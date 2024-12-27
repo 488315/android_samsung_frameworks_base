@@ -3,27 +3,30 @@ package android.media.soundtrigger;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class Properties implements Parcelable {
-    public static final Parcelable.Creator<Properties> CREATOR = new Parcelable.Creator<Properties>() { // from class: android.media.soundtrigger.Properties.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Properties createFromParcel(Parcel _aidl_source) {
-            Properties _aidl_out = new Properties();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Properties> CREATOR =
+            new Parcelable.Creator<
+                    Properties>() { // from class: android.media.soundtrigger.Properties.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Properties createFromParcel(Parcel _aidl_source) {
+                    Properties _aidl_out = new Properties();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Properties[] newArray(int _aidl_size) {
-            return new Properties[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Properties[] newArray(int _aidl_size) {
+                    return new Properties[_aidl_size];
+                }
+            };
     public String description;
     public String implementor;
     public String supportedModelArch;
@@ -238,14 +241,60 @@ public class Properties implements Parcelable {
             return false;
         }
         Properties that = (Properties) other;
-        if (Objects.deepEquals(this.implementor, that.implementor) && Objects.deepEquals(this.description, that.description) && Objects.deepEquals(Integer.valueOf(this.version), Integer.valueOf(that.version)) && Objects.deepEquals(this.uuid, that.uuid) && Objects.deepEquals(this.supportedModelArch, that.supportedModelArch) && Objects.deepEquals(Integer.valueOf(this.maxSoundModels), Integer.valueOf(that.maxSoundModels)) && Objects.deepEquals(Integer.valueOf(this.maxKeyPhrases), Integer.valueOf(that.maxKeyPhrases)) && Objects.deepEquals(Integer.valueOf(this.maxUsers), Integer.valueOf(that.maxUsers)) && Objects.deepEquals(Integer.valueOf(this.recognitionModes), Integer.valueOf(that.recognitionModes)) && Objects.deepEquals(Boolean.valueOf(this.captureTransition), Boolean.valueOf(that.captureTransition)) && Objects.deepEquals(Integer.valueOf(this.maxBufferMs), Integer.valueOf(that.maxBufferMs)) && Objects.deepEquals(Boolean.valueOf(this.concurrentCapture), Boolean.valueOf(that.concurrentCapture)) && Objects.deepEquals(Boolean.valueOf(this.triggerInEvent), Boolean.valueOf(that.triggerInEvent)) && Objects.deepEquals(Integer.valueOf(this.powerConsumptionMw), Integer.valueOf(that.powerConsumptionMw)) && Objects.deepEquals(Integer.valueOf(this.audioCapabilities), Integer.valueOf(that.audioCapabilities))) {
+        if (Objects.deepEquals(this.implementor, that.implementor)
+                && Objects.deepEquals(this.description, that.description)
+                && Objects.deepEquals(Integer.valueOf(this.version), Integer.valueOf(that.version))
+                && Objects.deepEquals(this.uuid, that.uuid)
+                && Objects.deepEquals(this.supportedModelArch, that.supportedModelArch)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.maxSoundModels), Integer.valueOf(that.maxSoundModels))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.maxKeyPhrases), Integer.valueOf(that.maxKeyPhrases))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.maxUsers), Integer.valueOf(that.maxUsers))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.recognitionModes),
+                        Integer.valueOf(that.recognitionModes))
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.captureTransition),
+                        Boolean.valueOf(that.captureTransition))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.maxBufferMs), Integer.valueOf(that.maxBufferMs))
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.concurrentCapture),
+                        Boolean.valueOf(that.concurrentCapture))
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.triggerInEvent), Boolean.valueOf(that.triggerInEvent))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.powerConsumptionMw),
+                        Integer.valueOf(that.powerConsumptionMw))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.audioCapabilities),
+                        Integer.valueOf(that.audioCapabilities))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.implementor, this.description, Integer.valueOf(this.version), this.uuid, this.supportedModelArch, Integer.valueOf(this.maxSoundModels), Integer.valueOf(this.maxKeyPhrases), Integer.valueOf(this.maxUsers), Integer.valueOf(this.recognitionModes), Boolean.valueOf(this.captureTransition), Integer.valueOf(this.maxBufferMs), Boolean.valueOf(this.concurrentCapture), Boolean.valueOf(this.triggerInEvent), Integer.valueOf(this.powerConsumptionMw), Integer.valueOf(this.audioCapabilities)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.implementor,
+                                this.description,
+                                Integer.valueOf(this.version),
+                                this.uuid,
+                                this.supportedModelArch,
+                                Integer.valueOf(this.maxSoundModels),
+                                Integer.valueOf(this.maxKeyPhrases),
+                                Integer.valueOf(this.maxUsers),
+                                Integer.valueOf(this.recognitionModes),
+                                Boolean.valueOf(this.captureTransition),
+                                Integer.valueOf(this.maxBufferMs),
+                                Boolean.valueOf(this.concurrentCapture),
+                                Boolean.valueOf(this.triggerInEvent),
+                                Integer.valueOf(this.powerConsumptionMw),
+                                Integer.valueOf(this.audioCapabilities))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

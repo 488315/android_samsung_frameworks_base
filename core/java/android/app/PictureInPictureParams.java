@@ -5,25 +5,28 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Rational;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class PictureInPictureParams implements Parcelable {
-    public static final Parcelable.Creator<PictureInPictureParams> CREATOR = new Parcelable.Creator<PictureInPictureParams>() { // from class: android.app.PictureInPictureParams.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PictureInPictureParams createFromParcel(Parcel in) {
-            return new PictureInPictureParams(in);
-        }
+    public static final Parcelable.Creator<PictureInPictureParams> CREATOR =
+            new Parcelable.Creator<
+                    PictureInPictureParams>() { // from class: android.app.PictureInPictureParams.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PictureInPictureParams createFromParcel(Parcel in) {
+                    return new PictureInPictureParams(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PictureInPictureParams[] newArray(int size) {
-            return new PictureInPictureParams[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PictureInPictureParams[] newArray(int size) {
+                    return new PictureInPictureParams[size];
+                }
+            };
     private Rational mAspectRatio;
     private Boolean mAutoEnterEnabled;
     private RemoteAction mCloseAction;
@@ -47,8 +50,7 @@ public final class PictureInPictureParams implements Parcelable {
         private CharSequence mTitle;
         private List<RemoteAction> mUserActions;
 
-        public Builder() {
-        }
+        public Builder() {}
 
         public Builder(PictureInPictureParams original) {
             this.mAspectRatio = original.mAspectRatio;
@@ -122,13 +124,23 @@ public final class PictureInPictureParams implements Parcelable {
         }
 
         public PictureInPictureParams build() {
-            PictureInPictureParams params = new PictureInPictureParams(this.mAspectRatio, this.mExpandedAspectRatio, this.mUserActions, this.mCloseAction, this.mSourceRectHint, this.mAutoEnterEnabled, this.mSeamlessResizeEnabled, this.mTitle, this.mSubtitle, this.mIsLaunchIntoPip);
+            PictureInPictureParams params =
+                    new PictureInPictureParams(
+                            this.mAspectRatio,
+                            this.mExpandedAspectRatio,
+                            this.mUserActions,
+                            this.mCloseAction,
+                            this.mSourceRectHint,
+                            this.mAutoEnterEnabled,
+                            this.mSeamlessResizeEnabled,
+                            this.mTitle,
+                            this.mSubtitle,
+                            this.mIsLaunchIntoPip);
             return params;
         }
     }
 
-    PictureInPictureParams() {
-    }
+    PictureInPictureParams() {}
 
     PictureInPictureParams(Parcel in) {
         this.mAspectRatio = readRationalFromParcel(in);
@@ -158,7 +170,17 @@ public final class PictureInPictureParams implements Parcelable {
         }
     }
 
-    PictureInPictureParams(Rational aspectRatio, Rational expandedAspectRatio, List<RemoteAction> actions, RemoteAction closeAction, Rect sourceRectHint, Boolean autoEnterEnabled, Boolean seamlessResizeEnabled, CharSequence title, CharSequence subtitle, Boolean isLaunchIntoPip) {
+    PictureInPictureParams(
+            Rational aspectRatio,
+            Rational expandedAspectRatio,
+            List<RemoteAction> actions,
+            RemoteAction closeAction,
+            Rect sourceRectHint,
+            Boolean autoEnterEnabled,
+            Boolean seamlessResizeEnabled,
+            CharSequence title,
+            CharSequence subtitle,
+            Boolean isLaunchIntoPip) {
         this.mAspectRatio = aspectRatio;
         this.mExpandedAspectRatio = expandedAspectRatio;
         this.mUserActions = actions;
@@ -172,7 +194,17 @@ public final class PictureInPictureParams implements Parcelable {
     }
 
     public PictureInPictureParams(PictureInPictureParams other) {
-        this(other.mAspectRatio, other.mExpandedAspectRatio, other.mUserActions, other.mCloseAction, other.hasSourceBoundsHint() ? new Rect(other.getSourceRectHint()) : null, other.mAutoEnterEnabled, other.mSeamlessResizeEnabled, other.mTitle, other.mSubtitle, other.mIsLaunchIntoPip);
+        this(
+                other.mAspectRatio,
+                other.mExpandedAspectRatio,
+                other.mUserActions,
+                other.mCloseAction,
+                other.hasSourceBoundsHint() ? new Rect(other.getSourceRectHint()) : null,
+                other.mAutoEnterEnabled,
+                other.mSeamlessResizeEnabled,
+                other.mTitle,
+                other.mSubtitle,
+                other.mIsLaunchIntoPip);
     }
 
     public void copyOnlySet(PictureInPictureParams otherArgs) {
@@ -257,7 +289,8 @@ public final class PictureInPictureParams implements Parcelable {
 
     public void truncateActions(int size) {
         if (hasSetActions()) {
-            this.mUserActions = this.mUserActions.subList(0, Math.min(this.mUserActions.size(), size));
+            this.mUserActions =
+                    this.mUserActions.subList(0, Math.min(this.mUserActions.size(), size));
         }
     }
 
@@ -307,7 +340,18 @@ public final class PictureInPictureParams implements Parcelable {
     }
 
     public boolean empty() {
-        return (hasSourceBoundsHint() || hasSetActions() || hasSetCloseAction() || hasSetAspectRatio() || hasSetExpandedAspectRatio() || this.mAutoEnterEnabled != null || this.mSeamlessResizeEnabled != null || hasSetTitle() || hasSetSubtitle() || this.mIsLaunchIntoPip != null) ? false : true;
+        return (hasSourceBoundsHint()
+                        || hasSetActions()
+                        || hasSetCloseAction()
+                        || hasSetAspectRatio()
+                        || hasSetExpandedAspectRatio()
+                        || this.mAutoEnterEnabled != null
+                        || this.mSeamlessResizeEnabled != null
+                        || hasSetTitle()
+                        || hasSetSubtitle()
+                        || this.mIsLaunchIntoPip != null)
+                ? false
+                : true;
     }
 
     public boolean equals(Object o) {
@@ -318,11 +362,30 @@ public final class PictureInPictureParams implements Parcelable {
             return false;
         }
         PictureInPictureParams that = (PictureInPictureParams) o;
-        return Objects.equals(this.mAutoEnterEnabled, that.mAutoEnterEnabled) && Objects.equals(this.mSeamlessResizeEnabled, that.mSeamlessResizeEnabled) && Objects.equals(this.mAspectRatio, that.mAspectRatio) && Objects.equals(this.mExpandedAspectRatio, that.mExpandedAspectRatio) && Objects.equals(this.mUserActions, that.mUserActions) && Objects.equals(this.mCloseAction, that.mCloseAction) && Objects.equals(this.mSourceRectHint, that.mSourceRectHint) && Objects.equals(this.mTitle, that.mTitle) && Objects.equals(this.mSubtitle, that.mSubtitle) && Objects.equals(this.mIsLaunchIntoPip, that.mIsLaunchIntoPip);
+        return Objects.equals(this.mAutoEnterEnabled, that.mAutoEnterEnabled)
+                && Objects.equals(this.mSeamlessResizeEnabled, that.mSeamlessResizeEnabled)
+                && Objects.equals(this.mAspectRatio, that.mAspectRatio)
+                && Objects.equals(this.mExpandedAspectRatio, that.mExpandedAspectRatio)
+                && Objects.equals(this.mUserActions, that.mUserActions)
+                && Objects.equals(this.mCloseAction, that.mCloseAction)
+                && Objects.equals(this.mSourceRectHint, that.mSourceRectHint)
+                && Objects.equals(this.mTitle, that.mTitle)
+                && Objects.equals(this.mSubtitle, that.mSubtitle)
+                && Objects.equals(this.mIsLaunchIntoPip, that.mIsLaunchIntoPip);
     }
 
     public int hashCode() {
-        return Objects.hash(this.mAspectRatio, this.mExpandedAspectRatio, this.mUserActions, this.mCloseAction, this.mSourceRectHint, this.mAutoEnterEnabled, this.mSeamlessResizeEnabled, this.mTitle, this.mSubtitle, this.mIsLaunchIntoPip);
+        return Objects.hash(
+                this.mAspectRatio,
+                this.mExpandedAspectRatio,
+                this.mUserActions,
+                this.mCloseAction,
+                this.mSourceRectHint,
+                this.mAutoEnterEnabled,
+                this.mSeamlessResizeEnabled,
+                this.mTitle,
+                this.mSubtitle,
+                this.mIsLaunchIntoPip);
     }
 
     @Override // android.os.Parcelable
@@ -397,6 +460,26 @@ public final class PictureInPictureParams implements Parcelable {
     }
 
     public String toString() {
-        return "PictureInPictureParams( aspectRatio=" + getAspectRatio() + " expandedAspectRatio=" + this.mExpandedAspectRatio + " sourceRectHint=" + getSourceRectHint() + " hasSetActions=" + hasSetActions() + " hasSetCloseAction=" + hasSetCloseAction() + " isAutoPipEnabled=" + isAutoEnterEnabled() + " isSeamlessResizeEnabled=" + isSeamlessResizeEnabled() + " title=" + ((Object) getTitle()) + " subtitle=" + ((Object) getSubtitle()) + " isLaunchIntoPip=" + isLaunchIntoPip() + NavigationBarInflaterView.KEY_CODE_END;
+        return "PictureInPictureParams( aspectRatio="
+                + getAspectRatio()
+                + " expandedAspectRatio="
+                + this.mExpandedAspectRatio
+                + " sourceRectHint="
+                + getSourceRectHint()
+                + " hasSetActions="
+                + hasSetActions()
+                + " hasSetCloseAction="
+                + hasSetCloseAction()
+                + " isAutoPipEnabled="
+                + isAutoEnterEnabled()
+                + " isSeamlessResizeEnabled="
+                + isSeamlessResizeEnabled()
+                + " title="
+                + ((Object) getTitle())
+                + " subtitle="
+                + ((Object) getSubtitle())
+                + " isLaunchIntoPip="
+                + isLaunchIntoPip()
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

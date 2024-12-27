@@ -6,10 +6,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.android.internal.view.menu.MenuBuilder;
 import com.android.internal.view.menu.MenuPopupHelper;
 import com.android.internal.view.menu.SubMenuBuilder;
 import com.android.internal.widget.ActionBarContextView;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes5.dex */
@@ -22,7 +24,11 @@ public class StandaloneActionMode extends ActionMode implements MenuBuilder.Call
     private boolean mFocusable;
     private MenuBuilder mMenu;
 
-    public StandaloneActionMode(Context context, ActionBarContextView view, ActionMode.Callback callback, boolean isFocusable) {
+    public StandaloneActionMode(
+            Context context,
+            ActionBarContextView view,
+            ActionMode.Callback callback,
+            boolean isFocusable) {
         this.mContext = context;
         this.mContextView = view;
         this.mCallback = callback;
@@ -116,8 +122,7 @@ public class StandaloneActionMode extends ActionMode implements MenuBuilder.Call
         return this.mCallback.onActionItemClicked(this, item);
     }
 
-    public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
-    }
+    public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {}
 
     public boolean onSubMenuSelected(SubMenuBuilder subMenu) {
         if (!subMenu.hasVisibleItems()) {
@@ -127,8 +132,7 @@ public class StandaloneActionMode extends ActionMode implements MenuBuilder.Call
         return true;
     }
 
-    public void onCloseSubMenu(SubMenuBuilder menu) {
-    }
+    public void onCloseSubMenu(SubMenuBuilder menu) {}
 
     @Override // com.android.internal.view.menu.MenuBuilder.Callback
     public void onMenuModeChange(MenuBuilder menu) {

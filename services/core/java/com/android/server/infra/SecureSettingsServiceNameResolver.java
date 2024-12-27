@@ -5,6 +5,7 @@ import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOut
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -33,12 +34,15 @@ public final class SecureSettingsServiceNameResolver extends ServiceNameBaseReso
 
     @Override // com.android.server.infra.ServiceNameBaseResolver
     public final String readServiceName(int i) {
-        return Settings.Secure.getStringForUser(this.mContext.getContentResolver(), this.mProperty, i);
+        return Settings.Secure.getStringForUser(
+                this.mContext.getContentResolver(), this.mProperty, i);
     }
 
     @Override // com.android.server.infra.ServiceNameBaseResolver
     public final String[] readServiceNameList(int i) {
-        String stringForUser = Settings.Secure.getStringForUser(this.mContext.getContentResolver(), this.mProperty, i);
+        String stringForUser =
+                Settings.Secure.getStringForUser(
+                        this.mContext.getContentResolver(), this.mProperty, i);
         ArraySet arraySet = new ArraySet();
         if (!TextUtils.isEmpty(stringForUser)) {
             TextUtils.SimpleStringSplitter simpleStringSplitter = this.mStringColonSplitter;
@@ -55,6 +59,7 @@ public final class SecureSettingsServiceNameResolver extends ServiceNameBaseReso
 
     @Override // com.android.server.infra.ServiceNameBaseResolver
     public final String toString() {
-        return AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder("SecureSettingsServiceNameResolver["), this.mProperty, "]");
+        return AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                new StringBuilder("SecureSettingsServiceNameResolver["), this.mProperty, "]");
     }
 }

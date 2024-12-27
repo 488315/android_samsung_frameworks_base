@@ -40,19 +40,20 @@ public class BaseErrorDialog extends AlertDialog {
     public BaseErrorDialog(Context context) {
         super(context, R.style.Theme.Leanback.Settings.Dialog.Alert);
         this.mConsuming = true;
-        this.mHandler = new Handler() { // from class: com.android.server.am.BaseErrorDialog.2
-            @Override // android.os.Handler
-            public final void handleMessage(Message message) {
-                int i = message.what;
-                BaseErrorDialog baseErrorDialog = BaseErrorDialog.this;
-                if (i == 0) {
-                    baseErrorDialog.mConsuming = false;
-                    BaseErrorDialog.m179$$Nest$msetEnabled(baseErrorDialog, true);
-                } else if (i == 1) {
-                    BaseErrorDialog.m179$$Nest$msetEnabled(baseErrorDialog, false);
-                }
-            }
-        };
+        this.mHandler =
+                new Handler() { // from class: com.android.server.am.BaseErrorDialog.2
+                    @Override // android.os.Handler
+                    public final void handleMessage(Message message) {
+                        int i = message.what;
+                        BaseErrorDialog baseErrorDialog = BaseErrorDialog.this;
+                        if (i == 0) {
+                            baseErrorDialog.mConsuming = false;
+                            BaseErrorDialog.m179$$Nest$msetEnabled(baseErrorDialog, true);
+                        } else if (i == 1) {
+                            BaseErrorDialog.m179$$Nest$msetEnabled(baseErrorDialog, false);
+                        }
+                    }
+                };
         context.assertRuntimeOverlayThemable();
         getWindow().setType(2003);
         getWindow().setFlags(131072, 131072);
@@ -85,15 +86,21 @@ public class BaseErrorDialog extends AlertDialog {
         AnonymousClass2 anonymousClass2 = this.mHandler;
         anonymousClass2.sendMessageDelayed(anonymousClass2.obtainMessage(0), 1000L);
         if (this.mReceiver == null) {
-            this.mReceiver = new BroadcastReceiver() { // from class: com.android.server.am.BaseErrorDialog.1
-                @Override // android.content.BroadcastReceiver
-                public final void onReceive(Context context, Intent intent) {
-                    if ("android.intent.action.CLOSE_SYSTEM_DIALOGS".equals(intent.getAction())) {
-                        BaseErrorDialog.this.closeDialog();
-                    }
-                }
-            };
-            getContext().registerReceiver(this.mReceiver, new IntentFilter("android.intent.action.CLOSE_SYSTEM_DIALOGS"), 2);
+            this.mReceiver =
+                    new BroadcastReceiver() { // from class: com.android.server.am.BaseErrorDialog.1
+                        @Override // android.content.BroadcastReceiver
+                        public final void onReceive(Context context, Intent intent) {
+                            if ("android.intent.action.CLOSE_SYSTEM_DIALOGS"
+                                    .equals(intent.getAction())) {
+                                BaseErrorDialog.this.closeDialog();
+                            }
+                        }
+                    };
+            getContext()
+                    .registerReceiver(
+                            this.mReceiver,
+                            new IntentFilter("android.intent.action.CLOSE_SYSTEM_DIALOGS"),
+                            2);
         }
     }
 

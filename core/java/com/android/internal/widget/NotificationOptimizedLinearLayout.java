@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.flags.Flags;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +33,14 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
         this.mShouldUseOptimizedLayout = false;
     }
 
-    public NotificationOptimizedLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NotificationOptimizedLinearLayout(
+            Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mShouldUseOptimizedLayout = false;
     }
 
-    public NotificationOptimizedLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public NotificationOptimizedLinearLayout(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mShouldUseOptimizedLayout = false;
     }
@@ -45,7 +48,10 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
     @Override // android.widget.LinearLayout, android.view.View
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         View weightedChildView = getSingleWeightedChild();
-        this.mShouldUseOptimizedLayout = isUseOptimizedLinearLayoutFlagEnabled() && weightedChildView != null && isOptimizationPossible(widthMeasureSpec, heightMeasureSpec);
+        this.mShouldUseOptimizedLayout =
+                isUseOptimizedLinearLayoutFlagEnabled()
+                        && weightedChildView != null
+                        && isOptimizationPossible(widthMeasureSpec, heightMeasureSpec);
         if (this.mShouldUseOptimizedLayout) {
             onMeasureOptimized(weightedChildView, widthMeasureSpec, heightMeasureSpec);
         } else {
@@ -68,7 +74,8 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
             return false;
         }
         if (requiresMatchParentRemeasureForVerticalLinearLayout(widthMeasureSpec)) {
-            logSkipOptimizedOnMeasure("Vertical LinearLayout requires children width MATCH_PARENT remeasure ");
+            logSkipOptimizedOnMeasure(
+                    "Vertical LinearLayout requires children width MATCH_PARENT remeasure ");
             return false;
         }
         boolean isHorizontal = getOrientation() == 0;
@@ -94,7 +101,8 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
         List<View> activeChildren = getActiveChildren();
         for (int i = 0; i < activeChildren.size(); i++) {
             View child = activeChildren.get(i);
-            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
+            ViewGroup.MarginLayoutParams lp =
+                    (ViewGroup.MarginLayoutParams) child.getLayoutParams();
             if (lp.leftMargin < 0 || lp.rightMargin < 0) {
                 return true;
             }
@@ -158,7 +166,8 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
             if (child.getLayoutParams() instanceof LinearLayout.LayoutParams) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) child.getLayoutParams();
                 if ((!isVertical && lp.width == -1) || (isVertical && lp.height == -1)) {
-                    logSkipOptimizedOnMeasure("There is a match parent child in the related orientation.");
+                    logSkipOptimizedOnMeasure(
+                            "There is a match parent child in the related orientation.");
                     return null;
                 }
                 if (lp.weight == 0.0f) {
@@ -175,17 +184,22 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
             logSkipOptimizedOnMeasure("There is no weighted child in this layout.");
             return singleWeightedChild;
         }
-        LinearLayout.LayoutParams lp2 = (LinearLayout.LayoutParams) singleWeightedChild.getLayoutParams();
+        LinearLayout.LayoutParams lp2 =
+                (LinearLayout.LayoutParams) singleWeightedChild.getLayoutParams();
         boolean isHeightWrapContentOrZero = lp2.height == -2 || lp2.height == 0;
         boolean isWidthWrapContentOrZero = lp2.width == -2 || lp2.width == 0;
-        if ((isVertical && !isHeightWrapContentOrZero) || (!isVertical && !isWidthWrapContentOrZero)) {
-            logSkipOptimizedOnMeasure("Single weighted child should be either WRAP_CONTENT or 0 in the related orientation");
+        if ((isVertical && !isHeightWrapContentOrZero)
+                || (!isVertical && !isWidthWrapContentOrZero)) {
+            logSkipOptimizedOnMeasure(
+                    "Single weighted child should be either WRAP_CONTENT or 0 in the related"
+                        + " orientation");
             return null;
         }
         return singleWeightedChild;
     }
 
-    private void onMeasureOptimized(View weightedChildView, int widthMeasureSpec, int heightMeasureSpec) {
+    private void onMeasureOptimized(
+            View weightedChildView, int widthMeasureSpec, int heightMeasureSpec) {
         try {
             if (TRACE_ONMEASURE) {
                 Trace.beginSection("NotifOptimizedLinearLayout#onMeasure");
@@ -237,7 +251,10 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
             Method dump skipped, instructions count: 263
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.NotificationOptimizedLinearLayout.measureVerticalOptimized(android.view.View, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.widget.NotificationOptimizedLinearLayout.measureVerticalOptimized(android.view.View,"
+                    + " int, int):void");
     }
 
     private List<View> getActiveChildren() {
@@ -301,7 +318,9 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
                 switch (absoluteGravity & 7) {
                     case 1:
                         int layoutDirection2 = lp.leftMargin;
-                        childLeft = ((((childSpace - childWidth) / 2) + paddingLeft) + layoutDirection2) - lp.rightMargin;
+                        childLeft =
+                                ((((childSpace - childWidth) / 2) + paddingLeft) + layoutDirection2)
+                                        - lp.rightMargin;
                         break;
                     case 5:
                         int layoutDirection3 = childRight - childWidth;
@@ -336,10 +355,11 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
 
     private void trackShouldUseOptimizedLayout() {
         if (TRACE_ONMEASURE) {
-            Trace.setCounter("NotifOptimizedLinearLayout#shouldUseOptimizedLayout", this.mShouldUseOptimizedLayout ? 1L : 0L);
+            Trace.setCounter(
+                    "NotifOptimizedLinearLayout#shouldUseOptimizedLayout",
+                    this.mShouldUseOptimizedLayout ? 1L : 0L);
         }
     }
 
-    private void logSkipOptimizedOnMeasure(String reason) {
-    }
+    private void logSkipOptimizedOnMeasure(String reason) {}
 }

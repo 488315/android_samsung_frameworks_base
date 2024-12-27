@@ -1,7 +1,9 @@
 package com.android.server.am;
 
 import android.util.IndentingPrintWriter;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -18,7 +20,26 @@ public abstract class SecLmkdStats {
     public static final int[] sKillCountSlot;
 
     static {
-        int[] iArr = {0, 50, 100, 200, 225, FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE, 300, 350, 400, 500, 600, 700, 800, FrameworkStatsLog.VPN_CONNECTION_STATE_CHANGED, FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, 999, 1001};
+        int[] iArr = {
+            0,
+            50,
+            100,
+            200,
+            225,
+            FrameworkStatsLog
+                    .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE,
+            300,
+            350,
+            400,
+            500,
+            600,
+            700,
+            800,
+            FrameworkStatsLog.VPN_CONNECTION_STATE_CHANGED,
+            FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+            999,
+            1001
+        };
         LMKD_SLOT_ADJ_VALUES = iArr;
         sKillCountSlot = new int[iArr.length];
         sKillCountInterval = new int[iArr.length];
@@ -49,7 +70,12 @@ public abstract class SecLmkdStats {
             indentingPrintWriter.print(" ");
             indentingPrintWriter.print(iArr[i]);
             indentingPrintWriter.print(" ");
-            indentingPrintWriter.println(i != 0 ? i != 1 ? i != 2 ? i != 3 ? "undefined" : "super_critical" : "critical" : "medium" : "low");
+            indentingPrintWriter.println(
+                    i != 0
+                            ? i != 1
+                                    ? i != 2 ? i != 3 ? "undefined" : "super_critical" : "critical"
+                                    : "medium"
+                            : "low");
             i++;
         }
         indentingPrintWriter.decreaseIndent();

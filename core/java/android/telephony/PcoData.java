@@ -2,22 +2,24 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public class PcoData implements Parcelable {
-    public static final Parcelable.Creator<PcoData> CREATOR = new Parcelable.Creator() { // from class: android.telephony.PcoData.1
-        @Override // android.os.Parcelable.Creator
-        public PcoData createFromParcel(Parcel in) {
-            return new PcoData(in);
-        }
+    public static final Parcelable.Creator<PcoData> CREATOR =
+            new Parcelable.Creator() { // from class: android.telephony.PcoData.1
+                @Override // android.os.Parcelable.Creator
+                public PcoData createFromParcel(Parcel in) {
+                    return new PcoData(in);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public PcoData[] newArray(int size) {
-            return new PcoData[size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public PcoData[] newArray(int size) {
+                    return new PcoData[size];
+                }
+            };
     public final String bearerProto;
     public final int cid;
     public final byte[] contents;
@@ -51,7 +53,15 @@ public class PcoData implements Parcelable {
     }
 
     public String toString() {
-        return "PcoData(" + this.cid + ", " + this.bearerProto + ", " + this.pcoId + ", contents[" + this.contents.length + "])";
+        return "PcoData("
+                + this.cid
+                + ", "
+                + this.bearerProto
+                + ", "
+                + this.pcoId
+                + ", contents["
+                + this.contents.length
+                + "])";
     }
 
     public boolean equals(Object o) {
@@ -62,14 +72,19 @@ public class PcoData implements Parcelable {
             return false;
         }
         PcoData pcoData = (PcoData) o;
-        if (this.cid == pcoData.cid && this.pcoId == pcoData.pcoId && Objects.equals(this.bearerProto, pcoData.bearerProto) && Arrays.equals(this.contents, pcoData.contents)) {
+        if (this.cid == pcoData.cid
+                && this.pcoId == pcoData.pcoId
+                && Objects.equals(this.bearerProto, pcoData.bearerProto)
+                && Arrays.equals(this.contents, pcoData.contents)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        int result = Objects.hash(Integer.valueOf(this.cid), this.bearerProto, Integer.valueOf(this.pcoId));
+        int result =
+                Objects.hash(
+                        Integer.valueOf(this.cid), this.bearerProto, Integer.valueOf(this.pcoId));
         return (result * 31) + Arrays.hashCode(this.contents);
     }
 }

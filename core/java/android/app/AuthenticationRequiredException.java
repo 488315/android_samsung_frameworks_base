@@ -2,23 +2,26 @@ package android.app;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class AuthenticationRequiredException extends SecurityException implements Parcelable {
-    public static final Parcelable.Creator<AuthenticationRequiredException> CREATOR = new Parcelable.Creator<AuthenticationRequiredException>() { // from class: android.app.AuthenticationRequiredException.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationRequiredException createFromParcel(Parcel source) {
-            return new AuthenticationRequiredException(source);
-        }
+    public static final Parcelable.Creator<AuthenticationRequiredException> CREATOR =
+            new Parcelable.Creator<AuthenticationRequiredException>() { // from class:
+                // android.app.AuthenticationRequiredException.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationRequiredException createFromParcel(Parcel source) {
+                    return new AuthenticationRequiredException(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationRequiredException[] newArray(int size) {
-            return new AuthenticationRequiredException[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationRequiredException[] newArray(int size) {
+                    return new AuthenticationRequiredException[size];
+                }
+            };
     private static final String TAG = "AuthenticationRequiredException";
     private final PendingIntent mUserAction;
 

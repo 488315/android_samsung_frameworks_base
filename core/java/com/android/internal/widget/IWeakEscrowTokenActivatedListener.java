@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IWeakEscrowTokenActivatedListener extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.widget.IWeakEscrowTokenActivatedListener";
+    public static final String DESCRIPTOR =
+            "com.android.internal.widget.IWeakEscrowTokenActivatedListener";
 
     void onWeakEscrowTokenActivated(long j, int i) throws RemoteException;
 
     public static class Default implements IWeakEscrowTokenActivatedListener {
         @Override // com.android.internal.widget.IWeakEscrowTokenActivatedListener
-        public void onWeakEscrowTokenActivated(long handle, int userId) throws RemoteException {
-        }
+        public void onWeakEscrowTokenActivated(long handle, int userId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IWeakEscrowTokenActivatedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWeakEscrowTokenActivatedListener {
+    public abstract static class Stub extends Binder implements IWeakEscrowTokenActivatedListener {
         static final int TRANSACTION_onWeakEscrowTokenActivated = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IWeakEscrowTokenActivatedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWeakEscrowTokenActivatedListener.DESCRIPTOR);
             }

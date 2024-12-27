@@ -2,7 +2,9 @@ package com.att.iqi.lib.metrics.ea;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.att.iqi.lib.Metric;
+
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 
@@ -30,17 +32,18 @@ public class EA12 extends Metric {
     private final String szPlmn;
     private final byte ucFlags;
     public static final Metric.ID ID = new Metric.ID("EA12");
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.ea.EA12.1
-        @Override // android.os.Parcelable.Creator
-        public EA12 createFromParcel(Parcel parcel) {
-            return new EA12(parcel);
-        }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.ea.EA12.1
+                @Override // android.os.Parcelable.Creator
+                public EA12 createFromParcel(Parcel parcel) {
+                    return new EA12(parcel);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public EA12[] newArray(int i) {
-            return new EA12[i];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public EA12[] newArray(int i) {
+                    return new EA12[i];
+                }
+            };
 
     public EA12(Parcel parcel) {
         super(parcel);

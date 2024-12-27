@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class DataConnectionRealTimeInfo implements Parcelable {
-    public static final Parcelable.Creator<DataConnectionRealTimeInfo> CREATOR = new Parcelable.Creator<DataConnectionRealTimeInfo>() { // from class: android.telephony.DataConnectionRealTimeInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DataConnectionRealTimeInfo createFromParcel(Parcel in) {
-            return new DataConnectionRealTimeInfo(in);
-        }
+    public static final Parcelable.Creator<DataConnectionRealTimeInfo> CREATOR =
+            new Parcelable.Creator<
+                    DataConnectionRealTimeInfo>() { // from class:
+                                                    // android.telephony.DataConnectionRealTimeInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DataConnectionRealTimeInfo createFromParcel(Parcel in) {
+                    return new DataConnectionRealTimeInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DataConnectionRealTimeInfo[] newArray(int size) {
-            return new DataConnectionRealTimeInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DataConnectionRealTimeInfo[] newArray(int size) {
+                    return new DataConnectionRealTimeInfo[size];
+                }
+            };
     public static final int DC_POWER_STATE_HIGH = 3;
     public static final int DC_POWER_STATE_LOW = 1;
     public static final int DC_POWER_STATE_MEDIUM = 2;

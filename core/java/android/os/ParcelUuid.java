@@ -1,26 +1,26 @@
 package android.os;
 
-import android.os.Parcelable;
 import java.util.UUID;
 
 /* loaded from: classes3.dex */
 public final class ParcelUuid implements Parcelable {
-    public static final Parcelable.Creator<ParcelUuid> CREATOR = new Parcelable.Creator<ParcelUuid>() { // from class: android.os.ParcelUuid.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelUuid createFromParcel(Parcel source) {
-            long mostSigBits = source.readLong();
-            long leastSigBits = source.readLong();
-            UUID uuid = new UUID(mostSigBits, leastSigBits);
-            return new ParcelUuid(uuid);
-        }
+    public static final Parcelable.Creator<ParcelUuid> CREATOR =
+            new Parcelable.Creator<ParcelUuid>() { // from class: android.os.ParcelUuid.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelUuid createFromParcel(Parcel source) {
+                    long mostSigBits = source.readLong();
+                    long leastSigBits = source.readLong();
+                    UUID uuid = new UUID(mostSigBits, leastSigBits);
+                    return new ParcelUuid(uuid);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelUuid[] newArray(int size) {
-            return new ParcelUuid[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelUuid[] newArray(int size) {
+                    return new ParcelUuid[size];
+                }
+            };
     private final UUID mUuid;
 
     public ParcelUuid(UUID uuid) {

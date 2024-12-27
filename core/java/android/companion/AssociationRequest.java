@@ -5,9 +5,11 @@ import android.annotation.UserIdInt;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.OneTimeUseBuilder;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.CollectionUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -16,24 +18,30 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class AssociationRequest implements Parcelable {
-    public static final Parcelable.Creator<AssociationRequest> CREATOR = new Parcelable.Creator<AssociationRequest>() { // from class: android.companion.AssociationRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssociationRequest[] newArray(int size) {
-            return new AssociationRequest[size];
-        }
+    public static final Parcelable.Creator<AssociationRequest> CREATOR =
+            new Parcelable.Creator<
+                    AssociationRequest>() { // from class: android.companion.AssociationRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssociationRequest[] newArray(int size) {
+                    return new AssociationRequest[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssociationRequest createFromParcel(Parcel in) {
-            return new AssociationRequest(in);
-        }
-    };
-    public static final String DEVICE_PROFILE_APP_STREAMING = "android.app.role.COMPANION_DEVICE_APP_STREAMING";
-    public static final String DEVICE_PROFILE_AUTOMOTIVE_PROJECTION = "android.app.role.SYSTEM_AUTOMOTIVE_PROJECTION";
-    public static final String DEVICE_PROFILE_COMPUTER = "android.app.role.COMPANION_DEVICE_COMPUTER";
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssociationRequest createFromParcel(Parcel in) {
+                    return new AssociationRequest(in);
+                }
+            };
+    public static final String DEVICE_PROFILE_APP_STREAMING =
+            "android.app.role.COMPANION_DEVICE_APP_STREAMING";
+    public static final String DEVICE_PROFILE_AUTOMOTIVE_PROJECTION =
+            "android.app.role.SYSTEM_AUTOMOTIVE_PROJECTION";
+    public static final String DEVICE_PROFILE_COMPUTER =
+            "android.app.role.COMPANION_DEVICE_COMPUTER";
     public static final String DEVICE_PROFILE_GLASSES = "android.app.role.COMPANION_DEVICE_GLASSES";
-    public static final String DEVICE_PROFILE_NEARBY_DEVICE_STREAMING = "android.app.role.COMPANION_DEVICE_NEARBY_DEVICE_STREAMING";
+    public static final String DEVICE_PROFILE_NEARBY_DEVICE_STREAMING =
+            "android.app.role.COMPANION_DEVICE_NEARBY_DEVICE_STREAMING";
     public static final String DEVICE_PROFILE_WATCH = "android.app.role.COMPANION_DEVICE_WATCH";
     private AssociatedDevice mAssociatedDevice;
     private final long mCreationTime;
@@ -49,10 +57,15 @@ public final class AssociationRequest implements Parcelable {
     private int mUserId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeviceProfile {
-    }
+    public @interface DeviceProfile {}
 
-    private AssociationRequest(boolean singleDevice, List<DeviceFilter<?>> deviceFilters, String deviceProfile, CharSequence displayName, boolean selfManaged, boolean forceConfirmation) {
+    private AssociationRequest(
+            boolean singleDevice,
+            List<DeviceFilter<?>> deviceFilters,
+            String deviceProfile,
+            CharSequence displayName,
+            boolean selfManaged,
+            boolean forceConfirmation) {
         this.mSingleDevice = singleDevice;
         this.mDeviceFilters = (List) Objects.requireNonNull(deviceFilters);
         this.mDeviceProfile = deviceProfile;
@@ -161,9 +174,17 @@ public final class AssociationRequest implements Parcelable {
         public AssociationRequest build() {
             markUsed();
             if (this.mSelfManaged && this.mDisplayName == null) {
-                throw new IllegalStateException("Request for a self-managed association MUST provide the display name of the device");
+                throw new IllegalStateException(
+                        "Request for a self-managed association MUST provide the display name of"
+                                + " the device");
             }
-            return new AssociationRequest(this.mSingleDevice, CollectionUtils.emptyIfNull(this.mDeviceFilters), this.mDeviceProfile, this.mDisplayName, this.mSelfManaged, this.mForceConfirmation);
+            return new AssociationRequest(
+                    this.mSingleDevice,
+                    CollectionUtils.emptyIfNull(this.mDeviceFilters),
+                    this.mDeviceProfile,
+                    this.mDisplayName,
+                    this.mSelfManaged,
+                    this.mForceConfirmation);
         }
     }
 
@@ -192,7 +213,31 @@ public final class AssociationRequest implements Parcelable {
     }
 
     public String toString() {
-        return "AssociationRequest { singleDevice = " + this.mSingleDevice + ", deviceFilters = " + this.mDeviceFilters + ", deviceProfile = " + this.mDeviceProfile + ", displayName = " + ((Object) this.mDisplayName) + ", associatedDevice = " + this.mAssociatedDevice + ", selfManaged = " + this.mSelfManaged + ", forceConfirmation = " + this.mForceConfirmation + ", packageName = " + this.mPackageName + ", userId = " + this.mUserId + ", deviceProfilePrivilegesDescription = " + this.mDeviceProfilePrivilegesDescription + ", creationTime = " + this.mCreationTime + ", skipPrompt = " + this.mSkipPrompt + " }";
+        return "AssociationRequest { singleDevice = "
+                + this.mSingleDevice
+                + ", deviceFilters = "
+                + this.mDeviceFilters
+                + ", deviceProfile = "
+                + this.mDeviceProfile
+                + ", displayName = "
+                + ((Object) this.mDisplayName)
+                + ", associatedDevice = "
+                + this.mAssociatedDevice
+                + ", selfManaged = "
+                + this.mSelfManaged
+                + ", forceConfirmation = "
+                + this.mForceConfirmation
+                + ", packageName = "
+                + this.mPackageName
+                + ", userId = "
+                + this.mUserId
+                + ", deviceProfilePrivilegesDescription = "
+                + this.mDeviceProfilePrivilegesDescription
+                + ", creationTime = "
+                + this.mCreationTime
+                + ", skipPrompt = "
+                + this.mSkipPrompt
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -203,7 +248,20 @@ public final class AssociationRequest implements Parcelable {
             return false;
         }
         AssociationRequest that = (AssociationRequest) o;
-        if (this.mSingleDevice == that.mSingleDevice && Objects.equals(this.mDeviceFilters, that.mDeviceFilters) && Objects.equals(this.mDeviceProfile, that.mDeviceProfile) && Objects.equals(this.mDisplayName, that.mDisplayName) && Objects.equals(this.mAssociatedDevice, that.mAssociatedDevice) && this.mSelfManaged == that.mSelfManaged && this.mForceConfirmation == that.mForceConfirmation && Objects.equals(this.mPackageName, that.mPackageName) && this.mUserId == that.mUserId && Objects.equals(this.mDeviceProfilePrivilegesDescription, that.mDeviceProfilePrivilegesDescription) && this.mCreationTime == that.mCreationTime && this.mSkipPrompt == that.mSkipPrompt) {
+        if (this.mSingleDevice == that.mSingleDevice
+                && Objects.equals(this.mDeviceFilters, that.mDeviceFilters)
+                && Objects.equals(this.mDeviceProfile, that.mDeviceProfile)
+                && Objects.equals(this.mDisplayName, that.mDisplayName)
+                && Objects.equals(this.mAssociatedDevice, that.mAssociatedDevice)
+                && this.mSelfManaged == that.mSelfManaged
+                && this.mForceConfirmation == that.mForceConfirmation
+                && Objects.equals(this.mPackageName, that.mPackageName)
+                && this.mUserId == that.mUserId
+                && Objects.equals(
+                        this.mDeviceProfilePrivilegesDescription,
+                        that.mDeviceProfilePrivilegesDescription)
+                && this.mCreationTime == that.mCreationTime
+                && this.mSkipPrompt == that.mSkipPrompt) {
             return true;
         }
         return false;
@@ -211,7 +269,44 @@ public final class AssociationRequest implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + Boolean.hashCode(this.mSingleDevice);
-        return (((((((((((((((((((((_hash * 31) + Objects.hashCode(this.mDeviceFilters)) * 31) + Objects.hashCode(this.mDeviceProfile)) * 31) + Objects.hashCode(this.mDisplayName)) * 31) + Objects.hashCode(this.mAssociatedDevice)) * 31) + Boolean.hashCode(this.mSelfManaged)) * 31) + Boolean.hashCode(this.mForceConfirmation)) * 31) + Objects.hashCode(this.mPackageName)) * 31) + this.mUserId) * 31) + Objects.hashCode(this.mDeviceProfilePrivilegesDescription)) * 31) + Long.hashCode(this.mCreationTime)) * 31) + Boolean.hashCode(this.mSkipPrompt);
+        return (((((((((((((((((((((_hash * 31) + Objects.hashCode(this.mDeviceFilters)) * 31)
+                                                                                                                                                                + Objects
+                                                                                                                                                                        .hashCode(
+                                                                                                                                                                                this
+                                                                                                                                                                                        .mDeviceProfile))
+                                                                                                                                                        * 31)
+                                                                                                                                                + Objects
+                                                                                                                                                        .hashCode(
+                                                                                                                                                                this
+                                                                                                                                                                        .mDisplayName))
+                                                                                                                                        * 31)
+                                                                                                                                + Objects
+                                                                                                                                        .hashCode(
+                                                                                                                                                this
+                                                                                                                                                        .mAssociatedDevice))
+                                                                                                                        * 31)
+                                                                                                                + Boolean
+                                                                                                                        .hashCode(
+                                                                                                                                this
+                                                                                                                                        .mSelfManaged))
+                                                                                                        * 31)
+                                                                                                + Boolean
+                                                                                                        .hashCode(
+                                                                                                                this
+                                                                                                                        .mForceConfirmation))
+                                                                                        * 31)
+                                                                                + Objects.hashCode(
+                                                                                        this
+                                                                                                .mPackageName))
+                                                                        * 31)
+                                                                + this.mUserId)
+                                                        * 31)
+                                                + Objects.hashCode(
+                                                        this.mDeviceProfilePrivilegesDescription))
+                                        * 31)
+                                + Long.hashCode(this.mCreationTime))
+                        * 31)
+                + Boolean.hashCode(this.mSkipPrompt);
     }
 
     @Override // android.os.Parcelable
@@ -277,14 +372,18 @@ public final class AssociationRequest implements Parcelable {
         in.readParcelableList(arrayList, DeviceFilter.class.getClassLoader(), DeviceFilter.class);
         String deviceProfile = (flg & 16) == 0 ? null : in.readString();
         CharSequence displayName = (flg & 32) == 0 ? null : in.readCharSequence();
-        AssociatedDevice associatedDevice = (flg & 64) == 0 ? null : (AssociatedDevice) in.readTypedObject(AssociatedDevice.CREATOR);
+        AssociatedDevice associatedDevice =
+                (flg & 64) == 0
+                        ? null
+                        : (AssociatedDevice) in.readTypedObject(AssociatedDevice.CREATOR);
         String packageName = (flg & 128) == 0 ? null : in.readString();
         int userId = in.readInt();
         String deviceProfilePrivilegesDescription = (flg & 256) == 0 ? null : in.readString8();
         long creationTime = in.readLong();
         this.mSingleDevice = singleDevice;
         this.mDeviceFilters = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mDeviceFilters);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mDeviceFilters);
         this.mDeviceProfile = deviceProfile;
         this.mDisplayName = displayName;
         this.mAssociatedDevice = associatedDevice;
@@ -292,7 +391,8 @@ public final class AssociationRequest implements Parcelable {
         this.mForceConfirmation = forceConfirmation;
         this.mPackageName = packageName;
         this.mUserId = userId;
-        AnnotationValidations.validate((Class<UserIdInt>) UserIdInt.class, (UserIdInt) null, this.mUserId);
+        AnnotationValidations.validate(
+                (Class<UserIdInt>) UserIdInt.class, (UserIdInt) null, this.mUserId);
         this.mDeviceProfilePrivilegesDescription = deviceProfilePrivilegesDescription;
         this.mCreationTime = creationTime;
         this.mSkipPrompt = skipPrompt;

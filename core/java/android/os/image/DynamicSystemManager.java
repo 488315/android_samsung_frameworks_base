@@ -16,8 +16,7 @@ public class DynamicSystemManager {
     }
 
     public class Session {
-        private Session() {
-        }
+        private Session() {}
 
         public boolean setAshmem(ParcelFileDescriptor ashmem, long size) {
             try {

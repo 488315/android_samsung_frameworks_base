@@ -8,9 +8,12 @@ import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Pair;
 import android.view.Display;
+
 import com.android.server.power.LibQmg;
 import com.android.server.power.Slog;
+
 import com.samsung.android.view.SemWindowManager;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,8 +42,7 @@ public final class QmgPlayer extends AnimationPlayer {
         public boolean finished = false;
         public int maxSleep;
 
-        public DrawHandler() {
-        }
+        public DrawHandler() {}
 
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
@@ -71,19 +73,25 @@ public final class QmgPlayer extends AnimationPlayer {
                 int i2 = qmgPlayer2.context.getResources().getConfiguration().semDisplayDeviceType;
                 boolean isFolded = SemWindowManager.getInstance().isFolded();
                 Locale locale = Locale.ENGLISH;
-                Slog.d("Shutdown-QmgPlayer", "image draw displayType[" + i2 + "] isFolded[" + isFolded + "]");
+                Slog.d(
+                        "Shutdown-QmgPlayer",
+                        "image draw displayType[" + i2 + "] isFolded[" + isFolded + "]");
                 if (i2 == 0) {
                     QmgPlayer qmgPlayer3 = QmgPlayer.this;
-                    qmgPlayer3.mainImageView.setImageBitmap(qmgPlayer3.bitmapQ[qmgPlayer3.bitmapQRear]);
+                    qmgPlayer3.mainImageView.setImageBitmap(
+                            qmgPlayer3.bitmapQ[qmgPlayer3.bitmapQRear]);
                 } else if (i2 == 5) {
                     QmgPlayer qmgPlayer4 = QmgPlayer.this;
-                    qmgPlayer4.mainImageView.setImageBitmap(qmgPlayer4.subbitmapQ[qmgPlayer4.bitmapQRear]);
+                    qmgPlayer4.mainImageView.setImageBitmap(
+                            qmgPlayer4.subbitmapQ[qmgPlayer4.bitmapQRear]);
                 } else if (!isFolded) {
                     QmgPlayer qmgPlayer5 = QmgPlayer.this;
-                    qmgPlayer5.mainImageView.setImageBitmap(qmgPlayer5.bitmapQ[qmgPlayer5.bitmapQRear]);
+                    qmgPlayer5.mainImageView.setImageBitmap(
+                            qmgPlayer5.bitmapQ[qmgPlayer5.bitmapQRear]);
                 } else if (isFolded) {
                     QmgPlayer qmgPlayer6 = QmgPlayer.this;
-                    qmgPlayer6.subImageView.setImageBitmap(qmgPlayer6.subbitmapQ[qmgPlayer6.bitmapQRear]);
+                    qmgPlayer6.subImageView.setImageBitmap(
+                            qmgPlayer6.subbitmapQ[qmgPlayer6.bitmapQRear]);
                     QmgPlayer qmgPlayer7 = QmgPlayer.this;
                     qmgPlayer7.subDialog.setContentView(qmgPlayer7.subImageView);
                     QmgPlayer.this.subDialog.show();
@@ -103,8 +111,7 @@ public final class QmgPlayer extends AnimationPlayer {
     public final class ImageLoader implements Runnable {
         public boolean running = true;
 
-        public ImageLoader() {
-        }
+        public ImageLoader() {}
 
         public final void frameLoadLoop(LibQmg libQmg) {
             int qmgLoadBitmap;
@@ -121,7 +128,9 @@ public final class QmgPlayer extends AnimationPlayer {
             do {
                 try {
                     QmgPlayer qmgPlayer = QmgPlayer.this;
-                    qmgLoadBitmap = LibQmg.qmgLoadBitmap(libQmg.handle, qmgPlayer.bitmapQ[qmgPlayer.bitmapQFront]);
+                    qmgLoadBitmap =
+                            LibQmg.qmgLoadBitmap(
+                                    libQmg.handle, qmgPlayer.bitmapQ[qmgPlayer.bitmapQFront]);
                     if (qmgLoadBitmap > 0) {
                         i++;
                     }
@@ -134,7 +143,10 @@ public final class QmgPlayer extends AnimationPlayer {
                                 try {
                                     qmgPlayer2.drawBufferLock.wait(5000L);
                                 } catch (InterruptedException e) {
-                                    Slog.e("Shutdown-QmgPlayer", "frameLoadLoop InterruptedException", e);
+                                    Slog.e(
+                                            "Shutdown-QmgPlayer",
+                                            "frameLoadLoop InterruptedException",
+                                            e);
                                 }
                             }
                         }
@@ -167,9 +179,12 @@ public final class QmgPlayer extends AnimationPlayer {
             do {
                 try {
                     QmgPlayer qmgPlayer = QmgPlayer.this;
-                    qmgLoadBitmap = LibQmg.qmgLoadBitmap(libQmg.handle, qmgPlayer.bitmapQ[qmgPlayer.bitmapQFront]);
+                    qmgLoadBitmap =
+                            LibQmg.qmgLoadBitmap(
+                                    libQmg.handle, qmgPlayer.bitmapQ[qmgPlayer.bitmapQFront]);
                     QmgPlayer qmgPlayer2 = QmgPlayer.this;
-                    LibQmg.qmgLoadBitmap(libQmg2.handle, qmgPlayer2.subbitmapQ[qmgPlayer2.bitmapQFront]);
+                    LibQmg.qmgLoadBitmap(
+                            libQmg2.handle, qmgPlayer2.subbitmapQ[qmgPlayer2.bitmapQFront]);
                     if (qmgLoadBitmap > 0) {
                         i++;
                     }
@@ -204,12 +219,16 @@ public final class QmgPlayer extends AnimationPlayer {
 
         @Override // java.lang.Runnable
         public final void run() {
-            Slog.i("Shutdown-QmgPlayer", "!@ImageLoadThread.run(), qmgList.size = " + QmgPlayer.this.mainImages.size());
+            Slog.i(
+                    "Shutdown-QmgPlayer",
+                    "!@ImageLoadThread.run(), qmgList.size = " + QmgPlayer.this.mainImages.size());
             QmgPlayer.this.mDrawHandler.sendEmptyMessage(0);
             while (QmgPlayer.this.mainImages.size() > 0) {
                 try {
                     if (QmgPlayer.this.subImages.size() > 0) {
-                        multiFrameLoadLoop((LibQmg) QmgPlayer.this.mainImages.get(0), (LibQmg) QmgPlayer.this.subImages.get(0));
+                        multiFrameLoadLoop(
+                                (LibQmg) QmgPlayer.this.mainImages.get(0),
+                                (LibQmg) QmgPlayer.this.subImages.get(0));
                         QmgPlayer.this.mainImages.remove(0);
                         QmgPlayer.this.subImages.remove(0);
                     } else {
@@ -217,7 +236,10 @@ public final class QmgPlayer extends AnimationPlayer {
                         QmgPlayer.this.mainImages.remove(0);
                     }
                 } catch (IndexOutOfBoundsException e) {
-                    Slog.e("Shutdown-QmgPlayer", "!@qmgList or subqmgList IndexOutOfBoundsException", e);
+                    Slog.e(
+                            "Shutdown-QmgPlayer",
+                            "!@qmgList or subqmgList IndexOutOfBoundsException",
+                            e);
                 }
             }
             this.running = false;
@@ -293,7 +315,8 @@ public final class QmgPlayer extends AnimationPlayer {
             for (int i = 0; i < 3; i++) {
                 Bitmap[] bitmapArr = this.bitmapQ;
                 if (bitmapArr[i] == null) {
-                    bitmapArr[i] = Bitmap.createBitmap(qmgGetWidth, qmgGetHeight, Bitmap.Config.RGB_565);
+                    bitmapArr[i] =
+                            Bitmap.createBitmap(qmgGetWidth, qmgGetHeight, Bitmap.Config.RGB_565);
                 }
             }
         } else {
@@ -308,13 +331,19 @@ public final class QmgPlayer extends AnimationPlayer {
             libQmg2.ensureQmgHandle();
             int qmgGetHeight2 = LibQmg.qmgGetHeight(libQmg2.handle);
             DisplayMetrics displayMetrics = new DisplayMetrics();
-            Display display = ((DisplayManager) this.context.getSystemService("display")).getDisplay(1);
+            Display display =
+                    ((DisplayManager) this.context.getSystemService("display")).getDisplay(1);
             if (display != null) {
                 display.getMetrics(displayMetrics);
                 for (int i2 = 0; i2 < 3; i2++) {
                     Bitmap[] bitmapArr2 = this.subbitmapQ;
                     if (bitmapArr2[i2] == null) {
-                        bitmapArr2[i2] = Bitmap.createBitmap(displayMetrics, qmgGetWidth2, qmgGetHeight2, Bitmap.Config.RGB_565);
+                        bitmapArr2[i2] =
+                                Bitmap.createBitmap(
+                                        displayMetrics,
+                                        qmgGetWidth2,
+                                        qmgGetHeight2,
+                                        Bitmap.Config.RGB_565);
                     }
                 }
             }

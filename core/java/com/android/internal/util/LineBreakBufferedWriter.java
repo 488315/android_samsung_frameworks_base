@@ -43,7 +43,7 @@ public class LineBreakBufferedWriter extends PrintWriter {
             }
             return;
         }
-        write(new char[]{(char) c}, 0, 1);
+        write(new char[] {(char) c}, 0, 1);
     }
 
     @Override // java.io.PrintWriter

@@ -1,6 +1,5 @@
 package android.accounts;
 
-import android.accounts.IAccountManagerResponse;
 import android.content.IntentSender;
 import android.os.Binder;
 import android.os.Bundle;
@@ -9,35 +8,75 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import java.util.Map;
 
 /* loaded from: classes.dex */
 public interface IAccountManager extends IInterface {
     boolean accountAuthenticated(Account account) throws RemoteException;
 
-    void addAccount(IAccountManagerResponse iAccountManagerResponse, String str, String str2, String[] strArr, boolean z, Bundle bundle) throws RemoteException;
+    void addAccount(
+            IAccountManagerResponse iAccountManagerResponse,
+            String str,
+            String str2,
+            String[] strArr,
+            boolean z,
+            Bundle bundle)
+            throws RemoteException;
 
-    void addAccountAsUser(IAccountManagerResponse iAccountManagerResponse, String str, String str2, String[] strArr, boolean z, Bundle bundle, int i) throws RemoteException;
+    void addAccountAsUser(
+            IAccountManagerResponse iAccountManagerResponse,
+            String str,
+            String str2,
+            String[] strArr,
+            boolean z,
+            Bundle bundle,
+            int i)
+            throws RemoteException;
 
-    boolean addAccountExplicitly(Account account, String str, Bundle bundle, String str2) throws RemoteException;
+    boolean addAccountExplicitly(Account account, String str, Bundle bundle, String str2)
+            throws RemoteException;
 
-    boolean addAccountExplicitlyWithVisibility(Account account, String str, Bundle bundle, Map map, String str2) throws RemoteException;
+    boolean addAccountExplicitlyWithVisibility(
+            Account account, String str, Bundle bundle, Map map, String str2)
+            throws RemoteException;
 
     void addSharedAccountsFromParentUser(int i, int i2, String str) throws RemoteException;
 
     void clearPassword(Account account) throws RemoteException;
 
-    void confirmCredentialsAsUser(IAccountManagerResponse iAccountManagerResponse, Account account, Bundle bundle, boolean z, int i) throws RemoteException;
+    void confirmCredentialsAsUser(
+            IAccountManagerResponse iAccountManagerResponse,
+            Account account,
+            Bundle bundle,
+            boolean z,
+            int i)
+            throws RemoteException;
 
-    void copyAccountToUser(IAccountManagerResponse iAccountManagerResponse, Account account, int i, int i2) throws RemoteException;
+    void copyAccountToUser(
+            IAccountManagerResponse iAccountManagerResponse, Account account, int i, int i2)
+            throws RemoteException;
 
-    IntentSender createRequestAccountAccessIntentSenderAsUser(Account account, String str, UserHandle userHandle) throws RemoteException;
+    IntentSender createRequestAccountAccessIntentSenderAsUser(
+            Account account, String str, UserHandle userHandle) throws RemoteException;
 
-    void editProperties(IAccountManagerResponse iAccountManagerResponse, String str, boolean z) throws RemoteException;
+    void editProperties(IAccountManagerResponse iAccountManagerResponse, String str, boolean z)
+            throws RemoteException;
 
-    void finishSessionAsUser(IAccountManagerResponse iAccountManagerResponse, Bundle bundle, boolean z, Bundle bundle2, int i) throws RemoteException;
+    void finishSessionAsUser(
+            IAccountManagerResponse iAccountManagerResponse,
+            Bundle bundle,
+            boolean z,
+            Bundle bundle2,
+            int i)
+            throws RemoteException;
 
-    void getAccountByTypeAndFeatures(IAccountManagerResponse iAccountManagerResponse, String str, String[] strArr, String str2) throws RemoteException;
+    void getAccountByTypeAndFeatures(
+            IAccountManagerResponse iAccountManagerResponse,
+            String str,
+            String[] strArr,
+            String str2)
+            throws RemoteException;
 
     int getAccountVisibility(Account account, String str) throws RemoteException;
 
@@ -45,15 +84,29 @@ public interface IAccountManager extends IInterface {
 
     Account[] getAccountsAsUser(String str, int i, String str2) throws RemoteException;
 
-    void getAccountsByFeatures(IAccountManagerResponse iAccountManagerResponse, String str, String[] strArr, String str2) throws RemoteException;
+    void getAccountsByFeatures(
+            IAccountManagerResponse iAccountManagerResponse,
+            String str,
+            String[] strArr,
+            String str2)
+            throws RemoteException;
 
-    Account[] getAccountsByTypeForPackage(String str, String str2, String str3) throws RemoteException;
+    Account[] getAccountsByTypeForPackage(String str, String str2, String str3)
+            throws RemoteException;
 
     Account[] getAccountsForPackage(String str, int i, String str2) throws RemoteException;
 
-    void getAuthToken(IAccountManagerResponse iAccountManagerResponse, Account account, String str, boolean z, boolean z2, Bundle bundle) throws RemoteException;
+    void getAuthToken(
+            IAccountManagerResponse iAccountManagerResponse,
+            Account account,
+            String str,
+            boolean z,
+            boolean z2,
+            Bundle bundle)
+            throws RemoteException;
 
-    void getAuthTokenLabel(IAccountManagerResponse iAccountManagerResponse, String str, String str2) throws RemoteException;
+    void getAuthTokenLabel(IAccountManagerResponse iAccountManagerResponse, String str, String str2)
+            throws RemoteException;
 
     AuthenticatorDescription[] getAuthenticatorTypes(int i) throws RemoteException;
 
@@ -65,13 +118,22 @@ public interface IAccountManager extends IInterface {
 
     String getUserData(Account account, String str) throws RemoteException;
 
-    boolean hasAccountAccess(Account account, String str, UserHandle userHandle) throws RemoteException;
+    boolean hasAccountAccess(Account account, String str, UserHandle userHandle)
+            throws RemoteException;
 
-    void hasFeatures(IAccountManagerResponse iAccountManagerResponse, Account account, String[] strArr, int i, String str) throws RemoteException;
+    void hasFeatures(
+            IAccountManagerResponse iAccountManagerResponse,
+            Account account,
+            String[] strArr,
+            int i,
+            String str)
+            throws RemoteException;
 
     void invalidateAuthToken(String str, String str2) throws RemoteException;
 
-    void isCredentialsUpdateSuggested(IAccountManagerResponse iAccountManagerResponse, Account account, String str) throws RemoteException;
+    void isCredentialsUpdateSuggested(
+            IAccountManagerResponse iAccountManagerResponse, Account account, String str)
+            throws RemoteException;
 
     void onAccountAccessed(String str) throws RemoteException;
 
@@ -79,11 +141,14 @@ public interface IAccountManager extends IInterface {
 
     void registerAccountListener(String[] strArr, String str) throws RemoteException;
 
-    void removeAccountAsUser(IAccountManagerResponse iAccountManagerResponse, Account account, boolean z, int i) throws RemoteException;
+    void removeAccountAsUser(
+            IAccountManagerResponse iAccountManagerResponse, Account account, boolean z, int i)
+            throws RemoteException;
 
     boolean removeAccountExplicitly(Account account) throws RemoteException;
 
-    void renameAccount(IAccountManagerResponse iAccountManagerResponse, Account account, String str) throws RemoteException;
+    void renameAccount(IAccountManagerResponse iAccountManagerResponse, Account account, String str)
+            throws RemoteException;
 
     boolean setAccountVisibility(Account account, String str, int i) throws RemoteException;
 
@@ -95,15 +160,34 @@ public interface IAccountManager extends IInterface {
 
     boolean someUserHasAccount(Account account) throws RemoteException;
 
-    void startAddAccountSession(IAccountManagerResponse iAccountManagerResponse, String str, String str2, String[] strArr, boolean z, Bundle bundle) throws RemoteException;
+    void startAddAccountSession(
+            IAccountManagerResponse iAccountManagerResponse,
+            String str,
+            String str2,
+            String[] strArr,
+            boolean z,
+            Bundle bundle)
+            throws RemoteException;
 
-    void startUpdateCredentialsSession(IAccountManagerResponse iAccountManagerResponse, Account account, String str, boolean z, Bundle bundle) throws RemoteException;
+    void startUpdateCredentialsSession(
+            IAccountManagerResponse iAccountManagerResponse,
+            Account account,
+            String str,
+            boolean z,
+            Bundle bundle)
+            throws RemoteException;
 
     void unregisterAccountListener(String[] strArr, String str) throws RemoteException;
 
     void updateAppPermission(Account account, String str, int i, boolean z) throws RemoteException;
 
-    void updateCredentials(IAccountManagerResponse iAccountManagerResponse, Account account, String str, boolean z, Bundle bundle) throws RemoteException;
+    void updateCredentials(
+            IAccountManagerResponse iAccountManagerResponse,
+            Account account,
+            String str,
+            boolean z,
+            Bundle bundle)
+            throws RemoteException;
 
     public static class Default implements IAccountManager {
         @Override // android.accounts.IAccountManager
@@ -122,40 +206,62 @@ public interface IAccountManager extends IInterface {
         }
 
         @Override // android.accounts.IAccountManager
-        public Account[] getAccountsForPackage(String packageName, int uid, String opPackageName) throws RemoteException {
+        public Account[] getAccountsForPackage(String packageName, int uid, String opPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.accounts.IAccountManager
-        public Account[] getAccountsByTypeForPackage(String type, String packageName, String opPackageName) throws RemoteException {
+        public Account[] getAccountsByTypeForPackage(
+                String type, String packageName, String opPackageName) throws RemoteException {
             return null;
         }
 
         @Override // android.accounts.IAccountManager
-        public Account[] getAccountsAsUser(String accountType, int userId, String opPackageName) throws RemoteException {
+        public Account[] getAccountsAsUser(String accountType, int userId, String opPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.accounts.IAccountManager
-        public void hasFeatures(IAccountManagerResponse response, Account account, String[] features, int userId, String opPackageName) throws RemoteException {
-        }
+        public void hasFeatures(
+                IAccountManagerResponse response,
+                Account account,
+                String[] features,
+                int userId,
+                String opPackageName)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void getAccountByTypeAndFeatures(IAccountManagerResponse response, String accountType, String[] features, String opPackageName) throws RemoteException {
-        }
+        public void getAccountByTypeAndFeatures(
+                IAccountManagerResponse response,
+                String accountType,
+                String[] features,
+                String opPackageName)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void getAccountsByFeatures(IAccountManagerResponse response, String accountType, String[] features, String opPackageName) throws RemoteException {
-        }
+        public void getAccountsByFeatures(
+                IAccountManagerResponse response,
+                String accountType,
+                String[] features,
+                String opPackageName)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public boolean addAccountExplicitly(Account account, String password, Bundle extras, String opPackageName) throws RemoteException {
+        public boolean addAccountExplicitly(
+                Account account, String password, Bundle extras, String opPackageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.accounts.IAccountManager
-        public void removeAccountAsUser(IAccountManagerResponse response, Account account, boolean expectActivityLaunch, int userId) throws RemoteException {
-        }
+        public void removeAccountAsUser(
+                IAccountManagerResponse response,
+                Account account,
+                boolean expectActivityLaunch,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
         public boolean removeAccountExplicitly(Account account) throws RemoteException {
@@ -163,12 +269,13 @@ public interface IAccountManager extends IInterface {
         }
 
         @Override // android.accounts.IAccountManager
-        public void copyAccountToUser(IAccountManagerResponse response, Account account, int userFrom, int userTo) throws RemoteException {
-        }
+        public void copyAccountToUser(
+                IAccountManagerResponse response, Account account, int userFrom, int userTo)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void invalidateAuthToken(String accountType, String authToken) throws RemoteException {
-        }
+        public void invalidateAuthToken(String accountType, String authToken)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
         public String peekAuthToken(Account account, String authTokenType) throws RemoteException {
@@ -176,48 +283,76 @@ public interface IAccountManager extends IInterface {
         }
 
         @Override // android.accounts.IAccountManager
-        public void setAuthToken(Account account, String authTokenType, String authToken) throws RemoteException {
-        }
+        public void setAuthToken(Account account, String authTokenType, String authToken)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void setPassword(Account account, String password) throws RemoteException {
-        }
+        public void setPassword(Account account, String password) throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void clearPassword(Account account) throws RemoteException {
-        }
+        public void clearPassword(Account account) throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void setUserData(Account account, String key, String value) throws RemoteException {
-        }
+        public void setUserData(Account account, String key, String value) throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void updateAppPermission(Account account, String authTokenType, int uid, boolean value) throws RemoteException {
-        }
+        public void updateAppPermission(
+                Account account, String authTokenType, int uid, boolean value)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void getAuthToken(IAccountManagerResponse response, Account account, String authTokenType, boolean notifyOnAuthFailure, boolean expectActivityLaunch, Bundle options) throws RemoteException {
-        }
+        public void getAuthToken(
+                IAccountManagerResponse response,
+                Account account,
+                String authTokenType,
+                boolean notifyOnAuthFailure,
+                boolean expectActivityLaunch,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void addAccount(IAccountManagerResponse response, String accountType, String authTokenType, String[] requiredFeatures, boolean expectActivityLaunch, Bundle options) throws RemoteException {
-        }
+        public void addAccount(
+                IAccountManagerResponse response,
+                String accountType,
+                String authTokenType,
+                String[] requiredFeatures,
+                boolean expectActivityLaunch,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void addAccountAsUser(IAccountManagerResponse response, String accountType, String authTokenType, String[] requiredFeatures, boolean expectActivityLaunch, Bundle options, int userId) throws RemoteException {
-        }
+        public void addAccountAsUser(
+                IAccountManagerResponse response,
+                String accountType,
+                String authTokenType,
+                String[] requiredFeatures,
+                boolean expectActivityLaunch,
+                Bundle options,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void updateCredentials(IAccountManagerResponse response, Account account, String authTokenType, boolean expectActivityLaunch, Bundle options) throws RemoteException {
-        }
+        public void updateCredentials(
+                IAccountManagerResponse response,
+                Account account,
+                String authTokenType,
+                boolean expectActivityLaunch,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void editProperties(IAccountManagerResponse response, String accountType, boolean expectActivityLaunch) throws RemoteException {
-        }
+        public void editProperties(
+                IAccountManagerResponse response, String accountType, boolean expectActivityLaunch)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void confirmCredentialsAsUser(IAccountManagerResponse response, Account account, Bundle options, boolean expectActivityLaunch, int userId) throws RemoteException {
-        }
+        public void confirmCredentialsAsUser(
+                IAccountManagerResponse response,
+                Account account,
+                Bundle options,
+                boolean expectActivityLaunch,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
         public boolean accountAuthenticated(Account account) throws RemoteException {
@@ -225,16 +360,18 @@ public interface IAccountManager extends IInterface {
         }
 
         @Override // android.accounts.IAccountManager
-        public void getAuthTokenLabel(IAccountManagerResponse response, String accountType, String authTokenType) throws RemoteException {
-        }
+        public void getAuthTokenLabel(
+                IAccountManagerResponse response, String accountType, String authTokenType)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void addSharedAccountsFromParentUser(int parentUserId, int userId, String opPackageName) throws RemoteException {
-        }
+        public void addSharedAccountsFromParentUser(
+                int parentUserId, int userId, String opPackageName) throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void renameAccount(IAccountManagerResponse response, Account accountToRename, String newName) throws RemoteException {
-        }
+        public void renameAccount(
+                IAccountManagerResponse response, Account accountToRename, String newName)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
         public String getPreviousName(Account account) throws RemoteException {
@@ -242,16 +379,32 @@ public interface IAccountManager extends IInterface {
         }
 
         @Override // android.accounts.IAccountManager
-        public void startAddAccountSession(IAccountManagerResponse response, String accountType, String authTokenType, String[] requiredFeatures, boolean expectActivityLaunch, Bundle options) throws RemoteException {
-        }
+        public void startAddAccountSession(
+                IAccountManagerResponse response,
+                String accountType,
+                String authTokenType,
+                String[] requiredFeatures,
+                boolean expectActivityLaunch,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void startUpdateCredentialsSession(IAccountManagerResponse response, Account account, String authTokenType, boolean expectActivityLaunch, Bundle options) throws RemoteException {
-        }
+        public void startUpdateCredentialsSession(
+                IAccountManagerResponse response,
+                Account account,
+                String authTokenType,
+                boolean expectActivityLaunch,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void finishSessionAsUser(IAccountManagerResponse response, Bundle sessionBundle, boolean expectActivityLaunch, Bundle appInfo, int userId) throws RemoteException {
-        }
+        public void finishSessionAsUser(
+                IAccountManagerResponse response,
+                Bundle sessionBundle,
+                boolean expectActivityLaunch,
+                Bundle appInfo,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
         public boolean someUserHasAccount(Account account) throws RemoteException {
@@ -259,8 +412,9 @@ public interface IAccountManager extends IInterface {
         }
 
         @Override // android.accounts.IAccountManager
-        public void isCredentialsUpdateSuggested(IAccountManagerResponse response, Account account, String statusToken) throws RemoteException {
-        }
+        public void isCredentialsUpdateSuggested(
+                IAccountManagerResponse response, Account account, String statusToken)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
         public Map getPackagesAndVisibilityForAccount(Account account) throws RemoteException {
@@ -268,12 +422,19 @@ public interface IAccountManager extends IInterface {
         }
 
         @Override // android.accounts.IAccountManager
-        public boolean addAccountExplicitlyWithVisibility(Account account, String password, Bundle extras, Map visibility, String opPackageName) throws RemoteException {
+        public boolean addAccountExplicitlyWithVisibility(
+                Account account,
+                String password,
+                Bundle extras,
+                Map visibility,
+                String opPackageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.accounts.IAccountManager
-        public boolean setAccountVisibility(Account a, String packageName, int newVisibility) throws RemoteException {
+        public boolean setAccountVisibility(Account a, String packageName, int newVisibility)
+                throws RemoteException {
             return false;
         }
 
@@ -283,31 +444,33 @@ public interface IAccountManager extends IInterface {
         }
 
         @Override // android.accounts.IAccountManager
-        public Map getAccountsAndVisibilityForPackage(String packageName, String accountType) throws RemoteException {
+        public Map getAccountsAndVisibilityForPackage(String packageName, String accountType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.accounts.IAccountManager
-        public void registerAccountListener(String[] accountTypes, String opPackageName) throws RemoteException {
-        }
+        public void registerAccountListener(String[] accountTypes, String opPackageName)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public void unregisterAccountListener(String[] accountTypes, String opPackageName) throws RemoteException {
-        }
+        public void unregisterAccountListener(String[] accountTypes, String opPackageName)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountManager
-        public boolean hasAccountAccess(Account account, String packageName, UserHandle userHandle) throws RemoteException {
+        public boolean hasAccountAccess(Account account, String packageName, UserHandle userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.accounts.IAccountManager
-        public IntentSender createRequestAccountAccessIntentSenderAsUser(Account account, String packageName, UserHandle userHandle) throws RemoteException {
+        public IntentSender createRequestAccountAccessIntentSenderAsUser(
+                Account account, String packageName, UserHandle userHandle) throws RemoteException {
             return null;
         }
 
         @Override // android.accounts.IAccountManager
-        public void onAccountAccessed(String token) throws RemoteException {
-        }
+        public void onAccountAccessed(String token) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -315,7 +478,7 @@ public interface IAccountManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAccountManager {
+    public abstract static class Stub extends Binder implements IAccountManager {
         public static final String DESCRIPTOR = "android.accounts.IAccountManager";
         static final int TRANSACTION_accountAuthenticated = 27;
         static final int TRANSACTION_addAccount = 22;
@@ -489,7 +652,8 @@ public interface IAccountManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -548,7 +712,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeTypedArray(_result6, 1);
                     return true;
                 case 7:
-                    IAccountManagerResponse _arg07 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg07 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg15 = (Account) data.readTypedObject(Account.CREATOR);
                     String[] _arg24 = data.createStringArray();
                     int _arg3 = data.readInt();
@@ -558,7 +723,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 8:
-                    IAccountManagerResponse _arg08 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg08 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg16 = data.readString();
                     String[] _arg25 = data.createStringArray();
                     String _arg32 = data.readString();
@@ -567,7 +733,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 9:
-                    IAccountManagerResponse _arg09 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg09 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg17 = data.readString();
                     String[] _arg26 = data.createStringArray();
                     String _arg33 = data.readString();
@@ -586,7 +753,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeBoolean(_result7);
                     return true;
                 case 11:
-                    IAccountManagerResponse _arg011 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg011 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg19 = (Account) data.readTypedObject(Account.CREATOR);
                     boolean _arg28 = data.readBoolean();
                     int _arg35 = data.readInt();
@@ -602,7 +770,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeBoolean(_result8);
                     return true;
                 case 13:
-                    IAccountManagerResponse _arg013 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg013 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg110 = (Account) data.readTypedObject(Account.CREATOR);
                     int _arg29 = data.readInt();
                     int _arg36 = data.readInt();
@@ -664,7 +833,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 21:
-                    IAccountManagerResponse _arg021 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg021 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg117 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg213 = data.readString();
                     boolean _arg38 = data.readBoolean();
@@ -675,7 +845,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 22:
-                    IAccountManagerResponse _arg022 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg022 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg118 = data.readString();
                     String _arg214 = data.readString();
                     String[] _arg39 = data.createStringArray();
@@ -686,7 +857,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 23:
-                    IAccountManagerResponse _arg023 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg023 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg119 = data.readString();
                     String _arg215 = data.readString();
                     String[] _arg310 = data.createStringArray();
@@ -698,7 +870,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 24:
-                    IAccountManagerResponse _arg024 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg024 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg120 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg216 = data.readString();
                     boolean _arg311 = data.readBoolean();
@@ -708,7 +881,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 25:
-                    IAccountManagerResponse _arg025 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg025 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg121 = data.readString();
                     boolean _arg217 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -716,7 +890,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 26:
-                    IAccountManagerResponse _arg026 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg026 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg122 = (Account) data.readTypedObject(Account.CREATOR);
                     Bundle _arg218 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     boolean _arg312 = data.readBoolean();
@@ -733,7 +908,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeBoolean(_result10);
                     return true;
                 case 28:
-                    IAccountManagerResponse _arg028 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg028 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg123 = data.readString();
                     String _arg219 = data.readString();
                     data.enforceNoDataAvail();
@@ -749,7 +925,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 30:
-                    IAccountManagerResponse _arg030 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg030 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg125 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg221 = data.readString();
                     data.enforceNoDataAvail();
@@ -764,7 +941,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeString(_result11);
                     return true;
                 case 32:
-                    IAccountManagerResponse _arg032 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg032 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg126 = data.readString();
                     String _arg222 = data.readString();
                     String[] _arg313 = data.createStringArray();
@@ -775,7 +953,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 33:
-                    IAccountManagerResponse _arg033 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg033 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg127 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg223 = data.readString();
                     boolean _arg314 = data.readBoolean();
@@ -785,7 +964,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 34:
-                    IAccountManagerResponse _arg034 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg034 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     Bundle _arg128 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     boolean _arg224 = data.readBoolean();
                     Bundle _arg315 = (Bundle) data.readTypedObject(Bundle.CREATOR);
@@ -802,7 +982,8 @@ public interface IAccountManager extends IInterface {
                     reply.writeBoolean(_result12);
                     return true;
                 case 36:
-                    IAccountManagerResponse _arg036 = IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountManagerResponse _arg036 =
+                            IAccountManagerResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg129 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg225 = data.readString();
                     data.enforceNoDataAvail();
@@ -824,7 +1005,9 @@ public interface IAccountManager extends IInterface {
                     Map _arg316 = data.readHashMap(cl);
                     String _arg410 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result14 = addAccountExplicitlyWithVisibility(_arg038, _arg130, _arg226, _arg316, _arg410);
+                    boolean _result14 =
+                            addAccountExplicitlyWithVisibility(
+                                    _arg038, _arg130, _arg226, _arg316, _arg410);
                     reply.writeNoException();
                     reply.writeBoolean(_result14);
                     return true;
@@ -881,7 +1064,8 @@ public interface IAccountManager extends IInterface {
                     String _arg137 = data.readString();
                     UserHandle _arg229 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    IntentSender _result19 = createRequestAccountAccessIntentSenderAsUser(_arg045, _arg137, _arg229);
+                    IntentSender _result19 =
+                            createRequestAccountAccessIntentSenderAsUser(_arg045, _arg137, _arg229);
                     reply.writeNoException();
                     reply.writeTypedObject(_result19, 1);
                     return true;
@@ -948,7 +1132,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public AuthenticatorDescription[] getAuthenticatorTypes(int userId) throws RemoteException {
+            public AuthenticatorDescription[] getAuthenticatorTypes(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -956,7 +1141,9 @@ public interface IAccountManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    AuthenticatorDescription[] _result = (AuthenticatorDescription[]) _reply.createTypedArray(AuthenticatorDescription.CREATOR);
+                    AuthenticatorDescription[] _result =
+                            (AuthenticatorDescription[])
+                                    _reply.createTypedArray(AuthenticatorDescription.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -965,7 +1152,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public Account[] getAccountsForPackage(String packageName, int uid, String opPackageName) throws RemoteException {
+            public Account[] getAccountsForPackage(
+                    String packageName, int uid, String opPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -984,7 +1172,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public Account[] getAccountsByTypeForPackage(String type, String packageName, String opPackageName) throws RemoteException {
+            public Account[] getAccountsByTypeForPackage(
+                    String type, String packageName, String opPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1003,7 +1192,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public Account[] getAccountsAsUser(String accountType, int userId, String opPackageName) throws RemoteException {
+            public Account[] getAccountsAsUser(String accountType, int userId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1022,7 +1212,13 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void hasFeatures(IAccountManagerResponse response, Account account, String[] features, int userId, String opPackageName) throws RemoteException {
+            public void hasFeatures(
+                    IAccountManagerResponse response,
+                    Account account,
+                    String[] features,
+                    int userId,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1041,7 +1237,12 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void getAccountByTypeAndFeatures(IAccountManagerResponse response, String accountType, String[] features, String opPackageName) throws RemoteException {
+            public void getAccountByTypeAndFeatures(
+                    IAccountManagerResponse response,
+                    String accountType,
+                    String[] features,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1059,7 +1260,12 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void getAccountsByFeatures(IAccountManagerResponse response, String accountType, String[] features, String opPackageName) throws RemoteException {
+            public void getAccountsByFeatures(
+                    IAccountManagerResponse response,
+                    String accountType,
+                    String[] features,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1077,7 +1283,9 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public boolean addAccountExplicitly(Account account, String password, Bundle extras, String opPackageName) throws RemoteException {
+            public boolean addAccountExplicitly(
+                    Account account, String password, Bundle extras, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1097,7 +1305,12 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void removeAccountAsUser(IAccountManagerResponse response, Account account, boolean expectActivityLaunch, int userId) throws RemoteException {
+            public void removeAccountAsUser(
+                    IAccountManagerResponse response,
+                    Account account,
+                    boolean expectActivityLaunch,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1132,7 +1345,9 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void copyAccountToUser(IAccountManagerResponse response, Account account, int userFrom, int userTo) throws RemoteException {
+            public void copyAccountToUser(
+                    IAccountManagerResponse response, Account account, int userFrom, int userTo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1150,7 +1365,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void invalidateAuthToken(String accountType, String authToken) throws RemoteException {
+            public void invalidateAuthToken(String accountType, String authToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1166,7 +1382,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public String peekAuthToken(Account account, String authTokenType) throws RemoteException {
+            public String peekAuthToken(Account account, String authTokenType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1184,7 +1401,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void setAuthToken(Account account, String authTokenType, String authToken) throws RemoteException {
+            public void setAuthToken(Account account, String authTokenType, String authToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1232,7 +1450,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void setUserData(Account account, String key, String value) throws RemoteException {
+            public void setUserData(Account account, String key, String value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1249,7 +1468,9 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void updateAppPermission(Account account, String authTokenType, int uid, boolean value) throws RemoteException {
+            public void updateAppPermission(
+                    Account account, String authTokenType, int uid, boolean value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1267,7 +1488,14 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void getAuthToken(IAccountManagerResponse response, Account account, String authTokenType, boolean notifyOnAuthFailure, boolean expectActivityLaunch, Bundle options) throws RemoteException {
+            public void getAuthToken(
+                    IAccountManagerResponse response,
+                    Account account,
+                    String authTokenType,
+                    boolean notifyOnAuthFailure,
+                    boolean expectActivityLaunch,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1287,7 +1515,14 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void addAccount(IAccountManagerResponse response, String accountType, String authTokenType, String[] requiredFeatures, boolean expectActivityLaunch, Bundle options) throws RemoteException {
+            public void addAccount(
+                    IAccountManagerResponse response,
+                    String accountType,
+                    String authTokenType,
+                    String[] requiredFeatures,
+                    boolean expectActivityLaunch,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1307,7 +1542,15 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void addAccountAsUser(IAccountManagerResponse response, String accountType, String authTokenType, String[] requiredFeatures, boolean expectActivityLaunch, Bundle options, int userId) throws RemoteException {
+            public void addAccountAsUser(
+                    IAccountManagerResponse response,
+                    String accountType,
+                    String authTokenType,
+                    String[] requiredFeatures,
+                    boolean expectActivityLaunch,
+                    Bundle options,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1328,7 +1571,13 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void updateCredentials(IAccountManagerResponse response, Account account, String authTokenType, boolean expectActivityLaunch, Bundle options) throws RemoteException {
+            public void updateCredentials(
+                    IAccountManagerResponse response,
+                    Account account,
+                    String authTokenType,
+                    boolean expectActivityLaunch,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1347,7 +1596,11 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void editProperties(IAccountManagerResponse response, String accountType, boolean expectActivityLaunch) throws RemoteException {
+            public void editProperties(
+                    IAccountManagerResponse response,
+                    String accountType,
+                    boolean expectActivityLaunch)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1364,7 +1617,13 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void confirmCredentialsAsUser(IAccountManagerResponse response, Account account, Bundle options, boolean expectActivityLaunch, int userId) throws RemoteException {
+            public void confirmCredentialsAsUser(
+                    IAccountManagerResponse response,
+                    Account account,
+                    Bundle options,
+                    boolean expectActivityLaunch,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1400,7 +1659,9 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void getAuthTokenLabel(IAccountManagerResponse response, String accountType, String authTokenType) throws RemoteException {
+            public void getAuthTokenLabel(
+                    IAccountManagerResponse response, String accountType, String authTokenType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1417,7 +1678,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void addSharedAccountsFromParentUser(int parentUserId, int userId, String opPackageName) throws RemoteException {
+            public void addSharedAccountsFromParentUser(
+                    int parentUserId, int userId, String opPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1434,7 +1696,9 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void renameAccount(IAccountManagerResponse response, Account accountToRename, String newName) throws RemoteException {
+            public void renameAccount(
+                    IAccountManagerResponse response, Account accountToRename, String newName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1468,7 +1732,14 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void startAddAccountSession(IAccountManagerResponse response, String accountType, String authTokenType, String[] requiredFeatures, boolean expectActivityLaunch, Bundle options) throws RemoteException {
+            public void startAddAccountSession(
+                    IAccountManagerResponse response,
+                    String accountType,
+                    String authTokenType,
+                    String[] requiredFeatures,
+                    boolean expectActivityLaunch,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1488,7 +1759,13 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void startUpdateCredentialsSession(IAccountManagerResponse response, Account account, String authTokenType, boolean expectActivityLaunch, Bundle options) throws RemoteException {
+            public void startUpdateCredentialsSession(
+                    IAccountManagerResponse response,
+                    Account account,
+                    String authTokenType,
+                    boolean expectActivityLaunch,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1507,7 +1784,13 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void finishSessionAsUser(IAccountManagerResponse response, Bundle sessionBundle, boolean expectActivityLaunch, Bundle appInfo, int userId) throws RemoteException {
+            public void finishSessionAsUser(
+                    IAccountManagerResponse response,
+                    Bundle sessionBundle,
+                    boolean expectActivityLaunch,
+                    Bundle appInfo,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1543,7 +1826,9 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void isCredentialsUpdateSuggested(IAccountManagerResponse response, Account account, String statusToken) throws RemoteException {
+            public void isCredentialsUpdateSuggested(
+                    IAccountManagerResponse response, Account account, String statusToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1578,7 +1863,13 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public boolean addAccountExplicitlyWithVisibility(Account account, String password, Bundle extras, Map visibility, String opPackageName) throws RemoteException {
+            public boolean addAccountExplicitlyWithVisibility(
+                    Account account,
+                    String password,
+                    Bundle extras,
+                    Map visibility,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1599,7 +1890,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public boolean setAccountVisibility(Account a, String packageName, int newVisibility) throws RemoteException {
+            public boolean setAccountVisibility(Account a, String packageName, int newVisibility)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1636,7 +1928,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public Map getAccountsAndVisibilityForPackage(String packageName, String accountType) throws RemoteException {
+            public Map getAccountsAndVisibilityForPackage(String packageName, String accountType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1655,7 +1948,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void registerAccountListener(String[] accountTypes, String opPackageName) throws RemoteException {
+            public void registerAccountListener(String[] accountTypes, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1671,7 +1965,8 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public void unregisterAccountListener(String[] accountTypes, String opPackageName) throws RemoteException {
+            public void unregisterAccountListener(String[] accountTypes, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1687,7 +1982,9 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public boolean hasAccountAccess(Account account, String packageName, UserHandle userHandle) throws RemoteException {
+            public boolean hasAccountAccess(
+                    Account account, String packageName, UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1706,7 +2003,9 @@ public interface IAccountManager extends IInterface {
             }
 
             @Override // android.accounts.IAccountManager
-            public IntentSender createRequestAccountAccessIntentSenderAsUser(Account account, String packageName, UserHandle userHandle) throws RemoteException {
+            public IntentSender createRequestAccountAccessIntentSenderAsUser(
+                    Account account, String packageName, UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1716,7 +2015,8 @@ public interface IAccountManager extends IInterface {
                     _data.writeTypedObject(userHandle, 0);
                     this.mRemote.transact(45, _data, _reply, 0);
                     _reply.readException();
-                    IntentSender _result = (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
+                    IntentSender _result =
+                            (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

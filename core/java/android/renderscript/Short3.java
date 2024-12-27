@@ -7,8 +7,7 @@ public class Short3 {
     public short y;
     public short z;
 
-    public Short3() {
-    }
+    public Short3() {}
 
     public Short3(short i) {
         this.z = i;

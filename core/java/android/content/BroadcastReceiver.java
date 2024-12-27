@@ -38,11 +38,44 @@ public abstract class BroadcastReceiver {
         final IBinder mToken;
         final int mType;
 
-        public PendingResult(int resultCode, String resultData, Bundle resultExtras, int type, boolean ordered, boolean sticky, IBinder token, int userId, int flags) {
-            this(resultCode, resultData, resultExtras, type, ordered, sticky, guessAssumeDelivered(type, ordered), token, userId, flags, -1, null);
+        public PendingResult(
+                int resultCode,
+                String resultData,
+                Bundle resultExtras,
+                int type,
+                boolean ordered,
+                boolean sticky,
+                IBinder token,
+                int userId,
+                int flags) {
+            this(
+                    resultCode,
+                    resultData,
+                    resultExtras,
+                    type,
+                    ordered,
+                    sticky,
+                    guessAssumeDelivered(type, ordered),
+                    token,
+                    userId,
+                    flags,
+                    -1,
+                    null);
         }
 
-        public PendingResult(int resultCode, String resultData, Bundle resultExtras, int type, boolean ordered, boolean sticky, boolean assumeDelivered, IBinder token, int userId, int flags, int sentFromUid, String sentFromPackage) {
+        public PendingResult(
+                int resultCode,
+                String resultData,
+                Bundle resultExtras,
+                int type,
+                boolean ordered,
+                boolean sticky,
+                boolean assumeDelivered,
+                IBinder token,
+                int userId,
+                int flags,
+                int sentFromUid,
+                String sentFromPackage) {
             this.mResultCode = resultCode;
             this.mResultData = resultData;
             this.mResultExtras = resultExtras;
@@ -125,17 +158,21 @@ public abstract class BroadcastReceiver {
 
         public final void finish() {
             if (Trace.isTagEnabled(64L)) {
-                Trace.traceCounter(64L, "PendingResult#finish#ClassName:" + this.mReceiverClassName, 1);
+                Trace.traceCounter(
+                        64L, "PendingResult#finish#ClassName:" + this.mReceiverClassName, 1);
             }
             if (this.mType == 0) {
                 final IActivityManager mgr = ActivityManager.getService();
                 if (QueuedWork.hasPendingWork()) {
-                    QueuedWork.queue(new Runnable() { // from class: android.content.BroadcastReceiver.PendingResult.1
-                        @Override // java.lang.Runnable
-                        public void run() {
-                            PendingResult.this.sendFinished(mgr);
-                        }
-                    }, false);
+                    QueuedWork.queue(
+                            new Runnable() { // from class:
+                                // android.content.BroadcastReceiver.PendingResult.1
+                                @Override // java.lang.Runnable
+                                public void run() {
+                                    PendingResult.this.sendFinished(mgr);
+                                }
+                            },
+                            false);
                     return;
                 } else {
                     sendFinished(mgr);
@@ -163,7 +200,13 @@ public abstract class BroadcastReceiver {
                     }
                     if (!this.mAssumeDeliveredHint) {
                         if (this.mOrderedHint) {
-                            am.finishReceiver(this.mToken, this.mResultCode, this.mResultData, this.mResultExtras, this.mAbortBroadcast, this.mFlags);
+                            am.finishReceiver(
+                                    this.mToken,
+                                    this.mResultCode,
+                                    this.mResultData,
+                                    this.mResultExtras,
+                                    this.mAbortBroadcast,
+                                    this.mFlags);
                         } else {
                             am.finishReceiver(this.mToken, 0, null, null, false, this.mFlags);
                         }
@@ -189,7 +232,10 @@ public abstract class BroadcastReceiver {
             if (this.mOrderedHint || this.mInitialStickyHint) {
                 return;
             }
-            RuntimeException e = new RuntimeException("BroadcastReceiver trying to return result during a non-ordered broadcast");
+            RuntimeException e =
+                    new RuntimeException(
+                            "BroadcastReceiver trying to return result during a non-ordered"
+                                    + " broadcast");
             e.fillInStackTrace();
             Log.e("BroadcastReceiver", e.getMessage(), e);
         }
@@ -200,7 +246,8 @@ public abstract class BroadcastReceiver {
         this.mPendingResult = null;
         if (res != null && Trace.isTagEnabled(64L)) {
             res.mReceiverClassName = getClass().getName();
-            Trace.traceCounter(64L, "BroadcastReceiver#goAsync#ClassName:" + res.mReceiverClassName, 1);
+            Trace.traceCounter(
+                    64L, "BroadcastReceiver#goAsync#ClassName:" + res.mReceiverClassName, 1);
         }
         return res;
     }
@@ -209,7 +256,11 @@ public abstract class BroadcastReceiver {
         IActivityManager am = ActivityManager.getService();
         try {
             service.prepareToLeaveProcess(myContext);
-            IBinder binder = am.peekService(service, service.resolveTypeIfNeeded(myContext.getContentResolver()), myContext.getOpPackageName());
+            IBinder binder =
+                    am.peekService(
+                            service,
+                            service.resolveTypeIfNeeded(myContext.getContentResolver()),
+                            myContext.getOpPackageName());
             return binder;
         } catch (RemoteException e) {
             return null;
@@ -301,8 +352,7 @@ public abstract class BroadcastReceiver {
         return false;
     }
 
-    public final void setOrderedHint(boolean isOrdered) {
-    }
+    public final void setOrderedHint(boolean isOrdered) {}
 
     public final void setPendingResult(PendingResult result) {
         this.mPendingResult = result;
@@ -350,7 +400,9 @@ public abstract class BroadcastReceiver {
         if (this.mPendingResult.mOrderedHint || this.mPendingResult.mInitialStickyHint) {
             return;
         }
-        RuntimeException e = new RuntimeException("BroadcastReceiver trying to return result during a non-ordered broadcast");
+        RuntimeException e =
+                new RuntimeException(
+                        "BroadcastReceiver trying to return result during a non-ordered broadcast");
         e.fillInStackTrace();
         Log.e("BroadcastReceiver", e.getMessage(), e);
     }

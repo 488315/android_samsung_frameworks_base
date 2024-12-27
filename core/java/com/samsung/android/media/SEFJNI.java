@@ -4,31 +4,87 @@ import android.os.ParcelFileDescriptor;
 
 /* loaded from: classes6.dex */
 class SEFJNI {
-    static native int addFastSEFData(String str, String str2, int i, byte[] bArr, int i2, byte[] bArr2, int i3, int i4, int i5);
+    static native int addFastSEFData(
+            String str,
+            String str2,
+            int i,
+            byte[] bArr,
+            int i2,
+            byte[] bArr2,
+            int i3,
+            int i4,
+            int i5);
 
-    static native int addFastSEFDataFile(String str, String str2, int i, byte[] bArr, int i2, String str3, int i3, int i4);
+    static native int addFastSEFDataFile(
+            String str, String str2, int i, byte[] bArr, int i2, String str3, int i3, int i4);
 
-    static native int addSEFData(String str, String str2, int i, byte[] bArr, int i2, byte[] bArr2, int i3, int i4, int i5);
+    static native int addSEFData(
+            String str,
+            String str2,
+            int i,
+            byte[] bArr,
+            int i2,
+            byte[] bArr2,
+            int i3,
+            int i4,
+            int i5);
 
-    static native int addSEFDataAddTag(String str, String str2, int i, byte[] bArr, int i2, byte[] bArr2, int i3, int i4, int i5);
+    static native int addSEFDataAddTag(
+            String str,
+            String str2,
+            int i,
+            byte[] bArr,
+            int i2,
+            byte[] bArr2,
+            int i3,
+            int i4,
+            int i5);
 
-    public static native long addSEFDataBufferAddTag(byte[] bArr, long j, long j2, long j3, String str, int i, byte[] bArr2, int i2, byte[] bArr3, int i3, int i4, int i5);
+    public static native long addSEFDataBufferAddTag(
+            byte[] bArr,
+            long j,
+            long j2,
+            long j3,
+            String str,
+            int i,
+            byte[] bArr2,
+            int i2,
+            byte[] bArr3,
+            int i3,
+            int i4,
+            int i5);
 
-    public static native int addSEFDataFd(int i, String str, int i2, byte[] bArr, int i3, byte[] bArr2, int i4, int i5, int i6);
+    public static native int addSEFDataFd(
+            int i, String str, int i2, byte[] bArr, int i3, byte[] bArr2, int i4, int i5, int i6);
 
-    public static native int addSEFDataFdAddTag(int i, String str, int i2, byte[] bArr, int i3, byte[] bArr2, int i4, int i5, int i6);
+    public static native int addSEFDataFdAddTag(
+            int i, String str, int i2, byte[] bArr, int i3, byte[] bArr2, int i4, int i5, int i6);
 
-    public static native int addSEFDataFdToMP4(int i, String str, int i2, byte[] bArr, int i3, byte[] bArr2, int i4, int i5, int i6);
+    public static native int addSEFDataFdToMP4(
+            int i, String str, int i2, byte[] bArr, int i3, byte[] bArr2, int i4, int i5, int i6);
 
-    static native int addSEFDataFile(String str, String str2, int i, byte[] bArr, int i2, String str3, int i3, int i4);
+    static native int addSEFDataFile(
+            String str, String str2, int i, byte[] bArr, int i2, String str3, int i3, int i4);
 
-    static native int addSEFDataFileAddTag(String str, String str2, int i, byte[] bArr, int i2, String str3, int i3, int i4);
+    static native int addSEFDataFileAddTag(
+            String str, String str2, int i, byte[] bArr, int i2, String str3, int i3, int i4);
 
-    static native int addSEFDataFileToMP4(String str, String str2, int i, byte[] bArr, int i2, String str3, int i3, int i4);
+    static native int addSEFDataFileToMP4(
+            String str, String str2, int i, byte[] bArr, int i2, String str3, int i3, int i4);
 
-    static native int addSEFDataFiles(String str, String[] strArr, int[] iArr, String[] strArr2, int[] iArr2, int i, int i2);
+    static native int addSEFDataFiles(
+            String str, String[] strArr, int[] iArr, String[] strArr2, int[] iArr2, int i, int i2);
 
-    static native int addSEFDataToMP4(String str, String str2, int i, byte[] bArr, int i2, byte[] bArr2, int i3, int i4, int i5);
+    static native int addSEFDataToMP4(
+            String str,
+            String str2,
+            int i,
+            byte[] bArr,
+            int i2,
+            byte[] bArr2,
+            int i3,
+            int i4,
+            int i5);
 
     static native int clearQdioData(String str);
 
@@ -80,8 +136,7 @@ class SEFJNI {
 
     static native int saveAudioJPEG(String str, byte[] bArr, int i, String str2, int i2);
 
-    SEFJNI() {
-    }
+    SEFJNI() {}
 
     static {
         System.loadLibrary("SEF.quram");
@@ -91,7 +146,8 @@ class SEFJNI {
         return isSEFfd(Pfd.getFd());
     }
 
-    public static long[] getSEFDataPositionFileDescriptor(ParcelFileDescriptor Pfd, String keyName) {
+    public static long[] getSEFDataPositionFileDescriptor(
+            ParcelFileDescriptor Pfd, String keyName) {
         return getSEFDataPositionFd(Pfd.getFd(), keyName);
     }
 
@@ -99,11 +155,13 @@ class SEFJNI {
         return listSEFDataTypesFd(Pfd.getFd());
     }
 
-    public static int copyAllSEFDataFileDescriptor(ParcelFileDescriptor srcPfd, ParcelFileDescriptor dstPfd) {
+    public static int copyAllSEFDataFileDescriptor(
+            ParcelFileDescriptor srcPfd, ParcelFileDescriptor dstPfd) {
         return copyAllSEFDataFd(srcPfd.getFd(), dstPfd.getFd());
     }
 
-    public static int deleteSEFDataFileDescriptor(ParcelFileDescriptor Pfd, String keyName, int keyNameLength) {
+    public static int deleteSEFDataFileDescriptor(
+            ParcelFileDescriptor Pfd, String keyName, int keyNameLength) {
         return deleteSEFDataFd(Pfd.getFd(), keyName, keyNameLength);
     }
 

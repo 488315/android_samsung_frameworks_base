@@ -17,7 +17,10 @@ public class FilterFunctionEnvironment extends MffEnvironment {
     }
 
     public FilterFunction createFunction(Class filterClass, Object... parameters) {
-        String filterName = "FilterFunction(" + filterClass.getSimpleName() + NavigationBarInflaterView.KEY_CODE_END;
+        String filterName =
+                "FilterFunction("
+                        + filterClass.getSimpleName()
+                        + NavigationBarInflaterView.KEY_CODE_END;
         Filter filter = FilterFactory.sharedFactory().createFilterByClass(filterClass, filterName);
         filter.initWithAssignmentList(parameters);
         return new FilterFunction(getContext(), filter);

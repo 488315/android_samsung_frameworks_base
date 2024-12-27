@@ -18,10 +18,14 @@ import java.util.List;
 public class CertStoreCollectionSpi extends CertStoreSpi {
     private CollectionCertStoreParameters params;
 
-    public CertStoreCollectionSpi(CertStoreParameters params) throws InvalidAlgorithmParameterException {
+    public CertStoreCollectionSpi(CertStoreParameters params)
+            throws InvalidAlgorithmParameterException {
         super(params);
         if (!(params instanceof CollectionCertStoreParameters)) {
-            throw new InvalidAlgorithmParameterException("com.android.internal.org.bouncycastle.jce.provider.CertStoreCollectionSpi: parameter must be a CollectionCertStoreParameters object\n" + params.toString());
+            throw new InvalidAlgorithmParameterException(
+                    "com.android.internal.org.bouncycastle.jce.provider.CertStoreCollectionSpi:"
+                        + " parameter must be a CollectionCertStoreParameters object\n"
+                            + params.toString());
         }
         this.params = (CollectionCertStoreParameters) params;
     }

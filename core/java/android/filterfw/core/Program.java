@@ -13,6 +13,5 @@ public abstract class Program {
         process(inputs, output);
     }
 
-    public void reset() {
-    }
+    public void reset() {}
 }

@@ -1,9 +1,10 @@
 package android.net.vcn.persistablebundleutils;
 
 import android.net.ipsec.ike.IkeSaProposal;
-import android.net.vcn.persistablebundleutils.SaProposalUtilsBase;
 import android.os.PersistableBundle;
+
 import com.android.server.vcn.repackaged.util.PersistableBundleUtils;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.function.ToIntFunction;
@@ -14,14 +15,19 @@ public final class IkeSaProposalUtils extends SaProposalUtilsBase {
 
     public static PersistableBundle toPersistableBundle(IkeSaProposal proposal) {
         PersistableBundle result = SaProposalUtilsBase.toPersistableBundle(proposal);
-        int[] prfArray = proposal.getPseudorandomFunctions().stream().mapToInt(new ToIntFunction() { // from class: android.net.vcn.persistablebundleutils.IkeSaProposalUtils$$ExternalSyntheticLambda0
-            @Override // java.util.function.ToIntFunction
-            public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
-            }
-        }).toArray();
+        int[] prfArray =
+                proposal.getPseudorandomFunctions().stream()
+                        .mapToInt(
+                                new ToIntFunction() { // from class:
+                                                      // android.net.vcn.persistablebundleutils.IkeSaProposalUtils$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.ToIntFunction
+                                    public final int applyAsInt(Object obj) {
+                                        int intValue;
+                                        intValue = ((Integer) obj).intValue();
+                                        return intValue;
+                                    }
+                                })
+                        .toArray();
         result.putIntArray(PRF_KEY, prfArray);
         return result;
     }
@@ -31,7 +37,9 @@ public final class IkeSaProposalUtils extends SaProposalUtilsBase {
         IkeSaProposal.Builder builder = new IkeSaProposal.Builder();
         PersistableBundle encryptionBundle = in.getPersistableBundle("ENCRYPT_ALGO_KEY");
         Objects.requireNonNull(encryptionBundle, "Encryption algo bundle was null");
-        List<SaProposalUtilsBase.EncryptionAlgoKeyLenPair> encryptList = PersistableBundleUtils.toList(encryptionBundle, new ChildSaProposalUtils$$ExternalSyntheticLambda0());
+        List<SaProposalUtilsBase.EncryptionAlgoKeyLenPair> encryptList =
+                PersistableBundleUtils.toList(
+                        encryptionBundle, new ChildSaProposalUtils$$ExternalSyntheticLambda0());
         for (SaProposalUtilsBase.EncryptionAlgoKeyLenPair t : encryptList) {
             builder.addEncryptionAlgorithm(t.encryptionAlgo, t.keyLen);
         }

@@ -12,6 +12,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -106,7 +107,8 @@ public final class IntervalStats {
     }
 
     public final ConfigurationStats getOrCreateConfigurationStats(Configuration configuration) {
-        ConfigurationStats configurationStats = (ConfigurationStats) this.configurations.get(configuration);
+        ConfigurationStats configurationStats =
+                (ConfigurationStats) this.configurations.get(configuration);
         if (configurationStats != null) {
             return configurationStats;
         }
@@ -138,7 +140,11 @@ public final class IntervalStats {
         for (int i = 0; i < size; i++) {
             String str = (String) this.packageStats.keyAt(i);
             UsageStats usageStats = (UsageStats) this.packageStats.valueAt(i);
-            if (usageStats != null && (packageTokenOrAdd = packagesTokenData.getPackageTokenOrAdd(usageStats.mEndTimeStamp, str)) != -1) {
+            if (usageStats != null
+                    && (packageTokenOrAdd =
+                                    packagesTokenData.getPackageTokenOrAdd(
+                                            usageStats.mEndTimeStamp, str))
+                            != -1) {
                 usageStats.mPackageToken = packageTokenOrAdd;
                 int size2 = usageStats.mChooserCounts.size();
                 for (int i2 = 0; i2 < size2; i2++) {
@@ -148,9 +154,14 @@ public final class IntervalStats {
                         SparseIntArray sparseIntArray = new SparseIntArray();
                         int size3 = arrayMap.size();
                         for (int i3 = 0; i3 < size3; i3++) {
-                            sparseIntArray.put(packagesTokenData.getTokenOrAdd(packageTokenOrAdd, str, (String) arrayMap.keyAt(i3)), ((Integer) arrayMap.valueAt(i3)).intValue());
+                            sparseIntArray.put(
+                                    packagesTokenData.getTokenOrAdd(
+                                            packageTokenOrAdd, str, (String) arrayMap.keyAt(i3)),
+                                    ((Integer) arrayMap.valueAt(i3)).intValue());
                         }
-                        usageStats.mChooserCountsObfuscated.put(packagesTokenData.getTokenOrAdd(packageTokenOrAdd, str, str2), sparseIntArray);
+                        usageStats.mChooserCountsObfuscated.put(
+                                packagesTokenData.getTokenOrAdd(packageTokenOrAdd, str, str2),
+                                sparseIntArray);
                     }
                 }
                 this.packageStatsObfuscated.put(packageTokenOrAdd, usageStats);
@@ -159,43 +170,68 @@ public final class IntervalStats {
         for (int size4 = this.events.size() - 1; size4 >= 0; size4--) {
             UsageEvents.Event event = this.events.get(size4);
             if (event != null) {
-                int packageTokenOrAdd2 = packagesTokenData.getPackageTokenOrAdd(event.mTimeStamp, event.mPackage);
+                int packageTokenOrAdd2 =
+                        packagesTokenData.getPackageTokenOrAdd(event.mTimeStamp, event.mPackage);
                 if (packageTokenOrAdd2 == -1) {
                     this.events.remove(size4);
                 } else {
                     event.mPackageToken = packageTokenOrAdd2;
                     if (!TextUtils.isEmpty(event.mClass)) {
-                        event.mClassToken = packagesTokenData.getTokenOrAdd(packageTokenOrAdd2, event.mPackage, event.mClass);
+                        event.mClassToken =
+                                packagesTokenData.getTokenOrAdd(
+                                        packageTokenOrAdd2, event.mPackage, event.mClass);
                     }
                     if (!TextUtils.isEmpty(event.mTaskRootPackage)) {
-                        event.mTaskRootPackageToken = packagesTokenData.getTokenOrAdd(packageTokenOrAdd2, event.mPackage, event.mTaskRootPackage);
+                        event.mTaskRootPackageToken =
+                                packagesTokenData.getTokenOrAdd(
+                                        packageTokenOrAdd2, event.mPackage, event.mTaskRootPackage);
                     }
                     if (!TextUtils.isEmpty(event.mTaskRootClass)) {
-                        event.mTaskRootClassToken = packagesTokenData.getTokenOrAdd(packageTokenOrAdd2, event.mPackage, event.mTaskRootClass);
+                        event.mTaskRootClassToken =
+                                packagesTokenData.getTokenOrAdd(
+                                        packageTokenOrAdd2, event.mPackage, event.mTaskRootClass);
                     }
                     int i4 = event.mEventType;
                     if (i4 == 7) {
                         PersistableBundle persistableBundle = event.mExtras;
                         if (persistableBundle != null && persistableBundle.size() != 0) {
-                            String string = event.mExtras.getString("android.app.usage.extra.EVENT_CATEGORY");
-                            String string2 = event.mExtras.getString("android.app.usage.extra.EVENT_ACTION");
+                            String string =
+                                    event.mExtras.getString(
+                                            "android.app.usage.extra.EVENT_CATEGORY");
+                            String string2 =
+                                    event.mExtras.getString("android.app.usage.extra.EVENT_ACTION");
                             if (!TextUtils.isEmpty(string) && !TextUtils.isEmpty(string2)) {
-                                UsageEvents.Event.UserInteractionEventExtrasToken userInteractionEventExtrasToken = new UsageEvents.Event.UserInteractionEventExtrasToken();
+                                UsageEvents.Event.UserInteractionEventExtrasToken
+                                        userInteractionEventExtrasToken =
+                                                new UsageEvents.Event
+                                                        .UserInteractionEventExtrasToken();
                                 event.mUserInteractionExtrasToken = userInteractionEventExtrasToken;
-                                userInteractionEventExtrasToken.mCategoryToken = packagesTokenData.getTokenOrAdd(packageTokenOrAdd2, event.mPackage, string);
-                                event.mUserInteractionExtrasToken.mActionToken = packagesTokenData.getTokenOrAdd(packageTokenOrAdd2, event.mPackage, string2);
+                                userInteractionEventExtrasToken.mCategoryToken =
+                                        packagesTokenData.getTokenOrAdd(
+                                                packageTokenOrAdd2, event.mPackage, string);
+                                event.mUserInteractionExtrasToken.mActionToken =
+                                        packagesTokenData.getTokenOrAdd(
+                                                packageTokenOrAdd2, event.mPackage, string2);
                             }
                         }
                     } else if (i4 != 8) {
                         if (i4 != 12) {
                             if (i4 == 30 && !TextUtils.isEmpty(event.mLocusId)) {
-                                event.mLocusIdToken = packagesTokenData.getTokenOrAdd(packageTokenOrAdd2, event.mPackage, event.mLocusId);
+                                event.mLocusIdToken =
+                                        packagesTokenData.getTokenOrAdd(
+                                                packageTokenOrAdd2, event.mPackage, event.mLocusId);
                             }
                         } else if (!TextUtils.isEmpty(event.mNotificationChannelId)) {
-                            event.mNotificationChannelIdToken = packagesTokenData.getTokenOrAdd(packageTokenOrAdd2, event.mPackage, event.mNotificationChannelId);
+                            event.mNotificationChannelIdToken =
+                                    packagesTokenData.getTokenOrAdd(
+                                            packageTokenOrAdd2,
+                                            event.mPackage,
+                                            event.mNotificationChannelId);
                         }
                     } else if (!TextUtils.isEmpty(event.mShortcutId)) {
-                        event.mShortcutIdToken = packagesTokenData.getTokenOrAdd(packageTokenOrAdd2, event.mPackage, event.mShortcutId);
+                        event.mShortcutIdToken =
+                                packagesTokenData.getTokenOrAdd(
+                                        packageTokenOrAdd2, event.mPackage, event.mShortcutId);
                     }
                 }
             }
@@ -229,18 +265,22 @@ public final class IntervalStats {
         } else {
             arrayMap = (ArrayMap) orCreateUsageStats.mChooserCounts.valueAt(indexOfKey);
         }
-        arrayMap.put(str2, Integer.valueOf(((Integer) arrayMap.getOrDefault(str2, 0)).intValue() + 1));
+        arrayMap.put(
+                str2, Integer.valueOf(((Integer) arrayMap.getOrDefault(str2, 0)).intValue() + 1));
     }
 
     public final void updateConfigurationStats(Configuration configuration, long j) {
         Configuration configuration2 = this.activeConfiguration;
         if (configuration2 != null) {
-            ConfigurationStats configurationStats = (ConfigurationStats) this.configurations.get(configuration2);
-            configurationStats.mTotalTimeActive = (j - configurationStats.mLastTimeActive) + configurationStats.mTotalTimeActive;
+            ConfigurationStats configurationStats =
+                    (ConfigurationStats) this.configurations.get(configuration2);
+            configurationStats.mTotalTimeActive =
+                    (j - configurationStats.mLastTimeActive) + configurationStats.mTotalTimeActive;
             configurationStats.mLastTimeActive = j - 1;
         }
         if (configuration != null) {
-            ConfigurationStats orCreateConfigurationStats = getOrCreateConfigurationStats(configuration);
+            ConfigurationStats orCreateConfigurationStats =
+                    getOrCreateConfigurationStats(configuration);
             orCreateConfigurationStats.mLastTimeActive = j;
             orCreateConfigurationStats.mActivationCount++;
             this.activeConfiguration = orCreateConfigurationStats.mConfiguration;

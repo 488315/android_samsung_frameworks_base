@@ -16,11 +16,12 @@ import android.util.ArraySet;
 import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.logging.EventLogTags;
-import com.android.internal.os.BatteryStatsHistory;
-import com.android.internal.os.PowerStats;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
@@ -126,7 +127,9 @@ public class BatteryStatsHistory {
 
         private BatteryHistoryFile(File directory, long monotonicTimeMs) {
             this.monotonicTimeMs = monotonicTimeMs;
-            this.atomicFile = new AtomicFile(new File(directory, monotonicTimeMs + BatteryStatsHistory.FILE_SUFFIX));
+            this.atomicFile =
+                    new AtomicFile(
+                            new File(directory, monotonicTimeMs + BatteryStatsHistory.FILE_SUFFIX));
         }
 
         @Override // java.lang.Comparable
@@ -156,12 +159,15 @@ public class BatteryStatsHistory {
         private int mMaxHistoryFiles;
         private final MonotonicClock mMonotonicClock;
 
-        BatteryHistoryDirectory(File directory, MonotonicClock monotonicClock, int maxHistoryFiles) {
+        BatteryHistoryDirectory(
+                File directory, MonotonicClock monotonicClock, int maxHistoryFiles) {
             this.mDirectory = directory;
             this.mMonotonicClock = monotonicClock;
             this.mMaxHistoryFiles = maxHistoryFiles;
             if (this.mMaxHistoryFiles == 0) {
-                Slog.wtf(BatteryStatsHistory.TAG, "mMaxHistoryFiles should not be zero when writing history");
+                Slog.wtf(
+                        BatteryStatsHistory.TAG,
+                        "mMaxHistoryFiles should not be zero when writing history");
             }
         }
 
@@ -196,34 +202,45 @@ public class BatteryStatsHistory {
         void load() {
             this.mDirectory.mkdirs();
             if (!this.mDirectory.exists()) {
-                Slog.wtf(BatteryStatsHistory.TAG, "HistoryDir does not exist:" + this.mDirectory.getPath());
+                Slog.wtf(
+                        BatteryStatsHistory.TAG,
+                        "HistoryDir does not exist:" + this.mDirectory.getPath());
             }
             final List<File> toRemove = new ArrayList<>();
             final Set<BatteryHistoryFile> dedup = new ArraySet<>();
-            this.mDirectory.listFiles(new FilenameFilter() { // from class: com.android.internal.os.BatteryStatsHistory$BatteryHistoryDirectory$$ExternalSyntheticLambda0
-                @Override // java.io.FilenameFilter
-                public final boolean accept(File file, String str) {
-                    boolean lambda$load$0;
-                    lambda$load$0 = BatteryStatsHistory.BatteryHistoryDirectory.this.lambda$load$0(toRemove, dedup, file, str);
-                    return lambda$load$0;
-                }
-            });
+            this.mDirectory.listFiles(
+                    new FilenameFilter() { // from class:
+                                           // com.android.internal.os.BatteryStatsHistory$BatteryHistoryDirectory$$ExternalSyntheticLambda0
+                        @Override // java.io.FilenameFilter
+                        public final boolean accept(File file, String str) {
+                            boolean lambda$load$0;
+                            lambda$load$0 =
+                                    BatteryStatsHistory.BatteryHistoryDirectory.this.lambda$load$0(
+                                            toRemove, dedup, file, str);
+                            return lambda$load$0;
+                        }
+                    });
             if (!dedup.isEmpty()) {
                 this.mHistoryFiles.addAll(dedup);
                 Collections.sort(this.mHistoryFiles);
             }
             if (!toRemove.isEmpty()) {
-                BackgroundThread.getHandler().post(new Runnable() { // from class: com.android.internal.os.BatteryStatsHistory$BatteryHistoryDirectory$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        BatteryStatsHistory.BatteryHistoryDirectory.this.lambda$load$1(toRemove);
-                    }
-                });
+                BackgroundThread.getHandler()
+                        .post(
+                                new Runnable() { // from class:
+                                                 // com.android.internal.os.BatteryStatsHistory$BatteryHistoryDirectory$$ExternalSyntheticLambda1
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        BatteryStatsHistory.BatteryHistoryDirectory.this
+                                                .lambda$load$1(toRemove);
+                                    }
+                                });
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ boolean lambda$load$0(List toRemove, Set dedup, File dir, String name) {
+        public /* synthetic */ boolean lambda$load$0(
+                List toRemove, Set dedup, File dir, String name) {
             int b = name.lastIndexOf(BatteryStatsHistory.FILE_SUFFIX);
             if (b <= 0) {
                 toRemove.add(new File(dir, name));
@@ -267,7 +284,8 @@ public class BatteryStatsHistory {
                         unlock();
                     }
                 }
-                Slog.wtfStack(BatteryStatsHistory.TAG, "getFileNames, Already locked by another thread.");
+                Slog.wtfStack(
+                        BatteryStatsHistory.TAG, "getFileNames, Already locked by another thread.");
                 return new ArrayList();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -287,7 +305,8 @@ public class BatteryStatsHistory {
                         unlock();
                     }
                 }
-                Slog.wtfStack(BatteryStatsHistory.TAG, "getFirstFile, Already locked by another thread.");
+                Slog.wtfStack(
+                        BatteryStatsHistory.TAG, "getFirstFile, Already locked by another thread.");
                 return null;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -307,14 +326,16 @@ public class BatteryStatsHistory {
                         unlock();
                     }
                 }
-                Slog.wtfStack(BatteryStatsHistory.TAG, "getLastFile, Already locked by another thread.");
+                Slog.wtfStack(
+                        BatteryStatsHistory.TAG, "getLastFile, Already locked by another thread.");
                 return null;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        BatteryHistoryFile getNextFile(BatteryHistoryFile current, long startTimeMs, long endTimeMs) {
+        BatteryHistoryFile getNextFile(
+                BatteryHistoryFile current, long startTimeMs, long endTimeMs) {
             if (!this.mLock.isHeldByCurrentThread()) {
                 throw new IllegalStateException("Iterating battery history without a lock");
             }
@@ -350,7 +371,8 @@ public class BatteryStatsHistory {
         }
 
         BatteryHistoryFile makeBatteryHistoryFile() {
-            BatteryHistoryFile file = new BatteryHistoryFile(this.mDirectory, this.mMonotonicClock.monotonicTime());
+            BatteryHistoryFile file =
+                    new BatteryHistoryFile(this.mDirectory, this.mMonotonicClock.monotonicTime());
             lock();
             try {
                 this.mHistoryFiles.add(file);
@@ -371,7 +393,10 @@ public class BatteryStatsHistory {
                     try {
                         raw = file.readFully();
                     } catch (Exception e) {
-                        Slog.e(BatteryStatsHistory.TAG, "Error reading file " + file.getBaseFile().getPath(), e);
+                        Slog.e(
+                                BatteryStatsHistory.TAG,
+                                "Error reading file " + file.getBaseFile().getPath(),
+                                e);
                     }
                     if (useBlobs) {
                         out.writeBlob(raw);
@@ -394,7 +419,8 @@ public class BatteryStatsHistory {
                         unlock();
                     }
                 }
-                Slog.wtfStack(BatteryStatsHistory.TAG, "getFileCount, Already locked by another thread.");
+                Slog.wtfStack(
+                        BatteryStatsHistory.TAG, "getFileCount, Already locked by another thread.");
                 return 0;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -408,14 +434,21 @@ public class BatteryStatsHistory {
                     int ret = 0;
                     for (int i = 0; i < this.mHistoryFiles.size() - 1; i++) {
                         try {
-                            ret += (int) this.mHistoryFiles.get(i).atomicFile.getBaseFile().length();
+                            ret +=
+                                    (int)
+                                            this.mHistoryFiles
+                                                    .get(i)
+                                                    .atomicFile
+                                                    .getBaseFile()
+                                                    .length();
                         } finally {
                             unlock();
                         }
                     }
                     return ret;
                 }
-                Slog.wtfStack(BatteryStatsHistory.TAG, "getSize, Already locked by another thread.");
+                Slog.wtfStack(
+                        BatteryStatsHistory.TAG, "getSize, Already locked by another thread.");
                 return 0;
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -489,15 +522,45 @@ public class BatteryStatsHistory {
 
     public static class EventLogger {
         public void writeCommitSysConfigFile(long startTimeMs) {
-            EventLogTags.writeCommitSysConfigFile("batterystats", SystemClock.uptimeMillis() - startTimeMs);
+            EventLogTags.writeCommitSysConfigFile(
+                    "batterystats", SystemClock.uptimeMillis() - startTimeMs);
         }
     }
 
-    public BatteryStatsHistory(Parcel historyBuffer, File systemDir, int maxHistoryFiles, int maxHistoryBufferSize, HistoryStepDetailsCalculator stepDetailsCalculator, Clock clock, MonotonicClock monotonicClock, TraceDelegate tracer, EventLogger eventLogger) {
-        this(historyBuffer, systemDir, maxHistoryFiles, maxHistoryBufferSize, stepDetailsCalculator, clock, monotonicClock, tracer, eventLogger, null);
+    public BatteryStatsHistory(
+            Parcel historyBuffer,
+            File systemDir,
+            int maxHistoryFiles,
+            int maxHistoryBufferSize,
+            HistoryStepDetailsCalculator stepDetailsCalculator,
+            Clock clock,
+            MonotonicClock monotonicClock,
+            TraceDelegate tracer,
+            EventLogger eventLogger) {
+        this(
+                historyBuffer,
+                systemDir,
+                maxHistoryFiles,
+                maxHistoryBufferSize,
+                stepDetailsCalculator,
+                clock,
+                monotonicClock,
+                tracer,
+                eventLogger,
+                null);
     }
 
-    private BatteryStatsHistory(Parcel historyBuffer, File systemDir, int maxHistoryFiles, int maxHistoryBufferSize, HistoryStepDetailsCalculator stepDetailsCalculator, Clock clock, MonotonicClock monotonicClock, TraceDelegate tracer, EventLogger eventLogger, BatteryStatsHistory writableHistory) {
+    private BatteryStatsHistory(
+            Parcel historyBuffer,
+            File systemDir,
+            int maxHistoryFiles,
+            int maxHistoryBufferSize,
+            HistoryStepDetailsCalculator stepDetailsCalculator,
+            Clock clock,
+            MonotonicClock monotonicClock,
+            TraceDelegate tracer,
+            EventLogger eventLogger,
+            BatteryStatsHistory writableHistory) {
         this.mHistoryParcels = null;
         this.mParcelIndex = 0;
         this.mWriteLock = new ReentrantLock();
@@ -538,10 +601,13 @@ public class BatteryStatsHistory {
             return;
         }
         if (systemDir != null) {
-            this.mHistoryDir = new BatteryHistoryDirectory(new File(systemDir, HISTORY_DIR), monotonicClock, maxHistoryFiles);
+            this.mHistoryDir =
+                    new BatteryHistoryDirectory(
+                            new File(systemDir, HISTORY_DIR), monotonicClock, maxHistoryFiles);
             this.mHistoryDir.load();
             BatteryHistoryFile activeFile = this.mHistoryDir.getLastFile();
-            setActiveFile(activeFile == null ? this.mHistoryDir.makeBatteryHistoryFile() : activeFile);
+            setActiveFile(
+                    activeFile == null ? this.mHistoryDir.makeBatteryHistoryFile() : activeFile);
             return;
         }
         this.mHistoryDir = null;
@@ -615,7 +681,18 @@ public class BatteryStatsHistory {
         synchronized (this) {
             Parcel historyBufferCopy = Parcel.obtain();
             historyBufferCopy.appendFrom(this.mHistoryBuffer, 0, this.mHistoryBuffer.dataSize());
-            batteryStatsHistory = new BatteryStatsHistory(historyBufferCopy, this.mSystemDir, 0, 0, null, null, null, null, this.mEventLogger, this);
+            batteryStatsHistory =
+                    new BatteryStatsHistory(
+                            historyBufferCopy,
+                            this.mSystemDir,
+                            0,
+                            0,
+                            null,
+                            null,
+                            null,
+                            null,
+                            this.mEventLogger,
+                            this);
         }
         return batteryStatsHistory;
     }
@@ -711,12 +788,14 @@ public class BatteryStatsHistory {
             if (this.mHistoryBuffer == this.mCurrentParcel) {
                 return null;
             }
-            if (this.mHistoryParcels == null || !this.mHistoryParcels.contains(this.mCurrentParcel)) {
+            if (this.mHistoryParcels == null
+                    || !this.mHistoryParcels.contains(this.mCurrentParcel)) {
                 this.mCurrentParcel.recycle();
             }
         }
         if (this.mHistoryDir != null) {
-            BatteryHistoryFile nextFile = this.mHistoryDir.getNextFile(this.mCurrentFile, startTimeMs, endTimeMs);
+            BatteryHistoryFile nextFile =
+                    this.mHistoryDir.getNextFile(this.mCurrentFile, startTimeMs, endTimeMs);
             while (nextFile != null) {
                 this.mCurrentParcel = null;
                 this.mCurrentParcelEnd = 0;
@@ -969,7 +1048,8 @@ public class BatteryStatsHistory {
         synchronized (this) {
             this.mRecordingHistory = true;
             this.mHistoryCur.currentTime = this.mClock.currentTimeMillis();
-            writeHistoryItem(elapsedRealtimeMs, uptimeMs, this.mHistoryCur, reset ? (byte) 7 : (byte) 5);
+            writeHistoryItem(
+                    elapsedRealtimeMs, uptimeMs, this.mHistoryCur, reset ? (byte) 7 : (byte) 5);
             this.mHistoryCur.currentTime = 0L;
         }
     }
@@ -996,7 +1076,14 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void setBatteryState(int status, int level, int health, int plugType, int temperature, int voltageMv, int chargeUah) {
+    public void setBatteryState(
+            int status,
+            int level,
+            int health,
+            int plugType,
+            int temperature,
+            int voltageMv,
+            int chargeUah) {
         synchronized (this) {
             this.mHaveBatteryLevel = true;
             this.mHistoryCur.batteryStatus = (byte) status;
@@ -1009,7 +1096,19 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void setBatteryState(int status, int level, int health, int plugType, int temperature, int voltageMv, int chargeUah, int secTxShareEvent, int secOnline, int secCurrentEvent, int secEvent, int otgOnline) {
+    public void setBatteryState(
+            int status,
+            int level,
+            int health,
+            int plugType,
+            int temperature,
+            int voltageMv,
+            int chargeUah,
+            int secTxShareEvent,
+            int secOnline,
+            int secCurrentEvent,
+            int secEvent,
+            int otgOnline) {
         setBatteryState(status, level, health, plugType, temperature, voltageMv, chargeUah);
         synchronized (this) {
             this.mHistoryCur.batterySecTxShareEvent = secTxShareEvent;
@@ -1020,7 +1119,8 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void setTemperatureNCurrent(int ap_temp, int pa_temp, int skin_temp, int sub_batt_temp, int current) {
+    public void setTemperatureNCurrent(
+            int ap_temp, int pa_temp, int skin_temp, int sub_batt_temp, int current) {
         synchronized (this) {
             this.mHistoryCur.ap_temp = (byte) ap_temp;
             this.mHistoryCur.pa_temp = (byte) pa_temp;
@@ -1128,7 +1228,8 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordBatteryState(long elapsedRealtimeMs, long uptimeMs, int batteryLevel, boolean isPlugged) {
+    public void recordBatteryState(
+            long elapsedRealtimeMs, long uptimeMs, int batteryLevel, boolean isPlugged) {
         synchronized (this) {
             this.mHistoryCur.batteryLevel = (byte) batteryLevel;
             setPluggedInState(isPlugged);
@@ -1144,7 +1245,8 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordProcessStateChange(long elapsedRealtimeMs, long uptimeMs, int uid, int processState) {
+    public void recordProcessStateChange(
+            long elapsedRealtimeMs, long uptimeMs, int uid, int processState) {
         synchronized (this) {
             this.mHistoryCur.processStateChange = this.mHistoryCur.localProcessStateChange;
             this.mHistoryCur.processStateChange.uid = uid;
@@ -1154,14 +1256,16 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordWifiConsumedCharge(long elapsedRealtimeMs, long uptimeMs, double monitoredRailChargeMah) {
+    public void recordWifiConsumedCharge(
+            long elapsedRealtimeMs, long uptimeMs, double monitoredRailChargeMah) {
         synchronized (this) {
             this.mHistoryCur.wifiRailChargeMah += monitoredRailChargeMah;
             writeHistoryItem(elapsedRealtimeMs, uptimeMs);
         }
     }
 
-    public void recordWakelockStartEvent(long elapsedRealtimeMs, long uptimeMs, String historyName, int uid) {
+    public void recordWakelockStartEvent(
+            long elapsedRealtimeMs, long uptimeMs, String historyName, int uid) {
         synchronized (this) {
             this.mHistoryCur.wakelockTag = this.mHistoryCur.localWakelockTag;
             this.mHistoryCur.wakelockTag.string = historyName;
@@ -1170,7 +1274,8 @@ public class BatteryStatsHistory {
         }
     }
 
-    public boolean maybeUpdateWakelockTag(long elapsedRealtimeMs, long uptimeMs, String historyName, int uid) {
+    public boolean maybeUpdateWakelockTag(
+            long elapsedRealtimeMs, long uptimeMs, String historyName, int uid) {
         synchronized (this) {
             if (this.mHistoryLastWritten.cmd != 0) {
                 return false;
@@ -1186,7 +1291,8 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordWakelockStopEvent(long elapsedRealtimeMs, long uptimeMs, String historyName, int uid) {
+    public void recordWakelockStopEvent(
+            long elapsedRealtimeMs, long uptimeMs, String historyName, int uid) {
         synchronized (this) {
             this.mHistoryCur.wakelockTag = this.mHistoryCur.localWakelockTag;
             this.mHistoryCur.wakelockTag.string = historyName != null ? historyName : "";
@@ -1202,7 +1308,8 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordStateStartEvent(long elapsedRealtimeMs, long uptimeMs, int stateFlags, int uid, String name) {
+    public void recordStateStartEvent(
+            long elapsedRealtimeMs, long uptimeMs, int stateFlags, int uid, String name) {
         synchronized (this) {
             this.mHistoryCur.states |= stateFlags;
             this.mHistoryCur.eventCode = 32789;
@@ -1220,7 +1327,8 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordStateStopEvent(long elapsedRealtimeMs, long uptimeMs, int stateFlags, int uid, String name) {
+    public void recordStateStopEvent(
+            long elapsedRealtimeMs, long uptimeMs, int stateFlags, int uid, String name) {
         synchronized (this) {
             this.mHistoryCur.states &= ~stateFlags;
             this.mHistoryCur.eventCode = 16405;
@@ -1231,9 +1339,11 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordStateChangeEvent(long elapsedRealtimeMs, long uptimeMs, int stateStartFlags, int stateStopFlags) {
+    public void recordStateChangeEvent(
+            long elapsedRealtimeMs, long uptimeMs, int stateStartFlags, int stateStopFlags) {
         synchronized (this) {
-            this.mHistoryCur.states = (this.mHistoryCur.states | stateStartFlags) & (~stateStopFlags);
+            this.mHistoryCur.states =
+                    (this.mHistoryCur.states | stateStartFlags) & (~stateStopFlags);
             writeHistoryItem(elapsedRealtimeMs, uptimeMs);
         }
     }
@@ -1245,7 +1355,8 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordState2StartEvent(long elapsedRealtimeMs, long uptimeMs, int stateFlags, int uid, String name) {
+    public void recordState2StartEvent(
+            long elapsedRealtimeMs, long uptimeMs, int stateFlags, int uid, String name) {
         synchronized (this) {
             this.mHistoryCur.states2 |= stateFlags;
             this.mHistoryCur.eventCode = 32789;
@@ -1256,7 +1367,8 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordState2StopEvent(long elapsedRealtimeMs, long uptimeMs, int stateFlags, int uid, String name) {
+    public void recordState2StopEvent(
+            long elapsedRealtimeMs, long uptimeMs, int stateFlags, int uid, String name) {
         synchronized (this) {
             this.mHistoryCur.states2 &= ~stateFlags;
             this.mHistoryCur.eventCode = 16405;
@@ -1283,14 +1395,16 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordScreenBrightnessEvent(long elapsedRealtimeMs, long uptimeMs, int brightnessBin) {
+    public void recordScreenBrightnessEvent(
+            long elapsedRealtimeMs, long uptimeMs, int brightnessBin) {
         synchronized (this) {
             this.mHistoryCur.states = setBitField(this.mHistoryCur.states, brightnessBin, 0, 7);
             writeHistoryItem(elapsedRealtimeMs, uptimeMs);
         }
     }
 
-    public void recordGpsSignalQualityEvent(long elapsedRealtimeMs, long uptimeMs, int signalLevel) {
+    public void recordGpsSignalQualityEvent(
+            long elapsedRealtimeMs, long uptimeMs, int signalLevel) {
         synchronized (this) {
             this.mHistoryCur.states2 = setBitField(this.mHistoryCur.states2, signalLevel, 7, 384);
             writeHistoryItem(elapsedRealtimeMs, uptimeMs);
@@ -1304,22 +1418,35 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordPhoneStateChangeEvent(long elapsedRealtimeMs, long uptimeMs, int addStateFlag, int removeStateFlag, int state, int signalStrength) {
+    public void recordPhoneStateChangeEvent(
+            long elapsedRealtimeMs,
+            long uptimeMs,
+            int addStateFlag,
+            int removeStateFlag,
+            int state,
+            int signalStrength) {
         synchronized (this) {
             this.mHistoryCur.states = (this.mHistoryCur.states | addStateFlag) & (~removeStateFlag);
             if (state != -1) {
                 this.mHistoryCur.states = setBitField(this.mHistoryCur.states, state, 6, 448);
             }
             if (signalStrength != -1) {
-                this.mHistoryCur.states = setBitField(this.mHistoryCur.states, signalStrength, 3, 56);
+                this.mHistoryCur.states =
+                        setBitField(this.mHistoryCur.states, signalStrength, 3, 56);
             }
             writeHistoryItem(elapsedRealtimeMs, uptimeMs);
         }
     }
 
-    public void recordDataConnectionTypeChangeEvent(long elapsedRealtimeMs, long uptimeMs, int dataConnectionType) {
+    public void recordDataConnectionTypeChangeEvent(
+            long elapsedRealtimeMs, long uptimeMs, int dataConnectionType) {
         synchronized (this) {
-            this.mHistoryCur.states = setBitField(this.mHistoryCur.states, dataConnectionType, 9, BatteryStats.HistoryItem.STATE_DATA_CONNECTION_MASK);
+            this.mHistoryCur.states =
+                    setBitField(
+                            this.mHistoryCur.states,
+                            dataConnectionType,
+                            9,
+                            BatteryStats.HistoryItem.STATE_DATA_CONNECTION_MASK);
             writeHistoryItem(elapsedRealtimeMs, uptimeMs);
         }
     }
@@ -1331,14 +1458,16 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordWifiSupplicantStateChangeEvent(long elapsedRealtimeMs, long uptimeMs, int supplState) {
+    public void recordWifiSupplicantStateChangeEvent(
+            long elapsedRealtimeMs, long uptimeMs, int supplState) {
         synchronized (this) {
             this.mHistoryCur.states2 = setBitField(this.mHistoryCur.states2, supplState, 0, 15);
             writeHistoryItem(elapsedRealtimeMs, uptimeMs);
         }
     }
 
-    public void recordWifiSignalStrengthChangeEvent(long elapsedRealtimeMs, long uptimeMs, int strengthBin) {
+    public void recordWifiSignalStrengthChangeEvent(
+            long elapsedRealtimeMs, long uptimeMs, int strengthBin) {
         synchronized (this) {
             this.mHistoryCur.states2 = setBitField(this.mHistoryCur.states2, strengthBin, 4, 112);
             writeHistoryItem(elapsedRealtimeMs, uptimeMs);
@@ -1365,7 +1494,8 @@ public class BatteryStatsHistory {
         this.mTracer.traceInstantEvent(track, name);
     }
 
-    private void recordTraceCounters(int oldval, int newval, int mask, BatteryStats.BitDescription[] descriptions) {
+    private void recordTraceCounters(
+            int oldval, int newval, int mask, BatteryStats.BitDescription[] descriptions) {
         int value;
         int diff = (oldval ^ newval) & mask;
         if (diff == 0) {
@@ -1387,7 +1517,12 @@ public class BatteryStatsHistory {
     private int setBitField(int bits, int value, int shift, int mask) {
         int shiftedValue = value << shift;
         if (((~mask) & shiftedValue) != 0) {
-            Slog.wtfStack(TAG, "Value " + Integer.toHexString(value) + " does not fit in the bit field: " + Integer.toHexString(mask));
+            Slog.wtfStack(
+                    TAG,
+                    "Value "
+                            + Integer.toHexString(value)
+                            + " does not fit in the bit field: "
+                            + Integer.toHexString(mask));
             shiftedValue &= mask;
         }
         return ((~mask) & bits) | shiftedValue;
@@ -1415,28 +1550,94 @@ public class BatteryStatsHistory {
         }
     }
 
-    private void writeHistoryItem(long elapsedRealtimeMs, long uptimeMs, BatteryStats.HistoryItem cur) {
+    private void writeHistoryItem(
+            long elapsedRealtimeMs, long uptimeMs, BatteryStats.HistoryItem cur) {
         long elapsedRealtimeMs2;
         if (cur.eventCode != 0 && cur.eventTag.string == null) {
             Slog.wtfStack(TAG, "Event " + Integer.toHexString(cur.eventCode) + " without a name");
         }
         if (this.mTracer != null && this.mTracer.tracingEnabled()) {
             recordTraceEvents(cur.eventCode, cur.eventTag);
-            recordTraceCounters(this.mTraceLastState, cur.states, 1073741823, BatteryStats.HISTORY_STATE_DESCRIPTIONS);
-            recordTraceCounters(this.mTraceLastState2, cur.states2, -1, BatteryStats.HISTORY_STATE2_DESCRIPTIONS);
+            recordTraceCounters(
+                    this.mTraceLastState,
+                    cur.states,
+                    1073741823,
+                    BatteryStats.HISTORY_STATE_DESCRIPTIONS);
+            recordTraceCounters(
+                    this.mTraceLastState2,
+                    cur.states2,
+                    -1,
+                    BatteryStats.HISTORY_STATE2_DESCRIPTIONS);
             this.mTraceLastState = cur.states;
             this.mTraceLastState2 = cur.states2;
         }
-        if ((!this.mHaveBatteryLevel || !this.mRecordingHistory) && cur.powerStats == null && cur.processStateChange == null) {
+        if ((!this.mHaveBatteryLevel || !this.mRecordingHistory)
+                && cur.powerStats == null
+                && cur.processStateChange == null) {
             return;
         }
         if (this.mMutable) {
-            long timeDiffMs = this.mMonotonicClock.monotonicTime(elapsedRealtimeMs) - this.mHistoryLastWritten.time;
+            long timeDiffMs =
+                    this.mMonotonicClock.monotonicTime(elapsedRealtimeMs)
+                            - this.mHistoryLastWritten.time;
             int diffStates = this.mHistoryLastWritten.states ^ cur.states;
             int diffStates2 = this.mHistoryLastWritten.states2 ^ cur.states2;
-            int lastDiffStates = this.mHistoryLastWritten.states ^ this.mHistoryLastLastWritten.states;
-            int lastDiffStates2 = this.mHistoryLastWritten.states2 ^ this.mHistoryLastLastWritten.states2;
-            if (this.mHistoryBufferLastPos >= 0 && this.mHistoryLastWritten.cmd == 0 && timeDiffMs < 1000 && (diffStates & lastDiffStates) == 0 && (diffStates2 & lastDiffStates2) == 0 && !this.mHistoryLastWritten.tagsFirstOccurrence && !cur.tagsFirstOccurrence && ((this.mHistoryLastWritten.wakelockTag == null || cur.wakelockTag == null) && ((this.mHistoryLastWritten.wakeReasonTag == null || cur.wakeReasonTag == null) && this.mHistoryLastWritten.stepDetails == null && ((this.mHistoryLastWritten.eventCode == 0 || cur.eventCode == 0) && this.mHistoryLastWritten.batteryLevel == cur.batteryLevel && this.mHistoryLastWritten.batteryStatus == cur.batteryStatus && this.mHistoryLastWritten.batteryHealth == cur.batteryHealth && this.mHistoryLastWritten.batteryPlugType == cur.batteryPlugType && this.mHistoryLastWritten.batteryTemperature == cur.batteryTemperature && this.mHistoryLastWritten.batteryVoltage == cur.batteryVoltage && this.mHistoryLastWritten.current == cur.current && this.mHistoryLastWritten.ap_temp == cur.ap_temp && this.mHistoryLastWritten.pa_temp == cur.pa_temp && this.mHistoryLastWritten.sub_batt_temp == cur.sub_batt_temp && this.mHistoryLastWritten.skin_temp == cur.skin_temp && this.mHistoryLastWritten.wifi_ap == cur.wifi_ap && this.mHistoryLastWritten.otgOnline == cur.otgOnline && this.mHistoryLastWritten.highSpeakerVolume == cur.highSpeakerVolume && this.mHistoryLastWritten.subScreenOn == cur.subScreenOn && this.mHistoryLastWritten.subScreenDoze == cur.subScreenDoze && this.mHistoryLastWritten.batterySecTxShareEvent == cur.batterySecTxShareEvent && this.mHistoryLastWritten.batterySecOnline == cur.batterySecOnline && this.mHistoryLastWritten.batterySecCurrentEvent == cur.batterySecCurrentEvent && this.mHistoryLastWritten.batterySecEvent == cur.batterySecEvent && this.mHistoryLastWritten.protectBatteryMode == cur.protectBatteryMode && this.mHistoryLastWritten.powerStats == null && this.mHistoryLastWritten.processStateChange == null)))) {
+            int lastDiffStates =
+                    this.mHistoryLastWritten.states ^ this.mHistoryLastLastWritten.states;
+            int lastDiffStates2 =
+                    this.mHistoryLastWritten.states2 ^ this.mHistoryLastLastWritten.states2;
+            if (this.mHistoryBufferLastPos >= 0
+                    && this.mHistoryLastWritten.cmd == 0
+                    && timeDiffMs < 1000
+                    && (diffStates & lastDiffStates) == 0
+                    && (diffStates2 & lastDiffStates2) == 0
+                    && !this.mHistoryLastWritten.tagsFirstOccurrence
+                    && !cur.tagsFirstOccurrence
+                    && ((this.mHistoryLastWritten.wakelockTag == null || cur.wakelockTag == null)
+                            && ((this.mHistoryLastWritten.wakeReasonTag == null
+                                            || cur.wakeReasonTag == null)
+                                    && this.mHistoryLastWritten.stepDetails == null
+                                    && ((this.mHistoryLastWritten.eventCode == 0
+                                                    || cur.eventCode == 0)
+                                            && this.mHistoryLastWritten.batteryLevel
+                                                    == cur.batteryLevel
+                                            && this.mHistoryLastWritten.batteryStatus
+                                                    == cur.batteryStatus
+                                            && this.mHistoryLastWritten.batteryHealth
+                                                    == cur.batteryHealth
+                                            && this.mHistoryLastWritten.batteryPlugType
+                                                    == cur.batteryPlugType
+                                            && this.mHistoryLastWritten.batteryTemperature
+                                                    == cur.batteryTemperature
+                                            && this.mHistoryLastWritten.batteryVoltage
+                                                    == cur.batteryVoltage
+                                            && this.mHistoryLastWritten.current == cur.current
+                                            && this.mHistoryLastWritten.ap_temp == cur.ap_temp
+                                            && this.mHistoryLastWritten.pa_temp == cur.pa_temp
+                                            && this.mHistoryLastWritten.sub_batt_temp
+                                                    == cur.sub_batt_temp
+                                            && this.mHistoryLastWritten.skin_temp == cur.skin_temp
+                                            && this.mHistoryLastWritten.wifi_ap == cur.wifi_ap
+                                            && this.mHistoryLastWritten.otgOnline == cur.otgOnline
+                                            && this.mHistoryLastWritten.highSpeakerVolume
+                                                    == cur.highSpeakerVolume
+                                            && this.mHistoryLastWritten.subScreenOn
+                                                    == cur.subScreenOn
+                                            && this.mHistoryLastWritten.subScreenDoze
+                                                    == cur.subScreenDoze
+                                            && this.mHistoryLastWritten.batterySecTxShareEvent
+                                                    == cur.batterySecTxShareEvent
+                                            && this.mHistoryLastWritten.batterySecOnline
+                                                    == cur.batterySecOnline
+                                            && this.mHistoryLastWritten.batterySecCurrentEvent
+                                                    == cur.batterySecCurrentEvent
+                                            && this.mHistoryLastWritten.batterySecEvent
+                                                    == cur.batterySecEvent
+                                            && this.mHistoryLastWritten.protectBatteryMode
+                                                    == cur.protectBatteryMode
+                                            && this.mHistoryLastWritten.powerStats == null
+                                            && this.mHistoryLastWritten.processStateChange
+                                                    == null)))) {
                 this.mHistoryBuffer.setDataSize(this.mHistoryBufferLastPos);
                 this.mHistoryBuffer.setDataPosition(this.mHistoryBufferLastPos);
                 this.mHistoryBufferLastPos = -1;
@@ -1481,7 +1682,8 @@ public class BatteryStatsHistory {
         throw new ConcurrentModificationException("Battery history is not writable");
     }
 
-    private boolean maybeFlushBufferAndWriteHistoryItem(BatteryStats.HistoryItem cur, long elapsedRealtimeMs, long uptimeMs) {
+    private boolean maybeFlushBufferAndWriteHistoryItem(
+            BatteryStats.HistoryItem cur, long elapsedRealtimeMs, long uptimeMs) {
         int dataSize = this.mHistoryBuffer.dataSize();
         if (dataSize < this.mMaxHistoryBufferSize) {
             return false;
@@ -1511,19 +1713,27 @@ public class BatteryStatsHistory {
         }
     }
 
-    private void writeHistoryItem(long elapsedRealtimeMs, long uptimeMs, BatteryStats.HistoryItem cur, byte cmd) {
+    private void writeHistoryItem(
+            long elapsedRealtimeMs, long uptimeMs, BatteryStats.HistoryItem cur, byte cmd) {
         if (!this.mMutable) {
             throw new ConcurrentModificationException("Battery history is not writable");
         }
         this.mHistoryBufferLastPos = this.mHistoryBuffer.dataPosition();
         this.mHistoryLastLastWritten.setTo(this.mHistoryLastWritten);
         boolean hasTags = this.mHistoryLastWritten.tagsFirstOccurrence || cur.tagsFirstOccurrence;
-        this.mHistoryLastWritten.setTo(this.mMonotonicClock.monotonicTime(elapsedRealtimeMs), cmd, cur);
+        this.mHistoryLastWritten.setTo(
+                this.mMonotonicClock.monotonicTime(elapsedRealtimeMs), cmd, cur);
         if (this.mHistoryLastWritten.time < this.mHistoryLastLastWritten.time - 60000) {
-            Slog.wtf(TAG, "Significantly earlier event written to battery history: time=" + this.mHistoryLastWritten.time + " previous=" + this.mHistoryLastLastWritten.time);
+            Slog.wtf(
+                    TAG,
+                    "Significantly earlier event written to battery history: time="
+                            + this.mHistoryLastWritten.time
+                            + " previous="
+                            + this.mHistoryLastLastWritten.time);
         }
         this.mHistoryLastWritten.tagsFirstOccurrence = hasTags;
-        writeHistoryDelta(this.mHistoryBuffer, this.mHistoryLastWritten, this.mHistoryLastLastWritten);
+        writeHistoryDelta(
+                this.mHistoryBuffer, this.mHistoryLastWritten, this.mHistoryLastLastWritten);
         cur.wakelockTag = null;
         cur.wakeReasonTag = null;
         cur.eventCode = 0;
@@ -1533,7 +1743,8 @@ public class BatteryStatsHistory {
         cur.processStateChange = null;
     }
 
-    private void writeHistoryDelta(Parcel dest, BatteryStats.HistoryItem cur, BatteryStats.HistoryItem last) {
+    private void writeHistoryDelta(
+            Parcel dest, BatteryStats.HistoryItem cur, BatteryStats.HistoryItem last) {
         int deltaTimeToken;
         BatteryStatsHistory batteryStatsHistory;
         int wakeLockIndex;
@@ -1574,7 +1785,8 @@ public class BatteryStatsHistory {
             firstToken |= 524288;
         }
         int CurrentNTemperatureInt = buildCurrentNTemperature(cur);
-        boolean CurrentNTemperatureIntChanged = CurrentNTemperatureInt != lastCurrentNTemperatureInt;
+        boolean CurrentNTemperatureIntChanged =
+                CurrentNTemperatureInt != lastCurrentNTemperatureInt;
         if (CurrentNTemperatureIntChanged) {
             firstToken |= 262144;
         }
@@ -1590,7 +1802,8 @@ public class BatteryStatsHistory {
         }
         int lastCurrentNTemperatureInt2 = cur.batterySecCurrentEvent;
         int lastTemperatureInt22 = last.batterySecCurrentEvent;
-        boolean batterySecCurrentEventIntChanged = lastCurrentNTemperatureInt2 != lastTemperatureInt22;
+        boolean batterySecCurrentEventIntChanged =
+                lastCurrentNTemperatureInt2 != lastTemperatureInt22;
         if (batterySecCurrentEventIntChanged) {
             firstToken |= 131072;
         }
@@ -1623,7 +1836,8 @@ public class BatteryStatsHistory {
         } else {
             cur.states2 &= -131073;
         }
-        boolean state2IntChanged = (cur.states2 == last.states2 && extensionFlags == 0) ? false : true;
+        boolean state2IntChanged =
+                (cur.states2 == last.states2 && extensionFlags == 0) ? false : true;
         if (state2IntChanged) {
             firstToken |= 2097152;
         }
@@ -1655,7 +1869,10 @@ public class BatteryStatsHistory {
             dest.writeInt(CurrentNTemperatureInt);
             dest.writeInt(TemperatureInt2);
         }
-        if (batterySecInfoIntChanged || batterySecCurrentEventIntChanged || batterySecEventIntChanged || protectBatteryModeChanged) {
+        if (batterySecInfoIntChanged
+                || batterySecCurrentEventIntChanged
+                || batterySecEventIntChanged
+                || protectBatteryModeChanged) {
             dest.writeInt(cur.batterySecCurrentEvent);
             dest.writeInt(batterySecInfoInt);
             dest.writeInt(cur.batterySecEvent);
@@ -1694,7 +1911,8 @@ public class BatteryStatsHistory {
         }
         if (cur.eventCode != 0) {
             int index = batteryStatsHistory.writeHistoryTag(cur.eventTag);
-            int codeAndIndex = batteryStatsHistory.setBitField(cur.eventCode & 65535, index, 16, -65536);
+            int codeAndIndex =
+                    batteryStatsHistory.setBitField(cur.eventCode & 65535, index, 16, -65536);
             dest.writeInt(codeAndIndex);
             if ((index & 32768) != 0) {
                 cur.eventTag.writeToParcel(dest, 0);
@@ -1714,7 +1932,8 @@ public class BatteryStatsHistory {
             if (cur.powerStats != null) {
                 if ((extensionFlags2 & 1) != 0) {
                     cur.powerStats.descriptor.writeSummaryToParcel(dest);
-                    batteryStatsHistory.mWrittenPowerStatsDescriptors.add(cur.powerStats.descriptor);
+                    batteryStatsHistory.mWrittenPowerStatsDescriptors.add(
+                            cur.powerStats.descriptor);
                 }
                 cur.powerStats.writeToParcel(dest);
             }
@@ -1735,11 +1954,19 @@ public class BatteryStatsHistory {
     }
 
     private int buildCurrentNTemperature(BatteryStats.HistoryItem h) {
-        return ((h.pa_temp << 24) & (-16777216)) | ((h.ap_temp << 16) & Spanned.SPAN_PRIORITY) | ((h.current << 0) & 65535);
+        return ((h.pa_temp << 24) & (-16777216))
+                | ((h.ap_temp << 16) & Spanned.SPAN_PRIORITY)
+                | ((h.current << 0) & 65535);
     }
 
     private int buildTemperature2(BatteryStats.HistoryItem h) {
-        return ((h.subScreenDoze << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT) & 536870912) | ((h.subScreenOn << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN) & 268435456) | ((h.highSpeakerVolume << 27) & 134217728) | ((h.otgOnline << 26) & 67108864) | ((h.wifi_ap << 25) & 33554432) | ((h.skin_temp << 16) & Spanned.SPAN_PRIORITY) | ((h.sub_batt_temp << 8) & 65280);
+        return ((h.subScreenDoze << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT) & 536870912)
+                | ((h.subScreenOn << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN) & 268435456)
+                | ((h.highSpeakerVolume << 27) & 134217728)
+                | ((h.otgOnline << 26) & 67108864)
+                | ((h.wifi_ap << 25) & 33554432)
+                | ((h.skin_temp << 16) & Spanned.SPAN_PRIORITY)
+                | ((h.sub_batt_temp << 8) & 65280);
     }
 
     private int buildBatterySecInfo(BatteryStats.HistoryItem h) {
@@ -1755,7 +1982,11 @@ public class BatteryStatsHistory {
         } else if ((h.batteryPlugType & 4) != 0) {
             plugType = 3;
         }
-        return ((h.batteryStatus & 7) << 29) | ((h.batteryHealth & 7) << 26) | ((h.batteryHealth & 8) << 14) | ((plugType & 3) << 24) | (h.states & 16777215);
+        return ((h.batteryStatus & 7) << 29)
+                | ((h.batteryHealth & 7) << 26)
+                | ((h.batteryHealth & 8) << 14)
+                | ((plugType & 3) << 24)
+                | (h.states & 16777215);
     }
 
     private int writeHistoryTag(BatteryStats.HistoryTag tag) {
@@ -1821,7 +2052,13 @@ public class BatteryStatsHistory {
         synchronized (this) {
             int version = in.readInt();
             if (version != VERSION) {
-                Slog.w("BatteryStats", "readHistoryBuffer: version got " + version + ", expected " + VERSION + "; erasing old stats");
+                Slog.w(
+                        "BatteryStats",
+                        "readHistoryBuffer: version got "
+                                + version
+                                + ", expected "
+                                + VERSION
+                                + "; erasing old stats");
                 return;
             }
             this.mHistoryBufferStartTime = in.readLong();
@@ -1830,10 +2067,12 @@ public class BatteryStatsHistory {
             int bufSize = in.readInt();
             int curPos = in.dataPosition();
             if (bufSize >= this.mMaxHistoryBufferSize * 100) {
-                throw new ParcelFormatException("File corrupt: history data buffer too large " + bufSize);
+                throw new ParcelFormatException(
+                        "File corrupt: history data buffer too large " + bufSize);
             }
             if ((bufSize & (-4)) != bufSize) {
-                throw new ParcelFormatException("File corrupt: history data buffer not aligned " + bufSize);
+                throw new ParcelFormatException(
+                        "File corrupt: history data buffer not aligned " + bufSize);
             }
             this.mHistoryBuffer.appendFrom(in, curPos, bufSize);
             in.setDataPosition(curPos + bufSize);

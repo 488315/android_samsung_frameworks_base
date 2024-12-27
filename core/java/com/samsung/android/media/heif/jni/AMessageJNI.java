@@ -1,6 +1,7 @@
 package com.samsung.android.media.heif.jni;
 
 import android.util.Log;
+
 import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 
@@ -42,7 +43,8 @@ public class AMessageJNI {
             throw new IllegalArgumentException("buffer cannot be null");
         }
         if (!buffer.isDirect()) {
-            throw new IllegalArgumentException("ByteBuffer is not allocated direct, please allocate direct");
+            throw new IllegalArgumentException(
+                    "ByteBuffer is not allocated direct, please allocate direct");
         }
         nativeSetByteBuffer(key, buffer);
     }

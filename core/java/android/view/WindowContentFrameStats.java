@@ -5,26 +5,32 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public final class WindowContentFrameStats extends FrameStats implements Parcelable {
-    public static final Parcelable.Creator<WindowContentFrameStats> CREATOR = new Parcelable.Creator<WindowContentFrameStats>() { // from class: android.view.WindowContentFrameStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContentFrameStats createFromParcel(Parcel parcel) {
-            return new WindowContentFrameStats(parcel);
-        }
+    public static final Parcelable.Creator<WindowContentFrameStats> CREATOR =
+            new Parcelable.Creator<
+                    WindowContentFrameStats>() { // from class:
+                                                 // android.view.WindowContentFrameStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContentFrameStats createFromParcel(Parcel parcel) {
+                    return new WindowContentFrameStats(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContentFrameStats[] newArray(int size) {
-            return new WindowContentFrameStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContentFrameStats[] newArray(int size) {
+                    return new WindowContentFrameStats[size];
+                }
+            };
     private long[] mFramesPostedTimeNano;
     private long[] mFramesReadyTimeNano;
 
-    public WindowContentFrameStats() {
-    }
+    public WindowContentFrameStats() {}
 
-    public void init(long refreshPeriodNano, long[] framesPostedTimeNano, long[] framesPresentedTimeNano, long[] framesReadyTimeNano) {
+    public void init(
+            long refreshPeriodNano,
+            long[] framesPostedTimeNano,
+            long[] framesPresentedTimeNano,
+            long[] framesReadyTimeNano) {
         this.mRefreshPeriodNano = refreshPeriodNano;
         this.mFramesPostedTimeNano = framesPostedTimeNano;
         this.mFramesPresentedTimeNano = framesPresentedTimeNano;

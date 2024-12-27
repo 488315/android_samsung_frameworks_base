@@ -6,15 +6,15 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.se.omapi.ISecureElementListener;
-import android.se.omapi.ISecureElementService;
 import android.util.Log;
+
 import java.util.HashMap;
 import java.util.concurrent.Executor;
 
 /* loaded from: classes3.dex */
 public final class SEService {
-    public static final String ACTION_SECURE_ELEMENT_STATE_CHANGED = "android.se.omapi.action.SECURE_ELEMENT_STATE_CHANGED";
+    public static final String ACTION_SECURE_ELEMENT_STATE_CHANGED =
+            "android.se.omapi.action.SECURE_ELEMENT_STATE_CHANGED";
     public static final String EXTRA_READER_NAME = "android.se.omapi.extra.READER_NAME";
     public static final String EXTRA_READER_STATE = "android.se.omapi.extra.READER_STATE";
     public static final int IO_ERROR = 1;
@@ -48,12 +48,13 @@ public final class SEService {
 
         public void onConnected() {
             if (this.mListener != null && this.mExecutor != null) {
-                this.mExecutor.execute(new Runnable() { // from class: android.se.omapi.SEService.SEListener.1
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        SEListener.this.mListener.onConnected();
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class: android.se.omapi.SEService.SEListener.1
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                SEListener.this.mListener.onConnected();
+                            }
+                        });
             }
         }
 
@@ -75,22 +76,25 @@ public final class SEService {
         this.mContext = context;
         this.mSEListener.mListener = listener;
         this.mSEListener.mExecutor = executor;
-        this.mConnection = new ServiceConnection() { // from class: android.se.omapi.SEService.1
-            @Override // android.content.ServiceConnection
-            public synchronized void onServiceConnected(ComponentName className, IBinder service) {
-                SEService.this.mSecureElementService = ISecureElementService.Stub.asInterface(service);
-                if (SEService.this.mSEListener != null) {
-                    SEService.this.mSEListener.onConnected();
-                }
-                Log.i(SEService.TAG, "Service onServiceConnected");
-            }
+        this.mConnection =
+                new ServiceConnection() { // from class: android.se.omapi.SEService.1
+                    @Override // android.content.ServiceConnection
+                    public synchronized void onServiceConnected(
+                            ComponentName className, IBinder service) {
+                        SEService.this.mSecureElementService =
+                                ISecureElementService.Stub.asInterface(service);
+                        if (SEService.this.mSEListener != null) {
+                            SEService.this.mSEListener.onConnected();
+                        }
+                        Log.i(SEService.TAG, "Service onServiceConnected");
+                    }
 
-            @Override // android.content.ServiceConnection
-            public void onServiceDisconnected(ComponentName className) {
-                SEService.this.mSecureElementService = null;
-                Log.i(SEService.TAG, "Service onServiceDisconnected");
-            }
-        };
+                    @Override // android.content.ServiceConnection
+                    public void onServiceDisconnected(ComponentName className) {
+                        SEService.this.mSecureElementService = null;
+                        Log.i(SEService.TAG, "Service onServiceDisconnected");
+                    }
+                };
         Intent intent = new Intent(ISecureElementService.class.getName());
         intent.setClassName("com.android.se", "com.android.se.SecureElementService");
         boolean bindingSuccessful = this.mContext.bindService(intent, this.mConnection, 1);
@@ -164,7 +168,8 @@ public final class SEService {
             for (String readerName : readerNames) {
                 if (this.mReaders.get(readerName) == null) {
                     try {
-                        this.mReaders.put(readerName, new Reader(this, readerName, getReader(readerName)));
+                        this.mReaders.put(
+                                readerName, new Reader(this, readerName, getReader(readerName)));
                     } catch (Exception e) {
                         Log.e(TAG, "Error adding Reader: " + readerName, e);
                     }

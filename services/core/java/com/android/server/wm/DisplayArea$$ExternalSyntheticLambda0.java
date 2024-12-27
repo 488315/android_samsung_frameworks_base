@@ -15,8 +15,18 @@ public final /* synthetic */ class DisplayArea$$ExternalSyntheticLambda0 impleme
     public final boolean test(Object obj) {
         switch (this.$r8$classId) {
             case 0:
-                ActivityRecord activityRecord = ((ActivityRecord) obj).mAppCompatController.mAppCompatOverrides.mAppCompatOrientationOverrides.mActivityRecord;
-                return activityRecord.isVisibleRequested() && activityRecord.getTaskFragment() != null && activityRecord.getTaskFragment().getWindowingMode() == 1 && activityRecord.mAppCompatController.mAppCompatOverrides.mAppCompatOrientationOverrides.mActivityRecord.info.isChangeEnabled(236283604L);
+                ActivityRecord activityRecord =
+                        ((ActivityRecord) obj)
+                                .mAppCompatController
+                                .mAppCompatOverrides
+                                .mAppCompatOrientationOverrides
+                                .mActivityRecord;
+                return activityRecord.isVisibleRequested()
+                        && activityRecord.getTaskFragment() != null
+                        && activityRecord.getTaskFragment().getWindowingMode() == 1
+                        && activityRecord.mAppCompatController.mAppCompatOverrides
+                                .mAppCompatOrientationOverrides.mActivityRecord.info
+                                .isChangeEnabled(236283604L);
             default:
                 return !((Task) obj).mCanAffectSystemUiFlags;
         }

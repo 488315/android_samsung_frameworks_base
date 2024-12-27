@@ -6,8 +6,10 @@ import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.os.storage.StorageManagerInternal;
 import android.provider.DeviceConfig;
+
 import com.android.server.LocalServices;
 import com.android.server.pm.pkg.AndroidPackage;
+
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -27,11 +29,23 @@ public abstract class SoftRestrictedPermissionPolicy {
     }
 
     static {
-        String string = DeviceConfig.getString("storage_native_boot", "forced_scoped_storage_whitelist", "");
-        sForcedScopedStorageAppWhitelist = new HashSet(Arrays.asList((string == null || string.equals("")) ? new String[0] : string.split(",")));
+        String string =
+                DeviceConfig.getString(
+                        "storage_native_boot", "forced_scoped_storage_whitelist", "");
+        sForcedScopedStorageAppWhitelist =
+                new HashSet(
+                        Arrays.asList(
+                                (string == null || string.equals(""))
+                                        ? new String[0]
+                                        : string.split(",")));
     }
 
-    public static SoftRestrictedPermissionPolicy forPermission(Context context, ApplicationInfo applicationInfo, AndroidPackage androidPackage, UserHandle userHandle, String str) {
+    public static SoftRestrictedPermissionPolicy forPermission(
+            Context context,
+            ApplicationInfo applicationInfo,
+            AndroidPackage androidPackage,
+            UserHandle userHandle,
+            String str) {
         final boolean z;
         final int i;
         final boolean z2;
@@ -49,13 +63,21 @@ public abstract class SoftRestrictedPermissionPolicy {
                 return DUMMY_POLICY;
             }
             if (applicationInfo != null) {
-                boolean z10 = (context.getPackageManager().getPermissionFlags(str, applicationInfo.packageName, userHandle) & 14336) != 0;
+                boolean z10 =
+                        (context.getPackageManager()
+                                                .getPermissionFlags(
+                                                        str,
+                                                        applicationInfo.packageName,
+                                                        userHandle)
+                                        & 14336)
+                                != 0;
                 i2 = getMinimumTargetSDK(context, applicationInfo, userHandle);
                 z9 = z10;
             } else {
                 i2 = 0;
             }
-            return new SoftRestrictedPermissionPolicy() { // from class: com.android.server.policy.SoftRestrictedPermissionPolicy.3
+            return new SoftRestrictedPermissionPolicy() { // from class:
+                                                          // com.android.server.policy.SoftRestrictedPermissionPolicy.3
                 @Override // com.android.server.policy.SoftRestrictedPermissionPolicy
                 public final boolean mayGrantPermission() {
                     return z9 || i2 >= 29;
@@ -64,16 +86,23 @@ public abstract class SoftRestrictedPermissionPolicy {
         }
         if (applicationInfo != null) {
             PackageManager packageManager = context.getPackageManager();
-            StorageManagerInternal storageManagerInternal = (StorageManagerInternal) LocalServices.getService(StorageManagerInternal.class);
-            boolean z11 = (packageManager.getPermissionFlags(str, applicationInfo.packageName, userHandle) & 14336) != 0;
-            boolean hasLegacyExternalStorage = storageManagerInternal.hasLegacyExternalStorage(applicationInfo.uid);
+            StorageManagerInternal storageManagerInternal =
+                    (StorageManagerInternal) LocalServices.getService(StorageManagerInternal.class);
+            boolean z11 =
+                    (packageManager.getPermissionFlags(str, applicationInfo.packageName, userHandle)
+                                    & 14336)
+                            != 0;
+            boolean hasLegacyExternalStorage =
+                    storageManagerInternal.hasLegacyExternalStorage(applicationInfo.uid);
             int i3 = applicationInfo.uid;
             PackageManager packageManager2 = context.getPackageManager();
             String[] packagesForUid = packageManager2.getPackagesForUid(i3);
             if (packagesForUid != null) {
                 UserHandle userHandleForUid = UserHandle.getUserHandleForUid(i3);
                 for (String str2 : packagesForUid) {
-                    if (packageManager2.getApplicationInfoAsUser(str2, 0, userHandleForUid).hasRequestedLegacyExternalStorage()) {
+                    if (packageManager2
+                            .getApplicationInfoAsUser(str2, 0, userHandleForUid)
+                            .hasRequestedLegacyExternalStorage()) {
                         z8 = true;
                         break;
                     }
@@ -90,14 +119,17 @@ public abstract class SoftRestrictedPermissionPolicy {
                     if (i5 >= length) {
                         break;
                     }
-                    if (packageManager3.checkPermission("android.permission.WRITE_MEDIA_STORAGE", packagesForUid2[i5]) == 0) {
+                    if (packageManager3.checkPermission(
+                                    "android.permission.WRITE_MEDIA_STORAGE", packagesForUid2[i5])
+                            == 0) {
                         z9 = true;
                         break;
                     }
                     i5++;
                 }
             }
-            boolean hasPreserveLegacyExternalStorage = androidPackage.hasPreserveLegacyExternalStorage();
+            boolean hasPreserveLegacyExternalStorage =
+                    androidPackage.hasPreserveLegacyExternalStorage();
             i = getMinimumTargetSDK(context, applicationInfo, userHandle);
             z3 = sForcedScopedStorageAppWhitelist.contains(applicationInfo.packageName);
             z2 = !z11;
@@ -116,7 +148,8 @@ public abstract class SoftRestrictedPermissionPolicy {
             z6 = false;
             z7 = false;
         }
-        return new SoftRestrictedPermissionPolicy() { // from class: com.android.server.policy.SoftRestrictedPermissionPolicy.2
+        return new SoftRestrictedPermissionPolicy() { // from class:
+                                                      // com.android.server.policy.SoftRestrictedPermissionPolicy.2
             @Override // com.android.server.policy.SoftRestrictedPermissionPolicy
             public final int getExtraAppOpCode() {
                 return 87;
@@ -142,7 +175,8 @@ public abstract class SoftRestrictedPermissionPolicy {
         };
     }
 
-    public static int getMinimumTargetSDK(Context context, ApplicationInfo applicationInfo, UserHandle userHandle) {
+    public static int getMinimumTargetSDK(
+            Context context, ApplicationInfo applicationInfo, UserHandle userHandle) {
         PackageManager packageManager = context.getPackageManager();
         int i = applicationInfo.targetSdkVersion;
         String[] packagesForUid = packageManager.getPackagesForUid(applicationInfo.uid);
@@ -150,7 +184,11 @@ public abstract class SoftRestrictedPermissionPolicy {
             for (String str : packagesForUid) {
                 if (!str.equals(applicationInfo.packageName)) {
                     try {
-                        i = Integer.min(i, packageManager.getApplicationInfoAsUser(str, 0, userHandle).targetSdkVersion);
+                        i =
+                                Integer.min(
+                                        i,
+                                        packageManager.getApplicationInfoAsUser(str, 0, userHandle)
+                                                .targetSdkVersion);
                     } catch (PackageManager.NameNotFoundException unused) {
                     }
                 }

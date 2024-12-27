@@ -15,6 +15,7 @@ import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
+
 import java.util.List;
 
 @Deprecated
@@ -59,11 +60,14 @@ public final class RemoteController {
         void onClientTransportControlUpdate(int i);
     }
 
-    public RemoteController(Context context, OnClientUpdateListener updateListener) throws IllegalArgumentException {
+    public RemoteController(Context context, OnClientUpdateListener updateListener)
+            throws IllegalArgumentException {
         this(context, updateListener, null);
     }
 
-    public RemoteController(Context context, OnClientUpdateListener onClientUpdateListener, Looper looper) throws IllegalArgumentException {
+    public RemoteController(
+            Context context, OnClientUpdateListener onClientUpdateListener, Looper looper)
+            throws IllegalArgumentException {
         byte b = 0;
         this.mSessionCb = new MediaControllerCallback();
         this.mIsRegistered = false;
@@ -88,20 +92,23 @@ public final class RemoteController {
         }
         this.mOnClientUpdateListener = onClientUpdateListener;
         this.mContext = context;
-        this.mSessionManager = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
+        this.mSessionManager =
+                (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
         this.mSessionListener = new TopTransportSessionListener();
         if (ActivityManager.isLowRamDeviceStatic()) {
             this.mMaxBitmapDimension = 512;
         } else {
             DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-            this.mMaxBitmapDimension = Math.max(displayMetrics.widthPixels, displayMetrics.heightPixels);
+            this.mMaxBitmapDimension =
+                    Math.max(displayMetrics.widthPixels, displayMetrics.heightPixels);
         }
     }
 
     public long getEstimatedMediaPosition() {
         PlaybackState state;
         synchronized (mInfoLock) {
-            if (this.mCurrentSession != null && (state = this.mCurrentSession.getPlaybackState()) != null) {
+            if (this.mCurrentSession != null
+                    && (state = this.mCurrentSession.getPlaybackState()) != null) {
                 return state.getPosition();
             }
             return -1L;
@@ -136,7 +143,8 @@ public final class RemoteController {
         return true;
     }
 
-    public boolean setArtworkConfiguration(boolean wantBitmap, int width, int height) throws IllegalArgumentException {
+    public boolean setArtworkConfiguration(boolean wantBitmap, int width, int height)
+            throws IllegalArgumentException {
         synchronized (mInfoLock) {
             if (wantBitmap) {
                 if (width > 0 && height > 0) {
@@ -189,13 +197,13 @@ public final class RemoteController {
     }
 
     public class MetadataEditor extends MediaMetadataEditor {
-        protected MetadataEditor() {
-        }
+        protected MetadataEditor() {}
 
         protected MetadataEditor(Bundle metadata, long editableKeys) {
             this.mEditorMetadata = metadata;
             this.mEditableKeys = editableKeys;
-            this.mEditorArtwork = (Bitmap) metadata.getParcelable(String.valueOf(100), Bitmap.class);
+            this.mEditorArtwork =
+                    (Bitmap) metadata.getParcelable(String.valueOf(100), Bitmap.class);
             if (this.mEditorArtwork != null) {
                 cleanupBitmapFromBundle(100);
             }
@@ -220,8 +228,12 @@ public final class RemoteController {
                 try {
                     if (RemoteController.this.mCurrentSession != null) {
                         try {
-                            if (this.mEditorMetadata.containsKey(String.valueOf(268435457)) && (rating = (Rating) getObject(268435457, null)) != null) {
-                                RemoteController.this.mCurrentSession.getTransportControls().setRating(rating);
+                            if (this.mEditorMetadata.containsKey(String.valueOf(268435457))
+                                    && (rating = (Rating) getObject(268435457, null)) != null) {
+                                RemoteController.this
+                                        .mCurrentSession
+                                        .getTransportControls()
+                                        .setRating(rating);
                             }
                         } catch (Throwable th) {
                             th = th;
@@ -237,8 +249,7 @@ public final class RemoteController {
     }
 
     private class MediaControllerCallback extends MediaController.Callback {
-        private MediaControllerCallback() {
-        }
+        private MediaControllerCallback() {}
 
         @Override // android.media.session.MediaController.Callback
         public void onPlaybackStateChanged(PlaybackState state) {
@@ -251,9 +262,9 @@ public final class RemoteController {
         }
     }
 
-    private class TopTransportSessionListener implements MediaSessionManager.OnActiveSessionsChangedListener {
-        private TopTransportSessionListener() {
-        }
+    private class TopTransportSessionListener
+            implements MediaSessionManager.OnActiveSessionsChangedListener {
+        private TopTransportSessionListener() {}
 
         @Override // android.media.session.MediaSessionManager.OnActiveSessionsChangedListener
         public void onActiveSessionsChanged(List<MediaController> controllers) {
@@ -295,20 +306,30 @@ public final class RemoteController {
     }
 
     void startListeningToSessions() {
-        ComponentName listenerComponent = new ComponentName(this.mContext, this.mOnClientUpdateListener.getClass());
+        ComponentName listenerComponent =
+                new ComponentName(this.mContext, this.mOnClientUpdateListener.getClass());
         Handler handler = null;
         if (Looper.myLooper() == null) {
             handler = new Handler(Looper.getMainLooper());
         }
-        this.mSessionManager.addOnActiveSessionsChangedListener(this.mSessionListener, listenerComponent, handler);
-        this.mSessionListener.onActiveSessionsChanged(this.mSessionManager.getActiveSessions(listenerComponent));
+        this.mSessionManager.addOnActiveSessionsChangedListener(
+                this.mSessionListener, listenerComponent, handler);
+        this.mSessionListener.onActiveSessionsChanged(
+                this.mSessionManager.getActiveSessions(listenerComponent));
     }
 
     void stopListeningToSessions() {
         this.mSessionManager.removeOnActiveSessionsChangedListener(this.mSessionListener);
     }
 
-    private static void sendMsg(Handler handler, int msg, int existingMsgPolicy, int arg1, int arg2, Object obj, int delayMs) {
+    private static void sendMsg(
+            Handler handler,
+            int msg,
+            int existingMsgPolicy,
+            int arg1,
+            int arg2,
+            Object obj,
+            int delayMs) {
         if (handler == null) {
             Log.e(TAG, "null event handler, will not deliver message " + msg);
             return;
@@ -342,7 +363,10 @@ public final class RemoteController {
                     this.mCurrentSession = null;
                     sendMsg(this.mEventHandler, 0, 0, 0, 1, null, 0);
                 }
-            } else if (this.mCurrentSession == null || !controller.getSessionToken().equals(this.mCurrentSession.getSessionToken())) {
+            } else if (this.mCurrentSession == null
+                    || !controller
+                            .getSessionToken()
+                            .equals(this.mCurrentSession.getSessionToken())) {
                 if (this.mCurrentSession != null) {
                     this.mCurrentSession.unregisterCallback(this.mSessionCb);
                 }
@@ -364,14 +388,20 @@ public final class RemoteController {
             l = this.mOnClientUpdateListener;
         }
         if (l != null) {
-            int playstate = state == null ? 0 : RemoteControlClient.getRccStateFromState(state.getState());
+            int playstate =
+                    state == null ? 0 : RemoteControlClient.getRccStateFromState(state.getState());
             if (state == null || state.getPosition() == -1) {
                 l.onClientPlaybackStateUpdate(playstate);
             } else {
-                l.onClientPlaybackStateUpdate(playstate, state.getLastPositionUpdateTime(), state.getPosition(), state.getPlaybackSpeed());
+                l.onClientPlaybackStateUpdate(
+                        playstate,
+                        state.getLastPositionUpdateTime(),
+                        state.getPosition(),
+                        state.getPlaybackSpeed());
             }
             if (state != null) {
-                l.onClientTransportControlUpdate(RemoteControlClient.getRccControlFlagsFromActions(state.getActions()));
+                l.onClientTransportControlUpdate(
+                        RemoteControlClient.getRccControlFlagsFromActions(state.getActions()));
             }
         }
     }
@@ -385,9 +415,14 @@ public final class RemoteController {
         }
         synchronized (mInfoLock) {
             l = this.mOnClientUpdateListener;
-            boolean canRate = (this.mCurrentSession == null || this.mCurrentSession.getRatingType() == 0) ? false : true;
+            boolean canRate =
+                    (this.mCurrentSession == null || this.mCurrentSession.getRatingType() == 0)
+                            ? false
+                            : true;
             long editableKeys = canRate ? 268435457L : 0L;
-            Bundle legacyMetadata = MediaSessionLegacyHelper.getOldMetadata(metadata, this.mArtworkWidth, this.mArtworkHeight);
+            Bundle legacyMetadata =
+                    MediaSessionLegacyHelper.getOldMetadata(
+                            metadata, this.mArtworkWidth, this.mArtworkHeight);
             this.mMetadataEditor = new MetadataEditor(legacyMetadata, editableKeys);
             metadataEditor = this.mMetadataEditor;
         }

@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class CaptureResultExtras implements Parcelable {
-    public static final Parcelable.Creator<CaptureResultExtras> CREATOR = new Parcelable.Creator<CaptureResultExtras>() { // from class: android.hardware.camera2.impl.CaptureResultExtras.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CaptureResultExtras createFromParcel(Parcel in) {
-            return new CaptureResultExtras(in);
-        }
+    public static final Parcelable.Creator<CaptureResultExtras> CREATOR =
+            new Parcelable.Creator<CaptureResultExtras>() { // from class:
+                // android.hardware.camera2.impl.CaptureResultExtras.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CaptureResultExtras createFromParcel(Parcel in) {
+                    return new CaptureResultExtras(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CaptureResultExtras[] newArray(int size) {
-            return new CaptureResultExtras[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CaptureResultExtras[] newArray(int size) {
+                    return new CaptureResultExtras[size];
+                }
+            };
     private int afTriggerId;
     private String errorPhysicalCameraId;
     private int errorStreamId;
@@ -36,7 +38,20 @@ public class CaptureResultExtras implements Parcelable {
         readFromParcel(in);
     }
 
-    public CaptureResultExtras(int requestId, int subsequenceId, int afTriggerId, int precaptureTriggerId, long frameNumber, int partialResultCount, int errorStreamId, String errorPhysicalCameraId, long lastCompletedRegularFrameNumber, long lastCompletedReprocessFrameNumber, long lastCompletedZslFrameNumber, boolean hasReadoutTimestamp, long readoutTimestamp) {
+    public CaptureResultExtras(
+            int requestId,
+            int subsequenceId,
+            int afTriggerId,
+            int precaptureTriggerId,
+            long frameNumber,
+            int partialResultCount,
+            int errorStreamId,
+            String errorPhysicalCameraId,
+            long lastCompletedRegularFrameNumber,
+            long lastCompletedReprocessFrameNumber,
+            long lastCompletedZslFrameNumber,
+            boolean hasReadoutTimestamp,
+            long readoutTimestamp) {
         this.requestId = requestId;
         this.subsequenceId = subsequenceId;
         this.afTriggerId = afTriggerId;

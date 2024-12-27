@@ -1,6 +1,7 @@
 package android.webkit;
 
 import android.annotation.SystemApi;
+
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
 import java.util.Map;
@@ -21,7 +22,13 @@ public class WebResourceResponse {
         setData(data);
     }
 
-    public WebResourceResponse(String mimeType, String encoding, int statusCode, String reasonPhrase, Map<String, String> responseHeaders, InputStream data) {
+    public WebResourceResponse(
+            String mimeType,
+            String encoding,
+            int statusCode,
+            String reasonPhrase,
+            Map<String, String> responseHeaders,
+            InputStream data) {
         this(mimeType, encoding, data);
         setStatusCodeAndReasonPhrase(statusCode, reasonPhrase);
         setResponseHeaders(responseHeaders);
@@ -65,7 +72,8 @@ public class WebResourceResponse {
         for (int i = 0; i < reasonPhrase.length(); i++) {
             int c = reasonPhrase.charAt(i);
             if (c > 127) {
-                throw new IllegalArgumentException("reasonPhrase can't contain non-ASCII characters.");
+                throw new IllegalArgumentException(
+                        "reasonPhrase can't contain non-ASCII characters.");
             }
         }
         this.mStatusCode = statusCode;
@@ -92,7 +100,9 @@ public class WebResourceResponse {
     public void setData(InputStream data) {
         checkImmutable();
         if (data != null && StringBufferInputStream.class.isAssignableFrom(data.getClass())) {
-            throw new IllegalArgumentException("StringBufferInputStream is deprecated and must not be passed to a WebResourceResponse");
+            throw new IllegalArgumentException(
+                    "StringBufferInputStream is deprecated and must not be passed to a"
+                        + " WebResourceResponse");
         }
         this.mInputStream = data;
     }
@@ -102,7 +112,14 @@ public class WebResourceResponse {
     }
 
     @SystemApi
-    public WebResourceResponse(boolean immutable, String mimeType, String encoding, int statusCode, String reasonPhrase, Map<String, String> responseHeaders, InputStream data) {
+    public WebResourceResponse(
+            boolean immutable,
+            String mimeType,
+            String encoding,
+            int statusCode,
+            String reasonPhrase,
+            Map<String, String> responseHeaders,
+            InputStream data) {
         this.mImmutable = immutable;
         this.mMimeType = mimeType;
         this.mEncoding = encoding;

@@ -6,7 +6,9 @@ import android.view.View;
 public abstract class VisibilityPropagation extends TransitionPropagation {
     private static final String PROPNAME_VISIBILITY = "android:visibilityPropagation:visibility";
     private static final String PROPNAME_VIEW_CENTER = "android:visibilityPropagation:center";
-    private static final String[] VISIBILITY_PROPAGATION_VALUES = {PROPNAME_VISIBILITY, PROPNAME_VIEW_CENTER};
+    private static final String[] VISIBILITY_PROPAGATION_VALUES = {
+        PROPNAME_VISIBILITY, PROPNAME_VIEW_CENTER
+    };
 
     @Override // android.transition.TransitionPropagation
     public void captureValues(TransitionValues values) {
@@ -32,7 +34,8 @@ public abstract class VisibilityPropagation extends TransitionPropagation {
 
     public int getViewVisibility(TransitionValues values) {
         Integer visibility;
-        if (values == null || (visibility = (Integer) values.values.get(PROPNAME_VISIBILITY)) == null) {
+        if (values == null
+                || (visibility = (Integer) values.values.get(PROPNAME_VISIBILITY)) == null) {
             return 8;
         }
         return visibility.intValue();
@@ -48,7 +51,8 @@ public abstract class VisibilityPropagation extends TransitionPropagation {
 
     private static int getViewCoordinate(TransitionValues values, int coordinateIndex) {
         int[] coordinates;
-        if (values == null || (coordinates = (int[]) values.values.get(PROPNAME_VIEW_CENTER)) == null) {
+        if (values == null
+                || (coordinates = (int[]) values.values.get(PROPNAME_VIEW_CENTER)) == null) {
             return -1;
         }
         return coordinates[coordinateIndex];

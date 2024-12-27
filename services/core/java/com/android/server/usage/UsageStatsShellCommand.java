@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.os.ShellCommand;
 import android.os.SystemClock;
 import android.os.UserHandle;
+
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,9 +56,14 @@ public final class UsageStatsShellCommand extends ShellCommand {
         }
         UsageStatsService usageStatsService = this.mService;
         synchronized (usageStatsService.mLock) {
-            UsageStatsDatabase usageStatsDatabase = ((UserUsageStatsService) usageStatsService.mUserState.get(userId2)).mDatabase;
+            UsageStatsDatabase usageStatsDatabase =
+                    ((UserUsageStatsService) usageStatsService.mUserState.get(userId2)).mDatabase;
             usageStatsDatabase.getClass();
-            usageStatsDatabase.prunePackagesDataOnUpgrade(new HashMap(Collections.singletonMap(nextArgRequired2, Long.valueOf(SystemClock.elapsedRealtime()))));
+            usageStatsDatabase.prunePackagesDataOnUpgrade(
+                    new HashMap(
+                            Collections.singletonMap(
+                                    nextArgRequired2,
+                                    Long.valueOf(SystemClock.elapsedRealtime()))));
         }
         return 0;
     }

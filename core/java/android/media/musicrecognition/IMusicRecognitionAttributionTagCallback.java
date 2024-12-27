@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IMusicRecognitionAttributionTagCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.media.musicrecognition.IMusicRecognitionAttributionTagCallback";
+    public static final String DESCRIPTOR =
+            "android.media.musicrecognition.IMusicRecognitionAttributionTagCallback";
 
     void onAttributionTag(String str) throws RemoteException;
 
     public static class Default implements IMusicRecognitionAttributionTagCallback {
         @Override // android.media.musicrecognition.IMusicRecognitionAttributionTagCallback
-        public void onAttributionTag(String attributionTag) throws RemoteException {
-        }
+        public void onAttributionTag(String attributionTag) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,8 @@ public interface IMusicRecognitionAttributionTagCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMusicRecognitionAttributionTagCallback {
+    public abstract static class Stub extends Binder
+            implements IMusicRecognitionAttributionTagCallback {
         static final int TRANSACTION_onAttributionTag = 1;
 
         public Stub() {
@@ -34,7 +35,8 @@ public interface IMusicRecognitionAttributionTagCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IMusicRecognitionAttributionTagCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IMusicRecognitionAttributionTagCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof IMusicRecognitionAttributionTagCallback)) {
                 return (IMusicRecognitionAttributionTagCallback) iin;
             }
@@ -61,7 +63,8 @@ public interface IMusicRecognitionAttributionTagCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMusicRecognitionAttributionTagCallback.DESCRIPTOR);
             }

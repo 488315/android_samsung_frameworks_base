@@ -3,27 +3,30 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CdmaNumberInfoRecord implements Parcelable {
     public static final int CDMA_NUMBER_INFO_BUFFER_LENGTH = 81;
-    public static final Parcelable.Creator<CdmaNumberInfoRecord> CREATOR = new Parcelable.Creator<CdmaNumberInfoRecord>() { // from class: android.hardware.radio.voice.CdmaNumberInfoRecord.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaNumberInfoRecord createFromParcel(Parcel _aidl_source) {
-            CdmaNumberInfoRecord _aidl_out = new CdmaNumberInfoRecord();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CdmaNumberInfoRecord> CREATOR =
+            new Parcelable.Creator<CdmaNumberInfoRecord>() { // from class:
+                // android.hardware.radio.voice.CdmaNumberInfoRecord.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaNumberInfoRecord createFromParcel(Parcel _aidl_source) {
+                    CdmaNumberInfoRecord _aidl_out = new CdmaNumberInfoRecord();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaNumberInfoRecord[] newArray(int _aidl_size) {
-            return new CdmaNumberInfoRecord[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaNumberInfoRecord[] newArray(int _aidl_size) {
+                    return new CdmaNumberInfoRecord[_aidl_size];
+                }
+            };
     public String number;
     public byte numberType = 0;
     public byte numberPlan = 0;

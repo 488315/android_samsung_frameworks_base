@@ -7,8 +7,7 @@ public class EventLogTags {
     public static final int NTP_FAILURE = 50081;
     public static final int NTP_SUCCESS = 50080;
 
-    private EventLogTags() {
-    }
+    private EventLogTags() {}
 
     public static void writeNtpSuccess(String server, long rtt, long offset) {
         EventLog.writeEvent(50080, server, Long.valueOf(rtt), Long.valueOf(offset));

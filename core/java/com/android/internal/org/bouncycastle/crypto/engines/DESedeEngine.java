@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto.engines;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.OutputLengthException;
@@ -14,10 +15,12 @@ public class DESedeEngine extends DESEngine {
     private int[] workingKey2 = null;
     private int[] workingKey3 = null;
 
-    @Override // com.android.internal.org.bouncycastle.crypto.engines.DESEngine, com.android.internal.org.bouncycastle.crypto.BlockCipher
+    @Override // com.android.internal.org.bouncycastle.crypto.engines.DESEngine,
+              // com.android.internal.org.bouncycastle.crypto.BlockCipher
     public void init(boolean encrypting, CipherParameters params) {
         if (!(params instanceof KeyParameter)) {
-            throw new IllegalArgumentException("invalid parameter passed to DESede init - " + params.getClass().getName());
+            throw new IllegalArgumentException(
+                    "invalid parameter passed to DESede init - " + params.getClass().getName());
         }
         byte[] keyMaster = ((KeyParameter) params).getKey();
         if (keyMaster.length != 24 && keyMaster.length != 16) {
@@ -39,17 +42,20 @@ public class DESedeEngine extends DESEngine {
         this.workingKey3 = this.workingKey1;
     }
 
-    @Override // com.android.internal.org.bouncycastle.crypto.engines.DESEngine, com.android.internal.org.bouncycastle.crypto.BlockCipher
+    @Override // com.android.internal.org.bouncycastle.crypto.engines.DESEngine,
+              // com.android.internal.org.bouncycastle.crypto.BlockCipher
     public String getAlgorithmName() {
         return KeyProperties.KEY_ALGORITHM_3DES;
     }
 
-    @Override // com.android.internal.org.bouncycastle.crypto.engines.DESEngine, com.android.internal.org.bouncycastle.crypto.BlockCipher
+    @Override // com.android.internal.org.bouncycastle.crypto.engines.DESEngine,
+              // com.android.internal.org.bouncycastle.crypto.BlockCipher
     public int getBlockSize() {
         return 8;
     }
 
-    @Override // com.android.internal.org.bouncycastle.crypto.engines.DESEngine, com.android.internal.org.bouncycastle.crypto.BlockCipher
+    @Override // com.android.internal.org.bouncycastle.crypto.engines.DESEngine,
+              // com.android.internal.org.bouncycastle.crypto.BlockCipher
     public int processBlock(byte[] in, int inOff, byte[] out, int outOff) {
         if (this.workingKey1 == null) {
             throw new IllegalStateException("DESede engine not initialised");
@@ -73,7 +79,7 @@ public class DESedeEngine extends DESEngine {
         return 8;
     }
 
-    @Override // com.android.internal.org.bouncycastle.crypto.engines.DESEngine, com.android.internal.org.bouncycastle.crypto.BlockCipher
-    public void reset() {
-    }
+    @Override // com.android.internal.org.bouncycastle.crypto.engines.DESEngine,
+              // com.android.internal.org.bouncycastle.crypto.BlockCipher
+    public void reset() {}
 }

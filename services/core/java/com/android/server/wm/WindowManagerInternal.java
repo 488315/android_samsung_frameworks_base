@@ -24,12 +24,13 @@ import android.view.SurfaceControl;
 import android.view.SurfaceControlViewHost;
 import android.view.inputmethod.ImeTracker;
 import android.window.ScreenCapture;
+
 import com.android.internal.policy.KeyInterceptionInfo;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.input.InputManagerService;
 import com.android.server.wallpaper.WallpaperCropper;
-import com.android.server.wm.DragState;
 import com.android.server.wm.DragState.InputInterceptor;
+
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
@@ -49,25 +50,24 @@ public abstract class WindowManagerInternal {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class AppTransitionListener {
-        public void onAppTransitionCancelledLocked(boolean z) {
-        }
+        public void onAppTransitionCancelledLocked(boolean z) {}
 
-        public void onAppTransitionFinishedLocked(IBinder iBinder) {
-        }
+        public void onAppTransitionFinishedLocked(IBinder iBinder) {}
 
-        public void onAppTransitionPendingLocked() {
-        }
+        public void onAppTransitionPendingLocked() {}
 
-        public void onAppTransitionStartingLocked(long j) {
-        }
+        public void onAppTransitionStartingLocked(long j) {}
 
-        public void onAppTransitionTimeoutLocked() {
-        }
+        public void onAppTransitionTimeoutLocked() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface IDragDropCallback {
-        static CompletableFuture registerInputChannel(final DragState dragState, Display display, final InputManagerService inputManagerService, final InputChannel inputChannel) {
+        static CompletableFuture registerInputChannel(
+                final DragState dragState,
+                Display display,
+                final InputManagerService inputManagerService,
+                final InputChannel inputChannel) {
             CompletableFuture completableFuture;
             MagnificationSpec magnificationSpec;
             display.getRealSize(dragState.mDisplaySize);
@@ -78,38 +78,79 @@ public abstract class WindowManagerInternal {
             } else {
                 dragState.mInputInterceptor = dragState.new InputInterceptor(display);
                 if (dragState.mInputSurface == null) {
-                    dragState.mInputSurface = dragState.mService.makeSurfaceBuilder(dragState.mDisplayContent.mSession).setContainerLayer().setName("Drag and Drop Input Consumer").setCallsite("DragState.showInputSurface").setParent(dragState.mDisplayContent.mOverlayLayer).build();
+                    dragState.mInputSurface =
+                            dragState
+                                    .mService
+                                    .makeSurfaceBuilder(dragState.mDisplayContent.mSession)
+                                    .setContainerLayer()
+                                    .setName("Drag and Drop Input Consumer")
+                                    .setCallsite("DragState.showInputSurface")
+                                    .setParent(dragState.mDisplayContent.mOverlayLayer)
+                                    .build();
                 }
                 DragState.InputInterceptor inputInterceptor = dragState.mInputInterceptor;
-                InputWindowHandle inputWindowHandle = inputInterceptor == null ? null : inputInterceptor.mDragWindowHandle;
+                InputWindowHandle inputWindowHandle =
+                        inputInterceptor == null ? null : inputInterceptor.mDragWindowHandle;
                 if (inputWindowHandle == null) {
-                    Slog.w("WindowManager", "Drag is in progress but there is no drag window handle.");
+                    Slog.w(
+                            "WindowManager",
+                            "Drag is in progress but there is no drag window handle.");
                     completableFuture = CompletableFuture.completedFuture(null);
                 } else {
                     Rect rect = dragState.mTmpClipRect;
                     Point point = dragState.mDisplaySize;
                     rect.set(0, 0, point.x, point.y);
-                    inputWindowHandle.setTrustedOverlay(dragState.mTransaction, dragState.mInputSurface, true);
-                    dragState.mTransaction.show(dragState.mInputSurface).setInputWindowInfo(dragState.mInputSurface, inputWindowHandle).setLayer(dragState.mInputSurface, Integer.MAX_VALUE).setCrop(dragState.mInputSurface, dragState.mTmpClipRect);
-                    if (dragState.mDisplayContent.hasOneHandOpSpec() && (magnificationSpec = dragState.mDisplayContent.mMagnificationSpec) != null) {
+                    inputWindowHandle.setTrustedOverlay(
+                            dragState.mTransaction, dragState.mInputSurface, true);
+                    dragState
+                            .mTransaction
+                            .show(dragState.mInputSurface)
+                            .setInputWindowInfo(dragState.mInputSurface, inputWindowHandle)
+                            .setLayer(dragState.mInputSurface, Integer.MAX_VALUE)
+                            .setCrop(dragState.mInputSurface, dragState.mTmpClipRect);
+                    if (dragState.mDisplayContent.hasOneHandOpSpec()
+                            && (magnificationSpec = dragState.mDisplayContent.mMagnificationSpec)
+                                    != null) {
                         SurfaceControl.Transaction transaction = dragState.mTransaction;
                         SurfaceControl surfaceControl = dragState.mInputSurface;
                         float f = magnificationSpec.scale;
-                        transaction.setMatrix(surfaceControl, f, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, f).setPosition(dragState.mInputSurface, magnificationSpec.offsetX, magnificationSpec.offsetY);
+                        transaction
+                                .setMatrix(
+                                        surfaceControl,
+                                        f,
+                                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                        f)
+                                .setPosition(
+                                        dragState.mInputSurface,
+                                        magnificationSpec.offsetX,
+                                        magnificationSpec.offsetY);
                     }
                     completableFuture = new CompletableFuture();
-                    dragState.mTransaction.addWindowInfosReportedListener(new DragState$$ExternalSyntheticLambda2(1, completableFuture)).apply();
+                    dragState
+                            .mTransaction
+                            .addWindowInfosReportedListener(
+                                    new DragState$$ExternalSyntheticLambda2(1, completableFuture))
+                            .apply();
                 }
             }
-            return completableFuture.thenApply(new Function() { // from class: com.android.server.wm.WindowManagerInternal$IDragDropCallback$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    InputManagerService inputManagerService2 = InputManagerService.this;
-                    InputChannel inputChannel2 = inputChannel;
-                    DragState.InputInterceptor inputInterceptor2 = dragState.mInputInterceptor;
-                    return Boolean.valueOf(inputManagerService2.startDragAndDrop(inputChannel2, inputInterceptor2 == null ? null : inputInterceptor2.mClientChannel));
-                }
-            });
+            return completableFuture.thenApply(
+                    new Function() { // from class:
+                                     // com.android.server.wm.WindowManagerInternal$IDragDropCallback$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj) {
+                            InputManagerService inputManagerService2 = InputManagerService.this;
+                            InputChannel inputChannel2 = inputChannel;
+                            DragState.InputInterceptor inputInterceptor2 =
+                                    dragState.mInputInterceptor;
+                            return Boolean.valueOf(
+                                    inputManagerService2.startDragAndDrop(
+                                            inputChannel2,
+                                            inputInterceptor2 == null
+                                                    ? null
+                                                    : inputInterceptor2.mClientChannel));
+                        }
+                    });
         }
     }
 
@@ -131,20 +172,16 @@ public abstract class WindowManagerInternal {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface MagnificationCallbacks {
-    }
+    public interface MagnificationCallbacks {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface OnHardKeyboardStatusChangeListener {
-    }
+    public interface OnHardKeyboardStatusChangeListener {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface OnImeRequestedChangedListener {
-    }
+    public interface OnImeRequestedChangedListener {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface OnWindowRemovedListener {
-    }
+    public interface OnWindowRemovedListener {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface TaskSystemBarsListener {
@@ -152,8 +189,7 @@ public abstract class WindowManagerInternal {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface WindowsForAccessibilityCallback {
-    }
+    public interface WindowsForAccessibilityCallback {}
 
     public abstract void addBlockScreenCaptureForApps(ArraySet arraySet);
 
@@ -161,11 +197,15 @@ public abstract class WindowManagerInternal {
 
     public abstract void addRefreshRateRangeForPackage(String str, float f, float f2);
 
-    public abstract void addTrustedTaskOverlay(int i, SurfaceControlViewHost.SurfacePackage surfacePackage);
+    public abstract void addTrustedTaskOverlay(
+            int i, SurfaceControlViewHost.SurfacePackage surfacePackage);
 
     public abstract void addWindowToken(IBinder iBinder, int i, int i2, Bundle bundle);
 
-    public abstract void captureDisplay(int i, ScreenCapture.CaptureArgs captureArgs, ScreenCapture.ScreenCaptureListener screenCaptureListener);
+    public abstract void captureDisplay(
+            int i,
+            ScreenCapture.CaptureArgs captureArgs,
+            ScreenCapture.ScreenCaptureListener screenCaptureListener);
 
     public abstract void clearBlockedApps();
 
@@ -253,17 +293,21 @@ public abstract class WindowManagerInternal {
 
     public abstract void onDisplayManagerReceivedDeviceState(int i);
 
-    public abstract ImeTargetInfo onToggleImeRequested(boolean z, IBinder iBinder, IBinder iBinder2, int i);
+    public abstract ImeTargetInfo onToggleImeRequested(
+            boolean z, IBinder iBinder, IBinder iBinder2, int i);
 
     public abstract void registerAppTransitionListener(AppTransitionListener appTransitionListener);
 
-    public abstract void registerAppTransitionListener(AppTransitionListener appTransitionListener, int i);
+    public abstract void registerAppTransitionListener(
+            AppTransitionListener appTransitionListener, int i);
 
     public abstract void registerDragDropControllerCallback(IDragDropCallback iDragDropCallback);
 
-    public abstract void registerOnWindowRemovedListener(OnWindowRemovedListener onWindowRemovedListener);
+    public abstract void registerOnWindowRemovedListener(
+            OnWindowRemovedListener onWindowRemovedListener);
 
-    public abstract void registerTaskSystemBarsListener(TaskSystemBarsListener taskSystemBarsListener);
+    public abstract void registerTaskSystemBarsListener(
+            TaskSystemBarsListener taskSystemBarsListener);
 
     public abstract void removeBlockScreenCaptureForApps(ArraySet arraySet);
 
@@ -271,7 +315,8 @@ public abstract class WindowManagerInternal {
 
     public abstract void removeRefreshRateRangeForPackage(String str);
 
-    public abstract void removeTrustedTaskOverlay(int i, SurfaceControlViewHost.SurfacePackage surfacePackage);
+    public abstract void removeTrustedTaskOverlay(
+            int i, SurfaceControlViewHost.SurfacePackage surfacePackage);
 
     public final void removeWindowToken(IBinder iBinder, boolean z, int i) {
         removeWindowToken(iBinder, z, true, i);
@@ -289,9 +334,11 @@ public abstract class WindowManagerInternal {
 
     public abstract void setBlockScreenCaptureForAppsSessionId(long j);
 
-    public abstract boolean setContentRecordingSession(ContentRecordingSession contentRecordingSession);
+    public abstract boolean setContentRecordingSession(
+            ContentRecordingSession contentRecordingSession);
 
-    public abstract void setDeviceStateListener(DeviceStateManager.DeviceStateCallback deviceStateCallback);
+    public abstract void setDeviceStateListener(
+            DeviceStateManager.DeviceStateCallback deviceStateCallback);
 
     public abstract void setDismissImeOnBackKeyPressed(boolean z, boolean z2);
 
@@ -305,15 +352,19 @@ public abstract class WindowManagerInternal {
 
     public abstract void setInputFilter(IInputFilter iInputFilter);
 
-    public abstract void setInputMethodTargetChangeListener(ImeTargetChangeListener imeTargetChangeListener);
+    public abstract void setInputMethodTargetChangeListener(
+            ImeTargetChangeListener imeTargetChangeListener);
 
-    public abstract boolean setMagnificationCallbacks(int i, MagnificationCallbacks magnificationCallbacks);
+    public abstract boolean setMagnificationCallbacks(
+            int i, MagnificationCallbacks magnificationCallbacks);
 
     public abstract void setMagnificationSpec(int i, MagnificationSpec magnificationSpec);
 
-    public abstract void setOnHardKeyboardStatusChangeListener(OnHardKeyboardStatusChangeListener onHardKeyboardStatusChangeListener);
+    public abstract void setOnHardKeyboardStatusChangeListener(
+            OnHardKeyboardStatusChangeListener onHardKeyboardStatusChangeListener);
 
-    public abstract void setOnImeRequestedChangedListener(OnImeRequestedChangedListener onImeRequestedChangedListener);
+    public abstract void setOnImeRequestedChangedListener(
+            OnImeRequestedChangedListener onImeRequestedChangedListener);
 
     public abstract void setOrientationRequestPolicy(boolean z, int[] iArr, int[] iArr2);
 
@@ -321,13 +372,15 @@ public abstract class WindowManagerInternal {
 
     public abstract void setWallpaperCropHints(IBinder iBinder, SparseArray sparseArray);
 
-    public abstract void setWallpaperCropUtils(WallpaperCropper.WallpaperCropUtils wallpaperCropUtils);
+    public abstract void setWallpaperCropUtils(
+            WallpaperCropper.WallpaperCropUtils wallpaperCropUtils);
 
     public abstract void setWallpaperDisplayAddress(IBinder iBinder, DisplayAddress displayAddress);
 
     public abstract void setWallpaperShowWhenLocked(IBinder iBinder, boolean z);
 
-    public abstract void setWindowsForAccessibilityCallback(int i, WindowsForAccessibilityCallback windowsForAccessibilityCallback);
+    public abstract void setWindowsForAccessibilityCallback(
+            int i, WindowsForAccessibilityCallback windowsForAccessibilityCallback);
 
     public abstract boolean shouldRestoreImeVisibility(IBinder iBinder);
 
@@ -341,13 +394,17 @@ public abstract class WindowManagerInternal {
 
     public abstract ScreenCapture.ScreenshotHardwareBuffer takeAssistScreenshot(Set set);
 
-    public abstract Bitmap takeScreenshotToTargetWindowInternal(int i, int i2, boolean z, Rect rect, int i3, int i4, boolean z2);
+    public abstract Bitmap takeScreenshotToTargetWindowInternal(
+            int i, int i2, boolean z, Rect rect, int i3, int i4, boolean z2);
 
-    public abstract void unregisterAppTransitionListener(AppTransitionListener appTransitionListener, int i);
+    public abstract void unregisterAppTransitionListener(
+            AppTransitionListener appTransitionListener, int i);
 
-    public abstract void unregisterOnWindowRemovedListener(OnWindowRemovedListener onWindowRemovedListener);
+    public abstract void unregisterOnWindowRemovedListener(
+            OnWindowRemovedListener onWindowRemovedListener);
 
-    public abstract void unregisterTaskSystemBarsListener(TaskSystemBarsListener taskSystemBarsListener);
+    public abstract void unregisterTaskSystemBarsListener(
+            TaskSystemBarsListener taskSystemBarsListener);
 
     public abstract void updateInputMethodTargetWindow(IBinder iBinder, IBinder iBinder2);
 

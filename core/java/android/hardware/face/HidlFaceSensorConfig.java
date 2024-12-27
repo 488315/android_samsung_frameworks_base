@@ -3,6 +3,7 @@ package android.hardware.face;
 import android.content.Context;
 import android.hardware.biometrics.common.CommonProps;
 import android.hardware.biometrics.face.SensorProps;
+
 import com.android.internal.R;
 
 /* loaded from: classes2.dex */
@@ -30,8 +31,10 @@ public final class HidlFaceSensorConfig extends SensorProps {
         this.commonProps = new CommonProps();
         this.commonProps.sensorId = this.mSensorId;
         this.commonProps.sensorStrength = authenticatorStrengthToPropertyStrength(this.mStrength);
-        this.halControlsPreview = context.getResources().getBoolean(R.bool.config_faceAuthSupportsSelfIllumination);
-        this.commonProps.maxEnrollmentsPerUser = context.getResources().getInteger(R.integer.config_faceMaxTemplatesPerUser);
+        this.halControlsPreview =
+                context.getResources().getBoolean(R.bool.config_faceAuthSupportsSelfIllumination);
+        this.commonProps.maxEnrollmentsPerUser =
+                context.getResources().getInteger(R.integer.config_faceMaxTemplatesPerUser);
         this.commonProps.componentInfo = null;
         this.supportsDetectInteraction = false;
     }

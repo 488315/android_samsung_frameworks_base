@@ -10,8 +10,8 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.Surface;
+
 import com.android.internal.os.SomeArgs;
-import com.android.server.tv.TvInputHardwareManager;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -35,8 +35,7 @@ final class TvInputHal implements Handler.Callback {
     public final Handler mHandler = new Handler(this);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Callback {
-    }
+    public interface Callback {}
 
     public TvInputHal(Callback callback) {
         this.mCallback = callback;
@@ -63,7 +62,10 @@ final class TvInputHal implements Handler.Callback {
                 if (this.mStreamConfigGenerations.get(i, 0) != tvStreamConfig.getGeneration()) {
                     return -2;
                 }
-                return nativeAddOrUpdateStream(this.mPtr, i, tvStreamConfig.getStreamId(), surface) == 0 ? 0 : -3;
+                return nativeAddOrUpdateStream(this.mPtr, i, tvStreamConfig.getStreamId(), surface)
+                                == 0
+                        ? 0
+                        : -3;
             } catch (Throwable th) {
                 throw th;
             }
@@ -105,9 +107,12 @@ final class TvInputHal implements Handler.Callback {
             TvInputHardwareInfo tvInputHardwareInfo = (TvInputHardwareInfo) message.obj;
             synchronized (this.mLock) {
                 retrieveStreamConfigsLocked(tvInputHardwareInfo.getDeviceId());
-                tvStreamConfigArr = (TvStreamConfig[]) this.mStreamConfigs.get(tvInputHardwareInfo.getDeviceId());
+                tvStreamConfigArr =
+                        (TvStreamConfig[])
+                                this.mStreamConfigs.get(tvInputHardwareInfo.getDeviceId());
             }
-            ((TvInputHardwareManager) this.mCallback).onDeviceAvailable(tvInputHardwareInfo, tvStreamConfigArr);
+            ((TvInputHardwareManager) this.mCallback)
+                    .onDeviceAvailable(tvInputHardwareInfo, tvStreamConfigArr);
         } else if (i == 2) {
             ((TvInputHardwareManager) this.mCallback).onDeviceUnavailable(message.arg1);
         } else if (i == 3) {
@@ -117,15 +122,20 @@ final class TvInputHal implements Handler.Callback {
                 retrieveStreamConfigsLocked(i2);
                 tvStreamConfigArr2 = (TvStreamConfig[]) this.mStreamConfigs.get(i2);
             }
-            ((TvInputHardwareManager) this.mCallback).onStreamConfigurationChanged(i2, tvStreamConfigArr2, i3);
+            ((TvInputHardwareManager) this.mCallback)
+                    .onStreamConfigurationChanged(i2, tvStreamConfigArr2, i3);
         } else if (i == 4) {
             int i4 = message.arg1;
             TvInputHardwareManager tvInputHardwareManager = (TvInputHardwareManager) this.mCallback;
             synchronized (tvInputHardwareManager.mLock) {
                 try {
-                    TvInputHardwareManager.Connection connection = (TvInputHardwareManager.Connection) tvInputHardwareManager.mConnections.get(i4);
+                    TvInputHardwareManager.Connection connection =
+                            (TvInputHardwareManager.Connection)
+                                    tvInputHardwareManager.mConnections.get(i4);
                     if (connection == null) {
-                        Slog.e("TvInputHardwareManager", "FirstFrameCaptured: Cannot find a connection with " + i4);
+                        Slog.e(
+                                "TvInputHardwareManager",
+                                "FirstFrameCaptured: Cannot find a connection with " + i4);
                     } else {
                         Runnable runnable = connection.mOnFirstFrameCaptured;
                         if (runnable != null) {
@@ -144,14 +154,18 @@ final class TvInputHal implements Handler.Callback {
             int i5 = message.arg1;
             int i6 = message.arg2;
             Bundle bundle = (Bundle) message.obj;
-            TvInputHardwareManager tvInputHardwareManager2 = (TvInputHardwareManager) this.mCallback;
+            TvInputHardwareManager tvInputHardwareManager2 =
+                    (TvInputHardwareManager) this.mCallback;
             synchronized (tvInputHardwareManager2.mLock) {
                 try {
                     if (((String) tvInputHardwareManager2.mHardwareInputIdMap.get(i5)) != null) {
                         SomeArgs obtain = SomeArgs.obtain();
                         obtain.arg1 = tvInputHardwareManager2.mHardwareInputIdMap.get(i5);
                         obtain.arg2 = bundle;
-                        tvInputHardwareManager2.mHandler.obtainMessage(8, i6, 0, obtain).sendToTarget();
+                        tvInputHardwareManager2
+                                .mHandler
+                                .obtainMessage(8, i6, 0, obtain)
+                                .sendToTarget();
                     }
                 } finally {
                 }
@@ -197,7 +211,10 @@ final class TvInputHal implements Handler.Callback {
                 if (this.mStreamConfigGenerations.get(i, 0) != tvStreamConfig.getGeneration()) {
                     return -2;
                 }
-                return nativeSetTvMessageEnabled(this.mPtr, i, tvStreamConfig.getStreamId(), i2, z) == 0 ? 0 : -3;
+                return nativeSetTvMessageEnabled(this.mPtr, i, tvStreamConfig.getStreamId(), i2, z)
+                                == 0
+                        ? 0
+                        : -3;
             } catch (Throwable th) {
                 throw th;
             }

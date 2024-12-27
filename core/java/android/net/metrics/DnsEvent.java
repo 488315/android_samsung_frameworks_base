@@ -47,7 +47,13 @@ public final class DnsEvent {
     }
 
     public String toString() {
-        StringBuilder builder = new StringBuilder("DnsEvent(").append("netId=").append(this.netId).append(", transports=").append(BitSet.valueOf(new long[]{this.transports})).append(", ");
+        StringBuilder builder =
+                new StringBuilder("DnsEvent(")
+                        .append("netId=")
+                        .append(this.netId)
+                        .append(", transports=")
+                        .append(BitSet.valueOf(new long[] {this.transports}))
+                        .append(", ");
         builder.append(String.format("%d events, ", Integer.valueOf(this.eventCount)));
         builder.append(String.format("%d success)", Integer.valueOf(this.successCount)));
         return builder.toString();

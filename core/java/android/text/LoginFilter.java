@@ -16,7 +16,8 @@ public abstract class LoginFilter implements InputFilter {
     }
 
     @Override // android.text.InputFilter
-    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+    public CharSequence filter(
+            CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
         onStart();
         for (int i = 0; i < dstart; i++) {
             char c = dest.charAt(i);
@@ -53,14 +54,11 @@ public abstract class LoginFilter implements InputFilter {
         return modification;
     }
 
-    public void onStart() {
-    }
+    public void onStart() {}
 
-    public void onInvalidCharacter(char c) {
-    }
+    public void onInvalidCharacter(char c) {}
 
-    public void onStop() {
-    }
+    public void onStop() {}
 
     @Deprecated
     public static class UsernameFilterGMail extends LoginFilter {

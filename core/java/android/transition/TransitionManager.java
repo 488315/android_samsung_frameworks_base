@@ -4,6 +4,7 @@ import android.util.ArrayMap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,7 +14,8 @@ public class TransitionManager {
     private static String LOG_TAG = "TransitionManager";
     private static Transition sDefaultTransition = new AutoTransition();
     private static final String[] EMPTY_STRINGS = new String[0];
-    private static ThreadLocal<WeakReference<ArrayMap<ViewGroup, ArrayList<Transition>>>> sRunningTransitions = new ThreadLocal<>();
+    private static ThreadLocal<WeakReference<ArrayMap<ViewGroup, ArrayList<Transition>>>>
+            sRunningTransitions = new ThreadLocal<>();
     private static ArrayList<ViewGroup> sPendingTransitions = new ArrayList<>();
     ArrayMap<Scene, Transition> mSceneTransitions = new ArrayMap<>();
     ArrayMap<Scene, ArrayMap<Scene, Transition>> mScenePairTransitions = new ArrayMap<>();
@@ -43,7 +45,9 @@ public class TransitionManager {
         Scene currScene;
         ArrayMap<Scene, Transition> sceneTransitionMap;
         ViewGroup sceneRoot = scene.getSceneRoot();
-        if (sceneRoot != null && (currScene = Scene.getCurrentScene(sceneRoot)) != null && (sceneTransitionMap = this.mScenePairTransitions.get(scene)) != null) {
+        if (sceneRoot != null
+                && (currScene = Scene.getCurrentScene(sceneRoot)) != null
+                && (sceneTransitionMap = this.mScenePairTransitions.get(scene)) != null) {
             Transition transition = sceneTransitionMap.get(currScene);
             if (transition != null) {
                 return transition;
@@ -79,7 +83,8 @@ public class TransitionManager {
     /* JADX INFO: Access modifiers changed from: private */
     public static ArrayMap<ViewGroup, ArrayList<Transition>> getRunningTransitions() {
         ArrayMap<ViewGroup, ArrayList<Transition>> transitions;
-        WeakReference<ArrayMap<ViewGroup, ArrayList<Transition>>> runningTransitions = sRunningTransitions.get();
+        WeakReference<ArrayMap<ViewGroup, ArrayList<Transition>>> runningTransitions =
+                sRunningTransitions.get();
         if (runningTransitions != null && (transitions = runningTransitions.get()) != null) {
             return transitions;
         }
@@ -96,7 +101,8 @@ public class TransitionManager {
         }
     }
 
-    private static class MultiListener implements ViewTreeObserver.OnPreDrawListener, View.OnAttachStateChangeListener {
+    private static class MultiListener
+            implements ViewTreeObserver.OnPreDrawListener, View.OnAttachStateChangeListener {
         ViewGroup mSceneRoot;
         Transition mTransition;
         final ViewTreeObserver mViewTreeObserver;
@@ -117,14 +123,14 @@ public class TransitionManager {
         }
 
         @Override // android.view.View.OnAttachStateChangeListener
-        public void onViewAttachedToWindow(View v) {
-        }
+        public void onViewAttachedToWindow(View v) {}
 
         @Override // android.view.View.OnAttachStateChangeListener
         public void onViewDetachedFromWindow(View v) {
             removeListeners();
             TransitionManager.sPendingTransitions.remove(this.mSceneRoot);
-            ArrayList<Transition> runningTransitions = (ArrayList) TransitionManager.getRunningTransitions().get(this.mSceneRoot);
+            ArrayList<Transition> runningTransitions =
+                    (ArrayList) TransitionManager.getRunningTransitions().get(this.mSceneRoot);
             if (runningTransitions != null && runningTransitions.size() > 0) {
                 Iterator<Transition> it = runningTransitions.iterator();
                 while (it.hasNext()) {
@@ -141,7 +147,8 @@ public class TransitionManager {
             if (!TransitionManager.sPendingTransitions.remove(this.mSceneRoot)) {
                 return true;
             }
-            final ArrayMap<ViewGroup, ArrayList<Transition>> runningTransitions = TransitionManager.getRunningTransitions();
+            final ArrayMap<ViewGroup, ArrayList<Transition>> runningTransitions =
+                    TransitionManager.getRunningTransitions();
             ArrayList<Transition> currentTransitions = runningTransitions.get(this.mSceneRoot);
             ArrayList<Transition> previousRunningTransitions = null;
             if (currentTransitions == null) {
@@ -151,14 +158,19 @@ public class TransitionManager {
                 previousRunningTransitions = new ArrayList<>(currentTransitions);
             }
             currentTransitions.add(this.mTransition);
-            this.mTransition.addListener(new TransitionListenerAdapter() { // from class: android.transition.TransitionManager.MultiListener.1
-                @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
-                public void onTransitionEnd(Transition transition) {
-                    ArrayList<Transition> currentTransitions2 = (ArrayList) runningTransitions.get(MultiListener.this.mSceneRoot);
-                    currentTransitions2.remove(transition);
-                    transition.removeListener(this);
-                }
-            });
+            this.mTransition.addListener(
+                    new TransitionListenerAdapter() { // from class:
+                                                      // android.transition.TransitionManager.MultiListener.1
+                        @Override // android.transition.TransitionListenerAdapter,
+                                  // android.transition.Transition.TransitionListener
+                        public void onTransitionEnd(Transition transition) {
+                            ArrayList<Transition> currentTransitions2 =
+                                    (ArrayList)
+                                            runningTransitions.get(MultiListener.this.mSceneRoot);
+                            currentTransitions2.remove(transition);
+                            transition.removeListener(this);
+                        }
+                    });
             this.mTransition.captureValues(this.mSceneRoot, false);
             if (previousRunningTransitions != null) {
                 Iterator<Transition> it = previousRunningTransitions.iterator();

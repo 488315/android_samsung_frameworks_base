@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class ChannelConfig implements Parcelable {
-    public static final Parcelable.Creator<ChannelConfig> CREATOR = new Parcelable.Creator<ChannelConfig>() { // from class: android.hardware.power.ChannelConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ChannelConfig createFromParcel(Parcel _aidl_source) {
-            ChannelConfig _aidl_out = new ChannelConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ChannelConfig> CREATOR =
+            new Parcelable.Creator<
+                    ChannelConfig>() { // from class: android.hardware.power.ChannelConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ChannelConfig createFromParcel(Parcel _aidl_source) {
+                    ChannelConfig _aidl_out = new ChannelConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ChannelConfig[] newArray(int _aidl_size) {
-            return new ChannelConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ChannelConfig[] newArray(int _aidl_size) {
+                    return new ChannelConfig[_aidl_size];
+                }
+            };
     public MQDescriptor<ChannelMessage, Byte> channelDescriptor;
     public MQDescriptor<Byte, Byte> eventFlagDescriptor;
     public int readFlagBitmask = 0;
@@ -60,7 +62,8 @@ public class ChannelConfig implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.channelDescriptor = (MQDescriptor) _aidl_parcel.readTypedObject(MQDescriptor.CREATOR);
+            this.channelDescriptor =
+                    (MQDescriptor) _aidl_parcel.readTypedObject(MQDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -68,7 +71,8 @@ public class ChannelConfig implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.eventFlagDescriptor = (MQDescriptor) _aidl_parcel.readTypedObject(MQDescriptor.CREATOR);
+            this.eventFlagDescriptor =
+                    (MQDescriptor) _aidl_parcel.readTypedObject(MQDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

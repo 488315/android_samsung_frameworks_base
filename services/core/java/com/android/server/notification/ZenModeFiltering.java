@@ -16,11 +16,12 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.LocalLog;
 import android.util.Slog;
+
 import com.android.internal.util.NotificationMessagingUtil;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.notification.ValidateNotificationPeople;
+
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -45,11 +46,16 @@ public final class ZenModeFiltering {
         public final ArrayMap mOtherCalls = new ArrayMap();
 
         /* renamed from: -$$Nest$misRepeat, reason: not valid java name */
-        public static boolean m734$$Nest$misRepeat(RepeatCallers repeatCallers, Context context, Bundle bundle, ArraySet arraySet) {
+        public static boolean m734$$Nest$misRepeat(
+                RepeatCallers repeatCallers, Context context, Bundle bundle, ArraySet arraySet) {
             boolean z;
             synchronized (repeatCallers) {
                 if (repeatCallers.mThresholdMinutes <= 0) {
-                    repeatCallers.mThresholdMinutes = context.getResources().getInteger(R.integer.leanback_setup_alpha_backward_in_content_delay);
+                    repeatCallers.mThresholdMinutes =
+                            context.getResources()
+                                    .getInteger(
+                                            R.integer
+                                                    .leanback_setup_alpha_backward_in_content_delay);
                 }
                 z = false;
                 if (repeatCallers.mThresholdMinutes > 0 && bundle != null) {
@@ -65,10 +71,13 @@ public final class ZenModeFiltering {
             return z;
         }
 
-        public final synchronized boolean checkCallers(Context context, String[] strArr, ArraySet arraySet) {
+        public final synchronized boolean checkCallers(
+                Context context, String[] strArr, ArraySet arraySet) {
             boolean z;
             try {
-                String networkCountryIso = ((TelephonyManager) context.getSystemService(TelephonyManager.class)).getNetworkCountryIso();
+                String networkCountryIso =
+                        ((TelephonyManager) context.getSystemService(TelephonyManager.class))
+                                .getNetworkCountryIso();
                 z = false;
                 boolean z2 = false;
                 boolean z3 = false;
@@ -125,8 +134,7 @@ public final class ZenModeFiltering {
             try {
                 for (int size = arrayMap.size() - 1; size >= 0; size--) {
                     long longValue = ((Long) arrayMap.valueAt(size)).longValue();
-                    if (longValue <= j && j - longValue <= this.mThresholdMinutes * 60000) {
-                    }
+                    if (longValue <= j && j - longValue <= this.mThresholdMinutes * 60000) {}
                     arrayMap.removeAt(size);
                 }
             } catch (Throwable th) {
@@ -192,11 +200,19 @@ public final class ZenModeFiltering {
         if (i == 2) {
             return f >= 1.0f;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Encountered unknown source: ", "ZenModeHelper");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                i, "Encountered unknown source: ", "ZenModeHelper");
         return true;
     }
 
-    public static boolean matchesCallFilter(Context context, int i, NotificationManager.Policy policy, UserHandle userHandle, Bundle bundle, ValidateNotificationPeople validateNotificationPeople, int i2) {
+    public static boolean matchesCallFilter(
+            Context context,
+            int i,
+            NotificationManager.Policy policy,
+            UserHandle userHandle,
+            Bundle bundle,
+            ValidateNotificationPeople validateNotificationPeople,
+            int i2) {
         if (i == 2) {
             ZenLog.traceMatchesCallFilter(i2, "no interruptions", false);
             return false;
@@ -208,16 +224,24 @@ public final class ZenModeFiltering {
         if (i == 1) {
             List exceptionContacts = policy.getExceptionContacts();
             if (exceptionContacts != null && validateNotificationPeople != null) {
-                if (policy.exceptionContactsFlag == 0 && exceptionContacts.size() > 0 && validateNotificationPeople.isInExceptionContacts(userHandle, bundle, exceptionContacts)) {
+                if (policy.exceptionContactsFlag == 0
+                        && exceptionContacts.size() > 0
+                        && validateNotificationPeople.isInExceptionContacts(
+                                userHandle, bundle, exceptionContacts)) {
                     ZenLog.traceMatchesCallFilter(i2, "contact matched (allowed)", true);
                     return true;
                 }
-                if (policy.exceptionContactsFlag == 1 && (exceptionContacts.isEmpty() || (exceptionContacts.size() > 0 && !validateNotificationPeople.isInExceptionContacts(userHandle, bundle, exceptionContacts)))) {
+                if (policy.exceptionContactsFlag == 1
+                        && (exceptionContacts.isEmpty()
+                                || (exceptionContacts.size() > 0
+                                        && !validateNotificationPeople.isInExceptionContacts(
+                                                userHandle, bundle, exceptionContacts)))) {
                     ZenLog.traceMatchesCallFilter(i2, "contact matched (disallowed)", true);
                     return true;
                 }
             }
-            if (policy.allowRepeatCallers() && RepeatCallers.m734$$Nest$misRepeat(REPEAT_CALLERS, context, bundle, null)) {
+            if (policy.allowRepeatCallers()
+                    && RepeatCallers.m734$$Nest$misRepeat(REPEAT_CALLERS, context, bundle, null)) {
                 ZenLog.traceMatchesCallFilter(i2, "repeat caller", true);
                 return true;
             }
@@ -236,32 +260,47 @@ public final class ZenModeFiltering {
                     ArraySet arraySet = new ArraySet();
                     Context contextAsUser = validateNotificationPeople.getContextAsUser(userHandle);
                     if (contextAsUser != null) {
-                        final ValidateNotificationPeople.PeopleRankingReconsideration validatePeople = validateNotificationPeople.validatePeople(contextAsUser, l, bundle, null, fArr, arraySet);
+                        final ValidateNotificationPeople.PeopleRankingReconsideration
+                                validatePeople =
+                                        validateNotificationPeople.validatePeople(
+                                                contextAsUser, l, bundle, null, fArr, arraySet);
                         f = fArr[0];
                         if (validatePeople != null) {
                             final Semaphore semaphore = new Semaphore(0);
-                            AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() { // from class: com.android.server.notification.ValidateNotificationPeople.2
-                                public final /* synthetic */ Semaphore val$s;
+                            AsyncTask.THREAD_POOL_EXECUTOR.execute(
+                                    new Runnable() { // from class:
+                                                     // com.android.server.notification.ValidateNotificationPeople.2
+                                        public final /* synthetic */ Semaphore val$s;
 
-                                public AnonymousClass2(final Semaphore semaphore2) {
-                                    r2 = semaphore2;
-                                }
+                                        public AnonymousClass2(final Semaphore semaphore2) {
+                                            r2 = semaphore2;
+                                        }
 
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    PeopleRankingReconsideration.this.work();
-                                    r2.release();
-                                }
-                            });
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            PeopleRankingReconsideration.this.work();
+                                            r2.release();
+                                        }
+                                    });
                             try {
                                 if (semaphore2.tryAcquire(3000, TimeUnit.MILLISECONDS)) {
                                     f = Math.max(validatePeople.mContactAffinity, f);
                                 } else {
-                                    Slog.w("ValidateNoPeople", "Timeout while waiting for affinity: " + l + ". Returning timeoutAffinity=1.0");
+                                    Slog.w(
+                                            "ValidateNoPeople",
+                                            "Timeout while waiting for affinity: "
+                                                    + l
+                                                    + ". Returning timeoutAffinity=1.0");
                                     f = 1.0f;
                                 }
                             } catch (InterruptedException e) {
-                                Slog.w("ValidateNoPeople", "InterruptedException while waiting for affinity: " + l + ". Returning affinity=" + f, e);
+                                Slog.w(
+                                        "ValidateNoPeople",
+                                        "InterruptedException while waiting for affinity: "
+                                                + l
+                                                + ". Returning affinity="
+                                                + f,
+                                        e);
                             }
                         }
                     }
@@ -282,7 +321,8 @@ public final class ZenModeFiltering {
         return true;
     }
 
-    public static void maybeLogInterceptDecision(NotificationRecord notificationRecord, boolean z, String str) {
+    public static void maybeLogInterceptDecision(
+            NotificationRecord notificationRecord, boolean z, String str) {
         boolean z2 = notificationRecord.mIntercept;
         boolean z3 = notificationRecord.mInterceptSet;
         if (z3 && z2 == z) {
@@ -316,25 +356,32 @@ public final class ZenModeFiltering {
         if (notificationRecord != null) {
             String packageName = notificationRecord.sbn.getPackageName();
             if (this.mDefaultPhoneApp == null) {
-                TelecomManager telecomManager = (TelecomManager) this.mContext.getSystemService("telecom");
-                this.mDefaultPhoneApp = telecomManager != null ? telecomManager.getDefaultPhoneApp() : null;
+                TelecomManager telecomManager =
+                        (TelecomManager) this.mContext.getSystemService("telecom");
+                this.mDefaultPhoneApp =
+                        telecomManager != null ? telecomManager.getDefaultPhoneApp() : null;
                 if (DEBUG) {
                     Slog.d("ZenModeHelper", "Default phone app: " + this.mDefaultPhoneApp);
                 }
             }
-            if ((packageName != null && (componentName = this.mDefaultPhoneApp) != null && packageName.equals(componentName.getPackageName())) || notificationRecord.isCategory("call")) {
+            if ((packageName != null
+                            && (componentName = this.mDefaultPhoneApp) != null
+                            && packageName.equals(componentName.getPackageName()))
+                    || notificationRecord.isCategory("call")) {
                 return true;
             }
         }
         return false;
     }
 
-    public final boolean matchesExceptionContacts(NotificationManager.Policy policy, NotificationRecord notificationRecord) {
+    public final boolean matchesExceptionContacts(
+            NotificationManager.Policy policy, NotificationRecord notificationRecord) {
         String country;
         String[] split;
         String stringBuffer;
         if (notificationRecord.sbn != null) {
-            TelephonyManager telephonyManager = (TelephonyManager) this.mContext.getSystemService("phone");
+            TelephonyManager telephonyManager =
+                    (TelephonyManager) this.mContext.getSystemService("phone");
             if (telephonyManager != null) {
                 country = telephonyManager.getNetworkCountryIso();
                 if (country == null && (country = telephonyManager.getSimCountryIso()) == null) {
@@ -370,18 +417,25 @@ public final class ZenModeFiltering {
                     String str2 = (String) it.next();
                     if (str2 != null) {
                         for (int i2 = 0; i2 < arrayList2.size(); i2++) {
-                            if (arrayList2.get(i2) != null && PhoneNumberUtils.areSamePhoneNumber(str2, (String) arrayList2.get(i2), country)) {
+                            if (arrayList2.get(i2) != null
+                                    && PhoneNumberUtils.areSamePhoneNumber(
+                                            str2, (String) arrayList2.get(i2), country)) {
                                 return true;
                             }
                         }
                     }
                 }
             }
-            String[] extraPeople = ValidateNotificationPeople.getExtraPeople(notificationRecord.sbn.getNotification().extras);
+            String[] extraPeople =
+                    ValidateNotificationPeople.getExtraPeople(
+                            notificationRecord.sbn.getNotification().extras);
             if (extraPeople != null) {
                 for (String str3 : extraPeople) {
                     if (str3 != null && (split = str3.split(":")) != null) {
-                        BootReceiver$$ExternalSyntheticOutline0.m(new StringBuilder("received contact type="), split[0], "ZenModeHelper");
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("received contact type="),
+                                split[0],
+                                "ZenModeHelper");
                         if (split.length < 2) {
                             Slog.e("ZenModeHelper", "The contact info doesn't have a number.");
                         } else {
@@ -440,14 +494,19 @@ public final class ZenModeFiltering {
                                     }
                                     stringBuffer = stringBuffer2.toString();
                                 }
-                                BootReceiver$$ExternalSyntheticOutline0.m(sb, stringBuffer, "ZenModeHelper");
+                                BootReceiver$$ExternalSyntheticOutline0.m(
+                                        sb, stringBuffer, "ZenModeHelper");
                                 for (int i4 = 0; i4 < arrayList2.size(); i4++) {
-                                    if (PhoneNumberUtils.areSamePhoneNumber(str4, (String) arrayList2.get(i4), country)) {
+                                    if (PhoneNumberUtils.areSamePhoneNumber(
+                                            str4, (String) arrayList2.get(i4), country)) {
                                         return true;
                                     }
                                 }
                             } else if (!split[0].equals("contactId")) {
-                                BootReceiver$$ExternalSyntheticOutline0.m(new StringBuilder("received contact specificUri="), split[1], "ZenModeHelper");
+                                BootReceiver$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("received contact specificUri="),
+                                        split[1],
+                                        "ZenModeHelper");
                             } else if (arrayList.contains(null)) {
                                 if (DEBUG) {
                                     Slog.d("ZenModeHelper", "contactId");
@@ -463,18 +522,25 @@ public final class ZenModeFiltering {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:54:0x00c0, code lost:
-    
-        if (r7 == false) goto L71;
-     */
+
+       if (r7 == false) goto L71;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean shouldIntercept(int r7, android.app.NotificationManager.Policy r8, com.android.server.notification.NotificationRecord r9) {
+    public final boolean shouldIntercept(
+            int r7,
+            android.app.NotificationManager.Policy r8,
+            com.android.server.notification.NotificationRecord r9) {
         /*
             Method dump skipped, instructions count: 561
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.ZenModeFiltering.shouldIntercept(int, android.app.NotificationManager$Policy, com.android.server.notification.NotificationRecord):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.ZenModeFiltering.shouldIntercept(int,"
+                    + " android.app.NotificationManager$Policy,"
+                    + " com.android.server.notification.NotificationRecord):boolean");
     }
 }

@@ -43,8 +43,7 @@ public interface IResourceManagerObserver extends IInterface {
         }
 
         @Override // com.samsung.android.media.IResourceManagerObserver
-        public void disconnect() throws RemoteException {
-        }
+        public void disconnect() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -52,7 +51,7 @@ public interface IResourceManagerObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IResourceManagerObserver {
+    public abstract static class Stub extends Binder implements IResourceManagerObserver {
         static final int TRANSACTION_disconnect = 5;
         static final int TRANSACTION_enableObserver = 1;
         static final int TRANSACTION_getCodecCapacity = 3;
@@ -102,7 +101,8 @@ public interface IResourceManagerObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IResourceManagerObserver.DESCRIPTOR);
             }
@@ -192,7 +192,9 @@ public interface IResourceManagerObserver extends IInterface {
                     _data.writeInt(type);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    GetResourceInfoReturn _result = (GetResourceInfoReturn) _reply.readTypedObject(GetResourceInfoReturn.CREATOR);
+                    GetResourceInfoReturn _result =
+                            (GetResourceInfoReturn)
+                                    _reply.readTypedObject(GetResourceInfoReturn.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -209,7 +211,9 @@ public interface IResourceManagerObserver extends IInterface {
                     _data.writeInt(param);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    GetCodecCapacityReturn _result = (GetCodecCapacityReturn) _reply.readTypedObject(GetCodecCapacityReturn.CREATOR);
+                    GetCodecCapacityReturn _result =
+                            (GetCodecCapacityReturn)
+                                    _reply.readTypedObject(GetCodecCapacityReturn.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

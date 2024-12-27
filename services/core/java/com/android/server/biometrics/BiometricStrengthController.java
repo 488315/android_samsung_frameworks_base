@@ -2,23 +2,29 @@ package com.android.server.biometrics;
 
 import android.provider.DeviceConfig;
 import android.util.Slog;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.asks.ASKSManagerService$$ExternalSyntheticOutline0;
+
 import java.util.HashMap;
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class BiometricStrengthController {
-    public final BiometricStrengthController$$ExternalSyntheticLambda0 mDeviceConfigListener = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.server.biometrics.BiometricStrengthController$$ExternalSyntheticLambda0
-        public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-            BiometricStrengthController biometricStrengthController = BiometricStrengthController.this;
-            biometricStrengthController.getClass();
-            if (properties.getKeyset().contains("biometric_strengths")) {
-                biometricStrengthController.updateStrengths();
-            }
-        }
-    };
+    public final BiometricStrengthController$$ExternalSyntheticLambda0 mDeviceConfigListener =
+            new DeviceConfig
+                    .OnPropertiesChangedListener() { // from class:
+                                                     // com.android.server.biometrics.BiometricStrengthController$$ExternalSyntheticLambda0
+                public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                    BiometricStrengthController biometricStrengthController =
+                            BiometricStrengthController.this;
+                    biometricStrengthController.getClass();
+                    if (properties.getKeyset().contains("biometric_strengths")) {
+                        biometricStrengthController.updateStrengths();
+                    }
+                }
+            };
     public final BiometricService mService;
 
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.biometrics.BiometricStrengthController$$ExternalSyntheticLambda0] */
@@ -37,7 +43,8 @@ public final class BiometricStrengthController {
                 StringBuilder sb = new StringBuilder("updateStrengths: revert sensorId=");
                 sb.append(biometricSensor.id);
                 sb.append(" to oemStrength=");
-                DeviceIdleController$$ExternalSyntheticOutline0.m(sb, biometricSensor.oemStrength, "BiometricStrengthController");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        sb, biometricSensor.oemStrength, "BiometricStrengthController");
                 biometricSensor.updateStrength(biometricSensor.oemStrength);
             }
             return;
@@ -50,7 +57,9 @@ public final class BiometricStrengthController {
             try {
                 for (String str : string.split(",")) {
                     String[] split = str.split(":");
-                    hashMap2.put(Integer.valueOf(Integer.parseInt(split[0])), Integer.valueOf(Integer.parseInt(split[1])));
+                    hashMap2.put(
+                            Integer.valueOf(Integer.parseInt(split[0])),
+                            Integer.valueOf(Integer.parseInt(split[1])));
                 }
                 hashMap = hashMap2;
             } catch (Exception unused) {
@@ -66,7 +75,12 @@ public final class BiometricStrengthController {
             int i = biometricSensor2.id;
             if (hashMap.containsKey(Integer.valueOf(i))) {
                 int intValue = ((Integer) hashMap.get(Integer.valueOf(i))).intValue();
-                ASKSManagerService$$ExternalSyntheticOutline0.m(i, intValue, "updateStrengths: update sensorId=", " to newStrength=", "BiometricStrengthController");
+                ASKSManagerService$$ExternalSyntheticOutline0.m(
+                        i,
+                        intValue,
+                        "updateStrengths: update sensorId=",
+                        " to newStrength=",
+                        "BiometricStrengthController");
                 biometricSensor2.updateStrength(intValue);
             }
         }

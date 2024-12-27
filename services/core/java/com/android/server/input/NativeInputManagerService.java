@@ -10,6 +10,7 @@ import android.view.InputChannel;
 import android.view.InputEvent;
 import android.view.PointerIcon;
 import android.view.VerifiedInputEvent;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,7 +25,8 @@ public interface NativeInputManagerService {
             this.mPtr = init(inputManagerService, messageQueue);
         }
 
-        private native long init(InputManagerService inputManagerService, MessageQueue messageQueue);
+        private native long init(
+                InputManagerService inputManagerService, MessageQueue messageQueue);
 
         @Override // com.android.server.input.NativeInputManagerService
         public native void addKeyRemapping(int i, int i2, int i3);
@@ -147,7 +149,8 @@ public interface NativeInputManagerService {
         public native boolean hasKeys(int i, int i2, int[] iArr, boolean[] zArr);
 
         @Override // com.android.server.input.NativeInputManagerService
-        public native int injectInputEvent(InputEvent inputEvent, boolean z, int i, int i2, int i3, int i4, int i5, int i6);
+        public native int injectInputEvent(
+                InputEvent inputEvent, boolean z, int i, int i2, int i3, int i4, int i5, int i6);
 
         @Override // com.android.server.input.NativeInputManagerService
         public native boolean isUidTouched(int i);
@@ -225,7 +228,8 @@ public interface NativeInputManagerService {
         public native void setFlowPointerDirection(int i);
 
         @Override // com.android.server.input.NativeInputManagerService
-        public native void setFocusedApplication(int i, InputApplicationHandle inputApplicationHandle);
+        public native void setFocusedApplication(
+                int i, InputApplicationHandle inputApplicationHandle);
 
         @Override // com.android.server.input.NativeInputManagerService
         public native void setFocusedDisplay(int i);
@@ -293,7 +297,8 @@ public interface NativeInputManagerService {
         public native void setPointerDisplayId(int i);
 
         @Override // com.android.server.input.NativeInputManagerService
-        public native boolean setPointerIcon(PointerIcon pointerIcon, int i, int i2, int i3, IBinder iBinder);
+        public native boolean setPointerIcon(
+                PointerIcon pointerIcon, int i, int i2, int i3, IBinder iBinder);
 
         @Override // com.android.server.input.NativeInputManagerService
         public native void setPointerIconVisibility(int i, boolean z);
@@ -387,7 +392,8 @@ public interface NativeInputManagerService {
         public native void vibrate(int i, long[] jArr, int[] iArr, int i2, int i3);
 
         @Override // com.android.server.input.NativeInputManagerService
-        public native void vibrateCombined(int i, long[] jArr, SparseArray sparseArray, int i2, int i3);
+        public native void vibrateCombined(
+                int i, long[] jArr, SparseArray sparseArray, int i2, int i3);
     }
 
     void addKeyRemapping(int i, int i2, int i3);
@@ -470,7 +476,8 @@ public interface NativeInputManagerService {
 
     boolean hasKeys(int i, int i2, int[] iArr, boolean[] zArr);
 
-    int injectInputEvent(InputEvent inputEvent, boolean z, int i, int i2, int i3, int i4, int i5, int i6);
+    int injectInputEvent(
+            InputEvent inputEvent, boolean z, int i, int i2, int i3, int i4, int i5, int i6);
 
     boolean isUidTouched(int i);
 

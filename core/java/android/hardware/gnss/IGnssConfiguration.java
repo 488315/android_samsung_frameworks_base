@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IGnssConfiguration extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$gnss$IGnssConfiguration".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$IGnssConfiguration".replace('$', '.');
     public static final int GLONASS_POS_PROTOCOL_LPP_UPLANE = 4;
     public static final int GLONASS_POS_PROTOCOL_RRC_CPLANE = 1;
     public static final int GLONASS_POS_PROTOCOL_RRLP_UPLANE = 2;
@@ -39,32 +40,25 @@ public interface IGnssConfiguration extends IInterface {
 
     public static class Default implements IGnssConfiguration {
         @Override // android.hardware.gnss.IGnssConfiguration
-        public void setSuplVersion(int version) throws RemoteException {
-        }
+        public void setSuplVersion(int version) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssConfiguration
-        public void setSuplMode(int mode) throws RemoteException {
-        }
+        public void setSuplMode(int mode) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssConfiguration
-        public void setLppProfile(int lppProfile) throws RemoteException {
-        }
+        public void setLppProfile(int lppProfile) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssConfiguration
-        public void setGlonassPositioningProtocol(int protocol) throws RemoteException {
-        }
+        public void setGlonassPositioningProtocol(int protocol) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssConfiguration
-        public void setEmergencySuplPdn(boolean enable) throws RemoteException {
-        }
+        public void setEmergencySuplPdn(boolean enable) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssConfiguration
-        public void setEsExtensionSec(int emergencyExtensionSeconds) throws RemoteException {
-        }
+        public void setEsExtensionSec(int emergencyExtensionSeconds) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssConfiguration
-        public void setBlocklist(BlocklistedSource[] blocklist) throws RemoteException {
-        }
+        public void setBlocklist(BlocklistedSource[] blocklist) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssConfiguration
         public int getInterfaceVersion() {
@@ -82,7 +76,7 @@ public interface IGnssConfiguration extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssConfiguration {
+    public abstract static class Stub extends Binder implements IGnssConfiguration {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_setBlocklist = 7;
@@ -145,7 +139,8 @@ public interface IGnssConfiguration extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -202,7 +197,8 @@ public interface IGnssConfiguration extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 7:
-                    BlocklistedSource[] _arg07 = (BlocklistedSource[]) data.createTypedArray(BlocklistedSource.CREATOR);
+                    BlocklistedSource[] _arg07 =
+                            (BlocklistedSource[]) data.createTypedArray(BlocklistedSource.CREATOR);
                     data.enforceNoDataAvail();
                     setBlocklist(_arg07);
                     reply.writeNoException();
@@ -293,7 +289,8 @@ public interface IGnssConfiguration extends IInterface {
                     _data.writeInt(protocol);
                     boolean _status = this.mRemote.transact(4, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method setGlonassPositioningProtocol is unimplemented.");
+                        throw new RemoteException(
+                                "Method setGlonassPositioningProtocol is unimplemented.");
                     }
                     _reply.readException();
                 } finally {

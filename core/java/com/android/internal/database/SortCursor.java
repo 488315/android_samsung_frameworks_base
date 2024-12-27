@@ -4,6 +4,7 @@ import android.database.AbstractCursor;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.util.Log;
+
 import java.lang.reflect.Array;
 
 /* loaded from: classes5.dex */
@@ -17,17 +18,18 @@ public class SortCursor extends AbstractCursor {
     private int[] mRowNumCache = new int[64];
     private int[] mCursorCache = new int[64];
     private int mLastCacheHit = -1;
-    private DataSetObserver mObserver = new DataSetObserver() { // from class: com.android.internal.database.SortCursor.1
-        @Override // android.database.DataSetObserver
-        public void onChanged() {
-            SortCursor.this.mPos = -1;
-        }
+    private DataSetObserver mObserver =
+            new DataSetObserver() { // from class: com.android.internal.database.SortCursor.1
+                @Override // android.database.DataSetObserver
+                public void onChanged() {
+                    SortCursor.this.mPos = -1;
+                }
 
-        @Override // android.database.DataSetObserver
-        public void onInvalidated() {
-            SortCursor.this.mPos = -1;
-        }
-    };
+                @Override // android.database.DataSetObserver
+                public void onInvalidated() {
+                    SortCursor.this.mPos = -1;
+                }
+            };
 
     public SortCursor(Cursor[] cursors, String sortcolumn) {
         this.mCursors = cursors;
@@ -45,7 +47,8 @@ public class SortCursor extends AbstractCursor {
         for (int j = 0; j < length; j++) {
             if (this.mCursors[j] != null && !this.mCursors[j].isAfterLast()) {
                 String current = this.mCursors[j].getString(this.mSortColumns[j]);
-                if (this.mCursor == null || (current != null && current.compareToIgnoreCase(smallest) < 0)) {
+                if (this.mCursor == null
+                        || (current != null && current.compareToIgnoreCase(smallest) < 0)) {
                     smallest = current;
                     this.mCursor = this.mCursors[j];
                 }
@@ -113,7 +116,8 @@ public class SortCursor extends AbstractCursor {
             for (int j = 0; j < length; j++) {
                 if (this.mCursors[j] != null && !this.mCursors[j].isAfterLast()) {
                     String current = this.mCursors[j].getString(this.mSortColumns[j]);
-                    if (smallestIdx < 0 || (current != null && current.compareToIgnoreCase(smallest) < 0)) {
+                    if (smallestIdx < 0
+                            || (current != null && current.compareToIgnoreCase(smallest) < 0)) {
                         smallest = current;
                         smallestIdx = j;
                     }
@@ -207,7 +211,8 @@ public class SortCursor extends AbstractCursor {
         }
     }
 
-    @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable, java.lang.AutoCloseable
+    @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable,
+              // java.lang.AutoCloseable
     public void close() {
         int length = this.mCursors.length;
         for (int i = 0; i < length; i++) {

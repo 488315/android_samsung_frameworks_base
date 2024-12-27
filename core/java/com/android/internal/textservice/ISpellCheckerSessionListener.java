@@ -10,18 +10,18 @@ import android.view.textservice.SuggestionsInfo;
 
 /* loaded from: classes5.dex */
 public interface ISpellCheckerSessionListener extends IInterface {
-    void onGetSentenceSuggestions(SentenceSuggestionsInfo[] sentenceSuggestionsInfoArr) throws RemoteException;
+    void onGetSentenceSuggestions(SentenceSuggestionsInfo[] sentenceSuggestionsInfoArr)
+            throws RemoteException;
 
     void onGetSuggestions(SuggestionsInfo[] suggestionsInfoArr) throws RemoteException;
 
     public static class Default implements ISpellCheckerSessionListener {
         @Override // com.android.internal.textservice.ISpellCheckerSessionListener
-        public void onGetSuggestions(SuggestionsInfo[] results) throws RemoteException {
-        }
+        public void onGetSuggestions(SuggestionsInfo[] results) throws RemoteException {}
 
         @Override // com.android.internal.textservice.ISpellCheckerSessionListener
-        public void onGetSentenceSuggestions(SentenceSuggestionsInfo[] result) throws RemoteException {
-        }
+        public void onGetSentenceSuggestions(SentenceSuggestionsInfo[] result)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,8 +29,9 @@ public interface ISpellCheckerSessionListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpellCheckerSessionListener {
-        public static final String DESCRIPTOR = "com.android.internal.textservice.ISpellCheckerSessionListener";
+    public abstract static class Stub extends Binder implements ISpellCheckerSessionListener {
+        public static final String DESCRIPTOR =
+                "com.android.internal.textservice.ISpellCheckerSessionListener";
         static final int TRANSACTION_onGetSentenceSuggestions = 2;
         static final int TRANSACTION_onGetSuggestions = 1;
 
@@ -71,7 +72,8 @@ public interface ISpellCheckerSessionListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -81,12 +83,15 @@ public interface ISpellCheckerSessionListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SuggestionsInfo[] _arg0 = (SuggestionsInfo[]) data.createTypedArray(SuggestionsInfo.CREATOR);
+                    SuggestionsInfo[] _arg0 =
+                            (SuggestionsInfo[]) data.createTypedArray(SuggestionsInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onGetSuggestions(_arg0);
                     return true;
                 case 2:
-                    SentenceSuggestionsInfo[] _arg02 = (SentenceSuggestionsInfo[]) data.createTypedArray(SentenceSuggestionsInfo.CREATOR);
+                    SentenceSuggestionsInfo[] _arg02 =
+                            (SentenceSuggestionsInfo[])
+                                    data.createTypedArray(SentenceSuggestionsInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onGetSentenceSuggestions(_arg02);
                     return true;
@@ -124,7 +129,8 @@ public interface ISpellCheckerSessionListener extends IInterface {
             }
 
             @Override // com.android.internal.textservice.ISpellCheckerSessionListener
-            public void onGetSentenceSuggestions(SentenceSuggestionsInfo[] result) throws RemoteException {
+            public void onGetSentenceSuggestions(SentenceSuggestionsInfo[] result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -19,8 +19,10 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+
 import com.android.internal.R;
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,19 +33,62 @@ import java.util.Set;
 
 /* loaded from: classes4.dex */
 public class SubscriptionInfo implements Parcelable {
-    public static final Parcelable.Creator<SubscriptionInfo> CREATOR = new Parcelable.Creator<SubscriptionInfo>() { // from class: android.telephony.SubscriptionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SubscriptionInfo createFromParcel(Parcel source) {
-            return new Builder().setId(source.readInt()).setIccId(source.readString()).setSimSlotIndex(source.readInt()).setDisplayName(TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source)).setCarrierName(TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source)).setDisplayNameSource(source.readInt()).setIconTint(source.readInt()).setNumber(source.readString()).setDataRoaming(source.readInt()).setMcc(source.readString()).setMnc(source.readString()).setCountryIso(source.readString()).setEmbedded(source.readBoolean()).setNativeAccessRules((UiccAccessRule[]) source.createTypedArray(UiccAccessRule.CREATOR)).setCardString(source.readString()).setCardId(source.readInt()).setPortIndex(source.readInt()).setOpportunistic(source.readBoolean()).setGroupUuid(source.readString8()).setGroupDisabled(source.readBoolean()).setCarrierId(source.readInt()).setProfileClass(source.readInt()).setType(source.readInt()).setEhplmns(source.createStringArray()).setHplmns(source.createStringArray()).setGroupOwner(source.readString()).setCarrierConfigAccessRules((UiccAccessRule[]) source.createTypedArray(UiccAccessRule.CREATOR)).setUiccApplicationsEnabled(source.readBoolean()).setUsageSetting(source.readInt()).setOnlyNonTerrestrialNetwork(source.readBoolean()).setServiceCapabilities(SubscriptionManager.getServiceCapabilitiesSet(source.readInt())).setTransferStatus(source.readInt()).setSatelliteESOSSupported(source.readBoolean()).build();
-        }
+    public static final Parcelable.Creator<SubscriptionInfo> CREATOR =
+            new Parcelable.Creator<
+                    SubscriptionInfo>() { // from class: android.telephony.SubscriptionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SubscriptionInfo createFromParcel(Parcel source) {
+                    return new Builder()
+                            .setId(source.readInt())
+                            .setIccId(source.readString())
+                            .setSimSlotIndex(source.readInt())
+                            .setDisplayName(
+                                    TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source))
+                            .setCarrierName(
+                                    TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source))
+                            .setDisplayNameSource(source.readInt())
+                            .setIconTint(source.readInt())
+                            .setNumber(source.readString())
+                            .setDataRoaming(source.readInt())
+                            .setMcc(source.readString())
+                            .setMnc(source.readString())
+                            .setCountryIso(source.readString())
+                            .setEmbedded(source.readBoolean())
+                            .setNativeAccessRules(
+                                    (UiccAccessRule[])
+                                            source.createTypedArray(UiccAccessRule.CREATOR))
+                            .setCardString(source.readString())
+                            .setCardId(source.readInt())
+                            .setPortIndex(source.readInt())
+                            .setOpportunistic(source.readBoolean())
+                            .setGroupUuid(source.readString8())
+                            .setGroupDisabled(source.readBoolean())
+                            .setCarrierId(source.readInt())
+                            .setProfileClass(source.readInt())
+                            .setType(source.readInt())
+                            .setEhplmns(source.createStringArray())
+                            .setHplmns(source.createStringArray())
+                            .setGroupOwner(source.readString())
+                            .setCarrierConfigAccessRules(
+                                    (UiccAccessRule[])
+                                            source.createTypedArray(UiccAccessRule.CREATOR))
+                            .setUiccApplicationsEnabled(source.readBoolean())
+                            .setUsageSetting(source.readInt())
+                            .setOnlyNonTerrestrialNetwork(source.readBoolean())
+                            .setServiceCapabilities(
+                                    SubscriptionManager.getServiceCapabilitiesSet(source.readInt()))
+                            .setTransferStatus(source.readInt())
+                            .setSatelliteESOSSupported(source.readBoolean())
+                            .build();
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SubscriptionInfo[] newArray(int size) {
-            return new SubscriptionInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SubscriptionInfo[] newArray(int size) {
+                    return new SubscriptionInfo[size];
+                }
+            };
     private static final int TEXT_SIZE = 16;
     private final boolean mAreUiccApplicationsEnabled;
     private final int mCardId;
@@ -81,27 +126,251 @@ public class SubscriptionInfo implements Parcelable {
     private final int mUsageSetting;
 
     @Deprecated
-    public SubscriptionInfo(int id, String iccId, int simSlotIndex, CharSequence displayName, CharSequence carrierName, int nameSource, int iconTint, String number, int roaming, Bitmap icon, String mcc, String mnc, String countryIso, boolean isEmbedded, UiccAccessRule[] nativeAccessRules, String cardString) {
-        this(id, iccId, simSlotIndex, displayName, carrierName, nameSource, iconTint, number, roaming, icon, mcc, mnc, countryIso, isEmbedded, nativeAccessRules, cardString, -1, false, null, false, -1, -1, 0, null, null, true);
+    public SubscriptionInfo(
+            int id,
+            String iccId,
+            int simSlotIndex,
+            CharSequence displayName,
+            CharSequence carrierName,
+            int nameSource,
+            int iconTint,
+            String number,
+            int roaming,
+            Bitmap icon,
+            String mcc,
+            String mnc,
+            String countryIso,
+            boolean isEmbedded,
+            UiccAccessRule[] nativeAccessRules,
+            String cardString) {
+        this(
+                id,
+                iccId,
+                simSlotIndex,
+                displayName,
+                carrierName,
+                nameSource,
+                iconTint,
+                number,
+                roaming,
+                icon,
+                mcc,
+                mnc,
+                countryIso,
+                isEmbedded,
+                nativeAccessRules,
+                cardString,
+                -1,
+                false,
+                null,
+                false,
+                -1,
+                -1,
+                0,
+                null,
+                null,
+                true);
     }
 
     @Deprecated
-    public SubscriptionInfo(int id, String iccId, int simSlotIndex, CharSequence displayName, CharSequence carrierName, int nameSource, int iconTint, String number, int roaming, Bitmap icon, String mcc, String mnc, String countryIso, boolean isEmbedded, UiccAccessRule[] nativeAccessRules, String cardString, boolean isOpportunistic, String groupUUID, int carrierId, int profileClass) {
-        this(id, iccId, simSlotIndex, displayName, carrierName, nameSource, iconTint, number, roaming, icon, mcc, mnc, countryIso, isEmbedded, nativeAccessRules, cardString, -1, isOpportunistic, groupUUID, false, carrierId, profileClass, 0, null, null, true);
+    public SubscriptionInfo(
+            int id,
+            String iccId,
+            int simSlotIndex,
+            CharSequence displayName,
+            CharSequence carrierName,
+            int nameSource,
+            int iconTint,
+            String number,
+            int roaming,
+            Bitmap icon,
+            String mcc,
+            String mnc,
+            String countryIso,
+            boolean isEmbedded,
+            UiccAccessRule[] nativeAccessRules,
+            String cardString,
+            boolean isOpportunistic,
+            String groupUUID,
+            int carrierId,
+            int profileClass) {
+        this(
+                id,
+                iccId,
+                simSlotIndex,
+                displayName,
+                carrierName,
+                nameSource,
+                iconTint,
+                number,
+                roaming,
+                icon,
+                mcc,
+                mnc,
+                countryIso,
+                isEmbedded,
+                nativeAccessRules,
+                cardString,
+                -1,
+                isOpportunistic,
+                groupUUID,
+                false,
+                carrierId,
+                profileClass,
+                0,
+                null,
+                null,
+                true);
     }
 
     @Deprecated
-    public SubscriptionInfo(int id, String iccId, int simSlotIndex, CharSequence displayName, CharSequence carrierName, int nameSource, int iconTint, String number, int roaming, Bitmap icon, String mcc, String mnc, String countryIso, boolean isEmbedded, UiccAccessRule[] nativeAccessRules, String cardString, int cardId, boolean isOpportunistic, String groupUUID, boolean isGroupDisabled, int carrierId, int profileClass, int subType, String groupOwner, UiccAccessRule[] carrierConfigAccessRules, boolean areUiccApplicationsEnabled) {
-        this(id, iccId, simSlotIndex, displayName, carrierName, nameSource, iconTint, number, roaming, icon, mcc, mnc, countryIso, isEmbedded, nativeAccessRules, cardString, cardId, isOpportunistic, groupUUID, isGroupDisabled, carrierId, profileClass, subType, groupOwner, carrierConfigAccessRules, areUiccApplicationsEnabled, 0);
+    public SubscriptionInfo(
+            int id,
+            String iccId,
+            int simSlotIndex,
+            CharSequence displayName,
+            CharSequence carrierName,
+            int nameSource,
+            int iconTint,
+            String number,
+            int roaming,
+            Bitmap icon,
+            String mcc,
+            String mnc,
+            String countryIso,
+            boolean isEmbedded,
+            UiccAccessRule[] nativeAccessRules,
+            String cardString,
+            int cardId,
+            boolean isOpportunistic,
+            String groupUUID,
+            boolean isGroupDisabled,
+            int carrierId,
+            int profileClass,
+            int subType,
+            String groupOwner,
+            UiccAccessRule[] carrierConfigAccessRules,
+            boolean areUiccApplicationsEnabled) {
+        this(
+                id,
+                iccId,
+                simSlotIndex,
+                displayName,
+                carrierName,
+                nameSource,
+                iconTint,
+                number,
+                roaming,
+                icon,
+                mcc,
+                mnc,
+                countryIso,
+                isEmbedded,
+                nativeAccessRules,
+                cardString,
+                cardId,
+                isOpportunistic,
+                groupUUID,
+                isGroupDisabled,
+                carrierId,
+                profileClass,
+                subType,
+                groupOwner,
+                carrierConfigAccessRules,
+                areUiccApplicationsEnabled,
+                0);
     }
 
     @Deprecated
-    public SubscriptionInfo(int id, String iccId, int simSlotIndex, CharSequence displayName, CharSequence carrierName, int displayNameSource, int iconTint, String number, int roaming, Bitmap icon, String mcc, String mnc, String countryIso, boolean isEmbedded, UiccAccessRule[] nativeAccessRules, String cardString, int cardId, boolean isOpportunistic, String groupUUID, boolean isGroupDisabled, int carrierId, int profileClass, int subType, String groupOwner, UiccAccessRule[] carrierConfigAccessRules, boolean areUiccApplicationsEnabled, int portIndex) {
-        this(id, iccId, simSlotIndex, displayName, carrierName, displayNameSource, iconTint, number, roaming, icon, mcc, mnc, countryIso, isEmbedded, nativeAccessRules, cardString, cardId, isOpportunistic, groupUUID, isGroupDisabled, carrierId, profileClass, subType, groupOwner, carrierConfigAccessRules, areUiccApplicationsEnabled, portIndex, 0);
+    public SubscriptionInfo(
+            int id,
+            String iccId,
+            int simSlotIndex,
+            CharSequence displayName,
+            CharSequence carrierName,
+            int displayNameSource,
+            int iconTint,
+            String number,
+            int roaming,
+            Bitmap icon,
+            String mcc,
+            String mnc,
+            String countryIso,
+            boolean isEmbedded,
+            UiccAccessRule[] nativeAccessRules,
+            String cardString,
+            int cardId,
+            boolean isOpportunistic,
+            String groupUUID,
+            boolean isGroupDisabled,
+            int carrierId,
+            int profileClass,
+            int subType,
+            String groupOwner,
+            UiccAccessRule[] carrierConfigAccessRules,
+            boolean areUiccApplicationsEnabled,
+            int portIndex) {
+        this(
+                id,
+                iccId,
+                simSlotIndex,
+                displayName,
+                carrierName,
+                displayNameSource,
+                iconTint,
+                number,
+                roaming,
+                icon,
+                mcc,
+                mnc,
+                countryIso,
+                isEmbedded,
+                nativeAccessRules,
+                cardString,
+                cardId,
+                isOpportunistic,
+                groupUUID,
+                isGroupDisabled,
+                carrierId,
+                profileClass,
+                subType,
+                groupOwner,
+                carrierConfigAccessRules,
+                areUiccApplicationsEnabled,
+                portIndex,
+                0);
     }
 
     @Deprecated
-    public SubscriptionInfo(int id, String iccId, int simSlotIndex, CharSequence displayName, CharSequence carrierName, int nameSource, int iconTint, String number, int roaming, Bitmap icon, String mcc, String mnc, String countryIso, boolean isEmbedded, UiccAccessRule[] nativeAccessRules, String cardString, int cardId, boolean isOpportunistic, String groupUuid, boolean isGroupDisabled, int carrierId, int profileClass, int subType, String groupOwner, UiccAccessRule[] carrierConfigAccessRules, boolean areUiccApplicationsEnabled, int portIndex, int usageSetting) {
+    public SubscriptionInfo(
+            int id,
+            String iccId,
+            int simSlotIndex,
+            CharSequence displayName,
+            CharSequence carrierName,
+            int nameSource,
+            int iconTint,
+            String number,
+            int roaming,
+            Bitmap icon,
+            String mcc,
+            String mnc,
+            String countryIso,
+            boolean isEmbedded,
+            UiccAccessRule[] nativeAccessRules,
+            String cardString,
+            int cardId,
+            boolean isOpportunistic,
+            String groupUuid,
+            boolean isGroupDisabled,
+            int carrierId,
+            int profileClass,
+            int subType,
+            String groupOwner,
+            UiccAccessRule[] carrierConfigAccessRules,
+            boolean areUiccApplicationsEnabled,
+            int portIndex,
+            int usageSetting) {
         this.mId = id;
         this.mIccId = iccId;
         this.mSimSlotIndex = simSlotIndex;
@@ -205,12 +474,15 @@ public class SubscriptionInfo implements Parcelable {
 
     public Bitmap createIconBitmap(Context context) {
         if (this.mIconBitmap == null) {
-            this.mIconBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_sim_card_multi_24px_clr);
+            this.mIconBitmap =
+                    BitmapFactory.decodeResource(
+                            context.getResources(), R.drawable.ic_sim_card_multi_24px_clr);
         }
         int width = this.mIconBitmap.getWidth();
         int height = this.mIconBitmap.getHeight();
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        Bitmap workingBitmap = Bitmap.createBitmap(metrics, width, height, this.mIconBitmap.getConfig());
+        Bitmap workingBitmap =
+                Bitmap.createBitmap(metrics, width, height, this.mIconBitmap.getConfig());
         Canvas canvas = new Canvas(workingBitmap);
         Paint paint = new Paint();
         paint.setColorFilter(new PorterDuffColorFilter(this.mIconTint, PorterDuff.Mode.SRC_ATOP));
@@ -291,11 +563,13 @@ public class SubscriptionInfo implements Parcelable {
     }
 
     public List<String> getEhplmns() {
-        return Collections.unmodifiableList(this.mEhplmns == null ? Collections.emptyList() : Arrays.asList(this.mEhplmns));
+        return Collections.unmodifiableList(
+                this.mEhplmns == null ? Collections.emptyList() : Arrays.asList(this.mEhplmns));
     }
 
     public List<String> getHplmns() {
-        return Collections.unmodifiableList(this.mHplmns == null ? Collections.emptyList() : Arrays.asList(this.mHplmns));
+        return Collections.unmodifiableList(
+                this.mHplmns == null ? Collections.emptyList() : Arrays.asList(this.mHplmns));
     }
 
     public String getGroupOwner() {
@@ -450,7 +724,9 @@ public class SubscriptionInfo implements Parcelable {
             return null;
         }
         if (id.length() > 9 && !TelephonyUtils.IS_DEBUGGABLE) {
-            String idToPrint = id.substring(0, 9) + com.android.telephony.Rlog.pii(false, (Object) id.substring(9));
+            String idToPrint =
+                    id.substring(0, 9)
+                            + com.android.telephony.Rlog.pii(false, (Object) id.substring(9));
             return idToPrint;
         }
         return id;
@@ -459,7 +735,74 @@ public class SubscriptionInfo implements Parcelable {
     public String toString() {
         String iccIdToPrint = getPrintableId(this.mIccId);
         String cardStringToPrint = getPrintableId(this.mCardString);
-        return "[SubscriptionInfo: id=" + this.mId + " iccId=" + iccIdToPrint + " simSlotIndex=" + this.mSimSlotIndex + " portIndex=" + this.mPortIndex + " isEmbedded=" + this.mIsEmbedded + " carrierId=" + this.mCarrierId + " displayName=" + ((Object) this.mDisplayName) + " carrierName=" + ((Object) this.mCarrierName) + " isOpportunistic=" + this.mIsOpportunistic + " groupUuid=" + this.mGroupUuid + " groupOwner=" + this.mGroupOwner + " isGroupDisabled=" + this.mIsGroupDisabled + " displayNameSource=" + SubscriptionManager.displayNameSourceToString(this.mDisplayNameSource) + " iconTint=" + this.mIconTint + " number=" + com.android.telephony.Rlog.pii(TelephonyUtils.IS_DEBUGGABLE, this.mNumber) + " dataRoaming=" + this.mDataRoaming + " mcc=" + this.mMcc + " mnc=" + this.mMnc + " ehplmns=" + Arrays.toString(this.mEhplmns) + " hplmns=" + Arrays.toString(this.mHplmns) + " cardString=" + cardStringToPrint + " cardId=" + this.mCardId + " nativeAccessRules=" + Arrays.toString(this.mNativeAccessRules) + " carrierConfigAccessRules=" + Arrays.toString(this.mCarrierConfigAccessRules) + " countryIso=" + this.mCountryIso + " profileClass=" + this.mProfileClass + " mType=" + SubscriptionManager.subscriptionTypeToString(this.mType) + " areUiccApplicationsEnabled=" + this.mAreUiccApplicationsEnabled + " usageSetting=" + SubscriptionManager.usageSettingToString(this.mUsageSetting) + " isOnlyNonTerrestrialNetwork=" + this.mIsOnlyNonTerrestrialNetwork + " serviceCapabilities=" + SubscriptionManager.getServiceCapabilitiesSet(this.mServiceCapabilities).toString() + " transferStatus=" + this.mTransferStatus + " isSatelliteESOSSupported=" + this.mIsSatelliteESOSSupported + NavigationBarInflaterView.SIZE_MOD_END;
+        return "[SubscriptionInfo: id="
+                + this.mId
+                + " iccId="
+                + iccIdToPrint
+                + " simSlotIndex="
+                + this.mSimSlotIndex
+                + " portIndex="
+                + this.mPortIndex
+                + " isEmbedded="
+                + this.mIsEmbedded
+                + " carrierId="
+                + this.mCarrierId
+                + " displayName="
+                + ((Object) this.mDisplayName)
+                + " carrierName="
+                + ((Object) this.mCarrierName)
+                + " isOpportunistic="
+                + this.mIsOpportunistic
+                + " groupUuid="
+                + this.mGroupUuid
+                + " groupOwner="
+                + this.mGroupOwner
+                + " isGroupDisabled="
+                + this.mIsGroupDisabled
+                + " displayNameSource="
+                + SubscriptionManager.displayNameSourceToString(this.mDisplayNameSource)
+                + " iconTint="
+                + this.mIconTint
+                + " number="
+                + com.android.telephony.Rlog.pii(TelephonyUtils.IS_DEBUGGABLE, this.mNumber)
+                + " dataRoaming="
+                + this.mDataRoaming
+                + " mcc="
+                + this.mMcc
+                + " mnc="
+                + this.mMnc
+                + " ehplmns="
+                + Arrays.toString(this.mEhplmns)
+                + " hplmns="
+                + Arrays.toString(this.mHplmns)
+                + " cardString="
+                + cardStringToPrint
+                + " cardId="
+                + this.mCardId
+                + " nativeAccessRules="
+                + Arrays.toString(this.mNativeAccessRules)
+                + " carrierConfigAccessRules="
+                + Arrays.toString(this.mCarrierConfigAccessRules)
+                + " countryIso="
+                + this.mCountryIso
+                + " profileClass="
+                + this.mProfileClass
+                + " mType="
+                + SubscriptionManager.subscriptionTypeToString(this.mType)
+                + " areUiccApplicationsEnabled="
+                + this.mAreUiccApplicationsEnabled
+                + " usageSetting="
+                + SubscriptionManager.usageSettingToString(this.mUsageSetting)
+                + " isOnlyNonTerrestrialNetwork="
+                + this.mIsOnlyNonTerrestrialNetwork
+                + " serviceCapabilities="
+                + SubscriptionManager.getServiceCapabilitiesSet(this.mServiceCapabilities)
+                        .toString()
+                + " transferStatus="
+                + this.mTransferStatus
+                + " isSatelliteESOSSupported="
+                + this.mIsSatelliteESOSSupported
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public boolean equals(Object o) {
@@ -470,15 +813,82 @@ public class SubscriptionInfo implements Parcelable {
             return false;
         }
         SubscriptionInfo that = (SubscriptionInfo) o;
-        if (this.mId == that.mId && this.mSimSlotIndex == that.mSimSlotIndex && this.mDisplayNameSource == that.mDisplayNameSource && this.mIconTint == that.mIconTint && this.mDataRoaming == that.mDataRoaming && this.mIsEmbedded == that.mIsEmbedded && this.mIsOpportunistic == that.mIsOpportunistic && this.mCarrierId == that.mCarrierId && this.mProfileClass == that.mProfileClass && this.mType == that.mType && this.mAreUiccApplicationsEnabled == that.mAreUiccApplicationsEnabled && this.mPortIndex == that.mPortIndex && this.mUsageSetting == that.mUsageSetting && this.mCardId == that.mCardId && this.mIsGroupDisabled == that.mIsGroupDisabled && this.mIccId.equals(that.mIccId) && this.mDisplayName.equals(that.mDisplayName) && this.mCarrierName.equals(that.mCarrierName) && this.mNumber.equals(that.mNumber) && Objects.equals(this.mMcc, that.mMcc) && Objects.equals(this.mMnc, that.mMnc) && Arrays.equals(this.mEhplmns, that.mEhplmns) && Arrays.equals(this.mHplmns, that.mHplmns) && this.mCardString.equals(that.mCardString) && Arrays.equals(this.mNativeAccessRules, that.mNativeAccessRules) && Arrays.equals(this.mCarrierConfigAccessRules, that.mCarrierConfigAccessRules) && Objects.equals(this.mGroupUuid, that.mGroupUuid) && this.mCountryIso.equals(that.mCountryIso) && this.mGroupOwner.equals(that.mGroupOwner) && this.mIsOnlyNonTerrestrialNetwork == that.mIsOnlyNonTerrestrialNetwork && this.mServiceCapabilities == that.mServiceCapabilities && this.mTransferStatus == that.mTransferStatus && this.mIsSatelliteESOSSupported == that.mIsSatelliteESOSSupported) {
+        if (this.mId == that.mId
+                && this.mSimSlotIndex == that.mSimSlotIndex
+                && this.mDisplayNameSource == that.mDisplayNameSource
+                && this.mIconTint == that.mIconTint
+                && this.mDataRoaming == that.mDataRoaming
+                && this.mIsEmbedded == that.mIsEmbedded
+                && this.mIsOpportunistic == that.mIsOpportunistic
+                && this.mCarrierId == that.mCarrierId
+                && this.mProfileClass == that.mProfileClass
+                && this.mType == that.mType
+                && this.mAreUiccApplicationsEnabled == that.mAreUiccApplicationsEnabled
+                && this.mPortIndex == that.mPortIndex
+                && this.mUsageSetting == that.mUsageSetting
+                && this.mCardId == that.mCardId
+                && this.mIsGroupDisabled == that.mIsGroupDisabled
+                && this.mIccId.equals(that.mIccId)
+                && this.mDisplayName.equals(that.mDisplayName)
+                && this.mCarrierName.equals(that.mCarrierName)
+                && this.mNumber.equals(that.mNumber)
+                && Objects.equals(this.mMcc, that.mMcc)
+                && Objects.equals(this.mMnc, that.mMnc)
+                && Arrays.equals(this.mEhplmns, that.mEhplmns)
+                && Arrays.equals(this.mHplmns, that.mHplmns)
+                && this.mCardString.equals(that.mCardString)
+                && Arrays.equals(this.mNativeAccessRules, that.mNativeAccessRules)
+                && Arrays.equals(this.mCarrierConfigAccessRules, that.mCarrierConfigAccessRules)
+                && Objects.equals(this.mGroupUuid, that.mGroupUuid)
+                && this.mCountryIso.equals(that.mCountryIso)
+                && this.mGroupOwner.equals(that.mGroupOwner)
+                && this.mIsOnlyNonTerrestrialNetwork == that.mIsOnlyNonTerrestrialNetwork
+                && this.mServiceCapabilities == that.mServiceCapabilities
+                && this.mTransferStatus == that.mTransferStatus
+                && this.mIsSatelliteESOSSupported == that.mIsSatelliteESOSSupported) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        int result = Objects.hash(Integer.valueOf(this.mId), this.mIccId, Integer.valueOf(this.mSimSlotIndex), this.mDisplayName, this.mCarrierName, Integer.valueOf(this.mDisplayNameSource), Integer.valueOf(this.mIconTint), this.mNumber, Integer.valueOf(this.mDataRoaming), this.mMcc, this.mMnc, Boolean.valueOf(this.mIsEmbedded), this.mCardString, Boolean.valueOf(this.mIsOpportunistic), this.mGroupUuid, this.mCountryIso, Integer.valueOf(this.mCarrierId), Integer.valueOf(this.mProfileClass), Integer.valueOf(this.mType), this.mGroupOwner, Boolean.valueOf(this.mAreUiccApplicationsEnabled), Integer.valueOf(this.mPortIndex), Integer.valueOf(this.mUsageSetting), Integer.valueOf(this.mCardId), Boolean.valueOf(this.mIsGroupDisabled), Boolean.valueOf(this.mIsOnlyNonTerrestrialNetwork), Integer.valueOf(this.mServiceCapabilities), Integer.valueOf(this.mTransferStatus), Boolean.valueOf(this.mIsSatelliteESOSSupported));
-        return (((((((result * 31) + Arrays.hashCode(this.mEhplmns)) * 31) + Arrays.hashCode(this.mHplmns)) * 31) + Arrays.hashCode(this.mNativeAccessRules)) * 31) + Arrays.hashCode(this.mCarrierConfigAccessRules);
+        int result =
+                Objects.hash(
+                        Integer.valueOf(this.mId),
+                        this.mIccId,
+                        Integer.valueOf(this.mSimSlotIndex),
+                        this.mDisplayName,
+                        this.mCarrierName,
+                        Integer.valueOf(this.mDisplayNameSource),
+                        Integer.valueOf(this.mIconTint),
+                        this.mNumber,
+                        Integer.valueOf(this.mDataRoaming),
+                        this.mMcc,
+                        this.mMnc,
+                        Boolean.valueOf(this.mIsEmbedded),
+                        this.mCardString,
+                        Boolean.valueOf(this.mIsOpportunistic),
+                        this.mGroupUuid,
+                        this.mCountryIso,
+                        Integer.valueOf(this.mCarrierId),
+                        Integer.valueOf(this.mProfileClass),
+                        Integer.valueOf(this.mType),
+                        this.mGroupOwner,
+                        Boolean.valueOf(this.mAreUiccApplicationsEnabled),
+                        Integer.valueOf(this.mPortIndex),
+                        Integer.valueOf(this.mUsageSetting),
+                        Integer.valueOf(this.mCardId),
+                        Boolean.valueOf(this.mIsGroupDisabled),
+                        Boolean.valueOf(this.mIsOnlyNonTerrestrialNetwork),
+                        Integer.valueOf(this.mServiceCapabilities),
+                        Integer.valueOf(this.mTransferStatus),
+                        Boolean.valueOf(this.mIsSatelliteESOSSupported));
+        return (((((((result * 31) + Arrays.hashCode(this.mEhplmns)) * 31)
+                                                + Arrays.hashCode(this.mHplmns))
+                                        * 31)
+                                + Arrays.hashCode(this.mNativeAccessRules))
+                        * 31)
+                + Arrays.hashCode(this.mCarrierConfigAccessRules);
     }
 
     public static class Builder {
@@ -726,7 +1136,8 @@ public class SubscriptionInfo implements Parcelable {
         }
 
         public Builder setGroupUuid(String groupUuid) {
-            this.mGroupUuid = TextUtils.isEmpty(groupUuid) ? null : ParcelUuid.fromString(groupUuid);
+            this.mGroupUuid =
+                    TextUtils.isEmpty(groupUuid) ? null : ParcelUuid.fromString(groupUuid);
             return this;
         }
 
@@ -786,7 +1197,8 @@ public class SubscriptionInfo implements Parcelable {
             while (it.hasNext()) {
                 int capability = it.next().intValue();
                 if (capability < 1 || capability > 3) {
-                    throw new IllegalArgumentException("Invalid service capability value: " + capability);
+                    throw new IllegalArgumentException(
+                            "Invalid service capability value: " + capability);
                 }
                 combinedCapabilities |= SubscriptionManager.serviceCapabilityToBitmask(capability);
             }

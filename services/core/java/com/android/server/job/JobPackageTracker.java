@@ -11,6 +11,7 @@ import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.jobs.RingBufferIndices;
 import com.android.server.job.controllers.JobStatus;
 
@@ -52,7 +53,8 @@ public final class JobPackageTracker {
             this.mStartClockTime = dataSet.mStartClockTime;
         }
 
-        public static boolean printDuration(int i, long j, long j2, IndentingPrintWriter indentingPrintWriter, String str) {
+        public static boolean printDuration(
+                int i, long j, long j2, IndentingPrintWriter indentingPrintWriter, String str) {
             int i2 = (int) (((j2 / j) * 100.0f) + 0.5f);
             if (i2 > 0) {
                 indentingPrintWriter.print(i2);
@@ -71,7 +73,8 @@ public final class JobPackageTracker {
             return true;
         }
 
-        public static void printPackageEntryState(int i, long j, long j2, ProtoOutputStream protoOutputStream) {
+        public static void printPackageEntryState(
+                int i, long j, long j2, ProtoOutputStream protoOutputStream) {
             long start = protoOutputStream.start(j);
             protoOutputStream.write(1112396529665L, j2);
             protoOutputStream.write(1120986464258L, i);
@@ -90,7 +93,9 @@ public final class JobPackageTracker {
                 int i2 = i;
                 while (size2 >= 0) {
                     PackageEntry packageEntry = (PackageEntry) arrayMap.valueAt(size2);
-                    PackageEntry orCreateEntry = dataSet.getOrCreateEntry(this.mEntries.keyAt(size), (String) arrayMap.keyAt(size2));
+                    PackageEntry orCreateEntry =
+                            dataSet.getOrCreateEntry(
+                                    this.mEntries.keyAt(size), (String) arrayMap.keyAt(size2));
                     long j2 = orCreateEntry.pastActiveTime + packageEntry.pastActiveTime;
                     orCreateEntry.pastActiveTime = j2;
                     orCreateEntry.activeCount += packageEntry.activeCount;
@@ -109,17 +114,23 @@ public final class JobPackageTracker {
                         z = 1;
                     }
                     if (packageEntry.activeTopNesting > 0) {
-                        orCreateEntry.pastActiveTopTime = (j - packageEntry.activeTopStartTime) + j3;
+                        orCreateEntry.pastActiveTopTime =
+                                (j - packageEntry.activeTopStartTime) + j3;
                         orCreateEntry.hadActiveTop = z;
                     }
                     if (packageEntry.pendingNesting > 0) {
                         orCreateEntry.pastPendingTime = (j - packageEntry.pendingStartTime) + j4;
                         orCreateEntry.hadPending = z;
                     }
-                    for (int size3 = packageEntry.stopReasons.size() - (z ? 1 : 0); size3 >= 0; size3--) {
+                    for (int size3 = packageEntry.stopReasons.size() - (z ? 1 : 0);
+                            size3 >= 0;
+                            size3--) {
                         int keyAt = packageEntry.stopReasons.keyAt(size3);
                         SparseIntArray sparseIntArray = orCreateEntry.stopReasons;
-                        sparseIntArray.put(keyAt, packageEntry.stopReasons.valueAt(size3) + sparseIntArray.get(keyAt, 0));
+                        sparseIntArray.put(
+                                keyAt,
+                                packageEntry.stopReasons.valueAt(size3)
+                                        + sparseIntArray.get(keyAt, 0));
                     }
                     size2--;
                     arrayMap = arrayMap2;
@@ -138,13 +149,15 @@ public final class JobPackageTracker {
             }
         }
 
-        public final void dump(int i, long j, long j2, IndentingPrintWriter indentingPrintWriter, String str) {
+        public final void dump(
+                int i, long j, long j2, IndentingPrintWriter indentingPrintWriter, String str) {
             DataSet dataSet = this;
             int i2 = i;
             long totalTime = dataSet.getTotalTime(j);
             indentingPrintWriter.print(str);
             indentingPrintWriter.print(" at ");
-            indentingPrintWriter.print(DateFormat.format("yyyy-MM-dd-HH-mm-ss", dataSet.mStartClockTime).toString());
+            indentingPrintWriter.print(
+                    DateFormat.format("yyyy-MM-dd-HH-mm-ss", dataSet.mStartClockTime).toString());
             indentingPrintWriter.print(" (");
             TimeUtils.formatDuration(dataSet.mStartElapsedTime, j2, indentingPrintWriter);
             indentingPrintWriter.print(") over ");
@@ -177,14 +190,31 @@ public final class JobPackageTracker {
                         int i6 = size2;
                         int i7 = keyAt;
                         int i8 = i3;
-                        if (printDuration(packageEntry.pendingCount, totalTime, packageEntry.getPendingTime(j), indentingPrintWriter, "pending")) {
+                        if (printDuration(
+                                packageEntry.pendingCount,
+                                totalTime,
+                                packageEntry.getPendingTime(j),
+                                indentingPrintWriter,
+                                "pending")) {
                             indentingPrintWriter.print(" ");
                         }
-                        if (printDuration(packageEntry.activeCount, totalTime, packageEntry.getActiveTime(j), indentingPrintWriter, "active")) {
+                        if (printDuration(
+                                packageEntry.activeCount,
+                                totalTime,
+                                packageEntry.getActiveTime(j),
+                                indentingPrintWriter,
+                                "active")) {
                             indentingPrintWriter.print(" ");
                         }
                         long j3 = packageEntry.pastActiveTopTime;
-                        printDuration(packageEntry.activeTopCount, totalTime, packageEntry.activeTopNesting > 0 ? (j - packageEntry.activeTopStartTime) + j3 : j3, indentingPrintWriter, "active-top");
+                        printDuration(
+                                packageEntry.activeTopCount,
+                                totalTime,
+                                packageEntry.activeTopNesting > 0
+                                        ? (j - packageEntry.activeTopStartTime) + j3
+                                        : j3,
+                                indentingPrintWriter,
+                                "active-top");
                         if (packageEntry.pendingNesting > 0 || packageEntry.hadPending) {
                             indentingPrintWriter.print(" (pending)");
                         }
@@ -202,7 +232,9 @@ public final class JobPackageTracker {
                                 }
                                 indentingPrintWriter.print(packageEntry.stopReasons.valueAt(i9));
                                 indentingPrintWriter.print("x ");
-                                indentingPrintWriter.print(JobParameters.getInternalReasonCodeDescription(packageEntry.stopReasons.keyAt(i9)));
+                                indentingPrintWriter.print(
+                                        JobParameters.getInternalReasonCodeDescription(
+                                                packageEntry.stopReasons.keyAt(i9)));
                             }
                             indentingPrintWriter.println();
                         }
@@ -221,7 +253,8 @@ public final class JobPackageTracker {
             indentingPrintWriter.decreaseIndent();
         }
 
-        public final void dump(ProtoOutputStream protoOutputStream, long j, long j2, long j3, int i) {
+        public final void dump(
+                ProtoOutputStream protoOutputStream, long j, long j2, long j3, int i) {
             int i2 = i;
             long start = protoOutputStream.start(j);
             long totalTime = getTotalTime(j2);
@@ -248,21 +281,41 @@ public final class JobPackageTracker {
                         ArrayMap arrayMap2 = arrayMap;
                         int i8 = size2;
                         int i9 = keyAt;
-                        printPackageEntryState(packageEntry.pendingCount, 1146756268035L, packageEntry.getPendingTime(j2), protoOutputStream);
-                        printPackageEntryState(packageEntry.activeCount, 1146756268036L, packageEntry.getActiveTime(j2), protoOutputStream);
+                        printPackageEntryState(
+                                packageEntry.pendingCount,
+                                1146756268035L,
+                                packageEntry.getPendingTime(j2),
+                                protoOutputStream);
+                        printPackageEntryState(
+                                packageEntry.activeCount,
+                                1146756268036L,
+                                packageEntry.getActiveTime(j2),
+                                protoOutputStream);
                         long j5 = packageEntry.pastActiveTopTime;
-                        printPackageEntryState(packageEntry.activeTopCount, 1146756268037L, packageEntry.activeTopNesting > 0 ? (j2 - packageEntry.activeTopStartTime) + j5 : j5, protoOutputStream);
+                        printPackageEntryState(
+                                packageEntry.activeTopCount,
+                                1146756268037L,
+                                packageEntry.activeTopNesting > 0
+                                        ? (j2 - packageEntry.activeTopStartTime) + j5
+                                        : j5,
+                                protoOutputStream);
                         boolean z = true;
-                        protoOutputStream.write(1133871366150L, packageEntry.pendingNesting > 0 || packageEntry.hadPending);
-                        protoOutputStream.write(1133871366151L, packageEntry.activeNesting > 0 || packageEntry.hadActive);
+                        protoOutputStream.write(
+                                1133871366150L,
+                                packageEntry.pendingNesting > 0 || packageEntry.hadPending);
+                        protoOutputStream.write(
+                                1133871366151L,
+                                packageEntry.activeNesting > 0 || packageEntry.hadActive);
                         if (packageEntry.activeTopNesting <= 0 && !packageEntry.hadActiveTop) {
                             z = false;
                         }
                         protoOutputStream.write(1133871366152L, z);
                         for (int i10 = 0; i10 < packageEntry.stopReasons.size(); i10++) {
                             long start3 = protoOutputStream.start(2246267895817L);
-                            protoOutputStream.write(1159641169921L, packageEntry.stopReasons.keyAt(i10));
-                            protoOutputStream.write(1120986464258L, packageEntry.stopReasons.valueAt(i10));
+                            protoOutputStream.write(
+                                    1159641169921L, packageEntry.stopReasons.keyAt(i10));
+                            protoOutputStream.write(
+                                    1120986464258L, packageEntry.stopReasons.valueAt(i10));
                             protoOutputStream.end(start3);
                         }
                         protoOutputStream.end(start2);
@@ -430,14 +483,17 @@ public final class JobPackageTracker {
             int i4 = this.mEventUids[indexOf];
             if (i == -1 || i == UserHandle.getAppId(i4)) {
                 int[] iArr = this.mEventCmds;
-                int i5 = iArr[indexOf] & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT;
+                int i5 =
+                        iArr[indexOf]
+                                & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT;
                 if (i5 != 0) {
                     long start2 = protoOutputStream.start(2246267895809L);
                     ringBufferIndices = ringBufferIndices2;
                     i2 = size;
                     protoOutputStream.write(1159641169921L, i5);
                     j = elapsedRealtime;
-                    protoOutputStream.write(1112396529666L, elapsedRealtime - this.mEventTimes[indexOf]);
+                    protoOutputStream.write(
+                            1112396529666L, elapsedRealtime - this.mEventTimes[indexOf]);
                     protoOutputStream.write(1120986464259L, i4);
                     protoOutputStream.write(1120986464260L, this.mEventJobIds[indexOf]);
                     protoOutputStream.write(1138166333445L, this.mEventTags[indexOf]);
@@ -478,10 +534,18 @@ public final class JobPackageTracker {
             int i3 = this.mEventUids[indexOf];
             if (i == -1 || i == UserHandle.getAppId(i3)) {
                 int[] iArr = this.mEventCmds;
-                int i4 = iArr[indexOf] & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT;
+                int i4 =
+                        iArr[indexOf]
+                                & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT;
                 if (i4 != 0) {
-                    String str = i4 != 1 ? i4 != 2 ? i4 != 3 ? i4 != 4 ? "     ??" : " STOP-P" : "START-P" : "   STOP" : "  START";
-                    TimeUtils.formatDuration(this.mEventTimes[indexOf] - elapsedRealtime, indentingPrintWriter, 19);
+                    String str =
+                            i4 != 1
+                                    ? i4 != 2
+                                            ? i4 != 3 ? i4 != 4 ? "     ??" : " STOP-P" : "START-P"
+                                            : "   STOP"
+                                    : "  START";
+                    TimeUtils.formatDuration(
+                            this.mEventTimes[indexOf] - elapsedRealtime, indentingPrintWriter, 19);
                     indentingPrintWriter.print(" ");
                     indentingPrintWriter.print(str);
                     indentingPrintWriter.print(": #");
@@ -496,7 +560,9 @@ public final class JobPackageTracker {
                         if (str2 != null) {
                             indentingPrintWriter.print(str2);
                         } else {
-                            indentingPrintWriter.print(JobParameters.getInternalReasonCodeDescription((iArr[indexOf] & 65280) >> 8));
+                            indentingPrintWriter.print(
+                                    JobParameters.getInternalReasonCodeDescription(
+                                            (iArr[indexOf] & 65280) >> 8));
                         }
                     }
                     indentingPrintWriter.println();
@@ -530,15 +596,23 @@ public final class JobPackageTracker {
             }
             orCreateEntry2.activeNesting = i4 + 1;
         }
-        addEvent(jobStatus.job.isPeriodic() ? 3 : 1, jobStatus.sourceUid, jobStatus.job.getId(), jobStatus.batteryName, null, 0);
+        addEvent(
+                jobStatus.job.isPeriodic() ? 3 : 1,
+                jobStatus.sourceUid,
+                jobStatus.job.getId(),
+                jobStatus.batteryName,
+                null,
+                0);
     }
 
     public final void noteNonpending(JobStatus jobStatus) {
         long millis = JobSchedulerService.sUptimeMillisClock.millis();
-        PackageEntry orCreateEntry = this.mCurDataSet.getOrCreateEntry(jobStatus.sourceUid, jobStatus.sourcePackageName);
+        PackageEntry orCreateEntry =
+                this.mCurDataSet.getOrCreateEntry(jobStatus.sourceUid, jobStatus.sourcePackageName);
         int i = orCreateEntry.pendingNesting;
         if (i == 1) {
-            orCreateEntry.pastPendingTime = (millis - orCreateEntry.pendingStartTime) + orCreateEntry.pastPendingTime;
+            orCreateEntry.pastPendingTime =
+                    (millis - orCreateEntry.pendingStartTime) + orCreateEntry.pastPendingTime;
         }
         orCreateEntry.pendingNesting = i - 1;
         rebatchIfNeeded(millis);
@@ -548,7 +622,8 @@ public final class JobPackageTracker {
         long millis = JobSchedulerService.sUptimeMillisClock.millis();
         jobStatus.madePending = millis;
         rebatchIfNeeded(millis);
-        PackageEntry orCreateEntry = this.mCurDataSet.getOrCreateEntry(jobStatus.sourceUid, jobStatus.sourcePackageName);
+        PackageEntry orCreateEntry =
+                this.mCurDataSet.getOrCreateEntry(jobStatus.sourceUid, jobStatus.sourcePackageName);
         int i = orCreateEntry.pendingNesting;
         if (i == 0) {
             orCreateEntry.pendingStartTime = millis;
@@ -568,8 +643,13 @@ public final class JobPackageTracker {
                 ArrayMap arrayMap = (ArrayMap) dataSet.mEntries.valueAt(size);
                 for (int size2 = arrayMap.size() - 1; size2 >= 0; size2--) {
                     PackageEntry packageEntry = (PackageEntry) arrayMap.valueAt(size2);
-                    if (packageEntry.activeNesting > 0 || packageEntry.activeTopNesting > 0 || packageEntry.pendingNesting > 0) {
-                        PackageEntry orCreateEntry = dataSet2.getOrCreateEntry(dataSet.mEntries.keyAt(size), (String) arrayMap.keyAt(size2));
+                    if (packageEntry.activeNesting > 0
+                            || packageEntry.activeTopNesting > 0
+                            || packageEntry.pendingNesting > 0) {
+                        PackageEntry orCreateEntry =
+                                dataSet2.getOrCreateEntry(
+                                        dataSet.mEntries.keyAt(size),
+                                        (String) arrayMap.keyAt(size2));
                         orCreateEntry.activeStartTime = j;
                         orCreateEntry.activeNesting = packageEntry.activeNesting;
                         orCreateEntry.activeTopStartTime = j;
@@ -577,15 +657,21 @@ public final class JobPackageTracker {
                         orCreateEntry.pendingStartTime = j;
                         orCreateEntry.pendingNesting = packageEntry.pendingNesting;
                         if (packageEntry.activeNesting > 0) {
-                            packageEntry.pastActiveTime = (j - packageEntry.activeStartTime) + packageEntry.pastActiveTime;
+                            packageEntry.pastActiveTime =
+                                    (j - packageEntry.activeStartTime)
+                                            + packageEntry.pastActiveTime;
                             packageEntry.activeNesting = 0;
                         }
                         if (packageEntry.activeTopNesting > 0) {
-                            packageEntry.pastActiveTopTime = (j - packageEntry.activeTopStartTime) + packageEntry.pastActiveTopTime;
+                            packageEntry.pastActiveTopTime =
+                                    (j - packageEntry.activeTopStartTime)
+                                            + packageEntry.pastActiveTopTime;
                             packageEntry.activeTopNesting = 0;
                         }
                         if (packageEntry.pendingNesting > 0) {
-                            packageEntry.pastPendingTime = (j - packageEntry.pendingStartTime) + packageEntry.pastPendingTime;
+                            packageEntry.pastPendingTime =
+                                    (j - packageEntry.pendingStartTime)
+                                            + packageEntry.pastPendingTime;
                             packageEntry.pendingNesting = 0;
                         }
                     }

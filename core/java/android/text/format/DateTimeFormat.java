@@ -17,17 +17,18 @@ class DateTimeFormat {
         }
     }
 
-    private DateTimeFormat() {
-    }
+    private DateTimeFormat() {}
 
-    public static String format(ULocale icuLocale, Calendar time, int flags, DisplayContext displayContext) {
+    public static String format(
+            ULocale icuLocale, Calendar time, int flags, DisplayContext displayContext) {
         String format;
         String skeleton = DateUtilsBridge.toSkeleton(time, flags);
         String key = skeleton + "\t" + icuLocale + "\t" + time.getTimeZone();
         synchronized (CACHED_FORMATTERS) {
             android.icu.text.DateFormat formatter = CACHED_FORMATTERS.get(key);
             if (formatter == null) {
-                DateTimePatternGenerator generator = DateTimePatternGenerator.getInstance(icuLocale);
+                DateTimePatternGenerator generator =
+                        DateTimePatternGenerator.getInstance(icuLocale);
                 formatter = new SimpleDateFormat(generator.getBestPattern(skeleton), icuLocale);
                 CACHED_FORMATTERS.put(key, formatter);
             }

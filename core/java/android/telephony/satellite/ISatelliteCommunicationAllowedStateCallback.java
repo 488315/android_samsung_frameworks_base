@@ -8,14 +8,15 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface ISatelliteCommunicationAllowedStateCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.satellite.ISatelliteCommunicationAllowedStateCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.satellite.ISatelliteCommunicationAllowedStateCallback";
 
     void onSatelliteCommunicationAllowedStateChanged(boolean z) throws RemoteException;
 
     public static class Default implements ISatelliteCommunicationAllowedStateCallback {
         @Override // android.telephony.satellite.ISatelliteCommunicationAllowedStateCallback
-        public void onSatelliteCommunicationAllowedStateChanged(boolean isAllowed) throws RemoteException {
-        }
+        public void onSatelliteCommunicationAllowedStateChanged(boolean isAllowed)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,8 @@ public interface ISatelliteCommunicationAllowedStateCallback extends IInterface 
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatelliteCommunicationAllowedStateCallback {
+    public abstract static class Stub extends Binder
+            implements ISatelliteCommunicationAllowedStateCallback {
         static final int TRANSACTION_onSatelliteCommunicationAllowedStateChanged = 1;
 
         public Stub() {
@@ -34,7 +36,8 @@ public interface ISatelliteCommunicationAllowedStateCallback extends IInterface 
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(ISatelliteCommunicationAllowedStateCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(ISatelliteCommunicationAllowedStateCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof ISatelliteCommunicationAllowedStateCallback)) {
                 return (ISatelliteCommunicationAllowedStateCallback) iin;
             }
@@ -61,7 +64,8 @@ public interface ISatelliteCommunicationAllowedStateCallback extends IInterface 
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISatelliteCommunicationAllowedStateCallback.DESCRIPTOR);
             }
@@ -97,10 +101,12 @@ public interface ISatelliteCommunicationAllowedStateCallback extends IInterface 
             }
 
             @Override // android.telephony.satellite.ISatelliteCommunicationAllowedStateCallback
-            public void onSatelliteCommunicationAllowedStateChanged(boolean isAllowed) throws RemoteException {
+            public void onSatelliteCommunicationAllowedStateChanged(boolean isAllowed)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(ISatelliteCommunicationAllowedStateCallback.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            ISatelliteCommunicationAllowedStateCallback.DESCRIPTOR);
                     _data.writeBoolean(isAllowed);
                     this.mRemote.transact(1, _data, null, 1);
                 } finally {

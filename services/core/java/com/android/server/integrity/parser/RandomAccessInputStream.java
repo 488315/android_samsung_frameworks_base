@@ -8,7 +8,8 @@ public final class RandomAccessInputStream extends InputStream {
     public int mPosition = 0;
     public final RandomAccessObject$RandomAccessFileObject mRandomAccessObject;
 
-    public RandomAccessInputStream(RandomAccessObject$RandomAccessFileObject randomAccessObject$RandomAccessFileObject) {
+    public RandomAccessInputStream(
+            RandomAccessObject$RandomAccessFileObject randomAccessObject$RandomAccessFileObject) {
         this.mRandomAccessObject = randomAccessObject$RandomAccessFileObject;
     }
 
@@ -45,7 +46,8 @@ public final class RandomAccessInputStream extends InputStream {
         if (available <= 0) {
             return -1;
         }
-        int read = this.mRandomAccessObject.mRandomAccessFile.read(bArr, i, Math.min(i2, available));
+        int read =
+                this.mRandomAccessObject.mRandomAccessFile.read(bArr, i, Math.min(i2, available));
         this.mPosition += read;
         return read;
     }

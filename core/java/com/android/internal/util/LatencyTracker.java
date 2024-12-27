@@ -12,8 +12,9 @@ import android.text.TextUtils;
 import android.util.EventLog;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.os.BackgroundThread;
-import com.android.internal.util.LatencyTracker;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -57,27 +58,34 @@ public class LatencyTracker {
     private static final String SETTINGS_SAMPLING_INTERVAL_KEY = "sampling_interval";
     private static final String TAG = "LatencyTracker";
     private static final boolean DEFAULT_ENABLED = Build.IS_DEBUGGABLE;
-    private static final int[] ACTIONS_ALL = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
-    public static final int[] STATSD_ACTION = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 27, 28, 29, 30, 31};
+    private static final int[] ACTIONS_ALL = {
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+        25, 26, 27
+    };
+    public static final int[] STATSD_ACTION = {
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 27, 28,
+        29, 30, 31
+    };
     private final Object mLock = new Object();
     private final SparseArray<Session> mSessions = new SparseArray<>();
     private final SparseArray<ActionProperties> mActionPropertiesMap = new SparseArray<>();
-    private final DeviceConfig.OnPropertiesChangedListener mOnPropertiesChangedListener = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.internal.util.LatencyTracker$$ExternalSyntheticLambda2
-        public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-            LatencyTracker.this.updateProperties(properties);
-        }
-    };
+    private final DeviceConfig.OnPropertiesChangedListener mOnPropertiesChangedListener =
+            new DeviceConfig
+                    .OnPropertiesChangedListener() { // from class:
+                                                     // com.android.internal.util.LatencyTracker$$ExternalSyntheticLambda2
+                public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                    LatencyTracker.this.updateProperties(properties);
+                }
+            };
     private boolean mEnabled = DEFAULT_ENABLED;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Action {
-    }
+    public @interface Action {}
 
     private static final class SLatencyTrackerHolder {
         private static final LatencyTracker sLatencyTracker = new LatencyTracker();
 
-        private SLatencyTrackerHolder() {
-        }
+        private SLatencyTrackerHolder() {}
 
         static {
             sLatencyTracker.startListeningForLatencyTrackerConfigChanges();
@@ -95,7 +103,11 @@ public class LatencyTracker {
             boolean wasEnabled = this.mEnabled;
             this.mEnabled = properties.getBoolean("enabled", DEFAULT_ENABLED);
             if (wasEnabled != this.mEnabled) {
-                Log.d(TAG, "Latency tracker " + (this.mEnabled ? "enabled" : "disabled") + MediaMetrics.SEPARATOR);
+                Log.d(
+                        TAG,
+                        "Latency tracker "
+                                + (this.mEnabled ? "enabled" : "disabled")
+                                + MediaMetrics.SEPARATOR);
             }
             int[] iArr = ACTIONS_ALL;
             int length = iArr.length;
@@ -103,8 +115,18 @@ public class LatencyTracker {
             while (i < length) {
                 int action = iArr[i];
                 String actionName = getNameOfAction(STATSD_ACTION[action]).toLowerCase(Locale.ROOT);
-                int legacyActionTraceThreshold = properties.getInt(actionName.toUpperCase(Locale.ROOT) + "", -1);
-                this.mActionPropertiesMap.put(action, new ActionProperties(action, properties.getBoolean(actionName + "_enable", this.mEnabled), properties.getInt(actionName + "_sample_interval", samplingInterval), properties.getInt(actionName + "_trace_threshold", legacyActionTraceThreshold)));
+                int legacyActionTraceThreshold =
+                        properties.getInt(actionName.toUpperCase(Locale.ROOT) + "", -1);
+                this.mActionPropertiesMap.put(
+                        action,
+                        new ActionProperties(
+                                action,
+                                properties.getBoolean(actionName + "_enable", this.mEnabled),
+                                properties.getInt(
+                                        actionName + "_sample_interval", samplingInterval),
+                                properties.getInt(
+                                        actionName + "_trace_threshold",
+                                        legacyActionTraceThreshold)));
                 i++;
                 samplingInterval = samplingInterval;
             }
@@ -114,24 +136,41 @@ public class LatencyTracker {
 
     public void startListeningForLatencyTrackerConfigChanges() {
         final Context context = ActivityThread.currentApplication();
-        if (context == null || context.checkCallingOrSelfPermission(Manifest.permission.READ_DEVICE_CONFIG) != 0) {
+        if (context == null
+                || context.checkCallingOrSelfPermission(Manifest.permission.READ_DEVICE_CONFIG)
+                        != 0) {
             return;
         }
-        BackgroundThread.getHandler().post(new Runnable() { // from class: com.android.internal.util.LatencyTracker$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                LatencyTracker.this.lambda$startListeningForLatencyTrackerConfigChanges$0(context);
-            }
-        });
+        BackgroundThread.getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.internal.util.LatencyTracker$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                LatencyTracker.this
+                                        .lambda$startListeningForLatencyTrackerConfigChanges$0(
+                                                context);
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$startListeningForLatencyTrackerConfigChanges$0(Context context) {
+    public /* synthetic */ void lambda$startListeningForLatencyTrackerConfigChanges$0(
+            Context context) {
         try {
             updateProperties(DeviceConfig.getProperties("latency_tracker", new String[0]));
-            DeviceConfig.addOnPropertiesChangedListener("latency_tracker", BackgroundThread.getExecutor(), this.mOnPropertiesChangedListener);
+            DeviceConfig.addOnPropertiesChangedListener(
+                    "latency_tracker",
+                    BackgroundThread.getExecutor(),
+                    this.mOnPropertiesChangedListener);
         } catch (SecurityException e) {
-            Log.d(TAG, "Can't get properties: READ_DEVICE_CONFIG granted=" + context.checkCallingOrSelfPermission(Manifest.permission.READ_DEVICE_CONFIG) + ", package=" + context.getPackageName());
+            Log.d(
+                    TAG,
+                    "Can't get properties: READ_DEVICE_CONFIG granted="
+                            + context.checkCallingOrSelfPermission(
+                                    Manifest.permission.READ_DEVICE_CONFIG)
+                            + ", package="
+                            + context.getPackageName());
         }
     }
 
@@ -258,12 +297,14 @@ public class LatencyTracker {
                     return;
                 }
                 Session session = new Session(action, tag);
-                session.begin(new Runnable() { // from class: com.android.internal.util.LatencyTracker$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        LatencyTracker.this.lambda$onActionStart$1(action);
-                    }
-                });
+                session.begin(
+                        new Runnable() { // from class:
+                                         // com.android.internal.util.LatencyTracker$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                LatencyTracker.this.lambda$onActionStart$1(action);
+                            }
+                        });
                 this.mSessions.put(action, session);
             }
         }
@@ -311,16 +352,20 @@ public class LatencyTracker {
                 if (actionProperties == null) {
                     return;
                 }
-                int nextRandNum = ThreadLocalRandom.current().nextInt(actionProperties.getSamplingInterval());
+                int nextRandNum =
+                        ThreadLocalRandom.current().nextInt(actionProperties.getSamplingInterval());
                 boolean shouldSample = nextRandNum == 0;
                 int traceThreshold = actionProperties.getTraceThreshold();
-                boolean shouldTriggerPerfettoTrace = traceThreshold > 0 && duration >= traceThreshold;
+                boolean shouldTriggerPerfettoTrace =
+                        traceThreshold > 0 && duration >= traceThreshold;
                 EventLog.writeEvent(36070, Integer.valueOf(action), Integer.valueOf(duration));
                 if (shouldTriggerPerfettoTrace) {
                     onTriggerPerfetto(getTraceTriggerNameForAction(action));
                 }
                 if (shouldSample) {
-                    onLogToFrameworkStats(new FrameworkStatsLogEvent(action, 306, STATSD_ACTION[action], duration));
+                    onLogToFrameworkStats(
+                            new FrameworkStatsLogEvent(
+                                    action, 306, STATSD_ACTION[action], duration));
                 }
             }
         }
@@ -341,7 +386,10 @@ public class LatencyTracker {
             if (TextUtils.isEmpty(this.mTag)) {
                 str = LatencyTracker.getNameOfAction(LatencyTracker.STATSD_ACTION[this.mAction]);
             } else {
-                str = LatencyTracker.getNameOfAction(LatencyTracker.STATSD_ACTION[this.mAction]) + "::" + this.mTag;
+                str =
+                        LatencyTracker.getNameOfAction(LatencyTracker.STATSD_ACTION[this.mAction])
+                                + "::"
+                                + this.mTag;
             }
             this.mName = str;
         }
@@ -357,13 +405,16 @@ public class LatencyTracker {
         void begin(final Runnable timeoutAction) {
             this.mStartRtc = SystemClock.elapsedRealtime();
             Trace.asyncTraceForTrackBegin(4096L, traceName(), traceName(), 0);
-            this.mTimeoutRunnable = new Runnable() { // from class: com.android.internal.util.LatencyTracker$Session$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    LatencyTracker.Session.this.lambda$begin$0(timeoutAction);
-                }
-            };
-            BackgroundThread.getHandler().postDelayed(this.mTimeoutRunnable, TimeUnit.SECONDS.toMillis(15L));
+            this.mTimeoutRunnable =
+                    new Runnable() { // from class:
+                                     // com.android.internal.util.LatencyTracker$Session$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            LatencyTracker.Session.this.lambda$begin$0(timeoutAction);
+                        }
+                    };
+            BackgroundThread.getHandler()
+                    .postDelayed(this.mTimeoutRunnable, TimeUnit.SECONDS.toMillis(15L));
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -401,9 +452,11 @@ public class LatencyTracker {
         private final int mSamplingInterval;
         private final int mTraceThreshold;
 
-        public ActionProperties(int action, boolean enabled, int samplingInterval, int traceThreshold) {
+        public ActionProperties(
+                int action, boolean enabled, int samplingInterval, int traceThreshold) {
             this.mAction = action;
-            AnnotationValidations.validate((Class<? extends Annotation>) Action.class, (Annotation) null, this.mAction);
+            AnnotationValidations.validate(
+                    (Class<? extends Annotation>) Action.class, (Annotation) null, this.mAction);
             this.mEnabled = enabled;
             this.mSamplingInterval = samplingInterval;
             this.mTraceThreshold = traceThreshold;
@@ -426,7 +479,15 @@ public class LatencyTracker {
         }
 
         public String toString() {
-            return "ActionProperties{ mAction=" + this.mAction + ", mEnabled=" + this.mEnabled + ", mSamplingInterval=" + this.mSamplingInterval + ", mTraceThreshold=" + this.mTraceThreshold + "}";
+            return "ActionProperties{ mAction="
+                    + this.mAction
+                    + ", mEnabled="
+                    + this.mEnabled
+                    + ", mSamplingInterval="
+                    + this.mSamplingInterval
+                    + ", mTraceThreshold="
+                    + this.mTraceThreshold
+                    + "}";
         }
 
         public boolean equals(Object o) {
@@ -437,7 +498,10 @@ public class LatencyTracker {
                 return false;
             }
             ActionProperties that = (ActionProperties) o;
-            if (this.mAction == that.mAction && this.mEnabled == that.mEnabled && this.mSamplingInterval == that.mSamplingInterval && this.mTraceThreshold == that.mTraceThreshold) {
+            if (this.mAction == that.mAction
+                    && this.mEnabled == that.mEnabled
+                    && this.mSamplingInterval == that.mSamplingInterval
+                    && this.mTraceThreshold == that.mTraceThreshold) {
                 return true;
             }
             return false;
@@ -445,12 +509,14 @@ public class LatencyTracker {
 
         public int hashCode() {
             int _hash = (1 * 31) + this.mAction;
-            return (((((_hash * 31) + Boolean.hashCode(this.mEnabled)) * 31) + this.mSamplingInterval) * 31) + this.mTraceThreshold;
+            return (((((_hash * 31) + Boolean.hashCode(this.mEnabled)) * 31)
+                                    + this.mSamplingInterval)
+                            * 31)
+                    + this.mTraceThreshold;
         }
     }
 
-    public void onDeviceConfigPropertiesUpdated(SparseArray<ActionProperties> actionProperties) {
-    }
+    public void onDeviceConfigPropertiesUpdated(SparseArray<ActionProperties> actionProperties) {}
 
     public void onTriggerPerfetto(String triggerName) {
         PerfettoTrigger.trigger(triggerName);
@@ -466,7 +532,8 @@ public class LatencyTracker {
         public final int logCode;
         public final int statsdAction;
 
-        private FrameworkStatsLogEvent(int action, int logCode, int statsdAction, int durationMillis) {
+        private FrameworkStatsLogEvent(
+                int action, int logCode, int statsdAction, int durationMillis) {
             this.action = action;
             this.logCode = logCode;
             this.statsdAction = statsdAction;
@@ -474,7 +541,13 @@ public class LatencyTracker {
         }
 
         public String toString() {
-            return "FrameworkStatsLogEvent{ logCode=" + this.logCode + ", statsdAction=" + this.statsdAction + ", durationMillis=" + this.durationMillis + "}";
+            return "FrameworkStatsLogEvent{ logCode="
+                    + this.logCode
+                    + ", statsdAction="
+                    + this.statsdAction
+                    + ", durationMillis="
+                    + this.durationMillis
+                    + "}";
         }
     }
 }

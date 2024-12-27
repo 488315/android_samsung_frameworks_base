@@ -9,14 +9,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ISemContinuitySimpleListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.continuity.ISemContinuitySimpleListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.continuity.ISemContinuitySimpleListener";
 
     void onNotify(Bundle bundle) throws RemoteException;
 
     public static class Default implements ISemContinuitySimpleListener {
         @Override // com.samsung.android.continuity.ISemContinuitySimpleListener
-        public void onNotify(Bundle bundle) throws RemoteException {
-        }
+        public void onNotify(Bundle bundle) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface ISemContinuitySimpleListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemContinuitySimpleListener {
+    public abstract static class Stub extends Binder implements ISemContinuitySimpleListener {
         static final int TRANSACTION_onNotify = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface ISemContinuitySimpleListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemContinuitySimpleListener.DESCRIPTOR);
             }

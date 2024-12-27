@@ -2,22 +2,25 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.util.Objects;
+
 import vendor.samsung.hardware.radio.V2_0.SehSignalBar;
+
+import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public class SignalBarInfo implements Parcelable {
-    public static final Parcelable.Creator<SignalBarInfo> CREATOR = new Parcelable.Creator() { // from class: android.telephony.SignalBarInfo.1
-        @Override // android.os.Parcelable.Creator
-        public SignalBarInfo createFromParcel(Parcel in) {
-            return new SignalBarInfo(in);
-        }
+    public static final Parcelable.Creator<SignalBarInfo> CREATOR =
+            new Parcelable.Creator() { // from class: android.telephony.SignalBarInfo.1
+                @Override // android.os.Parcelable.Creator
+                public SignalBarInfo createFromParcel(Parcel in) {
+                    return new SignalBarInfo(in);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SignalBarInfo[] newArray(int size) {
-            return new SignalBarInfo[size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SignalBarInfo[] newArray(int size) {
+                    return new SignalBarInfo[size];
+                }
+            };
     private int mCdmaLevel;
     private int mEvdoLevel;
     private int mGsmLevel;
@@ -177,7 +180,14 @@ public class SignalBarInfo implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mCdmaLevel), Integer.valueOf(this.mEvdoLevel), Integer.valueOf(this.mGsmLevel), Integer.valueOf(this.mWcdmaLevel), Integer.valueOf(this.mTdscdmaLevel), Integer.valueOf(this.mLteLevel), Integer.valueOf(this.mNrLevel));
+        return Objects.hash(
+                Integer.valueOf(this.mCdmaLevel),
+                Integer.valueOf(this.mEvdoLevel),
+                Integer.valueOf(this.mGsmLevel),
+                Integer.valueOf(this.mWcdmaLevel),
+                Integer.valueOf(this.mTdscdmaLevel),
+                Integer.valueOf(this.mLteLevel),
+                Integer.valueOf(this.mNrLevel));
     }
 
     public boolean equals(Object o) {
@@ -188,7 +198,13 @@ public class SignalBarInfo implements Parcelable {
             return false;
         }
         SignalBarInfo other = (SignalBarInfo) o;
-        return this.mCdmaLevel == other.mCdmaLevel && this.mEvdoLevel == other.mEvdoLevel && this.mGsmLevel == other.mGsmLevel && this.mWcdmaLevel == other.mWcdmaLevel && this.mTdscdmaLevel == other.mTdscdmaLevel && this.mLteLevel == other.mLteLevel && this.mNrLevel == other.mNrLevel;
+        return this.mCdmaLevel == other.mCdmaLevel
+                && this.mEvdoLevel == other.mEvdoLevel
+                && this.mGsmLevel == other.mGsmLevel
+                && this.mWcdmaLevel == other.mWcdmaLevel
+                && this.mTdscdmaLevel == other.mTdscdmaLevel
+                && this.mLteLevel == other.mLteLevel
+                && this.mNrLevel == other.mNrLevel;
     }
 
     @Override // android.os.Parcelable

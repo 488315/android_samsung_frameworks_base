@@ -2,16 +2,17 @@ package android.os;
 
 import android.app.ActivityThread;
 import android.content.Context;
-import android.os.IVibratorManagerService;
-import android.os.VibrationAttributes;
 import android.util.Log;
+
 import com.samsung.android.vibrator.VibrationTag;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /* loaded from: classes3.dex */
 public class HapticPlayer implements AutoCloseable {
@@ -27,7 +28,9 @@ public class HapticPlayer implements AutoCloseable {
     private static final int DYNAMIC_TRANSIENT_DURATION = 20;
     private static final String TAG = "HapticPlayer";
     private static final boolean mAvailable;
-    private static final IVibratorManagerService mService = IVibratorManagerService.Stub.asInterface(ServiceManager.getService(Context.VIBRATOR_MANAGER_SERVICE));
+    private static final IVibratorManagerService mService =
+            IVibratorManagerService.Stub.asInterface(
+                    ServiceManager.getService(Context.VIBRATOR_MANAGER_SERVICE));
     private static final int mVibratorGroup = getVibratorGroup();
     private DynamicEffect mEffect;
     private int mLoop;
@@ -87,7 +90,12 @@ public class HapticPlayer implements AutoCloseable {
         start(loop, interval, amplitude, -1, true);
     }
 
-    private void start(int loop, final int interval, final int amplitude, final int freq, final boolean needParseEffect) {
+    private void start(
+            int loop,
+            final int interval,
+            final int amplitude,
+            final int freq,
+            final boolean needParseEffect) {
         if (!mAvailable || mService == null || this.mEffect == null) {
             Log.w(TAG, "Failed to start vibrate; no support, no service or no effect info.");
             return;
@@ -101,35 +109,56 @@ public class HapticPlayer implements AutoCloseable {
         } else {
             this.mLoop = Math.max(loop, 1);
         }
-        new Thread(new Runnable() { // from class: android.os.HapticPlayer.1
-            @Override // java.lang.Runnable
-            public void run() {
-                HapticPlayer.this.stop();
-                if (HapticPlayer.this.mStepParameters == null) {
-                    HapticPlayer.this.mStepParameters = new ArrayList();
-                }
-                if (needParseEffect) {
-                    HapticPlayer.this.mStepParameters.clear();
-                    List<RampParameter> rampParameters = HapticPlayer.this.parseRamp(HapticPlayer.this.mEffect.getEffectInfo());
-                    if (rampParameters != null) {
-                        for (RampParameter parameter : rampParameters) {
-                            HapticPlayer.this.mStepParameters.addAll(HapticPlayer.this.rampToStepParameter(parameter));
-                        }
-                    }
-                }
-                VibrationAttributes.Builder builder = new VibrationAttributes.Builder().setUsage(18);
-                if ("com.samsung.android.game.gametools".equals(ActivityThread.currentPackageName())) {
-                    builder.semAddTag(VibrationTag.ALLOWED_IN_BACKGROUND_PROCESS);
-                }
-                VibrationEffect effect = HapticPlayer.this.createStepEffect(HapticPlayer.this.mStepParameters, interval, amplitude, freq);
-                String reason = "DynamicEffect_" + HapticPlayer.this.mLoop;
-                try {
-                    HapticPlayer.mService.vibrate(Process.myUid(), 0, ActivityThread.currentPackageName(), CombinedVibration.createParallel(effect), builder.build(), reason, HapticPlayer.this.mToken);
-                } catch (RemoteException e) {
-                    Log.w(HapticPlayer.TAG, "Failed to start vibrate.", e);
-                }
-            }
-        }, "DynamicEffectThread").start();
+        new Thread(
+                        new Runnable() { // from class: android.os.HapticPlayer.1
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                HapticPlayer.this.stop();
+                                if (HapticPlayer.this.mStepParameters == null) {
+                                    HapticPlayer.this.mStepParameters = new ArrayList();
+                                }
+                                if (needParseEffect) {
+                                    HapticPlayer.this.mStepParameters.clear();
+                                    List<RampParameter> rampParameters =
+                                            HapticPlayer.this.parseRamp(
+                                                    HapticPlayer.this.mEffect.getEffectInfo());
+                                    if (rampParameters != null) {
+                                        for (RampParameter parameter : rampParameters) {
+                                            HapticPlayer.this.mStepParameters.addAll(
+                                                    HapticPlayer.this.rampToStepParameter(
+                                                            parameter));
+                                        }
+                                    }
+                                }
+                                VibrationAttributes.Builder builder =
+                                        new VibrationAttributes.Builder().setUsage(18);
+                                if ("com.samsung.android.game.gametools"
+                                        .equals(ActivityThread.currentPackageName())) {
+                                    builder.semAddTag(VibrationTag.ALLOWED_IN_BACKGROUND_PROCESS);
+                                }
+                                VibrationEffect effect =
+                                        HapticPlayer.this.createStepEffect(
+                                                HapticPlayer.this.mStepParameters,
+                                                interval,
+                                                amplitude,
+                                                freq);
+                                String reason = "DynamicEffect_" + HapticPlayer.this.mLoop;
+                                try {
+                                    HapticPlayer.mService.vibrate(
+                                            Process.myUid(),
+                                            0,
+                                            ActivityThread.currentPackageName(),
+                                            CombinedVibration.createParallel(effect),
+                                            builder.build(),
+                                            reason,
+                                            HapticPlayer.this.mToken);
+                                } catch (RemoteException e) {
+                                    Log.w(HapticPlayer.TAG, "Failed to start vibrate.", e);
+                                }
+                            }
+                        },
+                        "DynamicEffectThread")
+                .start();
     }
 
     public void updateInterval(int interval) {
@@ -182,7 +211,8 @@ public class HapticPlayer implements AutoCloseable {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public VibrationEffect createStepEffect(List<StepParameter> parameters, int interval, int amplitude, int freq) {
+    public VibrationEffect createStepEffect(
+            List<StepParameter> parameters, int interval, int amplitude, int freq) {
         if (parameters == null) {
             return null;
         }
@@ -197,7 +227,8 @@ public class HapticPlayer implements AutoCloseable {
         for (int i = 0; i < size; i++) {
             StepParameter parameter = parameters.get(i);
             durations[i] = Math.max(Math.min(parameter.getDuration(), 5000), 0);
-            amplitudes[i] = Math.max(Math.min(parameter.getAmplitude() * amplitudeScale, 1.0f), 0.0f);
+            amplitudes[i] =
+                    Math.max(Math.min(parameter.getAmplitude() * amplitudeScale, 1.0f), 0.0f);
             frequencies[i] = Math.max(Math.min(parameter.getFrequency() * 1.0f, 4.0f), 0.0f);
         }
         if (interval >= 0 && interval <= 1000) {
@@ -230,7 +261,13 @@ public class HapticPlayer implements AutoCloseable {
                 int intensity = paramJson.getInt("Intensity");
                 int frequency = paramJson.getInt(str3);
                 if (relativeTime != curRelativeTime) {
-                    parameters.add(new RampParameter(0.0f, 0.0f, 0.0f, 0.0f, Math.abs(relativeTime - curRelativeTime)));
+                    parameters.add(
+                            new RampParameter(
+                                    0.0f,
+                                    0.0f,
+                                    0.0f,
+                                    0.0f,
+                                    Math.abs(relativeTime - curRelativeTime)));
                 }
                 if ("continuous".equals(type)) {
                     JSONArray jsonArray = paramJson.getJSONArray("Curve");
@@ -257,7 +294,13 @@ public class HapticPlayer implements AutoCloseable {
                             str2 = str3;
                         } else {
                             str2 = str3;
-                            parameters.add(new RampParameter((intensity * startIntensity) / 100.0f, (intensity * endIntensity) / 100.0f, (startFrequency + frequency) / 25.0f, (endFrequency + frequency) / 25.0f, endTime - startTime));
+                            parameters.add(
+                                    new RampParameter(
+                                            (intensity * startIntensity) / 100.0f,
+                                            (intensity * endIntensity) / 100.0f,
+                                            (startFrequency + frequency) / 25.0f,
+                                            (endFrequency + frequency) / 25.0f,
+                                            endTime - startTime));
                         }
                         startTime = endTime;
                         startIntensity = endIntensity;
@@ -283,7 +326,13 @@ public class HapticPlayer implements AutoCloseable {
                     if (!"transient".equals(type)) {
                         curRelativeTime = curRelativeTime4;
                     } else {
-                        parameters.add(new RampParameter(intensity / 100.0f, intensity / 100.0f, frequency / 25.0f, frequency / 25.0f, 20));
+                        parameters.add(
+                                new RampParameter(
+                                        intensity / 100.0f,
+                                        intensity / 100.0f,
+                                        frequency / 25.0f,
+                                        frequency / 25.0f,
+                                        20));
                         curRelativeTime = relativeTime + 20;
                     }
                 }
@@ -306,16 +355,25 @@ public class HapticPlayer implements AutoCloseable {
         float endFrequency = parameter.getEndFrequency();
         int rampDuration = parameter.getDuration();
         if (Float.compare(startAmplitude, endAmplitude) == 0) {
-            return Collections.singletonList(new StepParameter(endAmplitude, endFrequency, rampDuration));
+            return Collections.singletonList(
+                    new StepParameter(endAmplitude, endFrequency, rampDuration));
         }
         int stepCount = Math.max(Math.min(this.mStepCount, rampDuration / 5), 1);
         int stepDuration = rampDuration / stepCount;
         List<StepParameter> steps = new ArrayList<>();
         for (int i = 1; i < stepCount; i++) {
             float pos = i / stepCount;
-            steps.add(new StepParameter(interpolate(startAmplitude, endAmplitude, pos), interpolate(startFrequency, endFrequency, pos), stepDuration));
+            steps.add(
+                    new StepParameter(
+                            interpolate(startAmplitude, endAmplitude, pos),
+                            interpolate(startFrequency, endFrequency, pos),
+                            stepDuration));
         }
-        steps.add(new StepParameter(endAmplitude, endFrequency, rampDuration - ((stepCount - 1) * stepDuration)));
+        steps.add(
+                new StepParameter(
+                        endAmplitude,
+                        endFrequency,
+                        rampDuration - ((stepCount - 1) * stepDuration)));
         return steps;
     }
 
@@ -324,8 +382,7 @@ public class HapticPlayer implements AutoCloseable {
     }
 
     @Override // java.lang.AutoCloseable
-    public void close() {
-    }
+    public void close() {}
 
     private static class StepParameter {
         private final float amplitude;
@@ -358,7 +415,12 @@ public class HapticPlayer implements AutoCloseable {
         private final float startAmplitude;
         private final float startFrequency;
 
-        RampParameter(float startAmplitude, float endAmplitude, float startFrequency, float endFrequency, int duration) {
+        RampParameter(
+                float startAmplitude,
+                float endAmplitude,
+                float startFrequency,
+                float endFrequency,
+                int duration) {
             this.startAmplitude = startAmplitude;
             this.endAmplitude = endAmplitude;
             this.startFrequency = startFrequency;

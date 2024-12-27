@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -12,19 +13,22 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class DelegateRegistrationState implements Parcelable {
-    public static final Parcelable.Creator<DelegateRegistrationState> CREATOR = new Parcelable.Creator<DelegateRegistrationState>() { // from class: android.telephony.ims.DelegateRegistrationState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DelegateRegistrationState createFromParcel(Parcel source) {
-            return new DelegateRegistrationState(source);
-        }
+    public static final Parcelable.Creator<DelegateRegistrationState> CREATOR =
+            new Parcelable.Creator<
+                    DelegateRegistrationState>() { // from class:
+                                                   // android.telephony.ims.DelegateRegistrationState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DelegateRegistrationState createFromParcel(Parcel source) {
+                    return new DelegateRegistrationState(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DelegateRegistrationState[] newArray(int size) {
-            return new DelegateRegistrationState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DelegateRegistrationState[] newArray(int size) {
+                    return new DelegateRegistrationState[size];
+                }
+            };
     public static final int DEREGISTERED_REASON_NOT_PROVISIONED = 1;
     public static final int DEREGISTERED_REASON_NOT_REGISTERED = 2;
     public static final int DEREGISTERED_REASON_UNKNOWN = 0;
@@ -40,12 +44,10 @@ public final class DelegateRegistrationState implements Parcelable {
     private ArraySet<String> mRegisteringTags;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeregisteredReason {
-    }
+    public @interface DeregisteredReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeregisteringReason {
-    }
+    public @interface DeregisteringReason {}
 
     public static final class Builder {
         private final DelegateRegistrationState mState = new DelegateRegistrationState();
@@ -152,17 +154,32 @@ public final class DelegateRegistrationState implements Parcelable {
             return false;
         }
         DelegateRegistrationState that = (DelegateRegistrationState) o;
-        if (this.mRegisteringTags.equals(that.mRegisteringTags) && this.mRegisteredTags.equals(that.mRegisteredTags) && this.mDeregisteringTags.equals(that.mDeregisteringTags) && this.mDeregisteredTags.equals(that.mDeregisteredTags)) {
+        if (this.mRegisteringTags.equals(that.mRegisteringTags)
+                && this.mRegisteredTags.equals(that.mRegisteredTags)
+                && this.mDeregisteringTags.equals(that.mDeregisteringTags)
+                && this.mDeregisteredTags.equals(that.mDeregisteredTags)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mRegisteringTags, this.mRegisteredTags, this.mDeregisteringTags, this.mDeregisteredTags);
+        return Objects.hash(
+                this.mRegisteringTags,
+                this.mRegisteredTags,
+                this.mDeregisteringTags,
+                this.mDeregisteredTags);
     }
 
     public String toString() {
-        return "DelegateRegistrationState{ registered={" + this.mRegisteredTags + "}, registering={" + this.mRegisteringTags + "}, deregistering={" + this.mDeregisteringTags + "}, deregistered={" + this.mDeregisteredTags + "}}";
+        return "DelegateRegistrationState{ registered={"
+                + this.mRegisteredTags
+                + "}, registering={"
+                + this.mRegisteringTags
+                + "}, deregistering={"
+                + this.mDeregisteringTags
+                + "}, deregistered={"
+                + this.mDeregisteredTags
+                + "}}";
     }
 }

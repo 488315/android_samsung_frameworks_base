@@ -2,7 +2,9 @@ package android.mtp;
 
 import android.content.res.Resources;
 import android.os.storage.StorageVolume;
+
 import com.android.internal.R;
+
 import java.util.function.Supplier;
 
 /* loaded from: classes3.dex */

@@ -1,6 +1,5 @@
 package android.util;
 
-import android.util.Base64;
 import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -60,7 +59,8 @@ public class Base64OutputStream extends FilterOutputStream {
         internalWrite(b, off, len, false);
     }
 
-    @Override // java.io.FilterOutputStream, java.io.OutputStream, java.io.Closeable, java.lang.AutoCloseable
+    @Override // java.io.FilterOutputStream, java.io.OutputStream, java.io.Closeable,
+              // java.lang.AutoCloseable
     public void close() throws IOException {
         IOException thrown = null;
         try {

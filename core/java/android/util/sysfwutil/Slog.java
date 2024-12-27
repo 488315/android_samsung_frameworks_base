@@ -5,6 +5,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.FileUtils;
 import android.os.Process;
 import android.os.SystemProperties;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -83,17 +84,29 @@ public final class Slog {
             this.mLogFile.createNewFile();
             FileUtils.setPermissions(this.mLogFile.getAbsolutePath(), 416, 1000, 1007);
         } catch (Exception e) {
-            localLogE("initParam: error set permissions" + this.mLogFile.getAbsolutePath() + " , " + e);
+            localLogE(
+                    "initParam: error set permissions"
+                            + this.mLogFile.getAbsolutePath()
+                            + " , "
+                            + e);
         }
     }
 
     private synchronized void addMsgToList(String msg, boolean force) {
         if (this.mSfSlogEnable) {
             String tid = Integer.toString(Process.myTid());
-            SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd (z) HH:mm:ss.SSS", Locale.getDefault());
+            SimpleDateFormat sdf =
+                    new SimpleDateFormat("yy-MM-dd (z) HH:mm:ss.SSS", Locale.getDefault());
             String strNow = sdf.format(new Date());
             this.mLogList.add(strNow + " " + tid + " " + msg + "\n");
-            localLogV("addMsgToList mLogList.size() " + this.mLogList.size() + " mLinesToDump " + this.mLinesToDump + " strNow[" + strNow + NavigationBarInflaterView.SIZE_MOD_END);
+            localLogV(
+                    "addMsgToList mLogList.size() "
+                            + this.mLogList.size()
+                            + " mLinesToDump "
+                            + this.mLinesToDump
+                            + " strNow["
+                            + strNow
+                            + NavigationBarInflaterView.SIZE_MOD_END);
             if (this.mLogList.size() >= this.mLinesToDump || force) {
                 dumpLogsToTheFile();
             }
@@ -147,7 +160,8 @@ public final class Slog {
             this.mLogList.clear();
             localLogV("dumpLogsToTheFile: mCurentFileSize " + this.mCurentFileSize);
             if (this.mCurentFileSize > this.mMaxLogFileSize) {
-                localLogV("dumpLogsToTheFile: swap file, current " + this.mLogFile.getAbsolutePath());
+                localLogV(
+                        "dumpLogsToTheFile: swap file, current " + this.mLogFile.getAbsolutePath());
                 if (this.mLogFile.getAbsolutePath().equals(LOG0_PATH)) {
                     this.mLogFile = new File(LOG1_PATH);
                 } else {
@@ -179,15 +193,20 @@ public final class Slog {
         android.util.Slog.e(TAG, msg);
     }
 
-    private static void localLogV(String msg) {
-    }
+    private static void localLogV(String msg) {}
 
     public static int v(String tag, String msg) {
         if (getInstance() != null) {
             getInstance().addMsgToList("V " + tag + ": " + msg, false);
         }
         if ("!@".equals(kernelLogPrefix)) {
-            return android.util.Slog.v(tag, kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + msg);
+            return android.util.Slog.v(
+                    tag,
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + msg);
         }
         return android.util.Slog.v(tag, msg);
     }
@@ -197,7 +216,14 @@ public final class Slog {
             getInstance().addMsgToList("V " + tag + ": " + msg, false);
         }
         if ("!@".equals(kernelLogPrefix)) {
-            return android.util.Slog.v(tag, kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + msg, tr);
+            return android.util.Slog.v(
+                    tag,
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + msg,
+                    tr);
         }
         return android.util.Slog.v(tag, msg, tr);
     }
@@ -207,7 +233,13 @@ public final class Slog {
             getInstance().addMsgToList("D " + tag + ": " + msg, false);
         }
         if ("!@".equals(kernelLogPrefix)) {
-            return android.util.Slog.d(tag, kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + msg);
+            return android.util.Slog.d(
+                    tag,
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + msg);
         }
         return android.util.Slog.d(tag, msg);
     }
@@ -217,7 +249,14 @@ public final class Slog {
             getInstance().addMsgToList("D " + tag + ": " + msg, false);
         }
         if ("!@".equals(kernelLogPrefix)) {
-            return android.util.Slog.d(tag, kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + msg, tr);
+            return android.util.Slog.d(
+                    tag,
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + msg,
+                    tr);
         }
         return android.util.Slog.d(tag, msg, tr);
     }
@@ -227,7 +266,13 @@ public final class Slog {
             getInstance().addMsgToList("I " + tag + ": " + msg, false);
         }
         if ("!@".equals(kernelLogPrefix)) {
-            return android.util.Slog.i(tag, kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + msg);
+            return android.util.Slog.i(
+                    tag,
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + msg);
         }
         return android.util.Slog.i(tag, msg);
     }
@@ -237,7 +282,14 @@ public final class Slog {
             getInstance().addMsgToList("I " + tag + ": " + msg, false);
         }
         if ("!@".equals(kernelLogPrefix)) {
-            return android.util.Slog.i(tag, kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + msg, tr);
+            return android.util.Slog.i(
+                    tag,
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + msg,
+                    tr);
         }
         return android.util.Slog.i(tag, msg, tr);
     }
@@ -247,7 +299,13 @@ public final class Slog {
             getInstance().addMsgToList("W " + tag + ": " + msg, false);
         }
         if ("!@".equals(kernelLogPrefix)) {
-            return android.util.Slog.w(tag, kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + msg);
+            return android.util.Slog.w(
+                    tag,
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + msg);
         }
         return android.util.Slog.w(tag, msg);
     }
@@ -257,7 +315,14 @@ public final class Slog {
             getInstance().addMsgToList("W " + tag + ": " + msg, false);
         }
         if ("!@".equals(kernelLogPrefix)) {
-            return android.util.Slog.w(tag, kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + msg, tr);
+            return android.util.Slog.w(
+                    tag,
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + msg,
+                    tr);
         }
         return android.util.Slog.w(tag, msg, tr);
     }
@@ -271,7 +336,13 @@ public final class Slog {
             getInstance().addMsgToList("E " + tag + ": " + msg, false);
         }
         if ("!@".equals(kernelLogPrefix)) {
-            return android.util.Slog.e(tag, kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + msg);
+            return android.util.Slog.e(
+                    tag,
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + msg);
         }
         return android.util.Slog.e(tag, msg);
     }
@@ -281,7 +352,14 @@ public final class Slog {
             getInstance().addMsgToList("E " + tag + ": " + msg, false);
         }
         if ("!@".equals(kernelLogPrefix)) {
-            return android.util.Slog.e(tag, kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + msg, tr);
+            return android.util.Slog.e(
+                    tag,
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + msg,
+                    tr);
         }
         return android.util.Slog.e(tag, msg, tr);
     }
@@ -302,7 +380,14 @@ public final class Slog {
             getInstance().addMsgToList("WTF " + tag + ": " + msg, false);
         }
         if ("!@".equals(kernelLogPrefix)) {
-            return android.util.Slog.wtf(tag, kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + msg, tr);
+            return android.util.Slog.wtf(
+                    tag,
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + msg,
+                    tr);
         }
         return android.util.Slog.wtf(tag, msg, tr);
     }
@@ -319,7 +404,12 @@ public final class Slog {
         }
         localLogV("stackTraceLength=" + stackTraceLength);
         if ("!@".equals(kernelLogPrefix)) {
-            String exTitle = kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + NavigationBarInflaterView.SIZE_MOD_END + ex.toString();
+            String exTitle =
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + NavigationBarInflaterView.SIZE_MOD_END
+                            + ex.toString();
             if (getInstance() != null) {
                 localLogV("Print exTitle 1 at SFSLOG");
                 getInstance().addMsgToList("D " + tag + ": " + exTitle, false);
@@ -328,14 +418,25 @@ public final class Slog {
             android.util.Slog.d(tag, exTitle);
             if (stackTraceLength > 0) {
                 for (int p = 0; p < stackTraceLength; p++) {
-                    String exStackMsg = kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + "] > " + stackTraceElements[p].toString();
+                    String exStackMsg =
+                            kernelLogPrefix
+                                    + NavigationBarInflaterView.SIZE_MOD_START
+                                    + tag
+                                    + "] > "
+                                    + stackTraceElements[p].toString();
                     if (getInstance() != null) {
                         getInstance().addMsgToList("D " + tag + ": " + exStackMsg, false);
                     }
                     android.util.Slog.d(tag, exStackMsg);
                 }
             }
-            String exEndStr = kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + tag + "]Print StackTrace of " + methodName + " Done";
+            String exEndStr =
+                    kernelLogPrefix
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + tag
+                            + "]Print StackTrace of "
+                            + methodName
+                            + " Done";
             if (getInstance() != null) {
                 getInstance().addMsgToList("D " + tag + ": " + exEndStr, true);
             }

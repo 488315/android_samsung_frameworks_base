@@ -4,6 +4,7 @@ import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOut
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -17,7 +18,8 @@ public final class VendorKeyValue {
         ArrayList arrayList = new ArrayList();
         HwBlob readBuffer = hwParcel.readBuffer(16L);
         int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+        HwBlob readEmbeddedBuffer =
+                hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             VendorKeyValue vendorKeyValue = new VendorKeyValue();
@@ -35,11 +37,14 @@ public final class VendorKeyValue {
             return false;
         }
         VendorKeyValue vendorKeyValue = (VendorKeyValue) obj;
-        return HidlSupport.deepEquals(this.key, vendorKeyValue.key) && HidlSupport.deepEquals(this.value, vendorKeyValue.value);
+        return HidlSupport.deepEquals(this.key, vendorKeyValue.key)
+                && HidlSupport.deepEquals(this.value, vendorKeyValue.value);
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.key)), Integer.valueOf(HidlSupport.deepHashCode(this.value)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.key)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.value)));
     }
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {

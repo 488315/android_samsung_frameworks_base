@@ -7,6 +7,7 @@ import com.samsung.android.sume.core.filter.AsyncFilter;
 import com.samsung.android.sume.core.filter.MediaFilter;
 import com.samsung.android.sume.core.filter.factory.MediaFilterCreator;
 import com.samsung.android.sume.core.filter.factory.MediaFilterFactory;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes6.dex */
@@ -19,17 +20,27 @@ public abstract class MFGraphUnitFactory {
 
     public abstract GraphNode<MediaFilter> newNode(MediaFilter mediaFilter);
 
-    protected abstract MediaFilter parallelizeFilter(MediaFilterFactory mediaFilterFactory, MFDescriptor mFDescriptor, MediaFilter mediaFilter);
+    protected abstract MediaFilter parallelizeFilter(
+            MediaFilterFactory mediaFilterFactory,
+            MFDescriptor mFDescriptor,
+            MediaFilter mediaFilter);
 
     protected MFGraphUnitFactory(Consumer<MediaFilterFactory.Builder> builderConstitutor) {
         MediaFilterFactory.Builder builder = new MediaFilterFactory.Builder();
         builderConstitutor.accept(builder);
-        builder.addCreator(AsyncFilter.class, new MediaFilterCreator() { // from class: com.samsung.android.sume.core.graph.MFGraphUnitFactory$$ExternalSyntheticLambda0
-            @Override // com.samsung.android.sume.core.filter.factory.MediaFilterCreator
-            public final MediaFilter newFilter(MediaFilterFactory mediaFilterFactory, MFDescriptor mFDescriptor, MediaFilter mediaFilter) {
-                return MFGraphUnitFactory.this.parallelizeFilter(mediaFilterFactory, mFDescriptor, mediaFilter);
-            }
-        });
+        builder.addCreator(
+                AsyncFilter.class,
+                new MediaFilterCreator() { // from class:
+                                           // com.samsung.android.sume.core.graph.MFGraphUnitFactory$$ExternalSyntheticLambda0
+                    @Override // com.samsung.android.sume.core.filter.factory.MediaFilterCreator
+                    public final MediaFilter newFilter(
+                            MediaFilterFactory mediaFilterFactory,
+                            MFDescriptor mFDescriptor,
+                            MediaFilter mediaFilter) {
+                        return MFGraphUnitFactory.this.parallelizeFilter(
+                                mediaFilterFactory, mFDescriptor, mediaFilter);
+                    }
+                });
         builder.addBufferChannelSupplier(new MFGraph$Builder$$ExternalSyntheticLambda0(this));
         this.mediaFilterFactory = builder.build();
     }

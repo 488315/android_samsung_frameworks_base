@@ -4,8 +4,7 @@ package android.animation;
 public class IntArrayEvaluator implements TypeEvaluator<int[]> {
     private int[] mArray;
 
-    public IntArrayEvaluator() {
-    }
+    public IntArrayEvaluator() {}
 
     public IntArrayEvaluator(int[] reuseArray) {
         this.mArray = reuseArray;

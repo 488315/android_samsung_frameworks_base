@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -13,26 +14,31 @@ public final class TvInputHardwareInfo implements Parcelable {
     public static final int CABLE_CONNECTION_STATUS_CONNECTED = 1;
     public static final int CABLE_CONNECTION_STATUS_DISCONNECTED = 2;
     public static final int CABLE_CONNECTION_STATUS_UNKNOWN = 0;
-    public static final Parcelable.Creator<TvInputHardwareInfo> CREATOR = new Parcelable.Creator<TvInputHardwareInfo>() { // from class: android.media.tv.TvInputHardwareInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvInputHardwareInfo createFromParcel(Parcel source) {
-            try {
-                TvInputHardwareInfo info = new TvInputHardwareInfo();
-                info.readFromParcel(source);
-                return info;
-            } catch (Exception e) {
-                Log.e(TvInputHardwareInfo.TAG, "Exception creating TvInputHardwareInfo from parcel", e);
-                return null;
-            }
-        }
+    public static final Parcelable.Creator<TvInputHardwareInfo> CREATOR =
+            new Parcelable.Creator<
+                    TvInputHardwareInfo>() { // from class: android.media.tv.TvInputHardwareInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvInputHardwareInfo createFromParcel(Parcel source) {
+                    try {
+                        TvInputHardwareInfo info = new TvInputHardwareInfo();
+                        info.readFromParcel(source);
+                        return info;
+                    } catch (Exception e) {
+                        Log.e(
+                                TvInputHardwareInfo.TAG,
+                                "Exception creating TvInputHardwareInfo from parcel",
+                                e);
+                        return null;
+                    }
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvInputHardwareInfo[] newArray(int size) {
-            return new TvInputHardwareInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvInputHardwareInfo[] newArray(int size) {
+                    return new TvInputHardwareInfo[size];
+                }
+            };
     static final String TAG = "TvInputHardwareInfo";
     public static final int TV_INPUT_TYPE_COMPONENT = 6;
     public static final int TV_INPUT_TYPE_COMPOSITE = 3;
@@ -52,11 +58,9 @@ public final class TvInputHardwareInfo implements Parcelable {
     private int mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CableConnectionStatus {
-    }
+    public @interface CableConnectionStatus {}
 
-    private TvInputHardwareInfo() {
-    }
+    private TvInputHardwareInfo() {}
 
     public int getDeviceId() {
         return this.mDeviceId;
@@ -128,7 +132,13 @@ public final class TvInputHardwareInfo implements Parcelable {
     }
 
     public Builder toBuilder() {
-        Builder newBuilder = new Builder().deviceId(this.mDeviceId).type(this.mType).audioType(this.mAudioType).audioAddress(this.mAudioAddress).cableConnectionStatus(this.mCableConnectionStatus);
+        Builder newBuilder =
+                new Builder()
+                        .deviceId(this.mDeviceId)
+                        .type(this.mType)
+                        .audioType(this.mAudioType)
+                        .audioAddress(this.mAudioAddress)
+                        .cableConnectionStatus(this.mCableConnectionStatus);
         if (this.mType == 9) {
             newBuilder.hdmiPortId(this.mHdmiPortId);
         }
@@ -177,7 +187,8 @@ public final class TvInputHardwareInfo implements Parcelable {
             if (this.mDeviceId == null || this.mType == null) {
                 throw new UnsupportedOperationException();
             }
-            if ((this.mType.intValue() == 9 && this.mHdmiPortId == null) || (this.mType.intValue() != 9 && this.mHdmiPortId != null)) {
+            if ((this.mType.intValue() == 9 && this.mHdmiPortId == null)
+                    || (this.mType.intValue() != 9 && this.mHdmiPortId != null)) {
                 throw new UnsupportedOperationException();
             }
             TvInputHardwareInfo info = new TvInputHardwareInfo();

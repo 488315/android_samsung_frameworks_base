@@ -3,6 +3,7 @@ package android.animation;
 import android.content.res.ConstantState;
 import android.util.StateSet;
 import android.view.View;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -21,15 +22,17 @@ public class StateListAnimator implements Cloneable {
     }
 
     private void initAnimatorListener() {
-        this.mAnimatorListener = new AnimatorListenerAdapter() { // from class: android.animation.StateListAnimator.1
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                animation.setTarget(null);
-                if (StateListAnimator.this.mRunningAnimator == animation) {
-                    StateListAnimator.this.mRunningAnimator = null;
-                }
-            }
-        };
+        this.mAnimatorListener =
+                new AnimatorListenerAdapter() { // from class: android.animation.StateListAnimator.1
+                    @Override // android.animation.AnimatorListenerAdapter,
+                    // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        animation.setTarget(null);
+                        if (StateListAnimator.this.mRunningAnimator == animation) {
+                            StateListAnimator.this.mRunningAnimator = null;
+                        }
+                    }
+                };
     }
 
     public void addState(int[] specs, Animator animator) {

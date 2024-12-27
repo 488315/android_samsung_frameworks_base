@@ -2,6 +2,7 @@ package com.android.server.enterprise.vpn.knoxvpn.profile;
 
 import android.net.ProxyInfo;
 import android.net.Uri;
+
 import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -69,7 +70,8 @@ public final class VpnProfileInfo {
 
     public final void removePackageEntry(String str) {
         if (this.mPackageMap.containsKey(str)) {
-            this.mPackageUidSet.remove(Integer.valueOf(((VpnPackageInfo) this.mPackageMap.get(str)).getUid()));
+            this.mPackageUidSet.remove(
+                    Integer.valueOf(((VpnPackageInfo) this.mPackageMap.get(str)).getUid()));
             this.mPackageMap.remove(str);
         }
     }

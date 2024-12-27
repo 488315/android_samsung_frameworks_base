@@ -24,9 +24,9 @@ import android.view.animation.PathInterpolator;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.AbsListView;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -88,7 +88,8 @@ public class RelativeLayout extends ViewGroup {
     private static final int[] RULES_VERTICAL = {2, 3, 4, 6, 8};
     private static final int[] RULES_HORIZONTAL = {0, 1, 5, 7, 16, 17, 18, 19};
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<RelativeLayout> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<RelativeLayout> {
         private int mGravityId;
         private int mIgnoreGravityId;
         private boolean mPropertiesMapped = false;
@@ -137,9 +138,13 @@ public class RelativeLayout extends ViewGroup {
         queryCompatibilityModes(context);
     }
 
-    private void initFromAttributes(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RelativeLayout, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.RelativeLayout, attrs, a, defStyleAttr, defStyleRes);
+    private void initFromAttributes(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.RelativeLayout, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.RelativeLayout, attrs, a, defStyleAttr, defStyleRes);
         this.mIgnoreGravity = a.getResourceId(1, -1);
         this.mGravity = a.getInt(0, this.mGravity);
         a.recycle();
@@ -217,7 +222,8 @@ public class RelativeLayout extends ViewGroup {
         if (this.mSortedVerticalChildren == null || this.mSortedVerticalChildren.length != count) {
             this.mSortedVerticalChildren = new View[count];
         }
-        if (this.mSortedHorizontalChildren == null || this.mSortedHorizontalChildren.length != count) {
+        if (this.mSortedHorizontalChildren == null
+                || this.mSortedHorizontalChildren.length != count) {
             this.mSortedHorizontalChildren = new View[count];
         }
         DependencyGraph graph = this.mGraph;
@@ -396,7 +402,9 @@ public class RelativeLayout extends ViewGroup {
             int top = bottom2;
             if (child3.getVisibility() != 8) {
                 LayoutParams childParams = (LayoutParams) child3.getLayoutParams();
-                if (baselineView == null || baselineParams == null || compareLayoutPosition(childParams, baselineParams) < 0) {
+                if (baselineView == null
+                        || baselineParams == null
+                        || compareLayoutPosition(childParams, baselineParams) < 0) {
                     baselineView = child3;
                     baselineParams = childParams;
                 }
@@ -453,7 +461,8 @@ public class RelativeLayout extends ViewGroup {
             if (this.mLayoutParams != null && this.mLayoutParams.height >= 0) {
                 height4 = Math.max(height4, this.mLayoutParams.height);
             }
-            height3 = resolveSize(Math.max(height4, getSuggestedMinimumHeight()), heightMeasureSpec);
+            height3 =
+                    resolveSize(Math.max(height4, getSuggestedMinimumHeight()), heightMeasureSpec);
             if (offsetVerticalAxis) {
                 int i5 = 0;
                 while (i5 < myWidth2) {
@@ -484,9 +493,19 @@ public class RelativeLayout extends ViewGroup {
         }
         if (horizontalGravity || verticalGravity) {
             Rect selfBounds = this.mSelfBounds;
-            selfBounds.set(this.mPaddingLeft, this.mPaddingTop, width3 - this.mPaddingRight, height3 - this.mPaddingBottom);
+            selfBounds.set(
+                    this.mPaddingLeft,
+                    this.mPaddingTop,
+                    width3 - this.mPaddingRight,
+                    height3 - this.mPaddingBottom);
             Rect contentBounds = this.mContentBounds;
-            Gravity.apply(this.mGravity, i3 - left, bottom3 - top2, selfBounds, contentBounds, layoutDirection);
+            Gravity.apply(
+                    this.mGravity,
+                    i3 - left,
+                    bottom3 - top2,
+                    selfBounds,
+                    contentBounds,
+                    layoutDirection);
             int horizontalOffset = contentBounds.left - left;
             int verticalOffset = contentBounds.top - top2;
             if (horizontalOffset != 0 || verticalOffset != 0) {
@@ -544,16 +563,44 @@ public class RelativeLayout extends ViewGroup {
     }
 
     private void measureChild(View child, LayoutParams params, int myWidth, int myHeight) {
-        int childWidthMeasureSpec = getChildMeasureSpec(params.mLeft, params.mRight, params.width, params.leftMargin, params.rightMargin, this.mPaddingLeft, this.mPaddingRight, myWidth);
-        int childHeightMeasureSpec = getChildMeasureSpec(params.mTop, params.mBottom, params.height, params.topMargin, params.bottomMargin, this.mPaddingTop, this.mPaddingBottom, myHeight);
+        int childWidthMeasureSpec =
+                getChildMeasureSpec(
+                        params.mLeft,
+                        params.mRight,
+                        params.width,
+                        params.leftMargin,
+                        params.rightMargin,
+                        this.mPaddingLeft,
+                        this.mPaddingRight,
+                        myWidth);
+        int childHeightMeasureSpec =
+                getChildMeasureSpec(
+                        params.mTop,
+                        params.mBottom,
+                        params.height,
+                        params.topMargin,
+                        params.bottomMargin,
+                        this.mPaddingTop,
+                        this.mPaddingBottom,
+                        myHeight);
         child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
     }
 
-    private void measureChildHorizontal(View child, LayoutParams params, int myWidth, int myHeight) {
+    private void measureChildHorizontal(
+            View child, LayoutParams params, int myWidth, int myHeight) {
         int maxHeight;
         int heightMode;
         int maxHeight2;
-        int childWidthMeasureSpec = getChildMeasureSpec(params.mLeft, params.mRight, params.width, params.leftMargin, params.rightMargin, this.mPaddingLeft, this.mPaddingRight, myWidth);
+        int childWidthMeasureSpec =
+                getChildMeasureSpec(
+                        params.mLeft,
+                        params.mRight,
+                        params.width,
+                        params.leftMargin,
+                        params.rightMargin,
+                        this.mPaddingLeft,
+                        this.mPaddingRight,
+                        myWidth);
         if (myHeight < 0 && !this.mAllowBrokenMeasureSpecs) {
             if (params.height >= 0) {
                 maxHeight2 = View.MeasureSpec.makeMeasureSpec(params.height, 1073741824);
@@ -562,7 +609,12 @@ public class RelativeLayout extends ViewGroup {
             }
         } else {
             if (this.mMeasureVerticalWithPaddingMargin) {
-                maxHeight = Math.max(0, (((myHeight - this.mPaddingTop) - this.mPaddingBottom) - params.topMargin) - params.bottomMargin);
+                maxHeight =
+                        Math.max(
+                                0,
+                                (((myHeight - this.mPaddingTop) - this.mPaddingBottom)
+                                                - params.topMargin)
+                                        - params.bottomMargin);
             } else {
                 maxHeight = Math.max(0, myHeight);
             }
@@ -576,7 +628,15 @@ public class RelativeLayout extends ViewGroup {
         child.measure(childWidthMeasureSpec, maxHeight2);
     }
 
-    private int getChildMeasureSpec(int childStart, int childEnd, int childSize, int startMargin, int endMargin, int startPadding, int endPadding, int mySize) {
+    private int getChildMeasureSpec(
+            int childStart,
+            int childEnd,
+            int childSize,
+            int startMargin,
+            int endMargin,
+            int startPadding,
+            int endPadding,
+            int mySize) {
         int childSpecSize;
         int childSpecMode;
         int childSpecMode2 = 0;
@@ -636,7 +696,8 @@ public class RelativeLayout extends ViewGroup {
         return View.MeasureSpec.makeMeasureSpec(childSpecSize2, childSpecMode2);
     }
 
-    private boolean positionChildHorizontal(View child, LayoutParams params, int myWidth, boolean wrapContent) {
+    private boolean positionChildHorizontal(
+            View child, LayoutParams params, int myWidth, boolean wrapContent) {
         int layoutDirection = getLayoutDirection();
         int[] rules = params.getRules(layoutDirection);
         if (params.mLeft == Integer.MIN_VALUE && params.mRight != Integer.MIN_VALUE) {
@@ -667,7 +728,8 @@ public class RelativeLayout extends ViewGroup {
         }
     }
 
-    private boolean positionChildVertical(View child, LayoutParams params, int myHeight, boolean wrapContent) {
+    private boolean positionChildVertical(
+            View child, LayoutParams params, int myHeight, boolean wrapContent) {
         int[] rules = params.getRules();
         if (params.mTop == Integer.MIN_VALUE && params.mBottom != Integer.MIN_VALUE) {
             params.mTop = params.mBottom - child.getMeasuredHeight();
@@ -694,13 +756,15 @@ public class RelativeLayout extends ViewGroup {
         childParams.mRight = Integer.MIN_VALUE;
         LayoutParams anchorParams = getRelatedViewParams(rules, 0);
         if (anchorParams != null) {
-            childParams.mRight = anchorParams.mLeft - (anchorParams.leftMargin + childParams.rightMargin);
+            childParams.mRight =
+                    anchorParams.mLeft - (anchorParams.leftMargin + childParams.rightMargin);
         } else if (childParams.alignWithParent && rules[0] != 0 && myWidth >= 0) {
             childParams.mRight = (myWidth - this.mPaddingRight) - childParams.rightMargin;
         }
         LayoutParams anchorParams2 = getRelatedViewParams(rules, 1);
         if (anchorParams2 != null) {
-            childParams.mLeft = anchorParams2.mRight + anchorParams2.rightMargin + childParams.leftMargin;
+            childParams.mLeft =
+                    anchorParams2.mRight + anchorParams2.rightMargin + childParams.leftMargin;
         } else if (childParams.alignWithParent && rules[1] != 0) {
             childParams.mLeft = this.mPaddingLeft + childParams.leftMargin;
         }
@@ -739,13 +803,15 @@ public class RelativeLayout extends ViewGroup {
         childParams.mBottom = Integer.MIN_VALUE;
         LayoutParams anchorParams = getRelatedViewParams(rules, 2);
         if (anchorParams != null) {
-            childParams.mBottom = anchorParams.mTop - (anchorParams.topMargin + childParams.bottomMargin);
+            childParams.mBottom =
+                    anchorParams.mTop - (anchorParams.topMargin + childParams.bottomMargin);
         } else if (childParams.alignWithParent && rules[2] != 0 && myHeight >= 0) {
             childParams.mBottom = (myHeight - this.mPaddingBottom) - childParams.bottomMargin;
         }
         LayoutParams anchorParams2 = getRelatedViewParams(rules, 3);
         if (anchorParams2 != null) {
-            childParams.mTop = anchorParams2.mBottom + anchorParams2.bottomMargin + childParams.topMargin;
+            childParams.mTop =
+                    anchorParams2.mBottom + anchorParams2.bottomMargin + childParams.topMargin;
         } else if (childParams.alignWithParent && rules[3] != 0) {
             childParams.mTop = this.mPaddingTop + childParams.topMargin;
         }
@@ -778,7 +844,8 @@ public class RelativeLayout extends ViewGroup {
         View v = node.view;
         while (v.getVisibility() == 8) {
             int[] rules2 = ((LayoutParams) v.getLayoutParams()).getRules(v.getLayoutDirection());
-            DependencyGraph.Node node2 = (DependencyGraph.Node) this.mGraph.mKeyNodes.get(rules2[relation]);
+            DependencyGraph.Node node2 =
+                    (DependencyGraph.Node) this.mGraph.mKeyNodes.get(rules2[relation]);
             if (node2 == null || v == node2.view) {
                 return null;
             }
@@ -902,8 +969,7 @@ public class RelativeLayout extends ViewGroup {
     }
 
     private class TopToBottomLeftToRightComparator implements Comparator<View> {
-        private TopToBottomLeftToRightComparator() {
-        }
+        private TopToBottomLeftToRightComparator() {}
 
         @Override // java.util.Comparator
         public int compare(View first, View second) {
@@ -931,6 +997,7 @@ public class RelativeLayout extends ViewGroup {
 
         @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT)
         public boolean alignWithParent;
+
         private int mBottom;
         private int[] mInitialRules;
         private boolean mIsRtlCompatibilityMode;
@@ -938,8 +1005,39 @@ public class RelativeLayout extends ViewGroup {
         private boolean mNeedsLayoutResolution;
         private int mRight;
 
-        @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT, indexMapping = {@ViewDebug.IntToString(from = 2, to = "above"), @ViewDebug.IntToString(from = 4, to = "alignBaseline"), @ViewDebug.IntToString(from = 8, to = "alignBottom"), @ViewDebug.IntToString(from = 5, to = "alignLeft"), @ViewDebug.IntToString(from = 12, to = "alignParentBottom"), @ViewDebug.IntToString(from = 9, to = "alignParentLeft"), @ViewDebug.IntToString(from = 11, to = "alignParentRight"), @ViewDebug.IntToString(from = 10, to = "alignParentTop"), @ViewDebug.IntToString(from = 7, to = "alignRight"), @ViewDebug.IntToString(from = 6, to = "alignTop"), @ViewDebug.IntToString(from = 3, to = "below"), @ViewDebug.IntToString(from = 14, to = "centerHorizontal"), @ViewDebug.IntToString(from = 13, to = "center"), @ViewDebug.IntToString(from = 15, to = "centerVertical"), @ViewDebug.IntToString(from = 0, to = "leftOf"), @ViewDebug.IntToString(from = 1, to = "rightOf"), @ViewDebug.IntToString(from = 18, to = "alignStart"), @ViewDebug.IntToString(from = 19, to = "alignEnd"), @ViewDebug.IntToString(from = 20, to = "alignParentStart"), @ViewDebug.IntToString(from = 21, to = "alignParentEnd"), @ViewDebug.IntToString(from = 16, to = "startOf"), @ViewDebug.IntToString(from = 17, to = "endOf")}, mapping = {@ViewDebug.IntToString(from = -1, to = "true"), @ViewDebug.IntToString(from = 0, to = "false/NO_ID")}, resolveId = true)
+        @ViewDebug.ExportedProperty(
+                category = TtmlUtils.TAG_LAYOUT,
+                indexMapping = {
+                    @ViewDebug.IntToString(from = 2, to = "above"),
+                    @ViewDebug.IntToString(from = 4, to = "alignBaseline"),
+                    @ViewDebug.IntToString(from = 8, to = "alignBottom"),
+                    @ViewDebug.IntToString(from = 5, to = "alignLeft"),
+                    @ViewDebug.IntToString(from = 12, to = "alignParentBottom"),
+                    @ViewDebug.IntToString(from = 9, to = "alignParentLeft"),
+                    @ViewDebug.IntToString(from = 11, to = "alignParentRight"),
+                    @ViewDebug.IntToString(from = 10, to = "alignParentTop"),
+                    @ViewDebug.IntToString(from = 7, to = "alignRight"),
+                    @ViewDebug.IntToString(from = 6, to = "alignTop"),
+                    @ViewDebug.IntToString(from = 3, to = "below"),
+                    @ViewDebug.IntToString(from = 14, to = "centerHorizontal"),
+                    @ViewDebug.IntToString(from = 13, to = "center"),
+                    @ViewDebug.IntToString(from = 15, to = "centerVertical"),
+                    @ViewDebug.IntToString(from = 0, to = "leftOf"),
+                    @ViewDebug.IntToString(from = 1, to = "rightOf"),
+                    @ViewDebug.IntToString(from = 18, to = "alignStart"),
+                    @ViewDebug.IntToString(from = 19, to = "alignEnd"),
+                    @ViewDebug.IntToString(from = 20, to = "alignParentStart"),
+                    @ViewDebug.IntToString(from = 21, to = "alignParentEnd"),
+                    @ViewDebug.IntToString(from = 16, to = "startOf"),
+                    @ViewDebug.IntToString(from = 17, to = "endOf")
+                },
+                mapping = {
+                    @ViewDebug.IntToString(from = -1, to = "true"),
+                    @ViewDebug.IntToString(from = 0, to = "false/NO_ID")
+                },
+                resolveId = true)
         private int[] mRules;
+
         private boolean mRulesChanged;
         private int mTop;
 
@@ -1079,7 +1177,12 @@ public class RelativeLayout extends ViewGroup {
 
         @Override // android.view.ViewGroup.LayoutParams
         public String debug(String output) {
-            return output + "ViewGroup.LayoutParams={ width=" + sizeToString(this.width) + ", height=" + sizeToString(this.height) + " }";
+            return output
+                    + "ViewGroup.LayoutParams={ width="
+                    + sizeToString(this.width)
+                    + ", height="
+                    + sizeToString(this.height)
+                    + " }";
         }
 
         public void addRule(int verb) {
@@ -1087,7 +1190,10 @@ public class RelativeLayout extends ViewGroup {
         }
 
         public void addRule(int verb, int subject) {
-            if (!this.mNeedsLayoutResolution && isRelativeRule(verb) && this.mInitialRules[verb] != 0 && subject == 0) {
+            if (!this.mNeedsLayoutResolution
+                    && isRelativeRule(verb)
+                    && this.mInitialRules[verb] != 0
+                    && subject == 0) {
                 this.mNeedsLayoutResolution = true;
             }
             this.mRules[verb] = subject;
@@ -1104,7 +1210,14 @@ public class RelativeLayout extends ViewGroup {
         }
 
         private boolean hasRelativeRules() {
-            return (this.mInitialRules[16] == 0 && this.mInitialRules[17] == 0 && this.mInitialRules[18] == 0 && this.mInitialRules[19] == 0 && this.mInitialRules[20] == 0 && this.mInitialRules[21] == 0) ? false : true;
+            return (this.mInitialRules[16] == 0
+                            && this.mInitialRules[17] == 0
+                            && this.mInitialRules[18] == 0
+                            && this.mInitialRules[19] == 0
+                            && this.mInitialRules[20] == 0
+                            && this.mInitialRules[21] == 0)
+                    ? false
+                    : true;
         }
 
         private boolean isRelativeRule(int rule) {
@@ -1153,7 +1266,8 @@ public class RelativeLayout extends ViewGroup {
                     this.mRules[21] = 0;
                 }
             } else {
-                if ((this.mRules[18] != 0 || this.mRules[19] != 0) && (this.mRules[5] != 0 || this.mRules[7] != 0)) {
+                if ((this.mRules[18] != 0 || this.mRules[19] != 0)
+                        && (this.mRules[5] != 0 || this.mRules[7] != 0)) {
                     this.mRules[5] = 0;
                     this.mRules[7] = 0;
                 }
@@ -1165,7 +1279,8 @@ public class RelativeLayout extends ViewGroup {
                     this.mRules[isLayoutRtl ? (char) 5 : (char) 7] = this.mRules[19];
                     this.mRules[19] = 0;
                 }
-                if ((this.mRules[16] != 0 || this.mRules[17] != 0) && (this.mRules[0] != 0 || this.mRules[1] != 0)) {
+                if ((this.mRules[16] != 0 || this.mRules[17] != 0)
+                        && (this.mRules[0] != 0 || this.mRules[1] != 0)) {
                     this.mRules[0] = 0;
                     this.mRules[1] = 0;
                 }
@@ -1177,7 +1292,8 @@ public class RelativeLayout extends ViewGroup {
                     this.mRules[isLayoutRtl ? (char) 0 : (char) 1] = this.mRules[17];
                     this.mRules[17] = 0;
                 }
-                if ((this.mRules[20] == 0 && this.mRules[21] == 0) || (this.mRules[9] == 0 && this.mRules[11] == 0)) {
+                if ((this.mRules[20] == 0 && this.mRules[21] == 0)
+                        || (this.mRules[9] == 0 && this.mRules[11] == 0)) {
                     c = 11;
                 } else {
                     this.mRules[9] = 0;
@@ -1215,7 +1331,8 @@ public class RelativeLayout extends ViewGroup {
         }
 
         private boolean shouldResolveLayoutDirection(int layoutDirection) {
-            return (this.mNeedsLayoutResolution || hasRelativeRules()) && (this.mRulesChanged || layoutDirection != getLayoutDirection());
+            return (this.mNeedsLayoutResolution || hasRelativeRules())
+                    && (this.mRulesChanged || layoutDirection != getLayoutDirection());
         }
 
         @Override // android.view.ViewGroup.MarginLayoutParams, android.view.ViewGroup.LayoutParams
@@ -1224,7 +1341,8 @@ public class RelativeLayout extends ViewGroup {
             encoder.addProperty("layout:alignWithParent", this.alignWithParent);
         }
 
-        public static final class InspectionCompanion implements android.view.inspector.InspectionCompanion<LayoutParams> {
+        public static final class InspectionCompanion
+                implements android.view.inspector.InspectionCompanion<LayoutParams> {
             private int mAboveId;
             private int mAlignBaselineId;
             private int mAlignBottomId;
@@ -1254,24 +1372,35 @@ public class RelativeLayout extends ViewGroup {
             public void mapProperties(PropertyMapper propertyMapper) {
                 this.mPropertiesMapped = true;
                 this.mAboveId = propertyMapper.mapResourceId("layout_above", 16843140);
-                this.mAlignBaselineId = propertyMapper.mapResourceId("layout_alignBaseline", 16843142);
+                this.mAlignBaselineId =
+                        propertyMapper.mapResourceId("layout_alignBaseline", 16843142);
                 this.mAlignBottomId = propertyMapper.mapResourceId("layout_alignBottom", 16843146);
                 this.mAlignEndId = propertyMapper.mapResourceId("layout_alignEnd", 16843706);
                 this.mAlignLeftId = propertyMapper.mapResourceId("layout_alignLeft", 16843143);
-                this.mAlignParentBottomId = propertyMapper.mapBoolean("layout_alignParentBottom", 16843150);
-                this.mAlignParentEndId = propertyMapper.mapBoolean("layout_alignParentEnd", 16843708);
-                this.mAlignParentLeftId = propertyMapper.mapBoolean("layout_alignParentLeft", 16843147);
-                this.mAlignParentRightId = propertyMapper.mapBoolean("layout_alignParentRight", 16843149);
-                this.mAlignParentStartId = propertyMapper.mapBoolean("layout_alignParentStart", 16843707);
-                this.mAlignParentTopId = propertyMapper.mapBoolean("layout_alignParentTop", 16843148);
+                this.mAlignParentBottomId =
+                        propertyMapper.mapBoolean("layout_alignParentBottom", 16843150);
+                this.mAlignParentEndId =
+                        propertyMapper.mapBoolean("layout_alignParentEnd", 16843708);
+                this.mAlignParentLeftId =
+                        propertyMapper.mapBoolean("layout_alignParentLeft", 16843147);
+                this.mAlignParentRightId =
+                        propertyMapper.mapBoolean("layout_alignParentRight", 16843149);
+                this.mAlignParentStartId =
+                        propertyMapper.mapBoolean("layout_alignParentStart", 16843707);
+                this.mAlignParentTopId =
+                        propertyMapper.mapBoolean("layout_alignParentTop", 16843148);
                 this.mAlignRightId = propertyMapper.mapResourceId("layout_alignRight", 16843145);
                 this.mAlignStartId = propertyMapper.mapResourceId("layout_alignStart", 16843705);
                 this.mAlignTopId = propertyMapper.mapResourceId("layout_alignTop", 16843144);
-                this.mAlignWithParentIfMissingId = propertyMapper.mapBoolean("layout_alignWithParentIfMissing", 16843154);
+                this.mAlignWithParentIfMissingId =
+                        propertyMapper.mapBoolean("layout_alignWithParentIfMissing", 16843154);
                 this.mBelowId = propertyMapper.mapResourceId("layout_below", 16843141);
-                this.mCenterHorizontalId = propertyMapper.mapBoolean("layout_centerHorizontal", 16843152);
-                this.mCenterInParentId = propertyMapper.mapBoolean("layout_centerInParent", 16843151);
-                this.mCenterVerticalId = propertyMapper.mapBoolean("layout_centerVertical", 16843153);
+                this.mCenterHorizontalId =
+                        propertyMapper.mapBoolean("layout_centerHorizontal", 16843152);
+                this.mCenterInParentId =
+                        propertyMapper.mapBoolean("layout_centerInParent", 16843151);
+                this.mCenterVerticalId =
+                        propertyMapper.mapBoolean("layout_centerVertical", 16843153);
                 this.mToEndOfId = propertyMapper.mapResourceId("layout_toEndOf", 16843704);
                 this.mToLeftOfId = propertyMapper.mapResourceId("layout_toLeftOf", 16843138);
                 this.mToRightOfId = propertyMapper.mapResourceId("layout_toRightOf", 16843139);
@@ -1367,7 +1496,8 @@ public class RelativeLayout extends ViewGroup {
                 index = index2;
             }
             if (index < sorted.length) {
-                throw new IllegalStateException("Circular dependencies cannot exist in RelativeLayout");
+                throw new IllegalStateException(
+                        "Circular dependencies cannot exist in RelativeLayout");
             }
         }
 
@@ -1387,7 +1517,9 @@ public class RelativeLayout extends ViewGroup {
                 int[] rules = layoutParams.mRules;
                 for (int i3 : rulesFilter) {
                     int rule = rules[i3];
-                    if ((rule > 0 || ResourceId.isValid(rule)) && (dependency = keyNodes.get(rule)) != null && dependency != node2) {
+                    if ((rule > 0 || ResourceId.isValid(rule))
+                            && (dependency = keyNodes.get(rule)) != null
+                            && dependency != node2) {
                         dependency.dependents.put(node2, this);
                         node2.dependencies.put(rule, dependency);
                     }
@@ -1406,13 +1538,13 @@ public class RelativeLayout extends ViewGroup {
 
         static class Node {
             private static final int POOL_LIMIT = 100;
-            private static final Pools.SynchronizedPool<Node> sPool = new Pools.SynchronizedPool<>(100);
+            private static final Pools.SynchronizedPool<Node> sPool =
+                    new Pools.SynchronizedPool<>(100);
             View view;
             final ArrayMap<Node, DependencyGraph> dependents = new ArrayMap<>();
             final SparseArray<Node> dependencies = new SparseArray<>();
 
-            Node() {
-            }
+            Node() {}
 
             static Node acquire(View view) {
                 Node node = sPool.acquire();
@@ -1433,8 +1565,7 @@ public class RelativeLayout extends ViewGroup {
     }
 
     private class AppWidgetListScrollListener implements AbsListView.OnScrollListener {
-        private AppWidgetListScrollListener() {
-        }
+        private AppWidgetListScrollListener() {}
 
         @Override // android.widget.AbsListView.OnScrollListener
         public void onScrollStateChanged(AbsListView absListView, int i) {
@@ -1442,38 +1573,45 @@ public class RelativeLayout extends ViewGroup {
             if (RelativeLayout.this.mReleaseScrollRunnable == null) {
                 RelativeLayout.this.mReleaseScrollRunnable = new ReleaseScrollRunnable();
             } else {
-                RelativeLayout.this.mAppWidgetListView.removeCallbacks(RelativeLayout.this.mReleaseScrollRunnable);
+                RelativeLayout.this.mAppWidgetListView.removeCallbacks(
+                        RelativeLayout.this.mReleaseScrollRunnable);
             }
             if (RelativeLayout.this.mExpandTopBarRunnable == null) {
                 RelativeLayout.this.mExpandTopBarRunnable = new ExpandTopBarRunnable();
             } else {
-                RelativeLayout.this.mAppWidgetListView.removeCallbacks(RelativeLayout.this.mExpandTopBarRunnable);
+                RelativeLayout.this.mAppWidgetListView.removeCallbacks(
+                        RelativeLayout.this.mExpandTopBarRunnable);
             }
             if (i == 0) {
-                if (RelativeLayout.this.mAppWidgetToolBar.getBottom() > 0 && RelativeLayout.this.mAppWidgetToolBar.getBottom() < RelativeLayout.this.mAppWidgetToolBar.getHeight()) {
-                    RelativeLayout.this.mAppWidgetListView.postDelayed(RelativeLayout.this.mReleaseScrollRunnable, 50L);
-                    if (RelativeLayout.this.mAppWidgetToolBar.getBottom() < RelativeLayout.this.mAppWidgetToolBar.getHeight() / 2) {
-                        RelativeLayout.this.mAppWidgetListView.postDelayed(RelativeLayout.this.mExpandTopBarRunnable, 1550L);
+                if (RelativeLayout.this.mAppWidgetToolBar.getBottom() > 0
+                        && RelativeLayout.this.mAppWidgetToolBar.getBottom()
+                                < RelativeLayout.this.mAppWidgetToolBar.getHeight()) {
+                    RelativeLayout.this.mAppWidgetListView.postDelayed(
+                            RelativeLayout.this.mReleaseScrollRunnable, 50L);
+                    if (RelativeLayout.this.mAppWidgetToolBar.getBottom()
+                            < RelativeLayout.this.mAppWidgetToolBar.getHeight() / 2) {
+                        RelativeLayout.this.mAppWidgetListView.postDelayed(
+                                RelativeLayout.this.mExpandTopBarRunnable, 1550L);
                         return;
                     }
                     return;
                 }
                 if (RelativeLayout.this.mAppWidgetToolBar.getBottom() == 0) {
-                    RelativeLayout.this.mAppWidgetListView.postDelayed(RelativeLayout.this.mExpandTopBarRunnable, 1500L);
+                    RelativeLayout.this.mAppWidgetListView.postDelayed(
+                            RelativeLayout.this.mExpandTopBarRunnable, 1500L);
                 }
             }
         }
 
         @Override // android.widget.AbsListView.OnScrollListener
-        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        }
+        public void onScroll(
+                AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {}
     }
 
     private class ReleaseScrollRunnable implements Runnable {
         int mLastOffset;
 
-        private ReleaseScrollRunnable() {
-        }
+        private ReleaseScrollRunnable() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -1481,40 +1619,52 @@ public class RelativeLayout extends ViewGroup {
             ValueAnimator mExpandOffsetAnimator = new ValueAnimator();
             mExpandOffsetAnimator.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
             mExpandOffsetAnimator.setDuration(400L);
-            if (RelativeLayout.this.mAppWidgetToolBar.getBottom() > RelativeLayout.this.mAppWidgetToolBar.getHeight() / 2) {
+            if (RelativeLayout.this.mAppWidgetToolBar.getBottom()
+                    > RelativeLayout.this.mAppWidgetToolBar.getHeight() / 2) {
                 targetValue = RelativeLayout.this.mAppWidgetToolBar.getTop();
             } else {
                 targetValue = RelativeLayout.this.mAppWidgetToolBar.getBottom();
             }
             mExpandOffsetAnimator.setIntValues(0, targetValue);
-            mExpandOffsetAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.RelativeLayout.ReleaseScrollRunnable.1
-                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    int value = ((Integer) animation.getAnimatedValue()).intValue();
-                    int offset = value - ReleaseScrollRunnable.this.mLastOffset;
-                    RelativeLayout.this.mAppWidgetToolBar.offsetTopAndBottom(-offset);
-                    RelativeLayout.this.mAppWidgetListView.offsetTopAndBottom(-offset);
-                    ReleaseScrollRunnable.this.mLastOffset = value;
-                }
-            });
-            mExpandOffsetAnimator.addListener(new AnimatorListenerAdapter() { // from class: android.widget.RelativeLayout.ReleaseScrollRunnable.2
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animator) {
-                    if ((animator instanceof ValueAnimator) && ((ValueAnimator) animator).getAnimatedValue() != null) {
-                        ReleaseScrollRunnable.this.mLastOffset = ((Integer) ((ValueAnimator) animator).getAnimatedValue()).intValue();
-                    }
-                }
+            mExpandOffsetAnimator.addUpdateListener(
+                    new ValueAnimator
+                            .AnimatorUpdateListener() { // from class:
+                                                        // android.widget.RelativeLayout.ReleaseScrollRunnable.1
+                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            int value = ((Integer) animation.getAnimatedValue()).intValue();
+                            int offset = value - ReleaseScrollRunnable.this.mLastOffset;
+                            RelativeLayout.this.mAppWidgetToolBar.offsetTopAndBottom(-offset);
+                            RelativeLayout.this.mAppWidgetListView.offsetTopAndBottom(-offset);
+                            ReleaseScrollRunnable.this.mLastOffset = value;
+                        }
+                    });
+            mExpandOffsetAnimator.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // android.widget.RelativeLayout.ReleaseScrollRunnable.2
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationStart(Animator animator) {
+                            if ((animator instanceof ValueAnimator)
+                                    && ((ValueAnimator) animator).getAnimatedValue() != null) {
+                                ReleaseScrollRunnable.this.mLastOffset =
+                                        ((Integer) ((ValueAnimator) animator).getAnimatedValue())
+                                                .intValue();
+                            }
+                        }
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    ReleaseScrollRunnable.this.mLastOffset = 0;
-                }
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            ReleaseScrollRunnable.this.mLastOffset = 0;
+                        }
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationCancel(Animator animation) {
-                    ReleaseScrollRunnable.this.mLastOffset = 0;
-                }
-            });
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationCancel(Animator animation) {
+                            ReleaseScrollRunnable.this.mLastOffset = 0;
+                        }
+                    });
             mExpandOffsetAnimator.start();
         }
     }
@@ -1522,8 +1672,7 @@ public class RelativeLayout extends ViewGroup {
     private class ExpandTopBarRunnable implements Runnable {
         int mLastOffset;
 
-        private ExpandTopBarRunnable() {
-        }
+        private ExpandTopBarRunnable() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -1533,42 +1682,54 @@ public class RelativeLayout extends ViewGroup {
             ValueAnimator mExpandOffsetAnimator = new ValueAnimator();
             mExpandOffsetAnimator.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
             mExpandOffsetAnimator.setDuration(400L);
-            mExpandOffsetAnimator.setIntValues(0, RelativeLayout.this.mAppWidgetToolBar.getHeight());
-            mExpandOffsetAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.RelativeLayout.ExpandTopBarRunnable.1
-                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    int value = ((Integer) animation.getAnimatedValue()).intValue();
-                    int offset = value - ExpandTopBarRunnable.this.mLastOffset;
-                    if (RelativeLayout.this.mAppWidgetToolBar.getTop() == 0) {
-                        return;
-                    }
-                    if (RelativeLayout.this.mAppWidgetToolBar.getTop() + offset > 0) {
-                        offset = -RelativeLayout.this.mAppWidgetToolBar.getTop();
-                    }
-                    RelativeLayout.this.mAppWidgetListView.scrollListBy(offset);
-                    RelativeLayout.this.mAppWidgetListView.offsetTopAndBottom(offset);
-                    RelativeLayout.this.mAppWidgetToolBar.offsetTopAndBottom(offset);
-                    ExpandTopBarRunnable.this.mLastOffset = value;
-                }
-            });
-            mExpandOffsetAnimator.addListener(new AnimatorListenerAdapter() { // from class: android.widget.RelativeLayout.ExpandTopBarRunnable.2
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animator) {
-                    if ((animator instanceof ValueAnimator) && ((ValueAnimator) animator).getAnimatedValue() != null) {
-                        ExpandTopBarRunnable.this.mLastOffset = ((Integer) ((ValueAnimator) animator).getAnimatedValue()).intValue();
-                    }
-                }
+            mExpandOffsetAnimator.setIntValues(
+                    0, RelativeLayout.this.mAppWidgetToolBar.getHeight());
+            mExpandOffsetAnimator.addUpdateListener(
+                    new ValueAnimator
+                            .AnimatorUpdateListener() { // from class:
+                                                        // android.widget.RelativeLayout.ExpandTopBarRunnable.1
+                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            int value = ((Integer) animation.getAnimatedValue()).intValue();
+                            int offset = value - ExpandTopBarRunnable.this.mLastOffset;
+                            if (RelativeLayout.this.mAppWidgetToolBar.getTop() == 0) {
+                                return;
+                            }
+                            if (RelativeLayout.this.mAppWidgetToolBar.getTop() + offset > 0) {
+                                offset = -RelativeLayout.this.mAppWidgetToolBar.getTop();
+                            }
+                            RelativeLayout.this.mAppWidgetListView.scrollListBy(offset);
+                            RelativeLayout.this.mAppWidgetListView.offsetTopAndBottom(offset);
+                            RelativeLayout.this.mAppWidgetToolBar.offsetTopAndBottom(offset);
+                            ExpandTopBarRunnable.this.mLastOffset = value;
+                        }
+                    });
+            mExpandOffsetAnimator.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // android.widget.RelativeLayout.ExpandTopBarRunnable.2
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationStart(Animator animator) {
+                            if ((animator instanceof ValueAnimator)
+                                    && ((ValueAnimator) animator).getAnimatedValue() != null) {
+                                ExpandTopBarRunnable.this.mLastOffset =
+                                        ((Integer) ((ValueAnimator) animator).getAnimatedValue())
+                                                .intValue();
+                            }
+                        }
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    ExpandTopBarRunnable.this.mLastOffset = 0;
-                }
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            ExpandTopBarRunnable.this.mLastOffset = 0;
+                        }
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationCancel(Animator animation) {
-                    ExpandTopBarRunnable.this.mLastOffset = 0;
-                }
-            });
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationCancel(Animator animation) {
+                            ExpandTopBarRunnable.this.mLastOffset = 0;
+                        }
+                    });
             mExpandOffsetAnimator.start();
         }
     }
@@ -1613,7 +1774,8 @@ public class RelativeLayout extends ViewGroup {
                     this.mAppWidgetListView.offsetTopAndBottom(offset2);
                 }
             }
-        } else if (dy < 0 && this.mAppWidgetToolBar.getBottom() < this.mAppWidgetToolBar.getHeight()) {
+        } else if (dy < 0
+                && this.mAppWidgetToolBar.getBottom() < this.mAppWidgetToolBar.getHeight()) {
             if (dy < this.mAppWidgetToolBar.getTop()) {
                 consumed[1] = dy - this.mAppWidgetToolBar.getTop();
                 int offset3 = -this.mAppWidgetToolBar.getTop();

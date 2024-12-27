@@ -4,10 +4,10 @@ import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOut
 import android.os.UserHandle;
 import android.util.IndentingPrintWriter;
 import android.util.SparseArray;
+
 import com.android.internal.os.PowerStats;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
-import com.android.server.power.stats.AggregatedPowerStatsConfig;
-import com.android.server.power.stats.MultiStateStats;
+
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.Collection;
@@ -40,7 +40,9 @@ public final class PowerComponentAggregatedPowerStats {
         public boolean updated;
     }
 
-    public PowerComponentAggregatedPowerStats(AggregatedPowerStats aggregatedPowerStats, AggregatedPowerStatsConfig.PowerComponent powerComponent) {
+    public PowerComponentAggregatedPowerStats(
+            AggregatedPowerStats aggregatedPowerStats,
+            AggregatedPowerStatsConfig.PowerComponent powerComponent) {
         this.mAggregatedPowerStats = aggregatedPowerStats;
         this.mConfig = powerComponent;
         this.powerComponentId = powerComponent.mPowerComponentId;
@@ -48,54 +50,65 @@ public final class PowerComponentAggregatedPowerStats {
         this.mUidStateConfig = powerComponent.getUidStateConfig();
     }
 
-    public static void dumpMultiStateStats(final IndentingPrintWriter indentingPrintWriter, final MultiStateStats multiStateStats, final String str, final String str2, final PowerStats.PowerStatsFormatter powerStatsFormatter) {
+    public static void dumpMultiStateStats(
+            final IndentingPrintWriter indentingPrintWriter,
+            final MultiStateStats multiStateStats,
+            final String str,
+            final String str2,
+            final PowerStats.PowerStatsFormatter powerStatsFormatter) {
         final boolean[] zArr = {true};
         MultiStateStats.Factory factory = multiStateStats.mFactory;
         final long[] jArr = new long[factory.mDimensionCount];
         final MultiStateStats.States[] statesArr = factory.mStates;
-        MultiStateStats.States.forEachTrackedStateCombination(new Consumer() { // from class: com.android.server.power.stats.PowerComponentAggregatedPowerStats$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                MultiStateStats multiStateStats2 = MultiStateStats.this;
-                long[] jArr2 = jArr;
-                boolean[] zArr2 = zArr;
-                IndentingPrintWriter indentingPrintWriter2 = indentingPrintWriter;
-                String str3 = str;
-                MultiStateStats.States[] statesArr2 = statesArr;
-                String str4 = str2;
-                PowerStats.PowerStatsFormatter powerStatsFormatter2 = powerStatsFormatter;
-                int[] iArr = (int[]) obj;
-                multiStateStats2.mCounter.getCounts(jArr2, multiStateStats2.mFactory.getSerialState(iArr));
-                for (long j : jArr2) {
-                    if (j != 0) {
-                        if (zArr2[0]) {
-                            indentingPrintWriter2.println(str3);
-                            indentingPrintWriter2.increaseIndent();
-                        }
-                        zArr2[0] = false;
-                        StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m("(");
-                        boolean z = true;
-                        for (int i = 0; i < iArr.length; i++) {
-                            if (statesArr2[i].mTracked) {
-                                if (!z) {
-                                    m.append(" ");
+        MultiStateStats.States.forEachTrackedStateCombination(
+                new Consumer() { // from class:
+                                 // com.android.server.power.stats.PowerComponentAggregatedPowerStats$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        MultiStateStats multiStateStats2 = MultiStateStats.this;
+                        long[] jArr2 = jArr;
+                        boolean[] zArr2 = zArr;
+                        IndentingPrintWriter indentingPrintWriter2 = indentingPrintWriter;
+                        String str3 = str;
+                        MultiStateStats.States[] statesArr2 = statesArr;
+                        String str4 = str2;
+                        PowerStats.PowerStatsFormatter powerStatsFormatter2 = powerStatsFormatter;
+                        int[] iArr = (int[]) obj;
+                        multiStateStats2.mCounter.getCounts(
+                                jArr2, multiStateStats2.mFactory.getSerialState(iArr));
+                        for (long j : jArr2) {
+                            if (j != 0) {
+                                if (zArr2[0]) {
+                                    indentingPrintWriter2.println(str3);
+                                    indentingPrintWriter2.increaseIndent();
                                 }
-                                m.append(statesArr2[i].mLabels[iArr[i]]);
-                                z = false;
+                                zArr2[0] = false;
+                                StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m("(");
+                                boolean z = true;
+                                for (int i = 0; i < iArr.length; i++) {
+                                    if (statesArr2[i].mTracked) {
+                                        if (!z) {
+                                            m.append(" ");
+                                        }
+                                        m.append(statesArr2[i].mLabels[iArr[i]]);
+                                        z = false;
+                                    }
+                                }
+                                if (str4 != null) {
+                                    m.append(" ");
+                                    m.append(str4);
+                                }
+                                m.append(") ");
+                                m.append(powerStatsFormatter2.format(jArr2));
+                                indentingPrintWriter2.println(m);
+                                return;
                             }
                         }
-                        if (str4 != null) {
-                            m.append(" ");
-                            m.append(str4);
-                        }
-                        m.append(") ");
-                        m.append(powerStatsFormatter2.format(jArr2));
-                        indentingPrintWriter2.println(m);
-                        return;
                     }
-                }
-            }
-        }, statesArr, new int[statesArr.length], 0);
+                },
+                statesArr,
+                new int[statesArr.length],
+                0);
         if (zArr[0]) {
             return;
         }
@@ -114,7 +127,8 @@ public final class PowerComponentAggregatedPowerStats {
             if (multiStateStats2 == null) {
                 multiStateStats2 = createStateStats(keyAt);
             }
-            multiStateStats2.mCounter.incrementValues((long[]) powerStats.stateStats.valueAt(size), j);
+            multiStateStats2.mCounter.incrementValues(
+                    (long[]) powerStats.stateStats.valueAt(size), j);
             multiStateStats2.mTracking = true;
         }
         MultiStateStats multiStateStats3 = this.mDeviceStats;
@@ -126,7 +140,8 @@ public final class PowerComponentAggregatedPowerStats {
                 createUidStats(uidStats, j);
             }
             MultiStateStats multiStateStats4 = uidStats.stats;
-            multiStateStats4.mCounter.incrementValues((long[]) powerStats.uidStats.valueAt(size2), j);
+            multiStateStats4.mCounter.incrementValues(
+                    (long[]) powerStats.uidStats.valueAt(size2), j);
             multiStateStats4.mTracking = true;
             uidStats.updated = true;
         }
@@ -161,7 +176,8 @@ public final class PowerComponentAggregatedPowerStats {
             if (descriptor == null) {
                 return;
             } else {
-                this.mStatsFactory = new MultiStateStats.Factory(descriptor.statsArrayLength, statesArr);
+                this.mStatsFactory =
+                        new MultiStateStats.Factory(descriptor.statsArrayLength, statesArr);
             }
         }
         MultiStateStats.Factory factory2 = this.mStatsFactory;
@@ -187,7 +203,9 @@ public final class PowerComponentAggregatedPowerStats {
             if (descriptor == null) {
                 return null;
             }
-            this.mStateStatsFactory = new MultiStateStats.Factory(descriptor.stateStatsArrayLength, this.mDeviceStateConfig);
+            this.mStateStatsFactory =
+                    new MultiStateStats.Factory(
+                            descriptor.stateStatsArrayLength, this.mDeviceStateConfig);
         }
         MultiStateStats.Factory factory = this.mStateStatsFactory;
         MultiStateStats multiStateStats = new MultiStateStats(factory, factory.mDimensionCount);
@@ -207,7 +225,8 @@ public final class PowerComponentAggregatedPowerStats {
             if (descriptor == null) {
                 return;
             } else {
-                this.mUidStatsFactory = new MultiStateStats.Factory(descriptor.uidStatsArrayLength, statesArr);
+                this.mUidStatsFactory =
+                        new MultiStateStats.Factory(descriptor.uidStatsArrayLength, statesArr);
             }
         }
         MultiStateStats.Factory factory2 = this.mUidStatsFactory;
@@ -227,14 +246,27 @@ public final class PowerComponentAggregatedPowerStats {
         MultiStateStats multiStateStats = this.mDeviceStats;
         if (multiStateStats != null) {
             PowerStats.Descriptor descriptor = this.mPowerStatsDescriptor;
-            dumpMultiStateStats(indentingPrintWriter, multiStateStats, descriptor.name, null, descriptor.getDeviceStatsFormatter());
+            dumpMultiStateStats(
+                    indentingPrintWriter,
+                    multiStateStats,
+                    descriptor.name,
+                    null,
+                    descriptor.getDeviceStatsFormatter());
         }
         if (this.mStateStats.size() != 0) {
             indentingPrintWriter.increaseIndent();
-            String m = AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mPowerStatsDescriptor.name, " states");
-            PowerStats.PowerStatsFormatter stateStatsFormatter = this.mPowerStatsDescriptor.getStateStatsFormatter();
+            String m =
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                            new StringBuilder(), this.mPowerStatsDescriptor.name, " states");
+            PowerStats.PowerStatsFormatter stateStatsFormatter =
+                    this.mPowerStatsDescriptor.getStateStatsFormatter();
             for (int i = 0; i < this.mStateStats.size(); i++) {
-                dumpMultiStateStats(indentingPrintWriter, (MultiStateStats) this.mStateStats.valueAt(i), m, this.mPowerStatsDescriptor.getStateLabel(this.mStateStats.keyAt(i)), stateStatsFormatter);
+                dumpMultiStateStats(
+                        indentingPrintWriter,
+                        (MultiStateStats) this.mStateStats.valueAt(i),
+                        m,
+                        this.mPowerStatsDescriptor.getStateLabel(this.mStateStats.keyAt(i)),
+                        stateStatsFormatter);
             }
             indentingPrintWriter.decreaseIndent();
         }
@@ -251,7 +283,11 @@ public final class PowerComponentAggregatedPowerStats {
             multiStateStats.mCounter.getCounts(jArr, multiStateStats.mFactory.getSerialState(iArr));
             return true;
         }
-        throw new IllegalArgumentException("Invalid number of tracked states: " + iArr.length + " expected: " + statesArr.length);
+        throw new IllegalArgumentException(
+                "Invalid number of tracked states: "
+                        + iArr.length
+                        + " expected: "
+                        + statesArr.length);
     }
 
     public final UidStats getUidStats(int i) {
@@ -265,8 +301,10 @@ public final class PowerComponentAggregatedPowerStats {
                 if (states.mTracked) {
                     String str = states.mName;
                     MultiStateStats.States[] statesArr2 = this.mDeviceStateConfig;
-                    int findTrackedStateByName = MultiStateStats.States.findTrackedStateByName(statesArr2, str);
-                    if (findTrackedStateByName != -1 && statesArr2[findTrackedStateByName].mTracked) {
+                    int findTrackedStateByName =
+                            MultiStateStats.States.findTrackedStateByName(statesArr2, str);
+                    if (findTrackedStateByName != -1
+                            && statesArr2[findTrackedStateByName].mTracked) {
                         uidStats.states[i2] = this.mDeviceStates[findTrackedStateByName];
                     }
                 }
@@ -281,7 +319,11 @@ public final class PowerComponentAggregatedPowerStats {
         int length = iArr.length;
         MultiStateStats.States[] statesArr = this.mUidStateConfig;
         if (length != statesArr.length) {
-            throw new IllegalArgumentException("Invalid number of tracked states: " + iArr.length + " expected: " + statesArr.length);
+            throw new IllegalArgumentException(
+                    "Invalid number of tracked states: "
+                            + iArr.length
+                            + " expected: "
+                            + statesArr.length);
         }
         UidStats uidStats = (UidStats) this.mUidStats.get(i);
         if (uidStats == null || (multiStateStats = uidStats.stats) == null) {
@@ -324,7 +366,12 @@ public final class PowerComponentAggregatedPowerStats {
             UidStats uidStats = (UidStats) this.mUidStats.get(i3);
             if (uidStats != null && (multiStateStats = uidStats.stats) != null) {
                 PowerStats.Descriptor descriptor = this.mPowerStatsDescriptor;
-                dumpMultiStateStats(indentingPrintWriter, multiStateStats, descriptor.name, null, descriptor.getUidStatsFormatter());
+                dumpMultiStateStats(
+                        indentingPrintWriter,
+                        multiStateStats,
+                        descriptor.name,
+                        null,
+                        descriptor.getUidStatsFormatter());
             }
             indentingPrintWriter.decreaseIndent();
         }

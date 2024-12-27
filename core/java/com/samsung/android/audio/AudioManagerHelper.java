@@ -11,9 +11,11 @@ import android.os.SystemProperties;
 import android.telecom.Logging.Session;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.samsung.android.common.AsPackageName;
 import com.samsung.android.media.AudioParameter;
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,12 +28,14 @@ public class AudioManagerHelper {
     private static final int LOGGING_CALLER_DEFAULT_DEPTH = 5;
     private static final String TAG = "AudioManagerHelper";
     private static final boolean USER_SHIP;
-    private static final ArrayList<String> mLoggingPackages = new ArrayList<>(Arrays.asList("android", AsPackageName.SYSTEMUI, "com.android.settings"));
+    private static final ArrayList<String> mLoggingPackages =
+            new ArrayList<>(
+                    Arrays.asList("android", AsPackageName.SYSTEMUI, "com.android.settings"));
 
     /* JADX WARN: Code restructure failed: missing block: B:4:0x002d, code lost:
-    
-        if (android.os.SystemProperties.getBoolean("ro.product_ship", true) != false) goto L8;
-     */
+
+       if (android.os.SystemProperties.getBoolean("ro.product_ship", true) != false) goto L8;
+    */
     static {
         /*
             java.util.ArrayList r0 = new java.util.ArrayList
@@ -58,11 +62,16 @@ public class AudioManagerHelper {
             com.samsung.android.audio.AudioManagerHelper.USER_SHIP = r1
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.audio.AudioManagerHelper.<clinit>():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.audio.AudioManagerHelper.<clinit>():void");
     }
 
     public static void setMusicShareSyncDelay(int delay) {
-        AudioParameter param = new AudioParameter.Builder().setParam(AudioParameter.SEC_GLOBAL_SET_A2DP_AV_SYNC, "musicshare," + delay).build();
+        AudioParameter param =
+                new AudioParameter.Builder()
+                        .setParam(AudioParameter.SEC_GLOBAL_SET_A2DP_AV_SYNC, "musicshare," + delay)
+                        .build();
         AudioSystem.setParameters(param.toString());
     }
 
@@ -112,7 +121,8 @@ public class AudioManagerHelper {
     }
 
     private static boolean isTablet() {
-        return SystemProperties.get("ro.build.characteristics", "").contains(BnRConstants.DEVICETYPE_TABLET);
+        return SystemProperties.get("ro.build.characteristics", "")
+                .contains(BnRConstants.DEVICETYPE_TABLET);
     }
 
     private static boolean isAttModelWithSoftPhone() {
@@ -157,28 +167,45 @@ public class AudioManagerHelper {
     }
 
     public static String buildCallStack(StackTraceElement[] stack, int depth) {
-        return (String) List.of((Object[]) stack).subList(5, Math.min(depth + 5, stack.length)).stream().map(new Function() { // from class: com.samsung.android.audio.AudioManagerHelper$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String makeMethodString;
-                makeMethodString = AudioManagerHelper.makeMethodString((StackTraceElement) obj);
-                return makeMethodString;
-            }
-        }).collect(Collectors.joining("<-"));
+        return (String)
+                List.of((Object[]) stack).subList(5, Math.min(depth + 5, stack.length)).stream()
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.audio.AudioManagerHelper$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        String makeMethodString;
+                                        makeMethodString =
+                                                AudioManagerHelper.makeMethodString(
+                                                        (StackTraceElement) obj);
+                                        return makeMethodString;
+                                    }
+                                })
+                        .collect(Collectors.joining("<-"));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public static String makeMethodString(StackTraceElement element) {
-        return getSimpleClassName(element) + MediaMetrics.SEPARATOR + element.getMethodName() + ":" + element.getLineNumber();
+        return getSimpleClassName(element)
+                + MediaMetrics.SEPARATOR
+                + element.getMethodName()
+                + ":"
+                + element.getLineNumber();
     }
 
     private static String getSimpleClassName(StackTraceElement element) {
-        return (String) Arrays.stream(element.getClassName().split("\\.")).reduce(new BinaryOperator() { // from class: com.samsung.android.audio.AudioManagerHelper$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiFunction
-            public final Object apply(Object obj, Object obj2) {
-                return AudioManagerHelper.lambda$getSimpleClassName$0((String) obj, (String) obj2);
-            }
-        }).orElse("");
+        return (String)
+                Arrays.stream(element.getClassName().split("\\."))
+                        .reduce(
+                                new BinaryOperator() { // from class:
+                                                       // com.samsung.android.audio.AudioManagerHelper$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiFunction
+                                    public final Object apply(Object obj, Object obj2) {
+                                        return AudioManagerHelper.lambda$getSimpleClassName$0(
+                                                (String) obj, (String) obj2);
+                                    }
+                                })
+                        .orElse("");
     }
 
     static /* synthetic */ String lambda$getSimpleClassName$0(String first, String second) {

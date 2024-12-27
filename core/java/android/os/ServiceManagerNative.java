@@ -2,8 +2,7 @@ package android.os;
 
 /* loaded from: classes3.dex */
 public final class ServiceManagerNative {
-    private ServiceManagerNative() {
-    }
+    private ServiceManagerNative() {}
 
     public static IServiceManager asInterface(IBinder obj) {
         if (obj == null) {

@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISemDisplayQualityManager extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.displayquality.ISemDisplayQualityManager";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.displayquality.ISemDisplayQualityManager";
 
     void enhanceDisplayOutdoorVisibilityByLux(int i) throws RemoteException;
 
@@ -16,12 +17,10 @@ public interface ISemDisplayQualityManager extends IInterface {
 
     public static class Default implements ISemDisplayQualityManager {
         @Override // com.samsung.android.displayquality.ISemDisplayQualityManager
-        public void enhanceDisplayOutdoorVisibilityByLux(int lux) throws RemoteException {
-        }
+        public void enhanceDisplayOutdoorVisibilityByLux(int lux) throws RemoteException {}
 
         @Override // com.samsung.android.displayquality.ISemDisplayQualityManager
-        public void setAdaptiveSync(boolean enable) throws RemoteException {
-        }
+        public void setAdaptiveSync(boolean enable) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface ISemDisplayQualityManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemDisplayQualityManager {
+    public abstract static class Stub extends Binder implements ISemDisplayQualityManager {
         static final int TRANSACTION_enhanceDisplayOutdoorVisibilityByLux = 1;
         static final int TRANSACTION_setAdaptiveSync = 2;
 
@@ -70,7 +69,8 @@ public interface ISemDisplayQualityManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemDisplayQualityManager.DESCRIPTOR);
             }

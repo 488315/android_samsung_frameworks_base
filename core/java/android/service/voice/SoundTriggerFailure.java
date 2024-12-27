@@ -4,25 +4,29 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class SoundTriggerFailure implements Parcelable {
-    public static final Parcelable.Creator<SoundTriggerFailure> CREATOR = new Parcelable.Creator<SoundTriggerFailure>() { // from class: android.service.voice.SoundTriggerFailure.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SoundTriggerFailure[] newArray(int size) {
-            return new SoundTriggerFailure[size];
-        }
+    public static final Parcelable.Creator<SoundTriggerFailure> CREATOR =
+            new Parcelable.Creator<
+                    SoundTriggerFailure>() { // from class:
+                                             // android.service.voice.SoundTriggerFailure.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SoundTriggerFailure[] newArray(int size) {
+                    return new SoundTriggerFailure[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SoundTriggerFailure createFromParcel(Parcel in) {
-            return new SoundTriggerFailure(in.readInt(), in.readString8());
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SoundTriggerFailure createFromParcel(Parcel in) {
+                    return new SoundTriggerFailure(in.readInt(), in.readString8());
+                }
+            };
     public static final int ERROR_CODE_MODULE_DIED = 1;
     public static final int ERROR_CODE_RECOGNITION_RESUME_FAILED = 2;
     public static final int ERROR_CODE_UNEXPECTED_PREEMPTION = 3;
@@ -32,8 +36,7 @@ public final class SoundTriggerFailure implements Parcelable {
     private final int mSuggestedAction;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SoundTriggerErrorCode {
-    }
+    public @interface SoundTriggerErrorCode {}
 
     public SoundTriggerFailure(int errorCode, String errorMessage) {
         this(errorCode, errorMessage, getSuggestedActionBasedOnErrorCode(errorCode));
@@ -49,8 +52,13 @@ public final class SoundTriggerFailure implements Parcelable {
             case 2:
             case 3:
                 this.mErrorCode = errorCode;
-                if (suggestedAction != getSuggestedActionBasedOnErrorCode(errorCode) && errorCode != 0) {
-                    throw new IllegalArgumentException("Invalid suggested next action: errorCode=" + errorCode + ", suggestedAction=" + suggestedAction);
+                if (suggestedAction != getSuggestedActionBasedOnErrorCode(errorCode)
+                        && errorCode != 0) {
+                    throw new IllegalArgumentException(
+                            "Invalid suggested next action: errorCode="
+                                    + errorCode
+                                    + ", suggestedAction="
+                                    + suggestedAction);
                 }
                 this.mErrorMessage = errorMessage;
                 this.mSuggestedAction = suggestedAction;
@@ -97,6 +105,12 @@ public final class SoundTriggerFailure implements Parcelable {
     }
 
     public String toString() {
-        return "SoundTriggerFailure { errorCode = " + this.mErrorCode + ", errorMessage = " + this.mErrorMessage + ", suggestedNextAction = " + this.mSuggestedAction + " }";
+        return "SoundTriggerFailure { errorCode = "
+                + this.mErrorCode
+                + ", errorMessage = "
+                + this.mErrorMessage
+                + ", suggestedNextAction = "
+                + this.mSuggestedAction
+                + " }";
     }
 }

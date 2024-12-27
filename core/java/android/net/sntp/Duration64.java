@@ -1,6 +1,7 @@
 package android.net.sntp;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.time.Duration;
 import java.util.Objects;
 
@@ -14,8 +15,12 @@ public final class Duration64 {
     }
 
     public static Duration64 between(Timestamp64 startInclusive, Timestamp64 endExclusive) {
-        long oneBits = (startInclusive.getEraSeconds() << 32) | (startInclusive.getFractionBits() & 4294967295L);
-        long twoBits = (endExclusive.getEraSeconds() << 32) | (endExclusive.getFractionBits() & 4294967295L);
+        long oneBits =
+                (startInclusive.getEraSeconds() << 32)
+                        | (startInclusive.getFractionBits() & 4294967295L);
+        long twoBits =
+                (endExclusive.getEraSeconds() << 32)
+                        | (endExclusive.getFractionBits() & 4294967295L);
         long resultBits = twoBits - oneBits;
         return new Duration64(resultBits);
     }
@@ -29,7 +34,9 @@ public final class Duration64 {
         if (seconds < -2147483648L || seconds > 2147483647L) {
             throw new IllegalArgumentException();
         }
-        long bits = (seconds << 32) | (Timestamp64.nanosToFractionBits(duration.getNano()) & 4294967295L);
+        long bits =
+                (seconds << 32)
+                        | (Timestamp64.nanosToFractionBits(duration.getNano()) & 4294967295L);
         return new Duration64(bits);
     }
 
@@ -59,7 +66,12 @@ public final class Duration64 {
 
     public String toString() {
         Duration duration = toDuration();
-        return Long.toHexString(this.mBits) + NavigationBarInflaterView.KEY_CODE_START + duration.getSeconds() + "s " + duration.getNano() + "ns)";
+        return Long.toHexString(this.mBits)
+                + NavigationBarInflaterView.KEY_CODE_START
+                + duration.getSeconds()
+                + "s "
+                + duration.getNano()
+                + "ns)";
     }
 
     public int getSeconds() {

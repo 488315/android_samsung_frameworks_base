@@ -4,36 +4,46 @@ import android.annotation.SystemApi;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class DevicePolicyStringResource implements Parcelable {
-    public static final Parcelable.Creator<DevicePolicyStringResource> CREATOR = new Parcelable.Creator<DevicePolicyStringResource>() { // from class: android.app.admin.DevicePolicyStringResource.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DevicePolicyStringResource createFromParcel(Parcel in) {
-            String stringId = in.readString();
-            int resourceIdInCallingPackage = in.readInt();
-            ParcelableResource resource = (ParcelableResource) in.readTypedObject(ParcelableResource.CREATOR);
-            return new DevicePolicyStringResource(stringId, resourceIdInCallingPackage, resource);
-        }
+    public static final Parcelable.Creator<DevicePolicyStringResource> CREATOR =
+            new Parcelable.Creator<DevicePolicyStringResource>() { // from class:
+                // android.app.admin.DevicePolicyStringResource.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DevicePolicyStringResource createFromParcel(Parcel in) {
+                    String stringId = in.readString();
+                    int resourceIdInCallingPackage = in.readInt();
+                    ParcelableResource resource =
+                            (ParcelableResource) in.readTypedObject(ParcelableResource.CREATOR);
+                    return new DevicePolicyStringResource(
+                            stringId, resourceIdInCallingPackage, resource);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DevicePolicyStringResource[] newArray(int size) {
-            return new DevicePolicyStringResource[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DevicePolicyStringResource[] newArray(int size) {
+                    return new DevicePolicyStringResource[size];
+                }
+            };
     private ParcelableResource mResource;
     private final int mResourceIdInCallingPackage;
     private final String mStringId;
 
-    public DevicePolicyStringResource(Context context, String stringId, int resourceIdInCallingPackage) {
-        this(stringId, resourceIdInCallingPackage, new ParcelableResource(context, resourceIdInCallingPackage, 2));
+    public DevicePolicyStringResource(
+            Context context, String stringId, int resourceIdInCallingPackage) {
+        this(
+                stringId,
+                resourceIdInCallingPackage,
+                new ParcelableResource(context, resourceIdInCallingPackage, 2));
     }
 
-    private DevicePolicyStringResource(String stringId, int resourceIdInCallingPackage, ParcelableResource resource) {
+    private DevicePolicyStringResource(
+            String stringId, int resourceIdInCallingPackage, ParcelableResource resource) {
         Objects.requireNonNull(stringId, "stringId must be provided.");
         Objects.requireNonNull(resource, "ParcelableResource must be provided.");
         this.mStringId = stringId;
@@ -61,14 +71,17 @@ public final class DevicePolicyStringResource implements Parcelable {
             return false;
         }
         DevicePolicyStringResource other = (DevicePolicyStringResource) o;
-        if (this.mStringId == other.mStringId && this.mResourceIdInCallingPackage == other.mResourceIdInCallingPackage && this.mResource.equals(other.mResource)) {
+        if (this.mStringId == other.mStringId
+                && this.mResourceIdInCallingPackage == other.mResourceIdInCallingPackage
+                && this.mResource.equals(other.mResource)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mStringId, Integer.valueOf(this.mResourceIdInCallingPackage), this.mResource);
+        return Objects.hash(
+                this.mStringId, Integer.valueOf(this.mResourceIdInCallingPackage), this.mResource);
     }
 
     @Override // android.os.Parcelable

@@ -8,7 +8,8 @@ import com.android.internal.org.bouncycastle.asn1.x500.X500NameStyle;
 public class BCStrictStyle extends BCStyle {
     public static final X500NameStyle INSTANCE = new BCStrictStyle();
 
-    @Override // com.android.internal.org.bouncycastle.asn1.x500.style.AbstractX500NameStyle, com.android.internal.org.bouncycastle.asn1.x500.X500NameStyle
+    @Override // com.android.internal.org.bouncycastle.asn1.x500.style.AbstractX500NameStyle,
+              // com.android.internal.org.bouncycastle.asn1.x500.X500NameStyle
     public boolean areEqual(X500Name name1, X500Name name2) {
         RDN[] rdns1 = name1.getRDNs();
         RDN[] rdns2 = name2.getRDNs();

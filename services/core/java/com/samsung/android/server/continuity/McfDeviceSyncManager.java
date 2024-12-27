@@ -14,12 +14,14 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptService$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.audio.AudioService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.mcfds.lib.AbstractDeviceSyncManager$1;
 import com.samsung.android.mcfds.lib.DeviceSyncManager;
 import com.samsung.android.server.continuity.autoswitch.AutoSwitchSettingHelper;
@@ -39,196 +41,314 @@ public final class McfDeviceSyncManager {
     static final int MSG_UNBIND_MCF = 3;
     public UserHandle mCurrentUserHandle;
     public final DeviceSyncManager mDsManager;
-    public final AnonymousClass1 mHandler = new Handler(Looper.getMainLooper()) { // from class: com.samsung.android.server.continuity.McfDeviceSyncManager.1
-        @Override // android.os.Handler
-        public final void handleMessage(Message message) {
-            int semGetIdentifier;
-            int i = message.what;
-            int i2 = message.arg1;
-            McfDeviceSyncManager mcfDeviceSyncManager = McfDeviceSyncManager.this;
-            if (i != 0) {
-                if (i == 1) {
-                    mcfDeviceSyncManager.stopUser();
-                    return;
-                }
-                if (i != 2) {
-                    if (i == 3) {
-                        mcfDeviceSyncManager.unbindMcf();
-                        return;
-                    }
-                    if (i != 4) {
-                        mcfDeviceSyncManager.getClass();
-                        return;
-                    }
-                    AnonymousClass1 anonymousClass1 = mcfDeviceSyncManager.mHandler;
-                    if (anonymousClass1.hasMessages(3)) {
-                        Log.i("[MCF_DS_SYS]_McfDsManager", "replacedPackage - remove unbind message");
-                        mcfDeviceSyncManager.removeMessage(3);
-                    }
-                    if (anonymousClass1.hasMessages(2)) {
-                        Log.i("[MCF_DS_SYS]_McfDsManager", "replacedPackage - has bind message");
-                        return;
-                    } else {
-                        Log.i("[MCF_DS_SYS]_McfDsManager", "replacedPackage");
-                        mcfDeviceSyncManager.removeAndSendMessageDelayed(2, 5, 0L);
-                        return;
-                    }
-                }
-                if (!mcfDeviceSyncManager.mIsValidState) {
-                    Log.d("[MCF_DS_SYS]_McfDsManager", "bindMcf - invalid state");
-                    return;
-                }
-                DeviceSyncManager deviceSyncManager = mcfDeviceSyncManager.mDsManager;
-                int i3 = deviceSyncManager.mServiceState;
-                if (i3 != 0 && (i3 != 1 || i2 != 6)) {
-                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(i3, i2, "bindMcf - invalid state ", ", reason ", "[MCF_DS_SYS]_McfDsManager");
-                    if (i3 == 3) {
-                        mcfDeviceSyncManager.initMcfDeviceSyncMainController(i2);
-                        return;
-                    }
-                    return;
-                }
-                UserHandle userHandle = mcfDeviceSyncManager.mCurrentUserHandle;
-                if (userHandle == null) {
-                    Log.w("[MCF_DS_SYS]_McfDsManager", "bindMcf - null current user handle");
-                    return;
-                }
-                AnonymousClass3 anonymousClass3 = mcfDeviceSyncManager.new AnonymousClass3(i2);
-                if (i3 == 0 || i3 == 1) {
-                    Intent intent = new Intent("com.samsung.android.mcfds.ACTION_START");
-                    intent.setComponent(new ComponentName("com.samsung.android.mcfds", "com.samsung.android.mcfds.McfDeviceSyncService"));
-                    intent.putExtra("Caller", deviceSyncManager.mContext.getPackageName());
-                    if (!deviceSyncManager.mContext.semBindServiceAsUser(intent, deviceSyncManager.mServiceConnection, 1, userHandle)) {
-                        Log.w("[MCF_DS_LIB]_DeviceSyncManager", "connectService : failed");
-                        Log.w("[MCF_DS_SYS]_McfDsManager", "bindMcf - failed with reason: " + i2);
-                        mcfDeviceSyncManager.removeAndSendMessageDelayed(2, i2, 3000L);
-                        return;
-                    }
-                    Log.i("[MCF_DS_LIB]_DeviceSyncManager", "connectServiceAsUser : success " + userHandle.toString());
-                    deviceSyncManager.mServiceState = 2;
-                    deviceSyncManager.mListener = anonymousClass3;
-                } else {
-                    AudioService$$ExternalSyntheticOutline0.m(new StringBuilder("connectServiceAsUser : invalid request "), deviceSyncManager.mServiceState, "[MCF_DS_LIB]_DeviceSyncManager");
-                }
-                DirEncryptService$$ExternalSyntheticOutline0.m(i2, "bindMcf - success with reason: ", "[MCF_DS_SYS]_McfDsManager");
-                return;
-            }
-            UserHandle userHandle2 = mcfDeviceSyncManager.mCurrentUserHandle;
-            if (userHandle2 == null) {
-                semGetIdentifier = -10000;
-            } else {
-                UserHandle userHandle3 = SemWrapper.SEM_ALL;
-                semGetIdentifier = userHandle2.semGetIdentifier();
-            }
-            if (semGetIdentifier == -10000) {
-                Log.w("[MCF_DS_SYS]_McfDsManager", "start : userId is USER_NULL");
-                return;
-            }
-            AnonymousClass2 anonymousClass2 = mcfDeviceSyncManager.new AnonymousClass2();
-            PreconditionObserver preconditionObserver = mcfDeviceSyncManager.mPreconditionObserver;
-            preconditionObserver.mUserId = semGetIdentifier;
-            preconditionObserver.mListener = anonymousClass2;
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
-            intentFilter.addAction("android.intent.action.PACKAGE_REPLACED");
-            intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
-            intentFilter.addDataScheme("package");
-            intentFilter.addDataSchemeSpecificPart("com.samsung.android.scloud", 0);
-            intentFilter.addDataSchemeSpecificPart("com.samsung.android.mcfds", 0);
-            Context context = preconditionObserver.mContext;
-            UserHandle userHandleForUid = UserHandle.getUserHandleForUid(preconditionObserver.mUserId);
-            UserHandle userHandle4 = SemWrapper.SEM_ALL;
-            context.semRegisterReceiverAsUser(preconditionObserver.mPkgReceiver, userHandleForUid, intentFilter, null, null, 2);
-            IntentFilter intentFilter2 = new IntentFilter();
-            intentFilter2.addAction("android.intent.action.PACKAGE_RESTARTED");
-            intentFilter2.addDataScheme("package");
-            intentFilter2.addDataSchemeSpecificPart("com.samsung.android.mcfds", 0);
-            preconditionObserver.mContext.semRegisterReceiverAsUser(preconditionObserver.mPkgReceiver, UserHandle.getUserHandleForUid(preconditionObserver.mUserId), intentFilter2, null, null, 2);
-            preconditionObserver.mIsPkgObserverRegistered = true;
-            if (Utils.isPackageInstalled(preconditionObserver.mContext, "com.samsung.android.scloud")) {
-                preconditionObserver.setFlag(240);
-            }
-            if (Utils.isPackageInstalled(preconditionObserver.mContext, "com.samsung.android.mcfds")) {
-                preconditionObserver.setFlag(3840);
-            }
-            preconditionObserver.mCurrentAccount = preconditionObserver.getSamsungAccount();
-            if (Settings.System.semGetIntForUser(preconditionObserver.mContext.getContentResolver(), "mcf_continuity", -1, preconditionObserver.mUserId) == -1) {
-                preconditionObserver.setContinuitySetting((preconditionObserver.mCurrentAccount == null || Utils.isHighPowerConsumptionChipset()) ? 0 : 1);
-            }
-            preconditionObserver.updateSettings(preconditionObserver.isEnableSettings());
-            if (PreconditionObserver.FEATURE_CONTINUITY <= 0) {
-                Log.e("[MCF_DS_SYS]_PreconditionObserver", "registerSettingsObserver - invalid feature value");
-            } else if (!preconditionObserver.mRegisterSettingsObserver) {
-                if (PreconditionObserver.isSupportedContinuity()) {
-                    ContentResolver contentResolver = preconditionObserver.mContext.getContentResolver();
-                    Uri uriFor = Settings.System.getUriFor("mcf_continuity");
-                    AbstractPreconditionObserver$1 abstractPreconditionObserver$1 = preconditionObserver.mSettingObserver;
-                    contentResolver.registerContentObserver(uriFor, false, abstractPreconditionObserver$1);
-                    preconditionObserver.mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor("multi_control_enabled"), false, abstractPreconditionObserver$1);
-                    preconditionObserver.mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor("vcc_continuity"), false, abstractPreconditionObserver$1);
-                    preconditionObserver.mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor("hwrs_service"), false, abstractPreconditionObserver$1);
-                }
-                if (PreconditionObserver.isSupported(2)) {
-                    AutoSwitchSettingHelper autoSwitchSettingHelper = preconditionObserver.mAutoSwitchSettingHelper;
-                    autoSwitchSettingHelper.getClass();
-                    BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
-                    if (defaultAdapter == null) {
-                        Log.e("[MCF_DS_SYS]_AutoSwitchSettingHelper", "start - null bluetoothAdapter");
-                    } else {
-                        boolean semIsBleEnabled = defaultAdapter.semIsBleEnabled();
-                        AutoSwitchSettingHelper.AnonymousClass1 anonymousClass12 = autoSwitchSettingHelper.mBtStateReceiver;
-                        if (semIsBleEnabled) {
-                            Log.i("[MCF_DS_SYS]_AutoSwitchSettingHelper", "start - BleEnabled true");
-                            autoSwitchSettingHelper.setStandAloneBleMode(true);
-                            if (autoSwitchSettingHelper.mIsRegisterBtStateReceiver) {
-                                autoSwitchSettingHelper.mIsRegisterBtStateReceiver = false;
-                                autoSwitchSettingHelper.mContext.unregisterReceiver(anonymousClass12);
-                            }
-                            ExecutorUtil.sExecutorIO.execute(new ExecutorUtil.ThrowExceptionRunnable(new AutoSwitchSettingHelper$$ExternalSyntheticLambda0(autoSwitchSettingHelper)));
-                        } else {
-                            if (!autoSwitchSettingHelper.mIsRegisterBtStateReceiver) {
-                                autoSwitchSettingHelper.mContext.registerReceiver(anonymousClass12, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("com.samsung.bluetooth.adapter.action.BLE_STATE_CHANGED", "android.bluetooth.adapter.action.STATE_CHANGED"), 2);
-                                autoSwitchSettingHelper.mIsRegisterBtStateReceiver = true;
-                            }
-                            autoSwitchSettingHelper.setStandAloneBleMode(true);
+    public final AnonymousClass1 mHandler = new Handler(Looper.getMainLooper()) { // from class:
+                // com.samsung.android.server.continuity.McfDeviceSyncManager.1
+                @Override // android.os.Handler
+                public final void handleMessage(Message message) {
+                    int semGetIdentifier;
+                    int i = message.what;
+                    int i2 = message.arg1;
+                    McfDeviceSyncManager mcfDeviceSyncManager = McfDeviceSyncManager.this;
+                    if (i != 0) {
+                        if (i == 1) {
+                            mcfDeviceSyncManager.stopUser();
+                            return;
                         }
-                        autoSwitchSettingHelper.mContext.registerReceiver(autoSwitchSettingHelper.mReceiver, BatteryService$$ExternalSyntheticOutline0.m("com.samsung.bluetooth.device.action.AUTO_SWITCH_MODE_CHANGED"), 2);
-                        IntentFilter intentFilter3 = new IntentFilter();
-                        intentFilter3.addAction("com.samsung.intent.action.SETTINGS_WIFI_BLUETOOTH_RESET");
-                        autoSwitchSettingHelper.mContext.registerReceiver(autoSwitchSettingHelper.mReceiver, intentFilter3, "com.sec.android.settings.permission.WIFI_BLUETOOTH_RESET", null, 2);
-                        autoSwitchSettingHelper.mContext.registerReceiver(autoSwitchSettingHelper.mReceiver, BatteryService$$ExternalSyntheticOutline0.m("android.intent.action.SETTINGS_SOFT_RESET"), "com.sec.android.settings.permission.SOFT_RESET", null, 2);
+                        if (i != 2) {
+                            if (i == 3) {
+                                mcfDeviceSyncManager.unbindMcf();
+                                return;
+                            }
+                            if (i != 4) {
+                                mcfDeviceSyncManager.getClass();
+                                return;
+                            }
+                            AnonymousClass1 anonymousClass1 = mcfDeviceSyncManager.mHandler;
+                            if (anonymousClass1.hasMessages(3)) {
+                                Log.i(
+                                        "[MCF_DS_SYS]_McfDsManager",
+                                        "replacedPackage - remove unbind message");
+                                mcfDeviceSyncManager.removeMessage(3);
+                            }
+                            if (anonymousClass1.hasMessages(2)) {
+                                Log.i(
+                                        "[MCF_DS_SYS]_McfDsManager",
+                                        "replacedPackage - has bind message");
+                                return;
+                            } else {
+                                Log.i("[MCF_DS_SYS]_McfDsManager", "replacedPackage");
+                                mcfDeviceSyncManager.removeAndSendMessageDelayed(2, 5, 0L);
+                                return;
+                            }
+                        }
+                        if (!mcfDeviceSyncManager.mIsValidState) {
+                            Log.d("[MCF_DS_SYS]_McfDsManager", "bindMcf - invalid state");
+                            return;
+                        }
+                        DeviceSyncManager deviceSyncManager = mcfDeviceSyncManager.mDsManager;
+                        int i3 = deviceSyncManager.mServiceState;
+                        if (i3 != 0 && (i3 != 1 || i2 != 6)) {
+                            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                    i3,
+                                    i2,
+                                    "bindMcf - invalid state ",
+                                    ", reason ",
+                                    "[MCF_DS_SYS]_McfDsManager");
+                            if (i3 == 3) {
+                                mcfDeviceSyncManager.initMcfDeviceSyncMainController(i2);
+                                return;
+                            }
+                            return;
+                        }
+                        UserHandle userHandle = mcfDeviceSyncManager.mCurrentUserHandle;
+                        if (userHandle == null) {
+                            Log.w(
+                                    "[MCF_DS_SYS]_McfDsManager",
+                                    "bindMcf - null current user handle");
+                            return;
+                        }
+                        AnonymousClass3 anonymousClass3 =
+                                mcfDeviceSyncManager.new AnonymousClass3(i2);
+                        if (i3 == 0 || i3 == 1) {
+                            Intent intent = new Intent("com.samsung.android.mcfds.ACTION_START");
+                            intent.setComponent(
+                                    new ComponentName(
+                                            "com.samsung.android.mcfds",
+                                            "com.samsung.android.mcfds.McfDeviceSyncService"));
+                            intent.putExtra("Caller", deviceSyncManager.mContext.getPackageName());
+                            if (!deviceSyncManager.mContext.semBindServiceAsUser(
+                                    intent, deviceSyncManager.mServiceConnection, 1, userHandle)) {
+                                Log.w("[MCF_DS_LIB]_DeviceSyncManager", "connectService : failed");
+                                Log.w(
+                                        "[MCF_DS_SYS]_McfDsManager",
+                                        "bindMcf - failed with reason: " + i2);
+                                mcfDeviceSyncManager.removeAndSendMessageDelayed(2, i2, 3000L);
+                                return;
+                            }
+                            Log.i(
+                                    "[MCF_DS_LIB]_DeviceSyncManager",
+                                    "connectServiceAsUser : success " + userHandle.toString());
+                            deviceSyncManager.mServiceState = 2;
+                            deviceSyncManager.mListener = anonymousClass3;
+                        } else {
+                            AudioService$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("connectServiceAsUser : invalid request "),
+                                    deviceSyncManager.mServiceState,
+                                    "[MCF_DS_LIB]_DeviceSyncManager");
+                        }
+                        DirEncryptService$$ExternalSyntheticOutline0.m(
+                                i2, "bindMcf - success with reason: ", "[MCF_DS_SYS]_McfDsManager");
+                        return;
+                    }
+                    UserHandle userHandle2 = mcfDeviceSyncManager.mCurrentUserHandle;
+                    if (userHandle2 == null) {
+                        semGetIdentifier = -10000;
+                    } else {
+                        UserHandle userHandle3 = SemWrapper.SEM_ALL;
+                        semGetIdentifier = userHandle2.semGetIdentifier();
+                    }
+                    if (semGetIdentifier == -10000) {
+                        Log.w("[MCF_DS_SYS]_McfDsManager", "start : userId is USER_NULL");
+                        return;
+                    }
+                    AnonymousClass2 anonymousClass2 = mcfDeviceSyncManager.new AnonymousClass2();
+                    PreconditionObserver preconditionObserver =
+                            mcfDeviceSyncManager.mPreconditionObserver;
+                    preconditionObserver.mUserId = semGetIdentifier;
+                    preconditionObserver.mListener = anonymousClass2;
+                    IntentFilter intentFilter = new IntentFilter();
+                    intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
+                    intentFilter.addAction("android.intent.action.PACKAGE_REPLACED");
+                    intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
+                    intentFilter.addDataScheme("package");
+                    intentFilter.addDataSchemeSpecificPart("com.samsung.android.scloud", 0);
+                    intentFilter.addDataSchemeSpecificPart("com.samsung.android.mcfds", 0);
+                    Context context = preconditionObserver.mContext;
+                    UserHandle userHandleForUid =
+                            UserHandle.getUserHandleForUid(preconditionObserver.mUserId);
+                    UserHandle userHandle4 = SemWrapper.SEM_ALL;
+                    context.semRegisterReceiverAsUser(
+                            preconditionObserver.mPkgReceiver,
+                            userHandleForUid,
+                            intentFilter,
+                            null,
+                            null,
+                            2);
+                    IntentFilter intentFilter2 = new IntentFilter();
+                    intentFilter2.addAction("android.intent.action.PACKAGE_RESTARTED");
+                    intentFilter2.addDataScheme("package");
+                    intentFilter2.addDataSchemeSpecificPart("com.samsung.android.mcfds", 0);
+                    preconditionObserver.mContext.semRegisterReceiverAsUser(
+                            preconditionObserver.mPkgReceiver,
+                            UserHandle.getUserHandleForUid(preconditionObserver.mUserId),
+                            intentFilter2,
+                            null,
+                            null,
+                            2);
+                    preconditionObserver.mIsPkgObserverRegistered = true;
+                    if (Utils.isPackageInstalled(
+                            preconditionObserver.mContext, "com.samsung.android.scloud")) {
+                        preconditionObserver.setFlag(240);
+                    }
+                    if (Utils.isPackageInstalled(
+                            preconditionObserver.mContext, "com.samsung.android.mcfds")) {
+                        preconditionObserver.setFlag(3840);
+                    }
+                    preconditionObserver.mCurrentAccount = preconditionObserver.getSamsungAccount();
+                    if (Settings.System.semGetIntForUser(
+                                    preconditionObserver.mContext.getContentResolver(),
+                                    "mcf_continuity",
+                                    -1,
+                                    preconditionObserver.mUserId)
+                            == -1) {
+                        preconditionObserver.setContinuitySetting(
+                                (preconditionObserver.mCurrentAccount == null
+                                                || Utils.isHighPowerConsumptionChipset())
+                                        ? 0
+                                        : 1);
+                    }
+                    preconditionObserver.updateSettings(preconditionObserver.isEnableSettings());
+                    if (PreconditionObserver.FEATURE_CONTINUITY <= 0) {
+                        Log.e(
+                                "[MCF_DS_SYS]_PreconditionObserver",
+                                "registerSettingsObserver - invalid feature value");
+                    } else if (!preconditionObserver.mRegisterSettingsObserver) {
+                        if (PreconditionObserver.isSupportedContinuity()) {
+                            ContentResolver contentResolver =
+                                    preconditionObserver.mContext.getContentResolver();
+                            Uri uriFor = Settings.System.getUriFor("mcf_continuity");
+                            AbstractPreconditionObserver$1 abstractPreconditionObserver$1 =
+                                    preconditionObserver.mSettingObserver;
+                            contentResolver.registerContentObserver(
+                                    uriFor, false, abstractPreconditionObserver$1);
+                            preconditionObserver
+                                    .mContext
+                                    .getContentResolver()
+                                    .registerContentObserver(
+                                            Settings.System.getUriFor("multi_control_enabled"),
+                                            false,
+                                            abstractPreconditionObserver$1);
+                            preconditionObserver
+                                    .mContext
+                                    .getContentResolver()
+                                    .registerContentObserver(
+                                            Settings.System.getUriFor("vcc_continuity"),
+                                            false,
+                                            abstractPreconditionObserver$1);
+                            preconditionObserver
+                                    .mContext
+                                    .getContentResolver()
+                                    .registerContentObserver(
+                                            Settings.System.getUriFor("hwrs_service"),
+                                            false,
+                                            abstractPreconditionObserver$1);
+                        }
+                        if (PreconditionObserver.isSupported(2)) {
+                            AutoSwitchSettingHelper autoSwitchSettingHelper =
+                                    preconditionObserver.mAutoSwitchSettingHelper;
+                            autoSwitchSettingHelper.getClass();
+                            BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
+                            if (defaultAdapter == null) {
+                                Log.e(
+                                        "[MCF_DS_SYS]_AutoSwitchSettingHelper",
+                                        "start - null bluetoothAdapter");
+                            } else {
+                                boolean semIsBleEnabled = defaultAdapter.semIsBleEnabled();
+                                AutoSwitchSettingHelper.AnonymousClass1 anonymousClass12 =
+                                        autoSwitchSettingHelper.mBtStateReceiver;
+                                if (semIsBleEnabled) {
+                                    Log.i(
+                                            "[MCF_DS_SYS]_AutoSwitchSettingHelper",
+                                            "start - BleEnabled true");
+                                    autoSwitchSettingHelper.setStandAloneBleMode(true);
+                                    if (autoSwitchSettingHelper.mIsRegisterBtStateReceiver) {
+                                        autoSwitchSettingHelper.mIsRegisterBtStateReceiver = false;
+                                        autoSwitchSettingHelper.mContext.unregisterReceiver(
+                                                anonymousClass12);
+                                    }
+                                    ExecutorUtil.sExecutorIO.execute(
+                                            new ExecutorUtil.ThrowExceptionRunnable(
+                                                    new AutoSwitchSettingHelper$$ExternalSyntheticLambda0(
+                                                            autoSwitchSettingHelper)));
+                                } else {
+                                    if (!autoSwitchSettingHelper.mIsRegisterBtStateReceiver) {
+                                        autoSwitchSettingHelper.mContext.registerReceiver(
+                                                anonymousClass12,
+                                                DirEncryptServiceHelper$$ExternalSyntheticOutline0
+                                                        .m(
+                                                                "com.samsung.bluetooth.adapter.action.BLE_STATE_CHANGED",
+                                                                "android.bluetooth.adapter.action.STATE_CHANGED"),
+                                                2);
+                                        autoSwitchSettingHelper.mIsRegisterBtStateReceiver = true;
+                                    }
+                                    autoSwitchSettingHelper.setStandAloneBleMode(true);
+                                }
+                                autoSwitchSettingHelper.mContext.registerReceiver(
+                                        autoSwitchSettingHelper.mReceiver,
+                                        BatteryService$$ExternalSyntheticOutline0.m(
+                                                "com.samsung.bluetooth.device.action.AUTO_SWITCH_MODE_CHANGED"),
+                                        2);
+                                IntentFilter intentFilter3 = new IntentFilter();
+                                intentFilter3.addAction(
+                                        "com.samsung.intent.action.SETTINGS_WIFI_BLUETOOTH_RESET");
+                                autoSwitchSettingHelper.mContext.registerReceiver(
+                                        autoSwitchSettingHelper.mReceiver,
+                                        intentFilter3,
+                                        "com.sec.android.settings.permission.WIFI_BLUETOOTH_RESET",
+                                        null,
+                                        2);
+                                autoSwitchSettingHelper.mContext.registerReceiver(
+                                        autoSwitchSettingHelper.mReceiver,
+                                        BatteryService$$ExternalSyntheticOutline0.m(
+                                                "android.intent.action.SETTINGS_SOFT_RESET"),
+                                        "com.sec.android.settings.permission.SOFT_RESET",
+                                        null,
+                                        2);
+                            }
+                        }
+                        preconditionObserver.mRegisterSettingsObserver = true;
+                    }
+                    if (preconditionObserver.mIsAddedAccountListener) {
+                        Log.w(
+                                "[MCF_DS_SYS]_PreconditionObserver",
+                                "addOnAccountsUpdatedListener - already added");
+                    } else {
+                        Log.d("[MCF_DS_SYS]_PreconditionObserver", "addOnAccountsUpdatedListener");
+                        AccountManager.get(preconditionObserver.mContext)
+                                .addOnAccountsUpdatedListener(
+                                        preconditionObserver.mOnAccountsUpdateListener,
+                                        null,
+                                        true,
+                                        new String[] {PreconditionObserver.SAMSUNG_ACCOUNT_TYPE});
+                        if (preconditionObserver.mUserId != 0) {
+                            preconditionObserver.mContext.semRegisterReceiverAsUser(
+                                    preconditionObserver.mAccountChangeReceiver,
+                                    UserHandle.getUserHandleForUid(preconditionObserver.mUserId),
+                                    BatteryService$$ExternalSyntheticOutline0.m(
+                                            "android.accounts.LOGIN_ACCOUNTS_CHANGED"),
+                                    null,
+                                    null,
+                                    2);
+                        }
+                        preconditionObserver.mIsAddedAccountListener = true;
+                    }
+                    if (preconditionObserver.mCurrentAccount != null) {
+                        preconditionObserver.setFlag(15);
+                    }
+                    boolean meetConditions = preconditionObserver.meetConditions();
+                    mcfDeviceSyncManager.mIsValidState = meetConditions;
+                    if (meetConditions) {
+                        mcfDeviceSyncManager.removeAndSendMessageDelayed(2, 1, 0L);
                     }
                 }
-                preconditionObserver.mRegisterSettingsObserver = true;
-            }
-            if (preconditionObserver.mIsAddedAccountListener) {
-                Log.w("[MCF_DS_SYS]_PreconditionObserver", "addOnAccountsUpdatedListener - already added");
-            } else {
-                Log.d("[MCF_DS_SYS]_PreconditionObserver", "addOnAccountsUpdatedListener");
-                AccountManager.get(preconditionObserver.mContext).addOnAccountsUpdatedListener(preconditionObserver.mOnAccountsUpdateListener, null, true, new String[]{PreconditionObserver.SAMSUNG_ACCOUNT_TYPE});
-                if (preconditionObserver.mUserId != 0) {
-                    preconditionObserver.mContext.semRegisterReceiverAsUser(preconditionObserver.mAccountChangeReceiver, UserHandle.getUserHandleForUid(preconditionObserver.mUserId), BatteryService$$ExternalSyntheticOutline0.m("android.accounts.LOGIN_ACCOUNTS_CHANGED"), null, null, 2);
-                }
-                preconditionObserver.mIsAddedAccountListener = true;
-            }
-            if (preconditionObserver.mCurrentAccount != null) {
-                preconditionObserver.setFlag(15);
-            }
-            boolean meetConditions = preconditionObserver.meetConditions();
-            mcfDeviceSyncManager.mIsValidState = meetConditions;
-            if (meetConditions) {
-                mcfDeviceSyncManager.removeAndSendMessageDelayed(2, 1, 0L);
-            }
-        }
-    };
+            };
     public boolean mIsValidState;
     public final PreconditionObserver mPreconditionObserver;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.continuity.McfDeviceSyncManager$2, reason: invalid class name */
     public final class AnonymousClass2 {
-        public AnonymousClass2() {
-        }
+        public AnonymousClass2() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -242,7 +362,8 @@ public final class McfDeviceSyncManager {
     }
 
     /* JADX WARN: Type inference failed for: r1v1, types: [com.samsung.android.server.continuity.McfDeviceSyncManager$1] */
-    public McfDeviceSyncManager(PreconditionObserver preconditionObserver, DeviceSyncManager deviceSyncManager) {
+    public McfDeviceSyncManager(
+            PreconditionObserver preconditionObserver, DeviceSyncManager deviceSyncManager) {
         this.mPreconditionObserver = preconditionObserver;
         this.mDsManager = deviceSyncManager;
     }
@@ -368,7 +489,9 @@ public final class McfDeviceSyncManager {
         Ldb:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.continuity.McfDeviceSyncManager.initMcfDeviceSyncMainController(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.continuity.McfDeviceSyncManager.initMcfDeviceSyncMainController(int):void");
     }
 
     public void removeAndSendMessageDelayed(int i, int i2, long j) {
@@ -425,28 +548,39 @@ public final class McfDeviceSyncManager {
         }
         if (preconditionObserver.mRegisterSettingsObserver) {
             if (PreconditionObserver.isSupportedContinuity()) {
-                preconditionObserver.mContext.getContentResolver().unregisterContentObserver(preconditionObserver.mSettingObserver);
+                preconditionObserver
+                        .mContext
+                        .getContentResolver()
+                        .unregisterContentObserver(preconditionObserver.mSettingObserver);
             }
             if (PreconditionObserver.isSupported(2)) {
-                AutoSwitchSettingHelper autoSwitchSettingHelper = preconditionObserver.mAutoSwitchSettingHelper;
+                AutoSwitchSettingHelper autoSwitchSettingHelper =
+                        preconditionObserver.mAutoSwitchSettingHelper;
                 autoSwitchSettingHelper.mIsAutoSwitchModeEnabled = false;
-                autoSwitchSettingHelper.mContext.unregisterReceiver(autoSwitchSettingHelper.mReceiver);
+                autoSwitchSettingHelper.mContext.unregisterReceiver(
+                        autoSwitchSettingHelper.mReceiver);
                 if (autoSwitchSettingHelper.mIsRegisterBtStateReceiver) {
                     autoSwitchSettingHelper.mIsRegisterBtStateReceiver = false;
-                    autoSwitchSettingHelper.mContext.unregisterReceiver(autoSwitchSettingHelper.mBtStateReceiver);
+                    autoSwitchSettingHelper.mContext.unregisterReceiver(
+                            autoSwitchSettingHelper.mBtStateReceiver);
                 }
             }
             preconditionObserver.mRegisterSettingsObserver = false;
         }
         if (preconditionObserver.mIsAddedAccountListener) {
             Log.d("[MCF_DS_SYS]_PreconditionObserver", "removeOnAccountsUpdatedListener");
-            AccountManager.get(preconditionObserver.mContext).removeOnAccountsUpdatedListener(preconditionObserver.mOnAccountsUpdateListener);
+            AccountManager.get(preconditionObserver.mContext)
+                    .removeOnAccountsUpdatedListener(
+                            preconditionObserver.mOnAccountsUpdateListener);
             if (preconditionObserver.mUserId != 0) {
-                preconditionObserver.mContext.unregisterReceiver(preconditionObserver.mAccountChangeReceiver);
+                preconditionObserver.mContext.unregisterReceiver(
+                        preconditionObserver.mAccountChangeReceiver);
             }
             preconditionObserver.mIsAddedAccountListener = false;
         } else {
-            Log.w("[MCF_DS_SYS]_PreconditionObserver", "removeOnAccountsUpdatedListener - already added");
+            Log.w(
+                    "[MCF_DS_SYS]_PreconditionObserver",
+                    "removeOnAccountsUpdatedListener - already added");
         }
         preconditionObserver.mCurrentAccount = null;
         preconditionObserver.mState = 0;
@@ -462,7 +596,8 @@ public final class McfDeviceSyncManager {
         DeviceSyncManager deviceSyncManager = this.mDsManager;
         int i = deviceSyncManager.mServiceState;
         if (i == 0) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "unbindMcf - invalid state ", "[MCF_DS_SYS]_McfDsManager");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i, "unbindMcf - invalid state ", "[MCF_DS_SYS]_McfDsManager");
             return;
         }
         Log.i("[MCF_DS_SYS]_McfDsManager", "unbindMcf");

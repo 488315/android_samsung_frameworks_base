@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.security.apc.IConfirmationCallback;
 
 /* loaded from: classes3.dex */
 public interface IProtectedConfirmation extends IInterface {
@@ -17,16 +16,26 @@ public interface IProtectedConfirmation extends IInterface {
 
     boolean isSupported() throws RemoteException;
 
-    void presentPrompt(IConfirmationCallback iConfirmationCallback, String str, byte[] bArr, String str2, int i) throws RemoteException;
+    void presentPrompt(
+            IConfirmationCallback iConfirmationCallback,
+            String str,
+            byte[] bArr,
+            String str2,
+            int i)
+            throws RemoteException;
 
     public static class Default implements IProtectedConfirmation {
         @Override // android.security.apc.IProtectedConfirmation
-        public void presentPrompt(IConfirmationCallback listener, String promptText, byte[] extraData, String locale, int uiOptionFlags) throws RemoteException {
-        }
+        public void presentPrompt(
+                IConfirmationCallback listener,
+                String promptText,
+                byte[] extraData,
+                String locale,
+                int uiOptionFlags)
+                throws RemoteException {}
 
         @Override // android.security.apc.IProtectedConfirmation
-        public void cancelPrompt(IConfirmationCallback listener) throws RemoteException {
-        }
+        public void cancelPrompt(IConfirmationCallback listener) throws RemoteException {}
 
         @Override // android.security.apc.IProtectedConfirmation
         public boolean isSupported() throws RemoteException {
@@ -39,7 +48,7 @@ public interface IProtectedConfirmation extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProtectedConfirmation {
+    public abstract static class Stub extends Binder implements IProtectedConfirmation {
         static final int TRANSACTION_cancelPrompt = 2;
         static final int TRANSACTION_isSupported = 3;
         static final int TRANSACTION_presentPrompt = 1;
@@ -65,7 +74,8 @@ public interface IProtectedConfirmation extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IProtectedConfirmation.DESCRIPTOR);
             }
@@ -75,7 +85,8 @@ public interface IProtectedConfirmation extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IConfirmationCallback _arg0 = IConfirmationCallback.Stub.asInterface(data.readStrongBinder());
+                    IConfirmationCallback _arg0 =
+                            IConfirmationCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg1 = data.readString();
                     byte[] _arg2 = data.createByteArray();
                     String _arg3 = data.readString();
@@ -85,7 +96,8 @@ public interface IProtectedConfirmation extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IConfirmationCallback _arg02 = IConfirmationCallback.Stub.asInterface(data.readStrongBinder());
+                    IConfirmationCallback _arg02 =
+                            IConfirmationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     cancelPrompt(_arg02);
                     reply.writeNoException();
@@ -117,7 +129,13 @@ public interface IProtectedConfirmation extends IInterface {
             }
 
             @Override // android.security.apc.IProtectedConfirmation
-            public void presentPrompt(IConfirmationCallback listener, String promptText, byte[] extraData, String locale, int uiOptionFlags) throws RemoteException {
+            public void presentPrompt(
+                    IConfirmationCallback listener,
+                    String promptText,
+                    byte[] extraData,
+                    String locale,
+                    int uiOptionFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

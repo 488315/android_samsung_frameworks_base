@@ -1,6 +1,7 @@
 package com.android.server.location.injector;
 
 import android.os.Binder;
+
 import com.android.internal.util.Preconditions;
 import com.android.server.DeviceIdleInternal;
 

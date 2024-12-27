@@ -1,11 +1,13 @@
 package android.audio.policy.configuration.V7_0;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class AudioPolicyConfiguration {
@@ -74,7 +76,8 @@ public class AudioPolicyConfiguration {
         this.version = version;
     }
 
-    static AudioPolicyConfiguration read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static AudioPolicyConfiguration read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         AudioPolicyConfiguration _instance = new AudioPolicyConfiguration();
         String _raw = _parser.getAttributeValue(null, "version");

@@ -8,8 +8,7 @@ public final class MtpStorageInfo {
     private int mStorageId;
     private String mVolumeIdentifier;
 
-    private MtpStorageInfo() {
-    }
+    private MtpStorageInfo() {}
 
     public final int getStorageId() {
         return this.mStorageId;

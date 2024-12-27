@@ -16,7 +16,8 @@ public interface ISemKeyStoreService extends IInterface {
 
     int installCACert(SemCertAndroidKeyStore semCertAndroidKeyStore) throws RemoteException;
 
-    int installCertificateInAndroidKeyStore(SemCertByte semCertByte, String str, char[] cArr, int i) throws RemoteException;
+    int installCertificateInAndroidKeyStore(SemCertByte semCertByte, String str, char[] cArr, int i)
+            throws RemoteException;
 
     int isAliasExists(String str) throws RemoteException;
 
@@ -27,13 +28,14 @@ public interface ISemKeyStoreService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.util.ISemKeyStoreService
-        public int installCertificateInAndroidKeyStore(SemCertByte certificate, String aliasName, char[] password, int uid) throws RemoteException {
+        public int installCertificateInAndroidKeyStore(
+                SemCertByte certificate, String aliasName, char[] password, int uid)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.knox.util.ISemKeyStoreService
-        public void grantAccessForAKS(int uid, String alias) throws RemoteException {
-        }
+        public void grantAccessForAKS(int uid, String alias) throws RemoteException {}
 
         @Override // com.samsung.android.knox.util.ISemKeyStoreService
         public int installCACert(SemCertAndroidKeyStore caCert) throws RemoteException {
@@ -51,7 +53,7 @@ public interface ISemKeyStoreService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemKeyStoreService {
+    public abstract static class Stub extends Binder implements ISemKeyStoreService {
         static final int TRANSACTION_getKeystoreStatus = 5;
         static final int TRANSACTION_grantAccessForAKS = 3;
         static final int TRANSACTION_installCACert = 4;
@@ -101,7 +103,8 @@ public interface ISemKeyStoreService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemKeyStoreService.DESCRIPTOR);
             }
@@ -135,7 +138,9 @@ public interface ISemKeyStoreService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 4:
-                    SemCertAndroidKeyStore _arg04 = (SemCertAndroidKeyStore) data.readTypedObject(SemCertAndroidKeyStore.CREATOR);
+                    SemCertAndroidKeyStore _arg04 =
+                            (SemCertAndroidKeyStore)
+                                    data.readTypedObject(SemCertAndroidKeyStore.CREATOR);
                     data.enforceNoDataAvail();
                     int _result3 = installCACert(_arg04);
                     reply.writeNoException();
@@ -185,7 +190,9 @@ public interface ISemKeyStoreService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.util.ISemKeyStoreService
-            public int installCertificateInAndroidKeyStore(SemCertByte certificate, String aliasName, char[] password, int uid) throws RemoteException {
+            public int installCertificateInAndroidKeyStore(
+                    SemCertByte certificate, String aliasName, char[] password, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

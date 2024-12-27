@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IRotationResolverCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.rotationresolver.IRotationResolverCallback";
+    public static final String DESCRIPTOR =
+            "android.service.rotationresolver.IRotationResolverCallback";
 
     void onCancellable(ICancellationSignal iCancellationSignal) throws RemoteException;
 
@@ -19,16 +20,13 @@ public interface IRotationResolverCallback extends IInterface {
 
     public static class Default implements IRotationResolverCallback {
         @Override // android.service.rotationresolver.IRotationResolverCallback
-        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {
-        }
+        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {}
 
         @Override // android.service.rotationresolver.IRotationResolverCallback
-        public void onSuccess(int recommendedRotation) throws RemoteException {
-        }
+        public void onSuccess(int recommendedRotation) throws RemoteException {}
 
         @Override // android.service.rotationresolver.IRotationResolverCallback
-        public void onFailure(int error) throws RemoteException {
-        }
+        public void onFailure(int error) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +34,7 @@ public interface IRotationResolverCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRotationResolverCallback {
+    public abstract static class Stub extends Binder implements IRotationResolverCallback {
         static final int TRANSACTION_onCancellable = 1;
         static final int TRANSACTION_onFailure = 3;
         static final int TRANSACTION_onSuccess = 2;
@@ -80,7 +78,8 @@ public interface IRotationResolverCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRotationResolverCallback.DESCRIPTOR);
             }
@@ -90,7 +89,8 @@ public interface IRotationResolverCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ICancellationSignal _arg0 = ICancellationSignal.Stub.asInterface(data.readStrongBinder());
+                    ICancellationSignal _arg0 =
+                            ICancellationSignal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCancellable(_arg0);
                     return true;

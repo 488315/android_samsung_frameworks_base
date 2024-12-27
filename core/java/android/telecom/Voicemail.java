@@ -6,19 +6,20 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class Voicemail implements Parcelable {
-    public static final Parcelable.Creator<Voicemail> CREATOR = new Parcelable.Creator<Voicemail>() { // from class: android.telecom.Voicemail.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Voicemail createFromParcel(Parcel in) {
-            return new Voicemail(in);
-        }
+    public static final Parcelable.Creator<Voicemail> CREATOR =
+            new Parcelable.Creator<Voicemail>() { // from class: android.telecom.Voicemail.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Voicemail createFromParcel(Parcel in) {
+                    return new Voicemail(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Voicemail[] newArray(int size) {
-            return new Voicemail[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Voicemail[] newArray(int size) {
+                    return new Voicemail[size];
+                }
+            };
     private final Long mDuration;
     private final Boolean mHasContent;
     private final Long mId;
@@ -31,7 +32,18 @@ public class Voicemail implements Parcelable {
     private final String mTranscription;
     private final Uri mUri;
 
-    private Voicemail(Long timestamp, String number, PhoneAccountHandle phoneAccountHandle, Long id, Long duration, String source, String providerData, Uri uri, Boolean isRead, Boolean hasContent, String transcription) {
+    private Voicemail(
+            Long timestamp,
+            String number,
+            PhoneAccountHandle phoneAccountHandle,
+            Long id,
+            Long duration,
+            String source,
+            String providerData,
+            Uri uri,
+            Boolean isRead,
+            Boolean hasContent,
+            String transcription) {
         this.mTimestamp = timestamp;
         this.mNumber = number;
         this.mPhoneAccount = phoneAccountHandle;
@@ -66,8 +78,7 @@ public class Voicemail implements Parcelable {
         private String mBuilderTranscription;
         private Uri mBuilderUri;
 
-        private Builder() {
-        }
+        private Builder() {}
 
         public Builder setNumber(String number) {
             this.mBuilderNumber = number;
@@ -125,11 +136,33 @@ public class Voicemail implements Parcelable {
         }
 
         public Voicemail build() {
-            this.mBuilderId = Long.valueOf(this.mBuilderId == null ? -1L : this.mBuilderId.longValue());
-            this.mBuilderTimestamp = Long.valueOf(this.mBuilderTimestamp == null ? 0L : this.mBuilderTimestamp.longValue());
-            this.mBuilderDuration = Long.valueOf(this.mBuilderDuration != null ? this.mBuilderDuration.longValue() : 0L);
-            this.mBuilderIsRead = Boolean.valueOf(this.mBuilderIsRead == null ? false : this.mBuilderIsRead.booleanValue());
-            return new Voicemail(this.mBuilderTimestamp, this.mBuilderNumber, this.mBuilderPhoneAccount, this.mBuilderId, this.mBuilderDuration, this.mBuilderSourcePackage, this.mBuilderSourceData, this.mBuilderUri, this.mBuilderIsRead, Boolean.valueOf(this.mBuilderHasContent), this.mBuilderTranscription);
+            this.mBuilderId =
+                    Long.valueOf(this.mBuilderId == null ? -1L : this.mBuilderId.longValue());
+            this.mBuilderTimestamp =
+                    Long.valueOf(
+                            this.mBuilderTimestamp == null
+                                    ? 0L
+                                    : this.mBuilderTimestamp.longValue());
+            this.mBuilderDuration =
+                    Long.valueOf(
+                            this.mBuilderDuration != null ? this.mBuilderDuration.longValue() : 0L);
+            this.mBuilderIsRead =
+                    Boolean.valueOf(
+                            this.mBuilderIsRead == null
+                                    ? false
+                                    : this.mBuilderIsRead.booleanValue());
+            return new Voicemail(
+                    this.mBuilderTimestamp,
+                    this.mBuilderNumber,
+                    this.mBuilderPhoneAccount,
+                    this.mBuilderId,
+                    this.mBuilderDuration,
+                    this.mBuilderSourcePackage,
+                    this.mBuilderSourceData,
+                    this.mBuilderUri,
+                    this.mBuilderIsRead,
+                    Boolean.valueOf(this.mBuilderHasContent),
+                    this.mBuilderTranscription);
         }
     }
 

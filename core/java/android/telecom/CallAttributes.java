@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -14,19 +15,29 @@ public final class CallAttributes implements Parcelable {
     public static final String CALLER_PID_KEY = "CallerPid";
     public static final String CALLER_UID_KEY = "CallerUid";
     public static final String CALL_CAPABILITIES_KEY = "TelecomCapabilities";
-    public static final Parcelable.Creator<CallAttributes> CREATOR = new Parcelable.Creator<CallAttributes>() { // from class: android.telecom.CallAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CallAttributes createFromParcel(Parcel source) {
-            return new CallAttributes((PhoneAccountHandle) source.readParcelable(getClass().getClassLoader(), PhoneAccountHandle.class), source.readCharSequence(), (Uri) source.readParcelable(getClass().getClassLoader(), Uri.class), source.readInt(), source.readInt(), source.readInt());
-        }
+    public static final Parcelable.Creator<CallAttributes> CREATOR =
+            new Parcelable.Creator<
+                    CallAttributes>() { // from class: android.telecom.CallAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CallAttributes createFromParcel(Parcel source) {
+                    return new CallAttributes(
+                            (PhoneAccountHandle)
+                                    source.readParcelable(
+                                            getClass().getClassLoader(), PhoneAccountHandle.class),
+                            source.readCharSequence(),
+                            (Uri) source.readParcelable(getClass().getClassLoader(), Uri.class),
+                            source.readInt(),
+                            source.readInt(),
+                            source.readInt());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CallAttributes[] newArray(int size) {
-            return new CallAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CallAttributes[] newArray(int size) {
+                    return new CallAttributes[size];
+                }
+            };
     public static final int DIRECTION_INCOMING = 1;
     public static final int DIRECTION_OUTGOING = 2;
     public static final String DISPLAY_NAME_KEY = "DisplayName";
@@ -43,18 +54,21 @@ public final class CallAttributes implements Parcelable {
     private final PhoneAccountHandle mPhoneAccountHandle;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CallCapability {
-    }
+    public @interface CallCapability {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CallType {
-    }
+    public @interface CallType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Direction {
-    }
+    public @interface Direction {}
 
-    private CallAttributes(PhoneAccountHandle phoneAccountHandle, CharSequence displayName, Uri address, int direction, int callType, int callCapabilities) {
+    private CallAttributes(
+            PhoneAccountHandle phoneAccountHandle,
+            CharSequence displayName,
+            Uri address,
+            int direction,
+            int callType,
+            int callCapabilities) {
         this.mPhoneAccountHandle = phoneAccountHandle;
         this.mDisplayName = displayName;
         this.mAddress = address;
@@ -71,9 +85,17 @@ public final class CallAttributes implements Parcelable {
         private int mCallType = 1;
         private int mCallCapabilities = 2;
 
-        public Builder(PhoneAccountHandle phoneAccountHandle, int callDirection, CharSequence displayName, Uri address) {
+        public Builder(
+                PhoneAccountHandle phoneAccountHandle,
+                int callDirection,
+                CharSequence displayName,
+                Uri address) {
             if (!isInRange(1, 2, callDirection)) {
-                throw new IllegalArgumentException(TextUtils.formatSimple("CallDirection=[%d] is invalid. CallDirections value should be within [%d, %d]", Integer.valueOf(callDirection), 1, 2));
+                throw new IllegalArgumentException(
+                        TextUtils.formatSimple(
+                                "CallDirection=[%d] is invalid. CallDirections value should be"
+                                    + " within [%d, %d]",
+                                Integer.valueOf(callDirection), 1, 2));
             }
             Objects.requireNonNull(phoneAccountHandle);
             Objects.requireNonNull(displayName);
@@ -86,7 +108,11 @@ public final class CallAttributes implements Parcelable {
 
         public Builder setCallType(int callType) {
             if (!isInRange(1, 2, callType)) {
-                throw new IllegalArgumentException(TextUtils.formatSimple("CallType=[%d] is invalid. CallTypes value should be within [%d, %d]", Integer.valueOf(callType), 1, 2));
+                throw new IllegalArgumentException(
+                        TextUtils.formatSimple(
+                                "CallType=[%d] is invalid. CallTypes value should be within [%d,"
+                                    + " %d]",
+                                Integer.valueOf(callType), 1, 2));
             }
             this.mCallType = callType;
             return this;
@@ -98,7 +124,13 @@ public final class CallAttributes implements Parcelable {
         }
 
         public CallAttributes build() {
-            return new CallAttributes(this.mPhoneAccountHandle, this.mDisplayName, this.mAddress, this.mDirection, this.mCallType, this.mCallCapabilities);
+            return new CallAttributes(
+                    this.mPhoneAccountHandle,
+                    this.mDisplayName,
+                    this.mAddress,
+                    this.mDirection,
+                    this.mCallType,
+                    this.mCallCapabilities);
         }
 
         private boolean isInRange(int floor, int ceiling, int value) {
@@ -147,7 +179,19 @@ public final class CallAttributes implements Parcelable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("{ CallAttributes: [phoneAccountHandle: ").append(this.mPhoneAccountHandle).append("], [contactName: ").append(Log.pii(this.mDisplayName)).append("], [address=").append(Log.pii(this.mAddress)).append("], [direction=").append(this.mDirection).append("], [callType=").append(this.mCallType).append("], [mCallCapabilities=").append(this.mCallCapabilities).append("]  }");
+        sb.append("{ CallAttributes: [phoneAccountHandle: ")
+                .append(this.mPhoneAccountHandle)
+                .append("], [contactName: ")
+                .append(Log.pii(this.mDisplayName))
+                .append("], [address=")
+                .append(Log.pii(this.mAddress))
+                .append("], [direction=")
+                .append(this.mDirection)
+                .append("], [callType=")
+                .append(this.mCallType)
+                .append("], [mCallCapabilities=")
+                .append(this.mCallCapabilities)
+                .append("]  }");
         return sb.toString();
     }
 
@@ -156,10 +200,21 @@ public final class CallAttributes implements Parcelable {
             return false;
         }
         CallAttributes that = (CallAttributes) obj;
-        return this.mDirection == that.mDirection && this.mCallType == that.mCallType && this.mCallCapabilities == that.mCallCapabilities && Objects.equals(this.mPhoneAccountHandle, that.mPhoneAccountHandle) && Objects.equals(this.mAddress, that.mAddress) && Objects.equals(this.mDisplayName, that.mDisplayName);
+        return this.mDirection == that.mDirection
+                && this.mCallType == that.mCallType
+                && this.mCallCapabilities == that.mCallCapabilities
+                && Objects.equals(this.mPhoneAccountHandle, that.mPhoneAccountHandle)
+                && Objects.equals(this.mAddress, that.mAddress)
+                && Objects.equals(this.mDisplayName, that.mDisplayName);
     }
 
     public int hashCode() {
-        return Objects.hash(this.mPhoneAccountHandle, this.mAddress, this.mDisplayName, Integer.valueOf(this.mDirection), Integer.valueOf(this.mCallType), Integer.valueOf(this.mCallCapabilities));
+        return Objects.hash(
+                this.mPhoneAccountHandle,
+                this.mAddress,
+                this.mDisplayName,
+                Integer.valueOf(this.mDirection),
+                Integer.valueOf(this.mCallType),
+                Integer.valueOf(this.mCallCapabilities));
     }
 }

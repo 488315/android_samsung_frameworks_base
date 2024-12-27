@@ -18,7 +18,8 @@ public final class SupportedStreamConfiguration implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            SupportedStreamConfiguration supportedStreamConfiguration = new SupportedStreamConfiguration();
+            SupportedStreamConfiguration supportedStreamConfiguration =
+                    new SupportedStreamConfiguration();
             int dataPosition = parcel.dataPosition();
             int readInt = parcel.readInt();
             try {
@@ -34,10 +35,12 @@ public final class SupportedStreamConfiguration implements Parcelable {
                             if (parcel.dataPosition() - dataPosition < readInt) {
                                 supportedStreamConfiguration.maxFps = parcel.readInt();
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -77,7 +80,9 @@ public final class SupportedStreamConfiguration implements Parcelable {
         parcel.writeInt(this.width);
         parcel.writeInt(this.height);
         parcel.writeInt(this.pixelFormat);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.maxFps, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.maxFps, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

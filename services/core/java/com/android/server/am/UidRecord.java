@@ -5,8 +5,9 @@ import android.os.SystemClock;
 import android.os.UserHandle;
 import android.util.ArraySet;
 import android.util.TimeUtils;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
-import com.android.server.am.UidObserverController;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,7 +35,8 @@ public final class UidRecord {
     public final ArraySet mProcRecords = new ArraySet();
     public boolean mFGSFilter = false;
     public final Object networkStateLock = new Object();
-    public final UidObserverController.ChangeRecord pendingChange = new UidObserverController.ChangeRecord();
+    public final UidObserverController.ChangeRecord pendingChange =
+            new UidObserverController.ChangeRecord();
     public boolean mIdle = true;
     public int mCurProcState = 19;
     public boolean mForegroundServices = false;

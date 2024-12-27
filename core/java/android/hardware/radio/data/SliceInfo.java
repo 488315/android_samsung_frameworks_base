@@ -3,25 +3,28 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SliceInfo implements Parcelable {
-    public static final Parcelable.Creator<SliceInfo> CREATOR = new Parcelable.Creator<SliceInfo>() { // from class: android.hardware.radio.data.SliceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SliceInfo createFromParcel(Parcel _aidl_source) {
-            SliceInfo _aidl_out = new SliceInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SliceInfo> CREATOR =
+            new Parcelable.Creator<
+                    SliceInfo>() { // from class: android.hardware.radio.data.SliceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SliceInfo createFromParcel(Parcel _aidl_source) {
+                    SliceInfo _aidl_out = new SliceInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SliceInfo[] newArray(int _aidl_size) {
-            return new SliceInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SliceInfo[] newArray(int _aidl_size) {
+                    return new SliceInfo[_aidl_size];
+                }
+            };
     public static final byte SERVICE_TYPE_EMBB = 1;
     public static final byte SERVICE_TYPE_MIOT = 3;
     public static final byte SERVICE_TYPE_NONE = 0;

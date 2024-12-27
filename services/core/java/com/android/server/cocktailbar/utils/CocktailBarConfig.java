@@ -8,13 +8,16 @@ import android.content.res.XmlResourceParser;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -79,7 +82,9 @@ public final class CocktailBarConfig {
 
     public final void parseEdgeConfig() {
         XmlResourceParser xmlResourceParser;
-        List<ResolveInfo> queryIntentServicesAsUser = this.mPackageManager.queryIntentServicesAsUser(new Intent("com.samsung.app.honeyspace.edge"), 128, 0);
+        List<ResolveInfo> queryIntentServicesAsUser =
+                this.mPackageManager.queryIntentServicesAsUser(
+                        new Intent("com.samsung.app.honeyspace.edge"), 128, 0);
         if (queryIntentServicesAsUser == null || queryIntentServicesAsUser.size() <= 0) {
             this.mIsServiceFounded = false;
             Slog.d("CocktailBarConfig", "getEdgeConfigParser: no enabled cocktailbarservice");
@@ -87,13 +92,22 @@ public final class CocktailBarConfig {
             this.mIsServiceFounded = true;
             for (ResolveInfo resolveInfo : queryIntentServicesAsUser) {
                 if (!resolveInfo.serviceInfo.isEnabled()) {
-                    BootReceiver$$ExternalSyntheticOutline0.m(new StringBuilder("getEdgeConfigParser: not enabled: "), resolveInfo.resolvePackageName, "CocktailBarConfig");
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("getEdgeConfigParser: not enabled: "),
+                            resolveInfo.resolvePackageName,
+                            "CocktailBarConfig");
                 } else {
-                    if (CocktailBarUtils$CocktailBarWhiteList.isSystemApplication(0, resolveInfo.serviceInfo.packageName)) {
-                        xmlResourceParser = resolveInfo.serviceInfo.loadXmlMetaData(this.mPackageManager, "com.samsung.android.edge.config");
+                    if (CocktailBarUtils$CocktailBarWhiteList.isSystemApplication(
+                            0, resolveInfo.serviceInfo.packageName)) {
+                        xmlResourceParser =
+                                resolveInfo.serviceInfo.loadXmlMetaData(
+                                        this.mPackageManager, "com.samsung.android.edge.config");
                         break;
                     }
-                    BootReceiver$$ExternalSyntheticOutline0.m(new StringBuilder("getEdgeConfigParser: not system app: "), resolveInfo.resolvePackageName, "CocktailBarConfig");
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("getEdgeConfigParser: not system app: "),
+                            resolveInfo.resolvePackageName,
+                            "CocktailBarConfig");
                 }
             }
         }
@@ -125,26 +139,40 @@ public final class CocktailBarConfig {
                     this.mVersion = xmlResourceParser.getAttributeIntValue(null, "name", 2);
                 } else if ("category_filter".equals(name)) {
                     String attributeValue = xmlResourceParser.getAttributeValue(null, "product");
-                    if (attributeValue != null && ((this.mCategoryFilterStr == null && attributeValue.equals("default")) || (str != null && str.contains(attributeValue)))) {
-                        this.mCategoryFilterStr = xmlResourceParser.getAttributeValue(null, "value");
+                    if (attributeValue != null
+                            && ((this.mCategoryFilterStr == null
+                                            && attributeValue.equals("default"))
+                                    || (str != null && str.contains(attributeValue)))) {
+                        this.mCategoryFilterStr =
+                                xmlResourceParser.getAttributeValue(null, "value");
                     }
                 } else if ("preferred_width".equals(name)) {
-                    this.mPreferredWidth = xmlResourceParser.getAttributeIntValue(null, "value", 160);
+                    this.mPreferredWidth =
+                            xmlResourceParser.getAttributeIntValue(null, "value", 160);
                 } else if ("package_hide_edge_service".equals(name)) {
                     String attributeValue2 = xmlResourceParser.getAttributeValue(null, "value");
                     if (attributeValue2 != null && attributeValue2.length() > 0) {
                         this.mPackageHideEdgeServiceList.add(attributeValue2);
                     }
                 } else if ("meta_data_hide_edge_service".equals(name)) {
-                    this.mMetaDataHideEdgeService = xmlResourceParser.getAttributeValue(null, "value");
+                    this.mMetaDataHideEdgeService =
+                            xmlResourceParser.getAttributeValue(null, "value");
                 } else if ("replaced_component".equals(name)) {
                     String attributeValue3 = xmlResourceParser.getAttributeValue(null, "value");
                     if (TextUtils.isEmpty(attributeValue3)) {
-                        BootReceiver$$ExternalSyntheticOutline0.m("addReplcaedComponent: value is empty. -", attributeValue3, "CocktailBarConfig");
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                "addReplcaedComponent: value is empty. -",
+                                attributeValue3,
+                                "CocktailBarConfig");
                     } else {
                         String[] split = attributeValue3.split(",");
-                        if (split.length < 2 || TextUtils.isEmpty(split[0]) || TextUtils.isEmpty(split[1])) {
-                            Slog.e("CocktailBarConfig", "addReplcaedComponent: value is wrong. - ".concat(attributeValue3));
+                        if (split.length < 2
+                                || TextUtils.isEmpty(split[0])
+                                || TextUtils.isEmpty(split[1])) {
+                            Slog.e(
+                                    "CocktailBarConfig",
+                                    "addReplcaedComponent: value is wrong. - "
+                                            .concat(attributeValue3));
                         } else {
                             this.mReplacedComponent.put(split[0], split[1]);
                         }

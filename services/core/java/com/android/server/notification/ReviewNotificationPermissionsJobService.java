@@ -17,8 +17,18 @@ public class ReviewNotificationPermissionsJobService extends JobService {
             return false;
         }
         NotificationManagerService.checkCallerIsSystem();
-        ((NotificationManager) notificationManagerService.getContext().getSystemService(NotificationManager.class)).notify("NotificationService", 71, notificationManagerService.createReviewPermissionsNotification());
-        Settings.Global.putInt(notificationManagerService.getContext().getContentResolver(), "review_permissions_notification_state", 3);
+        ((NotificationManager)
+                        notificationManagerService
+                                .getContext()
+                                .getSystemService(NotificationManager.class))
+                .notify(
+                        "NotificationService",
+                        71,
+                        notificationManagerService.createReviewPermissionsNotification());
+        Settings.Global.putInt(
+                notificationManagerService.getContext().getContentResolver(),
+                "review_permissions_notification_state",
+                3);
         return false;
     }
 

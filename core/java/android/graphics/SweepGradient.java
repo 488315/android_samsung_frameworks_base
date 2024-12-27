@@ -1,7 +1,5 @@
 package android.graphics;
 
-import android.graphics.ColorSpace;
-
 /* loaded from: classes.dex */
 public class SweepGradient extends Shader {
     private int mColor0;
@@ -12,7 +10,8 @@ public class SweepGradient extends Shader {
     private float mCy;
     private float[] mPositions;
 
-    private static native long nativeCreate(long j, float f, float f2, long[] jArr, float[] fArr, long j2);
+    private static native long nativeCreate(
+            long j, float f, float f2, long[] jArr, float[] fArr, long j2);
 
     public SweepGradient(float cx, float cy, int[] colors, float[] positions) {
         this(cx, cy, convertColors(colors), positions, ColorSpace.get(ColorSpace.Named.SRGB));
@@ -22,7 +21,8 @@ public class SweepGradient extends Shader {
         this(cx, cy, (long[]) colors.clone(), positions, detectColorSpace(colors));
     }
 
-    private SweepGradient(float cx, float cy, long[] colors, float[] positions, ColorSpace colorSpace) {
+    private SweepGradient(
+            float cx, float cy, long[] colors, float[] positions, ColorSpace colorSpace) {
         super(colorSpace);
         if (positions != null && colors.length != positions.length) {
             throw new IllegalArgumentException("color and position arrays must be of equal length");
@@ -38,11 +38,17 @@ public class SweepGradient extends Shader {
     }
 
     public SweepGradient(float cx, float cy, long color0, long color1) {
-        this(cx, cy, new long[]{color0, color1}, (float[]) null);
+        this(cx, cy, new long[] {color0, color1}, (float[]) null);
     }
 
     @Override // android.graphics.Shader
     protected long createNativeInstance(long nativeMatrix, boolean filterFromPaint) {
-        return nativeCreate(nativeMatrix, this.mCx, this.mCy, this.mColorLongs, this.mPositions, colorSpace().getNativeInstance());
+        return nativeCreate(
+                nativeMatrix,
+                this.mCx,
+                this.mCy,
+                this.mColorLongs,
+                this.mPositions,
+                colorSpace().getNativeInstance());
     }
 }

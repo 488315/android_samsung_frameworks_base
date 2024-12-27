@@ -8,12 +8,13 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IGeofenceHardwareMonitorCallback extends IInterface {
-    void onMonitoringSystemChange(GeofenceHardwareMonitorEvent geofenceHardwareMonitorEvent) throws RemoteException;
+    void onMonitoringSystemChange(GeofenceHardwareMonitorEvent geofenceHardwareMonitorEvent)
+            throws RemoteException;
 
     public static class Default implements IGeofenceHardwareMonitorCallback {
         @Override // android.hardware.location.IGeofenceHardwareMonitorCallback
-        public void onMonitoringSystemChange(GeofenceHardwareMonitorEvent event) throws RemoteException {
-        }
+        public void onMonitoringSystemChange(GeofenceHardwareMonitorEvent event)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +22,9 @@ public interface IGeofenceHardwareMonitorCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGeofenceHardwareMonitorCallback {
-        public static final String DESCRIPTOR = "android.hardware.location.IGeofenceHardwareMonitorCallback";
+    public abstract static class Stub extends Binder implements IGeofenceHardwareMonitorCallback {
+        public static final String DESCRIPTOR =
+                "android.hardware.location.IGeofenceHardwareMonitorCallback";
         static final int TRANSACTION_onMonitoringSystemChange = 1;
 
         public Stub() {
@@ -60,7 +62,8 @@ public interface IGeofenceHardwareMonitorCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +73,9 @@ public interface IGeofenceHardwareMonitorCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    GeofenceHardwareMonitorEvent _arg0 = (GeofenceHardwareMonitorEvent) data.readTypedObject(GeofenceHardwareMonitorEvent.CREATOR);
+                    GeofenceHardwareMonitorEvent _arg0 =
+                            (GeofenceHardwareMonitorEvent)
+                                    data.readTypedObject(GeofenceHardwareMonitorEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onMonitoringSystemChange(_arg0);
                     return true;
@@ -96,7 +101,8 @@ public interface IGeofenceHardwareMonitorCallback extends IInterface {
             }
 
             @Override // android.hardware.location.IGeofenceHardwareMonitorCallback
-            public void onMonitoringSystemChange(GeofenceHardwareMonitorEvent event) throws RemoteException {
+            public void onMonitoringSystemChange(GeofenceHardwareMonitorEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

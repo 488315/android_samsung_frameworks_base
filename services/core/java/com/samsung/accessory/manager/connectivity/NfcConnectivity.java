@@ -2,11 +2,14 @@ package com.samsung.accessory.manager.connectivity;
 
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import com.samsung.accessory.manager.authentication.AuthenticationResult;
 import com.samsung.accessory.manager.authentication.AuthenticationSession;
 import com.samsung.android.nfc.adapter.ISamsungNfcAdapter;
 import com.samsung.android.nfc.adapter.SamsungNfcAdapter;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -17,8 +20,7 @@ public final class NfcConnectivity extends Connectivity {
     public AtomicBoolean mEnableRequest;
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
-    public final void close() {
-    }
+    public final void close() {}
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
     public final void connect() {
@@ -40,7 +42,11 @@ public final class NfcConnectivity extends Connectivity {
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
     public final void dump(PrintWriter printWriter) {
-        BatteryService$$ExternalSyntheticOutline0.m(printWriter, " Current NfcConnectivity state:", "  mState = -1", "  mPrevState = -1");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                printWriter,
+                " Current NfcConnectivity state:",
+                "  mState = -1",
+                "  mPrevState = -1");
     }
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
@@ -53,10 +59,14 @@ public final class NfcConnectivity extends Connectivity {
         try {
             samsungNfcAdapter = SamsungNfcAdapter.getDefaultAdapter(this.mContext);
             if (samsungNfcAdapter == null) {
-                Log.e("SAccessoryManager_NfcConnectivity", "SamsungNfcAdapter.getDefaultAdapter returns null");
+                Log.e(
+                        "SAccessoryManager_NfcConnectivity",
+                        "SamsungNfcAdapter.getDefaultAdapter returns null");
                 samsungNfcAdapter = SamsungNfcAdapter.getDefaultAdapter(this.mContext);
                 if (samsungNfcAdapter == null) {
-                    Log.e("SAccessoryManager_NfcConnectivity", "retry, SamsungNfcAdapter.getDefaultAdapter returns null");
+                    Log.e(
+                            "SAccessoryManager_NfcConnectivity",
+                            "retry, SamsungNfcAdapter.getDefaultAdapter returns null");
                 }
             }
         } catch (Exception e) {
@@ -103,8 +113,7 @@ public final class NfcConnectivity extends Connectivity {
     }
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
-    public final void sendStopUsbAuth() {
-    }
+    public final void sendStopUsbAuth() {}
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
     public final byte[] sendSynchronously(byte[] bArr, AuthenticationResult authenticationResult) {
@@ -114,7 +123,8 @@ public final class NfcConnectivity extends Connectivity {
                 return null;
             }
             try {
-                return ((ISamsungNfcAdapter.Stub.Proxy) SamsungNfcAdapter.sService).transceiveAuthData(bArr);
+                return ((ISamsungNfcAdapter.Stub.Proxy) SamsungNfcAdapter.sService)
+                        .transceiveAuthData(bArr);
             } catch (RemoteException e) {
                 Log.e("SamsungNfcAdapter", "Failed to transmit authentication data");
                 SamsungNfcAdapter.attemptDeadServiceRecovery(e);

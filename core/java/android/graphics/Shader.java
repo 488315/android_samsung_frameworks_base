@@ -13,10 +13,11 @@ public class Shader {
     public static native long nativeGetFinalizer();
 
     private static class NoImagePreloadHolder {
-        public static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(Shader.class.getClassLoader(), Shader.nativeGetFinalizer());
+        public static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        Shader.class.getClassLoader(), Shader.nativeGetFinalizer());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     @Deprecated
@@ -27,7 +28,8 @@ public class Shader {
     protected Shader(ColorSpace colorSpace) {
         this.mColorSpace = colorSpace;
         if (colorSpace == null) {
-            throw new IllegalArgumentException("Use Shader() to create a Shader with no ColorSpace");
+            throw new IllegalArgumentException(
+                    "Use Shader() to create a Shader with no ColorSpace");
         }
         this.mColorSpace.getNativeInstance();
     }
@@ -100,9 +102,14 @@ public class Shader {
             discardNativeInstanceLocked();
         }
         if (this.mNativeInstance == 0) {
-            this.mNativeInstance = createNativeInstance(this.mLocalMatrix == null ? 0L : this.mLocalMatrix.ni(), filterFromPaint);
+            this.mNativeInstance =
+                    createNativeInstance(
+                            this.mLocalMatrix == null ? 0L : this.mLocalMatrix.ni(),
+                            filterFromPaint);
             if (this.mNativeInstance != 0) {
-                this.mCleaner = NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, this.mNativeInstance);
+                this.mCleaner =
+                        NoImagePreloadHolder.sRegistry.registerNativeAllocation(
+                                this, this.mNativeInstance);
             }
         }
         return this.mNativeInstance;

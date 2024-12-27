@@ -4,18 +4,21 @@ import android.media.MediaMetrics;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.secutil.Log;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 /* loaded from: classes6.dex */
 public class CustomizedTextParser {
@@ -35,7 +38,10 @@ public class CustomizedTextParser {
     private CustomizedTextParser() {
         try {
             String omcEtcPath = SystemProperties.get("persist.sys.omc_etcpath");
-            String pathName = TextUtils.isEmpty(omcEtcPath) ? "/system/csc/unique_text.xml" : omcEtcPath + "/" + CSC_XML_FILE_NAME;
+            String pathName =
+                    TextUtils.isEmpty(omcEtcPath)
+                            ? "/system/csc/unique_text.xml"
+                            : omcEtcPath + "/" + CSC_XML_FILE_NAME;
             Log.secD(TAG, "path name : " + pathName);
             update(pathName);
         } catch (Exception e) {
@@ -74,7 +80,12 @@ public class CustomizedTextParser {
             if (srcTemp != null && targetTemp != null) {
                 this.mRuleMap.put(getValue(srcTemp), getValue(targetTemp));
             } else {
-                Log.e(TAG, "createCscRuleMap:src or target is null. srcTemp =" + srcTemp + ",target=" + targetTemp);
+                Log.e(
+                        TAG,
+                        "createCscRuleMap:src or target is null. srcTemp ="
+                                + srcTemp
+                                + ",target="
+                                + targetTemp);
             }
         }
         Log.d(TAG, "Initialzed: Finished. size=" + sInstance.mRuleMap.size());
@@ -98,7 +109,8 @@ public class CustomizedTextParser {
         return replaceText;
     }
 
-    private void update(String fileName) throws ParserConfigurationException, SAXException, IOException {
+    private void update(String fileName)
+            throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         File fe = new File(fileName);

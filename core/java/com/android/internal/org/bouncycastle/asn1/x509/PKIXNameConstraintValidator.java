@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.asn1.x509;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1OctetString;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
@@ -14,6 +15,7 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Integers;
 import com.android.internal.org.bouncycastle.util.Strings;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
@@ -42,7 +44,8 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
     public void checkPermitted(GeneralName name) throws NameConstraintValidatorException {
         switch (name.getTagNo()) {
             case 0:
-                checkPermittedOtherName(this.permittedSubtreesOtherName, OtherName.getInstance(name.getName()));
+                checkPermittedOtherName(
+                        this.permittedSubtreesOtherName, OtherName.getInstance(name.getName()));
                 break;
             case 1:
                 checkPermittedEmail(this.permittedSubtreesEmail, extractNameAsString(name));
@@ -57,7 +60,9 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
                 checkPermittedURI(this.permittedSubtreesURI, extractNameAsString(name));
                 break;
             case 7:
-                checkPermittedIP(this.permittedSubtreesIP, ASN1OctetString.getInstance(name.getName()).getOctets());
+                checkPermittedIP(
+                        this.permittedSubtreesIP,
+                        ASN1OctetString.getInstance(name.getName()).getOctets());
                 break;
         }
     }
@@ -66,7 +71,8 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
     public void checkExcluded(GeneralName name) throws NameConstraintValidatorException {
         switch (name.getTagNo()) {
             case 0:
-                checkExcludedOtherName(this.excludedSubtreesOtherName, OtherName.getInstance(name.getName()));
+                checkExcludedOtherName(
+                        this.excludedSubtreesOtherName, OtherName.getInstance(name.getName()));
                 break;
             case 1:
                 checkExcludedEmail(this.excludedSubtreesEmail, extractNameAsString(name));
@@ -81,14 +87,16 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
                 checkExcludedURI(this.excludedSubtreesURI, extractNameAsString(name));
                 break;
             case 7:
-                checkExcludedIP(this.excludedSubtreesIP, ASN1OctetString.getInstance(name.getName()).getOctets());
+                checkExcludedIP(
+                        this.excludedSubtreesIP,
+                        ASN1OctetString.getInstance(name.getName()).getOctets());
                 break;
         }
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.x509.NameConstraintValidator
     public void intersectPermittedSubtree(GeneralSubtree permitted) {
-        intersectPermittedSubtree(new GeneralSubtree[]{permitted});
+        intersectPermittedSubtree(new GeneralSubtree[] {permitted});
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.x509.NameConstraintValidator
@@ -106,26 +114,33 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
             int nameType = ((Integer) entry.getKey()).intValue();
             switch (nameType) {
                 case 0:
-                    this.permittedSubtreesOtherName = intersectOtherName(this.permittedSubtreesOtherName, (Set) entry.getValue());
+                    this.permittedSubtreesOtherName =
+                            intersectOtherName(
+                                    this.permittedSubtreesOtherName, (Set) entry.getValue());
                     break;
                 case 1:
-                    this.permittedSubtreesEmail = intersectEmail(this.permittedSubtreesEmail, (Set) entry.getValue());
+                    this.permittedSubtreesEmail =
+                            intersectEmail(this.permittedSubtreesEmail, (Set) entry.getValue());
                     break;
                 case 2:
-                    this.permittedSubtreesDNS = intersectDNS(this.permittedSubtreesDNS, (Set) entry.getValue());
+                    this.permittedSubtreesDNS =
+                            intersectDNS(this.permittedSubtreesDNS, (Set) entry.getValue());
                     break;
                 case 3:
                 case 5:
                 default:
                     throw new IllegalStateException("Unknown tag encountered: " + nameType);
                 case 4:
-                    this.permittedSubtreesDN = intersectDN(this.permittedSubtreesDN, (Set) entry.getValue());
+                    this.permittedSubtreesDN =
+                            intersectDN(this.permittedSubtreesDN, (Set) entry.getValue());
                     break;
                 case 6:
-                    this.permittedSubtreesURI = intersectURI(this.permittedSubtreesURI, (Set) entry.getValue());
+                    this.permittedSubtreesURI =
+                            intersectURI(this.permittedSubtreesURI, (Set) entry.getValue());
                     break;
                 case 7:
-                    this.permittedSubtreesIP = intersectIP(this.permittedSubtreesIP, (Set) entry.getValue());
+                    this.permittedSubtreesIP =
+                            intersectIP(this.permittedSubtreesIP, (Set) entry.getValue());
                     break;
             }
         }
@@ -164,32 +179,55 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         GeneralName base = subtree.getBase();
         switch (base.getTagNo()) {
             case 0:
-                this.excludedSubtreesOtherName = unionOtherName(this.excludedSubtreesOtherName, OtherName.getInstance(base.getName()));
+                this.excludedSubtreesOtherName =
+                        unionOtherName(
+                                this.excludedSubtreesOtherName,
+                                OtherName.getInstance(base.getName()));
                 return;
             case 1:
-                this.excludedSubtreesEmail = unionEmail(this.excludedSubtreesEmail, extractNameAsString(base));
+                this.excludedSubtreesEmail =
+                        unionEmail(this.excludedSubtreesEmail, extractNameAsString(base));
                 return;
             case 2:
-                this.excludedSubtreesDNS = unionDNS(this.excludedSubtreesDNS, extractNameAsString(base));
+                this.excludedSubtreesDNS =
+                        unionDNS(this.excludedSubtreesDNS, extractNameAsString(base));
                 return;
             case 3:
             case 5:
             default:
                 throw new IllegalStateException("Unknown tag encountered: " + base.getTagNo());
             case 4:
-                this.excludedSubtreesDN = unionDN(this.excludedSubtreesDN, (ASN1Sequence) base.getName().toASN1Primitive());
+                this.excludedSubtreesDN =
+                        unionDN(
+                                this.excludedSubtreesDN,
+                                (ASN1Sequence) base.getName().toASN1Primitive());
                 return;
             case 6:
-                this.excludedSubtreesURI = unionURI(this.excludedSubtreesURI, extractNameAsString(base));
+                this.excludedSubtreesURI =
+                        unionURI(this.excludedSubtreesURI, extractNameAsString(base));
                 return;
             case 7:
-                this.excludedSubtreesIP = unionIP(this.excludedSubtreesIP, ASN1OctetString.getInstance(base.getName()).getOctets());
+                this.excludedSubtreesIP =
+                        unionIP(
+                                this.excludedSubtreesIP,
+                                ASN1OctetString.getInstance(base.getName()).getOctets());
                 return;
         }
     }
 
     public int hashCode() {
-        return hashCollection(this.excludedSubtreesDN) + hashCollection(this.excludedSubtreesDNS) + hashCollection(this.excludedSubtreesEmail) + hashCollection(this.excludedSubtreesIP) + hashCollection(this.excludedSubtreesURI) + hashCollection(this.excludedSubtreesOtherName) + hashCollection(this.permittedSubtreesDN) + hashCollection(this.permittedSubtreesDNS) + hashCollection(this.permittedSubtreesEmail) + hashCollection(this.permittedSubtreesIP) + hashCollection(this.permittedSubtreesURI) + hashCollection(this.permittedSubtreesOtherName);
+        return hashCollection(this.excludedSubtreesDN)
+                + hashCollection(this.excludedSubtreesDNS)
+                + hashCollection(this.excludedSubtreesEmail)
+                + hashCollection(this.excludedSubtreesIP)
+                + hashCollection(this.excludedSubtreesURI)
+                + hashCollection(this.excludedSubtreesOtherName)
+                + hashCollection(this.permittedSubtreesDN)
+                + hashCollection(this.permittedSubtreesDNS)
+                + hashCollection(this.permittedSubtreesEmail)
+                + hashCollection(this.permittedSubtreesIP)
+                + hashCollection(this.permittedSubtreesURI)
+                + hashCollection(this.permittedSubtreesOtherName);
     }
 
     public boolean equals(Object o) {
@@ -197,7 +235,31 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
             return false;
         }
         PKIXNameConstraintValidator constraintValidator = (PKIXNameConstraintValidator) o;
-        return collectionsAreEqual(constraintValidator.excludedSubtreesDN, this.excludedSubtreesDN) && collectionsAreEqual(constraintValidator.excludedSubtreesDNS, this.excludedSubtreesDNS) && collectionsAreEqual(constraintValidator.excludedSubtreesEmail, this.excludedSubtreesEmail) && collectionsAreEqual(constraintValidator.excludedSubtreesIP, this.excludedSubtreesIP) && collectionsAreEqual(constraintValidator.excludedSubtreesURI, this.excludedSubtreesURI) && collectionsAreEqual(constraintValidator.excludedSubtreesOtherName, this.excludedSubtreesOtherName) && collectionsAreEqual(constraintValidator.permittedSubtreesDN, this.permittedSubtreesDN) && collectionsAreEqual(constraintValidator.permittedSubtreesDNS, this.permittedSubtreesDNS) && collectionsAreEqual(constraintValidator.permittedSubtreesEmail, this.permittedSubtreesEmail) && collectionsAreEqual(constraintValidator.permittedSubtreesIP, this.permittedSubtreesIP) && collectionsAreEqual(constraintValidator.permittedSubtreesURI, this.permittedSubtreesURI) && collectionsAreEqual(constraintValidator.permittedSubtreesOtherName, this.permittedSubtreesOtherName);
+        return collectionsAreEqual(constraintValidator.excludedSubtreesDN, this.excludedSubtreesDN)
+                && collectionsAreEqual(
+                        constraintValidator.excludedSubtreesDNS, this.excludedSubtreesDNS)
+                && collectionsAreEqual(
+                        constraintValidator.excludedSubtreesEmail, this.excludedSubtreesEmail)
+                && collectionsAreEqual(
+                        constraintValidator.excludedSubtreesIP, this.excludedSubtreesIP)
+                && collectionsAreEqual(
+                        constraintValidator.excludedSubtreesURI, this.excludedSubtreesURI)
+                && collectionsAreEqual(
+                        constraintValidator.excludedSubtreesOtherName,
+                        this.excludedSubtreesOtherName)
+                && collectionsAreEqual(
+                        constraintValidator.permittedSubtreesDN, this.permittedSubtreesDN)
+                && collectionsAreEqual(
+                        constraintValidator.permittedSubtreesDNS, this.permittedSubtreesDNS)
+                && collectionsAreEqual(
+                        constraintValidator.permittedSubtreesEmail, this.permittedSubtreesEmail)
+                && collectionsAreEqual(
+                        constraintValidator.permittedSubtreesIP, this.permittedSubtreesIP)
+                && collectionsAreEqual(
+                        constraintValidator.permittedSubtreesURI, this.permittedSubtreesURI)
+                && collectionsAreEqual(
+                        constraintValidator.permittedSubtreesOtherName,
+                        this.permittedSubtreesOtherName);
     }
 
     public void checkPermittedDN(X500Name dns) throws NameConstraintValidatorException {
@@ -227,11 +289,22 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         for (int j3 = 0; j3 < subtree.size(); j3++) {
             RDN subtreeRdn = RDN.getInstance(subtree.getObjectAt(j3));
             RDN dnsRdn = RDN.getInstance(dns.getObjectAt(start + j3));
-            if (subtreeRdn.size() != dnsRdn.size() || !subtreeRdn.getFirst().getType().equals((ASN1Primitive) dnsRdn.getFirst().getType())) {
+            if (subtreeRdn.size() != dnsRdn.size()
+                    || !subtreeRdn
+                            .getFirst()
+                            .getType()
+                            .equals((ASN1Primitive) dnsRdn.getFirst().getType())) {
                 return false;
             }
-            if (subtreeRdn.size() == 1 && subtreeRdn.getFirst().getType().equals((ASN1Primitive) RFC4519Style.serialNumber)) {
-                if (!dnsRdn.getFirst().getValue().toString().startsWith(subtreeRdn.getFirst().getValue().toString())) {
+            if (subtreeRdn.size() == 1
+                    && subtreeRdn
+                            .getFirst()
+                            .getType()
+                            .equals((ASN1Primitive) RFC4519Style.serialNumber)) {
+                if (!dnsRdn.getFirst()
+                        .getValue()
+                        .toString()
+                        .startsWith(subtreeRdn.getFirst().getValue().toString())) {
                     return false;
                 }
             } else if (!IETFUtils.rDNAreEqual(subtreeRdn, dnsRdn)) {
@@ -241,7 +314,8 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         return true;
     }
 
-    private void checkPermittedDN(Set permitted, ASN1Sequence dns) throws NameConstraintValidatorException {
+    private void checkPermittedDN(Set permitted, ASN1Sequence dns)
+            throws NameConstraintValidatorException {
         if (permitted == null) {
             return;
         }
@@ -255,10 +329,12 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
                 return;
             }
         }
-        throw new NameConstraintValidatorException("Subject distinguished name is not from a permitted subtree");
+        throw new NameConstraintValidatorException(
+                "Subject distinguished name is not from a permitted subtree");
     }
 
-    private void checkExcludedDN(Set excluded, ASN1Sequence dns) throws NameConstraintValidatorException {
+    private void checkExcludedDN(Set excluded, ASN1Sequence dns)
+            throws NameConstraintValidatorException {
         if (excluded.isEmpty()) {
             return;
         }
@@ -266,7 +342,8 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         while (it.hasNext()) {
             ASN1Sequence subtree = (ASN1Sequence) it.next();
             if (withinDNSubtree(dns, subtree)) {
-                throw new NameConstraintValidatorException("Subject distinguished name is from an excluded subtree");
+                throw new NameConstraintValidatorException(
+                        "Subject distinguished name is from an excluded subtree");
             }
         }
     }
@@ -275,7 +352,9 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         Set intersect = new HashSet();
         Iterator it = dns.iterator();
         while (it.hasNext()) {
-            ASN1Sequence dn = ASN1Sequence.getInstance(((GeneralSubtree) it.next()).getBase().getName().toASN1Primitive());
+            ASN1Sequence dn =
+                    ASN1Sequence.getInstance(
+                            ((GeneralSubtree) it.next()).getBase().getName().toASN1Primitive());
             if (permitted == null) {
                 if (dn != null) {
                     intersect.add(dn);
@@ -323,7 +402,8 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         Set intersect = new HashSet();
         Iterator it = otherNames.iterator();
         while (it.hasNext()) {
-            OtherName otName1 = OtherName.getInstance(((GeneralSubtree) it.next()).getBase().getName());
+            OtherName otName1 =
+                    OtherName.getInstance(((GeneralSubtree) it.next()).getBase().getName());
             if (permitted == null) {
                 if (otName1 != null) {
                     intersect.add(otName1);
@@ -392,7 +472,9 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         Set intersect = new HashSet();
         Iterator it = ips.iterator();
         while (it.hasNext()) {
-            byte[] ip = ASN1OctetString.getInstance(((GeneralSubtree) it.next()).getBase().getName()).getOctets();
+            byte[] ip =
+                    ASN1OctetString.getInstance(((GeneralSubtree) it.next()).getBase().getName())
+                            .getOctets();
             if (permitted == null) {
                 if (ip != null) {
                     intersect.add(ip);
@@ -474,7 +556,7 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         byte[] subnetmask2 = new byte[ipLength];
         System.arraycopy(ipWithSubmask2, 0, ip2, 0, ipLength);
         System.arraycopy(ipWithSubmask2, ipLength, subnetmask2, 0, ipLength);
-        return new byte[][]{ip1, subnetmask1, ip2, subnetmask2};
+        return new byte[][] {ip1, subnetmask1, ip2, subnetmask2};
     }
 
     private byte[][] minMaxIPs(byte[] ip1, byte[] subnetmask1, byte[] ip2, byte[] subnetmask2) {
@@ -489,10 +571,11 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
             min2[i] = (byte) (ip2[i] & subnetmask2[i]);
             max2[i] = (byte) ((ip2[i] & subnetmask2[i]) | (~subnetmask2[i]));
         }
-        return new byte[][]{min1, max1, min2, max2};
+        return new byte[][] {min1, max1, min2, max2};
     }
 
-    private void checkPermittedEmail(Set permitted, String email) throws NameConstraintValidatorException {
+    private void checkPermittedEmail(Set permitted, String email)
+            throws NameConstraintValidatorException {
         if (permitted == null) {
             return;
         }
@@ -505,11 +588,13 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         }
         if (email.length() == 0 && permitted.size() == 0) {
         } else {
-            throw new NameConstraintValidatorException("Subject email address is not from a permitted subtree.");
+            throw new NameConstraintValidatorException(
+                    "Subject email address is not from a permitted subtree.");
         }
     }
 
-    private void checkPermittedOtherName(Set permitted, OtherName name) throws NameConstraintValidatorException {
+    private void checkPermittedOtherName(Set permitted, OtherName name)
+            throws NameConstraintValidatorException {
         if (permitted == null) {
             return;
         }
@@ -520,10 +605,12 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
                 return;
             }
         }
-        throw new NameConstraintValidatorException("Subject OtherName is not from a permitted subtree.");
+        throw new NameConstraintValidatorException(
+                "Subject OtherName is not from a permitted subtree.");
     }
 
-    private void checkExcludedOtherName(Set excluded, OtherName name) throws NameConstraintValidatorException {
+    private void checkExcludedOtherName(Set excluded, OtherName name)
+            throws NameConstraintValidatorException {
         if (excluded.isEmpty()) {
             return;
         }
@@ -531,12 +618,14 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         while (it.hasNext()) {
             OtherName str = OtherName.getInstance(it.next());
             if (otherNameIsConstrained(name, str)) {
-                throw new NameConstraintValidatorException("OtherName is from an excluded subtree.");
+                throw new NameConstraintValidatorException(
+                        "OtherName is from an excluded subtree.");
             }
         }
     }
 
-    private void checkExcludedEmail(Set excluded, String email) throws NameConstraintValidatorException {
+    private void checkExcludedEmail(Set excluded, String email)
+            throws NameConstraintValidatorException {
         if (excluded.isEmpty()) {
             return;
         }
@@ -544,12 +633,14 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         while (it.hasNext()) {
             String str = (String) it.next();
             if (emailIsConstrained(email, str)) {
-                throw new NameConstraintValidatorException("Email address is from an excluded subtree.");
+                throw new NameConstraintValidatorException(
+                        "Email address is from an excluded subtree.");
             }
         }
     }
 
-    private void checkPermittedIP(Set permitted, byte[] ip) throws NameConstraintValidatorException {
+    private void checkPermittedIP(Set permitted, byte[] ip)
+            throws NameConstraintValidatorException {
         if (permitted == null) {
             return;
         }
@@ -605,7 +696,8 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
     private boolean emailIsConstrained(String email, String constraint) {
         String sub = email.substring(email.indexOf(64) + 1);
         if (constraint.indexOf(64) != -1) {
-            if (email.equalsIgnoreCase(constraint) || sub.equalsIgnoreCase(constraint.substring(1))) {
+            if (email.equalsIgnoreCase(constraint)
+                    || sub.equalsIgnoreCase(constraint.substring(1))) {
                 return true;
             }
         } else if (constraint.charAt(0) != '.') {
@@ -641,7 +733,8 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         return true;
     }
 
-    private void checkPermittedDNS(Set permitted, String dns) throws NameConstraintValidatorException {
+    private void checkPermittedDNS(Set permitted, String dns)
+            throws NameConstraintValidatorException {
         if (permitted == null) {
             return;
         }
@@ -658,7 +751,8 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         }
     }
 
-    private void checkExcludedDNS(Set excluded, String dns) throws NameConstraintValidatorException {
+    private void checkExcludedDNS(Set excluded, String dns)
+            throws NameConstraintValidatorException {
         if (excluded.isEmpty()) {
             return;
         }
@@ -976,7 +1070,8 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         }
     }
 
-    private void checkExcludedURI(Set excluded, String uri) throws NameConstraintValidatorException {
+    private void checkExcludedURI(Set excluded, String uri)
+            throws NameConstraintValidatorException {
         if (excluded.isEmpty()) {
             return;
         }
@@ -1093,7 +1188,8 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
         }
     }
 
-    private void checkPermittedURI(Set permitted, String uri) throws NameConstraintValidatorException {
+    private void checkPermittedURI(Set permitted, String uri)
+            throws NameConstraintValidatorException {
         if (permitted == null) {
             return;
         }
@@ -1112,7 +1208,9 @@ public class PKIXNameConstraintValidator implements NameConstraintValidator {
 
     private boolean isUriConstrained(String uri, String constraint) {
         String host = extractHostFromURL(uri);
-        return !constraint.startsWith(MediaMetrics.SEPARATOR) ? host.equalsIgnoreCase(constraint) : withinDomain(host, constraint);
+        return !constraint.startsWith(MediaMetrics.SEPARATOR)
+                ? host.equalsIgnoreCase(constraint)
+                : withinDomain(host, constraint);
     }
 
     private static String extractHostFromURL(String url) {

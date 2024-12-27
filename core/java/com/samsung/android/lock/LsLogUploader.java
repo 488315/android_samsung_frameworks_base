@@ -7,12 +7,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.samsung.android.share.SemShareConstants;
 
 /* loaded from: classes6.dex */
 public class LsLogUploader {
     private static final String AUTHORITY = "com.sec.android.log.sp4xkeu9ef";
-    private static final String REPORT_ERROR_INTENT = "com.sec.android.diagmonagent.intent.REPORT_ERROR_V2";
+    private static final String REPORT_ERROR_INTENT =
+            "com.sec.android.diagmonagent.intent.REPORT_ERROR_V2";
     private static final String SERVICE_ID = "sp4xkeu9ef";
     private static final String TAG = "LsLogUploader";
     private static final String UPLOAD_MO = "uploadMO";
@@ -43,7 +45,8 @@ public class LsLogUploader {
             mLastUploadType = type;
             return;
         }
-        int errorlog_agree = Settings.System.getInt(mContext.getContentResolver(), "samsung_errorlog_agree", 0);
+        int errorlog_agree =
+                Settings.System.getInt(mContext.getContentResolver(), "samsung_errorlog_agree", 0);
         if (errorlog_agree != 1) {
             Log.w(TAG, "sendToDiagmon failed. errorlog_agree is not true!!");
             mLastUploadType = null;
@@ -66,18 +69,51 @@ public class LsLogUploader {
         try {
             uploadMO.putBundle("DiagMon", new Bundle());
             uploadMO.getBundle("DiagMon").putBundle("CFailLogUpload", new Bundle());
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").putString("ServiceID", SERVICE_ID);
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").putBundle("Ext", new Bundle());
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").getBundle("Ext").putString("ClientV", BUILD_ID);
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").getBundle("Ext").putString("UiMode", "0");
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").getBundle("Ext").putString("ResultCode", type.getErrorCode());
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").getBundle("Ext").putString("WifiOnlyFeature", "1");
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").getBundle("Ext").putString("EventID", EVENT_ID);
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").getBundle("Ext").putString("Description", type.getErrorCode());
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").putBundle("IntentOnly", new Bundle());
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").getBundle("IntentOnly").putString("IntentOnlyMode", "1");
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").getBundle("IntentOnly").putString("Agree", GnssSignalType.CODE_TYPE_D);
-            uploadMO.getBundle("DiagMon").getBundle("CFailLogUpload").getBundle("IntentOnly").putString("LogPath", file);
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .putString("ServiceID", SERVICE_ID);
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .putBundle("Ext", new Bundle());
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .getBundle("Ext")
+                    .putString("ClientV", BUILD_ID);
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .getBundle("Ext")
+                    .putString("UiMode", "0");
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .getBundle("Ext")
+                    .putString("ResultCode", type.getErrorCode());
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .getBundle("Ext")
+                    .putString("WifiOnlyFeature", "1");
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .getBundle("Ext")
+                    .putString("EventID", EVENT_ID);
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .getBundle("Ext")
+                    .putString("Description", type.getErrorCode());
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .putBundle("IntentOnly", new Bundle());
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .getBundle("IntentOnly")
+                    .putString("IntentOnlyMode", "1");
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .getBundle("IntentOnly")
+                    .putString("Agree", GnssSignalType.CODE_TYPE_D);
+            uploadMO.getBundle("DiagMon")
+                    .getBundle("CFailLogUpload")
+                    .getBundle("IntentOnly")
+                    .putString("LogPath", file);
             i.putExtra(UPLOAD_MO, uploadMO);
             i.setFlags(32);
             i.setPackage(SemShareConstants.DMA_SURVEY_DMA_PACKAGE);

@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes3.dex */
@@ -48,12 +49,14 @@ class DelegatingX509Certificate extends X509Certificate {
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity()
+            throws CertificateExpiredException, CertificateNotYetValidException {
         this.mDelegate.checkValidity();
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity(Date date)
+            throws CertificateExpiredException, CertificateNotYetValidException {
         this.mDelegate.checkValidity(date);
     }
 
@@ -148,12 +151,22 @@ class DelegatingX509Certificate extends X509Certificate {
     }
 
     @Override // java.security.cert.Certificate
-    public void verify(PublicKey key) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public void verify(PublicKey key)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    NoSuchProviderException,
+                    SignatureException {
         this.mDelegate.verify(key);
     }
 
     @Override // java.security.cert.Certificate
-    public void verify(PublicKey key, String sigProvider) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public void verify(PublicKey key, String sigProvider)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    NoSuchProviderException,
+                    SignatureException {
         this.mDelegate.verify(key, sigProvider);
     }
 

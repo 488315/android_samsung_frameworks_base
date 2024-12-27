@@ -11,11 +11,12 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserManager;
 import android.util.Log;
+
 import com.android.internal.R;
-import com.android.internal.app.AlertController;
 
 /* loaded from: classes5.dex */
-public class ConfirmUserCreationActivity extends AlertActivity implements DialogInterface.OnClickListener {
+public class ConfirmUserCreationActivity extends AlertActivity
+        implements DialogInterface.OnClickListener {
     private static final String TAG = "CreateUser";
     private static final String USER_TYPE = "android.os.usertype.full.SECONDARY";
     private String mAccountName;
@@ -34,7 +35,10 @@ public class ConfirmUserCreationActivity extends AlertActivity implements Dialog
         this.mUserName = intent.getStringExtra(UserManager.EXTRA_USER_NAME);
         this.mAccountName = intent.getStringExtra(UserManager.EXTRA_USER_ACCOUNT_NAME);
         this.mAccountType = intent.getStringExtra(UserManager.EXTRA_USER_ACCOUNT_TYPE);
-        this.mAccountOptions = (PersistableBundle) intent.getParcelableExtra(UserManager.EXTRA_USER_ACCOUNT_OPTIONS, PersistableBundle.class);
+        this.mAccountOptions =
+                (PersistableBundle)
+                        intent.getParcelableExtra(
+                                UserManager.EXTRA_USER_ACCOUNT_OPTIONS, PersistableBundle.class);
         this.mUserManager = (UserManager) getSystemService(UserManager.class);
         String message = checkUserCreationRequirements();
         if (message == null) {
@@ -56,15 +60,23 @@ public class ConfirmUserCreationActivity extends AlertActivity implements Dialog
     private String checkUserCreationRequirements() {
         String callingPackage = getCallingPackage();
         if (callingPackage == null) {
-            throw new SecurityException("User Creation intent must be launched with startActivityForResult");
+            throw new SecurityException(
+                    "User Creation intent must be launched with startActivityForResult");
         }
         try {
             boolean accountExists = false;
             ApplicationInfo appInfo = getPackageManager().getApplicationInfo(callingPackage, 0);
-            boolean cantCreateUser = this.mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER) || !this.mUserManager.isAdminUser();
-            boolean cantCreateAnyMoreUsers = !this.mUserManager.canAddMoreUsers("android.os.usertype.full.SECONDARY");
+            boolean cantCreateUser =
+                    this.mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER)
+                            || !this.mUserManager.isAdminUser();
+            boolean cantCreateAnyMoreUsers =
+                    !this.mUserManager.canAddMoreUsers("android.os.usertype.full.SECONDARY");
             Account account = new Account(this.mAccountName, this.mAccountType);
-            if (this.mAccountName != null && this.mAccountType != null && (AccountManager.get(this).someUserHasAccount(account) | this.mUserManager.someUserHasSeedAccount(this.mAccountName, this.mAccountType))) {
+            if (this.mAccountName != null
+                    && this.mAccountType != null
+                    && (AccountManager.get(this).someUserHasAccount(account)
+                            | this.mUserManager.someUserHasSeedAccount(
+                                    this.mAccountName, this.mAccountType))) {
                 accountExists = true;
             }
             this.mCanProceed = true;
@@ -73,7 +85,11 @@ public class ConfirmUserCreationActivity extends AlertActivity implements Dialog
                 setResult(1);
                 return null;
             }
-            if (!isUserPropertyWithinLimit(this.mUserName, 100) || !isUserPropertyWithinLimit(this.mAccountName, 500) || !isUserPropertyWithinLimit(this.mAccountType, 500) || (this.mAccountOptions != null && !this.mAccountOptions.isBundleContentsWithinLengthLimit(1000))) {
+            if (!isUserPropertyWithinLimit(this.mUserName, 100)
+                    || !isUserPropertyWithinLimit(this.mAccountName, 500)
+                    || !isUserPropertyWithinLimit(this.mAccountType, 500)
+                    || (this.mAccountOptions != null
+                            && !this.mAccountOptions.isBundleContentsWithinLengthLimit(1000))) {
                 setResult(1);
                 Log.i(TAG, "User properties must not exceed their character limits");
                 return null;
@@ -83,7 +99,9 @@ public class ConfirmUserCreationActivity extends AlertActivity implements Dialog
                 return null;
             }
             if (accountExists) {
-                String message = getString(R.string.user_creation_account_exists, appName, this.mAccountName);
+                String message =
+                        getString(
+                                R.string.user_creation_account_exists, appName, this.mAccountName);
                 return message;
             }
             String message2 = this.mAccountName;
@@ -99,13 +117,16 @@ public class ConfirmUserCreationActivity extends AlertActivity implements Dialog
         if (which == -1 && this.mCanProceed && this.mIsFirstClick) {
             this.mIsFirstClick = false;
             Log.i(TAG, "Ok, creating user");
-            UserInfo user = this.mUserManager.createUser(this.mUserName, "android.os.usertype.full.SECONDARY", 0);
+            UserInfo user =
+                    this.mUserManager.createUser(
+                            this.mUserName, "android.os.usertype.full.SECONDARY", 0);
             if (user == null) {
                 Log.e(TAG, "Couldn't create user");
                 finish();
                 return;
             } else {
-                this.mUserManager.setSeedAccountData(user.id, this.mAccountName, this.mAccountType, this.mAccountOptions);
+                this.mUserManager.setSeedAccountData(
+                        user.id, this.mAccountName, this.mAccountType, this.mAccountOptions);
                 setResult(-1);
             }
         }

@@ -2,7 +2,6 @@ package android.content;
 
 import android.Manifest;
 import android.app.ActivityThread;
-import android.content.IOnPrimaryClipChangedListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -12,7 +11,13 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IClipboard extends IInterface {
-    void addPrimaryClipChangedListener(IOnPrimaryClipChangedListener iOnPrimaryClipChangedListener, String str, String str2, int i, int i2) throws RemoteException;
+    void addPrimaryClipChangedListener(
+            IOnPrimaryClipChangedListener iOnPrimaryClipChangedListener,
+            String str,
+            String str2,
+            int i,
+            int i2)
+            throws RemoteException;
 
     boolean areClipboardAccessNotificationsEnabledForUser(int i) throws RemoteException;
 
@@ -20,7 +25,8 @@ public interface IClipboard extends IInterface {
 
     ClipData getPrimaryClip(String str, String str2, int i, int i2) throws RemoteException;
 
-    ClipDescription getPrimaryClipDescription(String str, String str2, int i, int i2) throws RemoteException;
+    ClipDescription getPrimaryClipDescription(String str, String str2, int i, int i2)
+            throws RemoteException;
 
     String getPrimaryClipSource(String str, String str2, int i, int i2) throws RemoteException;
 
@@ -28,68 +34,109 @@ public interface IClipboard extends IInterface {
 
     boolean hasPrimaryClip(String str, String str2, int i, int i2) throws RemoteException;
 
-    void removePrimaryClipChangedListener(IOnPrimaryClipChangedListener iOnPrimaryClipChangedListener, String str, String str2, int i, int i2) throws RemoteException;
+    void removePrimaryClipChangedListener(
+            IOnPrimaryClipChangedListener iOnPrimaryClipChangedListener,
+            String str,
+            String str2,
+            int i,
+            int i2)
+            throws RemoteException;
 
     void setClipboardAccessNotificationsEnabledForUser(boolean z, int i) throws RemoteException;
 
-    void setPrimaryClip(ClipData clipData, String str, String str2, int i, int i2) throws RemoteException;
+    void setPrimaryClip(ClipData clipData, String str, String str2, int i, int i2)
+            throws RemoteException;
 
-    void setPrimaryClipAsPackage(ClipData clipData, String str, String str2, int i, int i2, String str3) throws RemoteException;
+    void setPrimaryClipAsPackage(
+            ClipData clipData, String str, String str2, int i, int i2, String str3)
+            throws RemoteException;
 
     public static class Default implements IClipboard {
         @Override // android.content.IClipboard
-        public void setPrimaryClip(ClipData clip, String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
-        }
+        public void setPrimaryClip(
+                ClipData clip,
+                String callingPackage,
+                String attributionTag,
+                int userId,
+                int deviceId)
+                throws RemoteException {}
 
         @Override // android.content.IClipboard
-        public void setPrimaryClipAsPackage(ClipData clip, String callingPackage, String attributionTag, int userId, int deviceId, String sourcePackage) throws RemoteException {
-        }
+        public void setPrimaryClipAsPackage(
+                ClipData clip,
+                String callingPackage,
+                String attributionTag,
+                int userId,
+                int deviceId,
+                String sourcePackage)
+                throws RemoteException {}
 
         @Override // android.content.IClipboard
-        public void clearPrimaryClip(String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
-        }
+        public void clearPrimaryClip(
+                String callingPackage, String attributionTag, int userId, int deviceId)
+                throws RemoteException {}
 
         @Override // android.content.IClipboard
-        public ClipData getPrimaryClip(String pkg, String attributionTag, int userId, int deviceId) throws RemoteException {
+        public ClipData getPrimaryClip(String pkg, String attributionTag, int userId, int deviceId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.IClipboard
-        public ClipDescription getPrimaryClipDescription(String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+        public ClipDescription getPrimaryClipDescription(
+                String callingPackage, String attributionTag, int userId, int deviceId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.IClipboard
-        public boolean hasPrimaryClip(String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+        public boolean hasPrimaryClip(
+                String callingPackage, String attributionTag, int userId, int deviceId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.IClipboard
-        public void addPrimaryClipChangedListener(IOnPrimaryClipChangedListener listener, String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
-        }
+        public void addPrimaryClipChangedListener(
+                IOnPrimaryClipChangedListener listener,
+                String callingPackage,
+                String attributionTag,
+                int userId,
+                int deviceId)
+                throws RemoteException {}
 
         @Override // android.content.IClipboard
-        public void removePrimaryClipChangedListener(IOnPrimaryClipChangedListener listener, String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
-        }
+        public void removePrimaryClipChangedListener(
+                IOnPrimaryClipChangedListener listener,
+                String callingPackage,
+                String attributionTag,
+                int userId,
+                int deviceId)
+                throws RemoteException {}
 
         @Override // android.content.IClipboard
-        public boolean hasClipboardText(String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+        public boolean hasClipboardText(
+                String callingPackage, String attributionTag, int userId, int deviceId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.IClipboard
-        public String getPrimaryClipSource(String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+        public String getPrimaryClipSource(
+                String callingPackage, String attributionTag, int userId, int deviceId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.IClipboard
-        public boolean areClipboardAccessNotificationsEnabledForUser(int userId) throws RemoteException {
+        public boolean areClipboardAccessNotificationsEnabledForUser(int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.IClipboard
-        public void setClipboardAccessNotificationsEnabledForUser(boolean enable, int userId) throws RemoteException {
-        }
+        public void setClipboardAccessNotificationsEnabledForUser(boolean enable, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -97,7 +144,7 @@ public interface IClipboard extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IClipboard {
+    public abstract static class Stub extends Binder implements IClipboard {
         public static final String DESCRIPTOR = "android.content.IClipboard";
         static final int TRANSACTION_addPrimaryClipChangedListener = 7;
         static final int TRANSACTION_areClipboardAccessNotificationsEnabledForUser = 11;
@@ -123,7 +170,9 @@ public interface IClipboard extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IClipboard asInterface(IBinder obj) {
@@ -179,7 +228,8 @@ public interface IClipboard extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -234,7 +284,8 @@ public interface IClipboard extends IInterface {
                     int _arg25 = data.readInt();
                     int _arg35 = data.readInt();
                     data.enforceNoDataAvail();
-                    ClipDescription _result2 = getPrimaryClipDescription(_arg05, _arg15, _arg25, _arg35);
+                    ClipDescription _result2 =
+                            getPrimaryClipDescription(_arg05, _arg15, _arg25, _arg35);
                     reply.writeNoException();
                     reply.writeTypedObject(_result2, 1);
                     return true;
@@ -249,7 +300,8 @@ public interface IClipboard extends IInterface {
                     reply.writeBoolean(_result3);
                     return true;
                 case 7:
-                    IOnPrimaryClipChangedListener _arg07 = IOnPrimaryClipChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnPrimaryClipChangedListener _arg07 =
+                            IOnPrimaryClipChangedListener.Stub.asInterface(data.readStrongBinder());
                     String _arg17 = data.readString();
                     String _arg27 = data.readString();
                     int _arg37 = data.readInt();
@@ -259,7 +311,8 @@ public interface IClipboard extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 8:
-                    IOnPrimaryClipChangedListener _arg08 = IOnPrimaryClipChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnPrimaryClipChangedListener _arg08 =
+                            IOnPrimaryClipChangedListener.Stub.asInterface(data.readStrongBinder());
                     String _arg18 = data.readString();
                     String _arg28 = data.readString();
                     int _arg38 = data.readInt();
@@ -324,7 +377,13 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public void setPrimaryClip(ClipData clip, String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+            public void setPrimaryClip(
+                    ClipData clip,
+                    String callingPackage,
+                    String attributionTag,
+                    int userId,
+                    int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -343,7 +402,14 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public void setPrimaryClipAsPackage(ClipData clip, String callingPackage, String attributionTag, int userId, int deviceId, String sourcePackage) throws RemoteException {
+            public void setPrimaryClipAsPackage(
+                    ClipData clip,
+                    String callingPackage,
+                    String attributionTag,
+                    int userId,
+                    int deviceId,
+                    String sourcePackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -363,7 +429,9 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public void clearPrimaryClip(String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+            public void clearPrimaryClip(
+                    String callingPackage, String attributionTag, int userId, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -381,7 +449,9 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public ClipData getPrimaryClip(String pkg, String attributionTag, int userId, int deviceId) throws RemoteException {
+            public ClipData getPrimaryClip(
+                    String pkg, String attributionTag, int userId, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -401,7 +471,9 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public ClipDescription getPrimaryClipDescription(String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+            public ClipDescription getPrimaryClipDescription(
+                    String callingPackage, String attributionTag, int userId, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -412,7 +484,8 @@ public interface IClipboard extends IInterface {
                     _data.writeInt(deviceId);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    ClipDescription _result = (ClipDescription) _reply.readTypedObject(ClipDescription.CREATOR);
+                    ClipDescription _result =
+                            (ClipDescription) _reply.readTypedObject(ClipDescription.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -421,7 +494,9 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public boolean hasPrimaryClip(String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+            public boolean hasPrimaryClip(
+                    String callingPackage, String attributionTag, int userId, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -441,7 +516,13 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public void addPrimaryClipChangedListener(IOnPrimaryClipChangedListener listener, String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+            public void addPrimaryClipChangedListener(
+                    IOnPrimaryClipChangedListener listener,
+                    String callingPackage,
+                    String attributionTag,
+                    int userId,
+                    int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -460,7 +541,13 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public void removePrimaryClipChangedListener(IOnPrimaryClipChangedListener listener, String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+            public void removePrimaryClipChangedListener(
+                    IOnPrimaryClipChangedListener listener,
+                    String callingPackage,
+                    String attributionTag,
+                    int userId,
+                    int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -479,7 +566,9 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public boolean hasClipboardText(String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+            public boolean hasClipboardText(
+                    String callingPackage, String attributionTag, int userId, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -499,7 +588,9 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public String getPrimaryClipSource(String callingPackage, String attributionTag, int userId, int deviceId) throws RemoteException {
+            public String getPrimaryClipSource(
+                    String callingPackage, String attributionTag, int userId, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -519,7 +610,8 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public boolean areClipboardAccessNotificationsEnabledForUser(int userId) throws RemoteException {
+            public boolean areClipboardAccessNotificationsEnabledForUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -536,7 +628,8 @@ public interface IClipboard extends IInterface {
             }
 
             @Override // android.content.IClipboard
-            public void setClipboardAccessNotificationsEnabledForUser(boolean enable, int userId) throws RemoteException {
+            public void setClipboardAccessNotificationsEnabledForUser(boolean enable, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -553,11 +646,13 @@ public interface IClipboard extends IInterface {
         }
 
         protected void setPrimaryClipAsPackage_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SET_CLIP_SOURCE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SET_CLIP_SOURCE, getCallingPid(), getCallingUid());
         }
 
         protected void getPrimaryClipSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SET_CLIP_SOURCE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SET_CLIP_SOURCE, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

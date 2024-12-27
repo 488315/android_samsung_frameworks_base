@@ -3,7 +3,9 @@ package com.android.server.appfunctions;
 import android.app.appsearch.AppSearchBatchResult;
 import android.app.appsearch.AppSearchManager;
 import android.app.appsearch.BatchResultCallback;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
@@ -32,14 +34,20 @@ public final class FutureAppSearchSessionImpl implements FutureAppSearchSession 
         }
     }
 
-    public FutureAppSearchSessionImpl(AppSearchManager appSearchManager, Executor executor, AppSearchManager.SearchContext searchContext) {
+    public FutureAppSearchSessionImpl(
+            AppSearchManager appSearchManager,
+            Executor executor,
+            AppSearchManager.SearchContext searchContext) {
         Objects.requireNonNull(appSearchManager);
         Objects.requireNonNull(executor);
         Objects.requireNonNull(searchContext);
         this.mExecutor = executor;
         AndroidFuture androidFuture = new AndroidFuture();
         this.mSettableSessionFuture = androidFuture;
-        appSearchManager.createSearchSession(searchContext, executor, new FutureAppSearchSessionImpl$$ExternalSyntheticLambda7(androidFuture));
+        appSearchManager.createSearchSession(
+                searchContext,
+                executor,
+                new FutureAppSearchSessionImpl$$ExternalSyntheticLambda7(androidFuture));
     }
 
     @Override // java.io.Closeable, java.lang.AutoCloseable
@@ -48,6 +56,7 @@ public final class FutureAppSearchSessionImpl implements FutureAppSearchSession 
     }
 
     public final AndroidFuture getSessionAsync() {
-        return this.mSettableSessionFuture.thenApply(new FutureAppSearchSessionImpl$$ExternalSyntheticLambda8(1));
+        return this.mSettableSessionFuture.thenApply(
+                new FutureAppSearchSessionImpl$$ExternalSyntheticLambda8(1));
     }
 }

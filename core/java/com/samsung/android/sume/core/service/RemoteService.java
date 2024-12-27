@@ -8,12 +8,14 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 import android.util.Pair;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.controller.MediaController;
 import com.samsung.android.sume.core.graph.MFDescriptorGraph;
 import com.samsung.android.sume.core.message.Request;
 import com.samsung.android.sume.core.message.Response;
 import com.samsung.android.sume.core.message.ResponseHolder;
+
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +25,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 /* loaded from: classes6.dex */
-public abstract class RemoteService extends ServiceStub implements ServiceController, MediaController.OnEventListener {
+public abstract class RemoteService extends ServiceStub
+        implements ServiceController, MediaController.OnEventListener {
     private static final String TAG = Def.tagOf((Class<?>) RemoteService.class);
     protected Messenger requestMessenger = new Messenger(new IncommingHandler(this));
     protected final Map<Integer, Messenger> replyListeners = new HashMap();
@@ -55,21 +58,31 @@ public abstract class RemoteService extends ServiceStub implements ServiceContro
     public boolean onUnbind(Intent intent) {
         if (this.mediaFilterControllers.isEmpty()) {
             Pair<Integer, TimeUnit> delay = new Pair<>(30, TimeUnit.MINUTES);
-            Log.i(TAG, "all clients are disconnected, run exit-timer[" + delay.first + " " + delay.second + " to stop service");
+            Log.i(
+                    TAG,
+                    "all clients are disconnected, run exit-timer["
+                            + delay.first
+                            + " "
+                            + delay.second
+                            + " to stop service");
             Timer timer = new Timer("Self-stop SumeNNService");
             this.exitTimer.set(timer);
-            timer.schedule(new TimerTask() { // from class: com.samsung.android.sume.core.service.RemoteService.1
-                @Override // java.util.TimerTask, java.lang.Runnable
-                public void run() {
-                    RemoteService.this.stopSelf();
-                }
-            }, delay.second.toMillis(delay.first.intValue()));
+            timer.schedule(
+                    new TimerTask() { // from class:
+                                      // com.samsung.android.sume.core.service.RemoteService.1
+                        @Override // java.util.TimerTask, java.lang.Runnable
+                        public void run() {
+                            RemoteService.this.stopSelf();
+                        }
+                    },
+                    delay.second.toMillis(delay.first.intValue()));
         }
         return super.onUnbind(intent);
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    @Override // com.samsung.android.sume.core.service.ServiceStub, com.samsung.android.sume.core.service.ServiceController
+    @Override // com.samsung.android.sume.core.service.ServiceStub,
+              // com.samsung.android.sume.core.service.ServiceController
     public ResponseHolder request(int id, Request request) {
         ResponseHolder responseHolder = super.request(id, request);
         if (!responseHolder.contains()) {
@@ -106,7 +119,9 @@ public abstract class RemoteService extends ServiceStub implements ServiceContro
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Log.d(RemoteService.TAG, "handleMessage: msg=" + msg + " on " + Thread.currentThread().getId());
+            Log.d(
+                    RemoteService.TAG,
+                    "handleMessage: msg=" + msg + " on " + Thread.currentThread().getId());
             msg.getData().setClassLoader(MFDescriptorGraph.class.getClassLoader());
             Request request = Request.of(msg);
             int id = ((Integer) request.get("id", 0)).intValue();

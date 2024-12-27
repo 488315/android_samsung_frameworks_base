@@ -14,6 +14,7 @@ import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.Pri
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.internal.org.bouncycastle.util.Integers;
 import com.android.internal.org.bouncycastle.util.Properties;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidParameterException;
 import java.security.KeyPair;
@@ -43,15 +44,22 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
 
     @Override // java.security.KeyPairGenerator, java.security.KeyPairGeneratorSpi
     public void initialize(int strength, SecureRandom random) {
-        if (strength < 512 || strength > 4096 || ((strength < 1024 && strength % 64 != 0) || (strength >= 1024 && strength % 1024 != 0))) {
-            throw new InvalidParameterException("strength must be from 512 - 4096 and a multiple of 1024 above 1024");
+        if (strength < 512
+                || strength > 4096
+                || ((strength < 1024 && strength % 64 != 0)
+                        || (strength >= 1024 && strength % 1024 != 0))) {
+            throw new InvalidParameterException(
+                    "strength must be from 512 - 4096 and a multiple of 1024 above 1024");
         }
         if (random == null) {
             random = new SecureRandom();
         }
-        DSAParameterSpec spec = BouncyCastleProvider.CONFIGURATION.getDSADefaultParameters(strength);
+        DSAParameterSpec spec =
+                BouncyCastleProvider.CONFIGURATION.getDSADefaultParameters(strength);
         if (spec != null) {
-            this.param = new DSAKeyGenerationParameters(random, new DSAParameters(spec.getP(), spec.getQ(), spec.getG()));
+            this.param =
+                    new DSAKeyGenerationParameters(
+                            random, new DSAParameters(spec.getP(), spec.getQ(), spec.getG()));
             this.engine.init(this.param);
             this.initialised = true;
         } else {
@@ -62,7 +70,8 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
     }
 
     @Override // java.security.KeyPairGenerator, java.security.KeyPairGeneratorSpi
-    public void initialize(AlgorithmParameterSpec params2, SecureRandom random) throws InvalidAlgorithmParameterException {
+    public void initialize(AlgorithmParameterSpec params2, SecureRandom random)
+            throws InvalidAlgorithmParameterException {
         if (!(params2 instanceof DSAParameterSpec)) {
             throw new InvalidAlgorithmParameterException("parameter object not a DSAParameterSpec");
         }
@@ -70,7 +79,10 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
         if (random == null) {
             random = new SecureRandom();
         }
-        this.param = new DSAKeyGenerationParameters(random, new DSAParameters(dsaParams.getP(), dsaParams.getQ(), dsaParams.getG()));
+        this.param =
+                new DSAKeyGenerationParameters(
+                        random,
+                        new DSAParameters(dsaParams.getP(), dsaParams.getQ(), dsaParams.getG()));
         this.engine.init(this.param);
         this.initialised = true;
     }
@@ -90,22 +102,30 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
                         int certainty = PrimeCertaintyCalculator.getDefaultCertainty(this.strength);
                         if (this.strength == 1024) {
                             pGen = new DSAParametersGenerator();
-                            if (Properties.isOverrideSet("com.android.internal.org.bouncycastle.dsa.FIPS186-2for1024bits")) {
+                            if (Properties.isOverrideSet(
+                                    "com.android.internal.org.bouncycastle.dsa.FIPS186-2for1024bits")) {
                                 pGen.init(this.strength, certainty, this.random);
                             } else {
-                                DSAParameterGenerationParameters dsaParams = new DSAParameterGenerationParameters(1024, 160, certainty, this.random);
+                                DSAParameterGenerationParameters dsaParams =
+                                        new DSAParameterGenerationParameters(
+                                                1024, 160, certainty, this.random);
                                 pGen.init(dsaParams);
                             }
                         } else if (this.strength > 1024) {
-                            DSAParameterGenerationParameters dsaParams2 = new DSAParameterGenerationParameters(this.strength, 256, certainty, this.random);
-                            DSAParametersGenerator pGen2 = new DSAParametersGenerator(new SHA256Digest());
+                            DSAParameterGenerationParameters dsaParams2 =
+                                    new DSAParameterGenerationParameters(
+                                            this.strength, 256, certainty, this.random);
+                            DSAParametersGenerator pGen2 =
+                                    new DSAParametersGenerator(new SHA256Digest());
                             pGen2.init(dsaParams2);
                             pGen = pGen2;
                         } else {
                             pGen = new DSAParametersGenerator();
                             pGen.init(this.strength, certainty, this.random);
                         }
-                        this.param = new DSAKeyGenerationParameters(this.random, pGen.generateParameters());
+                        this.param =
+                                new DSAKeyGenerationParameters(
+                                        this.random, pGen.generateParameters());
                         params.put(paramStrength, this.param);
                     }
                 }

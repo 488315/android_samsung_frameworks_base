@@ -7,9 +7,11 @@ import android.hardware.usb.IUsbOperationInternal;
 public interface UsbPortHal {
     void enableContaminantPresenceDetection(String str, long j, boolean z);
 
-    void enableLimitPowerTransfer(String str, boolean z, long j, IUsbOperationInternal iUsbOperationInternal);
+    void enableLimitPowerTransfer(
+            String str, boolean z, long j, IUsbOperationInternal iUsbOperationInternal);
 
-    boolean enableUsbData(String str, boolean z, long j, IUsbOperationInternal iUsbOperationInternal);
+    boolean enableUsbData(
+            String str, boolean z, long j, IUsbOperationInternal iUsbOperationInternal);
 
     void enableUsbDataWhileDocked(String str, long j, IUsbOperationInternal iUsbOperationInternal);
 

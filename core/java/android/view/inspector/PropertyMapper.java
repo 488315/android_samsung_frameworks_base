@@ -34,8 +34,13 @@ public interface PropertyMapper {
     int mapShort(String str, int i);
 
     public static class PropertyConflictException extends RuntimeException {
-        public PropertyConflictException(String name, String newPropertyType, String existingPropertyType) {
-            super(String.format("Attempted to map property \"%s\" as type %s, but it is already mapped as %s.", name, newPropertyType, existingPropertyType));
+        public PropertyConflictException(
+                String name, String newPropertyType, String existingPropertyType) {
+            super(
+                    String.format(
+                            "Attempted to map property \"%s\" as type %s, but it is already mapped"
+                                + " as %s.",
+                            name, newPropertyType, existingPropertyType));
         }
     }
 }

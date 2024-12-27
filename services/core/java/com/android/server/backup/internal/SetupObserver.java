@@ -3,6 +3,7 @@ package com.android.server.backup.internal;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.provider.Settings;
+
 import com.android.server.backup.KeyValueBackupJob;
 import com.android.server.backup.UserBackupManagerService;
 
@@ -13,7 +14,8 @@ public final class SetupObserver extends ContentObserver {
     public final UserBackupManagerService mUserBackupManagerService;
     public final int mUserId;
 
-    public SetupObserver(UserBackupManagerService userBackupManagerService, BackupHandler backupHandler) {
+    public SetupObserver(
+            UserBackupManagerService userBackupManagerService, BackupHandler backupHandler) {
         super(backupHandler);
         this.mUserBackupManagerService = userBackupManagerService;
         this.mContext = userBackupManagerService.mContext;
@@ -23,15 +25,26 @@ public final class SetupObserver extends ContentObserver {
     @Override // android.database.ContentObserver
     public final void onChange(boolean z) {
         boolean z2 = this.mUserBackupManagerService.mSetupComplete;
-        boolean z3 = z2 || (Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "user_setup_complete", 0, this.mUserId) != 0);
+        boolean z3 =
+                z2
+                        || (Settings.Secure.getIntForUser(
+                                        this.mContext.getContentResolver(),
+                                        "user_setup_complete",
+                                        0,
+                                        this.mUserId)
+                                != 0);
         UserBackupManagerService userBackupManagerService = this.mUserBackupManagerService;
         userBackupManagerService.mSetupComplete = z3;
         synchronized (userBackupManagerService.mQueueLock) {
             if (z3 && !z2) {
                 try {
-                    UserBackupManagerService userBackupManagerService2 = this.mUserBackupManagerService;
+                    UserBackupManagerService userBackupManagerService2 =
+                            this.mUserBackupManagerService;
                     if (userBackupManagerService2.mEnabled) {
-                        KeyValueBackupJob.schedule(userBackupManagerService2.mUserId, this.mContext, userBackupManagerService2);
+                        KeyValueBackupJob.schedule(
+                                userBackupManagerService2.mUserId,
+                                this.mContext,
+                                userBackupManagerService2);
                         this.mUserBackupManagerService.scheduleNextFullBackupJob(0L);
                     }
                 } catch (Throwable th) {

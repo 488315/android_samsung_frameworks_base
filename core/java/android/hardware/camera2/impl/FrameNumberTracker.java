@@ -2,6 +2,7 @@ package android.hardware.camera2.impl;
 
 import android.hardware.camera2.CaptureResult;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -45,7 +46,11 @@ public class FrameNumberTracker {
                         break;
                     }
                     int otherType = (requestType + i) % 3;
-                    if (this.mPendingFrameNumbersWithOtherType[otherType].isEmpty() || errorFrameNumber != this.mPendingFrameNumbersWithOtherType[otherType].element().longValue()) {
+                    if (this.mPendingFrameNumbersWithOtherType[otherType].isEmpty()
+                            || errorFrameNumber
+                                    != this.mPendingFrameNumbersWithOtherType[otherType]
+                                            .element()
+                                            .longValue()) {
                         i++;
                     } else {
                         this.mPendingFrameNumbersWithOtherType[otherType].remove();
@@ -62,8 +67,13 @@ public class FrameNumberTracker {
                         removeError = removeError2;
                     } else if (this.mPendingFrameNumbersWithOtherType[otherType2].isEmpty()) {
                         removeError = removeError2;
-                        long errorGapNumber = Math.max(this.mCompletedFrameNumber[otherType1], this.mCompletedFrameNumber[otherType2]) + 1;
-                        if (errorGapNumber > this.mCompletedFrameNumber[requestType] + 1 && errorGapNumber == errorFrameNumber) {
+                        long errorGapNumber =
+                                Math.max(
+                                                this.mCompletedFrameNumber[otherType1],
+                                                this.mCompletedFrameNumber[otherType2])
+                                        + 1;
+                        if (errorGapNumber > this.mCompletedFrameNumber[requestType] + 1
+                                && errorGapNumber == errorFrameNumber) {
                             removeError2 = true;
                         }
                     } else {
@@ -71,7 +81,8 @@ public class FrameNumberTracker {
                     }
                 }
                 removeError2 = removeError;
-            } else if (errorFrameNumber == this.mPendingFrameNumbers[requestType].element().longValue()) {
+            } else if (errorFrameNumber
+                    == this.mPendingFrameNumbers[requestType].element().longValue()) {
                 this.mPendingFrameNumbers[requestType].remove();
                 removeError2 = true;
             }
@@ -96,7 +107,8 @@ public class FrameNumberTracker {
         update();
     }
 
-    public void updateTracker(long frameNumber, CaptureResult result, boolean partial, int requestType) {
+    public void updateTracker(
+            long frameNumber, CaptureResult result, boolean partial, int requestType) {
         if (!partial) {
             updateTracker(frameNumber, false, requestType);
             return;
@@ -128,7 +140,8 @@ public class FrameNumberTracker {
         return this.mCompletedFrameNumber[2];
     }
 
-    private void updateCompletedFrameNumber(long frameNumber, int requestType) throws IllegalArgumentException {
+    private void updateCompletedFrameNumber(long frameNumber, int requestType)
+            throws IllegalArgumentException {
         LinkedList<Long> srcList;
         LinkedList<Long> dstList;
         int index;
@@ -137,24 +150,37 @@ public class FrameNumberTracker {
         }
         int otherType1 = (requestType + 1) % 3;
         int otherType2 = (requestType + 2) % 3;
-        long maxOtherFrameNumberSeen = Math.max(this.mCompletedFrameNumber[otherType1], this.mCompletedFrameNumber[otherType2]);
+        long maxOtherFrameNumberSeen =
+                Math.max(
+                        this.mCompletedFrameNumber[otherType1],
+                        this.mCompletedFrameNumber[otherType2]);
         if (frameNumber < maxOtherFrameNumberSeen) {
             if (!this.mPendingFrameNumbers[requestType].isEmpty()) {
                 Long pendingFrameNumberSameType = this.mPendingFrameNumbers[requestType].element();
                 if (frameNumber != pendingFrameNumberSameType.longValue()) {
                     if (frameNumber < pendingFrameNumberSameType.longValue()) {
-                        throw new IllegalArgumentException("frame number " + frameNumber + " is a repeat");
+                        throw new IllegalArgumentException(
+                                "frame number " + frameNumber + " is a repeat");
                     }
-                    throw new IllegalArgumentException("frame number " + frameNumber + " comes out of order. Expecting " + pendingFrameNumberSameType);
+                    throw new IllegalArgumentException(
+                            "frame number "
+                                    + frameNumber
+                                    + " comes out of order. Expecting "
+                                    + pendingFrameNumberSameType);
                 }
                 this.mPendingFrameNumbers[requestType].remove();
             } else {
-                int index1 = this.mPendingFrameNumbersWithOtherType[otherType1].indexOf(Long.valueOf(frameNumber));
-                int index2 = this.mPendingFrameNumbersWithOtherType[otherType2].indexOf(Long.valueOf(frameNumber));
+                int index1 =
+                        this.mPendingFrameNumbersWithOtherType[otherType1].indexOf(
+                                Long.valueOf(frameNumber));
+                int index2 =
+                        this.mPendingFrameNumbersWithOtherType[otherType2].indexOf(
+                                Long.valueOf(frameNumber));
                 boolean inSkippedOther1 = index1 != -1;
                 boolean inSkippedOther2 = index2 != -1;
                 if (!(inSkippedOther1 ^ inSkippedOther2)) {
-                    throw new IllegalArgumentException("frame number " + frameNumber + " is a repeat or invalid");
+                    throw new IllegalArgumentException(
+                            "frame number " + frameNumber + " is a repeat or invalid");
                 }
                 if (inSkippedOther1) {
                     srcList = this.mPendingFrameNumbersWithOtherType[otherType1];

@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextActivityCalibrationAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextActivityCalibrationAttribute> CREATOR = new Parcelable.Creator<SemContextActivityCalibrationAttribute>() { // from class: com.samsung.android.hardware.context.SemContextActivityCalibrationAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityCalibrationAttribute createFromParcel(Parcel in) {
-            return new SemContextActivityCalibrationAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextActivityCalibrationAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextActivityCalibrationAttribute>() { // from class:
+                                                                // com.samsung.android.hardware.context.SemContextActivityCalibrationAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityCalibrationAttribute createFromParcel(Parcel in) {
+                    return new SemContextActivityCalibrationAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityCalibrationAttribute[] newArray(int size) {
-            return new SemContextActivityCalibrationAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityCalibrationAttribute[] newArray(int size) {
+                    return new SemContextActivityCalibrationAttribute[size];
+                }
+            };
     private static final String TAG = "SemContextActivityCalibrationAttribute";
     private int mData;
     private float mSpeed;
@@ -76,7 +79,13 @@ public class SemContextActivityCalibrationAttribute extends SemContextAttribute 
         byte[] acData = {(byte) this.mStatus, (byte) this.mData};
         attribute.putByteArray("activity_calibration", acData);
         attribute.putFloat("activity_speed", this.mSpeed);
-        Log.d(TAG, "Activity Status Data : " + ((int) acData[0]) + ((int) acData[1]) + ", Speed : " + this.mSpeed);
+        Log.d(
+                TAG,
+                "Activity Status Data : "
+                        + ((int) acData[0])
+                        + ((int) acData[1])
+                        + ", Speed : "
+                        + this.mSpeed);
         super.setAttribute(53, attribute);
     }
 }

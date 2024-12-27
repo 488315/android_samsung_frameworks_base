@@ -1,6 +1,7 @@
 package android.net;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
@@ -11,8 +12,7 @@ import java.nio.charset.CharsetDecoder;
 public final class UriCodec {
     private static final char INVALID_INPUT_CHARACTER = 65533;
 
-    private UriCodec() {
-    }
+    private UriCodec() {}
 
     private static int hexCharToValue(char c) {
         if ('0' <= c && c <= '9') {
@@ -27,34 +27,45 @@ public final class UriCodec {
         return -1;
     }
 
-    private static URISyntaxException unexpectedCharacterException(String uri, String name, char unexpected, int index) {
-        String nameString = name == null ? "" : " in [" + name + NavigationBarInflaterView.SIZE_MOD_END;
-        return new URISyntaxException(uri, "Unexpected character" + nameString + ": " + unexpected, index);
+    private static URISyntaxException unexpectedCharacterException(
+            String uri, String name, char unexpected, int index) {
+        String nameString =
+                name == null ? "" : " in [" + name + NavigationBarInflaterView.SIZE_MOD_END;
+        return new URISyntaxException(
+                uri, "Unexpected character" + nameString + ": " + unexpected, index);
     }
 
-    private static char getNextCharacter(String uri, int index, int end, String name) throws URISyntaxException {
+    private static char getNextCharacter(String uri, int index, int end, String name)
+            throws URISyntaxException {
         if (index >= end) {
-            String nameString = name == null ? "" : " in [" + name + NavigationBarInflaterView.SIZE_MOD_END;
+            String nameString =
+                    name == null ? "" : " in [" + name + NavigationBarInflaterView.SIZE_MOD_END;
             throw new URISyntaxException(uri, "Unexpected end of string" + nameString, index);
         }
         return uri.charAt(index);
     }
 
-    public static String decode(String s, boolean convertPlus, Charset charset, boolean throwOnFailure) {
+    public static String decode(
+            String s, boolean convertPlus, Charset charset, boolean throwOnFailure) {
         StringBuilder builder = new StringBuilder(s.length());
         appendDecoded(builder, s, convertPlus, charset, throwOnFailure);
         return builder.toString();
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:27:0x008b, code lost:
-    
-        r1.put(r4);
-     */
+
+       r1.put(r4);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static void appendDecoded(java.lang.StringBuilder r10, java.lang.String r11, boolean r12, java.nio.charset.Charset r13, boolean r14) {
+    private static void appendDecoded(
+            java.lang.StringBuilder r10,
+            java.lang.String r11,
+            boolean r12,
+            java.nio.charset.Charset r13,
+            boolean r14) {
         /*
             java.nio.charset.CharsetDecoder r0 = r13.newDecoder()
             java.nio.charset.CodingErrorAction r1 = java.nio.charset.CodingErrorAction.REPLACE
@@ -138,10 +149,16 @@ public final class UriCodec {
             flushDecodingByteAccumulator(r10, r0, r1, r14)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.net.UriCodec.appendDecoded(java.lang.StringBuilder, java.lang.String, boolean, java.nio.charset.Charset, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.net.UriCodec.appendDecoded(java.lang.StringBuilder,"
+                    + " java.lang.String, boolean, java.nio.charset.Charset, boolean):void");
     }
 
-    private static void flushDecodingByteAccumulator(StringBuilder builder, CharsetDecoder decoder, ByteBuffer byteBuffer, boolean throwOnFailure) {
+    private static void flushDecodingByteAccumulator(
+            StringBuilder builder,
+            CharsetDecoder decoder,
+            ByteBuffer byteBuffer,
+            boolean throwOnFailure) {
         if (byteBuffer.position() == 0) {
             return;
         }

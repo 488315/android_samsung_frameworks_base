@@ -3,7 +3,9 @@ package android.media;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Surface;
+
 import dalvik.system.CloseGuard;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,7 +62,11 @@ public final class RemoteDisplay {
         this.mNativeListener = null;
     }
 
-    private RemoteDisplay(Listener listener, Handler handler, String opPackageName, NativeListener nativeListener) {
+    private RemoteDisplay(
+            Listener listener,
+            Handler handler,
+            String opPackageName,
+            NativeListener nativeListener) {
         this.mGuard = CloseGuard.get();
         this.mListener = listener;
         this.mHandler = handler;
@@ -76,7 +82,8 @@ public final class RemoteDisplay {
         }
     }
 
-    public static RemoteDisplay listen(String iface, Listener listener, Handler handler, String opPackageName) {
+    public static RemoteDisplay listen(
+            String iface, Listener listener, Handler handler, String opPackageName) {
         if (iface == null) {
             throw new IllegalArgumentException("iface must not be null");
         }
@@ -91,7 +98,13 @@ public final class RemoteDisplay {
         return display;
     }
 
-    public static RemoteDisplay listen(String iface, Listener listener, Handler handler, String opPackageName, String setparamInfo, NativeListener nativeListener) {
+    public static RemoteDisplay listen(
+            String iface,
+            Listener listener,
+            Handler handler,
+            String opPackageName,
+            String setparamInfo,
+            NativeListener nativeListener) {
         if (iface == null) {
             throw new IllegalArgumentException("iface must not be null");
         }
@@ -148,7 +161,8 @@ public final class RemoteDisplay {
     private void startListening(String iface) {
         this.mPtr = nativeListen(iface, this.mOpPackageName);
         if (this.mPtr == 0) {
-            throw new IllegalStateException("Could not start listening for remote display connection on \"" + iface + "\"");
+            throw new IllegalStateException(
+                    "Could not start listening for remote display connection on \"" + iface + "\"");
         }
         this.mGuard.open("dispose");
     }
@@ -156,55 +170,70 @@ public final class RemoteDisplay {
     private void startListening(String iface, String initParam) {
         this.mPtr = nativeListen(iface, this.mOpPackageName, initParam);
         if (this.mPtr == 0) {
-            throw new IllegalStateException("Could not start listening for remote display connection on \"" + iface + "\"");
+            throw new IllegalStateException(
+                    "Could not start listening for remote display connection on \"" + iface + "\"");
         }
         this.mGuard.open("dispose");
     }
 
-    private void notifyDisplayConnected(final Surface surface, final int width, final int height, final int flags, final int session, final String msg) {
-        this.mHandler.post(new Runnable() { // from class: android.media.RemoteDisplay.1
-            @Override // java.lang.Runnable
-            public void run() {
-                RemoteDisplay.this.mListener.onDisplayConnected(surface, width, height, flags, session, msg);
-            }
-        });
+    private void notifyDisplayConnected(
+            final Surface surface,
+            final int width,
+            final int height,
+            final int flags,
+            final int session,
+            final String msg) {
+        this.mHandler.post(
+                new Runnable() { // from class: android.media.RemoteDisplay.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        RemoteDisplay.this.mListener.onDisplayConnected(
+                                surface, width, height, flags, session, msg);
+                    }
+                });
     }
 
     private void notifyDisplayDisconnected() {
-        this.mHandler.post(new Runnable() { // from class: android.media.RemoteDisplay.2
-            @Override // java.lang.Runnable
-            public void run() {
-                RemoteDisplay.this.mListener.onDisplayDisconnected();
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class: android.media.RemoteDisplay.2
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        RemoteDisplay.this.mListener.onDisplayDisconnected();
+                    }
+                });
     }
 
     private void notifyDisplayError(final int error) {
-        this.mHandler.post(new Runnable() { // from class: android.media.RemoteDisplay.3
-            @Override // java.lang.Runnable
-            public void run() {
-                RemoteDisplay.this.mListener.onDisplayError(error);
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class: android.media.RemoteDisplay.3
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        RemoteDisplay.this.mListener.onDisplayError(error);
+                    }
+                });
     }
 
-    private void notifyDisplayChanged(final Surface surface, final int width, final int height, final int flags) {
-        this.mHandler.post(new Runnable() { // from class: android.media.RemoteDisplay.4
-            @Override // java.lang.Runnable
-            public void run() {
-                RemoteDisplay.this.mListener.onDisplayChanged(surface, width, height, flags);
-            }
-        });
+    private void notifyDisplayChanged(
+            final Surface surface, final int width, final int height, final int flags) {
+        this.mHandler.post(
+                new Runnable() { // from class: android.media.RemoteDisplay.4
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        RemoteDisplay.this.mListener.onDisplayChanged(
+                                surface, width, height, flags);
+                    }
+                });
     }
 
     private void cbFromNativeWFD(final int msg, final String data) {
-        this.mHandler.post(new Runnable() { // from class: android.media.RemoteDisplay.5
-            @Override // java.lang.Runnable
-            public void run() {
-                if (RemoteDisplay.this.mNativeListener != null) {
-                    RemoteDisplay.this.mNativeListener.onNotify(msg, data);
-                }
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class: android.media.RemoteDisplay.5
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        if (RemoteDisplay.this.mNativeListener != null) {
+                            RemoteDisplay.this.mNativeListener.onNotify(msg, data);
+                        }
+                    }
+                });
     }
 }

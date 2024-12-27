@@ -11,7 +11,6 @@ public final class IncidentHeaderProto {
         public static final long ID = 1112396529666L;
         public static final long UID = 1120986464257L;
 
-        public StatsdConfigKey() {
-        }
+        public StatsdConfigKey() {}
     }
 }

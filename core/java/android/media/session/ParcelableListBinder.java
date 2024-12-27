@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -27,7 +28,8 @@ public class ParcelableListBinder<T extends Parcelable> extends Binder {
     }
 
     @Override // android.os.Binder
-    protected boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+    protected boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+            throws RemoteException {
         List<T> list;
         if (i != 1) {
             return super.onTransact(i, parcel, parcel2, i2);
@@ -60,7 +62,8 @@ public class ParcelableListBinder<T extends Parcelable> extends Binder {
         }
     }
 
-    public static <T extends Parcelable> void send(IBinder binder, List<T> list) throws RemoteException {
+    public static <T extends Parcelable> void send(IBinder binder, List<T> list)
+            throws RemoteException {
         int count = list.size();
         int i = 0;
         do {

@@ -69,8 +69,7 @@ public final class DsmsThreadPoolExecutor extends ThreadPoolExecutor {
     }
 
     private static final class RejectedThread implements RejectedExecutionHandler {
-        private RejectedThread() {
-        }
+        private RejectedThread() {}
 
         @Override // java.util.concurrent.RejectedExecutionHandler
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {

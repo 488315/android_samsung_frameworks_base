@@ -8,12 +8,11 @@ import android.util.AttributeSet;
 
 @HasNativeInterpolator
 /* loaded from: classes4.dex */
-public class AccelerateDecelerateInterpolator extends BaseInterpolator implements NativeInterpolator {
-    public AccelerateDecelerateInterpolator() {
-    }
+public class AccelerateDecelerateInterpolator extends BaseInterpolator
+        implements NativeInterpolator {
+    public AccelerateDecelerateInterpolator() {}
 
-    public AccelerateDecelerateInterpolator(Context context, AttributeSet attrs) {
-    }
+    public AccelerateDecelerateInterpolator(Context context, AttributeSet attrs) {}
 
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float input) {

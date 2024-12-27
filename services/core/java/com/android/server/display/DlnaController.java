@@ -8,7 +8,9 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.server.input.KeyboardMetricsCollector;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
 import com.samsung.android.knoxguard.service.utils.Constants;
 
@@ -35,19 +37,33 @@ public final class DlnaController {
         public final void run() {
             switch (this.$r8$classId) {
                 case 0:
-                    Log.d("DlnaController", "sendDisconnectionRequestBroadcast::DLNA_DISCONNECTION_REQUEST");
-                    Intent intent = new Intent("com.sec.android.screensharing.DLNA_DISCONNECTION_REQUEST");
+                    Log.d(
+                            "DlnaController",
+                            "sendDisconnectionRequestBroadcast::DLNA_DISCONNECTION_REQUEST");
+                    Intent intent =
+                            new Intent("com.sec.android.screensharing.DLNA_DISCONNECTION_REQUEST");
                     intent.putExtra("uid", ((DlnaController) this.this$0).mDevice.getUid());
-                    ((DlnaController) this.this$0).mContext.sendBroadcastAsUser(intent, UserHandle.ALL, "android.permission.CONFIGURE_WIFI_DISPLAY");
+                    ((DlnaController) this.this$0)
+                            .mContext.sendBroadcastAsUser(
+                                    intent,
+                                    UserHandle.ALL,
+                                    "android.permission.CONFIGURE_WIFI_DISPLAY");
                     break;
                 case 1:
                     Intent intent2 = new Intent("com.samsung.intent.action.DLNA_STATUS_CHANGED");
-                    int connectionState = ((DlnaController) this.this$0).mDevice.getConnectionState();
+                    int connectionState =
+                            ((DlnaController) this.this$0).mDevice.getConnectionState();
                     intent2.putExtra(Constants.JSON_CLIENT_DATA_STATUS, connectionState);
-                    intent2.putExtra(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, connectionState);
-                    intent2.putExtra("player_type", ((DlnaController) this.this$0).mDevice.getDlnaType());
-                    Log.d("DlnaController", "sendStatusChangedBroadcast::SEM_ACTION_DLNA_STATUS_CHANGED state : " + connectionState);
-                    ((DlnaController) this.this$0).mContext.sendBroadcastAsUser(intent2, UserHandle.ALL);
+                    intent2.putExtra(
+                            LauncherConfigurationInternal.KEY_STATE_BOOLEAN, connectionState);
+                    intent2.putExtra(
+                            "player_type", ((DlnaController) this.this$0).mDevice.getDlnaType());
+                    Log.d(
+                            "DlnaController",
+                            "sendStatusChangedBroadcast::SEM_ACTION_DLNA_STATUS_CHANGED state : "
+                                    + connectionState);
+                    ((DlnaController) this.this$0)
+                            .mContext.sendBroadcastAsUser(intent2, UserHandle.ALL);
                     break;
                 default:
                     if (DlnaController.this.mDevice.isConnected()) {
@@ -56,7 +72,8 @@ public final class DlnaController {
                         dlnaController.getClass();
                         dlnaController.mHandler.post(new AnonymousClass1(1, dlnaController));
                     }
-                    DlnaClientDeathMonitor dlnaClientDeathMonitor = DlnaController.this.mDlnaMonitor;
+                    DlnaClientDeathMonitor dlnaClientDeathMonitor =
+                            DlnaController.this.mDlnaMonitor;
                     if (dlnaClientDeathMonitor != null) {
                         Log.i("DlnaController", "unlinkToDeath");
                         dlnaClientDeathMonitor.mBinder.unlinkToDeath(dlnaClientDeathMonitor, 0);
@@ -74,7 +91,20 @@ public final class DlnaController {
 
         public DlnaClientDeathMonitor(IBinder iBinder, int i) {
             DlnaController.this.getClass();
-            Log.d("DlnaController", "DlnaClientDeathMonitor, playerType : ".concat(i != 0 ? i != 1 ? i != 2 ? i != 3 ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG : "Music_chn" : "Music" : "Image" : "Video"));
+            Log.d(
+                    "DlnaController",
+                    "DlnaClientDeathMonitor, playerType : "
+                            .concat(
+                                    i != 0
+                                            ? i != 1
+                                                    ? i != 2
+                                                            ? i != 3
+                                                                    ? KeyboardMetricsCollector
+                                                                            .DEFAULT_LANGUAGE_TAG
+                                                                    : "Music_chn"
+                                                            : "Music"
+                                                    : "Image"
+                                            : "Video"));
             this.mBinder = iBinder;
             try {
                 iBinder.linkToDeath(this, 0);

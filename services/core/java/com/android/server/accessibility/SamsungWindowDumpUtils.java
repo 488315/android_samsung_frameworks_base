@@ -4,8 +4,11 @@ import android.graphics.Rect;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityWindowInfo;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,7 +23,12 @@ public abstract class SamsungWindowDumpUtils {
         return false;
     }
 
-    public static void printNode(PrintWriter printWriter, AccessibilityNodeInfo accessibilityNodeInfo, int i, boolean z, boolean z2) {
+    public static void printNode(
+            PrintWriter printWriter,
+            AccessibilityNodeInfo accessibilityNodeInfo,
+            int i,
+            boolean z,
+            boolean z2) {
         String str;
         if (accessibilityNodeInfo == null) {
             printWriter.println();
@@ -116,7 +124,8 @@ public abstract class SamsungWindowDumpUtils {
                 sb.append("S, ");
             }
             sb.append("Actions={");
-            for (AccessibilityNodeInfo.AccessibilityAction accessibilityAction : accessibilityNodeInfo.getActionList()) {
+            for (AccessibilityNodeInfo.AccessibilityAction accessibilityAction :
+                    accessibilityNodeInfo.getActionList()) {
                 int id = accessibilityAction.getId();
                 if (id == 1) {
                     str = "F";
@@ -158,13 +167,15 @@ public abstract class SamsungWindowDumpUtils {
                         case 8192:
                             str = "SB";
                             break;
-                        case EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION /* 16384 */:
+                        case EndpointMonitorConst
+                                .FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION /* 16384 */:
                             str = "CP";
                             break;
                         case 32768:
                             str = "PA";
                             break;
-                        case EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT /* 65536 */:
+                        case EndpointMonitorConst
+                                .FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT /* 65536 */:
                             str = "CT";
                             break;
                         case 131072:
@@ -209,7 +220,11 @@ public abstract class SamsungWindowDumpUtils {
         }
     }
 
-    public static void printNodeTreeOfWindow(PrintWriter printWriter, AccessibilityWindowInfo accessibilityWindowInfo, boolean z, boolean z2) {
+    public static void printNodeTreeOfWindow(
+            PrintWriter printWriter,
+            AccessibilityWindowInfo accessibilityWindowInfo,
+            boolean z,
+            boolean z2) {
         StringBuilder sb = new StringBuilder("<window id:");
         sb.append(accessibilityWindowInfo.getId());
         sb.append(", ");
@@ -223,7 +238,18 @@ public abstract class SamsungWindowDumpUtils {
             sb.append(", ");
         }
         int type = accessibilityWindowInfo.getType();
-        sb.append(type != 1 ? type != 2 ? type != 3 ? type != 4 ? type != 5 ? "TYPE_Unknown" : "TYPE_SPLIT_SCREEN_DIVIDER" : "TYPE_ACCESSIBILITY_OVERLAY" : "TYPE_SYSTEM" : "TYPE_INPUT_METHOD" : "TYPE_APPLICATION");
+        sb.append(
+                type != 1
+                        ? type != 2
+                                ? type != 3
+                                        ? type != 4
+                                                ? type != 5
+                                                        ? "TYPE_Unknown"
+                                                        : "TYPE_SPLIT_SCREEN_DIVIDER"
+                                                : "TYPE_ACCESSIBILITY_OVERLAY"
+                                        : "TYPE_SYSTEM"
+                                : "TYPE_INPUT_METHOD"
+                        : "TYPE_APPLICATION");
         sb.append(", ");
         if (accessibilityWindowInfo.isActive()) {
             sb.append("Active, ");

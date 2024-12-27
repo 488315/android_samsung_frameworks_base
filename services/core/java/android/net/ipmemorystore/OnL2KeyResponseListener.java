@@ -1,12 +1,12 @@
 package android.net.ipmemorystore;
 
-import android.net.ipmemorystore.IOnL2KeyResponseListener;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public interface OnL2KeyResponseListener {
     static IOnL2KeyResponseListener toAIDL(OnL2KeyResponseListener onL2KeyResponseListener) {
-        return new IOnL2KeyResponseListener.Stub() { // from class: android.net.ipmemorystore.OnL2KeyResponseListener.1
+        return new IOnL2KeyResponseListener
+                .Stub() { // from class: android.net.ipmemorystore.OnL2KeyResponseListener.1
             @Override // android.net.ipmemorystore.IOnL2KeyResponseListener
             public final String getInterfaceHash() {
                 return "d5ea5eb3ddbdaa9a986ce6ba70b0804ca3e39b0c";

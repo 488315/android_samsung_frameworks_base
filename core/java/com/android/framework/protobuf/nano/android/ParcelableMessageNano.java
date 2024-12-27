@@ -2,6 +2,7 @@ package com.android.framework.protobuf.nano.android;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.framework.protobuf.nano.MessageNano;
 
 /* loaded from: classes3.dex */

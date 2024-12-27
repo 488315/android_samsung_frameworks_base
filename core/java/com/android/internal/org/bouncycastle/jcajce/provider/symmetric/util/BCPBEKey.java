@@ -6,7 +6,9 @@ import com.android.internal.org.bouncycastle.crypto.PBEParametersGenerator;
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import javax.crypto.interfaces.PBEKey;
 import javax.crypto.spec.PBEKeySpec;
 import javax.security.auth.Destroyable;
@@ -26,7 +28,15 @@ public class BCPBEKey implements PBEKey, Destroyable {
     boolean tryWrong;
     int type;
 
-    public BCPBEKey(String algorithm, ASN1ObjectIdentifier oid, int type, int digest, int keySize, int ivSize, PBEKeySpec pbeKeySpec, CipherParameters param) {
+    public BCPBEKey(
+            String algorithm,
+            ASN1ObjectIdentifier oid,
+            int type,
+            int digest,
+            int keySize,
+            int ivSize,
+            PBEKeySpec pbeKeySpec,
+            CipherParameters param) {
         this.hasBeenDestroyed = new AtomicBoolean(false);
         this.tryWrong = false;
         this.algorithm = algorithm;

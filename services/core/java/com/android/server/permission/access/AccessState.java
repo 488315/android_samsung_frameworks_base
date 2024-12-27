@@ -11,7 +11,10 @@ public abstract class AccessState implements Immutable {
     public final MutableReference systemStateReference;
     public final MutableReference userStatesReference;
 
-    public AccessState(MutableReference mutableReference, MutableReference mutableReference2, MutableReference mutableReference3) {
+    public AccessState(
+            MutableReference mutableReference,
+            MutableReference mutableReference2,
+            MutableReference mutableReference3) {
         this.externalStateReference = mutableReference;
         this.systemStateReference = mutableReference2;
         this.userStatesReference = mutableReference3;
@@ -31,6 +34,9 @@ public abstract class AccessState implements Immutable {
 
     @Override // com.android.server.permission.access.immutable.Immutable
     public final MutableAccessState toMutable() {
-        return new MutableAccessState(this.externalStateReference.toImmutable(), this.systemStateReference.toImmutable(), this.userStatesReference.toImmutable());
+        return new MutableAccessState(
+                this.externalStateReference.toImmutable(),
+                this.systemStateReference.toImmutable(),
+                this.userStatesReference.toImmutable());
     }
 }

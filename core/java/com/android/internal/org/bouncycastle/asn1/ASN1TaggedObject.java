@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -27,10 +28,12 @@ public abstract class ASN1TaggedObject extends ASN1Primitive implements ASN1Tagg
             try {
                 return getInstance(fromByteArray((byte[]) obj));
             } catch (IOException e) {
-                throw new IllegalArgumentException("failed to construct tagged object from byte[]: " + e.getMessage());
+                throw new IllegalArgumentException(
+                        "failed to construct tagged object from byte[]: " + e.getMessage());
             }
         }
-        throw new IllegalArgumentException("unknown object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in getInstance: " + obj.getClass().getName());
     }
 
     public ASN1TaggedObject(boolean explicit, int tagNo, ASN1Encodable obj) {
@@ -56,7 +59,8 @@ public abstract class ASN1TaggedObject extends ASN1Primitive implements ASN1Tagg
         return p1 == p2 || p1.asn1Equals(p2);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         return (this.tagNo ^ (this.explicit ? 15 : 240)) ^ this.obj.toASN1Primitive().hashCode();
     }
@@ -107,6 +111,9 @@ public abstract class ASN1TaggedObject extends ASN1Primitive implements ASN1Tagg
     }
 
     public String toString() {
-        return NavigationBarInflaterView.SIZE_MOD_START + this.tagNo + NavigationBarInflaterView.SIZE_MOD_END + this.obj;
+        return NavigationBarInflaterView.SIZE_MOD_START
+                + this.tagNo
+                + NavigationBarInflaterView.SIZE_MOD_END
+                + this.obj;
     }
 }

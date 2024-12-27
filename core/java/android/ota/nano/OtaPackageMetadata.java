@@ -7,6 +7,7 @@ import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MapFactories;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -159,7 +160,8 @@ public interface OtaPackageMetadata {
             }
         }
 
-        public static PartitionState parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static PartitionState parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (PartitionState) MessageNano.mergeFrom(new PartitionState(), data);
         }
 
@@ -579,7 +581,8 @@ public interface OtaPackageMetadata {
             }
         }
 
-        public static ApexMetadata parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static ApexMetadata parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (ApexMetadata) MessageNano.mergeFrom(new ApexMetadata(), data);
         }
 
@@ -687,7 +690,9 @@ public interface OtaPackageMetadata {
                 size += CodedOutputByteBufferNano.computeMessageSize(6, this.postcondition);
             }
             if (this.retrofitDynamicPartitions) {
-                size += CodedOutputByteBufferNano.computeBoolSize(7, this.retrofitDynamicPartitions);
+                size +=
+                        CodedOutputByteBufferNano.computeBoolSize(
+                                7, this.retrofitDynamicPartitions);
             }
             if (this.requiredCache != 0) {
                 size += CodedOutputByteBufferNano.computeInt64Size(8, this.requiredCache);
@@ -723,7 +728,9 @@ public interface OtaPackageMetadata {
                         this.downgrade = input.readBool();
                         break;
                     case 34:
-                        this.propertyFiles = InternalNano.mergeMapEntry(input, this.propertyFiles, mapFactory, 9, 9, null, 10, 18);
+                        this.propertyFiles =
+                                InternalNano.mergeMapEntry(
+                                        input, this.propertyFiles, mapFactory, 9, 9, null, 10, 18);
                         break;
                     case 42:
                         if (this.precondition == null) {

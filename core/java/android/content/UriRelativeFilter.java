@@ -6,15 +6,18 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.PatternMatcher;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.AnnotationValidations;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
 
 /* loaded from: classes.dex */
 public final class UriRelativeFilter {
@@ -30,16 +33,20 @@ public final class UriRelativeFilter {
     private final int mUriPart;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UriPart {
-    }
+    public @interface UriPart {}
 
     public UriRelativeFilter(int uriPart, int patternType, String filter) {
         this.mUriPart = uriPart;
-        AnnotationValidations.validate((Class<? extends Annotation>) UriPart.class, (Annotation) null, this.mUriPart);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) UriPart.class, (Annotation) null, this.mUriPart);
         this.mPatternType = patternType;
-        AnnotationValidations.validate((Class<? extends Annotation>) PatternMatcher.PatternType.class, (Annotation) null, this.mPatternType);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) PatternMatcher.PatternType.class,
+                (Annotation) null,
+                this.mPatternType);
         this.mFilter = filter;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFilter);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFilter);
     }
 
     public int getUriPart() {
@@ -131,7 +138,13 @@ public final class UriRelativeFilter {
     }
 
     public String toString() {
-        return "UriRelativeFilter { uriPart = " + uriPartToString() + ", patternType = " + patternTypeToString() + ", filter = " + this.mFilter + " }";
+        return "UriRelativeFilter { uriPart = "
+                + uriPartToString()
+                + ", patternType = "
+                + patternTypeToString()
+                + ", filter = "
+                + this.mFilter
+                + " }";
     }
 
     public UriRelativeFilterParcel toParcel() {
@@ -150,7 +163,9 @@ public final class UriRelativeFilter {
             return false;
         }
         UriRelativeFilter that = (UriRelativeFilter) o;
-        if (this.mUriPart == that.mUriPart && this.mPatternType == that.mPatternType && Objects.equals(this.mFilter, that.mFilter)) {
+        if (this.mUriPart == that.mUriPart
+                && this.mPatternType == that.mPatternType
+                && Objects.equals(this.mFilter, that.mFilter)) {
             return true;
         }
         return false;

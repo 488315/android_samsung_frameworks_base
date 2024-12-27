@@ -2,20 +2,22 @@ package android.preference;
 
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.preference.Preference;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+
 import com.android.internal.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Deprecated
 /* loaded from: classes3.dex */
-public class PreferenceGroupAdapter extends BaseAdapter implements Preference.OnPreferenceChangeInternalListener {
+public class PreferenceGroupAdapter extends BaseAdapter
+        implements Preference.OnPreferenceChangeInternalListener {
     private static final String TAG = "PreferenceGroupAdapter";
     private static ViewGroup.LayoutParams sWrapperLayoutParams = new ViewGroup.LayoutParams(-1, -2);
     private Drawable mHighlightedDrawable;
@@ -29,12 +31,13 @@ public class PreferenceGroupAdapter extends BaseAdapter implements Preference.On
     Preference mNextGroupPreference = null;
     private volatile boolean mIsSyncing = false;
     private Handler mHandler = new Handler();
-    private Runnable mSyncRunnable = new Runnable() { // from class: android.preference.PreferenceGroupAdapter.1
-        @Override // java.lang.Runnable
-        public void run() {
-            PreferenceGroupAdapter.this.syncMyPreferences();
-        }
-    };
+    private Runnable mSyncRunnable =
+            new Runnable() { // from class: android.preference.PreferenceGroupAdapter.1
+                @Override // java.lang.Runnable
+                public void run() {
+                    PreferenceGroupAdapter.this.syncMyPreferences();
+                }
+            };
     private int mHighlightedPosition = -1;
 
     private static class PreferenceLayout implements Comparable<PreferenceLayout> {
@@ -42,8 +45,7 @@ public class PreferenceGroupAdapter extends BaseAdapter implements Preference.On
         private int resId;
         private int widgetResId;
 
-        private PreferenceLayout() {
-        }
+        private PreferenceLayout() {}
 
         @Override // java.lang.Comparable
         public int compareTo(PreferenceLayout other) {
@@ -110,13 +112,24 @@ public class PreferenceGroupAdapter extends BaseAdapter implements Preference.On
                     }
                     if (preference instanceof PreferenceCategory) {
                         this.mIsCategoryAfter = true;
-                    } else if (this.mIsCategoryAfter && ((this.mNextPreference instanceof PreferenceCategory) || (this.mNextPreference == null && ((this.mNextGroupPreference instanceof PreferenceCategory) || this.mNextGroupPreference == null)))) {
+                    } else if (this.mIsCategoryAfter
+                            && ((this.mNextPreference instanceof PreferenceCategory)
+                                    || (this.mNextPreference == null
+                                            && ((this.mNextGroupPreference
+                                                            instanceof PreferenceCategory)
+                                                    || this.mNextGroupPreference == null)))) {
                         preference.setRoundCorner(15);
                         this.mIsCategoryAfter = false;
                     } else if (this.mIsCategoryAfter) {
                         preference.setRoundCorner(3);
                         this.mIsCategoryAfter = false;
-                    } else if ((this.mNextPreference instanceof PreferenceCategory) || ((this.mNextPreference == null && (this.mNextGroupPreference instanceof PreferenceCategory)) || preference == this.mNextGroupPreference || (this.mNextPreference == null && this.mNextGroupPreference == null))) {
+                    } else if ((this.mNextPreference instanceof PreferenceCategory)
+                            || ((this.mNextPreference == null
+                                            && (this.mNextGroupPreference
+                                                    instanceof PreferenceCategory))
+                                    || preference == this.mNextGroupPreference
+                                    || (this.mNextPreference == null
+                                            && this.mNextGroupPreference == null))) {
                         preference.setRoundCorner(12);
                         this.mIsCategoryAfter = true;
                     } else {
@@ -129,12 +142,15 @@ public class PreferenceGroupAdapter extends BaseAdapter implements Preference.On
                 preferences.add(preference);
                 if (View.sIsSamsungBasicInteraction && (preference instanceof PreferenceCategory)) {
                     if (TextUtils.isEmpty(preference.getTitle())) {
-                        preference.setLayoutResource(R.layout.tw_preference_category_material_empty);
+                        preference.setLayoutResource(
+                                R.layout.tw_preference_category_material_empty);
                     } else {
                         preference.setLayoutResource(R.layout.tw_preference_category_material);
                     }
                 }
-                if (!this.mHasReturnedViewTypeCount && preference != null && preference.isRecycleEnabled()) {
+                if (!this.mHasReturnedViewTypeCount
+                        && preference != null
+                        && preference.isRecycleEnabled()) {
                     addPreferenceClassName(preference);
                 }
                 if (preference instanceof PreferenceGroup) {
@@ -198,7 +214,8 @@ public class PreferenceGroupAdapter extends BaseAdapter implements Preference.On
     public View getView(int position, View convertView, ViewGroup parent) {
         Preference preference = getItem(position);
         this.mTempPreferenceLayout = createPreferenceLayout(preference, this.mTempPreferenceLayout);
-        if (Collections.binarySearch(this.mPreferenceLayouts, this.mTempPreferenceLayout) < 0 || getItemViewType(position) == getHighlightItemViewType()) {
+        if (Collections.binarySearch(this.mPreferenceLayouts, this.mTempPreferenceLayout) < 0
+                || getItemViewType(position) == getHighlightItemViewType()) {
             convertView = null;
         }
         View result = preference.getView(convertView, parent);
@@ -258,7 +275,8 @@ public class PreferenceGroupAdapter extends BaseAdapter implements Preference.On
             return -1;
         }
         this.mTempPreferenceLayout = createPreferenceLayout(preference, this.mTempPreferenceLayout);
-        int viewType = Collections.binarySearch(this.mPreferenceLayouts, this.mTempPreferenceLayout);
+        int viewType =
+                Collections.binarySearch(this.mPreferenceLayouts, this.mTempPreferenceLayout);
         if (viewType < 0) {
             return -1;
         }

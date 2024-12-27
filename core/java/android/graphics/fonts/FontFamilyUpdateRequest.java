@@ -1,7 +1,9 @@
 package android.graphics.fonts;
 
 import android.annotation.SystemApi;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -93,7 +95,8 @@ public final class FontFamilyUpdateRequest {
             }
         }
 
-        private Font(String postScriptName, FontStyle style, int index, List<FontVariationAxis> axes) {
+        private Font(
+                String postScriptName, FontStyle style, int index, List<FontVariationAxis> axes) {
             this.mPostScriptName = postScriptName;
             this.mStyle = style;
             this.mIndex = index;
@@ -138,7 +141,8 @@ public final class FontFamilyUpdateRequest {
         }
     }
 
-    private FontFamilyUpdateRequest(List<FontFileUpdateRequest> fontFiles, List<FontFamily> fontFamilies) {
+    private FontFamilyUpdateRequest(
+            List<FontFileUpdateRequest> fontFiles, List<FontFamily> fontFamilies) {
         this.mFontFiles = fontFiles;
         this.mFontFamilies = fontFamilies;
     }

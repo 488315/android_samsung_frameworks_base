@@ -43,7 +43,8 @@ public final class PackageMetrics {
     public final void onStepFinished(int i) {
         InstallStep installStep = (InstallStep) this.mInstallSteps.get(i);
         if (installStep != null) {
-            installStep.mDurationMillis = System.currentTimeMillis() - installStep.mStartTimestampMillis;
+            installStep.mDurationMillis =
+                    System.currentTimeMillis() - installStep.mStartTimestampMillis;
         }
     }
 
@@ -63,6 +64,8 @@ public final class PackageMetrics {
             Method dump skipped, instructions count: 447
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.PackageMetrics.reportInstallationStats(boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.PackageMetrics.reportInstallationStats(boolean):void");
     }
 }

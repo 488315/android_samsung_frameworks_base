@@ -27,8 +27,7 @@ public class MtpEvent {
     private int mParameter2;
     private int mParameter3;
 
-    private MtpEvent() {
-    }
+    private MtpEvent() {}
 
     public int getEventCode() {
         return this.mEventCode;
@@ -120,7 +119,12 @@ public class MtpEvent {
 
     private static class IllegalParameterAccess extends UnsupportedOperationException {
         public IllegalParameterAccess(String propertyName, int eventCode) {
-            super("Cannot obtain " + propertyName + " for the event: " + eventCode + MediaMetrics.SEPARATOR);
+            super(
+                    "Cannot obtain "
+                            + propertyName
+                            + " for the event: "
+                            + eventCode
+                            + MediaMetrics.SEPARATOR);
         }
     }
 }

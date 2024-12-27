@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.util.Log;
 import android.util.Slog;
+
 import java.util.ArrayList;
 
 /* loaded from: classes6.dex */
@@ -44,14 +45,20 @@ public class NotificationHistoryImageProvider extends ContentProvider {
         private static final String TAG = "NotiHistoryImg.DB";
 
         public DatabaseHelper(Context context) {
-            super(context, NotificationHistoryImageProvider.sDatabaseName, (SQLiteDatabase.CursorFactory) null, 1);
+            super(
+                    context,
+                    NotificationHistoryImageProvider.sDatabaseName,
+                    (SQLiteDatabase.CursorFactory) null,
+                    1);
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
         public void onCreate(SQLiteDatabase db) {
             try {
                 Slog.d(TAG, "Create DB");
-                db.execSQL("CREATE TABLE NotiHistoryImgProvider (uri_id TEXT PRIMARY KEY, image BLOB,time DATETIME);");
+                db.execSQL(
+                        "CREATE TABLE NotiHistoryImgProvider (uri_id TEXT PRIMARY KEY, image"
+                            + " BLOB,time DATETIME);");
             } catch (SQLException ex) {
                 Log.e(TAG, "Create DB Create failed", ex);
             }
@@ -59,7 +66,13 @@ public class NotificationHistoryImageProvider extends ContentProvider {
 
         @Override // android.database.sqlite.SQLiteOpenHelper
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
+            Log.w(
+                    TAG,
+                    "Upgrading database from version "
+                            + oldVersion
+                            + " to "
+                            + newVersion
+                            + ", which will destroy all old data");
             db.execSQL("DROP TABLE IF EXISTS suggestions");
             onCreate(db);
         }
@@ -99,7 +112,12 @@ public class NotificationHistoryImageProvider extends ContentProvider {
     }
 
     @Override // android.content.ContentProvider
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(
+            Uri uri,
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String sortOrder) {
         if (this.mOpenHelper == null) {
             Slog.d(TAG, "Error getting mOpenHelper in getCachedImage");
             return null;
@@ -109,7 +127,16 @@ public class NotificationHistoryImageProvider extends ContentProvider {
             Slog.d(TAG, "Error getting DB in getCachedImage");
             return null;
         }
-        Cursor cursor = db.query(SETTINGS_TABLE, projection, selection, selectionArgs, null, null, sortOrder, null);
+        Cursor cursor =
+                db.query(
+                        SETTINGS_TABLE,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder,
+                        null);
         if (cursor != null) {
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
         }
@@ -188,7 +215,7 @@ public class NotificationHistoryImageProvider extends ContentProvider {
         ContentValues contentValues = new ContentValues();
         contentValues.put("time", Long.valueOf(time));
         for (String uri : list) {
-            db.update(SETTINGS_TABLE, contentValues, "uri_id=?", new String[]{uri});
+            db.update(SETTINGS_TABLE, contentValues, "uri_id=?", new String[] {uri});
         }
         return true;
     }
@@ -220,7 +247,7 @@ public class NotificationHistoryImageProvider extends ContentProvider {
             Slog.d(TAG, "Error getting DB in deleteRows");
             return false;
         }
-        db.delete(SETTINGS_TABLE, "uri_id=?", new String[]{uri});
+        db.delete(SETTINGS_TABLE, "uri_id=?", new String[] {uri});
         Slog.d(TAG, "deletedRows, uri= " + uri);
         return true;
     }

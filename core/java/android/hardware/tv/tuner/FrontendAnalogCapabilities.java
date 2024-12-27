@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class FrontendAnalogCapabilities implements Parcelable {
-    public static final Parcelable.Creator<FrontendAnalogCapabilities> CREATOR = new Parcelable.Creator<FrontendAnalogCapabilities>() { // from class: android.hardware.tv.tuner.FrontendAnalogCapabilities.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendAnalogCapabilities createFromParcel(Parcel _aidl_source) {
-            FrontendAnalogCapabilities _aidl_out = new FrontendAnalogCapabilities();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FrontendAnalogCapabilities> CREATOR =
+            new Parcelable.Creator<FrontendAnalogCapabilities>() { // from class:
+                // android.hardware.tv.tuner.FrontendAnalogCapabilities.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendAnalogCapabilities createFromParcel(Parcel _aidl_source) {
+                    FrontendAnalogCapabilities _aidl_out = new FrontendAnalogCapabilities();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendAnalogCapabilities[] newArray(int _aidl_size) {
-            return new FrontendAnalogCapabilities[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendAnalogCapabilities[] newArray(int _aidl_size) {
+                    return new FrontendAnalogCapabilities[_aidl_size];
+                }
+            };
     public int typeCap = 0;
     public int sifStandardCap = 0;
 

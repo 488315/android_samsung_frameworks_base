@@ -1,6 +1,7 @@
 package com.android.server.usb;
 
 import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -10,7 +11,9 @@ public final class UsbMidiPacketConverter {
     public UsbMidiDecoder mUsbMidiDecoder;
     public UsbMidiEncoder[] mUsbMidiEncoders;
     public static final int[] PAYLOAD_SIZE = {-1, -1, 2, 3, 3, 1, 2, 3, 3, 3, 3, 3, 2, 2, 3, 1};
-    public static final int[] CODE_INDEX_NUMBER_FROM_SYSTEM_TYPE = {-1, 2, 3, 2, -1, -1, 5, -1, 5, -1, 5, 5, 5, -1, 5, 5};
+    public static final int[] CODE_INDEX_NUMBER_FROM_SYSTEM_TYPE = {
+        -1, 2, 3, 2, -1, -1, 5, -1, 5, -1, 5, 5, 5, -1, 5, 5
+    };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UsbMidiDecoder {
@@ -114,13 +117,15 @@ public final class UsbMidiPacketConverter {
                     bArr2[0] = b3;
                     usbMidiEncoder.mNumStoredSystemExclusiveBytes = 1;
                 } else if (b3 == -9) {
-                    byteArrayOutputStream.write((usbMidiEncoder.mNumStoredSystemExclusiveBytes + 5) | b2);
+                    byteArrayOutputStream.write(
+                            (usbMidiEncoder.mNumStoredSystemExclusiveBytes + 5) | b2);
                     int i7 = usbMidiEncoder.mNumStoredSystemExclusiveBytes;
                     bArr2[i7] = bArr[i4];
                     int i8 = i7 + 1;
                     usbMidiEncoder.mNumStoredSystemExclusiveBytes = i8;
                     byteArrayOutputStream.write(bArr2, 0, i8);
-                    byteArrayOutputStream.write(bArr3, 0, 3 - usbMidiEncoder.mNumStoredSystemExclusiveBytes);
+                    byteArrayOutputStream.write(
+                            bArr3, 0, 3 - usbMidiEncoder.mNumStoredSystemExclusiveBytes);
                     usbMidiEncoder.mHasSystemExclusiveStarted = false;
                     usbMidiEncoder.mNumStoredSystemExclusiveBytes = 0;
                 } else {

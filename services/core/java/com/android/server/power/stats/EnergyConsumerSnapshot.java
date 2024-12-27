@@ -7,6 +7,7 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.util.SparseLongArray;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
@@ -89,7 +90,8 @@ public final class EnergyConsumerSnapshot {
         return strArr;
     }
 
-    public final EnergyConsumerDeltaData updateAndGetDelta(EnergyConsumerResult[] energyConsumerResultArr, int i) {
+    public final EnergyConsumerDeltaData updateAndGetDelta(
+            EnergyConsumerResult[] energyConsumerResultArr, int i) {
         int i2;
         int i3;
         int i4;
@@ -107,7 +109,11 @@ public final class EnergyConsumerSnapshot {
             return null;
         }
         if (i6 <= 0) {
-            Slog.wtf("EnergyConsumerSnapshot", "Unexpected battery voltage (" + i6 + " mV) when taking energy consumer snapshot");
+            Slog.wtf(
+                    "EnergyConsumerSnapshot",
+                    "Unexpected battery voltage ("
+                            + i6
+                            + " mV) when taking energy consumer snapshot");
             return null;
         }
         EnergyConsumerDeltaData energyConsumerDeltaData = new EnergyConsumerDeltaData();
@@ -127,10 +133,15 @@ public final class EnergyConsumerSnapshot {
             EnergyConsumerResult energyConsumerResult = energyConsumerResultArr2[i7];
             int i8 = energyConsumerResult.id;
             long j6 = energyConsumerResult.energyUWs;
-            EnergyConsumerAttribution[] energyConsumerAttributionArr = energyConsumerResult.attribution;
-            EnergyConsumer energyConsumer = (EnergyConsumer) energyConsumerSnapshot.mEnergyConsumers.get(i8, z);
+            EnergyConsumerAttribution[] energyConsumerAttributionArr =
+                    energyConsumerResult.attribution;
+            EnergyConsumer energyConsumer =
+                    (EnergyConsumer) energyConsumerSnapshot.mEnergyConsumers.get(i8, z);
             if (energyConsumer == null) {
-                NandswapManager$$ExternalSyntheticOutline0.m(i8, "updateAndGetDelta given invalid consumerId ", "EnergyConsumerSnapshot");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        i8,
+                        "updateAndGetDelta given invalid consumerId ",
+                        "EnergyConsumerSnapshot");
                 i5 = i6;
                 i2 = length;
                 i4 = i7;
@@ -151,16 +162,24 @@ public final class EnergyConsumerSnapshot {
                     if (energyConsumerAttributionArr == null) {
                         energyConsumerAttributionArr = new EnergyConsumerAttribution[0];
                     }
-                    SparseLongArray sparseLongArray2 = (SparseLongArray) energyConsumerSnapshot.mAttributionSnapshots.get(energyConsumer.id, null);
+                    SparseLongArray sparseLongArray2 =
+                            (SparseLongArray)
+                                    energyConsumerSnapshot.mAttributionSnapshots.get(
+                                            energyConsumer.id, null);
                     if (sparseLongArray2 == null) {
-                        SparseLongArray sparseLongArray3 = new SparseLongArray(energyConsumerAttributionArr.length);
-                        energyConsumerSnapshot.mAttributionSnapshots.put(energyConsumer.id, sparseLongArray3);
+                        SparseLongArray sparseLongArray3 =
+                                new SparseLongArray(energyConsumerAttributionArr.length);
+                        energyConsumerSnapshot.mAttributionSnapshots.put(
+                                energyConsumer.id, sparseLongArray3);
                         int length2 = energyConsumerAttributionArr.length;
                         int i12 = 0;
                         while (i12 < length2) {
                             int i13 = length2;
-                            EnergyConsumerAttribution energyConsumerAttribution = energyConsumerAttributionArr[i12];
-                            sparseLongArray3.put(energyConsumerAttribution.uid, energyConsumerAttribution.energyUWs);
+                            EnergyConsumerAttribution energyConsumerAttribution =
+                                    energyConsumerAttributionArr[i12];
+                            sparseLongArray3.put(
+                                    energyConsumerAttribution.uid,
+                                    energyConsumerAttribution.energyUWs);
                             i12++;
                             length2 = i13;
                             i7 = i7;
@@ -176,7 +195,8 @@ public final class EnergyConsumerSnapshot {
                         int length3 = energyConsumerAttributionArr.length;
                         int i14 = 0;
                         while (i14 < length3) {
-                            EnergyConsumerAttribution energyConsumerAttribution2 = energyConsumerAttributionArr[i14];
+                            EnergyConsumerAttribution energyConsumerAttribution2 =
+                                    energyConsumerAttributionArr[i14];
                             int i15 = energyConsumerAttribution2.uid;
                             long j8 = j6;
                             long j9 = energyConsumerAttribution2.energyUWs;
@@ -192,8 +212,10 @@ public final class EnergyConsumerSnapshot {
                                     sb.append(energyConsumer.name);
                                     sb.append(": new energy (");
                                     sb.append(j9);
-                                    BootReceiver$$ExternalSyntheticOutline0.m(sb, ") but old energy (", j11, "). Average voltage (");
-                                    NandswapManager$$ExternalSyntheticOutline0.m(sb, i11, ")Skipping. ", "EnergyConsumerSnapshot");
+                                    BootReceiver$$ExternalSyntheticOutline0.m(
+                                            sb, ") but old energy (", j11, "). Average voltage (");
+                                    NandswapManager$$ExternalSyntheticOutline0.m(
+                                            sb, i11, ")Skipping. ", "EnergyConsumerSnapshot");
                                 } else {
                                     sparseLongArray.put(i15, ((j12 * 1000) + (i11 / 2)) / i11);
                                 }
@@ -214,9 +236,13 @@ public final class EnergyConsumerSnapshot {
                                 sb2.append(energyConsumer.name);
                                 sb2.append(": new energy (");
                                 sb2.append(j2);
-                                BootReceiver$$ExternalSyntheticOutline0.m(sb2, ") < old energy (", j, "), new voltage (");
+                                BootReceiver$$ExternalSyntheticOutline0.m(
+                                        sb2, ") < old energy (", j, "), new voltage (");
                                 i5 = i;
-                                Slog.e("EnergyConsumerSnapshot", ActivityManagerService$$ExternalSyntheticOutline0.m(i5, i3, "), old voltage (", "). Skipping. ", sb2));
+                                Slog.e(
+                                        "EnergyConsumerSnapshot",
+                                        ActivityManagerService$$ExternalSyntheticOutline0.m(
+                                                i5, i3, "), old voltage (", "). Skipping. ", sb2));
                             } else {
                                 long j13 = ((j4 * 1000) + (i11 / 2)) / i11;
                                 switch (b) {
@@ -224,11 +250,14 @@ public final class EnergyConsumerSnapshot {
                                         energyConsumerSnapshot = this;
                                         if (energyConsumerDeltaData.otherTotalChargeUC == null) {
                                             int i18 = energyConsumerSnapshot.mNumOtherOrdinals;
-                                            energyConsumerDeltaData.otherTotalChargeUC = new long[i18];
-                                            energyConsumerDeltaData.otherUidChargesUC = new SparseLongArray[i18];
+                                            energyConsumerDeltaData.otherTotalChargeUC =
+                                                    new long[i18];
+                                            energyConsumerDeltaData.otherUidChargesUC =
+                                                    new SparseLongArray[i18];
                                         }
                                         energyConsumerDeltaData.otherTotalChargeUC[i9] = j13;
-                                        energyConsumerDeltaData.otherUidChargesUC[i9] = sparseLongArray;
+                                        energyConsumerDeltaData.otherUidChargesUC[i9] =
+                                                sparseLongArray;
                                         break;
                                     case 1:
                                         energyConsumerSnapshot = this;
@@ -237,14 +266,20 @@ public final class EnergyConsumerSnapshot {
                                     case 2:
                                         energyConsumerSnapshot = this;
                                         if (energyConsumerDeltaData.cpuClusterChargeUC == null) {
-                                            energyConsumerDeltaData.cpuClusterChargeUC = new long[energyConsumerSnapshot.mNumCpuClusterOrdinals];
+                                            energyConsumerDeltaData.cpuClusterChargeUC =
+                                                    new long
+                                                            [energyConsumerSnapshot
+                                                                    .mNumCpuClusterOrdinals];
                                         }
                                         energyConsumerDeltaData.cpuClusterChargeUC[i9] = j13;
                                         break;
                                     case 3:
                                         if (energyConsumerDeltaData.displayChargeUC == null) {
                                             energyConsumerSnapshot = this;
-                                            energyConsumerDeltaData.displayChargeUC = new long[energyConsumerSnapshot.mNumDisplayOrdinals];
+                                            energyConsumerDeltaData.displayChargeUC =
+                                                    new long
+                                                            [energyConsumerSnapshot
+                                                                    .mNumDisplayOrdinals];
                                         } else {
                                             energyConsumerSnapshot = this;
                                         }
@@ -263,7 +298,12 @@ public final class EnergyConsumerSnapshot {
                                         energyConsumerDeltaData.cameraChargeUC = j13;
                                         break;
                                     default:
-                                        Slog.w("EnergyConsumerSnapshot", "Ignoring consumer " + energyConsumer.name + " of unknown type " + ((int) b));
+                                        Slog.w(
+                                                "EnergyConsumerSnapshot",
+                                                "Ignoring consumer "
+                                                        + energyConsumer.name
+                                                        + " of unknown type "
+                                                        + ((int) b));
                                         break;
                                 }
                                 i5 = i;
@@ -278,16 +318,19 @@ public final class EnergyConsumerSnapshot {
                 sparseLongArray = null;
                 if (j >= j3) {
                     j4 = j2 - j;
-                    if (j4 >= j3) {
-                    }
+                    if (j4 >= j3) {}
                     energyConsumerSnapshot = this;
                     StringBuilder sb22 = new StringBuilder("Bad data! EnergyConsumer ");
                     sb22.append(energyConsumer.name);
                     sb22.append(": new energy (");
                     sb22.append(j2);
-                    BootReceiver$$ExternalSyntheticOutline0.m(sb22, ") < old energy (", j, "), new voltage (");
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            sb22, ") < old energy (", j, "), new voltage (");
                     i5 = i;
-                    Slog.e("EnergyConsumerSnapshot", ActivityManagerService$$ExternalSyntheticOutline0.m(i5, i3, "), old voltage (", "). Skipping. ", sb22));
+                    Slog.e(
+                            "EnergyConsumerSnapshot",
+                            ActivityManagerService$$ExternalSyntheticOutline0.m(
+                                    i5, i3, "), old voltage (", "). Skipping. ", sb22));
                 }
                 energyConsumerSnapshot = this;
                 i5 = i;

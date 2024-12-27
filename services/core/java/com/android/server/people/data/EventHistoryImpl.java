@@ -5,11 +5,13 @@ import android.os.FileUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseArray;
+
 import com.android.internal.util.CollectionUtils;
 import com.android.server.backup.BackupManagerConstants;
 import com.android.server.cpu.CpuInfoReader$$ExternalSyntheticLambda0;
-import com.android.server.people.data.AbstractProtoDiskReadWriter;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,7 +37,8 @@ public final class EventHistoryImpl implements EventHistory {
         public final /* synthetic */ int $r8$classId;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public /* synthetic */ EventsProtoDiskReadWriter(File file, ScheduledExecutorService scheduledExecutorService, int i) {
+        public /* synthetic */ EventsProtoDiskReadWriter(
+                File file, ScheduledExecutorService scheduledExecutorService, int i) {
             super(file, scheduledExecutorService);
             this.$r8$classId = i;
         }
@@ -44,9 +47,11 @@ public final class EventHistoryImpl implements EventHistory {
         public final AbstractProtoDiskReadWriter.ProtoStreamReader protoStreamReader() {
             switch (this.$r8$classId) {
                 case 0:
-                    return new EventHistoryImpl$EventsProtoDiskReadWriter$$ExternalSyntheticLambda0(3);
+                    return new EventHistoryImpl$EventsProtoDiskReadWriter$$ExternalSyntheticLambda0(
+                            3);
                 default:
-                    return new EventHistoryImpl$EventsProtoDiskReadWriter$$ExternalSyntheticLambda0(2);
+                    return new EventHistoryImpl$EventsProtoDiskReadWriter$$ExternalSyntheticLambda0(
+                            2);
             }
         }
 
@@ -54,34 +59,39 @@ public final class EventHistoryImpl implements EventHistory {
         public final AbstractProtoDiskReadWriter.ProtoStreamWriter protoStreamWriter() {
             switch (this.$r8$classId) {
                 case 0:
-                    return new EventHistoryImpl$EventsProtoDiskReadWriter$$ExternalSyntheticLambda0(0);
+                    return new EventHistoryImpl$EventsProtoDiskReadWriter$$ExternalSyntheticLambda0(
+                            0);
                 default:
-                    return new EventHistoryImpl$EventsProtoDiskReadWriter$$ExternalSyntheticLambda0(1);
+                    return new EventHistoryImpl$EventsProtoDiskReadWriter$$ExternalSyntheticLambda0(
+                            1);
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class Injector {
-    }
+    class Injector {}
 
-    public EventHistoryImpl(Injector injector, File file, ScheduledExecutorService scheduledExecutorService) {
+    public EventHistoryImpl(
+            Injector injector, File file, ScheduledExecutorService scheduledExecutorService) {
         this.mInjector = injector;
         this.mScheduledExecutorService = scheduledExecutorService;
         injector.getClass();
         this.mLastPruneTime = System.currentTimeMillis();
         this.mRootDir = file;
         File file2 = new File(file, "events");
-        EventsProtoDiskReadWriter eventsProtoDiskReadWriter = new EventsProtoDiskReadWriter(file2, scheduledExecutorService, 0);
+        EventsProtoDiskReadWriter eventsProtoDiskReadWriter =
+                new EventsProtoDiskReadWriter(file2, scheduledExecutorService, 0);
         file2.mkdirs();
         this.mEventsProtoDiskReadWriter = eventsProtoDiskReadWriter;
         File file3 = new File(file, "indexes");
-        EventsProtoDiskReadWriter eventsProtoDiskReadWriter2 = new EventsProtoDiskReadWriter(file3, scheduledExecutorService, 1);
+        EventsProtoDiskReadWriter eventsProtoDiskReadWriter2 =
+                new EventsProtoDiskReadWriter(file3, scheduledExecutorService, 1);
         file3.mkdirs();
         this.mEventIndexesProtoDiskReadWriter = eventsProtoDiskReadWriter2;
     }
 
-    public static Map eventHistoriesImplFromDisk(Injector injector, File file, ScheduledExecutorService scheduledExecutorService) {
+    public static Map eventHistoriesImplFromDisk(
+            Injector injector, File file, ScheduledExecutorService scheduledExecutorService) {
         ArrayMap arrayMap = new ArrayMap();
         File[] listFiles = file.listFiles(new CpuInfoReader$$ExternalSyntheticLambda0(2));
         if (listFiles == null) {
@@ -90,7 +100,8 @@ public final class EventHistoryImpl implements EventHistory {
         for (File file2 : listFiles) {
             File[] listFiles2 = file2.listFiles(new EventHistoryImpl$$ExternalSyntheticLambda1());
             if (listFiles2 != null && listFiles2.length == 2) {
-                EventHistoryImpl eventHistoryImpl = new EventHistoryImpl(injector, file2, scheduledExecutorService);
+                EventHistoryImpl eventHistoryImpl =
+                        new EventHistoryImpl(injector, file2, scheduledExecutorService);
                 eventHistoryImpl.loadFromDisk();
                 arrayMap.put(Uri.decode(file2.getName()), eventHistoryImpl);
             }
@@ -102,7 +113,8 @@ public final class EventHistoryImpl implements EventHistory {
         pruneOldEvents();
         addEventInMemory(event);
         this.mEventsProtoDiskReadWriter.scheduleSave("recent", this.mRecentEvents);
-        this.mEventIndexesProtoDiskReadWriter.scheduleSave(LauncherConfigurationInternal.KEY_INDEX_INT, this.mEventIndexArray);
+        this.mEventIndexesProtoDiskReadWriter.scheduleSave(
+                LauncherConfigurationInternal.KEY_INDEX_INT, this.mEventIndexArray);
     }
 
     public final synchronized void addEventInMemory(Event event) {
@@ -144,7 +156,8 @@ public final class EventHistoryImpl implements EventHistory {
         eventIndex = new EventIndex();
         Iterator it = ((ArraySet) set).iterator();
         while (it.hasNext()) {
-            EventIndex eventIndex2 = (EventIndex) this.mEventIndexArray.get(((Integer) it.next()).intValue());
+            EventIndex eventIndex2 =
+                    (EventIndex) this.mEventIndexArray.get(((Integer) it.next()).intValue());
             if (eventIndex2 != null) {
                 eventIndex = EventIndex.combine(eventIndex, eventIndex2);
             }
@@ -153,36 +166,51 @@ public final class EventHistoryImpl implements EventHistory {
     }
 
     public synchronized void loadFromDisk() {
-        this.mScheduledExecutorService.execute(new Runnable() { // from class: com.android.server.people.data.EventHistoryImpl$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                EventHistoryImpl eventHistoryImpl = EventHistoryImpl.this;
-                synchronized (eventHistoryImpl) {
-                    try {
-                        EventList eventList = (EventList) eventHistoryImpl.mEventsProtoDiskReadWriter.read("recent");
-                        if (eventList != null) {
-                            eventHistoryImpl.mInjector.getClass();
-                            eventList.removeOldEvents(System.currentTimeMillis() - BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS);
-                            EventList eventList2 = eventHistoryImpl.mRecentEvents;
-                            List copyOf = CollectionUtils.copyOf(eventList.mEvents);
-                            eventList2.getClass();
-                            Iterator it = copyOf.iterator();
-                            while (it.hasNext()) {
-                                eventList2.add((Event) it.next());
+        this.mScheduledExecutorService.execute(
+                new Runnable() { // from class:
+                                 // com.android.server.people.data.EventHistoryImpl$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        EventHistoryImpl eventHistoryImpl = EventHistoryImpl.this;
+                        synchronized (eventHistoryImpl) {
+                            try {
+                                EventList eventList =
+                                        (EventList)
+                                                eventHistoryImpl.mEventsProtoDiskReadWriter.read(
+                                                        "recent");
+                                if (eventList != null) {
+                                    eventHistoryImpl.mInjector.getClass();
+                                    eventList.removeOldEvents(
+                                            System.currentTimeMillis()
+                                                    - BackupManagerConstants
+                                                            .DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS);
+                                    EventList eventList2 = eventHistoryImpl.mRecentEvents;
+                                    List copyOf = CollectionUtils.copyOf(eventList.mEvents);
+                                    eventList2.getClass();
+                                    Iterator it = copyOf.iterator();
+                                    while (it.hasNext()) {
+                                        eventList2.add((Event) it.next());
+                                    }
+                                }
+                                SparseArray sparseArray =
+                                        (SparseArray)
+                                                eventHistoryImpl.mEventIndexesProtoDiskReadWriter
+                                                        .read(
+                                                                LauncherConfigurationInternal
+                                                                        .KEY_INDEX_INT);
+                                if (sparseArray != null) {
+                                    for (int i = 0; i < sparseArray.size(); i++) {
+                                        eventHistoryImpl.mEventIndexArray.put(
+                                                sparseArray.keyAt(i),
+                                                (EventIndex) sparseArray.valueAt(i));
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                        SparseArray sparseArray = (SparseArray) eventHistoryImpl.mEventIndexesProtoDiskReadWriter.read(LauncherConfigurationInternal.KEY_INDEX_INT);
-                        if (sparseArray != null) {
-                            for (int i = 0; i < sparseArray.size(); i++) {
-                                eventHistoryImpl.mEventIndexArray.put(sparseArray.keyAt(i), (EventIndex) sparseArray.valueAt(i));
-                            }
-                        }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
-        });
+                });
     }
 
     public final synchronized void onDestroy() {
@@ -197,7 +225,10 @@ public final class EventHistoryImpl implements EventHistory {
         this.mInjector.getClass();
         long currentTimeMillis = System.currentTimeMillis();
         if (currentTimeMillis - this.mLastPruneTime > 900000) {
-            this.mRecentEvents.removeOldEvents(currentTimeMillis - BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS);
+            this.mRecentEvents.removeOldEvents(
+                    currentTimeMillis
+                            - BackupManagerConstants
+                                    .DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS);
             this.mLastPruneTime = currentTimeMillis;
         }
     }

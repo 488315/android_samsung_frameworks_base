@@ -9,11 +9,11 @@ import android.service.vr.IPersistentVrStateCallbacks;
 import android.service.vr.IVrManager;
 import android.util.Log;
 import android.view.Surface;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.server.LocalServices;
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
-import com.android.server.vr.VrManagerService;
 import com.android.server.wm.ActivityTaskManagerInternal;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.WindowManagerGlobalLock;
@@ -33,15 +33,17 @@ public final class Vr2dDisplay {
     public final WindowManagerInternal mWindowManagerInternal;
     public final Object mVdLock = new Object();
     public final Handler mHandler = new Handler();
-    public final AnonymousClass1 mVrStateCallbacks = new IPersistentVrStateCallbacks.Stub() { // from class: com.android.server.vr.Vr2dDisplay.1
-        public final void onPersistentVrStateChanged(boolean z) {
-            Vr2dDisplay vr2dDisplay = Vr2dDisplay.this;
-            if (z != vr2dDisplay.mIsPersistentVrModeEnabled) {
-                vr2dDisplay.mIsPersistentVrModeEnabled = z;
-                vr2dDisplay.updateVirtualDisplay();
-            }
-        }
-    };
+    public final AnonymousClass1 mVrStateCallbacks =
+            new IPersistentVrStateCallbacks
+                    .Stub() { // from class: com.android.server.vr.Vr2dDisplay.1
+                public final void onPersistentVrStateChanged(boolean z) {
+                    Vr2dDisplay vr2dDisplay = Vr2dDisplay.this;
+                    if (z != vr2dDisplay.mIsPersistentVrModeEnabled) {
+                        vr2dDisplay.mIsPersistentVrModeEnabled = z;
+                        vr2dDisplay.updateVirtualDisplay();
+                    }
+                }
+            };
     public boolean mIsVirtualDisplayAllowed = true;
     public boolean mBootsToVr = false;
     public int mVirtualDisplayWidth = 1400;
@@ -49,7 +51,10 @@ public final class Vr2dDisplay {
     public int mVirtualDisplayDpi = 320;
 
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.vr.Vr2dDisplay$1] */
-    public Vr2dDisplay(DisplayManager displayManager, WindowManagerInternal windowManagerInternal, VrManagerService.AnonymousClass4 anonymousClass4) {
+    public Vr2dDisplay(
+            DisplayManager displayManager,
+            WindowManagerInternal windowManagerInternal,
+            VrManagerService.AnonymousClass4 anonymousClass4) {
         this.mDisplayManager = displayManager;
         this.mWindowManagerInternal = windowManagerInternal;
         this.mVrManager = anonymousClass4;
@@ -58,7 +63,9 @@ public final class Vr2dDisplay {
     public final void setSurfaceLocked(Surface surface) {
         if (this.mSurface != surface) {
             if (surface == null || surface.isValid()) {
-                Log.i("Vr2dDisplay", "Setting the new surface from " + this.mSurface + " to " + surface);
+                Log.i(
+                        "Vr2dDisplay",
+                        "Setting the new surface from " + this.mSurface + " to " + surface);
                 VirtualDisplay virtualDisplay = this.mVirtualDisplay;
                 if (virtualDisplay != null) {
                     virtualDisplay.setSurface(surface);
@@ -163,18 +170,23 @@ public final class Vr2dDisplay {
             monitor-exit(r2)     // Catch: java.lang.Throwable -> L45
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.vr.Vr2dDisplay.setVirtualDisplayProperties(android.app.Vr2dDisplayProperties):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.vr.Vr2dDisplay.setVirtualDisplayProperties(android.app.Vr2dDisplayProperties):void");
     }
 
     public final void startImageReader() {
         if (this.mImageReader == null) {
-            this.mImageReader = ImageReader.newInstance(this.mVirtualDisplayWidth, this.mVirtualDisplayHeight, 1, 2);
+            this.mImageReader =
+                    ImageReader.newInstance(
+                            this.mVirtualDisplayWidth, this.mVirtualDisplayHeight, 1, 2);
             StringBuilder sb = new StringBuilder("VD startImageReader: res = ");
             sb.append(this.mVirtualDisplayWidth);
             sb.append("X");
             sb.append(this.mVirtualDisplayHeight);
             sb.append(", dpi = ");
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m(sb, this.mVirtualDisplayDpi, "Vr2dDisplay");
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    sb, this.mVirtualDisplayDpi, "Vr2dDisplay");
         }
         synchronized (this.mVdLock) {
             setSurfaceLocked(this.mImageReader.getSurface());
@@ -182,12 +194,17 @@ public final class Vr2dDisplay {
     }
 
     public final void updateDisplayId(int i) {
-        ActivityTaskManagerService.LocalService localService = (ActivityTaskManagerService.LocalService) ((ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class));
+        ActivityTaskManagerService.LocalService localService =
+                (ActivityTaskManagerService.LocalService)
+                        ((ActivityTaskManagerInternal)
+                                LocalServices.getService(ActivityTaskManagerInternal.class));
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_TASKS_enabled[0]) {
             localService.getClass();
-            ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_TASKS, -1123414663662718691L, 1, null, Long.valueOf(i));
+            ProtoLogImpl_54989576.d(
+                    ProtoLogGroup.WM_DEBUG_TASKS, -1123414663662718691L, 1, null, Long.valueOf(i));
         }
-        WindowManagerGlobalLock windowManagerGlobalLock = ActivityTaskManagerService.this.mGlobalLock;
+        WindowManagerGlobalLock windowManagerGlobalLock =
+                ActivityTaskManagerService.this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
@@ -203,38 +220,46 @@ public final class Vr2dDisplay {
 
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.vr.Vr2dDisplay$3] */
     public final void updateVirtualDisplay() {
-        if (!this.mIsVirtualDisplayAllowed || (!this.mBootsToVr && !this.mIsPersistentVrModeEnabled)) {
+        if (!this.mIsVirtualDisplayAllowed
+                || (!this.mBootsToVr && !this.mIsPersistentVrModeEnabled)) {
             if (this.mStopVDRunnable == null) {
-                this.mStopVDRunnable = new Runnable() { // from class: com.android.server.vr.Vr2dDisplay.3
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        Vr2dDisplay vr2dDisplay = Vr2dDisplay.this;
-                        if (vr2dDisplay.mIsVirtualDisplayAllowed && (vr2dDisplay.mBootsToVr || vr2dDisplay.mIsPersistentVrModeEnabled)) {
-                            Log.i("Vr2dDisplay", "Virtual Display destruction stopped: VrMode is back on.");
-                            return;
-                        }
-                        Log.i("Vr2dDisplay", "Stopping Virtual Display");
-                        synchronized (Vr2dDisplay.this.mVdLock) {
-                            try {
-                                Vr2dDisplay.this.updateDisplayId(-1);
-                                Vr2dDisplay.this.setSurfaceLocked(null);
-                                VirtualDisplay virtualDisplay = Vr2dDisplay.this.mVirtualDisplay;
-                                if (virtualDisplay != null) {
-                                    virtualDisplay.release();
-                                    Vr2dDisplay.this.mVirtualDisplay = null;
+                this.mStopVDRunnable =
+                        new Runnable() { // from class: com.android.server.vr.Vr2dDisplay.3
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                Vr2dDisplay vr2dDisplay = Vr2dDisplay.this;
+                                if (vr2dDisplay.mIsVirtualDisplayAllowed
+                                        && (vr2dDisplay.mBootsToVr
+                                                || vr2dDisplay.mIsPersistentVrModeEnabled)) {
+                                    Log.i(
+                                            "Vr2dDisplay",
+                                            "Virtual Display destruction stopped: VrMode is back"
+                                                + " on.");
+                                    return;
                                 }
-                                Vr2dDisplay vr2dDisplay2 = Vr2dDisplay.this;
-                                ImageReader imageReader = vr2dDisplay2.mImageReader;
-                                if (imageReader != null) {
-                                    imageReader.close();
-                                    vr2dDisplay2.mImageReader = null;
+                                Log.i("Vr2dDisplay", "Stopping Virtual Display");
+                                synchronized (Vr2dDisplay.this.mVdLock) {
+                                    try {
+                                        Vr2dDisplay.this.updateDisplayId(-1);
+                                        Vr2dDisplay.this.setSurfaceLocked(null);
+                                        VirtualDisplay virtualDisplay =
+                                                Vr2dDisplay.this.mVirtualDisplay;
+                                        if (virtualDisplay != null) {
+                                            virtualDisplay.release();
+                                            Vr2dDisplay.this.mVirtualDisplay = null;
+                                        }
+                                        Vr2dDisplay vr2dDisplay2 = Vr2dDisplay.this;
+                                        ImageReader imageReader = vr2dDisplay2.mImageReader;
+                                        if (imageReader != null) {
+                                            imageReader.close();
+                                            vr2dDisplay2.mImageReader = null;
+                                        }
+                                    } catch (Throwable th) {
+                                        throw th;
+                                    }
                                 }
-                            } catch (Throwable th) {
-                                throw th;
                             }
-                        }
-                    }
-                };
+                        };
             }
             Handler handler = this.mHandler;
             handler.removeCallbacks(this.mStopVDRunnable);
@@ -251,17 +276,26 @@ public final class Vr2dDisplay {
                 if (this.mVirtualDisplay != null) {
                     Log.i("Vr2dDisplay", "VD already exists, ignoring request");
                 } else {
-                    VirtualDisplayConfig.Builder builder = new VirtualDisplayConfig.Builder("VR 2D Display", this.mVirtualDisplayWidth, this.mVirtualDisplayHeight, this.mVirtualDisplayDpi);
+                    VirtualDisplayConfig.Builder builder =
+                            new VirtualDisplayConfig.Builder(
+                                    "VR 2D Display",
+                                    this.mVirtualDisplayWidth,
+                                    this.mVirtualDisplayHeight,
+                                    this.mVirtualDisplayDpi);
                     builder.setUniqueId("277f1a09-b88d-4d1e-8716-796f114d080b");
                     builder.setFlags(1485);
-                    VirtualDisplay createVirtualDisplay = this.mDisplayManager.createVirtualDisplay(null, builder.build(), null, null);
+                    VirtualDisplay createVirtualDisplay =
+                            this.mDisplayManager.createVirtualDisplay(
+                                    null, builder.build(), null, null);
                     this.mVirtualDisplay = createVirtualDisplay;
                     if (createVirtualDisplay != null) {
                         updateDisplayId(createVirtualDisplay.getDisplay().getDisplayId());
                         startImageReader();
                         Log.i("Vr2dDisplay", "VD created: " + this.mVirtualDisplay);
                     } else {
-                        Log.w("Vr2dDisplay", "Virtual display id is null after createVirtualDisplay");
+                        Log.w(
+                                "Vr2dDisplay",
+                                "Virtual display id is null after createVirtualDisplay");
                         updateDisplayId(-1);
                     }
                 }

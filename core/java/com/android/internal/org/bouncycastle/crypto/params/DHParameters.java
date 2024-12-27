@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.crypto.params;
 
 import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 import com.android.internal.org.bouncycastle.util.Properties;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -38,20 +39,36 @@ public class DHParameters implements CipherParameters {
         this(p, g, q, m, l, null, null);
     }
 
-    public DHParameters(BigInteger p, BigInteger g, BigInteger q, BigInteger j, DHValidationParameters validation) {
+    public DHParameters(
+            BigInteger p,
+            BigInteger g,
+            BigInteger q,
+            BigInteger j,
+            DHValidationParameters validation) {
         this(p, g, q, 160, 0, j, validation);
     }
 
-    public DHParameters(BigInteger p, BigInteger g, BigInteger q, int m, int l, BigInteger j, DHValidationParameters validation) {
+    public DHParameters(
+            BigInteger p,
+            BigInteger g,
+            BigInteger q,
+            int m,
+            int l,
+            BigInteger j,
+            DHValidationParameters validation) {
         if (l != 0) {
             if (l > p.bitLength()) {
-                throw new IllegalArgumentException("when l value specified, it must satisfy 2^(l-1) <= p");
+                throw new IllegalArgumentException(
+                        "when l value specified, it must satisfy 2^(l-1) <= p");
             }
             if (l < m) {
-                throw new IllegalArgumentException("when l value specified, it may not be less than m value");
+                throw new IllegalArgumentException(
+                        "when l value specified, it may not be less than m value");
             }
         }
-        if (m > p.bitLength() && !Properties.isOverrideSet("com.android.internal.org.bouncycastle.dh.allow_unsafe_p_value")) {
+        if (m > p.bitLength()
+                && !Properties.isOverrideSet(
+                        "com.android.internal.org.bouncycastle.dh.allow_unsafe_p_value")) {
             throw new IllegalArgumentException("unsafe p value so small specific l required");
         }
         this.g = g;

@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.se.omapi.ISecureElementReader;
 
 /* loaded from: classes3.dex */
 public interface ISecureElementService extends IInterface {
@@ -20,7 +19,8 @@ public interface ISecureElementService extends IInterface {
 
     String[] getReaders() throws RemoteException;
 
-    boolean[] isNfcEventAllowed(String str, byte[] bArr, String[] strArr, int i) throws RemoteException;
+    boolean[] isNfcEventAllowed(String str, byte[] bArr, String[] strArr, int i)
+            throws RemoteException;
 
     public static class Default implements ISecureElementService {
         @Override // android.se.omapi.ISecureElementService
@@ -34,7 +34,9 @@ public interface ISecureElementService extends IInterface {
         }
 
         @Override // android.se.omapi.ISecureElementService
-        public boolean[] isNfcEventAllowed(String reader, byte[] aid, String[] packageNames, int userId) throws RemoteException {
+        public boolean[] isNfcEventAllowed(
+                String reader, byte[] aid, String[] packageNames, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -54,8 +56,9 @@ public interface ISecureElementService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISecureElementService {
-        public static final String DESCRIPTOR = "android$se$omapi$ISecureElementService".replace('$', '.');
+    public abstract static class Stub extends Binder implements ISecureElementService {
+        public static final String DESCRIPTOR =
+                "android$se$omapi$ISecureElementService".replace('$', '.');
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_getReader = 2;
@@ -84,7 +87,8 @@ public interface ISecureElementService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -180,7 +184,8 @@ public interface ISecureElementService extends IInterface {
                         throw new RemoteException("Method getReader is unimplemented.");
                     }
                     _reply.readException();
-                    ISecureElementReader _result = ISecureElementReader.Stub.asInterface(_reply.readStrongBinder());
+                    ISecureElementReader _result =
+                            ISecureElementReader.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -189,7 +194,9 @@ public interface ISecureElementService extends IInterface {
             }
 
             @Override // android.se.omapi.ISecureElementService
-            public boolean[] isNfcEventAllowed(String reader, byte[] aid, String[] packageNames, int userId) throws RemoteException {
+            public boolean[] isNfcEventAllowed(
+                    String reader, byte[] aid, String[] packageNames, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

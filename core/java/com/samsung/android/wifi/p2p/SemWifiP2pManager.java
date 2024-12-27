@@ -7,8 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
-import com.samsung.android.wifi.p2p.ISemWifiP2pCallback;
-import com.samsung.android.wifi.p2p.SemWifiP2pManager;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -20,8 +19,10 @@ public class SemWifiP2pManager {
     private static final String TAG = "SemWifiP2pManager";
     public static final String TYPE_WIFI_AWARE = "aware";
     public static final String TYPE_WIFI_P2P = "p2p";
-    public static final String WIFI_P2P_CLIENT_IP_UPDATED_ACTION = "com.samsung.android.wifi.p2p.CLIENT_IP_UPDATED";
-    public static final String WIFI_P2P_PEER_FOUND_ACTION = "com.samsung.android.wifi.p2p.PEER_FOUND";
+    public static final String WIFI_P2P_CLIENT_IP_UPDATED_ACTION =
+            "com.samsung.android.wifi.p2p.CLIENT_IP_UPDATED";
+    public static final String WIFI_P2P_PEER_FOUND_ACTION =
+            "com.samsung.android.wifi.p2p.PEER_FOUND";
     private final Context mContext;
     private Looper mLooper;
     private final ISemWifiP2pManager mService;
@@ -52,14 +53,18 @@ public class SemWifiP2pManager {
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pCallback
         public void onSuccess() {
-            Log.v(SemWifiP2pManager.TAG, "SemWifiP2pCallbackProxy:" + this.mActionTag + ": onSuccess");
+            Log.v(
+                    SemWifiP2pManager.TAG,
+                    "SemWifiP2pCallbackProxy:" + this.mActionTag + ": onSuccess");
             if (this.mCallback != null) {
-                this.mHandler.post(new Runnable() { // from class: com.samsung.android.wifi.p2p.SemWifiP2pManager$SemWifiP2pCallbackProxy$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SemWifiP2pManager.SemWifiP2pCallbackProxy.this.lambda$onSuccess$0();
-                    }
-                });
+                this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.wifi.p2p.SemWifiP2pManager$SemWifiP2pCallbackProxy$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemWifiP2pManager.SemWifiP2pCallbackProxy.this.lambda$onSuccess$0();
+                            }
+                        });
             }
         }
 
@@ -70,14 +75,19 @@ public class SemWifiP2pManager {
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pCallback
         public void onFailure(final int reason) {
-            Log.v(SemWifiP2pManager.TAG, "SemWifiP2pCallbackProxy:" + this.mActionTag + ": onFailure=" + reason);
+            Log.v(
+                    SemWifiP2pManager.TAG,
+                    "SemWifiP2pCallbackProxy:" + this.mActionTag + ": onFailure=" + reason);
             if (this.mCallback != null) {
-                this.mHandler.post(new Runnable() { // from class: com.samsung.android.wifi.p2p.SemWifiP2pManager$SemWifiP2pCallbackProxy$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SemWifiP2pManager.SemWifiP2pCallbackProxy.this.lambda$onFailure$1(reason);
-                    }
-                });
+                this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.wifi.p2p.SemWifiP2pManager$SemWifiP2pCallbackProxy$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemWifiP2pManager.SemWifiP2pCallbackProxy.this.lambda$onFailure$1(
+                                        reason);
+                            }
+                        });
             }
         }
 
@@ -120,10 +130,12 @@ public class SemWifiP2pManager {
         }
     }
 
-    public void setPreparedAccountPin(String pin, String hexEncData, String hexIv, ActionListener listener) {
+    public void setPreparedAccountPin(
+            String pin, String hexEncData, String hexIv, ActionListener listener) {
         SemWifiP2pCallbackProxy callbackProxy = null;
         if (listener != null) {
-            callbackProxy = new SemWifiP2pCallbackProxy("setPreparedAccountPin", this.mLooper, listener);
+            callbackProxy =
+                    new SemWifiP2pCallbackProxy("setPreparedAccountPin", this.mLooper, listener);
         }
         try {
             this.mService.setPreparedAccountPin(1, pin, hexEncData, hexIv, null, callbackProxy);
@@ -135,13 +147,21 @@ public class SemWifiP2pManager {
         }
     }
 
-    public void setPreparedAccountPin(int type, String pin, String hexEncData, String hexIv, String hashedAccount, ActionListener listener) {
+    public void setPreparedAccountPin(
+            int type,
+            String pin,
+            String hexEncData,
+            String hexIv,
+            String hashedAccount,
+            ActionListener listener) {
         SemWifiP2pCallbackProxy callbackProxy = null;
         if (listener != null) {
-            callbackProxy = new SemWifiP2pCallbackProxy("setPreparedAccountPin", this.mLooper, listener);
+            callbackProxy =
+                    new SemWifiP2pCallbackProxy("setPreparedAccountPin", this.mLooper, listener);
         }
         try {
-            this.mService.setPreparedAccountPin(type, pin, hexEncData, hexIv, hashedAccount, callbackProxy);
+            this.mService.setPreparedAccountPin(
+                    type, pin, hexEncData, hexIv, hashedAccount, callbackProxy);
         } catch (RemoteException e) {
             if (callbackProxy != null) {
                 callbackProxy.onFailure(0);
@@ -174,7 +194,8 @@ public class SemWifiP2pManager {
         }
     }
 
-    public void setInUsePackage(String type, Context srcContext, String pkg, boolean reqNextAction) {
+    public void setInUsePackage(
+            String type, Context srcContext, String pkg, boolean reqNextAction) {
         try {
             this.mService.setInUsePackage(type, srcContext.getOpPackageName(), pkg, reqNextAction);
         } catch (RemoteException e) {
@@ -182,9 +203,11 @@ public class SemWifiP2pManager {
         }
     }
 
-    public void unsetInUsePackage(String type, Context srcContext, String pkg, boolean reqNextAction) {
+    public void unsetInUsePackage(
+            String type, Context srcContext, String pkg, boolean reqNextAction) {
         try {
-            this.mService.unsetInUsePackage(type, srcContext.getOpPackageName(), pkg, reqNextAction);
+            this.mService.unsetInUsePackage(
+                    type, srcContext.getOpPackageName(), pkg, reqNextAction);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -240,7 +263,8 @@ public class SemWifiP2pManager {
 
     public SemWifiP2pDevice getSemWifiP2pDevice(WifiP2pDevice device) {
         if (!device.getVendorElements().isEmpty()) {
-            return new SemWifiP2pDevice(device.deviceAddress, device.deviceName, device.getVendorElements());
+            return new SemWifiP2pDevice(
+                    device.deviceAddress, device.deviceName, device.getVendorElements());
         }
         try {
             return this.mService.getSemWifiP2pDevice(device.deviceAddress);

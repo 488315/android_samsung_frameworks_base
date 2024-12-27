@@ -5,6 +5,7 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes5.dex */
@@ -95,7 +96,20 @@ public class StatLogger {
             for (int i = 0; i < this.SIZE; i++) {
                 int count = this.mCountStats[i];
                 double durationMs = this.mDurationStats[i] / 1000.0d;
-                pw.println(String.format("%s: count=%d, total=%.1fms, avg=%.3fms, max calls/s=%d max dur/s=%.1fms max time=%.1fms", this.mLabels[i], Integer.valueOf(count), Double.valueOf(durationMs), Double.valueOf(count == 0 ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN : durationMs / count), Integer.valueOf(this.mMaxCallsPerSecond[i]), Double.valueOf(this.mMaxDurationPerSecond[i] / 1000.0d), Double.valueOf(this.mMaxDurationStats[i] / 1000.0d)));
+                pw.println(
+                        String.format(
+                                "%s: count=%d, total=%.1fms, avg=%.3fms, max calls/s=%d max"
+                                    + " dur/s=%.1fms max time=%.1fms",
+                                this.mLabels[i],
+                                Integer.valueOf(count),
+                                Double.valueOf(durationMs),
+                                Double.valueOf(
+                                        count == 0
+                                                ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                                                : durationMs / count),
+                                Integer.valueOf(this.mMaxCallsPerSecond[i]),
+                                Double.valueOf(this.mMaxDurationPerSecond[i] / 1000.0d),
+                                Double.valueOf(this.mMaxDurationStats[i] / 1000.0d)));
             }
             pw.decreaseIndent();
         }

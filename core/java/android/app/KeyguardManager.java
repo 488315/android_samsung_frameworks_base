@@ -2,8 +2,6 @@ package android.app;
 
 import android.Manifest;
 import android.annotation.SystemApi;
-import android.app.INotificationManager;
-import android.app.KeyguardManager;
 import android.app.admin.PasswordMetrics;
 import android.app.trust.ITrustManager;
 import android.content.ComponentName;
@@ -25,6 +23,7 @@ import android.util.Log;
 import android.view.IOnKeyguardExitResult;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
+
 import com.android.internal.policy.IKeyguardDismissCallback;
 import com.android.internal.policy.IKeyguardLockedStateListener;
 import com.android.internal.util.Preconditions;
@@ -35,7 +34,9 @@ import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.PasswordValidationError;
 import com.android.internal.widget.VerifyCredentialResponse;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.nio.charset.Charset;
@@ -47,40 +48,51 @@ import java.util.function.BiConsumer;
 
 /* loaded from: classes.dex */
 public class KeyguardManager {
-    public static final String ACTION_CONFIRM_DEVICE_CREDENTIAL = "android.app.action.CONFIRM_DEVICE_CREDENTIAL";
-    public static final String ACTION_CONFIRM_DEVICE_CREDENTIAL_WITH_USER = "android.app.action.CONFIRM_DEVICE_CREDENTIAL_WITH_USER";
-    public static final String ACTION_CONFIRM_FRP_CREDENTIAL = "android.app.action.CONFIRM_FRP_CREDENTIAL";
-    public static final String ACTION_CONFIRM_REMOTE_DEVICE_CREDENTIAL = "android.app.action.CONFIRM_REMOTE_DEVICE_CREDENTIAL";
-    public static final String ACTION_CONFIRM_REPAIR_MODE_DEVICE_CREDENTIAL = "android.app.action.CONFIRM_REPAIR_MODE_DEVICE_CREDENTIAL";
-    public static final String ACTION_PREPARE_REPAIR_MODE_DEVICE_CREDENTIAL = "android.app.action.PREPARE_REPAIR_MODE_DEVICE_CREDENTIAL";
-    public static final String EXTRA_ALTERNATE_BUTTON_LABEL = "android.app.extra.ALTERNATE_BUTTON_LABEL";
+    public static final String ACTION_CONFIRM_DEVICE_CREDENTIAL =
+            "android.app.action.CONFIRM_DEVICE_CREDENTIAL";
+    public static final String ACTION_CONFIRM_DEVICE_CREDENTIAL_WITH_USER =
+            "android.app.action.CONFIRM_DEVICE_CREDENTIAL_WITH_USER";
+    public static final String ACTION_CONFIRM_FRP_CREDENTIAL =
+            "android.app.action.CONFIRM_FRP_CREDENTIAL";
+    public static final String ACTION_CONFIRM_REMOTE_DEVICE_CREDENTIAL =
+            "android.app.action.CONFIRM_REMOTE_DEVICE_CREDENTIAL";
+    public static final String ACTION_CONFIRM_REPAIR_MODE_DEVICE_CREDENTIAL =
+            "android.app.action.CONFIRM_REPAIR_MODE_DEVICE_CREDENTIAL";
+    public static final String ACTION_PREPARE_REPAIR_MODE_DEVICE_CREDENTIAL =
+            "android.app.action.PREPARE_REPAIR_MODE_DEVICE_CREDENTIAL";
+    public static final String EXTRA_ALTERNATE_BUTTON_LABEL =
+            "android.app.extra.ALTERNATE_BUTTON_LABEL";
     public static final String EXTRA_CHECKBOX_LABEL = "android.app.extra.CHECKBOX_LABEL";
     public static final String EXTRA_DESCRIPTION = "android.app.extra.DESCRIPTION";
     public static final String EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS = "check_dpm";
-    public static final String EXTRA_FORCE_TASK_OVERLAY = "android.app.KeyguardManager.FORCE_TASK_OVERLAY";
-    public static final String EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION = "android.app.extra.REMOTE_LOCKSCREEN_VALIDATION_SESSION";
+    public static final String EXTRA_FORCE_TASK_OVERLAY =
+            "android.app.KeyguardManager.FORCE_TASK_OVERLAY";
+    public static final String EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION =
+            "android.app.extra.REMOTE_LOCKSCREEN_VALIDATION_SESSION";
     public static final String EXTRA_TITLE = "android.app.extra.TITLE";
 
-    @SystemApi
-    public static final int PASSWORD = 0;
+    @SystemApi public static final int PASSWORD = 0;
 
-    @SystemApi
-    public static final int PATTERN = 2;
+    @SystemApi public static final int PATTERN = 2;
 
-    @SystemApi
-    public static final int PIN = 1;
+    @SystemApi public static final int PIN = 1;
     public static final int RESULT_ALTERNATE = 1;
     public static final int SMART_CARD = 3;
     private static final String TAG = "KeyguardManager";
     private final Context mContext;
     private final LockPatternUtils mLockPatternUtils;
-    private final ArrayMap<WeakEscrowTokenRemovedListener, IWeakEscrowTokenRemovedListener> mListeners = new ArrayMap<>();
-    private final IKeyguardLockedStateListener mIKeyguardLockedStateListener = new AnonymousClass1();
-    private final ArrayMap<KeyguardLockedStateListener, Executor> mKeyguardLockedStateListeners = new ArrayMap<>();
+    private final ArrayMap<WeakEscrowTokenRemovedListener, IWeakEscrowTokenRemovedListener>
+            mListeners = new ArrayMap<>();
+    private final IKeyguardLockedStateListener mIKeyguardLockedStateListener =
+            new AnonymousClass1();
+    private final ArrayMap<KeyguardLockedStateListener, Executor> mKeyguardLockedStateListeners =
+            new ArrayMap<>();
     private final IWindowManager mWM = WindowManagerGlobal.getWindowManagerService();
     private final IActivityManager mAm = ActivityManager.getService();
-    private final ITrustManager mTrustManager = ITrustManager.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.TRUST_SERVICE));
-    private final INotificationManager mNotificationManager = INotificationManager.Stub.asInterface(ServiceManager.getServiceOrThrow("notification"));
+    private final ITrustManager mTrustManager =
+            ITrustManager.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.TRUST_SERVICE));
+    private final INotificationManager mNotificationManager =
+            INotificationManager.Stub.asInterface(ServiceManager.getServiceOrThrow("notification"));
 
     @FunctionalInterface
     public interface KeyguardLockedStateListener {
@@ -88,8 +100,7 @@ public class KeyguardManager {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface LockTypes {
-    }
+    @interface LockTypes {}
 
     @Deprecated
     public interface OnKeyguardExitResult {
@@ -108,29 +119,35 @@ public class KeyguardManager {
 
     /* renamed from: android.app.KeyguardManager$1, reason: invalid class name */
     class AnonymousClass1 extends IKeyguardLockedStateListener.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // com.android.internal.policy.IKeyguardLockedStateListener
         public void onKeyguardLockedStateChanged(final boolean isKeyguardLocked) {
-            KeyguardManager.this.mKeyguardLockedStateListeners.forEach(new BiConsumer() { // from class: android.app.KeyguardManager$1$$ExternalSyntheticLambda0
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    Executor executor = (Executor) obj2;
-                    executor.execute(new Runnable() { // from class: android.app.KeyguardManager$1$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            KeyguardManager.KeyguardLockedStateListener.this.onKeyguardLockedStateChanged(r2);
+            KeyguardManager.this.mKeyguardLockedStateListeners.forEach(
+                    new BiConsumer() { // from class:
+                        // android.app.KeyguardManager$1$$ExternalSyntheticLambda0
+                        @Override // java.util.function.BiConsumer
+                        public final void accept(Object obj, Object obj2) {
+                            Executor executor = (Executor) obj2;
+                            executor.execute(
+                                    new Runnable() { // from class:
+                                        // android.app.KeyguardManager$1$$ExternalSyntheticLambda1
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            KeyguardManager.KeyguardLockedStateListener.this
+                                                    .onKeyguardLockedStateChanged(r2);
+                                        }
+                                    });
                         }
                     });
-                }
-            });
         }
     }
 
     @Deprecated
-    public Intent createConfirmDeviceCredentialIntent(CharSequence title, CharSequence description) {
-        if (!isDeviceSecure() && !SemPersonaManager.appliedPasswordPolicy(this.mContext.getUserId())) {
+    public Intent createConfirmDeviceCredentialIntent(
+            CharSequence title, CharSequence description) {
+        if (!isDeviceSecure()
+                && !SemPersonaManager.appliedPasswordPolicy(this.mContext.getUserId())) {
             return null;
         }
         Intent intent = new Intent(ACTION_CONFIRM_DEVICE_CREDENTIAL);
@@ -140,7 +157,8 @@ public class KeyguardManager {
         return intent;
     }
 
-    public Intent createConfirmDeviceCredentialIntent(CharSequence title, CharSequence description, int userId) {
+    public Intent createConfirmDeviceCredentialIntent(
+            CharSequence title, CharSequence description, int userId) {
         if (!isDeviceSecure(userId) && !SemPersonaManager.appliedPasswordPolicy(userId)) {
             return null;
         }
@@ -152,26 +170,35 @@ public class KeyguardManager {
         return intent;
     }
 
-    public Intent createConfirmDeviceCredentialIntent(CharSequence title, CharSequence description, int userId, boolean disallowBiometricsIfPolicyExists) {
+    public Intent createConfirmDeviceCredentialIntent(
+            CharSequence title,
+            CharSequence description,
+            int userId,
+            boolean disallowBiometricsIfPolicyExists) {
         Intent intent = createConfirmDeviceCredentialIntent(title, description, userId);
         if (intent != null) {
-            intent.putExtra(EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, disallowBiometricsIfPolicyExists);
+            intent.putExtra(
+                    EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, disallowBiometricsIfPolicyExists);
         }
         return intent;
     }
 
     @SystemApi
-    public Intent createConfirmFactoryResetCredentialIntent(CharSequence title, CharSequence description, CharSequence alternateButtonLabel) {
+    public Intent createConfirmFactoryResetCredentialIntent(
+            CharSequence title, CharSequence description, CharSequence alternateButtonLabel) {
         if (!LockPatternUtils.frpCredentialEnabled(this.mContext)) {
             Log.w(TAG, "Factory reset credentials not supported.");
             throw new UnsupportedOperationException("not supported on this device");
         }
-        if (Settings.Global.getInt(this.mContext.getContentResolver(), "device_provisioned", 0) != 0) {
+        if (Settings.Global.getInt(this.mContext.getContentResolver(), "device_provisioned", 0)
+                != 0) {
             Log.e(TAG, "Factory reset credential cannot be verified after provisioning.");
             throw new IllegalStateException("must not be provisioned yet");
         }
         try {
-            IPersistentDataBlockService pdb = IPersistentDataBlockService.Stub.asInterface(ServiceManager.getService(Context.PERSISTENT_DATA_BLOCK_SERVICE));
+            IPersistentDataBlockService pdb =
+                    IPersistentDataBlockService.Stub.asInterface(
+                            ServiceManager.getService(Context.PERSISTENT_DATA_BLOCK_SERVICE));
             if (pdb == null) {
                 Log.e(TAG, "No persistent data block service");
                 throw new UnsupportedOperationException("not supported on this device");
@@ -192,8 +219,23 @@ public class KeyguardManager {
     }
 
     @SystemApi
-    public Intent createConfirmDeviceCredentialForRemoteValidationIntent(RemoteLockscreenValidationSession session, ComponentName remoteLockscreenValidationServiceComponent, CharSequence title, CharSequence description, CharSequence checkboxLabel, CharSequence alternateButtonLabel) {
-        Intent intent = new Intent(ACTION_CONFIRM_REMOTE_DEVICE_CREDENTIAL).putExtra(EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION, session).putExtra(Intent.EXTRA_COMPONENT_NAME, remoteLockscreenValidationServiceComponent).putExtra(EXTRA_TITLE, title).putExtra(EXTRA_DESCRIPTION, description).putExtra(EXTRA_CHECKBOX_LABEL, checkboxLabel).putExtra(EXTRA_ALTERNATE_BUTTON_LABEL, alternateButtonLabel);
+    public Intent createConfirmDeviceCredentialForRemoteValidationIntent(
+            RemoteLockscreenValidationSession session,
+            ComponentName remoteLockscreenValidationServiceComponent,
+            CharSequence title,
+            CharSequence description,
+            CharSequence checkboxLabel,
+            CharSequence alternateButtonLabel) {
+        Intent intent =
+                new Intent(ACTION_CONFIRM_REMOTE_DEVICE_CREDENTIAL)
+                        .putExtra(EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION, session)
+                        .putExtra(
+                                Intent.EXTRA_COMPONENT_NAME,
+                                remoteLockscreenValidationServiceComponent)
+                        .putExtra(EXTRA_TITLE, title)
+                        .putExtra(EXTRA_DESCRIPTION, description)
+                        .putExtra(EXTRA_CHECKBOX_LABEL, checkboxLabel)
+                        .putExtra(EXTRA_ALTERNATE_BUTTON_LABEL, alternateButtonLabel);
         intent.setPackage(getSettingsPackageForIntent(intent));
         return intent;
     }
@@ -217,7 +259,8 @@ public class KeyguardManager {
     }
 
     private String getSettingsPackageForIntent(Intent intent) {
-        List<ResolveInfo> resolveInfos = this.mContext.getPackageManager().queryIntentActivities(intent, 1048576);
+        List<ResolveInfo> resolveInfos =
+                this.mContext.getPackageManager().queryIntentActivities(intent, 1048576);
         if (0 < resolveInfos.size()) {
             return resolveInfos.get(0).activityInfo.packageName;
         }
@@ -240,7 +283,8 @@ public class KeyguardManager {
         public void disableKeyguard() {
             try {
                 EventLog.writeEvent(EventLogTags.SCREEN_DISABLED, this.mTag, 0);
-                KeyguardManager.this.mWM.disableKeyguard(this.mToken, this.mTag, KeyguardManager.this.mContext.getUserId());
+                KeyguardManager.this.mWM.disableKeyguard(
+                        this.mToken, this.mTag, KeyguardManager.this.mContext.getUserId());
             } catch (RemoteException e) {
             }
         }
@@ -248,21 +292,19 @@ public class KeyguardManager {
         public void reenableKeyguard() {
             try {
                 EventLog.writeEvent(EventLogTags.SCREEN_DISABLED, this.mTag, 1);
-                KeyguardManager.this.mWM.reenableKeyguard(this.mToken, KeyguardManager.this.mContext.getUserId());
+                KeyguardManager.this.mWM.reenableKeyguard(
+                        this.mToken, KeyguardManager.this.mContext.getUserId());
             } catch (RemoteException e) {
             }
         }
     }
 
-    public static abstract class KeyguardDismissCallback {
-        public void onDismissError() {
-        }
+    public abstract static class KeyguardDismissCallback {
+        public void onDismissError() {}
 
-        public void onDismissSucceeded() {
-        }
+        public void onDismissSucceeded() {}
 
-        public void onDismissCancelled() {
-        }
+        public void onDismissCancelled() {}
     }
 
     KeyguardManager(Context context) throws ServiceManager.ServiceNotFoundException {
@@ -332,67 +374,89 @@ public class KeyguardManager {
     }
 
     @SystemApi
-    public void requestDismissKeyguard(final Activity activity, CharSequence message, final KeyguardDismissCallback callback) {
-        EventLog.writeEvent(EventLogTags.DISMISS_SCREEN, Integer.valueOf(Process.myPid()), "requestDismissKeyguard");
-        ActivityClient.getInstance().dismissKeyguard(activity.getActivityToken(), new IKeyguardDismissCallback.Stub() { // from class: android.app.KeyguardManager.2
-            @Override // com.android.internal.policy.IKeyguardDismissCallback
-            public void onDismissError() throws RemoteException {
-                if (callback != null && !activity.isDestroyed()) {
-                    Handler handler = activity.mHandler;
-                    final KeyguardDismissCallback keyguardDismissCallback = callback;
-                    Objects.requireNonNull(keyguardDismissCallback);
-                    handler.post(new Runnable() { // from class: android.app.KeyguardManager$2$$ExternalSyntheticLambda2
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            KeyguardManager.KeyguardDismissCallback.this.onDismissError();
-                        }
-                    });
-                }
-            }
+    public void requestDismissKeyguard(
+            final Activity activity, CharSequence message, final KeyguardDismissCallback callback) {
+        EventLog.writeEvent(
+                EventLogTags.DISMISS_SCREEN,
+                Integer.valueOf(Process.myPid()),
+                "requestDismissKeyguard");
+        ActivityClient.getInstance()
+                .dismissKeyguard(
+                        activity.getActivityToken(),
+                        new IKeyguardDismissCallback
+                                .Stub() { // from class: android.app.KeyguardManager.2
+                            @Override // com.android.internal.policy.IKeyguardDismissCallback
+                            public void onDismissError() throws RemoteException {
+                                if (callback != null && !activity.isDestroyed()) {
+                                    Handler handler = activity.mHandler;
+                                    final KeyguardDismissCallback keyguardDismissCallback =
+                                            callback;
+                                    Objects.requireNonNull(keyguardDismissCallback);
+                                    handler.post(
+                                            new Runnable() { // from class:
+                                                // android.app.KeyguardManager$2$$ExternalSyntheticLambda2
+                                                @Override // java.lang.Runnable
+                                                public final void run() {
+                                                    KeyguardManager.KeyguardDismissCallback.this
+                                                            .onDismissError();
+                                                }
+                                            });
+                                }
+                            }
 
-            @Override // com.android.internal.policy.IKeyguardDismissCallback
-            public void onDismissSucceeded() throws RemoteException {
-                if (callback != null && !activity.isDestroyed()) {
-                    Handler handler = activity.mHandler;
-                    final KeyguardDismissCallback keyguardDismissCallback = callback;
-                    Objects.requireNonNull(keyguardDismissCallback);
-                    handler.post(new Runnable() { // from class: android.app.KeyguardManager$2$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            KeyguardManager.KeyguardDismissCallback.this.onDismissSucceeded();
-                        }
-                    });
-                }
-            }
+                            @Override // com.android.internal.policy.IKeyguardDismissCallback
+                            public void onDismissSucceeded() throws RemoteException {
+                                if (callback != null && !activity.isDestroyed()) {
+                                    Handler handler = activity.mHandler;
+                                    final KeyguardDismissCallback keyguardDismissCallback =
+                                            callback;
+                                    Objects.requireNonNull(keyguardDismissCallback);
+                                    handler.post(
+                                            new Runnable() { // from class:
+                                                // android.app.KeyguardManager$2$$ExternalSyntheticLambda0
+                                                @Override // java.lang.Runnable
+                                                public final void run() {
+                                                    KeyguardManager.KeyguardDismissCallback.this
+                                                            .onDismissSucceeded();
+                                                }
+                                            });
+                                }
+                            }
 
-            @Override // com.android.internal.policy.IKeyguardDismissCallback
-            public void onDismissCancelled() throws RemoteException {
-                if (callback != null && !activity.isDestroyed()) {
-                    Handler handler = activity.mHandler;
-                    final KeyguardDismissCallback keyguardDismissCallback = callback;
-                    Objects.requireNonNull(keyguardDismissCallback);
-                    handler.post(new Runnable() { // from class: android.app.KeyguardManager$2$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            KeyguardManager.KeyguardDismissCallback.this.onDismissCancelled();
-                        }
-                    });
-                }
-            }
-        }, message);
+                            @Override // com.android.internal.policy.IKeyguardDismissCallback
+                            public void onDismissCancelled() throws RemoteException {
+                                if (callback != null && !activity.isDestroyed()) {
+                                    Handler handler = activity.mHandler;
+                                    final KeyguardDismissCallback keyguardDismissCallback =
+                                            callback;
+                                    Objects.requireNonNull(keyguardDismissCallback);
+                                    handler.post(
+                                            new Runnable() { // from class:
+                                                // android.app.KeyguardManager$2$$ExternalSyntheticLambda1
+                                                @Override // java.lang.Runnable
+                                                public final void run() {
+                                                    KeyguardManager.KeyguardDismissCallback.this
+                                                            .onDismissCancelled();
+                                                }
+                                            });
+                                }
+                            }
+                        },
+                        message);
     }
 
     @Deprecated
     public void exitKeyguardSecurely(final OnKeyguardExitResult callback) {
         try {
-            this.mWM.exitKeyguardSecurely(new IOnKeyguardExitResult.Stub() { // from class: android.app.KeyguardManager.3
-                @Override // android.view.IOnKeyguardExitResult
-                public void onKeyguardExitResult(boolean success) throws RemoteException {
-                    if (callback != null) {
-                        callback.onKeyguardExitResult(success);
-                    }
-                }
-            });
+            this.mWM.exitKeyguardSecurely(
+                    new IOnKeyguardExitResult.Stub() { // from class: android.app.KeyguardManager.3
+                        @Override // android.view.IOnKeyguardExitResult
+                        public void onKeyguardExitResult(boolean success) throws RemoteException {
+                            if (callback != null) {
+                                callback.onKeyguardExitResult(success);
+                            }
+                        }
+                    });
         } catch (RemoteException e) {
         }
     }
@@ -415,10 +479,13 @@ public class KeyguardManager {
         }
         Objects.requireNonNull(password, "Password cannot be null.");
         int complexity2 = PasswordMetrics.sanitizeComplexityLevel(complexity);
-        PasswordMetrics adminMetrics = this.mLockPatternUtils.getRequestedPasswordMetrics(this.mContext.getUserId());
+        PasswordMetrics adminMetrics =
+                this.mLockPatternUtils.getRequestedPasswordMetrics(this.mContext.getUserId());
         LockscreenCredential credential = createLockscreenCredential(lockType, password);
         try {
-            boolean z = PasswordMetrics.validateCredential(adminMetrics, complexity2, credential).size() == 0;
+            boolean z =
+                    PasswordMetrics.validateCredential(adminMetrics, complexity2, credential).size()
+                            == 0;
             if (credential != null) {
                 credential.close();
             }
@@ -441,8 +508,10 @@ public class KeyguardManager {
             return -1;
         }
         int complexity2 = PasswordMetrics.sanitizeComplexityLevel(complexity);
-        PasswordMetrics adminMetrics = this.mLockPatternUtils.getRequestedPasswordMetrics(this.mContext.getUserId());
-        PasswordMetrics minMetrics = PasswordMetrics.applyComplexity(adminMetrics, isPin, complexity2);
+        PasswordMetrics adminMetrics =
+                this.mLockPatternUtils.getRequestedPasswordMetrics(this.mContext.getUserId());
+        PasswordMetrics minMetrics =
+                PasswordMetrics.applyComplexity(adminMetrics, isPin, complexity2);
         return minMetrics.length;
     }
 
@@ -465,7 +534,9 @@ public class KeyguardManager {
             try {
                 LockscreenCredential credential = createLockscreenCredential(lockType, password);
                 try {
-                    success = this.mLockPatternUtils.setLockCredential(credential, LockscreenCredential.createNone(), userId);
+                    success =
+                            this.mLockPatternUtils.setLockCredential(
+                                    credential, LockscreenCredential.createNone(), userId);
                     if (credential != null) {
                         credential.close();
                     }
@@ -490,13 +561,18 @@ public class KeyguardManager {
     }
 
     @SystemApi
-    public long addWeakEscrowToken(byte[] token, UserHandle user, Executor executor, WeakEscrowTokenActivatedListener listener) {
+    public long addWeakEscrowToken(
+            byte[] token,
+            UserHandle user,
+            Executor executor,
+            WeakEscrowTokenActivatedListener listener) {
         Objects.requireNonNull(token, "Token cannot be null.");
         Objects.requireNonNull(user, "User cannot be null.");
         Objects.requireNonNull(executor, "Executor cannot be null.");
         Objects.requireNonNull(listener, "Listener cannot be null.");
         int userId = user.getIdentifier();
-        IWeakEscrowTokenActivatedListener internalListener = new AnonymousClass4(executor, listener);
+        IWeakEscrowTokenActivatedListener internalListener =
+                new AnonymousClass4(executor, listener);
         return this.mLockPatternUtils.addWeakEscrowToken(token, userId, internalListener);
     }
 
@@ -505,7 +581,9 @@ public class KeyguardManager {
         final /* synthetic */ Executor val$executor;
         final /* synthetic */ WeakEscrowTokenActivatedListener val$listener;
 
-        AnonymousClass4(Executor executor, WeakEscrowTokenActivatedListener weakEscrowTokenActivatedListener) {
+        AnonymousClass4(
+                Executor executor,
+                WeakEscrowTokenActivatedListener weakEscrowTokenActivatedListener) {
             this.val$executor = executor;
             this.val$listener = weakEscrowTokenActivatedListener;
         }
@@ -516,13 +594,17 @@ public class KeyguardManager {
             long restoreToken = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
-                final WeakEscrowTokenActivatedListener weakEscrowTokenActivatedListener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.app.KeyguardManager$4$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        KeyguardManager.WeakEscrowTokenActivatedListener.this.onWeakEscrowTokenActivated(handle, user);
-                    }
-                });
+                final WeakEscrowTokenActivatedListener weakEscrowTokenActivatedListener =
+                        this.val$listener;
+                executor.execute(
+                        new Runnable() { // from class:
+                            // android.app.KeyguardManager$4$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                KeyguardManager.WeakEscrowTokenActivatedListener.this
+                                        .onWeakEscrowTokenActivated(handle, user);
+                            }
+                        });
                 Binder.restoreCallingIdentity(restoreToken);
                 Log.i(KeyguardManager.TAG, "Weak escrow token activated.");
             } catch (Throwable th) {
@@ -552,10 +634,14 @@ public class KeyguardManager {
     }
 
     @SystemApi
-    public boolean registerWeakEscrowTokenRemovedListener(Executor executor, WeakEscrowTokenRemovedListener listener) {
+    public boolean registerWeakEscrowTokenRemovedListener(
+            Executor executor, WeakEscrowTokenRemovedListener listener) {
         Objects.requireNonNull(listener, "Listener cannot be null.");
         Objects.requireNonNull(executor, "Executor cannot be null.");
-        Preconditions.checkArgument(!this.mListeners.containsKey(listener), "Listener already registered: %s", listener);
+        Preconditions.checkArgument(
+                !this.mListeners.containsKey(listener),
+                "Listener already registered: %s",
+                listener);
         IWeakEscrowTokenRemovedListener internalListener = new AnonymousClass5(executor, listener);
         if (this.mLockPatternUtils.registerWeakEscrowTokenRemovedListener(internalListener)) {
             this.mListeners.put(listener, internalListener);
@@ -570,7 +656,8 @@ public class KeyguardManager {
         final /* synthetic */ Executor val$executor;
         final /* synthetic */ WeakEscrowTokenRemovedListener val$listener;
 
-        AnonymousClass5(Executor executor, WeakEscrowTokenRemovedListener weakEscrowTokenRemovedListener) {
+        AnonymousClass5(
+                Executor executor, WeakEscrowTokenRemovedListener weakEscrowTokenRemovedListener) {
             this.val$executor = executor;
             this.val$listener = weakEscrowTokenRemovedListener;
         }
@@ -581,13 +668,17 @@ public class KeyguardManager {
             long token = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
-                final WeakEscrowTokenRemovedListener weakEscrowTokenRemovedListener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.app.KeyguardManager$5$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        KeyguardManager.WeakEscrowTokenRemovedListener.this.onWeakEscrowTokenRemoved(handle, user);
-                    }
-                });
+                final WeakEscrowTokenRemovedListener weakEscrowTokenRemovedListener =
+                        this.val$listener;
+                executor.execute(
+                        new Runnable() { // from class:
+                            // android.app.KeyguardManager$5$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                KeyguardManager.WeakEscrowTokenRemovedListener.this
+                                        .onWeakEscrowTokenRemoved(handle, user);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -595,7 +686,8 @@ public class KeyguardManager {
     }
 
     @SystemApi
-    public boolean unregisterWeakEscrowTokenRemovedListener(WeakEscrowTokenRemovedListener listener) {
+    public boolean unregisterWeakEscrowTokenRemovedListener(
+            WeakEscrowTokenRemovedListener listener) {
         Objects.requireNonNull(listener, "Listener cannot be null.");
         IWeakEscrowTokenRemovedListener internalListener = this.mListeners.get(listener);
         Preconditions.checkArgument(internalListener != null, "Listener was not registered");
@@ -607,14 +699,20 @@ public class KeyguardManager {
         return false;
     }
 
-    public boolean setLock(int newLockType, byte[] newPassword, int currentLockType, byte[] currentPassword) {
+    public boolean setLock(
+            int newLockType, byte[] newPassword, int currentLockType, byte[] currentPassword) {
         int userId = this.mContext.getUserId();
-        LockscreenCredential currentCredential = createLockscreenCredential(currentLockType, currentPassword);
+        LockscreenCredential currentCredential =
+                createLockscreenCredential(currentLockType, currentPassword);
         try {
-            LockscreenCredential newCredential = createLockscreenCredential(newLockType, newPassword);
+            LockscreenCredential newCredential =
+                    createLockscreenCredential(newLockType, newPassword);
             try {
-                PasswordMetrics adminMetrics = this.mLockPatternUtils.getRequestedPasswordMetrics(this.mContext.getUserId());
-                List<PasswordValidationError> errors = PasswordMetrics.validateCredential(adminMetrics, 0, newCredential);
+                PasswordMetrics adminMetrics =
+                        this.mLockPatternUtils.getRequestedPasswordMetrics(
+                                this.mContext.getUserId());
+                List<PasswordValidationError> errors =
+                        PasswordMetrics.validateCredential(adminMetrics, 0, newCredential);
                 if (!errors.isEmpty()) {
                     Log.e(TAG, "New credential is not valid: " + errors.get(0));
                     if (newCredential != null) {
@@ -625,7 +723,9 @@ public class KeyguardManager {
                     }
                     return false;
                 }
-                boolean lockCredential = this.mLockPatternUtils.setLockCredential(newCredential, currentCredential, userId);
+                boolean lockCredential =
+                        this.mLockPatternUtils.setLockCredential(
+                                newCredential, currentCredential, userId);
                 if (newCredential != null) {
                     newCredential.close();
                 }
@@ -650,7 +750,9 @@ public class KeyguardManager {
     public boolean checkLock(int lockType, byte[] password) {
         LockscreenCredential credential = createLockscreenCredential(lockType, password);
         try {
-            VerifyCredentialResponse response = this.mLockPatternUtils.verifyCredential(credential, this.mContext.getUserId(), 0);
+            VerifyCredentialResponse response =
+                    this.mLockPatternUtils.verifyCredential(
+                            credential, this.mContext.getUserId(), 0);
             if (response != null) {
                 boolean z = response.getResponseCode() == 0;
                 if (credential != null) {
@@ -703,7 +805,8 @@ public class KeyguardManager {
         }
     }
 
-    public void addKeyguardLockedStateListener(Executor executor, KeyguardLockedStateListener listener) {
+    public void addKeyguardLockedStateListener(
+            Executor executor, KeyguardLockedStateListener listener) {
         synchronized (this.mKeyguardLockedStateListeners) {
             this.mKeyguardLockedStateListeners.put(listener, executor);
             if (this.mKeyguardLockedStateListeners.size() > 1) {
@@ -732,7 +835,10 @@ public class KeyguardManager {
 
     public void semDismissKeyguard() {
         try {
-            EventLog.writeEvent(EventLogTags.DISMISS_SCREEN, Integer.valueOf(Process.myPid()), "semDismissKeyguard");
+            EventLog.writeEvent(
+                    EventLogTags.DISMISS_SCREEN,
+                    Integer.valueOf(Process.myPid()),
+                    "semDismissKeyguard");
             this.mWM.dismissKeyguard(null, null);
         } catch (RemoteException e) {
         }
@@ -748,7 +854,10 @@ public class KeyguardManager {
 
     public void semSetPendingIntentAfterUnlock(PendingIntent p, Intent fillInIntent) {
         try {
-            EventLog.writeEvent(EventLogTags.PENDING_INTENT_AFTER_UNLOCK, Integer.valueOf(Process.myPid()), "pendingIntentAfterUnlock");
+            EventLog.writeEvent(
+                    EventLogTags.PENDING_INTENT_AFTER_UNLOCK,
+                    Integer.valueOf(Process.myPid()),
+                    "pendingIntentAfterUnlock");
             this.mWM.setPendingIntentAfterUnlock(p, fillInIntent);
         } catch (RemoteException e) {
         }

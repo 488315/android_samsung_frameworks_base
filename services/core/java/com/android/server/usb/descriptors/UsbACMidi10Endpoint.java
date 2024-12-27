@@ -26,7 +26,11 @@ public final class UsbACMidi10Endpoint extends UsbACEndpoint {
     @Override // com.android.server.usb.descriptors.UsbDescriptor
     public final void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
-        textReportCanvas.writeHeader("ACMidi10Endpoint: " + TextReportCanvas.getHexString(this.mType) + " Length: " + this.mLength);
+        textReportCanvas.writeHeader(
+                "ACMidi10Endpoint: "
+                        + TextReportCanvas.getHexString(this.mType)
+                        + " Length: "
+                        + this.mLength);
         textReportCanvas.openList();
         textReportCanvas.writeListItem("" + ((int) this.mNumJacks) + " Jacks.");
         for (int i = 0; i < this.mNumJacks; i++) {

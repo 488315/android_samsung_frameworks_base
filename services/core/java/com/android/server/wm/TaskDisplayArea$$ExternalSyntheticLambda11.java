@@ -8,7 +8,8 @@ public final /* synthetic */ class TaskDisplayArea$$ExternalSyntheticLambda11 im
     public final /* synthetic */ ActivityRecord f$0;
     public final /* synthetic */ int[] f$1;
 
-    public /* synthetic */ TaskDisplayArea$$ExternalSyntheticLambda11(ActivityRecord activityRecord, int[] iArr) {
+    public /* synthetic */ TaskDisplayArea$$ExternalSyntheticLambda11(
+            ActivityRecord activityRecord, int[] iArr) {
         this.f$0 = activityRecord;
         this.f$1 = iArr;
     }

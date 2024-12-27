@@ -14,10 +14,6 @@ import android.hardware.biometrics.ITestSession;
 import android.hardware.biometrics.ITestSessionCallback;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.biometrics.fingerprint.PointerContext;
-import android.hardware.fingerprint.FingerprintAuthenticateOptions;
-import android.hardware.fingerprint.FingerprintManager;
-import android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback;
-import android.hardware.fingerprint.IFingerprintServiceReceiver;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.CancellationSignal;
@@ -32,11 +28,14 @@ import android.security.identity.IdentityCredential;
 import android.security.identity.PresentationSession;
 import android.util.Slog;
 import android.view.WindowManager;
+
 import com.android.internal.R;
 import com.android.internal.util.FrameworkStatsLog;
+
 import com.samsung.android.bio.fingerprint.ISemFingerprintAodController;
 import com.samsung.android.bio.fingerprint.ISemFingerprintRequestCallback;
 import com.samsung.android.bio.fingerprint.SemFingerprintManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.nio.charset.StandardCharsets;
@@ -44,6 +43,7 @@ import java.security.Signature;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyAgreement;
 import javax.crypto.Mac;
@@ -76,32 +76,28 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     private List<FingerprintSensorPropertiesInternal> mProps = new ArrayList();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AuthenticationFlag {
-    }
+    public @interface AuthenticationFlag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EnrollReason {
-    }
+    public @interface EnrollReason {}
 
     public interface GenerateChallengeCallback {
         void onChallengeGenerated(int i, int i2, long j);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SecurityLevel {
-    }
+    public @interface SecurityLevel {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SensorPosition {
-    }
+    public @interface SensorPosition {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UdfpsUiEvent {
-    }
+    public @interface UdfpsUiEvent {}
 
     public List<SensorProperties> getSensorProperties() {
         List<SensorProperties> properties = new ArrayList<>();
-        List<FingerprintSensorPropertiesInternal> internalProperties = getSensorPropertiesInternal();
+        List<FingerprintSensorPropertiesInternal> internalProperties =
+                getSensorPropertiesInternal();
         for (FingerprintSensorPropertiesInternal internalProp : internalProperties) {
             properties.add(FingerprintSensorProperties.from(internalProp));
         }
@@ -110,21 +106,29 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
 
     public BiometricTestSession createTestSession(int sensorId) {
         try {
-            return new BiometricTestSession(this.mContext, sensorId, new BiometricTestSession.TestSessionProvider() { // from class: android.hardware.fingerprint.FingerprintManager$$ExternalSyntheticLambda2
-                @Override // android.hardware.biometrics.BiometricTestSession.TestSessionProvider
-                public final ITestSession createTestSession(Context context, int i, ITestSessionCallback iTestSessionCallback) {
-                    ITestSession lambda$createTestSession$0;
-                    lambda$createTestSession$0 = FingerprintManager.this.lambda$createTestSession$0(context, i, iTestSessionCallback);
-                    return lambda$createTestSession$0;
-                }
-            });
+            return new BiometricTestSession(
+                    this.mContext,
+                    sensorId,
+                    new BiometricTestSession.TestSessionProvider() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$$ExternalSyntheticLambda2
+                        @Override // android.hardware.biometrics.BiometricTestSession.TestSessionProvider
+                        public final ITestSession createTestSession(
+                                Context context, int i, ITestSessionCallback iTestSessionCallback) {
+                            ITestSession lambda$createTestSession$0;
+                            lambda$createTestSession$0 =
+                                    FingerprintManager.this.lambda$createTestSession$0(
+                                            context, i, iTestSessionCallback);
+                            return lambda$createTestSession$0;
+                        }
+                    });
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ ITestSession lambda$createTestSession$0(Context context, int sensorId1, ITestSessionCallback callback) throws RemoteException {
+    public /* synthetic */ ITestSession lambda$createTestSession$0(
+            Context context, int sensorId1, ITestSessionCallback callback) throws RemoteException {
         return this.mService.createTestSession(sensorId1, callback, context.getOpPackageName());
     }
 
@@ -137,7 +141,9 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
 
         @Override // android.os.CancellationSignal.OnCancelListener
         public void onCancel() {
-            Slog.d(FingerprintManager.TAG, "Cancel fingerprint enrollment requested for: " + this.mAuthRequestId);
+            Slog.d(
+                    FingerprintManager.TAG,
+                    "Cancel fingerprint enrollment requested for: " + this.mAuthRequestId);
             FingerprintManager.this.cancelEnrollment(this.mAuthRequestId);
         }
     }
@@ -151,12 +157,15 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
 
         @Override // android.os.CancellationSignal.OnCancelListener
         public void onCancel() {
-            Slog.d(FingerprintManager.TAG, "Cancel fingerprint authentication requested for: " + this.mAuthRequestId);
+            Slog.d(
+                    FingerprintManager.TAG,
+                    "Cancel fingerprint authentication requested for: " + this.mAuthRequestId);
             FingerprintManager.this.cancelAuthentication(this.mAuthRequestId);
         }
     }
 
-    private class OnFingerprintDetectionCancelListener implements CancellationSignal.OnCancelListener {
+    private class OnFingerprintDetectionCancelListener
+            implements CancellationSignal.OnCancelListener {
         private final long mAuthRequestId;
 
         OnFingerprintDetectionCancelListener(long id) {
@@ -165,7 +174,9 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
 
         @Override // android.os.CancellationSignal.OnCancelListener
         public void onCancel() {
-            Slog.d(FingerprintManager.TAG, "Cancel fingerprint detect requested for: " + this.mAuthRequestId);
+            Slog.d(
+                    FingerprintManager.TAG,
+                    "Cancel fingerprint detect requested for: " + this.mAuthRequestId);
             FingerprintManager.this.cancelFingerprintDetect(this.mAuthRequestId);
         }
     }
@@ -223,7 +234,11 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         private boolean mIsStrongBiometric;
         private int mUserId;
 
-        public AuthenticationResult(CryptoObject crypto, Fingerprint fingerprint, int userId, boolean isStrongBiometric) {
+        public AuthenticationResult(
+                CryptoObject crypto,
+                Fingerprint fingerprint,
+                int userId,
+                boolean isStrongBiometric) {
             this.mCryptoObject = crypto;
             this.mFingerprint = fingerprint;
             this.mUserId = userId;
@@ -248,79 +263,61 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     }
 
     @Deprecated
-    public static abstract class AuthenticationCallback extends BiometricAuthenticator.AuthenticationCallback {
+    public abstract static class AuthenticationCallback
+            extends BiometricAuthenticator.AuthenticationCallback {
         @Override // android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback
-        public void onAuthenticationError(int errorCode, CharSequence errString) {
-        }
-
-        @Override // android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback
-        public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
-        }
-
-        public void onAuthenticationSucceeded(AuthenticationResult result) {
-        }
+        public void onAuthenticationError(int errorCode, CharSequence errString) {}
 
         @Override // android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback
-        public void onAuthenticationFailed() {
-        }
+        public void onAuthenticationHelp(int helpCode, CharSequence helpString) {}
+
+        public void onAuthenticationSucceeded(AuthenticationResult result) {}
 
         @Override // android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback
-        public void onAuthenticationAcquired(int acquireInfo) {
-        }
+        public void onAuthenticationFailed() {}
 
-        public void onUdfpsPointerDown(int sensorId) {
-        }
+        @Override // android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback
+        public void onAuthenticationAcquired(int acquireInfo) {}
 
-        public void onUdfpsPointerUp(int sensorId) {
-        }
+        public void onUdfpsPointerDown(int sensorId) {}
+
+        public void onUdfpsPointerUp(int sensorId) {}
     }
 
     public interface FingerprintDetectionCallback {
         void onFingerprintDetected(int i, int i2, boolean z);
 
-        default void onDetectionError(int errorMsgId) {
-        }
+        default void onDetectionError(int errorMsgId) {}
     }
 
-    public static abstract class EnrollmentCallback {
-        public void onEnrollmentError(int errMsgId, CharSequence errString) {
-        }
+    public abstract static class EnrollmentCallback {
+        public void onEnrollmentError(int errMsgId, CharSequence errString) {}
 
-        public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
-        }
+        public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {}
 
-        public void onEnrollmentProgress(int remaining) {
-        }
+        public void onEnrollmentProgress(int remaining) {}
 
-        public void onAcquired(boolean isAcquiredGood) {
-        }
+        public void onAcquired(boolean isAcquiredGood) {}
 
-        public void onUdfpsPointerDown(int sensorId) {
-        }
+        public void onUdfpsPointerDown(int sensorId) {}
 
-        public void onUdfpsPointerUp(int sensorId) {
-        }
+        public void onUdfpsPointerUp(int sensorId) {}
 
-        public void onUdfpsOverlayShown() {
-        }
+        public void onUdfpsOverlayShown() {}
     }
 
-    public static abstract class RemovalCallback {
-        public void onRemovalError(Fingerprint fp, int errMsgId, CharSequence errString) {
-        }
+    public abstract static class RemovalCallback {
+        public void onRemovalError(Fingerprint fp, int errMsgId, CharSequence errString) {}
 
-        public void onRemovalSucceeded(Fingerprint fp, int remaining) {
-        }
+        public void onRemovalSucceeded(Fingerprint fp, int remaining) {}
     }
 
-    public static abstract class LockoutResetCallback {
-        public void onLockoutReset(int sensorId) {
-        }
+    public abstract static class LockoutResetCallback {
+        public void onLockoutReset(int sensorId) {}
     }
 
-    public static abstract class SemRequestCallback {
-        public void onRequested(int msgId) {
-        }
+    public abstract static class SemRequestCallback {
+        public void onRequested(int msgId) {}
     }
 
     private void useHandler(Handler handler) {
@@ -334,26 +331,67 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     }
 
     @Deprecated
-    public void authenticate(CryptoObject crypto, CancellationSignal cancel, int flags, AuthenticationCallback callback, Handler handler) {
+    public void authenticate(
+            CryptoObject crypto,
+            CancellationSignal cancel,
+            int flags,
+            AuthenticationCallback callback,
+            Handler handler) {
         authenticate(crypto, cancel, callback, handler, -1, this.mContext.getUserId(), flags);
     }
 
     @Deprecated
-    public void authenticate(CryptoObject crypto, CancellationSignal cancel, AuthenticationCallback callback, Handler handler, int userId) {
+    public void authenticate(
+            CryptoObject crypto,
+            CancellationSignal cancel,
+            AuthenticationCallback callback,
+            Handler handler,
+            int userId) {
         authenticate(crypto, cancel, callback, handler, -1, userId, 0);
     }
 
     @Deprecated
-    public void authenticate(CryptoObject crypto, CancellationSignal cancel, AuthenticationCallback callback, Handler handler, int sensorId, int userId, int flags) {
-        authenticate(crypto, cancel, callback, handler, new FingerprintAuthenticateOptions.Builder().setSensorId(sensorId).setUserId(userId).setIgnoreEnrollmentState(flags != 0).build());
+    public void authenticate(
+            CryptoObject crypto,
+            CancellationSignal cancel,
+            AuthenticationCallback callback,
+            Handler handler,
+            int sensorId,
+            int userId,
+            int flags) {
+        authenticate(
+                crypto,
+                cancel,
+                callback,
+                handler,
+                new FingerprintAuthenticateOptions.Builder()
+                        .setSensorId(sensorId)
+                        .setUserId(userId)
+                        .setIgnoreEnrollmentState(flags != 0)
+                        .build());
     }
 
-    public void authenticate(CryptoObject crypto, CancellationSignal cancel, AuthenticationCallback callback, Handler handler, FingerprintAuthenticateOptions options) {
+    public void authenticate(
+            CryptoObject crypto,
+            CancellationSignal cancel,
+            AuthenticationCallback callback,
+            Handler handler,
+            FingerprintAuthenticateOptions options) {
         authenticate(crypto, cancel, callback, handler, options, false);
     }
 
-    public void authenticate(CryptoObject crypto, CancellationSignal cancel, AuthenticationCallback callback, Handler handler, FingerprintAuthenticateOptions options, boolean allowEvenIfEncryptedOrLockdown) {
-        FrameworkStatsLog.write(356, 1, this.mContext.getApplicationInfo().uid, this.mContext.getApplicationInfo().targetSdkVersion);
+    public void authenticate(
+            CryptoObject crypto,
+            CancellationSignal cancel,
+            AuthenticationCallback callback,
+            Handler handler,
+            FingerprintAuthenticateOptions options,
+            boolean allowEvenIfEncryptedOrLockdown) {
+        FrameworkStatsLog.write(
+                356,
+                1,
+                this.mContext.getApplicationInfo().uid,
+                this.mContext.getApplicationInfo().targetSdkVersion);
         if (callback == null) {
             throw new IllegalArgumentException("Must supply an authentication callback");
         }
@@ -365,24 +403,37 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         options.setAttributionTag(this.mContext.getAttributionTag());
         if (this.mService != null) {
             try {
-                final FingerprintCallback fingerprintCallback = new FingerprintCallback(callback, crypto);
+                final FingerprintCallback fingerprintCallback =
+                        new FingerprintCallback(callback, crypto);
                 try {
                     useHandler(handler);
                     long operationId = crypto != null ? crypto.getOpId() : 0L;
                     Bundle extraInfo = new Bundle();
                     SemFingerprintManager.setExtraInfo(this.mContext, extraInfo);
-                    extraInfo.putBoolean(SemFingerprintManager.EXTRA_KEY_ALLOW_AUTH_EVEN_IF_ENCRYPTED_OR_LOCKDOWN, allowEvenIfEncryptedOrLockdown);
-                    long authId = this.mService.semAuthenticate(this.mToken, operationId, new FingerprintServiceReceiver(fingerprintCallback), options, extraInfo);
+                    extraInfo.putBoolean(
+                            SemFingerprintManager
+                                    .EXTRA_KEY_ALLOW_AUTH_EVEN_IF_ENCRYPTED_OR_LOCKDOWN,
+                            allowEvenIfEncryptedOrLockdown);
+                    long authId =
+                            this.mService.semAuthenticate(
+                                    this.mToken,
+                                    operationId,
+                                    new FingerprintServiceReceiver(fingerprintCallback),
+                                    options,
+                                    extraInfo);
                     if (cancel != null) {
                         cancel.setOnCancelListener(new OnAuthenticationCancelListener(authId));
                     }
                     if (authId < 0) {
-                        this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$$ExternalSyntheticLambda4
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                FingerprintManager.this.lambda$authenticate$1(fingerprintCallback);
-                            }
-                        });
+                        this.mExecutor.execute(
+                                new Runnable() { // from class:
+                                    // android.hardware.fingerprint.FingerprintManager$$ExternalSyntheticLambda4
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        FingerprintManager.this.lambda$authenticate$1(
+                                                fingerprintCallback);
+                                    }
+                                });
                     }
                 } catch (RemoteException e) {
                     e = e;
@@ -400,7 +451,10 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         fingerprintCallback.sendErrorResult(this.mContext, 5, 0);
     }
 
-    public void detectFingerprint(CancellationSignal cancel, FingerprintDetectionCallback callback, FingerprintAuthenticateOptions options) {
+    public void detectFingerprint(
+            CancellationSignal cancel,
+            FingerprintDetectionCallback callback,
+            FingerprintAuthenticateOptions options) {
         if (this.mService == null) {
             return;
         }
@@ -412,7 +466,11 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         options.setAttributionTag(this.mContext.getAttributionTag());
         FingerprintCallback fingerprintCallback = new FingerprintCallback(callback);
         try {
-            long authId = this.mService.detectFingerprint(this.mToken, new FingerprintServiceReceiver(fingerprintCallback), options);
+            long authId =
+                    this.mService.detectFingerprint(
+                            this.mToken,
+                            new FingerprintServiceReceiver(fingerprintCallback),
+                            options);
             cancel.setOnCancelListener(new OnFingerprintDetectionCancelListener(authId));
         } catch (RemoteException e) {
             Slog.w(TAG, "Remote exception when requesting finger detect", e);
@@ -431,7 +489,13 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
     }
 
-    public void enroll(byte[] hardwareAuthToken, CancellationSignal cancel, int userId, EnrollmentCallback callback, int enrollReason, FingerprintEnrollOptions options) {
+    public void enroll(
+            byte[] hardwareAuthToken,
+            CancellationSignal cancel,
+            int userId,
+            EnrollmentCallback callback,
+            int enrollReason,
+            FingerprintEnrollOptions options) {
         int userId2;
         if (userId != -2) {
             userId2 = userId;
@@ -452,17 +516,27 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         if (this.mService != null) {
             try {
                 final FingerprintCallback fingerprintCallback = new FingerprintCallback(callback);
-                long enrollId = this.mService.enroll(this.mToken, hardwareAuthToken, userId2, new FingerprintServiceReceiver(fingerprintCallback), this.mContext.getOpPackageName(), enrollReason, options);
+                long enrollId =
+                        this.mService.enroll(
+                                this.mToken,
+                                hardwareAuthToken,
+                                userId2,
+                                new FingerprintServiceReceiver(fingerprintCallback),
+                                this.mContext.getOpPackageName(),
+                                enrollReason,
+                                options);
                 if (cancel != null) {
                     cancel.setOnCancelListener(new OnEnrollCancelListener(enrollId));
                 }
                 if (enrollId < 0) {
-                    this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$$ExternalSyntheticLambda3
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            FingerprintManager.this.lambda$enroll$2(fingerprintCallback);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                // android.hardware.fingerprint.FingerprintManager$$ExternalSyntheticLambda3
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    FingerprintManager.this.lambda$enroll$2(fingerprintCallback);
+                                }
+                            });
                 }
             } catch (RemoteException e) {
                 Slog.w(TAG, "Remote exception in enroll: ", e);
@@ -480,7 +554,12 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         if (this.mService != null) {
             try {
                 FingerprintCallback fingerprintCallback = new FingerprintCallback(callback);
-                this.mService.generateChallenge(this.mToken, sensorId, userId, new FingerprintServiceReceiver(fingerprintCallback), this.mContext.getOpPackageName());
+                this.mService.generateChallenge(
+                        this.mToken,
+                        sensorId,
+                        userId,
+                        new FingerprintServiceReceiver(fingerprintCallback),
+                        this.mContext.getOpPackageName());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -503,7 +582,12 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                 if (sensorProps == null) {
                     Slog.e(TAG, "No sensors");
                 } else {
-                    this.mService.revokeChallenge(this.mToken, sensorProps.sensorId, userId, this.mContext.getOpPackageName(), challenge);
+                    this.mService.revokeChallenge(
+                            this.mToken,
+                            sensorProps.sensorId,
+                            userId,
+                            this.mContext.getOpPackageName(),
+                            challenge);
                 }
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
@@ -514,7 +598,12 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     public void resetLockout(int sensorId, int userId, byte[] hardwareAuthToken) {
         if (this.mService != null) {
             try {
-                this.mService.resetLockout(this.mToken, sensorId, userId, hardwareAuthToken, this.mContext.getOpPackageName());
+                this.mService.resetLockout(
+                        this.mToken,
+                        sensorId,
+                        userId,
+                        hardwareAuthToken,
+                        this.mContext.getOpPackageName());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -525,7 +614,12 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         if (this.mService != null) {
             try {
                 FingerprintCallback fingerprintCallback = new FingerprintCallback(callback, 1, fp);
-                this.mService.remove(this.mToken, fp.getBiometricId(), userId, new FingerprintServiceReceiver(fingerprintCallback), this.mContext.getOpPackageName());
+                this.mService.remove(
+                        this.mToken,
+                        fp.getBiometricId(),
+                        userId,
+                        new FingerprintServiceReceiver(fingerprintCallback),
+                        this.mContext.getOpPackageName());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -535,8 +629,13 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     public void removeAll(int userId, RemovalCallback callback) {
         if (this.mService != null) {
             try {
-                FingerprintCallback fingerprintCallback = new FingerprintCallback(callback, 2, null);
-                this.mService.removeAll(this.mToken, userId, new FingerprintServiceReceiver(fingerprintCallback), this.mContext.getOpPackageName());
+                FingerprintCallback fingerprintCallback =
+                        new FingerprintCallback(callback, 2, null);
+                this.mService.removeAll(
+                        this.mToken,
+                        userId,
+                        new FingerprintServiceReceiver(fingerprintCallback),
+                        this.mContext.getOpPackageName());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -558,7 +657,10 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     public List<Fingerprint> getEnrolledFingerprints(int userId) {
         if (this.mService != null) {
             try {
-                return this.mService.getEnrolledFingerprints(userId, this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+                return this.mService.getEnrolledFingerprints(
+                        userId,
+                        this.mContext.getOpPackageName(),
+                        this.mContext.getAttributionTag());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -598,7 +700,8 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
     }
 
-    public void onPointerDown(long requestId, int sensorId, int x, int y, float minor, float major) {
+    public void onPointerDown(
+            long requestId, int sensorId, int x, int y, float minor, float major) {
         if (this.mService == null) {
             Slog.w(TAG, "onPointerDown: no fingerprint service");
             return;
@@ -628,7 +731,18 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
     }
 
-    public void onPointerDown(long requestId, int sensorId, int pointerId, float x, float y, float minor, float major, float orientation, long time, long gestureStart, boolean isAod) {
+    public void onPointerDown(
+            long requestId,
+            int sensorId,
+            int pointerId,
+            float x,
+            float y,
+            float minor,
+            float major,
+            float orientation,
+            long time,
+            long gestureStart,
+            boolean isAod) {
         if (this.mService == null) {
             Slog.w(TAG, "onPointerDown: no fingerprint service");
             return;
@@ -655,7 +769,18 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
     }
 
-    public void onPointerUp(long requestId, int sensorId, int pointerId, float x, float y, float minor, float major, float orientation, long time, long gestureStart, boolean isAod) {
+    public void onPointerUp(
+            long requestId,
+            int sensorId,
+            int pointerId,
+            float x,
+            float y,
+            float minor,
+            float major,
+            float orientation,
+            long time,
+            long gestureStart,
+            boolean isAod) {
         if (this.mService == null) {
             Slog.w(TAG, "onPointerUp: no fingerprint service");
             return;
@@ -696,24 +821,28 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
 
     public void onPowerPressed() {
         Slog.i(TAG, "onPowerPressed");
-        this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                FingerprintManager.this.lambda$onPowerPressed$3();
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                    // android.hardware.fingerprint.FingerprintManager$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        FingerprintManager.this.lambda$onPowerPressed$3();
+                    }
+                });
     }
 
     public void onPowerPressed(boolean goToSleep) {
         if (!goToSleep) {
             return;
         }
-        this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                FingerprintManager.this.lambda$onPowerPressed$4();
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                    // android.hardware.fingerprint.FingerprintManager$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        FingerprintManager.this.lambda$onPowerPressed$4();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -727,14 +856,21 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
 
     @Deprecated
     public boolean hasEnrolledFingerprints() {
-        FrameworkStatsLog.write(356, 2, this.mContext.getApplicationInfo().uid, this.mContext.getApplicationInfo().targetSdkVersion);
+        FrameworkStatsLog.write(
+                356,
+                2,
+                this.mContext.getApplicationInfo().uid,
+                this.mContext.getApplicationInfo().targetSdkVersion);
         return hasEnrolledFingerprints(UserHandle.myUserId());
     }
 
     public boolean hasEnrolledFingerprints(int userId) {
         if (this.mService != null) {
             try {
-                return this.mService.hasEnrolledFingerprintsDeprecated(userId, this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+                return this.mService.hasEnrolledFingerprintsDeprecated(
+                        userId,
+                        this.mContext.getOpPackageName(),
+                        this.mContext.getAttributionTag());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -744,10 +880,15 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
 
     @Deprecated
     public boolean isHardwareDetected() {
-        FrameworkStatsLog.write(356, 3, this.mContext.getApplicationInfo().uid, this.mContext.getApplicationInfo().targetSdkVersion);
+        FrameworkStatsLog.write(
+                356,
+                3,
+                this.mContext.getApplicationInfo().uid,
+                this.mContext.getApplicationInfo().targetSdkVersion);
         if (this.mService != null) {
             try {
-                return this.mService.isHardwareDetectedDeprecated(this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+                return this.mService.isHardwareDetectedDeprecated(
+                        this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -772,7 +913,8 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         return sensorProps != null && sensorProps.sensorType == 4;
     }
 
-    public void addAuthenticatorsRegisteredCallback(IFingerprintAuthenticatorsRegisteredCallback callback) {
+    public void addAuthenticatorsRegisteredCallback(
+            IFingerprintAuthenticatorsRegisteredCallback callback) {
         if (this.mService != null) {
             try {
                 this.mService.addAuthenticatorsRegisteredCallback(callback);
@@ -807,8 +949,11 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     public void addLockoutResetCallback(LockoutResetCallback callback) {
         if (this.mService != null) {
             try {
-                PowerManager powerManager = (PowerManager) this.mContext.getSystemService(PowerManager.class);
-                this.mService.addLockoutResetCallback(new AnonymousClass1(powerManager, callback), this.mContext.getOpPackageName());
+                PowerManager powerManager =
+                        (PowerManager) this.mContext.getSystemService(PowerManager.class);
+                this.mService.addLockoutResetCallback(
+                        new AnonymousClass1(powerManager, callback),
+                        this.mContext.getOpPackageName());
                 return;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
@@ -828,24 +973,32 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
 
         @Override // android.hardware.biometrics.IBiometricServiceLockoutResetCallback
-        public void onLockoutReset(final int sensorId, IRemoteCallback serverCallback) throws RemoteException {
+        public void onLockoutReset(final int sensorId, IRemoteCallback serverCallback)
+                throws RemoteException {
             try {
-                final PowerManager.WakeLock wakeLock = this.val$powerManager.newWakeLock(1, "lockoutResetCallback");
+                final PowerManager.WakeLock wakeLock =
+                        this.val$powerManager.newWakeLock(1, "lockoutResetCallback");
                 wakeLock.acquire();
                 Handler handler = FingerprintManager.this.mHandler;
                 final LockoutResetCallback lockoutResetCallback = this.val$callback;
-                handler.post(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        FingerprintManager.AnonymousClass1.lambda$onLockoutReset$0(FingerprintManager.LockoutResetCallback.this, sensorId, wakeLock);
-                    }
-                });
+                handler.post(
+                        new Runnable() { // from class:
+                            // android.hardware.fingerprint.FingerprintManager$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                FingerprintManager.AnonymousClass1.lambda$onLockoutReset$0(
+                                        FingerprintManager.LockoutResetCallback.this,
+                                        sensorId,
+                                        wakeLock);
+                            }
+                        });
             } finally {
                 serverCallback.sendResult(null);
             }
         }
 
-        static /* synthetic */ void lambda$onLockoutReset$0(LockoutResetCallback callback, int sensorId, PowerManager.WakeLock wakeLock) {
+        static /* synthetic */ void lambda$onLockoutReset$0(
+                LockoutResetCallback callback, int sensorId, PowerManager.WakeLock wakeLock) {
             try {
                 callback.onLockoutReset(sensorId);
             } finally {
@@ -872,12 +1025,15 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         }
         if (context.checkCallingOrSelfPermission(Manifest.permission.USE_BIOMETRIC_INTERNAL) == 0) {
             try {
-                addAuthenticatorsRegisteredCallback(new IFingerprintAuthenticatorsRegisteredCallback.Stub() { // from class: android.hardware.fingerprint.FingerprintManager.2
-                    @Override // android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback
-                    public void onAllAuthenticatorsRegistered(List<FingerprintSensorPropertiesInternal> sensors) {
-                        FingerprintManager.this.mProps = sensors;
-                    }
-                });
+                addAuthenticatorsRegisteredCallback(
+                        new IFingerprintAuthenticatorsRegisteredCallback.Stub() { // from class:
+                            // android.hardware.fingerprint.FingerprintManager.2
+                            @Override // android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback
+                            public void onAllAuthenticatorsRegistered(
+                                    List<FingerprintSensorPropertiesInternal> sensors) {
+                                FingerprintManager.this.mProps = sensors;
+                            }
+                        });
             } catch (SecurityException se) {
                 se.printStackTrace();
             }
@@ -917,7 +1073,11 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     public void cancelAuthentication(long requestId) {
         if (this.mService != null) {
             try {
-                this.mService.cancelAuthentication(this.mToken, this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), requestId);
+                this.mService.cancelAuthentication(
+                        this.mToken,
+                        this.mContext.getOpPackageName(),
+                        this.mContext.getAttributionTag(),
+                        requestId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -930,7 +1090,8 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
             return;
         }
         try {
-            this.mService.cancelFingerprintDetect(this.mToken, this.mContext.getOpPackageName(), requestId);
+            this.mService.cancelFingerprintDetect(
+                    this.mToken, this.mContext.getOpPackageName(), requestId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -960,9 +1121,13 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     private float[] createEnrollStageThresholds(Context context) {
         String[] enrollStageThresholdStrings;
         if (isPowerbuttonFps()) {
-            enrollStageThresholdStrings = context.getResources().getStringArray(R.array.config_sfps_enroll_stage_thresholds);
+            enrollStageThresholdStrings =
+                    context.getResources()
+                            .getStringArray(R.array.config_sfps_enroll_stage_thresholds);
         } else {
-            enrollStageThresholdStrings = context.getResources().getStringArray(R.array.config_udfps_enroll_stage_thresholds);
+            enrollStageThresholdStrings =
+                    context.getResources()
+                            .getStringArray(R.array.config_udfps_enroll_stage_thresholds);
         }
         float[] enrollStageThresholds = new float[enrollStageThresholdStrings.length];
         for (int i = 0; i < enrollStageThresholds.length; i++) {
@@ -1035,7 +1200,8 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
             case 5:
                 return context.getString(R.string.fingerprint_acquired_too_fast);
             case 6:
-                String[] msgArray = context.getResources().getStringArray(R.array.fingerprint_acquired_vendor);
+                String[] msgArray =
+                        context.getResources().getStringArray(R.array.fingerprint_acquired_vendor);
                 if (vendorCode < msgArray.length) {
                     return msgArray[vendorCode];
                 }
@@ -1067,57 +1233,76 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
 
         @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
         public void onEnrollResult(Fingerprint fp, final int remaining) {
-            FingerprintManager.this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda6
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.FingerprintServiceReceiver.this.lambda$onEnrollResult$0(remaining);
-                }
-            });
+            FingerprintManager.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda6
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.FingerprintServiceReceiver.this
+                                    .lambda$onEnrollResult$0(remaining);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onAcquired$1(int acquireInfo, int vendorCode) {
-            this.mFingerprintCallback.sendAcquiredResult(FingerprintManager.this.mContext, acquireInfo, vendorCode);
+            this.mFingerprintCallback.sendAcquiredResult(
+                    FingerprintManager.this.mContext, acquireInfo, vendorCode);
         }
 
         @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
         public void onAcquired(final int acquireInfo, final int vendorCode) {
-            FingerprintManager.this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda10
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.FingerprintServiceReceiver.this.lambda$onAcquired$1(acquireInfo, vendorCode);
-                }
-            });
+            FingerprintManager.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda10
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.FingerprintServiceReceiver.this.lambda$onAcquired$1(
+                                    acquireInfo, vendorCode);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onAuthenticationSucceeded$2(Fingerprint fp, int userId, boolean isStrongBiometric) {
+        public /* synthetic */ void lambda$onAuthenticationSucceeded$2(
+                Fingerprint fp, int userId, boolean isStrongBiometric) {
             this.mFingerprintCallback.sendAuthenticatedSucceeded(fp, userId, isStrongBiometric);
         }
 
         @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onAuthenticationSucceeded(final Fingerprint fp, final int userId, final boolean isStrongBiometric) {
-            FingerprintManager.this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.FingerprintServiceReceiver.this.lambda$onAuthenticationSucceeded$2(fp, userId, isStrongBiometric);
-                }
-            });
+        public void onAuthenticationSucceeded(
+                final Fingerprint fp, final int userId, final boolean isStrongBiometric) {
+            FingerprintManager.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.FingerprintServiceReceiver.this
+                                    .lambda$onAuthenticationSucceeded$2(
+                                            fp, userId, isStrongBiometric);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onFingerprintDetected$3(int sensorId, int userId, boolean isStrongBiometric) {
+        public /* synthetic */ void lambda$onFingerprintDetected$3(
+                int sensorId, int userId, boolean isStrongBiometric) {
             this.mFingerprintCallback.sendFingerprintDetected(sensorId, userId, isStrongBiometric);
         }
 
         @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onFingerprintDetected(final int sensorId, final int userId, final boolean isStrongBiometric) {
-            FingerprintManager.this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.FingerprintServiceReceiver.this.lambda$onFingerprintDetected$3(sensorId, userId, isStrongBiometric);
-                }
-            });
+        public void onFingerprintDetected(
+                final int sensorId, final int userId, final boolean isStrongBiometric) {
+            FingerprintManager.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.FingerprintServiceReceiver.this
+                                    .lambda$onFingerprintDetected$3(
+                                            sensorId, userId, isStrongBiometric);
+                        }
+                    });
         }
 
         @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
@@ -1125,27 +1310,33 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
             HandlerExecutor handlerExecutor = FingerprintManager.this.mExecutor;
             final FingerprintCallback fingerprintCallback = this.mFingerprintCallback;
             Objects.requireNonNull(fingerprintCallback);
-            handlerExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda7
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintCallback.this.sendAuthenticatedFailed();
-                }
-            });
+            handlerExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda7
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintCallback.this.sendAuthenticatedFailed();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onError$4(int error, int vendorCode) {
-            this.mFingerprintCallback.sendErrorResult(FingerprintManager.this.mContext, error, vendorCode);
+            this.mFingerprintCallback.sendErrorResult(
+                    FingerprintManager.this.mContext, error, vendorCode);
         }
 
         @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
         public void onError(final int error, final int vendorCode) {
-            FingerprintManager.this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.FingerprintServiceReceiver.this.lambda$onError$4(error, vendorCode);
-                }
-            });
+            FingerprintManager.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.FingerprintServiceReceiver.this.lambda$onError$4(
+                                    error, vendorCode);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1155,27 +1346,35 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
 
         @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
         public void onRemoved(final Fingerprint fp, final int remaining) {
-            FingerprintManager.this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.FingerprintServiceReceiver.this.lambda$onRemoved$5(fp, remaining);
-                }
-            });
+            FingerprintManager.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.FingerprintServiceReceiver.this.lambda$onRemoved$5(
+                                    fp, remaining);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onChallengeGenerated$6(long challenge, int sensorId, int userId) {
+        public /* synthetic */ void lambda$onChallengeGenerated$6(
+                long challenge, int sensorId, int userId) {
             this.mFingerprintCallback.sendChallengeGenerated(challenge, sensorId, userId);
         }
 
         @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onChallengeGenerated(final int sensorId, final int userId, final long challenge) {
-            FingerprintManager.this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda9
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.FingerprintServiceReceiver.this.lambda$onChallengeGenerated$6(challenge, sensorId, userId);
-                }
-            });
+        public void onChallengeGenerated(
+                final int sensorId, final int userId, final long challenge) {
+            FingerprintManager.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda9
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.FingerprintServiceReceiver.this
+                                    .lambda$onChallengeGenerated$6(challenge, sensorId, userId);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1185,12 +1384,15 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
 
         @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
         public void onUdfpsPointerDown(final int sensorId) {
-            FingerprintManager.this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.FingerprintServiceReceiver.this.lambda$onUdfpsPointerDown$7(sensorId);
-                }
-            });
+            FingerprintManager.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.FingerprintServiceReceiver.this
+                                    .lambda$onUdfpsPointerDown$7(sensorId);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1200,12 +1402,15 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
 
         @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
         public void onUdfpsPointerUp(final int sensorId) {
-            FingerprintManager.this.mExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda8
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.FingerprintServiceReceiver.this.lambda$onUdfpsPointerUp$8(sensorId);
-                }
-            });
+            FingerprintManager.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda8
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.FingerprintServiceReceiver.this
+                                    .lambda$onUdfpsPointerUp$8(sensorId);
+                        }
+                    });
         }
 
         @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
@@ -1213,12 +1418,14 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
             HandlerExecutor handlerExecutor = FingerprintManager.this.mExecutor;
             final FingerprintCallback fingerprintCallback = this.mFingerprintCallback;
             Objects.requireNonNull(fingerprintCallback);
-            handlerExecutor.execute(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintCallback.this.sendUdfpsOverlayShown();
-                }
-            });
+            handlerExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$FingerprintServiceReceiver$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintCallback.this.sendUdfpsOverlayShown();
+                        }
+                    });
         }
     }
 
@@ -1421,12 +1628,14 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         public void onResult(final int code) {
             Handler handler = FingerprintManager.this.mHandler;
             final SemRequestCallback semRequestCallback = this.val$callback;
-            handler.post(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$3$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.SemRequestCallback.this.onRequested(code);
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$3$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.SemRequestCallback.this.onRequested(code);
+                        }
+                    });
         }
     }
 
@@ -1523,12 +1732,15 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         public void turnOnDozeMode() {
             Handler handler = FingerprintManager.this.mHandler;
             final SemFingerprintViewListener semFingerprintViewListener = this.val$listener;
-            handler.post(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$4$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.AnonymousClass4.lambda$turnOnDozeMode$0(SemFingerprintViewListener.this);
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$4$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.AnonymousClass4.lambda$turnOnDozeMode$0(
+                                    SemFingerprintViewListener.this);
+                        }
+                    });
         }
 
         static /* synthetic */ void lambda$turnOnDozeMode$0(SemFingerprintViewListener listener) {
@@ -1540,12 +1752,15 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         public void turnOffDozeMode() {
             Handler handler = FingerprintManager.this.mHandler;
             final SemFingerprintViewListener semFingerprintViewListener = this.val$listener;
-            handler.post(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$4$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.AnonymousClass4.lambda$turnOffDozeMode$1(SemFingerprintViewListener.this);
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$4$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.AnonymousClass4.lambda$turnOffDozeMode$1(
+                                    SemFingerprintViewListener.this);
+                        }
+                    });
         }
 
         static /* synthetic */ void lambda$turnOffDozeMode$1(SemFingerprintViewListener listener) {
@@ -1557,15 +1772,19 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         public void turnOnDozeHlpmMode() {
             Handler handler = FingerprintManager.this.mHandler;
             final SemFingerprintViewListener semFingerprintViewListener = this.val$listener;
-            handler.post(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$4$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.AnonymousClass4.lambda$turnOnDozeHlpmMode$2(SemFingerprintViewListener.this);
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$4$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.AnonymousClass4.lambda$turnOnDozeHlpmMode$2(
+                                    SemFingerprintViewListener.this);
+                        }
+                    });
         }
 
-        static /* synthetic */ void lambda$turnOnDozeHlpmMode$2(SemFingerprintViewListener listener) {
+        static /* synthetic */ void lambda$turnOnDozeHlpmMode$2(
+                SemFingerprintViewListener listener) {
             Slog.i(FingerprintManager.TAG, "deliver event to AOD: turnOnDozeHlpmMode");
             listener.onShow();
         }
@@ -1574,15 +1793,19 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         public void turnOffDozeHlpmMode() {
             Handler handler = FingerprintManager.this.mHandler;
             final SemFingerprintViewListener semFingerprintViewListener = this.val$listener;
-            handler.post(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$4$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.AnonymousClass4.lambda$turnOffDozeHlpmMode$3(SemFingerprintViewListener.this);
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$4$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.AnonymousClass4.lambda$turnOffDozeHlpmMode$3(
+                                    SemFingerprintViewListener.this);
+                        }
+                    });
         }
 
-        static /* synthetic */ void lambda$turnOffDozeHlpmMode$3(SemFingerprintViewListener listener) {
+        static /* synthetic */ void lambda$turnOffDozeHlpmMode$3(
+                SemFingerprintViewListener listener) {
             Slog.i(FingerprintManager.TAG, "deliver event to AOD: turnOffDozeHlpmMode");
             listener.onDismiss();
         }
@@ -1591,12 +1814,15 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         public void hideAodScreen() {
             Handler handler = FingerprintManager.this.mHandler;
             final SemFingerprintViewListener semFingerprintViewListener = this.val$listener;
-            handler.post(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$4$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.AnonymousClass4.lambda$hideAodScreen$4(SemFingerprintViewListener.this);
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$4$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.AnonymousClass4.lambda$hideAodScreen$4(
+                                    SemFingerprintViewListener.this);
+                        }
+                    });
         }
 
         static /* synthetic */ void lambda$hideAodScreen$4(SemFingerprintViewListener listener) {
@@ -1645,10 +1871,12 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     public Rect semGetFingerIconRectInDisplay() {
         if (this.mService != null) {
             try {
-                WindowManager wm = (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
+                WindowManager wm =
+                        (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
                 Point size = new Point();
                 wm.getDefaultDisplay().getRealSize(size);
-                return this.mService.semGetSensorAreaInDisplay(1, wm.getDefaultDisplay().getRotation(), size);
+                return this.mService.semGetSensorAreaInDisplay(
+                        1, wm.getDefaultDisplay().getRotation(), size);
             } catch (RemoteException e) {
                 Slog.e(TAG, "semGetFingerIconRectInDisplay: ", e);
             }
@@ -1719,7 +1947,8 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
             }
             try {
                 ISemFingerprintRequestCallback requestCallback = new AnonymousClass5(callback);
-                this.mService.semUpdateTrustApp(path, requestCallback, this.mContext.getOpPackageName());
+                this.mService.semUpdateTrustApp(
+                        path, requestCallback, this.mContext.getOpPackageName());
             } catch (RemoteException e) {
                 Slog.e(TAG, "semUpdateTrustApp: ", e);
             }
@@ -1738,12 +1967,14 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         public void onResult(final int code) {
             Handler handler = FingerprintManager.this.mHandler;
             final SemRequestCallback semRequestCallback = this.val$callback;
-            handler.post(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$5$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.SemRequestCallback.this.onRequested(code);
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$5$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.SemRequestCallback.this.onRequested(code);
+                        }
+                    });
         }
     }
 
@@ -1760,7 +1991,8 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     public int semSetCalibrationMode(int param) {
         if (this.mService != null) {
             try {
-                this.mService.semSetCalibrationMode(this.mToken, param, this.mContext.getOpPackageName());
+                this.mService.semSetCalibrationMode(
+                        this.mToken, param, this.mContext.getOpPackageName());
                 return -1;
             } catch (RemoteException e) {
                 Slog.e(TAG, "semSetCalibrationMode: ", e);
@@ -1773,7 +2005,8 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
     public int semProcessFido(int userId, byte[] in, byte[] out) {
         if (this.mService != null) {
             try {
-                return this.mService.semProcessFido(userId, in, out, this.mContext.getOpPackageName());
+                return this.mService.semProcessFido(
+                        userId, in, out, this.mContext.getOpPackageName());
             } catch (RemoteException e) {
                 Slog.e(TAG, "semProcessFido: ", e);
                 return -1;
@@ -1806,11 +2039,18 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         return true;
     }
 
-    public int request(int cmd, byte[] inputBuf, byte[] outputBuf, int inParam, SemRequestCallback callback) {
+    public int request(
+            int cmd, byte[] inputBuf, byte[] outputBuf, int inParam, SemRequestCallback callback) {
         return request(cmd, inputBuf, outputBuf, inParam, callback, this.mContext.getUserId());
     }
 
-    public int request(int cmd, byte[] inputBuf, byte[] outputBuf, int inParam, SemRequestCallback callback, int userId) {
+    public int request(
+            int cmd,
+            byte[] inputBuf,
+            byte[] outputBuf,
+            int inParam,
+            SemRequestCallback callback,
+            int userId) {
         byte[] inputBuf2;
         byte[] outputBuf2;
         switch (cmd) {
@@ -1870,7 +2110,15 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                             return -2;
                         }
                     }
-                    return this.mService.semRequest(this.mToken, cmd, inputBuf2, outputBuf2, inParam, userId, this.mContext.getOpPackageName(), requestCallback);
+                    return this.mService.semRequest(
+                            this.mToken,
+                            cmd,
+                            inputBuf2,
+                            outputBuf2,
+                            inParam,
+                            userId,
+                            this.mContext.getOpPackageName(),
+                            requestCallback);
                 }
                 Slog.w(TAG, "request : Service not connected!");
                 return -2;
@@ -1889,36 +2137,41 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
         public void onResult(final int code) {
             Handler handler = FingerprintManager.this.mHandler;
             final SemRequestCallback semRequestCallback = this.val$callback;
-            handler.post(new Runnable() { // from class: android.hardware.fingerprint.FingerprintManager$6$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FingerprintManager.SemRequestCallback.this.onRequested(code);
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                        // android.hardware.fingerprint.FingerprintManager$6$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FingerprintManager.SemRequestCallback.this.onRequested(code);
+                        }
+                    });
         }
     }
 
     private void semRemove(int userId, int fingerId, final SemRequestCallback requestCallback) {
         if (this.mContext.checkSelfPermission(Manifest.permission.MANAGE_FINGERPRINT) == -1) {
-            throw new SecurityException("Must have android.permission.MANAGE_FINGERPRINT permission.");
+            throw new SecurityException(
+                    "Must have android.permission.MANAGE_FINGERPRINT permission.");
         }
-        RemovalCallback removalCallback = new RemovalCallback() { // from class: android.hardware.fingerprint.FingerprintManager.7
-            @Override // android.hardware.fingerprint.FingerprintManager.RemovalCallback
-            public void onRemovalError(Fingerprint fp, int errMsgId, CharSequence errString) {
-                Slog.d(FingerprintManager.TAG, "semRemove: removal error");
-                if (requestCallback != null) {
-                    requestCallback.onRequested(6);
-                }
-            }
+        RemovalCallback removalCallback = new RemovalCallback() { // from class:
+                    // android.hardware.fingerprint.FingerprintManager.7
+                    @Override // android.hardware.fingerprint.FingerprintManager.RemovalCallback
+                    public void onRemovalError(
+                            Fingerprint fp, int errMsgId, CharSequence errString) {
+                        Slog.d(FingerprintManager.TAG, "semRemove: removal error");
+                        if (requestCallback != null) {
+                            requestCallback.onRequested(6);
+                        }
+                    }
 
-            @Override // android.hardware.fingerprint.FingerprintManager.RemovalCallback
-            public void onRemovalSucceeded(Fingerprint fp, int remaining) {
-                Slog.d(FingerprintManager.TAG, "semRemove: removal succeeded");
-                if (requestCallback != null) {
-                    requestCallback.onRequested(0);
-                }
-            }
-        };
+                    @Override // android.hardware.fingerprint.FingerprintManager.RemovalCallback
+                    public void onRemovalSucceeded(Fingerprint fp, int remaining) {
+                        Slog.d(FingerprintManager.TAG, "semRemove: removal succeeded");
+                        if (requestCallback != null) {
+                            requestCallback.onRequested(0);
+                        }
+                    }
+                };
         if (fingerId == -1) {
             removeAll(userId, removalCallback);
         } else {
@@ -1979,7 +2232,9 @@ public class FingerprintManager implements BiometricAuthenticator, BiometricFing
                 case 5002:
                     return context.getString(R.string.sem_fingerprint_error_insecure_biometrics);
                 case 5003:
-                    return context.getString(R.string.sem_fingerprint_error_smart_view, context.getString(R.string.sem_fingerprint_app_smart_view));
+                    return context.getString(
+                            R.string.sem_fingerprint_error_smart_view,
+                            context.getString(R.string.sem_fingerprint_app_smart_view));
                 default:
                     return context.getString(R.string.fingerprint_error_canceled);
             }

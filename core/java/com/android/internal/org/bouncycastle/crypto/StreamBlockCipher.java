@@ -20,7 +20,8 @@ public abstract class StreamBlockCipher implements BlockCipher, StreamCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.StreamCipher
-    public int processBytes(byte[] in, int inOff, int len, byte[] out, int outOff) throws DataLengthException {
+    public int processBytes(byte[] in, int inOff, int len, byte[] out, int outOff)
+            throws DataLengthException {
         if (inOff + len > in.length) {
             throw new DataLengthException("input buffer too small");
         }

@@ -13,8 +13,7 @@ public class DataSourceParams {
     public final boolean willNotifyOnStop;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PerfettoDsBufferExhausted {
-    }
+    public @interface PerfettoDsBufferExhausted {}
 
     private DataSourceParams(int bufferExhaustedPolicy, boolean willNotifyOnStop, boolean noFlush) {
         this.bufferExhaustedPolicy = bufferExhaustedPolicy;
@@ -43,7 +42,8 @@ public class DataSourceParams {
         }
 
         public DataSourceParams build() {
-            return new DataSourceParams(this.mBufferExhaustedPolicy, this.mWillNotifyOnStop, this.mNoFlush);
+            return new DataSourceParams(
+                    this.mBufferExhaustedPolicy, this.mWillNotifyOnStop, this.mNoFlush);
         }
     }
 }

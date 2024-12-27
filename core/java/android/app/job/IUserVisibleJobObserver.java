@@ -10,12 +10,13 @@ import android.os.RemoteException;
 public interface IUserVisibleJobObserver extends IInterface {
     public static final String DESCRIPTOR = "android.app.job.IUserVisibleJobObserver";
 
-    void onUserVisibleJobStateChanged(UserVisibleJobSummary userVisibleJobSummary, boolean z) throws RemoteException;
+    void onUserVisibleJobStateChanged(UserVisibleJobSummary userVisibleJobSummary, boolean z)
+            throws RemoteException;
 
     public static class Default implements IUserVisibleJobObserver {
         @Override // android.app.job.IUserVisibleJobObserver
-        public void onUserVisibleJobStateChanged(UserVisibleJobSummary summary, boolean isRunning) throws RemoteException {
-        }
+        public void onUserVisibleJobStateChanged(UserVisibleJobSummary summary, boolean isRunning)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface IUserVisibleJobObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUserVisibleJobObserver {
+    public abstract static class Stub extends Binder implements IUserVisibleJobObserver {
         static final int TRANSACTION_onUserVisibleJobStateChanged = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface IUserVisibleJobObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUserVisibleJobObserver.DESCRIPTOR);
             }
@@ -71,7 +73,9 @@ public interface IUserVisibleJobObserver extends IInterface {
             }
             switch (code) {
                 case 1:
-                    UserVisibleJobSummary _arg0 = (UserVisibleJobSummary) data.readTypedObject(UserVisibleJobSummary.CREATOR);
+                    UserVisibleJobSummary _arg0 =
+                            (UserVisibleJobSummary)
+                                    data.readTypedObject(UserVisibleJobSummary.CREATOR);
                     boolean _arg1 = data.readBoolean();
                     data.enforceNoDataAvail();
                     onUserVisibleJobStateChanged(_arg0, _arg1);
@@ -98,7 +102,8 @@ public interface IUserVisibleJobObserver extends IInterface {
             }
 
             @Override // android.app.job.IUserVisibleJobObserver
-            public void onUserVisibleJobStateChanged(UserVisibleJobSummary summary, boolean isRunning) throws RemoteException {
+            public void onUserVisibleJobStateChanged(
+                    UserVisibleJobSummary summary, boolean isRunning) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IUserVisibleJobObserver.DESCRIPTOR);

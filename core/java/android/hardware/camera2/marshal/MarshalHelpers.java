@@ -2,6 +2,7 @@ package android.hardware.camera2.marshal;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Rational;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes2.dex */
@@ -28,7 +29,8 @@ public final class MarshalHelpers {
             case 5:
                 return 8;
             default:
-                throw new UnsupportedOperationException("Unknown type, can't get size for " + nativeType);
+                throw new UnsupportedOperationException(
+                        "Unknown type, can't get size for " + nativeType);
         }
     }
 
@@ -37,21 +39,36 @@ public final class MarshalHelpers {
         if (isPrimitiveClass(klass)) {
             return klass;
         }
-        throw new UnsupportedOperationException("Unsupported class '" + klass + "'; expected a metadata primitive class");
+        throw new UnsupportedOperationException(
+                "Unsupported class '" + klass + "'; expected a metadata primitive class");
     }
 
     public static boolean isUnwrappedPrimitiveClass(Class<?> klass) {
         if (klass == null) {
             return false;
         }
-        return klass == Byte.TYPE || klass == Integer.TYPE || klass == Float.TYPE || klass == Long.TYPE || klass == Double.TYPE;
+        return klass == Byte.TYPE
+                || klass == Integer.TYPE
+                || klass == Float.TYPE
+                || klass == Long.TYPE
+                || klass == Double.TYPE;
     }
 
     public static <T> boolean isPrimitiveClass(Class<T> klass) {
         if (klass == null) {
             return false;
         }
-        return klass == Byte.TYPE || klass == Byte.class || klass == Integer.TYPE || klass == Integer.class || klass == Float.TYPE || klass == Float.class || klass == Long.TYPE || klass == Long.class || klass == Double.TYPE || klass == Double.class || klass == Rational.class;
+        return klass == Byte.TYPE
+                || klass == Byte.class
+                || klass == Integer.TYPE
+                || klass == Integer.class
+                || klass == Float.TYPE
+                || klass == Float.class
+                || klass == Long.TYPE
+                || klass == Long.class
+                || klass == Double.TYPE
+                || klass == Double.class
+                || klass == Rational.class;
     }
 
     public static <T> Class<T> wrapClassIfPrimitive(Class<T> klass) {
@@ -125,7 +142,11 @@ public final class MarshalHelpers {
 
     public static int checkNativeTypeEquals(int expectedNativeType, int actualNativeType) {
         if (expectedNativeType != actualNativeType) {
-            throw new UnsupportedOperationException(String.format("Expected native type %d, but got %d", Integer.valueOf(expectedNativeType), Integer.valueOf(actualNativeType)));
+            throw new UnsupportedOperationException(
+                    String.format(
+                            "Expected native type %d, but got %d",
+                            Integer.valueOf(expectedNativeType),
+                            Integer.valueOf(actualNativeType)));
         }
         return actualNativeType;
     }

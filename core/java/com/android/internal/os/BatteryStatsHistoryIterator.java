@@ -4,12 +4,14 @@ import android.os.BatteryStats;
 import android.os.Parcel;
 import android.util.Slog;
 import android.util.SparseArray;
-import com.android.internal.os.PowerStats;
+
 import com.samsung.android.media.SemExtendedFormat;
+
 import java.util.Iterator;
 
 /* loaded from: classes5.dex */
-public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.HistoryItem>, AutoCloseable {
+public class BatteryStatsHistoryIterator
+        implements Iterator<BatteryStats.HistoryItem>, AutoCloseable {
     private static final boolean DEBUG = false;
     private static final String TAG = "BatteryStatsHistoryItr";
     private final BatteryStatsHistory mBatteryStatsHistory;
@@ -18,12 +20,15 @@ public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.Histor
     private boolean mNextItemReady;
     private final long mStartTimeMs;
     private boolean mTimeInitialized;
-    private final BatteryStats.HistoryStepDetails mReadHistoryStepDetails = new BatteryStats.HistoryStepDetails();
+    private final BatteryStats.HistoryStepDetails mReadHistoryStepDetails =
+            new BatteryStats.HistoryStepDetails();
     private final SparseArray<BatteryStats.HistoryTag> mHistoryTags = new SparseArray<>();
-    private final PowerStats.DescriptorRegistry mDescriptorRegistry = new PowerStats.DescriptorRegistry();
+    private final PowerStats.DescriptorRegistry mDescriptorRegistry =
+            new PowerStats.DescriptorRegistry();
     private BatteryStats.HistoryItem mHistoryItem = new BatteryStats.HistoryItem();
 
-    public BatteryStatsHistoryIterator(BatteryStatsHistory history, long startTimeMs, long endTimeMs) {
+    public BatteryStatsHistoryIterator(
+            BatteryStatsHistory history, long startTimeMs, long endTimeMs) {
         this.mBatteryStatsHistory = history;
         this.mStartTimeMs = startTimeMs;
         this.mEndTimeMs = endTimeMs != -1 ? endTimeMs : Long.MAX_VALUE;
@@ -60,11 +65,13 @@ public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.Histor
                 long lastWalltimeMs = this.mHistoryItem.currentTime;
                 try {
                     readHistoryDelta(p, this.mHistoryItem);
-                    if (this.mHistoryItem.cmd != 5 && this.mHistoryItem.cmd != 7 && lastWalltimeMs != 0) {
-                        this.mHistoryItem.currentTime = (this.mHistoryItem.time - lastMonotonicTimeMs) + lastWalltimeMs;
+                    if (this.mHistoryItem.cmd != 5
+                            && this.mHistoryItem.cmd != 7
+                            && lastWalltimeMs != 0) {
+                        this.mHistoryItem.currentTime =
+                                (this.mHistoryItem.time - lastMonotonicTimeMs) + lastWalltimeMs;
                     }
-                    if (this.mEndTimeMs == 0 || this.mHistoryItem.time < this.mEndTimeMs) {
-                    }
+                    if (this.mEndTimeMs == 0 || this.mHistoryItem.time < this.mEndTimeMs) {}
                 } catch (Throwable t) {
                     Slog.wtf(TAG, "Corrupted battery history", t);
                 }
@@ -194,7 +201,8 @@ public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.Histor
         cur.wifiRailChargeMah = src.readDouble();
         if ((cur.states2 & 131072) != 0) {
             int extensionFlags = src.readInt();
-            if ((extensionFlags & 1) != 0 && (descriptor = PowerStats.Descriptor.readSummaryFromParcel(src)) != null) {
+            if ((extensionFlags & 1) != 0
+                    && (descriptor = PowerStats.Descriptor.readSummaryFromParcel(src)) != null) {
                 this.mDescriptorRegistry.register(descriptor);
             }
             if ((extensionFlags & 2) != 0) {
@@ -252,7 +260,8 @@ public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.Histor
         out.batteryVoltage = (short) voltage;
     }
 
-    private static void readCurrentNTemperatureInt(int currentNTemperatureInt, BatteryStats.HistoryItem out) {
+    private static void readCurrentNTemperatureInt(
+            int currentNTemperatureInt, BatteryStats.HistoryItem out) {
         out.pa_temp = (byte) (((-16777216) & currentNTemperatureInt) >>> 24);
         out.ap_temp = (byte) ((16711680 & currentNTemperatureInt) >>> 16);
         out.current = (short) ((65535 & currentNTemperatureInt) >>> 0);

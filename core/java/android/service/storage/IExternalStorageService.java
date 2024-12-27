@@ -15,34 +15,51 @@ public interface IExternalStorageService extends IInterface {
 
     void endSession(String str, RemoteCallback remoteCallback) throws RemoteException;
 
-    void freeCache(String str, String str2, long j, RemoteCallback remoteCallback) throws RemoteException;
+    void freeCache(String str, String str2, long j, RemoteCallback remoteCallback)
+            throws RemoteException;
 
     void notifyAnrDelayStarted(String str, int i, int i2, int i3) throws RemoteException;
 
-    void notifyVolumeStateChanged(String str, StorageVolume storageVolume, RemoteCallback remoteCallback) throws RemoteException;
+    void notifyVolumeStateChanged(
+            String str, StorageVolume storageVolume, RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void startSession(String str, int i, ParcelFileDescriptor parcelFileDescriptor, String str2, String str3, RemoteCallback remoteCallback) throws RemoteException;
+    void startSession(
+            String str,
+            int i,
+            ParcelFileDescriptor parcelFileDescriptor,
+            String str2,
+            String str3,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
     public static class Default implements IExternalStorageService {
         @Override // android.service.storage.IExternalStorageService
-        public void startSession(String sessionId, int type, ParcelFileDescriptor deviceFd, String upperPath, String lowerPath, RemoteCallback callback) throws RemoteException {
-        }
+        public void startSession(
+                String sessionId,
+                int type,
+                ParcelFileDescriptor deviceFd,
+                String upperPath,
+                String lowerPath,
+                RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.storage.IExternalStorageService
-        public void endSession(String sessionId, RemoteCallback callback) throws RemoteException {
-        }
+        public void endSession(String sessionId, RemoteCallback callback) throws RemoteException {}
 
         @Override // android.service.storage.IExternalStorageService
-        public void notifyVolumeStateChanged(String sessionId, StorageVolume vol, RemoteCallback callback) throws RemoteException {
-        }
+        public void notifyVolumeStateChanged(
+                String sessionId, StorageVolume vol, RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.storage.IExternalStorageService
-        public void freeCache(String sessionId, String volumeUuid, long bytes, RemoteCallback callback) throws RemoteException {
-        }
+        public void freeCache(
+                String sessionId, String volumeUuid, long bytes, RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.storage.IExternalStorageService
-        public void notifyAnrDelayStarted(String packageName, int uid, int tid, int reason) throws RemoteException {
-        }
+        public void notifyAnrDelayStarted(String packageName, int uid, int tid, int reason)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -50,7 +67,7 @@ public interface IExternalStorageService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IExternalStorageService {
+    public abstract static class Stub extends Binder implements IExternalStorageService {
         static final int TRANSACTION_endSession = 2;
         static final int TRANSACTION_freeCache = 4;
         static final int TRANSACTION_notifyAnrDelayStarted = 5;
@@ -100,7 +117,8 @@ public interface IExternalStorageService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IExternalStorageService.DESCRIPTOR);
             }
@@ -112,23 +130,29 @@ public interface IExternalStorageService extends IInterface {
                 case 1:
                     String _arg0 = data.readString();
                     int _arg1 = data.readInt();
-                    ParcelFileDescriptor _arg2 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg2 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     String _arg3 = data.readString();
                     String _arg4 = data.readString();
-                    RemoteCallback _arg5 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg5 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     startSession(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5);
                     return true;
                 case 2:
                     String _arg02 = data.readString();
-                    RemoteCallback _arg12 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg12 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     endSession(_arg02, _arg12);
                     return true;
                 case 3:
                     String _arg03 = data.readString();
-                    StorageVolume _arg13 = (StorageVolume) data.readTypedObject(StorageVolume.CREATOR);
-                    RemoteCallback _arg22 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    StorageVolume _arg13 =
+                            (StorageVolume) data.readTypedObject(StorageVolume.CREATOR);
+                    RemoteCallback _arg22 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     notifyVolumeStateChanged(_arg03, _arg13, _arg22);
                     return true;
@@ -136,7 +160,8 @@ public interface IExternalStorageService extends IInterface {
                     String _arg04 = data.readString();
                     String _arg14 = data.readString();
                     long _arg23 = data.readLong();
-                    RemoteCallback _arg32 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg32 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     freeCache(_arg04, _arg14, _arg23, _arg32);
                     return true;
@@ -170,7 +195,14 @@ public interface IExternalStorageService extends IInterface {
             }
 
             @Override // android.service.storage.IExternalStorageService
-            public void startSession(String sessionId, int type, ParcelFileDescriptor deviceFd, String upperPath, String lowerPath, RemoteCallback callback) throws RemoteException {
+            public void startSession(
+                    String sessionId,
+                    int type,
+                    ParcelFileDescriptor deviceFd,
+                    String upperPath,
+                    String lowerPath,
+                    RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IExternalStorageService.DESCRIPTOR);
@@ -187,7 +219,8 @@ public interface IExternalStorageService extends IInterface {
             }
 
             @Override // android.service.storage.IExternalStorageService
-            public void endSession(String sessionId, RemoteCallback callback) throws RemoteException {
+            public void endSession(String sessionId, RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IExternalStorageService.DESCRIPTOR);
@@ -200,7 +233,9 @@ public interface IExternalStorageService extends IInterface {
             }
 
             @Override // android.service.storage.IExternalStorageService
-            public void notifyVolumeStateChanged(String sessionId, StorageVolume vol, RemoteCallback callback) throws RemoteException {
+            public void notifyVolumeStateChanged(
+                    String sessionId, StorageVolume vol, RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IExternalStorageService.DESCRIPTOR);
@@ -214,7 +249,9 @@ public interface IExternalStorageService extends IInterface {
             }
 
             @Override // android.service.storage.IExternalStorageService
-            public void freeCache(String sessionId, String volumeUuid, long bytes, RemoteCallback callback) throws RemoteException {
+            public void freeCache(
+                    String sessionId, String volumeUuid, long bytes, RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IExternalStorageService.DESCRIPTOR);
@@ -229,7 +266,8 @@ public interface IExternalStorageService extends IInterface {
             }
 
             @Override // android.service.storage.IExternalStorageService
-            public void notifyAnrDelayStarted(String packageName, int uid, int tid, int reason) throws RemoteException {
+            public void notifyAnrDelayStarted(String packageName, int uid, int tid, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IExternalStorageService.DESCRIPTOR);

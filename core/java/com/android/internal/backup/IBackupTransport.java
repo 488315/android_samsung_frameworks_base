@@ -11,8 +11,9 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
-import com.android.internal.backup.ITransportStatusCallback;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -21,9 +22,11 @@ public interface IBackupTransport extends IInterface {
 
     void cancelFullBackup(ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
 
-    void checkFullBackupSize(long j, ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
+    void checkFullBackupSize(long j, ITransportStatusCallback iTransportStatusCallback)
+            throws RemoteException;
 
-    void clearBackupData(PackageInfo packageInfo, ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
+    void clearBackupData(PackageInfo packageInfo, ITransportStatusCallback iTransportStatusCallback)
+            throws RemoteException;
 
     void configurationIntent(AndroidFuture<Intent> androidFuture) throws RemoteException;
 
@@ -31,160 +34,189 @@ public interface IBackupTransport extends IInterface {
 
     void dataManagementIntent(AndroidFuture<Intent> androidFuture) throws RemoteException;
 
-    void dataManagementIntentLabel(AndroidFuture<CharSequence> androidFuture) throws RemoteException;
+    void dataManagementIntentLabel(AndroidFuture<CharSequence> androidFuture)
+            throws RemoteException;
 
     void finishBackup(ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
 
     void finishRestore(ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
 
-    void getAvailableRestoreSets(AndroidFuture<List<RestoreSet>> androidFuture) throws RemoteException;
+    void getAvailableRestoreSets(AndroidFuture<List<RestoreSet>> androidFuture)
+            throws RemoteException;
 
-    void getBackupManagerMonitor(AndroidFuture<IBackupManagerMonitor> androidFuture) throws RemoteException;
+    void getBackupManagerMonitor(AndroidFuture<IBackupManagerMonitor> androidFuture)
+            throws RemoteException;
 
-    void getBackupQuota(String str, boolean z, AndroidFuture<Long> androidFuture) throws RemoteException;
+    void getBackupQuota(String str, boolean z, AndroidFuture<Long> androidFuture)
+            throws RemoteException;
 
     void getCurrentRestoreSet(AndroidFuture<Long> androidFuture) throws RemoteException;
 
-    void getNextFullRestoreDataChunk(ParcelFileDescriptor parcelFileDescriptor, ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
+    void getNextFullRestoreDataChunk(
+            ParcelFileDescriptor parcelFileDescriptor,
+            ITransportStatusCallback iTransportStatusCallback)
+            throws RemoteException;
 
-    void getRestoreData(ParcelFileDescriptor parcelFileDescriptor, ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
+    void getRestoreData(
+            ParcelFileDescriptor parcelFileDescriptor,
+            ITransportStatusCallback iTransportStatusCallback)
+            throws RemoteException;
 
     void getTransportFlags(AndroidFuture<Integer> androidFuture) throws RemoteException;
 
     void initializeDevice(ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
 
-    void isAppEligibleForBackup(PackageInfo packageInfo, boolean z, AndroidFuture<Boolean> androidFuture) throws RemoteException;
+    void isAppEligibleForBackup(
+            PackageInfo packageInfo, boolean z, AndroidFuture<Boolean> androidFuture)
+            throws RemoteException;
 
     void name(AndroidFuture<String> androidFuture) throws RemoteException;
 
     void nextRestorePackage(AndroidFuture<RestoreDescription> androidFuture) throws RemoteException;
 
-    void performBackup(PackageInfo packageInfo, ParcelFileDescriptor parcelFileDescriptor, int i, ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
+    void performBackup(
+            PackageInfo packageInfo,
+            ParcelFileDescriptor parcelFileDescriptor,
+            int i,
+            ITransportStatusCallback iTransportStatusCallback)
+            throws RemoteException;
 
-    void performFullBackup(PackageInfo packageInfo, ParcelFileDescriptor parcelFileDescriptor, int i, ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
+    void performFullBackup(
+            PackageInfo packageInfo,
+            ParcelFileDescriptor parcelFileDescriptor,
+            int i,
+            ITransportStatusCallback iTransportStatusCallback)
+            throws RemoteException;
 
     void requestBackupTime(AndroidFuture<Long> androidFuture) throws RemoteException;
 
     void requestFullBackupTime(AndroidFuture<Long> androidFuture) throws RemoteException;
 
-    void sendBackupData(int i, ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
+    void sendBackupData(int i, ITransportStatusCallback iTransportStatusCallback)
+            throws RemoteException;
 
-    void startRestore(long j, PackageInfo[] packageInfoArr, ITransportStatusCallback iTransportStatusCallback) throws RemoteException;
+    void startRestore(
+            long j, PackageInfo[] packageInfoArr, ITransportStatusCallback iTransportStatusCallback)
+            throws RemoteException;
 
     void transportDirName(AndroidFuture<String> androidFuture) throws RemoteException;
 
     public static class Default implements IBackupTransport {
         @Override // com.android.internal.backup.IBackupTransport
-        public void name(AndroidFuture<String> result) throws RemoteException {
-        }
+        public void name(AndroidFuture<String> result) throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void configurationIntent(AndroidFuture<Intent> resultFuture) throws RemoteException {
-        }
+        public void configurationIntent(AndroidFuture<Intent> resultFuture)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void currentDestinationString(AndroidFuture<String> resultFuture) throws RemoteException {
-        }
+        public void currentDestinationString(AndroidFuture<String> resultFuture)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void dataManagementIntent(AndroidFuture<Intent> resultFuture) throws RemoteException {
-        }
+        public void dataManagementIntent(AndroidFuture<Intent> resultFuture)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void dataManagementIntentLabel(AndroidFuture<CharSequence> resultFuture) throws RemoteException {
-        }
+        public void dataManagementIntentLabel(AndroidFuture<CharSequence> resultFuture)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void transportDirName(AndroidFuture<String> resultFuture) throws RemoteException {
-        }
+        public void transportDirName(AndroidFuture<String> resultFuture) throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void requestBackupTime(AndroidFuture<Long> resultFuture) throws RemoteException {
-        }
+        public void requestBackupTime(AndroidFuture<Long> resultFuture) throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void initializeDevice(ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void initializeDevice(ITransportStatusCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void performBackup(PackageInfo packageInfo, ParcelFileDescriptor inFd, int flags, ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void performBackup(
+                PackageInfo packageInfo,
+                ParcelFileDescriptor inFd,
+                int flags,
+                ITransportStatusCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void clearBackupData(PackageInfo packageInfo, ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void clearBackupData(PackageInfo packageInfo, ITransportStatusCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void finishBackup(ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void finishBackup(ITransportStatusCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void getAvailableRestoreSets(AndroidFuture<List<RestoreSet>> resultFuture) throws RemoteException {
-        }
+        public void getAvailableRestoreSets(AndroidFuture<List<RestoreSet>> resultFuture)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void getCurrentRestoreSet(AndroidFuture<Long> resultFuture) throws RemoteException {
-        }
+        public void getCurrentRestoreSet(AndroidFuture<Long> resultFuture) throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void startRestore(long token, PackageInfo[] packages, ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void startRestore(
+                long token, PackageInfo[] packages, ITransportStatusCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void nextRestorePackage(AndroidFuture<RestoreDescription> resultFuture) throws RemoteException {
-        }
+        public void nextRestorePackage(AndroidFuture<RestoreDescription> resultFuture)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void getRestoreData(ParcelFileDescriptor outFd, ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void getRestoreData(ParcelFileDescriptor outFd, ITransportStatusCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void finishRestore(ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void finishRestore(ITransportStatusCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void requestFullBackupTime(AndroidFuture<Long> resultFuture) throws RemoteException {
-        }
+        public void requestFullBackupTime(AndroidFuture<Long> resultFuture)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void performFullBackup(PackageInfo targetPackage, ParcelFileDescriptor socket, int flags, ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void performFullBackup(
+                PackageInfo targetPackage,
+                ParcelFileDescriptor socket,
+                int flags,
+                ITransportStatusCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void checkFullBackupSize(long size, ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void checkFullBackupSize(long size, ITransportStatusCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void sendBackupData(int numBytes, ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void sendBackupData(int numBytes, ITransportStatusCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void cancelFullBackup(ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void cancelFullBackup(ITransportStatusCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void isAppEligibleForBackup(PackageInfo targetPackage, boolean isFullBackup, AndroidFuture<Boolean> resultFuture) throws RemoteException {
-        }
+        public void isAppEligibleForBackup(
+                PackageInfo targetPackage,
+                boolean isFullBackup,
+                AndroidFuture<Boolean> resultFuture)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void getBackupQuota(String packageName, boolean isFullBackup, AndroidFuture<Long> resultFuture) throws RemoteException {
-        }
+        public void getBackupQuota(
+                String packageName, boolean isFullBackup, AndroidFuture<Long> resultFuture)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void getNextFullRestoreDataChunk(ParcelFileDescriptor socket, ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void getNextFullRestoreDataChunk(
+                ParcelFileDescriptor socket, ITransportStatusCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void abortFullRestore(ITransportStatusCallback callback) throws RemoteException {
-        }
+        public void abortFullRestore(ITransportStatusCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void getTransportFlags(AndroidFuture<Integer> resultFuture) throws RemoteException {
-        }
+        public void getTransportFlags(AndroidFuture<Integer> resultFuture) throws RemoteException {}
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void getBackupManagerMonitor(AndroidFuture<IBackupManagerMonitor> resultFuture) throws RemoteException {
-        }
+        public void getBackupManagerMonitor(AndroidFuture<IBackupManagerMonitor> resultFuture)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -192,7 +224,7 @@ public interface IBackupTransport extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBackupTransport {
+    public abstract static class Stub extends Binder implements IBackupTransport {
         public static final String DESCRIPTOR = "com.android.internal.backup.IBackupTransport";
         static final int TRANSACTION_abortFullRestore = 26;
         static final int TRANSACTION_cancelFullBackup = 22;
@@ -312,7 +344,8 @@ public interface IBackupTransport extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -322,159 +355,196 @@ public interface IBackupTransport extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AndroidFuture<String> _arg0 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<String> _arg0 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     name(_arg0);
                     return true;
                 case 2:
-                    AndroidFuture<Intent> _arg02 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<Intent> _arg02 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     configurationIntent(_arg02);
                     return true;
                 case 3:
-                    AndroidFuture<String> _arg03 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<String> _arg03 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     currentDestinationString(_arg03);
                     return true;
                 case 4:
-                    AndroidFuture<Intent> _arg04 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<Intent> _arg04 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     dataManagementIntent(_arg04);
                     return true;
                 case 5:
-                    AndroidFuture<CharSequence> _arg05 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<CharSequence> _arg05 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     dataManagementIntentLabel(_arg05);
                     return true;
                 case 6:
-                    AndroidFuture<String> _arg06 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<String> _arg06 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     transportDirName(_arg06);
                     return true;
                 case 7:
-                    AndroidFuture<Long> _arg07 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<Long> _arg07 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     requestBackupTime(_arg07);
                     return true;
                 case 8:
-                    ITransportStatusCallback _arg08 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransportStatusCallback _arg08 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     initializeDevice(_arg08);
                     return true;
                 case 9:
                     PackageInfo _arg09 = (PackageInfo) data.readTypedObject(PackageInfo.CREATOR);
-                    ParcelFileDescriptor _arg1 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg1 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     int _arg2 = data.readInt();
-                    ITransportStatusCallback _arg3 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransportStatusCallback _arg3 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     performBackup(_arg09, _arg1, _arg2, _arg3);
                     return true;
                 case 10:
                     PackageInfo _arg010 = (PackageInfo) data.readTypedObject(PackageInfo.CREATOR);
-                    ITransportStatusCallback _arg12 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransportStatusCallback _arg12 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     clearBackupData(_arg010, _arg12);
                     return true;
                 case 11:
-                    ITransportStatusCallback _arg011 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransportStatusCallback _arg011 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     finishBackup(_arg011);
                     return true;
                 case 12:
-                    AndroidFuture<List<RestoreSet>> _arg012 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<List<RestoreSet>> _arg012 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getAvailableRestoreSets(_arg012);
                     return true;
                 case 13:
-                    AndroidFuture<Long> _arg013 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<Long> _arg013 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getCurrentRestoreSet(_arg013);
                     return true;
                 case 14:
                     long _arg014 = data.readLong();
-                    PackageInfo[] _arg13 = (PackageInfo[]) data.createTypedArray(PackageInfo.CREATOR);
-                    ITransportStatusCallback _arg22 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    PackageInfo[] _arg13 =
+                            (PackageInfo[]) data.createTypedArray(PackageInfo.CREATOR);
+                    ITransportStatusCallback _arg22 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startRestore(_arg014, _arg13, _arg22);
                     return true;
                 case 15:
-                    AndroidFuture<RestoreDescription> _arg015 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<RestoreDescription> _arg015 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     nextRestorePackage(_arg015);
                     return true;
                 case 16:
-                    ParcelFileDescriptor _arg016 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    ITransportStatusCallback _arg14 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ParcelFileDescriptor _arg016 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ITransportStatusCallback _arg14 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getRestoreData(_arg016, _arg14);
                     return true;
                 case 17:
-                    ITransportStatusCallback _arg017 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransportStatusCallback _arg017 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     finishRestore(_arg017);
                     return true;
                 case 18:
-                    AndroidFuture<Long> _arg018 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<Long> _arg018 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     requestFullBackupTime(_arg018);
                     return true;
                 case 19:
                     PackageInfo _arg019 = (PackageInfo) data.readTypedObject(PackageInfo.CREATOR);
-                    ParcelFileDescriptor _arg15 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg15 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     int _arg23 = data.readInt();
-                    ITransportStatusCallback _arg32 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransportStatusCallback _arg32 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     performFullBackup(_arg019, _arg15, _arg23, _arg32);
                     return true;
                 case 20:
                     long _arg020 = data.readLong();
-                    ITransportStatusCallback _arg16 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransportStatusCallback _arg16 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     checkFullBackupSize(_arg020, _arg16);
                     return true;
                 case 21:
                     int _arg021 = data.readInt();
-                    ITransportStatusCallback _arg17 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransportStatusCallback _arg17 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     sendBackupData(_arg021, _arg17);
                     return true;
                 case 22:
-                    ITransportStatusCallback _arg022 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransportStatusCallback _arg022 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     cancelFullBackup(_arg022);
                     return true;
                 case 23:
                     PackageInfo _arg023 = (PackageInfo) data.readTypedObject(PackageInfo.CREATOR);
                     boolean _arg18 = data.readBoolean();
-                    AndroidFuture<Boolean> _arg24 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<Boolean> _arg24 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     isAppEligibleForBackup(_arg023, _arg18, _arg24);
                     return true;
                 case 24:
                     String _arg024 = data.readString();
                     boolean _arg19 = data.readBoolean();
-                    AndroidFuture<Long> _arg25 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<Long> _arg25 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getBackupQuota(_arg024, _arg19, _arg25);
                     return true;
                 case 25:
-                    ParcelFileDescriptor _arg025 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    ITransportStatusCallback _arg110 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ParcelFileDescriptor _arg025 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ITransportStatusCallback _arg110 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getNextFullRestoreDataChunk(_arg025, _arg110);
                     return true;
                 case 26:
-                    ITransportStatusCallback _arg026 = ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransportStatusCallback _arg026 =
+                            ITransportStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     abortFullRestore(_arg026);
                     return true;
                 case 27:
-                    AndroidFuture<Integer> _arg027 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<Integer> _arg027 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getTransportFlags(_arg027);
                     return true;
                 case 28:
-                    AndroidFuture<IBackupManagerMonitor> _arg028 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<IBackupManagerMonitor> _arg028 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getBackupManagerMonitor(_arg028);
                     return true;
@@ -512,7 +582,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void configurationIntent(AndroidFuture<Intent> resultFuture) throws RemoteException {
+            public void configurationIntent(AndroidFuture<Intent> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -524,7 +595,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void currentDestinationString(AndroidFuture<String> resultFuture) throws RemoteException {
+            public void currentDestinationString(AndroidFuture<String> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -536,7 +608,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void dataManagementIntent(AndroidFuture<Intent> resultFuture) throws RemoteException {
+            public void dataManagementIntent(AndroidFuture<Intent> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -548,7 +621,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void dataManagementIntentLabel(AndroidFuture<CharSequence> resultFuture) throws RemoteException {
+            public void dataManagementIntentLabel(AndroidFuture<CharSequence> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -560,7 +634,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void transportDirName(AndroidFuture<String> resultFuture) throws RemoteException {
+            public void transportDirName(AndroidFuture<String> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -596,7 +671,12 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void performBackup(PackageInfo packageInfo, ParcelFileDescriptor inFd, int flags, ITransportStatusCallback callback) throws RemoteException {
+            public void performBackup(
+                    PackageInfo packageInfo,
+                    ParcelFileDescriptor inFd,
+                    int flags,
+                    ITransportStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -611,7 +691,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void clearBackupData(PackageInfo packageInfo, ITransportStatusCallback callback) throws RemoteException {
+            public void clearBackupData(PackageInfo packageInfo, ITransportStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -636,7 +717,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void getAvailableRestoreSets(AndroidFuture<List<RestoreSet>> resultFuture) throws RemoteException {
+            public void getAvailableRestoreSets(AndroidFuture<List<RestoreSet>> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -648,7 +730,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void getCurrentRestoreSet(AndroidFuture<Long> resultFuture) throws RemoteException {
+            public void getCurrentRestoreSet(AndroidFuture<Long> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -660,7 +743,9 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void startRestore(long token, PackageInfo[] packages, ITransportStatusCallback callback) throws RemoteException {
+            public void startRestore(
+                    long token, PackageInfo[] packages, ITransportStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -674,7 +759,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void nextRestorePackage(AndroidFuture<RestoreDescription> resultFuture) throws RemoteException {
+            public void nextRestorePackage(AndroidFuture<RestoreDescription> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -686,7 +772,9 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void getRestoreData(ParcelFileDescriptor outFd, ITransportStatusCallback callback) throws RemoteException {
+            public void getRestoreData(
+                    ParcelFileDescriptor outFd, ITransportStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -711,7 +799,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void requestFullBackupTime(AndroidFuture<Long> resultFuture) throws RemoteException {
+            public void requestFullBackupTime(AndroidFuture<Long> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -723,7 +812,12 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void performFullBackup(PackageInfo targetPackage, ParcelFileDescriptor socket, int flags, ITransportStatusCallback callback) throws RemoteException {
+            public void performFullBackup(
+                    PackageInfo targetPackage,
+                    ParcelFileDescriptor socket,
+                    int flags,
+                    ITransportStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -738,7 +832,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void checkFullBackupSize(long size, ITransportStatusCallback callback) throws RemoteException {
+            public void checkFullBackupSize(long size, ITransportStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -751,7 +846,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void sendBackupData(int numBytes, ITransportStatusCallback callback) throws RemoteException {
+            public void sendBackupData(int numBytes, ITransportStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -776,7 +872,11 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void isAppEligibleForBackup(PackageInfo targetPackage, boolean isFullBackup, AndroidFuture<Boolean> resultFuture) throws RemoteException {
+            public void isAppEligibleForBackup(
+                    PackageInfo targetPackage,
+                    boolean isFullBackup,
+                    AndroidFuture<Boolean> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -790,7 +890,9 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void getBackupQuota(String packageName, boolean isFullBackup, AndroidFuture<Long> resultFuture) throws RemoteException {
+            public void getBackupQuota(
+                    String packageName, boolean isFullBackup, AndroidFuture<Long> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -804,7 +906,9 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void getNextFullRestoreDataChunk(ParcelFileDescriptor socket, ITransportStatusCallback callback) throws RemoteException {
+            public void getNextFullRestoreDataChunk(
+                    ParcelFileDescriptor socket, ITransportStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -829,7 +933,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void getTransportFlags(AndroidFuture<Integer> resultFuture) throws RemoteException {
+            public void getTransportFlags(AndroidFuture<Integer> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -841,7 +946,8 @@ public interface IBackupTransport extends IInterface {
             }
 
             @Override // com.android.internal.backup.IBackupTransport
-            public void getBackupManagerMonitor(AndroidFuture<IBackupManagerMonitor> resultFuture) throws RemoteException {
+            public void getBackupManagerMonitor(AndroidFuture<IBackupManagerMonitor> resultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

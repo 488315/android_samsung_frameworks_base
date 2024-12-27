@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IAcknowledgeEvent extends IInterface {
-    public static final String DESCRIPTOR = "android.media.soundtrigger_middleware.IAcknowledgeEvent";
+    public static final String DESCRIPTOR =
+            "android.media.soundtrigger_middleware.IAcknowledgeEvent";
 
     void eventReceived() throws RemoteException;
 
     public static class Default implements IAcknowledgeEvent {
         @Override // android.media.soundtrigger_middleware.IAcknowledgeEvent
-        public void eventReceived() throws RemoteException {
-        }
+        public void eventReceived() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IAcknowledgeEvent extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAcknowledgeEvent {
+    public abstract static class Stub extends Binder implements IAcknowledgeEvent {
         static final int TRANSACTION_eventReceived = 1;
 
         public Stub() {
@@ -47,7 +47,8 @@ public interface IAcknowledgeEvent extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAcknowledgeEvent.DESCRIPTOR);
             }

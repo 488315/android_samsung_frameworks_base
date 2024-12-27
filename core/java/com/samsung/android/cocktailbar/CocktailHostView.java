@@ -53,8 +53,11 @@ public class CocktailHostView extends FrameLayout {
             if (adapter instanceof BaseAdapter) {
                 BaseAdapter baseAdapter = (BaseAdapter) adapter;
                 baseAdapter.notifyDataSetChanged();
-            } else if (adapter == null && (adapterView instanceof RemoteViewsAdapter.RemoteAdapterConnectionCallback)) {
-                ((RemoteViewsAdapter.RemoteAdapterConnectionCallback) adapterView).deferNotifyDataSetChanged();
+            } else if (adapter == null
+                    && (adapterView
+                            instanceof RemoteViewsAdapter.RemoteAdapterConnectionCallback)) {
+                ((RemoteViewsAdapter.RemoteAdapterConnectionCallback) adapterView)
+                        .deferNotifyDataSetChanged();
             }
         }
     }

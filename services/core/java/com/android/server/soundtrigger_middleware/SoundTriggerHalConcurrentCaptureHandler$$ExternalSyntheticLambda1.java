@@ -5,22 +5,23 @@ import android.media.soundtrigger.PhraseRecognitionExtra;
 import android.media.soundtrigger.RecognitionEvent;
 import android.media.soundtrigger_middleware.PhraseRecognitionEventSys;
 import android.media.soundtrigger_middleware.RecognitionEventSys;
-import com.android.server.soundtrigger_middleware.ISoundTriggerHal;
-import com.android.server.soundtrigger_middleware.SoundTriggerHalConcurrentCaptureHandler;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda1 implements Runnable {
+public final /* synthetic */ class SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda1
+        implements Runnable {
     public final /* synthetic */ int $r8$classId = 0;
     public final /* synthetic */ int f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda1(int i, SoundTriggerHalConcurrentCaptureHandler.LoadedModel loadedModel) {
+    public /* synthetic */ SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda1(
+            int i, SoundTriggerHalConcurrentCaptureHandler.LoadedModel loadedModel) {
         this.f$0 = i;
         this.f$1 = loadedModel;
     }
 
-    public /* synthetic */ SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda1(SoundTriggerHalConcurrentCaptureHandler.CallbackWrapper callbackWrapper, int i) {
+    public /* synthetic */ SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda1(
+            SoundTriggerHalConcurrentCaptureHandler.CallbackWrapper callbackWrapper, int i) {
         this.f$1 = callbackWrapper;
         this.f$0 = i;
     }
@@ -30,7 +31,8 @@ public final /* synthetic */ class SoundTriggerHalConcurrentCaptureHandler$$Exte
         switch (this.$r8$classId) {
             case 0:
                 int i = this.f$0;
-                SoundTriggerHalConcurrentCaptureHandler.LoadedModel loadedModel = (SoundTriggerHalConcurrentCaptureHandler.LoadedModel) this.f$1;
+                SoundTriggerHalConcurrentCaptureHandler.LoadedModel loadedModel =
+                        (SoundTriggerHalConcurrentCaptureHandler.LoadedModel) this.f$1;
                 int i2 = loadedModel.type;
                 ISoundTriggerHal.ModelCallback modelCallback = loadedModel.callback;
                 if (i2 == 0) {
@@ -41,7 +43,8 @@ public final /* synthetic */ class SoundTriggerHalConcurrentCaptureHandler$$Exte
                     phraseRecognitionEvent.phraseExtras = new PhraseRecognitionExtra[0];
                     recognitionEvent.type = 0;
                     recognitionEvent.status = 1;
-                    PhraseRecognitionEventSys phraseRecognitionEventSys = new PhraseRecognitionEventSys();
+                    PhraseRecognitionEventSys phraseRecognitionEventSys =
+                            new PhraseRecognitionEventSys();
                     phraseRecognitionEventSys.phraseRecognitionEvent = phraseRecognitionEvent;
                     modelCallback.phraseRecognitionCallback(i, phraseRecognitionEventSys);
                     break;
@@ -57,7 +60,8 @@ public final /* synthetic */ class SoundTriggerHalConcurrentCaptureHandler$$Exte
                 }
                 break;
             default:
-                SoundTriggerHalConcurrentCaptureHandler.CallbackWrapper callbackWrapper = (SoundTriggerHalConcurrentCaptureHandler.CallbackWrapper) this.f$1;
+                SoundTriggerHalConcurrentCaptureHandler.CallbackWrapper callbackWrapper =
+                        (SoundTriggerHalConcurrentCaptureHandler.CallbackWrapper) this.f$1;
                 callbackWrapper.mDelegateCallback.modelUnloaded(this.f$0);
                 break;
         }

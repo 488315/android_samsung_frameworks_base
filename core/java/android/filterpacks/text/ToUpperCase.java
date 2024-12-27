@@ -5,6 +5,7 @@ import android.filterfw.core.FilterContext;
 import android.filterfw.core.Frame;
 import android.filterfw.core.FrameFormat;
 import android.filterfw.format.ObjectFormat;
+
 import java.util.Locale;
 
 /* loaded from: classes.dex */

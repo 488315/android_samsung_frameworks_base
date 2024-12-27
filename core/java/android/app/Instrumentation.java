@@ -1,7 +1,6 @@
 package android.app;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -35,10 +34,13 @@ import android.view.SurfaceControl;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManagerGlobal;
+
 import com.android.internal.R;
 import com.android.internal.content.ReferrerIntent;
+
 import com.samsung.android.core.AppJumpBlockTool;
 import com.samsung.android.rune.CoreRune;
+
 import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -74,12 +76,12 @@ public class Instrumentation {
     private final Object mAnimationCompleteLock = new Object();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UiAutomationFlags {
-    }
+    public @interface UiAutomationFlags {}
 
     static {
         boolean z = false;
-        if (Build.IS_DEBUGGABLE && SystemProperties.getBoolean("persist.wm.debug.start_activity", false)) {
+        if (Build.IS_DEBUGGABLE
+                && SystemProperties.getBoolean("persist.wm.debug.start_activity", false)) {
             z = true;
         }
         DEBUG_START_ACTIVITY = z;
@@ -87,7 +89,8 @@ public class Instrumentation {
 
     private void checkInstrumenting(String method) {
         if (this.mInstrContext == null) {
-            throw new RuntimeException(method + " cannot be called outside of instrumented processes");
+            throw new RuntimeException(
+                    method + " cannot be called outside of instrumented processes");
         }
     }
 
@@ -98,8 +101,7 @@ public class Instrumentation {
         return true;
     }
 
-    public void onCreate(Bundle arguments) {
-    }
+    public void onCreate(Bundle arguments) {}
 
     public void start() {
         if (this.mRunner != null) {
@@ -109,8 +111,7 @@ public class Instrumentation {
         this.mRunner.start();
     }
 
-    public void onStart() {
-    }
+    public void onStart() {}
 
     public boolean onException(Object obj, Throwable e) {
         return false;
@@ -169,8 +170,7 @@ public class Instrumentation {
         }
     }
 
-    public void onDestroy() {
-    }
+    public void onDestroy() {}
 
     public Context getContext() {
         return this.mInstrContext;
@@ -208,13 +208,15 @@ public class Instrumentation {
 
     public void setInTouchMode(boolean inTouch) {
         try {
-            IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE)).setInTouchModeOnAllDisplays(inTouch);
+            IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE))
+                    .setInTouchModeOnAllDisplays(inTouch);
         } catch (RemoteException e) {
         }
     }
 
     public void resetInTouchMode() {
-        boolean defaultInTouchMode = getContext().getResources().getBoolean(R.bool.config_defaultInTouchMode);
+        boolean defaultInTouchMode =
+                getContext().getResources().getBoolean(R.bool.config_defaultInTouchMode);
         setInTouchMode(defaultInTouchMode);
     }
 
@@ -263,12 +265,28 @@ public class Instrumentation {
     }
 
     boolean isSdkSandboxAllowedToStartActivities() {
-        return Process.isSdkSandbox() && this.mThread != null && this.mThread.mBoundApplication != null && this.mThread.mBoundApplication.isSdkInSandbox && getContext() != null && getContext().checkSelfPermission(Manifest.permission.START_ACTIVITIES_FROM_SDK_SANDBOX) == 0;
+        return Process.isSdkSandbox()
+                && this.mThread != null
+                && this.mThread.mBoundApplication != null
+                && this.mThread.mBoundApplication.isSdkInSandbox
+                && getContext() != null
+                && getContext()
+                                .checkSelfPermission(
+                                        Manifest.permission.START_ACTIVITIES_FROM_SDK_SANDBOX)
+                        == 0;
     }
 
     private void adjustIntentForCtsInSdkSandboxInstrumentation(Intent intent) {
-        if (this.mComponent != null && intent.getComponent() != null && getContext().getPackageManager().getSdkSandboxPackageName().equals(intent.getComponent().getPackageName())) {
-            intent.setComponent(new ComponentName(this.mComponent.getPackageName(), intent.getComponent().getClassName()));
+        if (this.mComponent != null
+                && intent.getComponent() != null
+                && getContext()
+                        .getPackageManager()
+                        .getSdkSandboxPackageName()
+                        .equals(intent.getComponent().getPackageName())) {
+            intent.setComponent(
+                    new ComponentName(
+                            this.mComponent.getPackageName(),
+                            intent.getComponent().getClassName()));
         }
         intent.setIdentifier(this.mComponent.getPackageName());
     }
@@ -305,7 +323,13 @@ public class Instrumentation {
             }
             String myProc = this.mThread.getProcessName();
             if (!ai.processName.equals(myProc)) {
-                throw new RuntimeException("Intent in process " + myProc + " resolved to different process " + ai.processName + ": " + intent2);
+                throw new RuntimeException(
+                        "Intent in process "
+                                + myProc
+                                + " resolved to different process "
+                                + ai.processName
+                                + ": "
+                                + intent2);
             }
             intent2.setComponent(new ComponentName(ai.applicationInfo.packageName, ai.name));
             ActivityWaiter aw = new ActivityWaiter(intent2);
@@ -441,15 +465,17 @@ public class Instrumentation {
             return null;
         }
 
-        public void onStartActivityResult(int result, Bundle bOptions) {
-        }
+        public void onStartActivityResult(int result, Bundle bOptions) {}
 
         final boolean match(Context who, Activity activity, Intent intent) {
             if (this.mIgnoreMatchingSpecificIntents) {
                 return false;
             }
             synchronized (this) {
-                if (this.mWhich != null && this.mWhich.match(who.getContentResolver(), intent, true, Instrumentation.TAG) < 0) {
+                if (this.mWhich != null
+                        && this.mWhich.match(
+                                        who.getContentResolver(), intent, true, Instrumentation.TAG)
+                                < 0) {
                     return false;
                 }
                 if (this.mClass != null) {
@@ -633,18 +659,38 @@ public class Instrumentation {
         int eventDisplayId = event.getDisplayId();
         if (eventDisplayId != -1) {
             if (VERBOSE) {
-                Log.v(TAG, "setDisplayIfNeeded(" + event + "): not changing display id as it's explicitly set to " + eventDisplayId);
+                Log.v(
+                        TAG,
+                        "setDisplayIfNeeded("
+                                + event
+                                + "): not changing display id as it's explicitly set to "
+                                + eventDisplayId);
                 return;
             }
             return;
         }
-        UserManager userManager = (UserManager) this.mInstrContext.getSystemService(UserManager.class);
+        UserManager userManager =
+                (UserManager) this.mInstrContext.getSystemService(UserManager.class);
         int userDisplayId = userManager.getMainDisplayIdAssignedToUser();
         if (VERBOSE) {
-            Log.v(TAG, "setDisplayIfNeeded(" + event + "): eventDisplayId=" + eventDisplayId + ", user=" + this.mInstrContext.getUser() + ", userDisplayId=" + userDisplayId);
+            Log.v(
+                    TAG,
+                    "setDisplayIfNeeded("
+                            + event
+                            + "): eventDisplayId="
+                            + eventDisplayId
+                            + ", user="
+                            + this.mInstrContext.getUser()
+                            + ", userDisplayId="
+                            + userDisplayId);
         }
         if (userDisplayId == -1) {
-            Log.e(TAG, "setDisplayIfNeeded(" + event + "): UserManager returned INVALID_DISPLAY as display assigned to user " + this.mInstrContext.getUser());
+            Log.e(
+                    TAG,
+                    "setDisplayIfNeeded("
+                            + event
+                            + "): UserManager returned INVALID_DISPLAY as display assigned to user "
+                            + this.mInstrContext.getUser());
         } else {
             event.setDisplayId(userDisplayId);
         }
@@ -692,13 +738,16 @@ public class Instrumentation {
         InputManagerGlobal.getInstance().injectInputEvent(event, 2);
     }
 
-    public Application newApplication(ClassLoader cl, String className, Context context) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-        Application app = getFactory(context.getPackageName()).instantiateApplication(cl, className);
+    public Application newApplication(ClassLoader cl, String className, Context context)
+            throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+        Application app =
+                getFactory(context.getPackageName()).instantiateApplication(cl, className);
         app.attach(context);
         return app;
     }
 
-    public static Application newApplication(Class<?> clazz, Context context) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public static Application newApplication(Class<?> clazz, Context context)
+            throws InstantiationException, IllegalAccessException, ClassNotFoundException {
         Application app = (Application) clazz.newInstance();
         app.attach(context);
         return app;
@@ -708,7 +757,18 @@ public class Instrumentation {
         app.onCreate();
     }
 
-    public Activity newActivity(Class<?> clazz, Context context, IBinder token, Application application, Intent intent, ActivityInfo info, CharSequence title, Activity parent, String id, Object lastNonConfigurationInstance) throws InstantiationException, IllegalAccessException {
+    public Activity newActivity(
+            Class<?> clazz,
+            Context context,
+            IBinder token,
+            Application application,
+            Intent intent,
+            ActivityInfo info,
+            CharSequence title,
+            Activity parent,
+            String id,
+            Object lastNonConfigurationInstance)
+            throws InstantiationException, IllegalAccessException {
         Application application2;
         Activity activity = (Activity) clazz.newInstance();
         if (application != null) {
@@ -716,12 +776,36 @@ public class Instrumentation {
         } else {
             application2 = new Application();
         }
-        activity.attach(context, null, this, token, 0, application2, intent, info, title, parent, id, (Activity.NonConfigurationInstances) lastNonConfigurationInstance, new Configuration(), null, null, null, null, null, null, null);
+        activity.attach(
+                context,
+                null,
+                this,
+                token,
+                0,
+                application2,
+                intent,
+                info,
+                title,
+                parent,
+                id,
+                (Activity.NonConfigurationInstances) lastNonConfigurationInstance,
+                new Configuration(),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
         return activity;
     }
 
-    public Activity newActivity(ClassLoader cl, String className, Intent intent) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-        String pkg = (intent == null || intent.getComponent() == null) ? null : intent.getComponent().getPackageName();
+    public Activity newActivity(ClassLoader cl, String className, Intent intent)
+            throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+        String pkg =
+                (intent == null || intent.getComponent() == null)
+                        ? null
+                        : intent.getComponent().getPackageName();
         return getFactory(pkg).instantiateActivity(cl, className, intent);
     }
 
@@ -731,7 +815,11 @@ public class Instrumentation {
             return AppComponentFactory.DEFAULT;
         }
         if (this.mThread == null) {
-            Log.e(TAG, "Uninitialized ActivityThread, likely app-created Instrumentation, disabling AppComponentFactory", new Throwable());
+            Log.e(
+                    TAG,
+                    "Uninitialized ActivityThread, likely app-created Instrumentation, disabling"
+                            + " AppComponentFactory",
+                    new Throwable());
             return AppComponentFactory.DEFAULT;
         }
         LoadedApk apk = this.mThread.peekPackageInfo(pkg, true);
@@ -794,7 +882,8 @@ public class Instrumentation {
         postPerformCreate(activity);
     }
 
-    public void callActivityOnCreate(Activity activity, Bundle icicle, PersistableBundle persistentState) {
+    public void callActivityOnCreate(
+            Activity activity, Bundle icicle, PersistableBundle persistentState) {
         prePerformCreate(activity);
         activity.performCreate(icicle, persistentState);
         postPerformCreate(activity);
@@ -808,7 +897,8 @@ public class Instrumentation {
         activity.performRestoreInstanceState(savedInstanceState);
     }
 
-    public void callActivityOnRestoreInstanceState(Activity activity, Bundle savedInstanceState, PersistableBundle persistentState) {
+    public void callActivityOnRestoreInstanceState(
+            Activity activity, Bundle savedInstanceState, PersistableBundle persistentState) {
         activity.performRestoreInstanceState(savedInstanceState, persistentState);
     }
 
@@ -816,13 +906,15 @@ public class Instrumentation {
         activity.onPostCreate(savedInstanceState);
     }
 
-    public void callActivityOnPostCreate(Activity activity, Bundle savedInstanceState, PersistableBundle persistentState) {
+    public void callActivityOnPostCreate(
+            Activity activity, Bundle savedInstanceState, PersistableBundle persistentState) {
         activity.onPostCreate(savedInstanceState, persistentState);
     }
 
     public void callActivityOnNewIntent(Activity activity, Intent intent) {
         if (android.security.Flags.contentUriPermissionApis()) {
-            activity.performNewIntent(intent, new ComponentCaller(activity.getActivityToken(), null));
+            activity.performNewIntent(
+                    intent, new ComponentCaller(activity.getActivityToken(), null));
         } else {
             activity.performNewIntent(intent);
         }
@@ -832,11 +924,13 @@ public class Instrumentation {
         activity.performNewIntent(intent, caller);
     }
 
-    public void callActivityOnNewIntent(Activity activity, ReferrerIntent intent, ComponentCaller caller) {
+    public void callActivityOnNewIntent(
+            Activity activity, ReferrerIntent intent, ComponentCaller caller) {
         internalCallActivityOnNewIntent(activity, intent, caller);
     }
 
-    private void internalCallActivityOnNewIntent(Activity activity, ReferrerIntent intent, ComponentCaller caller) {
+    private void internalCallActivityOnNewIntent(
+            Activity activity, ReferrerIntent intent, ComponentCaller caller) {
         String oldReferrer = activity.mReferrer;
         if (intent != null) {
             try {
@@ -853,7 +947,8 @@ public class Instrumentation {
 
     public void callActivityOnNewIntent(Activity activity, ReferrerIntent intent) {
         if (android.security.Flags.contentUriPermissionApis()) {
-            internalCallActivityOnNewIntent(activity, intent, new ComponentCaller(activity.getActivityToken(), null));
+            internalCallActivityOnNewIntent(
+                    activity, intent, new ComponentCaller(activity.getActivityToken(), null));
             return;
         }
         String oldReferrer = activity.mReferrer;
@@ -899,7 +994,8 @@ public class Instrumentation {
         activity.performSaveInstanceState(outState);
     }
 
-    public void callActivityOnSaveInstanceState(Activity activity, Bundle outState, PersistableBundle outPersistentState) {
+    public void callActivityOnSaveInstanceState(
+            Activity activity, Bundle outState, PersistableBundle outPersistentState) {
         activity.performSaveInstanceState(outState, outPersistentState);
     }
 
@@ -948,18 +1044,28 @@ public class Instrumentation {
 
     public Bundle getAllocCounts() {
         Bundle results = new Bundle();
-        results.putLong(PerformanceCollector.METRIC_KEY_GLOBAL_ALLOC_COUNT, Debug.getGlobalAllocCount());
-        results.putLong(PerformanceCollector.METRIC_KEY_GLOBAL_ALLOC_SIZE, Debug.getGlobalAllocSize());
-        results.putLong(PerformanceCollector.METRIC_KEY_GLOBAL_FREED_COUNT, Debug.getGlobalFreedCount());
-        results.putLong(PerformanceCollector.METRIC_KEY_GLOBAL_FREED_SIZE, Debug.getGlobalFreedSize());
-        results.putLong(PerformanceCollector.METRIC_KEY_GC_INVOCATION_COUNT, Debug.getGlobalGcInvocationCount());
+        results.putLong(
+                PerformanceCollector.METRIC_KEY_GLOBAL_ALLOC_COUNT, Debug.getGlobalAllocCount());
+        results.putLong(
+                PerformanceCollector.METRIC_KEY_GLOBAL_ALLOC_SIZE, Debug.getGlobalAllocSize());
+        results.putLong(
+                PerformanceCollector.METRIC_KEY_GLOBAL_FREED_COUNT, Debug.getGlobalFreedCount());
+        results.putLong(
+                PerformanceCollector.METRIC_KEY_GLOBAL_FREED_SIZE, Debug.getGlobalFreedSize());
+        results.putLong(
+                PerformanceCollector.METRIC_KEY_GC_INVOCATION_COUNT,
+                Debug.getGlobalGcInvocationCount());
         return results;
     }
 
     public Bundle getBinderCounts() {
         Bundle results = new Bundle();
-        results.putLong(PerformanceCollector.METRIC_KEY_SENT_TRANSACTIONS, Debug.getBinderSentTransactions());
-        results.putLong(PerformanceCollector.METRIC_KEY_RECEIVED_TRANSACTIONS, Debug.getBinderReceivedTransactions());
+        results.putLong(
+                PerformanceCollector.METRIC_KEY_SENT_TRANSACTIONS,
+                Debug.getBinderSentTransactions());
+        results.putLong(
+                PerformanceCollector.METRIC_KEY_RECEIVED_TRANSACTIONS,
+                Debug.getBinderReceivedTransactions());
         return results;
     }
 
@@ -982,26 +1088,52 @@ public class Instrumentation {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:40:0x00d1, code lost:
-    
-        r12 = r2;
-     */
+
+       r12 = r2;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.app.Instrumentation.ActivityResult execStartActivity(final android.content.Context r25, android.os.IBinder r26, final android.os.IBinder r27, final android.app.Activity r28, final android.content.Intent r29, int r30, android.os.Bundle r31) {
+    public android.app.Instrumentation.ActivityResult execStartActivity(
+            final android.content.Context r25,
+            android.os.IBinder r26,
+            final android.os.IBinder r27,
+            final android.app.Activity r28,
+            final android.content.Intent r29,
+            int r30,
+            android.os.Bundle r31) {
         /*
             Method dump skipped, instructions count: 361
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.Instrumentation.execStartActivity(android.content.Context, android.os.IBinder, android.os.IBinder, android.app.Activity, android.content.Intent, int, android.os.Bundle):android.app.Instrumentation$ActivityResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                        + " android.app.Instrumentation.execStartActivity(android.content.Context,"
+                        + " android.os.IBinder, android.os.IBinder, android.app.Activity,"
+                        + " android.content.Intent, int,"
+                        + " android.os.Bundle):android.app.Instrumentation$ActivityResult");
     }
 
-    public void execStartActivities(Context who, IBinder contextThread, IBinder token, Activity target, Intent[] intents, Bundle options) {
-        execStartActivitiesAsUser(who, contextThread, token, target, intents, options, who.getUserId());
+    public void execStartActivities(
+            Context who,
+            IBinder contextThread,
+            IBinder token,
+            Activity target,
+            Intent[] intents,
+            Bundle options) {
+        execStartActivitiesAsUser(
+                who, contextThread, token, target, intents, options, who.getUserId());
     }
 
-    public int execStartActivitiesAsUser(final Context who, IBinder contextThread, final IBinder token, Activity target, Intent[] intents, Bundle options, final int userId) {
+    public int execStartActivitiesAsUser(
+            final Context who,
+            IBinder contextThread,
+            final IBinder token,
+            Activity target,
+            Intent[] intents,
+            Bundle options,
+            final int userId) {
         Bundle options2;
         Bundle options3;
         if (DEBUG_START_ACTIVITY) {
@@ -1010,7 +1142,19 @@ public class Instrumentation {
                 joiner.add(i.toString());
             }
             options2 = options;
-            Log.d(TAG, "startActivities: who=" + who + " source=" + target + " userId=" + userId + " intents=[" + joiner + "] options=" + options2, new Throwable());
+            Log.d(
+                    TAG,
+                    "startActivities: who="
+                            + who
+                            + " source="
+                            + target
+                            + " userId="
+                            + userId
+                            + " intents=["
+                            + joiner
+                            + "] options="
+                            + options2,
+                    new Throwable());
         } else {
             options2 = options;
         }
@@ -1079,30 +1223,55 @@ public class Instrumentation {
                     throw new RuntimeException("Failure from system", e);
                 }
             }
-            AppJumpBlockTool.BlockDialogReceiver blockDialogReceiver = new AppJumpBlockTool.BlockDialogReceiver() { // from class: android.app.Instrumentation.2
-                @Override // com.samsung.android.core.AppJumpBlockTool.BlockDialogReceiver, android.content.BroadcastReceiver
-                public void onReceive(Context context, Intent receiveIntent) {
-                    super.onReceive(context, receiveIntent);
-                    if (isResultAllow()) {
-                        try {
-                            Intent[] jumpIntents = new Intent[getSourceIntents().size()];
-                            getSourceIntents().toArray(jumpIntents);
-                            int newResult = ActivityTaskManager.getService().startActivities(whoThread, who.getOpPackageName(), who.getAttributionTag(), jumpIntents, resolvedTypes, token, getSourceOptions(), userId);
-                            Instrumentation.this.notifyStartActivityResult(newResult, getSourceOptions());
-                            Instrumentation.checkStartActivityResult(newResult, jumpIntents[0]);
-                        } catch (RemoteException e2) {
-                            throw new RuntimeException("Failure from system", e2);
+            AppJumpBlockTool.BlockDialogReceiver blockDialogReceiver =
+                    new AppJumpBlockTool
+                            .BlockDialogReceiver() { // from class: android.app.Instrumentation.2
+                        @Override // com.samsung.android.core.AppJumpBlockTool.BlockDialogReceiver,
+                        // android.content.BroadcastReceiver
+                        public void onReceive(Context context, Intent receiveIntent) {
+                            super.onReceive(context, receiveIntent);
+                            if (isResultAllow()) {
+                                try {
+                                    Intent[] jumpIntents = new Intent[getSourceIntents().size()];
+                                    getSourceIntents().toArray(jumpIntents);
+                                    int newResult =
+                                            ActivityTaskManager.getService()
+                                                    .startActivities(
+                                                            whoThread,
+                                                            who.getOpPackageName(),
+                                                            who.getAttributionTag(),
+                                                            jumpIntents,
+                                                            resolvedTypes,
+                                                            token,
+                                                            getSourceOptions(),
+                                                            userId);
+                                    Instrumentation.this.notifyStartActivityResult(
+                                            newResult, getSourceOptions());
+                                    Instrumentation.checkStartActivityResult(
+                                            newResult, jumpIntents[0]);
+                                } catch (RemoteException e2) {
+                                    throw new RuntimeException("Failure from system", e2);
+                                }
+                            }
                         }
-                    }
-                }
-            };
+                    };
             if (CoreRune.SUPPORT_APP_JUMP_BLOCK && intents.length > 0) {
                 intents[0].putExtra(AppJumpBlockTool.CONTINUE_FLAG, false);
                 intents[0].putExtra(AppJumpBlockTool.IDENTIFY, blockDialogReceiver.getIdentify());
             }
             Bundle options4 = options3;
             try {
-                int result2 = ActivityTaskManager.getService().startActivities(whoThread, who.getOpPackageName(), who.getAttributionTag(), intents, resolvedTypes, token, options4, userId);
+                int result2 =
+                        ActivityTaskManager.getService()
+                                .startActivities(
+                                        whoThread,
+                                        who.getOpPackageName(),
+                                        who.getAttributionTag(),
+                                        intents,
+                                        resolvedTypes,
+                                        token,
+                                        options4,
+                                        userId);
                 if (CoreRune.SUPPORT_APP_JUMP_BLOCK && result2 == -103) {
                     Log.e("AppJumpBlockTool", "Register Broadcast1");
                     AppJumpBlockTool.registerBroadcast(who, blockDialogReceiver);
@@ -1121,56 +1290,99 @@ public class Instrumentation {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:34:0x00c3, code lost:
-    
-        r11 = r4;
-     */
+
+       r11 = r4;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.app.Instrumentation.ActivityResult execStartActivity(android.content.Context r20, android.os.IBinder r21, android.os.IBinder r22, java.lang.String r23, android.content.Intent r24, int r25, android.os.Bundle r26) {
+    public android.app.Instrumentation.ActivityResult execStartActivity(
+            android.content.Context r20,
+            android.os.IBinder r21,
+            android.os.IBinder r22,
+            java.lang.String r23,
+            android.content.Intent r24,
+            int r25,
+            android.os.Bundle r26) {
         /*
             Method dump skipped, instructions count: 281
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.Instrumentation.execStartActivity(android.content.Context, android.os.IBinder, android.os.IBinder, java.lang.String, android.content.Intent, int, android.os.Bundle):android.app.Instrumentation$ActivityResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                        + " android.app.Instrumentation.execStartActivity(android.content.Context,"
+                        + " android.os.IBinder, android.os.IBinder, java.lang.String,"
+                        + " android.content.Intent, int,"
+                        + " android.os.Bundle):android.app.Instrumentation$ActivityResult");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:34:0x00d1, code lost:
-    
-        r10 = r4;
-     */
+
+       r10 = r4;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.app.Instrumentation.ActivityResult execStartActivity(android.content.Context r21, android.os.IBinder r22, android.os.IBinder r23, java.lang.String r24, android.content.Intent r25, int r26, android.os.Bundle r27, android.os.UserHandle r28) {
+    public android.app.Instrumentation.ActivityResult execStartActivity(
+            android.content.Context r21,
+            android.os.IBinder r22,
+            android.os.IBinder r23,
+            java.lang.String r24,
+            android.content.Intent r25,
+            int r26,
+            android.os.Bundle r27,
+            android.os.UserHandle r28) {
         /*
             Method dump skipped, instructions count: 304
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.Instrumentation.execStartActivity(android.content.Context, android.os.IBinder, android.os.IBinder, java.lang.String, android.content.Intent, int, android.os.Bundle, android.os.UserHandle):android.app.Instrumentation$ActivityResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                        + " android.app.Instrumentation.execStartActivity(android.content.Context,"
+                        + " android.os.IBinder, android.os.IBinder, java.lang.String,"
+                        + " android.content.Intent, int, android.os.Bundle,"
+                        + " android.os.UserHandle):android.app.Instrumentation$ActivityResult");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:33:0x00dd, code lost:
-    
-        r10 = r5;
-     */
+
+       r10 = r5;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.app.Instrumentation.ActivityResult execStartActivityAsCaller(android.content.Context r20, android.os.IBinder r21, android.os.IBinder r22, android.app.Activity r23, android.content.Intent r24, int r25, android.os.Bundle r26, boolean r27, int r28) {
+    public android.app.Instrumentation.ActivityResult execStartActivityAsCaller(
+            android.content.Context r20,
+            android.os.IBinder r21,
+            android.os.IBinder r22,
+            android.app.Activity r23,
+            android.content.Intent r24,
+            int r25,
+            android.os.Bundle r26,
+            boolean r27,
+            int r28) {
         /*
             Method dump skipped, instructions count: 326
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.Instrumentation.execStartActivityAsCaller(android.content.Context, android.os.IBinder, android.os.IBinder, android.app.Activity, android.content.Intent, int, android.os.Bundle, boolean, int):android.app.Instrumentation$ActivityResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.app.Instrumentation.execStartActivityAsCaller(android.content.Context,"
+                    + " android.os.IBinder, android.os.IBinder, android.app.Activity,"
+                    + " android.content.Intent, int, android.os.Bundle, boolean,"
+                    + " int):android.app.Instrumentation$ActivityResult");
     }
 
-    public void execStartActivityFromAppTask(Context who, IBinder contextThread, IAppTask appTask, Intent intent, Bundle options) {
+    public void execStartActivityFromAppTask(
+            Context who, IBinder contextThread, IAppTask appTask, Intent intent, Bundle options) {
         if (DEBUG_START_ACTIVITY) {
-            Log.d(TAG, "startActivity: who=" + who + " intent=" + intent + " options=" + options, new Throwable());
+            Log.d(
+                    TAG,
+                    "startActivity: who=" + who + " intent=" + intent + " options=" + options,
+                    new Throwable());
         }
         Objects.requireNonNull(intent);
         IApplicationThread whoThread = (IApplicationThread) contextThread;
@@ -1210,7 +1422,14 @@ public class Instrumentation {
         try {
             intent.migrateExtraStreamToClipData(who);
             intent.prepareToLeaveProcess(who);
-            int result2 = appTask.startActivity(whoThread.asBinder(), who.getOpPackageName(), who.getAttributionTag(), intent, intent.resolveTypeIfNeeded(who.getContentResolver()), options);
+            int result2 =
+                    appTask.startActivity(
+                            whoThread.asBinder(),
+                            who.getOpPackageName(),
+                            who.getAttributionTag(),
+                            intent,
+                            intent.resolveTypeIfNeeded(who.getContentResolver()),
+                            options);
             notifyStartActivityResult(result2, options);
             checkStartActivityResult(result2, intent);
         } catch (RemoteException e) {
@@ -1218,7 +1437,13 @@ public class Instrumentation {
         }
     }
 
-    final void init(ActivityThread thread, Context instrContext, Context appContext, ComponentName component, IInstrumentationWatcher watcher, IUiAutomationConnection uiAutomationConnection) {
+    final void init(
+            ActivityThread thread,
+            Context instrContext,
+            Context appContext,
+            ComponentName component,
+            IInstrumentationWatcher watcher,
+            IUiAutomationConnection uiAutomationConnection) {
         this.mThread = thread;
         this.mThread.getLooper();
         this.mMessageQueue = Looper.myQueue();
@@ -1247,14 +1472,19 @@ public class Instrumentation {
             case -102:
                 return;
             case -101:
-                Log.d(TAG, "checkStartActivityResult() : mdm admin has blocked start activity " + intent);
+                Log.d(
+                        TAG,
+                        "checkStartActivityResult() : mdm admin has blocked start activity "
+                                + intent);
                 return;
             case -100:
                 throw new IllegalStateException("Cannot start voice activity on a hidden session");
             case ActivityManager.START_VOICE_NOT_ACTIVE_SESSION /* -99 */:
-                throw new IllegalStateException("Session calling startVoiceActivity does not match active session");
+                throw new IllegalStateException(
+                        "Session calling startVoiceActivity does not match active session");
             case ActivityManager.START_NOT_VOICE_COMPATIBLE /* -97 */:
-                throw new SecurityException("Starting under voice control not allowed for: " + intent);
+                throw new SecurityException(
+                        "Starting under voice control not allowed for: " + intent);
             case ActivityManager.START_CANCELED /* -96 */:
                 throw new AndroidRuntimeException("Activity could not be started for " + intent);
             case ActivityManager.START_NOT_ACTIVITY /* -95 */:
@@ -1262,25 +1492,35 @@ public class Instrumentation {
             case ActivityManager.START_PERMISSION_DENIED /* -94 */:
                 throw new SecurityException("Not allowed to start activity " + intent);
             case ActivityManager.START_FORWARD_AND_REQUEST_CONFLICT /* -93 */:
-                throw new AndroidRuntimeException("FORWARD_RESULT_FLAG used while also requesting a result");
+                throw new AndroidRuntimeException(
+                        "FORWARD_RESULT_FLAG used while also requesting a result");
             case -92:
             case -91:
                 if ((intent instanceof Intent) && ((Intent) intent).getComponent() != null) {
-                    throw new ActivityNotFoundException("Unable to find explicit activity class " + ((Intent) intent).getComponent().toShortString() + "; have you declared this activity in your AndroidManifest.xml, or does your intent not match its declared <intent-filter>?");
+                    throw new ActivityNotFoundException(
+                            "Unable to find explicit activity class "
+                                    + ((Intent) intent).getComponent().toShortString()
+                                    + "; have you declared this activity in your"
+                                    + " AndroidManifest.xml, or does your intent not match its"
+                                    + " declared <intent-filter>?");
                 }
                 throw new ActivityNotFoundException("No Activity found to handle " + intent);
             case -90:
-                throw new IllegalStateException("Cannot start assistant activity on a hidden session");
+                throw new IllegalStateException(
+                        "Cannot start assistant activity on a hidden session");
             case ActivityManager.START_ASSISTANT_NOT_ACTIVE_SESSION /* -89 */:
-                throw new IllegalStateException("Session calling startAssistantActivity does not match active session");
+                throw new IllegalStateException(
+                        "Session calling startAssistantActivity does not match active session");
             default:
-                throw new AndroidRuntimeException("Unknown error code " + res + " when starting " + intent);
+                throw new AndroidRuntimeException(
+                        "Unknown error code " + res + " when starting " + intent);
         }
     }
 
     private final void validateNotAppThread() {
         if (Looper.myLooper() == Looper.getMainLooper()) {
-            throw new RuntimeException("This method can not be called from the main application thread");
+            throw new RuntimeException(
+                    "This method can not be called from the main application thread");
         }
     }
 
@@ -1289,13 +1529,15 @@ public class Instrumentation {
     }
 
     public UiAutomation getUiAutomation(int flags) {
-        boolean mustCreateNewAutomation = this.mUiAutomation == null || this.mUiAutomation.isDestroyed();
+        boolean mustCreateNewAutomation =
+                this.mUiAutomation == null || this.mUiAutomation.isDestroyed();
         if (this.mUiAutomationConnection != null) {
             if (!mustCreateNewAutomation && this.mUiAutomation.getFlags() == flags) {
                 return this.mUiAutomation;
             }
             if (mustCreateNewAutomation) {
-                this.mUiAutomation = new UiAutomation(getTargetContext(), this.mUiAutomationConnection);
+                this.mUiAutomation =
+                        new UiAutomation(getTargetContext(), this.mUiAutomationConnection);
             } else {
                 this.mUiAutomation.disconnect();
             }
@@ -1332,7 +1574,10 @@ public class Instrumentation {
             try {
                 Process.setThreadPriority(-8);
             } catch (RuntimeException e) {
-                Log.w(Instrumentation.TAG, "Exception setting priority of instrumentation thread " + Process.myTid(), e);
+                Log.w(
+                        Instrumentation.TAG,
+                        "Exception setting priority of instrumentation thread " + Process.myTid(),
+                        e);
             }
             if (Instrumentation.this.mAutomaticPerformanceSnapshots) {
                 Instrumentation.this.startPerformanceSnapshot();
@@ -1342,12 +1587,10 @@ public class Instrumentation {
     }
 
     private static final class EmptyRunnable implements Runnable {
-        private EmptyRunnable() {
-        }
+        private EmptyRunnable() {}
 
         @Override // java.lang.Runnable
-        public void run() {
-        }
+        public void run() {}
     }
 
     private static final class SyncRunnable implements Runnable {

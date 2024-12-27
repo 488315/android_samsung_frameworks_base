@@ -1,6 +1,7 @@
 package com.samsung.android.server.corestate;
 
 import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

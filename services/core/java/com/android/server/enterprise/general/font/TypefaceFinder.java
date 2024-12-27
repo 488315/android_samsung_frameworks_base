@@ -4,6 +4,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.util.Log;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,9 +15,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+
 import javax.xml.parsers.SAXParserFactory;
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -51,7 +54,8 @@ public final class TypefaceFinder {
         }
     }
 
-    public final void getSansEntries(PackageManager packageManager, Vector vector, Vector vector2, Vector vector3) {
+    public final void getSansEntries(
+            PackageManager packageManager, Vector vector, Vector vector2, Vector vector3) {
         vector.add("default");
         vector2.add("default");
         vector3.add("");
@@ -66,38 +70,72 @@ public final class TypefaceFinder {
                 if (lastIndexOf2 < 0) {
                     lastIndexOf2 = str2.length();
                 }
-                String replaceAll = str2.substring(lastIndexOf + 1, lastIndexOf2).replaceAll(" ", "");
+                String replaceAll =
+                        str2.substring(lastIndexOf + 1, lastIndexOf2).replaceAll(" ", "");
                 try {
-                    ApplicationInfo applicationInfo = packageManager.getApplicationInfo(((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName, 128);
+                    ApplicationInfo applicationInfo =
+                            packageManager.getApplicationInfo(
+                                    ((Typeface) ((ArrayList) this.mTypefaces).get(i))
+                                            .mFontPackageName,
+                                    128);
                     applicationInfo.publicSourceDir = applicationInfo.sourceDir;
-                    android.graphics.Typeface.createFromAsset(packageManager.getResourcesForApplication(applicationInfo).getAssets(), "fonts/" + replaceAll + ".ttf");
-                    if (((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName != null) {
-                        if (!((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName.contains("com.monotype.android.font.droidserifitalic")) {
-                            if (((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName.equals("com.monotype.android.font.samsungoneuiregular")) {
+                    android.graphics.Typeface.createFromAsset(
+                            packageManager.getResourcesForApplication(applicationInfo).getAssets(),
+                            "fonts/" + replaceAll + ".ttf");
+                    if (((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName
+                            != null) {
+                        if (!((Typeface) ((ArrayList) this.mTypefaces).get(i))
+                                .mFontPackageName.contains(
+                                        "com.monotype.android.font.droidserifitalic")) {
+                            if (((Typeface) ((ArrayList) this.mTypefaces).get(i))
+                                    .mFontPackageName.equals(
+                                            "com.monotype.android.font.samsungoneuiregular")) {
                                 Iterator it = ((ArrayList) this.mTypefaces).iterator();
                                 while (it.hasNext()) {
-                                    if (((Typeface) it.next()).mFontPackageName.equalsIgnoreCase("com.monotype.android.font.samsungone")) {
+                                    if (((Typeface) it.next())
+                                            .mFontPackageName.equalsIgnoreCase(
+                                                    "com.monotype.android.font.samsungone")) {
                                         break;
                                     }
                                 }
                             }
                         }
                     }
-                    if (((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName.equals("com.monotype.android.font.foundation")) {
+                    if (((Typeface) ((ArrayList) this.mTypefaces).get(i))
+                            .mFontPackageName.equals("com.monotype.android.font.foundation")) {
                         vector.add(1, deleteWhiteSpace(str));
-                        vector2.add(1, ((Typeface) ((ArrayList) this.mTypefaces).get(i)).mTypefaceFilename);
-                        vector3.add(1, ((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName);
-                    } else if (((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName.equals("com.monotype.android.font.samsungone")) {
+                        vector2.add(
+                                1,
+                                ((Typeface) ((ArrayList) this.mTypefaces).get(i))
+                                        .mTypefaceFilename);
+                        vector3.add(
+                                1,
+                                ((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName);
+                    } else if (((Typeface) ((ArrayList) this.mTypefaces).get(i))
+                            .mFontPackageName.equals("com.monotype.android.font.samsungone")) {
                         vector.add(1, deleteWhiteSpace(str));
-                        vector2.add(1, ((Typeface) ((ArrayList) this.mTypefaces).get(i)).mTypefaceFilename);
-                        vector3.add(1, ((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName);
+                        vector2.add(
+                                1,
+                                ((Typeface) ((ArrayList) this.mTypefaces).get(i))
+                                        .mTypefaceFilename);
+                        vector3.add(
+                                1,
+                                ((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName);
                     } else {
                         vector.add(str);
-                        vector2.add(((Typeface) ((ArrayList) this.mTypefaces).get(i)).mTypefaceFilename);
-                        vector3.add(((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName);
+                        vector2.add(
+                                ((Typeface) ((ArrayList) this.mTypefaces).get(i))
+                                        .mTypefaceFilename);
+                        vector3.add(
+                                ((Typeface) ((ArrayList) this.mTypefaces).get(i)).mFontPackageName);
                     }
                 } catch (Exception e) {
-                    Log.d("TypefaceFinder", "getSansEntries - Typeface.createFromAsset caused an exception for - fonts/" + replaceAll + ".ttf");
+                    Log.d(
+                            "TypefaceFinder",
+                            "getSansEntries - Typeface.createFromAsset caused an exception for -"
+                                + " fonts/"
+                                    + replaceAll
+                                    + ".ttf");
                     e.printStackTrace();
                 }
             }

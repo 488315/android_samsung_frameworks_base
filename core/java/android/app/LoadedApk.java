@@ -1,7 +1,5 @@
 package android.app;
 
-import android.app.IServiceConnection;
-import android.app.LoadedApk;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -41,10 +39,14 @@ import android.util.PerfLog;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.view.DisplayAdjustments;
+
 import com.android.internal.R;
 import com.android.internal.util.ArrayUtils;
-import com.samsung.android.rune.CoreRune;
+
 import dalvik.system.VMRuntime;
+
+import com.samsung.android.rune.CoreRune;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -102,14 +104,23 @@ public final class LoadedApk {
     private SplitDependencyLoaderImpl mSplitLoader;
     private String[] mSplitNames;
     private String[] mSplitResDirs;
-    private final ArrayMap<Context, ArrayMap<ServiceConnection, ServiceDispatcher>> mUnboundServices;
-    private final ArrayMap<Context, ArrayMap<BroadcastReceiver, ReceiverDispatcher>> mUnregisteredReceivers;
+    private final ArrayMap<Context, ArrayMap<ServiceConnection, ServiceDispatcher>>
+            mUnboundServices;
+    private final ArrayMap<Context, ArrayMap<BroadcastReceiver, ReceiverDispatcher>>
+            mUnregisteredReceivers;
 
     Application getApplication() {
         return this.mApplication;
     }
 
-    public LoadedApk(ActivityThread activityThread, ApplicationInfo aInfo, CompatibilityInfo compatInfo, ClassLoader baseLoader, boolean securityViolation, boolean includeCode, boolean registerPackage) {
+    public LoadedApk(
+            ActivityThread activityThread,
+            ApplicationInfo aInfo,
+            CompatibilityInfo compatInfo,
+            ClassLoader baseLoader,
+            boolean securityViolation,
+            boolean includeCode,
+            boolean registerPackage) {
         this.mDisplayAdjustments = new DisplayAdjustments();
         this.mReceivers = new ArrayMap<>();
         this.mUnregisteredReceivers = new ArrayMap<>();
@@ -132,7 +143,8 @@ public final class LoadedApk {
             String runtimeIsa = VMRuntime.getRuntime().vmInstructionSet();
             String secondaryIsa = VMRuntime.getInstructionSet(info.secondaryCpuAbi);
             String secondaryDexCodeIsa = SystemProperties.get("ro.dalvik.vm.isa." + secondaryIsa);
-            if (runtimeIsa.equals(secondaryDexCodeIsa.isEmpty() ? secondaryIsa : secondaryDexCodeIsa)) {
+            if (runtimeIsa.equals(
+                    secondaryDexCodeIsa.isEmpty() ? secondaryIsa : secondaryDexCodeIsa)) {
                 ApplicationInfo modified = new ApplicationInfo(info);
                 modified.nativeLibraryDir = modified.secondaryNativeLibraryDir;
                 modified.primaryCpuAbi = modified.secondaryCpuAbi;
@@ -171,21 +183,27 @@ public final class LoadedApk {
         this.mRegisterPackage = false;
         this.mResources = Resources.getSystem();
         this.mDefaultClassLoader = ClassLoader.getSystemClassLoader();
-        this.mAppComponentFactory = createAppFactory(this.mApplicationInfo, this.mDefaultClassLoader);
-        this.mClassLoader = this.mAppComponentFactory.instantiateClassLoader(this.mDefaultClassLoader, new ApplicationInfo(this.mApplicationInfo));
+        this.mAppComponentFactory =
+                createAppFactory(this.mApplicationInfo, this.mDefaultClassLoader);
+        this.mClassLoader =
+                this.mAppComponentFactory.instantiateClassLoader(
+                        this.mDefaultClassLoader, new ApplicationInfo(this.mApplicationInfo));
     }
 
     void installSystemApplicationInfo(ApplicationInfo info, ClassLoader classLoader) {
         this.mApplicationInfo = info;
         this.mDefaultClassLoader = classLoader;
         this.mAppComponentFactory = createAppFactory(info, this.mDefaultClassLoader);
-        this.mClassLoader = this.mAppComponentFactory.instantiateClassLoader(this.mDefaultClassLoader, new ApplicationInfo(this.mApplicationInfo));
+        this.mClassLoader =
+                this.mAppComponentFactory.instantiateClassLoader(
+                        this.mDefaultClassLoader, new ApplicationInfo(this.mApplicationInfo));
     }
 
     private AppComponentFactory createAppFactory(ApplicationInfo appInfo, ClassLoader cl) {
         if (this.mIncludeCode && appInfo.appComponentFactory != null && cl != null) {
             try {
-                return (AppComponentFactory) cl.loadClass(appInfo.appComponentFactory).newInstance();
+                return (AppComponentFactory)
+                        cl.loadClass(appInfo.appComponentFactory).newInstance();
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
                 Slog.e(TAG, "Unable to instantiate appComponentFactory", e);
             }
@@ -223,7 +241,9 @@ public final class LoadedApk {
 
     private static String[] getLibrariesFor(String packageName) {
         try {
-            ApplicationInfo ai = ActivityThread.getPackageManager().getApplicationInfo(packageName, 1024L, UserHandle.myUserId());
+            ApplicationInfo ai =
+                    ActivityThread.getPackageManager()
+                            .getApplicationInfo(packageName, 1024L, UserHandle.myUserId());
             if (ai == null) {
                 return null;
             }
@@ -281,7 +301,19 @@ public final class LoadedApk {
                     } else {
                         loaders = this.mApplication.getResources().getLoaders();
                     }
-                    this.mResources = resourcesManager.getResources(null, str, splitPaths, strArr, strArr2, strArr3, null, null, compatibilityInfo, classLoader, loaders);
+                    this.mResources =
+                            resourcesManager.getResources(
+                                    null,
+                                    str,
+                                    splitPaths,
+                                    strArr,
+                                    strArr2,
+                                    strArr3,
+                                    null,
+                                    null,
+                                    compatibilityInfo,
+                                    classLoader,
+                                    loaders);
                 } catch (PackageManager.NameNotFoundException e) {
                     throw new AssertionError("null split not found");
                 }
@@ -291,8 +323,16 @@ public final class LoadedApk {
     }
 
     private boolean setApplicationInfo(ApplicationInfo aInfo) {
-        if (this.mApplicationInfo != null && this.mApplicationInfo.createTimestamp > aInfo.createTimestamp) {
-            Slog.w(TAG, "New application info for package " + aInfo.packageName + " is out of date with TS " + aInfo.createTimestamp + " < the current TS " + this.mApplicationInfo.createTimestamp);
+        if (this.mApplicationInfo != null
+                && this.mApplicationInfo.createTimestamp > aInfo.createTimestamp) {
+            Slog.w(
+                    TAG,
+                    "New application info for package "
+                            + aInfo.packageName
+                            + " is out of date with TS "
+                            + aInfo.createTimestamp
+                            + " < the current TS "
+                            + this.mApplicationInfo.createTimestamp);
             return false;
         }
         int myUid = Process.myUid();
@@ -306,10 +346,12 @@ public final class LoadedApk {
         this.mLibDir = aInfo2.nativeLibraryDir;
         this.mDataDirFile = FileUtils.newFileOrNull(aInfo2.dataDir);
         this.mDeviceProtectedDataDirFile = FileUtils.newFileOrNull(aInfo2.deviceProtectedDataDir);
-        this.mCredentialProtectedDataDirFile = FileUtils.newFileOrNull(aInfo2.credentialProtectedDataDir);
+        this.mCredentialProtectedDataDirFile =
+                FileUtils.newFileOrNull(aInfo2.credentialProtectedDataDir);
         this.mSplitNames = aInfo2.splitNames;
         this.mSplitAppDirs = aInfo2.splitSourceDirs;
-        this.mSplitResDirs = aInfo2.uid == myUid ? aInfo2.splitSourceDirs : aInfo2.splitPublicSourceDirs;
+        this.mSplitResDirs =
+                aInfo2.uid == myUid ? aInfo2.splitSourceDirs : aInfo2.splitPublicSourceDirs;
         this.mSplitClassLoaderNames = aInfo2.splitClassLoaderNames;
         if (aInfo2.requestsIsolatedSplitLoading() && !ArrayUtils.isEmpty(this.mSplitNames)) {
             this.mSplitLoader = new SplitDependencyLoaderImpl(aInfo2.splitDependencies);
@@ -318,10 +360,17 @@ public final class LoadedApk {
         return true;
     }
 
-    void setSdkSandboxStorage(String sdkSandboxClientAppVolumeUuid, String sdkSandboxClientAppPackage) {
+    void setSdkSandboxStorage(
+            String sdkSandboxClientAppVolumeUuid, String sdkSandboxClientAppPackage) {
         int userId = UserHandle.myUserId();
-        this.mDeviceProtectedDataDirFile = Environment.getDataMiscDeSharedSdkSandboxDirectory(sdkSandboxClientAppVolumeUuid, userId, sdkSandboxClientAppPackage).getAbsoluteFile();
-        this.mCredentialProtectedDataDirFile = Environment.getDataMiscCeSharedSdkSandboxDirectory(sdkSandboxClientAppVolumeUuid, userId, sdkSandboxClientAppPackage).getAbsoluteFile();
+        this.mDeviceProtectedDataDirFile =
+                Environment.getDataMiscDeSharedSdkSandboxDirectory(
+                                sdkSandboxClientAppVolumeUuid, userId, sdkSandboxClientAppPackage)
+                        .getAbsoluteFile();
+        this.mCredentialProtectedDataDirFile =
+                Environment.getDataMiscCeSharedSdkSandboxDirectory(
+                                sdkSandboxClientAppVolumeUuid, userId, sdkSandboxClientAppPackage)
+                        .getAbsoluteFile();
         if ((this.mApplicationInfo.privateFlags & 32) != 0) {
             this.mDataDirFile = this.mDeviceProtectedDataDirFile;
         } else {
@@ -330,11 +379,16 @@ public final class LoadedApk {
         this.mDataDir = this.mDataDirFile.getAbsolutePath();
     }
 
-    public static void makePaths(ActivityThread activityThread, ApplicationInfo aInfo, List<String> outZipPaths) {
+    public static void makePaths(
+            ActivityThread activityThread, ApplicationInfo aInfo, List<String> outZipPaths) {
         makePaths(activityThread, false, aInfo, outZipPaths, null);
     }
 
-    private static void appendSharedLibrariesLibPathsIfNeeded(List<SharedLibraryInfo> sharedLibraries, ApplicationInfo aInfo, Set<String> outSeenPaths, List<String> outLibPaths) {
+    private static void appendSharedLibrariesLibPathsIfNeeded(
+            List<SharedLibraryInfo> sharedLibraries,
+            ApplicationInfo aInfo,
+            Set<String> outSeenPaths,
+            List<String> outLibPaths) {
         if (sharedLibraries == null) {
             return;
         }
@@ -345,12 +399,18 @@ public final class LoadedApk {
                 for (String path : paths) {
                     appendApkLibPathIfNeeded(path, aInfo, outLibPaths);
                 }
-                appendSharedLibrariesLibPathsIfNeeded(lib.getDependencies(), aInfo, outSeenPaths, outLibPaths);
+                appendSharedLibrariesLibPathsIfNeeded(
+                        lib.getDependencies(), aInfo, outSeenPaths, outLibPaths);
             }
         }
     }
 
-    public static void makePaths(ActivityThread activityThread, boolean isBundledApp, ApplicationInfo aInfo, List<String> list, List<String> outLibPaths) {
+    public static void makePaths(
+            ActivityThread activityThread,
+            boolean isBundledApp,
+            ApplicationInfo aInfo,
+            List<String> list,
+            List<String> outLibPaths) {
         String str = aInfo.sourceDir;
         String libDir = aInfo.nativeLibraryDir;
         list.clear();
@@ -401,7 +461,9 @@ public final class LoadedApk {
             }
             if (aInfo.primaryCpuAbi != null) {
                 if (aInfo.targetSdkVersion < 24) {
-                    outLibPaths.add("/system/fake-libs" + (VMRuntime.is64BitAbi(aInfo.primaryCpuAbi) ? "64" : ""));
+                    outLibPaths.add(
+                            "/system/fake-libs"
+                                    + (VMRuntime.is64BitAbi(aInfo.primaryCpuAbi) ? "64" : ""));
                 }
                 for (String apk : list) {
                     outLibPaths.add(apk + "!/lib/" + aInfo.primaryCpuAbi);
@@ -412,7 +474,8 @@ public final class LoadedApk {
             }
         }
         Set<String> outSeenPaths = new LinkedHashSet<>();
-        appendSharedLibrariesLibPathsIfNeeded(aInfo.sharedLibraryInfos, aInfo, outSeenPaths, outLibPaths);
+        appendSharedLibrariesLibPathsIfNeeded(
+                aInfo.sharedLibraryInfos, aInfo, outSeenPaths, outLibPaths);
         if (aInfo.sharedLibraryFiles != null) {
             int index = 0;
             for (String lib : aInfo.sharedLibraryFiles) {
@@ -433,13 +496,18 @@ public final class LoadedApk {
         }
     }
 
-    private static void appendApkLibPathIfNeeded(String path, ApplicationInfo applicationInfo, List<String> outLibPaths) {
-        if (outLibPaths != null && applicationInfo.primaryCpuAbi != null && path.endsWith(".apk") && applicationInfo.targetSdkVersion >= 26) {
+    private static void appendApkLibPathIfNeeded(
+            String path, ApplicationInfo applicationInfo, List<String> outLibPaths) {
+        if (outLibPaths != null
+                && applicationInfo.primaryCpuAbi != null
+                && path.endsWith(".apk")
+                && applicationInfo.targetSdkVersion >= 26) {
             outLibPaths.add(path + "!/lib/" + applicationInfo.primaryCpuAbi);
         }
     }
 
-    private class SplitDependencyLoaderImpl extends SplitDependencyLoader<PackageManager.NameNotFoundException> {
+    private class SplitDependencyLoaderImpl
+            extends SplitDependencyLoader<PackageManager.NameNotFoundException> {
         private final ClassLoader[] mCachedClassLoaders;
         private final String[][] mCachedResourcePaths;
 
@@ -459,7 +527,8 @@ public final class LoadedApk {
         }
 
         @Override // android.content.pm.split.SplitDependencyLoader
-        protected void constructSplit(int splitIdx, int[] configSplitIndices, int parentSplitIdx) throws PackageManager.NameNotFoundException {
+        protected void constructSplit(int splitIdx, int[] configSplitIndices, int parentSplitIdx)
+                throws PackageManager.NameNotFoundException {
             synchronized (LoadedApk.this.mLock) {
                 ArrayList<String> splitPaths = new ArrayList<>();
                 if (splitIdx == 0) {
@@ -468,26 +537,39 @@ public final class LoadedApk {
                     for (int configSplitIdx : configSplitIndices) {
                         splitPaths.add(LoadedApk.this.mSplitResDirs[configSplitIdx - 1]);
                     }
-                    this.mCachedResourcePaths[0] = (String[]) splitPaths.toArray(new String[splitPaths.size()]);
+                    this.mCachedResourcePaths[0] =
+                            (String[]) splitPaths.toArray(new String[splitPaths.size()]);
                     return;
                 }
                 ClassLoader parent = this.mCachedClassLoaders[parentSplitIdx];
-                this.mCachedClassLoaders[splitIdx] = ApplicationLoaders.getDefault().getClassLoader(LoadedApk.this.mSplitAppDirs[splitIdx - 1], LoadedApk.this.getTargetSdkVersion(), false, null, null, parent, LoadedApk.this.mSplitClassLoaderNames[splitIdx - 1]);
+                this.mCachedClassLoaders[splitIdx] =
+                        ApplicationLoaders.getDefault()
+                                .getClassLoader(
+                                        LoadedApk.this.mSplitAppDirs[splitIdx - 1],
+                                        LoadedApk.this.getTargetSdkVersion(),
+                                        false,
+                                        null,
+                                        null,
+                                        parent,
+                                        LoadedApk.this.mSplitClassLoaderNames[splitIdx - 1]);
                 Collections.addAll(splitPaths, this.mCachedResourcePaths[parentSplitIdx]);
                 splitPaths.add(LoadedApk.this.mSplitResDirs[splitIdx - 1]);
                 for (int configSplitIdx2 : configSplitIndices) {
                     splitPaths.add(LoadedApk.this.mSplitResDirs[configSplitIdx2 - 1]);
                 }
-                this.mCachedResourcePaths[splitIdx] = (String[]) splitPaths.toArray(new String[splitPaths.size()]);
+                this.mCachedResourcePaths[splitIdx] =
+                        (String[]) splitPaths.toArray(new String[splitPaths.size()]);
             }
         }
 
-        private int ensureSplitLoaded(String splitName) throws PackageManager.NameNotFoundException {
+        private int ensureSplitLoaded(String splitName)
+                throws PackageManager.NameNotFoundException {
             int idx = 0;
             if (splitName != null) {
                 int idx2 = Arrays.binarySearch(LoadedApk.this.mSplitNames, splitName);
                 if (idx2 < 0) {
-                    throw new PackageManager.NameNotFoundException("Split name '" + splitName + "' is not installed");
+                    throw new PackageManager.NameNotFoundException(
+                            "Split name '" + splitName + "' is not installed");
                 }
                 idx = idx2 + 1;
             }
@@ -495,7 +577,8 @@ public final class LoadedApk {
             return idx;
         }
 
-        ClassLoader getClassLoaderForSplit(String splitName) throws PackageManager.NameNotFoundException {
+        ClassLoader getClassLoaderForSplit(String splitName)
+                throws PackageManager.NameNotFoundException {
             ClassLoader classLoader;
             int idx = ensureSplitLoaded(splitName);
             synchronized (LoadedApk.this.mLock) {
@@ -504,7 +587,8 @@ public final class LoadedApk {
             return classLoader;
         }
 
-        String[] getSplitPathsForSplit(String splitName) throws PackageManager.NameNotFoundException {
+        String[] getSplitPathsForSplit(String splitName)
+                throws PackageManager.NameNotFoundException {
             String[] strArr;
             int idx = ensureSplitLoaded(splitName);
             synchronized (LoadedApk.this.mLock) {
@@ -528,28 +612,57 @@ public final class LoadedApk {
         return this.mSplitLoader.getSplitPathsForSplit(splitName);
     }
 
-    ClassLoader createSharedLibraryLoader(SharedLibraryInfo sharedLibrary, boolean isBundledApp, String librarySearchPath, String libraryPermittedPath) {
+    ClassLoader createSharedLibraryLoader(
+            SharedLibraryInfo sharedLibrary,
+            boolean isBundledApp,
+            String librarySearchPath,
+            String libraryPermittedPath) {
         List<String> paths = sharedLibrary.getAllCodePaths();
-        Pair<List<ClassLoader>, List<ClassLoader>> sharedLibraries = createSharedLibrariesLoaders(sharedLibrary.getDependencies(), isBundledApp, librarySearchPath, libraryPermittedPath);
+        Pair<List<ClassLoader>, List<ClassLoader>> sharedLibraries =
+                createSharedLibrariesLoaders(
+                        sharedLibrary.getDependencies(),
+                        isBundledApp,
+                        librarySearchPath,
+                        libraryPermittedPath);
         String jars = paths.size() == 1 ? paths.get(0) : TextUtils.join(File.pathSeparator, paths);
-        return ApplicationLoaders.getDefault().getSharedLibraryClassLoaderWithSharedLibraries(jars, this.mApplicationInfo.targetSdkVersion, isBundledApp, librarySearchPath, libraryPermittedPath, null, null, sharedLibraries.first, sharedLibraries.second);
+        return ApplicationLoaders.getDefault()
+                .getSharedLibraryClassLoaderWithSharedLibraries(
+                        jars,
+                        this.mApplicationInfo.targetSdkVersion,
+                        isBundledApp,
+                        librarySearchPath,
+                        libraryPermittedPath,
+                        null,
+                        null,
+                        sharedLibraries.first,
+                        sharedLibraries.second);
     }
 
-    private Pair<List<ClassLoader>, List<ClassLoader>> createSharedLibrariesLoaders(List<SharedLibraryInfo> sharedLibraries, boolean isBundledApp, String librarySearchPath, String libraryPermittedPath) {
+    private Pair<List<ClassLoader>, List<ClassLoader>> createSharedLibrariesLoaders(
+            List<SharedLibraryInfo> sharedLibraries,
+            boolean isBundledApp,
+            String librarySearchPath,
+            String libraryPermittedPath) {
         if (sharedLibraries == null || sharedLibraries.isEmpty()) {
             return new Pair<>(null, null);
         }
         HashSet<String> libsToLoadAfter = new HashSet<>();
         Resources systemR = Resources.getSystem();
-        Collections.addAll(libsToLoadAfter, systemR.getStringArray(R.array.config_sharedLibrariesLoadedAfterApp));
+        Collections.addAll(
+                libsToLoadAfter,
+                systemR.getStringArray(R.array.config_sharedLibrariesLoadedAfterApp));
         List<ClassLoader> loaders = new ArrayList<>();
         List<ClassLoader> after = new ArrayList<>();
         for (SharedLibraryInfo info : sharedLibraries) {
             if (!info.isNative() && !info.isSdk()) {
                 if (libsToLoadAfter.contains(info.getName())) {
-                    after.add(createSharedLibraryLoader(info, isBundledApp, librarySearchPath, libraryPermittedPath));
+                    after.add(
+                            createSharedLibraryLoader(
+                                    info, isBundledApp, librarySearchPath, libraryPermittedPath));
                 } else {
-                    loaders.add(createSharedLibraryLoader(info, isBundledApp, librarySearchPath, libraryPermittedPath));
+                    loaders.add(
+                            createSharedLibraryLoader(
+                                    info, isBundledApp, librarySearchPath, libraryPermittedPath));
                 }
             }
         }
@@ -595,7 +708,9 @@ public final class LoadedApk {
             Method dump skipped, instructions count: 771
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.LoadedApk.createOrUpdateClassLoaderLocked(java.util.List):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.app.LoadedApk.createOrUpdateClassLoaderLocked(java.util.List):void");
     }
 
     private boolean canAccessDataDir() {
@@ -634,7 +749,10 @@ public final class LoadedApk {
         if (!CoreRune.SYSFW_APP_SPEG || (apkFile = this.mApplicationInfo.sourceDir) == null) {
             return false;
         }
-        String spegFile = apkFile.substring(0, apkFile.lastIndexOf("/")) + "/base.speg" + this.mApplicationInfo.uid;
+        String spegFile =
+                apkFile.substring(0, apkFile.lastIndexOf("/"))
+                        + "/base.speg"
+                        + this.mApplicationInfo.uid;
         StrictMode.ThreadPolicy oldThreadPolicy = allowThreadDiskReads();
         try {
             return new File(spegFile).exists();
@@ -661,14 +779,23 @@ public final class LoadedApk {
         int i = codePaths.size() - 1;
         while (i >= 0) {
             String splitName = i == 0 ? null : this.mApplicationInfo.splitNames[i - 1];
-            String curProfileFile = ArtManager.getCurrentProfilePath(this.mPackageName, UserHandle.myUserId(), splitName);
-            String refProfileFile = ArtManager.getReferenceProfilePath(this.mPackageName, UserHandle.myUserId(), splitName);
+            String curProfileFile =
+                    ArtManager.getCurrentProfilePath(
+                            this.mPackageName, UserHandle.myUserId(), splitName);
+            String refProfileFile =
+                    ArtManager.getReferenceProfilePath(
+                            this.mPackageName, UserHandle.myUserId(), splitName);
             if (codePaths.get(i).equals(this.mApplicationInfo.sourceDir)) {
                 codePathType = 1;
             } else {
                 codePathType = 2;
             }
-            VMRuntime.registerAppInfo(this.mPackageName, curProfileFile, refProfileFile, new String[]{codePaths.get(i)}, codePathType);
+            VMRuntime.registerAppInfo(
+                    this.mPackageName,
+                    curProfileFile,
+                    refProfileFile,
+                    new String[] {codePaths.get(i)},
+                    codePathType);
             i--;
         }
         if (isSpeg()) {
@@ -684,13 +811,22 @@ public final class LoadedApk {
     private void initializeJavaContextClassLoader() {
         ClassLoader contextClassLoader;
         ActivityThread.getPackageManager();
-        PackageInfo pi = PackageManager.getPackageInfoAsUserCached(this.mPackageName, 268435456L, UserHandle.myUserId());
+        PackageInfo pi =
+                PackageManager.getPackageInfoAsUserCached(
+                        this.mPackageName, 268435456L, UserHandle.myUserId());
         if (pi == null) {
-            throw new IllegalStateException("Unable to get package info for " + this.mPackageName + "; is package not installed?");
+            throw new IllegalStateException(
+                    "Unable to get package info for "
+                            + this.mPackageName
+                            + "; is package not installed?");
         }
         boolean sharable = true;
         boolean sharedUserIdSet = pi.sharedUserId != null;
-        boolean processNameNotDefault = (pi.applicationInfo == null || this.mPackageName.equals(pi.applicationInfo.processName)) ? false : true;
+        boolean processNameNotDefault =
+                (pi.applicationInfo == null
+                                || this.mPackageName.equals(pi.applicationInfo.processName))
+                        ? false
+                        : true;
         if (!sharedUserIdSet && !processNameNotDefault) {
             sharable = false;
         }
@@ -705,8 +841,7 @@ public final class LoadedApk {
     private static class WarningContextClassLoader extends ClassLoader {
         private static boolean warned = false;
 
-        private WarningContextClassLoader() {
-        }
+        private WarningContextClassLoader() {}
 
         private void warn(String methodName) {
             if (warned) {
@@ -714,7 +849,14 @@ public final class LoadedApk {
             }
             warned = true;
             Thread.currentThread().setContextClassLoader(getParent());
-            Slog.w(ActivityThread.TAG, "ClassLoader." + methodName + ": The class loader returned by Thread.getContextClassLoader() may fail for processes that host multiple applications. You should explicitly specify a context class loader. For example: Thread.setContextClassLoader(getClass().getClassLoader());");
+            Slog.w(
+                    ActivityThread.TAG,
+                    "ClassLoader."
+                            + methodName
+                            + ": The class loader returned by Thread.getContextClassLoader() may"
+                            + " fail for processes that host multiple applications. You should"
+                            + " explicitly specify a context class loader. For example:"
+                            + " Thread.setContextClassLoader(getClass().getClassLoader());");
         }
 
         @Override // java.lang.ClassLoader
@@ -819,9 +961,23 @@ public final class LoadedApk {
             try {
                 String[] splitPaths = getSplitPaths(null);
                 if (Process.myUid() == this.mApplicationInfo.uid) {
-                    ResourcesManager.getInstance().initializeApplicationPaths(this.mResDir, splitPaths);
+                    ResourcesManager.getInstance()
+                            .initializeApplicationPaths(this.mResDir, splitPaths);
                 }
-                this.mResources = ResourcesManager.getInstance().getResources(null, this.mResDir, splitPaths, this.mLegacyOverlayDirs, this.mOverlayPaths, this.mApplicationInfo.sharedLibraryFiles, null, null, getCompatibilityInfo(), getClassLoader(), null);
+                this.mResources =
+                        ResourcesManager.getInstance()
+                                .getResources(
+                                        null,
+                                        this.mResDir,
+                                        splitPaths,
+                                        this.mLegacyOverlayDirs,
+                                        this.mOverlayPaths,
+                                        this.mApplicationInfo.sharedLibraryFiles,
+                                        null,
+                                        null,
+                                        getCompatibilityInfo(),
+                                        getClassLoader(),
+                                        null);
             } catch (PackageManager.NameNotFoundException e) {
                 throw new AssertionError("null split not found");
             }
@@ -829,15 +985,20 @@ public final class LoadedApk {
         return this.mResources;
     }
 
-    public Application makeApplication(boolean forceDefaultAppClass, Instrumentation instrumentation) {
+    public Application makeApplication(
+            boolean forceDefaultAppClass, Instrumentation instrumentation) {
         return makeApplicationInner(forceDefaultAppClass, instrumentation, true);
     }
 
-    public Application makeApplicationInner(boolean forceDefaultAppClass, Instrumentation instrumentation) {
+    public Application makeApplicationInner(
+            boolean forceDefaultAppClass, Instrumentation instrumentation) {
         return makeApplicationInner(forceDefaultAppClass, instrumentation, false);
     }
 
-    private Application makeApplicationInner(boolean forceDefaultAppClass, Instrumentation instrumentation, boolean allowDuplicateInstances) {
+    private Application makeApplicationInner(
+            boolean forceDefaultAppClass,
+            Instrumentation instrumentation,
+            boolean allowDuplicateInstances) {
         if (this.mApplication != null) {
             return this.mApplication;
         }
@@ -849,7 +1010,12 @@ public final class LoadedApk {
                 Application cached = sApplications.get(this.mPackageName);
                 if (cached != null) {
                     if (!"android".equals(this.mPackageName)) {
-                        Slog.wtfStack(TAG, "App instance already created for package=" + this.mPackageName + " instance=" + cached);
+                        Slog.wtfStack(
+                                TAG,
+                                "App instance already created for package="
+                                        + this.mPackageName
+                                        + " instance="
+                                        + cached);
                     }
                     if (!allowDuplicateInstances) {
                         this.mApplication = cached;
@@ -858,7 +1024,9 @@ public final class LoadedApk {
                 }
                 Application app = null;
                 String myProcessName = Process.myProcessName();
-                String appClass = this.mApplicationInfo.getCustomApplicationClassNameForProcess(myProcessName);
+                String appClass =
+                        this.mApplicationInfo.getCustomApplicationClassNameForProcess(
+                                myProcessName);
                 if (forceDefaultAppClass || appClass == null) {
                     appClass = "android.app.Application";
                 }
@@ -869,7 +1037,8 @@ public final class LoadedApk {
                         initializeJavaContextClassLoader();
                         Trace.traceEnd(64L);
                     }
-                    SparseArray<String> packageIdentifiers = getAssets().getAssignedPackageIdentifiers(false, false);
+                    SparseArray<String> packageIdentifiers =
+                            getAssets().getAssignedPackageIdentifiers(false, false);
                     int n = packageIdentifiers.size();
                     for (int i = 0; i < n; i++) {
                         int id = packageIdentifiers.keyAt(i);
@@ -877,13 +1046,23 @@ public final class LoadedApk {
                             rewriteRValues(cl, packageIdentifiers.valueAt(i), id);
                         }
                     }
-                    ContextImpl appContext = ContextImpl.createAppContext(this.mActivityThread, this);
+                    ContextImpl appContext =
+                            ContextImpl.createAppContext(this.mActivityThread, this);
                     NetworkSecurityConfigProvider.handleNewApplication(appContext);
-                    app = this.mActivityThread.mInstrumentation.newApplication(cl, appClass, appContext);
+                    app =
+                            this.mActivityThread.mInstrumentation.newApplication(
+                                    cl, appClass, appContext);
                     appContext.setOuterContext(app);
                 } catch (Exception e) {
                     if (!this.mActivityThread.mInstrumentation.onException(app, e)) {
-                        throw new RuntimeException("Unable to instantiate application " + appClass + " package " + this.mPackageName + ": " + e.toString(), e);
+                        throw new RuntimeException(
+                                "Unable to instantiate application "
+                                        + appClass
+                                        + " package "
+                                        + this.mPackageName
+                                        + ": "
+                                        + e.toString(),
+                                e);
                     }
                 }
                 this.mActivityThread.mAllApplications.add(app);
@@ -898,7 +1077,12 @@ public final class LoadedApk {
                         instrumentation.callApplicationOnCreate(app);
                     } catch (Exception e2) {
                         if (!instrumentation.onException(app, e2)) {
-                            throw new RuntimeException("Unable to create application " + app.getClass().getName() + ": " + e2.toString(), e2);
+                            throw new RuntimeException(
+                                    "Unable to create application "
+                                            + app.getClass().getName()
+                                            + ": "
+                                            + e2.toString(),
+                                    e2);
                         }
                     }
                 }
@@ -919,10 +1103,12 @@ public final class LoadedApk {
                     callback.invoke(null, Integer.valueOf(id));
                 } catch (IllegalAccessException e) {
                     cause = e;
-                    throw new RuntimeException("Failed to rewrite resource references for " + packageName, cause);
+                    throw new RuntimeException(
+                            "Failed to rewrite resource references for " + packageName, cause);
                 } catch (InvocationTargetException e2) {
                     cause = e2.getCause();
-                    throw new RuntimeException("Failed to rewrite resource references for " + packageName, cause);
+                    throw new RuntimeException(
+                            "Failed to rewrite resource references for " + packageName, cause);
                 }
             } catch (NoSuchMethodException e3) {
             }
@@ -938,7 +1124,15 @@ public final class LoadedApk {
             if (rmap != null) {
                 for (int i = 0; i < rmap.size(); i++) {
                     ReceiverDispatcher rd = rmap.valueAt(i);
-                    IntentReceiverLeaked leak = new IntentReceiverLeaked(what + " " + who + " has leaked IntentReceiver " + rd.getIntentReceiver() + " that was originally registered here. Are you missing a call to unregisterReceiver()?");
+                    IntentReceiverLeaked leak =
+                            new IntentReceiverLeaked(
+                                    what
+                                            + " "
+                                            + who
+                                            + " has leaked IntentReceiver "
+                                            + rd.getIntentReceiver()
+                                            + " that was originally registered here. Are you"
+                                            + " missing a call to unregisterReceiver()?");
                     leak.setStackTrace(rd.getLocation().getStackTrace());
                     Slog.e(ActivityThread.TAG, leak.getMessage(), leak);
                     if (reportRegistrationLeaks) {
@@ -958,7 +1152,14 @@ public final class LoadedApk {
             if (smap != null) {
                 for (int i2 = 0; i2 < smap.size(); i2++) {
                     ServiceDispatcher sd = smap.valueAt(i2);
-                    ServiceConnectionLeaked leak2 = new ServiceConnectionLeaked(what + " " + who + " has leaked ServiceConnection " + sd.getServiceConnection() + " that was originally bound here");
+                    ServiceConnectionLeaked leak2 =
+                            new ServiceConnectionLeaked(
+                                    what
+                                            + " "
+                                            + who
+                                            + " has leaked ServiceConnection "
+                                            + sd.getServiceConnection()
+                                            + " that was originally bound here");
                     leak2.setStackTrace(sd.getLocation().getStackTrace());
                     Slog.e(ActivityThread.TAG, leak2.getMessage(), leak2);
                     if (reportRegistrationLeaks) {
@@ -976,7 +1177,12 @@ public final class LoadedApk {
         }
     }
 
-    public IIntentReceiver getReceiverDispatcher(BroadcastReceiver r, Context context, Handler handler, Instrumentation instrumentation, boolean registered) {
+    public IIntentReceiver getReceiverDispatcher(
+            BroadcastReceiver r,
+            Context context,
+            Handler handler,
+            Instrumentation instrumentation,
+            boolean registered) {
         ArrayMap<BroadcastReceiver, ReceiverDispatcher> map;
         synchronized (this.mReceivers) {
             ReceiverDispatcher rd = null;
@@ -985,7 +1191,8 @@ public final class LoadedApk {
                     map = null;
                 } else {
                     try {
-                        ArrayMap<BroadcastReceiver, ReceiverDispatcher> map2 = this.mReceivers.get(context);
+                        ArrayMap<BroadcastReceiver, ReceiverDispatcher> map2 =
+                                this.mReceivers.get(context);
                         if (map2 == null) {
                             map = map2;
                         } else {
@@ -998,7 +1205,14 @@ public final class LoadedApk {
                     }
                 }
                 if (rd == null) {
-                    rd = new ReceiverDispatcher(this.mActivityThread.getApplicationThread(), r, context, handler, instrumentation, registered);
+                    rd =
+                            new ReceiverDispatcher(
+                                    this.mActivityThread.getApplicationThread(),
+                                    r,
+                                    context,
+                                    handler,
+                                    instrumentation,
+                                    registered);
                     if (registered) {
                         if (map == null) {
                             ArrayMap<BroadcastReceiver, ReceiverDispatcher> map3 = new ArrayMap<>();
@@ -1019,14 +1233,15 @@ public final class LoadedApk {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:30:0x00b4, code lost:
-    
-        throw new java.lang.IllegalStateException("Unbinding Receiver " + r10 + " from Context that is no longer in use: " + r9);
-     */
+
+       throw new java.lang.IllegalStateException("Unbinding Receiver " + r10 + " from Context that is no longer in use: " + r9);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.content.IIntentReceiver forgetReceiverDispatcher(android.content.Context r9, android.content.BroadcastReceiver r10) {
+    public android.content.IIntentReceiver forgetReceiverDispatcher(
+            android.content.Context r9, android.content.BroadcastReceiver r10) {
         /*
             r8 = this;
             android.util.ArrayMap<android.content.Context, android.util.ArrayMap<android.content.BroadcastReceiver, android.app.LoadedApk$ReceiverDispatcher>> r0 = r8.mReceivers
@@ -1122,7 +1337,10 @@ public final class LoadedApk {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lce
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.LoadedApk.forgetReceiverDispatcher(android.content.Context, android.content.BroadcastReceiver):android.content.IIntentReceiver");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                        + " android.app.LoadedApk.forgetReceiverDispatcher(android.content.Context,"
+                        + " android.content.BroadcastReceiver):android.content.IIntentReceiver");
     }
 
     static final class ReceiverDispatcher {
@@ -1149,12 +1367,41 @@ public final class LoadedApk {
             }
 
             @Override // android.content.IIntentReceiver
-            public void performReceive(Intent intent, int resultCode, String data, Bundle extras, boolean ordered, boolean sticky, int sendingUser) {
-                Log.wtf(LoadedApk.TAG, "performReceive() called targeting raw IIntentReceiver for " + intent);
-                performReceive(intent, resultCode, data, extras, ordered, sticky, BroadcastReceiver.PendingResult.guessAssumeDelivered(1, ordered), sendingUser, -1, null);
+            public void performReceive(
+                    Intent intent,
+                    int resultCode,
+                    String data,
+                    Bundle extras,
+                    boolean ordered,
+                    boolean sticky,
+                    int sendingUser) {
+                Log.wtf(
+                        LoadedApk.TAG,
+                        "performReceive() called targeting raw IIntentReceiver for " + intent);
+                performReceive(
+                        intent,
+                        resultCode,
+                        data,
+                        extras,
+                        ordered,
+                        sticky,
+                        BroadcastReceiver.PendingResult.guessAssumeDelivered(1, ordered),
+                        sendingUser,
+                        -1,
+                        null);
             }
 
-            public void performReceive(Intent intent, int resultCode, String data, Bundle extras, boolean ordered, boolean sticky, boolean assumeDelivered, int sendingUser, int sendingUid, String sendingPackage) {
+            public void performReceive(
+                    Intent intent,
+                    int resultCode,
+                    String data,
+                    Bundle extras,
+                    boolean ordered,
+                    boolean sticky,
+                    boolean assumeDelivered,
+                    int sendingUser,
+                    int sendingUid,
+                    String sendingPackage) {
                 ReceiverDispatcher rd;
                 if (intent == null) {
                     Log.wtf(LoadedApk.TAG, "Null intent received");
@@ -1163,7 +1410,17 @@ public final class LoadedApk {
                     rd = this.mDispatcher.get();
                 }
                 if (rd != null) {
-                    rd.performReceive(intent, resultCode, data, extras, ordered, sticky, assumeDelivered, sendingUser, sendingUid, sendingPackage);
+                    rd.performReceive(
+                            intent,
+                            resultCode,
+                            data,
+                            extras,
+                            ordered,
+                            sticky,
+                            assumeDelivered,
+                            sendingUser,
+                            sendingUid,
+                            sendingPackage);
                     return;
                 }
                 if (!assumeDelivered) {
@@ -1175,7 +1432,13 @@ public final class LoadedApk {
                             throw e.rethrowFromSystemServer();
                         }
                     }
-                    mgr.finishReceiver(this.mApplicationThread.asBinder(), resultCode, data, extras, false, intent != null ? intent.getFlags() : 0);
+                    mgr.finishReceiver(
+                            this.mApplicationThread.asBinder(),
+                            resultCode,
+                            data,
+                            extras,
+                            false,
+                            intent != null ? intent.getFlags() : 0);
                 }
             }
 
@@ -1194,14 +1457,37 @@ public final class LoadedApk {
             private long mHandleOnSystemMainOLOGThresMs;
             private boolean mRunCalled;
 
-            public Args(Intent intent, int resultCode, String resultData, Bundle resultExtras, boolean ordered, boolean sticky, boolean assumeDelivered, int sendingUser, int sendingUid, String sendingPackage) {
-                super(resultCode, resultData, resultExtras, ReceiverDispatcher.this.mRegistered ? 1 : 2, ordered, sticky, assumeDelivered, ReceiverDispatcher.this.mAppThread.asBinder(), sendingUser, intent.getFlags(), sendingUid, sendingPackage);
+            public Args(
+                    Intent intent,
+                    int resultCode,
+                    String resultData,
+                    Bundle resultExtras,
+                    boolean ordered,
+                    boolean sticky,
+                    boolean assumeDelivered,
+                    int sendingUser,
+                    int sendingUid,
+                    String sendingPackage) {
+                super(
+                        resultCode,
+                        resultData,
+                        resultExtras,
+                        ReceiverDispatcher.this.mRegistered ? 1 : 2,
+                        ordered,
+                        sticky,
+                        assumeDelivered,
+                        ReceiverDispatcher.this.mAppThread.asBinder(),
+                        sendingUser,
+                        intent.getFlags(),
+                        sendingUid,
+                        sendingPackage);
                 this.mHandleOnSystemMainOLOGThresMs = 100L;
                 this.mCurIntent = intent;
             }
 
             public final Runnable getRunnable() {
-                return new Runnable() { // from class: android.app.LoadedApk$ReceiverDispatcher$Args$$ExternalSyntheticLambda0
+                return new Runnable() { // from class:
+                    // android.app.LoadedApk$ReceiverDispatcher$Args$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
                         LoadedApk.ReceiverDispatcher.Args.this.lambda$getRunnable$0();
@@ -1215,7 +1501,11 @@ public final class LoadedApk {
                 IActivityManager mgr = ActivityManager.getService();
                 Intent intent = this.mCurIntent;
                 if (intent == null) {
-                    Log.wtf(LoadedApk.TAG, "Null intent being dispatched, mDispatched=" + this.mDispatched + (this.mRunCalled ? ", run() has already been called" : ""));
+                    Log.wtf(
+                            LoadedApk.TAG,
+                            "Null intent being dispatched, mDispatched="
+                                    + this.mDispatched
+                                    + (this.mRunCalled ? ", run() has already been called" : ""));
                 }
                 this.mCurIntent = null;
                 this.mDispatched = true;
@@ -1226,20 +1516,34 @@ public final class LoadedApk {
                 }
                 long dispatchStart = SystemClock.elapsedRealtime();
                 if (Trace.isTagEnabled(64L)) {
-                    Trace.traceBegin(64L, "broadcastReceiveReg: " + ReceiverDispatcher.this.mReceiver + ", for " + intent.getAction());
+                    Trace.traceBegin(
+                            64L,
+                            "broadcastReceiveReg: "
+                                    + ReceiverDispatcher.this.mReceiver
+                                    + ", for "
+                                    + intent.getAction());
                 }
                 try {
                     ClassLoader cl = ReceiverDispatcher.this.mReceiver.getClass().getClassLoader();
                     intent.setExtrasClassLoader(cl);
-                    intent.prepareToEnterProcess(ActivityThread.isProtectedBroadcast(intent), ReceiverDispatcher.this.mContext.getAttributionSource());
+                    intent.prepareToEnterProcess(
+                            ActivityThread.isProtectedBroadcast(intent),
+                            ReceiverDispatcher.this.mContext.getAttributionSource());
                     setExtrasClassLoader(cl);
                     receiver.setPendingResult(this);
                     receiver.onReceive(ReceiverDispatcher.this.mContext, intent);
                 } catch (Exception e) {
                     sendFinished(mgr);
-                    if (ReceiverDispatcher.this.mInstrumentation == null || !ReceiverDispatcher.this.mInstrumentation.onException(ReceiverDispatcher.this.mReceiver, e)) {
+                    if (ReceiverDispatcher.this.mInstrumentation == null
+                            || !ReceiverDispatcher.this.mInstrumentation.onException(
+                                    ReceiverDispatcher.this.mReceiver, e)) {
                         Trace.traceEnd(64L);
-                        throw new RuntimeException("Error receiving broadcast " + intent + " in " + ReceiverDispatcher.this.mReceiver, e);
+                        throw new RuntimeException(
+                                "Error receiving broadcast "
+                                        + intent
+                                        + " in "
+                                        + ReceiverDispatcher.this.mReceiver,
+                                e);
                     }
                 }
                 if (receiver.getPendingResult() != null) {
@@ -1251,8 +1555,22 @@ public final class LoadedApk {
                 try {
                     boolean mPerfLogEnable = Looper.myLooper().isPerfLogEnable();
                     if (mPerfLogEnable && handleTime > this.mHandleOnSystemMainOLOGThresMs) {
-                        PerfLog.d(5, " system_server main thread handled for " + intent.getAction() + " took " + handleTime + " ms, Receiver = " + ReceiverDispatcher.this.mReceiver);
-                        Slog.w(LoadedApk.TAG, "Slow system_server main thread handled for " + intent.getAction() + " took " + handleTime + " ms, Receiver = " + ReceiverDispatcher.this.mReceiver);
+                        PerfLog.d(
+                                5,
+                                " system_server main thread handled for "
+                                        + intent.getAction()
+                                        + " took "
+                                        + handleTime
+                                        + " ms, Receiver = "
+                                        + ReceiverDispatcher.this.mReceiver);
+                        Slog.w(
+                                LoadedApk.TAG,
+                                "Slow system_server main thread handled for "
+                                        + intent.getAction()
+                                        + " took "
+                                        + handleTime
+                                        + " ms, Receiver = "
+                                        + ReceiverDispatcher.this.mReceiver);
                     }
                 } catch (Exception e2) {
                     Slog.e(LoadedApk.TAG, "Exception : " + e2.toString());
@@ -1260,7 +1578,13 @@ public final class LoadedApk {
             }
         }
 
-        ReceiverDispatcher(IApplicationThread appThread, BroadcastReceiver receiver, Context context, Handler activityThread, Instrumentation instrumentation, boolean registered) {
+        ReceiverDispatcher(
+                IApplicationThread appThread,
+                BroadcastReceiver receiver,
+                Context context,
+                Handler activityThread,
+                Instrumentation instrumentation,
+                boolean registered) {
             if (activityThread == null) {
                 throw new NullPointerException("Handler must not be null");
             }
@@ -1277,10 +1601,24 @@ public final class LoadedApk {
 
         void validate(Context context, Handler activityThread) {
             if (this.mContext != context) {
-                throw new IllegalStateException("Receiver " + this.mReceiver + " registered with differing Context (was " + this.mContext + " now " + context + NavigationBarInflaterView.KEY_CODE_END);
+                throw new IllegalStateException(
+                        "Receiver "
+                                + this.mReceiver
+                                + " registered with differing Context (was "
+                                + this.mContext
+                                + " now "
+                                + context
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
             if (this.mActivityThread != activityThread) {
-                throw new IllegalStateException("Receiver " + this.mReceiver + " registered with differing handler (was " + this.mActivityThread + " now " + activityThread + NavigationBarInflaterView.KEY_CODE_END);
+                throw new IllegalStateException(
+                        "Receiver "
+                                + this.mReceiver
+                                + " registered with differing handler (was "
+                                + this.mActivityThread
+                                + " now "
+                                + activityThread
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
         }
 
@@ -1304,8 +1642,29 @@ public final class LoadedApk {
             return this.mUnregisterLocation;
         }
 
-        public void performReceive(Intent intent, int resultCode, String data, Bundle extras, boolean ordered, boolean sticky, boolean assumeDelivered, int sendingUser, int sendingUid, String sendingPackage) {
-            Args args = new Args(intent, resultCode, data, extras, ordered, sticky, assumeDelivered, sendingUser, sendingUid, sendingPackage);
+        public void performReceive(
+                Intent intent,
+                int resultCode,
+                String data,
+                Bundle extras,
+                boolean ordered,
+                boolean sticky,
+                boolean assumeDelivered,
+                int sendingUser,
+                int sendingUid,
+                String sendingPackage) {
+            Args args =
+                    new Args(
+                            intent,
+                            resultCode,
+                            data,
+                            extras,
+                            ordered,
+                            sticky,
+                            assumeDelivered,
+                            sendingUser,
+                            sendingUid,
+                            sendingPackage);
             if (intent == null) {
                 Log.wtf(LoadedApk.TAG, "Null intent received");
             }
@@ -1317,20 +1676,24 @@ public final class LoadedApk {
         }
     }
 
-    public final IServiceConnection getServiceDispatcher(ServiceConnection c, Context context, Handler handler, long flags) {
+    public final IServiceConnection getServiceDispatcher(
+            ServiceConnection c, Context context, Handler handler, long flags) {
         return getServiceDispatcherCommon(c, context, handler, null, flags);
     }
 
-    public final IServiceConnection getServiceDispatcher(ServiceConnection c, Context context, Executor executor, long flags) {
+    public final IServiceConnection getServiceDispatcher(
+            ServiceConnection c, Context context, Executor executor, long flags) {
         return getServiceDispatcherCommon(c, context, null, executor, flags);
     }
 
-    private IServiceConnection getServiceDispatcherCommon(ServiceConnection c, Context context, Handler handler, Executor executor, long flags) {
+    private IServiceConnection getServiceDispatcherCommon(
+            ServiceConnection c, Context context, Handler handler, Executor executor, long flags) {
         synchronized (this.mServices) {
             ServiceDispatcher sd = null;
             try {
                 try {
-                    ArrayMap<ServiceConnection, ServiceDispatcher> map = this.mServices.get(context);
+                    ArrayMap<ServiceConnection, ServiceDispatcher> map =
+                            this.mServices.get(context);
                     if (map != null) {
                         sd = map.get(c);
                     }
@@ -1375,14 +1738,15 @@ public final class LoadedApk {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:30:0x00bb, code lost:
-    
-        throw new java.lang.IllegalStateException("Unbinding Service " + r10 + " from Context that is no longer in use: " + r9);
-     */
+
+       throw new java.lang.IllegalStateException("Unbinding Service " + r10 + " from Context that is no longer in use: " + r9);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.app.IServiceConnection forgetServiceDispatcher(android.content.Context r9, android.content.ServiceConnection r10) {
+    public final android.app.IServiceConnection forgetServiceDispatcher(
+            android.content.Context r9, android.content.ServiceConnection r10) {
         /*
             r8 = this;
             android.util.ArrayMap<android.content.Context, android.util.ArrayMap<android.content.ServiceConnection, android.app.LoadedApk$ServiceDispatcher>> r0 = r8.mServices
@@ -1481,7 +1845,10 @@ public final class LoadedApk {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Ld5
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.LoadedApk.forgetServiceDispatcher(android.content.Context, android.content.ServiceConnection):android.app.IServiceConnection");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                        + " android.app.LoadedApk.forgetServiceDispatcher(android.content.Context,"
+                        + " android.content.ServiceConnection):android.app.IServiceConnection");
     }
 
     static final class ServiceDispatcher {
@@ -1500,8 +1867,7 @@ public final class LoadedApk {
             IBinder binder;
             IBinder.DeathRecipient deathMonitor;
 
-            private ConnectionInfo() {
-            }
+            private ConnectionInfo() {}
         }
 
         private static class InnerConnection extends IServiceConnection.Stub {
@@ -1512,7 +1878,8 @@ public final class LoadedApk {
             }
 
             @Override // android.app.IServiceConnection
-            public void connected(ComponentName name, IBinder service, boolean dead) throws RemoteException {
+            public void connected(ComponentName name, IBinder service, boolean dead)
+                    throws RemoteException {
                 ServiceDispatcher sd = this.mDispatcher.get();
                 if (sd != null) {
                     sd.connected(name, service, dead);
@@ -1520,7 +1887,8 @@ public final class LoadedApk {
             }
         }
 
-        ServiceDispatcher(ServiceConnection conn, Context context, Handler activityThread, long flags) {
+        ServiceDispatcher(
+                ServiceConnection conn, Context context, Handler activityThread, long flags) {
             this.mActiveConnections = new ArrayMap<>();
             this.mIServiceConnection = new InnerConnection(this);
             this.mConnection = conn;
@@ -1532,7 +1900,8 @@ public final class LoadedApk {
             this.mFlags = flags;
         }
 
-        ServiceDispatcher(ServiceConnection conn, Context context, Executor activityExecutor, long flags) {
+        ServiceDispatcher(
+                ServiceConnection conn, Context context, Executor activityExecutor, long flags) {
             this.mActiveConnections = new ArrayMap<>();
             this.mIServiceConnection = new InnerConnection(this);
             this.mConnection = conn;
@@ -1546,13 +1915,34 @@ public final class LoadedApk {
 
         void validate(Context context, Handler activityThread, Executor activityExecutor) {
             if (this.mContext != context) {
-                throw new RuntimeException("ServiceConnection " + this.mConnection + " registered with differing Context (was " + this.mContext + " now " + context + NavigationBarInflaterView.KEY_CODE_END);
+                throw new RuntimeException(
+                        "ServiceConnection "
+                                + this.mConnection
+                                + " registered with differing Context (was "
+                                + this.mContext
+                                + " now "
+                                + context
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
             if (this.mActivityThread != activityThread) {
-                throw new RuntimeException("ServiceConnection " + this.mConnection + " registered with differing handler (was " + this.mActivityThread + " now " + activityThread + NavigationBarInflaterView.KEY_CODE_END);
+                throw new RuntimeException(
+                        "ServiceConnection "
+                                + this.mConnection
+                                + " registered with differing handler (was "
+                                + this.mActivityThread
+                                + " now "
+                                + activityThread
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
             if (this.mActivityExecutor != activityExecutor) {
-                throw new RuntimeException("ServiceConnection " + this.mConnection + " registered with differing executor (was " + this.mActivityExecutor + " now " + activityExecutor + NavigationBarInflaterView.KEY_CODE_END);
+                throw new RuntimeException(
+                        "ServiceConnection "
+                                + this.mConnection
+                                + " registered with differing executor (was "
+                                + this.mActivityExecutor
+                                + " now "
+                                + activityExecutor
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
         }
 
@@ -1641,7 +2031,10 @@ public final class LoadedApk {
                         try {
                             old.binder.unlinkToDeath(old.deathMonitor, 0);
                         } catch (NoSuchElementException e2) {
-                            Log.e(LoadedApk.TAG, "Error during unlinkToDeath, " + name.toString(), e2);
+                            Log.e(
+                                    LoadedApk.TAG,
+                                    "Error during unlinkToDeath, " + name.toString(),
+                                    e2);
                         }
                     }
                     if (old != null) {
@@ -1722,10 +2115,14 @@ public final class LoadedApk {
         }
     }
 
-    private static void checkAndUpdateApkPaths(ActivityThread activityThread, ApplicationInfo expectedAppInfo, boolean cacheWithCode) {
+    private static void checkAndUpdateApkPaths(
+            ActivityThread activityThread, ApplicationInfo expectedAppInfo, boolean cacheWithCode) {
         String expectedCodePath = expectedAppInfo.getCodePath();
-        LoadedApk loadedApk = activityThread.peekPackageInfo(expectedAppInfo.packageName, cacheWithCode);
-        if (loadedApk == null || loadedApk.getApplicationInfo() == null || loadedApk.getApplicationInfo().getCodePath().equals(expectedCodePath)) {
+        LoadedApk loadedApk =
+                activityThread.peekPackageInfo(expectedAppInfo.packageName, cacheWithCode);
+        if (loadedApk == null
+                || loadedApk.getApplicationInfo() == null
+                || loadedApk.getApplicationInfo().getCodePath().equals(expectedCodePath)) {
             return;
         }
         List<String> oldPaths = new ArrayList<>();

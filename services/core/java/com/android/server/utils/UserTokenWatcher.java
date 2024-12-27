@@ -3,8 +3,10 @@ package com.android.server.utils;
 import android.os.Handler;
 import android.os.TokenWatcher;
 import android.util.SparseArray;
+
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.wm.KeyguardDisableHandler;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,17 +28,20 @@ public final class UserTokenWatcher {
 
         @Override // android.os.TokenWatcher
         public final void acquired() {
-            KeyguardDisableHandler.AnonymousClass1 anonymousClass1 = UserTokenWatcher.this.mCallback;
+            KeyguardDisableHandler.AnonymousClass1 anonymousClass1 =
+                    UserTokenWatcher.this.mCallback;
             KeyguardDisableHandler.this.updateKeyguardEnabled(this.mUserId);
         }
 
         @Override // android.os.TokenWatcher
         public final void released() {
-            KeyguardDisableHandler.AnonymousClass1 anonymousClass1 = UserTokenWatcher.this.mCallback;
+            KeyguardDisableHandler.AnonymousClass1 anonymousClass1 =
+                    UserTokenWatcher.this.mCallback;
             KeyguardDisableHandler.this.updateKeyguardEnabled(this.mUserId);
             synchronized (UserTokenWatcher.this.mWatchers) {
                 try {
-                    TokenWatcher tokenWatcher = (TokenWatcher) UserTokenWatcher.this.mWatchers.get(this.mUserId);
+                    TokenWatcher tokenWatcher =
+                            (TokenWatcher) UserTokenWatcher.this.mWatchers.get(this.mUserId);
                     if (tokenWatcher != null && !tokenWatcher.isAcquired()) {
                         UserTokenWatcher.this.mWatchers.remove(this.mUserId);
                     }
@@ -47,7 +52,8 @@ public final class UserTokenWatcher {
         }
     }
 
-    public UserTokenWatcher(KeyguardDisableHandler.AnonymousClass1 anonymousClass1, Handler handler) {
+    public UserTokenWatcher(
+            KeyguardDisableHandler.AnonymousClass1 anonymousClass1, Handler handler) {
         this.mCallback = anonymousClass1;
         this.mHandler = handler;
     }

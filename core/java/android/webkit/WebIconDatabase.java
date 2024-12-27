@@ -14,7 +14,8 @@ public abstract class WebIconDatabase {
     }
 
     @SystemApi
-    public abstract void bulkRequestIconForPageUrl(ContentResolver contentResolver, String str, IconListener iconListener);
+    public abstract void bulkRequestIconForPageUrl(
+            ContentResolver contentResolver, String str, IconListener iconListener);
 
     public abstract void close();
 

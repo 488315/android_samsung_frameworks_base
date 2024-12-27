@@ -26,11 +26,16 @@ public final class UsbACMidi20Endpoint extends UsbACEndpoint {
     @Override // com.android.server.usb.descriptors.UsbDescriptor
     public final void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
-        textReportCanvas.writeHeader("AC Midi20 Endpoint: " + TextReportCanvas.getHexString(this.mType) + " Length: " + this.mLength);
+        textReportCanvas.writeHeader(
+                "AC Midi20 Endpoint: "
+                        + TextReportCanvas.getHexString(this.mType)
+                        + " Length: "
+                        + this.mLength);
         textReportCanvas.openList();
         textReportCanvas.writeListItem("" + ((int) this.mNumGroupTerminals) + " Group Terminals.");
         for (int i = 0; i < this.mNumGroupTerminals; i++) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Group Terminal ", ": ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(i, "Group Terminal ", ": ");
             m.append((int) this.mBlockIds[i]);
             textReportCanvas.writeListItem(m.toString());
         }

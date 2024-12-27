@@ -6,13 +6,13 @@ final class ExtensionSchemas {
     private static final ExtensionSchema<?> LITE_SCHEMA = new ExtensionSchemaLite();
     private static final ExtensionSchema<?> FULL_SCHEMA = loadSchemaForFullRuntime();
 
-    ExtensionSchemas() {
-    }
+    ExtensionSchemas() {}
 
     private static ExtensionSchema<?> loadSchemaForFullRuntime() {
         try {
             Class<?> clazz = Class.forName("com.android.framework.protobuf.ExtensionSchemaFull");
-            return (ExtensionSchema) clazz.getDeclaredConstructor(new Class[0]).newInstance(new Object[0]);
+            return (ExtensionSchema)
+                    clazz.getDeclaredConstructor(new Class[0]).newInstance(new Object[0]);
         } catch (Exception e) {
             return null;
         }

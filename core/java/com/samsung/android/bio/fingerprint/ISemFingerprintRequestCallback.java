@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ISemFingerprintRequestCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.bio.fingerprint.ISemFingerprintRequestCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.bio.fingerprint.ISemFingerprintRequestCallback";
 
     void onResult(int i) throws RemoteException;
 
     public static class Default implements ISemFingerprintRequestCallback {
         @Override // com.samsung.android.bio.fingerprint.ISemFingerprintRequestCallback
-        public void onResult(int code) throws RemoteException {
-        }
+        public void onResult(int code) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ISemFingerprintRequestCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemFingerprintRequestCallback {
+    public abstract static class Stub extends Binder implements ISemFingerprintRequestCallback {
         static final int TRANSACTION_onResult = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ISemFingerprintRequestCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemFingerprintRequestCallback.DESCRIPTOR);
             }

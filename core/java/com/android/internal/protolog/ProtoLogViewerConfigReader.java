@@ -2,7 +2,9 @@ package com.android.internal.protolog;
 
 import android.util.ArrayMap;
 import android.util.proto.ProtoInputStream;
+
 import com.android.internal.protolog.common.ILogger;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -11,7 +13,8 @@ public class ProtoLogViewerConfigReader {
     private Map<Long, String> mLogMessageMap = null;
     private final ViewerConfigInputStreamProvider mViewerConfigInputStreamProvider;
 
-    public ProtoLogViewerConfigReader(ViewerConfigInputStreamProvider viewerConfigInputStreamProvider) {
+    public ProtoLogViewerConfigReader(
+            ViewerConfigInputStreamProvider viewerConfigInputStreamProvider) {
         this.mViewerConfigInputStreamProvider = viewerConfigInputStreamProvider;
     }
 
@@ -30,7 +33,9 @@ public class ProtoLogViewerConfigReader {
             doLoadViewerConfig();
             logger.log("Loaded " + this.mLogMessageMap.size() + " log definitions");
         } catch (IOException e) {
-            logger.log("Unable to load log definitions: IOException while processing viewer config" + e);
+            logger.log(
+                    "Unable to load log definitions: IOException while processing viewer config"
+                            + e);
         }
     }
 

@@ -3,11 +3,6 @@ package android.hardware.radio;
 import android.annotation.SystemApi;
 import android.app.admin.PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2;
 import android.content.Context;
-import android.hardware.radio.Announcement;
-import android.hardware.radio.IAnnouncementListener;
-import android.hardware.radio.IRadioService;
-import android.hardware.radio.ProgramSelector;
-import android.hardware.radio.RadioTuner;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Handler;
 import android.os.Parcel;
@@ -17,7 +12,9 @@ import android.os.ServiceManager;
 import android.telecom.Logging.Session;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -47,8 +44,7 @@ public class RadioManager {
     public static final int CONFIG_DAB_FM_LINKING = 7;
     public static final int CONFIG_DAB_FM_SOFT_LINKING = 9;
 
-    @Deprecated
-    public static final int CONFIG_FORCE_ANALOG = 2;
+    @Deprecated public static final int CONFIG_FORCE_ANALOG = 2;
     public static final int CONFIG_FORCE_ANALOG_AM = 11;
     public static final int CONFIG_FORCE_ANALOG_FM = 10;
     public static final int CONFIG_FORCE_DIGITAL = 3;
@@ -74,33 +70,32 @@ public class RadioManager {
     private final IRadioService mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Band {
-    }
+    public @interface Band {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConfigFlag {
-    }
+    public @interface ConfigFlag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RadioStatusType {
-    }
+    public @interface RadioStatusType {}
 
     private native int nativeListModules(List<ModuleProperties> list);
 
     public static class ModuleProperties implements Parcelable {
-        public static final Parcelable.Creator<ModuleProperties> CREATOR = new Parcelable.Creator<ModuleProperties>() { // from class: android.hardware.radio.RadioManager.ModuleProperties.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ModuleProperties createFromParcel(Parcel in) {
-                return new ModuleProperties(in);
-            }
+        public static final Parcelable.Creator<ModuleProperties> CREATOR =
+                new Parcelable.Creator<ModuleProperties>() { // from class:
+                    // android.hardware.radio.RadioManager.ModuleProperties.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ModuleProperties createFromParcel(Parcel in) {
+                        return new ModuleProperties(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ModuleProperties[] newArray(int size) {
-                return new ModuleProperties[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ModuleProperties[] newArray(int size) {
+                        return new ModuleProperties[size];
+                    }
+                };
         private final BandDescriptor[] mBands;
         private final int mClassId;
         private final Map<String, Integer> mDabFrequencyTable;
@@ -119,7 +114,24 @@ public class RadioManager {
         private final Map<String, String> mVendorInfo;
         private final String mVersion;
 
-        public ModuleProperties(int id, String serviceName, int classId, String implementor, String product, String version, String serial, int numTuners, int numAudioSources, boolean isInitializationRequired, boolean isCaptureSupported, BandDescriptor[] bands, boolean isBgScanSupported, int[] supportedProgramTypes, int[] supportedIdentifierTypes, Map<String, Integer> dabFrequencyTable, Map<String, String> vendorInfo) {
+        public ModuleProperties(
+                int id,
+                String serviceName,
+                int classId,
+                String implementor,
+                String product,
+                String version,
+                String serial,
+                int numTuners,
+                int numAudioSources,
+                boolean isInitializationRequired,
+                boolean isCaptureSupported,
+                BandDescriptor[] bands,
+                boolean isBgScanSupported,
+                int[] supportedProgramTypes,
+                int[] supportedIdentifierTypes,
+                Map<String, Integer> dabFrequencyTable,
+                Map<String, String> vendorInfo) {
             this.mId = id;
             this.mServiceName = TextUtils.isEmpty(serviceName) ? "default" : serviceName;
             this.mClassId = classId;
@@ -141,7 +153,10 @@ public class RadioManager {
                     Objects.requireNonNull(entry.getValue());
                 }
             }
-            this.mDabFrequencyTable = (dabFrequencyTable == null || dabFrequencyTable.isEmpty()) ? null : dabFrequencyTable;
+            this.mDabFrequencyTable =
+                    (dabFrequencyTable == null || dabFrequencyTable.isEmpty())
+                            ? null
+                            : dabFrequencyTable;
             this.mVendorInfo = vendorInfo == null ? new HashMap<>() : vendorInfo;
         }
 
@@ -150,7 +165,9 @@ public class RadioManager {
         }
 
         private static int[] setToArray(Set<Integer> set) {
-            return set.stream().mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2()).toArray();
+            return set.stream()
+                    .mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2())
+                    .toArray();
         }
 
         public int getId() {
@@ -234,7 +251,10 @@ public class RadioManager {
             this.mNumAudioSources = in.readInt();
             this.mIsInitializationRequired = in.readInt() == 1;
             this.mIsCaptureSupported = in.readInt() == 1;
-            Parcelable[] tmp = (Parcelable[]) in.readParcelableArray(BandDescriptor.class.getClassLoader(), BandDescriptor.class);
+            Parcelable[] tmp =
+                    (Parcelable[])
+                            in.readParcelableArray(
+                                    BandDescriptor.class.getClassLoader(), BandDescriptor.class);
             this.mBands = new BandDescriptor[tmp.length];
             for (int i = 0; i < tmp.length; i++) {
                 this.mBands[i] = (BandDescriptor) tmp[i];
@@ -275,11 +295,52 @@ public class RadioManager {
         }
 
         public String toString() {
-            return "ModuleProperties [mId=" + this.mId + ", mServiceName=" + this.mServiceName + ", mClassId=" + this.mClassId + ", mImplementor=" + this.mImplementor + ", mProduct=" + this.mProduct + ", mVersion=" + this.mVersion + ", mSerial=" + this.mSerial + ", mNumTuners=" + this.mNumTuners + ", mNumAudioSources=" + this.mNumAudioSources + ", mIsInitializationRequired=" + this.mIsInitializationRequired + ", mIsCaptureSupported=" + this.mIsCaptureSupported + ", mIsBgScanSupported=" + this.mIsBgScanSupported + ", mBands=" + Arrays.toString(this.mBands) + NavigationBarInflaterView.SIZE_MOD_END;
+            return "ModuleProperties [mId="
+                    + this.mId
+                    + ", mServiceName="
+                    + this.mServiceName
+                    + ", mClassId="
+                    + this.mClassId
+                    + ", mImplementor="
+                    + this.mImplementor
+                    + ", mProduct="
+                    + this.mProduct
+                    + ", mVersion="
+                    + this.mVersion
+                    + ", mSerial="
+                    + this.mSerial
+                    + ", mNumTuners="
+                    + this.mNumTuners
+                    + ", mNumAudioSources="
+                    + this.mNumAudioSources
+                    + ", mIsInitializationRequired="
+                    + this.mIsInitializationRequired
+                    + ", mIsCaptureSupported="
+                    + this.mIsCaptureSupported
+                    + ", mIsBgScanSupported="
+                    + this.mIsBgScanSupported
+                    + ", mBands="
+                    + Arrays.toString(this.mBands)
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.mId), this.mServiceName, Integer.valueOf(this.mClassId), this.mImplementor, this.mProduct, this.mVersion, this.mSerial, Integer.valueOf(this.mNumTuners), Integer.valueOf(this.mNumAudioSources), Boolean.valueOf(this.mIsInitializationRequired), Boolean.valueOf(this.mIsCaptureSupported), Integer.valueOf(Arrays.hashCode(this.mBands)), Boolean.valueOf(this.mIsBgScanSupported), this.mDabFrequencyTable, this.mVendorInfo);
+            return Objects.hash(
+                    Integer.valueOf(this.mId),
+                    this.mServiceName,
+                    Integer.valueOf(this.mClassId),
+                    this.mImplementor,
+                    this.mProduct,
+                    this.mVersion,
+                    this.mSerial,
+                    Integer.valueOf(this.mNumTuners),
+                    Integer.valueOf(this.mNumAudioSources),
+                    Boolean.valueOf(this.mIsInitializationRequired),
+                    Boolean.valueOf(this.mIsCaptureSupported),
+                    Integer.valueOf(Arrays.hashCode(this.mBands)),
+                    Boolean.valueOf(this.mIsBgScanSupported),
+                    this.mDabFrequencyTable,
+                    this.mVendorInfo);
         }
 
         public boolean equals(Object obj) {
@@ -290,35 +351,52 @@ public class RadioManager {
                 return false;
             }
             ModuleProperties other = (ModuleProperties) obj;
-            return this.mId == other.getId() && TextUtils.equals(this.mServiceName, other.mServiceName) && this.mClassId == other.mClassId && Objects.equals(this.mImplementor, other.mImplementor) && Objects.equals(this.mProduct, other.mProduct) && Objects.equals(this.mVersion, other.mVersion) && Objects.equals(this.mSerial, other.mSerial) && this.mNumTuners == other.mNumTuners && this.mNumAudioSources == other.mNumAudioSources && this.mIsInitializationRequired == other.mIsInitializationRequired && this.mIsCaptureSupported == other.mIsCaptureSupported && Arrays.equals(this.mBands, other.mBands) && this.mIsBgScanSupported == other.mIsBgScanSupported && Objects.equals(this.mDabFrequencyTable, other.mDabFrequencyTable) && Objects.equals(this.mVendorInfo, other.mVendorInfo);
+            return this.mId == other.getId()
+                    && TextUtils.equals(this.mServiceName, other.mServiceName)
+                    && this.mClassId == other.mClassId
+                    && Objects.equals(this.mImplementor, other.mImplementor)
+                    && Objects.equals(this.mProduct, other.mProduct)
+                    && Objects.equals(this.mVersion, other.mVersion)
+                    && Objects.equals(this.mSerial, other.mSerial)
+                    && this.mNumTuners == other.mNumTuners
+                    && this.mNumAudioSources == other.mNumAudioSources
+                    && this.mIsInitializationRequired == other.mIsInitializationRequired
+                    && this.mIsCaptureSupported == other.mIsCaptureSupported
+                    && Arrays.equals(this.mBands, other.mBands)
+                    && this.mIsBgScanSupported == other.mIsBgScanSupported
+                    && Objects.equals(this.mDabFrequencyTable, other.mDabFrequencyTable)
+                    && Objects.equals(this.mVendorInfo, other.mVendorInfo);
         }
     }
 
     public static class BandDescriptor implements Parcelable {
-        public static final Parcelable.Creator<BandDescriptor> CREATOR = new Parcelable.Creator<BandDescriptor>() { // from class: android.hardware.radio.RadioManager.BandDescriptor.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BandDescriptor createFromParcel(Parcel parcel) {
-                int lookupTypeFromParcel = BandDescriptor.lookupTypeFromParcel(parcel);
-                byte b = 0;
-                switch (lookupTypeFromParcel) {
-                    case 0:
-                    case 3:
-                        return new AmBandDescriptor(parcel);
-                    case 1:
-                    case 2:
-                        return new FmBandDescriptor(parcel);
-                    default:
-                        throw new IllegalArgumentException("Unsupported band: " + lookupTypeFromParcel);
-                }
-            }
+        public static final Parcelable.Creator<BandDescriptor> CREATOR =
+                new Parcelable.Creator<BandDescriptor>() { // from class:
+                    // android.hardware.radio.RadioManager.BandDescriptor.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BandDescriptor createFromParcel(Parcel parcel) {
+                        int lookupTypeFromParcel = BandDescriptor.lookupTypeFromParcel(parcel);
+                        byte b = 0;
+                        switch (lookupTypeFromParcel) {
+                            case 0:
+                            case 3:
+                                return new AmBandDescriptor(parcel);
+                            case 1:
+                            case 2:
+                                return new FmBandDescriptor(parcel);
+                            default:
+                                throw new IllegalArgumentException(
+                                        "Unsupported band: " + lookupTypeFromParcel);
+                        }
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BandDescriptor[] newArray(int size) {
-                return new BandDescriptor[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BandDescriptor[] newArray(int size) {
+                        return new BandDescriptor[size];
+                    }
+                };
         private final int mLowerLimit;
         private final int mRegion;
         private final int mSpacing;
@@ -396,12 +474,25 @@ public class RadioManager {
         }
 
         public String toString() {
-            return "BandDescriptor [mRegion=" + this.mRegion + ", mType=" + this.mType + ", mLowerLimit=" + this.mLowerLimit + ", mUpperLimit=" + this.mUpperLimit + ", mSpacing=" + this.mSpacing + NavigationBarInflaterView.SIZE_MOD_END;
+            return "BandDescriptor [mRegion="
+                    + this.mRegion
+                    + ", mType="
+                    + this.mType
+                    + ", mLowerLimit="
+                    + this.mLowerLimit
+                    + ", mUpperLimit="
+                    + this.mUpperLimit
+                    + ", mSpacing="
+                    + this.mSpacing
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         public int hashCode() {
             int result = (1 * 31) + this.mRegion;
-            return (((((((result * 31) + this.mType) * 31) + this.mLowerLimit) * 31) + this.mUpperLimit) * 31) + this.mSpacing;
+            return (((((((result * 31) + this.mType) * 31) + this.mLowerLimit) * 31)
+                                    + this.mUpperLimit)
+                            * 31)
+                    + this.mSpacing;
         }
 
         public boolean equals(Object obj) {
@@ -412,31 +503,47 @@ public class RadioManager {
                 return false;
             }
             BandDescriptor other = (BandDescriptor) obj;
-            return this.mRegion == other.getRegion() && this.mType == other.getType() && this.mLowerLimit == other.getLowerLimit() && this.mUpperLimit == other.getUpperLimit() && this.mSpacing == other.getSpacing();
+            return this.mRegion == other.getRegion()
+                    && this.mType == other.getType()
+                    && this.mLowerLimit == other.getLowerLimit()
+                    && this.mUpperLimit == other.getUpperLimit()
+                    && this.mSpacing == other.getSpacing();
         }
     }
 
     public static class FmBandDescriptor extends BandDescriptor {
-        public static final Parcelable.Creator<FmBandDescriptor> CREATOR = new Parcelable.Creator<FmBandDescriptor>() { // from class: android.hardware.radio.RadioManager.FmBandDescriptor.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FmBandDescriptor createFromParcel(Parcel in) {
-                return new FmBandDescriptor(in);
-            }
+        public static final Parcelable.Creator<FmBandDescriptor> CREATOR =
+                new Parcelable.Creator<FmBandDescriptor>() { // from class:
+                    // android.hardware.radio.RadioManager.FmBandDescriptor.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FmBandDescriptor createFromParcel(Parcel in) {
+                        return new FmBandDescriptor(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FmBandDescriptor[] newArray(int size) {
-                return new FmBandDescriptor[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FmBandDescriptor[] newArray(int size) {
+                        return new FmBandDescriptor[size];
+                    }
+                };
         private final boolean mAf;
         private final boolean mEa;
         private final boolean mRds;
         private final boolean mStereo;
         private final boolean mTa;
 
-        public FmBandDescriptor(int region, int type, int lowerLimit, int upperLimit, int spacing, boolean stereo, boolean rds, boolean ta, boolean af, boolean ea) {
+        public FmBandDescriptor(
+                int region,
+                int type,
+                int lowerLimit,
+                int upperLimit,
+                int spacing,
+                boolean stereo,
+                boolean rds,
+                boolean ta,
+                boolean af,
+                boolean ea) {
             super(region, type, lowerLimit, upperLimit, spacing);
             this.mStereo = stereo;
             this.mRds = rds;
@@ -491,12 +598,31 @@ public class RadioManager {
 
         @Override // android.hardware.radio.RadioManager.BandDescriptor
         public String toString() {
-            return "FmBandDescriptor [ " + super.toString() + " mStereo=" + this.mStereo + ", mRds=" + this.mRds + ", mTa=" + this.mTa + ", mAf=" + this.mAf + ", mEa =" + this.mEa + NavigationBarInflaterView.SIZE_MOD_END;
+            return "FmBandDescriptor [ "
+                    + super.toString()
+                    + " mStereo="
+                    + this.mStereo
+                    + ", mRds="
+                    + this.mRds
+                    + ", mTa="
+                    + this.mTa
+                    + ", mAf="
+                    + this.mAf
+                    + ", mEa ="
+                    + this.mEa
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         @Override // android.hardware.radio.RadioManager.BandDescriptor
         public int hashCode() {
-            return (((((((((super.hashCode() * 31) + (this.mStereo ? 1 : 0)) * 31) + (this.mRds ? 1 : 0)) * 31) + (this.mTa ? 1 : 0)) * 31) + (this.mAf ? 1 : 0)) * 31) + (this.mEa ? 1 : 0);
+            return (((((((((super.hashCode() * 31) + (this.mStereo ? 1 : 0)) * 31)
+                                                                    + (this.mRds ? 1 : 0))
+                                                            * 31)
+                                                    + (this.mTa ? 1 : 0))
+                                            * 31)
+                                    + (this.mAf ? 1 : 0))
+                            * 31)
+                    + (this.mEa ? 1 : 0);
         }
 
         @Override // android.hardware.radio.RadioManager.BandDescriptor
@@ -508,27 +634,34 @@ public class RadioManager {
                 return false;
             }
             FmBandDescriptor other = (FmBandDescriptor) obj;
-            return this.mStereo == other.isStereoSupported() && this.mRds == other.isRdsSupported() && this.mTa == other.isTaSupported() && this.mAf == other.isAfSupported() && this.mEa == other.isEaSupported();
+            return this.mStereo == other.isStereoSupported()
+                    && this.mRds == other.isRdsSupported()
+                    && this.mTa == other.isTaSupported()
+                    && this.mAf == other.isAfSupported()
+                    && this.mEa == other.isEaSupported();
         }
     }
 
     public static class AmBandDescriptor extends BandDescriptor {
-        public static final Parcelable.Creator<AmBandDescriptor> CREATOR = new Parcelable.Creator<AmBandDescriptor>() { // from class: android.hardware.radio.RadioManager.AmBandDescriptor.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AmBandDescriptor createFromParcel(Parcel in) {
-                return new AmBandDescriptor(in);
-            }
+        public static final Parcelable.Creator<AmBandDescriptor> CREATOR =
+                new Parcelable.Creator<AmBandDescriptor>() { // from class:
+                    // android.hardware.radio.RadioManager.AmBandDescriptor.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AmBandDescriptor createFromParcel(Parcel in) {
+                        return new AmBandDescriptor(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AmBandDescriptor[] newArray(int size) {
-                return new AmBandDescriptor[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AmBandDescriptor[] newArray(int size) {
+                        return new AmBandDescriptor[size];
+                    }
+                };
         private final boolean mStereo;
 
-        public AmBandDescriptor(int region, int type, int lowerLimit, int upperLimit, int spacing, boolean stereo) {
+        public AmBandDescriptor(
+                int region, int type, int lowerLimit, int upperLimit, int spacing, boolean stereo) {
             super(region, type, lowerLimit, upperLimit, spacing);
             this.mStereo = stereo;
         }
@@ -555,7 +688,11 @@ public class RadioManager {
 
         @Override // android.hardware.radio.RadioManager.BandDescriptor
         public String toString() {
-            return "AmBandDescriptor [ " + super.toString() + " mStereo=" + this.mStereo + NavigationBarInflaterView.SIZE_MOD_END;
+            return "AmBandDescriptor [ "
+                    + super.toString()
+                    + " mStereo="
+                    + this.mStereo
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         @Override // android.hardware.radio.RadioManager.BandDescriptor
@@ -577,35 +714,44 @@ public class RadioManager {
     }
 
     public static class BandConfig implements Parcelable {
-        public static final Parcelable.Creator<BandConfig> CREATOR = new Parcelable.Creator<BandConfig>() { // from class: android.hardware.radio.RadioManager.BandConfig.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BandConfig createFromParcel(Parcel parcel) {
-                int lookupTypeFromParcel = BandDescriptor.lookupTypeFromParcel(parcel);
-                byte b = 0;
-                switch (lookupTypeFromParcel) {
-                    case 0:
-                    case 3:
-                        return new AmBandConfig(parcel);
-                    case 1:
-                    case 2:
-                        return new FmBandConfig(parcel);
-                    default:
-                        throw new IllegalArgumentException("Unsupported band: " + lookupTypeFromParcel);
-                }
-            }
+        public static final Parcelable.Creator<BandConfig> CREATOR =
+                new Parcelable.Creator<BandConfig>() { // from class:
+                    // android.hardware.radio.RadioManager.BandConfig.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BandConfig createFromParcel(Parcel parcel) {
+                        int lookupTypeFromParcel = BandDescriptor.lookupTypeFromParcel(parcel);
+                        byte b = 0;
+                        switch (lookupTypeFromParcel) {
+                            case 0:
+                            case 3:
+                                return new AmBandConfig(parcel);
+                            case 1:
+                            case 2:
+                                return new FmBandConfig(parcel);
+                            default:
+                                throw new IllegalArgumentException(
+                                        "Unsupported band: " + lookupTypeFromParcel);
+                        }
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BandConfig[] newArray(int size) {
-                return new BandConfig[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BandConfig[] newArray(int size) {
+                        return new BandConfig[size];
+                    }
+                };
         final BandDescriptor mDescriptor;
 
         BandConfig(BandDescriptor descriptor) {
             Objects.requireNonNull(descriptor, "Descriptor cannot be null");
-            this.mDescriptor = new BandDescriptor(descriptor.getRegion(), descriptor.getType(), descriptor.getLowerLimit(), descriptor.getUpperLimit(), descriptor.getSpacing());
+            this.mDescriptor =
+                    new BandDescriptor(
+                            descriptor.getRegion(),
+                            descriptor.getType(),
+                            descriptor.getLowerLimit(),
+                            descriptor.getUpperLimit(),
+                            descriptor.getSpacing());
         }
 
         BandConfig(int region, int type, int lowerLimit, int upperLimit, int spacing) {
@@ -651,7 +797,9 @@ public class RadioManager {
         }
 
         public String toString() {
-            return "BandConfig [ " + this.mDescriptor.toString() + NavigationBarInflaterView.SIZE_MOD_END;
+            return "BandConfig [ "
+                    + this.mDescriptor.toString()
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         public int hashCode() {
@@ -676,19 +824,21 @@ public class RadioManager {
     }
 
     public static class FmBandConfig extends BandConfig {
-        public static final Parcelable.Creator<FmBandConfig> CREATOR = new Parcelable.Creator<FmBandConfig>() { // from class: android.hardware.radio.RadioManager.FmBandConfig.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FmBandConfig createFromParcel(Parcel in) {
-                return new FmBandConfig(in);
-            }
+        public static final Parcelable.Creator<FmBandConfig> CREATOR =
+                new Parcelable.Creator<FmBandConfig>() { // from class:
+                    // android.hardware.radio.RadioManager.FmBandConfig.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FmBandConfig createFromParcel(Parcel in) {
+                        return new FmBandConfig(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FmBandConfig[] newArray(int size) {
-                return new FmBandConfig[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FmBandConfig[] newArray(int size) {
+                        return new FmBandConfig[size];
+                    }
+                };
         private final boolean mAf;
         private final boolean mEa;
         private final boolean mRds;
@@ -704,7 +854,17 @@ public class RadioManager {
             this.mEa = descriptor.isEaSupported();
         }
 
-        FmBandConfig(int region, int type, int lowerLimit, int upperLimit, int spacing, boolean stereo, boolean rds, boolean ta, boolean af, boolean ea) {
+        FmBandConfig(
+                int region,
+                int type,
+                int lowerLimit,
+                int upperLimit,
+                int spacing,
+                boolean stereo,
+                boolean rds,
+                boolean ta,
+                boolean af,
+                boolean ea) {
             super(region, type, lowerLimit, upperLimit, spacing);
             this.mStereo = stereo;
             this.mRds = rds;
@@ -759,12 +919,31 @@ public class RadioManager {
 
         @Override // android.hardware.radio.RadioManager.BandConfig
         public String toString() {
-            return "FmBandConfig [" + super.toString() + ", mStereo=" + this.mStereo + ", mRds=" + this.mRds + ", mTa=" + this.mTa + ", mAf=" + this.mAf + ", mEa =" + this.mEa + NavigationBarInflaterView.SIZE_MOD_END;
+            return "FmBandConfig ["
+                    + super.toString()
+                    + ", mStereo="
+                    + this.mStereo
+                    + ", mRds="
+                    + this.mRds
+                    + ", mTa="
+                    + this.mTa
+                    + ", mAf="
+                    + this.mAf
+                    + ", mEa ="
+                    + this.mEa
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         @Override // android.hardware.radio.RadioManager.BandConfig
         public int hashCode() {
-            return (((((((((super.hashCode() * 31) + (this.mStereo ? 1 : 0)) * 31) + (this.mRds ? 1 : 0)) * 31) + (this.mTa ? 1 : 0)) * 31) + (this.mAf ? 1 : 0)) * 31) + (this.mEa ? 1 : 0);
+            return (((((((((super.hashCode() * 31) + (this.mStereo ? 1 : 0)) * 31)
+                                                                    + (this.mRds ? 1 : 0))
+                                                            * 31)
+                                                    + (this.mTa ? 1 : 0))
+                                            * 31)
+                                    + (this.mAf ? 1 : 0))
+                            * 31)
+                    + (this.mEa ? 1 : 0);
         }
 
         @Override // android.hardware.radio.RadioManager.BandConfig
@@ -776,7 +955,11 @@ public class RadioManager {
                 return false;
             }
             FmBandConfig other = (FmBandConfig) obj;
-            return this.mStereo == other.mStereo && this.mRds == other.mRds && this.mTa == other.mTa && this.mAf == other.mAf && this.mEa == other.mEa;
+            return this.mStereo == other.mStereo
+                    && this.mRds == other.mRds
+                    && this.mTa == other.mTa
+                    && this.mAf == other.mAf
+                    && this.mEa == other.mEa;
         }
 
         public static class Builder {
@@ -788,7 +971,13 @@ public class RadioManager {
             private boolean mTa;
 
             public Builder(FmBandDescriptor descriptor) {
-                this.mDescriptor = new BandDescriptor(descriptor.getRegion(), descriptor.getType(), descriptor.getLowerLimit(), descriptor.getUpperLimit(), descriptor.getSpacing());
+                this.mDescriptor =
+                        new BandDescriptor(
+                                descriptor.getRegion(),
+                                descriptor.getType(),
+                                descriptor.getLowerLimit(),
+                                descriptor.getUpperLimit(),
+                                descriptor.getSpacing());
                 this.mStereo = descriptor.isStereoSupported();
                 this.mRds = descriptor.isRdsSupported();
                 this.mTa = descriptor.isTaSupported();
@@ -797,7 +986,13 @@ public class RadioManager {
             }
 
             public Builder(FmBandConfig config) {
-                this.mDescriptor = new BandDescriptor(config.getRegion(), config.getType(), config.getLowerLimit(), config.getUpperLimit(), config.getSpacing());
+                this.mDescriptor =
+                        new BandDescriptor(
+                                config.getRegion(),
+                                config.getType(),
+                                config.getLowerLimit(),
+                                config.getUpperLimit(),
+                                config.getSpacing());
                 this.mStereo = config.getStereo();
                 this.mRds = config.getRds();
                 this.mTa = config.getTa();
@@ -806,7 +1001,18 @@ public class RadioManager {
             }
 
             public FmBandConfig build() {
-                FmBandConfig config = new FmBandConfig(this.mDescriptor.getRegion(), this.mDescriptor.getType(), this.mDescriptor.getLowerLimit(), this.mDescriptor.getUpperLimit(), this.mDescriptor.getSpacing(), this.mStereo, this.mRds, this.mTa, this.mAf, this.mEa);
+                FmBandConfig config =
+                        new FmBandConfig(
+                                this.mDescriptor.getRegion(),
+                                this.mDescriptor.getType(),
+                                this.mDescriptor.getLowerLimit(),
+                                this.mDescriptor.getUpperLimit(),
+                                this.mDescriptor.getSpacing(),
+                                this.mStereo,
+                                this.mRds,
+                                this.mTa,
+                                this.mAf,
+                                this.mEa);
                 return config;
             }
 
@@ -838,19 +1044,21 @@ public class RadioManager {
     }
 
     public static class AmBandConfig extends BandConfig {
-        public static final Parcelable.Creator<AmBandConfig> CREATOR = new Parcelable.Creator<AmBandConfig>() { // from class: android.hardware.radio.RadioManager.AmBandConfig.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AmBandConfig createFromParcel(Parcel in) {
-                return new AmBandConfig(in);
-            }
+        public static final Parcelable.Creator<AmBandConfig> CREATOR =
+                new Parcelable.Creator<AmBandConfig>() { // from class:
+                    // android.hardware.radio.RadioManager.AmBandConfig.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AmBandConfig createFromParcel(Parcel in) {
+                        return new AmBandConfig(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AmBandConfig[] newArray(int size) {
-                return new AmBandConfig[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AmBandConfig[] newArray(int size) {
+                        return new AmBandConfig[size];
+                    }
+                };
         private final boolean mStereo;
 
         public AmBandConfig(AmBandDescriptor descriptor) {
@@ -858,7 +1066,8 @@ public class RadioManager {
             this.mStereo = descriptor.isStereoSupported();
         }
 
-        AmBandConfig(int region, int type, int lowerLimit, int upperLimit, int spacing, boolean stereo) {
+        AmBandConfig(
+                int region, int type, int lowerLimit, int upperLimit, int spacing, boolean stereo) {
             super(region, type, lowerLimit, upperLimit, spacing);
             this.mStereo = stereo;
         }
@@ -885,7 +1094,11 @@ public class RadioManager {
 
         @Override // android.hardware.radio.RadioManager.BandConfig
         public String toString() {
-            return "AmBandConfig [" + super.toString() + ", mStereo=" + this.mStereo + NavigationBarInflaterView.SIZE_MOD_END;
+            return "AmBandConfig ["
+                    + super.toString()
+                    + ", mStereo="
+                    + this.mStereo
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         @Override // android.hardware.radio.RadioManager.BandConfig
@@ -910,17 +1123,36 @@ public class RadioManager {
             private boolean mStereo;
 
             public Builder(AmBandDescriptor descriptor) {
-                this.mDescriptor = new BandDescriptor(descriptor.getRegion(), descriptor.getType(), descriptor.getLowerLimit(), descriptor.getUpperLimit(), descriptor.getSpacing());
+                this.mDescriptor =
+                        new BandDescriptor(
+                                descriptor.getRegion(),
+                                descriptor.getType(),
+                                descriptor.getLowerLimit(),
+                                descriptor.getUpperLimit(),
+                                descriptor.getSpacing());
                 this.mStereo = descriptor.isStereoSupported();
             }
 
             public Builder(AmBandConfig config) {
-                this.mDescriptor = new BandDescriptor(config.getRegion(), config.getType(), config.getLowerLimit(), config.getUpperLimit(), config.getSpacing());
+                this.mDescriptor =
+                        new BandDescriptor(
+                                config.getRegion(),
+                                config.getType(),
+                                config.getLowerLimit(),
+                                config.getUpperLimit(),
+                                config.getSpacing());
                 this.mStereo = config.getStereo();
             }
 
             public AmBandConfig build() {
-                AmBandConfig config = new AmBandConfig(this.mDescriptor.getRegion(), this.mDescriptor.getType(), this.mDescriptor.getLowerLimit(), this.mDescriptor.getUpperLimit(), this.mDescriptor.getSpacing(), this.mStereo);
+                AmBandConfig config =
+                        new AmBandConfig(
+                                this.mDescriptor.getRegion(),
+                                this.mDescriptor.getType(),
+                                this.mDescriptor.getLowerLimit(),
+                                this.mDescriptor.getUpperLimit(),
+                                this.mDescriptor.getSpacing(),
+                                this.mStereo);
                 return config;
             }
 
@@ -932,19 +1164,21 @@ public class RadioManager {
     }
 
     public static class ProgramInfo implements Parcelable {
-        public static final Parcelable.Creator<ProgramInfo> CREATOR = new Parcelable.Creator<ProgramInfo>() { // from class: android.hardware.radio.RadioManager.ProgramInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ProgramInfo createFromParcel(Parcel in) {
-                return new ProgramInfo(in);
-            }
+        public static final Parcelable.Creator<ProgramInfo> CREATOR =
+                new Parcelable.Creator<ProgramInfo>() { // from class:
+                    // android.hardware.radio.RadioManager.ProgramInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ProgramInfo createFromParcel(Parcel in) {
+                        return new ProgramInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ProgramInfo[] newArray(int size) {
-                return new ProgramInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ProgramInfo[] newArray(int size) {
+                        return new ProgramInfo[size];
+                    }
+                };
         private static final int FLAG_HD_AUDIO_ACQUIRED = 256;
         private static final int FLAG_HD_SIS_ACQUIRED = 128;
         private static final int FLAG_LIVE = 1;
@@ -963,7 +1197,15 @@ public class RadioManager {
         private final int mSignalQuality;
         private final Map<String, String> mVendorInfo;
 
-        public ProgramInfo(ProgramSelector selector, ProgramSelector.Identifier logicallyTunedTo, ProgramSelector.Identifier physicallyTunedTo, Collection<ProgramSelector.Identifier> relatedContent, int infoFlags, int signalQuality, RadioMetadata metadata, Map<String, String> vendorInfo) {
+        public ProgramInfo(
+                ProgramSelector selector,
+                ProgramSelector.Identifier logicallyTunedTo,
+                ProgramSelector.Identifier physicallyTunedTo,
+                Collection<ProgramSelector.Identifier> relatedContent,
+                int infoFlags,
+                int signalQuality,
+                RadioMetadata metadata,
+                Map<String, String> vendorInfo) {
             this.mSelector = (ProgramSelector) Objects.requireNonNull(selector);
             this.mLogicallyTunedTo = logicallyTunedTo;
             this.mPhysicallyTunedTo = physicallyTunedTo;
@@ -1073,9 +1315,16 @@ public class RadioManager {
         }
 
         private ProgramInfo(Parcel in) {
-            this.mSelector = (ProgramSelector) Objects.requireNonNull((ProgramSelector) in.readTypedObject(ProgramSelector.CREATOR));
-            this.mLogicallyTunedTo = (ProgramSelector.Identifier) in.readTypedObject(ProgramSelector.Identifier.CREATOR);
-            this.mPhysicallyTunedTo = (ProgramSelector.Identifier) in.readTypedObject(ProgramSelector.Identifier.CREATOR);
+            this.mSelector =
+                    (ProgramSelector)
+                            Objects.requireNonNull(
+                                    (ProgramSelector) in.readTypedObject(ProgramSelector.CREATOR));
+            this.mLogicallyTunedTo =
+                    (ProgramSelector.Identifier)
+                            in.readTypedObject(ProgramSelector.Identifier.CREATOR);
+            this.mPhysicallyTunedTo =
+                    (ProgramSelector.Identifier)
+                            in.readTypedObject(ProgramSelector.Identifier.CREATOR);
             this.mRelatedContent = in.createTypedArrayList(ProgramSelector.Identifier.CREATOR);
             this.mInfoFlags = in.readInt();
             this.mSignalQuality = in.readInt();
@@ -1101,11 +1350,33 @@ public class RadioManager {
         }
 
         public String toString() {
-            return "ProgramInfo [selector=" + this.mSelector + ", logicallyTunedTo=" + Objects.toString(this.mLogicallyTunedTo) + ", physicallyTunedTo=" + Objects.toString(this.mPhysicallyTunedTo) + ", relatedContent=" + this.mRelatedContent.size() + ", infoFlags=" + this.mInfoFlags + ", mSignalQuality=" + this.mSignalQuality + ", mMetadata=" + Objects.toString(this.mMetadata) + NavigationBarInflaterView.SIZE_MOD_END;
+            return "ProgramInfo [selector="
+                    + this.mSelector
+                    + ", logicallyTunedTo="
+                    + Objects.toString(this.mLogicallyTunedTo)
+                    + ", physicallyTunedTo="
+                    + Objects.toString(this.mPhysicallyTunedTo)
+                    + ", relatedContent="
+                    + this.mRelatedContent.size()
+                    + ", infoFlags="
+                    + this.mInfoFlags
+                    + ", mSignalQuality="
+                    + this.mSignalQuality
+                    + ", mMetadata="
+                    + Objects.toString(this.mMetadata)
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         public int hashCode() {
-            return Objects.hash(this.mSelector, this.mLogicallyTunedTo, this.mPhysicallyTunedTo, this.mRelatedContent, Integer.valueOf(this.mInfoFlags), Integer.valueOf(this.mSignalQuality), this.mMetadata, this.mVendorInfo);
+            return Objects.hash(
+                    this.mSelector,
+                    this.mLogicallyTunedTo,
+                    this.mPhysicallyTunedTo,
+                    this.mRelatedContent,
+                    Integer.valueOf(this.mInfoFlags),
+                    Integer.valueOf(this.mSignalQuality),
+                    this.mMetadata,
+                    this.mVendorInfo);
         }
 
         public boolean equals(Object obj) {
@@ -1116,7 +1387,14 @@ public class RadioManager {
                 return false;
             }
             ProgramInfo other = (ProgramInfo) obj;
-            return this.mSelector.strictEquals(other.mSelector) && Objects.equals(this.mLogicallyTunedTo, other.mLogicallyTunedTo) && Objects.equals(this.mPhysicallyTunedTo, other.mPhysicallyTunedTo) && Objects.equals(this.mRelatedContent, other.mRelatedContent) && this.mInfoFlags == other.mInfoFlags && this.mSignalQuality == other.mSignalQuality && Objects.equals(this.mMetadata, other.mMetadata) && Objects.equals(this.mVendorInfo, other.mVendorInfo);
+            return this.mSelector.strictEquals(other.mSelector)
+                    && Objects.equals(this.mLogicallyTunedTo, other.mLogicallyTunedTo)
+                    && Objects.equals(this.mPhysicallyTunedTo, other.mPhysicallyTunedTo)
+                    && Objects.equals(this.mRelatedContent, other.mRelatedContent)
+                    && this.mInfoFlags == other.mInfoFlags
+                    && this.mSignalQuality == other.mSignalQuality
+                    && Objects.equals(this.mMetadata, other.mMetadata)
+                    && Objects.equals(this.mVendorInfo, other.mVendorInfo);
         }
     }
 
@@ -1140,7 +1418,12 @@ public class RadioManager {
         }
     }
 
-    public RadioTuner openTuner(int moduleId, BandConfig config, boolean withAudio, RadioTuner.Callback callback, Handler handler) {
+    public RadioTuner openTuner(
+            int moduleId,
+            BandConfig config,
+            boolean withAudio,
+            RadioTuner.Callback callback,
+            Handler handler) {
         if (callback == null) {
             throw new IllegalArgumentException("callback must not be empty");
         }
@@ -1159,19 +1442,30 @@ public class RadioManager {
         }
     }
 
-    public void addAnnouncementListener(Set<Integer> enabledAnnouncementTypes, Announcement.OnListUpdatedListener listener) {
-        addAnnouncementListener(new Executor() { // from class: android.hardware.radio.RadioManager$$ExternalSyntheticLambda0
-            @Override // java.util.concurrent.Executor
-            public final void execute(Runnable runnable) {
-                runnable.run();
-            }
-        }, enabledAnnouncementTypes, listener);
+    public void addAnnouncementListener(
+            Set<Integer> enabledAnnouncementTypes, Announcement.OnListUpdatedListener listener) {
+        addAnnouncementListener(
+                new Executor() { // from class:
+                    // android.hardware.radio.RadioManager$$ExternalSyntheticLambda0
+                    @Override // java.util.concurrent.Executor
+                    public final void execute(Runnable runnable) {
+                        runnable.run();
+                    }
+                },
+                enabledAnnouncementTypes,
+                listener);
     }
 
-    public void addAnnouncementListener(Executor executor, Set<Integer> enabledAnnouncementTypes, Announcement.OnListUpdatedListener listener) {
+    public void addAnnouncementListener(
+            Executor executor,
+            Set<Integer> enabledAnnouncementTypes,
+            Announcement.OnListUpdatedListener listener) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(listener);
-        int[] types = enabledAnnouncementTypes.stream().mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2()).toArray();
+        int[] types =
+                enabledAnnouncementTypes.stream()
+                        .mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2())
+                        .toArray();
         IAnnouncementListener listenerIface = new AnonymousClass1(executor, listener);
         synchronized (this.mAnnouncementListeners) {
             ICloseHandle closeHandle = null;
@@ -1193,7 +1487,8 @@ public class RadioManager {
         final /* synthetic */ Executor val$executor;
         final /* synthetic */ Announcement.OnListUpdatedListener val$listener;
 
-        AnonymousClass1(Executor executor, Announcement.OnListUpdatedListener onListUpdatedListener) {
+        AnonymousClass1(
+                Executor executor, Announcement.OnListUpdatedListener onListUpdatedListener) {
             this.val$executor = executor;
             this.val$listener = onListUpdatedListener;
         }
@@ -1202,12 +1497,15 @@ public class RadioManager {
         public void onListUpdated(final List<Announcement> activeAnnouncements) {
             Executor executor = this.val$executor;
             final Announcement.OnListUpdatedListener onListUpdatedListener = this.val$listener;
-            executor.execute(new Runnable() { // from class: android.hardware.radio.RadioManager$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    Announcement.OnListUpdatedListener.this.onListUpdated(activeAnnouncements);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.radio.RadioManager$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            Announcement.OnListUpdatedListener.this.onListUpdated(
+                                    activeAnnouncements);
+                        }
+                    });
         }
     }
 
@@ -1222,7 +1520,10 @@ public class RadioManager {
     }
 
     public RadioManager(Context context) throws ServiceManager.ServiceNotFoundException {
-        this(context, IRadioService.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.RADIO_SERVICE)));
+        this(
+                context,
+                IRadioService.Stub.asInterface(
+                        ServiceManager.getServiceOrThrow(Context.RADIO_SERVICE)));
     }
 
     public RadioManager(Context context, IRadioService service) {

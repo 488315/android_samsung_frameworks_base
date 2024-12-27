@@ -16,7 +16,6 @@ import android.os.ParcelableException;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.ContactsContract;
 import android.telecom.CallerInfo;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -24,8 +23,11 @@ import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.server.telecom.flags.Flags;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -44,9 +46,11 @@ public class CallLog {
     private static final boolean VERBOSE_LOG = false;
     public static final Uri CONTENT_URI = Uri.parse("content://call_log");
     public static final String CALL_COMPOSER_SEGMENT = "call_composer";
-    public static final Uri CALL_COMPOSER_PICTURE_URI = CONTENT_URI.buildUpon().appendPath(CALL_COMPOSER_SEGMENT).build();
+    public static final Uri CALL_COMPOSER_PICTURE_URI =
+            CONTENT_URI.buildUpon().appendPath(CALL_COMPOSER_SEGMENT).build();
     public static final String SHADOW_AUTHORITY = "call_log_shadow";
-    public static final Uri SHADOW_CALL_COMPOSER_PICTURE_URI = CALL_COMPOSER_PICTURE_URI.buildUpon().authority(SHADOW_AUTHORITY).build();
+    public static final Uri SHADOW_CALL_COMPOSER_PICTURE_URI =
+            CALL_COMPOSER_PICTURE_URI.buildUpon().authority(SHADOW_AUTHORITY).build();
 
     @SystemApi
     public static class CallComposerLoggingException extends Throwable {
@@ -57,8 +61,7 @@ public class CallLog {
         private final int mErrorCode;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface CallComposerLoggingError {
-        }
+        public @interface CallComposerLoggingError {}
 
         public CallComposerLoggingException(int errorCode) {
             this.mErrorCode = errorCode;
@@ -93,20 +96,26 @@ public class CallLog {
     }
 
     @SystemApi
-    public static void storeCallComposerPicture(final Context context, final InputStream input, Executor executor, final OutcomeReceiver<Uri, CallComposerLoggingException> callback) {
+    public static void storeCallComposerPicture(
+            final Context context,
+            final InputStream input,
+            Executor executor,
+            final OutcomeReceiver<Uri, CallComposerLoggingException> callback) {
         Objects.requireNonNull(context);
         Objects.requireNonNull(input);
         Objects.requireNonNull(executor);
         Objects.requireNonNull(callback);
-        executor.execute(new Runnable() { // from class: android.provider.CallLog$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                CallLog.lambda$storeCallComposerPicture$0(input, callback, context);
-            }
-        });
+        executor.execute(
+                new Runnable() { // from class: android.provider.CallLog$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        CallLog.lambda$storeCallComposerPicture$0(input, callback, context);
+                    }
+                });
     }
 
-    static /* synthetic */ void lambda$storeCallComposerPicture$0(InputStream input, OutcomeReceiver callback, Context context) {
+    static /* synthetic */ void lambda$storeCallComposerPicture$0(
+            InputStream input, OutcomeReceiver callback, Context context) {
         UserManager userManager;
         Context context2 = context;
         ByteArrayOutputStream tmpOut = new ByteArrayOutputStream();
@@ -130,11 +139,17 @@ public class CallLog {
         UserHandle user = context.getUser();
         UserHandle realUser = UserHandle.CURRENT.equals(user) ? Process.myUserHandle() : user;
         if (realUser != UserHandle.ALL) {
-            Uri baseUri = userManager2.isUserUnlocked(realUser) ? CALL_COMPOSER_PICTURE_URI : SHADOW_CALL_COMPOSER_PICTURE_URI;
-            Uri pictureInsertionUri = ContentProvider.maybeAddUserId(baseUri, realUser.getIdentifier());
+            Uri baseUri =
+                    userManager2.isUserUnlocked(realUser)
+                            ? CALL_COMPOSER_PICTURE_URI
+                            : SHADOW_CALL_COMPOSER_PICTURE_URI;
+            Uri pictureInsertionUri =
+                    ContentProvider.maybeAddUserId(baseUri, realUser.getIdentifier());
             Log.i("CallLog", "Inserting call composer for single user at " + pictureInsertionUri);
             try {
-                Uri result = storeCallComposerPictureAtUri(context2, pictureInsertionUri, false, picData);
+                Uri result =
+                        storeCallComposerPictureAtUri(
+                                context2, pictureInsertionUri, false, picData);
                 callback.onResult(result);
                 return;
             } catch (CallComposerLoggingException e2) {
@@ -143,10 +158,17 @@ public class CallLog {
             }
         }
         if (!userManager2.isUserUnlocked(UserHandle.SYSTEM)) {
-            Uri pictureInsertionUri2 = ContentProvider.maybeAddUserId(SHADOW_CALL_COMPOSER_PICTURE_URI, UserHandle.SYSTEM.getIdentifier());
-            Log.i("CallLog", "Inserting call composer for all users, but system locked at " + pictureInsertionUri2);
+            Uri pictureInsertionUri2 =
+                    ContentProvider.maybeAddUserId(
+                            SHADOW_CALL_COMPOSER_PICTURE_URI, UserHandle.SYSTEM.getIdentifier());
+            Log.i(
+                    "CallLog",
+                    "Inserting call composer for all users, but system locked at "
+                            + pictureInsertionUri2);
             try {
-                Uri result2 = storeCallComposerPictureAtUri(context2, pictureInsertionUri2, true, picData);
+                Uri result2 =
+                        storeCallComposerPictureAtUri(
+                                context2, pictureInsertionUri2, true, picData);
                 callback.onResult(result2);
                 return;
             } catch (CallComposerLoggingException e3) {
@@ -154,26 +176,47 @@ public class CallLog {
                 return;
             }
         }
-        Uri systemPictureInsertionUri = ContentProvider.maybeAddUserId(CALL_COMPOSER_PICTURE_URI, UserHandle.SYSTEM.getIdentifier());
+        Uri systemPictureInsertionUri =
+                ContentProvider.maybeAddUserId(
+                        CALL_COMPOSER_PICTURE_URI, UserHandle.SYSTEM.getIdentifier());
         try {
-            Uri systemInsertedPicture = storeCallComposerPictureAtUri(context2, systemPictureInsertionUri, true, picData);
-            Log.i("CallLog", "Inserting call composer for all users, succeeded with system, result is " + systemInsertedPicture);
+            Uri systemInsertedPicture =
+                    storeCallComposerPictureAtUri(
+                            context2, systemPictureInsertionUri, true, picData);
+            Log.i(
+                    "CallLog",
+                    "Inserting call composer for all users, succeeded with system, result is "
+                            + systemInsertedPicture);
             Uri strippedInsertionUri = ContentProvider.getUriWithoutUserId(systemInsertedPicture);
             for (UserInfo u : userManager2.getAliveUsers()) {
                 UserHandle userHandle = u.getUserHandle();
-                if (!userHandle.isSystem() && Calls.shouldHaveSharedCallLogEntries(context2, userManager2, userHandle.getIdentifier())) {
+                if (!userHandle.isSystem()
+                        && Calls.shouldHaveSharedCallLogEntries(
+                                context2, userManager2, userHandle.getIdentifier())) {
                     if (!userManager2.isUserRunning(userHandle)) {
                         userManager = userManager2;
                     } else if (!userManager2.isUserUnlocked(userHandle)) {
                         userManager = userManager2;
                     } else {
-                        Uri insertionUri = ContentProvider.maybeAddUserId(strippedInsertionUri, userHandle.getIdentifier());
+                        Uri insertionUri =
+                                ContentProvider.maybeAddUserId(
+                                        strippedInsertionUri, userHandle.getIdentifier());
                         userManager = userManager2;
-                        Log.i("CallLog", "Inserting call composer for all users, now on user " + userHandle + " inserting at " + insertionUri);
+                        Log.i(
+                                "CallLog",
+                                "Inserting call composer for all users, now on user "
+                                        + userHandle
+                                        + " inserting at "
+                                        + insertionUri);
                         try {
                             storeCallComposerPictureAtUri(context2, insertionUri, false, picData);
                         } catch (CallComposerLoggingException e4) {
-                            Log.e("CallLog", "Error writing for user " + userHandle.getIdentifier() + ": " + e4);
+                            Log.e(
+                                    "CallLog",
+                                    "Error writing for user "
+                                            + userHandle.getIdentifier()
+                                            + ": "
+                                            + e4);
                         }
                     }
                     context2 = context;
@@ -186,7 +229,9 @@ public class CallLog {
         }
     }
 
-    private static Uri storeCallComposerPictureAtUri(Context context, Uri insertionUri, boolean forAllUsers, byte[] picData) throws CallComposerLoggingException {
+    private static Uri storeCallComposerPictureAtUri(
+            Context context, Uri insertionUri, boolean forAllUsers, byte[] picData)
+            throws CallComposerLoggingException {
         ParcelFileDescriptor pfd;
         try {
             ContentValues cv = new ContentValues();
@@ -222,7 +267,8 @@ public class CallLog {
         }
     }
 
-    private static void sendCallComposerError(OutcomeReceiver<?, CallComposerLoggingException> cb, int error) {
+    private static void sendCallComposerError(
+            OutcomeReceiver<?, CallComposerLoggingException> cb, int error) {
         cb.onError(new CallComposerLoggingException(error));
     }
 
@@ -358,12 +404,14 @@ public class CallLog {
                 return this;
             }
 
-            public AddCallParametersBuilder setCallScreeningAppName(CharSequence callScreeningAppName) {
+            public AddCallParametersBuilder setCallScreeningAppName(
+                    CharSequence callScreeningAppName) {
                 this.mCallScreeningAppName = callScreeningAppName;
                 return this;
             }
 
-            public AddCallParametersBuilder setCallScreeningComponentName(String callScreeningComponentName) {
+            public AddCallParametersBuilder setCallScreeningComponentName(
+                    String callScreeningComponentName) {
                 this.mCallScreeningComponentName = callScreeningComponentName;
                 return this;
             }
@@ -398,7 +446,8 @@ public class CallLog {
                 return this;
             }
 
-            public AddCallParametersBuilder setIsPhoneAccountMigrationPending(int isPhoneAccountMigrationPending) {
+            public AddCallParametersBuilder setIsPhoneAccountMigrationPending(
+                    int isPhoneAccountMigrationPending) {
                 this.mIsPhoneAccountMigrationPending = isPhoneAccountMigrationPending;
                 return this;
             }
@@ -410,7 +459,8 @@ public class CallLog {
 
             public AddCallParametersBuilder setAssertedDisplayName(String assertedDisplayName) {
                 if (assertedDisplayName != null && assertedDisplayName.length() > 256) {
-                    throw new IllegalArgumentException("assertedDisplayName exceeds the character limit of 256.");
+                    throw new IllegalArgumentException(
+                            "assertedDisplayName exceeds the character limit of 256.");
                 }
                 this.mAssertedDisplayName = assertedDisplayName;
                 return this;
@@ -418,13 +468,87 @@ public class CallLog {
 
             public AddCallParams build() {
                 if (Flags.businessCallComposer()) {
-                    return new AddCallParams(this.mCallerInfo, this.mNumber, this.mPostDialDigits, this.mViaNumber, this.mPresentation, this.mCallType, this.mFeatures, this.mAccountHandle, this.mStart, this.mDuration, this.mDataUsage.longValue(), this.mAddForAllUsers, this.mUserToBeInsertedTo, this.mIsRead, this.mCallBlockReason, this.mCallScreeningAppName, this.mCallScreeningComponentName, this.mMissedReason, this.mPriority, this.mSubject, this.mLatitude, this.mLongitude, this.mPictureUri, this.mIsPhoneAccountMigrationPending, this.mIsBusinessCall, this.mAssertedDisplayName);
+                    return new AddCallParams(
+                            this.mCallerInfo,
+                            this.mNumber,
+                            this.mPostDialDigits,
+                            this.mViaNumber,
+                            this.mPresentation,
+                            this.mCallType,
+                            this.mFeatures,
+                            this.mAccountHandle,
+                            this.mStart,
+                            this.mDuration,
+                            this.mDataUsage.longValue(),
+                            this.mAddForAllUsers,
+                            this.mUserToBeInsertedTo,
+                            this.mIsRead,
+                            this.mCallBlockReason,
+                            this.mCallScreeningAppName,
+                            this.mCallScreeningComponentName,
+                            this.mMissedReason,
+                            this.mPriority,
+                            this.mSubject,
+                            this.mLatitude,
+                            this.mLongitude,
+                            this.mPictureUri,
+                            this.mIsPhoneAccountMigrationPending,
+                            this.mIsBusinessCall,
+                            this.mAssertedDisplayName);
                 }
-                return new AddCallParams(this.mCallerInfo, this.mNumber, this.mPostDialDigits, this.mViaNumber, this.mPresentation, this.mCallType, this.mFeatures, this.mAccountHandle, this.mStart, this.mDuration, this.mDataUsage.longValue(), this.mAddForAllUsers, this.mUserToBeInsertedTo, this.mIsRead, this.mCallBlockReason, this.mCallScreeningAppName, this.mCallScreeningComponentName, this.mMissedReason, this.mPriority, this.mSubject, this.mLatitude, this.mLongitude, this.mPictureUri, this.mIsPhoneAccountMigrationPending);
+                return new AddCallParams(
+                        this.mCallerInfo,
+                        this.mNumber,
+                        this.mPostDialDigits,
+                        this.mViaNumber,
+                        this.mPresentation,
+                        this.mCallType,
+                        this.mFeatures,
+                        this.mAccountHandle,
+                        this.mStart,
+                        this.mDuration,
+                        this.mDataUsage.longValue(),
+                        this.mAddForAllUsers,
+                        this.mUserToBeInsertedTo,
+                        this.mIsRead,
+                        this.mCallBlockReason,
+                        this.mCallScreeningAppName,
+                        this.mCallScreeningComponentName,
+                        this.mMissedReason,
+                        this.mPriority,
+                        this.mSubject,
+                        this.mLatitude,
+                        this.mLongitude,
+                        this.mPictureUri,
+                        this.mIsPhoneAccountMigrationPending);
             }
         }
 
-        private AddCallParams(CallerInfo callerInfo, String number, String postDialDigits, String viaNumber, int presentation, int callType, int features, PhoneAccountHandle accountHandle, long start, int duration, long dataUsage, boolean addForAllUsers, UserHandle userToBeInsertedTo, boolean isRead, int callBlockReason, CharSequence callScreeningAppName, String callScreeningComponentName, long missedReason, int priority, String subject, double latitude, double longitude, Uri pictureUri, int isPhoneAccountMigrationPending) {
+        private AddCallParams(
+                CallerInfo callerInfo,
+                String number,
+                String postDialDigits,
+                String viaNumber,
+                int presentation,
+                int callType,
+                int features,
+                PhoneAccountHandle accountHandle,
+                long start,
+                int duration,
+                long dataUsage,
+                boolean addForAllUsers,
+                UserHandle userToBeInsertedTo,
+                boolean isRead,
+                int callBlockReason,
+                CharSequence callScreeningAppName,
+                String callScreeningComponentName,
+                long missedReason,
+                int priority,
+                String subject,
+                double latitude,
+                double longitude,
+                Uri pictureUri,
+                int isPhoneAccountMigrationPending) {
             this.mLatitude = Double.NaN;
             this.mLongitude = Double.NaN;
             this.mCallerInfo = callerInfo;
@@ -453,7 +577,33 @@ public class CallLog {
             this.mIsPhoneAccountMigrationPending = isPhoneAccountMigrationPending;
         }
 
-        private AddCallParams(CallerInfo callerInfo, String number, String postDialDigits, String viaNumber, int presentation, int callType, int features, PhoneAccountHandle accountHandle, long start, int duration, long dataUsage, boolean addForAllUsers, UserHandle userToBeInsertedTo, boolean isRead, int callBlockReason, CharSequence callScreeningAppName, String callScreeningComponentName, long missedReason, int priority, String subject, double latitude, double longitude, Uri pictureUri, int isPhoneAccountMigrationPending, boolean isBusinessCall, String assertedDisplayName) {
+        private AddCallParams(
+                CallerInfo callerInfo,
+                String number,
+                String postDialDigits,
+                String viaNumber,
+                int presentation,
+                int callType,
+                int features,
+                PhoneAccountHandle accountHandle,
+                long start,
+                int duration,
+                long dataUsage,
+                boolean addForAllUsers,
+                UserHandle userToBeInsertedTo,
+                boolean isRead,
+                int callBlockReason,
+                CharSequence callScreeningAppName,
+                String callScreeningComponentName,
+                long missedReason,
+                int priority,
+                String subject,
+                double latitude,
+                double longitude,
+                Uri pictureUri,
+                int isPhoneAccountMigrationPending,
+                boolean isBusinessCall,
+                String assertedDisplayName) {
             this.mLatitude = Double.NaN;
             this.mLongitude = Double.NaN;
             this.mCallerInfo = callerInfo;
@@ -521,7 +671,8 @@ public class CallLog {
         public static final String DATE = "date";
         public static final String DEFAULT_SORT_ORDER = "date DESC";
         public static final String DURATION = "duration";
-        public static final String EXTRA_CALL_TYPE_FILTER = "android.provider.extra.CALL_TYPE_FILTER";
+        public static final String EXTRA_CALL_TYPE_FILTER =
+                "android.provider.extra.CALL_TYPE_FILTER";
         public static final String FEATURES = "features";
         public static final int FEATURES_ASSISTED_DIALING_USED = 16;
         public static final int FEATURES_HD_CALL = 4;
@@ -535,7 +686,8 @@ public class CallLog {
         public static final String GEOCODED_LOCATION = "geocoded_location";
         public static final int INCOMING_TYPE = 1;
         public static final String IS_BUSINESS_CALL = "is_business_call";
-        public static final String IS_PHONE_ACCOUNT_MIGRATION_PENDING = "is_call_log_phone_account_migration_pending";
+        public static final String IS_PHONE_ACCOUNT_MIGRATION_PENDING =
+                "is_call_log_phone_account_migration_pending";
         public static final String IS_READ = "is_read";
         public static final String LAST_MODIFIED = "last_modified";
         public static final String LIMIT_PARAM_KEY = "limit";
@@ -685,24 +837,117 @@ public class CallLog {
         public static final Uri CONTENT_URI = Uri.parse("content://call_log/calls");
         public static final Uri SHADOW_CONTENT_URI = Uri.parse("content://call_log_shadow/calls");
         public static final Uri CONTENT_FILTER_URI = Uri.parse("content://call_log/calls/filter");
-        private static final Uri CONTENT_URI_LIMIT_1 = CONTENT_URI.buildUpon().appendQueryParameter("limit", "1").build();
+        private static final Uri CONTENT_URI_LIMIT_1 =
+                CONTENT_URI.buildUpon().appendQueryParameter("limit", "1").build();
         public static final String ALLOW_VOICEMAILS_PARAM_KEY = "allow_voicemails";
-        public static final Uri CONTENT_URI_WITH_VOICEMAIL = CONTENT_URI.buildUpon().appendQueryParameter(ALLOW_VOICEMAILS_PARAM_KEY, "true").build();
+        public static final Uri CONTENT_URI_WITH_VOICEMAIL =
+                CONTENT_URI
+                        .buildUpon()
+                        .appendQueryParameter(ALLOW_VOICEMAILS_PARAM_KEY, "true")
+                        .build();
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface MissedReason {
+        public @interface MissedReason {}
+
+        public static Uri addCall(
+                CallerInfo ci,
+                Context context,
+                String number,
+                int presentation,
+                int callType,
+                int features,
+                PhoneAccountHandle accountHandle,
+                long start,
+                int duration,
+                Long dataUsage,
+                long missedReason,
+                int isPhoneAccountMigrationPending) {
+            return addCall(
+                    ci,
+                    context,
+                    number,
+                    "",
+                    "",
+                    presentation,
+                    callType,
+                    features,
+                    accountHandle,
+                    start,
+                    duration,
+                    dataUsage,
+                    false,
+                    null,
+                    false,
+                    0,
+                    null,
+                    null,
+                    missedReason,
+                    isPhoneAccountMigrationPending);
         }
 
-        public static Uri addCall(CallerInfo ci, Context context, String number, int presentation, int callType, int features, PhoneAccountHandle accountHandle, long start, int duration, Long dataUsage, long missedReason, int isPhoneAccountMigrationPending) {
-            return addCall(ci, context, number, "", "", presentation, callType, features, accountHandle, start, duration, dataUsage, false, null, false, 0, null, null, missedReason, isPhoneAccountMigrationPending);
+        public static Uri addCall(
+                CallerInfo ci,
+                Context context,
+                String number,
+                String postDialDigits,
+                String viaNumber,
+                int presentation,
+                int callType,
+                int features,
+                PhoneAccountHandle accountHandle,
+                long start,
+                int duration,
+                Long dataUsage,
+                boolean addForAllUsers,
+                UserHandle userToBeInsertedTo,
+                long missedReason,
+                int isPhoneAccountMigrationPending) {
+            return addCall(
+                    ci,
+                    context,
+                    number,
+                    postDialDigits,
+                    viaNumber,
+                    presentation,
+                    callType,
+                    features,
+                    accountHandle,
+                    start,
+                    duration,
+                    dataUsage,
+                    addForAllUsers,
+                    userToBeInsertedTo,
+                    false,
+                    0,
+                    null,
+                    null,
+                    missedReason,
+                    isPhoneAccountMigrationPending);
         }
 
-        public static Uri addCall(CallerInfo ci, Context context, String number, String postDialDigits, String viaNumber, int presentation, int callType, int features, PhoneAccountHandle accountHandle, long start, int duration, Long dataUsage, boolean addForAllUsers, UserHandle userToBeInsertedTo, long missedReason, int isPhoneAccountMigrationPending) {
-            return addCall(ci, context, number, postDialDigits, viaNumber, presentation, callType, features, accountHandle, start, duration, dataUsage, addForAllUsers, userToBeInsertedTo, false, 0, null, null, missedReason, isPhoneAccountMigrationPending);
-        }
-
-        public static Uri addCall(CallerInfo ci, Context context, String number, String postDialDigits, String viaNumber, int presentation, int callType, int features, PhoneAccountHandle accountHandle, long start, int duration, Long dataUsage, boolean addForAllUsers, UserHandle userToBeInsertedTo, boolean isRead, int callBlockReason, CharSequence callScreeningAppName, String callScreeningComponentName, long missedReason, int isPhoneAccountMigrationPending) {
-            AddCallParams.AddCallParametersBuilder builder = new AddCallParams.AddCallParametersBuilder();
+        public static Uri addCall(
+                CallerInfo ci,
+                Context context,
+                String number,
+                String postDialDigits,
+                String viaNumber,
+                int presentation,
+                int callType,
+                int features,
+                PhoneAccountHandle accountHandle,
+                long start,
+                int duration,
+                Long dataUsage,
+                boolean addForAllUsers,
+                UserHandle userToBeInsertedTo,
+                boolean isRead,
+                int callBlockReason,
+                CharSequence callScreeningAppName,
+                String callScreeningComponentName,
+                long missedReason,
+                int isPhoneAccountMigrationPending) {
+            AddCallParams.AddCallParametersBuilder builder =
+                    new AddCallParams.AddCallParametersBuilder();
             builder.setCallerInfo(ci);
             builder.setNumber(number);
             builder.setPostDialDigits(postDialDigits);
@@ -729,15 +974,18 @@ public class CallLog {
             return addCall(context, params, null);
         }
 
-        public static Uri addCall(Context context, AddCallParams addCallParams, ContentValues contentValues) {
+        public static Uri addCall(
+                Context context, AddCallParams addCallParams, ContentValues contentValues) {
             UserHandle of;
             String str;
             String str2;
             Uri maybeInsertLocation;
             ContentResolver contentResolver = context.getContentResolver();
             String logAccountAddress = getLogAccountAddress(context, addCallParams.mAccountHandle);
-            int logNumberPresentation = getLogNumberPresentation(addCallParams.mNumber, addCallParams.mPresentation);
-            String name = addCallParams.mCallerInfo != null ? addCallParams.mCallerInfo.getName() : "";
+            int logNumberPresentation =
+                    getLogNumberPresentation(addCallParams.mNumber, addCallParams.mPresentation);
+            String name =
+                    addCallParams.mCallerInfo != null ? addCallParams.mCallerInfo.getName() : "";
             if (logNumberPresentation != 1) {
                 addCallParams.mNumber = "";
                 if (addCallParams.mCallerInfo != null) {
@@ -770,22 +1018,29 @@ public class CallLog {
             contentValues2.put(PHONE_ACCOUNT_ADDRESS, logAccountAddress);
             contentValues2.put("new", (Integer) 1);
             contentValues2.put("name", name);
-            contentValues2.put(ADD_FOR_ALL_USERS, Integer.valueOf(addCallParams.mAddForAllUsers ? 1 : 0));
+            contentValues2.put(
+                    ADD_FOR_ALL_USERS, Integer.valueOf(addCallParams.mAddForAllUsers ? 1 : 0));
             if (addCallParams.mCallType == 3) {
                 contentValues2.put("is_read", Integer.valueOf(addCallParams.mIsRead ? 1 : 0));
             }
             contentValues2.put(BLOCK_REASON, Integer.valueOf(addCallParams.mCallBlockReason));
-            contentValues2.put(CALL_SCREENING_APP_NAME, charSequenceToString(addCallParams.mCallScreeningAppName));
-            contentValues2.put(CALL_SCREENING_COMPONENT_NAME, addCallParams.mCallScreeningComponentName);
+            contentValues2.put(
+                    CALL_SCREENING_APP_NAME,
+                    charSequenceToString(addCallParams.mCallScreeningAppName));
+            contentValues2.put(
+                    CALL_SCREENING_COMPONENT_NAME, addCallParams.mCallScreeningComponentName);
             contentValues2.put(MISSED_REASON, Long.valueOf(addCallParams.mMissedReason));
             contentValues2.put("priority", Integer.valueOf(addCallParams.mPriority));
             contentValues2.put("subject", addCallParams.mSubject);
             if (addCallParams.mPictureUri != null) {
                 contentValues2.put(COMPOSER_PHOTO_URI, addCallParams.mPictureUri.toString());
             }
-            contentValues2.put(IS_PHONE_ACCOUNT_MIGRATION_PENDING, Integer.valueOf(addCallParams.mIsPhoneAccountMigrationPending));
+            contentValues2.put(
+                    IS_PHONE_ACCOUNT_MIGRATION_PENDING,
+                    Integer.valueOf(addCallParams.mIsPhoneAccountMigrationPending));
             if (Flags.businessCallComposer()) {
-                contentValues2.put(IS_BUSINESS_CALL, Integer.valueOf(addCallParams.mIsBusinessCall ? 1 : 0));
+                contentValues2.put(
+                        IS_BUSINESS_CALL, Integer.valueOf(addCallParams.mIsBusinessCall ? 1 : 0));
                 contentValues2.put(ASSERTED_DISPLAY_NAME, addCallParams.mAssertedDisplayName);
             }
             Uri uri = null;
@@ -796,11 +1051,19 @@ public class CallLog {
                 addCallParams.mAddForAllUsers = true;
             }
             if (addCallParams.mAddForAllUsers) {
-                if (userManager.isUserUnlocked(UserHandle.SYSTEM) && (maybeInsertLocation = maybeInsertLocation(addCallParams, contentResolver, UserHandle.SYSTEM)) != null) {
+                if (userManager.isUserUnlocked(UserHandle.SYSTEM)
+                        && (maybeInsertLocation =
+                                        maybeInsertLocation(
+                                                addCallParams, contentResolver, UserHandle.SYSTEM))
+                                != null) {
                     contentValues2.put("location", maybeInsertLocation.toString());
                 }
-                Uri addEntryAndRemoveExpiredEntries = addEntryAndRemoveExpiredEntries(context, userManager, UserHandle.SYSTEM, contentValues2);
-                if (addEntryAndRemoveExpiredEntries != null && !CallLog.SHADOW_AUTHORITY.equals(addEntryAndRemoveExpiredEntries.getAuthority())) {
+                Uri addEntryAndRemoveExpiredEntries =
+                        addEntryAndRemoveExpiredEntries(
+                                context, userManager, UserHandle.SYSTEM, contentValues2);
+                if (addEntryAndRemoveExpiredEntries != null
+                        && !CallLog.SHADOW_AUTHORITY.equals(
+                                addEntryAndRemoveExpiredEntries.getAuthority())) {
                     if (processUserId == 0) {
                         uri = addEntryAndRemoveExpiredEntries;
                     }
@@ -815,14 +1078,18 @@ public class CallLog {
                         if (userHandle.isSystem()) {
                             str = name;
                             str2 = str3;
-                        } else if (SemPersonaManager.isKioskModeEnabled(context) || shouldHaveSharedCallLogEntries(context, userManager, identifier)) {
+                        } else if (SemPersonaManager.isKioskModeEnabled(context)
+                                || shouldHaveSharedCallLogEntries(
+                                        context, userManager, identifier)) {
                             str = name;
                             if (!userManager.isUserRunning(userHandle)) {
                                 str2 = str3;
                             } else if (!userManager.isUserUnlocked(userHandle)) {
                                 str2 = str3;
                             } else {
-                                Uri maybeInsertLocation2 = maybeInsertLocation(addCallParams, contentResolver, userHandle);
+                                Uri maybeInsertLocation2 =
+                                        maybeInsertLocation(
+                                                addCallParams, contentResolver, userHandle);
                                 if (maybeInsertLocation2 != null) {
                                     str2 = str3;
                                     contentValues2.put("location", maybeInsertLocation2.toString());
@@ -830,7 +1097,9 @@ public class CallLog {
                                     str2 = str3;
                                     contentValues2.put("location", (String) null);
                                 }
-                                Uri addEntryAndRemoveExpiredEntries2 = addEntryAndRemoveExpiredEntries(context, userManager, userHandle, contentValues2);
+                                Uri addEntryAndRemoveExpiredEntries2 =
+                                        addEntryAndRemoveExpiredEntries(
+                                                context, userManager, userHandle, contentValues2);
                                 if (identifier == processUserId) {
                                     uri = addEntryAndRemoveExpiredEntries2;
                                 }
@@ -848,7 +1117,10 @@ public class CallLog {
                     }
                     return uri;
                 }
-                Log.d("CallLog", "The system user is still encrypted or the callLog is inserted into the shadow");
+                Log.d(
+                        "CallLog",
+                        "The system user is still encrypted or the callLog is inserted into the"
+                            + " shadow");
                 return null;
             }
             if (addCallParams.mUserToBeInsertedTo != null) {
@@ -874,16 +1146,29 @@ public class CallLog {
             return sequence.toString();
         }
 
-        public static boolean shouldHaveSharedCallLogEntries(Context context, UserManager userManager, int userId) {
+        public static boolean shouldHaveSharedCallLogEntries(
+                Context context, UserManager userManager, int userId) {
             UserInfo userInfo;
-            return (userManager.hasUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, UserHandle.of(userId)) || (userInfo = userManager.getUserInfo(userId)) == null || userInfo.isProfile() || userInfo.isCloneProfile()) ? false : true;
+            return (userManager.hasUserRestriction(
+                                    UserManager.DISALLOW_OUTGOING_CALLS, UserHandle.of(userId))
+                            || (userInfo = userManager.getUserInfo(userId)) == null
+                            || userInfo.isProfile()
+                            || userInfo.isCloneProfile())
+                    ? false
+                    : true;
         }
 
         public static String getLastOutgoingCall(Context context) {
             ContentResolver resolver = context.getContentResolver();
             Cursor c = null;
             try {
-                c = resolver.query(CONTENT_URI_LIMIT_1, new String[]{"number"}, "type = 2", null, "date DESC");
+                c =
+                        resolver.query(
+                                CONTENT_URI_LIMIT_1,
+                                new String[] {"number"},
+                                "type = 2",
+                                null,
+                                "date DESC");
                 if (c != null && c.moveToFirst()) {
                     return c.getString(0);
                 }
@@ -898,17 +1183,24 @@ public class CallLog {
             }
         }
 
-        private static Uri addEntryAndRemoveExpiredEntries(Context context, UserManager userManager, UserHandle user, ContentValues values) {
+        private static Uri addEntryAndRemoveExpiredEntries(
+                Context context, UserManager userManager, UserHandle user, ContentValues values) {
             ContentResolver resolver = context.getContentResolver();
             Uri LOGS_URI = Uri.parse("content://logs/call");
-            Uri uri = ContentProvider.maybeAddUserId(userManager.isUserUnlocked(user) ? LOGS_URI : SHADOW_CONTENT_URI, user.getIdentifier());
+            Uri uri =
+                    ContentProvider.maybeAddUserId(
+                            userManager.isUserUnlocked(user) ? LOGS_URI : SHADOW_CONTENT_URI,
+                            user.getIdentifier());
             String radValue = null;
             if (values.containsKey(SEM_ROAMING_AUTO_DIALER_QUERY_PARAM)) {
                 radValue = values.getAsString(SEM_ROAMING_AUTO_DIALER_QUERY_PARAM);
                 values.remove(SEM_ROAMING_AUTO_DIALER_QUERY_PARAM);
             }
             if (!TextUtils.isEmpty(radValue)) {
-                uri = uri.buildUpon().appendQueryParameter(SEM_ROAMING_AUTO_DIALER_QUERY_PARAM, radValue).build();
+                uri =
+                        uri.buildUpon()
+                                .appendQueryParameter(SEM_ROAMING_AUTO_DIALER_QUERY_PARAM, radValue)
+                                .build();
             }
             try {
                 Log.d("CallLog", "Provider called! Insert callLog as a uri");
@@ -918,7 +1210,10 @@ public class CallLog {
                 } else {
                     String lastPathSegment = result.getLastPathSegment();
                     if (lastPathSegment != null && lastPathSegment.equals("0")) {
-                        Log.w("CallLog", "Failed to insert into call log due to appops denial; resultUri=" + result);
+                        Log.w(
+                                "CallLog",
+                                "Failed to insert into call log due to appops denial; resultUri="
+                                        + result);
                     }
                 }
                 if (!TextUtils.isEmpty(radValue)) {
@@ -931,28 +1226,38 @@ public class CallLog {
             }
         }
 
-        private static Uri maybeInsertLocation(AddCallParams params, ContentResolver resolver, UserHandle user) {
+        private static Uri maybeInsertLocation(
+                AddCallParams params, ContentResolver resolver, UserHandle user) {
             if (Double.isNaN(params.mLatitude) || Double.isNaN(params.mLongitude)) {
                 return null;
             }
             ContentValues locationValues = new ContentValues();
             locationValues.put("latitude", Double.valueOf(params.mLatitude));
             locationValues.put("longitude", Double.valueOf(params.mLongitude));
-            Uri locationUri = ContentProvider.maybeAddUserId(Locations.CONTENT_URI, user.getIdentifier());
+            Uri locationUri =
+                    ContentProvider.maybeAddUserId(Locations.CONTENT_URI, user.getIdentifier());
             try {
                 return resolver.insert(locationUri, locationValues);
             } catch (SecurityException e) {
-                Log.w("CallLog", "Skipping inserting location because caller lacks ACCESS_FINE_LOCATION.");
+                Log.w(
+                        "CallLog",
+                        "Skipping inserting location because caller lacks ACCESS_FINE_LOCATION.");
                 return null;
             }
         }
 
         private static void updateDataUsageStatForData(ContentResolver resolver, String dataId) {
-            Uri feedbackUri = ContactsContract.DataUsageFeedback.FEEDBACK_URI.buildUpon().appendPath(dataId).appendQueryParameter("type", "call").build();
+            Uri feedbackUri =
+                    ContactsContract.DataUsageFeedback.FEEDBACK_URI
+                            .buildUpon()
+                            .appendPath(dataId)
+                            .appendQueryParameter("type", "call")
+                            .build();
             resolver.update(feedbackUri, new ContentValues(), null, null);
         }
 
-        private static void updateNormalizedNumber(Context context, ContentResolver resolver, String dataId, String number) {
+        private static void updateNormalizedNumber(
+                Context context, ContentResolver resolver, String dataId, String number) {
             if (TextUtils.isEmpty(number) || TextUtils.isEmpty(dataId)) {
                 return;
             }
@@ -966,7 +1271,8 @@ public class CallLog {
             }
             ContentValues values = new ContentValues();
             values.put("data4", normalizedNumber);
-            resolver.update(ContactsContract.Data.CONTENT_URI, values, "_id=?", new String[]{dataId});
+            resolver.update(
+                    ContactsContract.Data.CONTENT_URI, values, "_id=?", new String[] {dataId});
         }
 
         private static int getLogNumberPresentation(String number, int presentation) {
@@ -982,7 +1288,8 @@ public class CallLog {
             return (TextUtils.isEmpty(number) || presentation == 3) ? 3 : 1;
         }
 
-        private static String getLogAccountAddress(Context context, PhoneAccountHandle accountHandle) {
+        private static String getLogAccountAddress(
+                Context context, PhoneAccountHandle accountHandle) {
             PhoneAccount account;
             Uri address;
             TelecomManager tm = null;
@@ -990,7 +1297,10 @@ public class CallLog {
                 tm = (TelecomManager) context.getSystemService(TelecomManager.class);
             } catch (UnsupportedOperationException e) {
             }
-            if (tm == null || accountHandle == null || (account = tm.getPhoneAccount(accountHandle)) == null || (address = account.getSubscriptionAddress()) == null) {
+            if (tm == null
+                    || accountHandle == null
+                    || (account = tm.getPhoneAccount(accountHandle)) == null
+                    || (address = account.getSubscriptionAddress()) == null) {
                 return null;
             }
             String accountAddress = address.getSchemeSpecificPart();
@@ -999,7 +1309,8 @@ public class CallLog {
 
         private static String getCurrentCountryIso(Context context) {
             Country country;
-            CountryDetector detector = (CountryDetector) context.getSystemService(Context.COUNTRY_DETECTOR);
+            CountryDetector detector =
+                    (CountryDetector) context.getSystemService(Context.COUNTRY_DETECTOR);
             if (detector == null || (country = detector.detectCountry()) == null) {
                 return null;
             }
@@ -1014,13 +1325,13 @@ public class CallLog {
 
     public static class Locations implements BaseColumns {
         public static final String AUTHORITY = "call_composer_locations";
-        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/call_composer_location";
+        public static final String CONTENT_ITEM_TYPE =
+                "vnd.android.cursor.item/call_composer_location";
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/call_composer_location";
         public static final Uri CONTENT_URI = Uri.parse("content://call_composer_locations");
         public static final String LATITUDE = "latitude";
         public static final String LONGITUDE = "longitude";
 
-        private Locations() {
-        }
+        private Locations() {}
     }
 }

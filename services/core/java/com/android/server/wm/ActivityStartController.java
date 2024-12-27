@@ -15,6 +15,7 @@ import android.os.UserHandle;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.server.DualAppManagerService;
 import com.android.server.am.BroadcastStats$$ExternalSyntheticOutline0;
@@ -22,9 +23,9 @@ import com.android.server.am.PendingIntentRecord;
 import com.android.server.uri.NeededUriGrants;
 import com.android.server.uri.UriGrantsManagerInternal;
 import com.android.server.uri.UriGrantsManagerService;
-import com.android.server.wm.ActivityMetricsLogger;
-import com.android.server.wm.ActivityStarter;
+
 import com.samsung.android.app.SemDualAppManager;
+
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
@@ -44,13 +45,18 @@ public final class ActivityStartController {
     public boolean mCheckedForSetup = false;
     public boolean mInExecution = false;
 
-    public ActivityStartController(ActivityTaskManagerService activityTaskManagerService, ActivityTaskSupervisor activityTaskSupervisor, ActivityStarter.Factory factory) {
+    public ActivityStartController(
+            ActivityTaskManagerService activityTaskManagerService,
+            ActivityTaskSupervisor activityTaskSupervisor,
+            ActivityStarter.Factory factory) {
         this.mService = activityTaskManagerService;
         this.mSupervisor = activityTaskSupervisor;
         this.mHandler = new Handler(activityTaskManagerService.mH.getLooper(), null, true);
         this.mFactory = factory;
         factory.setController(this);
-        this.mPendingRemoteAnimationRegistry = new PendingRemoteAnimationRegistry(activityTaskManagerService.mGlobalLock, activityTaskManagerService.mH);
+        this.mPendingRemoteAnimationRegistry =
+                new PendingRemoteAnimationRegistry(
+                        activityTaskManagerService.mGlobalLock, activityTaskManagerService.mH);
     }
 
     public final int checkTargetUser(int i, int i2, String str, int i3, boolean z) {
@@ -79,7 +85,15 @@ public final class ActivityStartController {
             z = true;
         }
         ActivityStarter activityStarter = this.mLastStarter;
-        if (activityStarter != null && (!z2 || (((activityRecord = activityStarter.mLastStartActivityRecord) != null && str2.equals(activityRecord.packageName)) || (((activityRecord2 = activityStarter.mStartActivity) != null && str2.equals(activityRecord2.packageName)) || ((activityRecord3 = this.mLastHomeActivityStartRecord) != null && str2.equals(activityRecord3.packageName)))))) {
+        if (activityStarter != null
+                && (!z2
+                        || (((activityRecord = activityStarter.mLastStartActivityRecord) != null
+                                        && str2.equals(activityRecord.packageName))
+                                || (((activityRecord2 = activityStarter.mStartActivity) != null
+                                                && str2.equals(activityRecord2.packageName))
+                                        || ((activityRecord3 = this.mLastHomeActivityStartRecord)
+                                                        != null
+                                                && str2.equals(activityRecord3.packageName)))))) {
             if (!z) {
                 printWriter.print(str);
                 printWriter.print("mLastHomeActivityStartResult=");
@@ -93,11 +107,17 @@ public final class ActivityStartController {
             activityStarter2.getClass();
             printWriter.print(concat);
             printWriter.print("mCurrentUser=");
-            BroadcastStats$$ExternalSyntheticOutline0.m(activityStarter2.mRootWindowContainer.mCurrentUser, printWriter, concat, "mLastStartReason=");
+            BroadcastStats$$ExternalSyntheticOutline0.m(
+                    activityStarter2.mRootWindowContainer.mCurrentUser,
+                    printWriter,
+                    concat,
+                    "mLastStartReason=");
             printWriter.println(activityStarter2.mLastStartReason);
             printWriter.print(concat);
             printWriter.print("mLastStartActivityTimeMs=");
-            printWriter.println(DateFormat.getDateTimeInstance().format(new Date(activityStarter2.mLastStartActivityTimeMs)));
+            printWriter.println(
+                    DateFormat.getDateTimeInstance()
+                            .format(new Date(activityStarter2.mLastStartActivityTimeMs)));
             printWriter.print(concat);
             printWriter.print("mLastStartActivityResult=");
             printWriter.println(activityStarter2.mLastStartActivityResult);
@@ -153,7 +173,21 @@ public final class ActivityStartController {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final int startActivities(IApplicationThread iApplicationThread, int i, int i2, int i3, String str, String str2, Intent[] intentArr, String[] strArr, IBinder iBinder, SafeActivityOptions safeActivityOptions, int i4, String str3, PendingIntentRecord pendingIntentRecord, BackgroundStartPrivileges backgroundStartPrivileges) {
+    public final int startActivities(
+            IApplicationThread iApplicationThread,
+            int i,
+            int i2,
+            int i3,
+            String str,
+            String str2,
+            Intent[] intentArr,
+            String[] strArr,
+            IBinder iBinder,
+            SafeActivityOptions safeActivityOptions,
+            int i4,
+            String str3,
+            PendingIntentRecord pendingIntentRecord,
+            BackgroundStartPrivileges backgroundStartPrivileges) {
         int i5;
         int i6;
         SparseArray sparseArray;
@@ -202,8 +236,10 @@ public final class ActivityStartController {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         if (safeActivityOptions != null) {
             safeActivityOptions.mShouldCheckFreeform = true;
-            ActivityOptions cloneLaunchingOptions = SafeActivityOptions.cloneLaunchingOptions(safeActivityOptions.mOriginalOptions);
-            ActivityOptions cloneLaunchingOptions2 = SafeActivityOptions.cloneLaunchingOptions(safeActivityOptions.mCallerOptions);
+            ActivityOptions cloneLaunchingOptions =
+                    SafeActivityOptions.cloneLaunchingOptions(safeActivityOptions.mOriginalOptions);
+            ActivityOptions cloneLaunchingOptions2 =
+                    SafeActivityOptions.cloneLaunchingOptions(safeActivityOptions.mCallerOptions);
             if (cloneLaunchingOptions == null && cloneLaunchingOptions2 == null) {
                 sparseArray = sparseArray3;
                 i7 = computeResolveFilterUid;
@@ -213,7 +249,8 @@ public final class ActivityStartController {
             } else {
                 if (safeActivityOptions.mShouldCheckFreeform) {
                     ActivityOptions activityOptions = safeActivityOptions.mOriginalOptions;
-                    int launchWindowingMode = activityOptions != null ? activityOptions.getLaunchWindowingMode() : 0;
+                    int launchWindowingMode =
+                            activityOptions != null ? activityOptions.getLaunchWindowingMode() : 0;
                     ActivityOptions activityOptions2 = safeActivityOptions.mOriginalOptions;
                     if (activityOptions2 != null) {
                         rect = activityOptions2.getLaunchBounds();
@@ -258,7 +295,11 @@ public final class ActivityStartController {
                     i8 = i6;
                     i9 = 0;
                 }
-                safeActivityOptions4 = new SafeActivityOptions(cloneLaunchingOptions, safeActivityOptions.mOriginalCallingPid, safeActivityOptions.mOriginalCallingUid);
+                safeActivityOptions4 =
+                        new SafeActivityOptions(
+                                cloneLaunchingOptions,
+                                safeActivityOptions.mOriginalCallingPid,
+                                safeActivityOptions.mOriginalCallingUid);
                 safeActivityOptions4.mCallerOptions = cloneLaunchingOptions2;
                 safeActivityOptions4.mRealCallingPid = safeActivityOptions.mRealCallingPid;
                 safeActivityOptions4.mRealCallingUid = safeActivityOptions.mRealCallingUid;
@@ -272,7 +313,11 @@ public final class ActivityStartController {
             safeActivityOptions2 = null;
         }
         try {
-            Intent[] intentArr2 = (Intent[]) ArrayUtils.filterNotNull(intentArr, new ActivityStartController$$ExternalSyntheticLambda0());
+            Intent[] intentArr2 =
+                    (Intent[])
+                            ArrayUtils.filterNotNull(
+                                    intentArr,
+                                    new ActivityStartController$$ExternalSyntheticLambda0());
             int length = intentArr2.length;
             ActivityStarter[] activityStarterArr2 = new ActivityStarter[length];
             int i15 = i9;
@@ -301,20 +346,39 @@ public final class ActivityStartController {
                 int i19 = i7;
                 int i20 = length;
                 int i21 = i8;
-                ActivityInfo activityInfoForUser = this.mService.mAmInternal.getActivityInfoForUser(activityTaskSupervisor.resolveActivity(intent2, activityTaskSupervisor.resolveIntent(intent2, strArr[i15], i4, 0, i19, i21), i16, null), i4);
+                ActivityInfo activityInfoForUser =
+                        this.mService.mAmInternal.getActivityInfoForUser(
+                                activityTaskSupervisor.resolveActivity(
+                                        intent2,
+                                        activityTaskSupervisor.resolveIntent(
+                                                intent2, strArr[i15], i4, 0, i19, i21),
+                                        i16,
+                                        null),
+                                i4);
                 if (activityInfoForUser != null) {
                     try {
-                        UriGrantsManagerInternal uriGrantsManagerInternal = this.mSupervisor.mService.mUgmInternal;
+                        UriGrantsManagerInternal uriGrantsManagerInternal =
+                                this.mSupervisor.mService.mUgmInternal;
                         ApplicationInfo applicationInfo = activityInfoForUser.applicationInfo;
-                        internalCheckGrantUriPermissionFromIntent = ((UriGrantsManagerService.LocalService) uriGrantsManagerInternal).internalCheckGrantUriPermissionFromIntent(intent2, i19, applicationInfo.packageName, UserHandle.getUserId(applicationInfo.uid), null);
+                        internalCheckGrantUriPermissionFromIntent =
+                                ((UriGrantsManagerService.LocalService) uriGrantsManagerInternal)
+                                        .internalCheckGrantUriPermissionFromIntent(
+                                                intent2,
+                                                i19,
+                                                applicationInfo.packageName,
+                                                UserHandle.getUserId(applicationInfo.uid),
+                                                null);
                         ApplicationInfo applicationInfo2 = activityInfoForUser.applicationInfo;
                         if ((applicationInfo2.privateFlags & 2) != 0) {
-                            throw new IllegalArgumentException("FLAG_CANT_SAVE_STATE not supported here");
+                            throw new IllegalArgumentException(
+                                    "FLAG_CANT_SAVE_STATE not supported here");
                         }
                         sparseArray2 = sparseArray4;
                         sparseArray2.put(applicationInfo2.uid, applicationInfo2.packageName);
                     } catch (SecurityException unused) {
-                        Slog.d("ActivityTaskManager", "Not allowed to start activity since no uri permission.");
+                        Slog.d(
+                                "ActivityTaskManager",
+                                "Not allowed to start activity since no uri permission.");
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         return -96;
                     }
@@ -323,7 +387,8 @@ public final class ActivityStartController {
                     internalCheckGrantUriPermissionFromIntent = null;
                 }
                 boolean z2 = i17 == intentArr2.length - 1 ? 1 : i16;
-                SafeActivityOptions safeActivityOptions6 = z2 != 0 ? safeActivityOptions : safeActivityOptions5;
+                SafeActivityOptions safeActivityOptions6 =
+                        z2 != 0 ? safeActivityOptions : safeActivityOptions5;
                 ActivityStarter obtainStarter = obtainStarter(intent2, str3);
                 Intent[] intentArr3 = intentArr2;
                 ActivityStarter.Request request = obtainStarter.mRequest;
@@ -382,7 +447,11 @@ public final class ActivityStartController {
             synchronized (windowManagerGlobalLock) {
                 try {
                     this.mService.deferWindowLayout();
-                    this.mService.mWindowManager.mStartingSurfaceController.mDeferringAddStartingWindow = true;
+                    this.mService
+                                    .mWindowManager
+                                    .mStartingSurfaceController
+                                    .mDeferringAddStartingWindow =
+                            true;
                     IBinder iBinder2 = iBinder;
                     int i25 = 0;
                     while (i25 < i22) {
@@ -397,14 +466,21 @@ public final class ActivityStartController {
                                     this.mFactory.recycle(activityStarterArr4[i26]);
                                 }
                                 try {
-                                    this.mService.mWindowManager.mStartingSurfaceController.endDeferAddStartingWindow(safeActivityOptions != null ? safeActivityOptions.mOriginalOptions : null);
+                                    this.mService.mWindowManager.mStartingSurfaceController
+                                            .endDeferAddStartingWindow(
+                                                    safeActivityOptions != null
+                                                            ? safeActivityOptions.mOriginalOptions
+                                                            : null);
                                     this.mService.continueWindowLayout();
                                     WindowManagerService.resetPriorityAfterLockedSection();
                                     Binder.restoreCallingIdentity(clearCallingIdentity);
                                     return execute;
                                 } catch (Exception e) {
                                     String stackTraceString = Log.getStackTraceString(e);
-                                    Slog.e("ActivityTaskManager", "endDeferAddStartingWindow failed, " + stackTraceString);
+                                    Slog.e(
+                                            "ActivityTaskManager",
+                                            "endDeferAddStartingWindow failed, "
+                                                    + stackTraceString);
                                     WindowManagerServiceExt.logCriticalInfo(stackTraceString, null);
                                     WindowManagerService.resetPriorityAfterLockedSection();
                                     Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -425,7 +501,8 @@ public final class ActivityStartController {
                                     i11 = i23;
                                 }
                                 if (i25 < i22 - 1) {
-                                    activityStarterArr4[i25 + 1].mRequest.intent.addFlags(268435456);
+                                    activityStarterArr4[i25 + 1].mRequest.intent.addFlags(
+                                            268435456);
                                 }
                                 iBinder2 = iBinder;
                                 i25++;
@@ -433,13 +510,21 @@ public final class ActivityStartController {
                             } catch (Throwable th) {
                                 th = th;
                                 try {
-                                    this.mService.mWindowManager.mStartingSurfaceController.endDeferAddStartingWindow(safeActivityOptions3 != null ? safeActivityOptions3.mOriginalOptions : null);
+                                    this.mService.mWindowManager.mStartingSurfaceController
+                                            .endDeferAddStartingWindow(
+                                                    safeActivityOptions3 != null
+                                                            ? safeActivityOptions3.mOriginalOptions
+                                                            : null);
                                     this.mService.continueWindowLayout();
                                     throw th;
                                 } catch (Exception e2) {
                                     String stackTraceString2 = Log.getStackTraceString(e2);
-                                    Slog.e("ActivityTaskManager", "endDeferAddStartingWindow failed, " + stackTraceString2);
-                                    WindowManagerServiceExt.logCriticalInfo(stackTraceString2, null);
+                                    Slog.e(
+                                            "ActivityTaskManager",
+                                            "endDeferAddStartingWindow failed, "
+                                                    + stackTraceString2);
+                                    WindowManagerServiceExt.logCriticalInfo(
+                                            stackTraceString2, null);
                                     WindowManagerService.resetPriorityAfterLockedSection();
                                     Binder.restoreCallingIdentity(clearCallingIdentity);
                                     return -96;
@@ -451,14 +536,20 @@ public final class ActivityStartController {
                         }
                     }
                     try {
-                        this.mService.mWindowManager.mStartingSurfaceController.endDeferAddStartingWindow(safeActivityOptions != null ? safeActivityOptions.mOriginalOptions : null);
+                        this.mService.mWindowManager.mStartingSurfaceController
+                                .endDeferAddStartingWindow(
+                                        safeActivityOptions != null
+                                                ? safeActivityOptions.mOriginalOptions
+                                                : null);
                         this.mService.continueWindowLayout();
                         WindowManagerService.resetPriorityAfterLockedSection();
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         return 0;
                     } catch (Exception e3) {
                         String stackTraceString3 = Log.getStackTraceString(e3);
-                        Slog.e("ActivityTaskManager", "endDeferAddStartingWindow failed, " + stackTraceString3);
+                        Slog.e(
+                                "ActivityTaskManager",
+                                "endDeferAddStartingWindow failed, " + stackTraceString3);
                         WindowManagerServiceExt.logCriticalInfo(stackTraceString3, null);
                         WindowManagerService.resetPriorityAfterLockedSection();
                         Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -475,24 +566,50 @@ public final class ActivityStartController {
         }
     }
 
-    public final int startActivityInPackage(int i, int i2, int i3, String str, String str2, Intent intent, String str3, IBinder iBinder, String str4, int i4, SafeActivityOptions safeActivityOptions, int i5, Task task, String str5, PendingIntentRecord pendingIntentRecord, BackgroundStartPrivileges backgroundStartPrivileges) {
+    public final int startActivityInPackage(
+            int i,
+            int i2,
+            int i3,
+            String str,
+            String str2,
+            Intent intent,
+            String str3,
+            IBinder iBinder,
+            String str4,
+            int i4,
+            SafeActivityOptions safeActivityOptions,
+            int i5,
+            Task task,
+            String str5,
+            PendingIntentRecord pendingIntentRecord,
+            BackgroundStartPrivileges backgroundStartPrivileges) {
         String str6;
         String str7;
         Intent intent2;
         ActivityTaskManagerService activityTaskManagerService = this.mService;
-        if ((activityTaskManagerService.mSIOPLevel >= 6 || activityTaskManagerService.mBatteryOverheatLevel > 0) && !activityTaskManagerService.isPossibleToStart(intent)) {
+        if ((activityTaskManagerService.mSIOPLevel >= 6
+                        || activityTaskManagerService.mBatteryOverheatLevel > 0)
+                && !activityTaskManagerService.isPossibleToStart(intent)) {
             Handler handler = this.mHandler;
             handler.sendMessage(handler.obtainMessage(7));
             return -102;
         }
         int checkTargetUser = checkTargetUser(i5, i2, str5, i3, false);
-        if (!SemDualAppManager.isDualAppId(SemDualAppManager.getDualAppProfileId()) || intent == null || intent.getComponent() == null || (!("com.tencent.mm".equals(intent.getComponent().getPackageName()) || "com.tencent.mobileqq".equals(intent.getComponent().getPackageName())) || i3 == 1000)) {
+        if (!SemDualAppManager.isDualAppId(SemDualAppManager.getDualAppProfileId())
+                || intent == null
+                || intent.getComponent() == null
+                || (!("com.tencent.mm".equals(intent.getComponent().getPackageName())
+                                || "com.tencent.mobileqq"
+                                        .equals(intent.getComponent().getPackageName()))
+                        || i3 == 1000)) {
             str6 = str3;
             str7 = str5;
             intent2 = intent;
         } else {
             int userId = UserHandle.getUserId(i3);
-            intent2 = DualAppManagerService.startDAChooserActivity(userId, checkTargetUser, i3, intent, str);
+            intent2 =
+                    DualAppManagerService.startDAChooserActivity(
+                            userId, checkTargetUser, i3, intent, str);
             if (intent2 != null) {
                 str6 = null;
             } else {
@@ -500,8 +617,14 @@ public final class ActivityStartController {
                 intent2 = intent;
             }
             if (SemDualAppManager.isDualAppId(userId)) {
-                String packageName = intent2.getComponent() != null ? intent2.getComponent().getPackageName() : intent2.getPackage();
-                if (str != null && packageName != null && !str.equals(packageName) && DualAppManagerService.shouldForwardToOwner(packageName)) {
+                String packageName =
+                        intent2.getComponent() != null
+                                ? intent2.getComponent().getPackageName()
+                                : intent2.getPackage();
+                if (str != null
+                        && packageName != null
+                        && !str.equals(packageName)
+                        && DualAppManagerService.shouldForwardToOwner(packageName)) {
                     str7 = str5;
                     checkTargetUser = 0;
                 }
@@ -531,12 +654,29 @@ public final class ActivityStartController {
     public final boolean startExistingRecents(Intent intent, ActivityOptions activityOptions) {
         ActivityRecord activityRecord;
         ActivityTaskManagerService activityTaskManagerService = this.mService;
-        Task rootTask = activityTaskManagerService.mRootWindowContainer.mDefaultDisplay.getDefaultTaskDisplayArea().getRootTask(0, activityTaskManagerService.mRecentTasks.mRecentsComponent.equals(intent.getComponent()) ? 3 : 2);
-        if (rootTask != null && (activityRecord = rootTask.topRunningActivity(false)) != null && ((!activityRecord.isVisibleRequested() || !rootTask.isTopRootTaskInDisplayArea()) && activityRecord.attachedToProcess() && activityRecord.mActivityComponent.equals(intent.getComponent()))) {
-            if (activityTaskManagerService.mRecentTasks.isCallerRecents(activityRecord.getUid()) && !activityRecord.mDisplayContent.isKeyguardLocked()) {
-                if (activityTaskManagerService.mController != null && activityRecord.isActivityTypeRecents()) {
+        Task rootTask =
+                activityTaskManagerService
+                        .mRootWindowContainer
+                        .mDefaultDisplay
+                        .getDefaultTaskDisplayArea()
+                        .getRootTask(
+                                0,
+                                activityTaskManagerService.mRecentTasks.mRecentsComponent.equals(
+                                                intent.getComponent())
+                                        ? 3
+                                        : 2);
+        if (rootTask != null
+                && (activityRecord = rootTask.topRunningActivity(false)) != null
+                && ((!activityRecord.isVisibleRequested() || !rootTask.isTopRootTaskInDisplayArea())
+                        && activityRecord.attachedToProcess()
+                        && activityRecord.mActivityComponent.equals(intent.getComponent()))) {
+            if (activityTaskManagerService.mRecentTasks.isCallerRecents(activityRecord.getUid())
+                    && !activityRecord.mDisplayContent.isKeyguardLocked()) {
+                if (activityTaskManagerService.mController != null
+                        && activityRecord.isActivityTypeRecents()) {
                     try {
-                        if (!activityTaskManagerService.mController.activityStarting(intent.cloneFilter(), activityRecord.packageName)) {
+                        if (!activityTaskManagerService.mController.activityStarting(
+                                intent.cloneFilter(), activityRecord.packageName)) {
                             return false;
                         }
                     } catch (RemoteException unused) {
@@ -547,27 +687,35 @@ public final class ActivityStartController {
                 if (displayContent != null && !displayContent.mIsInExitingRecents) {
                     displayContent.mIsInExitingRecents = true;
                 }
-                activityTaskManagerService.mRootWindowContainer.startPowerModeLaunchIfNeeded(true, activityRecord);
+                activityTaskManagerService.mRootWindowContainer.startPowerModeLaunchIfNeeded(
+                        true, activityRecord);
                 ActivityTaskSupervisor activityTaskSupervisor = this.mSupervisor;
-                ActivityMetricsLogger.LaunchingState notifyActivityLaunching = activityTaskSupervisor.mActivityMetricsLogger.notifyActivityLaunching(intent, null, -1);
+                ActivityMetricsLogger.LaunchingState notifyActivityLaunching =
+                        activityTaskSupervisor.mActivityMetricsLogger.notifyActivityLaunching(
+                                intent, null, -1);
                 Task task = activityRecord.task;
                 activityTaskManagerService.deferWindowLayout();
                 try {
-                    TransitionController transitionController = activityRecord.mTransitionController;
+                    TransitionController transitionController =
+                            activityRecord.mTransitionController;
                     Transition transition = transitionController.mCollectingTransition;
                     if (transition != null) {
                         IApplicationThread iApplicationThread = activityRecord.app.mThread;
                         TransitionController transitionController2 = transition.mController;
-                        WindowProcessController processController = transitionController2.mAtm.getProcessController(iApplicationThread);
+                        WindowProcessController processController =
+                                transitionController2.mAtm.getProcessController(iApplicationThread);
                         if (processController != null) {
-                            transitionController2.mRemotePlayer.update(processController, true, true);
+                            transitionController2.mRemotePlayer.update(
+                                    processController, true, true);
                         }
-                        transitionController.setTransientLaunch(TaskDisplayArea.getRootTaskAbove(rootTask), activityRecord);
+                        transitionController.setTransientLaunch(
+                                TaskDisplayArea.getRootTaskAbove(rootTask), activityRecord);
                     }
                     task.moveToFront("startExistingRecents", null);
                     task.mInResumeTopActivity = true;
                     task.resumeTopActivity(null, activityOptions, true);
-                    activityTaskSupervisor.mActivityMetricsLogger.notifyActivityLaunched(notifyActivityLaunching, 2, false, activityRecord, activityOptions);
+                    activityTaskSupervisor.mActivityMetricsLogger.notifyActivityLaunched(
+                            notifyActivityLaunching, 2, false, activityRecord, activityOptions);
                     if (displayContent != null && displayContent.mIsInExitingRecents) {
                         displayContent.mIsInExitingRecents = false;
                     }

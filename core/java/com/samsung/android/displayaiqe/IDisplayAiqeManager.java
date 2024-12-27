@@ -38,7 +38,8 @@ public interface IDisplayAiqeManager extends IInterface {
 
     boolean setVividnessMode(int i) throws RemoteException;
 
-    boolean setWhiteBalanceMode(int i, int i2, int i3, int i4, int i5, int i6) throws RemoteException;
+    boolean setWhiteBalanceMode(int i, int i2, int i3, int i4, int i5, int i6)
+            throws RemoteException;
 
     public static class Default implements IDisplayAiqeManager {
         @Override // com.samsung.android.displayaiqe.IDisplayAiqeManager
@@ -82,7 +83,8 @@ public interface IDisplayAiqeManager extends IInterface {
         }
 
         @Override // com.samsung.android.displayaiqe.IDisplayAiqeManager
-        public boolean setWhiteBalanceMode(int m_r, int m_g, int m_b, int s_r, int s_g, int s_b) throws RemoteException {
+        public boolean setWhiteBalanceMode(int m_r, int m_g, int m_b, int s_r, int s_g, int s_b)
+                throws RemoteException {
             return false;
         }
 
@@ -122,7 +124,7 @@ public interface IDisplayAiqeManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDisplayAiqeManager {
+    public abstract static class Stub extends Binder implements IDisplayAiqeManager {
         static final int TRANSACTION_getContentMode = 7;
         static final int TRANSACTION_getCoprValue = 15;
         static final int TRANSACTION_getDisplayService = 14;
@@ -202,7 +204,8 @@ public interface IDisplayAiqeManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDisplayAiqeManager.DESCRIPTOR);
             }
@@ -274,7 +277,8 @@ public interface IDisplayAiqeManager extends IInterface {
                     int _arg4 = data.readInt();
                     int _arg5 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result9 = setWhiteBalanceMode(_arg08, _arg12, _arg2, _arg3, _arg4, _arg5);
+                    boolean _result9 =
+                            setWhiteBalanceMode(_arg08, _arg12, _arg2, _arg3, _arg4, _arg5);
                     reply.writeNoException();
                     reply.writeBoolean(_result9);
                     return true;
@@ -406,7 +410,8 @@ public interface IDisplayAiqeManager extends IInterface {
             }
 
             @Override // com.samsung.android.displayaiqe.IDisplayAiqeManager
-            public boolean setBlueLightFilterMode(boolean enable, int level) throws RemoteException {
+            public boolean setBlueLightFilterMode(boolean enable, int level)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -474,7 +479,8 @@ public interface IDisplayAiqeManager extends IInterface {
             }
 
             @Override // com.samsung.android.displayaiqe.IDisplayAiqeManager
-            public boolean setWhiteBalanceMode(int m_r, int m_g, int m_b, int s_r, int s_g, int s_b) throws RemoteException {
+            public boolean setWhiteBalanceMode(int m_r, int m_g, int m_b, int s_r, int s_g, int s_b)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

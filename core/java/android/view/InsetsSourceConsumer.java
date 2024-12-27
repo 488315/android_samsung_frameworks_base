@@ -5,10 +5,9 @@ import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
-import android.view.SurfaceControl;
-import android.view.WindowInsets;
 import android.view.inputmethod.Flags;
 import android.view.inputmethod.ImeTracker;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -39,7 +38,12 @@ public class InsetsSourceConsumer {
         public static final int SHOW_IMMEDIATELY = 0;
     }
 
-    public InsetsSourceConsumer(int id, int type, InsetsState state, Supplier<SurfaceControl.Transaction> transactionSupplier, InsetsController controller) {
+    public InsetsSourceConsumer(
+            int id,
+            int type,
+            InsetsState state,
+            Supplier<SurfaceControl.Transaction> transactionSupplier,
+            InsetsController controller) {
         this.mId = id;
         this.mType = type;
         this.mState = state;
@@ -59,12 +63,18 @@ public class InsetsSourceConsumer {
         InsetsSourceControl lastControl = this.mSourceControl;
         this.mSourceControl = control;
         if (control != null && InsetsController.DEBUG) {
-            Log.d(TAG, String.format("setControl -> %s on %s", WindowInsets.Type.toString(control.getType()), this.mController.getHost().getRootViewTitle()));
+            Log.d(
+                    TAG,
+                    String.format(
+                            "setControl -> %s on %s",
+                            WindowInsets.Type.toString(control.getType()),
+                            this.mController.getHost().getRootViewTitle()));
         }
         if (this.mSourceControl == null) {
             this.mController.notifyControlRevoked(this);
             InsetsSource localSource = this.mState.peekSource(this.mId);
-            InsetsSource serverSource = this.mController.getLastDispatchedState().peekSource(this.mId);
+            InsetsSource serverSource =
+                    this.mController.getLastDispatchedState().peekSource(this.mId);
             boolean localVisible = localSource != null && localSource.isVisible();
             if (serverSource != null && serverSource.isVisible()) {
                 serverVisible = true;
@@ -79,9 +89,16 @@ public class InsetsSourceConsumer {
             boolean requestedVisible = isRequestedVisibleAwaitingControl();
             SurfaceControl oldLeash = lastControl != null ? lastControl.getLeash() : null;
             SurfaceControl newLeash = control.getLeash();
-            if (newLeash != null && ((oldLeash == null || !newLeash.isSameSurface(oldLeash)) && requestedVisible != control.isInitiallyVisible())) {
+            if (newLeash != null
+                    && ((oldLeash == null || !newLeash.isSameSurface(oldLeash))
+                            && requestedVisible != control.isInitiallyVisible())) {
                 if (InsetsController.DEBUG) {
-                    Log.d(TAG, String.format("Gaining leash in %s, requestedVisible: %b", this.mController.getHost().getRootViewTitle(), Boolean.valueOf(requestedVisible)));
+                    Log.d(
+                            TAG,
+                            String.format(
+                                    "Gaining leash in %s, requestedVisible: %b",
+                                    this.mController.getHost().getRootViewTitle(),
+                                    Boolean.valueOf(requestedVisible)));
                 }
                 if (requestedVisible) {
                     showTypes[0] = showTypes[0] | this.mType;
@@ -142,7 +159,8 @@ public class InsetsSourceConsumer {
         boolean showRequested = isShowRequested();
         int i = 2;
         if (Flags.refactorInsetsController()) {
-            cancelledForNewAnimation = (this.mController.getCancelledForNewAnimationTypes() & this.mType) != 0;
+            cancelledForNewAnimation =
+                    (this.mController.getCancelledForNewAnimationTypes() & this.mType) != 0;
         } else if (!running && showRequested) {
             cancelledForNewAnimation = this.mAnimationState == 2;
         } else {
@@ -188,13 +206,27 @@ public class InsetsSourceConsumer {
         if (Flags.refactorInsetsController()) {
             if (this.mSourceControl == null) {
                 if (InsetsController.DEBUG) {
-                    Log.d(TAG, TextUtils.formatSimple("applyLocalVisibilityOverride: No control in %s for type %s, requestedVisible=%s", this.mController.getHost().getRootViewTitle(), WindowInsets.Type.toString(this.mType), Boolean.valueOf(requestedVisible)));
+                    Log.d(
+                            TAG,
+                            TextUtils.formatSimple(
+                                    "applyLocalVisibilityOverride: No control in %s for type %s,"
+                                        + " requestedVisible=%s",
+                                    this.mController.getHost().getRootViewTitle(),
+                                    WindowInsets.Type.toString(this.mType),
+                                    Boolean.valueOf(requestedVisible)));
                 }
                 return false;
             }
-            if (this.mId != InsetsSource.ID_IME_CAPTION_BAR && this.mSourceControl.getLeash() == null) {
+            if (this.mId != InsetsSource.ID_IME_CAPTION_BAR
+                    && this.mSourceControl.getLeash() == null) {
                 if (InsetsController.DEBUG) {
-                    Log.d(TAG, TextUtils.formatSimple("applyLocalVisibilityOverride: Set the source visibility to false, as there is no leash yet for type %s in %s", WindowInsets.Type.toString(this.mType), this.mController.getHost().getRootViewTitle()));
+                    Log.d(
+                            TAG,
+                            TextUtils.formatSimple(
+                                    "applyLocalVisibilityOverride: Set the source visibility to"
+                                        + " false, as there is no leash yet for type %s in %s",
+                                    WindowInsets.Type.toString(this.mType),
+                                    this.mController.getHost().getRootViewTitle()));
                 }
                 boolean wasVisible = source.isVisible();
                 source.setVisible(false);
@@ -202,7 +234,12 @@ public class InsetsSourceConsumer {
             }
         } else if (this.mSourceControl == null) {
             if (InsetsController.DEBUG) {
-                Log.d(TAG, "applyLocalVisibilityOverride: No control in " + this.mController.getHost().getRootViewTitle() + " requestedVisible=" + requestedVisible);
+                Log.d(
+                        TAG,
+                        "applyLocalVisibilityOverride: No control in "
+                                + this.mController.getHost().getRootViewTitle()
+                                + " requestedVisible="
+                                + requestedVisible);
             }
             return false;
         }
@@ -210,7 +247,12 @@ public class InsetsSourceConsumer {
             return false;
         }
         if (InsetsController.DEBUG) {
-            Log.d(TAG, String.format("applyLocalVisibilityOverride: %s requestedVisible: %b", this.mController.getHost().getRootViewTitle(), Boolean.valueOf(requestedVisible)));
+            Log.d(
+                    TAG,
+                    String.format(
+                            "applyLocalVisibilityOverride: %s requestedVisible: %b",
+                            this.mController.getHost().getRootViewTitle(),
+                            Boolean.valueOf(requestedVisible)));
         }
         source.setVisible(requestedVisible);
         return true;
@@ -220,23 +262,28 @@ public class InsetsSourceConsumer {
         return 0;
     }
 
-    void requestHide(boolean fromController, ImeTracker.Token statsToken) {
-    }
+    void requestHide(boolean fromController, ImeTracker.Token statsToken) {}
 
     public void onPerceptible(boolean perceptible) {
         IBinder window;
-        if (Flags.refactorInsetsController() && this.mType == WindowInsets.Type.ime() && (window = this.mController.getHost().getWindowToken()) != null) {
-            this.mController.getHost().getInputMethodManager().reportPerceptible(window, perceptible);
+        if (Flags.refactorInsetsController()
+                && this.mType == WindowInsets.Type.ime()
+                && (window = this.mController.getHost().getWindowToken()) != null) {
+            this.mController
+                    .getHost()
+                    .getInputMethodManager()
+                    .reportPerceptible(window, perceptible);
         }
     }
 
-    public void removeSurface() {
-    }
+    public void removeSurface() {}
 
     public void updateSource(InsetsSource newSource, int animationType) {
         InsetsSource source = this.mState.peekSource(this.mId);
         Rect rect = null;
-        if (source == null || animationType == -1 || source.getFrame().equals(newSource.getFrame())) {
+        if (source == null
+                || animationType == -1
+                || source.getFrame().equals(newSource.getFrame())) {
             this.mPendingFrame = null;
             this.mPendingVisibleFrame = null;
             this.mState.addSource(newSource);
@@ -263,7 +310,14 @@ public class InsetsSourceConsumer {
         boolean requestedVisible = (this.mController.getRequestedVisibleTypes() & this.mType) != 0;
         SurfaceControl.Transaction t = this.mTransactionSupplier.get();
         try {
-            Log.i(TAG, "applyRequestedVisibilityToControl: visible=" + requestedVisible + ", type=" + WindowInsets.Type.toString(this.mType) + ", host=" + this.mController.getHost().getRootViewTitle());
+            Log.i(
+                    TAG,
+                    "applyRequestedVisibilityToControl: visible="
+                            + requestedVisible
+                            + ", type="
+                            + WindowInsets.Type.toString(this.mType)
+                            + ", host="
+                            + this.mController.getHost().getRootViewTitle());
             if (requestedVisible) {
                 t.show(this.mSourceControl.getLeash());
             } else {

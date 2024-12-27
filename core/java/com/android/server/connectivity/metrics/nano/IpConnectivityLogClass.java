@@ -6,6 +6,7 @@ import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -275,7 +276,9 @@ public interface IpConnectivityLogClass {
                 size += CodedOutputByteBufferNano.computeMessageSize(2, this.previousNetworkId);
             }
             if (this.previousNetworkIpSupport != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(3, this.previousNetworkIpSupport);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                3, this.previousNetworkIpSupport);
             }
             if (this.transportTypes != null && this.transportTypes.length > 0) {
                 int dataSize = 0;
@@ -286,10 +289,14 @@ public interface IpConnectivityLogClass {
                 size = size + dataSize + (this.transportTypes.length * 1);
             }
             if (this.defaultNetworkDurationMs != 0) {
-                size += CodedOutputByteBufferNano.computeInt64Size(5, this.defaultNetworkDurationMs);
+                size +=
+                        CodedOutputByteBufferNano.computeInt64Size(
+                                5, this.defaultNetworkDurationMs);
             }
             if (this.noDefaultNetworkDurationMs != 0) {
-                size += CodedOutputByteBufferNano.computeInt64Size(6, this.noDefaultNetworkDurationMs);
+                size +=
+                        CodedOutputByteBufferNano.computeInt64Size(
+                                6, this.noDefaultNetworkDurationMs);
             }
             if (this.initialScore != 0) {
                 size += CodedOutputByteBufferNano.computeInt64Size(7, this.initialScore);
@@ -301,10 +308,13 @@ public interface IpConnectivityLogClass {
                 size += CodedOutputByteBufferNano.computeInt32Size(9, this.ipSupport);
             }
             if (this.previousDefaultNetworkLinkLayer != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(10, this.previousDefaultNetworkLinkLayer);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                10, this.previousDefaultNetworkLinkLayer);
             }
             if (this.validationDurationMs != 0) {
-                return size + CodedOutputByteBufferNano.computeInt64Size(11, this.validationDurationMs);
+                return size
+                        + CodedOutputByteBufferNano.computeInt64Size(11, this.validationDurationMs);
             }
             return size;
         }
@@ -425,11 +435,13 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static DefaultNetworkEvent parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static DefaultNetworkEvent parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (DefaultNetworkEvent) MessageNano.mergeFrom(new DefaultNetworkEvent(), data);
         }
 
-        public static DefaultNetworkEvent parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static DefaultNetworkEvent parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new DefaultNetworkEvent().mergeFrom(input);
         }
     }
@@ -506,11 +518,13 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static IpReachabilityEvent parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static IpReachabilityEvent parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (IpReachabilityEvent) MessageNano.mergeFrom(new IpReachabilityEvent(), data);
         }
 
-        public static IpReachabilityEvent parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static IpReachabilityEvent parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new IpReachabilityEvent().mergeFrom(input);
         }
     }
@@ -601,7 +615,8 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static NetworkEvent parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static NetworkEvent parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (NetworkEvent) MessageNano.mergeFrom(new NetworkEvent(), data);
         }
 
@@ -707,11 +722,13 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static ValidationProbeEvent parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static ValidationProbeEvent parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (ValidationProbeEvent) MessageNano.mergeFrom(new ValidationProbeEvent(), data);
         }
 
-        public static ValidationProbeEvent parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static ValidationProbeEvent parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new ValidationProbeEvent().mergeFrom(input);
         }
     }
@@ -826,14 +843,16 @@ public interface IpConnectivityLogClass {
             if (this.returnCodes != null && this.returnCodes.length > 0) {
                 int dataSize2 = 0;
                 for (int i2 = 0; i2 < this.returnCodes.length; i2++) {
-                    dataSize2 += CodedOutputByteBufferNano.computeInt32SizeNoTag(this.returnCodes[i2]);
+                    dataSize2 +=
+                            CodedOutputByteBufferNano.computeInt32SizeNoTag(this.returnCodes[i2]);
                 }
                 size = size + dataSize2 + (this.returnCodes.length * 1);
             }
             if (this.latenciesMs != null && this.latenciesMs.length > 0) {
                 int dataSize3 = 0;
                 for (int i3 = 0; i3 < this.latenciesMs.length; i3++) {
-                    dataSize3 += CodedOutputByteBufferNano.computeInt32SizeNoTag(this.latenciesMs[i3]);
+                    dataSize3 +=
+                            CodedOutputByteBufferNano.computeInt32SizeNoTag(this.latenciesMs[i3]);
                 }
                 size = size + dataSize3 + (this.latenciesMs.length * 1);
             }
@@ -1023,7 +1042,10 @@ public interface IpConnectivityLogClass {
                         break;
                     case 82:
                         int arrayLength8 = WireFormatNano.getRepeatedFieldArrayLength(input, 82);
-                        int i8 = this.gethostbynameErrors == null ? 0 : this.gethostbynameErrors.length;
+                        int i8 =
+                                this.gethostbynameErrors == null
+                                        ? 0
+                                        : this.gethostbynameErrors.length;
                         Pair[] newArray8 = new Pair[i8 + arrayLength8];
                         if (i8 != 0) {
                             System.arraycopy(this.gethostbynameErrors, 0, newArray8, 0, i8);
@@ -1047,7 +1069,8 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static DNSLookupBatch parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static DNSLookupBatch parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (DNSLookupBatch) MessageNano.mergeFrom(new DNSLookupBatch(), data);
         }
 
@@ -1213,7 +1236,8 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static DNSLatencies parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static DNSLatencies parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (DNSLatencies) MessageNano.mergeFrom(new DNSLatencies(), data);
         }
 
@@ -1302,7 +1326,8 @@ public interface IpConnectivityLogClass {
             if (this.latenciesMs != null && this.latenciesMs.length > 0) {
                 int dataSize = 0;
                 for (int i = 0; i < this.latenciesMs.length; i++) {
-                    dataSize += CodedOutputByteBufferNano.computeInt32SizeNoTag(this.latenciesMs[i]);
+                    dataSize +=
+                            CodedOutputByteBufferNano.computeInt32SizeNoTag(this.latenciesMs[i]);
                 }
                 size = size + dataSize + (this.latenciesMs.length * 1);
             }
@@ -1321,7 +1346,9 @@ public interface IpConnectivityLogClass {
             if (this.nonBlockingLatenciesMs != null && this.nonBlockingLatenciesMs.length > 0) {
                 int dataSize2 = 0;
                 for (int i4 = 0; i4 < this.nonBlockingLatenciesMs.length; i4++) {
-                    dataSize2 += CodedOutputByteBufferNano.computeInt32SizeNoTag(this.nonBlockingLatenciesMs[i4]);
+                    dataSize2 +=
+                            CodedOutputByteBufferNano.computeInt32SizeNoTag(
+                                    this.nonBlockingLatenciesMs[i4]);
                 }
                 return size + dataSize2 + (this.nonBlockingLatenciesMs.length * 1);
             }
@@ -1400,7 +1427,10 @@ public interface IpConnectivityLogClass {
                         break;
                     case 48:
                         int arrayLength4 = WireFormatNano.getRepeatedFieldArrayLength(input, 48);
-                        int i4 = this.nonBlockingLatenciesMs == null ? 0 : this.nonBlockingLatenciesMs.length;
+                        int i4 =
+                                this.nonBlockingLatenciesMs == null
+                                        ? 0
+                                        : this.nonBlockingLatenciesMs.length;
                         int[] newArray4 = new int[i4 + arrayLength4];
                         if (i4 != 0) {
                             System.arraycopy(this.nonBlockingLatenciesMs, 0, newArray4, 0, i4);
@@ -1423,7 +1453,10 @@ public interface IpConnectivityLogClass {
                             arrayLength5++;
                         }
                         input.rewindToPosition(startPos2);
-                        int i5 = this.nonBlockingLatenciesMs == null ? 0 : this.nonBlockingLatenciesMs.length;
+                        int i5 =
+                                this.nonBlockingLatenciesMs == null
+                                        ? 0
+                                        : this.nonBlockingLatenciesMs.length;
                         int[] newArray5 = new int[i5 + arrayLength5];
                         if (i5 != 0) {
                             System.arraycopy(this.nonBlockingLatenciesMs, 0, newArray5, 0, i5);
@@ -1444,11 +1477,13 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static ConnectStatistics parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static ConnectStatistics parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (ConnectStatistics) MessageNano.mergeFrom(new ConnectStatistics(), data);
         }
 
-        public static ConnectStatistics parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static ConnectStatistics parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new ConnectStatistics().mergeFrom(input);
         }
     }
@@ -1556,7 +1591,9 @@ public interface IpConnectivityLogClass {
                 size += CodedOutputByteBufferNano.computeStringSize(2, (String) this.value_);
             }
             if (this.valueCase_ == 3) {
-                size += CodedOutputByteBufferNano.computeInt32Size(3, ((Integer) this.value_).intValue());
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                3, ((Integer) this.value_).intValue());
             }
             if (this.durationMs != 0) {
                 return size + CodedOutputByteBufferNano.computeInt32Size(4, this.durationMs);
@@ -1730,7 +1767,8 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static ApfProgramEvent parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static ApfProgramEvent parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (ApfProgramEvent) MessageNano.mergeFrom(new ApfProgramEvent(), data);
         }
 
@@ -1868,7 +1906,9 @@ public interface IpConnectivityLogClass {
                 size += CodedOutputByteBufferNano.computeInt32Size(10, this.programUpdatesAll);
             }
             if (this.programUpdatesAllowingMulticast != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(11, this.programUpdatesAllowingMulticast);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                11, this.programUpdatesAllowingMulticast);
             }
             if (this.totalPacketProcessed != 0) {
                 size += CodedOutputByteBufferNano.computeInt32Size(12, this.totalPacketProcessed);
@@ -1957,7 +1997,8 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static ApfStatistics parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static ApfStatistics parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (ApfStatistics) MessageNano.mergeFrom(new ApfStatistics(), data);
         }
 
@@ -2174,11 +2215,13 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static IpProvisioningEvent parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static IpProvisioningEvent parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (IpProvisioningEvent) MessageNano.mergeFrom(new IpProvisioningEvent(), data);
         }
 
-        public static IpProvisioningEvent parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static IpProvisioningEvent parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new IpProvisioningEvent().mergeFrom(input);
         }
     }
@@ -2376,7 +2419,8 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static NetworkStats parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static NetworkStats parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (NetworkStats) MessageNano.mergeFrom(new NetworkStats(), data);
         }
 
@@ -2582,7 +2626,10 @@ public interface IpConnectivityLogClass {
                         break;
                     case 74:
                         int arrayLength2 = WireFormatNano.getRepeatedFieldArrayLength(input, 74);
-                        int i2 = this.ipNextHeaderCounts == null ? 0 : this.ipNextHeaderCounts.length;
+                        int i2 =
+                                this.ipNextHeaderCounts == null
+                                        ? 0
+                                        : this.ipNextHeaderCounts.length;
                         Pair[] newArray2 = new Pair[i2 + arrayLength2];
                         if (i2 != 0) {
                             System.arraycopy(this.ipNextHeaderCounts, 0, newArray2, 0, i2);
@@ -3084,7 +3131,9 @@ public interface IpConnectivityLogClass {
                 size += CodedOutputByteBufferNano.computeMessageSize(19, (MessageNano) this.event_);
             }
             if (this.eventCase_ == 20) {
-                return size + CodedOutputByteBufferNano.computeMessageSize(20, (MessageNano) this.event_);
+                return size
+                        + CodedOutputByteBufferNano.computeMessageSize(
+                                20, (MessageNano) this.event_);
             }
             return size;
         }
@@ -3231,11 +3280,13 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static IpConnectivityEvent parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static IpConnectivityEvent parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (IpConnectivityEvent) MessageNano.mergeFrom(new IpConnectivityEvent(), data);
         }
 
-        public static IpConnectivityEvent parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static IpConnectivityEvent parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new IpConnectivityEvent().mergeFrom(input);
         }
     }
@@ -3349,11 +3400,13 @@ public interface IpConnectivityLogClass {
             }
         }
 
-        public static IpConnectivityLog parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static IpConnectivityLog parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (IpConnectivityLog) MessageNano.mergeFrom(new IpConnectivityLog(), data);
         }
 
-        public static IpConnectivityLog parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static IpConnectivityLog parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new IpConnectivityLog().mergeFrom(input);
         }
     }

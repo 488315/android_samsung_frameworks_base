@@ -2,7 +2,6 @@ package android.media;
 
 import android.app.PendingIntent;
 import android.graphics.Bitmap;
-import android.media.MediaMetadata;
 import android.media.session.MediaSession;
 import android.media.session.MediaSessionLegacyHelper;
 import android.media.session.PlaybackState;
@@ -80,19 +79,22 @@ public class RemoteControlClient {
     private int mCurrentClientGenId = -1;
     private boolean mNeedsPositionSync = false;
     private PlaybackState mSessionPlaybackState = null;
-    private MediaSession.Callback mTransportListener = new MediaSession.Callback() { // from class: android.media.RemoteControlClient.1
-        @Override // android.media.session.MediaSession.Callback
-        public void onSeekTo(long pos) {
-            RemoteControlClient.this.onSeekTo(RemoteControlClient.this.mCurrentClientGenId, pos);
-        }
+    private MediaSession.Callback mTransportListener =
+            new MediaSession.Callback() { // from class: android.media.RemoteControlClient.1
+                @Override // android.media.session.MediaSession.Callback
+                public void onSeekTo(long pos) {
+                    RemoteControlClient.this.onSeekTo(
+                            RemoteControlClient.this.mCurrentClientGenId, pos);
+                }
 
-        @Override // android.media.session.MediaSession.Callback
-        public void onSetRating(Rating rating) {
-            if ((RemoteControlClient.this.mTransportControlFlags & 512) != 0) {
-                RemoteControlClient.this.onUpdateMetadata(RemoteControlClient.this.mCurrentClientGenId, 268435457, rating);
-            }
-        }
-    };
+                @Override // android.media.session.MediaSession.Callback
+                public void onSetRating(Rating rating) {
+                    if ((RemoteControlClient.this.mTransportControlFlags & 512) != 0) {
+                        RemoteControlClient.this.onUpdateMetadata(
+                                RemoteControlClient.this.mCurrentClientGenId, 268435457, rating);
+                    }
+                }
+            };
 
     public interface OnGetPlaybackPositionListener {
         long onGetPlaybackPosition();
@@ -134,48 +136,57 @@ public class RemoteControlClient {
         public static final int BITMAP_KEY_ARTWORK = 100;
         public static final int METADATA_KEY_ARTWORK = 100;
 
-        private MetadataEditor() {
-        }
+        private MetadataEditor() {}
 
         public Object clone() throws CloneNotSupportedException {
             throw new CloneNotSupportedException();
         }
 
         @Override // android.media.MediaMetadataEditor
-        public synchronized MetadataEditor putString(int key, String value) throws IllegalArgumentException {
+        public synchronized MetadataEditor putString(int key, String value)
+                throws IllegalArgumentException {
             String metadataKey;
             super.putString(key, value);
-            if (this.mMetadataBuilder != null && (metadataKey = MediaMetadata.getKeyFromMetadataEditorKey(key)) != null) {
+            if (this.mMetadataBuilder != null
+                    && (metadataKey = MediaMetadata.getKeyFromMetadataEditorKey(key)) != null) {
                 this.mMetadataBuilder.putText(metadataKey, value);
             }
             return this;
         }
 
         @Override // android.media.MediaMetadataEditor
-        public synchronized MetadataEditor putLong(int key, long value) throws IllegalArgumentException {
+        public synchronized MetadataEditor putLong(int key, long value)
+                throws IllegalArgumentException {
             String metadataKey;
             super.putLong(key, value);
-            if (this.mMetadataBuilder != null && (metadataKey = MediaMetadata.getKeyFromMetadataEditorKey(key)) != null) {
+            if (this.mMetadataBuilder != null
+                    && (metadataKey = MediaMetadata.getKeyFromMetadataEditorKey(key)) != null) {
                 this.mMetadataBuilder.putLong(metadataKey, value);
             }
             return this;
         }
 
         @Override // android.media.MediaMetadataEditor
-        public synchronized MetadataEditor putBitmap(int key, Bitmap bitmap) throws IllegalArgumentException {
+        public synchronized MetadataEditor putBitmap(int key, Bitmap bitmap)
+                throws IllegalArgumentException {
             String metadataKey;
             super.putBitmap(key, bitmap);
-            if (this.mMetadataBuilder != null && (metadataKey = MediaMetadata.getKeyFromMetadataEditorKey(key)) != null) {
+            if (this.mMetadataBuilder != null
+                    && (metadataKey = MediaMetadata.getKeyFromMetadataEditorKey(key)) != null) {
                 this.mMetadataBuilder.putBitmap(metadataKey, bitmap);
             }
             return this;
         }
 
         @Override // android.media.MediaMetadataEditor
-        public synchronized MetadataEditor putObject(int key, Object object) throws IllegalArgumentException {
+        public synchronized MetadataEditor putObject(int key, Object object)
+                throws IllegalArgumentException {
             String metadataKey;
             super.putObject(key, object);
-            if (this.mMetadataBuilder != null && ((key == 268435457 || key == 101) && (metadataKey = MediaMetadata.getKeyFromMetadataEditorKey(key)) != null)) {
+            if (this.mMetadataBuilder != null
+                    && ((key == 268435457 || key == 101)
+                            && (metadataKey = MediaMetadata.getKeyFromMetadataEditorKey(key))
+                                    != null)) {
                 this.mMetadataBuilder.putRating(metadataKey, (Rating) object);
             }
             return this;
@@ -187,12 +198,12 @@ public class RemoteControlClient {
         }
 
         /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-            jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:33:0x008b
-            	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
-            	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
-            	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
-            	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
-            */
+        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:33:0x008b
+        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
+        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
+        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
+        */
         @Override // android.media.MediaMetadataEditor
         public synchronized void apply() {
             /*
@@ -270,7 +281,9 @@ public class RemoteControlClient {
                 monitor-exit(r5)
                 throw r0
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.media.RemoteControlClient.MetadataEditor.apply():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                            + " android.media.RemoteControlClient.MetadataEditor.apply():void");
         }
     }
 
@@ -304,9 +317,12 @@ public class RemoteControlClient {
         setPlaybackStateInt(state, timeInMs, playbackSpeed, true);
     }
 
-    private void setPlaybackStateInt(int state, long timeInMs, float playbackSpeed, boolean hasPosition) {
+    private void setPlaybackStateInt(
+            int state, long timeInMs, float playbackSpeed, boolean hasPosition) {
         synchronized (this.mCacheLock) {
-            if (this.mPlaybackState != state || this.mPlaybackPositionMs != timeInMs || this.mPlaybackSpeed != playbackSpeed) {
+            if (this.mPlaybackState != state
+                    || this.mPlaybackPositionMs != timeInMs
+                    || this.mPlaybackSpeed != playbackSpeed) {
                 this.mPlaybackState = state;
                 long position = -1;
                 if (!hasPosition) {
@@ -323,7 +339,8 @@ public class RemoteControlClient {
                     if (hasPosition) {
                         position = this.mPlaybackPositionMs;
                     }
-                    PlaybackState.Builder bob = new PlaybackState.Builder(this.mSessionPlaybackState);
+                    PlaybackState.Builder bob =
+                            new PlaybackState.Builder(this.mSessionPlaybackState);
                     bob.setState(pbState, position, playbackSpeed, SystemClock.elapsedRealtime());
                     bob.setErrorMessage(null);
                     this.mSessionPlaybackState = bob.build();

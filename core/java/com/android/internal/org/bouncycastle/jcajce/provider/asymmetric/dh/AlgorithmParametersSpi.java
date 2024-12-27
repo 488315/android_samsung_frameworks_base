@@ -2,9 +2,11 @@ package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.dh;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1Encoding;
 import com.android.internal.org.bouncycastle.asn1.pkcs.DHParameter;
+
 import java.io.IOException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
+
 import javax.crypto.spec.DHParameterSpec;
 
 /* loaded from: classes5.dex */
@@ -16,7 +18,8 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
     }
 
     @Override // java.security.AlgorithmParametersSpi
-    protected AlgorithmParameterSpec engineGetParameterSpec(Class paramSpec) throws InvalidParameterSpecException {
+    protected AlgorithmParameterSpec engineGetParameterSpec(Class paramSpec)
+            throws InvalidParameterSpecException {
         if (paramSpec == null) {
             throw new NullPointerException("argument to getParameterSpec must not be null");
         }
@@ -25,7 +28,9 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
 
     @Override // java.security.AlgorithmParametersSpi
     protected byte[] engineGetEncoded() {
-        DHParameter dhP = new DHParameter(this.currentSpec.getP(), this.currentSpec.getG(), this.currentSpec.getL());
+        DHParameter dhP =
+                new DHParameter(
+                        this.currentSpec.getP(), this.currentSpec.getG(), this.currentSpec.getL());
         try {
             return dhP.getEncoded(ASN1Encoding.DER);
         } catch (IOException e) {
@@ -41,17 +46,22 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
         return null;
     }
 
-    protected AlgorithmParameterSpec localEngineGetParameterSpec(Class paramSpec) throws InvalidParameterSpecException {
+    protected AlgorithmParameterSpec localEngineGetParameterSpec(Class paramSpec)
+            throws InvalidParameterSpecException {
         if (paramSpec == DHParameterSpec.class || paramSpec == AlgorithmParameterSpec.class) {
             return this.currentSpec;
         }
-        throw new InvalidParameterSpecException("unknown parameter spec passed to DH parameters object.");
+        throw new InvalidParameterSpecException(
+                "unknown parameter spec passed to DH parameters object.");
     }
 
     @Override // java.security.AlgorithmParametersSpi
-    protected void engineInit(AlgorithmParameterSpec paramSpec) throws InvalidParameterSpecException {
+    protected void engineInit(AlgorithmParameterSpec paramSpec)
+            throws InvalidParameterSpecException {
         if (!(paramSpec instanceof DHParameterSpec)) {
-            throw new InvalidParameterSpecException("DHParameterSpec required to initialise a Diffie-Hellman algorithm parameters object");
+            throw new InvalidParameterSpecException(
+                    "DHParameterSpec required to initialise a Diffie-Hellman algorithm parameters"
+                        + " object");
         }
         this.currentSpec = (DHParameterSpec) paramSpec;
     }
@@ -61,7 +71,8 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
         try {
             DHParameter dhP = DHParameter.getInstance(params);
             if (dhP.getL() != null) {
-                this.currentSpec = new DHParameterSpec(dhP.getP(), dhP.getG(), dhP.getL().intValue());
+                this.currentSpec =
+                        new DHParameterSpec(dhP.getP(), dhP.getG(), dhP.getL().intValue());
             } else {
                 this.currentSpec = new DHParameterSpec(dhP.getP(), dhP.getG());
             }

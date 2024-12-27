@@ -7,9 +7,12 @@ import android.os.Trace;
 import android.os.UserHandle;
 import android.util.IndentingPrintWriter;
 import android.util.TimeUtils;
+
 import com.android.internal.os.SomeArgs;
 import com.android.internal.util.Preconditions;
+
 import dalvik.annotation.optimization.NeverCompile;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -96,14 +99,23 @@ public final class BroadcastProcessQueue {
             SomeArgs someArgs = (SomeArgs) descendingIterator.next();
             BroadcastRecord broadcastRecord = (BroadcastRecord) someArgs.arg1;
             int i = someArgs.argi1;
-            if (!BroadcastRecord.isDeliveryStateTerminal(broadcastRecord.delivery[i]) && !broadcastRecord.deferUntilActive && !((Boolean) broadcastRecord.mMARsTargetReceiver.get(i)).booleanValue()) {
-                Preconditions.checkState(SystemClock.uptimeMillis() - broadcastRecord.enqueueTime < 600000, "waitingTime");
+            if (!BroadcastRecord.isDeliveryStateTerminal(broadcastRecord.delivery[i])
+                    && !broadcastRecord.deferUntilActive
+                    && !((Boolean) broadcastRecord.mMARsTargetReceiver.get(i)).booleanValue()) {
+                Preconditions.checkState(
+                        SystemClock.uptimeMillis() - broadcastRecord.enqueueTime < 600000,
+                        "waitingTime");
             }
         }
     }
 
     @NeverCompile
-    public static void dumpRecord(String str, long j, IndentingPrintWriter indentingPrintWriter, BroadcastRecord broadcastRecord, int i) {
+    public static void dumpRecord(
+            String str,
+            long j,
+            IndentingPrintWriter indentingPrintWriter,
+            BroadcastRecord broadcastRecord,
+            int i) {
         TimeUtils.formatDuration(broadcastRecord.enqueueTime, j, indentingPrintWriter);
         indentingPrintWriter.print(' ');
         indentingPrintWriter.println(broadcastRecord.toShortString());
@@ -121,7 +133,8 @@ public final class BroadcastProcessQueue {
         Object obj = broadcastRecord.receivers.get(i);
         if (obj instanceof BroadcastFilter) {
             indentingPrintWriter.print(" for registered ");
-            indentingPrintWriter.print(Integer.toHexString(System.identityHashCode((BroadcastFilter) obj)));
+            indentingPrintWriter.print(
+                    Integer.toHexString(System.identityHashCode((BroadcastFilter) obj)));
         } else {
             indentingPrintWriter.print(" for manifest ");
             indentingPrintWriter.print(((ResolveInfo) obj).activityInfo.name);
@@ -138,7 +151,9 @@ public final class BroadcastProcessQueue {
         }
     }
 
-    public static BroadcastProcessQueue insertIntoRunnableList(BroadcastProcessQueue broadcastProcessQueue, BroadcastProcessQueue broadcastProcessQueue2) {
+    public static BroadcastProcessQueue insertIntoRunnableList(
+            BroadcastProcessQueue broadcastProcessQueue,
+            BroadcastProcessQueue broadcastProcessQueue2) {
         if (broadcastProcessQueue == null) {
             return broadcastProcessQueue2;
         }
@@ -150,11 +165,14 @@ public final class BroadcastProcessQueue {
                 broadcastProcessQueue2.runnableAtNext = broadcastProcessQueue4;
                 broadcastProcessQueue2.runnableAtPrev = broadcastProcessQueue4.runnableAtPrev;
                 broadcastProcessQueue4.runnableAtPrev = broadcastProcessQueue2;
-                BroadcastProcessQueue broadcastProcessQueue5 = broadcastProcessQueue2.runnableAtPrev;
+                BroadcastProcessQueue broadcastProcessQueue5 =
+                        broadcastProcessQueue2.runnableAtPrev;
                 if (broadcastProcessQueue5 != null) {
                     broadcastProcessQueue5.runnableAtNext = broadcastProcessQueue2;
                 }
-                return broadcastProcessQueue4 == broadcastProcessQueue ? broadcastProcessQueue2 : broadcastProcessQueue;
+                return broadcastProcessQueue4 == broadcastProcessQueue
+                        ? broadcastProcessQueue2
+                        : broadcastProcessQueue;
             }
             broadcastProcessQueue3 = broadcastProcessQueue4;
             broadcastProcessQueue4 = broadcastProcessQueue4.runnableAtNext;
@@ -229,7 +247,9 @@ public final class BroadcastProcessQueue {
         }
     }
 
-    public static BroadcastProcessQueue removeFromRunnableList(BroadcastProcessQueue broadcastProcessQueue, BroadcastProcessQueue broadcastProcessQueue2) {
+    public static BroadcastProcessQueue removeFromRunnableList(
+            BroadcastProcessQueue broadcastProcessQueue,
+            BroadcastProcessQueue broadcastProcessQueue2) {
         if (broadcastProcessQueue == broadcastProcessQueue2) {
             broadcastProcessQueue = broadcastProcessQueue2.runnableAtNext;
         }
@@ -270,11 +290,21 @@ public final class BroadcastProcessQueue {
         return sb.toString();
     }
 
-    public final boolean forEachMatchingBroadcast(BroadcastPredicate broadcastPredicate, BroadcastConsumer broadcastConsumer, boolean z) {
-        return forEachMatchingBroadcastInQueue(this.mPendingOffload, broadcastPredicate, broadcastConsumer, z) | forEachMatchingBroadcastInQueue(this.mPending, broadcastPredicate, broadcastConsumer, z) | forEachMatchingBroadcastInQueue(this.mPendingUrgent, broadcastPredicate, broadcastConsumer, z);
+    public final boolean forEachMatchingBroadcast(
+            BroadcastPredicate broadcastPredicate, BroadcastConsumer broadcastConsumer, boolean z) {
+        return forEachMatchingBroadcastInQueue(
+                        this.mPendingOffload, broadcastPredicate, broadcastConsumer, z)
+                | forEachMatchingBroadcastInQueue(
+                        this.mPending, broadcastPredicate, broadcastConsumer, z)
+                | forEachMatchingBroadcastInQueue(
+                        this.mPendingUrgent, broadcastPredicate, broadcastConsumer, z);
     }
 
-    public final boolean forEachMatchingBroadcastInQueue(ArrayDeque arrayDeque, BroadcastPredicate broadcastPredicate, BroadcastConsumer broadcastConsumer, boolean z) {
+    public final boolean forEachMatchingBroadcastInQueue(
+            ArrayDeque arrayDeque,
+            BroadcastPredicate broadcastPredicate,
+            BroadcastConsumer broadcastConsumer,
+            boolean z) {
         Iterator it = arrayDeque.iterator();
         boolean z2 = false;
         while (it.hasNext()) {
@@ -308,7 +338,11 @@ public final class BroadcastProcessQueue {
     }
 
     public final ArrayDeque getQueueForBroadcast(BroadcastRecord broadcastRecord) {
-        return broadcastRecord.urgent ? this.mPendingUrgent : (broadcastRecord.intent.getFlags() & Integer.MIN_VALUE) != 0 ? this.mPendingOffload : this.mPending;
+        return broadcastRecord.urgent
+                ? this.mPendingUrgent
+                : (broadcastRecord.intent.getFlags() & Integer.MIN_VALUE) != 0
+                        ? this.mPendingOffload
+                        : this.mPending;
     }
 
     public final long getRunnableAt() {
@@ -330,12 +364,18 @@ public final class BroadcastProcessQueue {
     }
 
     public final boolean isEmpty() {
-        return this.mPending.isEmpty() && this.mPendingUrgent.isEmpty() && this.mPendingOffload.isEmpty();
+        return this.mPending.isEmpty()
+                && this.mPendingUrgent.isEmpty()
+                && this.mPendingOffload.isEmpty();
     }
 
     public final boolean isProcessWarm() {
         ProcessRecord processRecord = this.app;
-        return (processRecord == null || processRecord.mOnewayThread == null || processRecord.mKilled) ? false : true;
+        return (processRecord == null
+                        || processRecord.mOnewayThread == null
+                        || processRecord.mKilled)
+                ? false
+                : true;
     }
 
     public final boolean isRunnable() {
@@ -356,14 +396,23 @@ public final class BroadcastProcessQueue {
             this.mActiveCountConsecutiveUrgent = 0;
             this.mActiveCountConsecutiveNormal = 0;
         }
-        SomeArgs someArgs = !isQueueEmpty(queueForNextBroadcast) ? (SomeArgs) queueForNextBroadcast.removeFirst() : null;
+        SomeArgs someArgs =
+                !isQueueEmpty(queueForNextBroadcast)
+                        ? (SomeArgs) queueForNextBroadcast.removeFirst()
+                        : null;
         BroadcastRecord broadcastRecord = (BroadcastRecord) someArgs.arg1;
         this.mActive = broadcastRecord;
         int i = someArgs.argi1;
         this.mActiveIndex = i;
         this.mActiveReEnqueued = someArgs.argi2 == 1;
         this.mActiveCountSinceIdle++;
-        this.mActiveAssumedDeliveryCountSinceIdle = (((broadcastRecord.receivers.get(i) instanceof BroadcastFilter) && !broadcastRecord.ordered && broadcastRecord.resultTo == null) ? 1 : 0) + this.mActiveAssumedDeliveryCountSinceIdle;
+        this.mActiveAssumedDeliveryCountSinceIdle =
+                (((broadcastRecord.receivers.get(i) instanceof BroadcastFilter)
+                                        && !broadcastRecord.ordered
+                                        && broadcastRecord.resultTo == null)
+                                ? 1
+                                : 0)
+                        + this.mActiveAssumedDeliveryCountSinceIdle;
         this.mActiveViaColdStart = false;
         this.mActiveWasStopped = false;
         someArgs.recycle();
@@ -371,7 +420,8 @@ public final class BroadcastProcessQueue {
     }
 
     public final void onBroadcastDequeued(BroadcastRecord broadcastRecord, int i) {
-        boolean booleanValue = ((Boolean) broadcastRecord.mMARsTargetReceiver.get(i)).booleanValue();
+        boolean booleanValue =
+                ((Boolean) broadcastRecord.mMARsTargetReceiver.get(i)).booleanValue();
         this.mCountEnqueued--;
         if (broadcastRecord.deferUntilActive || booleanValue) {
             this.mCountDeferred--;
@@ -410,7 +460,8 @@ public final class BroadcastProcessQueue {
     }
 
     public final void onBroadcastEnqueued(BroadcastRecord broadcastRecord, int i) {
-        boolean booleanValue = ((Boolean) broadcastRecord.mMARsTargetReceiver.get(i)).booleanValue();
+        boolean booleanValue =
+                ((Boolean) broadcastRecord.mMARsTargetReceiver.get(i)).booleanValue();
         this.mCountEnqueued++;
         if (broadcastRecord.deferUntilActive || booleanValue) {
             this.mCountDeferred++;
@@ -461,10 +512,19 @@ public final class BroadcastProcessQueue {
         ArrayDeque arrayDeque2 = this.mPendingOffload;
         int i = this.mActiveCountConsecutiveNormal;
         BroadcastConstants broadcastConstants = this.constants;
-        return queueForNextBroadcast(this.mPendingUrgent, queueForNextBroadcast(arrayDeque, arrayDeque2, i, broadcastConstants.MAX_CONSECUTIVE_NORMAL_DISPATCHES), this.mActiveCountConsecutiveUrgent, broadcastConstants.MAX_CONSECUTIVE_URGENT_DISPATCHES);
+        return queueForNextBroadcast(
+                this.mPendingUrgent,
+                queueForNextBroadcast(
+                        arrayDeque,
+                        arrayDeque2,
+                        i,
+                        broadcastConstants.MAX_CONSECUTIVE_NORMAL_DISPATCHES),
+                this.mActiveCountConsecutiveUrgent,
+                broadcastConstants.MAX_CONSECUTIVE_URGENT_DISPATCHES);
     }
 
-    public final ArrayDeque queueForNextBroadcast(ArrayDeque arrayDeque, ArrayDeque arrayDeque2, int i, int i2) {
+    public final ArrayDeque queueForNextBroadcast(
+            ArrayDeque arrayDeque, ArrayDeque arrayDeque2, int i, int i2) {
         if (isQueueEmpty(arrayDeque)) {
             return arrayDeque2;
         }
@@ -473,7 +533,14 @@ public final class BroadcastProcessQueue {
         }
         SomeArgs someArgs = (SomeArgs) arrayDeque2.peekFirst();
         BroadcastRecord broadcastRecord = (BroadcastRecord) someArgs.arg1;
-        return ((this.mCountPrioritizeEarliestRequests > 0 || i >= i2) && broadcastRecord.enqueueTime <= ((BroadcastRecord) ((SomeArgs) arrayDeque.peekFirst()).arg1).enqueueTime && broadcastRecord.beyondCount >= broadcastRecord.blockedUntilBeyondCount[someArgs.argi1]) ? arrayDeque2 : arrayDeque;
+        return ((this.mCountPrioritizeEarliestRequests > 0 || i >= i2)
+                        && broadcastRecord.enqueueTime
+                                <= ((BroadcastRecord) ((SomeArgs) arrayDeque.peekFirst()).arg1)
+                                        .enqueueTime
+                        && broadcastRecord.beyondCount
+                                >= broadcastRecord.blockedUntilBeyondCount[someArgs.argi1])
+                ? arrayDeque2
+                : arrayDeque;
     }
 
     public final boolean setProcessAndUidState(ProcessRecord processRecord, boolean z, boolean z2) {
@@ -585,14 +652,18 @@ public final class BroadcastProcessQueue {
     }
 
     public final void traceProcessRunningBegin() {
-        Trace.asyncTraceForTrackBegin(64L, this.runningTraceTrackName, toShortString() + " running", hashCode());
+        Trace.asyncTraceForTrackBegin(
+                64L, this.runningTraceTrackName, toShortString() + " running", hashCode());
     }
 
     public final void updateRunnableAt() {
         if (this.mRunnableAtInvalidated) {
             this.mRunnableAtInvalidated = false;
             ArrayDeque queueForNextBroadcast = queueForNextBroadcast();
-            SomeArgs someArgs = !isQueueEmpty(queueForNextBroadcast) ? (SomeArgs) queueForNextBroadcast.peekFirst() : null;
+            SomeArgs someArgs =
+                    !isQueueEmpty(queueForNextBroadcast)
+                            ? (SomeArgs) queueForNextBroadcast.peekFirst()
+                            : null;
             if (someArgs == null) {
                 this.mRunnableAt = Long.MAX_VALUE;
                 this.mRunnableAtReason = 0;
@@ -652,7 +723,9 @@ public final class BroadcastProcessQueue {
                         this.mRunnableAt = j;
                         this.mRunnableAtReason = 17;
                     } else if (this.mProcessFreezable) {
-                        if (!broadcastRecord.deferUntilActive && !((Boolean) broadcastRecord.mMARsTargetReceiver.get(i)).booleanValue()) {
+                        if (!broadcastRecord.deferUntilActive
+                                && !((Boolean) broadcastRecord.mMARsTargetReceiver.get(i))
+                                        .booleanValue()) {
                             this.mRunnableAt = broadcastConstants.DELAY_CACHED_MILLIS + j;
                             this.mRunnableAtReason = 1;
                         } else if (this.mCountDeferred == this.mCountEnqueued) {
@@ -689,7 +762,8 @@ public final class BroadcastProcessQueue {
                     }
                 }
             }
-            if (this.mPendingOffload.size() + this.mPendingUrgent.size() + this.mPending.size() >= broadcastConstants.MAX_PENDING_BROADCASTS) {
+            if (this.mPendingOffload.size() + this.mPendingUrgent.size() + this.mPending.size()
+                    >= broadcastConstants.MAX_PENDING_BROADCASTS) {
                 this.mRunnableAt = Math.min(this.mRunnableAt, j);
                 this.mRunnableAtReason = 3;
             }

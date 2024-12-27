@@ -4,6 +4,7 @@ import android.os.Binder;
 import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.window.IScreenRecordingCallback;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,11 +21,11 @@ public final class ScreenRecordingCallbacks {
     private int mState = 0;
     private int mKnoxState = 0;
 
-    private ScreenRecordingCallbacks() {
-    }
+    private ScreenRecordingCallbacks() {}
 
     private static IWindowManager getWindowManagerService() {
-        return (IWindowManager) Objects.requireNonNull(WindowManagerGlobal.getWindowManagerService());
+        return (IWindowManager)
+                Objects.requireNonNull(WindowManagerGlobal.getWindowManagerService());
     }
 
     static ScreenRecordingCallbacks getInstance() {
@@ -44,20 +45,25 @@ public final class ScreenRecordingCallbacks {
         synchronized (sLock) {
             int i3 = 1;
             if (this.mCallbackNotifier == null) {
-                this.mCallbackNotifier = new IScreenRecordingCallback.Stub() { // from class: android.view.ScreenRecordingCallbacks.1
-                    @Override // android.window.IScreenRecordingCallback
-                    public void onScreenRecordingStateChanged(boolean visibleInScreenRecording) {
-                        int state;
-                        if (visibleInScreenRecording) {
-                            state = 1;
-                        } else {
-                            state = 0;
-                        }
-                        ScreenRecordingCallbacks.this.notifyCallbacks(state);
-                    }
-                };
+                this.mCallbackNotifier =
+                        new IScreenRecordingCallback
+                                .Stub() { // from class: android.view.ScreenRecordingCallbacks.1
+                            @Override // android.window.IScreenRecordingCallback
+                            public void onScreenRecordingStateChanged(
+                                    boolean visibleInScreenRecording) {
+                                int state;
+                                if (visibleInScreenRecording) {
+                                    state = 1;
+                                } else {
+                                    state = 0;
+                                }
+                                ScreenRecordingCallbacks.this.notifyCallbacks(state);
+                            }
+                        };
                 try {
-                    boolean visibleInScreenRecording = getWindowManagerService().registerScreenRecordingCallback(this.mCallbackNotifier);
+                    boolean visibleInScreenRecording =
+                            getWindowManagerService()
+                                    .registerScreenRecordingCallback(this.mCallbackNotifier);
                     if (visibleInScreenRecording) {
                         i2 = 1;
                     } else {
@@ -69,20 +75,25 @@ public final class ScreenRecordingCallbacks {
                 }
             }
             if (this.mKnoxCallbackNotifier == null) {
-                this.mKnoxCallbackNotifier = new IScreenRecordingCallback.Stub() { // from class: android.view.ScreenRecordingCallbacks.2
-                    @Override // android.window.IScreenRecordingCallback
-                    public void onScreenRecordingStateChanged(boolean visibleInKnoxRemoteScreen) {
-                        int knoxState;
-                        if (visibleInKnoxRemoteScreen) {
-                            knoxState = 1;
-                        } else {
-                            knoxState = 0;
-                        }
-                        ScreenRecordingCallbacks.this.notifyCallbacks(knoxState, true);
-                    }
-                };
+                this.mKnoxCallbackNotifier =
+                        new IScreenRecordingCallback
+                                .Stub() { // from class: android.view.ScreenRecordingCallbacks.2
+                            @Override // android.window.IScreenRecordingCallback
+                            public void onScreenRecordingStateChanged(
+                                    boolean visibleInKnoxRemoteScreen) {
+                                int knoxState;
+                                if (visibleInKnoxRemoteScreen) {
+                                    knoxState = 1;
+                                } else {
+                                    knoxState = 0;
+                                }
+                                ScreenRecordingCallbacks.this.notifyCallbacks(knoxState, true);
+                            }
+                        };
                 try {
-                    boolean visibleInKnoxRemoteScreen = getWindowManagerService().registerKnoxRemoteScreenCallback(this.mKnoxCallbackNotifier);
+                    boolean visibleInKnoxRemoteScreen =
+                            getWindowManagerService()
+                                    .registerKnoxRemoteScreenCallback(this.mKnoxCallbackNotifier);
                     if (!visibleInKnoxRemoteScreen) {
                         i3 = 0;
                     }
@@ -102,13 +113,15 @@ public final class ScreenRecordingCallbacks {
             this.mCallbacks.remove(callback);
             if (this.mCallbacks.isEmpty()) {
                 try {
-                    getWindowManagerService().unregisterScreenRecordingCallback(this.mCallbackNotifier);
+                    getWindowManagerService()
+                            .unregisterScreenRecordingCallback(this.mCallbackNotifier);
                 } catch (RemoteException e) {
                     e.rethrowFromSystemServer();
                 }
                 this.mCallbackNotifier = null;
                 try {
-                    getWindowManagerService().unregisterKnoxRemoteScreenCallback(this.mKnoxCallbackNotifier);
+                    getWindowManagerService()
+                            .unregisterKnoxRemoteScreenCallback(this.mKnoxCallbackNotifier);
                 } catch (RemoteException e2) {
                     e2.rethrowFromSystemServer();
                 }
@@ -134,17 +147,21 @@ public final class ScreenRecordingCallbacks {
             for (int i = 0; i < this.mCallbacks.size(); i++) {
                 final Consumer<Integer> callback = this.mCallbacks.keyAt(i);
                 final Executor executor = this.mCallbacks.valueAt(i);
-                callbacks.add(new Runnable() { // from class: android.view.ScreenRecordingCallbacks$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        executor.execute(new Runnable() { // from class: android.view.ScreenRecordingCallbacks$$ExternalSyntheticLambda0
+                callbacks.add(
+                        new Runnable() { // from class:
+                                         // android.view.ScreenRecordingCallbacks$$ExternalSyntheticLambda1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                r1.accept(Integer.valueOf(r2));
+                                executor.execute(
+                                        new Runnable() { // from class:
+                                                         // android.view.ScreenRecordingCallbacks$$ExternalSyntheticLambda0
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                r1.accept(Integer.valueOf(r2));
+                                            }
+                                        });
                             }
                         });
-                    }
-                });
             }
             checkAndNotifyCallbacks(callbacks, notifyClient);
         }

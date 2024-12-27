@@ -2,10 +2,9 @@ package com.android.server.display;
 
 import android.util.FloatProperty;
 import android.view.Choreographer;
+
 import com.android.server.VcnManagementService$$ExternalSyntheticLambda10;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.display.DisplayPowerController;
-import com.android.server.display.DisplayPowerState;
 import com.android.server.power.Slog;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -32,28 +31,36 @@ public final class RampAnimator {
         public final RampAnimator mFirst;
         public DisplayPowerController.AnonymousClass4 mListener;
         public final RampAnimator mSecond;
-        public final AnonymousClass1 mAnimationCallback = new Runnable() { // from class: com.android.server.display.RampAnimator.DualRampAnimator.1
-            @Override // java.lang.Runnable
-            public final void run() {
-                long frameTimeNanos = DualRampAnimator.this.mChoreographer.getFrameTimeNanos();
-                DualRampAnimator.this.mFirst.performNextAnimationStep(frameTimeNanos);
-                DualRampAnimator.this.mSecond.performNextAnimationStep(frameTimeNanos);
-                if (DualRampAnimator.this.isAnimating()) {
-                    DualRampAnimator dualRampAnimator = DualRampAnimator.this;
-                    dualRampAnimator.mChoreographer.postCallback(1, dualRampAnimator.mAnimationCallback, null);
-                } else {
-                    DisplayPowerController.AnonymousClass4 anonymousClass4 = DualRampAnimator.this.mListener;
-                    if (anonymousClass4 != null) {
-                        anonymousClass4.onAnimationEnd();
+        public final AnonymousClass1 mAnimationCallback =
+                new Runnable() { // from class:
+                                 // com.android.server.display.RampAnimator.DualRampAnimator.1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        long frameTimeNanos =
+                                DualRampAnimator.this.mChoreographer.getFrameTimeNanos();
+                        DualRampAnimator.this.mFirst.performNextAnimationStep(frameTimeNanos);
+                        DualRampAnimator.this.mSecond.performNextAnimationStep(frameTimeNanos);
+                        if (DualRampAnimator.this.isAnimating()) {
+                            DualRampAnimator dualRampAnimator = DualRampAnimator.this;
+                            dualRampAnimator.mChoreographer.postCallback(
+                                    1, dualRampAnimator.mAnimationCallback, null);
+                        } else {
+                            DisplayPowerController.AnonymousClass4 anonymousClass4 =
+                                    DualRampAnimator.this.mListener;
+                            if (anonymousClass4 != null) {
+                                anonymousClass4.onAnimationEnd();
+                            }
+                            DualRampAnimator.this.mAwaitingCallback = false;
+                        }
                     }
-                    DualRampAnimator.this.mAwaitingCallback = false;
-                }
-            }
-        };
+                };
         public final Choreographer mChoreographer = Choreographer.getInstance();
 
         /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.display.RampAnimator$DualRampAnimator$1] */
-        public DualRampAnimator(Object obj, DisplayPowerState.AnonymousClass1 anonymousClass1, DisplayPowerState.AnonymousClass1 anonymousClass12) {
+        public DualRampAnimator(
+                Object obj,
+                DisplayPowerState.AnonymousClass1 anonymousClass1,
+                DisplayPowerState.AnonymousClass1 anonymousClass12) {
             this.mFirst = new RampAnimator(obj, anonymousClass1);
             this.mSecond = new RampAnimator(obj, anonymousClass12);
         }
@@ -68,7 +75,9 @@ public final class RampAnimator {
     }
 
     public RampAnimator(Object obj, FloatProperty floatProperty) {
-        VcnManagementService$$ExternalSyntheticLambda10 vcnManagementService$$ExternalSyntheticLambda10 = new VcnManagementService$$ExternalSyntheticLambda10();
+        VcnManagementService$$ExternalSyntheticLambda10
+                vcnManagementService$$ExternalSyntheticLambda10 =
+                        new VcnManagementService$$ExternalSyntheticLambda10();
         this.mFirstTime = true;
         this.mObject = obj;
         this.mProperty = floatProperty;
@@ -82,7 +91,9 @@ public final class RampAnimator {
         }
         this.mLastFrameTimeNanos = j;
         float f2 = this.mRate;
-        if (this.mTargetHlgValue < this.mCurrentValue && this.mAnimatedValue > 1.0f && !Float.isNaN(this.mRateAtHbm)) {
+        if (this.mTargetHlgValue < this.mCurrentValue
+                && this.mAnimatedValue > 1.0f
+                && !Float.isNaN(this.mRateAtHbm)) {
             f2 = this.mRateAtHbm;
         }
         float f3 = (f * f2) / 1.0f;
@@ -222,7 +233,10 @@ public final class RampAnimator {
         Lae:
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.RampAnimator.setAnimationTarget(float, float, float, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.RampAnimator.setAnimationTarget(float, float,"
+                    + " float, boolean):boolean");
     }
 
     public final void setAnimationTimeLimits(long j, long j2) {

@@ -26,12 +26,12 @@ public final class DynamicRangeProfiles {
     private final HashMap<Long, Boolean> mLookahedLatencyMap = new HashMap<>();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Profile {
-    }
+    public @interface Profile {}
 
     public DynamicRangeProfiles(long[] elements) {
         if (elements.length % 3 != 0) {
-            throw new IllegalArgumentException("Dynamic range profile map length " + elements.length + " is not even!");
+            throw new IllegalArgumentException(
+                    "Dynamic range profile map length " + elements.length + " is not even!");
         }
         int i = 0;
         while (true) {
@@ -39,7 +39,8 @@ public final class DynamicRangeProfiles {
             if (i < elements.length) {
                 checkProfileValue(elements[i]);
                 if (elements[i] == 1) {
-                    throw new IllegalArgumentException("Dynamic range profile map must not include a STANDARD profile entry!");
+                    throw new IllegalArgumentException(
+                            "Dynamic range profile map must not include a STANDARD profile entry!");
                 }
                 HashSet<Long> profiles = new HashSet<>();
                 if (elements[i + 1] != 0) {
@@ -61,7 +62,8 @@ public final class DynamicRangeProfiles {
                 HashSet<Long> standardConstraints = new HashSet<>();
                 standardConstraints.add(1L);
                 for (Long profile2 : this.mProfileMap.keySet()) {
-                    if (this.mProfileMap.get(profile2).isEmpty() || this.mProfileMap.get(profile2).contains(1L)) {
+                    if (this.mProfileMap.get(profile2).isEmpty()
+                            || this.mProfileMap.get(profile2).contains(1L)) {
                         standardConstraints.add(profile2);
                     }
                 }
@@ -73,7 +75,18 @@ public final class DynamicRangeProfiles {
     }
 
     public static void checkProfileValue(long profile) {
-        if (profile != 1 && profile != 2 && profile != 4 && profile != 8 && profile != 16 && profile != 32 && profile != 64 && profile != 128 && profile != 256 && profile != 512 && profile != 1024 && profile != 2048) {
+        if (profile != 1
+                && profile != 2
+                && profile != 4
+                && profile != 8
+                && profile != 16
+                && profile != 32
+                && profile != 64
+                && profile != 128
+                && profile != 256
+                && profile != 512
+                && profile != 1024
+                && profile != 2048) {
             throw new IllegalArgumentException("Unknown profile " + profile);
         }
     }

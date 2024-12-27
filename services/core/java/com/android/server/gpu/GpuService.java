@@ -18,8 +18,10 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.updatabledriver.UpdatableDriverProto;
 import android.util.Base64;
+
 import com.android.framework.protobuf.InvalidProtocolBufferException;
 import com.android.server.SystemService;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -43,14 +45,16 @@ public class GpuService extends SystemService {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceConfigListener implements DeviceConfig.OnPropertiesChangedListener {
         public DeviceConfigListener() {
-            DeviceConfig.addOnPropertiesChangedListener("game_driver", GpuService.this.mContext.getMainExecutor(), this);
+            DeviceConfig.addOnPropertiesChangedListener(
+                    "game_driver", GpuService.this.mContext.getMainExecutor(), this);
         }
 
         public final void onPropertiesChanged(DeviceConfig.Properties properties) {
             synchronized (GpuService.this.mDeviceConfigLock) {
                 try {
                     if (properties.getKeyset().contains("updatable_driver_production_denylists")) {
-                        GpuService.this.parseDenylists(properties.getString("updatable_driver_production_denylists", ""));
+                        GpuService.this.parseDenylists(
+                                properties.getString("updatable_driver_production_denylists", ""));
                         GpuService.this.setDenylist();
                     }
                 } catch (Throwable th) {
@@ -62,8 +66,7 @@ public class GpuService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageReceiver extends BroadcastReceiver {
-        public PackageReceiver() {
-        }
+        public PackageReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -109,9 +112,14 @@ public class GpuService extends SystemService {
             if (uri != null && this.mProdDriverDenylistsUri.equals(uri)) {
                 GpuService gpuService = GpuService.this;
                 gpuService.getClass();
-                String property = DeviceConfig.getProperty("game_driver", "updatable_driver_production_denylists");
+                String property =
+                        DeviceConfig.getProperty(
+                                "game_driver", "updatable_driver_production_denylists");
                 if (property == null) {
-                    property = Settings.Global.getString(gpuService.mContentResolver, "updatable_driver_production_denylists");
+                    property =
+                            Settings.Global.getString(
+                                    gpuService.mContentResolver,
+                                    "updatable_driver_production_denylists");
                 }
                 if (property == null) {
                     property = "";
@@ -143,7 +151,9 @@ public class GpuService extends SystemService {
             intentFilter.addAction("android.intent.action.PACKAGE_CHANGED");
             intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
             intentFilter.addDataScheme("package");
-            getContext().registerReceiverAsUser(new PackageReceiver(), UserHandle.ALL, intentFilter, null, null);
+            getContext()
+                    .registerReceiverAsUser(
+                            new PackageReceiver(), UserHandle.ALL, intentFilter, null, null);
         }
     }
 
@@ -151,14 +161,17 @@ public class GpuService extends SystemService {
 
     public final void fetchPrereleaseDriverPackageProperties() {
         try {
-            ApplicationInfo applicationInfo = this.mPackageManager.getApplicationInfo(this.mDevDriverPackageName, 1048576);
+            ApplicationInfo applicationInfo =
+                    this.mPackageManager.getApplicationInfo(this.mDevDriverPackageName, 1048576);
             if (applicationInfo.targetSdkVersion < 26) {
                 return;
             }
             if (applicationInfo.primaryCpuAbi == null) {
                 nSetUpdatableDriverPath("");
             } else {
-                nSetUpdatableDriverPath(AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), applicationInfo.sourceDir, "!/lib/"));
+                nSetUpdatableDriverPath(
+                        AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(), applicationInfo.sourceDir, "!/lib/"));
             }
         } catch (PackageManager.NameNotFoundException unused) {
         }
@@ -171,16 +184,23 @@ public class GpuService extends SystemService {
             if (applicationInfo.targetSdkVersion < 26) {
                 return;
             }
-            Settings.Global.putString(this.mContentResolver, "updatable_driver_production_allowlist", "");
+            Settings.Global.putString(
+                    this.mContentResolver, "updatable_driver_production_allowlist", "");
             this.mProdDriverVersionCode = applicationInfo.longVersionCode;
             Context createPackageContext = this.mContext.createPackageContext(str, 4);
             Context context = this.mContext;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(createPackageContext.getAssets().open("allowlist.txt")));
+            BufferedReader bufferedReader =
+                    new BufferedReader(
+                            new InputStreamReader(
+                                    createPackageContext.getAssets().open("allowlist.txt")));
             ArrayList arrayList = new ArrayList();
             while (true) {
                 String readLine = bufferedReader.readLine();
                 if (readLine == null) {
-                    Settings.Global.putString(context.getContentResolver(), "updatable_driver_production_allowlist", String.join(",", arrayList));
+                    Settings.Global.putString(
+                            context.getContentResolver(),
+                            "updatable_driver_production_allowlist",
+                            String.join(",", arrayList));
                     return;
                 }
                 arrayList.add(readLine);
@@ -197,9 +217,13 @@ public class GpuService extends SystemService {
                 new SettingsObserver();
                 new DeviceConfigListener();
                 fetchProductionDriverPackageProperties();
-                String property = DeviceConfig.getProperty("game_driver", "updatable_driver_production_denylists");
+                String property =
+                        DeviceConfig.getProperty(
+                                "game_driver", "updatable_driver_production_denylists");
                 if (property == null) {
-                    property = Settings.Global.getString(this.mContentResolver, "updatable_driver_production_denylists");
+                    property =
+                            Settings.Global.getString(
+                                    this.mContentResolver, "updatable_driver_production_denylists");
                 }
                 if (property == null) {
                     property = "";
@@ -212,8 +236,7 @@ public class GpuService extends SystemService {
     }
 
     @Override // com.android.server.SystemService
-    public final void onStart() {
-    }
+    public final void onStart() {}
 
     public final void parseDenylists(String str) {
         synchronized (this.mLock) {
@@ -226,7 +249,8 @@ public class GpuService extends SystemService {
     }
 
     public final void setDenylist() {
-        Settings.Global.putString(this.mContentResolver, "updatable_driver_production_denylist", "");
+        Settings.Global.putString(
+                this.mContentResolver, "updatable_driver_production_denylist", "");
         synchronized (this.mLock) {
             try {
                 UpdatableDriverProto.Denylists denylists = this.mDenylists;
@@ -235,7 +259,10 @@ public class GpuService extends SystemService {
                 }
                 for (UpdatableDriverProto.Denylist denylist : denylists.getDenylistsList()) {
                     if (denylist.getVersionCode() == this.mProdDriverVersionCode) {
-                        Settings.Global.putString(this.mContentResolver, "updatable_driver_production_denylist", String.join(",", denylist.getPackageNamesList()));
+                        Settings.Global.putString(
+                                this.mContentResolver,
+                                "updatable_driver_production_denylist",
+                                String.join(",", denylist.getPackageNamesList()));
                         return;
                     }
                 }

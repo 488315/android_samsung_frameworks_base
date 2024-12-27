@@ -16,6 +16,7 @@ import android.util.ArrayMap;
 import android.util.Slog;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
+
 import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.ScreenshotHelper;
@@ -23,6 +24,7 @@ import com.android.server.LocalServices;
 import com.android.server.statusbar.StatusBarManagerInternal;
 import com.android.server.statusbar.StatusBarManagerService;
 import com.android.server.wm.WindowManagerInternal;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -49,18 +51,22 @@ public final class SystemActionPerformer {
     public final WindowManagerInternal mWindowManagerService;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface DisplayUpdateCallBack {
-    }
+    public interface DisplayUpdateCallBack {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface SystemActionsChangedListener {
-    }
+    public interface SystemActionsChangedListener {}
 
-    public SystemActionPerformer(Context context, WindowManagerInternal windowManagerInternal, Supplier supplier) {
+    public SystemActionPerformer(
+            Context context, WindowManagerInternal windowManagerInternal, Supplier supplier) {
         this(context, windowManagerInternal, supplier, null, null);
     }
 
-    public SystemActionPerformer(Context context, WindowManagerInternal windowManagerInternal, Supplier supplier, SystemActionsChangedListener systemActionsChangedListener, DisplayUpdateCallBack displayUpdateCallBack) {
+    public SystemActionPerformer(
+            Context context,
+            WindowManagerInternal windowManagerInternal,
+            Supplier supplier,
+            SystemActionsChangedListener systemActionsChangedListener,
+            DisplayUpdateCallBack displayUpdateCallBack) {
         this.mSystemActionLock = new Object();
         this.mRegisteredSystemActions = new ArrayMap();
         this.mContext = context;
@@ -68,14 +74,36 @@ public final class SystemActionPerformer {
         this.mListener = systemActionsChangedListener;
         this.mDisplayUpdateCallBack = displayUpdateCallBack;
         this.mScreenshotHelperSupplier = supplier;
-        this.mLegacyHomeAction = new AccessibilityNodeInfo.AccessibilityAction(2, context.getResources().getString(R.string.autofill_save_type_password));
-        this.mLegacyBackAction = new AccessibilityNodeInfo.AccessibilityAction(1, context.getResources().getString(R.string.autofill_save_title));
-        this.mLegacyRecentsAction = new AccessibilityNodeInfo.AccessibilityAction(3, context.getResources().getString(R.string.autofill_update_title_with_type));
-        this.mLegacyNotificationsAction = new AccessibilityNodeInfo.AccessibilityAction(4, context.getResources().getString(R.string.autofill_save_type_username));
-        this.mLegacyQuickSettingsAction = new AccessibilityNodeInfo.AccessibilityAction(5, context.getResources().getString(R.string.autofill_update_title_with_3types));
-        this.mLegacyPowerDialogAction = new AccessibilityNodeInfo.AccessibilityAction(6, context.getResources().getString(R.string.autofill_update_title_with_2types));
-        this.mLegacyLockScreenAction = new AccessibilityNodeInfo.AccessibilityAction(8, context.getResources().getString(R.string.autofill_save_type_payment_card));
-        this.mLegacyTakeScreenshotAction = new AccessibilityNodeInfo.AccessibilityAction(9, context.getResources().getString(R.string.autofill_update_yes));
+        this.mLegacyHomeAction =
+                new AccessibilityNodeInfo.AccessibilityAction(
+                        2, context.getResources().getString(R.string.autofill_save_type_password));
+        this.mLegacyBackAction =
+                new AccessibilityNodeInfo.AccessibilityAction(
+                        1, context.getResources().getString(R.string.autofill_save_title));
+        this.mLegacyRecentsAction =
+                new AccessibilityNodeInfo.AccessibilityAction(
+                        3,
+                        context.getResources().getString(R.string.autofill_update_title_with_type));
+        this.mLegacyNotificationsAction =
+                new AccessibilityNodeInfo.AccessibilityAction(
+                        4, context.getResources().getString(R.string.autofill_save_type_username));
+        this.mLegacyQuickSettingsAction =
+                new AccessibilityNodeInfo.AccessibilityAction(
+                        5,
+                        context.getResources()
+                                .getString(R.string.autofill_update_title_with_3types));
+        this.mLegacyPowerDialogAction =
+                new AccessibilityNodeInfo.AccessibilityAction(
+                        6,
+                        context.getResources()
+                                .getString(R.string.autofill_update_title_with_2types));
+        this.mLegacyLockScreenAction =
+                new AccessibilityNodeInfo.AccessibilityAction(
+                        8,
+                        context.getResources().getString(R.string.autofill_save_type_payment_card));
+        this.mLegacyTakeScreenshotAction =
+                new AccessibilityNodeInfo.AccessibilityAction(
+                        9, context.getResources().getString(R.string.autofill_update_yes));
     }
 
     public final void addLegacySystemActions(List list) {
@@ -111,7 +139,10 @@ public final class SystemActionPerformer {
         synchronized (this.mSystemActionLock) {
             try {
                 for (Map.Entry entry : ((ArrayMap) this.mRegisteredSystemActions).entrySet()) {
-                    arrayList.add(new AccessibilityNodeInfo.AccessibilityAction(((Integer) entry.getKey()).intValue(), ((RemoteAction) entry.getValue()).getTitle()));
+                    arrayList.add(
+                            new AccessibilityNodeInfo.AccessibilityAction(
+                                    ((Integer) entry.getKey()).intValue(),
+                                    ((RemoteAction) entry.getValue()).getTitle()));
                 }
                 addLegacySystemActions(arrayList);
             } catch (Throwable th) {
@@ -130,11 +161,16 @@ public final class SystemActionPerformer {
         } finally {
         }
         synchronized (this.mSystemActionLock) {
-            AccessibilityWindowManager accessibilityWindowManager = ((AccessibilityManagerService) this.mDisplayUpdateCallBack).mA11yWindowManager;
-            if (accessibilityWindowManager.mHasProxy && (i2 = accessibilityWindowManager.mLastNonProxyTopFocusedDisplayId) != accessibilityWindowManager.mTopFocusedDisplayId) {
+            AccessibilityWindowManager accessibilityWindowManager =
+                    ((AccessibilityManagerService) this.mDisplayUpdateCallBack).mA11yWindowManager;
+            if (accessibilityWindowManager.mHasProxy
+                    && (i2 = accessibilityWindowManager.mLastNonProxyTopFocusedDisplayId)
+                            != accessibilityWindowManager.mTopFocusedDisplayId) {
                 accessibilityWindowManager.mWindowManagerInternal.moveDisplayToTopIfAllowed(i2);
             }
-            RemoteAction remoteAction = (RemoteAction) ((ArrayMap) this.mRegisteredSystemActions).get(Integer.valueOf(i));
+            RemoteAction remoteAction =
+                    (RemoteAction)
+                            ((ArrayMap) this.mRegisteredSystemActions).get(Integer.valueOf(i));
             boolean z = false;
             if (remoteAction != null) {
                 try {
@@ -142,41 +178,61 @@ public final class SystemActionPerformer {
                         remoteAction.getActionIntent().send();
                         return true;
                     }
-                    ActivityOptions pendingIntentBackgroundActivityStartMode = ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1);
-                    pendingIntentBackgroundActivityStartMode.setPendingIntentBackgroundActivityLaunchAllowedByPermission(true);
-                    remoteAction.getActionIntent().send(pendingIntentBackgroundActivityStartMode.toBundle());
+                    ActivityOptions pendingIntentBackgroundActivityStartMode =
+                            ActivityOptions.makeBasic()
+                                    .setPendingIntentBackgroundActivityStartMode(1);
+                    pendingIntentBackgroundActivityStartMode
+                            .setPendingIntentBackgroundActivityLaunchAllowedByPermission(true);
+                    remoteAction
+                            .getActionIntent()
+                            .send(pendingIntentBackgroundActivityStartMode.toBundle());
                     return true;
                 } catch (PendingIntent.CanceledException e) {
-                    Slog.e("SystemActionPerformer", "canceled PendingIntent for global action " + ((Object) remoteAction.getTitle()), e);
+                    Slog.e(
+                            "SystemActionPerformer",
+                            "canceled PendingIntent for global action "
+                                    + ((Object) remoteAction.getTitle()),
+                            e);
                     return false;
                 }
             }
             switch (i) {
                 case 1:
-                    sendDownAndUpKeyEvents(4, FrameworkStatsLog.HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP);
+                    sendDownAndUpKeyEvents(
+                            4,
+                            FrameworkStatsLog
+                                    .HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP);
                     return true;
                 case 2:
-                    sendDownAndUpKeyEvents(3, FrameworkStatsLog.HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP);
+                    sendDownAndUpKeyEvents(
+                            3,
+                            FrameworkStatsLog
+                                    .HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP);
                     return true;
                 case 3:
                     clearCallingIdentity = Binder.clearCallingIdentity();
-                    StatusBarManagerInternal statusBarManagerInternal = (StatusBarManagerInternal) LocalServices.getService(StatusBarManagerInternal.class);
+                    StatusBarManagerInternal statusBarManagerInternal =
+                            (StatusBarManagerInternal)
+                                    LocalServices.getService(StatusBarManagerInternal.class);
                     if (statusBarManagerInternal == null) {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     } else {
-                        ((StatusBarManagerService.AnonymousClass2) statusBarManagerInternal).toggleRecentApps();
+                        ((StatusBarManagerService.AnonymousClass2) statusBarManagerInternal)
+                                .toggleRecentApps();
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         z = true;
                     }
                     return z;
                 case 4:
                     clearCallingIdentity = Binder.clearCallingIdentity();
-                    ((StatusBarManager) this.mContext.getSystemService("statusbar")).expandNotificationsPanel();
+                    ((StatusBarManager) this.mContext.getSystemService("statusbar"))
+                            .expandNotificationsPanel();
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return true;
                 case 5:
                     clearCallingIdentity = Binder.clearCallingIdentity();
-                    ((StatusBarManager) this.mContext.getSystemService("statusbar")).expandSettingsPanel();
+                    ((StatusBarManager) this.mContext.getSystemService("statusbar"))
+                            .expandSettingsPanel();
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return true;
                 case 6:
@@ -192,16 +248,24 @@ public final class SystemActionPerformer {
                     Slog.e("SystemActionPerformer", "Invalid action id: " + i);
                     return false;
                 case 8:
-                    ((PowerManager) this.mContext.getSystemService(PowerManager.class)).goToSleep(SystemClock.uptimeMillis(), 7, 0);
+                    ((PowerManager) this.mContext.getSystemService(PowerManager.class))
+                            .goToSleep(SystemClock.uptimeMillis(), 7, 0);
                     this.mWindowManagerService.lockNow();
                     return true;
                 case 9:
                     Supplier supplier = this.mScreenshotHelperSupplier;
-                    (supplier != null ? (ScreenshotHelper) supplier.get() : new ScreenshotHelper(this.mContext)).takeScreenshot(4, new Handler(Looper.getMainLooper()), (Consumer) null);
+                    (supplier != null
+                                    ? (ScreenshotHelper) supplier.get()
+                                    : new ScreenshotHelper(this.mContext))
+                            .takeScreenshot(
+                                    4, new Handler(Looper.getMainLooper()), (Consumer) null);
                     return true;
                 case 10:
                     if (!AccessibilityUtils.interceptHeadsetHookForActiveCall(this.mContext)) {
-                        sendDownAndUpKeyEvents(79, FrameworkStatsLog.HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP);
+                        sendDownAndUpKeyEvents(
+                                79,
+                                FrameworkStatsLog
+                                        .HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP);
                     }
                     return true;
                 case 16:
@@ -229,9 +293,12 @@ public final class SystemActionPerformer {
         }
         SystemActionsChangedListener systemActionsChangedListener = this.mListener;
         if (systemActionsChangedListener != null) {
-            AccessibilityManagerService accessibilityManagerService = (AccessibilityManagerService) systemActionsChangedListener;
+            AccessibilityManagerService accessibilityManagerService =
+                    (AccessibilityManagerService) systemActionsChangedListener;
             synchronized (accessibilityManagerService.mLock) {
-                accessibilityManagerService.notifySystemActionsChangedLocked(accessibilityManagerService.getUserStateLocked(accessibilityManagerService.mCurrentUserId));
+                accessibilityManagerService.notifySystemActionsChangedLocked(
+                        accessibilityManagerService.getUserStateLocked(
+                                accessibilityManagerService.mCurrentUserId));
             }
         }
     }
@@ -248,8 +315,24 @@ public final class SystemActionPerformer {
     }
 
     public final void sendKeyEventIdentityCleared(int i, int i2, int i3, long j, long j2) {
-        KeyEvent obtain = KeyEvent.obtain(j, j2, i2, i, 0, 0, -1, 0, 8, i3, ((AccessibilityManagerService) this.mDisplayUpdateCallBack).mA11yWindowManager.mLastNonProxyTopFocusedDisplayId, null);
-        ((InputManager) this.mContext.getSystemService(InputManager.class)).injectInputEvent(obtain, 0);
+        KeyEvent obtain =
+                KeyEvent.obtain(
+                        j,
+                        j2,
+                        i2,
+                        i,
+                        0,
+                        0,
+                        -1,
+                        0,
+                        8,
+                        i3,
+                        ((AccessibilityManagerService) this.mDisplayUpdateCallBack)
+                                .mA11yWindowManager
+                                .mLastNonProxyTopFocusedDisplayId,
+                        null);
+        ((InputManager) this.mContext.getSystemService(InputManager.class))
+                .injectInputEvent(obtain, 0);
         obtain.recycle();
     }
 
@@ -259,9 +342,12 @@ public final class SystemActionPerformer {
         }
         SystemActionsChangedListener systemActionsChangedListener = this.mListener;
         if (systemActionsChangedListener != null) {
-            AccessibilityManagerService accessibilityManagerService = (AccessibilityManagerService) systemActionsChangedListener;
+            AccessibilityManagerService accessibilityManagerService =
+                    (AccessibilityManagerService) systemActionsChangedListener;
             synchronized (accessibilityManagerService.mLock) {
-                accessibilityManagerService.notifySystemActionsChangedLocked(accessibilityManagerService.getUserStateLocked(accessibilityManagerService.mCurrentUserId));
+                accessibilityManagerService.notifySystemActionsChangedLocked(
+                        accessibilityManagerService.getUserStateLocked(
+                                accessibilityManagerService.mCurrentUserId));
             }
         }
     }

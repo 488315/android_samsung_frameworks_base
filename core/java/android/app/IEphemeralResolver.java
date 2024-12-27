@@ -9,18 +9,21 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IEphemeralResolver extends IInterface {
-    void getEphemeralIntentFilterList(IRemoteCallback iRemoteCallback, String str, int i) throws RemoteException;
+    void getEphemeralIntentFilterList(IRemoteCallback iRemoteCallback, String str, int i)
+            throws RemoteException;
 
-    void getEphemeralResolveInfoList(IRemoteCallback iRemoteCallback, int[] iArr, int i) throws RemoteException;
+    void getEphemeralResolveInfoList(IRemoteCallback iRemoteCallback, int[] iArr, int i)
+            throws RemoteException;
 
     public static class Default implements IEphemeralResolver {
         @Override // android.app.IEphemeralResolver
-        public void getEphemeralResolveInfoList(IRemoteCallback callback, int[] digestPrefix, int sequence) throws RemoteException {
-        }
+        public void getEphemeralResolveInfoList(
+                IRemoteCallback callback, int[] digestPrefix, int sequence)
+                throws RemoteException {}
 
         @Override // android.app.IEphemeralResolver
-        public void getEphemeralIntentFilterList(IRemoteCallback callback, String hostName, int sequence) throws RemoteException {
-        }
+        public void getEphemeralIntentFilterList(
+                IRemoteCallback callback, String hostName, int sequence) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +31,7 @@ public interface IEphemeralResolver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEphemeralResolver {
+    public abstract static class Stub extends Binder implements IEphemeralResolver {
         public static final String DESCRIPTOR = "android.app.IEphemeralResolver";
         static final int TRANSACTION_getEphemeralIntentFilterList = 2;
         static final int TRANSACTION_getEphemeralResolveInfoList = 1;
@@ -70,7 +73,8 @@ public interface IEphemeralResolver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -80,14 +84,16 @@ public interface IEphemeralResolver extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IRemoteCallback _arg0 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg0 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     int[] _arg1 = data.createIntArray();
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     getEphemeralResolveInfoList(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    IRemoteCallback _arg02 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg02 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg12 = data.readString();
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
@@ -115,7 +121,9 @@ public interface IEphemeralResolver extends IInterface {
             }
 
             @Override // android.app.IEphemeralResolver
-            public void getEphemeralResolveInfoList(IRemoteCallback callback, int[] digestPrefix, int sequence) throws RemoteException {
+            public void getEphemeralResolveInfoList(
+                    IRemoteCallback callback, int[] digestPrefix, int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -129,7 +137,9 @@ public interface IEphemeralResolver extends IInterface {
             }
 
             @Override // android.app.IEphemeralResolver
-            public void getEphemeralIntentFilterList(IRemoteCallback callback, String hostName, int sequence) throws RemoteException {
+            public void getEphemeralIntentFilterList(
+                    IRemoteCallback callback, String hostName, int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

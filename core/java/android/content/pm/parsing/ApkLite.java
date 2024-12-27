@@ -4,7 +4,9 @@ import android.content.pm.ArchivedPackageParcel;
 import android.content.pm.PackageInfo;
 import android.content.pm.SigningDetails;
 import android.content.pm.VerifierInfo;
+
 import com.android.internal.util.CollectionUtils;
+
 import java.util.List;
 import java.util.Set;
 
@@ -47,7 +49,42 @@ public class ApkLite {
     private final int mVersionCode;
     private final int mVersionCodeMajor;
 
-    public ApkLite(String path, String packageName, String splitName, boolean isFeatureSplit, String configForSplit, String usesSplitName, boolean isSplitRequired, int versionCode, int versionCodeMajor, int revisionCode, int installLocation, List<VerifierInfo> verifiers, SigningDetails signingDetails, boolean coreApp, boolean debuggable, boolean profileableByShell, boolean multiArch, boolean use32bitAbi, boolean useEmbeddedDex, boolean extractNativeLibs, boolean isolatedSplits, String targetPackageName, boolean overlayIsStatic, int overlayPriority, String requiredSystemPropertyName, String requiredSystemPropertyValue, int minSdkVersion, int targetSdkVersion, int rollbackDataPolicy, Set<String> requiredSplitTypes, Set<String> splitTypes, boolean hasDeviceAdminReceiver, boolean isSdkLibrary, boolean updatableSystem, String emergencyInstaller) {
+    public ApkLite(
+            String path,
+            String packageName,
+            String splitName,
+            boolean isFeatureSplit,
+            String configForSplit,
+            String usesSplitName,
+            boolean isSplitRequired,
+            int versionCode,
+            int versionCodeMajor,
+            int revisionCode,
+            int installLocation,
+            List<VerifierInfo> verifiers,
+            SigningDetails signingDetails,
+            boolean coreApp,
+            boolean debuggable,
+            boolean profileableByShell,
+            boolean multiArch,
+            boolean use32bitAbi,
+            boolean useEmbeddedDex,
+            boolean extractNativeLibs,
+            boolean isolatedSplits,
+            String targetPackageName,
+            boolean overlayIsStatic,
+            int overlayPriority,
+            String requiredSystemPropertyName,
+            String requiredSystemPropertyValue,
+            int minSdkVersion,
+            int targetSdkVersion,
+            int rollbackDataPolicy,
+            Set<String> requiredSplitTypes,
+            Set<String> splitTypes,
+            boolean hasDeviceAdminReceiver,
+            boolean isSdkLibrary,
+            boolean updatableSystem,
+            String emergencyInstaller) {
         this.mPath = path;
         this.mPackageName = packageName;
         this.mSplitName = splitName;
@@ -278,6 +315,5 @@ public class ApkLite {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

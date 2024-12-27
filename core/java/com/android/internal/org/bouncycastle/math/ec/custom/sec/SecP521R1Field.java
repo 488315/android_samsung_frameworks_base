@@ -4,6 +4,7 @@ import com.android.internal.org.bouncycastle.math.raw.Mod;
 import com.android.internal.org.bouncycastle.math.raw.Nat;
 import com.android.internal.org.bouncycastle.math.raw.Nat512;
 import com.android.internal.org.bouncycastle.util.Pack;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -86,7 +87,10 @@ public class SecP521R1Field {
 
     public static void reduce(int[] xx, int[] z) {
         int xx32 = xx[32];
-        int c = (Nat.shiftDownBits(16, xx, 16, 9, xx32, z, 0) >>> 23) + (xx32 >>> 9) + Nat.addTo(16, xx, z);
+        int c =
+                (Nat.shiftDownBits(16, xx, 16, 9, xx32, z, 0) >>> 23)
+                        + (xx32 >>> 9)
+                        + Nat.addTo(16, xx, z);
         if (c > 511 || (c == 511 && Nat.eq(16, z, P))) {
             c = (c + Nat.inc(16, z)) & 511;
         }

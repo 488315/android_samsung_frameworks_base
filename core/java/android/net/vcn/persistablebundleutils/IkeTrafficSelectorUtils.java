@@ -3,6 +3,7 @@ package android.net.vcn.persistablebundleutils;
 import android.net.InetAddresses;
 import android.net.ipsec.ike.IkeTrafficSelector;
 import android.os.PersistableBundle;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
@@ -20,7 +21,11 @@ public final class IkeTrafficSelectorUtils {
         String endingAddress = in.getString(END_ADDRESS_KEY);
         Objects.requireNonNull(startingAddress, "startAddress was null");
         Objects.requireNonNull(startingAddress, "endAddress was null");
-        return new IkeTrafficSelector(startPort, endPort, InetAddresses.parseNumericAddress(startingAddress), InetAddresses.parseNumericAddress(endingAddress));
+        return new IkeTrafficSelector(
+                startPort,
+                endPort,
+                InetAddresses.parseNumericAddress(startingAddress),
+                InetAddresses.parseNumericAddress(endingAddress));
     }
 
     public static PersistableBundle toPersistableBundle(IkeTrafficSelector ts) {

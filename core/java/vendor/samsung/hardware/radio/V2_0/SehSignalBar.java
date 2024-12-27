@@ -3,6 +3,7 @@ package vendor.samsung.hardware.radio.V2_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,18 +25,45 @@ public final class SehSignalBar {
             return false;
         }
         SehSignalBar other = (SehSignalBar) otherObject;
-        if (this.cdmaLevel == other.cdmaLevel && this.evdoLevel == other.evdoLevel && this.gsmLevel == other.gsmLevel && this.wcdmaLevel == other.wcdmaLevel && this.tdscdmaLevel == other.tdscdmaLevel && this.lteLevel == other.lteLevel && this.nrLevel == other.nrLevel) {
+        if (this.cdmaLevel == other.cdmaLevel
+                && this.evdoLevel == other.evdoLevel
+                && this.gsmLevel == other.gsmLevel
+                && this.wcdmaLevel == other.wcdmaLevel
+                && this.tdscdmaLevel == other.tdscdmaLevel
+                && this.lteLevel == other.lteLevel
+                && this.nrLevel == other.nrLevel) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cdmaLevel))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.evdoLevel))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.gsmLevel))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.wcdmaLevel))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.tdscdmaLevel))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.lteLevel))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.nrLevel))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cdmaLevel))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.evdoLevel))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.gsmLevel))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.wcdmaLevel))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.tdscdmaLevel))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.lteLevel))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.nrLevel))));
     }
 
     public final String toString() {
-        return "{.cdmaLevel = " + SehSignalLevel.toString(this.cdmaLevel) + ", .evdoLevel = " + SehSignalLevel.toString(this.evdoLevel) + ", .gsmLevel = " + SehSignalLevel.toString(this.gsmLevel) + ", .wcdmaLevel = " + SehSignalLevel.toString(this.wcdmaLevel) + ", .tdscdmaLevel = " + SehSignalLevel.toString(this.tdscdmaLevel) + ", .lteLevel = " + SehSignalLevel.toString(this.lteLevel) + ", .nrLevel = " + SehSignalLevel.toString(this.nrLevel) + "}";
+        return "{.cdmaLevel = "
+                + SehSignalLevel.toString(this.cdmaLevel)
+                + ", .evdoLevel = "
+                + SehSignalLevel.toString(this.evdoLevel)
+                + ", .gsmLevel = "
+                + SehSignalLevel.toString(this.gsmLevel)
+                + ", .wcdmaLevel = "
+                + SehSignalLevel.toString(this.wcdmaLevel)
+                + ", .tdscdmaLevel = "
+                + SehSignalLevel.toString(this.tdscdmaLevel)
+                + ", .lteLevel = "
+                + SehSignalLevel.toString(this.lteLevel)
+                + ", .nrLevel = "
+                + SehSignalLevel.toString(this.nrLevel)
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -47,7 +75,8 @@ public final class SehSignalBar {
         ArrayList<SehSignalBar> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 28, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 28, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SehSignalBar _hidl_vec_element = new SehSignalBar();
@@ -57,7 +86,8 @@ public final class SehSignalBar {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.cdmaLevel = _hidl_blob.getInt32(0 + _hidl_offset);
         this.evdoLevel = _hidl_blob.getInt32(4 + _hidl_offset);
         this.gsmLevel = _hidl_blob.getInt32(8 + _hidl_offset);
@@ -73,7 +103,8 @@ public final class SehSignalBar {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<SehSignalBar> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<SehSignalBar> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

@@ -10,19 +10,21 @@ import android.os.Trace;
 
 /* loaded from: classes.dex */
 public class PauseActivityItem extends ActivityLifecycleItem {
-    public static final Parcelable.Creator<PauseActivityItem> CREATOR = new Parcelable.Creator<PauseActivityItem>() { // from class: android.app.servertransaction.PauseActivityItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PauseActivityItem createFromParcel(Parcel in) {
-            return new PauseActivityItem(in);
-        }
+    public static final Parcelable.Creator<PauseActivityItem> CREATOR =
+            new Parcelable.Creator<PauseActivityItem>() { // from class:
+                // android.app.servertransaction.PauseActivityItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PauseActivityItem createFromParcel(Parcel in) {
+                    return new PauseActivityItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PauseActivityItem[] newArray(int size) {
-            return new PauseActivityItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PauseActivityItem[] newArray(int size) {
+                    return new PauseActivityItem[size];
+                }
+            };
     private static final String TAG = "PauseActivityItem";
     private boolean mAutoEnteringPip;
     private boolean mDontReport;
@@ -30,9 +32,18 @@ public class PauseActivityItem extends ActivityLifecycleItem {
     private boolean mUserLeaving;
 
     @Override // android.app.servertransaction.ActivityTransactionItem
-    public void execute(ClientTransactionHandler client, ActivityThread.ActivityClientRecord r, PendingTransactionActions pendingActions) {
+    public void execute(
+            ClientTransactionHandler client,
+            ActivityThread.ActivityClientRecord r,
+            PendingTransactionActions pendingActions) {
         Trace.traceBegin(64L, "activityPause");
-        client.handlePauseActivity(r, this.mFinished, this.mUserLeaving, this.mAutoEnteringPip, pendingActions, "PAUSE_ACTIVITY_ITEM");
+        client.handlePauseActivity(
+                r,
+                this.mFinished,
+                this.mUserLeaving,
+                this.mAutoEnteringPip,
+                pendingActions,
+                "PAUSE_ACTIVITY_ITEM");
         Trace.traceEnd(64L);
     }
 
@@ -42,17 +53,22 @@ public class PauseActivityItem extends ActivityLifecycleItem {
     }
 
     @Override // android.app.servertransaction.BaseClientRequest
-    public void postExecute(ClientTransactionHandler client, PendingTransactionActions pendingActions) {
+    public void postExecute(
+            ClientTransactionHandler client, PendingTransactionActions pendingActions) {
         if (this.mDontReport) {
             return;
         }
         ActivityClient.getInstance().activityPaused(getActivityToken());
     }
 
-    private PauseActivityItem() {
-    }
+    private PauseActivityItem() {}
 
-    public static PauseActivityItem obtain(IBinder activityToken, boolean finished, boolean userLeaving, boolean dontReport, boolean autoEnteringPip) {
+    public static PauseActivityItem obtain(
+            IBinder activityToken,
+            boolean finished,
+            boolean userLeaving,
+            boolean dontReport,
+            boolean autoEnteringPip) {
         PauseActivityItem instance = (PauseActivityItem) ObjectPool.obtain(PauseActivityItem.class);
         if (instance == null) {
             instance = new PauseActivityItem();
@@ -69,7 +85,8 @@ public class PauseActivityItem extends ActivityLifecycleItem {
         return obtain(activityToken, false, false, true, false);
     }
 
-    @Override // android.app.servertransaction.ActivityTransactionItem, android.app.servertransaction.ObjectPoolItem
+    @Override // android.app.servertransaction.ActivityTransactionItem,
+    // android.app.servertransaction.ObjectPoolItem
     public void recycle() {
         super.recycle();
         this.mFinished = false;
@@ -105,16 +122,34 @@ public class PauseActivityItem extends ActivityLifecycleItem {
             return false;
         }
         PauseActivityItem other = (PauseActivityItem) o;
-        return this.mFinished == other.mFinished && this.mUserLeaving == other.mUserLeaving && this.mDontReport == other.mDontReport && this.mAutoEnteringPip == other.mAutoEnteringPip;
+        return this.mFinished == other.mFinished
+                && this.mUserLeaving == other.mUserLeaving
+                && this.mDontReport == other.mDontReport
+                && this.mAutoEnteringPip == other.mAutoEnteringPip;
     }
 
     @Override // android.app.servertransaction.ActivityTransactionItem
     public int hashCode() {
-        return (((((((((17 * 31) + super.hashCode()) * 31) + (this.mFinished ? 1 : 0)) * 31) + (this.mUserLeaving ? 1 : 0)) * 31) + (this.mDontReport ? 1 : 0)) * 31) + (this.mAutoEnteringPip ? 1 : 0);
+        return (((((((((17 * 31) + super.hashCode()) * 31) + (this.mFinished ? 1 : 0)) * 31)
+                                                + (this.mUserLeaving ? 1 : 0))
+                                        * 31)
+                                + (this.mDontReport ? 1 : 0))
+                        * 31)
+                + (this.mAutoEnteringPip ? 1 : 0);
     }
 
     @Override // android.app.servertransaction.ActivityTransactionItem
     public String toString() {
-        return "PauseActivityItem{" + super.toString() + ",finished=" + this.mFinished + ",userLeaving=" + this.mUserLeaving + ",dontReport=" + this.mDontReport + ",autoEnteringPip=" + this.mAutoEnteringPip + "}";
+        return "PauseActivityItem{"
+                + super.toString()
+                + ",finished="
+                + this.mFinished
+                + ",userLeaving="
+                + this.mUserLeaving
+                + ",dontReport="
+                + this.mDontReport
+                + ",autoEnteringPip="
+                + this.mAutoEnteringPip
+                + "}";
     }
 }

@@ -29,6 +29,7 @@ import android.util.ArrayMap;
 import android.util.IntArray;
 import android.util.LongSparseArray;
 import android.util.sysfwutil.Slog;
+
 import com.android.internal.notification.SystemNotificationChannels;
 import com.android.internal.usb.DumpUtils;
 import com.android.internal.util.FrameworkStatsLog;
@@ -38,13 +39,14 @@ import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.FgThread;
 import com.android.server.SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0;
-import com.android.server.usb.UsbService;
 import com.android.server.usb.hal.port.RawPortInfo;
 import com.android.server.usb.hal.port.UsbPortAidl;
 import com.android.server.usb.hal.port.UsbPortHal;
 import com.android.server.usb.hal.port.UsbPortHidl;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.android.os.SemDvfsManager;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -70,24 +72,31 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
     public final ArrayMap mContaminantStatus = new ArrayMap();
     public final Object mDisplayPortListenerLock = new Object();
     public final ArrayMap mDisplayPortListeners = new ArrayMap();
-    public final AnonymousClass1 mHandler = new Handler(FgThread.get().getLooper()) { // from class: com.android.server.usb.UsbPortManager.1
-        @Override // android.os.Handler
-        public final void handleMessage(Message message) {
-            int i = message.what;
-            if (i != 1) {
-                if (i != 2) {
-                    return;
+    public final AnonymousClass1 mHandler =
+            new Handler(
+                    FgThread.get()
+                            .getLooper()) { // from class: com.android.server.usb.UsbPortManager.1
+                @Override // android.os.Handler
+                public final void handleMessage(Message message) {
+                    int i = message.what;
+                    if (i != 1) {
+                        if (i != 2) {
+                            return;
+                        }
+                        UsbPortManager usbPortManager = UsbPortManager.this;
+                        usbPortManager.mNotificationManager =
+                                (NotificationManager)
+                                        usbPortManager.mContext.getSystemService("notification");
+                        return;
+                    }
+                    ArrayList parcelableArrayList =
+                            message.getData()
+                                    .getParcelableArrayList("port_info", RawPortInfo.class);
+                    synchronized (UsbPortManager.this.mLock) {
+                        UsbPortManager.this.updatePortsLocked(null, parcelableArrayList);
+                    }
                 }
-                UsbPortManager usbPortManager = UsbPortManager.this;
-                usbPortManager.mNotificationManager = (NotificationManager) usbPortManager.mContext.getSystemService("notification");
-                return;
-            }
-            ArrayList parcelableArrayList = message.getData().getParcelableArrayList("port_info", RawPortInfo.class);
-            synchronized (UsbPortManager.this.mLock) {
-                UsbPortManager.this.updatePortsLocked(null, parcelableArrayList);
-            }
-        }
-    };
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PortInfo {
@@ -102,19 +111,37 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         public int mComplianceWarningChange = 0;
         public int mDisplayPortAltModeChange = 0;
 
-        public PortInfo(UsbManager usbManager, String str, int i, int i2, boolean z, boolean z2, boolean z3, int i3) {
+        public PortInfo(
+                UsbManager usbManager,
+                String str,
+                int i,
+                int i2,
+                boolean z,
+                boolean z2,
+                boolean z3,
+                int i3) {
             this.mUsbPort = new UsbPort(usbManager, str, i, i2, z, z2, z3, i3);
         }
 
         public final void dump(DualDumpOutputStream dualDumpOutputStream) {
             long start = dualDumpOutputStream.start("usb_ports", 2246267895810L);
             DumpUtils.writePort(dualDumpOutputStream, "port", 1146756268033L, this.mUsbPort);
-            DumpUtils.writePortStatus(dualDumpOutputStream, Constants.JSON_CLIENT_DATA_STATUS, 1146756268034L, this.mUsbPortStatus);
+            DumpUtils.writePortStatus(
+                    dualDumpOutputStream,
+                    Constants.JSON_CLIENT_DATA_STATUS,
+                    1146756268034L,
+                    this.mUsbPortStatus);
             dualDumpOutputStream.write("can_change_mode", 1133871366147L, this.mCanChangeMode);
-            dualDumpOutputStream.write("can_change_power_role", 1133871366148L, this.mCanChangePowerRole);
-            dualDumpOutputStream.write("can_change_data_role", 1133871366149L, this.mCanChangeDataRole);
-            dualDumpOutputStream.write("connected_at_millis", 1112396529670L, this.mConnectedAtMillis);
-            dualDumpOutputStream.write("last_connect_duration_millis", 1112396529671L, this.mLastConnectDurationMillis);
+            dualDumpOutputStream.write(
+                    "can_change_power_role", 1133871366148L, this.mCanChangePowerRole);
+            dualDumpOutputStream.write(
+                    "can_change_data_role", 1133871366149L, this.mCanChangeDataRole);
+            dualDumpOutputStream.write(
+                    "connected_at_millis", 1112396529670L, this.mConnectedAtMillis);
+            dualDumpOutputStream.write(
+                    "last_connect_duration_millis",
+                    1112396529671L,
+                    this.mLastConnectDurationMillis);
             dualDumpOutputStream.end(start);
         }
 
@@ -125,16 +152,48 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final boolean setStatus(int r18, boolean r19, int r20, boolean r21, int r22, boolean r23, int r24, int r25, int r26, int r27, boolean r28, int r29, int[] r30, int r31, android.hardware.usb.DisplayPortAltModeInfo r32) {
+        public final boolean setStatus(
+                int r18,
+                boolean r19,
+                int r20,
+                boolean r21,
+                int r22,
+                boolean r23,
+                int r24,
+                int r25,
+                int r26,
+                int r27,
+                boolean r28,
+                int r29,
+                int[] r30,
+                int r31,
+                android.hardware.usb.DisplayPortAltModeInfo r32) {
             /*
                 Method dump skipped, instructions count: 362
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.usb.UsbPortManager.PortInfo.setStatus(int, boolean, int, boolean, int, boolean, int, int, int, int, boolean, int, int[], int, android.hardware.usb.DisplayPortAltModeInfo):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.usb.UsbPortManager.PortInfo.setStatus(int, boolean,"
+                        + " int, boolean, int, boolean, int, int, int, int, boolean, int, int[],"
+                        + " int, android.hardware.usb.DisplayPortAltModeInfo):boolean");
         }
 
         public final String toString() {
-            return "port=" + this.mUsbPort + ", status=" + this.mUsbPortStatus + ", canChangeMode=" + this.mCanChangeMode + ", canChangePowerRole=" + this.mCanChangePowerRole + ", canChangeDataRole=" + this.mCanChangeDataRole + ", connectedAtMillis=" + this.mConnectedAtMillis + ", lastConnectDurationMillis=" + this.mLastConnectDurationMillis;
+            return "port="
+                    + this.mUsbPort
+                    + ", status="
+                    + this.mUsbPortStatus
+                    + ", canChangeMode="
+                    + this.mCanChangeMode
+                    + ", canChangePowerRole="
+                    + this.mCanChangePowerRole
+                    + ", canChangeDataRole="
+                    + this.mCanChangeDataRole
+                    + ", connectedAtMillis="
+                    + this.mConnectedAtMillis
+                    + ", lastConnectDurationMillis="
+                    + this.mLastConnectDurationMillis;
         }
     }
 
@@ -145,7 +204,8 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         this.usbPortBooster = null;
         this.mContext = context;
         if (this.usbPortBooster == null) {
-            this.usbPortBooster = SemDvfsManager.createInstance(context, "USB_PORT_MANAGER_BOOSTER");
+            this.usbPortBooster =
+                    SemDvfsManager.createInstance(context, "USB_PORT_MANAGER_BOOSTER");
         }
         if (this.usbPortBooster != null) {
             Slog.d("UsbPortManager", "To boost, setHint");
@@ -164,7 +224,8 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             usbPortHal = new UsbPortAidl(this);
         } else {
             try {
-                IUsb.asInterface(HwBinder.getService("android.hardware.usb@1.0::IUsb", "default", true));
+                IUsb.asInterface(
+                        HwBinder.getService("android.hardware.usb@1.0::IUsb", "default", true));
             } catch (RemoteException e2) {
                 Slog.e("UsbPortManager", "IUSB hal service present but failed to get service", e2);
             } catch (NoSuchElementException e3) {
@@ -184,21 +245,46 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         }
     }
 
-    public static void logAndPrintException(IndentingPrintWriter indentingPrintWriter, String str, Exception exc) {
+    public static void logAndPrintException(
+            IndentingPrintWriter indentingPrintWriter, String str, Exception exc) {
         Slog.e("UsbPortManager", str, exc);
         if (indentingPrintWriter != null) {
             indentingPrintWriter.println(str + exc);
         }
     }
 
-    public final void addOrUpdatePortLocked(String str, int i, int i2, int i3, boolean z, int i4, boolean z2, int i5, boolean z3, boolean z4, int i6, boolean z5, int i7, int i8, boolean z6, int i9, boolean z7, int[] iArr, int i10, int i11, DisplayPortAltModeInfo displayPortAltModeInfo, IndentingPrintWriter indentingPrintWriter) {
+    public final void addOrUpdatePortLocked(
+            String str,
+            int i,
+            int i2,
+            int i3,
+            boolean z,
+            int i4,
+            boolean z2,
+            int i5,
+            boolean z3,
+            boolean z4,
+            int i6,
+            boolean z5,
+            int i7,
+            int i8,
+            boolean z6,
+            int i9,
+            boolean z7,
+            int[] iArr,
+            int i10,
+            int i11,
+            DisplayPortAltModeInfo displayPortAltModeInfo,
+            IndentingPrintWriter indentingPrintWriter) {
         int i12;
         boolean z8;
         String str2;
         int i13;
         int i14;
         int combineRolesAsBit;
-        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("addOrUpdatePortLocked()++ : portId=", str, " supportedModes=");
+        StringBuilder m =
+                DumpUtils$$ExternalSyntheticOutline0.m(
+                        "addOrUpdatePortLocked()++ : portId=", str, " supportedModes=");
         m.append(UsbPort.modeToString(i));
         m.append(" currentMode=");
         m.append(UsbPort.modeToString(i3));
@@ -220,7 +306,13 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             i12 = i3;
             z8 = false;
         } else {
-            logAndPrint(5, indentingPrintWriter, "Ignoring inconsistent current mode from USB port driver: supportedModes=" + UsbPort.modeToString(i) + ", currentMode=" + UsbPort.modeToString(i3));
+            logAndPrint(
+                    5,
+                    indentingPrintWriter,
+                    "Ignoring inconsistent current mode from USB port driver: supportedModes="
+                            + UsbPort.modeToString(i)
+                            + ", currentMode="
+                            + UsbPort.modeToString(i3));
             i12 = 0;
             z8 = false;
         }
@@ -249,26 +341,89 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         Slog.d("UsbPortManager", "supportedRoleCombinations=" + i15);
         PortInfo portInfo = (PortInfo) this.mPorts.get(str);
         if (portInfo == null) {
-            PortInfo portInfo2 = new PortInfo((UsbManager) this.mContext.getSystemService(UsbManager.class), str, i, i2, z4, z5, z7, i11);
-            portInfo2.setStatus(i12, z8, i4, z2, i5, z3, i15, i6, i7, i8, z6, i9, iArr, i10, displayPortAltModeInfo);
+            PortInfo portInfo2 =
+                    new PortInfo(
+                            (UsbManager) this.mContext.getSystemService(UsbManager.class),
+                            str,
+                            i,
+                            i2,
+                            z4,
+                            z5,
+                            z7,
+                            i11);
+            portInfo2.setStatus(
+                    i12,
+                    z8,
+                    i4,
+                    z2,
+                    i5,
+                    z3,
+                    i15,
+                    i6,
+                    i7,
+                    i8,
+                    z6,
+                    i9,
+                    iArr,
+                    i10,
+                    displayPortAltModeInfo);
             this.mPorts.put(str, portInfo2);
             Slog.d("UsbPortManager", "mPorts(" + str + ") put size=" + this.mPorts.size());
             str2 = "UsbPortManager";
         } else {
             if (i != portInfo.mUsbPort.getSupportedModes()) {
-                logAndPrint(5, indentingPrintWriter, "Ignoring inconsistent list of supported modes from USB port driver (should be immutable): previous=" + UsbPort.modeToString(portInfo.mUsbPort.getSupportedModes()) + ", current=" + UsbPort.modeToString(i));
+                logAndPrint(
+                        5,
+                        indentingPrintWriter,
+                        "Ignoring inconsistent list of supported modes from USB port driver (should"
+                            + " be immutable): previous="
+                                + UsbPort.modeToString(portInfo.mUsbPort.getSupportedModes())
+                                + ", current="
+                                + UsbPort.modeToString(i));
             }
             Slog.d("UsbPortManager", "supportedModes=" + UsbPort.modeToString(i));
             if (z4 != portInfo.mUsbPort.supportsEnableContaminantPresenceProtection()) {
-                logAndPrint(5, indentingPrintWriter, "Ignoring inconsistent supportsEnableContaminantPresenceProtectionUSB port driver (should be immutable): previous=" + portInfo.mUsbPort.supportsEnableContaminantPresenceProtection() + ", current=" + z4);
+                logAndPrint(
+                        5,
+                        indentingPrintWriter,
+                        "Ignoring inconsistent supportsEnableContaminantPresenceProtectionUSB port"
+                            + " driver (should be immutable): previous="
+                                + portInfo.mUsbPort.supportsEnableContaminantPresenceProtection()
+                                + ", current="
+                                + z4);
             }
             if (z5 != portInfo.mUsbPort.supportsEnableContaminantPresenceDetection()) {
-                logAndPrint(5, indentingPrintWriter, "Ignoring inconsistent supportsEnableContaminantPresenceDetection USB port driver (should be immutable): previous=" + portInfo.mUsbPort.supportsEnableContaminantPresenceDetection() + ", current=" + z5);
+                logAndPrint(
+                        5,
+                        indentingPrintWriter,
+                        "Ignoring inconsistent supportsEnableContaminantPresenceDetection USB port"
+                            + " driver (should be immutable): previous="
+                                + portInfo.mUsbPort.supportsEnableContaminantPresenceDetection()
+                                + ", current="
+                                + z5);
             }
-            if (portInfo.setStatus(i12, z8, i4, z2, i5, z3, i15, i6, i7, i8, z6, i9, iArr, i10, displayPortAltModeInfo)) {
+            if (portInfo.setStatus(
+                    i12,
+                    z8,
+                    i4,
+                    z2,
+                    i5,
+                    z3,
+                    i15,
+                    i6,
+                    i7,
+                    i8,
+                    z6,
+                    i9,
+                    iArr,
+                    i10,
+                    displayPortAltModeInfo)) {
                 portInfo.mDisposition = 1;
                 str2 = "UsbPortManager";
-                Slog.d(str2, "addOrUpdatePortLocked() mPorts DISPOSITION_REMOVED -> DISPOSITION_CHANGED");
+                Slog.d(
+                        str2,
+                        "addOrUpdatePortLocked() mPorts DISPOSITION_REMOVED ->"
+                            + " DISPOSITION_CHANGED");
             } else {
                 str2 = "UsbPortManager";
                 portInfo.mDisposition = 2;
@@ -277,7 +432,8 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         Slog.d(str2, "addOrUpdatePortLocked()--");
     }
 
-    public final void addSimulatedPort(String str, int i, boolean z, boolean z2, IndentingPrintWriter indentingPrintWriter) {
+    public final void addSimulatedPort(
+            String str, int i, boolean z, boolean z2, IndentingPrintWriter indentingPrintWriter) {
         DisplayPortAltModeInfo displayPortAltModeInfo = z2 ? new DisplayPortAltModeInfo() : null;
         synchronized (this.mLock) {
             try {
@@ -286,11 +442,39 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             }
             try {
                 if (this.mSimulatedPorts.containsKey(str)) {
-                    indentingPrintWriter.println("Port with same name already exists.  Please remove it first.");
+                    indentingPrintWriter.println(
+                            "Port with same name already exists.  Please remove it first.");
                     return;
                 }
-                indentingPrintWriter.println("Adding simulated port: portId=" + str + ", supportedModes=" + UsbPort.modeToString(i));
-                this.mSimulatedPorts.put(str, new RawPortInfo(str, i, 0, 0, false, 0, false, 0, false, false, 0, false, 0, 0, false, 0, z, new int[0], 0, z2 ? 1 : 0, displayPortAltModeInfo));
+                indentingPrintWriter.println(
+                        "Adding simulated port: portId="
+                                + str
+                                + ", supportedModes="
+                                + UsbPort.modeToString(i));
+                this.mSimulatedPorts.put(
+                        str,
+                        new RawPortInfo(
+                                str,
+                                i,
+                                0,
+                                0,
+                                false,
+                                0,
+                                false,
+                                0,
+                                false,
+                                false,
+                                0,
+                                false,
+                                0,
+                                0,
+                                false,
+                                0,
+                                z,
+                                new int[0],
+                                0,
+                                z2 ? 1 : 0,
+                                displayPortAltModeInfo));
                 updatePortsLocked(indentingPrintWriter, null);
             } catch (Throwable th2) {
                 th = th2;
@@ -312,20 +496,44 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         }
     }
 
-    public final void connectSimulatedPort(String str, int i, boolean z, int i2, boolean z2, int i3, boolean z3, IndentingPrintWriter indentingPrintWriter) {
+    public final void connectSimulatedPort(
+            String str,
+            int i,
+            boolean z,
+            int i2,
+            boolean z2,
+            int i3,
+            boolean z3,
+            IndentingPrintWriter indentingPrintWriter) {
         synchronized (this.mLock) {
             try {
                 RawPortInfo rawPortInfo = (RawPortInfo) this.mSimulatedPorts.get(str);
                 if (rawPortInfo == null) {
-                    indentingPrintWriter.println("Cannot connect simulated port which does not exist.");
+                    indentingPrintWriter.println(
+                            "Cannot connect simulated port which does not exist.");
                     return;
                 }
                 if (i != 0 && i2 != 0 && i3 != 0) {
                     if ((rawPortInfo.supportedModes & i) == 0) {
-                        indentingPrintWriter.println("Simulated port does not support mode: " + UsbPort.modeToString(i));
+                        indentingPrintWriter.println(
+                                "Simulated port does not support mode: " + UsbPort.modeToString(i));
                         return;
                     }
-                    indentingPrintWriter.println("Connecting simulated port: portId=" + str + ", mode=" + UsbPort.modeToString(i) + ", canChangeMode=" + z + ", powerRole=" + UsbPort.powerRoleToString(i2) + ", canChangePowerRole=" + z2 + ", dataRole=" + UsbPort.dataRoleToString(i3) + ", canChangeDataRole=" + z3);
+                    indentingPrintWriter.println(
+                            "Connecting simulated port: portId="
+                                    + str
+                                    + ", mode="
+                                    + UsbPort.modeToString(i)
+                                    + ", canChangeMode="
+                                    + z
+                                    + ", powerRole="
+                                    + UsbPort.powerRoleToString(i2)
+                                    + ", canChangePowerRole="
+                                    + z2
+                                    + ", dataRole="
+                                    + UsbPort.dataRoleToString(i3)
+                                    + ", canChangeDataRole="
+                                    + z3);
                     rawPortInfo.currentMode = i;
                     rawPortInfo.canChangeMode = z;
                     rawPortInfo.currentPowerRole = i2;
@@ -335,19 +543,22 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                     updatePortsLocked(indentingPrintWriter, null);
                     return;
                 }
-                indentingPrintWriter.println("Cannot connect simulated port in null mode, power role, or data role.");
+                indentingPrintWriter.println(
+                        "Cannot connect simulated port in null mode, power role, or data role.");
             } catch (Throwable th) {
                 throw th;
             }
         }
     }
 
-    public final void disconnectSimulatedPort(String str, IndentingPrintWriter indentingPrintWriter) {
+    public final void disconnectSimulatedPort(
+            String str, IndentingPrintWriter indentingPrintWriter) {
         synchronized (this.mLock) {
             try {
                 RawPortInfo rawPortInfo = (RawPortInfo) this.mSimulatedPorts.get(str);
                 if (rawPortInfo == null) {
-                    indentingPrintWriter.println("Cannot disconnect simulated port which does not exist.");
+                    indentingPrintWriter.println(
+                            "Cannot disconnect simulated port which does not exist.");
                     return;
                 }
                 indentingPrintWriter.println("Disconnecting simulated port: portId=" + str);
@@ -368,7 +579,8 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         long start = dualDumpOutputStream.start(str, j);
         synchronized (this.mLock) {
             try {
-                dualDumpOutputStream.write("is_simulation_active", 1133871366145L, !this.mSimulatedPorts.isEmpty());
+                dualDumpOutputStream.write(
+                        "is_simulation_active", 1133871366145L, !this.mSimulatedPorts.isEmpty());
                 Iterator it = this.mPorts.values().iterator();
                 while (it.hasNext()) {
                     ((PortInfo) it.next()).dump(dualDumpOutputStream);
@@ -389,7 +601,8 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         dualDumpOutputStream.end(start);
     }
 
-    public final void enableContaminantDetection(String str, boolean z, IndentingPrintWriter indentingPrintWriter) {
+    public final void enableContaminantDetection(
+            String str, boolean z, IndentingPrintWriter indentingPrintWriter) {
         PortInfo portInfo = (PortInfo) this.mPorts.get(str);
         if (portInfo == null) {
             if (indentingPrintWriter != null) {
@@ -400,30 +613,43 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         }
         if (portInfo.mUsbPort.supportsEnableContaminantPresenceDetection()) {
             if (!z || portInfo.mUsbPortStatus.getContaminantDetectionStatus() == 1) {
-                if ((z || portInfo.mUsbPortStatus.getContaminantDetectionStatus() != 1) && portInfo.mUsbPortStatus.getContaminantDetectionStatus() != 0) {
+                if ((z || portInfo.mUsbPortStatus.getContaminantDetectionStatus() != 1)
+                        && portInfo.mUsbPortStatus.getContaminantDetectionStatus() != 0) {
                     try {
                         UsbPortHal usbPortHal = this.mUsbPortHal;
                         long j = this.mTransactionId + 1;
                         this.mTransactionId = j;
                         usbPortHal.enableContaminantPresenceDetection(str, j, z);
                     } catch (Exception e) {
-                        logAndPrintException(indentingPrintWriter, "Failed to set contaminant detection", e);
+                        logAndPrintException(
+                                indentingPrintWriter, "Failed to set contaminant detection", e);
                     }
                 }
             }
         }
     }
 
-    public final void enableLimitPowerTransfer(String str, boolean z, long j, IUsbOperationInternal iUsbOperationInternal, IndentingPrintWriter indentingPrintWriter) {
+    public final void enableLimitPowerTransfer(
+            String str,
+            boolean z,
+            long j,
+            IUsbOperationInternal iUsbOperationInternal,
+            IndentingPrintWriter indentingPrintWriter) {
         Objects.requireNonNull(str);
         if (((PortInfo) this.mPorts.get(str)) == null) {
-            logAndPrint(6, indentingPrintWriter, "enableLimitPowerTransfer: No such port: " + str + " opId:" + j);
+            logAndPrint(
+                    6,
+                    indentingPrintWriter,
+                    "enableLimitPowerTransfer: No such port: " + str + " opId:" + j);
             if (iUsbOperationInternal != null) {
                 try {
                     iUsbOperationInternal.onOperationComplete(3);
                     return;
                 } catch (RemoteException e) {
-                    logAndPrintException(indentingPrintWriter, "enableLimitPowerTransfer: Failed to call OperationComplete. opId:" + j, e);
+                    logAndPrintException(
+                            indentingPrintWriter,
+                            "enableLimitPowerTransfer: Failed to call OperationComplete. opId:" + j,
+                            e);
                     return;
                 }
             }
@@ -433,25 +659,39 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             this.mUsbPortHal.enableLimitPowerTransfer(str, z, j, iUsbOperationInternal);
         } catch (Exception e2) {
             try {
-                logAndPrintException(indentingPrintWriter, "enableLimitPowerTransfer: Failed to limit power transfer. opId:" + j, e2);
+                logAndPrintException(
+                        indentingPrintWriter,
+                        "enableLimitPowerTransfer: Failed to limit power transfer. opId:" + j,
+                        e2);
                 if (iUsbOperationInternal != null) {
                     iUsbOperationInternal.onOperationComplete(1);
                 }
             } catch (RemoteException e3) {
-                logAndPrintException(indentingPrintWriter, "enableLimitPowerTransfer:Failed to call onOperationComplete. opId:" + j, e3);
+                logAndPrintException(
+                        indentingPrintWriter,
+                        "enableLimitPowerTransfer:Failed to call onOperationComplete. opId:" + j,
+                        e3);
             }
         }
     }
 
-    public final boolean enableUsbData(String str, boolean z, int i, IUsbOperationInternal iUsbOperationInternal) {
+    public final boolean enableUsbData(
+            String str, boolean z, int i, IUsbOperationInternal iUsbOperationInternal) {
         Objects.requireNonNull(iUsbOperationInternal);
         Objects.requireNonNull(str);
         if (((PortInfo) this.mPorts.get(str)) == null) {
-            Slog.println(6, "UsbPortManager", SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0.m(i, "enableUsbData: No such port: ", str, " opId:"));
+            Slog.println(
+                    6,
+                    "UsbPortManager",
+                    SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0
+                            .m(i, "enableUsbData: No such port: ", str, " opId:"));
             try {
                 iUsbOperationInternal.onOperationComplete(3);
             } catch (RemoteException e) {
-                Slog.e("UsbPortManager", "enableUsbData: Failed to call OperationComplete. opId:" + i, e);
+                Slog.e(
+                        "UsbPortManager",
+                        "enableUsbData: Failed to call OperationComplete. opId:" + i,
+                        e);
             }
             return false;
         }
@@ -459,25 +699,38 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             return this.mUsbPortHal.enableUsbData(str, z, i, iUsbOperationInternal);
         } catch (Exception e2) {
             try {
-                Slog.e("UsbPortManager", "enableUsbData: Failed to invoke enableUsbData. opId:" + i, e2);
+                Slog.e(
+                        "UsbPortManager",
+                        "enableUsbData: Failed to invoke enableUsbData. opId:" + i,
+                        e2);
                 iUsbOperationInternal.onOperationComplete(1);
             } catch (RemoteException e3) {
-                Slog.e("UsbPortManager", "enableUsbData: Failed to call onOperationComplete. opId:" + i, e3);
+                Slog.e(
+                        "UsbPortManager",
+                        "enableUsbData: Failed to call onOperationComplete. opId:" + i,
+                        e3);
             }
             return false;
         }
     }
 
-    public final void enableUsbDataWhileDocked(String str, long j, IUsbOperationInternal iUsbOperationInternal) {
+    public final void enableUsbDataWhileDocked(
+            String str, long j, IUsbOperationInternal iUsbOperationInternal) {
         Objects.requireNonNull(str);
         if (((PortInfo) this.mPorts.get(str)) == null) {
-            Slog.println(6, "UsbPortManager", "enableUsbDataWhileDocked: No such port: " + str + " opId:" + j);
+            Slog.println(
+                    6,
+                    "UsbPortManager",
+                    "enableUsbDataWhileDocked: No such port: " + str + " opId:" + j);
             if (iUsbOperationInternal != null) {
                 try {
                     iUsbOperationInternal.onOperationComplete(3);
                     return;
                 } catch (RemoteException e) {
-                    Slog.e("UsbPortManager", "enableUsbDataWhileDocked: Failed to call OperationComplete. opId:" + j, e);
+                    Slog.e(
+                            "UsbPortManager",
+                            "enableUsbDataWhileDocked: Failed to call OperationComplete. opId:" + j,
+                            e);
                     return;
                 }
             }
@@ -487,12 +740,18 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             this.mUsbPortHal.enableUsbDataWhileDocked(str, j, iUsbOperationInternal);
         } catch (Exception e2) {
             try {
-                Slog.e("UsbPortManager", "enableUsbDataWhileDocked: Failed to limit power transfer. opId:" + j, e2);
+                Slog.e(
+                        "UsbPortManager",
+                        "enableUsbDataWhileDocked: Failed to limit power transfer. opId:" + j,
+                        e2);
                 if (iUsbOperationInternal != null) {
                     iUsbOperationInternal.onOperationComplete(1);
                 }
             } catch (RemoteException e3) {
-                Slog.e("UsbPortManager", "enableUsbDataWhileDocked:Failed to call onOperationComplete. opId:" + j, e3);
+                Slog.e(
+                        "UsbPortManager",
+                        "enableUsbDataWhileDocked:Failed to call onOperationComplete. opId:" + j,
+                        e3);
             }
         }
     }
@@ -530,39 +789,66 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         PortInfo portInfo2;
         int i;
         int i2;
-        Intent m = BatteryService$$ExternalSyntheticOutline0.m(285212672, "android.hardware.usb.action.USB_PORT_CHANGED");
+        Intent m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        285212672, "android.hardware.usb.action.USB_PORT_CHANGED");
         m.putExtra("port", (Parcelable) ParcelableUsbPort.of(portInfo.mUsbPort));
         m.putExtra("portStatus", (Parcelable) portInfo.mUsbPortStatus);
         post(new UsbPortManager$$ExternalSyntheticLambda0(this, m, 0));
         if (portInfo.mUsbPortStatus == null) {
             if (this.mConnected.containsKey(portInfo.mUsbPort.getId())) {
                 if (((Boolean) this.mConnected.get(portInfo.mUsbPort.getId())).booleanValue()) {
-                    FrameworkStatsLog.write(70, 0, portInfo.mUsbPort.getId(), portInfo.mLastConnectDurationMillis);
+                    FrameworkStatsLog.write(
+                            70, 0, portInfo.mUsbPort.getId(), portInfo.mLastConnectDurationMillis);
                 }
                 this.mConnected.remove(portInfo.mUsbPort.getId());
             }
             if (this.mContaminantStatus.containsKey(portInfo.mUsbPort.getId())) {
-                if (((Integer) this.mContaminantStatus.get(portInfo.mUsbPort.getId())).intValue() == 3) {
+                if (((Integer) this.mContaminantStatus.get(portInfo.mUsbPort.getId())).intValue()
+                        == 3) {
                     FrameworkStatsLog.write(146, portInfo.mUsbPort.getId(), 3);
                 }
                 this.mContaminantStatus.remove(portInfo.mUsbPort.getId());
             }
         } else {
-            if (!this.mConnected.containsKey(portInfo.mUsbPort.getId()) || ((Boolean) this.mConnected.get(portInfo.mUsbPort.getId())).booleanValue() != portInfo.mUsbPortStatus.isConnected()) {
-                this.mConnected.put(portInfo.mUsbPort.getId(), Boolean.valueOf(portInfo.mUsbPortStatus.isConnected()));
-                FrameworkStatsLog.write(70, portInfo.mUsbPortStatus.isConnected() ? 1 : 0, portInfo.mUsbPort.getId(), portInfo.mLastConnectDurationMillis);
+            if (!this.mConnected.containsKey(portInfo.mUsbPort.getId())
+                    || ((Boolean) this.mConnected.get(portInfo.mUsbPort.getId())).booleanValue()
+                            != portInfo.mUsbPortStatus.isConnected()) {
+                this.mConnected.put(
+                        portInfo.mUsbPort.getId(),
+                        Boolean.valueOf(portInfo.mUsbPortStatus.isConnected()));
+                FrameworkStatsLog.write(
+                        70,
+                        portInfo.mUsbPortStatus.isConnected() ? 1 : 0,
+                        portInfo.mUsbPort.getId(),
+                        portInfo.mLastConnectDurationMillis);
             }
-            if (!this.mContaminantStatus.containsKey(portInfo.mUsbPort.getId()) || ((Integer) this.mContaminantStatus.get(portInfo.mUsbPort.getId())).intValue() != portInfo.mUsbPortStatus.getContaminantDetectionStatus()) {
-                this.mContaminantStatus.put(portInfo.mUsbPort.getId(), Integer.valueOf(portInfo.mUsbPortStatus.getContaminantDetectionStatus()));
+            if (!this.mContaminantStatus.containsKey(portInfo.mUsbPort.getId())
+                    || ((Integer) this.mContaminantStatus.get(portInfo.mUsbPort.getId())).intValue()
+                            != portInfo.mUsbPortStatus.getContaminantDetectionStatus()) {
+                this.mContaminantStatus.put(
+                        portInfo.mUsbPort.getId(),
+                        Integer.valueOf(portInfo.mUsbPortStatus.getContaminantDetectionStatus()));
                 String id = portInfo.mUsbPort.getId();
-                int contaminantDetectionStatus = portInfo.mUsbPortStatus.getContaminantDetectionStatus();
-                FrameworkStatsLog.write(146, id, contaminantDetectionStatus != 0 ? contaminantDetectionStatus != 1 ? contaminantDetectionStatus != 2 ? contaminantDetectionStatus != 3 ? 0 : 4 : 3 : 2 : 1);
+                int contaminantDetectionStatus =
+                        portInfo.mUsbPortStatus.getContaminantDetectionStatus();
+                FrameworkStatsLog.write(
+                        146,
+                        id,
+                        contaminantDetectionStatus != 0
+                                ? contaminantDetectionStatus != 1
+                                        ? contaminantDetectionStatus != 2
+                                                ? contaminantDetectionStatus != 3 ? 0 : 4
+                                                : 3
+                                        : 2
+                                : 1);
             }
         }
         Resources resources = this.mContext.getResources();
         int i3 = 2;
         for (PortInfo portInfo3 : this.mPorts.values()) {
-            int contaminantDetectionStatus2 = portInfo3.mUsbPortStatus.getContaminantDetectionStatus();
+            int contaminantDetectionStatus2 =
+                    portInfo3.mUsbPortStatus.getContaminantDetectionStatus();
             if (contaminantDetectionStatus2 == 3 || contaminantDetectionStatus2 == 1) {
                 portInfo2 = portInfo3;
                 i3 = contaminantDetectionStatus2;
@@ -581,10 +867,35 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             CharSequence text2 = resources.getText(17043336);
             Intent intent = new Intent();
             intent.addFlags(268435456);
-            intent.setComponent(ComponentName.unflattenFromString(resources.getString(R.string.face_dialog_default_subtitle)));
+            intent.setComponent(
+                    ComponentName.unflattenFromString(
+                            resources.getString(R.string.face_dialog_default_subtitle)));
             intent.putExtra("port", (Parcelable) ParcelableUsbPort.of(portInfo2.mUsbPort));
             intent.putExtra("portStatus", (Parcelable) portInfo2.mUsbPortStatus);
-            this.mNotificationManager.notifyAsUser(null, this.mIsPortContaminatedNotificationId, new Notification.Builder(this.mContext, str).setOngoing(true).setTicker(text).setColor(this.mContext.getColor(R.color.system_notification_accent_color)).setContentIntent(PendingIntent.getActivityAsUser(this.mContext, 0, intent, 67108864, null, UserHandle.CURRENT)).setContentTitle(text).setContentText(text2).setVisibility(1).setSmallIcon(R.drawable.stat_sys_warning).setStyle(new Notification.BigTextStyle().bigText(text2)).build(), UserHandle.ALL);
+            this.mNotificationManager.notifyAsUser(
+                    null,
+                    this.mIsPortContaminatedNotificationId,
+                    new Notification.Builder(this.mContext, str)
+                            .setOngoing(true)
+                            .setTicker(text)
+                            .setColor(
+                                    this.mContext.getColor(
+                                            R.color.system_notification_accent_color))
+                            .setContentIntent(
+                                    PendingIntent.getActivityAsUser(
+                                            this.mContext,
+                                            0,
+                                            intent,
+                                            67108864,
+                                            null,
+                                            UserHandle.CURRENT))
+                            .setContentTitle(text)
+                            .setContentText(text2)
+                            .setVisibility(1)
+                            .setSmallIcon(R.drawable.stat_sys_warning)
+                            .setStyle(new Notification.BigTextStyle().bigText(text2))
+                            .build(),
+                    UserHandle.ALL);
             return;
         }
         if (i3 == 3 || (i = this.mIsPortContaminatedNotificationId) != 52) {
@@ -599,22 +910,43 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             CharSequence text3 = resources.getText(17043339);
             String str2 = SystemNotificationChannels.ALERTS;
             CharSequence text4 = resources.getText(17043338);
-            this.mNotificationManager.notifyAsUser(null, this.mIsPortContaminatedNotificationId, new Notification.Builder(this.mContext, str2).setSmallIcon(R.drawable.jog_tab_bar_left_end_confirm_green).setTicker(text3).setColor(this.mContext.getColor(R.color.system_notification_accent_color)).setContentTitle(text3).setContentText(text4).setVisibility(1).setStyle(new Notification.BigTextStyle().bigText(text4)).build(), userHandle);
+            this.mNotificationManager.notifyAsUser(
+                    null,
+                    this.mIsPortContaminatedNotificationId,
+                    new Notification.Builder(this.mContext, str2)
+                            .setSmallIcon(R.drawable.jog_tab_bar_left_end_confirm_green)
+                            .setTicker(text3)
+                            .setColor(
+                                    this.mContext.getColor(
+                                            R.color.system_notification_accent_color))
+                            .setContentTitle(text3)
+                            .setContentText(text4)
+                            .setVisibility(1)
+                            .setStyle(new Notification.BigTextStyle().bigText(text4))
+                            .build(),
+                    userHandle);
         }
     }
 
-    public final boolean registerForDisplayPortEvents(IDisplayPortAltModeInfoListener iDisplayPortAltModeInfoListener) {
+    public final boolean registerForDisplayPortEvents(
+            IDisplayPortAltModeInfoListener iDisplayPortAltModeInfoListener) {
         synchronized (this.mDisplayPortListenerLock) {
             try {
-                if (this.mDisplayPortListeners.containsKey(iDisplayPortAltModeInfoListener.asBinder())) {
+                if (this.mDisplayPortListeners.containsKey(
+                        iDisplayPortAltModeInfoListener.asBinder())) {
                     return false;
                 }
                 try {
                     iDisplayPortAltModeInfoListener.asBinder().linkToDeath(this, 0);
-                    this.mDisplayPortListeners.put(iDisplayPortAltModeInfoListener.asBinder(), iDisplayPortAltModeInfoListener);
+                    this.mDisplayPortListeners.put(
+                            iDisplayPortAltModeInfoListener.asBinder(),
+                            iDisplayPortAltModeInfoListener);
                     return true;
                 } catch (RemoteException e) {
-                    Slog.e("UsbPortManager", "Caught RemoteException in registerForDisplayPortEvents: ", e);
+                    Slog.e(
+                            "UsbPortManager",
+                            "Caught RemoteException in registerForDisplayPortEvents: ",
+                            e);
                     return false;
                 }
             } catch (Throwable th) {
@@ -628,7 +960,8 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             try {
                 int indexOfKey = this.mSimulatedPorts.indexOfKey(str);
                 if (indexOfKey < 0) {
-                    indentingPrintWriter.println("Cannot remove simulated port which does not exist.");
+                    indentingPrintWriter.println(
+                            "Cannot remove simulated port which does not exist.");
                     return;
                 }
                 indentingPrintWriter.println("Disconnecting simulated port: portId=" + str);
@@ -659,27 +992,40 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
             Objects.requireNonNull(iUsbOperationInternal);
             Objects.requireNonNull(str);
             if (((PortInfo) this.mPorts.get(str)) == null) {
-                Slog.println(6, "UsbPortManager", "resetUsbPort: No such port: " + str + " opId:" + i);
+                Slog.println(
+                        6, "UsbPortManager", "resetUsbPort: No such port: " + str + " opId:" + i);
                 try {
                     iUsbOperationInternal.onOperationComplete(3);
                 } catch (RemoteException e) {
-                    Slog.e("UsbPortManager", "resetUsbPort: Failed to call OperationComplete. opId:" + i, e);
+                    Slog.e(
+                            "UsbPortManager",
+                            "resetUsbPort: Failed to call OperationComplete. opId:" + i,
+                            e);
                 }
             }
             try {
                 this.mUsbPortHal.resetUsbPort(str, i, iUsbOperationInternal);
             } catch (Exception e2) {
                 try {
-                    logAndPrintException(null, "reseetUsbPort: Failed to resetUsbPort. opId:" + i, e2);
+                    logAndPrintException(
+                            null, "reseetUsbPort: Failed to resetUsbPort. opId:" + i, e2);
                     iUsbOperationInternal.onOperationComplete(1);
                 } catch (RemoteException e3) {
-                    Slog.e("UsbPortManager", "resetUsbPort: Failed to call onOperationComplete. opId:" + i, e3);
+                    Slog.e(
+                            "UsbPortManager",
+                            "resetUsbPort: Failed to call onOperationComplete. opId:" + i,
+                            e3);
                 }
             }
         }
     }
 
-    public final void setPortRoles(String str, int i, int i2, IndentingPrintWriter indentingPrintWriter, UsbService.AnonymousClass2 anonymousClass2) {
+    public final void setPortRoles(
+            String str,
+            int i,
+            int i2,
+            IndentingPrintWriter indentingPrintWriter,
+            UsbService.AnonymousClass2 anonymousClass2) {
         PortInfo portInfo;
         int i3;
         synchronized (this.mLock) {
@@ -695,7 +1041,15 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                 return;
             }
             if (!portInfo.mUsbPortStatus.isRoleCombinationSupported(i, i2)) {
-                logAndPrint(6, indentingPrintWriter, "Attempted to set USB port into unsupported role combination: portId=" + str + ", newPowerRole=" + UsbPort.powerRoleToString(i) + ", newDataRole=" + UsbPort.dataRoleToString(i2));
+                logAndPrint(
+                        6,
+                        indentingPrintWriter,
+                        "Attempted to set USB port into unsupported role combination: portId="
+                                + str
+                                + ", newPowerRole="
+                                + UsbPort.powerRoleToString(i)
+                                + ", newDataRole="
+                                + UsbPort.dataRoleToString(i2));
                 return;
             }
             int currentDataRole = portInfo.mUsbPortStatus.getCurrentDataRole();
@@ -716,12 +1070,37 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                 i3 = 2;
             } else {
                 if (!z || i != 2 || i2 != 2) {
-                    logAndPrint(6, indentingPrintWriter, "Found mismatch in supported USB role combinations while attempting to change role: " + portInfo + ", newPowerRole=" + UsbPort.powerRoleToString(i) + ", newDataRole=" + UsbPort.dataRoleToString(i2));
+                    logAndPrint(
+                            6,
+                            indentingPrintWriter,
+                            "Found mismatch in supported USB role combinations while attempting to"
+                                + " change role: "
+                                    + portInfo
+                                    + ", newPowerRole="
+                                    + UsbPort.powerRoleToString(i)
+                                    + ", newDataRole="
+                                    + UsbPort.dataRoleToString(i2));
                     return;
                 }
                 i3 = 1;
             }
-            logAndPrint(4, indentingPrintWriter, "Setting USB port mode and role: portId=" + str + ", currentMode=" + UsbPort.modeToString(currentMode) + ", currentPowerRole=" + UsbPort.powerRoleToString(currentPowerRole) + ", currentDataRole=" + UsbPort.dataRoleToString(currentDataRole) + ", newMode=" + UsbPort.modeToString(i3) + ", newPowerRole=" + UsbPort.powerRoleToString(i) + ", newDataRole=" + UsbPort.dataRoleToString(i2));
+            logAndPrint(
+                    4,
+                    indentingPrintWriter,
+                    "Setting USB port mode and role: portId="
+                            + str
+                            + ", currentMode="
+                            + UsbPort.modeToString(currentMode)
+                            + ", currentPowerRole="
+                            + UsbPort.powerRoleToString(currentPowerRole)
+                            + ", currentDataRole="
+                            + UsbPort.dataRoleToString(currentDataRole)
+                            + ", newMode="
+                            + UsbPort.modeToString(i3)
+                            + ", newPowerRole="
+                            + UsbPort.powerRoleToString(i)
+                            + ", newDataRole="
+                            + UsbPort.dataRoleToString(i2));
             RawPortInfo rawPortInfo = (RawPortInfo) this.mSimulatedPorts.get(str);
             if (rawPortInfo != null) {
                 rawPortInfo.currentMode = i3;
@@ -732,12 +1111,24 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                 UsbPortHal usbPortHal = this.mUsbPortHal;
                 if (usbPortHal != null) {
                     if (currentMode != i3) {
-                        logAndPrint(6, indentingPrintWriter, "Trying to set the USB port mode: portId=" + str + ", newMode=" + UsbPort.modeToString(i3));
+                        logAndPrint(
+                                6,
+                                indentingPrintWriter,
+                                "Trying to set the USB port mode: portId="
+                                        + str
+                                        + ", newMode="
+                                        + UsbPort.modeToString(i3));
                         if (anonymousClass2 != null) {
                             try {
                                 anonymousClass2.run();
                             } catch (Exception e) {
-                                logAndPrintException(indentingPrintWriter, "Failed to set the USB port mode: portId=" + str + ", newMode=" + UsbPort.modeToString(i3), e);
+                                logAndPrintException(
+                                        indentingPrintWriter,
+                                        "Failed to set the USB port mode: portId="
+                                                + str
+                                                + ", newMode="
+                                                + UsbPort.modeToString(i3),
+                                        e);
                             }
                         }
                         UsbPortHal usbPortHal2 = this.mUsbPortHal;
@@ -755,7 +1146,13 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                                 this.mTransactionId = j2;
                                 usbPortHal.switchPowerRole(i4, str, j2);
                             } catch (Exception e2) {
-                                logAndPrintException(indentingPrintWriter, "Failed to set the USB port power role: portId=" + str + ", newPowerRole=" + UsbPort.powerRoleToString(i), e2);
+                                logAndPrintException(
+                                        indentingPrintWriter,
+                                        "Failed to set the USB port power role: portId="
+                                                + str
+                                                + ", newPowerRole="
+                                                + UsbPort.powerRoleToString(i),
+                                        e2);
                                 return;
                             }
                         }
@@ -764,7 +1161,13 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                                 try {
                                     anonymousClass2.run();
                                 } catch (Exception e3) {
-                                    logAndPrintException(indentingPrintWriter, "Failed to set the USB port data role: portId=" + str + ", newDataRole=" + UsbPort.dataRoleToString(i2), e3);
+                                    logAndPrintException(
+                                            indentingPrintWriter,
+                                            "Failed to set the USB port data role: portId="
+                                                    + str
+                                                    + ", newDataRole="
+                                                    + UsbPort.dataRoleToString(i2),
+                                            e3);
                                 }
                             }
                             UsbPortHal usbPortHal3 = this.mUsbPortHal;
@@ -780,7 +1183,8 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         }
     }
 
-    public final void simulateComplianceWarnings(String str, String str2, IndentingPrintWriter indentingPrintWriter) {
+    public final void simulateComplianceWarnings(
+            String str, String str2, IndentingPrintWriter indentingPrintWriter) {
         synchronized (this.mLock) {
             try {
                 RawPortInfo rawPortInfo = (RawPortInfo) this.mSimulatedPorts.get(str);
@@ -794,7 +1198,8 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                         intArray.add(Integer.parseInt(str3));
                     }
                 }
-                indentingPrintWriter.println("Simulating Compliance Warnings: portId=" + str + " Warnings=" + str2);
+                indentingPrintWriter.println(
+                        "Simulating Compliance Warnings: portId=" + str + " Warnings=" + str2);
                 rawPortInfo.complianceWarnings = intArray.toArray();
                 updatePortsLocked(indentingPrintWriter, null);
             } catch (Throwable th) {
@@ -803,7 +1208,8 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         }
     }
 
-    public final void simulateContaminantStatus(String str, boolean z, IndentingPrintWriter indentingPrintWriter) {
+    public final void simulateContaminantStatus(
+            String str, boolean z, IndentingPrintWriter indentingPrintWriter) {
         synchronized (this.mLock) {
             try {
                 RawPortInfo rawPortInfo = (RawPortInfo) this.mSimulatedPorts.get(str);
@@ -820,7 +1226,14 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         }
     }
 
-    public final void simulateDisplayPortAltModeInfo(String str, int i, int i2, int i3, boolean z, int i4, IndentingPrintWriter indentingPrintWriter) {
+    public final void simulateDisplayPortAltModeInfo(
+            String str,
+            int i,
+            int i2,
+            int i3,
+            boolean z,
+            int i4,
+            IndentingPrintWriter indentingPrintWriter) {
         synchronized (this.mLock) {
             try {
                 RawPortInfo rawPortInfo = (RawPortInfo) this.mSimulatedPorts.get(str);
@@ -828,9 +1241,11 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                     indentingPrintWriter.println("Simulated port not found");
                     return;
                 }
-                DisplayPortAltModeInfo displayPortAltModeInfo = new DisplayPortAltModeInfo(i, i2, i3, z, i4);
+                DisplayPortAltModeInfo displayPortAltModeInfo =
+                        new DisplayPortAltModeInfo(i, i2, i3, z, i4);
                 rawPortInfo.displayPortAltModeInfo = displayPortAltModeInfo;
-                indentingPrintWriter.println("Simulating DisplayPort Info: " + displayPortAltModeInfo);
+                indentingPrintWriter.println(
+                        "Simulating DisplayPort Info: " + displayPortAltModeInfo);
                 updatePortsLocked(indentingPrintWriter, null);
             } catch (Throwable th) {
                 throw th;
@@ -861,7 +1276,8 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         sendMessage(obtainMessage);
     }
 
-    public final void updatePortsLocked(IndentingPrintWriter indentingPrintWriter, ArrayList arrayList) {
+    public final void updatePortsLocked(
+            IndentingPrintWriter indentingPrintWriter, ArrayList arrayList) {
         IndentingPrintWriter indentingPrintWriter2;
         int i;
         UsbPortManager usbPortManager = this;
@@ -878,14 +1294,58 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
         if (usbPortManager.mSimulatedPorts.isEmpty()) {
             for (Iterator it = arrayList.iterator(); it.hasNext(); it = it) {
                 RawPortInfo rawPortInfo = (RawPortInfo) it.next();
-                addOrUpdatePortLocked(rawPortInfo.portId, rawPortInfo.supportedModes, rawPortInfo.supportedContaminantProtectionModes, rawPortInfo.currentMode, rawPortInfo.canChangeMode, rawPortInfo.currentPowerRole, rawPortInfo.canChangePowerRole, rawPortInfo.currentDataRole, rawPortInfo.canChangeDataRole, rawPortInfo.supportsEnableContaminantPresenceProtection, rawPortInfo.contaminantProtectionStatus, rawPortInfo.supportsEnableContaminantPresenceDetection, rawPortInfo.contaminantDetectionStatus, rawPortInfo.usbDataStatus, rawPortInfo.powerTransferLimited, rawPortInfo.powerBrickConnectionStatus, rawPortInfo.supportsComplianceWarnings, rawPortInfo.complianceWarnings, rawPortInfo.plugState, rawPortInfo.supportedAltModes, rawPortInfo.displayPortAltModeInfo, indentingPrintWriter);
+                addOrUpdatePortLocked(
+                        rawPortInfo.portId,
+                        rawPortInfo.supportedModes,
+                        rawPortInfo.supportedContaminantProtectionModes,
+                        rawPortInfo.currentMode,
+                        rawPortInfo.canChangeMode,
+                        rawPortInfo.currentPowerRole,
+                        rawPortInfo.canChangePowerRole,
+                        rawPortInfo.currentDataRole,
+                        rawPortInfo.canChangeDataRole,
+                        rawPortInfo.supportsEnableContaminantPresenceProtection,
+                        rawPortInfo.contaminantProtectionStatus,
+                        rawPortInfo.supportsEnableContaminantPresenceDetection,
+                        rawPortInfo.contaminantDetectionStatus,
+                        rawPortInfo.usbDataStatus,
+                        rawPortInfo.powerTransferLimited,
+                        rawPortInfo.powerBrickConnectionStatus,
+                        rawPortInfo.supportsComplianceWarnings,
+                        rawPortInfo.complianceWarnings,
+                        rawPortInfo.plugState,
+                        rawPortInfo.supportedAltModes,
+                        rawPortInfo.displayPortAltModeInfo,
+                        indentingPrintWriter);
             }
         } else {
             int i3 = 0;
             for (int size2 = usbPortManager.mSimulatedPorts.size(); i3 < size2; size2 = size2) {
                 RawPortInfo rawPortInfo2 = (RawPortInfo) usbPortManager.mSimulatedPorts.valueAt(i3);
                 usbPortManager = this;
-                usbPortManager.addOrUpdatePortLocked(rawPortInfo2.portId, rawPortInfo2.supportedModes, rawPortInfo2.supportedContaminantProtectionModes, rawPortInfo2.currentMode, rawPortInfo2.canChangeMode, rawPortInfo2.currentPowerRole, rawPortInfo2.canChangePowerRole, rawPortInfo2.currentDataRole, rawPortInfo2.canChangeDataRole, rawPortInfo2.supportsEnableContaminantPresenceProtection, rawPortInfo2.contaminantProtectionStatus, rawPortInfo2.supportsEnableContaminantPresenceDetection, rawPortInfo2.contaminantDetectionStatus, rawPortInfo2.usbDataStatus, rawPortInfo2.powerTransferLimited, rawPortInfo2.powerBrickConnectionStatus, rawPortInfo2.supportsComplianceWarnings, rawPortInfo2.complianceWarnings, rawPortInfo2.plugState, rawPortInfo2.supportedAltModes, rawPortInfo2.displayPortAltModeInfo, indentingPrintWriter);
+                usbPortManager.addOrUpdatePortLocked(
+                        rawPortInfo2.portId,
+                        rawPortInfo2.supportedModes,
+                        rawPortInfo2.supportedContaminantProtectionModes,
+                        rawPortInfo2.currentMode,
+                        rawPortInfo2.canChangeMode,
+                        rawPortInfo2.currentPowerRole,
+                        rawPortInfo2.canChangePowerRole,
+                        rawPortInfo2.currentDataRole,
+                        rawPortInfo2.canChangeDataRole,
+                        rawPortInfo2.supportsEnableContaminantPresenceProtection,
+                        rawPortInfo2.contaminantProtectionStatus,
+                        rawPortInfo2.supportsEnableContaminantPresenceDetection,
+                        rawPortInfo2.contaminantDetectionStatus,
+                        rawPortInfo2.usbDataStatus,
+                        rawPortInfo2.powerTransferLimited,
+                        rawPortInfo2.powerBrickConnectionStatus,
+                        rawPortInfo2.supportsComplianceWarnings,
+                        rawPortInfo2.complianceWarnings,
+                        rawPortInfo2.plugState,
+                        rawPortInfo2.supportedAltModes,
+                        rawPortInfo2.displayPortAltModeInfo,
+                        indentingPrintWriter);
                 i3++;
             }
         }
@@ -905,16 +1365,22 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                 logAndPrint(4, indentingPrintWriter2, "USB port added: " + portInfo);
                 handlePortLocked(portInfo);
                 portInfo.mDisposition = 2;
-                Slog.d("UsbPortManager", "mPorts(" + i4 + ") DISPOSITION_ADDED -> DISPOSITION_READY");
+                Slog.d(
+                        "UsbPortManager",
+                        "mPorts(" + i4 + ") DISPOSITION_ADDED -> DISPOSITION_READY");
             } else if (i5 != 1) {
                 i = 3;
                 if (i5 != 3) {
-                    StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i4, "mPorts(", ") default: mDisposition=");
+                    StringBuilder m =
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    i4, "mPorts(", ") default: mDisposition=");
                     m.append(portInfo.mDisposition);
                     Slog.d("UsbPortManager", m.toString());
                     indentingPrintWriter2 = indentingPrintWriter;
                 } else {
-                    StringBuilder m2 = BatteryService$$ExternalSyntheticOutline0.m(i4, "mPorts(", ") DISPOSITION_REMOVED size=");
+                    StringBuilder m2 =
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    i4, "mPorts(", ") DISPOSITION_REMOVED size=");
                     m2.append(this.mPorts.size());
                     Slog.d("UsbPortManager", m2.toString());
                     this.mPorts.removeAt(i4);
@@ -927,10 +1393,17 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                 indentingPrintWriter2 = indentingPrintWriter;
                 i = 3;
                 logAndPrint(4, indentingPrintWriter2, "USB port changed: " + portInfo);
-                if (this.mConnected.containsKey(portInfo.mUsbPort.getId()) && ((Boolean) this.mConnected.get(portInfo.mUsbPort.getId())).booleanValue() && !portInfo.mUsbPortStatus.isConnected() && portInfo.mUsbPortStatus.getContaminantDetectionStatus() == 1) {
-                    enableContaminantDetection(portInfo.mUsbPort.getId(), true, indentingPrintWriter2);
+                if (this.mConnected.containsKey(portInfo.mUsbPort.getId())
+                        && ((Boolean) this.mConnected.get(portInfo.mUsbPort.getId())).booleanValue()
+                        && !portInfo.mUsbPortStatus.isConnected()
+                        && portInfo.mUsbPortStatus.getContaminantDetectionStatus() == 1) {
+                    enableContaminantDetection(
+                            portInfo.mUsbPort.getId(), true, indentingPrintWriter2);
                 }
-                if (this.mConnected.containsKey(portInfo.mUsbPort.getId()) && ((Boolean) this.mConnected.get(portInfo.mUsbPort.getId())).booleanValue() && !portInfo.mUsbPortStatus.isConnected() && portInfo.mUsbPortStatus.isPowerTransferLimited()) {
+                if (this.mConnected.containsKey(portInfo.mUsbPort.getId())
+                        && ((Boolean) this.mConnected.get(portInfo.mUsbPort.getId())).booleanValue()
+                        && !portInfo.mUsbPortStatus.isConnected()
+                        && portInfo.mUsbPortStatus.isPowerTransferLimited()) {
                     String id = portInfo.mUsbPort.getId();
                     long j = this.mTransactionId + 1;
                     this.mTransactionId = j;
@@ -938,10 +1411,15 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                 }
                 handlePortLocked(portInfo);
                 portInfo.mDisposition = 2;
-                Slog.d("UsbPortManager", "mPorts(" + i4 + ") DISPOSITION_CHANGED -> DISPOSITION_READY");
+                Slog.d(
+                        "UsbPortManager",
+                        "mPorts(" + i4 + ") DISPOSITION_CHANGED -> DISPOSITION_READY");
             }
             if (portInfo.mComplianceWarningChange == 1) {
-                logAndPrint(4, indentingPrintWriter2, "USB port compliance warning changed: " + portInfo);
+                logAndPrint(
+                        4,
+                        indentingPrintWriter2,
+                        "USB port compliance warning changed: " + portInfo);
                 UsbPortStatus usbPortStatus = portInfo.mUsbPortStatus;
                 if (usbPortStatus != null && usbPortStatus.getComplianceWarnings().length != 0) {
                     String id2 = portInfo.mUsbPort.getId();
@@ -978,25 +1456,40 @@ public final class UsbPortManager implements IBinder.DeathRecipient {
                                 break;
                         }
                     }
-                    FrameworkStatsLog.write(FrameworkStatsLog.USB_COMPLIANCE_WARNINGS_REPORTED, id2, intArray.toArray());
+                    FrameworkStatsLog.write(
+                            FrameworkStatsLog.USB_COMPLIANCE_WARNINGS_REPORTED,
+                            id2,
+                            intArray.toArray());
                 }
                 if (portInfo.mComplianceWarningChange != 0) {
-                    Intent m3 = BatteryService$$ExternalSyntheticOutline0.m(285212672, "android.hardware.usb.action.USB_PORT_COMPLIANCE_CHANGED");
+                    Intent m3 =
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    285212672,
+                                    "android.hardware.usb.action.USB_PORT_COMPLIANCE_CHANGED");
                     m3.putExtra("port", (Parcelable) ParcelableUsbPort.of(portInfo.mUsbPort));
                     m3.putExtra("portStatus", (Parcelable) portInfo.mUsbPortStatus);
                     post(new UsbPortManager$$ExternalSyntheticLambda0(this, m3, 1));
                 }
             }
             if (portInfo.mDisplayPortAltModeChange == 1) {
-                logAndPrint(4, indentingPrintWriter2, "USB port DisplayPort Alt Mode Status Changed: " + portInfo);
+                logAndPrint(
+                        4,
+                        indentingPrintWriter2,
+                        "USB port DisplayPort Alt Mode Status Changed: " + portInfo);
                 String id3 = portInfo.mUsbPort.getId();
                 synchronized (this.mDisplayPortListenerLock) {
                     Iterator it2 = this.mDisplayPortListeners.values().iterator();
                     while (it2.hasNext()) {
                         try {
-                            ((IDisplayPortAltModeInfoListener) it2.next()).onDisplayPortAltModeInfoChanged(id3, portInfo.mUsbPortStatus.getDisplayPortAltModeInfo());
+                            ((IDisplayPortAltModeInfoListener) it2.next())
+                                    .onDisplayPortAltModeInfoChanged(
+                                            id3,
+                                            portInfo.mUsbPortStatus.getDisplayPortAltModeInfo());
                         } catch (RemoteException e) {
-                            logAndPrintException(indentingPrintWriter2, "Caught RemoteException at sendDpAltModeCallbackLocked", e);
+                            logAndPrintException(
+                                    indentingPrintWriter2,
+                                    "Caught RemoteException at sendDpAltModeCallbackLocked",
+                                    e);
                         }
                     }
                 }

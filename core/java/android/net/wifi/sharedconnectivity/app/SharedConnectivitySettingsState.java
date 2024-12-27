@@ -6,24 +6,28 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class SharedConnectivitySettingsState implements Parcelable {
-    public static final Parcelable.Creator<SharedConnectivitySettingsState> CREATOR = new Parcelable.Creator<SharedConnectivitySettingsState>() { // from class: android.net.wifi.sharedconnectivity.app.SharedConnectivitySettingsState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SharedConnectivitySettingsState createFromParcel(Parcel in) {
-            return SharedConnectivitySettingsState.readFromParcel(in);
-        }
+    public static final Parcelable.Creator<SharedConnectivitySettingsState> CREATOR =
+            new Parcelable.Creator<
+                    SharedConnectivitySettingsState>() { // from class:
+                                                         // android.net.wifi.sharedconnectivity.app.SharedConnectivitySettingsState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SharedConnectivitySettingsState createFromParcel(Parcel in) {
+                    return SharedConnectivitySettingsState.readFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SharedConnectivitySettingsState[] newArray(int size) {
-            return new SharedConnectivitySettingsState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SharedConnectivitySettingsState[] newArray(int size) {
+                    return new SharedConnectivitySettingsState[size];
+                }
+            };
     private final Bundle mExtras;
     private final boolean mInstantTetherEnabled;
     private final PendingIntent mInstantTetherSettingsPendingIntent;
@@ -49,7 +53,10 @@ public final class SharedConnectivitySettingsState implements Parcelable {
         }
 
         public SharedConnectivitySettingsState build() {
-            return new SharedConnectivitySettingsState(this.mInstantTetherEnabled, this.mInstantTetherSettingsPendingIntent, this.mExtras);
+            return new SharedConnectivitySettingsState(
+                    this.mInstantTetherEnabled,
+                    this.mInstantTetherSettingsPendingIntent,
+                    this.mExtras);
         }
     }
 
@@ -59,7 +66,8 @@ public final class SharedConnectivitySettingsState implements Parcelable {
         }
     }
 
-    private SharedConnectivitySettingsState(boolean instantTetherEnabled, PendingIntent pendingIntent, Bundle extras) {
+    private SharedConnectivitySettingsState(
+            boolean instantTetherEnabled, PendingIntent pendingIntent, Bundle extras) {
         validate(pendingIntent);
         this.mInstantTetherEnabled = instantTetherEnabled;
         this.mInstantTetherSettingsPendingIntent = pendingIntent;
@@ -83,11 +91,16 @@ public final class SharedConnectivitySettingsState implements Parcelable {
             return false;
         }
         SharedConnectivitySettingsState other = (SharedConnectivitySettingsState) obj;
-        return this.mInstantTetherEnabled == other.isInstantTetherEnabled() && Objects.equals(this.mInstantTetherSettingsPendingIntent, other.getInstantTetherSettingsPendingIntent());
+        return this.mInstantTetherEnabled == other.isInstantTetherEnabled()
+                && Objects.equals(
+                        this.mInstantTetherSettingsPendingIntent,
+                        other.getInstantTetherSettingsPendingIntent());
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mInstantTetherEnabled), this.mInstantTetherSettingsPendingIntent);
+        return Objects.hash(
+                Boolean.valueOf(this.mInstantTetherEnabled),
+                this.mInstantTetherSettingsPendingIntent);
     }
 
     @Override // android.os.Parcelable
@@ -97,7 +110,8 @@ public final class SharedConnectivitySettingsState implements Parcelable {
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
-        PendingIntent.writePendingIntentOrNullToParcel(this.mInstantTetherSettingsPendingIntent, dest);
+        PendingIntent.writePendingIntentOrNullToParcel(
+                this.mInstantTetherSettingsPendingIntent, dest);
         dest.writeBoolean(this.mInstantTetherEnabled);
         dest.writeBundle(this.mExtras);
     }
@@ -110,6 +124,12 @@ public final class SharedConnectivitySettingsState implements Parcelable {
     }
 
     public String toString() {
-        return "SharedConnectivitySettingsState[instantTetherEnabled=" + this.mInstantTetherEnabled + "PendingIntent=" + this.mInstantTetherSettingsPendingIntent + "extras=" + this.mExtras.toString() + NavigationBarInflaterView.SIZE_MOD_END;
+        return "SharedConnectivitySettingsState[instantTetherEnabled="
+                + this.mInstantTetherEnabled
+                + "PendingIntent="
+                + this.mInstantTetherSettingsPendingIntent
+                + "extras="
+                + this.mExtras.toString()
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

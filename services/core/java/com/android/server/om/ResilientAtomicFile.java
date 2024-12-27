@@ -4,15 +4,19 @@ import android.os.FileUtils;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.security.FileIntegrity;
+
+import libcore.io.IoUtils;
+
 import com.samsung.android.os.ReliableWrite;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -28,7 +32,8 @@ public final class ResilientAtomicFile implements Closeable {
     public File mCurrentFile = null;
     public FileInputStream mCurrentInStream = null;
 
-    public ResilientAtomicFile(File file, File file2, File file3, OverlayManagerService overlayManagerService) {
+    public ResilientAtomicFile(
+            File file, File file2, File file3, OverlayManagerService overlayManagerService) {
         this.mFile = file;
         this.mTemporaryBackup = file2;
         this.mReserveCopy = file3;
@@ -57,7 +62,12 @@ public final class ResilientAtomicFile implements Closeable {
         this.mCurrentInStream = null;
         IoUtils.closeQuietly(fileInputStream);
         if (this.mReadEventLogger != null) {
-            Slog.e("ResilientAtomicFile", "!@Error reading overlay manager settings, removing " + this.mCurrentFile + '\n' + Log.getStackTraceString(exc));
+            Slog.e(
+                    "ResilientAtomicFile",
+                    "!@Error reading overlay manager settings, removing "
+                            + this.mCurrentFile
+                            + '\n'
+                            + Log.getStackTraceString(exc));
         }
         if (this.mCurrentFile.delete()) {
             this.mCurrentFile = null;
@@ -77,7 +87,11 @@ public final class ResilientAtomicFile implements Closeable {
             this.mMainOutStream = null;
             fileOutputStream2.flush();
             FileUtils.sync(fileOutputStream2);
-            FileUtils.setPermissions(fileOutputStream2.getFD(), FrameworkStatsLog.HOTWORD_DETECTION_SERVICE_RESTARTED, -1, -1);
+            FileUtils.setPermissions(
+                    fileOutputStream2.getFD(),
+                    FrameworkStatsLog.HOTWORD_DETECTION_SERVICE_RESTARTED,
+                    -1,
+                    -1);
             fileOutputStream2.close();
             this.mTemporaryBackup.delete();
             try {
@@ -93,7 +107,11 @@ public final class ResilientAtomicFile implements Closeable {
                             FileUtils.copy(fileInputStream, fileOutputStream3);
                             fileOutputStream3.flush();
                             FileUtils.sync(fileOutputStream3);
-                            FileUtils.setPermissions(fileOutputStream3.getFD(), FrameworkStatsLog.HOTWORD_DETECTION_SERVICE_RESTARTED, -1, -1);
+                            FileUtils.setPermissions(
+                                    fileOutputStream3.getFD(),
+                                    FrameworkStatsLog.HOTWORD_DETECTION_SERVICE_RESTARTED,
+                                    -1,
+                                    -1);
                             fileOutputStream3.close();
                             try {
                                 dup = ParcelFileDescriptor.dup(fileInputStream.getFD());
@@ -110,7 +128,10 @@ public final class ResilientAtomicFile implements Closeable {
                                     throw th;
                                 }
                             } catch (IOException e) {
-                                Slog.e("ResilientAtomicFile", "Failed to verity-protect overlay manager settings", e);
+                                Slog.e(
+                                        "ResilientAtomicFile",
+                                        "Failed to verity-protect overlay manager settings",
+                                        e);
                             }
                             try {
                                 FileIntegrity.setUpFsVerity(dup);
@@ -136,7 +157,11 @@ public final class ResilientAtomicFile implements Closeable {
                 } finally {
                 }
             } catch (IOException e2) {
-                Slog.e("ResilientAtomicFile", "Failed to write reserve copy overlay manager settings: " + this.mReserveCopy, e2);
+                Slog.e(
+                        "ResilientAtomicFile",
+                        "Failed to write reserve copy overlay manager settings: "
+                                + this.mReserveCopy,
+                        e2);
             }
         } catch (Throwable th3) {
             if (fileOutputStream2 != null) {
@@ -156,10 +181,14 @@ public final class ResilientAtomicFile implements Closeable {
                 this.mCurrentFile = this.mTemporaryBackup;
                 this.mCurrentInStream = new FileInputStream(this.mCurrentFile);
                 if (this.mReadEventLogger != null) {
-                    Slog.i("ResilientAtomicFile", "Need to read from backup overlay manager settings file");
+                    Slog.i(
+                            "ResilientAtomicFile",
+                            "Need to read from backup overlay manager settings file");
                 }
                 if (this.mFile.exists()) {
-                    Slog.w("ResilientAtomicFile", "Cleaning up overlay manager settings file " + this.mFile);
+                    Slog.w(
+                            "ResilientAtomicFile",
+                            "Cleaning up overlay manager settings file " + this.mFile);
                     this.mFile.delete();
                 }
                 this.mReserveCopy.delete();
@@ -177,7 +206,9 @@ public final class ResilientAtomicFile implements Closeable {
             this.mCurrentFile = this.mReserveCopy;
             this.mCurrentInStream = new FileInputStream(this.mCurrentFile);
             if (this.mReadEventLogger != null) {
-                Slog.i("ResilientAtomicFile", "Need to read from reserve copy overlay manager settings file");
+                Slog.i(
+                        "ResilientAtomicFile",
+                        "Need to read from reserve copy overlay manager settings file");
             }
         }
         if (this.mCurrentInStream == null && this.mReadEventLogger != null) {
@@ -196,7 +227,9 @@ public final class ResilientAtomicFile implements Closeable {
                 this.mFile.delete();
                 Slog.w("ResilientAtomicFile", "Preserving older overlay manager settings backup");
             } else if (!this.mFile.renameTo(this.mTemporaryBackup)) {
-                throw new IOException("Unable to backup overlay manager settings file, current changes will be lost at reboot");
+                throw new IOException(
+                        "Unable to backup overlay manager settings file, current changes will be"
+                            + " lost at reboot");
             }
         }
         this.mReserveCopy.delete();

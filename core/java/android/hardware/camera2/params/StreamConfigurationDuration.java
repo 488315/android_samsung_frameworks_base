@@ -2,6 +2,7 @@ package android.hardware.camera2.params;
 
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.util.Size;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes2.dex */
@@ -15,7 +16,9 @@ public final class StreamConfigurationDuration {
         this.mFormat = StreamConfigurationMap.checkArgumentFormatInternal(format);
         this.mWidth = Preconditions.checkArgumentPositive(width, "width must be positive");
         this.mHeight = Preconditions.checkArgumentPositive(height, "height must be positive");
-        this.mDurationNs = Preconditions.checkArgumentNonnegative(durationNs, "durationNs must be non-negative");
+        this.mDurationNs =
+                Preconditions.checkArgumentNonnegative(
+                        durationNs, "durationNs must be non-negative");
     }
 
     public final int getFormat() {
@@ -49,13 +52,21 @@ public final class StreamConfigurationDuration {
             return false;
         }
         StreamConfigurationDuration other = (StreamConfigurationDuration) obj;
-        if (this.mFormat != other.mFormat || this.mWidth != other.mWidth || this.mHeight != other.mHeight || this.mDurationNs != other.mDurationNs) {
+        if (this.mFormat != other.mFormat
+                || this.mWidth != other.mWidth
+                || this.mHeight != other.mHeight
+                || this.mDurationNs != other.mDurationNs) {
             return false;
         }
         return true;
     }
 
     public int hashCode() {
-        return HashCodeHelpers.hashCode(this.mFormat, this.mWidth, this.mHeight, (int) this.mDurationNs, (int) (this.mDurationNs >>> 32));
+        return HashCodeHelpers.hashCode(
+                this.mFormat,
+                this.mWidth,
+                this.mHeight,
+                (int) this.mDurationNs,
+                (int) (this.mDurationNs >>> 32));
     }
 }

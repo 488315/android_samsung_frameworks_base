@@ -18,7 +18,8 @@ public abstract class BackupObserverUtils {
         }
     }
 
-    public static void sendBackupOnPackageResult(IBackupObserver iBackupObserver, String str, int i) {
+    public static void sendBackupOnPackageResult(
+            IBackupObserver iBackupObserver, String str, int i) {
         if (iBackupObserver != null) {
             try {
                 iBackupObserver.onResult(str, i);
@@ -28,7 +29,8 @@ public abstract class BackupObserverUtils {
         }
     }
 
-    public static void sendBackupOnUpdate(IBackupObserver iBackupObserver, String str, BackupProgress backupProgress) {
+    public static void sendBackupOnUpdate(
+            IBackupObserver iBackupObserver, String str, BackupProgress backupProgress) {
         if (iBackupObserver != null) {
             try {
                 iBackupObserver.onUpdate(str, backupProgress);

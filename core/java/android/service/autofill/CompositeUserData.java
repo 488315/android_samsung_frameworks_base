@@ -5,27 +5,33 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.view.autofill.Helper;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class CompositeUserData implements FieldClassificationUserData, Parcelable {
-    public static final Parcelable.Creator<CompositeUserData> CREATOR = new Parcelable.Creator<CompositeUserData>() { // from class: android.service.autofill.CompositeUserData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompositeUserData createFromParcel(Parcel parcel) {
-            UserData genericUserData = (UserData) parcel.readParcelable(null, UserData.class);
-            UserData packageUserData = (UserData) parcel.readParcelable(null, UserData.class);
-            return new CompositeUserData(genericUserData, packageUserData);
-        }
+    public static final Parcelable.Creator<CompositeUserData> CREATOR =
+            new Parcelable.Creator<
+                    CompositeUserData>() { // from class:
+                                           // android.service.autofill.CompositeUserData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompositeUserData createFromParcel(Parcel parcel) {
+                    UserData genericUserData =
+                            (UserData) parcel.readParcelable(null, UserData.class);
+                    UserData packageUserData =
+                            (UserData) parcel.readParcelable(null, UserData.class);
+                    return new CompositeUserData(genericUserData, packageUserData);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompositeUserData[] newArray(int size) {
-            return new CompositeUserData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompositeUserData[] newArray(int size) {
+                    return new CompositeUserData[size];
+                }
+            };
     private final String[] mCategories;
     private final UserData mGenericUserData;
     private final UserData mPackageUserData;
@@ -93,16 +99,22 @@ public final class CompositeUserData implements FieldClassificationUserData, Par
 
     @Override // android.service.autofill.FieldClassificationUserData
     public ArrayMap<String, String> getFieldClassificationAlgorithms() {
-        ArrayMap<String, String> packageAlgos = this.mPackageUserData.getFieldClassificationAlgorithms();
-        ArrayMap<String, String> genericAlgos = this.mGenericUserData == null ? null : this.mGenericUserData.getFieldClassificationAlgorithms();
+        ArrayMap<String, String> packageAlgos =
+                this.mPackageUserData.getFieldClassificationAlgorithms();
+        ArrayMap<String, String> genericAlgos =
+                this.mGenericUserData == null
+                        ? null
+                        : this.mGenericUserData.getFieldClassificationAlgorithms();
         ArrayMap<String, String> categoryAlgorithms = null;
         if (packageAlgos != null || genericAlgos != null) {
             categoryAlgorithms = new ArrayMap<>();
             if (genericAlgos != null) {
-                categoryAlgorithms.putAll((ArrayMap<? extends String, ? extends String>) genericAlgos);
+                categoryAlgorithms.putAll(
+                        (ArrayMap<? extends String, ? extends String>) genericAlgos);
             }
             if (packageAlgos != null) {
-                categoryAlgorithms.putAll((ArrayMap<? extends String, ? extends String>) packageAlgos);
+                categoryAlgorithms.putAll(
+                        (ArrayMap<? extends String, ? extends String>) packageAlgos);
             }
         }
         return categoryAlgorithms;
@@ -111,7 +123,10 @@ public final class CompositeUserData implements FieldClassificationUserData, Par
     @Override // android.service.autofill.FieldClassificationUserData
     public ArrayMap<String, Bundle> getFieldClassificationArgs() {
         ArrayMap<String, Bundle> packageArgs = this.mPackageUserData.getFieldClassificationArgs();
-        ArrayMap<String, Bundle> genericArgs = this.mGenericUserData == null ? null : this.mGenericUserData.getFieldClassificationArgs();
+        ArrayMap<String, Bundle> genericArgs =
+                this.mGenericUserData == null
+                        ? null
+                        : this.mGenericUserData.getFieldClassificationArgs();
         ArrayMap<String, Bundle> categoryArgs = null;
         if (packageArgs != null || genericArgs != null) {
             categoryArgs = new ArrayMap<>();
@@ -139,7 +154,11 @@ public final class CompositeUserData implements FieldClassificationUserData, Par
         if (!Helper.sDebug) {
             return super.toString();
         }
-        StringBuilder builder = new StringBuilder("genericUserData=").append(this.mGenericUserData).append(", packageUserData=").append(this.mPackageUserData);
+        StringBuilder builder =
+                new StringBuilder("genericUserData=")
+                        .append(this.mGenericUserData)
+                        .append(", packageUserData=")
+                        .append(this.mPackageUserData);
         return builder.toString();
     }
 

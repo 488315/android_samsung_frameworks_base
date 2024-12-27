@@ -11,6 +11,7 @@ import android.os.UserHandle;
 import android.sec.enterprise.IEDMProxy;
 import android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback;
 import android.util.Log;
+
 import com.android.internal.util.HexDump;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
@@ -35,11 +36,13 @@ import com.android.server.enterprise.security.PasswordPolicy;
 import com.android.server.enterprise.security.PasswordPolicy$$ExternalSyntheticLambda14;
 import com.android.server.enterprise.utils.Utils;
 import com.android.server.timedetector.NetworkTimeUpdateService;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.ISecurityPolicy;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.ucm.ucmservice.CredentialManagerService;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -54,9 +57,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0019, code lost:
-    
-        if (r0 < 0) goto L11;
-     */
+
+       if (r0 < 0) goto L11;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -90,11 +93,15 @@ public final class EDMProxyService extends IEDMProxy.Stub {
             r3.putGenericValueAsUser(r1, r4, r0)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.EDMProxyService.addCallsCount(java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.EDMProxyService.addCallsCount(java.lang.String):void");
     }
 
     public final boolean addNumberOfIncomingCalls() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return false;
         }
@@ -102,7 +109,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean addNumberOfIncomingSms() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return false;
         }
@@ -110,7 +119,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean addNumberOfOutgoingCalls() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return false;
         }
@@ -118,7 +129,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean addNumberOfOutgoingSms() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return false;
         }
@@ -126,37 +139,63 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final void auditLogger(int i, int i2, boolean z, int i3, String str, String str2) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService == null) {
             return;
         }
         auditLogService.redactedAuditLogger(null, i, i2, z, i3, str, str2, null);
     }
 
-    public final void auditLoggerAsUser(int i, int i2, boolean z, int i3, String str, String str2, int i4) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+    public final void auditLoggerAsUser(
+            int i, int i2, boolean z, int i3, String str, String str2, int i4) {
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService == null) {
             return;
         }
         auditLogService.redactedAuditLoggerAsUser(null, i, i2, z, i3, str, str2, null, i4);
     }
 
-    public final void auditLoggerPrivileged(int i, int i2, boolean z, int i3, String str, String str2) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+    public final void auditLoggerPrivileged(
+            int i, int i2, boolean z, int i3, String str, String str2) {
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService != null && AuditLogService.checkAuditPrivilegedAllowed(str)) {
-            auditLogService.auditLoggerInternal(null, i, i2, z, i3, str, auditLogService.appendLogMessageWithCallingUser(str2), null, -1);
+            auditLogService.auditLoggerInternal(
+                    null,
+                    i,
+                    i2,
+                    z,
+                    i3,
+                    str,
+                    auditLogService.appendLogMessageWithCallingUser(str2),
+                    null,
+                    -1);
         }
     }
 
-    public final void auditLoggerPrivilegedAsUser(int i, int i2, boolean z, int i3, String str, String str2, int i4) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+    public final void auditLoggerPrivilegedAsUser(
+            int i, int i2, boolean z, int i3, String str, String str2, int i4) {
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService != null && AuditLogService.checkAuditPrivilegedAllowed(str)) {
-            auditLogService.auditLoggerInternal(null, i, i2, z, i3, str, auditLogService.appendLogMessageWithCallingUser(str2), null, i4);
+            auditLogService.auditLoggerInternal(
+                    null,
+                    i,
+                    i2,
+                    z,
+                    i3,
+                    str,
+                    auditLogService.appendLogMessageWithCallingUser(str2),
+                    null,
+                    i4);
         }
     }
 
     public final void bluetoothLog(String str, String str2) {
-        BluetoothPolicy bluetoothPolicy = (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
+        BluetoothPolicy bluetoothPolicy =
+                (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
         if (bluetoothPolicy == null) {
             return;
         }
@@ -164,7 +203,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean canIncomingCall(String str) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -172,7 +213,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean canIncomingSms(String str) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -180,7 +223,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean canOutgoingCall(String str) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -188,7 +233,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean canOutgoingSms(String str) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -196,7 +243,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean decreaseNumberOfOutgoingSms() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return false;
         }
@@ -204,14 +253,16 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean getAddHomeShorcutRequested() {
-        if (((ApplicationPolicy) EnterpriseService.getPolicyService("application_policy")) == null) {
+        if (((ApplicationPolicy) EnterpriseService.getPolicyService("application_policy"))
+                == null) {
             return false;
         }
         return ApplicationPolicy.addHomeShorcutRequested;
     }
 
     public final boolean getAllowBluetoothDataTransfer(boolean z) {
-        BluetoothPolicy bluetoothPolicy = (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
+        BluetoothPolicy bluetoothPolicy =
+                (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
         if (bluetoothPolicy == null) {
             return true;
         }
@@ -219,7 +270,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final byte[] getApplicationIconFromDb(String str, int i) {
-        ApplicationPolicy applicationPolicy = (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
+        ApplicationPolicy applicationPolicy =
+                (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
         if (applicationPolicy == null) {
             return null;
         }
@@ -227,16 +279,20 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final String getApplicationNameForComponent(String str, String str2, int i) {
-        ApplicationPolicy applicationPolicy = (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
+        ApplicationPolicy applicationPolicy =
+                (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
         if (applicationPolicy == null) {
             return null;
         }
         String applicationNameFromDb = applicationPolicy.getApplicationNameFromDb(str, i);
-        return applicationNameFromDb == null ? applicationPolicy.getApplicationNameFromDb(str2, i) : applicationNameFromDb;
+        return applicationNameFromDb == null
+                ? applicationPolicy.getApplicationNameFromDb(str2, i)
+                : applicationNameFromDb;
     }
 
     public final String getApplicationNameFromDb(String str, int i) {
-        ApplicationPolicy applicationPolicy = (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
+        ApplicationPolicy applicationPolicy =
+                (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
         if (applicationPolicy == null) {
             return null;
         }
@@ -244,12 +300,18 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final Bundle getApplicationRestrictions(String str, int i) {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
-        return knoxCustomManagerService == null ? Bundle.EMPTY : knoxCustomManagerService.getApplicationRestrictionsInternal(str, i);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        return knoxCustomManagerService == null
+                ? Bundle.EMPTY
+                : knoxCustomManagerService.getApplicationRestrictionsInternal(str, i);
     }
 
     public final boolean getBrowserSettingStatus(int i) {
-        BrowserPolicy browserPolicy = (BrowserPolicy) EnterpriseService.getPolicyService("browser_policy");
+        BrowserPolicy browserPolicy =
+                (BrowserPolicy) EnterpriseService.getPolicyService("browser_policy");
         if (browserPolicy == null) {
             return true;
         }
@@ -257,7 +319,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final List getELMPermissions(String str) {
-        EnterpriseLicenseService enterpriseLicenseService = (EnterpriseLicenseService) EnterpriseService.getPolicyService("enterprise_license_policy");
+        EnterpriseLicenseService enterpriseLicenseService =
+                (EnterpriseLicenseService)
+                        EnterpriseService.getPolicyService("enterprise_license_policy");
         if (enterpriseLicenseService == null) {
             return null;
         }
@@ -265,15 +329,21 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean getEmergencyCallOnly(boolean z) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return false;
         }
-        return phoneRestrictionPolicy.getEmergencyCallOnly(new ContextInfo(Binder.getCallingUid()), z);
+        return phoneRestrictionPolicy.getEmergencyCallOnly(
+                new ContextInfo(Binder.getCallingUid()), z);
     }
 
     public final boolean getExtendedCallInfoState() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return false;
         }
@@ -281,7 +351,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final int getKeyboardMode() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return 0;
         }
@@ -289,7 +362,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final String getNtpServer() {
-        DateTimePolicy dateTimePolicy = (DateTimePolicy) EnterpriseService.getPolicyService("date_time_policy");
+        DateTimePolicy dateTimePolicy =
+                (DateTimePolicy) EnterpriseService.getPolicyService("date_time_policy");
         if (dateTimePolicy == null) {
             return null;
         }
@@ -297,7 +371,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final long getNtpTimeout() {
-        DateTimePolicy dateTimePolicy = (DateTimePolicy) EnterpriseService.getPolicyService("date_time_policy");
+        DateTimePolicy dateTimePolicy =
+                (DateTimePolicy) EnterpriseService.getPolicyService("date_time_policy");
         if (dateTimePolicy == null) {
             return 0L;
         }
@@ -305,7 +380,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final int getProKioskHideNotificationMessages() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return 0;
         }
@@ -313,7 +391,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean getProKioskNotificationMessagesState() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return true;
         }
@@ -321,7 +402,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean getProKioskState() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return false;
         }
@@ -329,7 +413,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final int getSensorDisabled() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return 0;
         }
@@ -337,7 +424,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean getToastEnabledState() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return true;
         }
@@ -345,7 +435,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final int getToastGravity() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return 0;
         }
@@ -353,7 +446,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean getToastGravityEnabledState() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return false;
         }
@@ -361,7 +457,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final int getToastGravityXOffset() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return 0;
         }
@@ -369,7 +468,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final int getToastGravityYOffset() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return 0;
         }
@@ -377,7 +479,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean getToastShowPackageNameState() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return false;
         }
@@ -385,7 +490,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final String getUsbNetAddress(int i) {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return null;
         }
@@ -393,7 +501,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean getUsbNetStateInternal() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return false;
         }
@@ -401,7 +512,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean getVolumeButtonRotationState() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return false;
         }
@@ -409,7 +523,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final int getVolumeControlStream() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return 0;
         }
@@ -417,7 +534,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean getVolumePanelEnabledState() {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return true;
         }
@@ -429,7 +549,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isAccountRemovalAllowed(String str, String str2, boolean z) {
-        DeviceAccountPolicy deviceAccountPolicy = (DeviceAccountPolicy) EnterpriseService.getPolicyService("device_account_policy");
+        DeviceAccountPolicy deviceAccountPolicy =
+                (DeviceAccountPolicy) EnterpriseService.getPolicyService("device_account_policy");
         if (deviceAccountPolicy == null) {
             return true;
         }
@@ -437,7 +558,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isAllowedMamPackage(String str) {
-        KnoxCustomManagerService knoxCustomManagerService = (KnoxCustomManagerService) EnterpriseService.getPolicyService(KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
+        KnoxCustomManagerService knoxCustomManagerService =
+                (KnoxCustomManagerService)
+                        EnterpriseService.getPolicyService(
+                                KnoxCustomManagerService.KNOX_CUSTOM_MANAGER_SERVICE);
         if (knoxCustomManagerService == null) {
             return false;
         }
@@ -445,7 +569,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isAnyApplicationNameChangedAsUser(int i) {
-        ApplicationPolicy applicationPolicy = (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
+        ApplicationPolicy applicationPolicy =
+                (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
         if (applicationPolicy == null) {
             return false;
         }
@@ -453,7 +578,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isAudioRecordAllowed(boolean z) {
-        RestrictionPolicy restrictionPolicy = (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
+        RestrictionPolicy restrictionPolicy =
+                (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
         if (restrictionPolicy == null) {
             return true;
         }
@@ -461,7 +587,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isAuditLogEnabledAsUser(int i) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService == null) {
             return false;
         }
@@ -469,7 +596,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isBackupAllowed(boolean z) {
-        RestrictionPolicy restrictionPolicy = (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
+        RestrictionPolicy restrictionPolicy =
+                (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
         if (restrictionPolicy == null) {
             return true;
         }
@@ -477,23 +605,30 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isBlockMmsWithStorageEnabled() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return false;
         }
-        return phoneRestrictionPolicy.isBlockMmsWithStorageEnabled(new ContextInfo(Binder.getCallingUid()));
+        return phoneRestrictionPolicy.isBlockMmsWithStorageEnabled(
+                new ContextInfo(Binder.getCallingUid()));
     }
 
     public final boolean isBlockSmsWithStorageEnabled() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return false;
         }
-        return phoneRestrictionPolicy.isBlockSmsWithStorageEnabled(new ContextInfo(Binder.getCallingUid()));
+        return phoneRestrictionPolicy.isBlockSmsWithStorageEnabled(
+                new ContextInfo(Binder.getCallingUid()));
     }
 
     public final boolean isBluetoothDeviceAllowed(String str) {
-        BluetoothPolicy bluetoothPolicy = (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
+        BluetoothPolicy bluetoothPolicy =
+                (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
         if (bluetoothPolicy == null) {
             return true;
         }
@@ -509,7 +644,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isBluetoothEnabled() {
-        BluetoothPolicy bluetoothPolicy = (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
+        BluetoothPolicy bluetoothPolicy =
+                (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
         if (bluetoothPolicy == null) {
             return true;
         }
@@ -517,7 +653,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isBluetoothLogEnabled() {
-        BluetoothPolicy bluetoothPolicy = (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
+        BluetoothPolicy bluetoothPolicy =
+                (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
         if (bluetoothPolicy == null) {
             return false;
         }
@@ -526,12 +663,14 @@ public final class EDMProxyService extends IEDMProxy.Stub {
 
     public final boolean isBluetoothUUIDAllowed(String str) {
         int i;
-        BluetoothPolicy bluetoothPolicy = (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
+        BluetoothPolicy bluetoothPolicy =
+                (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
         if (bluetoothPolicy == null) {
             return true;
         }
         Iterator it = ((HashMap) bluetoothPolicy.mProfileMap).keySet().iterator();
-        loop0: while (true) {
+        loop0:
+        while (true) {
             if (!it.hasNext()) {
                 i = -1;
                 break;
@@ -645,7 +784,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
             android.util.Log.e(r0, r6)
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.EDMProxyService.isCaCertificateTrustedAsUser(byte[], boolean, boolean, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.EDMProxyService.isCaCertificateTrustedAsUser(byte[],"
+                    + " boolean, boolean, int):boolean");
     }
 
     public final boolean isCallingCaptureEnabled() {
@@ -657,7 +799,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isCertificateTrustedUntrustedEnabledAsUser(int i) {
-        CertificatePolicy certificatePolicy = (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
+        CertificatePolicy certificatePolicy =
+                (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
         if (certificatePolicy == null) {
             return false;
         }
@@ -665,7 +808,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isCertificateValidationAtInstallEnabledAsUser(int i) {
-        CertificatePolicy certificatePolicy = (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
+        CertificatePolicy certificatePolicy =
+                (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
         if (certificatePolicy == null) {
             return false;
         }
@@ -673,7 +817,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isClipboardAllowed(boolean z) {
-        RestrictionPolicy restrictionPolicy = (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
+        RestrictionPolicy restrictionPolicy =
+                (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
         if (restrictionPolicy == null) {
             return true;
         }
@@ -681,7 +826,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isClipboardShareAllowed() {
-        RestrictionPolicy restrictionPolicy = (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
+        RestrictionPolicy restrictionPolicy =
+                (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
         if (restrictionPolicy == null) {
             return true;
         }
@@ -690,11 +836,17 @@ public final class EDMProxyService extends IEDMProxy.Stub {
 
     public final boolean isCopyContactToSimAllowed(int i) {
         boolean z;
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
-        Iterator it = phoneRestrictionPolicy.mEdmStorageProvider.getBooleanListAsUser(0, "PHONERESTRICTION", "copyContactToSimEnabled").iterator();
+        Iterator it =
+                phoneRestrictionPolicy
+                        .mEdmStorageProvider
+                        .getBooleanListAsUser(0, "PHONERESTRICTION", "copyContactToSimEnabled")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z = true;
@@ -710,7 +862,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
                 Log.d("PhoneRestrictionPolicy", "Access to PB ADD ");
                 RestrictionToastManager.show(R.string.bluetooth_a2dp_audio_route_name);
             } else if (i != 3) {
-                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "isCopyContactToSimAllowed wrong message value: ", "PhoneRestrictionPolicy");
+                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                        i,
+                        "isCopyContactToSimAllowed wrong message value: ",
+                        "PhoneRestrictionPolicy");
             } else {
                 Log.d("PhoneRestrictionPolicy", "Access to PB Edit ");
                 RestrictionToastManager.show(R.string.indeterminate_progress_44);
@@ -720,7 +875,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isDataAllowedFromSimSlot(int i) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -728,7 +885,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isDiscoverableEnabled() {
-        BluetoothPolicy bluetoothPolicy = (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
+        BluetoothPolicy bluetoothPolicy =
+                (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
         if (bluetoothPolicy == null) {
             return true;
         }
@@ -736,7 +894,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isFactoryResetAllowed() {
-        RestrictionPolicy restrictionPolicy = (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
+        RestrictionPolicy restrictionPolicy =
+                (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
         if (restrictionPolicy == null) {
             return true;
         }
@@ -744,7 +903,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isGoogleAccountsAutoSyncAllowedAsUser(int i) {
-        RestrictionPolicy restrictionPolicy = (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
+        RestrictionPolicy restrictionPolicy =
+                (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
         if (restrictionPolicy == null) {
             return true;
         }
@@ -752,7 +912,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isIncomingCallAllowedFromSimSlot(int i) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -760,7 +922,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isIncomingMmsAllowed() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -768,7 +932,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isIncomingSmsAllowed() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -777,7 +943,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isIncomingSmsAllowedFromSimSlot(int i) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -785,7 +953,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isKnoxBluetoothEnabled(int i) {
-        KnoxMUMContainerPolicy knoxMUMContainerPolicy = (KnoxMUMContainerPolicy) ServiceManager.getService("mum_container_policy");
+        KnoxMUMContainerPolicy knoxMUMContainerPolicy =
+                (KnoxMUMContainerPolicy) ServiceManager.getService("mum_container_policy");
         if (knoxMUMContainerPolicy == null) {
             return false;
         }
@@ -793,15 +962,19 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isLimitNumberOfSmsEnabled() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return false;
         }
-        return phoneRestrictionPolicy.isLimitNumberOfSmsEnabled(new ContextInfo(Binder.getCallingUid()));
+        return phoneRestrictionPolicy.isLimitNumberOfSmsEnabled(
+                new ContextInfo(Binder.getCallingUid()));
     }
 
     public final boolean isMicrophoneEnabled(boolean z) {
-        RestrictionPolicy restrictionPolicy = (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
+        RestrictionPolicy restrictionPolicy =
+                (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
         if (restrictionPolicy == null) {
             return true;
         }
@@ -809,7 +982,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isMmsAllowedFromSimSlot(int i) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -817,7 +992,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isMockLocationEnabled() {
-        RestrictionPolicy restrictionPolicy = (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
+        RestrictionPolicy restrictionPolicy =
+                (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
         if (restrictionPolicy == null) {
             return true;
         }
@@ -829,7 +1005,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isOcspCheckEnabled() {
-        CertificatePolicy certificatePolicy = (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
+        CertificatePolicy certificatePolicy =
+                (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
         if (certificatePolicy == null) {
             return false;
         }
@@ -837,7 +1014,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isOutgoingCallAllowedFromSimSlot(int i) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -845,7 +1024,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isOutgoingCallsAllowed() {
-        BluetoothPolicy bluetoothPolicy = (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
+        BluetoothPolicy bluetoothPolicy =
+                (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
         if (bluetoothPolicy == null) {
             return true;
         }
@@ -853,7 +1033,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isOutgoingSmsAllowed() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -862,7 +1044,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isOutgoingSmsAllowedFromSimSlot(int i) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -870,7 +1054,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isPackageAllowedToAccessExternalSdcard(int i, int i2) {
-        KnoxMUMContainerPolicy knoxMUMContainerPolicy = (KnoxMUMContainerPolicy) ServiceManager.getService("mum_container_policy");
+        KnoxMUMContainerPolicy knoxMUMContainerPolicy =
+                (KnoxMUMContainerPolicy) ServiceManager.getService("mum_container_policy");
         if (knoxMUMContainerPolicy == null) {
             return false;
         }
@@ -879,16 +1064,19 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isPackageInAvrWhitelist(int i) {
-        ApplicationPolicy applicationPolicy = (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
+        ApplicationPolicy applicationPolicy =
+                (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
         if (applicationPolicy != null) {
-            return applicationPolicy.isPackageInWhitelistInternal(3, UserHandle.getCallingUserId(), i);
+            return applicationPolicy.isPackageInWhitelistInternal(
+                    3, UserHandle.getCallingUserId(), i);
         }
         Log.e("EDMProxyService", "AVR Policy returning false due null applicationPolicy");
         return false;
     }
 
     public final boolean isPairingEnabled() {
-        BluetoothPolicy bluetoothPolicy = (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
+        BluetoothPolicy bluetoothPolicy =
+                (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
         if (bluetoothPolicy == null) {
             return true;
         }
@@ -896,7 +1084,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isProfileEnabled(int i) {
-        BluetoothPolicy bluetoothPolicy = (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
+        BluetoothPolicy bluetoothPolicy =
+                (BluetoothPolicy) EnterpriseService.getPolicyService("bluetooth_policy");
         if (bluetoothPolicy == null) {
             return true;
         }
@@ -904,7 +1093,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isRevocationCheckEnabled() {
-        CertificatePolicy certificatePolicy = (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
+        CertificatePolicy certificatePolicy =
+                (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
         if (certificatePolicy == null) {
             return false;
         }
@@ -912,7 +1102,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isRoamingDataEnabled() {
-        RoamingPolicy roamingPolicy = (RoamingPolicy) EnterpriseService.getPolicyService("roaming_policy");
+        RoamingPolicy roamingPolicy =
+                (RoamingPolicy) EnterpriseService.getPolicyService("roaming_policy");
         if (roamingPolicy == null) {
             return true;
         }
@@ -920,7 +1111,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isRoamingPushEnabled() {
-        RoamingPolicy roamingPolicy = (RoamingPolicy) EnterpriseService.getPolicyService("roaming_policy");
+        RoamingPolicy roamingPolicy =
+                (RoamingPolicy) EnterpriseService.getPolicyService("roaming_policy");
         if (roamingPolicy == null) {
             return true;
         }
@@ -936,15 +1128,18 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isScreenLockPatternVisibilityEnabled() {
-        PasswordPolicy passwordPolicy = (PasswordPolicy) EnterpriseService.getPolicyService("password_policy");
+        PasswordPolicy passwordPolicy =
+                (PasswordPolicy) EnterpriseService.getPolicyService("password_policy");
         if (passwordPolicy == null) {
             return true;
         }
-        return passwordPolicy.isScreenLockPatternVisibilityEnabled(new ContextInfo(Binder.getCallingUid()));
+        return passwordPolicy.isScreenLockPatternVisibilityEnabled(
+                new ContextInfo(Binder.getCallingUid()));
     }
 
     public final boolean isScreenLockPatternVisibilityEnabledAsUser(int i) {
-        PasswordPolicy passwordPolicy = (PasswordPolicy) EnterpriseService.getPolicyService("password_policy");
+        PasswordPolicy passwordPolicy =
+                (PasswordPolicy) EnterpriseService.getPolicyService("password_policy");
         if (passwordPolicy == null) {
             return true;
         }
@@ -952,7 +1147,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isSmsPatternCheckRequired() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -960,7 +1157,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isTaskManagerAllowed(boolean z) {
-        KioskModeService kioskModeService = (KioskModeService) EnterpriseService.getPolicyService("kioskmode");
+        KioskModeService kioskModeService =
+                (KioskModeService) EnterpriseService.getPolicyService("kioskmode");
         if (kioskModeService == null) {
             return true;
         }
@@ -969,7 +1167,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isVideoRecordAllowed(boolean z) {
-        RestrictionPolicy restrictionPolicy = (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
+        RestrictionPolicy restrictionPolicy =
+                (RestrictionPolicy) EnterpriseService.getPolicyService("restriction_policy");
         if (restrictionPolicy == null) {
             return true;
         }
@@ -977,7 +1176,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final boolean isWapPushAllowed() {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return true;
         }
@@ -985,7 +1186,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final void logEvent(int i, int i2, List list) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService == null) {
             return;
         }
@@ -993,7 +1195,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final void logEventAsUser(int i, int i2, int i3, List list) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService == null) {
             return;
         }
@@ -1001,7 +1204,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final void logEventForComponent(int i, String str, int i2, List list) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService == null) {
             return;
         }
@@ -1009,7 +1213,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final void notifyCertificateFailureAsUser(String str, String str2, boolean z, int i) {
-        CertificatePolicy certificatePolicy = (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
+        CertificatePolicy certificatePolicy =
+                (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
         if (certificatePolicy == null) {
             return;
         }
@@ -1017,7 +1222,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final void notifyCertificateRemovedAsUser(String str, int i) {
-        CertificatePolicy certificatePolicy = (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
+        CertificatePolicy certificatePolicy =
+                (CertificatePolicy) EnterpriseService.getPolicyService("certificate_policy");
         if (certificatePolicy == null) {
             return;
         }
@@ -1025,59 +1231,96 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final void notifyPasswordPolicyOneLockChanged(boolean z, int i) {
-        PasswordPolicy passwordPolicy = (PasswordPolicy) EnterpriseService.getPolicyService("password_policy");
+        PasswordPolicy passwordPolicy =
+                (PasswordPolicy) EnterpriseService.getPolicyService("password_policy");
         if (passwordPolicy == null) {
             return;
         }
         passwordPolicy.updateSystemUIMonitor$9(i);
         if (z) {
             PasswordPolicy.Injector injector = passwordPolicy.mInjector;
-            PasswordPolicy$$ExternalSyntheticLambda14 passwordPolicy$$ExternalSyntheticLambda14 = new PasswordPolicy$$ExternalSyntheticLambda14(passwordPolicy, i, 1);
+            PasswordPolicy$$ExternalSyntheticLambda14 passwordPolicy$$ExternalSyntheticLambda14 =
+                    new PasswordPolicy$$ExternalSyntheticLambda14(passwordPolicy, i, 1);
             injector.getClass();
             Binder.withCleanCallingIdentity(passwordPolicy$$ExternalSyntheticLambda14);
         }
     }
 
-    public final void redactedAuditLogger(int i, int i2, boolean z, int i3, String str, String str2, String str3) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+    public final void redactedAuditLogger(
+            int i, int i2, boolean z, int i3, String str, String str2, String str3) {
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService == null) {
             return;
         }
         auditLogService.redactedAuditLogger(null, i, i2, z, i3, str, str2, str3);
     }
 
-    public final void redactedAuditLoggerAsUser(int i, int i2, boolean z, int i3, String str, String str2, String str3, int i4) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+    public final void redactedAuditLoggerAsUser(
+            int i, int i2, boolean z, int i3, String str, String str2, String str3, int i4) {
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService == null) {
             return;
         }
         auditLogService.redactedAuditLoggerAsUser(null, i, i2, z, i3, str, str2, str3, i4);
     }
 
-    public final void redactedAuditLoggerPrivileged(int i, int i2, boolean z, int i3, String str, String str2, String str3) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+    public final void redactedAuditLoggerPrivileged(
+            int i, int i2, boolean z, int i3, String str, String str2, String str3) {
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService != null && AuditLogService.checkAuditPrivilegedAllowed(str)) {
-            auditLogService.auditLoggerInternal(null, i, i2, z, i3, str, auditLogService.appendLogMessageWithCallingUser(str2), str3, -1);
+            auditLogService.auditLoggerInternal(
+                    null,
+                    i,
+                    i2,
+                    z,
+                    i3,
+                    str,
+                    auditLogService.appendLogMessageWithCallingUser(str2),
+                    str3,
+                    -1);
         }
     }
 
-    public final void redactedAuditLoggerPrivilegedAsUser(int i, int i2, boolean z, int i3, String str, String str2, String str3, int i4) {
-        AuditLogService auditLogService = (AuditLogService) EnterpriseService.getPolicyService("auditlog");
+    public final void redactedAuditLoggerPrivilegedAsUser(
+            int i, int i2, boolean z, int i3, String str, String str2, String str3, int i4) {
+        AuditLogService auditLogService =
+                (AuditLogService) EnterpriseService.getPolicyService("auditlog");
         if (auditLogService != null && AuditLogService.checkAuditPrivilegedAllowed(str)) {
-            auditLogService.auditLoggerInternal(null, i, i2, z, i3, str, auditLogService.appendLogMessageWithCallingUser(str2), str3, i4);
+            auditLogService.auditLoggerInternal(
+                    null,
+                    i,
+                    i2,
+                    z,
+                    i3,
+                    str,
+                    auditLogService.appendLogMessageWithCallingUser(str2),
+                    str3,
+                    i4);
         }
     }
 
-    public final boolean registerSystemUICallback(ISystemUIAdapterCallback iSystemUIAdapterCallback) {
+    public final boolean registerSystemUICallback(
+            ISystemUIAdapterCallback iSystemUIAdapterCallback) {
         int i;
         SystemUIAdapter systemUIAdapter = SystemUIAdapter.getInstance(this.mContext);
         systemUIAdapter.getClass();
-        Log.d("SystemUIAdapter", "registerSystemUICallback() is called " + iSystemUIAdapterCallback);
+        Log.d(
+                "SystemUIAdapter",
+                "registerSystemUICallback() is called " + iSystemUIAdapterCallback);
         int callingUid = Binder.getCallingUid();
         try {
-            i = SystemUIAdapter.mContext.getPackageManager().getPackageUidAsUser(Constants.SYSTEMUI_PACKAGE_NAME, 0);
+            i =
+                    SystemUIAdapter.mContext
+                            .getPackageManager()
+                            .getPackageUidAsUser(Constants.SYSTEMUI_PACKAGE_NAME, 0);
         } catch (PackageManager.NameNotFoundException e) {
-            Log.e("SystemUIAdapter", "isCalledFromSystemUI() : Unable to resolve SystemUI's UID.", e);
+            Log.e(
+                    "SystemUIAdapter",
+                    "isCalledFromSystemUI() : Unable to resolve SystemUI's UID.",
+                    e);
             i = -1;
         }
         int appId = UserHandle.getAppId(callingUid);
@@ -1090,7 +1333,11 @@ public final class EDMProxyService extends IEDMProxy.Stub {
             if (nameForUid.equals("android.uid.systemui") && appId == i) {
                 int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(null);
                 if (callingOrCurrentUserId != 0) {
-                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m(callingOrCurrentUserId, "registerSystemUICallback() has failed because it's only allowed user_system, but userId = ", "SystemUIAdapter");
+                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                            callingOrCurrentUserId,
+                            "registerSystemUICallback() has failed because it's only allowed"
+                                + " user_system, but userId = ",
+                            "SystemUIAdapter");
                     return false;
                 }
                 if (iSystemUIAdapterCallback == null) {
@@ -1101,12 +1348,19 @@ public final class EDMProxyService extends IEDMProxy.Stub {
                     int i2 = systemUIAdapter.mRegisteredCount + 1;
                     systemUIAdapter.mRegisteredCount = i2;
                     systemUIAdapter.mCallbacks.put(Integer.valueOf(i2), iSystemUIAdapterCallback);
-                    iSystemUIAdapterCallback.asBinder().linkToDeath(systemUIAdapter.new SystemUIAdapterCallbackDeathRecipient(i2), 0);
+                    iSystemUIAdapterCallback
+                            .asBinder()
+                            .linkToDeath(
+                                    systemUIAdapter.new SystemUIAdapterCallbackDeathRecipient(i2),
+                                    0);
                     Log.d("SystemUIAdapter", "registerSystemUICallback() successfully added");
                 } catch (Exception unused) {
                 }
                 systemUIAdapter.isCallbackDied = false;
-                Log.d("SystemUIAdapter", "registerSystemUICallback() callback has registered. " + systemUIAdapter.mRegisteredCount);
+                Log.d(
+                        "SystemUIAdapter",
+                        "registerSystemUICallback() callback has registered. "
+                                + systemUIAdapter.mRegisteredCount);
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     systemUIAdapter.updateSystemUIMonitor(0);
@@ -1118,9 +1372,14 @@ public final class EDMProxyService extends IEDMProxy.Stub {
                 clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     try {
-                        if (ISecurityPolicy.Stub.asInterface(ServiceManager.getService("security_policy")) != null && systemUIAdapter.isFistcalled) {
+                        if (ISecurityPolicy.Stub.asInterface(
+                                                ServiceManager.getService("security_policy"))
+                                        != null
+                                && systemUIAdapter.isFistcalled) {
                             systemUIAdapter.isFistcalled = false;
-                            ISecurityPolicy.Stub.asInterface(ServiceManager.getService("security_policy")).onKeyguardLaunched();
+                            ISecurityPolicy.Stub.asInterface(
+                                            ServiceManager.getService("security_policy"))
+                                    .onKeyguardLaunched();
                         }
                     } finally {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1131,7 +1390,10 @@ public final class EDMProxyService extends IEDMProxy.Stub {
                 return true;
             }
         }
-        Log.d("SystemUIAdapter", "registerSystemUICallback() has failed because it's only allowed to call by SystemUI ");
+        Log.d(
+                "SystemUIAdapter",
+                "registerSystemUICallback() has failed because it's only allowed to call by"
+                    + " SystemUI ");
         return false;
     }
 
@@ -1139,14 +1401,20 @@ public final class EDMProxyService extends IEDMProxy.Stub {
         return NetworkTimeUpdateService.shallForceNtpMdmValues();
     }
 
-    public final void storeBlockedSmsMms(boolean z, byte[] bArr, String str, int i, String str2, String str3, String str4) {
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+    public final void storeBlockedSmsMms(
+            boolean z, byte[] bArr, String str, int i, String str2, String str3, String str4) {
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return;
         }
         PhoneRestrictionPolicy.enforcePhoneApp();
-        ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("smsMmsPdu", HexDump.toHexString(bArr));
-        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, m, "smsMmsSendType", z ? 1 : 0, "smsMmsType");
+        ContentValues m =
+                AccountManagerService$$ExternalSyntheticOutline0.m(
+                        "smsMmsPdu", HexDump.toHexString(bArr));
+        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                i, m, "smsMmsSendType", z ? 1 : 0, "smsMmsType");
         m.put("smsMmsOrigAddress", str);
         if (!z) {
             m.put("smsMmsTimeStamp", str2);
@@ -1154,7 +1422,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
             m.put("smsMmsSubId", str4);
         }
         try {
-            phoneRestrictionPolicy.mEdmStorageProvider.insertConfiguration("SMSMMSBlockedDelivery", m);
+            phoneRestrictionPolicy.mEdmStorageProvider.insertConfiguration(
+                    "SMSMMSBlockedDelivery", m);
             Log.w("PhoneRestrictionPolicy", "sms/mms stored successfully");
         } catch (Exception unused) {
             Log.w("PhoneRestrictionPolicy", "could not write sms/mms into edm database");
@@ -1178,7 +1447,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final byte[] ucmDecrypt(String str, byte[] bArr, String str2, Bundle bundle) {
-        CredentialManagerService credentialManagerService = (CredentialManagerService) ServiceManager.getService("com.samsung.ucs.ucsservice");
+        CredentialManagerService credentialManagerService =
+                (CredentialManagerService) ServiceManager.getService("com.samsung.ucs.ucsservice");
         if (credentialManagerService == null) {
             return null;
         }
@@ -1186,7 +1456,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final byte[] ucmEncrypt(String str, byte[] bArr, String str2, Bundle bundle) {
-        CredentialManagerService credentialManagerService = (CredentialManagerService) ServiceManager.getService("com.samsung.ucs.ucsservice");
+        CredentialManagerService credentialManagerService =
+                (CredentialManagerService) ServiceManager.getService("com.samsung.ucs.ucsservice");
         if (credentialManagerService == null) {
             return null;
         }
@@ -1194,7 +1465,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final byte[] ucmGetCertificateChain(String str) {
-        CredentialManagerService credentialManagerService = (CredentialManagerService) ServiceManager.getService("com.samsung.ucs.ucsservice");
+        CredentialManagerService credentialManagerService =
+                (CredentialManagerService) ServiceManager.getService("com.samsung.ucs.ucsservice");
         if (credentialManagerService == null) {
             return null;
         }
@@ -1202,7 +1474,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final byte[] ucmMac(String str, byte[] bArr, String str2) {
-        CredentialManagerService credentialManagerService = (CredentialManagerService) ServiceManager.getService("com.samsung.ucs.ucsservice");
+        CredentialManagerService credentialManagerService =
+                (CredentialManagerService) ServiceManager.getService("com.samsung.ucs.ucsservice");
         if (credentialManagerService == null) {
             return null;
         }
@@ -1210,7 +1483,8 @@ public final class EDMProxyService extends IEDMProxy.Stub {
     }
 
     public final byte[] ucmSign(String str, byte[] bArr, String str2) {
-        CredentialManagerService credentialManagerService = (CredentialManagerService) ServiceManager.getService("com.samsung.ucs.ucsservice");
+        CredentialManagerService credentialManagerService =
+                (CredentialManagerService) ServiceManager.getService("com.samsung.ucs.ucsservice");
         if (credentialManagerService == null) {
             return null;
         }
@@ -1306,6 +1580,9 @@ public final class EDMProxyService extends IEDMProxy.Stub {
             r5 = -1
             return r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.EDMProxyService.validateCertificateAtInstallAsUser(byte[], int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.EDMProxyService.validateCertificateAtInstallAsUser(byte[],"
+                    + " int):int");
     }
 }

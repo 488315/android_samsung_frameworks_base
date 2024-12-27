@@ -5,7 +5,9 @@ import android.system.OsConstants;
 import android.util.Range;
 import android.util.Size;
 import android.view.Surface;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -111,21 +113,30 @@ public class SurfaceUtils {
     private static void checkHighSpeedSurfaceFormat(Surface surface) {
         int surfaceFormat = getSurfaceFormat(surface);
         if (surfaceFormat != 34) {
-            throw new IllegalArgumentException("Surface format(" + surfaceFormat + ") is not for preview or hardware video encoding!");
+            throw new IllegalArgumentException(
+                    "Surface format("
+                            + surfaceFormat
+                            + ") is not for preview or hardware video encoding!");
         }
     }
 
-    public static void checkConstrainedHighSpeedSurfaces(Collection<Surface> surfaces, Range<Integer> fpsRange, StreamConfigurationMap config) {
+    public static void checkConstrainedHighSpeedSurfaces(
+            Collection<Surface> surfaces, Range<Integer> fpsRange, StreamConfigurationMap config) {
         List<Size> highSpeedSizes;
         if (surfaces == null || surfaces.size() == 0 || surfaces.size() > 2) {
-            throw new IllegalArgumentException("Output target surface list must not be null and the size must be 1 or 2");
+            throw new IllegalArgumentException(
+                    "Output target surface list must not be null and the size must be 1 or 2");
         }
         if (fpsRange == null) {
             highSpeedSizes = Arrays.asList(config.getHighSpeedVideoSizes());
         } else {
             Range<Integer>[] highSpeedFpsRanges = config.getHighSpeedVideoFpsRanges();
             if (!Arrays.asList(highSpeedFpsRanges).contains(fpsRange)) {
-                throw new IllegalArgumentException("Fps range " + fpsRange.toString() + " in the request is not a supported high speed fps range " + Arrays.toString(highSpeedFpsRanges));
+                throw new IllegalArgumentException(
+                        "Fps range "
+                                + fpsRange.toString()
+                                + " in the request is not a supported high speed fps range "
+                                + Arrays.toString(highSpeedFpsRanges));
             }
             highSpeedSizes = Arrays.asList(config.getHighSpeedVideoSizesFor(fpsRange));
         }
@@ -133,13 +144,21 @@ public class SurfaceUtils {
             checkHighSpeedSurfaceFormat(surface);
             Size surfaceSize = getSurfaceSize(surface);
             if (!highSpeedSizes.contains(surfaceSize)) {
-                throw new IllegalArgumentException("Surface size " + surfaceSize.toString() + " is not part of the high speed supported size list " + Arrays.toString(highSpeedSizes.toArray()));
+                throw new IllegalArgumentException(
+                        "Surface size "
+                                + surfaceSize.toString()
+                                + " is not part of the high speed supported size list "
+                                + Arrays.toString(highSpeedSizes.toArray()));
             }
             if (!isSurfaceForPreview(surface) && !isSurfaceForHwVideoEncoder(surface)) {
-                throw new IllegalArgumentException("This output surface is neither preview nor hardware video encoding surface");
+                throw new IllegalArgumentException(
+                        "This output surface is neither preview nor hardware video encoding"
+                                + " surface");
             }
             if (isSurfaceForPreview(surface) && isSurfaceForHwVideoEncoder(surface)) {
-                throw new IllegalArgumentException("This output surface can not be both preview and hardware video encoding surface");
+                throw new IllegalArgumentException(
+                        "This output surface can not be both preview and hardware video encoding"
+                                + " surface");
             }
         }
         if (surfaces.size() == 2) {
@@ -147,7 +166,8 @@ public class SurfaceUtils {
             boolean isFirstSurfacePreview = isSurfaceForPreview(iterator.next());
             boolean isSecondSurfacePreview = isSurfaceForPreview(iterator.next());
             if (isFirstSurfacePreview == isSecondSurfacePreview) {
-                throw new IllegalArgumentException("The 2 output surfaces must have different type");
+                throw new IllegalArgumentException(
+                        "The 2 output surfaces must have different type");
             }
         }
     }

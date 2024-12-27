@@ -1,6 +1,7 @@
 package com.android.server.notification;
 
 import android.app.NotificationChannel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -26,7 +27,25 @@ public final class NotificationRecordExtractorData {
     public final Integer mUserSentiment;
     public final int mVisibility;
 
-    public NotificationRecordExtractorData(int i, int i2, boolean z, boolean z2, boolean z3, NotificationChannel notificationChannel, String str, ArrayList arrayList, ArrayList arrayList2, Integer num, Integer num2, ArrayList arrayList3, ArrayList arrayList4, int i3, float f, boolean z4, int i4, boolean z5) {
+    public NotificationRecordExtractorData(
+            int i,
+            int i2,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            NotificationChannel notificationChannel,
+            String str,
+            ArrayList arrayList,
+            ArrayList arrayList2,
+            Integer num,
+            Integer num2,
+            ArrayList arrayList3,
+            ArrayList arrayList4,
+            int i3,
+            float f,
+            boolean z4,
+            int i4,
+            boolean z5) {
         this.mPosition = i;
         this.mVisibility = i2;
         this.mShowBadge = z;
@@ -49,9 +68,20 @@ public final class NotificationRecordExtractorData {
 
     public final boolean hasDiffForLoggingLocked(NotificationRecord notificationRecord, int i) {
         if (this.mPosition == i && Objects.equals(this.mChannel, notificationRecord.mChannel)) {
-            if (Objects.equals(this.mGroupKey, notificationRecord.sbn.getGroupKey()) && Objects.equals(this.mOverridePeople, notificationRecord.mPeopleOverride) && Objects.equals(this.mSnoozeCriteria, notificationRecord.mSnoozeCriteria)) {
-                if (Objects.equals(this.mUserSentiment, Integer.valueOf(notificationRecord.mUserSentiment)) && Objects.equals(this.mSystemSmartActions, notificationRecord.mSystemGeneratedSmartActions) && Objects.equals(this.mSmartReplies, notificationRecord.mSmartReplies)) {
-                    if (this.mImportance == notificationRecord.mImportance && Math.abs(notificationRecord.mRankingScore - this.mRankingScore) < 1.0E-4d && this.mIsConversation == notificationRecord.isConversation()) {
+            if (Objects.equals(this.mGroupKey, notificationRecord.sbn.getGroupKey())
+                    && Objects.equals(this.mOverridePeople, notificationRecord.mPeopleOverride)
+                    && Objects.equals(this.mSnoozeCriteria, notificationRecord.mSnoozeCriteria)) {
+                if (Objects.equals(
+                                this.mUserSentiment,
+                                Integer.valueOf(notificationRecord.mUserSentiment))
+                        && Objects.equals(
+                                this.mSystemSmartActions,
+                                notificationRecord.mSystemGeneratedSmartActions)
+                        && Objects.equals(this.mSmartReplies, notificationRecord.mSmartReplies)) {
+                    if (this.mImportance == notificationRecord.mImportance
+                            && Math.abs(notificationRecord.mRankingScore - this.mRankingScore)
+                                    < 1.0E-4d
+                            && this.mIsConversation == notificationRecord.isConversation()) {
                         if (this.mProposedImportance == notificationRecord.mProposedImportance) {
                             if (this.mSensitiveContent == notificationRecord.mSensitiveContent) {
                                 return false;
@@ -69,13 +99,38 @@ public final class NotificationRecordExtractorData {
             if (this.mVisibility == notificationRecord.mPackageVisibility) {
                 if (this.mShowBadge == notificationRecord.mShowBadge) {
                     if (this.mAllowBubble == notificationRecord.mAllowBubble) {
-                        if (this.mIsBubble == notificationRecord.sbn.getNotification().isBubbleNotification() && Objects.equals(this.mChannel, notificationRecord.mChannel)) {
-                            if (Objects.equals(this.mGroupKey, notificationRecord.sbn.getGroupKey()) && Objects.equals(this.mOverridePeople, notificationRecord.mPeopleOverride) && Objects.equals(this.mSnoozeCriteria, notificationRecord.mSnoozeCriteria)) {
-                                if (Objects.equals(this.mUserSentiment, Integer.valueOf(notificationRecord.mUserSentiment))) {
-                                    if (Objects.equals(this.mSuppressVisually, Integer.valueOf(notificationRecord.mSuppressedVisualEffects)) && Objects.equals(this.mSystemSmartActions, notificationRecord.mSystemGeneratedSmartActions) && Objects.equals(this.mSmartReplies, notificationRecord.mSmartReplies)) {
+                        if (this.mIsBubble
+                                        == notificationRecord
+                                                .sbn
+                                                .getNotification()
+                                                .isBubbleNotification()
+                                && Objects.equals(this.mChannel, notificationRecord.mChannel)) {
+                            if (Objects.equals(this.mGroupKey, notificationRecord.sbn.getGroupKey())
+                                    && Objects.equals(
+                                            this.mOverridePeople,
+                                            notificationRecord.mPeopleOverride)
+                                    && Objects.equals(
+                                            this.mSnoozeCriteria,
+                                            notificationRecord.mSnoozeCriteria)) {
+                                if (Objects.equals(
+                                        this.mUserSentiment,
+                                        Integer.valueOf(notificationRecord.mUserSentiment))) {
+                                    if (Objects.equals(
+                                                    this.mSuppressVisually,
+                                                    Integer.valueOf(
+                                                            notificationRecord
+                                                                    .mSuppressedVisualEffects))
+                                            && Objects.equals(
+                                                    this.mSystemSmartActions,
+                                                    notificationRecord.mSystemGeneratedSmartActions)
+                                            && Objects.equals(
+                                                    this.mSmartReplies,
+                                                    notificationRecord.mSmartReplies)) {
                                         if (this.mImportance == notificationRecord.mImportance) {
-                                            if (this.mProposedImportance == notificationRecord.mProposedImportance) {
-                                                if (this.mSensitiveContent == notificationRecord.mSensitiveContent) {
+                                            if (this.mProposedImportance
+                                                    == notificationRecord.mProposedImportance) {
+                                                if (this.mSensitiveContent
+                                                        == notificationRecord.mSensitiveContent) {
                                                     return false;
                                                 }
                                             }

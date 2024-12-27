@@ -3,9 +3,12 @@ package android.app.admin;
 import android.content.ComponentName;
 import android.os.Bundle;
 import android.stats.devicepolicy.nano.StringList;
+
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.internal.util.FrameworkStatsLog;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -113,7 +116,14 @@ public class DevicePolicyEventLogger {
 
     public void write() {
         byte[] bytes = stringArrayValueToBytes(this.mStringArrayValue);
-        FrameworkStatsLog.write(103, this.mEventId, this.mAdminPackageName, this.mIntValue, this.mBooleanValue, this.mTimePeriodMs, bytes);
+        FrameworkStatsLog.write(
+                103,
+                this.mEventId,
+                this.mAdminPackageName,
+                this.mIntValue,
+                this.mBooleanValue,
+                this.mTimePeriodMs,
+                bytes);
         Bundle bundle = new Bundle();
         bundle.putInt("aN", this.mEventId);
         bundle.putInt("iV", this.mIntValue);
@@ -121,10 +131,12 @@ public class DevicePolicyEventLogger {
         bundle.putLong("tpms", this.mTimePeriodMs);
         bundle.putBundle("kB", this.mKnoxBundleValue);
         if (this.mStringArrayValue != null && this.mStringArrayValue.length > 0) {
-            bundle.putStringArrayList("saV", new ArrayList<>(Arrays.asList(this.mStringArrayValue)));
+            bundle.putStringArrayList(
+                    "saV", new ArrayList<>(Arrays.asList(this.mStringArrayValue)));
         }
         if (this.mKnoxBundleValue.containsKey("targetPackageName")) {
-            bundle.getStringArrayList("saV").add(this.mKnoxBundleValue.getCharSequence("targetPackageName").toString());
+            bundle.getStringArrayList("saV")
+                    .add(this.mKnoxBundleValue.getCharSequence("targetPackageName").toString());
         }
         if (this.mAdminPackageName != null && !this.mAdminPackageName.isEmpty()) {
             bundle.putString("apN", this.mAdminPackageName);

@@ -11,21 +11,28 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IContainerService extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.core.pm.containerservice.IContainerService";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.core.pm.containerservice.IContainerService";
 
-    String copyPackageToContainer(String str, String str2, String str3, boolean z, String str4) throws RemoteException;
+    String copyPackageToContainer(String str, String str2, String str3, boolean z, String str4)
+            throws RemoteException;
 
     void doForceGC() throws RemoteException;
 
     public static class Default implements IContainerService {
         @Override // com.samsung.android.core.pm.containerservice.IContainerService
-        public String copyPackageToContainer(String packagePath, String containerId, String key, boolean isExternal, String abiOverride) throws RemoteException {
+        public String copyPackageToContainer(
+                String packagePath,
+                String containerId,
+                String key,
+                boolean isExternal,
+                String abiOverride)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.core.pm.containerservice.IContainerService
-        public void doForceGC() throws RemoteException {
-        }
+        public void doForceGC() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +40,7 @@ public interface IContainerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContainerService {
+    public abstract static class Stub extends Binder implements IContainerService {
         static final int TRANSACTION_copyPackageToContainer = 1;
         static final int TRANSACTION_doForceGC = 2;
         private final PermissionEnforcer mEnforcer;
@@ -48,7 +55,9 @@ public interface IContainerService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IContainerService asInterface(IBinder obj) {
@@ -84,7 +93,8 @@ public interface IContainerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContainerService.DESCRIPTOR);
             }
@@ -130,7 +140,13 @@ public interface IContainerService extends IInterface {
             }
 
             @Override // com.samsung.android.core.pm.containerservice.IContainerService
-            public String copyPackageToContainer(String packagePath, String containerId, String key, boolean isExternal, String abiOverride) throws RemoteException {
+            public String copyPackageToContainer(
+                    String packagePath,
+                    String containerId,
+                    String key,
+                    boolean isExternal,
+                    String abiOverride)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -166,11 +182,13 @@ public interface IContainerService extends IInterface {
         }
 
         protected void copyPackageToContainer_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.COPY_PROTECTED_DATA, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.COPY_PROTECTED_DATA, getCallingPid(), getCallingUid());
         }
 
         protected void doForceGC_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.COPY_PROTECTED_DATA, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.COPY_PROTECTED_DATA, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

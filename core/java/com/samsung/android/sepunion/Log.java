@@ -2,6 +2,7 @@ package com.samsung.android.sepunion;
 
 import android.icu.util.Calendar;
 import android.util.SparseArray;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -183,7 +184,16 @@ public class Log {
 
     private static String toTimestampFormat(String msg) {
         Calendar calendar = Calendar.getInstance();
-        return String.format(Locale.US, "[%02d-%02d %02d:%02d:%02d.%03d] %s", Integer.valueOf(calendar.get(2) + 1), Integer.valueOf(calendar.get(5)), Integer.valueOf(calendar.get(11)), Integer.valueOf(calendar.get(12)), Integer.valueOf(calendar.get(13)), Integer.valueOf(calendar.get(14)), msg);
+        return String.format(
+                Locale.US,
+                "[%02d-%02d %02d:%02d:%02d.%03d] %s",
+                Integer.valueOf(calendar.get(2) + 1),
+                Integer.valueOf(calendar.get(5)),
+                Integer.valueOf(calendar.get(11)),
+                Integer.valueOf(calendar.get(12)),
+                Integer.valueOf(calendar.get(13)),
+                Integer.valueOf(calendar.get(14)),
+                msg);
     }
 
     public static void dump(String tag, FileDescriptor fd, PrintWriter writer, String[] args) {

@@ -2,13 +2,15 @@ package android.graphics.drawable;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.DrawableContainer;
 import android.util.AttributeSet;
+
 import com.android.ims.ImsConfig;
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class LevelListDrawable extends DrawableContainer {
@@ -36,13 +38,17 @@ public class LevelListDrawable extends DrawableContainer {
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         super.inflate(r, parser, attrs, theme);
         updateDensity(r);
         inflateChildElements(r, parser, attrs, theme);
     }
 
-    private void inflateChildElements(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    private void inflateChildElements(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         int depth;
         int type;
         Drawable dr;
@@ -52,14 +58,18 @@ public class LevelListDrawable extends DrawableContainer {
             if (type2 == 1 || ((depth = parser.getDepth()) < innerDepth && type2 == 3)) {
                 break;
             }
-            if (type2 == 2 && depth <= innerDepth && parser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
+            if (type2 == 2
+                    && depth <= innerDepth
+                    && parser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
                 TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.LevelListDrawableItem);
                 int low = a.getInt(1, 0);
                 int high = a.getInt(2, 0);
                 int drawableRes = a.getResourceId(0, 0);
                 a.recycle();
                 if (high < 0) {
-                    throw new XmlPullParserException(parser.getPositionDescription() + ": <item> tag requires a 'maxLevel' attribute");
+                    throw new XmlPullParserException(
+                            parser.getPositionDescription()
+                                    + ": <item> tag requires a 'maxLevel' attribute");
                 }
                 if (drawableRes != 0) {
                     dr = r.getDrawable(drawableRes, theme);
@@ -68,7 +78,10 @@ public class LevelListDrawable extends DrawableContainer {
                         type = parser.next();
                     } while (type == 4);
                     if (type != 2) {
-                        throw new XmlPullParserException(parser.getPositionDescription() + ": <item> tag requires a 'drawable' attribute or child tag defining a drawable");
+                        throw new XmlPullParserException(
+                                parser.getPositionDescription()
+                                        + ": <item> tag requires a 'drawable' attribute or child"
+                                        + " tag defining a drawable");
                     }
                     dr = Drawable.createFromXmlInner(r, parser, attrs, theme);
                 }

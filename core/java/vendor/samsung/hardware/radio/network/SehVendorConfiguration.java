@@ -3,24 +3,28 @@ package vendor.samsung.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehVendorConfiguration implements Parcelable {
-    public static final Parcelable.Creator<SehVendorConfiguration> CREATOR = new Parcelable.Creator<SehVendorConfiguration>() { // from class: vendor.samsung.hardware.radio.network.SehVendorConfiguration.1
-        @Override // android.os.Parcelable.Creator
-        public SehVendorConfiguration createFromParcel(Parcel _aidl_source) {
-            SehVendorConfiguration _aidl_out = new SehVendorConfiguration();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehVendorConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    SehVendorConfiguration>() { // from class:
+                                                // vendor.samsung.hardware.radio.network.SehVendorConfiguration.1
+                @Override // android.os.Parcelable.Creator
+                public SehVendorConfiguration createFromParcel(Parcel _aidl_source) {
+                    SehVendorConfiguration _aidl_out = new SehVendorConfiguration();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehVendorConfiguration[] newArray(int _aidl_size) {
-            return new SehVendorConfiguration[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehVendorConfiguration[] newArray(int _aidl_size) {
+                    return new SehVendorConfiguration[_aidl_size];
+                }
+            };
     public String name;
     public String value;
 

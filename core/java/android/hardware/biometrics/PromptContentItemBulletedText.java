@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class PromptContentItemBulletedText implements PromptContentItemParcelable {
-    public static final Parcelable.Creator<PromptContentItemBulletedText> CREATOR = new Parcelable.Creator<PromptContentItemBulletedText>() { // from class: android.hardware.biometrics.PromptContentItemBulletedText.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PromptContentItemBulletedText createFromParcel(Parcel in) {
-            return new PromptContentItemBulletedText(in.readString());
-        }
+    public static final Parcelable.Creator<PromptContentItemBulletedText> CREATOR =
+            new Parcelable.Creator<PromptContentItemBulletedText>() { // from class:
+                // android.hardware.biometrics.PromptContentItemBulletedText.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PromptContentItemBulletedText createFromParcel(Parcel in) {
+                    return new PromptContentItemBulletedText(in.readString());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PromptContentItemBulletedText[] newArray(int size) {
-            return new PromptContentItemBulletedText[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PromptContentItemBulletedText[] newArray(int size) {
+                    return new PromptContentItemBulletedText[size];
+                }
+            };
     private final String mText;
 
     public PromptContentItemBulletedText(String text) {

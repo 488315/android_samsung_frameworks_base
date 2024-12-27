@@ -2,21 +2,23 @@ package com.samsung.android.server.pm.install;
 
 import android.util.AtomicFile;
 import android.util.Xml;
+
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Iterator;
-import org.xmlpull.v1.XmlSerializer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class PmConfigParser {
     /* JADX WARN: Code restructure failed: missing block: B:41:0x0067, code lost:
-    
-        r3.close();
-     */
+
+       r3.close();
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -129,7 +131,9 @@ public final class PmConfigParser {
         Lbc:
             return r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.pm.install.PmConfigParser.parsePackages(java.lang.String):java.util.List");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.pm.install.PmConfigParser.parsePackages(java.lang.String):java.util.List");
     }
 
     public static void writePackagesToXml(String str, HashSet hashSet) {
@@ -148,7 +152,8 @@ public final class PmConfigParser {
             try {
                 XmlSerializer newSerializer = Xml.newSerializer();
                 newSerializer.setOutput(startWrite, StandardCharsets.UTF_8.name());
-                newSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                newSerializer.setFeature(
+                        "http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 newSerializer.startDocument(null, Boolean.TRUE);
                 newSerializer.startTag(null, "packages");
                 Iterator it = hashSet.iterator();

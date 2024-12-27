@@ -1,7 +1,5 @@
 package android.os;
 
-import android.os.IIncidentAuthListener;
-import android.os.IncidentManager;
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -10,7 +8,14 @@ public interface IIncidentCompanion extends IInterface {
 
     void approveReport(String str) throws RemoteException;
 
-    void authorizeReport(int i, String str, String str2, String str3, int i2, IIncidentAuthListener iIncidentAuthListener) throws RemoteException;
+    void authorizeReport(
+            int i,
+            String str,
+            String str2,
+            String str3,
+            int i2,
+            IIncidentAuthListener iIncidentAuthListener)
+            throws RemoteException;
 
     void cancelAuthorization(IIncidentAuthListener iIncidentAuthListener) throws RemoteException;
 
@@ -20,7 +25,8 @@ public interface IIncidentCompanion extends IInterface {
 
     void denyReport(String str) throws RemoteException;
 
-    IncidentManager.IncidentReport getIncidentReport(String str, String str2, String str3) throws RemoteException;
+    IncidentManager.IncidentReport getIncidentReport(String str, String str2, String str3)
+            throws RemoteException;
 
     List<String> getIncidentReportList(String str, String str2) throws RemoteException;
 
@@ -30,16 +36,20 @@ public interface IIncidentCompanion extends IInterface {
 
     public static class Default implements IIncidentCompanion {
         @Override // android.os.IIncidentCompanion
-        public void authorizeReport(int callingUid, String callingPackage, String receiverClass, String reportId, int flags, IIncidentAuthListener callback) throws RemoteException {
-        }
+        public void authorizeReport(
+                int callingUid,
+                String callingPackage,
+                String receiverClass,
+                String reportId,
+                int flags,
+                IIncidentAuthListener callback)
+                throws RemoteException {}
 
         @Override // android.os.IIncidentCompanion
-        public void cancelAuthorization(IIncidentAuthListener callback) throws RemoteException {
-        }
+        public void cancelAuthorization(IIncidentAuthListener callback) throws RemoteException {}
 
         @Override // android.os.IIncidentCompanion
-        public void sendReportReadyBroadcast(String pkg, String cls) throws RemoteException {
-        }
+        public void sendReportReadyBroadcast(String pkg, String cls) throws RemoteException {}
 
         @Override // android.os.IIncidentCompanion
         public List<String> getPendingReports() throws RemoteException {
@@ -47,12 +57,10 @@ public interface IIncidentCompanion extends IInterface {
         }
 
         @Override // android.os.IIncidentCompanion
-        public void approveReport(String uri) throws RemoteException {
-        }
+        public void approveReport(String uri) throws RemoteException {}
 
         @Override // android.os.IIncidentCompanion
-        public void denyReport(String uri) throws RemoteException {
-        }
+        public void denyReport(String uri) throws RemoteException {}
 
         @Override // android.os.IIncidentCompanion
         public List<String> getIncidentReportList(String pkg, String cls) throws RemoteException {
@@ -60,17 +68,17 @@ public interface IIncidentCompanion extends IInterface {
         }
 
         @Override // android.os.IIncidentCompanion
-        public IncidentManager.IncidentReport getIncidentReport(String pkg, String cls, String id) throws RemoteException {
+        public IncidentManager.IncidentReport getIncidentReport(String pkg, String cls, String id)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IIncidentCompanion
-        public void deleteIncidentReports(String pkg, String cls, String id) throws RemoteException {
-        }
+        public void deleteIncidentReports(String pkg, String cls, String id)
+                throws RemoteException {}
 
         @Override // android.os.IIncidentCompanion
-        public void deleteAllIncidentReports(String pkg) throws RemoteException {
-        }
+        public void deleteAllIncidentReports(String pkg) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -78,7 +86,7 @@ public interface IIncidentCompanion extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIncidentCompanion {
+    public abstract static class Stub extends Binder implements IIncidentCompanion {
         static final int TRANSACTION_approveReport = 5;
         static final int TRANSACTION_authorizeReport = 1;
         static final int TRANSACTION_cancelAuthorization = 2;
@@ -143,7 +151,8 @@ public interface IIncidentCompanion extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIncidentCompanion.DESCRIPTOR);
             }
@@ -158,12 +167,14 @@ public interface IIncidentCompanion extends IInterface {
                     String _arg2 = data.readString();
                     String _arg3 = data.readString();
                     int _arg4 = data.readInt();
-                    IIncidentAuthListener _arg5 = IIncidentAuthListener.Stub.asInterface(data.readStrongBinder());
+                    IIncidentAuthListener _arg5 =
+                            IIncidentAuthListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     authorizeReport(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5);
                     return true;
                 case 2:
-                    IIncidentAuthListener _arg02 = IIncidentAuthListener.Stub.asInterface(data.readStrongBinder());
+                    IIncidentAuthListener _arg02 =
+                            IIncidentAuthListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     cancelAuthorization(_arg02);
                     return true;
@@ -203,7 +214,8 @@ public interface IIncidentCompanion extends IInterface {
                     String _arg14 = data.readString();
                     String _arg22 = data.readString();
                     data.enforceNoDataAvail();
-                    IncidentManager.IncidentReport _result3 = getIncidentReport(_arg07, _arg14, _arg22);
+                    IncidentManager.IncidentReport _result3 =
+                            getIncidentReport(_arg07, _arg14, _arg22);
                     reply.writeNoException();
                     reply.writeTypedObject(_result3, 1);
                     return true;
@@ -243,7 +255,14 @@ public interface IIncidentCompanion extends IInterface {
             }
 
             @Override // android.os.IIncidentCompanion
-            public void authorizeReport(int callingUid, String callingPackage, String receiverClass, String reportId, int flags, IIncidentAuthListener callback) throws RemoteException {
+            public void authorizeReport(
+                    int callingUid,
+                    String callingPackage,
+                    String receiverClass,
+                    String reportId,
+                    int flags,
+                    IIncidentAuthListener callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IIncidentCompanion.DESCRIPTOR);
@@ -331,7 +350,8 @@ public interface IIncidentCompanion extends IInterface {
             }
 
             @Override // android.os.IIncidentCompanion
-            public List<String> getIncidentReportList(String pkg, String cls) throws RemoteException {
+            public List<String> getIncidentReportList(String pkg, String cls)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -349,7 +369,8 @@ public interface IIncidentCompanion extends IInterface {
             }
 
             @Override // android.os.IIncidentCompanion
-            public IncidentManager.IncidentReport getIncidentReport(String pkg, String cls, String id) throws RemoteException {
+            public IncidentManager.IncidentReport getIncidentReport(
+                    String pkg, String cls, String id) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -359,7 +380,9 @@ public interface IIncidentCompanion extends IInterface {
                     _data.writeString(id);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    IncidentManager.IncidentReport _result = (IncidentManager.IncidentReport) _reply.readTypedObject(IncidentManager.IncidentReport.CREATOR);
+                    IncidentManager.IncidentReport _result =
+                            (IncidentManager.IncidentReport)
+                                    _reply.readTypedObject(IncidentManager.IncidentReport.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -368,7 +391,8 @@ public interface IIncidentCompanion extends IInterface {
             }
 
             @Override // android.os.IIncidentCompanion
-            public void deleteIncidentReports(String pkg, String cls, String id) throws RemoteException {
+            public void deleteIncidentReports(String pkg, String cls, String id)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

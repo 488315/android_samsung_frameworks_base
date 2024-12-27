@@ -9,6 +9,7 @@ import android.media.MediaMetrics;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -19,7 +20,8 @@ public final class RegStateResult {
     public int reasonForDenial = 0;
     public CellIdentity cellIdentity = new CellIdentity();
     public String registeredPlmn = new String();
-    public AccessTechnologySpecificInfo accessTechnologySpecificInfo = new AccessTechnologySpecificInfo();
+    public AccessTechnologySpecificInfo accessTechnologySpecificInfo =
+            new AccessTechnologySpecificInfo();
 
     public static final class AccessTechnologySpecificInfo {
         private byte hidl_d = 0;
@@ -35,22 +37,43 @@ public final class RegStateResult {
                 if (this == otherObject) {
                     return true;
                 }
-                if (otherObject == null || otherObject.getClass() != Cdma2000RegistrationInfo.class) {
+                if (otherObject == null
+                        || otherObject.getClass() != Cdma2000RegistrationInfo.class) {
                     return false;
                 }
                 Cdma2000RegistrationInfo other = (Cdma2000RegistrationInfo) otherObject;
-                if (this.cssSupported == other.cssSupported && this.roamingIndicator == other.roamingIndicator && this.systemIsInPrl == other.systemIsInPrl && this.defaultRoamingIndicator == other.defaultRoamingIndicator) {
+                if (this.cssSupported == other.cssSupported
+                        && this.roamingIndicator == other.roamingIndicator
+                        && this.systemIsInPrl == other.systemIsInPrl
+                        && this.defaultRoamingIndicator == other.defaultRoamingIndicator) {
                     return true;
                 }
                 return false;
             }
 
             public final int hashCode() {
-                return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.cssSupported))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.roamingIndicator))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.systemIsInPrl))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.defaultRoamingIndicator))));
+                return Objects.hash(
+                        Integer.valueOf(
+                                HidlSupport.deepHashCode(Boolean.valueOf(this.cssSupported))),
+                        Integer.valueOf(
+                                HidlSupport.deepHashCode(Integer.valueOf(this.roamingIndicator))),
+                        Integer.valueOf(
+                                HidlSupport.deepHashCode(Integer.valueOf(this.systemIsInPrl))),
+                        Integer.valueOf(
+                                HidlSupport.deepHashCode(
+                                        Integer.valueOf(this.defaultRoamingIndicator))));
             }
 
             public final String toString() {
-                return "{.cssSupported = " + this.cssSupported + ", .roamingIndicator = " + this.roamingIndicator + ", .systemIsInPrl = " + PrlIndicator.toString(this.systemIsInPrl) + ", .defaultRoamingIndicator = " + this.defaultRoamingIndicator + "}";
+                return "{.cssSupported = "
+                        + this.cssSupported
+                        + ", .roamingIndicator = "
+                        + this.roamingIndicator
+                        + ", .systemIsInPrl = "
+                        + PrlIndicator.toString(this.systemIsInPrl)
+                        + ", .defaultRoamingIndicator = "
+                        + this.defaultRoamingIndicator
+                        + "}";
             }
 
             public final void readFromParcel(HwParcel parcel) {
@@ -58,11 +81,14 @@ public final class RegStateResult {
                 readEmbeddedFromParcel(parcel, blob, 0L);
             }
 
-            public static final ArrayList<Cdma2000RegistrationInfo> readVectorFromParcel(HwParcel parcel) {
+            public static final ArrayList<Cdma2000RegistrationInfo> readVectorFromParcel(
+                    HwParcel parcel) {
                 ArrayList<Cdma2000RegistrationInfo> _hidl_vec = new ArrayList<>();
                 HwBlob _hidl_blob = parcel.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        parcel.readEmbeddedBuffer(
+                                _hidl_vec_size * 16, _hidl_blob.handle(), 0L, true);
                 _hidl_vec.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     Cdma2000RegistrationInfo _hidl_vec_element = new Cdma2000RegistrationInfo();
@@ -72,7 +98,8 @@ public final class RegStateResult {
                 return _hidl_vec;
             }
 
-            public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+            public final void readEmbeddedFromParcel(
+                    HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
                 this.cssSupported = _hidl_blob.getBool(0 + _hidl_offset);
                 this.roamingIndicator = _hidl_blob.getInt32(4 + _hidl_offset);
                 this.systemIsInPrl = _hidl_blob.getInt32(8 + _hidl_offset);
@@ -85,7 +112,8 @@ public final class RegStateResult {
                 parcel.writeBuffer(_hidl_blob);
             }
 
-            public static final void writeVectorToParcel(HwParcel parcel, ArrayList<Cdma2000RegistrationInfo> _hidl_vec) {
+            public static final void writeVectorToParcel(
+                    HwParcel parcel, ArrayList<Cdma2000RegistrationInfo> _hidl_vec) {
                 HwBlob _hidl_blob = new HwBlob(16);
                 int _hidl_vec_size = _hidl_vec.size();
                 _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -118,18 +146,25 @@ public final class RegStateResult {
                     return false;
                 }
                 EutranRegistrationInfo other = (EutranRegistrationInfo) otherObject;
-                if (HidlSupport.deepEquals(this.lteVopsInfo, other.lteVopsInfo) && HidlSupport.deepEquals(this.nrIndicators, other.nrIndicators)) {
+                if (HidlSupport.deepEquals(this.lteVopsInfo, other.lteVopsInfo)
+                        && HidlSupport.deepEquals(this.nrIndicators, other.nrIndicators)) {
                     return true;
                 }
                 return false;
             }
 
             public final int hashCode() {
-                return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.lteVopsInfo)), Integer.valueOf(HidlSupport.deepHashCode(this.nrIndicators)));
+                return Objects.hash(
+                        Integer.valueOf(HidlSupport.deepHashCode(this.lteVopsInfo)),
+                        Integer.valueOf(HidlSupport.deepHashCode(this.nrIndicators)));
             }
 
             public final String toString() {
-                return "{.lteVopsInfo = " + this.lteVopsInfo + ", .nrIndicators = " + this.nrIndicators + "}";
+                return "{.lteVopsInfo = "
+                        + this.lteVopsInfo
+                        + ", .nrIndicators = "
+                        + this.nrIndicators
+                        + "}";
             }
 
             public final void readFromParcel(HwParcel parcel) {
@@ -137,11 +172,14 @@ public final class RegStateResult {
                 readEmbeddedFromParcel(parcel, blob, 0L);
             }
 
-            public static final ArrayList<EutranRegistrationInfo> readVectorFromParcel(HwParcel parcel) {
+            public static final ArrayList<EutranRegistrationInfo> readVectorFromParcel(
+                    HwParcel parcel) {
                 ArrayList<EutranRegistrationInfo> _hidl_vec = new ArrayList<>();
                 HwBlob _hidl_blob = parcel.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 5, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        parcel.readEmbeddedBuffer(
+                                _hidl_vec_size * 5, _hidl_blob.handle(), 0L, true);
                 _hidl_vec.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     EutranRegistrationInfo _hidl_vec_element = new EutranRegistrationInfo();
@@ -151,7 +189,8 @@ public final class RegStateResult {
                 return _hidl_vec;
             }
 
-            public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+            public final void readEmbeddedFromParcel(
+                    HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
                 this.lteVopsInfo.readEmbeddedFromParcel(parcel, _hidl_blob, 0 + _hidl_offset);
                 this.nrIndicators.readEmbeddedFromParcel(parcel, _hidl_blob, 2 + _hidl_offset);
             }
@@ -162,7 +201,8 @@ public final class RegStateResult {
                 parcel.writeBuffer(_hidl_blob);
             }
 
-            public static final void writeVectorToParcel(HwParcel parcel, ArrayList<EutranRegistrationInfo> _hidl_vec) {
+            public static final void writeVectorToParcel(
+                    HwParcel parcel, ArrayList<EutranRegistrationInfo> _hidl_vec) {
                 HwBlob _hidl_blob = new HwBlob(16);
                 int _hidl_vec_size = _hidl_vec.size();
                 _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -204,8 +244,7 @@ public final class RegStateResult {
                 }
             }
 
-            private hidl_discriminator() {
-            }
+            private hidl_discriminator() {}
         }
 
         public void noinit(Monostate noinit) {
@@ -216,7 +255,15 @@ public final class RegStateResult {
         public Monostate noinit() {
             if (this.hidl_d != 0) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Monostate.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -232,7 +279,15 @@ public final class RegStateResult {
         public Cdma2000RegistrationInfo cdmaInfo() {
             if (this.hidl_d != 1) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Cdma2000RegistrationInfo.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -248,7 +303,15 @@ public final class RegStateResult {
         public EutranRegistrationInfo eutranInfo() {
             if (this.hidl_d != 2) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !EutranRegistrationInfo.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -264,7 +327,8 @@ public final class RegStateResult {
             if (this == otherObject) {
                 return true;
             }
-            if (otherObject == null || otherObject.getClass() != AccessTechnologySpecificInfo.class) {
+            if (otherObject == null
+                    || otherObject.getClass() != AccessTechnologySpecificInfo.class) {
                 return false;
             }
             AccessTechnologySpecificInfo other = (AccessTechnologySpecificInfo) otherObject;
@@ -275,7 +339,9 @@ public final class RegStateResult {
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)), Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)),
+                    Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
         }
 
         public final String toString() {
@@ -295,7 +361,8 @@ public final class RegStateResult {
                     builder.append(eutranInfo());
                     break;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
             builder.append("}");
             return builder.toString();
@@ -306,11 +373,13 @@ public final class RegStateResult {
             readEmbeddedFromParcel(parcel, blob, 0L);
         }
 
-        public static final ArrayList<AccessTechnologySpecificInfo> readVectorFromParcel(HwParcel parcel) {
+        public static final ArrayList<AccessTechnologySpecificInfo> readVectorFromParcel(
+                HwParcel parcel) {
             ArrayList<AccessTechnologySpecificInfo> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 20, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 20, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 AccessTechnologySpecificInfo _hidl_vec_element = new AccessTechnologySpecificInfo();
@@ -320,23 +389,28 @@ public final class RegStateResult {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.hidl_d = _hidl_blob.getInt8(0 + _hidl_offset);
             switch (this.hidl_d) {
                 case 0:
                     this.hidl_o = new Monostate();
-                    ((Monostate) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
+                    ((Monostate) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
                     return;
                 case 1:
                     this.hidl_o = new Cdma2000RegistrationInfo();
-                    ((Cdma2000RegistrationInfo) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
+                    ((Cdma2000RegistrationInfo) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
                     return;
                 case 2:
                     this.hidl_o = new EutranRegistrationInfo();
-                    ((EutranRegistrationInfo) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
+                    ((EutranRegistrationInfo) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
                     return;
                 default:
-                    throw new IllegalStateException("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new IllegalStateException(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
 
@@ -346,7 +420,8 @@ public final class RegStateResult {
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<AccessTechnologySpecificInfo> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<AccessTechnologySpecificInfo> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -372,7 +447,8 @@ public final class RegStateResult {
                     eutranInfo().writeEmbeddedToBlob(_hidl_blob, 4 + _hidl_offset);
                     return;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
     }
@@ -385,18 +461,42 @@ public final class RegStateResult {
             return false;
         }
         RegStateResult other = (RegStateResult) otherObject;
-        if (this.regState == other.regState && this.rat == other.rat && this.reasonForDenial == other.reasonForDenial && HidlSupport.deepEquals(this.cellIdentity, other.cellIdentity) && HidlSupport.deepEquals(this.registeredPlmn, other.registeredPlmn) && HidlSupport.deepEquals(this.accessTechnologySpecificInfo, other.accessTechnologySpecificInfo)) {
+        if (this.regState == other.regState
+                && this.rat == other.rat
+                && this.reasonForDenial == other.reasonForDenial
+                && HidlSupport.deepEquals(this.cellIdentity, other.cellIdentity)
+                && HidlSupport.deepEquals(this.registeredPlmn, other.registeredPlmn)
+                && HidlSupport.deepEquals(
+                        this.accessTechnologySpecificInfo, other.accessTechnologySpecificInfo)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.regState))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.rat))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.reasonForDenial))), Integer.valueOf(HidlSupport.deepHashCode(this.cellIdentity)), Integer.valueOf(HidlSupport.deepHashCode(this.registeredPlmn)), Integer.valueOf(HidlSupport.deepHashCode(this.accessTechnologySpecificInfo)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.regState))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.rat))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.reasonForDenial))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.cellIdentity)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.registeredPlmn)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.accessTechnologySpecificInfo)));
     }
 
     public final String toString() {
-        return "{.regState = " + RegState.toString(this.regState) + ", .rat = " + RadioTechnology.toString(this.rat) + ", .reasonForDenial = " + RegistrationFailCause.toString(this.reasonForDenial) + ", .cellIdentity = " + this.cellIdentity + ", .registeredPlmn = " + this.registeredPlmn + ", .accessTechnologySpecificInfo = " + this.accessTechnologySpecificInfo + "}";
+        return "{.regState = "
+                + RegState.toString(this.regState)
+                + ", .rat = "
+                + RadioTechnology.toString(this.rat)
+                + ", .reasonForDenial = "
+                + RegistrationFailCause.toString(this.reasonForDenial)
+                + ", .cellIdentity = "
+                + this.cellIdentity
+                + ", .registeredPlmn = "
+                + this.registeredPlmn
+                + ", .accessTechnologySpecificInfo = "
+                + this.accessTechnologySpecificInfo
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -408,7 +508,8 @@ public final class RegStateResult {
         ArrayList<RegStateResult> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 224, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 224, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             RegStateResult _hidl_vec_element = new RegStateResult();
@@ -418,14 +519,20 @@ public final class RegStateResult {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.regState = _hidl_blob.getInt32(_hidl_offset + 0);
         this.rat = _hidl_blob.getInt32(_hidl_offset + 4);
         this.reasonForDenial = _hidl_blob.getInt32(_hidl_offset + 8);
         this.cellIdentity.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 16);
         this.registeredPlmn = _hidl_blob.getString(_hidl_offset + 184);
-        parcel.readEmbeddedBuffer(this.registeredPlmn.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 184 + 0, false);
-        this.accessTechnologySpecificInfo.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 200);
+        parcel.readEmbeddedBuffer(
+                this.registeredPlmn.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 184 + 0,
+                false);
+        this.accessTechnologySpecificInfo.readEmbeddedFromParcel(
+                parcel, _hidl_blob, _hidl_offset + 200);
     }
 
     public final void writeToParcel(HwParcel parcel) {
@@ -434,7 +541,8 @@ public final class RegStateResult {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<RegStateResult> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<RegStateResult> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

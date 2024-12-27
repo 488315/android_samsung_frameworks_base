@@ -1,8 +1,10 @@
 package com.android.server.am;
 
 import android.util.ArrayMap;
+
 import com.android.internal.app.procstats.ProcessStats;
 import com.android.server.wm.WindowProcessController;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -19,7 +21,8 @@ public final class PackageList {
     public final void clear() {
         synchronized (this) {
             this.mPkgList.clear();
-            WindowProcessController windowProcessController = this.mProcess.mWindowProcessController;
+            WindowProcessController windowProcessController =
+                    this.mProcess.mWindowProcessController;
             synchronized (windowProcessController.mPkgList) {
                 windowProcessController.mPkgList.clear();
             }
@@ -88,7 +91,8 @@ public final class PackageList {
 
     public final void put(String str, ProcessStats.ProcessStateHolder processStateHolder) {
         synchronized (this) {
-            WindowProcessController windowProcessController = this.mProcess.mWindowProcessController;
+            WindowProcessController windowProcessController =
+                    this.mProcess.mWindowProcessController;
             synchronized (windowProcessController.mPkgList) {
                 try {
                     if (!windowProcessController.mPkgList.contains(str)) {

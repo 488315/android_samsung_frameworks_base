@@ -10,9 +10,12 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
+
 import com.android.internal.R;
+
 import com.samsung.android.app.SemDualAppManager;
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.function.Supplier;
 
 /* loaded from: classes4.dex */
@@ -45,7 +48,8 @@ public class IconDrawableFactory {
         return getBadgedIcon(appInfo, appInfo, userId);
     }
 
-    public Drawable getBadgedIcon(PackageItemInfo itemInfo, ApplicationInfo appInfo, final int userId) {
+    public Drawable getBadgedIcon(
+            PackageItemInfo itemInfo, ApplicationInfo appInfo, final int userId) {
         Drawable icon = this.mPm.loadUnbadgedItemIcon(itemInfo, appInfo, true, 1);
         if (!this.mEmbedShadow && !needsBadging(appInfo, userId)) {
             return icon;
@@ -63,21 +67,33 @@ public class IconDrawableFactory {
             icon2 = this.mLauncherIcons.getBadgedDrawable(icon2, badge, badgeColor);
         }
         if (this.mUm.hasBadge(userId)) {
-            Drawable badge2 = this.mDpm.getResources().getDrawable(getUpdatableUserIconBadgeId(userId), DevicePolicyResources.Drawables.Style.SOLID_COLORED, new Supplier() { // from class: android.util.IconDrawableFactory$$ExternalSyntheticLambda0
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    Drawable lambda$getBadgedIcon$0;
-                    lambda$getBadgedIcon$0 = IconDrawableFactory.this.lambda$getBadgedIcon$0(userId);
-                    return lambda$getBadgedIcon$0;
-                }
-            });
-            return this.mLauncherIcons.getBadgedDrawable(icon2, badge2, this.mUm.getUserBadgeColor(userId));
+            Drawable badge2 =
+                    this.mDpm
+                            .getResources()
+                            .getDrawable(
+                                    getUpdatableUserIconBadgeId(userId),
+                                    DevicePolicyResources.Drawables.Style.SOLID_COLORED,
+                                    new Supplier() { // from class:
+                                                     // android.util.IconDrawableFactory$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            Drawable lambda$getBadgedIcon$0;
+                                            lambda$getBadgedIcon$0 =
+                                                    IconDrawableFactory.this.lambda$getBadgedIcon$0(
+                                                            userId);
+                                            return lambda$getBadgedIcon$0;
+                                        }
+                                    });
+            return this.mLauncherIcons.getBadgedDrawable(
+                    icon2, badge2, this.mUm.getUserBadgeColor(userId));
         }
         return icon2;
     }
 
     private String getUpdatableUserIconBadgeId(int userId) {
-        return this.mUm.isManagedProfile(userId) ? DevicePolicyResources.Drawables.WORK_PROFILE_ICON_BADGE : DevicePolicyResources.UNDEFINED;
+        return this.mUm.isManagedProfile(userId)
+                ? DevicePolicyResources.Drawables.WORK_PROFILE_ICON_BADGE
+                : DevicePolicyResources.UNDEFINED;
     }
 
     /* JADX INFO: Access modifiers changed from: private */

@@ -6,6 +6,7 @@ import android.os.PersistableBundle;
 import android.service.voice.HotwordAudioStream;
 import android.service.voice.HotwordDetectedResult;
 import android.util.Slog;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,7 +33,10 @@ public final class HotwordAudioStreamCopier {
         public final ParcelFileDescriptor mSink;
         public final ParcelFileDescriptor mSource;
 
-        public CopyTaskInfo(ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, int i) {
+        public CopyTaskInfo(
+                ParcelFileDescriptor parcelFileDescriptor,
+                ParcelFileDescriptor parcelFileDescriptor2,
+                int i) {
             this.mSource = parcelFileDescriptor;
             this.mSink = parcelFileDescriptor2;
             this.mCopyBufferLength = i;
@@ -63,9 +67,18 @@ public final class HotwordAudioStreamCopier {
                     copyTaskInfo.mSink.closeWithError(str);
                 }
                 HotwordAudioStreamCopier hotwordAudioStreamCopier = HotwordAudioStreamCopier.this;
-                HotwordMetricsLogger.writeAudioEgressEvent(hotwordAudioStreamCopier.mDetectorType, 10, hotwordAudioStreamCopier.mVoiceInteractorUid, 0, 0, this.mCopyTaskInfos.size());
+                HotwordMetricsLogger.writeAudioEgressEvent(
+                        hotwordAudioStreamCopier.mDetectorType,
+                        10,
+                        hotwordAudioStreamCopier.mVoiceInteractorUid,
+                        0,
+                        0,
+                        this.mCopyTaskInfos.size());
             } catch (IOException e) {
-                Slog.e("HotwordAudioStreamCopier", this.mResultTaskId + ": Failed to propagate error", e);
+                Slog.e(
+                        "HotwordAudioStreamCopier",
+                        this.mResultTaskId + ": Failed to propagate error",
+                        e);
             }
         }
 
@@ -85,21 +98,55 @@ public final class HotwordAudioStreamCopier {
                 ParcelFileDescriptor parcelFileDescriptor2 = copyTaskInfo.mSink;
                 int i3 = copyTaskInfo.mCopyBufferLength;
                 HotwordAudioStreamCopier hotwordAudioStreamCopier2 = HotwordAudioStreamCopier.this;
-                arrayList.add(new SingleAudioStreamCopyTask(str2, parcelFileDescriptor, parcelFileDescriptor2, i3, hotwordAudioStreamCopier2.mDetectorType, hotwordAudioStreamCopier2.mVoiceInteractorUid));
+                arrayList.add(
+                        new SingleAudioStreamCopyTask(
+                                str2,
+                                parcelFileDescriptor,
+                                parcelFileDescriptor2,
+                                i3,
+                                hotwordAudioStreamCopier2.mDetectorType,
+                                hotwordAudioStreamCopier2.mVoiceInteractorUid));
             }
             if (this.mShouldNotifyAppOpsManager) {
                 HotwordAudioStreamCopier hotwordAudioStreamCopier3 = HotwordAudioStreamCopier.this;
-                if (hotwordAudioStreamCopier3.mAppOpsManager.startOpNoThrow("android:record_audio_hotword", hotwordAudioStreamCopier3.mVoiceInteractorUid, hotwordAudioStreamCopier3.mVoiceInteractorPackageName, hotwordAudioStreamCopier3.mVoiceInteractorAttributionTag, "Streaming hotword audio to VoiceInteractionService") != 0) {
-                    HotwordAudioStreamCopier hotwordAudioStreamCopier4 = HotwordAudioStreamCopier.this;
-                    HotwordMetricsLogger.writeAudioEgressEvent(hotwordAudioStreamCopier4.mDetectorType, 4, hotwordAudioStreamCopier4.mVoiceInteractorUid, 0, 0, size);
-                    bestEffortPropagateError("Failed to obtain RECORD_AUDIO_HOTWORD permission for voice interactor with uid=" + HotwordAudioStreamCopier.this.mVoiceInteractorUid + " packageName=" + HotwordAudioStreamCopier.this.mVoiceInteractorPackageName + " attributionTag=" + HotwordAudioStreamCopier.this.mVoiceInteractorAttributionTag);
+                if (hotwordAudioStreamCopier3.mAppOpsManager.startOpNoThrow(
+                                "android:record_audio_hotword",
+                                hotwordAudioStreamCopier3.mVoiceInteractorUid,
+                                hotwordAudioStreamCopier3.mVoiceInteractorPackageName,
+                                hotwordAudioStreamCopier3.mVoiceInteractorAttributionTag,
+                                "Streaming hotword audio to VoiceInteractionService")
+                        != 0) {
+                    HotwordAudioStreamCopier hotwordAudioStreamCopier4 =
+                            HotwordAudioStreamCopier.this;
+                    HotwordMetricsLogger.writeAudioEgressEvent(
+                            hotwordAudioStreamCopier4.mDetectorType,
+                            4,
+                            hotwordAudioStreamCopier4.mVoiceInteractorUid,
+                            0,
+                            0,
+                            size);
+                    bestEffortPropagateError(
+                            "Failed to obtain RECORD_AUDIO_HOTWORD permission for voice interactor"
+                                + " with uid="
+                                    + HotwordAudioStreamCopier.this.mVoiceInteractorUid
+                                    + " packageName="
+                                    + HotwordAudioStreamCopier.this.mVoiceInteractorPackageName
+                                    + " attributionTag="
+                                    + HotwordAudioStreamCopier.this.mVoiceInteractorAttributionTag);
                     return;
                 }
             }
             try {
                 try {
-                    HotwordAudioStreamCopier hotwordAudioStreamCopier5 = HotwordAudioStreamCopier.this;
-                    HotwordMetricsLogger.writeAudioEgressEvent(hotwordAudioStreamCopier5.mDetectorType, 1, hotwordAudioStreamCopier5.mVoiceInteractorUid, this.mTotalInitialAudioSizeBytes, this.mTotalMetadataSizeBytes, size);
+                    HotwordAudioStreamCopier hotwordAudioStreamCopier5 =
+                            HotwordAudioStreamCopier.this;
+                    HotwordMetricsLogger.writeAudioEgressEvent(
+                            hotwordAudioStreamCopier5.mDetectorType,
+                            1,
+                            hotwordAudioStreamCopier5.mVoiceInteractorUid,
+                            this.mTotalInitialAudioSizeBytes,
+                            this.mTotalMetadataSizeBytes,
+                            size);
                     this.mExecutorService.invokeAll(arrayList);
                     int i4 = this.mTotalInitialAudioSizeBytes;
                     Iterator it = arrayList.iterator();
@@ -107,9 +154,24 @@ public final class HotwordAudioStreamCopier {
                     while (it.hasNext()) {
                         i5 += ((SingleAudioStreamCopyTask) it.next()).mTotalCopiedBytes;
                     }
-                    Slog.i("HotwordAudioStreamCopier", this.mResultTaskId + ": Task was completed. Total bytes egressed: " + i5 + " (including " + this.mTotalInitialAudioSizeBytes + " bytes NOT streamed), total metadata bundle size bytes: " + this.mTotalMetadataSizeBytes);
-                    HotwordAudioStreamCopier hotwordAudioStreamCopier6 = HotwordAudioStreamCopier.this;
-                    HotwordMetricsLogger.writeAudioEgressEvent(hotwordAudioStreamCopier6.mDetectorType, 2, hotwordAudioStreamCopier6.mVoiceInteractorUid, i5, this.mTotalMetadataSizeBytes, size);
+                    Slog.i(
+                            "HotwordAudioStreamCopier",
+                            this.mResultTaskId
+                                    + ": Task was completed. Total bytes egressed: "
+                                    + i5
+                                    + " (including "
+                                    + this.mTotalInitialAudioSizeBytes
+                                    + " bytes NOT streamed), total metadata bundle size bytes: "
+                                    + this.mTotalMetadataSizeBytes);
+                    HotwordAudioStreamCopier hotwordAudioStreamCopier6 =
+                            HotwordAudioStreamCopier.this;
+                    HotwordMetricsLogger.writeAudioEgressEvent(
+                            hotwordAudioStreamCopier6.mDetectorType,
+                            2,
+                            hotwordAudioStreamCopier6.mVoiceInteractorUid,
+                            i5,
+                            this.mTotalMetadataSizeBytes,
+                            size);
                 } catch (InterruptedException e) {
                     int i6 = this.mTotalInitialAudioSizeBytes;
                     Iterator it2 = arrayList.iterator();
@@ -117,9 +179,24 @@ public final class HotwordAudioStreamCopier {
                     while (it2.hasNext()) {
                         i7 += ((SingleAudioStreamCopyTask) it2.next()).mTotalCopiedBytes;
                     }
-                    HotwordAudioStreamCopier hotwordAudioStreamCopier7 = HotwordAudioStreamCopier.this;
-                    HotwordMetricsLogger.writeAudioEgressEvent(hotwordAudioStreamCopier7.mDetectorType, 3, hotwordAudioStreamCopier7.mVoiceInteractorUid, i7, this.mTotalMetadataSizeBytes, size);
-                    Slog.i("HotwordAudioStreamCopier", this.mResultTaskId + ": Task was interrupted. Total bytes egressed: " + i7 + " (including " + this.mTotalInitialAudioSizeBytes + " bytes NOT streamed), total metadata bundle size bytes: " + this.mTotalMetadataSizeBytes);
+                    HotwordAudioStreamCopier hotwordAudioStreamCopier7 =
+                            HotwordAudioStreamCopier.this;
+                    HotwordMetricsLogger.writeAudioEgressEvent(
+                            hotwordAudioStreamCopier7.mDetectorType,
+                            3,
+                            hotwordAudioStreamCopier7.mVoiceInteractorUid,
+                            i7,
+                            this.mTotalMetadataSizeBytes,
+                            size);
+                    Slog.i(
+                            "HotwordAudioStreamCopier",
+                            this.mResultTaskId
+                                    + ": Task was interrupted. Total bytes egressed: "
+                                    + i7
+                                    + " (including "
+                                    + this.mTotalInitialAudioSizeBytes
+                                    + " bytes NOT streamed), total metadata bundle size bytes: "
+                                    + this.mTotalMetadataSizeBytes);
                     bestEffortPropagateError(e.getMessage());
                     if (!this.mShouldNotifyAppOpsManager) {
                         return;
@@ -134,12 +211,21 @@ public final class HotwordAudioStreamCopier {
                     appOpsManager = hotwordAudioStreamCopier.mAppOpsManager;
                     i = hotwordAudioStreamCopier.mVoiceInteractorUid;
                     str = hotwordAudioStreamCopier.mVoiceInteractorPackageName;
-                    appOpsManager.finishOp("android:record_audio_hotword", i, str, hotwordAudioStreamCopier.mVoiceInteractorAttributionTag);
+                    appOpsManager.finishOp(
+                            "android:record_audio_hotword",
+                            i,
+                            str,
+                            hotwordAudioStreamCopier.mVoiceInteractorAttributionTag);
                 }
             } catch (Throwable th) {
                 if (this.mShouldNotifyAppOpsManager) {
-                    HotwordAudioStreamCopier hotwordAudioStreamCopier8 = HotwordAudioStreamCopier.this;
-                    hotwordAudioStreamCopier8.mAppOpsManager.finishOp("android:record_audio_hotword", hotwordAudioStreamCopier8.mVoiceInteractorUid, hotwordAudioStreamCopier8.mVoiceInteractorPackageName, hotwordAudioStreamCopier8.mVoiceInteractorAttributionTag);
+                    HotwordAudioStreamCopier hotwordAudioStreamCopier8 =
+                            HotwordAudioStreamCopier.this;
+                    hotwordAudioStreamCopier8.mAppOpsManager.finishOp(
+                            "android:record_audio_hotword",
+                            hotwordAudioStreamCopier8.mVoiceInteractorUid,
+                            hotwordAudioStreamCopier8.mVoiceInteractorPackageName,
+                            hotwordAudioStreamCopier8.mVoiceInteractorAttributionTag);
                 }
                 throw th;
             }
@@ -156,7 +242,13 @@ public final class HotwordAudioStreamCopier {
         public volatile int mTotalCopiedBytes = 0;
         public final int mUid;
 
-        public SingleAudioStreamCopyTask(String str, ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, int i, int i2, int i3) {
+        public SingleAudioStreamCopyTask(
+                String str,
+                ParcelFileDescriptor parcelFileDescriptor,
+                ParcelFileDescriptor parcelFileDescriptor2,
+                int i,
+                int i2,
+                int i3) {
             this.mStreamTaskId = str;
             this.mAudioSource = parcelFileDescriptor;
             this.mAudioSink = parcelFileDescriptor2;
@@ -166,9 +258,9 @@ public final class HotwordAudioStreamCopier {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:33:0x00c3, code lost:
-        
-            if (r3 != null) goto L17;
-         */
+
+           if (r3 != null) goto L17;
+        */
         /* JADX WARN: Multi-variable type inference failed */
         /* JADX WARN: Removed duplicated region for block: B:41:0x00c9  */
         /* JADX WARN: Removed duplicated region for block: B:43:0x00ce  */
@@ -303,11 +395,14 @@ public final class HotwordAudioStreamCopier {
             Ld1:
                 throw r12
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.voiceinteraction.HotwordAudioStreamCopier.SingleAudioStreamCopyTask.call():java.lang.Object");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.voiceinteraction.HotwordAudioStreamCopier.SingleAudioStreamCopyTask.call():java.lang.Object");
         }
     }
 
-    public HotwordAudioStreamCopier(AppOpsManager appOpsManager, int i, int i2, String str, String str2) {
+    public HotwordAudioStreamCopier(
+            AppOpsManager appOpsManager, int i, int i2, String str, String str2) {
         this.mAppOpsManager = appOpsManager;
         this.mDetectorType = i;
         this.mVoiceInteractorUid = i2;
@@ -315,11 +410,13 @@ public final class HotwordAudioStreamCopier {
         this.mVoiceInteractorAttributionTag = str2;
     }
 
-    public final HotwordDetectedResult startCopyingAudioStreams(HotwordDetectedResult hotwordDetectedResult, boolean z) {
+    public final HotwordDetectedResult startCopyingAudioStreams(
+            HotwordDetectedResult hotwordDetectedResult, boolean z) {
         int i;
         List<HotwordAudioStream> audioStreams = hotwordDetectedResult.getAudioStreams();
         if (audioStreams.isEmpty()) {
-            HotwordMetricsLogger.writeAudioEgressEvent(this.mDetectorType, 7, this.mVoiceInteractorUid, 0, 0, 0);
+            HotwordMetricsLogger.writeAudioEgressEvent(
+                    this.mDetectorType, 7, this.mVoiceInteractorUid, 0, 0, 0);
             return hotwordDetectedResult;
         }
         int size = audioStreams.size();
@@ -332,28 +429,56 @@ public final class HotwordAudioStreamCopier {
             ParcelFileDescriptor[] createReliablePipe = ParcelFileDescriptor.createReliablePipe();
             ParcelFileDescriptor parcelFileDescriptor = createReliablePipe[c];
             ParcelFileDescriptor parcelFileDescriptor2 = createReliablePipe[1];
-            arrayList.add(hotwordAudioStream.buildUpon().setAudioStreamParcelFileDescriptor(parcelFileDescriptor).build());
+            arrayList.add(
+                    hotwordAudioStream
+                            .buildUpon()
+                            .setAudioStreamParcelFileDescriptor(parcelFileDescriptor)
+                            .build());
             PersistableBundle metadata = hotwordAudioStream.getMetadata();
             int parcelableSize = HotwordDetectedResult.getParcelableSize(metadata) + i2;
-            if (metadata.containsKey("android.service.voice.key.AUDIO_STREAM_COPY_BUFFER_LENGTH_BYTES")) {
-                i = metadata.getInt("android.service.voice.key.AUDIO_STREAM_COPY_BUFFER_LENGTH_BYTES", -1);
+            if (metadata.containsKey(
+                    "android.service.voice.key.AUDIO_STREAM_COPY_BUFFER_LENGTH_BYTES")) {
+                i =
+                        metadata.getInt(
+                                "android.service.voice.key.AUDIO_STREAM_COPY_BUFFER_LENGTH_BYTES",
+                                -1);
                 if (i < 1 || i > 65536) {
-                    HotwordMetricsLogger.writeAudioEgressEvent(this.mDetectorType, 9, this.mVoiceInteractorUid, 0, 0, size);
-                    Slog.w("HotwordAudioStreamCopier", "Attempted to set an invalid copy buffer length (" + i + ") for: " + hotwordAudioStream);
+                    HotwordMetricsLogger.writeAudioEgressEvent(
+                            this.mDetectorType, 9, this.mVoiceInteractorUid, 0, 0, size);
+                    Slog.w(
+                            "HotwordAudioStreamCopier",
+                            "Attempted to set an invalid copy buffer length ("
+                                    + i
+                                    + ") for: "
+                                    + hotwordAudioStream);
                 } else {
                     i3 += hotwordAudioStream.getInitialAudio().length;
-                    arrayList2.add(new CopyTaskInfo(hotwordAudioStream.getAudioStreamParcelFileDescriptor(), parcelFileDescriptor2, i));
+                    arrayList2.add(
+                            new CopyTaskInfo(
+                                    hotwordAudioStream.getAudioStreamParcelFileDescriptor(),
+                                    parcelFileDescriptor2,
+                                    i));
                     i2 = parcelableSize;
                     c = 0;
                 }
             }
             i = 32768;
             i3 += hotwordAudioStream.getInitialAudio().length;
-            arrayList2.add(new CopyTaskInfo(hotwordAudioStream.getAudioStreamParcelFileDescriptor(), parcelFileDescriptor2, i));
+            arrayList2.add(
+                    new CopyTaskInfo(
+                            hotwordAudioStream.getAudioStreamParcelFileDescriptor(),
+                            parcelFileDescriptor2,
+                            i));
             i2 = parcelableSize;
             c = 0;
         }
-        this.mExecutorService.execute(new HotwordDetectedResultCopyTask("HotwordDetectedResult@" + System.identityHashCode(hotwordDetectedResult), arrayList2, i2, i3, z));
+        this.mExecutorService.execute(
+                new HotwordDetectedResultCopyTask(
+                        "HotwordDetectedResult@" + System.identityHashCode(hotwordDetectedResult),
+                        arrayList2,
+                        i2,
+                        i3,
+                        z));
         return hotwordDetectedResult.buildUpon().setAudioStreams(arrayList).build();
     }
 }

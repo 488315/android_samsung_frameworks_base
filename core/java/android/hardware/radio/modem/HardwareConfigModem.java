@@ -4,25 +4,28 @@ import android.hardware.radio.RadioTechnology$$;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class HardwareConfigModem implements Parcelable {
-    public static final Parcelable.Creator<HardwareConfigModem> CREATOR = new Parcelable.Creator<HardwareConfigModem>() { // from class: android.hardware.radio.modem.HardwareConfigModem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HardwareConfigModem createFromParcel(Parcel _aidl_source) {
-            HardwareConfigModem _aidl_out = new HardwareConfigModem();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<HardwareConfigModem> CREATOR =
+            new Parcelable.Creator<HardwareConfigModem>() { // from class:
+                // android.hardware.radio.modem.HardwareConfigModem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HardwareConfigModem createFromParcel(Parcel _aidl_source) {
+                    HardwareConfigModem _aidl_out = new HardwareConfigModem();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HardwareConfigModem[] newArray(int _aidl_size) {
-            return new HardwareConfigModem[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HardwareConfigModem[] newArray(int _aidl_size) {
+                    return new HardwareConfigModem[_aidl_size];
+                }
+            };
     public int rat;
     public int rilModel = 0;
     public int maxVoiceCalls = 0;

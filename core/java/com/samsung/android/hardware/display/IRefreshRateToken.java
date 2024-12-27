@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IRefreshRateToken extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.hardware.display.IRefreshRateToken";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.hardware.display.IRefreshRateToken";
 
     void release() throws RemoteException;
 
     public static class Default implements IRefreshRateToken {
         @Override // com.samsung.android.hardware.display.IRefreshRateToken
-        public void release() throws RemoteException {
-        }
+        public void release() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IRefreshRateToken extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRefreshRateToken {
+    public abstract static class Stub extends Binder implements IRefreshRateToken {
         static final int TRANSACTION_release = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IRefreshRateToken extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRefreshRateToken.DESCRIPTOR);
             }

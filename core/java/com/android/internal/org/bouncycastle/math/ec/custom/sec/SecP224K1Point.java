@@ -152,7 +152,7 @@ public class SecP224K1Point extends ECPoint.AbstractFp {
         if (!Z1.isOne()) {
             SecP224K1Field.multiply(Z3.x, Z1.x, Z3.x);
         }
-        return new SecP224K1Point(curve, X3, Y3, new ECFieldElement[]{Z3});
+        return new SecP224K1Point(curve, X3, Y3, new ECFieldElement[] {Z3});
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECPoint

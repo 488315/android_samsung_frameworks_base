@@ -2,12 +2,11 @@ package android.flags;
 
 import android.app.backup.FullBackup;
 import android.content.Context;
-import android.flags.IFeatureFlags;
-import android.flags.IFeatureFlagsCallback;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.ArraySet;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -56,27 +55,32 @@ public class FeatureFlags {
         this.mDirtyFlags = new ArraySet();
         this.mBooleanOverrides = new HashMap();
         this.mListeners = new HashSet();
-        this.mIFeatureFlagsCallback = new IFeatureFlagsCallback.Stub() { // from class: android.flags.FeatureFlags.1
-            @Override // android.flags.IFeatureFlagsCallback
-            public void onFlagChange(SyncableFlag flag) {
-                for (Flag<?> f : FeatureFlags.this.mKnownFlags) {
-                    if (FeatureFlags.flagEqualsSyncableFlag(f, flag)) {
-                        if (f instanceof DynamicFlag) {
-                            if (f instanceof DynamicBooleanFlag) {
-                                String value = flag.getValue();
-                                if (value == null) {
-                                    value = ((DynamicBooleanFlag) f).getDefault().toString();
+        this.mIFeatureFlagsCallback =
+                new IFeatureFlagsCallback.Stub() { // from class: android.flags.FeatureFlags.1
+                    @Override // android.flags.IFeatureFlagsCallback
+                    public void onFlagChange(SyncableFlag flag) {
+                        for (Flag<?> f : FeatureFlags.this.mKnownFlags) {
+                            if (FeatureFlags.flagEqualsSyncableFlag(f, flag)) {
+                                if (f instanceof DynamicFlag) {
+                                    if (f instanceof DynamicBooleanFlag) {
+                                        String value = flag.getValue();
+                                        if (value == null) {
+                                            value =
+                                                    ((DynamicBooleanFlag) f)
+                                                            .getDefault()
+                                                            .toString();
+                                        }
+                                        FeatureFlags.this.addBooleanOverride(
+                                                flag.getNamespace(), flag.getName(), value);
+                                    }
+                                    FeatureFlags.this.onFlagChange((DynamicFlag) f);
+                                    return;
                                 }
-                                FeatureFlags.this.addBooleanOverride(flag.getNamespace(), flag.getName(), value);
+                                return;
                             }
-                            FeatureFlags.this.onFlagChange((DynamicFlag) f);
-                            return;
                         }
-                        return;
                     }
-                }
-            }
-        };
+                };
         this.mIFeatureFlags = iFeatureFlags;
         if (this.mIFeatureFlags != null) {
             try {
@@ -99,8 +103,10 @@ public class FeatureFlags {
         return (FusedOnFlag) getInstance().addFlag(new FusedOnFlag(namespace, name));
     }
 
-    public static DynamicBooleanFlag dynamicBooleanFlag(String namespace, String name, boolean def) {
-        return (DynamicBooleanFlag) getInstance().addFlag(new DynamicBooleanFlag(namespace, name, def));
+    public static DynamicBooleanFlag dynamicBooleanFlag(
+            String namespace, String name, boolean def) {
+        return (DynamicBooleanFlag)
+                getInstance().addFlag(new DynamicBooleanFlag(namespace, name, def));
     }
 
     public void addChangeListener(ChangeListener listener) {
@@ -194,7 +200,10 @@ public class FeatureFlags {
                 }
             }
             if (!found && (f instanceof BooleanFlag)) {
-                addBooleanOverride(f.getNamespace(), f.getName(), ((BooleanFlag) f).getDefault().booleanValue() ? "true" : "false");
+                addBooleanOverride(
+                        f.getNamespace(),
+                        f.getName(),
+                        ((BooleanFlag) f).getDefault().booleanValue() ? "true" : "false");
             }
         }
     }
@@ -210,12 +219,15 @@ public class FeatureFlags {
     }
 
     private SyncableFlag flagToSyncableFlag(Flag<?> f) {
-        return new SyncableFlag(f.getNamespace(), f.getName(), f.getDefault().toString(), f instanceof DynamicFlag);
+        return new SyncableFlag(
+                f.getNamespace(), f.getName(), f.getDefault().toString(), f instanceof DynamicFlag);
     }
 
     private IFeatureFlags bind() {
         if (this.mIFeatureFlags == null) {
-            this.mIFeatureFlags = IFeatureFlags.Stub.asInterface(ServiceManager.getService(Context.FEATURE_FLAGS_SERVICE));
+            this.mIFeatureFlags =
+                    IFeatureFlags.Stub.asInterface(
+                            ServiceManager.getService(Context.FEATURE_FLAGS_SERVICE));
             try {
                 this.mIFeatureFlags.registerCallback(this.mIFeatureFlagsCallback);
             } catch (RemoteException e) {
@@ -226,9 +238,22 @@ public class FeatureFlags {
     }
 
     static boolean parseBoolean(String value) {
-        boolean result = value.equalsIgnoreCase("true") || value.equals("1") || value.equalsIgnoreCase("t") || value.equalsIgnoreCase("on");
-        if (!result && !value.equalsIgnoreCase("false") && !value.equals("0") && !value.equalsIgnoreCase(FullBackup.FILES_TREE_TOKEN) && !value.equalsIgnoreCase("off")) {
-            Log.e(TAG, "Tried parsing " + value + " as boolean but it doesn't look like one. Value expected to be one of true|false, 1|0, t|f, on|off.");
+        boolean result =
+                value.equalsIgnoreCase("true")
+                        || value.equals("1")
+                        || value.equalsIgnoreCase("t")
+                        || value.equalsIgnoreCase("on");
+        if (!result
+                && !value.equalsIgnoreCase("false")
+                && !value.equals("0")
+                && !value.equalsIgnoreCase(FullBackup.FILES_TREE_TOKEN)
+                && !value.equalsIgnoreCase("off")) {
+            Log.e(
+                    TAG,
+                    "Tried parsing "
+                            + value
+                            + " as boolean but it doesn't look like one. Value expected to be one"
+                            + " of true|false, 1|0, t|f, on|off.");
         }
         return result;
     }

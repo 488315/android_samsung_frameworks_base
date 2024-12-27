@@ -7,11 +7,13 @@ import android.os.Parcelable;
 import android.util.MathUtils;
 import android.util.Slog;
 import android.util.Spline;
+
 import com.android.internal.util.Preconditions;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.am.mars.MARsFreezeStateRecord$$ExternalSyntheticOutline0;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -56,7 +58,8 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         }
 
         public BrightnessWeights copy() {
-            return new BrightnessWeights(this.mLux, this.mBrightness, this.mWeight, this.mLastUserBrightnessTime);
+            return new BrightnessWeights(
+                    this.mLux, this.mBrightness, this.mWeight, this.mLastUserBrightnessTime);
         }
 
         public float getBrightness() {
@@ -99,7 +102,20 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         public String toString() {
             StringBuilder sb = new StringBuilder();
             float weight = getWeight();
-            sb.append(String.format("%d:%s", Integer.valueOf((int) this.mBrightness), weight < 10.0f ? String.format("%.1f", Float.valueOf(weight)) : weight < 100.0f ? String.format("%d", Integer.valueOf((int) weight)) : weight < 1000.0f ? String.format("%d", Integer.valueOf((int) weight)) : String.format("%.1fh", Float.valueOf(weight / 3600.0f))));
+            sb.append(
+                    String.format(
+                            "%d:%s",
+                            Integer.valueOf((int) this.mBrightness),
+                            weight < 10.0f
+                                    ? String.format("%.1f", Float.valueOf(weight))
+                                    : weight < 100.0f
+                                            ? String.format("%d", Integer.valueOf((int) weight))
+                                            : weight < 1000.0f
+                                                    ? String.format(
+                                                            "%d", Integer.valueOf((int) weight))
+                                                    : String.format(
+                                                            "%.1fh",
+                                                            Float.valueOf(weight / 3600.0f))));
             return sb.toString();
         }
 
@@ -146,11 +162,24 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
             public final String toString() {
                 float f = this.mBrightness;
                 float f2 = this.mAdjustment;
-                return String.format("%5.1f -> %5.1f (%+6.1f) @ [%6.1f < %6.1f < %6.1f]  (%.1fs : %.1fs)", Float.valueOf(f - f2), Float.valueOf(f), Float.valueOf(f2), Float.valueOf(this.mLowerBoundary), Float.valueOf(this.mLux), Float.valueOf(this.mUpperBoundary), Float.valueOf(this.mPreTimeDuration), Float.valueOf(this.mPostTimeDuration));
+                return String.format(
+                        "%5.1f -> %5.1f (%+6.1f) @ [%6.1f < %6.1f < %6.1f]  (%.1fs : %.1fs)",
+                        Float.valueOf(f - f2),
+                        Float.valueOf(f),
+                        Float.valueOf(f2),
+                        Float.valueOf(this.mLowerBoundary),
+                        Float.valueOf(this.mLux),
+                        Float.valueOf(this.mUpperBoundary),
+                        Float.valueOf(this.mPreTimeDuration),
+                        Float.valueOf(this.mPostTimeDuration));
             }
         }
 
-        public ContinuityStatsCollector(float[] fArr, BrightnessMappingStrategy brightnessMappingStrategy, TimeStatsCollector timeStatsCollector, BrightnessWeights[] brightnessWeightsArr) {
+        public ContinuityStatsCollector(
+                float[] fArr,
+                BrightnessMappingStrategy brightnessMappingStrategy,
+                TimeStatsCollector timeStatsCollector,
+                BrightnessWeights[] brightnessWeightsArr) {
             this.mBucketBoundaries = fArr;
             this.mContinuityStats = new WeightStat[fArr.length];
             int i = 0;
@@ -164,15 +193,20 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
                     this.mTotalStats = brightnessWeightsArr;
                     return;
                 }
-                weightStatArr[i] = new WeightStat(FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                weightStatArr[i] =
+                        new WeightStat(
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE);
                 i++;
             }
         }
 
-        public final void addUserBrightnessStat(float f, float f2, float f3, Spline spline, ArrayList arrayList, boolean z) {
+        public final void addUserBrightnessStat(
+                float f, float f2, float f3, Spline spline, ArrayList arrayList, boolean z) {
             float f4;
             if (z) {
-                int bucketIndex = AdaptiveBrightnessWeightStats.getBucketIndex(f, this.mBucketBoundaries);
+                int bucketIndex =
+                        AdaptiveBrightnessWeightStats.getBucketIndex(f, this.mBucketBoundaries);
                 TimeStatsCollector timeStatsCollector = this.mTimeStatsCollector;
                 timeStatsCollector.summarize();
                 f4 = timeStatsCollector.mTimeStats[bucketIndex].getWeight();
@@ -183,13 +217,16 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
             Iterator it = arrayList.iterator();
             while (it.hasNext()) {
                 float f5 = ((UserBrightnessStat) it.next()).mLux;
-                if (userBrightnessStat.mLowerBoundary <= f5 && f5 <= userBrightnessStat.mUpperBoundary) {
+                if (userBrightnessStat.mLowerBoundary <= f5
+                        && f5 <= userBrightnessStat.mUpperBoundary) {
                     it.remove();
                 }
             }
             arrayList.add(userBrightnessStat);
             for (int i = 0; i < arrayList.size(); i++) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "addUserBrightnessStat: [", "] ");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                i, "addUserBrightnessStat: [", "] ");
                 m.append(z ? "userInitiated " : "");
                 m.append(arrayList.get(i));
                 Slog.d("AdaptiveBrightnessWeightStats", m.toString());
@@ -204,7 +241,8 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         public final WeightStat[] mTimeStats;
         public final ArrayList mTransientStats = new ArrayList();
 
-        public TimeStatsCollector(float[] fArr, BrightnessMappingStrategy brightnessMappingStrategy) {
+        public TimeStatsCollector(
+                float[] fArr, BrightnessMappingStrategy brightnessMappingStrategy) {
             this.mBucketBoundaries = fArr;
             this.mTimeStats = new WeightStat[fArr.length];
             int i = 0;
@@ -214,7 +252,10 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
                     this.mBrightnessMapper = brightnessMappingStrategy;
                     return;
                 } else {
-                    weightStatArr[i] = new WeightStat(FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                    weightStatArr[i] =
+                            new WeightStat(
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE);
                     i++;
                 }
             }
@@ -243,7 +284,9 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
                 if (i >= fArr.length) {
                     break;
                 }
-                i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%9d", new Object[]{Integer.valueOf((int) fArr[i])}, sb, i, 1);
+                i =
+                        MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                                "%9d", new Object[] {Integer.valueOf((int) fArr[i])}, sb, i, 1);
             }
             int i2 = 0;
             for (int i3 = 0; i3 < this.mTransientStats.size(); i3++) {
@@ -258,12 +301,17 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
                     if (i4 < arrayList.size()) {
                         sb2.append(String.format("%9s", arrayList.get(i4)));
                     } else {
-                        sb2.append(String.format("%9s", PackageManagerShellCommandDataLoader.STDIN_PATH));
+                        sb2.append(
+                                String.format(
+                                        "%9s", PackageManagerShellCommandDataLoader.STDIN_PATH));
                     }
                 }
                 sb2.append(System.lineSeparator());
             }
-            return System.lineSeparator() + ((CharSequence) sb) + System.lineSeparator() + ((CharSequence) sb2);
+            return System.lineSeparator()
+                    + ((CharSequence) sb)
+                    + System.lineSeparator()
+                    + ((CharSequence) sb2);
         }
     }
 
@@ -292,7 +340,18 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
 
         public String toString() {
             float f = this.mWeight;
-            return String.format(Integer.toString((int) this.mBrightness) + ":" + (f < 10.0f ? String.format("%.1f", Float.valueOf(f)) : f < 100.0f ? String.format("%d", Integer.valueOf((int) f)) : f < 1000.0f ? String.format("%d", Integer.valueOf((int) f)) : String.format("%.1fh", Float.valueOf(f / 3600.0f))), new Object[0]);
+            return String.format(
+                    Integer.toString((int) this.mBrightness)
+                            + ":"
+                            + (f < 10.0f
+                                    ? String.format("%.1f", Float.valueOf(f))
+                                    : f < 100.0f
+                                            ? String.format("%d", Integer.valueOf((int) f))
+                                            : f < 1000.0f
+                                                    ? String.format("%d", Integer.valueOf((int) f))
+                                                    : String.format(
+                                                            "%.1fh", Float.valueOf(f / 3600.0f))),
+                    new Object[0]);
         }
 
         public void updateWeight(float f) {
@@ -310,7 +369,16 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
             return 1.0f;
         }
         if (f2 >= f3 || f3 >= f4) {
-            Slog.e("AdaptiveBrightnessWeightStats", "getDistributionRatio: wrong boundary " + f + ": " + f2 + " < " + f3 + " < " + f4);
+            Slog.e(
+                    "AdaptiveBrightnessWeightStats",
+                    "getDistributionRatio: wrong boundary "
+                            + f
+                            + ": "
+                            + f2
+                            + " < "
+                            + f3
+                            + " < "
+                            + f4);
         } else {
             if (f < f3) {
                 return (f - f2) / (f3 - f2);
@@ -329,7 +397,9 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         while (true) {
             BrightnessWeights[] brightnessWeightsArr = this.mStats;
             if (i >= brightnessWeightsArr.length) {
-                Slog.d("AdaptiveBrightnessWeightStats", "AdaptiveBrightnessWeightStats (parcel): mBrightnessMapper: null");
+                Slog.d(
+                        "AdaptiveBrightnessWeightStats",
+                        "AdaptiveBrightnessWeightStats (parcel): mBrightnessMapper: null");
                 this.mContinuityStatsCollector = null;
                 this.mTimeStatsCollector = null;
                 return;
@@ -339,13 +409,21 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         }
     }
 
-    public AdaptiveBrightnessWeightStats(float[] fArr, BrightnessMappingStrategy brightnessMappingStrategy) {
+    public AdaptiveBrightnessWeightStats(
+            float[] fArr, BrightnessMappingStrategy brightnessMappingStrategy) {
         this(fArr, null, brightnessMappingStrategy);
     }
 
-    public AdaptiveBrightnessWeightStats(float[] fArr, BrightnessWeights[] brightnessWeightsArr, BrightnessMappingStrategy brightnessMappingStrategy) {
+    public AdaptiveBrightnessWeightStats(
+            float[] fArr,
+            BrightnessWeights[] brightnessWeightsArr,
+            BrightnessMappingStrategy brightnessMappingStrategy) {
         Objects.requireNonNull(fArr);
-        Preconditions.checkArrayElementsInRange(fArr, FullScreenMagnificationGestureHandler.MAX_SCALE, Float.MAX_VALUE, "bucketBoundaries");
+        Preconditions.checkArrayElementsInRange(
+                fArr,
+                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                Float.MAX_VALUE,
+                "bucketBoundaries");
         if (fArr.length < 1) {
             throw new IllegalArgumentException("Bucket boundaries must contain at least 1 value");
         }
@@ -357,26 +435,42 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
             }
         }
         if (brightnessWeightsArr == null) {
-            Slog.d("AdaptiveBrightnessWeightStats", "AdaptiveBrightnessWeightStats: stats is null. default!");
+            Slog.d(
+                    "AdaptiveBrightnessWeightStats",
+                    "AdaptiveBrightnessWeightStats: stats is null. default!");
             brightnessWeightsArr = new BrightnessWeights[fArr.length];
             for (int i2 = 0; i2 < fArr.length; i2++) {
-                brightnessWeightsArr[i2] = new BrightnessWeights(fArr[i2], brightnessMappingStrategy.convertToNits(brightnessMappingStrategy.getBrightness(null, fArr[i2], -1)), 60.0f, 0L);
+                brightnessWeightsArr[i2] =
+                        new BrightnessWeights(
+                                fArr[i2],
+                                brightnessMappingStrategy.convertToNits(
+                                        brightnessMappingStrategy.getBrightness(
+                                                null, fArr[i2], -1)),
+                                60.0f,
+                                0L);
             }
         } else {
             if (fArr.length != brightnessWeightsArr.length) {
-                throw new IllegalArgumentException("Bucket boundaries and stats must be of same size.");
+                throw new IllegalArgumentException(
+                        "Bucket boundaries and stats must be of same size.");
             }
-            printCurrentStats("AdaptiveBrightnessWeightStats - orig stats", brightnessWeightsArr, fArr);
+            printCurrentStats(
+                    "AdaptiveBrightnessWeightStats - orig stats", brightnessWeightsArr, fArr);
             for (int i3 = 0; i3 < fArr.length; i3++) {
-                brightnessWeightsArr[i3].setBrightness(brightnessMappingStrategy.convertToNits(brightnessMappingStrategy.getBrightness(null, fArr[i3], -1)));
+                brightnessWeightsArr[i3].setBrightness(
+                        brightnessMappingStrategy.convertToNits(
+                                brightnessMappingStrategy.getBrightness(null, fArr[i3], -1)));
             }
         }
         this.mBucketBoundaries = fArr;
         this.mStats = brightnessWeightsArr;
         printCurrentStats("AdaptiveBrightnessWeightStats - mStats", brightnessWeightsArr, fArr);
-        TimeStatsCollector timeStatsCollector = new TimeStatsCollector(fArr, brightnessMappingStrategy);
+        TimeStatsCollector timeStatsCollector =
+                new TimeStatsCollector(fArr, brightnessMappingStrategy);
         this.mTimeStatsCollector = timeStatsCollector;
-        this.mContinuityStatsCollector = new ContinuityStatsCollector(fArr, brightnessMappingStrategy, timeStatsCollector, brightnessWeightsArr);
+        this.mContinuityStatsCollector =
+                new ContinuityStatsCollector(
+                        fArr, brightnessMappingStrategy, timeStatsCollector, brightnessWeightsArr);
         timeStatsCollector.mTransientStats.clear();
         for (int i4 = 0; i4 < timeStatsCollector.mBucketBoundaries.length; i4++) {
             timeStatsCollector.mTransientStats.add(new ArrayList());
@@ -427,11 +521,15 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         int i = 0;
         int i2 = 0;
         while (i2 < fArr.length) {
-            i2 = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%9d", new Object[]{Integer.valueOf((int) fArr[i2])}, sb2, i2, 1);
+            i2 =
+                    MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                            "%9d", new Object[] {Integer.valueOf((int) fArr[i2])}, sb2, i2, 1);
         }
         int length = objArr.length;
         while (i < length) {
-            i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%9s", new Object[]{objArr[i]}, sb3, i, 1);
+            i =
+                    MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                            "%9s", new Object[] {objArr[i]}, sb3, i, 1);
         }
         sb.append(System.lineSeparator());
         sb.append((CharSequence) sb2);
@@ -452,8 +550,11 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         if (obj == null || AdaptiveBrightnessWeightStats.class != obj.getClass()) {
             return false;
         }
-        AdaptiveBrightnessWeightStats adaptiveBrightnessWeightStats = (AdaptiveBrightnessWeightStats) obj;
-        return Arrays.equals(this.mBucketBoundaries, adaptiveBrightnessWeightStats.mBucketBoundaries) && Arrays.equals(this.mStats, adaptiveBrightnessWeightStats.mStats);
+        AdaptiveBrightnessWeightStats adaptiveBrightnessWeightStats =
+                (AdaptiveBrightnessWeightStats) obj;
+        return Arrays.equals(
+                        this.mBucketBoundaries, adaptiveBrightnessWeightStats.mBucketBoundaries)
+                && Arrays.equals(this.mStats, adaptiveBrightnessWeightStats.mStats);
     }
 
     public float[] getBucketBoundaries() {
@@ -486,7 +587,14 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         return Arrays.hashCode(this.mStats) + ((Arrays.hashCode(this.mBucketBoundaries) + 31) * 31);
     }
 
-    public void log(float f, float f2, float f3, Spline spline, BrightnessChangeEvent brightnessChangeEvent, Spline spline2, boolean z) {
+    public void log(
+            float f,
+            float f2,
+            float f3,
+            Spline spline,
+            BrightnessChangeEvent brightnessChangeEvent,
+            Spline spline2,
+            boolean z) {
         int i;
         String str;
         float f4 = f2;
@@ -495,7 +603,10 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         if (z) {
             StringBuilder sb2 = new StringBuilder("(");
             if (brightnessChangeEvent != null) {
-                str = brightnessChangeEvent.lastBrightness + "->" + brightnessChangeEvent.brightness;
+                str =
+                        brightnessChangeEvent.lastBrightness
+                                + "->"
+                                + brightnessChangeEvent.brightness;
             } else {
                 str = "null";
             }
@@ -519,7 +630,9 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         sb3.append((Object) charSequence);
         Slog.d("AdaptiveBrightnessWeightStats", sb3.toString());
         int bucketIndex = getBucketIndex(f, this.mBucketBoundaries);
-        if (bucketIndex < 0 || f4 < FullScreenMagnificationGestureHandler.MAX_SCALE || spline3 == null) {
+        if (bucketIndex < 0
+                || f4 < FullScreenMagnificationGestureHandler.MAX_SCALE
+                || spline3 == null) {
             return;
         }
         TimeStatsCollector timeStatsCollector = this.mTimeStatsCollector;
@@ -536,34 +649,63 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         if (fArr[constrain2] > max && constrain2 > 0) {
             constrain2--;
         }
-        Slog.d("AdaptiveBrightnessWeightStats", "updateTransientStats: " + min + " < " + f + " < " + max + "  b:" + f4 + " t:" + f3 + "s");
+        Slog.d(
+                "AdaptiveBrightnessWeightStats",
+                "updateTransientStats: "
+                        + min
+                        + " < "
+                        + f
+                        + " < "
+                        + max
+                        + "  b:"
+                        + f4
+                        + " t:"
+                        + f3
+                        + "s");
         while (constrain <= constrain2) {
             ArrayList arrayList = (ArrayList) timeStatsCollector.mTransientStats.get(constrain);
-            BrightnessMappingStrategy brightnessMappingStrategy = timeStatsCollector.mBrightnessMapper;
+            BrightnessMappingStrategy brightnessMappingStrategy =
+                    timeStatsCollector.mBrightnessMapper;
             if (brightnessMappingStrategy != null) {
                 float f6 = fArr[constrain];
                 i = constrain2;
-                float convertToNits = brightnessMappingStrategy.convertToNits(brightnessMappingStrategy.getBrightnessForSpline(f6, spline3));
+                float convertToNits =
+                        brightnessMappingStrategy.convertToNits(
+                                brightnessMappingStrategy.getBrightnessForSpline(f6, spline3));
                 if (bucketIndex2 == constrain) {
-                    Slog.d("AdaptiveBrightnessWeightStats", "updateTransientStats: b: " + f4 + " ambientLux:" + f + " currentBucketLux:" + f5 + " mBrightnessMapper: " + convertToNits);
+                    Slog.d(
+                            "AdaptiveBrightnessWeightStats",
+                            "updateTransientStats: b: "
+                                    + f4
+                                    + " ambientLux:"
+                                    + f
+                                    + " currentBucketLux:"
+                                    + f5
+                                    + " mBrightnessMapper: "
+                                    + convertToNits);
                 }
-                float m434$$Nest$smgetDistributionRatio = m434$$Nest$smgetDistributionRatio(f6, min, f5, max);
+                float m434$$Nest$smgetDistributionRatio =
+                        m434$$Nest$smgetDistributionRatio(f6, min, f5, max);
                 int size = arrayList.size();
                 int i2 = 0;
                 while (true) {
                     if (i2 >= size) {
                         i2 = -1;
                         break;
-                    } else if (Float.compare(convertToNits, ((WeightStat) arrayList.get(i2)).getBrightness()) == 0) {
+                    } else if (Float.compare(
+                                    convertToNits, ((WeightStat) arrayList.get(i2)).getBrightness())
+                            == 0) {
                         break;
                     } else {
                         i2++;
                     }
                 }
                 if (i2 >= 0) {
-                    ((WeightStat) arrayList.get(i2)).updateWeight(m434$$Nest$smgetDistributionRatio * f3);
+                    ((WeightStat) arrayList.get(i2))
+                            .updateWeight(m434$$Nest$smgetDistributionRatio * f3);
                 } else {
-                    arrayList.add(new WeightStat(convertToNits, m434$$Nest$smgetDistributionRatio * f3));
+                    arrayList.add(
+                            new WeightStat(convertToNits, m434$$Nest$smgetDistributionRatio * f3));
                 }
             } else {
                 i = constrain2;
@@ -579,14 +721,16 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
         float f7 = brightnessChangeEvent.brightness;
         float f8 = f7 - brightnessChangeEvent.lastBrightness;
         ContinuityStatsCollector continuityStatsCollector = this.mContinuityStatsCollector;
-        continuityStatsCollector.addUserBrightnessStat(f, f7, f8, spline2, continuityStatsCollector.mCurrentUserBrightnessStats, true);
+        continuityStatsCollector.addUserBrightnessStat(
+                f, f7, f8, spline2, continuityStatsCollector.mCurrentUserBrightnessStats, true);
         this.mStats[bucketIndex].setLastUserBrightnessTime(System.currentTimeMillis());
     }
 
     public void setMaxWeight() {
         Slog.d("AdaptiveBrightnessWeightStats", "setMaxWeight");
         for (BrightnessWeights brightnessWeights : this.mStats) {
-            brightnessWeights.set(brightnessWeights.getLux(), brightnessWeights.getBrightness(), 28800.0f);
+            brightnessWeights.set(
+                    brightnessWeights.getLux(), brightnessWeights.getBrightness(), 28800.0f);
         }
     }
 
@@ -600,7 +744,9 @@ public final class AdaptiveBrightnessWeightStats implements Parcelable {
             Method dump skipped, instructions count: 1103
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.AdaptiveBrightnessWeightStats.summarizeStats():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.AdaptiveBrightnessWeightStats.summarizeStats():void");
     }
 
     @Override // android.os.Parcelable

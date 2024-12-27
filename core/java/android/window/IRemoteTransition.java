@@ -6,36 +6,66 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.SurfaceControl;
-import android.window.IRemoteTransitionFinishedCallback;
 
 /* loaded from: classes4.dex */
 public interface IRemoteTransition extends IInterface {
     public static final String DESCRIPTOR = "android.window.IRemoteTransition";
 
-    void mergeAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, IBinder iBinder2, IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback) throws RemoteException;
+    void mergeAnimation(
+            IBinder iBinder,
+            TransitionInfo transitionInfo,
+            SurfaceControl.Transaction transaction,
+            IBinder iBinder2,
+            IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback)
+            throws RemoteException;
 
     void onTransitionConsumed(IBinder iBinder, boolean z) throws RemoteException;
 
-    void startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback) throws RemoteException;
+    void startAnimation(
+            IBinder iBinder,
+            TransitionInfo transitionInfo,
+            SurfaceControl.Transaction transaction,
+            IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback)
+            throws RemoteException;
 
-    void takeOverAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback, WindowAnimationState[] windowAnimationStateArr) throws RemoteException;
+    void takeOverAnimation(
+            IBinder iBinder,
+            TransitionInfo transitionInfo,
+            SurfaceControl.Transaction transaction,
+            IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback,
+            WindowAnimationState[] windowAnimationStateArr)
+            throws RemoteException;
 
     public static class Default implements IRemoteTransition {
         @Override // android.window.IRemoteTransition
-        public void startAnimation(IBinder token, TransitionInfo info, SurfaceControl.Transaction t, IRemoteTransitionFinishedCallback finishCallback) throws RemoteException {
-        }
+        public void startAnimation(
+                IBinder token,
+                TransitionInfo info,
+                SurfaceControl.Transaction t,
+                IRemoteTransitionFinishedCallback finishCallback)
+                throws RemoteException {}
 
         @Override // android.window.IRemoteTransition
-        public void mergeAnimation(IBinder transition, TransitionInfo info, SurfaceControl.Transaction t, IBinder mergeTarget, IRemoteTransitionFinishedCallback finishCallback) throws RemoteException {
-        }
+        public void mergeAnimation(
+                IBinder transition,
+                TransitionInfo info,
+                SurfaceControl.Transaction t,
+                IBinder mergeTarget,
+                IRemoteTransitionFinishedCallback finishCallback)
+                throws RemoteException {}
 
         @Override // android.window.IRemoteTransition
-        public void takeOverAnimation(IBinder transition, TransitionInfo info, SurfaceControl.Transaction t, IRemoteTransitionFinishedCallback finishCallback, WindowAnimationState[] states) throws RemoteException {
-        }
+        public void takeOverAnimation(
+                IBinder transition,
+                TransitionInfo info,
+                SurfaceControl.Transaction t,
+                IRemoteTransitionFinishedCallback finishCallback,
+                WindowAnimationState[] states)
+                throws RemoteException {}
 
         @Override // android.window.IRemoteTransition
-        public void onTransitionConsumed(IBinder transition, boolean aborted) throws RemoteException {
-        }
+        public void onTransitionConsumed(IBinder transition, boolean aborted)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -43,7 +73,7 @@ public interface IRemoteTransition extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteTransition {
+    public abstract static class Stub extends Binder implements IRemoteTransition {
         static final int TRANSACTION_mergeAnimation = 2;
         static final int TRANSACTION_onTransitionConsumed = 4;
         static final int TRANSACTION_startAnimation = 1;
@@ -90,7 +120,8 @@ public interface IRemoteTransition extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteTransition.DESCRIPTOR);
             }
@@ -101,27 +132,44 @@ public interface IRemoteTransition extends IInterface {
             switch (code) {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
-                    TransitionInfo _arg1 = (TransitionInfo) data.readTypedObject(TransitionInfo.CREATOR);
-                    SurfaceControl.Transaction _arg2 = (SurfaceControl.Transaction) data.readTypedObject(SurfaceControl.Transaction.CREATOR);
-                    IRemoteTransitionFinishedCallback _arg3 = IRemoteTransitionFinishedCallback.Stub.asInterface(data.readStrongBinder());
+                    TransitionInfo _arg1 =
+                            (TransitionInfo) data.readTypedObject(TransitionInfo.CREATOR);
+                    SurfaceControl.Transaction _arg2 =
+                            (SurfaceControl.Transaction)
+                                    data.readTypedObject(SurfaceControl.Transaction.CREATOR);
+                    IRemoteTransitionFinishedCallback _arg3 =
+                            IRemoteTransitionFinishedCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startAnimation(_arg0, _arg1, _arg2, _arg3);
                     return true;
                 case 2:
                     IBinder _arg02 = data.readStrongBinder();
-                    TransitionInfo _arg12 = (TransitionInfo) data.readTypedObject(TransitionInfo.CREATOR);
-                    SurfaceControl.Transaction _arg22 = (SurfaceControl.Transaction) data.readTypedObject(SurfaceControl.Transaction.CREATOR);
+                    TransitionInfo _arg12 =
+                            (TransitionInfo) data.readTypedObject(TransitionInfo.CREATOR);
+                    SurfaceControl.Transaction _arg22 =
+                            (SurfaceControl.Transaction)
+                                    data.readTypedObject(SurfaceControl.Transaction.CREATOR);
                     IBinder _arg32 = data.readStrongBinder();
-                    IRemoteTransitionFinishedCallback _arg4 = IRemoteTransitionFinishedCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteTransitionFinishedCallback _arg4 =
+                            IRemoteTransitionFinishedCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     mergeAnimation(_arg02, _arg12, _arg22, _arg32, _arg4);
                     return true;
                 case 3:
                     IBinder _arg03 = data.readStrongBinder();
-                    TransitionInfo _arg13 = (TransitionInfo) data.readTypedObject(TransitionInfo.CREATOR);
-                    SurfaceControl.Transaction _arg23 = (SurfaceControl.Transaction) data.readTypedObject(SurfaceControl.Transaction.CREATOR);
-                    IRemoteTransitionFinishedCallback _arg33 = IRemoteTransitionFinishedCallback.Stub.asInterface(data.readStrongBinder());
-                    WindowAnimationState[] _arg42 = (WindowAnimationState[]) data.createTypedArray(WindowAnimationState.CREATOR);
+                    TransitionInfo _arg13 =
+                            (TransitionInfo) data.readTypedObject(TransitionInfo.CREATOR);
+                    SurfaceControl.Transaction _arg23 =
+                            (SurfaceControl.Transaction)
+                                    data.readTypedObject(SurfaceControl.Transaction.CREATOR);
+                    IRemoteTransitionFinishedCallback _arg33 =
+                            IRemoteTransitionFinishedCallback.Stub.asInterface(
+                                    data.readStrongBinder());
+                    WindowAnimationState[] _arg42 =
+                            (WindowAnimationState[])
+                                    data.createTypedArray(WindowAnimationState.CREATOR);
                     data.enforceNoDataAvail();
                     takeOverAnimation(_arg03, _arg13, _arg23, _arg33, _arg42);
                     return true;
@@ -153,7 +201,12 @@ public interface IRemoteTransition extends IInterface {
             }
 
             @Override // android.window.IRemoteTransition
-            public void startAnimation(IBinder token, TransitionInfo info, SurfaceControl.Transaction t, IRemoteTransitionFinishedCallback finishCallback) throws RemoteException {
+            public void startAnimation(
+                    IBinder token,
+                    TransitionInfo info,
+                    SurfaceControl.Transaction t,
+                    IRemoteTransitionFinishedCallback finishCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);
@@ -168,7 +221,13 @@ public interface IRemoteTransition extends IInterface {
             }
 
             @Override // android.window.IRemoteTransition
-            public void mergeAnimation(IBinder transition, TransitionInfo info, SurfaceControl.Transaction t, IBinder mergeTarget, IRemoteTransitionFinishedCallback finishCallback) throws RemoteException {
+            public void mergeAnimation(
+                    IBinder transition,
+                    TransitionInfo info,
+                    SurfaceControl.Transaction t,
+                    IBinder mergeTarget,
+                    IRemoteTransitionFinishedCallback finishCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);
@@ -184,7 +243,13 @@ public interface IRemoteTransition extends IInterface {
             }
 
             @Override // android.window.IRemoteTransition
-            public void takeOverAnimation(IBinder transition, TransitionInfo info, SurfaceControl.Transaction t, IRemoteTransitionFinishedCallback finishCallback, WindowAnimationState[] states) throws RemoteException {
+            public void takeOverAnimation(
+                    IBinder transition,
+                    TransitionInfo info,
+                    SurfaceControl.Transaction t,
+                    IRemoteTransitionFinishedCallback finishCallback,
+                    WindowAnimationState[] states)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);
@@ -200,7 +265,8 @@ public interface IRemoteTransition extends IInterface {
             }
 
             @Override // android.window.IRemoteTransition
-            public void onTransitionConsumed(IBinder transition, boolean aborted) throws RemoteException {
+            public void onTransitionConsumed(IBinder transition, boolean aborted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);

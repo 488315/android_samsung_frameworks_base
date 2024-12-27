@@ -18,20 +18,16 @@ public interface IKeyguardStateCallback extends IInterface {
 
     public static class Default implements IKeyguardStateCallback {
         @Override // com.android.internal.policy.IKeyguardStateCallback
-        public void onShowingStateChanged(boolean showing, int userId) throws RemoteException {
-        }
+        public void onShowingStateChanged(boolean showing, int userId) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardStateCallback
-        public void onSimSecureStateChanged(boolean simSecure) throws RemoteException {
-        }
+        public void onSimSecureStateChanged(boolean simSecure) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardStateCallback
-        public void onInputRestrictedStateChanged(boolean inputRestricted) throws RemoteException {
-        }
+        public void onInputRestrictedStateChanged(boolean inputRestricted) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardStateCallback
-        public void onTrustedChanged(boolean trusted) throws RemoteException {
-        }
+        public void onTrustedChanged(boolean trusted) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -39,8 +35,9 @@ public interface IKeyguardStateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyguardStateCallback {
-        public static final String DESCRIPTOR = "com.android.internal.policy.IKeyguardStateCallback";
+    public abstract static class Stub extends Binder implements IKeyguardStateCallback {
+        public static final String DESCRIPTOR =
+                "com.android.internal.policy.IKeyguardStateCallback";
         static final int TRANSACTION_onInputRestrictedStateChanged = 3;
         static final int TRANSACTION_onShowingStateChanged = 1;
         static final int TRANSACTION_onSimSecureStateChanged = 2;
@@ -87,7 +84,8 @@ public interface IKeyguardStateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -174,7 +172,8 @@ public interface IKeyguardStateCallback extends IInterface {
             }
 
             @Override // com.android.internal.policy.IKeyguardStateCallback
-            public void onInputRestrictedStateChanged(boolean inputRestricted) throws RemoteException {
+            public void onInputRestrictedStateChanged(boolean inputRestricted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

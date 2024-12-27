@@ -2,9 +2,12 @@ package com.android.server.smartclip;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
+
 import com.samsung.android.content.smartclip.SmartClipRemoteRequestResult;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -52,7 +55,8 @@ public final class SmartClipRemoteRequestSyncManager {
         RequestInfo requestInfo;
         RequestInfo requestItem = getRequestItem(i);
         if (requestItem == null) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "waitResult : Could not find request info!! id = ", TAG);
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    i, "waitResult : Could not find request info!! id = ", TAG);
             return null;
         }
         long currentTimeMillis = System.currentTimeMillis();
@@ -66,7 +70,9 @@ public final class SmartClipRemoteRequestSyncManager {
             }
         }
         String str = TAG;
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "waitResult : Unlocked. Id = ", " Elapsed = ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        i, "waitResult : Unlocked. Id = ", " Elapsed = ");
         m.append(System.currentTimeMillis() - currentTimeMillis);
         m.append("ms");
         Log.i(str, m.toString());

@@ -12,6 +12,7 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.internal.org.bouncycastle.asn1.x509.X509Name;
+
 import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
@@ -31,11 +32,13 @@ public class CertificationRequestInfo extends ASN1Object {
         return null;
     }
 
-    public CertificationRequestInfo(X500Name subject, SubjectPublicKeyInfo pkInfo, ASN1Set attributes) {
+    public CertificationRequestInfo(
+            X500Name subject, SubjectPublicKeyInfo pkInfo, ASN1Set attributes) {
         this.version = new ASN1Integer(0L);
         this.attributes = null;
         if (subject == null || pkInfo == null) {
-            throw new IllegalArgumentException("Not all mandatory fields set in CertificationRequestInfo generator.");
+            throw new IllegalArgumentException(
+                    "Not all mandatory fields set in CertificationRequestInfo generator.");
         }
         validateAttributes(attributes);
         this.subject = subject;
@@ -43,7 +46,8 @@ public class CertificationRequestInfo extends ASN1Object {
         this.attributes = attributes;
     }
 
-    public CertificationRequestInfo(X509Name subject, SubjectPublicKeyInfo pkInfo, ASN1Set attributes) {
+    public CertificationRequestInfo(
+            X509Name subject, SubjectPublicKeyInfo pkInfo, ASN1Set attributes) {
         this(X500Name.getInstance(subject.toASN1Primitive()), pkInfo, attributes);
     }
 
@@ -59,7 +63,8 @@ public class CertificationRequestInfo extends ASN1Object {
         }
         validateAttributes(this.attributes);
         if (this.subject == null || this.version == null || this.subjectPKInfo == null) {
-            throw new IllegalArgumentException("Not all mandatory fields set in CertificationRequestInfo generator.");
+            throw new IllegalArgumentException(
+                    "Not all mandatory fields set in CertificationRequestInfo generator.");
         }
     }
 
@@ -79,7 +84,8 @@ public class CertificationRequestInfo extends ASN1Object {
         return this.attributes;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(4);
         v.add(this.version);
@@ -98,8 +104,13 @@ public class CertificationRequestInfo extends ASN1Object {
         Enumeration en = attributes.getObjects();
         while (en.hasMoreElements()) {
             Attribute attr = Attribute.getInstance(en.nextElement());
-            if (attr.getAttrType().equals((ASN1Primitive) PKCSObjectIdentifiers.pkcs_9_at_challengePassword) && attr.getAttrValues().size() != 1) {
-                throw new IllegalArgumentException("challengePassword attribute must have one value");
+            if (attr.getAttrType()
+                            .equals(
+                                    (ASN1Primitive)
+                                            PKCSObjectIdentifiers.pkcs_9_at_challengePassword)
+                    && attr.getAttrValues().size() != 1) {
+                throw new IllegalArgumentException(
+                        "challengePassword attribute must have one value");
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.android.server.backup;
 
 import android.util.Slog;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,7 +20,9 @@ public abstract class UserBackupManagerFilePersistedSettings {
                 fileOutputStream.write(z ? 1 : 0);
                 fileOutputStream.close();
                 if (!file2.renameTo(file)) {
-                    Slog.e("BackupManagerService", "Write enable failed as could not rename staging file to actual");
+                    Slog.e(
+                            "BackupManagerService",
+                            "Write enable failed as could not rename staging file to actual");
                 }
                 fileOutputStream.close();
             } catch (Throwable th) {
@@ -31,7 +34,10 @@ public abstract class UserBackupManagerFilePersistedSettings {
                 throw th;
             }
         } catch (IOException | RuntimeException e) {
-            Slog.e("BackupManagerService", "Unable to record backup enable state; reverting to disabled: " + e.getMessage());
+            Slog.e(
+                    "BackupManagerService",
+                    "Unable to record backup enable state; reverting to disabled: "
+                            + e.getMessage());
             file.delete();
             file2.delete();
         }

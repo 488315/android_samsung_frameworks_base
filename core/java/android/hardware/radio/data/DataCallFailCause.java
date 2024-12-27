@@ -141,8 +141,7 @@ public @interface DataCallFailCause {
     public static final int MAXIMIUM_NSAPIS_EXCEEDED = 2157;
     public static final int MAXIMUM_SIZE_OF_L2_MESSAGE_EXCEEDED = 2166;
 
-    @Deprecated
-    public static final int MAXINUM_SIZE_OF_L2_MESSAGE_EXCEEDED = 2166;
+    @Deprecated public static final int MAXINUM_SIZE_OF_L2_MESSAGE_EXCEEDED = 2166;
     public static final int MAX_ACCESS_PROBE = 2079;
     public static final int MAX_ACTIVE_PDP_CONTEXT_REACHED = 65;
     public static final int MAX_IPV4_CONNECTIONS = 2052;

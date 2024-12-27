@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.telecom.PhoneAccount;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -27,7 +28,12 @@ public class EmergencyAffordanceManager {
     private static Uri getPhoneUri(Context context) {
         String override;
         String number = context.getResources().getString(R.string.config_emergency_call_number);
-        if (Build.IS_DEBUGGABLE && (override = Settings.Global.getString(context.getContentResolver(), EMERGENCY_CALL_NUMBER_SETTING)) != null) {
+        if (Build.IS_DEBUGGABLE
+                && (override =
+                                Settings.Global.getString(
+                                        context.getContentResolver(),
+                                        EMERGENCY_CALL_NUMBER_SETTING))
+                        != null) {
             number = override;
         }
         return Uri.fromParts(PhoneAccount.SCHEME_TEL, number, null);
@@ -48,10 +54,16 @@ public class EmergencyAffordanceManager {
     }
 
     private boolean isEmergencyAffordanceNeeded() {
-        return Settings.Global.getInt(this.mContext.getContentResolver(), Settings.Global.EMERGENCY_AFFORDANCE_NEEDED, 0) != 0;
+        return Settings.Global.getInt(
+                        this.mContext.getContentResolver(),
+                        Settings.Global.EMERGENCY_AFFORDANCE_NEEDED,
+                        0)
+                != 0;
     }
 
     private boolean forceShowing() {
-        return Settings.Global.getInt(this.mContext.getContentResolver(), FORCE_EMERGENCY_AFFORDANCE_SETTING, 0) != 0;
+        return Settings.Global.getInt(
+                        this.mContext.getContentResolver(), FORCE_EMERGENCY_AFFORDANCE_SETTING, 0)
+                != 0;
     }
 }

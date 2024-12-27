@@ -34,11 +34,13 @@ public final class CombinedVote implements Vote {
 
     @Override // com.android.server.display.mode.Vote
     public final void updateSummary(final VoteSummary voteSummary) {
-        this.mVotes.forEach(new Consumer() { // from class: com.android.server.display.mode.CombinedVote$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((Vote) obj).updateSummary(VoteSummary.this);
-            }
-        });
+        this.mVotes.forEach(
+                new Consumer() { // from class:
+                                 // com.android.server.display.mode.CombinedVote$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        ((Vote) obj).updateSummary(VoteSummary.this);
+                    }
+                });
     }
 }

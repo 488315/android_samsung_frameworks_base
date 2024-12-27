@@ -4,6 +4,7 @@ import android.companion.virtualcamera.SupportedStreamConfiguration$$ExternalSyn
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -42,10 +43,12 @@ public final class AmFmBandRange implements Parcelable {
                             if (parcel.dataPosition() - dataPosition < readInt) {
                                 amFmBandRange.seekSpacing = parcel.readInt();
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -86,7 +89,15 @@ public final class AmFmBandRange implements Parcelable {
             return false;
         }
         AmFmBandRange amFmBandRange = (AmFmBandRange) obj;
-        return Objects.deepEquals(Integer.valueOf(this.lowerBound), Integer.valueOf(amFmBandRange.lowerBound)) && Objects.deepEquals(Integer.valueOf(this.upperBound), Integer.valueOf(amFmBandRange.upperBound)) && Objects.deepEquals(Integer.valueOf(this.spacing), Integer.valueOf(amFmBandRange.spacing)) && Objects.deepEquals(Integer.valueOf(this.seekSpacing), Integer.valueOf(amFmBandRange.seekSpacing));
+        return Objects.deepEquals(
+                        Integer.valueOf(this.lowerBound), Integer.valueOf(amFmBandRange.lowerBound))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.upperBound), Integer.valueOf(amFmBandRange.upperBound))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.spacing), Integer.valueOf(amFmBandRange.spacing))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.seekSpacing),
+                        Integer.valueOf(amFmBandRange.seekSpacing));
     }
 
     public final int getStability() {
@@ -94,12 +105,36 @@ public final class AmFmBandRange implements Parcelable {
     }
 
     public final int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.lowerBound), Integer.valueOf(this.upperBound), Integer.valueOf(this.spacing), Integer.valueOf(this.seekSpacing)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.lowerBound),
+                                Integer.valueOf(this.upperBound),
+                                Integer.valueOf(this.spacing),
+                                Integer.valueOf(this.seekSpacing))
+                        .toArray());
     }
 
     public final String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("lowerBound: "), this.lowerBound, stringJoiner, "upperBound: "), this.upperBound, stringJoiner, "spacing: "), this.spacing, stringJoiner, "seekSpacing: "), this.seekSpacing, stringJoiner, "AmFmBandRange"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                                new StringBuilder("lowerBound: "),
+                                                this.lowerBound,
+                                                stringJoiner,
+                                                "upperBound: "),
+                                        this.upperBound,
+                                        stringJoiner,
+                                        "spacing: "),
+                                this.spacing,
+                                stringJoiner,
+                                "seekSpacing: "),
+                        this.seekSpacing,
+                        stringJoiner,
+                        "AmFmBandRange"));
     }
 
     @Override // android.os.Parcelable
@@ -109,7 +144,9 @@ public final class AmFmBandRange implements Parcelable {
         parcel.writeInt(this.lowerBound);
         parcel.writeInt(this.upperBound);
         parcel.writeInt(this.spacing);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.seekSpacing, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.seekSpacing, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

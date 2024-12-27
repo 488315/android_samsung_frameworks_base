@@ -9,14 +9,17 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IPackageInstallerSessionFileSystemConnector extends IInterface {
-    public static final String DESCRIPTOR = "android.content.pm.IPackageInstallerSessionFileSystemConnector";
+    public static final String DESCRIPTOR =
+            "android.content.pm.IPackageInstallerSessionFileSystemConnector";
 
-    void writeData(String str, long j, long j2, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
+    void writeData(String str, long j, long j2, ParcelFileDescriptor parcelFileDescriptor)
+            throws RemoteException;
 
     public static class Default implements IPackageInstallerSessionFileSystemConnector {
         @Override // android.content.pm.IPackageInstallerSessionFileSystemConnector
-        public void writeData(String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor fd) throws RemoteException {
-        }
+        public void writeData(
+                String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor fd)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +27,8 @@ public interface IPackageInstallerSessionFileSystemConnector extends IInterface 
         }
     }
 
-    public static abstract class Stub extends Binder implements IPackageInstallerSessionFileSystemConnector {
+    public abstract static class Stub extends Binder
+            implements IPackageInstallerSessionFileSystemConnector {
         static final int TRANSACTION_writeData = 1;
 
         public Stub() {
@@ -35,7 +39,8 @@ public interface IPackageInstallerSessionFileSystemConnector extends IInterface 
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IPackageInstallerSessionFileSystemConnector.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IPackageInstallerSessionFileSystemConnector.DESCRIPTOR);
             if (iin != null && (iin instanceof IPackageInstallerSessionFileSystemConnector)) {
                 return (IPackageInstallerSessionFileSystemConnector) iin;
             }
@@ -62,7 +67,8 @@ public interface IPackageInstallerSessionFileSystemConnector extends IInterface 
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPackageInstallerSessionFileSystemConnector.DESCRIPTOR);
             }
@@ -75,7 +81,9 @@ public interface IPackageInstallerSessionFileSystemConnector extends IInterface 
                     String _arg0 = data.readString();
                     long _arg1 = data.readLong();
                     long _arg2 = data.readLong();
-                    ParcelFileDescriptor _arg3 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg3 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     writeData(_arg0, _arg1, _arg2, _arg3);
                     reply.writeNoException();
@@ -102,11 +110,14 @@ public interface IPackageInstallerSessionFileSystemConnector extends IInterface 
             }
 
             @Override // android.content.pm.IPackageInstallerSessionFileSystemConnector
-            public void writeData(String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor fd) throws RemoteException {
+            public void writeData(
+                    String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor fd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
-                    _data.writeInterfaceToken(IPackageInstallerSessionFileSystemConnector.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            IPackageInstallerSessionFileSystemConnector.DESCRIPTOR);
                     _data.writeString(name);
                     _data.writeLong(offsetBytes);
                     _data.writeLong(lengthBytes);

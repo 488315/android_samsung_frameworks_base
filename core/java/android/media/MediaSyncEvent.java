@@ -3,28 +3,29 @@ package android.media;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public class MediaSyncEvent implements Parcelable {
-    public static final Parcelable.Creator<MediaSyncEvent> CREATOR = new Parcelable.Creator<MediaSyncEvent>() { // from class: android.media.MediaSyncEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaSyncEvent createFromParcel(Parcel p) {
-            return new MediaSyncEvent(p);
-        }
+    public static final Parcelable.Creator<MediaSyncEvent> CREATOR =
+            new Parcelable.Creator<MediaSyncEvent>() { // from class: android.media.MediaSyncEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaSyncEvent createFromParcel(Parcel p) {
+                    return new MediaSyncEvent(p);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaSyncEvent[] newArray(int size) {
-            return new MediaSyncEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaSyncEvent[] newArray(int size) {
+                    return new MediaSyncEvent[size];
+                }
+            };
     public static final int SYNC_EVENT_NONE = 0;
     public static final int SYNC_EVENT_PRESENTATION_COMPLETE = 1;
 
-    @SystemApi
-    public static final int SYNC_EVENT_SHARE_AUDIO_HISTORY = 100;
+    @SystemApi public static final int SYNC_EVENT_SHARE_AUDIO_HISTORY = 100;
     private int mAudioSession;
     private final int mType;
 
@@ -104,7 +105,11 @@ public class MediaSyncEvent implements Parcelable {
     }
 
     public String toString() {
-        return new String("MediaSyncEvent: type=" + typeToString(this.mType) + " session=" + this.mAudioSession);
+        return new String(
+                "MediaSyncEvent: type="
+                        + typeToString(this.mType)
+                        + " session="
+                        + this.mAudioSession);
     }
 
     public static String typeToString(int type) {

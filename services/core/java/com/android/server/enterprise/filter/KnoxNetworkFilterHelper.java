@@ -20,6 +20,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
@@ -29,6 +30,10 @@ import com.android.server.am.Pageboost$PageboostFileDBHelper$$ExternalSyntheticO
 import com.android.server.enterprise.adapterlayer.PackageManagerAdapter;
 import com.android.server.enterprise.container.KnoxMUMContainerPolicy$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.storage.EdmStorageProvider;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -37,8 +42,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -65,7 +68,9 @@ public final class KnoxNetworkFilterHelper {
         try {
             IPackageManager packageManager = AppGlobals.getPackageManager();
             ApplicationInfo applicationInfo = packageManager.getApplicationInfo(str, 128L, i);
-            if (packageManager.checkUidSignatures(applicationInfo != null ? applicationInfo.uid : -1, 1000) == 0) {
+            if (packageManager.checkUidSignatures(
+                            applicationInfo != null ? applicationInfo.uid : -1, 1000)
+                    == 0) {
                 z = true;
             }
         } catch (Exception unused) {
@@ -83,28 +88,40 @@ public final class KnoxNetworkFilterHelper {
         JSONObject jSONObject2;
         JSONObject jSONObject3;
         String str3 = "";
-        if (KnoxNetworkFilterProfileInfo.containsProfileEntry(str) && (str2 = KnoxNetworkFilterProfileInfo.getProfileEntry(str).mSocketConfig) != null) {
+        if (KnoxNetworkFilterProfileInfo.containsProfileEntry(str)
+                && (str2 = KnoxNetworkFilterProfileInfo.getProfileEntry(str).mSocketConfig)
+                        != null) {
             try {
                 JSONObject jSONObject4 = new JSONObject(str2);
                 if (i == 2) {
                     JSONObject jSONObject5 = (JSONObject) jSONObject4.opt("ipv4");
-                    if (jSONObject5 != null && (jSONObject3 = (JSONObject) jSONObject5.opt("misc")) != null) {
+                    if (jSONObject5 != null
+                            && (jSONObject3 = (JSONObject) jSONObject5.opt("misc")) != null) {
                         str3 = jSONObject3.optString("ipRange", "");
                     }
-                } else if (i == 10 && (jSONObject = (JSONObject) jSONObject4.opt("ipv6")) != null && (jSONObject2 = (JSONObject) jSONObject.opt("misc")) != null) {
+                } else if (i == 10
+                        && (jSONObject = (JSONObject) jSONObject4.opt("ipv6")) != null
+                        && (jSONObject2 = (JSONObject) jSONObject.opt("misc")) != null) {
                     str3 = jSONObject2.optString("ipRange", "");
                 }
             } catch (JSONException unused) {
             }
         }
-        VpnManagerService$$ExternalSyntheticOutline0.m(StorageManagerService$$ExternalSyntheticOutline0.m(i, "getConfiguredIpRange: profileName ", str, " ipVersion: ", " ipRange: "), str3, "knoxNwFilter-KnoxNetworkFilterHelper");
+        VpnManagerService$$ExternalSyntheticOutline0.m(
+                StorageManagerService$$ExternalSyntheticOutline0.m(
+                        i, "getConfiguredIpRange: profileName ", str, " ipVersion: ", " ipRange: "),
+                str3,
+                "knoxNwFilter-KnoxNetworkFilterHelper");
         return str3;
     }
 
     public static void getConfiguredProtocols(String str) {
         String str2;
-        KnoxNetworkFilterProfileInfo profileEntry = KnoxNetworkFilterProfileInfo.getProfileEntry(str);
-        if (profileEntry == null || (str2 = KnoxNetworkFilterProfileInfo.getProfileEntry(str).mSocketConfig) == null) {
+        KnoxNetworkFilterProfileInfo profileEntry =
+                KnoxNetworkFilterProfileInfo.getProfileEntry(str);
+        if (profileEntry == null
+                || (str2 = KnoxNetworkFilterProfileInfo.getProfileEntry(str).mSocketConfig)
+                        == null) {
             return;
         }
         try {
@@ -162,7 +179,9 @@ public final class KnoxNetworkFilterHelper {
                 }
             }
         } catch (JSONException e) {
-            Log.e("knoxNwFilter-KnoxNetworkFilterHelper", "Error parsing: getConfiguredProtocols " + Log.getStackTraceString(e));
+            Log.e(
+                    "knoxNwFilter-KnoxNetworkFilterHelper",
+                    "Error parsing: getConfiguredProtocols " + Log.getStackTraceString(e));
         }
     }
 
@@ -172,7 +191,8 @@ public final class KnoxNetworkFilterHelper {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             IPackageManager packageManager = AppGlobals.getPackageManager();
-            for (ApplicationInfo applicationInfo : packageManager.getInstalledApplications(0L, i).getList()) {
+            for (ApplicationInfo applicationInfo :
+                    packageManager.getInstalledApplications(0L, i).getList()) {
                 String str = applicationInfo.packageName;
                 PackageInfo packageInfo = packageManager.getPackageInfo(str, 4L, i);
                 if (packageInfo != null && (serviceInfoArr = packageInfo.services) != null) {
@@ -183,9 +203,16 @@ public final class KnoxNetworkFilterHelper {
                             break;
                         }
                         String str2 = serviceInfoArr[i2].permission;
-                        if (str2 != null && str2.equalsIgnoreCase("android.permission.BIND_VPN_SERVICE")) {
+                        if (str2 != null
+                                && str2.equalsIgnoreCase("android.permission.BIND_VPN_SERVICE")) {
                             hashSet.add(Integer.valueOf(applicationInfo.uid));
-                            Log.d("knoxNwFilter-KnoxNetworkFilterHelper", "The following package " + str + " with uid " + applicationInfo.uid + " is identified as vpn client");
+                            Log.d(
+                                    "knoxNwFilter-KnoxNetworkFilterHelper",
+                                    "The following package "
+                                            + str
+                                            + " with uid "
+                                            + applicationInfo.uid
+                                            + " is identified as vpn client");
                             break;
                         }
                         i2++;
@@ -226,7 +253,9 @@ public final class KnoxNetworkFilterHelper {
             try {
                 str = AppGlobals.getPackageManager().getNameForUid(i);
             } catch (Exception e) {
-                Log.e("knoxNwFilter-KnoxNetworkFilterHelper", "Exception in getPackageNameForUid : " + Log.getStackTraceString(e));
+                Log.e(
+                        "knoxNwFilter-KnoxNetworkFilterHelper",
+                        "Exception in getPackageNameForUid : " + Log.getStackTraceString(e));
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 str = null;
             }
@@ -250,7 +279,8 @@ public final class KnoxNetworkFilterHelper {
 
     public static List getProfileListByVendor(int i) {
         ArrayList arrayList = new ArrayList();
-        Collection<KnoxNetworkFilterProfileInfo> values = KnoxNetworkFilterProfileInfo.mProfileInfomap.values();
+        Collection<KnoxNetworkFilterProfileInfo> values =
+                KnoxNetworkFilterProfileInfo.mProfileInfomap.values();
         if (values != null) {
             for (KnoxNetworkFilterProfileInfo knoxNetworkFilterProfileInfo : values) {
                 if (knoxNetworkFilterProfileInfo.mPackageUid == i) {
@@ -262,7 +292,8 @@ public final class KnoxNetworkFilterHelper {
     }
 
     public static String getProfilebyUserId(int i) {
-        Collection<KnoxNetworkFilterProfileInfo> values = KnoxNetworkFilterProfileInfo.mProfileInfomap.values();
+        Collection<KnoxNetworkFilterProfileInfo> values =
+                KnoxNetworkFilterProfileInfo.mProfileInfomap.values();
         if (values != null) {
             for (KnoxNetworkFilterProfileInfo knoxNetworkFilterProfileInfo : values) {
                 if (UserHandle.getUserId(knoxNetworkFilterProfileInfo.mPackageUid) == i) {
@@ -285,12 +316,15 @@ public final class KnoxNetworkFilterHelper {
         int i2 = -1;
         try {
             try {
-                ApplicationInfo applicationInfo = AppGlobals.getPackageManager().getApplicationInfo(str, 128L, i);
+                ApplicationInfo applicationInfo =
+                        AppGlobals.getPackageManager().getApplicationInfo(str, 128L, i);
                 if (applicationInfo != null) {
                     i2 = applicationInfo.uid;
                 }
             } catch (Exception e) {
-                Log.e("knoxNwFilter-KnoxNetworkFilterHelper", "Exception in getUIDForPackage : " + Log.getStackTraceString(e));
+                Log.e(
+                        "knoxNwFilter-KnoxNetworkFilterHelper",
+                        "Exception in getUIDForPackage : " + Log.getStackTraceString(e));
             }
             return i2;
         } finally {
@@ -304,14 +338,18 @@ public final class KnoxNetworkFilterHelper {
         if (values != null) {
             Iterator it = values.iterator();
             while (it.hasNext()) {
-                arrayList.add(Integer.valueOf(UserHandle.getUserId(((KnoxNetworkFilterProfileInfo) it.next()).mPackageUid)));
+                arrayList.add(
+                        Integer.valueOf(
+                                UserHandle.getUserId(
+                                        ((KnoxNetworkFilterProfileInfo) it.next()).mPackageUid)));
             }
         }
         return arrayList;
     }
 
     public static int getVendorUidByProfile(String str) {
-        Collection<KnoxNetworkFilterProfileInfo> values = KnoxNetworkFilterProfileInfo.mProfileInfomap.values();
+        Collection<KnoxNetworkFilterProfileInfo> values =
+                KnoxNetworkFilterProfileInfo.mProfileInfomap.values();
         if (values != null) {
             for (KnoxNetworkFilterProfileInfo knoxNetworkFilterProfileInfo : values) {
                 if (knoxNetworkFilterProfileInfo.mProfileName.equalsIgnoreCase(str)) {
@@ -325,11 +363,13 @@ public final class KnoxNetworkFilterHelper {
     public static boolean isPackageInstalled(int i, String str) {
         try {
             long clearCallingIdentity = Binder.clearCallingIdentity();
-            ApplicationInfo applicationInfo = AppGlobals.getPackageManager().getApplicationInfo(str, 0L, i);
+            ApplicationInfo applicationInfo =
+                    AppGlobals.getPackageManager().getApplicationInfo(str, 0L, i);
             Binder.restoreCallingIdentity(clearCallingIdentity);
             return applicationInfo != null;
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Error "), "knoxNwFilter-KnoxNetworkFilterHelper");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Error "), "knoxNwFilter-KnoxNetworkFilterHelper");
             return false;
         }
     }
@@ -343,7 +383,8 @@ public final class KnoxNetworkFilterHelper {
 
     public final boolean addAuthorizedInfoToDatabase(int i, String str, Bundle bundle) {
         ContentValues contentValues = new ContentValues();
-        KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(i, contentValues, "pkgUid", "pkgName", str);
+        KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(
+                i, contentValues, "pkgUid", "pkgName", str);
         if (bundle != null) {
             Parcel obtain = Parcel.obtain();
             obtain.writeBundle(bundle);
@@ -351,8 +392,12 @@ public final class KnoxNetworkFilterHelper {
             obtain.recycle();
             contentValues.put("bundleInfo", marshall);
         }
-        boolean putDataByFields = this.mEDM.putDataByFields("UnManagedNwFilterMgr", null, null, contentValues);
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("addUnmanagedInfoToDatabase: result value is ", "knoxNwFilter-KnoxNetworkFilterHelper", putDataByFields);
+        boolean putDataByFields =
+                this.mEDM.putDataByFields("UnManagedNwFilterMgr", null, null, contentValues);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "addUnmanagedInfoToDatabase: result value is ",
+                "knoxNwFilter-KnoxNetworkFilterHelper",
+                putDataByFields);
         if (putDataByFields) {
             if (this.mBundleInfo.containsKey(Integer.valueOf(UserHandle.getUserId(i)))) {
                 this.mBundleInfo.remove(Integer.valueOf(UserHandle.getUserId(i)));
@@ -367,22 +412,31 @@ public final class KnoxNetworkFilterHelper {
         try {
             try {
                 if (z) {
-                    if (!((PowerManager) this.mContext.getSystemService("power")).isIgnoringBatteryOptimizations(str)) {
-                        IDeviceIdleController.Stub.asInterface(ServiceManager.getService("deviceidle")).addPowerSaveWhitelistApp(str);
+                    if (!((PowerManager) this.mContext.getSystemService("power"))
+                            .isIgnoringBatteryOptimizations(str)) {
+                        IDeviceIdleController.Stub.asInterface(
+                                        ServiceManager.getService("deviceidle"))
+                                .addPowerSaveWhitelistApp(str);
                     }
                     this.mAppOpsManager.setMode(124, i, str, 0);
                     this.mAppOpsManager.setMode(128, i, str, 0);
                     this.mAppOpsManager.setMode(129, i, str, 0);
                 } else {
-                    if (((PowerManager) this.mContext.getSystemService("power")).isIgnoringBatteryOptimizations(str)) {
-                        IDeviceIdleController.Stub.asInterface(ServiceManager.getService("deviceidle")).removePowerSaveWhitelistApp(str);
+                    if (((PowerManager) this.mContext.getSystemService("power"))
+                            .isIgnoringBatteryOptimizations(str)) {
+                        IDeviceIdleController.Stub.asInterface(
+                                        ServiceManager.getService("deviceidle"))
+                                .removePowerSaveWhitelistApp(str);
                     }
                     this.mAppOpsManager.setMode(124, i, str, 3);
                     this.mAppOpsManager.setMode(128, i, str, 3);
                     this.mAppOpsManager.setMode(129, i, str, 3);
                 }
             } catch (Exception e) {
-                Log.e("knoxNwFilter-KnoxNetworkFilterHelper", " addOrRemoveAppsFromBatteryOptimization error " + Log.getStackTraceString(e));
+                Log.e(
+                        "knoxNwFilter-KnoxNetworkFilterHelper",
+                        " addOrRemoveAppsFromBatteryOptimization error "
+                                + Log.getStackTraceString(e));
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
         } catch (Throwable th) {
@@ -393,7 +447,8 @@ public final class KnoxNetworkFilterHelper {
 
     public final boolean addRegisterInfoToDatabase(int i, String str, String str2, Bundle bundle) {
         ContentValues contentValues = new ContentValues();
-        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, contentValues, "adminUid", -1, "pkgUid");
+        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                i, contentValues, "adminUid", -1, "pkgUid");
         contentValues.put("pkgName", str);
         if (str2 != null) {
             contentValues.put("pkgSign", str2);
@@ -405,37 +460,59 @@ public final class KnoxNetworkFilterHelper {
             obtain.recycle();
             contentValues.put("bundleInfo", marshall);
         }
-        boolean putDataByFields = this.mEDM.putDataByFields("NwFilterMgr", null, null, contentValues);
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("addRegisterInfoToDatabase: status is ", "knoxNwFilter-KnoxNetworkFilterHelper", putDataByFields);
+        boolean putDataByFields =
+                this.mEDM.putDataByFields("NwFilterMgr", null, null, contentValues);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "addRegisterInfoToDatabase: status is ",
+                "knoxNwFilter-KnoxNetworkFilterHelper",
+                putDataByFields);
         return putDataByFields;
     }
 
     public final boolean addVendorInfoToStorage(int i, String str, String str2, String str3) {
         boolean putDataByFields;
-        if (this.mEDM.getDataByFields("NwFilterService", new String[]{"profileName"}, new String[]{str}, new String[]{"profileConfig"}).size() > 0) {
-            ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("profileConfig", str2);
-            putDataByFields = this.mEDM.putDataByFields("NwFilterService", new String[]{"profileName"}, new String[]{str}, m);
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m("addVendorInfoToStorage: update status is ", "knoxNwFilter-KnoxNetworkFilterHelper", putDataByFields);
+        if (this.mEDM
+                        .getDataByFields(
+                                "NwFilterService",
+                                new String[] {"profileName"},
+                                new String[] {str},
+                                new String[] {"profileConfig"})
+                        .size()
+                > 0) {
+            ContentValues m =
+                    AccountManagerService$$ExternalSyntheticOutline0.m("profileConfig", str2);
+            putDataByFields =
+                    this.mEDM.putDataByFields(
+                            "NwFilterService", new String[] {"profileName"}, new String[] {str}, m);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    "addVendorInfoToStorage: update status is ",
+                    "knoxNwFilter-KnoxNetworkFilterHelper",
+                    putDataByFields);
         } else {
             ContentValues contentValues = new ContentValues();
             contentValues.put("profileName", str);
             contentValues.put("profileConfig", str2);
-            KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(i, contentValues, "pkgUid", "pkgName", str3);
-            putDataByFields = this.mEDM.putDataByFields("NwFilterService", null, null, contentValues);
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m("addVendorInfoToStorage: new entry status is ", "knoxNwFilter-KnoxNetworkFilterHelper", putDataByFields);
+            KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(
+                    i, contentValues, "pkgUid", "pkgName", str3);
+            putDataByFields =
+                    this.mEDM.putDataByFields("NwFilterService", null, null, contentValues);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    "addVendorInfoToStorage: new entry status is ",
+                    "knoxNwFilter-KnoxNetworkFilterHelper",
+                    putDataByFields);
         }
         if (putDataByFields) {
             if (KnoxNetworkFilterProfileInfo.containsProfileEntry(str)) {
                 KnoxNetworkFilterProfileInfo.getProfileEntry(str).mRulesConfig = str2;
             } else {
-                KnoxNetworkFilterProfileInfo knoxNetworkFilterProfileInfo = new KnoxNetworkFilterProfileInfo();
+                KnoxNetworkFilterProfileInfo knoxNetworkFilterProfileInfo =
+                        new KnoxNetworkFilterProfileInfo();
                 knoxNetworkFilterProfileInfo.mProfileName = str;
                 knoxNetworkFilterProfileInfo.mRulesConfig = str2;
                 knoxNetworkFilterProfileInfo.mPackageName = str3;
                 knoxNetworkFilterProfileInfo.mPackageUid = i;
                 synchronized (KnoxNetworkFilterProfileInfo.class) {
-                    if (str != null) {
-                    }
+                    if (str != null) {}
                 }
             }
         }
@@ -443,7 +520,8 @@ public final class KnoxNetworkFilterHelper {
     }
 
     public final void applyHttpProxyConfiguration(String str, String[] strArr, boolean z, int i) {
-        KnoxNetworkFilterProfileInfo profileEntry = KnoxNetworkFilterProfileInfo.getProfileEntry(str);
+        KnoxNetworkFilterProfileInfo profileEntry =
+                KnoxNetworkFilterProfileInfo.getProfileEntry(str);
         if (profileEntry == null || profileEntry.mDNSCacheStatus != 1) {
             return;
         }
@@ -459,12 +537,23 @@ public final class KnoxNetworkFilterHelper {
                 try {
                     int uIDForPackage = getUIDForPackage(i, str3);
                     if (uIDForPackage != -1) {
-                        ApplicationInfo applicationInfo = this.mContext.getPackageManager().getApplicationInfo(str3, 0);
-                        if (((ActivityManagerService) ServiceManager.getService("activity")).checkIfProcessIsRunning(uIDForPackage, applicationInfo.processName)) {
-                            Log.d("knoxNwFilter-KnoxNetworkFilterHelper", "Proxy config has been applied, going to restart the app " + str3 + "whose uid is " + uIDForPackage);
-                            ((ActivityManagerService) ServiceManager.getService("activity")).killApplicationProcess(applicationInfo.processName, uIDForPackage);
+                        ApplicationInfo applicationInfo =
+                                this.mContext.getPackageManager().getApplicationInfo(str3, 0);
+                        if (((ActivityManagerService) ServiceManager.getService("activity"))
+                                .checkIfProcessIsRunning(
+                                        uIDForPackage, applicationInfo.processName)) {
+                            Log.d(
+                                    "knoxNwFilter-KnoxNetworkFilterHelper",
+                                    "Proxy config has been applied, going to restart the app "
+                                            + str3
+                                            + "whose uid is "
+                                            + uIDForPackage);
+                            ((ActivityManagerService) ServiceManager.getService("activity"))
+                                    .killApplicationProcess(
+                                            applicationInfo.processName, uIDForPackage);
                         }
-                        ((ActivityManagerService) ServiceManager.getService("activity")).killBackgroundProcesses(str3, UserHandle.getUserId(uIDForPackage));
+                        ((ActivityManagerService) ServiceManager.getService("activity"))
+                                .killBackgroundProcesses(str3, UserHandle.getUserId(uIDForPackage));
                     }
                 } catch (PackageManager.NameNotFoundException unused) {
                 }
@@ -488,7 +577,8 @@ public final class KnoxNetworkFilterHelper {
     }
 
     public final String getAuthorizedAppPackage(int i) {
-        ArrayList dataByFields = this.mEDM.getDataByFields("UnManagedNwFilterMgr", null, null, null);
+        ArrayList dataByFields =
+                this.mEDM.getDataByFields("UnManagedNwFilterMgr", null, null, null);
         if (dataByFields.size() <= 0) {
             return null;
         }
@@ -504,7 +594,8 @@ public final class KnoxNetworkFilterHelper {
 
     public final List getAuthorizedInfoFromDatabase() {
         ArrayList arrayList = new ArrayList();
-        ArrayList dataByFields = this.mEDM.getDataByFields("UnManagedNwFilterMgr", null, null, null);
+        ArrayList dataByFields =
+                this.mEDM.getDataByFields("UnManagedNwFilterMgr", null, null, null);
         if (dataByFields.size() > 0) {
             Iterator it = dataByFields.iterator();
             while (it.hasNext()) {
@@ -574,10 +665,15 @@ public final class KnoxNetworkFilterHelper {
                 PackageManagerAdapter.getInstance(this.mContext).getClass();
                 packageInfo = PackageManagerAdapter.getPackageInfo(64, i, str);
             } catch (Exception e) {
-                Log.e("knoxNwFilter-KnoxNetworkFilterHelper", "In getPackageCertForPkgname: Exception", e);
+                Log.e(
+                        "knoxNwFilter-KnoxNetworkFilterHelper",
+                        "In getPackageCertForPkgname: Exception",
+                        e);
             }
             if (packageInfo == null) {
-                Log.e("knoxNwFilter-KnoxNetworkFilterHelper", "getPackageCertForPkgname: pkgInfo is null");
+                Log.e(
+                        "knoxNwFilter-KnoxNetworkFilterHelper",
+                        "getPackageCertForPkgname: pkgInfo is null");
                 return null;
             }
             Signature[] signatureArr = packageInfo.signatures;
@@ -645,7 +741,12 @@ public final class KnoxNetworkFilterHelper {
     }
 
     public final boolean isAppAuthorized(int i, String str) {
-        ArrayList dataByFields = this.mEDM.getDataByFields("UnManagedNwFilterMgr", new String[]{"pkgName"}, new String[]{str}, new String[]{"pkgUid"});
+        ArrayList dataByFields =
+                this.mEDM.getDataByFields(
+                        "UnManagedNwFilterMgr",
+                        new String[] {"pkgName"},
+                        new String[] {str},
+                        new String[] {"pkgUid"});
         if (dataByFields.size() > 0) {
             Iterator it = dataByFields.iterator();
             while (it.hasNext()) {
@@ -658,14 +759,22 @@ public final class KnoxNetworkFilterHelper {
     }
 
     public final boolean isAppRegistered(int i, String str, String str2) {
-        ArrayList dataByFields = this.mEDM.getDataByFields("NwFilterMgr", new String[]{"pkgName"}, new String[]{str}, new String[]{"adminUid", "pkgSign"});
+        ArrayList dataByFields =
+                this.mEDM.getDataByFields(
+                        "NwFilterMgr",
+                        new String[] {"pkgName"},
+                        new String[] {str},
+                        new String[] {"adminUid", "pkgSign"});
         if (dataByFields.size() > 0) {
             Iterator it = dataByFields.iterator();
             while (it.hasNext()) {
                 ContentValues contentValues = (ContentValues) it.next();
                 int intValue = contentValues.getAsInteger("adminUid").intValue();
                 String asString = contentValues.getAsString("pkgSign");
-                if (UserHandle.getUserId(intValue) == i && (asString == null || asString.isEmpty() || asString.equalsIgnoreCase(str2))) {
+                if (UserHandle.getUserId(intValue) == i
+                        && (asString == null
+                                || asString.isEmpty()
+                                || asString.equalsIgnoreCase(str2))) {
                     return true;
                 }
             }
@@ -678,11 +787,14 @@ public final class KnoxNetworkFilterHelper {
     }
 
     public final boolean isUserIdAuthorized(int i) {
-        ArrayList dataByFields = this.mEDM.getDataByFields("UnManagedNwFilterMgr", null, null, null);
+        ArrayList dataByFields =
+                this.mEDM.getDataByFields("UnManagedNwFilterMgr", null, null, null);
         if (dataByFields.size() > 0) {
             Iterator it = dataByFields.iterator();
             while (it.hasNext()) {
-                if (UserHandle.getUserId(((ContentValues) it.next()).getAsInteger("pkgUid").intValue()) == i) {
+                if (UserHandle.getUserId(
+                                ((ContentValues) it.next()).getAsInteger("pkgUid").intValue())
+                        == i) {
                     return true;
                 }
             }
@@ -695,7 +807,9 @@ public final class KnoxNetworkFilterHelper {
         if (dataByFields.size() > 0) {
             Iterator it = dataByFields.iterator();
             while (it.hasNext()) {
-                if (UserHandle.getUserId(((ContentValues) it.next()).getAsInteger("adminUid").intValue()) == i) {
+                if (UserHandle.getUserId(
+                                ((ContentValues) it.next()).getAsInteger("adminUid").intValue())
+                        == i) {
                     return true;
                 }
             }
@@ -704,8 +818,13 @@ public final class KnoxNetworkFilterHelper {
     }
 
     public final boolean removeAuthorizedInfoFromDatabase(int i, String str) {
-        boolean deleteDataByFields = this.mEDM.deleteDataByFields("UnManagedNwFilterMgr", new String[]{"pkgName"}, new String[]{str});
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("removeAuthorizedInfoFromDatabase: result value is ", "knoxNwFilter-KnoxNetworkFilterHelper", deleteDataByFields);
+        boolean deleteDataByFields =
+                this.mEDM.deleteDataByFields(
+                        "UnManagedNwFilterMgr", new String[] {"pkgName"}, new String[] {str});
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "removeAuthorizedInfoFromDatabase: result value is ",
+                "knoxNwFilter-KnoxNetworkFilterHelper",
+                deleteDataByFields);
         if (this.mBundleInfo.containsKey(Integer.valueOf(UserHandle.getUserId(i)))) {
             this.mBundleInfo.remove(Integer.valueOf(UserHandle.getUserId(i)));
         }
@@ -713,16 +832,20 @@ public final class KnoxNetworkFilterHelper {
     }
 
     public final void removeVendorInfoFromStorage(String str) {
-        boolean deleteDataByFields = this.mEDM.deleteDataByFields("NwFilterService", new String[]{"profileName"}, new String[]{str});
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("removeVendorInfoFromStorage: status is ", "knoxNwFilter-KnoxNetworkFilterHelper", deleteDataByFields);
+        boolean deleteDataByFields =
+                this.mEDM.deleteDataByFields(
+                        "NwFilterService", new String[] {"profileName"}, new String[] {str});
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "removeVendorInfoFromStorage: status is ",
+                "knoxNwFilter-KnoxNetworkFilterHelper",
+                deleteDataByFields);
         if (deleteDataByFields && KnoxNetworkFilterProfileInfo.containsProfileEntry(str)) {
             synchronized (KnoxNetworkFilterProfileInfo.class) {
                 if (str == null) {
                     return;
                 }
                 ConcurrentHashMap concurrentHashMap = KnoxNetworkFilterProfileInfo.mProfileInfomap;
-                if (concurrentHashMap.containsKey(str)) {
-                }
+                if (concurrentHashMap.containsKey(str)) {}
             }
         }
     }

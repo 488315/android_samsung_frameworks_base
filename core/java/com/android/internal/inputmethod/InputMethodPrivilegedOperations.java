@@ -6,8 +6,9 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.view.inputmethod.ImeTracker;
 import android.view.inputmethod.InputMethodSubtype;
+
 import com.android.internal.infra.AndroidFuture;
-import com.android.internal.inputmethod.IInputContentUriToken;
+
 import java.util.Objects;
 
 /* loaded from: classes5.dex */
@@ -18,12 +19,13 @@ public final class InputMethodPrivilegedOperations {
     private static final class OpsHolder {
         private IInputMethodPrivilegedOperations mPrivOps;
 
-        private OpsHolder() {
-        }
+        private OpsHolder() {}
 
         public synchronized void set(IInputMethodPrivilegedOperations privOps) {
             if (this.mPrivOps != null) {
-                throw new IllegalStateException("IInputMethodPrivilegedOperations must be set at most once. privOps=" + privOps);
+                throw new IllegalStateException(
+                        "IInputMethodPrivilegedOperations must be set at most once. privOps="
+                                + privOps);
             }
             this.mPrivOps = privOps;
         }
@@ -38,7 +40,11 @@ public final class InputMethodPrivilegedOperations {
 
         public synchronized IInputMethodPrivilegedOperations getAndWarnIfNull() {
             if (this.mPrivOps == null) {
-                Log.e(InputMethodPrivilegedOperations.TAG, getCallerMethodName() + " is ignored. Call it within attachToken() and InputMethodService.onDestroy()");
+                Log.e(
+                        InputMethodPrivilegedOperations.TAG,
+                        getCallerMethodName()
+                                + " is ignored. Call it within attachToken() and"
+                                + " InputMethodService.onDestroy()");
             }
             return this.mPrivOps;
         }
@@ -93,7 +99,8 @@ public final class InputMethodPrivilegedOperations {
         try {
             AndroidFuture<IBinder> future = new AndroidFuture<>();
             ops.createInputContentUriToken(contentUri, packageName, future);
-            return IInputContentUriToken.Stub.asInterface((IBinder) CompletableFutureUtil.getResult(future));
+            return IInputContentUriToken.Stub.asInterface(
+                    (IBinder) CompletableFutureUtil.getResult(future));
         } catch (RemoteException e) {
             return null;
         }
@@ -237,7 +244,8 @@ public final class InputMethodPrivilegedOperations {
         }
     }
 
-    public void applyImeVisibilityAsync(IBinder showOrHideInputToken, boolean setVisible, ImeTracker.Token statsToken) {
+    public void applyImeVisibilityAsync(
+            IBinder showOrHideInputToken, boolean setVisible, ImeTracker.Token statsToken) {
         IInputMethodPrivilegedOperations ops = this.mOps.getAndWarnIfNull();
         if (ops == null) {
             ImeTracker.forLogging().onFailed(statsToken, 46);

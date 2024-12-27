@@ -23,19 +23,22 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
     private static final String ANIMATION_TYPE_LAYOUT_PARAMS_WIDTH = "width";
     public static final String ANIMATION_TYPE_PROGRESS = "progress";
     private static final String ANIMATION_TYPE_TEXTVIEW_DECIMAL_TEXT = "decimal_text";
-    public static final Parcelable.Creator<SemRemoteViewsValueAnimation> CREATOR = new Parcelable.Creator<SemRemoteViewsValueAnimation>() { // from class: android.widget.SemRemoteViewsValueAnimation.2
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemRemoteViewsValueAnimation createFromParcel(Parcel in) {
-            return new SemRemoteViewsValueAnimation(in);
-        }
+    public static final Parcelable.Creator<SemRemoteViewsValueAnimation> CREATOR =
+            new Parcelable.Creator<
+                    SemRemoteViewsValueAnimation>() { // from class:
+                                                      // android.widget.SemRemoteViewsValueAnimation.2
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemRemoteViewsValueAnimation createFromParcel(Parcel in) {
+                    return new SemRemoteViewsValueAnimation(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemRemoteViewsValueAnimation[] newArray(int size) {
-            return new SemRemoteViewsValueAnimation[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemRemoteViewsValueAnimation[] newArray(int size) {
+                    return new SemRemoteViewsValueAnimation[size];
+                }
+            };
     private static final String LOG_TAG = "SemRemoteViewsValueAnimation";
     public static final String VALUE_TYPE_COLOR = "color";
     public static final String VALUE_TYPE_FLOAT = "float";
@@ -54,11 +57,24 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
     private Bundle mOptions;
     private final String mValueType;
 
-    public SemRemoteViewsValueAnimation(int viewId, String animationType, String valueType, float valueFrom, float ValueTo, long duration) {
+    public SemRemoteViewsValueAnimation(
+            int viewId,
+            String animationType,
+            String valueType,
+            float valueFrom,
+            float ValueTo,
+            long duration) {
         this(viewId, animationType, valueType, valueFrom, ValueTo, duration, (Bundle) null);
     }
 
-    SemRemoteViewsValueAnimation(int viewId, String animationType, String valueType, float valueFrom, float ValueTo, long duration, Bundle options) {
+    SemRemoteViewsValueAnimation(
+            int viewId,
+            String animationType,
+            String valueType,
+            float valueFrom,
+            float ValueTo,
+            long duration,
+            Bundle options) {
         super(viewId);
         this.mInterpolatorResId = -1;
         this.mAnimationType = animationType;
@@ -77,11 +93,24 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
         this.mOptions = options;
     }
 
-    public SemRemoteViewsValueAnimation(int viewId, String animationType, String valueType, int valueFrom, int valueTo, long duration) {
+    public SemRemoteViewsValueAnimation(
+            int viewId,
+            String animationType,
+            String valueType,
+            int valueFrom,
+            int valueTo,
+            long duration) {
         this(viewId, animationType, valueType, valueFrom, valueTo, duration, (Bundle) null);
     }
 
-    SemRemoteViewsValueAnimation(int viewId, String animationType, String valueType, int valueFrom, int valueTo, long duration, Bundle options) {
+    SemRemoteViewsValueAnimation(
+            int viewId,
+            String animationType,
+            String valueType,
+            int valueFrom,
+            int valueTo,
+            long duration,
+            Bundle options) {
         super(viewId);
         this.mInterpolatorResId = -1;
         this.mAnimationType = animationType;
@@ -165,7 +194,8 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
         animator = new ValueAnimator();
         if (this.mInterpolatorResId != -1) {
             if (this.mInterpolator == null && (context = targetView.getContext()) != null) {
-                this.mInterpolator = AnimationUtils.loadInterpolator(context, this.mInterpolatorResId);
+                this.mInterpolator =
+                        AnimationUtils.loadInterpolator(context, this.mInterpolatorResId);
             }
             animator.setInterpolator(this.mInterpolator);
         }
@@ -186,8 +216,10 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
             default:
                 return;
         }
-        ValueAnimator.AnimatorUpdateListener animatorUpdateListener = provideAnimatorUpdateListener(targetView);
-        if (animatorUpdateListener == null || (animatorListener = provideAnimatorListener(targetView)) == null) {
+        ValueAnimator.AnimatorUpdateListener animatorUpdateListener =
+                provideAnimatorUpdateListener(targetView);
+        if (animatorUpdateListener == null
+                || (animatorListener = provideAnimatorListener(targetView)) == null) {
             return;
         }
         animator.addUpdateListener(animatorUpdateListener);
@@ -202,8 +234,7 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.SemRemoteViewsAnimation
     /* renamed from: endAnimation */
-    public void lambda$play$0(View root) {
-    }
+    public void lambda$play$0(View root) {}
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private boolean checkArgumentValidation() {
@@ -263,7 +294,8 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    private ValueAnimator.AnimatorUpdateListener provideAnimatorUpdateListener(final View targetView) {
+    private ValueAnimator.AnimatorUpdateListener provideAnimatorUpdateListener(
+            final View targetView) {
         char c;
         String str = this.mAnimationType;
         switch (str.hashCode()) {
@@ -303,12 +335,17 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
             case 0:
                 if (targetView instanceof ProgressBar) {
                     final ProgressBar progressBar = (ProgressBar) targetView;
-                    ValueAnimator.AnimatorUpdateListener animatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SemRemoteViewsValueAnimation$$ExternalSyntheticLambda0
-                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                        public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                            SemRemoteViewsValueAnimation.lambda$provideAnimatorUpdateListener$0(ProgressBar.this, valueAnimator);
-                        }
-                    };
+                    ValueAnimator.AnimatorUpdateListener animatorUpdateListener =
+                            new ValueAnimator
+                                    .AnimatorUpdateListener() { // from class:
+                                                                // android.widget.SemRemoteViewsValueAnimation$$ExternalSyntheticLambda0
+                                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                                public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                    SemRemoteViewsValueAnimation
+                                            .lambda$provideAnimatorUpdateListener$0(
+                                                    ProgressBar.this, valueAnimator);
+                                }
+                            };
                     return animatorUpdateListener;
                 }
                 Log.e(LOG_TAG, "targetView is not ProgressBar");
@@ -316,22 +353,32 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
             case 1:
             case 2:
                 final ViewGroup.LayoutParams layoutParams = targetView.getLayoutParams();
-                ValueAnimator.AnimatorUpdateListener animatorUpdateListener2 = new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SemRemoteViewsValueAnimation$$ExternalSyntheticLambda1
-                    @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                    public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        SemRemoteViewsValueAnimation.this.lambda$provideAnimatorUpdateListener$1(layoutParams, targetView, valueAnimator);
-                    }
-                };
+                ValueAnimator.AnimatorUpdateListener animatorUpdateListener2 =
+                        new ValueAnimator
+                                .AnimatorUpdateListener() { // from class:
+                                                            // android.widget.SemRemoteViewsValueAnimation$$ExternalSyntheticLambda1
+                            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                SemRemoteViewsValueAnimation.this
+                                        .lambda$provideAnimatorUpdateListener$1(
+                                                layoutParams, targetView, valueAnimator);
+                            }
+                        };
                 return animatorUpdateListener2;
             case 3:
                 if (targetView instanceof TextView) {
                     final TextView textView = (TextView) targetView;
-                    ValueAnimator.AnimatorUpdateListener animatorUpdateListener3 = new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SemRemoteViewsValueAnimation$$ExternalSyntheticLambda2
-                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                        public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                            SemRemoteViewsValueAnimation.this.lambda$provideAnimatorUpdateListener$2(textView, valueAnimator);
-                        }
-                    };
+                    ValueAnimator.AnimatorUpdateListener animatorUpdateListener3 =
+                            new ValueAnimator
+                                    .AnimatorUpdateListener() { // from class:
+                                                                // android.widget.SemRemoteViewsValueAnimation$$ExternalSyntheticLambda2
+                                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                                public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                    SemRemoteViewsValueAnimation.this
+                                            .lambda$provideAnimatorUpdateListener$2(
+                                                    textView, valueAnimator);
+                                }
+                            };
                     return animatorUpdateListener3;
                 }
                 Log.e(LOG_TAG, "targetView is not TextView");
@@ -341,13 +388,15 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
         }
     }
 
-    static /* synthetic */ void lambda$provideAnimatorUpdateListener$0(ProgressBar progressBar, ValueAnimator animation) {
+    static /* synthetic */ void lambda$provideAnimatorUpdateListener$0(
+            ProgressBar progressBar, ValueAnimator animation) {
         int value = ((Integer) animation.getAnimatedValue()).intValue();
         progressBar.setProgress(value);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$provideAnimatorUpdateListener$1(ViewGroup.LayoutParams layoutParams, View targetView, ValueAnimator animation) {
+    public /* synthetic */ void lambda$provideAnimatorUpdateListener$1(
+            ViewGroup.LayoutParams layoutParams, View targetView, ValueAnimator animation) {
         if (layoutParams == null) {
             return;
         }
@@ -361,14 +410,16 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$provideAnimatorUpdateListener$2(TextView textView, ValueAnimator animation) {
+    public /* synthetic */ void lambda$provideAnimatorUpdateListener$2(
+            TextView textView, ValueAnimator animation) {
         if (this.mDecimalFormat == null) {
             this.mDecimalFormat = new DecimalFormat(this.mDecimalFormatString);
         }
         if (VALUE_TYPE_FLOAT.equals(this.mValueType)) {
             float value = ((Float) animation.getAnimatedValue()).floatValue();
             if (this.mOptions != null) {
-                RemoteViews.setTextWithSpannableString(textView, this.mDecimalFormat.format(value), this.mOptions);
+                RemoteViews.setTextWithSpannableString(
+                        textView, this.mDecimalFormat.format(value), this.mOptions);
                 return;
             } else {
                 textView.lambda$setTextAsync$0(this.mDecimalFormat.format(value));
@@ -378,7 +429,8 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
         if ("int".equals(this.mValueType)) {
             int value2 = ((Integer) animation.getAnimatedValue()).intValue();
             if (this.mOptions != null) {
-                RemoteViews.setTextWithSpannableString(textView, this.mDecimalFormat.format(value2), this.mOptions);
+                RemoteViews.setTextWithSpannableString(
+                        textView, this.mDecimalFormat.format(value2), this.mOptions);
                 return;
             } else {
                 textView.lambda$setTextAsync$0(this.mDecimalFormat.format(value2));
@@ -430,12 +482,15 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
             case 1:
             case 2:
             case 3:
-                Animator.AnimatorListener animatorListener = new AnimatorListenerAdapter() { // from class: android.widget.SemRemoteViewsValueAnimation.1
-                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                    public void onAnimationEnd(Animator animation) {
-                        SemRemoteViewsValueAnimation.this.mIsExpired = true;
-                    }
-                };
+                Animator.AnimatorListener animatorListener =
+                        new AnimatorListenerAdapter() { // from class:
+                                                        // android.widget.SemRemoteViewsValueAnimation.1
+                            @Override // android.animation.AnimatorListenerAdapter,
+                                      // android.animation.Animator.AnimatorListener
+                            public void onAnimationEnd(Animator animation) {
+                                SemRemoteViewsValueAnimation.this.mIsExpired = true;
+                            }
+                        };
                 return animatorListener;
             default:
                 return null;

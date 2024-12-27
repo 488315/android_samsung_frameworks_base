@@ -11,13 +11,16 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.ProxyManager$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.EnterpriseKnoxManager;
 import com.samsung.android.knox.container.KnoxContainerManager;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -34,7 +37,8 @@ public final class LockSettingsShellCommand extends ShellCommand {
     public String mNew = "";
     public String mType = "";
 
-    public LockSettingsShellCommand(LockPatternUtils lockPatternUtils, Context context, int i, int i2) {
+    public LockSettingsShellCommand(
+            LockPatternUtils lockPatternUtils, Context context, int i, int i2) {
         this.mLockPatternUtils = lockPatternUtils;
         this.mCallingPid = i;
         this.mCallingUid = i2;
@@ -54,11 +58,16 @@ public final class LockSettingsShellCommand extends ShellCommand {
             return false;
         }
         try {
-            boolean checkCredential = this.mLockPatternUtils.checkCredential(getOldCredential(), this.mCurrentUserId, (LockPatternUtils.CheckCredentialProgressCallback) null);
+            boolean checkCredential =
+                    this.mLockPatternUtils.checkCredential(
+                            getOldCredential(),
+                            this.mCurrentUserId,
+                            (LockPatternUtils.CheckCredentialProgressCallback) null);
             if (checkCredential) {
                 this.mLockPatternUtils.reportSuccessfulPasswordAttempt(this.mCurrentUserId);
             } else {
-                if (!this.mLockPatternUtils.isManagedProfileWithUnifiedChallenge(this.mCurrentUserId)) {
+                if (!this.mLockPatternUtils.isManagedProfileWithUnifiedChallenge(
+                        this.mCurrentUserId)) {
                     this.mLockPatternUtils.reportFailedPasswordAttempt(this.mCurrentUserId);
                 }
                 getOutPrintWriter().println("Old password '" + this.mOld + "' didn't match");
@@ -71,16 +80,34 @@ public final class LockSettingsShellCommand extends ShellCommand {
     }
 
     public final LockscreenCredential getOldCredential() {
-        return TextUtils.isEmpty(this.mOld) ? LockscreenCredential.createNone() : this.mLockPatternUtils.isLockPasswordEnabled(this.mCurrentUserId) ? LockPatternUtils.isQualityAlphabeticPassword(this.mLockPatternUtils.getKeyguardStoredPasswordQuality(this.mCurrentUserId)) ? LockscreenCredential.createPassword(this.mOld) : LockscreenCredential.createPin(this.mOld) : this.mLockPatternUtils.isLockPatternEnabled(this.mCurrentUserId) ? LockscreenCredential.createPattern(LockPatternUtils.byteArrayToPattern(this.mOld.getBytes())) : LockscreenCredential.createPassword(this.mOld);
+        return TextUtils.isEmpty(this.mOld)
+                ? LockscreenCredential.createNone()
+                : this.mLockPatternUtils.isLockPasswordEnabled(this.mCurrentUserId)
+                        ? LockPatternUtils.isQualityAlphabeticPassword(
+                                        this.mLockPatternUtils.getKeyguardStoredPasswordQuality(
+                                                this.mCurrentUserId))
+                                ? LockscreenCredential.createPassword(this.mOld)
+                                : LockscreenCredential.createPin(this.mOld)
+                        : this.mLockPatternUtils.isLockPatternEnabled(this.mCurrentUserId)
+                                ? LockscreenCredential.createPattern(
+                                        LockPatternUtils.byteArrayToPattern(this.mOld.getBytes()))
+                                : LockscreenCredential.createPassword(this.mOld);
     }
 
     /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:18:0x0085 -> B:14:0x0086). Please report as a decompilation issue!!! */
     public final boolean isNewCredentialSufficient(LockscreenCredential lockscreenCredential) {
         boolean z;
         KnoxContainerManager knoxContainerManager;
-        List validateCredential = PasswordMetrics.validateCredential(this.mLockPatternUtils.getRequestedPasswordMetrics(this.mCurrentUserId), this.mLockPatternUtils.getRequestedPasswordComplexity(this.mCurrentUserId), lockscreenCredential);
+        List validateCredential =
+                PasswordMetrics.validateCredential(
+                        this.mLockPatternUtils.getRequestedPasswordMetrics(this.mCurrentUserId),
+                        this.mLockPatternUtils.getRequestedPasswordComplexity(this.mCurrentUserId),
+                        lockscreenCredential);
         if (!validateCredential.isEmpty()) {
-            getOutPrintWriter().println("New credential doesn't satisfy admin policies: " + validateCredential.get(0));
+            getOutPrintWriter()
+                    .println(
+                            "New credential doesn't satisfy admin policies: "
+                                    + validateCredential.get(0));
             return false;
         }
         if (!lockscreenCredential.isNone()) {
@@ -93,14 +120,21 @@ public final class LockSettingsShellCommand extends ShellCommand {
             Slog.d("ShellCommand", "SecurityException : " + e);
         }
         if (i == 0) {
-            EnterpriseDeviceManager enterpriseDeviceManager = EnterpriseDeviceManager.getInstance(this.mContext);
+            EnterpriseDeviceManager enterpriseDeviceManager =
+                    EnterpriseDeviceManager.getInstance(this.mContext);
             if (enterpriseDeviceManager != null) {
-                z = enterpriseDeviceManager.getPasswordPolicy().isMultifactorAuthenticationEnabled();
+                z =
+                        enterpriseDeviceManager
+                                .getPasswordPolicy()
+                                .isMultifactorAuthenticationEnabled();
             }
             z = false;
         } else {
             EnterpriseKnoxManager enterpriseKnoxManager = EnterpriseKnoxManager.getInstance();
-            if (enterpriseKnoxManager != null && (knoxContainerManager = enterpriseKnoxManager.getKnoxContainerManager(this.mContext, i)) != null) {
+            if (enterpriseKnoxManager != null
+                    && (knoxContainerManager =
+                                    enterpriseKnoxManager.getKnoxContainerManager(this.mContext, i))
+                            != null) {
                 z = knoxContainerManager.getPasswordPolicy().isMultifactorAuthenticationEnabled();
             }
             z = false;
@@ -108,7 +142,10 @@ public final class LockSettingsShellCommand extends ShellCommand {
         if (!z) {
             return true;
         }
-        getOutPrintWriter().println("New credential doesn't satisfy admin policies: password null does not meet multi-factor auth enforced");
+        getOutPrintWriter()
+                .println(
+                        "New credential doesn't satisfy admin policies: password null does not meet"
+                            + " multi-factor auth enforced");
         return false;
     }
 
@@ -161,7 +198,10 @@ public final class LockSettingsShellCommand extends ShellCommand {
                         break;
                 }
                 if (c2 != 0 && c2 != 1 && c2 != 2 && c2 != 3) {
-                    getErrPrintWriter().println("The device does not support lock screen - ignoring the command.");
+                    getErrPrintWriter()
+                            .println(
+                                    "The device does not support lock screen - ignoring the"
+                                        + " command.");
                     return -1;
                 }
             }
@@ -214,13 +254,20 @@ public final class LockSettingsShellCommand extends ShellCommand {
             }
             if (c == 0) {
                 this.mLockPatternUtils.removeCachedUnifiedChallenge(this.mCurrentUserId);
-                getOutPrintWriter().println("Password cached removed for user " + this.mCurrentUserId);
+                getOutPrintWriter()
+                        .println("Password cached removed for user " + this.mCurrentUserId);
                 return 0;
             }
             if (c == 1) {
                 String str2 = this.mNew;
-                Slog.i("ShellCommand", "Setting persist.sys.resume_on_reboot_provider_package to " + str2);
-                this.mContext.enforcePermission("android.permission.BIND_RESUME_ON_REBOOT_SERVICE", this.mCallingPid, this.mCallingUid, "ShellCommand");
+                Slog.i(
+                        "ShellCommand",
+                        "Setting persist.sys.resume_on_reboot_provider_package to " + str2);
+                this.mContext.enforcePermission(
+                        "android.permission.BIND_RESUME_ON_REBOOT_SERVICE",
+                        this.mCallingPid,
+                        this.mCallingUid,
+                        "ShellCommand");
                 SystemProperties.set("persist.sys.resume_on_reboot_provider_package", str2);
                 return 0;
             }
@@ -233,7 +280,8 @@ public final class LockSettingsShellCommand extends ShellCommand {
                 return 0;
             }
             if (c == 4) {
-                getOutPrintWriter().println(this.mLockPatternUtils.isLockScreenDisabled(this.mCurrentUserId));
+                getOutPrintWriter()
+                        .println(this.mLockPatternUtils.isLockScreenDisabled(this.mCurrentUserId));
                 return 0;
             }
             if (c == 5) {
@@ -317,22 +365,33 @@ public final class LockSettingsShellCommand extends ShellCommand {
                     z2 = runSetPattern();
                     break;
                 case 1:
-                    LockscreenCredential createPassword = LockscreenCredential.createPassword(this.mNew);
+                    LockscreenCredential createPassword =
+                            LockscreenCredential.createPassword(this.mNew);
                     if (!isNewCredentialSufficient(createPassword)) {
                         z = false;
                         z2 = z;
                         break;
                     } else {
-                        this.mLockPatternUtils.setLockCredential(createPassword, getOldCredential(), this.mCurrentUserId);
-                        ProxyManager$$ExternalSyntheticOutline0.m(getOutPrintWriter(), this.mNew, "'", new StringBuilder("Password set to '"));
+                        this.mLockPatternUtils.setLockCredential(
+                                createPassword, getOldCredential(), this.mCurrentUserId);
+                        ProxyManager$$ExternalSyntheticOutline0.m(
+                                getOutPrintWriter(),
+                                this.mNew,
+                                "'",
+                                new StringBuilder("Password set to '"));
                         z = true;
                         z2 = z;
                     }
                 case 2:
                     LockscreenCredential createPin = LockscreenCredential.createPin(this.mNew);
                     if (isNewCredentialSufficient(createPin)) {
-                        this.mLockPatternUtils.setLockCredential(createPin, getOldCredential(), this.mCurrentUserId);
-                        ProxyManager$$ExternalSyntheticOutline0.m(getOutPrintWriter(), this.mNew, "'", new StringBuilder("Pin set to '"));
+                        this.mLockPatternUtils.setLockCredential(
+                                createPin, getOldCredential(), this.mCurrentUserId);
+                        ProxyManager$$ExternalSyntheticOutline0.m(
+                                getOutPrintWriter(),
+                                this.mNew,
+                                "'",
+                                new StringBuilder("Pin set to '"));
                         z = true;
                         z2 = z;
                         break;
@@ -345,7 +404,8 @@ public final class LockSettingsShellCommand extends ShellCommand {
                         z2 = false;
                         break;
                     } else {
-                        this.mLockPatternUtils.setLockCredential(createNone, getOldCredential(), this.mCurrentUserId);
+                        this.mLockPatternUtils.setLockCredential(
+                                createNone, getOldCredential(), this.mCurrentUserId);
                         getOutPrintWriter().println("Lock credential cleared");
                         break;
                     }
@@ -386,28 +446,37 @@ public final class LockSettingsShellCommand extends ShellCommand {
         try {
             outPrintWriter.println("lockSettings service commands:");
             outPrintWriter.println("");
-            outPrintWriter.println("NOTE: when a secure lock screen is set, most commands require the");
+            outPrintWriter.println(
+                    "NOTE: when a secure lock screen is set, most commands require the");
             outPrintWriter.println("--old <CREDENTIAL> option.");
             outPrintWriter.println("");
             outPrintWriter.println("  help");
             outPrintWriter.println("    Prints this help text.");
             outPrintWriter.println("");
             outPrintWriter.println("  get-disabled [--user USER_ID]");
-            outPrintWriter.println("    Prints true if the lock screen is completely disabled, i.e. set to None.");
+            outPrintWriter.println(
+                    "    Prints true if the lock screen is completely disabled, i.e. set to None.");
             outPrintWriter.println("    Otherwise prints false.");
             outPrintWriter.println("");
             outPrintWriter.println("  set-disabled [--user USER_ID] <true|false>");
-            outPrintWriter.println("    Sets whether the lock screen is disabled. If the lock screen is secure, this");
-            outPrintWriter.println("    has no immediate effect. I.e. this can only change between Swipe and None.");
+            outPrintWriter.println(
+                    "    Sets whether the lock screen is disabled. If the lock screen is secure,"
+                        + " this");
+            outPrintWriter.println(
+                    "    has no immediate effect. I.e. this can only change between Swipe and"
+                        + " None.");
             outPrintWriter.println("");
             outPrintWriter.println("  set-pattern [--old <CREDENTIAL>] [--user USER_ID] <PATTERN>");
-            outPrintWriter.println("    Sets a secure lock screen that uses the given PATTERN. PATTERN is a series");
+            outPrintWriter.println(
+                    "    Sets a secure lock screen that uses the given PATTERN. PATTERN is a"
+                        + " series");
             outPrintWriter.println("    of digits 1-9 that identify the cells of the pattern.");
             outPrintWriter.println("");
             outPrintWriter.println("  set-pin [--old <CREDENTIAL>] [--user USER_ID] <PIN>");
             outPrintWriter.println("    Sets a secure lock screen that uses the given PIN.");
             outPrintWriter.println("");
-            outPrintWriter.println("  set-password [--old <CREDENTIAL>] [--user USER_ID] <PASSWORD>");
+            outPrintWriter.println(
+                    "  set-password [--old <CREDENTIAL>] [--user USER_ID] <PASSWORD>");
             outPrintWriter.println("    Sets a secure lock screen that uses the given PASSWORD.");
             outPrintWriter.println("");
             outPrintWriter.println("  clear [--old <CREDENTIAL>] [--user USER_ID]");
@@ -420,10 +489,13 @@ public final class LockSettingsShellCommand extends ShellCommand {
             outPrintWriter.println("    Removes cached unified challenge for the managed profile.");
             outPrintWriter.println("");
             outPrintWriter.println("  set-resume-on-reboot-provider-package <package_name>");
-            outPrintWriter.println("    Sets the package name for server based resume on reboot service provider.");
+            outPrintWriter.println(
+                    "    Sets the package name for server based resume on reboot service"
+                        + " provider.");
             outPrintWriter.println("");
             outPrintWriter.println("  require-strong-auth [--user USER_ID] <reason>");
-            outPrintWriter.println("    Requires strong authentication. The current supported reasons:");
+            outPrintWriter.println(
+                    "    Requires strong authentication. The current supported reasons:");
             outPrintWriter.println("    STRONG_AUTH_REQUIRED_AFTER_USER_LOCKDOWN.");
             outPrintWriter.println("");
             outPrintWriter.close();
@@ -468,7 +540,8 @@ public final class LockSettingsShellCommand extends ShellCommand {
         if (this.mType.equals("finger") || this.mType.equals("face") || this.mType.equals("")) {
             sendCommand("fail", this.mType);
         } else {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Unknown unlock type: "), this.mType, getErrPrintWriter());
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Unknown unlock type: "), this.mType, getErrPrintWriter());
         }
     }
 
@@ -489,12 +562,16 @@ public final class LockSettingsShellCommand extends ShellCommand {
     }
 
     public final boolean runSetPattern() {
-        LockscreenCredential createPattern = LockscreenCredential.createPattern(LockPatternUtils.byteArrayToPattern(this.mNew.getBytes()));
+        LockscreenCredential createPattern =
+                LockscreenCredential.createPattern(
+                        LockPatternUtils.byteArrayToPattern(this.mNew.getBytes()));
         if (!isNewCredentialSufficient(createPattern)) {
             return false;
         }
-        this.mLockPatternUtils.setLockCredential(createPattern, getOldCredential(), this.mCurrentUserId);
-        ProxyManager$$ExternalSyntheticOutline0.m(getOutPrintWriter(), this.mNew, "'", new StringBuilder("Pattern set to '"));
+        this.mLockPatternUtils.setLockCredential(
+                createPattern, getOldCredential(), this.mCurrentUserId);
+        ProxyManager$$ExternalSyntheticOutline0.m(
+                getOutPrintWriter(), this.mNew, "'", new StringBuilder("Pattern set to '"));
         return true;
     }
 
@@ -502,7 +579,8 @@ public final class LockSettingsShellCommand extends ShellCommand {
         if (this.mType.equals("finger") || this.mType.equals("face") || this.mType.equals("")) {
             sendCommand("unlock", this.mType);
         } else {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Unknown unlock type: "), this.mType, getErrPrintWriter());
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Unknown unlock type: "), this.mType, getErrPrintWriter());
         }
     }
 

@@ -4,6 +4,7 @@ import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
 import android.os.SystemProperties;
 import android.util.sysfwutil.Slog;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -69,7 +70,9 @@ public final class SemUsbBackend {
             UsbPortStatus portStatus = usbPortManager.getPortStatus(ports[i].getId());
             Slog.d("SemUsbBackend", "updateUsbPort() status = " + portStatus);
             if (portStatus != null) {
-                Slog.d("SemUsbBackend", "updateUsbPort() status.isConnected() = " + portStatus.isConnected());
+                Slog.d(
+                        "SemUsbBackend",
+                        "updateUsbPort() status.isConnected() = " + portStatus.isConnected());
                 if (portStatus.isConnected()) {
                     this.mPort = ports[i];
                     this.mPortStatus = portStatus;

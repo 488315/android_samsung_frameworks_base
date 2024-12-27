@@ -5,19 +5,26 @@ import android.os.BatteryStats;
 import android.os.PowerSaveState;
 import android.os.SpeakerOutEnergyInfo;
 import android.telephony.SignalStrength;
+
 import com.android.server.power.stats.BatteryStatsImpl;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda28 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda28
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ Object f$1;
     public final /* synthetic */ long f$2;
     public final /* synthetic */ long f$3;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda28(BatteryStatsService batteryStatsService, BluetoothActivityEnergyInfo bluetoothActivityEnergyInfo, long j, long j2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda28(
+            BatteryStatsService batteryStatsService,
+            BluetoothActivityEnergyInfo bluetoothActivityEnergyInfo,
+            long j,
+            long j2) {
         this.$r8$classId = 2;
         this.f$0 = batteryStatsService;
         this.f$1 = bluetoothActivityEnergyInfo;
@@ -25,7 +32,11 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
         this.f$3 = j2;
     }
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda28(BatteryStatsService batteryStatsService, SpeakerOutEnergyInfo speakerOutEnergyInfo, long j, long j2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda28(
+            BatteryStatsService batteryStatsService,
+            SpeakerOutEnergyInfo speakerOutEnergyInfo,
+            long j,
+            long j2) {
         this.$r8$classId = 0;
         this.f$0 = batteryStatsService;
         this.f$1 = speakerOutEnergyInfo;
@@ -33,7 +44,11 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
         this.f$3 = j2;
     }
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda28(BatteryStatsService batteryStatsService, SignalStrength signalStrength, long j, long j2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda28(
+            BatteryStatsService batteryStatsService,
+            SignalStrength signalStrength,
+            long j,
+            long j2) {
         this.$r8$classId = 3;
         this.f$0 = batteryStatsService;
         this.f$1 = signalStrength;
@@ -41,7 +56,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
         this.f$3 = j2;
     }
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda28(BatteryStatsService batteryStatsService, Object obj, long j, long j2, int i) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda28(
+            BatteryStatsService batteryStatsService, Object obj, long j, long j2, int i) {
         this.$r8$classId = i;
         this.f$0 = batteryStatsService;
         this.f$1 = obj;
@@ -68,7 +84,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
                 long j = this.f$2;
                 long j2 = this.f$3;
                 synchronized (batteryStatsService.mStats) {
-                    batteryStatsService.mStats.updateSpeakerOutEnergyInfoLocked(speakerOutEnergyInfo, j, j2);
+                    batteryStatsService.mStats.updateSpeakerOutEnergyInfoLocked(
+                            speakerOutEnergyInfo, j, j2);
                 }
                 return;
             case 1:
@@ -77,16 +94,19 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
                 long j3 = this.f$2;
                 long j4 = this.f$3;
                 synchronized (batteryStatsService2.mStats) {
-                    batteryStatsService2.mStats.notePowerSaveModeLocked(j3, j4, powerSaveState.batterySaverEnabled);
+                    batteryStatsService2.mStats.notePowerSaveModeLocked(
+                            j3, j4, powerSaveState.batterySaverEnabled);
                 }
                 return;
             case 2:
                 BatteryStatsService batteryStatsService3 = this.f$0;
-                BluetoothActivityEnergyInfo bluetoothActivityEnergyInfo = (BluetoothActivityEnergyInfo) this.f$1;
+                BluetoothActivityEnergyInfo bluetoothActivityEnergyInfo =
+                        (BluetoothActivityEnergyInfo) this.f$1;
                 long j5 = this.f$2;
                 long j6 = this.f$3;
                 synchronized (batteryStatsService3.mStats) {
-                    batteryStatsService3.mStats.updateBluetoothStateLocked(bluetoothActivityEnergyInfo, -1L, j5, j6);
+                    batteryStatsService3.mStats.updateBluetoothStateLocked(
+                            bluetoothActivityEnergyInfo, -1L, j5, j6);
                 }
                 return;
             case 3:

@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.PatternMatcher;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageHidden;
 import com.android.internal.pm.parsing.pkg.AndroidPackageLegacyUtils;
 import com.android.internal.pm.parsing.pkg.PackageImpl;
@@ -41,6 +42,7 @@ import com.android.internal.pm.pkg.parsing.ParsingPackageHidden;
 import com.android.internal.pm.pkg.parsing.ParsingPackageUtils;
 import com.android.internal.util.ArrayUtils;
 import com.android.server.pm.pkg.AndroidPackage;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -143,7 +145,9 @@ public class PackageInfoCommonUtils {
                 for (int i4 = 0; i4 < size11; i4++) {
                     ParsedAttribution parsedAttribution = pkg.getAttributions().get(i4);
                     if (parsedAttribution != null) {
-                        info.attributions[i4] = new Attribution(parsedAttribution.getTag(), parsedAttribution.getLabel());
+                        info.attributions[i4] =
+                                new Attribution(
+                                        parsedAttribution.getTag(), parsedAttribution.getLabel());
                     }
                 }
             }
@@ -163,7 +167,8 @@ public class PackageInfoCommonUtils {
             } else if (signingDetails.hasSignatures()) {
                 int numberOfSigs = signingDetails.getSignatures().length;
                 info.signatures = new Signature[numberOfSigs];
-                System.arraycopy(signingDetails.getSignatures(), 0, info.signatures, 0, numberOfSigs);
+                System.arraycopy(
+                        signingDetails.getSignatures(), 0, info.signatures, 0, numberOfSigs);
             }
         }
         if ((134217728 & flags) != 0) {
@@ -178,7 +183,8 @@ public class PackageInfoCommonUtils {
             ActivityInfo[] res = new ActivityInfo[size5];
             for (int i5 = 0; i5 < size5; i5++) {
                 ParsedActivity a = pkg.getActivities().get(i5);
-                if (isMatch(pkg, a.isDirectBootAware(), flags) && !PackageManager.APP_DETAILS_ACTIVITY_CLASS_NAME.equals(a.getName())) {
+                if (isMatch(pkg, a.isDirectBootAware(), flags)
+                        && !PackageManager.APP_DETAILS_ACTIVITY_CLASS_NAME.equals(a.getName())) {
                     res[num] = generateActivityInfo(a, flags, applicationInfo);
                     num++;
                 }
@@ -229,7 +235,9 @@ public class PackageInfoCommonUtils {
         if ((16 & flags) != 0 && (size = pkg.getInstrumentations().size()) > 0) {
             info.instrumentation = new InstrumentationInfo[size];
             for (int i9 = 0; i9 < size; i9++) {
-                info.instrumentation[i9] = generateInstrumentationInfo(pkg.getInstrumentations().get(i9), pkg, flags, userId);
+                info.instrumentation[i9] =
+                        generateInstrumentationInfo(
+                                pkg.getInstrumentations().get(i9), pkg, flags, userId);
             }
         }
         return info;
@@ -252,7 +260,8 @@ public class PackageInfoCommonUtils {
         ai.seInfoUser = SEInfoUtil.COMPLETE_STR;
     }
 
-    private static ApplicationInfo generateApplicationInfo(AndroidPackage pkg, long flags, int userId) {
+    private static ApplicationInfo generateApplicationInfo(
+            AndroidPackage pkg, long flags, int userId) {
         ApplicationInfo info = ((AndroidPackageHidden) pkg).toAppInfoWithoutState();
         updateApplicationInfo(info, flags);
         initForUser(info, pkg, userId);
@@ -263,12 +272,16 @@ public class PackageInfoCommonUtils {
         }
         if ((1024 & flags) != 0) {
             List<String> usesLibraryFiles = pkg.getUsesLibraries();
-            info.sharedLibraryFiles = usesLibraryFiles.isEmpty() ? null : (String[]) usesLibraryFiles.toArray(new String[0]);
+            info.sharedLibraryFiles =
+                    usesLibraryFiles.isEmpty()
+                            ? null
+                            : (String[]) usesLibraryFiles.toArray(new String[0]);
         }
         return info;
     }
 
-    private static ActivityInfo generateActivityInfo(ParsedActivity a, long flags, ApplicationInfo applicationInfo) {
+    private static ActivityInfo generateActivityInfo(
+            ParsedActivity a, long flags, ApplicationInfo applicationInfo) {
         if (a == null) {
             return null;
         }
@@ -313,7 +326,8 @@ public class PackageInfoCommonUtils {
         return ai;
     }
 
-    private static ServiceInfo generateServiceInfo(ParsedService s, long flags, ApplicationInfo applicationInfo) {
+    private static ServiceInfo generateServiceInfo(
+            ParsedService s, long flags, ApplicationInfo applicationInfo) {
         if (s == null) {
             return null;
         }
@@ -332,12 +346,22 @@ public class PackageInfoCommonUtils {
         return si;
     }
 
-    private static ProviderInfo generateProviderInfo(AndroidPackage pkg, ParsedProvider p, long flags, ApplicationInfo applicationInfo, int userId) {
+    private static ProviderInfo generateProviderInfo(
+            AndroidPackage pkg,
+            ParsedProvider p,
+            long flags,
+            ApplicationInfo applicationInfo,
+            int userId) {
         if (p == null) {
             return null;
         }
         if (!pkg.getPackageName().equals(applicationInfo.packageName)) {
-            Slog.wtf("PackageParsing", "AppInfo's package name is different. Expected=" + pkg.getPackageName() + " actual=" + applicationInfo.packageName);
+            Slog.wtf(
+                    "PackageParsing",
+                    "AppInfo's package name is different. Expected="
+                            + pkg.getPackageName()
+                            + " actual="
+                            + applicationInfo.packageName);
             applicationInfo = generateApplicationInfo(pkg, flags, userId);
         }
         ProviderInfo pi = new ProviderInfo();
@@ -352,8 +376,10 @@ public class PackageInfoCommonUtils {
         pi.forceUriPermissions = p.isForceUriPermissions();
         pi.multiprocess = p.isMultiProcess();
         pi.initOrder = p.getInitOrder();
-        pi.uriPermissionPatterns = (PatternMatcher[]) p.getUriPermissionPatterns().toArray(new PatternMatcher[0]);
-        pi.pathPermissions = (PathPermission[]) p.getPathPermissions().toArray(new PathPermission[0]);
+        pi.uriPermissionPatterns =
+                (PatternMatcher[]) p.getUriPermissionPatterns().toArray(new PatternMatcher[0]);
+        pi.pathPermissions =
+                (PathPermission[]) p.getPathPermissions().toArray(new PathPermission[0]);
         if ((2048 & flags) == 0) {
             pi.uriPermissionPatterns = null;
         }
@@ -366,7 +392,8 @@ public class PackageInfoCommonUtils {
         return pi;
     }
 
-    private static InstrumentationInfo generateInstrumentationInfo(ParsedInstrumentation i, AndroidPackage pkg, long flags, int userId) {
+    private static InstrumentationInfo generateInstrumentationInfo(
+            ParsedInstrumentation i, AndroidPackage pkg, long flags, int userId) {
         if (i == null) {
             return null;
         }
@@ -379,8 +406,10 @@ public class PackageInfoCommonUtils {
         info.publicSourceDir = pkg.getBaseApkPath();
         info.splitNames = pkg.getSplitNames();
         info.splitSourceDirs = pkg.getSplitCodePaths().length == 0 ? null : pkg.getSplitCodePaths();
-        info.splitPublicSourceDirs = pkg.getSplitCodePaths().length == 0 ? null : pkg.getSplitCodePaths();
-        info.splitDependencies = pkg.getSplitDependencies().size() == 0 ? null : pkg.getSplitDependencies();
+        info.splitPublicSourceDirs =
+                pkg.getSplitCodePaths().length == 0 ? null : pkg.getSplitCodePaths();
+        info.splitDependencies =
+                pkg.getSplitDependencies().size() == 0 ? null : pkg.getSplitDependencies();
         initForUser(info, pkg, userId);
         info.primaryCpuAbi = AndroidPackageLegacyUtils.getRawPrimaryCpuAbi(pkg);
         info.secondaryCpuAbi = AndroidPackageLegacyUtils.getRawSecondaryCpuAbi(pkg);
@@ -417,7 +446,8 @@ public class PackageInfoCommonUtils {
         return pi;
     }
 
-    private static void assignFieldsComponentInfoParsedMainComponent(ComponentInfo info, ParsedMainComponent component) {
+    private static void assignFieldsComponentInfoParsedMainComponent(
+            ComponentInfo info, ParsedMainComponent component) {
         assignFieldsPackageItemInfoParsedComponent(info, component);
         info.descriptionRes = component.getDescriptionRes();
         info.directBootAware = component.isDirectBootAware();
@@ -428,7 +458,8 @@ public class PackageInfoCommonUtils {
         info.icon = component.getIcon();
     }
 
-    private static void assignFieldsPackageItemInfoParsedComponent(PackageItemInfo packageItemInfo, ParsedComponent component) {
+    private static void assignFieldsPackageItemInfoParsedComponent(
+            PackageItemInfo packageItemInfo, ParsedComponent component) {
         packageItemInfo.nonLocalizedLabel = ComponentParseUtils.getNonLocalizedLabel(component);
         packageItemInfo.icon = ComponentParseUtils.getIcon(component);
         packageItemInfo.banner = component.getBanner();
@@ -451,9 +482,17 @@ public class PackageInfoCommonUtils {
             } else {
                 String userIdString = String.valueOf(userId);
                 int credentialLength = credentialDir.length();
-                output.credentialProtectedDataDir = new StringBuilder(credentialDir).replace(credentialLength - 2, credentialLength - 1, userIdString).append(packageName).toString();
+                output.credentialProtectedDataDir =
+                        new StringBuilder(credentialDir)
+                                .replace(credentialLength - 2, credentialLength - 1, userIdString)
+                                .append(packageName)
+                                .toString();
                 int deviceLength = deviceDir.length();
-                output.deviceProtectedDataDir = new StringBuilder(deviceDir).replace(deviceLength - 2, deviceLength - 1, userIdString).append(packageName).toString();
+                output.deviceProtectedDataDir =
+                        new StringBuilder(deviceDir)
+                                .replace(deviceLength - 2, deviceLength - 1, userIdString)
+                                .append(packageName)
+                                .toString();
             }
         }
         if (input.isDefaultToDeviceProtectedStorage()) {
@@ -475,9 +514,17 @@ public class PackageInfoCommonUtils {
             } else {
                 String userIdString = String.valueOf(userId);
                 int credentialLength = credentialDir.length();
-                output.credentialProtectedDataDir = new StringBuilder(credentialDir).replace(credentialLength - 2, credentialLength - 1, userIdString).append(packageName).toString();
+                output.credentialProtectedDataDir =
+                        new StringBuilder(credentialDir)
+                                .replace(credentialLength - 2, credentialLength - 1, userIdString)
+                                .append(packageName)
+                                .toString();
                 int deviceLength = deviceDir.length();
-                output.deviceProtectedDataDir = new StringBuilder(deviceDir).replace(deviceLength - 2, deviceLength - 1, userIdString).append(packageName).toString();
+                output.deviceProtectedDataDir =
+                        new StringBuilder(deviceDir)
+                                .replace(deviceLength - 2, deviceLength - 1, userIdString)
+                                .append(packageName)
+                                .toString();
             }
         }
         if (input.isDefaultToDeviceProtectedStorage()) {
@@ -487,12 +534,14 @@ public class PackageInfoCommonUtils {
         }
     }
 
-    private static boolean isMatch(AndroidPackage pkg, boolean isComponentDirectBootAware, long flags) {
+    private static boolean isMatch(
+            AndroidPackage pkg, boolean isComponentDirectBootAware, long flags) {
         boolean isSystem = ((AndroidPackageHidden) pkg).isSystem();
         if ((1048576 & flags) != 0 && !isSystem) {
             return reportIfDebug(false, flags);
         }
-        boolean matchesUnaware = ((262144 & flags) == 0 || isComponentDirectBootAware) ? false : true;
+        boolean matchesUnaware =
+                ((262144 & flags) == 0 || isComponentDirectBootAware) ? false : true;
         boolean matchesAware = (524288 & flags) != 0 && isComponentDirectBootAware;
         return reportIfDebug(matchesUnaware || matchesAware, flags);
     }

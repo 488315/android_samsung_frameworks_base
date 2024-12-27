@@ -22,6 +22,7 @@ public class ToPackedGrayFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "owidth")
     private int mOWidth;
+
     private Program mProgram;
 
     public ToPackedGrayFilter(String name) {
@@ -29,7 +30,19 @@ public class ToPackedGrayFilter extends Filter {
         this.mOWidth = 0;
         this.mOHeight = 0;
         this.mKeepAspectRatio = false;
-        this.mColorToPackedGrayShader = "precision mediump float;\nconst vec4 coeff_y = vec4(0.299, 0.587, 0.114, 0);\nuniform sampler2D tex_sampler_0;\nuniform float pix_stride;\nvarying vec2 v_texcoord;\nvoid main() {\n  for (int i = 0; i < 4; ++i) {\n    vec4 p = texture2D(tex_sampler_0,\n                       v_texcoord + vec2(pix_stride * float(i), 0.0));\n    gl_FragColor[i] = dot(p, coeff_y);\n  }\n}\n";
+        this.mColorToPackedGrayShader =
+                "precision mediump float;\n"
+                        + "const vec4 coeff_y = vec4(0.299, 0.587, 0.114, 0);\n"
+                        + "uniform sampler2D tex_sampler_0;\n"
+                        + "uniform float pix_stride;\n"
+                        + "varying vec2 v_texcoord;\n"
+                        + "void main() {\n"
+                        + "  for (int i = 0; i < 4; ++i) {\n"
+                        + "    vec4 p = texture2D(tex_sampler_0,\n"
+                        + "                       v_texcoord + vec2(pix_stride * float(i), 0.0));\n"
+                        + "    gl_FragColor[i] = dot(p, coeff_y);\n"
+                        + "  }\n"
+                        + "}\n";
     }
 
     @Override // android.filterfw.core.Filter
@@ -45,7 +58,8 @@ public class ToPackedGrayFilter extends Filter {
 
     private void checkOutputDimensions(int outputWidth, int outputHeight) {
         if (outputWidth <= 0 || outputHeight <= 0) {
-            throw new RuntimeException("Invalid output dimensions: " + outputWidth + " " + outputHeight);
+            throw new RuntimeException(
+                    "Invalid output dimensions: " + outputWidth + " " + outputHeight);
         }
     }
 
@@ -74,7 +88,22 @@ public class ToPackedGrayFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void prepare(FilterContext context) {
-        this.mProgram = new ShaderProgram(context, "precision mediump float;\nconst vec4 coeff_y = vec4(0.299, 0.587, 0.114, 0);\nuniform sampler2D tex_sampler_0;\nuniform float pix_stride;\nvarying vec2 v_texcoord;\nvoid main() {\n  for (int i = 0; i < 4; ++i) {\n    vec4 p = texture2D(tex_sampler_0,\n                       v_texcoord + vec2(pix_stride * float(i), 0.0));\n    gl_FragColor[i] = dot(p, coeff_y);\n  }\n}\n");
+        this.mProgram =
+                new ShaderProgram(
+                        context,
+                        "precision mediump float;\n"
+                                + "const vec4 coeff_y = vec4(0.299, 0.587, 0.114, 0);\n"
+                                + "uniform sampler2D tex_sampler_0;\n"
+                                + "uniform float pix_stride;\n"
+                                + "varying vec2 v_texcoord;\n"
+                                + "void main() {\n"
+                                + "  for (int i = 0; i < 4; ++i) {\n"
+                                + "    vec4 p = texture2D(tex_sampler_0,\n"
+                                + "                       v_texcoord + vec2(pix_stride * float(i),"
+                                + " 0.0));\n"
+                                + "    gl_FragColor[i] = dot(p, coeff_y);\n"
+                                + "  }\n"
+                                + "}\n");
     }
 
     @Override // android.filterfw.core.Filter

@@ -1,6 +1,5 @@
 package android.app.job;
 
-import android.app.job.IJobCallback;
 import android.companion.CompanionDeviceManager;
 import android.content.ClipData;
 import android.net.Network;
@@ -12,6 +11,7 @@ import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.os.PowerManager;
 import android.os.RemoteException;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -64,24 +64,26 @@ public class JobParameters implements Parcelable {
     private final Uri[] mTriggeredContentUris;
     private final boolean overrideDeadlineExpired;
     private final Bundle transientExtras;
-    public static final int[] JOB_STOP_REASON_CODES = {-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-    public static final Parcelable.Creator<JobParameters> CREATOR = new Parcelable.Creator<JobParameters>() { // from class: android.app.job.JobParameters.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public JobParameters createFromParcel(Parcel in) {
-            return new JobParameters(in);
-        }
-
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public JobParameters[] newArray(int size) {
-            return new JobParameters[size];
-        }
+    public static final int[] JOB_STOP_REASON_CODES = {
+        -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
     };
+    public static final Parcelable.Creator<JobParameters> CREATOR =
+            new Parcelable.Creator<JobParameters>() { // from class: android.app.job.JobParameters.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public JobParameters createFromParcel(Parcel in) {
+                    return new JobParameters(in);
+                }
+
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public JobParameters[] newArray(int size) {
+                    return new JobParameters[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StopReason {
-    }
+    public @interface StopReason {}
 
     public static String getInternalReasonCodeDescription(int reasonCode) {
         switch (reasonCode) {
@@ -122,7 +124,20 @@ public class JobParameters implements Parcelable {
         return JOB_STOP_REASON_CODES;
     }
 
-    public JobParameters(IBinder callback, String namespace, int jobId, PersistableBundle extras, Bundle transientExtras, ClipData clipData, int clipGrantFlags, boolean overrideDeadlineExpired, boolean isExpedited, boolean isUserInitiated, Uri[] triggeredContentUris, String[] triggeredContentAuthorities, Network network) {
+    public JobParameters(
+            IBinder callback,
+            String namespace,
+            int jobId,
+            PersistableBundle extras,
+            Bundle transientExtras,
+            ClipData clipData,
+            int clipGrantFlags,
+            boolean overrideDeadlineExpired,
+            boolean isExpedited,
+            boolean isUserInitiated,
+            Uri[] triggeredContentUris,
+            String[] triggeredContentAuthorities,
+            Network network) {
         this.mStopReason = 0;
         this.mInternalStopReason = -1;
         this.jobId = jobId;

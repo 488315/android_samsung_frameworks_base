@@ -2,7 +2,6 @@ package android.database.sqlite;
 
 import android.database.CursorWindow;
 import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDebug;
 import android.database.sqlite.trace.SQLiteTrace;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Binder;
@@ -20,8 +19,10 @@ import android.util.LruCache;
 import android.util.NtpTrustedTime;
 import android.util.Pair;
 import android.util.Printer;
+
 import dalvik.system.BlockGuard;
 import dalvik.system.CloseGuard;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.Reference;
@@ -93,7 +94,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
 
     private static native int nativeExecuteForChangedRowCount(long j, long j2);
 
-    private static native long nativeExecuteForCursorWindow(long j, long j2, long j3, int i, int i2, boolean z);
+    private static native long nativeExecuteForCursorWindow(
+            long j, long j2, long j3, int i, int i2, boolean z);
 
     private static native long nativeExecuteForLastInsertedRowId(long j, long j2);
 
@@ -121,14 +123,17 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
 
     private static native int nativeLastInsertRowId(long j);
 
-    private static native long nativeOpen(String str, int i, String str2, boolean z, boolean z2, int i2, int i3);
+    private static native long nativeOpen(
+            String str, int i, String str2, boolean z, boolean z2, int i2, int i3);
 
     /* JADX INFO: Access modifiers changed from: private */
     public static native long nativePrepareStatement(long j, String str);
 
-    private static native void nativeRegisterCustomAggregateFunction(long j, String str, BinaryOperator<String> binaryOperator);
+    private static native void nativeRegisterCustomAggregateFunction(
+            long j, String str, BinaryOperator<String> binaryOperator);
 
-    private static native void nativeRegisterCustomScalarFunction(long j, String str, UnaryOperator<String> unaryOperator);
+    private static native void nativeRegisterCustomScalarFunction(
+            long j, String str, UnaryOperator<String> unaryOperator);
 
     private static native void nativeRegisterLocalizedCollators(long j, String str);
 
@@ -148,13 +153,18 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
 
     private static native boolean nativeUpdatesTempOnly(long j, long j2);
 
-    private SQLiteConnection(SQLiteConnectionPool pool, SQLiteDatabaseConfiguration configuration, int connectionId, boolean primaryConnection) {
+    private SQLiteConnection(
+            SQLiteConnectionPool pool,
+            SQLiteDatabaseConfiguration configuration,
+            int connectionId,
+            boolean primaryConnection) {
         this.mPool = pool;
         this.mConfiguration = new SQLiteDatabaseConfiguration(configuration);
         this.mConnectionId = connectionId;
         this.mIsPrimaryConnection = primaryConnection;
         this.mIsReadOnlyConnection = this.mConfiguration.isReadOnlyDatabase();
-        this.mPreparedStatementCache = new PreparedStatementCache(this.mConfiguration.maxSqlCacheSize);
+        this.mPreparedStatementCache =
+                new PreparedStatementCache(this.mConfiguration.maxSqlCacheSize);
         this.mRecentOperations = new OperationLog(pool, this, this.mConfiguration);
         this.mCloseGuard.open("SQLiteConnection.close");
     }
@@ -170,8 +180,13 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
     }
 
-    static SQLiteConnection open(SQLiteConnectionPool pool, SQLiteDatabaseConfiguration configuration, int connectionId, boolean primaryConnection) {
-        SQLiteConnection connection = new SQLiteConnection(pool, configuration, connectionId, primaryConnection);
+    static SQLiteConnection open(
+            SQLiteConnectionPool pool,
+            SQLiteDatabaseConfiguration configuration,
+            int connectionId,
+            boolean primaryConnection) {
+        SQLiteConnection connection =
+                new SQLiteConnection(pool, configuration, connectionId, primaryConnection);
         try {
             connection.open();
             return connection;
@@ -184,8 +199,14 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
     }
 
-    static SQLiteConnection openSecure(SQLiteConnectionPool pool, SQLiteDatabaseConfiguration configuration, int connectionId, boolean primaryConnection, byte[] password) {
-        SQLiteConnection connection = new SQLiteConnection(pool, configuration, connectionId, primaryConnection);
+    static SQLiteConnection openSecure(
+            SQLiteConnectionPool pool,
+            SQLiteDatabaseConfiguration configuration,
+            int connectionId,
+            boolean primaryConnection,
+            byte[] password) {
+        SQLiteConnection connection =
+                new SQLiteConnection(pool, configuration, connectionId, primaryConnection);
         try {
             connection.open(password);
             return connection;
@@ -204,10 +225,20 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
 
     private void open(byte[] password) {
         String file = this.mConfiguration.path;
-        int cookie = this.mRecentOperations.beginOperation(RcsContactPresenceTuple.TUPLE_BASIC_STATUS_OPEN, null, null);
+        int cookie =
+                this.mRecentOperations.beginOperation(
+                        RcsContactPresenceTuple.TUPLE_BASIC_STATUS_OPEN, null, null);
         try {
             try {
-                this.mConnectionPtr = nativeOpen(file, this.mConfiguration.openFlags, this.mConfiguration.label, SQLiteDebug.NoPreloadHolder.DEBUG_SQL_STATEMENTS, SQLiteDebug.NoPreloadHolder.DEBUG_SQL_TIME, this.mConfiguration.lookasideSlotSize, this.mConfiguration.lookasideSlotCount);
+                this.mConnectionPtr =
+                        nativeOpen(
+                                file,
+                                this.mConfiguration.openFlags,
+                                this.mConfiguration.label,
+                                SQLiteDebug.NoPreloadHolder.DEBUG_SQL_STATEMENTS,
+                                SQLiteDebug.NoPreloadHolder.DEBUG_SQL_TIME,
+                                this.mConfiguration.lookasideSlotSize,
+                                this.mConfiguration.lookasideSlotCount);
                 this.mRecentOperations.endOperation(cookie);
                 if (this.mConnectionPtr == 0) {
                     return;
@@ -231,7 +262,10 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     setUserDataRecovery();
                 } catch (SQLiteReadOnlyDatabaseException ex) {
                     if (isForcedReadOnlyConnection()) {
-                        Log.i(TAG, "This connection is forced to be a read-only connection. Ignore SQLiteReadOnlyDatabaseException.");
+                        Log.i(
+                                TAG,
+                                "This connection is forced to be a read-only connection. Ignore"
+                                        + " SQLiteReadOnlyDatabaseException.");
                     } else {
                         throw ex;
                     }
@@ -239,7 +273,12 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                 this.mPool.saveConnectionKey(key);
                 this.mIsOpen = true;
             } catch (SQLiteCantOpenDatabaseException e) {
-                StringBuilder message = new StringBuilder("Cannot open database '").append(file).append(DateFormat.QUOTE).append(" with flags 0x").append(Integer.toHexString(this.mConfiguration.openFlags));
+                StringBuilder message =
+                        new StringBuilder("Cannot open database '")
+                                .append(file)
+                                .append(DateFormat.QUOTE)
+                                .append(" with flags 0x")
+                                .append(Integer.toHexString(this.mConfiguration.openFlags));
                 try {
                     Path path = FileSystems.getDefault().getPath(file, new String[0]);
                     Path dir = path.getParent();
@@ -250,7 +289,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     } else if (!Files.exists(path, new LinkOption[0])) {
                         message.append(": File ").append(path).append(" doesn't exist");
                         if ((this.mConfiguration.openFlags & 268435456) != 0) {
-                            message.append(" and CREATE_IF_NECESSARY is set, check directory permissions");
+                            message.append(
+                                    " and CREATE_IF_NECESSARY is set, check directory permissions");
                         }
                     } else if (!Files.isReadable(path)) {
                         message.append(": File ").append(path).append(" is not readable");
@@ -260,7 +300,10 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                         message.append(": Unable to deduct failure reason");
                     }
                 } catch (Throwable th) {
-                    message.append(": Unable to deduct failure reason because filesystem couldn't be examined: ").append(th.getMessage());
+                    message.append(
+                                    ": Unable to deduct failure reason because filesystem couldn't"
+                                            + " be examined: ")
+                            .append(th.getMessage());
                 }
                 throw new SQLiteCantOpenDatabaseException(message.toString(), e);
             }
@@ -272,10 +315,20 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
 
     private void open() {
         String file = this.mConfiguration.path;
-        int cookie = this.mRecentOperations.beginOperation(RcsContactPresenceTuple.TUPLE_BASIC_STATUS_OPEN, null, null);
+        int cookie =
+                this.mRecentOperations.beginOperation(
+                        RcsContactPresenceTuple.TUPLE_BASIC_STATUS_OPEN, null, null);
         try {
             try {
-                this.mConnectionPtr = nativeOpen(file, this.mConfiguration.openFlags, this.mConfiguration.label, SQLiteDebug.NoPreloadHolder.DEBUG_SQL_STATEMENTS, SQLiteDebug.NoPreloadHolder.DEBUG_SQL_TIME, this.mConfiguration.lookasideSlotSize, this.mConfiguration.lookasideSlotCount);
+                this.mConnectionPtr =
+                        nativeOpen(
+                                file,
+                                this.mConfiguration.openFlags,
+                                this.mConfiguration.label,
+                                SQLiteDebug.NoPreloadHolder.DEBUG_SQL_STATEMENTS,
+                                SQLiteDebug.NoPreloadHolder.DEBUG_SQL_TIME,
+                                this.mConfiguration.lookasideSlotSize,
+                                this.mConfiguration.lookasideSlotCount);
                 this.mRecentOperations.endOperation(cookie);
                 if (this.mConnectionPtr == 0) {
                     return;
@@ -298,14 +351,22 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     setUserDataRecovery();
                 } catch (SQLiteReadOnlyDatabaseException ex) {
                     if (isForcedReadOnlyConnection()) {
-                        Log.i(TAG, "This connection is forced to be a read-only connection. Ignore SQLiteReadOnlyDatabaseException.");
+                        Log.i(
+                                TAG,
+                                "This connection is forced to be a read-only connection. Ignore"
+                                        + " SQLiteReadOnlyDatabaseException.");
                     } else {
                         throw ex;
                     }
                 }
                 this.mIsOpen = true;
             } catch (SQLiteCantOpenDatabaseException e) {
-                StringBuilder message = new StringBuilder("Cannot open database '").append(file).append(DateFormat.QUOTE).append(" with flags 0x").append(Integer.toHexString(this.mConfiguration.openFlags));
+                StringBuilder message =
+                        new StringBuilder("Cannot open database '")
+                                .append(file)
+                                .append(DateFormat.QUOTE)
+                                .append(" with flags 0x")
+                                .append(Integer.toHexString(this.mConfiguration.openFlags));
                 try {
                     Path path = FileSystems.getDefault().getPath(file, new String[0]);
                     Path dir = path.getParent();
@@ -316,7 +377,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     } else if (!Files.exists(path, new LinkOption[0])) {
                         message.append(": File ").append(path).append(" doesn't exist");
                         if ((this.mConfiguration.openFlags & 268435456) != 0) {
-                            message.append(" and CREATE_IF_NECESSARY is set, check directory permissions");
+                            message.append(
+                                    " and CREATE_IF_NECESSARY is set, check directory permissions");
                         }
                     } else if (!Files.isReadable(path)) {
                         message.append(": File ").append(path).append(" is not readable");
@@ -326,7 +388,10 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                         message.append(": Unable to deduct failure reason");
                     }
                 } catch (Throwable th) {
-                    message.append(": Unable to deduct failure reason because filesystem couldn't be examined: ").append(th.getMessage());
+                    message.append(
+                                    ": Unable to deduct failure reason because filesystem couldn't"
+                                            + " be examined: ")
+                            .append(th.getMessage());
                 }
                 throw new SQLiteCantOpenDatabaseException(message.toString(), e);
             }
@@ -355,7 +420,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                 }
             } finally {
                 if (this.mRecentOperations.endOperationDeferLog(cookie)) {
-                    this.mRecentOperations.logOperation(cookie, "window='" + this.mConfiguration.path + "'");
+                    this.mRecentOperations.logOperation(
+                            cookie, "window='" + this.mConfiguration.path + "'");
                 }
             }
         }
@@ -429,7 +495,10 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
     }
 
     private void setCacheSizeFromConfiguration() {
-        long newValue = this.mConfiguration.cacheSize == 0 ? SQLiteGlobal.getDefaultCacheSize() : this.mConfiguration.cacheSize;
+        long newValue =
+                this.mConfiguration.cacheSize == 0
+                        ? SQLiteGlobal.getDefaultCacheSize()
+                        : this.mConfiguration.cacheSize;
         long value = executeForLong("PRAGMA cache_size", null, null);
         if (value != newValue) {
             execute("PRAGMA cache_size=" + newValue, null, null);
@@ -596,7 +665,18 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                 }
             } catch (SQLiteDatabaseLockedException e) {
             }
-            Log.w(TAG, "Could not change the database journal mode of '" + this.mConfiguration.label + "' from '" + value + "' to '" + newValue + "' because the database is locked.  This usually means that there are other open connections to the database which prevents the database from enabling or disabling write-ahead logging mode.  Proceeding without changing the journal mode.");
+            Log.w(
+                    TAG,
+                    "Could not change the database journal mode of '"
+                            + this.mConfiguration.label
+                            + "' from '"
+                            + value
+                            + "' to '"
+                            + newValue
+                            + "' because the database is locked.  This usually means that there are"
+                            + " other open connections to the database which prevents the database"
+                            + " from enabling or disabling write-ahead logging mode.  Proceeding"
+                            + " without changing the journal mode.");
         }
     }
 
@@ -617,14 +697,22 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         try {
             try {
                 execute("CREATE TABLE IF NOT EXISTS android_metadata (locale TEXT)", null, null);
-                String oldLocale = executeForString("SELECT locale FROM android_metadata UNION SELECT NULL ORDER BY locale DESC LIMIT 1", null, null);
+                String oldLocale =
+                        executeForString(
+                                "SELECT locale FROM android_metadata UNION SELECT NULL ORDER BY"
+                                        + " locale DESC LIMIT 1",
+                                null,
+                                null);
                 if (oldLocale != null && oldLocale.equals(newLocale)) {
                     return;
                 }
                 execute("BEGIN", null, null);
                 try {
                     execute("DELETE FROM android_metadata", null, null);
-                    execute("INSERT INTO android_metadata (locale) VALUES(?)", new Object[]{newLocale}, null);
+                    execute(
+                            "INSERT INTO android_metadata (locale) VALUES(?)",
+                            new Object[] {newLocale},
+                            null);
                     execute("REINDEX LOCALIZED", null, null);
                     execute(1 == 0 ? "ROLLBACK" : "COMMIT", null, null);
                 } catch (Throwable th) {
@@ -634,12 +722,26 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     execute(str, null, null);
                     throw th;
                 }
-            } catch (SQLiteDatabaseCorruptException | SQLiteFullException | SQLiteReadOnlyDatabaseException ex) {
-                Log.e(TAG, "Failed to change locale for db'" + this.mConfiguration.label + "' to '" + newLocale + "'.");
+            } catch (SQLiteDatabaseCorruptException
+                    | SQLiteFullException
+                    | SQLiteReadOnlyDatabaseException ex) {
+                Log.e(
+                        TAG,
+                        "Failed to change locale for db'"
+                                + this.mConfiguration.label
+                                + "' to '"
+                                + newLocale
+                                + "'.");
                 throw ex;
             }
         } catch (RuntimeException ex2) {
-            throw new SQLiteException("Failed to change locale for db '" + this.mConfiguration.label + "' to '" + newLocale + "'.", ex2);
+            throw new SQLiteException(
+                    "Failed to change locale for db '"
+                            + this.mConfiguration.label
+                            + "' to '"
+                            + newLocale
+                            + "'.",
+                    ex2);
         }
     }
 
@@ -651,10 +753,16 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
 
     private void setCustomFunctionsFromConfiguration() {
         for (int i = 0; i < this.mConfiguration.customScalarFunctions.size(); i++) {
-            nativeRegisterCustomScalarFunction(this.mConnectionPtr, this.mConfiguration.customScalarFunctions.keyAt(i), this.mConfiguration.customScalarFunctions.valueAt(i));
+            nativeRegisterCustomScalarFunction(
+                    this.mConnectionPtr,
+                    this.mConfiguration.customScalarFunctions.keyAt(i),
+                    this.mConfiguration.customScalarFunctions.valueAt(i));
         }
         for (int i2 = 0; i2 < this.mConfiguration.customAggregateFunctions.size(); i2++) {
-            nativeRegisterCustomAggregateFunction(this.mConnectionPtr, this.mConfiguration.customAggregateFunctions.keyAt(i2), this.mConfiguration.customAggregateFunctions.valueAt(i2));
+            nativeRegisterCustomAggregateFunction(
+                    this.mConnectionPtr,
+                    this.mConfiguration.customAggregateFunctions.keyAt(i2),
+                    this.mConfiguration.customAggregateFunctions.valueAt(i2));
         }
     }
 
@@ -670,7 +778,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     execute(statement.first, statement.second, null);
                     break;
                 default:
-                    throw new IllegalArgumentException("Unsupported configuration statement: " + statement);
+                    throw new IllegalArgumentException(
+                            "Unsupported configuration statement: " + statement);
             }
         }
     }
@@ -681,7 +790,13 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
         try {
             File checkFile = new File(this.mConfiguration.path + "-wipecheck");
-            boolean hasMetadataTable = executeForLong("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='android_metadata'", null, null) > 0;
+            boolean hasMetadataTable =
+                    executeForLong(
+                                    "SELECT count(*) FROM sqlite_master WHERE type='table' AND"
+                                            + " name='android_metadata'",
+                                    null,
+                                    null)
+                            > 0;
             boolean hasCheckFile = checkFile.exists();
             if (!this.mIsReadOnlyConnection && !hasCheckFile) {
                 checkFile.createNewFile();
@@ -690,20 +805,30 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                 SQLiteDatabase.wipeDetected(this.mConfiguration.path, "unknown");
             }
         } catch (IOException | RuntimeException ex) {
-            SQLiteDatabase.wtfAsSystemServer(TAG, "Unexpected exception while checking for wipe", ex);
+            SQLiteDatabase.wtfAsSystemServer(
+                    TAG, "Unexpected exception while checking for wipe", ex);
         }
     }
 
     void reconfigure(SQLiteDatabaseConfiguration configuration) {
         this.mOnlyAllowReadOnlyOperations = false;
-        boolean foreignKeyModeChanged = configuration.foreignKeyConstraintsEnabled != this.mConfiguration.foreignKeyConstraintsEnabled;
+        boolean foreignKeyModeChanged =
+                configuration.foreignKeyConstraintsEnabled
+                        != this.mConfiguration.foreignKeyConstraintsEnabled;
         boolean localeChanged = !configuration.locale.equals(this.mConfiguration.locale);
-        boolean automaticIndexChanged = configuration.automaticIndexEnabled != this.mConfiguration.automaticIndexEnabled;
+        boolean automaticIndexChanged =
+                configuration.automaticIndexEnabled != this.mConfiguration.automaticIndexEnabled;
         boolean busyTimeoutChanged = configuration.busyTimeout != this.mConfiguration.busyTimeout;
         boolean cacheSizeChanged = configuration.cacheSize != this.mConfiguration.cacheSize;
-        boolean caseSensitiveLikeChanged = configuration.caseSensitiveLikeEnabled != this.mConfiguration.caseSensitiveLikeEnabled;
-        boolean customScalarFunctionsChanged = !configuration.customScalarFunctions.equals(this.mConfiguration.customScalarFunctions);
-        boolean customAggregateFunctionsChanged = !configuration.customAggregateFunctions.equals(this.mConfiguration.customAggregateFunctions);
+        boolean caseSensitiveLikeChanged =
+                configuration.caseSensitiveLikeEnabled
+                        != this.mConfiguration.caseSensitiveLikeEnabled;
+        boolean customScalarFunctionsChanged =
+                !configuration.customScalarFunctions.equals(
+                        this.mConfiguration.customScalarFunctions);
+        boolean customAggregateFunctionsChanged =
+                !configuration.customAggregateFunctions.equals(
+                        this.mConfiguration.customAggregateFunctions);
         int oldSize = this.mConfiguration.perConnectionSql.size();
         int newSize = configuration.perConnectionSql.size();
         boolean perConnectionSqlChanged = newSize > oldSize;
@@ -712,11 +837,17 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         if (foreignKeyModeChanged) {
             setForeignKeyModeFromConfiguration();
         }
-        boolean journalModeChanged = !configuration.resolveJournalMode().equalsIgnoreCase(this.mConfiguration.resolveJournalMode());
+        boolean journalModeChanged =
+                !configuration
+                        .resolveJournalMode()
+                        .equalsIgnoreCase(this.mConfiguration.resolveJournalMode());
         if (journalModeChanged) {
             setJournalFromConfiguration();
         }
-        boolean syncModeChanged = !configuration.resolveSyncMode().equalsIgnoreCase(this.mConfiguration.resolveSyncMode());
+        boolean syncModeChanged =
+                !configuration
+                        .resolveSyncMode()
+                        .equalsIgnoreCase(this.mConfiguration.resolveSyncMode());
         if (syncModeChanged) {
             setSyncModeFromConfiguration();
         }
@@ -778,13 +909,16 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     try {
                         outStatementInfo.numParameters = statement.mNumParameters;
                         outStatementInfo.readOnly = statement.mReadOnly;
-                        int columnCount = nativeGetColumnCount(this.mConnectionPtr, statement.mStatementPtr);
+                        int columnCount =
+                                nativeGetColumnCount(this.mConnectionPtr, statement.mStatementPtr);
                         if (columnCount == 0) {
                             outStatementInfo.columnNames = EMPTY_STRING_ARRAY;
                         } else {
                             outStatementInfo.columnNames = new String[columnCount];
                             for (int i = 0; i < columnCount; i++) {
-                                outStatementInfo.columnNames[i] = nativeGetColumnName(this.mConnectionPtr, statement.mStatementPtr, i);
+                                outStatementInfo.columnNames[i] =
+                                        nativeGetColumnName(
+                                                this.mConnectionPtr, statement.mStatementPtr, i);
                             }
                         }
                     } finally {
@@ -797,7 +931,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             }
         } finally {
             if (this.mRecentOperations.endOperationDeferLog(cookie)) {
-                this.mRecentOperations.logOperation(cookie, "window='" + this.mConfiguration.path + "'");
+                this.mRecentOperations.logOperation(
+                        cookie, "window='" + this.mConfiguration.path + "'");
             }
         }
     }
@@ -830,12 +965,14 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             }
         } finally {
             if (this.mRecentOperations.endOperationDeferLog(cookie)) {
-                this.mRecentOperations.logOperation(cookie, "window='" + this.mConfiguration.path + "'");
+                this.mRecentOperations.logOperation(
+                        cookie, "window='" + this.mConfiguration.path + "'");
             }
         }
     }
 
-    public long executeForLong(String sql, Object[] bindArgs, CancellationSignal cancellationSignal) {
+    public long executeForLong(
+            String sql, Object[] bindArgs, CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
@@ -849,7 +986,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     applyBlockGuardPolicy(statement);
                     attachCancellationSignal(cancellationSignal);
                     try {
-                        long ret = nativeExecuteForLong(this.mConnectionPtr, statement.mStatementPtr);
+                        long ret =
+                                nativeExecuteForLong(this.mConnectionPtr, statement.mStatementPtr);
                         this.mRecentOperations.setResult(ret);
                         return ret;
                     } finally {
@@ -864,12 +1002,14 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             }
         } finally {
             if (this.mRecentOperations.endOperationDeferLog(cookie)) {
-                this.mRecentOperations.logOperation(cookie, "window='" + this.mConfiguration.path + "'");
+                this.mRecentOperations.logOperation(
+                        cookie, "window='" + this.mConfiguration.path + "'");
             }
         }
     }
 
-    public String executeForString(String sql, Object[] bindArgs, CancellationSignal cancellationSignal) {
+    public String executeForString(
+            String sql, Object[] bindArgs, CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
@@ -883,7 +1023,9 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     applyBlockGuardPolicy(statement);
                     attachCancellationSignal(cancellationSignal);
                     try {
-                        String ret = nativeExecuteForString(this.mConnectionPtr, statement.mStatementPtr);
+                        String ret =
+                                nativeExecuteForString(
+                                        this.mConnectionPtr, statement.mStatementPtr);
                         this.mRecentOperations.setResult(ret);
                         return ret;
                     } finally {
@@ -898,16 +1040,20 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             }
         } finally {
             if (this.mRecentOperations.endOperationDeferLog(cookie)) {
-                this.mRecentOperations.logOperation(cookie, "window='" + this.mConfiguration.path + "'");
+                this.mRecentOperations.logOperation(
+                        cookie, "window='" + this.mConfiguration.path + "'");
             }
         }
     }
 
-    public ParcelFileDescriptor executeForBlobFileDescriptor(String sql, Object[] bindArgs, CancellationSignal cancellationSignal) {
+    public ParcelFileDescriptor executeForBlobFileDescriptor(
+            String sql, Object[] bindArgs, CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
-        int cookie = this.mRecentOperations.beginOperation("executeForBlobFileDescriptor", sql, bindArgs);
+        int cookie =
+                this.mRecentOperations.beginOperation(
+                        "executeForBlobFileDescriptor", sql, bindArgs);
         try {
             try {
                 PreparedStatement statement = acquirePreparedStatement(sql);
@@ -917,7 +1063,9 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     applyBlockGuardPolicy(statement);
                     attachCancellationSignal(cancellationSignal);
                     try {
-                        int fd = nativeExecuteForBlobFileDescriptor(this.mConnectionPtr, statement.mStatementPtr);
+                        int fd =
+                                nativeExecuteForBlobFileDescriptor(
+                                        this.mConnectionPtr, statement.mStatementPtr);
                         return fd >= 0 ? ParcelFileDescriptor.adoptFd(fd) : null;
                     } finally {
                         detachCancellationSignal(cancellationSignal);
@@ -931,17 +1079,20 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             }
         } finally {
             if (this.mRecentOperations.endOperationDeferLog(cookie)) {
-                this.mRecentOperations.logOperation(cookie, "window='" + this.mConfiguration.path + "'");
+                this.mRecentOperations.logOperation(
+                        cookie, "window='" + this.mConfiguration.path + "'");
             }
         }
     }
 
-    public int executeForChangedRowCount(String sql, Object[] bindArgs, CancellationSignal cancellationSignal) {
+    public int executeForChangedRowCount(
+            String sql, Object[] bindArgs, CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
         int changedRows = 0;
-        int cookie = this.mRecentOperations.beginOperation("executeForChangedRowCount", sql, bindArgs);
+        int cookie =
+                this.mRecentOperations.beginOperation("executeForChangedRowCount", sql, bindArgs);
         try {
             try {
                 PreparedStatement statement = acquirePreparedStatement(sql);
@@ -951,7 +1102,9 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     applyBlockGuardPolicy(statement);
                     attachCancellationSignal(cancellationSignal);
                     try {
-                        changedRows = nativeExecuteForChangedRowCount(this.mConnectionPtr, statement.mStatementPtr);
+                        changedRows =
+                                nativeExecuteForChangedRowCount(
+                                        this.mConnectionPtr, statement.mStatementPtr);
                         return changedRows;
                     } finally {
                         detachCancellationSignal(cancellationSignal);
@@ -965,16 +1118,20 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             }
         } finally {
             if (this.mRecentOperations.endOperationDeferLog(cookie)) {
-                this.mRecentOperations.logOperation(cookie, "window='" + this.mConfiguration.path + "', changedRows=" + changedRows);
+                this.mRecentOperations.logOperation(
+                        cookie,
+                        "window='" + this.mConfiguration.path + "', changedRows=" + changedRows);
             }
         }
     }
 
-    public long executeForLastInsertedRowId(String sql, Object[] bindArgs, CancellationSignal cancellationSignal) {
+    public long executeForLastInsertedRowId(
+            String sql, Object[] bindArgs, CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
-        int cookie = this.mRecentOperations.beginOperation("executeForLastInsertedRowId", sql, bindArgs);
+        int cookie =
+                this.mRecentOperations.beginOperation("executeForLastInsertedRowId", sql, bindArgs);
         try {
             try {
                 PreparedStatement statement = acquirePreparedStatement(sql);
@@ -984,7 +1141,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     applyBlockGuardPolicy(statement);
                     attachCancellationSignal(cancellationSignal);
                     try {
-                        return nativeExecuteForLastInsertedRowId(this.mConnectionPtr, statement.mStatementPtr);
+                        return nativeExecuteForLastInsertedRowId(
+                                this.mConnectionPtr, statement.mStatementPtr);
                     } finally {
                         detachCancellationSignal(cancellationSignal);
                     }
@@ -997,7 +1155,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             }
         } finally {
             if (this.mRecentOperations.endOperationDeferLog(cookie)) {
-                this.mRecentOperations.logOperation(cookie, "window='" + this.mConfiguration.path + "'");
+                this.mRecentOperations.logOperation(
+                        cookie, "window='" + this.mConfiguration.path + "'");
             }
         }
     }
@@ -1007,12 +1166,23 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int executeForCursorWindow(java.lang.String r26, java.lang.Object[] r27, android.database.CursorWindow r28, int r29, int r30, boolean r31, android.os.CancellationSignal r32) {
+    public int executeForCursorWindow(
+            java.lang.String r26,
+            java.lang.Object[] r27,
+            android.database.CursorWindow r28,
+            int r29,
+            int r30,
+            boolean r31,
+            android.os.CancellationSignal r32) {
         /*
             Method dump skipped, instructions count: 503
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.database.sqlite.SQLiteConnection.executeForCursorWindow(java.lang.String, java.lang.Object[], android.database.CursorWindow, int, int, boolean, android.os.CancellationSignal):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.database.sqlite.SQLiteConnection.executeForCursorWindow(java.lang.String,"
+                    + " java.lang.Object[], android.database.CursorWindow, int, int, boolean,"
+                    + " android.os.CancellationSignal):int");
     }
 
     public byte[] setPassword(byte[] password) {
@@ -1036,8 +1206,17 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             try {
                 try {
                     window = new CursorWindow("QueryPlan-" + Thread.currentThread().getId());
-                    statementPtr = nativePrepareStatement(this.mConnectionPtr, "EXPLAIN QUERY PLAN " + sql);
-                    result = nativeExecuteForCursorWindow(this.mConnectionPtr, statementPtr, window.mWindowPtr, 0, 0, true);
+                    statementPtr =
+                            nativePrepareStatement(
+                                    this.mConnectionPtr, "EXPLAIN QUERY PLAN " + sql);
+                    result =
+                            nativeExecuteForCursorWindow(
+                                    this.mConnectionPtr,
+                                    statementPtr,
+                                    window.mWindowPtr,
+                                    0,
+                                    0,
+                                    true);
                 } catch (RuntimeException ex) {
                     Log.e(TAG, "Failed to explain query plan : " + sql + " - " + ex.getMessage());
                     ex.printStackTrace();
@@ -1063,10 +1242,25 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     int order = window.getInt(i, 1);
                     int from = window.getInt(i, 2);
                     String detail = window.getString(i, 3);
-                    sb.append(selectId + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + order + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + from + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + detail + " * ");
+                    sb.append(
+                            selectId
+                                    + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                                    + order
+                                    + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                                    + from
+                                    + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                                    + detail
+                                    + " * ");
                 }
                 String hash = Integer.toHexString((sql + this.mConfiguration.path).hashCode());
-                String log = sb.toString() + "\", sql=\"" + trimSqlForDisplay(sql) + "\", window='" + this.mConfiguration.path + "', hash=" + hash;
+                String log =
+                        sb.toString()
+                                + "\", sql=\""
+                                + trimSqlForDisplay(sql)
+                                + "\", window='"
+                                + this.mConfiguration.path
+                                + "', hash="
+                                + hash;
                 Log.d("SQLiteQueryPlan", log);
                 window.close();
                 if (statementPtr == 0) {
@@ -1097,7 +1291,11 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     Log.e(TAG, "Could not use expert without the key.");
                     return null;
                 }
-                this.mExpertPtr = nativeCreateExpert(this.mConfiguration.path, this.mConfiguration.locale.toString(), key);
+                this.mExpertPtr =
+                        nativeCreateExpert(
+                                this.mConfiguration.path,
+                                this.mConfiguration.locale.toString(),
+                                key);
             }
             if (this.mExpertPtr == 0) {
                 Log.e(TAG, "Could not use expert to analyze. No pointer.");
@@ -1154,7 +1352,9 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             statementPtr = statementPtr2;
         }
         try {
-            statement = obtainPreparedStatement(sql, statementPtr2, numParameters, type, readOnly, seqNum2);
+            statement =
+                    obtainPreparedStatement(
+                            sql, statementPtr2, numParameters, type, readOnly, seqNum2);
             if (!skipCache && isCacheable(type)) {
                 this.mPreparedStatementCache.put(sql, statement);
                 statement.mInCache = true;
@@ -1243,7 +1443,12 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
     private void bindArguments(PreparedStatement statement, Object[] bindArgs) {
         int count = bindArgs != null ? bindArgs.length : 0;
         if (count != statement.mNumParameters) {
-            throw new SQLiteBindOrColumnIndexOutOfRangeException("Expected " + statement.mNumParameters + " bind arguments but " + count + " were provided.");
+            throw new SQLiteBindOrColumnIndexOutOfRangeException(
+                    "Expected "
+                            + statement.mNumParameters
+                            + " bind arguments but "
+                            + count
+                            + " were provided.");
         }
         if (count == 0) {
             return;
@@ -1256,15 +1461,21 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     nativeBindNull(this.mConnectionPtr, statementPtr, i + 1);
                     break;
                 case 1:
-                    nativeBindLong(this.mConnectionPtr, statementPtr, i + 1, ((Number) arg).longValue());
+                    nativeBindLong(
+                            this.mConnectionPtr, statementPtr, i + 1, ((Number) arg).longValue());
                     break;
                 case 2:
-                    nativeBindDouble(this.mConnectionPtr, statementPtr, i + 1, ((Number) arg).doubleValue());
+                    nativeBindDouble(
+                            this.mConnectionPtr, statementPtr, i + 1, ((Number) arg).doubleValue());
                     break;
                 case 3:
                 default:
                     if (arg instanceof Boolean) {
-                        nativeBindLong(this.mConnectionPtr, statementPtr, i + 1, ((Boolean) arg).booleanValue() ? 1L : 0L);
+                        nativeBindLong(
+                                this.mConnectionPtr,
+                                statementPtr,
+                                i + 1,
+                                ((Boolean) arg).booleanValue() ? 1L : 0L);
                         break;
                     } else {
                         nativeBindString(this.mConnectionPtr, statementPtr, i + 1, arg.toString());
@@ -1280,12 +1491,15 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
     void throwIfStatementForbidden(PreparedStatement statement) {
         if (this.mOnlyAllowReadOnlyOperations && !statement.mReadOnly) {
             if (this.mAllowTempTableRetry) {
-                statement.mReadOnly = nativeUpdatesTempOnly(this.mConnectionPtr, statement.mStatementPtr);
+                statement.mReadOnly =
+                        nativeUpdatesTempOnly(this.mConnectionPtr, statement.mStatementPtr);
                 if (statement.mReadOnly) {
                     return;
                 }
             }
-            throw new SQLiteException("Cannot execute this statement because it might modify the database but the connection is read-only.");
+            throw new SQLiteException(
+                    "Cannot execute this statement because it might modify the database but the"
+                            + " connection is read-only.");
         }
     }
 
@@ -1355,8 +1569,10 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                         long pageCount3 = 0;
                         long pageSize3 = 0;
                         try {
-                            pageCount3 = executeForLong("PRAGMA " + name + ".page_count;", null, null);
-                            long pageSize4 = executeForLong("PRAGMA " + name + ".page_size;", null, null);
+                            pageCount3 =
+                                    executeForLong("PRAGMA " + name + ".page_count;", null, null);
+                            long pageSize4 =
+                                    executeForLong("PRAGMA " + name + ".page_size;", null, null);
                             pageSize3 = pageSize4;
                         } catch (SQLiteException e2) {
                         }
@@ -1364,7 +1580,16 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                         if (!path.isEmpty()) {
                             label.append(": ").append(path);
                         }
-                        dbStatsList.add(new SQLiteDebug.DbStats(label.toString(), pageCount3, pageSize3, 0, 0, 0, 0, false));
+                        dbStatsList.add(
+                                new SQLiteDebug.DbStats(
+                                        label.toString(),
+                                        pageCount3,
+                                        pageSize3,
+                                        0,
+                                        0,
+                                        0,
+                                        0,
+                                        false));
                         i++;
                         window3 = window;
                     } catch (Throwable th) {
@@ -1392,18 +1617,40 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
     private SQLiteDebug.DbStats getMainDbStatsUnsafe(int lookaside, long pageCount, long pageSize) {
         String label;
         if (!this.mIsPrimaryConnection) {
-            label = this.mConfiguration.path + " (" + this.mConnectionId + NavigationBarInflaterView.KEY_CODE_END;
+            label =
+                    this.mConfiguration.path
+                            + " ("
+                            + this.mConnectionId
+                            + NavigationBarInflaterView.KEY_CODE_END;
         } else {
             label = this.mConfiguration.path;
         }
-        return new SQLiteDebug.DbStats(label, pageCount, pageSize, lookaside, this.mPreparedStatementCache.hitCount(), this.mPreparedStatementCache.missCount(), this.mPreparedStatementCache.size(), false);
+        return new SQLiteDebug.DbStats(
+                label,
+                pageCount,
+                pageSize,
+                lookaside,
+                this.mPreparedStatementCache.hitCount(),
+                this.mPreparedStatementCache.missCount(),
+                this.mPreparedStatementCache.size(),
+                false);
     }
 
     public String toString() {
-        return "SQLiteConnection: " + this.mConfiguration.path + " (" + this.mConnectionId + NavigationBarInflaterView.KEY_CODE_END;
+        return "SQLiteConnection: "
+                + this.mConfiguration.path
+                + " ("
+                + this.mConnectionId
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
-    private PreparedStatement obtainPreparedStatement(String sql, long statementPtr, int numParameters, int type, boolean readOnly, long seqNum) {
+    private PreparedStatement obtainPreparedStatement(
+            String sql,
+            long statementPtr,
+            int numParameters,
+            int type,
+            boolean readOnly,
+            long seqNum) {
         PreparedStatement statement = this.mPreparedStatementPool;
         if (statement != null) {
             this.mPreparedStatementPool = statement.mPoolNext;
@@ -1447,8 +1694,7 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         public long mStatementPtr;
         public int mType;
 
-        PreparedStatement() {
-        }
+        PreparedStatement() {}
     }
 
     private final class PreparedStatementCache extends LruCache<String, PreparedStatement> {
@@ -1476,12 +1722,17 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
 
         public synchronized long createStatement(String sql) {
             this.mLastSeqNum = this.mDatabaseSeqNum;
-            return SQLiteConnection.nativePrepareStatement(SQLiteConnection.this.mConnectionPtr, sql);
+            return SQLiteConnection.nativePrepareStatement(
+                    SQLiteConnection.this.mConnectionPtr, sql);
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.util.LruCache
-        public void entryRemoved(boolean evicted, String key, PreparedStatement oldValue, PreparedStatement newValue) {
+        public void entryRemoved(
+                boolean evicted,
+                String key,
+                PreparedStatement oldValue,
+                PreparedStatement newValue) {
             oldValue.mInCache = false;
             if (!oldValue.mInUse) {
                 SQLiteConnection.this.finalizePreparedStatement(oldValue);
@@ -1497,7 +1748,20 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     PreparedStatement statement = entry.getValue();
                     if (statement.mInCache) {
                         String sql = entry.getKey();
-                        printer.println("    " + i + ": statementPtr=0x" + Long.toHexString(statement.mStatementPtr) + ", numParameters=" + statement.mNumParameters + ", type=" + statement.mType + ", readOnly=" + statement.mReadOnly + ", sql=\"" + SQLiteConnection.trimSqlForDisplay(sql) + "\"");
+                        printer.println(
+                                "    "
+                                        + i
+                                        + ": statementPtr=0x"
+                                        + Long.toHexString(statement.mStatementPtr)
+                                        + ", numParameters="
+                                        + statement.mNumParameters
+                                        + ", type="
+                                        + statement.mType
+                                        + ", readOnly="
+                                        + statement.mReadOnly
+                                        + ", sql=\""
+                                        + SQLiteConnection.trimSqlForDisplay(sql)
+                                        + "\"");
                     }
                     i++;
                 }
@@ -1520,7 +1784,10 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         private final Operation[] mOperations = new Operation[30];
         private long mResultLong = Long.MIN_VALUE;
 
-        public OperationLog(SQLiteConnectionPool pool, SQLiteConnection connection, SQLiteDatabaseConfiguration configuration) {
+        public OperationLog(
+                SQLiteConnectionPool pool,
+                SQLiteConnection connection,
+                SQLiteDatabaseConfiguration configuration) {
             this.mPool = pool;
             this.mConnection = connection;
             this.mConfiguration = configuration;
@@ -1560,7 +1827,9 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                         operation.mBindArgs.clear();
                     }
                     for (Object arg : bindArgs) {
-                        if (!SQLiteDebug.NoPreloadHolder.DEBUG_ENABLE && arg != null && (arg instanceof byte[])) {
+                        if (!SQLiteDebug.NoPreloadHolder.DEBUG_ENABLE
+                                && arg != null
+                                && (arg instanceof byte[])) {
                             operation.mBindArgs.add(SQLiteConnection.EMPTY_BYTE_ARRAY);
                         } else {
                             operation.mBindArgs.add(arg);
@@ -1570,7 +1839,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                 int i2 = newOperationCookieLocked(index);
                 operation.mCookie = i2;
                 if (Trace.isTagEnabled(1048576L)) {
-                    Trace.asyncTraceBegin(1048576L, operation.getTraceMethodName(), operation.mCookie);
+                    Trace.asyncTraceBegin(
+                            1048576L, operation.getTraceMethodName(), operation.mCookie);
                 }
                 this.mIndex = index;
                 i = operation.mCookie;
@@ -1585,7 +1855,13 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     operation.mException = ex;
                 }
                 if (ex != null && (ex instanceof SQLiteDatabaseCorruptException)) {
-                    Log.d(SQLiteConnection.TAG, "Corruption detected - isPrimary: " + this.mConnection.isPrimaryConnection() + ", address: @" + Integer.toHexString(System.identityHashCode(this.mConnection)));
+                    Log.d(
+                            SQLiteConnection.TAG,
+                            "Corruption detected - isPrimary: "
+                                    + this.mConnection.isPrimaryConnection()
+                                    + ", address: @"
+                                    + Integer.toHexString(
+                                            System.identityHashCode(this.mConnection)));
                 }
             }
         }
@@ -1606,10 +1882,12 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             return endOperationDeferLogLocked;
         }
 
-        public boolean endOperationDeferLog(int cookie, int filledRows, int countedRows, int totalRows) {
+        public boolean endOperationDeferLog(
+                int cookie, int filledRows, int countedRows, int totalRows) {
             boolean endOperationDeferLogLocked;
             synchronized (this.mOperations) {
-                endOperationDeferLogLocked = endOperationDeferLogLocked(cookie, filledRows, countedRows, totalRows);
+                endOperationDeferLogLocked =
+                        endOperationDeferLogLocked(cookie, filledRows, countedRows, totalRows);
             }
             return endOperationDeferLogLocked;
         }
@@ -1628,7 +1906,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             this.mResultString = stringResult;
         }
 
-        private boolean endOperationDeferLogLocked(int cookie, int filledRows, int countedRows, int totalRows) {
+        private boolean endOperationDeferLogLocked(
+                int cookie, int filledRows, int countedRows, int totalRows) {
             Operation operation = getOperationLocked(cookie);
             if (operation == null) {
                 return false;
@@ -1647,7 +1926,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                 operation.mTid = Process.myTid();
                 SQLiteTrace.trace(operation, this.mConfiguration.path);
             }
-            if (!SQLiteDebug.NoPreloadHolder.DEBUG_LOG_SLOW_QUERIES || !SQLiteDebug.shouldLogSlowQuery(operation.mExecutionTime)) {
+            if (!SQLiteDebug.NoPreloadHolder.DEBUG_LOG_SLOW_QUERIES
+                    || !SQLiteDebug.shouldLogSlowQuery(operation.mExecutionTime)) {
                 return false;
             }
             return true;
@@ -1663,7 +1943,10 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                 msg.append(", ").append(detail);
             }
             if (operation.mSql != null) {
-                msg.append(", hash=" + Integer.toHexString((operation.mSql + this.mConfiguration.path).hashCode()));
+                msg.append(
+                        ", hash="
+                                + Integer.toHexString(
+                                        (operation.mSql + this.mConfiguration.path).hashCode()));
             }
             Log.d(SQLiteConnection.TAG, msg.toString());
             if (operation.mSql != null && operation.mException == null) {
@@ -1674,7 +1957,11 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     }
                     if (SQLiteDebug.shouldLogIndexRecommendation()) {
                         try {
-                            SQLiteExpertModule expertModule = new SQLiteExpertModule(this.mConnection, operation.mSql, this.mConfiguration.path);
+                            SQLiteExpertModule expertModule =
+                                    new SQLiteExpertModule(
+                                            this.mConnection,
+                                            operation.mSql,
+                                            this.mConfiguration.path);
                             expertModule.start();
                         } catch (Exception e) {
                         }
@@ -1772,13 +2059,21 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             if (this.mFinished) {
                 msg.append(" took ").append(this.mExecutionTime).append("ms");
             } else {
-                msg.append(" started ").append(System.currentTimeMillis() - this.mStartWallTime).append("ms ago");
+                msg.append(" started ")
+                        .append(System.currentTimeMillis() - this.mStartWallTime)
+                        .append("ms ago");
             }
             msg.append(" - ").append(getStatus());
             if (this.mSql != null) {
-                msg.append(", sql=\"").append(SQLiteConnection.trimSqlForDisplay(this.mSql)).append("\"");
+                msg.append(", sql=\"")
+                        .append(SQLiteConnection.trimSqlForDisplay(this.mSql))
+                        .append("\"");
             }
-            boolean dumpDetails = allowDetailedLog && SQLiteDebug.NoPreloadHolder.DEBUG_LOG_DETAILED && this.mBindArgs != null && this.mBindArgs.size() != 0;
+            boolean dumpDetails =
+                    allowDetailedLog
+                            && SQLiteDebug.NoPreloadHolder.DEBUG_LOG_DETAILED
+                            && this.mBindArgs != null
+                            && this.mBindArgs.size() != 0;
             if (dumpDetails) {
                 msg.append(", bindArgs=[");
                 int count = this.mBindArgs.size();
@@ -1873,7 +2168,15 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         public void run() {
             String result = this.mConnection.analyzeSql(this.mSql);
             if (result != null) {
-                String log = "newIndex=\"" + result + "\", sql=\"" + SQLiteConnection.trimSqlForDisplay(this.mSql) + "\", window='" + this.mPath + "', hash=" + Integer.toHexString((this.mSql + this.mPath).hashCode());
+                String log =
+                        "newIndex=\""
+                                + result
+                                + "\", sql=\""
+                                + SQLiteConnection.trimSqlForDisplay(this.mSql)
+                                + "\", window='"
+                                + this.mPath
+                                + "', hash="
+                                + Integer.toHexString((this.mSql + this.mPath).hashCode());
                 Log.d(TAG, log);
             }
         }

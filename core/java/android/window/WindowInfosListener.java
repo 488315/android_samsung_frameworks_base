@@ -4,6 +4,7 @@ import android.graphics.Matrix;
 import android.util.Pair;
 import android.util.Size;
 import android.view.InputWindowHandle;
+
 import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes4.dex */
@@ -18,10 +19,13 @@ public abstract class WindowInfosListener {
 
     private static native void nativeUnregister(long j);
 
-    public abstract void onWindowInfosChanged(InputWindowHandle[] inputWindowHandleArr, DisplayInfo[] displayInfoArr);
+    public abstract void onWindowInfosChanged(
+            InputWindowHandle[] inputWindowHandleArr, DisplayInfo[] displayInfoArr);
 
     public WindowInfosListener() {
-        NativeAllocationRegistry registry = NativeAllocationRegistry.createMalloced(WindowInfosListener.class.getClassLoader(), nativeGetFinalizer());
+        NativeAllocationRegistry registry =
+                NativeAllocationRegistry.createMalloced(
+                        WindowInfosListener.class.getClassLoader(), nativeGetFinalizer());
         this.mNativeListener = nativeCreate(this);
         registry.registerNativeAllocation(this, this.mNativeListener);
     }
@@ -46,7 +50,12 @@ public abstract class WindowInfosListener {
         }
 
         public String toString() {
-            return "displayId=" + this.mDisplayId + ", mLogicalSize=" + this.mLogicalSize + ", mTransform=" + this.mTransform;
+            return "displayId="
+                    + this.mDisplayId
+                    + ", mLogicalSize="
+                    + this.mLogicalSize
+                    + ", mTransform="
+                    + this.mTransform;
         }
     }
 }

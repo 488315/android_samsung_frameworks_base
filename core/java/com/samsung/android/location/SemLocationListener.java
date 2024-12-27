@@ -4,6 +4,5 @@ import android.location.Location;
 
 /* loaded from: classes6.dex */
 public interface SemLocationListener {
-    default void onLocationChanged(Location location) {
-    }
+    default void onLocationChanged(Location location) {}
 }

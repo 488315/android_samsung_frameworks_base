@@ -1,6 +1,5 @@
 package com.android.server.hdmi;
 
-import com.android.server.hdmi.HdmiControlService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -47,17 +46,23 @@ public final class ArcInitiationActionFromAvr extends HdmiCecFeatureAction {
         ((HdmiCecLocalDeviceAudioSystem) this.mSource).setArcStatus(true);
         this.mState = 1;
         addTimer(1, 1000);
-        this.mService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), 0, 192), new HdmiControlService.SendMessageCallback() { // from class: com.android.server.hdmi.ArcInitiationActionFromAvr$$ExternalSyntheticLambda0
-            @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
-            public final void onSendCompleted(int i) {
-                ArcInitiationActionFromAvr arcInitiationActionFromAvr = ArcInitiationActionFromAvr.this;
-                if (i == 0) {
-                    arcInitiationActionFromAvr.getClass();
-                } else {
-                    ((HdmiCecLocalDeviceAudioSystem) arcInitiationActionFromAvr.mSource).setArcStatus(false);
-                    arcInitiationActionFromAvr.finish(true);
-                }
-            }
-        });
+        this.mService.sendCecCommand(
+                HdmiCecMessage.build(getSourceAddress(), 0, 192),
+                new HdmiControlService
+                        .SendMessageCallback() { // from class:
+                                                 // com.android.server.hdmi.ArcInitiationActionFromAvr$$ExternalSyntheticLambda0
+                    @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
+                    public final void onSendCompleted(int i) {
+                        ArcInitiationActionFromAvr arcInitiationActionFromAvr =
+                                ArcInitiationActionFromAvr.this;
+                        if (i == 0) {
+                            arcInitiationActionFromAvr.getClass();
+                        } else {
+                            ((HdmiCecLocalDeviceAudioSystem) arcInitiationActionFromAvr.mSource)
+                                    .setArcStatus(false);
+                            arcInitiationActionFromAvr.finish(true);
+                        }
+                    }
+                });
     }
 }

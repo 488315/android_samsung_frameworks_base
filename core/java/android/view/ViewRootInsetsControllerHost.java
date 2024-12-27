@@ -7,12 +7,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
-import android.view.InsetsController;
-import android.view.SurfaceControl;
-import android.view.SyncRtSurfaceTransactionApplier;
-import android.view.ViewTreeObserver;
-import android.view.WindowInsetsAnimation;
 import android.view.inputmethod.InputMethodManager;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -40,14 +36,24 @@ public class ViewRootInsetsControllerHost implements InsetsController.Host {
         if (this.mViewRoot.mView == null) {
             return;
         }
-        this.mViewRoot.mView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: android.view.ViewRootInsetsControllerHost.1
-            @Override // android.view.ViewTreeObserver.OnPreDrawListener
-            public boolean onPreDraw() {
-                ViewRootInsetsControllerHost.this.mViewRoot.mView.getViewTreeObserver().removeOnPreDrawListener(this);
-                r.run();
-                return true;
-            }
-        });
+        this.mViewRoot
+                .mView
+                .getViewTreeObserver()
+                .addOnPreDrawListener(
+                        new ViewTreeObserver
+                                .OnPreDrawListener() { // from class:
+                                                       // android.view.ViewRootInsetsControllerHost.1
+                            @Override // android.view.ViewTreeObserver.OnPreDrawListener
+                            public boolean onPreDraw() {
+                                ViewRootInsetsControllerHost.this
+                                        .mViewRoot
+                                        .mView
+                                        .getViewTreeObserver()
+                                        .removeOnPreDrawListener(this);
+                                r.run();
+                                return true;
+                            }
+                        });
         this.mViewRoot.mView.invalidate();
     }
 
@@ -60,7 +66,8 @@ public class ViewRootInsetsControllerHost implements InsetsController.Host {
     }
 
     @Override // android.view.InsetsController.Host
-    public WindowInsetsAnimation.Bounds dispatchWindowInsetsAnimationStart(WindowInsetsAnimation animation, WindowInsetsAnimation.Bounds bounds) {
+    public WindowInsetsAnimation.Bounds dispatchWindowInsetsAnimationStart(
+            WindowInsetsAnimation animation, WindowInsetsAnimation.Bounds bounds) {
         if (this.mViewRoot.mView == null) {
             return null;
         }
@@ -71,16 +78,20 @@ public class ViewRootInsetsControllerHost implements InsetsController.Host {
     }
 
     @Override // android.view.InsetsController.Host
-    public WindowInsets dispatchWindowInsetsAnimationProgress(WindowInsets insets, List<WindowInsetsAnimation> runningAnimations) {
+    public WindowInsets dispatchWindowInsetsAnimationProgress(
+            WindowInsets insets, List<WindowInsetsAnimation> runningAnimations) {
         if (this.mViewRoot.mView == null) {
             return null;
         }
         if (InsetsController.DEBUG) {
             for (WindowInsetsAnimation anim : runningAnimations) {
-                Log.d("VRInsetsControllerHost", "windowInsetsAnimation progress: " + anim.getInterpolatedFraction());
+                Log.d(
+                        "VRInsetsControllerHost",
+                        "windowInsetsAnimation progress: " + anim.getInterpolatedFraction());
             }
         }
-        return this.mViewRoot.mView.dispatchWindowInsetsAnimationProgress(insets, runningAnimations);
+        return this.mViewRoot.mView.dispatchWindowInsetsAnimationProgress(
+                insets, runningAnimations);
     }
 
     @Override // android.view.InsetsController.Host
@@ -117,15 +128,18 @@ public class ViewRootInsetsControllerHost implements InsetsController.Host {
     }
 
     @Override // android.view.InsetsController.Host
-    public void updateCompatSysUiVisibility(int visibleTypes, int requestedVisibleTypes, int controllableTypes) {
-        this.mViewRoot.updateCompatSysUiVisibility(visibleTypes, requestedVisibleTypes, controllableTypes);
+    public void updateCompatSysUiVisibility(
+            int visibleTypes, int requestedVisibleTypes, int controllableTypes) {
+        this.mViewRoot.updateCompatSysUiVisibility(
+                visibleTypes, requestedVisibleTypes, controllableTypes);
     }
 
     @Override // android.view.InsetsController.Host
     public void updateRequestedVisibleTypes(int types) {
         try {
             if (this.mViewRoot.mAdded) {
-                this.mViewRoot.mWindowSession.updateRequestedVisibleTypes(this.mViewRoot.mWindow, types);
+                this.mViewRoot.mWindowSession.updateRequestedVisibleTypes(
+                        this.mViewRoot.mWindow, types);
             }
         } catch (RemoteException e) {
             Log.e("VRInsetsControllerHost", "Failed to call insetsModified", e);
@@ -173,12 +187,15 @@ public class ViewRootInsetsControllerHost implements InsetsController.Host {
     @Override // android.view.InsetsController.Host
     public void releaseSurfaceControlFromRt(final SurfaceControl surfaceControl) {
         if (this.mViewRoot.mView != null && this.mViewRoot.mView.isHardwareAccelerated()) {
-            this.mViewRoot.registerRtFrameCallback(new HardwareRenderer.FrameDrawingCallback() { // from class: android.view.ViewRootInsetsControllerHost$$ExternalSyntheticLambda0
-                @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
-                public final void onFrameDraw(long j) {
-                    SurfaceControl.this.release();
-                }
-            });
+            this.mViewRoot.registerRtFrameCallback(
+                    new HardwareRenderer
+                            .FrameDrawingCallback() { // from class:
+                                                      // android.view.ViewRootInsetsControllerHost$$ExternalSyntheticLambda0
+                        @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
+                        public final void onFrameDraw(long j) {
+                            SurfaceControl.this.release();
+                        }
+                    });
             this.mViewRoot.mView.invalidate();
         } else {
             surfaceControl.release();
@@ -187,7 +204,8 @@ public class ViewRootInsetsControllerHost implements InsetsController.Host {
 
     @Override // android.view.InsetsController.Host
     public InputMethodManager getInputMethodManager() {
-        return (InputMethodManager) this.mViewRoot.mContext.getSystemService(InputMethodManager.class);
+        return (InputMethodManager)
+                this.mViewRoot.mContext.getSystemService(InputMethodManager.class);
     }
 
     @Override // android.view.InsetsController.Host

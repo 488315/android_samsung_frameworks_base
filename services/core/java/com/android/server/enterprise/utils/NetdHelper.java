@@ -1,6 +1,7 @@
 package com.android.server.enterprise.utils;
 
 import com.android.server.devicepolicy.AbUpdateInstaller$$ExternalSyntheticOutline0;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +46,9 @@ public abstract class NetdHelper {
         if (cmdNumber.intValue() == CMD_INVALID) {
             return null;
         }
-        return str.replace(CMD_PATH, "").replace((CharSequence) allowedCommands.get(cmdNumber), "").trim().split(PARAM_DELIMITER);
+        return str.replace(CMD_PATH, "")
+                .replace((CharSequence) allowedCommands.get(cmdNumber), "")
+                .trim()
+                .split(PARAM_DELIMITER);
     }
 }

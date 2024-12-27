@@ -2,6 +2,7 @@ package com.samsung.android.globalactions.util;
 
 import android.content.Context;
 import android.widget.Toast;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes6.dex */

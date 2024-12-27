@@ -11,12 +11,13 @@ import android.os.RemoteException;
 public interface ILoudnessCodecUpdatesDispatcher extends IInterface {
     public static final String DESCRIPTOR = "android.media.ILoudnessCodecUpdatesDispatcher";
 
-    void dispatchLoudnessCodecParameterChange(int i, PersistableBundle persistableBundle) throws RemoteException;
+    void dispatchLoudnessCodecParameterChange(int i, PersistableBundle persistableBundle)
+            throws RemoteException;
 
     public static class Default implements ILoudnessCodecUpdatesDispatcher {
         @Override // android.media.ILoudnessCodecUpdatesDispatcher
-        public void dispatchLoudnessCodecParameterChange(int sessionId, PersistableBundle params) throws RemoteException {
-        }
+        public void dispatchLoudnessCodecParameterChange(int sessionId, PersistableBundle params)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +25,7 @@ public interface ILoudnessCodecUpdatesDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILoudnessCodecUpdatesDispatcher {
+    public abstract static class Stub extends Binder implements ILoudnessCodecUpdatesDispatcher {
         static final int TRANSACTION_dispatchLoudnessCodecParameterChange = 1;
 
         public Stub() {
@@ -62,7 +63,8 @@ public interface ILoudnessCodecUpdatesDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ILoudnessCodecUpdatesDispatcher.DESCRIPTOR);
             }
@@ -73,7 +75,8 @@ public interface ILoudnessCodecUpdatesDispatcher extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    PersistableBundle _arg1 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg1 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     dispatchLoudnessCodecParameterChange(_arg0, _arg1);
                     return true;
@@ -99,7 +102,8 @@ public interface ILoudnessCodecUpdatesDispatcher extends IInterface {
             }
 
             @Override // android.media.ILoudnessCodecUpdatesDispatcher
-            public void dispatchLoudnessCodecParameterChange(int sessionId, PersistableBundle params) throws RemoteException {
+            public void dispatchLoudnessCodecParameterChange(
+                    int sessionId, PersistableBundle params) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ILoudnessCodecUpdatesDispatcher.DESCRIPTOR);

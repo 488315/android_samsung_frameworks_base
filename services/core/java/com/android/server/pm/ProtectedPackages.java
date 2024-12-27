@@ -3,6 +3,7 @@ package com.android.server.pm;
 import android.R;
 import android.content.Context;
 import android.util.SparseArray;
+
 import java.util.Set;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -15,7 +16,8 @@ public final class ProtectedPackages {
     public SparseArray mProfileOwnerPackages;
 
     public ProtectedPackages(Context context) {
-        this.mDeviceProvisioningPackage = context.getResources().getString(R.string.display_manager_built_in_display_name);
+        this.mDeviceProvisioningPackage =
+                context.getResources().getString(R.string.display_manager_built_in_display_name);
     }
 
     public final synchronized String getDeviceOwnerOrProfileOwnerPackage(int i) {
@@ -60,9 +62,9 @@ public final class ProtectedPackages {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:21:0x002a, code lost:
-    
-        if (r4 != false) goto L27;
-     */
+
+       if (r4 != false) goto L27;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -119,6 +121,9 @@ public final class ProtectedPackages {
             monitor-exit(r3)
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.ProtectedPackages.isProtectedPackage(int, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.ProtectedPackages.isProtectedPackage(int,"
+                    + " java.lang.String):boolean");
     }
 }

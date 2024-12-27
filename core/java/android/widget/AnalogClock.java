@@ -18,10 +18,10 @@ import android.view.View;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.RemoteViews;
-import android.widget.TextClock;
+
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
+
 import java.time.Clock;
 import java.time.DateTimeException;
 import java.time.Duration;
@@ -60,7 +60,8 @@ public class AnalogClock extends View {
     private ZoneId mTimeZone;
     private boolean mVisible;
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<AnalogClock> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<AnalogClock> {
         private int mDialTintBlendModeId;
         private int mDialTintListId;
         private int mHourHandTintBlendModeId;
@@ -78,9 +79,11 @@ public class AnalogClock extends View {
             this.mDialTintListId = propertyMapper.mapObject("dialTintList", 5);
             this.mHourHandTintBlendModeId = propertyMapper.mapObject("hourHandTintBlendMode", 8);
             this.mHourHandTintListId = propertyMapper.mapObject("hourHandTintList", 7);
-            this.mMinuteHandTintBlendModeId = propertyMapper.mapObject("minuteHandTintBlendMode", 10);
+            this.mMinuteHandTintBlendModeId =
+                    propertyMapper.mapObject("minuteHandTintBlendMode", 10);
             this.mMinuteHandTintListId = propertyMapper.mapObject("minuteHandTintList", 9);
-            this.mSecondHandTintBlendModeId = propertyMapper.mapObject("secondHandTintBlendMode", 12);
+            this.mSecondHandTintBlendModeId =
+                    propertyMapper.mapObject("secondHandTintBlendMode", 12);
             this.mSecondHandTintListId = propertyMapper.mapObject("secondHandTintList", 11);
             this.mTimeZoneId = propertyMapper.mapObject("timeZone", 16843724);
             this.mPropertiesMapped = true;
@@ -93,11 +96,14 @@ public class AnalogClock extends View {
             }
             propertyReader.readObject(this.mDialTintBlendModeId, node.getDialTintBlendMode());
             propertyReader.readObject(this.mDialTintListId, node.getDialTintList());
-            propertyReader.readObject(this.mHourHandTintBlendModeId, node.getHourHandTintBlendMode());
+            propertyReader.readObject(
+                    this.mHourHandTintBlendModeId, node.getHourHandTintBlendMode());
             propertyReader.readObject(this.mHourHandTintListId, node.getHourHandTintList());
-            propertyReader.readObject(this.mMinuteHandTintBlendModeId, node.getMinuteHandTintBlendMode());
+            propertyReader.readObject(
+                    this.mMinuteHandTintBlendModeId, node.getMinuteHandTintBlendMode());
             propertyReader.readObject(this.mMinuteHandTintListId, node.getMinuteHandTintList());
-            propertyReader.readObject(this.mSecondHandTintBlendModeId, node.getSecondHandTintBlendMode());
+            propertyReader.readObject(
+                    this.mSecondHandTintBlendModeId, node.getSecondHandTintBlendMode());
             propertyReader.readObject(this.mSecondHandTintListId, node.getSecondHandTintList());
             propertyReader.readObject(this.mTimeZoneId, node.getTimeZone());
         }
@@ -121,52 +127,64 @@ public class AnalogClock extends View {
         this.mMinuteHandTintInfo = new TintInfo();
         this.mSecondHandTintInfo = new TintInfo();
         this.mDialTintInfo = new TintInfo();
-        this.mIntentReceiver = new BroadcastReceiver() { // from class: android.widget.AnalogClock.1
-            @Override // android.content.BroadcastReceiver
-            public void onReceive(Context context2, Intent intent) {
-                if (Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) {
-                    AnalogClock.this.createClock();
-                }
-                AnalogClock.this.mTick.run();
-            }
-        };
-        this.mTick = new Runnable() { // from class: android.widget.AnalogClock.2
-            @Override // java.lang.Runnable
-            public void run() {
-                long millisUntilNextTick;
-                AnalogClock.this.removeCallbacks(this);
-                if (!AnalogClock.this.mVisible) {
-                    return;
-                }
-                Instant now = AnalogClock.this.now();
-                ZonedDateTime zonedDateTime = now.atZone(AnalogClock.this.mClock.getZone());
-                LocalTime localTime = zonedDateTime.toLocalTime();
-                if (AnalogClock.this.mSecondHand == null || AnalogClock.this.mSecondsHandFps <= 0) {
-                    Instant startOfNextMinute = zonedDateTime.plusMinutes(1L).withSecond(0).toInstant();
-                    long millisUntilNextTick2 = Duration.between(now, startOfNextMinute).toMillis();
-                    if (millisUntilNextTick2 > 0) {
-                        millisUntilNextTick = millisUntilNextTick2;
-                    } else {
-                        millisUntilNextTick = Duration.ofMinutes(1L).toMillis();
+        this.mIntentReceiver =
+                new BroadcastReceiver() { // from class: android.widget.AnalogClock.1
+                    @Override // android.content.BroadcastReceiver
+                    public void onReceive(Context context2, Intent intent) {
+                        if (Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) {
+                            AnalogClock.this.createClock();
+                        }
+                        AnalogClock.this.mTick.run();
                     }
-                } else {
-                    long millisOfSecond = Duration.ofNanos(localTime.getNano()).toMillis();
-                    double millisPerTick = 1000.0d / AnalogClock.this.mSecondsHandFps;
-                    long millisPastLastTick = Math.round(millisOfSecond % millisPerTick);
-                    millisUntilNextTick = Math.round(millisPerTick - millisPastLastTick);
-                    if (millisUntilNextTick <= 0) {
-                        millisUntilNextTick = Math.round(millisPerTick);
+                };
+        this.mTick =
+                new Runnable() { // from class: android.widget.AnalogClock.2
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        long millisUntilNextTick;
+                        AnalogClock.this.removeCallbacks(this);
+                        if (!AnalogClock.this.mVisible) {
+                            return;
+                        }
+                        Instant now = AnalogClock.this.now();
+                        ZonedDateTime zonedDateTime = now.atZone(AnalogClock.this.mClock.getZone());
+                        LocalTime localTime = zonedDateTime.toLocalTime();
+                        if (AnalogClock.this.mSecondHand == null
+                                || AnalogClock.this.mSecondsHandFps <= 0) {
+                            Instant startOfNextMinute =
+                                    zonedDateTime.plusMinutes(1L).withSecond(0).toInstant();
+                            long millisUntilNextTick2 =
+                                    Duration.between(now, startOfNextMinute).toMillis();
+                            if (millisUntilNextTick2 > 0) {
+                                millisUntilNextTick = millisUntilNextTick2;
+                            } else {
+                                millisUntilNextTick = Duration.ofMinutes(1L).toMillis();
+                            }
+                        } else {
+                            long millisOfSecond = Duration.ofNanos(localTime.getNano()).toMillis();
+                            double millisPerTick = 1000.0d / AnalogClock.this.mSecondsHandFps;
+                            long millisPastLastTick = Math.round(millisOfSecond % millisPerTick);
+                            millisUntilNextTick = Math.round(millisPerTick - millisPastLastTick);
+                            if (millisUntilNextTick <= 0) {
+                                millisUntilNextTick = Math.round(millisPerTick);
+                            }
+                        }
+                        AnalogClock.this.postDelayed(this, millisUntilNextTick);
+                        AnalogClock.this.onTimeChanged(localTime, now.toEpochMilli());
+                        AnalogClock.this.invalidate();
                     }
-                }
-                AnalogClock.this.postDelayed(this, millisUntilNextTick);
-                AnalogClock.this.onTimeChanged(localTime, now.toEpochMilli());
-                AnalogClock.this.invalidate();
-            }
-        };
+                };
         this.mClockEventDelegate = new TextClock.ClockEventDelegate(context);
-        this.mSecondsHandFps = AppGlobals.getIntCoreSetting(WidgetFlags.KEY_ANALOG_CLOCK_SECONDS_HAND_FPS, context.getResources().getInteger(R.integer.config_defaultAnalogClockSecondsHandFps));
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AnalogClock, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.AnalogClock, attrs, a, defStyleAttr, defStyleRes);
+        this.mSecondsHandFps =
+                AppGlobals.getIntCoreSetting(
+                        WidgetFlags.KEY_ANALOG_CLOCK_SECONDS_HAND_FPS,
+                        context.getResources()
+                                .getInteger(R.integer.config_defaultAnalogClockSecondsHandFps));
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.AnalogClock, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.AnalogClock, attrs, a, defStyleAttr, defStyleRes);
         this.mDial = a.getDrawable(0);
         if (this.mDial == null) {
             this.mDial = context.getDrawable(R.drawable.clock_dial);
@@ -449,7 +467,9 @@ public class AnalogClock extends View {
             vScale = heightSize / this.mDialHeight;
         }
         float scale = Math.min(hScale, vScale);
-        setMeasuredDimension(resolveSizeAndState((int) (this.mDialWidth * scale), widthMeasureSpec, 0), resolveSizeAndState((int) (this.mDialHeight * scale), heightMeasureSpec, 0));
+        setMeasuredDimension(
+                resolveSizeAndState((int) (this.mDialWidth * scale), widthMeasureSpec, 0),
+                resolveSizeAndState((int) (this.mDialHeight * scale), heightMeasureSpec, 0));
     }
 
     @Override // android.view.View
@@ -544,7 +564,8 @@ public class AnalogClock extends View {
         this.mMinutes = localTime.getMinute() + (this.mSeconds / 60.0f);
         this.mHour = localTime.getHour() + (this.mMinutes / 60.0f);
         this.mChanged = true;
-        if (((int) previousHour) != ((int) this.mHour) || ((int) previousMinutes) != ((int) this.mMinutes)) {
+        if (((int) previousHour) != ((int) this.mHour)
+                || ((int) previousMinutes) != ((int) this.mMinutes)) {
             updateContentDescription(nowMillis);
         }
     }
@@ -560,7 +581,15 @@ public class AnalogClock extends View {
     }
 
     private void updateContentDescription(long timeMillis) {
-        String contentDescription = DateUtils.formatDateRange(this.mContext, new Formatter(new StringBuilder(50), Locale.getDefault()), timeMillis, timeMillis, 129, getTimeZone()).toString();
+        String contentDescription =
+                DateUtils.formatDateRange(
+                                this.mContext,
+                                new Formatter(new StringBuilder(50), Locale.getDefault()),
+                                timeMillis,
+                                timeMillis,
+                                129,
+                                getTimeZone())
+                        .toString();
         setContentDescription(contentDescription);
     }
 
@@ -582,8 +611,7 @@ public class AnalogClock extends View {
         BlendMode mTintBlendMode;
         ColorStateList mTintList;
 
-        private TintInfo() {
-        }
+        private TintInfo() {}
 
         Drawable apply(Drawable drawable) {
             if (drawable == null) {

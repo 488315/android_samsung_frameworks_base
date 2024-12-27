@@ -6,7 +6,9 @@ import android.os.Parcelable;
 import android.util.ArraySet;
 import android.util.NtpTrustedTime;
 import android.util.Printer;
+
 import com.android.internal.util.Parcelling;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -61,8 +63,7 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
     public static final int DOCUMENT_LAUNCH_NEVER = 3;
     public static final int DOCUMENT_LAUNCH_NONE = 0;
 
-    @Deprecated
-    public static final int FLAG_ALLOW_EMBEDDED = Integer.MIN_VALUE;
+    @Deprecated public static final int FLAG_ALLOW_EMBEDDED = Integer.MIN_VALUE;
     public static final int FLAG_ALLOW_TASK_REPARENTING = 64;
     public static final int FLAG_ALLOW_UNTRUSTED_ACTIVITY_EMBEDDING = 268435456;
     public static final int FLAG_ALWAYS_FOCUSABLE = 262144;
@@ -107,11 +108,13 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
     public static final long OVERRIDE_ANY_ORIENTATION = 265464455;
     public static final long OVERRIDE_ANY_ORIENTATION_TO_USER = 310816437;
     public static final long OVERRIDE_CAMERA_COMPAT_DISABLE_FORCE_ROTATION = 263959004;
-    public static final long OVERRIDE_CAMERA_COMPAT_DISABLE_FREEFORM_WINDOWING_TREATMENT = 314961188;
+    public static final long OVERRIDE_CAMERA_COMPAT_DISABLE_FREEFORM_WINDOWING_TREATMENT =
+            314961188;
     public static final long OVERRIDE_CAMERA_COMPAT_DISABLE_REFRESH = 264304459;
     public static final long OVERRIDE_CAMERA_COMPAT_ENABLE_REFRESH_VIA_PAUSE = 264301586;
     public static final long OVERRIDE_ENABLE_COMPAT_FAKE_FOCUS = 263259275;
-    public static final long OVERRIDE_ENABLE_COMPAT_IGNORE_ORIENTATION_REQUEST_WHEN_LOOP_DETECTED = 273509367;
+    public static final long OVERRIDE_ENABLE_COMPAT_IGNORE_ORIENTATION_REQUEST_WHEN_LOOP_DETECTED =
+            273509367;
     public static final long OVERRIDE_ENABLE_COMPAT_IGNORE_REQUESTED_ORIENTATION = 254631730;
     public static final long OVERRIDE_ENABLE_INSETS_DECOUPLED_CONFIGURATION = 327313645;
     public static final long OVERRIDE_LANDSCAPE_ORIENTATION_TO_REVERSE_LANDSCAPE = 266124927;
@@ -201,45 +204,46 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
     public int transientBarShowingDelayMillis;
     public int uiOptions;
     public WindowLayout windowLayout;
-    private static final Parcelling.BuiltIn.ForStringSet sForStringSet = (Parcelling.BuiltIn.ForStringSet) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForStringSet.class);
-    public static int[] CONFIG_NATIVE_BITS = {2, 1, 4, 8, 16, 32, 64, 128, 2048, 4096, 512, 8192, 256, 16384, 65536, 131072, 131072, 32768, 262144, 524288, 2097152, 1048576};
-    public static final Parcelable.Creator<ActivityInfo> CREATOR = new Parcelable.Creator<ActivityInfo>() { // from class: android.content.pm.ActivityInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityInfo createFromParcel(Parcel source) {
-            return new ActivityInfo(source);
-        }
-
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityInfo[] newArray(int size) {
-            return new ActivityInfo[size];
-        }
+    private static final Parcelling.BuiltIn.ForStringSet sForStringSet =
+            (Parcelling.BuiltIn.ForStringSet)
+                    Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForStringSet.class);
+    public static int[] CONFIG_NATIVE_BITS = {
+        2, 1, 4, 8, 16, 32, 64, 128, 2048, 4096, 512, 8192, 256, 16384, 65536, 131072, 131072,
+        32768, 262144, 524288, 2097152, 1048576
     };
+    public static final Parcelable.Creator<ActivityInfo> CREATOR =
+            new Parcelable.Creator<
+                    ActivityInfo>() { // from class: android.content.pm.ActivityInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityInfo createFromParcel(Parcel source) {
+                    return new ActivityInfo(source);
+                }
+
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityInfo[] newArray(int size) {
+                    return new ActivityInfo[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ColorMode {
-    }
+    public @interface ColorMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Config {
-    }
+    public @interface Config {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LaunchMode {
-    }
+    public @interface LaunchMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RequiredContentUriPermission {
-    }
+    public @interface RequiredContentUriPermission {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScreenOrientation {
-    }
+    public @interface ScreenOrientation {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SizeChangesSupportMode {
-    }
+    public @interface SizeChangesSupportMode {}
 
     public static String launchModeToString(int launchMode) {
         switch (launchMode) {
@@ -439,7 +443,10 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
     }
 
     public static boolean isFixedOrientation(int orientation) {
-        return orientation == 14 || orientation == 5 || isFixedOrientationLandscape(orientation) || isFixedOrientationPortrait(orientation);
+        return orientation == 14
+                || orientation == 5
+                || isFixedOrientationLandscape(orientation)
+                || isFixedOrientationPortrait(orientation);
     }
 
     boolean isFixedOrientationLandscape() {
@@ -491,11 +498,13 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
     }
 
     public boolean neverSandboxDisplayApis(ConstrainDisplayApisConfig constrainDisplayApisConfig) {
-        return isChangeEnabled(NEVER_SANDBOX_DISPLAY_APIS) || constrainDisplayApisConfig.getNeverConstrainDisplayApis(this.applicationInfo);
+        return isChangeEnabled(NEVER_SANDBOX_DISPLAY_APIS)
+                || constrainDisplayApisConfig.getNeverConstrainDisplayApis(this.applicationInfo);
     }
 
     public boolean alwaysSandboxDisplayApis(ConstrainDisplayApisConfig constrainDisplayApisConfig) {
-        return isChangeEnabled(ALWAYS_SANDBOX_DISPLAY_APIS) || constrainDisplayApisConfig.getAlwaysConstrainDisplayApis(this.applicationInfo);
+        return isChangeEnabled(ALWAYS_SANDBOX_DISPLAY_APIS)
+                || constrainDisplayApisConfig.getAlwaysConstrainDisplayApis(this.applicationInfo);
     }
 
     public void setMaxAspectRatio(float maxAspectRatio) {
@@ -515,7 +524,9 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
     }
 
     public Set<String> getKnownActivityEmbeddingCerts() {
-        return this.mKnownActivityEmbeddingCerts == null ? Collections.emptySet() : this.mKnownActivityEmbeddingCerts;
+        return this.mKnownActivityEmbeddingCerts == null
+                ? Collections.emptySet()
+                : this.mKnownActivityEmbeddingCerts;
     }
 
     public void setKnownActivityEmbeddingCerts(Set<String> knownActivityEmbeddingCerts) {
@@ -534,7 +545,13 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
     }
 
     public static boolean isResizeableMode(int mode) {
-        return mode == 2 || mode == 4 || (1048576 & mode) != 0 || mode == 6 || mode == 5 || mode == 7 || mode == 1;
+        return mode == 2
+                || mode == 4
+                || (1048576 & mode) != 0
+                || mode == 6
+                || mode == 5
+                || mode == 7
+                || mode == 1;
     }
 
     public static boolean isPreserveOrientationMode(int mode) {
@@ -609,22 +626,59 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
             pw.println(prefix + "permission=" + this.permission);
         }
         if ((dumpFlags & 1) != 0) {
-            pw.println(prefix + "taskAffinity=" + this.taskAffinity + " targetActivity=" + this.targetActivity + " persistableMode=" + persistableModeToString());
+            pw.println(
+                    prefix
+                            + "taskAffinity="
+                            + this.taskAffinity
+                            + " targetActivity="
+                            + this.targetActivity
+                            + " persistableMode="
+                            + persistableModeToString());
         }
         if (this.launchMode != 0 || this.flags != 0 || this.privateFlags != 0 || this.theme != 0) {
-            pw.println(prefix + "launchMode=" + launchModeToString(this.launchMode) + " flags=0x" + Integer.toHexString(this.flags) + " privateFlags=0x" + Integer.toHexString(this.privateFlags) + " theme=0x" + Integer.toHexString(this.theme));
+            pw.println(
+                    prefix
+                            + "launchMode="
+                            + launchModeToString(this.launchMode)
+                            + " flags=0x"
+                            + Integer.toHexString(this.flags)
+                            + " privateFlags=0x"
+                            + Integer.toHexString(this.privateFlags)
+                            + " theme=0x"
+                            + Integer.toHexString(this.theme));
         }
         if (this.screenOrientation != -1 || this.configChanges != 0 || this.softInputMode != 0) {
-            pw.println(prefix + "screenOrientation=" + this.screenOrientation + " configChanges=0x" + Integer.toHexString(this.configChanges) + " softInputMode=0x" + Integer.toHexString(this.softInputMode));
+            pw.println(
+                    prefix
+                            + "screenOrientation="
+                            + this.screenOrientation
+                            + " configChanges=0x"
+                            + Integer.toHexString(this.configChanges)
+                            + " softInputMode=0x"
+                            + Integer.toHexString(this.softInputMode));
         }
         if (this.uiOptions != 0) {
             pw.println(prefix + " uiOptions=0x" + Integer.toHexString(this.uiOptions));
         }
         if ((dumpFlags & 1) != 0) {
-            pw.println(prefix + "lockTaskLaunchMode=" + lockTaskLaunchModeToString(this.lockTaskLaunchMode));
+            pw.println(
+                    prefix
+                            + "lockTaskLaunchMode="
+                            + lockTaskLaunchModeToString(this.lockTaskLaunchMode));
         }
         if (this.windowLayout != null) {
-            pw.println(prefix + "windowLayout=" + this.windowLayout.width + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.windowLayout.widthFraction + ", " + this.windowLayout.height + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.windowLayout.heightFraction + ", " + this.windowLayout.gravity);
+            pw.println(
+                    prefix
+                            + "windowLayout="
+                            + this.windowLayout.width
+                            + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                            + this.windowLayout.widthFraction
+                            + ", "
+                            + this.windowLayout.height
+                            + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                            + this.windowLayout.heightFraction
+                            + ", "
+                            + this.windowLayout.gravity);
         }
         pw.println(prefix + "resizeMode=" + resizeModeToString(this.resizeMode));
         if (this.requestedVrComponent != null) {
@@ -647,16 +701,27 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
             pw.println(prefix + "requiredDisplayCategory=" + this.requiredDisplayCategory);
         }
         if ((dumpFlags & 1) != 0) {
-            pw.println(prefix + "requireContentUriPermissionFromCaller=" + requiredContentUriPermissionToFullString(this.requireContentUriPermissionFromCaller));
+            pw.println(
+                    prefix
+                            + "requireContentUriPermissionFromCaller="
+                            + requiredContentUriPermissionToFullString(
+                                    this.requireContentUriPermissionFromCaller));
         }
         if (this.transientBarShowingDelayMillis >= 0) {
-            pw.println(prefix + "transientBarShowingDelayMillis=" + this.transientBarShowingDelayMillis);
+            pw.println(
+                    prefix
+                            + "transientBarShowingDelayMillis="
+                            + this.transientBarShowingDelayMillis);
         }
         super.dumpBack(pw, prefix, dumpFlags);
     }
 
     public String toString() {
-        return "ActivityInfo{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.name + "}";
+        return "ActivityInfo{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + this.name
+                + "}";
     }
 
     @Override // android.os.Parcelable
@@ -664,7 +729,8 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
         return 0;
     }
 
-    @Override // android.content.pm.ComponentInfo, android.content.pm.PackageItemInfo, android.os.Parcelable
+    @Override // android.content.pm.ComponentInfo, android.content.pm.PackageItemInfo,
+    // android.os.Parcelable
     public void writeToParcel(Parcel dest, int parcelableFlags) {
         super.writeToParcel(dest, parcelableFlags);
         dest.writeInt(this.theme);
@@ -821,11 +887,26 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
         public final float widthFraction;
         public String windowLayoutAffinity;
 
-        public WindowLayout(int width, float widthFraction, int height, float heightFraction, int gravity, int minWidth, int minHeight) {
+        public WindowLayout(
+                int width,
+                float widthFraction,
+                int height,
+                float heightFraction,
+                int gravity,
+                int minWidth,
+                int minHeight) {
             this(width, widthFraction, height, heightFraction, gravity, minWidth, minHeight, null);
         }
 
-        public WindowLayout(int width, float widthFraction, int height, float heightFraction, int gravity, int minWidth, int minHeight, String windowLayoutAffinity) {
+        public WindowLayout(
+                int width,
+                float widthFraction,
+                int height,
+                float heightFraction,
+                int gravity,
+                int minWidth,
+                int minHeight,
+                String windowLayoutAffinity) {
             this.width = width;
             this.widthFraction = widthFraction;
             this.height = height;
@@ -848,7 +929,10 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
         }
 
         public boolean hasSpecifiedSize() {
-            return this.width >= 0 || this.height >= 0 || this.widthFraction >= 0.0f || this.heightFraction >= 0.0f;
+            return this.width >= 0
+                    || this.height >= 0
+                    || this.widthFraction >= 0.0f
+                    || this.heightFraction >= 0.0f;
         }
 
         public void writeToParcel(Parcel dest) {

@@ -3,9 +3,11 @@ package com.samsung.android.wallpaper.colortheme.monet;
 import android.app.WallpaperColors;
 import android.graphics.Color;
 import android.hardware.scontext.SContextConstants;
+
 import com.android.internal.graphics.ColorUtils;
 import com.android.internal.graphics.cam.Cam;
 import com.android.internal.graphics.cam.CamUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -130,7 +132,21 @@ public class ColorScheme {
     }
 
     public String toString() {
-        return "ColorScheme {\n  seed color: " + stringForColor(this.seed) + "\n  style: " + this.style + "\n  palettes: \n  " + humanReadable("PRIMARY", this.accent1) + "\n  " + humanReadable("SECONDARY", this.accent2) + "\n  " + humanReadable("TERTIARY", this.accent3) + "\n  " + humanReadable("NEUTRAL", this.neutral1) + "\n  " + humanReadable("NEUTRAL VARIANT", this.neutral2) + "\n}";
+        return "ColorScheme {\n  seed color: "
+                + stringForColor(this.seed)
+                + "\n  style: "
+                + this.style
+                + "\n  palettes: \n  "
+                + humanReadable("PRIMARY", this.accent1)
+                + "\n  "
+                + humanReadable("SECONDARY", this.accent2)
+                + "\n  "
+                + humanReadable("TERTIARY", this.accent3)
+                + "\n  "
+                + humanReadable("NEUTRAL", this.neutral1)
+                + "\n  "
+                + humanReadable("NEUTRAL VARIANT", this.neutral2)
+                + "\n}";
     }
 
     public final int getSeed() {
@@ -168,7 +184,8 @@ public class ColorScheme {
             int importance = it.next().intValue();
             totalPopulation2 += importance;
         }
-        boolean totalPopulationMeaningless = totalPopulation2 == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+        boolean totalPopulationMeaningless =
+                totalPopulation2 == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         if (totalPopulationMeaningless) {
             List<Color> colors = wallpaperColors.getMainColors();
             List<Integer> distinctColors = new ArrayList<>();
@@ -187,7 +204,8 @@ public class ColorScheme {
         Map<Integer, Double> intToProportion = new HashMap<>();
         Map<Integer, Cam> intToCam = new HashMap<>();
         for (Map.Entry<Integer, Integer> entry : allColors.entrySet()) {
-            intToProportion.put(entry.getKey(), Double.valueOf(entry.getValue().intValue() / totalPopulation2));
+            intToProportion.put(
+                    entry.getKey(), Double.valueOf(entry.getValue().intValue() / totalPopulation2));
             intToCam.put(entry.getKey(), Cam.fromInt(entry.getKey().intValue()));
         }
         List<Double> hueProportions = huePopulations(intToCam, intToProportion, z);
@@ -223,7 +241,12 @@ public class ColorScheme {
         }
         Map<Integer, Double> intToScoreIntermediate = new HashMap<>();
         for (Map.Entry<Integer, Cam> entry4 : filteredIntToCam.entrySet()) {
-            intToScoreIntermediate.put(entry4.getKey(), Double.valueOf(score(entry4.getValue(), intToHueProportion.get(entry4.getKey()).doubleValue())));
+            intToScoreIntermediate.put(
+                    entry4.getKey(),
+                    Double.valueOf(
+                            score(
+                                    entry4.getValue(),
+                                    intToHueProportion.get(entry4.getKey()).doubleValue())));
         }
         List<Map.Entry<Integer, Double>> intToScore = entriesSortedByValues(intToScoreIntermediate);
         List<Integer> seeds = new ArrayList<>();
@@ -300,8 +323,13 @@ public class ColorScheme {
         Cam hct = Cam.fromInt(color);
         String h = 'H' + String.format("%04d", Integer.valueOf(Math.round(hct.getHue())));
         String c = 'C' + String.format("%04d", Integer.valueOf(Math.round(hct.getChroma())));
-        String t = 'T' + String.format("%04d", Integer.valueOf(Math.round(CamUtils.lstarFromInt(color))));
-        String hex = String.format("%-06s", Integer.toHexString(16777215 & color).toUpperCase(Locale.ROOT));
+        String t =
+                'T'
+                        + String.format(
+                                "%04d", Integer.valueOf(Math.round(CamUtils.lstarFromInt(color))));
+        String hex =
+                String.format(
+                        "%-06s", Integer.toHexString(16777215 & color).toUpperCase(Locale.ROOT));
         return h + c + t + " = #" + hex;
     }
 
@@ -327,7 +355,8 @@ public class ColorScheme {
         return chromaScore + proportionScore;
     }
 
-    private static List<Double> huePopulations(Map<Integer, Cam> camByColor, Map<Integer, Double> populationByColor, boolean filter) {
+    private static List<Double> huePopulations(
+            Map<Integer, Cam> camByColor, Map<Integer, Double> populationByColor, boolean filter) {
         List<Double> huePopulation = new ArrayList<>(360);
         for (int i = 0; i < 360; i++) {
             huePopulation.add(Double.valueOf(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN));
@@ -337,7 +366,8 @@ public class ColorScheme {
             Cam cam = camByColor.get(entry.getKey());
             int hue = Math.round(cam.getHue()) % 360;
             if (!filter || cam.getChroma() > 5.0f) {
-                huePopulation.set(hue, Double.valueOf(huePopulation.get(hue).doubleValue() + population));
+                huePopulation.set(
+                        hue, Double.valueOf(huePopulation.get(hue).doubleValue() + population));
             }
         }
         return huePopulation;
@@ -353,14 +383,21 @@ public class ColorScheme {
         return result;
     }
 
-    private static <K, V extends Comparable<? super V>> List<Map.Entry<K, V>> entriesSortedByValues(Map<K, V> map) {
+    private static <K, V extends Comparable<? super V>> List<Map.Entry<K, V>> entriesSortedByValues(
+            Map<K, V> map) {
         List<Map.Entry<K, V>> sortedEntries = new ArrayList<>(map.entrySet());
-        Collections.sort(sortedEntries, new Comparator<Map.Entry<K, V>>() { // from class: com.samsung.android.wallpaper.colortheme.monet.ColorScheme.1
-            @Override // java.util.Comparator
-            public int compare(Map.Entry<K, V> e1, Map.Entry<K, V> e2) {
-                return ((Comparable) e2.getValue()).compareTo(e1.getValue());
-            }
-        });
+        Collections.sort(
+                sortedEntries,
+                new Comparator<
+                        Map.Entry<
+                                K,
+                                V>>() { // from class:
+                                        // com.samsung.android.wallpaper.colortheme.monet.ColorScheme.1
+                    @Override // java.util.Comparator
+                    public int compare(Map.Entry<K, V> e1, Map.Entry<K, V> e2) {
+                        return ((Comparable) e2.getValue()).compareTo(e1.getValue());
+                    }
+                });
         return sortedEntries;
     }
 }

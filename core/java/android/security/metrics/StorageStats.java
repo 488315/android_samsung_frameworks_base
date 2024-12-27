@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class StorageStats implements Parcelable {
-    public static final Parcelable.Creator<StorageStats> CREATOR = new Parcelable.Creator<StorageStats>() { // from class: android.security.metrics.StorageStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StorageStats createFromParcel(Parcel _aidl_source) {
-            StorageStats _aidl_out = new StorageStats();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<StorageStats> CREATOR =
+            new Parcelable.Creator<
+                    StorageStats>() { // from class: android.security.metrics.StorageStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StorageStats createFromParcel(Parcel _aidl_source) {
+                    StorageStats _aidl_out = new StorageStats();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StorageStats[] newArray(int _aidl_size) {
-            return new StorageStats[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StorageStats[] newArray(int _aidl_size) {
+                    return new StorageStats[_aidl_size];
+                }
+            };
     public int storage_type;
     public int size = 0;
     public int unused_size = 0;

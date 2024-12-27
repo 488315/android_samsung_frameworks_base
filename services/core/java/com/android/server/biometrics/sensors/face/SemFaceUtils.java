@@ -8,8 +8,10 @@ import android.provider.Settings;
 import android.util.Log;
 import android.util.Slog;
 import android.view.Surface;
+
 import com.android.server.am.mars.MARsFreezeStateRecord$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.Utils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -27,13 +29,25 @@ public abstract class SemFaceUtils {
         int length = bArr.length;
         int i = 0;
         while (i < length) {
-            i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%02x", new Object[]{Integer.valueOf(bArr[i] & 255)}, sb, i, 1);
+            i =
+                    MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                            "%02x", new Object[] {Integer.valueOf(bArr[i] & 255)}, sb, i, 1);
         }
         return sb.toString();
     }
 
-    public static FaceAuthenticateOptions copyOptions(int i, FaceAuthenticateOptions faceAuthenticateOptions) {
-        return new FaceAuthenticateOptions.Builder().setUserId(i).setSensorId(faceAuthenticateOptions.getSensorId()).setOpPackageName(faceAuthenticateOptions.getOpPackageName()).setAttributionTag(faceAuthenticateOptions.getAttributionTag() == null ? "" : faceAuthenticateOptions.getAttributionTag()).setDisplayState(faceAuthenticateOptions.getDisplayState()).build();
+    public static FaceAuthenticateOptions copyOptions(
+            int i, FaceAuthenticateOptions faceAuthenticateOptions) {
+        return new FaceAuthenticateOptions.Builder()
+                .setUserId(i)
+                .setSensorId(faceAuthenticateOptions.getSensorId())
+                .setOpPackageName(faceAuthenticateOptions.getOpPackageName())
+                .setAttributionTag(
+                        faceAuthenticateOptions.getAttributionTag() == null
+                                ? ""
+                                : faceAuthenticateOptions.getAttributionTag())
+                .setDisplayState(faceAuthenticateOptions.getDisplayState())
+                .build();
     }
 
     public static ArrayList getFidoRequestDataAsArrayList() {
@@ -49,8 +63,16 @@ public abstract class SemFaceUtils {
     }
 
     public static int getSecurityMode(Context context) {
-        int i = 1 == Settings.Secure.getIntForUser(context.getContentResolver(), "face_open_eyes", -1, -2) ? 4 : 0;
-        if (1 == Settings.Secure.getIntForUser(context.getContentResolver(), "face_recognize_mask", -1, -2) && FaceManager.semIsSupportOnMask()) {
+        int i =
+                1
+                                == Settings.Secure.getIntForUser(
+                                        context.getContentResolver(), "face_open_eyes", -1, -2)
+                        ? 4
+                        : 0;
+        if (1
+                        == Settings.Secure.getIntForUser(
+                                context.getContentResolver(), "face_recognize_mask", -1, -2)
+                && FaceManager.semIsSupportOnMask()) {
             i |= 16;
         }
         Slog.i("SemFace", "mode=0x" + Integer.toBinaryString(i));
@@ -73,6 +95,11 @@ public abstract class SemFaceUtils {
         if (!Utils.DEBUG || mFidoResultData.length >= 128) {
             return;
         }
-        Log.i("SemFace", "fidoResultData(" + mFidoResultData.length + ") = " + Arrays.toString(mFidoResultData));
+        Log.i(
+                "SemFace",
+                "fidoResultData("
+                        + mFidoResultData.length
+                        + ") = "
+                        + Arrays.toString(mFidoResultData));
     }
 }

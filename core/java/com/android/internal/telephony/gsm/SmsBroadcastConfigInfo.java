@@ -10,7 +10,8 @@ public final class SmsBroadcastConfigInfo {
     private int mToCodeScheme;
     private int mToServiceId;
 
-    public SmsBroadcastConfigInfo(int fromId, int toId, int fromScheme, int toScheme, boolean selected) {
+    public SmsBroadcastConfigInfo(
+            int fromId, int toId, int fromScheme, int toScheme, boolean selected) {
         this.mFromServiceId = fromId;
         this.mToServiceId = toId;
         this.mFromCodeScheme = fromScheme;
@@ -59,11 +60,25 @@ public final class SmsBroadcastConfigInfo {
     }
 
     public String toString() {
-        return "SmsBroadcastConfigInfo: Id [" + this.mFromServiceId + ',' + this.mToServiceId + "] Code [" + this.mFromCodeScheme + ',' + this.mToCodeScheme + "] " + (this.mSelected ? "ENABLED" : "DISABLED");
+        return "SmsBroadcastConfigInfo: Id ["
+                + this.mFromServiceId
+                + ','
+                + this.mToServiceId
+                + "] Code ["
+                + this.mFromCodeScheme
+                + ','
+                + this.mToCodeScheme
+                + "] "
+                + (this.mSelected ? "ENABLED" : "DISABLED");
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mFromServiceId), Integer.valueOf(this.mToServiceId), Integer.valueOf(this.mFromCodeScheme), Integer.valueOf(this.mToCodeScheme), Boolean.valueOf(this.mSelected));
+        return Objects.hash(
+                Integer.valueOf(this.mFromServiceId),
+                Integer.valueOf(this.mToServiceId),
+                Integer.valueOf(this.mFromCodeScheme),
+                Integer.valueOf(this.mToCodeScheme),
+                Boolean.valueOf(this.mSelected));
     }
 
     public boolean equals(Object obj) {
@@ -71,6 +86,10 @@ public final class SmsBroadcastConfigInfo {
             return false;
         }
         SmsBroadcastConfigInfo other = (SmsBroadcastConfigInfo) obj;
-        return this.mFromServiceId == other.mFromServiceId && this.mToServiceId == other.mToServiceId && this.mFromCodeScheme == other.mFromCodeScheme && this.mToCodeScheme == other.mToCodeScheme && this.mSelected == other.mSelected;
+        return this.mFromServiceId == other.mFromServiceId
+                && this.mToServiceId == other.mToServiceId
+                && this.mFromCodeScheme == other.mFromCodeScheme
+                && this.mToCodeScheme == other.mToCodeScheme
+                && this.mSelected == other.mSelected;
     }
 }

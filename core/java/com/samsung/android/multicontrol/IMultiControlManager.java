@@ -6,8 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.IInputFilter;
-import com.samsung.android.multicontrol.IInputFilterInstallListener;
-import com.samsung.android.multicontrol.IMultiControlDeathChecker;
 
 /* loaded from: classes6.dex */
 public interface IMultiControlManager extends IInterface {
@@ -25,7 +23,9 @@ public interface IMultiControlManager extends IInterface {
 
     void setCursorPosition(int i, int i2, int i3) throws RemoteException;
 
-    void setInputFilter(IInputFilter iInputFilter, IInputFilterInstallListener iInputFilterInstallListener) throws RemoteException;
+    void setInputFilter(
+            IInputFilter iInputFilter, IInputFilterInstallListener iInputFilterInstallListener)
+            throws RemoteException;
 
     void setInteractive(boolean z) throws RemoteException;
 
@@ -35,7 +35,8 @@ public interface IMultiControlManager extends IInterface {
 
     void setTriggerThreshold(int i) throws RemoteException;
 
-    void startDeathChecker(IMultiControlDeathChecker iMultiControlDeathChecker) throws RemoteException;
+    void startDeathChecker(IMultiControlDeathChecker iMultiControlDeathChecker)
+            throws RemoteException;
 
     void stopDeathChecker() throws RemoteException;
 
@@ -51,48 +52,38 @@ public interface IMultiControlManager extends IInterface {
         }
 
         @Override // com.samsung.android.multicontrol.IMultiControlManager
-        public void setProtocolVersion(int version) throws RemoteException {
-        }
+        public void setProtocolVersion(int version) throws RemoteException {}
 
         @Override // com.samsung.android.multicontrol.IMultiControlManager
-        public void setInputFilter(IInputFilter filter, IInputFilterInstallListener listener) throws RemoteException {
-        }
+        public void setInputFilter(IInputFilter filter, IInputFilterInstallListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multicontrol.IMultiControlManager
-        public void resetInputFilter() throws RemoteException {
-        }
+        public void resetInputFilter() throws RemoteException {}
 
         @Override // com.samsung.android.multicontrol.IMultiControlManager
-        public void forceHideCursor(boolean hide) throws RemoteException {
-        }
+        public void forceHideCursor(boolean hide) throws RemoteException {}
 
         @Override // com.samsung.android.multicontrol.IMultiControlManager
-        public void setInteractive(boolean interactive) throws RemoteException {
-        }
+        public void setInteractive(boolean interactive) throws RemoteException {}
 
         @Override // com.samsung.android.multicontrol.IMultiControlManager
-        public void setMultiControlOutOfFocus(boolean outOfFocus) throws RemoteException {
-        }
+        public void setMultiControlOutOfFocus(boolean outOfFocus) throws RemoteException {}
 
         @Override // com.samsung.android.multicontrol.IMultiControlManager
-        public void startDeathChecker(IMultiControlDeathChecker checker) throws RemoteException {
-        }
+        public void startDeathChecker(IMultiControlDeathChecker checker) throws RemoteException {}
 
         @Override // com.samsung.android.multicontrol.IMultiControlManager
-        public void stopDeathChecker() throws RemoteException {
-        }
+        public void stopDeathChecker() throws RemoteException {}
 
         @Override // com.samsung.android.multicontrol.IMultiControlManager
-        public void setCursorPosition(int x, int y, int displayId) throws RemoteException {
-        }
+        public void setCursorPosition(int x, int y, int displayId) throws RemoteException {}
 
         @Override // com.samsung.android.multicontrol.IMultiControlManager
-        public void enableTriggerDetection(boolean enable) throws RemoteException {
-        }
+        public void enableTriggerDetection(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.multicontrol.IMultiControlManager
-        public void setTriggerThreshold(int threshold) throws RemoteException {
-        }
+        public void setTriggerThreshold(int threshold) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -100,7 +91,7 @@ public interface IMultiControlManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMultiControlManager {
+    public abstract static class Stub extends Binder implements IMultiControlManager {
         static final int TRANSACTION_enableTriggerDetection = 12;
         static final int TRANSACTION_forceHideCursor = 6;
         static final int TRANSACTION_getProtocolVersion = 2;
@@ -174,7 +165,8 @@ public interface IMultiControlManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMultiControlManager.DESCRIPTOR);
             }
@@ -201,7 +193,8 @@ public interface IMultiControlManager extends IInterface {
                     return true;
                 case 4:
                     IInputFilter _arg02 = IInputFilter.Stub.asInterface(data.readStrongBinder());
-                    IInputFilterInstallListener _arg1 = IInputFilterInstallListener.Stub.asInterface(data.readStrongBinder());
+                    IInputFilterInstallListener _arg1 =
+                            IInputFilterInstallListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setInputFilter(_arg02, _arg1);
                     reply.writeNoException();
@@ -229,7 +222,8 @@ public interface IMultiControlManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 9:
-                    IMultiControlDeathChecker _arg06 = IMultiControlDeathChecker.Stub.asInterface(data.readStrongBinder());
+                    IMultiControlDeathChecker _arg06 =
+                            IMultiControlDeathChecker.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startDeathChecker(_arg06);
                     reply.writeNoException();
@@ -327,7 +321,8 @@ public interface IMultiControlManager extends IInterface {
             }
 
             @Override // com.samsung.android.multicontrol.IMultiControlManager
-            public void setInputFilter(IInputFilter filter, IInputFilterInstallListener listener) throws RemoteException {
+            public void setInputFilter(IInputFilter filter, IInputFilterInstallListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -402,7 +397,8 @@ public interface IMultiControlManager extends IInterface {
             }
 
             @Override // com.samsung.android.multicontrol.IMultiControlManager
-            public void startDeathChecker(IMultiControlDeathChecker checker) throws RemoteException {
+            public void startDeathChecker(IMultiControlDeathChecker checker)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

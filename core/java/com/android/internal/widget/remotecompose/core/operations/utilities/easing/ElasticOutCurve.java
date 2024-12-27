@@ -15,7 +15,8 @@ public class ElasticOutCurve extends Easing {
         if (x >= 1.0f) {
             return 1.0f;
         }
-        return (float) ((Math.pow(2.0d, (-10.0f) * x) * Math.sin(((10.0f * x) - 0.75f) * C4)) + 1.0d);
+        return (float)
+                ((Math.pow(2.0d, (-10.0f) * x) * Math.sin(((10.0f * x) - 0.75f) * C4)) + 1.0d);
     }
 
     @Override // com.android.internal.widget.remotecompose.core.operations.utilities.easing.Easing
@@ -23,6 +24,10 @@ public class ElasticOutCurve extends Easing {
         if (x < 0.0f || x > 1.0f) {
             return 0.0f;
         }
-        return (float) (((Math.pow(2.0d, 1.0f - (10.0f * x)) * 5.0d) * ((LOG_8 * Math.cos((x * TWENTY_PI) / 3.0f)) + (Math.sin((TWENTY_PI * x) / 3.0f) * 6.2831854820251465d))) / 3.0d);
+        return (float)
+                (((Math.pow(2.0d, 1.0f - (10.0f * x)) * 5.0d)
+                                * ((LOG_8 * Math.cos((x * TWENTY_PI) / 3.0f))
+                                        + (Math.sin((TWENTY_PI * x) / 3.0f) * 6.2831854820251465d)))
+                        / 3.0d);
     }
 }

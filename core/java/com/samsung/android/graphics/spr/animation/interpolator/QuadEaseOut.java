@@ -6,11 +6,9 @@ import android.view.animation.Interpolator;
 
 /* loaded from: classes6.dex */
 public class QuadEaseOut implements Interpolator {
-    public QuadEaseOut() {
-    }
+    public QuadEaseOut() {}
 
-    public QuadEaseOut(Context context, AttributeSet attrs) {
-    }
+    public QuadEaseOut(Context context, AttributeSet attrs) {}
 
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float t) {

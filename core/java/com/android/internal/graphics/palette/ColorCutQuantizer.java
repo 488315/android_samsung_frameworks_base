@@ -2,7 +2,7 @@ package com.android.internal.graphics.palette;
 
 import android.graphics.Color;
 import android.util.TimingLogger;
-import com.android.internal.graphics.palette.Palette;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,20 +19,22 @@ final class ColorCutQuantizer implements Quantizer {
     private static final boolean LOG_TIMINGS = false;
     private static final int QUANTIZE_WORD_MASK = 31;
     private static final int QUANTIZE_WORD_WIDTH = 5;
-    private static final Comparator<Vbox> VBOX_COMPARATOR_VOLUME = new Comparator<Vbox>() { // from class: com.android.internal.graphics.palette.ColorCutQuantizer.1
-        @Override // java.util.Comparator
-        public int compare(Vbox lhs, Vbox rhs) {
-            return rhs.getVolume() - lhs.getVolume();
-        }
-    };
+    private static final Comparator<Vbox> VBOX_COMPARATOR_VOLUME =
+            new Comparator<
+                    Vbox>() { // from class:
+                              // com.android.internal.graphics.palette.ColorCutQuantizer.1
+                @Override // java.util.Comparator
+                public int compare(Vbox lhs, Vbox rhs) {
+                    return rhs.getVolume() - lhs.getVolume();
+                }
+            };
     int[] mColors;
     int[] mHistogram;
     List<Palette.Swatch> mQuantizedColors;
     private final float[] mTempHsl = new float[3];
     TimingLogger mTimingLogger;
 
-    ColorCutQuantizer() {
-    }
+    ColorCutQuantizer() {}
 
     @Override // com.android.internal.graphics.palette.Quantizer
     public void quantize(int[] pixels, int maxColors) {
@@ -62,7 +64,8 @@ final class ColorCutQuantizer implements Quantizer {
         if (distinctColorCount <= maxColors) {
             this.mQuantizedColors = new ArrayList();
             for (int color2 : colors) {
-                this.mQuantizedColors.add(new Palette.Swatch(approximateToRgb888(color2), hist[color2]));
+                this.mQuantizedColors.add(
+                        new Palette.Swatch(approximateToRgb888(color2), hist[color2]));
             }
             return;
         }
@@ -116,7 +119,9 @@ final class ColorCutQuantizer implements Quantizer {
         }
 
         final int getVolume() {
-            return ((this.mMaxRed - this.mMinRed) + 1) * ((this.mMaxGreen - this.mMinGreen) + 1) * ((this.mMaxBlue - this.mMinBlue) + 1);
+            return ((this.mMaxRed - this.mMinRed) + 1)
+                    * ((this.mMaxGreen - this.mMinGreen) + 1)
+                    * ((this.mMaxBlue - this.mMinBlue) + 1);
         }
 
         final boolean canSplit() {
@@ -199,9 +204,11 @@ final class ColorCutQuantizer implements Quantizer {
             int longestDimension = getLongestColorDimension();
             int[] colors = ColorCutQuantizer.this.mColors;
             int[] hist = ColorCutQuantizer.this.mHistogram;
-            ColorCutQuantizer.modifySignificantOctet(colors, longestDimension, this.mLowerIndex, this.mUpperIndex);
+            ColorCutQuantizer.modifySignificantOctet(
+                    colors, longestDimension, this.mLowerIndex, this.mUpperIndex);
             Arrays.sort(colors, this.mLowerIndex, this.mUpperIndex + 1);
-            ColorCutQuantizer.modifySignificantOctet(colors, longestDimension, this.mLowerIndex, this.mUpperIndex);
+            ColorCutQuantizer.modifySignificantOctet(
+                    colors, longestDimension, this.mLowerIndex, this.mUpperIndex);
             int midPoint = this.mPopulation / 2;
             int count = 0;
             for (int i = this.mLowerIndex; i <= this.mUpperIndex; i++) {
@@ -232,7 +239,9 @@ final class ColorCutQuantizer implements Quantizer {
             int redMean = Math.round(redSum / totalPopulation);
             int greenMean = Math.round(greenSum / totalPopulation);
             int blueMean = Math.round(blueSum / totalPopulation);
-            return new Palette.Swatch(ColorCutQuantizer.approximateToRgb888(redMean, greenMean, blueMean), totalPopulation);
+            return new Palette.Swatch(
+                    ColorCutQuantizer.approximateToRgb888(redMean, greenMean, blueMean),
+                    totalPopulation);
         }
     }
 
@@ -241,13 +250,19 @@ final class ColorCutQuantizer implements Quantizer {
             case -2:
                 for (int i = lower; i <= upper; i++) {
                     int color = a[i];
-                    a[i] = (quantizedGreen(color) << 10) | (quantizedRed(color) << 5) | quantizedBlue(color);
+                    a[i] =
+                            (quantizedGreen(color) << 10)
+                                    | (quantizedRed(color) << 5)
+                                    | quantizedBlue(color);
                 }
                 break;
             case -1:
                 for (int i2 = lower; i2 <= upper; i2++) {
                     int color2 = a[i2];
-                    a[i2] = (quantizedBlue(color2) << 10) | (quantizedGreen(color2) << 5) | quantizedRed(color2);
+                    a[i2] =
+                            (quantizedBlue(color2) << 10)
+                                    | (quantizedGreen(color2) << 5)
+                                    | quantizedRed(color2);
                 }
                 break;
         }
@@ -261,11 +276,13 @@ final class ColorCutQuantizer implements Quantizer {
     }
 
     static int approximateToRgb888(int r, int g, int b) {
-        return Color.rgb(modifyWordWidth(r, 5, 8), modifyWordWidth(g, 5, 8), modifyWordWidth(b, 5, 8));
+        return Color.rgb(
+                modifyWordWidth(r, 5, 8), modifyWordWidth(g, 5, 8), modifyWordWidth(b, 5, 8));
     }
 
     private static int approximateToRgb888(int color) {
-        return approximateToRgb888(quantizedRed(color), quantizedGreen(color), quantizedBlue(color));
+        return approximateToRgb888(
+                quantizedRed(color), quantizedGreen(color), quantizedBlue(color));
     }
 
     static int quantizedRed(int color) {

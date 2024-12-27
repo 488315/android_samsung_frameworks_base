@@ -8,6 +8,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
@@ -22,7 +23,8 @@ public interface ILightsManager extends IInterface {
 
     void openSession(IBinder iBinder, int i) throws RemoteException;
 
-    void setLightStates(IBinder iBinder, int[] iArr, LightState[] lightStateArr) throws RemoteException;
+    void setLightStates(IBinder iBinder, int[] iArr, LightState[] lightStateArr)
+            throws RemoteException;
 
     public static class Default implements ILightsManager {
         @Override // android.hardware.lights.ILightsManager
@@ -36,16 +38,14 @@ public interface ILightsManager extends IInterface {
         }
 
         @Override // android.hardware.lights.ILightsManager
-        public void openSession(IBinder sessionToken, int priority) throws RemoteException {
-        }
+        public void openSession(IBinder sessionToken, int priority) throws RemoteException {}
 
         @Override // android.hardware.lights.ILightsManager
-        public void closeSession(IBinder sessionToken) throws RemoteException {
-        }
+        public void closeSession(IBinder sessionToken) throws RemoteException {}
 
         @Override // android.hardware.lights.ILightsManager
-        public void setLightStates(IBinder sessionToken, int[] lightIds, LightState[] states) throws RemoteException {
-        }
+        public void setLightStates(IBinder sessionToken, int[] lightIds, LightState[] states)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -53,7 +53,7 @@ public interface ILightsManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILightsManager {
+    public abstract static class Stub extends Binder implements ILightsManager {
         static final int TRANSACTION_closeSession = 4;
         static final int TRANSACTION_getLightState = 2;
         static final int TRANSACTION_getLights = 1;
@@ -71,7 +71,9 @@ public interface ILightsManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static ILightsManager asInterface(IBinder obj) {
@@ -113,7 +115,8 @@ public interface ILightsManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ILightsManager.DESCRIPTOR);
             }
@@ -241,7 +244,8 @@ public interface ILightsManager extends IInterface {
             }
 
             @Override // android.hardware.lights.ILightsManager
-            public void setLightStates(IBinder sessionToken, int[] lightIds, LightState[] states) throws RemoteException {
+            public void setLightStates(IBinder sessionToken, int[] lightIds, LightState[] states)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -259,23 +263,28 @@ public interface ILightsManager extends IInterface {
         }
 
         protected void getLights_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DEVICE_LIGHTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DEVICE_LIGHTS, getCallingPid(), getCallingUid());
         }
 
         protected void getLightState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DEVICE_LIGHTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DEVICE_LIGHTS, getCallingPid(), getCallingUid());
         }
 
         protected void openSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DEVICE_LIGHTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DEVICE_LIGHTS, getCallingPid(), getCallingUid());
         }
 
         protected void closeSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DEVICE_LIGHTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DEVICE_LIGHTS, getCallingPid(), getCallingUid());
         }
 
         protected void setLightStates_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DEVICE_LIGHTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DEVICE_LIGHTS, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

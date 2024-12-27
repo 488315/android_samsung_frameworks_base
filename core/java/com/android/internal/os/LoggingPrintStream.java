@@ -1,6 +1,7 @@
 package com.android.internal.os;
 
 import android.provider.Telephony;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -24,17 +25,19 @@ public abstract class LoggingPrintStream extends PrintStream {
     protected abstract void log(String str);
 
     protected LoggingPrintStream() {
-        super(new OutputStream() { // from class: com.android.internal.os.LoggingPrintStream.1
-            @Override // java.io.OutputStream
-            public void write(int oneByte) throws IOException {
-                throw new AssertionError();
-            }
-        });
+        super(
+                new OutputStream() { // from class: com.android.internal.os.LoggingPrintStream.1
+                    @Override // java.io.OutputStream
+                    public void write(int oneByte) throws IOException {
+                        throw new AssertionError();
+                    }
+                });
         this.builder = new StringBuilder();
         this.formatter = new Formatter(this.builder, (Locale) null);
     }
 
-    @Override // java.io.PrintStream, java.io.FilterOutputStream, java.io.OutputStream, java.io.Flushable
+    @Override // java.io.PrintStream, java.io.FilterOutputStream, java.io.OutputStream,
+              // java.io.Flushable
     public synchronized void flush() {
         flush(true);
     }
@@ -62,7 +65,7 @@ public abstract class LoggingPrintStream extends PrintStream {
 
     @Override // java.io.PrintStream, java.io.FilterOutputStream, java.io.OutputStream
     public void write(int oneByte) {
-        write(new byte[]{(byte) oneByte}, 0, 1);
+        write(new byte[] {(byte) oneByte}, 0, 1);
     }
 
     @Override // java.io.PrintStream, java.io.FilterOutputStream, java.io.OutputStream
@@ -76,7 +79,11 @@ public abstract class LoggingPrintStream extends PrintStream {
         if (this.decoder == null) {
             this.encodedBytes = ByteBuffer.allocate(80);
             this.decodedChars = CharBuffer.allocate(80);
-            this.decoder = Charset.defaultCharset().newDecoder().onMalformedInput(CodingErrorAction.REPLACE).onUnmappableCharacter(CodingErrorAction.REPLACE);
+            this.decoder =
+                    Charset.defaultCharset()
+                            .newDecoder()
+                            .onMalformedInput(CodingErrorAction.REPLACE)
+                            .onUnmappableCharacter(CodingErrorAction.REPLACE);
         }
         int end = start + count;
         while (start < end) {
@@ -101,12 +108,11 @@ public abstract class LoggingPrintStream extends PrintStream {
     }
 
     @Override // java.io.PrintStream
-    protected void setError() {
-    }
+    protected void setError() {}
 
-    @Override // java.io.PrintStream, java.io.FilterOutputStream, java.io.OutputStream, java.io.Closeable, java.lang.AutoCloseable
-    public void close() {
-    }
+    @Override // java.io.PrintStream, java.io.FilterOutputStream, java.io.OutputStream,
+              // java.io.Closeable, java.lang.AutoCloseable
+    public void close() {}
 
     @Override // java.io.PrintStream
     public PrintStream format(String format, Object... args) {

@@ -6,8 +6,9 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.provider.Settings;
 import android.util.Slog;
-import com.android.server.am.AppNotRespondingDialog;
+
 import com.android.server.wm.ActivityTaskManagerService;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.android.rune.CoreRune;
 
@@ -94,12 +95,29 @@ public final class ProcessErrorStateRecord {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void appNotResponding(java.lang.String r56, android.content.pm.ApplicationInfo r57, java.lang.String r58, com.android.server.wm.WindowProcessController r59, boolean r60, com.android.internal.os.TimeoutRecord r61, java.util.concurrent.ExecutorService r62, final boolean r63, boolean r64, java.util.concurrent.Future r65) {
+    public final void appNotResponding(
+            java.lang.String r56,
+            android.content.pm.ApplicationInfo r57,
+            java.lang.String r58,
+            com.android.server.wm.WindowProcessController r59,
+            boolean r60,
+            com.android.internal.os.TimeoutRecord r61,
+            java.util.concurrent.ExecutorService r62,
+            final boolean r63,
+            boolean r64,
+            java.util.concurrent.Future r65) {
         /*
             Method dump skipped, instructions count: 1805
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.ProcessErrorStateRecord.appNotResponding(java.lang.String, android.content.pm.ApplicationInfo, java.lang.String, com.android.server.wm.WindowProcessController, boolean, com.android.internal.os.TimeoutRecord, java.util.concurrent.ExecutorService, boolean, boolean, java.util.concurrent.Future):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.ProcessErrorStateRecord.appNotResponding(java.lang.String,"
+                    + " android.content.pm.ApplicationInfo, java.lang.String,"
+                    + " com.android.server.wm.WindowProcessController, boolean,"
+                    + " com.android.internal.os.TimeoutRecord,"
+                    + " java.util.concurrent.ExecutorService, boolean, boolean,"
+                    + " java.util.concurrent.Future):void");
     }
 
     public boolean isMonitorCpuUsage() {
@@ -109,14 +127,18 @@ public final class ProcessErrorStateRecord {
 
     public boolean isSilentAnr() {
         ContentResolver contentResolver = this.mService.mContext.getContentResolver();
-        if (Settings.Secure.getIntForUser(contentResolver, "anr_show_background", 0, contentResolver.getUserId()) != 0) {
+        if (Settings.Secure.getIntForUser(
+                        contentResolver, "anr_show_background", 0, contentResolver.getUserId())
+                != 0) {
             return false;
         }
         ProcessRecord processRecord = this.mApp;
-        if (processRecord.mPid == ActivityManagerService.MY_PID || processRecord.isInterestingToUserLocked()) {
+        if (processRecord.mPid == ActivityManagerService.MY_PID
+                || processRecord.isInterestingToUserLocked()) {
             return false;
         }
-        if (this.mApp.info != null && Constants.SYSTEMUI_PACKAGE_NAME.equals(this.mApp.info.packageName)) {
+        if (this.mApp.info != null
+                && Constants.SYSTEMUI_PACKAGE_NAME.equals(this.mApp.info.packageName)) {
             return false;
         }
         ProcessStateRecord processStateRecord = this.mApp.mState;
@@ -158,7 +180,11 @@ public final class ProcessErrorStateRecord {
         for (int i : this.mService.mUserController.getCurrentProfileIds()) {
             ProcessRecord processRecord = this.mApp;
             if (processRecord.userId == i) {
-                this.mErrorReportReceiver = ApplicationErrorReport.getErrorReportReceiver(this.mService.mContext, processRecord.info.packageName, this.mApp.info.flags);
+                this.mErrorReportReceiver =
+                        ApplicationErrorReport.getErrorReportReceiver(
+                                this.mService.mContext,
+                                processRecord.info.packageName,
+                                this.mApp.info.flags);
             }
         }
         this.mService.mBroadcastQueue.onApplicationCleanupLocked(this.mApp);

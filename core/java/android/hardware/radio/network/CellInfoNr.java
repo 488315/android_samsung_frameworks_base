@@ -3,26 +3,29 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CellInfoNr implements Parcelable {
-    public static final Parcelable.Creator<CellInfoNr> CREATOR = new Parcelable.Creator<CellInfoNr>() { // from class: android.hardware.radio.network.CellInfoNr.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoNr createFromParcel(Parcel _aidl_source) {
-            CellInfoNr _aidl_out = new CellInfoNr();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CellInfoNr> CREATOR =
+            new Parcelable.Creator<
+                    CellInfoNr>() { // from class: android.hardware.radio.network.CellInfoNr.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoNr createFromParcel(Parcel _aidl_source) {
+                    CellInfoNr _aidl_out = new CellInfoNr();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoNr[] newArray(int _aidl_size) {
-            return new CellInfoNr[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoNr[] newArray(int _aidl_size) {
+                    return new CellInfoNr[_aidl_size];
+                }
+            };
     public CellIdentityNr cellIdentityNr;
     public NrSignalStrength signalStrengthNr;
 
@@ -57,14 +60,16 @@ public class CellInfoNr implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.cellIdentityNr = (CellIdentityNr) _aidl_parcel.readTypedObject(CellIdentityNr.CREATOR);
+            this.cellIdentityNr =
+                    (CellIdentityNr) _aidl_parcel.readTypedObject(CellIdentityNr.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.signalStrengthNr = (NrSignalStrength) _aidl_parcel.readTypedObject(NrSignalStrength.CREATOR);
+                this.signalStrengthNr =
+                        (NrSignalStrength) _aidl_parcel.readTypedObject(NrSignalStrength.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

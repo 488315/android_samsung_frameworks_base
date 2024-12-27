@@ -12,6 +12,7 @@ import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,62 +47,178 @@ public final class ApduServiceInfo implements Parcelable {
     private final HashMap<String, AidGroup> mStaticAidGroups;
     private String mStaticOffHostName;
     private final int mUid;
-    public static final Parcelable.Creator<ApduServiceInfo> CREATOR = new Parcelable.Creator<ApduServiceInfo>() { // from class: android.nfc.cardemulation.ApduServiceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApduServiceInfo createFromParcel(Parcel source) {
-            ResolveInfo info = ResolveInfo.CREATOR.createFromParcel(source);
-            String description = source.readString();
-            boolean onHost = source.readInt() != 0;
-            String offHostName = source.readString();
-            String staticOffHostName = source.readString();
-            ArrayList<AidGroup> staticAidGroups = new ArrayList<>();
-            int numStaticGroups = source.readInt();
-            if (numStaticGroups > 0) {
-                source.readTypedList(staticAidGroups, AidGroup.CREATOR);
-            }
-            ArrayList<AidGroup> dynamicAidGroups = new ArrayList<>();
-            int numDynamicGroups = source.readInt();
-            if (numDynamicGroups > 0) {
-                source.readTypedList(dynamicAidGroups, AidGroup.CREATOR);
-            }
-            boolean requiresUnlock = source.readInt() != 0;
-            boolean requiresScreenOn = source.readInt() != 0;
-            int bannerResource = source.readInt();
-            int uid = source.readInt();
-            String settingsActivityName = source.readString();
-            boolean isEnabled = source.readInt() != 0;
-            int autoTransactSize = source.readInt();
-            HashMap<String, Boolean> autoTransact = new HashMap<>(autoTransactSize);
-            source.readMap(autoTransact, getClass().getClassLoader(), String.class, Boolean.class);
-            source.readInt();
-            HashMap<Pattern, Boolean> autoTransactPatterns = new HashMap<>(autoTransactSize);
-            source.readMap(autoTransactPatterns, getClass().getClassLoader(), Pattern.class, Boolean.class);
-            return new ApduServiceInfo(info, onHost, description, staticAidGroups, dynamicAidGroups, requiresUnlock, requiresScreenOn, bannerResource, uid, settingsActivityName, offHostName, staticOffHostName, isEnabled, autoTransact, autoTransactPatterns);
-        }
+    public static final Parcelable.Creator<ApduServiceInfo> CREATOR =
+            new Parcelable.Creator<
+                    ApduServiceInfo>() { // from class: android.nfc.cardemulation.ApduServiceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApduServiceInfo createFromParcel(Parcel source) {
+                    ResolveInfo info = ResolveInfo.CREATOR.createFromParcel(source);
+                    String description = source.readString();
+                    boolean onHost = source.readInt() != 0;
+                    String offHostName = source.readString();
+                    String staticOffHostName = source.readString();
+                    ArrayList<AidGroup> staticAidGroups = new ArrayList<>();
+                    int numStaticGroups = source.readInt();
+                    if (numStaticGroups > 0) {
+                        source.readTypedList(staticAidGroups, AidGroup.CREATOR);
+                    }
+                    ArrayList<AidGroup> dynamicAidGroups = new ArrayList<>();
+                    int numDynamicGroups = source.readInt();
+                    if (numDynamicGroups > 0) {
+                        source.readTypedList(dynamicAidGroups, AidGroup.CREATOR);
+                    }
+                    boolean requiresUnlock = source.readInt() != 0;
+                    boolean requiresScreenOn = source.readInt() != 0;
+                    int bannerResource = source.readInt();
+                    int uid = source.readInt();
+                    String settingsActivityName = source.readString();
+                    boolean isEnabled = source.readInt() != 0;
+                    int autoTransactSize = source.readInt();
+                    HashMap<String, Boolean> autoTransact = new HashMap<>(autoTransactSize);
+                    source.readMap(
+                            autoTransact, getClass().getClassLoader(), String.class, Boolean.class);
+                    source.readInt();
+                    HashMap<Pattern, Boolean> autoTransactPatterns =
+                            new HashMap<>(autoTransactSize);
+                    source.readMap(
+                            autoTransactPatterns,
+                            getClass().getClassLoader(),
+                            Pattern.class,
+                            Boolean.class);
+                    return new ApduServiceInfo(
+                            info,
+                            onHost,
+                            description,
+                            staticAidGroups,
+                            dynamicAidGroups,
+                            requiresUnlock,
+                            requiresScreenOn,
+                            bannerResource,
+                            uid,
+                            settingsActivityName,
+                            offHostName,
+                            staticOffHostName,
+                            isEnabled,
+                            autoTransact,
+                            autoTransactPatterns);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApduServiceInfo[] newArray(int size) {
-            return new ApduServiceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApduServiceInfo[] newArray(int size) {
+                    return new ApduServiceInfo[size];
+                }
+            };
     private static final Pattern AID_PATTERN = Pattern.compile("[0-9A-Fa-f]{10,32}\\*?\\#?");
 
-    public ApduServiceInfo(ResolveInfo info, boolean onHost, String description, ArrayList<AidGroup> staticAidGroups, ArrayList<AidGroup> dynamicAidGroups, boolean requiresUnlock, int bannerResource, int uid, String settingsActivityName, String offHost, String staticOffHost) {
-        this(info, onHost, description, staticAidGroups, dynamicAidGroups, requiresUnlock, bannerResource, uid, settingsActivityName, offHost, staticOffHost, false, false);
+    public ApduServiceInfo(
+            ResolveInfo info,
+            boolean onHost,
+            String description,
+            ArrayList<AidGroup> staticAidGroups,
+            ArrayList<AidGroup> dynamicAidGroups,
+            boolean requiresUnlock,
+            int bannerResource,
+            int uid,
+            String settingsActivityName,
+            String offHost,
+            String staticOffHost) {
+        this(
+                info,
+                onHost,
+                description,
+                staticAidGroups,
+                dynamicAidGroups,
+                requiresUnlock,
+                bannerResource,
+                uid,
+                settingsActivityName,
+                offHost,
+                staticOffHost,
+                false,
+                false);
     }
 
-    public ApduServiceInfo(ResolveInfo info, boolean onHost, String description, ArrayList<AidGroup> staticAidGroups, ArrayList<AidGroup> dynamicAidGroups, boolean requiresUnlock, int bannerResource, int uid, String settingsActivityName, String offHost, String staticOffHost, boolean isEnabled, boolean samsungExt) {
-        this(info, onHost, description, staticAidGroups, dynamicAidGroups, requiresUnlock, onHost, bannerResource, uid, settingsActivityName, offHost, staticOffHost, isEnabled);
+    public ApduServiceInfo(
+            ResolveInfo info,
+            boolean onHost,
+            String description,
+            ArrayList<AidGroup> staticAidGroups,
+            ArrayList<AidGroup> dynamicAidGroups,
+            boolean requiresUnlock,
+            int bannerResource,
+            int uid,
+            String settingsActivityName,
+            String offHost,
+            String staticOffHost,
+            boolean isEnabled,
+            boolean samsungExt) {
+        this(
+                info,
+                onHost,
+                description,
+                staticAidGroups,
+                dynamicAidGroups,
+                requiresUnlock,
+                onHost,
+                bannerResource,
+                uid,
+                settingsActivityName,
+                offHost,
+                staticOffHost,
+                isEnabled);
         this.mSamsungExt = samsungExt;
     }
 
-    public ApduServiceInfo(ResolveInfo info, boolean onHost, String description, List<AidGroup> staticAidGroups, List<AidGroup> dynamicAidGroups, boolean requiresUnlock, boolean requiresScreenOn, int bannerResource, int uid, String settingsActivityName, String offHost, String staticOffHost, boolean isEnabled) {
-        this(info, onHost, description, staticAidGroups, dynamicAidGroups, requiresUnlock, requiresScreenOn, bannerResource, uid, settingsActivityName, offHost, staticOffHost, isEnabled, new HashMap(), new HashMap());
+    public ApduServiceInfo(
+            ResolveInfo info,
+            boolean onHost,
+            String description,
+            List<AidGroup> staticAidGroups,
+            List<AidGroup> dynamicAidGroups,
+            boolean requiresUnlock,
+            boolean requiresScreenOn,
+            int bannerResource,
+            int uid,
+            String settingsActivityName,
+            String offHost,
+            String staticOffHost,
+            boolean isEnabled) {
+        this(
+                info,
+                onHost,
+                description,
+                staticAidGroups,
+                dynamicAidGroups,
+                requiresUnlock,
+                requiresScreenOn,
+                bannerResource,
+                uid,
+                settingsActivityName,
+                offHost,
+                staticOffHost,
+                isEnabled,
+                new HashMap(),
+                new HashMap());
     }
 
-    public ApduServiceInfo(ResolveInfo info, boolean onHost, String description, List<AidGroup> staticAidGroups, List<AidGroup> dynamicAidGroups, boolean requiresUnlock, boolean requiresScreenOn, int bannerResource, int uid, String settingsActivityName, String offHost, String staticOffHost, boolean isEnabled, Map<String, Boolean> autoTransact, Map<Pattern, Boolean> autoTransactPatterns) {
+    public ApduServiceInfo(
+            ResolveInfo info,
+            boolean onHost,
+            String description,
+            List<AidGroup> staticAidGroups,
+            List<AidGroup> dynamicAidGroups,
+            boolean requiresUnlock,
+            boolean requiresScreenOn,
+            int bannerResource,
+            int uid,
+            String settingsActivityName,
+            String offHost,
+            String staticOffHost,
+            boolean isEnabled,
+            Map<String, Boolean> autoTransact,
+            Map<Pattern, Boolean> autoTransactPatterns) {
         this.mSamsungExt = false;
         this.mService = info;
         this.mDescription = description;
@@ -127,13 +244,13 @@ public final class ApduServiceInfo implements Parcelable {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0079, code lost:
-    
-        if ("offhost-apdu-service".equals(r12) == false) goto L37;
-     */
+
+       if ("offhost-apdu-service".equals(r12) == false) goto L37;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0083, code lost:
-    
-        throw new org.xmlpull.v1.XmlPullParserException("Meta-data does not start with <offhost-apdu-service> tag");
-     */
+
+       throw new org.xmlpull.v1.XmlPullParserException("Meta-data does not start with <offhost-apdu-service> tag");
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:243:0x0581  */
     /* JADX WARN: Removed duplicated region for block: B:245:? A[SYNTHETIC] */
@@ -145,16 +262,22 @@ public final class ApduServiceInfo implements Parcelable {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public ApduServiceInfo(android.content.pm.PackageManager r24, android.content.pm.ResolveInfo r25, boolean r26) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    public ApduServiceInfo(
+            android.content.pm.PackageManager r24, android.content.pm.ResolveInfo r25, boolean r26)
+            throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             Method dump skipped, instructions count: 1413
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.nfc.cardemulation.ApduServiceInfo.<init>(android.content.pm.PackageManager, android.content.pm.ResolveInfo, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.nfc.cardemulation.ApduServiceInfo.<init>(android.content.pm.PackageManager,"
+                    + " android.content.pm.ResolveInfo, boolean):void");
     }
 
     public ComponentName getComponent() {
-        return new ComponentName(this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
+        return new ComponentName(
+                this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
     }
 
     public String getOffHostSecureElement() {
@@ -177,14 +300,19 @@ public final class ApduServiceInfo implements Parcelable {
         if (this.mAutoTransact.getOrDefault(plf.toUpperCase(Locale.ROOT), false).booleanValue()) {
             return true;
         }
-        List<Pattern> patternMatches = this.mAutoTransactPatterns.keySet().stream().filter(new Predicate() { // from class: android.nfc.cardemulation.ApduServiceInfo$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean matches;
-                matches = ((Pattern) obj).matcher(plf).matches();
-                return matches;
-            }
-        }).toList();
+        List<Pattern> patternMatches =
+                this.mAutoTransactPatterns.keySet().stream()
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // android.nfc.cardemulation.ApduServiceInfo$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        boolean matches;
+                                        matches = ((Pattern) obj).matcher(plf).matches();
+                                        return matches;
+                                    }
+                                })
+                        .toList();
         if (patternMatches == null || patternMatches.size() == 0) {
             return false;
         }
@@ -257,7 +385,8 @@ public final class ApduServiceInfo implements Parcelable {
     }
 
     public boolean hasCategory(String category) {
-        return this.mStaticAidGroups.containsKey(category) || this.mDynamicAidGroups.containsKey(category);
+        return this.mStaticAidGroups.containsKey(category)
+                || this.mDynamicAidGroups.containsKey(category);
     }
 
     public boolean isOnHost() {
@@ -311,11 +440,13 @@ public final class ApduServiceInfo implements Parcelable {
         if (!this.mOnHost && !autoTransact) {
             return;
         }
-        this.mAutoTransactPatterns.put(Pattern.compile(pollingLoopPatternFilter), Boolean.valueOf(autoTransact));
+        this.mAutoTransactPatterns.put(
+                Pattern.compile(pollingLoopPatternFilter), Boolean.valueOf(autoTransact));
     }
 
     public void removePollingLoopPatternFilter(String pollingLoopPatternFilter) {
-        this.mAutoTransactPatterns.remove(Pattern.compile(pollingLoopPatternFilter.toUpperCase(Locale.ROOT)));
+        this.mAutoTransactPatterns.remove(
+                Pattern.compile(pollingLoopPatternFilter.toUpperCase(Locale.ROOT)));
     }
 
     public void setOffHostSecureElement(String offHost) {
@@ -332,7 +463,8 @@ public final class ApduServiceInfo implements Parcelable {
 
     public CharSequence loadAppLabel(PackageManager pm) {
         try {
-            return pm.getApplicationLabel(pm.getApplicationInfo(this.mService.resolvePackageName, 128));
+            return pm.getApplicationLabel(
+                    pm.getApplicationInfo(this.mService.resolvePackageName, 128));
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         }
@@ -384,7 +516,8 @@ public final class ApduServiceInfo implements Parcelable {
             return false;
         }
         ApduServiceInfo thatService = (ApduServiceInfo) o;
-        return thatService.getComponent().equals(getComponent()) && thatService.getUid() == getUid();
+        return thatService.getComponent().equals(getComponent())
+                && thatService.getUid() == getUid();
     }
 
     public int hashCode() {
@@ -424,23 +557,44 @@ public final class ApduServiceInfo implements Parcelable {
     }
 
     public void dump(ParcelFileDescriptor fd, PrintWriter pw, String[] args) {
-        pw.println("    " + getComponent() + " (Description: " + getDescription() + ") (UID: " + getUid() + NavigationBarInflaterView.KEY_CODE_END);
+        pw.println(
+                "    "
+                        + getComponent()
+                        + " (Description: "
+                        + getDescription()
+                        + ") (UID: "
+                        + getUid()
+                        + NavigationBarInflaterView.KEY_CODE_END);
         if (this.mOnHost) {
             pw.println("    On Host Service");
         } else {
             pw.println("    Off-host Service");
-            pw.println("        Current off-host SE:" + this.mOffHostName + " static off-host SE:" + this.mStaticOffHostName);
+            pw.println(
+                    "        Current off-host SE:"
+                            + this.mOffHostName
+                            + " static off-host SE:"
+                            + this.mStaticOffHostName);
         }
         pw.println("    Static AID groups:");
         for (AidGroup group : this.mStaticAidGroups.values()) {
-            pw.println("        Category: " + group.getCategory() + "(enabled: " + this.mCategoryOtherServiceEnabled + NavigationBarInflaterView.KEY_CODE_END);
+            pw.println(
+                    "        Category: "
+                            + group.getCategory()
+                            + "(enabled: "
+                            + this.mCategoryOtherServiceEnabled
+                            + NavigationBarInflaterView.KEY_CODE_END);
             for (String aid : group.getAids()) {
                 pw.println("            AID: " + aid);
             }
         }
         pw.println("    Dynamic AID groups:");
         for (AidGroup group2 : this.mDynamicAidGroups.values()) {
-            pw.println("        Category: " + group2.getCategory() + "(enabled: " + this.mCategoryOtherServiceEnabled + NavigationBarInflaterView.KEY_CODE_END);
+            pw.println(
+                    "        Category: "
+                            + group2.getCategory()
+                            + "(enabled: "
+                            + this.mCategoryOtherServiceEnabled
+                            + NavigationBarInflaterView.KEY_CODE_END);
             for (String aid2 : group2.getAids()) {
                 pw.println("            AID: " + aid2);
             }

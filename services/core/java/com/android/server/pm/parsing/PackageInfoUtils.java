@@ -25,6 +25,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Pair;
 import android.util.secutil.Slog;
+
 import com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags;
 import com.android.internal.pm.parsing.pkg.AndroidPackageHidden;
 import com.android.internal.pm.parsing.pkg.AndroidPackageLegacyUtils;
@@ -52,7 +53,9 @@ import com.android.server.pm.pkg.PackageUserState;
 import com.android.server.pm.pkg.PackageUserStateInternal;
 import com.android.server.pm.pkg.PackageUserStateUtils;
 import com.android.server.pm.pkg.SharedLibraryWrapper;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -72,11 +75,44 @@ public abstract class PackageInfoUtils {
     static {
         StringBuilder sb = new StringBuilder();
         sb.append(Environment.getDataDirectoryPath());
-        SYSTEM_DATA_PATH = AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, File.separator, "system");
+        SYSTEM_DATA_PATH =
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, File.separator, "system");
     }
 
-    public static int appInfoFlags(AndroidPackage androidPackage, PackageStateInternal packageStateInternal) {
-        int i = (androidPackage.isFactoryTest() ? 16 : 0) | (androidPackage.isExternalStorage() ? 262144 : 0) | (androidPackage.isHardwareAccelerated() ? 536870912 : 0) | (androidPackage.isBackupAllowed() ? 32768 : 0) | (androidPackage.isKillAfterRestoreAllowed() ? EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT : 0) | (androidPackage.isRestoreAnyVersion() ? 131072 : 0) | (androidPackage.isFullBackupOnly() ? 67108864 : 0) | (androidPackage.isPersistent() ? 8 : 0) | (androidPackage.isDebuggable() ? 2 : 0) | (androidPackage.isVmSafeMode() ? EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION : 0) | (androidPackage.isDeclaredHavingCode() ? 4 : 0) | (androidPackage.isTaskReparentingAllowed() ? 32 : 0) | (androidPackage.isClearUserDataAllowed() ? 64 : 0) | (androidPackage.isLargeHeap() ? 1048576 : 0) | (androidPackage.isCleartextTrafficAllowed() ? 134217728 : 0) | (androidPackage.isRtlSupported() ? 4194304 : 0) | (androidPackage.isTestOnly() ? 256 : 0) | (androidPackage.isMultiArch() ? Integer.MIN_VALUE : 0) | (androidPackage.isExtractNativeLibrariesRequested() ? 268435456 : 0) | (androidPackage.isGame() ? 33554432 : 0) | (androidPackage.isSmallScreensSupported() ? 512 : 0) | (androidPackage.isNormalScreensSupported() ? 1024 : 0) | (androidPackage.isLargeScreensSupported() ? 2048 : 0) | (androidPackage.isExtraLargeScreensSupported() ? 524288 : 0) | (androidPackage.isResizeable() ? 4096 : 0) | (androidPackage.isAnyDensity() ? 8192 : 0) | (AndroidPackageLegacyUtils.isSystem(androidPackage) ? 1 : 0);
+    public static int appInfoFlags(
+            AndroidPackage androidPackage, PackageStateInternal packageStateInternal) {
+        int i =
+                (androidPackage.isFactoryTest() ? 16 : 0)
+                        | (androidPackage.isExternalStorage() ? 262144 : 0)
+                        | (androidPackage.isHardwareAccelerated() ? 536870912 : 0)
+                        | (androidPackage.isBackupAllowed() ? 32768 : 0)
+                        | (androidPackage.isKillAfterRestoreAllowed()
+                                ? EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT
+                                : 0)
+                        | (androidPackage.isRestoreAnyVersion() ? 131072 : 0)
+                        | (androidPackage.isFullBackupOnly() ? 67108864 : 0)
+                        | (androidPackage.isPersistent() ? 8 : 0)
+                        | (androidPackage.isDebuggable() ? 2 : 0)
+                        | (androidPackage.isVmSafeMode()
+                                ? EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION
+                                : 0)
+                        | (androidPackage.isDeclaredHavingCode() ? 4 : 0)
+                        | (androidPackage.isTaskReparentingAllowed() ? 32 : 0)
+                        | (androidPackage.isClearUserDataAllowed() ? 64 : 0)
+                        | (androidPackage.isLargeHeap() ? 1048576 : 0)
+                        | (androidPackage.isCleartextTrafficAllowed() ? 134217728 : 0)
+                        | (androidPackage.isRtlSupported() ? 4194304 : 0)
+                        | (androidPackage.isTestOnly() ? 256 : 0)
+                        | (androidPackage.isMultiArch() ? Integer.MIN_VALUE : 0)
+                        | (androidPackage.isExtractNativeLibrariesRequested() ? 268435456 : 0)
+                        | (androidPackage.isGame() ? 33554432 : 0)
+                        | (androidPackage.isSmallScreensSupported() ? 512 : 0)
+                        | (androidPackage.isNormalScreensSupported() ? 1024 : 0)
+                        | (androidPackage.isLargeScreensSupported() ? 2048 : 0)
+                        | (androidPackage.isExtraLargeScreensSupported() ? 524288 : 0)
+                        | (androidPackage.isResizeable() ? 4096 : 0)
+                        | (androidPackage.isAnyDensity() ? 8192 : 0)
+                        | (AndroidPackageLegacyUtils.isSystem(androidPackage) ? 1 : 0);
         if (packageStateInternal != null) {
             return i | (packageStateInternal.isUpdatedSystemApp() ? 128 : 0);
         }
@@ -84,25 +120,62 @@ public abstract class PackageInfoUtils {
     }
 
     public static int appInfoPrivateFlags(AndroidPackage androidPackage) {
-        int i = (androidPackage.isStaticSharedLibrary() ? EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION : 0) | (androidPackage.isResourceOverlay() ? 268435456 : 0) | (androidPackage.isIsolatedSplitLoading() ? 32768 : 0) | (androidPackage.isHasDomainUrls() ? 16 : 0) | (androidPackage.isProfileableByShell() ? 8388608 : 0) | (androidPackage.isBackupInForeground() ? 8192 : 0) | (androidPackage.isUseEmbeddedDex() ? 33554432 : 0) | (androidPackage.isDefaultToDeviceProtectedStorage() ? 32 : 0) | (androidPackage.isDirectBootAware() ? 64 : 0) | (androidPackage.isPartiallyDirectBootAware() ? 256 : 0) | (androidPackage.isClearUserDataOnFailedRestoreAllowed() ? 67108864 : 0) | (androidPackage.isAllowAudioPlaybackCapture() ? 134217728 : 0) | (androidPackage.isRequestLegacyExternalStorage() ? 536870912 : 0) | (androidPackage.isNonSdkApiRequested() ? 4194304 : 0) | (androidPackage.isUserDataFragile() ? 16777216 : 0) | (androidPackage.isSaveStateDisallowed() ? 2 : 0) | (androidPackage.isResizeableActivityViaSdkVersion() ? 4096 : 0) | (androidPackage.isAllowNativeHeapPointerTagging() ? Integer.MIN_VALUE : 0) | (AndroidPackageLegacyUtils.isSystemExt(androidPackage) ? 2097152 : 0) | (AndroidPackageLegacyUtils.isPrivileged(androidPackage) ? 8 : 0) | (AndroidPackageLegacyUtils.isOem(androidPackage) ? 131072 : 0) | (AndroidPackageLegacyUtils.isVendor(androidPackage) ? 262144 : 0) | (AndroidPackageLegacyUtils.isProduct(androidPackage) ? 524288 : 0) | (AndroidPackageLegacyUtils.isOdm(androidPackage) ? 1073741824 : 0) | (androidPackage.isSignedWithPlatformKey() ? 1048576 : 0);
+        int i =
+                (androidPackage.isStaticSharedLibrary()
+                                ? EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION
+                                : 0)
+                        | (androidPackage.isResourceOverlay() ? 268435456 : 0)
+                        | (androidPackage.isIsolatedSplitLoading() ? 32768 : 0)
+                        | (androidPackage.isHasDomainUrls() ? 16 : 0)
+                        | (androidPackage.isProfileableByShell() ? 8388608 : 0)
+                        | (androidPackage.isBackupInForeground() ? 8192 : 0)
+                        | (androidPackage.isUseEmbeddedDex() ? 33554432 : 0)
+                        | (androidPackage.isDefaultToDeviceProtectedStorage() ? 32 : 0)
+                        | (androidPackage.isDirectBootAware() ? 64 : 0)
+                        | (androidPackage.isPartiallyDirectBootAware() ? 256 : 0)
+                        | (androidPackage.isClearUserDataOnFailedRestoreAllowed() ? 67108864 : 0)
+                        | (androidPackage.isAllowAudioPlaybackCapture() ? 134217728 : 0)
+                        | (androidPackage.isRequestLegacyExternalStorage() ? 536870912 : 0)
+                        | (androidPackage.isNonSdkApiRequested() ? 4194304 : 0)
+                        | (androidPackage.isUserDataFragile() ? 16777216 : 0)
+                        | (androidPackage.isSaveStateDisallowed() ? 2 : 0)
+                        | (androidPackage.isResizeableActivityViaSdkVersion() ? 4096 : 0)
+                        | (androidPackage.isAllowNativeHeapPointerTagging() ? Integer.MIN_VALUE : 0)
+                        | (AndroidPackageLegacyUtils.isSystemExt(androidPackage) ? 2097152 : 0)
+                        | (AndroidPackageLegacyUtils.isPrivileged(androidPackage) ? 8 : 0)
+                        | (AndroidPackageLegacyUtils.isOem(androidPackage) ? 131072 : 0)
+                        | (AndroidPackageLegacyUtils.isVendor(androidPackage) ? 262144 : 0)
+                        | (AndroidPackageLegacyUtils.isProduct(androidPackage) ? 524288 : 0)
+                        | (AndroidPackageLegacyUtils.isOdm(androidPackage) ? 1073741824 : 0)
+                        | (androidPackage.isSignedWithPlatformKey() ? 1048576 : 0);
         Boolean resizeableActivity = androidPackage.getResizeableActivity();
-        return resizeableActivity != null ? resizeableActivity.booleanValue() ? i | 1024 : i | 2048 : i;
+        return resizeableActivity != null
+                ? resizeableActivity.booleanValue() ? i | 1024 : i | 2048
+                : i;
     }
 
-    public static void assignFieldsComponentInfoParsedMainComponent(ComponentInfo componentInfo, ParsedMainComponent parsedMainComponent, PackageStateInternal packageStateInternal, int i) {
+    public static void assignFieldsComponentInfoParsedMainComponent(
+            ComponentInfo componentInfo,
+            ParsedMainComponent parsedMainComponent,
+            PackageStateInternal packageStateInternal,
+            int i) {
         assignFieldsPackageItemInfoParsedComponent(componentInfo, parsedMainComponent);
         componentInfo.descriptionRes = parsedMainComponent.getDescriptionRes();
         componentInfo.directBootAware = parsedMainComponent.isDirectBootAware();
         componentInfo.enabled = parsedMainComponent.isEnabled();
         componentInfo.splitName = parsedMainComponent.getSplitName();
         componentInfo.attributionTags = parsedMainComponent.getAttributionTags();
-        Pair nonLocalizedLabelAndIcon = ParsedComponentStateUtils.getNonLocalizedLabelAndIcon(parsedMainComponent, packageStateInternal, i);
+        Pair nonLocalizedLabelAndIcon =
+                ParsedComponentStateUtils.getNonLocalizedLabelAndIcon(
+                        parsedMainComponent, packageStateInternal, i);
         componentInfo.nonLocalizedLabel = (CharSequence) nonLocalizedLabelAndIcon.first;
         componentInfo.icon = ((Integer) nonLocalizedLabelAndIcon.second).intValue();
     }
 
-    public static void assignFieldsPackageItemInfoParsedComponent(PackageItemInfo packageItemInfo, ParsedComponent parsedComponent) {
-        packageItemInfo.nonLocalizedLabel = ComponentParseUtils.getNonLocalizedLabel(parsedComponent);
+    public static void assignFieldsPackageItemInfoParsedComponent(
+            PackageItemInfo packageItemInfo, ParsedComponent parsedComponent) {
+        packageItemInfo.nonLocalizedLabel =
+                ComponentParseUtils.getNonLocalizedLabel(parsedComponent);
         packageItemInfo.icon = ComponentParseUtils.getIcon(parsedComponent);
         packageItemInfo.banner = parsedComponent.getBanner();
         packageItemInfo.labelRes = parsedComponent.getLabelRes();
@@ -111,30 +184,68 @@ public abstract class PackageInfoUtils {
         packageItemInfo.packageName = parsedComponent.getPackageName();
     }
 
-    public static boolean checkUseInstalledOrHidden(long j, PackageUserStateInternal packageUserStateInternal, ApplicationInfo applicationInfo) {
-        if ((536870912 & j) != 0 || packageUserStateInternal.isInstalled() || applicationInfo == null || !applicationInfo.hiddenUntilInstalled) {
-            return PackageUserStateUtils.isAvailable(packageUserStateInternal, j) || !(applicationInfo == null || !applicationInfo.isSystemApp() || (j & 4836040704L) == 0);
+    public static boolean checkUseInstalledOrHidden(
+            long j,
+            PackageUserStateInternal packageUserStateInternal,
+            ApplicationInfo applicationInfo) {
+        if ((536870912 & j) != 0
+                || packageUserStateInternal.isInstalled()
+                || applicationInfo == null
+                || !applicationInfo.hiddenUntilInstalled) {
+            return PackageUserStateUtils.isAvailable(packageUserStateInternal, j)
+                    || !(applicationInfo == null
+                            || !applicationInfo.isSystemApp()
+                            || (j & 4836040704L) == 0);
         }
         return false;
     }
 
-    public static boolean checkUseInstalledOrHidden(PackageStateInternal packageStateInternal, PackageUserStateInternal packageUserStateInternal, long j) {
-        if ((536870912 & j) == 0 && !packageUserStateInternal.isInstalled() && packageStateInternal.getTransientState().hiddenUntilInstalled) {
+    public static boolean checkUseInstalledOrHidden(
+            PackageStateInternal packageStateInternal,
+            PackageUserStateInternal packageUserStateInternal,
+            long j) {
+        if ((536870912 & j) == 0
+                && !packageUserStateInternal.isInstalled()
+                && packageStateInternal.getTransientState().hiddenUntilInstalled) {
             return false;
         }
-        return PackageUserStateUtils.isAvailable(packageUserStateInternal, j) || (packageStateInternal.isSystem() && (4836040704L & j) != 0);
+        return PackageUserStateUtils.isAvailable(packageUserStateInternal, j)
+                || (packageStateInternal.isSystem() && (4836040704L & j) != 0);
     }
 
-    public static ActivityInfo generateActivityInfo(AndroidPackage androidPackage, ParsedActivity parsedActivity, long j, PackageUserStateInternal packageUserStateInternal, int i, PackageStateInternal packageStateInternal) {
-        return generateActivityInfo(androidPackage, parsedActivity, j, packageUserStateInternal, null, i, packageStateInternal);
+    public static ActivityInfo generateActivityInfo(
+            AndroidPackage androidPackage,
+            ParsedActivity parsedActivity,
+            long j,
+            PackageUserStateInternal packageUserStateInternal,
+            int i,
+            PackageStateInternal packageStateInternal) {
+        return generateActivityInfo(
+                androidPackage,
+                parsedActivity,
+                j,
+                packageUserStateInternal,
+                null,
+                i,
+                packageStateInternal);
     }
 
-    public static ActivityInfo generateActivityInfo(AndroidPackage androidPackage, ParsedActivity parsedActivity, long j, PackageUserStateInternal packageUserStateInternal, ApplicationInfo applicationInfo, int i, PackageStateInternal packageStateInternal) {
-        if (parsedActivity == null || !checkUseInstalledOrHidden(packageStateInternal, packageUserStateInternal, j)) {
+    public static ActivityInfo generateActivityInfo(
+            AndroidPackage androidPackage,
+            ParsedActivity parsedActivity,
+            long j,
+            PackageUserStateInternal packageUserStateInternal,
+            ApplicationInfo applicationInfo,
+            int i,
+            PackageStateInternal packageStateInternal) {
+        if (parsedActivity == null
+                || !checkUseInstalledOrHidden(packageStateInternal, packageUserStateInternal, j)) {
             return null;
         }
         if (applicationInfo == null) {
-            applicationInfo = generateApplicationInfo(androidPackage, j, packageUserStateInternal, i, packageStateInternal);
+            applicationInfo =
+                    generateApplicationInfo(
+                            androidPackage, j, packageUserStateInternal, i, packageStateInternal);
         }
         if (applicationInfo == null) {
             return null;
@@ -175,43 +286,75 @@ public abstract class PackageInfoUtils {
         }
         activityInfo.applicationInfo = applicationInfo;
         activityInfo.requiredDisplayCategory = parsedActivity.getRequiredDisplayCategory();
-        activityInfo.requireContentUriPermissionFromCaller = parsedActivity.getRequireContentUriPermissionFromCaller();
-        activityInfo.setKnownActivityEmbeddingCerts(parsedActivity.getKnownActivityEmbeddingCerts());
-        assignFieldsComponentInfoParsedMainComponent(activityInfo, parsedActivity, packageStateInternal, i);
+        activityInfo.requireContentUriPermissionFromCaller =
+                parsedActivity.getRequireContentUriPermissionFromCaller();
+        activityInfo.setKnownActivityEmbeddingCerts(
+                parsedActivity.getKnownActivityEmbeddingCerts());
+        assignFieldsComponentInfoParsedMainComponent(
+                activityInfo, parsedActivity, packageStateInternal, i);
         return activityInfo;
     }
 
-    public static ApplicationInfo generateApplicationInfo(AndroidPackage androidPackage, long j, PackageUserStateInternal packageUserStateInternal, int i, PackageStateInternal packageStateInternal) {
+    public static ApplicationInfo generateApplicationInfo(
+            AndroidPackage androidPackage,
+            long j,
+            PackageUserStateInternal packageUserStateInternal,
+            int i,
+            PackageStateInternal packageStateInternal) {
         int indexOf;
         ArrayList arrayList = null;
-        if (androidPackage != null && checkUseInstalledOrHidden(packageStateInternal, packageUserStateInternal, j)) {
+        if (androidPackage != null
+                && checkUseInstalledOrHidden(packageStateInternal, packageUserStateInternal, j)) {
             if ((1048576 & j) != 0 ? packageStateInternal.isSystem() : true) {
-                ApplicationInfo appInfoWithoutState = ((AndroidPackageHidden) androidPackage).toAppInfoWithoutState();
+                ApplicationInfo appInfoWithoutState =
+                        ((AndroidPackageHidden) androidPackage).toAppInfoWithoutState();
                 updateApplicationInfo(appInfoWithoutState, j, packageUserStateInternal);
                 PackageImpl packageImpl = (PackageImpl) androidPackage;
                 String packageName = androidPackage.getPackageName();
-                appInfoWithoutState.uid = UserHandle.getUid(i, UserHandle.getAppId(androidPackage.getUid()));
+                appInfoWithoutState.uid =
+                        UserHandle.getUid(i, UserHandle.getAppId(androidPackage.getUid()));
                 if ("android".equals(packageName)) {
                     appInfoWithoutState.dataDir = SYSTEM_DATA_PATH;
-                } else if (packageUserStateInternal.isInstalled() || packageUserStateInternal.dataExists() || !Flags.nullableDataDir()) {
+                } else if (packageUserStateInternal.isInstalled()
+                        || packageUserStateInternal.dataExists()
+                        || !Flags.nullableDataDir()) {
                     if (i == 0) {
-                        appInfoWithoutState.credentialProtectedDataDir = packageImpl.getBaseAppDataCredentialProtectedDirForSystemUser() + packageName;
-                        appInfoWithoutState.deviceProtectedDataDir = packageImpl.getBaseAppDataDeviceProtectedDirForSystemUser() + packageName;
+                        appInfoWithoutState.credentialProtectedDataDir =
+                                packageImpl.getBaseAppDataCredentialProtectedDirForSystemUser()
+                                        + packageName;
+                        appInfoWithoutState.deviceProtectedDataDir =
+                                packageImpl.getBaseAppDataDeviceProtectedDirForSystemUser()
+                                        + packageName;
                     } else {
                         String valueOf = String.valueOf(i);
-                        int length = packageImpl.getBaseAppDataCredentialProtectedDirForSystemUser().length();
-                        StringBuilder replace = new StringBuilder(packageImpl.getBaseAppDataCredentialProtectedDirForSystemUser()).replace(length - 2, length - 1, valueOf);
+                        int length =
+                                packageImpl
+                                        .getBaseAppDataCredentialProtectedDirForSystemUser()
+                                        .length();
+                        StringBuilder replace =
+                                new StringBuilder(
+                                                packageImpl
+                                                        .getBaseAppDataCredentialProtectedDirForSystemUser())
+                                        .replace(length - 2, length - 1, valueOf);
                         replace.append(packageName);
                         appInfoWithoutState.credentialProtectedDataDir = replace.toString();
-                        int length2 = packageImpl.getBaseAppDataDeviceProtectedDirForSystemUser().length();
-                        StringBuilder replace2 = new StringBuilder(packageImpl.getBaseAppDataDeviceProtectedDirForSystemUser()).replace(length2 - 2, length2 - 1, valueOf);
+                        int length2 =
+                                packageImpl
+                                        .getBaseAppDataDeviceProtectedDirForSystemUser()
+                                        .length();
+                        StringBuilder replace2 =
+                                new StringBuilder(
+                                                packageImpl
+                                                        .getBaseAppDataDeviceProtectedDirForSystemUser())
+                                        .replace(length2 - 2, length2 - 1, valueOf);
                         replace2.append(packageName);
                         appInfoWithoutState.deviceProtectedDataDir = replace2.toString();
                     }
                     if (androidPackage.isDefaultToDeviceProtectedStorage()) {
                         appInfoWithoutState.dataDir = appInfoWithoutState.deviceProtectedDataDir;
                     } else {
-                        appInfoWithoutState.dataDir = appInfoWithoutState.credentialProtectedDataDir;
+                        appInfoWithoutState.dataDir =
+                                appInfoWithoutState.credentialProtectedDataDir;
                     }
                 } else {
                     appInfoWithoutState.dataDir = null;
@@ -224,16 +367,27 @@ public abstract class PackageInfoUtils {
                 for (int i2 = 0; i2 < list2.size(); i2++) {
                     arrayList2.add(((SharedLibraryWrapper) list2.get(i2)).mInfo);
                 }
-                appInfoWithoutState.sharedLibraryFiles = list.isEmpty() ? null : (String[]) list.toArray(new String[0]);
+                appInfoWithoutState.sharedLibraryFiles =
+                        list.isEmpty() ? null : (String[]) list.toArray(new String[0]);
                 if (Flags.sdkLibIndependence()) {
-                    appInfoWithoutState.sharedLibraryInfos = arrayList2.isEmpty() ? null : arrayList2;
+                    appInfoWithoutState.sharedLibraryInfos =
+                            arrayList2.isEmpty() ? null : arrayList2;
                     String[] usesSdkLibraries = packageStateInternal.getUsesSdkLibraries();
-                    boolean[] usesSdkLibrariesOptional = packageStateInternal.getUsesSdkLibrariesOptional();
-                    if (!ArrayUtils.isEmpty(usesSdkLibrariesOptional) && !ArrayUtils.isEmpty(usesSdkLibraries) && usesSdkLibraries.length == usesSdkLibrariesOptional.length) {
+                    boolean[] usesSdkLibrariesOptional =
+                            packageStateInternal.getUsesSdkLibrariesOptional();
+                    if (!ArrayUtils.isEmpty(usesSdkLibrariesOptional)
+                            && !ArrayUtils.isEmpty(usesSdkLibraries)
+                            && usesSdkLibraries.length == usesSdkLibrariesOptional.length) {
                         Iterator it = arrayList2.iterator();
                         while (it.hasNext()) {
                             SharedLibraryInfo sharedLibraryInfo = (SharedLibraryInfo) it.next();
-                            if (sharedLibraryInfo.getType() == 3 && (indexOf = ArrayUtils.indexOf(usesSdkLibraries, sharedLibraryInfo.getName())) >= 0 && usesSdkLibrariesOptional[indexOf]) {
+                            if (sharedLibraryInfo.getType() == 3
+                                    && (indexOf =
+                                                    ArrayUtils.indexOf(
+                                                            usesSdkLibraries,
+                                                            sharedLibraryInfo.getName()))
+                                            >= 0
+                                    && usesSdkLibrariesOptional[indexOf]) {
                                 if (arrayList == null) {
                                     arrayList = new ArrayList();
                                 }
@@ -253,15 +407,22 @@ public abstract class PackageInfoUtils {
                 if (categoryOverride != -1) {
                     appInfoWithoutState.category = categoryOverride;
                 }
-                AppCategoryHintHelper appCategoryHintHelper = PackageManagerService.sAppCategoryHintHelper;
+                AppCategoryHintHelper appCategoryHintHelper =
+                        PackageManagerService.sAppCategoryHintHelper;
                 String packageName2 = packageStateInternal.getPackageName();
                 int i3 = appInfoWithoutState.category;
                 if (appCategoryHintHelper.mInit.get()) {
-                    int packageCategory = appCategoryHintHelper.mAppCategoryFilter.getPackageCategory(packageName2);
+                    int packageCategory =
+                            appCategoryHintHelper.mAppCategoryFilter.getPackageCategory(
+                                    packageName2);
                     synchronized (appCategoryHintHelper.mCategoryMap) {
                         try {
                             if (appCategoryHintHelper.mCategoryMap.containsKey(packageName2)) {
-                                i3 = ((Integer) appCategoryHintHelper.mCategoryMap.get(packageName2)).intValue();
+                                i3 =
+                                        ((Integer)
+                                                        appCategoryHintHelper.mCategoryMap.get(
+                                                                packageName2))
+                                                .intValue();
                             } else if (packageCategory != -1) {
                                 i3 = packageCategory;
                             }
@@ -270,26 +431,36 @@ public abstract class PackageInfoUtils {
                         }
                     }
                 } else {
-                    Slog.d("AppCategoryHintHelper", "AppCategoryHintHelper is not initialized, return category without user's setting");
+                    Slog.d(
+                            "AppCategoryHintHelper",
+                            "AppCategoryHintHelper is not initialized, return category without"
+                                + " user's setting");
                 }
                 appInfoWithoutState.category = i3;
                 appInfoWithoutState.seInfo = packageStateInternal.getSeInfo();
                 appInfoWithoutState.primaryCpuAbi = packageStateInternal.getPrimaryCpuAbi();
                 appInfoWithoutState.secondaryCpuAbi = packageStateInternal.getSecondaryCpuAbi();
                 int i4 = appInfoWithoutState.flags;
-                appInfoWithoutState.flags = i4 | (packageStateInternal.isUpdatedSystemApp() ? 128 : 0) | i4;
+                appInfoWithoutState.flags =
+                        i4 | (packageStateInternal.isUpdatedSystemApp() ? 128 : 0) | i4;
                 appInfoWithoutState.privateFlags = appInfoWithoutState.privateFlags;
                 int i5 = appInfoWithoutState.privateFlagsExt;
-                appInfoWithoutState.privateFlagsExt = i5 | i5 | (packageStateInternal.getCpuAbiOverride() != null ? 32 : 0);
+                appInfoWithoutState.privateFlagsExt =
+                        i5 | i5 | (packageStateInternal.getCpuAbiOverride() != null ? 32 : 0);
                 return appInfoWithoutState;
             }
         }
         return null;
     }
 
-    public static ApplicationInfo generateDelegateApplicationInfo(ApplicationInfo applicationInfo, long j, PackageUserStateInternal packageUserStateInternal, int i) {
+    public static ApplicationInfo generateDelegateApplicationInfo(
+            ApplicationInfo applicationInfo,
+            long j,
+            PackageUserStateInternal packageUserStateInternal,
+            int i) {
         int i2;
-        if (applicationInfo == null || !checkUseInstalledOrHidden(j, packageUserStateInternal, applicationInfo)) {
+        if (applicationInfo == null
+                || !checkUseInstalledOrHidden(j, packageUserStateInternal, applicationInfo)) {
             return null;
         }
         ApplicationInfo applicationInfo2 = new ApplicationInfo(applicationInfo);
@@ -302,8 +473,15 @@ public abstract class PackageInfoUtils {
         return applicationInfo2;
     }
 
-    public static InstrumentationInfo generateInstrumentationInfo(ParsedInstrumentation parsedInstrumentation, AndroidPackage androidPackage, long j, PackageUserStateInternal packageUserStateInternal, int i, PackageStateInternal packageStateInternal) {
-        if (parsedInstrumentation == null || !checkUseInstalledOrHidden(packageStateInternal, packageUserStateInternal, j)) {
+    public static InstrumentationInfo generateInstrumentationInfo(
+            ParsedInstrumentation parsedInstrumentation,
+            AndroidPackage androidPackage,
+            long j,
+            PackageUserStateInternal packageUserStateInternal,
+            int i,
+            PackageStateInternal packageStateInternal) {
+        if (parsedInstrumentation == null
+                || !checkUseInstalledOrHidden(packageStateInternal, packageUserStateInternal, j)) {
             return null;
         }
         InstrumentationInfo instrumentationInfo = new InstrumentationInfo();
@@ -314,25 +492,47 @@ public abstract class PackageInfoUtils {
         instrumentationInfo.sourceDir = androidPackage.getBaseApkPath();
         instrumentationInfo.publicSourceDir = androidPackage.getBaseApkPath();
         instrumentationInfo.splitNames = androidPackage.getSplitNames();
-        instrumentationInfo.splitSourceDirs = androidPackage.getSplitCodePaths().length == 0 ? null : androidPackage.getSplitCodePaths();
-        instrumentationInfo.splitPublicSourceDirs = androidPackage.getSplitCodePaths().length == 0 ? null : androidPackage.getSplitCodePaths();
-        instrumentationInfo.splitDependencies = androidPackage.getSplitDependencies().size() == 0 ? null : androidPackage.getSplitDependencies();
+        instrumentationInfo.splitSourceDirs =
+                androidPackage.getSplitCodePaths().length == 0
+                        ? null
+                        : androidPackage.getSplitCodePaths();
+        instrumentationInfo.splitPublicSourceDirs =
+                androidPackage.getSplitCodePaths().length == 0
+                        ? null
+                        : androidPackage.getSplitCodePaths();
+        instrumentationInfo.splitDependencies =
+                androidPackage.getSplitDependencies().size() == 0
+                        ? null
+                        : androidPackage.getSplitDependencies();
         PackageImpl packageImpl = (PackageImpl) androidPackage;
         String packageName = androidPackage.getPackageName();
         if ("android".equals(packageName)) {
             instrumentationInfo.dataDir = SYSTEM_DATA_PATH;
-        } else if (packageUserStateInternal.isInstalled() || packageUserStateInternal.dataExists() || !Flags.nullableDataDir()) {
+        } else if (packageUserStateInternal.isInstalled()
+                || packageUserStateInternal.dataExists()
+                || !Flags.nullableDataDir()) {
             if (i == 0) {
-                instrumentationInfo.credentialProtectedDataDir = packageImpl.getBaseAppDataCredentialProtectedDirForSystemUser() + packageName;
-                instrumentationInfo.deviceProtectedDataDir = packageImpl.getBaseAppDataDeviceProtectedDirForSystemUser() + packageName;
+                instrumentationInfo.credentialProtectedDataDir =
+                        packageImpl.getBaseAppDataCredentialProtectedDirForSystemUser()
+                                + packageName;
+                instrumentationInfo.deviceProtectedDataDir =
+                        packageImpl.getBaseAppDataDeviceProtectedDirForSystemUser() + packageName;
             } else {
                 String valueOf = String.valueOf(i);
-                int length = packageImpl.getBaseAppDataCredentialProtectedDirForSystemUser().length();
-                StringBuilder replace = new StringBuilder(packageImpl.getBaseAppDataCredentialProtectedDirForSystemUser()).replace(length - 2, length - 1, valueOf);
+                int length =
+                        packageImpl.getBaseAppDataCredentialProtectedDirForSystemUser().length();
+                StringBuilder replace =
+                        new StringBuilder(
+                                        packageImpl
+                                                .getBaseAppDataCredentialProtectedDirForSystemUser())
+                                .replace(length - 2, length - 1, valueOf);
                 replace.append(packageName);
                 instrumentationInfo.credentialProtectedDataDir = replace.toString();
                 int length2 = packageImpl.getBaseAppDataDeviceProtectedDirForSystemUser().length();
-                StringBuilder replace2 = new StringBuilder(packageImpl.getBaseAppDataDeviceProtectedDirForSystemUser()).replace(length2 - 2, length2 - 1, valueOf);
+                StringBuilder replace2 =
+                        new StringBuilder(
+                                        packageImpl.getBaseAppDataDeviceProtectedDirForSystemUser())
+                                .replace(length2 - 2, length2 - 1, valueOf);
                 replace2.append(packageName);
                 instrumentationInfo.deviceProtectedDataDir = replace2.toString();
             }
@@ -347,11 +547,16 @@ public abstract class PackageInfoUtils {
         instrumentationInfo.primaryCpuAbi = packageStateInternal.getPrimaryCpuAbi();
         instrumentationInfo.secondaryCpuAbi = packageStateInternal.getSecondaryCpuAbi();
         instrumentationInfo.nativeLibraryDir = androidPackage.getNativeLibraryDir();
-        instrumentationInfo.secondaryNativeLibraryDir = androidPackage.getSecondaryNativeLibraryDir();
+        instrumentationInfo.secondaryNativeLibraryDir =
+                androidPackage.getSecondaryNativeLibraryDir();
         assignFieldsPackageItemInfoParsedComponent(instrumentationInfo, parsedInstrumentation);
-        Pair nonLocalizedLabelAndIcon = ParsedComponentStateUtils.getNonLocalizedLabelAndIcon(parsedInstrumentation, packageStateInternal, i);
-        ((PackageItemInfo) instrumentationInfo).nonLocalizedLabel = (CharSequence) nonLocalizedLabelAndIcon.first;
-        ((PackageItemInfo) instrumentationInfo).icon = ((Integer) nonLocalizedLabelAndIcon.second).intValue();
+        Pair nonLocalizedLabelAndIcon =
+                ParsedComponentStateUtils.getNonLocalizedLabelAndIcon(
+                        parsedInstrumentation, packageStateInternal, i);
+        ((PackageItemInfo) instrumentationInfo).nonLocalizedLabel =
+                (CharSequence) nonLocalizedLabelAndIcon.first;
+        ((PackageItemInfo) instrumentationInfo).icon =
+                ((Integer) nonLocalizedLabelAndIcon.second).intValue();
         if ((j & 128) == 0) {
             instrumentationInfo.metaData = null;
         } else {
@@ -361,11 +566,16 @@ public abstract class PackageInfoUtils {
         return instrumentationInfo;
     }
 
-    public static PermissionGroupInfo generatePermissionGroupInfo(ParsedPermissionGroup parsedPermissionGroup, long j) {
+    public static PermissionGroupInfo generatePermissionGroupInfo(
+            ParsedPermissionGroup parsedPermissionGroup, long j) {
         if (parsedPermissionGroup == null) {
             return null;
         }
-        PermissionGroupInfo permissionGroupInfo = new PermissionGroupInfo(parsedPermissionGroup.getRequestDetailRes(), parsedPermissionGroup.getBackgroundRequestRes(), parsedPermissionGroup.getBackgroundRequestDetailRes());
+        PermissionGroupInfo permissionGroupInfo =
+                new PermissionGroupInfo(
+                        parsedPermissionGroup.getRequestDetailRes(),
+                        parsedPermissionGroup.getBackgroundRequestRes(),
+                        parsedPermissionGroup.getBackgroundRequestDetailRes());
         assignFieldsPackageItemInfoParsedComponent(permissionGroupInfo, parsedPermissionGroup);
         permissionGroupInfo.descriptionRes = parsedPermissionGroup.getDescriptionRes();
         permissionGroupInfo.priority = parsedPermissionGroup.getPriority();
@@ -384,7 +594,8 @@ public abstract class PackageInfoUtils {
         if (parsedPermission == null) {
             return null;
         }
-        PermissionInfo permissionInfo = new PermissionInfo(parsedPermission.getBackgroundPermission());
+        PermissionInfo permissionInfo =
+                new PermissionInfo(parsedPermission.getBackgroundPermission());
         assignFieldsPackageItemInfoParsedComponent(permissionInfo, parsedPermission);
         permissionInfo.group = parsedPermission.getGroup();
         permissionInfo.requestRes = parsedPermission.getRequestRes();
@@ -409,22 +620,41 @@ public abstract class PackageInfoUtils {
         Iterator it = map.keySet().iterator();
         while (it.hasNext()) {
             ParsedProcess parsedProcess = (ParsedProcess) map.get((String) it.next());
-            arrayMap.put(parsedProcess.getName(), new ProcessInfo(parsedProcess.getName(), new ArraySet(parsedProcess.getDeniedPermissions()), parsedProcess.getGwpAsanMode(), parsedProcess.getMemtagMode(), parsedProcess.getNativeHeapZeroInitialized(), parsedProcess.isUseEmbeddedDex()));
+            arrayMap.put(
+                    parsedProcess.getName(),
+                    new ProcessInfo(
+                            parsedProcess.getName(),
+                            new ArraySet(parsedProcess.getDeniedPermissions()),
+                            parsedProcess.getGwpAsanMode(),
+                            parsedProcess.getMemtagMode(),
+                            parsedProcess.getNativeHeapZeroInitialized(),
+                            parsedProcess.isUseEmbeddedDex()));
         }
         return arrayMap;
     }
 
-    public static ProviderInfo generateProviderInfo(AndroidPackage androidPackage, ParsedProvider parsedProvider, long j, PackageUserStateInternal packageUserStateInternal, ApplicationInfo applicationInfo, int i, PackageStateInternal packageStateInternal) {
-        if (parsedProvider == null || !checkUseInstalledOrHidden(packageStateInternal, packageUserStateInternal, j)) {
+    public static ProviderInfo generateProviderInfo(
+            AndroidPackage androidPackage,
+            ParsedProvider parsedProvider,
+            long j,
+            PackageUserStateInternal packageUserStateInternal,
+            ApplicationInfo applicationInfo,
+            int i,
+            PackageStateInternal packageStateInternal) {
+        if (parsedProvider == null
+                || !checkUseInstalledOrHidden(packageStateInternal, packageUserStateInternal, j)) {
             return null;
         }
-        if (applicationInfo == null || !androidPackage.getPackageName().equals(applicationInfo.packageName)) {
+        if (applicationInfo == null
+                || !androidPackage.getPackageName().equals(applicationInfo.packageName)) {
             StringBuilder sb = new StringBuilder("AppInfo's package name is different. Expected=");
             sb.append(androidPackage.getPackageName());
             sb.append(" actual=");
             sb.append(applicationInfo == null ? "(null AppInfo)" : applicationInfo.packageName);
             android.util.Slog.wtf("PackageParsing", sb.toString());
-            applicationInfo = generateApplicationInfo(androidPackage, j, packageUserStateInternal, i, packageStateInternal);
+            applicationInfo =
+                    generateApplicationInfo(
+                            androidPackage, j, packageUserStateInternal, i, packageStateInternal);
         }
         if (applicationInfo == null) {
             return null;
@@ -441,8 +671,12 @@ public abstract class PackageInfoUtils {
         providerInfo.forceUriPermissions = parsedProvider.isForceUriPermissions();
         providerInfo.multiprocess = parsedProvider.isMultiProcess();
         providerInfo.initOrder = parsedProvider.getInitOrder();
-        providerInfo.uriPermissionPatterns = (PatternMatcher[]) parsedProvider.getUriPermissionPatterns().toArray(new PatternMatcher[0]);
-        providerInfo.pathPermissions = (PathPermission[]) parsedProvider.getPathPermissions().toArray(new PathPermission[0]);
+        providerInfo.uriPermissionPatterns =
+                (PatternMatcher[])
+                        parsedProvider.getUriPermissionPatterns().toArray(new PatternMatcher[0]);
+        providerInfo.pathPermissions =
+                (PathPermission[])
+                        parsedProvider.getPathPermissions().toArray(new PathPermission[0]);
         if ((2048 & j) == 0) {
             providerInfo.uriPermissionPatterns = null;
         }
@@ -451,16 +685,27 @@ public abstract class PackageInfoUtils {
             providerInfo.metaData = metaData.isEmpty() ? null : metaData;
         }
         providerInfo.applicationInfo = applicationInfo;
-        assignFieldsComponentInfoParsedMainComponent(providerInfo, parsedProvider, packageStateInternal, i);
+        assignFieldsComponentInfoParsedMainComponent(
+                providerInfo, parsedProvider, packageStateInternal, i);
         return providerInfo;
     }
 
-    public static ServiceInfo generateServiceInfo(AndroidPackage androidPackage, ParsedService parsedService, long j, PackageUserStateInternal packageUserStateInternal, ApplicationInfo applicationInfo, int i, PackageStateInternal packageStateInternal) {
-        if (parsedService == null || !checkUseInstalledOrHidden(packageStateInternal, packageUserStateInternal, j)) {
+    public static ServiceInfo generateServiceInfo(
+            AndroidPackage androidPackage,
+            ParsedService parsedService,
+            long j,
+            PackageUserStateInternal packageUserStateInternal,
+            ApplicationInfo applicationInfo,
+            int i,
+            PackageStateInternal packageStateInternal) {
+        if (parsedService == null
+                || !checkUseInstalledOrHidden(packageStateInternal, packageUserStateInternal, j)) {
             return null;
         }
         if (applicationInfo == null) {
-            applicationInfo = generateApplicationInfo(androidPackage, j, packageUserStateInternal, i, packageStateInternal);
+            applicationInfo =
+                    generateApplicationInfo(
+                            androidPackage, j, packageUserStateInternal, i, packageStateInternal);
         }
         if (applicationInfo == null) {
             return null;
@@ -476,7 +721,8 @@ public abstract class PackageInfoUtils {
             Bundle metaData = parsedService.getMetaData();
             serviceInfo.metaData = metaData.isEmpty() ? null : metaData;
         }
-        assignFieldsComponentInfoParsedMainComponent(serviceInfo, parsedService, packageStateInternal, i);
+        assignFieldsComponentInfoParsedMainComponent(
+                serviceInfo, parsedService, packageStateInternal, i);
         return serviceInfo;
     }
 
@@ -484,8 +730,18 @@ public abstract class PackageInfoUtils {
         if ("android".equals(packageStateInternal.getPackageName())) {
             return Environment.getDataSystemDirectory();
         }
-        if (packageStateInternal.getUserStateOrDefault(i).isInstalled() || packageStateInternal.getUserStateOrDefault(i).dataExists() || !Flags.nullableDataDir()) {
-            return packageStateInternal.isDefaultToDeviceProtectedStorage() ? Environment.getDataUserDePackageDirectory(packageStateInternal.getVolumeUuid(), i, packageStateInternal.getPackageName()) : Environment.getDataUserCePackageDirectory(packageStateInternal.getVolumeUuid(), i, packageStateInternal.getPackageName());
+        if (packageStateInternal.getUserStateOrDefault(i).isInstalled()
+                || packageStateInternal.getUserStateOrDefault(i).dataExists()
+                || !Flags.nullableDataDir()) {
+            return packageStateInternal.isDefaultToDeviceProtectedStorage()
+                    ? Environment.getDataUserDePackageDirectory(
+                            packageStateInternal.getVolumeUuid(),
+                            i,
+                            packageStateInternal.getPackageName())
+                    : Environment.getDataUserCePackageDirectory(
+                            packageStateInternal.getVolumeUuid(),
+                            i,
+                            packageStateInternal.getPackageName());
         }
         return null;
     }
@@ -495,7 +751,7 @@ public abstract class PackageInfoUtils {
             return null;
         }
         if (signingDetails.hasPastSigningCertificates()) {
-            return new Signature[]{signingDetails.getPastSigningCertificates()[0]};
+            return new Signature[] {signingDetails.getPastSigningCertificates()[0]};
         }
         if (!signingDetails.hasSignatures()) {
             return null;
@@ -506,7 +762,8 @@ public abstract class PackageInfoUtils {
         return signatureArr;
     }
 
-    public static void updateApplicationInfo(ApplicationInfo applicationInfo, long j, PackageUserState packageUserState) {
+    public static void updateApplicationInfo(
+            ApplicationInfo applicationInfo, long j, PackageUserState packageUserState) {
         if ((128 & j) == 0) {
             applicationInfo.metaData = null;
         }
@@ -517,8 +774,16 @@ public abstract class PackageInfoUtils {
         if (!ParsingPackageUtils.sCompatibilityModeEnabled) {
             applicationInfo.disableCompatibilityMode();
         }
-        applicationInfo.flags |= (packageUserState.isStopped() ? 2097152 : 0) | (packageUserState.isInstalled() ? 8388608 : 0) | (packageUserState.isSuspended() ? 1073741824 : 0);
-        applicationInfo.privateFlags |= (packageUserState.isInstantApp() ? 128 : 0) | (packageUserState.isVirtualPreload() ? EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT : 0) | (packageUserState.isHidden() ? 1 : 0);
+        applicationInfo.flags |=
+                (packageUserState.isStopped() ? 2097152 : 0)
+                        | (packageUserState.isInstalled() ? 8388608 : 0)
+                        | (packageUserState.isSuspended() ? 1073741824 : 0);
+        applicationInfo.privateFlags |=
+                (packageUserState.isInstantApp() ? 128 : 0)
+                        | (packageUserState.isVirtualPreload()
+                                ? EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT
+                                : 0)
+                        | (packageUserState.isHidden() ? 1 : 0);
         applicationInfo.privateFlagsExt |= packageUserState.isNotLaunched() ? 64 : 0;
         boolean z = true;
         if (packageUserState.getEnabledState() == 1) {
@@ -528,25 +793,35 @@ public abstract class PackageInfoUtils {
                 z = false;
             }
             applicationInfo.enabled = z;
-        } else if (packageUserState.getEnabledState() == 2 || packageUserState.getEnabledState() == 3) {
+        } else if (packageUserState.getEnabledState() == 2
+                || packageUserState.getEnabledState() == 3) {
             applicationInfo.enabled = false;
         }
         applicationInfo.enabledSetting = packageUserState.getEnabledState();
         if (applicationInfo.category == -1) {
-            applicationInfo.category = FallbackCategoryProvider.getFallbackCategory(applicationInfo.packageName);
+            applicationInfo.category =
+                    FallbackCategoryProvider.getFallbackCategory(applicationInfo.packageName);
         }
-        applicationInfo.seInfoUser = packageUserState.isInstantApp() ? ":ephemeralapp:complete" : ":complete";
+        applicationInfo.seInfoUser =
+                packageUserState.isInstantApp() ? ":ephemeralapp:complete" : ":complete";
         OverlayPaths allOverlayPaths = packageUserState.getAllOverlayPaths();
         if (allOverlayPaths != null) {
-            applicationInfo.resourceDirs = (String[]) allOverlayPaths.getResourceDirs().toArray(new String[0]);
-            applicationInfo.overlayPaths = (String[]) allOverlayPaths.getOverlayPaths().toArray(new String[0]);
+            applicationInfo.resourceDirs =
+                    (String[]) allOverlayPaths.getResourceDirs().toArray(new String[0]);
+            applicationInfo.overlayPaths =
+                    (String[]) allOverlayPaths.getOverlayPaths().toArray(new String[0]);
         }
         boolean isArchived = PackageArchiver.isArchived(packageUserState);
         applicationInfo.isArchived = isArchived;
         if (isArchived) {
-            applicationInfo.nonLocalizedLabel = ((ArchiveState.ArchiveActivityInfo) packageUserState.getArchiveState().mActivityInfos.get(0)).mTitle;
+            applicationInfo.nonLocalizedLabel =
+                    ((ArchiveState.ArchiveActivityInfo)
+                                    packageUserState.getArchiveState().mActivityInfos.get(0))
+                            .mTitle;
         }
-        if (packageUserState.isInstalled() || packageUserState.dataExists() || !Flags.nullableDataDir()) {
+        if (packageUserState.isInstalled()
+                || packageUserState.dataExists()
+                || !Flags.nullableDataDir()) {
             return;
         }
         applicationInfo.dataDir = null;

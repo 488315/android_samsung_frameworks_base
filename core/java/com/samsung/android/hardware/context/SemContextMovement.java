@@ -7,19 +7,22 @@ import android.os.Parcelable;
 /* loaded from: classes6.dex */
 public class SemContextMovement extends SemContextEventContext {
     public static final int ACTION = 1;
-    public static final Parcelable.Creator<SemContextMovement> CREATOR = new Parcelable.Creator<SemContextMovement>() { // from class: com.samsung.android.hardware.context.SemContextMovement.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextMovement createFromParcel(Parcel in) {
-            return new SemContextMovement(in);
-        }
+    public static final Parcelable.Creator<SemContextMovement> CREATOR =
+            new Parcelable.Creator<
+                    SemContextMovement>() { // from class:
+                                            // com.samsung.android.hardware.context.SemContextMovement.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextMovement createFromParcel(Parcel in) {
+                    return new SemContextMovement(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextMovement[] newArray(int size) {
-            return new SemContextMovement[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextMovement[] newArray(int size) {
+                    return new SemContextMovement[size];
+                }
+            };
     public static final int NONE = 0;
     private Bundle mContext;
 

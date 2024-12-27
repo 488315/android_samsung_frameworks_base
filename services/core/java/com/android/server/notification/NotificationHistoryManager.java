@@ -12,13 +12,15 @@ import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.HermesService$3$$ExternalSyntheticOutline0;
 import com.android.server.IoThread;
 import com.android.server.notification.NotificationHistoryDatabase.RemoveImageRunnable;
 import com.android.server.notification.NotificationHistoryDatabase.RemovePackageRunnable;
-import com.android.server.notification.NotificationManagerService;
+
 import com.samsung.android.server.notification.NotificationHistoryImageProvider;
+
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
@@ -44,7 +46,8 @@ public final class NotificationHistoryManager {
 
         public SettingsObserver(NotificationManagerService.WorkerHandler workerHandler) {
             super(workerHandler);
-            this.NOTIFICATION_HISTORY_URI = Settings.Secure.getUriFor("notification_history_enabled");
+            this.NOTIFICATION_HISTORY_URI =
+                    Settings.Secure.getUriFor("notification_history_enabled");
         }
 
         @Override // android.database.ContentObserver
@@ -53,10 +56,15 @@ public final class NotificationHistoryManager {
         }
 
         public final void update(int i, Uri uri) {
-            ContentResolver contentResolver = NotificationHistoryManager.this.mContext.getContentResolver();
+            ContentResolver contentResolver =
+                    NotificationHistoryManager.this.mContext.getContentResolver();
             if (uri == null || this.NOTIFICATION_HISTORY_URI.equals(uri)) {
-                boolean z = Settings.Secure.getIntForUser(contentResolver, "notification_history_enabled", 1, i) != 0;
-                NotificationHistoryManager notificationHistoryManager = NotificationHistoryManager.this;
+                boolean z =
+                        Settings.Secure.getIntForUser(
+                                        contentResolver, "notification_history_enabled", 1, i)
+                                != 0;
+                NotificationHistoryManager notificationHistoryManager =
+                        NotificationHistoryManager.this;
                 synchronized (notificationHistoryManager.mLock) {
                     if (z) {
                         try {
@@ -65,24 +73,28 @@ public final class NotificationHistoryManager {
                             throw th;
                         }
                     }
-                    NotificationHistoryDatabase userHistoryAndInitializeIfNeededLocked = notificationHistoryManager.getUserHistoryAndInitializeIfNeededLocked(i);
+                    NotificationHistoryDatabase userHistoryAndInitializeIfNeededLocked =
+                            notificationHistoryManager.getUserHistoryAndInitializeIfNeededLocked(i);
                     if (userHistoryAndInitializeIfNeededLocked == null) {
                         notificationHistoryManager.mUserPendingHistoryDisables.put(i, !z);
                     } else if (!z) {
-                        notificationHistoryManager.disableHistory(i, userHistoryAndInitializeIfNeededLocked);
+                        notificationHistoryManager.disableHistory(
+                                i, userHistoryAndInitializeIfNeededLocked);
                     }
                 }
             }
         }
     }
 
-    public NotificationHistoryManager(Context context, NotificationManagerService.WorkerHandler workerHandler) {
+    public NotificationHistoryManager(
+            Context context, NotificationManagerService.WorkerHandler workerHandler) {
         this.mContext = context;
         this.mUserManager = (UserManager) context.getSystemService(UserManager.class);
         this.mSettingsObserver = new SettingsObserver(workerHandler);
     }
 
-    public final void disableHistory(int i, NotificationHistoryDatabase notificationHistoryDatabase) {
+    public final void disableHistory(
+            int i, NotificationHistoryDatabase notificationHistoryDatabase) {
         Context context = this.mContext;
         synchronized (notificationHistoryDatabase.mLock) {
             try {
@@ -92,7 +104,8 @@ public final class NotificationHistoryManager {
                 }
                 notificationHistoryDatabase.mHistoryDir.delete();
                 notificationHistoryDatabase.mHistoryFiles.clear();
-                context.getContentResolver().delete(NotificationHistoryImageProvider.CONTENT_URI, null, null);
+                context.getContentResolver()
+                        .delete(NotificationHistoryImageProvider.CONTENT_URI, null, null);
             } catch (Throwable th) {
                 throw th;
             }
@@ -121,18 +134,26 @@ public final class NotificationHistoryManager {
     public final NotificationHistoryDatabase getUserHistoryAndInitializeIfNeededLocked(int i) {
         if (!this.mHistoryEnabled.get(i)) {
             if (DEBUG) {
-                HermesService$3$$ExternalSyntheticOutline0.m(i, "History disabled for user ", "NotificationHistory");
+                HermesService$3$$ExternalSyntheticOutline0.m(
+                        i, "History disabled for user ", "NotificationHistory");
             }
             this.mUserState.put(i, null);
             return null;
         }
-        NotificationHistoryDatabase notificationHistoryDatabase = (NotificationHistoryDatabase) this.mUserState.get(i);
+        NotificationHistoryDatabase notificationHistoryDatabase =
+                (NotificationHistoryDatabase) this.mUserState.get(i);
         if (notificationHistoryDatabase != null) {
             return notificationHistoryDatabase;
         }
-        NotificationHistoryDatabase notificationHistoryDatabase2 = new NotificationHistoryDatabase(IoThread.getHandler(), new File(Environment.getDataSystemCeDirectory(i), DIRECTORY_PER_USER));
+        NotificationHistoryDatabase notificationHistoryDatabase2 =
+                new NotificationHistoryDatabase(
+                        IoThread.getHandler(),
+                        new File(Environment.getDataSystemCeDirectory(i), DIRECTORY_PER_USER));
         if (!this.mUserUnlockedStates.get(i)) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Attempted to initialize service for stopped or removed user ", "NotificationHistory");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Attempted to initialize service for stopped or removed user ",
+                    "NotificationHistory");
             return null;
         }
         try {
@@ -143,7 +164,10 @@ public final class NotificationHistoryManager {
             if (this.mUserManager.isUserUnlocked(i)) {
                 throw e;
             }
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Attempted to initialize service for stopped or removed user ", "NotificationHistory");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Attempted to initialize service for stopped or removed user ",
+                    "NotificationHistory");
             return null;
         }
     }
@@ -158,7 +182,10 @@ public final class NotificationHistoryManager {
 
     public void onDestroy() {
         SettingsObserver settingsObserver = this.mSettingsObserver;
-        NotificationHistoryManager.this.mContext.getContentResolver().unregisterContentObserver(settingsObserver);
+        NotificationHistoryManager.this
+                .mContext
+                .getContentResolver()
+                .unregisterContentObserver(settingsObserver);
     }
 
     public final void onUserStopped(int i) {
@@ -172,7 +199,8 @@ public final class NotificationHistoryManager {
         synchronized (this.mLock) {
             try {
                 this.mUserUnlockedStates.put(i, true);
-                NotificationHistoryDatabase userHistoryAndInitializeIfNeededLocked = getUserHistoryAndInitializeIfNeededLocked(i);
+                NotificationHistoryDatabase userHistoryAndInitializeIfNeededLocked =
+                        getUserHistoryAndInitializeIfNeededLocked(i);
                 if (userHistoryAndInitializeIfNeededLocked == null) {
                     Slog.i("NotificationHistory", "Attempted to unlock gone/disabled user " + i);
                     return;
@@ -180,7 +208,9 @@ public final class NotificationHistoryManager {
                 List list = (List) this.mUserPendingPackageRemovals.get(i);
                 if (list != null) {
                     for (int i2 = 0; i2 < list.size(); i2++) {
-                        userHistoryAndInitializeIfNeededLocked.mFileWriteHandler.post(userHistoryAndInitializeIfNeededLocked.new RemovePackageRunnable((String) list.get(i2)));
+                        userHistoryAndInitializeIfNeededLocked.mFileWriteHandler.post(
+                                userHistoryAndInitializeIfNeededLocked
+                                .new RemovePackageRunnable((String) list.get(i2)));
                     }
                     this.mUserPendingPackageRemovals.remove(i);
                 }
@@ -198,7 +228,8 @@ public final class NotificationHistoryManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.app.NotificationHistory readFilteredNotificationHistoryForPackage(int r5, int r6, java.lang.String r7, java.lang.String r8) {
+    public final android.app.NotificationHistory readFilteredNotificationHistoryForPackage(
+            int r5, int r6, java.lang.String r7, java.lang.String r8) {
         /*
             r4 = this;
             java.lang.String r0 = "Attempted to read history for locked/gone/disabled user "
@@ -261,7 +292,10 @@ public final class NotificationHistoryManager {
             monitor-exit(r1)     // Catch: java.lang.Throwable -> L23
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.NotificationHistoryManager.readFilteredNotificationHistoryForPackage(int, int, java.lang.String, java.lang.String):android.app.NotificationHistory");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.NotificationHistoryManager.readFilteredNotificationHistoryForPackage(int,"
+                    + " int, java.lang.String, java.lang.String):android.app.NotificationHistory");
     }
 
     public final NotificationHistory readNotificationHistory(int[] iArr) {
@@ -272,11 +306,15 @@ public final class NotificationHistoryManager {
                     return notificationHistory;
                 }
                 for (int i : iArr) {
-                    NotificationHistoryDatabase userHistoryAndInitializeIfNeededLocked = getUserHistoryAndInitializeIfNeededLocked(i);
+                    NotificationHistoryDatabase userHistoryAndInitializeIfNeededLocked =
+                            getUserHistoryAndInitializeIfNeededLocked(i);
                     if (userHistoryAndInitializeIfNeededLocked == null) {
-                        Slog.i("NotificationHistory", "Attempted to read history for locked/gone/disabled user " + i);
+                        Slog.i(
+                                "NotificationHistory",
+                                "Attempted to read history for locked/gone/disabled user " + i);
                     } else {
-                        notificationHistory.addNotificationsToWrite(userHistoryAndInitializeIfNeededLocked.readNotificationHistory());
+                        notificationHistory.addNotificationsToWrite(
+                                userHistoryAndInitializeIfNeededLocked.readNotificationHistory());
                     }
                 }
                 return notificationHistory;
@@ -286,7 +324,8 @@ public final class NotificationHistoryManager {
         }
     }
 
-    public void replaceNotificationHistoryDatabase(int i, NotificationHistoryDatabase notificationHistoryDatabase) {
+    public void replaceNotificationHistoryDatabase(
+            int i, NotificationHistoryDatabase notificationHistoryDatabase) {
         synchronized (this.mLock) {
             try {
                 if (this.mUserState.get(i) != null) {
@@ -301,26 +340,38 @@ public final class NotificationHistoryManager {
     public final void updateCancelEvent(int i, String str, boolean z) {
         synchronized (this.mLock) {
             try {
-                NotificationHistoryDatabase userHistoryAndInitializeIfNeededLocked = getUserHistoryAndInitializeIfNeededLocked(i);
+                NotificationHistoryDatabase userHistoryAndInitializeIfNeededLocked =
+                        getUserHistoryAndInitializeIfNeededLocked(i);
                 if (userHistoryAndInitializeIfNeededLocked != null) {
                     userHistoryAndInitializeIfNeededLocked.updateCancelEvent(str, z);
                     return;
                 }
-                Slog.i("NotificationHistory", "Attempted to update history for locked/gone/disabled user " + i);
+                Slog.i(
+                        "NotificationHistory",
+                        "Attempted to update history for locked/gone/disabled user " + i);
             } catch (Throwable th) {
                 throw th;
             }
         }
     }
 
-    public final void updateNotificationItems(int i, NotificationHistory.HistoricalNotification historicalNotification) {
+    public final void updateNotificationItems(
+            int i, NotificationHistory.HistoricalNotification historicalNotification) {
         synchronized (this.mLock) {
             try {
-                NotificationHistoryDatabase userHistoryAndInitializeIfNeededLocked = getUserHistoryAndInitializeIfNeededLocked(i);
+                NotificationHistoryDatabase userHistoryAndInitializeIfNeededLocked =
+                        getUserHistoryAndInitializeIfNeededLocked(i);
                 if (userHistoryAndInitializeIfNeededLocked != null) {
-                    userHistoryAndInitializeIfNeededLocked.mFileWriteHandler.post(userHistoryAndInitializeIfNeededLocked.new RemoveImageRunnable(historicalNotification.getSbnKey(), historicalNotification.getText(), historicalNotification.getUri()));
+                    userHistoryAndInitializeIfNeededLocked.mFileWriteHandler.post(
+                            userHistoryAndInitializeIfNeededLocked
+                            .new RemoveImageRunnable(
+                                    historicalNotification.getSbnKey(),
+                                    historicalNotification.getText(),
+                                    historicalNotification.getUri()));
                 } else {
-                    Slog.i("NotificationHistory", "Attempted to update history for locked/gone/disabled user " + i);
+                    Slog.i(
+                            "NotificationHistory",
+                            "Attempted to update history for locked/gone/disabled user " + i);
                 }
             } catch (Throwable th) {
                 throw th;

@@ -1,6 +1,5 @@
 package android.hardware.location;
 
-import android.hardware.location.IActivityRecognitionHardware;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,12 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IActivityRecognitionHardwareClient extends IInterface {
-    void onAvailabilityChanged(boolean z, IActivityRecognitionHardware iActivityRecognitionHardware) throws RemoteException;
+    void onAvailabilityChanged(boolean z, IActivityRecognitionHardware iActivityRecognitionHardware)
+            throws RemoteException;
 
     public static class Default implements IActivityRecognitionHardwareClient {
         @Override // android.hardware.location.IActivityRecognitionHardwareClient
-        public void onAvailabilityChanged(boolean isSupported, IActivityRecognitionHardware instance) throws RemoteException {
-        }
+        public void onAvailabilityChanged(
+                boolean isSupported, IActivityRecognitionHardware instance)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,8 +23,9 @@ public interface IActivityRecognitionHardwareClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IActivityRecognitionHardwareClient {
-        public static final String DESCRIPTOR = "android.hardware.location.IActivityRecognitionHardwareClient";
+    public abstract static class Stub extends Binder implements IActivityRecognitionHardwareClient {
+        public static final String DESCRIPTOR =
+                "android.hardware.location.IActivityRecognitionHardwareClient";
         static final int TRANSACTION_onAvailabilityChanged = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface IActivityRecognitionHardwareClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -72,7 +75,8 @@ public interface IActivityRecognitionHardwareClient extends IInterface {
             switch (code) {
                 case 1:
                     boolean _arg0 = data.readBoolean();
-                    IActivityRecognitionHardware _arg1 = IActivityRecognitionHardware.Stub.asInterface(data.readStrongBinder());
+                    IActivityRecognitionHardware _arg1 =
+                            IActivityRecognitionHardware.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onAvailabilityChanged(_arg0, _arg1);
                     return true;
@@ -98,7 +102,9 @@ public interface IActivityRecognitionHardwareClient extends IInterface {
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardwareClient
-            public void onAvailabilityChanged(boolean isSupported, IActivityRecognitionHardware instance) throws RemoteException {
+            public void onAvailabilityChanged(
+                    boolean isSupported, IActivityRecognitionHardware instance)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

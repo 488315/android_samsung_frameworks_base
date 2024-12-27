@@ -12,9 +12,9 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
-import android.service.remotelockscreenvalidation.IRemoteLockscreenValidationService;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,7 +22,8 @@ import java.util.Queue;
 import java.util.concurrent.Executor;
 
 /* loaded from: classes3.dex */
-public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenValidationClient, ServiceConnection {
+public class RemoteLockscreenValidationClientImpl
+        implements RemoteLockscreenValidationClient, ServiceConnection {
     private static final String TAG = RemoteLockscreenValidationClientImpl.class.getSimpleName();
     private final Context mContext;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
@@ -33,10 +34,12 @@ public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenVal
     private IRemoteLockscreenValidationService mService;
     private ServiceInfo mServiceInfo;
 
-    RemoteLockscreenValidationClientImpl(Context context, Executor bgExecutor, ComponentName serviceComponent) {
+    RemoteLockscreenValidationClientImpl(
+            Context context, Executor bgExecutor, ComponentName serviceComponent) {
         this.mContext = context.getApplicationContext();
         this.mIsServiceAvailable = isServiceAvailable(this.mContext, serviceComponent);
-        this.mLifecycleExecutor = bgExecutor == null ? new PendingIntent$$ExternalSyntheticLambda0() : bgExecutor;
+        this.mLifecycleExecutor =
+                bgExecutor == null ? new PendingIntent$$ExternalSyntheticLambda0() : bgExecutor;
         this.mRequestQueue = new ArrayDeque();
     }
 
@@ -46,7 +49,8 @@ public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenVal
     }
 
     @Override // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClient
-    public void validateLockscreenGuess(final byte[] guess, final IRemoteLockscreenValidationCallback callback) {
+    public void validateLockscreenGuess(
+            final byte[] guess, final IRemoteLockscreenValidationCallback callback) {
         try {
             if (!isServiceAvailable()) {
                 callback.onFailure("Service is not available");
@@ -55,36 +59,44 @@ public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenVal
         } catch (RemoteException e) {
             Log.e(TAG, "Error while failing for service unavailable", e);
         }
-        executeApiCall(new Call() { // from class: android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl.1
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            {
-                super();
-            }
+        executeApiCall(
+                new Call() { // from class:
+                             // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl.1
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    {
+                        super();
+                    }
 
-            @Override // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl.Call
-            public void exec(IRemoteLockscreenValidationService service) throws RemoteException {
-                service.validateLockscreenGuess(guess, callback);
-            }
+                    @Override // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl.Call
+                    public void exec(IRemoteLockscreenValidationService service)
+                            throws RemoteException {
+                        service.validateLockscreenGuess(guess, callback);
+                    }
 
-            @Override // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl.Call
-            void onError(String msg) {
-                try {
-                    callback.onFailure(msg);
-                } catch (RemoteException e2) {
-                    Log.e(RemoteLockscreenValidationClientImpl.TAG, "Error while failing validateLockscreenGuess", e2);
-                }
-            }
-        });
+                    @Override // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl.Call
+                    void onError(String msg) {
+                        try {
+                            callback.onFailure(msg);
+                        } catch (RemoteException e2) {
+                            Log.e(
+                                    RemoteLockscreenValidationClientImpl.TAG,
+                                    "Error while failing validateLockscreenGuess",
+                                    e2);
+                        }
+                    }
+                });
     }
 
     @Override // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClient
     public void disconnect() {
-        this.mHandler.post(new Runnable() { // from class: android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                RemoteLockscreenValidationClientImpl.this.disconnectInternal();
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        RemoteLockscreenValidationClientImpl.this.disconnectInternal();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -94,12 +106,14 @@ public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenVal
             return;
         }
         this.mIsConnected = false;
-        this.mLifecycleExecutor.execute(new Runnable() { // from class: android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda5
-            @Override // java.lang.Runnable
-            public final void run() {
-                RemoteLockscreenValidationClientImpl.this.lambda$disconnectInternal$0();
-            }
-        });
+        this.mLifecycleExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda5
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        RemoteLockscreenValidationClientImpl.this.lambda$disconnectInternal$0();
+                    }
+                });
         this.mService = null;
         this.mRequestQueue.clear();
     }
@@ -110,12 +124,14 @@ public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenVal
     }
 
     private void connect() {
-        this.mHandler.post(new Runnable() { // from class: android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda3
-            @Override // java.lang.Runnable
-            public final void run() {
-                RemoteLockscreenValidationClientImpl.this.connectInternal();
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda3
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        RemoteLockscreenValidationClientImpl.this.connectInternal();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -131,12 +147,15 @@ public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenVal
         final Intent intent = new Intent(RemoteLockscreenValidationService.SERVICE_INTERFACE);
         intent.setComponent(this.mServiceInfo.getComponentName());
         final int flags = 33;
-        this.mLifecycleExecutor.execute(new Runnable() { // from class: android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda4
-            @Override // java.lang.Runnable
-            public final void run() {
-                RemoteLockscreenValidationClientImpl.this.lambda$connectInternal$1(intent, flags);
-            }
-        });
+        this.mLifecycleExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda4
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        RemoteLockscreenValidationClientImpl.this.lambda$connectInternal$1(
+                                intent, flags);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -166,8 +185,15 @@ public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenVal
         if (this.mServiceInfo == null) {
             return false;
         }
-        if (!Manifest.permission.BIND_REMOTE_LOCKSCREEN_VALIDATION_SERVICE.equals(this.mServiceInfo.permission)) {
-            Log.w(TAG, TextUtils.formatSimple("%s/%s does not require permission %s", this.mServiceInfo.packageName, this.mServiceInfo.name, Manifest.permission.BIND_REMOTE_LOCKSCREEN_VALIDATION_SERVICE));
+        if (!Manifest.permission.BIND_REMOTE_LOCKSCREEN_VALIDATION_SERVICE.equals(
+                this.mServiceInfo.permission)) {
+            Log.w(
+                    TAG,
+                    TextUtils.formatSimple(
+                            "%s/%s does not require permission %s",
+                            this.mServiceInfo.packageName,
+                            this.mServiceInfo.name,
+                            Manifest.permission.BIND_REMOTE_LOCKSCREEN_VALIDATION_SERVICE));
             return false;
         }
         return true;
@@ -175,20 +201,26 @@ public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenVal
 
     private ServiceInfo getServiceInfo(Context context, ComponentName serviceComponent) {
         try {
-            return context.getPackageManager().getServiceInfo(serviceComponent, PackageManager.ComponentInfoFlags.of(128L));
+            return context.getPackageManager()
+                    .getServiceInfo(serviceComponent, PackageManager.ComponentInfoFlags.of(128L));
         } catch (PackageManager.NameNotFoundException e) {
-            Log.w(TAG, TextUtils.formatSimple("Cannot resolve service %s", serviceComponent.getClassName()));
+            Log.w(
+                    TAG,
+                    TextUtils.formatSimple(
+                            "Cannot resolve service %s", serviceComponent.getClassName()));
             return null;
         }
     }
 
     private void executeApiCall(final Call call) {
-        this.mHandler.post(new Runnable() { // from class: android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                RemoteLockscreenValidationClientImpl.this.lambda$executeApiCall$2(call);
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        RemoteLockscreenValidationClientImpl.this.lambda$executeApiCall$2(call);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -202,7 +234,8 @@ public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenVal
         }
     }
 
-    private void performApiCallInternal(Call apiCaller, IRemoteLockscreenValidationService service) {
+    private void performApiCallInternal(
+            Call apiCaller, IRemoteLockscreenValidationService service) {
         if (service == null) {
             apiCaller.onError("Service is null");
             return;
@@ -218,18 +251,21 @@ public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenVal
 
     @Override // android.content.ServiceConnection
     public void onServiceConnected(ComponentName name, IBinder binder) {
-        final IRemoteLockscreenValidationService service = IRemoteLockscreenValidationService.Stub.asInterface(binder);
-        this.mHandler.post(new Runnable() { // from class: android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                RemoteLockscreenValidationClientImpl.this.lambda$onServiceConnected$3(service);
-            }
-        });
+        final IRemoteLockscreenValidationService service =
+                IRemoteLockscreenValidationService.Stub.asInterface(binder);
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.service.remotelockscreenvalidation.RemoteLockscreenValidationClientImpl$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        RemoteLockscreenValidationClientImpl.this.lambda$onServiceConnected$3(
+                                service);
+                    }
+                });
     }
 
     @Override // android.content.ServiceConnection
-    public void onServiceDisconnected(ComponentName name) {
-    }
+    public void onServiceDisconnected(ComponentName name) {}
 
     @Override // android.content.ServiceConnection
     public void onBindingDied(ComponentName name) {
@@ -242,12 +278,12 @@ public class RemoteLockscreenValidationClientImpl implements RemoteLockscreenVal
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    static abstract class Call {
-        abstract void exec(IRemoteLockscreenValidationService iRemoteLockscreenValidationService) throws RemoteException;
+    abstract static class Call {
+        abstract void exec(IRemoteLockscreenValidationService iRemoteLockscreenValidationService)
+                throws RemoteException;
 
         abstract void onError(String str);
 
-        private Call() {
-        }
+        private Call() {}
     }
 }

@@ -16,10 +16,15 @@ public final class SensorList {
         this.mActivityManager = iActivityManager;
     }
 
-    public final void addSensor(int i, Object obj, int i2, SynchronousUserSwitchObserver synchronousUserSwitchObserver) {
+    public final void addSensor(
+            int i,
+            Object obj,
+            int i2,
+            SynchronousUserSwitchObserver synchronousUserSwitchObserver) {
         this.mSensors.put(i, obj);
         try {
-            this.mActivityManager.registerUserSwitchObserver(synchronousUserSwitchObserver, "SensorList");
+            this.mActivityManager.registerUserSwitchObserver(
+                    synchronousUserSwitchObserver, "SensorList");
             if (i2 == -10000) {
                 synchronousUserSwitchObserver.onUserSwitching(0);
             }

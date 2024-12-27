@@ -11,7 +11,8 @@ public class MediaRouteControllerDialogFragment extends DialogFragment {
         setCancelable(true);
     }
 
-    public MediaRouteControllerDialog onCreateControllerDialog(Context context, Bundle savedInstanceState) {
+    public MediaRouteControllerDialog onCreateControllerDialog(
+            Context context, Bundle savedInstanceState) {
         return new MediaRouteControllerDialog(context, getTheme());
     }
 

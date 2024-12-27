@@ -5,13 +5,15 @@ import android.content.Intent;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda8 implements Runnable {
+public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda8
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ WindowManagerService f$0;
     public final /* synthetic */ Object f$1;
     public final /* synthetic */ Object f$2;
 
-    public /* synthetic */ WindowManagerService$$ExternalSyntheticLambda8(WindowManagerService windowManagerService, Object obj, Object obj2, int i) {
+    public /* synthetic */ WindowManagerService$$ExternalSyntheticLambda8(
+            WindowManagerService windowManagerService, Object obj, Object obj2, int i) {
         this.$r8$classId = i;
         this.f$0 = windowManagerService;
         this.f$1 = obj;
@@ -23,7 +25,8 @@ public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda
         switch (this.$r8$classId) {
             case 0:
                 WindowManagerService windowManagerService = this.f$0;
-                windowManagerService.mExt.mPolicyExt.setPendingIntentAfterUnlock((PendingIntent) this.f$1, (Intent) this.f$2);
+                windowManagerService.mExt.mPolicyExt.setPendingIntentAfterUnlock(
+                        (PendingIntent) this.f$1, (Intent) this.f$2);
                 return;
             default:
                 WindowManagerService windowManagerService2 = this.f$0;

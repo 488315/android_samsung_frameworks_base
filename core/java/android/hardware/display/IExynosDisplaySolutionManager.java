@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IExynosDisplaySolutionManager extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.display.IExynosDisplaySolutionManager";
+    public static final String DESCRIPTOR =
+            "android.hardware.display.IExynosDisplaySolutionManager";
 
     String getColorEnhancementMode() throws RemoteException;
 
@@ -46,8 +47,8 @@ public interface IExynosDisplaySolutionManager extends IInterface {
 
     public static class Default implements IExynosDisplaySolutionManager {
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setDisplayFeature(String arg0, int arg1, int arg2, String arg3) throws RemoteException {
-        }
+        public void setDisplayFeature(String arg0, int arg1, int arg2, String arg3)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
         public String getColorEnhancementMode() throws RemoteException {
@@ -55,64 +56,49 @@ public interface IExynosDisplaySolutionManager extends IInterface {
         }
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setColorEnhancementSettingValue(int value) throws RemoteException {
-        }
+        public void setColorEnhancementSettingValue(int value) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setColorTempSettingValue(int valueFrom, int valueTo) throws RemoteException {
-        }
+        public void setColorTempSettingValue(int valueFrom, int valueTo) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setColorTempSettingOn(int onoff) throws RemoteException {
-        }
+        public void setColorTempSettingOn(int onoff) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setEyeTempSettingValue(int value) throws RemoteException {
-        }
+        public void setEyeTempSettingValue(int value) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setEyeTempSettingOn(int onoff) throws RemoteException {
-        }
+        public void setEyeTempSettingOn(int onoff) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setRgbGainSettingValue(int r, int g, int b) throws RemoteException {
-        }
+        public void setRgbGainSettingValue(int r, int g, int b) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setRgbGainSettingOn(int onoff) throws RemoteException {
-        }
+        public void setRgbGainSettingOn(int onoff) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setRgbWeightSettingValue(float r, float g, float b) throws RemoteException {
-        }
+        public void setRgbWeightSettingValue(float r, float g, float b) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setRgbWeightSettingOn(int onoff) throws RemoteException {
-        }
+        public void setRgbWeightSettingOn(int onoff) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setSkinColorSettingOn(int onoff) throws RemoteException {
-        }
+        public void setSkinColorSettingOn(int onoff) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setHsvGainSettingValue(int h, int s, int v) throws RemoteException {
-        }
+        public void setHsvGainSettingValue(int h, int s, int v) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setHsvGainSettingOn(int onoff) throws RemoteException {
-        }
+        public void setHsvGainSettingOn(int onoff) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setWhitePointColorSettingOn(int onoff) throws RemoteException {
-        }
+        public void setWhitePointColorSettingOn(int onoff) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setEdgeSharpnessSettingValue(int value) throws RemoteException {
-        }
+        public void setEdgeSharpnessSettingValue(int value) throws RemoteException {}
 
         @Override // android.hardware.display.IExynosDisplaySolutionManager
-        public void setEdgeSharpnessSettingOn(int onoff) throws RemoteException {
-        }
+        public void setEdgeSharpnessSettingOn(int onoff) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -120,7 +106,7 @@ public interface IExynosDisplaySolutionManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IExynosDisplaySolutionManager {
+    public abstract static class Stub extends Binder implements IExynosDisplaySolutionManager {
         static final int TRANSACTION_getColorEnhancementMode = 2;
         static final int TRANSACTION_setColorEnhancementSettingValue = 3;
         static final int TRANSACTION_setColorTempSettingOn = 5;
@@ -206,7 +192,8 @@ public interface IExynosDisplaySolutionManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IExynosDisplaySolutionManager.DESCRIPTOR);
             }
@@ -348,7 +335,8 @@ public interface IExynosDisplaySolutionManager extends IInterface {
             }
 
             @Override // android.hardware.display.IExynosDisplaySolutionManager
-            public void setDisplayFeature(String arg0, int arg1, int arg2, String arg3) throws RemoteException {
+            public void setDisplayFeature(String arg0, int arg1, int arg2, String arg3)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -397,7 +385,8 @@ public interface IExynosDisplaySolutionManager extends IInterface {
             }
 
             @Override // android.hardware.display.IExynosDisplaySolutionManager
-            public void setColorTempSettingValue(int valueFrom, int valueTo) throws RemoteException {
+            public void setColorTempSettingValue(int valueFrom, int valueTo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

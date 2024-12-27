@@ -21,6 +21,7 @@ import android.sec.enterprise.proxy.IProxyCredentialsCallback;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.internal.util.FunctionalUtils;
 import com.android.net.IProxyCallback;
 import com.android.net.IProxyPortListener;
@@ -28,8 +29,10 @@ import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.utils.NetworkUtils;
+
 import com.samsung.android.knox.net.AuthConfig;
 import com.samsung.android.knox.net.ProxyProperties;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -72,11 +75,13 @@ public final class LocalProxyManager {
             this.this$0 = localProxyManager;
         }
 
-        private final void onServiceDisconnected$com$android$server$enterprise$proxy$LocalProxyManager$1(ComponentName componentName) {
-        }
+        private final void
+                onServiceDisconnected$com$android$server$enterprise$proxy$LocalProxyManager$1(
+                        ComponentName componentName) {}
 
-        private final void onServiceDisconnected$com$android$server$enterprise$proxy$LocalProxyManager$2(ComponentName componentName) {
-        }
+        private final void
+                onServiceDisconnected$com$android$server$enterprise$proxy$LocalProxyManager$2(
+                        ComponentName componentName) {}
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -86,31 +91,49 @@ public final class LocalProxyManager {
                     IProxyCallback iProxyCallback = this.this$0.mCallbackService;
                     if (iProxyCallback != null) {
                         try {
-                            iProxyCallback.getProxyPort(new IProxyPortListener.Stub() { // from class: com.android.server.enterprise.proxy.LocalProxyManager.1.1
-                                public final void setProxyPort(int i) {
-                                    if (i == -1) {
-                                        Log.e("LocalProxyManager", "Received invalid port from Local Proxy, proxy will not be operational");
-                                        return;
-                                    }
-                                    LocalProxyManager localProxyManager = AnonymousClass1.this.this$0;
-                                    LocalProxyManager localProxyManager2 = LocalProxyManager.sInstance;
-                                    localProxyManager.getClass();
-                                    Log.d("LocalProxyManager", "Proxy bound at port " + i);
-                                    LocalProxyManager.sIsLocalProxyServerRunning = true;
-                                    LocalProxyManager localProxyManager3 = AnonymousClass1.this.this$0;
-                                    synchronized (localProxyManager3) {
-                                        Log.d("LocalProxyManager", "Set local proxy port " + i);
-                                        synchronized (LocalProxyManager.mProxyLock) {
-                                            LocalProxyManager.sLocalProxyInfo = ProxyInfo.buildPacProxy(Uri.EMPTY, i);
+                            iProxyCallback.getProxyPort(
+                                    new IProxyPortListener.Stub() { // from class:
+                                        // com.android.server.enterprise.proxy.LocalProxyManager.1.1
+                                        public final void setProxyPort(int i) {
+                                            if (i == -1) {
+                                                Log.e(
+                                                        "LocalProxyManager",
+                                                        "Received invalid port from Local Proxy,"
+                                                            + " proxy will not be operational");
+                                                return;
+                                            }
+                                            LocalProxyManager localProxyManager =
+                                                    AnonymousClass1.this.this$0;
+                                            LocalProxyManager localProxyManager2 =
+                                                    LocalProxyManager.sInstance;
+                                            localProxyManager.getClass();
+                                            Log.d("LocalProxyManager", "Proxy bound at port " + i);
+                                            LocalProxyManager.sIsLocalProxyServerRunning = true;
+                                            LocalProxyManager localProxyManager3 =
+                                                    AnonymousClass1.this.this$0;
+                                            synchronized (localProxyManager3) {
+                                                Log.d(
+                                                        "LocalProxyManager",
+                                                        "Set local proxy port " + i);
+                                                synchronized (LocalProxyManager.mProxyLock) {
+                                                    LocalProxyManager.sLocalProxyInfo =
+                                                            ProxyInfo.buildPacProxy(Uri.EMPTY, i);
+                                                }
+                                                localProxyManager3.updateGlobalProxyValues();
+                                                if (LocalProxyManager.isDirectProxy(
+                                                        LocalProxyManager.getDefaultProxy())) {
+                                                    Log.d(
+                                                            "LocalProxyManager",
+                                                            "Updating enterprise wifi proxy"
+                                                                + " values");
+                                                    localProxyManager3.updateProxyInWifiConfig(
+                                                            localProxyManager3.mConnectedWifiSsid,
+                                                            true,
+                                                            LocalProxyManager.sLocalProxyInfo);
+                                                }
+                                            }
                                         }
-                                        localProxyManager3.updateGlobalProxyValues();
-                                        if (LocalProxyManager.isDirectProxy(LocalProxyManager.getDefaultProxy())) {
-                                            Log.d("LocalProxyManager", "Updating enterprise wifi proxy values");
-                                            localProxyManager3.updateProxyInWifiConfig(localProxyManager3.mConnectedWifiSsid, true, LocalProxyManager.sLocalProxyInfo);
-                                        }
-                                    }
-                                }
-                            });
+                                    });
                             break;
                         } catch (RemoteException e) {
                             Log.e("LocalProxyManager", "Failed to get proxy callback instance");
@@ -122,8 +145,10 @@ public final class LocalProxyManager {
                 default:
                     this.this$0.mCallbackService = IProxyCallback.Stub.asInterface(iBinder);
                     LocalProxyManager localProxyManager = this.this$0;
-                    if (localProxyManager.mCallbackService != null && !((ArrayList) LocalProxyManager.sPendinOperationsList).isEmpty()) {
-                        Iterator it = ((ArrayList) LocalProxyManager.sPendinOperationsList).iterator();
+                    if (localProxyManager.mCallbackService != null
+                            && !((ArrayList) LocalProxyManager.sPendinOperationsList).isEmpty()) {
+                        Iterator it =
+                                ((ArrayList) LocalProxyManager.sPendinOperationsList).iterator();
                         while (it.hasNext()) {
                             String str = (String) it.next();
                             Log.d("LocalProxyManager", "Execute pending operation: " + str);
@@ -133,9 +158,16 @@ public final class LocalProxyManager {
                                 ((ArrayList) LocalProxyManager.sPendinOperationsList).remove(str);
                             } else if (str.equals("setProxyCredentials")) {
                                 Bundle bundle = localProxyManager.mLastCredentialsResponse;
-                                IProxyCredentialsCallback iProxyCredentialsCallback = localProxyManager.mLastCredentialsCallback;
-                                Log.d("LocalProxyManager", "Set proxy credentials callback to proxy server");
-                                Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda7(localProxyManager, iProxyCredentialsCallback, bundle));
+                                IProxyCredentialsCallback iProxyCredentialsCallback =
+                                        localProxyManager.mLastCredentialsCallback;
+                                Log.d(
+                                        "LocalProxyManager",
+                                        "Set proxy credentials callback to proxy server");
+                                Binder.withCleanCallingIdentity(
+                                        new LocalProxyManager$$ExternalSyntheticLambda7(
+                                                localProxyManager,
+                                                iProxyCredentialsCallback,
+                                                bundle));
                                 ((ArrayList) LocalProxyManager.sPendinOperationsList).remove(str);
                             }
                         }
@@ -152,9 +184,9 @@ public final class LocalProxyManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:14:0x004d, code lost:
-    
-        r1 = r5[8];
-     */
+
+       r1 = r5[8];
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -235,14 +267,20 @@ public final class LocalProxyManager {
         L8b:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.proxy.LocalProxyManager.getAppUidFromTcpFile(int, java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.proxy.LocalProxyManager.getAppUidFromTcpFile(int,"
+                    + " java.lang.String):java.lang.String");
     }
 
     public static List getAuthConfigOrNull(ProxyProperties proxyProperties, String str, int i) {
         if (proxyProperties.getAuthConfigList().isEmpty()) {
             return null;
         }
-        if (!(!TextUtils.isEmpty(proxyProperties.getHostname()) && proxyProperties.getHostname().equals(str) && proxyProperties.getPortNumber() == i) && TextUtils.isEmpty(proxyProperties.getPacFileUrl())) {
+        if (!(!TextUtils.isEmpty(proxyProperties.getHostname())
+                        && proxyProperties.getHostname().equals(str)
+                        && proxyProperties.getPortNumber() == i)
+                && TextUtils.isEmpty(proxyProperties.getPacFileUrl())) {
             return null;
         }
         return proxyProperties.getAuthConfigList();
@@ -274,54 +312,85 @@ public final class LocalProxyManager {
                     if (localProxyManager == null) {
                         localProxyManager = new LocalProxyManager();
                         localProxyManager.mConnectedWifiSsid = null;
-                        localProxyManager.mNetworkCallback = new ConnectivityManager.NetworkCallback() { // from class: com.android.server.enterprise.proxy.LocalProxyManager.4
-                            @Override // android.net.ConnectivityManager.NetworkCallback
-                            public final void onAvailable(Network network) {
-                                WifiInfo connectionInfo;
-                                super.onAvailable(network);
-                                if (((ArrayMap) LocalProxyManager.sWifiProxyInfoMapCache).isEmpty()) {
-                                    return;
-                                }
-                                LocalProxyManager localProxyManager2 = LocalProxyManager.this;
-                                if (localProxyManager2.mContext == null || (connectionInfo = localProxyManager2.getWifiManager().getConnectionInfo()) == null) {
-                                    return;
-                                }
-                                String replace = connectionInfo.getSSID().replace("\"", "");
-                                ProxyProperties proxyProperties = (ProxyProperties) ((ArrayMap) LocalProxyManager.sWifiProxyInfoMapCache).get(replace);
-                                if (proxyProperties == null) {
-                                    return;
-                                }
-                                synchronized (LocalProxyManager.mProxyLock) {
-                                    LocalProxyManager.sDefaultProxy = proxyProperties;
-                                }
-                                if (LocalProxyManager.getDefaultProxy() != null) {
-                                    LocalProxyManager localProxyManager3 = LocalProxyManager.this;
-                                    localProxyManager3.mConnectedWifiSsid = replace;
-                                    localProxyManager3.handleLocalProxyServer();
-                                }
-                            }
+                        localProxyManager.mNetworkCallback =
+                                new ConnectivityManager
+                                        .NetworkCallback() { // from class:
+                                                             // com.android.server.enterprise.proxy.LocalProxyManager.4
+                                    @Override // android.net.ConnectivityManager.NetworkCallback
+                                    public final void onAvailable(Network network) {
+                                        WifiInfo connectionInfo;
+                                        super.onAvailable(network);
+                                        if (((ArrayMap) LocalProxyManager.sWifiProxyInfoMapCache)
+                                                .isEmpty()) {
+                                            return;
+                                        }
+                                        LocalProxyManager localProxyManager2 =
+                                                LocalProxyManager.this;
+                                        if (localProxyManager2.mContext == null
+                                                || (connectionInfo =
+                                                                localProxyManager2
+                                                                        .getWifiManager()
+                                                                        .getConnectionInfo())
+                                                        == null) {
+                                            return;
+                                        }
+                                        String replace = connectionInfo.getSSID().replace("\"", "");
+                                        ProxyProperties proxyProperties =
+                                                (ProxyProperties)
+                                                        ((ArrayMap)
+                                                                        LocalProxyManager
+                                                                                .sWifiProxyInfoMapCache)
+                                                                .get(replace);
+                                        if (proxyProperties == null) {
+                                            return;
+                                        }
+                                        synchronized (LocalProxyManager.mProxyLock) {
+                                            LocalProxyManager.sDefaultProxy = proxyProperties;
+                                        }
+                                        if (LocalProxyManager.getDefaultProxy() != null) {
+                                            LocalProxyManager localProxyManager3 =
+                                                    LocalProxyManager.this;
+                                            localProxyManager3.mConnectedWifiSsid = replace;
+                                            localProxyManager3.handleLocalProxyServer();
+                                        }
+                                    }
 
-                            @Override // android.net.ConnectivityManager.NetworkCallback
-                            public final void onLost(Network network) {
-                                super.onLost(network);
-                                ProxyProperties defaultProxy = LocalProxyManager.getDefaultProxy();
-                                if (defaultProxy != null) {
-                                    LocalProxyManager.this.getClass();
-                                    if (LocalProxyManager.isDirectProxy(defaultProxy)) {
-                                        LocalProxyManager localProxyManager2 = LocalProxyManager.this;
-                                        localProxyManager2.updateProxyInWifiConfig(localProxyManager2.mConnectedWifiSsid, true, NetworkUtils.convertToProxyInfo((ProxyProperties) ((ArrayMap) LocalProxyManager.sWifiProxyInfoMapCache).get(LocalProxyManager.this.mConnectedWifiSsid)));
-                                        LocalProxyManager.this.mConnectedWifiSsid = null;
+                                    @Override // android.net.ConnectivityManager.NetworkCallback
+                                    public final void onLost(Network network) {
+                                        super.onLost(network);
+                                        ProxyProperties defaultProxy =
+                                                LocalProxyManager.getDefaultProxy();
+                                        if (defaultProxy != null) {
+                                            LocalProxyManager.this.getClass();
+                                            if (LocalProxyManager.isDirectProxy(defaultProxy)) {
+                                                LocalProxyManager localProxyManager2 =
+                                                        LocalProxyManager.this;
+                                                localProxyManager2.updateProxyInWifiConfig(
+                                                        localProxyManager2.mConnectedWifiSsid,
+                                                        true,
+                                                        NetworkUtils.convertToProxyInfo(
+                                                                (ProxyProperties)
+                                                                        ((ArrayMap)
+                                                                                        LocalProxyManager
+                                                                                                .sWifiProxyInfoMapCache)
+                                                                                .get(
+                                                                                        LocalProxyManager
+                                                                                                .this
+                                                                                                .mConnectedWifiSsid)));
+                                                LocalProxyManager.this.mConnectedWifiSsid = null;
+                                            }
+                                            synchronized (LocalProxyManager.mProxyLock) {
+                                                LocalProxyManager.sDefaultProxy = null;
+                                            }
+                                            LocalProxyManager.this.handleLocalProxyServer();
+                                        }
                                     }
-                                    synchronized (LocalProxyManager.mProxyLock) {
-                                        LocalProxyManager.sDefaultProxy = null;
-                                    }
-                                    LocalProxyManager.this.handleLocalProxyServer();
-                                }
-                            }
-                        };
+                                };
                         Log.i("LocalProxyManager", "Initializing LocalProxyManager");
                         localProxyManager.mContext = context;
-                        localProxyManager.mNotificationManager = (NotificationManager) context.getSystemService(NotificationManager.class);
+                        localProxyManager.mNotificationManager =
+                                (NotificationManager)
+                                        context.getSystemService(NotificationManager.class);
                         sInstance = localProxyManager;
                     }
                 } finally {
@@ -349,7 +418,8 @@ public final class LocalProxyManager {
 
     public final ConnectivityManager getConnectivityManagerService() {
         if (this.mConnectivityManager == null) {
-            this.mConnectivityManager = (ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class);
+            this.mConnectivityManager =
+                    (ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class);
         }
         return this.mConnectivityManager;
     }
@@ -360,10 +430,16 @@ public final class LocalProxyManager {
         ProxyProperties globalProxy = getGlobalProxy();
         String str2 = null;
         if (globalProxy != null) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "Reading auth config for global proxy ", str, " port ", "LocalProxyManager");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i, "Reading auth config for global proxy ", str, " port ", "LocalProxyManager");
             list = getAuthConfigOrNull(globalProxy, str, i);
         } else if (defaultProxy != null) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "Reading auth config for default proxy ", str, " port ", "LocalProxyManager");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Reading auth config for default proxy ",
+                    str,
+                    " port ",
+                    "LocalProxyManager");
             list = getAuthConfigOrNull(defaultProxy, str, i);
         } else {
             list = null;
@@ -371,8 +447,11 @@ public final class LocalProxyManager {
         if (list == null || list.isEmpty()) {
             String str3 = this.mConnectedWifiSsid;
             StringBuilder sb = new StringBuilder();
-            AuthConfig authConfig = (AuthConfig) ((ArrayMap) sWifiBackCompatCredentialsMapCache).get(str3);
-            if (authConfig != null && !TextUtils.isEmpty(authConfig.getUsername()) && !TextUtils.isEmpty(authConfig.getPassword())) {
+            AuthConfig authConfig =
+                    (AuthConfig) ((ArrayMap) sWifiBackCompatCredentialsMapCache).get(str3);
+            if (authConfig != null
+                    && !TextUtils.isEmpty(authConfig.getUsername())
+                    && !TextUtils.isEmpty(authConfig.getPassword())) {
                 sb.append(authConfig.getUsername());
                 sb.append(":");
                 sb.append(authConfig.getPassword());
@@ -411,21 +490,25 @@ public final class LocalProxyManager {
         ProxyProperties globalProxy = getGlobalProxy();
         if (globalProxy != null && !TextUtils.isEmpty(globalProxy.getPacFileUrl())) {
             ProxyInfo convertToProxyInfo = NetworkUtils.convertToProxyInfo(getGlobalProxy());
-            if (convertToProxyInfo == null || Uri.EMPTY.equals(convertToProxyInfo.getPacFileUrl())) {
+            if (convertToProxyInfo == null
+                    || Uri.EMPTY.equals(convertToProxyInfo.getPacFileUrl())) {
                 return;
             }
             Log.d("LocalProxyManager", "Set global PAC proxy");
-            Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda5(this, convertToProxyInfo, 0));
+            Binder.withCleanCallingIdentity(
+                    new LocalProxyManager$$ExternalSyntheticLambda5(this, convertToProxyInfo, 0));
             return;
         }
         if (!sIsLocalProxyServerRunning && (isDirectProxy || isDirectProxy2)) {
             Log.d("LocalProxyManager", "Starting enterprise local proxy");
-            Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda2(this, 2));
+            Binder.withCleanCallingIdentity(
+                    new LocalProxyManager$$ExternalSyntheticLambda2(this, 2));
             return;
         }
         if (sIsLocalProxyServerRunning && getGlobalProxy() == null && getDefaultProxy() == null) {
             Log.d("LocalProxyManager", "Stopping enterprise local proxy");
-            Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda2(this, 6));
+            Binder.withCleanCallingIdentity(
+                    new LocalProxyManager$$ExternalSyntheticLambda2(this, 6));
             return;
         }
         if (sIsLocalProxyServerRunning && isDirectProxy2) {
@@ -458,51 +541,75 @@ public final class LocalProxyManager {
             synchronized (this) {
                 if (getConnectivityManagerService() != null) {
                     Log.d("LocalProxyManager", "Updating enterprise global proxy value");
-                    Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda2(this, 3));
+                    Binder.withCleanCallingIdentity(
+                            new LocalProxyManager$$ExternalSyntheticLambda2(this, 3));
                     clearProxyServerCache();
                 }
             }
         }
     }
 
-    public final synchronized void updateProxyInWifiConfig(final String str, final boolean z, final ProxyInfo proxyInfo) {
+    public final synchronized void updateProxyInWifiConfig(
+            final String str, final boolean z, final ProxyInfo proxyInfo) {
         if (TextUtils.isEmpty(str)) {
             return;
         }
-        Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: com.android.server.enterprise.proxy.LocalProxyManager$$ExternalSyntheticLambda13
-            public final void runOrThrow() {
-                final LocalProxyManager localProxyManager = LocalProxyManager.this;
-                String str2 = str;
-                final boolean z2 = z;
-                ProxyInfo proxyInfo2 = proxyInfo;
-                for (WifiConfiguration wifiConfiguration : localProxyManager.getWifiManager().getConfiguredNetworks()) {
-                    if (wifiConfiguration != null && !TextUtils.isEmpty(wifiConfiguration.SSID) && str2.equals(wifiConfiguration.SSID.replace("\"", "")) && ((ArrayMap) LocalProxyManager.sWifiProxyInfoMapCache).get(str2) != null) {
-                        WifiManager wifiManager = localProxyManager.getWifiManager();
-                        IpConfiguration ipConfiguration = wifiConfiguration.getIpConfiguration();
-                        IpConfiguration.ProxySettings proxySettings = z2 ? IpConfiguration.ProxySettings.STATIC : IpConfiguration.ProxySettings.NONE;
-                        if (!z2) {
-                            proxyInfo2 = null;
-                        }
-                        ipConfiguration.setProxySettings(proxySettings);
-                        ipConfiguration.setHttpProxy(proxyInfo2);
-                        wifiConfiguration.setIpConfiguration(ipConfiguration);
-                        wifiManager.save(wifiConfiguration, new WifiManager.ActionListener() { // from class: com.android.server.enterprise.proxy.LocalProxyManager.3
-                            public final void onFailure(int i) {
-                                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "Fail to update wifi proxy - reason: ", "LocalProxyManager");
-                            }
-
-                            public final void onSuccess() {
-                                Log.d("LocalProxyManager", "Wifi proxy updated successfully");
-                                if (z2) {
-                                    LocalProxyManager.this.clearProxyServerCache();
+        Binder.withCleanCallingIdentity(
+                new FunctionalUtils.ThrowingRunnable() { // from class:
+                    // com.android.server.enterprise.proxy.LocalProxyManager$$ExternalSyntheticLambda13
+                    public final void runOrThrow() {
+                        final LocalProxyManager localProxyManager = LocalProxyManager.this;
+                        String str2 = str;
+                        final boolean z2 = z;
+                        ProxyInfo proxyInfo2 = proxyInfo;
+                        for (WifiConfiguration wifiConfiguration :
+                                localProxyManager.getWifiManager().getConfiguredNetworks()) {
+                            if (wifiConfiguration != null
+                                    && !TextUtils.isEmpty(wifiConfiguration.SSID)
+                                    && str2.equals(wifiConfiguration.SSID.replace("\"", ""))
+                                    && ((ArrayMap) LocalProxyManager.sWifiProxyInfoMapCache)
+                                                    .get(str2)
+                                            != null) {
+                                WifiManager wifiManager = localProxyManager.getWifiManager();
+                                IpConfiguration ipConfiguration =
+                                        wifiConfiguration.getIpConfiguration();
+                                IpConfiguration.ProxySettings proxySettings =
+                                        z2
+                                                ? IpConfiguration.ProxySettings.STATIC
+                                                : IpConfiguration.ProxySettings.NONE;
+                                if (!z2) {
+                                    proxyInfo2 = null;
                                 }
+                                ipConfiguration.setProxySettings(proxySettings);
+                                ipConfiguration.setHttpProxy(proxyInfo2);
+                                wifiConfiguration.setIpConfiguration(ipConfiguration);
+                                wifiManager.save(
+                                        wifiConfiguration,
+                                        new WifiManager.ActionListener() { // from class:
+                                            // com.android.server.enterprise.proxy.LocalProxyManager.3
+                                            public final void onFailure(int i) {
+                                                NetworkScorerAppManager$$ExternalSyntheticOutline0
+                                                        .m(
+                                                                i,
+                                                                "Fail to update wifi proxy -"
+                                                                    + " reason: ",
+                                                                "LocalProxyManager");
+                                            }
+
+                                            public final void onSuccess() {
+                                                Log.d(
+                                                        "LocalProxyManager",
+                                                        "Wifi proxy updated successfully");
+                                                if (z2) {
+                                                    LocalProxyManager.this.clearProxyServerCache();
+                                                }
+                                            }
+                                        });
+                                return;
                             }
-                        });
-                        return;
+                        }
                     }
-                }
-            }
-        });
+                });
     }
 
     public final void updateWifiProxy(Map map) {
@@ -518,7 +625,8 @@ public final class LocalProxyManager {
                 ((ArrayMap) sWifiProxyInfoMapCache).clear();
                 sDefaultProxy = null;
             }
-            Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda0(this, arrayList, 0));
+            Binder.withCleanCallingIdentity(
+                    new LocalProxyManager$$ExternalSyntheticLambda0(this, arrayList, 0));
         } else {
             map.forEach(new LocalProxyManager$$ExternalSyntheticLambda1(0));
         }
@@ -528,7 +636,8 @@ public final class LocalProxyManager {
                     return;
                 }
                 Log.d("LocalProxyManager", "Register proxy network callback for wifi");
-                Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda2(this, 4));
+                Binder.withCleanCallingIdentity(
+                        new LocalProxyManager$$ExternalSyntheticLambda2(this, 4));
                 return;
             }
         }
@@ -536,7 +645,8 @@ public final class LocalProxyManager {
             synchronized (this) {
                 if (sIsNetworkCallbackRunning) {
                     Log.d("LocalProxyManager", "Unregister proxy network callback for wifi");
-                    Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda2(this, 0));
+                    Binder.withCleanCallingIdentity(
+                            new LocalProxyManager$$ExternalSyntheticLambda2(this, 0));
                 }
             }
         }

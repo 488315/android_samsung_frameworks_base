@@ -4,11 +4,14 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes.dex */
@@ -47,7 +50,8 @@ public abstract class PolicyKey implements Parcelable {
         serializer.attribute(null, ATTR_POLICY_IDENTIFIER, this.mIdentifier);
     }
 
-    public PolicyKey readFromXml(TypedXmlPullParser parser) throws XmlPullParserException, IOException {
+    public PolicyKey readFromXml(TypedXmlPullParser parser)
+            throws XmlPullParserException, IOException {
         return this;
     }
 

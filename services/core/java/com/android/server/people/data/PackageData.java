@@ -15,7 +15,13 @@ public final class PackageData {
     public final String mPackageName;
     public final int mUserId;
 
-    public PackageData(String str, int i, Predicate predicate, Predicate predicate2, ScheduledExecutorService scheduledExecutorService, File file) {
+    public PackageData(
+            String str,
+            int i,
+            Predicate predicate,
+            Predicate predicate2,
+            ScheduledExecutorService scheduledExecutorService,
+            File file) {
         this.mPackageName = str;
         this.mUserId = i;
         File file2 = new File(file, str);

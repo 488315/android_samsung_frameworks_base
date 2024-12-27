@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -26,7 +28,10 @@ public final class CoreStateSettingObserver extends ContentObserver {
     public final Map mSystemSettingToTypeMap;
     public final Map mSystemSettingToTypeMapForUser;
 
-    public CoreStateSettingObserver(Context context, Handler handler, CoreStateObserverController coreStateObserverController) {
+    public CoreStateSettingObserver(
+            Context context,
+            Handler handler,
+            CoreStateObserverController coreStateObserverController) {
         super(handler);
         this.mSecureSettingToTypeMap = new HashMap();
         this.mSystemSettingToTypeMap = new HashMap();
@@ -64,7 +69,8 @@ public final class CoreStateSettingObserver extends ContentObserver {
     }
 
     public final void beginObserveCoreStateSettingsForSingleUser(int i) {
-        DeviceIdleController$$ExternalSyntheticOutline0.m(i, "beginObserveCoreStateSettingsForSingleUser(u", ")", "CoreStateSettingObserver");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                i, "beginObserveCoreStateSettingsForSingleUser(u", ")", "CoreStateSettingObserver");
         Iterator it = ((HashMap) this.mSecureSettingToTypeMapForUser).keySet().iterator();
         while (it.hasNext()) {
             Uri uriFor = Settings.Secure.getUriFor((String) it.next());
@@ -92,7 +98,29 @@ public final class CoreStateSettingObserver extends ContentObserver {
             String str = (String) entry.getKey();
             Class cls = (Class) entry.getValue();
             if (cls == String.class) {
-                String string = hashMap == this.mSecureSettingToTypeMap ? Settings.Secure.getString(this.mContext.getContentResolver(), str) : hashMap == this.mSystemSettingToTypeMap ? Settings.System.getString(this.mContext.getContentResolver(), str) : hashMap == this.mGlobalSettingToTypeMap ? Settings.Global.getString(this.mContext.getContentResolver(), str) : hashMap == this.mSecureSettingToTypeMapForUser ? Settings.Secure.getStringForUser(this.mContext.getContentResolver(), str, i) : hashMap == this.mSystemSettingToTypeMapForUser ? Settings.System.getStringForUser(this.mContext.getContentResolver(), str, i) : "";
+                String string =
+                        hashMap == this.mSecureSettingToTypeMap
+                                ? Settings.Secure.getString(this.mContext.getContentResolver(), str)
+                                : hashMap == this.mSystemSettingToTypeMap
+                                        ? Settings.System.getString(
+                                                this.mContext.getContentResolver(), str)
+                                        : hashMap == this.mGlobalSettingToTypeMap
+                                                ? Settings.Global.getString(
+                                                        this.mContext.getContentResolver(), str)
+                                                : hashMap == this.mSecureSettingToTypeMapForUser
+                                                        ? Settings.Secure.getStringForUser(
+                                                                this.mContext.getContentResolver(),
+                                                                str,
+                                                                i)
+                                                        : hashMap
+                                                                        == this
+                                                                                .mSystemSettingToTypeMapForUser
+                                                                ? Settings.System.getStringForUser(
+                                                                        this.mContext
+                                                                                .getContentResolver(),
+                                                                        str,
+                                                                        i)
+                                                                : "";
                 if (string != null && !string.equals(bundle.getString(str))) {
                     bundle.putString(str, string);
                     z = true;
@@ -100,7 +128,31 @@ public final class CoreStateSettingObserver extends ContentObserver {
             } else if (cls == Integer.TYPE) {
                 Integer num = (Integer) ((HashMap) this.mIntegerDefaultKeyMap).get(str);
                 int intValue = num != null ? num.intValue() : 0;
-                int i2 = hashMap == this.mSecureSettingToTypeMap ? Settings.Secure.getInt(this.mContext.getContentResolver(), str, 0) : hashMap == this.mSystemSettingToTypeMap ? Settings.System.getInt(this.mContext.getContentResolver(), str, 0) : hashMap == this.mGlobalSettingToTypeMap ? Settings.Global.getInt(this.mContext.getContentResolver(), str, 0) : hashMap == this.mSecureSettingToTypeMapForUser ? Settings.Secure.getIntForUser(this.mContext.getContentResolver(), str, 0, i) : hashMap == this.mSystemSettingToTypeMapForUser ? Settings.System.getIntForUser(this.mContext.getContentResolver(), str, 0, i) : 0;
+                int i2 =
+                        hashMap == this.mSecureSettingToTypeMap
+                                ? Settings.Secure.getInt(this.mContext.getContentResolver(), str, 0)
+                                : hashMap == this.mSystemSettingToTypeMap
+                                        ? Settings.System.getInt(
+                                                this.mContext.getContentResolver(), str, 0)
+                                        : hashMap == this.mGlobalSettingToTypeMap
+                                                ? Settings.Global.getInt(
+                                                        this.mContext.getContentResolver(), str, 0)
+                                                : hashMap == this.mSecureSettingToTypeMapForUser
+                                                        ? Settings.Secure.getIntForUser(
+                                                                this.mContext.getContentResolver(),
+                                                                str,
+                                                                0,
+                                                                i)
+                                                        : hashMap
+                                                                        == this
+                                                                                .mSystemSettingToTypeMapForUser
+                                                                ? Settings.System.getIntForUser(
+                                                                        this.mContext
+                                                                                .getContentResolver(),
+                                                                        str,
+                                                                        0,
+                                                                        i)
+                                                                : 0;
                 if (i2 != bundle.getInt(str, intValue)) {
                     bundle.putInt(str, i2);
                     z = true;
@@ -109,15 +161,37 @@ public final class CoreStateSettingObserver extends ContentObserver {
                 Map map2 = this.mSecureSettingToTypeMap;
                 float f = FullScreenMagnificationGestureHandler.MAX_SCALE;
                 if (hashMap == map2) {
-                    f = Settings.Secure.getFloat(this.mContext.getContentResolver(), str, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                    f =
+                            Settings.Secure.getFloat(
+                                    this.mContext.getContentResolver(),
+                                    str,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE);
                 } else if (hashMap == this.mSystemSettingToTypeMap) {
-                    f = Settings.System.getFloat(this.mContext.getContentResolver(), str, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                    f =
+                            Settings.System.getFloat(
+                                    this.mContext.getContentResolver(),
+                                    str,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE);
                 } else if (hashMap == this.mGlobalSettingToTypeMap) {
-                    f = Settings.Global.getFloat(this.mContext.getContentResolver(), str, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                    f =
+                            Settings.Global.getFloat(
+                                    this.mContext.getContentResolver(),
+                                    str,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE);
                 } else if (hashMap == this.mSecureSettingToTypeMapForUser) {
-                    f = Settings.Secure.getFloatForUser(this.mContext.getContentResolver(), str, FullScreenMagnificationGestureHandler.MAX_SCALE, i);
+                    f =
+                            Settings.Secure.getFloatForUser(
+                                    this.mContext.getContentResolver(),
+                                    str,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    i);
                 } else if (hashMap == this.mSystemSettingToTypeMapForUser) {
-                    f = Settings.System.getFloatForUser(this.mContext.getContentResolver(), str, FullScreenMagnificationGestureHandler.MAX_SCALE, i);
+                    f =
+                            Settings.System.getFloatForUser(
+                                    this.mContext.getContentResolver(),
+                                    str,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    i);
                 }
                 if (f != bundle.getFloat(str)) {
                     bundle.putFloat(str, f);
@@ -132,9 +206,13 @@ public final class CoreStateSettingObserver extends ContentObserver {
                 } else if (hashMap == this.mGlobalSettingToTypeMap) {
                     j = Settings.Global.getLong(this.mContext.getContentResolver(), str, 0L);
                 } else if (hashMap == this.mSecureSettingToTypeMapForUser) {
-                    j = Settings.Secure.getLongForUser(this.mContext.getContentResolver(), str, 0L, i);
+                    j =
+                            Settings.Secure.getLongForUser(
+                                    this.mContext.getContentResolver(), str, 0L, i);
                 } else if (hashMap == this.mSystemSettingToTypeMapForUser) {
-                    j = Settings.System.getLongForUser(this.mContext.getContentResolver(), str, 0L, i);
+                    j =
+                            Settings.System.getLongForUser(
+                                    this.mContext.getContentResolver(), str, 0L, i);
                 }
                 if (j != bundle.getLong(str)) {
                     bundle.putLong(str, j);
@@ -145,15 +223,23 @@ public final class CoreStateSettingObserver extends ContentObserver {
         return z;
     }
 
-    public final void registerContentObserver(final Uri uri, final ContentObserver contentObserver, final int i) {
-        BackgroundThread.getHandler().post(new Runnable() { // from class: com.samsung.android.server.corestate.CoreStateSettingObserver$$ExternalSyntheticLambda1
-            public final /* synthetic */ boolean f$2 = false;
+    public final void registerContentObserver(
+            final Uri uri, final ContentObserver contentObserver, final int i) {
+        BackgroundThread.getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.server.corestate.CoreStateSettingObserver$$ExternalSyntheticLambda1
+                            public final /* synthetic */ boolean f$2 = false;
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                CoreStateSettingObserver coreStateSettingObserver = CoreStateSettingObserver.this;
-                coreStateSettingObserver.mContext.getContentResolver().registerContentObserver(uri, this.f$2, contentObserver, i);
-            }
-        });
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                CoreStateSettingObserver coreStateSettingObserver =
+                                        CoreStateSettingObserver.this;
+                                coreStateSettingObserver
+                                        .mContext
+                                        .getContentResolver()
+                                        .registerContentObserver(uri, this.f$2, contentObserver, i);
+                            }
+                        });
     }
 }

@@ -3,7 +3,9 @@ package android.content.pm;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
+
 import com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -14,19 +16,21 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class SharedLibraryInfo implements Parcelable {
-    public static final Parcelable.Creator<SharedLibraryInfo> CREATOR = new Parcelable.Creator<SharedLibraryInfo>() { // from class: android.content.pm.SharedLibraryInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SharedLibraryInfo createFromParcel(Parcel source) {
-            return new SharedLibraryInfo(source);
-        }
+    public static final Parcelable.Creator<SharedLibraryInfo> CREATOR =
+            new Parcelable.Creator<
+                    SharedLibraryInfo>() { // from class: android.content.pm.SharedLibraryInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SharedLibraryInfo createFromParcel(Parcel source) {
+                    return new SharedLibraryInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SharedLibraryInfo[] newArray(int size) {
-            return new SharedLibraryInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SharedLibraryInfo[] newArray(int size) {
+                    return new SharedLibraryInfo[size];
+                }
+            };
     public static final int TYPE_BUILTIN = 0;
     public static final int TYPE_DYNAMIC = 1;
     public static final int TYPE_SDK_PACKAGE = 3;
@@ -45,10 +49,19 @@ public final class SharedLibraryInfo implements Parcelable {
     private final long mVersion;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
-    public SharedLibraryInfo(String path, String packageName, List<String> codePaths, String name, long version, int type, VersionedPackage declaringPackage, List<VersionedPackage> dependentPackages, List<SharedLibraryInfo> dependencies, boolean isNative) {
+    public SharedLibraryInfo(
+            String path,
+            String packageName,
+            List<String> codePaths,
+            String name,
+            long version,
+            int type,
+            VersionedPackage declaringPackage,
+            List<VersionedPackage> dependentPackages,
+            List<SharedLibraryInfo> dependencies,
+            boolean isNative) {
         this.mPath = path;
         this.mPackageName = packageName;
         this.mCodePaths = codePaths;
@@ -62,7 +75,17 @@ public final class SharedLibraryInfo implements Parcelable {
         this.mOptionalDependentPackages = null;
     }
 
-    public SharedLibraryInfo(String path, String packageName, List<String> codePaths, String name, long version, int type, VersionedPackage declaringPackage, List<SharedLibraryInfo> dependencies, boolean isNative, Pair<List<VersionedPackage>, List<Boolean>> allDependentPackages) {
+    public SharedLibraryInfo(
+            String path,
+            String packageName,
+            List<String> codePaths,
+            String name,
+            long version,
+            int type,
+            VersionedPackage declaringPackage,
+            List<SharedLibraryInfo> dependencies,
+            boolean isNative,
+            Pair<List<VersionedPackage>, List<Boolean>> allDependentPackages) {
         this.mPath = path;
         this.mPackageName = packageName;
         this.mCodePaths = codePaths;
@@ -76,11 +99,16 @@ public final class SharedLibraryInfo implements Parcelable {
         List<Boolean> usesLibOptional = allDependentPackages.second;
         this.mDependentPackages = allDependents;
         List<VersionedPackage> optionalDependents = null;
-        if (this.mType == 3 && Flags.sdkLibIndependence() && allDependents != null && usesLibOptional != null && allDependents.size() == usesLibOptional.size()) {
+        if (this.mType == 3
+                && Flags.sdkLibIndependence()
+                && allDependents != null
+                && usesLibOptional != null
+                && allDependents.size() == usesLibOptional.size()) {
             for (int k = 0; k < allDependents.size(); k++) {
                 VersionedPackage versionedPackage = allDependents.get(k);
                 if (usesLibOptional.get(k).booleanValue()) {
-                    optionalDependents = optionalDependents == null ? new ArrayList<>() : optionalDependents;
+                    optionalDependents =
+                            optionalDependents == null ? new ArrayList<>() : optionalDependents;
                     optionalDependents.add(versionedPackage);
                 }
             }
@@ -99,11 +127,16 @@ public final class SharedLibraryInfo implements Parcelable {
         this.mName = parcel.readString8();
         this.mVersion = parcel.readLong();
         this.mType = parcel.readInt();
-        this.mDeclaringPackage = (VersionedPackage) parcel.readParcelable(null, VersionedPackage.class);
+        this.mDeclaringPackage =
+                (VersionedPackage) parcel.readParcelable(null, VersionedPackage.class);
         this.mDependentPackages = parcel.readArrayList(null, VersionedPackage.class);
         this.mDependencies = parcel.createTypedArrayList(CREATOR);
         this.mIsNative = parcel.readBoolean();
-        this.mOptionalDependentPackages = parcel.readParcelableList(new ArrayList(), VersionedPackage.class.getClassLoader(), VersionedPackage.class);
+        this.mOptionalDependentPackages =
+                parcel.readParcelableList(
+                        new ArrayList(),
+                        VersionedPackage.class.getClassLoader(),
+                        VersionedPackage.class);
     }
 
     public int getType() {
@@ -202,7 +235,14 @@ public final class SharedLibraryInfo implements Parcelable {
     }
 
     public String toString() {
-        return "SharedLibraryInfo{name:" + this.mName + ", type:" + typeToString(this.mType) + ", version:" + this.mVersion + (!getDependentPackages().isEmpty() ? " has dependents" : "") + "}";
+        return "SharedLibraryInfo{name:"
+                + this.mName
+                + ", type:"
+                + typeToString(this.mType)
+                + ", version:"
+                + this.mVersion
+                + (!getDependentPackages().isEmpty() ? " has dependents" : "")
+                + "}";
     }
 
     @Override // android.os.Parcelable
@@ -211,7 +251,8 @@ public final class SharedLibraryInfo implements Parcelable {
         parcel.writeString8(this.mPackageName);
         if (this.mCodePaths != null) {
             parcel.writeInt(1);
-            parcel.writeString8Array((String[]) this.mCodePaths.toArray(new String[this.mCodePaths.size()]));
+            parcel.writeString8Array(
+                    (String[]) this.mCodePaths.toArray(new String[this.mCodePaths.size()]));
         } else {
             parcel.writeInt(0);
         }

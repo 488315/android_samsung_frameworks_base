@@ -1,7 +1,9 @@
 package android.graphics.fonts;
 
 import android.util.ArraySet;
+
 import dalvik.annotation.optimization.FastNative;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Collections;
@@ -25,8 +27,7 @@ public class FontFileUtil {
     @FastNative
     private static native int nIsPostScriptType1Font(ByteBuffer byteBuffer, int i);
 
-    private FontFileUtil() {
-    }
+    private FontFileUtil() {}
 
     public static int unpackWeight(int packed) {
         return 65535 & packed;
@@ -44,7 +45,8 @@ public class FontFileUtil {
         return (italic ? 65536 : 0) | weight;
     }
 
-    public static final int analyzeStyle(ByteBuffer buffer, int ttcIndex, FontVariationAxis[] varSettings) {
+    public static final int analyzeStyle(
+            ByteBuffer buffer, int ttcIndex, FontVariationAxis[] varSettings) {
         int italic;
         int italic2;
         int weight = -1;
@@ -175,13 +177,17 @@ public class FontFileUtil {
             if (fvarTableOffset == -1) {
                 return Collections.EMPTY_SET;
             }
-            if (buffer.getShort(fvarTableOffset) == 1 && buffer.getShort(fvarTableOffset + 2) == 0) {
+            if (buffer.getShort(fvarTableOffset) == 1
+                    && buffer.getShort(fvarTableOffset + 2) == 0) {
                 int axesArrayOffset = getUInt16(buffer, fvarTableOffset + 4);
                 int axisCount = getUInt16(buffer, fvarTableOffset + 8);
                 int axisSize = getUInt16(buffer, fvarTableOffset + 10);
                 ArraySet<Integer> axes = new ArraySet<>();
                 for (int i2 = 0; i2 < axisCount; i2++) {
-                    axes.add(Integer.valueOf(buffer.getInt(fvarTableOffset + axesArrayOffset + (axisSize * i2))));
+                    axes.add(
+                            Integer.valueOf(
+                                    buffer.getInt(
+                                            fvarTableOffset + axesArrayOffset + (axisSize * i2))));
                 }
                 return axes;
             }

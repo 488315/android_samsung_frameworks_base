@@ -13,7 +13,8 @@ public class AudioPortConfig {
     final AudioPort mPort;
     private final int mSamplingRate;
 
-    AudioPortConfig(AudioPort port, int samplingRate, int channelMask, int format, AudioGainConfig gain) {
+    AudioPortConfig(
+            AudioPort port, int samplingRate, int channelMask, int format, AudioGainConfig gain) {
         this.mPort = port;
         this.mSamplingRate = samplingRate;
         this.mChannelMask = channelMask;
@@ -42,6 +43,16 @@ public class AudioPortConfig {
     }
 
     public String toString() {
-        return "{mPort:" + this.mPort + ", mSamplingRate:" + this.mSamplingRate + ", mChannelMask: " + this.mChannelMask + ", mFormat:" + this.mFormat + ", mGain:" + this.mGain + "}";
+        return "{mPort:"
+                + this.mPort
+                + ", mSamplingRate:"
+                + this.mSamplingRate
+                + ", mChannelMask: "
+                + this.mChannelMask
+                + ", mFormat:"
+                + this.mFormat
+                + ", mGain:"
+                + this.mGain
+                + "}";
     }
 }

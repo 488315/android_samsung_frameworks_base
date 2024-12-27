@@ -4,13 +4,15 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.drawable.DrawableWrapper;
 import android.util.AttributeSet;
 import android.view.Gravity;
+
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class ScaleDrawable extends DrawableWrapper {
@@ -31,7 +33,9 @@ public class ScaleDrawable extends DrawableWrapper {
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.ScaleDrawable);
         super.inflate(r, parser, attrs, theme);
         updateStateFromTypedArray(a);
@@ -66,7 +70,10 @@ public class ScaleDrawable extends DrawableWrapper {
     private void verifyRequiredAttributes(TypedArray a) throws XmlPullParserException {
         if (getDrawable() == null) {
             if (this.mState.mThemeAttrs == null || this.mState.mThemeAttrs[0] == 0) {
-                throw new XmlPullParserException(a.getPositionDescription() + ": <scale> tag requires a 'drawable' attribute or child tag defining a drawable");
+                throw new XmlPullParserException(
+                        a.getPositionDescription()
+                                + ": <scale> tag requires a 'drawable' attribute or child tag"
+                                + " defining a drawable");
             }
         }
     }
@@ -147,7 +154,11 @@ public class ScaleDrawable extends DrawableWrapper {
             h = h2;
         } else {
             int ih = min ? d.getIntrinsicHeight() : 0;
-            h = h2 - ((int) ((((h2 - ih) * (10000 - level)) * this.mState.mScaleHeight) / 10000.0f));
+            h =
+                    h2
+                            - ((int)
+                                    ((((h2 - ih) * (10000 - level)) * this.mState.mScaleHeight)
+                                            / 10000.0f));
         }
         int layoutDirection = getLayoutDirection();
         Gravity.apply(this.mState.mGravity, w, h, bounds, r, layoutDirection);
@@ -187,7 +198,8 @@ public class ScaleDrawable extends DrawableWrapper {
             }
         }
 
-        @Override // android.graphics.drawable.DrawableWrapper.DrawableWrapperState, android.graphics.drawable.Drawable.ConstantState
+        @Override // android.graphics.drawable.DrawableWrapper.DrawableWrapperState,
+        // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable(Resources res) {
             return new ScaleDrawable(this, res);
         }

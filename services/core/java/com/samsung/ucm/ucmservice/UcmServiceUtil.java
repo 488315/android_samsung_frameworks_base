@@ -4,8 +4,10 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.android.server.enterprise.EnterpriseDeviceManagerService;
 import com.android.server.enterprise.EnterpriseService;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +20,8 @@ import java.io.IOException;
 public abstract class UcmServiceUtil {
     public static int getOrganizationOwnedProfileUserId() {
         int i = EnterpriseDeviceManagerService.$r8$clinit;
-        return ((EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance).getOrganizationOwnedProfileUserId();
+        return ((EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance)
+                .getOrganizationOwnedProfileUserId();
     }
 
     public static boolean isDebug() {
@@ -27,7 +30,8 @@ public abstract class UcmServiceUtil {
     }
 
     public static boolean isOrganizationOwnedProfile(Context context) {
-        return ((DevicePolicyManager) context.getSystemService("device_policy")).isOrganizationOwnedDeviceWithManagedProfile();
+        return ((DevicePolicyManager) context.getSystemService("device_policy"))
+                .isOrganizationOwnedDeviceWithManagedProfile();
     }
 
     public static int readIntFromFile(String str) {

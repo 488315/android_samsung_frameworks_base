@@ -1,6 +1,7 @@
 package android.net.ipmemorystore;
 
 import android.net.networkstack.aidl.quirks.IPv6ProvisioningLossQuirk;
+
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -50,7 +51,13 @@ public class NetworkAttributes {
         }
 
         public NetworkAttributes build() {
-            return new NetworkAttributes(this.mAssignedAddress, this.mAssignedAddressExpiry, this.mCluster, this.mDnsAddresses, this.mMtu, this.mIpv6ProvLossQuirk);
+            return new NetworkAttributes(
+                    this.mAssignedAddress,
+                    this.mAssignedAddressExpiry,
+                    this.mCluster,
+                    this.mDnsAddresses,
+                    this.mMtu,
+                    this.mIpv6ProvLossQuirk);
         }
 
         public Builder setAssignedV4Address(Inet4Address inet4Address) {
@@ -139,10 +146,18 @@ public class NetworkAttributes {
             r1.<init>(r2, r3, r4, r5, r6, r7)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.net.ipmemorystore.NetworkAttributes.<init>(android.net.ipmemorystore.NetworkAttributesParcelable):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.net.ipmemorystore.NetworkAttributes.<init>(android.net.ipmemorystore.NetworkAttributesParcelable):void");
     }
 
-    public NetworkAttributes(Inet4Address inet4Address, Long l, String str, List list, Integer num, IPv6ProvisioningLossQuirk iPv6ProvisioningLossQuirk) {
+    public NetworkAttributes(
+            Inet4Address inet4Address,
+            Long l,
+            String str,
+            List list,
+            Integer num,
+            IPv6ProvisioningLossQuirk iPv6ProvisioningLossQuirk) {
         if (num != null && num.intValue() < 0) {
             throw new IllegalArgumentException("MTU can't be negative");
         }
@@ -216,26 +231,64 @@ public class NetworkAttributes {
             return false;
         }
         NetworkAttributes networkAttributes = (NetworkAttributes) obj;
-        return Objects.equals(this.assignedV4Address, networkAttributes.assignedV4Address) && Objects.equals(this.assignedV4AddressExpiry, networkAttributes.assignedV4AddressExpiry) && Objects.equals(this.cluster, networkAttributes.cluster) && Objects.equals(this.dnsAddresses, networkAttributes.dnsAddresses) && Objects.equals(this.mtu, networkAttributes.mtu) && Objects.equals(this.ipv6ProvisioningLossQuirk, networkAttributes.ipv6ProvisioningLossQuirk);
+        return Objects.equals(this.assignedV4Address, networkAttributes.assignedV4Address)
+                && Objects.equals(
+                        this.assignedV4AddressExpiry, networkAttributes.assignedV4AddressExpiry)
+                && Objects.equals(this.cluster, networkAttributes.cluster)
+                && Objects.equals(this.dnsAddresses, networkAttributes.dnsAddresses)
+                && Objects.equals(this.mtu, networkAttributes.mtu)
+                && Objects.equals(
+                        this.ipv6ProvisioningLossQuirk,
+                        networkAttributes.ipv6ProvisioningLossQuirk);
     }
 
     public float getNetworkGroupSamenessConfidence(NetworkAttributes networkAttributes) {
-        float samenessContribution = samenessContribution(300.0f, this.assignedV4Address, networkAttributes.assignedV4Address) + samenessContribution(0.0f, this.assignedV4AddressExpiry, networkAttributes.assignedV4AddressExpiry) + samenessContribution(300.0f, this.cluster, networkAttributes.cluster) + samenessContribution(WEIGHT_DNSADDRESSES, this.dnsAddresses, networkAttributes.dnsAddresses) + samenessContribution(WEIGHT_MTU, this.mtu, networkAttributes.mtu) + samenessContribution(0.0f, this.ipv6ProvisioningLossQuirk, networkAttributes.ipv6ProvisioningLossQuirk);
-        return samenessContribution < TOTAL_WEIGHT_CUTOFF ? samenessContribution / 1040.0f : (((samenessContribution - TOTAL_WEIGHT_CUTOFF) / 330.0f) / 2.0f) + 0.5f;
+        float samenessContribution =
+                samenessContribution(
+                                300.0f, this.assignedV4Address, networkAttributes.assignedV4Address)
+                        + samenessContribution(
+                                0.0f,
+                                this.assignedV4AddressExpiry,
+                                networkAttributes.assignedV4AddressExpiry)
+                        + samenessContribution(300.0f, this.cluster, networkAttributes.cluster)
+                        + samenessContribution(
+                                WEIGHT_DNSADDRESSES,
+                                this.dnsAddresses,
+                                networkAttributes.dnsAddresses)
+                        + samenessContribution(WEIGHT_MTU, this.mtu, networkAttributes.mtu)
+                        + samenessContribution(
+                                0.0f,
+                                this.ipv6ProvisioningLossQuirk,
+                                networkAttributes.ipv6ProvisioningLossQuirk);
+        return samenessContribution < TOTAL_WEIGHT_CUTOFF
+                ? samenessContribution / 1040.0f
+                : (((samenessContribution - TOTAL_WEIGHT_CUTOFF) / 330.0f) / 2.0f) + 0.5f;
     }
 
     public int hashCode() {
-        return Objects.hash(this.assignedV4Address, this.assignedV4AddressExpiry, this.cluster, this.dnsAddresses, this.mtu, this.ipv6ProvisioningLossQuirk);
+        return Objects.hash(
+                this.assignedV4Address,
+                this.assignedV4AddressExpiry,
+                this.cluster,
+                this.dnsAddresses,
+                this.mtu,
+                this.ipv6ProvisioningLossQuirk);
     }
 
     public boolean isEmpty() {
-        return this.assignedV4Address == null && this.assignedV4AddressExpiry == null && this.cluster == null && this.dnsAddresses == null && this.mtu == null && this.ipv6ProvisioningLossQuirk == null;
+        return this.assignedV4Address == null
+                && this.assignedV4AddressExpiry == null
+                && this.cluster == null
+                && this.dnsAddresses == null
+                && this.mtu == null
+                && this.ipv6ProvisioningLossQuirk == null;
     }
 
     public NetworkAttributesParcelable toParcelable() {
         NetworkAttributesParcelable networkAttributesParcelable = new NetworkAttributesParcelable();
         Inet4Address inet4Address = this.assignedV4Address;
-        networkAttributesParcelable.assignedV4Address = inet4Address == null ? null : inet4Address.getAddress();
+        networkAttributesParcelable.assignedV4Address =
+                inet4Address == null ? null : inet4Address.getAddress();
         Long l = this.assignedV4AddressExpiry;
         networkAttributesParcelable.assignedV4AddressExpiry = l == null ? 0L : l.longValue();
         networkAttributesParcelable.cluster = this.cluster;
@@ -243,7 +296,10 @@ public class NetworkAttributes {
         Integer num = this.mtu;
         networkAttributesParcelable.mtu = num == null ? -1 : num.intValue();
         IPv6ProvisioningLossQuirk iPv6ProvisioningLossQuirk = this.ipv6ProvisioningLossQuirk;
-        networkAttributesParcelable.ipv6ProvisioningLossQuirk = iPv6ProvisioningLossQuirk != null ? iPv6ProvisioningLossQuirk.toStableParcelable() : null;
+        networkAttributesParcelable.ipv6ProvisioningLossQuirk =
+                iPv6ProvisioningLossQuirk != null
+                        ? iPv6ProvisioningLossQuirk.toStableParcelable()
+                        : null;
         return networkAttributesParcelable;
     }
 

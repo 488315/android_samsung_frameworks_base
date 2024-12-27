@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.util.ArrayMap;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -137,7 +138,15 @@ public abstract class FileCollector {
                 Map map = EXTENSION_MAP;
                 String name = file2.getName();
                 int lastIndexOf = name.lastIndexOf(46);
-                int intValue = ((Integer) map.getOrDefault(lastIndexOf == -1 ? "" : name.substring(lastIndexOf + 1).toLowerCase(), -1)).intValue();
+                int intValue =
+                        ((Integer)
+                                        map.getOrDefault(
+                                                lastIndexOf == -1
+                                                        ? ""
+                                                        : name.substring(lastIndexOf + 1)
+                                                                .toLowerCase(),
+                                                -1))
+                                .intValue();
                 if (intValue == 0) {
                     measurementResult.imagesSize += length;
                 } else if (intValue == 1) {
@@ -154,11 +163,18 @@ public abstract class FileCollector {
     public static MeasurementResult getMeasurementResult(Context context) {
         MeasurementResult measurementResult = new MeasurementResult();
         try {
-            ExternalStorageStats queryExternalStatsForUser = ((StorageStatsManager) context.getSystemService("storagestats")).queryExternalStatsForUser(StorageManager.UUID_PRIVATE_INTERNAL, UserHandle.of(context.getUserId()));
+            ExternalStorageStats queryExternalStatsForUser =
+                    ((StorageStatsManager) context.getSystemService("storagestats"))
+                            .queryExternalStatsForUser(
+                                    StorageManager.UUID_PRIVATE_INTERNAL,
+                                    UserHandle.of(context.getUserId()));
             measurementResult.imagesSize = queryExternalStatsForUser.getImageBytes();
             measurementResult.videosSize = queryExternalStatsForUser.getVideoBytes();
             measurementResult.audioSize = queryExternalStatsForUser.getAudioBytes();
-            measurementResult.miscSize = ((queryExternalStatsForUser.getTotalBytes() - measurementResult.imagesSize) - measurementResult.videosSize) - measurementResult.audioSize;
+            measurementResult.miscSize =
+                    ((queryExternalStatsForUser.getTotalBytes() - measurementResult.imagesSize)
+                                    - measurementResult.videosSize)
+                            - measurementResult.audioSize;
             return measurementResult;
         } catch (IOException unused) {
             throw new IllegalStateException("Could not query storage");

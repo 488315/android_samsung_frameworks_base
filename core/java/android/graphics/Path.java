@@ -2,11 +2,14 @@ package android.graphics;
 
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
+
 import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public class Path {
-    static final FillType[] sFillTypeArray = {FillType.WINDING, FillType.EVEN_ODD, FillType.INVERSE_WINDING, FillType.INVERSE_EVEN_ODD};
+    static final FillType[] sFillTypeArray = {
+        FillType.WINDING, FillType.EVEN_ODD, FillType.INVERSE_WINDING, FillType.INVERSE_EVEN_ODD
+    };
     public final long mNativePath;
 
     public enum Op {
@@ -17,7 +20,8 @@ public class Path {
         REVERSE_DIFFERENCE
     }
 
-    private static native void nAddArc(long j, float f, float f2, float f3, float f4, float f5, float f6);
+    private static native void nAddArc(
+            long j, float f, float f2, float f3, float f4, float f5, float f6);
 
     private static native void nAddCircle(long j, float f, float f2, float f3, int i);
 
@@ -31,13 +35,16 @@ public class Path {
 
     private static native void nAddRect(long j, float f, float f2, float f3, float f4, int i);
 
-    private static native void nAddRoundRect(long j, float f, float f2, float f3, float f4, float f5, float f6, int i);
+    private static native void nAddRoundRect(
+            long j, float f, float f2, float f3, float f4, float f5, float f6, int i);
 
-    private static native void nAddRoundRect(long j, float f, float f2, float f3, float f4, float[] fArr, int i);
+    private static native void nAddRoundRect(
+            long j, float f, float f2, float f3, float f4, float[] fArr, int i);
 
     private static native float[] nApproximate(long j, float f);
 
-    private static native void nArcTo(long j, float f, float f2, float f3, float f4, float f5, float f6, boolean z);
+    private static native void nArcTo(
+            long j, float f, float f2, float f3, float f4, float f5, float f6, boolean z);
 
     private static native void nClose(long j);
 
@@ -45,7 +52,8 @@ public class Path {
 
     private static native void nConicTo(long j, float f, float f2, float f3, float f4, float f5);
 
-    private static native void nCubicTo(long j, float f, float f2, float f3, float f4, float f5, float f6);
+    private static native void nCubicTo(
+            long j, float f, float f2, float f3, float f4, float f5, float f6);
 
     @CriticalNative
     private static native int nGetFillType(long j);
@@ -88,7 +96,8 @@ public class Path {
 
     private static native void nRConicTo(long j, float f, float f2, float f3, float f4, float f5);
 
-    private static native void nRCubicTo(long j, float f, float f2, float f3, float f4, float f5, float f6);
+    private static native void nRCubicTo(
+            long j, float f, float f2, float f3, float f4, float f5, float f6);
 
     private static native void nRLineTo(long j, float f, float f2);
 
@@ -114,10 +123,11 @@ public class Path {
     private static native void nTransform(long j, long j2, long j3);
 
     private static class NoImagePreloadHolder {
-        static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(Path.class.getClassLoader(), Path.nGetFinalizer());
+        static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        Path.class.getClassLoader(), Path.nGetFinalizer());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     public Path() {
@@ -264,7 +274,14 @@ public class Path {
         arcTo(oval.left, oval.top, oval.right, oval.bottom, startAngle, sweepAngle, false);
     }
 
-    public void arcTo(float left, float top, float right, float bottom, float startAngle, float sweepAngle, boolean forceMoveTo) {
+    public void arcTo(
+            float left,
+            float top,
+            float right,
+            float bottom,
+            float startAngle,
+            float sweepAngle,
+            boolean forceMoveTo) {
         nArcTo(this.mNativePath, left, top, right, bottom, startAngle, sweepAngle, forceMoveTo);
     }
 
@@ -307,7 +324,8 @@ public class Path {
         addArc(oval.left, oval.top, oval.right, oval.bottom, startAngle, sweepAngle);
     }
 
-    public void addArc(float left, float top, float right, float bottom, float startAngle, float sweepAngle) {
+    public void addArc(
+            float left, float top, float right, float bottom, float startAngle, float sweepAngle) {
         nAddArc(this.mNativePath, left, top, right, bottom, startAngle, sweepAngle);
     }
 
@@ -315,7 +333,8 @@ public class Path {
         addRoundRect(rect.left, rect.top, rect.right, rect.bottom, rx, ry, dir);
     }
 
-    public void addRoundRect(float left, float top, float right, float bottom, float rx, float ry, Direction dir) {
+    public void addRoundRect(
+            float left, float top, float right, float bottom, float rx, float ry, Direction dir) {
         nAddRoundRect(this.mNativePath, left, top, right, bottom, rx, ry, dir.nativeInt);
     }
 
@@ -326,7 +345,8 @@ public class Path {
         addRoundRect(rect.left, rect.top, rect.right, rect.bottom, radii, dir);
     }
 
-    public void addRoundRect(float left, float top, float right, float bottom, float[] radii, Direction dir) {
+    public void addRoundRect(
+            float left, float top, float right, float bottom, float[] radii, Direction dir) {
         if (radii.length < 8) {
             throw new ArrayIndexOutOfBoundsException("radii[] needs 8 values");
         }
@@ -380,7 +400,8 @@ public class Path {
 
     public float[] approximate(float acceptableError) {
         if (acceptableError < 0.0f) {
-            throw new IllegalArgumentException("AcceptableError must be greater than or equal to 0");
+            throw new IllegalArgumentException(
+                    "AcceptableError must be greater than or equal to 0");
         }
         return nApproximate(this.mNativePath, acceptableError);
     }
@@ -394,6 +415,7 @@ public class Path {
     }
 
     public boolean interpolate(Path otherPath, float t, Path interpolatedPath) {
-        return nInterpolate(this.mNativePath, otherPath.mNativePath, t, interpolatedPath.mNativePath);
+        return nInterpolate(
+                this.mNativePath, otherPath.mNativePath, t, interpolatedPath.mNativePath);
     }
 }

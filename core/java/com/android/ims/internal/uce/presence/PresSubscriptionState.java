@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class PresSubscriptionState implements Parcelable {
-    public static final Parcelable.Creator<PresSubscriptionState> CREATOR = new Parcelable.Creator<PresSubscriptionState>() { // from class: com.android.ims.internal.uce.presence.PresSubscriptionState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresSubscriptionState createFromParcel(Parcel source) {
-            return new PresSubscriptionState(source);
-        }
+    public static final Parcelable.Creator<PresSubscriptionState> CREATOR =
+            new Parcelable.Creator<
+                    PresSubscriptionState>() { // from class:
+                                               // com.android.ims.internal.uce.presence.PresSubscriptionState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresSubscriptionState createFromParcel(Parcel source) {
+                    return new PresSubscriptionState(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresSubscriptionState[] newArray(int size) {
-            return new PresSubscriptionState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresSubscriptionState[] newArray(int size) {
+                    return new PresSubscriptionState[size];
+                }
+            };
     public static final int UCE_PRES_SUBSCRIPTION_STATE_ACTIVE = 0;
     public static final int UCE_PRES_SUBSCRIPTION_STATE_PENDING = 1;
     public static final int UCE_PRES_SUBSCRIPTION_STATE_TERMINATED = 2;

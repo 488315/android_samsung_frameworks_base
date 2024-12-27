@@ -4,23 +4,26 @@ import android.app.PendingIntent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import java.util.Set;
 
 /* loaded from: classes.dex */
 public final class PrepareGetCredentialResponseInternal implements Parcelable {
-    public static final Parcelable.Creator<PrepareGetCredentialResponseInternal> CREATOR = new Parcelable.Creator<PrepareGetCredentialResponseInternal>() { // from class: android.credentials.PrepareGetCredentialResponseInternal.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrepareGetCredentialResponseInternal[] newArray(int size) {
-            return new PrepareGetCredentialResponseInternal[size];
-        }
+    public static final Parcelable.Creator<PrepareGetCredentialResponseInternal> CREATOR =
+            new Parcelable.Creator<PrepareGetCredentialResponseInternal>() { // from class:
+                // android.credentials.PrepareGetCredentialResponseInternal.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrepareGetCredentialResponseInternal[] newArray(int size) {
+                    return new PrepareGetCredentialResponseInternal[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrepareGetCredentialResponseInternal createFromParcel(Parcel in) {
-            return new PrepareGetCredentialResponseInternal(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrepareGetCredentialResponseInternal createFromParcel(Parcel in) {
+                    return new PrepareGetCredentialResponseInternal(in);
+                }
+            };
     private static final String TAG = "CredentialManager";
     private final ArraySet<String> mCredentialResultTypes;
     private final boolean mHasAuthenticationResults;
@@ -34,7 +37,8 @@ public final class PrepareGetCredentialResponseInternal implements Parcelable {
 
     public boolean hasCredentialResults(String credentialType) {
         if (!this.mHasQueryApiPermission) {
-            throw new SecurityException("caller doesn't have the permission to query credential results");
+            throw new SecurityException(
+                    "caller doesn't have the permission to query credential results");
         }
         if (this.mCredentialResultTypes == null) {
             return false;
@@ -44,14 +48,16 @@ public final class PrepareGetCredentialResponseInternal implements Parcelable {
 
     public boolean hasAuthenticationResults() {
         if (!this.mHasQueryApiPermission) {
-            throw new SecurityException("caller doesn't have the permission to query authentication results");
+            throw new SecurityException(
+                    "caller doesn't have the permission to query authentication results");
         }
         return this.mHasAuthenticationResults;
     }
 
     public boolean hasRemoteResults() {
         if (!this.mHasQueryApiPermission) {
-            throw new SecurityException("caller doesn't have the permission to query remote results");
+            throw new SecurityException(
+                    "caller doesn't have the permission to query remote results");
         }
         return this.mHasRemoteResults;
     }
@@ -70,7 +76,12 @@ public final class PrepareGetCredentialResponseInternal implements Parcelable {
         return 0;
     }
 
-    public PrepareGetCredentialResponseInternal(boolean hasQueryApiPermission, Set<String> credentialResultTypes, boolean hasAuthenticationResults, boolean hasRemoteResults, PendingIntent pendingIntent) {
+    public PrepareGetCredentialResponseInternal(
+            boolean hasQueryApiPermission,
+            Set<String> credentialResultTypes,
+            boolean hasAuthenticationResults,
+            boolean hasRemoteResults,
+            PendingIntent pendingIntent) {
         this.mHasQueryApiPermission = hasQueryApiPermission;
         this.mCredentialResultTypes = new ArraySet<>(credentialResultTypes);
         this.mHasAuthenticationResults = hasAuthenticationResults;

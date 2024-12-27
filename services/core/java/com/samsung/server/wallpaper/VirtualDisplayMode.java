@@ -13,7 +13,9 @@ public final class VirtualDisplayMode {
     }
 
     public final boolean isVirtualWallpaperDisplay(int i) {
-        Display[] displays = this.mDisplayManager.getDisplays("com.samsung.android.hardware.display.category.VIEW_COVER_DISPLAY");
+        Display[] displays =
+                this.mDisplayManager.getDisplays(
+                        "com.samsung.android.hardware.display.category.VIEW_COVER_DISPLAY");
         if (displays.length > 0) {
             for (Display display : displays) {
                 if (i == display.getDisplayId()) {

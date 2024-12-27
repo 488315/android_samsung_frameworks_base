@@ -8,15 +8,11 @@ import java.util.List;
 public class MbmsStreamingSessionCallback {
 
     @Retention(RetentionPolicy.SOURCE)
-    private @interface StreamingError {
-    }
+    private @interface StreamingError {}
 
-    public void onError(int errorCode, String message) {
-    }
+    public void onError(int errorCode, String message) {}
 
-    public void onStreamingServicesUpdated(List<StreamingServiceInfo> services) {
-    }
+    public void onStreamingServicesUpdated(List<StreamingServiceInfo> services) {}
 
-    public void onMiddlewareReady() {
-    }
+    public void onMiddlewareReady() {}
 }

@@ -14,8 +14,7 @@ public interface IGbaService extends IInterface {
 
     public static class Default implements IGbaService {
         @Override // android.telephony.gba.IGbaService
-        public void authenticationRequest(GbaAuthRequest request) throws RemoteException {
-        }
+        public void authenticationRequest(GbaAuthRequest request) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IGbaService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGbaService {
+    public abstract static class Stub extends Binder implements IGbaService {
         static final int TRANSACTION_authenticationRequest = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IGbaService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGbaService.DESCRIPTOR);
             }
@@ -71,7 +71,8 @@ public interface IGbaService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    GbaAuthRequest _arg0 = (GbaAuthRequest) data.readTypedObject(GbaAuthRequest.CREATOR);
+                    GbaAuthRequest _arg0 =
+                            (GbaAuthRequest) data.readTypedObject(GbaAuthRequest.CREATOR);
                     data.enforceNoDataAvail();
                     authenticationRequest(_arg0);
                     return true;

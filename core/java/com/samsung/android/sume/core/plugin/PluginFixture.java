@@ -1,11 +1,12 @@
 package com.samsung.android.sume.core.plugin;
 
 import android.content.Context;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.filter.ContentFilterRegister;
 import com.samsung.android.sume.core.functional.DescriptorLoader;
 import com.samsung.android.sume.core.functional.DescriptorStreamLoader;
-import com.samsung.android.sume.core.plugin.PluginFixture;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes6.dex */

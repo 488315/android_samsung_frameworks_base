@@ -1,7 +1,7 @@
 package com.samsung.android.media;
 
 import android.content.res.AssetFileDescriptor;
-import com.samsung.android.media.SemBackgroundMusic;
+
 import java.io.FileDescriptor;
 
 /* loaded from: classes6.dex */

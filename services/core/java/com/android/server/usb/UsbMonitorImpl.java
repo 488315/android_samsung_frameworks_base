@@ -4,11 +4,14 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.sysfwutil.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
+import libcore.io.IoUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -47,7 +50,11 @@ public final class UsbMonitorImpl {
             boolean exists = this.mLogFile.exists();
             UsbMonitorImpl usbMonitorImpl = UsbMonitorImpl.this;
             if (exists) {
-                UsbMonitorImpl.m1024$$Nest$mstringToFile(usbMonitorImpl, this.mSysFs, UsbMonitorImpl.m1023$$Nest$mreadFileAsStringOrNull(usbMonitorImpl, this.mLogFile));
+                UsbMonitorImpl.m1024$$Nest$mstringToFile(
+                        usbMonitorImpl,
+                        this.mSysFs,
+                        UsbMonitorImpl.m1023$$Nest$mreadFileAsStringOrNull(
+                                usbMonitorImpl, this.mLogFile));
             } else {
                 UsbMonitorImpl.m1024$$Nest$mstringToFile(usbMonitorImpl, this.mSysFs, "0");
                 try {
@@ -66,10 +73,13 @@ public final class UsbMonitorImpl {
         public final void updateUsbStats() {
             File file = this.mSysFs;
             UsbMonitorImpl usbMonitorImpl = UsbMonitorImpl.this;
-            String m1023$$Nest$mreadFileAsStringOrNull = UsbMonitorImpl.m1023$$Nest$mreadFileAsStringOrNull(usbMonitorImpl, file);
-            if (m1023$$Nest$mreadFileAsStringOrNull != null && !m1023$$Nest$mreadFileAsStringOrNull.equals(this.mCurrentUsbStats)) {
+            String m1023$$Nest$mreadFileAsStringOrNull =
+                    UsbMonitorImpl.m1023$$Nest$mreadFileAsStringOrNull(usbMonitorImpl, file);
+            if (m1023$$Nest$mreadFileAsStringOrNull != null
+                    && !m1023$$Nest$mreadFileAsStringOrNull.equals(this.mCurrentUsbStats)) {
                 this.mCurrentUsbStats = m1023$$Nest$mreadFileAsStringOrNull;
-                UsbMonitorImpl.m1024$$Nest$mstringToFile(usbMonitorImpl, this.mLogFile, m1023$$Nest$mreadFileAsStringOrNull);
+                UsbMonitorImpl.m1024$$Nest$mstringToFile(
+                        usbMonitorImpl, this.mLogFile, m1023$$Nest$mreadFileAsStringOrNull);
             }
             Slog.d("UsbStatsMonitor", this.mCurrentUsbStats);
             removeMessages(1);
@@ -78,7 +88,8 @@ public final class UsbMonitorImpl {
     }
 
     /* renamed from: -$$Nest$mreadFileAsStringOrNull, reason: not valid java name */
-    public static String m1023$$Nest$mreadFileAsStringOrNull(UsbMonitorImpl usbMonitorImpl, File file) {
+    public static String m1023$$Nest$mreadFileAsStringOrNull(
+            UsbMonitorImpl usbMonitorImpl, File file) {
         usbMonitorImpl.getClass();
         try {
             return IoUtils.readFileAsString(file.getAbsolutePath()).trim();
@@ -89,14 +100,15 @@ public final class UsbMonitorImpl {
     }
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:19:0x001f
-        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
-        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
-        */
+    jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:19:0x001f
+    	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
+    	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
+    */
     /* renamed from: -$$Nest$mstringToFile, reason: not valid java name */
-    public static void m1024$$Nest$mstringToFile(com.android.server.usb.UsbMonitorImpl r4, java.io.File r5, java.lang.String r6) {
+    public static void m1024$$Nest$mstringToFile(
+            com.android.server.usb.UsbMonitorImpl r4, java.io.File r5, java.lang.String r6) {
         /*
             r4.getClass()
             java.lang.String r4 = "Couldn't close stream"
@@ -150,7 +162,10 @@ public final class UsbMonitorImpl {
         L4f:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usb.UsbMonitorImpl.m1024$$Nest$mstringToFile(com.android.server.usb.UsbMonitorImpl, java.io.File, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usb.UsbMonitorImpl.m1024$$Nest$mstringToFile(com.android.server.usb.UsbMonitorImpl,"
+                    + " java.io.File, java.lang.String):void");
     }
 
     public UsbMonitorImpl(Looper looper) {
@@ -160,7 +175,10 @@ public final class UsbMonitorImpl {
     public final void dump(PrintWriter printWriter) {
         UsbStatsHandler usbStatsHandler = this.mHandler;
         if (usbStatsHandler != null) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Current USB Stats: "), usbStatsHandler.mCurrentUsbStats, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Current USB Stats: "),
+                    usbStatsHandler.mCurrentUsbStats,
+                    printWriter);
         }
     }
 }

@@ -2,29 +2,37 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public class VoiceSpecificRegistrationInfo implements Parcelable {
-    public static final Parcelable.Creator<VoiceSpecificRegistrationInfo> CREATOR = new Parcelable.Creator<VoiceSpecificRegistrationInfo>() { // from class: android.telephony.VoiceSpecificRegistrationInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VoiceSpecificRegistrationInfo createFromParcel(Parcel source) {
-            return new VoiceSpecificRegistrationInfo(source);
-        }
+    public static final Parcelable.Creator<VoiceSpecificRegistrationInfo> CREATOR =
+            new Parcelable.Creator<
+                    VoiceSpecificRegistrationInfo>() { // from class:
+                                                       // android.telephony.VoiceSpecificRegistrationInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VoiceSpecificRegistrationInfo createFromParcel(Parcel source) {
+                    return new VoiceSpecificRegistrationInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VoiceSpecificRegistrationInfo[] newArray(int size) {
-            return new VoiceSpecificRegistrationInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VoiceSpecificRegistrationInfo[] newArray(int size) {
+                    return new VoiceSpecificRegistrationInfo[size];
+                }
+            };
     public final boolean cssSupported;
     public final int defaultRoamingIndicator;
     public final int roamingIndicator;
     public final int systemIsInPrl;
 
-    VoiceSpecificRegistrationInfo(boolean cssSupported, int roamingIndicator, int systemIsInPrl, int defaultRoamingIndicator) {
+    VoiceSpecificRegistrationInfo(
+            boolean cssSupported,
+            int roamingIndicator,
+            int systemIsInPrl,
+            int defaultRoamingIndicator) {
         this.cssSupported = cssSupported;
         this.roamingIndicator = roamingIndicator;
         this.systemIsInPrl = systemIsInPrl;
@@ -59,11 +67,23 @@ public class VoiceSpecificRegistrationInfo implements Parcelable {
     }
 
     public String toString() {
-        return "VoiceSpecificRegistrationInfo { mCssSupported=" + this.cssSupported + " mRoamingIndicator=" + this.roamingIndicator + " mSystemIsInPrl=" + this.systemIsInPrl + " mDefaultRoamingIndicator=" + this.defaultRoamingIndicator + "}";
+        return "VoiceSpecificRegistrationInfo { mCssSupported="
+                + this.cssSupported
+                + " mRoamingIndicator="
+                + this.roamingIndicator
+                + " mSystemIsInPrl="
+                + this.systemIsInPrl
+                + " mDefaultRoamingIndicator="
+                + this.defaultRoamingIndicator
+                + "}";
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.cssSupported), Integer.valueOf(this.roamingIndicator), Integer.valueOf(this.systemIsInPrl), Integer.valueOf(this.defaultRoamingIndicator));
+        return Objects.hash(
+                Boolean.valueOf(this.cssSupported),
+                Integer.valueOf(this.roamingIndicator),
+                Integer.valueOf(this.systemIsInPrl),
+                Integer.valueOf(this.defaultRoamingIndicator));
     }
 
     public boolean equals(Object o) {
@@ -74,7 +94,10 @@ public class VoiceSpecificRegistrationInfo implements Parcelable {
             return false;
         }
         VoiceSpecificRegistrationInfo other = (VoiceSpecificRegistrationInfo) o;
-        if (this.cssSupported == other.cssSupported && this.roamingIndicator == other.roamingIndicator && this.systemIsInPrl == other.systemIsInPrl && this.defaultRoamingIndicator == other.defaultRoamingIndicator) {
+        if (this.cssSupported == other.cssSupported
+                && this.roamingIndicator == other.roamingIndicator
+                && this.systemIsInPrl == other.systemIsInPrl
+                && this.defaultRoamingIndicator == other.defaultRoamingIndicator) {
             return true;
         }
         return false;

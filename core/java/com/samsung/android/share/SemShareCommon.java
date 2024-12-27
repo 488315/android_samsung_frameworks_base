@@ -14,9 +14,12 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.provider.Telephony;
 import android.util.Log;
+
 import com.android.internal.R;
+
 import com.samsung.android.emergencymode.SemEmergencyManager;
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,11 +45,23 @@ public class SemShareCommon {
     private static final String sSalesCode = SemSystemProperties.getSalesCode();
     private static final String[] CHINA_SALES_CODES = {"CHN", "CHM", "CBK", "CTC", "CHU", "CHC"};
 
-    public SemShareCommon(Context context, Intent intent, boolean isDeviceDefault, int launchedFromUid, List<Intent> extraIntentList) {
+    public SemShareCommon(
+            Context context,
+            Intent intent,
+            boolean isDeviceDefault,
+            int launchedFromUid,
+            List<Intent> extraIntentList) {
         this(context, intent, isDeviceDefault, false, false, launchedFromUid, extraIntentList);
     }
 
-    public SemShareCommon(Context context, Intent intent, boolean isDeviceDefault, boolean alwaysUseOption, boolean hasFilteredItem, int launchedFromUid, List<Intent> extraIntentList) {
+    public SemShareCommon(
+            Context context,
+            Intent intent,
+            boolean isDeviceDefault,
+            boolean alwaysUseOption,
+            boolean hasFilteredItem,
+            int launchedFromUid,
+            List<Intent> extraIntentList) {
         this.mSupportedFeatures = 0;
         this.mIconChangePlayer = 0;
         this.mIconScreenMirroring = 0;
@@ -160,7 +175,8 @@ public class SemShareCommon {
 
     private boolean isIntentTypeSupportRemoteShare(Intent intent) {
         String action = intent.getAction();
-        if ((Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) && isIntentUriDataIValidCheck(intent)) {
+        if ((Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action))
+                && isIntentUriDataIValidCheck(intent)) {
             return true;
         }
         return false;
@@ -220,7 +236,9 @@ public class SemShareCommon {
 
     private boolean getButtonsSupportState() {
         ContentResolver contentResolver = this.mContext.getContentResolver();
-        if (contentResolver == null || Settings.System.getInt(contentResolver, "default_app_selection_option", 0) != 1) {
+        if (contentResolver == null
+                || Settings.System.getInt(contentResolver, "default_app_selection_option", 0)
+                        != 1) {
             return false;
         }
         return true;
@@ -228,7 +246,8 @@ public class SemShareCommon {
 
     private boolean getButtonShapeSupportState() {
         ContentResolver contentResolver = this.mContext.getContentResolver();
-        if (contentResolver == null || Settings.System.getInt(contentResolver, "show_button_background", 0) != 1) {
+        if (contentResolver == null
+                || Settings.System.getInt(contentResolver, "show_button_background", 0) != 1) {
             return false;
         }
         return true;
@@ -256,7 +275,16 @@ public class SemShareCommon {
         if (intentSupport && !knoxMode && !emergencyMode && !forceDisable) {
             return true;
         }
-        Log.d(TAG, " intentSupport = " + intentSupport + " knoxMode = " + knoxMode + " emergencyMode = " + emergencyMode + " forceDisable = " + forceDisable);
+        Log.d(
+                TAG,
+                " intentSupport = "
+                        + intentSupport
+                        + " knoxMode = "
+                        + knoxMode
+                        + " emergencyMode = "
+                        + emergencyMode
+                        + " forceDisable = "
+                        + forceDisable);
         return false;
     }
 
@@ -412,7 +440,8 @@ public class SemShareCommon {
     }
 
     public Map<String, String> getHtmlCharMap() {
-        return new HashMap<String, String>() { // from class: com.samsung.android.share.SemShareCommon.1
+        return new HashMap<
+                String, String>() { // from class: com.samsung.android.share.SemShareCommon.1
             {
                 put("&nbsp;", " ");
                 put("&iexcl;", "¡");

@@ -1,12 +1,14 @@
 package com.android.internal.widget.remotecompose.core.operations;
 
 import android.media.MediaMetrics;
+
 import com.android.internal.widget.remotecompose.core.CompanionOperation;
 import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.VariableSupport;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
 import com.android.internal.widget.remotecompose.core.operations.utilities.StringUtils;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -28,7 +30,8 @@ public class TextFromFloat implements Operation, VariableSupport {
     public int mTextId;
     public float mValue;
 
-    public TextFromFloat(int textId, float value, short digitsBefore, short digitsAfter, int flags) {
+    public TextFromFloat(
+            int textId, float value, short digitsBefore, short digitsAfter, int flags) {
         this.mPre = ' ';
         this.mAfter = ' ';
         this.mTextId = textId;
@@ -63,11 +66,26 @@ public class TextFromFloat implements Operation, VariableSupport {
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
     public void write(WireBuffer buffer) {
-        COMPANION.apply(buffer, this.mTextId, this.mValue, this.mDigitsAfter, this.mDigitsBefore, this.mFlags);
+        COMPANION.apply(
+                buffer,
+                this.mTextId,
+                this.mValue,
+                this.mDigitsAfter,
+                this.mDigitsBefore,
+                this.mFlags);
     }
 
     public String toString() {
-        return "TextFromFloat[" + this.mTextId + "] = " + Utils.floatToString(this.mValue) + " " + ((int) this.mDigitsBefore) + MediaMetrics.SEPARATOR + ((int) this.mDigitsAfter) + " " + this.mFlags;
+        return "TextFromFloat["
+                + this.mTextId
+                + "] = "
+                + Utils.floatToString(this.mValue)
+                + " "
+                + ((int) this.mDigitsBefore)
+                + MediaMetrics.SEPARATOR
+                + ((int) this.mDigitsAfter)
+                + " "
+                + this.mFlags;
     }
 
     @Override // com.android.internal.widget.remotecompose.core.VariableSupport
@@ -85,8 +103,7 @@ public class TextFromFloat implements Operation, VariableSupport {
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public String name() {
@@ -98,7 +115,13 @@ public class TextFromFloat implements Operation, VariableSupport {
             return 135;
         }
 
-        public void apply(WireBuffer buffer, int textId, float value, short digitsBefore, short digitsAfter, int flags) {
+        public void apply(
+                WireBuffer buffer,
+                int textId,
+                float value,
+                short digitsBefore,
+                short digitsAfter,
+                int flags) {
             buffer.start(135);
             buffer.writeInt(textId);
             buffer.writeFloat(value);
@@ -121,7 +144,9 @@ public class TextFromFloat implements Operation, VariableSupport {
     @Override // com.android.internal.widget.remotecompose.core.Operation
     public void apply(RemoteContext context) {
         float v = this.mOutValue;
-        String s = StringUtils.floatToString(v, this.mDigitsBefore, this.mDigitsAfter, this.mPre, this.mAfter);
+        String s =
+                StringUtils.floatToString(
+                        v, this.mDigitsBefore, this.mDigitsAfter, this.mPre, this.mAfter);
         context.loadText(this.mTextId, s);
     }
 

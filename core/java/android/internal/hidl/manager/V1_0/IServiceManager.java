@@ -10,8 +10,11 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -60,7 +63,9 @@ public interface IServiceManager extends IBase {
     @Override // android.internal.hidl.base.V1_0.IBase
     void ping() throws RemoteException;
 
-    boolean registerForNotifications(String str, String str2, IServiceNotification iServiceNotification) throws RemoteException;
+    boolean registerForNotifications(
+            String str, String str2, IServiceNotification iServiceNotification)
+            throws RemoteException;
 
     void registerPassthroughClient(String str, String str2) throws RemoteException;
 
@@ -193,18 +198,37 @@ public interface IServiceManager extends IBase {
                 return false;
             }
             InstanceDebugInfo other = (InstanceDebugInfo) otherObject;
-            if (HidlSupport.deepEquals(this.interfaceName, other.interfaceName) && HidlSupport.deepEquals(this.instanceName, other.instanceName) && this.pid == other.pid && HidlSupport.deepEquals(this.clientPids, other.clientPids) && this.arch == other.arch) {
+            if (HidlSupport.deepEquals(this.interfaceName, other.interfaceName)
+                    && HidlSupport.deepEquals(this.instanceName, other.instanceName)
+                    && this.pid == other.pid
+                    && HidlSupport.deepEquals(this.clientPids, other.clientPids)
+                    && this.arch == other.arch) {
                 return true;
             }
             return false;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.interfaceName)), Integer.valueOf(HidlSupport.deepHashCode(this.instanceName)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.pid))), Integer.valueOf(HidlSupport.deepHashCode(this.clientPids)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.arch))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.interfaceName)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.instanceName)),
+                    Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.pid))),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.clientPids)),
+                    Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.arch))));
         }
 
         public final String toString() {
-            return "{.interfaceName = " + this.interfaceName + ", .instanceName = " + this.instanceName + ", .pid = " + this.pid + ", .clientPids = " + this.clientPids + ", .arch = " + DebugInfo.Architecture.toString(this.arch) + "}";
+            return "{.interfaceName = "
+                    + this.interfaceName
+                    + ", .instanceName = "
+                    + this.instanceName
+                    + ", .pid = "
+                    + this.pid
+                    + ", .clientPids = "
+                    + this.clientPids
+                    + ", .arch = "
+                    + DebugInfo.Architecture.toString(this.arch)
+                    + "}";
         }
 
         public final void readFromParcel(HwParcel parcel) {
@@ -216,7 +240,8 @@ public interface IServiceManager extends IBase {
             ArrayList<InstanceDebugInfo> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 64, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 64, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 InstanceDebugInfo _hidl_vec_element = new InstanceDebugInfo();
@@ -226,14 +251,25 @@ public interface IServiceManager extends IBase {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.interfaceName = _hidl_blob.getString(_hidl_offset + 0);
-            parcel.readEmbeddedBuffer(this.interfaceName.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 0 + 0, false);
+            parcel.readEmbeddedBuffer(
+                    this.interfaceName.getBytes().length + 1,
+                    _hidl_blob.handle(),
+                    _hidl_offset + 0 + 0,
+                    false);
             this.instanceName = _hidl_blob.getString(_hidl_offset + 16);
-            parcel.readEmbeddedBuffer(this.instanceName.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 16 + 0, false);
+            parcel.readEmbeddedBuffer(
+                    this.instanceName.getBytes().length + 1,
+                    _hidl_blob.handle(),
+                    _hidl_offset + 16 + 0,
+                    false);
             this.pid = _hidl_blob.getInt32(_hidl_offset + 32);
             int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 40 + 8);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 4, _hidl_blob.handle(), _hidl_offset + 40 + 0, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(
+                            _hidl_vec_size * 4, _hidl_blob.handle(), _hidl_offset + 40 + 0, true);
             this.clientPids.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 int _hidl_vec_element = childBlob.getInt32(_hidl_index_0 * 4);
@@ -248,7 +284,8 @@ public interface IServiceManager extends IBase {
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<InstanceDebugInfo> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<InstanceDebugInfo> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -270,7 +307,8 @@ public interface IServiceManager extends IBase {
             _hidl_blob.putBool(_hidl_offset + 40 + 12, false);
             HwBlob childBlob = new HwBlob(_hidl_vec_size * 4);
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
-                childBlob.putInt32(_hidl_index_0 * 4, this.clientPids.get(_hidl_index_0).intValue());
+                childBlob.putInt32(
+                        _hidl_index_0 * 4, this.clientPids.get(_hidl_index_0).intValue());
             }
             _hidl_blob.putBlob(40 + _hidl_offset + 0, childBlob);
             _hidl_blob.putInt32(56 + _hidl_offset, this.arch);
@@ -284,7 +322,8 @@ public interface IServiceManager extends IBase {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -393,7 +432,8 @@ public interface IServiceManager extends IBase {
         }
 
         @Override // android.internal.hidl.manager.V1_0.IServiceManager
-        public boolean registerForNotifications(String fqName, String name, IServiceNotification callback) throws RemoteException {
+        public boolean registerForNotifications(
+                String fqName, String name, IServiceNotification callback) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IServiceManager.kInterfaceName);
             _hidl_request.writeString(fqName);
@@ -420,7 +460,8 @@ public interface IServiceManager extends IBase {
                 this.mRemote.transact(7, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                ArrayList<InstanceDebugInfo> _hidl_out_info = InstanceDebugInfo.readVectorFromParcel(_hidl_reply);
+                ArrayList<InstanceDebugInfo> _hidl_out_info =
+                        InstanceDebugInfo.readVectorFromParcel(_hidl_reply);
                 return _hidl_out_info;
             } finally {
                 _hidl_reply.release();
@@ -443,7 +484,8 @@ public interface IServiceManager extends IBase {
             }
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -459,7 +501,8 @@ public interface IServiceManager extends IBase {
             }
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -475,7 +518,8 @@ public interface IServiceManager extends IBase {
             }
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -491,7 +535,8 @@ public interface IServiceManager extends IBase {
             }
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -503,7 +548,9 @@ public interface IServiceManager extends IBase {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -517,7 +564,8 @@ public interface IServiceManager extends IBase {
             }
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -530,12 +578,15 @@ public interface IServiceManager extends IBase {
             }
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -549,7 +600,8 @@ public interface IServiceManager extends IBase {
             }
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -566,7 +618,8 @@ public interface IServiceManager extends IBase {
             }
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -579,51 +632,128 @@ public interface IServiceManager extends IBase {
             }
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements IServiceManager {
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements IServiceManager {
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(IServiceManager.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(IServiceManager.kInterfaceName, IBase.kInterfaceName));
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return IServiceManager.kInterfaceName;
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{-123, 57, 79, -118, 13, 21, -25, -5, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70, -28, 92, 82, -47, -5, -117, -113, -45, -63, 60, 51, 62, 99, -57, -116, 74, -95, -1, -122, -124, 12, -10, -36}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                -123,
+                                57,
+                                79,
+                                -118,
+                                13,
+                                21,
+                                -25,
+                                -5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70,
+                                -28,
+                                92,
+                                82,
+                                -47,
+                                -5,
+                                -117,
+                                -113,
+                                -45,
+                                -63,
+                                60,
+                                51,
+                                62,
+                                99,
+                                -57,
+                                -116,
+                                74,
+                                -95,
+                                -1,
+                                -122,
+                                -124,
+                                12,
+                                -10,
+                                -36
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -632,12 +762,14 @@ public interface IServiceManager extends IBase {
             return info;
         }
 
-        @Override // android.internal.hidl.manager.V1_0.IServiceManager, android.internal.hidl.base.V1_0.IBase
+        @Override // android.internal.hidl.manager.V1_0.IServiceManager,
+        // android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -659,7 +791,9 @@ public interface IServiceManager extends IBase {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(IServiceManager.kInterfaceName);
@@ -667,7 +801,8 @@ public interface IServiceManager extends IBase {
                     String name = _hidl_request.readString();
                     IBase _hidl_out_service = get(fqName, name);
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_service == null ? null : _hidl_out_service.asBinder());
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_service == null ? null : _hidl_out_service.asBinder());
                     _hidl_reply.send();
                     return;
                 case 2:
@@ -707,7 +842,8 @@ public interface IServiceManager extends IBase {
                     _hidl_request.enforceInterface(IServiceManager.kInterfaceName);
                     String fqName4 = _hidl_request.readString();
                     String name4 = _hidl_request.readString();
-                    IServiceNotification callback = IServiceNotification.asInterface(_hidl_request.readStrongBinder());
+                    IServiceNotification callback =
+                            IServiceNotification.asInterface(_hidl_request.readStrongBinder());
                     boolean _hidl_out_success2 = registerForNotifications(fqName4, name4, callback);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.writeBool(_hidl_out_success2);
@@ -763,7 +899,8 @@ public interface IServiceManager extends IBase {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

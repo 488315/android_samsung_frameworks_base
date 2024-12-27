@@ -32,7 +32,16 @@ public class EncoderCapabilities {
         public final int mMinFrameRate;
         public final int mMinFrameWidth;
 
-        private VideoEncoderCap(int codec, int minBitRate, int maxBitRate, int minFrameRate, int maxFrameRate, int minFrameWidth, int maxFrameWidth, int minFrameHeight, int maxFrameHeight) {
+        private VideoEncoderCap(
+                int codec,
+                int minBitRate,
+                int maxBitRate,
+                int minFrameRate,
+                int maxFrameRate,
+                int minFrameWidth,
+                int maxFrameWidth,
+                int minFrameHeight,
+                int maxFrameHeight) {
             this.mCodec = codec;
             this.mMinBitRate = minBitRate;
             this.mMaxBitRate = maxBitRate;
@@ -54,7 +63,14 @@ public class EncoderCapabilities {
         public final int mMinChannels;
         public final int mMinSampleRate;
 
-        private AudioEncoderCap(int codec, int minBitRate, int maxBitRate, int minSampleRate, int maxSampleRate, int minChannels, int maxChannels) {
+        private AudioEncoderCap(
+                int codec,
+                int minBitRate,
+                int maxBitRate,
+                int minSampleRate,
+                int maxSampleRate,
+                int minChannels,
+                int maxChannels) {
             this.mCodec = codec;
             this.mMinBitRate = minBitRate;
             this.mMaxBitRate = maxBitRate;
@@ -106,6 +122,5 @@ public class EncoderCapabilities {
         return encoderList;
     }
 
-    private EncoderCapabilities() {
-    }
+    private EncoderCapabilities() {}
 }

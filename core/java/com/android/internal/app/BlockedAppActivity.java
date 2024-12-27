@@ -6,11 +6,13 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
 public class BlockedAppActivity extends AlertActivity {
-    private static final String EXTRA_BLOCKED_PACKAGE = "com.android.internal.app.extra.BLOCKED_PACKAGE";
+    private static final String EXTRA_BLOCKED_PACKAGE =
+            "com.android.internal.app.extra.BLOCKED_PACKAGE";
     private static final String PACKAGE_NAME = "com.android.internal.app";
     private static final String TAG = "BlockedAppActivity";
 
@@ -49,6 +51,9 @@ public class BlockedAppActivity extends AlertActivity {
     }
 
     public static Intent createIntent(int userId, String packageName) {
-        return new Intent().setClassName("android", BlockedAppActivity.class.getName()).putExtra("android.intent.extra.USER_ID", userId).putExtra(EXTRA_BLOCKED_PACKAGE, packageName);
+        return new Intent()
+                .setClassName("android", BlockedAppActivity.class.getName())
+                .putExtra("android.intent.extra.USER_ID", userId)
+                .putExtra(EXTRA_BLOCKED_PACKAGE, packageName);
     }
 }

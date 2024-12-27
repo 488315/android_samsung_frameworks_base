@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class IVerificationResult implements Parcelable {
-    public static final Parcelable.Creator<IVerificationResult> CREATOR = new Parcelable.Creator<IVerificationResult>() { // from class: android.security.attestationverification.IVerificationResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IVerificationResult createFromParcel(Parcel _aidl_source) {
-            IVerificationResult _aidl_out = new IVerificationResult();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<IVerificationResult> CREATOR =
+            new Parcelable.Creator<
+                    IVerificationResult>() { // from class:
+                                             // android.security.attestationverification.IVerificationResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IVerificationResult createFromParcel(Parcel _aidl_source) {
+                    IVerificationResult _aidl_out = new IVerificationResult();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IVerificationResult[] newArray(int _aidl_size) {
-            return new IVerificationResult[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IVerificationResult[] newArray(int _aidl_size) {
+                    return new IVerificationResult[_aidl_size];
+                }
+            };
     public int resultCode = 0;
     public VerificationToken token;
 
@@ -57,7 +60,8 @@ public class IVerificationResult implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.token = (VerificationToken) _aidl_parcel.readTypedObject(VerificationToken.CREATOR);
+                this.token =
+                        (VerificationToken) _aidl_parcel.readTypedObject(VerificationToken.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

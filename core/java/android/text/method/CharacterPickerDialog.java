@@ -14,10 +14,12 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListAdapter;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
-public class CharacterPickerDialog extends Dialog implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class CharacterPickerDialog extends Dialog
+        implements AdapterView.OnItemClickListener, View.OnClickListener {
     private Button mCancelButton;
     private LayoutInflater mInflater;
     private boolean mInsert;
@@ -25,7 +27,8 @@ public class CharacterPickerDialog extends Dialog implements AdapterView.OnItemC
     private Editable mText;
     private View mView;
 
-    public CharacterPickerDialog(Context context, View view, Editable text, String options, boolean insert) {
+    public CharacterPickerDialog(
+            Context context, View view, Editable text, String options, boolean insert) {
         super(context, 16973913);
         this.mView = view;
         this.mText = text;
@@ -76,13 +79,16 @@ public class CharacterPickerDialog extends Dialog implements AdapterView.OnItemC
     }
 
     private class OptionsAdapter extends BaseAdapter {
-        public OptionsAdapter(Context context) {
-        }
+        public OptionsAdapter(Context context) {}
 
         @Override // android.widget.Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
-            Button b = (Button) CharacterPickerDialog.this.mInflater.inflate(R.layout.character_picker_button, (ViewGroup) null);
-            b.lambda$setTextAsync$0(String.valueOf(CharacterPickerDialog.this.mOptions.charAt(position)));
+            Button b =
+                    (Button)
+                            CharacterPickerDialog.this.mInflater.inflate(
+                                    R.layout.character_picker_button, (ViewGroup) null);
+            b.lambda$setTextAsync$0(
+                    String.valueOf(CharacterPickerDialog.this.mOptions.charAt(position)));
             b.setOnClickListener(CharacterPickerDialog.this);
             return b;
         }

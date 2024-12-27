@@ -1,17 +1,14 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.hardware.hdmi.HdmiControlManager;
-import android.hardware.hdmi.IHdmiCecSettingChangeListener;
-import android.hardware.hdmi.IHdmiCecVolumeControlFeatureListener;
-import android.hardware.hdmi.IHdmiControlStatusChangeListener;
-import android.hardware.hdmi.IHdmiHotplugEventListener;
 import android.os.Binder;
 import android.os.RemoteException;
 import android.sysprop.HdmiProperties;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.internal.util.ConcurrentUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -24,13 +21,15 @@ import java.util.stream.Collectors;
 @SystemApi
 /* loaded from: classes2.dex */
 public final class HdmiControlManager {
-    public static final String ACTION_ON_ACTIVE_SOURCE_RECOVERED_DISMISS_UI = "android.hardware.hdmi.action.ON_ACTIVE_SOURCE_RECOVERED_DISMISS_UI";
+    public static final String ACTION_ON_ACTIVE_SOURCE_RECOVERED_DISMISS_UI =
+            "android.hardware.hdmi.action.ON_ACTIVE_SOURCE_RECOVERED_DISMISS_UI";
     public static final String ACTION_OSD_MESSAGE = "android.hardware.hdmi.action.OSD_MESSAGE";
     public static final int AVR_VOLUME_MUTED = 101;
     public static final String CEC_SETTING_NAME_HDMI_CEC_ENABLED = "hdmi_cec_enabled";
     public static final String CEC_SETTING_NAME_HDMI_CEC_VERSION = "hdmi_cec_version";
     public static final String CEC_SETTING_NAME_POWER_CONTROL_MODE = "power_control_mode";
-    public static final String CEC_SETTING_NAME_POWER_STATE_CHANGE_ON_ACTIVE_SOURCE_LOST = "power_state_change_on_active_source_lost";
+    public static final String CEC_SETTING_NAME_POWER_STATE_CHANGE_ON_ACTIVE_SOURCE_LOST =
+            "power_state_change_on_active_source_lost";
     public static final String CEC_SETTING_NAME_QUERY_SAD_AAC = "query_sad_aac";
     public static final String CEC_SETTING_NAME_QUERY_SAD_ATRAC = "query_sad_atrac";
     public static final String CEC_SETTING_NAME_QUERY_SAD_DD = "query_sad_dd";
@@ -46,19 +45,28 @@ public final class HdmiControlManager {
     public static final String CEC_SETTING_NAME_QUERY_SAD_ONEBITAUDIO = "query_sad_onebitaudio";
     public static final String CEC_SETTING_NAME_QUERY_SAD_TRUEHD = "query_sad_truehd";
     public static final String CEC_SETTING_NAME_QUERY_SAD_WMAPRO = "query_sad_wmapro";
-    public static final String CEC_SETTING_NAME_RC_PROFILE_SOURCE_HANDLES_CONTENTS_MENU = "rc_profile_source_handles_contents_menu";
-    public static final String CEC_SETTING_NAME_RC_PROFILE_SOURCE_HANDLES_MEDIA_CONTEXT_SENSITIVE_MENU = "rc_profile_source_handles_media_context_sensitive_menu";
-    public static final String CEC_SETTING_NAME_RC_PROFILE_SOURCE_HANDLES_ROOT_MENU = "rc_profile_source_handles_root_menu";
-    public static final String CEC_SETTING_NAME_RC_PROFILE_SOURCE_HANDLES_SETUP_MENU = "rc_profile_source_handles_setup_menu";
-    public static final String CEC_SETTING_NAME_RC_PROFILE_SOURCE_HANDLES_TOP_MENU = "rc_profile_source_handles_top_menu";
+    public static final String CEC_SETTING_NAME_RC_PROFILE_SOURCE_HANDLES_CONTENTS_MENU =
+            "rc_profile_source_handles_contents_menu";
+    public static final String
+            CEC_SETTING_NAME_RC_PROFILE_SOURCE_HANDLES_MEDIA_CONTEXT_SENSITIVE_MENU =
+                    "rc_profile_source_handles_media_context_sensitive_menu";
+    public static final String CEC_SETTING_NAME_RC_PROFILE_SOURCE_HANDLES_ROOT_MENU =
+            "rc_profile_source_handles_root_menu";
+    public static final String CEC_SETTING_NAME_RC_PROFILE_SOURCE_HANDLES_SETUP_MENU =
+            "rc_profile_source_handles_setup_menu";
+    public static final String CEC_SETTING_NAME_RC_PROFILE_SOURCE_HANDLES_TOP_MENU =
+            "rc_profile_source_handles_top_menu";
     public static final String CEC_SETTING_NAME_RC_PROFILE_TV = "rc_profile_tv";
     public static final String CEC_SETTING_NAME_ROUTING_CONTROL = "routing_control";
     public static final String CEC_SETTING_NAME_SET_MENU_LANGUAGE = "set_menu_language";
     public static final String CEC_SETTING_NAME_SOUNDBAR_MODE = "soundbar_mode";
     public static final String CEC_SETTING_NAME_SYSTEM_AUDIO_CONTROL = "system_audio_control";
-    public static final String CEC_SETTING_NAME_SYSTEM_AUDIO_MODE_MUTING = "system_audio_mode_muting";
-    public static final String CEC_SETTING_NAME_TV_SEND_STANDBY_ON_SLEEP = "tv_send_standby_on_sleep";
-    public static final String CEC_SETTING_NAME_TV_WAKE_ON_ONE_TOUCH_PLAY = "tv_wake_on_one_touch_play";
+    public static final String CEC_SETTING_NAME_SYSTEM_AUDIO_MODE_MUTING =
+            "system_audio_mode_muting";
+    public static final String CEC_SETTING_NAME_TV_SEND_STANDBY_ON_SLEEP =
+            "tv_send_standby_on_sleep";
+    public static final String CEC_SETTING_NAME_TV_WAKE_ON_ONE_TOUCH_PLAY =
+            "tv_wake_on_one_touch_play";
     public static final String CEC_SETTING_NAME_VOLUME_CONTROL_MODE = "volume_control_enabled";
     public static final int CLEAR_TIMER_STATUS_CEC_DISABLE = 162;
     public static final int CLEAR_TIMER_STATUS_CHECK_RECORDER_CONNECTION = 160;
@@ -77,7 +85,8 @@ public final class HdmiControlManager {
     public static final int EARC_FEATURE_DISABLED = 0;
     public static final int EARC_FEATURE_ENABLED = 1;
     public static final String EXTRA_LOCALE = "android.hardware.hdmi.extra.LOCALE";
-    public static final String EXTRA_MESSAGE_EXTRA_PARAM1 = "android.hardware.hdmi.extra.MESSAGE_EXTRA_PARAM1";
+    public static final String EXTRA_MESSAGE_EXTRA_PARAM1 =
+            "android.hardware.hdmi.extra.MESSAGE_EXTRA_PARAM1";
     public static final String EXTRA_MESSAGE_ID = "android.hardware.hdmi.extra.MESSAGE_ID";
     public static final int HDMI_CEC_CONTROL_DISABLED = 0;
     public static final int HDMI_CEC_CONTROL_ENABLED = 1;
@@ -135,8 +144,7 @@ public final class HdmiControlManager {
     public static final int RC_PROFILE_TV_THREE = 10;
     public static final int RC_PROFILE_TV_TWO = 6;
 
-    @Deprecated
-    public static final int RESULT_ALREADY_IN_PROGRESS = 4;
+    @Deprecated public static final int RESULT_ALREADY_IN_PROGRESS = 4;
     public static final int RESULT_COMMUNICATION_FAILED = 7;
     public static final int RESULT_EXCEPTION = 5;
     public static final int RESULT_INCORRECT_MODE = 6;
@@ -195,38 +203,38 @@ public final class HdmiControlManager {
     private final IHdmiControlService mService;
     private int mLocalPhysicalAddress = 65535;
     private final Object mLock = new Object();
-    private final ArrayMap<HotplugEventListener, IHdmiHotplugEventListener> mHotplugEventListeners = new ArrayMap<>();
-    private final ArrayMap<HdmiControlStatusChangeListener, IHdmiControlStatusChangeListener> mHdmiControlStatusChangeListeners = new ArrayMap<>();
-    private final ArrayMap<HdmiCecVolumeControlFeatureListener, IHdmiCecVolumeControlFeatureListener> mHdmiCecVolumeControlFeatureListeners = new ArrayMap<>();
-    private final ArrayMap<String, ArrayMap<CecSettingChangeListener, IHdmiCecSettingChangeListener>> mCecSettingChangeListeners = new ArrayMap<>();
+    private final ArrayMap<HotplugEventListener, IHdmiHotplugEventListener> mHotplugEventListeners =
+            new ArrayMap<>();
+    private final ArrayMap<HdmiControlStatusChangeListener, IHdmiControlStatusChangeListener>
+            mHdmiControlStatusChangeListeners = new ArrayMap<>();
+    private final ArrayMap<
+                    HdmiCecVolumeControlFeatureListener, IHdmiCecVolumeControlFeatureListener>
+            mHdmiCecVolumeControlFeatureListeners = new ArrayMap<>();
+    private final ArrayMap<
+                    String, ArrayMap<CecSettingChangeListener, IHdmiCecSettingChangeListener>>
+            mCecSettingChangeListeners = new ArrayMap<>();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ActiveSourceLostBehavior {
-    }
+    public @interface ActiveSourceLostBehavior {}
 
     public interface CecSettingChangeListener {
         void onChange(String str);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CecSettingSad {
-    }
+    public @interface CecSettingSad {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ControlCallbackResult {
-    }
+    public @interface ControlCallbackResult {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EarcFeature {
-    }
+    public @interface EarcFeature {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface HdmiCecControl {
-    }
+    public @interface HdmiCecControl {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface HdmiCecVersion {
-    }
+    public @interface HdmiCecVersion {}
 
     public interface HdmiCecVolumeControlFeatureListener {
         void onHdmiCecVolumeControlFeature(int i);
@@ -241,52 +249,40 @@ public final class HdmiControlManager {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PowerControlMode {
-    }
+    public @interface PowerControlMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RcProfileSourceHandlesMenu {
-    }
+    public @interface RcProfileSourceHandlesMenu {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RcProfileTv {
-    }
+    public @interface RcProfileTv {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RoutingControl {
-    }
+    public @interface RoutingControl {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SadPresenceInQuery {
-    }
+    public @interface SadPresenceInQuery {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SetMenuLanguage {
-    }
+    public @interface SetMenuLanguage {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SettingName {
-    }
+    public @interface SettingName {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SoundbarMode {
-    }
+    public @interface SoundbarMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SystemAudioControl {
-    }
+    public @interface SystemAudioControl {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SystemAudioModeMuting {
-    }
+    public @interface SystemAudioModeMuting {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TvSendStandbyOnSleep {
-    }
+    public @interface TvSendStandbyOnSleep {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TvWakeOnOneTouchPlay {
-    }
+    public @interface TvWakeOnOneTouchPlay {}
 
     public interface VendorCommandListener {
         void onControlStateChanged(boolean z, int i);
@@ -295,8 +291,7 @@ public final class HdmiControlManager {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VolumeControl {
-    }
+    public @interface VolumeControl {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public void setLocalPhysicalAddress(int physicalAddress) {
@@ -332,8 +327,7 @@ public final class HdmiControlManager {
     }
 
     private final class ClientHotplugEventListener implements HotplugEventListener {
-        private ClientHotplugEventListener() {
-        }
+        private ClientHotplugEventListener() {}
 
         @Override // android.hardware.hdmi.HdmiControlManager.HotplugEventListener
         public void onReceived(HdmiHotplugEvent event) {
@@ -342,7 +336,10 @@ public final class HdmiControlManager {
             try {
                 List<HdmiPortInfo> ports = HdmiControlManager.this.mService.getPortInfo();
                 if (ports.isEmpty()) {
-                    Log.e(HdmiControlManager.TAG, "Can't find port info, not updating connected status. Hotplug event:" + event);
+                    Log.e(
+                            HdmiControlManager.TAG,
+                            "Can't find port info, not updating connected status. Hotplug event:"
+                                    + event);
                     return;
                 }
                 for (HdmiPortInfo port : ports) {
@@ -400,7 +397,9 @@ public final class HdmiControlManager {
                 return null;
             case 5:
                 try {
-                    if ((this.mService.getCecSettingIntValue(CEC_SETTING_NAME_SOUNDBAR_MODE) == 1 && this.mHasPlaybackDevice) || this.mHasAudioSystemDevice) {
+                    if ((this.mService.getCecSettingIntValue(CEC_SETTING_NAME_SOUNDBAR_MODE) == 1
+                                    && this.mHasPlaybackDevice)
+                            || this.mHasAudioSystemDevice) {
                         return new HdmiAudioSystemClient(this.mService);
                     }
                     return null;
@@ -459,7 +458,8 @@ public final class HdmiControlManager {
     public void powerOffDevice(HdmiDeviceInfo deviceInfo) {
         Objects.requireNonNull(deviceInfo);
         try {
-            this.mService.powerOffRemoteDevice(deviceInfo.getLogicalAddress(), deviceInfo.getDevicePowerStatus());
+            this.mService.powerOffRemoteDevice(
+                    deviceInfo.getLogicalAddress(), deviceInfo.getDevicePowerStatus());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -469,7 +469,8 @@ public final class HdmiControlManager {
     public void powerOffRemoteDevice(HdmiDeviceInfo deviceInfo) {
         Objects.requireNonNull(deviceInfo);
         try {
-            this.mService.powerOffRemoteDevice(deviceInfo.getLogicalAddress(), deviceInfo.getDevicePowerStatus());
+            this.mService.powerOffRemoteDevice(
+                    deviceInfo.getLogicalAddress(), deviceInfo.getDevicePowerStatus());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -478,7 +479,8 @@ public final class HdmiControlManager {
     public void powerOnDevice(HdmiDeviceInfo deviceInfo) {
         Objects.requireNonNull(deviceInfo);
         try {
-            this.mService.powerOnRemoteDevice(deviceInfo.getLogicalAddress(), deviceInfo.getDevicePowerStatus());
+            this.mService.powerOnRemoteDevice(
+                    deviceInfo.getLogicalAddress(), deviceInfo.getDevicePowerStatus());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -488,7 +490,8 @@ public final class HdmiControlManager {
     public void powerOnRemoteDevice(HdmiDeviceInfo deviceInfo) {
         Objects.requireNonNull(deviceInfo);
         try {
-            this.mService.powerOnRemoteDevice(deviceInfo.getLogicalAddress(), deviceInfo.getDevicePowerStatus());
+            this.mService.powerOnRemoteDevice(
+                    deviceInfo.getLogicalAddress(), deviceInfo.getDevicePowerStatus());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -539,7 +542,8 @@ public final class HdmiControlManager {
 
     public void setHdmiCecVolumeControlEnabled(int hdmiCecVolumeControlEnabled) {
         try {
-            this.mService.setCecSettingIntValue(CEC_SETTING_NAME_VOLUME_CONTROL_MODE, hdmiCecVolumeControlEnabled);
+            this.mService.setCecSettingIntValue(
+                    CEC_SETTING_NAME_VOLUME_CONTROL_MODE, hdmiCecVolumeControlEnabled);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -569,7 +573,13 @@ public final class HdmiControlManager {
         int targetPhysicalAddress;
         Objects.requireNonNull(targetDevice);
         int physicalAddress = getLocalPhysicalAddress();
-        return (physicalAddress == 65535 || (targetPhysicalAddress = targetDevice.getPhysicalAddress()) == 65535 || HdmiUtils.getLocalPortFromPhysicalAddress(targetPhysicalAddress, physicalAddress) == -1) ? false : true;
+        return (physicalAddress == 65535
+                        || (targetPhysicalAddress = targetDevice.getPhysicalAddress()) == 65535
+                        || HdmiUtils.getLocalPortFromPhysicalAddress(
+                                        targetPhysicalAddress, physicalAddress)
+                                == -1)
+                ? false
+                : true;
     }
 
     @Deprecated
@@ -577,7 +587,13 @@ public final class HdmiControlManager {
         int targetPhysicalAddress;
         Objects.requireNonNull(targetDevice);
         int physicalAddress = getLocalPhysicalAddress();
-        return (physicalAddress == 65535 || (targetPhysicalAddress = targetDevice.getPhysicalAddress()) == 65535 || HdmiUtils.getLocalPortFromPhysicalAddress(targetPhysicalAddress, physicalAddress) == -1) ? false : true;
+        return (physicalAddress == 65535
+                        || (targetPhysicalAddress = targetDevice.getPhysicalAddress()) == 65535
+                        || HdmiUtils.getLocalPortFromPhysicalAddress(
+                                        targetPhysicalAddress, physicalAddress)
+                                == -1)
+                ? false
+                : true;
     }
 
     public void addHotplugEventListener(HotplugEventListener listener) {
@@ -593,7 +609,8 @@ public final class HdmiControlManager {
             Log.e(TAG, "listener is already registered");
             return;
         }
-        IHdmiHotplugEventListener wrappedListener = getHotplugEventListenerWrapper(executor, listener);
+        IHdmiHotplugEventListener wrappedListener =
+                getHotplugEventListenerWrapper(executor, listener);
         this.mHotplugEventListeners.put(listener, wrappedListener);
         try {
             this.mService.addHotplugEventListener(wrappedListener);
@@ -635,19 +652,22 @@ public final class HdmiControlManager {
             try {
                 Executor executor = this.val$executor;
                 final HotplugEventListener hotplugEventListener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiControlManager$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        HdmiControlManager.HotplugEventListener.this.onReceived(event);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                            // android.hardware.hdmi.HdmiControlManager$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                HdmiControlManager.HotplugEventListener.this.onReceived(event);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    private IHdmiHotplugEventListener getHotplugEventListenerWrapper(Executor executor, HotplugEventListener listener) {
+    private IHdmiHotplugEventListener getHotplugEventListenerWrapper(
+            Executor executor, HotplugEventListener listener) {
         return new AnonymousClass1(executor, listener);
     }
 
@@ -655,7 +675,8 @@ public final class HdmiControlManager {
         addHdmiControlStatusChangeListener(ConcurrentUtils.DIRECT_EXECUTOR, listener);
     }
 
-    public void addHdmiControlStatusChangeListener(Executor executor, HdmiControlStatusChangeListener listener) {
+    public void addHdmiControlStatusChangeListener(
+            Executor executor, HdmiControlStatusChangeListener listener) {
         if (this.mService == null) {
             Log.e(TAG, "addHdmiControlStatusChangeListener: HdmiControlService is not available");
             return;
@@ -664,7 +685,8 @@ public final class HdmiControlManager {
             Log.e(TAG, "listener is already registered");
             return;
         }
-        IHdmiControlStatusChangeListener wrappedListener = getHdmiControlStatusChangeListenerWrapper(executor, listener);
+        IHdmiControlStatusChangeListener wrappedListener =
+                getHdmiControlStatusChangeListenerWrapper(executor, listener);
         this.mHdmiControlStatusChangeListeners.put(listener, wrappedListener);
         try {
             this.mService.addHdmiControlStatusChangeListener(wrappedListener);
@@ -675,10 +697,13 @@ public final class HdmiControlManager {
 
     public void removeHdmiControlStatusChangeListener(HdmiControlStatusChangeListener listener) {
         if (this.mService == null) {
-            Log.e(TAG, "removeHdmiControlStatusChangeListener: HdmiControlService is not available");
+            Log.e(
+                    TAG,
+                    "removeHdmiControlStatusChangeListener: HdmiControlService is not available");
             return;
         }
-        IHdmiControlStatusChangeListener wrappedListener = this.mHdmiControlStatusChangeListeners.remove(listener);
+        IHdmiControlStatusChangeListener wrappedListener =
+                this.mHdmiControlStatusChangeListeners.remove(listener);
         if (wrappedListener == null) {
             Log.e(TAG, "tried to remove not-registered listener");
             return;
@@ -695,7 +720,9 @@ public final class HdmiControlManager {
         final /* synthetic */ Executor val$executor;
         final /* synthetic */ HdmiControlStatusChangeListener val$listener;
 
-        AnonymousClass2(Executor executor, HdmiControlStatusChangeListener hdmiControlStatusChangeListener) {
+        AnonymousClass2(
+                Executor executor,
+                HdmiControlStatusChangeListener hdmiControlStatusChangeListener) {
             this.val$executor = executor;
             this.val$listener = hdmiControlStatusChangeListener;
         }
@@ -705,33 +732,42 @@ public final class HdmiControlManager {
             long token = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
-                final HdmiControlStatusChangeListener hdmiControlStatusChangeListener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiControlManager$2$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        HdmiControlManager.HdmiControlStatusChangeListener.this.onStatusChange(isCecEnabled, isCecAvailable);
-                    }
-                });
+                final HdmiControlStatusChangeListener hdmiControlStatusChangeListener =
+                        this.val$listener;
+                executor.execute(
+                        new Runnable() { // from class:
+                            // android.hardware.hdmi.HdmiControlManager$2$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                HdmiControlManager.HdmiControlStatusChangeListener.this
+                                        .onStatusChange(isCecEnabled, isCecAvailable);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    private IHdmiControlStatusChangeListener getHdmiControlStatusChangeListenerWrapper(Executor executor, HdmiControlStatusChangeListener listener) {
+    private IHdmiControlStatusChangeListener getHdmiControlStatusChangeListenerWrapper(
+            Executor executor, HdmiControlStatusChangeListener listener) {
         return new AnonymousClass2(executor, listener);
     }
 
-    public void addHdmiCecVolumeControlFeatureListener(Executor executor, HdmiCecVolumeControlFeatureListener listener) {
+    public void addHdmiCecVolumeControlFeatureListener(
+            Executor executor, HdmiCecVolumeControlFeatureListener listener) {
         if (this.mService == null) {
-            Log.e(TAG, "addHdmiCecVolumeControlFeatureListener: HdmiControlService is not available");
+            Log.e(
+                    TAG,
+                    "addHdmiCecVolumeControlFeatureListener: HdmiControlService is not available");
             return;
         }
         if (this.mHdmiCecVolumeControlFeatureListeners.containsKey(listener)) {
             Log.e(TAG, "listener is already registered");
             return;
         }
-        IHdmiCecVolumeControlFeatureListener wrappedListener = createHdmiCecVolumeControlFeatureListenerWrapper(executor, listener);
+        IHdmiCecVolumeControlFeatureListener wrappedListener =
+                createHdmiCecVolumeControlFeatureListenerWrapper(executor, listener);
         this.mHdmiCecVolumeControlFeatureListeners.put(listener, wrappedListener);
         try {
             this.mService.addHdmiCecVolumeControlFeatureListener(wrappedListener);
@@ -740,12 +776,17 @@ public final class HdmiControlManager {
         }
     }
 
-    public void removeHdmiCecVolumeControlFeatureListener(HdmiCecVolumeControlFeatureListener listener) {
+    public void removeHdmiCecVolumeControlFeatureListener(
+            HdmiCecVolumeControlFeatureListener listener) {
         if (this.mService == null) {
-            Log.e(TAG, "removeHdmiCecVolumeControlFeatureListener: HdmiControlService is not available");
+            Log.e(
+                    TAG,
+                    "removeHdmiCecVolumeControlFeatureListener: HdmiControlService is not"
+                            + " available");
             return;
         }
-        IHdmiCecVolumeControlFeatureListener wrappedListener = this.mHdmiCecVolumeControlFeatureListeners.remove(listener);
+        IHdmiCecVolumeControlFeatureListener wrappedListener =
+                this.mHdmiCecVolumeControlFeatureListeners.remove(listener);
         if (wrappedListener == null) {
             Log.e(TAG, "tried to remove not-registered listener");
             return;
@@ -762,7 +803,9 @@ public final class HdmiControlManager {
         final /* synthetic */ Executor val$executor;
         final /* synthetic */ HdmiCecVolumeControlFeatureListener val$listener;
 
-        AnonymousClass3(Executor executor, HdmiCecVolumeControlFeatureListener hdmiCecVolumeControlFeatureListener) {
+        AnonymousClass3(
+                Executor executor,
+                HdmiCecVolumeControlFeatureListener hdmiCecVolumeControlFeatureListener) {
             this.val$executor = executor;
             this.val$listener = hdmiCecVolumeControlFeatureListener;
         }
@@ -772,33 +815,41 @@ public final class HdmiControlManager {
             long token = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
-                final HdmiCecVolumeControlFeatureListener hdmiCecVolumeControlFeatureListener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiControlManager$3$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        HdmiControlManager.HdmiCecVolumeControlFeatureListener.this.onHdmiCecVolumeControlFeature(enabled);
-                    }
-                });
+                final HdmiCecVolumeControlFeatureListener hdmiCecVolumeControlFeatureListener =
+                        this.val$listener;
+                executor.execute(
+                        new Runnable() { // from class:
+                            // android.hardware.hdmi.HdmiControlManager$3$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                HdmiControlManager.HdmiCecVolumeControlFeatureListener.this
+                                        .onHdmiCecVolumeControlFeature(enabled);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    private IHdmiCecVolumeControlFeatureListener createHdmiCecVolumeControlFeatureListenerWrapper(Executor executor, HdmiCecVolumeControlFeatureListener listener) {
+    private IHdmiCecVolumeControlFeatureListener createHdmiCecVolumeControlFeatureListenerWrapper(
+            Executor executor, HdmiCecVolumeControlFeatureListener listener) {
         return new AnonymousClass3(executor, listener);
     }
 
-    private void addCecSettingChangeListener(String setting, Executor executor, CecSettingChangeListener listener) {
+    private void addCecSettingChangeListener(
+            String setting, Executor executor, CecSettingChangeListener listener) {
         if (this.mService == null) {
             Log.e(TAG, "addCecSettingChangeListener: HdmiControlService is not available");
             return;
         }
-        if (this.mCecSettingChangeListeners.containsKey(setting) && this.mCecSettingChangeListeners.get(setting).containsKey(listener)) {
+        if (this.mCecSettingChangeListeners.containsKey(setting)
+                && this.mCecSettingChangeListeners.get(setting).containsKey(listener)) {
             Log.e(TAG, "listener is already registered");
             return;
         }
-        IHdmiCecSettingChangeListener wrappedListener = getCecSettingChangeListenerWrapper(executor, listener);
+        IHdmiCecSettingChangeListener wrappedListener =
+                getCecSettingChangeListenerWrapper(executor, listener);
         if (!this.mCecSettingChangeListeners.containsKey(setting)) {
             this.mCecSettingChangeListeners.put(setting, new ArrayMap<>());
         }
@@ -815,7 +866,10 @@ public final class HdmiControlManager {
             Log.e(TAG, "removeCecSettingChangeListener: HdmiControlService is not available");
             return;
         }
-        IHdmiCecSettingChangeListener wrappedListener = !this.mCecSettingChangeListeners.containsKey(setting) ? null : this.mCecSettingChangeListeners.get(setting).remove(listener);
+        IHdmiCecSettingChangeListener wrappedListener =
+                !this.mCecSettingChangeListeners.containsKey(setting)
+                        ? null
+                        : this.mCecSettingChangeListeners.get(setting).remove(listener);
         if (wrappedListener == null) {
             Log.e(TAG, "tried to remove not-registered listener");
             return;
@@ -843,19 +897,22 @@ public final class HdmiControlManager {
             try {
                 Executor executor = this.val$executor;
                 final CecSettingChangeListener cecSettingChangeListener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiControlManager$4$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        HdmiControlManager.CecSettingChangeListener.this.onChange(setting);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                            // android.hardware.hdmi.HdmiControlManager$4$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                HdmiControlManager.CecSettingChangeListener.this.onChange(setting);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    private IHdmiCecSettingChangeListener getCecSettingChangeListenerWrapper(Executor executor, CecSettingChangeListener listener) {
+    private IHdmiCecSettingChangeListener getCecSettingChangeListenerWrapper(
+            Executor executor, CecSettingChangeListener listener) {
         return new AnonymousClass4(executor, listener);
     }
 
@@ -924,7 +981,8 @@ public final class HdmiControlManager {
         addHdmiCecEnabledChangeListener(ConcurrentUtils.DIRECT_EXECUTOR, listener);
     }
 
-    public void addHdmiCecEnabledChangeListener(Executor executor, CecSettingChangeListener listener) {
+    public void addHdmiCecEnabledChangeListener(
+            Executor executor, CecSettingChangeListener listener) {
         addCecSettingChangeListener(CEC_SETTING_NAME_HDMI_CEC_ENABLED, executor, listener);
     }
 
@@ -1030,11 +1088,14 @@ public final class HdmiControlManager {
 
     public void setPowerStateChangeOnActiveSourceLost(String value) {
         if (this.mService == null) {
-            Log.e(TAG, "setPowerStateChangeOnActiveSourceLost: HdmiControlService is not available");
+            Log.e(
+                    TAG,
+                    "setPowerStateChangeOnActiveSourceLost: HdmiControlService is not available");
             throw new RuntimeException("HdmiControlService is not available");
         }
         try {
-            this.mService.setCecSettingStringValue(CEC_SETTING_NAME_POWER_STATE_CHANGE_ON_ACTIVE_SOURCE_LOST, value);
+            this.mService.setCecSettingStringValue(
+                    CEC_SETTING_NAME_POWER_STATE_CHANGE_ON_ACTIVE_SOURCE_LOST, value);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1042,11 +1103,14 @@ public final class HdmiControlManager {
 
     public String getPowerStateChangeOnActiveSourceLost() {
         if (this.mService == null) {
-            Log.e(TAG, "getPowerStateChangeOnActiveSourceLost: HdmiControlService is not available");
+            Log.e(
+                    TAG,
+                    "getPowerStateChangeOnActiveSourceLost: HdmiControlService is not available");
             throw new RuntimeException("HdmiControlService is not available");
         }
         try {
-            return this.mService.getCecSettingStringValue(CEC_SETTING_NAME_POWER_STATE_CHANGE_ON_ACTIVE_SOURCE_LOST);
+            return this.mService.getCecSettingStringValue(
+                    CEC_SETTING_NAME_POWER_STATE_CHANGE_ON_ACTIVE_SOURCE_LOST);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

@@ -3,23 +3,25 @@ package android.hardware.radio.data;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class Qos implements Parcelable {
-    public static final Parcelable.Creator<Qos> CREATOR = new Parcelable.Creator<Qos>() { // from class: android.hardware.radio.data.Qos.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Qos createFromParcel(Parcel _aidl_source) {
-            return new Qos(_aidl_source);
-        }
+    public static final Parcelable.Creator<Qos> CREATOR =
+            new Parcelable.Creator<Qos>() { // from class: android.hardware.radio.data.Qos.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Qos createFromParcel(Parcel _aidl_source) {
+                    return new Qos(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Qos[] newArray(int _aidl_size) {
-            return new Qos[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Qos[] newArray(int _aidl_size) {
+                    return new Qos[_aidl_size];
+                }
+            };
     public static final int eps = 1;
     public static final int noinit = 0;
     public static final int nr = 2;
@@ -156,9 +158,13 @@ public final class Qos implements Parcelable {
             case 0:
                 return "Qos.noinit(" + getNoinit() + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "Qos.eps(" + Objects.toString(getEps()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "Qos.eps("
+                        + Objects.toString(getEps())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 2:
-                return "Qos.nr(" + Objects.toString(getNr()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "Qos.nr("
+                        + Objects.toString(getNr())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -166,7 +172,12 @@ public final class Qos implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

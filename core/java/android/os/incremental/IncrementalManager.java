@@ -5,12 +5,12 @@ import android.content.pm.IPackageLoadingProgressCallback;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.os.SystemProperties;
-import android.os.incremental.IStorageLoadingProgressListener;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.system.StructStat;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -33,12 +33,12 @@ public final class IncrementalManager {
     public static final int CREATE_MODE_TEMPORARY_BIND = 1;
     public static final int MIN_VERSION_TO_SUPPORT_FSVERITY = 2;
     private static final String TAG = "IncrementalManager";
-    private final LoadingProgressCallbacks mLoadingProgressCallbacks = new LoadingProgressCallbacks();
+    private final LoadingProgressCallbacks mLoadingProgressCallbacks =
+            new LoadingProgressCallbacks();
     private final IIncrementalService mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CreateMode {
-    }
+    public @interface CreateMode {}
 
     private static native boolean nativeIsEnabled();
 
@@ -81,7 +81,8 @@ public final class IncrementalManager {
         }
     }
 
-    public IncrementalStorage createStorage(String path, IncrementalStorage linkedStorage, int createMode) {
+    public IncrementalStorage createStorage(
+            String path, IncrementalStorage linkedStorage, int createMode) {
         int id = -1;
         try {
             StructStat st = Os.stat(path);
@@ -105,7 +106,8 @@ public final class IncrementalManager {
         }
     }
 
-    public void linkCodePath(File beforeCodeFile, File afterCodeFile) throws IllegalArgumentException, IOException {
+    public void linkCodePath(File beforeCodeFile, File afterCodeFile)
+            throws IllegalArgumentException, IOException {
         File beforeCodeAbsolute = beforeCodeFile.getAbsoluteFile();
         IncrementalStorage apkStorage = openStorage(beforeCodeAbsolute.toString());
         if (apkStorage == null) {
@@ -125,24 +127,38 @@ public final class IncrementalManager {
         }
     }
 
-    private void linkFiles(final IncrementalStorage sourceStorage, File sourceAbsolutePath, String sourceRelativePath, final IncrementalStorage targetStorage, String targetRelativePath) throws IOException {
+    private void linkFiles(
+            final IncrementalStorage sourceStorage,
+            File sourceAbsolutePath,
+            String sourceRelativePath,
+            final IncrementalStorage targetStorage,
+            String targetRelativePath)
+            throws IOException {
         final Path sourceBase = sourceAbsolutePath.toPath().resolve(sourceRelativePath);
         final Path targetRelative = Paths.get(targetRelativePath, new String[0]);
-        Files.walkFileTree(sourceAbsolutePath.toPath(), new SimpleFileVisitor<Path>() { // from class: android.os.incremental.IncrementalManager.1
-            @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
-            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-                Path relativeDir = sourceBase.relativize(dir);
-                targetStorage.makeDirectory(targetRelative.resolve(relativeDir).toString());
-                return FileVisitResult.CONTINUE;
-            }
+        Files.walkFileTree(
+                sourceAbsolutePath.toPath(),
+                new SimpleFileVisitor<
+                        Path>() { // from class: android.os.incremental.IncrementalManager.1
+                    @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
+                    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
+                            throws IOException {
+                        Path relativeDir = sourceBase.relativize(dir);
+                        targetStorage.makeDirectory(targetRelative.resolve(relativeDir).toString());
+                        return FileVisitResult.CONTINUE;
+                    }
 
-            @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
-            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                Path relativeFile = sourceBase.relativize(file);
-                sourceStorage.makeLink(file.toAbsolutePath().toString(), targetStorage, targetRelative.resolve(relativeFile).toString());
-                return FileVisitResult.CONTINUE;
-            }
-        });
+                    @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
+                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+                            throws IOException {
+                        Path relativeFile = sourceBase.relativize(file);
+                        sourceStorage.makeLink(
+                                file.toAbsolutePath().toString(),
+                                targetStorage,
+                                targetRelative.resolve(relativeFile).toString());
+                        return FileVisitResult.CONTINUE;
+                    }
+                });
     }
 
     public static boolean isFeatureEnabled() {
@@ -186,7 +202,8 @@ public final class IncrementalManager {
         }
     }
 
-    public boolean registerLoadingProgressCallback(String codePath, IPackageLoadingProgressCallback callback) {
+    public boolean registerLoadingProgressCallback(
+            String codePath, IPackageLoadingProgressCallback callback) {
         IncrementalStorage storage = openStorage(codePath);
         if (storage == null) {
             return false;
@@ -222,10 +239,12 @@ public final class IncrementalManager {
             storage.unregisterLoadingProgressListener();
         }
 
-        public boolean registerCallback(IncrementalStorage storage, IPackageLoadingProgressCallback callback) {
+        public boolean registerCallback(
+                IncrementalStorage storage, IPackageLoadingProgressCallback callback) {
             int storageId = storage.getId();
             synchronized (this.mCallbacks) {
-                RemoteCallbackList<IPackageLoadingProgressCallback> callbacksForStorage = this.mCallbacks.get(storageId);
+                RemoteCallbackList<IPackageLoadingProgressCallback> callbacksForStorage =
+                        this.mCallbacks.get(storageId);
                 if (callbacksForStorage == null) {
                     callbacksForStorage = new RemoteCallbackList<>();
                     this.mCallbacks.put(storageId, callbacksForStorage);

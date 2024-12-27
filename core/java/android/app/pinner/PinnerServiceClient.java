@@ -1,10 +1,10 @@
 package android.app.pinner;
 
-import android.app.pinner.IPinnerService;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,10 @@ public class PinnerServiceClient {
     public List<PinnedFileStat> getPinnerStats() {
         IBinder binder = ServiceManager.getService("pinner");
         if (binder == null) {
-            Slog.w(TAG, "Failed to retrieve PinnerService. A common failure reason is due to a lack of selinux permissions.");
+            Slog.w(
+                    TAG,
+                    "Failed to retrieve PinnerService. A common failure reason is due to a lack of"
+                            + " selinux permissions.");
             return new ArrayList();
         }
         IPinnerService pinnerService = IPinnerService.Stub.asInterface(binder);

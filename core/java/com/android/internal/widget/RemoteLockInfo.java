@@ -6,36 +6,51 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class RemoteLockInfo implements Parcelable {
-    public static final Parcelable.Creator<RemoteLockInfo> CREATOR = new Parcelable.Creator<RemoteLockInfo>() { // from class: com.android.internal.widget.RemoteLockInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteLockInfo createFromParcel(Parcel in) {
-            int lockType = in.readInt();
-            boolean[] typeBooleanArray = new boolean[1];
-            in.readBooleanArray(typeBooleanArray);
-            boolean lockState = typeBooleanArray[0];
-            CharSequence message = in.readCharSequence();
-            CharSequence phoneNumber = in.readCharSequence();
-            CharSequence emailAddress = in.readCharSequence();
-            boolean[] EMCBooleanArray = new boolean[1];
-            in.readBooleanArray(EMCBooleanArray);
-            boolean enableEmergencyCall = EMCBooleanArray[0];
-            CharSequence clientName = in.readCharSequence();
-            int count = in.readInt();
-            long time = in.readLong();
-            int blockcount = in.readInt();
-            boolean skipPin = in.readBoolean();
-            boolean skipSupport = in.readBoolean();
-            Bundle bundle = in.readBundle();
-            return new RemoteLockInfo(lockType, lockState, message, phoneNumber, emailAddress, enableEmergencyCall, clientName, count, time, blockcount, skipPin, skipSupport, bundle);
-        }
+    public static final Parcelable.Creator<RemoteLockInfo> CREATOR =
+            new Parcelable.Creator<
+                    RemoteLockInfo>() { // from class: com.android.internal.widget.RemoteLockInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteLockInfo createFromParcel(Parcel in) {
+                    int lockType = in.readInt();
+                    boolean[] typeBooleanArray = new boolean[1];
+                    in.readBooleanArray(typeBooleanArray);
+                    boolean lockState = typeBooleanArray[0];
+                    CharSequence message = in.readCharSequence();
+                    CharSequence phoneNumber = in.readCharSequence();
+                    CharSequence emailAddress = in.readCharSequence();
+                    boolean[] EMCBooleanArray = new boolean[1];
+                    in.readBooleanArray(EMCBooleanArray);
+                    boolean enableEmergencyCall = EMCBooleanArray[0];
+                    CharSequence clientName = in.readCharSequence();
+                    int count = in.readInt();
+                    long time = in.readLong();
+                    int blockcount = in.readInt();
+                    boolean skipPin = in.readBoolean();
+                    boolean skipSupport = in.readBoolean();
+                    Bundle bundle = in.readBundle();
+                    return new RemoteLockInfo(
+                            lockType,
+                            lockState,
+                            message,
+                            phoneNumber,
+                            emailAddress,
+                            enableEmergencyCall,
+                            clientName,
+                            count,
+                            time,
+                            blockcount,
+                            skipPin,
+                            skipSupport,
+                            bundle);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteLockInfo[] newArray(int size) {
-            return new RemoteLockInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteLockInfo[] newArray(int size) {
+                    return new RemoteLockInfo[size];
+                }
+            };
     public static final String CUSTOMER_APP_NAME = "customer_app_name";
     public static final String CUSTOMER_PACKAGE_NAME = "customer_package_name";
     public static final int REMOTE_LOCK_INFO_ALL = 65535;
@@ -67,7 +82,20 @@ public class RemoteLockInfo implements Parcelable {
     public boolean skipPinContainer;
     public boolean skipSupportContainer;
 
-    private RemoteLockInfo(int type, boolean state, CharSequence msg, CharSequence number, CharSequence email, boolean callbutton, CharSequence name, int count, long time, int blockcount, boolean skipPin, boolean skipSupport, Bundle b) {
+    private RemoteLockInfo(
+            int type,
+            boolean state,
+            CharSequence msg,
+            CharSequence number,
+            CharSequence email,
+            boolean callbutton,
+            CharSequence name,
+            int count,
+            long time,
+            int blockcount,
+            boolean skipPin,
+            boolean skipSupport,
+            Bundle b) {
         this.lockType = type;
         this.lockState = state;
         this.message = msg;
@@ -141,10 +169,20 @@ public class RemoteLockInfo implements Parcelable {
             diff |= 2048;
         }
         if (this.bundle != null) {
-            if ((this.bundle.getCharSequence(CUSTOMER_PACKAGE_NAME) != null && !this.bundle.getCharSequence(CUSTOMER_PACKAGE_NAME).equals(delta.bundle.getCharSequence(CUSTOMER_PACKAGE_NAME))) || (this.bundle.getCharSequence(CUSTOMER_PACKAGE_NAME) == null && delta.bundle.getCharSequence(CUSTOMER_PACKAGE_NAME) != null)) {
+            if ((this.bundle.getCharSequence(CUSTOMER_PACKAGE_NAME) != null
+                            && !this.bundle
+                                    .getCharSequence(CUSTOMER_PACKAGE_NAME)
+                                    .equals(delta.bundle.getCharSequence(CUSTOMER_PACKAGE_NAME)))
+                    || (this.bundle.getCharSequence(CUSTOMER_PACKAGE_NAME) == null
+                            && delta.bundle.getCharSequence(CUSTOMER_PACKAGE_NAME) != null)) {
                 diff |= 4096;
             }
-            if ((this.bundle.getCharSequence(CUSTOMER_APP_NAME) != null && !this.bundle.getCharSequence(CUSTOMER_APP_NAME).equals(delta.bundle.getCharSequence(CUSTOMER_APP_NAME))) || (this.bundle.getCharSequence(CUSTOMER_APP_NAME) == null && delta.bundle.getCharSequence(CUSTOMER_APP_NAME) != null)) {
+            if ((this.bundle.getCharSequence(CUSTOMER_APP_NAME) != null
+                            && !this.bundle
+                                    .getCharSequence(CUSTOMER_APP_NAME)
+                                    .equals(delta.bundle.getCharSequence(CUSTOMER_APP_NAME)))
+                    || (this.bundle.getCharSequence(CUSTOMER_APP_NAME) == null
+                            && delta.bundle.getCharSequence(CUSTOMER_APP_NAME) != null)) {
                 return diff | 8192;
             }
             return diff;

@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.graphics.drawable.LayerDrawable;
 import android.media.audio.Enums;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -72,16 +73,23 @@ public final class LauncherIcons {
         return getBadgedDrawable(null, badgeForeground, backgroundColor);
     }
 
-    public Drawable getBadgedDrawable(Drawable base, Drawable badgeForeground, int backgroundColor) {
+    public Drawable getBadgedDrawable(
+            Drawable base, Drawable badgeForeground, int backgroundColor) {
         Drawable[] drawables;
-        Resources overlayableRes = ActivityThread.currentActivityThread().getApplication().getResources();
+        Resources overlayableRes =
+                ActivityThread.currentActivityThread().getApplication().getResources();
         Drawable badgeShadow = overlayableRes.getDrawable(R.drawable.ic_corp_icon_badge_shadow);
-        Drawable badgeColor = overlayableRes.getDrawable(R.drawable.ic_corp_icon_badge_color).getConstantState().newDrawable().mutate();
+        Drawable badgeColor =
+                overlayableRes
+                        .getDrawable(R.drawable.ic_corp_icon_badge_color)
+                        .getConstantState()
+                        .newDrawable()
+                        .mutate();
         badgeForeground.setTint(backgroundColor);
         if (base == null) {
-            drawables = new Drawable[]{badgeShadow, badgeColor, badgeForeground};
+            drawables = new Drawable[] {badgeShadow, badgeColor, badgeForeground};
         } else {
-            drawables = new Drawable[]{base, badgeShadow, badgeColor, badgeForeground};
+            drawables = new Drawable[] {base, badgeShadow, badgeColor, badgeForeground};
         }
         return new LayerDrawable(drawables);
     }
@@ -109,7 +117,9 @@ public final class LauncherIcons {
             Rect bounds = getBounds();
             canvas.drawBitmap(this.mState.mShadow, (Rect) null, bounds, this.mState.mPaint);
             canvas.save();
-            canvas.translate(bounds.width() * 0.9599999f * LauncherIcons.ICON_SIZE_KEY_SHADOW_DELTA_FACTOR, bounds.height() * 0.9599999f * LauncherIcons.ICON_SIZE_BLUR_FACTOR);
+            canvas.translate(
+                    bounds.width() * 0.9599999f * LauncherIcons.ICON_SIZE_KEY_SHADOW_DELTA_FACTOR,
+                    bounds.height() * 0.9599999f * LauncherIcons.ICON_SIZE_BLUR_FACTOR);
             canvas.scale(0.9599999f, 0.9599999f);
             super.draw(canvas);
             canvas.restore();

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.ConditionVariable;
-import android.speech.tts.TextToSpeechService;
 import android.util.Log;
 
 /* loaded from: classes3.dex */
@@ -17,7 +16,12 @@ class AudioPlaybackQueueItem extends PlaybackQueueItem {
     private MediaPlayer mPlayer;
     private final Uri mUri;
 
-    AudioPlaybackQueueItem(TextToSpeechService.UtteranceProgressDispatcher dispatcher, Object callerIdentity, Context context, Uri uri, TextToSpeechService.AudioOutputParams audioParams) {
+    AudioPlaybackQueueItem(
+            TextToSpeechService.UtteranceProgressDispatcher dispatcher,
+            Object callerIdentity,
+            Context context,
+            Uri uri,
+            TextToSpeechService.AudioOutputParams audioParams) {
         super(dispatcher, callerIdentity);
         this.mContext = context;
         this.mUri = uri;
@@ -32,27 +36,41 @@ class AudioPlaybackQueueItem extends PlaybackQueueItem {
         TextToSpeechService.UtteranceProgressDispatcher dispatcher = getDispatcher();
         dispatcher.dispatchOnStart();
         int sessionId = this.mAudioParams.mSessionId;
-        this.mPlayer = MediaPlayer.create(this.mContext, this.mUri, null, this.mAudioParams.mAudioAttributes, sessionId > 0 ? sessionId : 0);
+        this.mPlayer =
+                MediaPlayer.create(
+                        this.mContext,
+                        this.mUri,
+                        null,
+                        this.mAudioParams.mAudioAttributes,
+                        sessionId > 0 ? sessionId : 0);
         if (this.mPlayer == null) {
             dispatcher.dispatchOnError(-5);
             return;
         }
         try {
-            this.mPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() { // from class: android.speech.tts.AudioPlaybackQueueItem.1
-                @Override // android.media.MediaPlayer.OnErrorListener
-                public boolean onError(MediaPlayer mp, int what, int extra) {
-                    Log.w(AudioPlaybackQueueItem.TAG, "Audio playback error: " + what + ", " + extra);
-                    AudioPlaybackQueueItem.this.mDone.open();
-                    return true;
-                }
-            });
-            this.mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() { // from class: android.speech.tts.AudioPlaybackQueueItem.2
-                @Override // android.media.MediaPlayer.OnCompletionListener
-                public void onCompletion(MediaPlayer mp) {
-                    AudioPlaybackQueueItem.this.mFinished = true;
-                    AudioPlaybackQueueItem.this.mDone.open();
-                }
-            });
+            this.mPlayer.setOnErrorListener(
+                    new MediaPlayer
+                            .OnErrorListener() { // from class:
+                                                 // android.speech.tts.AudioPlaybackQueueItem.1
+                        @Override // android.media.MediaPlayer.OnErrorListener
+                        public boolean onError(MediaPlayer mp, int what, int extra) {
+                            Log.w(
+                                    AudioPlaybackQueueItem.TAG,
+                                    "Audio playback error: " + what + ", " + extra);
+                            AudioPlaybackQueueItem.this.mDone.open();
+                            return true;
+                        }
+                    });
+            this.mPlayer.setOnCompletionListener(
+                    new MediaPlayer
+                            .OnCompletionListener() { // from class:
+                                                      // android.speech.tts.AudioPlaybackQueueItem.2
+                        @Override // android.media.MediaPlayer.OnCompletionListener
+                        public void onCompletion(MediaPlayer mp) {
+                            AudioPlaybackQueueItem.this.mFinished = true;
+                            AudioPlaybackQueueItem.this.mDone.open();
+                        }
+                    });
             setupVolume(this.mPlayer, this.mAudioParams.mVolume, this.mAudioParams.mPan);
             this.mPlayer.start();
             this.mDone.block();

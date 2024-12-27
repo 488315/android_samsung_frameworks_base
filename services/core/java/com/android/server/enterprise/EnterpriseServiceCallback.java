@@ -13,8 +13,7 @@ public interface EnterpriseServiceCallback {
 
     void onAdminAdded(int i);
 
-    default void onAdminRemoved(int i) {
-    }
+    default void onAdminRemoved(int i) {}
 
     default void onAdminRemoved(int i, boolean z) {
         onAdminRemoved(i);
@@ -22,11 +21,9 @@ public interface EnterpriseServiceCallback {
 
     void onPreAdminRemoval(int i);
 
-    default void onUserStarting(int i) {
-    }
+    default void onUserStarting(int i) {}
 
-    default void registerDeferredBoradcastReceiver() {
-    }
+    default void registerDeferredBoradcastReceiver() {}
 
     void systemReady();
 }

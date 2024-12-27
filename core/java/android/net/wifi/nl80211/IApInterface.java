@@ -1,6 +1,5 @@
 package android.net.wifi.nl80211;
 
-import android.net.wifi.nl80211.IApInterfaceEventCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -16,7 +15,8 @@ public interface IApInterface extends IInterface {
 
     String getInterfaceName() throws RemoteException;
 
-    boolean registerCallback(IApInterfaceEventCallback iApInterfaceEventCallback) throws RemoteException;
+    boolean registerCallback(IApInterfaceEventCallback iApInterfaceEventCallback)
+            throws RemoteException;
 
     public static class Default implements IApInterface {
         @Override // android.net.wifi.nl80211.IApInterface
@@ -35,7 +35,7 @@ public interface IApInterface extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IApInterface {
+    public abstract static class Stub extends Binder implements IApInterface {
         static final int TRANSACTION_getInterfaceName = 2;
         static final int TRANSACTION_registerCallback = 1;
 
@@ -76,7 +76,8 @@ public interface IApInterface extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IApInterface.DESCRIPTOR);
             }
@@ -86,7 +87,8 @@ public interface IApInterface extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IApInterfaceEventCallback _arg0 = IApInterfaceEventCallback.Stub.asInterface(data.readStrongBinder());
+                    IApInterfaceEventCallback _arg0 =
+                            IApInterfaceEventCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result = registerCallback(_arg0);
                     reply.writeNoException();
@@ -119,7 +121,8 @@ public interface IApInterface extends IInterface {
             }
 
             @Override // android.net.wifi.nl80211.IApInterface
-            public boolean registerCallback(IApInterfaceEventCallback callback) throws RemoteException {
+            public boolean registerCallback(IApInterfaceEventCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

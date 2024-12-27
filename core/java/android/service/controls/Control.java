@@ -5,29 +5,31 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.Icon;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.service.controls.CustomControl;
 import android.service.controls.templates.ControlTemplate;
 import android.service.controls.templates.ControlTemplateWrapper;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public final class Control implements Parcelable {
-    public static final Parcelable.Creator<Control> CREATOR = new Parcelable.Creator<Control>() { // from class: android.service.controls.Control.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Control createFromParcel(Parcel source) {
-            return new Control(source);
-        }
+    public static final Parcelable.Creator<Control> CREATOR =
+            new Parcelable.Creator<Control>() { // from class: android.service.controls.Control.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Control createFromParcel(Parcel source) {
+                    return new Control(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Control[] newArray(int size) {
-            return new Control[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Control[] newArray(int size) {
+                    return new Control[size];
+                }
+            };
     private static final int NUM_STATUS = 5;
     public static final int STATUS_DISABLED = 4;
     public static final int STATUS_ERROR = 3;
@@ -51,10 +53,22 @@ public final class Control implements Parcelable {
     private final CharSequence mZone;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+    public @interface Status {}
 
-    Control(String controlId, int deviceType, CharSequence title, CharSequence subtitle, CharSequence structure, CharSequence zone, PendingIntent appIntent, Icon customIcon, ColorStateList customColor, int status, ControlTemplate controlTemplate, CharSequence statusText, boolean authRequired) {
+    Control(
+            String controlId,
+            int deviceType,
+            CharSequence title,
+            CharSequence subtitle,
+            CharSequence structure,
+            CharSequence zone,
+            PendingIntent appIntent,
+            Icon customIcon,
+            ColorStateList customColor,
+            int status,
+            ControlTemplate controlTemplate,
+            CharSequence statusText,
+            boolean authRequired) {
         Preconditions.checkNotNull(controlId);
         Preconditions.checkNotNull(title);
         Preconditions.checkNotNull(subtitle);
@@ -258,7 +272,8 @@ public final class Control implements Parcelable {
             this.mAppIntent = control.mAppIntent;
             this.mCustomIcon = control.mCustomIcon;
             this.mCustomColor = control.mCustomColor;
-            this.mCustomStatelessBuilder = new CustomControl.CustomStatelessBuilder(control.mCustomControl);
+            this.mCustomStatelessBuilder =
+                    new CustomControl.CustomStatelessBuilder(control.mCustomControl);
         }
 
         public StatelessBuilder setControlId(String controlId) {
@@ -315,13 +330,17 @@ public final class Control implements Parcelable {
             return this;
         }
 
-        public StatelessBuilder setUseCustomIconWithoutShadowBg(boolean useCustomIconWithoutShadowBg) {
-            this.mCustomStatelessBuilder.setUseCustomIconWithoutShadowBg(useCustomIconWithoutShadowBg);
+        public StatelessBuilder setUseCustomIconWithoutShadowBg(
+                boolean useCustomIconWithoutShadowBg) {
+            this.mCustomStatelessBuilder.setUseCustomIconWithoutShadowBg(
+                    useCustomIconWithoutShadowBg);
             return this;
         }
 
-        public StatelessBuilder setUseCustomIconWithoutPadding(boolean useCustomIconWithoutPadding) {
-            this.mCustomStatelessBuilder.setUseCustomIconWithoutPadding(useCustomIconWithoutPadding);
+        public StatelessBuilder setUseCustomIconWithoutPadding(
+                boolean useCustomIconWithoutPadding) {
+            this.mCustomStatelessBuilder.setUseCustomIconWithoutPadding(
+                    useCustomIconWithoutPadding);
             return this;
         }
 
@@ -335,8 +354,10 @@ public final class Control implements Parcelable {
             return this;
         }
 
-        public StatelessBuilder setCustomIconAnimationStartAndEndFrame(int startFrame, int endFrame) {
-            this.mCustomStatelessBuilder.setCustomIconAnimationStartAndEndFrame(startFrame, endFrame);
+        public StatelessBuilder setCustomIconAnimationStartAndEndFrame(
+                int startFrame, int endFrame) {
+            this.mCustomStatelessBuilder.setCustomIconAnimationStartAndEndFrame(
+                    startFrame, endFrame);
             return this;
         }
 
@@ -350,7 +371,21 @@ public final class Control implements Parcelable {
         }
 
         public Control build() {
-            Control control = new Control(this.mControlId, this.mDeviceType, this.mTitle, this.mSubtitle, this.mStructure, this.mZone, this.mAppIntent, this.mCustomIcon, this.mCustomColor, 0, ControlTemplate.NO_TEMPLATE, "", true);
+            Control control =
+                    new Control(
+                            this.mControlId,
+                            this.mDeviceType,
+                            this.mTitle,
+                            this.mSubtitle,
+                            this.mStructure,
+                            this.mZone,
+                            this.mAppIntent,
+                            this.mCustomIcon,
+                            this.mCustomColor,
+                            0,
+                            ControlTemplate.NO_TEMPLATE,
+                            "",
+                            true);
             control.mCustomControl = this.mCustomStatelessBuilder.build();
             return control;
         }
@@ -410,7 +445,8 @@ public final class Control implements Parcelable {
             this.mControlTemplate = control.mControlTemplate;
             this.mStatusText = control.mStatusText;
             this.mAuthRequired = control.mAuthRequired;
-            this.mCustomStatefulBuilder = new CustomControl.CustomStatefulBuilder(control.mCustomControl);
+            this.mCustomStatefulBuilder =
+                    new CustomControl.CustomStatefulBuilder(control.mCustomControl);
         }
 
         public StatefulBuilder setControlId(String controlId) {
@@ -499,8 +535,10 @@ public final class Control implements Parcelable {
             return this;
         }
 
-        public StatefulBuilder setCustomIconAnimationStartAndEndFrame(int startFrame, int endFrame) {
-            this.mCustomStatefulBuilder.setCustomIconAnimationStartAndEndFrame(startFrame, endFrame);
+        public StatefulBuilder setCustomIconAnimationStartAndEndFrame(
+                int startFrame, int endFrame) {
+            this.mCustomStatefulBuilder.setCustomIconAnimationStartAndEndFrame(
+                    startFrame, endFrame);
             return this;
         }
 
@@ -534,8 +572,10 @@ public final class Control implements Parcelable {
             return this;
         }
 
-        public StatefulBuilder setUseCustomIconWithoutShadowBg(boolean useCustomIconWithoutShadowBg) {
-            this.mCustomStatefulBuilder.setUseCustomIconWithoutShadowBg(useCustomIconWithoutShadowBg);
+        public StatefulBuilder setUseCustomIconWithoutShadowBg(
+                boolean useCustomIconWithoutShadowBg) {
+            this.mCustomStatefulBuilder.setUseCustomIconWithoutShadowBg(
+                    useCustomIconWithoutShadowBg);
             return this;
         }
 
@@ -569,7 +609,21 @@ public final class Control implements Parcelable {
         }
 
         public Control build() {
-            Control control = new Control(this.mControlId, this.mDeviceType, this.mTitle, this.mSubtitle, this.mStructure, this.mZone, this.mAppIntent, this.mCustomIcon, this.mCustomColor, this.mStatus, this.mControlTemplate, this.mStatusText, this.mAuthRequired);
+            Control control =
+                    new Control(
+                            this.mControlId,
+                            this.mDeviceType,
+                            this.mTitle,
+                            this.mSubtitle,
+                            this.mStructure,
+                            this.mZone,
+                            this.mAppIntent,
+                            this.mCustomIcon,
+                            this.mCustomColor,
+                            this.mStatus,
+                            this.mControlTemplate,
+                            this.mStatusText,
+                            this.mAuthRequired);
             control.mCustomControl = this.mCustomStatefulBuilder.build();
             return control;
         }

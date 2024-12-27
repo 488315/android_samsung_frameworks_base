@@ -6,6 +6,7 @@ import android.telecom.CallControl;
 import android.telecom.CallControlCallback;
 import android.telecom.CallEventCallback;
 import android.telecom.CallException;
+
 import java.util.concurrent.Executor;
 
 /* loaded from: classes5.dex */
@@ -18,7 +19,13 @@ public class TransactionalCall {
     private final Executor mExecutor;
     private final OutcomeReceiver<CallControl, CallException> mPendingControl;
 
-    public TransactionalCall(String callId, CallAttributes callAttributes, Executor executor, OutcomeReceiver<CallControl, CallException> pendingControl, CallControlCallback callControlCallback, CallEventCallback callStateCallback) {
+    public TransactionalCall(
+            String callId,
+            CallAttributes callAttributes,
+            Executor executor,
+            OutcomeReceiver<CallControl, CallException> pendingControl,
+            CallControlCallback callControlCallback,
+            CallEventCallback callStateCallback) {
         this.mCallId = callId;
         this.mCallAttributes = callAttributes;
         this.mExecutor = executor;

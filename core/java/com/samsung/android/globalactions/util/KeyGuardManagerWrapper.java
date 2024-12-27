@@ -5,11 +5,13 @@ import android.app.KeyguardManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+
 import com.samsung.android.view.SemWindowManager;
 
 /* loaded from: classes6.dex */
 public class KeyGuardManagerWrapper {
-    private static final String ACTION_SHOW_GLOBAL_ACTIONS = "android.intent.action.SHOW_GLOBAL_ACTIONS";
+    private static final String ACTION_SHOW_GLOBAL_ACTIONS =
+            "android.intent.action.SHOW_GLOBAL_ACTIONS";
     private static final String TAG = "KeyguardManagerWrapper";
     private final Context mContext;
     private boolean mIsRegistered;
@@ -18,12 +20,14 @@ public class KeyGuardManagerWrapper {
 
     public KeyGuardManagerWrapper(Context context, LogWrapper logWrapper) {
         this.mContext = context;
-        this.mKeyguardManager = (KeyguardManager) this.mContext.getSystemService(Context.KEYGUARD_SERVICE);
+        this.mKeyguardManager =
+                (KeyguardManager) this.mContext.getSystemService(Context.KEYGUARD_SERVICE);
         this.mLogWrapper = logWrapper;
     }
 
     public boolean isSecureKeyguard() {
-        return this.mKeyguardManager.isDeviceSecure(ActivityManager.getCurrentUser()) && this.mKeyguardManager.inKeyguardRestrictedInputMode();
+        return this.mKeyguardManager.isDeviceSecure(ActivityManager.getCurrentUser())
+                && this.mKeyguardManager.inKeyguardRestrictedInputMode();
     }
 
     public boolean isCurrentUserSecure() {
@@ -36,7 +40,8 @@ public class KeyGuardManagerWrapper {
             return;
         }
         Intent intent = new Intent("android.intent.action.SHOW_GLOBAL_ACTIONS");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.mContext, 0, intent, 201326592);
+        PendingIntent pendingIntent =
+                PendingIntent.getBroadcast(this.mContext, 0, intent, 201326592);
         Intent fillInIntent = new Intent();
         fillInIntent.putExtra("afterKeyguardGone", false);
         fillInIntent.putExtra("dismissType", dissmissType);
@@ -49,7 +54,8 @@ public class KeyGuardManagerWrapper {
             return;
         }
         Intent intent = new Intent("android.intent.action.SHOW_GLOBAL_ACTIONS");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.mContext, 0, intent, 201326592);
+        PendingIntent pendingIntent =
+                PendingIntent.getBroadcast(this.mContext, 0, intent, 201326592);
         Intent fillInIntent = new Intent();
         if (oncover && SemWindowManager.getInstance().isFolded()) {
             fillInIntent.putExtra("runOnCover", true);

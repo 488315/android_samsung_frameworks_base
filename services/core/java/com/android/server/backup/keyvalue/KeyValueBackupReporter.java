@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.util.EventLog;
 import android.util.Slog;
+
 import com.android.server.backup.UserBackupManagerService;
 import com.android.server.backup.utils.BackupManagerMonitorEventSender;
 
@@ -17,7 +18,10 @@ public class KeyValueBackupReporter {
     public final UserBackupManagerService mBackupManagerService;
     public final IBackupObserver mObserver;
 
-    public KeyValueBackupReporter(UserBackupManagerService userBackupManagerService, IBackupObserver iBackupObserver, BackupManagerMonitorEventSender backupManagerMonitorEventSender) {
+    public KeyValueBackupReporter(
+            UserBackupManagerService userBackupManagerService,
+            IBackupObserver iBackupObserver,
+            BackupManagerMonitorEventSender backupManagerMonitorEventSender) {
         this.mBackupManagerService = userBackupManagerService;
         this.mObserver = iBackupObserver;
         this.mBackupManagerMonitorEventSender = backupManagerMonitorEventSender;

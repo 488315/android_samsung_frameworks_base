@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class PrimitivePwle implements Parcelable {
-    public static final Parcelable.Creator<PrimitivePwle> CREATOR = new Parcelable.Creator<PrimitivePwle>() { // from class: android.hardware.vibrator.PrimitivePwle.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrimitivePwle createFromParcel(Parcel _aidl_source) {
-            return new PrimitivePwle(_aidl_source);
-        }
+    public static final Parcelable.Creator<PrimitivePwle> CREATOR =
+            new Parcelable.Creator<
+                    PrimitivePwle>() { // from class: android.hardware.vibrator.PrimitivePwle.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrimitivePwle createFromParcel(Parcel _aidl_source) {
+                    return new PrimitivePwle(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrimitivePwle[] newArray(int _aidl_size) {
-            return new PrimitivePwle[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrimitivePwle[] newArray(int _aidl_size) {
+                    return new PrimitivePwle[_aidl_size];
+                }
+            };
     public static final int active = 0;
     public static final int braking = 1;
     private int _tag;
@@ -94,11 +96,13 @@ public final class PrimitivePwle implements Parcelable {
         int _aidl_tag = _aidl_parcel.readInt();
         switch (_aidl_tag) {
             case 0:
-                ActivePwle _aidl_value = (ActivePwle) _aidl_parcel.readTypedObject(ActivePwle.CREATOR);
+                ActivePwle _aidl_value =
+                        (ActivePwle) _aidl_parcel.readTypedObject(ActivePwle.CREATOR);
                 _set(_aidl_tag, _aidl_value);
                 return;
             case 1:
-                BrakingPwle _aidl_value2 = (BrakingPwle) _aidl_parcel.readTypedObject(BrakingPwle.CREATOR);
+                BrakingPwle _aidl_value2 =
+                        (BrakingPwle) _aidl_parcel.readTypedObject(BrakingPwle.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             default:
@@ -129,7 +133,12 @@ public final class PrimitivePwle implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

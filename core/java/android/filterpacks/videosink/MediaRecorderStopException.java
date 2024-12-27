@@ -8,8 +8,7 @@ public class MediaRecorderStopException extends RuntimeException {
         super(msg);
     }
 
-    public MediaRecorderStopException() {
-    }
+    public MediaRecorderStopException() {}
 
     public MediaRecorderStopException(String msg, Throwable t) {
         super(msg, t);

@@ -1,6 +1,7 @@
 package com.android.server.companion.utils;
 
 import android.util.ArrayMap;
+
 import java.util.Collections;
 import java.util.Map;
 

@@ -5,9 +5,11 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Slog;
+
 import com.android.internal.util.FastPrintWriter;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.MagnificationConnectionManager$$ExternalSyntheticOutline0;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,16 +32,32 @@ public final class BackupManagerMonitorDumpsysUtils {
     public boolean mIsFileLargerThanSizeLimit = false;
 
     public static void addAgentLogsIfAvailable(Bundle bundle, PrintWriter printWriter) {
-        if (bundle.containsKey("android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS") ? !bundle.getParcelableArrayList("android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS").isEmpty() : false) {
+        if (bundle.containsKey("android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS")
+                ? !bundle.getParcelableArrayList(
+                                "android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS")
+                        .isEmpty()
+                : false) {
             printWriter.println("\tAgent Logs:");
-            Iterator it = bundle.getParcelableArrayList("android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS").iterator();
+            Iterator it =
+                    bundle.getParcelableArrayList(
+                                    "android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS")
+                            .iterator();
             while (it.hasNext()) {
-                BackupRestoreEventLogger.DataTypeResult dataTypeResult = (BackupRestoreEventLogger.DataTypeResult) it.next();
+                BackupRestoreEventLogger.DataTypeResult dataTypeResult =
+                        (BackupRestoreEventLogger.DataTypeResult) it.next();
                 int successCount = dataTypeResult.getSuccessCount() + dataTypeResult.getFailCount();
                 printWriter.println("\t\tData Type: " + dataTypeResult.getDataType());
-                printWriter.println("\t\t\tItem restored: " + dataTypeResult.getSuccessCount() + "/" + successCount);
+                printWriter.println(
+                        "\t\t\tItem restored: "
+                                + dataTypeResult.getSuccessCount()
+                                + "/"
+                                + successCount);
                 for (Map.Entry entry : dataTypeResult.getErrors().entrySet()) {
-                    printWriter.println("\t\t\tAgent Error - Category: " + ((String) entry.getKey()) + ", Count: " + entry.getValue());
+                    printWriter.println(
+                            "\t\t\tAgent Error - Category: "
+                                    + ((String) entry.getKey())
+                                    + ", Count: "
+                                    + entry.getValue());
                 }
             }
         }
@@ -48,21 +66,32 @@ public final class BackupManagerMonitorDumpsysUtils {
     public static void addExtrasIfAvailable(Bundle bundle, PrintWriter printWriter) {
         if (bundle.getInt("android.app.backup.extra.LOG_EVENT_ID") == 27) {
             if (bundle.containsKey("android.app.backup.extra.LOG_RESTORE_ANYWAY")) {
-                printWriter.println("\t\tPackage supports RestoreAnyVersion: " + bundle.getBoolean("android.app.backup.extra.LOG_RESTORE_ANYWAY"));
+                printWriter.println(
+                        "\t\tPackage supports RestoreAnyVersion: "
+                                + bundle.getBoolean("android.app.backup.extra.LOG_RESTORE_ANYWAY"));
             }
             if (bundle.containsKey("android.app.backup.extra.LOG_RESTORE_VERSION")) {
-                printWriter.println("\t\tPackage version on source: " + bundle.getLong("android.app.backup.extra.LOG_RESTORE_VERSION"));
+                printWriter.println(
+                        "\t\tPackage version on source: "
+                                + bundle.getLong("android.app.backup.extra.LOG_RESTORE_VERSION"));
             }
             if (bundle.containsKey("android.app.backup.extra.LOG_EVENT_PACKAGE_FULL_VERSION")) {
-                printWriter.println("\t\tPackage version on target: " + bundle.getLong("android.app.backup.extra.LOG_EVENT_PACKAGE_FULL_VERSION"));
+                printWriter.println(
+                        "\t\tPackage version on target: "
+                                + bundle.getLong(
+                                        "android.app.backup.extra.LOG_EVENT_PACKAGE_FULL_VERSION"));
             }
         }
         if (bundle.getInt("android.app.backup.extra.LOG_EVENT_ID") == 72) {
             if (bundle.containsKey("android.app.backup.extra.V_TO_U_DENYLIST")) {
-                printWriter.println("\t\tV to U Denylist : " + bundle.getString("android.app.backup.extra.V_TO_U_DENYLIST"));
+                printWriter.println(
+                        "\t\tV to U Denylist : "
+                                + bundle.getString("android.app.backup.extra.V_TO_U_DENYLIST"));
             }
             if (bundle.containsKey("android.app.backup.extra.V_TO_U_ALLOWLIST")) {
-                printWriter.println("\t\tV to U Allowllist : " + bundle.getString("android.app.backup.extra.V_TO_U_ALLOWLIST"));
+                printWriter.println(
+                        "\t\tV to U Allowllist : "
+                                + bundle.getString("android.app.backup.extra.V_TO_U_ALLOWLIST"));
             }
         }
     }
@@ -242,7 +271,9 @@ public final class BackupManagerMonitorDumpsysUtils {
                 if (bMMEventsFile.delete()) {
                     Slog.i("BackupManagerMonitorDumpsysUtils", "Deleted expired BMM Events");
                 } else {
-                    Slog.e("BackupManagerMonitorDumpsysUtils", "Unable to delete expired BMM Events");
+                    Slog.e(
+                            "BackupManagerMonitorDumpsysUtils",
+                            "Unable to delete expired BMM Events");
                 }
             }
             return true;
@@ -279,13 +310,17 @@ public final class BackupManagerMonitorDumpsysUtils {
             } finally {
             }
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("An error occurred while reading the date: "), "BackupManagerMonitorDumpsysUtils");
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("An error occurred while reading the date: "),
+                    "BackupManagerMonitorDumpsysUtils");
             return "Could not retrieve setup date";
         }
     }
 
     public File getSetUpDateFile() {
-        return new File(new File(Environment.getDataDirectory(), "backup"), "initialSetupTimestamp.txt");
+        return new File(
+                new File(Environment.getDataDirectory(), "backup"), "initialSetupTimestamp.txt");
     }
 
     public boolean isAfterRetentionPeriod() {
@@ -298,7 +333,11 @@ public final class BackupManagerMonitorDumpsysUtils {
             return false;
         }
         try {
-            boolean isDateAfterNMillisec = isDateAfterNMillisec(Long.parseLong(getSetUpDate()), System.currentTimeMillis(), getRetentionPeriodInMillisec());
+            boolean isDateAfterNMillisec =
+                    isDateAfterNMillisec(
+                            Long.parseLong(getSetUpDate()),
+                            System.currentTimeMillis(),
+                            getRetentionPeriodInMillisec());
             this.mIsAfterRetentionPeriod = isDateAfterNMillisec;
             this.mIsAfterRetentionPeriodCached = true;
             return isDateAfterNMillisec;
@@ -310,9 +349,13 @@ public final class BackupManagerMonitorDumpsysUtils {
     }
 
     public final void parseBackupManagerMonitorRestoreEventForDumpsys(Bundle bundle) {
-        if (!isAfterRetentionPeriod() && bundle.getInt("android.app.backup.extra.OPERATION_TYPE", -1) == 1) {
-            if (!bundle.containsKey("android.app.backup.extra.LOG_EVENT_ID") || !bundle.containsKey("android.app.backup.extra.LOG_EVENT_CATEGORY")) {
-                Slog.w("BackupManagerMonitorDumpsysUtils", "Event id and category are not optional fields.");
+        if (!isAfterRetentionPeriod()
+                && bundle.getInt("android.app.backup.extra.OPERATION_TYPE", -1) == 1) {
+            if (!bundle.containsKey("android.app.backup.extra.LOG_EVENT_ID")
+                    || !bundle.containsKey("android.app.backup.extra.LOG_EVENT_CATEGORY")) {
+                Slog.w(
+                        "BackupManagerMonitorDumpsysUtils",
+                        "Event id and category are not optional fields.");
                 return;
             }
             File bMMEventsFile = getBMMEventsFile();
@@ -320,7 +363,8 @@ public final class BackupManagerMonitorDumpsysUtils {
                 recordSetUpTimestamp();
             }
             if (!this.mIsFileLargerThanSizeLimit) {
-                this.mIsFileLargerThanSizeLimit = bMMEventsFile.length() > getBMMEventsFileSizeLimit();
+                this.mIsFileLargerThanSizeLimit =
+                        bMMEventsFile.length() > getBMMEventsFileSizeLimit();
             }
             if (this.mIsFileLargerThanSizeLimit) {
                 return;
@@ -333,15 +377,28 @@ public final class BackupManagerMonitorDumpsysUtils {
                         bundle.getInt("android.app.backup.extra.LOG_EVENT_CATEGORY");
                         int i = bundle.getInt("android.app.backup.extra.LOG_EVENT_ID");
                         if (i == 52) {
-                            if (!(bundle.containsKey("android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS") ? !bundle.getParcelableArrayList("android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS").isEmpty() : false)) {
+                            if (!(bundle.containsKey(
+                                            "android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS")
+                                    ? !bundle.getParcelableArrayList(
+                                                    "android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS")
+                                            .isEmpty()
+                                    : false)) {
                                 fastPrintWriter.close();
                                 fileOutputStream.close();
                                 return;
                             }
                         }
-                        fastPrintWriter.println("[" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(System.currentTimeMillis())) + "] - " + getId(i));
+                        fastPrintWriter.println(
+                                "["
+                                        + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+                                                .format(new Date(System.currentTimeMillis()))
+                                        + "] - "
+                                        + getId(i));
                         if (bundle.containsKey("android.app.backup.extra.LOG_EVENT_PACKAGE_NAME")) {
-                            fastPrintWriter.println("\tPackage: " + bundle.getString("android.app.backup.extra.LOG_EVENT_PACKAGE_NAME"));
+                            fastPrintWriter.println(
+                                    "\tPackage: "
+                                            + bundle.getString(
+                                                    "android.app.backup.extra.LOG_EVENT_PACKAGE_NAME"));
                         }
                         addAgentLogsIfAvailable(bundle, fastPrintWriter);
                         addExtrasIfAvailable(bundle, fastPrintWriter);
@@ -352,7 +409,10 @@ public final class BackupManagerMonitorDumpsysUtils {
                 } finally {
                 }
             } catch (IOException e) {
-                BootReceiver$$ExternalSyntheticOutline0.m("IO Exception when writing BMM events to file: ", e, "BackupManagerMonitorDumpsysUtils");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        "IO Exception when writing BMM events to file: ",
+                        e,
+                        "BackupManagerMonitorDumpsysUtils");
             }
         }
     }
@@ -373,7 +433,9 @@ public final class BackupManagerMonitorDumpsysUtils {
                 } finally {
                 }
             } catch (IOException e) {
-                Slog.w("BackupManagerMonitorDumpsysUtils", "An error occurred while recording the setup date: " + e.getMessage());
+                Slog.w(
+                        "BackupManagerMonitorDumpsysUtils",
+                        "An error occurred while recording the setup date: " + e.getMessage());
             }
         }
     }

@@ -7,7 +7,8 @@ public class AsymmetricCipherKeyPair {
     private AsymmetricKeyParameter privateParam;
     private AsymmetricKeyParameter publicParam;
 
-    public AsymmetricCipherKeyPair(AsymmetricKeyParameter publicParam, AsymmetricKeyParameter privateParam) {
+    public AsymmetricCipherKeyPair(
+            AsymmetricKeyParameter publicParam, AsymmetricKeyParameter privateParam) {
         this.publicParam = publicParam;
         this.privateParam = privateParam;
     }

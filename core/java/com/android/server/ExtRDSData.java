@@ -32,10 +32,34 @@ public class ExtRDSData {
     }
 
     private void logPackage() {
-        Log("rdsa: " + ((char) this.rdsa[1]) + "," + ((char) this.rdsa[0]) + " -- blersa: " + this.blera);
-        Log("rdsb: " + ((char) this.rdsb[1]) + "," + ((char) this.rdsb[0]) + " -- blersb: " + this.blerb);
-        Log("rdsc: " + ((char) this.rdsc[1]) + "," + ((char) this.rdsc[0]) + " -- blersc: " + this.blerc);
-        Log("rdsd: " + ((char) this.rdsd[1]) + "," + ((char) this.rdsd[0]) + " -- blersd: " + this.blerd);
+        Log(
+                "rdsa: "
+                        + ((char) this.rdsa[1])
+                        + ","
+                        + ((char) this.rdsa[0])
+                        + " -- blersa: "
+                        + this.blera);
+        Log(
+                "rdsb: "
+                        + ((char) this.rdsb[1])
+                        + ","
+                        + ((char) this.rdsb[0])
+                        + " -- blersb: "
+                        + this.blerb);
+        Log(
+                "rdsc: "
+                        + ((char) this.rdsc[1])
+                        + ","
+                        + ((char) this.rdsc[0])
+                        + " -- blersc: "
+                        + this.blerc);
+        Log(
+                "rdsd: "
+                        + ((char) this.rdsd[1])
+                        + ","
+                        + ((char) this.rdsd[0])
+                        + " -- blersd: "
+                        + this.blerd);
     }
 
     private void Log(String s) {

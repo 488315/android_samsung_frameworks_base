@@ -1,7 +1,5 @@
 package android.media.tv.interactive;
 
-import android.media.tv.interactive.ITvInteractiveAppServiceCallback;
-import android.media.tv.interactive.ITvInteractiveAppSessionCallback;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -14,42 +12,50 @@ import android.view.InputChannel;
 public interface ITvInteractiveAppService extends IInterface {
     public static final String DESCRIPTOR = "android.media.tv.interactive.ITvInteractiveAppService";
 
-    void createSession(InputChannel inputChannel, ITvInteractiveAppSessionCallback iTvInteractiveAppSessionCallback, String str, int i) throws RemoteException;
+    void createSession(
+            InputChannel inputChannel,
+            ITvInteractiveAppSessionCallback iTvInteractiveAppSessionCallback,
+            String str,
+            int i)
+            throws RemoteException;
 
     void registerAppLinkInfo(AppLinkInfo appLinkInfo) throws RemoteException;
 
-    void registerCallback(ITvInteractiveAppServiceCallback iTvInteractiveAppServiceCallback) throws RemoteException;
+    void registerCallback(ITvInteractiveAppServiceCallback iTvInteractiveAppServiceCallback)
+            throws RemoteException;
 
     void sendAppLinkCommand(Bundle bundle) throws RemoteException;
 
     void unregisterAppLinkInfo(AppLinkInfo appLinkInfo) throws RemoteException;
 
-    void unregisterCallback(ITvInteractiveAppServiceCallback iTvInteractiveAppServiceCallback) throws RemoteException;
+    void unregisterCallback(ITvInteractiveAppServiceCallback iTvInteractiveAppServiceCallback)
+            throws RemoteException;
 
     public static class Default implements ITvInteractiveAppService {
         @Override // android.media.tv.interactive.ITvInteractiveAppService
-        public void registerCallback(ITvInteractiveAppServiceCallback callback) throws RemoteException {
-        }
+        public void registerCallback(ITvInteractiveAppServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppService
-        public void unregisterCallback(ITvInteractiveAppServiceCallback callback) throws RemoteException {
-        }
+        public void unregisterCallback(ITvInteractiveAppServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppService
-        public void createSession(InputChannel channel, ITvInteractiveAppSessionCallback callback, String iAppServiceId, int type) throws RemoteException {
-        }
+        public void createSession(
+                InputChannel channel,
+                ITvInteractiveAppSessionCallback callback,
+                String iAppServiceId,
+                int type)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppService
-        public void registerAppLinkInfo(AppLinkInfo info) throws RemoteException {
-        }
+        public void registerAppLinkInfo(AppLinkInfo info) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppService
-        public void unregisterAppLinkInfo(AppLinkInfo info) throws RemoteException {
-        }
+        public void unregisterAppLinkInfo(AppLinkInfo info) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppService
-        public void sendAppLinkCommand(Bundle command) throws RemoteException {
-        }
+        public void sendAppLinkCommand(Bundle command) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -57,7 +63,7 @@ public interface ITvInteractiveAppService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvInteractiveAppService {
+    public abstract static class Stub extends Binder implements ITvInteractiveAppService {
         static final int TRANSACTION_createSession = 3;
         static final int TRANSACTION_registerAppLinkInfo = 4;
         static final int TRANSACTION_registerCallback = 1;
@@ -110,7 +116,8 @@ public interface ITvInteractiveAppService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITvInteractiveAppService.DESCRIPTOR);
             }
@@ -120,18 +127,24 @@ public interface ITvInteractiveAppService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ITvInteractiveAppServiceCallback _arg0 = ITvInteractiveAppServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    ITvInteractiveAppServiceCallback _arg0 =
+                            ITvInteractiveAppServiceCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallback(_arg0);
                     return true;
                 case 2:
-                    ITvInteractiveAppServiceCallback _arg02 = ITvInteractiveAppServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    ITvInteractiveAppServiceCallback _arg02 =
+                            ITvInteractiveAppServiceCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCallback(_arg02);
                     return true;
                 case 3:
                     InputChannel _arg03 = (InputChannel) data.readTypedObject(InputChannel.CREATOR);
-                    ITvInteractiveAppSessionCallback _arg1 = ITvInteractiveAppSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ITvInteractiveAppSessionCallback _arg1 =
+                            ITvInteractiveAppSessionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg2 = data.readString();
                     int _arg3 = data.readInt();
                     data.enforceNoDataAvail();
@@ -174,7 +187,8 @@ public interface ITvInteractiveAppService extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppService
-            public void registerCallback(ITvInteractiveAppServiceCallback callback) throws RemoteException {
+            public void registerCallback(ITvInteractiveAppServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
@@ -186,7 +200,8 @@ public interface ITvInteractiveAppService extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppService
-            public void unregisterCallback(ITvInteractiveAppServiceCallback callback) throws RemoteException {
+            public void unregisterCallback(ITvInteractiveAppServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
@@ -198,7 +213,12 @@ public interface ITvInteractiveAppService extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppService
-            public void createSession(InputChannel channel, ITvInteractiveAppSessionCallback callback, String iAppServiceId, int type) throws RemoteException {
+            public void createSession(
+                    InputChannel channel,
+                    ITvInteractiveAppSessionCallback callback,
+                    String iAppServiceId,
+                    int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);

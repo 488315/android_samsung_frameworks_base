@@ -13,8 +13,10 @@ import android.os.SystemClock;
 import android.os.UserHandle;
 import android.service.vr.IVrListener;
 import android.util.Slog;
+
 import com.android.server.input.KeyboardMetricsCollector;
 import com.android.server.vr.VrManagerService;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -36,29 +38,37 @@ public final class ManagedApplicationService {
     public boolean mRetrying;
     public final String mSettingsAction;
     public final int mUserId;
-    public final ManagedApplicationService$$ExternalSyntheticLambda0 mRetryRunnable = new Runnable() { // from class: com.android.server.utils.ManagedApplicationService$$ExternalSyntheticLambda0
-        @Override // java.lang.Runnable
-        public final void run() {
-            ManagedApplicationService managedApplicationService = ManagedApplicationService.this;
-            synchronized (managedApplicationService.mLock) {
-                try {
-                    if (managedApplicationService.mConnection == null) {
-                        return;
-                    }
-                    if (managedApplicationService.mRetrying) {
-                        Slog.i("ManagedApplicationService", "Attempting to reconnect " + managedApplicationService.mComponent + "...");
-                        managedApplicationService.disconnect();
-                        if (managedApplicationService.checkAndDeliverServiceDiedCbLocked()) {
-                            return;
+    public final ManagedApplicationService$$ExternalSyntheticLambda0 mRetryRunnable =
+            new Runnable() { // from class:
+                             // com.android.server.utils.ManagedApplicationService$$ExternalSyntheticLambda0
+                @Override // java.lang.Runnable
+                public final void run() {
+                    ManagedApplicationService managedApplicationService =
+                            ManagedApplicationService.this;
+                    synchronized (managedApplicationService.mLock) {
+                        try {
+                            if (managedApplicationService.mConnection == null) {
+                                return;
+                            }
+                            if (managedApplicationService.mRetrying) {
+                                Slog.i(
+                                        "ManagedApplicationService",
+                                        "Attempting to reconnect "
+                                                + managedApplicationService.mComponent
+                                                + "...");
+                                managedApplicationService.disconnect();
+                                if (managedApplicationService
+                                        .checkAndDeliverServiceDiedCbLocked()) {
+                                    return;
+                                }
+                                managedApplicationService.queueRetryLocked();
+                                managedApplicationService.connect();
+                            }
+                        } finally {
                         }
-                        managedApplicationService.queueRetryLocked();
-                        managedApplicationService.connect();
                     }
-                } finally {
                 }
-            }
-        }
-    };
+            };
     public final Object mLock = new Object();
     public long mNextRetryDurationMs = 2000;
     public final boolean mIsImportant = true;
@@ -66,8 +76,7 @@ public final class ManagedApplicationService {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.utils.ManagedApplicationService$1, reason: invalid class name */
     public final class AnonymousClass1 implements ServiceConnection {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // android.content.ServiceConnection
         public final void onBindingDied(ComponentName componentName) {
@@ -76,12 +85,16 @@ public final class ManagedApplicationService {
             Slog.w("ManagedApplicationService", "Service binding died: " + componentName);
             synchronized (ManagedApplicationService.this.mLock) {
                 try {
-                    ManagedApplicationService managedApplicationService = ManagedApplicationService.this;
+                    ManagedApplicationService managedApplicationService =
+                            ManagedApplicationService.this;
                     if (managedApplicationService.mConnection != this) {
                         return;
                     }
-                    managedApplicationService.mHandler.post(new ManagedApplicationService$$ExternalSyntheticLambda1(3, currentTimeMillis, this));
-                    ManagedApplicationService managedApplicationService2 = ManagedApplicationService.this;
+                    managedApplicationService.mHandler.post(
+                            new ManagedApplicationService$$ExternalSyntheticLambda1(
+                                    3, currentTimeMillis, this));
+                    ManagedApplicationService managedApplicationService2 =
+                            ManagedApplicationService.this;
                     managedApplicationService2.mBoundInterface = null;
                     managedApplicationService2.startRetriesLocked();
                 } catch (Throwable th) {
@@ -98,30 +111,42 @@ public final class ManagedApplicationService {
             Slog.i("ManagedApplicationService", "Service connected: " + componentName);
             synchronized (ManagedApplicationService.this.mLock) {
                 try {
-                    ManagedApplicationService managedApplicationService = ManagedApplicationService.this;
+                    ManagedApplicationService managedApplicationService =
+                            ManagedApplicationService.this;
                     if (managedApplicationService.mConnection != this) {
                         return;
                     }
-                    managedApplicationService.mHandler.post(new ManagedApplicationService$$ExternalSyntheticLambda1(1, currentTimeMillis, this));
-                    ManagedApplicationService managedApplicationService2 = ManagedApplicationService.this;
+                    managedApplicationService.mHandler.post(
+                            new ManagedApplicationService$$ExternalSyntheticLambda1(
+                                    1, currentTimeMillis, this));
+                    ManagedApplicationService managedApplicationService2 =
+                            ManagedApplicationService.this;
                     managedApplicationService2.mRetrying = false;
-                    managedApplicationService2.mHandler.removeCallbacks(managedApplicationService2.mRetryRunnable);
-                    ManagedApplicationService managedApplicationService3 = ManagedApplicationService.this;
+                    managedApplicationService2.mHandler.removeCallbacks(
+                            managedApplicationService2.mRetryRunnable);
+                    ManagedApplicationService managedApplicationService3 =
+                            ManagedApplicationService.this;
                     IInterface iInterface = null;
                     managedApplicationService3.mBoundInterface = null;
                     if (managedApplicationService3.mChecker != null) {
-                        managedApplicationService3.mBoundInterface = IVrListener.Stub.asInterface(iBinder);
-                        ManagedApplicationService managedApplicationService4 = ManagedApplicationService.this;
-                        VrManagerService.AnonymousClass3 anonymousClass3 = managedApplicationService4.mChecker;
+                        managedApplicationService3.mBoundInterface =
+                                IVrListener.Stub.asInterface(iBinder);
+                        ManagedApplicationService managedApplicationService4 =
+                                ManagedApplicationService.this;
+                        VrManagerService.AnonymousClass3 anonymousClass3 =
+                                managedApplicationService4.mChecker;
                         IInterface iInterface2 = managedApplicationService4.mBoundInterface;
                         anonymousClass3.getClass();
                         if (!(iInterface2 instanceof IVrListener)) {
                             ManagedApplicationService.this.mBoundInterface = null;
-                            Slog.w("ManagedApplicationService", "Invalid binder from " + componentName);
+                            Slog.w(
+                                    "ManagedApplicationService",
+                                    "Invalid binder from " + componentName);
                             ManagedApplicationService.this.startRetriesLocked();
                             return;
                         }
-                        ManagedApplicationService managedApplicationService5 = ManagedApplicationService.this;
+                        ManagedApplicationService managedApplicationService5 =
+                                ManagedApplicationService.this;
                         IInterface iInterface3 = managedApplicationService5.mBoundInterface;
                         anonymousClass6 = managedApplicationService5.mPendingEvent;
                         managedApplicationService5.mPendingEvent = null;
@@ -133,10 +158,17 @@ public final class ManagedApplicationService {
                         return;
                     }
                     try {
-                        ((IVrListener) iInterface).focusedActivityChanged(anonymousClass6.val$c, anonymousClass6.val$b, anonymousClass6.val$pid);
+                        ((IVrListener) iInterface)
+                                .focusedActivityChanged(
+                                        anonymousClass6.val$c,
+                                        anonymousClass6.val$b,
+                                        anonymousClass6.val$pid);
                     } catch (RemoteException | RuntimeException e) {
                         ManagedApplicationService.this.getClass();
-                        Slog.e("ManagedApplicationService", "Received exception from user service: ", e);
+                        Slog.e(
+                                "ManagedApplicationService",
+                                "Received exception from user service: ",
+                                e);
                         ManagedApplicationService.this.startRetriesLocked();
                     }
                 } catch (Throwable th) {
@@ -152,12 +184,16 @@ public final class ManagedApplicationService {
             Slog.w("ManagedApplicationService", "Service disconnected: " + componentName);
             synchronized (ManagedApplicationService.this.mLock) {
                 try {
-                    ManagedApplicationService managedApplicationService = ManagedApplicationService.this;
+                    ManagedApplicationService managedApplicationService =
+                            ManagedApplicationService.this;
                     if (managedApplicationService.mConnection != this) {
                         return;
                     }
-                    managedApplicationService.mHandler.post(new ManagedApplicationService$$ExternalSyntheticLambda1(2, currentTimeMillis, this));
-                    ManagedApplicationService managedApplicationService2 = ManagedApplicationService.this;
+                    managedApplicationService.mHandler.post(
+                            new ManagedApplicationService$$ExternalSyntheticLambda1(
+                                    2, currentTimeMillis, this));
+                    ManagedApplicationService managedApplicationService2 =
+                            ManagedApplicationService.this;
                     managedApplicationService2.mBoundInterface = null;
                     managedApplicationService2.startRetriesLocked();
                 } catch (Throwable th) {
@@ -185,10 +221,22 @@ public final class ManagedApplicationService {
             sb.append(simpleDateFormat.format(new Date(this.timestamp)));
             sb.append("   ");
             int i = this.event;
-            sb.append(i != 1 ? i != 2 ? i != 3 ? i != 4 ? "Unknown Event Occurred" : "Permanently Stopped" : "Binding Died For" : "Disconnected" : "Connected");
+            sb.append(
+                    i != 1
+                            ? i != 2
+                                    ? i != 3
+                                            ? i != 4
+                                                    ? "Unknown Event Occurred"
+                                                    : "Permanently Stopped"
+                                            : "Binding Died For"
+                                    : "Disconnected"
+                            : "Connected");
             sb.append(" Managed Service: ");
             ComponentName componentName = this.component;
-            sb.append(componentName == null ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG : componentName.flattenToString());
+            sb.append(
+                    componentName == null
+                            ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG
+                            : componentName.flattenToString());
             return sb.toString();
         }
     }
@@ -199,7 +247,16 @@ public final class ManagedApplicationService {
     }
 
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.utils.ManagedApplicationService$$ExternalSyntheticLambda0] */
-    public ManagedApplicationService(Context context, ComponentName componentName, int i, int i2, String str, VrManagerService.AnonymousClass3 anonymousClass3, int i3, Handler handler, VrManagerService.AnonymousClass1 anonymousClass1) {
+    public ManagedApplicationService(
+            Context context,
+            ComponentName componentName,
+            int i,
+            int i2,
+            String str,
+            VrManagerService.AnonymousClass3 anonymousClass3,
+            int i3,
+            Handler handler,
+            VrManagerService.AnonymousClass1 anonymousClass1) {
         this.mContext = context;
         this.mComponent = componentName;
         this.mUserId = i;
@@ -216,11 +273,15 @@ public final class ManagedApplicationService {
         if (i != 2 && (i != 3 || this.mRetryCount < 4)) {
             return false;
         }
-        Slog.e("ManagedApplicationService", "Service " + this.mComponent + " has died too much, not retrying.");
+        Slog.e(
+                "ManagedApplicationService",
+                "Service " + this.mComponent + " has died too much, not retrying.");
         if (this.mEventCb == null) {
             return true;
         }
-        this.mHandler.post(new ManagedApplicationService$$ExternalSyntheticLambda1(0, System.currentTimeMillis(), this));
+        this.mHandler.post(
+                new ManagedApplicationService$$ExternalSyntheticLambda1(
+                        0, System.currentTimeMillis(), this));
         return true;
     }
 
@@ -236,12 +297,19 @@ public final class ManagedApplicationService {
                     component.putExtra("android.intent.extra.client_label", i);
                 }
                 if (this.mSettingsAction != null) {
-                    component.putExtra("android.intent.extra.client_intent", PendingIntent.getActivity(this.mContext, 0, new Intent(this.mSettingsAction), 67108864));
+                    component.putExtra(
+                            "android.intent.extra.client_intent",
+                            PendingIntent.getActivity(
+                                    this.mContext, 0, new Intent(this.mSettingsAction), 67108864));
                 }
                 AnonymousClass1 anonymousClass1 = new AnonymousClass1();
                 this.mConnection = anonymousClass1;
                 try {
-                    if (!this.mContext.bindServiceAsUser(component, anonymousClass1, this.mIsImportant ? 67108929 : 67108865, new UserHandle(this.mUserId))) {
+                    if (!this.mContext.bindServiceAsUser(
+                            component,
+                            anonymousClass1,
+                            this.mIsImportant ? 67108929 : 67108865,
+                            new UserHandle(this.mUserId))) {
                         Slog.w("ManagedApplicationService", "Unable to bind service: " + component);
                         startRetriesLocked();
                     }

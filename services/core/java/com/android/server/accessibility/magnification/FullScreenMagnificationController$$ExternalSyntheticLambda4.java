@@ -4,17 +4,18 @@ import java.util.function.BiConsumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class FullScreenMagnificationController$$ExternalSyntheticLambda4 implements BiConsumer {
+public final /* synthetic */ class FullScreenMagnificationController$$ExternalSyntheticLambda4
+        implements BiConsumer {
     public final /* synthetic */ int $r8$classId;
 
     /* JADX WARN: Code restructure failed: missing block: B:62:0x005c, code lost:
-    
-        r8 = move-exception;
-     */
+
+       r8 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:65:0x009a, code lost:
-    
-        throw r8;
-     */
+
+       throw r8;
+    */
     @Override // java.util.function.BiConsumer
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -137,6 +138,9 @@ public final /* synthetic */ class FullScreenMagnificationController$$ExternalSy
             r9.resetAllIfNeeded(r8)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.magnification.FullScreenMagnificationController$$ExternalSyntheticLambda4.accept(java.lang.Object, java.lang.Object):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.magnification.FullScreenMagnificationController$$ExternalSyntheticLambda4.accept(java.lang.Object,"
+                    + " java.lang.Object):void");
     }
 }

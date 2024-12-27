@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.ContentProvider;
 import android.content.Intent;
@@ -16,22 +15,24 @@ import android.os.UserHandle;
 import android.util.Singleton;
 import android.view.RemoteAnimationDefinition;
 import android.window.SizeConfigurationBuckets;
+
 import com.android.internal.policy.IKeyguardDismissCallback;
 
 /* loaded from: classes.dex */
 public class ActivityClient {
-    private static final Singleton<ActivityClient> sInstance = new Singleton<ActivityClient>() { // from class: android.app.ActivityClient.1
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.util.Singleton
-        public ActivityClient create() {
-            return new ActivityClient();
-        }
-    };
-    private static final ActivityClientControllerSingleton INTERFACE_SINGLETON = new ActivityClientControllerSingleton();
+    private static final Singleton<ActivityClient> sInstance =
+            new Singleton<ActivityClient>() { // from class: android.app.ActivityClient.1
+                /* JADX INFO: Access modifiers changed from: protected */
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.util.Singleton
+                public ActivityClient create() {
+                    return new ActivityClient();
+                }
+            };
+    private static final ActivityClientControllerSingleton INTERFACE_SINGLETON =
+            new ActivityClientControllerSingleton();
 
-    private ActivityClient() {
-    }
+    private ActivityClient() {}
 
     public void activityIdle(IBinder token, Configuration config, boolean stopProfiling) {
         try {
@@ -73,9 +74,14 @@ public class ActivityClient {
         }
     }
 
-    public void activityStopped(IBinder token, Bundle state, PersistableBundle persistentState, CharSequence description) {
+    public void activityStopped(
+            IBinder token,
+            Bundle state,
+            PersistableBundle persistentState,
+            CharSequence description) {
         try {
-            getActivityClientController().activityStopped(token, state, persistentState, description);
+            getActivityClientController()
+                    .activityStopped(token, state, persistentState, description);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -129,9 +135,15 @@ public class ActivityClient {
         }
     }
 
-    boolean navigateUpTo(IBinder token, Intent destIntent, String resolvedType, int resultCode, Intent resultData) {
+    boolean navigateUpTo(
+            IBinder token,
+            Intent destIntent,
+            String resolvedType,
+            int resultCode,
+            Intent resultData) {
         try {
-            return getActivityClientController().navigateUpTo(token, destIntent, resolvedType, resultCode, resultData);
+            return getActivityClientController()
+                    .navigateUpTo(token, destIntent, resolvedType, resultCode, resultData);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -145,9 +157,11 @@ public class ActivityClient {
         }
     }
 
-    public boolean finishActivity(IBinder token, int resultCode, Intent resultData, int finishTask) {
+    public boolean finishActivity(
+            IBinder token, int resultCode, Intent resultData, int finishTask) {
         try {
-            return getActivityClientController().finishActivity(token, resultCode, resultData, finishTask);
+            return getActivityClientController()
+                    .finishActivity(token, resultCode, resultData, finishTask);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -267,15 +281,23 @@ public class ActivityClient {
 
     public String getActivityCallerPackage(IBinder activityToken, IBinder callerToken) {
         try {
-            return getActivityClientController().getActivityCallerPackage(activityToken, callerToken);
+            return getActivityClientController()
+                    .getActivityCallerPackage(activityToken, callerToken);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public int checkActivityCallerContentUriPermission(IBinder activityToken, IBinder callerToken, Uri uri, int modeFlags) {
+    public int checkActivityCallerContentUriPermission(
+            IBinder activityToken, IBinder callerToken, Uri uri, int modeFlags) {
         try {
-            return getActivityClientController().checkActivityCallerContentUriPermission(activityToken, callerToken, ContentProvider.getUriWithoutUserId(uri), modeFlags, ContentProvider.getUserIdFromUri(uri, UserHandle.getCallingUserId()));
+            return getActivityClientController()
+                    .checkActivityCallerContentUriPermission(
+                            activityToken,
+                            callerToken,
+                            ContentProvider.getUriWithoutUserId(uri),
+                            modeFlags,
+                            ContentProvider.getUserIdFromUri(uri, UserHandle.getCallingUserId()));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -307,7 +329,8 @@ public class ActivityClient {
 
     boolean convertFromTranslucent(IBinder token, boolean skipSetWindowOpaque) {
         try {
-            return getActivityClientController().convertFromTranslucentOp(token, skipSetWindowOpaque);
+            return getActivityClientController()
+                    .convertFromTranslucentOp(token, skipSetWindowOpaque);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -489,9 +512,11 @@ public class ActivityClient {
         }
     }
 
-    void overrideActivityTransition(IBinder token, boolean open, int enterAnim, int exitAnim, int backgroundColor) {
+    void overrideActivityTransition(
+            IBinder token, boolean open, int enterAnim, int exitAnim, int backgroundColor) {
         try {
-            getActivityClientController().overrideActivityTransition(token, open, enterAnim, exitAnim, backgroundColor);
+            getActivityClientController()
+                    .overrideActivityTransition(token, open, enterAnim, exitAnim, backgroundColor);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -505,25 +530,32 @@ public class ActivityClient {
         }
     }
 
-    void overridePendingTransition(IBinder token, String packageName, int enterAnim, int exitAnim, int backgroundColor) {
+    void overridePendingTransition(
+            IBinder token, String packageName, int enterAnim, int exitAnim, int backgroundColor) {
         try {
-            getActivityClientController().overridePendingTransition(token, packageName, enterAnim, exitAnim, backgroundColor);
+            getActivityClientController()
+                    .overridePendingTransition(
+                            token, packageName, enterAnim, exitAnim, backgroundColor);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
     }
 
-    void overridePendingTaskTransition(IBinder token, String packageName, int enterAnim, int exitAnim) {
+    void overridePendingTaskTransition(
+            IBinder token, String packageName, int enterAnim, int exitAnim) {
         try {
-            getActivityClientController().overridePendingTaskTransition(token, packageName, enterAnim, exitAnim);
+            getActivityClientController()
+                    .overridePendingTaskTransition(token, packageName, enterAnim, exitAnim);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
     }
 
-    void adjustPopOverOptions(IBinder token, int[] widthDp, int[] heightDp, Point[] marginDp, int[] position) {
+    void adjustPopOverOptions(
+            IBinder token, int[] widthDp, int[] heightDp, Point[] marginDp, int[] position) {
         try {
-            getActivityClientController().adjustPopOverOptions(token, widthDp, heightDp, marginDp, position);
+            getActivityClientController()
+                    .adjustPopOverOptions(token, widthDp, heightDp, marginDp, position);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -593,9 +625,11 @@ public class ActivityClient {
         }
     }
 
-    public boolean isRequestedToLaunchInTaskFragment(IBinder activityToken, IBinder taskFragmentToken) {
+    public boolean isRequestedToLaunchInTaskFragment(
+            IBinder activityToken, IBinder taskFragmentToken) {
         try {
-            return getActivityClientController().isRequestedToLaunchInTaskFragment(activityToken, taskFragmentToken);
+            return getActivityClientController()
+                    .isRequestedToLaunchInTaskFragment(activityToken, taskFragmentToken);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -613,7 +647,8 @@ public class ActivityClient {
         return sInstance.get();
     }
 
-    public static IActivityClientController setActivityClientController(IActivityClientController activityClientController) {
+    public static IActivityClientController setActivityClientController(
+            IActivityClientController activityClientController) {
         INTERFACE_SINGLETON.mKnownInstance = activityClientController;
         return activityClientController;
     }
@@ -623,11 +658,11 @@ public class ActivityClient {
         return controller != null ? controller : INTERFACE_SINGLETON.get();
     }
 
-    private static class ActivityClientControllerSingleton extends Singleton<IActivityClientController> {
+    private static class ActivityClientControllerSingleton
+            extends Singleton<IActivityClientController> {
         IActivityClientController mKnownInstance;
 
-        private ActivityClientControllerSingleton() {
-        }
+        private ActivityClientControllerSingleton() {}
 
         /* JADX INFO: Access modifiers changed from: protected */
         /* JADX WARN: Can't rename method to resolve collision */

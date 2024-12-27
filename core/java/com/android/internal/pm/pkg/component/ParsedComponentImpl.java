@@ -7,9 +7,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+
 import com.android.internal.pm.parsing.pkg.PackageImpl;
 import com.android.internal.pm.pkg.parsing.ParsingUtils;
 import com.android.internal.util.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -219,6 +221,5 @@ public abstract class ParsedComponentImpl implements ParsedComponent, Parcelable
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

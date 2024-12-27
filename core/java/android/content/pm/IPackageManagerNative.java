@@ -1,6 +1,5 @@
 package android.content.pm;
 
-import android.content.pm.IStagedApexObserver;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -41,7 +40,8 @@ public interface IPackageManagerNative extends IInterface {
 
     void registerStagedApexObserver(IStagedApexObserver iStagedApexObserver) throws RemoteException;
 
-    void unregisterStagedApexObserver(IStagedApexObserver iStagedApexObserver) throws RemoteException;
+    void unregisterStagedApexObserver(IStagedApexObserver iStagedApexObserver)
+            throws RemoteException;
 
     public static class Default implements IPackageManagerNative {
         @Override // android.content.pm.IPackageManagerNative
@@ -50,7 +50,8 @@ public interface IPackageManagerNative extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManagerNative
-        public int getPackageUid(String packageName, long flags, int userId) throws RemoteException {
+        public int getPackageUid(String packageName, long flags, int userId)
+                throws RemoteException {
             return 0;
         }
 
@@ -65,7 +66,8 @@ public interface IPackageManagerNative extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManagerNative
-        public boolean[] isAudioPlaybackCaptureAllowed(String[] packageNames) throws RemoteException {
+        public boolean[] isAudioPlaybackCaptureAllowed(String[] packageNames)
+                throws RemoteException {
             return null;
         }
 
@@ -85,7 +87,8 @@ public interface IPackageManagerNative extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManagerNative
-        public boolean hasSha256SigningCertificate(String packageName, byte[] certificate) throws RemoteException {
+        public boolean hasSha256SigningCertificate(String packageName, byte[] certificate)
+                throws RemoteException {
             return false;
         }
 
@@ -100,12 +103,12 @@ public interface IPackageManagerNative extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManagerNative
-        public void registerStagedApexObserver(IStagedApexObserver observer) throws RemoteException {
-        }
+        public void registerStagedApexObserver(IStagedApexObserver observer)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManagerNative
-        public void unregisterStagedApexObserver(IStagedApexObserver observer) throws RemoteException {
-        }
+        public void unregisterStagedApexObserver(IStagedApexObserver observer)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManagerNative
         public String[] getStagedApexModuleNames() throws RemoteException {
@@ -123,7 +126,7 @@ public interface IPackageManagerNative extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPackageManagerNative {
+    public abstract static class Stub extends Binder implements IPackageManagerNative {
         public static final String DESCRIPTOR = "android.content.pm.IPackageManagerNative";
         static final int TRANSACTION_getInstallerForPackage = 3;
         static final int TRANSACTION_getLocationFlags = 6;
@@ -162,7 +165,8 @@ public interface IPackageManagerNative extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -251,13 +255,15 @@ public interface IPackageManagerNative extends IInterface {
                     reply.writeBoolean(_result11);
                     return true;
                 case 12:
-                    IStagedApexObserver _arg011 = IStagedApexObserver.Stub.asInterface(data.readStrongBinder());
+                    IStagedApexObserver _arg011 =
+                            IStagedApexObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerStagedApexObserver(_arg011);
                     reply.writeNoException();
                     return true;
                 case 13:
-                    IStagedApexObserver _arg012 = IStagedApexObserver.Stub.asInterface(data.readStrongBinder());
+                    IStagedApexObserver _arg012 =
+                            IStagedApexObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterStagedApexObserver(_arg012);
                     reply.writeNoException();
@@ -313,7 +319,8 @@ public interface IPackageManagerNative extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManagerNative
-            public int getPackageUid(String packageName, long flags, int userId) throws RemoteException {
+            public int getPackageUid(String packageName, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -366,7 +373,8 @@ public interface IPackageManagerNative extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManagerNative
-            public boolean[] isAudioPlaybackCaptureAllowed(String[] packageNames) throws RemoteException {
+            public boolean[] isAudioPlaybackCaptureAllowed(String[] packageNames)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -433,7 +441,8 @@ public interface IPackageManagerNative extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManagerNative
-            public boolean hasSha256SigningCertificate(String packageName, byte[] certificate) throws RemoteException {
+            public boolean hasSha256SigningCertificate(String packageName, byte[] certificate)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -468,7 +477,8 @@ public interface IPackageManagerNative extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManagerNative
-            public boolean hasSystemFeature(String featureName, int version) throws RemoteException {
+            public boolean hasSystemFeature(String featureName, int version)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -486,7 +496,8 @@ public interface IPackageManagerNative extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManagerNative
-            public void registerStagedApexObserver(IStagedApexObserver observer) throws RemoteException {
+            public void registerStagedApexObserver(IStagedApexObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -501,7 +512,8 @@ public interface IPackageManagerNative extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManagerNative
-            public void unregisterStagedApexObserver(IStagedApexObserver observer) throws RemoteException {
+            public void unregisterStagedApexObserver(IStagedApexObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -540,7 +552,8 @@ public interface IPackageManagerNative extends IInterface {
                     _data.writeString(moduleName);
                     this.mRemote.transact(15, _data, _reply, 0);
                     _reply.readException();
-                    StagedApexInfo _result = (StagedApexInfo) _reply.readTypedObject(StagedApexInfo.CREATOR);
+                    StagedApexInfo _result =
+                            (StagedApexInfo) _reply.readTypedObject(StagedApexInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

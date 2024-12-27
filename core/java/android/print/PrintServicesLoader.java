@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Loader;
 import android.os.Handler;
 import android.os.Message;
-import android.print.PrintManager;
 import android.printservice.PrintServiceInfo;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -37,12 +38,15 @@ public class PrintServicesLoader extends Loader<List<PrintServiceInfo>> {
 
     @Override // android.content.Loader
     protected void onStartLoading() {
-        this.mListener = new PrintManager.PrintServicesChangeListener() { // from class: android.print.PrintServicesLoader.1
-            @Override // android.print.PrintManager.PrintServicesChangeListener
-            public void onPrintServicesChanged() {
-                PrintServicesLoader.this.queueNewResult();
-            }
-        };
+        this.mListener =
+                new PrintManager
+                        .PrintServicesChangeListener() { // from class:
+                                                         // android.print.PrintServicesLoader.1
+                    @Override // android.print.PrintManager.PrintServicesChangeListener
+                    public void onPrintServicesChanged() {
+                        PrintServicesLoader.this.queueNewResult();
+                    }
+                };
         this.mPrintManager.addPrintServicesChangeListener(this.mListener, null);
         deliverResult(this.mPrintManager.getPrintServices(this.mSelectionFlags));
     }

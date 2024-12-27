@@ -4,12 +4,16 @@ import com.android.internal.os.anr.AnrLatencyTracker;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class ProcessErrorStateRecord$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class ProcessErrorStateRecord$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ ProcessErrorStateRecord f$0;
     public final /* synthetic */ AnrLatencyTracker f$1;
     public final /* synthetic */ String f$2;
 
-    public /* synthetic */ ProcessErrorStateRecord$$ExternalSyntheticLambda0(ProcessErrorStateRecord processErrorStateRecord, AnrLatencyTracker anrLatencyTracker, String str) {
+    public /* synthetic */ ProcessErrorStateRecord$$ExternalSyntheticLambda0(
+            ProcessErrorStateRecord processErrorStateRecord,
+            AnrLatencyTracker anrLatencyTracker,
+            String str) {
         this.f$0 = processErrorStateRecord;
         this.f$1 = anrLatencyTracker;
         this.f$2 = str;

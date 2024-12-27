@@ -5,22 +5,20 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.ims.internal.IImsExternalCallStateListener;
 
 /* loaded from: classes5.dex */
 public interface IImsMultiEndpoint extends IInterface {
     void requestImsExternalCallStateInfo() throws RemoteException;
 
-    void setListener(IImsExternalCallStateListener iImsExternalCallStateListener) throws RemoteException;
+    void setListener(IImsExternalCallStateListener iImsExternalCallStateListener)
+            throws RemoteException;
 
     public static class Default implements IImsMultiEndpoint {
         @Override // com.android.ims.internal.IImsMultiEndpoint
-        public void setListener(IImsExternalCallStateListener listener) throws RemoteException {
-        }
+        public void setListener(IImsExternalCallStateListener listener) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsMultiEndpoint
-        public void requestImsExternalCallStateInfo() throws RemoteException {
-        }
+        public void requestImsExternalCallStateInfo() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +26,7 @@ public interface IImsMultiEndpoint extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsMultiEndpoint {
+    public abstract static class Stub extends Binder implements IImsMultiEndpoint {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsMultiEndpoint";
         static final int TRANSACTION_requestImsExternalCallStateInfo = 2;
         static final int TRANSACTION_setListener = 1;
@@ -70,7 +68,8 @@ public interface IImsMultiEndpoint extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -80,7 +79,8 @@ public interface IImsMultiEndpoint extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IImsExternalCallStateListener _arg0 = IImsExternalCallStateListener.Stub.asInterface(data.readStrongBinder());
+                    IImsExternalCallStateListener _arg0 =
+                            IImsExternalCallStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setListener(_arg0);
                     reply.writeNoException();

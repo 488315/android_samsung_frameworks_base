@@ -2,16 +2,23 @@ package com.android.internal.widget.helper;
 
 import android.graphics.Canvas;
 import android.view.View;
+
 import com.android.internal.R;
 import com.android.internal.widget.RecyclerView;
 
 /* loaded from: classes5.dex */
 class ItemTouchUIUtilImpl implements ItemTouchUIUtil {
-    ItemTouchUIUtilImpl() {
-    }
+    ItemTouchUIUtilImpl() {}
 
     @Override // com.android.internal.widget.helper.ItemTouchUIUtil
-    public void onDraw(Canvas c, RecyclerView recyclerView, View view, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+    public void onDraw(
+            Canvas c,
+            RecyclerView recyclerView,
+            View view,
+            float dX,
+            float dY,
+            int actionState,
+            boolean isCurrentlyActive) {
         if (isCurrentlyActive) {
             Object originalElevation = view.getTag(R.id.item_touch_helper_previous_elevation);
             if (originalElevation == null) {
@@ -52,10 +59,15 @@ class ItemTouchUIUtilImpl implements ItemTouchUIUtil {
     }
 
     @Override // com.android.internal.widget.helper.ItemTouchUIUtil
-    public void onSelected(View view) {
-    }
+    public void onSelected(View view) {}
 
     @Override // com.android.internal.widget.helper.ItemTouchUIUtil
-    public void onDrawOver(Canvas c, RecyclerView recyclerView, View view, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-    }
+    public void onDrawOver(
+            Canvas c,
+            RecyclerView recyclerView,
+            View view,
+            float dX,
+            float dY,
+            int actionState,
+            boolean isCurrentlyActive) {}
 }

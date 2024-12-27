@@ -19,7 +19,8 @@ public interface IVideoProvider extends IInterface {
 
     void requestCameraCapabilities() throws RemoteException;
 
-    void sendSessionModifyRequest(VideoProfile videoProfile, VideoProfile videoProfile2) throws RemoteException;
+    void sendSessionModifyRequest(VideoProfile videoProfile, VideoProfile videoProfile2)
+            throws RemoteException;
 
     void sendSessionModifyResponse(VideoProfile videoProfile) throws RemoteException;
 
@@ -37,52 +38,43 @@ public interface IVideoProvider extends IInterface {
 
     public static class Default implements IVideoProvider {
         @Override // com.android.internal.telecom.IVideoProvider
-        public void addVideoCallback(IBinder videoCallbackBinder) throws RemoteException {
-        }
+        public void addVideoCallback(IBinder videoCallbackBinder) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IVideoProvider
-        public void removeVideoCallback(IBinder videoCallbackBinder) throws RemoteException {
-        }
+        public void removeVideoCallback(IBinder videoCallbackBinder) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IVideoProvider
-        public void setCamera(String cameraId, String mCallingPackageName, int targetSdkVersion) throws RemoteException {
-        }
+        public void setCamera(String cameraId, String mCallingPackageName, int targetSdkVersion)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IVideoProvider
-        public void setPreviewSurface(Surface surface) throws RemoteException {
-        }
+        public void setPreviewSurface(Surface surface) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IVideoProvider
-        public void setDisplaySurface(Surface surface) throws RemoteException {
-        }
+        public void setDisplaySurface(Surface surface) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IVideoProvider
-        public void setDeviceOrientation(int rotation) throws RemoteException {
-        }
+        public void setDeviceOrientation(int rotation) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IVideoProvider
-        public void setZoom(float value) throws RemoteException {
-        }
+        public void setZoom(float value) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IVideoProvider
-        public void sendSessionModifyRequest(VideoProfile fromProfile, VideoProfile toProfile) throws RemoteException {
-        }
+        public void sendSessionModifyRequest(VideoProfile fromProfile, VideoProfile toProfile)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IVideoProvider
-        public void sendSessionModifyResponse(VideoProfile responseProfile) throws RemoteException {
-        }
+        public void sendSessionModifyResponse(VideoProfile responseProfile)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IVideoProvider
-        public void requestCameraCapabilities() throws RemoteException {
-        }
+        public void requestCameraCapabilities() throws RemoteException {}
 
         @Override // com.android.internal.telecom.IVideoProvider
-        public void requestCallDataUsage() throws RemoteException {
-        }
+        public void requestCallDataUsage() throws RemoteException {}
 
         @Override // com.android.internal.telecom.IVideoProvider
-        public void setPauseImage(Uri uri) throws RemoteException {
-        }
+        public void setPauseImage(Uri uri) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -90,7 +82,7 @@ public interface IVideoProvider extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVideoProvider {
+    public abstract static class Stub extends Binder implements IVideoProvider {
         public static final String DESCRIPTOR = "com.android.internal.telecom.IVideoProvider";
         static final int TRANSACTION_addVideoCallback = 1;
         static final int TRANSACTION_removeVideoCallback = 2;
@@ -162,7 +154,8 @@ public interface IVideoProvider extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -276,7 +269,8 @@ public interface IVideoProvider extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IVideoProvider
-            public void setCamera(String cameraId, String mCallingPackageName, int targetSdkVersion) throws RemoteException {
+            public void setCamera(String cameraId, String mCallingPackageName, int targetSdkVersion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -338,7 +332,8 @@ public interface IVideoProvider extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IVideoProvider
-            public void sendSessionModifyRequest(VideoProfile fromProfile, VideoProfile toProfile) throws RemoteException {
+            public void sendSessionModifyRequest(VideoProfile fromProfile, VideoProfile toProfile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -351,7 +346,8 @@ public interface IVideoProvider extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IVideoProvider
-            public void sendSessionModifyResponse(VideoProfile responseProfile) throws RemoteException {
+            public void sendSessionModifyResponse(VideoProfile responseProfile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

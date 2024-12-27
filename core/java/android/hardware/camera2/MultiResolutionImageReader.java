@@ -5,7 +5,9 @@ import android.media.Image;
 import android.media.ImageReader;
 import android.util.Size;
 import android.view.Surface;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Collection;
 import java.util.concurrent.Executor;
 
@@ -17,14 +19,17 @@ public class MultiResolutionImageReader implements AutoCloseable {
     private final ImageReader[] mReaders;
     private final MultiResolutionStreamInfo[] mStreamInfo;
 
-    public MultiResolutionImageReader(Collection<MultiResolutionStreamInfo> streams, int format, int maxImages) {
+    public MultiResolutionImageReader(
+            Collection<MultiResolutionStreamInfo> streams, int format, int maxImages) {
         this.mFormat = format;
         this.mMaxImages = maxImages;
         if (streams == null || streams.size() <= 1) {
-            throw new IllegalArgumentException("The streams info collection must contain at least 2 entries");
+            throw new IllegalArgumentException(
+                    "The streams info collection must contain at least 2 entries");
         }
         if (this.mMaxImages < 1) {
-            throw new IllegalArgumentException("Maximum outstanding image count must be at least 1");
+            throw new IllegalArgumentException(
+                    "Maximum outstanding image count must be at least 1");
         }
         if (format == 17) {
             throw new IllegalArgumentException("NV21 format is not supported");
@@ -34,20 +39,25 @@ public class MultiResolutionImageReader implements AutoCloseable {
         this.mStreamInfo = new MultiResolutionStreamInfo[numImageReaders];
         int index = 0;
         for (MultiResolutionStreamInfo streamInfo : streams) {
-            this.mReaders[index] = ImageReader.newInstance(streamInfo.getWidth(), streamInfo.getHeight(), format, maxImages);
+            this.mReaders[index] =
+                    ImageReader.newInstance(
+                            streamInfo.getWidth(), streamInfo.getHeight(), format, maxImages);
             this.mStreamInfo[index] = streamInfo;
             index++;
         }
     }
 
-    public MultiResolutionImageReader(Collection<MultiResolutionStreamInfo> streams, int format, int maxImages, long usage) {
+    public MultiResolutionImageReader(
+            Collection<MultiResolutionStreamInfo> streams, int format, int maxImages, long usage) {
         this.mFormat = format;
         this.mMaxImages = maxImages;
         if (streams == null || streams.size() <= 1) {
-            throw new IllegalArgumentException("The streams info collection must contain at least 2 entries");
+            throw new IllegalArgumentException(
+                    "The streams info collection must contain at least 2 entries");
         }
         if (this.mMaxImages < 1) {
-            throw new IllegalArgumentException("Maximum outstanding image count must be at least 1");
+            throw new IllegalArgumentException(
+                    "Maximum outstanding image count must be at least 1");
         }
         if (format == 17) {
             throw new IllegalArgumentException("NV21 format is not supported");
@@ -57,13 +67,20 @@ public class MultiResolutionImageReader implements AutoCloseable {
         this.mStreamInfo = new MultiResolutionStreamInfo[numImageReaders];
         int index = 0;
         for (MultiResolutionStreamInfo streamInfo : streams) {
-            this.mReaders[index] = ImageReader.newInstance(streamInfo.getWidth(), streamInfo.getHeight(), format, maxImages, usage);
+            this.mReaders[index] =
+                    ImageReader.newInstance(
+                            streamInfo.getWidth(),
+                            streamInfo.getHeight(),
+                            format,
+                            maxImages,
+                            usage);
             this.mStreamInfo[index] = streamInfo;
             index++;
         }
     }
 
-    public void setOnImageAvailableListener(ImageReader.OnImageAvailableListener listener, Executor executor) {
+    public void setOnImageAvailableListener(
+            ImageReader.OnImageAvailableListener listener, Executor executor) {
         for (int i = 0; i < this.mReaders.length; i++) {
             this.mReaders[i].setOnImageAvailableListenerWithExecutor(listener, executor);
         }
@@ -108,11 +125,15 @@ public class MultiResolutionImageReader implements AutoCloseable {
         Preconditions.checkNotNull(configuredSize, "configuredSize must not be null");
         Preconditions.checkNotNull(physicalCameraId, "physicalCameraId must not be null");
         for (int i = 0; i < this.mStreamInfo.length; i++) {
-            if (this.mStreamInfo[i].getWidth() == configuredSize.getWidth() && this.mStreamInfo[i].getHeight() == configuredSize.getHeight() && physicalCameraId.equals(this.mStreamInfo[i].getPhysicalCameraId())) {
+            if (this.mStreamInfo[i].getWidth() == configuredSize.getWidth()
+                    && this.mStreamInfo[i].getHeight() == configuredSize.getHeight()
+                    && physicalCameraId.equals(this.mStreamInfo[i].getPhysicalCameraId())) {
                 return this.mReaders[i].getSurface();
             }
         }
-        throw new IllegalArgumentException("configuredSize and physicalCameraId don't match with this MultiResolutionImageReader");
+        throw new IllegalArgumentException(
+                "configuredSize and physicalCameraId don't match with this"
+                        + " MultiResolutionImageReader");
     }
 
     public Surface getSurface() {
@@ -134,6 +155,7 @@ public class MultiResolutionImageReader implements AutoCloseable {
                 return this.mStreamInfo[i];
             }
         }
-        throw new IllegalArgumentException("ImageReader doesn't belong to this multi-resolution imagereader");
+        throw new IllegalArgumentException(
+                "ImageReader doesn't belong to this multi-resolution imagereader");
     }
 }

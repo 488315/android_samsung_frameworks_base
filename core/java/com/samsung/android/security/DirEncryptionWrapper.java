@@ -10,8 +10,11 @@ import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.util.Log;
+
 import com.android.internal.widget.LockPatternUtils;
+
 import com.samsung.android.media.AudioParameter;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -43,11 +46,15 @@ public class DirEncryptionWrapper {
     }
 
     private VolumeInfo getVolumeInfo() {
-        StorageManager storageManager = (StorageManager) this.mContext.getSystemService(Context.STORAGE_SERVICE);
+        StorageManager storageManager =
+                (StorageManager) this.mContext.getSystemService(Context.STORAGE_SERVICE);
         List<VolumeInfo> volumes = storageManager.getVolumes();
         Collections.sort(volumes, VolumeInfo.getDescriptionComparator());
         for (VolumeInfo vol : volumes) {
-            if (vol != null && vol.getType() == 0 && vol.getDisk() != null && vol.getDisk().isSd()) {
+            if (vol != null
+                    && vol.getType() == 0
+                    && vol.getDisk() != null
+                    && vol.getDisk().isSd()) {
                 return vol;
             }
         }
@@ -149,7 +156,8 @@ public class DirEncryptionWrapper {
         if (this.mStorageManager != null) {
             return false;
         }
-        this.mStorageManager = (StorageManager) this.mContext.getSystemService(Context.STORAGE_SERVICE);
+        this.mStorageManager =
+                (StorageManager) this.mContext.getSystemService(Context.STORAGE_SERVICE);
         if (this.mStorageManager == null) {
             return false;
         }

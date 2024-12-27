@@ -17,17 +17,18 @@ import android.view.Display;
 import android.view.DisplayShape;
 import android.view.Surface;
 import android.view.SurfaceControl;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 import com.android.server.chimera.AggressivePolicyHandler$$ExternalSyntheticOutline0;
-import com.android.server.display.DisplayAdapter;
-import com.android.server.display.DisplayManagerService;
 import com.android.server.display.feature.DisplayManagerFlags;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -77,7 +78,10 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
                     this.mCallback.onStopped();
                 }
             } catch (RemoteException e) {
-                Slog.w("VirtualDisplayAdapter", "Failed to notify listener of virtual display event.", e);
+                Slog.w(
+                        "VirtualDisplayAdapter",
+                        "Failed to notify listener of virtual display event.",
+                        e);
             }
         }
     }
@@ -90,15 +94,14 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
             this.mAppToken = iBinder;
         }
 
-        public final void onCapturedContentResize(int i, int i2) {
-        }
+        public final void onCapturedContentResize(int i, int i2) {}
 
-        public final void onCapturedContentVisibilityChanged(boolean z) {
-        }
+        public final void onCapturedContentVisibilityChanged(boolean z) {}
 
         public final void onStop() {
             synchronized (VirtualDisplayAdapter.this.mSyncRoot) {
-                VirtualDisplayAdapter.m464$$Nest$mhandleMediaProjectionStoppedLocked(VirtualDisplayAdapter.this, this.mAppToken);
+                VirtualDisplayAdapter.m464$$Nest$mhandleMediaProjectionStoppedLocked(
+                        VirtualDisplayAdapter.this, this.mAppToken);
             }
         }
     }
@@ -111,7 +114,8 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class VirtualDisplayDevice extends DisplayDevice implements IBinder.DeathRecipient {
+    public final class VirtualDisplayDevice extends DisplayDevice
+            implements IBinder.DeathRecipient {
         public final IBinder mAppToken;
         public final Callback mCallback;
         public int mDensityDpi;
@@ -135,8 +139,24 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
         public Surface mSurface;
         public int mWidth;
 
-        public VirtualDisplayDevice(IBinder iBinder, IBinder iBinder2, int i, String str, Surface surface, int i2, Callback callback, IMediaProjection iMediaProjection, MediaProjectionCallback mediaProjectionCallback, String str2, VirtualDisplayConfig virtualDisplayConfig) {
-            super(VirtualDisplayAdapter.this, iBinder, str2, VirtualDisplayAdapter.this.mContext, false);
+        public VirtualDisplayDevice(
+                IBinder iBinder,
+                IBinder iBinder2,
+                int i,
+                String str,
+                Surface surface,
+                int i2,
+                Callback callback,
+                IMediaProjection iMediaProjection,
+                MediaProjectionCallback mediaProjectionCallback,
+                String str2,
+                VirtualDisplayConfig virtualDisplayConfig) {
+            super(
+                    VirtualDisplayAdapter.this,
+                    iBinder,
+                    str2,
+                    VirtualDisplayAdapter.this.mContext,
+                    false);
             this.mAppToken = iBinder2;
             this.mOwnerUid = i;
             this.mOwnerPackageName = str;
@@ -148,8 +168,20 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
             this.mRequestedRefreshRate = requestedRefreshRate;
             int i3 = this.mWidth;
             int i4 = this.mHeight;
-            float f = requestedRefreshRate == FullScreenMagnificationGestureHandler.MAX_SCALE ? 60.0f : requestedRefreshRate;
-            this.mMode = new Display.Mode(DisplayAdapter.NEXT_DISPLAY_MODE_ID.getAndIncrement(), i3, i4, f, f, false, new float[0], new int[0]);
+            float f =
+                    requestedRefreshRate == FullScreenMagnificationGestureHandler.MAX_SCALE
+                            ? 60.0f
+                            : requestedRefreshRate;
+            this.mMode =
+                    new Display.Mode(
+                            DisplayAdapter.NEXT_DISPLAY_MODE_ID.getAndIncrement(),
+                            i3,
+                            i4,
+                            f,
+                            f,
+                            false,
+                            new float[0],
+                            new int[0]);
             this.mSurface = surface;
             this.mFlags = i2;
             this.mCallback = callback;
@@ -167,14 +199,21 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
             IMediaProjectionCallback iMediaProjectionCallback;
             synchronized (VirtualDisplayAdapter.this.mSyncRoot) {
                 VirtualDisplayAdapter.this.mVirtualDisplayDevices.remove(this.mAppToken);
-                Slog.i("VirtualDisplayAdapter", "Virtual display device released because application token died: " + this.mOwnerPackageName);
+                Slog.i(
+                        "VirtualDisplayAdapter",
+                        "Virtual display device released because application token died: "
+                                + this.mOwnerPackageName);
                 destroyLocked(false);
                 IMediaProjection iMediaProjection = this.mProjection;
-                if (iMediaProjection != null && (iMediaProjectionCallback = this.mMediaProjectionCallback) != null) {
+                if (iMediaProjection != null
+                        && (iMediaProjectionCallback = this.mMediaProjectionCallback) != null) {
                     try {
                         iMediaProjection.unregisterCallback(iMediaProjectionCallback);
                     } catch (RemoteException e) {
-                        Slog.w("VirtualDisplayAdapter", "Failed to unregister callback in binderDied", e);
+                        Slog.w(
+                                "VirtualDisplayAdapter",
+                                "Failed to unregister callback in binderDied",
+                                e);
                     }
                 }
                 VirtualDisplayAdapter.this.sendDisplayDeviceEventLocked(this, 3);
@@ -188,9 +227,11 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
                 surface.release();
                 this.mSurface = null;
             }
-            VirtualDisplayAdapter.this.mSurfaceControlDisplayFactory.destroyDisplay(this.mDisplayToken);
+            VirtualDisplayAdapter.this.mSurfaceControlDisplayFactory.destroyDisplay(
+                    this.mDisplayToken);
             IMediaProjection iMediaProjection = this.mProjection;
-            if (iMediaProjection != null && (iMediaProjectionCallback = this.mMediaProjectionCallback) != null) {
+            if (iMediaProjection != null
+                    && (iMediaProjectionCallback = this.mMediaProjectionCallback) != null) {
                 try {
                     iMediaProjection.unregisterCallback(iMediaProjectionCallback);
                 } catch (RemoteException e) {
@@ -205,10 +246,30 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
         @Override // com.android.server.display.DisplayDevice
         public final void dumpLocked(PrintWriter printWriter) {
             super.dumpLocked(printWriter);
-            StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mFlags="), this.mFlags, printWriter, "mDisplayState=");
+            StringBuilder m =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("mFlags="),
+                            this.mFlags,
+                            printWriter,
+                            "mDisplayState=");
             m.append(Display.stateToString(this.mDisplayState));
             printWriter.println(m.toString());
-            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mStopped="), this.mStopped, printWriter, "mDisplayIdToMirror="), this.mDisplayIdToMirror, printWriter, "mWindowManagerMirroring="), this.mIsWindowManagerMirroring, printWriter, "mRequestedRefreshRate="), this.mRequestedRefreshRate, printWriter);
+            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("mStopped="),
+                                            this.mStopped,
+                                            printWriter,
+                                            "mDisplayIdToMirror="),
+                                    this.mDisplayIdToMirror,
+                                    printWriter,
+                                    "mWindowManagerMirroring="),
+                            this.mIsWindowManagerMirroring,
+                            printWriter,
+                            "mRequestedRefreshRate="),
+                    this.mRequestedRefreshRate,
+                    printWriter);
             if (this.mDexEnabled) {
                 printWriter.println("mDexEnabled=true");
             }
@@ -232,7 +293,7 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
                 this.mInfo.renderFrameRate = this.mMode.getRefreshRate();
                 this.mInfo.defaultModeId = this.mMode.getModeId();
                 DisplayDeviceInfo displayDeviceInfo2 = this.mInfo;
-                displayDeviceInfo2.supportedModes = new Display.Mode[]{this.mMode};
+                displayDeviceInfo2.supportedModes = new Display.Mode[] {this.mMode};
                 int i = this.mDensityDpi;
                 displayDeviceInfo2.densityDpi = i;
                 float f = i;
@@ -266,7 +327,9 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
                 }
                 if ((i2 & 2) != 0) {
                     displayDeviceInfo2.flags |= 64;
-                    if (i3 != 0 && "portrait".equals(SystemProperties.get("persist.demo.remoterotation"))) {
+                    if (i3 != 0
+                            && "portrait"
+                                    .equals(SystemProperties.get("persist.demo.remoterotation"))) {
                         this.mInfo.rotation = 3;
                     }
                 }
@@ -289,27 +352,46 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
                 if ((i5 & 4096) != 0) {
                     DisplayDeviceInfo displayDeviceInfo3 = this.mInfo;
                     int i6 = displayDeviceInfo3.flags;
-                    if ((i6 & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION) == 0 && (i5 & 32768) == 0) {
-                        Slog.w("VirtualDisplayAdapter", "Ignoring VIRTUAL_DISPLAY_FLAG_ALWAYS_UNLOCKED as it requires VIRTUAL_DISPLAY_FLAG_DEVICE_DISPLAY_GROUP or VIRTUAL_DISPLAY_FLAG_OWN_DISPLAY_GROUP.");
+                    if ((i6 & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION)
+                                    == 0
+                            && (i5 & 32768) == 0) {
+                        Slog.w(
+                                "VirtualDisplayAdapter",
+                                "Ignoring VIRTUAL_DISPLAY_FLAG_ALWAYS_UNLOCKED as it requires"
+                                    + " VIRTUAL_DISPLAY_FLAG_DEVICE_DISPLAY_GROUP or"
+                                    + " VIRTUAL_DISPLAY_FLAG_OWN_DISPLAY_GROUP.");
                     } else {
                         displayDeviceInfo3.flags = i6 | 32768;
                     }
                 }
                 int i7 = this.mFlags;
                 if ((i7 & 8192) != 0) {
-                    this.mInfo.flags |= EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT;
+                    this.mInfo.flags |=
+                            EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT;
                 }
-                if ((i7 & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION) != 0) {
+                if ((i7 & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION)
+                        != 0) {
                     if ((i7 & 1024) != 0) {
                         this.mInfo.flags |= 131072;
                     } else {
-                        Slog.w("VirtualDisplayAdapter", "Ignoring VIRTUAL_DISPLAY_FLAG_OWN_FOCUS as it requires VIRTUAL_DISPLAY_FLAG_TRUSTED.");
+                        Slog.w(
+                                "VirtualDisplayAdapter",
+                                "Ignoring VIRTUAL_DISPLAY_FLAG_OWN_FOCUS as it requires"
+                                    + " VIRTUAL_DISPLAY_FLAG_TRUSTED.");
                     }
                 }
                 int i8 = this.mFlags;
                 if ((i8 & EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT) != 0) {
-                    if ((i8 & 1024) == 0 || (i8 & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION) == 0) {
-                        Slog.w("VirtualDisplayAdapter", "Ignoring VIRTUAL_DISPLAY_FLAG_STEAL_TOP_FOCUS_DISABLED as it requires VIRTUAL_DISPLAY_FLAG_OWN_FOCUS which requires VIRTUAL_DISPLAY_FLAG_TRUSTED.");
+                    if ((i8 & 1024) == 0
+                            || (i8
+                                            & EndpointMonitorConst
+                                                    .FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION)
+                                    == 0) {
+                        Slog.w(
+                                "VirtualDisplayAdapter",
+                                "Ignoring VIRTUAL_DISPLAY_FLAG_STEAL_TOP_FOCUS_DISABLED as it"
+                                    + " requires VIRTUAL_DISPLAY_FLAG_OWN_FOCUS which requires"
+                                    + " VIRTUAL_DISPLAY_FLAG_TRUSTED.");
                     } else {
                         this.mInfo.flags |= 524288;
                     }
@@ -333,8 +415,10 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
                     }
                     displayDeviceInfo4.state = i10;
                 }
-                DisplayDeviceInfo displayDeviceInfo5 = VirtualDisplayAdapter.this.mDefaultDeviceInfo;
-                if (displayDeviceInfo5 != null && ((i9 & 262144) != 0 || (i9 & 524288) != 0 || (i9 & 131072) != 0)) {
+                DisplayDeviceInfo displayDeviceInfo5 =
+                        VirtualDisplayAdapter.this.mDefaultDeviceInfo;
+                if (displayDeviceInfo5 != null
+                        && ((i9 & 262144) != 0 || (i9 & 524288) != 0 || (i9 & 131072) != 0)) {
                     displayDeviceInfo4.hdrCapabilities = displayDeviceInfo5.hdrCapabilities;
                     displayDeviceInfo4.supportedColorModes = displayDeviceInfo5.supportedColorModes;
                 }
@@ -363,13 +447,16 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
                     displayDeviceInfo4.flags |= 33554570;
                     if (displayDeviceInfo5 != null) {
                         displayDeviceInfo4.hdrCapabilities = displayDeviceInfo5.hdrCapabilities;
-                        displayDeviceInfo4.supportedColorModes = displayDeviceInfo5.supportedColorModes;
+                        displayDeviceInfo4.supportedColorModes =
+                                displayDeviceInfo5.supportedColorModes;
                     }
                 }
                 if ((2097152 & i9) != 0) {
                     displayDeviceInfo4.flags |= 536870912;
                 }
-                displayDeviceInfo4.displayShape = DisplayShape.createDefaultDisplayShape(displayDeviceInfo4.width, displayDeviceInfo4.height, false);
+                displayDeviceInfo4.displayShape =
+                        DisplayShape.createDefaultDisplayShape(
+                                displayDeviceInfo4.width, displayDeviceInfo4.height, false);
             }
             return this.mInfo;
         }
@@ -409,7 +496,8 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
             if ((this.mPendingChanges & 2) != 0) {
                 transaction.setDisplaySize(this.mDisplayToken, this.mWidth, this.mHeight);
             }
-            if ((this.mPendingChanges & 1) != 0 && this.mCurrentSurface != (surface = this.mSurface)) {
+            if ((this.mPendingChanges & 1) != 0
+                    && this.mCurrentSurface != (surface = this.mSurface)) {
                 this.mCurrentSurface = surface;
                 transaction.setDisplaySurface(this.mDisplayToken, surface);
             }
@@ -417,7 +505,8 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
         }
 
         @Override // com.android.server.display.DisplayDevice
-        public final Runnable requestDisplayStateLocked(int i, float f, float f2, DisplayOffloadSessionImpl displayOffloadSessionImpl) {
+        public final Runnable requestDisplayStateLocked(
+                int i, float f, float f2, DisplayOffloadSessionImpl displayOffloadSessionImpl) {
             if ((!((this.mFlags & 262144) != 0) || this.mDexEnabled) && i != this.mDisplayState) {
                 this.mDisplayState = i;
                 if (i == 1) {
@@ -426,7 +515,10 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
                     this.mCallback.sendEmptyMessage(1);
                 }
                 int i2 = this.mFlags;
-                if ((i2 & 262144) != 0 || (524288 & i2) != 0 || (1073741824 & i2) != 0 || (CoreRune.BAIDU_CARLIFE && (i2 & 1048576) != 0)) {
+                if ((i2 & 262144) != 0
+                        || (524288 & i2) != 0
+                        || (1073741824 & i2) != 0
+                        || (CoreRune.BAIDU_CARLIFE && (i2 & 1048576) != 0)) {
                     this.mInfo = null;
                     VirtualDisplayAdapter.this.sendDisplayDeviceEventLocked(this, 2);
                 }
@@ -446,9 +538,12 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
             this.mSurface = surface;
             this.mInfo = null;
             this.mPendingChanges |= 1;
-            LogicalDisplay displayLocked = VirtualDisplayAdapter.this.mLogicalDisplayMapper.getDisplayLocked(this);
+            LogicalDisplay displayLocked =
+                    VirtualDisplayAdapter.this.mLogicalDisplayMapper.getDisplayLocked(this);
             if (displayLocked != null) {
-                VirtualDisplayAdapter.this.mHandler.sendMessage(VirtualDisplayAdapter.this.mHandler.obtainMessage(30, displayLocked.mDisplayId, 0));
+                VirtualDisplayAdapter.this.mHandler.sendMessage(
+                        VirtualDisplayAdapter.this.mHandler.obtainMessage(
+                                30, displayLocked.mDisplayId, 0));
             }
         }
 
@@ -465,30 +560,46 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
         public final void updateDexEnabledStateLocked(boolean z) {
             if (this.mDexEnabled != z) {
                 this.mDexEnabled = z;
-                Slog.d("VirtualDisplayAdapter", "updateDexEnabledStateLocked: enabled=" + z + ", " + this);
+                Slog.d(
+                        "VirtualDisplayAdapter",
+                        "updateDexEnabledStateLocked: enabled=" + z + ", " + this);
             }
         }
     }
 
     /* renamed from: -$$Nest$mhandleMediaProjectionStoppedLocked, reason: not valid java name */
-    public static void m464$$Nest$mhandleMediaProjectionStoppedLocked(VirtualDisplayAdapter virtualDisplayAdapter, IBinder iBinder) {
-        VirtualDisplayDevice virtualDisplayDevice = (VirtualDisplayDevice) virtualDisplayAdapter.mVirtualDisplayDevices.get(iBinder);
+    public static void m464$$Nest$mhandleMediaProjectionStoppedLocked(
+            VirtualDisplayAdapter virtualDisplayAdapter, IBinder iBinder) {
+        VirtualDisplayDevice virtualDisplayDevice =
+                (VirtualDisplayDevice) virtualDisplayAdapter.mVirtualDisplayDevices.get(iBinder);
         if (virtualDisplayDevice != null) {
-            Slog.i("VirtualDisplayAdapter", "Virtual display device released because media projection stopped: " + virtualDisplayDevice.mName);
-            Slog.d("VirtualDisplayAdapter", "Virtual Display: stopping device " + virtualDisplayDevice.mName);
+            Slog.i(
+                    "VirtualDisplayAdapter",
+                    "Virtual display device released because media projection stopped: "
+                            + virtualDisplayDevice.mName);
+            Slog.d(
+                    "VirtualDisplayAdapter",
+                    "Virtual Display: stopping device " + virtualDisplayDevice.mName);
             virtualDisplayDevice.setSurfaceLocked(null);
             virtualDisplayDevice.mStopped = true;
         }
     }
 
-    public VirtualDisplayAdapter(DisplayManagerService.SyncRoot syncRoot, Context context, Handler handler, DisplayAdapter.Listener listener, SurfaceControlDisplayFactory surfaceControlDisplayFactory, DisplayManagerFlags displayManagerFlags) {
+    public VirtualDisplayAdapter(
+            DisplayManagerService.SyncRoot syncRoot,
+            Context context,
+            Handler handler,
+            DisplayAdapter.Listener listener,
+            SurfaceControlDisplayFactory surfaceControlDisplayFactory,
+            DisplayManagerFlags displayManagerFlags) {
         super(syncRoot, context, handler, listener, "VirtualDisplayAdapter", displayManagerFlags);
         this.mVirtualDisplayDevices = new ArrayMap();
         this.mHandler = handler;
         this.mSurfaceControlDisplayFactory = surfaceControlDisplayFactory;
     }
 
-    public static String generateDisplayUniqueId(String str, int i, VirtualDisplayConfig virtualDisplayConfig) {
+    public static String generateDisplayUniqueId(
+            String str, int i, VirtualDisplayConfig virtualDisplayConfig) {
         String sb;
         StringBuilder sb2 = new StringBuilder(UNIQUE_ID_PREFIX);
         sb2.append(str);
@@ -506,7 +617,8 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
     }
 
     public Surface getVirtualDisplaySurfaceLocked(IBinder iBinder) {
-        VirtualDisplayDevice virtualDisplayDevice = (VirtualDisplayDevice) this.mVirtualDisplayDevices.get(iBinder);
+        VirtualDisplayDevice virtualDisplayDevice =
+                (VirtualDisplayDevice) this.mVirtualDisplayDevices.get(iBinder);
         if (virtualDisplayDevice != null) {
             return virtualDisplayDevice.getSurfaceLocked();
         }
@@ -514,7 +626,8 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
     }
 
     public final VirtualDisplayDevice releaseVirtualDisplayLocked(IBinder iBinder) {
-        VirtualDisplayDevice virtualDisplayDevice = (VirtualDisplayDevice) this.mVirtualDisplayDevices.remove(iBinder);
+        VirtualDisplayDevice virtualDisplayDevice =
+                (VirtualDisplayDevice) this.mVirtualDisplayDevices.remove(iBinder);
         if (virtualDisplayDevice != null) {
             Slog.v("VirtualDisplayAdapter", "Release VirtualDisplay " + virtualDisplayDevice.mName);
             virtualDisplayDevice.destroyLocked(true);
@@ -524,12 +637,16 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
     }
 
     public final void resizeVirtualDisplayLocked(int i, int i2, int i3, IBinder iBinder) {
-        VirtualDisplayDevice virtualDisplayDevice = (VirtualDisplayDevice) this.mVirtualDisplayDevices.get(iBinder);
+        VirtualDisplayDevice virtualDisplayDevice =
+                (VirtualDisplayDevice) this.mVirtualDisplayDevices.get(iBinder);
         if (virtualDisplayDevice != null) {
             StringBuilder sb = new StringBuilder("Resize VirtualDisplay ");
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, virtualDisplayDevice.mName, " to ", " ", sb);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    i, virtualDisplayDevice.mName, " to ", " ", sb);
             GmsAlarmManager$$ExternalSyntheticOutline0.m(sb, i2, "VirtualDisplayAdapter");
-            if (virtualDisplayDevice.mWidth == i && virtualDisplayDevice.mHeight == i2 && virtualDisplayDevice.mDensityDpi == i3) {
+            if (virtualDisplayDevice.mWidth == i
+                    && virtualDisplayDevice.mHeight == i2
+                    && virtualDisplayDevice.mDensityDpi == i3) {
                 return;
             }
             VirtualDisplayAdapter.this.sendDisplayDeviceEventLocked(virtualDisplayDevice, 2);
@@ -541,7 +658,16 @@ public class VirtualDisplayAdapter extends DisplayAdapter {
                 f = 60.0f;
             }
             float f2 = f;
-            virtualDisplayDevice.mMode = new Display.Mode(DisplayAdapter.NEXT_DISPLAY_MODE_ID.getAndIncrement(), i, i2, f2, f2, false, new float[0], new int[0]);
+            virtualDisplayDevice.mMode =
+                    new Display.Mode(
+                            DisplayAdapter.NEXT_DISPLAY_MODE_ID.getAndIncrement(),
+                            i,
+                            i2,
+                            f2,
+                            f2,
+                            false,
+                            new float[0],
+                            new int[0]);
             virtualDisplayDevice.mDensityDpi = i3;
             virtualDisplayDevice.mInfo = null;
             virtualDisplayDevice.mPendingChanges |= 2;

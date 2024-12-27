@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core;
 
 import com.samsung.android.sume.core.filter.MediaFilter;
+
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -48,12 +49,17 @@ public class Def {
     }
 
     public static String taglnOf(Object object) {
-        return (String) Optional.ofNullable(object).map(new Function() { // from class: com.samsung.android.sume.core.Def$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Def.lambda$taglnOf$0(obj);
-            }
-        }).orElse("");
+        return (String)
+                Optional.ofNullable(object)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.Def$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return Def.lambda$taglnOf$0(obj);
+                                    }
+                                })
+                        .orElse("");
     }
 
     public static void check(boolean condition) {
@@ -77,12 +83,17 @@ public class Def {
     }
 
     public static String contentToString(String... values) {
-        return (String) Arrays.stream(values).filter(new Predicate() { // from class: com.samsung.android.sume.core.Def$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return Def.lambda$contentToString$1((String) obj);
-            }
-        }).collect(Collectors.joining(", "));
+        return (String)
+                Arrays.stream(values)
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.Def$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return Def.lambda$contentToString$1((String) obj);
+                                    }
+                                })
+                        .collect(Collectors.joining(", "));
     }
 
     static /* synthetic */ boolean lambda$contentToString$1(String it) {
@@ -90,19 +101,29 @@ public class Def {
     }
 
     public static String contentToStringln(final String indentMark, String... values) {
-        return (String) Arrays.stream(values).filter(new Predicate() { // from class: com.samsung.android.sume.core.Def$$ExternalSyntheticLambda2
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return Def.lambda$contentToStringln$2((String) obj);
-            }
-        }).map(new Function() { // from class: com.samsung.android.sume.core.Def$$ExternalSyntheticLambda3
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String replaceAll;
-                replaceAll = (r0 + ((String) obj)).replaceAll("\n", "\n" + indentMark + r0);
-                return replaceAll;
-            }
-        }).collect(Collectors.joining("\n"));
+        return (String)
+                Arrays.stream(values)
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.Def$$ExternalSyntheticLambda2
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return Def.lambda$contentToStringln$2((String) obj);
+                                    }
+                                })
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.Def$$ExternalSyntheticLambda3
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        String replaceAll;
+                                        replaceAll =
+                                                (r0 + ((String) obj))
+                                                        .replaceAll("\n", "\n" + indentMark + r0);
+                                        return replaceAll;
+                                    }
+                                })
+                        .collect(Collectors.joining("\n"));
     }
 
     static /* synthetic */ boolean lambda$contentToStringln$2(String it) {

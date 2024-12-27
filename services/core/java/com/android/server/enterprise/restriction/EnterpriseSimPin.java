@@ -7,6 +7,7 @@ import android.telephony.PinResult;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
 import com.android.internal.telephony.ISemTelephony;
 import com.android.internal.telephony.ITelephony;
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
@@ -26,17 +27,23 @@ public final class EnterpriseSimPin {
     }
 
     public static int getIccLockRetryNumber(int i) {
-        NetworkScoreService$$ExternalSyntheticOutline0.m(i, "getIccLockRetryNumber(", ")", "EnterpriseSimPin");
+        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                i, "getIccLockRetryNumber(", ")", "EnterpriseSimPin");
         int i2 = 0;
         try {
-            ISemTelephony asInterface = ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
+            ISemTelephony asInterface =
+                    ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
             if (asInterface != null) {
                 i2 = asInterface.getSimPinRetryForSubscriber(i);
             }
         } catch (RemoteException e) {
-            ActivityManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("RemoteException for getIccLockRetryNumber: "), "EnterpriseSimPin");
+            ActivityManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("RemoteException for getIccLockRetryNumber: "),
+                    "EnterpriseSimPin");
         }
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i2, "getIccLockRetryNumber() = ", "EnterpriseSimPin");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i2, "getIccLockRetryNumber() = ", "EnterpriseSimPin");
         return i2;
     }
 
@@ -56,16 +63,26 @@ public final class EnterpriseSimPin {
         Log.d("EnterpriseSimPin", "supplyPinReportResultForSubscriber(" + i + ")");
         enforceCaller();
         try {
-            ITelephony asInterface = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
+            ITelephony asInterface =
+                    ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
             if (asInterface == null) {
                 Log.e("EnterpriseSimPin", "Null IBinder for phone service. Aborting...");
                 return;
             }
-            int[] supplyPinReportResultForSubscriber = asInterface.supplyPinReportResultForSubscriber(i, str);
-            Log.d("EnterpriseSimPin", "supplyPinReportResult returned: " + supplyPinReportResultForSubscriber[0] + " " + supplyPinReportResultForSubscriber[1]);
+            int[] supplyPinReportResultForSubscriber =
+                    asInterface.supplyPinReportResultForSubscriber(i, str);
+            Log.d(
+                    "EnterpriseSimPin",
+                    "supplyPinReportResult returned: "
+                            + supplyPinReportResultForSubscriber[0]
+                            + " "
+                            + supplyPinReportResultForSubscriber[1]);
             int i2 = supplyPinReportResultForSubscriber[0];
         } catch (RemoteException e) {
-            ActivityManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("RemoteException for supplyPinReportResult: "), "EnterpriseSimPin");
+            ActivityManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("RemoteException for supplyPinReportResult: "),
+                    "EnterpriseSimPin");
         }
     }
 
@@ -86,8 +103,11 @@ public final class EnterpriseSimPin {
     }
 
     public final TelephonyManager createTelephonyForSubId(int i) {
-        NetworkScoreService$$ExternalSyntheticOutline0.m(i, "createTelephonyForSubId(", ")", "EnterpriseSimPin");
-        return this.mSubscriptionManager.isActiveSubId(i) ? this.mTelephonyManager.createForSubscriptionId(i) : this.mTelephonyManager;
+        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                i, "createTelephonyForSubId(", ")", "EnterpriseSimPin");
+        return this.mSubscriptionManager.isActiveSubId(i)
+                ? this.mTelephonyManager.createForSubscriptionId(i)
+                : this.mTelephonyManager;
     }
 
     public final boolean isSimLocked(int i) {

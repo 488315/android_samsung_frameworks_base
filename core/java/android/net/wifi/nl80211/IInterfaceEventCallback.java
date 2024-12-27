@@ -1,7 +1,5 @@
 package android.net.wifi.nl80211;
 
-import android.net.wifi.nl80211.IApInterface;
-import android.net.wifi.nl80211.IClientInterface;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -22,20 +20,18 @@ public interface IInterfaceEventCallback extends IInterface {
 
     public static class Default implements IInterfaceEventCallback {
         @Override // android.net.wifi.nl80211.IInterfaceEventCallback
-        public void OnClientInterfaceReady(IClientInterface network_interface) throws RemoteException {
-        }
+        public void OnClientInterfaceReady(IClientInterface network_interface)
+                throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IInterfaceEventCallback
-        public void OnApInterfaceReady(IApInterface network_interface) throws RemoteException {
-        }
+        public void OnApInterfaceReady(IApInterface network_interface) throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IInterfaceEventCallback
-        public void OnClientTorndownEvent(IClientInterface network_interface) throws RemoteException {
-        }
+        public void OnClientTorndownEvent(IClientInterface network_interface)
+                throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IInterfaceEventCallback
-        public void OnApTorndownEvent(IApInterface network_interface) throws RemoteException {
-        }
+        public void OnApTorndownEvent(IApInterface network_interface) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -43,7 +39,7 @@ public interface IInterfaceEventCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInterfaceEventCallback {
+    public abstract static class Stub extends Binder implements IInterfaceEventCallback {
         static final int TRANSACTION_OnApInterfaceReady = 2;
         static final int TRANSACTION_OnApTorndownEvent = 4;
         static final int TRANSACTION_OnClientInterfaceReady = 1;
@@ -90,7 +86,8 @@ public interface IInterfaceEventCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInterfaceEventCallback.DESCRIPTOR);
             }
@@ -100,7 +97,8 @@ public interface IInterfaceEventCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IClientInterface _arg0 = IClientInterface.Stub.asInterface(data.readStrongBinder());
+                    IClientInterface _arg0 =
+                            IClientInterface.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     OnClientInterfaceReady(_arg0);
                     return true;
@@ -110,7 +108,8 @@ public interface IInterfaceEventCallback extends IInterface {
                     OnApInterfaceReady(_arg02);
                     return true;
                 case 3:
-                    IClientInterface _arg03 = IClientInterface.Stub.asInterface(data.readStrongBinder());
+                    IClientInterface _arg03 =
+                            IClientInterface.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     OnClientTorndownEvent(_arg03);
                     return true;
@@ -141,7 +140,8 @@ public interface IInterfaceEventCallback extends IInterface {
             }
 
             @Override // android.net.wifi.nl80211.IInterfaceEventCallback
-            public void OnClientInterfaceReady(IClientInterface network_interface) throws RemoteException {
+            public void OnClientInterfaceReady(IClientInterface network_interface)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInterfaceEventCallback.DESCRIPTOR);
@@ -165,7 +165,8 @@ public interface IInterfaceEventCallback extends IInterface {
             }
 
             @Override // android.net.wifi.nl80211.IInterfaceEventCallback
-            public void OnClientTorndownEvent(IClientInterface network_interface) throws RemoteException {
+            public void OnClientTorndownEvent(IClientInterface network_interface)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInterfaceEventCallback.DESCRIPTOR);

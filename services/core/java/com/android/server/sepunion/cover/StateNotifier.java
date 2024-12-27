@@ -11,10 +11,12 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.SystemClock;
+
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.cover.ICoverManagerCallback;
 import com.samsung.android.cover.ICoverStateListenerCallback;
 import com.samsung.android.sepunion.Log;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -46,7 +48,8 @@ public final class StateNotifier {
         public final int type;
         public final int uid;
 
-        public CoverStateListenerInfo(IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
+        public CoverStateListenerInfo(
+                IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
             this.token = iBinder;
             this.component = componentName;
             this.pid = i;
@@ -74,12 +77,16 @@ public final class StateNotifier {
             }
             if ((this.type & 2) != 0) {
                 try {
-                    ICoverStateListenerCallback asInterface = ICoverStateListenerCallback.Stub.asInterface(iBinder);
+                    ICoverStateListenerCallback asInterface =
+                            ICoverStateListenerCallback.Stub.asInterface(iBinder);
                     if (asInterface != null) {
                         asInterface.onCoverAttachStateChanged(z);
                     }
                 } catch (RemoteException e) {
-                    Log.e("CoverManager_StateNotifier", "Failed onCoverAttachStateChanged callback", e);
+                    Log.e(
+                            "CoverManager_StateNotifier",
+                            "Failed onCoverAttachStateChanged callback",
+                            e);
                 }
             }
         }
@@ -92,12 +99,16 @@ public final class StateNotifier {
             }
             if (this.type == 1) {
                 try {
-                    ICoverManagerCallback asInterface = ICoverManagerCallback.Stub.asInterface(iBinder);
+                    ICoverManagerCallback asInterface =
+                            ICoverManagerCallback.Stub.asInterface(iBinder);
                     if (asInterface != null) {
                         asInterface.coverCallback(coverState);
                     }
                 } catch (RemoteException e) {
-                    Log.e("CoverManager_StateNotifier", "Failed onCoverStateChanged coverCallback", e);
+                    Log.e(
+                            "CoverManager_StateNotifier",
+                            "Failed onCoverStateChanged coverCallback",
+                            e);
                 }
             }
         }
@@ -110,12 +121,16 @@ public final class StateNotifier {
             }
             if ((this.type & 2) != 0) {
                 try {
-                    ICoverStateListenerCallback asInterface = ICoverStateListenerCallback.Stub.asInterface(iBinder);
+                    ICoverStateListenerCallback asInterface =
+                            ICoverStateListenerCallback.Stub.asInterface(iBinder);
                     if (asInterface != null) {
                         asInterface.onCoverSwitchStateChanged(z);
                     }
                 } catch (RemoteException e) {
-                    Log.e("CoverManager_StateNotifier", "Failed onCoverSwitchStateChanged callback", e);
+                    Log.e(
+                            "CoverManager_StateNotifier",
+                            "Failed onCoverSwitchStateChanged callback",
+                            e);
                 }
             }
         }
@@ -139,7 +154,8 @@ public final class StateNotifier {
                     try {
                         Iterator it = stateNotifier.mListeners.iterator();
                         while (it.hasNext()) {
-                            CoverStateListenerInfo coverStateListenerInfo = (CoverStateListenerInfo) it.next();
+                            CoverStateListenerInfo coverStateListenerInfo =
+                                    (CoverStateListenerInfo) it.next();
                             coverStateListenerInfo.onCoverSwitchStateChanged(coverState);
                             coverStateListenerInfo.onCoverSwitchStateChanged(z);
                         }
@@ -190,7 +206,8 @@ public final class StateNotifier {
         public final IBinder token;
         public final int uid;
 
-        public LcdOffDisableListenerInfo(IBinder iBinder, ComponentName componentName, int i, int i2) {
+        public LcdOffDisableListenerInfo(
+                IBinder iBinder, ComponentName componentName, int i, int i2) {
             this.token = iBinder;
             this.component = componentName;
             this.pid = i;
@@ -226,17 +243,22 @@ public final class StateNotifier {
         newWakeLock2.setReferenceCounted(false);
     }
 
-    public final void addListenerToListLocked(IBinder iBinder, ComponentName componentName, int i, List list) {
+    public final void addListenerToListLocked(
+            IBinder iBinder, ComponentName componentName, int i, List list) {
         ArrayList arrayList = (ArrayList) list;
         Iterator it = arrayList.iterator();
         while (it.hasNext()) {
             CoverStateListenerInfo coverStateListenerInfo = (CoverStateListenerInfo) it.next();
             if (coverStateListenerInfo != null && iBinder.equals(coverStateListenerInfo.token)) {
-                Log.e("CoverManager_StateNotifier", "addListenerToListLocked : duplicated listener handle");
+                Log.e(
+                        "CoverManager_StateNotifier",
+                        "addListenerToListLocked : duplicated listener handle");
                 return;
             }
         }
-        CoverStateListenerInfo coverStateListenerInfo2 = new CoverStateListenerInfo(iBinder, componentName, Binder.getCallingPid(), Binder.getCallingUid(), i);
+        CoverStateListenerInfo coverStateListenerInfo2 =
+                new CoverStateListenerInfo(
+                        iBinder, componentName, Binder.getCallingPid(), Binder.getCallingUid(), i);
         try {
             iBinder.linkToDeath(coverStateListenerInfo2, 0);
         } catch (RemoteException e) {
@@ -252,9 +274,17 @@ public final class StateNotifier {
                 printWriter.println("  Live listeners (" + this.mListeners.size() + "):");
                 Iterator it = this.mListeners.iterator();
                 while (it.hasNext()) {
-                    CoverStateListenerInfo coverStateListenerInfo = (CoverStateListenerInfo) it.next();
+                    CoverStateListenerInfo coverStateListenerInfo =
+                            (CoverStateListenerInfo) it.next();
                     if (coverStateListenerInfo != null) {
-                        printWriter.println("    " + coverStateListenerInfo.component + " (pid=" + coverStateListenerInfo.pid + " uid=" + coverStateListenerInfo.uid + ")");
+                        printWriter.println(
+                                "    "
+                                        + coverStateListenerInfo.component
+                                        + " (pid="
+                                        + coverStateListenerInfo.pid
+                                        + " uid="
+                                        + coverStateListenerInfo.uid
+                                        + ")");
                     }
                 }
                 printWriter.println("  ");
@@ -263,12 +293,23 @@ public final class StateNotifier {
         }
         synchronized (this.mHighPriorityListeners) {
             try {
-                printWriter.println("  Live high priority listeners (" + this.mHighPriorityListeners.size() + "):");
+                printWriter.println(
+                        "  Live high priority listeners ("
+                                + this.mHighPriorityListeners.size()
+                                + "):");
                 Iterator it2 = this.mHighPriorityListeners.iterator();
                 while (it2.hasNext()) {
-                    CoverStateListenerInfo coverStateListenerInfo2 = (CoverStateListenerInfo) it2.next();
+                    CoverStateListenerInfo coverStateListenerInfo2 =
+                            (CoverStateListenerInfo) it2.next();
                     if (coverStateListenerInfo2 != null) {
-                        printWriter.println("    " + coverStateListenerInfo2.component + " (pid=" + coverStateListenerInfo2.pid + " uid=" + coverStateListenerInfo2.uid + ")");
+                        printWriter.println(
+                                "    "
+                                        + coverStateListenerInfo2.component
+                                        + " (pid="
+                                        + coverStateListenerInfo2.pid
+                                        + " uid="
+                                        + coverStateListenerInfo2.uid
+                                        + ")");
                     }
                 }
                 printWriter.println("  ");
@@ -278,12 +319,21 @@ public final class StateNotifier {
         synchronized (this.mLcdOffDisableListeners) {
             try {
                 printWriter.println(" LCD Off disabled by app: " + this.mLcdOffDisabledByApp);
-                printWriter.println(" LCD Off listeners (" + this.mLcdOffDisableListeners.size() + "):");
+                printWriter.println(
+                        " LCD Off listeners (" + this.mLcdOffDisableListeners.size() + "):");
                 Iterator it3 = this.mLcdOffDisableListeners.iterator();
                 while (it3.hasNext()) {
-                    LcdOffDisableListenerInfo lcdOffDisableListenerInfo = (LcdOffDisableListenerInfo) it3.next();
+                    LcdOffDisableListenerInfo lcdOffDisableListenerInfo =
+                            (LcdOffDisableListenerInfo) it3.next();
                     if (lcdOffDisableListenerInfo != null) {
-                        printWriter.println("    " + lcdOffDisableListenerInfo.component + " (pid=" + lcdOffDisableListenerInfo.pid + " uid=" + lcdOffDisableListenerInfo.uid + ")");
+                        printWriter.println(
+                                "    "
+                                        + lcdOffDisableListenerInfo.component
+                                        + " (pid="
+                                        + lcdOffDisableListenerInfo.pid
+                                        + " uid="
+                                        + lcdOffDisableListenerInfo.uid
+                                        + ")");
                     }
                 }
                 printWriter.println("  ");
@@ -299,7 +349,8 @@ public final class StateNotifier {
                 Log.addLogString("CoverManager_", "goToSleep by cover close : enableLcdOff");
                 this.mPowerManager.goToSleep(SystemClock.uptimeMillis(), 20, 0);
             }
-            LcdOffDisabledByAppListener lcdOffDisabledByAppListener = this.mLcdOffDisabledByAppListener;
+            LcdOffDisabledByAppListener lcdOffDisabledByAppListener =
+                    this.mLcdOffDisabledByAppListener;
             if (lcdOffDisabledByAppListener != null) {
                 int i = this.mCoverType;
                 if (i == 7 || i == 11 || i == 14) {
@@ -362,7 +413,8 @@ public final class StateNotifier {
         }
         if (CoverManagerUtils.isSupportWirelessCharge) {
             int i2 = this.mCoverType;
-            if ((i2 == 7 || i2 == 8 || i2 == 14 || i2 == 15 || i2 == 16 || i2 == 0 || i2 == 17) && z) {
+            if ((i2 == 7 || i2 == 8 || i2 == 14 || i2 == 15 || i2 == 16 || i2 == 0 || i2 == 17)
+                    && z) {
                 CoverManagerUtils.fileWriteInt(1);
             } else {
                 CoverManagerUtils.fileWriteInt(0);
@@ -377,7 +429,8 @@ public final class StateNotifier {
             try {
                 Iterator it = this.mHighPriorityListeners.iterator();
                 while (it.hasNext()) {
-                    CoverStateListenerInfo coverStateListenerInfo = (CoverStateListenerInfo) it.next();
+                    CoverStateListenerInfo coverStateListenerInfo =
+                            (CoverStateListenerInfo) it.next();
                     coverStateListenerInfo.onCoverSwitchStateChanged(coverState);
                     coverStateListenerInfo.onCoverSwitchStateChanged(coverState.getSwitchState());
                 }
@@ -388,7 +441,9 @@ public final class StateNotifier {
         if (!this.mSendCoverSwitchStateWakeLock.isHeld()) {
             this.mSendCoverSwitchStateWakeLock.acquire();
         }
-        this.mHandler.obtainMessage(0, coverState.getSwitchState() ? 1 : 0, 0, coverState).sendToTarget();
+        this.mHandler
+                .obtainMessage(0, coverState.getSwitchState() ? 1 : 0, 0, coverState)
+                .sendToTarget();
     }
 
     public final void updatePowerState(int i, boolean z) {
@@ -422,7 +477,8 @@ public final class StateNotifier {
                             this.mPowerManager.userActivity(SystemClock.uptimeMillis(), 0, 0);
                             return;
                         } else {
-                            this.mPowerManager.semWakeUp(SystemClock.uptimeMillis(), 103, "updatePowerState");
+                            this.mPowerManager.semWakeUp(
+                                    SystemClock.uptimeMillis(), 103, "updatePowerState");
                             return;
                         }
                     }
@@ -443,7 +499,10 @@ public final class StateNotifier {
             }
         }
         Feature.getInstance(this.mContext).getClass();
-        if (!Feature.sIsSupportFlipCover || FactoryTest.isFactoryMode() || FactoryTest.isAutomaticTestMode(this.mContext) || FactoryTest.isRunningFactoryApp()) {
+        if (!Feature.sIsSupportFlipCover
+                || FactoryTest.isFactoryMode()
+                || FactoryTest.isAutomaticTestMode(this.mContext)
+                || FactoryTest.isRunningFactoryApp()) {
             return;
         }
         if (z) {
@@ -463,7 +522,9 @@ public final class StateNotifier {
                 this.mGoToSleepRunnable = new StateNotifier$$ExternalSyntheticLambda0(this);
                 return;
             } else {
-                Log.addLogString("CoverManager_", "goToSleep by cover close : mLcdOffDisabledByApp is false");
+                Log.addLogString(
+                        "CoverManager_",
+                        "goToSleep by cover close : mLcdOffDisabledByApp is false");
                 this.mPowerManager.goToSleep(SystemClock.uptimeMillis(), 20, 0);
                 return;
             }
@@ -472,13 +533,21 @@ public final class StateNotifier {
             try {
                 if (this.mLcdOffDisableListeners.isEmpty()) {
                     this.mLcdOffDisabledByApp = false;
-                    Log.addLogString("CoverManager_", "goToSleep by cover close : mLcdOffDisableListeners is empty");
+                    Log.addLogString(
+                            "CoverManager_",
+                            "goToSleep by cover close : mLcdOffDisableListeners is empty");
                     this.mPowerManager.goToSleep(SystemClock.uptimeMillis(), 20, 0);
                 } else {
                     Iterator it = this.mLcdOffDisableListeners.iterator();
                     while (it.hasNext()) {
-                        LcdOffDisableListenerInfo lcdOffDisableListenerInfo = (LcdOffDisableListenerInfo) it.next();
-                        Log.d("CoverManager_StateNotifier", "cover close: goToSleep disabled by: PID:" + lcdOffDisableListenerInfo.pid + " UID:" + lcdOffDisableListenerInfo.uid);
+                        LcdOffDisableListenerInfo lcdOffDisableListenerInfo =
+                                (LcdOffDisableListenerInfo) it.next();
+                        Log.d(
+                                "CoverManager_StateNotifier",
+                                "cover close: goToSleep disabled by: PID:"
+                                        + lcdOffDisableListenerInfo.pid
+                                        + " UID:"
+                                        + lcdOffDisableListenerInfo.uid);
                     }
                 }
             } finally {

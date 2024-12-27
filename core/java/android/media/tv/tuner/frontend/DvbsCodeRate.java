@@ -43,8 +43,7 @@ public class DvbsCodeRate {
         private boolean mIsLinear;
         private boolean mIsShortFrames;
 
-        private Builder() {
-        }
+        private Builder() {}
 
         public Builder setInnerFec(long fec) {
             this.mFec = fec;
@@ -67,7 +66,8 @@ public class DvbsCodeRate {
         }
 
         public DvbsCodeRate build() {
-            return new DvbsCodeRate(this.mFec, this.mIsLinear, this.mIsShortFrames, this.mBitsPer1000Symbol);
+            return new DvbsCodeRate(
+                    this.mFec, this.mIsLinear, this.mIsShortFrames, this.mBitsPer1000Symbol);
         }
     }
 }

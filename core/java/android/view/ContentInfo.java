@@ -9,7 +9,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
 import android.view.inputmethod.InputContentInfo;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -18,34 +20,43 @@ import java.util.function.Predicate;
 
 /* loaded from: classes4.dex */
 public final class ContentInfo implements Parcelable {
-    public static final Parcelable.Creator<ContentInfo> CREATOR = new Parcelable.Creator<ContentInfo>() { // from class: android.view.ContentInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentInfo createFromParcel(Parcel parcel) {
-            ClipData clip = ClipData.CREATOR.createFromParcel(parcel);
-            int source = parcel.readInt();
-            int flags = parcel.readInt();
-            Uri linkUri = Uri.CREATOR.createFromParcel(parcel);
-            Bundle extras = parcel.readBundle();
-            InputContentInfo inputContentInfo = null;
-            if (parcel.readInt() != 0) {
-                InputContentInfo inputContentInfo2 = InputContentInfo.CREATOR.createFromParcel(parcel);
-                inputContentInfo = inputContentInfo2;
-            }
-            DragAndDropPermissions dragAndDropPermissions = null;
-            if (parcel.readInt() != 0) {
-                DragAndDropPermissions dragAndDropPermissions2 = DragAndDropPermissions.CREATOR.createFromParcel(parcel);
-                dragAndDropPermissions = dragAndDropPermissions2;
-            }
-            return new Builder(clip, source).setFlags(flags).setLinkUri(linkUri).setExtras(extras).setInputContentInfo(inputContentInfo).setDragAndDropPermissions(dragAndDropPermissions).build();
-        }
+    public static final Parcelable.Creator<ContentInfo> CREATOR =
+            new Parcelable.Creator<ContentInfo>() { // from class: android.view.ContentInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentInfo createFromParcel(Parcel parcel) {
+                    ClipData clip = ClipData.CREATOR.createFromParcel(parcel);
+                    int source = parcel.readInt();
+                    int flags = parcel.readInt();
+                    Uri linkUri = Uri.CREATOR.createFromParcel(parcel);
+                    Bundle extras = parcel.readBundle();
+                    InputContentInfo inputContentInfo = null;
+                    if (parcel.readInt() != 0) {
+                        InputContentInfo inputContentInfo2 =
+                                InputContentInfo.CREATOR.createFromParcel(parcel);
+                        inputContentInfo = inputContentInfo2;
+                    }
+                    DragAndDropPermissions dragAndDropPermissions = null;
+                    if (parcel.readInt() != 0) {
+                        DragAndDropPermissions dragAndDropPermissions2 =
+                                DragAndDropPermissions.CREATOR.createFromParcel(parcel);
+                        dragAndDropPermissions = dragAndDropPermissions2;
+                    }
+                    return new Builder(clip, source)
+                            .setFlags(flags)
+                            .setLinkUri(linkUri)
+                            .setExtras(extras)
+                            .setInputContentInfo(inputContentInfo)
+                            .setDragAndDropPermissions(dragAndDropPermissions)
+                            .build();
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentInfo[] newArray(int size) {
-            return new ContentInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentInfo[] newArray(int size) {
+                    return new ContentInfo[size];
+                }
+            };
     public static final int FLAG_CONVERT_TO_PLAIN_TEXT = 1;
     public static final int SOURCE_APP = 0;
     public static final int SOURCE_AUTOFILL = 4;
@@ -62,12 +73,10 @@ public final class ContentInfo implements Parcelable {
     private final int mSource;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Flags {
-    }
+    public @interface Flags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Source {
-    }
+    public @interface Source {}
 
     static String sourceToString(int source) {
         switch (source) {
@@ -115,7 +124,17 @@ public final class ContentInfo implements Parcelable {
     }
 
     public String toString() {
-        return "ContentInfo{clip=" + this.mClip + ", source=" + sourceToString(this.mSource) + ", flags=" + flagsToString(this.mFlags) + ", linkUri=" + this.mLinkUri + ", extras=" + this.mExtras + "}";
+        return "ContentInfo{clip="
+                + this.mClip
+                + ", source="
+                + sourceToString(this.mSource)
+                + ", flags="
+                + flagsToString(this.mFlags)
+                + ", linkUri="
+                + this.mLinkUri
+                + ", extras="
+                + this.mExtras
+                + "}";
     }
 
     public ClipData getClip() {
@@ -159,8 +178,20 @@ public final class ContentInfo implements Parcelable {
         if (remainingItems.isEmpty()) {
             return Pair.create(this, null);
         }
-        ContentInfo accepted = new Builder(this).setClip(new ClipData(new ClipDescription(this.mClip.getDescription()), acceptedItems)).build();
-        ContentInfo remaining = new Builder(this).setClip(new ClipData(new ClipDescription(this.mClip.getDescription()), remainingItems)).build();
+        ContentInfo accepted =
+                new Builder(this)
+                        .setClip(
+                                new ClipData(
+                                        new ClipDescription(this.mClip.getDescription()),
+                                        acceptedItems))
+                        .build();
+        ContentInfo remaining =
+                new Builder(this)
+                        .setClip(
+                                new ClipData(
+                                        new ClipDescription(this.mClip.getDescription()),
+                                        remainingItems))
+                        .build();
         return Pair.create(accepted, remaining);
     }
 

@@ -1,17 +1,5 @@
 package android.hardware.gnss;
 
-import android.hardware.gnss.IAGnss;
-import android.hardware.gnss.IAGnssRil;
-import android.hardware.gnss.IGnssAntennaInfo;
-import android.hardware.gnss.IGnssBatching;
-import android.hardware.gnss.IGnssCallback;
-import android.hardware.gnss.IGnssConfiguration;
-import android.hardware.gnss.IGnssDebug;
-import android.hardware.gnss.IGnssGeofence;
-import android.hardware.gnss.IGnssMeasurementInterface;
-import android.hardware.gnss.IGnssNavigationMessageInterface;
-import android.hardware.gnss.IGnssPowerIndication;
-import android.hardware.gnss.IGnssPsds;
 import android.hardware.gnss.measurement_corrections.IMeasurementCorrectionsInterface;
 import android.hardware.gnss.visibility_control.IGnssVisibilityControl;
 import android.os.BadParcelableException;
@@ -116,12 +104,10 @@ public interface IGnss extends IInterface {
 
     public static class Default implements IGnss {
         @Override // android.hardware.gnss.IGnss
-        public void setCallback(IGnssCallback callback) throws RemoteException {
-        }
+        public void setCallback(IGnssCallback callback) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
         public IGnssPsds getExtensionPsds() throws RemoteException {
@@ -154,7 +140,8 @@ public interface IGnss extends IInterface {
         }
 
         @Override // android.hardware.gnss.IGnss
-        public IGnssNavigationMessageInterface getExtensionGnssNavigationMessage() throws RemoteException {
+        public IGnssNavigationMessageInterface getExtensionGnssNavigationMessage()
+                throws RemoteException {
             return null;
         }
 
@@ -179,32 +166,26 @@ public interface IGnss extends IInterface {
         }
 
         @Override // android.hardware.gnss.IGnss
-        public void start() throws RemoteException {
-        }
+        public void start() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
-        public void stop() throws RemoteException {
-        }
+        public void stop() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
-        public void injectTime(long timeMs, long timeReferenceMs, int uncertaintyMs) throws RemoteException {
-        }
+        public void injectTime(long timeMs, long timeReferenceMs, int uncertaintyMs)
+                throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
-        public void injectLocation(GnssLocation location) throws RemoteException {
-        }
+        public void injectLocation(GnssLocation location) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
-        public void injectBestLocation(GnssLocation location) throws RemoteException {
-        }
+        public void injectBestLocation(GnssLocation location) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
-        public void deleteAidingData(int aidingDataFlags) throws RemoteException {
-        }
+        public void deleteAidingData(int aidingDataFlags) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
-        public void setPositionMode(PositionModeOptions options) throws RemoteException {
-        }
+        public void setPositionMode(PositionModeOptions options) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
         public IGnssAntennaInfo getExtensionGnssAntennaInfo() throws RemoteException {
@@ -212,25 +193,22 @@ public interface IGnss extends IInterface {
         }
 
         @Override // android.hardware.gnss.IGnss
-        public IMeasurementCorrectionsInterface getExtensionMeasurementCorrections() throws RemoteException {
+        public IMeasurementCorrectionsInterface getExtensionMeasurementCorrections()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.gnss.IGnss
-        public void startSvStatus() throws RemoteException {
-        }
+        public void startSvStatus() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
-        public void stopSvStatus() throws RemoteException {
-        }
+        public void stopSvStatus() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
-        public void startNmea() throws RemoteException {
-        }
+        public void startNmea() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
-        public void stopNmea() throws RemoteException {
-        }
+        public void stopNmea() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnss
         public int getInterfaceVersion() {
@@ -248,7 +226,7 @@ public interface IGnss extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnss {
+    public abstract static class Stub extends Binder implements IGnss {
         static final int TRANSACTION_close = 2;
         static final int TRANSACTION_deleteAidingData = 19;
         static final int TRANSACTION_getExtensionAGnss = 10;
@@ -368,7 +346,8 @@ public interface IGnss extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -488,7 +467,8 @@ public interface IGnss extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 20:
-                    PositionModeOptions _arg06 = (PositionModeOptions) data.readTypedObject(PositionModeOptions.CREATOR);
+                    PositionModeOptions _arg06 =
+                            (PositionModeOptions) data.readTypedObject(PositionModeOptions.CREATOR);
                     data.enforceNoDataAvail();
                     setPositionMode(_arg06);
                     reply.writeNoException();
@@ -499,7 +479,8 @@ public interface IGnss extends IInterface {
                     reply.writeStrongInterface(_result12);
                     return true;
                 case 22:
-                    IMeasurementCorrectionsInterface _result13 = getExtensionMeasurementCorrections();
+                    IMeasurementCorrectionsInterface _result13 =
+                            getExtensionMeasurementCorrections();
                     reply.writeNoException();
                     reply.writeStrongInterface(_result13);
                     return true;
@@ -604,10 +585,12 @@ public interface IGnss extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(4, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getExtensionGnssConfiguration is unimplemented.");
+                        throw new RemoteException(
+                                "Method getExtensionGnssConfiguration is unimplemented.");
                     }
                     _reply.readException();
-                    IGnssConfiguration _result = IGnssConfiguration.Stub.asInterface(_reply.readStrongBinder());
+                    IGnssConfiguration _result =
+                            IGnssConfiguration.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -623,10 +606,12 @@ public interface IGnss extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(5, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getExtensionGnssMeasurement is unimplemented.");
+                        throw new RemoteException(
+                                "Method getExtensionGnssMeasurement is unimplemented.");
                     }
                     _reply.readException();
-                    IGnssMeasurementInterface _result = IGnssMeasurementInterface.Stub.asInterface(_reply.readStrongBinder());
+                    IGnssMeasurementInterface _result =
+                            IGnssMeasurementInterface.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -642,10 +627,12 @@ public interface IGnss extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(6, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getExtensionGnssPowerIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method getExtensionGnssPowerIndication is unimplemented.");
                     }
                     _reply.readException();
-                    IGnssPowerIndication _result = IGnssPowerIndication.Stub.asInterface(_reply.readStrongBinder());
+                    IGnssPowerIndication _result =
+                            IGnssPowerIndication.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -661,10 +648,12 @@ public interface IGnss extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(7, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getExtensionGnssBatching is unimplemented.");
+                        throw new RemoteException(
+                                "Method getExtensionGnssBatching is unimplemented.");
                     }
                     _reply.readException();
-                    IGnssBatching _result = IGnssBatching.Stub.asInterface(_reply.readStrongBinder());
+                    IGnssBatching _result =
+                            IGnssBatching.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -680,10 +669,12 @@ public interface IGnss extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(8, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getExtensionGnssGeofence is unimplemented.");
+                        throw new RemoteException(
+                                "Method getExtensionGnssGeofence is unimplemented.");
                     }
                     _reply.readException();
-                    IGnssGeofence _result = IGnssGeofence.Stub.asInterface(_reply.readStrongBinder());
+                    IGnssGeofence _result =
+                            IGnssGeofence.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -692,17 +683,21 @@ public interface IGnss extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnss
-            public IGnssNavigationMessageInterface getExtensionGnssNavigationMessage() throws RemoteException {
+            public IGnssNavigationMessageInterface getExtensionGnssNavigationMessage()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(9, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getExtensionGnssNavigationMessage is unimplemented.");
+                        throw new RemoteException(
+                                "Method getExtensionGnssNavigationMessage is unimplemented.");
                     }
                     _reply.readException();
-                    IGnssNavigationMessageInterface _result = IGnssNavigationMessageInterface.Stub.asInterface(_reply.readStrongBinder());
+                    IGnssNavigationMessageInterface _result =
+                            IGnssNavigationMessageInterface.Stub.asInterface(
+                                    _reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -768,17 +763,20 @@ public interface IGnss extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnss
-            public IGnssVisibilityControl getExtensionGnssVisibilityControl() throws RemoteException {
+            public IGnssVisibilityControl getExtensionGnssVisibilityControl()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(13, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getExtensionGnssVisibilityControl is unimplemented.");
+                        throw new RemoteException(
+                                "Method getExtensionGnssVisibilityControl is unimplemented.");
                     }
                     _reply.readException();
-                    IGnssVisibilityControl _result = IGnssVisibilityControl.Stub.asInterface(_reply.readStrongBinder());
+                    IGnssVisibilityControl _result =
+                            IGnssVisibilityControl.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -821,7 +819,8 @@ public interface IGnss extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnss
-            public void injectTime(long timeMs, long timeReferenceMs, int uncertaintyMs) throws RemoteException {
+            public void injectTime(long timeMs, long timeReferenceMs, int uncertaintyMs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -920,10 +919,12 @@ public interface IGnss extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(21, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getExtensionGnssAntennaInfo is unimplemented.");
+                        throw new RemoteException(
+                                "Method getExtensionGnssAntennaInfo is unimplemented.");
                     }
                     _reply.readException();
-                    IGnssAntennaInfo _result = IGnssAntennaInfo.Stub.asInterface(_reply.readStrongBinder());
+                    IGnssAntennaInfo _result =
+                            IGnssAntennaInfo.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -932,17 +933,21 @@ public interface IGnss extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnss
-            public IMeasurementCorrectionsInterface getExtensionMeasurementCorrections() throws RemoteException {
+            public IMeasurementCorrectionsInterface getExtensionMeasurementCorrections()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(22, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getExtensionMeasurementCorrections is unimplemented.");
+                        throw new RemoteException(
+                                "Method getExtensionMeasurementCorrections is unimplemented.");
                     }
                     _reply.readException();
-                    IMeasurementCorrectionsInterface _result = IMeasurementCorrectionsInterface.Stub.asInterface(_reply.readStrongBinder());
+                    IMeasurementCorrectionsInterface _result =
+                            IMeasurementCorrectionsInterface.Stub.asInterface(
+                                    _reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1065,21 +1070,23 @@ public interface IGnss extends IInterface {
     }
 
     public static class PositionModeOptions implements Parcelable {
-        public static final Parcelable.Creator<PositionModeOptions> CREATOR = new Parcelable.Creator<PositionModeOptions>() { // from class: android.hardware.gnss.IGnss.PositionModeOptions.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PositionModeOptions createFromParcel(Parcel _aidl_source) {
-                PositionModeOptions _aidl_out = new PositionModeOptions();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<PositionModeOptions> CREATOR =
+                new Parcelable.Creator<PositionModeOptions>() { // from class:
+                    // android.hardware.gnss.IGnss.PositionModeOptions.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PositionModeOptions createFromParcel(Parcel _aidl_source) {
+                        PositionModeOptions _aidl_out = new PositionModeOptions();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PositionModeOptions[] newArray(int _aidl_size) {
-                return new PositionModeOptions[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PositionModeOptions[] newArray(int _aidl_size) {
+                        return new PositionModeOptions[_aidl_size];
+                    }
+                };
         public int mode;
         public int recurrence;
         public int minIntervalMs = 0;

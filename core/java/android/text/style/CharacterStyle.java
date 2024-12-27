@@ -1,7 +1,6 @@
 package android.text.style;
 
 import android.text.TextPaint;
-import android.text.style.MetricAffectingSpan;
 
 /* loaded from: classes4.dex */
 public abstract class CharacterStyle {

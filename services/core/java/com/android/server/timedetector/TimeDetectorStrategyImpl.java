@@ -15,6 +15,7 @@ import android.sec.enterprise.IEDMProxy;
 import android.util.ArraySet;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
@@ -22,6 +23,7 @@ import com.android.server.SystemClockTime;
 import com.android.server.timezonedetector.ArrayMapWithHistory;
 import com.android.server.timezonedetector.ReferenceWithHistory;
 import com.android.server.timezonedetector.StateChangeListener;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,28 +48,35 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
     public final ArraySet mNetworkTimeUpdateListeners = new ArraySet();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Environment {
-    }
+    public interface Environment {}
 
-    public TimeDetectorStrategyImpl(Environment environment, ServiceConfigAccessor serviceConfigAccessor) {
+    public TimeDetectorStrategyImpl(
+            Environment environment, ServiceConfigAccessor serviceConfigAccessor) {
         Objects.requireNonNull(environment);
         this.mEnvironment = environment;
         Objects.requireNonNull(serviceConfigAccessor);
         this.mServiceConfigAccessor = serviceConfigAccessor;
         synchronized (this) {
             try {
-                StateChangeListener stateChangeListener = new StateChangeListener() { // from class: com.android.server.timedetector.TimeDetectorStrategyImpl$$ExternalSyntheticLambda1
-                    @Override // com.android.server.timezonedetector.StateChangeListener
-                    public final void onChange() {
-                        TimeDetectorStrategyImpl timeDetectorStrategyImpl = TimeDetectorStrategyImpl.this;
-                        synchronized (timeDetectorStrategyImpl) {
-                            timeDetectorStrategyImpl.updateCurrentConfigurationInternalIfRequired("handleConfigurationInternalMaybeChanged:");
-                        }
-                    }
-                };
-                ServiceConfigAccessorImpl serviceConfigAccessorImpl = (ServiceConfigAccessorImpl) serviceConfigAccessor;
+                StateChangeListener stateChangeListener =
+                        new StateChangeListener() { // from class:
+                                                    // com.android.server.timedetector.TimeDetectorStrategyImpl$$ExternalSyntheticLambda1
+                            @Override // com.android.server.timezonedetector.StateChangeListener
+                            public final void onChange() {
+                                TimeDetectorStrategyImpl timeDetectorStrategyImpl =
+                                        TimeDetectorStrategyImpl.this;
+                                synchronized (timeDetectorStrategyImpl) {
+                                    timeDetectorStrategyImpl
+                                            .updateCurrentConfigurationInternalIfRequired(
+                                                    "handleConfigurationInternalMaybeChanged:");
+                                }
+                            }
+                        };
+                ServiceConfigAccessorImpl serviceConfigAccessorImpl =
+                        (ServiceConfigAccessorImpl) serviceConfigAccessor;
                 synchronized (serviceConfigAccessorImpl) {
-                    ((ArrayList) serviceConfigAccessorImpl.mConfigurationInternalListeners).add(stateChangeListener);
+                    ((ArrayList) serviceConfigAccessorImpl.mConfigurationInternalListeners)
+                            .add(stateChangeListener);
                 }
                 updateCurrentConfigurationInternalIfRequired("TimeDetectorStrategyImpl:");
             } catch (Throwable th) {
@@ -89,11 +98,17 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
         }
     }
 
-    public static boolean validateSuggestionAgainstLowerBound(UnixEpochTime unixEpochTime, Object obj, Instant instant) {
+    public static boolean validateSuggestionAgainstLowerBound(
+            UnixEpochTime unixEpochTime, Object obj, Instant instant) {
         if (instant.toEpochMilli() <= unixEpochTime.getUnixEpochTimeMillis()) {
             return true;
         }
-        Slog.w("time_detector", "Suggestion points to time before lower bound, skipping it. suggestion=" + obj + ", lower bound=" + instant);
+        Slog.w(
+                "time_detector",
+                "Suggestion points to time before lower bound, skipping it. suggestion="
+                        + obj
+                        + ", lower bound="
+                        + instant);
         return false;
     }
 
@@ -118,9 +133,26 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
             long elapsedRealtime = SystemClock.elapsedRealtime();
             ((EnvironmentImpl) this.mEnvironment).getClass();
             long currentTimeMillis = System.currentTimeMillis();
-            z = Math.abs(unixEpochTime.at(elapsedRealtime).getUnixEpochTimeMillis() - currentTimeMillis) <= ((long) this.mCurrentConfigurationInternal.mSystemClockConfidenceThresholdMillis);
-            if (z && (systemClockConfidence = ((EnvironmentImpl) this.mEnvironment).systemClockConfidence()) < 100) {
-                String str = "Confirm system clock time. confirmationTime=" + unixEpochTime + " newTimeConfidence=100 currentElapsedRealtimeMillis=" + elapsedRealtime + " currentSystemClockMillis=" + currentTimeMillis + " (old) currentTimeConfidence=" + systemClockConfidence;
+            z =
+                    Math.abs(
+                                    unixEpochTime.at(elapsedRealtime).getUnixEpochTimeMillis()
+                                            - currentTimeMillis)
+                            <= ((long)
+                                    this.mCurrentConfigurationInternal
+                                            .mSystemClockConfidenceThresholdMillis);
+            if (z
+                    && (systemClockConfidence =
+                                    ((EnvironmentImpl) this.mEnvironment).systemClockConfidence())
+                            < 100) {
+                String str =
+                        "Confirm system clock time. confirmationTime="
+                                + unixEpochTime
+                                + " newTimeConfidence=100 currentElapsedRealtimeMillis="
+                                + elapsedRealtime
+                                + " currentSystemClockMillis="
+                                + currentTimeMillis
+                                + " (old) currentTimeConfidence="
+                                + systemClockConfidence;
                 Slog.d("time_detector", str);
                 ((EnvironmentImpl) this.mEnvironment).setSystemClockConfidence(100, str);
             }
@@ -139,32 +171,53 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
                 TelephonyTimeSuggestion findBestTelephonySuggestion = findBestTelephonySuggestion();
                 if (findBestTelephonySuggestion != null) {
                     unixEpochTime = findBestTelephonySuggestion.getUnixEpochTime();
-                    str2 = "Found good telephony suggestion., bestTelephonySuggestion=" + findBestTelephonySuggestion + ", detectionReason=" + str;
+                    str2 =
+                            "Found good telephony suggestion., bestTelephonySuggestion="
+                                    + findBestTelephonySuggestion
+                                    + ", detectionReason="
+                                    + str;
                 }
                 str2 = null;
             } else if (i == 3) {
-                NetworkTimeSuggestion findLatestValidNetworkSuggestion = findLatestValidNetworkSuggestion();
+                NetworkTimeSuggestion findLatestValidNetworkSuggestion =
+                        findLatestValidNetworkSuggestion();
                 if (findLatestValidNetworkSuggestion != null) {
                     unixEpochTime = findLatestValidNetworkSuggestion.mUnixEpochTime;
-                    str2 = "Found good network suggestion., networkSuggestion=" + findLatestValidNetworkSuggestion + ", detectionReason=" + str;
+                    str2 =
+                            "Found good network suggestion., networkSuggestion="
+                                    + findLatestValidNetworkSuggestion
+                                    + ", detectionReason="
+                                    + str;
                 }
                 str2 = null;
             } else if (i == 4) {
                 GnssTimeSuggestion findLatestValidGnssSuggestion = findLatestValidGnssSuggestion();
                 if (findLatestValidGnssSuggestion != null) {
-                    unixEpochTime = findLatestValidGnssSuggestion.mTimeSuggestionHelper.getUnixEpochTime();
-                    str2 = "Found good gnss suggestion., gnssSuggestion=" + findLatestValidGnssSuggestion + ", detectionReason=" + str;
+                    unixEpochTime =
+                            findLatestValidGnssSuggestion.mTimeSuggestionHelper.getUnixEpochTime();
+                    str2 =
+                            "Found good gnss suggestion., gnssSuggestion="
+                                    + findLatestValidGnssSuggestion
+                                    + ", detectionReason="
+                                    + str;
                 }
                 str2 = null;
             } else {
                 if (i == 5) {
-                    ExternalTimeSuggestion findLatestValidExternalSuggestion = findLatestValidExternalSuggestion();
+                    ExternalTimeSuggestion findLatestValidExternalSuggestion =
+                            findLatestValidExternalSuggestion();
                     if (findLatestValidExternalSuggestion != null) {
                         unixEpochTime = findLatestValidExternalSuggestion.getUnixEpochTime();
-                        str2 = "Found good external suggestion., externalSuggestion=" + findLatestValidExternalSuggestion + ", detectionReason=" + str;
+                        str2 =
+                                "Found good external suggestion., externalSuggestion="
+                                        + findLatestValidExternalSuggestion
+                                        + ", detectionReason="
+                                        + str;
                     }
                 } else {
-                    StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Unknown or unsupported origin=", " in ");
+                    StringBuilder m =
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    i, "Unknown or unsupported origin=", " in ");
                     m.append(Arrays.toString(iArr));
                     m.append(": Skipping");
                     Slog.w("time_detector", m.toString());
@@ -172,7 +225,8 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
                 str2 = null;
             }
             if (unixEpochTime != null) {
-                if (this.mCurrentConfigurationInternal.getAutoDetectionEnabledBehavior() || isNtpSetByMdm()) {
+                if (this.mCurrentConfigurationInternal.getAutoDetectionEnabledBehavior()
+                        || isNtpSetByMdm()) {
                     setSystemClockAndConfidenceIfRequired(i, unixEpochTime, str2);
                     return;
                 }
@@ -187,8 +241,22 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
                         ((EnvironmentImpl) environment).getClass();
                         long currentTimeMillis = System.currentTimeMillis();
                         UnixEpochTime unixEpochTime2 = unixEpochTime;
-                        if (Math.abs(unixEpochTime.at(elapsedRealtime).getUnixEpochTimeMillis() - currentTimeMillis) <= this.mCurrentConfigurationInternal.mSystemClockConfidenceThresholdMillis) {
-                            String str3 = "Upgrade system clock confidence. autoDetectedUnixEpochTime=" + unixEpochTime2 + " newTimeConfidence=100 cause=" + str2 + " currentElapsedRealtimeMillis=" + elapsedRealtime + " currentSystemClockMillis=" + currentTimeMillis + " currentTimeConfidence=" + systemClockConfidence;
+                        if (Math.abs(
+                                        unixEpochTime.at(elapsedRealtime).getUnixEpochTimeMillis()
+                                                - currentTimeMillis)
+                                <= this.mCurrentConfigurationInternal
+                                        .mSystemClockConfidenceThresholdMillis) {
+                            String str3 =
+                                    "Upgrade system clock confidence. autoDetectedUnixEpochTime="
+                                            + unixEpochTime2
+                                            + " newTimeConfidence=100 cause="
+                                            + str2
+                                            + " currentElapsedRealtimeMillis="
+                                            + elapsedRealtime
+                                            + " currentSystemClockMillis="
+                                            + currentTimeMillis
+                                            + " currentTimeConfidence="
+                                            + systemClockConfidence;
                             Slog.d("time_detector", str3);
                             ((EnvironmentImpl) environment).setSystemClockConfidence(100, str3);
                         }
@@ -200,16 +268,27 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
                 return;
             }
         }
-        Slog.d("time_detector", "Could not determine time: No suggestion found in originPriorities=" + Arrays.toString(iArr) + ", detectionReason=" + str);
+        Slog.d(
+                "time_detector",
+                "Could not determine time: No suggestion found in originPriorities="
+                        + Arrays.toString(iArr)
+                        + ", detectionReason="
+                        + str);
     }
 
     @Override // com.android.server.timezonedetector.Dumpable
-    public final synchronized void dump(IndentingPrintWriter indentingPrintWriter, String[] strArr) {
+    public final synchronized void dump(
+            IndentingPrintWriter indentingPrintWriter, String[] strArr) {
         indentingPrintWriter.println("TimeDetectorStrategy:");
         indentingPrintWriter.increaseIndent();
-        indentingPrintWriter.println("mLastAutoSystemClockTimeSet=" + this.mLastAutoSystemClockTimeSet);
-        indentingPrintWriter.println("mCurrentConfigurationInternal=" + this.mCurrentConfigurationInternal);
-        indentingPrintWriter.println("[Capabilities=" + this.mCurrentConfigurationInternal.createCapabilitiesAndConfig() + "]");
+        indentingPrintWriter.println(
+                "mLastAutoSystemClockTimeSet=" + this.mLastAutoSystemClockTimeSet);
+        indentingPrintWriter.println(
+                "mCurrentConfigurationInternal=" + this.mCurrentConfigurationInternal);
+        indentingPrintWriter.println(
+                "[Capabilities="
+                        + this.mCurrentConfigurationInternal.createCapabilitiesAndConfig()
+                        + "]");
         indentingPrintWriter.println("mEnvironment:");
         indentingPrintWriter.increaseIndent();
         ((EnvironmentImpl) this.mEnvironment).dumpDebugLog(indentingPrintWriter);
@@ -344,7 +423,9 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
         Lb7:
             return r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.timedetector.TimeDetectorStrategyImpl.findBestTelephonySuggestion():android.app.timedetector.TelephonyTimeSuggestion");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.timedetector.TimeDetectorStrategyImpl.findBestTelephonySuggestion():android.app.timedetector.TelephonyTimeSuggestion");
     }
 
     public synchronized TelephonyTimeSuggestion findBestTelephonySuggestionForTests() {
@@ -352,7 +433,8 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
     }
 
     public final ExternalTimeSuggestion findLatestValidExternalSuggestion() {
-        ExternalTimeSuggestion externalTimeSuggestion = (ExternalTimeSuggestion) this.mLastExternalSuggestion.get();
+        ExternalTimeSuggestion externalTimeSuggestion =
+                (ExternalTimeSuggestion) this.mLastExternalSuggestion.get();
         if (externalTimeSuggestion == null) {
             return null;
         }
@@ -386,7 +468,8 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
     }
 
     public final NetworkTimeSuggestion findLatestValidNetworkSuggestion() {
-        NetworkTimeSuggestion networkTimeSuggestion = (NetworkTimeSuggestion) this.mLastNetworkSuggestion.get();
+        NetworkTimeSuggestion networkTimeSuggestion =
+                (NetworkTimeSuggestion) this.mLastNetworkSuggestion.get();
         if (networkTimeSuggestion == null) {
             return null;
         }
@@ -437,14 +520,22 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
         while (it.hasNext()) {
             StateChangeListener stateChangeListener = (StateChangeListener) it.next();
             Objects.requireNonNull(stateChangeListener);
-            ((EnvironmentImpl) this.mEnvironment).mHandler.post(new TimeDetectorStrategyImpl$$ExternalSyntheticLambda0(stateChangeListener));
+            ((EnvironmentImpl) this.mEnvironment)
+                    .mHandler.post(
+                            new TimeDetectorStrategyImpl$$ExternalSyntheticLambda0(
+                                    stateChangeListener));
         }
     }
 
-    public final boolean setSystemClockAndConfidenceIfRequired(int i, UnixEpochTime unixEpochTime, String str) {
+    public final boolean setSystemClockAndConfidenceIfRequired(
+            int i, UnixEpochTime unixEpochTime, String str) {
         if (i != 2) {
-            if (!this.mCurrentConfigurationInternal.getAutoDetectionEnabledBehavior() && !isNtpSetByMdm()) {
-                StringBuilder sb = new StringBuilder("Auto time detection is not enabled / no confidence update is needed. origin=");
+            if (!this.mCurrentConfigurationInternal.getAutoDetectionEnabledBehavior()
+                    && !isNtpSetByMdm()) {
+                StringBuilder sb =
+                        new StringBuilder(
+                                "Auto time detection is not enabled / no confidence update is"
+                                    + " needed. origin=");
                 sb.append(TimeDetectorStrategy.originToString(i));
                 sb.append(", time=");
                 sb.append(unixEpochTime);
@@ -452,7 +543,8 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
                 BootReceiver$$ExternalSyntheticOutline0.m(sb, str, "time_detector");
                 return false;
             }
-        } else if (this.mCurrentConfigurationInternal.getAutoDetectionEnabledBehavior() && !isNtpSetByMdm()) {
+        } else if (this.mCurrentConfigurationInternal.getAutoDetectionEnabledBehavior()
+                && !isNtpSetByMdm()) {
             StringBuilder sb2 = new StringBuilder("Auto time detection is enabled. origin=");
             sb2.append(TimeDetectorStrategy.originToString(i));
             sb2.append(", time=");
@@ -481,12 +573,16 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setSystemClockAndConfidenceUnderWakeLock(int r32, android.app.time.UnixEpochTime r33, int r34, java.lang.String r35) {
+    public final void setSystemClockAndConfidenceUnderWakeLock(
+            int r32, android.app.time.UnixEpochTime r33, int r34, java.lang.String r35) {
         /*
             Method dump skipped, instructions count: 412
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.timedetector.TimeDetectorStrategyImpl.setSystemClockAndConfidenceUnderWakeLock(int, android.app.time.UnixEpochTime, int, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.timedetector.TimeDetectorStrategyImpl.setSystemClockAndConfidenceUnderWakeLock(int,"
+                    + " android.app.time.UnixEpochTime, int, java.lang.String):void");
     }
 
     public final synchronized void setTimeState(TimeState timeState) {
@@ -494,7 +590,8 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
         int i = timeState.getUserShouldConfirmTime() ? 0 : 100;
         ((EnvironmentImpl) this.mEnvironment).acquireWakeLock();
         try {
-            setSystemClockAndConfidenceUnderWakeLock(2, timeState.getUnixEpochTime(), i, "setTimeState()");
+            setSystemClockAndConfidenceUnderWakeLock(
+                    2, timeState.getUnixEpochTime(), i, "setTimeState()");
         } finally {
             ((EnvironmentImpl) this.mEnvironment).releaseWakeLock();
         }
@@ -505,15 +602,30 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
         int slotIndex = telephonyTimeSuggestion.getSlotIndex();
         Integer valueOf = Integer.valueOf(slotIndex);
         ArrayMapWithHistory arrayMapWithHistory = this.mSuggestionBySlotIndex;
-        TelephonyTimeSuggestion telephonyTimeSuggestion2 = (TelephonyTimeSuggestion) arrayMapWithHistory.get(valueOf);
+        TelephonyTimeSuggestion telephonyTimeSuggestion2 =
+                (TelephonyTimeSuggestion) arrayMapWithHistory.get(valueOf);
         if (telephonyTimeSuggestion2 != null) {
             if (telephonyTimeSuggestion2.getUnixEpochTime() == null) {
-                Slog.w("time_detector", "Previous suggestion is null or has a null time. previousSuggestion=" + telephonyTimeSuggestion2 + ", suggestion=" + telephonyTimeSuggestion);
+                Slog.w(
+                        "time_detector",
+                        "Previous suggestion is null or has a null time. previousSuggestion="
+                                + telephonyTimeSuggestion2
+                                + ", suggestion="
+                                + telephonyTimeSuggestion);
                 return false;
             }
-            long elapsedRealtimeDifference = UnixEpochTime.elapsedRealtimeDifference(unixEpochTime, telephonyTimeSuggestion2.getUnixEpochTime());
+            long elapsedRealtimeDifference =
+                    UnixEpochTime.elapsedRealtimeDifference(
+                            unixEpochTime, telephonyTimeSuggestion2.getUnixEpochTime());
             if (elapsedRealtimeDifference < 0) {
-                Slog.w("time_detector", "Out of order telephony suggestion received. referenceTimeDifference=" + elapsedRealtimeDifference + " previousSuggestion=" + telephonyTimeSuggestion2 + " suggestion=" + telephonyTimeSuggestion);
+                Slog.w(
+                        "time_detector",
+                        "Out of order telephony suggestion received. referenceTimeDifference="
+                                + elapsedRealtimeDifference
+                                + " previousSuggestion="
+                                + telephonyTimeSuggestion2
+                                + " suggestion="
+                                + telephonyTimeSuggestion);
                 return false;
             }
         }
@@ -522,41 +634,71 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
     }
 
     public final synchronized void suggestGnssTime(GnssTimeSuggestion gnssTimeSuggestion) {
-        Slog.d("time_detector", "GNSS suggestion received. currentUserConfig=" + this.mCurrentConfigurationInternal + " suggestion=" + gnssTimeSuggestion);
+        Slog.d(
+                "time_detector",
+                "GNSS suggestion received. currentUserConfig="
+                        + this.mCurrentConfigurationInternal
+                        + " suggestion="
+                        + gnssTimeSuggestion);
         Objects.requireNonNull(gnssTimeSuggestion);
-        if (validateAutoSuggestionTime(gnssTimeSuggestion.mTimeSuggestionHelper.getUnixEpochTime(), gnssTimeSuggestion)) {
+        if (validateAutoSuggestionTime(
+                gnssTimeSuggestion.mTimeSuggestionHelper.getUnixEpochTime(), gnssTimeSuggestion)) {
             this.mLastGnssSuggestion.set(gnssTimeSuggestion);
             doAutoTimeDetection("GNSS time suggestion received: suggestion=" + gnssTimeSuggestion);
         }
     }
 
-    public final synchronized boolean suggestManualTime(int i, ManualTimeSuggestion manualTimeSuggestion) {
+    public final synchronized boolean suggestManualTime(
+            int i, ManualTimeSuggestion manualTimeSuggestion) {
         ConfigurationInternal configurationInternal = this.mCurrentConfigurationInternal;
         if (configurationInternal.mUserId != i) {
-            Slog.w("time_detector", "Manual suggestion received but user != current user, userId=" + i + " suggestion=" + manualTimeSuggestion);
+            Slog.w(
+                    "time_detector",
+                    "Manual suggestion received but user != current user, userId="
+                            + i
+                            + " suggestion="
+                            + manualTimeSuggestion);
             return false;
         }
         Objects.requireNonNull(manualTimeSuggestion);
         String str = "Manual time suggestion received: suggestion=" + manualTimeSuggestion;
-        TimeCapabilities capabilities = configurationInternal.createCapabilitiesAndConfig().getCapabilities();
+        TimeCapabilities capabilities =
+                configurationInternal.createCapabilitiesAndConfig().getCapabilities();
         if (capabilities.getSetManualTimeCapability() == 40) {
             UnixEpochTime unixEpochTime = manualTimeSuggestion.getUnixEpochTime();
             Instant instant = this.mCurrentConfigurationInternal.mManualSuggestionLowerBound;
-            if (!validateSuggestionCommon(unixEpochTime, manualTimeSuggestion) || !validateSuggestionAgainstLowerBound(unixEpochTime, manualTimeSuggestion, instant)) {
+            if (!validateSuggestionCommon(unixEpochTime, manualTimeSuggestion)
+                    || !validateSuggestionAgainstLowerBound(
+                            unixEpochTime, manualTimeSuggestion, instant)) {
                 return false;
             }
             return setSystemClockAndConfidenceIfRequired(2, unixEpochTime, str);
         }
-        Slog.i("time_detector", "User does not have the capability needed to set the time manually: capabilities=" + capabilities + ", suggestion=" + manualTimeSuggestion + ", cause=" + str);
+        Slog.i(
+                "time_detector",
+                "User does not have the capability needed to set the time manually: capabilities="
+                        + capabilities
+                        + ", suggestion="
+                        + manualTimeSuggestion
+                        + ", cause="
+                        + str);
         return false;
     }
 
     public final synchronized void suggestNetworkTime(NetworkTimeSuggestion networkTimeSuggestion) {
-        Slog.d("time_detector", "Network suggestion received. currentUserConfig=" + this.mCurrentConfigurationInternal + " suggestion=" + networkTimeSuggestion);
+        Slog.d(
+                "time_detector",
+                "Network suggestion received. currentUserConfig="
+                        + this.mCurrentConfigurationInternal
+                        + " suggestion="
+                        + networkTimeSuggestion);
         Objects.requireNonNull(networkTimeSuggestion);
-        if (validateAutoSuggestionTime(networkTimeSuggestion.mUnixEpochTime, networkTimeSuggestion) || isNtpSetByMdm()) {
-            NetworkTimeSuggestion networkTimeSuggestion2 = (NetworkTimeSuggestion) this.mLastNetworkSuggestion.get();
-            if (networkTimeSuggestion2 == null || !networkTimeSuggestion2.equals(networkTimeSuggestion)) {
+        if (validateAutoSuggestionTime(networkTimeSuggestion.mUnixEpochTime, networkTimeSuggestion)
+                || isNtpSetByMdm()) {
+            NetworkTimeSuggestion networkTimeSuggestion2 =
+                    (NetworkTimeSuggestion) this.mLastNetworkSuggestion.get();
+            if (networkTimeSuggestion2 == null
+                    || !networkTimeSuggestion2.equals(networkTimeSuggestion)) {
                 this.mLastNetworkSuggestion.set(networkTimeSuggestion);
                 notifyNetworkTimeUpdateListenersAsynchronously();
             }
@@ -564,27 +706,46 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
         }
     }
 
-    public final synchronized boolean updateConfiguration(int i, TimeConfiguration timeConfiguration) {
+    public final synchronized boolean updateConfiguration(
+            int i, TimeConfiguration timeConfiguration) {
         boolean updateConfiguration;
-        updateConfiguration = ((ServiceConfigAccessorImpl) this.mServiceConfigAccessor).updateConfiguration(i, timeConfiguration);
+        updateConfiguration =
+                ((ServiceConfigAccessorImpl) this.mServiceConfigAccessor)
+                        .updateConfiguration(i, timeConfiguration);
         if (updateConfiguration) {
-            updateCurrentConfigurationInternalIfRequired("updateConfiguration: userId=" + i + ", configuration=" + timeConfiguration + ", bypassUserPolicyChecks=false");
+            updateCurrentConfigurationInternalIfRequired(
+                    "updateConfiguration: userId="
+                            + i
+                            + ", configuration="
+                            + timeConfiguration
+                            + ", bypassUserPolicyChecks=false");
         }
         return updateConfiguration;
     }
 
     public final void updateCurrentConfigurationInternalIfRequired(String str) {
         ConfigurationInternal configurationInternal;
-        ServiceConfigAccessorImpl serviceConfigAccessorImpl = (ServiceConfigAccessorImpl) this.mServiceConfigAccessor;
+        ServiceConfigAccessorImpl serviceConfigAccessorImpl =
+                (ServiceConfigAccessorImpl) this.mServiceConfigAccessor;
         synchronized (serviceConfigAccessorImpl) {
-            configurationInternal = serviceConfigAccessorImpl.getConfigurationInternal(((ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class)).getCurrentUserId());
+            configurationInternal =
+                    serviceConfigAccessorImpl.getConfigurationInternal(
+                            ((ActivityManagerInternal)
+                                            LocalServices.getService(ActivityManagerInternal.class))
+                                    .getCurrentUserId());
         }
         ConfigurationInternal configurationInternal2 = this.mCurrentConfigurationInternal;
         if (configurationInternal.equals(configurationInternal2)) {
             return;
         }
         this.mCurrentConfigurationInternal = configurationInternal;
-        String str2 = str + " [oldConfiguration=" + configurationInternal2 + ", newConfiguration=" + configurationInternal + "]";
+        String str2 =
+                str
+                        + " [oldConfiguration="
+                        + configurationInternal2
+                        + ", newConfiguration="
+                        + configurationInternal
+                        + "]";
         Slog.d("time_detector", str2);
         ((EnvironmentImpl) this.mEnvironment).getClass();
         SystemClockTime.sTimeDebugLog.log(str2);
@@ -592,7 +753,10 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
         while (it.hasNext()) {
             StateChangeListener stateChangeListener = (StateChangeListener) it.next();
             Objects.requireNonNull(stateChangeListener);
-            ((EnvironmentImpl) this.mEnvironment).mHandler.post(new TimeDetectorStrategyImpl$$ExternalSyntheticLambda0(stateChangeListener));
+            ((EnvironmentImpl) this.mEnvironment)
+                    .mHandler.post(
+                            new TimeDetectorStrategyImpl$$ExternalSyntheticLambda0(
+                                    stateChangeListener));
         }
         if (this.mCurrentConfigurationInternal.getAutoDetectionEnabledBehavior()) {
             doAutoTimeDetection("Auto time detection config changed.");
@@ -602,20 +766,32 @@ public final class TimeDetectorStrategyImpl implements TimeDetectorStrategy {
     }
 
     public final boolean validateAutoSuggestionTime(UnixEpochTime unixEpochTime, Object obj) {
-        return validateSuggestionCommon(unixEpochTime, obj) && validateSuggestionAgainstLowerBound(unixEpochTime, obj, this.mCurrentConfigurationInternal.mAutoSuggestionLowerBound);
+        return validateSuggestionCommon(unixEpochTime, obj)
+                && validateSuggestionAgainstLowerBound(
+                        unixEpochTime,
+                        obj,
+                        this.mCurrentConfigurationInternal.mAutoSuggestionLowerBound);
     }
 
     public final boolean validateSuggestionCommon(UnixEpochTime unixEpochTime, Object obj) {
         ((EnvironmentImpl) this.mEnvironment).getClass();
         long elapsedRealtime = SystemClock.elapsedRealtime();
         if (elapsedRealtime < unixEpochTime.getElapsedRealtimeMillis()) {
-            Slog.w("time_detector", "New elapsed realtime is in the future? Ignoring. elapsedRealtimeMillis=" + elapsedRealtime + ", suggestion=" + obj);
+            Slog.w(
+                    "time_detector",
+                    "New elapsed realtime is in the future? Ignoring. elapsedRealtimeMillis="
+                            + elapsedRealtime
+                            + ", suggestion="
+                            + obj);
             return false;
         }
-        if (unixEpochTime.getUnixEpochTimeMillis() <= this.mCurrentConfigurationInternal.mSuggestionUpperBound.toEpochMilli()) {
+        if (unixEpochTime.getUnixEpochTimeMillis()
+                <= this.mCurrentConfigurationInternal.mSuggestionUpperBound.toEpochMilli()) {
             return true;
         }
-        Slog.w("time_detector", "Suggested value is above max time supported by this device. suggestion=" + obj);
+        Slog.w(
+                "time_detector",
+                "Suggested value is above max time supported by this device. suggestion=" + obj);
         return false;
     }
 }

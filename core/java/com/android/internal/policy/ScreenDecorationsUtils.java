@@ -6,6 +6,7 @@ import android.util.DisplayUtils;
 import android.view.Display;
 import android.view.DisplayInfo;
 import android.view.RoundedCorners;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -16,12 +17,21 @@ public class ScreenDecorationsUtils {
             return 0.0f;
         }
         String displayUniqueId = context.getDisplayNoVerify().getUniqueId();
-        float defaultRadius = RoundedCorners.getRoundedCornerRadius(resources, displayUniqueId) - RoundedCorners.getRoundedCornerRadiusAdjustment(resources, displayUniqueId);
-        float topRadius = RoundedCorners.getRoundedCornerTopRadius(resources, displayUniqueId) - RoundedCorners.getRoundedCornerRadiusTopAdjustment(resources, displayUniqueId);
+        float defaultRadius =
+                RoundedCorners.getRoundedCornerRadius(resources, displayUniqueId)
+                        - RoundedCorners.getRoundedCornerRadiusAdjustment(
+                                resources, displayUniqueId);
+        float topRadius =
+                RoundedCorners.getRoundedCornerTopRadius(resources, displayUniqueId)
+                        - RoundedCorners.getRoundedCornerRadiusTopAdjustment(
+                                resources, displayUniqueId);
         if (topRadius == 0.0f) {
             topRadius = defaultRadius;
         }
-        float bottomRadius = RoundedCorners.getRoundedCornerBottomRadius(resources, displayUniqueId) - RoundedCorners.getRoundedCornerRadiusBottomAdjustment(resources, displayUniqueId);
+        float bottomRadius =
+                RoundedCorners.getRoundedCornerBottomRadius(resources, displayUniqueId)
+                        - RoundedCorners.getRoundedCornerRadiusBottomAdjustment(
+                                resources, displayUniqueId);
         if (bottomRadius == 0.0f) {
             bottomRadius = defaultRadius;
         }
@@ -36,11 +46,16 @@ public class ScreenDecorationsUtils {
     static float getPhysicalPixelDisplaySizeRatio(Context context) {
         DisplayInfo displayInfo = new DisplayInfo();
         context.getDisplay().getDisplayInfo(displayInfo);
-        Display.Mode maxDisplayMode = DisplayUtils.getMaximumResolutionDisplayMode(displayInfo.supportedModes);
+        Display.Mode maxDisplayMode =
+                DisplayUtils.getMaximumResolutionDisplayMode(displayInfo.supportedModes);
         if (maxDisplayMode == null) {
             return 1.0f;
         }
-        return DisplayUtils.getPhysicalPixelDisplaySizeRatio(maxDisplayMode.getPhysicalWidth(), maxDisplayMode.getPhysicalHeight(), displayInfo.getNaturalWidth(), displayInfo.getNaturalHeight());
+        return DisplayUtils.getPhysicalPixelDisplaySizeRatio(
+                maxDisplayMode.getPhysicalWidth(),
+                maxDisplayMode.getPhysicalHeight(),
+                displayInfo.getNaturalWidth(),
+                displayInfo.getNaturalHeight());
     }
 
     public static boolean supportsRoundedCornersOnWindows(Resources resources) {

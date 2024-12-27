@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
-import android.drm.DrmStore;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
 import android.os.Build;
@@ -16,8 +15,11 @@ import android.os.Looper;
 import android.os.Message;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import com.samsung.android.os.SemDvfsManager;
+
 import dalvik.system.CloseGuard;
+
+import com.samsung.android.os.SemDvfsManager;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -136,7 +138,8 @@ public class DrmManagerClient implements AutoCloseable {
             HashMap<String, Object> attributes = new HashMap<>();
             switch (msg.what) {
                 case 1001:
-                    if (DrmManagerClient.this._removeAllRights(DrmManagerClient.this.mUniqueId) == 0) {
+                    if (DrmManagerClient.this._removeAllRights(DrmManagerClient.this.mUniqueId)
+                            == 0) {
                         event = new DrmEvent(DrmManagerClient.this.mUniqueId, 1001, null);
                         break;
                     } else {
@@ -157,7 +160,9 @@ public class DrmManagerClient implements AutoCloseable {
                             Log.e(DrmManagerClient.TAG, "Exception the file " + e.toString());
                         }
                     }
-                    DrmInfoStatus status = DrmManagerClient.this._processDrmInfo(DrmManagerClient.this.mUniqueId, drmInfo);
+                    DrmInfoStatus status =
+                            DrmManagerClient.this._processDrmInfo(
+                                    DrmManagerClient.this.mUniqueId, drmInfo);
                     attributes.put(DrmEvent.DRM_INFO_STATUS_OBJECT, status);
                     attributes.put(DrmEvent.DRM_INFO_OBJECT, drmInfo);
                     if (fis != null) {
@@ -167,17 +172,32 @@ public class DrmManagerClient implements AutoCloseable {
                         }
                     }
                     if (status != null && 1 == status.statusCode) {
-                        event = new DrmEvent(DrmManagerClient.this.mUniqueId, DrmManagerClient.this.getEventType(status.infoType), null, attributes);
+                        event =
+                                new DrmEvent(
+                                        DrmManagerClient.this.mUniqueId,
+                                        DrmManagerClient.this.getEventType(status.infoType),
+                                        null,
+                                        attributes);
                         break;
                     } else {
                         int infoType = status != null ? status.infoType : drmInfo.getInfoType();
                         if (status != null && status.data.getData() != null) {
                             byte[] bytes = status.data.getData();
                             String url = new String(bytes, StandardCharsets.UTF_8);
-                            error = new DrmErrorEvent(DrmManagerClient.this.mUniqueId, DrmManagerClient.this.getErrorType(infoType, status), url, attributes);
+                            error =
+                                    new DrmErrorEvent(
+                                            DrmManagerClient.this.mUniqueId,
+                                            DrmManagerClient.this.getErrorType(infoType, status),
+                                            url,
+                                            attributes);
                             break;
                         } else {
-                            error = new DrmErrorEvent(DrmManagerClient.this.mUniqueId, DrmManagerClient.this.getErrorType(infoType, status), null, attributes);
+                            error =
+                                    new DrmErrorEvent(
+                                            DrmManagerClient.this.mUniqueId,
+                                            DrmManagerClient.this.getErrorType(infoType, status),
+                                            null,
+                                            attributes);
                             break;
                         }
                     }
@@ -243,7 +263,8 @@ public class DrmManagerClient implements AutoCloseable {
                         DrmManagerClient.this.mOnInfoListener.onInfo(DrmManagerClient.this, info);
                     }
                     if (DrmManagerClient.this.mOnErrorListener != null && error != null) {
-                        DrmManagerClient.this.mOnErrorListener.onError(DrmManagerClient.this, error);
+                        DrmManagerClient.this.mOnErrorListener.onError(
+                                DrmManagerClient.this, error);
                         break;
                     }
                     break;
@@ -256,7 +277,10 @@ public class DrmManagerClient implements AutoCloseable {
 
     private int _checkFDSupporting(String path) {
         String[] OmaExtensions = {".dcf"};
-        String[] PlayReadyExtensions = {".pyv", ".pya", ".wmv", ".wma", ".asf", ".eny", ".pye", ".ismv", ".isma", ".mp4", ".fdsa"};
+        String[] PlayReadyExtensions = {
+            ".pyv", ".pya", ".wmv", ".wma", ".asf", ".eny", ".pye", ".ismv", ".isma", ".mp4",
+            ".fdsa"
+        };
         String[] DivxExtensions = {".avi", "divx"};
         if (path == null) {
             return 0;
@@ -417,7 +441,8 @@ public class DrmManagerClient implements AutoCloseable {
         return getMetadata(convertUriToPath(uri));
     }
 
-    public int saveRights(DrmRights drmRights, String rightsPath, String contentPath) throws IOException {
+    public int saveRights(DrmRights drmRights, String rightsPath, String contentPath)
+            throws IOException {
         if (drmRights == null || !drmRights.isValid()) {
             throw new IllegalArgumentException("Given drmRights or contentPath is not valid");
         }
@@ -429,7 +454,8 @@ public class DrmManagerClient implements AutoCloseable {
 
     public void installDrmEngine(String engineFilePath) {
         if (engineFilePath == null || engineFilePath.equals("")) {
-            throw new IllegalArgumentException("Given engineFilePath: " + engineFilePath + "is not valid");
+            throw new IllegalArgumentException(
+                    "Given engineFilePath: " + engineFilePath + "is not valid");
         }
         _installDrmEngine(this.mUniqueId, engineFilePath);
     }
@@ -444,7 +470,8 @@ public class DrmManagerClient implements AutoCloseable {
             int[] iArr = {0};
             if (this.mDvfsHelper == null) {
                 Log.i(TAG, "mDvfsHelper initialize");
-                this.mDvfsHintManager = SemDvfsManager.createInstance(this.mContext, "DRM_SECURE_PLAY", 21);
+                this.mDvfsHintManager =
+                        SemDvfsManager.createInstance(this.mContext, "DRM_SECURE_PLAY", 21);
                 if (this.mDvfsHintManager != null) {
                     this.mDvfsHintManager.setHint(1400);
                 }
@@ -472,7 +499,8 @@ public class DrmManagerClient implements AutoCloseable {
         if (!_saveSRL(roSerial)) {
             Log.e(TAG, "SRL Write save failed");
         }
-        if (this.mContext != null && this.mContext.checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == 0) {
+        if (this.mContext != null
+                && this.mContext.checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == 0) {
             TelephonyManager tmgr = (TelephonyManager) this.mContext.getSystemService("phone");
             String deviceID = tmgr.getDeviceId();
             if (!_saveIMEI(deviceID)) {
@@ -610,7 +638,9 @@ public class DrmManagerClient implements AutoCloseable {
             Method dump skipped, instructions count: 605
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.drm.DrmManagerClient.acquireDrmInfo(android.drm.DrmInfoRequest):android.drm.DrmInfo");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.drm.DrmManagerClient.acquireDrmInfo(android.drm.DrmInfoRequest):android.drm.DrmInfo");
     }
 
     public int acquireRights(DrmInfoRequest drmInfoRequest) {
@@ -860,8 +890,13 @@ public class DrmManagerClient implements AutoCloseable {
             case 1:
             case 2:
             case 3:
-                if (infoStatus == null || infoStatus.mimeType.contains("video/wvm") || infoStatus.statusCode == 2) {
-                    Log.i(TAG, "getErrorType return TYPE_PROCESS_DRM_INFO_FAILED becauseof widevine or STATUS_ERROR");
+                if (infoStatus == null
+                        || infoStatus.mimeType.contains("video/wvm")
+                        || infoStatus.statusCode == 2) {
+                    Log.i(
+                            TAG,
+                            "getErrorType return TYPE_PROCESS_DRM_INFO_FAILED becauseof widevine or"
+                                    + " STATUS_ERROR");
                     return 2006;
                 }
                 Log.i(TAG, "getErrorType infoStatus.statusCode: " + infoStatus.statusCode);
@@ -890,14 +925,20 @@ public class DrmManagerClient implements AutoCloseable {
             Cursor cursor = null;
             try {
                 try {
-                    cursor = this.mContext.getContentResolver().query(uri, projection, null, null, null);
+                    cursor =
+                            this.mContext
+                                    .getContentResolver()
+                                    .query(uri, projection, null, null, null);
                     if (cursor == null || cursor.getCount() == 0 || !cursor.moveToFirst()) {
-                        throw new IllegalArgumentException("Given Uri could not be found in media store");
+                        throw new IllegalArgumentException(
+                                "Given Uri could not be found in media store");
                     }
                     int pathIndex = cursor.getColumnIndexOrThrow("_data");
                     String path3 = cursor.getString(pathIndex);
                 } catch (SQLiteException e) {
-                    throw new IllegalArgumentException("Given Uri is not formatted in a way so that it can be found in media store.");
+                    throw new IllegalArgumentException(
+                            "Given Uri is not formatted in a way so that it can be found in media"
+                                    + " store.");
                 }
             } finally {
                 if (cursor != null) {

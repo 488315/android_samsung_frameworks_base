@@ -37,7 +37,7 @@ public class GeneralNames extends ASN1Object {
     }
 
     public GeneralNames(GeneralName name) {
-        this.names = new GeneralName[]{name};
+        this.names = new GeneralName[] {name};
     }
 
     public GeneralNames(GeneralName[] names) {
@@ -55,7 +55,8 @@ public class GeneralNames extends ASN1Object {
         return copy(this.names);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return new DERSequence(this.names);
     }

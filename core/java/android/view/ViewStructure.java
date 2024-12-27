@@ -11,19 +11,25 @@ import android.os.OutcomeReceiver;
 import android.util.Pair;
 import android.view.autofill.AutofillId;
 import android.view.autofill.AutofillValue;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public abstract class ViewStructure {
-    public static final String EXTRA_ACTIVE_CHILDREN_IDS = "android.view.ViewStructure.extra.ACTIVE_CHILDREN_IDS";
-    public static final String EXTRA_FIRST_ACTIVE_POSITION = "android.view.ViewStructure.extra.FIRST_ACTIVE_POSITION";
-    public static final String EXTRA_VIRTUAL_STRUCTURE_TYPE = "android.view.ViewStructure.extra.VIRTUAL_STRUCTURE_TYPE";
-    public static final String EXTRA_VIRTUAL_STRUCTURE_VERSION_NUMBER = "android.view.ViewStructure.extra.VIRTUAL_STRUCTURE_VERSION_NUMBER";
+    public static final String EXTRA_ACTIVE_CHILDREN_IDS =
+            "android.view.ViewStructure.extra.ACTIVE_CHILDREN_IDS";
+    public static final String EXTRA_FIRST_ACTIVE_POSITION =
+            "android.view.ViewStructure.extra.FIRST_ACTIVE_POSITION";
+    public static final String EXTRA_VIRTUAL_STRUCTURE_TYPE =
+            "android.view.ViewStructure.extra.VIRTUAL_STRUCTURE_TYPE";
+    public static final String EXTRA_VIRTUAL_STRUCTURE_VERSION_NUMBER =
+            "android.view.ViewStructure.extra.VIRTUAL_STRUCTURE_VERSION_NUMBER";
 
-    public static abstract class HtmlInfo {
+    public abstract static class HtmlInfo {
 
-        public static abstract class Builder {
+        public abstract static class Builder {
             public abstract Builder addAttribute(String str, String str2);
 
             public abstract HtmlInfo build();
@@ -150,31 +156,26 @@ public abstract class ViewStructure {
         return null;
     }
 
-    public OutcomeReceiver<GetCredentialResponse, GetCredentialException> getPendingCredentialCallback() {
+    public OutcomeReceiver<GetCredentialResponse, GetCredentialException>
+            getPendingCredentialCallback() {
         return null;
     }
 
-    public void setImportantForAutofill(int mode) {
-    }
+    public void setImportantForAutofill(int mode) {}
 
-    public void setIsCredential(boolean isCredential) {
-    }
+    public void setIsCredential(boolean isCredential) {}
 
-    public void setReceiveContentMimeTypes(String[] mimeTypes) {
-    }
+    public void setReceiveContentMimeTypes(String[] mimeTypes) {}
 
-    public void setMinTextEms(int minEms) {
-    }
+    public void setMinTextEms(int minEms) {}
 
-    public void setMaxTextEms(int maxEms) {
-    }
+    public void setMaxTextEms(int maxEms) {}
 
-    public void setMaxTextLength(int maxLength) {
-    }
+    public void setMaxTextLength(int maxLength) {}
 
-    public void setPendingCredentialRequest(GetCredentialRequest request, OutcomeReceiver<GetCredentialResponse, GetCredentialException> callback) {
-    }
+    public void setPendingCredentialRequest(
+            GetCredentialRequest request,
+            OutcomeReceiver<GetCredentialResponse, GetCredentialException> callback) {}
 
-    public void clearCredentialManagerRequest() {
-    }
+    public void clearCredentialManagerRequest() {}
 }

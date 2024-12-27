@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
 import com.android.internal.R;
 
 /* loaded from: classes2.dex */
@@ -35,7 +36,9 @@ public class CompactExtractEditLayout extends LinearLayout {
         this.mInputExtractEditText = findViewById(16908325);
         this.mInputExtractAccessories = findViewById(16908378);
         this.mInputExtractAction = findViewById(16908377);
-        if (this.mInputExtractEditText != null && this.mInputExtractAccessories != null && this.mInputExtractAction != null) {
+        if (this.mInputExtractEditText != null
+                && this.mInputExtractAccessories != null
+                && this.mInputExtractAction != null) {
             this.mPerformLayoutChanges = true;
         }
     }
@@ -60,10 +63,19 @@ public class CompactExtractEditLayout extends LinearLayout {
         if (getResources().getConfiguration().isScreenRound()) {
             setGravity(80);
         }
-        setLayoutHeight(this, applyFractionInt(R.fraction.input_extract_layout_height, screenHeightPx));
-        setPadding(applyFractionInt(R.fraction.input_extract_layout_padding_left, screenWidthPx), 0, applyFractionInt(R.fraction.input_extract_layout_padding_right, screenWidthPx), 0);
-        setLayoutMarginBottom(this.mInputExtractEditText, applyFractionInt(R.fraction.input_extract_text_margin_bottom, screenHeightPx));
-        setLayoutMarginBottom(this.mInputExtractAccessories, applyFractionInt(R.fraction.input_extract_action_margin_bottom, screenHeightPx));
+        setLayoutHeight(
+                this, applyFractionInt(R.fraction.input_extract_layout_height, screenHeightPx));
+        setPadding(
+                applyFractionInt(R.fraction.input_extract_layout_padding_left, screenWidthPx),
+                0,
+                applyFractionInt(R.fraction.input_extract_layout_padding_right, screenWidthPx),
+                0);
+        setLayoutMarginBottom(
+                this.mInputExtractEditText,
+                applyFractionInt(R.fraction.input_extract_text_margin_bottom, screenHeightPx));
+        setLayoutMarginBottom(
+                this.mInputExtractAccessories,
+                applyFractionInt(R.fraction.input_extract_action_margin_bottom, screenHeightPx));
     }
 
     @Override // android.view.ViewGroup, android.view.View

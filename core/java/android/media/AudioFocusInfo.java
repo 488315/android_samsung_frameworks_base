@@ -1,29 +1,39 @@
 package android.media;
 
 import android.annotation.SystemApi;
-import android.media.AudioAttributes;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public final class AudioFocusInfo implements Parcelable {
-    public static final Parcelable.Creator<AudioFocusInfo> CREATOR = new Parcelable.Creator<AudioFocusInfo>() { // from class: android.media.AudioFocusInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioFocusInfo createFromParcel(Parcel in) {
-            AudioFocusInfo afi = new AudioFocusInfo(AudioAttributes.CREATOR.createFromParcel(in), in.readInt(), in.readString(), in.readString(), in.readInt(), in.readInt(), in.readInt(), in.readInt());
-            afi.setGen(in.readLong());
-            return afi;
-        }
+    public static final Parcelable.Creator<AudioFocusInfo> CREATOR =
+            new Parcelable.Creator<AudioFocusInfo>() { // from class: android.media.AudioFocusInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioFocusInfo createFromParcel(Parcel in) {
+                    AudioFocusInfo afi =
+                            new AudioFocusInfo(
+                                    AudioAttributes.CREATOR.createFromParcel(in),
+                                    in.readInt(),
+                                    in.readString(),
+                                    in.readString(),
+                                    in.readInt(),
+                                    in.readInt(),
+                                    in.readInt(),
+                                    in.readInt());
+                    afi.setGen(in.readLong());
+                    return afi;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioFocusInfo[] newArray(int size) {
-            return new AudioFocusInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioFocusInfo[] newArray(int size) {
+                    return new AudioFocusInfo[size];
+                }
+            };
     private final AudioAttributes mAttributes;
     private final String mClientId;
     private final int mClientUid;
@@ -34,7 +44,15 @@ public final class AudioFocusInfo implements Parcelable {
     private final String mPackageName;
     private final int mSdkTarget;
 
-    public AudioFocusInfo(AudioAttributes aa, int clientUid, String clientId, String packageName, int gainRequest, int lossReceived, int flags, int sdk) {
+    public AudioFocusInfo(
+            AudioAttributes aa,
+            int clientUid,
+            String clientId,
+            String packageName,
+            int gainRequest,
+            int lossReceived,
+            int flags,
+            int sdk) {
         this.mAttributes = aa == null ? new AudioAttributes.Builder().build() : aa;
         this.mClientUid = clientUid;
         this.mClientId = clientId == null ? "" : clientId;
@@ -108,7 +126,13 @@ public final class AudioFocusInfo implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(this.mAttributes, Integer.valueOf(this.mClientUid), this.mClientId, this.mPackageName, Integer.valueOf(this.mGainRequest), Integer.valueOf(this.mFlags));
+        return Objects.hash(
+                this.mAttributes,
+                Integer.valueOf(this.mClientUid),
+                this.mClientId,
+                this.mPackageName,
+                Integer.valueOf(this.mGainRequest),
+                Integer.valueOf(this.mFlags));
     }
 
     public boolean equals(Object obj) {
@@ -119,7 +143,14 @@ public final class AudioFocusInfo implements Parcelable {
             return false;
         }
         AudioFocusInfo other = (AudioFocusInfo) obj;
-        if (this.mAttributes.equals(other.mAttributes) && this.mClientUid == other.mClientUid && this.mClientId.equals(other.mClientId) && this.mPackageName.equals(other.mPackageName) && this.mGainRequest == other.mGainRequest && this.mLossReceived == other.mLossReceived && this.mFlags == other.mFlags && this.mSdkTarget == other.mSdkTarget) {
+        if (this.mAttributes.equals(other.mAttributes)
+                && this.mClientUid == other.mClientUid
+                && this.mClientId.equals(other.mClientId)
+                && this.mPackageName.equals(other.mPackageName)
+                && this.mGainRequest == other.mGainRequest
+                && this.mLossReceived == other.mLossReceived
+                && this.mFlags == other.mFlags
+                && this.mSdkTarget == other.mSdkTarget) {
             return true;
         }
         return false;

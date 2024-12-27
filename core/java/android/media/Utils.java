@@ -3,7 +3,6 @@ package android.media;
 import android.content.Context;
 import android.database.Cursor;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.media.Utils;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Environment;
@@ -13,6 +12,7 @@ import android.util.Pair;
 import android.util.Range;
 import android.util.Rational;
 import android.util.Size;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -27,21 +27,29 @@ public class Utils {
     private static final String TAG = "Utils";
 
     public static <T extends Comparable<? super T>> void sortDistinctRanges(Range<T>[] ranges) {
-        Arrays.sort(ranges, new Comparator<Range<T>>() { // from class: android.media.Utils.1
-            @Override // java.util.Comparator
-            public int compare(Range<T> range, Range<T> range2) {
-                if (range.getUpper().compareTo(range2.getLower()) < 0) {
-                    return -1;
-                }
-                if (range.getLower().compareTo(range2.getUpper()) > 0) {
-                    return 1;
-                }
-                throw new IllegalArgumentException("sample rate ranges must be distinct (" + range + " and " + range2 + NavigationBarInflaterView.KEY_CODE_END);
-            }
-        });
+        Arrays.sort(
+                ranges,
+                new Comparator<Range<T>>() { // from class: android.media.Utils.1
+                    @Override // java.util.Comparator
+                    public int compare(Range<T> range, Range<T> range2) {
+                        if (range.getUpper().compareTo(range2.getLower()) < 0) {
+                            return -1;
+                        }
+                        if (range.getLower().compareTo(range2.getUpper()) > 0) {
+                            return 1;
+                        }
+                        throw new IllegalArgumentException(
+                                "sample rate ranges must be distinct ("
+                                        + range
+                                        + " and "
+                                        + range2
+                                        + NavigationBarInflaterView.KEY_CODE_END);
+                    }
+                });
     }
 
-    public static <T extends Comparable<? super T>> Range<T>[] intersectSortedDistinctRanges(Range<T>[] one, Range<T>[] another) {
+    public static <T extends Comparable<? super T>> Range<T>[] intersectSortedDistinctRanges(
+            Range<T>[] one, Range<T>[] another) {
         int ix = 0;
         Vector<Range<T>> result = new Vector<>();
         for (Range<T> range : another) {
@@ -62,19 +70,23 @@ public class Utils {
         return (Range[]) result.toArray(new Range[result.size()]);
     }
 
-    public static <T extends Comparable<? super T>> int binarySearchDistinctRanges(Range<T>[] ranges, T value) {
-        return Arrays.binarySearch(ranges, Range.create(value, value), new Comparator<Range<T>>() { // from class: android.media.Utils.2
-            @Override // java.util.Comparator
-            public int compare(Range<T> range, Range<T> range2) {
-                if (range.getUpper().compareTo(range2.getLower()) < 0) {
-                    return -1;
-                }
-                if (range.getLower().compareTo(range2.getUpper()) > 0) {
-                    return 1;
-                }
-                return 0;
-            }
-        });
+    public static <T extends Comparable<? super T>> int binarySearchDistinctRanges(
+            Range<T>[] ranges, T value) {
+        return Arrays.binarySearch(
+                ranges,
+                Range.create(value, value),
+                new Comparator<Range<T>>() { // from class: android.media.Utils.2
+                    @Override // java.util.Comparator
+                    public int compare(Range<T> range, Range<T> range2) {
+                        if (range.getUpper().compareTo(range2.getLower()) < 0) {
+                            return -1;
+                        }
+                        if (range.getLower().compareTo(range2.getUpper()) > 0) {
+                            return 1;
+                        }
+                        return 0;
+                    }
+                });
     }
 
     static int gcd(int a, int b) {
@@ -99,30 +111,39 @@ public class Utils {
         if (factor == 1) {
             return range;
         }
-        return Range.create(Integer.valueOf(divUp(range.getLower().intValue(), factor)), Integer.valueOf(range.getUpper().intValue() / factor));
+        return Range.create(
+                Integer.valueOf(divUp(range.getLower().intValue(), factor)),
+                Integer.valueOf(range.getUpper().intValue() / factor));
     }
 
     static Range<Long> factorRange(Range<Long> range, long factor) {
         if (factor == 1) {
             return range;
         }
-        return Range.create(Long.valueOf(divUp(range.getLower().longValue(), factor)), Long.valueOf(range.getUpper().longValue() / factor));
+        return Range.create(
+                Long.valueOf(divUp(range.getLower().longValue(), factor)),
+                Long.valueOf(range.getUpper().longValue() / factor));
     }
 
     private static Rational scaleRatio(Rational ratio, int num, int den) {
         int common = gcd(num, den);
-        return new Rational((int) (ratio.getNumerator() * (num / common)), (int) (ratio.getDenominator() * (den / common)));
+        return new Rational(
+                (int) (ratio.getNumerator() * (num / common)),
+                (int) (ratio.getDenominator() * (den / common)));
     }
 
     static Range<Rational> scaleRange(Range<Rational> range, int num, int den) {
         if (num == den) {
             return range;
         }
-        return Range.create(scaleRatio(range.getLower(), num, den), scaleRatio(range.getUpper(), num, den));
+        return Range.create(
+                scaleRatio(range.getLower(), num, den), scaleRatio(range.getUpper(), num, den));
     }
 
     static Range<Integer> alignRange(Range<Integer> range, int align) {
-        return range.intersect(Integer.valueOf(divUp(range.getLower().intValue(), align) * align), Integer.valueOf((range.getUpper().intValue() / align) * align));
+        return range.intersect(
+                Integer.valueOf(divUp(range.getLower().intValue(), align) * align),
+                Integer.valueOf((range.getUpper().intValue() / align) * align));
     }
 
     static int divUp(int num, int den) {
@@ -181,7 +202,9 @@ public class Utils {
             String s = (String) o;
             int ix = s.indexOf(45);
             if (ix >= 0) {
-                return Range.create(Integer.valueOf(Integer.parseInt(s.substring(0, ix), 10)), Integer.valueOf(Integer.parseInt(s.substring(ix + 1), 10)));
+                return Range.create(
+                        Integer.valueOf(Integer.parseInt(s.substring(0, ix), 10)),
+                        Integer.valueOf(Integer.parseInt(s.substring(ix + 1), 10)));
             }
             int value = Integer.parseInt(s);
             return Range.create(Integer.valueOf(value), Integer.valueOf(value));
@@ -199,7 +222,9 @@ public class Utils {
             String s = (String) o;
             int ix = s.indexOf(45);
             if (ix >= 0) {
-                return Range.create(Long.valueOf(Long.parseLong(s.substring(0, ix), 10)), Long.valueOf(Long.parseLong(s.substring(ix + 1), 10)));
+                return Range.create(
+                        Long.valueOf(Long.parseLong(s.substring(0, ix), 10)),
+                        Long.valueOf(Long.parseLong(s.substring(ix + 1), 10)));
             }
             long value = Long.parseLong(s);
             return Range.create(Long.valueOf(value), Long.valueOf(value));
@@ -217,7 +242,9 @@ public class Utils {
             String s = (String) o;
             int ix = s.indexOf(45);
             if (ix >= 0) {
-                return Range.create(Rational.parseRational(s.substring(0, ix)), Rational.parseRational(s.substring(ix + 1)));
+                return Range.create(
+                        Rational.parseRational(s.substring(0, ix)),
+                        Rational.parseRational(s.substring(ix + 1)));
             }
             Rational value = Rational.parseRational(s);
             return Range.create(value, value);
@@ -235,7 +262,8 @@ public class Utils {
             String s = (String) o;
             int ix = s.indexOf(45);
             if (ix >= 0) {
-                return Pair.create(Size.parseSize(s.substring(0, ix)), Size.parseSize(s.substring(ix + 1)));
+                return Pair.create(
+                        Size.parseSize(s.substring(0, ix)), Size.parseSize(s.substring(ix + 1)));
             }
             Size value = Size.parseSize(s);
             return Pair.create(value, value);
@@ -245,7 +273,8 @@ public class Utils {
         }
     }
 
-    public static File getUniqueExternalFile(Context context, String subdirectory, String fileName, String mimeType) {
+    public static File getUniqueExternalFile(
+            Context context, String subdirectory, String fileName, String mimeType) {
         File externalStorage = Environment.getExternalStoragePublicDirectory(subdirectory);
         externalStorage.mkdirs();
         try {
@@ -311,7 +340,10 @@ public class Utils {
             this(true, true, false);
         }
 
-        public ListenerList(boolean restrictSingleCallerOnEvent, boolean clearCallingIdentity, boolean forceRemoveConsistency) {
+        public ListenerList(
+                boolean restrictSingleCallerOnEvent,
+                boolean clearCallingIdentity,
+                boolean forceRemoveConsistency) {
             this.mListeners = new HashMap<>();
             this.mRestrictSingleCallerOnEvent = restrictSingleCallerOnEvent;
             this.mClearCallingIdentity = clearCallingIdentity;
@@ -322,7 +354,8 @@ public class Utils {
             Objects.requireNonNull(key);
             Objects.requireNonNull(executor);
             Objects.requireNonNull(listener);
-            ListenerWithCancellation<V> listenerWithCancellation = new AnonymousClass1(executor, listener);
+            ListenerWithCancellation<V> listenerWithCancellation =
+                    new AnonymousClass1(executor, listener);
             synchronized (this.mListeners) {
                 this.mListeners.put(key, listenerWithCancellation);
             }
@@ -344,17 +377,22 @@ public class Utils {
             public void onEvent(final int eventCode, final V info) {
                 Executor executor = this.val$executor;
                 final Listener listener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.media.Utils$ListenerList$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        Utils.ListenerList.AnonymousClass1.this.lambda$onEvent$0(listener, eventCode, info);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                            // android.media.Utils$ListenerList$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                Utils.ListenerList.AnonymousClass1.this.lambda$onEvent$0(
+                                        listener, eventCode, info);
+                            }
+                        });
             }
 
             /* JADX INFO: Access modifiers changed from: private */
-            public /* synthetic */ void lambda$onEvent$0(Listener listener, int eventCode, Object info) {
-                if (ListenerList.this.mRestrictSingleCallerOnEvent || ListenerList.this.mForceRemoveConsistency) {
+            public /* synthetic */ void lambda$onEvent$0(
+                    Listener listener, int eventCode, Object info) {
+                if (ListenerList.this.mRestrictSingleCallerOnEvent
+                        || ListenerList.this.mForceRemoveConsistency) {
                     synchronized (this.mLock) {
                         if (this.mCancelled) {
                             return;
@@ -399,7 +437,10 @@ public class Utils {
                     return;
                 }
                 Object[] listeners = this.mListeners.values().toArray();
-                Long identity = this.mClearCallingIdentity ? Long.valueOf(Binder.clearCallingIdentity()) : null;
+                Long identity =
+                        this.mClearCallingIdentity
+                                ? Long.valueOf(Binder.clearCallingIdentity())
+                                : null;
                 try {
                     for (Object object : listeners) {
                         ListenerWithCancellation<V> listener = (ListenerWithCancellation) object;

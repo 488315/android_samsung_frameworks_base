@@ -5,14 +5,21 @@ import android.app.Notification;
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
-import android.os.Parcelable;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.util.Log;
+
 import com.android.internal.util.FastPrintWriter;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.TypedProperties;
-import com.samsung.android.rune.CoreRune;
+
 import dalvik.system.VMDebug;
+
+import com.samsung.android.rune.CoreRune;
+
+import org.apache.harmony.dalvik.ddmc.Chunk;
+import org.apache.harmony.dalvik.ddmc.ChunkHandler;
+import org.apache.harmony.dalvik.ddmc.DdmServer;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
@@ -25,9 +32,6 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.harmony.dalvik.ddmc.Chunk;
-import org.apache.harmony.dalvik.ddmc.ChunkHandler;
-import org.apache.harmony.dalvik.ddmc.DdmServer;
 
 /* loaded from: classes3.dex */
 public final class Debug {
@@ -85,16 +89,16 @@ public final class Debug {
     private static final String SYSFS_QEMU_TRACE_STATE = "/sys/qemu_trace/state";
     private static final String TAG = "Debug";
 
-    @Deprecated
-    public static final int TRACE_COUNT_ALLOCS = 1;
+    @Deprecated public static final int TRACE_COUNT_ALLOCS = 1;
     private static volatile boolean mWaiting = false;
-    private static final String[] FRAMEWORK_FEATURES = {"opengl-tracing", "view-hierarchy", "support_boot_stages"};
+    private static final String[] FRAMEWORK_FEATURES = {
+        "opengl-tracing", "view-hierarchy", "support_boot_stages"
+    };
     private static final TypedProperties debugProperties = null;
 
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface DebugProperty {
-    }
+    public @interface DebugProperty {}
 
     public static native boolean dumpJavaBacktraceToFileTimeout(int i, String str, int i2);
 
@@ -158,23 +162,23 @@ public final class Debug {
 
     public static native boolean logAllocatorStats();
 
-    private Debug() {
-    }
+    private Debug() {}
 
     public static class MemoryInfo implements Parcelable {
-        public static final Parcelable.Creator<MemoryInfo> CREATOR = new Parcelable.Creator<MemoryInfo>() { // from class: android.os.Debug.MemoryInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public MemoryInfo createFromParcel(Parcel source) {
-                return new MemoryInfo(source);
-            }
+        public static final Parcelable.Creator<MemoryInfo> CREATOR =
+                new Parcelable.Creator<MemoryInfo>() { // from class: android.os.Debug.MemoryInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public MemoryInfo createFromParcel(Parcel source) {
+                        return new MemoryInfo(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public MemoryInfo[] newArray(int size) {
-                return new MemoryInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public MemoryInfo[] newArray(int size) {
+                        return new MemoryInfo[size];
+                    }
+                };
         public static final int HEAP_DALVIK = 1;
         public static final int HEAP_NATIVE = 2;
         public static final int HEAP_UNKNOWN = 0;
@@ -301,7 +305,12 @@ public final class Debug {
         }
 
         public int getTotalUss() {
-            return this.dalvikPrivateClean + this.dalvikPrivateDirty + this.nativePrivateClean + this.nativePrivateDirty + this.otherPrivateClean + this.otherPrivateDirty;
+            return this.dalvikPrivateClean
+                    + this.dalvikPrivateDirty
+                    + this.nativePrivateClean
+                    + this.nativePrivateDirty
+                    + this.otherPrivateClean
+                    + this.otherPrivateDirty;
         }
 
         public int getTotalSwappablePss() {
@@ -565,7 +574,14 @@ public final class Debug {
         }
 
         public int getSummaryCode() {
-            return getOtherPrivate(6) + getOtherPrivate(7) + getOtherPrivate(8) + getOtherPrivate(9) + getOtherPrivate(10) + getOtherPrivate(11) + getOtherPrivate(23) + getOtherPrivate(24);
+            return getOtherPrivate(6)
+                    + getOtherPrivate(7)
+                    + getOtherPrivate(8)
+                    + getOtherPrivate(9)
+                    + getOtherPrivate(10)
+                    + getOtherPrivate(11)
+                    + getOtherPrivate(23)
+                    + getOtherPrivate(24);
         }
 
         public int getSummaryStack() {
@@ -577,7 +593,11 @@ public final class Debug {
         }
 
         public int getSummaryPrivateOther() {
-            return (((((getTotalPrivateClean() + getTotalPrivateDirty()) - getSummaryJavaHeap()) - getSummaryNativeHeap()) - getSummaryCode()) - getSummaryStack()) - getSummaryGraphics();
+            return (((((getTotalPrivateClean() + getTotalPrivateDirty()) - getSummaryJavaHeap())
+                                            - getSummaryNativeHeap())
+                                    - getSummaryCode())
+                            - getSummaryStack())
+                    - getSummaryGraphics();
         }
 
         public int getSummarySystem() {
@@ -593,7 +613,14 @@ public final class Debug {
         }
 
         public int getSummaryCodeRss() {
-            return getOtherRss(6) + getOtherRss(7) + getOtherRss(8) + getOtherRss(9) + getOtherRss(10) + getOtherRss(11) + getOtherRss(23) + getOtherRss(24);
+            return getOtherRss(6)
+                    + getOtherRss(7)
+                    + getOtherRss(8)
+                    + getOtherRss(9)
+                    + getOtherRss(10)
+                    + getOtherRss(11)
+                    + getOtherRss(23)
+                    + getOtherRss(24);
         }
 
         public int getSummaryStackRss() {
@@ -605,7 +632,10 @@ public final class Debug {
         }
 
         public int getSummaryUnknownRss() {
-            return ((((getTotalRss() - getSummaryJavaHeapRss()) - getSummaryNativeHeapRss()) - getSummaryCodeRss()) - getSummaryStackRss()) - getSummaryGraphicsRss();
+            return ((((getTotalRss() - getSummaryJavaHeapRss()) - getSummaryNativeHeapRss())
+                                    - getSummaryCodeRss())
+                            - getSummaryStackRss())
+                    - getSummaryGraphicsRss();
         }
 
         public int getSummaryTotalPss() {
@@ -751,7 +781,8 @@ public final class Debug {
                 } catch (InterruptedException e2) {
                 }
             } else {
-                System.out.println("debugger has settled (" + delta + NavigationBarInflaterView.KEY_CODE_END);
+                System.out.println(
+                        "debugger has settled (" + delta + NavigationBarInflaterView.KEY_CODE_END);
                 return;
             }
         }
@@ -774,8 +805,7 @@ public final class Debug {
     }
 
     @Deprecated
-    public static void changeDebugPort(int port) {
-    }
+    public static void changeDebugPort(int port) {}
 
     public static void startNativeTracing() {
         PrintWriter outStream = null;
@@ -835,7 +865,8 @@ public final class Debug {
         VMDebug.startMethodTracing(fixTracePath(tracePath), bufferSize, flags, false, 0);
     }
 
-    public static void startMethodTracingSampling(String tracePath, int bufferSize, int intervalUs) {
+    public static void startMethodTracingSampling(
+            String tracePath, int bufferSize, int intervalUs) {
         VMDebug.startMethodTracing(fixTracePath(tracePath), bufferSize, 0, true, intervalUs);
     }
 
@@ -860,11 +891,13 @@ public final class Debug {
         return tracePath;
     }
 
-    public static void startMethodTracing(String traceName, FileDescriptor fd, int bufferSize, int flags, boolean streamOutput) {
+    public static void startMethodTracing(
+            String traceName, FileDescriptor fd, int bufferSize, int flags, boolean streamOutput) {
         VMDebug.startMethodTracing(traceName, fd, bufferSize, flags, false, 0, streamOutput);
     }
 
-    public static void startMethodTracingDdms(int bufferSize, int flags, boolean samplingEnabled, int intervalUs) {
+    public static void startMethodTracingDdms(
+            int bufferSize, int flags, boolean samplingEnabled, int intervalUs) {
         VMDebug.startMethodTracingDdms(bufferSize, flags, samplingEnabled, intervalUs);
     }
 
@@ -966,12 +999,10 @@ public final class Debug {
     }
 
     @Deprecated
-    public static void resetGlobalExternalAllocSize() {
-    }
+    public static void resetGlobalExternalAllocSize() {}
 
     @Deprecated
-    public static void resetGlobalExternalAllocCount() {
-    }
+    public static void resetGlobalExternalAllocCount() {}
 
     @Deprecated
     public static int getGlobalExternalAllocSize() {
@@ -984,8 +1015,7 @@ public final class Debug {
     }
 
     @Deprecated
-    public static void resetGlobalExternalFreedCount() {
-    }
+    public static void resetGlobalExternalFreedCount() {}
 
     @Deprecated
     public static int getGlobalExternalFreedSize() {
@@ -993,8 +1023,7 @@ public final class Debug {
     }
 
     @Deprecated
-    public static void resetGlobalExternalFreedSize() {
-    }
+    public static void resetGlobalExternalFreedSize() {}
 
     @Deprecated
     public static int getThreadAllocCount() {
@@ -1022,8 +1051,7 @@ public final class Debug {
     }
 
     @Deprecated
-    public static void resetThreadExternalAllocCount() {
-    }
+    public static void resetThreadExternalAllocCount() {}
 
     @Deprecated
     public static int getThreadExternalAllocSize() {
@@ -1031,8 +1059,7 @@ public final class Debug {
     }
 
     @Deprecated
-    public static void resetThreadExternalAllocSize() {
-    }
+    public static void resetThreadExternalAllocSize() {}
 
     @Deprecated
     public static int getThreadGcInvocationCount() {
@@ -1139,12 +1166,18 @@ public final class Debug {
         }
     }
 
-    private static void modifyFieldIfSet(Field field, TypedProperties properties, String propertyName) {
+    private static void modifyFieldIfSet(
+            Field field, TypedProperties properties, String propertyName) {
         if (field.getType() == String.class) {
             int stringInfo = properties.getStringInfo(propertyName);
             switch (stringInfo) {
                 case -2:
-                    throw new IllegalArgumentException("Type of " + propertyName + "  does not match field type (" + field.getType() + NavigationBarInflaterView.KEY_CODE_END);
+                    throw new IllegalArgumentException(
+                            "Type of "
+                                    + propertyName
+                                    + "  does not match field type ("
+                                    + field.getType()
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                 case -1:
                     return;
                 case 0:
@@ -1152,18 +1185,30 @@ public final class Debug {
                         field.set(null, null);
                         return;
                     } catch (IllegalAccessException ex) {
-                        throw new IllegalArgumentException("Cannot set field for " + propertyName, ex);
+                        throw new IllegalArgumentException(
+                                "Cannot set field for " + propertyName, ex);
                     }
                 case 1:
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected getStringInfo(" + propertyName + ") return value " + stringInfo);
+                    throw new IllegalStateException(
+                            "Unexpected getStringInfo("
+                                    + propertyName
+                                    + ") return value "
+                                    + stringInfo);
             }
         }
         Object value = properties.get(propertyName);
         if (value != null) {
             if (!fieldTypeMatches(field, value.getClass())) {
-                throw new IllegalArgumentException("Type of " + propertyName + " (" + value.getClass() + ")  does not match field type (" + field.getType() + NavigationBarInflaterView.KEY_CODE_END);
+                throw new IllegalArgumentException(
+                        "Type of "
+                                + propertyName
+                                + " ("
+                                + value.getClass()
+                                + ")  does not match field type ("
+                                + field.getType()
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
             try {
                 field.set(null, value);
@@ -1178,7 +1223,11 @@ public final class Debug {
     }
 
     public static void setFieldsOn(Class<?> cl, boolean partial) {
-        Log.wtf(TAG, "setFieldsOn(" + (cl == null ? "null" : cl.getName()) + ") called in non-DEBUG build");
+        Log.wtf(
+                TAG,
+                "setFieldsOn("
+                        + (cl == null ? "null" : cl.getName())
+                        + ") called in non-DEBUG build");
     }
 
     public static boolean dumpService(String name, FileDescriptor fd, String[] args) {
@@ -1201,7 +1250,11 @@ public final class Debug {
             return "<bottom of call stack>";
         }
         StackTraceElement caller = callStack[depth + 4];
-        return caller.getClassName() + MediaMetrics.SEPARATOR + caller.getMethodName() + ":" + caller.getLineNumber();
+        return caller.getClassName()
+                + MediaMetrics.SEPARATOR
+                + caller.getMethodName()
+                + ":"
+                + caller.getLineNumber();
     }
 
     public static String getCallers(int depth) {
@@ -1239,7 +1292,9 @@ public final class Debug {
     public static boolean semIsOemUnlockEnabled(Context context) {
         PersistentDataBlockManager manager = null;
         try {
-            manager = (PersistentDataBlockManager) context.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+            manager =
+                    (PersistentDataBlockManager)
+                            context.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1254,7 +1309,9 @@ public final class Debug {
         synchronized (Debug.class) {
             if (reason != null) {
                 SystemProperties.set("sys.reset_reason", reason);
-                SystemProperties.set("sys.reset_info", extra_info.substring(0, Math.min(extra_info.length(), 91)));
+                SystemProperties.set(
+                        "sys.reset_info",
+                        extra_info.substring(0, Math.min(extra_info.length(), 91)));
                 SystemProperties.set("ctl.start", "resetreason");
             } else {
                 Log.d(TAG, "!@ saveResetReason, but reason is null");
@@ -1262,7 +1319,8 @@ public final class Debug {
         }
     }
 
-    public static void attachJvmtiAgent(String library, String options, ClassLoader classLoader) throws IOException {
+    public static void attachJvmtiAgent(String library, String options, ClassLoader classLoader)
+            throws IOException {
         Preconditions.checkNotNull(library);
         Preconditions.checkArgument(!library.contains("="));
         if (options != null) {
@@ -1299,7 +1357,11 @@ public final class Debug {
             }
             if (CoreRune.IS_DEBUG_LEVEL_LOW) {
                 try {
-                    if (nxt_brmode.startsWith("app") && (packageName == null || (!packageName.contains("com.sec.") && !packageName.contains("com.samsung.") && !packageName.contains("com.android.phone")))) {
+                    if (nxt_brmode.startsWith("app")
+                            && (packageName == null
+                                    || (!packageName.contains("com.sec.")
+                                            && !packageName.contains("com.samsung.")
+                                            && !packageName.contains("com.android.phone")))) {
                         Log.d(TAG, "low && ship && 3rdparty app crash, do not dump");
                         return;
                     }
@@ -1309,7 +1371,8 @@ public final class Debug {
                 }
             }
             if ("1".equals(dump_running)) {
-                if (!pre_brmode.startsWith(Notification.CATEGORY_SYSTEM) && nxt_brmode.startsWith(Notification.CATEGORY_SYSTEM)) {
+                if (!pre_brmode.startsWith(Notification.CATEGORY_SYSTEM)
+                        && nxt_brmode.startsWith(Notification.CATEGORY_SYSTEM)) {
                     Log.d(TAG, "cancel previous dumsptate, and start new one");
                     SystemProperties.set("ctl.stop", "bugreportm");
                     SystemProperties.set("ctl.stop", "bugreportd");

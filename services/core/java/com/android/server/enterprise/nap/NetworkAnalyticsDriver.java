@@ -3,7 +3,7 @@ package com.android.server.enterprise.nap;
 import android.os.AsyncTask;
 import android.os.Message;
 import android.util.Log;
-import com.android.server.enterprise.nap.NetworkAnalyticsDataDelivery;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -25,12 +25,15 @@ class NetworkAnalyticsDriver {
     public String ncmVersion = null;
     public Integer versionMismatchCheck = null;
     public boolean stateOfIntervalSet = false;
-    public String test = "{ \"src\":\"10.10.12.12\", \"dst\":\"66.7.251.20\", \"sport\":\"5000\", \"dport\":\"443\", \"uid\":\"10197\", \"pid\":\"666\", \"bsent\":\"1400\", \"brecv\":\"4500\", \"hostname\":\"www.space.com\", \"protocol\":\"tcp\", \"hash\":\"a0627953\" }";
+    public String test =
+            "{ \"src\":\"10.10.12.12\", \"dst\":\"66.7.251.20\", \"sport\":\"5000\","
+                + " \"dport\":\"443\", \"uid\":\"10197\", \"pid\":\"666\", \"bsent\":\"1400\","
+                + " \"brecv\":\"4500\", \"hostname\":\"www.space.com\", \"protocol\":\"tcp\","
+                + " \"hash\":\"a0627953\" }";
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KernelDataFetch extends AsyncTask {
-        public KernelDataFetch() {
-        }
+        public KernelDataFetch() {}
 
         @Override // android.os.AsyncTask
         public final Object doInBackground(Object[] objArr) {
@@ -38,7 +41,9 @@ class NetworkAnalyticsDriver {
             try {
                 z = NetworkAnalyticsDriver.DBG;
                 if (z) {
-                    Log.d(NetworkAnalyticsDriver.TAG, "_deliverDataToRecipients: Starting Async task.");
+                    Log.d(
+                            NetworkAnalyticsDriver.TAG,
+                            "_deliverDataToRecipients: Starting Async task.");
                 }
             } catch (InterruptedException unused) {
             } catch (Exception e) {
@@ -46,13 +51,17 @@ class NetworkAnalyticsDriver {
             }
             if (NetworkAnalyticsDriver.this.dataDeliver == null) {
                 if (z) {
-                    Log.d(NetworkAnalyticsDriver.TAG, "_deliverDataToRecipients: Data Delivery object is null. Terminate.");
+                    Log.d(
+                            NetworkAnalyticsDriver.TAG,
+                            "_deliverDataToRecipients: Data Delivery object is null. Terminate.");
                 }
                 NetworkAnalyticsDriver.this.setStateOfThread(false);
                 return null;
             }
             if (z) {
-                Log.d(NetworkAnalyticsDriver.TAG, "_deliverDataToRecipients: Initialzing handler thread from Async task.");
+                Log.d(
+                        NetworkAnalyticsDriver.TAG,
+                        "_deliverDataToRecipients: Initialzing handler thread from Async task.");
             }
             NetworkAnalyticsDriver.this.dataDeliver.initializeHandlerThread();
             while (NetworkAnalyticsDriver.this.atomicBoolean.get()) {
@@ -67,24 +76,28 @@ class NetworkAnalyticsDriver {
         }
 
         @Override // android.os.AsyncTask
-        public final /* bridge */ /* synthetic */ void onPostExecute(Object obj) {
-        }
+        public final /* bridge */ /* synthetic */ void onPostExecute(Object obj) {}
 
         @Override // android.os.AsyncTask
-        public final void onPreExecute() {
-        }
+        public final void onPreExecute() {}
     }
 
-    public NetworkAnalyticsDriver(NetworkAnalyticsConnectionManager networkAnalyticsConnectionManager, NetworkAnalyticsDataDelivery networkAnalyticsDataDelivery) {
+    public NetworkAnalyticsDriver(
+            NetworkAnalyticsConnectionManager networkAnalyticsConnectionManager,
+            NetworkAnalyticsDataDelivery networkAnalyticsDataDelivery) {
         this.atomicBoolean = null;
         this.dataDeliver = networkAnalyticsDataDelivery;
         this.mConnectionManager = networkAnalyticsConnectionManager;
         this.atomicBoolean = new AtomicBoolean(false);
     }
 
-    public static NetworkAnalyticsDriver getInstance(NetworkAnalyticsConnectionManager networkAnalyticsConnectionManager, NetworkAnalyticsDataDelivery networkAnalyticsDataDelivery) {
+    public static NetworkAnalyticsDriver getInstance(
+            NetworkAnalyticsConnectionManager networkAnalyticsConnectionManager,
+            NetworkAnalyticsDataDelivery networkAnalyticsDataDelivery) {
         if (mInstance == null) {
-            mInstance = new NetworkAnalyticsDriver(networkAnalyticsConnectionManager, networkAnalyticsDataDelivery);
+            mInstance =
+                    new NetworkAnalyticsDriver(
+                            networkAnalyticsConnectionManager, networkAnalyticsDataDelivery);
         }
         return mInstance;
     }
@@ -106,15 +119,16 @@ class NetworkAnalyticsDriver {
         setStateOfThread(true);
     }
 
-    public void checkDataCollectionState() {
-    }
+    public void checkDataCollectionState() {}
 
     public native int checkNcmVersion();
 
     public synchronized int checkNcmVersionMismatch() {
         if (this.versionMismatchCheck == null) {
             if (checkNcmVersion() < 0) {
-                Log.i(TAG, "beginDataRecording: Mismatch between kernel and userspace npa version.");
+                Log.i(
+                        TAG,
+                        "beginDataRecording: Mismatch between kernel and userspace npa version.");
                 this.versionMismatchCheck = -20;
                 return -20;
             }
@@ -150,9 +164,11 @@ class NetworkAnalyticsDriver {
 
     public void jniSendingData(String str) {
         NetworkAnalyticsDataDelivery networkAnalyticsDataDelivery = this.dataDeliver;
-        NetworkAnalyticsDataDelivery.DataDeliveryHandler dataDeliveryHandler = networkAnalyticsDataDelivery.mHandler;
+        NetworkAnalyticsDataDelivery.DataDeliveryHandler dataDeliveryHandler =
+                networkAnalyticsDataDelivery.mHandler;
         if (dataDeliveryHandler != null) {
-            networkAnalyticsDataDelivery.mHandler.sendMessage(Message.obtain(dataDeliveryHandler, 1, 0, 0, str));
+            networkAnalyticsDataDelivery.mHandler.sendMessage(
+                    Message.obtain(dataDeliveryHandler, 1, 0, 0, str));
         }
     }
 
@@ -169,7 +185,9 @@ class NetworkAnalyticsDriver {
             this.ncmVersion = Integer.toString(ncmVersion);
             if (ncmVersion < 0) {
                 this.ncmVersion = null;
-                Log.i(TAG, "beginDataRecording: Get npa version failed. Char device in open state.");
+                Log.i(
+                        TAG,
+                        "beginDataRecording: Get npa version failed. Char device in open state.");
                 return -1;
             }
         }

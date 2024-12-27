@@ -4,6 +4,7 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.os.SystemClock;
 import android.os.TimestampedValue;
 import android.util.IndentingPrintWriter;
+
 import java.time.Duration;
 import java.util.ArrayDeque;
 import java.util.Iterator;
@@ -17,7 +18,8 @@ public final class ReferenceWithHistory {
 
     public ReferenceWithHistory(int i) {
         if (i < 1) {
-            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "maxHistorySize < 1: "));
+            throw new IllegalArgumentException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "maxHistorySize < 1: "));
         }
         this.mMaxHistorySize = i;
     }
@@ -33,7 +35,8 @@ public final class ReferenceWithHistory {
                 TimestampedValue timestampedValue = (TimestampedValue) descendingIterator.next();
                 indentingPrintWriter.print(size);
                 indentingPrintWriter.print("@");
-                indentingPrintWriter.print(Duration.ofMillis(timestampedValue.getReferenceTimeMillis()).toString());
+                indentingPrintWriter.print(
+                        Duration.ofMillis(timestampedValue.getReferenceTimeMillis()).toString());
                 indentingPrintWriter.print(": ");
                 indentingPrintWriter.println(timestampedValue.getValue());
                 size++;

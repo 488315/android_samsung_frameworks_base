@@ -11,10 +11,12 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
 import com.android.server.SystemConfig;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.location.LocationServiceThread;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -76,7 +78,9 @@ public final class SystemSettingsHelper {
             this.mListeners = new CopyOnWriteArrayList();
         }
 
-        public final void addListener(SettingsHelper$UserSettingChangedListener settingsHelper$UserSettingChangedListener) {
+        public final void addListener(
+                SettingsHelper$UserSettingChangedListener
+                        settingsHelper$UserSettingChangedListener) {
             this.mListeners.add(settingsHelper$UserSettingChangedListener);
         }
 
@@ -97,7 +101,9 @@ public final class SystemSettingsHelper {
             this.mRegistered = true;
         }
 
-        public final void removeListener(SettingsHelper$UserSettingChangedListener settingsHelper$UserSettingChangedListener) {
+        public final void removeListener(
+                SettingsHelper$UserSettingChangedListener
+                        settingsHelper$UserSettingChangedListener) {
             this.mListeners.remove(settingsHelper$UserSettingChangedListener);
         }
     }
@@ -123,7 +129,9 @@ public final class SystemSettingsHelper {
                 if (!this.mValid) {
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        PackageTagsList.Builder add = new PackageTagsList.Builder().add((Map) this.mBaseValuesSupplier.get());
+                        PackageTagsList.Builder add =
+                                new PackageTagsList.Builder()
+                                        .add((Map) this.mBaseValuesSupplier.get());
                         String property = DeviceConfig.getProperty("location", this.mName);
                         if (!TextUtils.isEmpty(property)) {
                             for (String str : property.split(",")) {
@@ -174,7 +182,10 @@ public final class SystemSettingsHelper {
                     this.mValid = false;
                     this.mCachedValue = null;
                 }
-                VpnManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("location device config setting changed: "), this.mName, "LocationManagerService");
+                VpnManagerService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("location device config setting changed: "),
+                        this.mName,
+                        "LocationManagerService");
                 Iterator it = this.mListeners.iterator();
                 while (it.hasNext()) {
                     ((SettingsHelper$UserSettingChangedListener) it.next()).onSettingChanged(-1);
@@ -205,8 +216,13 @@ public final class SystemSettingsHelper {
                 if (i != this.mCachedUserId) {
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        String stringForUser = Settings.Secure.getStringForUser(this.mContext.getContentResolver(), this.mSettingName, i);
-                        List emptyList = TextUtils.isEmpty(stringForUser) ? Collections.emptyList() : Arrays.asList(stringForUser.split(","));
+                        String stringForUser =
+                                Settings.Secure.getStringForUser(
+                                        this.mContext.getContentResolver(), this.mSettingName, i);
+                        List emptyList =
+                                TextUtils.isEmpty(stringForUser)
+                                        ? Collections.emptyList()
+                                        : Arrays.asList(stringForUser.split(","));
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         synchronized (this) {
                             if (this.mRegistered) {
@@ -226,7 +242,8 @@ public final class SystemSettingsHelper {
             return list;
         }
 
-        @Override // com.android.server.location.injector.SystemSettingsHelper.ObservingSetting, android.database.ContentObserver
+        @Override // com.android.server.location.injector.SystemSettingsHelper.ObservingSetting,
+                  // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri, int i) {
             synchronized (this) {
                 if (this.mCachedUserId == i) {
@@ -246,7 +263,11 @@ public final class SystemSettingsHelper {
         public final String mSettingName;
         public boolean mValid;
 
-        public StringSetCachedGlobalSetting(Context context, SystemSettingsHelper$$ExternalSyntheticLambda0 systemSettingsHelper$$ExternalSyntheticLambda0, Handler handler) {
+        public StringSetCachedGlobalSetting(
+                Context context,
+                SystemSettingsHelper$$ExternalSyntheticLambda0
+                        systemSettingsHelper$$ExternalSyntheticLambda0,
+                Handler handler) {
             super(handler);
             this.mContext = context;
             this.mSettingName = "location_background_throttle_package_whitelist";
@@ -261,8 +282,11 @@ public final class SystemSettingsHelper {
                 if (!this.mValid) {
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        ArraySet arraySet2 = new ArraySet((ArraySet) this.mBaseValuesSupplier.get());
-                        String string = Settings.Global.getString(this.mContext.getContentResolver(), this.mSettingName);
+                        ArraySet arraySet2 =
+                                new ArraySet((ArraySet) this.mBaseValuesSupplier.get());
+                        String string =
+                                Settings.Global.getString(
+                                        this.mContext.getContentResolver(), this.mSettingName);
                         if (!TextUtils.isEmpty(string)) {
                             arraySet2.addAll(Arrays.asList(string.split(",")));
                         }
@@ -283,7 +307,8 @@ public final class SystemSettingsHelper {
             return arraySet;
         }
 
-        @Override // com.android.server.location.injector.SystemSettingsHelper.ObservingSetting, android.database.ContentObserver
+        @Override // com.android.server.location.injector.SystemSettingsHelper.ObservingSetting,
+                  // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri, int i) {
             synchronized (this) {
                 this.mValid = false;
@@ -297,58 +322,87 @@ public final class SystemSettingsHelper {
     public SystemSettingsHelper(Context context) {
         this.mContext = context;
         this.mLocationMode = new LongGlobalSetting(context, LocationServiceThread.getHandler(), 2);
-        this.mBackgroundThrottleIntervalMs = new LongGlobalSetting(context, LocationServiceThread.getHandler(), 0);
-        this.mGnssMeasurementFullTracking = new LongGlobalSetting(context, LocationServiceThread.getHandler(), 1);
-        this.mLocationPackageBlacklist = new StringListCachedSecureSetting(context, "locationPackagePrefixBlacklist", LocationServiceThread.getHandler());
-        this.mLocationPackageWhitelist = new StringListCachedSecureSetting(context, "locationPackagePrefixWhitelist", LocationServiceThread.getHandler());
+        this.mBackgroundThrottleIntervalMs =
+                new LongGlobalSetting(context, LocationServiceThread.getHandler(), 0);
+        this.mGnssMeasurementFullTracking =
+                new LongGlobalSetting(context, LocationServiceThread.getHandler(), 1);
+        this.mLocationPackageBlacklist =
+                new StringListCachedSecureSetting(
+                        context,
+                        "locationPackagePrefixBlacklist",
+                        LocationServiceThread.getHandler());
+        this.mLocationPackageWhitelist =
+                new StringListCachedSecureSetting(
+                        context,
+                        "locationPackagePrefixWhitelist",
+                        LocationServiceThread.getHandler());
         final int i = 0;
-        this.mBackgroundThrottlePackageWhitelist = new StringSetCachedGlobalSetting(context, new Supplier() { // from class: com.android.server.location.injector.SystemSettingsHelper$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                switch (i) {
-                    case 0:
-                        return SystemConfig.getInstance().mAllowUnthrottledLocation;
-                    case 1:
-                        return SystemConfig.getInstance().mAllowAdasSettings;
-                    default:
-                        return SystemConfig.getInstance().mAllowIgnoreLocationSettings;
-                }
-            }
-        }, LocationServiceThread.getHandler());
+        this.mBackgroundThrottlePackageWhitelist =
+                new StringSetCachedGlobalSetting(
+                        context,
+                        new Supplier() { // from class:
+                                         // com.android.server.location.injector.SystemSettingsHelper$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                switch (i) {
+                                    case 0:
+                                        return SystemConfig.getInstance().mAllowUnthrottledLocation;
+                                    case 1:
+                                        return SystemConfig.getInstance().mAllowAdasSettings;
+                                    default:
+                                        return SystemConfig.getInstance()
+                                                .mAllowIgnoreLocationSettings;
+                                }
+                            }
+                        },
+                        LocationServiceThread.getHandler());
         final int i2 = 1;
-        this.mAdasPackageAllowlist = new PackageTagsListSetting("adas_settings_allowlist", new Supplier() { // from class: com.android.server.location.injector.SystemSettingsHelper$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                switch (i2) {
-                    case 0:
-                        return SystemConfig.getInstance().mAllowUnthrottledLocation;
-                    case 1:
-                        return SystemConfig.getInstance().mAllowAdasSettings;
-                    default:
-                        return SystemConfig.getInstance().mAllowIgnoreLocationSettings;
-                }
-            }
-        });
+        this.mAdasPackageAllowlist =
+                new PackageTagsListSetting(
+                        "adas_settings_allowlist",
+                        new Supplier() { // from class:
+                                         // com.android.server.location.injector.SystemSettingsHelper$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                switch (i2) {
+                                    case 0:
+                                        return SystemConfig.getInstance().mAllowUnthrottledLocation;
+                                    case 1:
+                                        return SystemConfig.getInstance().mAllowAdasSettings;
+                                    default:
+                                        return SystemConfig.getInstance()
+                                                .mAllowIgnoreLocationSettings;
+                                }
+                            }
+                        });
         final int i3 = 2;
-        this.mIgnoreSettingsPackageAllowlist = new PackageTagsListSetting("ignore_settings_allowlist", new Supplier() { // from class: com.android.server.location.injector.SystemSettingsHelper$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                switch (i3) {
-                    case 0:
-                        return SystemConfig.getInstance().mAllowUnthrottledLocation;
-                    case 1:
-                        return SystemConfig.getInstance().mAllowAdasSettings;
-                    default:
-                        return SystemConfig.getInstance().mAllowIgnoreLocationSettings;
-                }
-            }
-        });
+        this.mIgnoreSettingsPackageAllowlist =
+                new PackageTagsListSetting(
+                        "ignore_settings_allowlist",
+                        new Supplier() { // from class:
+                                         // com.android.server.location.injector.SystemSettingsHelper$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                switch (i3) {
+                                    case 0:
+                                        return SystemConfig.getInstance().mAllowUnthrottledLocation;
+                                    case 1:
+                                        return SystemConfig.getInstance().mAllowAdasSettings;
+                                    default:
+                                        return SystemConfig.getInstance()
+                                                .mAllowIgnoreLocationSettings;
+                                }
+                            }
+                        });
     }
 
     public final long getBackgroundThrottleProximityAlertIntervalMs() {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            return Settings.Global.getLong(this.mContext.getContentResolver(), "location_background_throttle_proximity_alert_interval_ms", 1800000L);
+            return Settings.Global.getLong(
+                    this.mContext.getContentResolver(),
+                    "location_background_throttle_proximity_alert_interval_ms",
+                    1800000L);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -359,7 +413,12 @@ public final class SystemSettingsHelper {
         longGlobalSetting.getClass();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            return Settings.Secure.getIntForUser(longGlobalSetting.mContext.getContentResolver(), longGlobalSetting.mSettingName, 0, i) != 0;
+            return Settings.Secure.getIntForUser(
+                            longGlobalSetting.mContext.getContentResolver(),
+                            longGlobalSetting.mSettingName,
+                            0,
+                            i)
+                    != 0;
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -387,21 +446,35 @@ public final class SystemSettingsHelper {
 
     public final void onSystemReady() {
         LongGlobalSetting longGlobalSetting = this.mLocationMode;
-        longGlobalSetting.register(longGlobalSetting.mContext, Settings.Secure.getUriFor(longGlobalSetting.mSettingName));
+        longGlobalSetting.register(
+                longGlobalSetting.mContext,
+                Settings.Secure.getUriFor(longGlobalSetting.mSettingName));
         LongGlobalSetting longGlobalSetting2 = this.mBackgroundThrottleIntervalMs;
-        longGlobalSetting2.register(longGlobalSetting2.mContext, Settings.Global.getUriFor(longGlobalSetting2.mSettingName));
-        StringListCachedSecureSetting stringListCachedSecureSetting = this.mLocationPackageBlacklist;
-        stringListCachedSecureSetting.register(stringListCachedSecureSetting.mContext, Settings.Secure.getUriFor(stringListCachedSecureSetting.mSettingName));
-        StringListCachedSecureSetting stringListCachedSecureSetting2 = this.mLocationPackageWhitelist;
-        stringListCachedSecureSetting2.register(stringListCachedSecureSetting2.mContext, Settings.Secure.getUriFor(stringListCachedSecureSetting2.mSettingName));
-        StringSetCachedGlobalSetting stringSetCachedGlobalSetting = this.mBackgroundThrottlePackageWhitelist;
-        stringSetCachedGlobalSetting.register(stringSetCachedGlobalSetting.mContext, Settings.Global.getUriFor(stringSetCachedGlobalSetting.mSettingName));
+        longGlobalSetting2.register(
+                longGlobalSetting2.mContext,
+                Settings.Global.getUriFor(longGlobalSetting2.mSettingName));
+        StringListCachedSecureSetting stringListCachedSecureSetting =
+                this.mLocationPackageBlacklist;
+        stringListCachedSecureSetting.register(
+                stringListCachedSecureSetting.mContext,
+                Settings.Secure.getUriFor(stringListCachedSecureSetting.mSettingName));
+        StringListCachedSecureSetting stringListCachedSecureSetting2 =
+                this.mLocationPackageWhitelist;
+        stringListCachedSecureSetting2.register(
+                stringListCachedSecureSetting2.mContext,
+                Settings.Secure.getUriFor(stringListCachedSecureSetting2.mSettingName));
+        StringSetCachedGlobalSetting stringSetCachedGlobalSetting =
+                this.mBackgroundThrottlePackageWhitelist;
+        stringSetCachedGlobalSetting.register(
+                stringSetCachedGlobalSetting.mContext,
+                Settings.Global.getUriFor(stringSetCachedGlobalSetting.mSettingName));
         PackageTagsListSetting packageTagsListSetting = this.mIgnoreSettingsPackageAllowlist;
         synchronized (packageTagsListSetting) {
             if (packageTagsListSetting.mRegistered) {
                 return;
             }
-            DeviceConfig.addOnPropertiesChangedListener("location", LocationServiceThread.getExecutor(), packageTagsListSetting);
+            DeviceConfig.addOnPropertiesChangedListener(
+                    "location", LocationServiceThread.getExecutor(), packageTagsListSetting);
             packageTagsListSetting.mRegistered = true;
         }
     }

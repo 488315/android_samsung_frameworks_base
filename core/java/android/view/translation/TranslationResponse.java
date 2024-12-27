@@ -5,26 +5,31 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseArray;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TranslationResponse implements Parcelable {
-    public static final Parcelable.Creator<TranslationResponse> CREATOR = new Parcelable.Creator<TranslationResponse>() { // from class: android.view.translation.TranslationResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationResponse[] newArray(int size) {
-            return new TranslationResponse[size];
-        }
+    public static final Parcelable.Creator<TranslationResponse> CREATOR =
+            new Parcelable.Creator<
+                    TranslationResponse>() { // from class:
+                                             // android.view.translation.TranslationResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationResponse[] newArray(int size) {
+                    return new TranslationResponse[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationResponse createFromParcel(Parcel in) {
-            return new TranslationResponse(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationResponse createFromParcel(Parcel in) {
+                    return new TranslationResponse(in);
+                }
+            };
     public static final int TRANSLATION_STATUS_CONTEXT_UNSUPPORTED = 2;
     public static final int TRANSLATION_STATUS_SUCCESS = 0;
     public static final int TRANSLATION_STATUS_UNKNOWN_ERROR = 1;
@@ -34,15 +39,13 @@ public final class TranslationResponse implements Parcelable {
     private final SparseArray<ViewTranslationResponse> mViewTranslationResponses;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TranslationStatus {
-    }
+    public @interface TranslationStatus {}
 
-    static abstract class BaseBuilder {
+    abstract static class BaseBuilder {
         @Deprecated
         public abstract Builder setTranslationStatus(int i);
 
-        BaseBuilder() {
-        }
+        BaseBuilder() {}
 
         public Builder setTranslationResponseValue(int index, TranslationResponseValue value) {
             Objects.requireNonNull(value, "value should not be null");
@@ -93,15 +96,33 @@ public final class TranslationResponse implements Parcelable {
         }
     }
 
-    TranslationResponse(int translationStatus, SparseArray<TranslationResponseValue> translationResponseValues, SparseArray<ViewTranslationResponse> viewTranslationResponses, boolean finalResponse) {
+    TranslationResponse(
+            int translationStatus,
+            SparseArray<TranslationResponseValue> translationResponseValues,
+            SparseArray<ViewTranslationResponse> viewTranslationResponses,
+            boolean finalResponse) {
         this.mTranslationStatus = translationStatus;
-        if (this.mTranslationStatus != 0 && this.mTranslationStatus != 1 && this.mTranslationStatus != 2) {
-            throw new IllegalArgumentException("translationStatus was " + this.mTranslationStatus + " but must be one of: TRANSLATION_STATUS_SUCCESS(0), TRANSLATION_STATUS_UNKNOWN_ERROR(1), TRANSLATION_STATUS_CONTEXT_UNSUPPORTED(2" + NavigationBarInflaterView.KEY_CODE_END);
+        if (this.mTranslationStatus != 0
+                && this.mTranslationStatus != 1
+                && this.mTranslationStatus != 2) {
+            throw new IllegalArgumentException(
+                    "translationStatus was "
+                            + this.mTranslationStatus
+                            + " but must be one of: TRANSLATION_STATUS_SUCCESS(0),"
+                            + " TRANSLATION_STATUS_UNKNOWN_ERROR(1),"
+                            + " TRANSLATION_STATUS_CONTEXT_UNSUPPORTED(2"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mTranslationResponseValues = translationResponseValues;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTranslationResponseValues);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mTranslationResponseValues);
         this.mViewTranslationResponses = viewTranslationResponses;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mViewTranslationResponses);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mViewTranslationResponses);
         this.mFinalResponse = finalResponse;
     }
 
@@ -122,7 +143,15 @@ public final class TranslationResponse implements Parcelable {
     }
 
     public String toString() {
-        return "TranslationResponse { translationStatus = " + translationStatusToString(this.mTranslationStatus) + ", translationResponseValues = " + this.mTranslationResponseValues + ", viewTranslationResponses = " + this.mViewTranslationResponses + ", finalResponse = " + this.mFinalResponse + " }";
+        return "TranslationResponse { translationStatus = "
+                + translationStatusToString(this.mTranslationStatus)
+                + ", translationResponseValues = "
+                + this.mTranslationResponseValues
+                + ", viewTranslationResponses = "
+                + this.mViewTranslationResponses
+                + ", finalResponse = "
+                + this.mFinalResponse
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -143,16 +172,32 @@ public final class TranslationResponse implements Parcelable {
         byte flg = in.readByte();
         boolean finalResponse = (flg & 8) != 0;
         int translationStatus = in.readInt();
-        SparseArray<TranslationResponseValue> translationResponseValues = in.readSparseArray(TranslationResponseValue.class.getClassLoader());
-        SparseArray<ViewTranslationResponse> viewTranslationResponses = in.readSparseArray(ViewTranslationResponse.class.getClassLoader());
+        SparseArray<TranslationResponseValue> translationResponseValues =
+                in.readSparseArray(TranslationResponseValue.class.getClassLoader());
+        SparseArray<ViewTranslationResponse> viewTranslationResponses =
+                in.readSparseArray(ViewTranslationResponse.class.getClassLoader());
         this.mTranslationStatus = translationStatus;
-        if (this.mTranslationStatus != 0 && this.mTranslationStatus != 1 && this.mTranslationStatus != 2) {
-            throw new IllegalArgumentException("translationStatus was " + this.mTranslationStatus + " but must be one of: TRANSLATION_STATUS_SUCCESS(0), TRANSLATION_STATUS_UNKNOWN_ERROR(1), TRANSLATION_STATUS_CONTEXT_UNSUPPORTED(2" + NavigationBarInflaterView.KEY_CODE_END);
+        if (this.mTranslationStatus != 0
+                && this.mTranslationStatus != 1
+                && this.mTranslationStatus != 2) {
+            throw new IllegalArgumentException(
+                    "translationStatus was "
+                            + this.mTranslationStatus
+                            + " but must be one of: TRANSLATION_STATUS_SUCCESS(0),"
+                            + " TRANSLATION_STATUS_UNKNOWN_ERROR(1),"
+                            + " TRANSLATION_STATUS_CONTEXT_UNSUPPORTED(2"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mTranslationResponseValues = translationResponseValues;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTranslationResponseValues);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mTranslationResponseValues);
         this.mViewTranslationResponses = viewTranslationResponses;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mViewTranslationResponses);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mViewTranslationResponses);
         this.mFinalResponse = finalResponse;
     }
 
@@ -164,19 +209,29 @@ public final class TranslationResponse implements Parcelable {
         private SparseArray<ViewTranslationResponse> mViewTranslationResponses;
 
         @Override // android.view.translation.TranslationResponse.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder setTranslationResponseValue(int i, TranslationResponseValue translationResponseValue) {
+        public /* bridge */ /* synthetic */ Builder setTranslationResponseValue(
+                int i, TranslationResponseValue translationResponseValue) {
             return super.setTranslationResponseValue(i, translationResponseValue);
         }
 
         @Override // android.view.translation.TranslationResponse.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder setViewTranslationResponse(int i, ViewTranslationResponse viewTranslationResponse) {
+        public /* bridge */ /* synthetic */ Builder setViewTranslationResponse(
+                int i, ViewTranslationResponse viewTranslationResponse) {
             return super.setViewTranslationResponse(i, viewTranslationResponse);
         }
 
         public Builder(int translationStatus) {
             this.mTranslationStatus = translationStatus;
-            if (this.mTranslationStatus != 0 && this.mTranslationStatus != 1 && this.mTranslationStatus != 2) {
-                throw new IllegalArgumentException("translationStatus was " + this.mTranslationStatus + " but must be one of: TRANSLATION_STATUS_SUCCESS(0), TRANSLATION_STATUS_UNKNOWN_ERROR(1), TRANSLATION_STATUS_CONTEXT_UNSUPPORTED(2" + NavigationBarInflaterView.KEY_CODE_END);
+            if (this.mTranslationStatus != 0
+                    && this.mTranslationStatus != 1
+                    && this.mTranslationStatus != 2) {
+                throw new IllegalArgumentException(
+                        "translationStatus was "
+                                + this.mTranslationStatus
+                                + " but must be one of: TRANSLATION_STATUS_SUCCESS(0),"
+                                + " TRANSLATION_STATUS_UNKNOWN_ERROR(1),"
+                                + " TRANSLATION_STATUS_CONTEXT_UNSUPPORTED(2"
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
         }
 
@@ -214,26 +269,33 @@ public final class TranslationResponse implements Parcelable {
             checkNotUsed();
             this.mBuilderFieldsSet |= 16;
             if ((this.mBuilderFieldsSet & 2) == 0) {
-                this.mTranslationResponseValues = TranslationResponse.defaultTranslationResponseValues();
+                this.mTranslationResponseValues =
+                        TranslationResponse.defaultTranslationResponseValues();
             }
             if ((this.mBuilderFieldsSet & 4) == 0) {
-                this.mViewTranslationResponses = TranslationResponse.defaultViewTranslationResponses();
+                this.mViewTranslationResponses =
+                        TranslationResponse.defaultViewTranslationResponses();
             }
             if ((this.mBuilderFieldsSet & 8) == 0) {
                 this.mFinalResponse = TranslationResponse.defaultFinalResponse();
             }
-            TranslationResponse o = new TranslationResponse(this.mTranslationStatus, this.mTranslationResponseValues, this.mViewTranslationResponses, this.mFinalResponse);
+            TranslationResponse o =
+                    new TranslationResponse(
+                            this.mTranslationStatus,
+                            this.mTranslationResponseValues,
+                            this.mViewTranslationResponses,
+                            this.mFinalResponse);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 16) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

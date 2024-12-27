@@ -1,6 +1,7 @@
 package android.os;
 
 import android.annotation.SystemApi;
+
 import java.io.Closeable;
 import java.io.IOException;
 
@@ -21,7 +22,8 @@ public class HidlMemory implements Closeable {
     }
 
     public HidlMemory dup() throws IOException {
-        return new HidlMemory(this.mName, this.mSize, this.mHandle != null ? this.mHandle.dup() : null);
+        return new HidlMemory(
+                this.mName, this.mSize, this.mHandle != null ? this.mHandle.dup() : null);
     }
 
     @Override // java.io.Closeable, java.lang.AutoCloseable

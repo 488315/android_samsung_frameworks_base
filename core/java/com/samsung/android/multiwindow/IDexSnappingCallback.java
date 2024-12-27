@@ -15,8 +15,7 @@ public interface IDexSnappingCallback extends IInterface {
 
     public static class Default implements IDexSnappingCallback {
         @Override // com.samsung.android.multiwindow.IDexSnappingCallback
-        public void onWindowSnappingChanged(int taskID, Rect othersBounds) throws RemoteException {
-        }
+        public void onWindowSnappingChanged(int taskID, Rect othersBounds) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +23,7 @@ public interface IDexSnappingCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDexSnappingCallback {
+    public abstract static class Stub extends Binder implements IDexSnappingCallback {
         static final int TRANSACTION_onWindowSnappingChanged = 1;
 
         public Stub() {
@@ -62,7 +61,8 @@ public interface IDexSnappingCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDexSnappingCallback.DESCRIPTOR);
             }
@@ -99,7 +99,8 @@ public interface IDexSnappingCallback extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IDexSnappingCallback
-            public void onWindowSnappingChanged(int taskID, Rect othersBounds) throws RemoteException {
+            public void onWindowSnappingChanged(int taskID, Rect othersBounds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDexSnappingCallback.DESCRIPTOR);

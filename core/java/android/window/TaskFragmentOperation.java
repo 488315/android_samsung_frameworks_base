@@ -6,25 +6,28 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.SurfaceControl;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TaskFragmentOperation implements Parcelable {
-    public static final Parcelable.Creator<TaskFragmentOperation> CREATOR = new Parcelable.Creator<TaskFragmentOperation>() { // from class: android.window.TaskFragmentOperation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TaskFragmentOperation createFromParcel(Parcel in) {
-            return new TaskFragmentOperation(in);
-        }
+    public static final Parcelable.Creator<TaskFragmentOperation> CREATOR =
+            new Parcelable.Creator<
+                    TaskFragmentOperation>() { // from class: android.window.TaskFragmentOperation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TaskFragmentOperation createFromParcel(Parcel in) {
+                    return new TaskFragmentOperation(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TaskFragmentOperation[] newArray(int size) {
-            return new TaskFragmentOperation[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TaskFragmentOperation[] newArray(int size) {
+                    return new TaskFragmentOperation[size];
+                }
+            };
     public static final int OP_TYPE_CLEAR_ADJACENT_TASK_FRAGMENTS = 5;
     public static final int OP_TYPE_CREATE_OR_MOVE_TASK_FRAGMENT_DECOR_SURFACE = 14;
     public static final int OP_TYPE_CREATE_TASK_FRAGMENT = 0;
@@ -57,10 +60,18 @@ public final class TaskFragmentOperation implements Parcelable {
     private final TaskFragmentCreationParams mTaskFragmentCreationParams;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OperationType {
-    }
+    public @interface OperationType {}
 
-    private TaskFragmentOperation(int opType, TaskFragmentCreationParams taskFragmentCreationParams, IBinder activityToken, Intent activityIntent, Bundle bundle, IBinder secondaryFragmentToken, TaskFragmentAnimationParams animationParams, boolean booleanValue, SurfaceControl.Transaction surfaceTransaction) {
+    private TaskFragmentOperation(
+            int opType,
+            TaskFragmentCreationParams taskFragmentCreationParams,
+            IBinder activityToken,
+            Intent activityIntent,
+            Bundle bundle,
+            IBinder secondaryFragmentToken,
+            TaskFragmentAnimationParams animationParams,
+            boolean booleanValue,
+            SurfaceControl.Transaction surfaceTransaction) {
         this.mOpType = opType;
         this.mTaskFragmentCreationParams = taskFragmentCreationParams;
         this.mActivityToken = activityToken;
@@ -74,14 +85,18 @@ public final class TaskFragmentOperation implements Parcelable {
 
     private TaskFragmentOperation(Parcel in) {
         this.mOpType = in.readInt();
-        this.mTaskFragmentCreationParams = (TaskFragmentCreationParams) in.readTypedObject(TaskFragmentCreationParams.CREATOR);
+        this.mTaskFragmentCreationParams =
+                (TaskFragmentCreationParams) in.readTypedObject(TaskFragmentCreationParams.CREATOR);
         this.mActivityToken = in.readStrongBinder();
         this.mActivityIntent = (Intent) in.readTypedObject(Intent.CREATOR);
         this.mBundle = in.readBundle(getClass().getClassLoader());
         this.mSecondaryFragmentToken = in.readStrongBinder();
-        this.mAnimationParams = (TaskFragmentAnimationParams) in.readTypedObject(TaskFragmentAnimationParams.CREATOR);
+        this.mAnimationParams =
+                (TaskFragmentAnimationParams)
+                        in.readTypedObject(TaskFragmentAnimationParams.CREATOR);
         this.mBooleanValue = in.readBoolean();
-        this.mSurfaceTransaction = (SurfaceControl.Transaction) in.readTypedObject(SurfaceControl.Transaction.CREATOR);
+        this.mSurfaceTransaction =
+                (SurfaceControl.Transaction) in.readTypedObject(SurfaceControl.Transaction.CREATOR);
     }
 
     @Override // android.os.Parcelable
@@ -163,7 +178,16 @@ public final class TaskFragmentOperation implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mOpType), this.mTaskFragmentCreationParams, this.mActivityToken, this.mActivityIntent, this.mBundle, this.mSecondaryFragmentToken, this.mAnimationParams, Boolean.valueOf(this.mBooleanValue), this.mSurfaceTransaction);
+        return Objects.hash(
+                Integer.valueOf(this.mOpType),
+                this.mTaskFragmentCreationParams,
+                this.mActivityToken,
+                this.mActivityIntent,
+                this.mBundle,
+                this.mSecondaryFragmentToken,
+                this.mAnimationParams,
+                Boolean.valueOf(this.mBooleanValue),
+                this.mSurfaceTransaction);
     }
 
     public boolean equals(Object obj) {
@@ -171,7 +195,16 @@ public final class TaskFragmentOperation implements Parcelable {
             return false;
         }
         TaskFragmentOperation other = (TaskFragmentOperation) obj;
-        return this.mOpType == other.mOpType && Objects.equals(this.mTaskFragmentCreationParams, other.mTaskFragmentCreationParams) && Objects.equals(this.mActivityToken, other.mActivityToken) && Objects.equals(this.mActivityIntent, other.mActivityIntent) && Objects.equals(this.mBundle, other.mBundle) && Objects.equals(this.mSecondaryFragmentToken, other.mSecondaryFragmentToken) && Objects.equals(this.mAnimationParams, other.mAnimationParams) && this.mBooleanValue == other.mBooleanValue && Objects.equals(this.mSurfaceTransaction, other.mSurfaceTransaction);
+        return this.mOpType == other.mOpType
+                && Objects.equals(
+                        this.mTaskFragmentCreationParams, other.mTaskFragmentCreationParams)
+                && Objects.equals(this.mActivityToken, other.mActivityToken)
+                && Objects.equals(this.mActivityIntent, other.mActivityIntent)
+                && Objects.equals(this.mBundle, other.mBundle)
+                && Objects.equals(this.mSecondaryFragmentToken, other.mSecondaryFragmentToken)
+                && Objects.equals(this.mAnimationParams, other.mAnimationParams)
+                && this.mBooleanValue == other.mBooleanValue
+                && Objects.equals(this.mSurfaceTransaction, other.mSurfaceTransaction);
     }
 
     @Override // android.os.Parcelable
@@ -194,7 +227,8 @@ public final class TaskFragmentOperation implements Parcelable {
             this.mOpType = opType;
         }
 
-        public Builder setTaskFragmentCreationParams(TaskFragmentCreationParams taskFragmentCreationParams) {
+        public Builder setTaskFragmentCreationParams(
+                TaskFragmentCreationParams taskFragmentCreationParams) {
             this.mTaskFragmentCreationParams = taskFragmentCreationParams;
             return this;
         }
@@ -235,7 +269,16 @@ public final class TaskFragmentOperation implements Parcelable {
         }
 
         public TaskFragmentOperation build() {
-            return new TaskFragmentOperation(this.mOpType, this.mTaskFragmentCreationParams, this.mActivityToken, this.mActivityIntent, this.mBundle, this.mSecondaryFragmentToken, this.mAnimationParams, this.mBooleanValue, this.mSurfaceTransaction);
+            return new TaskFragmentOperation(
+                    this.mOpType,
+                    this.mTaskFragmentCreationParams,
+                    this.mActivityToken,
+                    this.mActivityIntent,
+                    this.mBundle,
+                    this.mSecondaryFragmentToken,
+                    this.mAnimationParams,
+                    this.mBooleanValue,
+                    this.mSurfaceTransaction);
         }
     }
 }

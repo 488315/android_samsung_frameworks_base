@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.util.encoders.Base64;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -28,13 +29,16 @@ class PEMUtil {
     }
 
     PEMUtil(String type) {
-        this._supportedBoundaries = new Boundaries[]{new Boundaries(type), new Boundaries("X509 " + type), new Boundaries("PKCS7")};
+        this._supportedBoundaries =
+                new Boundaries[] {
+                    new Boundaries(type), new Boundaries("X509 " + type), new Boundaries("PKCS7")
+                };
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:9:0x001f, code lost:
-    
-        if (r0.length() == 0) goto L33;
-     */
+
+       if (r0.length() == 0) goto L33;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -83,7 +87,9 @@ class PEMUtil {
             java.lang.String r1 = r0.toString()
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.PEMUtil.readLine(java.io.InputStream):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.PEMUtil.readLine(java.io.InputStream):java.lang.String");
     }
 
     private Boundaries getBoundaries(String line) {

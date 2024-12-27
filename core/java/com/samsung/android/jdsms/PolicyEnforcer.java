@@ -10,8 +10,7 @@ final class PolicyEnforcer {
     private static final UidAllowList mUidAllowList = new UidAllowList();
     private static final CallerVerifier mCallerVerifier = new CallerVerifier();
 
-    PolicyEnforcer() {
-    }
+    PolicyEnforcer() {}
 
     static final boolean isAValidCaller() {
         if (!mCallerVerifier.wasCallerValid()) {
@@ -26,14 +25,29 @@ final class PolicyEnforcer {
         String callingUid = context.getPackageManager().getNameForUid(uid);
         if (callingUid == null) {
             if (!mUidAllowList.containsUid("OEM_UID:" + Integer.toString(uid))) {
-                DsmsLog.e("Unauthorized OEM_UID [" + uid + "] name [" + callingUid + NavigationBarInflaterView.SIZE_MOD_END);
+                DsmsLog.e(
+                        "Unauthorized OEM_UID ["
+                                + uid
+                                + "] name ["
+                                + callingUid
+                                + NavigationBarInflaterView.SIZE_MOD_END);
                 return false;
             }
         } else if (!mUidAllowList.containsUid(callingUid)) {
-            DsmsLog.e("[POLICY] Unauthorized uid [" + uid + "] name [" + callingUid + NavigationBarInflaterView.SIZE_MOD_END);
+            DsmsLog.e(
+                    "[POLICY] Unauthorized uid ["
+                            + uid
+                            + "] name ["
+                            + callingUid
+                            + NavigationBarInflaterView.SIZE_MOD_END);
             return false;
         }
-        DsmsLog.d("[POLICY] ALLOW uid [" + uid + "] name [" + callingUid + NavigationBarInflaterView.SIZE_MOD_END);
+        DsmsLog.d(
+                "[POLICY] ALLOW uid ["
+                        + uid
+                        + "] name ["
+                        + callingUid
+                        + NavigationBarInflaterView.SIZE_MOD_END);
         return true;
     }
 }

@@ -2,6 +2,7 @@ package com.android.server.display.color;
 
 import android.animation.TypeEvaluator;
 import android.util.Slog;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,7 +21,10 @@ public final class CctEvaluator implements TypeEvaluator {
         int length = iArr.length;
         int i4 = 0;
         if (iArr.length != iArr2.length) {
-            Slog.e("CctEvaluator", "Parallel arrays cctRangeMinimums and steps are different lengths; setting step of 1");
+            Slog.e(
+                    "CctEvaluator",
+                    "Parallel arrays cctRangeMinimums and steps are different lengths; setting step"
+                        + " of 1");
             Arrays.fill(iArr3, 1);
             while (true) {
                 int[] iArr4 = this.mSteppedCctsAtOffsetCcts;
@@ -67,7 +71,8 @@ public final class CctEvaluator implements TypeEvaluator {
     @Override // android.animation.TypeEvaluator
     public final Object evaluate(float f, Object obj, Object obj2) {
         Integer num = (Integer) obj;
-        int intValue = (int) ((f * (((Integer) obj2).intValue() - num.intValue())) + num.intValue());
+        int intValue =
+                (int) ((f * (((Integer) obj2).intValue() - num.intValue())) + num.intValue());
         int i = intValue - this.mIndexOffset;
         if (i >= 0) {
             int[] iArr = this.mSteppedCctsAtOffsetCcts;
@@ -75,7 +80,9 @@ public final class CctEvaluator implements TypeEvaluator {
                 return Integer.valueOf(iArr[i]);
             }
         }
-        Slog.e("CctEvaluator", "steppedCctValueAt: returning same since invalid requested index=" + i);
+        Slog.e(
+                "CctEvaluator",
+                "steppedCctValueAt: returning same since invalid requested index=" + i);
         return Integer.valueOf(intValue);
     }
 }

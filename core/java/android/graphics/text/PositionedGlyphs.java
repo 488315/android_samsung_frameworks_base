@@ -3,11 +3,15 @@ package android.graphics.text;
 import android.graphics.Typeface;
 import android.graphics.fonts.Font;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.util.Preconditions;
+
 import dalvik.annotation.optimization.CriticalNative;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.util.ArrayList;
 import java.util.Objects;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public final class PositionedGlyphs {
@@ -58,10 +62,11 @@ public final class PositionedGlyphs {
     public static native long nReleaseFunc();
 
     private static class NoImagePreloadHolder {
-        private static final NativeAllocationRegistry REGISTRY = NativeAllocationRegistry.createMalloced(Typeface.class.getClassLoader(), PositionedGlyphs.nReleaseFunc());
+        private static final NativeAllocationRegistry REGISTRY =
+                NativeAllocationRegistry.createMalloced(
+                        Typeface.class.getClassLoader(), PositionedGlyphs.nReleaseFunc());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     public float getAdvance() {
@@ -163,11 +168,16 @@ public final class PositionedGlyphs {
             return false;
         }
         PositionedGlyphs that = (PositionedGlyphs) o;
-        if (this.mXOffset != that.mXOffset || this.mYOffset != that.mYOffset || glyphCount() != that.glyphCount()) {
+        if (this.mXOffset != that.mXOffset
+                || this.mYOffset != that.mYOffset
+                || glyphCount() != that.glyphCount()) {
             return false;
         }
         for (int i = 0; i < glyphCount(); i++) {
-            if (getGlyphId(i) != that.getGlyphId(i) || getGlyphX(i) != that.getGlyphX(i) || getGlyphY(i) != that.getGlyphY(i) || !getFont(i).equals(that.getFont(i))) {
+            if (getGlyphId(i) != that.getGlyphId(i)
+                    || getGlyphX(i) != that.getGlyphX(i)
+                    || getGlyphY(i) != that.getGlyphY(i)
+                    || !getFont(i).equals(that.getFont(i))) {
                 return false;
             }
         }
@@ -177,7 +187,13 @@ public final class PositionedGlyphs {
     public int hashCode() {
         int hashCode = Objects.hash(Float.valueOf(this.mXOffset), Float.valueOf(this.mYOffset));
         for (int i = 0; i < glyphCount(); i++) {
-            hashCode = Objects.hash(Integer.valueOf(hashCode), Integer.valueOf(getGlyphId(i)), Float.valueOf(getGlyphX(i)), Float.valueOf(getGlyphY(i)), getFont(i));
+            hashCode =
+                    Objects.hash(
+                            Integer.valueOf(hashCode),
+                            Integer.valueOf(getGlyphId(i)),
+                            Float.valueOf(getGlyphX(i)),
+                            Float.valueOf(getGlyphY(i)),
+                            getFont(i));
         }
         return hashCode;
     }
@@ -188,9 +204,24 @@ public final class PositionedGlyphs {
             if (i != 0) {
                 sb.append(", ");
             }
-            sb.append("[ ID = " + getGlyphId(i) + ", pos = (" + getGlyphX(i) + "," + getGlyphY(i) + ") font = " + getFont(i) + " ]");
+            sb.append(
+                    "[ ID = "
+                            + getGlyphId(i)
+                            + ", pos = ("
+                            + getGlyphX(i)
+                            + ","
+                            + getGlyphY(i)
+                            + ") font = "
+                            + getFont(i)
+                            + " ]");
         }
         sb.append(NavigationBarInflaterView.SIZE_MOD_END);
-        return "PositionedGlyphs{glyphs = " + sb.toString() + ", mXOffset=" + this.mXOffset + ", mYOffset=" + this.mYOffset + '}';
+        return "PositionedGlyphs{glyphs = "
+                + sb.toString()
+                + ", mXOffset="
+                + this.mXOffset
+                + ", mYOffset="
+                + this.mYOffset
+                + '}';
     }
 }

@@ -39,18 +39,24 @@ public abstract class AsyncFilter extends DecorateFilter {
         return this.outputChannel;
     }
 
-    @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.filter.MediaFilter
+    @Override // com.samsung.android.sume.core.filter.DecorateFilter,
+              // com.samsung.android.sume.core.filter.MediaFilter
     public void prepare() {
-        Def.require((this.inputChannel == null || this.outputChannel == null) ? false : true, "either input-channel or output-channel is not given", new Object[0]);
+        Def.require(
+                (this.inputChannel == null || this.outputChannel == null) ? false : true,
+                "either input-channel or output-channel is not given",
+                new Object[0]);
         super.prepare();
     }
 
-    @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.functional.Operator
+    @Override // com.samsung.android.sume.core.filter.DecorateFilter,
+              // com.samsung.android.sume.core.functional.Operator
     public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) {
         throw new UnsupportedOperationException("do not call, instead call prepare & release");
     }
 
-    @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.filter.MediaFilter
+    @Override // com.samsung.android.sume.core.filter.DecorateFilter,
+              // com.samsung.android.sume.core.filter.MediaFilter
     public void release() {
         super.release();
         this.inputChannel.close();

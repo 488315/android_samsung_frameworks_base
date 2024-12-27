@@ -21,15 +21,17 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.EventLog;
 import android.util.Slog;
+
 import com.android.internal.hidden_from_bootclasspath.android.crashrecovery.flags.Flags;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
-import com.android.server.PackageWatchdog;
 import com.android.server.pm.PackageManagerServiceUtils;
 import com.android.server.statusbar.StatusBarManagerService;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.wifi.util.SemWifiRescueParty;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -88,16 +90,24 @@ public abstract class RescueParty {
         public Context mContext;
 
         public final void onDeviceConfigAccess(String str, String str2) {
-            RescuePartyObserver rescuePartyObserver = RescuePartyObserver.getInstance(this.mContext);
+            RescuePartyObserver rescuePartyObserver =
+                    RescuePartyObserver.getInstance(this.mContext);
             synchronized (rescuePartyObserver) {
                 try {
-                    Set set = (Set) ((HashMap) rescuePartyObserver.mCallingPackageNamespaceSetMap).get(str);
+                    Set set =
+                            (Set)
+                                    ((HashMap) rescuePartyObserver.mCallingPackageNamespaceSetMap)
+                                            .get(str);
                     if (set == null) {
                         set = new ArraySet();
-                        ((HashMap) rescuePartyObserver.mCallingPackageNamespaceSetMap).put(str, set);
+                        ((HashMap) rescuePartyObserver.mCallingPackageNamespaceSetMap)
+                                .put(str, set);
                     }
                     set.add(str2);
-                    Set set2 = (Set) ((HashMap) rescuePartyObserver.mNamespaceCallingPackageSetMap).get(str2);
+                    Set set2 =
+                            (Set)
+                                    ((HashMap) rescuePartyObserver.mNamespaceCallingPackageSetMap)
+                                            .get(str2);
                     if (set2 == null) {
                         set2 = new ArraySet();
                     }
@@ -121,8 +131,14 @@ public abstract class RescueParty {
             }
             ArrayList arrayList = new ArrayList();
             arrayList.addAll(set);
-            Slog.i(RescueParty.TAG, "Starting to observe: " + arrayList + ", updated namespace: " + str);
-            PackageWatchdog.getInstance(context).startObservingHealth(rescuePartyObserver, arrayList, RescueParty.DEFAULT_OBSERVING_DURATION_MS);
+            Slog.i(
+                    RescueParty.TAG,
+                    "Starting to observe: " + arrayList + ", updated namespace: " + str);
+            PackageWatchdog.getInstance(context)
+                    .startObservingHealth(
+                            rescuePartyObserver,
+                            arrayList,
+                            RescueParty.DEFAULT_OBSERVING_DURATION_MS);
         }
     }
 
@@ -168,11 +184,28 @@ public abstract class RescueParty {
                 return false;
             }
             if (Flags.recoverabilityDetection()) {
-                m82$$Nest$smgetSecRescueLevel = RescueParty.m81$$Nest$smgetRescueLevel(i2, versionedPackage != null ? Constants.SYSTEMUI_PACKAGE_NAME.equals(versionedPackage.getPackageName()) : false, versionedPackage);
+                m82$$Nest$smgetSecRescueLevel =
+                        RescueParty.m81$$Nest$smgetRescueLevel(
+                                i2,
+                                versionedPackage != null
+                                        ? Constants.SYSTEMUI_PACKAGE_NAME.equals(
+                                                versionedPackage.getPackageName())
+                                        : false,
+                                versionedPackage);
             } else {
-                m82$$Nest$smgetSecRescueLevel = RescueParty.m82$$Nest$smgetSecRescueLevel(i2, versionedPackage != null ? Constants.SYSTEMUI_PACKAGE_NAME.equals(versionedPackage.getPackageName()) : false, versionedPackage);
+                m82$$Nest$smgetSecRescueLevel =
+                        RescueParty.m82$$Nest$smgetSecRescueLevel(
+                                i2,
+                                versionedPackage != null
+                                        ? Constants.SYSTEMUI_PACKAGE_NAME.equals(
+                                                versionedPackage.getPackageName())
+                                        : false,
+                                versionedPackage);
             }
-            RescueParty.m80$$Nest$smexecuteRescueLevel(this.mContext, versionedPackage == null ? null : versionedPackage.getPackageName(), m82$$Nest$smgetSecRescueLevel);
+            RescueParty.m80$$Nest$smexecuteRescueLevel(
+                    this.mContext,
+                    versionedPackage == null ? null : versionedPackage.getPackageName(),
+                    m82$$Nest$smgetSecRescueLevel);
             return true;
         }
 
@@ -181,7 +214,12 @@ public abstract class RescueParty {
             if (RescueParty.m83$$Nest$smisDisabled()) {
                 return false;
             }
-            RescueParty.m80$$Nest$smexecuteRescueLevel(this.mContext, null, Flags.recoverabilityDetection() ? RescueParty.m81$$Nest$smgetRescueLevel(i, true, null) : RescueParty.m82$$Nest$smgetSecRescueLevel(i, true, null));
+            RescueParty.m80$$Nest$smexecuteRescueLevel(
+                    this.mContext,
+                    null,
+                    Flags.recoverabilityDetection()
+                            ? RescueParty.m81$$Nest$smgetRescueLevel(i, true, null)
+                            : RescueParty.m82$$Nest$smgetSecRescueLevel(i, true, null));
             return true;
         }
 
@@ -199,7 +237,8 @@ public abstract class RescueParty {
             } catch (PackageManager.NameNotFoundException | IllegalStateException unused) {
             }
             try {
-                return (this.mContext.getPackageManager().getApplicationInfo(str, 0).flags & 9) == 9;
+                return (this.mContext.getPackageManager().getApplicationInfo(str, 0).flags & 9)
+                        == 9;
             } catch (PackageManager.NameNotFoundException unused2) {
                 return false;
             }
@@ -210,7 +249,11 @@ public abstract class RescueParty {
             if (RescueParty.m83$$Nest$smisDisabled()) {
                 return 0;
             }
-            return Flags.recoverabilityDetection() ? RescueParty.m84$$Nest$smmapRescueLevelToUserImpact(RescueParty.m81$$Nest$smgetRescueLevel(i, true, null)) : RescueParty.m84$$Nest$smmapRescueLevelToUserImpact(RescueParty.m82$$Nest$smgetSecRescueLevel(i, true, null));
+            return Flags.recoverabilityDetection()
+                    ? RescueParty.m84$$Nest$smmapRescueLevelToUserImpact(
+                            RescueParty.m81$$Nest$smgetRescueLevel(i, true, null))
+                    : RescueParty.m84$$Nest$smmapRescueLevelToUserImpact(
+                            RescueParty.m82$$Nest$smgetSecRescueLevel(i, true, null));
         }
 
         @Override // com.android.server.PackageWatchdog.PackageHealthObserver
@@ -219,20 +262,36 @@ public abstract class RescueParty {
                 return 0;
             }
             if (Flags.recoverabilityDetection()) {
-                return RescueParty.m84$$Nest$smmapRescueLevelToUserImpact(RescueParty.m81$$Nest$smgetRescueLevel(i2, versionedPackage != null ? Constants.SYSTEMUI_PACKAGE_NAME.equals(versionedPackage.getPackageName()) : false, versionedPackage));
+                return RescueParty.m84$$Nest$smmapRescueLevelToUserImpact(
+                        RescueParty.m81$$Nest$smgetRescueLevel(
+                                i2,
+                                versionedPackage != null
+                                        ? Constants.SYSTEMUI_PACKAGE_NAME.equals(
+                                                versionedPackage.getPackageName())
+                                        : false,
+                                versionedPackage));
             }
-            return RescueParty.m84$$Nest$smmapRescueLevelToUserImpact(RescueParty.m82$$Nest$smgetSecRescueLevel(i2, versionedPackage != null ? Constants.SYSTEMUI_PACKAGE_NAME.equals(versionedPackage.getPackageName()) : false, versionedPackage));
+            return RescueParty.m84$$Nest$smmapRescueLevelToUserImpact(
+                    RescueParty.m82$$Nest$smgetSecRescueLevel(
+                            i2,
+                            versionedPackage != null
+                                    ? Constants.SYSTEMUI_PACKAGE_NAME.equals(
+                                            versionedPackage.getPackageName())
+                                    : false,
+                            versionedPackage));
         }
     }
 
     /* renamed from: -$$Nest$smexecuteEraseAppData, reason: not valid java name */
     public static void m79$$Nest$smexecuteEraseAppData(Context context, String str, int i) {
         try {
-            FileWriter fileWriter = new FileWriter(new File("/efs/recovery/rescueparty"), StandardCharsets.UTF_8);
+            FileWriter fileWriter =
+                    new FileWriter(new File("/efs/recovery/rescueparty"), StandardCharsets.UTF_8);
             try {
                 fileWriter.write("emergency_reset");
                 fileWriter.flush();
-                PowerManager powerManager = (PowerManager) context.getSystemService(PowerManager.class);
+                PowerManager powerManager =
+                        (PowerManager) context.getSystemService(PowerManager.class);
                 String str2 = "";
                 if (powerManager != null) {
                     StringBuilder sb = new StringBuilder(TAG);
@@ -258,24 +317,29 @@ public abstract class RescueParty {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:34:0x00e3, code lost:
-    
-        if (r5 != null) goto L42;
-     */
+
+       if (r5 != null) goto L42;
+    */
     /* renamed from: -$$Nest$smexecuteRescueLevel, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m80$$Nest$smexecuteRescueLevel(android.content.Context r21, java.lang.String r22, int r23) {
+    public static void m80$$Nest$smexecuteRescueLevel(
+            android.content.Context r21, java.lang.String r22, int r23) {
         /*
             Method dump skipped, instructions count: 298
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.RescueParty.m80$$Nest$smexecuteRescueLevel(android.content.Context, java.lang.String, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.RescueParty.m80$$Nest$smexecuteRescueLevel(android.content.Context,"
+                    + " java.lang.String, int):void");
     }
 
     /* renamed from: -$$Nest$smgetRescueLevel, reason: not valid java name */
-    public static int m81$$Nest$smgetRescueLevel(int i, boolean z, VersionedPackage versionedPackage) {
+    public static int m81$$Nest$smgetRescueLevel(
+            int i, boolean z, VersionedPackage versionedPackage) {
         if (versionedPackage == null && i > 0) {
             i++;
         }
@@ -310,8 +374,10 @@ public abstract class RescueParty {
     }
 
     /* renamed from: -$$Nest$smgetSecRescueLevel, reason: not valid java name */
-    public static int m82$$Nest$smgetSecRescueLevel(int i, boolean z, VersionedPackage versionedPackage) {
-        if (versionedPackage == null || Constants.SYSTEMUI_PACKAGE_NAME.equals(versionedPackage.getPackageName())) {
+    public static int m82$$Nest$smgetSecRescueLevel(
+            int i, boolean z, VersionedPackage versionedPackage) {
+        if (versionedPackage == null
+                || Constants.SYSTEMUI_PACKAGE_NAME.equals(versionedPackage.getPackageName())) {
             int i2 = SystemProperties.getInt("persist.sys.rescue_level", 0);
             if (versionedPackage == null) {
                 if (i2 == 0) {
@@ -349,16 +415,19 @@ public abstract class RescueParty {
             isUnrecoverable = i > 8;
             return Math.min(getMaxRescueLevel(z), 8);
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Expected positive mitigation count, was ", TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                i, "Expected positive mitigation count, was ", TAG);
         return 0;
     }
 
     /* renamed from: -$$Nest$smisDisabled, reason: not valid java name */
     public static boolean m83$$Nest$smisDisabled() {
-        if (SystemProperties.getBoolean(PROP_ENABLE_RESCUE, false) || !CoreRune.IS_DEBUG_LEVEL_LOW) {
+        if (SystemProperties.getBoolean(PROP_ENABLE_RESCUE, false)
+                || !CoreRune.IS_DEBUG_LEVEL_LOW) {
             return false;
         }
-        if (SystemProperties.getBoolean("persist.device_config.configuration.disable_rescue_party", false)) {
+        if (SystemProperties.getBoolean(
+                "persist.device_config.configuration.disable_rescue_party", false)) {
             Slog.v(TAG, "Disabled because of DeviceConfig flag");
         } else {
             if (!SystemProperties.getBoolean("persist.sys.disable_rescue", false)) {
@@ -436,7 +505,9 @@ public abstract class RescueParty {
         L26:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.RescueParty.m84$$Nest$smmapRescueLevelToUserImpact(int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.RescueParty.m84$$Nest$smmapRescueLevelToUserImpact(int):int");
     }
 
     public static void executeFactoryReset(final Context context, final String str, final int i) {
@@ -446,30 +517,39 @@ public abstract class RescueParty {
         SystemProperties.set("persist.sys.rescue_mode", "");
         SystemProperties.set("persist.sys.isrb_alertnum", Integer.toString(0));
         CrashRecoveryProperties.lastFactoryResetTimeMs(Long.valueOf(System.currentTimeMillis()));
-        new Thread(new Runnable() { // from class: com.android.server.RescueParty.1
-            @Override // java.lang.Runnable
-            public final void run() {
-                try {
-                    if (!"emergency".equals(SystemProperties.get("persist.sys.emergency_reset", "unknown")) || RescueParty.isUnrecoverable) {
-                        StringBuilder sb = new StringBuilder();
-                        String str2 = str;
-                        if (str2 == null) {
-                            str2 = "PlatformReset";
-                        }
-                        sb.append(str2);
-                        sb.append(" (");
-                        sb.append(i);
-                        sb.append(")");
-                        String sb2 = sb.toString();
-                        RecoverySystem.rebootPromptAndWipeAppData(context, "RescueParty by " + sb2);
-                    } else {
-                        RescueParty.m79$$Nest$smexecuteEraseAppData(context, str, i);
-                    }
-                } catch (Throwable th) {
-                    RescueParty.logRescueException(i, str, th);
-                }
-            }
-        }).start();
+        new Thread(
+                        new Runnable() { // from class: com.android.server.RescueParty.1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                try {
+                                    if (!"emergency"
+                                                    .equals(
+                                                            SystemProperties.get(
+                                                                    "persist.sys.emergency_reset",
+                                                                    "unknown"))
+                                            || RescueParty.isUnrecoverable) {
+                                        StringBuilder sb = new StringBuilder();
+                                        String str2 = str;
+                                        if (str2 == null) {
+                                            str2 = "PlatformReset";
+                                        }
+                                        sb.append(str2);
+                                        sb.append(" (");
+                                        sb.append(i);
+                                        sb.append(")");
+                                        String sb2 = sb.toString();
+                                        RecoverySystem.rebootPromptAndWipeAppData(
+                                                context, "RescueParty by " + sb2);
+                                    } else {
+                                        RescueParty.m79$$Nest$smexecuteEraseAppData(
+                                                context, str, i);
+                                    }
+                                } catch (Throwable th) {
+                                    RescueParty.logRescueException(i, str, th);
+                                }
+                            }
+                        })
+                .start();
     }
 
     public static void executeISRBReboot(Context context, String str, int i) {
@@ -482,12 +562,12 @@ public abstract class RescueParty {
     }
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:55:0x00e3
-        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
-        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
-        */
+    jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:55:0x00e3
+    	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
+    	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
+    */
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Removed duplicated region for block: B:64:0x00f9  */
     /* JADX WARN: Removed duplicated region for block: B:65:? A[RETURN, SYNTHETIC] */
@@ -495,12 +575,16 @@ public abstract class RescueParty {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void executeRescueLevelInternal(android.content.Context r8, java.lang.String r9, int r10) {
+    public static void executeRescueLevelInternal(
+            android.content.Context r8, java.lang.String r9, int r10) {
         /*
             Method dump skipped, instructions count: 294
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.RescueParty.executeRescueLevelInternal(android.content.Context, java.lang.String, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.RescueParty.executeRescueLevelInternal(android.content.Context,"
+                    + " java.lang.String, int):void");
     }
 
     public static void executeResetOthers(Context context, String str) {
@@ -510,7 +594,8 @@ public abstract class RescueParty {
         }
         Slog.w(TAG, "reset wallpaper");
         try {
-            IWallpaperManager asInterface = IWallpaperManager.Stub.asInterface(ServiceManager.getService("wallpaper"));
+            IWallpaperManager asInterface =
+                    IWallpaperManager.Stub.asInterface(ServiceManager.getService("wallpaper"));
             if (asInterface != null) {
                 asInterface.clearWallpaper("android", 1, 0);
                 asInterface.clearWallpaper("android", 17, 0);
@@ -552,9 +637,17 @@ public abstract class RescueParty {
 
     public static int getMaxRescueLevel(boolean z) {
         if (!Flags.recoverabilityDetection()) {
-            return (!z || SystemProperties.getBoolean("persist.device_config.configuration.disable_rescue_party_factory_reset", false)) ? 3 : 8;
+            return (!z
+                            || SystemProperties.getBoolean(
+                                    "persist.device_config.configuration.disable_rescue_party_factory_reset",
+                                    false))
+                    ? 3
+                    : 8;
         }
-        if (!z || SystemProperties.getBoolean("persist.device_config.configuration.disable_rescue_party_factory_reset", false)) {
+        if (!z
+                || SystemProperties.getBoolean(
+                        "persist.device_config.configuration.disable_rescue_party_factory_reset",
+                        false)) {
             return SystemProperties.getInt(RESCUE_NON_REBOOT_LEVEL_LIMIT, 2);
         }
         return 10;
@@ -565,7 +658,8 @@ public abstract class RescueParty {
     }
 
     public static boolean isRebootPropertySet() {
-        return ((Boolean) CrashRecoveryProperties.attemptingReboot().orElse(Boolean.FALSE)).booleanValue();
+        return ((Boolean) CrashRecoveryProperties.attemptingReboot().orElse(Boolean.FALSE))
+                .booleanValue();
     }
 
     public static String levelToString(int i) {
@@ -648,7 +742,11 @@ public abstract class RescueParty {
             set = (Set) ((HashMap) rescuePartyObserver.mCallingPackageNamespaceSetMap).get(str);
         }
         if (set != null) {
-            StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Performing scoped reset for package: ", str, ", affected namespaces: ");
+            StringBuilder m =
+                    DumpUtils$$ExternalSyntheticOutline0.m(
+                            "Performing scoped reset for package: ",
+                            str,
+                            ", affected namespaces: ");
             m.append(Arrays.toString(set.toArray()));
             Slog.w(TAG, m.toString());
             for (String str2 : set) {
@@ -663,9 +761,15 @@ public abstract class RescueParty {
         HashSet hashSet;
         RescuePartyObserver rescuePartyObserver = RescuePartyObserver.getInstance(context);
         synchronized (rescuePartyObserver) {
-            hashSet = new HashSet(((HashMap) rescuePartyObserver.mNamespaceCallingPackageSetMap).keySet());
+            hashSet =
+                    new HashSet(
+                            ((HashMap) rescuePartyObserver.mNamespaceCallingPackageSetMap)
+                                    .keySet());
         }
-        Slog.w(TAG, "Performing reset for all affected namespaces: " + Arrays.toString(hashSet.toArray()));
+        Slog.w(
+                TAG,
+                "Performing reset for all affected namespaces: "
+                        + Arrays.toString(hashSet.toArray()));
         Iterator it = hashSet.iterator();
         while (it.hasNext()) {
             String str = (String) it.next();
@@ -677,13 +781,15 @@ public abstract class RescueParty {
 
     public static void resetAllSettingsIfNecessary(Context context, int i, int i2) {
         RuntimeException runtimeException;
-        if (((Integer) CrashRecoveryProperties.maxRescueLevelAttempted().orElse(0)).intValue() >= i2) {
+        if (((Integer) CrashRecoveryProperties.maxRescueLevelAttempted().orElse(0)).intValue()
+                >= i2) {
             return;
         }
         CrashRecoveryProperties.maxRescueLevelAttempted(Integer.valueOf(i2));
         ContentResolver contentResolver = context.getContentResolver();
         try {
-            Settings.Global.resetToDefaultsAsUser(contentResolver, null, i, UserHandle.SYSTEM.getIdentifier());
+            Settings.Global.resetToDefaultsAsUser(
+                    contentResolver, null, i, UserHandle.SYSTEM.getIdentifier());
             runtimeException = null;
         } catch (Exception e) {
             runtimeException = new RuntimeException("Failed to reset global settings", e);
@@ -692,7 +798,11 @@ public abstract class RescueParty {
             try {
                 Settings.Secure.resetToDefaultsAsUser(contentResolver, null, i, i3);
             } catch (Exception e2) {
-                runtimeException = new RuntimeException(VibrationParam$1$$ExternalSyntheticOutline0.m(i3, "Failed to reset secure settings for "), e2);
+                runtimeException =
+                        new RuntimeException(
+                                VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                        i3, "Failed to reset secure settings for "),
+                                e2);
             }
         }
         if (runtimeException != null) {
@@ -726,7 +836,10 @@ public abstract class RescueParty {
             while (it.hasNext()) {
                 String str = (String) it.next();
                 synchronized (rescuePartyObserver) {
-                    set = (Set) ((HashMap) rescuePartyObserver.mCallingPackageNamespaceSetMap).get(str);
+                    set =
+                            (Set)
+                                    ((HashMap) rescuePartyObserver.mCallingPackageNamespaceSetMap)
+                                            .get(str);
                 }
                 if (set != null) {
                     arraySet.addAll(set);
@@ -736,7 +849,12 @@ public abstract class RescueParty {
         ArraySet arraySet2 = new ArraySet();
         try {
             try {
-                String[] split = DeviceConfig.getString(NAMESPACE_CONFIGURATION, NAMESPACE_TO_PACKAGE_MAPPING_FLAG, "").split(",");
+                String[] split =
+                        DeviceConfig.getString(
+                                        NAMESPACE_CONFIGURATION,
+                                        NAMESPACE_TO_PACKAGE_MAPPING_FLAG,
+                                        "")
+                                .split(",");
                 for (int i = 0; i < split.length; i++) {
                     if (!TextUtils.isEmpty(split[i])) {
                         String[] split2 = split[i].split(":");
@@ -760,11 +878,18 @@ public abstract class RescueParty {
         while (it2.hasNext()) {
             String str3 = (String) it2.next();
             try {
-                if (!DeviceConfig.setProperties(new DeviceConfig.Properties.Builder(str3).build())) {
-                    PackageManagerServiceUtils.logCriticalInfo(6, "Failed to clear properties under " + str3 + ". Running `device_config get_sync_disabled_for_tests` will confirm if config-bulk-update is enabled.");
+                if (!DeviceConfig.setProperties(
+                        new DeviceConfig.Properties.Builder(str3).build())) {
+                    PackageManagerServiceUtils.logCriticalInfo(
+                            6,
+                            "Failed to clear properties under "
+                                    + str3
+                                    + ". Running `device_config get_sync_disabled_for_tests` will"
+                                    + " confirm if config-bulk-update is enabled.");
                 }
             } catch (DeviceConfig.BadConfigException unused2) {
-                PackageManagerServiceUtils.logCriticalInfo(5, "namespace " + str3 + " is already banned, skip reset.");
+                PackageManagerServiceUtils.logCriticalInfo(
+                        5, "namespace " + str3 + " is already banned, skip reset.");
             }
         }
     }
@@ -805,16 +930,20 @@ public abstract class RescueParty {
         if (SystemProperties.getBoolean("sys.isrblevel.callreboot", false)) {
             return;
         }
-        SystemProperties.set("persist.sys.rescue_level", Integer.toString(Flags.recoverabilityDetection() ? 8 : 6));
+        SystemProperties.set(
+                "persist.sys.rescue_level",
+                Integer.toString(Flags.recoverabilityDetection() ? 8 : 6));
         SystemProperties.set("persist.sys.enable_isrb", Boolean.toString(false));
         SystemProperties.set("persist.sys.rescue_mode", "isrb_boot");
     }
 
     public static void truncateAndCopyFile(File file, File file2) {
         try {
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+            BufferedInputStream bufferedInputStream =
+                    new BufferedInputStream(new FileInputStream(file));
             try {
-                BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file2));
+                BufferedOutputStream bufferedOutputStream =
+                        new BufferedOutputStream(new FileOutputStream(file2));
                 try {
                     byte[] bArr = new byte[(int) Math.min(65536L, file.length())];
                     int read = bufferedInputStream.read(bArr);

@@ -1,7 +1,9 @@
 package android.internal.framework.protobuf.nano;
 
 import android.os.BatteryStats;
+
 import com.samsung.android.transcode.constants.EncodeConstants;
+
 import java.io.IOException;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
@@ -166,7 +168,8 @@ public final class CodedOutputByteBufferNano {
             if (minLengthVarIntSize == maxLengthVarIntSize) {
                 int oldPosition = this.buffer.position();
                 if (this.buffer.remaining() < minLengthVarIntSize) {
-                    throw new OutOfSpaceException(oldPosition + minLengthVarIntSize, this.buffer.limit());
+                    throw new OutOfSpaceException(
+                            oldPosition + minLengthVarIntSize, this.buffer.limit());
                 }
                 this.buffer.position(oldPosition + minLengthVarIntSize);
                 encode(value, this.buffer);
@@ -179,7 +182,8 @@ public final class CodedOutputByteBufferNano {
             writeRawVarint32(encodedLength(value));
             encode(value, this.buffer);
         } catch (BufferOverflowException e) {
-            OutOfSpaceException outOfSpaceException = new OutOfSpaceException(this.buffer.position(), this.buffer.limit());
+            OutOfSpaceException outOfSpaceException =
+                    new OutOfSpaceException(this.buffer.position(), this.buffer.limit());
             outOfSpaceException.initCause(e);
             throw outOfSpaceException;
         }
@@ -207,7 +211,8 @@ public final class CodedOutputByteBufferNano {
             }
         }
         if (utf8Length < utf16Length) {
-            throw new IllegalArgumentException("UTF-8 length does not fit in int: " + (utf8Length + 4294967296L));
+            throw new IllegalArgumentException(
+                    "UTF-8 length does not fit in int: " + (utf8Length + 4294967296L));
         }
         return utf8Length;
     }
@@ -241,7 +246,12 @@ public final class CodedOutputByteBufferNano {
         }
         if (byteBuffer.hasArray()) {
             try {
-                int encoded = encode(sequence, byteBuffer.array(), byteBuffer.arrayOffset() + byteBuffer.position(), byteBuffer.remaining());
+                int encoded =
+                        encode(
+                                sequence,
+                                byteBuffer.array(),
+                                byteBuffer.arrayOffset() + byteBuffer.position(),
+                                byteBuffer.remaining());
                 byteBuffer.position(encoded - byteBuffer.arrayOffset());
                 return;
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -261,7 +271,8 @@ public final class CodedOutputByteBufferNano {
             if (c < 128) {
                 byteBuffer.put((byte) c);
             } else if (c < 2048) {
-                byteBuffer.put((byte) ((c >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
+                byteBuffer.put(
+                        (byte) ((c >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
                 byteBuffer.put((byte) (128 | (c & '?')));
             } else if (c < 55296 || 57343 < c) {
                 byteBuffer.put((byte) ((c >>> '\f') | 480));
@@ -286,9 +297,9 @@ public final class CodedOutputByteBufferNano {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0023, code lost:
-    
-        return r12 + r0;
-     */
+
+       return r12 + r0;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -298,7 +309,10 @@ public final class CodedOutputByteBufferNano {
             Method dump skipped, instructions count: 258
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.internal.framework.protobuf.nano.CodedOutputByteBufferNano.encode(java.lang.CharSequence, byte[], int, int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.internal.framework.protobuf.nano.CodedOutputByteBufferNano.encode(java.lang.CharSequence,"
+                    + " byte[], int, int):int");
     }
 
     public void writeGroupNoTag(MessageNano value) throws IOException {
@@ -510,7 +524,12 @@ public final class CodedOutputByteBufferNano {
         private static final long serialVersionUID = -6947486886997889499L;
 
         OutOfSpaceException(int position, int limit) {
-            super("CodedOutputStream was writing to a flat byte array and ran out of space (pos " + position + " limit " + limit + ").");
+            super(
+                    "CodedOutputStream was writing to a flat byte array and ran out of space (pos "
+                            + position
+                            + " limit "
+                            + limit
+                            + ").");
         }
     }
 

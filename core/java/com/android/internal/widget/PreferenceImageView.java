@@ -19,7 +19,8 @@ public class PreferenceImageView extends ImageView {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public PreferenceImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public PreferenceImageView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

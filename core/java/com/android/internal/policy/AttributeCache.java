@@ -66,7 +66,8 @@ public final class AttributeCache {
             IntentFilter filter = new IntentFilter("android.intent.action.PACKAGE_REMOVED");
             filter.addDataScheme("package");
             context.registerReceiverAsUser(this, UserHandle.ALL, filter, null, handler);
-            IntentFilter extFilter = new IntentFilter(Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE);
+            IntentFilter extFilter =
+                    new IntentFilter(Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE);
             extFilter.setPriority(1000);
             context.registerReceiverAsUser(this, UserHandle.ALL, extFilter, null, handler);
         }
@@ -140,7 +141,9 @@ public final class AttributeCache {
                 }
             } else {
                 try {
-                    Context context = this.mContext.createPackageContextAsUser(packageName, 0, new UserHandle(userId));
+                    Context context =
+                            this.mContext.createPackageContextAsUser(
+                                    packageName, 0, new UserHandle(userId));
                     if (context == null) {
                         return null;
                     }
@@ -155,7 +158,9 @@ public final class AttributeCache {
                 pkg.mMap.put(resId, map);
             }
             try {
-                Entry ent2 = new Entry(pkg.context, pkg.context.obtainStyledAttributes(resId, styleable));
+                Entry ent2 =
+                        new Entry(
+                                pkg.context, pkg.context.obtainStyledAttributes(resId, styleable));
                 map.put(styleable, ent2);
                 return ent2;
             } catch (Resources.NotFoundException e2) {

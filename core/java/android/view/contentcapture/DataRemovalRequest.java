@@ -5,7 +5,9 @@ import android.content.LocusId;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.IntArray;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -14,36 +16,41 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class DataRemovalRequest implements Parcelable {
-    public static final Parcelable.Creator<DataRemovalRequest> CREATOR = new Parcelable.Creator<DataRemovalRequest>() { // from class: android.view.contentcapture.DataRemovalRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DataRemovalRequest createFromParcel(Parcel parcel) {
-            return new DataRemovalRequest(parcel);
-        }
+    public static final Parcelable.Creator<DataRemovalRequest> CREATOR =
+            new Parcelable.Creator<
+                    DataRemovalRequest>() { // from class:
+                                            // android.view.contentcapture.DataRemovalRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DataRemovalRequest createFromParcel(Parcel parcel) {
+                    return new DataRemovalRequest(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DataRemovalRequest[] newArray(int size) {
-            return new DataRemovalRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DataRemovalRequest[] newArray(int size) {
+                    return new DataRemovalRequest[size];
+                }
+            };
     public static final int FLAG_IS_PREFIX = 1;
     private final boolean mForEverything;
     private ArrayList<LocusIdRequest> mLocusIdRequests;
     private final String mPackageName;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface Flags {
-    }
+    @interface Flags {}
 
     private DataRemovalRequest(Builder builder) {
-        this.mPackageName = ActivityThread.currentActivityThread().getApplication().getPackageName();
+        this.mPackageName =
+                ActivityThread.currentActivityThread().getApplication().getPackageName();
         this.mForEverything = builder.mForEverything;
         if (builder.mLocusIds != null) {
             int size = builder.mLocusIds.size();
             this.mLocusIdRequests = new ArrayList<>(size);
             for (int i = 0; i < size; i++) {
-                this.mLocusIdRequests.add(new LocusIdRequest((LocusId) builder.mLocusIds.get(i), builder.mFlags.get(i)));
+                this.mLocusIdRequests.add(
+                        new LocusIdRequest(
+                                (LocusId) builder.mLocusIds.get(i), builder.mFlags.get(i)));
             }
         }
     }
@@ -55,7 +62,8 @@ public final class DataRemovalRequest implements Parcelable {
             int size = parcel.readInt();
             this.mLocusIdRequests = new ArrayList<>(size);
             for (int i = 0; i < size; i++) {
-                this.mLocusIdRequests.add(new LocusIdRequest((LocusId) parcel.readValue(null), parcel.readInt()));
+                this.mLocusIdRequests.add(
+                        new LocusIdRequest((LocusId) parcel.readValue(null), parcel.readInt()));
             }
         }
     }
@@ -100,7 +108,9 @@ public final class DataRemovalRequest implements Parcelable {
 
         public DataRemovalRequest build() {
             throwIfDestroyed();
-            Preconditions.checkState(this.mForEverything || this.mLocusIds != null, "must call either #forEverything() or add one #addLocusId()");
+            Preconditions.checkState(
+                    this.mForEverything || this.mLocusIds != null,
+                    "must call either #forEverything() or add one #addLocusId()");
             this.mDestroyed = true;
             return new DataRemovalRequest(this);
         }

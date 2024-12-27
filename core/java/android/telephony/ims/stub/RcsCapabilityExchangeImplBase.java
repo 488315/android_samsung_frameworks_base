@@ -7,6 +7,7 @@ import android.telephony.ims.SipDetails;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collection;
@@ -30,8 +31,7 @@ public class RcsCapabilityExchangeImplBase {
     private static final String LOG_TAG = "RcsCapExchangeImplBase";
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CommandCode {
-    }
+    public @interface CommandCode {}
 
     public interface OptionsResponseCallback {
         void onCommandError(int i) throws ImsException;
@@ -52,7 +52,11 @@ public class RcsCapabilityExchangeImplBase {
             if (TextUtils.isEmpty(details.getReasonHeaderText())) {
                 onNetworkResponse(details.getResponseCode(), details.getResponsePhrase());
             } else {
-                onNetworkResponse(details.getResponseCode(), details.getResponsePhrase(), details.getReasonHeaderCause(), details.getReasonHeaderText());
+                onNetworkResponse(
+                        details.getResponseCode(),
+                        details.getResponsePhrase(),
+                        details.getReasonHeaderCause(),
+                        details.getReasonHeaderText());
             }
         }
     }
@@ -76,7 +80,11 @@ public class RcsCapabilityExchangeImplBase {
             if (TextUtils.isEmpty(details.getReasonHeaderText())) {
                 onNetworkResponse(details.getResponseCode(), details.getResponsePhrase());
             } else {
-                onNetworkResponse(details.getResponseCode(), details.getResponsePhrase(), details.getReasonHeaderCause(), details.getReasonHeaderText());
+                onNetworkResponse(
+                        details.getResponseCode(),
+                        details.getResponsePhrase(),
+                        details.getReasonHeaderCause(),
+                        details.getReasonHeaderText());
             }
         }
     }
@@ -97,7 +105,8 @@ public class RcsCapabilityExchangeImplBase {
         }
     }
 
-    public void sendOptionsCapabilityRequest(Uri contactUri, Set<String> myCapabilities, OptionsResponseCallback callback) {
+    public void sendOptionsCapabilityRequest(
+            Uri contactUri, Set<String> myCapabilities, OptionsResponseCallback callback) {
         Log.w(LOG_TAG, "sendOptionsCapabilityRequest called with no implementation.");
         try {
             callback.onCommandError(7);

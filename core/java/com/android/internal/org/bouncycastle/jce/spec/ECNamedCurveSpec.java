@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.math.field.FiniteField;
 import com.android.internal.org.bouncycastle.math.field.Polynomial;
 import com.android.internal.org.bouncycastle.math.field.PolynomialExtensionField;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.math.BigInteger;
 import java.security.spec.ECField;
 import java.security.spec.ECFieldF2m;
@@ -40,7 +41,8 @@ public class ECNamedCurveSpec extends java.security.spec.ECParameterSpec {
         this.name = name;
     }
 
-    public ECNamedCurveSpec(String name, EllipticCurve curve, java.security.spec.ECPoint g, BigInteger n) {
+    public ECNamedCurveSpec(
+            String name, EllipticCurve curve, java.security.spec.ECPoint g, BigInteger n) {
         super(curve, g, n, 1);
         this.name = name;
     }
@@ -50,12 +52,18 @@ public class ECNamedCurveSpec extends java.security.spec.ECParameterSpec {
         this.name = name;
     }
 
-    public ECNamedCurveSpec(String name, EllipticCurve curve, java.security.spec.ECPoint g, BigInteger n, BigInteger h) {
+    public ECNamedCurveSpec(
+            String name,
+            EllipticCurve curve,
+            java.security.spec.ECPoint g,
+            BigInteger n,
+            BigInteger h) {
         super(curve, g, n, h.intValue());
         this.name = name;
     }
 
-    public ECNamedCurveSpec(String name, ECCurve curve, ECPoint g, BigInteger n, BigInteger h, byte[] seed) {
+    public ECNamedCurveSpec(
+            String name, ECCurve curve, ECPoint g, BigInteger n, BigInteger h, byte[] seed) {
         super(convertCurve(curve, seed), EC5Util.convertPoint(g), n, h.intValue());
         this.name = name;
     }

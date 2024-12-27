@@ -1,6 +1,5 @@
 package com.samsung.android.core.pm.runtimemanifest;
 
-import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestPolicies;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,12 +27,17 @@ public class RuntimeManifestPolicies {
     }
 
     public List<PolicyInfo> getApplicationPolicies() {
-        Collections.sort(this.mApplications, new Comparator() { // from class: com.samsung.android.core.pm.runtimemanifest.RuntimeManifestPolicies$$ExternalSyntheticLambda1
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                return RuntimeManifestPolicies.lambda$getApplicationPolicies$0((RuntimeManifestPolicies.PolicyInfo) obj, (RuntimeManifestPolicies.PolicyInfo) obj2);
-            }
-        });
+        Collections.sort(
+                this.mApplications,
+                new Comparator() { // from class:
+                                   // com.samsung.android.core.pm.runtimemanifest.RuntimeManifestPolicies$$ExternalSyntheticLambda1
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        return RuntimeManifestPolicies.lambda$getApplicationPolicies$0(
+                                (RuntimeManifestPolicies.PolicyInfo) obj,
+                                (RuntimeManifestPolicies.PolicyInfo) obj2);
+                    }
+                });
         return this.mApplications;
     }
 
@@ -73,15 +77,21 @@ public class RuntimeManifestPolicies {
         return this.mReceivers;
     }
 
-    private static List<PolicyInfo> getAndSortFromMap(Map<String, List<PolicyInfo>> map, String key) {
+    private static List<PolicyInfo> getAndSortFromMap(
+            Map<String, List<PolicyInfo>> map, String key) {
         List<PolicyInfo> policies = map.get(key);
         if (policies != null) {
-            Collections.sort(policies, new Comparator() { // from class: com.samsung.android.core.pm.runtimemanifest.RuntimeManifestPolicies$$ExternalSyntheticLambda2
-                @Override // java.util.Comparator
-                public final int compare(Object obj, Object obj2) {
-                    return RuntimeManifestPolicies.lambda$getAndSortFromMap$1((RuntimeManifestPolicies.PolicyInfo) obj, (RuntimeManifestPolicies.PolicyInfo) obj2);
-                }
-            });
+            Collections.sort(
+                    policies,
+                    new Comparator() { // from class:
+                                       // com.samsung.android.core.pm.runtimemanifest.RuntimeManifestPolicies$$ExternalSyntheticLambda2
+                        @Override // java.util.Comparator
+                        public final int compare(Object obj, Object obj2) {
+                            return RuntimeManifestPolicies.lambda$getAndSortFromMap$1(
+                                    (RuntimeManifestPolicies.PolicyInfo) obj,
+                                    (RuntimeManifestPolicies.PolicyInfo) obj2);
+                        }
+                    });
         }
         return policies;
     }
@@ -92,12 +102,17 @@ public class RuntimeManifestPolicies {
 
     private static void sortMap(Map<String, List<PolicyInfo>> map) {
         for (List<PolicyInfo> policies : map.values()) {
-            Collections.sort(policies, new Comparator() { // from class: com.samsung.android.core.pm.runtimemanifest.RuntimeManifestPolicies$$ExternalSyntheticLambda0
-                @Override // java.util.Comparator
-                public final int compare(Object obj, Object obj2) {
-                    return RuntimeManifestPolicies.lambda$sortMap$2((RuntimeManifestPolicies.PolicyInfo) obj, (RuntimeManifestPolicies.PolicyInfo) obj2);
-                }
-            });
+            Collections.sort(
+                    policies,
+                    new Comparator() { // from class:
+                                       // com.samsung.android.core.pm.runtimemanifest.RuntimeManifestPolicies$$ExternalSyntheticLambda0
+                        @Override // java.util.Comparator
+                        public final int compare(Object obj, Object obj2) {
+                            return RuntimeManifestPolicies.lambda$sortMap$2(
+                                    (RuntimeManifestPolicies.PolicyInfo) obj,
+                                    (RuntimeManifestPolicies.PolicyInfo) obj2);
+                        }
+                    });
         }
     }
 

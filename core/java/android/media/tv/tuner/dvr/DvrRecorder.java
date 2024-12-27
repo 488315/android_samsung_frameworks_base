@@ -7,7 +7,9 @@ import android.media.tv.tuner.filter.Filter;
 import android.os.ParcelFileDescriptor;
 import android.os.Process;
 import android.util.Log;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.concurrent.Executor;
 
 @SystemApi
@@ -66,12 +68,14 @@ public class DvrRecorder implements AutoCloseable {
         }
         synchronized (this.mListenerLock) {
             if (this.mExecutor != null && this.mListener != null) {
-                this.mExecutor.execute(new Runnable() { // from class: android.media.tv.tuner.dvr.DvrRecorder$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        DvrRecorder.this.lambda$onRecordStatusChanged$0(status);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.media.tv.tuner.dvr.DvrRecorder$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                DvrRecorder.this.lambda$onRecordStatusChanged$0(status);
+                            }
+                        });
             }
         }
     }
@@ -98,7 +102,8 @@ public class DvrRecorder implements AutoCloseable {
     }
 
     public int setRecordBufferStatusCheckIntervalHint(long durationInMs) {
-        if (!TunerVersionChecker.checkHigherOrEqualVersionTo(196608, "Set status check interval hint")) {
+        if (!TunerVersionChecker.checkHigherOrEqualVersionTo(
+                196608, "Set status check interval hint")) {
             return 1;
         }
         return nativeSetStatusCheckIntervalHint(durationInMs);
@@ -160,7 +165,8 @@ public class DvrRecorder implements AutoCloseable {
 
     public long write(byte[] buffer, long offset, long size) {
         if (size + offset > buffer.length) {
-            throw new ArrayIndexOutOfBoundsException("Array length=" + buffer.length + ", offset=" + offset + ", size=" + size);
+            throw new ArrayIndexOutOfBoundsException(
+                    "Array length=" + buffer.length + ", offset=" + offset + ", size=" + size);
         }
         return nativeWrite(buffer, offset, size);
     }

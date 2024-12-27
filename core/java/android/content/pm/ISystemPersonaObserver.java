@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.samsung.android.knox.SemPersonaState;
 
 /* loaded from: classes.dex */
@@ -19,28 +20,25 @@ public interface ISystemPersonaObserver extends IInterface {
 
     void onResetPersona(int i) throws RemoteException;
 
-    void onStateChange(int i, SemPersonaState semPersonaState, SemPersonaState semPersonaState2) throws RemoteException;
+    void onStateChange(int i, SemPersonaState semPersonaState, SemPersonaState semPersonaState2)
+            throws RemoteException;
 
     public static class Default implements ISystemPersonaObserver {
         @Override // android.content.pm.ISystemPersonaObserver
-        public void onPersonaActive(int personaId) throws RemoteException {
-        }
+        public void onPersonaActive(int personaId) throws RemoteException {}
 
         @Override // android.content.pm.ISystemPersonaObserver
-        public void onRemovePersona(int personaId) throws RemoteException {
-        }
+        public void onRemovePersona(int personaId) throws RemoteException {}
 
         @Override // android.content.pm.ISystemPersonaObserver
-        public void onResetPersona(int personaId) throws RemoteException {
-        }
+        public void onResetPersona(int personaId) throws RemoteException {}
 
         @Override // android.content.pm.ISystemPersonaObserver
-        public void onKnoxContainerLaunch(int personaId) throws RemoteException {
-        }
+        public void onKnoxContainerLaunch(int personaId) throws RemoteException {}
 
         @Override // android.content.pm.ISystemPersonaObserver
-        public void onStateChange(int personaId, SemPersonaState oldState, SemPersonaState newState) throws RemoteException {
-        }
+        public void onStateChange(int personaId, SemPersonaState oldState, SemPersonaState newState)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -48,7 +46,7 @@ public interface ISystemPersonaObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISystemPersonaObserver {
+    public abstract static class Stub extends Binder implements ISystemPersonaObserver {
         static final int TRANSACTION_onKnoxContainerLaunch = 4;
         static final int TRANSACTION_onPersonaActive = 1;
         static final int TRANSACTION_onRemovePersona = 2;
@@ -98,7 +96,8 @@ public interface ISystemPersonaObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISystemPersonaObserver.DESCRIPTOR);
             }
@@ -133,8 +132,10 @@ public interface ISystemPersonaObserver extends IInterface {
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    SemPersonaState _arg1 = (SemPersonaState) data.readTypedObject(SemPersonaState.CREATOR);
-                    SemPersonaState _arg2 = (SemPersonaState) data.readTypedObject(SemPersonaState.CREATOR);
+                    SemPersonaState _arg1 =
+                            (SemPersonaState) data.readTypedObject(SemPersonaState.CREATOR);
+                    SemPersonaState _arg2 =
+                            (SemPersonaState) data.readTypedObject(SemPersonaState.CREATOR);
                     data.enforceNoDataAvail();
                     onStateChange(_arg05, _arg1, _arg2);
                     reply.writeNoException();
@@ -221,7 +222,9 @@ public interface ISystemPersonaObserver extends IInterface {
             }
 
             @Override // android.content.pm.ISystemPersonaObserver
-            public void onStateChange(int personaId, SemPersonaState oldState, SemPersonaState newState) throws RemoteException {
+            public void onStateChange(
+                    int personaId, SemPersonaState oldState, SemPersonaState newState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

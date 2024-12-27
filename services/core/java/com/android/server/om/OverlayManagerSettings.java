@@ -6,19 +6,23 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Xml;
+
 import com.android.internal.util.CollectionUtils;
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -40,25 +44,40 @@ public final class OverlayManagerSettings {
         public static void persist(ArrayList arrayList, OutputStream outputStream) {
             TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(outputStream);
             resolveSerializer.startDocument((String) null, Boolean.TRUE);
-            resolveSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+            resolveSerializer.setFeature(
+                    "http://xmlpull.org/v1/doc/features.html#indent-output", true);
             resolveSerializer.startTag((String) null, "overlays");
             resolveSerializer.attributeInt((String) null, "version", 4);
             int size = arrayList.size();
             for (int i = 0; i < size; i++) {
                 SettingsItem settingsItem = (SettingsItem) arrayList.get(i);
                 resolveSerializer.startTag((String) null, "item");
-                XmlUtils.writeStringAttribute(resolveSerializer, "packageName", settingsItem.mOverlay.getPackageName());
-                XmlUtils.writeStringAttribute(resolveSerializer, "overlayName", settingsItem.mOverlay.getOverlayName());
+                XmlUtils.writeStringAttribute(
+                        resolveSerializer, "packageName", settingsItem.mOverlay.getPackageName());
+                XmlUtils.writeStringAttribute(
+                        resolveSerializer, "overlayName", settingsItem.mOverlay.getOverlayName());
                 resolveSerializer.attributeInt((String) null, "userId", settingsItem.mUserId);
-                XmlUtils.writeStringAttribute(resolveSerializer, "targetPackageName", settingsItem.mTargetPackageName);
-                XmlUtils.writeStringAttribute(resolveSerializer, "targetOverlayableName", settingsItem.mTargetOverlayableName);
-                XmlUtils.writeStringAttribute(resolveSerializer, "baseCodePath", settingsItem.mBaseCodePath);
-                resolveSerializer.attributeInt((String) null, LauncherConfigurationInternal.KEY_STATE_BOOLEAN, settingsItem.mState);
-                XmlUtils.writeBooleanAttribute(resolveSerializer, "isEnabled", settingsItem.mIsEnabled);
-                XmlUtils.writeBooleanAttribute(resolveSerializer, "isStatic", !settingsItem.mIsMutable);
+                XmlUtils.writeStringAttribute(
+                        resolveSerializer, "targetPackageName", settingsItem.mTargetPackageName);
+                XmlUtils.writeStringAttribute(
+                        resolveSerializer,
+                        "targetOverlayableName",
+                        settingsItem.mTargetOverlayableName);
+                XmlUtils.writeStringAttribute(
+                        resolveSerializer, "baseCodePath", settingsItem.mBaseCodePath);
+                resolveSerializer.attributeInt(
+                        (String) null,
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN,
+                        settingsItem.mState);
+                XmlUtils.writeBooleanAttribute(
+                        resolveSerializer, "isEnabled", settingsItem.mIsEnabled);
+                XmlUtils.writeBooleanAttribute(
+                        resolveSerializer, "isStatic", !settingsItem.mIsMutable);
                 resolveSerializer.attributeInt((String) null, "priority", settingsItem.mPriority);
-                XmlUtils.writeStringAttribute(resolveSerializer, "category", settingsItem.mCategory);
-                XmlUtils.writeBooleanAttribute(resolveSerializer, "fabricated", settingsItem.mIsFabricated);
+                XmlUtils.writeStringAttribute(
+                        resolveSerializer, "category", settingsItem.mCategory);
+                XmlUtils.writeBooleanAttribute(
+                        resolveSerializer, "fabricated", settingsItem.mIsFabricated);
                 resolveSerializer.endTag((String) null, "item");
             }
             resolveSerializer.endTag((String) null, "overlays");
@@ -73,16 +92,40 @@ public final class OverlayManagerSettings {
             int attributeInt = resolvePullParser.getAttributeInt((String) null, "version");
             if (attributeInt != 4) {
                 if (attributeInt == 0 || attributeInt == 1 || attributeInt == 2) {
-                    throw new XmlPullParserException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(attributeInt, "old version ", "; ignoring"));
+                    throw new XmlPullParserException(
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    attributeInt, "old version ", "; ignoring"));
                 }
                 if (attributeInt != 3) {
-                    throw new XmlPullParserException(VibrationParam$1$$ExternalSyntheticOutline0.m(attributeInt, "unrecognized version "));
+                    throw new XmlPullParserException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                    attributeInt, "unrecognized version "));
                 }
             }
             int depth = resolvePullParser.getDepth();
             while (XmlUtils.nextElementWithin(resolvePullParser, depth)) {
                 if ("item".equals(resolvePullParser.getName())) {
-                    arrayList.add(new SettingsItem(new OverlayIdentifier(XmlUtils.readStringAttribute(resolvePullParser, "packageName"), XmlUtils.readStringAttribute(resolvePullParser, "overlayName")), resolvePullParser.getAttributeInt(str, "userId"), XmlUtils.readStringAttribute(resolvePullParser, "targetPackageName"), XmlUtils.readStringAttribute(resolvePullParser, "targetOverlayableName"), XmlUtils.readStringAttribute(resolvePullParser, "baseCodePath"), resolvePullParser.getAttributeInt(str, LauncherConfigurationInternal.KEY_STATE_BOOLEAN), resolvePullParser.getAttributeBoolean(str, "isEnabled", false), !resolvePullParser.getAttributeBoolean(str, "isStatic", false), resolvePullParser.getAttributeInt(str, "priority"), XmlUtils.readStringAttribute(resolvePullParser, "category"), resolvePullParser.getAttributeBoolean(str, "fabricated", false)));
+                    arrayList.add(
+                            new SettingsItem(
+                                    new OverlayIdentifier(
+                                            XmlUtils.readStringAttribute(
+                                                    resolvePullParser, "packageName"),
+                                            XmlUtils.readStringAttribute(
+                                                    resolvePullParser, "overlayName")),
+                                    resolvePullParser.getAttributeInt(str, "userId"),
+                                    XmlUtils.readStringAttribute(
+                                            resolvePullParser, "targetPackageName"),
+                                    XmlUtils.readStringAttribute(
+                                            resolvePullParser, "targetOverlayableName"),
+                                    XmlUtils.readStringAttribute(resolvePullParser, "baseCodePath"),
+                                    resolvePullParser.getAttributeInt(
+                                            str, LauncherConfigurationInternal.KEY_STATE_BOOLEAN),
+                                    resolvePullParser.getAttributeBoolean(str, "isEnabled", false),
+                                    !resolvePullParser.getAttributeBoolean(str, "isStatic", false),
+                                    resolvePullParser.getAttributeInt(str, "priority"),
+                                    XmlUtils.readStringAttribute(resolvePullParser, "category"),
+                                    resolvePullParser.getAttributeBoolean(
+                                            str, "fabricated", false)));
                     str = null;
                 }
             }
@@ -113,12 +156,35 @@ public final class OverlayManagerSettings {
                 String str2 = settingsItem.mBaseCodePath;
                 int i = settingsItem.mState;
                 int i2 = settingsItem.mPriority;
-                settingsItem.mCache = new OverlayInfo(packageName, overlayName, settingsItem.mTargetPackageName, settingsItem.mTargetOverlayableName, str, str2, i, settingsItem.mUserId, i2, settingsItem.mIsMutable, settingsItem.mIsFabricated);
+                settingsItem.mCache =
+                        new OverlayInfo(
+                                packageName,
+                                overlayName,
+                                settingsItem.mTargetPackageName,
+                                settingsItem.mTargetOverlayableName,
+                                str,
+                                str2,
+                                i,
+                                settingsItem.mUserId,
+                                i2,
+                                settingsItem.mIsMutable,
+                                settingsItem.mIsFabricated);
             }
             return settingsItem.mCache;
         }
 
-        public SettingsItem(OverlayIdentifier overlayIdentifier, int i, String str, String str2, String str3, int i2, boolean z, boolean z2, int i3, String str4, boolean z3) {
+        public SettingsItem(
+                OverlayIdentifier overlayIdentifier,
+                int i,
+                String str,
+                String str2,
+                String str3,
+                int i2,
+                boolean z,
+                boolean z2,
+                int i3,
+                String str4,
+                boolean z3) {
             this.mOverlay = overlayIdentifier;
             this.mUserId = i;
             this.mTargetPackageName = str;
@@ -171,7 +237,8 @@ public final class OverlayManagerSettings {
                 if (select < 0) {
                     return null;
                 }
-                return SettingsItem.m739$$Nest$mgetOverlayInfo((SettingsItem) this.mItems.get(select));
+                return SettingsItem.m739$$Nest$mgetOverlayInfo(
+                        (SettingsItem) this.mItems.get(select));
             } catch (Throwable th) {
                 throw th;
             }
@@ -186,7 +253,9 @@ public final class OverlayManagerSettings {
                 if (select < 0) {
                     throw new BadKeyException(overlayIdentifier, i);
                 }
-                m739$$Nest$mgetOverlayInfo = SettingsItem.m739$$Nest$mgetOverlayInfo((SettingsItem) this.mItems.get(select));
+                m739$$Nest$mgetOverlayInfo =
+                        SettingsItem.m739$$Nest$mgetOverlayInfo(
+                                (SettingsItem) this.mItems.get(select));
             } catch (Throwable th) {
                 throw th;
             }
@@ -198,9 +267,11 @@ public final class OverlayManagerSettings {
         List selectWhereUser;
         synchronized (this.mItemsLock) {
             selectWhereUser = selectWhereUser(i);
-            ((ArrayList) selectWhereUser).removeIf(new OverlayManagerSettings$$ExternalSyntheticLambda4(3, str));
+            ((ArrayList) selectWhereUser)
+                    .removeIf(new OverlayManagerSettings$$ExternalSyntheticLambda4(3, str));
         }
-        return CollectionUtils.map(selectWhereUser, new OverlayManagerSettings$$ExternalSyntheticLambda9(0));
+        return CollectionUtils.map(
+                selectWhereUser, new OverlayManagerSettings$$ExternalSyntheticLambda9(0));
     }
 
     public final ArrayMap getOverlaysForUser(int i) {
@@ -210,7 +281,11 @@ public final class OverlayManagerSettings {
         int size = arrayList.size();
         for (int i2 = 0; i2 < size; i2++) {
             SettingsItem settingsItem = (SettingsItem) arrayList.get(i2);
-            ((List) arrayMap.computeIfAbsent(settingsItem.mTargetPackageName, new OverlayManagerSettings$$ExternalSyntheticLambda9(1))).add(SettingsItem.m739$$Nest$mgetOverlayInfo(settingsItem));
+            ((List)
+                            arrayMap.computeIfAbsent(
+                                    settingsItem.mTargetPackageName,
+                                    new OverlayManagerSettings$$ExternalSyntheticLambda9(1)))
+                    .add(SettingsItem.m739$$Nest$mgetOverlayInfo(settingsItem));
         }
         return arrayMap;
     }
@@ -234,7 +309,11 @@ public final class OverlayManagerSettings {
     public final int[] getUsers() {
         int[] array;
         synchronized (this.mItemsLock) {
-            array = this.mItems.stream().mapToInt(new OverlayManagerSettings$$ExternalSyntheticLambda2()).distinct().toArray();
+            array =
+                    this.mItems.stream()
+                            .mapToInt(new OverlayManagerSettings$$ExternalSyntheticLambda2())
+                            .distinct()
+                            .toArray();
         }
         return array;
     }
@@ -243,7 +322,9 @@ public final class OverlayManagerSettings {
         synchronized (this.mItemsLock) {
             try {
                 int size = this.mItems.size() - 1;
-                while (size >= 0 && ((SettingsItem) this.mItems.get(size)).mPriority > settingsItem.mPriority) {
+                while (size >= 0
+                        && ((SettingsItem) this.mItems.get(size)).mPriority
+                                > settingsItem.mPriority) {
                     size--;
                 }
                 this.mItems.add(size + 1, settingsItem);
@@ -274,7 +355,9 @@ public final class OverlayManagerSettings {
             try {
                 List list = null;
                 for (int size = this.mItems.size() - 1; size >= 0; size--) {
-                    OverlayInfo m739$$Nest$mgetOverlayInfo = SettingsItem.m739$$Nest$mgetOverlayInfo((SettingsItem) this.mItems.get(size));
+                    OverlayInfo m739$$Nest$mgetOverlayInfo =
+                            SettingsItem.m739$$Nest$mgetOverlayInfo(
+                                    (SettingsItem) this.mItems.get(size));
                     if (predicate.test(m739$$Nest$mgetOverlayInfo)) {
                         this.mItems.remove(size);
                         list = CollectionUtils.add(list, m739$$Nest$mgetOverlayInfo);
@@ -300,7 +383,8 @@ public final class OverlayManagerSettings {
                 int size = this.mItems.size();
                 for (int i2 = 0; i2 < size; i2++) {
                     SettingsItem settingsItem = (SettingsItem) this.mItems.get(i2);
-                    if (settingsItem.mUserId == i && settingsItem.mOverlay.equals(overlayIdentifier)) {
+                    if (settingsItem.mUserId == i
+                            && settingsItem.mOverlay.equals(overlayIdentifier)) {
                         return i2;
                     }
                 }
@@ -315,7 +399,10 @@ public final class OverlayManagerSettings {
         ArrayList arrayList;
         synchronized (this.mItemsLock) {
             arrayList = new ArrayList();
-            CollectionUtils.addIf(this.mItems, arrayList, new OverlayManagerSettings$$ExternalSyntheticLambda0(i, 1));
+            CollectionUtils.addIf(
+                    this.mItems,
+                    arrayList,
+                    new OverlayManagerSettings$$ExternalSyntheticLambda0(i, 1));
         }
         return arrayList;
     }
@@ -398,7 +485,8 @@ public final class OverlayManagerSettings {
         }
     }
 
-    public final boolean setPriority(OverlayIdentifier overlayIdentifier, OverlayIdentifier overlayIdentifier2, int i) {
+    public final boolean setPriority(
+            OverlayIdentifier overlayIdentifier, OverlayIdentifier overlayIdentifier2, int i) {
         synchronized (this.mItemsLock) {
             try {
                 if (overlayIdentifier.equals(overlayIdentifier2)) {
@@ -413,7 +501,8 @@ public final class OverlayManagerSettings {
                     return false;
                 }
                 SettingsItem settingsItem = (SettingsItem) this.mItems.get(select);
-                if (!settingsItem.mTargetPackageName.equals(((SettingsItem) this.mItems.get(select2)).mTargetPackageName)) {
+                if (!settingsItem.mTargetPackageName.equals(
+                        ((SettingsItem) this.mItems.get(select2)).mTargetPackageName)) {
                     return false;
                 }
                 this.mItems.remove(select);

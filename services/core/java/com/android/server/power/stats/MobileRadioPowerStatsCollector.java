@@ -9,11 +9,11 @@ import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.os.PowerStats;
 import com.android.server.SystemServerInitThreadPool$$ExternalSyntheticLambda0;
 import com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticOutline0;
-import com.android.server.power.stats.BatteryStatsImpl;
-import com.android.server.power.stats.PowerStatsCollector;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +26,8 @@ import java.util.function.LongSupplier;
 public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
     protected static final long MOBILE_RADIO_POWER_STATE_UPDATE_FREQ_MS = 600000;
     static final int[] NETWORK_TYPES = {0, 1, 2, 3, 4, 5, 6};
-    public BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda3 mCallDurationSupplier;
+    public BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda3
+            mCallDurationSupplier;
     public PowerStatsCollector.ConsumedEnergyRetrieverImpl mConsumedEnergyRetriever;
     public long[] mDeviceStats;
     public int[] mEnergyConsumerIds;
@@ -40,9 +41,11 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
     public long mLastUpdateTimestampMillis;
     public int mLastVoltageMv;
     public MobileRadioPowerStatsLayout mLayout;
-    public volatile BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda1 mNetworkStatsSupplier;
+    public volatile BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda1
+            mNetworkStatsSupplier;
     public PowerStats mPowerStats;
-    public BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda3 mScanDurationSupplier;
+    public BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda3
+            mScanDurationSupplier;
     public volatile TelephonyManager mTelephonyManager;
     public BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0 mVoltageSupplier;
 
@@ -51,7 +54,8 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public MobileRadioPowerStatsCollector(com.android.server.power.stats.BatteryStatsImpl.PowerStatsCollectorInjector r8) {
+    public MobileRadioPowerStatsCollector(
+            com.android.server.power.stats.BatteryStatsImpl.PowerStatsCollectorInjector r8) {
         /*
             r7 = this;
             com.android.server.power.stats.BatteryStatsImpl r0 = com.android.server.power.stats.BatteryStatsImpl.this
@@ -70,7 +74,9 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
             r7.mInjector = r8
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.MobileRadioPowerStatsCollector.<init>(com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.stats.MobileRadioPowerStatsCollector.<init>(com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector):void");
     }
 
     public static int mapRadioAccessNetworkTypeToRadioAccessTechnology(int i) {
@@ -86,7 +92,11 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
             case 6:
                 break;
             default:
-                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(i, "Unhandled RadioAccessNetworkType (", "), mapping to OTHER", "MobileRadioPowerStatsCollector");
+                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                        i,
+                        "Unhandled RadioAccessNetworkType (",
+                        "), mapping to OTHER",
+                        "MobileRadioPowerStatsCollector");
                 break;
         }
         return 0;
@@ -101,82 +111,119 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
             if (!this.mEnabled) {
                 return null;
             }
-            BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector = this.mInjector;
+            BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector =
+                    this.mInjector;
             this.mConsumedEnergyRetriever = powerStatsCollectorInjector.mConsumedEnergyRetriever;
-            this.mVoltageSupplier = new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0(powerStatsCollectorInjector);
+            this.mVoltageSupplier =
+                    new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0(
+                            powerStatsCollectorInjector);
             this.mTelephonyManager = powerStatsCollectorInjector.mTelephonyManager;
-            BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector2 = this.mInjector;
+            BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector2 =
+                    this.mInjector;
             powerStatsCollectorInjector2.getClass();
-            this.mNetworkStatsSupplier = new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda1(powerStatsCollectorInjector2, 0);
-            final BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector3 = this.mInjector;
+            this.mNetworkStatsSupplier =
+                    new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda1(
+                            powerStatsCollectorInjector2, 0);
+            final BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector3 =
+                    this.mInjector;
             powerStatsCollectorInjector3.getClass();
             final int i = 1;
-            this.mCallDurationSupplier = new LongSupplier() { // from class: com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda3
-                @Override // java.util.function.LongSupplier
-                public final long getAsLong() {
-                    int i2 = i;
-                    BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector4 = powerStatsCollectorInjector3;
-                    switch (i2) {
-                        case 0:
-                            BatteryStatsImpl batteryStatsImpl = BatteryStatsImpl.this;
-                            return batteryStatsImpl.mPhoneSignalScanningTimer.getTotalTimeLocked(batteryStatsImpl.mClock.elapsedRealtime() * 1000, 0);
-                        default:
-                            BatteryStatsImpl batteryStatsImpl2 = BatteryStatsImpl.this;
-                            return batteryStatsImpl2.mPhoneOnTimer.getTotalTimeLocked(batteryStatsImpl2.mClock.elapsedRealtime() * 1000, 0);
-                    }
-                }
-            };
-            final BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector4 = this.mInjector;
+            this.mCallDurationSupplier =
+                    new LongSupplier() { // from class:
+                                         // com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda3
+                        @Override // java.util.function.LongSupplier
+                        public final long getAsLong() {
+                            int i2 = i;
+                            BatteryStatsImpl.PowerStatsCollectorInjector
+                                    powerStatsCollectorInjector4 = powerStatsCollectorInjector3;
+                            switch (i2) {
+                                case 0:
+                                    BatteryStatsImpl batteryStatsImpl = BatteryStatsImpl.this;
+                                    return batteryStatsImpl.mPhoneSignalScanningTimer
+                                            .getTotalTimeLocked(
+                                                    batteryStatsImpl.mClock.elapsedRealtime()
+                                                            * 1000,
+                                                    0);
+                                default:
+                                    BatteryStatsImpl batteryStatsImpl2 = BatteryStatsImpl.this;
+                                    return batteryStatsImpl2.mPhoneOnTimer.getTotalTimeLocked(
+                                            batteryStatsImpl2.mClock.elapsedRealtime() * 1000, 0);
+                            }
+                        }
+                    };
+            final BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector4 =
+                    this.mInjector;
             powerStatsCollectorInjector4.getClass();
             final int i2 = 0;
-            this.mScanDurationSupplier = new LongSupplier() { // from class: com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda3
-                @Override // java.util.function.LongSupplier
-                public final long getAsLong() {
-                    int i22 = i2;
-                    BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector42 = powerStatsCollectorInjector4;
-                    switch (i22) {
-                        case 0:
-                            BatteryStatsImpl batteryStatsImpl = BatteryStatsImpl.this;
-                            return batteryStatsImpl.mPhoneSignalScanningTimer.getTotalTimeLocked(batteryStatsImpl.mClock.elapsedRealtime() * 1000, 0);
-                        default:
-                            BatteryStatsImpl batteryStatsImpl2 = BatteryStatsImpl.this;
-                            return batteryStatsImpl2.mPhoneOnTimer.getTotalTimeLocked(batteryStatsImpl2.mClock.elapsedRealtime() * 1000, 0);
-                    }
-                }
-            };
+            this.mScanDurationSupplier =
+                    new LongSupplier() { // from class:
+                                         // com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda3
+                        @Override // java.util.function.LongSupplier
+                        public final long getAsLong() {
+                            int i22 = i2;
+                            BatteryStatsImpl.PowerStatsCollectorInjector
+                                    powerStatsCollectorInjector42 = powerStatsCollectorInjector4;
+                            switch (i22) {
+                                case 0:
+                                    BatteryStatsImpl batteryStatsImpl = BatteryStatsImpl.this;
+                                    return batteryStatsImpl.mPhoneSignalScanningTimer
+                                            .getTotalTimeLocked(
+                                                    batteryStatsImpl.mClock.elapsedRealtime()
+                                                            * 1000,
+                                                    0);
+                                default:
+                                    BatteryStatsImpl batteryStatsImpl2 = BatteryStatsImpl.this;
+                                    return batteryStatsImpl2.mPhoneOnTimer.getTotalTimeLocked(
+                                            batteryStatsImpl2.mClock.elapsedRealtime() * 1000, 0);
+                            }
+                        }
+                    };
             int[] energyConsumerIds = this.mConsumedEnergyRetriever.getEnergyConsumerIds(5, null);
             this.mEnergyConsumerIds = energyConsumerIds;
             long[] jArr = new long[energyConsumerIds.length];
             this.mLastConsumedEnergyUws = jArr;
             Arrays.fill(jArr, -1L);
-            MobileRadioPowerStatsLayout mobileRadioPowerStatsLayout = new MobileRadioPowerStatsLayout();
+            MobileRadioPowerStatsLayout mobileRadioPowerStatsLayout =
+                    new MobileRadioPowerStatsLayout();
             this.mLayout = mobileRadioPowerStatsLayout;
-            mobileRadioPowerStatsLayout.mDeviceSleepTimePosition = mobileRadioPowerStatsLayout.addDeviceSection(1, 0, "sleep");
-            mobileRadioPowerStatsLayout.mDeviceIdleTimePosition = mobileRadioPowerStatsLayout.addDeviceSection(1, 0, "idle");
-            mobileRadioPowerStatsLayout.mDeviceScanTimePosition = mobileRadioPowerStatsLayout.addDeviceSection(1, 0, "scan");
-            mobileRadioPowerStatsLayout.mDeviceCallTimePosition = mobileRadioPowerStatsLayout.addDeviceSection(1, 1, "call");
+            mobileRadioPowerStatsLayout.mDeviceSleepTimePosition =
+                    mobileRadioPowerStatsLayout.addDeviceSection(1, 0, "sleep");
+            mobileRadioPowerStatsLayout.mDeviceIdleTimePosition =
+                    mobileRadioPowerStatsLayout.addDeviceSection(1, 0, "idle");
+            mobileRadioPowerStatsLayout.mDeviceScanTimePosition =
+                    mobileRadioPowerStatsLayout.addDeviceSection(1, 0, "scan");
+            mobileRadioPowerStatsLayout.mDeviceCallTimePosition =
+                    mobileRadioPowerStatsLayout.addDeviceSection(1, 1, "call");
             this.mLayout.addDeviceSectionEnergyConsumers(this.mEnergyConsumerIds.length);
             MobileRadioPowerStatsLayout mobileRadioPowerStatsLayout2 = this.mLayout;
             int i3 = mobileRadioPowerStatsLayout2.mStateStatsArrayLength;
             mobileRadioPowerStatsLayout2.mStateStatsArrayLength = i3 + 1;
-            PowerStatsLayout.appendFormat(mobileRadioPowerStatsLayout2.mStateFormat, i3, 1, "rx", 0);
+            PowerStatsLayout.appendFormat(
+                    mobileRadioPowerStatsLayout2.mStateFormat, i3, 1, "rx", 0);
             mobileRadioPowerStatsLayout2.mStateRxTimePosition = i3;
             int numTxPowerLevels = ModemActivityInfo.getNumTxPowerLevels();
             mobileRadioPowerStatsLayout2.mStateTxTimesCount = numTxPowerLevels;
             int i4 = mobileRadioPowerStatsLayout2.mStateStatsArrayLength;
             mobileRadioPowerStatsLayout2.mStateStatsArrayLength = i4 + numTxPowerLevels;
-            PowerStatsLayout.appendFormat(mobileRadioPowerStatsLayout2.mStateFormat, i4, numTxPowerLevels, "tx", 0);
+            PowerStatsLayout.appendFormat(
+                    mobileRadioPowerStatsLayout2.mStateFormat, i4, numTxPowerLevels, "tx", 0);
             mobileRadioPowerStatsLayout2.mStateTxTimesPosition = i4;
             MobileRadioPowerStatsLayout mobileRadioPowerStatsLayout3 = this.mLayout;
-            mobileRadioPowerStatsLayout3.mUidRxPacketsPosition = mobileRadioPowerStatsLayout3.addUidSection(1, 0, "rx-pkts");
-            mobileRadioPowerStatsLayout3.mUidRxBytesPosition = mobileRadioPowerStatsLayout3.addUidSection(1, 0, "rx-B");
-            mobileRadioPowerStatsLayout3.mUidTxPacketsPosition = mobileRadioPowerStatsLayout3.addUidSection(1, 0, "tx-pkts");
-            mobileRadioPowerStatsLayout3.mUidTxBytesPosition = mobileRadioPowerStatsLayout3.addUidSection(1, 0, "tx-B");
+            mobileRadioPowerStatsLayout3.mUidRxPacketsPosition =
+                    mobileRadioPowerStatsLayout3.addUidSection(1, 0, "rx-pkts");
+            mobileRadioPowerStatsLayout3.mUidRxBytesPosition =
+                    mobileRadioPowerStatsLayout3.addUidSection(1, 0, "rx-B");
+            mobileRadioPowerStatsLayout3.mUidTxPacketsPosition =
+                    mobileRadioPowerStatsLayout3.addUidSection(1, 0, "tx-pkts");
+            mobileRadioPowerStatsLayout3.mUidTxBytesPosition =
+                    mobileRadioPowerStatsLayout3.addUidSection(1, 0, "tx-B");
             MobileRadioPowerStatsLayout mobileRadioPowerStatsLayout4 = this.mLayout;
-            mobileRadioPowerStatsLayout4.mDeviceDurationPosition = mobileRadioPowerStatsLayout4.addDeviceSection(1, 1, "usage");
+            mobileRadioPowerStatsLayout4.mDeviceDurationPosition =
+                    mobileRadioPowerStatsLayout4.addDeviceSection(1, 1, "usage");
             this.mLayout.addDeviceSectionPowerEstimate();
             MobileRadioPowerStatsLayout mobileRadioPowerStatsLayout5 = this.mLayout;
-            mobileRadioPowerStatsLayout5.mUidPowerEstimatePosition = mobileRadioPowerStatsLayout5.addUidSection(1, 5, "power");
+            mobileRadioPowerStatsLayout5.mUidPowerEstimatePosition =
+                    mobileRadioPowerStatsLayout5.addUidSection(1, 5, "power");
             SparseArray sparseArray = new SparseArray();
             int i5 = 0;
             while (i5 < 3) {
@@ -200,7 +247,15 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
             PersistableBundle persistableBundle = new PersistableBundle();
             this.mLayout.toExtras(persistableBundle);
             MobileRadioPowerStatsLayout mobileRadioPowerStatsLayout6 = this.mLayout;
-            PowerStats powerStats = new PowerStats(new PowerStats.Descriptor(8, mobileRadioPowerStatsLayout6.mDeviceStatsArrayLength, sparseArray, mobileRadioPowerStatsLayout6.mStateStatsArrayLength, mobileRadioPowerStatsLayout6.mUidStatsArrayLength, persistableBundle));
+            PowerStats powerStats =
+                    new PowerStats(
+                            new PowerStats.Descriptor(
+                                    8,
+                                    mobileRadioPowerStatsLayout6.mDeviceStatsArrayLength,
+                                    sparseArray,
+                                    mobileRadioPowerStatsLayout6.mStateStatsArrayLength,
+                                    mobileRadioPowerStatsLayout6.mUidStatsArrayLength,
+                                    persistableBundle));
             this.mPowerStats = powerStats;
             this.mDeviceStats = powerStats.stats;
             this.mIsInitialized = true;
@@ -209,31 +264,43 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
         this.mPowerStats.uidStats.clear();
         if (this.mTelephonyManager != null) {
             final CompletableFuture completableFuture = new CompletableFuture();
-            this.mTelephonyManager.requestModemActivityInfo(new SystemServerInitThreadPool$$ExternalSyntheticLambda0(), new OutcomeReceiver() { // from class: com.android.server.power.stats.MobileRadioPowerStatsCollector.1
-                @Override // android.os.OutcomeReceiver
-                public final void onError(Throwable th) {
-                    Slog.w("MobileRadioPowerStatsCollector", "error reading modem stats:" + ((TelephonyManager.ModemActivityInfoException) th));
-                    completableFuture.complete(null);
-                }
+            this.mTelephonyManager.requestModemActivityInfo(
+                    new SystemServerInitThreadPool$$ExternalSyntheticLambda0(),
+                    new OutcomeReceiver() { // from class:
+                                            // com.android.server.power.stats.MobileRadioPowerStatsCollector.1
+                        @Override // android.os.OutcomeReceiver
+                        public final void onError(Throwable th) {
+                            Slog.w(
+                                    "MobileRadioPowerStatsCollector",
+                                    "error reading modem stats:"
+                                            + ((TelephonyManager.ModemActivityInfoException) th));
+                            completableFuture.complete(null);
+                        }
 
-                @Override // android.os.OutcomeReceiver
-                public final void onResult(Object obj) {
-                    completableFuture.complete((ModemActivityInfo) obj);
-                }
-            });
+                        @Override // android.os.OutcomeReceiver
+                        public final void onResult(Object obj) {
+                            completableFuture.complete((ModemActivityInfo) obj);
+                        }
+                    });
             try {
-                modemActivityInfo = (ModemActivityInfo) completableFuture.get(20000L, TimeUnit.MILLISECONDS);
+                modemActivityInfo =
+                        (ModemActivityInfo) completableFuture.get(20000L, TimeUnit.MILLISECONDS);
             } catch (Exception unused) {
                 Slog.e("MobileRadioPowerStatsCollector", "Cannot acquire ModemActivityInfo");
             }
             if (modemActivityInfo != null) {
                 ModemActivityInfo modemActivityInfo2 = this.mLastModemActivityInfo;
-                ModemActivityInfo delta = modemActivityInfo2 == null ? modemActivityInfo.getDelta(modemActivityInfo) : modemActivityInfo2.getDelta(modemActivityInfo);
+                ModemActivityInfo delta =
+                        modemActivityInfo2 == null
+                                ? modemActivityInfo.getDelta(modemActivityInfo)
+                                : modemActivityInfo2.getDelta(modemActivityInfo);
                 this.mLastModemActivityInfo = modemActivityInfo;
                 long timestampMillis = delta.getTimestampMillis();
-                this.mPowerStats.durationMs = Math.max(timestampMillis - this.mLastUpdateTimestampMillis, 0L);
+                this.mPowerStats.durationMs =
+                        Math.max(timestampMillis - this.mLastUpdateTimestampMillis, 0L);
                 this.mLastUpdateTimestampMillis = timestampMillis;
-                this.mDeviceStats[this.mLayout.mDeviceSleepTimePosition] = delta.getSleepTimeMillis();
+                this.mDeviceStats[this.mLayout.mDeviceSleepTimePosition] =
+                        delta.getSleepTimeMillis();
                 this.mDeviceStats[this.mLayout.mDeviceIdleTimePosition] = delta.getIdleTimeMillis();
                 long asLong = getAsLong();
                 long j = this.mLastCallDuration;
@@ -250,15 +317,30 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
                 SparseArray sparseArray2 = this.mPowerStats.stateStats;
                 sparseArray2.clear();
                 if (delta.getSpecificInfoLength() == 0) {
-                    this.mLayout.addRxTxTimesForRat(sparseArray2, 0, 0, delta.getReceiveTimeMillis(), delta.getTransmitTimeMillis());
+                    this.mLayout.addRxTxTimesForRat(
+                            sparseArray2,
+                            0,
+                            0,
+                            delta.getReceiveTimeMillis(),
+                            delta.getTransmitTimeMillis());
                 } else {
                     for (int i9 = 0; i9 < NETWORK_TYPES.length; i9++) {
                         if (i9 == 6) {
                             for (int i10 = 0; i10 < 5; i10++) {
-                                this.mLayout.addRxTxTimesForRat(sparseArray2, i9, i10, delta.getReceiveTimeMillis(i9, i10), delta.getTransmitTimeMillis(i9, i10));
+                                this.mLayout.addRxTxTimesForRat(
+                                        sparseArray2,
+                                        i9,
+                                        i10,
+                                        delta.getReceiveTimeMillis(i9, i10),
+                                        delta.getTransmitTimeMillis(i9, i10));
                             }
                         } else {
-                            this.mLayout.addRxTxTimesForRat(sparseArray2, i9, 0, delta.getReceiveTimeMillis(i9), delta.getTransmitTimeMillis(i9));
+                            this.mLayout.addRxTxTimesForRat(
+                                    sparseArray2,
+                                    i9,
+                                    0,
+                                    delta.getReceiveTimeMillis(i9),
+                                    delta.getTransmitTimeMillis(i9));
                         }
                     }
                 }
@@ -270,7 +352,8 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
             this.mLastNetworkStats = networkStats;
             ArrayList arrayList = (ArrayList) computeDelta;
             for (int size = arrayList.size() - 1; size >= 0; size--) {
-                BatteryStatsImpl.NetworkStatsDelta networkStatsDelta = (BatteryStatsImpl.NetworkStatsDelta) arrayList.get(size);
+                BatteryStatsImpl.NetworkStatsDelta networkStatsDelta =
+                        (BatteryStatsImpl.NetworkStatsDelta) arrayList.get(size);
                 long j3 = networkStatsDelta.mRxBytes;
                 long j4 = networkStatsDelta.mTxBytes;
                 long j5 = networkStatsDelta.mRxPackets;
@@ -303,12 +386,17 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
         if (this.mEnergyConsumerIds.length != 0) {
             int asInt = this.mVoltageSupplier.getAsInt();
             if (asInt <= 0) {
-                Slog.wtf("MobileRadioPowerStatsCollector", "Unexpected battery voltage (" + asInt + " mV) when querying energy consumers");
+                Slog.wtf(
+                        "MobileRadioPowerStatsCollector",
+                        "Unexpected battery voltage ("
+                                + asInt
+                                + " mV) when querying energy consumers");
             } else {
                 int i15 = this.mLastVoltageMv;
                 int i16 = i15 != 0 ? (i15 + asInt) / 2 : asInt;
                 this.mLastVoltageMv = asInt;
-                long[] consumedEnergyUws = this.mConsumedEnergyRetriever.getConsumedEnergyUws(this.mEnergyConsumerIds);
+                long[] consumedEnergyUws =
+                        this.mConsumedEnergyRetriever.getConsumedEnergyUws(this.mEnergyConsumerIds);
                 if (consumedEnergyUws != null) {
                     for (int length = consumedEnergyUws.length - 1; length >= 0; length--) {
                         long j7 = this.mLastConsumedEnergyUws[length];
@@ -316,7 +404,10 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
                         if (j8 < 0) {
                             j8 = 0;
                         }
-                        this.mLayout.setConsumedEnergy(this.mPowerStats.stats, length, PowerStatsCollector.uJtoUc(i16, j8));
+                        this.mLayout.setConsumedEnergy(
+                                this.mPowerStats.stats,
+                                length,
+                                PowerStatsCollector.uJtoUc(i16, j8));
                         this.mLastConsumedEnergyUws[length] = consumedEnergyUws[length];
                     }
                 }
@@ -324,7 +415,8 @@ public final class MobileRadioPowerStatsCollector extends PowerStatsCollector {
         }
         if (this.mPowerStats.durationMs == 0) {
             long elapsedRealtime = this.mClock.elapsedRealtime();
-            this.mPowerStats.durationMs = Math.max(elapsedRealtime - this.mLastUpdateTimestampMillis, 0L);
+            this.mPowerStats.durationMs =
+                    Math.max(elapsedRealtime - this.mLastUpdateTimestampMillis, 0L);
             this.mLastUpdateTimestampMillis = elapsedRealtime;
         }
         return this.mPowerStats;

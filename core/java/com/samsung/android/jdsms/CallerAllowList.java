@@ -8,8 +8,7 @@ import java.util.Set;
 final class CallerAllowList {
     private static final Set<String> mAllowList;
 
-    CallerAllowList() {
-    }
+    CallerAllowList() {}
 
     static {
         HashSet<String> modifiableSet = new HashSet<>();

@@ -3,7 +3,6 @@ package com.android.server.hdmi;
 import android.hardware.hdmi.HdmiDeviceInfo;
 import android.hardware.hdmi.IHdmiControlCallback;
 import android.util.Slog;
-import com.android.server.hdmi.HdmiControlService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -20,8 +19,7 @@ public final class DeviceSelectActionFromPlayback extends HdmiCecFeatureAction {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.hdmi.DeviceSelectActionFromPlayback$1, reason: invalid class name */
     public final class AnonymousClass1 implements HdmiControlService.SendMessageCallback {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
         public final void onSendCompleted(int i) {
@@ -31,11 +29,16 @@ public final class DeviceSelectActionFromPlayback extends HdmiCecFeatureAction {
         }
     }
 
-    public DeviceSelectActionFromPlayback(HdmiCecLocalDevicePlayback hdmiCecLocalDevicePlayback, HdmiDeviceInfo hdmiDeviceInfo, IHdmiControlCallback iHdmiControlCallback, boolean z) {
+    public DeviceSelectActionFromPlayback(
+            HdmiCecLocalDevicePlayback hdmiCecLocalDevicePlayback,
+            HdmiDeviceInfo hdmiDeviceInfo,
+            IHdmiControlCallback iHdmiControlCallback,
+            boolean z) {
         super(hdmiCecLocalDevicePlayback, iHdmiControlCallback);
         this.mPowerStatusCounter = 0;
         this.mTarget = hdmiDeviceInfo;
-        this.mGivePowerStatus = HdmiCecMessage.build(getSourceAddress(), hdmiDeviceInfo.getLogicalAddress(), 143);
+        this.mGivePowerStatus =
+                HdmiCecMessage.build(getSourceAddress(), hdmiDeviceInfo.getLogicalAddress(), 143);
         this.mIsCec20 = z;
     }
 
@@ -64,7 +67,14 @@ public final class DeviceSelectActionFromPlayback extends HdmiCecFeatureAction {
             }
             finishWithCallback(1);
         } else {
-            this.mService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), 15, 134, HdmiCecMessageBuilder.physicalAddressToParam(this.mTarget.getPhysicalAddress())), null);
+            this.mService.sendCecCommand(
+                    HdmiCecMessage.build(
+                            getSourceAddress(),
+                            15,
+                            134,
+                            HdmiCecMessageBuilder.physicalAddressToParam(
+                                    this.mTarget.getPhysicalAddress())),
+                    null);
             this.mState = 5;
             addTimer(5, 2000);
         }
@@ -120,7 +130,12 @@ public final class DeviceSelectActionFromPlayback extends HdmiCecFeatureAction {
     }
 
     public final void sendRoutingChange() {
-        sendCommand(HdmiCecMessageBuilder.buildRoutingChange(getSourceAddress(), ((HdmiCecLocalDevicePlayback) this.mSource).mService.getLocalActiveSource().physicalAddress, this.mTarget.getPhysicalAddress()));
+        sendCommand(
+                HdmiCecMessageBuilder.buildRoutingChange(
+                        getSourceAddress(),
+                        ((HdmiCecLocalDevicePlayback) this.mSource)
+                                .mService.getLocalActiveSource().physicalAddress,
+                        this.mTarget.getPhysicalAddress()));
     }
 
     @Override // com.android.server.hdmi.HdmiCecFeatureAction
@@ -128,8 +143,11 @@ public final class DeviceSelectActionFromPlayback extends HdmiCecFeatureAction {
         sendRoutingChange();
         HdmiCecMessage hdmiCecMessage = this.mGivePowerStatus;
         if (this.mIsCec20) {
-            HdmiDeviceInfo cecDeviceInfo = this.mSource.mService.mHdmiCecNetwork.getCecDeviceInfo(this.mTarget.getLogicalAddress());
-            int devicePowerStatus = cecDeviceInfo != null ? cecDeviceInfo.getDevicePowerStatus() : -1;
+            HdmiDeviceInfo cecDeviceInfo =
+                    this.mSource.mService.mHdmiCecNetwork.getCecDeviceInfo(
+                            this.mTarget.getLogicalAddress());
+            int devicePowerStatus =
+                    cecDeviceInfo != null ? cecDeviceInfo.getDevicePowerStatus() : -1;
             if (devicePowerStatus == -1) {
                 sendCommand(hdmiCecMessage, new AnonymousClass1());
             } else if (devicePowerStatus == 0) {

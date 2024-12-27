@@ -38,7 +38,6 @@ public final class InternedDataOuterClass {
         public static final long VIEWCAPTURE_WINDOW_NAME = 2246267895847L;
         public static final long VULKAN_MEMORY_KEYS = 2246267895830L;
 
-        public InternedData() {
-        }
+        public InternedData() {}
     }
 }

@@ -11,9 +11,7 @@ import android.view.ViewStructure;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.autofill.AutofillManager;
 import android.view.autofill.AutofillValue;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -49,8 +47,10 @@ public class RadioGroup extends LinearLayout {
             setImportantForAutofill(1);
         }
         setImportantForAccessibility(1);
-        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.RadioGroup, 16842878, 0);
-        saveAttributeDataForStyleable(context, R.styleable.RadioGroup, attrs, attributes, 16842878, 0);
+        TypedArray attributes =
+                context.obtainStyledAttributes(attrs, R.styleable.RadioGroup, 16842878, 0);
+        saveAttributeDataForStyleable(
+                context, R.styleable.RadioGroup, attrs, attributes, 16842878, 0);
         int value = attributes.getResourceId(1, -1);
         if (value != -1) {
             this.mCheckedId = value;
@@ -120,7 +120,9 @@ public class RadioGroup extends LinearLayout {
         if (this.mOnCheckedChangeListener != null) {
             this.mOnCheckedChangeListener.onCheckedChanged(this, this.mCheckedId);
         }
-        if (changed && (afm = (AutofillManager) this.mContext.getSystemService(AutofillManager.class)) != null) {
+        if (changed
+                && (afm = (AutofillManager) this.mContext.getSystemService(AutofillManager.class))
+                        != null) {
             afm.notifyValueChanged(this);
         }
     }
@@ -203,8 +205,7 @@ public class RadioGroup extends LinearLayout {
     }
 
     private class CheckedStateTracker implements CompoundButton.OnCheckedChangeListener {
-        private CheckedStateTracker() {
-        }
+        private CheckedStateTracker() {}
 
         @Override // android.widget.CompoundButton.OnCheckedChangeListener
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -221,11 +222,11 @@ public class RadioGroup extends LinearLayout {
         }
     }
 
-    private class PassThroughHierarchyChangeListener implements ViewGroup.OnHierarchyChangeListener {
+    private class PassThroughHierarchyChangeListener
+            implements ViewGroup.OnHierarchyChangeListener {
         private ViewGroup.OnHierarchyChangeListener mOnHierarchyChangeListener;
 
-        private PassThroughHierarchyChangeListener() {
-        }
+        private PassThroughHierarchyChangeListener() {}
 
         @Override // android.view.ViewGroup.OnHierarchyChangeListener
         public void onChildViewAdded(View parent, View child) {
@@ -235,7 +236,9 @@ public class RadioGroup extends LinearLayout {
                     int id2 = View.generateViewId();
                     child.setId(id2);
                 }
-                ((RadioButton) child).setOnCheckedChangeWidgetListener(RadioGroup.this.mChildOnCheckedChangeListener);
+                ((RadioButton) child)
+                        .setOnCheckedChangeWidgetListener(
+                                RadioGroup.this.mChildOnCheckedChangeListener);
             }
             if (this.mOnHierarchyChangeListener != null) {
                 this.mOnHierarchyChangeListener.onChildViewAdded(parent, child);
@@ -302,16 +305,21 @@ public class RadioGroup extends LinearLayout {
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
         if (getOrientation() == 0) {
-            info.setCollectionInfo(AccessibilityNodeInfo.CollectionInfo.obtain(1, getVisibleChildWithTextCount(), false, 1));
+            info.setCollectionInfo(
+                    AccessibilityNodeInfo.CollectionInfo.obtain(
+                            1, getVisibleChildWithTextCount(), false, 1));
         } else {
-            info.setCollectionInfo(AccessibilityNodeInfo.CollectionInfo.obtain(getVisibleChildWithTextCount(), 1, false, 1));
+            info.setCollectionInfo(
+                    AccessibilityNodeInfo.CollectionInfo.obtain(
+                            getVisibleChildWithTextCount(), 1, false, 1));
         }
     }
 
     private int getVisibleChildWithTextCount() {
         int count = 0;
         for (int i = 0; i < getChildCount(); i++) {
-            if ((getChildAt(i) instanceof RadioButton) && isVisibleWithText((RadioButton) getChildAt(i))) {
+            if ((getChildAt(i) instanceof RadioButton)
+                    && isVisibleWithText((RadioButton) getChildAt(i))) {
                 count++;
             }
         }

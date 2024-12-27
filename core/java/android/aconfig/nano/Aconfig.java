@@ -6,6 +6,7 @@ import android.internal.framework.protobuf.nano.InternalNano;
 import android.internal.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import android.internal.framework.protobuf.nano.MessageNano;
 import android.internal.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes.dex */
@@ -171,11 +172,13 @@ public interface Aconfig {
             }
         }
 
-        public static flag_declaration parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static flag_declaration parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (flag_declaration) MessageNano.mergeFrom(new flag_declaration(), data);
         }
 
-        public static flag_declaration parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static flag_declaration parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new flag_declaration().mergeFrom(input);
         }
     }
@@ -250,7 +253,8 @@ public interface Aconfig {
             }
         }
 
-        public static flag_metadata parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static flag_metadata parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (flag_metadata) MessageNano.mergeFrom(new flag_metadata(), data);
         }
 
@@ -366,11 +370,13 @@ public interface Aconfig {
             }
         }
 
-        public static flag_declarations parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static flag_declarations parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (flag_declarations) MessageNano.mergeFrom(new flag_declarations(), data);
         }
 
-        public static flag_declarations parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static flag_declarations parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new flag_declarations().mergeFrom(input);
         }
     }
@@ -1025,7 +1031,8 @@ public interface Aconfig {
             }
         }
 
-        public static parsed_flags parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static parsed_flags parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (parsed_flags) MessageNano.mergeFrom(new parsed_flags(), data);
         }
 

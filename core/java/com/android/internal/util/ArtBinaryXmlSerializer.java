@@ -2,6 +2,7 @@ package com.android.internal.util;
 
 import com.android.modules.utils.BinaryXmlSerializer;
 import com.android.modules.utils.FastDataOutput;
+
 import java.io.OutputStream;
 
 /* loaded from: classes5.dex */

@@ -2,6 +2,7 @@ package android.media;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -12,19 +13,20 @@ public final class PlaybackParams implements Parcelable {
     public static final int AUDIO_FALLBACK_MODE_MUTE = 1;
     public static final int AUDIO_STRETCH_MODE_DEFAULT = 0;
     public static final int AUDIO_STRETCH_MODE_VOICE = 1;
-    public static final Parcelable.Creator<PlaybackParams> CREATOR = new Parcelable.Creator<PlaybackParams>() { // from class: android.media.PlaybackParams.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackParams createFromParcel(Parcel in) {
-            return new PlaybackParams(in);
-        }
+    public static final Parcelable.Creator<PlaybackParams> CREATOR =
+            new Parcelable.Creator<PlaybackParams>() { // from class: android.media.PlaybackParams.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackParams createFromParcel(Parcel in) {
+                    return new PlaybackParams(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackParams[] newArray(int size) {
-            return new PlaybackParams[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackParams[] newArray(int size) {
+                    return new PlaybackParams[size];
+                }
+            };
     private static final int SET_AUDIO_FALLBACK_MODE = 4;
     private static final int SET_AUDIO_STRETCH_MODE = 8;
     private static final int SET_PITCH = 2;
@@ -36,12 +38,10 @@ public final class PlaybackParams implements Parcelable {
     private float mSpeed;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioFallbackMode {
-    }
+    public @interface AudioFallbackMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioStretchMode {
-    }
+    public @interface AudioStretchMode {}
 
     public PlaybackParams() {
         this.mSet = 0;

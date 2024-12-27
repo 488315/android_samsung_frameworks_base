@@ -8,16 +8,20 @@ import android.hardware.biometrics.AuthenticateOptions;
 import android.hardware.biometrics.BiometricManager;
 import android.os.IBinder;
 import android.util.Slog;
+
 import com.android.server.biometrics.Utils;
 import com.android.server.biometrics.log.BiometricContext;
 import com.android.server.biometrics.log.BiometricContextProvider;
 import com.android.server.biometrics.log.BiometricLogger;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public abstract class AuthenticationClient extends AcquisitionClient implements AuthenticationConsumer {
+public abstract class AuthenticationClient extends AcquisitionClient
+        implements AuthenticationConsumer {
     public final ActivityManager mActivityManager;
     public final ActivityTaskManager mActivityTaskManager;
     public final boolean mAllowBackgroundAuthentication;
@@ -38,15 +42,44 @@ public abstract class AuthenticationClient extends AcquisitionClient implements 
     public int mState;
     public final TaskStackListener mTaskStackListener;
 
-    public AuthenticationClient(Context context, Supplier supplier, IBinder iBinder, ClientMonitorCallbackConverter clientMonitorCallbackConverter, long j, boolean z, AuthenticateOptions authenticateOptions, int i, boolean z2, BiometricLogger biometricLogger, BiometricContext biometricContext, boolean z3, TaskStackListener taskStackListener, LockoutTracker lockoutTracker, boolean z4, int i2) {
-        super(context, supplier, iBinder, clientMonitorCallbackConverter, authenticateOptions.getUserId(), authenticateOptions.getOpPackageName(), i, authenticateOptions.getSensorId(), false, biometricLogger, biometricContext, authenticateOptions.isMandatoryBiometrics());
+    public AuthenticationClient(
+            Context context,
+            Supplier supplier,
+            IBinder iBinder,
+            ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+            long j,
+            boolean z,
+            AuthenticateOptions authenticateOptions,
+            int i,
+            boolean z2,
+            BiometricLogger biometricLogger,
+            BiometricContext biometricContext,
+            boolean z3,
+            TaskStackListener taskStackListener,
+            LockoutTracker lockoutTracker,
+            boolean z4,
+            int i2) {
+        super(
+                context,
+                supplier,
+                iBinder,
+                clientMonitorCallbackConverter,
+                authenticateOptions.getUserId(),
+                authenticateOptions.getOpPackageName(),
+                i,
+                authenticateOptions.getSensorId(),
+                false,
+                biometricLogger,
+                biometricContext,
+                authenticateOptions.isMandatoryBiometrics());
         this.mState = 0;
         this.mAuthSuccess = false;
         this.mIsStrongBiometric = z3;
         this.mOperationId = j;
         this.mRequireConfirmation = z2;
         this.mActivityTaskManager = ActivityTaskManager.getInstance();
-        this.mBiometricManager = (BiometricManager) context.getSystemService(BiometricManager.class);
+        this.mBiometricManager =
+                (BiometricManager) context.getSystemService(BiometricManager.class);
         this.mTaskStackListener = taskStackListener;
         this.mLockoutTracker = lockoutTracker;
         this.mIsRestricted = z;
@@ -57,18 +90,21 @@ public abstract class AuthenticationClient extends AcquisitionClient implements 
         this.mActivityManager = (ActivityManager) context.getSystemService(ActivityManager.class);
     }
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor, android.os.IBinder.DeathRecipient
+    @Override // com.android.server.biometrics.sensors.BaseClientMonitor,
+              // android.os.IBinder.DeathRecipient
     public final void binderDied() {
         binderDiedInternal(!isBiometricPrompt());
     }
 
-    @Override // com.android.server.biometrics.sensors.AcquisitionClient, com.android.server.biometrics.sensors.BaseClientMonitor
+    @Override // com.android.server.biometrics.sensors.AcquisitionClient,
+              // com.android.server.biometrics.sensors.BaseClientMonitor
     public final void cancel() {
         super.cancel();
         unregisterListenersForTaskStack();
     }
 
-    @Override // com.android.server.biometrics.sensors.HalClientMonitor, com.android.server.biometrics.sensors.BaseClientMonitor
+    @Override // com.android.server.biometrics.sensors.HalClientMonitor,
+              // com.android.server.biometrics.sensors.BaseClientMonitor
     public void destroy() {
         super.destroy();
         unregisterListenersForTaskStack();
@@ -89,7 +125,11 @@ public abstract class AuthenticationClient extends AcquisitionClient implements 
         Context context = this.mContext;
         String str = this.mOwner;
         boolean z = Utils.DEBUG;
-        return (context.checkCallingOrSelfPermission("android.permission.USE_BIOMETRIC_INTERNAL") == 0 && KnoxCustomManagerService.SETTING_PKG_NAME.equals(str)) ? 6 : 5;
+        return (context.checkCallingOrSelfPermission("android.permission.USE_BIOMETRIC_INTERNAL")
+                                == 0
+                        && KnoxCustomManagerService.SETTING_PKG_NAME.equals(str))
+                ? 6
+                : 5;
     }
 
     public abstract void handleLifecycleAfterAuth(boolean z);
@@ -134,15 +174,22 @@ public abstract class AuthenticationClient extends AcquisitionClient implements 
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void onAuthenticated(android.hardware.biometrics.BiometricAuthenticator.Identifier r23, boolean r24, java.util.ArrayList r25) {
+    public void onAuthenticated(
+            android.hardware.biometrics.BiometricAuthenticator.Identifier r23,
+            boolean r24,
+            java.util.ArrayList r25) {
         /*
             Method dump skipped, instructions count: 1440
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.sensors.AuthenticationClient.onAuthenticated(android.hardware.biometrics.BiometricAuthenticator$Identifier, boolean, java.util.ArrayList):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.biometrics.sensors.AuthenticationClient.onAuthenticated(android.hardware.biometrics.BiometricAuthenticator$Identifier,"
+                    + " boolean, java.util.ArrayList):void");
     }
 
-    @Override // com.android.server.biometrics.sensors.AcquisitionClient, com.android.server.biometrics.sensors.ErrorConsumer
+    @Override // com.android.server.biometrics.sensors.AcquisitionClient,
+              // com.android.server.biometrics.sensors.ErrorConsumer
     public void onError(int i, int i2) {
         onErrorInternal(i, i2, true);
         this.mState = 4;
@@ -165,16 +212,20 @@ public abstract class AuthenticationClient extends AcquisitionClient implements 
         if (this.mShouldUseLockoutTracker) {
             i = this.mLockoutTracker.getLockoutModeForUser(this.mTargetUserId);
         } else {
-            AuthSessionCoordinator authSessionCoordinator = ((BiometricContextProvider) this.mBiometricContext).mAuthSessionCoordinator;
+            AuthSessionCoordinator authSessionCoordinator =
+                    ((BiometricContextProvider) this.mBiometricContext).mAuthSessionCoordinator;
             int i2 = this.mTargetUserId;
             int i3 = this.mSensorStrength;
             synchronized (authSessionCoordinator) {
-                lockoutState = authSessionCoordinator.mMultiBiometricLockoutState.getLockoutState(i2, i3);
+                lockoutState =
+                        authSessionCoordinator.mMultiBiometricLockoutState.getLockoutState(i2, i3);
             }
             i = lockoutState;
         }
         if (i != 0) {
-            Slog.v("Biometrics/AuthenticationClient", "In lockout mode(" + i + ") ; disallowing authentication");
+            Slog.v(
+                    "Biometrics/AuthenticationClient",
+                    "In lockout mode(" + i + ") ; disallowing authentication");
             onError(i == 1 ? 7 : 9, 0);
             return;
         }

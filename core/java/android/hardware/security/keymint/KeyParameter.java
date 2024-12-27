@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class KeyParameter implements Parcelable {
-    public static final Parcelable.Creator<KeyParameter> CREATOR = new Parcelable.Creator<KeyParameter>() { // from class: android.hardware.security.keymint.KeyParameter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyParameter createFromParcel(Parcel _aidl_source) {
-            KeyParameter _aidl_out = new KeyParameter();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<KeyParameter> CREATOR =
+            new Parcelable.Creator<KeyParameter>() { // from class:
+                // android.hardware.security.keymint.KeyParameter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyParameter createFromParcel(Parcel _aidl_source) {
+                    KeyParameter _aidl_out = new KeyParameter();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyParameter[] newArray(int _aidl_size) {
-            return new KeyParameter[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyParameter[] newArray(int _aidl_size) {
+                    return new KeyParameter[_aidl_size];
+                }
+            };
     public int tag = 0;
     public KeyParameterValue value;
 
@@ -62,7 +64,8 @@ public class KeyParameter implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.value = (KeyParameterValue) _aidl_parcel.readTypedObject(KeyParameterValue.CREATOR);
+                this.value =
+                        (KeyParameterValue) _aidl_parcel.readTypedObject(KeyParameterValue.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

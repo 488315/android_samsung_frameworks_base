@@ -8,6 +8,7 @@ import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.telephony.cdma.CdmaSmsCbProgramData;
 import android.text.TextUtils;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -18,22 +19,27 @@ public interface ICellBroadcastService extends IInterface {
 
     void handleCdmaCellBroadcastSms(int i, byte[] bArr, int i2) throws RemoteException;
 
-    void handleCdmaScpMessage(int i, List<CdmaSmsCbProgramData> list, String str, RemoteCallback remoteCallback) throws RemoteException;
+    void handleCdmaScpMessage(
+            int i, List<CdmaSmsCbProgramData> list, String str, RemoteCallback remoteCallback)
+            throws RemoteException;
 
     void handleGsmCellBroadcastSms(int i, byte[] bArr) throws RemoteException;
 
     public static class Default implements ICellBroadcastService {
         @Override // android.telephony.ICellBroadcastService
-        public void handleGsmCellBroadcastSms(int slotId, byte[] message) throws RemoteException {
-        }
+        public void handleGsmCellBroadcastSms(int slotId, byte[] message) throws RemoteException {}
 
         @Override // android.telephony.ICellBroadcastService
-        public void handleCdmaCellBroadcastSms(int slotId, byte[] bearerData, int serviceCategory) throws RemoteException {
-        }
+        public void handleCdmaCellBroadcastSms(int slotId, byte[] bearerData, int serviceCategory)
+                throws RemoteException {}
 
         @Override // android.telephony.ICellBroadcastService
-        public void handleCdmaScpMessage(int slotId, List<CdmaSmsCbProgramData> programData, String originatingAddress, RemoteCallback callback) throws RemoteException {
-        }
+        public void handleCdmaScpMessage(
+                int slotId,
+                List<CdmaSmsCbProgramData> programData,
+                String originatingAddress,
+                RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.ICellBroadcastService
         public CharSequence getCellBroadcastAreaInfo(int slotIndex) throws RemoteException {
@@ -46,7 +52,7 @@ public interface ICellBroadcastService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICellBroadcastService {
+    public abstract static class Stub extends Binder implements ICellBroadcastService {
         static final int TRANSACTION_getCellBroadcastAreaInfo = 4;
         static final int TRANSACTION_handleCdmaCellBroadcastSms = 2;
         static final int TRANSACTION_handleCdmaScpMessage = 3;
@@ -93,7 +99,8 @@ public interface ICellBroadcastService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICellBroadcastService.DESCRIPTOR);
             }
@@ -117,9 +124,11 @@ public interface ICellBroadcastService extends IInterface {
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    List<CdmaSmsCbProgramData> _arg13 = data.createTypedArrayList(CdmaSmsCbProgramData.CREATOR);
+                    List<CdmaSmsCbProgramData> _arg13 =
+                            data.createTypedArrayList(CdmaSmsCbProgramData.CREATOR);
                     String _arg22 = data.readString();
-                    RemoteCallback _arg3 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg3 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     handleCdmaScpMessage(_arg03, _arg13, _arg22, _arg3);
                     return true;
@@ -157,7 +166,8 @@ public interface ICellBroadcastService extends IInterface {
             }
 
             @Override // android.telephony.ICellBroadcastService
-            public void handleGsmCellBroadcastSms(int slotId, byte[] message) throws RemoteException {
+            public void handleGsmCellBroadcastSms(int slotId, byte[] message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICellBroadcastService.DESCRIPTOR);
@@ -170,7 +180,8 @@ public interface ICellBroadcastService extends IInterface {
             }
 
             @Override // android.telephony.ICellBroadcastService
-            public void handleCdmaCellBroadcastSms(int slotId, byte[] bearerData, int serviceCategory) throws RemoteException {
+            public void handleCdmaCellBroadcastSms(
+                    int slotId, byte[] bearerData, int serviceCategory) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICellBroadcastService.DESCRIPTOR);
@@ -184,7 +195,12 @@ public interface ICellBroadcastService extends IInterface {
             }
 
             @Override // android.telephony.ICellBroadcastService
-            public void handleCdmaScpMessage(int slotId, List<CdmaSmsCbProgramData> programData, String originatingAddress, RemoteCallback callback) throws RemoteException {
+            public void handleCdmaScpMessage(
+                    int slotId,
+                    List<CdmaSmsCbProgramData> programData,
+                    String originatingAddress,
+                    RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICellBroadcastService.DESCRIPTOR);
@@ -207,7 +223,8 @@ public interface ICellBroadcastService extends IInterface {
                     _data.writeInt(slotIndex);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

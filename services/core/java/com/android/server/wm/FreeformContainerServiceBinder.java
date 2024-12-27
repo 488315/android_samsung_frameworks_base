@@ -6,8 +6,11 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,20 +23,25 @@ public abstract class FreeformContainerServiceBinder {
     public final SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public final ArrayList mServiceHistory = new ArrayList();
     public boolean mIsServiceRunning = false;
-    public final AnonymousClass1 mServiceConnection = new ServiceConnection() { // from class: com.android.server.wm.FreeformContainerServiceBinder.1
-        @Override // android.content.ServiceConnection
-        public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-        }
+    public final AnonymousClass1 mServiceConnection =
+            new ServiceConnection() { // from class:
+                                      // com.android.server.wm.FreeformContainerServiceBinder.1
+                @Override // android.content.ServiceConnection
+                public final void onServiceConnected(
+                        ComponentName componentName, IBinder iBinder) {}
 
-        @Override // android.content.ServiceConnection
-        public final void onServiceDisconnected(ComponentName componentName) {
-            FreeformContainerServiceBinder freeformContainerServiceBinder = FreeformContainerServiceBinder.this;
-            if (freeformContainerServiceBinder.mIsServiceRunning) {
-                freeformContainerServiceBinder.unbindServiceIfNeeded("service_disconnected");
-                FreeformContainerServiceBinder.this.bindServiceIfNeeded("service_disconnected");
-            }
-        }
-    };
+                @Override // android.content.ServiceConnection
+                public final void onServiceDisconnected(ComponentName componentName) {
+                    FreeformContainerServiceBinder freeformContainerServiceBinder =
+                            FreeformContainerServiceBinder.this;
+                    if (freeformContainerServiceBinder.mIsServiceRunning) {
+                        freeformContainerServiceBinder.unbindServiceIfNeeded(
+                                "service_disconnected");
+                        FreeformContainerServiceBinder.this.bindServiceIfNeeded(
+                                "service_disconnected");
+                    }
+                }
+            };
     public final String TAG = getClass().getSimpleName();
 
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.wm.FreeformContainerServiceBinder$1] */
@@ -42,19 +50,31 @@ public abstract class FreeformContainerServiceBinder {
     }
 
     public final synchronized void bindServiceIfNeeded(String str) {
-        if (CoreRune.MW_FREEFORM_SMART_POPUP_VIEW && (this instanceof SmartPopupViewServiceBinder) && this.mIsServiceRunning && !okToBind() && "startUser".equals(str)) {
+        if (CoreRune.MW_FREEFORM_SMART_POPUP_VIEW
+                && (this instanceof SmartPopupViewServiceBinder)
+                && this.mIsServiceRunning
+                && !okToBind()
+                && "startUser".equals(str)) {
             Slog.d(this.TAG, "Service running but not needed for this User");
             unbindServiceIfNeeded(str);
             return;
         }
         if (!this.mIsServiceRunning && okToBind()) {
-            if (this.mAtm.mContext.bindServiceAsUser(this.mService, this.mServiceConnection, 1, UserHandle.SYSTEM)) {
+            if (this.mAtm.mContext.bindServiceAsUser(
+                    this.mService, this.mServiceConnection, 1, UserHandle.SYSTEM)) {
                 this.mIsServiceRunning = true;
                 Slog.i(this.TAG, "bind service success, reason=" + str);
             } else {
                 Slog.w(this.TAG, "bind service failed, reason=" + str);
             }
-            this.mServiceHistory.add("BindService[" + str + "] Success=" + this.mIsServiceRunning + " | " + this.mSimpleDateFormat.format(Long.valueOf(System.currentTimeMillis())));
+            this.mServiceHistory.add(
+                    "BindService["
+                            + str
+                            + "] Success="
+                            + this.mIsServiceRunning
+                            + " | "
+                            + this.mSimpleDateFormat.format(
+                                    Long.valueOf(System.currentTimeMillis())));
         }
     }
 
@@ -67,7 +87,8 @@ public abstract class FreeformContainerServiceBinder {
         StringBuilder sb2 = new StringBuilder("    ");
         sb2.append(str);
         sb2.append(" Running=");
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb2, this.mIsServiceRunning, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                sb2, this.mIsServiceRunning, printWriter);
         if (this.mServiceHistory.isEmpty()) {
             return;
         }
@@ -79,7 +100,8 @@ public abstract class FreeformContainerServiceBinder {
             int i2 = i + 1;
             sb3.append(i2);
             sb3.append(" ");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb3, (String) this.mServiceHistory.get(i), printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    sb3, (String) this.mServiceHistory.get(i), printWriter);
             i = i2;
         }
     }
@@ -111,7 +133,12 @@ public abstract class FreeformContainerServiceBinder {
             this.mAtm.mContext.unbindService(this.mServiceConnection);
             this.mIsServiceRunning = false;
             Slog.i(this.TAG, "unbind service success, reason=" + str);
-            this.mServiceHistory.add("UnbindService[" + str + "] | " + this.mSimpleDateFormat.format(Long.valueOf(System.currentTimeMillis())));
+            this.mServiceHistory.add(
+                    "UnbindService["
+                            + str
+                            + "] | "
+                            + this.mSimpleDateFormat.format(
+                                    Long.valueOf(System.currentTimeMillis())));
         }
     }
 }

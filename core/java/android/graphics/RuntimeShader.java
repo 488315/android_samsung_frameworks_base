@@ -1,7 +1,7 @@
 package android.graphics;
 
-import android.graphics.ColorSpace;
 import android.util.ArrayMap;
+
 import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
@@ -18,19 +18,22 @@ public class RuntimeShader extends Shader {
 
     private static native void nativeUpdateShader(long j, String str, long j2);
 
-    private static native void nativeUpdateUniforms(long j, String str, float f, float f2, float f3, float f4, int i);
+    private static native void nativeUpdateUniforms(
+            long j, String str, float f, float f2, float f3, float f4, int i);
 
-    private static native void nativeUpdateUniforms(long j, String str, int i, int i2, int i3, int i4, int i5);
+    private static native void nativeUpdateUniforms(
+            long j, String str, int i, int i2, int i3, int i4, int i5);
 
     private static native void nativeUpdateUniforms(long j, String str, float[] fArr, boolean z);
 
     private static native void nativeUpdateUniforms(long j, String str, int[] iArr);
 
     private static class NoImagePreloadHolder {
-        public static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(RuntimeShader.class.getClassLoader(), RuntimeShader.nativeGetFinalizer());
+        public static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        RuntimeShader.class.getClassLoader(), RuntimeShader.nativeGetFinalizer());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     public RuntimeShader(String shader) {
@@ -40,7 +43,8 @@ public class RuntimeShader extends Shader {
             throw new NullPointerException("RuntimeShader requires a non-null AGSL string");
         }
         this.mNativeInstanceRuntimeShaderBuilder = nativeCreateBuilder(shader);
-        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, this.mNativeInstanceRuntimeShaderBuilder);
+        NoImagePreloadHolder.sRegistry.registerNativeAllocation(
+                this, this.mNativeInstanceRuntimeShaderBuilder);
     }
 
     public void setColorUniform(String uniformName, int color) {
@@ -72,7 +76,8 @@ public class RuntimeShader extends Shader {
         setFloatUniform(uniformName, value1, value2, value3, 0.0f, 3);
     }
 
-    public void setFloatUniform(String uniformName, float value1, float value2, float value3, float value4) {
+    public void setFloatUniform(
+            String uniformName, float value1, float value2, float value3, float value4) {
         setFloatUniform(uniformName, value1, value2, value3, value4, 4);
     }
 
@@ -80,11 +85,19 @@ public class RuntimeShader extends Shader {
         setUniform(uniformName, values, false);
     }
 
-    private void setFloatUniform(String uniformName, float value1, float value2, float value3, float value4, int count) {
+    private void setFloatUniform(
+            String uniformName, float value1, float value2, float value3, float value4, int count) {
         if (uniformName == null) {
             throw new NullPointerException("The uniformName parameter must not be null");
         }
-        nativeUpdateUniforms(this.mNativeInstanceRuntimeShaderBuilder, uniformName, value1, value2, value3, value4, count);
+        nativeUpdateUniforms(
+                this.mNativeInstanceRuntimeShaderBuilder,
+                uniformName,
+                value1,
+                value2,
+                value3,
+                value4,
+                count);
         discardNativeInstance();
     }
 
@@ -95,7 +108,8 @@ public class RuntimeShader extends Shader {
         if (values == null) {
             throw new NullPointerException("The uniform values parameter must not be null");
         }
-        nativeUpdateUniforms(this.mNativeInstanceRuntimeShaderBuilder, uniformName, values, isColor);
+        nativeUpdateUniforms(
+                this.mNativeInstanceRuntimeShaderBuilder, uniformName, values, isColor);
         discardNativeInstance();
     }
 
@@ -126,11 +140,19 @@ public class RuntimeShader extends Shader {
         discardNativeInstance();
     }
 
-    private void setIntUniform(String uniformName, int value1, int value2, int value3, int value4, int count) {
+    private void setIntUniform(
+            String uniformName, int value1, int value2, int value3, int value4, int count) {
         if (uniformName == null) {
             throw new NullPointerException("The uniformName parameter must not be null");
         }
-        nativeUpdateUniforms(this.mNativeInstanceRuntimeShaderBuilder, uniformName, value1, value2, value3, value4, count);
+        nativeUpdateUniforms(
+                this.mNativeInstanceRuntimeShaderBuilder,
+                uniformName,
+                value1,
+                value2,
+                value3,
+                value4,
+                count);
         discardNativeInstance();
     }
 
@@ -142,7 +164,8 @@ public class RuntimeShader extends Shader {
             throw new NullPointerException("The shader parameter must not be null");
         }
         this.mShaderUniforms.put(shaderName, shader);
-        nativeUpdateShader(this.mNativeInstanceRuntimeShaderBuilder, shaderName, shader.getNativeInstance());
+        nativeUpdateShader(
+                this.mNativeInstanceRuntimeShaderBuilder, shaderName, shader.getNativeInstance());
         discardNativeInstance();
     }
 
@@ -154,7 +177,10 @@ public class RuntimeShader extends Shader {
             throw new NullPointerException("The shader parameter must not be null");
         }
         this.mShaderUniforms.put(shaderName, shader);
-        nativeUpdateShader(this.mNativeInstanceRuntimeShaderBuilder, shaderName, shader.getNativeInstanceWithDirectSampling());
+        nativeUpdateShader(
+                this.mNativeInstanceRuntimeShaderBuilder,
+                shaderName,
+                shader.getNativeInstanceWithDirectSampling());
         discardNativeInstance();
     }
 

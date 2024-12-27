@@ -1,8 +1,9 @@
 package com.samsung.android.graphics.spr.document.animator;
 
 import android.animation.PropertyValuesHolder;
+
 import com.samsung.android.graphics.spr.document.SprInputStream;
-import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -26,7 +27,9 @@ public class SprAnimatorScale extends SprAnimatorBase {
     }
 
     private void init() {
-        setValues(PropertyValuesHolder.ofFloat("x", this.fromX, this.toX), PropertyValuesHolder.ofFloat("y", this.fromY, this.toY));
+        setValues(
+                PropertyValuesHolder.ofFloat("x", this.fromX, this.toX),
+                PropertyValuesHolder.ofFloat("y", this.fromY, this.toY));
     }
 
     @Override // com.samsung.android.graphics.spr.document.animator.SprAnimatorBase

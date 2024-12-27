@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IVisualQueryRecognitionStatusListener extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.app.IVisualQueryRecognitionStatusListener";
+    public static final String DESCRIPTOR =
+            "com.android.internal.app.IVisualQueryRecognitionStatusListener";
 
     void onStartPerceiving() throws RemoteException;
 
@@ -16,12 +17,10 @@ public interface IVisualQueryRecognitionStatusListener extends IInterface {
 
     public static class Default implements IVisualQueryRecognitionStatusListener {
         @Override // com.android.internal.app.IVisualQueryRecognitionStatusListener
-        public void onStartPerceiving() throws RemoteException {
-        }
+        public void onStartPerceiving() throws RemoteException {}
 
         @Override // com.android.internal.app.IVisualQueryRecognitionStatusListener
-        public void onStopPerceiving() throws RemoteException {
-        }
+        public void onStopPerceiving() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,8 @@ public interface IVisualQueryRecognitionStatusListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVisualQueryRecognitionStatusListener {
+    public abstract static class Stub extends Binder
+            implements IVisualQueryRecognitionStatusListener {
         static final int TRANSACTION_onStartPerceiving = 1;
         static final int TRANSACTION_onStopPerceiving = 2;
 
@@ -41,7 +41,8 @@ public interface IVisualQueryRecognitionStatusListener extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IVisualQueryRecognitionStatusListener.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IVisualQueryRecognitionStatusListener.DESCRIPTOR);
             if (iin != null && (iin instanceof IVisualQueryRecognitionStatusListener)) {
                 return (IVisualQueryRecognitionStatusListener) iin;
             }
@@ -70,7 +71,8 @@ public interface IVisualQueryRecognitionStatusListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVisualQueryRecognitionStatusListener.DESCRIPTOR);
             }

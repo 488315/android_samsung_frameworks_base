@@ -3,6 +3,7 @@ package com.android.server.apphibernation;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,9 @@ public final class UserLevelHibernationProto implements ProtoReadWriter {
                     if (fieldNumber == 1) {
                         userLevelState.packageName = protoInputStream.readString(1138166333441L);
                     } else if (fieldNumber != 2) {
-                        Slog.w("UserLevelHibernationProtoReadWriter", "Undefined field in proto: " + protoInputStream.getFieldNumber());
+                        Slog.w(
+                                "UserLevelHibernationProtoReadWriter",
+                                "Undefined field in proto: " + protoInputStream.getFieldNumber());
                     } else {
                         userLevelState.hibernated = protoInputStream.readBoolean(1133871366146L);
                     }

@@ -9,8 +9,7 @@ public class ByteTransferPipe extends TransferPipe {
     static final String TAG = "ByteTransferPipe";
     private ByteArrayOutputStream mOutputStream;
 
-    public ByteTransferPipe() throws IOException {
-    }
+    public ByteTransferPipe() throws IOException {}
 
     public ByteTransferPipe(String bufferPrefix) throws IOException {
         super(bufferPrefix, TAG);

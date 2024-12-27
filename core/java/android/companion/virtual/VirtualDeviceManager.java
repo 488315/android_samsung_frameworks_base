@@ -2,8 +2,6 @@ package android.companion.virtual;
 
 import android.annotation.SystemApi;
 import android.app.PendingIntent;
-import android.companion.virtual.IVirtualDeviceListener;
-import android.companion.virtual.VirtualDeviceManager;
 import android.companion.virtual.audio.VirtualAudioDevice;
 import android.companion.virtual.camera.VirtualCamera;
 import android.companion.virtual.camera.VirtualCameraConfig;
@@ -33,6 +31,7 @@ import android.os.RemoteException;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.Surface;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -48,20 +47,18 @@ import java.util.function.IntConsumer;
 
 /* loaded from: classes.dex */
 public final class VirtualDeviceManager {
-    public static final String ACTION_VIRTUAL_DEVICE_REMOVED = "android.companion.virtual.action.VIRTUAL_DEVICE_REMOVED";
-    public static final String EXTRA_VIRTUAL_DEVICE_ID = "android.companion.virtual.extra.VIRTUAL_DEVICE_ID";
+    public static final String ACTION_VIRTUAL_DEVICE_REMOVED =
+            "android.companion.virtual.action.VIRTUAL_DEVICE_REMOVED";
+    public static final String EXTRA_VIRTUAL_DEVICE_ID =
+            "android.companion.virtual.extra.VIRTUAL_DEVICE_ID";
 
-    @SystemApi
-    public static final int LAUNCH_FAILURE_NO_ACTIVITY = 2;
+    @SystemApi public static final int LAUNCH_FAILURE_NO_ACTIVITY = 2;
 
-    @SystemApi
-    public static final int LAUNCH_FAILURE_PENDING_INTENT_CANCELED = 1;
+    @SystemApi public static final int LAUNCH_FAILURE_PENDING_INTENT_CANCELED = 1;
 
-    @SystemApi
-    public static final int LAUNCH_SUCCESS = 0;
+    @SystemApi public static final int LAUNCH_SUCCESS = 0;
 
-    @SystemApi
-    public static final String PERSISTENT_DEVICE_ID_DEFAULT = "default:0";
+    @SystemApi public static final String PERSISTENT_DEVICE_ID_DEFAULT = "default:0";
     private static final String TAG = "VirtualDeviceManager";
     private final Context mContext;
     private final IVirtualDeviceManager mService;
@@ -74,8 +71,7 @@ public final class VirtualDeviceManager {
 
     @Target({ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PendingIntentLaunchStatus {
-    }
+    public @interface PendingIntentLaunchStatus {}
 
     @SystemApi
     public interface SoundEffectListener {
@@ -129,7 +125,10 @@ public final class VirtualDeviceManager {
             Log.w(TAG, "Failed to register listener; no virtual device manager service.");
             return;
         }
-        VirtualDeviceListenerDelegate delegate = new VirtualDeviceListenerDelegate((Executor) Objects.requireNonNull(executor), (VirtualDeviceListener) Objects.requireNonNull(listener));
+        VirtualDeviceListenerDelegate delegate =
+                new VirtualDeviceListenerDelegate(
+                        (Executor) Objects.requireNonNull(executor),
+                        (VirtualDeviceListener) Objects.requireNonNull(listener));
         synchronized (this.mVirtualDeviceListeners) {
             try {
                 try {
@@ -203,7 +202,8 @@ public final class VirtualDeviceManager {
             return null;
         }
         try {
-            return this.mService.getDisplayNameForPersistentDeviceId((String) Objects.requireNonNull(persistentDeviceId));
+            return this.mService.getDisplayNameForPersistentDeviceId(
+                    (String) Objects.requireNonNull(persistentDeviceId));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -284,8 +284,14 @@ public final class VirtualDeviceManager {
     public static class VirtualDevice implements AutoCloseable {
         private final VirtualDeviceInternal mVirtualDeviceInternal;
 
-        private VirtualDevice(IVirtualDeviceManager service, Context context, int associationId, VirtualDeviceParams params) throws RemoteException {
-            this.mVirtualDeviceInternal = new VirtualDeviceInternal(service, context, associationId, params);
+        private VirtualDevice(
+                IVirtualDeviceManager service,
+                Context context,
+                int associationId,
+                VirtualDeviceParams params)
+                throws RemoteException {
+            this.mVirtualDeviceInternal =
+                    new VirtualDeviceInternal(service, context, associationId, params);
         }
 
         public int getDeviceId() {
@@ -304,24 +310,40 @@ public final class VirtualDeviceManager {
             return this.mVirtualDeviceInternal.getVirtualSensorList();
         }
 
-        public void launchPendingIntent(int displayId, PendingIntent pendingIntent, Executor executor, IntConsumer listener) {
+        public void launchPendingIntent(
+                int displayId,
+                PendingIntent pendingIntent,
+                Executor executor,
+                IntConsumer listener) {
             Objects.requireNonNull(pendingIntent, "pendingIntent must not be null");
             Objects.requireNonNull(executor, "executor must not be null");
             Objects.requireNonNull(listener, "listener must not be null");
-            this.mVirtualDeviceInternal.launchPendingIntent(displayId, pendingIntent, executor, listener);
+            this.mVirtualDeviceInternal.launchPendingIntent(
+                    displayId, pendingIntent, executor, listener);
         }
 
         @Deprecated
-        public VirtualDisplay createVirtualDisplay(int width, int height, int densityDpi, Surface surface, int flags, Executor executor, VirtualDisplay.Callback callback) {
+        public VirtualDisplay createVirtualDisplay(
+                int width,
+                int height,
+                int densityDpi,
+                Surface surface,
+                int flags,
+                Executor executor,
+                VirtualDisplay.Callback callback) {
             String virtualDisplayName = "VirtualDevice_" + getDeviceId();
-            VirtualDisplayConfig.Builder builder = new VirtualDisplayConfig.Builder(virtualDisplayName, width, height, densityDpi).setFlags(flags);
+            VirtualDisplayConfig.Builder builder =
+                    new VirtualDisplayConfig.Builder(virtualDisplayName, width, height, densityDpi)
+                            .setFlags(flags);
             if (surface != null) {
                 builder.setSurface(surface);
             }
-            return this.mVirtualDeviceInternal.createVirtualDisplay(builder.build(), executor, callback);
+            return this.mVirtualDeviceInternal.createVirtualDisplay(
+                    builder.build(), executor, callback);
         }
 
-        public VirtualDisplay createVirtualDisplay(VirtualDisplayConfig config, Executor executor, VirtualDisplay.Callback callback) {
+        public VirtualDisplay createVirtualDisplay(
+                VirtualDisplayConfig config, Executor executor, VirtualDisplay.Callback callback) {
             Objects.requireNonNull(config, "config must not be null");
             return this.mVirtualDeviceInternal.createVirtualDisplay(config, executor, callback);
         }
@@ -336,11 +358,13 @@ public final class VirtualDeviceManager {
         }
 
         public void addActivityPolicyExemption(ComponentName componentName) {
-            this.mVirtualDeviceInternal.addActivityPolicyExemption((ComponentName) Objects.requireNonNull(componentName));
+            this.mVirtualDeviceInternal.addActivityPolicyExemption(
+                    (ComponentName) Objects.requireNonNull(componentName));
         }
 
         public void removeActivityPolicyExemption(ComponentName componentName) {
-            this.mVirtualDeviceInternal.removeActivityPolicyExemption((ComponentName) Objects.requireNonNull(componentName));
+            this.mVirtualDeviceInternal.removeActivityPolicyExemption(
+                    (ComponentName) Objects.requireNonNull(componentName));
         }
 
         public VirtualDpad createVirtualDpad(VirtualDpadConfig config) {
@@ -354,8 +378,15 @@ public final class VirtualDeviceManager {
         }
 
         @Deprecated
-        public VirtualKeyboard createVirtualKeyboard(VirtualDisplay display, String inputDeviceName, int vendorId, int productId) {
-            VirtualKeyboardConfig keyboardConfig = new VirtualKeyboardConfig.Builder().setVendorId(vendorId).setProductId(productId).setInputDeviceName(inputDeviceName).setAssociatedDisplayId(display.getDisplay().getDisplayId()).build();
+        public VirtualKeyboard createVirtualKeyboard(
+                VirtualDisplay display, String inputDeviceName, int vendorId, int productId) {
+            VirtualKeyboardConfig keyboardConfig =
+                    new VirtualKeyboardConfig.Builder()
+                            .setVendorId(vendorId)
+                            .setProductId(productId)
+                            .setInputDeviceName(inputDeviceName)
+                            .setAssociatedDisplayId(display.getDisplay().getDisplayId())
+                            .build();
             return this.mVirtualDeviceInternal.createVirtualKeyboard(keyboardConfig);
         }
 
@@ -365,8 +396,15 @@ public final class VirtualDeviceManager {
         }
 
         @Deprecated
-        public VirtualMouse createVirtualMouse(VirtualDisplay display, String inputDeviceName, int vendorId, int productId) {
-            VirtualMouseConfig mouseConfig = new VirtualMouseConfig.Builder().setVendorId(vendorId).setProductId(productId).setInputDeviceName(inputDeviceName).setAssociatedDisplayId(display.getDisplay().getDisplayId()).build();
+        public VirtualMouse createVirtualMouse(
+                VirtualDisplay display, String inputDeviceName, int vendorId, int productId) {
+            VirtualMouseConfig mouseConfig =
+                    new VirtualMouseConfig.Builder()
+                            .setVendorId(vendorId)
+                            .setProductId(productId)
+                            .setInputDeviceName(inputDeviceName)
+                            .setAssociatedDisplayId(display.getDisplay().getDisplayId())
+                            .build();
             return this.mVirtualDeviceInternal.createVirtualMouse(mouseConfig);
         }
 
@@ -377,14 +415,33 @@ public final class VirtualDeviceManager {
 
         /* JADX WARN: Multi-variable type inference failed */
         @Deprecated
-        public VirtualTouchscreen createVirtualTouchscreen(VirtualDisplay display, String inputDeviceName, int vendorId, int productId) {
+        public VirtualTouchscreen createVirtualTouchscreen(
+                VirtualDisplay display, String inputDeviceName, int vendorId, int productId) {
             Point size = new Point();
             display.getDisplay().getSize(size);
-            VirtualTouchscreenConfig touchscreenConfig = ((VirtualTouchscreenConfig.Builder) ((VirtualTouchscreenConfig.Builder) ((VirtualTouchscreenConfig.Builder) ((VirtualTouchscreenConfig.Builder) new VirtualTouchscreenConfig.Builder(size.x, size.y).setVendorId(vendorId)).setProductId(productId)).setInputDeviceName(inputDeviceName)).setAssociatedDisplayId(display.getDisplay().getDisplayId())).build();
+            VirtualTouchscreenConfig touchscreenConfig =
+                    ((VirtualTouchscreenConfig.Builder)
+                                    ((VirtualTouchscreenConfig.Builder)
+                                                    ((VirtualTouchscreenConfig.Builder)
+                                                                    ((VirtualTouchscreenConfig
+                                                                                            .Builder)
+                                                                                    new VirtualTouchscreenConfig
+                                                                                                    .Builder(
+                                                                                                    size.x,
+                                                                                                    size.y)
+                                                                                            .setVendorId(
+                                                                                                    vendorId))
+                                                                            .setProductId(
+                                                                                    productId))
+                                                            .setInputDeviceName(inputDeviceName))
+                                            .setAssociatedDisplayId(
+                                                    display.getDisplay().getDisplayId()))
+                            .build();
             return this.mVirtualDeviceInternal.createVirtualTouchscreen(touchscreenConfig);
         }
 
-        public VirtualNavigationTouchpad createVirtualNavigationTouchpad(VirtualNavigationTouchpadConfig config) {
+        public VirtualNavigationTouchpad createVirtualNavigationTouchpad(
+                VirtualNavigationTouchpadConfig config) {
             return this.mVirtualDeviceInternal.createVirtualNavigationTouchpad(config);
         }
 
@@ -392,16 +449,22 @@ public final class VirtualDeviceManager {
             return this.mVirtualDeviceInternal.createVirtualStylus(config);
         }
 
-        public VirtualAudioDevice createVirtualAudioDevice(VirtualDisplay display, Executor executor, VirtualAudioDevice.AudioConfigurationChangeCallback callback) {
+        public VirtualAudioDevice createVirtualAudioDevice(
+                VirtualDisplay display,
+                Executor executor,
+                VirtualAudioDevice.AudioConfigurationChangeCallback callback) {
             Objects.requireNonNull(display, "display must not be null");
-            return this.mVirtualDeviceInternal.createVirtualAudioDevice(display, executor, callback);
+            return this.mVirtualDeviceInternal.createVirtualAudioDevice(
+                    display, executor, callback);
         }
 
         public VirtualCamera createVirtualCamera(VirtualCameraConfig config) {
             if (!Flags.virtualCamera()) {
-                throw new UnsupportedOperationException("Flag is not enabled: %s".formatted(Flags.FLAG_VIRTUAL_CAMERA));
+                throw new UnsupportedOperationException(
+                        "Flag is not enabled: %s".formatted(Flags.FLAG_VIRTUAL_CAMERA));
             }
-            return this.mVirtualDeviceInternal.createVirtualCamera((VirtualCameraConfig) Objects.requireNonNull(config));
+            return this.mVirtualDeviceInternal.createVirtualCamera(
+                    (VirtualCameraConfig) Objects.requireNonNull(config));
         }
 
         public void setShowPointerIcon(boolean showPointerIcon) {
@@ -422,7 +485,8 @@ public final class VirtualDeviceManager {
             this.mVirtualDeviceInternal.removeActivityListener(listener);
         }
 
-        public void addSoundEffectListener(Executor executor, SoundEffectListener soundEffectListener) {
+        public void addSoundEffectListener(
+                Executor executor, SoundEffectListener soundEffectListener) {
             this.mVirtualDeviceInternal.addSoundEffectListener(executor, soundEffectListener);
         }
 
@@ -430,8 +494,12 @@ public final class VirtualDeviceManager {
             this.mVirtualDeviceInternal.removeSoundEffectListener(soundEffectListener);
         }
 
-        public void registerIntentInterceptor(IntentFilter interceptorFilter, Executor executor, IntentInterceptorCallback interceptorCallback) {
-            this.mVirtualDeviceInternal.registerIntentInterceptor(interceptorFilter, executor, interceptorCallback);
+        public void registerIntentInterceptor(
+                IntentFilter interceptorFilter,
+                Executor executor,
+                IntentInterceptorCallback interceptorCallback) {
+            this.mVirtualDeviceInternal.registerIntentInterceptor(
+                    interceptorFilter, executor, interceptorCallback);
         }
 
         public void unregisterIntentInterceptor(IntentInterceptorCallback interceptorCallback) {
@@ -445,16 +513,13 @@ public final class VirtualDeviceManager {
 
         void onTopActivityChanged(int i, ComponentName componentName);
 
-        default void onTopActivityChanged(int displayId, ComponentName topActivity, int userId) {
-        }
+        default void onTopActivityChanged(int displayId, ComponentName topActivity, int userId) {}
     }
 
     public interface VirtualDeviceListener {
-        default void onVirtualDeviceCreated(int deviceId) {
-        }
+        default void onVirtualDeviceCreated(int deviceId) {}
 
-        default void onVirtualDeviceClosed(int deviceId) {
-        }
+        default void onVirtualDeviceClosed(int deviceId) {}
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -471,12 +536,15 @@ public final class VirtualDeviceManager {
         public void onVirtualDeviceCreated(final int deviceId) {
             long token = Binder.clearCallingIdentity();
             try {
-                this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceManager$VirtualDeviceListenerDelegate$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        VirtualDeviceManager.VirtualDeviceListenerDelegate.this.lambda$onVirtualDeviceCreated$0(deviceId);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.companion.virtual.VirtualDeviceManager$VirtualDeviceListenerDelegate$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                VirtualDeviceManager.VirtualDeviceListenerDelegate.this
+                                        .lambda$onVirtualDeviceCreated$0(deviceId);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -491,12 +559,15 @@ public final class VirtualDeviceManager {
         public void onVirtualDeviceClosed(final int deviceId) {
             long token = Binder.clearCallingIdentity();
             try {
-                this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceManager$VirtualDeviceListenerDelegate$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        VirtualDeviceManager.VirtualDeviceListenerDelegate.this.lambda$onVirtualDeviceClosed$1(deviceId);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.companion.virtual.VirtualDeviceManager$VirtualDeviceListenerDelegate$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                VirtualDeviceManager.VirtualDeviceListenerDelegate.this
+                                        .lambda$onVirtualDeviceClosed$1(deviceId);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }

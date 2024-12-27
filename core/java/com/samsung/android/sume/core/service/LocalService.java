@@ -5,10 +5,12 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcelable;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.controller.MediaController;
 import com.samsung.android.sume.core.message.Event;
+
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -31,12 +33,14 @@ public abstract class LocalService extends ServiceStub {
 
     @Override // com.samsung.android.sume.core.service.ServiceStub
     protected void startForegroundServiceStub(Intent intent) {
-        throw new UnsupportedOperationException("Local Service do not this, if required, override it");
+        throw new UnsupportedOperationException(
+                "Local Service do not this, if required, override it");
     }
 
     @Override // com.samsung.android.sume.core.service.ServiceStub
     protected void stopForegroundServiceStub() {
-        throw new UnsupportedOperationException("Local Service do not this, if required, override it");
+        throw new UnsupportedOperationException(
+                "Local Service do not this, if required, override it");
     }
 
     @Override // com.samsung.android.sume.core.controller.MediaController.OnEventListener
@@ -46,12 +50,19 @@ public abstract class LocalService extends ServiceStub {
                 Bundle data = event.toAndroidMessage().getData();
                 Parcelable[] buffers = data.getParcelableArray("buffer-list");
                 if (buffers != null) {
-                    event.put("buffer-list", Arrays.stream(buffers).map(new Function() { // from class: com.samsung.android.sume.core.service.LocalService$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Function
-                        public final Object apply(Object obj) {
-                            return LocalService.lambda$onEvent$0((Parcelable) obj);
-                        }
-                    }).collect(Collectors.toList()));
+                    event.put(
+                            "buffer-list",
+                            Arrays.stream(buffers)
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.sume.core.service.LocalService$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return LocalService.lambda$onEvent$0(
+                                                            (Parcelable) obj);
+                                                }
+                                            })
+                                    .collect(Collectors.toList()));
                     break;
                 }
                 break;
@@ -63,8 +74,7 @@ public abstract class LocalService extends ServiceStub {
     }
 
     public class LocalBinder extends Binder {
-        public LocalBinder() {
-        }
+        public LocalBinder() {}
 
         public LocalService getService() {
             return LocalService.this;

@@ -21,12 +21,10 @@ public interface IDragAndDropClient extends IInterface {
 
     public static class Default implements IDragAndDropClient {
         @Override // com.samsung.android.multiwindow.IDragAndDropClient
-        public void onConnected(IBinder serverProxy, int displayId) throws RemoteException {
-        }
+        public void onConnected(IBinder serverProxy, int displayId) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IDragAndDropClient
-        public void onDisconnected() throws RemoteException {
-        }
+        public void onDisconnected() throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IDragAndDropClient
         public boolean getInitialDropTargetVisible() throws RemoteException {
@@ -44,7 +42,7 @@ public interface IDragAndDropClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDragAndDropClient {
+    public abstract static class Stub extends Binder implements IDragAndDropClient {
         static final int TRANSACTION_getHiddenDropTargetArea = 4;
         static final int TRANSACTION_getInitialDropTargetVisible = 3;
         static final int TRANSACTION_onConnected = 1;
@@ -91,7 +89,8 @@ public interface IDragAndDropClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDragAndDropClient.DESCRIPTOR);
             }

@@ -2,14 +2,18 @@ package com.samsung.android.knox.analytics.util;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import com.android.server.clipboard.ClipboardService;
+
 import com.samsung.android.knox.analytics.KnoxAnalyticsData;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -54,7 +58,9 @@ public final class KnoxAnalyticsDataConverter {
     }
 
     public static long generateTimestamp() {
-        return (Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis() / ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS) * ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
+        return (Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTimeInMillis()
+                        / ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS)
+                * ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
     }
 
     public static String generateVersioningBlobEvent(String str, long j, int i) {
@@ -136,7 +142,8 @@ public final class KnoxAnalyticsDataConverter {
             for (String str : payload.keySet()) {
                 if (payload.get(str) instanceof Bundle) {
                     jSONObject2.put(str, convertToJSON(payload.getBundle(str)));
-                } else if ((payload.get(str) instanceof String) && isJSONValid(payload.getString(str))) {
+                } else if ((payload.get(str) instanceof String)
+                        && isJSONValid(payload.getString(str))) {
                     jSONObject2.put(str, new JSONObject(payload.getString(str)));
                 } else {
                     jSONObject2.put(str, payload.get(str));

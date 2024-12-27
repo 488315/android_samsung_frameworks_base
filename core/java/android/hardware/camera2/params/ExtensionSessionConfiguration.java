@@ -2,6 +2,7 @@ package android.hardware.camera2.params;
 
 import android.graphics.ColorSpace;
 import android.hardware.camera2.CameraExtensionSession;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -15,7 +16,11 @@ public final class ExtensionSessionConfiguration {
     private List<OutputConfiguration> mOutputs;
     private OutputConfiguration mPostviewOutput = null;
 
-    public ExtensionSessionConfiguration(int extension, List<OutputConfiguration> outputs, Executor executor, CameraExtensionSession.StateCallback listener) {
+    public ExtensionSessionConfiguration(
+            int extension,
+            List<OutputConfiguration> outputs,
+            Executor executor,
+            CameraExtensionSession.StateCallback listener) {
         this.mExecutor = null;
         this.mCallback = null;
         this.mExtensionType = extension;

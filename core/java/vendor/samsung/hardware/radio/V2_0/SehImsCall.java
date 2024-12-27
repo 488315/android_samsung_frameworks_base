@@ -3,6 +3,7 @@ package vendor.samsung.hardware.radio.V2_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,18 +23,37 @@ public final class SehImsCall {
             return false;
         }
         SehImsCall other = (SehImsCall) otherObject;
-        if (this.state == other.state && this.type == other.type && this.isMt == other.isMt && this.isMpty == other.isMpty && HidlSupport.deepEquals(this.number, other.number)) {
+        if (this.state == other.state
+                && this.type == other.type
+                && this.isMt == other.isMt
+                && this.isMpty == other.isMpty
+                && HidlSupport.deepEquals(this.number, other.number)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.state))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.isMt))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.isMpty))), Integer.valueOf(HidlSupport.deepHashCode(this.number)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.state))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.isMt))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.isMpty))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.number)));
     }
 
     public final String toString() {
-        return "{.state = " + this.state + ", .type = " + this.type + ", .isMt = " + this.isMt + ", .isMpty = " + this.isMpty + ", .number = " + this.number + "}";
+        return "{.state = "
+                + this.state
+                + ", .type = "
+                + this.type
+                + ", .isMt = "
+                + this.isMt
+                + ", .isMpty = "
+                + this.isMpty
+                + ", .number = "
+                + this.number
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -45,7 +65,8 @@ public final class SehImsCall {
         ArrayList<SehImsCall> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SehImsCall _hidl_vec_element = new SehImsCall();
@@ -55,13 +76,18 @@ public final class SehImsCall {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.state = _hidl_blob.getInt32(_hidl_offset + 0);
         this.type = _hidl_blob.getInt32(_hidl_offset + 4);
         this.isMt = _hidl_blob.getInt32(_hidl_offset + 8);
         this.isMpty = _hidl_blob.getInt32(_hidl_offset + 12);
         this.number = _hidl_blob.getString(_hidl_offset + 16);
-        parcel.readEmbeddedBuffer(this.number.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 16 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.number.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 16 + 0,
+                false);
     }
 
     public final void writeToParcel(HwParcel parcel) {

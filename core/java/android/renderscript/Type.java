@@ -209,7 +209,8 @@ public class Type extends BaseObj {
 
         public Builder setX(int value) {
             if (value < 1) {
-                throw new RSIllegalArgumentException("Values of less than 1 for Dimension X are not valid.");
+                throw new RSIllegalArgumentException(
+                        "Values of less than 1 for Dimension X are not valid.");
             }
             this.mDimX = value;
             return this;
@@ -217,7 +218,8 @@ public class Type extends BaseObj {
 
         public Builder setY(int value) {
             if (value < 1) {
-                throw new RSIllegalArgumentException("Values of less than 1 for Dimension Y are not valid.");
+                throw new RSIllegalArgumentException(
+                        "Values of less than 1 for Dimension Y are not valid.");
             }
             this.mDimY = value;
             return this;
@@ -225,7 +227,8 @@ public class Type extends BaseObj {
 
         public Builder setZ(int value) {
             if (value < 1) {
-                throw new RSIllegalArgumentException("Values of less than 1 for Dimension Z are not valid.");
+                throw new RSIllegalArgumentException(
+                        "Values of less than 1 for Dimension Z are not valid.");
             }
             this.mDimZ = value;
             return this;
@@ -257,14 +260,16 @@ public class Type extends BaseObj {
                     this.mYuv = yuvFormat;
                     return this;
                 default:
-                    throw new RSIllegalArgumentException("Only ImageFormat.NV21, .YV12, and .YUV_420_888 are supported..");
+                    throw new RSIllegalArgumentException(
+                            "Only ImageFormat.NV21, .YV12, and .YUV_420_888 are supported..");
             }
         }
 
         public Type create() {
             if (this.mDimZ > 0) {
                 if (this.mDimX < 1 || this.mDimY < 1) {
-                    throw new RSInvalidStateException("Both X and Y dimension required when Z is present.");
+                    throw new RSInvalidStateException(
+                            "Both X and Y dimension required when Z is present.");
                 }
                 if (this.mDimFaces) {
                     throw new RSInvalidStateException("Cube maps not supported with 3D types.");
@@ -288,7 +293,15 @@ public class Type extends BaseObj {
                     throw new RSInvalidStateException("Array dimensions must be contigous from 0.");
                 }
             }
-            long id = this.mRS.nTypeCreate(this.mElement.getID(this.mRS), this.mDimX, this.mDimY, this.mDimZ, this.mDimMipmaps, this.mDimFaces, this.mYuv);
+            long id =
+                    this.mRS.nTypeCreate(
+                            this.mElement.getID(this.mRS),
+                            this.mDimX,
+                            this.mDimY,
+                            this.mDimZ,
+                            this.mDimMipmaps,
+                            this.mDimFaces,
+                            this.mYuv);
             Type t = new Type(id, this.mRS);
             t.mElement = this.mElement;
             t.mDimX = this.mDimX;

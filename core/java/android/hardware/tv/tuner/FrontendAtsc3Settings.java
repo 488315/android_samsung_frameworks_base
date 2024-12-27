@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class FrontendAtsc3Settings implements Parcelable {
-    public static final Parcelable.Creator<FrontendAtsc3Settings> CREATOR = new Parcelable.Creator<FrontendAtsc3Settings>() { // from class: android.hardware.tv.tuner.FrontendAtsc3Settings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendAtsc3Settings createFromParcel(Parcel _aidl_source) {
-            FrontendAtsc3Settings _aidl_out = new FrontendAtsc3Settings();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FrontendAtsc3Settings> CREATOR =
+            new Parcelable.Creator<FrontendAtsc3Settings>() { // from class:
+                // android.hardware.tv.tuner.FrontendAtsc3Settings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendAtsc3Settings createFromParcel(Parcel _aidl_source) {
+                    FrontendAtsc3Settings _aidl_out = new FrontendAtsc3Settings();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendAtsc3Settings[] newArray(int _aidl_size) {
-            return new FrontendAtsc3Settings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendAtsc3Settings[] newArray(int _aidl_size) {
+                    return new FrontendAtsc3Settings[_aidl_size];
+                }
+            };
     public FrontendAtsc3PlpSettings[] plpSettings;
     public long frequency = 0;
     public long endFrequency = 0;
@@ -102,7 +104,9 @@ public class FrontendAtsc3Settings implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.plpSettings = (FrontendAtsc3PlpSettings[]) _aidl_parcel.createTypedArray(FrontendAtsc3PlpSettings.CREATOR);
+                this.plpSettings =
+                        (FrontendAtsc3PlpSettings[])
+                                _aidl_parcel.createTypedArray(FrontendAtsc3PlpSettings.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

@@ -1,10 +1,10 @@
 package android.apphibernation;
 
 import android.annotation.SystemApi;
-import android.apphibernation.IAppHibernationService;
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,9 @@ import java.util.Set;
 public class AppHibernationManager {
     private static final String TAG = "AppHibernationManager";
     private final Context mContext;
-    private final IAppHibernationService mIAppHibernationService = IAppHibernationService.Stub.asInterface(ServiceManager.getService(Context.APP_HIBERNATION_SERVICE));
+    private final IAppHibernationService mIAppHibernationService =
+            IAppHibernationService.Stub.asInterface(
+                    ServiceManager.getService(Context.APP_HIBERNATION_SERVICE));
 
     public AppHibernationManager(Context context) {
         this.mContext = context;
@@ -24,7 +26,8 @@ public class AppHibernationManager {
     @SystemApi
     public boolean isHibernatingForUser(String packageName) {
         try {
-            return this.mIAppHibernationService.isHibernatingForUser(packageName, this.mContext.getUserId());
+            return this.mIAppHibernationService.isHibernatingForUser(
+                    packageName, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -33,7 +36,8 @@ public class AppHibernationManager {
     @SystemApi
     public void setHibernatingForUser(String packageName, boolean isHibernating) {
         try {
-            this.mIAppHibernationService.setHibernatingForUser(packageName, this.mContext.getUserId(), isHibernating);
+            this.mIAppHibernationService.setHibernatingForUser(
+                    packageName, this.mContext.getUserId(), isHibernating);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -60,7 +64,8 @@ public class AppHibernationManager {
     @SystemApi
     public List<String> getHibernatingPackagesForUser() {
         try {
-            return this.mIAppHibernationService.getHibernatingPackagesForUser(this.mContext.getUserId());
+            return this.mIAppHibernationService.getHibernatingPackagesForUser(
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -69,7 +74,8 @@ public class AppHibernationManager {
     @SystemApi
     public Map<String, HibernationStats> getHibernationStatsForUser(Set<String> packageNames) {
         try {
-            return this.mIAppHibernationService.getHibernationStatsForUser(new ArrayList(packageNames), this.mContext.getUserId());
+            return this.mIAppHibernationService.getHibernationStatsForUser(
+                    new ArrayList(packageNames), this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -78,7 +84,8 @@ public class AppHibernationManager {
     @SystemApi
     public Map<String, HibernationStats> getHibernationStatsForUser() {
         try {
-            return this.mIAppHibernationService.getHibernationStatsForUser(null, this.mContext.getUserId());
+            return this.mIAppHibernationService.getHibernationStatsForUser(
+                    null, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

@@ -11,19 +11,23 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Singleton;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.MagnificationConnectionManager$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.clipboard.ClipboardService;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -40,7 +44,8 @@ public final class SemBioAnalyticsManager {
     public boolean mIsFirstSensorCheckForDQA = true;
     public int mFpAuthRejectConsecutively = 0;
     public long mFaceStartTime = 0;
-    public final Handler mH = BiometricHandlerProvider.sBiometricHandlerProvider.getBiometricCallbackHandler();
+    public final Handler mH =
+            BiometricHandlerProvider.sBiometricHandlerProvider.getBiometricCallbackHandler();
     public ArrayList mPendingRequestBeforeBootComplete = new ArrayList();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -70,67 +75,103 @@ public final class SemBioAnalyticsManager {
             this.mContext = context;
             this.mSemHqmManager = (SemHqmManager) context.getSystemService("HqmManagerService");
             this.mPreviousSavedTime = 0L;
-            boolean hasSystemFeature = context.getPackageManager().hasSystemFeature("android.hardware.biometrics.face");
+            boolean hasSystemFeature =
+                    context.getPackageManager()
+                            .hasSystemFeature("android.hardware.biometrics.face");
             this.FACE_FEATURE_HAL = hasSystemFeature;
             resetDqaData();
             if (SemBiometricFeature.FP_FEATURE_SUPPORT_FINGERPRINT) {
-                parserAndUpdateMap(readDqaDataFromFile("settings_fingerprint_ext_bigdata.xml"), linkedHashMap);
+                parserAndUpdateMap(
+                        readDqaDataFromFile("settings_fingerprint_ext_bigdata.xml"), linkedHashMap);
             }
             if (hasSystemFeature) {
-                parserAndUpdateMap(readDqaDataFromFile("settings_face_ext_bigdata.xml"), linkedHashMap2);
+                parserAndUpdateMap(
+                        readDqaDataFromFile("settings_face_ext_bigdata.xml"), linkedHashMap2);
             }
             try {
                 IntentFilter intentFilter = new IntentFilter();
                 intentFilter.addAction("android.intent.action.ACTION_SHUTDOWN");
                 intentFilter.addAction("com.sec.android.intent.action.HQM_UPDATE_REQ");
-                context.registerReceiverAsUser(new BroadcastReceiver() { // from class: com.android.server.biometrics.SemBioAnalyticsManager.DQAManager.1
-                    @Override // android.content.BroadcastReceiver
-                    public final void onReceive(Context context2, Intent intent) {
-                        String action = intent.getAction();
-                        Log.i("BiometricService.AM", "onBroadCastReceive [DQA]: " + action);
-                        action.getClass();
-                        if (!action.equals("com.sec.android.intent.action.HQM_UPDATE_REQ")) {
-                            if (action.equals("android.intent.action.ACTION_SHUTDOWN")) {
-                                if (SemBiometricFeature.FP_FEATURE_SUPPORT_FINGERPRINT) {
-                                    DQAManager.writeDqaDataToFile("settings_fingerprint_ext_bigdata.xml", DQAManager.getDqaDataFormatToSave(DQAManager.this.mFpBigDataNameMap));
-                                }
-                                DQAManager dQAManager = DQAManager.this;
-                                if (dQAManager.FACE_FEATURE_HAL) {
-                                    DQAManager.writeDqaDataToFile("settings_face_ext_bigdata.xml", DQAManager.getDqaDataFormatToSave(dQAManager.mFaceBigDataNameMap));
+                context.registerReceiverAsUser(
+                        new BroadcastReceiver() { // from class:
+                                                  // com.android.server.biometrics.SemBioAnalyticsManager.DQAManager.1
+                            @Override // android.content.BroadcastReceiver
+                            public final void onReceive(Context context2, Intent intent) {
+                                String action = intent.getAction();
+                                Log.i("BiometricService.AM", "onBroadCastReceive [DQA]: " + action);
+                                action.getClass();
+                                if (!action.equals(
+                                        "com.sec.android.intent.action.HQM_UPDATE_REQ")) {
+                                    if (action.equals("android.intent.action.ACTION_SHUTDOWN")) {
+                                        if (SemBiometricFeature.FP_FEATURE_SUPPORT_FINGERPRINT) {
+                                            DQAManager.writeDqaDataToFile(
+                                                    "settings_fingerprint_ext_bigdata.xml",
+                                                    DQAManager.getDqaDataFormatToSave(
+                                                            DQAManager.this.mFpBigDataNameMap));
+                                        }
+                                        DQAManager dQAManager = DQAManager.this;
+                                        if (dQAManager.FACE_FEATURE_HAL) {
+                                            DQAManager.writeDqaDataToFile(
+                                                    "settings_face_ext_bigdata.xml",
+                                                    DQAManager.getDqaDataFormatToSave(
+                                                            dQAManager.mFaceBigDataNameMap));
+                                            return;
+                                        }
+                                        return;
+                                    }
                                     return;
                                 }
-                                return;
-                            }
-                            return;
-                        }
-                        DQAManager dQAManager2 = DQAManager.this;
-                        dQAManager2.getClass();
-                        if (SemBiometricFeature.FP_FEATURE_SUPPORT_FINGERPRINT) {
-                            for (Map.Entry entry : ((LinkedHashMap) dQAManager2.mFpBigDataNameMap).entrySet()) {
-                                if (!((String) entry.getValue()).equals("")) {
-                                    dQAManager2.sendFingerprintBigData((String) entry.getKey(), (String) entry.getValue());
+                                DQAManager dQAManager2 = DQAManager.this;
+                                dQAManager2.getClass();
+                                if (SemBiometricFeature.FP_FEATURE_SUPPORT_FINGERPRINT) {
+                                    for (Map.Entry entry :
+                                            ((LinkedHashMap) dQAManager2.mFpBigDataNameMap)
+                                                    .entrySet()) {
+                                        if (!((String) entry.getValue()).equals("")) {
+                                            dQAManager2.sendFingerprintBigData(
+                                                    (String) entry.getKey(),
+                                                    (String) entry.getValue());
+                                        }
+                                    }
+                                    DQAManager.writeDqaDataToFile(
+                                            "settings_fingerprint_ext_bigdata.xml", null);
                                 }
-                            }
-                            DQAManager.writeDqaDataToFile("settings_fingerprint_ext_bigdata.xml", null);
-                        }
-                        if (dQAManager2.FACE_FEATURE_HAL) {
-                            for (Map.Entry entry2 : ((LinkedHashMap) dQAManager2.mFaceBigDataNameMap).entrySet()) {
-                                if (!((String) entry2.getValue()).equals("")) {
-                                    dQAManager2.sendFaceBigData((String) entry2.getKey(), (String) entry2.getValue());
+                                if (dQAManager2.FACE_FEATURE_HAL) {
+                                    for (Map.Entry entry2 :
+                                            ((LinkedHashMap) dQAManager2.mFaceBigDataNameMap)
+                                                    .entrySet()) {
+                                        if (!((String) entry2.getValue()).equals("")) {
+                                            dQAManager2.sendFaceBigData(
+                                                    (String) entry2.getKey(),
+                                                    (String) entry2.getValue());
+                                        }
+                                    }
+                                    DQAManager.writeDqaDataToFile(
+                                            "settings_face_ext_bigdata.xml", null);
                                 }
+                                dQAManager2.resetDqaData();
+                                DQAManager dQAManager3 = DQAManager.this;
+                                if (TextUtils.isEmpty(dQAManager3.mFingerprintDaemonVersion)) {
+                                    return;
+                                }
+                                dQAManager3.fpHandleDqaData(
+                                        new EventData(
+                                                -1,
+                                                2,
+                                                "FPDA",
+                                                dQAManager3.mFingerprintDaemonVersion));
                             }
-                            DQAManager.writeDqaDataToFile("settings_face_ext_bigdata.xml", null);
-                        }
-                        dQAManager2.resetDqaData();
-                        DQAManager dQAManager3 = DQAManager.this;
-                        if (TextUtils.isEmpty(dQAManager3.mFingerprintDaemonVersion)) {
-                            return;
-                        }
-                        dQAManager3.fpHandleDqaData(new EventData(-1, 2, "FPDA", dQAManager3.mFingerprintDaemonVersion));
-                    }
-                }, UserHandle.ALL, intentFilter, null, BiometricHandlerProvider.sBiometricHandlerProvider.getBiometricCallbackHandler());
+                        },
+                        UserHandle.ALL,
+                        intentFilter,
+                        null,
+                        BiometricHandlerProvider.sBiometricHandlerProvider
+                                .getBiometricCallbackHandler());
             } catch (Exception e) {
-                PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(e, "DQAManager: registerBroadCastReceiver : failed, ", "BiometricService.AM");
+                PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(
+                        e,
+                        "DQAManager: registerBroadCastReceiver : failed, ",
+                        "BiometricService.AM");
             }
         }
 
@@ -144,7 +185,8 @@ public final class SemBioAnalyticsManager {
             }
             String sb2 = sb.toString();
             if (SemBioAnalyticsManager.DEBUG) {
-                DualAppManagerService$$ExternalSyntheticOutline0.m("formatDqaDataToSave: formatData = [", sb2, "]", "BiometricService.AM");
+                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                        "formatDqaDataToSave: formatData = [", sb2, "]", "BiometricService.AM");
             }
             return sb2;
         }
@@ -185,7 +227,9 @@ public final class SemBioAnalyticsManager {
             L38:
                 return r2
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.SemBioAnalyticsManager.DQAManager.readDqaDataFromFile(java.lang.String):java.lang.String");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.biometrics.SemBioAnalyticsManager.DQAManager.readDqaDataFromFile(java.lang.String):java.lang.String");
         }
 
         public static String updateTargetWithSource(String str, String str2) {
@@ -208,7 +252,11 @@ public final class SemBioAnalyticsManager {
                                 if (keys2.hasNext()) {
                                     String next2 = keys2.next();
                                     if (next.equals(next2)) {
-                                        jSONObject2.put(next2, ((Integer) jSONObject.get(next)).intValue() + ((Integer) jSONObject2.get(next2)).intValue());
+                                        jSONObject2.put(
+                                                next2,
+                                                ((Integer) jSONObject.get(next)).intValue()
+                                                        + ((Integer) jSONObject2.get(next2))
+                                                                .intValue());
                                         break;
                                     }
                                 }
@@ -229,7 +277,9 @@ public final class SemBioAnalyticsManager {
         }
 
         public static void writeDqaDataToFile(String str, String str2) {
-            BiometricHandlerProvider.sBiometricHandlerProvider.getBiometricCallbackHandler().post(new SemBioAnalyticsManager$$ExternalSyntheticLambda1(1, str2, str));
+            BiometricHandlerProvider.sBiometricHandlerProvider
+                    .getBiometricCallbackHandler()
+                    .post(new SemBioAnalyticsManager$$ExternalSyntheticLambda1(1, str2, str));
         }
 
         public final void fpHandleDqaData(EventData eventData) {
@@ -241,25 +291,50 @@ public final class SemBioAnalyticsManager {
                 return;
             }
             if (isUsingPackageNameAsExtra(eventData.mFeature)) {
-                this.mFpBigDataNameMap.put(eventData.mFeature, updateAppCountNum((String) ((LinkedHashMap) this.mFpBigDataNameMap).get(eventData.mFeature), eventData.mExtra));
+                this.mFpBigDataNameMap.put(
+                        eventData.mFeature,
+                        updateAppCountNum(
+                                (String)
+                                        ((LinkedHashMap) this.mFpBigDataNameMap)
+                                                .get(eventData.mFeature),
+                                eventData.mExtra));
             } else {
-                String str = (String) ((LinkedHashMap) this.mFpBigDataNameMap).get(eventData.mFeature);
-                this.mFpBigDataNameMap.put(eventData.mFeature, String.valueOf((str == "" ? 0 : Integer.parseInt(str)) + 1));
+                String str =
+                        (String) ((LinkedHashMap) this.mFpBigDataNameMap).get(eventData.mFeature);
+                this.mFpBigDataNameMap.put(
+                        eventData.mFeature,
+                        String.valueOf((str == "" ? 0 : Integer.parseInt(str)) + 1));
             }
             long currentTimeMillis = System.currentTimeMillis();
             long j = this.mPreviousSavedTime;
-            if (j == 0 || currentTimeMillis - j > ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS) {
+            if (j == 0
+                    || currentTimeMillis - j > ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS) {
                 this.mPreviousSavedTime = currentTimeMillis;
-                writeDqaDataToFile("settings_fingerprint_ext_bigdata.xml", getDqaDataFormatToSave(this.mFpBigDataNameMap));
+                writeDqaDataToFile(
+                        "settings_fingerprint_ext_bigdata.xml",
+                        getDqaDataFormatToSave(this.mFpBigDataNameMap));
             }
         }
 
         public final boolean isUsingPackageNameAsExtra(String str) {
-            if (SemBiometricFeature.FP_FEATURE_SUPPORT_FINGERPRINT && (str.equals("FPIS") || str.equals("FPIF") || str.equals("FPQP") || str.equals("FPQI") || str.equals("FPQD") || str.equals("FPQS") || str.equals("FPQF") || str.equals("FPQW") || str.equals("FPQL"))) {
+            if (SemBiometricFeature.FP_FEATURE_SUPPORT_FINGERPRINT
+                    && (str.equals("FPIS")
+                            || str.equals("FPIF")
+                            || str.equals("FPQP")
+                            || str.equals("FPQI")
+                            || str.equals("FPQD")
+                            || str.equals("FPQS")
+                            || str.equals("FPQF")
+                            || str.equals("FPQW")
+                            || str.equals("FPQL"))) {
                 return true;
             }
             if (this.FACE_FEATURE_HAL) {
-                return str.equals("FAIS") || str.equals("FAIF") || str.equals("FAQN") || str.equals("FAQB") || str.equals("FAQS");
+                return str.equals("FAIS")
+                        || str.equals("FAIF")
+                        || str.equals("FAQN")
+                        || str.equals("FAQB")
+                        || str.equals("FAQS");
             }
             return false;
         }
@@ -276,11 +351,14 @@ public final class SemBioAnalyticsManager {
                         String trim = str.substring(indexOf + 5).split("\\|")[0].trim();
                         if (trim.length() > 0) {
                             if (isUsingPackageNameAsExtra(str2)) {
-                                map.put(str2, updateTargetWithSource(trim, (String) entry.getValue()));
+                                map.put(
+                                        str2,
+                                        updateTargetWithSource(trim, (String) entry.getValue()));
                             } else {
                                 int parseInt = Integer.parseInt(trim);
                                 if (((String) entry.getValue()).length() > 0) {
-                                    parseInt += Integer.valueOf((String) entry.getValue()).intValue();
+                                    parseInt +=
+                                            Integer.valueOf((String) entry.getValue()).intValue();
                                 }
                                 map.put(str2, Integer.toString(parseInt));
                             }
@@ -288,7 +366,8 @@ public final class SemBioAnalyticsManager {
                     }
                 }
             } catch (Exception e) {
-                MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("parserAndUpdateMap: "), "BiometricService.AM");
+                MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("parserAndUpdateMap: "), "BiometricService.AM");
             }
         }
 
@@ -337,7 +416,8 @@ public final class SemBioAnalyticsManager {
                 Log.d("BiometricService.AM", "DQAManager.sendFaceBigData: " + str + ":" + str2);
             }
             if (this.mSemHqmManager == null) {
-                this.mSemHqmManager = (SemHqmManager) this.mContext.getSystemService(SemHqmManager.class);
+                this.mSemHqmManager =
+                        (SemHqmManager) this.mContext.getSystemService(SemHqmManager.class);
             }
             SemHqmManager semHqmManager = this.mSemHqmManager;
             if (semHqmManager != null) {
@@ -350,16 +430,21 @@ public final class SemBioAnalyticsManager {
         public final void sendFingerprintBigData(String str, String str2) {
             String m = XmlUtils$$ExternalSyntheticOutline0.m("\"", str, "\":\"", str2, "\"");
             if (SemBioAnalyticsManager.DEBUG) {
-                Log.d("BiometricService.AM", "DQAManager.sendFingerprintBigData: " + str + ":" + str2);
+                Log.d(
+                        "BiometricService.AM",
+                        "DQAManager.sendFingerprintBigData: " + str + ":" + str2);
             }
             if (this.mSemHqmManager == null) {
-                this.mSemHqmManager = (SemHqmManager) this.mContext.getSystemService(SemHqmManager.class);
+                this.mSemHqmManager =
+                        (SemHqmManager) this.mContext.getSystemService(SemHqmManager.class);
             }
             SemHqmManager semHqmManager = this.mSemHqmManager;
             if (semHqmManager != null) {
                 semHqmManager.sendHWParamToHQM(0, "BFS", str, "ph", "0.0", "sec", "", m, "");
             } else {
-                Log.e("BiometricService.AM", "DQAManager.sendFingerprintBigData: SemHqmManager is null!!");
+                Log.e(
+                        "BiometricService.AM",
+                        "DQAManager.sendFingerprintBigData: SemHqmManager is null!!");
             }
         }
 
@@ -459,7 +544,10 @@ public final class SemBioAnalyticsManager {
                 r3.printStackTrace()
                 return r2
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.SemBioAnalyticsManager.DQAManager.updateAppCountNum(java.lang.String, java.lang.String):java.lang.String");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.biometrics.SemBioAnalyticsManager.DQAManager.updateAppCountNum(java.lang.String,"
+                        + " java.lang.String):java.lang.String");
         }
     }
 
@@ -487,7 +575,15 @@ public final class SemBioAnalyticsManager {
         }
 
         public final String toString() {
-            return this.mFeature + ", " + this.mExtra + ", " + this.mExtra2 + "," + this.mValue + ", " + this.mType;
+            return this.mFeature
+                    + ", "
+                    + this.mExtra
+                    + ", "
+                    + this.mExtra2
+                    + ","
+                    + this.mValue
+                    + ", "
+                    + this.mType;
         }
     }
 
@@ -528,15 +624,24 @@ public final class SemBioAnalyticsManager {
             return;
         }
         Intent intent = new Intent();
-        Bundle m142m = AccountManagerService$$ExternalSyntheticOutline0.m142m("tracking_id", "4G2-399-4810151");
+        Bundle m142m =
+                AccountManagerService$$ExternalSyntheticOutline0.m142m(
+                        "tracking_id", "4G2-399-4810151");
         m142m.putString(LauncherConfigurationInternal.KEY_FEATURE_INT, eventData.mFeature);
         String str2 = eventData.mExtra;
         if (str2 != null) {
             m142m.putString("extra", str2);
         }
-        if (eventData.mFeature.equals("FPIS") && (str = eventData.mExtra) != null && ("com.android.vending".equals(str) || "com.samsung.android.spay".equals(str) || "com.paypal.android.p2pmobile".equals(str) || "com.squareup.cash".equals(str) || "com.venmo".equals(str) || "com.zellepay.zell".equals(str))) {
+        if (eventData.mFeature.equals("FPIS")
+                && (str = eventData.mExtra) != null
+                && ("com.android.vending".equals(str)
+                        || "com.samsung.android.spay".equals(str)
+                        || "com.paypal.android.p2pmobile".equals(str)
+                        || "com.squareup.cash".equals(str)
+                        || "com.venmo".equals(str)
+                        || "com.zellepay.zell".equals(str))) {
             HashMap hashMap = new HashMap();
-            hashMap.put("FINGERPRINT_IDENTIFICATION", new String[]{"extra"});
+            hashMap.put("FINGERPRINT_IDENTIFICATION", new String[] {"extra"});
             m142m.putSerializable("personalizedData", hashMap);
         }
         m142m.putString("pkg_name", "com.android.server.biometrics.sensors.fingerprint");

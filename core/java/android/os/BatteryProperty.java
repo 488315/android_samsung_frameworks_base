@@ -1,22 +1,22 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class BatteryProperty implements Parcelable {
-    public static final Parcelable.Creator<BatteryProperty> CREATOR = new Parcelable.Creator<BatteryProperty>() { // from class: android.os.BatteryProperty.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BatteryProperty createFromParcel(Parcel p) {
-            return new BatteryProperty(p);
-        }
+    public static final Parcelable.Creator<BatteryProperty> CREATOR =
+            new Parcelable.Creator<BatteryProperty>() { // from class: android.os.BatteryProperty.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BatteryProperty createFromParcel(Parcel p) {
+                    return new BatteryProperty(p);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BatteryProperty[] newArray(int size) {
-            return new BatteryProperty[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BatteryProperty[] newArray(int size) {
+                    return new BatteryProperty[size];
+                }
+            };
     private long mValueLong;
     private String mValueString;
 

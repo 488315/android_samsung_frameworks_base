@@ -2,6 +2,7 @@ package android.app.usage;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -13,19 +14,20 @@ public final class StorageStats implements Parcelable {
     public static final int APP_DATA_TYPE_FILE_TYPE_DM = 4;
     public static final int APP_DATA_TYPE_FILE_TYPE_REFERENCE_PROFILE = 1;
     public static final int APP_DATA_TYPE_LIB = 5;
-    public static final Parcelable.Creator<StorageStats> CREATOR = new Parcelable.Creator<StorageStats>() { // from class: android.app.usage.StorageStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StorageStats createFromParcel(Parcel in) {
-            return new StorageStats(in);
-        }
+    public static final Parcelable.Creator<StorageStats> CREATOR =
+            new Parcelable.Creator<StorageStats>() { // from class: android.app.usage.StorageStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StorageStats createFromParcel(Parcel in) {
+                    return new StorageStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StorageStats[] newArray(int size) {
-            return new StorageStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StorageStats[] newArray(int size) {
+                    return new StorageStats[size];
+                }
+            };
     public long apkBytes;
     public long cacheBytes;
     public long codeBytes;
@@ -38,8 +40,7 @@ public final class StorageStats implements Parcelable {
     public long refProfBytes;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AppDataType {
-    }
+    public @interface AppDataType {}
 
     public long getAppBytes() {
         return this.codeBytes;
@@ -76,8 +77,7 @@ public final class StorageStats implements Parcelable {
         return this.externalCacheBytes;
     }
 
-    public StorageStats() {
-    }
+    public StorageStats() {}
 
     public StorageStats(Parcel in) {
         this.codeBytes = in.readLong();

@@ -9,7 +9,7 @@ import android.content.pm.ResolveInfo;
 import android.os.IBinder;
 import android.os.Process;
 import android.os.UserManager;
-import com.android.server.wm.ActivityInterceptorCallback;
+
 import com.samsung.android.knox.PersonaManagerInternal;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -40,7 +40,10 @@ public final class ActivityStartInterceptor {
     public int mUserId;
     public UserManager mUserManager;
 
-    public ActivityStartInterceptor(ActivityTaskManagerService activityTaskManagerService, ActivityTaskSupervisor activityTaskSupervisor, Context context) {
+    public ActivityStartInterceptor(
+            ActivityTaskManagerService activityTaskManagerService,
+            ActivityTaskSupervisor activityTaskSupervisor,
+            Context context) {
         this.mService = activityTaskManagerService;
         this.mSupervisor = activityTaskSupervisor;
         this.mServiceContext = context;
@@ -63,24 +66,62 @@ public final class ActivityStartInterceptor {
             taskFragment = taskFragment2;
         } else {
             ActivityOptions activityOptions2 = this.mActivityOptions;
-            if (activityOptions2 != null && (launchTaskFragmentToken = activityOptions2.getLaunchTaskFragmentToken()) != null) {
-                taskFragment = (TaskFragment) this.mService.mWindowOrganizerController.mLaunchTaskFragments.get(launchTaskFragmentToken);
+            if (activityOptions2 != null
+                    && (launchTaskFragmentToken = activityOptions2.getLaunchTaskFragmentToken())
+                            != null) {
+                taskFragment =
+                        (TaskFragment)
+                                this.mService.mWindowOrganizerController.mLaunchTaskFragments.get(
+                                        launchTaskFragmentToken);
             }
         }
         if (taskFragment != null) {
             makeBasic.setLaunchTaskFragmentToken(taskFragment.mFragmentToken);
         }
-        return new IntentSender(this.mService.getIntentSenderLocked(2, i, this.mUserId, 0, i2, makeBasic.toBundle(), null, this.mCallingPackage, this.mCallingFeatureId, null, new Intent[]{this.mIntent}, new String[]{this.mResolvedType}));
+        return new IntentSender(
+                this.mService.getIntentSenderLocked(
+                        2,
+                        i,
+                        this.mUserId,
+                        0,
+                        i2,
+                        makeBasic.toBundle(),
+                        null,
+                        this.mCallingPackage,
+                        this.mCallingFeatureId,
+                        null,
+                        new Intent[] {this.mIntent},
+                        new String[] {this.mResolvedType}));
     }
 
     public final DisplayContent getActualDisplayContent(int i) {
         ActivityTaskManagerService activityTaskManagerService = this.mService;
-        DisplayContent displayContent = activityTaskManagerService.mRootWindowContainer.getDisplayContent(i);
-        return displayContent == null ? activityTaskManagerService.mRootWindowContainer.mDefaultDisplay : displayContent;
+        DisplayContent displayContent =
+                activityTaskManagerService.mRootWindowContainer.getDisplayContent(i);
+        return displayContent == null
+                ? activityTaskManagerService.mRootWindowContainer.mDefaultDisplay
+                : displayContent;
     }
 
-    public final ActivityInterceptorCallback.ActivityInterceptorInfo getInterceptorInfo(ActivityStartInterceptor$$ExternalSyntheticLambda1 activityStartInterceptor$$ExternalSyntheticLambda1) {
-        return new ActivityInterceptorCallback.ActivityInterceptorInfo.Builder(this.mCallingUid, this.mCallingPid, this.mRealCallingUid, this.mRealCallingPid, this.mUserId, this.mIntent, this.mRInfo, this.mAInfo).setResolvedType(this.mResolvedType).setCallingPackage(this.mCallingPackage).setCallingFeatureId(this.mCallingFeatureId).setCheckedOptions(this.mActivityOptions).setClearOptionsAnimationRunnable(activityStartInterceptor$$ExternalSyntheticLambda1).build();
+    public final ActivityInterceptorCallback.ActivityInterceptorInfo getInterceptorInfo(
+            ActivityStartInterceptor$$ExternalSyntheticLambda1
+                    activityStartInterceptor$$ExternalSyntheticLambda1) {
+        return new ActivityInterceptorCallback.ActivityInterceptorInfo.Builder(
+                        this.mCallingUid,
+                        this.mCallingPid,
+                        this.mRealCallingUid,
+                        this.mRealCallingPid,
+                        this.mUserId,
+                        this.mIntent,
+                        this.mRInfo,
+                        this.mAInfo)
+                .setResolvedType(this.mResolvedType)
+                .setCallingPackage(this.mCallingPackage)
+                .setCallingFeatureId(this.mCallingFeatureId)
+                .setCheckedOptions(this.mActivityOptions)
+                .setClearOptionsAnimationRunnable(
+                        activityStartInterceptor$$ExternalSyntheticLambda1)
+                .build();
     }
 
     public final boolean hasAliasActivity(Intent intent) {
@@ -89,8 +130,12 @@ public final class ActivityStartInterceptor {
 
     public final boolean hasCarLifeDisplay() {
         ActivityTaskManagerService activityTaskManagerService = this.mService;
-        for (int childCount = activityTaskManagerService.mRootWindowContainer.getChildCount() - 1; childCount >= 0; childCount--) {
-            if (((DisplayContent) activityTaskManagerService.mRootWindowContainer.getChildAt(childCount)).isCarLifeDisplay()) {
+        for (int childCount = activityTaskManagerService.mRootWindowContainer.getChildCount() - 1;
+                childCount >= 0;
+                childCount--) {
+            if (((DisplayContent)
+                            activityTaskManagerService.mRootWindowContainer.getChildAt(childCount))
+                    .isCarLifeDisplay()) {
                 return true;
             }
         }
@@ -98,13 +143,13 @@ public final class ActivityStartInterceptor {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:101:0x035f, code lost:
-    
-        r1 = true;
-     */
+
+       r1 = true;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:120:0x035d, code lost:
-    
-        if ("android.intent.action.MAIN".equals(r18.mIntent.getAction()) != false) goto L129;
-     */
+
+       if ("android.intent.action.MAIN".equals(r18.mIntent.getAction()) != false) goto L129;
+    */
     /* JADX WARN: Removed duplicated region for block: B:178:0x05a6  */
     /* JADX WARN: Removed duplicated region for block: B:180:0x0694 A[RETURN] */
     /* JADX WARN: Removed duplicated region for block: B:181:0x0696  */
@@ -125,20 +170,39 @@ public final class ActivityStartInterceptor {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean intercept(android.content.Intent r19, android.content.pm.ResolveInfo r20, android.content.pm.ActivityInfo r21, java.lang.String r22, com.android.server.wm.Task r23, com.android.server.wm.TaskFragment r24, int r25, int r26, android.app.ActivityOptions r27, com.android.server.wm.TaskDisplayArea r28) {
+    public final boolean intercept(
+            android.content.Intent r19,
+            android.content.pm.ResolveInfo r20,
+            android.content.pm.ActivityInfo r21,
+            java.lang.String r22,
+            com.android.server.wm.Task r23,
+            com.android.server.wm.TaskFragment r24,
+            int r25,
+            int r26,
+            android.app.ActivityOptions r27,
+            com.android.server.wm.TaskDisplayArea r28) {
         /*
             Method dump skipped, instructions count: 2586
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.ActivityStartInterceptor.intercept(android.content.Intent, android.content.pm.ResolveInfo, android.content.pm.ActivityInfo, java.lang.String, com.android.server.wm.Task, com.android.server.wm.TaskFragment, int, int, android.app.ActivityOptions, com.android.server.wm.TaskDisplayArea):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.ActivityStartInterceptor.intercept(android.content.Intent,"
+                    + " android.content.pm.ResolveInfo, android.content.pm.ActivityInfo,"
+                    + " java.lang.String, com.android.server.wm.Task,"
+                    + " com.android.server.wm.TaskFragment, int, int, android.app.ActivityOptions,"
+                    + " com.android.server.wm.TaskDisplayArea):boolean");
     }
 
     public final void resolveLaunchTaskIdForAliasManagedTarget(Task task) {
         Intent intent = new Intent(this.mIntent);
         intent.setComponent(task.getBaseIntent().getComponent());
         intent.setLaunchTaskIdForAliasManagedTarget(task.mTaskId);
-        ResolveInfo resolveIntent = this.mSupervisor.resolveIntent(intent, this.mResolvedType, this.mUserId, 0, 1000, Process.myPid());
-        ActivityInfo resolveActivity = this.mSupervisor.resolveActivity(intent, resolveIntent, this.mStartFlags, null);
+        ResolveInfo resolveIntent =
+                this.mSupervisor.resolveIntent(
+                        intent, this.mResolvedType, this.mUserId, 0, 1000, Process.myPid());
+        ActivityInfo resolveActivity =
+                this.mSupervisor.resolveActivity(intent, resolveIntent, this.mStartFlags, null);
         if (resolveIntent == null || resolveActivity == null) {
             return;
         }

@@ -6,22 +6,23 @@ public final class IdleScreenRefreshRateTimeout {
     public IdleScreenRefreshRateTimeoutLuxThresholds luxThresholds;
 
     /* JADX WARN: Code restructure failed: missing block: B:75:0x00c9, code lost:
-    
-        if (r1 != 3) goto L49;
-     */
+
+       if (r1 != 3) goto L49;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:76:0x00cb, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:78:0x00d3, code lost:
-    
-        throw new javax.xml.datatype.DatatypeConfigurationException("IdleScreenRefreshRateTimeout is not closed");
-     */
+
+       throw new javax.xml.datatype.DatatypeConfigurationException("IdleScreenRefreshRateTimeout is not closed");
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.display.config.IdleScreenRefreshRateTimeout read(org.xmlpull.v1.XmlPullParser r8) {
+    public static com.android.server.display.config.IdleScreenRefreshRateTimeout read(
+            org.xmlpull.v1.XmlPullParser r8) {
         /*
             com.android.server.display.config.IdleScreenRefreshRateTimeout r0 = new com.android.server.display.config.IdleScreenRefreshRateTimeout
             r0.<init>()
@@ -129,6 +130,8 @@ public final class IdleScreenRefreshRateTimeout {
             r8.<init>(r0)
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.config.IdleScreenRefreshRateTimeout.read(org.xmlpull.v1.XmlPullParser):com.android.server.display.config.IdleScreenRefreshRateTimeout");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.config.IdleScreenRefreshRateTimeout.read(org.xmlpull.v1.XmlPullParser):com.android.server.display.config.IdleScreenRefreshRateTimeout");
     }
 }

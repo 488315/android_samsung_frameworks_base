@@ -15,8 +15,7 @@ public interface ILocalWallpaperColorConsumer extends IInterface {
 
     public static class Default implements ILocalWallpaperColorConsumer {
         @Override // android.app.ILocalWallpaperColorConsumer
-        public void onColorsChanged(RectF area, WallpaperColors colors) throws RemoteException {
-        }
+        public void onColorsChanged(RectF area, WallpaperColors colors) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +23,7 @@ public interface ILocalWallpaperColorConsumer extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILocalWallpaperColorConsumer {
+    public abstract static class Stub extends Binder implements ILocalWallpaperColorConsumer {
         static final int TRANSACTION_onColorsChanged = 1;
 
         public Stub() {
@@ -62,7 +61,8 @@ public interface ILocalWallpaperColorConsumer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ILocalWallpaperColorConsumer.DESCRIPTOR);
             }
@@ -73,7 +73,8 @@ public interface ILocalWallpaperColorConsumer extends IInterface {
             switch (code) {
                 case 1:
                     RectF _arg0 = (RectF) data.readTypedObject(RectF.CREATOR);
-                    WallpaperColors _arg1 = (WallpaperColors) data.readTypedObject(WallpaperColors.CREATOR);
+                    WallpaperColors _arg1 =
+                            (WallpaperColors) data.readTypedObject(WallpaperColors.CREATOR);
                     data.enforceNoDataAvail();
                     onColorsChanged(_arg0, _arg1);
                     return true;

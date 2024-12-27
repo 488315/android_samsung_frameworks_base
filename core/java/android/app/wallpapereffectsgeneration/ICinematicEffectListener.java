@@ -8,14 +8,16 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface ICinematicEffectListener extends IInterface {
-    public static final String DESCRIPTOR = "android.app.wallpapereffectsgeneration.ICinematicEffectListener";
+    public static final String DESCRIPTOR =
+            "android.app.wallpapereffectsgeneration.ICinematicEffectListener";
 
-    void onCinematicEffectGenerated(CinematicEffectResponse cinematicEffectResponse) throws RemoteException;
+    void onCinematicEffectGenerated(CinematicEffectResponse cinematicEffectResponse)
+            throws RemoteException;
 
     public static class Default implements ICinematicEffectListener {
         @Override // android.app.wallpapereffectsgeneration.ICinematicEffectListener
-        public void onCinematicEffectGenerated(CinematicEffectResponse response) throws RemoteException {
-        }
+        public void onCinematicEffectGenerated(CinematicEffectResponse response)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,7 @@ public interface ICinematicEffectListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICinematicEffectListener {
+    public abstract static class Stub extends Binder implements ICinematicEffectListener {
         static final int TRANSACTION_onCinematicEffectGenerated = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface ICinematicEffectListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICinematicEffectListener.DESCRIPTOR);
             }
@@ -71,7 +74,9 @@ public interface ICinematicEffectListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    CinematicEffectResponse _arg0 = (CinematicEffectResponse) data.readTypedObject(CinematicEffectResponse.CREATOR);
+                    CinematicEffectResponse _arg0 =
+                            (CinematicEffectResponse)
+                                    data.readTypedObject(CinematicEffectResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onCinematicEffectGenerated(_arg0);
                     return true;
@@ -97,7 +102,8 @@ public interface ICinematicEffectListener extends IInterface {
             }
 
             @Override // android.app.wallpapereffectsgeneration.ICinematicEffectListener
-            public void onCinematicEffectGenerated(CinematicEffectResponse response) throws RemoteException {
+            public void onCinematicEffectGenerated(CinematicEffectResponse response)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICinematicEffectListener.DESCRIPTOR);

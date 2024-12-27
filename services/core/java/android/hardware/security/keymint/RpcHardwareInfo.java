@@ -41,13 +41,16 @@ public final class RpcHardwareInfo implements Parcelable {
                                 if (parcel.dataPosition() - dataPosition < readInt) {
                                     rpcHardwareInfo.supportedNumKeysInCsr = parcel.readInt();
                                     if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -92,7 +95,9 @@ public final class RpcHardwareInfo implements Parcelable {
         parcel.writeString(this.rpcAuthorName);
         parcel.writeInt(this.supportedEekCurve);
         parcel.writeString(this.uniqueId);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.supportedNumKeysInCsr, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.supportedNumKeysInCsr, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

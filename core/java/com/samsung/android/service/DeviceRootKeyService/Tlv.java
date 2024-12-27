@@ -56,13 +56,21 @@ public final class Tlv {
         byte[] result = new byte[this.mTotalLength + 3];
         result[0] = -2;
         int offset = 0 + 1;
-        byte[] totLen = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN).putShort((short) this.mTotalLength).array();
+        byte[] totLen =
+                ByteBuffer.allocate(2)
+                        .order(ByteOrder.LITTLE_ENDIAN)
+                        .putShort((short) this.mTotalLength)
+                        .array();
         System.arraycopy(totLen, 0, result, offset, totLen.length);
         int offset2 = offset + 2;
         Set<Integer> keys = this.mTlvList.keySet();
         for (Integer key : keys) {
             byte[] tlvValue = this.mTlvList.get(key);
-            byte[] tlvLen = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN).putShort((short) tlvValue.length).array();
+            byte[] tlvLen =
+                    ByteBuffer.allocate(2)
+                            .order(ByteOrder.LITTLE_ENDIAN)
+                            .putShort((short) tlvValue.length)
+                            .array();
             result[offset2] = key.byteValue();
             int offset3 = offset2 + 1;
             System.arraycopy(tlvLen, 0, result, offset3, tlvLen.length);
@@ -79,13 +87,19 @@ public final class Tlv {
             return null;
         }
         int parsed = 0 + 1;
-        short totLen = ByteBuffer.wrap(buffer, offset + parsed, 2).order(ByteOrder.LITTLE_ENDIAN).getShort();
+        short totLen =
+                ByteBuffer.wrap(buffer, offset + parsed, 2)
+                        .order(ByteOrder.LITTLE_ENDIAN)
+                        .getShort();
         int parsed2 = parsed + 2;
         lcTlv.setTotalSize(totLen);
         while (parsed2 < length) {
             int tlvTag = Byte.toUnsignedInt(buffer[parsed2]);
             int parsed3 = parsed2 + 1;
-            int i = ByteBuffer.wrap(buffer, offset + parsed3, 2).order(ByteOrder.LITTLE_ENDIAN).getShort();
+            int i =
+                    ByteBuffer.wrap(buffer, offset + parsed3, 2)
+                            .order(ByteOrder.LITTLE_ENDIAN)
+                            .getShort();
             int parsed4 = parsed3 + 2;
             byte[] tlvValue = new byte[i];
             System.arraycopy(buffer, offset + parsed4, tlvValue, 0, i);

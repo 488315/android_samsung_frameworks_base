@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class SmartClipDataExtractionEvent implements Parcelable {
-    public static final Parcelable.Creator<SmartClipDataExtractionEvent> CREATOR = new Parcelable.Creator<SmartClipDataExtractionEvent>() { // from class: com.samsung.android.content.smartclip.SmartClipDataExtractionEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartClipDataExtractionEvent createFromParcel(Parcel in) {
-            SmartClipDataExtractionEvent data = new SmartClipDataExtractionEvent();
-            data.readFromParcel(in);
-            return data;
-        }
+    public static final Parcelable.Creator<SmartClipDataExtractionEvent> CREATOR =
+            new Parcelable.Creator<
+                    SmartClipDataExtractionEvent>() { // from class:
+                                                      // com.samsung.android.content.smartclip.SmartClipDataExtractionEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartClipDataExtractionEvent createFromParcel(Parcel in) {
+                    SmartClipDataExtractionEvent data = new SmartClipDataExtractionEvent();
+                    data.readFromParcel(in);
+                    return data;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartClipDataExtractionEvent[] newArray(int size) {
-            return new SmartClipDataExtractionEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartClipDataExtractionEvent[] newArray(int size) {
+                    return new SmartClipDataExtractionEvent[size];
+                }
+            };
     public static final int EXTRACTION_MODE_DRAG_AND_DROP = 2;
     public static final int EXTRACTION_MODE_FULL_SCREEN = 1;
     public static final int EXTRACTION_MODE_NORMAL = 0;

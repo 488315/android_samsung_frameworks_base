@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.ResultReceiver;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -17,10 +18,10 @@ public final class FailureResult {
     private final String mErrorMessage;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ErrorCode {
-    }
+    public @interface ErrorCode {}
 
-    public static void sendFailureResult(ResultReceiver resultReceiver, FailureResult failureResult) {
+    public static void sendFailureResult(
+            ResultReceiver resultReceiver, FailureResult failureResult) {
         FailureDialogResult result = failureResult.toFailureDialogResult();
         Bundle resultData = new Bundle();
         FailureDialogResult.addToBundle(result, resultData);

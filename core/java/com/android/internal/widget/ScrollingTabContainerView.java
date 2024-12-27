@@ -21,10 +21,12 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+
 import com.android.internal.view.ActionBarPolicy;
 
 /* loaded from: classes5.dex */
-public class ScrollingTabContainerView extends HorizontalScrollView implements AdapterView.OnItemClickListener {
+public class ScrollingTabContainerView extends HorizontalScrollView
+        implements AdapterView.OnItemClickListener {
     private static final int FADE_DURATION = 200;
     private static final String TAG = "ScrollingTabContainerView";
     private static final TimeInterpolator sAlphaInterpolator = new DecelerateInterpolator();
@@ -199,14 +201,20 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
         if (this.mTabSelector != null) {
             removeCallbacks(this.mTabSelector);
         }
-        this.mTabSelector = new Runnable() { // from class: com.android.internal.widget.ScrollingTabContainerView.1
-            @Override // java.lang.Runnable
-            public void run() {
-                int scrollPos = tabView.getLeft() - ((ScrollingTabContainerView.this.getWidth() - tabView.getWidth()) / 2);
-                ScrollingTabContainerView.this.smoothScrollTo(scrollPos, 0);
-                ScrollingTabContainerView.this.mTabSelector = null;
-            }
-        };
+        this.mTabSelector =
+                new Runnable() { // from class:
+                                 // com.android.internal.widget.ScrollingTabContainerView.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        int scrollPos =
+                                tabView.getLeft()
+                                        - ((ScrollingTabContainerView.this.getWidth()
+                                                        - tabView.getWidth())
+                                                / 2);
+                        ScrollingTabContainerView.this.smoothScrollTo(scrollPos, 0);
+                        ScrollingTabContainerView.this.mTabSelector = null;
+                    }
+                };
         post(this.mTabSelector);
     }
 
@@ -343,8 +351,12 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
         @Override // android.widget.LinearLayout, android.view.View
         public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-            if (ScrollingTabContainerView.this.mMaxTabWidth > 0 && getMeasuredWidth() > ScrollingTabContainerView.this.mMaxTabWidth) {
-                super.onMeasure(View.MeasureSpec.makeMeasureSpec(ScrollingTabContainerView.this.mMaxTabWidth, 1073741824), heightMeasureSpec);
+            if (ScrollingTabContainerView.this.mMaxTabWidth > 0
+                    && getMeasuredWidth() > ScrollingTabContainerView.this.mMaxTabWidth) {
+                super.onMeasure(
+                        View.MeasureSpec.makeMeasureSpec(
+                                ScrollingTabContainerView.this.mMaxTabWidth, 1073741824),
+                        heightMeasureSpec);
             }
         }
 
@@ -437,7 +449,8 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
 
         @Override // android.widget.Adapter
         public Object getItem(int position) {
-            return ((TabView) ScrollingTabContainerView.this.mTabLayout.getChildAt(position)).getTab();
+            return ((TabView) ScrollingTabContainerView.this.mTabLayout.getChildAt(position))
+                    .getTab();
         }
 
         @Override // android.widget.Adapter
@@ -448,7 +461,10 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
         @Override // android.widget.Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                return ScrollingTabContainerView.this.createTabView(ScrollingTabContainerView.this.mContext, (ActionBar.Tab) getItem(position), true);
+                return ScrollingTabContainerView.this.createTabView(
+                        ScrollingTabContainerView.this.mContext,
+                        (ActionBar.Tab) getItem(position),
+                        true);
             }
             ((TabView) convertView).bindTab((ActionBar.Tab) getItem(position));
             return convertView;
@@ -457,7 +473,8 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
         @Override // android.widget.BaseAdapter, android.widget.SpinnerAdapter
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                return ScrollingTabContainerView.this.createTabView(this.mDropDownContext, (ActionBar.Tab) getItem(position), true);
+                return ScrollingTabContainerView.this.createTabView(
+                        this.mDropDownContext, (ActionBar.Tab) getItem(position), true);
             }
             ((TabView) convertView).bindTab((ActionBar.Tab) getItem(position));
             return convertView;
@@ -465,8 +482,7 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
     }
 
     private class TabClickListener implements View.OnClickListener {
-        private TabClickListener() {
-        }
+        private TabClickListener() {}
 
         @Override // android.view.View.OnClickListener
         public void onClick(View view) {
@@ -484,8 +500,7 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
         private boolean mCanceled = false;
         private int mFinalVisibility;
 
-        protected VisibilityAnimListener() {
-        }
+        protected VisibilityAnimListener() {}
 
         public VisibilityAnimListener withFinalVisibility(int visibility) {
             this.mFinalVisibility = visibility;
@@ -514,7 +529,6 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
         }
 
         @Override // android.animation.Animator.AnimatorListener
-        public void onAnimationRepeat(Animator animation) {
-        }
+        public void onAnimationRepeat(Animator animation) {}
     }
 }

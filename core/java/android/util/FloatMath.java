@@ -3,8 +3,7 @@ package android.util;
 @Deprecated
 /* loaded from: classes4.dex */
 public class FloatMath {
-    private FloatMath() {
-    }
+    private FloatMath() {}
 
     public static float floor(float value) {
         return (float) Math.floor(value);

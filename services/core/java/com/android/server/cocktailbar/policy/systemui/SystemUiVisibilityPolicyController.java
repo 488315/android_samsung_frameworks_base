@@ -9,8 +9,11 @@ import android.os.Message;
 import android.os.Process;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
+
 import com.samsung.android.cocktailbar.ISystemUiVisibilityCallback;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -44,20 +47,27 @@ public final class SystemUiVisibilityPolicyController {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             boolean z = SystemUiVisibilityPolicyController.DEBUG;
-            SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("handleMessage: entry what = "), message.what, "SystemUiVisibilityPolicyController");
+            SystemServiceManager$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("handleMessage: entry what = "),
+                    message.what,
+                    "SystemUiVisibilityPolicyController");
             int i = message.what;
             if (i == 1) {
-                SystemUiVisibilityPolicyController systemUiVisibilityPolicyController = SystemUiVisibilityPolicyController.this;
+                SystemUiVisibilityPolicyController systemUiVisibilityPolicyController =
+                        SystemUiVisibilityPolicyController.this;
                 int i2 = message.arg1;
                 if (SystemUiVisibilityPolicyController.DEBUG) {
                     systemUiVisibilityPolicyController.getClass();
-                    Slog.i("SystemUiVisibilityPolicyController", "handleUpdateVisibility: visibility = " + i2);
+                    Slog.i(
+                            "SystemUiVisibilityPolicyController",
+                            "handleUpdateVisibility: visibility = " + i2);
                 }
                 synchronized (systemUiVisibilityPolicyController.mStateListeners) {
                     try {
                         Iterator it = systemUiVisibilityPolicyController.mStateListeners.iterator();
                         while (it.hasNext()) {
-                            ((SystemUiVisibilityListenerInfo) it.next()).onSystemUiVisibilityChanged(i2);
+                            ((SystemUiVisibilityListenerInfo) it.next())
+                                    .onSystemUiVisibilityChanged(i2);
                         }
                     } finally {
                     }
@@ -68,10 +78,12 @@ public final class SystemUiVisibilityPolicyController {
                 if (i != 101) {
                     return;
                 }
-                SystemUiVisibilityPolicyController systemUiVisibilityPolicyController2 = SystemUiVisibilityPolicyController.this;
+                SystemUiVisibilityPolicyController systemUiVisibilityPolicyController2 =
+                        SystemUiVisibilityPolicyController.this;
                 synchronized (systemUiVisibilityPolicyController2.mLock) {
                     try {
-                        HandlerThread handlerThread = systemUiVisibilityPolicyController2.mSystemUiVisibilityThread;
+                        HandlerThread handlerThread =
+                                systemUiVisibilityPolicyController2.mSystemUiVisibilityThread;
                         if (handlerThread != null) {
                             handlerThread.quitSafely();
                             systemUiVisibilityPolicyController2.mSystemUiVisibilityThread = null;
@@ -82,12 +94,15 @@ public final class SystemUiVisibilityPolicyController {
                 }
                 return;
             }
-            SystemUiVisibilityPolicyController systemUiVisibilityPolicyController3 = SystemUiVisibilityPolicyController.this;
+            SystemUiVisibilityPolicyController systemUiVisibilityPolicyController3 =
+                    SystemUiVisibilityPolicyController.this;
             IBinder iBinder = (IBinder) message.obj;
             int i3 = message.arg1;
             if (SystemUiVisibilityPolicyController.DEBUG) {
                 systemUiVisibilityPolicyController3.getClass();
-                Slog.i("SystemUiVisibilityPolicyController", "notifySystemUiVisibilityToBinder: visibility = " + i3);
+                Slog.i(
+                        "SystemUiVisibilityPolicyController",
+                        "notifySystemUiVisibilityToBinder: visibility = " + i3);
             }
             synchronized (systemUiVisibilityPolicyController3.mStateListeners) {
                 try {
@@ -96,7 +111,8 @@ public final class SystemUiVisibilityPolicyController {
                         if (!it2.hasNext()) {
                             break;
                         }
-                        SystemUiVisibilityListenerInfo systemUiVisibilityListenerInfo = (SystemUiVisibilityListenerInfo) it2.next();
+                        SystemUiVisibilityListenerInfo systemUiVisibilityListenerInfo =
+                                (SystemUiVisibilityListenerInfo) it2.next();
                         if (iBinder.equals(systemUiVisibilityListenerInfo.token)) {
                             systemUiVisibilityListenerInfo.onSystemUiVisibilityChanged(i3);
                             break;
@@ -131,17 +147,23 @@ public final class SystemUiVisibilityPolicyController {
             IBinder iBinder = this.token;
             if (iBinder == null) {
                 boolean z = SystemUiVisibilityPolicyController.DEBUG;
-                Slog.w("SystemUiVisibilityPolicyController", "onSystemUiVisibilityChanged : token is null");
+                Slog.w(
+                        "SystemUiVisibilityPolicyController",
+                        "onSystemUiVisibilityChanged : token is null");
                 return;
             }
             try {
-                ISystemUiVisibilityCallback asInterface = ISystemUiVisibilityCallback.Stub.asInterface(iBinder);
+                ISystemUiVisibilityCallback asInterface =
+                        ISystemUiVisibilityCallback.Stub.asInterface(iBinder);
                 if (asInterface != null) {
                     asInterface.onSystemUiVisibilityChanged(i);
                 }
             } catch (RemoteException e) {
                 boolean z2 = SystemUiVisibilityPolicyController.DEBUG;
-                Slog.e("SystemUiVisibilityPolicyController", "onSystemUiVisibilityChanged : RemoteException : ", e);
+                Slog.e(
+                        "SystemUiVisibilityPolicyController",
+                        "onSystemUiVisibilityChanged : RemoteException : ",
+                        e);
             }
         }
     }
@@ -152,7 +174,8 @@ public final class SystemUiVisibilityPolicyController {
             this.mSystemUiVisibilityThread = handlerThread;
             handlerThread.start();
             synchronized (this.mLock) {
-                SystemUiVisibilityHandler systemUiVisibilityHandler = new SystemUiVisibilityHandler(this.mSystemUiVisibilityThread.getLooper());
+                SystemUiVisibilityHandler systemUiVisibilityHandler =
+                        new SystemUiVisibilityHandler(this.mSystemUiVisibilityThread.getLooper());
                 this.mSystemUiVisibilityHandler = systemUiVisibilityHandler;
                 systemUiVisibilityHandler.post(new AnonymousClass1());
             }

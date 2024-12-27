@@ -14,7 +14,9 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.utils.ManagedApplicationService;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -43,18 +45,29 @@ public final class EnabledComponentsObserver {
         arraySet.addAll(collection);
     }
 
-    public static ArraySet loadComponentNames(PackageManager packageManager, int i, String str, String str2) {
+    public static ArraySet loadComponentNames(
+            PackageManager packageManager, int i, String str, String str2) {
         ArraySet arraySet = new ArraySet();
-        List queryIntentServicesAsUser = packageManager.queryIntentServicesAsUser(new Intent(str), 786564, i);
+        List queryIntentServicesAsUser =
+                packageManager.queryIntentServicesAsUser(new Intent(str), 786564, i);
         if (queryIntentServicesAsUser != null) {
             int size = queryIntentServicesAsUser.size();
             for (int i2 = 0; i2 < size; i2++) {
-                ServiceInfo serviceInfo = ((ResolveInfo) queryIntentServicesAsUser.get(i2)).serviceInfo;
-                ComponentName componentName = new ComponentName(serviceInfo.packageName, serviceInfo.name);
+                ServiceInfo serviceInfo =
+                        ((ResolveInfo) queryIntentServicesAsUser.get(i2)).serviceInfo;
+                ComponentName componentName =
+                        new ComponentName(serviceInfo.packageName, serviceInfo.name);
                 if (str2.equals(serviceInfo.permission)) {
                     arraySet.add(componentName);
                 } else {
-                    Slog.w("EnabledComponentsObserver", "Skipping service " + serviceInfo.packageName + "/" + serviceInfo.name + ": it does not require the permission " + str2);
+                    Slog.w(
+                            "EnabledComponentsObserver",
+                            "Skipping service "
+                                    + serviceInfo.packageName
+                                    + "/"
+                                    + serviceInfo.name
+                                    + ": it does not require the permission "
+                                    + str2);
                 }
             }
         }
@@ -93,7 +106,8 @@ public final class EnabledComponentsObserver {
     }
 
     public final ArraySet loadComponentNamesFromSetting(int i, String str) {
-        String stringForUser = Settings.Secure.getStringForUser(this.mContext.getContentResolver(), str, i);
+        String stringForUser =
+                Settings.Secure.getStringForUser(this.mContext.getContentResolver(), str, i);
         if (TextUtils.isEmpty(stringForUser)) {
             return new ArraySet();
         }
@@ -115,9 +129,19 @@ public final class EnabledComponentsObserver {
                 this.mInstalledSet.clear();
                 this.mEnabledSet.clear();
                 UserManager userManager = (UserManager) this.mContext.getSystemService("user");
-                for (int i : userManager == null ? null : userManager.getEnabledProfileIds(ActivityManager.getCurrentUser())) {
-                    ArraySet loadComponentNames = loadComponentNames(this.mContext.getPackageManager(), i, this.mServiceName, this.mServicePermission);
-                    ArraySet loadComponentNamesFromSetting = loadComponentNamesFromSetting(i, this.mSettingName);
+                for (int i :
+                        userManager == null
+                                ? null
+                                : userManager.getEnabledProfileIds(
+                                        ActivityManager.getCurrentUser())) {
+                    ArraySet loadComponentNames =
+                            loadComponentNames(
+                                    this.mContext.getPackageManager(),
+                                    i,
+                                    this.mServiceName,
+                                    this.mServicePermission);
+                    ArraySet loadComponentNamesFromSetting =
+                            loadComponentNamesFromSetting(i, this.mSettingName);
                     loadComponentNamesFromSetting.retainAll(loadComponentNames);
                     this.mInstalledSet.put(i, loadComponentNames);
                     this.mEnabledSet.put(i, loadComponentNamesFromSetting);
@@ -130,26 +154,42 @@ public final class EnabledComponentsObserver {
             VrManagerService vrManagerService = (VrManagerService) it.next();
             synchronized (vrManagerService.mLock) {
                 try {
-                    ArraySet enabled = vrManagerService.mComponentObserver.getEnabled(ActivityManager.getCurrentUser());
+                    ArraySet enabled =
+                            vrManagerService.mComponentObserver.getEnabled(
+                                    ActivityManager.getCurrentUser());
                     ArraySet arraySet = new ArraySet();
                     Iterator it2 = enabled.iterator();
                     while (it2.hasNext()) {
                         ComponentName componentName = (ComponentName) it2.next();
                         try {
-                            applicationInfo = vrManagerService.mContext.getPackageManager().getApplicationInfo(componentName.getPackageName(), 128);
+                            applicationInfo =
+                                    vrManagerService
+                                            .mContext
+                                            .getPackageManager()
+                                            .getApplicationInfo(
+                                                    componentName.getPackageName(), 128);
                         } catch (PackageManager.NameNotFoundException unused) {
                             applicationInfo = null;
                         }
-                        if (applicationInfo != null && (applicationInfo.isSystemApp() || applicationInfo.isUpdatedSystemApp())) {
+                        if (applicationInfo != null
+                                && (applicationInfo.isSystemApp()
+                                        || applicationInfo.isUpdatedSystemApp())) {
                             arraySet.add(componentName.getPackageName());
                         }
                     }
                     vrManagerService.mNotifAccessManager.update(arraySet);
                     if (vrManagerService.mVrModeAllowed) {
                         vrManagerService.consumeAndApplyPendingStateLocked(false);
-                        ManagedApplicationService managedApplicationService = vrManagerService.mCurrentVrService;
+                        ManagedApplicationService managedApplicationService =
+                                vrManagerService.mCurrentVrService;
                         if (managedApplicationService != null) {
-                            vrManagerService.updateCurrentVrServiceLocked(vrManagerService.mVrModeEnabled, vrManagerService.mRunning2dInVr, managedApplicationService.mComponent, managedApplicationService.mUserId, vrManagerService.mVrAppProcessId, vrManagerService.mCurrentVrModeComponent);
+                            vrManagerService.updateCurrentVrServiceLocked(
+                                    vrManagerService.mVrModeEnabled,
+                                    vrManagerService.mRunning2dInVr,
+                                    managedApplicationService.mComponent,
+                                    managedApplicationService.mUserId,
+                                    vrManagerService.mVrAppProcessId,
+                                    vrManagerService.mCurrentVrModeComponent);
                         }
                     }
                 } finally {

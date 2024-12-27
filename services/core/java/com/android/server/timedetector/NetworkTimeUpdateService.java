@@ -23,13 +23,16 @@ import android.util.IndentingPrintWriter;
 import android.util.LocalLog;
 import android.util.Log;
 import android.util.NtpTrustedTime;
+
 import com.android.internal.util.DumpUtils;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.datetime.IDateTimePolicy;
 import com.samsung.android.knox.datetime.NtpInfo;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.time.Duration;
@@ -58,7 +61,10 @@ public final class NetworkTimeUpdateService extends Binder {
         public final /* synthetic */ AlarmManager val$alarmManager;
         public final /* synthetic */ TimeDetectorInternal val$timeDetectorInternal;
 
-        public AnonymousClass1(NetworkTimeUpdateService networkTimeUpdateService, AlarmManager alarmManager, TimeDetectorInternal timeDetectorInternal) {
+        public AnonymousClass1(
+                NetworkTimeUpdateService networkTimeUpdateService,
+                AlarmManager alarmManager,
+                TimeDetectorInternal timeDetectorInternal) {
             this.val$alarmManager = alarmManager;
             this.val$timeDetectorInternal = timeDetectorInternal;
             this.mOnAlarmListener = networkTimeUpdateService.new ScheduledRefreshAlarmListener();
@@ -78,14 +84,14 @@ public final class NetworkTimeUpdateService extends Binder {
         @Override // android.database.ContentObserver
         public final void onChange(boolean z) {
             if (Settings.Global.getInt(this.mContext.getContentResolver(), "auto_time", 0) != 0) {
-                NetworkTimeUpdateService.m972$$Nest$monPollNetworkTime(NetworkTimeUpdateService.this, "automatic time enabled");
+                NetworkTimeUpdateService.m972$$Nest$monPollNetworkTime(
+                        NetworkTimeUpdateService.this, "automatic time enabled");
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    interface Engine {
-    }
+    interface Engine {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class EngineImpl implements Engine {
@@ -104,7 +110,13 @@ public final class NetworkTimeUpdateService extends Binder {
             Objects.requireNonNull(supplier);
             this.mElapsedRealtimeMillisSupplier = supplier;
             if (i2 > i) {
-                throw new IllegalArgumentException(DualAppManagerService$$ExternalSyntheticOutline0.m(i2, i, "shortPollingIntervalMillis (", ") > normalPollingIntervalMillis (", ")"));
+                throw new IllegalArgumentException(
+                        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                i2,
+                                i,
+                                "shortPollingIntervalMillis (",
+                                ") > normalPollingIntervalMillis (",
+                                ")"));
             }
             this.mNormalPollingIntervalMillis = i;
             this.mShortPollingIntervalMillis = i2;
@@ -120,13 +132,22 @@ public final class NetworkTimeUpdateService extends Binder {
             return AudioConfig$$ExternalSyntheticOutline0.m(sb, j, ")");
         }
 
-        public static void makeNetworkTimeSuggestion(NtpTrustedTime.TimeResult timeResult, String str, AnonymousClass1 anonymousClass1) {
-            NetworkTimeSuggestion networkTimeSuggestion = new NetworkTimeSuggestion(new UnixEpochTime(timeResult.getElapsedRealtimeMillis(), timeResult.getTimeMillis()), timeResult.getUncertaintyMillis());
+        public static void makeNetworkTimeSuggestion(
+                NtpTrustedTime.TimeResult timeResult, String str, AnonymousClass1 anonymousClass1) {
+            NetworkTimeSuggestion networkTimeSuggestion =
+                    new NetworkTimeSuggestion(
+                            new UnixEpochTime(
+                                    timeResult.getElapsedRealtimeMillis(),
+                                    timeResult.getTimeMillis()),
+                            timeResult.getUncertaintyMillis());
             networkTimeSuggestion.addDebugInfo(str);
             networkTimeSuggestion.addDebugInfo(timeResult.toString());
-            TimeDetectorInternalImpl timeDetectorInternalImpl = (TimeDetectorInternalImpl) anonymousClass1.val$timeDetectorInternal;
+            TimeDetectorInternalImpl timeDetectorInternalImpl =
+                    (TimeDetectorInternalImpl) anonymousClass1.val$timeDetectorInternal;
             timeDetectorInternalImpl.getClass();
-            timeDetectorInternalImpl.mHandler.post(new TimeDetectorInternalImpl$$ExternalSyntheticLambda0(timeDetectorInternalImpl, networkTimeSuggestion, 0));
+            timeDetectorInternalImpl.mHandler.post(
+                    new TimeDetectorInternalImpl$$ExternalSyntheticLambda0(
+                            timeDetectorInternalImpl, networkTimeSuggestion, 0));
         }
 
         public final void logToDebugAndDumpsys(String str) {
@@ -144,25 +165,32 @@ public final class NetworkTimeUpdateService extends Binder {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void refreshAndRescheduleIfRequired(android.net.Network r25, java.lang.String r26, com.android.server.timedetector.NetworkTimeUpdateService.AnonymousClass1 r27) {
+        public final void refreshAndRescheduleIfRequired(
+                android.net.Network r25,
+                java.lang.String r26,
+                com.android.server.timedetector.NetworkTimeUpdateService.AnonymousClass1 r27) {
             /*
                 Method dump skipped, instructions count: 426
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.timedetector.NetworkTimeUpdateService.EngineImpl.refreshAndRescheduleIfRequired(android.net.Network, java.lang.String, com.android.server.timedetector.NetworkTimeUpdateService$1):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.timedetector.NetworkTimeUpdateService.EngineImpl.refreshAndRescheduleIfRequired(android.net.Network,"
+                        + " java.lang.String,"
+                        + " com.android.server.timedetector.NetworkTimeUpdateService$1):void");
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MDMReceiver extends BroadcastReceiver implements Runnable {
-        public MDMReceiver() {
-        }
+        public MDMReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Log.v("NetworkTimeUpdateService", "onReceive + intent " + intent.getAction());
-            if (!"com.samsung.android.knox.intent.action.UPDATE_NTP_PARAMETERS_INTERNAL".equals(action)) {
+            if (!"com.samsung.android.knox.intent.action.UPDATE_NTP_PARAMETERS_INTERNAL"
+                    .equals(action)) {
                 if ("android.intent.action.BOOT_COMPLETED".equals(action)) {
                     NetworkTimeUpdateService.mBootCompleted = true;
                     return;
@@ -175,7 +203,9 @@ public final class NetworkTimeUpdateService extends Binder {
             engineImpl.getClass();
             NtpInfo ntpInfo = null;
             try {
-                IDateTimePolicy asInterface = IDateTimePolicy.Stub.asInterface(ServiceManager.getService("date_time_policy"));
+                IDateTimePolicy asInterface =
+                        IDateTimePolicy.Stub.asInterface(
+                                ServiceManager.getService("date_time_policy"));
                 if (asInterface != null) {
                     ntpInfo = asInterface.getNtpInfo(new ContextInfo(Binder.getCallingUid()));
                 }
@@ -183,27 +213,38 @@ public final class NetworkTimeUpdateService extends Binder {
             }
             if (ntpInfo == null || ntpInfo.getServer() == null) {
                 EngineImpl.mNtpSetByMDM = false;
-                engineImpl.mNormalPollingIntervalMillis = context2.getResources().getInteger(R.integer.config_screenBrightnessDoze);
-                engineImpl.mShortPollingIntervalMillis = context2.getResources().getInteger(R.integer.config_screenBrightnessSettingDefault);
-                engineImpl.mTryAgainTimesMax = context2.getResources().getInteger(R.integer.config_screenBrightnessSettingMaximum);
+                engineImpl.mNormalPollingIntervalMillis =
+                        context2.getResources().getInteger(R.integer.config_screenBrightnessDoze);
+                engineImpl.mShortPollingIntervalMillis =
+                        context2.getResources()
+                                .getInteger(R.integer.config_screenBrightnessSettingDefault);
+                engineImpl.mTryAgainTimesMax =
+                        context2.getResources()
+                                .getInteger(R.integer.config_screenBrightnessSettingMaximum);
             } else {
                 long pollingInterval = ntpInfo.getPollingInterval();
                 if (0 != pollingInterval) {
                     engineImpl.mNormalPollingIntervalMillis = (int) pollingInterval;
                 } else {
-                    engineImpl.mNormalPollingIntervalMillis = context2.getResources().getInteger(R.integer.config_screenBrightnessDoze);
+                    engineImpl.mNormalPollingIntervalMillis =
+                            context2.getResources()
+                                    .getInteger(R.integer.config_screenBrightnessDoze);
                 }
                 long pollingInterval2 = ntpInfo.getPollingInterval();
                 if (0 != pollingInterval2) {
                     engineImpl.mShortPollingIntervalMillis = (int) pollingInterval2;
                 } else {
-                    engineImpl.mShortPollingIntervalMillis = context2.getResources().getInteger(R.integer.config_screenBrightnessSettingDefault);
+                    engineImpl.mShortPollingIntervalMillis =
+                            context2.getResources()
+                                    .getInteger(R.integer.config_screenBrightnessSettingDefault);
                 }
                 int maxAttempts = ntpInfo.getMaxAttempts();
                 if (maxAttempts != 0) {
                     engineImpl.mTryAgainTimesMax = maxAttempts;
                 } else {
-                    engineImpl.mTryAgainTimesMax = context2.getResources().getInteger(R.integer.config_screenBrightnessSettingMaximum);
+                    engineImpl.mTryAgainTimesMax =
+                            context2.getResources()
+                                    .getInteger(R.integer.config_screenBrightnessSettingMaximum);
                 }
                 EngineImpl.mNtpSetByMDM = true;
                 engineImpl.mTryAgainCounter = 0;
@@ -213,24 +254,27 @@ public final class NetworkTimeUpdateService extends Binder {
 
         @Override // java.lang.Runnable
         public final void run() {
-            NetworkTimeUpdateService.m972$$Nest$monPollNetworkTime(NetworkTimeUpdateService.this, "NTP_PARAMETERS_UPDATED");
+            NetworkTimeUpdateService.m972$$Nest$monPollNetworkTime(
+                    NetworkTimeUpdateService.this, "NTP_PARAMETERS_UPDATED");
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkConnectivityCallback extends ConnectivityManager.NetworkCallback {
-        public NetworkConnectivityCallback() {
-        }
+        public NetworkConnectivityCallback() {}
 
         @Override // android.net.ConnectivityManager.NetworkCallback
         public final void onAvailable(Network network) {
             NetworkTimeUpdateService networkTimeUpdateService;
-            Log.d("NetworkTimeUpdateService", String.format("New default network %s; checking time.", network));
+            Log.d(
+                    "NetworkTimeUpdateService",
+                    String.format("New default network %s; checking time.", network));
             synchronized (NetworkTimeUpdateService.this.mLock) {
                 networkTimeUpdateService = NetworkTimeUpdateService.this;
                 networkTimeUpdateService.mDefaultNetwork = network;
             }
-            NetworkTimeUpdateService.m972$$Nest$monPollNetworkTime(networkTimeUpdateService, "network available");
+            NetworkTimeUpdateService.m972$$Nest$monPollNetworkTime(
+                    networkTimeUpdateService, "network available");
         }
 
         @Override // android.net.ConnectivityManager.NetworkCallback
@@ -248,9 +292,9 @@ public final class NetworkTimeUpdateService extends Binder {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class ScheduledRefreshAlarmListener implements AlarmManager.OnAlarmListener, Runnable {
-        public ScheduledRefreshAlarmListener() {
-        }
+    public final class ScheduledRefreshAlarmListener
+            implements AlarmManager.OnAlarmListener, Runnable {
+        public ScheduledRefreshAlarmListener() {}
 
         @Override // android.app.AlarmManager.OnAlarmListener
         public final void onAlarm() {
@@ -259,19 +303,22 @@ public final class NetworkTimeUpdateService extends Binder {
 
         @Override // java.lang.Runnable
         public final void run() {
-            NetworkTimeUpdateService.m972$$Nest$monPollNetworkTime(NetworkTimeUpdateService.this, "scheduled refresh");
+            NetworkTimeUpdateService.m972$$Nest$monPollNetworkTime(
+                    NetworkTimeUpdateService.this, "scheduled refresh");
         }
     }
 
     /* renamed from: -$$Nest$monPollNetworkTime, reason: not valid java name */
-    public static void m972$$Nest$monPollNetworkTime(NetworkTimeUpdateService networkTimeUpdateService, String str) {
+    public static void m972$$Nest$monPollNetworkTime(
+            NetworkTimeUpdateService networkTimeUpdateService, String str) {
         Network network;
         synchronized (networkTimeUpdateService.mLock) {
             network = networkTimeUpdateService.mDefaultNetwork;
         }
         networkTimeUpdateService.mWakeLock.acquire();
         try {
-            networkTimeUpdateService.mEngine.refreshAndRescheduleIfRequired(network, str, networkTimeUpdateService.mRefreshCallbacks);
+            networkTimeUpdateService.mEngine.refreshAndRescheduleIfRequired(
+                    network, str, networkTimeUpdateService.mRefreshCallbacks);
         } finally {
             networkTimeUpdateService.mWakeLock.release();
         }
@@ -281,11 +328,26 @@ public final class NetworkTimeUpdateService extends Binder {
         Objects.requireNonNull(context);
         this.mContext = context;
         this.mCM = (ConnectivityManager) context.getSystemService(ConnectivityManager.class);
-        this.mWakeLock = ((PowerManager) context.getSystemService(PowerManager.class)).newWakeLock(1, "NetworkTimeUpdateService");
+        this.mWakeLock =
+                ((PowerManager) context.getSystemService(PowerManager.class))
+                        .newWakeLock(1, "NetworkTimeUpdateService");
         NtpTrustedTime ntpTrustedTime = NtpTrustedTime.getInstance(context);
         this.mNtpTrustedTime = ntpTrustedTime;
-        this.mEngine = new EngineImpl(new NetworkTimeUpdateService$$ExternalSyntheticLambda0(), context.getResources().getInteger(R.integer.config_screenBrightnessDoze), context.getResources().getInteger(R.integer.config_screenBrightnessSettingDefault), context.getResources().getInteger(R.integer.config_screenBrightnessSettingMaximum), ntpTrustedTime);
-        this.mRefreshCallbacks = new AnonymousClass1(this, (AlarmManager) context.getSystemService(AlarmManager.class), (TimeDetectorInternal) LocalServices.getService(TimeDetectorInternal.class));
+        this.mEngine =
+                new EngineImpl(
+                        new NetworkTimeUpdateService$$ExternalSyntheticLambda0(),
+                        context.getResources().getInteger(R.integer.config_screenBrightnessDoze),
+                        context.getResources()
+                                .getInteger(R.integer.config_screenBrightnessSettingDefault),
+                        context.getResources()
+                                .getInteger(R.integer.config_screenBrightnessSettingMaximum),
+                        ntpTrustedTime);
+        this.mRefreshCallbacks =
+                new AnonymousClass1(
+                        this,
+                        (AlarmManager) context.getSystemService(AlarmManager.class),
+                        (TimeDetectorInternal)
+                                LocalServices.getService(TimeDetectorInternal.class));
         HandlerThread handlerThread = new HandlerThread("NetworkTimeUpdateService");
         handlerThread.start();
         this.mHandler = handlerThread.getThreadHandler();
@@ -301,7 +363,8 @@ public final class NetworkTimeUpdateService extends Binder {
     }
 
     @Override // android.os.Binder
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (DumpUtils.checkDumpPermission(this.mContext, "NetworkTimeUpdateService", printWriter)) {
             synchronized (this.mLock) {
                 printWriter.println("mDefaultNetwork=" + this.mDefaultNetwork);
@@ -309,13 +372,20 @@ public final class NetworkTimeUpdateService extends Binder {
             EngineImpl engineImpl = this.mEngine;
             engineImpl.getClass();
             IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter);
-            indentingPrintWriter.println("mNormalPollingIntervalMillis=" + engineImpl.mNormalPollingIntervalMillis);
-            indentingPrintWriter.println("mShortPollingIntervalMillis=" + engineImpl.mShortPollingIntervalMillis);
+            indentingPrintWriter.println(
+                    "mNormalPollingIntervalMillis=" + engineImpl.mNormalPollingIntervalMillis);
+            indentingPrintWriter.println(
+                    "mShortPollingIntervalMillis=" + engineImpl.mShortPollingIntervalMillis);
             indentingPrintWriter.println("mTryAgainTimesMax=" + engineImpl.mTryAgainTimesMax);
             synchronized (engineImpl) {
                 try {
                     Long l = engineImpl.mLastRefreshAttemptElapsedRealtimeMillis;
-                    indentingPrintWriter.println("mLastRefreshAttemptElapsedRealtimeMillis=" + (l == null ? "null" : EngineImpl.formatElapsedRealtimeMillis(l.longValue())));
+                    indentingPrintWriter.println(
+                            "mLastRefreshAttemptElapsedRealtimeMillis="
+                                    + (l == null
+                                            ? "null"
+                                            : EngineImpl.formatElapsedRealtimeMillis(
+                                                    l.longValue())));
                     indentingPrintWriter.println("mTryAgainCounter=" + engineImpl.mTryAgainCounter);
                 } catch (Throwable th) {
                     throw th;
@@ -337,12 +407,27 @@ public final class NetworkTimeUpdateService extends Binder {
         }
     }
 
-    public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-        new NetworkTimeUpdateServiceShellCommand(this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+    public final void onShellCommand(
+            FileDescriptor fileDescriptor,
+            FileDescriptor fileDescriptor2,
+            FileDescriptor fileDescriptor3,
+            String[] strArr,
+            ShellCallback shellCallback,
+            ResultReceiver resultReceiver) {
+        new NetworkTimeUpdateServiceShellCommand(this)
+                .exec(
+                        this,
+                        fileDescriptor,
+                        fileDescriptor2,
+                        fileDescriptor3,
+                        strArr,
+                        shellCallback,
+                        resultReceiver);
     }
 
     public final void setServerConfigForTests(NtpTrustedTime.NtpConfig ntpConfig) {
-        this.mContext.enforceCallingPermission("android.permission.SET_TIME", "set NTP server config for tests");
+        this.mContext.enforceCallingPermission(
+                "android.permission.SET_TIME", "set NTP server config for tests");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mNtpTrustedTime.setServerConfigForTests(ntpConfig);
@@ -353,7 +438,16 @@ public final class NetworkTimeUpdateService extends Binder {
 
     public final void systemRunning() {
         this.mCM.registerDefaultNetworkCallback(new NetworkConnectivityCallback(), this.mHandler);
-        this.mContext.registerReceiver(new MDMReceiver(), DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("com.samsung.android.knox.intent.action.UPDATE_NTP_PARAMETERS_INTERNAL", "android.intent.action.BOOT_COMPLETED"));
-        this.mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor("auto_time"), false, new AutoTimeSettingObserver(this.mHandler, this.mContext));
+        this.mContext.registerReceiver(
+                new MDMReceiver(),
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        "com.samsung.android.knox.intent.action.UPDATE_NTP_PARAMETERS_INTERNAL",
+                        "android.intent.action.BOOT_COMPLETED"));
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        Settings.Global.getUriFor("auto_time"),
+                        false,
+                        new AutoTimeSettingObserver(this.mHandler, this.mContext));
     }
 }

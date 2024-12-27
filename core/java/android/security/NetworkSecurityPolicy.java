@@ -9,8 +9,7 @@ import android.security.net.config.ManifestConfigSource;
 public class NetworkSecurityPolicy {
     private static final NetworkSecurityPolicy INSTANCE = new NetworkSecurityPolicy();
 
-    private NetworkSecurityPolicy() {
-    }
+    private NetworkSecurityPolicy() {}
 
     public static NetworkSecurityPolicy getInstance() {
         return INSTANCE;
@@ -21,7 +20,8 @@ public class NetworkSecurityPolicy {
     }
 
     public boolean isCleartextTrafficPermitted(String hostname) {
-        return libcore.net.NetworkSecurityPolicy.getInstance().isCleartextTrafficPermitted(hostname);
+        return libcore.net.NetworkSecurityPolicy.getInstance()
+                .isCleartextTrafficPermitted(hostname);
     }
 
     public void setCleartextTrafficPermitted(boolean permitted) {
@@ -30,7 +30,8 @@ public class NetworkSecurityPolicy {
     }
 
     public boolean isCertificateTransparencyVerificationRequired(String hostname) {
-        return libcore.net.NetworkSecurityPolicy.getInstance().isCertificateTransparencyVerificationRequired(hostname);
+        return libcore.net.NetworkSecurityPolicy.getInstance()
+                .isCertificateTransparencyVerificationRequired(hostname);
     }
 
     public void handleTrustStorageUpdate() {
@@ -40,7 +41,8 @@ public class NetworkSecurityPolicy {
         }
     }
 
-    public static ApplicationConfig getApplicationConfigForPackage(Context context, String packageName) throws PackageManager.NameNotFoundException {
+    public static ApplicationConfig getApplicationConfigForPackage(
+            Context context, String packageName) throws PackageManager.NameNotFoundException {
         Context appContext = context.createPackageContext(packageName, 0);
         ManifestConfigSource source = new ManifestConfigSource(appContext);
         return new ApplicationConfig(source);

@@ -6,7 +6,9 @@ import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+
 import com.samsung.android.wallpaperbackup.GenerateXML;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -40,7 +42,8 @@ public class LayoutTransition {
     private ArrayList<TransitionListener> mListeners;
     private long staggerDelay;
     private static long DEFAULT_DURATION = 300;
-    private static TimeInterpolator ACCEL_DECEL_INTERPOLATOR = new AccelerateDecelerateInterpolator();
+    private static TimeInterpolator ACCEL_DECEL_INTERPOLATOR =
+            new AccelerateDecelerateInterpolator();
     private static TimeInterpolator DECEL_INTERPOLATOR = new DecelerateInterpolator();
     private static TimeInterpolator sAppearingInterpolator = ACCEL_DECEL_INTERPOLATOR;
     private static TimeInterpolator sDisappearingInterpolator = ACCEL_DECEL_INTERPOLATOR;
@@ -68,15 +71,19 @@ public class LayoutTransition {
     private final HashMap<View, Animator> pendingAnimations = new HashMap<>();
     private final LinkedHashMap<View, Animator> currentChangingAnimations = new LinkedHashMap<>();
     private final LinkedHashMap<View, Animator> currentAppearingAnimations = new LinkedHashMap<>();
-    private final LinkedHashMap<View, Animator> currentDisappearingAnimations = new LinkedHashMap<>();
-    private final HashMap<View, View.OnLayoutChangeListener> layoutChangeListenerMap = new HashMap<>();
+    private final LinkedHashMap<View, Animator> currentDisappearingAnimations =
+            new LinkedHashMap<>();
+    private final HashMap<View, View.OnLayoutChangeListener> layoutChangeListenerMap =
+            new HashMap<>();
     private int mTransitionTypes = 15;
     private boolean mAnimateParentHierarchy = true;
 
     public interface TransitionListener {
-        void endTransition(LayoutTransition layoutTransition, ViewGroup viewGroup, View view, int i);
+        void endTransition(
+                LayoutTransition layoutTransition, ViewGroup viewGroup, View view, int i);
 
-        void startTransition(LayoutTransition layoutTransition, ViewGroup viewGroup, View view, int i);
+        void startTransition(
+                LayoutTransition layoutTransition, ViewGroup viewGroup, View view, int i);
     }
 
     public LayoutTransition() {
@@ -92,7 +99,9 @@ public class LayoutTransition {
             PropertyValuesHolder pvhBottom = PropertyValuesHolder.ofInt(GenerateXML.BOTTOM, 0, 1);
             PropertyValuesHolder pvhScrollX = PropertyValuesHolder.ofInt("scrollX", 0, 1);
             PropertyValuesHolder pvhScrollY = PropertyValuesHolder.ofInt("scrollY", 0, 1);
-            defaultChangeIn = ObjectAnimator.ofPropertyValuesHolder(null, pvhLeft, pvhTop, pvhRight, pvhBottom, pvhScrollX, pvhScrollY);
+            defaultChangeIn =
+                    ObjectAnimator.ofPropertyValuesHolder(
+                            null, pvhLeft, pvhTop, pvhRight, pvhBottom, pvhScrollX, pvhScrollY);
             defaultChangeIn.setDuration(DEFAULT_DURATION);
             defaultChangeIn.setStartDelay(this.mChangingAppearingDelay);
             defaultChangeIn.setInterpolator(this.mChangingAppearingInterpolator);
@@ -413,7 +422,12 @@ public class LayoutTransition {
                 while (tempParent != null) {
                     ViewParent parentParent = tempParent.getParent();
                     if (parentParent instanceof ViewGroup) {
-                        setupChangeAnimation((ViewGroup) parentParent, changeReason, parentAnimator, duration, tempParent);
+                        setupChangeAnimation(
+                                (ViewGroup) parentParent,
+                                changeReason,
+                                parentAnimator,
+                                duration,
+                                tempParent);
                         tempParent = (ViewGroup) parentParent;
                     } else {
                         tempParent = null;
@@ -430,7 +444,12 @@ public class LayoutTransition {
         this.mAnimateParentHierarchy = animateParentHierarchy;
     }
 
-    private void setupChangeAnimation(final ViewGroup parent, final int changeReason, Animator baseAnimator, final long duration, final View child) {
+    private void setupChangeAnimation(
+            final ViewGroup parent,
+            final int changeReason,
+            Animator baseAnimator,
+            final long duration,
+            final View child) {
         if (this.layoutChangeListenerMap.get(child) != null) {
             return;
         }
@@ -446,135 +465,182 @@ public class LayoutTransition {
             this.pendingAnimations.remove(child);
         }
         this.pendingAnimations.put(child, anim);
-        ValueAnimator pendingAnimRemover = ValueAnimator.ofFloat(0.0f, 1.0f).setDuration(duration + 100);
-        pendingAnimRemover.addListener(new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.1
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                LayoutTransition.this.pendingAnimations.remove(child);
-            }
-        });
+        ValueAnimator pendingAnimRemover =
+                ValueAnimator.ofFloat(0.0f, 1.0f).setDuration(duration + 100);
+        pendingAnimRemover.addListener(
+                new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.1
+                    @Override // android.animation.AnimatorListenerAdapter,
+                    // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        LayoutTransition.this.pendingAnimations.remove(child);
+                    }
+                });
         pendingAnimRemover.start();
-        final View.OnLayoutChangeListener listener = new View.OnLayoutChangeListener() { // from class: android.animation.LayoutTransition.2
-            @Override // android.view.View.OnLayoutChangeListener
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                anim.setupEndValues();
-                if (anim instanceof ValueAnimator) {
-                    boolean valuesDiffer = false;
-                    ValueAnimator valueAnim = (ValueAnimator) anim;
-                    PropertyValuesHolder[] oldValues = valueAnim.getValues();
-                    for (PropertyValuesHolder pvh : oldValues) {
-                        if (pvh.mKeyframes instanceof KeyframeSet) {
-                            KeyframeSet keyframeSet = (KeyframeSet) pvh.mKeyframes;
-                            if (keyframeSet.mFirstKeyframe == null || keyframeSet.mLastKeyframe == null || !keyframeSet.mFirstKeyframe.getValue().equals(keyframeSet.mLastKeyframe.getValue())) {
-                                valuesDiffer = true;
+        final View.OnLayoutChangeListener listener =
+                new View.OnLayoutChangeListener() { // from class:
+                    // android.animation.LayoutTransition.2
+                    @Override // android.view.View.OnLayoutChangeListener
+                    public void onLayoutChange(
+                            View v,
+                            int left,
+                            int top,
+                            int right,
+                            int bottom,
+                            int oldLeft,
+                            int oldTop,
+                            int oldRight,
+                            int oldBottom) {
+                        anim.setupEndValues();
+                        if (anim instanceof ValueAnimator) {
+                            boolean valuesDiffer = false;
+                            ValueAnimator valueAnim = (ValueAnimator) anim;
+                            PropertyValuesHolder[] oldValues = valueAnim.getValues();
+                            for (PropertyValuesHolder pvh : oldValues) {
+                                if (pvh.mKeyframes instanceof KeyframeSet) {
+                                    KeyframeSet keyframeSet = (KeyframeSet) pvh.mKeyframes;
+                                    if (keyframeSet.mFirstKeyframe == null
+                                            || keyframeSet.mLastKeyframe == null
+                                            || !keyframeSet
+                                                    .mFirstKeyframe
+                                                    .getValue()
+                                                    .equals(keyframeSet.mLastKeyframe.getValue())) {
+                                        valuesDiffer = true;
+                                    }
+                                } else if (!pvh.mKeyframes
+                                        .getValue(0.0f)
+                                        .equals(pvh.mKeyframes.getValue(1.0f))) {
+                                    valuesDiffer = true;
+                                }
                             }
-                        } else if (!pvh.mKeyframes.getValue(0.0f).equals(pvh.mKeyframes.getValue(1.0f))) {
-                            valuesDiffer = true;
+                            if (!valuesDiffer) {
+                                return;
+                            }
+                        }
+                        long startDelay = 0;
+                        switch (changeReason) {
+                            case 2:
+                                startDelay =
+                                        LayoutTransition.this.mChangingAppearingDelay
+                                                + LayoutTransition.this.staggerDelay;
+                                LayoutTransition.this.staggerDelay +=
+                                        LayoutTransition.this.mChangingAppearingStagger;
+                                if (LayoutTransition.this.mChangingAppearingInterpolator
+                                        != LayoutTransition.sChangingAppearingInterpolator) {
+                                    anim.setInterpolator(
+                                            LayoutTransition.this.mChangingAppearingInterpolator);
+                                    break;
+                                }
+                                break;
+                            case 3:
+                                startDelay =
+                                        LayoutTransition.this.mChangingDisappearingDelay
+                                                + LayoutTransition.this.staggerDelay;
+                                LayoutTransition.this.staggerDelay +=
+                                        LayoutTransition.this.mChangingDisappearingStagger;
+                                if (LayoutTransition.this.mChangingDisappearingInterpolator
+                                        != LayoutTransition.sChangingDisappearingInterpolator) {
+                                    anim.setInterpolator(
+                                            LayoutTransition.this
+                                                    .mChangingDisappearingInterpolator);
+                                    break;
+                                }
+                                break;
+                            case 4:
+                                startDelay =
+                                        LayoutTransition.this.mChangingDelay
+                                                + LayoutTransition.this.staggerDelay;
+                                LayoutTransition.this.staggerDelay +=
+                                        LayoutTransition.this.mChangingStagger;
+                                if (LayoutTransition.this.mChangingInterpolator
+                                        != LayoutTransition.sChangingInterpolator) {
+                                    anim.setInterpolator(
+                                            LayoutTransition.this.mChangingInterpolator);
+                                    break;
+                                }
+                                break;
+                        }
+                        anim.setStartDelay(startDelay);
+                        anim.setDuration(duration);
+                        Animator prevAnimation =
+                                (Animator)
+                                        LayoutTransition.this.currentChangingAnimations.get(child);
+                        if (prevAnimation != null) {
+                            prevAnimation.cancel();
+                        }
+                        Animator pendingAnimation =
+                                (Animator) LayoutTransition.this.pendingAnimations.get(child);
+                        if (pendingAnimation != null) {
+                            LayoutTransition.this.pendingAnimations.remove(child);
+                        }
+                        LayoutTransition.this.currentChangingAnimations.put(child, anim);
+                        parent.requestTransitionStart(LayoutTransition.this);
+                        child.removeOnLayoutChangeListener(this);
+                        LayoutTransition.this.layoutChangeListenerMap.remove(child);
+                    }
+                };
+        anim.addListener(
+                new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.3
+                    @Override // android.animation.AnimatorListenerAdapter,
+                    // android.animation.Animator.AnimatorListener
+                    public void onAnimationStart(Animator animator) {
+                        int i;
+                        if (LayoutTransition.this.hasListeners()) {
+                            ArrayList<TransitionListener> listeners =
+                                    (ArrayList) LayoutTransition.this.mListeners.clone();
+                            Iterator<TransitionListener> it = listeners.iterator();
+                            while (it.hasNext()) {
+                                TransitionListener listener2 = it.next();
+                                LayoutTransition layoutTransition = LayoutTransition.this;
+                                ViewGroup viewGroup = parent;
+                                View view = child;
+                                if (changeReason == 2) {
+                                    i = 0;
+                                } else {
+                                    i = changeReason == 3 ? 1 : 4;
+                                }
+                                listener2.startTransition(layoutTransition, viewGroup, view, i);
+                            }
                         }
                     }
-                    if (!valuesDiffer) {
-                        return;
-                    }
-                }
-                long startDelay = 0;
-                switch (changeReason) {
-                    case 2:
-                        startDelay = LayoutTransition.this.mChangingAppearingDelay + LayoutTransition.this.staggerDelay;
-                        LayoutTransition.this.staggerDelay += LayoutTransition.this.mChangingAppearingStagger;
-                        if (LayoutTransition.this.mChangingAppearingInterpolator != LayoutTransition.sChangingAppearingInterpolator) {
-                            anim.setInterpolator(LayoutTransition.this.mChangingAppearingInterpolator);
-                            break;
-                        }
-                        break;
-                    case 3:
-                        startDelay = LayoutTransition.this.mChangingDisappearingDelay + LayoutTransition.this.staggerDelay;
-                        LayoutTransition.this.staggerDelay += LayoutTransition.this.mChangingDisappearingStagger;
-                        if (LayoutTransition.this.mChangingDisappearingInterpolator != LayoutTransition.sChangingDisappearingInterpolator) {
-                            anim.setInterpolator(LayoutTransition.this.mChangingDisappearingInterpolator);
-                            break;
-                        }
-                        break;
-                    case 4:
-                        startDelay = LayoutTransition.this.mChangingDelay + LayoutTransition.this.staggerDelay;
-                        LayoutTransition.this.staggerDelay += LayoutTransition.this.mChangingStagger;
-                        if (LayoutTransition.this.mChangingInterpolator != LayoutTransition.sChangingInterpolator) {
-                            anim.setInterpolator(LayoutTransition.this.mChangingInterpolator);
-                            break;
-                        }
-                        break;
-                }
-                anim.setStartDelay(startDelay);
-                anim.setDuration(duration);
-                Animator prevAnimation = (Animator) LayoutTransition.this.currentChangingAnimations.get(child);
-                if (prevAnimation != null) {
-                    prevAnimation.cancel();
-                }
-                Animator pendingAnimation = (Animator) LayoutTransition.this.pendingAnimations.get(child);
-                if (pendingAnimation != null) {
-                    LayoutTransition.this.pendingAnimations.remove(child);
-                }
-                LayoutTransition.this.currentChangingAnimations.put(child, anim);
-                parent.requestTransitionStart(LayoutTransition.this);
-                child.removeOnLayoutChangeListener(this);
-                LayoutTransition.this.layoutChangeListenerMap.remove(child);
-            }
-        };
-        anim.addListener(new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.3
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationStart(Animator animator) {
-                int i;
-                if (LayoutTransition.this.hasListeners()) {
-                    ArrayList<TransitionListener> listeners = (ArrayList) LayoutTransition.this.mListeners.clone();
-                    Iterator<TransitionListener> it = listeners.iterator();
-                    while (it.hasNext()) {
-                        TransitionListener listener2 = it.next();
-                        LayoutTransition layoutTransition = LayoutTransition.this;
-                        ViewGroup viewGroup = parent;
-                        View view = child;
-                        if (changeReason == 2) {
-                            i = 0;
-                        } else {
-                            i = changeReason == 3 ? 1 : 4;
-                        }
-                        listener2.startTransition(layoutTransition, viewGroup, view, i);
-                    }
-                }
-            }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationCancel(Animator animator) {
-                child.removeOnLayoutChangeListener(listener);
-                LayoutTransition.this.layoutChangeListenerMap.remove(child);
-            }
-
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animator) {
-                int i;
-                LayoutTransition.this.currentChangingAnimations.remove(child);
-                if (LayoutTransition.this.hasListeners()) {
-                    ArrayList<TransitionListener> listeners = (ArrayList) LayoutTransition.this.mListeners.clone();
-                    Iterator<TransitionListener> it = listeners.iterator();
-                    while (it.hasNext()) {
-                        TransitionListener listener2 = it.next();
-                        LayoutTransition layoutTransition = LayoutTransition.this;
-                        ViewGroup viewGroup = parent;
-                        View view = child;
-                        if (changeReason == 2) {
-                            i = 0;
-                        } else {
-                            i = changeReason == 3 ? 1 : 4;
-                        }
-                        listener2.endTransition(layoutTransition, viewGroup, view, i);
+                    @Override // android.animation.AnimatorListenerAdapter,
+                    // android.animation.Animator.AnimatorListener
+                    public void onAnimationCancel(Animator animator) {
+                        child.removeOnLayoutChangeListener(listener);
+                        LayoutTransition.this.layoutChangeListenerMap.remove(child);
                     }
-                }
-            }
-        });
+
+                    @Override // android.animation.AnimatorListenerAdapter,
+                    // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animator) {
+                        int i;
+                        LayoutTransition.this.currentChangingAnimations.remove(child);
+                        if (LayoutTransition.this.hasListeners()) {
+                            ArrayList<TransitionListener> listeners =
+                                    (ArrayList) LayoutTransition.this.mListeners.clone();
+                            Iterator<TransitionListener> it = listeners.iterator();
+                            while (it.hasNext()) {
+                                TransitionListener listener2 = it.next();
+                                LayoutTransition layoutTransition = LayoutTransition.this;
+                                ViewGroup viewGroup = parent;
+                                View view = child;
+                                if (changeReason == 2) {
+                                    i = 0;
+                                } else {
+                                    i = changeReason == 3 ? 1 : 4;
+                                }
+                                listener2.endTransition(layoutTransition, viewGroup, view, i);
+                            }
+                        }
+                    }
+                });
         child.addOnLayoutChangeListener(listener);
         this.layoutChangeListenerMap.put(child, listener);
     }
 
     public void startChangingAnimations() {
-        LinkedHashMap<View, Animator> currentAnimCopy = (LinkedHashMap) this.currentChangingAnimations.clone();
+        LinkedHashMap<View, Animator> currentAnimCopy =
+                (LinkedHashMap) this.currentChangingAnimations.clone();
         for (Animator anim : currentAnimCopy.values()) {
             if (anim instanceof ObjectAnimator) {
                 ((ObjectAnimator) anim).setCurrentPlayTime(0L);
@@ -584,7 +650,8 @@ public class LayoutTransition {
     }
 
     public void endChangingAnimations() {
-        LinkedHashMap<View, Animator> currentAnimCopy = (LinkedHashMap) this.currentChangingAnimations.clone();
+        LinkedHashMap<View, Animator> currentAnimCopy =
+                (LinkedHashMap) this.currentChangingAnimations.clone();
         for (Animator anim : currentAnimCopy.values()) {
             anim.start();
             anim.end();
@@ -597,12 +664,15 @@ public class LayoutTransition {
     }
 
     public boolean isRunning() {
-        return this.currentChangingAnimations.size() > 0 || this.currentAppearingAnimations.size() > 0 || this.currentDisappearingAnimations.size() > 0;
+        return this.currentChangingAnimations.size() > 0
+                || this.currentAppearingAnimations.size() > 0
+                || this.currentDisappearingAnimations.size() > 0;
     }
 
     public void cancel() {
         if (this.currentChangingAnimations.size() > 0) {
-            LinkedHashMap<View, Animator> currentAnimCopy = (LinkedHashMap) this.currentChangingAnimations.clone();
+            LinkedHashMap<View, Animator> currentAnimCopy =
+                    (LinkedHashMap) this.currentChangingAnimations.clone();
             for (Animator anim : currentAnimCopy.values()) {
                 anim.cancel();
             }
@@ -610,7 +680,8 @@ public class LayoutTransition {
         }
         LinkedHashMap<View, Animator> currentAnimCopy2 = this.currentAppearingAnimations;
         if (currentAnimCopy2.size() > 0) {
-            LinkedHashMap<View, Animator> currentAnimCopy3 = (LinkedHashMap) this.currentAppearingAnimations.clone();
+            LinkedHashMap<View, Animator> currentAnimCopy3 =
+                    (LinkedHashMap) this.currentAppearingAnimations.clone();
             for (Animator anim2 : currentAnimCopy3.values()) {
                 anim2.end();
             }
@@ -618,7 +689,8 @@ public class LayoutTransition {
         }
         LinkedHashMap<View, Animator> currentAnimCopy4 = this.currentDisappearingAnimations;
         if (currentAnimCopy4.size() > 0) {
-            LinkedHashMap<View, Animator> currentAnimCopy5 = (LinkedHashMap) this.currentDisappearingAnimations.clone();
+            LinkedHashMap<View, Animator> currentAnimCopy5 =
+                    (LinkedHashMap) this.currentDisappearingAnimations.clone();
             for (Animator anim3 : currentAnimCopy5.values()) {
                 anim3.end();
             }
@@ -632,7 +704,8 @@ public class LayoutTransition {
             case 1:
             case 4:
                 if (this.currentChangingAnimations.size() > 0) {
-                    LinkedHashMap<View, Animator> currentAnimCopy = (LinkedHashMap) this.currentChangingAnimations.clone();
+                    LinkedHashMap<View, Animator> currentAnimCopy =
+                            (LinkedHashMap) this.currentChangingAnimations.clone();
                     for (Animator anim : currentAnimCopy.values()) {
                         anim.cancel();
                     }
@@ -643,7 +716,8 @@ public class LayoutTransition {
             case 2:
                 LinkedHashMap<View, Animator> currentAnimCopy2 = this.currentAppearingAnimations;
                 if (currentAnimCopy2.size() > 0) {
-                    LinkedHashMap<View, Animator> currentAnimCopy3 = (LinkedHashMap) this.currentAppearingAnimations.clone();
+                    LinkedHashMap<View, Animator> currentAnimCopy3 =
+                            (LinkedHashMap) this.currentAppearingAnimations.clone();
                     for (Animator anim2 : currentAnimCopy3.values()) {
                         anim2.end();
                     }
@@ -653,7 +727,8 @@ public class LayoutTransition {
                 break;
             case 3:
                 if (this.currentDisappearingAnimations.size() > 0) {
-                    LinkedHashMap<View, Animator> currentAnimCopy4 = (LinkedHashMap) this.currentDisappearingAnimations.clone();
+                    LinkedHashMap<View, Animator> currentAnimCopy4 =
+                            (LinkedHashMap) this.currentDisappearingAnimations.clone();
                     for (Animator anim3 : currentAnimCopy4.values()) {
                         anim3.end();
                     }
@@ -691,20 +766,23 @@ public class LayoutTransition {
         if (anim instanceof ObjectAnimator) {
             ((ObjectAnimator) anim).setCurrentPlayTime(0L);
         }
-        anim.addListener(new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.4
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator anim2) {
-                LayoutTransition.this.currentAppearingAnimations.remove(child);
-                if (LayoutTransition.this.hasListeners()) {
-                    ArrayList<TransitionListener> listeners2 = (ArrayList) LayoutTransition.this.mListeners.clone();
-                    Iterator<TransitionListener> it2 = listeners2.iterator();
-                    while (it2.hasNext()) {
-                        TransitionListener listener2 = it2.next();
-                        listener2.endTransition(LayoutTransition.this, parent, child, 2);
+        anim.addListener(
+                new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.4
+                    @Override // android.animation.AnimatorListenerAdapter,
+                    // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator anim2) {
+                        LayoutTransition.this.currentAppearingAnimations.remove(child);
+                        if (LayoutTransition.this.hasListeners()) {
+                            ArrayList<TransitionListener> listeners2 =
+                                    (ArrayList) LayoutTransition.this.mListeners.clone();
+                            Iterator<TransitionListener> it2 = listeners2.iterator();
+                            while (it2.hasNext()) {
+                                TransitionListener listener2 = it2.next();
+                                listener2.endTransition(LayoutTransition.this, parent, child, 2);
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
         this.currentAppearingAnimations.put(child, anim);
         anim.start();
     }
@@ -734,21 +812,24 @@ public class LayoutTransition {
         }
         anim.setTarget(child);
         final float preAnimAlpha = child.getAlpha();
-        anim.addListener(new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.5
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator anim2) {
-                LayoutTransition.this.currentDisappearingAnimations.remove(child);
-                child.setAlpha(preAnimAlpha);
-                if (LayoutTransition.this.hasListeners()) {
-                    ArrayList<TransitionListener> listeners2 = (ArrayList) LayoutTransition.this.mListeners.clone();
-                    Iterator<TransitionListener> it2 = listeners2.iterator();
-                    while (it2.hasNext()) {
-                        TransitionListener listener2 = it2.next();
-                        listener2.endTransition(LayoutTransition.this, parent, child, 3);
+        anim.addListener(
+                new AnimatorListenerAdapter() { // from class: android.animation.LayoutTransition.5
+                    @Override // android.animation.AnimatorListenerAdapter,
+                    // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator anim2) {
+                        LayoutTransition.this.currentDisappearingAnimations.remove(child);
+                        child.setAlpha(preAnimAlpha);
+                        if (LayoutTransition.this.hasListeners()) {
+                            ArrayList<TransitionListener> listeners2 =
+                                    (ArrayList) LayoutTransition.this.mListeners.clone();
+                            Iterator<TransitionListener> it2 = listeners2.iterator();
+                            while (it2.hasNext()) {
+                                TransitionListener listener2 = it2.next();
+                                listener2.endTransition(LayoutTransition.this, parent, child, 3);
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
         if (anim instanceof ObjectAnimator) {
             ((ObjectAnimator) anim).setCurrentPlayTime(0L);
         }
@@ -789,7 +870,9 @@ public class LayoutTransition {
     }
 
     public void layoutChange(ViewGroup parent) {
-        if (parent.getWindowVisibility() == 0 && (this.mTransitionTypes & 16) == 16 && !isRunning()) {
+        if (parent.getWindowVisibility() == 0
+                && (this.mTransitionTypes & 16) == 16
+                && !isRunning()) {
             runChangeTransition(parent, null, 4);
         }
     }
@@ -865,7 +948,8 @@ public class LayoutTransition {
         return this.mListeners;
     }
 
-    private static final class CleanupCallback implements ViewTreeObserver.OnPreDrawListener, View.OnAttachStateChangeListener {
+    private static final class CleanupCallback
+            implements ViewTreeObserver.OnPreDrawListener, View.OnAttachStateChangeListener {
         final Map<View, View.OnLayoutChangeListener> layoutChangeListenerMap;
         final ViewGroup parent;
 
@@ -889,8 +973,7 @@ public class LayoutTransition {
         }
 
         @Override // android.view.View.OnAttachStateChangeListener
-        public void onViewAttachedToWindow(View v) {
-        }
+        public void onViewAttachedToWindow(View v) {}
 
         @Override // android.view.View.OnAttachStateChangeListener
         public void onViewDetachedFromWindow(View v) {

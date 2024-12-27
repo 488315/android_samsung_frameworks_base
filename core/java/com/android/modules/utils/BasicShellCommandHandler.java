@@ -1,7 +1,9 @@
 package com.android.modules.utils;
 
 import android.os.Binder;
+
 import com.android.internal.content.NativeLibraryHelper;
+
 import java.io.BufferedInputStream;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -33,7 +35,13 @@ public abstract class BasicShellCommandHandler {
 
     public abstract void onHelp();
 
-    public void init(Binder target, FileDescriptor in, FileDescriptor out, FileDescriptor err, String[] args, int firstArgPos) {
+    public void init(
+            Binder target,
+            FileDescriptor in,
+            FileDescriptor out,
+            FileDescriptor err,
+            String[] args,
+            int firstArgPos) {
         this.mTarget = target;
         this.mIn = in;
         this.mOut = out;
@@ -51,18 +59,23 @@ public abstract class BasicShellCommandHandler {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:14:0x006c, code lost:
-    
-        return r1;
-     */
+
+       return r1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0069, code lost:
-    
-        if (r9.mErrPrintWriter == null) goto L23;
-     */
+
+       if (r9.mErrPrintWriter == null) goto L23;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int exec(android.os.Binder r10, java.io.FileDescriptor r11, java.io.FileDescriptor r12, java.io.FileDescriptor r13, java.lang.String[] r14) {
+    public int exec(
+            android.os.Binder r10,
+            java.io.FileDescriptor r11,
+            java.io.FileDescriptor r12,
+            java.io.FileDescriptor r13,
+            java.lang.String[] r14) {
         /*
             r9 = this;
             if (r14 == 0) goto Lb
@@ -141,7 +154,11 @@ public abstract class BasicShellCommandHandler {
         L80:
             throw r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.modules.utils.BasicShellCommandHandler.exec(android.os.Binder, java.io.FileDescriptor, java.io.FileDescriptor, java.io.FileDescriptor, java.lang.String[]):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.modules.utils.BasicShellCommandHandler.exec(android.os.Binder,"
+                    + " java.io.FileDescriptor, java.io.FileDescriptor, java.io.FileDescriptor,"
+                    + " java.lang.String[]):int");
     }
 
     public FileDescriptor getOutFileDescriptor() {

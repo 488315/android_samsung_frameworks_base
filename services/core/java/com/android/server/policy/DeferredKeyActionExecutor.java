@@ -3,6 +3,7 @@ package com.android.server.policy;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.KeyEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,10 @@ public final class DeferredKeyActionExecutor {
             return timedActionsBuffer;
         }
         if (DEBUG && timedActionsBuffer != null) {
-            Log.d("DeferredKeyAction", "getActionsBufferWithLazyCleanUp: cleaning up gesture actions for key " + KeyEvent.keyCodeToString(i));
+            Log.d(
+                    "DeferredKeyAction",
+                    "getActionsBufferWithLazyCleanUp: cleaning up gesture actions for key "
+                            + KeyEvent.keyCodeToString(i));
         }
         TimedActionsBuffer timedActionsBuffer2 = new TimedActionsBuffer(i, j);
         this.mBuffers.put(i, timedActionsBuffer2);
@@ -45,7 +49,10 @@ public final class DeferredKeyActionExecutor {
             return;
         }
         if (DEBUG) {
-            Log.i("DeferredKeyAction", "addAction: execute action for key " + KeyEvent.keyCodeToString(actionsBufferWithLazyCleanUp.mKeyCode));
+            Log.i(
+                    "DeferredKeyAction",
+                    "addAction: execute action for key "
+                            + KeyEvent.keyCodeToString(actionsBufferWithLazyCleanUp.mKeyCode));
         }
         runnable.run();
     }

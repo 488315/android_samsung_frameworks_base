@@ -10,8 +10,9 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.internal.R;
-import com.android.internal.app.IVoiceInteractionManagerService;
+
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -29,25 +30,44 @@ public class AssistUtils {
     public static final int INVOCATION_TYPE_VOICE = 3;
     private static final String TAG = "AssistUtils";
     private final Context mContext;
-    private final IVoiceInteractionManagerService mVoiceInteractionManagerService = IVoiceInteractionManagerService.Stub.asInterface(ServiceManager.getService(Context.VOICE_INTERACTION_MANAGER_SERVICE));
+    private final IVoiceInteractionManagerService mVoiceInteractionManagerService =
+            IVoiceInteractionManagerService.Stub.asInterface(
+                    ServiceManager.getService(Context.VOICE_INTERACTION_MANAGER_SERVICE));
 
     public AssistUtils(Context context) {
         this.mContext = context;
     }
 
     @Deprecated
-    public boolean showSessionForActiveService(Bundle args, int sourceFlags, IVoiceInteractionSessionShowCallback showCallback, IBinder activityToken) {
-        return showSessionForActiveServiceInternal(args, sourceFlags, null, showCallback, activityToken);
+    public boolean showSessionForActiveService(
+            Bundle args,
+            int sourceFlags,
+            IVoiceInteractionSessionShowCallback showCallback,
+            IBinder activityToken) {
+        return showSessionForActiveServiceInternal(
+                args, sourceFlags, null, showCallback, activityToken);
     }
 
-    public boolean showSessionForActiveService(Bundle args, int sourceFlags, String attributionTag, IVoiceInteractionSessionShowCallback showCallback, IBinder activityToken) {
-        return showSessionForActiveServiceInternal(args, sourceFlags, attributionTag, showCallback, activityToken);
+    public boolean showSessionForActiveService(
+            Bundle args,
+            int sourceFlags,
+            String attributionTag,
+            IVoiceInteractionSessionShowCallback showCallback,
+            IBinder activityToken) {
+        return showSessionForActiveServiceInternal(
+                args, sourceFlags, attributionTag, showCallback, activityToken);
     }
 
-    private boolean showSessionForActiveServiceInternal(Bundle args, int sourceFlags, String attributionTag, IVoiceInteractionSessionShowCallback showCallback, IBinder activityToken) {
+    private boolean showSessionForActiveServiceInternal(
+            Bundle args,
+            int sourceFlags,
+            String attributionTag,
+            IVoiceInteractionSessionShowCallback showCallback,
+            IBinder activityToken) {
         try {
             if (this.mVoiceInteractionManagerService != null) {
-                return this.mVoiceInteractionManagerService.showSessionForActiveService(args, sourceFlags, attributionTag, showCallback, activityToken);
+                return this.mVoiceInteractionManagerService.showSessionForActiveService(
+                        args, sourceFlags, attributionTag, showCallback, activityToken);
             }
             return false;
         } catch (RemoteException e) {
@@ -56,10 +76,12 @@ public class AssistUtils {
         }
     }
 
-    public void getActiveServiceSupportedActions(Set<String> voiceActions, IVoiceActionCheckCallback callback) {
+    public void getActiveServiceSupportedActions(
+            Set<String> voiceActions, IVoiceActionCheckCallback callback) {
         try {
             if (this.mVoiceInteractionManagerService != null) {
-                this.mVoiceInteractionManagerService.getActiveServiceSupportedActions(new ArrayList(voiceActions), callback);
+                this.mVoiceInteractionManagerService.getActiveServiceSupportedActions(
+                        new ArrayList(voiceActions), callback);
             }
         } catch (RemoteException e) {
             Log.w(TAG, "Failed to call activeServiceSupportedActions", e);
@@ -95,7 +117,8 @@ public class AssistUtils {
     public boolean activeServiceSupportsLaunchFromKeyguard() {
         try {
             if (this.mVoiceInteractionManagerService != null) {
-                return this.mVoiceInteractionManagerService.activeServiceSupportsLaunchFromKeyguard();
+                return this.mVoiceInteractionManagerService
+                        .activeServiceSupportsLaunchFromKeyguard();
             }
             return false;
         } catch (RemoteException e) {
@@ -151,17 +174,20 @@ public class AssistUtils {
     public void registerVoiceInteractionSessionListener(IVoiceInteractionSessionListener listener) {
         try {
             if (this.mVoiceInteractionManagerService != null) {
-                this.mVoiceInteractionManagerService.registerVoiceInteractionSessionListener(listener);
+                this.mVoiceInteractionManagerService.registerVoiceInteractionSessionListener(
+                        listener);
             }
         } catch (RemoteException e) {
             Log.w(TAG, "Failed to register voice interaction listener", e);
         }
     }
 
-    public void subscribeVisualQueryRecognitionStatus(IVisualQueryRecognitionStatusListener listener) {
+    public void subscribeVisualQueryRecognitionStatus(
+            IVisualQueryRecognitionStatusListener listener) {
         try {
             if (this.mVoiceInteractionManagerService != null) {
-                this.mVoiceInteractionManagerService.subscribeVisualQueryRecognitionStatus(listener);
+                this.mVoiceInteractionManagerService.subscribeVisualQueryRecognitionStatus(
+                        listener);
             }
         } catch (RemoteException e) {
             Log.w(TAG, "Failed to register visual query detection start listener", e);
@@ -189,7 +215,9 @@ public class AssistUtils {
     }
 
     public ComponentName getAssistComponentForUser(int userId) {
-        String setting = Settings.Secure.getStringForUser(this.mContext.getContentResolver(), Settings.Secure.ASSISTANT, userId);
+        String setting =
+                Settings.Secure.getStringForUser(
+                        this.mContext.getContentResolver(), Settings.Secure.ASSISTANT, userId);
         if (setting != null) {
             return ComponentName.unflattenFromString(setting);
         }
@@ -201,7 +229,8 @@ public class AssistUtils {
             return false;
         }
         try {
-            ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(assistant.getPackageName(), 0);
+            ApplicationInfo applicationInfo =
+                    context.getPackageManager().getApplicationInfo(assistant.getPackageName(), 0);
             return applicationInfo.isSystemApp() || applicationInfo.isUpdatedSystemApp();
         } catch (PackageManager.NameNotFoundException e) {
             return false;
@@ -209,11 +238,17 @@ public class AssistUtils {
     }
 
     public static boolean isDisclosureEnabled(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.ASSIST_DISCLOSURE_ENABLED, 0) != 0;
+        return Settings.Secure.getInt(
+                        context.getContentResolver(), Settings.Secure.ASSIST_DISCLOSURE_ENABLED, 0)
+                != 0;
     }
 
     public static boolean shouldDisclose(Context context, ComponentName assistant) {
-        return (allowDisablingAssistDisclosure(context) && !isDisclosureEnabled(context) && isPreinstalledAssistant(context, assistant)) ? false : true;
+        return (allowDisablingAssistDisclosure(context)
+                        && !isDisclosureEnabled(context)
+                        && isPreinstalledAssistant(context, assistant))
+                ? false
+                : true;
     }
 
     public static boolean allowDisablingAssistDisclosure(Context context) {

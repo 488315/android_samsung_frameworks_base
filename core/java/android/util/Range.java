@@ -1,7 +1,7 @@
 package android.util;
 
 import com.android.internal.util.Preconditions;
-import java.lang.Comparable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -81,7 +81,9 @@ public final class Range<T extends Comparable<? super T>> {
         if (cmpLower >= 0 && cmpUpper <= 0) {
             return range;
         }
-        return create(cmpLower <= 0 ? this.mLower : range.mLower, cmpUpper >= 0 ? this.mUpper : range.mUpper);
+        return create(
+                cmpLower <= 0 ? this.mLower : range.mLower,
+                cmpUpper >= 0 ? this.mUpper : range.mUpper);
     }
 
     public Range<T> intersect(T lower, T upper) {
@@ -105,7 +107,9 @@ public final class Range<T extends Comparable<? super T>> {
         if (cmpLower >= 0 && cmpUpper <= 0) {
             return this;
         }
-        return create(cmpLower >= 0 ? this.mLower : range.mLower, cmpUpper <= 0 ? this.mUpper : range.mUpper);
+        return create(
+                cmpLower >= 0 ? this.mLower : range.mLower,
+                cmpUpper <= 0 ? this.mUpper : range.mUpper);
     }
 
     public Range<T> extend(T lower, T upper) {

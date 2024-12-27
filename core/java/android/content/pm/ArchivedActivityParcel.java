@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ArchivedActivityParcel implements Parcelable {
-    public static final Parcelable.Creator<ArchivedActivityParcel> CREATOR = new Parcelable.Creator<ArchivedActivityParcel>() { // from class: android.content.pm.ArchivedActivityParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ArchivedActivityParcel createFromParcel(Parcel _aidl_source) {
-            ArchivedActivityParcel _aidl_out = new ArchivedActivityParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ArchivedActivityParcel> CREATOR =
+            new Parcelable.Creator<ArchivedActivityParcel>() { // from class:
+                // android.content.pm.ArchivedActivityParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ArchivedActivityParcel createFromParcel(Parcel _aidl_source) {
+                    ArchivedActivityParcel _aidl_out = new ArchivedActivityParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ArchivedActivityParcel[] newArray(int _aidl_size) {
-            return new ArchivedActivityParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ArchivedActivityParcel[] newArray(int _aidl_size) {
+                    return new ArchivedActivityParcel[_aidl_size];
+                }
+            };
     public byte[] iconBitmap;
     public byte[] monochromeIconBitmap;
     public ComponentName originalComponentName;
@@ -63,7 +65,8 @@ public class ArchivedActivityParcel implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.originalComponentName = (ComponentName) _aidl_parcel.readTypedObject(ComponentName.CREATOR);
+            this.originalComponentName =
+                    (ComponentName) _aidl_parcel.readTypedObject(ComponentName.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

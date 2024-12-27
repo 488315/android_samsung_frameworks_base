@@ -10,6 +10,7 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.text.FontConfig;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -27,7 +28,8 @@ public interface IFontManager extends IInterface {
         }
 
         @Override // com.android.internal.graphics.fonts.IFontManager
-        public int updateFontFamily(List<FontUpdateRequest> request, int baseVersion) throws RemoteException {
+        public int updateFontFamily(List<FontUpdateRequest> request, int baseVersion)
+                throws RemoteException {
             return 0;
         }
 
@@ -37,7 +39,7 @@ public interface IFontManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFontManager {
+    public abstract static class Stub extends Binder implements IFontManager {
         static final int TRANSACTION_getFontConfig = 1;
         static final int TRANSACTION_updateFontFamily = 2;
         private final PermissionEnforcer mEnforcer;
@@ -52,7 +54,9 @@ public interface IFontManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IFontManager asInterface(IBinder obj) {
@@ -88,7 +92,8 @@ public interface IFontManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFontManager.DESCRIPTOR);
             }
@@ -103,7 +108,8 @@ public interface IFontManager extends IInterface {
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 2:
-                    List<FontUpdateRequest> _arg0 = data.createTypedArrayList(FontUpdateRequest.CREATOR);
+                    List<FontUpdateRequest> _arg0 =
+                            data.createTypedArrayList(FontUpdateRequest.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result2 = updateFontFamily(_arg0, _arg1);
@@ -148,7 +154,8 @@ public interface IFontManager extends IInterface {
             }
 
             @Override // com.android.internal.graphics.fonts.IFontManager
-            public int updateFontFamily(List<FontUpdateRequest> request, int baseVersion) throws RemoteException {
+            public int updateFontFamily(List<FontUpdateRequest> request, int baseVersion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -167,7 +174,8 @@ public interface IFontManager extends IInterface {
         }
 
         protected void getFontConfig_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_FONTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_FONTS, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

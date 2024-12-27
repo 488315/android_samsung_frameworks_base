@@ -6,6 +6,7 @@ import android.os.RemoteException;
 import android.util.Slog;
 import android.view.autofill.AutofillId;
 import android.view.inputmethod.InlineSuggestionsRequest;
+
 import com.android.internal.inputmethod.IInlineSuggestionsRequestCallback;
 import com.android.internal.inputmethod.IInlineSuggestionsResponseCallback;
 import com.android.internal.inputmethod.InlineSuggestionsRequestCallback;
@@ -26,7 +27,11 @@ public final class AutofillSuggestionsController {
         public final String mPackageName;
         public final InlineSuggestionsRequestInfo mRequestInfo;
 
-        public CreateInlineSuggestionsRequest(InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo, AutofillInlineSuggestionsRequestSession.InlineSuggestionsRequestCallbackImpl inlineSuggestionsRequestCallbackImpl, String str) {
+        public CreateInlineSuggestionsRequest(
+                InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo,
+                AutofillInlineSuggestionsRequestSession.InlineSuggestionsRequestCallbackImpl
+                        inlineSuggestionsRequestCallbackImpl,
+                String str) {
             this.mRequestInfo = inlineSuggestionsRequestInfo;
             this.mCallback = inlineSuggestionsRequestCallbackImpl;
             this.mPackageName = str;
@@ -34,38 +39,52 @@ public final class AutofillSuggestionsController {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class InlineSuggestionsRequestCallbackDecorator extends IInlineSuggestionsRequestCallback.Stub {
+    public final class InlineSuggestionsRequestCallbackDecorator
+            extends IInlineSuggestionsRequestCallback.Stub {
         public final InlineSuggestionsRequestCallback mCallback;
         public final int mImeDisplayId;
         public final String mImePackageName;
         public final IBinder mImeToken;
 
-        public InlineSuggestionsRequestCallbackDecorator(AutofillInlineSuggestionsRequestSession.InlineSuggestionsRequestCallbackImpl inlineSuggestionsRequestCallbackImpl, String str, int i, IBinder iBinder) {
+        public InlineSuggestionsRequestCallbackDecorator(
+                AutofillInlineSuggestionsRequestSession.InlineSuggestionsRequestCallbackImpl
+                        inlineSuggestionsRequestCallbackImpl,
+                String str,
+                int i,
+                IBinder iBinder) {
             this.mCallback = inlineSuggestionsRequestCallbackImpl;
             this.mImePackageName = str;
             this.mImeDisplayId = i;
             this.mImeToken = iBinder;
         }
 
-        public final void onInlineSuggestionsRequest(InlineSuggestionsRequest inlineSuggestionsRequest, IInlineSuggestionsResponseCallback iInlineSuggestionsResponseCallback) {
+        public final void onInlineSuggestionsRequest(
+                InlineSuggestionsRequest inlineSuggestionsRequest,
+                IInlineSuggestionsResponseCallback iInlineSuggestionsResponseCallback) {
             if (!this.mImePackageName.equals(inlineSuggestionsRequest.getHostPackageName())) {
                 StringBuilder sb = new StringBuilder("Host package name in the provide request=[");
                 sb.append(inlineSuggestionsRequest.getHostPackageName());
                 sb.append("] doesn't match the IME package name=[");
-                throw new SecurityException(AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, this.mImePackageName, "]."));
+                throw new SecurityException(
+                        AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                sb, this.mImePackageName, "]."));
             }
             inlineSuggestionsRequest.setHostDisplayId(this.mImeDisplayId);
             synchronized (ImfLock.class) {
                 try {
-                    AutofillSuggestionsController autofillSuggestionsController = AutofillSuggestionsController.this;
-                    if (this.mImeToken == autofillSuggestionsController.mBindingController.mCurToken) {
-                        autofillSuggestionsController.mCurHostInputToken = inlineSuggestionsRequest.getHostInputToken();
+                    AutofillSuggestionsController autofillSuggestionsController =
+                            AutofillSuggestionsController.this;
+                    if (this.mImeToken
+                            == autofillSuggestionsController.mBindingController.mCurToken) {
+                        autofillSuggestionsController.mCurHostInputToken =
+                                inlineSuggestionsRequest.getHostInputToken();
                     }
                 } catch (Throwable th) {
                     throw th;
                 }
             }
-            this.mCallback.onInlineSuggestionsRequest(inlineSuggestionsRequest, iInlineSuggestionsResponseCallback);
+            this.mCallback.onInlineSuggestionsRequest(
+                    inlineSuggestionsRequest, iInlineSuggestionsResponseCallback);
         }
 
         public final void onInlineSuggestionsSessionInvalidated() {
@@ -97,7 +116,8 @@ public final class AutofillSuggestionsController {
         }
     }
 
-    public AutofillSuggestionsController(InputMethodBindingController inputMethodBindingController) {
+    public AutofillSuggestionsController(
+            InputMethodBindingController inputMethodBindingController) {
         this.mBindingController = inputMethodBindingController;
     }
 
@@ -108,16 +128,29 @@ public final class AutofillSuggestionsController {
         InputMethodBindingController inputMethodBindingController = this.mBindingController;
         IInputMethodInvoker iInputMethodInvoker = inputMethodBindingController.mCurMethod;
         if (iInputMethodInvoker != null) {
-            CreateInlineSuggestionsRequest createInlineSuggestionsRequest = this.mPendingInlineSuggestionsRequest;
-            InlineSuggestionsRequestCallback inlineSuggestionsRequestCallback = createInlineSuggestionsRequest.mCallback;
-            InlineSuggestionsRequestCallbackDecorator inlineSuggestionsRequestCallbackDecorator = new InlineSuggestionsRequestCallbackDecorator((AutofillInlineSuggestionsRequestSession.InlineSuggestionsRequestCallbackImpl) inlineSuggestionsRequestCallback, createInlineSuggestionsRequest.mPackageName, inputMethodBindingController.mCurTokenDisplayId, inputMethodBindingController.mCurToken);
+            CreateInlineSuggestionsRequest createInlineSuggestionsRequest =
+                    this.mPendingInlineSuggestionsRequest;
+            InlineSuggestionsRequestCallback inlineSuggestionsRequestCallback =
+                    createInlineSuggestionsRequest.mCallback;
+            InlineSuggestionsRequestCallbackDecorator inlineSuggestionsRequestCallbackDecorator =
+                    new InlineSuggestionsRequestCallbackDecorator(
+                            (AutofillInlineSuggestionsRequestSession
+                                            .InlineSuggestionsRequestCallbackImpl)
+                                    inlineSuggestionsRequestCallback,
+                            createInlineSuggestionsRequest.mPackageName,
+                            inputMethodBindingController.mCurTokenDisplayId,
+                            inputMethodBindingController.mCurToken);
             try {
-                iInputMethodInvoker.mTarget.onCreateInlineSuggestionsRequest(this.mPendingInlineSuggestionsRequest.mRequestInfo, inlineSuggestionsRequestCallbackDecorator);
+                iInputMethodInvoker.mTarget.onCreateInlineSuggestionsRequest(
+                        this.mPendingInlineSuggestionsRequest.mRequestInfo,
+                        inlineSuggestionsRequestCallbackDecorator);
             } catch (RemoteException e) {
                 IInputMethodInvoker.logRemoteException(e);
             }
         } else {
-            Slog.w("AutofillSuggestionsController", "No IME connected! Abandoning inline suggestions creation request.");
+            Slog.w(
+                    "AutofillSuggestionsController",
+                    "No IME connected! Abandoning inline suggestions creation request.");
         }
         this.mPendingInlineSuggestionsRequest = null;
     }

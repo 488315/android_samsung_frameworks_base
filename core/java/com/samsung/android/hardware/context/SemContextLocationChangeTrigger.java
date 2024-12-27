@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextLocationChangeTrigger extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextLocationChangeTrigger> CREATOR = new Parcelable.Creator<SemContextLocationChangeTrigger>() { // from class: com.samsung.android.hardware.context.SemContextLocationChangeTrigger.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextLocationChangeTrigger createFromParcel(Parcel in) {
-            return new SemContextLocationChangeTrigger(in);
-        }
+    public static final Parcelable.Creator<SemContextLocationChangeTrigger> CREATOR =
+            new Parcelable.Creator<
+                    SemContextLocationChangeTrigger>() { // from class:
+                                                         // com.samsung.android.hardware.context.SemContextLocationChangeTrigger.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextLocationChangeTrigger createFromParcel(Parcel in) {
+                    return new SemContextLocationChangeTrigger(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextLocationChangeTrigger[] newArray(int size) {
-            return new SemContextLocationChangeTrigger[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextLocationChangeTrigger[] newArray(int size) {
+                    return new SemContextLocationChangeTrigger[size];
+                }
+            };
     public static final int RESULT_FALSE = 2;
     public static final int RESULT_SENSOR_OUT = 3;
     public static final int RESULT_TRUE = 1;

@@ -9,7 +9,8 @@ import android.provider.Settings;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class SamsungRingerModeDelegate extends ContentObserver implements AudioManagerInternal.RingerModeDelegate {
+public final class SamsungRingerModeDelegate extends ContentObserver
+        implements AudioManagerInternal.RingerModeDelegate {
     public AudioManagerInternal mAudioManager;
     public ContentResolver mContentResolver;
     public NotificationManager mNm;
@@ -33,15 +34,18 @@ public final class SamsungRingerModeDelegate extends ContentObserver implements 
             return;
         }
         if (i == 0 || i2 == 0) {
-            this.mAudioManager.setRingerModeInternal(this.mAudioManager.getRingerModeInternal(), "SamsungRingerModeDelegate");
+            this.mAudioManager.setRingerModeInternal(
+                    this.mAudioManager.getRingerModeInternal(), "SamsungRingerModeDelegate");
         }
     }
 
-    public final int onSetRingerModeExternal(int i, int i2, String str, int i3, VolumePolicy volumePolicy) {
+    public final int onSetRingerModeExternal(
+            int i, int i2, String str, int i3, VolumePolicy volumePolicy) {
         return i2;
     }
 
-    public final int onSetRingerModeInternal(int i, int i2, String str, int i3, VolumePolicy volumePolicy) {
+    public final int onSetRingerModeInternal(
+            int i, int i2, String str, int i3, VolumePolicy volumePolicy) {
         if ((i2 == 1 || i2 == 2) && this.mNm.getZenMode() != 0) {
             return 0;
         }

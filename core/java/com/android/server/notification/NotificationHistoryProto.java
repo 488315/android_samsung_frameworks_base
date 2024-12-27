@@ -10,8 +10,7 @@ public final class NotificationHistoryProto {
         public static final long SIZE = 1120986464257L;
         public static final long STRINGS = 2237677961218L;
 
-        public StringPool() {
-        }
+        public StringPool() {}
     }
 
     public final class Notification {
@@ -42,8 +41,7 @@ public final class NotificationHistoryProto {
         public static final long USER_ID = 1120986464264L;
         public static final long WHEN = 1112396529683L;
 
-        public Notification() {
-        }
+        public Notification() {}
 
         public final class Icon {
             public static final long IMAGE_BITMAP_FILENAME = 1138166333442L;
@@ -55,8 +53,7 @@ public final class NotificationHistoryProto {
             public static final long IMAGE_TYPE = 1159641169921L;
             public static final long IMAGE_URI = 1138166333448L;
 
-            public Icon() {
-            }
+            public Icon() {}
         }
     }
 }

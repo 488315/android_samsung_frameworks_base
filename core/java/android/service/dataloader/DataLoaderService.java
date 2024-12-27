@@ -14,9 +14,11 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.util.ExceptionUtils;
 import android.util.Slog;
+
+import libcore.io.IoUtils;
+
 import java.io.IOException;
 import java.util.Collection;
-import libcore.io.IoUtils;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -26,19 +28,26 @@ public abstract class DataLoaderService extends Service {
 
     @SystemApi
     public interface DataLoader {
-        boolean onCreate(DataLoaderParams dataLoaderParams, FileSystemConnector fileSystemConnector);
+        boolean onCreate(
+                DataLoaderParams dataLoaderParams, FileSystemConnector fileSystemConnector);
 
-        boolean onPrepareImage(Collection<InstallationFile> collection, Collection<String> collection2);
+        boolean onPrepareImage(
+                Collection<InstallationFile> collection, Collection<String> collection2);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public native boolean nativeCreateDataLoader(int i, FileSystemControlParcel fileSystemControlParcel, DataLoaderParamsParcel dataLoaderParamsParcel, IDataLoaderStatusListener iDataLoaderStatusListener);
+    public native boolean nativeCreateDataLoader(
+            int i,
+            FileSystemControlParcel fileSystemControlParcel,
+            DataLoaderParamsParcel dataLoaderParamsParcel,
+            IDataLoaderStatusListener iDataLoaderStatusListener);
 
     /* JADX INFO: Access modifiers changed from: private */
     public native boolean nativeDestroyDataLoader(int i);
 
     /* JADX INFO: Access modifiers changed from: private */
-    public native boolean nativePrepareImage(int i, InstallationFileParcel[] installationFileParcelArr, String[] strArr);
+    public native boolean nativePrepareImage(
+            int i, InstallationFileParcel[] installationFileParcelArr, String[] strArr);
 
     /* JADX INFO: Access modifiers changed from: private */
     public native boolean nativeStartDataLoader(int i);
@@ -47,7 +56,8 @@ public abstract class DataLoaderService extends Service {
     public native boolean nativeStopDataLoader(int i);
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static native void nativeWriteData(long j, String str, long j2, long j3, ParcelFileDescriptor parcelFileDescriptor);
+    public static native void nativeWriteData(
+            long j, String str, long j2, long j3, ParcelFileDescriptor parcelFileDescriptor);
 
     @SystemApi
     public DataLoader onCreateDataLoader(DataLoaderParams dataLoaderParams) {
@@ -60,12 +70,16 @@ public abstract class DataLoaderService extends Service {
     }
 
     private class DataLoaderBinderService extends IDataLoader.Stub {
-        private DataLoaderBinderService() {
-        }
+        private DataLoaderBinderService() {}
 
         /* JADX WARN: Finally extract failed */
         @Override // android.content.pm.IDataLoader
-        public void create(int id, DataLoaderParamsParcel params, FileSystemControlParcel control, IDataLoaderStatusListener listener) throws RuntimeException {
+        public void create(
+                int id,
+                DataLoaderParamsParcel params,
+                FileSystemControlParcel control,
+                IDataLoaderStatusListener listener)
+                throws RuntimeException {
             try {
                 try {
                     DataLoaderService.this.nativeCreateDataLoader(id, control, params, listener);
@@ -113,7 +127,8 @@ public abstract class DataLoaderService extends Service {
         }
 
         @Override // android.content.pm.IDataLoader
-        public void prepareImage(int id, InstallationFileParcel[] addedFiles, String[] removedFiles) {
+        public void prepareImage(
+                int id, InstallationFileParcel[] addedFiles, String[] removedFiles) {
             if (!DataLoaderService.this.nativePrepareImage(id, addedFiles, removedFiles)) {
                 Slog.w(DataLoaderService.TAG, "Failed to prepare image for data loader: " + id);
             }
@@ -128,9 +143,12 @@ public abstract class DataLoaderService extends Service {
             this.mNativeInstance = nativeInstance;
         }
 
-        public void writeData(String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor incomingFd) throws IOException {
+        public void writeData(
+                String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor incomingFd)
+                throws IOException {
             try {
-                DataLoaderService.nativeWriteData(this.mNativeInstance, name, offsetBytes, lengthBytes, incomingFd);
+                DataLoaderService.nativeWriteData(
+                        this.mNativeInstance, name, offsetBytes, lengthBytes, incomingFd);
             } catch (RuntimeException e) {
                 ExceptionUtils.maybeUnwrapIOException(e);
                 throw e;

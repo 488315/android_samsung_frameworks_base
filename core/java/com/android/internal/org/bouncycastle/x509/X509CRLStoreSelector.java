@@ -5,6 +5,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.Extension;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Selector;
 import com.android.internal.org.bouncycastle.x509.extension.X509ExtensionUtil;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.cert.CRL;
@@ -54,7 +55,9 @@ public class X509CRLStoreSelector extends X509CRLSelector implements Selector {
             if (isCompleteCRLEnabled() && dci != null) {
                 return false;
             }
-            if (dci != null && this.maxBaseCRLNumber != null && dci.getPositiveValue().compareTo(this.maxBaseCRLNumber) == 1) {
+            if (dci != null
+                    && this.maxBaseCRLNumber != null
+                    && dci.getPositiveValue().compareTo(this.maxBaseCRLNumber) == 1) {
                 return false;
             }
             if (this.issuingDistributionPointEnabled) {
@@ -104,7 +107,8 @@ public class X509CRLStoreSelector extends X509CRLSelector implements Selector {
         }
     }
 
-    @Override // java.security.cert.X509CRLSelector, java.security.cert.CRLSelector, com.android.internal.org.bouncycastle.util.Selector
+    @Override // java.security.cert.X509CRLSelector, java.security.cert.CRLSelector,
+              // com.android.internal.org.bouncycastle.util.Selector
     public Object clone() {
         X509CRLStoreSelector sel = getInstance(this);
         sel.deltaCRLIndicator = this.deltaCRLIndicator;

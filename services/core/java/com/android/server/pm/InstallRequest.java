@@ -9,10 +9,11 @@ import android.os.UserHandle;
 import android.util.ExceptionUtils;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.pm.parsing.pkg.ParsedPackage;
 import com.android.server.art.model.DexoptResult;
-import com.android.server.pm.PackageMetrics;
 import com.android.server.pm.pkg.AndroidPackage;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -67,7 +68,15 @@ public final class InstallRequest {
     public final int mUserId;
     public final ArrayList mWarnings;
 
-    public InstallRequest(int i, AndroidPackage androidPackage, int[] iArr, InstallPackageHelper$$ExternalSyntheticLambda1 installPackageHelper$$ExternalSyntheticLambda1, int i2, int i3, boolean z) {
+    public InstallRequest(
+            int i,
+            AndroidPackage androidPackage,
+            int[] iArr,
+            InstallPackageHelper$$ExternalSyntheticLambda1
+                    installPackageHelper$$ExternalSyntheticLambda1,
+            int i2,
+            int i3,
+            boolean z) {
         this.mAppId = -1;
         this.mNeedToMove = false;
         int[] iArr2 = PackageManagerService.EMPTY_INT_ARRAY;
@@ -93,7 +102,13 @@ public final class InstallRequest {
         this.mHasAppMetadataFileFromInstaller = false;
     }
 
-    public InstallRequest(ParsedPackage parsedPackage, int i, int i2, UserHandle userHandle, ScanResult scanResult, PackageSetting packageSetting) {
+    public InstallRequest(
+            ParsedPackage parsedPackage,
+            int i,
+            int i2,
+            UserHandle userHandle,
+            ScanResult scanResult,
+            PackageSetting packageSetting) {
         this.mAppId = -1;
         this.mNeedToMove = false;
         int[] iArr = PackageManagerService.EMPTY_INT_ARRAY;
@@ -132,7 +147,29 @@ public final class InstallRequest {
         this.mWarnings = new ArrayList();
         this.mInstallerUidForInstallExisting = -1;
         this.mUserId = installingSession.mUser.getIdentifier();
-        this.mInstallArgs = new InstallArgs(installingSession.mOriginInfo, installingSession.mMoveInfo, installingSession.mObserver, installingSession.mInstallFlags, installingSession.mDevelopmentInstallFlags, installingSession.mInstallSource, installingSession.mVolumeUuid, installingSession.mPackageAbiOverride, installingSession.mPermissionStates, installingSession.mAllowlistedRestrictedPermissions, installingSession.mAutoRevokePermissionsMode, installingSession.mTraceMethod, installingSession.mTraceCookie, installingSession.mSigningDetails, installingSession.mInstallReason, installingSession.mInstallScenario, installingSession.mForceQueryableOverride, installingSession.mDataLoaderType, installingSession.mPackageSource, installingSession.mApplicationEnabledSettingPersistent, installingSession.mDexoptCompilerFilter);
+        this.mInstallArgs =
+                new InstallArgs(
+                        installingSession.mOriginInfo,
+                        installingSession.mMoveInfo,
+                        installingSession.mObserver,
+                        installingSession.mInstallFlags,
+                        installingSession.mDevelopmentInstallFlags,
+                        installingSession.mInstallSource,
+                        installingSession.mVolumeUuid,
+                        installingSession.mPackageAbiOverride,
+                        installingSession.mPermissionStates,
+                        installingSession.mAllowlistedRestrictedPermissions,
+                        installingSession.mAutoRevokePermissionsMode,
+                        installingSession.mTraceMethod,
+                        installingSession.mTraceCookie,
+                        installingSession.mSigningDetails,
+                        installingSession.mInstallReason,
+                        installingSession.mInstallScenario,
+                        installingSession.mForceQueryableOverride,
+                        installingSession.mDataLoaderType,
+                        installingSession.mPackageSource,
+                        installingSession.mApplicationEnabledSettingPersistent,
+                        installingSession.mDexoptCompilerFilter);
         this.mPackageLite = installingSession.mPackageLite;
         this.mPackageMetrics = new PackageMetrics(this);
         this.mIsInstallInherit = installingSession.mIsInherit;
@@ -248,13 +285,20 @@ public final class InstallRequest {
             LinkedHashSet linkedHashSet = new LinkedHashSet();
             Iterator it = dexoptResult.getPackageDexoptResults().iterator();
             while (it.hasNext()) {
-                Iterator it2 = ((DexoptResult.PackageDexoptResult) it.next()).getDexContainerFileDexoptResults().iterator();
+                Iterator it2 =
+                        ((DexoptResult.PackageDexoptResult) it.next())
+                                .getDexContainerFileDexoptResults()
+                                .iterator();
                 while (it2.hasNext()) {
-                    linkedHashSet.addAll(((DexoptResult.DexContainerFileDexoptResult) it2.next()).getExternalProfileErrors());
+                    linkedHashSet.addAll(
+                            ((DexoptResult.DexContainerFileDexoptResult) it2.next())
+                                    .getExternalProfileErrors());
                 }
             }
             if (!linkedHashSet.isEmpty()) {
-                this.mWarnings.add("Error occurred during dexopt when processing external profiles:\n  " + String.join("\n  ", linkedHashSet));
+                this.mWarnings.add(
+                        "Error occurred during dexopt when processing external profiles:\n  "
+                                + String.join("\n  ", linkedHashSet));
             }
         }
         PackageMetrics packageMetrics = this.mPackageMetrics;
@@ -264,9 +308,14 @@ public final class InstallRequest {
         Iterator it3 = dexoptResult.getPackageDexoptResults().iterator();
         long j = 0;
         while (it3.hasNext()) {
-            Iterator it4 = ((DexoptResult.PackageDexoptResult) it3.next()).getDexContainerFileDexoptResults().iterator();
+            Iterator it4 =
+                    ((DexoptResult.PackageDexoptResult) it3.next())
+                            .getDexContainerFileDexoptResults()
+                            .iterator();
             while (it4.hasNext()) {
-                j += ((DexoptResult.DexContainerFileDexoptResult) it4.next()).getDex2oatWallTimeMillis();
+                j +=
+                        ((DexoptResult.DexContainerFileDexoptResult) it4.next())
+                                .getDex2oatWallTimeMillis();
             }
         }
         packageMetrics.mInstallSteps.put(5, new PackageMetrics.InstallStep(j));
@@ -304,7 +353,17 @@ public final class InstallRequest {
         this.mOrigUsers = iArr;
     }
 
-    public final void setPrepareResult(boolean z, int i, int i2, PackageSetting packageSetting, ParsedPackage parsedPackage, ArchivedPackageParcel archivedPackageParcel, boolean z2, boolean z3, PackageSetting packageSetting2, PackageSetting packageSetting3) {
+    public final void setPrepareResult(
+            boolean z,
+            int i,
+            int i2,
+            PackageSetting packageSetting,
+            ParsedPackage parsedPackage,
+            ArchivedPackageParcel archivedPackageParcel,
+            boolean z2,
+            boolean z3,
+            PackageSetting packageSetting2,
+            PackageSetting packageSetting3) {
         this.mReplace = z;
         this.mScanFlags = i;
         this.mParseFlags = i2;

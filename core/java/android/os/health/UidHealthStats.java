@@ -1,10 +1,10 @@
 package android.os.health;
 
-import android.os.health.HealthKeys;
 
 /* loaded from: classes3.dex */
 public final class UidHealthStats {
-    public static final HealthKeys.Constants CONSTANTS = new HealthKeys.Constants(UidHealthStats.class);
+    public static final HealthKeys.Constants CONSTANTS =
+            new HealthKeys.Constants(UidHealthStats.class);
 
     @HealthKeys.Constant(type = 1)
     public static final int MEASUREMENT_BLUETOOTH_IDLE_MS = 10020;
@@ -199,6 +199,5 @@ public final class UidHealthStats {
     @HealthKeys.Constant(type = 0)
     public static final int TIMER_WIFI_SCAN = 10030;
 
-    private UidHealthStats() {
-    }
+    private UidHealthStats() {}
 }

@@ -10,10 +10,11 @@ import android.os.ICancellationSignal;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.os.SystemClock;
-import android.service.rotationresolver.IRotationResolverService;
+
 import com.android.internal.util.function.QuadConsumer;
 import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -26,14 +27,14 @@ public abstract class RotationResolverService extends Service {
     public static final int ROTATION_RESULT_FAILURE_PREEMPTED = 2;
     public static final int ROTATION_RESULT_FAILURE_TIMED_OUT = 1;
     public static final int ROTATION_RESULT_FAILURE_UNKNOWN = 3;
-    public static final String SERVICE_INTERFACE = "android.service.rotationresolver.RotationResolverService";
+    public static final String SERVICE_INTERFACE =
+            "android.service.rotationresolver.RotationResolverService";
     private CancellationSignal mCancellationSignal;
     private final Handler mMainThreadHandler = new Handler(Looper.getMainLooper(), null, true);
     private RotationResolverCallbackWrapper mPendingCallback;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FailureCodes {
-    }
+    public @interface FailureCodes {}
 
     public interface RotationResolverCallback {
         void onFailure(int i);
@@ -41,25 +42,41 @@ public abstract class RotationResolverService extends Service {
         void onSuccess(int i);
     }
 
-    public abstract void onResolveRotation(RotationResolutionRequest rotationResolutionRequest, CancellationSignal cancellationSignal, RotationResolverCallback rotationResolverCallback);
+    public abstract void onResolveRotation(
+            RotationResolutionRequest rotationResolutionRequest,
+            CancellationSignal cancellationSignal,
+            RotationResolverCallback rotationResolverCallback);
 
     /* renamed from: android.service.rotationresolver.RotationResolverService$1, reason: invalid class name */
     class AnonymousClass1 extends IRotationResolverService.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.service.rotationresolver.IRotationResolverService
-        public void resolveRotation(IRotationResolverCallback callback, RotationResolutionRequest request) throws RemoteException {
+        public void resolveRotation(
+                IRotationResolverCallback callback, RotationResolutionRequest request)
+                throws RemoteException {
             Objects.requireNonNull(callback);
             Objects.requireNonNull(request);
             ICancellationSignal transport = CancellationSignal.createTransport();
             callback.onCancellable(transport);
-            RotationResolverService.this.mMainThreadHandler.sendMessage(PooledLambda.obtainMessage(new QuadConsumer() { // from class: android.service.rotationresolver.RotationResolverService$1$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.function.QuadConsumer
-                public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
-                    ((RotationResolverService) obj).resolveRotation((IRotationResolverCallback) obj2, (RotationResolutionRequest) obj3, (ICancellationSignal) obj4);
-                }
-            }, RotationResolverService.this, callback, request, transport));
+            RotationResolverService.this.mMainThreadHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new QuadConsumer() { // from class:
+                                                 // android.service.rotationresolver.RotationResolverService$1$$ExternalSyntheticLambda0
+                                @Override // com.android.internal.util.function.QuadConsumer
+                                public final void accept(
+                                        Object obj, Object obj2, Object obj3, Object obj4) {
+                                    ((RotationResolverService) obj)
+                                            .resolveRotation(
+                                                    (IRotationResolverCallback) obj2,
+                                                    (RotationResolutionRequest) obj3,
+                                                    (ICancellationSignal) obj4);
+                                }
+                            },
+                            RotationResolverService.this,
+                            callback,
+                            request,
+                            transport));
         }
     }
 
@@ -72,12 +89,19 @@ public abstract class RotationResolverService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void resolveRotation(IRotationResolverCallback callback, RotationResolutionRequest request, ICancellationSignal transport) {
-        if (this.mPendingCallback != null && ((this.mCancellationSignal == null || !this.mCancellationSignal.isCanceled()) && SystemClock.uptimeMillis() < this.mPendingCallback.mExpirationTime)) {
+    public void resolveRotation(
+            IRotationResolverCallback callback,
+            RotationResolutionRequest request,
+            ICancellationSignal transport) {
+        if (this.mPendingCallback != null
+                && ((this.mCancellationSignal == null || !this.mCancellationSignal.isCanceled())
+                        && SystemClock.uptimeMillis() < this.mPendingCallback.mExpirationTime)) {
             reportFailures(callback, 2);
             return;
         }
-        this.mPendingCallback = new RotationResolverCallbackWrapper(callback, this, SystemClock.uptimeMillis() + request.getTimeoutMillis());
+        this.mPendingCallback =
+                new RotationResolverCallbackWrapper(
+                        callback, this, SystemClock.uptimeMillis() + request.getTimeoutMillis());
         this.mCancellationSignal = CancellationSignal.fromTransport(transport);
         onResolveRotation(request, this.mCancellationSignal, this.mPendingCallback);
     }
@@ -116,7 +140,10 @@ public abstract class RotationResolverService extends Service {
         private final Handler mHandler;
         private final RotationResolverService mService;
 
-        private RotationResolverCallbackWrapper(IRotationResolverCallback callback, RotationResolverService service, long expirationTime) {
+        private RotationResolverCallbackWrapper(
+                IRotationResolverCallback callback,
+                RotationResolverService service,
+                long expirationTime) {
             this.mCallback = callback;
             this.mService = service;
             this.mHandler = service.mMainThreadHandler;
@@ -126,22 +153,40 @@ public abstract class RotationResolverService extends Service {
 
         @Override // android.service.rotationresolver.RotationResolverService.RotationResolverCallback
         public void onSuccess(int result) {
-            this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.rotationresolver.RotationResolverService$RotationResolverCallbackWrapper$$ExternalSyntheticLambda1
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((RotationResolverService) obj).sendRotationResult((IRotationResolverCallback) obj2, ((Integer) obj3).intValue());
-                }
-            }, this.mService, this.mCallback, Integer.valueOf(result)));
+            this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.rotationresolver.RotationResolverService$RotationResolverCallbackWrapper$$ExternalSyntheticLambda1
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((RotationResolverService) obj)
+                                            .sendRotationResult(
+                                                    (IRotationResolverCallback) obj2,
+                                                    ((Integer) obj3).intValue());
+                                }
+                            },
+                            this.mService,
+                            this.mCallback,
+                            Integer.valueOf(result)));
         }
 
         @Override // android.service.rotationresolver.RotationResolverService.RotationResolverCallback
         public void onFailure(int error) {
-            this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.rotationresolver.RotationResolverService$RotationResolverCallbackWrapper$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((RotationResolverService) obj).sendFailureResult((IRotationResolverCallback) obj2, ((Integer) obj3).intValue());
-                }
-            }, this.mService, this.mCallback, Integer.valueOf(error)));
+            this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.rotationresolver.RotationResolverService$RotationResolverCallbackWrapper$$ExternalSyntheticLambda0
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((RotationResolverService) obj)
+                                            .sendFailureResult(
+                                                    (IRotationResolverCallback) obj2,
+                                                    ((Integer) obj3).intValue());
+                                }
+                            },
+                            this.mService,
+                            this.mCallback,
+                            Integer.valueOf(error)));
         }
     }
 }

@@ -22,10 +22,19 @@ public abstract class Flags {
     public static boolean enableColorCorrectionSaturation() {
         if (!FeatureFlagsImpl.accessibility_is_cached) {
             try {
-                FeatureFlagsImpl.enableColorCorrectionSaturation = DeviceConfig.getProperties("accessibility", new String[0]).getBoolean("com.android.server.accessibility.enable_color_correction_saturation", true);
+                FeatureFlagsImpl.enableColorCorrectionSaturation =
+                        DeviceConfig.getProperties("accessibility", new String[0])
+                                .getBoolean(
+                                        "com.android.server.accessibility.enable_color_correction_saturation",
+                                        true);
                 FeatureFlagsImpl.accessibility_is_cached = true;
             } catch (NullPointerException e) {
-                throw new RuntimeException("Cannot read value from namespace accessibility from DeviceConfig. It could be that the code using flag executed before SettingsProvider initialization. Please use fixed read-only flag by adding is_fixed_read_only: true in flag declaration.", e);
+                throw new RuntimeException(
+                        "Cannot read value from namespace accessibility from DeviceConfig. It could"
+                            + " be that the code using flag executed before SettingsProvider"
+                            + " initialization. Please use fixed read-only flag by adding"
+                            + " is_fixed_read_only: true in flag declaration.",
+                        e);
             }
         }
         return FeatureFlagsImpl.enableColorCorrectionSaturation;

@@ -16,12 +16,16 @@ public final class Usb20ACHeader extends UsbACHeaderInterface {
         return this.mLength;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbACHeaderInterface, com.android.server.usb.descriptors.UsbACInterface, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbACHeaderInterface,
+              // com.android.server.usb.descriptors.UsbACInterface,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public final void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
         textReportCanvas.openList();
-        textReportCanvas.writeListItem("Category: " + TextReportCanvas.getHexString(this.mCategory));
-        textReportCanvas.writeListItem("Controls: " + TextReportCanvas.getHexString(this.mControls));
+        textReportCanvas.writeListItem(
+                "Category: " + TextReportCanvas.getHexString(this.mCategory));
+        textReportCanvas.writeListItem(
+                "Controls: " + TextReportCanvas.getHexString(this.mControls));
         textReportCanvas.closeList();
     }
 }

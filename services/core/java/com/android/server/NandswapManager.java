@@ -15,9 +15,12 @@ import android.os.SemHqmManager;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.input.KeyboardMetricsCollector;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -32,7 +35,8 @@ import java.util.concurrent.TimeUnit;
 public final class NandswapManager extends JobService {
     public static final boolean SUPPORT_RAM_EXPAND_SWITCH;
     public static final AnonymousClass1 intentReceiver;
-    public static final ComponentName sNandswapManager = new ComponentName("android", NandswapManager.class.getName());
+    public static final ComponentName sNandswapManager =
+            new ComponentName("android", NandswapManager.class.getName());
     public static Context mContext = null;
     public static NandswapClient mClient = null;
     public static NandSwapBigdataManager mNandBigData = null;
@@ -45,7 +49,8 @@ public final class NandswapManager extends JobService {
             boolean z;
             int i;
             String action = intent.getAction();
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("received action: ", action, "NandswapManager");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "received action: ", action, "NandswapManager");
             try {
                 if ("com.sec.android.intent.action.HQM_UPDATE_REQ".equals(action)) {
                     if (NandswapManager.mNandBigData != null) {
@@ -54,11 +59,21 @@ public final class NandswapManager extends JobService {
                     }
                     return;
                 }
-                if (!"android.intent.action.ACTION_SHUTDOWN".equals(action) && !"android.intent.action.REBOOT".equals(action)) {
+                if (!"android.intent.action.ACTION_SHUTDOWN".equals(action)
+                        && !"android.intent.action.REBOOT".equals(action)) {
                     if ("com.samsung.intent.action.LAZY_BOOT_COMPLETE".equals(action)) {
-                        Slog.d("NandswapManager", "support ramExpandSwitch: " + NandswapManager.SUPPORT_RAM_EXPAND_SWITCH + " for " + Build.VERSION.SEM_PLATFORM_INT);
-                        int i2 = Settings.Global.getInt(context.getContentResolver(), "ram_expand_size", -1);
-                        String string = Settings.Global.getString(context.getContentResolver(), "ram_expand_size_list");
+                        Slog.d(
+                                "NandswapManager",
+                                "support ramExpandSwitch: "
+                                        + NandswapManager.SUPPORT_RAM_EXPAND_SWITCH
+                                        + " for "
+                                        + Build.VERSION.SEM_PLATFORM_INT);
+                        int i2 =
+                                Settings.Global.getInt(
+                                        context.getContentResolver(), "ram_expand_size", -1);
+                        String string =
+                                Settings.Global.getString(
+                                        context.getContentResolver(), "ram_expand_size_list");
                         if (i2 == -1) {
                             Slog.d("NandswapManager", "ram_expand_size was not set");
                             z = true;
@@ -75,21 +90,38 @@ public final class NandswapManager extends JobService {
                         }
                         if (z) {
                             try {
-                                i = (int) (((new File("/data/per_boot/zram_swap").length() / 1024) / 1024) * 4);
+                                i =
+                                        (int)
+                                                (((new File("/data/per_boot/zram_swap").length()
+                                                                        / 1024)
+                                                                / 1024)
+                                                        * 4);
                             } catch (Exception unused) {
                                 Slog.e("NandswapManager", "error on file length");
                                 i = 0;
                             }
                             NandswapManager.m76$$Nest$smsetExpandSizeAndList(context, i);
                         }
-                        if (SystemProperties.getBoolean("ro.sys.kernelmemory.gmr.enabled", false) && "kgsl".equals(SystemProperties.get("ro.sys.kernelmemory.gmr.vendor_plugin", ""))) {
+                        if (SystemProperties.getBoolean("ro.sys.kernelmemory.gmr.enabled", false)
+                                && "kgsl"
+                                        .equals(
+                                                SystemProperties.get(
+                                                        "ro.sys.kernelmemory.gmr.vendor_plugin",
+                                                        ""))) {
                             NandswapManager.m73$$Nest$smgetRamExpandSizePersistProp();
                             try {
-                                FileUtils.stringToFile(new File("/sys/class/kgsl/kgsl/max_reclaim_limit"), String.valueOf(128000));
-                                Slog.i("NandswapManager", "GMR: Success write max reclaim limit: 128000");
+                                FileUtils.stringToFile(
+                                        new File("/sys/class/kgsl/kgsl/max_reclaim_limit"),
+                                        String.valueOf(128000));
+                                Slog.i(
+                                        "NandswapManager",
+                                        "GMR: Success write max reclaim limit: 128000");
                                 return;
                             } catch (IOException unused2) {
-                                Slog.e("NandswapManager", "GMR: Failed to write max recaim limit to /sys/class/kgsl/kgsl/max_reclaim_limit");
+                                Slog.e(
+                                        "NandswapManager",
+                                        "GMR: Failed to write max recaim limit to"
+                                            + " /sys/class/kgsl/kgsl/max_reclaim_limit");
                                 return;
                             }
                         }
@@ -98,11 +130,18 @@ public final class NandswapManager extends JobService {
                     return;
                 }
                 ComponentName componentName = NandswapManager.sNandswapManager;
-                if (Settings.Global.getInt(context.getContentResolver(), "ram_expand_size", -1) == -1 && NandswapManager.m74$$Nest$smisBackingDevSet()) {
-                    NandswapManager.putRamExpandSize(context, NandswapManager.getDefaultRamExpandSize());
+                if (Settings.Global.getInt(context.getContentResolver(), "ram_expand_size", -1)
+                                == -1
+                        && NandswapManager.m74$$Nest$smisBackingDevSet()) {
+                    NandswapManager.putRamExpandSize(
+                            context, NandswapManager.getDefaultRamExpandSize());
                 }
-                int m73$$Nest$smgetRamExpandSizePersistProp = NandswapManager.m73$$Nest$smgetRamExpandSizePersistProp();
-                if (m73$$Nest$smgetRamExpandSizePersistProp == -1 || m73$$Nest$smgetRamExpandSizePersistProp == Settings.Global.getInt(context.getContentResolver(), "ram_expand_size", -1)) {
+                int m73$$Nest$smgetRamExpandSizePersistProp =
+                        NandswapManager.m73$$Nest$smgetRamExpandSizePersistProp();
+                if (m73$$Nest$smgetRamExpandSizePersistProp == -1
+                        || m73$$Nest$smgetRamExpandSizePersistProp
+                                == Settings.Global.getInt(
+                                        context.getContentResolver(), "ram_expand_size", -1)) {
                     NandswapManager.m75$$Nest$smsaveClientsBigdataInfoInReboot();
                     return;
                 }
@@ -112,14 +151,35 @@ public final class NandswapManager extends JobService {
                 }
                 Slog.i("NandswapManager", "Ramplus Option is changed. clear bigdata's info.");
             } catch (Exception e) {
-                NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("intent exception msg : "), "NandswapManager");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("intent exception msg : "), "NandswapManager");
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NandSwapBigdataManager {
-        public static final String[] bigdataJsonFormat = {"count_average", "size_average", "reads", "writes", "objcnt", "max_count", "max_size", "ppr_count_average", "ppr_size_average", "ppr_reads", "ppr_writes", "ppr_objcnt", "ppr_max_count", "ppr_max_size", "objreads", "objwrites", "gpu_total_mem", "gpu_reclaimed_mem", "swap_used"};
+        public static final String[] bigdataJsonFormat = {
+            "count_average",
+            "size_average",
+            "reads",
+            "writes",
+            "objcnt",
+            "max_count",
+            "max_size",
+            "ppr_count_average",
+            "ppr_size_average",
+            "ppr_reads",
+            "ppr_writes",
+            "ppr_objcnt",
+            "ppr_max_count",
+            "ppr_max_size",
+            "objreads",
+            "objwrites",
+            "gpu_total_mem",
+            "gpu_reclaimed_mem",
+            "swap_used"
+        };
         public static SemHqmManager semHqmManager;
 
         /* renamed from: -$$Nest$smuploadBigdataToHQM, reason: not valid java name */
@@ -136,7 +196,8 @@ public final class NandswapManager extends JobService {
                 HashMap bigdataInfoProp = NandswapManager.mClient.getBigdataInfoProp();
                 HashMap hashMap = new HashMap();
                 try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader("/proc/meminfo"));
+                    BufferedReader bufferedReader =
+                            new BufferedReader(new FileReader("/proc/meminfo"));
                     while (true) {
                         try {
                             String readLine = bufferedReader.readLine();
@@ -145,7 +206,12 @@ public final class NandswapManager extends JobService {
                             }
                             int indexOf = readLine.indexOf(":");
                             if (indexOf > 0) {
-                                hashMap.put(readLine.substring(0, indexOf), Integer.valueOf(Integer.parseInt(readLine.substring(indexOf).replaceAll("\\D+", ""))));
+                                hashMap.put(
+                                        readLine.substring(0, indexOf),
+                                        Integer.valueOf(
+                                                Integer.parseInt(
+                                                        readLine.substring(indexOf)
+                                                                .replaceAll("\\D+", ""))));
                             }
                         } finally {
                         }
@@ -157,9 +223,21 @@ public final class NandswapManager extends JobService {
                 }
                 if (bigdataInfoProp.isEmpty() || bdStat.isEmpty() || hashMap.isEmpty()) {
                     Locale locale = Locale.US;
-                    NandswapManager$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(bigdataInfoProp.size(), bdStat.size(), "persist.sys.zram0.bigdata_info(", ") or bd_stat(", ") or meminfo("), hashMap.size(), ") is empty...", "NandswapManager");
+                    NandswapManager$$ExternalSyntheticOutline0.m(
+                            ArrayUtils$$ExternalSyntheticOutline0.m(
+                                    bigdataInfoProp.size(),
+                                    bdStat.size(),
+                                    "persist.sys.zram0.bigdata_info(",
+                                    ") or bd_stat(",
+                                    ") or meminfo("),
+                            hashMap.size(),
+                            ") is empty...",
+                            "NandswapManager");
                 } else {
-                    String str2 = "\"option\":\"" + NandswapManager.m73$$Nest$smgetRamExpandSizePersistProp() + "\",";
+                    String str2 =
+                            "\"option\":\""
+                                    + NandswapManager.m73$$Nest$smgetRamExpandSizePersistProp()
+                                    + "\",";
                     String[] strArr = bigdataJsonFormat;
                     int i = 0;
                     while (true) {
@@ -169,110 +247,273 @@ public final class NandswapManager extends JobService {
                                 if (!str3.equals("size_average")) {
                                     if (!str3.equals("ppr_count_average")) {
                                         if (!str3.equals("ppr_size_average")) {
-                                            if (!str3.equals("objcnt") && !str3.equals("ppr_objcnt")) {
-                                                if (!str3.equals("max_count") && !str3.equals("max_size") && !str3.equals("ppr_max_count") && !str3.equals("ppr_max_size")) {
+                                            if (!str3.equals("objcnt")
+                                                    && !str3.equals("ppr_objcnt")) {
+                                                if (!str3.equals("max_count")
+                                                        && !str3.equals("max_size")
+                                                        && !str3.equals("ppr_max_count")
+                                                        && !str3.equals("ppr_max_size")) {
                                                     if (!str3.equals("reads")) {
                                                         if (!str3.equals("writes")) {
                                                             if (!str3.equals("ppr_reads")) {
                                                                 if (!str3.equals("ppr_writes")) {
                                                                     if (!str3.equals("objreads")) {
-                                                                        if (!str3.equals("objwrites")) {
-                                                                            if (!str3.equals("gpu_total_mem")) {
-                                                                                if (!str3.equals("gpu_reclaimed_mem")) {
-                                                                                    if (!str3.equals("swap_used")) {
+                                                                        if (!str3.equals(
+                                                                                "objwrites")) {
+                                                                            if (!str3.equals(
+                                                                                    "gpu_total_mem")) {
+                                                                                if (!str3.equals(
+                                                                                        "gpu_reclaimed_mem")) {
+                                                                                    if (!str3
+                                                                                            .equals(
+                                                                                                    "swap_used")) {
                                                                                         break;
                                                                                     } else {
-                                                                                        format = String.valueOf(((Integer) hashMap.get("SwapTotal")).intValue() - ((Integer) hashMap.get("SwapFree")).intValue());
+                                                                                        format =
+                                                                                                String
+                                                                                                        .valueOf(
+                                                                                                                ((Integer)
+                                                                                                                                        hashMap
+                                                                                                                                                .get(
+                                                                                                                                                        "SwapTotal"))
+                                                                                                                                .intValue()
+                                                                                                                        - ((Integer)
+                                                                                                                                        hashMap
+                                                                                                                                                .get(
+                                                                                                                                                        "SwapFree"))
+                                                                                                                                .intValue());
                                                                                     }
                                                                                 } else {
-                                                                                    if (hashMap.get("KgslReclaimed") != null) {
-                                                                                        format = String.valueOf(hashMap.get("KgslReclaimed"));
+                                                                                    if (hashMap.get(
+                                                                                                    "KgslReclaimed")
+                                                                                            != null) {
+                                                                                        format =
+                                                                                                String
+                                                                                                        .valueOf(
+                                                                                                                hashMap
+                                                                                                                        .get(
+                                                                                                                                "KgslReclaimed"));
                                                                                     }
                                                                                     format = "-1";
                                                                                 }
                                                                             } else {
-                                                                                if (hashMap.get("KgslShmemUsage") != null) {
-                                                                                    format = String.valueOf(hashMap.get("KgslShmemUsage"));
+                                                                                if (hashMap.get(
+                                                                                                "KgslShmemUsage")
+                                                                                        != null) {
+                                                                                    format =
+                                                                                            String
+                                                                                                    .valueOf(
+                                                                                                            hashMap
+                                                                                                                    .get(
+                                                                                                                            "KgslShmemUsage"));
                                                                                 }
                                                                                 format = "-1";
                                                                             }
                                                                         } else {
-                                                                            Locale locale2 = Locale.US;
-                                                                            int intValue = (((Integer) bdStat.get(str3)).intValue() - NandswapManager.mClient.normalStat.objWrites) + ((Integer) bigdataInfoProp.get(str3)).intValue();
-                                                                            StringBuilder sb = new StringBuilder();
+                                                                            Locale locale2 =
+                                                                                    Locale.US;
+                                                                            int intValue =
+                                                                                    (((Integer)
+                                                                                                                    bdStat
+                                                                                                                            .get(
+                                                                                                                                    str3))
+                                                                                                            .intValue()
+                                                                                                    - NandswapManager
+                                                                                                            .mClient
+                                                                                                            .normalStat
+                                                                                                            .objWrites)
+                                                                                            + ((Integer)
+                                                                                                            bigdataInfoProp
+                                                                                                                    .get(
+                                                                                                                            str3))
+                                                                                                    .intValue();
+                                                                            StringBuilder sb =
+                                                                                    new StringBuilder();
                                                                             sb.append(intValue);
                                                                             format = sb.toString();
                                                                         }
                                                                     } else {
                                                                         Locale locale3 = Locale.US;
-                                                                        int intValue2 = (((Integer) bdStat.get(str3)).intValue() - NandswapManager.mClient.normalStat.objReads) + ((Integer) bigdataInfoProp.get(str3)).intValue();
-                                                                        StringBuilder sb2 = new StringBuilder();
+                                                                        int intValue2 =
+                                                                                (((Integer)
+                                                                                                                bdStat
+                                                                                                                        .get(
+                                                                                                                                str3))
+                                                                                                        .intValue()
+                                                                                                - NandswapManager
+                                                                                                        .mClient
+                                                                                                        .normalStat
+                                                                                                        .objReads)
+                                                                                        + ((Integer)
+                                                                                                        bigdataInfoProp
+                                                                                                                .get(
+                                                                                                                        str3))
+                                                                                                .intValue();
+                                                                        StringBuilder sb2 =
+                                                                                new StringBuilder();
                                                                         sb2.append(intValue2);
                                                                         format = sb2.toString();
                                                                     }
                                                                 } else {
                                                                     Locale locale4 = Locale.US;
-                                                                    int intValue3 = (((Integer) bdStat.get(str3)).intValue() - NandswapManager.mClient.pprStat.writes) + ((Integer) bigdataInfoProp.get(str3)).intValue();
-                                                                    StringBuilder sb3 = new StringBuilder();
+                                                                    int intValue3 =
+                                                                            (((Integer)
+                                                                                                            bdStat
+                                                                                                                    .get(
+                                                                                                                            str3))
+                                                                                                    .intValue()
+                                                                                            - NandswapManager
+                                                                                                    .mClient
+                                                                                                    .pprStat
+                                                                                                    .writes)
+                                                                                    + ((Integer)
+                                                                                                    bigdataInfoProp
+                                                                                                            .get(
+                                                                                                                    str3))
+                                                                                            .intValue();
+                                                                    StringBuilder sb3 =
+                                                                            new StringBuilder();
                                                                     sb3.append(intValue3);
                                                                     format = sb3.toString();
                                                                 }
                                                             } else {
                                                                 Locale locale5 = Locale.US;
-                                                                int intValue4 = (((Integer) bdStat.get(str3)).intValue() - NandswapManager.mClient.pprStat.reads) + ((Integer) bigdataInfoProp.get(str3)).intValue();
-                                                                StringBuilder sb4 = new StringBuilder();
+                                                                int intValue4 =
+                                                                        (((Integer)
+                                                                                                        bdStat
+                                                                                                                .get(
+                                                                                                                        str3))
+                                                                                                .intValue()
+                                                                                        - NandswapManager
+                                                                                                .mClient
+                                                                                                .pprStat
+                                                                                                .reads)
+                                                                                + ((Integer)
+                                                                                                bigdataInfoProp
+                                                                                                        .get(
+                                                                                                                str3))
+                                                                                        .intValue();
+                                                                StringBuilder sb4 =
+                                                                        new StringBuilder();
                                                                 sb4.append(intValue4);
                                                                 format = sb4.toString();
                                                             }
                                                         } else {
                                                             Locale locale6 = Locale.US;
-                                                            int intValue5 = (((Integer) bdStat.get(str3)).intValue() - NandswapManager.mClient.normalStat.writes) + ((Integer) bigdataInfoProp.get(str3)).intValue();
+                                                            int intValue5 =
+                                                                    (((Integer) bdStat.get(str3))
+                                                                                            .intValue()
+                                                                                    - NandswapManager
+                                                                                            .mClient
+                                                                                            .normalStat
+                                                                                            .writes)
+                                                                            + ((Integer)
+                                                                                            bigdataInfoProp
+                                                                                                    .get(
+                                                                                                            str3))
+                                                                                    .intValue();
                                                             StringBuilder sb5 = new StringBuilder();
                                                             sb5.append(intValue5);
                                                             format = sb5.toString();
                                                         }
                                                     } else {
                                                         Locale locale7 = Locale.US;
-                                                        int intValue6 = (((Integer) bdStat.get(str3)).intValue() - NandswapManager.mClient.normalStat.reads) + ((Integer) bigdataInfoProp.get(str3)).intValue();
+                                                        int intValue6 =
+                                                                (((Integer) bdStat.get(str3))
+                                                                                        .intValue()
+                                                                                - NandswapManager
+                                                                                        .mClient
+                                                                                        .normalStat
+                                                                                        .reads)
+                                                                        + ((Integer)
+                                                                                        bigdataInfoProp
+                                                                                                .get(
+                                                                                                        str3))
+                                                                                .intValue();
                                                         StringBuilder sb6 = new StringBuilder();
                                                         sb6.append(intValue6);
                                                         format = sb6.toString();
                                                     }
                                                 } else {
                                                     Locale locale8 = Locale.US;
-                                                    int max = Math.max(((Integer) bigdataInfoProp.get(str3)).intValue(), ((Integer) bdStat.get(str3)).intValue());
+                                                    int max =
+                                                            Math.max(
+                                                                    ((Integer)
+                                                                                    bigdataInfoProp
+                                                                                            .get(
+                                                                                                    str3))
+                                                                            .intValue(),
+                                                                    ((Integer) bdStat.get(str3))
+                                                                            .intValue());
                                                     StringBuilder sb7 = new StringBuilder();
                                                     sb7.append(max);
                                                     format = sb7.toString();
                                                 }
                                             } else {
-                                                format = String.format(Locale.US, "%d", bdStat.get(str3));
+                                                format =
+                                                        String.format(
+                                                                Locale.US, "%d", bdStat.get(str3));
                                             }
                                         } else {
                                             Locale locale9 = Locale.US;
                                             NandswapClient nandswapClient = NandswapManager.mClient;
-                                            format = String.format(locale9, "%.3f", Double.valueOf(nandswapClient.supportBigdataState ? nandswapClient.pprStat.calcAverage(2) : 0.0d));
+                                            format =
+                                                    String.format(
+                                                            locale9,
+                                                            "%.3f",
+                                                            Double.valueOf(
+                                                                    nandswapClient
+                                                                                    .supportBigdataState
+                                                                            ? nandswapClient.pprStat
+                                                                                    .calcAverage(2)
+                                                                            : 0.0d));
                                         }
                                     } else {
                                         Locale locale10 = Locale.US;
                                         NandswapClient nandswapClient2 = NandswapManager.mClient;
-                                        format = String.format(locale10, "%.3f", Double.valueOf(nandswapClient2.supportBigdataState ? nandswapClient2.pprStat.calcAverage(1) : 0.0d));
+                                        format =
+                                                String.format(
+                                                        locale10,
+                                                        "%.3f",
+                                                        Double.valueOf(
+                                                                nandswapClient2.supportBigdataState
+                                                                        ? nandswapClient2.pprStat
+                                                                                .calcAverage(1)
+                                                                        : 0.0d));
                                     }
                                 } else {
                                     Locale locale11 = Locale.US;
                                     NandswapClient nandswapClient3 = NandswapManager.mClient;
-                                    format = String.format(locale11, "%.3f", Double.valueOf(nandswapClient3.supportBigdataState ? nandswapClient3.normalStat.calcAverage(2) : 0.0d));
+                                    format =
+                                            String.format(
+                                                    locale11,
+                                                    "%.3f",
+                                                    Double.valueOf(
+                                                            nandswapClient3.supportBigdataState
+                                                                    ? nandswapClient3.normalStat
+                                                                            .calcAverage(2)
+                                                                    : 0.0d));
                                 }
                             } else {
                                 Locale locale12 = Locale.US;
                                 NandswapClient nandswapClient4 = NandswapManager.mClient;
-                                format = String.format(locale12, "%.3f", Double.valueOf(nandswapClient4.supportBigdataState ? nandswapClient4.normalStat.calcAverage(1) : 0.0d));
+                                format =
+                                        String.format(
+                                                locale12,
+                                                "%.3f",
+                                                Double.valueOf(
+                                                        nandswapClient4.supportBigdataState
+                                                                ? nandswapClient4.normalStat
+                                                                        .calcAverage(1)
+                                                                : 0.0d));
                             }
                             str2 = str2 + "\"" + str3 + "\":\"" + format + "\",";
                             i++;
                         } else {
                             if (str2.length() != 0) {
-                                str2 = DropBoxManagerService$EntryFile$$ExternalSyntheticOutline0.m(1, 0, str2);
+                                str2 =
+                                        DropBoxManagerService$EntryFile$$ExternalSyntheticOutline0
+                                                .m(1, 0, str2);
                             }
                             str = str2;
                         }
@@ -295,7 +536,9 @@ public final class NandswapManager extends JobService {
                 try {
                     FileUtils.stringToFile(new File("/sys/block/zram0/bd_stat"), String.valueOf(0));
                 } catch (IOException unused2) {
-                    Slog.e("NandswapManager", "Failed to reset stats from /sys/block/zram0/bd_stat");
+                    Slog.e(
+                            "NandswapManager",
+                            "Failed to reset stats from /sys/block/zram0/bd_stat");
                 }
             }
         }
@@ -314,9 +557,9 @@ public final class NandswapManager extends JobService {
 
         /* JADX WARN: Can't wrap try/catch for region: R(10:0|1|(2:2|3)|(7:8|9|10|11|(1:13)(1:17)|14|15)|20|10|11|(0)(0)|14|15) */
         /* JADX WARN: Code restructure failed: missing block: B:18:0x0081, code lost:
-        
-            android.util.Slog.e("NandswapManager", "Failed to read stats from /sys/block/zram0/bd_stat");
-         */
+
+           android.util.Slog.e("NandswapManager", "Failed to read stats from /sys/block/zram0/bd_stat");
+        */
         /* JADX WARN: Removed duplicated region for block: B:13:0x007b A[Catch: IOException -> 0x0081, TryCatch #1 {IOException -> 0x0081, blocks: (B:11:0x005f, B:13:0x007b, B:17:0x007e), top: B:10:0x005f }] */
         /* JADX WARN: Removed duplicated region for block: B:17:0x007e A[Catch: IOException -> 0x0081, TRY_LEAVE, TryCatch #1 {IOException -> 0x0081, blocks: (B:11:0x005f, B:13:0x007b, B:17:0x007e), top: B:10:0x005f }] */
         /*
@@ -396,31 +639,62 @@ public final class NandswapManager extends JobService {
                 r7.setPreviousInfo()
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.NandswapManager.NandswapClient.<init>():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.NandswapManager.NandswapClient.<init>():void");
         }
 
         public static int getQuotaSysNode() {
             try {
-                return Integer.parseInt(FileUtils.readTextFile(new File("/sys/block/zram0/writeback_limit"), 128, "").trim());
+                return Integer.parseInt(
+                        FileUtils.readTextFile(
+                                        new File("/sys/block/zram0/writeback_limit"), 128, "")
+                                .trim());
             } catch (Exception unused) {
-                Slog.e("NandswapManager", "Failed to read quota from /sys/block/zram0/writeback_limit");
+                Slog.e(
+                        "NandswapManager",
+                        "Failed to read quota from /sys/block/zram0/writeback_limit");
                 return 0;
             }
         }
 
         public static void setQuotaSysNode(int i) {
             try {
-                FileUtils.stringToFile(new File("/sys/block/zram0/writeback_limit"), String.valueOf(i));
+                FileUtils.stringToFile(
+                        new File("/sys/block/zram0/writeback_limit"), String.valueOf(i));
             } catch (IOException unused) {
-                Slog.e("NandswapManager", "Failed to write new quota to /sys/block/zram0/writeback_limit");
+                Slog.e(
+                        "NandswapManager",
+                        "Failed to write new quota to /sys/block/zram0/writeback_limit");
             }
         }
 
         public final HashMap getBdStat() {
-            String[] strArr = {"expire", "count", "reads", "writes", "objcnt", "size", "max_count", "max_size", "ppr_count", "ppr_reads", "ppr_writes", "ppr_objcnt", "ppr_size", "ppr_max_count", "ppr_max_size", "objreads", "objwrites"};
+            String[] strArr = {
+                "expire",
+                "count",
+                "reads",
+                "writes",
+                "objcnt",
+                "size",
+                "max_count",
+                "max_size",
+                "ppr_count",
+                "ppr_reads",
+                "ppr_writes",
+                "ppr_objcnt",
+                "ppr_size",
+                "ppr_max_count",
+                "ppr_max_size",
+                "objreads",
+                "objwrites"
+            };
             this.bdStatMap.clear();
             try {
-                String[] split = FileUtils.readTextFile(new File("/sys/block/zram0/bd_stat"), 4096, "").trim().split("\\s+");
+                String[] split =
+                        FileUtils.readTextFile(new File("/sys/block/zram0/bd_stat"), 4096, "")
+                                .trim()
+                                .split("\\s+");
                 for (int i = 0; i < split.length; i++) {
                     this.bdStatMap.put(strArr[i], Integer.valueOf(Integer.parseInt(split[i])));
                 }
@@ -431,17 +705,34 @@ public final class NandswapManager extends JobService {
         }
 
         public final HashMap getBigdataInfoProp() {
-            String[] strArr = {"reads", "writes", "max_count", "max_size", "ppr_reads", "ppr_writes", "ppr_max_count", "ppr_max_size", "objreads", "objwrites"};
+            String[] strArr = {
+                "reads",
+                "writes",
+                "max_count",
+                "max_size",
+                "ppr_reads",
+                "ppr_writes",
+                "ppr_max_count",
+                "ppr_max_size",
+                "objreads",
+                "objwrites"
+            };
             this.bigdataPersistPropMap.clear();
             if (this.supportBigdataState) {
-                String str = SystemProperties.get("persist.sys.zram0.bigdata_info", KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG);
+                String str =
+                        SystemProperties.get(
+                                "persist.sys.zram0.bigdata_info",
+                                KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG);
                 if (!str.equals(KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG)) {
                     String[] split = str.split(",");
                     for (int i = 0; i < 10; i++) {
                         try {
-                            this.bigdataPersistPropMap.put(strArr[i], Integer.valueOf(Integer.parseInt(split[i])));
+                            this.bigdataPersistPropMap.put(
+                                    strArr[i], Integer.valueOf(Integer.parseInt(split[i])));
                         } catch (Exception e) {
-                            Slog.d("NandswapManager", "getBigdataInfo parseInt err - " + e.getMessage());
+                            Slog.d(
+                                    "NandswapManager",
+                                    "getBigdataInfo parseInt err - " + e.getMessage());
                             this.bigdataPersistPropMap.clear();
                             for (int i2 = 0; i2 < 10; i2++) {
                                 this.bigdataPersistPropMap.put(strArr[i2], 0);
@@ -536,9 +827,15 @@ public final class NandswapManager extends JobService {
     /* renamed from: -$$Nest$smisBackingDevSet, reason: not valid java name */
     public static boolean m74$$Nest$smisBackingDevSet() {
         try {
-            return !"none".equals(FileUtils.readTextFile(new File("/sys/block/zram0/backing_dev"), 128, "").trim());
+            return !"none"
+                    .equals(
+                            FileUtils.readTextFile(
+                                            new File("/sys/block/zram0/backing_dev"), 128, "")
+                                    .trim());
         } catch (IOException unused) {
-            Slog.w("NandswapManager", "exception on checking backing_dev /sys/block/zram0/backing_dev");
+            Slog.w(
+                    "NandswapManager",
+                    "exception on checking backing_dev /sys/block/zram0/backing_dev");
             return false;
         }
     }
@@ -551,34 +848,71 @@ public final class NandswapManager extends JobService {
             HashMap bdStat = nandswapClient.getBdStat();
             if (bigdataInfoProp.isEmpty() || bdStat.isEmpty()) {
                 Locale locale = Locale.US;
-                Slog.e("NandswapManager", DualAppManagerService$$ExternalSyntheticOutline0.m(bigdataInfoProp.size(), bdStat.size(), "persist.sys.zram0.bigdata_info(", ") or bd_stat(", ") is empty..."));
+                Slog.e(
+                        "NandswapManager",
+                        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                bigdataInfoProp.size(),
+                                bdStat.size(),
+                                "persist.sys.zram0.bigdata_info(",
+                                ") or bd_stat(",
+                                ") is empty..."));
                 return;
             }
             Locale locale2 = Locale.US;
             int intValue = ((Integer) bigdataInfoProp.get("reads")).intValue();
             int intValue2 = ((Integer) bdStat.get("reads")).intValue();
             ProcessingManager processingManager = nandswapClient.normalStat;
-            StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m(NandswapManager$$ExternalSyntheticOutline0.m((intValue2 - processingManager.reads) + intValue, ","));
-            m.append(((((Integer) bdStat.get("writes")).intValue() - processingManager.writes) + ((Integer) bigdataInfoProp.get("writes")).intValue()) + ",");
+            StringBuilder m =
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            NandswapManager$$ExternalSyntheticOutline0.m(
+                                    (intValue2 - processingManager.reads) + intValue, ","));
+            m.append(
+                    ((((Integer) bdStat.get("writes")).intValue() - processingManager.writes)
+                                    + ((Integer) bigdataInfoProp.get("writes")).intValue())
+                            + ",");
             StringBuilder m2 = BootReceiver$$ExternalSyntheticOutline0.m(m.toString());
-            m2.append(Math.max(((Integer) bigdataInfoProp.get("max_count")).intValue(), ((Integer) bdStat.get("max_count")).intValue()) + ",");
+            m2.append(
+                    Math.max(
+                                    ((Integer) bigdataInfoProp.get("max_count")).intValue(),
+                                    ((Integer) bdStat.get("max_count")).intValue())
+                            + ",");
             StringBuilder m3 = BootReceiver$$ExternalSyntheticOutline0.m(m2.toString());
-            m3.append(Math.max(((Integer) bigdataInfoProp.get("max_size")).intValue(), ((Integer) bdStat.get("max_size")).intValue()) + ",");
+            m3.append(
+                    Math.max(
+                                    ((Integer) bigdataInfoProp.get("max_size")).intValue(),
+                                    ((Integer) bdStat.get("max_size")).intValue())
+                            + ",");
             StringBuilder m4 = BootReceiver$$ExternalSyntheticOutline0.m(m3.toString());
             int intValue3 = ((Integer) bigdataInfoProp.get("ppr_reads")).intValue();
             int intValue4 = ((Integer) bdStat.get("ppr_reads")).intValue();
             ProcessingManager processingManager2 = nandswapClient.pprStat;
             m4.append(((intValue4 - processingManager2.reads) + intValue3) + ",");
             StringBuilder m5 = BootReceiver$$ExternalSyntheticOutline0.m(m4.toString());
-            m5.append(((((Integer) bdStat.get("ppr_writes")).intValue() - processingManager2.writes) + ((Integer) bigdataInfoProp.get("ppr_writes")).intValue()) + ",");
+            m5.append(
+                    ((((Integer) bdStat.get("ppr_writes")).intValue() - processingManager2.writes)
+                                    + ((Integer) bigdataInfoProp.get("ppr_writes")).intValue())
+                            + ",");
             StringBuilder m6 = BootReceiver$$ExternalSyntheticOutline0.m(m5.toString());
-            m6.append(Math.max(((Integer) bigdataInfoProp.get("ppr_max_count")).intValue(), ((Integer) bdStat.get("ppr_max_count")).intValue()) + ",");
+            m6.append(
+                    Math.max(
+                                    ((Integer) bigdataInfoProp.get("ppr_max_count")).intValue(),
+                                    ((Integer) bdStat.get("ppr_max_count")).intValue())
+                            + ",");
             StringBuilder m7 = BootReceiver$$ExternalSyntheticOutline0.m(m6.toString());
-            m7.append(Math.max(((Integer) bigdataInfoProp.get("ppr_max_size")).intValue(), ((Integer) bdStat.get("ppr_max_size")).intValue()) + ",");
+            m7.append(
+                    Math.max(
+                                    ((Integer) bigdataInfoProp.get("ppr_max_size")).intValue(),
+                                    ((Integer) bdStat.get("ppr_max_size")).intValue())
+                            + ",");
             StringBuilder m8 = BootReceiver$$ExternalSyntheticOutline0.m(m7.toString());
-            m8.append(((((Integer) bdStat.get("objreads")).intValue() - processingManager.objReads) + ((Integer) bigdataInfoProp.get("objreads")).intValue()) + ",");
+            m8.append(
+                    ((((Integer) bdStat.get("objreads")).intValue() - processingManager.objReads)
+                                    + ((Integer) bigdataInfoProp.get("objreads")).intValue())
+                            + ",");
             StringBuilder m9 = BootReceiver$$ExternalSyntheticOutline0.m(m8.toString());
-            int intValue5 = (((Integer) bdStat.get("objwrites")).intValue() - processingManager.objWrites) + ((Integer) bigdataInfoProp.get("objwrites")).intValue();
+            int intValue5 =
+                    (((Integer) bdStat.get("objwrites")).intValue() - processingManager.objWrites)
+                            + ((Integer) bigdataInfoProp.get("objwrites")).intValue();
             StringBuilder sb = new StringBuilder();
             sb.append(intValue5);
             m9.append(sb.toString());
@@ -597,7 +931,8 @@ public final class NandswapManager extends JobService {
         int storageSize = getStorageSize();
         boolean z2 = false;
         if (storageSize < 32) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(storageSize, "no ramExpandSwitch for low storage ", "NandswapManager");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    storageSize, "no ramExpandSwitch for low storage ", "NandswapManager");
             z = false;
         } else {
             z = true;
@@ -605,7 +940,10 @@ public final class NandswapManager extends JobService {
         if (SUPPORT_RAM_EXPAND_SWITCH) {
             z2 = z;
         } else {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("no ramExpandSwitch for version "), Build.VERSION.SEM_PLATFORM_INT, "NandswapManager");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("no ramExpandSwitch for version "),
+                    Build.VERSION.SEM_PLATFORM_INT,
+                    "NandswapManager");
         }
         putRamExpandSize(context, i);
         setRamExpandSizePersistProp(i);
@@ -628,7 +966,8 @@ public final class NandswapManager extends JobService {
 
     public static int getDefaultRamExpandSize() {
         int storageSize = getStorageSize();
-        if (SystemProperties.getBoolean("ro.sys.kernelmemory.nandswap.higher_max_size", false) && storageSize >= 256) {
+        if (SystemProperties.getBoolean("ro.sys.kernelmemory.nandswap.higher_max_size", false)
+                && storageSize >= 256) {
             return 8192;
         }
         if (storageSize > 32) {
@@ -687,9 +1026,14 @@ public final class NandswapManager extends JobService {
             int i3 = storageSize <= 128 ? storageSize : 128;
             int i4 = 16 <= i3 ? i3 : 16;
             try {
-                i = isUfs() ? ((Integer) hashMap.get(Integer.valueOf(i4))).intValue() * 262144 : ((Integer) hashMap2.get(Integer.valueOf(i4))).intValue() * 262144;
+                i =
+                        isUfs()
+                                ? ((Integer) hashMap.get(Integer.valueOf(i4))).intValue() * 262144
+                                : ((Integer) hashMap2.get(Integer.valueOf(i4))).intValue() * 262144;
             } catch (NullPointerException unused) {
-                Slog.w("NandswapManager", "Storage size is not in Quota table! size:" + Integer.toString(i4));
+                Slog.w(
+                        "NandswapManager",
+                        "Storage size is not in Quota table! size:" + Integer.toString(i4));
                 i = 262144;
             }
             if (SystemProperties.getInt("persist.sys.zram.daily_quota", -1) == -1) {
@@ -717,7 +1061,12 @@ public final class NandswapManager extends JobService {
     }
 
     public static boolean isRemainStorageLifeTime() {
-        String str = new File("/sys/class/scsi_host/host0/lt").exists() ? "/sys/class/scsi_host/host0/lt" : new File("/sys/class/sec/ufs/lt").exists() ? "/sys/class/sec/ufs/lt" : "/sys/block/mmcblk0/device/life_time";
+        String str =
+                new File("/sys/class/scsi_host/host0/lt").exists()
+                        ? "/sys/class/scsi_host/host0/lt"
+                        : new File("/sys/class/sec/ufs/lt").exists()
+                                ? "/sys/class/sec/ufs/lt"
+                                : "/sys/block/mmcblk0/device/life_time";
         Slog.d("NandswapManager", "try to check lifetime via ".concat(str));
         try {
             for (String str2 : FileUtils.readTextFile(new File(str), 16, "").trim().split("\\s+")) {
@@ -758,15 +1107,24 @@ public final class NandswapManager extends JobService {
     public static boolean makeNandswapBigdataManager(Context context) {
         try {
             NandSwapBigdataManager nandSwapBigdataManager = new NandSwapBigdataManager();
-            NandSwapBigdataManager.semHqmManager = (SemHqmManager) context.getSystemService("HqmManagerService");
+            NandSwapBigdataManager.semHqmManager =
+                    (SemHqmManager) context.getSystemService("HqmManagerService");
             boolean z = mClient.supportBigdataState;
-            if (z && (!z || SystemProperties.get("persist.sys.zram0.bigdata_info", KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG).equals(KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG))) {
+            if (z
+                    && (!z
+                            || SystemProperties.get(
+                                            "persist.sys.zram0.bigdata_info",
+                                            KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG)
+                                    .equals(KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG))) {
                 mClient.initBigdataInfoProp();
             }
             mNandBigData = nandSwapBigdataManager;
             return true;
         } catch (Exception e) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Unexpected error while create bigdataManager: "), "NandswapManager");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Unexpected error while create bigdataManager: "),
+                    "NandswapManager");
             mNandBigData = null;
             return false;
         }
@@ -776,7 +1134,8 @@ public final class NandswapManager extends JobService {
         try {
             Settings.Global.putInt(context.getContentResolver(), "ram_expand_size", i);
         } catch (Exception unused) {
-            NandswapManager$$ExternalSyntheticOutline0.m(i, "error on ram_expand_size: ", "NandswapManager");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    i, "error on ram_expand_size: ", "NandswapManager");
         }
     }
 
@@ -814,21 +1173,28 @@ public final class NandswapManager extends JobService {
         JobScheduler jobScheduler = (JobScheduler) mContext.getSystemService("jobscheduler");
         JobInfo.Builder builder = new JobInfo.Builder(813, sNandswapManager);
         TimeUnit timeUnit = TimeUnit.HOURS;
-        jobScheduler.schedule(builder.setMinimumLatency(timeUnit.toMillis(24L)).setOverrideDeadline(timeUnit.toMillis(24L)).build());
+        jobScheduler.schedule(
+                builder.setMinimumLatency(timeUnit.toMillis(24L))
+                        .setOverrideDeadline(timeUnit.toMillis(24L))
+                        .build());
     }
 
     public static void schedNextUpdateAvgerage() {
         JobScheduler jobScheduler = (JobScheduler) mContext.getSystemService("jobscheduler");
         JobInfo.Builder builder = new JobInfo.Builder(814, sNandswapManager);
         TimeUnit timeUnit = TimeUnit.HOURS;
-        jobScheduler.schedule(builder.setMinimumLatency(timeUnit.toMillis(4L)).setOverrideDeadline(timeUnit.toMillis(4L)).build());
+        jobScheduler.schedule(
+                builder.setMinimumLatency(timeUnit.toMillis(4L))
+                        .setOverrideDeadline(timeUnit.toMillis(4L))
+                        .build());
     }
 
     public static void setRamExpandSizePersistProp(int i) {
         try {
             SystemProperties.set("persist.sys.zram.ram_expand_size", String.valueOf(i));
         } catch (Exception unused) {
-            NandswapManager$$ExternalSyntheticOutline0.m(i, "error on set SystemProperties: ", "NandswapManager");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    i, "error on set SystemProperties: ", "NandswapManager");
         }
     }
 
@@ -838,17 +1204,21 @@ public final class NandswapManager extends JobService {
             return;
         }
         if (!SUPPORT_RAM_EXPAND_SWITCH) {
-            Slog.d("NandswapManager", "no ramExpandSwitch for version " + Build.VERSION.SEM_PLATFORM_INT);
+            Slog.d(
+                    "NandswapManager",
+                    "no ramExpandSwitch for version " + Build.VERSION.SEM_PLATFORM_INT);
             int defaultRamExpandSize = getDefaultRamExpandSize();
             if (i != defaultRamExpandSize) {
                 putRamExpandSize(context, defaultRamExpandSize);
                 i = defaultRamExpandSize;
             }
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "ramExpandSizeMb: ", "NandswapManager");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "ramExpandSizeMb: ", "NandswapManager");
             return;
         }
         String availSizeList = getAvailSizeList();
-        if (!availSizeList.equals(Settings.Global.getString(context.getContentResolver(), "ram_expand_size_list"))) {
+        if (!availSizeList.equals(
+                Settings.Global.getString(context.getContentResolver(), "ram_expand_size_list"))) {
             putRamExpandSizeList(context, availSizeList);
         }
         String availSizeList2 = getAvailSizeList();
@@ -865,7 +1235,8 @@ public final class NandswapManager extends JobService {
         Slog.d("NandswapManager", "onStartJob");
         try {
         } catch (Exception e) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("scheduler exception occurred : "), "NandswapManager");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("scheduler exception occurred : "), "NandswapManager");
         }
         if (!isRemainStorageLifeTime()) {
             jobFinished(jobParameters, false);

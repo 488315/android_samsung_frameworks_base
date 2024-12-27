@@ -5,11 +5,14 @@ import android.content.Context;
 import android.os.Binder;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.alarm.AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0;
 import com.android.server.utils.EventLogger;
+
 import com.samsung.android.server.audio.utils.AudioUtils;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -78,14 +81,17 @@ public final class MicModeManager {
         sb.append(", satelliteCallState: ");
         sb.append(isStateEnabled(64));
         Log.i("MicModeManager", sb.toString());
-        if (!micModeType.isMicModeSupported(this.mCurAudioMode, this.mCurCallDevice, this.mStates) || isStateEnabled(16)) {
+        if (!micModeType.isMicModeSupported(this.mCurAudioMode, this.mCurCallDevice, this.mStates)
+                || isStateEnabled(16)) {
             return false;
         }
         if (this.mCurCallDevice == 2) {
             if (isStateEnabled(4)) {
                 return false;
             }
-            if (this.mCurAudioMode == 3 && !isStateEnabled(1) && (isStateEnabled(8) || isStateEnabled(32))) {
+            if (this.mCurAudioMode == 3
+                    && !isStateEnabled(1)
+                    && (isStateEnabled(8) || isStateEnabled(32))) {
                 return false;
             }
         }
@@ -115,7 +121,12 @@ public final class MicModeManager {
     }
 
     public final void updateAudioDevice() {
-        Log.i("MicModeManager", "updateAudioDevice() audioMode: " + this.mCurAudioMode + ", curDevice: " + this.mCurCallDevice);
+        Log.i(
+                "MicModeManager",
+                "updateAudioDevice() audioMode: "
+                        + this.mCurAudioMode
+                        + ", curDevice: "
+                        + this.mCurCallDevice);
         setMicMode(isMicModeSupported());
     }
 
@@ -123,8 +134,10 @@ public final class MicModeManager {
         this.mPackageName = str;
         this.mCurAudioMode = i;
         StringBuilder sb = new StringBuilder("updateAudioMode() audioMode=");
-        AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0.m(this.mCurAudioMode, ", caller=", str, ", curCallDevice=", sb);
-        UiModeManagerService$13$$ExternalSyntheticOutline0.m(sb, this.mCurCallDevice, "MicModeManager");
+        AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0.m(
+                this.mCurAudioMode, ", caller=", str, ", curCallDevice=", sb);
+        UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                sb, this.mCurCallDevice, "MicModeManager");
         if (this.mCurAudioMode != 0) {
             setMicMode(isMicModeSupported());
         } else {
@@ -136,7 +149,9 @@ public final class MicModeManager {
     public final void updateMicModeSettings(int i, String str, boolean z) {
         if (this.mIsMicModeOn != z) {
             this.mIsMicModeOn = z;
-            StringBuilder m = AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "updateMicModeSettings is enabled ", ", effect:", ", ", z);
+            StringBuilder m =
+                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                            i, "updateMicModeSettings is enabled ", ", effect:", ", ", z);
             m.append(this.mPackageName);
             sMicModeLogger.enqueueAndLog(0, m.toString(), "MicModeManager");
         }

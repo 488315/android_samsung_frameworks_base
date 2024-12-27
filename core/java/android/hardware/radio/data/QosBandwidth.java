@@ -3,25 +3,28 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class QosBandwidth implements Parcelable {
-    public static final Parcelable.Creator<QosBandwidth> CREATOR = new Parcelable.Creator<QosBandwidth>() { // from class: android.hardware.radio.data.QosBandwidth.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public QosBandwidth createFromParcel(Parcel _aidl_source) {
-            QosBandwidth _aidl_out = new QosBandwidth();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<QosBandwidth> CREATOR =
+            new Parcelable.Creator<
+                    QosBandwidth>() { // from class: android.hardware.radio.data.QosBandwidth.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public QosBandwidth createFromParcel(Parcel _aidl_source) {
+                    QosBandwidth _aidl_out = new QosBandwidth();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public QosBandwidth[] newArray(int _aidl_size) {
-            return new QosBandwidth[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public QosBandwidth[] newArray(int _aidl_size) {
+                    return new QosBandwidth[_aidl_size];
+                }
+            };
     public int maxBitrateKbps = 0;
     public int guaranteedBitrateKbps = 0;
 

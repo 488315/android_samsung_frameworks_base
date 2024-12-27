@@ -1,9 +1,9 @@
 package android.content.integrity;
 
 import android.annotation.SystemApi;
-import android.content.integrity.AtomicFormula;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -18,8 +18,7 @@ public abstract class IntegrityFormula {
     public static final int STRING_ATOMIC_FORMULA_TAG = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface Tag {
-    }
+    @interface Tag {}
 
     public abstract int getTag();
 
@@ -60,8 +59,7 @@ public abstract class IntegrityFormula {
             return new AtomicFormula.BooleanAtomicFormula(5, true);
         }
 
-        private Application() {
-        }
+        private Application() {}
     }
 
     public static final class Installer {
@@ -77,8 +75,7 @@ public abstract class IntegrityFormula {
             return new AtomicFormula.StringAtomicFormula(3, installerCertificate);
         }
 
-        private Installer() {
-        }
+        private Installer() {}
     }
 
     public static final class SourceStamp {
@@ -90,8 +87,7 @@ public abstract class IntegrityFormula {
             return new AtomicFormula.BooleanAtomicFormula(6, false);
         }
 
-        private SourceStamp() {
-        }
+        private SourceStamp() {}
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -130,6 +126,5 @@ public abstract class IntegrityFormula {
         return new CompoundFormula(2, Arrays.asList(formula));
     }
 
-    IntegrityFormula() {
-    }
+    IntegrityFormula() {}
 }

@@ -2,27 +2,24 @@ package android.service.persistentdata;
 
 import android.annotation.SystemApi;
 import android.os.RemoteException;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public class PersistentDataBlockManager {
 
-    @SystemApi
-    public static final int FLASH_LOCK_LOCKED = 1;
+    @SystemApi public static final int FLASH_LOCK_LOCKED = 1;
 
-    @SystemApi
-    public static final int FLASH_LOCK_UNKNOWN = -1;
+    @SystemApi public static final int FLASH_LOCK_UNKNOWN = -1;
 
-    @SystemApi
-    public static final int FLASH_LOCK_UNLOCKED = 0;
+    @SystemApi public static final int FLASH_LOCK_UNLOCKED = 0;
     private static final String TAG = PersistentDataBlockManager.class.getSimpleName();
     private IPersistentDataBlockService sService;
 
     @SystemApi
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FlashLockState {
-    }
+    public @interface FlashLockState {}
 
     public PersistentDataBlockManager(IPersistentDataBlockService service) {
         this.sService = service;

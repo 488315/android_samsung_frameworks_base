@@ -6,6 +6,7 @@ import com.android.server.display.DisplayBrightnessState;
 import com.android.server.display.brightness.BrightnessUtils;
 import com.android.server.display.brightness.StrategyExecutionRequest;
 import com.android.server.display.brightness.StrategySelectionNotifyRequest;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,7 +22,21 @@ public final class FollowerBrightnessStrategy implements DisplayBrightnessStrate
 
     @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
     public final void dump(PrintWriter printWriter) {
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(KillPolicyManager$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "FollowerBrightnessStrategy:", "  mDisplayId="), this.mDisplayId, printWriter, "  mBrightnessToFollow:"), this.mBrightnessToFollow, printWriter, "  mBrightnessToFollowSlowChange:"), this.mBrightnessToFollowSlowChange, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                KillPolicyManager$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                                        printWriter,
+                                        "FollowerBrightnessStrategy:",
+                                        "  mDisplayId="),
+                                this.mDisplayId,
+                                printWriter,
+                                "  mBrightnessToFollow:"),
+                        this.mBrightnessToFollow,
+                        printWriter,
+                        "  mBrightnessToFollowSlowChange:"),
+                this.mBrightnessToFollowSlowChange,
+                printWriter);
     }
 
     @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
@@ -35,12 +50,14 @@ public final class FollowerBrightnessStrategy implements DisplayBrightnessStrate
     }
 
     @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
-    public final void strategySelectionPostProcessor(StrategySelectionNotifyRequest strategySelectionNotifyRequest) {
-    }
+    public final void strategySelectionPostProcessor(
+            StrategySelectionNotifyRequest strategySelectionNotifyRequest) {}
 
     @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
-    public final DisplayBrightnessState updateBrightness(StrategyExecutionRequest strategyExecutionRequest) {
+    public final DisplayBrightnessState updateBrightness(
+            StrategyExecutionRequest strategyExecutionRequest) {
         float f = this.mBrightnessToFollow;
-        return BrightnessUtils.constructDisplayBrightnessState(10, f, f, "FollowerBrightnessStrategy", this.mBrightnessToFollowSlowChange);
+        return BrightnessUtils.constructDisplayBrightnessState(
+                10, f, f, "FollowerBrightnessStrategy", this.mBrightnessToFollowSlowChange);
     }
 }

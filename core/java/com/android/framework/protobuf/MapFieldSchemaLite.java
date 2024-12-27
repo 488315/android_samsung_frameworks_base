@@ -1,13 +1,11 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.MapEntryLite;
 import java.util.Map;
 
 @CheckReturnValue
 /* loaded from: classes3.dex */
 class MapFieldSchemaLite implements MapFieldSchema {
-    MapFieldSchemaLite() {
-    }
+    MapFieldSchemaLite() {}
 
     @Override // com.android.framework.protobuf.MapFieldSchema
     public Map<?, ?> forMutableMapData(Object mapField) {
@@ -45,7 +43,8 @@ class MapFieldSchemaLite implements MapFieldSchema {
         return mergeFromLite(destMapField, srcMapField);
     }
 
-    private static <K, V> MapFieldLite<K, V> mergeFromLite(Object destMapField, Object srcMapField) {
+    private static <K, V> MapFieldLite<K, V> mergeFromLite(
+            Object destMapField, Object srcMapField) {
         MapFieldLite<K, V> mine = (MapFieldLite) destMapField;
         MapFieldLite<K, V> other = (MapFieldLite) srcMapField;
         if (!other.isEmpty()) {
@@ -62,7 +61,8 @@ class MapFieldSchemaLite implements MapFieldSchema {
         return getSerializedSizeLite(fieldNumber, mapField, mapDefaultEntry);
     }
 
-    private static <K, V> int getSerializedSizeLite(int fieldNumber, Object mapField, Object defaultEntry) {
+    private static <K, V> int getSerializedSizeLite(
+            int fieldNumber, Object mapField, Object defaultEntry) {
         MapFieldLite<K, V> mapFieldLite = (MapFieldLite) mapField;
         MapEntryLite<K, V> defaultEntryLite = (MapEntryLite) defaultEntry;
         if (mapFieldLite.isEmpty()) {
@@ -70,7 +70,9 @@ class MapFieldSchemaLite implements MapFieldSchema {
         }
         int size = 0;
         for (Map.Entry<K, V> entry : mapFieldLite.entrySet()) {
-            size += defaultEntryLite.computeMessageSize(fieldNumber, entry.getKey(), entry.getValue());
+            size +=
+                    defaultEntryLite.computeMessageSize(
+                            fieldNumber, entry.getKey(), entry.getValue());
         }
         return size;
     }

@@ -4,30 +4,34 @@ import android.content.ComponentName;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.pm.parsing.pkg.PackageImpl;
 
 /* loaded from: classes5.dex */
-public class ParsedInstrumentationImpl extends ParsedComponentImpl implements ParsedInstrumentation, Parcelable {
-    public static final Parcelable.Creator<ParsedInstrumentationImpl> CREATOR = new Parcelable.Creator<ParsedInstrumentationImpl>() { // from class: com.android.internal.pm.pkg.component.ParsedInstrumentationImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedInstrumentationImpl createFromParcel(Parcel source) {
-            return new ParsedInstrumentationImpl(source);
-        }
+public class ParsedInstrumentationImpl extends ParsedComponentImpl
+        implements ParsedInstrumentation, Parcelable {
+    public static final Parcelable.Creator<ParsedInstrumentationImpl> CREATOR =
+            new Parcelable.Creator<
+                    ParsedInstrumentationImpl>() { // from class:
+                                                   // com.android.internal.pm.pkg.component.ParsedInstrumentationImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedInstrumentationImpl createFromParcel(Parcel source) {
+                    return new ParsedInstrumentationImpl(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedInstrumentationImpl[] newArray(int size) {
-            return new ParsedInstrumentationImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedInstrumentationImpl[] newArray(int size) {
+                    return new ParsedInstrumentationImpl[size];
+                }
+            };
     private boolean functionalTest;
     private boolean handleProfiling;
     private String targetPackage;
     private String targetProcesses;
 
-    public ParsedInstrumentationImpl() {
-    }
+    public ParsedInstrumentationImpl() {}
 
     public ParsedInstrumentationImpl setTargetPackage(String targetPackage) {
         this.targetPackage = TextUtils.safeIntern(targetPackage);
@@ -71,7 +75,11 @@ public class ParsedInstrumentationImpl extends ParsedComponentImpl implements Pa
         this.functionalTest = in.readByte() != 0;
     }
 
-    public ParsedInstrumentationImpl(String targetPackage, String targetProcesses, boolean handleProfiling, boolean functionalTest) {
+    public ParsedInstrumentationImpl(
+            String targetPackage,
+            String targetProcesses,
+            boolean handleProfiling,
+            boolean functionalTest) {
         this.targetPackage = targetPackage;
         this.targetProcesses = targetProcesses;
         this.handleProfiling = handleProfiling;
@@ -109,6 +117,5 @@ public class ParsedInstrumentationImpl extends ParsedComponentImpl implements Pa
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

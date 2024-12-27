@@ -23,12 +23,10 @@ public final class SyncParams {
     private float mFrameRate = 0.0f;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioAdjustMode {
-    }
+    public @interface AudioAdjustMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SyncSource {
-    }
+    public @interface SyncSource {}
 
     public SyncParams allowDefaults() {
         this.mSet |= 7;

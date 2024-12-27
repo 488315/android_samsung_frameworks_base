@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class Smpte2086 implements Parcelable {
-    public static final Parcelable.Creator<Smpte2086> CREATOR = new Parcelable.Creator<Smpte2086>() { // from class: android.hardware.graphics.common.Smpte2086.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Smpte2086 createFromParcel(Parcel _aidl_source) {
-            Smpte2086 _aidl_out = new Smpte2086();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Smpte2086> CREATOR =
+            new Parcelable.Creator<
+                    Smpte2086>() { // from class: android.hardware.graphics.common.Smpte2086.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Smpte2086 createFromParcel(Parcel _aidl_source) {
+                    Smpte2086 _aidl_out = new Smpte2086();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Smpte2086[] newArray(int _aidl_size) {
-            return new Smpte2086[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Smpte2086[] newArray(int _aidl_size) {
+                    return new Smpte2086[_aidl_size];
+                }
+            };
     public float maxLuminance = 0.0f;
     public float minLuminance = 0.0f;
     public XyColor primaryBlue;
@@ -120,7 +122,10 @@ public class Smpte2086 implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.primaryRed);
-        return _mask | describeContents(this.primaryGreen) | describeContents(this.primaryBlue) | describeContents(this.whitePoint);
+        return _mask
+                | describeContents(this.primaryGreen)
+                | describeContents(this.primaryBlue)
+                | describeContents(this.whitePoint);
     }
 
     private int describeContents(Object _v) {

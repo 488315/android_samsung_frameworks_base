@@ -24,7 +24,7 @@ public abstract class FirewallDefinitions {
             FILTER = table;
             Table table2 = new Table("NAT", 1);
             NAT = table2;
-            $VALUES = new Table[]{table, table2};
+            $VALUES = new Table[] {table, table2};
         }
 
         public static Table valueOf(String str) {

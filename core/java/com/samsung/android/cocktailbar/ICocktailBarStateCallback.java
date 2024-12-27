@@ -8,14 +8,16 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ICocktailBarStateCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.cocktailbar.ICocktailBarStateCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.cocktailbar.ICocktailBarStateCallback";
 
-    void onCocktailBarStateChanged(CocktailBarStateInfo cocktailBarStateInfo) throws RemoteException;
+    void onCocktailBarStateChanged(CocktailBarStateInfo cocktailBarStateInfo)
+            throws RemoteException;
 
     public static class Default implements ICocktailBarStateCallback {
         @Override // com.samsung.android.cocktailbar.ICocktailBarStateCallback
-        public void onCocktailBarStateChanged(CocktailBarStateInfo stateInfo) throws RemoteException {
-        }
+        public void onCocktailBarStateChanged(CocktailBarStateInfo stateInfo)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,7 @@ public interface ICocktailBarStateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICocktailBarStateCallback {
+    public abstract static class Stub extends Binder implements ICocktailBarStateCallback {
         static final int TRANSACTION_onCocktailBarStateChanged = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface ICocktailBarStateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICocktailBarStateCallback.DESCRIPTOR);
             }
@@ -71,7 +74,9 @@ public interface ICocktailBarStateCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    CocktailBarStateInfo _arg0 = (CocktailBarStateInfo) data.readTypedObject(CocktailBarStateInfo.CREATOR);
+                    CocktailBarStateInfo _arg0 =
+                            (CocktailBarStateInfo)
+                                    data.readTypedObject(CocktailBarStateInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onCocktailBarStateChanged(_arg0);
                     return true;
@@ -97,7 +102,8 @@ public interface ICocktailBarStateCallback extends IInterface {
             }
 
             @Override // com.samsung.android.cocktailbar.ICocktailBarStateCallback
-            public void onCocktailBarStateChanged(CocktailBarStateInfo stateInfo) throws RemoteException {
+            public void onCocktailBarStateChanged(CocktailBarStateInfo stateInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICocktailBarStateCallback.DESCRIPTOR);

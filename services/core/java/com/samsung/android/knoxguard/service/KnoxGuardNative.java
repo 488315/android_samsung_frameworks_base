@@ -2,12 +2,13 @@ package com.samsung.android.knoxguard.service;
 
 import android.os.Bundle;
 import android.util.Slog;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
-import com.samsung.android.knoxguard.service.KnoxGuardSeService;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -207,7 +208,8 @@ public class KnoxGuardNative {
         if (tz_getClientData == null) {
             return null;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("getClientData - errwrapper = "), tz_getClientData.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("getClientData - errwrapper = "), tz_getClientData.err, TAG);
         return b2s(tz_getClientData.data);
     }
 
@@ -220,7 +222,10 @@ public class KnoxGuardNative {
         if (tz_getHotpChallenge == null) {
             return null;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("getHotpChallenge - errwrapper = "), tz_getHotpChallenge.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("getHotpChallenge - errwrapper = "),
+                tz_getHotpChallenge.err,
+                TAG);
         return b2s(tz_getHotpChallenge.data);
     }
 
@@ -233,7 +238,8 @@ public class KnoxGuardNative {
         if (tz_getKGID == null) {
             return null;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("getKGID - errwrapper = "), tz_getKGID.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("getKGID - errwrapper = "), tz_getKGID.err, TAG);
         return b2s(tz_getKGID.data);
     }
 
@@ -270,7 +276,8 @@ public class KnoxGuardNative {
         if (tz_getLockAction == null) {
             return null;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("getLockAction - errwrapper = "), tz_getLockAction.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("getLockAction - errwrapper = "), tz_getLockAction.err, TAG);
         return b2s(tz_getLockAction.data);
     }
 
@@ -283,7 +290,8 @@ public class KnoxGuardNative {
         if (tz_getLockObject == null) {
             return null;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("getLockObject - errwrapper = "), tz_getLockObject.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("getLockObject - errwrapper = "), tz_getLockObject.err, TAG);
         return tz_getLockObject.data;
     }
 
@@ -296,7 +304,8 @@ public class KnoxGuardNative {
         if (nonceRefactor == null) {
             return null;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("getNonce - errwrapper = "), nonceRefactor.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("getNonce - errwrapper = "), nonceRefactor.err, TAG);
         return b2s(nonceRefactor.data);
     }
 
@@ -325,18 +334,39 @@ public class KnoxGuardNative {
         return tz_getTAState(KGTA_PARAM_DEFAULT);
     }
 
-    public static int lockScreen(String str, String str2, String str3, String str4, String str5, boolean z, boolean z2, Bundle bundle) {
-        KgErrWrapper lockScreenRefactor = lockScreenRefactor(str, str2, str3, str4, str5, z, z2, bundle);
+    public static int lockScreen(
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            boolean z,
+            boolean z2,
+            Bundle bundle) {
+        KgErrWrapper lockScreenRefactor =
+                lockScreenRefactor(str, str2, str3, str4, str5, z, z2, bundle);
         if (lockScreenRefactor == null) {
             return KGTA_FAILED;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("lockScreen - errwrapper = "), lockScreenRefactor.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("lockScreen - errwrapper = "), lockScreenRefactor.err, TAG);
         int i = lockScreenRefactor.err;
         return i == 0 ? lockScreenRefactor.result : i;
     }
 
-    public static KgErrWrapper lockScreenRefactor(String str, String str2, String str3, String str4, String str5, boolean z, boolean z2, Bundle bundle) {
-        byte[] serialize = serialize(new KnoxGuardSeService.KGLockscreenInfo(str2, str3, str4, str5, z, z2, bundle));
+    public static KgErrWrapper lockScreenRefactor(
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            boolean z,
+            boolean z2,
+            Bundle bundle) {
+        byte[] serialize =
+                serialize(
+                        new KnoxGuardSeService.KGLockscreenInfo(
+                                str2, str3, str4, str5, z, z2, bundle));
         if (str == null) {
             Slog.e(TAG, "lockScreen: empty actionName");
             return null;
@@ -361,7 +391,8 @@ public class KnoxGuardNative {
         if (resetRPMBRefactor == null) {
             return KGTA_FAILED;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("resetRPMB - errwrapper = "), resetRPMBRefactor.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("resetRPMB - errwrapper = "), resetRPMBRefactor.err, TAG);
         int i = resetRPMBRefactor.err;
         return i == 0 ? resetRPMBRefactor.result : i;
     }
@@ -378,9 +409,9 @@ public class KnoxGuardNative {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:26:0x004e, code lost:
-    
-        if (r4 == null) goto L35;
-     */
+
+       if (r4 == null) goto L35;
+    */
     /* JADX WARN: Removed duplicated region for block: B:36:0x005f A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:42:? A[SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:43:0x0054 A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -470,7 +501,9 @@ public class KnoxGuardNative {
         L68:
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knoxguard.service.KnoxGuardNative.serialize(java.lang.Object):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.knoxguard.service.KnoxGuardNative.serialize(java.lang.Object):byte[]");
     }
 
     public static int setClientData(String str) {
@@ -478,7 +511,8 @@ public class KnoxGuardNative {
         if (clientDataRefactor == null) {
             return KGTA_FAILED;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("setClientData - errwrapper = "), clientDataRefactor.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("setClientData - errwrapper = "), clientDataRefactor.err, TAG);
         int i = clientDataRefactor.err;
         return i == 0 ? clientDataRefactor.result : i;
     }
@@ -514,7 +548,8 @@ public class KnoxGuardNative {
 
     public static native KgErrWrapper tz_lockScreen(int i, byte[] bArr, byte[] bArr2);
 
-    public static native KgErrWrapper tz_provisionCert(int i, byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4);
+    public static native KgErrWrapper tz_provisionCert(
+            int i, byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4);
 
     public static native KgErrWrapper tz_resetRPMB(int i, byte[] bArr);
 
@@ -530,7 +565,8 @@ public class KnoxGuardNative {
 
     public static native KgErrWrapper tz_verifyHOTPsecret(int i, byte[] bArr);
 
-    public static native KgErrWrapper tz_verifyHotpDhChallenge(int i, byte[] bArr, byte[] bArr2, byte[] bArr3);
+    public static native KgErrWrapper tz_verifyHotpDhChallenge(
+            int i, byte[] bArr, byte[] bArr2, byte[] bArr3);
 
     public static native KgErrWrapper tz_verifyKgRot(int i);
 
@@ -545,7 +581,8 @@ public class KnoxGuardNative {
         if (tz_unlockScreen == null) {
             return KGTA_FAILED;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("unlockScreen - errwrapper = "), tz_unlockScreen.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("unlockScreen - errwrapper = "), tz_unlockScreen.err, TAG);
         int i = tz_unlockScreen.err;
         return i == 0 ? tz_unlockScreen.result : i;
     }
@@ -559,7 +596,8 @@ public class KnoxGuardNative {
         if (tz_userChecking == null) {
             return KGTA_FAILED;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("userChecking - errwrapper = "), tz_userChecking.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("userChecking - errwrapper = "), tz_userChecking.err, TAG);
         int i = tz_userChecking.err;
         return i == 0 ? tz_userChecking.result : i;
     }
@@ -573,7 +611,10 @@ public class KnoxGuardNative {
         if (verifyCompleteTokenRefactor == null) {
             return KGTA_FAILED;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("verifyCompleteToken - errwrapper = "), verifyCompleteTokenRefactor.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("verifyCompleteToken - errwrapper = "),
+                verifyCompleteTokenRefactor.err,
+                TAG);
         int i = verifyCompleteTokenRefactor.err;
         return i == 0 ? verifyCompleteTokenRefactor.result : i;
     }
@@ -591,7 +632,8 @@ public class KnoxGuardNative {
         if (verifyHOTPPinRefactor == null) {
             return KGTA_FAILED;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("verifyHOTPPin - errwrapper = "), verifyHOTPPinRefactor.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("verifyHOTPPin - errwrapper = "), verifyHOTPPinRefactor.err, TAG);
         int i = verifyHOTPPinRefactor.err;
         return i == 0 ? verifyHOTPPinRefactor.result : i;
     }
@@ -630,7 +672,10 @@ public class KnoxGuardNative {
         if (verifyHotpDHChallengeRefactor == null) {
             return KGTA_FAILED;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("verifyHotpDHChallenge - errwrapper = "), verifyHotpDHChallengeRefactor.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("verifyHotpDHChallenge - errwrapper = "),
+                verifyHotpDHChallengeRefactor.err,
+                TAG);
         int i = verifyHotpDHChallengeRefactor.err;
         return i == 0 ? verifyHotpDHChallengeRefactor.result : i;
     }
@@ -648,7 +693,8 @@ public class KnoxGuardNative {
         if (tz_verifyKgRot == null) {
             return null;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("verifyKgRot - errwrapper = "), tz_verifyKgRot.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("verifyKgRot - errwrapper = "), tz_verifyKgRot.err, TAG);
         return b2s(tz_verifyKgRot.data);
     }
 
@@ -661,7 +707,8 @@ public class KnoxGuardNative {
         if (verifyPolicyRefactor == null) {
             return null;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("verifyPolicy - errwrapper = "), verifyPolicyRefactor.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("verifyPolicy - errwrapper = "), verifyPolicyRefactor.err, TAG);
         return b2s(verifyPolicyRefactor.data);
     }
 
@@ -676,7 +723,8 @@ public class KnoxGuardNative {
             return tz_verifyPolicy;
         }
         String b2s = b2s(tz_verifyPolicy.data);
-        if (PolicyStorageManager.getInstance().saveData(str, str2) == PolicyStorageManager.SUCCESS) {
+        if (PolicyStorageManager.getInstance().saveData(str, str2)
+                == PolicyStorageManager.SUCCESS) {
             return tz_verifyPolicy;
         }
         BootReceiver$$ExternalSyntheticOutline0.m("store the policy to EFS failed =", b2s, TAG);
@@ -688,7 +736,10 @@ public class KnoxGuardNative {
         if (verifyRegistrationInfoRefactor == null) {
             return null;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("verifyRegistrationInfo - errwrapper = "), verifyRegistrationInfoRefactor.err, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("verifyRegistrationInfo - errwrapper = "),
+                verifyRegistrationInfoRefactor.err,
+                TAG);
         return b2s(verifyRegistrationInfoRefactor.data);
     }
 

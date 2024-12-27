@@ -1,6 +1,7 @@
 package android.os;
 
 import android.annotation.SystemApi;
+
 import libcore.util.NativeAllocationRegistry;
 
 @SystemApi
@@ -158,6 +159,7 @@ public class HwBlob {
 
     static {
         long freeFunction = native_init();
-        sNativeRegistry = new NativeAllocationRegistry(HwBlob.class.getClassLoader(), freeFunction, 128L);
+        sNativeRegistry =
+                new NativeAllocationRegistry(HwBlob.class.getClassLoader(), freeFunction, 128L);
     }
 }

@@ -6,6 +6,7 @@ import android.hardware.broadcastradio.DabTableEntry$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
@@ -67,7 +68,10 @@ public class ScanResultInfoParcelable implements Parcelable {
                 if (parcel.dataPosition() - dataPosition < readInt) {
                     this.bssid = parcel.readString();
                     if (parcel.dataPosition() - dataPosition < readInt) {
-                        this.informationElements = (InformationElementParcelable[]) parcel.createTypedArray(InformationElementParcelable.CREATOR);
+                        this.informationElements =
+                                (InformationElementParcelable[])
+                                        parcel.createTypedArray(
+                                                InformationElementParcelable.CREATOR);
                         if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
@@ -95,7 +99,21 @@ public class ScanResultInfoParcelable implements Parcelable {
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.informationElements), "ScanResultInfoParcelable", DabTableEntry$$ExternalSyntheticOutline0.m(this.bssid, "informationElements: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.ssid, "bssid: ", new StringBuilder("ssid: "), stringJoiner), stringJoiner), stringJoiner));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                        Arrays.toString(this.informationElements),
+                        "ScanResultInfoParcelable",
+                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                this.bssid,
+                                "informationElements: ",
+                                DabTableEntry$$ExternalSyntheticOutline0.m(
+                                        this.ssid,
+                                        "bssid: ",
+                                        new StringBuilder("ssid: "),
+                                        stringJoiner),
+                                stringJoiner),
+                        stringJoiner));
     }
 
     @Override // android.os.Parcelable

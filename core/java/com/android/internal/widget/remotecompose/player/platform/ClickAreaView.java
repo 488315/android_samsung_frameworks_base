@@ -12,7 +12,8 @@ class ClickAreaView extends View {
     private String mMetadata;
     Paint mPaint;
 
-    ClickAreaView(Context context, boolean debug, int id, String contentDescription, String metadata) {
+    ClickAreaView(
+            Context context, boolean debug, int id, String contentDescription, String metadata) {
         super(context);
         this.mPaint = new Paint();
         this.mId = id;

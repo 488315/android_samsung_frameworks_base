@@ -1,8 +1,10 @@
 package com.android.server.backup.restore;
 
 import android.os.ParcelFileDescriptor;
-import java.io.InputStream;
+
 import libcore.io.IoUtils;
+
+import java.io.InputStream;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -10,7 +12,8 @@ public final class FullRestoreEngineThread implements Runnable {
     public final FullRestoreEngine mEngine;
     public final InputStream mEngineStream;
 
-    public FullRestoreEngineThread(FullRestoreEngine fullRestoreEngine, ParcelFileDescriptor parcelFileDescriptor) {
+    public FullRestoreEngineThread(
+            FullRestoreEngine fullRestoreEngine, ParcelFileDescriptor parcelFileDescriptor) {
         this.mEngine = fullRestoreEngine;
         fullRestoreEngine.setRunning(true);
         this.mEngineStream = new ParcelFileDescriptor.AutoCloseInputStream(parcelFileDescriptor);
@@ -21,7 +24,14 @@ public final class FullRestoreEngineThread implements Runnable {
         while (this.mEngine.mRunning.get()) {
             try {
                 FullRestoreEngine fullRestoreEngine = this.mEngine;
-                fullRestoreEngine.restoreOneFile(this.mEngineStream, false, fullRestoreEngine.mBuffer, fullRestoreEngine.mOnlyPackage, fullRestoreEngine.mAllowApks, fullRestoreEngine.mEphemeralOpToken, fullRestoreEngine.mMonitor);
+                fullRestoreEngine.restoreOneFile(
+                        this.mEngineStream,
+                        false,
+                        fullRestoreEngine.mBuffer,
+                        fullRestoreEngine.mOnlyPackage,
+                        fullRestoreEngine.mAllowApks,
+                        fullRestoreEngine.mEphemeralOpToken,
+                        fullRestoreEngine.mMonitor);
             } finally {
                 IoUtils.closeQuietly(this.mEngineStream);
             }

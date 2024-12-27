@@ -24,7 +24,7 @@ public interface IPassChecker extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPassChecker {
+    public abstract static class Stub extends Binder implements IPassChecker {
         static final int TRANSACTION_hasPermission = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IPassChecker extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPassChecker.DESCRIPTOR);
             }

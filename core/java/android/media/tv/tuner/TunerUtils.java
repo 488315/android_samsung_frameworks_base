@@ -85,7 +85,8 @@ public final class TunerUtils {
                     return 2;
             }
         }
-        throw new IllegalArgumentException("Invalid filter types. Main type=" + mainType + ", subtype=" + subtype);
+        throw new IllegalArgumentException(
+                "Invalid filter types. Main type=" + mainType + ", subtype=" + subtype);
     }
 
     public static void throwExceptionForResult(int r, String msg) {
@@ -124,6 +125,5 @@ public final class TunerUtils {
         }
     }
 
-    private TunerUtils() {
-    }
+    private TunerUtils() {}
 }

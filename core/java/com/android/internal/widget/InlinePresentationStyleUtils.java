@@ -2,6 +2,7 @@ package com.android.internal.widget;
 
 import android.os.Bundle;
 import android.os.IBinder;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -45,6 +46,5 @@ public final class InlinePresentationStyleUtils {
         }
     }
 
-    private InlinePresentationStyleUtils() {
-    }
+    private InlinePresentationStyleUtils() {}
 }

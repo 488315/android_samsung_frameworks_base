@@ -16,12 +16,11 @@ public interface IMemorySaverPackageMoveObserver extends IInterface {
 
     public static class Default implements IMemorySaverPackageMoveObserver {
         @Override // android.content.pm.IMemorySaverPackageMoveObserver
-        public void onCreated(String packageName) throws RemoteException {
-        }
+        public void onCreated(String packageName) throws RemoteException {}
 
         @Override // android.content.pm.IMemorySaverPackageMoveObserver
-        public void onStatusChanged(int moveId, int status, long estMillis) throws RemoteException {
-        }
+        public void onStatusChanged(int moveId, int status, long estMillis)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface IMemorySaverPackageMoveObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMemorySaverPackageMoveObserver {
+    public abstract static class Stub extends Binder implements IMemorySaverPackageMoveObserver {
         static final int TRANSACTION_onCreated = 1;
         static final int TRANSACTION_onStatusChanged = 2;
 
@@ -70,7 +69,8 @@ public interface IMemorySaverPackageMoveObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMemorySaverPackageMoveObserver.DESCRIPTOR);
             }
@@ -130,7 +130,8 @@ public interface IMemorySaverPackageMoveObserver extends IInterface {
             }
 
             @Override // android.content.pm.IMemorySaverPackageMoveObserver
-            public void onStatusChanged(int moveId, int status, long estMillis) throws RemoteException {
+            public void onStatusChanged(int moveId, int status, long estMillis)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

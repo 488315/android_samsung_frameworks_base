@@ -16,7 +16,7 @@ public interface IDeviceAdminService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDeviceAdminService {
+    public abstract static class Stub extends Binder implements IDeviceAdminService {
         public static final String DESCRIPTOR = "android.app.admin.IDeviceAdminService";
 
         public Stub() {
@@ -49,7 +49,8 @@ public interface IDeviceAdminService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code == 1598968902) {
                 reply.writeString(DESCRIPTOR);
                 return true;

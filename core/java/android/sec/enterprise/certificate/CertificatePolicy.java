@@ -11,17 +11,22 @@ public class CertificatePolicy {
     public static final int CERTIFICATE_VALIDATED_SUCCESSFULLY = -1;
     public static final int CERT_ERROR_REVOKED = -206;
     public static final int CERT_ERROR_UNABLE_TO_CHECK_REVOCATION = -205;
-    public static final String MSG_ADDITIONAL_CHECKER = "Additional certificate path checker failed.";
-    public static final String MSG_CRL_DIST_COULD_NOT_BE_READ = "CRL distribution point extension could not be read";
+    public static final String MSG_ADDITIONAL_CHECKER =
+            "Additional certificate path checker failed.";
+    public static final String MSG_CRL_DIST_COULD_NOT_BE_READ =
+            "CRL distribution point extension could not be read";
     public static final String MSG_CRL_NOT_VALID = "No valid CRL found.";
-    public static final String MSG_DIST_POINT_COULD_NOT_BE_READ = "Distribution points could not be read.";
+    public static final String MSG_DIST_POINT_COULD_NOT_BE_READ =
+            "Distribution points could not be read.";
     public static final String MSG_EXPIRED_CERT = ", expiration time";
     public static final String MSG_IS_REVOKED_CERT = "is revoked";
     public static final String MSG_NOT_YET_VALID_CERT = ", validation time";
-    public static final String MSG_NO_ADDITIONAL_CRL_DECODED = "No additional CRL locations could be decoded from CRL distribution point extension.";
+    public static final String MSG_NO_ADDITIONAL_CRL_DECODED =
+            "No additional CRL locations could be decoded from CRL distribution point extension.";
     public static final String MSG_REVOKED_CERT = "Certificate revocation after";
     public static final String MSG_UNABLE_CHECK_OCSP_STATUS = "OCSP check failed!";
-    public static final String MSG_UNABLE_CHECK_REVOCATION_STATUS = "Certificate status could not be determined.";
+    public static final String MSG_UNABLE_CHECK_REVOCATION_STATUS =
+            "Certificate status could not be determined.";
     public static final String MSG_UNABLE_GET_CRL = "Unable to get CRL for certificate";
     public static final String PACKAGE_MODULE = "package_manager_module";
     public static final int SBROWSER_VERIFY_NO_TRUSTED_ROOT = 2;
@@ -30,7 +35,8 @@ public class CertificatePolicy {
     private static String TAG = SecContentProviderURI.CERTIFICATEPOLICY;
     public static final String WIFI_MODULE = "wifi_module";
 
-    public void notifyCertificateFailureAsUser(String module, String msg, boolean showMsg, int userId) {
+    public void notifyCertificateFailureAsUser(
+            String module, String msg, boolean showMsg, int userId) {
         try {
             IEDMProxy lService = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
             if (lService != null) {
@@ -44,11 +50,13 @@ public class CertificatePolicy {
         return isCaCertificateTrustedAsUser(certBytes, showMsg, true, userId);
     }
 
-    public boolean isCaCertificateTrustedAsUser(byte[] certBytes, boolean showMsg, boolean checkTrusted, int userId) {
+    public boolean isCaCertificateTrustedAsUser(
+            byte[] certBytes, boolean showMsg, boolean checkTrusted, int userId) {
         try {
             IEDMProxy lService = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
             if (lService != null) {
-                return lService.isCaCertificateTrustedAsUser(certBytes, showMsg, checkTrusted, userId);
+                return lService.isCaCertificateTrustedAsUser(
+                        certBytes, showMsg, checkTrusted, userId);
             }
             return true;
         } catch (RemoteException e) {

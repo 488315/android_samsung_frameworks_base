@@ -1,10 +1,12 @@
 package android.telephony;
 
 import android.app.settings.SettingsEnums;
-import android.telephony.AccessNetworkConstants;
 import android.view.KeyEvent;
+
 import com.android.internal.logging.nano.MetricsProto;
+
 import com.samsung.android.media.SemExtendedFormat;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,8 +23,7 @@ public class AccessNetworkUtils {
     private static final String TAG = "AccessNetworkUtils";
     private static final Set<Integer> UARFCN_NOT_GENERAL_BAND = new HashSet();
 
-    private AccessNetworkUtils() {
-    }
+    private AccessNetworkUtils() {}
 
     static {
         UARFCN_NOT_GENERAL_BAND.add(101);
@@ -416,41 +417,131 @@ public class AccessNetworkUtils {
     }
 
     public static int getOperatingBandForUarfcn(int uarfcn) {
-        int[] addlBand2 = {412, 437, 462, 487, 512, MetricsProto.MetricsEvent.DIALOG_NO_HOME, 562, 587, MetricsProto.MetricsEvent.PROVISIONING_EXTRA, MetricsProto.MetricsEvent.ACTION_PERMISSION_REVOKE_READ_CALENDAR, MetricsProto.MetricsEvent.ACTION_PERMISSION_REQUEST_ACCESS_COARSE_LOCATION, MetricsProto.MetricsEvent.ACTION_PERMISSION_GRANT_ADD_VOICEMAIL};
-        int[] addlBand4 = {1887, 1912, SettingsEnums.ACTION_AUDIO_SHARING_LEAVE_FAILED, 1962, SettingsEnums.DIALOG_SPECIFIC_DDS_SIM_PICKER, 2012, 2037, 2062, 2087};
+        int[] addlBand2 = {
+            412,
+            437,
+            462,
+            487,
+            512,
+            MetricsProto.MetricsEvent.DIALOG_NO_HOME,
+            562,
+            587,
+            MetricsProto.MetricsEvent.PROVISIONING_EXTRA,
+            MetricsProto.MetricsEvent.ACTION_PERMISSION_REVOKE_READ_CALENDAR,
+            MetricsProto.MetricsEvent.ACTION_PERMISSION_REQUEST_ACCESS_COARSE_LOCATION,
+            MetricsProto.MetricsEvent.ACTION_PERMISSION_GRANT_ADD_VOICEMAIL
+        };
+        int[] addlBand4 = {
+            1887,
+            1912,
+            SettingsEnums.ACTION_AUDIO_SHARING_LEAVE_FAILED,
+            1962,
+            SettingsEnums.DIALOG_SPECIFIC_DDS_SIM_PICKER,
+            2012,
+            2037,
+            2062,
+            2087
+        };
         int[] addlBand5 = {1007, 1012, 1032, 1037, KeyEvent.KEYCODE_VOICE_WAKEUP, 1087};
         int[] addlBand6 = {1037, KeyEvent.KEYCODE_VOICE_WAKEUP};
-        int[] addlBand7 = {2587, 2612, 2637, 2662, 2687, 2712, SemExtendedFormat.DataType.DUAL_SHOT_DEPTHMAP, 2762, 2787, 2812, 2837, 2862, 2887, 2912};
+        int[] addlBand7 = {
+            2587,
+            2612,
+            2637,
+            2662,
+            2687,
+            2712,
+            SemExtendedFormat.DataType.DUAL_SHOT_DEPTHMAP,
+            2762,
+            2787,
+            2812,
+            2837,
+            2862,
+            2887,
+            2912
+        };
         int[] addlBand10 = {3412, 3437, 3462, 3487, 3512, 3537, 3562, 3587, 3612, 3637, 3662, 3687};
         int[] addlBand12 = {3932, 3957, 3962, 3987, 3992};
         int[] addlBand13 = {4067, 4092};
         int[] addlBand14 = {4167, 4192};
         int[] addlBand19 = {787, 812, 837};
-        int[] addlBand25 = {6292, 6317, 6342, 6367, ServiceState.RIL_RADIO_CDMA_TECHNOLOGY_BITMASK, 6417, 6442, 6467, 6492, 6517, 6542, 6567, 6592};
+        int[] addlBand25 = {
+            6292,
+            6317,
+            6342,
+            6367,
+            ServiceState.RIL_RADIO_CDMA_TECHNOLOGY_BITMASK,
+            6417,
+            6442,
+            6467,
+            6492,
+            6517,
+            6542,
+            6567,
+            6592
+        };
         int[] addlBand26 = {5937, 5962, 5987, 5992, 6012, 6017, 6037, 6042, 6062, 6067, 6087};
         if (uarfcn < 10562 || uarfcn > 10838) {
             if ((uarfcn < 9662 || uarfcn > 9938) && Arrays.binarySearch(addlBand2, uarfcn) < 0) {
                 if (uarfcn < 1162 || uarfcn > 1513) {
-                    if ((uarfcn < 1537 || uarfcn > 1738) && Arrays.binarySearch(addlBand4, uarfcn) < 0) {
+                    if ((uarfcn < 1537 || uarfcn > 1738)
+                            && Arrays.binarySearch(addlBand4, uarfcn) < 0) {
                         if (uarfcn < 4387 || uarfcn > 4413) {
-                            if ((uarfcn >= 4357 && uarfcn <= 4458) || Arrays.binarySearch(addlBand5, uarfcn) >= 0) {
+                            if ((uarfcn >= 4357 && uarfcn <= 4458)
+                                    || Arrays.binarySearch(addlBand5, uarfcn) >= 0) {
                                 return 5;
                             }
                             if (Arrays.binarySearch(addlBand6, uarfcn) < 0) {
-                                if ((uarfcn < 2237 || uarfcn > 2563) && Arrays.binarySearch(addlBand7, uarfcn) < 0) {
+                                if ((uarfcn < 2237 || uarfcn > 2563)
+                                        && Arrays.binarySearch(addlBand7, uarfcn) < 0) {
                                     if (uarfcn < 2937 || uarfcn > 3088) {
                                         if (uarfcn < 9237 || uarfcn > 9387) {
-                                            if ((uarfcn < 3112 || uarfcn > 3388) && Arrays.binarySearch(addlBand10, uarfcn) < 0) {
+                                            if ((uarfcn < 3112 || uarfcn > 3388)
+                                                    && Arrays.binarySearch(addlBand10, uarfcn)
+                                                            < 0) {
                                                 if (uarfcn < 3712 || uarfcn > 3787) {
-                                                    if ((uarfcn < 3842 || uarfcn > 3903) && Arrays.binarySearch(addlBand12, uarfcn) < 0) {
-                                                        if ((uarfcn < 4017 || uarfcn > 4043) && Arrays.binarySearch(addlBand13, uarfcn) < 0) {
-                                                            if ((uarfcn < 4117 || uarfcn > 4143) && Arrays.binarySearch(addlBand14, uarfcn) < 0) {
-                                                                if ((uarfcn < 712 || uarfcn > 763) && Arrays.binarySearch(addlBand19, uarfcn) < 0) {
-                                                                    if (uarfcn < 4512 || uarfcn > 4638) {
-                                                                        if (uarfcn < 862 || uarfcn > 912) {
-                                                                            if (uarfcn < 4662 || uarfcn > 5038) {
-                                                                                if ((uarfcn < 5112 || uarfcn > 5413) && Arrays.binarySearch(addlBand25, uarfcn) < 0) {
-                                                                                    if ((uarfcn >= 5762 && uarfcn <= 5913) || Arrays.binarySearch(addlBand26, uarfcn) >= 0) {
+                                                    if ((uarfcn < 3842 || uarfcn > 3903)
+                                                            && Arrays.binarySearch(
+                                                                            addlBand12, uarfcn)
+                                                                    < 0) {
+                                                        if ((uarfcn < 4017 || uarfcn > 4043)
+                                                                && Arrays.binarySearch(
+                                                                                addlBand13, uarfcn)
+                                                                        < 0) {
+                                                            if ((uarfcn < 4117 || uarfcn > 4143)
+                                                                    && Arrays.binarySearch(
+                                                                                    addlBand14,
+                                                                                    uarfcn)
+                                                                            < 0) {
+                                                                if ((uarfcn < 712 || uarfcn > 763)
+                                                                        && Arrays.binarySearch(
+                                                                                        addlBand19,
+                                                                                        uarfcn)
+                                                                                < 0) {
+                                                                    if (uarfcn < 4512
+                                                                            || uarfcn > 4638) {
+                                                                        if (uarfcn < 862
+                                                                                || uarfcn > 912) {
+                                                                            if (uarfcn < 4662
+                                                                                    || uarfcn
+                                                                                            > 5038) {
+                                                                                if ((uarfcn < 5112
+                                                                                                || uarfcn
+                                                                                                        > 5413)
+                                                                                        && Arrays
+                                                                                                        .binarySearch(
+                                                                                                                addlBand25,
+                                                                                                                uarfcn)
+                                                                                                < 0) {
+                                                                                    if ((uarfcn
+                                                                                                            >= 5762
+                                                                                                    && uarfcn
+                                                                                                            <= 5913)
+                                                                                            || Arrays
+                                                                                                            .binarySearch(
+                                                                                                                    addlBand26,
+                                                                                                                    uarfcn)
+                                                                                                    >= 0) {
                                                                                         return 26;
                                                                                     }
                                                                                     return -1;
@@ -723,7 +814,8 @@ public class AccessNetworkUtils {
         int globalKhz = 0;
         int rangeOffset = 0;
         int arfcnOffset = 0;
-        AccessNetworkConstants.NgranArfcnFrequency[] values = AccessNetworkConstants.NgranArfcnFrequency.values();
+        AccessNetworkConstants.NgranArfcnFrequency[] values =
+                AccessNetworkConstants.NgranArfcnFrequency.values();
         int length = values.length;
         int i = 0;
         while (true) {
@@ -744,9 +836,9 @@ public class AccessNetworkUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:16:0x005c, code lost:
-    
-        return convertEarfcnToFrequency(r0, r8, r1);
-     */
+
+       return convertEarfcnToFrequency(r0, r8, r1);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -804,15 +896,24 @@ public class AccessNetworkUtils {
             int r2 = convertEarfcnToFrequency(r0, r8, r1)
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.AccessNetworkUtils.getFrequencyFromEarfcn(int, int, boolean):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.telephony.AccessNetworkUtils.getFrequencyFromEarfcn(int, int,"
+                    + " boolean):int");
     }
 
     private static int convertEarfcnToFrequency(int low, int earfcn, int offset) {
         return ((earfcn - offset) * 100) + low;
     }
 
-    private static boolean isInEarfcnRange(int earfcn, AccessNetworkConstants.EutranBandArfcnFrequency earfcnFrequency, boolean isUplink) {
-        return isUplink ? earfcn >= earfcnFrequency.uplinkOffset && earfcn <= earfcnFrequency.uplinkRange : earfcn >= earfcnFrequency.downlinkOffset && earfcn <= earfcnFrequency.downlinkRange;
+    private static boolean isInEarfcnRange(
+            int earfcn,
+            AccessNetworkConstants.EutranBandArfcnFrequency earfcnFrequency,
+            boolean isUplink) {
+        return isUplink
+                ? earfcn >= earfcnFrequency.uplinkOffset && earfcn <= earfcnFrequency.uplinkRange
+                : earfcn >= earfcnFrequency.downlinkOffset
+                        && earfcn <= earfcnFrequency.downlinkRange;
     }
 
     public static int getFrequencyFromUarfcn(int band, int uarfcn, boolean isUplink) {
@@ -820,7 +921,8 @@ public class AccessNetworkUtils {
             return -1;
         }
         int offsetKhz = 0;
-        AccessNetworkConstants.UtranBandArfcnFrequency[] values = AccessNetworkConstants.UtranBandArfcnFrequency.values();
+        AccessNetworkConstants.UtranBandArfcnFrequency[] values =
+                AccessNetworkConstants.UtranBandArfcnFrequency.values();
         int length = values.length;
         int i = 0;
         while (true) {
@@ -831,9 +933,17 @@ public class AccessNetworkUtils {
             if (band != uarfcnFrequency.band) {
                 i++;
             } else if (isInUarfcnRange(uarfcn, uarfcnFrequency, isUplink)) {
-                offsetKhz = isUplink ? uarfcnFrequency.uplinkOffset : uarfcnFrequency.downlinkOffset;
+                offsetKhz =
+                        isUplink ? uarfcnFrequency.uplinkOffset : uarfcnFrequency.downlinkOffset;
             } else {
-                Rlog.w(TAG, "Band and the range of UARFCN are not consistent: band = " + band + " ,uarfcn = " + uarfcn + " ,isUplink = " + isUplink);
+                Rlog.w(
+                        TAG,
+                        "Band and the range of UARFCN are not consistent: band = "
+                                + band
+                                + " ,uarfcn = "
+                                + uarfcn
+                                + " ,isUplink = "
+                                + isUplink);
                 return -1;
             }
         }
@@ -854,14 +964,19 @@ public class AccessNetworkUtils {
         return ((uarfcn * 1000) - 2150100) * 5;
     }
 
-    private static boolean isInUarfcnRange(int uarfcn, AccessNetworkConstants.UtranBandArfcnFrequency uarfcnFrequency, boolean isUplink) {
+    private static boolean isInUarfcnRange(
+            int uarfcn,
+            AccessNetworkConstants.UtranBandArfcnFrequency uarfcnFrequency,
+            boolean isUplink) {
         if (isUplink) {
-            return uarfcn >= uarfcnFrequency.uplinkRangeFirst && uarfcn <= uarfcnFrequency.uplinkRangeLast;
+            return uarfcn >= uarfcnFrequency.uplinkRangeFirst
+                    && uarfcn <= uarfcnFrequency.uplinkRangeLast;
         }
         if (uarfcnFrequency.downlinkRangeFirst == 0 || uarfcnFrequency.downlinkRangeLast == 0) {
             return true;
         }
-        return uarfcn >= uarfcnFrequency.downlinkRangeFirst && uarfcn <= uarfcnFrequency.downlinkRangeLast;
+        return uarfcn >= uarfcnFrequency.downlinkRangeFirst
+                && uarfcn <= uarfcnFrequency.downlinkRangeLast;
     }
 
     public static int getFrequencyFromArfcn(int band, int arfcn, boolean isUplink) {
@@ -870,7 +985,8 @@ public class AccessNetworkUtils {
         }
         int downlinkOffset = 0;
         int frequency = 0;
-        AccessNetworkConstants.GeranBandArfcnFrequency[] values = AccessNetworkConstants.GeranBandArfcnFrequency.values();
+        AccessNetworkConstants.GeranBandArfcnFrequency[] values =
+                AccessNetworkConstants.GeranBandArfcnFrequency.values();
         int length = values.length;
         int i = 0;
         while (true) {
@@ -880,20 +996,29 @@ public class AccessNetworkUtils {
             AccessNetworkConstants.GeranBandArfcnFrequency arfcnFrequency = values[i];
             if (band != arfcnFrequency.band) {
                 i++;
-            } else if (arfcn >= arfcnFrequency.arfcnRangeFirst && arfcn <= arfcnFrequency.arfcnRangeLast) {
+            } else if (arfcn >= arfcnFrequency.arfcnRangeFirst
+                    && arfcn <= arfcnFrequency.arfcnRangeLast) {
                 int uplinkFrequencyFirst = arfcnFrequency.uplinkFrequencyFirst;
                 downlinkOffset = arfcnFrequency.downlinkOffset;
                 int arfcnOffset = arfcnFrequency.arfcnOffset;
                 frequency = convertArfcnToFrequency(arfcn, uplinkFrequencyFirst, arfcnOffset);
             } else {
-                Rlog.w(TAG, "Band and the range of ARFCN are not consistent: band = " + band + " ,arfcn = " + arfcn + " ,isUplink = " + isUplink);
+                Rlog.w(
+                        TAG,
+                        "Band and the range of ARFCN are not consistent: band = "
+                                + band
+                                + " ,arfcn = "
+                                + arfcn
+                                + " ,isUplink = "
+                                + isUplink);
                 return -1;
             }
         }
         return isUplink ? frequency : frequency + downlinkOffset;
     }
 
-    private static int convertArfcnToFrequency(int arfcn, int uplinkFrequencyFirstKhz, int arfcnOffset) {
+    private static int convertArfcnToFrequency(
+            int arfcn, int uplinkFrequencyFirstKhz, int arfcnOffset) {
         return ((arfcn - arfcnOffset) * 200) + uplinkFrequencyFirstKhz;
     }
 

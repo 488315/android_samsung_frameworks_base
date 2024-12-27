@@ -10,7 +10,8 @@ import java.util.function.Predicate;
 /* loaded from: classes4.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_RUN_ON_BACKGROUND_THREAD_ENABLED, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(Arrays.asList(Flags.FLAG_RUN_ON_BACKGROUND_THREAD_ENABLED, ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,12 +19,15 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // android.view.contentcapture.flags.FeatureFlags
     public boolean runOnBackgroundThreadEnabled() {
-        return getValue(Flags.FLAG_RUN_ON_BACKGROUND_THREAD_ENABLED, new Predicate() { // from class: android.view.contentcapture.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).runOnBackgroundThreadEnabled();
-            }
-        });
+        return getValue(
+                Flags.FLAG_RUN_ON_BACKGROUND_THREAD_ENABLED,
+                new Predicate() { // from class:
+                                  // android.view.contentcapture.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).runOnBackgroundThreadEnabled();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {

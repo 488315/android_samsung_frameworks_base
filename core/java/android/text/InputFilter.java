@@ -1,6 +1,7 @@
 package android.text;
 
 import com.android.internal.util.Preconditions;
+
 import java.util.Locale;
 
 /* loaded from: classes4.dex */
@@ -20,7 +21,8 @@ public interface InputFilter {
         }
 
         @Override // android.text.InputFilter
-        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+        public CharSequence filter(
+                CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
             boolean copySpans;
             CharSequence upper;
             CharSequence wrapper = new CharSequenceWrapper(source, start, end);
@@ -36,7 +38,13 @@ public interface InputFilter {
                     break;
                 }
             }
-            if (lowerOrTitleFound && (upper = TextUtils.toUpperCase(this.mLocale, wrapper, (copySpans = source instanceof Spanned))) != wrapper) {
+            if (lowerOrTitleFound
+                    && (upper =
+                                    TextUtils.toUpperCase(
+                                            this.mLocale,
+                                            wrapper,
+                                            (copySpans = source instanceof Spanned)))
+                            != wrapper) {
                 return copySpans ? new SpannableString(upper) : upper.toString();
             }
             return null;
@@ -73,7 +81,8 @@ public interface InputFilter {
                 if (start < 0 || end < 0 || end > this.mLength || start > end) {
                     throw new IndexOutOfBoundsException();
                 }
-                return new CharSequenceWrapper(this.mSource, this.mStart + start, this.mStart + end);
+                return new CharSequenceWrapper(
+                        this.mSource, this.mStart + start, this.mStart + end);
             }
 
             @Override // java.lang.CharSequence
@@ -83,7 +92,8 @@ public interface InputFilter {
 
             @Override // android.text.Spanned
             public <T> T[] getSpans(int i, int i2, Class<T> cls) {
-                return (T[]) ((Spanned) this.mSource).getSpans(this.mStart + i, this.mStart + i2, cls);
+                return (T[])
+                        ((Spanned) this.mSource).getSpans(this.mStart + i, this.mStart + i2, cls);
             }
 
             @Override // android.text.Spanned
@@ -103,7 +113,9 @@ public interface InputFilter {
 
             @Override // android.text.Spanned
             public int nextSpanTransition(int start, int limit, Class type) {
-                return ((Spanned) this.mSource).nextSpanTransition(this.mStart + start, this.mStart + limit, type) - this.mStart;
+                return ((Spanned) this.mSource)
+                                .nextSpanTransition(this.mStart + start, this.mStart + limit, type)
+                        - this.mStart;
             }
         }
     }
@@ -116,7 +128,8 @@ public interface InputFilter {
         }
 
         @Override // android.text.InputFilter
-        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+        public CharSequence filter(
+                CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
             int keep = this.mMax - (dest.length() - (dend - dstart));
             if (keep <= 0) {
                 return "";

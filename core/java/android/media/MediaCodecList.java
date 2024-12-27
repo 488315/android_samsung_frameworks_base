@@ -1,7 +1,7 @@
 package android.media;
 
-import android.media.MediaCodecInfo;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
@@ -80,7 +80,8 @@ public final class MediaCodecList {
                         Log.e(TAG, "Could not get codec capabilities", e);
                     }
                 }
-                sRegularCodecInfos = (MediaCodecInfo[]) regulars.toArray(new MediaCodecInfo[regulars.size()]);
+                sRegularCodecInfos =
+                        (MediaCodecInfo[]) regulars.toArray(new MediaCodecInfo[regulars.size()]);
                 sAllCodecInfos = (MediaCodecInfo[]) all.toArray(new MediaCodecInfo[all.size()]);
             }
         }
@@ -88,7 +89,8 @@ public final class MediaCodecList {
 
     private static MediaCodecInfo getNewCodecInfoAt(int index) {
         String[] supportedTypes = getSupportedTypes(index);
-        MediaCodecInfo.CodecCapabilities[] caps = new MediaCodecInfo.CodecCapabilities[supportedTypes.length];
+        MediaCodecInfo.CodecCapabilities[] caps =
+                new MediaCodecInfo.CodecCapabilities[supportedTypes.length];
         int typeIx = 0;
         int length = supportedTypes.length;
         int i = 0;
@@ -98,7 +100,8 @@ public final class MediaCodecList {
             i++;
             typeIx++;
         }
-        return new MediaCodecInfo(getCodecName(index), getCanonicalName(index), getAttributes(index), caps);
+        return new MediaCodecInfo(
+                getCodecName(index), getCanonicalName(index), getAttributes(index), caps);
     }
 
     public static MediaCodecInfo getInfoFor(String codec) {

@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextDualDisplayAngle extends SContextEventContext {
-    public static final Parcelable.Creator<SContextDualDisplayAngle> CREATOR = new Parcelable.Creator<SContextDualDisplayAngle>() { // from class: android.hardware.scontext.SContextDualDisplayAngle.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextDualDisplayAngle createFromParcel(Parcel in) {
-            return new SContextDualDisplayAngle(in);
-        }
+    public static final Parcelable.Creator<SContextDualDisplayAngle> CREATOR =
+            new Parcelable.Creator<SContextDualDisplayAngle>() { // from class:
+                // android.hardware.scontext.SContextDualDisplayAngle.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextDualDisplayAngle createFromParcel(Parcel in) {
+                    return new SContextDualDisplayAngle(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextDualDisplayAngle[] newArray(int size) {
-            return new SContextDualDisplayAngle[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextDualDisplayAngle[] newArray(int size) {
+                    return new SContextDualDisplayAngle[size];
+                }
+            };
     private Bundle mContext;
 
     public SContextDualDisplayAngle() {
@@ -42,7 +44,8 @@ public class SContextDualDisplayAngle extends SContextEventContext {
         return this.mContext.getShort("Intensity");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

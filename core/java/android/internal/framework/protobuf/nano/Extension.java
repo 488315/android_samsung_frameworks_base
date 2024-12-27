@@ -1,6 +1,5 @@
 package android.internal.framework.protobuf.nano;
 
-import android.internal.framework.protobuf.nano.ExtendableMessageNano;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -32,24 +31,31 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
     protected final int type;
 
     @Deprecated
-    public static <M extends ExtendableMessageNano<M>, T extends MessageNano> Extension<M, T> createMessageTyped(int type, Class<T> clazz, int tag) {
+    public static <M extends ExtendableMessageNano<M>, T extends MessageNano>
+            Extension<M, T> createMessageTyped(int type, Class<T> clazz, int tag) {
         return new Extension<>(type, clazz, tag, false);
     }
 
-    public static <M extends ExtendableMessageNano<M>, T extends MessageNano> Extension<M, T> createMessageTyped(int type, Class<T> clazz, long tag) {
+    public static <M extends ExtendableMessageNano<M>, T extends MessageNano>
+            Extension<M, T> createMessageTyped(int type, Class<T> clazz, long tag) {
         return new Extension<>(type, clazz, (int) tag, false);
     }
 
-    public static <M extends ExtendableMessageNano<M>, T extends MessageNano> Extension<M, T[]> createRepeatedMessageTyped(int type, Class<T[]> clazz, long tag) {
+    public static <M extends ExtendableMessageNano<M>, T extends MessageNano>
+            Extension<M, T[]> createRepeatedMessageTyped(int type, Class<T[]> clazz, long tag) {
         return new Extension<>(type, clazz, (int) tag, true);
     }
 
-    public static <M extends ExtendableMessageNano<M>, T> Extension<M, T> createPrimitiveTyped(int type, Class<T> clazz, long tag) {
+    public static <M extends ExtendableMessageNano<M>, T> Extension<M, T> createPrimitiveTyped(
+            int type, Class<T> clazz, long tag) {
         return new PrimitiveExtension(type, clazz, (int) tag, false, 0, 0);
     }
 
-    public static <M extends ExtendableMessageNano<M>, T> Extension<M, T> createRepeatedPrimitiveTyped(int type, Class<T> clazz, long tag, long nonPackedTag, long packedTag) {
-        return new PrimitiveExtension(type, clazz, (int) tag, true, (int) nonPackedTag, (int) packedTag);
+    public static <M extends ExtendableMessageNano<M>, T>
+            Extension<M, T> createRepeatedPrimitiveTyped(
+                    int type, Class<T> clazz, long tag, long nonPackedTag, long packedTag) {
+        return new PrimitiveExtension(
+                type, clazz, (int) tag, true, (int) nonPackedTag, (int) packedTag);
     }
 
     private Extension(int type, Class<T> clazz, int tag, boolean repeated) {
@@ -63,7 +69,9 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
         if (unknownFields == null) {
             return null;
         }
-        return this.repeated ? getRepeatedValueFrom(unknownFields) : getSingularValueFrom(unknownFields);
+        return this.repeated
+                ? getRepeatedValueFrom(unknownFields)
+                : getSingularValueFrom(unknownFields);
     }
 
     private T getRepeatedValueFrom(List<UnknownFieldData> unknownFields) {
@@ -111,9 +119,11 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
         } catch (IOException e) {
             throw new IllegalArgumentException("Error reading extension field", e);
         } catch (IllegalAccessException e2) {
-            throw new IllegalArgumentException("Error creating instance of class " + componentType, e2);
+            throw new IllegalArgumentException(
+                    "Error creating instance of class " + componentType, e2);
         } catch (InstantiationException e3) {
-            throw new IllegalArgumentException("Error creating instance of class " + componentType, e3);
+            throw new IllegalArgumentException(
+                    "Error creating instance of class " + componentType, e3);
         }
     }
 
@@ -194,11 +204,18 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
         }
     }
 
-    private static class PrimitiveExtension<M extends ExtendableMessageNano<M>, T> extends Extension<M, T> {
+    private static class PrimitiveExtension<M extends ExtendableMessageNano<M>, T>
+            extends Extension<M, T> {
         private final int nonPackedTag;
         private final int packedTag;
 
-        public PrimitiveExtension(int type, Class<T> clazz, int tag, boolean repeated, int nonPackedTag, int packedTag) {
+        public PrimitiveExtension(
+                int type,
+                Class<T> clazz,
+                int tag,
+                boolean repeated,
+                int nonPackedTag,
+                int packedTag) {
             super(type, clazz, tag, repeated);
             this.nonPackedTag = nonPackedTag;
             this.packedTag = packedTag;
@@ -403,7 +420,13 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
                     throw new IllegalStateException(e);
                 }
             }
-            throw new IllegalArgumentException("Unexpected repeated extension tag " + this.tag + ", unequal to both non-packed variant " + this.nonPackedTag + " and packed variant " + this.packedTag);
+            throw new IllegalArgumentException(
+                    "Unexpected repeated extension tag "
+                            + this.tag
+                            + ", unequal to both non-packed variant "
+                            + this.nonPackedTag
+                            + " and packed variant "
+                            + this.packedTag);
         }
 
         private int computePackedDataSize(Object array) {
@@ -420,17 +443,23 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
                     return arrayLength * 4;
                 case 3:
                     for (int i = 0; i < arrayLength; i++) {
-                        dataSize += CodedOutputByteBufferNano.computeInt64SizeNoTag(Array.getLong(array, i));
+                        dataSize +=
+                                CodedOutputByteBufferNano.computeInt64SizeNoTag(
+                                        Array.getLong(array, i));
                     }
                     return dataSize;
                 case 4:
                     for (int i2 = 0; i2 < arrayLength; i2++) {
-                        dataSize += CodedOutputByteBufferNano.computeUInt64SizeNoTag(Array.getLong(array, i2));
+                        dataSize +=
+                                CodedOutputByteBufferNano.computeUInt64SizeNoTag(
+                                        Array.getLong(array, i2));
                     }
                     return dataSize;
                 case 5:
                     for (int i3 = 0; i3 < arrayLength; i3++) {
-                        dataSize += CodedOutputByteBufferNano.computeInt32SizeNoTag(Array.getInt(array, i3));
+                        dataSize +=
+                                CodedOutputByteBufferNano.computeInt32SizeNoTag(
+                                        Array.getInt(array, i3));
                     }
                     return dataSize;
                 case 8:
@@ -443,22 +472,30 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
                     throw new IllegalArgumentException("Unexpected non-packable type " + this.type);
                 case 13:
                     for (int i4 = 0; i4 < arrayLength; i4++) {
-                        dataSize += CodedOutputByteBufferNano.computeUInt32SizeNoTag(Array.getInt(array, i4));
+                        dataSize +=
+                                CodedOutputByteBufferNano.computeUInt32SizeNoTag(
+                                        Array.getInt(array, i4));
                     }
                     return dataSize;
                 case 14:
                     for (int i5 = 0; i5 < arrayLength; i5++) {
-                        dataSize += CodedOutputByteBufferNano.computeEnumSizeNoTag(Array.getInt(array, i5));
+                        dataSize +=
+                                CodedOutputByteBufferNano.computeEnumSizeNoTag(
+                                        Array.getInt(array, i5));
                     }
                     return dataSize;
                 case 17:
                     for (int i6 = 0; i6 < arrayLength; i6++) {
-                        dataSize += CodedOutputByteBufferNano.computeSInt32SizeNoTag(Array.getInt(array, i6));
+                        dataSize +=
+                                CodedOutputByteBufferNano.computeSInt32SizeNoTag(
+                                        Array.getInt(array, i6));
                     }
                     return dataSize;
                 case 18:
                     for (int i7 = 0; i7 < arrayLength; i7++) {
-                        dataSize += CodedOutputByteBufferNano.computeSInt64SizeNoTag(Array.getLong(array, i7));
+                        dataSize +=
+                                CodedOutputByteBufferNano.computeSInt64SizeNoTag(
+                                        Array.getLong(array, i7));
                     }
                     return dataSize;
             }
@@ -471,10 +508,17 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
             }
             if (this.tag == this.packedTag) {
                 int dataSize = computePackedDataSize(array);
-                int payloadSize = CodedOutputByteBufferNano.computeRawVarint32Size(dataSize) + dataSize;
+                int payloadSize =
+                        CodedOutputByteBufferNano.computeRawVarint32Size(dataSize) + dataSize;
                 return CodedOutputByteBufferNano.computeRawVarint32Size(this.tag) + payloadSize;
             }
-            throw new IllegalArgumentException("Unexpected repeated extension tag " + this.tag + ", unequal to both non-packed variant " + this.nonPackedTag + " and packed variant " + this.packedTag);
+            throw new IllegalArgumentException(
+                    "Unexpected repeated extension tag "
+                            + this.tag
+                            + ", unequal to both non-packed variant "
+                            + this.nonPackedTag
+                            + " and packed variant "
+                            + this.packedTag);
         }
 
         @Override // android.internal.framework.protobuf.nano.Extension
@@ -483,28 +527,36 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
             switch (this.type) {
                 case 1:
                     Double doubleValue = (Double) value;
-                    return CodedOutputByteBufferNano.computeDoubleSize(fieldNumber, doubleValue.doubleValue());
+                    return CodedOutputByteBufferNano.computeDoubleSize(
+                            fieldNumber, doubleValue.doubleValue());
                 case 2:
                     Float floatValue = (Float) value;
-                    return CodedOutputByteBufferNano.computeFloatSize(fieldNumber, floatValue.floatValue());
+                    return CodedOutputByteBufferNano.computeFloatSize(
+                            fieldNumber, floatValue.floatValue());
                 case 3:
                     Long int64Value = (Long) value;
-                    return CodedOutputByteBufferNano.computeInt64Size(fieldNumber, int64Value.longValue());
+                    return CodedOutputByteBufferNano.computeInt64Size(
+                            fieldNumber, int64Value.longValue());
                 case 4:
                     Long uint64Value = (Long) value;
-                    return CodedOutputByteBufferNano.computeUInt64Size(fieldNumber, uint64Value.longValue());
+                    return CodedOutputByteBufferNano.computeUInt64Size(
+                            fieldNumber, uint64Value.longValue());
                 case 5:
                     Integer int32Value = (Integer) value;
-                    return CodedOutputByteBufferNano.computeInt32Size(fieldNumber, int32Value.intValue());
+                    return CodedOutputByteBufferNano.computeInt32Size(
+                            fieldNumber, int32Value.intValue());
                 case 6:
                     Long fixed64Value = (Long) value;
-                    return CodedOutputByteBufferNano.computeFixed64Size(fieldNumber, fixed64Value.longValue());
+                    return CodedOutputByteBufferNano.computeFixed64Size(
+                            fieldNumber, fixed64Value.longValue());
                 case 7:
                     Integer fixed32Value = (Integer) value;
-                    return CodedOutputByteBufferNano.computeFixed32Size(fieldNumber, fixed32Value.intValue());
+                    return CodedOutputByteBufferNano.computeFixed32Size(
+                            fieldNumber, fixed32Value.intValue());
                 case 8:
                     Boolean boolValue = (Boolean) value;
-                    return CodedOutputByteBufferNano.computeBoolSize(fieldNumber, boolValue.booleanValue());
+                    return CodedOutputByteBufferNano.computeBoolSize(
+                            fieldNumber, boolValue.booleanValue());
                 case 9:
                     String stringValue = (String) value;
                     return CodedOutputByteBufferNano.computeStringSize(fieldNumber, stringValue);
@@ -517,22 +569,28 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
                     return CodedOutputByteBufferNano.computeBytesSize(fieldNumber, bytesValue);
                 case 13:
                     Integer uint32Value = (Integer) value;
-                    return CodedOutputByteBufferNano.computeUInt32Size(fieldNumber, uint32Value.intValue());
+                    return CodedOutputByteBufferNano.computeUInt32Size(
+                            fieldNumber, uint32Value.intValue());
                 case 14:
                     Integer enumValue = (Integer) value;
-                    return CodedOutputByteBufferNano.computeEnumSize(fieldNumber, enumValue.intValue());
+                    return CodedOutputByteBufferNano.computeEnumSize(
+                            fieldNumber, enumValue.intValue());
                 case 15:
                     Integer sfixed32Value = (Integer) value;
-                    return CodedOutputByteBufferNano.computeSFixed32Size(fieldNumber, sfixed32Value.intValue());
+                    return CodedOutputByteBufferNano.computeSFixed32Size(
+                            fieldNumber, sfixed32Value.intValue());
                 case 16:
                     Long sfixed64Value = (Long) value;
-                    return CodedOutputByteBufferNano.computeSFixed64Size(fieldNumber, sfixed64Value.longValue());
+                    return CodedOutputByteBufferNano.computeSFixed64Size(
+                            fieldNumber, sfixed64Value.longValue());
                 case 17:
                     Integer sint32Value = (Integer) value;
-                    return CodedOutputByteBufferNano.computeSInt32Size(fieldNumber, sint32Value.intValue());
+                    return CodedOutputByteBufferNano.computeSInt32Size(
+                            fieldNumber, sint32Value.intValue());
                 case 18:
                     Long sint64Value = (Long) value;
-                    return CodedOutputByteBufferNano.computeSInt64Size(fieldNumber, sint64Value.longValue());
+                    return CodedOutputByteBufferNano.computeSInt64Size(
+                            fieldNumber, sint64Value.longValue());
             }
         }
     }

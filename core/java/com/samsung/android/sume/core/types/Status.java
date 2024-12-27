@@ -20,17 +20,25 @@ public enum Status {
     }
 
     public static Status from(final int value) {
-        return (Status) Arrays.stream(values()).filter(new Predicate() { // from class: com.samsung.android.sume.core.types.Status$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return Status.lambda$from$0(value, (Status) obj);
-            }
-        }).findFirst().orElseThrow(new Supplier() { // from class: com.samsung.android.sume.core.types.Status$$ExternalSyntheticLambda1
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return Status.lambda$from$1(value);
-            }
-        });
+        return (Status)
+                Arrays.stream(values())
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.types.Status$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return Status.lambda$from$0(value, (Status) obj);
+                                    }
+                                })
+                        .findFirst()
+                        .orElseThrow(
+                                new Supplier() { // from class:
+                                                 // com.samsung.android.sume.core.types.Status$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Supplier
+                                    public final Object get() {
+                                        return Status.lambda$from$1(value);
+                                    }
+                                });
     }
 
     static /* synthetic */ boolean lambda$from$0(int value, Status e) {

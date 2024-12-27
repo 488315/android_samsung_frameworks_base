@@ -11,7 +11,12 @@ public abstract class PowerCalculator {
         return (j == -1 || batteryUsageStatsQuery.shouldForceUsePowerProfileModel()) ? 1 : 2;
     }
 
-    public abstract void calculate(BatteryUsageStats.Builder builder, BatteryStats batteryStats, long j, long j2, BatteryUsageStatsQuery batteryUsageStatsQuery);
+    public abstract void calculate(
+            BatteryUsageStats.Builder builder,
+            BatteryStats batteryStats,
+            long j,
+            long j2,
+            BatteryUsageStatsQuery batteryUsageStatsQuery);
 
     public abstract boolean isPowerComponentSupported(int i);
 }

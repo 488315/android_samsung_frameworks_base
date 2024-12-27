@@ -24,7 +24,8 @@ public class ShaderProgram extends Program {
 
     private native boolean setShaderAttributeValues(String str, float[] fArr, int i);
 
-    private native boolean setShaderAttributeVertexFrame(String str, VertexFrame vertexFrame, int i, int i2, int i3, int i4, boolean z);
+    private native boolean setShaderAttributeVertexFrame(
+            String str, VertexFrame vertexFrame, int i, int i2, int i3, int i4, boolean z);
 
     private native boolean setShaderBlendEnabled(boolean z);
 
@@ -40,23 +41,23 @@ public class ShaderProgram extends Program {
 
     private native boolean setShaderVertexCount(int i);
 
-    private native boolean setTargetRegion(float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8);
+    private native boolean setTargetRegion(
+            float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8);
 
     private native boolean setUniformValue(String str, Object obj);
 
     private native boolean shaderProcess(GLFrame[] gLFrameArr, GLFrame gLFrame);
 
-    public native boolean setSourceRegion(float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8);
+    public native boolean setSourceRegion(
+            float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8);
 
     private void setTimer() {
         this.mTimer = new StopWatchMap();
     }
 
-    private ShaderProgram() {
-    }
+    private ShaderProgram() {}
 
-    private ShaderProgram(NativeAllocatorTag tag) {
-    }
+    private ShaderProgram(NativeAllocatorTag tag) {}
 
     public ShaderProgram(FilterContext context, String fragmentShader) {
         this.mGLEnvironment = getGLEnvironment(context);
@@ -108,8 +109,12 @@ public class ShaderProgram extends Program {
         if (output instanceof GLFrame) {
             GLFrame glOutput = (GLFrame) output;
             if (this.mMaxTileSize > 0) {
-                int xTiles = ((output.getFormat().getWidth() + this.mMaxTileSize) - 1) / this.mMaxTileSize;
-                int yTiles = ((output.getFormat().getHeight() + this.mMaxTileSize) - 1) / this.mMaxTileSize;
+                int xTiles =
+                        ((output.getFormat().getWidth() + this.mMaxTileSize) - 1)
+                                / this.mMaxTileSize;
+                int yTiles =
+                        ((output.getFormat().getHeight() + this.mMaxTileSize) - 1)
+                                / this.mMaxTileSize;
                 setShaderTileCounts(xTiles, yTiles);
             }
             if (!shaderProcess(glInputs, glOutput)) {
@@ -127,7 +132,8 @@ public class ShaderProgram extends Program {
     @Override // android.filterfw.core.Program
     public void setHostValue(String variableName, Object value) {
         if (!setUniformValue(variableName, value)) {
-            throw new RuntimeException("Error setting uniform value for variable '" + variableName + "'!");
+            throw new RuntimeException(
+                    "Error setting uniform value for variable '" + variableName + "'!");
         }
     }
 
@@ -138,22 +144,54 @@ public class ShaderProgram extends Program {
 
     public void setAttributeValues(String attributeName, float[] data, int componentCount) {
         if (!setShaderAttributeValues(attributeName, data, componentCount)) {
-            throw new RuntimeException("Error setting attribute value for attribute '" + attributeName + "'!");
+            throw new RuntimeException(
+                    "Error setting attribute value for attribute '" + attributeName + "'!");
         }
     }
 
-    public void setAttributeValues(String attributeName, VertexFrame vertexData, int type, int componentCount, int strideInBytes, int offsetInBytes, boolean normalize) {
-        if (!setShaderAttributeVertexFrame(attributeName, vertexData, type, componentCount, strideInBytes, offsetInBytes, normalize)) {
-            throw new RuntimeException("Error setting attribute value for attribute '" + attributeName + "'!");
+    public void setAttributeValues(
+            String attributeName,
+            VertexFrame vertexData,
+            int type,
+            int componentCount,
+            int strideInBytes,
+            int offsetInBytes,
+            boolean normalize) {
+        if (!setShaderAttributeVertexFrame(
+                attributeName,
+                vertexData,
+                type,
+                componentCount,
+                strideInBytes,
+                offsetInBytes,
+                normalize)) {
+            throw new RuntimeException(
+                    "Error setting attribute value for attribute '" + attributeName + "'!");
         }
     }
 
     public void setSourceRegion(Quad region) {
-        setSourceRegion(region.p0.x, region.p0.y, region.p1.x, region.p1.y, region.p2.x, region.p2.y, region.p3.x, region.p3.y);
+        setSourceRegion(
+                region.p0.x,
+                region.p0.y,
+                region.p1.x,
+                region.p1.y,
+                region.p2.x,
+                region.p2.y,
+                region.p3.x,
+                region.p3.y);
     }
 
     public void setTargetRegion(Quad region) {
-        setTargetRegion(region.p0.x, region.p0.y, region.p1.x, region.p1.y, region.p2.x, region.p2.y, region.p3.x, region.p3.y);
+        setTargetRegion(
+                region.p0.x,
+                region.p0.y,
+                region.p1.x,
+                region.p1.y,
+                region.p2.x,
+                region.p2.y,
+                region.p3.x,
+                region.p3.y);
     }
 
     public void setSourceRect(float x, float y, float width, float height) {
@@ -172,7 +210,8 @@ public class ShaderProgram extends Program {
 
     public void setClearColor(float r, float g, float b) {
         if (!setShaderClearColor(r, g, b)) {
-            throw new RuntimeException("Could not set clear color to " + r + "," + g + "," + b + "!");
+            throw new RuntimeException(
+                    "Could not set clear color to " + r + "," + g + "," + b + "!");
         }
     }
 
@@ -213,7 +252,8 @@ public class ShaderProgram extends Program {
     private static GLEnvironment getGLEnvironment(FilterContext context) {
         GLEnvironment result = context != null ? context.getGLEnvironment() : null;
         if (result == null) {
-            throw new NullPointerException("Attempting to create ShaderProgram with no GL environment in place!");
+            throw new NullPointerException(
+                    "Attempting to create ShaderProgram with no GL environment in place!");
         }
         return result;
     }

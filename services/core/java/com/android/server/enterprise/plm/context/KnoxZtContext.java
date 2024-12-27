@@ -1,6 +1,7 @@
 package com.android.server.enterprise.plm.context;
 
 import android.app.admin.DevicePolicyManager;
+
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0;
@@ -29,12 +30,30 @@ public final class KnoxZtContext extends ProcessContext {
     @Override // com.android.server.enterprise.plm.context.ProcessContext
     public final boolean needToKeepProcessAlive(IStateDelegate iStateDelegate) {
         ProcessStateTracker processStateTracker = (ProcessStateTracker) iStateDelegate;
-        boolean isDeviceManaged = ((DevicePolicyManager) processStateTracker.mSystemStateTracker.mContext.getSystemService("device_policy")).isDeviceManaged();
-        boolean isOrganizationOwnedDeviceWithManagedProfile = ((DevicePolicyManager) processStateTracker.mSystemStateTracker.mContext.getSystemService("device_policy")).isOrganizationOwnedDeviceWithManagedProfile();
+        boolean isDeviceManaged =
+                ((DevicePolicyManager)
+                                processStateTracker.mSystemStateTracker.mContext.getSystemService(
+                                        "device_policy"))
+                        .isDeviceManaged();
+        boolean isOrganizationOwnedDeviceWithManagedProfile =
+                ((DevicePolicyManager)
+                                processStateTracker.mSystemStateTracker.mContext.getSystemService(
+                                        "device_policy"))
+                        .isOrganizationOwnedDeviceWithManagedProfile();
         boolean isKlmActivated = processStateTracker.isKlmActivated();
-        RCPManagerService$$ExternalSyntheticOutline0.m("KnoxZtContext", FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("is device managed: ", isDeviceManaged, ", is device organization owned with managed profile: ", isOrganizationOwnedDeviceWithManagedProfile, ", is klm activated: "), isKlmActivated);
-        boolean z = isDeviceManaged || isOrganizationOwnedDeviceWithManagedProfile || isKlmActivated;
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("keep alive ", "KnoxZtContext", z);
+        RCPManagerService$$ExternalSyntheticOutline0.m(
+                "KnoxZtContext",
+                FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                        "is device managed: ",
+                        isDeviceManaged,
+                        ", is device organization owned with managed profile: ",
+                        isOrganizationOwnedDeviceWithManagedProfile,
+                        ", is klm activated: "),
+                isKlmActivated);
+        boolean z =
+                isDeviceManaged || isOrganizationOwnedDeviceWithManagedProfile || isKlmActivated;
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "keep alive ", "KnoxZtContext", z);
         return z;
     }
 }

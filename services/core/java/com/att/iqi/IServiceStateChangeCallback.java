@@ -19,8 +19,7 @@ public interface IServiceStateChangeCallback extends IInterface {
         }
 
         @Override // com.att.iqi.IServiceStateChangeCallback
-        public void onServiceChange(boolean z) throws RemoteException {
-        }
+        public void onServiceChange(boolean z) throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -65,8 +64,12 @@ public interface IServiceStateChangeCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IServiceStateChangeCallback.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IServiceStateChangeCallback)) ? new Proxy(iBinder) : (IServiceStateChangeCallback) queryLocalInterface;
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(IServiceStateChangeCallback.DESCRIPTOR);
+            return (queryLocalInterface == null
+                            || !(queryLocalInterface instanceof IServiceStateChangeCallback))
+                    ? new Proxy(iBinder)
+                    : (IServiceStateChangeCallback) queryLocalInterface;
         }
 
         @Override // android.os.IInterface
@@ -75,7 +78,8 @@ public interface IServiceStateChangeCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(IServiceStateChangeCallback.DESCRIPTOR);
             }

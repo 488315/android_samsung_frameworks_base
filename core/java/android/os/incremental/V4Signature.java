@@ -1,6 +1,7 @@
 package android.os.incremental;
 
 import android.os.ParcelFileDescriptor;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.EOFException;
@@ -53,7 +54,13 @@ public class V4Signature {
         public final byte[] signature;
         public final int signatureAlgorithmId;
 
-        SigningInfo(byte[] apkDigest, byte[] certificate, byte[] additionalData, byte[] publicKey, int signatureAlgorithmId, byte[] signature) {
+        SigningInfo(
+                byte[] apkDigest,
+                byte[] certificate,
+                byte[] additionalData,
+                byte[] publicKey,
+                int signatureAlgorithmId,
+                byte[] signature) {
             this.apkDigest = apkDigest;
             this.certificate = certificate;
             this.additionalData = additionalData;
@@ -73,7 +80,13 @@ public class V4Signature {
             byte[] publicKey = V4Signature.readBytes(buffer);
             int signatureAlgorithmId = buffer.getInt();
             byte[] signature = V4Signature.readBytes(buffer);
-            return new SigningInfo(apkDigest, certificate, additionalData, publicKey, signatureAlgorithmId, signature);
+            return new SigningInfo(
+                    apkDigest,
+                    certificate,
+                    additionalData,
+                    publicKey,
+                    signatureAlgorithmId,
+                    signature);
         }
     }
 
@@ -117,7 +130,11 @@ public class V4Signature {
             while (buffer.hasRemaining()) {
                 signingInfoBlocks.add(SigningInfoBlock.fromByteBuffer(buffer));
             }
-            return new SigningInfos(signingInfo, (SigningInfoBlock[]) signingInfoBlocks.toArray(new SigningInfoBlock[signingInfoBlocks.size()]));
+            return new SigningInfos(
+                    signingInfo,
+                    (SigningInfoBlock[])
+                            signingInfoBlocks.toArray(
+                                    new SigningInfoBlock[signingInfoBlocks.size()]));
         }
     }
 
@@ -168,8 +185,15 @@ public class V4Signature {
         }
     }
 
-    public static byte[] getSignedData(long fileSize, HashingInfo hashingInfo, SigningInfo signingInfo) {
-        int size = bytesSize(hashingInfo.salt) + 17 + bytesSize(hashingInfo.rawRootHash) + bytesSize(signingInfo.apkDigest) + bytesSize(signingInfo.certificate) + bytesSize(signingInfo.additionalData);
+    public static byte[] getSignedData(
+            long fileSize, HashingInfo hashingInfo, SigningInfo signingInfo) {
+        int size =
+                bytesSize(hashingInfo.salt)
+                        + 17
+                        + bytesSize(hashingInfo.rawRootHash)
+                        + bytesSize(signingInfo.apkDigest)
+                        + bytesSize(signingInfo.certificate)
+                        + bytesSize(signingInfo.additionalData);
         ByteBuffer buffer = ByteBuffer.allocate(size).order(ByteOrder.LITTLE_ENDIAN);
         buffer.putInt(size);
         buffer.putLong(fileSize);
@@ -233,7 +257,8 @@ public class V4Signature {
     }
 
     private static void writeIntLE(OutputStream stream, int v) throws IOException {
-        byte[] buffer = ByteBuffer.wrap(new byte[4]).order(ByteOrder.LITTLE_ENDIAN).putInt(v).array();
+        byte[] buffer =
+                ByteBuffer.wrap(new byte[4]).order(ByteOrder.LITTLE_ENDIAN).putInt(v).array();
         stream.write(buffer);
     }
 

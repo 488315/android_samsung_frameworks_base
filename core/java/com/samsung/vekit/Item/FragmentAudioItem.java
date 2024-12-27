@@ -1,12 +1,14 @@
 package com.samsung.vekit.Item;
 
 import android.util.Log;
+
 import com.samsung.vekit.Common.Type.ContentType;
 import com.samsung.vekit.Common.Type.ItemType;
 import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Content.Content;
 import com.samsung.vekit.Content.FragmentAudio;
 import com.samsung.vekit.Layer.Layer;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -121,7 +123,14 @@ public class FragmentAudioItem extends Item {
             this.enableOutro = false;
             this.enableAnimation = true;
         }
-        Log.d(this.TAG, "updateOptions() => duration : " + this.duration + " enableOutro : " + this.enableOutro + " enableAnimation : " + this.enableAnimation);
+        Log.d(
+                this.TAG,
+                "updateOptions() => duration : "
+                        + this.duration
+                        + " enableOutro : "
+                        + this.enableOutro
+                        + " enableAnimation : "
+                        + this.enableAnimation);
     }
 
     private void appendBodyCount(long contentDuration) {
@@ -151,7 +160,10 @@ public class FragmentAudioItem extends Item {
         int bodyIndex = 0;
         long minimumGap = Math.abs(this.duration - contentDuration);
         this.bodyFragmentCount = 0;
-        while (Math.abs(this.duration - (bodyDurationList.get(bodyIndex).longValue() + contentDuration)) < minimumGap) {
+        while (Math.abs(
+                        this.duration
+                                - (bodyDurationList.get(bodyIndex).longValue() + contentDuration))
+                < minimumGap) {
             contentDuration += bodyDurationList.get(bodyIndex).longValue();
             minimumGap = Math.abs(this.duration - contentDuration);
             bodyIndex = (bodyIndex + 1) % size;

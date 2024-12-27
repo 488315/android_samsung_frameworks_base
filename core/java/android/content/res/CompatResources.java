@@ -1,8 +1,8 @@
 package android.content.res;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes.dex */

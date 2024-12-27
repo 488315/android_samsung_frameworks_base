@@ -1,8 +1,8 @@
 package android.media.audiofx;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.media.audiofx.AudioEffect;
 import android.util.Log;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.StringTokenizer;
@@ -82,16 +82,28 @@ public final class DynamicsProcessing extends AudioEffect {
         this.mBaseParamListener = null;
         this.mParamListenerLock = new Object();
         if (audioSession == 0) {
-            Log.w(TAG, "WARNING: attaching a DynamicsProcessing to global output mix isdeprecated!");
+            Log.w(
+                    TAG,
+                    "WARNING: attaching a DynamicsProcessing to global output mix isdeprecated!");
         }
         this.mChannelCount = getChannelCount();
         if (cfg == null) {
-            Config.Builder builder = new Config.Builder(0, this.mChannelCount, true, 6, true, 6, true, 6, true);
+            Config.Builder builder =
+                    new Config.Builder(0, this.mChannelCount, true, 6, true, 6, true, 6, true);
             config = builder.build();
         } else {
             config = new Config(this.mChannelCount, cfg);
         }
-        setEngineArchitecture(config.getVariant(), config.getPreferredFrameDuration(), config.isPreEqInUse(), config.getPreEqBandCount(), config.isMbcInUse(), config.getMbcBandCount(), config.isPostEqInUse(), config.getPostEqBandCount(), config.isLimiterInUse());
+        setEngineArchitecture(
+                config.getVariant(),
+                config.getPreferredFrameDuration(),
+                config.isPreEqInUse(),
+                config.getPreEqBandCount(),
+                config.isMbcInUse(),
+                config.getMbcBandCount(),
+                config.isPostEqInUse(),
+                config.getPostEqBandCount(),
+                config.isLimiterInUse());
         for (int ch = 0; ch < this.mChannelCount; ch++) {
             updateEngineChannelByChannelIndex(ch, config.getChannelByChannelIndex(ch));
         }
@@ -104,7 +116,18 @@ public final class DynamicsProcessing extends AudioEffect {
         byte[] valueBytes = numberArrayToByteArray(values);
         getParameter(paramBytes, valueBytes);
         byteArrayToNumberArray(valueBytes, values);
-        Config.Builder builder = new Config.Builder(values[0].intValue(), this.mChannelCount, values[2].intValue() > 0, values[3].intValue(), values[4].intValue() > 0, values[5].intValue(), values[6].intValue() > 0, values[7].intValue(), values[8].intValue() > 0).setPreferredFrameDuration(values[1].floatValue());
+        Config.Builder builder =
+                new Config.Builder(
+                                values[0].intValue(),
+                                this.mChannelCount,
+                                values[2].intValue() > 0,
+                                values[3].intValue(),
+                                values[4].intValue() > 0,
+                                values[5].intValue(),
+                                values[6].intValue() > 0,
+                                values[7].intValue(),
+                                values[8].intValue() > 0)
+                        .setPreferredFrameDuration(values[1].floatValue());
         Config config = builder.build();
         for (int ch = 0; ch < this.mChannelCount; ch++) {
             Channel channel = queryEngineByChannelIndex(ch);
@@ -177,7 +200,8 @@ public final class DynamicsProcessing extends AudioEffect {
         }
 
         public String toString() {
-            return String.format(" Enabled: %b\n", Boolean.valueOf(this.mEnabled)) + String.format(" CutoffFrequency: %f\n", Float.valueOf(this.mCutoffFrequency));
+            return String.format(" Enabled: %b\n", Boolean.valueOf(this.mEnabled))
+                    + String.format(" CutoffFrequency: %f\n", Float.valueOf(this.mCutoffFrequency));
         }
 
         public boolean isEnabled() {
@@ -235,7 +259,18 @@ public final class DynamicsProcessing extends AudioEffect {
         private float mReleaseTime;
         private float mThreshold;
 
-        public MbcBand(boolean enabled, float cutoffFrequency, float attackTime, float releaseTime, float ratio, float threshold, float kneeWidth, float noiseGateThreshold, float expanderRatio, float preGain, float postGain) {
+        public MbcBand(
+                boolean enabled,
+                float cutoffFrequency,
+                float attackTime,
+                float releaseTime,
+                float ratio,
+                float threshold,
+                float kneeWidth,
+                float noiseGateThreshold,
+                float expanderRatio,
+                float preGain,
+                float postGain) {
             super(enabled, cutoffFrequency);
             this.mAttackTime = attackTime;
             this.mReleaseTime = releaseTime;
@@ -263,7 +298,17 @@ public final class DynamicsProcessing extends AudioEffect {
 
         @Override // android.media.audiofx.DynamicsProcessing.BandBase
         public String toString() {
-            return super.toString() + String.format(" AttackTime: %f (ms)\n", Float.valueOf(this.mAttackTime)) + String.format(" ReleaseTime: %f (ms)\n", Float.valueOf(this.mReleaseTime)) + String.format(" Ratio: 1:%f\n", Float.valueOf(this.mRatio)) + String.format(" Threshold: %f (dB)\n", Float.valueOf(this.mThreshold)) + String.format(" NoiseGateThreshold: %f(dB)\n", Float.valueOf(this.mNoiseGateThreshold)) + String.format(" ExpanderRatio: %f:1\n", Float.valueOf(this.mExpanderRatio)) + String.format(" PreGain: %f (dB)\n", Float.valueOf(this.mPreGain)) + String.format(" PostGain: %f (dB)\n", Float.valueOf(this.mPostGain));
+            return super.toString()
+                    + String.format(" AttackTime: %f (ms)\n", Float.valueOf(this.mAttackTime))
+                    + String.format(" ReleaseTime: %f (ms)\n", Float.valueOf(this.mReleaseTime))
+                    + String.format(" Ratio: 1:%f\n", Float.valueOf(this.mRatio))
+                    + String.format(" Threshold: %f (dB)\n", Float.valueOf(this.mThreshold))
+                    + String.format(
+                            " NoiseGateThreshold: %f(dB)\n",
+                            Float.valueOf(this.mNoiseGateThreshold))
+                    + String.format(" ExpanderRatio: %f:1\n", Float.valueOf(this.mExpanderRatio))
+                    + String.format(" PreGain: %f (dB)\n", Float.valueOf(this.mPreGain))
+                    + String.format(" PostGain: %f (dB)\n", Float.valueOf(this.mPostGain));
         }
 
         public float getAttackTime() {
@@ -349,7 +394,17 @@ public final class DynamicsProcessing extends AudioEffect {
                 for (int b = 0; b < bandCount; b++) {
                     float freq = 20000.0f;
                     if (bandCount > 1) {
-                        freq = (float) Math.pow(10.0d, DynamicsProcessing.mMinFreqLog + ((b * (DynamicsProcessing.mMaxFreqLog - DynamicsProcessing.mMinFreqLog)) / (bandCount - 1)));
+                        freq =
+                                (float)
+                                        Math.pow(
+                                                10.0d,
+                                                DynamicsProcessing.mMinFreqLog
+                                                        + ((b
+                                                                        * (DynamicsProcessing
+                                                                                        .mMaxFreqLog
+                                                                                - DynamicsProcessing
+                                                                                        .mMinFreqLog))
+                                                                / (bandCount - 1)));
                     }
                     this.mBands[b] = new EqBand(true, freq, 0.0f);
                 }
@@ -370,7 +425,8 @@ public final class DynamicsProcessing extends AudioEffect {
             this.mBands = null;
         }
 
-        @Override // android.media.audiofx.DynamicsProcessing.BandStage, android.media.audiofx.DynamicsProcessing.Stage
+        @Override // android.media.audiofx.DynamicsProcessing.BandStage,
+        // android.media.audiofx.DynamicsProcessing.Stage
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append(super.toString());
@@ -411,9 +467,31 @@ public final class DynamicsProcessing extends AudioEffect {
                 for (int b = 0; b < bandCount; b++) {
                     float freq = 20000.0f;
                     if (bandCount > 1) {
-                        freq = (float) Math.pow(10.0d, DynamicsProcessing.mMinFreqLog + ((b * (DynamicsProcessing.mMaxFreqLog - DynamicsProcessing.mMinFreqLog)) / (bandCount - 1)));
+                        freq =
+                                (float)
+                                        Math.pow(
+                                                10.0d,
+                                                DynamicsProcessing.mMinFreqLog
+                                                        + ((b
+                                                                        * (DynamicsProcessing
+                                                                                        .mMaxFreqLog
+                                                                                - DynamicsProcessing
+                                                                                        .mMinFreqLog))
+                                                                / (bandCount - 1)));
                     }
-                    this.mBands[b] = new MbcBand(true, freq, 3.0f, DynamicsProcessing.MBC_DEFAULT_RELEASE_TIME, 1.0f, DynamicsProcessing.MBC_DEFAULT_THRESHOLD, 0.0f, DynamicsProcessing.MBC_DEFAULT_NOISE_GATE_THRESHOLD, 1.0f, 0.0f, 0.0f);
+                    this.mBands[b] =
+                            new MbcBand(
+                                    true,
+                                    freq,
+                                    3.0f,
+                                    DynamicsProcessing.MBC_DEFAULT_RELEASE_TIME,
+                                    1.0f,
+                                    DynamicsProcessing.MBC_DEFAULT_THRESHOLD,
+                                    0.0f,
+                                    DynamicsProcessing.MBC_DEFAULT_NOISE_GATE_THRESHOLD,
+                                    1.0f,
+                                    0.0f,
+                                    0.0f);
                 }
                 return;
             }
@@ -432,7 +510,8 @@ public final class DynamicsProcessing extends AudioEffect {
             this.mBands = null;
         }
 
-        @Override // android.media.audiofx.DynamicsProcessing.BandStage, android.media.audiofx.DynamicsProcessing.Stage
+        @Override // android.media.audiofx.DynamicsProcessing.BandStage,
+        // android.media.audiofx.DynamicsProcessing.Stage
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append(super.toString());
@@ -471,7 +550,15 @@ public final class DynamicsProcessing extends AudioEffect {
         private float mReleaseTime;
         private float mThreshold;
 
-        public Limiter(boolean inUse, boolean enabled, int linkGroup, float attackTime, float releaseTime, float ratio, float threshold, float postGain) {
+        public Limiter(
+                boolean inUse,
+                boolean enabled,
+                int linkGroup,
+                float attackTime,
+                float releaseTime,
+                float ratio,
+                float threshold,
+                float postGain) {
             super(inUse, enabled);
             this.mLinkGroup = linkGroup;
             this.mAttackTime = attackTime;
@@ -496,9 +583,12 @@ public final class DynamicsProcessing extends AudioEffect {
             StringBuilder sb = new StringBuilder();
             sb.append(super.toString());
             if (isInUse()) {
-                sb.append(String.format(" LinkGroup: %d (group)\n", Integer.valueOf(this.mLinkGroup)));
+                sb.append(
+                        String.format(
+                                " LinkGroup: %d (group)\n", Integer.valueOf(this.mLinkGroup)));
                 sb.append(String.format(" AttackTime: %f (ms)\n", Float.valueOf(this.mAttackTime)));
-                sb.append(String.format(" ReleaseTime: %f (ms)\n", Float.valueOf(this.mReleaseTime)));
+                sb.append(
+                        String.format(" ReleaseTime: %f (ms)\n", Float.valueOf(this.mReleaseTime)));
                 sb.append(String.format(" Ratio: 1:%f\n", Float.valueOf(this.mRatio)));
                 sb.append(String.format(" Threshold: %f (dB)\n", Float.valueOf(this.mThreshold)));
                 sb.append(String.format(" PostGain: %f (dB)\n", Float.valueOf(this.mPostGain)));
@@ -562,7 +652,15 @@ public final class DynamicsProcessing extends AudioEffect {
         private Eq mPostEq;
         private Eq mPreEq;
 
-        public Channel(float inputGain, boolean preEqInUse, int preEqBandCount, boolean mbcInUse, int mbcBandCount, boolean postEqInUse, int postEqBandCount, boolean limiterInUse) {
+        public Channel(
+                float inputGain,
+                boolean preEqInUse,
+                int preEqBandCount,
+                boolean mbcInUse,
+                int mbcBandCount,
+                boolean postEqInUse,
+                int postEqBandCount,
+                boolean limiterInUse) {
             this.mInputGain = inputGain;
             this.mPreEq = new Eq(preEqInUse, true, preEqBandCount);
             this.mMbc = new Mbc(mbcInUse, true, mbcBandCount);
@@ -579,7 +677,15 @@ public final class DynamicsProcessing extends AudioEffect {
         }
 
         public String toString() {
-            return String.format(" InputGain: %f\n", Float.valueOf(this.mInputGain)) + "-->PreEq\n" + this.mPreEq.toString() + "-->MBC\n" + this.mMbc.toString() + "-->PostEq\n" + this.mPostEq.toString() + "-->Limiter\n" + this.mLimiter.toString();
+            return String.format(" InputGain: %f\n", Float.valueOf(this.mInputGain))
+                    + "-->PreEq\n"
+                    + this.mPreEq.toString()
+                    + "-->MBC\n"
+                    + this.mMbc.toString()
+                    + "-->PostEq\n"
+                    + this.mPostEq.toString()
+                    + "-->Limiter\n"
+                    + this.mLimiter.toString();
         }
 
         public float getInputGain() {
@@ -596,7 +702,11 @@ public final class DynamicsProcessing extends AudioEffect {
 
         public void setPreEq(Eq preEq) {
             if (preEq.getBandCount() != this.mPreEq.getBandCount()) {
-                throw new IllegalArgumentException("PreEqBandCount changed from " + this.mPreEq.getBandCount() + " to " + preEq.getBandCount());
+                throw new IllegalArgumentException(
+                        "PreEqBandCount changed from "
+                                + this.mPreEq.getBandCount()
+                                + " to "
+                                + preEq.getBandCount());
             }
             this.mPreEq = new Eq(preEq);
         }
@@ -615,7 +725,11 @@ public final class DynamicsProcessing extends AudioEffect {
 
         public void setMbc(Mbc mbc) {
             if (mbc.getBandCount() != this.mMbc.getBandCount()) {
-                throw new IllegalArgumentException("MbcBandCount changed from " + this.mMbc.getBandCount() + " to " + mbc.getBandCount());
+                throw new IllegalArgumentException(
+                        "MbcBandCount changed from "
+                                + this.mMbc.getBandCount()
+                                + " to "
+                                + mbc.getBandCount());
             }
             this.mMbc = new Mbc(mbc);
         }
@@ -634,7 +748,11 @@ public final class DynamicsProcessing extends AudioEffect {
 
         public void setPostEq(Eq postEq) {
             if (postEq.getBandCount() != this.mPostEq.getBandCount()) {
-                throw new IllegalArgumentException("PostEqBandCount changed from " + this.mPostEq.getBandCount() + " to " + postEq.getBandCount());
+                throw new IllegalArgumentException(
+                        "PostEqBandCount changed from "
+                                + this.mPostEq.getBandCount()
+                                + " to "
+                                + postEq.getBandCount());
             }
             this.mPostEq = new Eq(postEq);
         }
@@ -669,7 +787,18 @@ public final class DynamicsProcessing extends AudioEffect {
         private final float mPreferredFrameDuration;
         private final int mVariant;
 
-        public Config(int variant, float frameDurationMs, int channelCount, boolean preEqInUse, int preEqBandCount, boolean mbcInUse, int mbcBandCount, boolean postEqInUse, int postEqBandCount, boolean limiterInUse, Channel[] channel) {
+        public Config(
+                int variant,
+                float frameDurationMs,
+                int channelCount,
+                boolean preEqInUse,
+                int preEqBandCount,
+                boolean mbcInUse,
+                int mbcBandCount,
+                boolean postEqInUse,
+                int postEqBandCount,
+                boolean limiterInUse,
+                Channel[] channel) {
             this.mVariant = variant;
             this.mPreferredFrameDuration = frameDurationMs;
             this.mChannelCount = channelCount;
@@ -700,7 +829,11 @@ public final class DynamicsProcessing extends AudioEffect {
             this.mPostEqBandCount = cfg.mPostEqBandCount;
             this.mLimiterInUse = cfg.mLimiterInUse;
             if (this.mChannelCount != cfg.mChannel.length) {
-                throw new IllegalArgumentException("configuration channel counts differ " + this.mChannelCount + " !=" + cfg.mChannel.length);
+                throw new IllegalArgumentException(
+                        "configuration channel counts differ "
+                                + this.mChannelCount
+                                + " !="
+                                + cfg.mChannel.length);
             }
             if (channelCount < 1) {
                 throw new IllegalArgumentException("channel resizing less than 1 not allowed");
@@ -722,11 +855,25 @@ public final class DynamicsProcessing extends AudioEffect {
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append(String.format("Variant: %d\n", Integer.valueOf(this.mVariant)));
-            sb.append(String.format("PreferredFrameDuration: %f\n", Float.valueOf(this.mPreferredFrameDuration)));
+            sb.append(
+                    String.format(
+                            "PreferredFrameDuration: %f\n",
+                            Float.valueOf(this.mPreferredFrameDuration)));
             sb.append(String.format("ChannelCount: %d\n", Integer.valueOf(this.mChannelCount)));
-            sb.append(String.format("PreEq inUse: %b, bandCount:%d\n", Boolean.valueOf(this.mPreEqInUse), Integer.valueOf(this.mPreEqBandCount)));
-            sb.append(String.format("Mbc inUse: %b, bandCount: %d\n", Boolean.valueOf(this.mMbcInUse), Integer.valueOf(this.mMbcBandCount)));
-            sb.append(String.format("PostEq inUse: %b, bandCount: %d\n", Boolean.valueOf(this.mPostEqInUse), Integer.valueOf(this.mPostEqBandCount)));
+            sb.append(
+                    String.format(
+                            "PreEq inUse: %b, bandCount:%d\n",
+                            Boolean.valueOf(this.mPreEqInUse),
+                            Integer.valueOf(this.mPreEqBandCount)));
+            sb.append(
+                    String.format(
+                            "Mbc inUse: %b, bandCount: %d\n",
+                            Boolean.valueOf(this.mMbcInUse), Integer.valueOf(this.mMbcBandCount)));
+            sb.append(
+                    String.format(
+                            "PostEq inUse: %b, bandCount: %d\n",
+                            Boolean.valueOf(this.mPostEqInUse),
+                            Integer.valueOf(this.mPostEqBandCount)));
             sb.append(String.format("Limiter inUse: %b\n", Boolean.valueOf(this.mLimiterInUse)));
             for (int ch = 0; ch < this.mChannel.length; ch++) {
                 sb.append(String.format("==Channel %d\n", Integer.valueOf(ch)));
@@ -785,13 +932,25 @@ public final class DynamicsProcessing extends AudioEffect {
         public void setChannelTo(int channelIndex, Channel channel) {
             checkChannel(channelIndex);
             if (this.mMbcBandCount != channel.getMbc().getBandCount()) {
-                throw new IllegalArgumentException("MbcBandCount changed from " + this.mMbcBandCount + " to " + channel.getPreEq().getBandCount());
+                throw new IllegalArgumentException(
+                        "MbcBandCount changed from "
+                                + this.mMbcBandCount
+                                + " to "
+                                + channel.getPreEq().getBandCount());
             }
             if (this.mPreEqBandCount != channel.getPreEq().getBandCount()) {
-                throw new IllegalArgumentException("PreEqBandCount changed from " + this.mPreEqBandCount + " to " + channel.getPreEq().getBandCount());
+                throw new IllegalArgumentException(
+                        "PreEqBandCount changed from "
+                                + this.mPreEqBandCount
+                                + " to "
+                                + channel.getPreEq().getBandCount());
             }
             if (this.mPostEqBandCount != channel.getPostEq().getBandCount()) {
-                throw new IllegalArgumentException("PostEqBandCount changed from " + this.mPostEqBandCount + " to " + channel.getPostEq().getBandCount());
+                throw new IllegalArgumentException(
+                        "PostEqBandCount changed from "
+                                + this.mPostEqBandCount
+                                + " to "
+                                + channel.getPostEq().getBandCount());
             }
             this.mChannel[channelIndex] = new Channel(channel);
         }
@@ -943,7 +1102,16 @@ public final class DynamicsProcessing extends AudioEffect {
             private float mPreferredFrameDuration = 10.0f;
             private int mVariant;
 
-            public Builder(int variant, int channelCount, boolean preEqInUse, int preEqBandCount, boolean mbcInUse, int mbcBandCount, boolean postEqInUse, int postEqBandCount, boolean limiterInUse) {
+            public Builder(
+                    int variant,
+                    int channelCount,
+                    boolean preEqInUse,
+                    int preEqBandCount,
+                    boolean mbcInUse,
+                    int mbcBandCount,
+                    boolean postEqInUse,
+                    int postEqBandCount,
+                    boolean limiterInUse) {
                 this.mVariant = variant;
                 this.mChannelCount = channelCount;
                 this.mPreEqInUse = preEqInUse;
@@ -955,7 +1123,16 @@ public final class DynamicsProcessing extends AudioEffect {
                 this.mLimiterInUse = limiterInUse;
                 this.mChannel = new Channel[this.mChannelCount];
                 for (int ch = 0; ch < this.mChannelCount; ch++) {
-                    this.mChannel[ch] = new Channel(0.0f, this.mPreEqInUse, this.mPreEqBandCount, this.mMbcInUse, this.mMbcBandCount, this.mPostEqInUse, this.mPostEqBandCount, this.mLimiterInUse);
+                    this.mChannel[ch] =
+                            new Channel(
+                                    0.0f,
+                                    this.mPreEqInUse,
+                                    this.mPreEqBandCount,
+                                    this.mMbcInUse,
+                                    this.mMbcBandCount,
+                                    this.mPostEqInUse,
+                                    this.mPostEqBandCount,
+                                    this.mLimiterInUse);
                 }
             }
 
@@ -989,13 +1166,25 @@ public final class DynamicsProcessing extends AudioEffect {
             public Builder setChannelTo(int channelIndex, Channel channel) {
                 checkChannel(channelIndex);
                 if (this.mMbcBandCount != channel.getMbc().getBandCount()) {
-                    throw new IllegalArgumentException("MbcBandCount changed from " + this.mMbcBandCount + " to " + channel.getPreEq().getBandCount());
+                    throw new IllegalArgumentException(
+                            "MbcBandCount changed from "
+                                    + this.mMbcBandCount
+                                    + " to "
+                                    + channel.getPreEq().getBandCount());
                 }
                 if (this.mPreEqBandCount != channel.getPreEq().getBandCount()) {
-                    throw new IllegalArgumentException("PreEqBandCount changed from " + this.mPreEqBandCount + " to " + channel.getPreEq().getBandCount());
+                    throw new IllegalArgumentException(
+                            "PreEqBandCount changed from "
+                                    + this.mPreEqBandCount
+                                    + " to "
+                                    + channel.getPreEq().getBandCount());
                 }
                 if (this.mPostEqBandCount != channel.getPostEq().getBandCount()) {
-                    throw new IllegalArgumentException("PostEqBandCount changed from " + this.mPostEqBandCount + " to " + channel.getPostEq().getBandCount());
+                    throw new IllegalArgumentException(
+                            "PostEqBandCount changed from "
+                                    + this.mPostEqBandCount
+                                    + " to "
+                                    + channel.getPostEq().getBandCount());
                 }
                 this.mChannel[channelIndex] = new Channel(channel);
                 return this;
@@ -1061,7 +1250,18 @@ public final class DynamicsProcessing extends AudioEffect {
             }
 
             public Config build() {
-                return new Config(this.mVariant, this.mPreferredFrameDuration, this.mChannelCount, this.mPreEqInUse, this.mPreEqBandCount, this.mMbcInUse, this.mMbcBandCount, this.mPostEqInUse, this.mPostEqBandCount, this.mLimiterInUse, this.mChannel);
+                return new Config(
+                        this.mVariant,
+                        this.mPreferredFrameDuration,
+                        this.mChannelCount,
+                        this.mPreEqInUse,
+                        this.mPreEqBandCount,
+                        this.mMbcInUse,
+                        this.mMbcBandCount,
+                        this.mPostEqInUse,
+                        this.mPostEqBandCount,
+                        this.mLimiterInUse,
+                        this.mChannel);
             }
         }
     }
@@ -1196,12 +1396,31 @@ public final class DynamicsProcessing extends AudioEffect {
         return getOneInt(16);
     }
 
-    private void setEngineArchitecture(int i, float f, boolean z, int i2, boolean z2, int i3, boolean z3, int i4, boolean z4) {
-        setNumberArray(new Number[]{48}, new Number[]{Integer.valueOf(i), Float.valueOf(f), Integer.valueOf(z ? 1 : 0), Integer.valueOf(i2), Integer.valueOf(z2 ? 1 : 0), Integer.valueOf(i3), Integer.valueOf(z3 ? 1 : 0), Integer.valueOf(i4), Integer.valueOf(z4 ? 1 : 0)});
+    private void setEngineArchitecture(
+            int i, float f, boolean z, int i2, boolean z2, int i3, boolean z3, int i4, boolean z4) {
+        setNumberArray(
+                new Number[] {48},
+                new Number[] {
+                    Integer.valueOf(i),
+                    Float.valueOf(f),
+                    Integer.valueOf(z ? 1 : 0),
+                    Integer.valueOf(i2),
+                    Integer.valueOf(z2 ? 1 : 0),
+                    Integer.valueOf(i3),
+                    Integer.valueOf(z3 ? 1 : 0),
+                    Integer.valueOf(i4),
+                    Integer.valueOf(z4 ? 1 : 0)
+                });
     }
 
     private void updateEngineEqBandByChannelIndex(int i, int i2, int i3, EqBand eqBand) {
-        setNumberArray(new Number[]{Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3)}, new Number[]{Integer.valueOf(eqBand.isEnabled() ? 1 : 0), Float.valueOf(eqBand.getCutoffFrequency()), Float.valueOf(eqBand.getGain())});
+        setNumberArray(
+                new Number[] {Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3)},
+                new Number[] {
+                    Integer.valueOf(eqBand.isEnabled() ? 1 : 0),
+                    Float.valueOf(eqBand.getCutoffFrequency()),
+                    Float.valueOf(eqBand.getGain())
+                });
     }
 
     private Eq queryEngineEqByChannelIndex(int param, int channelIndex) {
@@ -1216,14 +1435,17 @@ public final class DynamicsProcessing extends AudioEffect {
         int bandCount = values[2].intValue();
         Eq eq = new Eq(values[0].intValue() > 0, values[1].intValue() > 0, bandCount);
         for (int b = 0; b < bandCount; b++) {
-            EqBand eqBand = queryEngineEqBandByChannelIndex(param == 64 ? 69 : 101, channelIndex, b);
+            EqBand eqBand =
+                    queryEngineEqBandByChannelIndex(param == 64 ? 69 : 101, channelIndex, b);
             eq.setBand(b, eqBand);
         }
         return eq;
     }
 
     private EqBand queryEngineEqBandByChannelIndex(int param, int channelIndex, int bandIndex) {
-        Number[] params = {Integer.valueOf(param), Integer.valueOf(channelIndex), Integer.valueOf(bandIndex)};
+        Number[] params = {
+            Integer.valueOf(param), Integer.valueOf(channelIndex), Integer.valueOf(bandIndex)
+        };
         Float valueOf = Float.valueOf(0.0f);
         Number[] values = {0, valueOf, valueOf};
         byte[] paramBytes = numberArrayToByteArray(params);
@@ -1235,7 +1457,13 @@ public final class DynamicsProcessing extends AudioEffect {
 
     private void updateEngineEqByChannelIndex(int i, int i2, Eq eq) {
         int bandCount = eq.getBandCount();
-        setNumberArray(new Number[]{Integer.valueOf(i), Integer.valueOf(i2)}, new Number[]{Integer.valueOf(eq.isInUse() ? 1 : 0), Integer.valueOf(eq.isEnabled() ? 1 : 0), Integer.valueOf(bandCount)});
+        setNumberArray(
+                new Number[] {Integer.valueOf(i), Integer.valueOf(i2)},
+                new Number[] {
+                    Integer.valueOf(eq.isInUse() ? 1 : 0),
+                    Integer.valueOf(eq.isEnabled() ? 1 : 0),
+                    Integer.valueOf(bandCount)
+                });
         for (int i3 = 0; i3 < bandCount; i3++) {
             updateEngineEqBandByChannelIndex(i == 64 ? 69 : 101, i2, i3, eq.getBand(i3));
         }
@@ -1260,28 +1488,73 @@ public final class DynamicsProcessing extends AudioEffect {
     private MbcBand queryEngineMbcBandByChannelIndex(int channelIndex, int bandIndex) {
         Number[] params = {85, Integer.valueOf(channelIndex), Integer.valueOf(bandIndex)};
         Float valueOf = Float.valueOf(0.0f);
-        Number[] values = {0, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf};
+        Number[] values = {
+            0, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf,
+            valueOf
+        };
         byte[] paramBytes = numberArrayToByteArray(params);
         byte[] valueBytes = numberArrayToByteArray(values);
         getParameter(paramBytes, valueBytes);
         byteArrayToNumberArray(valueBytes, values);
-        return new MbcBand(values[0].intValue() > 0, values[1].floatValue(), values[2].floatValue(), values[3].floatValue(), values[4].floatValue(), values[5].floatValue(), values[6].floatValue(), values[7].floatValue(), values[8].floatValue(), values[9].floatValue(), values[10].floatValue());
+        return new MbcBand(
+                values[0].intValue() > 0,
+                values[1].floatValue(),
+                values[2].floatValue(),
+                values[3].floatValue(),
+                values[4].floatValue(),
+                values[5].floatValue(),
+                values[6].floatValue(),
+                values[7].floatValue(),
+                values[8].floatValue(),
+                values[9].floatValue(),
+                values[10].floatValue());
     }
 
     private void updateEngineMbcBandByChannelIndex(int i, int i2, MbcBand mbcBand) {
-        setNumberArray(new Number[]{85, Integer.valueOf(i), Integer.valueOf(i2)}, new Number[]{Integer.valueOf(mbcBand.isEnabled() ? 1 : 0), Float.valueOf(mbcBand.getCutoffFrequency()), Float.valueOf(mbcBand.getAttackTime()), Float.valueOf(mbcBand.getReleaseTime()), Float.valueOf(mbcBand.getRatio()), Float.valueOf(mbcBand.getThreshold()), Float.valueOf(mbcBand.getKneeWidth()), Float.valueOf(mbcBand.getNoiseGateThreshold()), Float.valueOf(mbcBand.getExpanderRatio()), Float.valueOf(mbcBand.getPreGain()), Float.valueOf(mbcBand.getPostGain())});
+        setNumberArray(
+                new Number[] {85, Integer.valueOf(i), Integer.valueOf(i2)},
+                new Number[] {
+                    Integer.valueOf(mbcBand.isEnabled() ? 1 : 0),
+                    Float.valueOf(mbcBand.getCutoffFrequency()),
+                    Float.valueOf(mbcBand.getAttackTime()),
+                    Float.valueOf(mbcBand.getReleaseTime()),
+                    Float.valueOf(mbcBand.getRatio()),
+                    Float.valueOf(mbcBand.getThreshold()),
+                    Float.valueOf(mbcBand.getKneeWidth()),
+                    Float.valueOf(mbcBand.getNoiseGateThreshold()),
+                    Float.valueOf(mbcBand.getExpanderRatio()),
+                    Float.valueOf(mbcBand.getPreGain()),
+                    Float.valueOf(mbcBand.getPostGain())
+                });
     }
 
     private void updateEngineMbcByChannelIndex(int i, Mbc mbc) {
         int bandCount = mbc.getBandCount();
-        setNumberArray(new Number[]{80, Integer.valueOf(i)}, new Number[]{Integer.valueOf(mbc.isInUse() ? 1 : 0), Integer.valueOf(mbc.isEnabled() ? 1 : 0), Integer.valueOf(bandCount)});
+        setNumberArray(
+                new Number[] {80, Integer.valueOf(i)},
+                new Number[] {
+                    Integer.valueOf(mbc.isInUse() ? 1 : 0),
+                    Integer.valueOf(mbc.isEnabled() ? 1 : 0),
+                    Integer.valueOf(bandCount)
+                });
         for (int i2 = 0; i2 < bandCount; i2++) {
             updateEngineMbcBandByChannelIndex(i, i2, mbc.getBand(i2));
         }
     }
 
     private void updateEngineLimiterByChannelIndex(int i, Limiter limiter) {
-        setNumberArray(new Number[]{112, Integer.valueOf(i)}, new Number[]{Integer.valueOf(limiter.isInUse() ? 1 : 0), Integer.valueOf(limiter.isEnabled() ? 1 : 0), Integer.valueOf(limiter.getLinkGroup()), Float.valueOf(limiter.getAttackTime()), Float.valueOf(limiter.getReleaseTime()), Float.valueOf(limiter.getRatio()), Float.valueOf(limiter.getThreshold()), Float.valueOf(limiter.getPostGain())});
+        setNumberArray(
+                new Number[] {112, Integer.valueOf(i)},
+                new Number[] {
+                    Integer.valueOf(limiter.isInUse() ? 1 : 0),
+                    Integer.valueOf(limiter.isEnabled() ? 1 : 0),
+                    Integer.valueOf(limiter.getLinkGroup()),
+                    Float.valueOf(limiter.getAttackTime()),
+                    Float.valueOf(limiter.getReleaseTime()),
+                    Float.valueOf(limiter.getRatio()),
+                    Float.valueOf(limiter.getThreshold()),
+                    Float.valueOf(limiter.getPostGain())
+                });
     }
 
     private Limiter queryEngineLimiterByChannelIndex(int channelIndex) {
@@ -1292,7 +1565,15 @@ public final class DynamicsProcessing extends AudioEffect {
         byte[] valueBytes = numberArrayToByteArray(values);
         getParameter(paramBytes, valueBytes);
         byteArrayToNumberArray(valueBytes, values);
-        return new Limiter(values[0].intValue() > 0, values[1].intValue() > 0, values[2].intValue(), values[3].floatValue(), values[4].floatValue(), values[5].floatValue(), values[6].floatValue(), values[7].floatValue());
+        return new Limiter(
+                values[0].intValue() > 0,
+                values[1].intValue() > 0,
+                values[2].intValue(),
+                values[3].floatValue(),
+                values[4].floatValue(),
+                values[5].floatValue(),
+                values[6].floatValue(),
+                values[7].floatValue());
     }
 
     private Channel queryEngineByChannelIndex(int channelIndex) {
@@ -1301,7 +1582,16 @@ public final class DynamicsProcessing extends AudioEffect {
         Mbc mbc = queryEngineMbcByChannelIndex(channelIndex);
         Eq postEq = queryEngineEqByChannelIndex(96, channelIndex);
         Limiter limiter = queryEngineLimiterByChannelIndex(channelIndex);
-        Channel channel = new Channel(inputGain, preEq.isInUse(), preEq.getBandCount(), mbc.isInUse(), mbc.getBandCount(), postEq.isInUse(), postEq.getBandCount(), limiter.isInUse());
+        Channel channel =
+                new Channel(
+                        inputGain,
+                        preEq.isInUse(),
+                        preEq.getBandCount(),
+                        mbc.isInUse(),
+                        mbc.getBandCount(),
+                        postEq.isInUse(),
+                        postEq.getBandCount(),
+                        limiter.isInUse());
         channel.setInputGain(inputGain);
         channel.setPreEq(preEq);
         channel.setMbc(mbc);
@@ -1369,11 +1659,17 @@ public final class DynamicsProcessing extends AudioEffect {
                 inIndex += 4;
                 outIndex++;
             } else {
-                throw new IllegalArgumentException("can't convert " + valuesOut[outIndex].getClass());
+                throw new IllegalArgumentException(
+                        "can't convert " + valuesOut[outIndex].getClass());
             }
         }
         if (outIndex != valuesOut.length) {
-            throw new IllegalArgumentException("only converted " + outIndex + " values out of " + valuesOut.length + " expected");
+            throw new IllegalArgumentException(
+                    "only converted "
+                            + outIndex
+                            + " values out of "
+                            + valuesOut.length
+                            + " expected");
         }
     }
 
@@ -1395,8 +1691,7 @@ public final class DynamicsProcessing extends AudioEffect {
     }
 
     private class BaseParameterListener implements AudioEffect.OnParameterChangeListener {
-        private BaseParameterListener() {
-        }
+        private BaseParameterListener() {}
 
         @Override // android.media.audiofx.AudioEffect.OnParameterChangeListener
         public void onParameterChange(AudioEffect effect, int status, byte[] param, byte[] value) {
@@ -1439,8 +1734,7 @@ public final class DynamicsProcessing extends AudioEffect {
         public int channelCount;
         public float[] inputGain;
 
-        public Settings() {
-        }
+        public Settings() {}
 
         public Settings(String settings) {
             StringTokenizer st = new StringTokenizer(settings, "=;");
@@ -1449,7 +1743,8 @@ public final class DynamicsProcessing extends AudioEffect {
             }
             String key = st.nextToken();
             if (!key.equals(DynamicsProcessing.TAG)) {
-                throw new IllegalArgumentException("invalid settings for DynamicsProcessing: " + key);
+                throw new IllegalArgumentException(
+                        "invalid settings for DynamicsProcessing: " + key);
             }
             try {
                 String key2 = st.nextToken();
@@ -1477,9 +1772,17 @@ public final class DynamicsProcessing extends AudioEffect {
         }
 
         public String toString() {
-            String str = new String("DynamicsProcessing;channelCount=" + Integer.toString(this.channelCount));
+            String str =
+                    new String(
+                            "DynamicsProcessing;channelCount="
+                                    + Integer.toString(this.channelCount));
             for (int ch = 0; ch < this.channelCount; ch++) {
-                str = str.concat(NavigationBarInflaterView.GRAVITY_SEPARATOR + ch + "_inputGain=" + Float.toString(this.inputGain[ch]));
+                str =
+                        str.concat(
+                                NavigationBarInflaterView.GRAVITY_SEPARATOR
+                                        + ch
+                                        + "_inputGain="
+                                        + Float.toString(this.inputGain[ch]));
             }
             return str;
         }
@@ -1492,16 +1795,16 @@ public final class DynamicsProcessing extends AudioEffect {
             throw new IllegalArgumentException("too many channels Settings:" + settings);
         }
         settings.inputGain = new float[settings.channelCount];
-        for (int ch = 0; ch < settings.channelCount; ch++) {
-        }
+        for (int ch = 0; ch < settings.channelCount; ch++) {}
         return settings;
     }
 
     public void setProperties(Settings settings) {
-        if (settings.channelCount != settings.inputGain.length || settings.channelCount != this.mChannelCount) {
-            throw new IllegalArgumentException("settings invalid channel count: " + settings.channelCount);
+        if (settings.channelCount != settings.inputGain.length
+                || settings.channelCount != this.mChannelCount) {
+            throw new IllegalArgumentException(
+                    "settings invalid channel count: " + settings.channelCount);
         }
-        for (int ch = 0; ch < this.mChannelCount; ch++) {
-        }
+        for (int ch = 0; ch < this.mChannelCount; ch++) {}
     }
 }

@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IRemoteAppTransitionListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.multiwindow.IRemoteAppTransitionListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.multiwindow.IRemoteAppTransitionListener";
 
     void onFinishRecentsAnimation(boolean z) throws RemoteException;
 
@@ -20,20 +21,20 @@ public interface IRemoteAppTransitionListener extends IInterface {
 
     public static class Default implements IRemoteAppTransitionListener {
         @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
-        public void onStartRecentsAnimation(boolean isHomeOrRecentsVisible) throws RemoteException {
-        }
+        public void onStartRecentsAnimation(boolean isHomeOrRecentsVisible)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
-        public void onFinishRecentsAnimation(boolean isHomeOrRecentsVisible) throws RemoteException {
-        }
+        public void onFinishRecentsAnimation(boolean isHomeOrRecentsVisible)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
-        public void onStartHomeAnimation(boolean isHomeOrRecentsVisible) throws RemoteException {
-        }
+        public void onStartHomeAnimation(boolean isHomeOrRecentsVisible) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
-        public void onWallpaperVisibilityChanged(boolean wallpaerVisibility, boolean isHomeOrRecentsVisible) throws RemoteException {
-        }
+        public void onWallpaperVisibilityChanged(
+                boolean wallpaerVisibility, boolean isHomeOrRecentsVisible)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -41,7 +42,7 @@ public interface IRemoteAppTransitionListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteAppTransitionListener {
+    public abstract static class Stub extends Binder implements IRemoteAppTransitionListener {
         static final int TRANSACTION_onFinishRecentsAnimation = 2;
         static final int TRANSACTION_onStartHomeAnimation = 3;
         static final int TRANSACTION_onStartRecentsAnimation = 1;
@@ -88,7 +89,8 @@ public interface IRemoteAppTransitionListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteAppTransitionListener.DESCRIPTOR);
             }
@@ -140,7 +142,8 @@ public interface IRemoteAppTransitionListener extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
-            public void onStartRecentsAnimation(boolean isHomeOrRecentsVisible) throws RemoteException {
+            public void onStartRecentsAnimation(boolean isHomeOrRecentsVisible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);
@@ -152,7 +155,8 @@ public interface IRemoteAppTransitionListener extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
-            public void onFinishRecentsAnimation(boolean isHomeOrRecentsVisible) throws RemoteException {
+            public void onFinishRecentsAnimation(boolean isHomeOrRecentsVisible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);
@@ -164,7 +168,8 @@ public interface IRemoteAppTransitionListener extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
-            public void onStartHomeAnimation(boolean isHomeOrRecentsVisible) throws RemoteException {
+            public void onStartHomeAnimation(boolean isHomeOrRecentsVisible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);
@@ -176,7 +181,9 @@ public interface IRemoteAppTransitionListener extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IRemoteAppTransitionListener
-            public void onWallpaperVisibilityChanged(boolean wallpaerVisibility, boolean isHomeOrRecentsVisible) throws RemoteException {
+            public void onWallpaperVisibilityChanged(
+                    boolean wallpaerVisibility, boolean isHomeOrRecentsVisible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAppTransitionListener.DESCRIPTOR);

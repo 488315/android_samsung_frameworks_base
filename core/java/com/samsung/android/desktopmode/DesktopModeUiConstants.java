@@ -4,13 +4,20 @@ import android.app.admin.DevicePolicyResources;
 
 /* loaded from: classes6.dex */
 public class DesktopModeUiConstants {
-    public static final String ACTION_DESKTOP_MODE_UPDATE_REQUEST = "com.samsung.android.desktopmode.action.DESKTOP_MODE_UPDATE_REQUEST";
-    public static final String ACTION_DEX_RUNNING_NOTIFICATION_PRESSED = "com.samsung.android.desktopmode.action.DEX_RUNNING_NOTIFICATION_PRESSED";
-    public static final String ACTION_POGO_KEYBOARD_CHANGED = "com.samsung.android.input.POGO_KEYBOARD_CHANGED";
-    public static final String ACTION_SPEN_NOTIFICATION_CHANGE_MODE_PRESSED = "com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_CHANGE_MODE_PRESSED";
-    public static final String ACTION_SPEN_NOTIFICATION_PRESSED = "com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_PRESSED";
-    public static final String ACTION_TOUCHPAD_AVAILABLE_NOTIFICATION_PRESSED = "com.samsung.android.desktopmode.action.TOUCHPAD_AVAILABLE_NOTIFICATION_PRESSED";
-    public static final String ACTION_TOUCHPAD_NOTIFICATION_PRESSED = "com.samsung.android.desktopmode.action.TOUCHPAD_NOTIFICATION_PRESSED";
+    public static final String ACTION_DESKTOP_MODE_UPDATE_REQUEST =
+            "com.samsung.android.desktopmode.action.DESKTOP_MODE_UPDATE_REQUEST";
+    public static final String ACTION_DEX_RUNNING_NOTIFICATION_PRESSED =
+            "com.samsung.android.desktopmode.action.DEX_RUNNING_NOTIFICATION_PRESSED";
+    public static final String ACTION_POGO_KEYBOARD_CHANGED =
+            "com.samsung.android.input.POGO_KEYBOARD_CHANGED";
+    public static final String ACTION_SPEN_NOTIFICATION_CHANGE_MODE_PRESSED =
+            "com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_CHANGE_MODE_PRESSED";
+    public static final String ACTION_SPEN_NOTIFICATION_PRESSED =
+            "com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_PRESSED";
+    public static final String ACTION_TOUCHPAD_AVAILABLE_NOTIFICATION_PRESSED =
+            "com.samsung.android.desktopmode.action.TOUCHPAD_AVAILABLE_NOTIFICATION_PRESSED";
+    public static final String ACTION_TOUCHPAD_NOTIFICATION_PRESSED =
+            "com.samsung.android.desktopmode.action.TOUCHPAD_NOTIFICATION_PRESSED";
     private static final int ACTIVITY_END = 399;
     private static final int ACTIVITY_START = 300;
     public static final int ACTIVITY_TYPE_TOUCHPAD = 300;
@@ -32,7 +39,8 @@ public class DesktopModeUiConstants {
     public static final int DIALOG_TYPE_TOUCHPAD = 1;
     public static final int DIALOG_TYPE_WIRELESS_DEX_CONNECTION_FREQUENCY = 11;
     public static final int DIALOG_TYPE_WIRELESS_DEX_LOW_PERFORMANCE = 12;
-    public static final String EXTRA_DESKTOP_MODE_SOURCE = "com.samsung.android.desktopmode.extra.DESKTOP_MODE_SOURCE";
+    public static final String EXTRA_DESKTOP_MODE_SOURCE =
+            "com.samsung.android.desktopmode.extra.DESKTOP_MODE_SOURCE";
     public static final int EXTRA_DESKTOP_MODE_SOURCE_BIXBY = 8;
     public static final int EXTRA_DESKTOP_MODE_SOURCE_BIXBY_ROUTINES = 9;
     public static final int EXTRA_DESKTOP_MODE_SOURCE_CONNECTIVITY_ACTIVITY = 11;
@@ -46,12 +54,14 @@ public class DesktopModeUiConstants {
     public static final int EXTRA_DESKTOP_MODE_SOURCE_TILE = 1;
     public static final int EXTRA_DESKTOP_MODE_SOURCE_TOGGLE = 3;
     public static final int EXTRA_DESKTOP_MODE_SOURCE_WELCOME = 2;
-    public static final String EXTRA_DESKTOP_MODE_STATE = "com.samsung.android.desktopmode.extra.DESKTOP_MODE_STATE";
+    public static final String EXTRA_DESKTOP_MODE_STATE =
+            "com.samsung.android.desktopmode.extra.DESKTOP_MODE_STATE";
     public static final int EXTRA_DESKTOP_MODE_STATE_DEFAULT = -1;
     public static final int EXTRA_DESKTOP_MODE_STATE_DISABLED = 2;
     public static final int EXTRA_DESKTOP_MODE_STATE_ENABLED = 1;
     public static final int EXTRA_DESKTOP_MODE_STATE_UPDATE = 0;
-    public static final String EXTRA_NEW_DEX_MODE_STATE = "com.samsung.android.desktopmode.extra.NEW_DEX_MODE_STATE";
+    public static final String EXTRA_NEW_DEX_MODE_STATE =
+            "com.samsung.android.desktopmode.extra.NEW_DEX_MODE_STATE";
     public static final String JIT_CONTENT_ID_DEX_MIRRORING = "DEXX_0004";
     public static final int MESSAGE_COMMAND_MINIMIZE_TASKS = 1000;
     public static final String MESSAGE_KEY_COMMAND = "command";

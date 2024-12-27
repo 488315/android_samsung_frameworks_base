@@ -15,12 +15,10 @@ public interface IPrinterDiscoveryObserver extends IInterface {
 
     public static class Default implements IPrinterDiscoveryObserver {
         @Override // android.print.IPrinterDiscoveryObserver
-        public void onPrintersAdded(ParceledListSlice printers) throws RemoteException {
-        }
+        public void onPrintersAdded(ParceledListSlice printers) throws RemoteException {}
 
         @Override // android.print.IPrinterDiscoveryObserver
-        public void onPrintersRemoved(ParceledListSlice printerIds) throws RemoteException {
-        }
+        public void onPrintersRemoved(ParceledListSlice printerIds) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +26,7 @@ public interface IPrinterDiscoveryObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPrinterDiscoveryObserver {
+    public abstract static class Stub extends Binder implements IPrinterDiscoveryObserver {
         public static final String DESCRIPTOR = "android.print.IPrinterDiscoveryObserver";
         static final int TRANSACTION_onPrintersAdded = 1;
         static final int TRANSACTION_onPrintersRemoved = 2;
@@ -70,7 +68,8 @@ public interface IPrinterDiscoveryObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -80,12 +79,14 @@ public interface IPrinterDiscoveryObserver extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParceledListSlice _arg0 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg0 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     onPrintersAdded(_arg0);
                     return true;
                 case 2:
-                    ParceledListSlice _arg02 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg02 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     onPrintersRemoved(_arg02);
                     return true;

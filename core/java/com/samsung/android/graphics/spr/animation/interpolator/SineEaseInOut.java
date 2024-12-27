@@ -6,11 +6,9 @@ import android.view.animation.Interpolator;
 
 /* loaded from: classes6.dex */
 public class SineEaseInOut implements Interpolator {
-    public SineEaseInOut() {
-    }
+    public SineEaseInOut() {}
 
-    public SineEaseInOut(Context context, AttributeSet attrs) {
-    }
+    public SineEaseInOut(Context context, AttributeSet attrs) {}
 
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float t) {

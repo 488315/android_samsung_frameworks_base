@@ -22,16 +22,13 @@ public interface IRemoteDeviceCallback extends IInterface {
 
     public static class Default implements IRemoteDeviceCallback {
         @Override // android.hardware.IRemoteDeviceCallback
-        public void onCaptureResult(CameraMetadataNative result) throws RemoteException {
-        }
+        public void onCaptureResult(CameraMetadataNative result) throws RemoteException {}
 
         @Override // android.hardware.IRemoteDeviceCallback
-        public void onError(int errorCode) throws RemoteException {
-        }
+        public void onError(int errorCode) throws RemoteException {}
 
         @Override // android.hardware.IRemoteDeviceCallback
-        public void onOrientationChanged(int orientation) throws RemoteException {
-        }
+        public void onOrientationChanged(int orientation) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -39,7 +36,7 @@ public interface IRemoteDeviceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteDeviceCallback {
+    public abstract static class Stub extends Binder implements IRemoteDeviceCallback {
         static final int TRANSACTION_onCaptureResult = 1;
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onOrientationChanged = 3;
@@ -83,7 +80,8 @@ public interface IRemoteDeviceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteDeviceCallback.DESCRIPTOR);
             }
@@ -93,7 +91,9 @@ public interface IRemoteDeviceCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    CameraMetadataNative _arg0 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg0 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     data.enforceNoDataAvail();
                     onCaptureResult(_arg0);
                     return true;

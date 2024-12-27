@@ -18,15 +18,12 @@ import android.transition.Scene;
 import android.transition.Transition;
 import android.transition.TransitionManager;
 import android.util.Pair;
-import android.view.ActionMode;
-import android.view.InputQueue;
-import android.view.SurfaceHolder;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.flags.Flags;
 import android.window.OnBackInvokedDispatcher;
+
 import com.android.internal.R;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -36,8 +33,7 @@ public abstract class Window {
     public static final int DECOR_CAPTION_SHADE_DARK = 2;
     public static final int DECOR_CAPTION_SHADE_LIGHT = 1;
 
-    @Deprecated
-    protected static final int DEFAULT_FEATURES = 65;
+    @Deprecated protected static final int DEFAULT_FEATURES = 65;
     public static final int FEATURE_ACTION_BAR = 8;
     public static final int FEATURE_ACTION_BAR_OVERLAY = 9;
     public static final int FEATURE_ACTION_MODE_OVERLAY = 10;
@@ -46,47 +42,38 @@ public abstract class Window {
     public static final int FEATURE_CONTEXT_MENU = 6;
     public static final int FEATURE_CUSTOM_TITLE = 7;
 
-    @Deprecated
-    public static final int FEATURE_INDETERMINATE_PROGRESS = 5;
+    @Deprecated public static final int FEATURE_INDETERMINATE_PROGRESS = 5;
     public static final int FEATURE_LEFT_ICON = 3;
     public static final int FEATURE_MAX = 13;
     public static final int FEATURE_NO_TITLE = 1;
     public static final int FEATURE_OPTIONS_PANEL = 0;
 
-    @Deprecated
-    public static final int FEATURE_PROGRESS = 2;
+    @Deprecated public static final int FEATURE_PROGRESS = 2;
     public static final int FEATURE_RIGHT_ICON = 4;
 
-    @Deprecated
-    public static final int FEATURE_SWIPE_TO_DISMISS = 11;
+    @Deprecated public static final int FEATURE_SWIPE_TO_DISMISS = 11;
     public static final int ID_ANDROID_CONTENT = 16908290;
-    public static final String NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME = "android:navigation:background";
+    public static final String NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME =
+            "android:navigation:background";
 
-    @Deprecated
-    public static final int PROGRESS_END = 10000;
+    @Deprecated public static final int PROGRESS_END = 10000;
 
-    @Deprecated
-    public static final int PROGRESS_INDETERMINATE_OFF = -4;
+    @Deprecated public static final int PROGRESS_INDETERMINATE_OFF = -4;
 
-    @Deprecated
-    public static final int PROGRESS_INDETERMINATE_ON = -3;
+    @Deprecated public static final int PROGRESS_INDETERMINATE_ON = -3;
 
-    @Deprecated
-    public static final int PROGRESS_SECONDARY_END = 30000;
+    @Deprecated public static final int PROGRESS_SECONDARY_END = 30000;
 
-    @Deprecated
-    public static final int PROGRESS_SECONDARY_START = 20000;
+    @Deprecated public static final int PROGRESS_SECONDARY_START = 20000;
 
-    @Deprecated
-    public static final int PROGRESS_START = 0;
+    @Deprecated public static final int PROGRESS_START = 0;
 
-    @Deprecated
-    public static final int PROGRESS_VISIBILITY_OFF = -2;
+    @Deprecated public static final int PROGRESS_VISIBILITY_OFF = -2;
 
-    @Deprecated
-    public static final int PROGRESS_VISIBILITY_ON = -1;
+    @Deprecated public static final int PROGRESS_VISIBILITY_ON = -1;
     public static final String STATUS_BAR_BACKGROUND_TRANSITION_NAME = "android:status:background";
-    protected static boolean sToolkitSetFrameRateReadOnlyFlagValue = Flags.toolkitSetFrameRateReadOnly();
+    protected static boolean sToolkitSetFrameRateReadOnlyFlagValue =
+            Flags.toolkitSetFrameRateReadOnly();
     private Window mActiveChild;
     private String mAppName;
     private IBinder mAppToken;
@@ -324,11 +311,10 @@ public abstract class Window {
 
         ActionMode onWindowStartingActionMode(ActionMode.Callback callback, int i);
 
-        default void onProvideKeyboardShortcuts(List<KeyboardShortcutGroup> data, Menu menu, int deviceId) {
-        }
+        default void onProvideKeyboardShortcuts(
+                List<KeyboardShortcutGroup> data, Menu menu, int deviceId) {}
 
-        default void onPointerCaptureChanged(boolean hasCapture) {
-        }
+        default void onPointerCaptureChanged(boolean hasCapture) {}
     }
 
     public Window(Context context) {
@@ -375,8 +361,7 @@ public abstract class Window {
         onDestroy();
     }
 
-    protected void onDestroy() {
-    }
+    protected void onDestroy() {}
 
     public final boolean isDestroyed() {
         return this.mDestroyed;
@@ -386,7 +371,8 @@ public abstract class Window {
         setWindowManager(wm, appToken, appName, false);
     }
 
-    public void setWindowManager(WindowManager wm, IBinder appToken, String appName, boolean hardwareAccelerated) {
+    public void setWindowManager(
+            WindowManager wm, IBinder appToken, String appName, boolean hardwareAccelerated) {
         this.mAppToken = appToken;
         this.mAppName = appName;
         this.mHardwareAccelerated = hardwareAccelerated;
@@ -462,7 +448,8 @@ public abstract class Window {
         return this.mCallback;
     }
 
-    public final void addOnFrameMetricsAvailableListener(OnFrameMetricsAvailableListener listener, Handler handler) {
+    public final void addOnFrameMetricsAvailableListener(
+            OnFrameMetricsAvailableListener listener, Handler handler) {
         View decorView = getDecorView();
         if (decorView == null) {
             throw new IllegalStateException("can't observe a Window without an attached view");
@@ -473,7 +460,8 @@ public abstract class Window {
         decorView.addFrameMetricsListener(this, listener, handler);
     }
 
-    public final void removeOnFrameMetricsAvailableListener(OnFrameMetricsAvailableListener listener) {
+    public final void removeOnFrameMetricsAvailableListener(
+            OnFrameMetricsAvailableListener listener) {
         View decorView = getDecorView();
         if (decorView != null) {
             getDecorView().removeFrameMetricsListener(listener);
@@ -484,7 +472,8 @@ public abstract class Window {
         this.mOnWindowDismissedCallback = dcb;
     }
 
-    public final void dispatchOnWindowDismissed(boolean finishTask, boolean suppressWindowTransition) {
+    public final void dispatchOnWindowDismissed(
+            boolean finishTask, boolean suppressWindowTransition) {
         if (this.mOnWindowDismissedCallback != null) {
             this.mOnWindowDismissedCallback.onWindowDismissed(finishTask, suppressWindowTransition);
         }
@@ -530,21 +519,28 @@ public abstract class Window {
         }
     }
 
-    public final boolean onDrawLegacyNavigationBarBackgroundChanged(boolean drawLegacyNavigationBarBackground) {
+    public final boolean onDrawLegacyNavigationBarBackgroundChanged(
+            boolean drawLegacyNavigationBarBackground) {
         if (this.mDecorCallback == null) {
             return false;
         }
-        return this.mDecorCallback.onDrawLegacyNavigationBarBackgroundChanged(drawLegacyNavigationBarBackground);
+        return this.mDecorCallback.onDrawLegacyNavigationBarBackgroundChanged(
+                drawLegacyNavigationBarBackground);
     }
 
-    public final void setRestrictedCaptionAreaListener(OnRestrictedCaptionAreaChangedListener listener) {
+    public final void setRestrictedCaptionAreaListener(
+            OnRestrictedCaptionAreaChangedListener listener) {
         this.mOnRestrictedCaptionAreaChangedListener = listener;
         this.mRestrictedCaptionAreaRect = listener != null ? new Rect() : null;
     }
 
     public final void setHideOverlayWindows(boolean hide) {
-        if (this.mContext.checkSelfPermission(Manifest.permission.HIDE_NON_SYSTEM_OVERLAY_WINDOWS) != 0 && this.mContext.checkSelfPermission(Manifest.permission.HIDE_OVERLAY_WINDOWS) != 0) {
-            throw new SecurityException("Permission denial: setHideOverlayWindows: HIDE_OVERLAY_WINDOWS");
+        if (this.mContext.checkSelfPermission(Manifest.permission.HIDE_NON_SYSTEM_OVERLAY_WINDOWS)
+                        != 0
+                && this.mContext.checkSelfPermission(Manifest.permission.HIDE_OVERLAY_WINDOWS)
+                        != 0) {
+            throw new SecurityException(
+                    "Permission denial: setHideOverlayWindows: HIDE_OVERLAY_WINDOWS");
         }
         setPrivateFlags(hide ? 524288 : 0, 524288);
     }
@@ -689,7 +685,8 @@ public abstract class Window {
     }
 
     public boolean isWideColorGamut() {
-        return getColorMode() == 1 && getContext().getResources().getConfiguration().isScreenWideColorGamut();
+        return getColorMode() == 1
+                && getContext().getResources().getConfiguration().isScreenWideColorGamut();
     }
 
     public void setDimAmount(float amount) {
@@ -699,8 +696,7 @@ public abstract class Window {
         dispatchWindowAttributesChanged(attrs);
     }
 
-    public void setDecorFitsSystemWindows(boolean decorFitsSystemWindows) {
-    }
+    public void setDecorFitsSystemWindows(boolean decorFitsSystemWindows) {}
 
     public boolean decorFitsSystemWindows() {
         return false;
@@ -740,7 +736,8 @@ public abstract class Window {
     }
 
     public boolean shouldCloseOnTouch(Context context, MotionEvent event) {
-        boolean isOutside = (event.getAction() == 1 && isOutOfBounds(context, event)) || event.getAction() == 4;
+        boolean isOutside =
+                (event.getAction() == 1 && isOutOfBounds(context, event)) || event.getAction() == 4;
         return this.mCloseOnTouchOutside && peekDecorView() != null && isOutside;
     }
 
@@ -753,7 +750,10 @@ public abstract class Window {
         int y = (int) event.getY();
         int slop = ViewConfiguration.get(context).getScaledWindowTouchSlop();
         View decorView = getDecorView();
-        return x < (-slop) || y < (-slop) || x > decorView.getWidth() + slop || y > decorView.getHeight() + slop;
+        return x < (-slop)
+                || y < (-slop)
+                || x > decorView.getWidth() + slop
+                || y > decorView.getHeight() + slop;
     }
 
     public boolean requestFeature(int featureId) {
@@ -766,7 +766,8 @@ public abstract class Window {
     protected void removeFeature(int featureId) {
         int flag = 1 << featureId;
         this.mFeatures &= ~flag;
-        this.mLocalFeatures &= ~(this.mContainer != null ? (~this.mContainer.mFeatures) & flag : flag);
+        this.mLocalFeatures &=
+                ~(this.mContainer != null ? (~this.mContainer.mFeatures) & flag : flag);
     }
 
     public final void makeActive() {
@@ -796,22 +797,19 @@ public abstract class Window {
         return t;
     }
 
-    public void setElevation(float elevation) {
-    }
+    public void setElevation(float elevation) {}
 
     public float getElevation() {
         return 0.0f;
     }
 
-    public void setClipToOutline(boolean clipToOutline) {
-    }
+    public void setClipToOutline(boolean clipToOutline) {}
 
     public void setBackgroundDrawableResource(int resId) {
         setBackgroundDrawable(this.mContext.getDrawable(resId));
     }
 
-    public void setBackgroundBlurRadius(int blurRadius) {
-    }
+    public void setBackgroundBlurRadius(int blurRadius) {}
 
     public View getStatusBarBackgroundView() {
         return null;
@@ -858,36 +856,27 @@ public abstract class Window {
         return this.mHaveDimAmount;
     }
 
-    public void setMediaController(MediaController controller) {
-    }
+    public void setMediaController(MediaController controller) {}
 
     public MediaController getMediaController() {
         return null;
     }
 
-    public void setUiOptions(int uiOptions) {
-    }
+    public void setUiOptions(int uiOptions) {}
 
-    public void setUiOptions(int uiOptions, int mask) {
-    }
+    public void setUiOptions(int uiOptions, int mask) {}
 
-    public void setIcon(int resId) {
-    }
+    public void setIcon(int resId) {}
 
-    public void setDefaultIcon(int resId) {
-    }
+    public void setDefaultIcon(int resId) {}
 
-    public void setLogo(int resId) {
-    }
+    public void setLogo(int resId) {}
 
-    public void setDefaultLogo(int resId) {
-    }
+    public void setDefaultLogo(int resId) {}
 
-    public void setLocalFocus(boolean hasFocus, boolean inTouchMode) {
-    }
+    public void setLocalFocus(boolean hasFocus, boolean inTouchMode) {}
 
-    public void injectInputEvent(InputEvent event) {
-    }
+    public void injectInputEvent(InputEvent event) {}
 
     public TransitionManager getTransitionManager() {
         return null;
@@ -901,17 +890,13 @@ public abstract class Window {
         return null;
     }
 
-    public void setEnterTransition(Transition transition) {
-    }
+    public void setEnterTransition(Transition transition) {}
 
-    public void setReturnTransition(Transition transition) {
-    }
+    public void setReturnTransition(Transition transition) {}
 
-    public void setExitTransition(Transition transition) {
-    }
+    public void setExitTransition(Transition transition) {}
 
-    public void setReenterTransition(Transition transition) {
-    }
+    public void setReenterTransition(Transition transition) {}
 
     public Transition getEnterTransition() {
         return null;
@@ -929,11 +914,9 @@ public abstract class Window {
         return null;
     }
 
-    public void setSharedElementEnterTransition(Transition transition) {
-    }
+    public void setSharedElementEnterTransition(Transition transition) {}
 
-    public void setSharedElementReturnTransition(Transition transition) {
-    }
+    public void setSharedElementReturnTransition(Transition transition) {}
 
     public Transition getSharedElementEnterTransition() {
         return null;
@@ -943,11 +926,9 @@ public abstract class Window {
         return null;
     }
 
-    public void setSharedElementExitTransition(Transition transition) {
-    }
+    public void setSharedElementExitTransition(Transition transition) {}
 
-    public void setSharedElementReenterTransition(Transition transition) {
-    }
+    public void setSharedElementReenterTransition(Transition transition) {}
 
     public Transition getSharedElementExitTransition() {
         return null;
@@ -957,15 +938,13 @@ public abstract class Window {
         return null;
     }
 
-    public void setAllowEnterTransitionOverlap(boolean allow) {
-    }
+    public void setAllowEnterTransitionOverlap(boolean allow) {}
 
     public boolean getAllowEnterTransitionOverlap() {
         return true;
     }
 
-    public void setAllowReturnTransitionOverlap(boolean allow) {
-    }
+    public void setAllowReturnTransitionOverlap(boolean allow) {}
 
     public boolean getAllowReturnTransitionOverlap() {
         return true;
@@ -975,19 +954,16 @@ public abstract class Window {
         return 0L;
     }
 
-    public void setTransitionBackgroundFadeDuration(long fadeDurationMillis) {
-    }
+    public void setTransitionBackgroundFadeDuration(long fadeDurationMillis) {}
 
     public boolean getSharedElementsUseOverlay() {
         return true;
     }
 
-    public void setSharedElementsUseOverlay(boolean sharedElementsUseOverlay) {
-    }
+    public void setSharedElementsUseOverlay(boolean sharedElementsUseOverlay) {}
 
     @Deprecated
-    public void setNavigationBarDividerColor(int dividerColor) {
-    }
+    public void setNavigationBarDividerColor(int dividerColor) {}
 
     @Deprecated
     public int getNavigationBarDividerColor() {
@@ -995,16 +971,14 @@ public abstract class Window {
     }
 
     @Deprecated
-    public void setStatusBarContrastEnforced(boolean ensureContrast) {
-    }
+    public void setStatusBarContrastEnforced(boolean ensureContrast) {}
 
     @Deprecated
     public boolean isStatusBarContrastEnforced() {
         return false;
     }
 
-    public void setNavigationBarContrastEnforced(boolean enforceContrast) {
-    }
+    public void setNavigationBarContrastEnforced(boolean enforceContrast) {}
 
     public boolean isNavigationBarContrastEnforced() {
         return false;
@@ -1018,17 +992,13 @@ public abstract class Window {
         return Collections.emptyList();
     }
 
-    public void requestScrollCapture(IScrollCaptureResponseListener listener) {
-    }
+    public void requestScrollCapture(IScrollCaptureResponseListener listener) {}
 
-    public void registerScrollCaptureCallback(ScrollCaptureCallback callback) {
-    }
+    public void registerScrollCaptureCallback(ScrollCaptureCallback callback) {}
 
-    public void unregisterScrollCaptureCallback(ScrollCaptureCallback callback) {
-    }
+    public void unregisterScrollCaptureCallback(ScrollCaptureCallback callback) {}
 
-    public void setTheme(int resId) {
-    }
+    public void setTheme(int resId) {}
 
     public void setOverlayWithDecorCaptionEnabled(boolean enabled) {
         this.mOverlayWithDecorCaptionEnabled = enabled;
@@ -1041,7 +1011,8 @@ public abstract class Window {
     public void notifyRestrictedCaptionAreaCallback(int left, int top, int right, int bottom) {
         if (this.mOnRestrictedCaptionAreaChangedListener != null) {
             this.mRestrictedCaptionAreaRect.set(left, top, right, bottom);
-            this.mOnRestrictedCaptionAreaChangedListener.onRestrictedCaptionAreaChanged(this.mRestrictedCaptionAreaRect);
+            this.mOnRestrictedCaptionAreaChangedListener.onRestrictedCaptionAreaChanged(
+                    this.mRestrictedCaptionAreaRect);
         }
     }
 

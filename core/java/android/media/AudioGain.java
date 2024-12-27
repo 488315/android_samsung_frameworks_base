@@ -15,7 +15,16 @@ public class AudioGain {
     private final int mRampDurationMinMs;
     private final int mStepValue;
 
-    AudioGain(int index, int mode, int channelMask, int minValue, int maxValue, int defaultValue, int stepValue, int rampDurationMinMs, int rampDurationMaxMs) {
+    AudioGain(
+            int index,
+            int mode,
+            int channelMask,
+            int minValue,
+            int maxValue,
+            int defaultValue,
+            int stepValue,
+            int rampDurationMinMs,
+            int rampDurationMaxMs) {
         this.mIndex = index;
         this.mMode = mode;
         this.mChannelMask = channelMask;
@@ -59,7 +68,8 @@ public class AudioGain {
         return this.mRampDurationMaxMs;
     }
 
-    public AudioGainConfig buildConfig(int mode, int channelMask, int[] values, int rampDurationMs) {
+    public AudioGainConfig buildConfig(
+            int mode, int channelMask, int[] values, int rampDurationMs) {
         return new AudioGainConfig(this.mIndex, this, mode, channelMask, values, rampDurationMs);
     }
 }

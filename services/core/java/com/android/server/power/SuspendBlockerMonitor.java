@@ -1,6 +1,7 @@
 package com.android.server.power;
 
 import com.android.internal.util.RingBuffer;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -8,7 +9,8 @@ import java.io.PrintWriter;
 public final class SuspendBlockerMonitor {
     public String mDetail;
     public int mEvents;
-    public static final RingBuffer mSuspendBlockerMonitorCallbacks = new RingBuffer(CallbackHistory.class, 200);
+    public static final RingBuffer mSuspendBlockerMonitorCallbacks =
+            new RingBuffer(CallbackHistory.class, 200);
     public static final SuspendBlockerMonitor GLOBAL_INSTANCE = new SuspendBlockerMonitor();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */

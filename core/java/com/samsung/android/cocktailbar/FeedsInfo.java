@@ -8,19 +8,21 @@ import android.text.TextUtils;
 
 /* loaded from: classes5.dex */
 public class FeedsInfo implements Parcelable {
-    public static final Parcelable.Creator<FeedsInfo> CREATOR = new Parcelable.Creator<FeedsInfo>() { // from class: com.samsung.android.cocktailbar.FeedsInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FeedsInfo createFromParcel(Parcel parcel) {
-            return new FeedsInfo(parcel);
-        }
+    public static final Parcelable.Creator<FeedsInfo> CREATOR =
+            new Parcelable.Creator<
+                    FeedsInfo>() { // from class: com.samsung.android.cocktailbar.FeedsInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FeedsInfo createFromParcel(Parcel parcel) {
+                    return new FeedsInfo(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FeedsInfo[] newArray(int size) {
-            return new FeedsInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FeedsInfo[] newArray(int size) {
+                    return new FeedsInfo[size];
+                }
+            };
     public Bundle extras;
     public CharSequence feedsText;
     public int icon;

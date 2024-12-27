@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
-import com.samsung.android.knoxguard.IKnoxGuardManager;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -14,8 +14,7 @@ public class KnoxGuardManager {
     private static KnoxGuardManager mKnoxGuardManager;
     private IKnoxGuardManager mService;
 
-    private KnoxGuardManager() {
-    }
+    private KnoxGuardManager() {}
 
     public static synchronized KnoxGuardManager getInstance() {
         KnoxGuardManager knoxGuardManager;
@@ -30,7 +29,9 @@ public class KnoxGuardManager {
 
     private IKnoxGuardManager getService() {
         if (this.mService == null) {
-            this.mService = IKnoxGuardManager.Stub.asInterface(ServiceManager.getService(KNOXGUARD_SERVICE));
+            this.mService =
+                    IKnoxGuardManager.Stub.asInterface(
+                            ServiceManager.getService(KNOXGUARD_SERVICE));
         }
         return this.mService;
     }
@@ -55,20 +56,70 @@ public class KnoxGuardManager {
         }
     }
 
-    public void setRemoteLockToLockscreen(int type, boolean state, String msg, String number, String email, boolean emergencycallbutton, String name, int failcount, long timeout, int blockcount, boolean skippin, Bundle bundle) {
+    public void setRemoteLockToLockscreen(
+            int type,
+            boolean state,
+            String msg,
+            String number,
+            String email,
+            boolean emergencycallbutton,
+            String name,
+            int failcount,
+            long timeout,
+            int blockcount,
+            boolean skippin,
+            Bundle bundle) {
         if (getService() != null) {
             try {
-                this.mService.setRemoteLockToLockscreen(type, state, msg, number, email, emergencycallbutton, name, failcount, timeout, blockcount, skippin, bundle);
+                this.mService.setRemoteLockToLockscreen(
+                        type,
+                        state,
+                        msg,
+                        number,
+                        email,
+                        emergencycallbutton,
+                        name,
+                        failcount,
+                        timeout,
+                        blockcount,
+                        skippin,
+                        bundle);
             } catch (RemoteException e) {
                 Log.w(TAG, "Failed talking with KnoxGuard service", e);
             }
         }
     }
 
-    public void setRemoteLockToLockscreen(int type, boolean state, String msg, String number, String email, boolean emergencycallbutton, String name, int failcount, long timeout, int blockcount, boolean skippin, Bundle bundle, boolean skipSupportContainer) {
+    public void setRemoteLockToLockscreen(
+            int type,
+            boolean state,
+            String msg,
+            String number,
+            String email,
+            boolean emergencycallbutton,
+            String name,
+            int failcount,
+            long timeout,
+            int blockcount,
+            boolean skippin,
+            Bundle bundle,
+            boolean skipSupportContainer) {
         if (getService() != null) {
             try {
-                this.mService.setRemoteLockToLockscreenWithSkipSupport(type, state, msg, number, email, emergencycallbutton, name, failcount, timeout, blockcount, skippin, bundle, skipSupportContainer);
+                this.mService.setRemoteLockToLockscreenWithSkipSupport(
+                        type,
+                        state,
+                        msg,
+                        number,
+                        email,
+                        emergencycallbutton,
+                        name,
+                        failcount,
+                        timeout,
+                        blockcount,
+                        skippin,
+                        bundle,
+                        skipSupportContainer);
             } catch (RemoteException e) {
                 Log.w(TAG, "Failed talking with KnoxGuard service", e);
             }
@@ -296,12 +347,29 @@ public class KnoxGuardManager {
         }
     }
 
-    public int lockScreen(String actionName, String clientName, String phoneNumber, String emailAddress, String message, boolean skipPin, boolean skipSupport, Bundle bundle) {
+    public int lockScreen(
+            String actionName,
+            String clientName,
+            String phoneNumber,
+            String emailAddress,
+            String message,
+            boolean skipPin,
+            boolean skipSupport,
+            Bundle bundle) {
         if (getService() == null) {
             return -1000;
         }
         try {
-            int res = this.mService.lockScreen(actionName, clientName, phoneNumber, emailAddress, message, skipPin, skipSupport, bundle);
+            int res =
+                    this.mService.lockScreen(
+                            actionName,
+                            clientName,
+                            phoneNumber,
+                            emailAddress,
+                            message,
+                            skipPin,
+                            skipSupport,
+                            bundle);
             return res;
         } catch (RemoteException e) {
             Log.w(TAG, "Failed talking with KnoxGuard KGTA processCommand", e);

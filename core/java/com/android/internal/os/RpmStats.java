@@ -1,6 +1,7 @@
 package com.android.internal.os;
 
 import android.util.ArrayMap;
+
 import java.util.Map;
 
 /* loaded from: classes5.dex */
@@ -8,7 +9,8 @@ public final class RpmStats {
     public Map<String, PowerStatePlatformSleepState> mPlatformLowPowerStats = new ArrayMap();
     public Map<String, PowerStateSubsystem> mSubsystemLowPowerStats = new ArrayMap();
 
-    public PowerStatePlatformSleepState getAndUpdatePlatformState(String name, long timeMs, int count) {
+    public PowerStatePlatformSleepState getAndUpdatePlatformState(
+            String name, long timeMs, int count) {
         PowerStatePlatformSleepState e = this.mPlatformLowPowerStats.get(name);
         if (e == null) {
             e = new PowerStatePlatformSleepState();

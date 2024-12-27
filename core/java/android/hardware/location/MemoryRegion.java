@@ -3,24 +3,27 @@ package android.hardware.location;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.content.NativeLibraryHelper;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public class MemoryRegion implements Parcelable {
-    public static final Parcelable.Creator<MemoryRegion> CREATOR = new Parcelable.Creator<MemoryRegion>() { // from class: android.hardware.location.MemoryRegion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MemoryRegion createFromParcel(Parcel in) {
-            return new MemoryRegion(in);
-        }
+    public static final Parcelable.Creator<MemoryRegion> CREATOR =
+            new Parcelable.Creator<
+                    MemoryRegion>() { // from class: android.hardware.location.MemoryRegion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MemoryRegion createFromParcel(Parcel in) {
+                    return new MemoryRegion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MemoryRegion[] newArray(int size) {
-            return new MemoryRegion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MemoryRegion[] newArray(int size) {
+                    return new MemoryRegion[size];
+                }
+            };
     private boolean mIsExecutable;
     private boolean mIsReadable;
     private boolean mIsWritable;
@@ -73,7 +76,12 @@ public class MemoryRegion implements Parcelable {
             return false;
         }
         MemoryRegion other = (MemoryRegion) object;
-        boolean isEqual = other.getCapacityBytes() == this.mSizeBytes && other.getFreeCapacityBytes() == this.mSizeBytesFree && other.isReadable() == this.mIsReadable && other.isWritable() == this.mIsWritable && other.isExecutable() == this.mIsExecutable;
+        boolean isEqual =
+                other.getCapacityBytes() == this.mSizeBytes
+                        && other.getFreeCapacityBytes() == this.mSizeBytesFree
+                        && other.isReadable() == this.mIsReadable
+                        && other.isWritable() == this.mIsWritable
+                        && other.isExecutable() == this.mIsExecutable;
         return isEqual;
     }
 

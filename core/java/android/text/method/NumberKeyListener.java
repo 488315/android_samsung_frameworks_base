@@ -10,12 +10,14 @@ import android.text.Spanned;
 import android.text.format.DateFormat;
 import android.view.KeyEvent;
 import android.view.View;
+
 import java.util.Collection;
 import java.util.Locale;
 
 /* loaded from: classes4.dex */
 public abstract class NumberKeyListener extends BaseKeyListener implements InputFilter {
-    private static final String DATE_TIME_FORMAT_SYMBOLS = "GyYuUrQqMLlwWdDFgEecabBhHKkjJCmsSAzZOvVXx";
+    private static final String DATE_TIME_FORMAT_SYMBOLS =
+            "GyYuUrQqMLlwWdDFgEecabBhHKkjJCmsSAzZOvVXx";
     private static final char SINGLE_QUOTE = '\'';
 
     protected abstract char[] getAcceptedChars();
@@ -24,7 +26,8 @@ public abstract class NumberKeyListener extends BaseKeyListener implements Input
         return event.getMatch(getAcceptedChars(), getMetaState(content, event));
     }
 
-    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+    public CharSequence filter(
+            CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
         char[] accept = getAcceptedChars();
         int i = start;
         while (i < end && ok(accept, source.charAt(i))) {
@@ -57,7 +60,8 @@ public abstract class NumberKeyListener extends BaseKeyListener implements Input
         return false;
     }
 
-    @Override // android.text.method.BaseKeyListener, android.text.method.MetaKeyKeyListener, android.text.method.KeyListener
+    @Override // android.text.method.BaseKeyListener, android.text.method.MetaKeyKeyListener,
+              // android.text.method.KeyListener
     public boolean onKeyDown(View view, Editable content, int keyCode, KeyEvent event) {
         int a = Selection.getSelectionStart(content);
         int b = Selection.getSelectionEnd(content);
@@ -79,7 +83,11 @@ public abstract class NumberKeyListener extends BaseKeyListener implements Input
                 adjustMetaAfterKeypress(content);
                 return true;
             }
-        } else if (i == 48 && repeatCount == 1 && selStart == selEnd && selEnd > 0 && content.charAt(selStart - 1) == '0') {
+        } else if (i == 48
+                && repeatCount == 1
+                && selStart == selEnd
+                && selEnd > 0
+                && content.charAt(selStart - 1) == '0') {
             content.replace(selStart - 1, selEnd, String.valueOf('+'));
             adjustMetaAfterKeypress(content);
             return true;
@@ -102,7 +110,11 @@ public abstract class NumberKeyListener extends BaseKeyListener implements Input
         return true;
     }
 
-    static boolean addFormatCharsFromSkeleton(Collection<Character> collection, Locale locale, String skeleton, String symbolsToIgnore) {
+    static boolean addFormatCharsFromSkeleton(
+            Collection<Character> collection,
+            Locale locale,
+            String skeleton,
+            String symbolsToIgnore) {
         if (locale == null) {
             return false;
         }
@@ -139,7 +151,11 @@ public abstract class NumberKeyListener extends BaseKeyListener implements Input
         }
     }
 
-    static boolean addFormatCharsFromSkeletons(Collection<Character> collection, Locale locale, String[] skeletons, String symbolsToIgnore) {
+    static boolean addFormatCharsFromSkeletons(
+            Collection<Character> collection,
+            Locale locale,
+            String[] skeletons,
+            String symbolsToIgnore) {
         for (String str : skeletons) {
             boolean success = addFormatCharsFromSkeleton(collection, locale, str, symbolsToIgnore);
             if (!success) {

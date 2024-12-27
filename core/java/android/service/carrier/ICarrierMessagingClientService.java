@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface ICarrierMessagingClientService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.carrier.ICarrierMessagingClientService";
+    public static final String DESCRIPTOR =
+            "android.service.carrier.ICarrierMessagingClientService";
 
     public static class Default implements ICarrierMessagingClientService {
         @Override // android.os.IInterface
@@ -17,7 +18,7 @@ public interface ICarrierMessagingClientService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICarrierMessagingClientService {
+    public abstract static class Stub extends Binder implements ICarrierMessagingClientService {
         public Stub() {
             attachInterface(this, ICarrierMessagingClientService.DESCRIPTOR);
         }
@@ -48,7 +49,8 @@ public interface ICarrierMessagingClientService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code == 1598968902) {
                 reply.writeString(ICarrierMessagingClientService.DESCRIPTOR);
                 return true;

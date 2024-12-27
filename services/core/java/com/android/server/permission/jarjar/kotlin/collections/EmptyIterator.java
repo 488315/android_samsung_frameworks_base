@@ -10,7 +10,8 @@ public final class EmptyIterator implements ListIterator {
 
     @Override // java.util.ListIterator
     public final /* bridge */ /* synthetic */ void add(Object obj) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.ListIterator, java.util.Iterator
@@ -45,11 +46,13 @@ public final class EmptyIterator implements ListIterator {
 
     @Override // java.util.ListIterator, java.util.Iterator
     public final void remove() {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.ListIterator
     public final /* bridge */ /* synthetic */ void set(Object obj) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 }

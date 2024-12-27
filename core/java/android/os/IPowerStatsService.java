@@ -15,12 +15,12 @@ public interface IPowerStatsService extends IInterface {
 
     public static class Default implements IPowerStatsService {
         @Override // android.os.IPowerStatsService
-        public void getSupportedPowerMonitors(ResultReceiver resultReceiver) throws RemoteException {
-        }
+        public void getSupportedPowerMonitors(ResultReceiver resultReceiver)
+                throws RemoteException {}
 
         @Override // android.os.IPowerStatsService
-        public void getPowerMonitorReadings(int[] powerMonitorIndices, ResultReceiver resultReceiver) throws RemoteException {
-        }
+        public void getPowerMonitorReadings(
+                int[] powerMonitorIndices, ResultReceiver resultReceiver) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +28,7 @@ public interface IPowerStatsService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPowerStatsService {
+    public abstract static class Stub extends Binder implements IPowerStatsService {
         static final int TRANSACTION_getPowerMonitorReadings = 2;
         static final int TRANSACTION_getSupportedPowerMonitors = 1;
 
@@ -69,7 +69,8 @@ public interface IPowerStatsService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPowerStatsService.DESCRIPTOR);
             }
@@ -79,13 +80,15 @@ public interface IPowerStatsService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ResultReceiver _arg0 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg0 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     getSupportedPowerMonitors(_arg0);
                     return true;
                 case 2:
                     int[] _arg02 = data.createIntArray();
-                    ResultReceiver _arg1 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg1 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     getPowerMonitorReadings(_arg02, _arg1);
                     return true;
@@ -111,7 +114,8 @@ public interface IPowerStatsService extends IInterface {
             }
 
             @Override // android.os.IPowerStatsService
-            public void getSupportedPowerMonitors(ResultReceiver resultReceiver) throws RemoteException {
+            public void getSupportedPowerMonitors(ResultReceiver resultReceiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPowerStatsService.DESCRIPTOR);
@@ -123,7 +127,9 @@ public interface IPowerStatsService extends IInterface {
             }
 
             @Override // android.os.IPowerStatsService
-            public void getPowerMonitorReadings(int[] powerMonitorIndices, ResultReceiver resultReceiver) throws RemoteException {
+            public void getPowerMonitorReadings(
+                    int[] powerMonitorIndices, ResultReceiver resultReceiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPowerStatsService.DESCRIPTOR);

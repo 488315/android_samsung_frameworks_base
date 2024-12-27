@@ -3,7 +3,7 @@ package android.os;
 import android.app.ActivityThread;
 import android.app.Instrumentation;
 import android.app.UiAutomation;
-import android.os.ParcelFileDescriptor;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -34,7 +34,8 @@ public class VintfObject {
         Instrumentation instrumentation = activityThread.getInstrumentation();
         UiAutomation automation = instrumentation.getUiAutomation();
         ParcelFileDescriptor pfd = automation.executeShellCommand(command);
-        ParcelFileDescriptor.AutoCloseInputStream is = new ParcelFileDescriptor.AutoCloseInputStream(pfd);
+        ParcelFileDescriptor.AutoCloseInputStream is =
+                new ParcelFileDescriptor.AutoCloseInputStream(pfd);
         try {
             String str = new String(is.readAllBytes());
             is.close();
@@ -49,6 +50,5 @@ public class VintfObject {
         }
     }
 
-    private VintfObject() {
-    }
+    private VintfObject() {}
 }

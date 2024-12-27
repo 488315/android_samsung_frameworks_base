@@ -4,34 +4,37 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class SearchRequest implements Parcelable {
-    public static final String CONSTRAINT_IS_PRESUBMIT_SUGGESTION = "android.app.cloudsearch.IS_PRESUBMIT_SUGGESTION";
-    public static final String CONSTRAINT_SEARCH_PROVIDER_FILTER = "android.app.cloudsearch.SEARCH_PROVIDER_FILTER";
-    public static final Parcelable.Creator<SearchRequest> CREATOR = new Parcelable.Creator<SearchRequest>() { // from class: android.app.cloudsearch.SearchRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchRequest createFromParcel(Parcel p) {
-            return new SearchRequest();
-        }
+    public static final String CONSTRAINT_IS_PRESUBMIT_SUGGESTION =
+            "android.app.cloudsearch.IS_PRESUBMIT_SUGGESTION";
+    public static final String CONSTRAINT_SEARCH_PROVIDER_FILTER =
+            "android.app.cloudsearch.SEARCH_PROVIDER_FILTER";
+    public static final Parcelable.Creator<SearchRequest> CREATOR =
+            new Parcelable.Creator<
+                    SearchRequest>() { // from class: android.app.cloudsearch.SearchRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchRequest createFromParcel(Parcel p) {
+                    return new SearchRequest();
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchRequest[] newArray(int size) {
-            return new SearchRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchRequest[] newArray(int size) {
+                    return new SearchRequest[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SearchConstraintKey {
-    }
+    public @interface SearchConstraintKey {}
 
-    private SearchRequest() {
-    }
+    private SearchRequest() {}
 
     public String getQuery() {
         return "";
@@ -61,12 +64,10 @@ public final class SearchRequest implements Parcelable {
         return "";
     }
 
-    public void setCallerPackageName(String callerPackageName) {
-    }
+    public void setCallerPackageName(String callerPackageName) {}
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-    }
+    public void writeToParcel(Parcel dest, int flags) {}
 
     @Override // android.os.Parcelable
     public int describeContents() {
@@ -88,8 +89,7 @@ public final class SearchRequest implements Parcelable {
     @SystemApi
     public static final class Builder {
         @SystemApi
-        public Builder(String query) {
-        }
+        public Builder(String query) {}
 
         public Builder setQuery(String query) {
             return this;

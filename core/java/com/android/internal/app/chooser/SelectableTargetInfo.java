@@ -18,9 +18,11 @@ import android.os.UserHandle;
 import android.service.chooser.ChooserTarget;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
+
 import com.android.internal.app.ResolverActivity;
 import com.android.internal.app.ResolverListAdapter;
 import com.android.internal.app.SimpleIconFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,10 +51,17 @@ public final class SelectableTargetInfo implements ChooserTargetInfo {
 
         Intent getTargetIntent();
 
-        ResolverListAdapter.ActivityInfoPresentationGetter makePresentationGetter(ActivityInfo activityInfo);
+        ResolverListAdapter.ActivityInfoPresentationGetter makePresentationGetter(
+                ActivityInfo activityInfo);
     }
 
-    public SelectableTargetInfo(Context context, DisplayResolveInfo sourceInfo, ChooserTarget chooserTarget, float modifiedScore, SelectableTargetInfoCommunicator selectableTargetInfoComunicator, ShortcutInfo shortcutInfo) {
+    public SelectableTargetInfo(
+            Context context,
+            DisplayResolveInfo sourceInfo,
+            ChooserTarget chooserTarget,
+            float modifiedScore,
+            SelectableTargetInfoCommunicator selectableTargetInfoComunicator,
+            ShortcutInfo shortcutInfo) {
         boolean z;
         ResolveInfo ri;
         ActivityInfo ai;
@@ -71,14 +80,18 @@ public final class SelectableTargetInfo implements ChooserTargetInfo {
             z = true;
         }
         this.mIsPinned = z;
-        if (sourceInfo != null && (ri = sourceInfo.getResolveInfo()) != null && (ai = ri.activityInfo) != null && ai.applicationInfo != null) {
+        if (sourceInfo != null
+                && (ri = sourceInfo.getResolveInfo()) != null
+                && (ai = ri.activityInfo) != null
+                && ai.applicationInfo != null) {
             PackageManager pm = this.mContext.getPackageManager();
             this.mBadgeIcon = pm.getApplicationIcon(ai.applicationInfo);
             this.mBadgeContentDescription = pm.getApplicationLabel(ai.applicationInfo);
             this.mIsSuspended = (ai.applicationInfo.flags & 1073741824) != 0;
         }
         if (sourceInfo == null) {
-            this.mBackupResolveInfo = this.mContext.getPackageManager().resolveActivity(getResolvedIntent(), 0);
+            this.mBackupResolveInfo =
+                    this.mContext.getPackageManager().resolveActivity(getResolvedIntent(), 0);
         } else {
             this.mBackupResolveInfo = null;
         }
@@ -148,7 +161,8 @@ public final class SelectableTargetInfo implements ChooserTargetInfo {
         if (icon != null) {
             directShareIcon = icon.loadDrawable(this.mContext);
         } else if (shortcutInfo != null) {
-            LauncherApps launcherApps = (LauncherApps) this.mContext.getSystemService(Context.LAUNCHER_APPS_SERVICE);
+            LauncherApps launcherApps =
+                    (LauncherApps) this.mContext.getSystemService(Context.LAUNCHER_APPS_SERVICE);
             directShareIcon = launcherApps.getShortcutIconDrawable(shortcutInfo, 0);
         }
         if (directShareIcon == null) {
@@ -163,7 +177,10 @@ public final class SelectableTargetInfo implements ChooserTargetInfo {
         if (info == null) {
             return null;
         }
-        Bitmap appIcon = this.mSelectableTargetInfoCommunicator.makePresentationGetter(info).getIconBitmap(null);
+        Bitmap appIcon =
+                this.mSelectableTargetInfoCommunicator
+                        .makePresentationGetter(info)
+                        .getIconBitmap(null);
         SimpleIconFactory sif = SimpleIconFactory.obtain(this.mContext);
         Bitmap directShareBadgedIcon = sif.createAppBadgedIconBitmap(directShareIcon, appIcon);
         sif.recycle();
@@ -192,7 +209,9 @@ public final class SelectableTargetInfo implements ChooserTargetInfo {
             return this.mSourceInfo.getResolvedComponentName();
         }
         if (this.mBackupResolveInfo != null) {
-            return new ComponentName(this.mBackupResolveInfo.activityInfo.packageName, this.mBackupResolveInfo.activityInfo.name);
+            return new ComponentName(
+                    this.mBackupResolveInfo.activityInfo.packageName,
+                    this.mBackupResolveInfo.activityInfo.name);
         }
         return null;
     }
@@ -226,7 +245,11 @@ public final class SelectableTargetInfo implements ChooserTargetInfo {
         intent.setComponent(this.mChooserTarget.getComponentName());
         intent.putExtras(this.mChooserTarget.getIntentExtras());
         TargetInfo.prepareIntentForCrossProfileLaunch(intent, userId);
-        if (this.mSourceInfo != null && this.mSourceInfo.getResolvedComponentName().getPackageName().equals(this.mChooserTarget.getComponentName().getPackageName())) {
+        if (this.mSourceInfo != null
+                && this.mSourceInfo
+                        .getResolvedComponentName()
+                        .getPackageName()
+                        .equals(this.mChooserTarget.getComponentName().getPackageName())) {
             ignoreTargetSecurity = true;
         }
         activity.startActivityAsCaller(intent, options, ignoreTargetSecurity, userId);
@@ -240,7 +263,9 @@ public final class SelectableTargetInfo implements ChooserTargetInfo {
 
     @Override // com.android.internal.app.chooser.TargetInfo
     public ResolveInfo getResolveInfo() {
-        return this.mSourceInfo != null ? this.mSourceInfo.getResolveInfo() : this.mBackupResolveInfo;
+        return this.mSourceInfo != null
+                ? this.mSourceInfo.getResolveInfo()
+                : this.mBackupResolveInfo;
     }
 
     @Override // com.android.internal.app.chooser.TargetInfo

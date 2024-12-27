@@ -19,6 +19,7 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.app.ProcessMap;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0;
@@ -26,13 +27,14 @@ import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.PackageWatchdog;
 import com.android.server.PinnerService$$ExternalSyntheticOutline0;
 import com.android.server.Watchdog;
-import com.android.server.am.AppErrorDialog;
 import com.android.server.pm.PackageManagerService;
 import com.android.server.wm.ActivityTaskManagerInternal;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.WindowManagerGlobalLock;
 import com.android.server.wm.WindowManagerService;
+
 import com.sec.android.iaft.IAFDDiagnosis;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -50,7 +52,8 @@ public final class AppErrors {
     public final ProcessMap mProcessCrashCounts = new ProcessMap();
     public volatile ProcessMap mBadProcesses = new ProcessMap();
     public final Object mBadProcessLock = new Object();
-    public final CrashDetectionAndOptimization crashDetectionAndOptimization = new CrashDetectionAndOptimization();
+    public final CrashDetectionAndOptimization crashDetectionAndOptimization =
+            new CrashDetectionAndOptimization();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BadProcessInfo {
@@ -67,7 +70,10 @@ public final class AppErrors {
         }
     }
 
-    public AppErrors(Context context, ActivityManagerService activityManagerService, PackageWatchdog packageWatchdog) {
+    public AppErrors(
+            Context context,
+            ActivityManagerService activityManagerService,
+            PackageWatchdog packageWatchdog) {
         context.assertRuntimeOverlayThemable();
         this.mService = activityManagerService;
         this.mProcLock = activityManagerService.mProcLock;
@@ -82,7 +88,10 @@ public final class AppErrors {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.content.Intent createAppErrorIntentLOSP(com.android.server.am.ProcessRecord r4, long r5, android.app.ApplicationErrorReport.CrashInfo r7) {
+    public static android.content.Intent createAppErrorIntentLOSP(
+            com.android.server.am.ProcessRecord r4,
+            long r5,
+            android.app.ApplicationErrorReport.CrashInfo r7) {
         /*
             com.android.server.am.ProcessErrorStateRecord r0 = r4.mErrorState
             android.content.ComponentName r1 = r0.mErrorReportReceiver
@@ -165,11 +174,17 @@ public final class AppErrors {
             r5.addFlags(r4)
             return r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppErrors.createAppErrorIntentLOSP(com.android.server.am.ProcessRecord, long, android.app.ApplicationErrorReport$CrashInfo):android.content.Intent");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppErrors.createAppErrorIntentLOSP(com.android.server.am.ProcessRecord,"
+                    + " long,"
+                    + " android.app.ApplicationErrorReport$CrashInfo):android.content.Intent");
     }
 
-    public static ActivityManager.ProcessErrorStateInfo generateProcessError(ProcessRecord processRecord, int i, String str, String str2, String str3, String str4) {
-        ActivityManager.ProcessErrorStateInfo processErrorStateInfo = new ActivityManager.ProcessErrorStateInfo();
+    public static ActivityManager.ProcessErrorStateInfo generateProcessError(
+            ProcessRecord processRecord, int i, String str, String str2, String str3, String str4) {
+        ActivityManager.ProcessErrorStateInfo processErrorStateInfo =
+                new ActivityManager.ProcessErrorStateInfo();
         processErrorStateInfo.condition = i;
         processErrorStateInfo.processName = processRecord.processName;
         processErrorStateInfo.pid = processRecord.mPid;
@@ -185,16 +200,13 @@ public final class AppErrors {
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
             int keyAt = sparseArray.keyAt(size);
             if (z) {
-                if (UserHandle.getUserId(keyAt) != i2) {
-                }
+                if (UserHandle.getUserId(keyAt) != i2) {}
                 sparseArray.removeAt(size);
             } else if (i2 == -1) {
-                if (UserHandle.getAppId(keyAt) != i) {
-                }
+                if (UserHandle.getAppId(keyAt) != i) {}
                 sparseArray.removeAt(size);
             } else {
-                if (keyAt != UserHandle.getUid(i2, i)) {
-                }
+                if (keyAt != UserHandle.getUid(i2, i)) {}
                 sparseArray.removeAt(size);
             }
         }
@@ -216,12 +228,19 @@ public final class AppErrors {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void crashApplicationInner(final com.android.server.am.ProcessRecord r25, android.app.ApplicationErrorReport.CrashInfo r26, int r27, int r28) {
+    public final void crashApplicationInner(
+            final com.android.server.am.ProcessRecord r25,
+            android.app.ApplicationErrorReport.CrashInfo r26,
+            int r27,
+            int r28) {
         /*
             Method dump skipped, instructions count: 779
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppErrors.crashApplicationInner(com.android.server.am.ProcessRecord, android.app.ApplicationErrorReport$CrashInfo, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppErrors.crashApplicationInner(com.android.server.am.ProcessRecord,"
+                    + " android.app.ApplicationErrorReport$CrashInfo, int, int):void");
     }
 
     public final void dumpDebugLPr(ProtoOutputStream protoOutputStream, String str) {
@@ -254,8 +273,11 @@ public final class AppErrors {
                 int i4 = 0;
                 while (i4 < size2) {
                     int keyAt = sparseArray3.keyAt(i4);
-                    ProcessRecord processRecord = (ProcessRecord) this.mService.mProcessList.mProcessNames.get(str4, keyAt);
-                    if (str == null || (processRecord != null && processRecord.mPkgList.containsKey(str))) {
+                    ProcessRecord processRecord =
+                            (ProcessRecord)
+                                    this.mService.mProcessList.mProcessNames.get(str4, keyAt);
+                    if (str == null
+                            || (processRecord != null && processRecord.mPkgList.containsKey(str))) {
                         BadProcessInfo badProcessInfo = (BadProcessInfo) sparseArray3.valueAt(i4);
                         j = start;
                         str3 = str4;
@@ -305,15 +327,22 @@ public final class AppErrors {
                         int i6 = 0;
                         while (i6 < size4) {
                             int keyAt2 = sparseArray4.keyAt(i6);
-                            ProcessRecord processRecord2 = (ProcessRecord) this.mService.mProcessList.mProcessNames.get(str5, keyAt2);
-                            if (str == null || (processRecord2 != null && processRecord2.mPkgList.containsKey(str))) {
+                            ProcessRecord processRecord2 =
+                                    (ProcessRecord)
+                                            this.mService.mProcessList.mProcessNames.get(
+                                                    str5, keyAt2);
+                            if (str == null
+                                    || (processRecord2 != null
+                                            && processRecord2.mPkgList.containsKey(str))) {
                                 arrayMap = map2;
                                 i = size3;
                                 long start5 = protoOutputStream.start(2246267895810L);
                                 protoOutputStream.write(1120986464257L, keyAt2);
                                 str2 = str5;
                                 sparseArray = sparseArray4;
-                                protoOutputStream.write(1112396529666L, ((Long) sparseArray4.valueAt(i6)).longValue());
+                                protoOutputStream.write(
+                                        1112396529666L,
+                                        ((Long) sparseArray4.valueAt(i6)).longValue());
                                 protoOutputStream.end(start5);
                             } else {
                                 arrayMap = map2;
@@ -364,8 +393,13 @@ public final class AppErrors {
                         while (i4 < size2) {
                             int keyAt = sparseArray.keyAt(i4);
                             ArrayMap arrayMap = map;
-                            ProcessRecord processRecord = (ProcessRecord) appErrors.mService.mProcessList.mProcessNames.get(str2, keyAt);
-                            if (str == null || (processRecord != null && processRecord.mPkgList.containsKey(str))) {
+                            ProcessRecord processRecord =
+                                    (ProcessRecord)
+                                            appErrors.mService.mProcessList.mProcessNames.get(
+                                                    str2, keyAt);
+                            if (str == null
+                                    || (processRecord != null
+                                            && processRecord.mPkgList.containsKey(str))) {
                                 if (!z3) {
                                     if (z2) {
                                         printWriter.println();
@@ -380,7 +414,9 @@ public final class AppErrors {
                                 printWriter.print(keyAt);
                                 printWriter.print(": last crashed ");
                                 i2 = size;
-                                TimeUtils.formatDuration(uptimeMillis - ((Long) sparseArray.valueAt(i4)).longValue(), printWriter);
+                                TimeUtils.formatDuration(
+                                        uptimeMillis - ((Long) sparseArray.valueAt(i4)).longValue(),
+                                        printWriter);
                                 printWriter.println(" ago");
                                 i4++;
                                 size = i2;
@@ -407,13 +443,19 @@ public final class AppErrors {
                         while (i6 < size4) {
                             int keyAt2 = sparseArray2.keyAt(i6);
                             ArrayMap arrayMap2 = map2;
-                            ProcessRecord processRecord2 = (ProcessRecord) appErrors.mService.mProcessList.mProcessNames.get(str3, keyAt2);
-                            if (str == null || (processRecord2 != null && processRecord2.mPkgList.containsKey(str))) {
+                            ProcessRecord processRecord2 =
+                                    (ProcessRecord)
+                                            appErrors.mService.mProcessList.mProcessNames.get(
+                                                    str3, keyAt2);
+                            if (str == null
+                                    || (processRecord2 != null
+                                            && processRecord2.mPkgList.containsKey(str))) {
                                 if (!z4) {
                                     if (z2) {
                                         printWriter.println();
                                     }
-                                    printWriter.println("  First time processes crashed and counts:");
+                                    printWriter.println(
+                                            "  First time processes crashed and counts:");
                                     z4 = true;
                                     z2 = true;
                                 }
@@ -423,7 +465,11 @@ public final class AppErrors {
                                 printWriter.print(keyAt2);
                                 printWriter.print(": first crashed ");
                                 i = size3;
-                                TimeUtils.formatDuration(uptimeMillis - ((Long) ((Pair) sparseArray2.valueAt(i6)).first).longValue(), printWriter);
+                                TimeUtils.formatDuration(
+                                        uptimeMillis
+                                                - ((Long) ((Pair) sparseArray2.valueAt(i6)).first)
+                                                        .longValue(),
+                                        printWriter);
                                 printWriter.print(" ago; crashes since then: ");
                                 printWriter.println(((Pair) sparseArray2.valueAt(i6)).second);
                             } else {
@@ -452,8 +498,12 @@ public final class AppErrors {
                 int i8 = 0;
                 while (i8 < size6) {
                     int keyAt3 = sparseArray3.keyAt(i8);
-                    ProcessRecord processRecord3 = (ProcessRecord) appErrors.mService.mProcessList.mProcessNames.get(str4, keyAt3);
-                    if (str == null || (processRecord3 != null && processRecord3.mPkgList.containsKey(str))) {
+                    ProcessRecord processRecord3 =
+                            (ProcessRecord)
+                                    appErrors.mService.mProcessList.mProcessNames.get(str4, keyAt3);
+                    if (str == null
+                            || (processRecord3 != null
+                                    && processRecord3.mPkgList.containsKey(str))) {
                         if (!z5) {
                             if (z2) {
                                 printWriter.println();
@@ -506,7 +556,15 @@ public final class AppErrors {
         return z2;
     }
 
-    public final boolean handleAppCrashInActivityController(final ProcessRecord processRecord, final ApplicationErrorReport.CrashInfo crashInfo, final String str, final String str2, final String str3, long j, int i, int i2) {
+    public final boolean handleAppCrashInActivityController(
+            final ProcessRecord processRecord,
+            final ApplicationErrorReport.CrashInfo crashInfo,
+            final String str,
+            final String str2,
+            final String str3,
+            long j,
+            int i,
+            int i2) {
         AppErrors appErrors;
         final int i3;
         Runnable runnable = null;
@@ -523,42 +581,60 @@ public final class AppErrors {
         String str5 = crashInfo.stackTrace;
         final String str6 = str4;
         final int i5 = i4;
-        Runnable runnable2 = new Runnable() { // from class: com.android.server.am.AppErrors$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                AppErrors appErrors2 = AppErrors.this;
-                ApplicationErrorReport.CrashInfo crashInfo2 = crashInfo;
-                String str7 = str6;
-                int i6 = i5;
-                ProcessRecord processRecord2 = processRecord;
-                String str8 = str;
-                String str9 = str2;
-                String str10 = str3;
-                int i7 = i3;
-                appErrors2.getClass();
-                if (Build.IS_DEBUGGABLE && "Native crash".equals(crashInfo2.exceptionClassName)) {
-                    Slog.w("ActivityManager", AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0.m(i6, "Skip killing native crashed app ", str7, "(", ") during testing"));
-                    return;
-                }
-                PinnerService$$ExternalSyntheticOutline0.m("Force-killing crashed app ", str7, " at watcher's request", "ActivityManager");
-                if (processRecord2 != null) {
-                    if (appErrors2.makeAppCrashingLocked(processRecord2, str8, str9, str10, null)) {
-                        return;
+        Runnable runnable2 =
+                new Runnable() { // from class:
+                                 // com.android.server.am.AppErrors$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        AppErrors appErrors2 = AppErrors.this;
+                        ApplicationErrorReport.CrashInfo crashInfo2 = crashInfo;
+                        String str7 = str6;
+                        int i6 = i5;
+                        ProcessRecord processRecord2 = processRecord;
+                        String str8 = str;
+                        String str9 = str2;
+                        String str10 = str3;
+                        int i7 = i3;
+                        appErrors2.getClass();
+                        if (Build.IS_DEBUGGABLE
+                                && "Native crash".equals(crashInfo2.exceptionClassName)) {
+                            Slog.w(
+                                    "ActivityManager",
+                                    AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0.m(
+                                            i6,
+                                            "Skip killing native crashed app ",
+                                            str7,
+                                            "(",
+                                            ") during testing"));
+                            return;
+                        }
+                        PinnerService$$ExternalSyntheticOutline0.m(
+                                "Force-killing crashed app ",
+                                str7,
+                                " at watcher's request",
+                                "ActivityManager");
+                        if (processRecord2 != null) {
+                            if (appErrors2.makeAppCrashingLocked(
+                                    processRecord2, str8, str9, str10, null)) {
+                                return;
+                            }
+                            processRecord2.killLocked(4, "crash");
+                        } else {
+                            Process.killProcess(i6);
+                            ProcessList.killProcessGroup(i7, i6);
+                            appErrors2.mService.mProcessList.noteAppKill(i6, i7, 4, 0, "crash");
+                        }
                     }
-                    processRecord2.killLocked(4, "crash");
-                } else {
-                    Process.killProcess(i6);
-                    ProcessList.killProcessGroup(i7, i6);
-                    appErrors2.mService.mProcessList.noteAppKill(i6, i7, 4, 0, "crash");
-                }
-            }
-        };
-        ActivityTaskManagerService.LocalService localService = (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
-        WindowManagerGlobalLock windowManagerGlobalLock = ActivityTaskManagerService.this.mGlobalLock;
+                };
+        ActivityTaskManagerService.LocalService localService =
+                (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
+        WindowManagerGlobalLock windowManagerGlobalLock =
+                ActivityTaskManagerService.this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                IActivityController iActivityController = ActivityTaskManagerService.this.mController;
+                IActivityController iActivityController =
+                        ActivityTaskManagerService.this.mController;
                 if (iActivityController == null) {
                     WindowManagerService.resetPriorityAfterLockedSection();
                     return false;
@@ -593,12 +669,22 @@ public final class AppErrors {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean handleAppCrashLSPB(com.android.server.am.ProcessRecord r26, java.lang.String r27, java.lang.String r28, java.lang.String r29, java.lang.String r30, com.android.server.am.AppErrorDialog.Data r31) {
+    public final boolean handleAppCrashLSPB(
+            com.android.server.am.ProcessRecord r26,
+            java.lang.String r27,
+            java.lang.String r28,
+            java.lang.String r29,
+            java.lang.String r30,
+            com.android.server.am.AppErrorDialog.Data r31) {
         /*
             Method dump skipped, instructions count: 854
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppErrors.handleAppCrashLSPB(com.android.server.am.ProcessRecord, java.lang.String, java.lang.String, java.lang.String, java.lang.String, com.android.server.am.AppErrorDialog$Data):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppErrors.handleAppCrashLSPB(com.android.server.am.ProcessRecord,"
+                    + " java.lang.String, java.lang.String, java.lang.String, java.lang.String,"
+                    + " com.android.server.am.AppErrorDialog$Data):boolean");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:32:0x00d8  */
@@ -613,19 +699,21 @@ public final class AppErrors {
             Method dump skipped, instructions count: 235
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppErrors.handleShowAnrUi(android.os.Message):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppErrors.handleShowAnrUi(android.os.Message):void");
     }
 
     /* JADX WARN: Can't wrap try/catch for region: R(24:47|48|(1:50)(1:116)|51|(1:53)(1:115)|54|(1:56)(1:114)|57|(1:113)(1:61)|62|(2:64|(4:66|67|(9:91|92|93|94|95|96|(3:98|(1:100)|101)(1:105)|102|(1:104))(2:(1:71)|72)|73))(1:112)|111|67|(0)|91|92|93|94|95|96|(0)(0)|102|(0)|73) */
     /* JADX WARN: Code restructure failed: missing block: B:108:0x019e, code lost:
-    
-        android.util.Slog.d("ActivityManager", "IAFDParse false");
-        r4 = false;
-     */
+
+       android.util.Slog.d("ActivityManager", "IAFDParse false");
+       r4 = false;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:110:0x019c, code lost:
-    
-        r3 = r19;
-     */
+
+       r3 = r19;
+    */
     /* JADX WARN: Removed duplicated region for block: B:104:0x01c2 A[Catch: all -> 0x00d2, TryCatch #1 {all -> 0x00d2, blocks: (B:48:0x00c1, B:50:0x00c5, B:51:0x00d6, B:54:0x00e8, B:57:0x0102, B:59:0x010a, B:62:0x0117, B:64:0x011d, B:67:0x0131, B:71:0x01d2, B:73:0x01d9, B:89:0x0145, B:91:0x0149, B:93:0x0167, B:96:0x016d, B:98:0x01a8, B:100:0x01b2, B:102:0x01be, B:104:0x01c2, B:105:0x01b8, B:108:0x019e), top: B:47:0x00c1, outer: #4 }] */
     /* JADX WARN: Removed duplicated region for block: B:105:0x01b8 A[Catch: all -> 0x00d2, TryCatch #1 {all -> 0x00d2, blocks: (B:48:0x00c1, B:50:0x00c5, B:51:0x00d6, B:54:0x00e8, B:57:0x0102, B:59:0x010a, B:62:0x0117, B:64:0x011d, B:67:0x0131, B:71:0x01d2, B:73:0x01d9, B:89:0x0145, B:91:0x0149, B:93:0x0167, B:96:0x016d, B:98:0x01a8, B:100:0x01b2, B:102:0x01be, B:104:0x01c2, B:105:0x01b8, B:108:0x019e), top: B:47:0x00c1, outer: #4 }] */
     /* JADX WARN: Removed duplicated region for block: B:77:0x01e0 A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -640,7 +728,9 @@ public final class AppErrors {
             Method dump skipped, instructions count: 517
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppErrors.handleShowAppErrorUi(android.os.Message):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppErrors.handleShowAppErrorUi(android.os.Message):void");
     }
 
     public final void killAppAtUserRequestLocked(ProcessRecord processRecord) {
@@ -662,21 +752,27 @@ public final class AppErrors {
                 int i4 = i2;
                 List list = errorDialogController.mCrashDialogs;
                 if (list != null) {
-                    errorDialogController.scheduleForAllDialogs(list, new ErrorDialogController$$ExternalSyntheticLambda0(0));
+                    errorDialogController.scheduleForAllDialogs(
+                            list, new ErrorDialogController$$ExternalSyntheticLambda0(0));
                     errorDialogController.mCrashDialogs = null;
                 }
                 errorDialogController.clearAnrDialogs();
                 List list2 = errorDialogController.mViolationDialogs;
                 if (list2 != null) {
-                    errorDialogController.scheduleForAllDialogs(list2, new ErrorDialogController$$ExternalSyntheticLambda0(0));
+                    errorDialogController.scheduleForAllDialogs(
+                            list2, new ErrorDialogController$$ExternalSyntheticLambda0(0));
                     errorDialogController.mViolationDialogs = null;
                 }
-                AppWaitingForDebuggerDialog appWaitingForDebuggerDialog = errorDialogController.mWaitDialog;
+                AppWaitingForDebuggerDialog appWaitingForDebuggerDialog =
+                        errorDialogController.mWaitDialog;
                 if (appWaitingForDebuggerDialog != null) {
-                    errorDialogController.mService.mUiHandler.post(new ErrorDialogController$$ExternalSyntheticLambda2(2, appWaitingForDebuggerDialog));
+                    errorDialogController.mService.mUiHandler.post(
+                            new ErrorDialogController$$ExternalSyntheticLambda2(
+                                    2, appWaitingForDebuggerDialog));
                     errorDialogController.mWaitDialog = null;
                 }
-                killAppImmediateLSP(processRecord, i3, i4, "user-terminated", "user request after error");
+                killAppImmediateLSP(
+                        processRecord, i3, i4, "user-terminated", "user request after error");
             } catch (Throwable th) {
                 ActivityManagerService.resetPriorityAfterProcLockedSection();
                 throw th;
@@ -685,7 +781,8 @@ public final class AppErrors {
         ActivityManagerService.resetPriorityAfterProcLockedSection();
     }
 
-    public final void killAppImmediateLSP(ProcessRecord processRecord, int i, int i2, String str, String str2) {
+    public final void killAppImmediateLSP(
+            ProcessRecord processRecord, int i, int i2, String str, String str2) {
         ProcessErrorStateRecord processErrorStateRecord = processRecord.mErrorState;
         processErrorStateRecord.mCrashing = false;
         processErrorStateRecord.mApp.mWindowProcessController.mCrashing = false;
@@ -702,7 +799,12 @@ public final class AppErrors {
         processRecord.killLocked(i, i2, str2, str2, true, true);
     }
 
-    public final boolean makeAppCrashingLocked(ProcessRecord processRecord, String str, String str2, String str3, AppErrorDialog.Data data) {
+    public final boolean makeAppCrashingLocked(
+            ProcessRecord processRecord,
+            String str,
+            String str2,
+            String str3,
+            AppErrorDialog.Data data) {
         boolean handleAppCrashLSPB;
         ActivityManagerGlobalLock activityManagerGlobalLock = this.mProcLock;
         ActivityManagerService.boostPriorityForProcLockedSection();
@@ -711,11 +813,13 @@ public final class AppErrors {
                 ProcessErrorStateRecord processErrorStateRecord = processRecord.mErrorState;
                 processErrorStateRecord.mCrashing = true;
                 processErrorStateRecord.mApp.mWindowProcessController.mCrashing = true;
-                processErrorStateRecord.mCrashingReport = generateProcessError(processRecord, 1, null, str, str2, str3);
+                processErrorStateRecord.mCrashingReport =
+                        generateProcessError(processRecord, 1, null, str, str2, str3);
                 processErrorStateRecord.startAppProblemLSP();
                 processRecord.mWindowProcessController.stopFreezingActivities();
                 synchronized (this.mBadProcessLock) {
-                    handleAppCrashLSPB = handleAppCrashLSPB(processRecord, "force-crash", str, str2, str3, data);
+                    handleAppCrashLSPB =
+                            handleAppCrashLSPB(processRecord, "force-crash", str, str2, str3, data);
                 }
             } catch (Throwable th) {
                 ActivityManagerService.resetPriorityAfterProcLockedSection();
@@ -726,7 +830,8 @@ public final class AppErrors {
         return handleAppCrashLSPB;
     }
 
-    public final void scheduleAppCrashLocked(int i, int i2, String str, int i3, String str2, boolean z, int i4, Bundle bundle) {
+    public final void scheduleAppCrashLocked(
+            int i, int i2, String str, int i3, String str2, boolean z, int i4, Bundle bundle) {
         int i5;
         final ProcessRecord processRecord;
         synchronized (this.mService.mPidsSelfLocked) {
@@ -742,7 +847,8 @@ public final class AppErrors {
                         if (valueAt.mPid == i2) {
                             processRecord = valueAt;
                             break;
-                        } else if (valueAt.mPkgList.containsKey(str) && (i3 < 0 || valueAt.userId == i3)) {
+                        } else if (valueAt.mPkgList.containsKey(str)
+                                && (i3 < 0 || valueAt.userId == i3)) {
                             processRecord = valueAt;
                         }
                     }
@@ -753,7 +859,13 @@ public final class AppErrors {
             }
         }
         if (processRecord == null) {
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "crashApplication: nothing for uid=", " initialPid=", " packageName=");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i,
+                            i2,
+                            "crashApplication: nothing for uid=",
+                            " initialPid=",
+                            " packageName=");
             m.append(str);
             m.append(" userId=");
             m.append(i3);
@@ -764,8 +876,12 @@ public final class AppErrors {
             String[] packageList = processRecord.mPkgList.getPackageList();
             for (i5 = 0; i5 < packageList.length; i5++) {
                 PackageManagerInternal packageManagerInternal = this.mService.mPackageManagerInt;
-                if (PackageManagerService.this.mProtectedPackages.isPackageStateProtected(processRecord.userId, packageList[i5])) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("crashApplication: Can not crash protected package "), packageList[i5], "ActivityManager");
+                if (PackageManagerService.this.mProtectedPackages.isPackageStateProtected(
+                        processRecord.userId, packageList[i5])) {
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("crashApplication: Can not crash protected package "),
+                            packageList[i5],
+                            "ActivityManager");
                     return;
                 }
             }
@@ -788,34 +904,44 @@ public final class AppErrors {
             }
         }
         if (z) {
-            this.mService.mHandler.postDelayed(new Runnable() { // from class: com.android.server.am.AppErrors$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AppErrors appErrors = AppErrors.this;
-                    ProcessRecord processRecord2 = processRecord;
-                    ActivityManagerService activityManagerService = appErrors.mService;
-                    ActivityManagerService.boostPriorityForLockedSection();
-                    synchronized (activityManagerService) {
-                        try {
-                            ActivityManagerGlobalLock activityManagerGlobalLock = appErrors.mProcLock;
-                            ActivityManagerService.boostPriorityForProcLockedSection();
-                            synchronized (activityManagerGlobalLock) {
+            this.mService.mHandler.postDelayed(
+                    new Runnable() { // from class:
+                                     // com.android.server.am.AppErrors$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AppErrors appErrors = AppErrors.this;
+                            ProcessRecord processRecord2 = processRecord;
+                            ActivityManagerService activityManagerService = appErrors.mService;
+                            ActivityManagerService.boostPriorityForLockedSection();
+                            synchronized (activityManagerService) {
                                 try {
-                                    appErrors.killAppImmediateLSP(processRecord2, 13, 14, "forced", "killed for invalid state");
-                                } catch (Throwable th2) {
+                                    ActivityManagerGlobalLock activityManagerGlobalLock =
+                                            appErrors.mProcLock;
+                                    ActivityManagerService.boostPriorityForProcLockedSection();
+                                    synchronized (activityManagerGlobalLock) {
+                                        try {
+                                            appErrors.killAppImmediateLSP(
+                                                    processRecord2,
+                                                    13,
+                                                    14,
+                                                    "forced",
+                                                    "killed for invalid state");
+                                        } catch (Throwable th2) {
+                                            ActivityManagerService
+                                                    .resetPriorityAfterProcLockedSection();
+                                            throw th2;
+                                        }
+                                    }
                                     ActivityManagerService.resetPriorityAfterProcLockedSection();
-                                    throw th2;
+                                } catch (Throwable th3) {
+                                    ActivityManagerService.resetPriorityAfterLockedSection();
+                                    throw th3;
                                 }
                             }
-                            ActivityManagerService.resetPriorityAfterProcLockedSection();
-                        } catch (Throwable th3) {
                             ActivityManagerService.resetPriorityAfterLockedSection();
-                            throw th3;
                         }
-                    }
-                    ActivityManagerService.resetPriorityAfterLockedSection();
-                }
-            }, 5000L);
+                    },
+                    5000L);
         }
     }
 }

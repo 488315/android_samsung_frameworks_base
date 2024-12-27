@@ -4,7 +4,9 @@ import android.os.Environment;
 import android.security.keystore.KeyProtection;
 import android.security.keystore2.AndroidKeyStoreLoadStoreParameter;
 import android.util.Log;
+
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.util.Arrays;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -36,7 +39,10 @@ public final class KeyProtector {
     public static boolean checkSecretKey(String str) {
         try {
             return getKeyStore().containsAlias(str);
-        } catch (IOException | KeyStoreException | NoSuchAlgorithmException | CertificateException e) {
+        } catch (IOException
+                | KeyStoreException
+                | NoSuchAlgorithmException
+                | CertificateException e) {
             Log.e("KeyProtectorBase", "Failed to check secret key - " + str);
             e.printStackTrace();
             return false;
@@ -66,7 +72,12 @@ public final class KeyProtector {
         String attach = attach(i, str);
         boolean z = false;
         boolean z2 = !checkSecretKey(attach) || (checkSecretKey(attach) && deleteSecretKey(attach));
-        String str2 = Environment.getUserSystemDirectory(i).getAbsolutePath() + "/ENCRYPTED_KEY_" + str + "_" + i;
+        String str2 =
+                Environment.getUserSystemDirectory(i).getAbsolutePath()
+                        + "/ENCRYPTED_KEY_"
+                        + str
+                        + "_"
+                        + i;
         Log.d("KeyProtector", "deleteFile - File path : " + str2);
         File file = new File(str2);
         if (file.exists()) {
@@ -89,7 +100,10 @@ public final class KeyProtector {
         try {
             getKeyStore().deleteEntry(str);
             return true;
-        } catch (IOException | KeyStoreException | NoSuchAlgorithmException | CertificateException e) {
+        } catch (IOException
+                | KeyStoreException
+                | NoSuchAlgorithmException
+                | CertificateException e) {
             Log.e("KeyProtectorBase", "Failed to delete secret key - " + str);
             e.printStackTrace();
             return false;
@@ -131,7 +145,11 @@ public final class KeyProtector {
     public static SecretKey getSecretKey(String str) {
         try {
             return (SecretKey) getKeyStore().getKey(str, null);
-        } catch (IOException | KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException | CertificateException e) {
+        } catch (IOException
+                | KeyStoreException
+                | NoSuchAlgorithmException
+                | UnrecoverableKeyException
+                | CertificateException e) {
             Log.e("KeyProtectorBase", "Failed to get secret key - " + str);
             e.printStackTrace();
             return null;
@@ -139,17 +157,17 @@ public final class KeyProtector {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:35:0x00c4, code lost:
-    
-        if (r0 == null) goto L46;
-     */
+
+       if (r0 == null) goto L46;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x00bd, code lost:
-    
-        r0.close();
-     */
+
+       r0.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:45:0x00bb, code lost:
-    
-        if (r0 == null) goto L46;
-     */
+
+       if (r0 == null) goto L46;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -159,16 +177,29 @@ public final class KeyProtector {
             Method dump skipped, instructions count: 249
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.dar.KeyProtector.protect(int, java.lang.String, byte[]):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.knox.dar.KeyProtector.protect(int,"
+                    + " java.lang.String, byte[]):boolean");
     }
 
     public static boolean setSecretKey(String str) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             keyGenerator.init(256, new SecureRandom());
-            getKeyStore().setEntry(str, new KeyStore.SecretKeyEntry(keyGenerator.generateKey()), new KeyProtection.Builder(3).setBlockModes("GCM").setEncryptionPaddings("NoPadding").setCriticalToDeviceEncryption(true).build());
+            getKeyStore()
+                    .setEntry(
+                            str,
+                            new KeyStore.SecretKeyEntry(keyGenerator.generateKey()),
+                            new KeyProtection.Builder(3)
+                                    .setBlockModes("GCM")
+                                    .setEncryptionPaddings("NoPadding")
+                                    .setCriticalToDeviceEncryption(true)
+                                    .build());
             return true;
-        } catch (IOException | KeyStoreException | NoSuchAlgorithmException | CertificateException e) {
+        } catch (IOException
+                | KeyStoreException
+                | NoSuchAlgorithmException
+                | CertificateException e) {
             Log.e("KeyProtectorBase", "Failed to set secret key - " + str);
             e.printStackTrace();
             return false;

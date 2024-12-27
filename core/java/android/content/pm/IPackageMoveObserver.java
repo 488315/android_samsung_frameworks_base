@@ -15,12 +15,11 @@ public interface IPackageMoveObserver extends IInterface {
 
     public static class Default implements IPackageMoveObserver {
         @Override // android.content.pm.IPackageMoveObserver
-        public void onCreated(int moveId, Bundle extras) throws RemoteException {
-        }
+        public void onCreated(int moveId, Bundle extras) throws RemoteException {}
 
         @Override // android.content.pm.IPackageMoveObserver
-        public void onStatusChanged(int moveId, int status, long estMillis) throws RemoteException {
-        }
+        public void onStatusChanged(int moveId, int status, long estMillis)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +27,7 @@ public interface IPackageMoveObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPackageMoveObserver {
+    public abstract static class Stub extends Binder implements IPackageMoveObserver {
         public static final String DESCRIPTOR = "android.content.pm.IPackageMoveObserver";
         static final int TRANSACTION_onCreated = 1;
         static final int TRANSACTION_onStatusChanged = 2;
@@ -70,7 +69,8 @@ public interface IPackageMoveObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -127,7 +127,8 @@ public interface IPackageMoveObserver extends IInterface {
             }
 
             @Override // android.content.pm.IPackageMoveObserver
-            public void onStatusChanged(int moveId, int status, long estMillis) throws RemoteException {
+            public void onStatusChanged(int moveId, int status, long estMillis)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

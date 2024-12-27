@@ -4,8 +4,7 @@ package com.android.framework.protobuf;
 class GeneratedMessageInfoFactory implements MessageInfoFactory {
     private static final GeneratedMessageInfoFactory instance = new GeneratedMessageInfoFactory();
 
-    private GeneratedMessageInfoFactory() {
-    }
+    private GeneratedMessageInfoFactory() {}
 
     public static GeneratedMessageInfoFactory getInstance() {
         return instance;
@@ -19,12 +18,17 @@ class GeneratedMessageInfoFactory implements MessageInfoFactory {
     @Override // com.android.framework.protobuf.MessageInfoFactory
     public MessageInfo messageInfoFor(Class<?> messageType) {
         if (!GeneratedMessageLite.class.isAssignableFrom(messageType)) {
-            throw new IllegalArgumentException("Unsupported message type: " + messageType.getName());
+            throw new IllegalArgumentException(
+                    "Unsupported message type: " + messageType.getName());
         }
         try {
-            return (MessageInfo) GeneratedMessageLite.getDefaultInstance(messageType.asSubclass(GeneratedMessageLite.class)).buildMessageInfo();
+            return (MessageInfo)
+                    GeneratedMessageLite.getDefaultInstance(
+                                    messageType.asSubclass(GeneratedMessageLite.class))
+                            .buildMessageInfo();
         } catch (Exception e) {
-            throw new RuntimeException("Unable to get message info for " + messageType.getName(), e);
+            throw new RuntimeException(
+                    "Unable to get message info for " + messageType.getName(), e);
         }
     }
 }

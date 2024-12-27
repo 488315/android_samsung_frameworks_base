@@ -24,7 +24,8 @@ public class SContextStepCountAlertAttribute extends SContextAttribute {
         return this.mStepCount;
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mStepCount < 0) {
             Log.e(TAG, "The step count is wrong.");

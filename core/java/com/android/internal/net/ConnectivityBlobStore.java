@@ -7,13 +7,16 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Binder;
 import android.util.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public class ConnectivityBlobStore {
-    private static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS blob_table (owner INTEGER,name BLOB,blob BLOB,UNIQUE(owner, name));";
+    private static final String CREATE_TABLE =
+            "CREATE TABLE IF NOT EXISTS blob_table (owner INTEGER,name BLOB,blob BLOB,UNIQUE(owner,"
+                + " name));";
     private static final String ROOT_DIR = "/data/misc/connectivityblobdb/";
     private static final String TABLENAME = "blob_table";
     private static final String TAG = ConnectivityBlobStore.class.getSimpleName();
@@ -24,7 +27,11 @@ public class ConnectivityBlobStore {
     }
 
     public ConnectivityBlobStore(File file) {
-        SQLiteDatabase.OpenParams params = new SQLiteDatabase.OpenParams.Builder().addOpenFlags(268435456).addOpenFlags(536870912).build();
+        SQLiteDatabase.OpenParams params =
+                new SQLiteDatabase.OpenParams.Builder()
+                        .addOpenFlags(268435456)
+                        .addOpenFlags(536870912)
+                        .build();
         this.mDb = SQLiteDatabase.openDatabase(file, params);
         this.mDb.execSQL(CREATE_TABLE);
     }
@@ -42,7 +49,15 @@ public class ConnectivityBlobStore {
     public byte[] get(String name) {
         int ownerUid = Binder.getCallingUid();
         try {
-            Cursor cursor = this.mDb.query(TABLENAME, new String[]{"blob"}, "owner=? AND name=?", new String[]{Integer.toString(ownerUid), name}, null, null, null);
+            Cursor cursor =
+                    this.mDb.query(
+                            TABLENAME,
+                            new String[] {"blob"},
+                            "owner=? AND name=?",
+                            new String[] {Integer.toString(ownerUid), name},
+                            null,
+                            null,
+                            null);
             try {
                 if (cursor.moveToFirst()) {
                     byte[] blob = cursor.getBlob(0);
@@ -67,7 +82,11 @@ public class ConnectivityBlobStore {
     public boolean remove(String name) {
         int ownerUid = Binder.getCallingUid();
         try {
-            int res = this.mDb.delete(TABLENAME, "owner=? AND name=?", new String[]{Integer.toString(ownerUid), name});
+            int res =
+                    this.mDb.delete(
+                            TABLENAME,
+                            "owner=? AND name=?",
+                            new String[] {Integer.toString(ownerUid), name});
             return res > 0;
         } catch (SQLException e) {
             Log.e(TAG, "Error in removing " + name + ": " + e);
@@ -79,7 +98,18 @@ public class ConnectivityBlobStore {
         int ownerUid = Binder.getCallingUid();
         List<String> names = new ArrayList<>();
         try {
-            Cursor cursor = this.mDb.query(TABLENAME, new String[]{"name"}, "owner=? AND name LIKE ? ESCAPE '\\'", new String[]{Integer.toString(ownerUid), DatabaseUtils.escapeForLike(prefix) + "%"}, null, null, "name ASC");
+            Cursor cursor =
+                    this.mDb.query(
+                            TABLENAME,
+                            new String[] {"name"},
+                            "owner=? AND name LIKE ? ESCAPE '\\'",
+                            new String[] {
+                                Integer.toString(ownerUid),
+                                DatabaseUtils.escapeForLike(prefix) + "%"
+                            },
+                            null,
+                            null,
+                            "name ASC");
             try {
                 if (cursor.moveToFirst()) {
                     do {

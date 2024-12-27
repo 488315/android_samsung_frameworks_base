@@ -10,7 +10,8 @@ public final /* synthetic */ class DisplayContent$$ExternalSyntheticLambda12 imp
     public final /* synthetic */ int[] f$0;
     public final /* synthetic */ ArrayList f$1;
 
-    public /* synthetic */ DisplayContent$$ExternalSyntheticLambda12(int[] iArr, ArrayList arrayList, int i) {
+    public /* synthetic */ DisplayContent$$ExternalSyntheticLambda12(
+            int[] iArr, ArrayList arrayList, int i) {
         this.$r8$classId = i;
         this.f$0 = iArr;
         this.f$1 = arrayList;
@@ -24,7 +25,9 @@ public final /* synthetic */ class DisplayContent$$ExternalSyntheticLambda12 imp
                 ArrayList arrayList = this.f$1;
                 Task task = (Task) obj;
                 for (int i : iArr) {
-                    if (!task.mCreatedByOrganizer && task.getWindowingMode() == i && task.isActivityTypeStandardOrUndefined()) {
+                    if (!task.mCreatedByOrganizer
+                            && task.getWindowingMode() == i
+                            && task.isActivityTypeStandardOrUndefined()) {
                         arrayList.add(task);
                     }
                 }
@@ -35,7 +38,9 @@ public final /* synthetic */ class DisplayContent$$ExternalSyntheticLambda12 imp
                 Task task2 = (Task) obj;
                 for (int i2 : iArr2) {
                     if (task2.mCreatedByOrganizer) {
-                        for (int childCount = task2.getChildCount() - 1; childCount >= 0; childCount--) {
+                        for (int childCount = task2.getChildCount() - 1;
+                                childCount >= 0;
+                                childCount--) {
                             Task task3 = (Task) task2.getChildAt(childCount);
                             if (task3.getActivityType() == i2) {
                                 arrayList2.add(task3);

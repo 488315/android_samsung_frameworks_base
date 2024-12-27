@@ -12,13 +12,15 @@ public interface IVoldListener extends IInterface {
 
     void onEncryptionStateChanged(String str, String str2, String str3) throws RemoteException;
 
-    void onVolumeCreated(String str, int i, String str2, String str3, int i2) throws RemoteException;
+    void onVolumeCreated(String str, int i, String str2, String str3, int i2)
+            throws RemoteException;
 
     void onVolumeDestroyed(String str) throws RemoteException;
 
     void onVolumeInternalPathChanged(String str, String str2) throws RemoteException;
 
-    void onVolumeMetadataChanged(String str, String str2, String str3, String str4) throws RemoteException;
+    void onVolumeMetadataChanged(String str, String str2, String str3, String str4)
+            throws RemoteException;
 
     void onVolumePathChanged(String str, String str2) throws RemoteException;
 
@@ -28,52 +30,49 @@ public interface IVoldListener extends IInterface {
 
     public static class Default implements IVoldListener {
         @Override // android.os.IVoldListener
-        public void onDiskCreated(String diskId, int flags) throws RemoteException {
-        }
+        public void onDiskCreated(String diskId, int flags) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onDiskScanned(String diskId) throws RemoteException {
-        }
+        public void onDiskScanned(String diskId) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onDiskMetadataChanged(String diskId, long sizeBytes, String label, String sysPath) throws RemoteException {
-        }
+        public void onDiskMetadataChanged(
+                String diskId, long sizeBytes, String label, String sysPath)
+                throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onDiskDestroyed(String diskId) throws RemoteException {
-        }
+        public void onDiskDestroyed(String diskId) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumeCreated(String volId, int type, String diskId, String partGuid, int userId) throws RemoteException {
-        }
+        public void onVolumeCreated(
+                String volId, int type, String diskId, String partGuid, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumeStateChanged(String volId, int state, int userId) throws RemoteException {
-        }
+        public void onVolumeStateChanged(String volId, int state, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumeMetadataChanged(String volId, String fsType, String fsUuid, String fsLabel) throws RemoteException {
-        }
+        public void onVolumeMetadataChanged(
+                String volId, String fsType, String fsUuid, String fsLabel)
+                throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumePathChanged(String volId, String path) throws RemoteException {
-        }
+        public void onVolumePathChanged(String volId, String path) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumeInternalPathChanged(String volId, String internalPath) throws RemoteException {
-        }
+        public void onVolumeInternalPathChanged(String volId, String internalPath)
+                throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumeDestroyed(String volId) throws RemoteException {
-        }
+        public void onVolumeDestroyed(String volId) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void sendVoldMessage(String message) throws RemoteException {
-        }
+        public void sendVoldMessage(String message) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onEncryptionStateChanged(String volId, String state, String type) throws RemoteException {
-        }
+        public void onEncryptionStateChanged(String volId, String state, String type)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -81,7 +80,7 @@ public interface IVoldListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoldListener {
+    public abstract static class Stub extends Binder implements IVoldListener {
         public static final String DESCRIPTOR = "android.os.IVoldListener";
         static final int TRANSACTION_onDiskCreated = 1;
         static final int TRANSACTION_onDiskDestroyed = 4;
@@ -153,7 +152,8 @@ public interface IVoldListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -286,7 +286,9 @@ public interface IVoldListener extends IInterface {
             }
 
             @Override // android.os.IVoldListener
-            public void onDiskMetadataChanged(String diskId, long sizeBytes, String label, String sysPath) throws RemoteException {
+            public void onDiskMetadataChanged(
+                    String diskId, long sizeBytes, String label, String sysPath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -313,7 +315,9 @@ public interface IVoldListener extends IInterface {
             }
 
             @Override // android.os.IVoldListener
-            public void onVolumeCreated(String volId, int type, String diskId, String partGuid, int userId) throws RemoteException {
+            public void onVolumeCreated(
+                    String volId, int type, String diskId, String partGuid, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -329,7 +333,8 @@ public interface IVoldListener extends IInterface {
             }
 
             @Override // android.os.IVoldListener
-            public void onVolumeStateChanged(String volId, int state, int userId) throws RemoteException {
+            public void onVolumeStateChanged(String volId, int state, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -343,7 +348,9 @@ public interface IVoldListener extends IInterface {
             }
 
             @Override // android.os.IVoldListener
-            public void onVolumeMetadataChanged(String volId, String fsType, String fsUuid, String fsLabel) throws RemoteException {
+            public void onVolumeMetadataChanged(
+                    String volId, String fsType, String fsUuid, String fsLabel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -371,7 +378,8 @@ public interface IVoldListener extends IInterface {
             }
 
             @Override // android.os.IVoldListener
-            public void onVolumeInternalPathChanged(String volId, String internalPath) throws RemoteException {
+            public void onVolumeInternalPathChanged(String volId, String internalPath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -408,7 +416,8 @@ public interface IVoldListener extends IInterface {
             }
 
             @Override // android.os.IVoldListener
-            public void onEncryptionStateChanged(String volId, String state, String type) throws RemoteException {
+            public void onEncryptionStateChanged(String volId, String state, String type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

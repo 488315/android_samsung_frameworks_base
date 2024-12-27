@@ -2,6 +2,7 @@ package com.samsung.android.knox.analytics.service;
 
 import android.content.Context;
 import android.os.ServiceManager;
+
 import com.samsung.android.knox.analytics.util.Log;
 import com.samsung.android.knox.knoxanalyticsproxy.IKnoxAnalyticsProxy;
 import com.samsung.android.knox.knoxanalyticsproxy.KnoxAnalyticsData;
@@ -17,7 +18,9 @@ public final class KnoxAnalyticsProxyService extends IKnoxAnalyticsProxy.Stub {
     }
 
     public final void log(KnoxAnalyticsData knoxAnalyticsData) {
-        KnoxAnalyticsServiceImpl knoxAnalyticsServiceImpl = (KnoxAnalyticsServiceImpl) ServiceManager.getService(KnoxAnalyticsSystemService.ANALYTICS_SERVICE);
+        KnoxAnalyticsServiceImpl knoxAnalyticsServiceImpl =
+                (KnoxAnalyticsServiceImpl)
+                        ServiceManager.getService(KnoxAnalyticsSystemService.ANALYTICS_SERVICE);
         if (knoxAnalyticsServiceImpl == null) {
             return;
         }

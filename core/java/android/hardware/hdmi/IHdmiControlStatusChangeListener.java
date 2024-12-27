@@ -8,14 +8,15 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IHdmiControlStatusChangeListener extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.hdmi.IHdmiControlStatusChangeListener";
+    public static final String DESCRIPTOR =
+            "android.hardware.hdmi.IHdmiControlStatusChangeListener";
 
     void onStatusChange(int i, boolean z) throws RemoteException;
 
     public static class Default implements IHdmiControlStatusChangeListener {
         @Override // android.hardware.hdmi.IHdmiControlStatusChangeListener
-        public void onStatusChange(int isCecEnabled, boolean isCecAvailable) throws RemoteException {
-        }
+        public void onStatusChange(int isCecEnabled, boolean isCecAvailable)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface IHdmiControlStatusChangeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHdmiControlStatusChangeListener {
+    public abstract static class Stub extends Binder implements IHdmiControlStatusChangeListener {
         static final int TRANSACTION_onStatusChange = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface IHdmiControlStatusChangeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IHdmiControlStatusChangeListener.DESCRIPTOR);
             }
@@ -98,7 +100,8 @@ public interface IHdmiControlStatusChangeListener extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlStatusChangeListener
-            public void onStatusChange(int isCecEnabled, boolean isCecAvailable) throws RemoteException {
+            public void onStatusChange(int isCecEnabled, boolean isCecAvailable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IHdmiControlStatusChangeListener.DESCRIPTOR);

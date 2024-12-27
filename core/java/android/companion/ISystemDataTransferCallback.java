@@ -16,12 +16,10 @@ public interface ISystemDataTransferCallback extends IInterface {
 
     public static class Default implements ISystemDataTransferCallback {
         @Override // android.companion.ISystemDataTransferCallback
-        public void onResult() throws RemoteException {
-        }
+        public void onResult() throws RemoteException {}
 
         @Override // android.companion.ISystemDataTransferCallback
-        public void onError(String error) throws RemoteException {
-        }
+        public void onError(String error) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ISystemDataTransferCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISystemDataTransferCallback {
+    public abstract static class Stub extends Binder implements ISystemDataTransferCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onResult = 1;
 
@@ -70,7 +68,8 @@ public interface ISystemDataTransferCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISystemDataTransferCallback.DESCRIPTOR);
             }

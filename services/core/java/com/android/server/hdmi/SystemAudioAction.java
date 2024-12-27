@@ -4,7 +4,7 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.hardware.hdmi.IHdmiControlCallback;
 import android.util.Pair;
 import android.util.Slog;
-import com.android.server.hdmi.HdmiControlService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,11 @@ public abstract class SystemAudioAction extends HdmiCecFeatureAction {
     public int mSendRetryCount;
     public boolean mTargetAudioStatus;
 
-    public SystemAudioAction(HdmiCecLocalDevice hdmiCecLocalDevice, int i, IHdmiControlCallback iHdmiControlCallback, boolean z) {
+    public SystemAudioAction(
+            HdmiCecLocalDevice hdmiCecLocalDevice,
+            int i,
+            IHdmiControlCallback iHdmiControlCallback,
+            boolean z) {
         super(hdmiCecLocalDevice, iHdmiControlCallback);
         this.mSendRetryCount = 0;
         if (!HdmiUtils.verifyAddressType(i, 5)) {
@@ -59,13 +63,16 @@ public abstract class SystemAudioAction extends HdmiCecFeatureAction {
             return true;
         }
         if (i3 == 114 && HdmiUtils.checkCommandSource(hdmiCecMessage, i2, "SystemAudioAction")) {
-            boolean parseCommandParamSystemAudioStatus = HdmiUtils.parseCommandParamSystemAudioStatus(hdmiCecMessage);
+            boolean parseCommandParamSystemAudioStatus =
+                    HdmiUtils.parseCommandParamSystemAudioStatus(hdmiCecMessage);
             if (parseCommandParamSystemAudioStatus == this.mTargetAudioStatus) {
                 setSystemAudioMode(parseCommandParamSystemAudioStatus);
                 finish(true);
                 return true;
             }
-            HdmiLogger.debug("Unexpected system audio mode request:" + parseCommandParamSystemAudioStatus, new Object[0]);
+            HdmiLogger.debug(
+                    "Unexpected system audio mode request:" + parseCommandParamSystemAudioStatus,
+                    new Object[0]);
             finishWithCallback(5);
         }
         return false;
@@ -79,12 +86,13 @@ public abstract class SystemAudioAction extends HdmiCecFeatureAction {
         }
         this.mState = 1;
         RoutingControlAction routingControlAction = (RoutingControlAction) actions.get(0);
-        Runnable runnable = new Runnable() { // from class: com.android.server.hdmi.SystemAudioAction.1
-            @Override // java.lang.Runnable
-            public final void run() {
-                SystemAudioAction.this.sendSystemAudioModeRequestInternal();
-            }
-        };
+        Runnable runnable =
+                new Runnable() { // from class: com.android.server.hdmi.SystemAudioAction.1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SystemAudioAction.this.sendSystemAudioModeRequestInternal();
+                    }
+                };
         if (routingControlAction.mOnFinishedCallbacks == null) {
             routingControlAction.mOnFinishedCallbacks = new ArrayList();
         }
@@ -95,7 +103,8 @@ public abstract class SystemAudioAction extends HdmiCecFeatureAction {
         int activePath;
         int sourceAddress = getSourceAddress();
         HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv = (HdmiCecLocalDeviceTv) this.mSource;
-        if (HdmiUtils.isValidAddress(hdmiCecLocalDeviceTv.mService.getLocalActiveSource().logicalAddress)) {
+        if (HdmiUtils.isValidAddress(
+                hdmiCecLocalDeviceTv.mService.getLocalActiveSource().logicalAddress)) {
             activePath = hdmiCecLocalDeviceTv.mService.getLocalActiveSource().physicalAddress;
         } else {
             activePath = hdmiCecLocalDeviceTv.getActivePath();
@@ -105,17 +114,30 @@ public abstract class SystemAudioAction extends HdmiCecFeatureAction {
         }
         boolean z = this.mTargetAudioStatus;
         int i = this.mAvrLogicalAddress;
-        this.mService.sendCecCommand(z ? HdmiCecMessage.build(sourceAddress, i, 112, HdmiCecMessageBuilder.physicalAddressToParam(activePath)) : HdmiCecMessage.build(sourceAddress, i, 112), new HdmiControlService.SendMessageCallback() { // from class: com.android.server.hdmi.SystemAudioAction.2
-            @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
-            public final void onSendCompleted(int i2) {
-                if (i2 != 0) {
-                    HdmiLogger.debug(VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "Failed to send <System Audio Mode Request>:"), new Object[0]);
-                    SystemAudioAction systemAudioAction = SystemAudioAction.this;
-                    systemAudioAction.setSystemAudioMode(false);
-                    systemAudioAction.finishWithCallback(7);
-                }
-            }
-        });
+        this.mService.sendCecCommand(
+                z
+                        ? HdmiCecMessage.build(
+                                sourceAddress,
+                                i,
+                                112,
+                                HdmiCecMessageBuilder.physicalAddressToParam(activePath))
+                        : HdmiCecMessage.build(sourceAddress, i, 112),
+                new HdmiControlService
+                        .SendMessageCallback() { // from class:
+                                                 // com.android.server.hdmi.SystemAudioAction.2
+                    @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
+                    public final void onSendCompleted(int i2) {
+                        if (i2 != 0) {
+                            HdmiLogger.debug(
+                                    VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                            i2, "Failed to send <System Audio Mode Request>:"),
+                                    new Object[0]);
+                            SystemAudioAction systemAudioAction = SystemAudioAction.this;
+                            systemAudioAction.setSystemAudioMode(false);
+                            systemAudioAction.finishWithCallback(7);
+                        }
+                    }
+                });
         this.mState = 2;
         addTimer(2, this.mTargetAudioStatus ? 5000 : 2000);
     }

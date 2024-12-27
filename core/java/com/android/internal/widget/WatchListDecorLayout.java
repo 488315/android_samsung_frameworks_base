@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
-public class WatchListDecorLayout extends FrameLayout implements ViewTreeObserver.OnScrollChangedListener {
+public class WatchListDecorLayout extends FrameLayout
+        implements ViewTreeObserver.OnScrollChangedListener {
     private View mBottomPanel;
     private int mForegroundPaddingBottom;
     private int mForegroundPaddingLeft;
@@ -42,7 +44,8 @@ public class WatchListDecorLayout extends FrameLayout implements ViewTreeObserve
         this.mMatchParentChildren = new ArrayList<>(1);
     }
 
-    public WatchListDecorLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public WatchListDecorLayout(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mForegroundPaddingLeft = 0;
         this.mForegroundPaddingTop = 0;
@@ -94,16 +97,42 @@ public class WatchListDecorLayout extends FrameLayout implements ViewTreeObserve
         int childHeightMeasureSpec;
         ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
         if (lp.width == -1) {
-            int width2 = Math.max(0, (((getMeasuredWidth() - getPaddingLeftWithForeground()) - getPaddingRightWithForeground()) - lp.leftMargin) - lp.rightMargin);
+            int width2 =
+                    Math.max(
+                            0,
+                            (((getMeasuredWidth() - getPaddingLeftWithForeground())
+                                                    - getPaddingRightWithForeground())
+                                            - lp.leftMargin)
+                                    - lp.rightMargin);
             width = View.MeasureSpec.makeMeasureSpec(width2, 1073741824);
         } else {
-            width = getChildMeasureSpec(widthMeasureSpec, getPaddingLeftWithForeground() + getPaddingRightWithForeground() + lp.leftMargin + lp.rightMargin, lp.width);
+            width =
+                    getChildMeasureSpec(
+                            widthMeasureSpec,
+                            getPaddingLeftWithForeground()
+                                    + getPaddingRightWithForeground()
+                                    + lp.leftMargin
+                                    + lp.rightMargin,
+                            lp.width);
         }
         if (lp.height == -1) {
-            int height = Math.max(0, (((getMeasuredHeight() - getPaddingTopWithForeground()) - getPaddingBottomWithForeground()) - lp.topMargin) - lp.bottomMargin);
+            int height =
+                    Math.max(
+                            0,
+                            (((getMeasuredHeight() - getPaddingTopWithForeground())
+                                                    - getPaddingBottomWithForeground())
+                                            - lp.topMargin)
+                                    - lp.bottomMargin);
             childHeightMeasureSpec = View.MeasureSpec.makeMeasureSpec(height, 1073741824);
         } else {
-            childHeightMeasureSpec = getChildMeasureSpec(heightMeasureSpec, getPaddingTopWithForeground() + getPaddingBottomWithForeground() + lp.topMargin + lp.bottomMargin, lp.height);
+            childHeightMeasureSpec =
+                    getChildMeasureSpec(
+                            heightMeasureSpec,
+                            getPaddingTopWithForeground()
+                                    + getPaddingBottomWithForeground()
+                                    + lp.topMargin
+                                    + lp.bottomMargin,
+                            lp.height);
         }
         child.measure(width, childHeightMeasureSpec);
     }
@@ -127,7 +156,11 @@ public class WatchListDecorLayout extends FrameLayout implements ViewTreeObserve
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int i;
         int count = getChildCount();
-        boolean measureMatchParentChildren = (View.MeasureSpec.getMode(widthMeasureSpec) == 1073741824 && View.MeasureSpec.getMode(heightMeasureSpec) == 1073741824) ? false : true;
+        boolean measureMatchParentChildren =
+                (View.MeasureSpec.getMode(widthMeasureSpec) == 1073741824
+                                && View.MeasureSpec.getMode(heightMeasureSpec) == 1073741824)
+                        ? false
+                        : true;
         this.mMatchParentChildren.clear();
         int maxHeight = 0;
         int maxWidth = 0;
@@ -139,8 +172,14 @@ public class WatchListDecorLayout extends FrameLayout implements ViewTreeObserve
                 i = i2;
                 measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0);
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) child.getLayoutParams();
-                int maxWidth2 = Math.max(maxWidth, child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin);
-                int maxHeight2 = Math.max(maxHeight, child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin);
+                int maxWidth2 =
+                        Math.max(
+                                maxWidth,
+                                child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin);
+                int maxHeight2 =
+                        Math.max(
+                                maxHeight,
+                                child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin);
                 int childState2 = combineMeasuredStates(childState, child.getMeasuredState());
                 if (measureMatchParentChildren && (lp.width == -1 || lp.height == -1)) {
                     this.mMatchParentChildren.add(child);
@@ -154,31 +193,52 @@ public class WatchListDecorLayout extends FrameLayout implements ViewTreeObserve
             i2 = i + 1;
         }
         int maxWidth3 = maxWidth + getPaddingLeftWithForeground() + getPaddingRightWithForeground();
-        int maxHeight3 = Math.max(maxHeight + getPaddingTopWithForeground() + getPaddingBottomWithForeground(), getSuggestedMinimumHeight());
+        int maxHeight3 =
+                Math.max(
+                        maxHeight
+                                + getPaddingTopWithForeground()
+                                + getPaddingBottomWithForeground(),
+                        getSuggestedMinimumHeight());
         int maxWidth4 = Math.max(maxWidth3, getSuggestedMinimumWidth());
         Drawable drawable = getForeground();
         if (drawable != null) {
             maxHeight3 = Math.max(maxHeight3, drawable.getMinimumHeight());
             maxWidth4 = Math.max(maxWidth4, drawable.getMinimumWidth());
         }
-        setMeasuredDimension(resolveSizeAndState(maxWidth4, widthMeasureSpec, childState), resolveSizeAndState(maxHeight3, heightMeasureSpec, childState << 16));
+        setMeasuredDimension(
+                resolveSizeAndState(maxWidth4, widthMeasureSpec, childState),
+                resolveSizeAndState(maxHeight3, heightMeasureSpec, childState << 16));
         if (this.mListView != null) {
             if (this.mPendingScroll != 0) {
                 this.mListView.scrollListBy(this.mPendingScroll);
                 this.mPendingScroll = 0;
             }
-            int paddingTop = Math.max(this.mListView.getPaddingTop(), measureAndGetHeight(this.mTopPanel, widthMeasureSpec, heightMeasureSpec));
-            int paddingBottom = Math.max(this.mListView.getPaddingBottom(), measureAndGetHeight(this.mBottomPanel, widthMeasureSpec, heightMeasureSpec));
-            if (paddingTop != this.mListView.getPaddingTop() || paddingBottom != this.mListView.getPaddingBottom()) {
+            int paddingTop =
+                    Math.max(
+                            this.mListView.getPaddingTop(),
+                            measureAndGetHeight(
+                                    this.mTopPanel, widthMeasureSpec, heightMeasureSpec));
+            int paddingBottom =
+                    Math.max(
+                            this.mListView.getPaddingBottom(),
+                            measureAndGetHeight(
+                                    this.mBottomPanel, widthMeasureSpec, heightMeasureSpec));
+            if (paddingTop != this.mListView.getPaddingTop()
+                    || paddingBottom != this.mListView.getPaddingBottom()) {
                 this.mPendingScroll += this.mListView.getPaddingTop() - paddingTop;
-                this.mListView.setPadding(this.mListView.getPaddingLeft(), paddingTop, this.mListView.getPaddingRight(), paddingBottom);
+                this.mListView.setPadding(
+                        this.mListView.getPaddingLeft(),
+                        paddingTop,
+                        this.mListView.getPaddingRight(),
+                        paddingBottom);
             }
         }
         int count2 = this.mMatchParentChildren.size();
         if (count2 > 1) {
             for (int i3 = 0; i3 < count2; i3++) {
                 View child2 = this.mMatchParentChildren.get(i3);
-                if (this.mListView == null || (child2 != this.mTopPanel && child2 != this.mBottomPanel)) {
+                if (this.mListView == null
+                        || (child2 != this.mTopPanel && child2 != this.mBottomPanel)) {
                     applyMeasureToChild(child2, widthMeasureSpec, heightMeasureSpec);
                 }
             }
@@ -209,19 +269,27 @@ public class WatchListDecorLayout extends FrameLayout implements ViewTreeObserve
     }
 
     private int getPaddingLeftWithForeground() {
-        return isForegroundInsidePadding() ? Math.max(this.mPaddingLeft, this.mForegroundPaddingLeft) : this.mPaddingLeft + this.mForegroundPaddingLeft;
+        return isForegroundInsidePadding()
+                ? Math.max(this.mPaddingLeft, this.mForegroundPaddingLeft)
+                : this.mPaddingLeft + this.mForegroundPaddingLeft;
     }
 
     private int getPaddingRightWithForeground() {
-        return isForegroundInsidePadding() ? Math.max(this.mPaddingRight, this.mForegroundPaddingRight) : this.mPaddingRight + this.mForegroundPaddingRight;
+        return isForegroundInsidePadding()
+                ? Math.max(this.mPaddingRight, this.mForegroundPaddingRight)
+                : this.mPaddingRight + this.mForegroundPaddingRight;
     }
 
     private int getPaddingTopWithForeground() {
-        return isForegroundInsidePadding() ? Math.max(this.mPaddingTop, this.mForegroundPaddingTop) : this.mPaddingTop + this.mForegroundPaddingTop;
+        return isForegroundInsidePadding()
+                ? Math.max(this.mPaddingTop, this.mForegroundPaddingTop)
+                : this.mPaddingTop + this.mForegroundPaddingTop;
     }
 
     private int getPaddingBottomWithForeground() {
-        return isForegroundInsidePadding() ? Math.max(this.mPaddingBottom, this.mForegroundPaddingBottom) : this.mPaddingBottom + this.mForegroundPaddingBottom;
+        return isForegroundInsidePadding()
+                ? Math.max(this.mPaddingBottom, this.mForegroundPaddingBottom)
+                : this.mPaddingBottom + this.mForegroundPaddingBottom;
     }
 
     @Override // android.view.ViewTreeObserver.OnScrollChangedListener
@@ -233,7 +301,10 @@ public class WatchListDecorLayout extends FrameLayout implements ViewTreeObserve
             if (this.mListView.getChildCount() > 0) {
                 if (this.mListView.getFirstVisiblePosition() == 0) {
                     View firstChild = this.mListView.getChildAt(0);
-                    setScrolling(this.mTopPanel, (firstChild.getY() - this.mTopPanel.getHeight()) - this.mTopPanel.getTop());
+                    setScrolling(
+                            this.mTopPanel,
+                            (firstChild.getY() - this.mTopPanel.getHeight())
+                                    - this.mTopPanel.getTop());
                 } else {
                     setScrolling(this.mTopPanel, -this.mTopPanel.getHeight());
                 }
@@ -245,7 +316,12 @@ public class WatchListDecorLayout extends FrameLayout implements ViewTreeObserve
             if (this.mListView.getChildCount() > 0) {
                 if (this.mListView.getLastVisiblePosition() >= this.mListView.getCount() - 1) {
                     View lastChild = this.mListView.getChildAt(this.mListView.getChildCount() - 1);
-                    setScrolling(this.mBottomPanel, Math.max(0.0f, (lastChild.getY() + lastChild.getHeight()) - this.mBottomPanel.getTop()));
+                    setScrolling(
+                            this.mBottomPanel,
+                            Math.max(
+                                    0.0f,
+                                    (lastChild.getY() + lastChild.getHeight())
+                                            - this.mBottomPanel.getTop()));
                     return;
                 } else {
                     setScrolling(this.mBottomPanel, this.mBottomPanel.getHeight());

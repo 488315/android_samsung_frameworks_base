@@ -2,8 +2,6 @@ package android.media.tv.ad;
 
 import android.graphics.Rect;
 import android.media.tv.TvTrackInfo;
-import android.media.tv.ad.ITvAdClient;
-import android.media.tv.ad.ITvAdManagerCallback;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
@@ -12,23 +10,28 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.Surface;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface ITvAdManager extends IInterface {
     public static final String DESCRIPTOR = "android.media.tv.ad.ITvAdManager";
 
-    void createMediaView(IBinder iBinder, IBinder iBinder2, Rect rect, int i) throws RemoteException;
+    void createMediaView(IBinder iBinder, IBinder iBinder2, Rect rect, int i)
+            throws RemoteException;
 
-    void createSession(ITvAdClient iTvAdClient, String str, String str2, int i, int i2) throws RemoteException;
+    void createSession(ITvAdClient iTvAdClient, String str, String str2, int i, int i2)
+            throws RemoteException;
 
-    void dispatchSurfaceChanged(IBinder iBinder, int i, int i2, int i3, int i4) throws RemoteException;
+    void dispatchSurfaceChanged(IBinder iBinder, int i, int i2, int i3, int i4)
+            throws RemoteException;
 
     List<TvAdServiceInfo> getTvAdServiceList(int i) throws RemoteException;
 
     void notifyError(IBinder iBinder, String str, Bundle bundle, int i) throws RemoteException;
 
-    void notifyTvInputSessionData(IBinder iBinder, String str, Bundle bundle, int i) throws RemoteException;
+    void notifyTvInputSessionData(IBinder iBinder, String str, Bundle bundle, int i)
+            throws RemoteException;
 
     void notifyTvMessage(IBinder iBinder, int i, Bundle bundle, int i2) throws RemoteException;
 
@@ -60,7 +63,8 @@ public interface ITvAdManager extends IInterface {
 
     void stopAdService(IBinder iBinder, int i) throws RemoteException;
 
-    void unregisterCallback(ITvAdManagerCallback iTvAdManagerCallback, int i) throws RemoteException;
+    void unregisterCallback(ITvAdManagerCallback iTvAdManagerCallback, int i)
+            throws RemoteException;
 
     public static class Default implements ITvAdManager {
         @Override // android.media.tv.ad.ITvAdManager
@@ -69,88 +73,88 @@ public interface ITvAdManager extends IInterface {
         }
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void sendAppLinkCommand(String serviceId, Bundle command, int userId) throws RemoteException {
-        }
+        public void sendAppLinkCommand(String serviceId, Bundle command, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void createSession(ITvAdClient client, String serviceId, String type, int seq, int userId) throws RemoteException {
-        }
+        public void createSession(
+                ITvAdClient client, String serviceId, String type, int seq, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void releaseSession(IBinder sessionToken, int userId) throws RemoteException {
-        }
+        public void releaseSession(IBinder sessionToken, int userId) throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void startAdService(IBinder sessionToken, int userId) throws RemoteException {
-        }
+        public void startAdService(IBinder sessionToken, int userId) throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void stopAdService(IBinder sessionToken, int userId) throws RemoteException {
-        }
+        public void stopAdService(IBinder sessionToken, int userId) throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void resetAdService(IBinder sessionToken, int userId) throws RemoteException {
-        }
+        public void resetAdService(IBinder sessionToken, int userId) throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void setSurface(IBinder sessionToken, Surface surface, int userId) throws RemoteException {
-        }
+        public void setSurface(IBinder sessionToken, Surface surface, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void dispatchSurfaceChanged(IBinder sessionToken, int format, int width, int height, int userId) throws RemoteException {
-        }
+        public void dispatchSurfaceChanged(
+                IBinder sessionToken, int format, int width, int height, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void sendCurrentVideoBounds(IBinder sessionToken, Rect bounds, int userId) throws RemoteException {
-        }
+        public void sendCurrentVideoBounds(IBinder sessionToken, Rect bounds, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void sendCurrentChannelUri(IBinder sessionToken, Uri channelUri, int userId) throws RemoteException {
-        }
+        public void sendCurrentChannelUri(IBinder sessionToken, Uri channelUri, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void sendTrackInfoList(IBinder sessionToken, List<TvTrackInfo> tracks, int userId) throws RemoteException {
-        }
+        public void sendTrackInfoList(IBinder sessionToken, List<TvTrackInfo> tracks, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void sendCurrentTvInputId(IBinder sessionToken, String inputId, int userId) throws RemoteException {
-        }
+        public void sendCurrentTvInputId(IBinder sessionToken, String inputId, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void sendSigningResult(IBinder sessionToken, String signingId, byte[] result, int userId) throws RemoteException {
-        }
+        public void sendSigningResult(
+                IBinder sessionToken, String signingId, byte[] result, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void notifyError(IBinder sessionToken, String errMsg, Bundle params, int userId) throws RemoteException {
-        }
+        public void notifyError(IBinder sessionToken, String errMsg, Bundle params, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void notifyTvMessage(IBinder sessionToken, int type, Bundle data, int userId) throws RemoteException {
-        }
+        public void notifyTvMessage(IBinder sessionToken, int type, Bundle data, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void registerCallback(ITvAdManagerCallback callback, int userId) throws RemoteException {
-        }
+        public void registerCallback(ITvAdManagerCallback callback, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void unregisterCallback(ITvAdManagerCallback callback, int userId) throws RemoteException {
-        }
+        public void unregisterCallback(ITvAdManagerCallback callback, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void createMediaView(IBinder sessionToken, IBinder windowToken, Rect frame, int userId) throws RemoteException {
-        }
+        public void createMediaView(
+                IBinder sessionToken, IBinder windowToken, Rect frame, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void relayoutMediaView(IBinder sessionToken, Rect frame, int userId) throws RemoteException {
-        }
+        public void relayoutMediaView(IBinder sessionToken, Rect frame, int userId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void removeMediaView(IBinder sessionToken, int userId) throws RemoteException {
-        }
+        public void removeMediaView(IBinder sessionToken, int userId) throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManager
-        public void notifyTvInputSessionData(IBinder sessionToken, String type, Bundle data, int userId) throws RemoteException {
-        }
+        public void notifyTvInputSessionData(
+                IBinder sessionToken, String type, Bundle data, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -158,7 +162,7 @@ public interface ITvAdManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvAdManager {
+    public abstract static class Stub extends Binder implements ITvAdManager {
         static final int TRANSACTION_createMediaView = 19;
         static final int TRANSACTION_createSession = 3;
         static final int TRANSACTION_dispatchSurfaceChanged = 9;
@@ -259,7 +263,8 @@ public interface ITvAdManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITvAdManager.DESCRIPTOR);
             }
@@ -400,7 +405,8 @@ public interface ITvAdManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 17:
-                    ITvAdManagerCallback _arg018 = ITvAdManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    ITvAdManagerCallback _arg018 =
+                            ITvAdManagerCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg116 = data.readInt();
                     data.enforceNoDataAvail();
                     registerCallback(_arg018, _arg116);
@@ -477,7 +483,8 @@ public interface ITvAdManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    List<TvAdServiceInfo> _result = _reply.createTypedArrayList(TvAdServiceInfo.CREATOR);
+                    List<TvAdServiceInfo> _result =
+                            _reply.createTypedArrayList(TvAdServiceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -486,7 +493,8 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void sendAppLinkCommand(String serviceId, Bundle command, int userId) throws RemoteException {
+            public void sendAppLinkCommand(String serviceId, Bundle command, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -503,7 +511,9 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void createSession(ITvAdClient client, String serviceId, String type, int seq, int userId) throws RemoteException {
+            public void createSession(
+                    ITvAdClient client, String serviceId, String type, int seq, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -586,7 +596,8 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void setSurface(IBinder sessionToken, Surface surface, int userId) throws RemoteException {
+            public void setSurface(IBinder sessionToken, Surface surface, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -603,7 +614,9 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void dispatchSurfaceChanged(IBinder sessionToken, int format, int width, int height, int userId) throws RemoteException {
+            public void dispatchSurfaceChanged(
+                    IBinder sessionToken, int format, int width, int height, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -622,7 +635,8 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void sendCurrentVideoBounds(IBinder sessionToken, Rect bounds, int userId) throws RemoteException {
+            public void sendCurrentVideoBounds(IBinder sessionToken, Rect bounds, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -639,7 +653,8 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void sendCurrentChannelUri(IBinder sessionToken, Uri channelUri, int userId) throws RemoteException {
+            public void sendCurrentChannelUri(IBinder sessionToken, Uri channelUri, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -656,7 +671,9 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void sendTrackInfoList(IBinder sessionToken, List<TvTrackInfo> tracks, int userId) throws RemoteException {
+            public void sendTrackInfoList(
+                    IBinder sessionToken, List<TvTrackInfo> tracks, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -673,7 +690,8 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void sendCurrentTvInputId(IBinder sessionToken, String inputId, int userId) throws RemoteException {
+            public void sendCurrentTvInputId(IBinder sessionToken, String inputId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -690,7 +708,9 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void sendSigningResult(IBinder sessionToken, String signingId, byte[] result, int userId) throws RemoteException {
+            public void sendSigningResult(
+                    IBinder sessionToken, String signingId, byte[] result, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -708,7 +728,8 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void notifyError(IBinder sessionToken, String errMsg, Bundle params, int userId) throws RemoteException {
+            public void notifyError(IBinder sessionToken, String errMsg, Bundle params, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -726,7 +747,8 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void notifyTvMessage(IBinder sessionToken, int type, Bundle data, int userId) throws RemoteException {
+            public void notifyTvMessage(IBinder sessionToken, int type, Bundle data, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -744,7 +766,8 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void registerCallback(ITvAdManagerCallback callback, int userId) throws RemoteException {
+            public void registerCallback(ITvAdManagerCallback callback, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -760,7 +783,8 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void unregisterCallback(ITvAdManagerCallback callback, int userId) throws RemoteException {
+            public void unregisterCallback(ITvAdManagerCallback callback, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -776,7 +800,9 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void createMediaView(IBinder sessionToken, IBinder windowToken, Rect frame, int userId) throws RemoteException {
+            public void createMediaView(
+                    IBinder sessionToken, IBinder windowToken, Rect frame, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -794,7 +820,8 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void relayoutMediaView(IBinder sessionToken, Rect frame, int userId) throws RemoteException {
+            public void relayoutMediaView(IBinder sessionToken, Rect frame, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -827,7 +854,9 @@ public interface ITvAdManager extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdManager
-            public void notifyTvInputSessionData(IBinder sessionToken, String type, Bundle data, int userId) throws RemoteException {
+            public void notifyTvInputSessionData(
+                    IBinder sessionToken, String type, Bundle data, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

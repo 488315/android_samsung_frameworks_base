@@ -5,7 +5,9 @@ import android.os.FileUtils;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.util.Log;
+
 import com.android.internal.util.FastPrintWriter;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -36,7 +38,8 @@ public abstract class LogWriter {
             try {
                 fastPrintWriter = new FastPrintWriter(new FileOutputStream(file, true));
                 try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader(file2, StandardCharsets.UTF_8));
+                    BufferedReader bufferedReader =
+                            new BufferedReader(new FileReader(file2, StandardCharsets.UTF_8));
                     try {
                         if (bufferedReader.skip(250000L) != 250000) {
                             fastPrintWriter.println("Error in skipping file contents.");
@@ -64,7 +67,11 @@ public abstract class LogWriter {
         try {
             fastPrintWriter = new FastPrintWriter(new FileOutputStream(file, true));
             try {
-                fastPrintWriter.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(System.currentTimeMillis())) + ": " + str);
+                fastPrintWriter.println(
+                        new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+                                        .format(new Date(System.currentTimeMillis()))
+                                + ": "
+                                + str);
                 fastPrintWriter.flush();
                 FileUtils.setPermissions(file.toString(), 508, -1, -1);
                 fastPrintWriter.close();

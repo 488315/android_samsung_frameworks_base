@@ -4,7 +4,9 @@ import android.os.SystemClock;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.util.HeavyHitterSketch;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +42,7 @@ public final class BinderCallHeavyHitterWatcher {
         public float mFrequency;
         public int mUid;
 
-        public HeavyHitterContainer() {
-        }
+        public HeavyHitterContainer() {}
 
         public HeavyHitterContainer(HeavyHitterContainer other) {
             this.mUid = other.mUid;
@@ -55,7 +56,10 @@ public final class BinderCallHeavyHitterWatcher {
                 return false;
             }
             HeavyHitterContainer o = (HeavyHitterContainer) other;
-            return this.mUid == o.mUid && this.mClass == o.mClass && this.mCode == o.mCode && Math.abs(this.mFrequency - o.mFrequency) < 1.0E-5f;
+            return this.mUid == o.mUid
+                    && this.mClass == o.mClass
+                    && this.mCode == o.mCode
+                    && Math.abs(this.mFrequency - o.mFrequency) < 1.0E-5f;
         }
 
         public int hashCode() {
@@ -79,7 +83,11 @@ public final class BinderCallHeavyHitterWatcher {
         return binderCallHeavyHitterWatcher;
     }
 
-    public void setConfig(boolean enable, int batchSize, float threshold, BinderCallHeavyHitterListener listener) {
+    public void setConfig(
+            boolean enable,
+            int batchSize,
+            float threshold,
+            BinderCallHeavyHitterListener listener) {
         int inputSize;
         synchronized (this.mLock) {
             try {
@@ -87,7 +95,8 @@ public final class BinderCallHeavyHitterWatcher {
                     if (enable) {
                         this.mEnabled = true;
                         if (threshold >= 1.0E-5f && threshold <= 1.0f) {
-                            if (batchSize == this.mTotalInputSize && Math.abs(threshold - this.mThreshold) < 1.0E-5f) {
+                            if (batchSize == this.mTotalInputSize
+                                    && Math.abs(threshold - this.mThreshold) < 1.0E-5f) {
                                 this.mListener = listener;
                                 return;
                             }
@@ -102,10 +111,17 @@ public final class BinderCallHeavyHitterWatcher {
                             }
                             try {
                                 sketch.setConfig(batchSize, capacity);
-                                resetInternalLocked(listener, sketch, inputSize, batchSize, threshold, capacity);
+                                resetInternalLocked(
+                                        listener, sketch, inputSize, batchSize, threshold,
+                                        capacity);
                                 return;
                             } catch (IllegalArgumentException e) {
-                                Log.w(TAG, "Invalid parameter to heavy hitter watcher: " + batchSize + ", " + capacity);
+                                Log.w(
+                                        TAG,
+                                        "Invalid parameter to heavy hitter watcher: "
+                                                + batchSize
+                                                + ", "
+                                                + capacity);
                                 return;
                             }
                         }
@@ -126,7 +142,13 @@ public final class BinderCallHeavyHitterWatcher {
         }
     }
 
-    private void resetInternalLocked(BinderCallHeavyHitterListener listener, HeavyHitterSketch<Integer> sketch, int inputSize, int batchSize, float threshold, int capacity) {
+    private void resetInternalLocked(
+            BinderCallHeavyHitterListener listener,
+            HeavyHitterSketch<Integer> sketch,
+            int inputSize,
+            int batchSize,
+            float threshold,
+            int capacity) {
         this.mListener = listener;
         this.mHeavyHitterSketch = sketch;
         this.mHeavyHitterCandiates.clear();
@@ -189,15 +211,19 @@ public final class BinderCallHeavyHitterWatcher {
                             if (this.mCurrentInputSize > this.mInputSize) {
                                 try {
                                     if (this.mCurrentInputSize < this.mTotalInputSize) {
-                                        if (this.mCachedCandidateSet.contains(Integer.valueOf(hashCode))) {
-                                            int index = this.mHeavyHitterCandiates.indexOfKey(hashCode);
+                                        if (this.mCachedCandidateSet.contains(
+                                                Integer.valueOf(hashCode))) {
+                                            int index =
+                                                    this.mHeavyHitterCandiates.indexOfKey(hashCode);
                                             if (index < 0) {
-                                                HeavyHitterContainer container = acquireHeavyHitterContainerLocked();
+                                                HeavyHitterContainer container =
+                                                        acquireHeavyHitterContainerLocked();
                                                 container.mUid = callerUid;
                                                 try {
                                                     container.mClass = clazz;
                                                     container.mCode = code;
-                                                    this.mHeavyHitterCandiates.put(hashCode, container);
+                                                    this.mHeavyHitterCandiates.put(
+                                                            hashCode, container);
                                                 } catch (Throwable th) {
                                                     th = th;
                                                     throw th;
@@ -211,17 +237,35 @@ public final class BinderCallHeavyHitterWatcher {
                                 }
                             }
                             if (this.mCurrentInputSize == this.mTotalInputSize) {
-                                if (this.mListener != null && (result = sketch.getTopHeavyHitters(0, this.mCachedCandidateList, this.mCachedCandidateFrequencies)) != null && (size = result.size()) > 0) {
+                                if (this.mListener != null
+                                        && (result =
+                                                        sketch.getTopHeavyHitters(
+                                                                0,
+                                                                this.mCachedCandidateList,
+                                                                this.mCachedCandidateFrequencies))
+                                                != null
+                                        && (size = result.size()) > 0) {
                                     ArrayList<HeavyHitterContainer> hitters = new ArrayList<>();
                                     for (int i = 0; i < size; i++) {
-                                        HeavyHitterContainer container2 = this.mHeavyHitterCandiates.get(result.get(i).intValue());
+                                        HeavyHitterContainer container2 =
+                                                this.mHeavyHitterCandiates.get(
+                                                        result.get(i).intValue());
                                         if (container2 != null) {
-                                            HeavyHitterContainer cont = new HeavyHitterContainer(container2);
-                                            cont.mFrequency = this.mCachedCandidateFrequencies.get(i).floatValue();
+                                            HeavyHitterContainer cont =
+                                                    new HeavyHitterContainer(container2);
+                                            cont.mFrequency =
+                                                    this.mCachedCandidateFrequencies
+                                                            .get(i)
+                                                            .floatValue();
                                             hitters.add(cont);
                                         }
                                     }
-                                    this.mListener.onHeavyHit(hitters, this.mTotalInputSize, this.mThreshold, SystemClock.elapsedRealtime() - this.mBatchStartTimeStamp);
+                                    this.mListener.onHeavyHit(
+                                            hitters,
+                                            this.mTotalInputSize,
+                                            this.mThreshold,
+                                            SystemClock.elapsedRealtime()
+                                                    - this.mBatchStartTimeStamp);
                                 }
                                 this.mHeavyHitterSketch.reset();
                                 this.mHeavyHitterCandiates.clear();

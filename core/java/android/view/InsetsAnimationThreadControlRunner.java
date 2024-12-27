@@ -7,13 +7,9 @@ import android.os.Trace;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
-import android.view.InsetsAnimationThreadControlRunner;
-import android.view.SurfaceControl;
-import android.view.SyncRtSurfaceTransactionApplier;
-import android.view.WindowInsets;
-import android.view.WindowInsetsAnimation;
 import android.view.animation.Interpolator;
 import android.view.inputmethod.ImeTracker;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -28,12 +24,16 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
     class AnonymousClass1 implements InsetsAnimationControlCallbacks {
         private final float[] mTmpFloat9 = new float[9];
 
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.view.InsetsAnimationControlCallbacks
-        public <T extends InsetsAnimationControlRunner & InternalInsetsAnimationController> void startAnimation(T runner, WindowInsetsAnimationControlListener listener, int types, WindowInsetsAnimation animation, WindowInsetsAnimation.Bounds bounds) {
-        }
+        public <T extends InsetsAnimationControlRunner & InternalInsetsAnimationController>
+                void startAnimation(
+                        T runner,
+                        WindowInsetsAnimationControlListener listener,
+                        int types,
+                        WindowInsetsAnimation animation,
+                        WindowInsetsAnimation.Bounds bounds) {}
 
         @Override // android.view.InsetsAnimationControlCallbacks
         public void scheduleApplyChangeInsets(InsetsAnimationControlRunner runner) {
@@ -44,19 +44,27 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
 
         @Override // android.view.InsetsAnimationControlCallbacks
         public void notifyFinished(InsetsAnimationControlRunner runner, final boolean shown) {
-            Trace.asyncTraceEnd(8L, "InsetsAsyncAnimation: " + WindowInsets.Type.toString(runner.getTypes()), runner.getTypes());
-            InsetsController.releaseControls(InsetsAnimationThreadControlRunner.this.mControl.getControls());
-            InsetsAnimationThreadControlRunner.this.mMainThreadHandler.post(new Runnable() { // from class: android.view.InsetsAnimationThreadControlRunner$1$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    InsetsAnimationThreadControlRunner.AnonymousClass1.this.lambda$notifyFinished$0(shown);
-                }
-            });
+            Trace.asyncTraceEnd(
+                    8L,
+                    "InsetsAsyncAnimation: " + WindowInsets.Type.toString(runner.getTypes()),
+                    runner.getTypes());
+            InsetsController.releaseControls(
+                    InsetsAnimationThreadControlRunner.this.mControl.getControls());
+            InsetsAnimationThreadControlRunner.this.mMainThreadHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.InsetsAnimationThreadControlRunner$1$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            InsetsAnimationThreadControlRunner.AnonymousClass1.this
+                                    .lambda$notifyFinished$0(shown);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$notifyFinished$0(boolean shown) {
-            InsetsAnimationThreadControlRunner.this.mOuterCallbacks.notifyFinished(InsetsAnimationThreadControlRunner.this, shown);
+            InsetsAnimationThreadControlRunner.this.mOuterCallbacks.notifyFinished(
+                    InsetsAnimationThreadControlRunner.this, shown);
         }
 
         @Override // android.view.InsetsAnimationControlCallbacks
@@ -84,38 +92,74 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$reportPerceptible$1(int types, boolean perceptible) {
-            InsetsAnimationThreadControlRunner.this.mOuterCallbacks.reportPerceptible(types, perceptible);
+            InsetsAnimationThreadControlRunner.this.mOuterCallbacks.reportPerceptible(
+                    types, perceptible);
         }
 
         @Override // android.view.InsetsAnimationControlCallbacks
         public void reportPerceptible(final int types, final boolean perceptible) {
-            InsetsAnimationThreadControlRunner.this.mMainThreadHandler.post(new Runnable() { // from class: android.view.InsetsAnimationThreadControlRunner$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    InsetsAnimationThreadControlRunner.AnonymousClass1.this.lambda$reportPerceptible$1(types, perceptible);
-                }
-            });
+            InsetsAnimationThreadControlRunner.this.mMainThreadHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.InsetsAnimationThreadControlRunner$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            InsetsAnimationThreadControlRunner.AnonymousClass1.this
+                                    .lambda$reportPerceptible$1(types, perceptible);
+                        }
+                    });
         }
     }
 
-    public InsetsAnimationThreadControlRunner(SparseArray<InsetsSourceControl> controls, Rect frame, InsetsState state, final WindowInsetsAnimationControlListener listener, final int types, InsetsAnimationControlCallbacks controller, long durationMs, Interpolator interpolator, int animationType, int layoutInsetsDuringAnimation, CompatibilityInfo.Translator translator, Handler mainThreadHandler, ImeTracker.Token statsToken) {
+    public InsetsAnimationThreadControlRunner(
+            SparseArray<InsetsSourceControl> controls,
+            Rect frame,
+            InsetsState state,
+            final WindowInsetsAnimationControlListener listener,
+            final int types,
+            InsetsAnimationControlCallbacks controller,
+            long durationMs,
+            Interpolator interpolator,
+            int animationType,
+            int layoutInsetsDuringAnimation,
+            CompatibilityInfo.Translator translator,
+            Handler mainThreadHandler,
+            ImeTracker.Token statsToken) {
         this.mMainThreadHandler = mainThreadHandler;
         this.mOuterCallbacks = controller;
-        this.mControl = new InsetsAnimationControlImpl(controls, frame, state, listener, types, this.mCallbacks, durationMs, interpolator, animationType, layoutInsetsDuringAnimation, translator, statsToken);
-        InsetsAnimationThread.getHandler().post(new Runnable() { // from class: android.view.InsetsAnimationThreadControlRunner$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                InsetsAnimationThreadControlRunner.this.lambda$new$0(types, listener);
-            }
-        });
+        this.mControl =
+                new InsetsAnimationControlImpl(
+                        controls,
+                        frame,
+                        state,
+                        listener,
+                        types,
+                        this.mCallbacks,
+                        durationMs,
+                        interpolator,
+                        animationType,
+                        layoutInsetsDuringAnimation,
+                        translator,
+                        statsToken);
+        InsetsAnimationThread.getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // android.view.InsetsAnimationThreadControlRunner$$ExternalSyntheticLambda2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                InsetsAnimationThreadControlRunner.this.lambda$new$0(
+                                        types, listener);
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$new$0(int types, WindowInsetsAnimationControlListener listener) {
+    public /* synthetic */ void lambda$new$0(
+            int types, WindowInsetsAnimationControlListener listener) {
         if (this.mControl.isCancelled()) {
             return;
         }
-        Trace.asyncTraceBegin(8L, "InsetsAsyncAnimation: " + WindowInsets.Type.toString(types), types);
+        Trace.asyncTraceBegin(
+                8L, "InsetsAsyncAnimation: " + WindowInsets.Type.toString(types), types);
         listener.onReady(this.mControl, types);
     }
 
@@ -156,12 +200,14 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
         Handler handler = InsetsAnimationThread.getHandler();
         final InsetsAnimationControlImpl insetsAnimationControlImpl = this.mControl;
         Objects.requireNonNull(insetsAnimationControlImpl);
-        handler.post(new Runnable() { // from class: android.view.InsetsAnimationThreadControlRunner$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                InsetsAnimationControlImpl.this.cancel();
-            }
-        });
+        handler.post(
+                new Runnable() { // from class:
+                                 // android.view.InsetsAnimationThreadControlRunner$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        InsetsAnimationControlImpl.this.cancel();
+                    }
+                });
     }
 
     @Override // android.view.InsetsAnimationControlRunner
@@ -176,16 +222,22 @@ public class InsetsAnimationThreadControlRunner implements InsetsAnimationContro
 
     @Override // android.view.InsetsAnimationControlRunner
     public void updateLayoutInsetsDuringAnimation(final int layoutInsetsDuringAnimation) {
-        InsetsAnimationThread.getHandler().post(new Runnable() { // from class: android.view.InsetsAnimationThreadControlRunner$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                InsetsAnimationThreadControlRunner.this.lambda$updateLayoutInsetsDuringAnimation$1(layoutInsetsDuringAnimation);
-            }
-        });
+        InsetsAnimationThread.getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // android.view.InsetsAnimationThreadControlRunner$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                InsetsAnimationThreadControlRunner.this
+                                        .lambda$updateLayoutInsetsDuringAnimation$1(
+                                                layoutInsetsDuringAnimation);
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$updateLayoutInsetsDuringAnimation$1(int layoutInsetsDuringAnimation) {
+    public /* synthetic */ void lambda$updateLayoutInsetsDuringAnimation$1(
+            int layoutInsetsDuringAnimation) {
         this.mControl.updateLayoutInsetsDuringAnimation(layoutInsetsDuringAnimation);
     }
 }

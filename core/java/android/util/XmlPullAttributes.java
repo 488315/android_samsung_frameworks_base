@@ -1,6 +1,7 @@
 package android.util;
 
 import com.android.internal.util.XmlUtils;
+
 import org.xmlpull.v1.XmlPullParser;
 
 /* loaded from: classes4.dex */
@@ -47,13 +48,17 @@ class XmlPullAttributes implements AttributeSet {
     }
 
     @Override // android.util.AttributeSet
-    public int getAttributeListValue(String namespace, String attribute, String[] options, int defaultValue) {
-        return XmlUtils.convertValueToList(getAttributeValue(namespace, attribute), options, defaultValue);
+    public int getAttributeListValue(
+            String namespace, String attribute, String[] options, int defaultValue) {
+        return XmlUtils.convertValueToList(
+                getAttributeValue(namespace, attribute), options, defaultValue);
     }
 
     @Override // android.util.AttributeSet
-    public boolean getAttributeBooleanValue(String namespace, String attribute, boolean defaultValue) {
-        return XmlUtils.convertValueToBoolean(getAttributeValue(namespace, attribute), defaultValue);
+    public boolean getAttributeBooleanValue(
+            String namespace, String attribute, boolean defaultValue) {
+        return XmlUtils.convertValueToBoolean(
+                getAttributeValue(namespace, attribute), defaultValue);
     }
 
     @Override // android.util.AttributeSet
@@ -68,7 +73,8 @@ class XmlPullAttributes implements AttributeSet {
 
     @Override // android.util.AttributeSet
     public int getAttributeUnsignedIntValue(String namespace, String attribute, int defaultValue) {
-        return XmlUtils.convertValueToUnsignedInt(getAttributeValue(namespace, attribute), defaultValue);
+        return XmlUtils.convertValueToUnsignedInt(
+                getAttributeValue(namespace, attribute), defaultValue);
     }
 
     @Override // android.util.AttributeSet

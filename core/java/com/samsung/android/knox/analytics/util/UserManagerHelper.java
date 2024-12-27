@@ -8,7 +8,9 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserManager;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -84,7 +86,8 @@ public class UserManagerHelper {
             if (userInfoList != null) {
                 for (UserInfo userInfo : userInfoList) {
                     try {
-                        ComponentName profileComponent = devicePolicyManager.getProfileOwnerAsUser(userInfo.id);
+                        ComponentName profileComponent =
+                                devicePolicyManager.getProfileOwnerAsUser(userInfo.id);
                         if (profileComponent != null) {
                             poPackageName = profileComponent.getPackageName();
                         }
@@ -174,7 +177,8 @@ public class UserManagerHelper {
 
     private IDevicePolicyManager getDevicePolicyManagerService() {
         if (this.mDevicePolicyManagerService == null) {
-            this.mDevicePolicyManagerService = (IDevicePolicyManager) ServiceManager.getService(Context.DEVICE_POLICY_SERVICE);
+            this.mDevicePolicyManagerService =
+                    (IDevicePolicyManager) ServiceManager.getService(Context.DEVICE_POLICY_SERVICE);
             if (this.mDevicePolicyManagerService == null) {
                 Log.e(TAG, "getDevicePolicyManagerService(): could not get DevicePolicyManager!");
             }

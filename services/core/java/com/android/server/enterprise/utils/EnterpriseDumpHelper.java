@@ -2,9 +2,11 @@ package com.android.server.enterprise.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.storage.EdmStorageProvider;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +40,8 @@ public final class EnterpriseDumpHelper {
         return sb.toString();
     }
 
-    public final void dumpTable(PrintWriter printWriter, String str, String[] strArr, String[] strArr2) {
+    public final void dumpTable(
+            PrintWriter printWriter, String str, String[] strArr, String[] strArr2) {
         StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("[", str, " table]");
         m.append(System.lineSeparator());
         printWriter.write(m.toString());
@@ -52,15 +55,22 @@ public final class EnterpriseDumpHelper {
         }
         String[] strArr3 = {"name", "value", "containerID", "userID"};
         for (String str2 : strArr) {
-            String readColumns2 = readColumns(str, strArr3, strArr2, AccountManagerService$$ExternalSyntheticOutline0.m("name", str2));
+            String readColumns2 =
+                    readColumns(
+                            str,
+                            strArr3,
+                            strArr2,
+                            AccountManagerService$$ExternalSyntheticOutline0.m("name", str2));
             if (readColumns2 != null) {
                 printWriter.write(readColumns2);
             }
         }
     }
 
-    public final String readColumns(String str, String[] strArr, String[] strArr2, ContentValues contentValues) {
-        ArrayList arrayList = (ArrayList) this.mEdmStorageProvider.getValues(str, strArr, contentValues);
+    public final String readColumns(
+            String str, String[] strArr, String[] strArr2, ContentValues contentValues) {
+        ArrayList arrayList =
+                (ArrayList) this.mEdmStorageProvider.getValues(str, strArr, contentValues);
         if (arrayList.isEmpty()) {
             return null;
         }

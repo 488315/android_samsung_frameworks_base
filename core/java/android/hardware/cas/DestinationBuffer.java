@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class DestinationBuffer implements Parcelable {
-    public static final Parcelable.Creator<DestinationBuffer> CREATOR = new Parcelable.Creator<DestinationBuffer>() { // from class: android.hardware.cas.DestinationBuffer.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DestinationBuffer createFromParcel(Parcel _aidl_source) {
-            return new DestinationBuffer(_aidl_source);
-        }
+    public static final Parcelable.Creator<DestinationBuffer> CREATOR =
+            new Parcelable.Creator<
+                    DestinationBuffer>() { // from class: android.hardware.cas.DestinationBuffer.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DestinationBuffer createFromParcel(Parcel _aidl_source) {
+                    return new DestinationBuffer(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DestinationBuffer[] newArray(int _aidl_size) {
-            return new DestinationBuffer[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DestinationBuffer[] newArray(int _aidl_size) {
+                    return new DestinationBuffer[_aidl_size];
+                }
+            };
     public static final int nonsecureMemory = 0;
     public static final int secureMemory = 1;
     private int _tag;
@@ -95,11 +97,13 @@ public final class DestinationBuffer implements Parcelable {
         int _aidl_tag = _aidl_parcel.readInt();
         switch (_aidl_tag) {
             case 0:
-                SharedBuffer _aidl_value = (SharedBuffer) _aidl_parcel.readTypedObject(SharedBuffer.CREATOR);
+                SharedBuffer _aidl_value =
+                        (SharedBuffer) _aidl_parcel.readTypedObject(SharedBuffer.CREATOR);
                 _set(_aidl_tag, _aidl_value);
                 return;
             case 1:
-                NativeHandle _aidl_value2 = (NativeHandle) _aidl_parcel.readTypedObject(NativeHandle.CREATOR);
+                NativeHandle _aidl_value2 =
+                        (NativeHandle) _aidl_parcel.readTypedObject(NativeHandle.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             default:
@@ -130,7 +134,12 @@ public final class DestinationBuffer implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

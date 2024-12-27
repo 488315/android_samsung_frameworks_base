@@ -38,7 +38,8 @@ public interface ICocktailHost extends IInterface {
 
     void setDisableTickerView(int i, int i2) throws RemoteException;
 
-    void setPullToRefresh(int i, int i2, PendingIntent pendingIntent, int i3) throws RemoteException;
+    void setPullToRefresh(int i, int i2, PendingIntent pendingIntent, int i3)
+            throws RemoteException;
 
     void showCocktail(int i, int i2) throws RemoteException;
 
@@ -52,76 +53,66 @@ public interface ICocktailHost extends IInterface {
 
     public static class Default implements ICocktailHost {
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void updateCocktail(int cocktailId, Cocktail cocktail, int userId) throws RemoteException {
-        }
+        public void updateCocktail(int cocktailId, Cocktail cocktail, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void partiallyUpdateCocktail(int cocktailId, RemoteViews contentView, int userId) throws RemoteException {
-        }
+        public void partiallyUpdateCocktail(int cocktailId, RemoteViews contentView, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void partiallyUpdateHelpView(int cocktailId, RemoteViews helpView, int userId) throws RemoteException {
-        }
+        public void partiallyUpdateHelpView(int cocktailId, RemoteViews helpView, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void removeCocktail(int cocktailId, int userId) throws RemoteException {
-        }
+        public void removeCocktail(int cocktailId, int userId) throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void showCocktail(int cocktailId, int userId) throws RemoteException {
-        }
+        public void showCocktail(int cocktailId, int userId) throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void closeCocktail(int cocktailId, int category, int userId) throws RemoteException {
-        }
+        public void closeCocktail(int cocktailId, int category, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void viewDataChanged(int cocktailId, int viewId, int userId) throws RemoteException {
-        }
+        public void viewDataChanged(int cocktailId, int viewId, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void setPullToRefresh(int cocktailId, int viewId, PendingIntent pendingIntent, int userId) throws RemoteException {
-        }
+        public void setPullToRefresh(
+                int cocktailId, int viewId, PendingIntent pendingIntent, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void updateToolLauncher(int userId) throws RemoteException {
-        }
+        public void updateToolLauncher(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void notifyKeyguardState(boolean enable, int userId) throws RemoteException {
-        }
+        public void notifyKeyguardState(boolean enable, int userId) throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void notifyWakeUpState(boolean bEnable, int keyCode, int userId) throws RemoteException {
-        }
+        public void notifyWakeUpState(boolean bEnable, int keyCode, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void switchDefaultCocktail(int userId) throws RemoteException {
-        }
+        public void switchDefaultCocktail(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void sendExtraData(int userId, Bundle extraData) throws RemoteException {
-        }
+        public void sendExtraData(int userId, Bundle extraData) throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void setDisableTickerView(int state, int userId) throws RemoteException {
-        }
+        public void setDisableTickerView(int state, int userId) throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void changeVisibleEdgeService(boolean visible, int userId) throws RemoteException {
-        }
+        public void changeVisibleEdgeService(boolean visible, int userId) throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void noteResumeComponent(ComponentName resumeComponentName) throws RemoteException {
-        }
+        public void noteResumeComponent(ComponentName resumeComponentName) throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void notePauseComponent(ComponentName pauseComponentName) throws RemoteException {
-        }
+        public void notePauseComponent(ComponentName pauseComponentName) throws RemoteException {}
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void packageSuspendChanged(Cocktail cocktail) throws RemoteException {
-        }
+        public void packageSuspendChanged(Cocktail cocktail) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -129,7 +120,7 @@ public interface ICocktailHost extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICocktailHost {
+    public abstract static class Stub extends Binder implements ICocktailHost {
         static final int TRANSACTION_changeVisibleEdgeService = 15;
         static final int TRANSACTION_closeCocktail = 6;
         static final int TRANSACTION_notePauseComponent = 17;
@@ -218,7 +209,8 @@ public interface ICocktailHost extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICocktailHost.DESCRIPTOR);
             }
@@ -284,7 +276,8 @@ public interface ICocktailHost extends IInterface {
                 case 8:
                     int _arg08 = data.readInt();
                     int _arg18 = data.readInt();
-                    PendingIntent _arg26 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg26 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     int _arg3 = data.readInt();
                     data.enforceNoDataAvail();
                     setPullToRefresh(_arg08, _arg18, _arg26, _arg3);
@@ -339,13 +332,15 @@ public interface ICocktailHost extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 16:
-                    ComponentName _arg016 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg016 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     noteResumeComponent(_arg016);
                     reply.writeNoException();
                     return true;
                 case 17:
-                    ComponentName _arg017 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg017 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     notePauseComponent(_arg017);
                     reply.writeNoException();
@@ -378,7 +373,8 @@ public interface ICocktailHost extends IInterface {
             }
 
             @Override // com.samsung.android.cocktailbar.ICocktailHost
-            public void updateCocktail(int cocktailId, Cocktail cocktail, int userId) throws RemoteException {
+            public void updateCocktail(int cocktailId, Cocktail cocktail, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -395,7 +391,8 @@ public interface ICocktailHost extends IInterface {
             }
 
             @Override // com.samsung.android.cocktailbar.ICocktailHost
-            public void partiallyUpdateCocktail(int cocktailId, RemoteViews contentView, int userId) throws RemoteException {
+            public void partiallyUpdateCocktail(int cocktailId, RemoteViews contentView, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -412,7 +409,8 @@ public interface ICocktailHost extends IInterface {
             }
 
             @Override // com.samsung.android.cocktailbar.ICocktailHost
-            public void partiallyUpdateHelpView(int cocktailId, RemoteViews helpView, int userId) throws RemoteException {
+            public void partiallyUpdateHelpView(int cocktailId, RemoteViews helpView, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -461,7 +459,8 @@ public interface ICocktailHost extends IInterface {
             }
 
             @Override // com.samsung.android.cocktailbar.ICocktailHost
-            public void closeCocktail(int cocktailId, int category, int userId) throws RemoteException {
+            public void closeCocktail(int cocktailId, int category, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -478,7 +477,8 @@ public interface ICocktailHost extends IInterface {
             }
 
             @Override // com.samsung.android.cocktailbar.ICocktailHost
-            public void viewDataChanged(int cocktailId, int viewId, int userId) throws RemoteException {
+            public void viewDataChanged(int cocktailId, int viewId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -495,7 +495,9 @@ public interface ICocktailHost extends IInterface {
             }
 
             @Override // com.samsung.android.cocktailbar.ICocktailHost
-            public void setPullToRefresh(int cocktailId, int viewId, PendingIntent pendingIntent, int userId) throws RemoteException {
+            public void setPullToRefresh(
+                    int cocktailId, int viewId, PendingIntent pendingIntent, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -544,7 +546,8 @@ public interface ICocktailHost extends IInterface {
             }
 
             @Override // com.samsung.android.cocktailbar.ICocktailHost
-            public void notifyWakeUpState(boolean bEnable, int keyCode, int userId) throws RemoteException {
+            public void notifyWakeUpState(boolean bEnable, int keyCode, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -608,7 +611,8 @@ public interface ICocktailHost extends IInterface {
             }
 
             @Override // com.samsung.android.cocktailbar.ICocktailHost
-            public void changeVisibleEdgeService(boolean visible, int userId) throws RemoteException {
+            public void changeVisibleEdgeService(boolean visible, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -624,7 +628,8 @@ public interface ICocktailHost extends IInterface {
             }
 
             @Override // com.samsung.android.cocktailbar.ICocktailHost
-            public void noteResumeComponent(ComponentName resumeComponentName) throws RemoteException {
+            public void noteResumeComponent(ComponentName resumeComponentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -639,7 +644,8 @@ public interface ICocktailHost extends IInterface {
             }
 
             @Override // com.samsung.android.cocktailbar.ICocktailHost
-            public void notePauseComponent(ComponentName pauseComponentName) throws RemoteException {
+            public void notePauseComponent(ComponentName pauseComponentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

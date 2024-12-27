@@ -3,6 +3,7 @@ package android.filterfw.core;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.opengl.GLES20;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes.dex */
@@ -34,9 +35,11 @@ public class GLFrame extends Frame {
 
     private native boolean nativeAllocateExternal(GLEnvironment gLEnvironment);
 
-    private native boolean nativeAllocateWithFbo(GLEnvironment gLEnvironment, int i, int i2, int i3);
+    private native boolean nativeAllocateWithFbo(
+            GLEnvironment gLEnvironment, int i, int i2, int i3);
 
-    private native boolean nativeAllocateWithTexture(GLEnvironment gLEnvironment, int i, int i2, int i3);
+    private native boolean nativeAllocateWithTexture(
+            GLEnvironment gLEnvironment, int i, int i2, int i3);
 
     private native boolean nativeCopyFromGL(GLFrame gLFrame);
 
@@ -104,7 +107,8 @@ public class GLFrame extends Frame {
         } else if (bindingType == 103) {
             initWithFbo((int) getBindingId());
         } else {
-            throw new RuntimeException("Attempting to create GL frame with unknown binding type " + bindingType + "!");
+            throw new RuntimeException(
+                    "Attempting to create GL frame with unknown binding type " + bindingType + "!");
         }
         setReusable(reusable);
     }
@@ -114,7 +118,8 @@ public class GLFrame extends Frame {
             if (!nativeAllocateExternal(this.mGLEnvironment)) {
                 throw new RuntimeException("Could not allocate external GL frame!");
             }
-        } else if (!nativeAllocate(this.mGLEnvironment, getFormat().getWidth(), getFormat().getHeight())) {
+        } else if (!nativeAllocate(
+                this.mGLEnvironment, getFormat().getWidth(), getFormat().getHeight())) {
             throw new RuntimeException("Could not allocate GL frame!");
         }
     }
@@ -223,7 +228,8 @@ public class GLFrame extends Frame {
     public void setBitmap(Bitmap bitmap) {
         assertFrameMutable();
         assertGLEnvValid();
-        if (getFormat().getWidth() != bitmap.getWidth() || getFormat().getHeight() != bitmap.getHeight()) {
+        if (getFormat().getWidth() != bitmap.getWidth()
+                || getFormat().getHeight() != bitmap.getHeight()) {
             throw new RuntimeException("Bitmap dimensions do not match GL frame dimensions!");
         }
         Bitmap rgbaBitmap = convertBitmapToRGBA(bitmap);
@@ -236,7 +242,9 @@ public class GLFrame extends Frame {
     public Bitmap getBitmap() {
         assertGLEnvValid();
         flushGPU("getBitmap");
-        Bitmap result = Bitmap.createBitmap(getFormat().getWidth(), getFormat().getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap result =
+                Bitmap.createBitmap(
+                        getFormat().getWidth(), getFormat().getHeight(), Bitmap.Config.ARGB_8888);
         if (!getNativeBitmap(result)) {
             throw new RuntimeException("Could not get bitmap data from GL frame!");
         }
@@ -247,7 +255,12 @@ public class GLFrame extends Frame {
     public void setDataFromFrame(Frame frame) {
         assertGLEnvValid();
         if (getFormat().getSize() < frame.getFormat().getSize()) {
-            throw new RuntimeException("Attempting to assign frame of size " + frame.getFormat().getSize() + " to smaller GL frame of size " + getFormat().getSize() + "!");
+            throw new RuntimeException(
+                    "Attempting to assign frame of size "
+                            + frame.getFormat().getSize()
+                            + " to smaller GL frame of size "
+                            + getFormat().getSize()
+                            + "!");
         }
         if (frame instanceof NativeFrame) {
             nativeCopyFromNative((NativeFrame) frame);
@@ -284,7 +297,8 @@ public class GLFrame extends Frame {
         assertFrameMutable();
         assertGLEnvValid();
         if (!setNativeTextureParam(param, value)) {
-            throw new RuntimeException("Could not set texture value " + param + " = " + value + " for GLFrame!");
+            throw new RuntimeException(
+                    "Could not set texture value " + param + " = " + value + " for GLFrame!");
         }
     }
 
@@ -303,7 +317,14 @@ public class GLFrame extends Frame {
     }
 
     public String toString() {
-        return "GLFrame id: " + this.glFrameId + " (" + getFormat() + ") with texture ID " + getTextureId() + ", FBO ID " + getFboId();
+        return "GLFrame id: "
+                + this.glFrameId
+                + " ("
+                + getFormat()
+                + ") with texture ID "
+                + getTextureId()
+                + ", FBO ID "
+                + getFboId();
     }
 
     @Override // android.filterfw.core.Frame
@@ -331,9 +352,11 @@ public class GLFrame extends Frame {
     private void assertGLEnvValid() {
         if (!this.mGLEnvironment.isContextActive()) {
             if (GLEnvironment.isAnyContextActive()) {
-                throw new RuntimeException("Attempting to access " + this + " with foreign GL context active!");
+                throw new RuntimeException(
+                        "Attempting to access " + this + " with foreign GL context active!");
             }
-            throw new RuntimeException("Attempting to access " + this + " with no GL context  active!");
+            throw new RuntimeException(
+                    "Attempting to access " + this + " with no GL context  active!");
         }
     }
 

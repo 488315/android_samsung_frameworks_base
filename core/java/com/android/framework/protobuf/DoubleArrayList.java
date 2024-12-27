@@ -1,12 +1,12 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.Internal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.RandomAccess;
 
 /* loaded from: classes3.dex */
-final class DoubleArrayList extends AbstractProtobufList<Double> implements Internal.DoubleList, RandomAccess, PrimitiveNonBoxingCollection {
+final class DoubleArrayList extends AbstractProtobufList<Double>
+        implements Internal.DoubleList, RandomAccess, PrimitiveNonBoxingCollection {
     private static final DoubleArrayList EMPTY_LIST = new DoubleArrayList(new double[0], 0);
     private double[] array;
     private int size;
@@ -39,7 +39,8 @@ final class DoubleArrayList extends AbstractProtobufList<Double> implements Inte
         this.modCount++;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.Collection, java.util.List
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -60,7 +61,8 @@ final class DoubleArrayList extends AbstractProtobufList<Double> implements Inte
         return true;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.Collection, java.util.List
     public int hashCode() {
         int result = 1;
         for (int i = 0; i < this.size; i++) {
@@ -70,7 +72,8 @@ final class DoubleArrayList extends AbstractProtobufList<Double> implements Inte
         return result;
     }
 
-    @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
+    @Override // com.android.framework.protobuf.Internal.ProtobufList,
+              // com.android.framework.protobuf.Internal.BooleanList
     /* renamed from: mutableCopyWithCapacity */
     public Internal.ProtobufList<Double> mutableCopyWithCapacity2(int capacity) {
         if (capacity < this.size) {
@@ -115,7 +118,8 @@ final class DoubleArrayList extends AbstractProtobufList<Double> implements Inte
         return this.size;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public Double set(int index, Double element) {
         return Double.valueOf(setDouble(index, element.doubleValue()));
     }
@@ -129,13 +133,15 @@ final class DoubleArrayList extends AbstractProtobufList<Double> implements Inte
         return previousValue;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.AbstractCollection, java.util.Collection, java.util.List
     public boolean add(Double element) {
         addDouble(element.doubleValue());
         return true;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public void add(int index, Double element) {
         addDouble(index, element.doubleValue());
     }
@@ -174,7 +180,8 @@ final class DoubleArrayList extends AbstractProtobufList<Double> implements Inte
         this.modCount++;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractCollection, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractCollection,
+              // java.util.Collection, java.util.List
     public boolean addAll(Collection<? extends Double> collection) {
         ensureIsMutable();
         Internal.checkNotNull(collection);
@@ -199,7 +206,8 @@ final class DoubleArrayList extends AbstractProtobufList<Double> implements Inte
         return true;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public Double remove(int index) {
         ensureIsMutable();
         ensureIndexInRange(index);

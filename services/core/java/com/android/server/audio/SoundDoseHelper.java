@@ -20,14 +20,16 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Log;
 import android.util.SparseIntArray;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.accessibility.magnification.WindowMagnificationGestureHandler$$ExternalSyntheticOutline0;
-import com.android.server.audio.AudioService;
 import com.android.server.utils.EventLogger;
+
 import com.samsung.android.audio.Rune;
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.server.audio.FactoryUtils;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -99,7 +101,8 @@ public final class SoundDoseHelper {
             sb.append(",flags=");
             sb.append(this.mFlags);
             sb.append(",device=");
-            return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(sb, this.mDevice, '}');
+            return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                    sb, this.mDevice, '}');
         }
     }
 
@@ -115,12 +118,16 @@ public final class SoundDoseHelper {
         if (i == 4) {
             return -1;
         }
-        Log.e("AS.SoundDoseHelper", VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid CSD warning "), new Exception());
+        Log.e(
+                "AS.SoundDoseHelper",
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid CSD warning "),
+                new Exception());
         return -1;
     }
 
     /* renamed from: -$$Nest$mupdateSoundDoseRecords_l, reason: not valid java name */
-    public static void m287$$Nest$mupdateSoundDoseRecords_l(SoundDoseHelper soundDoseHelper, SoundDoseRecord[] soundDoseRecordArr, float f) {
+    public static void m287$$Nest$mupdateSoundDoseRecords_l(
+            SoundDoseHelper soundDoseHelper, SoundDoseRecord[] soundDoseRecordArr, float f) {
         soundDoseHelper.getClass();
         long j = 0;
         for (final SoundDoseRecord soundDoseRecord : soundDoseRecordArr) {
@@ -128,15 +135,26 @@ public final class SoundDoseHelper {
             j += (long) soundDoseRecord.duration;
             float f2 = soundDoseRecord.value;
             if (f2 < FullScreenMagnificationGestureHandler.MAX_SCALE) {
-                if (!((ArrayList) soundDoseHelper.mDoseRecords).removeIf(new Predicate() { // from class: com.android.server.audio.SoundDoseHelper$$ExternalSyntheticLambda3
-                    @Override // java.util.function.Predicate
-                    public final boolean test(Object obj) {
-                        SoundDoseRecord soundDoseRecord2 = soundDoseRecord;
-                        SoundDoseRecord soundDoseRecord3 = (SoundDoseRecord) obj;
-                        return soundDoseRecord3.value == (-soundDoseRecord2.value) && soundDoseRecord3.timestamp == soundDoseRecord2.timestamp && soundDoseRecord3.averageMel == soundDoseRecord2.averageMel && soundDoseRecord3.duration == soundDoseRecord2.duration;
-                    }
-                })) {
-                    Log.w("AS.SoundDoseHelper", "Could not find cached record to remove: " + soundDoseRecord);
+                if (!((ArrayList) soundDoseHelper.mDoseRecords)
+                        .removeIf(
+                                new Predicate() { // from class:
+                                                  // com.android.server.audio.SoundDoseHelper$$ExternalSyntheticLambda3
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        SoundDoseRecord soundDoseRecord2 = soundDoseRecord;
+                                        SoundDoseRecord soundDoseRecord3 = (SoundDoseRecord) obj;
+                                        return soundDoseRecord3.value == (-soundDoseRecord2.value)
+                                                && soundDoseRecord3.timestamp
+                                                        == soundDoseRecord2.timestamp
+                                                && soundDoseRecord3.averageMel
+                                                        == soundDoseRecord2.averageMel
+                                                && soundDoseRecord3.duration
+                                                        == soundDoseRecord2.duration;
+                                    }
+                                })) {
+                    Log.w(
+                            "AS.SoundDoseHelper",
+                            "Could not find cached record to remove: " + soundDoseRecord);
                 }
             } else if (f2 > FullScreenMagnificationGestureHandler.MAX_SCALE) {
                 ((ArrayList) soundDoseHelper.mDoseRecords).add(soundDoseRecord);
@@ -148,7 +166,12 @@ public final class SoundDoseHelper {
         soundDoseHelper.mLogger.enqueue(new AudioServiceEvents$SoundDoseEvent(1, j, f));
     }
 
-    public SoundDoseHelper(AudioService audioService, Context context, AudioService.AudioHandler audioHandler, SettingsAdapter settingsAdapter, AudioService.VolumeController volumeController) {
+    public SoundDoseHelper(
+            AudioService audioService,
+            Context context,
+            AudioService.AudioHandler audioHandler,
+            SettingsAdapter settingsAdapter,
+            AudioService.VolumeController volumeController) {
         SparseIntArray sparseIntArray = new SparseIntArray();
         this.mSafeMediaVolumeDevices = sparseIntArray;
         this.mLastMusicActiveTimeMs = 0L;
@@ -167,70 +190,100 @@ public final class SoundDoseHelper {
         this.mNextCsdWarning = 1.0f;
         this.mDoseRecords = new ArrayList();
         this.mGlobalTimeOffsetInSecs = -1L;
-        ISoundDoseCallback iSoundDoseCallback = new ISoundDoseCallback.Stub() { // from class: com.android.server.audio.SoundDoseHelper.1
-            public final void onMomentaryExposure(float f, int i) {
-                if (!SoundDoseHelper.this.mEnableCsd.get()) {
-                    Log.w("AS.SoundDoseHelper", "onMomentaryExposure: csd not supported, ignoring callback");
-                    return;
-                }
-                Log.w("AS.SoundDoseHelper", "DeviceId " + i + " triggered momentary exposure with value: " + f);
-                boolean z = false;
-                SoundDoseHelper.this.mLogger.enqueue(new AudioServiceEvents$SoundDoseEvent(0, 0L, f));
-                synchronized (SoundDoseHelper.this.mCsdStateLock) {
-                    try {
-                        if (SoundDoseHelper.this.mLastMomentaryExposureTimeMs >= 0) {
-                            if (System.currentTimeMillis() - SoundDoseHelper.this.mLastMomentaryExposureTimeMs >= 72000000) {
-                            }
+        ISoundDoseCallback iSoundDoseCallback =
+                new ISoundDoseCallback
+                        .Stub() { // from class: com.android.server.audio.SoundDoseHelper.1
+                    public final void onMomentaryExposure(float f, int i) {
+                        if (!SoundDoseHelper.this.mEnableCsd.get()) {
+                            Log.w(
+                                    "AS.SoundDoseHelper",
+                                    "onMomentaryExposure: csd not supported, ignoring callback");
+                            return;
                         }
-                        SoundDoseHelper.this.mLastMomentaryExposureTimeMs = System.currentTimeMillis();
-                        z = true;
-                    } catch (Throwable th) {
-                        throw th;
-                    }
-                }
-                if (z) {
-                    SoundDoseHelper soundDoseHelper = SoundDoseHelper.this;
-                    soundDoseHelper.mVolumeController.postDisplayCsdWarning(3, SoundDoseHelper.m286$$Nest$mgetTimeoutMsForWarning(soundDoseHelper, 3));
-                }
-            }
-
-            public final void onNewCsdValue(float f, SoundDoseRecord[] soundDoseRecordArr) {
-                if (!SoundDoseHelper.this.mEnableCsd.get()) {
-                    Log.w("AS.SoundDoseHelper", "onNewCsdValue: csd not supported, ignoring value");
-                    return;
-                }
-                Log.i("AS.SoundDoseHelper", "onNewCsdValue: " + f);
-                synchronized (SoundDoseHelper.this.mCsdStateLock) {
-                    try {
-                        SoundDoseHelper soundDoseHelper = SoundDoseHelper.this;
-                        float f2 = soundDoseHelper.mCurrentCsd;
-                        if (f2 < f) {
-                            float f3 = soundDoseHelper.mNextCsdWarning;
-                            if (f2 < f3 && f >= f3) {
-                                if (f3 == 5.0f) {
-                                    soundDoseHelper.mVolumeController.postDisplayCsdWarning(2, SoundDoseHelper.m286$$Nest$mgetTimeoutMsForWarning(soundDoseHelper, 2));
-                                    AudioService.sendMsg(SoundDoseHelper.this.mAudioService.mAudioHandler, 1007, 2, 0, 0, null, 0);
-                                } else {
-                                    soundDoseHelper.mVolumeController.postDisplayCsdWarning(1, 7000);
+                        Log.w(
+                                "AS.SoundDoseHelper",
+                                "DeviceId " + i + " triggered momentary exposure with value: " + f);
+                        boolean z = false;
+                        SoundDoseHelper.this.mLogger.enqueue(
+                                new AudioServiceEvents$SoundDoseEvent(0, 0L, f));
+                        synchronized (SoundDoseHelper.this.mCsdStateLock) {
+                            try {
+                                if (SoundDoseHelper.this.mLastMomentaryExposureTimeMs >= 0) {
+                                    if (System.currentTimeMillis()
+                                                    - SoundDoseHelper.this
+                                                            .mLastMomentaryExposureTimeMs
+                                            >= 72000000) {}
                                 }
-                                SoundDoseHelper.this.mNextCsdWarning += 1.0f;
-                            }
-                        } else {
-                            float f4 = soundDoseHelper.mNextCsdWarning;
-                            float f5 = f4 - 1.0f;
-                            if (f < f5 && f4 >= 2.0f) {
-                                soundDoseHelper.mNextCsdWarning = f5;
+                                SoundDoseHelper.this.mLastMomentaryExposureTimeMs =
+                                        System.currentTimeMillis();
+                                z = true;
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                        SoundDoseHelper soundDoseHelper2 = SoundDoseHelper.this;
-                        soundDoseHelper2.mCurrentCsd = f;
-                        SoundDoseHelper.m287$$Nest$mupdateSoundDoseRecords_l(soundDoseHelper2, soundDoseRecordArr, f);
-                    } catch (Throwable th) {
-                        throw th;
+                        if (z) {
+                            SoundDoseHelper soundDoseHelper = SoundDoseHelper.this;
+                            soundDoseHelper.mVolumeController.postDisplayCsdWarning(
+                                    3,
+                                    SoundDoseHelper.m286$$Nest$mgetTimeoutMsForWarning(
+                                            soundDoseHelper, 3));
+                        }
                     }
-                }
-            }
-        };
+
+                    public final void onNewCsdValue(float f, SoundDoseRecord[] soundDoseRecordArr) {
+                        if (!SoundDoseHelper.this.mEnableCsd.get()) {
+                            Log.w(
+                                    "AS.SoundDoseHelper",
+                                    "onNewCsdValue: csd not supported, ignoring value");
+                            return;
+                        }
+                        Log.i("AS.SoundDoseHelper", "onNewCsdValue: " + f);
+                        synchronized (SoundDoseHelper.this.mCsdStateLock) {
+                            try {
+                                SoundDoseHelper soundDoseHelper = SoundDoseHelper.this;
+                                float f2 = soundDoseHelper.mCurrentCsd;
+                                if (f2 < f) {
+                                    float f3 = soundDoseHelper.mNextCsdWarning;
+                                    if (f2 < f3 && f >= f3) {
+                                        if (f3 == 5.0f) {
+                                            soundDoseHelper.mVolumeController.postDisplayCsdWarning(
+                                                    2,
+                                                    SoundDoseHelper
+                                                            .m286$$Nest$mgetTimeoutMsForWarning(
+                                                                    soundDoseHelper, 2));
+                                            AudioService.sendMsg(
+                                                    SoundDoseHelper.this
+                                                            .mAudioService
+                                                            .mAudioHandler,
+                                                    1007,
+                                                    2,
+                                                    0,
+                                                    0,
+                                                    null,
+                                                    0);
+                                        } else {
+                                            soundDoseHelper.mVolumeController.postDisplayCsdWarning(
+                                                    1, 7000);
+                                        }
+                                        SoundDoseHelper.this.mNextCsdWarning += 1.0f;
+                                    }
+                                } else {
+                                    float f4 = soundDoseHelper.mNextCsdWarning;
+                                    float f5 = f4 - 1.0f;
+                                    if (f < f5 && f4 >= 2.0f) {
+                                        soundDoseHelper.mNextCsdWarning = f5;
+                                    }
+                                }
+                                SoundDoseHelper soundDoseHelper2 = SoundDoseHelper.this;
+                                soundDoseHelper2.mCurrentCsd = f;
+                                SoundDoseHelper.m287$$Nest$mupdateSoundDoseRecords_l(
+                                        soundDoseHelper2, soundDoseRecordArr, f);
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+                };
         this.mSoundDoseCallback = iSoundDoseCallback;
         SparseIntArray sparseIntArray2 = new SparseIntArray();
         this.mSafeMediaVolumeBTDevices = sparseIntArray2;
@@ -250,7 +303,8 @@ public final class SoundDoseHelper {
         boolean z = Rune.SEC_AUDIO_SAFE_MEDIA_VOLUME;
         sparseIntArray.append(128, -1);
         sparseIntArray.append(134217728, -1);
-        sparseIntArray.append(EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION, -1);
+        sparseIntArray.append(
+                EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION, -1);
         sparseIntArray2.append(128, -1);
         sparseIntArray2.append(256, -1);
         sparseIntArray2.append(536870912, -1);
@@ -258,11 +312,13 @@ public final class SoundDoseHelper {
         sparseIntArray2.append(134217728, -1);
         ContentResolver contentResolver = audioService.mContentResolver;
         settingsAdapter.getClass();
-        this.mSafeMediaVolumeState = Settings.Global.getInt(contentResolver, "audio_safe_volume_state", 0);
+        this.mSafeMediaVolumeState =
+                Settings.Global.getInt(contentResolver, "audio_safe_volume_state", 0);
         if (Rune.SEC_AUDIO_SAFE_VOLUME_COUNTRY) {
             this.mSafeMediaVolumeStateForBlueTooth = 3;
         }
-        this.mSafeMediaVolumeIndex = context.getResources().getInteger(R.integer.config_stableDeviceDisplayHeight) * 10;
+        this.mSafeMediaVolumeIndex =
+                context.getResources().getInteger(R.integer.config_stableDeviceDisplayHeight) * 10;
         atomicReference.set(AudioSystem.getSoundDoseInterface(iSoundDoseCallback));
         initCsd();
         this.mAlarmManager = (AlarmManager) context.getSystemService("alarm");
@@ -296,7 +352,12 @@ public final class SoundDoseHelper {
         if (FactoryUtils.isFactoryMode()) {
             return false;
         }
-        return !(Rune.SEC_AUDIO_BIKE_MODE && this.mAudioService.mExt.mIsBikeMode) && this.mSafeMediaVolumeState == 3 && AudioService.mStreamVolumeAlias[i] == 3 && safeDevicesContains(i3) && i2 > safeMediaVolumeIndex(i3) && this.mSafeMediaVolumeBTDevices.indexOfKey(i3) < 0;
+        return !(Rune.SEC_AUDIO_BIKE_MODE && this.mAudioService.mExt.mIsBikeMode)
+                && this.mSafeMediaVolumeState == 3
+                && AudioService.mStreamVolumeAlias[i] == 3
+                && safeDevicesContains(i3)
+                && i2 > safeMediaVolumeIndex(i3)
+                && this.mSafeMediaVolumeBTDevices.indexOfKey(i3) < 0;
     }
 
     public final void configureSafeMedia(boolean z) {
@@ -305,7 +366,13 @@ public final class SoundDoseHelper {
         AudioService.AudioHandler audioHandler = this.mAudioHandler;
         audioHandler.removeMessages(i);
         if (z) {
-            j = SystemClock.uptimeMillis() + (SystemProperties.getBoolean("audio.safemedia.bypass", Rune.SEC_AUDIO_SAFE_VOLUME_COUNTRY ^ true) ? 0 : 30000);
+            j =
+                    SystemClock.uptimeMillis()
+                            + (SystemProperties.getBoolean(
+                                            "audio.safemedia.bypass",
+                                            Rune.SEC_AUDIO_SAFE_VOLUME_COUNTRY ^ true)
+                                    ? 0
+                                    : 30000);
         } else {
             j = 0;
         }
@@ -363,7 +430,8 @@ public final class SoundDoseHelper {
             if (index > safeMediaVolumeIndex) {
                 volumeStreamState.setIndex(safeMediaVolumeIndex, keyAt, str, true);
                 AudioService.AudioHandler audioHandler = this.mAudioHandler;
-                audioHandler.sendMessageAtTime(audioHandler.obtainMessage(0, keyAt, 0, volumeStreamState), 0L);
+                audioHandler.sendMessageAtTime(
+                        audioHandler.obtainMessage(0, keyAt, 0, volumeStreamState), 0L);
             }
         }
     }
@@ -379,7 +447,9 @@ public final class SoundDoseHelper {
         }
         int i2 = AudioService.MIN_STREAM_VOLUME[3];
         int i3 = AudioService.MAX_STREAM_VOLUME[3];
-        this.mSafeMediaVolumeDbfs = this.mContext.getResources().getInteger(R.integer.config_stableDeviceDisplayWidth) / 100.0f;
+        this.mSafeMediaVolumeDbfs =
+                this.mContext.getResources().getInteger(R.integer.config_stableDeviceDisplayWidth)
+                        / 100.0f;
         while (Math.abs(i3 - i2) > 1) {
             int i4 = (i3 + i2) / 2;
             float streamVolumeDB = AudioSystem.getStreamVolumeDB(3, i4, i);
@@ -396,7 +466,14 @@ public final class SoundDoseHelper {
                 i3 = i4;
             }
         }
-        return (Rune.SEC_AUDIO_VOLUME_MONITOR_PHASE_3 ? 7 : Rune.SEC_AUDIO_SAFE_MEDIA_VOLUME ? this.mContext.getResources().getInteger(R.integer.config_stableDeviceDisplayHeight) : 9) * 10;
+        return (Rune.SEC_AUDIO_VOLUME_MONITOR_PHASE_3
+                        ? 7
+                        : Rune.SEC_AUDIO_SAFE_MEDIA_VOLUME
+                                ? this.mContext
+                                        .getResources()
+                                        .getInteger(R.integer.config_stableDeviceDisplayHeight)
+                                : 9)
+                * 10;
     }
 
     public final void handleMessage(Message message) {
@@ -414,7 +491,17 @@ public final class SoundDoseHelper {
                     int i3 = this.mContext.getResources().getConfiguration().mcc;
                     int i4 = this.mMcc;
                     if (i4 != i3 || (i4 == 0 && z)) {
-                        this.mSafeMediaVolumeIndex = this.mIsVolumeEffectOn ? 60 : Rune.SEC_AUDIO_VOLUME_MONITOR_PHASE_3 ? 70 : this.mContext.getResources().getInteger(R.integer.config_stableDeviceDisplayHeight) * 10;
+                        this.mSafeMediaVolumeIndex =
+                                this.mIsVolumeEffectOn
+                                        ? 60
+                                        : Rune.SEC_AUDIO_VOLUME_MONITOR_PHASE_3
+                                                ? 70
+                                                : this.mContext
+                                                                .getResources()
+                                                                .getInteger(
+                                                                        R.integer
+                                                                                .config_stableDeviceDisplayHeight)
+                                                        * 10;
                         initSafeMediaVolumeIndex();
                         updateSafeMediaVolume_l(str);
                         this.mMcc = i3;
@@ -432,7 +519,8 @@ public final class SoundDoseHelper {
                 SettingsAdapter settingsAdapter = this.mSettings;
                 ContentResolver contentResolver2 = this.mAudioService.mContentResolver;
                 settingsAdapter.getClass();
-                Settings.Secure.putIntForUser(contentResolver2, "unsafe_volume_music_active_ms", i6, -2);
+                Settings.Secure.putIntForUser(
+                        contentResolver2, "unsafe_volume_music_active_ms", i6, -2);
                 return;
             case 1005:
                 synchronized (this.mCsdStateLock) {
@@ -444,23 +532,50 @@ public final class SoundDoseHelper {
                         ContentResolver contentResolver3 = this.mAudioService.mContentResolver;
                         String f = Float.toString(this.mCurrentCsd);
                         settingsAdapter2.getClass();
-                        Settings.Global.putString(contentResolver3, "audio_safe_csd_current_value", f);
+                        Settings.Global.putString(
+                                contentResolver3, "audio_safe_csd_current_value", f);
                         SettingsAdapter settingsAdapter3 = this.mSettings;
                         ContentResolver contentResolver4 = this.mAudioService.mContentResolver;
                         String f2 = Float.toString(this.mNextCsdWarning);
                         settingsAdapter3.getClass();
-                        Settings.Global.putString(contentResolver4, "audio_safe_csd_next_warning", f2);
+                        Settings.Global.putString(
+                                contentResolver4, "audio_safe_csd_next_warning", f2);
                         SettingsAdapter settingsAdapter4 = this.mSettings;
                         ContentResolver contentResolver5 = this.mAudioService.mContentResolver;
-                        String str2 = (String) this.mDoseRecords.stream().map(new Function() { // from class: com.android.server.audio.SoundDoseHelper$$ExternalSyntheticLambda2
-                            @Override // java.util.function.Function
-                            public final Object apply(Object obj) {
-                                SoundDoseRecord soundDoseRecord = (SoundDoseRecord) obj;
-                                return (soundDoseRecord.timestamp + SoundDoseHelper.this.mGlobalTimeOffsetInSecs) + "," + soundDoseRecord.duration + "," + String.format("%.3f", Float.valueOf(soundDoseRecord.value)) + "," + String.format("%.3f", Float.valueOf(soundDoseRecord.averageMel));
-                            }
-                        }).collect(Collectors.joining("|"));
+                        String str2 =
+                                (String)
+                                        this.mDoseRecords.stream()
+                                                .map(
+                                                        new Function() { // from class:
+                                                                         // com.android.server.audio.SoundDoseHelper$$ExternalSyntheticLambda2
+                                                            @Override // java.util.function.Function
+                                                            public final Object apply(Object obj) {
+                                                                SoundDoseRecord soundDoseRecord =
+                                                                        (SoundDoseRecord) obj;
+                                                                return (soundDoseRecord.timestamp
+                                                                                + SoundDoseHelper
+                                                                                        .this
+                                                                                        .mGlobalTimeOffsetInSecs)
+                                                                        + ","
+                                                                        + soundDoseRecord.duration
+                                                                        + ","
+                                                                        + String.format(
+                                                                                "%.3f",
+                                                                                Float.valueOf(
+                                                                                        soundDoseRecord
+                                                                                                .value))
+                                                                        + ","
+                                                                        + String.format(
+                                                                                "%.3f",
+                                                                                Float.valueOf(
+                                                                                        soundDoseRecord
+                                                                                                .averageMel));
+                                                            }
+                                                        })
+                                                .collect(Collectors.joining("|"));
                         settingsAdapter4.getClass();
-                        Settings.Global.putString(contentResolver5, "audio_safe_csd_dose_records", str2);
+                        Settings.Global.putString(
+                                contentResolver5, "audio_safe_csd_dose_records", str2);
                     } finally {
                     }
                 }
@@ -468,40 +583,63 @@ public final class SoundDoseHelper {
             case 1006:
                 int i7 = message.arg1;
                 z = message.arg2 == 1;
-                AudioService.VolumeStreamState volumeStreamState = (AudioService.VolumeStreamState) message.obj;
+                AudioService.VolumeStreamState volumeStreamState =
+                        (AudioService.VolumeStreamState) message.obj;
                 int index = volumeStreamState.getIndex(i7);
                 int i8 = volumeStreamState.mStreamType;
                 if (this.mEnableCsd.get()) {
                     ISoundDose iSoundDose = (ISoundDose) this.mSoundDose.get();
                     if (iSoundDose == null) {
-                        Log.w("AS.SoundDoseHelper", "Can not apply attenuation. ISoundDose itf is null.");
+                        Log.w(
+                                "AS.SoundDoseHelper",
+                                "Can not apply attenuation. ISoundDose itf is null.");
                         return;
                     }
                     try {
                         if (!z) {
-                            iSoundDose.updateAttenuation(FullScreenMagnificationGestureHandler.MAX_SCALE, i7);
-                        } else if (AudioService.mStreamVolumeAlias[i8] == 3 && safeDevicesContains(i7)) {
-                            iSoundDose.updateAttenuation(-AudioSystem.getStreamVolumeDB(3, (index + 5) / 10, i7), i7);
+                            iSoundDose.updateAttenuation(
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE, i7);
+                        } else if (AudioService.mStreamVolumeAlias[i8] == 3
+                                && safeDevicesContains(i7)) {
+                            iSoundDose.updateAttenuation(
+                                    -AudioSystem.getStreamVolumeDB(3, (index + 5) / 10, i7), i7);
                         }
                         return;
                     } catch (RemoteException e) {
-                        Log.e("AS.SoundDoseHelper", "Could not apply the attenuation for MEL calculation with volume index " + index, e);
+                        Log.e(
+                                "AS.SoundDoseHelper",
+                                "Could not apply the attenuation for MEL calculation with volume"
+                                    + " index "
+                                        + index,
+                                e);
                         return;
                     }
                 }
                 return;
             case 1007:
-                this.mLogger.enqueue(new AudioServiceEvents$SoundDoseEvent(4, 0L, FullScreenMagnificationGestureHandler.MAX_SCALE));
-                ArrayList devicesForAttributesInt = this.mAudioService.getDevicesForAttributesInt(new AudioAttributes.Builder().setUsage(1).build(), true);
+                this.mLogger.enqueue(
+                        new AudioServiceEvents$SoundDoseEvent(
+                                4, 0L, FullScreenMagnificationGestureHandler.MAX_SCALE));
+                ArrayList devicesForAttributesInt =
+                        this.mAudioService.getDevicesForAttributesInt(
+                                new AudioAttributes.Builder().setUsage(1).build(), true);
                 if (devicesForAttributesInt.isEmpty()) {
                     audioDeviceAttributes = new AudioDeviceAttributes(67108864, "");
                     i = 67108864;
                 } else {
-                    AudioDeviceAttributes audioDeviceAttributes2 = (AudioDeviceAttributes) devicesForAttributesInt.get(0);
+                    AudioDeviceAttributes audioDeviceAttributes2 =
+                            (AudioDeviceAttributes) devicesForAttributesInt.get(0);
                     i = audioDeviceAttributes2.getInternalType();
                     audioDeviceAttributes = audioDeviceAttributes2;
                 }
-                this.mAudioService.setStreamVolumeWithAttributionInt(3, safeMediaVolumeIndex(i) / 10, 0, audioDeviceAttributes, this.mContext.getOpPackageName(), null, true);
+                this.mAudioService.setStreamVolumeWithAttributionInt(
+                        3,
+                        safeMediaVolumeIndex(i) / 10,
+                        0,
+                        audioDeviceAttributes,
+                        this.mContext.getOpPackageName(),
+                        null,
+                        true);
                 return;
             default:
                 Log.e("AS.SoundDoseHelper", "Unexpected msg to handle: " + message.what);
@@ -519,7 +657,8 @@ public final class SoundDoseHelper {
             Method dump skipped, instructions count: 253
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.audio.SoundDoseHelper.initCsd():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.audio.SoundDoseHelper.initCsd():void");
     }
 
     public final void initSafeMediaVolumeIndex() {
@@ -533,7 +672,8 @@ public final class SoundDoseHelper {
 
     public final void initSafeMediaVolumeIndex(boolean z) {
         this.mIsVolumeEffectOn = z;
-        this.mEarShockLogger.enqueueAndLog(0, "initSafeMediaVolumeIndex isVolumeEffectOn is " + z, "AS.SoundDoseHelper");
+        this.mEarShockLogger.enqueueAndLog(
+                0, "initSafeMediaVolumeIndex isVolumeEffectOn is " + z, "AS.SoundDoseHelper");
         for (int i = 0; i < this.mSafeMediaVolumeDevices.size(); i++) {
             int keyAt = this.mSafeMediaVolumeDevices.keyAt(i);
             this.mSafeMediaVolumeDevices.put(keyAt, z ? 60 : getSafeDeviceMediaVolumeIndex(keyAt));
@@ -564,9 +704,17 @@ public final class SoundDoseHelper {
         synchronized (this.mCsdStateLock) {
             try {
                 ISoundDose iSoundDose = (ISoundDose) this.mSoundDose.get();
-                if (iSoundDose != null && iSoundDose.asBinder().isBinderAlive() && this.mCurrentCsd != FullScreenMagnificationGestureHandler.MAX_SCALE) {
-                    Log.d("AS.SoundDoseHelper", "Resetting the saved sound dose value " + this.mCurrentCsd);
-                    iSoundDose.resetCsd(this.mCurrentCsd, (SoundDoseRecord[]) ((ArrayList) this.mDoseRecords).toArray(new SoundDoseRecord[0]));
+                if (iSoundDose != null
+                        && iSoundDose.asBinder().isBinderAlive()
+                        && this.mCurrentCsd != FullScreenMagnificationGestureHandler.MAX_SCALE) {
+                    Log.d(
+                            "AS.SoundDoseHelper",
+                            "Resetting the saved sound dose value " + this.mCurrentCsd);
+                    iSoundDose.resetCsd(
+                            this.mCurrentCsd,
+                            (SoundDoseRecord[])
+                                    ((ArrayList) this.mDoseRecords)
+                                            .toArray(new SoundDoseRecord[0]));
                 }
             } catch (RemoteException unused) {
             }
@@ -585,7 +733,9 @@ public final class SoundDoseHelper {
     public final void sanitizeDoseRecords_l() {
         if (this.mDoseRecords.size() > 655) {
             int size = this.mDoseRecords.size() - 655;
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(size, "Removing ", " records from the total of ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            size, "Removing ", " records from the total of ");
             m.append(this.mDoseRecords.size());
             Log.w("AS.SoundDoseHelper", m.toString());
             Iterator it = this.mDoseRecords.iterator();
@@ -604,8 +754,14 @@ public final class SoundDoseHelper {
                 this.mAlarmManager.cancel(pendingIntent);
                 this.mMusicActiveIntent = null;
             }
-            this.mMusicActiveIntent = PendingIntent.getBroadcast(this.mContext, 1, new Intent("com.android.server.audio.action.CHECK_MUSIC_ACTIVE"), 201326592);
-            this.mAlarmManager.setExactAndAllowWhileIdle(2, SystemClock.elapsedRealtime() + 60000, this.mMusicActiveIntent);
+            this.mMusicActiveIntent =
+                    PendingIntent.getBroadcast(
+                            this.mContext,
+                            1,
+                            new Intent("com.android.server.audio.action.CHECK_MUSIC_ACTIVE"),
+                            201326592);
+            this.mAlarmManager.setExactAndAllowWhileIdle(
+                    2, SystemClock.elapsedRealtime() + 60000, this.mMusicActiveIntent);
         }
     }
 
@@ -617,7 +773,8 @@ public final class SoundDoseHelper {
                 return;
             }
             try {
-                ISoundDose.AudioDeviceCategory audioDeviceCategory = new ISoundDose.AudioDeviceCategory();
+                ISoundDose.AudioDeviceCategory audioDeviceCategory =
+                        new ISoundDose.AudioDeviceCategory();
                 audioDeviceCategory.address = str;
                 audioDeviceCategory.internalAudioType = i;
                 audioDeviceCategory.csdCompatible = z;
@@ -662,8 +819,12 @@ public final class SoundDoseHelper {
     public final void updateCsdEnabled(String str) {
         boolean z = false;
         this.mForceCsdProperty.set(SystemProperties.getBoolean("audio.safemedia.csd.force", false));
-        boolean z2 = this.mContext.getResources().getBoolean(R.bool.config_showBuiltinWirelessChargingAnim);
-        boolean z3 = this.mContext.getResources().getBoolean(R.bool.config_showGesturalNavigationHints);
+        boolean z2 =
+                this.mContext
+                        .getResources()
+                        .getBoolean(R.bool.config_showBuiltinWirelessChargingAnim);
+        boolean z3 =
+                this.mContext.getResources().getBoolean(R.bool.config_showGesturalNavigationHints);
         boolean z4 = (z2 && z3) || this.mForceCsdProperty.get();
         synchronized (this.mCsdAsAFeatureLock) {
             try {
@@ -672,13 +833,16 @@ public final class SoundDoseHelper {
                 } else {
                     this.mIsCsdAsAFeatureAvailable = true;
                     if (!this.mIsCsdAsAFeatureEnabled) {
-                        if (this.mForceCsdProperty.get()) {
-                        }
-                        Log.v("AS.SoundDoseHelper", str + ": CSD as a feature is not enforced and enabled: " + z);
+                        if (this.mForceCsdProperty.get()) {}
+                        Log.v(
+                                "AS.SoundDoseHelper",
+                                str + ": CSD as a feature is not enforced and enabled: " + z);
                         z4 = z;
                     }
                     z = true;
-                    Log.v("AS.SoundDoseHelper", str + ": CSD as a feature is not enforced and enabled: " + z);
+                    Log.v(
+                            "AS.SoundDoseHelper",
+                            str + ": CSD as a feature is not enforced and enabled: " + z);
                     z4 = z;
                 }
             } finally {
@@ -695,7 +859,8 @@ public final class SoundDoseHelper {
     }
 
     public final boolean updateCsdForTestApi() {
-        if (this.mForceCsdProperty.get() != SystemProperties.getBoolean("audio.safemedia.csd.force", false)) {
+        if (this.mForceCsdProperty.get()
+                != SystemProperties.getBoolean("audio.safemedia.csd.force", false)) {
             updateCsdEnabled("SystemPropertiesChangeCallback");
         }
         return this.mEnableCsd.get();
@@ -703,12 +868,20 @@ public final class SoundDoseHelper {
 
     public final void updateSafeMediaVolume_l(String str) {
         int i = 1;
-        boolean z = SystemProperties.getBoolean("audio.safemedia.bypass", false) || this.mEnableCsd.get();
+        boolean z =
+                SystemProperties.getBoolean("audio.safemedia.bypass", false)
+                        || this.mEnableCsd.get();
         boolean z2 = SystemProperties.getBoolean("audio.safemedia.force", false);
         if (!Rune.SEC_AUDIO_SAFE_VOLUME_COUNTRY) {
             z = true;
         }
-        boolean z3 = (this.mContext.getResources().getBoolean(R.bool.config_showBuiltinWirelessChargingAnim) || z2 || Rune.SEC_AUDIO_SAFE_MEDIA_VOLUME) && !z;
+        boolean z3 =
+                (this.mContext
+                                        .getResources()
+                                        .getBoolean(R.bool.config_showBuiltinWirelessChargingAnim)
+                                || z2
+                                || Rune.SEC_AUDIO_SAFE_MEDIA_VOLUME)
+                        && !z;
         boolean z4 = Rune.SEC_AUDIO_VOLUME_MONITOR_PHASE_3;
         if (z4) {
             int i2 = this.mSafeMediaVolumeState;

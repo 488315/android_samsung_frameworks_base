@@ -11,12 +11,16 @@ import android.os.RemoteException;
 public interface ISystemGestureExclusionListener extends IInterface {
     public static final String DESCRIPTOR = "android.view.ISystemGestureExclusionListener";
 
-    void onSystemGestureExclusionChanged(int i, Region region, Region region2) throws RemoteException;
+    void onSystemGestureExclusionChanged(int i, Region region, Region region2)
+            throws RemoteException;
 
     public static class Default implements ISystemGestureExclusionListener {
         @Override // android.view.ISystemGestureExclusionListener
-        public void onSystemGestureExclusionChanged(int displayId, Region systemGestureExclusion, Region systemGestureExclusionUnrestricted) throws RemoteException {
-        }
+        public void onSystemGestureExclusionChanged(
+                int displayId,
+                Region systemGestureExclusion,
+                Region systemGestureExclusionUnrestricted)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +28,7 @@ public interface ISystemGestureExclusionListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISystemGestureExclusionListener {
+    public abstract static class Stub extends Binder implements ISystemGestureExclusionListener {
         static final int TRANSACTION_onSystemGestureExclusionChanged = 1;
 
         public Stub() {
@@ -62,7 +66,8 @@ public interface ISystemGestureExclusionListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISystemGestureExclusionListener.DESCRIPTOR);
             }
@@ -100,7 +105,11 @@ public interface ISystemGestureExclusionListener extends IInterface {
             }
 
             @Override // android.view.ISystemGestureExclusionListener
-            public void onSystemGestureExclusionChanged(int displayId, Region systemGestureExclusion, Region systemGestureExclusionUnrestricted) throws RemoteException {
+            public void onSystemGestureExclusionChanged(
+                    int displayId,
+                    Region systemGestureExclusion,
+                    Region systemGestureExclusionUnrestricted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISystemGestureExclusionListener.DESCRIPTOR);

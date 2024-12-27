@@ -12,10 +12,12 @@ import com.android.internal.org.bouncycastle.asn1.x9.DHDomainParameters;
 import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.crypto.params.DHPublicKeyParameters;
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.KeyUtil;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
+
 import javax.crypto.interfaces.DHPublicKey;
 import javax.crypto.spec.DHParameterSpec;
 import javax.crypto.spec.DHPublicKeySpec;
@@ -39,7 +41,11 @@ public class JCEDHPublicKey implements DHPublicKey {
 
     JCEDHPublicKey(DHPublicKeyParameters params) {
         this.y = params.getY();
-        this.dhSpec = new DHParameterSpec(params.getParameters().getP(), params.getParameters().getG(), params.getParameters().getL());
+        this.dhSpec =
+                new DHParameterSpec(
+                        params.getParameters().getP(),
+                        params.getParameters().getG(),
+                        params.getParameters().getL());
     }
 
     JCEDHPublicKey(BigInteger y, DHParameterSpec dhSpec) {
@@ -54,10 +60,13 @@ public class JCEDHPublicKey implements DHPublicKey {
             this.y = derY.getValue();
             ASN1Sequence seq = ASN1Sequence.getInstance(info.getAlgorithmId().getParameters());
             ASN1ObjectIdentifier id = info.getAlgorithmId().getAlgorithm();
-            if (id.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement) || isPKCSParam(seq)) {
+            if (id.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)
+                    || isPKCSParam(seq)) {
                 DHParameter params = DHParameter.getInstance(seq);
                 if (params.getL() != null) {
-                    this.dhSpec = new DHParameterSpec(params.getP(), params.getG(), params.getL().intValue());
+                    this.dhSpec =
+                            new DHParameterSpec(
+                                    params.getP(), params.getG(), params.getL().intValue());
                     return;
                 } else {
                     this.dhSpec = new DHParameterSpec(params.getP(), params.getG());
@@ -66,7 +75,8 @@ public class JCEDHPublicKey implements DHPublicKey {
             }
             if (id.equals((ASN1Primitive) X9ObjectIdentifiers.dhpublicnumber)) {
                 DHDomainParameters params2 = DHDomainParameters.getInstance(seq);
-                this.dhSpec = new DHParameterSpec(params2.getP().getValue(), params2.getG().getValue());
+                this.dhSpec =
+                        new DHParameterSpec(params2.getP().getValue(), params2.getG().getValue());
                 return;
             }
             throw new IllegalArgumentException("unknown algorithm type: " + id);
@@ -90,7 +100,12 @@ public class JCEDHPublicKey implements DHPublicKey {
         if (this.info != null) {
             return KeyUtil.getEncodedSubjectPublicKeyInfo(this.info);
         }
-        return KeyUtil.getEncodedSubjectPublicKeyInfo(new AlgorithmIdentifier(PKCSObjectIdentifiers.dhKeyAgreement, new DHParameter(this.dhSpec.getP(), this.dhSpec.getG(), this.dhSpec.getL())), new ASN1Integer(this.y));
+        return KeyUtil.getEncodedSubjectPublicKeyInfo(
+                new AlgorithmIdentifier(
+                        PKCSObjectIdentifiers.dhKeyAgreement,
+                        new DHParameter(
+                                this.dhSpec.getP(), this.dhSpec.getG(), this.dhSpec.getL())),
+                new ASN1Integer(this.y));
     }
 
     @Override // javax.crypto.interfaces.DHKey
@@ -117,7 +132,9 @@ public class JCEDHPublicKey implements DHPublicKey {
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         this.y = (BigInteger) in.readObject();
-        this.dhSpec = new DHParameterSpec((BigInteger) in.readObject(), (BigInteger) in.readObject(), in.readInt());
+        this.dhSpec =
+                new DHParameterSpec(
+                        (BigInteger) in.readObject(), (BigInteger) in.readObject(), in.readInt());
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {

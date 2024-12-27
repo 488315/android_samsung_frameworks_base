@@ -2,6 +2,7 @@ package android.media.tv.tuner.filter;
 
 import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerVersionChecker;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -48,12 +49,10 @@ public class AvSettings extends Settings {
     private int mVideoStreamType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioStreamType {
-    }
+    public @interface AudioStreamType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VideoStreamType {
-    }
+    public @interface VideoStreamType {}
 
     /* JADX WARN: Illegal instructions before constructor call */
     /*
@@ -80,7 +79,9 @@ public class AvSettings extends Settings {
             r1.mUseSecureMemory = r7
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.tv.tuner.filter.AvSettings.<init>(int, boolean, boolean, int, int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.media.tv.tuner.filter.AvSettings.<init>(int,"
+                    + " boolean, boolean, int, int, boolean):void");
     }
 
     public boolean isPassthrough() {
@@ -126,7 +127,8 @@ public class AvSettings extends Settings {
         }
 
         public Builder setAudioStreamType(int audioStreamType) {
-            if (TunerVersionChecker.checkHigherOrEqualVersionTo(65537, "setAudioStreamType") && this.mIsAudio) {
+            if (TunerVersionChecker.checkHigherOrEqualVersionTo(65537, "setAudioStreamType")
+                    && this.mIsAudio) {
                 this.mAudioStreamType = audioStreamType;
                 this.mVideoStreamType = 0;
             }
@@ -134,7 +136,8 @@ public class AvSettings extends Settings {
         }
 
         public Builder setVideoStreamType(int videoStreamType) {
-            if (TunerVersionChecker.checkHigherOrEqualVersionTo(65537, "setVideoStreamType") && !this.mIsAudio) {
+            if (TunerVersionChecker.checkHigherOrEqualVersionTo(65537, "setVideoStreamType")
+                    && !this.mIsAudio) {
                 this.mVideoStreamType = videoStreamType;
                 this.mAudioStreamType = 0;
             }
@@ -149,7 +152,13 @@ public class AvSettings extends Settings {
         }
 
         public AvSettings build() {
-            return new AvSettings(this.mMainType, this.mIsAudio, this.mIsPassthrough, this.mAudioStreamType, this.mVideoStreamType, this.mUseSecureMemory);
+            return new AvSettings(
+                    this.mMainType,
+                    this.mIsAudio,
+                    this.mIsPassthrough,
+                    this.mAudioStreamType,
+                    this.mVideoStreamType,
+                    this.mUseSecureMemory);
         }
     }
 }

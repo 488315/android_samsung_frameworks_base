@@ -12,8 +12,7 @@ public interface IKeyguardDrawnCallback extends IInterface {
 
     public static class Default implements IKeyguardDrawnCallback {
         @Override // com.android.internal.policy.IKeyguardDrawnCallback
-        public void onDrawn() throws RemoteException {
-        }
+        public void onDrawn() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +20,9 @@ public interface IKeyguardDrawnCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyguardDrawnCallback {
-        public static final String DESCRIPTOR = "com.android.internal.policy.IKeyguardDrawnCallback";
+    public abstract static class Stub extends Binder implements IKeyguardDrawnCallback {
+        public static final String DESCRIPTOR =
+                "com.android.internal.policy.IKeyguardDrawnCallback";
         static final int TRANSACTION_onDrawn = 1;
 
         public Stub() {
@@ -60,7 +60,8 @@ public interface IKeyguardDrawnCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

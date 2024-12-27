@@ -2,6 +2,7 @@ package com.samsung.android.allshare;
 
 import android.content.ContentResolver;
 import android.os.Bundle;
+
 import com.sec.android.allshare.iface.CVMessage;
 
 /* loaded from: classes3.dex */
@@ -28,7 +29,9 @@ public interface IAllShareConnector {
 
     CVMessage requestCVMSync(CVMessage cVMessage);
 
-    boolean subscribeAllShareEvent(String str, Bundle bundle, AllShareEventHandler allShareEventHandler);
+    boolean subscribeAllShareEvent(
+            String str, Bundle bundle, AllShareEventHandler allShareEventHandler);
 
-    void unsubscribeAllShareEvent(String str, Bundle bundle, AllShareEventHandler allShareEventHandler);
+    void unsubscribeAllShareEvent(
+            String str, Bundle bundle, AllShareEventHandler allShareEventHandler);
 }

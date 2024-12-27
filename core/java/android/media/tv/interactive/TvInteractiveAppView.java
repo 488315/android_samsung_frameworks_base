@@ -11,8 +11,6 @@ import android.media.tv.TvInputManager;
 import android.media.tv.TvRecordingInfo;
 import android.media.tv.TvTrackInfo;
 import android.media.tv.TvView;
-import android.media.tv.interactive.TvInteractiveAppManager;
-import android.media.tv.interactive.TvInteractiveAppView;
 import android.net.Uri;
 import android.net.http.SslCertificate;
 import android.os.Bundle;
@@ -28,8 +26,10 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewRootImpl;
+
 import com.android.internal.hidden_from_bootclasspath.android.media.tv.flags.Flags;
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -38,7 +38,8 @@ import java.util.concurrent.Executor;
 public class TvInteractiveAppView extends ViewGroup {
     public static final String BI_INTERACTIVE_APP_KEY_ALIAS = "alias";
     public static final String BI_INTERACTIVE_APP_KEY_CERTIFICATE = "certificate";
-    public static final String BI_INTERACTIVE_APP_KEY_HTTP_ADDITIONAL_HEADERS = "http_additional_headers";
+    public static final String BI_INTERACTIVE_APP_KEY_HTTP_ADDITIONAL_HEADERS =
+            "http_additional_headers";
     public static final String BI_INTERACTIVE_APP_KEY_HTTP_USER_AGENT = "http_user_agent";
     public static final String BI_INTERACTIVE_APP_KEY_PRIVATE_KEY = "private_key";
     private static final boolean DEBUG = false;
@@ -53,7 +54,8 @@ public class TvInteractiveAppView extends ViewGroup {
     private Executor mCallbackExecutor;
     private final Object mCallbackLock;
     private final int mDefStyleAttr;
-    private final TvInteractiveAppManager.Session.FinishedInputEventCallback mFinishedInputEventCallback;
+    private final TvInteractiveAppManager.Session.FinishedInputEventCallback
+            mFinishedInputEventCallback;
     private final Handler mHandler;
     private boolean mMediaViewCreated;
     private Rect mMediaViewFrame;
@@ -91,42 +93,55 @@ public class TvInteractiveAppView extends ViewGroup {
         super(context, attrs, defStyleAttr);
         this.mHandler = new Handler();
         this.mCallbackLock = new Object();
-        this.mSurfaceHolderCallback = new SurfaceHolder.Callback() { // from class: android.media.tv.interactive.TvInteractiveAppView.1
-            @Override // android.view.SurfaceHolder.Callback
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-                TvInteractiveAppView.this.mSurfaceFormat = format;
-                TvInteractiveAppView.this.mSurfaceWidth = width;
-                TvInteractiveAppView.this.mSurfaceHeight = height;
-                TvInteractiveAppView.this.mSurfaceChanged = true;
-                TvInteractiveAppView.this.dispatchSurfaceChanged(TvInteractiveAppView.this.mSurfaceFormat, TvInteractiveAppView.this.mSurfaceWidth, TvInteractiveAppView.this.mSurfaceHeight);
-            }
+        this.mSurfaceHolderCallback =
+                new SurfaceHolder
+                        .Callback() { // from class:
+                                      // android.media.tv.interactive.TvInteractiveAppView.1
+                    @Override // android.view.SurfaceHolder.Callback
+                    public void surfaceChanged(
+                            SurfaceHolder holder, int format, int width, int height) {
+                        TvInteractiveAppView.this.mSurfaceFormat = format;
+                        TvInteractiveAppView.this.mSurfaceWidth = width;
+                        TvInteractiveAppView.this.mSurfaceHeight = height;
+                        TvInteractiveAppView.this.mSurfaceChanged = true;
+                        TvInteractiveAppView.this.dispatchSurfaceChanged(
+                                TvInteractiveAppView.this.mSurfaceFormat,
+                                TvInteractiveAppView.this.mSurfaceWidth,
+                                TvInteractiveAppView.this.mSurfaceHeight);
+                    }
 
-            @Override // android.view.SurfaceHolder.Callback
-            public void surfaceCreated(SurfaceHolder holder) {
-                TvInteractiveAppView.this.mSurface = holder.getSurface();
-                TvInteractiveAppView.this.setSessionSurface(TvInteractiveAppView.this.mSurface);
-            }
+                    @Override // android.view.SurfaceHolder.Callback
+                    public void surfaceCreated(SurfaceHolder holder) {
+                        TvInteractiveAppView.this.mSurface = holder.getSurface();
+                        TvInteractiveAppView.this.setSessionSurface(
+                                TvInteractiveAppView.this.mSurface);
+                    }
 
-            @Override // android.view.SurfaceHolder.Callback
-            public void surfaceDestroyed(SurfaceHolder holder) {
-                TvInteractiveAppView.this.mSurface = null;
-                TvInteractiveAppView.this.mSurfaceChanged = false;
-                TvInteractiveAppView.this.setSessionSurface(null);
-            }
-        };
-        this.mFinishedInputEventCallback = new TvInteractiveAppManager.Session.FinishedInputEventCallback() { // from class: android.media.tv.interactive.TvInteractiveAppView.3
-            @Override // android.media.tv.interactive.TvInteractiveAppManager.Session.FinishedInputEventCallback
-            public void onFinishedInputEvent(Object token, boolean handled) {
-                ViewRootImpl viewRootImpl;
-                if (handled) {
-                    return;
-                }
-                InputEvent event = (InputEvent) token;
-                if (!TvInteractiveAppView.this.dispatchUnhandledInputEvent(event) && (viewRootImpl = TvInteractiveAppView.this.getViewRootImpl()) != null) {
-                    viewRootImpl.dispatchUnhandledInputEvent(event);
-                }
-            }
-        };
+                    @Override // android.view.SurfaceHolder.Callback
+                    public void surfaceDestroyed(SurfaceHolder holder) {
+                        TvInteractiveAppView.this.mSurface = null;
+                        TvInteractiveAppView.this.mSurfaceChanged = false;
+                        TvInteractiveAppView.this.setSessionSurface(null);
+                    }
+                };
+        this.mFinishedInputEventCallback =
+                new TvInteractiveAppManager.Session
+                        .FinishedInputEventCallback() { // from class:
+                                                        // android.media.tv.interactive.TvInteractiveAppView.3
+                    @Override // android.media.tv.interactive.TvInteractiveAppManager.Session.FinishedInputEventCallback
+                    public void onFinishedInputEvent(Object token, boolean handled) {
+                        ViewRootImpl viewRootImpl;
+                        if (handled) {
+                            return;
+                        }
+                        InputEvent event = (InputEvent) token;
+                        if (!TvInteractiveAppView.this.dispatchUnhandledInputEvent(event)
+                                && (viewRootImpl = TvInteractiveAppView.this.getViewRootImpl())
+                                        != null) {
+                            viewRootImpl.dispatchUnhandledInputEvent(event);
+                        }
+                    }
+                };
         int sourceResId = Resources.getAttributeSetSourceResId(attrs);
         if (sourceResId != 0) {
             Log.d(TAG, "Build local AttributeSet");
@@ -139,11 +154,14 @@ public class TvInteractiveAppView extends ViewGroup {
         }
         this.mDefStyleAttr = defStyleAttr;
         resetSurfaceView();
-        this.mTvInteractiveAppManager = (TvInteractiveAppManager) getContext().getSystemService(Context.TV_INTERACTIVE_APP_SERVICE);
+        this.mTvInteractiveAppManager =
+                (TvInteractiveAppManager)
+                        getContext().getSystemService(Context.TV_INTERACTIVE_APP_SERVICE);
     }
 
     public void setCallback(Executor executor, TvInteractiveAppCallback callback) {
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) callback);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) callback);
         synchronized (this.mCallbackLock) {
             this.mCallbackExecutor = executor;
             this.mCallback = callback;
@@ -172,7 +190,11 @@ public class TvInteractiveAppView extends ViewGroup {
     @Override // android.view.ViewGroup, android.view.View
     public void onLayout(boolean changed, int left, int top, int right, int bottom) {
         if (this.mUseRequestedSurfaceLayout) {
-            this.mSurfaceView.layout(this.mSurfaceViewLeft, this.mSurfaceViewTop, this.mSurfaceViewRight, this.mSurfaceViewBottom);
+            this.mSurfaceView.layout(
+                    this.mSurfaceViewLeft,
+                    this.mSurfaceViewTop,
+                    this.mSurfaceViewRight,
+                    this.mSurfaceViewBottom);
         } else {
             this.mSurfaceView.layout(0, 0, right - left, bottom - top);
         }
@@ -184,7 +206,9 @@ public class TvInteractiveAppView extends ViewGroup {
         int width = this.mSurfaceView.getMeasuredWidth();
         int height = this.mSurfaceView.getMeasuredHeight();
         int childState = this.mSurfaceView.getMeasuredState();
-        setMeasuredDimension(resolveSizeAndState(width, widthMeasureSpec, childState), resolveSizeAndState(height, heightMeasureSpec, childState << 16));
+        setMeasuredDimension(
+                resolveSizeAndState(width, widthMeasureSpec, childState),
+                resolveSizeAndState(height, heightMeasureSpec, childState << 16));
     }
 
     @Override // android.view.View
@@ -204,13 +228,19 @@ public class TvInteractiveAppView extends ViewGroup {
             removeView(this.mSurfaceView);
         }
         this.mSurface = null;
-        this.mSurfaceView = new SurfaceView(getContext(), this.mAttrs, this.mDefStyleAttr) { // from class: android.media.tv.interactive.TvInteractiveAppView.2
-            @Override // android.view.SurfaceView
-            protected void updateSurface() {
-                super.updateSurface();
-                TvInteractiveAppView.this.relayoutSessionMediaView();
-            }
-        };
+        this.mSurfaceView =
+                new SurfaceView(
+                        getContext(),
+                        this.mAttrs,
+                        this
+                                .mDefStyleAttr) { // from class:
+                                                  // android.media.tv.interactive.TvInteractiveAppView.2
+                    @Override // android.view.SurfaceView
+                    protected void updateSurface() {
+                        super.updateSurface();
+                        TvInteractiveAppView.this.relayoutSessionMediaView();
+                    }
+                };
         this.mSurfaceView.setSecure(true);
         this.mSurfaceView.getHolder().addCallback(this.mSurfaceHolderCallback);
         this.mSurfaceView.getHolder().setFormat(-3);
@@ -281,7 +311,8 @@ public class TvInteractiveAppView extends ViewGroup {
     }
 
     public boolean dispatchUnhandledInputEvent(InputEvent event) {
-        if (this.mOnUnhandledInputEventListener != null && this.mOnUnhandledInputEventListener.onUnhandledInputEvent(event)) {
+        if (this.mOnUnhandledInputEventListener != null
+                && this.mOnUnhandledInputEventListener.onUnhandledInputEvent(event)) {
             return true;
         }
         return onUnhandledInputEvent(event);
@@ -291,7 +322,8 @@ public class TvInteractiveAppView extends ViewGroup {
         return false;
     }
 
-    public void setOnUnhandledInputEventListener(Executor executor, OnUnhandledInputEventListener listener) {
+    public void setOnUnhandledInputEventListener(
+            Executor executor, OnUnhandledInputEventListener listener) {
         this.mOnUnhandledInputEventListener = listener;
     }
 
@@ -312,14 +344,17 @@ public class TvInteractiveAppView extends ViewGroup {
             return false;
         }
         InputEvent copiedEvent = event.copy();
-        int ret = this.mSession.dispatchInputEvent(copiedEvent, copiedEvent, this.mFinishedInputEventCallback, this.mHandler);
+        int ret =
+                this.mSession.dispatchInputEvent(
+                        copiedEvent, copiedEvent, this.mFinishedInputEventCallback, this.mHandler);
         return ret != 0;
     }
 
     public void prepareInteractiveApp(String iAppServiceId, int type) {
         this.mSessionCallback = new MySessionCallback(iAppServiceId, type);
         if (this.mTvInteractiveAppManager != null) {
-            this.mTvInteractiveAppManager.createSession(iAppServiceId, type, this.mSessionCallback, this.mHandler);
+            this.mTvInteractiveAppManager.createSession(
+                    iAppServiceId, type, this.mSessionCallback, this.mHandler);
         }
     }
 
@@ -560,81 +595,86 @@ public class TvInteractiveAppView extends ViewGroup {
         }
     }
 
-    public static abstract class TvInteractiveAppCallback {
-        public void onPlaybackCommandRequest(String iAppServiceId, String cmdType, Bundle parameters) {
-        }
+    public abstract static class TvInteractiveAppCallback {
+        public void onPlaybackCommandRequest(
+                String iAppServiceId, String cmdType, Bundle parameters) {}
 
-        public void onTimeShiftCommandRequest(String iAppServiceId, String cmdType, Bundle parameters) {
-        }
+        public void onTimeShiftCommandRequest(
+                String iAppServiceId, String cmdType, Bundle parameters) {}
 
-        public void onStateChanged(String iAppServiceId, int state, int err) {
-        }
+        public void onStateChanged(String iAppServiceId, int state, int err) {}
 
-        public void onBiInteractiveAppCreated(String iAppServiceId, Uri biIAppUri, String biIAppId) {
-        }
+        public void onBiInteractiveAppCreated(
+                String iAppServiceId, Uri biIAppUri, String biIAppId) {}
 
-        public void onTeletextAppStateChanged(String iAppServiceId, int state) {
-        }
+        public void onTeletextAppStateChanged(String iAppServiceId, int state) {}
 
-        public void onSetVideoBounds(String iAppServiceId, Rect rect) {
-        }
+        public void onSetVideoBounds(String iAppServiceId, Rect rect) {}
 
-        public void onRequestCurrentVideoBounds(String iAppServiceId) {
-        }
+        public void onRequestCurrentVideoBounds(String iAppServiceId) {}
 
-        public void onRequestCurrentChannelUri(String iAppServiceId) {
-        }
+        public void onRequestCurrentChannelUri(String iAppServiceId) {}
 
-        public void onRequestCurrentChannelLcn(String iAppServiceId) {
-        }
+        public void onRequestCurrentChannelLcn(String iAppServiceId) {}
 
-        public void onRequestStreamVolume(String iAppServiceId) {
-        }
+        public void onRequestStreamVolume(String iAppServiceId) {}
 
-        public void onRequestTrackInfoList(String iAppServiceId) {
-        }
+        public void onRequestTrackInfoList(String iAppServiceId) {}
 
-        public void onRequestSelectedTrackInfo(String iAppServiceId) {
-        }
+        public void onRequestSelectedTrackInfo(String iAppServiceId) {}
 
-        public void onRequestCurrentTvInputId(String iAppServiceId) {
-        }
+        public void onRequestCurrentTvInputId(String iAppServiceId) {}
 
-        public void onRequestTimeShiftMode(String iAppServiceId) {
-        }
+        public void onRequestTimeShiftMode(String iAppServiceId) {}
 
-        public void onRequestAvailableSpeeds(String iAppServiceId) {
-        }
+        public void onRequestAvailableSpeeds(String iAppServiceId) {}
 
-        public void onRequestStartRecording(String iAppServiceId, String requestId, Uri programUri) {
-        }
+        public void onRequestStartRecording(
+                String iAppServiceId, String requestId, Uri programUri) {}
 
-        public void onRequestStopRecording(String iAppServiceId, String recordingId) {
-        }
+        public void onRequestStopRecording(String iAppServiceId, String recordingId) {}
 
-        public void onRequestScheduleRecording(String iAppServiceId, String requestId, String inputId, Uri channelUri, Uri programUri, Bundle params) {
-        }
+        public void onRequestScheduleRecording(
+                String iAppServiceId,
+                String requestId,
+                String inputId,
+                Uri channelUri,
+                Uri programUri,
+                Bundle params) {}
 
-        public void onRequestScheduleRecording(String iAppServiceId, String requestId, String inputId, Uri channelUri, long startTime, long duration, int repeatDays, Bundle params) {
-        }
+        public void onRequestScheduleRecording(
+                String iAppServiceId,
+                String requestId,
+                String inputId,
+                Uri channelUri,
+                long startTime,
+                long duration,
+                int repeatDays,
+                Bundle params) {}
 
-        public void onRequestSigning(String iAppServiceId, String signingId, String algorithm, String alias, byte[] data) {
-        }
+        public void onRequestSigning(
+                String iAppServiceId,
+                String signingId,
+                String algorithm,
+                String alias,
+                byte[] data) {}
 
-        public void onRequestSigning(String iAppServiceId, String signingId, String algorithm, String host, int port, byte[] data) {
-        }
+        public void onRequestSigning(
+                String iAppServiceId,
+                String signingId,
+                String algorithm,
+                String host,
+                int port,
+                byte[] data) {}
 
-        public void onRequestCertificate(String iAppServiceId, String host, int port) {
-        }
+        public void onRequestCertificate(String iAppServiceId, String host, int port) {}
 
-        public void onSetTvRecordingInfo(String iAppServiceId, String recordingId, TvRecordingInfo recordingInfo) {
-        }
+        public void onSetTvRecordingInfo(
+                String iAppServiceId, String recordingId, TvRecordingInfo recordingInfo) {}
 
-        public void onRequestTvRecordingInfo(String iAppServiceId, String recordingId) {
-        }
+        public void onRequestTvRecordingInfo(String iAppServiceId, String recordingId) {}
 
-        public void onRequestTvRecordingInfoList(String iAppServiceId, int type) {
-        }
+        public void onRequestTvRecordingInfoList(String iAppServiceId, int type) {}
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -662,7 +702,10 @@ public class TvInteractiveAppView extends ViewGroup {
                 if (TvInteractiveAppView.this.mSurface != null) {
                     TvInteractiveAppView.this.setSessionSurface(TvInteractiveAppView.this.mSurface);
                     if (TvInteractiveAppView.this.mSurfaceChanged) {
-                        TvInteractiveAppView.this.dispatchSurfaceChanged(TvInteractiveAppView.this.mSurfaceFormat, TvInteractiveAppView.this.mSurfaceWidth, TvInteractiveAppView.this.mSurfaceHeight);
+                        TvInteractiveAppView.this.dispatchSurfaceChanged(
+                                TvInteractiveAppView.this.mSurfaceFormat,
+                                TvInteractiveAppView.this.mSurfaceWidth,
+                                TvInteractiveAppView.this.mSurfaceHeight);
                     }
                 }
                 TvInteractiveAppView.this.createSessionMediaView();
@@ -684,7 +727,8 @@ public class TvInteractiveAppView extends ViewGroup {
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onLayoutSurface(TvInteractiveAppManager.Session session, int left, int top, int right, int bottom) {
+        public void onLayoutSurface(
+                TvInteractiveAppManager.Session session, int left, int top, int right, int bottom) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onLayoutSurface - session not created");
                 return;
@@ -698,19 +742,25 @@ public class TvInteractiveAppView extends ViewGroup {
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onCommandRequest(TvInteractiveAppManager.Session session, final String cmdType, final Bundle parameters) {
+        public void onCommandRequest(
+                TvInteractiveAppManager.Session session,
+                final String cmdType,
+                final Bundle parameters) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onCommandRequest - session not created");
                 return;
             }
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallbackExecutor != null) {
-                    TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda5
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onCommandRequest$0(cmdType, parameters);
-                        }
-                    });
+                    TvInteractiveAppView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda5
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvInteractiveAppView.MySessionCallback.this
+                                            .lambda$onCommandRequest$0(cmdType, parameters);
+                                }
+                            });
                 }
             }
         }
@@ -719,52 +769,66 @@ public class TvInteractiveAppView extends ViewGroup {
         public /* synthetic */ void lambda$onCommandRequest$0(String cmdType, Bundle parameters) {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
-                    TvInteractiveAppView.this.mCallback.onPlaybackCommandRequest(this.mIAppServiceId, cmdType, parameters);
+                    TvInteractiveAppView.this.mCallback.onPlaybackCommandRequest(
+                            this.mIAppServiceId, cmdType, parameters);
                 }
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onTimeShiftCommandRequest(TvInteractiveAppManager.Session session, final String cmdType, final Bundle parameters) {
+        public void onTimeShiftCommandRequest(
+                TvInteractiveAppManager.Session session,
+                final String cmdType,
+                final Bundle parameters) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onTimeShiftCommandRequest - session not created");
                 return;
             }
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallbackExecutor != null) {
-                    TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onTimeShiftCommandRequest$1(cmdType, parameters);
-                        }
-                    });
+                    TvInteractiveAppView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvInteractiveAppView.MySessionCallback.this
+                                            .lambda$onTimeShiftCommandRequest$1(
+                                                    cmdType, parameters);
+                                }
+                            });
                 }
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onTimeShiftCommandRequest$1(String cmdType, Bundle parameters) {
+        public /* synthetic */ void lambda$onTimeShiftCommandRequest$1(
+                String cmdType, Bundle parameters) {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
-                    TvInteractiveAppView.this.mCallback.onTimeShiftCommandRequest(this.mIAppServiceId, cmdType, parameters);
+                    TvInteractiveAppView.this.mCallback.onTimeShiftCommandRequest(
+                            this.mIAppServiceId, cmdType, parameters);
                 }
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onSessionStateChanged(TvInteractiveAppManager.Session session, final int state, final int err) {
+        public void onSessionStateChanged(
+                TvInteractiveAppManager.Session session, final int state, final int err) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onSessionStateChanged - session not created");
                 return;
             }
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallbackExecutor != null) {
-                    TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda8
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onSessionStateChanged$2(state, err);
-                        }
-                    });
+                    TvInteractiveAppView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda8
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvInteractiveAppView.MySessionCallback.this
+                                            .lambda$onSessionStateChanged$2(state, err);
+                                }
+                            });
                 }
             }
         }
@@ -773,34 +837,44 @@ public class TvInteractiveAppView extends ViewGroup {
         public /* synthetic */ void lambda$onSessionStateChanged$2(int state, int err) {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
-                    TvInteractiveAppView.this.mCallback.onStateChanged(this.mIAppServiceId, state, err);
+                    TvInteractiveAppView.this.mCallback.onStateChanged(
+                            this.mIAppServiceId, state, err);
                 }
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onBiInteractiveAppCreated(TvInteractiveAppManager.Session session, final Uri biIAppUri, final String biIAppId) {
+        public void onBiInteractiveAppCreated(
+                TvInteractiveAppManager.Session session,
+                final Uri biIAppUri,
+                final String biIAppId) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onBiInteractiveAppCreated - session not created");
                 return;
             }
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallbackExecutor != null) {
-                    TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda10
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onBiInteractiveAppCreated$3(biIAppUri, biIAppId);
-                        }
-                    });
+                    TvInteractiveAppView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda10
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvInteractiveAppView.MySessionCallback.this
+                                            .lambda$onBiInteractiveAppCreated$3(
+                                                    biIAppUri, biIAppId);
+                                }
+                            });
                 }
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onBiInteractiveAppCreated$3(Uri biIAppUri, String biIAppId) {
+        public /* synthetic */ void lambda$onBiInteractiveAppCreated$3(
+                Uri biIAppUri, String biIAppId) {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
-                    TvInteractiveAppView.this.mCallback.onBiInteractiveAppCreated(this.mIAppServiceId, biIAppUri, biIAppId);
+                    TvInteractiveAppView.this.mCallback.onBiInteractiveAppCreated(
+                            this.mIAppServiceId, biIAppUri, biIAppId);
                 }
             }
         }
@@ -810,7 +884,8 @@ public class TvInteractiveAppView extends ViewGroup {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onTeletextAppStateChanged - session not created");
             } else if (TvInteractiveAppView.this.mCallback != null) {
-                TvInteractiveAppView.this.mCallback.onTeletextAppStateChanged(this.mIAppServiceId, state);
+                TvInteractiveAppView.this.mCallback.onTeletextAppStateChanged(
+                        this.mIAppServiceId, state);
             }
         }
 
@@ -822,12 +897,15 @@ public class TvInteractiveAppView extends ViewGroup {
             }
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallbackExecutor != null) {
-                    TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda9
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onSetVideoBounds$4(rect);
-                        }
-                    });
+                    TvInteractiveAppView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda9
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvInteractiveAppView.MySessionCallback.this
+                                            .lambda$onSetVideoBounds$4(rect);
+                                }
+                            });
                 }
             }
         }
@@ -844,17 +922,22 @@ public class TvInteractiveAppView extends ViewGroup {
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
         public void onRequestCurrentVideoBounds(TvInteractiveAppManager.Session session) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
-                Log.w(TvInteractiveAppView.TAG, "onRequestCurrentVideoBounds - session not created");
+                Log.w(
+                        TvInteractiveAppView.TAG,
+                        "onRequestCurrentVideoBounds - session not created");
                 return;
             }
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallbackExecutor != null) {
-                    TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda2
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestCurrentVideoBounds$5();
-                        }
-                    });
+                    TvInteractiveAppView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda2
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvInteractiveAppView.MySessionCallback.this
+                                            .lambda$onRequestCurrentVideoBounds$5();
+                                }
+                            });
                 }
             }
         }
@@ -863,7 +946,8 @@ public class TvInteractiveAppView extends ViewGroup {
         public /* synthetic */ void lambda$onRequestCurrentVideoBounds$5() {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
-                    TvInteractiveAppView.this.mCallback.onRequestCurrentVideoBounds(this.mIAppServiceId);
+                    TvInteractiveAppView.this.mCallback.onRequestCurrentVideoBounds(
+                            this.mIAppServiceId);
                 }
             }
         }
@@ -876,12 +960,15 @@ public class TvInteractiveAppView extends ViewGroup {
             }
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallbackExecutor != null) {
-                    TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda6
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestCurrentChannelUri$6();
-                        }
-                    });
+                    TvInteractiveAppView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda6
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvInteractiveAppView.MySessionCallback.this
+                                            .lambda$onRequestCurrentChannelUri$6();
+                                }
+                            });
                 }
             }
         }
@@ -890,7 +977,8 @@ public class TvInteractiveAppView extends ViewGroup {
         public /* synthetic */ void lambda$onRequestCurrentChannelUri$6() {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
-                    TvInteractiveAppView.this.mCallback.onRequestCurrentChannelUri(this.mIAppServiceId);
+                    TvInteractiveAppView.this.mCallback.onRequestCurrentChannelUri(
+                            this.mIAppServiceId);
                 }
             }
         }
@@ -903,12 +991,15 @@ public class TvInteractiveAppView extends ViewGroup {
             }
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallbackExecutor != null) {
-                    TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda4
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestCurrentChannelLcn$7();
-                        }
-                    });
+                    TvInteractiveAppView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda4
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvInteractiveAppView.MySessionCallback.this
+                                            .lambda$onRequestCurrentChannelLcn$7();
+                                }
+                            });
                 }
             }
         }
@@ -917,7 +1008,8 @@ public class TvInteractiveAppView extends ViewGroup {
         public /* synthetic */ void lambda$onRequestCurrentChannelLcn$7() {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
-                    TvInteractiveAppView.this.mCallback.onRequestCurrentChannelLcn(this.mIAppServiceId);
+                    TvInteractiveAppView.this.mCallback.onRequestCurrentChannelLcn(
+                            this.mIAppServiceId);
                 }
             }
         }
@@ -930,12 +1022,15 @@ public class TvInteractiveAppView extends ViewGroup {
             }
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallbackExecutor != null) {
-                    TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda3
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestStreamVolume$8();
-                        }
-                    });
+                    TvInteractiveAppView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda3
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvInteractiveAppView.MySessionCallback.this
+                                            .lambda$onRequestStreamVolume$8();
+                                }
+                            });
                 }
             }
         }
@@ -957,12 +1052,15 @@ public class TvInteractiveAppView extends ViewGroup {
             }
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallbackExecutor != null) {
-                    TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestTrackInfoList$9();
-                        }
-                    });
+                    TvInteractiveAppView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvInteractiveAppView.MySessionCallback.this
+                                            .lambda$onRequestTrackInfoList$9();
+                                }
+                            });
                 }
             }
         }
@@ -984,12 +1082,15 @@ public class TvInteractiveAppView extends ViewGroup {
             }
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallbackExecutor != null) {
-                    TvInteractiveAppView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda7
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvInteractiveAppView.MySessionCallback.this.lambda$onRequestSelectedTrackInfo$10();
-                        }
-                    });
+                    TvInteractiveAppView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.interactive.TvInteractiveAppView$MySessionCallback$$ExternalSyntheticLambda7
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvInteractiveAppView.MySessionCallback.this
+                                            .lambda$onRequestSelectedTrackInfo$10();
+                                }
+                            });
                 }
             }
         }
@@ -998,7 +1099,8 @@ public class TvInteractiveAppView extends ViewGroup {
         public /* synthetic */ void lambda$onRequestSelectedTrackInfo$10() {
             synchronized (TvInteractiveAppView.this.mCallbackLock) {
                 if (TvInteractiveAppView.this.mCallback != null) {
-                    TvInteractiveAppView.this.mCallback.onRequestSelectedTrackInfo(this.mIAppServiceId);
+                    TvInteractiveAppView.this.mCallback.onRequestSelectedTrackInfo(
+                            this.mIAppServiceId);
                 }
             }
         }
@@ -1031,92 +1133,142 @@ public class TvInteractiveAppView extends ViewGroup {
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onRequestStartRecording(TvInteractiveAppManager.Session session, String requestId, Uri programUri) {
+        public void onRequestStartRecording(
+                TvInteractiveAppManager.Session session, String requestId, Uri programUri) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onRequestStartRecording - session not created");
             } else if (TvInteractiveAppView.this.mCallback != null) {
-                TvInteractiveAppView.this.mCallback.onRequestStartRecording(this.mIAppServiceId, requestId, programUri);
+                TvInteractiveAppView.this.mCallback.onRequestStartRecording(
+                        this.mIAppServiceId, requestId, programUri);
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onRequestStopRecording(TvInteractiveAppManager.Session session, String recordingId) {
+        public void onRequestStopRecording(
+                TvInteractiveAppManager.Session session, String recordingId) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onRequestStopRecording - session not created");
             } else if (TvInteractiveAppView.this.mCallback != null) {
-                TvInteractiveAppView.this.mCallback.onRequestStopRecording(this.mIAppServiceId, recordingId);
+                TvInteractiveAppView.this.mCallback.onRequestStopRecording(
+                        this.mIAppServiceId, recordingId);
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onSetTvRecordingInfo(TvInteractiveAppManager.Session session, String recordingId, TvRecordingInfo recordingInfo) {
+        public void onSetTvRecordingInfo(
+                TvInteractiveAppManager.Session session,
+                String recordingId,
+                TvRecordingInfo recordingInfo) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onSetRecordingInfo - session not created");
             } else if (TvInteractiveAppView.this.mCallback != null) {
-                TvInteractiveAppView.this.mCallback.onSetTvRecordingInfo(this.mIAppServiceId, recordingId, recordingInfo);
+                TvInteractiveAppView.this.mCallback.onSetTvRecordingInfo(
+                        this.mIAppServiceId, recordingId, recordingInfo);
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onRequestScheduleRecording(TvInteractiveAppManager.Session session, String requestId, String inputId, Uri channelUri, Uri programUri, Bundle params) {
+        public void onRequestScheduleRecording(
+                TvInteractiveAppManager.Session session,
+                String requestId,
+                String inputId,
+                Uri channelUri,
+                Uri programUri,
+                Bundle params) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onRequestScheduleRecording - session not created");
             } else if (TvInteractiveAppView.this.mCallback != null) {
-                TvInteractiveAppView.this.mCallback.onRequestScheduleRecording(this.mIAppServiceId, requestId, inputId, channelUri, programUri, params);
+                TvInteractiveAppView.this.mCallback.onRequestScheduleRecording(
+                        this.mIAppServiceId, requestId, inputId, channelUri, programUri, params);
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onRequestScheduleRecording(TvInteractiveAppManager.Session session, String requestId, String inputId, Uri channelUri, long startTime, long duration, int repeatDays, Bundle params) {
+        public void onRequestScheduleRecording(
+                TvInteractiveAppManager.Session session,
+                String requestId,
+                String inputId,
+                Uri channelUri,
+                long startTime,
+                long duration,
+                int repeatDays,
+                Bundle params) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onRequestScheduleRecording - session not created");
             } else if (TvInteractiveAppView.this.mCallback != null) {
-                TvInteractiveAppView.this.mCallback.onRequestScheduleRecording(this.mIAppServiceId, requestId, inputId, channelUri, startTime, duration, repeatDays, params);
+                TvInteractiveAppView.this.mCallback.onRequestScheduleRecording(
+                        this.mIAppServiceId,
+                        requestId,
+                        inputId,
+                        channelUri,
+                        startTime,
+                        duration,
+                        repeatDays,
+                        params);
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onRequestTvRecordingInfo(TvInteractiveAppManager.Session session, String recordingId) {
+        public void onRequestTvRecordingInfo(
+                TvInteractiveAppManager.Session session, String recordingId) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onRequestRecordingInfo - session not created");
             } else if (TvInteractiveAppView.this.mCallback != null) {
-                TvInteractiveAppView.this.mCallback.onRequestTvRecordingInfo(this.mIAppServiceId, recordingId);
+                TvInteractiveAppView.this.mCallback.onRequestTvRecordingInfo(
+                        this.mIAppServiceId, recordingId);
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onRequestTvRecordingInfoList(TvInteractiveAppManager.Session session, int type) {
+        public void onRequestTvRecordingInfoList(
+                TvInteractiveAppManager.Session session, int type) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onRequestRecordingInfoList - session not created");
             } else if (TvInteractiveAppView.this.mCallback != null) {
-                TvInteractiveAppView.this.mCallback.onRequestTvRecordingInfoList(this.mIAppServiceId, type);
+                TvInteractiveAppView.this.mCallback.onRequestTvRecordingInfoList(
+                        this.mIAppServiceId, type);
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onRequestSigning(TvInteractiveAppManager.Session session, String id, String algorithm, String alias, byte[] data) {
+        public void onRequestSigning(
+                TvInteractiveAppManager.Session session,
+                String id,
+                String algorithm,
+                String alias,
+                byte[] data) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onRequestSigning - session not created");
             } else if (TvInteractiveAppView.this.mCallback != null) {
-                TvInteractiveAppView.this.mCallback.onRequestSigning(this.mIAppServiceId, id, algorithm, alias, data);
+                TvInteractiveAppView.this.mCallback.onRequestSigning(
+                        this.mIAppServiceId, id, algorithm, alias, data);
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onRequestSigning(TvInteractiveAppManager.Session session, String id, String algorithm, String host, int port, byte[] data) {
+        public void onRequestSigning(
+                TvInteractiveAppManager.Session session,
+                String id,
+                String algorithm,
+                String host,
+                int port,
+                byte[] data) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onRequestSigning - session not created");
             } else if (TvInteractiveAppView.this.mCallback != null && Flags.tiafVApis()) {
-                TvInteractiveAppView.this.mCallback.onRequestSigning(this.mIAppServiceId, id, algorithm, host, port, data);
+                TvInteractiveAppView.this.mCallback.onRequestSigning(
+                        this.mIAppServiceId, id, algorithm, host, port, data);
             }
         }
 
         @Override // android.media.tv.interactive.TvInteractiveAppManager.SessionCallback
-        public void onRequestCertificate(TvInteractiveAppManager.Session session, String host, int port) {
+        public void onRequestCertificate(
+                TvInteractiveAppManager.Session session, String host, int port) {
             if (this != TvInteractiveAppView.this.mSessionCallback) {
                 Log.w(TvInteractiveAppView.TAG, "onRequestCertificate - session not created");
             } else if (TvInteractiveAppView.this.mCallback != null && Flags.tiafVApis()) {
-                TvInteractiveAppView.this.mCallback.onRequestCertificate(this.mIAppServiceId, host, port);
+                TvInteractiveAppView.this.mCallback.onRequestCertificate(
+                        this.mIAppServiceId, host, port);
             }
         }
     }

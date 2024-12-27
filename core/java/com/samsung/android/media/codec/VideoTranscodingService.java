@@ -8,7 +8,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
-import com.samsung.android.media.codec.IVideoTranscodingService;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -94,41 +94,54 @@ public class VideoTranscodingService extends IVideoTranscodingService.Stub {
     public VideoTranscodingService(Context context) {
         this.mContext = context;
         this.mHandlerThread.start();
-        this.mHandler = new Handler(this.mHandlerThread.getLooper()) { // from class: com.samsung.android.media.codec.VideoTranscodingService.1
-            @Override // android.os.Handler
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                switch (msg.what) {
-                    case 0:
-                        VideoTranscodingService.this.mTaskLock.lock();
-                        try {
-                            try {
-                                VideoTranscodingService.this.printTasks();
-                                while (true) {
-                                    if (VideoTranscodingService.this.mStartingTasks.size() != 0) {
-                                        Task top = (Task) VideoTranscodingService.this.mStartingTasks.element();
-                                        if (top.getState() == 0) {
-                                            Log.i(VideoTranscodingService.TAG, "Task(" + top.getID() + ") has been started");
-                                            top.start();
-                                        } else if (top.getState() != 1) {
-                                            if (top.getState() == 2) {
-                                                VideoTranscodingService.this.mStartingTasks.remove(top);
+        this.mHandler =
+                new Handler(
+                        this.mHandlerThread
+                                .getLooper()) { // from class:
+                                                // com.samsung.android.media.codec.VideoTranscodingService.1
+                    @Override // android.os.Handler
+                    public void handleMessage(Message msg) {
+                        super.handleMessage(msg);
+                        switch (msg.what) {
+                            case 0:
+                                VideoTranscodingService.this.mTaskLock.lock();
+                                try {
+                                    try {
+                                        VideoTranscodingService.this.printTasks();
+                                        while (true) {
+                                            if (VideoTranscodingService.this.mStartingTasks.size()
+                                                    != 0) {
+                                                Task top =
+                                                        (Task)
+                                                                VideoTranscodingService.this
+                                                                        .mStartingTasks.element();
+                                                if (top.getState() == 0) {
+                                                    Log.i(
+                                                            VideoTranscodingService.TAG,
+                                                            "Task("
+                                                                    + top.getID()
+                                                                    + ") has been started");
+                                                    top.start();
+                                                } else if (top.getState() != 1) {
+                                                    if (top.getState() == 2) {
+                                                        VideoTranscodingService.this.mStartingTasks
+                                                                .remove(top);
+                                                    }
+                                                }
                                             }
                                         }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
                                     }
+                                    return;
+                                } finally {
+                                    VideoTranscodingService.this.mTaskLock.unlock();
                                 }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            return;
-                        } finally {
-                            VideoTranscodingService.this.mTaskLock.unlock();
+                            default:
+                                return;
                         }
-                    default:
-                        return;
-                }
-            }
-        };
+                    }
+                };
     }
 
     @Override // com.samsung.android.media.codec.IVideoTranscodingService
@@ -143,17 +156,25 @@ public class VideoTranscodingService extends IVideoTranscodingService.Stub {
             this.mCurrentId = 0;
         }
         final Task task = new Task(id, mode, callback);
-        boolean ret = task.linkToDeath(new IBinder.DeathRecipient() { // from class: com.samsung.android.media.codec.VideoTranscodingService.2
-            @Override // android.os.IBinder.DeathRecipient
-            public void binderDied() {
-                Log.e(VideoTranscodingService.TAG, "binderDied: task(" + task.getID() + NavigationBarInflaterView.KEY_CODE_END);
-                try {
-                    VideoTranscodingService.this.stopTask(task.getID());
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        boolean ret =
+                task.linkToDeath(
+                        new IBinder
+                                .DeathRecipient() { // from class:
+                                                    // com.samsung.android.media.codec.VideoTranscodingService.2
+                            @Override // android.os.IBinder.DeathRecipient
+                            public void binderDied() {
+                                Log.e(
+                                        VideoTranscodingService.TAG,
+                                        "binderDied: task("
+                                                + task.getID()
+                                                + NavigationBarInflaterView.KEY_CODE_END);
+                                try {
+                                    VideoTranscodingService.this.stopTask(task.getID());
+                                } catch (RemoteException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
         if (!ret) {
             Log.e(TAG, "Failed to link to death.");
             return null;
@@ -273,7 +294,12 @@ public class VideoTranscodingService extends IVideoTranscodingService.Stub {
                 i++;
             }
         }
-        Log.i(TAG, "Waiting tasks(" + this.mWaitingTasks.size() + NavigationBarInflaterView.KEY_CODE_END + tasks);
+        Log.i(
+                TAG,
+                "Waiting tasks("
+                        + this.mWaitingTasks.size()
+                        + NavigationBarInflaterView.KEY_CODE_END
+                        + tasks);
         String tasks2 = "";
         int i2 = 1;
         Iterator<Task> it2 = this.mStartingTasks.iterator();
@@ -286,10 +312,21 @@ public class VideoTranscodingService extends IVideoTranscodingService.Stub {
                 tasks2 = tasks2 + " ... more";
                 break;
             } else {
-                tasks2 = tasks2 + " " + task.getID() + NavigationBarInflaterView.KEY_CODE_START + task.mMode + NavigationBarInflaterView.KEY_CODE_END;
+                tasks2 =
+                        tasks2
+                                + " "
+                                + task.getID()
+                                + NavigationBarInflaterView.KEY_CODE_START
+                                + task.mMode
+                                + NavigationBarInflaterView.KEY_CODE_END;
                 i2++;
             }
         }
-        Log.i(TAG, "Starting tasks(" + this.mStartingTasks.size() + NavigationBarInflaterView.KEY_CODE_END + tasks2);
+        Log.i(
+                TAG,
+                "Starting tasks("
+                        + this.mStartingTasks.size()
+                        + NavigationBarInflaterView.KEY_CODE_END
+                        + tasks2);
     }
 }

@@ -10,10 +10,13 @@ import android.text.TextUtils;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.TimeUtils;
+
 import com.android.internal.os.ProcStatsUtil;
 import com.android.internal.os.ProcessCpuTracker;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
-import com.android.server.am.ProcessList;
+
+import libcore.io.IoUtils;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -23,7 +26,6 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.function.Consumer;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -46,8 +48,7 @@ public final class PhantomProcessList {
     public boolean mTrimPhantomProcessScheduled = false;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class Injector {
-    }
+    class Injector {}
 
     public PhantomProcessList(ActivityManagerService activityManagerService) {
         this.mCgroupVersion = 0;
@@ -63,7 +64,8 @@ public final class PhantomProcessList {
         }
     }
 
-    public static void dumpPhantomeProcessLocked(PrintWriter printWriter, String str, SparseArray sparseArray) {
+    public static void dumpPhantomeProcessLocked(
+            PrintWriter printWriter, String str, SparseArray sparseArray) {
         int size = sparseArray.size();
         if (size == 0) {
             return;
@@ -72,7 +74,8 @@ public final class PhantomProcessList {
         printWriter.print("  ");
         printWriter.println(str);
         for (int i = 0; i < size; i++) {
-            PhantomProcessRecord phantomProcessRecord = (PhantomProcessRecord) sparseArray.valueAt(i);
+            PhantomProcessRecord phantomProcessRecord =
+                    (PhantomProcessRecord) sparseArray.valueAt(i);
             printWriter.print("  ");
             printWriter.print("  proc #");
             printWriter.print(i);
@@ -90,13 +93,17 @@ public final class PhantomProcessList {
             printWriter.print(" ppid=");
             printWriter.print(phantomProcessRecord.mPpid);
             printWriter.print(" knownSince=");
-            TimeUtils.formatDuration(phantomProcessRecord.mKnownSince, elapsedRealtime, printWriter);
+            TimeUtils.formatDuration(
+                    phantomProcessRecord.mKnownSince, elapsedRealtime, printWriter);
             printWriter.print(" killed=");
-            AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "      ", "lastCpuTime=", phantomProcessRecord.mKilled);
+            AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                    printWriter, "      ", "lastCpuTime=", phantomProcessRecord.mKilled);
             printWriter.print(phantomProcessRecord.mLastCputime);
             if (phantomProcessRecord.mLastCputime > 0) {
                 printWriter.print(" timeUsed=");
-                TimeUtils.formatDuration(phantomProcessRecord.mCurrentCputime - phantomProcessRecord.mLastCputime, printWriter);
+                TimeUtils.formatDuration(
+                        phantomProcessRecord.mCurrentCputime - phantomProcessRecord.mLastCputime,
+                        printWriter);
             }
             printWriter.print(" oom adj=");
             printWriter.print(phantomProcessRecord.mAdj);
@@ -112,14 +119,16 @@ public final class PhantomProcessList {
         int indexOfKey = this.mPhantomToAppProcessMap.indexOfKey(i);
         if (indexOfKey < 0) {
             this.mPhantomToAppProcessMap.put(i, processRecord);
-        } else if (processRecord == ((ProcessRecord) this.mPhantomToAppProcessMap.valueAt(indexOfKey))) {
+        } else if (processRecord
+                == ((ProcessRecord) this.mPhantomToAppProcessMap.valueAt(indexOfKey))) {
             return;
         } else {
             this.mPhantomToAppProcessMap.setValueAt(indexOfKey, processRecord);
         }
         int uidForPid = Process.getUidForPid(i);
         this.mInjector.getClass();
-        String readTerminatedProcFile = ProcStatsUtil.readTerminatedProcFile("/proc/" + i + "/cmdline", (byte) 0);
+        String readTerminatedProcFile =
+                ProcStatsUtil.readTerminatedProcFile("/proc/" + i + "/cmdline", (byte) 0);
         if (readTerminatedProcFile == null) {
             readTerminatedProcFile = null;
         } else {
@@ -137,20 +146,24 @@ public final class PhantomProcessList {
 
     public final void dump(PrintWriter printWriter) {
         synchronized (this.mLock) {
-            dumpPhantomeProcessLocked(printWriter, "All Active App Child Processes:", this.mPhantomProcesses);
-            dumpPhantomeProcessLocked(printWriter, "All Zombie App Child Processes:", this.mZombiePhantomProcesses);
+            dumpPhantomeProcessLocked(
+                    printWriter, "All Active App Child Processes:", this.mPhantomProcesses);
+            dumpPhantomeProcessLocked(
+                    printWriter, "All Zombie App Child Processes:", this.mZombiePhantomProcesses);
         }
     }
 
     public String getCgroupFilePath(int i, int i2) {
         StringBuilder sb = new StringBuilder();
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i, i2, CGROUP_PATH_PREFIXES[this.mCgroupVersion], "/pid_", sb);
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i, i2, CGROUP_PATH_PREFIXES[this.mCgroupVersion], "/pid_", sb);
         sb.append("/cgroup.procs");
         return sb.toString();
     }
 
     /* JADX WARN: Type inference failed for: r9v0, types: [com.android.server.am.PhantomProcessList$$ExternalSyntheticLambda0] */
-    public final PhantomProcessRecord getOrCreatePhantomProcessIfNeededLocked(int i, int i2, String str, boolean z) {
+    public final PhantomProcessRecord getOrCreatePhantomProcessIfNeededLocked(
+            int i, int i2, String str, boolean z) {
         boolean z2;
         ProcessRecord processRecord;
         synchronized (this.mService.mPidsSelfLocked) {
@@ -161,8 +174,11 @@ public final class PhantomProcessList {
         }
         int indexOfKey = this.mPhantomProcesses.indexOfKey(i2);
         if (indexOfKey >= 0) {
-            PhantomProcessRecord phantomProcessRecord = (PhantomProcessRecord) this.mPhantomProcesses.valueAt(indexOfKey);
-            if (phantomProcessRecord.mUid == i && phantomProcessRecord.mPid == i2 && TextUtils.equals(phantomProcessRecord.mProcessName, str)) {
+            PhantomProcessRecord phantomProcessRecord =
+                    (PhantomProcessRecord) this.mPhantomProcesses.valueAt(indexOfKey);
+            if (phantomProcessRecord.mUid == i
+                    && phantomProcessRecord.mPid == i2
+                    && TextUtils.equals(phantomProcessRecord.mProcessName, str)) {
                 return phantomProcessRecord;
             }
             Slog.w("ActivityManager", "Stale " + phantomProcessRecord + ", removing");
@@ -170,8 +186,11 @@ public final class PhantomProcessList {
         } else {
             int indexOfKey2 = this.mZombiePhantomProcesses.indexOfKey(i2);
             if (indexOfKey2 >= 0) {
-                PhantomProcessRecord phantomProcessRecord2 = (PhantomProcessRecord) this.mZombiePhantomProcesses.valueAt(indexOfKey2);
-                if (phantomProcessRecord2.mUid == i && phantomProcessRecord2.mPid == i2 && TextUtils.equals(phantomProcessRecord2.mProcessName, str)) {
+                PhantomProcessRecord phantomProcessRecord2 =
+                        (PhantomProcessRecord) this.mZombiePhantomProcesses.valueAt(indexOfKey2);
+                if (phantomProcessRecord2.mUid == i
+                        && phantomProcessRecord2.mPid == i2
+                        && TextUtils.equals(phantomProcessRecord2.mProcessName, str)) {
                     return phantomProcessRecord2;
                 }
                 this.mZombiePhantomProcesses.removeAt(indexOfKey2);
@@ -180,12 +199,21 @@ public final class PhantomProcessList {
         if (z && (processRecord = (ProcessRecord) this.mPhantomToAppProcessMap.get(i2)) != null) {
             try {
                 int i3 = processRecord.mPid;
-                PhantomProcessRecord phantomProcessRecord3 = new PhantomProcessRecord(str, i, i2, i3, this.mService, new Consumer() { // from class: com.android.server.am.PhantomProcessList$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        PhantomProcessList.this.onPhantomProcessKilledLocked((PhantomProcessRecord) obj);
-                    }
-                });
+                PhantomProcessRecord phantomProcessRecord3 =
+                        new PhantomProcessRecord(
+                                str,
+                                i,
+                                i2,
+                                i3,
+                                this.mService,
+                                new Consumer() { // from class:
+                                                 // com.android.server.am.PhantomProcessList$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        PhantomProcessList.this.onPhantomProcessKilledLocked(
+                                                (PhantomProcessRecord) obj);
+                                    }
+                                });
                 phantomProcessRecord3.mUpdateSeq = this.mUpdateSeq;
                 this.mPhantomProcesses.put(i2, phantomProcessRecord3);
                 SparseArray sparseArray = (SparseArray) this.mAppPhantomProcessMap.get(i3);
@@ -195,32 +223,51 @@ public final class PhantomProcessList {
                 }
                 sparseArray.put(i2, phantomProcessRecord3);
                 if (phantomProcessRecord3.mPidFd != null) {
-                    this.mKillHandler.getLooper().getQueue().addOnFileDescriptorEventListener(phantomProcessRecord3.mPidFd, 5, new MessageQueue.OnFileDescriptorEventListener() { // from class: com.android.server.am.PhantomProcessList$$ExternalSyntheticLambda1
-                        @Override // android.os.MessageQueue.OnFileDescriptorEventListener
-                        public final int onFileDescriptorEvents(FileDescriptor fileDescriptor, int i4) {
-                            PhantomProcessList phantomProcessList = PhantomProcessList.this;
-                            synchronized (phantomProcessList.mLock) {
-                                try {
-                                    PhantomProcessRecord phantomProcessRecord4 = (PhantomProcessRecord) phantomProcessList.mPhantomProcessesPidFds.get(fileDescriptor.getInt$());
-                                    if (phantomProcessRecord4 == null) {
-                                        return 0;
-                                    }
-                                    if ((i4 & 1) != 0) {
-                                        phantomProcessRecord4.onProcDied(true);
-                                    } else {
-                                        phantomProcessRecord4.killLocked("Process error", true);
-                                    }
-                                    return 0;
-                                } finally {
-                                }
-                            }
-                        }
-                    });
-                    this.mPhantomProcessesPidFds.put(phantomProcessRecord3.mPidFd.getInt$(), phantomProcessRecord3);
+                    this.mKillHandler
+                            .getLooper()
+                            .getQueue()
+                            .addOnFileDescriptorEventListener(
+                                    phantomProcessRecord3.mPidFd,
+                                    5,
+                                    new MessageQueue
+                                            .OnFileDescriptorEventListener() { // from class:
+                                                                               // com.android.server.am.PhantomProcessList$$ExternalSyntheticLambda1
+                                        @Override // android.os.MessageQueue.OnFileDescriptorEventListener
+                                        public final int onFileDescriptorEvents(
+                                                FileDescriptor fileDescriptor, int i4) {
+                                            PhantomProcessList phantomProcessList =
+                                                    PhantomProcessList.this;
+                                            synchronized (phantomProcessList.mLock) {
+                                                try {
+                                                    PhantomProcessRecord phantomProcessRecord4 =
+                                                            (PhantomProcessRecord)
+                                                                    phantomProcessList
+                                                                            .mPhantomProcessesPidFds
+                                                                            .get(
+                                                                                    fileDescriptor
+                                                                                            .getInt$());
+                                                    if (phantomProcessRecord4 == null) {
+                                                        return 0;
+                                                    }
+                                                    if ((i4 & 1) != 0) {
+                                                        phantomProcessRecord4.onProcDied(true);
+                                                    } else {
+                                                        phantomProcessRecord4.killLocked(
+                                                                "Process error", true);
+                                                    }
+                                                    return 0;
+                                                } finally {
+                                                }
+                                            }
+                                        }
+                                    });
+                    this.mPhantomProcessesPidFds.put(
+                            phantomProcessRecord3.mPidFd.getInt$(), phantomProcessRecord3);
                 }
                 if (!this.mTrimPhantomProcessScheduled) {
                     this.mTrimPhantomProcessScheduled = true;
-                    this.mService.mHandler.post(new ActivityManagerConstants$$ExternalSyntheticLambda1(this));
+                    this.mService.mHandler.post(
+                            new ActivityManagerConstants$$ExternalSyntheticLambda1(this));
                 }
                 return phantomProcessRecord3;
             } catch (IllegalStateException unused) {
@@ -229,18 +276,22 @@ public final class PhantomProcessList {
         return null;
     }
 
-    public final void killPhantomProcessGroupLocked(ProcessRecord processRecord, PhantomProcessRecord phantomProcessRecord, String str) {
+    public final void killPhantomProcessGroupLocked(
+            ProcessRecord processRecord, PhantomProcessRecord phantomProcessRecord, String str) {
         synchronized (this.mLock) {
             try {
                 int indexOfKey = this.mAppPhantomProcessMap.indexOfKey(phantomProcessRecord.mPpid);
                 if (indexOfKey >= 0) {
-                    SparseArray sparseArray = (SparseArray) this.mAppPhantomProcessMap.valueAt(indexOfKey);
+                    SparseArray sparseArray =
+                            (SparseArray) this.mAppPhantomProcessMap.valueAt(indexOfKey);
                     for (int size = sparseArray.size() - 1; size >= 0; size--) {
-                        PhantomProcessRecord phantomProcessRecord2 = (PhantomProcessRecord) sparseArray.valueAt(size);
+                        PhantomProcessRecord phantomProcessRecord2 =
+                                (PhantomProcessRecord) sparseArray.valueAt(size);
                         if (phantomProcessRecord2 == phantomProcessRecord) {
                             phantomProcessRecord2.killLocked(str, true);
                         } else {
-                            phantomProcessRecord2.killLocked("Caused by siling process: " + str, false);
+                            phantomProcessRecord2.killLocked(
+                                    "Caused by siling process: " + str, false);
                         }
                     }
                 }
@@ -248,7 +299,9 @@ public final class PhantomProcessList {
                 throw th;
             }
         }
-        String m = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Caused by child process: ", str);
+        String m =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                        "Caused by child process: ", str);
         processRecord.killLocked(9, 7, m, m, true, true);
     }
 
@@ -258,7 +311,11 @@ public final class PhantomProcessList {
         try {
             synchronized (this.mService.mPidsSelfLocked) {
                 try {
-                    for (int size = ((SparseArray) this.mService.mPidsSelfLocked.mPidMap).size() - 1; size >= 0; size--) {
+                    for (int size =
+                                    ((SparseArray) this.mService.mPidsSelfLocked.mPidMap).size()
+                                            - 1;
+                            size >= 0;
+                            size--) {
                         lookForPhantomProcessesLocked(this.mService.mPidsSelfLocked.valueAt(size));
                     }
                 } catch (Throwable th) {
@@ -326,7 +383,10 @@ public final class PhantomProcessList {
     public final void onPhantomProcessKilledLocked(PhantomProcessRecord phantomProcessRecord) {
         FileDescriptor fileDescriptor = phantomProcessRecord.mPidFd;
         if (fileDescriptor != null && fileDescriptor.valid()) {
-            this.mKillHandler.getLooper().getQueue().removeOnFileDescriptorEventListener(phantomProcessRecord.mPidFd);
+            this.mKillHandler
+                    .getLooper()
+                    .getQueue()
+                    .removeOnFileDescriptorEventListener(phantomProcessRecord.mPidFd);
             this.mPhantomProcessesPidFds.remove(phantomProcessRecord.mPidFd.getInt$());
             IoUtils.closeQuietly(phantomProcessRecord.mPidFd);
         }
@@ -351,7 +411,8 @@ public final class PhantomProcessList {
 
     public final void pruneStaleProcessesLocked() {
         for (int size = this.mPhantomProcesses.size() - 1; size >= 0; size--) {
-            PhantomProcessRecord phantomProcessRecord = (PhantomProcessRecord) this.mPhantomProcesses.valueAt(size);
+            PhantomProcessRecord phantomProcessRecord =
+                    (PhantomProcessRecord) this.mPhantomProcesses.valueAt(size);
             if (phantomProcessRecord.mUpdateSeq < this.mUpdateSeq) {
                 phantomProcessRecord.killLocked("Stale process", true);
             }
@@ -363,7 +424,8 @@ public final class PhantomProcessList {
 
     public final void removePhantomProcessesWithNoParentLocked() {
         for (int size = this.mPhantomProcesses.size() - 1; size >= 0; size--) {
-            PhantomProcessRecord phantomProcessRecord = (PhantomProcessRecord) this.mPhantomProcesses.valueAt(size);
+            PhantomProcessRecord phantomProcessRecord =
+                    (PhantomProcessRecord) this.mPhantomProcesses.valueAt(size);
             synchronized (this.mService.mPidsSelfLocked) {
                 try {
                     if (this.mService.mPidsSelfLocked.get(phantomProcessRecord.mPpid) == null) {
@@ -383,17 +445,27 @@ public final class PhantomProcessList {
             try {
                 this.mUpdateSeq++;
                 lookForPhantomProcessesLocked();
-                for (int countStats = processCpuTracker.countStats() - 1; countStats >= 0; countStats--) {
+                for (int countStats = processCpuTracker.countStats() - 1;
+                        countStats >= 0;
+                        countStats--) {
                     ProcessCpuTracker.Stats stats = processCpuTracker.getStats(countStats);
-                    PhantomProcessRecord orCreatePhantomProcessIfNeededLocked = getOrCreatePhantomProcessIfNeededLocked(stats.uid, stats.pid, stats.name, false);
+                    PhantomProcessRecord orCreatePhantomProcessIfNeededLocked =
+                            getOrCreatePhantomProcessIfNeededLocked(
+                                    stats.uid, stats.pid, stats.name, false);
                     if (orCreatePhantomProcessIfNeededLocked != null) {
                         orCreatePhantomProcessIfNeededLocked.mUpdateSeq = this.mUpdateSeq;
-                        long j = orCreatePhantomProcessIfNeededLocked.mCurrentCputime + stats.rel_utime + stats.rel_stime;
+                        long j =
+                                orCreatePhantomProcessIfNeededLocked.mCurrentCputime
+                                        + stats.rel_utime
+                                        + stats.rel_stime;
                         orCreatePhantomProcessIfNeededLocked.mCurrentCputime = j;
                         if (orCreatePhantomProcessIfNeededLocked.mLastCputime == 0) {
                             orCreatePhantomProcessIfNeededLocked.mLastCputime = j;
                         }
-                        String str = "/proc/" + orCreatePhantomProcessIfNeededLocked.mPid + "/oom_score_adj";
+                        String str =
+                                "/proc/"
+                                        + orCreatePhantomProcessIfNeededLocked.mPid
+                                        + "/oom_score_adj";
                         int[] iArr = PhantomProcessRecord.LONG_FORMAT;
                         long[] jArr = PhantomProcessRecord.LONG_OUT;
                         if (Process.readProcFile(str, iArr, null, jArr, null)) {

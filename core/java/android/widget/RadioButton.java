@@ -3,7 +3,7 @@ package android.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityNodeInfo;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -32,7 +32,8 @@ public class RadioButton extends CompoundButton {
         }
     }
 
-    @Override // android.widget.CompoundButton, android.widget.Button, android.widget.TextView, android.view.View
+    @Override // android.widget.CompoundButton, android.widget.Button, android.widget.TextView,
+              // android.view.View
     public CharSequence getAccessibilityClassName() {
         return RadioButton.class.getName();
     }
@@ -43,9 +44,23 @@ public class RadioButton extends CompoundButton {
         if (getParent() instanceof RadioGroup) {
             RadioGroup radioGroup = (RadioGroup) getParent();
             if (radioGroup.getOrientation() == 0) {
-                info.setCollectionItemInfo(AccessibilityNodeInfo.CollectionItemInfo.obtain(0, 1, radioGroup.getIndexWithinVisibleButtons(this), 1, false, isChecked()));
+                info.setCollectionItemInfo(
+                        AccessibilityNodeInfo.CollectionItemInfo.obtain(
+                                0,
+                                1,
+                                radioGroup.getIndexWithinVisibleButtons(this),
+                                1,
+                                false,
+                                isChecked()));
             } else {
-                info.setCollectionItemInfo(AccessibilityNodeInfo.CollectionItemInfo.obtain(radioGroup.getIndexWithinVisibleButtons(this), 1, 0, 1, false, isChecked()));
+                info.setCollectionItemInfo(
+                        AccessibilityNodeInfo.CollectionItemInfo.obtain(
+                                radioGroup.getIndexWithinVisibleButtons(this),
+                                1,
+                                0,
+                                1,
+                                false,
+                                isChecked()));
             }
         }
     }

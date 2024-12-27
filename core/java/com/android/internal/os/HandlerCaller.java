@@ -143,7 +143,8 @@ public class HandlerCaller {
         return this.mH.obtainMessage(what, arg1, 0, args);
     }
 
-    public Message obtainMessageIIOOO(int what, int arg1, int arg2, Object arg3, Object arg4, Object arg5) {
+    public Message obtainMessageIIOOO(
+            int what, int arg1, int arg2, Object arg3, Object arg4, Object arg5) {
         SomeArgs args = SomeArgs.obtain();
         args.arg1 = arg3;
         args.arg2 = arg4;
@@ -151,7 +152,8 @@ public class HandlerCaller {
         return this.mH.obtainMessage(what, arg1, arg2, args);
     }
 
-    public Message obtainMessageIIOOOO(int what, int arg1, int arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
+    public Message obtainMessageIIOOOO(
+            int what, int arg1, int arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
         SomeArgs args = SomeArgs.obtain();
         args.arg1 = arg3;
         args.arg2 = arg4;
@@ -184,7 +186,8 @@ public class HandlerCaller {
         return this.mH.obtainMessage(what, 0, 0, args);
     }
 
-    public Message obtainMessageOOOOO(int what, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
+    public Message obtainMessageOOOOO(
+            int what, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) {
         SomeArgs args = SomeArgs.obtain();
         args.arg1 = arg1;
         args.arg2 = arg2;
@@ -194,7 +197,8 @@ public class HandlerCaller {
         return this.mH.obtainMessage(what, 0, 0, args);
     }
 
-    public Message obtainMessageOOOOII(int what, Object arg1, Object arg2, Object arg3, Object arg4, int arg5, int arg6) {
+    public Message obtainMessageOOOOII(
+            int what, Object arg1, Object arg2, Object arg3, Object arg4, int arg5, int arg6) {
         SomeArgs args = SomeArgs.obtain();
         args.arg1 = arg1;
         args.arg2 = arg2;
@@ -214,7 +218,8 @@ public class HandlerCaller {
         return this.mH.obtainMessage(what, 0, 0, args);
     }
 
-    public Message obtainMessageIIIIII(int what, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+    public Message obtainMessageIIIIII(
+            int what, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
         SomeArgs args = SomeArgs.obtain();
         args.argi1 = arg1;
         args.argi2 = arg2;
@@ -225,7 +230,8 @@ public class HandlerCaller {
         return this.mH.obtainMessage(what, 0, 0, args);
     }
 
-    public Message obtainMessageIIIIO(int what, int arg1, int arg2, int arg3, int arg4, Object arg5) {
+    public Message obtainMessageIIIIO(
+            int what, int arg1, int arg2, int arg3, int arg4, Object arg5) {
         SomeArgs args = SomeArgs.obtain();
         args.arg1 = arg5;
         args.argi1 = arg1;

@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -84,8 +85,12 @@ final class SoftInputWindow extends Dialog {
                     super.show();
                     updateWindowState(2);
                     return;
-                } catch (WindowManager.BadTokenException | WindowManager.InvalidDisplayException e) {
-                    Log.i(TAG, "Probably the IME window token is already invalidated. show() does nothing.");
+                } catch (WindowManager.BadTokenException
+                        | WindowManager.InvalidDisplayException e) {
+                    Log.i(
+                            TAG,
+                            "Probably the IME window token is already invalidated. show() does"
+                                    + " nothing.");
                     updateWindowState(3);
                     return;
                 }
@@ -111,16 +116,22 @@ final class SoftInputWindow extends Dialog {
                     getWindow().setWindowAnimations(0);
                     dismiss();
                 } catch (WindowManager.BadTokenException e) {
-                    Log.i(TAG, "Probably the IME window token is already invalidated. No need to dismiss it.");
+                    Log.i(
+                            TAG,
+                            "Probably the IME window token is already invalidated. No need to"
+                                    + " dismiss it.");
                 }
                 updateWindowState(4);
                 return;
             case 3:
-                Log.i(TAG, "Not trying to dismiss the window because it is most likely unnecessary.");
+                Log.i(
+                        TAG,
+                        "Not trying to dismiss the window because it is most likely unnecessary.");
                 updateWindowState(4);
                 return;
             case 4:
-                throw new IllegalStateException("dismissForDestroyIfNecessary can be called only once");
+                throw new IllegalStateException(
+                        "dismissForDestroyIfNecessary can be called only once");
             default:
                 throw new IllegalStateException("Unexpected state=" + this.mWindowState);
         }

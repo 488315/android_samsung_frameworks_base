@@ -5,7 +5,9 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.storage.IStorageManager;
 import android.util.sysfwutil.Slog;
+
 import com.samsung.android.media.AudioParameter;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -30,11 +32,9 @@ public class SemPassStorageManager {
     private static SemPassStorageManager mSemPassStorageManager = null;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SemPassStorageCodeResult {
-    }
+    public @interface SemPassStorageCodeResult {}
 
-    private SemPassStorageManager() {
-    }
+    private SemPassStorageManager() {}
 
     public static SemPassStorageManager getInstance() {
         if (!isPassSupport) {

@@ -3,6 +3,7 @@ package com.android.server.permission.access.appop;
 import android.app.AppOpsManager;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.server.LocalServices;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
@@ -13,7 +14,6 @@ import com.android.server.appop.AppOpsService$$ExternalSyntheticLambda15;
 import com.android.server.permission.access.MutableAccessState;
 import com.android.server.permission.access.MutableUserState;
 import com.android.server.permission.access.MutateStateScope;
-import com.android.server.permission.access.appop.AppOpService;
 import com.android.server.permission.access.immutable.Immutable;
 import com.android.server.permission.access.immutable.IndexedMap;
 import com.android.server.permission.access.immutable.IndexedMapExtensionsKt;
@@ -26,6 +26,7 @@ import com.android.server.permission.access.util.PackageVersionMigration;
 import com.android.server.permission.jarjar.kotlin.Triple;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
 import com.android.server.pm.pkg.PackageState;
+
 import java.util.Collections;
 import java.util.Map;
 
@@ -66,11 +67,20 @@ public final class PackageAppOpPolicy extends BaseAppOpPolicy {
                     throw th;
                 }
             }
-            Map map = (Map) appOpMigrationHelperImpl.mPackageAppOpModes.get(i, Collections.emptyMap());
-            int version$frameworks__base__services__permission__android_common__services_permission_pre_jarjar = PackageVersionMigration.getVersion$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(i);
+            Map map =
+                    (Map)
+                            appOpMigrationHelperImpl.mPackageAppOpModes.get(
+                                    i, Collections.emptyMap());
+            int
+                    version$frameworks__base__services__permission__android_common__services_permission_pre_jarjar =
+                            PackageVersionMigration
+                                    .getVersion$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                                            i);
             MutableUserState mutateUserState = mutableAccessState.mutateUserState(i, 1);
             Intrinsics.checkNotNull(mutateUserState);
-            MutableIndexedReferenceMap mutableIndexedReferenceMap = (MutableIndexedReferenceMap) mutateUserState.packageAppOpModesReference.mutate();
+            MutableIndexedReferenceMap mutableIndexedReferenceMap =
+                    (MutableIndexedReferenceMap)
+                            mutateUserState.packageAppOpModesReference.mutate();
             for (Map.Entry entry : map.entrySet()) {
                 String str = (String) entry.getKey();
                 Map map2 = (Map) entry.getValue();
@@ -78,11 +88,21 @@ public final class PackageAppOpPolicy extends BaseAppOpPolicy {
                     MutableIndexedMap mutableIndexedMap = new MutableIndexedMap();
                     mutableIndexedReferenceMap.put(str, mutableIndexedMap);
                     for (Map.Entry entry2 : map2.entrySet()) {
-                        mutableIndexedMap.put((String) entry2.getKey(), (Integer) entry2.getValue());
+                        mutableIndexedMap.put(
+                                (String) entry2.getKey(), (Integer) entry2.getValue());
                     }
-                    mutateUserState.mutatePackageVersions().put(str, Integer.valueOf(version$frameworks__base__services__permission__android_common__services_permission_pre_jarjar));
+                    mutateUserState
+                            .mutatePackageVersions()
+                            .put(
+                                    str,
+                                    Integer.valueOf(
+                                            version$frameworks__base__services__permission__android_common__services_permission_pre_jarjar));
                 } else {
-                    PinnerService$$ExternalSyntheticOutline0.m("Dropping unknown package ", str, " when migrating app op state", "PackageAppOpMigration");
+                    PinnerService$$ExternalSyntheticOutline0.m(
+                            "Dropping unknown package ",
+                            str,
+                            " when migrating app op state",
+                            "PackageAppOpMigration");
                 }
             }
         }
@@ -95,9 +115,22 @@ public final class PackageAppOpPolicy extends BaseAppOpPolicy {
         int size = userStates.array.size();
         for (int i2 = 0; i2 < size; i2++) {
             userStates.keyAt(i2);
-            int indexOfKey = ((MutableUserState) userStates.valueAt(i2)).getPackageAppOpModes().map.indexOfKey(str);
+            int indexOfKey =
+                    ((MutableUserState) userStates.valueAt(i2))
+                            .getPackageAppOpModes()
+                            .map
+                            .indexOfKey(str);
             if (indexOfKey >= 0) {
-                Immutable immutable = ((MutableReference) ((MutableIndexedReferenceMap) MutableAccessState.mutateUserStateAt$default(mutableAccessState, i2).packageAppOpModesReference.mutate()).map.removeAt(indexOfKey)).immutable;
+                Immutable immutable =
+                        ((MutableReference)
+                                        ((MutableIndexedReferenceMap)
+                                                        MutableAccessState
+                                                                .mutateUserStateAt$default(
+                                                                        mutableAccessState, i2)
+                                                                .packageAppOpModesReference
+                                                                .mutate())
+                                                .map.removeAt(indexOfKey))
+                                .immutable;
             }
         }
     }
@@ -108,7 +141,9 @@ public final class PackageAppOpPolicy extends BaseAppOpPolicy {
         int size = mutableIndexedListSet.list.size();
         int i = 0;
         while (i < size) {
-            AppOpService.OnPackageAppOpModeChangedListener onPackageAppOpModeChangedListener = (AppOpService.OnPackageAppOpModeChangedListener) mutableIndexedListSet.list.get(i);
+            AppOpService.OnPackageAppOpModeChangedListener onPackageAppOpModeChangedListener =
+                    (AppOpService.OnPackageAppOpModeChangedListener)
+                            mutableIndexedListSet.list.get(i);
             ArraySet arraySet = AppOpService.this.listeners;
             ArrayMap arrayMap = onPackageAppOpModeChangedListener.pendingChanges;
             int size2 = arrayMap.size();
@@ -119,12 +154,20 @@ public final class PackageAppOpPolicy extends BaseAppOpPolicy {
                 int size3 = arraySet.size();
                 int i3 = 0;
                 while (i3 < size3) {
-                    AppOpsService.AnonymousClass2 anonymousClass2 = (AppOpsService.AnonymousClass2) arraySet.valueAt(i3);
+                    AppOpsService.AnonymousClass2 anonymousClass2 =
+                            (AppOpsService.AnonymousClass2) arraySet.valueAt(i3);
                     String str = (String) triple.getFirst();
                     int intValue2 = ((Number) triple.getSecond()).intValue();
                     int intValue3 = ((Number) triple.getThird()).intValue();
                     AppOpsService appOpsService = AppOpsService.this;
-                    appOpsService.mHandler.sendMessage(PooledLambda.obtainMessage(new AppOpsService$$ExternalSyntheticLambda15(1), appOpsService, str, Integer.valueOf(intValue3), Integer.valueOf(intValue), Integer.valueOf(intValue2)));
+                    appOpsService.mHandler.sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new AppOpsService$$ExternalSyntheticLambda15(1),
+                                    appOpsService,
+                                    str,
+                                    Integer.valueOf(intValue3),
+                                    Integer.valueOf(intValue),
+                                    Integer.valueOf(intValue2)));
                     i3++;
                     mutableIndexedListSet = mutableIndexedListSet;
                     size = size;
@@ -139,42 +182,64 @@ public final class PackageAppOpPolicy extends BaseAppOpPolicy {
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r1v23, types: [com.android.server.permission.access.immutable.Immutable] */
-    public final void setAppOpMode(MutateStateScope mutateStateScope, String str, int i, String str2, int i2) {
+    public final void setAppOpMode(
+            MutateStateScope mutateStateScope, String str, int i, String str2, int i2) {
         if (!mutateStateScope.newState.getUserStates().array.contains(i)) {
-            NandswapManager$$ExternalSyntheticOutline0.m(i, "Unable to set app op mode for missing user ", "PackageAppOpPolicy");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    i, "Unable to set app op mode for missing user ", "PackageAppOpPolicy");
             return;
         }
         int opToDefaultMode = AppOpsManager.opToDefaultMode(str2);
         Immutable immutable = mutateStateScope.newState.getUserStates().get(i);
         Intrinsics.checkNotNull(immutable);
-        if (((Number) IndexedMapExtensionsKt.getWithDefault((IndexedMap) ((MutableUserState) immutable).getPackageAppOpModes().get(str), str2, Integer.valueOf(opToDefaultMode))).intValue() == i2) {
+        if (((Number)
+                                IndexedMapExtensionsKt.getWithDefault(
+                                        (IndexedMap)
+                                                ((MutableUserState) immutable)
+                                                        .getPackageAppOpModes()
+                                                        .get(str),
+                                        str2,
+                                        Integer.valueOf(opToDefaultMode)))
+                        .intValue()
+                == i2) {
             return;
         }
         MutableUserState mutateUserState = mutateStateScope.newState.mutateUserState(i, 1);
         Intrinsics.checkNotNull(mutateUserState);
-        MutableIndexedReferenceMap mutableIndexedReferenceMap = (MutableIndexedReferenceMap) mutateUserState.packageAppOpModesReference.mutate();
-        MutableReference mutableReference = (MutableReference) mutableIndexedReferenceMap.map.get(str);
+        MutableIndexedReferenceMap mutableIndexedReferenceMap =
+                (MutableIndexedReferenceMap) mutateUserState.packageAppOpModesReference.mutate();
+        MutableReference mutableReference =
+                (MutableReference) mutableIndexedReferenceMap.map.get(str);
         MutableIndexedMap mutate = mutableReference != null ? mutableReference.mutate() : null;
         if (mutate == null) {
             mutate = new MutableIndexedMap();
             mutableIndexedReferenceMap.put(str, mutate);
         }
         MutableIndexedMap mutableIndexedMap = mutate;
-        IndexedMapExtensionsKt.putWithDefault(mutableIndexedMap, str2, Integer.valueOf(i2), Integer.valueOf(opToDefaultMode));
+        IndexedMapExtensionsKt.putWithDefault(
+                mutableIndexedMap, str2, Integer.valueOf(i2), Integer.valueOf(opToDefaultMode));
         if (mutableIndexedMap.map.isEmpty()) {
             mutableIndexedReferenceMap.remove$1(str);
         }
         MutableIndexedListSet mutableIndexedListSet = this.onAppOpModeChangedListeners;
         int size = mutableIndexedListSet.list.size();
         for (int i3 = 0; i3 < size; i3++) {
-            AppOpService.OnPackageAppOpModeChangedListener onPackageAppOpModeChangedListener = (AppOpService.OnPackageAppOpModeChangedListener) mutableIndexedListSet.list.get(i3);
+            AppOpService.OnPackageAppOpModeChangedListener onPackageAppOpModeChangedListener =
+                    (AppOpService.OnPackageAppOpModeChangedListener)
+                            mutableIndexedListSet.list.get(i3);
             onPackageAppOpModeChangedListener.getClass();
-            onPackageAppOpModeChangedListener.pendingChanges.put(new Triple(str, Integer.valueOf(i), Integer.valueOf(AppOpsManager.strOpToOp(str2))), Integer.valueOf(i2));
+            onPackageAppOpModeChangedListener.pendingChanges.put(
+                    new Triple(
+                            str,
+                            Integer.valueOf(i),
+                            Integer.valueOf(AppOpsManager.strOpToOp(str2))),
+                    Integer.valueOf(i2));
         }
     }
 
     @Override // com.android.server.permission.access.SchemePolicy
-    public final void upgradePackageState(MutateStateScope mutateStateScope, PackageState packageState, int i, int i2) {
+    public final void upgradePackageState(
+            MutateStateScope mutateStateScope, PackageState packageState, int i, int i2) {
         MutableIndexedReferenceMap packageAppOpModes;
         PackageAppOpUpgrade packageAppOpUpgrade = this.upgrade;
         packageAppOpUpgrade.getClass();
@@ -182,8 +247,28 @@ public final class PackageAppOpPolicy extends BaseAppOpPolicy {
             String packageName = packageState.getPackageName();
             PackageAppOpPolicy packageAppOpPolicy = packageAppOpUpgrade.policy;
             packageAppOpPolicy.getClass();
-            MutableUserState mutableUserState = (MutableUserState) mutateStateScope.state.getUserStates().get(i);
-            packageAppOpPolicy.setAppOpMode(mutateStateScope, packageState.getPackageName(), i, "android:run_any_in_background", ((Number) IndexedMapExtensionsKt.getWithDefault((mutableUserState == null || (packageAppOpModes = mutableUserState.getPackageAppOpModes()) == null) ? null : (IndexedMap) packageAppOpModes.get(packageName), "android:run_in_background", Integer.valueOf(AppOpsManager.opToDefaultMode("android:run_in_background")))).intValue());
+            MutableUserState mutableUserState =
+                    (MutableUserState) mutateStateScope.state.getUserStates().get(i);
+            packageAppOpPolicy.setAppOpMode(
+                    mutateStateScope,
+                    packageState.getPackageName(),
+                    i,
+                    "android:run_any_in_background",
+                    ((Number)
+                                    IndexedMapExtensionsKt.getWithDefault(
+                                            (mutableUserState == null
+                                                            || (packageAppOpModes =
+                                                                            mutableUserState
+                                                                                    .getPackageAppOpModes())
+                                                                    == null)
+                                                    ? null
+                                                    : (IndexedMap)
+                                                            packageAppOpModes.get(packageName),
+                                            "android:run_in_background",
+                                            Integer.valueOf(
+                                                    AppOpsManager.opToDefaultMode(
+                                                            "android:run_in_background"))))
+                            .intValue());
         }
     }
 }

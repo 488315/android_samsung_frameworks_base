@@ -21,14 +21,17 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.server.LocalServices;
 import com.android.server.pm.PersonaManagerService;
 import com.android.server.wm.ActivityTaskManagerService;
+
 import com.samsung.android.knox.PersonaManagerInternal;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -49,8 +52,10 @@ public final class SeamLessSwitchHandler {
     public final PackageManager pm;
     public final SemPersonaManager semPersonaManager;
     public final SemStatusBarManager statusBarManager;
-    public final List SEAMLESS_NOTALLOWED_EXCEPTIONAL_LIST = new ArrayList(Arrays.asList("android"));
-    public final List LAUNCHSF_HOME_LIST = new ArrayList(Arrays.asList(KnoxCustomManagerService.SETTING_PKG_NAME));
+    public final List SEAMLESS_NOTALLOWED_EXCEPTIONAL_LIST =
+            new ArrayList(Arrays.asList("android"));
+    public final List LAUNCHSF_HOME_LIST =
+            new ArrayList(Arrays.asList(KnoxCustomManagerService.SETTING_PKG_NAME));
 
     public SeamLessSwitchHandler(Context context, PersonaManagerService personaManagerService) {
         this.c = context;
@@ -59,14 +64,18 @@ public final class SeamLessSwitchHandler {
         this.am = (ActivityManager) context.getSystemService("activity");
         this.semPersonaManager = (SemPersonaManager) context.getSystemService("persona");
         this.mUserManager = (UserManager) context.getSystemService("user");
-        this.statusBarManager = (SemStatusBarManager) context.getSystemService(SemStatusBarManager.class);
+        this.statusBarManager =
+                (SemStatusBarManager) context.getSystemService(SemStatusBarManager.class);
         this.mKeyguardManager = (KeyguardManager) context.getSystemService("keyguard");
         this.mLockPatternUtils = new LockPatternUtils(context);
-        this.mPersonaManagerInternal = (PersonaManagerInternal) LocalServices.getService(PersonaManagerInternal.class);
+        this.mPersonaManagerInternal =
+                (PersonaManagerInternal) LocalServices.getService(PersonaManagerInternal.class);
     }
 
     public static boolean isAllowedAppsInLockscreen(ComponentName componentName) {
-        return SystemProperties.get("service.camera.running", "0").equals("1") || componentName.getPackageName().equals("com.sec.android.app.popupcalculator") || componentName.getPackageName().equals("com.sec.android.app.voicenote");
+        return SystemProperties.get("service.camera.running", "0").equals("1")
+                || componentName.getPackageName().equals("com.sec.android.app.popupcalculator")
+                || componentName.getPackageName().equals("com.sec.android.app.voicenote");
     }
 
     public final Intent getLaunchIntentForPackage(String str, int i) {
@@ -85,7 +94,9 @@ public final class SeamLessSwitchHandler {
         }
         Intent intent2 = new Intent(intent);
         intent2.setFlags(268435456);
-        intent2.setClassName(((ResolveInfo) queryIntentActivitiesAsUser.get(0)).activityInfo.packageName, ((ResolveInfo) queryIntentActivitiesAsUser.get(0)).activityInfo.name);
+        intent2.setClassName(
+                ((ResolveInfo) queryIntentActivitiesAsUser.get(0)).activityInfo.packageName,
+                ((ResolveInfo) queryIntentActivitiesAsUser.get(0)).activityInfo.name);
         return intent2;
     }
 
@@ -117,7 +128,8 @@ public final class SeamLessSwitchHandler {
             if (((ArrayList) this.LAUNCHSF_HOME_LIST).contains(str)) {
                 return false;
             }
-            PackageInfo packageInfo = ActivityThread.getPackageManager().getPackageInfo(str, 786432L, i);
+            PackageInfo packageInfo =
+                    ActivityThread.getPackageManager().getPackageInfo(str, 786432L, i);
             if (packageInfo != null) {
                 if (packageInfo.applicationInfo.enabled) {
                     z = true;
@@ -133,15 +145,22 @@ public final class SeamLessSwitchHandler {
     }
 
     public final boolean isSecureFolderHidden() {
-        return Settings.Secure.getIntForUser(this.c.getContentResolver(), "hide_secure_folder_flag", 0, 0) == 1;
+        return Settings.Secure.getIntForUser(
+                        this.c.getContentResolver(), "hide_secure_folder_flag", 0, 0)
+                == 1;
     }
 
-    public final boolean isSettingsExceptionalCase(ActivityManager.RunningTaskInfo runningTaskInfo, ComponentName componentName, int i) {
+    public final boolean isSettingsExceptionalCase(
+            ActivityManager.RunningTaskInfo runningTaskInfo, ComponentName componentName, int i) {
         try {
-            if (!SemPersonaManager.isSecureFolderId(i) && this.personaManagerService.getFocusedUser() != 0) {
+            if (!SemPersonaManager.isSecureFolderId(i)
+                    && this.personaManagerService.getFocusedUser() != 0) {
                 return false;
             }
-            if (!KnoxCustomManagerService.SETTING_PKG_NAME.equals(componentName.getPackageName()) || !((ActivityTaskManagerService) ServiceManager.getService("activity_task")).mPersonaActivityHelper.isQuickSwitchExceptionalCase(runningTaskInfo.id)) {
+            if (!KnoxCustomManagerService.SETTING_PKG_NAME.equals(componentName.getPackageName())
+                    || !((ActivityTaskManagerService) ServiceManager.getService("activity_task"))
+                            .mPersonaActivityHelper.isQuickSwitchExceptionalCase(
+                                    runningTaskInfo.id)) {
                 return false;
             }
             Log.d("SeamLessSwitchHandler", "Exceptional case quick switch! securefolder keyguard");
@@ -155,7 +174,11 @@ public final class SeamLessSwitchHandler {
     public final void launchFolderContainerOrHome(int i) {
         Intent intent = new Intent("android.intent.action.MAIN");
         if (SemPersonaManager.isSecureFolderId(i)) {
-            intent.setClassName("com.samsung.knox.securefolder", isSecureFolderHidden() ? "com.samsung.knox.launcher.home.view.HomeActivity" : "com.samsung.knox.securefolder.presentation.switcher.view.SecureFolderShortcutActivity");
+            intent.setClassName(
+                    "com.samsung.knox.securefolder",
+                    isSecureFolderHidden()
+                            ? "com.samsung.knox.launcher.home.view.HomeActivity"
+                            : "com.samsung.knox.securefolder.presentation.switcher.view.SecureFolderShortcutActivity");
             intent.putExtra("userId", i);
             if (!this.mPersonaManagerInternal.shouldConfirmCredentials(i)) {
                 intent.putExtra("quick_switch", true);
@@ -164,13 +187,21 @@ public final class SeamLessSwitchHandler {
             intent.addFlags(49152);
             intent.addFlags(EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT);
             this.c.startActivityAsUser(intent, new UserHandle(isSecureFolderHidden() ? i : 0));
-            new Handler(Looper.getMainLooper()).postDelayed(new SeamLessSwitchHandler$$ExternalSyntheticLambda0(this, i), 500L);
+            new Handler(Looper.getMainLooper())
+                    .postDelayed(
+                            new SeamLessSwitchHandler$$ExternalSyntheticLambda0(this, i), 500L);
             packageExtraForSALog = "com.samsung.knox.securefolder";
             return;
         }
         intent.addCategory("android.intent.category.HOME");
         intent.setFlags(268435456);
-        ResolveInfo resolveActivityAsUser = this.c.getPackageManager().resolveActivityAsUser(intent, EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT, 0);
+        ResolveInfo resolveActivityAsUser =
+                this.c
+                        .getPackageManager()
+                        .resolveActivityAsUser(
+                                intent,
+                                EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT,
+                                0);
         if (resolveActivityAsUser == null) {
             return;
         }

@@ -1,6 +1,7 @@
 package com.android.server.accessibility.magnification;
 
 import com.android.server.accessibility.gestures.GestureMatcher;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,8 +16,7 @@ public final class GesturesObserver implements GestureMatcher.StateChangeListene
     public int mCancelledMatcherSize = 0;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Listener {
-    }
+    public interface Listener {}
 
     public GesturesObserver(Listener listener, GestureMatcher... gestureMatcherArr) {
         this.mListener = listener;
@@ -42,11 +42,15 @@ public final class GesturesObserver implements GestureMatcher.StateChangeListene
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onStateChanged(int r17, int r18, int r19, android.view.MotionEvent r20, android.view.MotionEvent r21) {
+    public final void onStateChanged(
+            int r17, int r18, int r19, android.view.MotionEvent r20, android.view.MotionEvent r21) {
         /*
             Method dump skipped, instructions count: 338
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.magnification.GesturesObserver.onStateChanged(int, int, int, android.view.MotionEvent, android.view.MotionEvent):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.magnification.GesturesObserver.onStateChanged(int,"
+                    + " int, int, android.view.MotionEvent, android.view.MotionEvent):void");
     }
 }

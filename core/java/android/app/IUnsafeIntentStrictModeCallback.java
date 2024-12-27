@@ -15,8 +15,7 @@ public interface IUnsafeIntentStrictModeCallback extends IInterface {
 
     public static class Default implements IUnsafeIntentStrictModeCallback {
         @Override // android.app.IUnsafeIntentStrictModeCallback
-        public void onUnsafeIntent(int type, Intent intent) throws RemoteException {
-        }
+        public void onUnsafeIntent(int type, Intent intent) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +23,7 @@ public interface IUnsafeIntentStrictModeCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUnsafeIntentStrictModeCallback {
+    public abstract static class Stub extends Binder implements IUnsafeIntentStrictModeCallback {
         static final int TRANSACTION_onUnsafeIntent = 1;
 
         public Stub() {
@@ -62,7 +61,8 @@ public interface IUnsafeIntentStrictModeCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUnsafeIntentStrictModeCallback.DESCRIPTOR);
             }

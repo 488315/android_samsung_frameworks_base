@@ -1,6 +1,7 @@
 package com.android.server;
 
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,8 +24,17 @@ public abstract class CommonNativeResetReasonCode extends ResetReasonCode {
             } else if (str3.startsWith("Abort message") || str3.startsWith("#")) {
                 str2 = AnyMotionDetector$$ExternalSyntheticOutline0.m(str2, str3, "\n");
             } else if (str3.startsWith("pid: ") && str3.indexOf("  >>>") != -1) {
-                String trim = str3.substring(str3.indexOf(">>>"), str3.length()).replace(">>>", "").replace("<<<", "").trim();
-                String[] split = (str3.substring(0, str3.indexOf("  >>>")).replace(":", ",") + "(" + trim + ")").split(", ");
+                String trim =
+                        str3.substring(str3.indexOf(">>>"), str3.length())
+                                .replace(">>>", "")
+                                .replace("<<<", "")
+                                .trim();
+                String[] split =
+                        (str3.substring(0, str3.indexOf("  >>>")).replace(":", ",")
+                                        + "("
+                                        + trim
+                                        + ")")
+                                .split(", ");
                 if (split.length >= 6) {
                     StringBuilder m2 = Preconditions$$ExternalSyntheticOutline0.m(str, ",");
                     m2.append(split[5]);

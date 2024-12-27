@@ -5,13 +5,15 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IMediaRoute2ProviderServiceCallback extends IInterface {
     public static final String DESCRIPTOR = "android.media.IMediaRoute2ProviderServiceCallback";
 
-    void notifyProviderUpdated(MediaRoute2ProviderInfo mediaRoute2ProviderInfo) throws RemoteException;
+    void notifyProviderUpdated(MediaRoute2ProviderInfo mediaRoute2ProviderInfo)
+            throws RemoteException;
 
     void notifyRequestFailed(long j, int i) throws RemoteException;
 
@@ -23,24 +25,22 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
 
     public static class Default implements IMediaRoute2ProviderServiceCallback {
         @Override // android.media.IMediaRoute2ProviderServiceCallback
-        public void notifyProviderUpdated(MediaRoute2ProviderInfo providerInfo) throws RemoteException {
-        }
+        public void notifyProviderUpdated(MediaRoute2ProviderInfo providerInfo)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderServiceCallback
-        public void notifySessionCreated(long requestId, RoutingSessionInfo sessionInfo) throws RemoteException {
-        }
+        public void notifySessionCreated(long requestId, RoutingSessionInfo sessionInfo)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderServiceCallback
-        public void notifySessionsUpdated(List<RoutingSessionInfo> sessionInfo) throws RemoteException {
-        }
+        public void notifySessionsUpdated(List<RoutingSessionInfo> sessionInfo)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderServiceCallback
-        public void notifySessionReleased(RoutingSessionInfo sessionInfo) throws RemoteException {
-        }
+        public void notifySessionReleased(RoutingSessionInfo sessionInfo) throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderServiceCallback
-        public void notifyRequestFailed(long requestId, int reason) throws RemoteException {
-        }
+        public void notifyRequestFailed(long requestId, int reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -48,7 +48,8 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaRoute2ProviderServiceCallback {
+    public abstract static class Stub extends Binder
+            implements IMediaRoute2ProviderServiceCallback {
         static final int TRANSACTION_notifyProviderUpdated = 1;
         static final int TRANSACTION_notifyRequestFailed = 5;
         static final int TRANSACTION_notifySessionCreated = 2;
@@ -63,7 +64,8 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof IMediaRoute2ProviderServiceCallback)) {
                 return (IMediaRoute2ProviderServiceCallback) iin;
             }
@@ -98,7 +100,8 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
             }
@@ -108,23 +111,28 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    MediaRoute2ProviderInfo _arg0 = (MediaRoute2ProviderInfo) data.readTypedObject(MediaRoute2ProviderInfo.CREATOR);
+                    MediaRoute2ProviderInfo _arg0 =
+                            (MediaRoute2ProviderInfo)
+                                    data.readTypedObject(MediaRoute2ProviderInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifyProviderUpdated(_arg0);
                     return true;
                 case 2:
                     long _arg02 = data.readLong();
-                    RoutingSessionInfo _arg1 = (RoutingSessionInfo) data.readTypedObject(RoutingSessionInfo.CREATOR);
+                    RoutingSessionInfo _arg1 =
+                            (RoutingSessionInfo) data.readTypedObject(RoutingSessionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifySessionCreated(_arg02, _arg1);
                     return true;
                 case 3:
-                    List<RoutingSessionInfo> _arg03 = data.createTypedArrayList(RoutingSessionInfo.CREATOR);
+                    List<RoutingSessionInfo> _arg03 =
+                            data.createTypedArrayList(RoutingSessionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifySessionsUpdated(_arg03);
                     return true;
                 case 4:
-                    RoutingSessionInfo _arg04 = (RoutingSessionInfo) data.readTypedObject(RoutingSessionInfo.CREATOR);
+                    RoutingSessionInfo _arg04 =
+                            (RoutingSessionInfo) data.readTypedObject(RoutingSessionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifySessionReleased(_arg04);
                     return true;
@@ -156,7 +164,8 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderServiceCallback
-            public void notifyProviderUpdated(MediaRoute2ProviderInfo providerInfo) throws RemoteException {
+            public void notifyProviderUpdated(MediaRoute2ProviderInfo providerInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
@@ -168,7 +177,8 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderServiceCallback
-            public void notifySessionCreated(long requestId, RoutingSessionInfo sessionInfo) throws RemoteException {
+            public void notifySessionCreated(long requestId, RoutingSessionInfo sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
@@ -181,7 +191,8 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderServiceCallback
-            public void notifySessionsUpdated(List<RoutingSessionInfo> sessionInfo) throws RemoteException {
+            public void notifySessionsUpdated(List<RoutingSessionInfo> sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);
@@ -193,7 +204,8 @@ public interface IMediaRoute2ProviderServiceCallback extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderServiceCallback
-            public void notifySessionReleased(RoutingSessionInfo sessionInfo) throws RemoteException {
+            public void notifySessionReleased(RoutingSessionInfo sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderServiceCallback.DESCRIPTOR);

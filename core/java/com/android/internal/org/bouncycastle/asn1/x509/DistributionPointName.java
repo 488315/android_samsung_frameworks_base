@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.x509;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Choice;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1Object;
@@ -28,7 +29,8 @@ public class DistributionPointName extends ASN1Object implements ASN1Choice {
         if (obj instanceof ASN1TaggedObject) {
             return new DistributionPointName((ASN1TaggedObject) obj);
         }
-        throw new IllegalArgumentException("unknown object in factory: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in factory: " + obj.getClass().getName());
     }
 
     public DistributionPointName(int type, ASN1Encodable name) {
@@ -57,7 +59,8 @@ public class DistributionPointName extends ASN1Object implements ASN1Choice {
         }
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return new DERTaggedObject(false, this.type, this.name);
     }

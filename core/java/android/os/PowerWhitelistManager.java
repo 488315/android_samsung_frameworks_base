@@ -2,6 +2,7 @@ package android.os;
 
 import android.annotation.SystemApi;
 import android.content.Context;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -36,8 +37,7 @@ public class PowerWhitelistManager {
     public static final int REASON_INSTR_BACKGROUND_FGS_PERMISSION = 61;
     public static final int REASON_KEY_CHAIN = 304;
 
-    @SystemApi
-    public static final int REASON_LOCATION_PROVIDER = 312;
+    @SystemApi public static final int REASON_LOCATION_PROVIDER = 312;
     public static final int REASON_LOCKED_BOOT_COMPLETED = 202;
     public static final int REASON_MEDIA_BUTTON = 313;
     public static final int REASON_NOTIFICATION_SERVICE = 310;
@@ -72,21 +72,21 @@ public class PowerWhitelistManager {
     private final IDeviceIdleController mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ReasonCode {
-    }
+    public @interface ReasonCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TempAllowListType {
-    }
+    public @interface TempAllowListType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WhitelistEvent {
-    }
+    public @interface WhitelistEvent {}
 
     public PowerWhitelistManager(Context context) {
         this.mContext = context;
-        this.mService = ((DeviceIdleManager) context.getSystemService(DeviceIdleManager.class)).getService();
-        this.mPowerExemptionManager = (PowerExemptionManager) context.getSystemService(PowerExemptionManager.class);
+        this.mService =
+                ((DeviceIdleManager) context.getSystemService(DeviceIdleManager.class))
+                        .getService();
+        this.mPowerExemptionManager =
+                (PowerExemptionManager) context.getSystemService(PowerExemptionManager.class);
     }
 
     @Deprecated
@@ -115,23 +115,29 @@ public class PowerWhitelistManager {
     }
 
     @Deprecated
-    public void whitelistAppTemporarily(String packageName, long durationMs, int reasonCode, String reason) {
-        this.mPowerExemptionManager.addToTemporaryAllowList(packageName, reasonCode, reason, durationMs);
+    public void whitelistAppTemporarily(
+            String packageName, long durationMs, int reasonCode, String reason) {
+        this.mPowerExemptionManager.addToTemporaryAllowList(
+                packageName, reasonCode, reason, durationMs);
     }
 
     @Deprecated
     public void whitelistAppTemporarily(String packageName, long durationMs) {
-        this.mPowerExemptionManager.addToTemporaryAllowList(packageName, 0, packageName, durationMs);
+        this.mPowerExemptionManager.addToTemporaryAllowList(
+                packageName, 0, packageName, durationMs);
     }
 
     @Deprecated
     public long whitelistAppTemporarilyForEvent(String packageName, int event, String reason) {
-        return this.mPowerExemptionManager.addToTemporaryAllowListForEvent(packageName, 0, reason, event);
+        return this.mPowerExemptionManager.addToTemporaryAllowListForEvent(
+                packageName, 0, reason, event);
     }
 
     @Deprecated
-    public long whitelistAppTemporarilyForEvent(String packageName, int event, int reasonCode, String reason) {
-        return this.mPowerExemptionManager.addToTemporaryAllowListForEvent(packageName, reasonCode, reason, event);
+    public long whitelistAppTemporarilyForEvent(
+            String packageName, int event, int reasonCode, String reason) {
+        return this.mPowerExemptionManager.addToTemporaryAllowListForEvent(
+                packageName, reasonCode, reason, event);
     }
 
     @Deprecated

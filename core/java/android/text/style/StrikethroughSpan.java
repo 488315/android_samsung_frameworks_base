@@ -6,11 +6,9 @@ import android.text.TextPaint;
 
 /* loaded from: classes4.dex */
 public class StrikethroughSpan extends CharacterStyle implements UpdateAppearance, ParcelableSpan {
-    public StrikethroughSpan() {
-    }
+    public StrikethroughSpan() {}
 
-    public StrikethroughSpan(Parcel src) {
-    }
+    public StrikethroughSpan(Parcel src) {}
 
     @Override // android.text.ParcelableSpan
     public int getSpanTypeId() {
@@ -33,8 +31,7 @@ public class StrikethroughSpan extends CharacterStyle implements UpdateAppearanc
     }
 
     @Override // android.text.ParcelableSpan
-    public void writeToParcelInternal(Parcel dest, int flags) {
-    }
+    public void writeToParcelInternal(Parcel dest, int flags) {}
 
     @Override // android.text.style.CharacterStyle
     public void updateDrawState(TextPaint ds) {

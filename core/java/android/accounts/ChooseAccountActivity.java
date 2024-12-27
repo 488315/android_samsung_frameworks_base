@@ -19,7 +19,9 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import java.util.HashMap;
 
 /* loaded from: classes.dex */
@@ -37,7 +39,12 @@ public class ChooseAccountActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().addSystemFlags(524288);
         this.mAccounts = getIntent().getParcelableArrayExtra(AccountManager.KEY_ACCOUNTS);
-        this.mAccountManagerResponse = (AccountManagerResponse) getIntent().getParcelableExtra(AccountManager.KEY_ACCOUNT_MANAGER_RESPONSE, AccountManagerResponse.class);
+        this.mAccountManagerResponse =
+                (AccountManagerResponse)
+                        getIntent()
+                                .getParcelableExtra(
+                                        AccountManager.KEY_ACCOUNT_MANAGER_RESPONSE,
+                                        AccountManagerResponse.class);
         if (this.mAccounts == null) {
             setResult(0);
             finish();
@@ -45,28 +52,39 @@ public class ChooseAccountActivity extends Activity {
         }
         this.mCallingUid = getLaunchedFromUid();
         this.mCallingPackage = getLaunchedFromPackage();
-        if (UserHandle.isSameApp(this.mCallingUid, 1000) && getIntent().getStringExtra(AccountManager.KEY_ANDROID_PACKAGE_NAME) != null) {
-            this.mCallingPackage = getIntent().getStringExtra(AccountManager.KEY_ANDROID_PACKAGE_NAME);
+        if (UserHandle.isSameApp(this.mCallingUid, 1000)
+                && getIntent().getStringExtra(AccountManager.KEY_ANDROID_PACKAGE_NAME) != null) {
+            this.mCallingPackage =
+                    getIntent().getStringExtra(AccountManager.KEY_ANDROID_PACKAGE_NAME);
         }
-        if (!UserHandle.isSameApp(this.mCallingUid, 1000) && getIntent().getStringExtra(AccountManager.KEY_ANDROID_PACKAGE_NAME) != null) {
-            Log.w(getClass().getSimpleName(), "Non-system Uid: " + this.mCallingUid + " tried to override packageName \n");
+        if (!UserHandle.isSameApp(this.mCallingUid, 1000)
+                && getIntent().getStringExtra(AccountManager.KEY_ANDROID_PACKAGE_NAME) != null) {
+            Log.w(
+                    getClass().getSimpleName(),
+                    "Non-system Uid: " + this.mCallingUid + " tried to override packageName \n");
         }
         getAuthDescriptions();
         AccountInfo[] mAccountInfos = new AccountInfo[this.mAccounts.length];
         for (int i = 0; i < this.mAccounts.length; i++) {
-            mAccountInfos[i] = new AccountInfo(((Account) this.mAccounts[i]).name, getDrawableForType(((Account) this.mAccounts[i]).type));
+            mAccountInfos[i] =
+                    new AccountInfo(
+                            ((Account) this.mAccounts[i]).name,
+                            getDrawableForType(((Account) this.mAccounts[i]).type));
         }
         setContentView(R.layout.choose_account);
         ListView list = (ListView) findViewById(16908298);
         list.setAdapter((ListAdapter) new AccountArrayAdapter(this, 17367043, mAccountInfos));
         list.setChoiceMode(1);
         list.setTextFilterEnabled(true);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: android.accounts.ChooseAccountActivity.1
-            @Override // android.widget.AdapterView.OnItemClickListener
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                ChooseAccountActivity.this.onListItemClick((ListView) parent, v, position, id);
-            }
-        });
+        list.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() { // from class:
+                    // android.accounts.ChooseAccountActivity.1
+                    @Override // android.widget.AdapterView.OnItemClickListener
+                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                        ChooseAccountActivity.this.onListItemClick(
+                                (ListView) parent, v, position, id);
+                    }
+                });
     }
 
     private void getAuthDescriptions() {
@@ -102,7 +120,8 @@ public class ChooseAccountActivity extends Activity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Account account = (Account) this.mAccounts[position];
         AccountManager am = AccountManager.get(this);
-        Integer oldVisibility = Integer.valueOf(am.getAccountVisibility(account, this.mCallingPackage));
+        Integer oldVisibility =
+                Integer.valueOf(am.getAccountVisibility(account, this.mCallingPackage));
         if (oldVisibility != null && oldVisibility.intValue() == 4) {
             am.setAccountVisibility(account, this.mCallingPackage, 2);
         }
@@ -140,8 +159,7 @@ public class ChooseAccountActivity extends Activity {
         ImageView icon;
         TextView text;
 
-        private ViewHolder() {
-        }
+        private ViewHolder() {}
     }
 
     private static class AccountArrayAdapter extends ArrayAdapter<AccountInfo> {
@@ -151,14 +169,16 @@ public class ChooseAccountActivity extends Activity {
         public AccountArrayAdapter(Context context, int textViewResourceId, AccountInfo[] infos) {
             super(context, textViewResourceId, infos);
             this.mInfos = infos;
-            this.mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.mLayoutInflater =
+                    (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override // android.widget.ArrayAdapter, android.widget.Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView = this.mLayoutInflater.inflate(R.layout.choose_account_row, (ViewGroup) null);
+                convertView =
+                        this.mLayoutInflater.inflate(R.layout.choose_account_row, (ViewGroup) null);
                 holder = new ViewHolder();
                 holder.text = (TextView) convertView.findViewById(R.id.account_row_text);
                 holder.icon = (ImageView) convertView.findViewById(R.id.account_row_icon);

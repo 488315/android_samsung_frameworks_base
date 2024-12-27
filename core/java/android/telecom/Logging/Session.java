@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.telecom.Log;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -38,22 +39,24 @@ public class Session {
     private int mChildCounter = 0;
 
     public static class Info implements Parcelable {
-        public static final Parcelable.Creator<Info> CREATOR = new Parcelable.Creator<Info>() { // from class: android.telecom.Logging.Session.Info.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Info createFromParcel(Parcel source) {
-                String id = source.readString();
-                String methodName = source.readString();
-                String ownerInfo = source.readString();
-                return new Info(id, methodName, ownerInfo);
-            }
+        public static final Parcelable.Creator<Info> CREATOR =
+                new Parcelable.Creator<
+                        Info>() { // from class: android.telecom.Logging.Session.Info.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Info createFromParcel(Parcel source) {
+                        String id = source.readString();
+                        String methodName = source.readString();
+                        String ownerInfo = source.readString();
+                        return new Info(id, methodName, ownerInfo);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Info[] newArray(int size) {
-                return new Info[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Info[] newArray(int size) {
+                        return new Info[size];
+                    }
+                };
         public final String methodPath;
         public final String ownerInfo;
         public final String sessionId;
@@ -65,7 +68,10 @@ public class Session {
         }
 
         public static Info getInfo(Session s) {
-            return new Info(s.getFullSessionId(), s.getFullMethodPath(!Log.DEBUG && s.isSessionExternal()), s.getOwnerInfo());
+            return new Info(
+                    s.getFullSessionId(),
+                    s.getFullMethodPath(!Log.DEBUG && s.isSessionExternal()),
+                    s.getOwnerInfo());
         }
 
         public static Info getExternalInfo(Session s, String ownerInfo) {
@@ -75,7 +81,10 @@ public class Session {
             } else {
                 newInfo = ownerInfo != null ? ownerInfo : s.getOwnerInfo();
             }
-            return new Info(s.getFullSessionId(), s.getFullMethodPath(!Log.DEBUG && s.isSessionExternal()), newInfo);
+            return new Info(
+                    s.getFullSessionId(),
+                    s.getFullMethodPath(!Log.DEBUG && s.isSessionExternal()),
+                    newInfo);
         }
 
         @Override // android.os.Parcelable
@@ -91,7 +100,12 @@ public class Session {
         }
     }
 
-    public Session(String sessionId, String shortMethodName, long startTimeMs, boolean isStartedFromActiveSession, String ownerInfo) {
+    public Session(
+            String sessionId,
+            String shortMethodName,
+            long startTimeMs,
+            boolean isStartedFromActiveSession,
+            String ownerInfo) {
         this.mIsStartedFromActiveSession = false;
         setSessionId(sessionId);
         setShortMethodName(shortMethodName);
@@ -218,7 +232,9 @@ public class Session {
             return this.mSessionId;
         }
         if (Log.VERBOSE) {
-            return parentSession.getFullSessionId(parentCount + 1) + SESSION_SEPARATION_CHAR_CHILD + this.mSessionId;
+            return parentSession.getFullSessionId(parentCount + 1)
+                    + SESSION_SEPARATION_CHAR_CHILD
+                    + this.mSessionId;
         }
         return parentSession.getFullSessionId(parentCount + 1);
     }
@@ -275,7 +291,8 @@ public class Session {
         return sb.toString();
     }
 
-    private synchronized void getFullMethodPath(StringBuilder sb, boolean truncatePath, int parentCount) {
+    private synchronized void getFullMethodPath(
+            StringBuilder sb, boolean truncatePath, int parentCount) {
         if (parentCount >= 25) {
             Slog.w(LOG_TAG, "getFullMethodPath: Hit recursion limit!");
             sb.append(TRUNCATE_STRING);
@@ -314,7 +331,52 @@ public class Session {
     }
 
     public int hashCode() {
-        return ((((((((((((((((((this.mSessionId != null ? this.mSessionId.hashCode() : 0) * 31) + (this.mShortMethodName != null ? this.mShortMethodName.hashCode() : 0)) * 31) + ((int) (this.mExecutionStartTimeMs ^ (this.mExecutionStartTimeMs >>> 32)))) * 31) + ((int) (this.mExecutionEndTimeMs ^ (this.mExecutionEndTimeMs >>> 32)))) * 31) + (this.mParentSession != null ? this.mParentSession.hashCode() : 0)) * 31) + (this.mChildSessions != null ? this.mChildSessions.hashCode() : 0)) * 31) + (this.mIsCompleted ? 1 : 0)) * 31) + this.mChildCounter) * 31) + (this.mIsStartedFromActiveSession ? 1 : 0)) * 31) + (this.mOwnerInfo != null ? this.mOwnerInfo.hashCode() : 0);
+        return ((((((((((((((((((this.mSessionId != null ? this.mSessionId.hashCode() : 0) * 31)
+                                                                                                                                                + (this
+                                                                                                                                                                        .mShortMethodName
+                                                                                                                                                                != null
+                                                                                                                                                        ? this
+                                                                                                                                                                .mShortMethodName
+                                                                                                                                                                .hashCode()
+                                                                                                                                                        : 0))
+                                                                                                                                        * 31)
+                                                                                                                                + ((int)
+                                                                                                                                        (this
+                                                                                                                                                        .mExecutionStartTimeMs
+                                                                                                                                                ^ (this
+                                                                                                                                                                .mExecutionStartTimeMs
+                                                                                                                                                        >>> 32))))
+                                                                                                                        * 31)
+                                                                                                                + ((int)
+                                                                                                                        (this
+                                                                                                                                        .mExecutionEndTimeMs
+                                                                                                                                ^ (this
+                                                                                                                                                .mExecutionEndTimeMs
+                                                                                                                                        >>> 32))))
+                                                                                                        * 31)
+                                                                                                + (this
+                                                                                                                        .mParentSession
+                                                                                                                != null
+                                                                                                        ? this
+                                                                                                                .mParentSession
+                                                                                                                .hashCode()
+                                                                                                        : 0))
+                                                                                        * 31)
+                                                                                + (this
+                                                                                                        .mChildSessions
+                                                                                                != null
+                                                                                        ? this
+                                                                                                .mChildSessions
+                                                                                                .hashCode()
+                                                                                        : 0))
+                                                                        * 31)
+                                                                + (this.mIsCompleted ? 1 : 0))
+                                                        * 31)
+                                                + this.mChildCounter)
+                                        * 31)
+                                + (this.mIsStartedFromActiveSession ? 1 : 0))
+                        * 31)
+                + (this.mOwnerInfo != null ? this.mOwnerInfo.hashCode() : 0);
     }
 
     public boolean equals(Object o) {
@@ -325,19 +387,31 @@ public class Session {
             return false;
         }
         Session session = (Session) o;
-        if (this.mExecutionStartTimeMs != session.mExecutionStartTimeMs || this.mExecutionEndTimeMs != session.mExecutionEndTimeMs || this.mIsCompleted != session.mIsCompleted || this.mChildCounter != session.mChildCounter || this.mIsStartedFromActiveSession != session.mIsStartedFromActiveSession) {
+        if (this.mExecutionStartTimeMs != session.mExecutionStartTimeMs
+                || this.mExecutionEndTimeMs != session.mExecutionEndTimeMs
+                || this.mIsCompleted != session.mIsCompleted
+                || this.mChildCounter != session.mChildCounter
+                || this.mIsStartedFromActiveSession != session.mIsStartedFromActiveSession) {
             return false;
         }
-        if (this.mSessionId == null ? session.mSessionId != null : !this.mSessionId.equals(session.mSessionId)) {
+        if (this.mSessionId == null
+                ? session.mSessionId != null
+                : !this.mSessionId.equals(session.mSessionId)) {
             return false;
         }
-        if (this.mShortMethodName == null ? session.mShortMethodName != null : !this.mShortMethodName.equals(session.mShortMethodName)) {
+        if (this.mShortMethodName == null
+                ? session.mShortMethodName != null
+                : !this.mShortMethodName.equals(session.mShortMethodName)) {
             return false;
         }
-        if (this.mParentSession == null ? session.mParentSession != null : !this.mParentSession.equals(session.mParentSession)) {
+        if (this.mParentSession == null
+                ? session.mParentSession != null
+                : !this.mParentSession.equals(session.mParentSession)) {
             return false;
         }
-        if (this.mChildSessions == null ? session.mChildSessions != null : !this.mChildSessions.equals(session.mChildSessions)) {
+        if (this.mChildSessions == null
+                ? session.mChildSessions != null
+                : !this.mChildSessions.equals(session.mChildSessions)) {
             return false;
         }
         if (this.mOwnerInfo != null) {

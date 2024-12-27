@@ -6,6 +6,7 @@ import android.content.IntentSender;
 import android.content.pm.ParceledListSlice;
 import android.content.pm.VersionedPackage;
 import android.os.RemoteException;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.List;
 /* loaded from: classes.dex */
 public final class RollbackManager {
     public static final String EXTRA_STATUS = "android.content.rollback.extra.STATUS";
-    public static final String EXTRA_STATUS_MESSAGE = "android.content.rollback.extra.STATUS_MESSAGE";
+    public static final String EXTRA_STATUS_MESSAGE =
+            "android.content.rollback.extra.STATUS_MESSAGE";
     public static final String PROPERTY_ROLLBACK_LIFETIME_MILLIS = "rollback_lifetime_in_millis";
     public static final int STATUS_FAILURE = 1;
     public static final int STATUS_FAILURE_INSTALL = 3;
@@ -24,8 +26,7 @@ public final class RollbackManager {
     private final String mCallerPackageName;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+    public @interface Status {}
 
     public RollbackManager(Context context, IRollbackManager binder) {
         this.mCallerPackageName = context.getPackageName();
@@ -48,9 +49,14 @@ public final class RollbackManager {
         }
     }
 
-    public void commitRollback(int rollbackId, List<VersionedPackage> causePackages, IntentSender statusReceiver) {
+    public void commitRollback(
+            int rollbackId, List<VersionedPackage> causePackages, IntentSender statusReceiver) {
         try {
-            this.mBinder.commitRollback(rollbackId, new ParceledListSlice(causePackages), this.mCallerPackageName, statusReceiver);
+            this.mBinder.commitRollback(
+                    rollbackId,
+                    new ParceledListSlice(causePackages),
+                    this.mCallerPackageName,
+                    statusReceiver);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.telephony.MbmsDownloadSession;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,7 +28,12 @@ public class MbmsTempFileProvider extends ContentProvider {
     }
 
     @Override // android.content.ContentProvider
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(
+            Uri uri,
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String sortOrder) {
         throw new UnsupportedOperationException("No querying supported");
     }
 
@@ -77,7 +83,11 @@ public class MbmsTempFileProvider extends ContentProvider {
             String filePath = file.getCanonicalPath();
             File tempFileDir = getEmbmsTempFileDir(context);
             if (!MbmsUtils.isContainedIn(tempFileDir, file)) {
-                throw new IllegalArgumentException("File " + file + " is not contained in the temp file directory, which is " + tempFileDir);
+                throw new IllegalArgumentException(
+                        "File "
+                                + file
+                                + " is not contained in the temp file directory, which is "
+                                + tempFileDir);
             }
             try {
                 String tempFileDirPath = tempFileDir.getCanonicalPath();
@@ -87,21 +97,31 @@ public class MbmsTempFileProvider extends ContentProvider {
                     pathFragment = filePath.substring(tempFileDirPath.length() + 1);
                 }
                 String encodedPath = Uri.encode(pathFragment);
-                return new Uri.Builder().scheme("content").authority(authority).encodedPath(encodedPath).build();
+                return new Uri.Builder()
+                        .scheme("content")
+                        .authority(authority)
+                        .encodedPath(encodedPath)
+                        .build();
             } catch (IOException e) {
-                throw new RuntimeException("Could not get canonical path for temp file root dir " + tempFileDir);
+                throw new RuntimeException(
+                        "Could not get canonical path for temp file root dir " + tempFileDir);
             }
         } catch (IOException e2) {
             throw new IllegalArgumentException("Could not get canonical path for file " + file);
         }
     }
 
-    public static File getFileForUri(Context context, String authority, Uri uri) throws FileNotFoundException {
+    public static File getFileForUri(Context context, String authority, Uri uri)
+            throws FileNotFoundException {
         if (!"content".equals(uri.getScheme())) {
             throw new IllegalArgumentException("Uri must have scheme content");
         }
         if (!Objects.equals(authority, uri.getAuthority())) {
-            throw new IllegalArgumentException("Uri does not have a matching authority: " + authority + ", " + uri.getAuthority());
+            throw new IllegalArgumentException(
+                    "Uri does not have a matching authority: "
+                            + authority
+                            + ", "
+                            + uri.getAuthority());
         }
         String relPath = Uri.decode(uri.getEncodedPath());
         try {
@@ -123,7 +143,10 @@ public class MbmsTempFileProvider extends ContentProvider {
             if (storedTempFileRoot != null) {
                 return new File(storedTempFileRoot).getCanonicalFile();
             }
-            return new File(context.getFilesDir(), MbmsDownloadSession.DEFAULT_TOP_LEVEL_TEMP_DIRECTORY).getCanonicalFile();
+            return new File(
+                            context.getFilesDir(),
+                            MbmsDownloadSession.DEFAULT_TOP_LEVEL_TEMP_DIRECTORY)
+                    .getCanonicalFile();
         } catch (IOException e) {
             throw new RuntimeException("Unable to canonicalize temp file root path " + e);
         }

@@ -21,7 +21,8 @@ public class OCSPResponse extends ASN1Object {
     private OCSPResponse(ASN1Sequence seq) {
         this.responseStatus = OCSPResponseStatus.getInstance(seq.getObjectAt(0));
         if (seq.size() == 2) {
-            this.responseBytes = ResponseBytes.getInstance((ASN1TaggedObject) seq.getObjectAt(1), true);
+            this.responseBytes =
+                    ResponseBytes.getInstance((ASN1TaggedObject) seq.getObjectAt(1), true);
         }
     }
 
@@ -47,7 +48,8 @@ public class OCSPResponse extends ASN1Object {
         return this.responseBytes;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         v.add(this.responseStatus);

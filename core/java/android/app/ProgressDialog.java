@@ -16,7 +16,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import java.text.NumberFormat;
 
 @Deprecated
@@ -77,15 +79,27 @@ public class ProgressDialog extends AlertDialog {
         return show(context, title, message, false);
     }
 
-    public static ProgressDialog show(Context context, CharSequence title, CharSequence message, boolean indeterminate) {
+    public static ProgressDialog show(
+            Context context, CharSequence title, CharSequence message, boolean indeterminate) {
         return show(context, title, message, indeterminate, false, null);
     }
 
-    public static ProgressDialog show(Context context, CharSequence title, CharSequence message, boolean indeterminate, boolean cancelable) {
+    public static ProgressDialog show(
+            Context context,
+            CharSequence title,
+            CharSequence message,
+            boolean indeterminate,
+            boolean cancelable) {
         return show(context, title, message, indeterminate, cancelable, null);
     }
 
-    public static ProgressDialog show(Context context, CharSequence title, CharSequence message, boolean indeterminate, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
+    public static ProgressDialog show(
+            Context context,
+            CharSequence title,
+            CharSequence message,
+            boolean indeterminate,
+            boolean cancelable,
+            DialogInterface.OnCancelListener cancelListener) {
         ProgressDialog dialog = new ProgressDialog(context);
         dialog.setTitle(title);
         dialog.setMessage(message);
@@ -101,34 +115,55 @@ public class ProgressDialog extends AlertDialog {
         View view;
         int i;
         LayoutInflater inflater = LayoutInflater.from(this.mContext);
-        TypedArray a = this.mContext.obtainStyledAttributes(null, R.styleable.AlertDialog, 16842845, 0);
+        TypedArray a =
+                this.mContext.obtainStyledAttributes(null, R.styleable.AlertDialog, 16842845, 0);
         if (this.mProgressStyle == 1) {
-            this.mViewUpdateHandler = new Handler() { // from class: android.app.ProgressDialog.1
-                @Override // android.os.Handler
-                public void handleMessage(Message message) {
-                    super.handleMessage(message);
-                    int progress = ProgressDialog.this.mProgress.getProgress();
-                    int max = ProgressDialog.this.mProgress.getMax();
-                    if (ProgressDialog.this.mProgressNumberFormat != null) {
-                        String str = ProgressDialog.this.mProgressNumberFormat;
-                        if (ProgressDialog.this.mProgressNumber.isLayoutRtl()) {
-                            ProgressDialog.this.mProgressNumber.lambda$setTextAsync$0(String.format(str, Integer.valueOf(max), Integer.valueOf(progress)));
-                        } else {
-                            ProgressDialog.this.mProgressNumber.lambda$setTextAsync$0(String.format(str, Integer.valueOf(progress), Integer.valueOf(max)));
+            this.mViewUpdateHandler =
+                    new Handler() { // from class: android.app.ProgressDialog.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message message) {
+                            super.handleMessage(message);
+                            int progress = ProgressDialog.this.mProgress.getProgress();
+                            int max = ProgressDialog.this.mProgress.getMax();
+                            if (ProgressDialog.this.mProgressNumberFormat != null) {
+                                String str = ProgressDialog.this.mProgressNumberFormat;
+                                if (ProgressDialog.this.mProgressNumber.isLayoutRtl()) {
+                                    ProgressDialog.this.mProgressNumber.lambda$setTextAsync$0(
+                                            String.format(
+                                                    str,
+                                                    Integer.valueOf(max),
+                                                    Integer.valueOf(progress)));
+                                } else {
+                                    ProgressDialog.this.mProgressNumber.lambda$setTextAsync$0(
+                                            String.format(
+                                                    str,
+                                                    Integer.valueOf(progress),
+                                                    Integer.valueOf(max)));
+                                }
+                            } else {
+                                ProgressDialog.this.mProgressNumber.lambda$setTextAsync$0("");
+                            }
+                            if (ProgressDialog.this.mProgressPercentFormat != null) {
+                                SpannableString spannableString =
+                                        new SpannableString(
+                                                ProgressDialog.this.mProgressPercentFormat.format(
+                                                        progress / max));
+                                spannableString.setSpan(
+                                        new StyleSpan(
+                                                !ProgressDialog.this.mThemeIsDeviceDefault ? 1 : 0),
+                                        0,
+                                        spannableString.length(),
+                                        33);
+                                ProgressDialog.this.mProgressPercent.lambda$setTextAsync$0(
+                                        spannableString);
+                                return;
+                            }
+                            ProgressDialog.this.mProgressPercent.lambda$setTextAsync$0("");
                         }
-                    } else {
-                        ProgressDialog.this.mProgressNumber.lambda$setTextAsync$0("");
-                    }
-                    if (ProgressDialog.this.mProgressPercentFormat != null) {
-                        SpannableString spannableString = new SpannableString(ProgressDialog.this.mProgressPercentFormat.format(progress / max));
-                        spannableString.setSpan(new StyleSpan(!ProgressDialog.this.mThemeIsDeviceDefault ? 1 : 0), 0, spannableString.length(), 33);
-                        ProgressDialog.this.mProgressPercent.lambda$setTextAsync$0(spannableString);
-                        return;
-                    }
-                    ProgressDialog.this.mProgressPercent.lambda$setTextAsync$0("");
-                }
-            };
-            View view2 = inflater.inflate(a.getResourceId(13, R.layout.alert_dialog_progress), (ViewGroup) null);
+                    };
+            View view2 =
+                    inflater.inflate(
+                            a.getResourceId(13, R.layout.alert_dialog_progress), (ViewGroup) null);
             this.mProgress = (ProgressBar) view2.findViewById(16908301);
             this.mProgressNumber = (TextView) view2.findViewById(R.id.progress_number);
             this.mProgressPercent = (TextView) view2.findViewById(R.id.progress_percent);
@@ -138,7 +173,9 @@ public class ProgressDialog extends AlertDialog {
             setView(view2);
         } else if (this.mProgressStyle == 1000 && this.mThemeIsDeviceDefault) {
             TypedValue colorValue = new TypedValue();
-            this.mContext.getTheme().resolveAttribute(R.attr.parentIsDeviceDefaultDark, colorValue, true);
+            this.mContext
+                    .getTheme()
+                    .resolveAttribute(R.attr.parentIsDeviceDefaultDark, colorValue, true);
             setTitle((CharSequence) null);
             Window window = getWindow();
             if (colorValue.data == 0) {
@@ -147,7 +184,8 @@ public class ProgressDialog extends AlertDialog {
                 i = R.drawable.tw_dialog_circle_progress_background_material_shape_dark;
             }
             window.setBackgroundDrawableResource(i);
-            View view3 = inflater.inflate(R.layout.tw_progress_dialog_circle_material, (ViewGroup) null);
+            View view3 =
+                    inflater.inflate(R.layout.tw_progress_dialog_circle_material, (ViewGroup) null);
             this.mProgress = (ProgressBar) view3.findViewById(16908301);
             this.mMessageView = (TextView) view3.findViewById(16908299);
             setView(view3);
@@ -155,7 +193,9 @@ public class ProgressDialog extends AlertDialog {
             if (this instanceof BootProgressDialog) {
                 view = inflater.inflate(R.layout.boot_progress_dialog, (ViewGroup) null);
             } else {
-                view = inflater.inflate(a.getResourceId(18, R.layout.progress_dialog), (ViewGroup) null);
+                view =
+                        inflater.inflate(
+                                a.getResourceId(18, R.layout.progress_dialog), (ViewGroup) null);
             }
             this.mProgress = (ProgressBar) view.findViewById(16908301);
             this.mMessageView = (TextView) view.findViewById(16908299);
@@ -190,7 +230,14 @@ public class ProgressDialog extends AlertDialog {
         onProgressChanged();
         super.onCreate(savedInstanceState);
         if (this.mProgressStyle == 1000) {
-            getWindow().setLayout(getContext().getResources().getDimensionPixelSize(R.dimen.tw_progress_circle_dialog_size), getContext().getResources().getDimensionPixelSize(R.dimen.tw_progress_circle_dialog_size));
+            getWindow()
+                    .setLayout(
+                            getContext()
+                                    .getResources()
+                                    .getDimensionPixelSize(R.dimen.tw_progress_circle_dialog_size),
+                            getContext()
+                                    .getResources()
+                                    .getDimensionPixelSize(R.dimen.tw_progress_circle_dialog_size));
         }
     }
 
@@ -316,7 +363,9 @@ public class ProgressDialog extends AlertDialog {
                     return;
                 }
             }
-            if (this.mThemeIsDeviceDefault && this.mMessageView != null && this.mProgressStyle == 1000) {
+            if (this.mThemeIsDeviceDefault
+                    && this.mMessageView != null
+                    && this.mProgressStyle == 1000) {
                 this.mMessageView.lambda$setTextAsync$0(message);
                 this.mMessageView.setVisibility(message.equals("") ? 8 : 0);
                 return;
@@ -346,7 +395,9 @@ public class ProgressDialog extends AlertDialog {
     }
 
     private void onProgressChanged() {
-        if (this.mProgressStyle == 1 && this.mViewUpdateHandler != null && !this.mViewUpdateHandler.hasMessages(0)) {
+        if (this.mProgressStyle == 1
+                && this.mViewUpdateHandler != null
+                && !this.mViewUpdateHandler.hasMessages(0)) {
             this.mViewUpdateHandler.sendEmptyMessage(0);
         }
     }

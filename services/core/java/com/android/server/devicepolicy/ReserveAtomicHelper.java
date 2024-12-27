@@ -3,7 +3,9 @@ package com.android.server.devicepolicy;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.FileUtils;
 import android.util.Slog;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -21,12 +23,16 @@ public final class ReserveAtomicHelper {
         this.failFlag = false;
         String name = file.getName();
         this.orignalFile = file;
-        String m$1 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(name, ".reservecopy");
+        String m$1 =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(name, ".reservecopy");
         this.LOG_TAG = "ReserveAtomic.owners";
         File file2 = new File(file.getParent(), m$1);
         this.mReserveFile = file2;
         if (!file2.exists() && file.exists()) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m("reserve not exists copying orignal to reserve. status : ", "ReserveAtomic.owners", writeReserve());
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    "reserve not exists copying orignal to reserve. status : ",
+                    "ReserveAtomic.owners",
+                    writeReserve());
         }
         this.failFlag = false;
     }

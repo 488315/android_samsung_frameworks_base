@@ -1,7 +1,7 @@
 package android.view;
 
 import android.content.res.Configuration;
-import android.view.ViewRootImpl;
+
 import java.text.BreakIterator;
 import java.util.Locale;
 
@@ -14,7 +14,7 @@ public final class AccessibilityIterators {
         int[] preceding(int i);
     }
 
-    public static abstract class AbstractTextSegmentIterator implements TextSegmentIterator {
+    public abstract static class AbstractTextSegmentIterator implements TextSegmentIterator {
         private final int[] mSegment = new int[2];
         protected String mText;
 
@@ -32,7 +32,8 @@ public final class AccessibilityIterators {
         }
     }
 
-    static class CharacterTextSegmentIterator extends AbstractTextSegmentIterator implements ViewRootImpl.ConfigChangedCallback {
+    static class CharacterTextSegmentIterator extends AbstractTextSegmentIterator
+            implements ViewRootImpl.ConfigChangedCallback {
         private static CharacterTextSegmentIterator sInstance;
         protected BreakIterator mImpl;
         private Locale mLocale;
@@ -135,7 +136,8 @@ public final class AccessibilityIterators {
             this.mImpl = BreakIterator.getWordInstance(locale);
         }
 
-        @Override // android.view.AccessibilityIterators.CharacterTextSegmentIterator, android.view.AccessibilityIterators.TextSegmentIterator
+        @Override // android.view.AccessibilityIterators.CharacterTextSegmentIterator,
+                  // android.view.AccessibilityIterators.TextSegmentIterator
         public int[] following(int offset) {
             int textLegth = this.mText.length();
             if (textLegth <= 0 || offset >= this.mText.length()) {
@@ -158,7 +160,8 @@ public final class AccessibilityIterators {
             return getRange(start, end);
         }
 
-        @Override // android.view.AccessibilityIterators.CharacterTextSegmentIterator, android.view.AccessibilityIterators.TextSegmentIterator
+        @Override // android.view.AccessibilityIterators.CharacterTextSegmentIterator,
+                  // android.view.AccessibilityIterators.TextSegmentIterator
         public int[] preceding(int offset) {
             int textLegth = this.mText.length();
             if (textLegth <= 0 || offset <= 0) {
@@ -186,7 +189,9 @@ public final class AccessibilityIterators {
         }
 
         private boolean isEndBoundary(int index) {
-            return index > 0 && isLetterOrDigit(index + (-1)) && (index == this.mText.length() || !isLetterOrDigit(index));
+            return index > 0
+                    && isLetterOrDigit(index + (-1))
+                    && (index == this.mText.length() || !isLetterOrDigit(index));
         }
 
         private boolean isLetterOrDigit(int index) {
@@ -201,8 +206,7 @@ public final class AccessibilityIterators {
     static class ParagraphTextSegmentIterator extends AbstractTextSegmentIterator {
         private static ParagraphTextSegmentIterator sInstance;
 
-        ParagraphTextSegmentIterator() {
-        }
+        ParagraphTextSegmentIterator() {}
 
         public static ParagraphTextSegmentIterator getInstance() {
             if (sInstance == null) {
@@ -212,9 +216,9 @@ public final class AccessibilityIterators {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:19:0x0028, code lost:
-        
-            return null;
-         */
+
+           return null;
+        */
         @Override // android.view.AccessibilityIterators.TextSegmentIterator
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -260,13 +264,15 @@ public final class AccessibilityIterators {
                 int[] r3 = r5.getRange(r2, r1)
                 return r3
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.view.AccessibilityIterators.ParagraphTextSegmentIterator.following(int):int[]");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.view.AccessibilityIterators.ParagraphTextSegmentIterator.following(int):int[]");
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:19:0x002a, code lost:
-        
-            return null;
-         */
+
+           return null;
+        */
         @Override // android.view.AccessibilityIterators.TextSegmentIterator
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -313,15 +319,20 @@ public final class AccessibilityIterators {
                 int[] r3 = r5.getRange(r1, r2)
                 return r3
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.view.AccessibilityIterators.ParagraphTextSegmentIterator.preceding(int):int[]");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.view.AccessibilityIterators.ParagraphTextSegmentIterator.preceding(int):int[]");
         }
 
         private boolean isStartBoundary(int index) {
-            return this.mText.charAt(index) != '\n' && (index == 0 || this.mText.charAt(index + (-1)) == '\n');
+            return this.mText.charAt(index) != '\n'
+                    && (index == 0 || this.mText.charAt(index + (-1)) == '\n');
         }
 
         private boolean isEndBoundary(int index) {
-            return index > 0 && this.mText.charAt(index + (-1)) != '\n' && (index == this.mText.length() || this.mText.charAt(index) == '\n');
+            return index > 0
+                    && this.mText.charAt(index + (-1)) != '\n'
+                    && (index == this.mText.length() || this.mText.charAt(index) == '\n');
         }
     }
 }

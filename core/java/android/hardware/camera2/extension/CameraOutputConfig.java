@@ -4,26 +4,29 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.Surface;
+
 import java.util.Collection;
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public class CameraOutputConfig implements Parcelable {
-    public static final Parcelable.Creator<CameraOutputConfig> CREATOR = new Parcelable.Creator<CameraOutputConfig>() { // from class: android.hardware.camera2.extension.CameraOutputConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraOutputConfig createFromParcel(Parcel _aidl_source) {
-            CameraOutputConfig _aidl_out = new CameraOutputConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CameraOutputConfig> CREATOR =
+            new Parcelable.Creator<CameraOutputConfig>() { // from class:
+                // android.hardware.camera2.extension.CameraOutputConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraOutputConfig createFromParcel(Parcel _aidl_source) {
+                    CameraOutputConfig _aidl_out = new CameraOutputConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraOutputConfig[] newArray(int _aidl_size) {
-            return new CameraOutputConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraOutputConfig[] newArray(int _aidl_size) {
+                    return new CameraOutputConfig[_aidl_size];
+                }
+            };
     public static final int TYPE_IMAGEREADER = 1;
     public static final int TYPE_MULTIRES_IMAGEREADER = 2;
     public static final int TYPE_SURFACE = 0;
@@ -181,7 +184,10 @@ public class CameraOutputConfig implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.size);
-        return _mask | describeContents(this.surface) | describeContents(this.outputId) | describeContents(this.sharedSurfaceConfigs);
+        return _mask
+                | describeContents(this.surface)
+                | describeContents(this.outputId)
+                | describeContents(this.sharedSurfaceConfigs);
     }
 
     private int describeContents(Object _v) {

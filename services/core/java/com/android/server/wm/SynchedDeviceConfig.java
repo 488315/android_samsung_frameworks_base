@@ -1,6 +1,7 @@
 package com.android.server.wm;
 
 import android.provider.DeviceConfig;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
@@ -26,7 +27,8 @@ public final class SynchedDeviceConfig implements DeviceConfig.OnPropertiesChang
             if (((ConcurrentHashMap) this.mDeviceConfigEntries).containsKey(str)) {
                 throw new AssertionError("Key already present: ".concat(str));
             }
-            ((ConcurrentHashMap) this.mDeviceConfigEntries).put(str, new SynchedDeviceConfigEntry(str, z, z2));
+            ((ConcurrentHashMap) this.mDeviceConfigEntries)
+                    .put(str, new SynchedDeviceConfigEntry(str, z, z2));
         }
     }
 
@@ -52,15 +54,18 @@ public final class SynchedDeviceConfig implements DeviceConfig.OnPropertiesChang
     }
 
     public final boolean getFlagValue(String str) {
-        SynchedDeviceConfigEntry synchedDeviceConfigEntry = (SynchedDeviceConfigEntry) this.mDeviceConfigEntries.get(str);
+        SynchedDeviceConfigEntry synchedDeviceConfigEntry =
+                (SynchedDeviceConfigEntry) this.mDeviceConfigEntries.get(str);
         if (synchedDeviceConfigEntry != null) {
-            return synchedDeviceConfigEntry.mBuildTimeFlagEnabled && synchedDeviceConfigEntry.mOverrideValue;
+            return synchedDeviceConfigEntry.mBuildTimeFlagEnabled
+                    && synchedDeviceConfigEntry.mOverrideValue;
         }
         throw new IllegalArgumentException("Unexpected flag name: ".concat(str));
     }
 
     public final boolean isBuildTimeFlagEnabled(String str) {
-        SynchedDeviceConfigEntry synchedDeviceConfigEntry = (SynchedDeviceConfigEntry) this.mDeviceConfigEntries.get(str);
+        SynchedDeviceConfigEntry synchedDeviceConfigEntry =
+                (SynchedDeviceConfigEntry) this.mDeviceConfigEntries.get(str);
         if (synchedDeviceConfigEntry != null) {
             return synchedDeviceConfigEntry.mBuildTimeFlagEnabled;
         }
@@ -68,9 +73,13 @@ public final class SynchedDeviceConfig implements DeviceConfig.OnPropertiesChang
     }
 
     public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-        for (SynchedDeviceConfigEntry synchedDeviceConfigEntry : this.mDeviceConfigEntries.values()) {
+        for (SynchedDeviceConfigEntry synchedDeviceConfigEntry :
+                this.mDeviceConfigEntries.values()) {
             if (properties.getKeyset().contains(synchedDeviceConfigEntry.mFlagKey)) {
-                synchedDeviceConfigEntry.mOverrideValue = properties.getBoolean(synchedDeviceConfigEntry.mFlagKey, synchedDeviceConfigEntry.mDefaultValue);
+                synchedDeviceConfigEntry.mOverrideValue =
+                        properties.getBoolean(
+                                synchedDeviceConfigEntry.mFlagKey,
+                                synchedDeviceConfigEntry.mDefaultValue);
             }
         }
     }

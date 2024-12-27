@@ -1,6 +1,5 @@
 package com.android.internal.widget;
 
-import com.android.internal.widget.AdapterHelper;
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -44,18 +43,25 @@ class OpReorderer {
         }
     }
 
-    void swapMoveRemove(List<AdapterHelper.UpdateOp> list, int movePos, AdapterHelper.UpdateOp moveOp, int removePos, AdapterHelper.UpdateOp removeOp) {
+    void swapMoveRemove(
+            List<AdapterHelper.UpdateOp> list,
+            int movePos,
+            AdapterHelper.UpdateOp moveOp,
+            int removePos,
+            AdapterHelper.UpdateOp removeOp) {
         boolean moveIsBackwards;
         AdapterHelper.UpdateOp extraRm = null;
         boolean revertedMove = false;
         if (moveOp.positionStart < moveOp.itemCount) {
             moveIsBackwards = false;
-            if (removeOp.positionStart == moveOp.positionStart && removeOp.itemCount == moveOp.itemCount - moveOp.positionStart) {
+            if (removeOp.positionStart == moveOp.positionStart
+                    && removeOp.itemCount == moveOp.itemCount - moveOp.positionStart) {
                 revertedMove = true;
             }
         } else {
             moveIsBackwards = true;
-            if (removeOp.positionStart == moveOp.itemCount + 1 && removeOp.itemCount == moveOp.positionStart - moveOp.itemCount) {
+            if (removeOp.positionStart == moveOp.itemCount + 1
+                    && removeOp.itemCount == moveOp.positionStart - moveOp.itemCount) {
                 revertedMove = true;
             }
         }
@@ -127,7 +133,12 @@ class OpReorderer {
         }
     }
 
-    private void swapMoveAdd(List<AdapterHelper.UpdateOp> list, int move, AdapterHelper.UpdateOp moveOp, int add, AdapterHelper.UpdateOp addOp) {
+    private void swapMoveAdd(
+            List<AdapterHelper.UpdateOp> list,
+            int move,
+            AdapterHelper.UpdateOp moveOp,
+            int add,
+            AdapterHelper.UpdateOp addOp) {
         int offset = 0;
         if (moveOp.itemCount < addOp.positionStart) {
             offset = 0 - 1;
@@ -146,7 +157,12 @@ class OpReorderer {
         list.set(add, moveOp);
     }
 
-    void swapMoveUpdate(List<AdapterHelper.UpdateOp> list, int move, AdapterHelper.UpdateOp moveOp, int update, AdapterHelper.UpdateOp updateOp) {
+    void swapMoveUpdate(
+            List<AdapterHelper.UpdateOp> list,
+            int move,
+            AdapterHelper.UpdateOp moveOp,
+            int update,
+            AdapterHelper.UpdateOp updateOp) {
         AdapterHelper.UpdateOp extraUp1 = null;
         AdapterHelper.UpdateOp extraUp2 = null;
         if (moveOp.itemCount < updateOp.positionStart) {
@@ -159,7 +175,9 @@ class OpReorderer {
             updateOp.positionStart++;
         } else if (moveOp.positionStart < updateOp.positionStart + updateOp.itemCount) {
             int remaining = (updateOp.positionStart + updateOp.itemCount) - moveOp.positionStart;
-            extraUp2 = this.mCallback.obtainUpdateOp(4, moveOp.positionStart + 1, remaining, updateOp.payload);
+            extraUp2 =
+                    this.mCallback.obtainUpdateOp(
+                            4, moveOp.positionStart + 1, remaining, updateOp.payload);
             updateOp.itemCount -= remaining;
         }
         list.set(update, moveOp);

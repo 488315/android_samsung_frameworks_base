@@ -10,12 +10,16 @@ import android.provider.Settings;
 import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlSerializer;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -30,16 +34,18 @@ public final class SystemUpdateManagerService extends ISystemUpdateManager.Stub 
         this.mLock = obj;
         this.mLastUid = -1;
         this.mContext = context;
-        this.mFile = new AtomicFile(new File(Environment.getDataSystemDirectory(), "system-update-info.xml"));
+        this.mFile =
+                new AtomicFile(
+                        new File(Environment.getDataSystemDirectory(), "system-update-info.xml"));
         synchronized (obj) {
             loadSystemUpdateInfoLocked();
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0024, code lost:
-    
-        r1 = android.os.PersistableBundle.restoreFromXml(r3);
-     */
+
+       r1 = android.os.PersistableBundle.restoreFromXml(r3);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -159,7 +165,9 @@ public final class SystemUpdateManagerService extends ISystemUpdateManager.Stub 
             android.os.Bundle r7 = r7.removeInfoFileAndGetDefaultInfoBundleLocked()
             return r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SystemUpdateManagerService.loadSystemUpdateInfoLocked():android.os.Bundle");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.SystemUpdateManagerService.loadSystemUpdateInfoLocked():android.os.Bundle");
     }
 
     public final Bundle removeInfoFileAndGetDefaultInfoBundleLocked() {
@@ -168,13 +176,19 @@ public final class SystemUpdateManagerService extends ISystemUpdateManager.Stub 
             this.mFile.delete();
         }
         this.mLastUid = -1;
-        return SystemUpdateManagerService$$ExternalSyntheticOutline0.m(0, Constants.JSON_CLIENT_DATA_STATUS);
+        return SystemUpdateManagerService$$ExternalSyntheticOutline0.m(
+                0, Constants.JSON_CLIENT_DATA_STATUS);
     }
 
     public final Bundle retrieveSystemUpdateInfo() {
         Bundle loadSystemUpdateInfoLocked;
-        if (this.mContext.checkCallingOrSelfPermission("android.permission.READ_SYSTEM_UPDATE_INFO") == -1 && this.mContext.checkCallingOrSelfPermission("android.permission.RECOVERY") == -1) {
-            throw new SecurityException("Can't read system update info. Requiring READ_SYSTEM_UPDATE_INFO or RECOVERY permission.");
+        if (this.mContext.checkCallingOrSelfPermission("android.permission.READ_SYSTEM_UPDATE_INFO")
+                        == -1
+                && this.mContext.checkCallingOrSelfPermission("android.permission.RECOVERY")
+                        == -1) {
+            throw new SecurityException(
+                    "Can't read system update info. Requiring READ_SYSTEM_UPDATE_INFO or RECOVERY"
+                        + " permission.");
         }
         synchronized (this.mLock) {
             loadSystemUpdateInfoLocked = loadSystemUpdateInfoLocked();
@@ -187,7 +201,9 @@ public final class SystemUpdateManagerService extends ISystemUpdateManager.Stub 
         persistableBundle2.putPersistableBundle("info-bundle", persistableBundle);
         persistableBundle2.putInt("version", 0);
         persistableBundle2.putInt("uid", i);
-        persistableBundle2.putInt("boot-count", Settings.Global.getInt(this.mContext.getContentResolver(), "boot_count", 0));
+        persistableBundle2.putInt(
+                "boot-count",
+                Settings.Global.getInt(this.mContext.getContentResolver(), "boot_count", 0));
         FileOutputStream fileOutputStream = null;
         try {
             FileOutputStream startWrite = this.mFile.startWrite();

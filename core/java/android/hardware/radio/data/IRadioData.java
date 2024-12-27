@@ -1,7 +1,5 @@
 package android.hardware.radio.data;
 
-import android.hardware.radio.data.IRadioDataIndication;
-import android.hardware.radio.data.IRadioDataResponse;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioData extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$data$IRadioData".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$data$IRadioData".replace('$', '.');
     public static final String HASH = "cd8913a3f9d39f1cc0a5fcf9e90257be94ec38df";
     public static final int VERSION = 3;
 
@@ -40,9 +39,22 @@ public interface IRadioData extends IInterface {
 
     void setInitialAttachApn(int i, DataProfileInfo dataProfileInfo) throws RemoteException;
 
-    void setResponseFunctions(IRadioDataResponse iRadioDataResponse, IRadioDataIndication iRadioDataIndication) throws RemoteException;
+    void setResponseFunctions(
+            IRadioDataResponse iRadioDataResponse, IRadioDataIndication iRadioDataIndication)
+            throws RemoteException;
 
-    void setupDataCall(int i, int i2, DataProfileInfo dataProfileInfo, boolean z, int i3, LinkAddress[] linkAddressArr, String[] strArr, int i4, SliceInfo sliceInfo, boolean z2) throws RemoteException;
+    void setupDataCall(
+            int i,
+            int i2,
+            DataProfileInfo dataProfileInfo,
+            boolean z,
+            int i3,
+            LinkAddress[] linkAddressArr,
+            String[] strArr,
+            int i4,
+            SliceInfo sliceInfo,
+            boolean z2)
+            throws RemoteException;
 
     void startHandover(int i, int i2) throws RemoteException;
 
@@ -52,68 +64,68 @@ public interface IRadioData extends IInterface {
 
     public static class Default implements IRadioData {
         @Override // android.hardware.radio.data.IRadioData
-        public void allocatePduSessionId(int serial) throws RemoteException {
-        }
+        public void allocatePduSessionId(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void cancelHandover(int serial, int callId) throws RemoteException {
-        }
+        public void cancelHandover(int serial, int callId) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void deactivateDataCall(int serial, int cid, int reason) throws RemoteException {
-        }
+        public void deactivateDataCall(int serial, int cid, int reason) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void getDataCallList(int serial) throws RemoteException {
-        }
+        public void getDataCallList(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void getSlicingConfig(int serial) throws RemoteException {
-        }
+        public void getSlicingConfig(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void releasePduSessionId(int serial, int id) throws RemoteException {
-        }
+        public void releasePduSessionId(int serial, int id) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void responseAcknowledgement() throws RemoteException {
-        }
+        public void responseAcknowledgement() throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void setDataAllowed(int serial, boolean allow) throws RemoteException {
-        }
+        public void setDataAllowed(int serial, boolean allow) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void setDataProfile(int serial, DataProfileInfo[] profiles) throws RemoteException {
-        }
+        public void setDataProfile(int serial, DataProfileInfo[] profiles) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void setDataThrottling(int serial, byte dataThrottlingAction, long completionDurationMillis) throws RemoteException {
-        }
+        public void setDataThrottling(
+                int serial, byte dataThrottlingAction, long completionDurationMillis)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void setInitialAttachApn(int serial, DataProfileInfo dataProfileInfo) throws RemoteException {
-        }
+        public void setInitialAttachApn(int serial, DataProfileInfo dataProfileInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void setResponseFunctions(IRadioDataResponse radioDataResponse, IRadioDataIndication radioDataIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                IRadioDataResponse radioDataResponse, IRadioDataIndication radioDataIndication)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void setupDataCall(int serial, int accessNetwork, DataProfileInfo dataProfileInfo, boolean roamingAllowed, int reason, LinkAddress[] addresses, String[] dnses, int pduSessionId, SliceInfo sliceInfo, boolean matchAllRuleAllowed) throws RemoteException {
-        }
+        public void setupDataCall(
+                int serial,
+                int accessNetwork,
+                DataProfileInfo dataProfileInfo,
+                boolean roamingAllowed,
+                int reason,
+                LinkAddress[] addresses,
+                String[] dnses,
+                int pduSessionId,
+                SliceInfo sliceInfo,
+                boolean matchAllRuleAllowed)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void startHandover(int serial, int callId) throws RemoteException {
-        }
+        public void startHandover(int serial, int callId) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void startKeepalive(int serial, KeepaliveRequest keepalive) throws RemoteException {
-        }
+        public void startKeepalive(int serial, KeepaliveRequest keepalive) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
-        public void stopKeepalive(int serial, int sessionHandle) throws RemoteException {
-        }
+        public void stopKeepalive(int serial, int sessionHandle) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioData
         public int getInterfaceVersion() {
@@ -131,7 +143,7 @@ public interface IRadioData extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioData {
+    public abstract static class Stub extends Binder implements IRadioData {
         static final int TRANSACTION_allocatePduSessionId = 1;
         static final int TRANSACTION_cancelHandover = 2;
         static final int TRANSACTION_deactivateDataCall = 3;
@@ -173,7 +185,8 @@ public interface IRadioData extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -238,7 +251,8 @@ public interface IRadioData extends IInterface {
                     break;
                 case 9:
                     int _arg08 = data.readInt();
-                    DataProfileInfo[] _arg15 = (DataProfileInfo[]) data.createTypedArray(DataProfileInfo.CREATOR);
+                    DataProfileInfo[] _arg15 =
+                            (DataProfileInfo[]) data.createTypedArray(DataProfileInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setDataProfile(_arg08, _arg15);
                     break;
@@ -251,29 +265,36 @@ public interface IRadioData extends IInterface {
                     break;
                 case 11:
                     int _arg010 = data.readInt();
-                    DataProfileInfo _arg17 = (DataProfileInfo) data.readTypedObject(DataProfileInfo.CREATOR);
+                    DataProfileInfo _arg17 =
+                            (DataProfileInfo) data.readTypedObject(DataProfileInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setInitialAttachApn(_arg010, _arg17);
                     break;
                 case 12:
-                    IRadioDataResponse _arg011 = IRadioDataResponse.Stub.asInterface(data.readStrongBinder());
-                    IRadioDataIndication _arg18 = IRadioDataIndication.Stub.asInterface(data.readStrongBinder());
+                    IRadioDataResponse _arg011 =
+                            IRadioDataResponse.Stub.asInterface(data.readStrongBinder());
+                    IRadioDataIndication _arg18 =
+                            IRadioDataIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg011, _arg18);
                     break;
                 case 13:
                     int _arg012 = data.readInt();
                     int _arg19 = data.readInt();
-                    DataProfileInfo _arg23 = (DataProfileInfo) data.readTypedObject(DataProfileInfo.CREATOR);
+                    DataProfileInfo _arg23 =
+                            (DataProfileInfo) data.readTypedObject(DataProfileInfo.CREATOR);
                     boolean _arg3 = data.readBoolean();
                     int _arg4 = data.readInt();
-                    LinkAddress[] _arg5 = (LinkAddress[]) data.createTypedArray(LinkAddress.CREATOR);
+                    LinkAddress[] _arg5 =
+                            (LinkAddress[]) data.createTypedArray(LinkAddress.CREATOR);
                     String[] _arg6 = data.createStringArray();
                     int _arg7 = data.readInt();
                     SliceInfo _arg8 = (SliceInfo) data.readTypedObject(SliceInfo.CREATOR);
                     boolean _arg9 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    setupDataCall(_arg012, _arg19, _arg23, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
+                    setupDataCall(
+                            _arg012, _arg19, _arg23, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8,
+                            _arg9);
                     break;
                 case 14:
                     int _arg013 = data.readInt();
@@ -283,7 +304,8 @@ public interface IRadioData extends IInterface {
                     break;
                 case 15:
                     int _arg014 = data.readInt();
-                    KeepaliveRequest _arg111 = (KeepaliveRequest) data.readTypedObject(KeepaliveRequest.CREATOR);
+                    KeepaliveRequest _arg111 =
+                            (KeepaliveRequest) data.readTypedObject(KeepaliveRequest.CREATOR);
                     data.enforceNoDataAvail();
                     startKeepalive(_arg014, _arg111);
                     break;
@@ -416,7 +438,8 @@ public interface IRadioData extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(7, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method responseAcknowledgement is unimplemented.");
+                        throw new RemoteException(
+                                "Method responseAcknowledgement is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -440,7 +463,8 @@ public interface IRadioData extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioData
-            public void setDataProfile(int serial, DataProfileInfo[] profiles) throws RemoteException {
+            public void setDataProfile(int serial, DataProfileInfo[] profiles)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -456,7 +480,9 @@ public interface IRadioData extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioData
-            public void setDataThrottling(int serial, byte dataThrottlingAction, long completionDurationMillis) throws RemoteException {
+            public void setDataThrottling(
+                    int serial, byte dataThrottlingAction, long completionDurationMillis)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -473,7 +499,8 @@ public interface IRadioData extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioData
-            public void setInitialAttachApn(int serial, DataProfileInfo dataProfileInfo) throws RemoteException {
+            public void setInitialAttachApn(int serial, DataProfileInfo dataProfileInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -489,7 +516,9 @@ public interface IRadioData extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioData
-            public void setResponseFunctions(IRadioDataResponse radioDataResponse, IRadioDataIndication radioDataIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    IRadioDataResponse radioDataResponse, IRadioDataIndication radioDataIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -505,7 +534,18 @@ public interface IRadioData extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioData
-            public void setupDataCall(int serial, int accessNetwork, DataProfileInfo dataProfileInfo, boolean roamingAllowed, int reason, LinkAddress[] addresses, String[] dnses, int pduSessionId, SliceInfo sliceInfo, boolean matchAllRuleAllowed) throws RemoteException {
+            public void setupDataCall(
+                    int serial,
+                    int accessNetwork,
+                    DataProfileInfo dataProfileInfo,
+                    boolean roamingAllowed,
+                    int reason,
+                    LinkAddress[] addresses,
+                    String[] dnses,
+                    int pduSessionId,
+                    SliceInfo sliceInfo,
+                    boolean matchAllRuleAllowed)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -545,7 +585,8 @@ public interface IRadioData extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioData
-            public void startKeepalive(int serial, KeepaliveRequest keepalive) throws RemoteException {
+            public void startKeepalive(int serial, KeepaliveRequest keepalive)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);

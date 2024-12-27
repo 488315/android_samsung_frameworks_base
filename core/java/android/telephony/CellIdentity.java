@@ -4,40 +4,42 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.util.Objects;
 import java.util.UUID;
 
 /* loaded from: classes4.dex */
 public abstract class CellIdentity implements Parcelable {
-    public static final Parcelable.Creator<CellIdentity> CREATOR = new Parcelable.Creator<CellIdentity>() { // from class: android.telephony.CellIdentity.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentity createFromParcel(Parcel in) {
-            int type = in.readInt();
-            switch (type) {
-                case 1:
-                    return CellIdentityGsm.createFromParcelBody(in);
-                case 2:
-                    return CellIdentityCdma.createFromParcelBody(in);
-                case 3:
-                    return CellIdentityLte.createFromParcelBody(in);
-                case 4:
-                    return CellIdentityWcdma.createFromParcelBody(in);
-                case 5:
-                    return CellIdentityTdscdma.createFromParcelBody(in);
-                case 6:
-                    return CellIdentityNr.createFromParcelBody(in);
-                default:
-                    throw new IllegalArgumentException("Bad Cell identity Parcel");
-            }
-        }
+    public static final Parcelable.Creator<CellIdentity> CREATOR =
+            new Parcelable.Creator<CellIdentity>() { // from class: android.telephony.CellIdentity.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentity createFromParcel(Parcel in) {
+                    int type = in.readInt();
+                    switch (type) {
+                        case 1:
+                            return CellIdentityGsm.createFromParcelBody(in);
+                        case 2:
+                            return CellIdentityCdma.createFromParcelBody(in);
+                        case 3:
+                            return CellIdentityLte.createFromParcelBody(in);
+                        case 4:
+                            return CellIdentityWcdma.createFromParcelBody(in);
+                        case 5:
+                            return CellIdentityTdscdma.createFromParcelBody(in);
+                        case 6:
+                            return CellIdentityNr.createFromParcelBody(in);
+                        default:
+                            throw new IllegalArgumentException("Bad Cell identity Parcel");
+                    }
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentity[] newArray(int size) {
-            return new CellIdentity[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentity[] newArray(int size) {
+                    return new CellIdentity[size];
+                }
+            };
     public static final int INVALID_CHANNEL_NUMBER = Integer.MAX_VALUE;
     public static final int MCC_LENGTH = 3;
     public static final int MNC_MAX_LENGTH = 3;
@@ -58,7 +60,8 @@ public abstract class CellIdentity implements Parcelable {
 
     protected abstract void updateGlobalCellId();
 
-    protected CellIdentity(String tag, int type, String mcc, String mnc, String alphal, String alphas) {
+    protected CellIdentity(
+            String tag, int type, String mcc, String mnc, String alphal, String alphas) {
         this.mTag = tag;
         this.mType = type;
         if (mcc == null || isMcc(mcc)) {
@@ -77,8 +80,11 @@ public abstract class CellIdentity implements Parcelable {
             this.mMncStr = null;
             log("invalid MNC format: " + mnc);
         }
-        if ((this.mMccStr != null && this.mMncStr == null) || (this.mMccStr == null && this.mMncStr != null)) {
-            AnomalyReporter.reportAnomaly(UUID.fromString("e257ae06-ac0a-44c0-ba63-823b9f07b3e4"), "CellIdentity Missing Half of PLMN ID");
+        if ((this.mMccStr != null && this.mMncStr == null)
+                || (this.mMccStr == null && this.mMncStr != null)) {
+            AnomalyReporter.reportAnomaly(
+                    UUID.fromString("e257ae06-ac0a-44c0-ba63-823b9f07b3e4"),
+                    "CellIdentity Missing Half of PLMN ID");
         }
         this.mAlphaLong = alphal;
         this.mAlphaShort = alphas;
@@ -144,11 +150,20 @@ public abstract class CellIdentity implements Parcelable {
             return false;
         }
         CellIdentity o = (CellIdentity) other;
-        return this.mType == o.mType && TextUtils.equals(this.mMccStr, o.mMccStr) && TextUtils.equals(this.mMncStr, o.mMncStr) && TextUtils.equals(this.mAlphaLong, o.mAlphaLong) && TextUtils.equals(this.mAlphaShort, o.mAlphaShort);
+        return this.mType == o.mType
+                && TextUtils.equals(this.mMccStr, o.mMccStr)
+                && TextUtils.equals(this.mMncStr, o.mMncStr)
+                && TextUtils.equals(this.mAlphaLong, o.mAlphaLong)
+                && TextUtils.equals(this.mAlphaShort, o.mAlphaShort);
     }
 
     public int hashCode() {
-        return Objects.hash(this.mAlphaLong, this.mAlphaShort, this.mMccStr, this.mMncStr, Integer.valueOf(this.mType));
+        return Objects.hash(
+                this.mAlphaLong,
+                this.mAlphaShort,
+                this.mMccStr,
+                this.mMncStr,
+                Integer.valueOf(this.mType));
     }
 
     @Override // android.os.Parcelable
@@ -161,11 +176,20 @@ public abstract class CellIdentity implements Parcelable {
     }
 
     public static boolean isValidPlmn(String plmn) {
-        return plmn.length() >= 5 && plmn.length() <= 6 && isMcc(plmn.substring(0, 3)) && isMnc(plmn.substring(3));
+        return plmn.length() >= 5
+                && plmn.length() <= 6
+                && isMcc(plmn.substring(0, 3))
+                && isMnc(plmn.substring(3));
     }
 
     protected CellIdentity(String tag, int type, Parcel source) {
-        this(tag, type, source.readString(), source.readString(), source.readString(), source.readString());
+        this(
+                tag,
+                type,
+                source.readString(),
+                source.readString(),
+                source.readString(),
+                source.readString());
     }
 
     protected void log(String s) {
@@ -186,7 +210,8 @@ public abstract class CellIdentity implements Parcelable {
         return value;
     }
 
-    protected static final int inRangeOrUnavailable(int value, int rangeMin, int rangeMax, int special) {
+    protected static final int inRangeOrUnavailable(
+            int value, int rangeMin, int rangeMax, int special) {
         if ((value < rangeMin || value > rangeMax) && value != special) {
             return Integer.MAX_VALUE;
         }

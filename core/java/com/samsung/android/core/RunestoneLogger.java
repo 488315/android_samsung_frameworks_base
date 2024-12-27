@@ -6,11 +6,13 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
+
 import java.util.ArrayList;
 
 /* loaded from: classes6.dex */
 public class RunestoneLogger {
-    private static final String ACTION_SCREEN_LOGGING = "com.sec.android.diagmonagent.intent.ACTION_SCREEN_LOGGING";
+    private static final String ACTION_SCREEN_LOGGING =
+            "com.sec.android.diagmonagent.intent.ACTION_SCREEN_LOGGING";
     private static final boolean DEBUG = false;
     private static final String EXTRA_FOLD_STATE = "fold_state";
     private static final String EXTRA_MULTI_WINDOW_STATE = "multi_window_state";
@@ -18,7 +20,8 @@ public class RunestoneLogger {
     private static final String EXTRA_SCREEN_TYPE = "screen_type";
     private static final String EXTRA_TIMESTAMP = "timestamp";
     private static final String PACKAGE_NAME = "com.sec.android.diagmonagent";
-    private static final String PERMISSION_SCREEN_LOGGING = "com.sec.android.diagmonagent.permission.DIAGMON_SURVEY";
+    private static final String PERMISSION_SCREEN_LOGGING =
+            "com.sec.android.diagmonagent.permission.DIAGMON_SURVEY";
     private static final String TAG = "RunestoneLogger";
 
     public enum ScreenType {
@@ -89,13 +92,19 @@ public class RunestoneLogger {
                 screenState = ScreenState.MULTIWINDOW_3UP_MODE;
                 break;
             default:
-                Log.w(TAG, "Warning sendPairLoggingLocked [" + packageList + NavigationBarInflaterView.SIZE_MOD_END);
+                Log.w(
+                        TAG,
+                        "Warning sendPairLoggingLocked ["
+                                + packageList
+                                + NavigationBarInflaterView.SIZE_MOD_END);
                 return;
         }
-        sendRunestoneLogging(context, ScreenType.MULTI_WINDOW.getValue(), screenState.getValue(), packageList);
+        sendRunestoneLogging(
+                context, ScreenType.MULTI_WINDOW.getValue(), screenState.getValue(), packageList);
     }
 
-    public static void sendRunestoneLogging(Context context, int screenType, int screenState, ArrayList<String> packageList) {
+    public static void sendRunestoneLogging(
+            Context context, int screenType, int screenState, ArrayList<String> packageList) {
         long timeStamp = System.currentTimeMillis();
         Bundle bundle = new Bundle();
         bundle.putInt(EXTRA_SCREEN_TYPE, screenType);
@@ -106,7 +115,8 @@ public class RunestoneLogger {
         }
         if (packageList != null && !packageList.isEmpty()) {
             bundle.putStringArrayList(EXTRA_PACKAGES, packageList);
-        } else if (screenType == ScreenType.MULTI_WINDOW.getValue() && screenState != ScreenState.NONE_MULTIWINDOW.getValue()) {
+        } else if (screenType == ScreenType.MULTI_WINDOW.getValue()
+                && screenState != ScreenState.NONE_MULTIWINDOW.getValue()) {
             Log.d(TAG, "Send failed. it's MULTI_WINDOW Type, but package list is null");
             return;
         }
@@ -114,6 +124,9 @@ public class RunestoneLogger {
         Intent intent = new Intent(ACTION_SCREEN_LOGGING);
         intent.setPackage("com.sec.android.diagmonagent");
         intent.putExtras(bundle);
-        context.sendBroadcastAsUser(intent, UserHandle.CURRENT_OR_SELF, "com.sec.android.diagmonagent.permission.DIAGMON_SURVEY");
+        context.sendBroadcastAsUser(
+                intent,
+                UserHandle.CURRENT_OR_SELF,
+                "com.sec.android.diagmonagent.permission.DIAGMON_SURVEY");
     }
 }

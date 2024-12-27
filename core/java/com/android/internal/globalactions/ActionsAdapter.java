@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
@@ -15,7 +16,11 @@ public class ActionsAdapter extends BaseAdapter {
     private final List<Action> mItems;
     private final BooleanSupplier mKeyguardShowing;
 
-    public ActionsAdapter(Context context, List<Action> items, BooleanSupplier deviceProvisioned, BooleanSupplier keyguardShowing) {
+    public ActionsAdapter(
+            Context context,
+            List<Action> items,
+            BooleanSupplier deviceProvisioned,
+            BooleanSupplier keyguardShowing) {
         this.mContext = context;
         this.mItems = items;
         this.mDeviceProvisioned = deviceProvisioned;
@@ -29,7 +34,8 @@ public class ActionsAdapter extends BaseAdapter {
         int count = 0;
         for (int i = 0; i < this.mItems.size(); i++) {
             Action action = this.mItems.get(i);
-            if ((!keyguardShowing || action.showDuringKeyguard()) && (deviceProvisioned || action.showBeforeProvisioning())) {
+            if ((!keyguardShowing || action.showDuringKeyguard())
+                    && (deviceProvisioned || action.showBeforeProvisioning())) {
                 count++;
             }
         }
@@ -53,14 +59,23 @@ public class ActionsAdapter extends BaseAdapter {
         int filteredPos = 0;
         for (int i = 0; i < this.mItems.size(); i++) {
             Action action = this.mItems.get(i);
-            if ((!keyguardShowing || action.showDuringKeyguard()) && (deviceProvisioned || action.showBeforeProvisioning())) {
+            if ((!keyguardShowing || action.showDuringKeyguard())
+                    && (deviceProvisioned || action.showBeforeProvisioning())) {
                 if (filteredPos == position) {
                     return action;
                 }
                 filteredPos++;
             }
         }
-        throw new IllegalArgumentException("position " + position + " out of range of showable actions, filtered count=" + getCount() + ", keyguardshowing=" + keyguardShowing + ", provisioned=" + deviceProvisioned);
+        throw new IllegalArgumentException(
+                "position "
+                        + position
+                        + " out of range of showable actions, filtered count="
+                        + getCount()
+                        + ", keyguardshowing="
+                        + keyguardShowing
+                        + ", provisioned="
+                        + deviceProvisioned);
     }
 
     @Override // android.widget.Adapter
@@ -71,6 +86,7 @@ public class ActionsAdapter extends BaseAdapter {
     @Override // android.widget.Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
         Action action = getItem(position);
-        return action.create(this.mContext, convertView, parent, LayoutInflater.from(this.mContext));
+        return action.create(
+                this.mContext, convertView, parent, LayoutInflater.from(this.mContext));
     }
 }

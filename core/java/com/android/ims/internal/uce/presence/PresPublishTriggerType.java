@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class PresPublishTriggerType implements Parcelable {
-    public static final Parcelable.Creator<PresPublishTriggerType> CREATOR = new Parcelable.Creator<PresPublishTriggerType>() { // from class: com.android.ims.internal.uce.presence.PresPublishTriggerType.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresPublishTriggerType createFromParcel(Parcel source) {
-            return new PresPublishTriggerType(source);
-        }
+    public static final Parcelable.Creator<PresPublishTriggerType> CREATOR =
+            new Parcelable.Creator<
+                    PresPublishTriggerType>() { // from class:
+                                                // com.android.ims.internal.uce.presence.PresPublishTriggerType.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresPublishTriggerType createFromParcel(Parcel source) {
+                    return new PresPublishTriggerType(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresPublishTriggerType[] newArray(int size) {
-            return new PresPublishTriggerType[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresPublishTriggerType[] newArray(int size) {
+                    return new PresPublishTriggerType[size];
+                }
+            };
     public static final int UCE_PRES_PUBLISH_TRIGGER_ETAG_EXPIRED = 0;
     public static final int UCE_PRES_PUBLISH_TRIGGER_MOVE_TO_2G = 6;
     public static final int UCE_PRES_PUBLISH_TRIGGER_MOVE_TO_3G = 5;

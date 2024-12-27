@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Binder;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.EnterpriseKnoxManager;
 
@@ -68,9 +69,16 @@ public final class GalaxyAIConfiguration {
     public final void setInterpreterState(Bundle bundle, int i, boolean z) {
         boolean z2 = z || !bundle.getBoolean("grayout", false);
         if (i == 0) {
-            EnterpriseDeviceManager.getInstance(this.mInjector.mContext).getApplicationPolicy().setApplicationStateList(new String[]{"com.samsung.android.app.interpreter"}, z2);
+            EnterpriseDeviceManager.getInstance(this.mInjector.mContext)
+                    .getApplicationPolicy()
+                    .setApplicationStateList(
+                            new String[] {"com.samsung.android.app.interpreter"}, z2);
         } else {
-            EnterpriseKnoxManager.getInstance(this.mInjector.mContext).getKnoxContainerManager(i).getApplicationPolicy().setApplicationStateList(new String[]{"com.samsung.android.app.interpreter"}, z2);
+            EnterpriseKnoxManager.getInstance(this.mInjector.mContext)
+                    .getKnoxContainerManager(i)
+                    .getApplicationPolicy()
+                    .setApplicationStateList(
+                            new String[] {"com.samsung.android.app.interpreter"}, z2);
         }
     }
 }

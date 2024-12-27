@@ -2,8 +2,7 @@ package android.util;
 
 /* loaded from: classes4.dex */
 class ContainerHelpers {
-    ContainerHelpers() {
-    }
+    ContainerHelpers() {}
 
     static int binarySearch(int[] array, int size, int value) {
         int lo = 0;

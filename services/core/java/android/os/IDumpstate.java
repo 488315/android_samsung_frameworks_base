@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.IDumpstateListener;
 import java.io.FileDescriptor;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -41,20 +40,35 @@ public interface IDumpstate extends IInterface {
         }
 
         @Override // android.os.IDumpstate
-        public void cancelBugreport(int i, String str) throws RemoteException {
-        }
+        public void cancelBugreport(int i, String str) throws RemoteException {}
 
         @Override // android.os.IDumpstate
-        public void preDumpUiData(String str) throws RemoteException {
-        }
+        public void preDumpUiData(String str) throws RemoteException {}
 
         @Override // android.os.IDumpstate
-        public void retrieveBugreport(int i, String str, int i2, FileDescriptor fileDescriptor, String str2, boolean z, boolean z2, IDumpstateListener iDumpstateListener) throws RemoteException {
-        }
+        public void retrieveBugreport(
+                int i,
+                String str,
+                int i2,
+                FileDescriptor fileDescriptor,
+                String str2,
+                boolean z,
+                boolean z2,
+                IDumpstateListener iDumpstateListener)
+                throws RemoteException {}
 
         @Override // android.os.IDumpstate
-        public void startBugreport(int i, String str, FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, int i2, int i3, IDumpstateListener iDumpstateListener, boolean z, boolean z2) throws RemoteException {
-        }
+        public void startBugreport(
+                int i,
+                String str,
+                FileDescriptor fileDescriptor,
+                FileDescriptor fileDescriptor2,
+                int i2,
+                int i3,
+                IDumpstateListener iDumpstateListener,
+                boolean z,
+                boolean z2)
+                throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -105,7 +119,15 @@ public interface IDumpstate extends IInterface {
             }
 
             @Override // android.os.IDumpstate
-            public final void retrieveBugreport(int i, String str, int i2, FileDescriptor fileDescriptor, String str2, boolean z, boolean z2, IDumpstateListener iDumpstateListener) {
+            public final void retrieveBugreport(
+                    int i,
+                    String str,
+                    int i2,
+                    FileDescriptor fileDescriptor,
+                    String str2,
+                    boolean z,
+                    boolean z2,
+                    IDumpstateListener iDumpstateListener) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -127,7 +149,16 @@ public interface IDumpstate extends IInterface {
             }
 
             @Override // android.os.IDumpstate
-            public final void startBugreport(int i, String str, FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, int i2, int i3, IDumpstateListener iDumpstateListener, boolean z, boolean z2) {
+            public final void startBugreport(
+                    int i,
+                    String str,
+                    FileDescriptor fileDescriptor,
+                    FileDescriptor fileDescriptor2,
+                    int i2,
+                    int i3,
+                    IDumpstateListener iDumpstateListener,
+                    boolean z,
+                    boolean z2) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -173,7 +204,8 @@ public interface IDumpstate extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(IDumpstate.DESCRIPTOR);
             }
@@ -193,11 +225,21 @@ public interface IDumpstate extends IInterface {
                 FileDescriptor readRawFileDescriptor2 = parcel.readRawFileDescriptor();
                 int readInt2 = parcel.readInt();
                 int readInt3 = parcel.readInt();
-                IDumpstateListener asInterface = IDumpstateListener.Stub.asInterface(parcel.readStrongBinder());
+                IDumpstateListener asInterface =
+                        IDumpstateListener.Stub.asInterface(parcel.readStrongBinder());
                 boolean readBoolean = parcel.readBoolean();
                 boolean readBoolean2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                startBugreport(readInt, readString2, readRawFileDescriptor, readRawFileDescriptor2, readInt2, readInt3, asInterface, readBoolean, readBoolean2);
+                startBugreport(
+                        readInt,
+                        readString2,
+                        readRawFileDescriptor,
+                        readRawFileDescriptor2,
+                        readInt2,
+                        readInt3,
+                        asInterface,
+                        readBoolean,
+                        readBoolean2);
                 parcel2.writeNoException();
             } else if (i == 3) {
                 int readInt4 = parcel.readInt();
@@ -216,9 +258,18 @@ public interface IDumpstate extends IInterface {
                 String readString5 = parcel.readString();
                 boolean readBoolean3 = parcel.readBoolean();
                 boolean readBoolean4 = parcel.readBoolean();
-                IDumpstateListener asInterface2 = IDumpstateListener.Stub.asInterface(parcel.readStrongBinder());
+                IDumpstateListener asInterface2 =
+                        IDumpstateListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                retrieveBugreport(readInt5, readString4, readInt6, readRawFileDescriptor3, readString5, readBoolean3, readBoolean4, asInterface2);
+                retrieveBugreport(
+                        readInt5,
+                        readString4,
+                        readInt6,
+                        readRawFileDescriptor3,
+                        readString5,
+                        readBoolean3,
+                        readBoolean4,
+                        asInterface2);
                 parcel2.writeNoException();
             }
             return true;
@@ -229,7 +280,26 @@ public interface IDumpstate extends IInterface {
 
     void preDumpUiData(String str) throws RemoteException;
 
-    void retrieveBugreport(int i, String str, int i2, FileDescriptor fileDescriptor, String str2, boolean z, boolean z2, IDumpstateListener iDumpstateListener) throws RemoteException;
+    void retrieveBugreport(
+            int i,
+            String str,
+            int i2,
+            FileDescriptor fileDescriptor,
+            String str2,
+            boolean z,
+            boolean z2,
+            IDumpstateListener iDumpstateListener)
+            throws RemoteException;
 
-    void startBugreport(int i, String str, FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, int i2, int i3, IDumpstateListener iDumpstateListener, boolean z, boolean z2) throws RemoteException;
+    void startBugreport(
+            int i,
+            String str,
+            FileDescriptor fileDescriptor,
+            FileDescriptor fileDescriptor2,
+            int i2,
+            int i3,
+            IDumpstateListener iDumpstateListener,
+            boolean z,
+            boolean z2)
+            throws RemoteException;
 }

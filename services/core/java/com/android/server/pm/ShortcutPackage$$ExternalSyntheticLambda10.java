@@ -2,6 +2,7 @@ package com.android.server.pm;
 
 import android.app.appsearch.AppSearchSession;
 import android.content.pm.ShortcutInfo;
+
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -30,7 +31,12 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda10 im
                 break;
             case 1:
                 ShortcutPackage shortcutPackage = (ShortcutPackage) obj2;
-                ((AppSearchSession) obj).remove("", shortcutPackage.getSearchSpec(), shortcutPackage.mShortcutUser.mExecutor, new ShortcutPackage$$ExternalSyntheticLambda14(5));
+                ((AppSearchSession) obj)
+                        .remove(
+                                "",
+                                shortcutPackage.getSearchSpec(),
+                                shortcutPackage.mShortcutUser.mExecutor,
+                                new ShortcutPackage$$ExternalSyntheticLambda14(5));
                 break;
             default:
                 ShortcutInfo shortcutInfo2 = (ShortcutInfo) obj;

@@ -1,24 +1,25 @@
 package android.os;
 
 import android.hardware.scontext.SContextConstants;
-import android.os.Parcelable;
 import android.telephony.CellSignalStrength;
 
 /* loaded from: classes3.dex */
 public class SemDevicePowerInfo implements Parcelable {
-    public static final Parcelable.Creator<SemDevicePowerInfo> CREATOR = new Parcelable.Creator<SemDevicePowerInfo>() { // from class: android.os.SemDevicePowerInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemDevicePowerInfo createFromParcel(Parcel in) {
-            return new SemDevicePowerInfo(in);
-        }
+    public static final Parcelable.Creator<SemDevicePowerInfo> CREATOR =
+            new Parcelable.Creator<
+                    SemDevicePowerInfo>() { // from class: android.os.SemDevicePowerInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemDevicePowerInfo createFromParcel(Parcel in) {
+                    return new SemDevicePowerInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemDevicePowerInfo[] newArray(int size) {
-            return new SemDevicePowerInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemDevicePowerInfo[] newArray(int size) {
+                    return new SemDevicePowerInfo[size];
+                }
+            };
     public long actualGpsTime;
     public double aodPower;
     public long aodTime;
@@ -351,7 +352,9 @@ public class SemDevicePowerInfo implements Parcelable {
         this.cpIdleTime += delta.cpIdleTime;
         this.nrTxTime += delta.nrTxTime;
         if (this.nrTxTime + delta.nrTxTime != 0) {
-            this.nrTxLevel = ((this.nrTxLevel * this.nrTxTime) + (delta.nrTxLevel * delta.nrTxTime)) / (this.nrTxTime + delta.nrTxTime);
+            this.nrTxLevel =
+                    ((this.nrTxLevel * this.nrTxTime) + (delta.nrTxLevel * delta.nrTxTime))
+                            / (this.nrTxTime + delta.nrTxTime);
         } else {
             this.nrTxLevel = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         }
@@ -360,7 +363,9 @@ public class SemDevicePowerInfo implements Parcelable {
         this.nrRxByte += delta.nrRxByte;
         this.lcTxTime += delta.lcTxTime;
         if (this.lcTxTime + delta.lcTxTime != 0) {
-            this.lcTxLevel = ((this.lcTxLevel * this.lcTxTime) + (delta.lcTxLevel * delta.lcTxTime)) / (this.lcTxTime + delta.lcTxTime);
+            this.lcTxLevel =
+                    ((this.lcTxLevel * this.lcTxTime) + (delta.lcTxLevel * delta.lcTxTime))
+                            / (this.lcTxTime + delta.lcTxTime);
         } else {
             this.lcTxLevel = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         }

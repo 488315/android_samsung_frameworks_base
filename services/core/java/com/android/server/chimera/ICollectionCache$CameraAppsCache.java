@@ -2,6 +2,7 @@ package com.android.server.chimera;
 
 import android.content.SharedPreferences;
 import android.util.ArraySet;
+
 import java.util.Arrays;
 import java.util.Set;
 
@@ -42,7 +43,10 @@ public final class ICollectionCache$CameraAppsCache {
         synchronized (systemRepository) {
             if (systemRepository.mSharedPreferences == null) {
                 try {
-                    systemRepository.mSharedPreferences = systemRepository.mContext.getSharedPreferences(SystemRepository.convertToChimeraTag("SystemRepositoryDefault"), 0);
+                    systemRepository.mSharedPreferences =
+                            systemRepository.mContext.getSharedPreferences(
+                                    SystemRepository.convertToChimeraTag("SystemRepositoryDefault"),
+                                    0);
                 } catch (Exception e) {
                     SystemRepository.logDebug("SystemRepositoryDefault", e.toString());
                 }

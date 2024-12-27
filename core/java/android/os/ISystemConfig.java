@@ -2,6 +2,7 @@ package android.os;
 
 import android.content.ComponentName;
 import android.content.pm.SignedPackageParcel;
+
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +40,8 @@ public interface ISystemConfig extends IInterface {
         }
 
         @Override // android.os.ISystemConfig
-        public Map getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries() throws RemoteException {
+        public Map getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries()
+                throws RemoteException {
             return null;
         }
 
@@ -49,7 +51,8 @@ public interface ISystemConfig extends IInterface {
         }
 
         @Override // android.os.ISystemConfig
-        public List<ComponentName> getEnabledComponentOverrides(String packageName) throws RemoteException {
+        public List<ComponentName> getEnabledComponentOverrides(String packageName)
+                throws RemoteException {
             return null;
         }
 
@@ -64,12 +67,14 @@ public interface ISystemConfig extends IInterface {
         }
 
         @Override // android.os.ISystemConfig
-        public List<SignedPackageParcel> getEnhancedConfirmationTrustedPackages() throws RemoteException {
+        public List<SignedPackageParcel> getEnhancedConfirmationTrustedPackages()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.ISystemConfig
-        public List<SignedPackageParcel> getEnhancedConfirmationTrustedInstallers() throws RemoteException {
+        public List<SignedPackageParcel> getEnhancedConfirmationTrustedInstallers()
+                throws RemoteException {
             return null;
         }
 
@@ -79,10 +84,11 @@ public interface ISystemConfig extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISystemConfig {
+    public abstract static class Stub extends Binder implements ISystemConfig {
         static final int TRANSACTION_getDefaultVrComponents = 6;
         static final int TRANSACTION_getDisabledUntilUsedPreinstalledCarrierApps = 1;
-        static final int TRANSACTION_getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries = 3;
+        static final int TRANSACTION_getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries =
+                3;
         static final int TRANSACTION_getDisabledUntilUsedPreinstalledCarrierAssociatedApps = 2;
         static final int TRANSACTION_getEnabledComponentOverrides = 5;
         static final int TRANSACTION_getEnhancedConfirmationTrustedInstallers = 9;
@@ -141,7 +147,8 @@ public interface ISystemConfig extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISystemConfig.DESCRIPTOR);
             }
@@ -221,7 +228,8 @@ public interface ISystemConfig extends IInterface {
             }
 
             @Override // android.os.ISystemConfig
-            public List<String> getDisabledUntilUsedPreinstalledCarrierApps() throws RemoteException {
+            public List<String> getDisabledUntilUsedPreinstalledCarrierApps()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -237,7 +245,8 @@ public interface ISystemConfig extends IInterface {
             }
 
             @Override // android.os.ISystemConfig
-            public Map getDisabledUntilUsedPreinstalledCarrierAssociatedApps() throws RemoteException {
+            public Map getDisabledUntilUsedPreinstalledCarrierAssociatedApps()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -254,7 +263,8 @@ public interface ISystemConfig extends IInterface {
             }
 
             @Override // android.os.ISystemConfig
-            public Map getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries() throws RemoteException {
+            public Map getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -288,7 +298,8 @@ public interface ISystemConfig extends IInterface {
             }
 
             @Override // android.os.ISystemConfig
-            public List<ComponentName> getEnabledComponentOverrides(String packageName) throws RemoteException {
+            public List<ComponentName> getEnabledComponentOverrides(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -296,7 +307,8 @@ public interface ISystemConfig extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    List<ComponentName> _result = _reply.createTypedArrayList(ComponentName.CREATOR);
+                    List<ComponentName> _result =
+                            _reply.createTypedArrayList(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -312,7 +324,8 @@ public interface ISystemConfig extends IInterface {
                     _data.writeInterfaceToken(ISystemConfig.DESCRIPTOR);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    List<ComponentName> _result = _reply.createTypedArrayList(ComponentName.CREATOR);
+                    List<ComponentName> _result =
+                            _reply.createTypedArrayList(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -337,14 +350,16 @@ public interface ISystemConfig extends IInterface {
             }
 
             @Override // android.os.ISystemConfig
-            public List<SignedPackageParcel> getEnhancedConfirmationTrustedPackages() throws RemoteException {
+            public List<SignedPackageParcel> getEnhancedConfirmationTrustedPackages()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(ISystemConfig.DESCRIPTOR);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    List<SignedPackageParcel> _result = _reply.createTypedArrayList(SignedPackageParcel.CREATOR);
+                    List<SignedPackageParcel> _result =
+                            _reply.createTypedArrayList(SignedPackageParcel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -353,14 +368,16 @@ public interface ISystemConfig extends IInterface {
             }
 
             @Override // android.os.ISystemConfig
-            public List<SignedPackageParcel> getEnhancedConfirmationTrustedInstallers() throws RemoteException {
+            public List<SignedPackageParcel> getEnhancedConfirmationTrustedInstallers()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(ISystemConfig.DESCRIPTOR);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    List<SignedPackageParcel> _result = _reply.createTypedArrayList(SignedPackageParcel.CREATOR);
+                    List<SignedPackageParcel> _result =
+                            _reply.createTypedArrayList(SignedPackageParcel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

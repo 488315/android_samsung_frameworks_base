@@ -10,7 +10,11 @@ public final /* synthetic */ class AnrController$$ExternalSyntheticLambda0 imple
     public final /* synthetic */ WindowState f$2;
     public final /* synthetic */ String f$3;
 
-    public /* synthetic */ AnrController$$ExternalSyntheticLambda0(AnrController anrController, ActivityRecord activityRecord, WindowState windowState, String str) {
+    public /* synthetic */ AnrController$$ExternalSyntheticLambda0(
+            AnrController anrController,
+            ActivityRecord activityRecord,
+            WindowState windowState,
+            String str) {
         this.f$0 = anrController;
         this.f$1 = activityRecord;
         this.f$2 = windowState;

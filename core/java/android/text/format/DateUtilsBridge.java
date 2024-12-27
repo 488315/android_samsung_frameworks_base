@@ -15,7 +15,8 @@ public final class DateUtilsBridge {
         return icuTimeZone;
     }
 
-    public static Calendar createIcuCalendar(TimeZone icuTimeZone, ULocale icuLocale, long timeInMillis) {
+    public static Calendar createIcuCalendar(
+            TimeZone icuTimeZone, ULocale icuLocale, long timeInMillis) {
         Calendar calendar = new GregorianCalendar(icuTimeZone, icuLocale);
         calendar.setTimeInMillis(timeInMillis);
         return calendar;
@@ -59,7 +60,10 @@ public final class DateUtilsBridge {
         if ((flags & 19) == 0) {
             flags |= 16;
         }
-        if ((flags & 16) != 0 && (flags & 4) == 0 && (flags & 8) == 0 && (!fallInSameYear(startCalendar, endCalendar) || !isThisYear(startCalendar))) {
+        if ((flags & 16) != 0
+                && (flags & 4) == 0
+                && (flags & 8) == 0
+                && (!fallInSameYear(startCalendar, endCalendar) || !isThisYear(startCalendar))) {
             flags |= 4;
         }
         StringBuilder builder = new StringBuilder();
@@ -94,7 +98,9 @@ public final class DateUtilsBridge {
     }
 
     private static boolean fallOnDifferentDates(Calendar c1, Calendar c2) {
-        return (c1.get(1) == c2.get(1) && c1.get(2) == c2.get(2) && c1.get(5) == c2.get(5)) ? false : true;
+        return (c1.get(1) == c2.get(1) && c1.get(2) == c2.get(2) && c1.get(5) == c2.get(5))
+                ? false
+                : true;
     }
 
     private static boolean fallInSameMonth(Calendar c1, Calendar c2) {

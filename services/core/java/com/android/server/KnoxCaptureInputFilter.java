@@ -10,7 +10,9 @@ import android.view.InputEvent;
 import android.view.InputFilter;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -50,7 +52,9 @@ public final class KnoxCaptureInputFilter extends InputFilter {
                 Method dump skipped, instructions count: 1100
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.KnoxCaptureInputFilter.ScanEventHandler.handleMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.KnoxCaptureInputFilter.ScanEventHandler.handleMessage(android.os.Message):void");
         }
     }
 
@@ -58,20 +62,26 @@ public final class KnoxCaptureInputFilter extends InputFilter {
         super(context.getMainLooper());
         this.activeScanDeviceId = -1;
         this.context = context;
-        this.scanEventHandler = new ScanEventHandler(KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("ScanEventThread").getLooper());
+        this.scanEventHandler =
+                new ScanEventHandler(
+                        KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("ScanEventThread")
+                                .getLooper());
         this.scannerDevices = new HashSet();
     }
 
     public final void onInputEvent(InputEvent inputEvent, int i) {
         if (DEBUG) {
-            Slog.d("KnoxCaptureInputFilter", "Received event: " + inputEvent + ", policyFlags=0x" + Integer.toHexString(i));
+            Slog.d(
+                    "KnoxCaptureInputFilter",
+                    "Received event: " + inputEvent + ", policyFlags=0x" + Integer.toHexString(i));
         }
         if (inputEvent instanceof MotionEvent) {
             super.onInputEvent(inputEvent, i);
             return;
         }
         if (inputEvent instanceof KeyEvent) {
-            if (!((HashSet) this.scannerDevices).contains(Integer.valueOf(inputEvent.getDeviceId()))) {
+            if (!((HashSet) this.scannerDevices)
+                    .contains(Integer.valueOf(inputEvent.getDeviceId()))) {
                 super.onInputEvent(inputEvent, i);
                 return;
             }
@@ -82,7 +92,11 @@ public final class KnoxCaptureInputFilter extends InputFilter {
             this.scanEventHandler.removeMessages(852);
             if (keyEvent.getAction() == 0 && keyEvent.getDeviceId() == this.activeScanDeviceId) {
                 ScanEventHandler scanEventHandler = this.scanEventHandler;
-                scanEventHandler.sendMessage(Message.obtain(scanEventHandler, FrameworkStatsLog.VPN_CONNECTION_REPORTED, new KeyEvent(keyEvent)));
+                scanEventHandler.sendMessage(
+                        Message.obtain(
+                                scanEventHandler,
+                                FrameworkStatsLog.VPN_CONNECTION_REPORTED,
+                                new KeyEvent(keyEvent)));
             }
             this.scanEventHandler.sendEmptyMessageDelayed(852, 100L);
         }

@@ -1,18 +1,18 @@
 package android.media;
 
 import android.graphics.ImageFormat;
-import android.media.Image;
 import android.util.Log;
 import android.util.Size;
-import java.nio.ByteBuffer;
+
 import libcore.io.Memory;
+
+import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
 class ImageUtils {
     private static final String IMAGEUTILS_LOG_TAG = "ImageUtils";
 
-    ImageUtils() {
-    }
+    ImageUtils() {}
 
     public static int getNumPlanesForFormat(int format) {
         switch (format) {
@@ -46,7 +46,8 @@ class ImageUtils {
             case 34:
                 return 0;
             default:
-                throw new UnsupportedOperationException(String.format("Invalid format specified %d", Integer.valueOf(format)));
+                throw new UnsupportedOperationException(
+                        String.format("Invalid format specified %d", Integer.valueOf(format)));
         }
     }
 
@@ -70,7 +71,10 @@ class ImageUtils {
             case 54:
                 return 3;
             default:
-                throw new UnsupportedOperationException(String.format("Invalid hardwareBuffer format specified %d", Integer.valueOf(hardwareBufferFormat)));
+                throw new UnsupportedOperationException(
+                        String.format(
+                                "Invalid hardwareBuffer format specified %d",
+                                Integer.valueOf(hardwareBufferFormat)));
         }
     }
 
@@ -87,21 +91,29 @@ class ImageUtils {
             throw new IllegalArgumentException("PRIVATE format images are not copyable");
         }
         if (src.getFormat() == 36) {
-            throw new IllegalArgumentException("Copy of RAW_OPAQUE format has not been implemented");
+            throw new IllegalArgumentException(
+                    "Copy of RAW_OPAQUE format has not been implemented");
         }
         if (src.getFormat() == 4098) {
             throw new IllegalArgumentException("Copy of RAW_DEPTH format has not been implemented");
         }
         if (src.getFormat() == 4099) {
-            throw new IllegalArgumentException("Copy of RAW_DEPTH10 format has not been implemented");
+            throw new IllegalArgumentException(
+                    "Copy of RAW_DEPTH10 format has not been implemented");
         }
         if (!(dst.getOwner() instanceof ImageWriter)) {
-            throw new IllegalArgumentException("Destination image is not from ImageWriter. Only the images from ImageWriter are writable");
+            throw new IllegalArgumentException(
+                    "Destination image is not from ImageWriter. Only the images from ImageWriter"
+                            + " are writable");
         }
         Size srcSize = new Size(src.getWidth(), src.getHeight());
         Size dstSize = new Size(dst.getWidth(), dst.getHeight());
         if (!srcSize.equals(dstSize)) {
-            throw new IllegalArgumentException("source image size " + srcSize + " is different with destination image size " + dstSize);
+            throw new IllegalArgumentException(
+                    "source image size "
+                            + srcSize
+                            + " is different with destination image size "
+                            + dstSize);
         }
         Image.Plane[] srcPlanes = src.getPlanes();
         Image.Plane[] dstPlanes = dst.getPlanes();
@@ -112,10 +124,15 @@ class ImageUtils {
             ByteBuffer srcBuffer = srcPlanes[i].getBuffer();
             ByteBuffer dstBuffer = dstPlanes[i].getBuffer();
             if (!srcBuffer.isDirect() || !dstBuffer.isDirect()) {
-                throw new IllegalArgumentException("Source and destination ByteBuffers must be direct byteBuffer!");
+                throw new IllegalArgumentException(
+                        "Source and destination ByteBuffers must be direct byteBuffer!");
             }
             if (srcPlanes[i].getPixelStride() != dstPlanes[i].getPixelStride()) {
-                throw new IllegalArgumentException("Source plane image pixel stride " + srcPlanes[i].getPixelStride() + " must be same as destination image pixel stride " + dstPlanes[i].getPixelStride());
+                throw new IllegalArgumentException(
+                        "Source plane image pixel stride "
+                                + srcPlanes[i].getPixelStride()
+                                + " must be same as destination image pixel stride "
+                                + dstPlanes[i].getPixelStride());
             }
             int srcPos = srcBuffer.position();
             srcBuffer.rewind();
@@ -128,7 +145,9 @@ class ImageUtils {
                 Size effectivePlaneSize = getEffectivePlaneSizeForImage(image, i);
                 int srcByteCount = effectivePlaneSize.getWidth() * srcPlanes[i].getPixelStride();
                 for (int row = 0; row < effectivePlaneSize.getHeight(); row++) {
-                    if (row == effectivePlaneSize.getHeight() - 1 && srcByteCount > (remainingBytes = srcBuffer.remaining() - srcOffset)) {
+                    if (row == effectivePlaneSize.getHeight() - 1
+                            && srcByteCount
+                                    > (remainingBytes = srcBuffer.remaining() - srcOffset)) {
                         srcByteCount = remainingBytes;
                     }
                     directByteBufferCopy(srcBuffer, srcOffset, dstBuffer, dstOffset, srcByteCount);
@@ -143,7 +162,8 @@ class ImageUtils {
         }
     }
 
-    public static int getEstimatedNativeAllocBytes(int width, int height, int format, int numImages) {
+    public static int getEstimatedNativeAllocBytes(
+            int width, int height, int format, int numImages) {
         double estimatedBytePerPixel;
         switch (format) {
             case 1:
@@ -188,7 +208,10 @@ class ImageUtils {
                 break;
             default:
                 if (Log.isLoggable(IMAGEUTILS_LOG_TAG, 2)) {
-                    Log.v(IMAGEUTILS_LOG_TAG, "getEstimatedNativeAllocBytes() uses defaultestimated native allocation size.");
+                    Log.v(
+                            IMAGEUTILS_LOG_TAG,
+                            "getEstimatedNativeAllocBytes() uses defaultestimated native allocation"
+                                    + " size.");
                 }
                 estimatedBytePerPixel = 1.0d;
                 break;
@@ -232,13 +255,21 @@ class ImageUtils {
                 return new Size(0, 0);
             default:
                 if (Log.isLoggable(IMAGEUTILS_LOG_TAG, 2)) {
-                    Log.v(IMAGEUTILS_LOG_TAG, "getEffectivePlaneSizeForImage() usesimage's width and height for plane size.");
+                    Log.v(
+                            IMAGEUTILS_LOG_TAG,
+                            "getEffectivePlaneSizeForImage() usesimage's width and height for plane"
+                                    + " size.");
                 }
                 return new Size(image.getWidth(), image.getHeight());
         }
     }
 
-    private static void directByteBufferCopy(ByteBuffer srcBuffer, int srcOffset, ByteBuffer dstBuffer, int dstOffset, int srcByteCount) {
+    private static void directByteBufferCopy(
+            ByteBuffer srcBuffer,
+            int srcOffset,
+            ByteBuffer dstBuffer,
+            int dstOffset,
+            int srcByteCount) {
         Memory.memmove(dstBuffer, dstOffset, srcBuffer, srcOffset, srcByteCount);
     }
 }

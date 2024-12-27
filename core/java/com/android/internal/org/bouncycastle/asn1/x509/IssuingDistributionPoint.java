@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.x509;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Boolean;
 import com.android.internal.org.bouncycastle.asn1.ASN1EncodableVector;
 import com.android.internal.org.bouncycastle.asn1.ASN1Object;
@@ -35,7 +36,13 @@ public class IssuingDistributionPoint extends ASN1Object {
         return null;
     }
 
-    public IssuingDistributionPoint(DistributionPointName distributionPoint, boolean onlyContainsUserCerts, boolean onlyContainsCACerts, ReasonFlags onlySomeReasons, boolean indirectCRL, boolean onlyContainsAttributeCerts) {
+    public IssuingDistributionPoint(
+            DistributionPointName distributionPoint,
+            boolean onlyContainsUserCerts,
+            boolean onlyContainsCACerts,
+            ReasonFlags onlySomeReasons,
+            boolean indirectCRL,
+            boolean onlyContainsAttributeCerts) {
         this.distributionPoint = distributionPoint;
         this.indirectCRL = indirectCRL;
         this.onlyContainsAttributeCerts = onlyContainsAttributeCerts;
@@ -64,7 +71,10 @@ public class IssuingDistributionPoint extends ASN1Object {
         this.seq = new DERSequence(vec);
     }
 
-    public IssuingDistributionPoint(DistributionPointName distributionPoint, boolean indirectCRL, boolean onlyContainsAttributeCerts) {
+    public IssuingDistributionPoint(
+            DistributionPointName distributionPoint,
+            boolean indirectCRL,
+            boolean onlyContainsAttributeCerts) {
         this(distributionPoint, false, false, null, indirectCRL, onlyContainsAttributeCerts);
     }
 
@@ -121,7 +131,8 @@ public class IssuingDistributionPoint extends ASN1Object {
         return this.onlySomeReasons;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.seq;
     }
@@ -135,16 +146,22 @@ public class IssuingDistributionPoint extends ASN1Object {
             appendObject(buf, sep, "distributionPoint", this.distributionPoint.toString());
         }
         if (this.onlyContainsUserCerts) {
-            appendObject(buf, sep, "onlyContainsUserCerts", booleanToString(this.onlyContainsUserCerts));
+            appendObject(
+                    buf, sep, "onlyContainsUserCerts", booleanToString(this.onlyContainsUserCerts));
         }
         if (this.onlyContainsCACerts) {
-            appendObject(buf, sep, "onlyContainsCACerts", booleanToString(this.onlyContainsCACerts));
+            appendObject(
+                    buf, sep, "onlyContainsCACerts", booleanToString(this.onlyContainsCACerts));
         }
         if (this.onlySomeReasons != null) {
             appendObject(buf, sep, "onlySomeReasons", this.onlySomeReasons.toString());
         }
         if (this.onlyContainsAttributeCerts) {
-            appendObject(buf, sep, "onlyContainsAttributeCerts", booleanToString(this.onlyContainsAttributeCerts));
+            appendObject(
+                    buf,
+                    sep,
+                    "onlyContainsAttributeCerts",
+                    booleanToString(this.onlyContainsAttributeCerts));
         }
         if (this.indirectCRL) {
             appendObject(buf, sep, "indirectCRL", booleanToString(this.indirectCRL));

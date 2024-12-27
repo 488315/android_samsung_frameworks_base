@@ -4,25 +4,28 @@ import android.hardware.radio.AccessNetwork$$;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class ImsRegistration implements Parcelable {
-    public static final Parcelable.Creator<ImsRegistration> CREATOR = new Parcelable.Creator<ImsRegistration>() { // from class: android.hardware.radio.ims.ImsRegistration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsRegistration createFromParcel(Parcel _aidl_source) {
-            ImsRegistration _aidl_out = new ImsRegistration();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ImsRegistration> CREATOR =
+            new Parcelable.Creator<
+                    ImsRegistration>() { // from class: android.hardware.radio.ims.ImsRegistration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsRegistration createFromParcel(Parcel _aidl_source) {
+                    ImsRegistration _aidl_out = new ImsRegistration();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsRegistration[] newArray(int _aidl_size) {
-            return new ImsRegistration[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsRegistration[] newArray(int _aidl_size) {
+                    return new ImsRegistration[_aidl_size];
+                }
+            };
     public static final int IMS_MMTEL_CAPABILITY_NONE = 0;
     public static final int IMS_MMTEL_CAPABILITY_SMS = 4;
     public static final int IMS_MMTEL_CAPABILITY_VIDEO = 2;

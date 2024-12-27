@@ -6,7 +6,7 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.PointerIcon;
 import android.view.flags.Flags;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -44,7 +44,12 @@ public class Button extends TextView {
 
     @Override // android.widget.TextView, android.view.View
     public PointerIcon onResolvePointerIcon(MotionEvent event, int pointerIndex) {
-        if (!this.mIsThemeDeviceDefault && !Flags.enableArrowIconOnHoverWhenClickable() && getPointerIcon() == null && isClickable() && isEnabled() && event.isFromSource(8194)) {
+        if (!this.mIsThemeDeviceDefault
+                && !Flags.enableArrowIconOnHoverWhenClickable()
+                && getPointerIcon() == null
+                && isClickable()
+                && isEnabled()
+                && event.isFromSource(8194)) {
             return PointerIcon.getSystemIcon(getContext(), 1002);
         }
         return super.onResolvePointerIcon(event, pointerIndex);

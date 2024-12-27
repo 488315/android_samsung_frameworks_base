@@ -9,14 +9,15 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISLocationBatchingListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.location.ISLocationBatchingListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.location.ISLocationBatchingListener";
 
     void onLocationAvailable(Location[] locationArr, boolean z) throws RemoteException;
 
     public static class Default implements ISLocationBatchingListener {
         @Override // com.samsung.android.location.ISLocationBatchingListener
-        public void onLocationAvailable(Location[] locations, boolean flushCompleted) throws RemoteException {
-        }
+        public void onLocationAvailable(Location[] locations, boolean flushCompleted)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +25,7 @@ public interface ISLocationBatchingListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISLocationBatchingListener {
+    public abstract static class Stub extends Binder implements ISLocationBatchingListener {
         static final int TRANSACTION_onLocationAvailable = 1;
 
         public Stub() {
@@ -62,7 +63,8 @@ public interface ISLocationBatchingListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISLocationBatchingListener.DESCRIPTOR);
             }
@@ -99,7 +101,8 @@ public interface ISLocationBatchingListener extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationBatchingListener
-            public void onLocationAvailable(Location[] locations, boolean flushCompleted) throws RemoteException {
+            public void onLocationAvailable(Location[] locations, boolean flushCompleted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISLocationBatchingListener.DESCRIPTOR);

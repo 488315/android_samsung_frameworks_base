@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jce.provider;
 
 import com.android.internal.org.bouncycastle.jcajce.PKIXCRLStoreSelector;
+
 import java.security.cert.CertStore;
 import java.security.cert.CertStoreException;
 import java.security.cert.X509CRL;
@@ -13,10 +14,11 @@ import java.util.Set;
 
 /* loaded from: classes5.dex */
 abstract class PKIXCRLUtil {
-    PKIXCRLUtil() {
-    }
+    PKIXCRLUtil() {}
 
-    static Set findCRLs(PKIXCRLStoreSelector crlselect, Date validityDate, List certStores, List pkixCrlStores) throws AnnotatedException {
+    static Set findCRLs(
+            PKIXCRLStoreSelector crlselect, Date validityDate, List certStores, List pkixCrlStores)
+            throws AnnotatedException {
         X509Certificate cert;
         HashSet initialSet = new HashSet();
         try {
@@ -26,7 +28,9 @@ abstract class PKIXCRLUtil {
             Iterator it = initialSet.iterator();
             while (it.hasNext()) {
                 X509CRL crl = (X509CRL) it.next();
-                if (crl.getNextUpdate().after(validityDate) && ((cert = crlselect.getCertificateChecking()) == null || crl.getThisUpdate().before(cert.getNotAfter()))) {
+                if (crl.getNextUpdate().after(validityDate)
+                        && ((cert = crlselect.getCertificateChecking()) == null
+                                || crl.getThisUpdate().before(cert.getNotAfter()))) {
                     finalSet.add(crl);
                 }
             }
@@ -36,7 +40,8 @@ abstract class PKIXCRLUtil {
         }
     }
 
-    private static void findCRLs(HashSet crls, PKIXCRLStoreSelector crlSelect, List crlStores) throws AnnotatedException {
+    private static void findCRLs(HashSet crls, PKIXCRLStoreSelector crlSelect, List crlStores)
+            throws AnnotatedException {
         AnnotatedException lastException = null;
         boolean foundValidStore = false;
         for (Object obj : crlStores) {
@@ -45,7 +50,8 @@ abstract class PKIXCRLUtil {
                 crls.addAll(PKIXCRLStoreSelector.getCRLs(crlSelect, store));
                 foundValidStore = true;
             } catch (CertStoreException e) {
-                lastException = new AnnotatedException("Exception searching in X.509 CRL store.", e);
+                lastException =
+                        new AnnotatedException("Exception searching in X.509 CRL store.", e);
             }
         }
         if (!foundValidStore && lastException != null) {

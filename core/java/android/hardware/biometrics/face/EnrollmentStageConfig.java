@@ -3,26 +3,29 @@ package android.hardware.biometrics.face;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Collection;
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public class EnrollmentStageConfig implements Parcelable {
-    public static final Parcelable.Creator<EnrollmentStageConfig> CREATOR = new Parcelable.Creator<EnrollmentStageConfig>() { // from class: android.hardware.biometrics.face.EnrollmentStageConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnrollmentStageConfig createFromParcel(Parcel _aidl_source) {
-            EnrollmentStageConfig _aidl_out = new EnrollmentStageConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<EnrollmentStageConfig> CREATOR =
+            new Parcelable.Creator<EnrollmentStageConfig>() { // from class:
+                // android.hardware.biometrics.face.EnrollmentStageConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnrollmentStageConfig createFromParcel(Parcel _aidl_source) {
+                    EnrollmentStageConfig _aidl_out = new EnrollmentStageConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnrollmentStageConfig[] newArray(int _aidl_size) {
-            return new EnrollmentStageConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnrollmentStageConfig[] newArray(int _aidl_size) {
+                    return new EnrollmentStageConfig[_aidl_size];
+                }
+            };
     public List<Cell> cells;
     public byte stage = 0;
 

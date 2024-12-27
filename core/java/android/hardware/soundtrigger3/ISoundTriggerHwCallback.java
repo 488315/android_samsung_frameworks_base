@@ -10,7 +10,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISoundTriggerHwCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$soundtrigger3$ISoundTriggerHwCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$soundtrigger3$ISoundTriggerHwCallback".replace('$', '.');
     public static final String HASH = "6b24e60ad261e3ff56106efd86ce6aa7ef5621b0";
     public static final int VERSION = 2;
 
@@ -20,22 +21,21 @@ public interface ISoundTriggerHwCallback extends IInterface {
 
     void modelUnloaded(int i) throws RemoteException;
 
-    void phraseRecognitionCallback(int i, PhraseRecognitionEvent phraseRecognitionEvent) throws RemoteException;
+    void phraseRecognitionCallback(int i, PhraseRecognitionEvent phraseRecognitionEvent)
+            throws RemoteException;
 
     void recognitionCallback(int i, RecognitionEvent recognitionEvent) throws RemoteException;
 
     public static class Default implements ISoundTriggerHwCallback {
         @Override // android.hardware.soundtrigger3.ISoundTriggerHwCallback
-        public void modelUnloaded(int model) throws RemoteException {
-        }
+        public void modelUnloaded(int model) throws RemoteException {}
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHwCallback
-        public void phraseRecognitionCallback(int model, PhraseRecognitionEvent event) throws RemoteException {
-        }
+        public void phraseRecognitionCallback(int model, PhraseRecognitionEvent event)
+                throws RemoteException {}
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHwCallback
-        public void recognitionCallback(int model, RecognitionEvent event) throws RemoteException {
-        }
+        public void recognitionCallback(int model, RecognitionEvent event) throws RemoteException {}
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHwCallback
         public int getInterfaceVersion() {
@@ -53,7 +53,7 @@ public interface ISoundTriggerHwCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISoundTriggerHwCallback {
+    public abstract static class Stub extends Binder implements ISoundTriggerHwCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_modelUnloaded = 1;
@@ -82,7 +82,8 @@ public interface ISoundTriggerHwCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -110,14 +111,17 @@ public interface ISoundTriggerHwCallback extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    PhraseRecognitionEvent _arg1 = (PhraseRecognitionEvent) data.readTypedObject(PhraseRecognitionEvent.CREATOR);
+                    PhraseRecognitionEvent _arg1 =
+                            (PhraseRecognitionEvent)
+                                    data.readTypedObject(PhraseRecognitionEvent.CREATOR);
                     data.enforceNoDataAvail();
                     phraseRecognitionCallback(_arg02, _arg1);
                     reply.writeNoException();
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    RecognitionEvent _arg12 = (RecognitionEvent) data.readTypedObject(RecognitionEvent.CREATOR);
+                    RecognitionEvent _arg12 =
+                            (RecognitionEvent) data.readTypedObject(RecognitionEvent.CREATOR);
                     data.enforceNoDataAvail();
                     recognitionCallback(_arg03, _arg12);
                     reply.writeNoException();
@@ -164,7 +168,8 @@ public interface ISoundTriggerHwCallback extends IInterface {
             }
 
             @Override // android.hardware.soundtrigger3.ISoundTriggerHwCallback
-            public void phraseRecognitionCallback(int model, PhraseRecognitionEvent event) throws RemoteException {
+            public void phraseRecognitionCallback(int model, PhraseRecognitionEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -173,7 +178,8 @@ public interface ISoundTriggerHwCallback extends IInterface {
                     _data.writeTypedObject(event, 0);
                     boolean _status = this.mRemote.transact(2, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method phraseRecognitionCallback is unimplemented.");
+                        throw new RemoteException(
+                                "Method phraseRecognitionCallback is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -183,7 +189,8 @@ public interface ISoundTriggerHwCallback extends IInterface {
             }
 
             @Override // android.hardware.soundtrigger3.ISoundTriggerHwCallback
-            public void recognitionCallback(int model, RecognitionEvent event) throws RemoteException {
+            public void recognitionCallback(int model, RecognitionEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

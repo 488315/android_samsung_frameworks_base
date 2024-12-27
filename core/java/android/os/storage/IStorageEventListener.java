@@ -24,32 +24,27 @@ public interface IStorageEventListener extends IInterface {
 
     public static class Default implements IStorageEventListener {
         @Override // android.os.storage.IStorageEventListener
-        public void onUsbMassStorageConnectionChanged(boolean connected) throws RemoteException {
-        }
+        public void onUsbMassStorageConnectionChanged(boolean connected) throws RemoteException {}
 
         @Override // android.os.storage.IStorageEventListener
-        public void onStorageStateChanged(String path, String oldState, String newState) throws RemoteException {
-        }
+        public void onStorageStateChanged(String path, String oldState, String newState)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageEventListener
-        public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) throws RemoteException {
-        }
+        public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageEventListener
-        public void onVolumeRecordChanged(VolumeRecord rec) throws RemoteException {
-        }
+        public void onVolumeRecordChanged(VolumeRecord rec) throws RemoteException {}
 
         @Override // android.os.storage.IStorageEventListener
-        public void onVolumeForgotten(String fsUuid) throws RemoteException {
-        }
+        public void onVolumeForgotten(String fsUuid) throws RemoteException {}
 
         @Override // android.os.storage.IStorageEventListener
-        public void onDiskScanned(DiskInfo disk, int volumeCount) throws RemoteException {
-        }
+        public void onDiskScanned(DiskInfo disk, int volumeCount) throws RemoteException {}
 
         @Override // android.os.storage.IStorageEventListener
-        public void onDiskDestroyed(DiskInfo disk) throws RemoteException {
-        }
+        public void onDiskDestroyed(DiskInfo disk) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -57,7 +52,7 @@ public interface IStorageEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStorageEventListener {
+    public abstract static class Stub extends Binder implements IStorageEventListener {
         public static final String DESCRIPTOR = "android.os.storage.IStorageEventListener";
         static final int TRANSACTION_onDiskDestroyed = 7;
         static final int TRANSACTION_onDiskScanned = 6;
@@ -114,7 +109,8 @@ public interface IStorageEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -185,7 +181,8 @@ public interface IStorageEventListener extends IInterface {
             }
 
             @Override // android.os.storage.IStorageEventListener
-            public void onUsbMassStorageConnectionChanged(boolean connected) throws RemoteException {
+            public void onUsbMassStorageConnectionChanged(boolean connected)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -197,7 +194,8 @@ public interface IStorageEventListener extends IInterface {
             }
 
             @Override // android.os.storage.IStorageEventListener
-            public void onStorageStateChanged(String path, String oldState, String newState) throws RemoteException {
+            public void onStorageStateChanged(String path, String oldState, String newState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -211,7 +209,8 @@ public interface IStorageEventListener extends IInterface {
             }
 
             @Override // android.os.storage.IStorageEventListener
-            public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) throws RemoteException {
+            public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

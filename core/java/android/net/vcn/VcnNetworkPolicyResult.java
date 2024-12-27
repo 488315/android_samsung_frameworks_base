@@ -4,28 +4,36 @@ import android.annotation.SystemApi;
 import android.net.NetworkCapabilities;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class VcnNetworkPolicyResult implements Parcelable {
-    public static final Parcelable.Creator<VcnNetworkPolicyResult> CREATOR = new Parcelable.Creator<VcnNetworkPolicyResult>() { // from class: android.net.vcn.VcnNetworkPolicyResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VcnNetworkPolicyResult createFromParcel(Parcel in) {
-            return new VcnNetworkPolicyResult(in.readBoolean(), (NetworkCapabilities) in.readParcelable(null, NetworkCapabilities.class));
-        }
+    public static final Parcelable.Creator<VcnNetworkPolicyResult> CREATOR =
+            new Parcelable.Creator<
+                    VcnNetworkPolicyResult>() { // from class:
+                                                // android.net.vcn.VcnNetworkPolicyResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VcnNetworkPolicyResult createFromParcel(Parcel in) {
+                    return new VcnNetworkPolicyResult(
+                            in.readBoolean(),
+                            (NetworkCapabilities)
+                                    in.readParcelable(null, NetworkCapabilities.class));
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VcnNetworkPolicyResult[] newArray(int size) {
-            return new VcnNetworkPolicyResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VcnNetworkPolicyResult[] newArray(int size) {
+                    return new VcnNetworkPolicyResult[size];
+                }
+            };
     private final boolean mIsTearDownRequested;
     private final NetworkCapabilities mNetworkCapabilities;
 
-    public VcnNetworkPolicyResult(boolean isTearDownRequested, NetworkCapabilities networkCapabilities) {
+    public VcnNetworkPolicyResult(
+            boolean isTearDownRequested, NetworkCapabilities networkCapabilities) {
         Objects.requireNonNull(networkCapabilities, "networkCapabilities must be non-null");
         this.mIsTearDownRequested = isTearDownRequested;
         this.mNetworkCapabilities = networkCapabilities;
@@ -51,11 +59,16 @@ public final class VcnNetworkPolicyResult implements Parcelable {
             return false;
         }
         VcnNetworkPolicyResult that = (VcnNetworkPolicyResult) o;
-        return this.mIsTearDownRequested == that.mIsTearDownRequested && this.mNetworkCapabilities.equals(that.mNetworkCapabilities);
+        return this.mIsTearDownRequested == that.mIsTearDownRequested
+                && this.mNetworkCapabilities.equals(that.mNetworkCapabilities);
     }
 
     public String toString() {
-        return "VcnNetworkPolicyResult { mIsTeardownRequested = " + this.mIsTearDownRequested + ", mNetworkCapabilities" + this.mNetworkCapabilities + " }";
+        return "VcnNetworkPolicyResult { mIsTeardownRequested = "
+                + this.mIsTearDownRequested
+                + ", mNetworkCapabilities"
+                + this.mNetworkCapabilities
+                + " }";
     }
 
     @Override // android.os.Parcelable

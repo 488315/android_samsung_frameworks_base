@@ -15,8 +15,7 @@ final class ChangeIdStateQuery {
     public int userId;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface QueryType {
-    }
+    @interface QueryType {}
 
     private ChangeIdStateQuery(int type, long changeId, String packageName, int uid, int userId) {
         this.type = type;
@@ -42,14 +41,19 @@ final class ChangeIdStateQuery {
             return false;
         }
         ChangeIdStateQuery that = (ChangeIdStateQuery) other;
-        if (this.type == that.type && this.changeId == that.changeId && Objects.equals(this.packageName, that.packageName) && this.uid == that.uid && this.userId == that.userId) {
+        if (this.type == that.type
+                && this.changeId == that.changeId
+                && Objects.equals(this.packageName, that.packageName)
+                && this.uid == that.uid
+                && this.userId == that.userId) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        int result = (((1 * 31) + this.type) * 31) + ((int) (this.changeId ^ (this.changeId >>> 32)));
+        int result =
+                (((1 * 31) + this.type) * 31) + ((int) (this.changeId ^ (this.changeId >>> 32)));
         if (this.packageName != null) {
             result = (result * 31) + this.packageName.hashCode();
         }

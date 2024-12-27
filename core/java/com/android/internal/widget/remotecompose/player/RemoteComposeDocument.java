@@ -3,6 +3,7 @@ package com.android.internal.widget.remotecompose.player;
 import com.android.internal.widget.remotecompose.core.CoreDocument;
 import com.android.internal.widget.remotecompose.core.RemoteComposeBuffer;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
+
 import java.io.InputStream;
 
 /* loaded from: classes5.dex */
@@ -10,7 +11,9 @@ public class RemoteComposeDocument {
     CoreDocument mDocument = new CoreDocument();
 
     public RemoteComposeDocument(InputStream inputStream) {
-        RemoteComposeBuffer buffer = RemoteComposeBuffer.fromInputStream(inputStream, this.mDocument.getRemoteComposeState());
+        RemoteComposeBuffer buffer =
+                RemoteComposeBuffer.fromInputStream(
+                        inputStream, this.mDocument.getRemoteComposeState());
         this.mDocument.initFromBuffer(buffer);
     }
 

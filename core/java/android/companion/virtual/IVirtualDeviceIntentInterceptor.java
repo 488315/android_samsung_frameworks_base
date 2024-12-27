@@ -9,14 +9,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IVirtualDeviceIntentInterceptor extends IInterface {
-    public static final String DESCRIPTOR = "android.companion.virtual.IVirtualDeviceIntentInterceptor";
+    public static final String DESCRIPTOR =
+            "android.companion.virtual.IVirtualDeviceIntentInterceptor";
 
     void onIntentIntercepted(Intent intent) throws RemoteException;
 
     public static class Default implements IVirtualDeviceIntentInterceptor {
         @Override // android.companion.virtual.IVirtualDeviceIntentInterceptor
-        public void onIntentIntercepted(Intent intent) throws RemoteException {
-        }
+        public void onIntentIntercepted(Intent intent) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IVirtualDeviceIntentInterceptor extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualDeviceIntentInterceptor {
+    public abstract static class Stub extends Binder implements IVirtualDeviceIntentInterceptor {
         static final int TRANSACTION_onIntentIntercepted = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IVirtualDeviceIntentInterceptor extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVirtualDeviceIntentInterceptor.DESCRIPTOR);
             }

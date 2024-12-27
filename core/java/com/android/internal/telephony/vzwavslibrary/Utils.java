@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.pm.SigningInfo;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -52,21 +53,27 @@ public class Utils {
         }
     }
 
-    public static Signature[] getSigningCertificates(Context context, String packageName) throws PackageManager.NameNotFoundException {
+    public static Signature[] getSigningCertificates(Context context, String packageName)
+            throws PackageManager.NameNotFoundException {
         return getSigningCertificatesP(context, packageName);
     }
 
-    private static Signature[] getSigningCertificatesP(Context context, String packageName) throws PackageManager.NameNotFoundException {
+    private static Signature[] getSigningCertificatesP(Context context, String packageName)
+            throws PackageManager.NameNotFoundException {
         PackageInfo pi = context.getPackageManager().getPackageInfo(packageName, 134217728);
         SigningInfo signingInfo = pi == null ? null : pi.signingInfo;
         if (signingInfo == null) {
             return new Signature[0];
         }
-        Signature[] sigs = signingInfo.hasMultipleSigners() ? signingInfo.getApkContentsSigners() : signingInfo.getSigningCertificateHistory();
+        Signature[] sigs =
+                signingInfo.hasMultipleSigners()
+                        ? signingInfo.getApkContentsSigners()
+                        : signingInfo.getSigningCertificateHistory();
         return sigs == null ? new Signature[0] : sigs;
     }
 
-    private static Signature[] legacyGetSigningCertificates(Context context, String packageName) throws PackageManager.NameNotFoundException {
+    private static Signature[] legacyGetSigningCertificates(Context context, String packageName)
+            throws PackageManager.NameNotFoundException {
         PackageInfo pi = context.getPackageManager().getPackageInfo(packageName, 64);
         Signature[] sigs = pi == null ? null : pi.signatures;
         return sigs == null ? new Signature[0] : sigs;

@@ -9,7 +9,9 @@ public interface PowerAllowlistInternal {
         void onAppRemoved(int i);
     }
 
-    void registerTempAllowlistChangeListener(TempAllowlistChangeListener tempAllowlistChangeListener);
+    void registerTempAllowlistChangeListener(
+            TempAllowlistChangeListener tempAllowlistChangeListener);
 
-    void unregisterTempAllowlistChangeListener(TempAllowlistChangeListener tempAllowlistChangeListener);
+    void unregisterTempAllowlistChangeListener(
+            TempAllowlistChangeListener tempAllowlistChangeListener);
 }

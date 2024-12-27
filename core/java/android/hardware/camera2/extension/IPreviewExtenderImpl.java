@@ -1,18 +1,18 @@
 package android.hardware.camera2.extension;
 
-import android.hardware.camera2.extension.IPreviewImageProcessorImpl;
-import android.hardware.camera2.extension.IRequestUpdateProcessorImpl;
 import android.hardware.camera2.impl.CameraMetadataNative;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IPreviewExtenderImpl extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.camera2.extension.IPreviewExtenderImpl";
+    public static final String DESCRIPTOR =
+            "android.hardware.camera2.extension.IPreviewExtenderImpl";
     public static final int PROCESSOR_TYPE_IMAGE_PROCESSOR = 1;
     public static final int PROCESSOR_TYPE_NONE = 2;
     public static final int PROCESSOR_TYPE_REQUEST_UPDATE_ONLY = 0;
@@ -31,7 +31,8 @@ public interface IPreviewExtenderImpl extends IInterface {
 
     void init(String str, CameraMetadataNative cameraMetadataNative) throws RemoteException;
 
-    boolean isExtensionAvailable(String str, CameraMetadataNative cameraMetadataNative) throws RemoteException;
+    boolean isExtensionAvailable(String str, CameraMetadataNative cameraMetadataNative)
+            throws RemoteException;
 
     void onDeInit(IBinder iBinder) throws RemoteException;
 
@@ -39,18 +40,19 @@ public interface IPreviewExtenderImpl extends IInterface {
 
     CaptureStageImpl onEnableSession() throws RemoteException;
 
-    void onInit(IBinder iBinder, String str, CameraMetadataNative cameraMetadataNative) throws RemoteException;
+    void onInit(IBinder iBinder, String str, CameraMetadataNative cameraMetadataNative)
+            throws RemoteException;
 
     CaptureStageImpl onPresetSession() throws RemoteException;
 
     public static class Default implements IPreviewExtenderImpl {
         @Override // android.hardware.camera2.extension.IPreviewExtenderImpl
-        public void onInit(IBinder token, String cameraId, CameraMetadataNative cameraCharacteristics) throws RemoteException {
-        }
+        public void onInit(
+                IBinder token, String cameraId, CameraMetadataNative cameraCharacteristics)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IPreviewExtenderImpl
-        public void onDeInit(IBinder token) throws RemoteException {
-        }
+        public void onDeInit(IBinder token) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IPreviewExtenderImpl
         public CaptureStageImpl onPresetSession() throws RemoteException {
@@ -68,11 +70,11 @@ public interface IPreviewExtenderImpl extends IInterface {
         }
 
         @Override // android.hardware.camera2.extension.IPreviewExtenderImpl
-        public void init(String cameraId, CameraMetadataNative chars) throws RemoteException {
-        }
+        public void init(String cameraId, CameraMetadataNative chars) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IPreviewExtenderImpl
-        public boolean isExtensionAvailable(String cameraId, CameraMetadataNative chars) throws RemoteException {
+        public boolean isExtensionAvailable(String cameraId, CameraMetadataNative chars)
+                throws RemoteException {
             return false;
         }
 
@@ -112,7 +114,7 @@ public interface IPreviewExtenderImpl extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPreviewExtenderImpl {
+    public abstract static class Stub extends Binder implements IPreviewExtenderImpl {
         static final int TRANSACTION_getCaptureStage = 8;
         static final int TRANSACTION_getPreviewImageProcessor = 11;
         static final int TRANSACTION_getProcessorType = 10;
@@ -186,7 +188,8 @@ public interface IPreviewExtenderImpl extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPreviewExtenderImpl.DESCRIPTOR);
             }
@@ -198,7 +201,9 @@ public interface IPreviewExtenderImpl extends IInterface {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
                     String _arg1 = data.readString();
-                    CameraMetadataNative _arg2 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg2 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     data.enforceNoDataAvail();
                     onInit(_arg0, _arg1, _arg2);
                     reply.writeNoException();
@@ -226,14 +231,18 @@ public interface IPreviewExtenderImpl extends IInterface {
                     return true;
                 case 6:
                     String _arg03 = data.readString();
-                    CameraMetadataNative _arg12 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg12 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     data.enforceNoDataAvail();
                     init(_arg03, _arg12);
                     reply.writeNoException();
                     return true;
                 case 7:
                     String _arg04 = data.readString();
-                    CameraMetadataNative _arg13 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg13 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result4 = isExtensionAvailable(_arg04, _arg13);
                     reply.writeNoException();
@@ -291,7 +300,9 @@ public interface IPreviewExtenderImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IPreviewExtenderImpl
-            public void onInit(IBinder token, String cameraId, CameraMetadataNative cameraCharacteristics) throws RemoteException {
+            public void onInit(
+                    IBinder token, String cameraId, CameraMetadataNative cameraCharacteristics)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -330,7 +341,8 @@ public interface IPreviewExtenderImpl extends IInterface {
                     _data.writeInterfaceToken(IPreviewExtenderImpl.DESCRIPTOR);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    CaptureStageImpl _result = (CaptureStageImpl) _reply.readTypedObject(CaptureStageImpl.CREATOR);
+                    CaptureStageImpl _result =
+                            (CaptureStageImpl) _reply.readTypedObject(CaptureStageImpl.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -346,7 +358,8 @@ public interface IPreviewExtenderImpl extends IInterface {
                     _data.writeInterfaceToken(IPreviewExtenderImpl.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    CaptureStageImpl _result = (CaptureStageImpl) _reply.readTypedObject(CaptureStageImpl.CREATOR);
+                    CaptureStageImpl _result =
+                            (CaptureStageImpl) _reply.readTypedObject(CaptureStageImpl.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -362,7 +375,8 @@ public interface IPreviewExtenderImpl extends IInterface {
                     _data.writeInterfaceToken(IPreviewExtenderImpl.DESCRIPTOR);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    CaptureStageImpl _result = (CaptureStageImpl) _reply.readTypedObject(CaptureStageImpl.CREATOR);
+                    CaptureStageImpl _result =
+                            (CaptureStageImpl) _reply.readTypedObject(CaptureStageImpl.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -387,7 +401,8 @@ public interface IPreviewExtenderImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IPreviewExtenderImpl
-            public boolean isExtensionAvailable(String cameraId, CameraMetadataNative chars) throws RemoteException {
+            public boolean isExtensionAvailable(String cameraId, CameraMetadataNative chars)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -412,7 +427,8 @@ public interface IPreviewExtenderImpl extends IInterface {
                     _data.writeInterfaceToken(IPreviewExtenderImpl.DESCRIPTOR);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    CaptureStageImpl _result = (CaptureStageImpl) _reply.readTypedObject(CaptureStageImpl.CREATOR);
+                    CaptureStageImpl _result =
+                            (CaptureStageImpl) _reply.readTypedObject(CaptureStageImpl.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -460,7 +476,8 @@ public interface IPreviewExtenderImpl extends IInterface {
                     _data.writeInterfaceToken(IPreviewExtenderImpl.DESCRIPTOR);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    IPreviewImageProcessorImpl _result = IPreviewImageProcessorImpl.Stub.asInterface(_reply.readStrongBinder());
+                    IPreviewImageProcessorImpl _result =
+                            IPreviewImageProcessorImpl.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -476,7 +493,8 @@ public interface IPreviewExtenderImpl extends IInterface {
                     _data.writeInterfaceToken(IPreviewExtenderImpl.DESCRIPTOR);
                     this.mRemote.transact(12, _data, _reply, 0);
                     _reply.readException();
-                    IRequestUpdateProcessorImpl _result = IRequestUpdateProcessorImpl.Stub.asInterface(_reply.readStrongBinder());
+                    IRequestUpdateProcessorImpl _result =
+                            IRequestUpdateProcessorImpl.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

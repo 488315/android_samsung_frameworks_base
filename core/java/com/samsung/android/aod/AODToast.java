@@ -4,24 +4,26 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes5.dex */
 public class AODToast implements Parcelable {
-    public static final Parcelable.Creator<AODToast> CREATOR = new Parcelable.Creator<AODToast>() { // from class: com.samsung.android.aod.AODToast.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AODToast createFromParcel(Parcel in) {
-            return new AODToast(in);
-        }
+    public static final Parcelable.Creator<AODToast> CREATOR =
+            new Parcelable.Creator<AODToast>() { // from class: com.samsung.android.aod.AODToast.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AODToast createFromParcel(Parcel in) {
+                    return new AODToast(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AODToast[] newArray(int size) {
-            return new AODToast[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AODToast[] newArray(int size) {
+                    return new AODToast[size];
+                }
+            };
     public static final int LENGTH_LONG = 1;
     public static final int LENGTH_SHORT = 0;
     private int mDuration;
@@ -35,8 +37,7 @@ public class AODToast implements Parcelable {
     private int mY;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Duration {
-    }
+    public @interface Duration {}
 
     private AODToast(Builder builder) {
         this.mToken = new Binder();
@@ -99,7 +100,23 @@ public class AODToast implements Parcelable {
     }
 
     public String toString() {
-        return "[AODToast: text:(" + this.mText + ") duration:(" + this.mDuration + ") durationMillis:(" + this.mDurationMillis + ") gravity:(" + this.mGravity + ") xOffset:(" + this.mX + ") yOffset:(" + this.mY + ") hMargin:(" + this.mHorizontalMargin + ") vMargin:(" + this.mVerticalMargin + ")]";
+        return "[AODToast: text:("
+                + this.mText
+                + ") duration:("
+                + this.mDuration
+                + ") durationMillis:("
+                + this.mDurationMillis
+                + ") gravity:("
+                + this.mGravity
+                + ") xOffset:("
+                + this.mX
+                + ") yOffset:("
+                + this.mY
+                + ") hMargin:("
+                + this.mHorizontalMargin
+                + ") vMargin:("
+                + this.mVerticalMargin
+                + ")]";
     }
 
     @Override // android.os.Parcelable

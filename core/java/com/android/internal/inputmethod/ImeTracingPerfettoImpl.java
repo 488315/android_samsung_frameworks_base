@@ -11,7 +11,7 @@ import android.tracing.perfetto.TraceFunction;
 import android.tracing.perfetto.TracingContext;
 import android.util.proto.ProtoOutputStream;
 import android.view.inputmethod.InputMethodManager;
-import com.android.internal.inputmethod.ImeTracing;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -28,27 +28,39 @@ final class ImeTracingPerfettoImpl extends ImeTracing {
     ImeTracingPerfettoImpl() {
         final AtomicInteger atomicInteger = this.mTracingSessionsCount;
         Objects.requireNonNull(atomicInteger);
-        Runnable runnable = new Runnable() { // from class: com.android.internal.inputmethod.ImeTracingPerfettoImpl$$ExternalSyntheticLambda3
-            @Override // java.lang.Runnable
-            public final void run() {
-                atomicInteger.incrementAndGet();
-            }
-        };
+        Runnable runnable =
+                new Runnable() { // from class:
+                                 // com.android.internal.inputmethod.ImeTracingPerfettoImpl$$ExternalSyntheticLambda3
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        atomicInteger.incrementAndGet();
+                    }
+                };
         final AtomicInteger atomicInteger2 = this.mTracingSessionsCount;
         Objects.requireNonNull(atomicInteger2);
-        this.mDataSource = new InputMethodDataSource(runnable, new Runnable() { // from class: com.android.internal.inputmethod.ImeTracingPerfettoImpl$$ExternalSyntheticLambda4
-            @Override // java.lang.Runnable
-            public final void run() {
-                atomicInteger2.decrementAndGet();
-            }
-        });
+        this.mDataSource =
+                new InputMethodDataSource(
+                        runnable,
+                        new Runnable() { // from class:
+                                         // com.android.internal.inputmethod.ImeTracingPerfettoImpl$$ExternalSyntheticLambda4
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                atomicInteger2.decrementAndGet();
+                            }
+                        });
         Producer.init(InitArguments.DEFAULTS);
-        DataSourceParams params = new DataSourceParams.Builder().setBufferExhaustedPolicy(1).setNoFlush(true).setWillNotifyOnStop(false).build();
+        DataSourceParams params =
+                new DataSourceParams.Builder()
+                        .setBufferExhaustedPolicy(1)
+                        .setNoFlush(true)
+                        .setWillNotifyOnStop(false)
+                        .build();
         this.mDataSource.register(params);
     }
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void triggerClientDump(final String where, final InputMethodManager immInstance, final byte[] icProto) {
+    public void triggerClientDump(
+            final String where, final InputMethodManager immInstance, final byte[] icProto) {
         if (!isEnabled() || !isAvailable()) {
             return;
         }
@@ -57,19 +69,23 @@ final class ImeTracingPerfettoImpl extends ImeTracing {
         }
         try {
             Trace.beginSection("inputmethod_client_dump");
-            this.mDataSource.trace(new TraceFunction() { // from class: com.android.internal.inputmethod.ImeTracingPerfettoImpl$$ExternalSyntheticLambda1
-                @Override // android.tracing.perfetto.TraceFunction
-                public final void trace(TracingContext tracingContext) {
-                    ImeTracingPerfettoImpl.lambda$triggerClientDump$0(where, immInstance, icProto, tracingContext);
-                }
-            });
+            this.mDataSource.trace(
+                    new TraceFunction() { // from class:
+                                          // com.android.internal.inputmethod.ImeTracingPerfettoImpl$$ExternalSyntheticLambda1
+                        @Override // android.tracing.perfetto.TraceFunction
+                        public final void trace(TracingContext tracingContext) {
+                            ImeTracingPerfettoImpl.lambda$triggerClientDump$0(
+                                    where, immInstance, icProto, tracingContext);
+                        }
+                    });
         } finally {
             this.mIsClientDumpInProgress.set(false);
             Trace.endSection();
         }
     }
 
-    static /* synthetic */ void lambda$triggerClientDump$0(String where, InputMethodManager immInstance, byte[] icProto, TracingContext ctx) {
+    static /* synthetic */ void lambda$triggerClientDump$0(
+            String where, InputMethodManager immInstance, byte[] icProto, TracingContext ctx) {
         ProtoOutputStream os = ctx.newTracePacket();
         os.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
         long tokenWinscopeExtensions = os.start(1146756268144L);
@@ -83,7 +99,8 @@ final class ImeTracingPerfettoImpl extends ImeTracing {
     }
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void triggerServiceDump(final String where, final ImeTracing.ServiceDumper dumper, final byte[] icProto) {
+    public void triggerServiceDump(
+            final String where, final ImeTracing.ServiceDumper dumper, final byte[] icProto) {
         if (!isEnabled() || !isAvailable()) {
             return;
         }
@@ -92,19 +109,23 @@ final class ImeTracingPerfettoImpl extends ImeTracing {
         }
         try {
             Trace.beginSection("inputmethod_service_dump");
-            this.mDataSource.trace(new TraceFunction() { // from class: com.android.internal.inputmethod.ImeTracingPerfettoImpl$$ExternalSyntheticLambda0
-                @Override // android.tracing.perfetto.TraceFunction
-                public final void trace(TracingContext tracingContext) {
-                    ImeTracingPerfettoImpl.lambda$triggerServiceDump$1(where, dumper, icProto, tracingContext);
-                }
-            });
+            this.mDataSource.trace(
+                    new TraceFunction() { // from class:
+                                          // com.android.internal.inputmethod.ImeTracingPerfettoImpl$$ExternalSyntheticLambda0
+                        @Override // android.tracing.perfetto.TraceFunction
+                        public final void trace(TracingContext tracingContext) {
+                            ImeTracingPerfettoImpl.lambda$triggerServiceDump$1(
+                                    where, dumper, icProto, tracingContext);
+                        }
+                    });
         } finally {
             this.mIsServiceDumpInProgress.set(false);
             Trace.endSection();
         }
     }
 
-    static /* synthetic */ void lambda$triggerServiceDump$1(String where, ImeTracing.ServiceDumper dumper, byte[] icProto, TracingContext ctx) {
+    static /* synthetic */ void lambda$triggerServiceDump$1(
+            String where, ImeTracing.ServiceDumper dumper, byte[] icProto, TracingContext ctx) {
         ProtoOutputStream os = ctx.newTracePacket();
         os.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
         long tokenWinscopeExtensions = os.start(1146756268144L);
@@ -116,7 +137,8 @@ final class ImeTracingPerfettoImpl extends ImeTracing {
     }
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void triggerManagerServiceDump(final String where, final ImeTracing.ServiceDumper dumper) {
+    public void triggerManagerServiceDump(
+            final String where, final ImeTracing.ServiceDumper dumper) {
         if (!isEnabled() || !isAvailable()) {
             return;
         }
@@ -125,19 +147,23 @@ final class ImeTracingPerfettoImpl extends ImeTracing {
         }
         try {
             Trace.beginSection("inputmethod_manager_service_dump");
-            this.mDataSource.trace(new TraceFunction() { // from class: com.android.internal.inputmethod.ImeTracingPerfettoImpl$$ExternalSyntheticLambda2
-                @Override // android.tracing.perfetto.TraceFunction
-                public final void trace(TracingContext tracingContext) {
-                    ImeTracingPerfettoImpl.lambda$triggerManagerServiceDump$2(where, dumper, tracingContext);
-                }
-            });
+            this.mDataSource.trace(
+                    new TraceFunction() { // from class:
+                                          // com.android.internal.inputmethod.ImeTracingPerfettoImpl$$ExternalSyntheticLambda2
+                        @Override // android.tracing.perfetto.TraceFunction
+                        public final void trace(TracingContext tracingContext) {
+                            ImeTracingPerfettoImpl.lambda$triggerManagerServiceDump$2(
+                                    where, dumper, tracingContext);
+                        }
+                    });
         } finally {
             this.mIsManagerServiceDumpInProgress.set(false);
             Trace.endSection();
         }
     }
 
-    static /* synthetic */ void lambda$triggerManagerServiceDump$2(String where, ImeTracing.ServiceDumper dumper, TracingContext ctx) {
+    static /* synthetic */ void lambda$triggerManagerServiceDump$2(
+            String where, ImeTracing.ServiceDumper dumper, TracingContext ctx) {
         ProtoOutputStream os = ctx.newTracePacket();
         os.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
         long tokenWinscopeExtensions = os.start(1146756268144L);
@@ -154,14 +180,11 @@ final class ImeTracingPerfettoImpl extends ImeTracing {
     }
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void startTrace(PrintWriter pw) {
-    }
+    public void startTrace(PrintWriter pw) {}
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void stopTrace(PrintWriter pw) {
-    }
+    public void stopTrace(PrintWriter pw) {}
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void addToBuffer(ProtoOutputStream proto, int source) {
-    }
+    public void addToBuffer(ProtoOutputStream proto, int source) {}
 }

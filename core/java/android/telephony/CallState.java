@@ -3,6 +3,7 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
@@ -13,17 +14,18 @@ public final class CallState implements Parcelable {
     public static final int CALL_CLASSIFICATION_MAX = 3;
     public static final int CALL_CLASSIFICATION_RINGING = 0;
     public static final int CALL_CLASSIFICATION_UNKNOWN = -1;
-    public static final Parcelable.Creator<CallState> CREATOR = new Parcelable.Creator() { // from class: android.telephony.CallState.1
-        @Override // android.os.Parcelable.Creator
-        public CallState createFromParcel(Parcel in) {
-            return new CallState(in);
-        }
+    public static final Parcelable.Creator<CallState> CREATOR =
+            new Parcelable.Creator() { // from class: android.telephony.CallState.1
+                @Override // android.os.Parcelable.Creator
+                public CallState createFromParcel(Parcel in) {
+                    return new CallState(in);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public CallState[] newArray(int size) {
-            return new CallState[size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public CallState[] newArray(int size) {
+                    return new CallState[size];
+                }
+            };
     private final int mCallClassification;
     private final CallQuality mCallQuality;
     private String mImsCallId;
@@ -32,7 +34,14 @@ public final class CallState implements Parcelable {
     private final int mNetworkType;
     private final int mPreciseCallState;
 
-    private CallState(int callState, int networkType, CallQuality callQuality, int callClassification, String imsCallId, int imsCallServiceType, int imsCallType) {
+    private CallState(
+            int callState,
+            int networkType,
+            CallQuality callQuality,
+            int callClassification,
+            String imsCallId,
+            int imsCallServiceType,
+            int imsCallType) {
         this.mPreciseCallState = callState;
         this.mNetworkType = networkType;
         this.mCallQuality = callQuality;
@@ -43,13 +52,28 @@ public final class CallState implements Parcelable {
     }
 
     public String toString() {
-        return "mPreciseCallState=" + this.mPreciseCallState + " mNetworkType=" + this.mNetworkType + " mCallQuality=" + this.mCallQuality + " mCallClassification" + this.mCallClassification + " mImsCallId=" + this.mImsCallId + " mImsCallServiceType=" + this.mImsCallServiceType + " mImsCallType=" + this.mImsCallType;
+        return "mPreciseCallState="
+                + this.mPreciseCallState
+                + " mNetworkType="
+                + this.mNetworkType
+                + " mCallQuality="
+                + this.mCallQuality
+                + " mCallClassification"
+                + this.mCallClassification
+                + " mImsCallId="
+                + this.mImsCallId
+                + " mImsCallServiceType="
+                + this.mImsCallServiceType
+                + " mImsCallType="
+                + this.mImsCallType;
     }
 
     private CallState(Parcel in) {
         this.mPreciseCallState = in.readInt();
         this.mNetworkType = in.readInt();
-        this.mCallQuality = (CallQuality) in.readParcelable(CallQuality.class.getClassLoader(), CallQuality.class);
+        this.mCallQuality =
+                (CallQuality)
+                        in.readParcelable(CallQuality.class.getClassLoader(), CallQuality.class);
         this.mCallClassification = in.readInt();
         this.mImsCallId = in.readString();
         this.mImsCallServiceType = in.readInt();
@@ -85,7 +109,14 @@ public final class CallState implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mPreciseCallState), Integer.valueOf(this.mNetworkType), this.mCallQuality, Integer.valueOf(this.mCallClassification), this.mImsCallId, Integer.valueOf(this.mImsCallServiceType), Integer.valueOf(this.mImsCallType));
+        return Objects.hash(
+                Integer.valueOf(this.mPreciseCallState),
+                Integer.valueOf(this.mNetworkType),
+                this.mCallQuality,
+                Integer.valueOf(this.mCallClassification),
+                this.mImsCallId,
+                Integer.valueOf(this.mImsCallServiceType),
+                Integer.valueOf(this.mImsCallType));
     }
 
     public boolean equals(Object o) {
@@ -96,7 +127,13 @@ public final class CallState implements Parcelable {
             return true;
         }
         CallState s = (CallState) o;
-        if (this.mPreciseCallState != s.mPreciseCallState || this.mNetworkType != s.mNetworkType || !Objects.equals(this.mCallQuality, s.mCallQuality) || this.mCallClassification != s.mCallClassification || !Objects.equals(this.mImsCallId, s.mImsCallId) || this.mImsCallType != s.mImsCallType || this.mImsCallServiceType != s.mImsCallServiceType) {
+        if (this.mPreciseCallState != s.mPreciseCallState
+                || this.mNetworkType != s.mNetworkType
+                || !Objects.equals(this.mCallQuality, s.mCallQuality)
+                || this.mCallClassification != s.mCallClassification
+                || !Objects.equals(this.mImsCallId, s.mImsCallId)
+                || this.mImsCallType != s.mImsCallType
+                || this.mImsCallServiceType != s.mImsCallServiceType) {
             return false;
         }
         return true;
@@ -162,7 +199,14 @@ public final class CallState implements Parcelable {
         }
 
         public CallState build() {
-            return new CallState(this.mPreciseCallState, this.mNetworkType, this.mCallQuality, this.mCallClassification, this.mImsCallId, this.mImsCallServiceType, this.mImsCallType);
+            return new CallState(
+                    this.mPreciseCallState,
+                    this.mNetworkType,
+                    this.mCallQuality,
+                    this.mCallClassification,
+                    this.mImsCallId,
+                    this.mImsCallServiceType,
+                    this.mImsCallType);
         }
     }
 }

@@ -10,10 +10,8 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewDebug;
 import android.widget.TextView;
+
 import com.android.internal.R;
-import com.android.internal.view.menu.IconMenuView;
-import com.android.internal.view.menu.MenuBuilder;
-import com.android.internal.view.menu.MenuView;
 
 /* loaded from: classes5.dex */
 public final class IconMenuItemView extends TextView implements MenuView.ItemView {
@@ -31,14 +29,17 @@ public final class IconMenuItemView extends TextView implements MenuView.ItemVie
     private int mTextAppearance;
     private Context mTextAppearanceContext;
 
-    public IconMenuItemView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public IconMenuItemView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mPositionIconAvailable = new Rect();
         this.mPositionIconOutput = new Rect();
         if (sPrependShortcutLabel == null) {
             sPrependShortcutLabel = getResources().getString(R.string.prepend_shortcut_label);
         }
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MenuView, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.MenuView, defStyleAttr, defStyleRes);
         this.mDisabledAlpha = a.getFloat(6, 0.8f);
         this.mTextAppearance = a.getResourceId(1, -1);
         this.mTextAppearanceContext = context;
@@ -182,7 +183,14 @@ public final class IconMenuItemView extends TextView implements MenuView.ItemVie
         if (lp == null) {
             lp = new IconMenuView.LayoutParams(-1, -1);
         }
-        lp.desiredWidth = (int) Layout.getDesiredWidth(getText(), 0, getText().length(), getPaint(), getTextDirectionHeuristic());
+        lp.desiredWidth =
+                (int)
+                        Layout.getDesiredWidth(
+                                getText(),
+                                0,
+                                getText().length(),
+                                getPaint(),
+                                getTextDirectionHeuristic());
         return lp;
     }
 
@@ -194,17 +202,21 @@ public final class IconMenuItemView extends TextView implements MenuView.ItemVie
         getLineBounds(0, tmpRect);
         this.mPositionIconAvailable.set(0, 0, getWidth(), tmpRect.top);
         int layoutDirection = getLayoutDirection();
-        Gravity.apply(8388627, this.mIcon.getIntrinsicWidth(), this.mIcon.getIntrinsicHeight(), this.mPositionIconAvailable, this.mPositionIconOutput, layoutDirection);
+        Gravity.apply(
+                8388627,
+                this.mIcon.getIntrinsicWidth(),
+                this.mIcon.getIntrinsicHeight(),
+                this.mPositionIconAvailable,
+                this.mPositionIconOutput,
+                layoutDirection);
         this.mIcon.setBounds(this.mPositionIconOutput);
     }
 
     @Override // com.android.internal.view.menu.MenuView.ItemView
-    public void setCheckable(boolean checkable) {
-    }
+    public void setCheckable(boolean checkable) {}
 
     @Override // com.android.internal.view.menu.MenuView.ItemView
-    public void setChecked(boolean checked) {
-    }
+    public void setChecked(boolean checked) {}
 
     @Override // com.android.internal.view.menu.MenuView.ItemView
     public void setShortcut(boolean showShortcut, char shortcutKey) {

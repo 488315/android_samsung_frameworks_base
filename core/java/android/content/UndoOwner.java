@@ -31,6 +31,20 @@ public class UndoOwner {
     }
 
     public String toString() {
-        return "UndoOwner:[mTag=" + this.mTag + " mManager=" + this.mManager + " mData=" + this.mData + " mData=" + this.mData + " mOpCount=" + this.mOpCount + " mStateSeq=" + this.mStateSeq + " mSavedIdx=" + this.mSavedIdx + NavigationBarInflaterView.SIZE_MOD_END;
+        return "UndoOwner:[mTag="
+                + this.mTag
+                + " mManager="
+                + this.mManager
+                + " mData="
+                + this.mData
+                + " mData="
+                + this.mData
+                + " mOpCount="
+                + this.mOpCount
+                + " mStateSeq="
+                + this.mStateSeq
+                + " mSavedIdx="
+                + this.mSavedIdx
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

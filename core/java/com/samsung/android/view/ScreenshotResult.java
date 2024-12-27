@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class ScreenshotResult implements Parcelable {
-    public static final Parcelable.Creator<ScreenshotResult> CREATOR = new Parcelable.Creator<ScreenshotResult>() { // from class: com.samsung.android.view.ScreenshotResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ScreenshotResult createFromParcel(Parcel in) {
-            return new ScreenshotResult(in);
-        }
+    public static final Parcelable.Creator<ScreenshotResult> CREATOR =
+            new Parcelable.Creator<
+                    ScreenshotResult>() { // from class: com.samsung.android.view.ScreenshotResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ScreenshotResult createFromParcel(Parcel in) {
+                    return new ScreenshotResult(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ScreenshotResult[] newArray(int size) {
-            return new ScreenshotResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ScreenshotResult[] newArray(int size) {
+                    return new ScreenshotResult[size];
+                }
+            };
     public static final int FAIL_REASON_EMPTY_BITMAP = 8;
     public static final int FAIL_REASON_INVALID_DEFAULT_TASK_DISPLAY_AREA = 4;
     public static final int FAIL_REASON_INVALID_DISPLAY = 1;
@@ -30,7 +32,8 @@ public class ScreenshotResult implements Parcelable {
     private String mSecuredWindowName;
     private String mTargetWindowName;
 
-    private ScreenshotResult(Bitmap bitmap, int failedReason, String targetWindowName, String securedWindowName) {
+    private ScreenshotResult(
+            Bitmap bitmap, int failedReason, String targetWindowName, String securedWindowName) {
         this.mCapturedBitmap = bitmap;
         this.mFailedReason = failedReason;
         this.mTargetWindowName = targetWindowName;
@@ -71,7 +74,11 @@ public class ScreenshotResult implements Parcelable {
         private String mTargetWindowName;
 
         public ScreenshotResult build() {
-            return new ScreenshotResult(this.mCapturedBitmap, this.mFailedReason, this.mTargetWindowName, this.mSecuredWindowName);
+            return new ScreenshotResult(
+                    this.mCapturedBitmap,
+                    this.mFailedReason,
+                    this.mTargetWindowName,
+                    this.mSecuredWindowName);
         }
 
         public Builder setCapturedBitmap(Bitmap bitmap) {

@@ -12,8 +12,7 @@ public interface IDownloadSubscriptionCallback extends IInterface {
 
     public static class Default implements IDownloadSubscriptionCallback {
         @Override // android.service.euicc.IDownloadSubscriptionCallback
-        public void onComplete(DownloadSubscriptionResult result) throws RemoteException {
-        }
+        public void onComplete(DownloadSubscriptionResult result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +20,9 @@ public interface IDownloadSubscriptionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDownloadSubscriptionCallback {
-        public static final String DESCRIPTOR = "android.service.euicc.IDownloadSubscriptionCallback";
+    public abstract static class Stub extends Binder implements IDownloadSubscriptionCallback {
+        public static final String DESCRIPTOR =
+                "android.service.euicc.IDownloadSubscriptionCallback";
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -60,7 +60,8 @@ public interface IDownloadSubscriptionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +71,9 @@ public interface IDownloadSubscriptionCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    DownloadSubscriptionResult _arg0 = (DownloadSubscriptionResult) data.readTypedObject(DownloadSubscriptionResult.CREATOR);
+                    DownloadSubscriptionResult _arg0 =
+                            (DownloadSubscriptionResult)
+                                    data.readTypedObject(DownloadSubscriptionResult.CREATOR);
                     data.enforceNoDataAvail();
                     onComplete(_arg0);
                     return true;

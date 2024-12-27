@@ -6,7 +6,9 @@ import android.os.BatteryUsageStats;
 import android.os.BatteryUsageStatsQuery;
 import android.os.UidBatteryConsumer;
 import android.util.SparseArray;
+
 import com.android.internal.os.PowerProfile;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -35,18 +37,27 @@ public final class BluetoothPowerCalculator extends PowerCalculator {
         this.mRxMa = averagePower2;
         double averagePower3 = powerProfile.getAveragePower("bluetooth.controller.tx");
         this.mTxMa = averagePower3;
-        this.mHasBluetoothPowerController = (averagePower == 0.0d || averagePower2 == 0.0d || averagePower3 == 0.0d) ? false : true;
+        this.mHasBluetoothPowerController =
+                (averagePower == 0.0d || averagePower2 == 0.0d || averagePower3 == 0.0d)
+                        ? false
+                        : true;
     }
 
     @Override // com.android.server.power.stats.PowerCalculator
-    public final void calculate(BatteryUsageStats.Builder builder, BatteryStats batteryStats, long j, long j2, BatteryUsageStatsQuery batteryUsageStatsQuery) {
+    public final void calculate(
+            BatteryUsageStats.Builder builder,
+            BatteryStats batteryStats,
+            long j,
+            long j2,
+            BatteryUsageStatsQuery batteryUsageStatsQuery) {
         if (batteryStats.hasBluetoothActivityReporting()) {
             BatteryConsumer.Key[] keyArr = UNINITIALIZED_KEYS;
             PowerAndDuration powerAndDuration = new PowerAndDuration();
             SparseArray uidBatteryConsumerBuilders = builder.getUidBatteryConsumerBuilders();
             int size = uidBatteryConsumerBuilders.size() - 1;
             while (size >= 0) {
-                UidBatteryConsumer.Builder builder2 = (UidBatteryConsumer.Builder) uidBatteryConsumerBuilders.valueAt(size);
+                UidBatteryConsumer.Builder builder2 =
+                        (UidBatteryConsumer.Builder) uidBatteryConsumerBuilders.valueAt(size);
                 if (keyArr == UNINITIALIZED_KEYS) {
                     if (batteryUsageStatsQuery.isProcessStateDataNeeded()) {
                         keyArr = builder2.getKeys(2);
@@ -56,23 +67,35 @@ public final class BluetoothPowerCalculator extends PowerCalculator {
                         keyArr = null;
                     }
                 }
-                long bluetoothEnergyConsumptionUC = builder2.getBatteryStatsUid().getBluetoothEnergyConsumptionUC();
-                int powerModel = PowerCalculator.getPowerModel(bluetoothEnergyConsumptionUC, batteryUsageStatsQuery);
+                long bluetoothEnergyConsumptionUC =
+                        builder2.getBatteryStatsUid().getBluetoothEnergyConsumptionUC();
+                int powerModel =
+                        PowerCalculator.getPowerModel(
+                                bluetoothEnergyConsumptionUC, batteryUsageStatsQuery);
                 BatteryConsumer.Key[] keyArr2 = keyArr;
-                calculatePowerAndDuration(builder2.getBatteryStatsUid(), powerModel, bluetoothEnergyConsumptionUC, builder2.getBatteryStatsUid().getBluetoothControllerActivity(), batteryUsageStatsQuery.shouldForceUsePowerProfileModel(), powerAndDuration);
-                builder2.setUsageDurationMillis(2, powerAndDuration.durationMs).setConsumedPower(2, powerAndDuration.powerMah, powerModel);
+                calculatePowerAndDuration(
+                        builder2.getBatteryStatsUid(),
+                        powerModel,
+                        bluetoothEnergyConsumptionUC,
+                        builder2.getBatteryStatsUid().getBluetoothControllerActivity(),
+                        batteryUsageStatsQuery.shouldForceUsePowerProfileModel(),
+                        powerAndDuration);
+                builder2.setUsageDurationMillis(2, powerAndDuration.durationMs)
+                        .setConsumedPower(2, powerAndDuration.powerMah, powerModel);
                 if (!builder2.isVirtualUid()) {
                     powerAndDuration.totalDurationMs += powerAndDuration.durationMs;
                     powerAndDuration.totalPowerMah += powerAndDuration.powerMah;
                 }
-                if (batteryUsageStatsQuery.isProcessStateDataNeeded() && powerAndDuration.keys != null) {
+                if (batteryUsageStatsQuery.isProcessStateDataNeeded()
+                        && powerAndDuration.keys != null) {
                     int i = 0;
                     while (true) {
                         BatteryConsumer.Key[] keyArr3 = powerAndDuration.keys;
                         if (i < keyArr3.length) {
                             BatteryConsumer.Key key = keyArr3[i];
                             if (key.processState != 0) {
-                                builder2.setConsumedPower(key, powerAndDuration.powerPerKeyMah[i], powerModel);
+                                builder2.setConsumedPower(
+                                        key, powerAndDuration.powerPerKeyMah[i], powerModel);
                             }
                             i++;
                         }
@@ -82,15 +105,36 @@ public final class BluetoothPowerCalculator extends PowerCalculator {
                 keyArr = keyArr2;
             }
             long bluetoothEnergyConsumptionUC2 = batteryStats.getBluetoothEnergyConsumptionUC();
-            int powerModel2 = PowerCalculator.getPowerModel(bluetoothEnergyConsumptionUC2, batteryUsageStatsQuery);
-            calculatePowerAndDuration(null, powerModel2, bluetoothEnergyConsumptionUC2, batteryStats.getBluetoothControllerActivity(), batteryUsageStatsQuery.shouldForceUsePowerProfileModel(), powerAndDuration);
+            int powerModel2 =
+                    PowerCalculator.getPowerModel(
+                            bluetoothEnergyConsumptionUC2, batteryUsageStatsQuery);
+            calculatePowerAndDuration(
+                    null,
+                    powerModel2,
+                    bluetoothEnergyConsumptionUC2,
+                    batteryStats.getBluetoothControllerActivity(),
+                    batteryUsageStatsQuery.shouldForceUsePowerProfileModel(),
+                    powerAndDuration);
             Math.max(0L, powerAndDuration.durationMs - powerAndDuration.totalDurationMs);
-            builder.getAggregateBatteryConsumerBuilder(0).setUsageDurationMillis(2, powerAndDuration.durationMs).setConsumedPower(2, Math.max(powerAndDuration.powerMah, powerAndDuration.totalPowerMah), powerModel2);
-            builder.getAggregateBatteryConsumerBuilder(1).setUsageDurationMillis(2, powerAndDuration.totalDurationMs).setConsumedPower(2, powerAndDuration.totalPowerMah, powerModel2);
+            builder.getAggregateBatteryConsumerBuilder(0)
+                    .setUsageDurationMillis(2, powerAndDuration.durationMs)
+                    .setConsumedPower(
+                            2,
+                            Math.max(powerAndDuration.powerMah, powerAndDuration.totalPowerMah),
+                            powerModel2);
+            builder.getAggregateBatteryConsumerBuilder(1)
+                    .setUsageDurationMillis(2, powerAndDuration.totalDurationMs)
+                    .setConsumedPower(2, powerAndDuration.totalPowerMah, powerModel2);
         }
     }
 
-    public final void calculatePowerAndDuration(BatteryStats.Uid uid, int i, long j, BatteryStats.ControllerActivityCounter controllerActivityCounter, boolean z, PowerAndDuration powerAndDuration) {
+    public final void calculatePowerAndDuration(
+            BatteryStats.Uid uid,
+            int i,
+            long j,
+            BatteryStats.ControllerActivityCounter controllerActivityCounter,
+            boolean z,
+            PowerAndDuration powerAndDuration) {
         if (controllerActivityCounter == null) {
             powerAndDuration.durationMs = 0L;
             powerAndDuration.powerMah = 0.0d;
@@ -120,13 +164,15 @@ public final class BluetoothPowerCalculator extends PowerCalculator {
                     return;
                 }
                 if (keyArr[i2].processState != 0) {
-                    powerAndDuration.powerPerKeyMah[i2] = uid.getBluetoothEnergyConsumptionUC(r2) * 2.777777777777778E-7d;
+                    powerAndDuration.powerPerKeyMah[i2] =
+                            uid.getBluetoothEnergyConsumptionUC(r2) * 2.777777777777778E-7d;
                 }
                 i2++;
             }
         } else {
             if (!z) {
-                double countLocked4 = controllerActivityCounter.getPowerCounter().getCountLocked(0) / 3600000.0d;
+                double countLocked4 =
+                        controllerActivityCounter.getPowerCounter().getCountLocked(0) / 3600000.0d;
                 if (countLocked4 != 0.0d) {
                     powerAndDuration.powerMah = countLocked4;
                     double[] dArr2 = powerAndDuration.powerPerKeyMah;
@@ -158,7 +204,11 @@ public final class BluetoothPowerCalculator extends PowerCalculator {
                 }
                 int i4 = keyArr2[i3].processState;
                 if (i4 != 0) {
-                    powerAndDuration.powerPerKeyMah[i3] = calculatePowerMah(rxTimeCounter.getCountForProcessState(i4), longCounter.getCountForProcessState(i4), idleTimeCounter.getCountForProcessState(i4));
+                    powerAndDuration.powerPerKeyMah[i3] =
+                            calculatePowerMah(
+                                    rxTimeCounter.getCountForProcessState(i4),
+                                    longCounter.getCountForProcessState(i4),
+                                    idleTimeCounter.getCountForProcessState(i4));
                 }
                 i3++;
             }

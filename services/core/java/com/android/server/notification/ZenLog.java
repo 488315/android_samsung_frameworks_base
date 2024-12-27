@@ -6,7 +6,9 @@ import android.os.Build;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeDiff;
 import android.util.LocalLog;
+
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -65,8 +67,14 @@ public abstract class ZenLog {
         return i != 0 ? i != 1 ? i != 2 ? "unknown" : "normal" : "vibrate" : "silent";
     }
 
-    public static void traceConfig(String str, ComponentName componentName, ZenModeConfig zenModeConfig, ZenModeConfig zenModeConfig2, int i) {
-        ZenModeDiff.ConfigDiff configDiff = new ZenModeDiff.ConfigDiff(zenModeConfig, zenModeConfig2);
+    public static void traceConfig(
+            String str,
+            ComponentName componentName,
+            ZenModeConfig zenModeConfig,
+            ZenModeConfig zenModeConfig2,
+            int i) {
+        ZenModeDiff.ConfigDiff configDiff =
+                new ZenModeDiff.ConfigDiff(zenModeConfig, zenModeConfig2);
         if (!configDiff.hasDiff()) {
             append(11, str + " no changes");
             return;
@@ -92,15 +100,23 @@ public abstract class ZenLog {
         append(12, notificationRecord.sbn.getKey() + "," + str);
     }
 
-    public static void traceSetNotificationPolicy(String str, int i, NotificationManager.Policy policy) {
-        StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i, "pkg=", str, " targetSdk=", " NotificationPolicy=");
+    public static void traceSetNotificationPolicy(
+            String str, int i, NotificationManager.Policy policy) {
+        StringBuilder m =
+                StorageManagerService$$ExternalSyntheticOutline0.m(
+                        i, "pkg=", str, " targetSdk=", " NotificationPolicy=");
         m.append(policy.toString());
         append(16, m.toString());
     }
 
     public static void traceSetZenMode(int i, String str) {
         StringBuilder sb = new StringBuilder();
-        sb.append(i != 0 ? i != 1 ? i != 2 ? i != 3 ? "unknown" : "alarms" : "no_interruptions" : "important_interruptions" : "off");
+        sb.append(
+                i != 0
+                        ? i != 1
+                                ? i != 2 ? i != 3 ? "unknown" : "alarms" : "no_interruptions"
+                                : "important_interruptions"
+                        : "off");
         sb.append(",");
         sb.append(str);
         append(6, sb.toString());

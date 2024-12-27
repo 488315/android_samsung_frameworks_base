@@ -26,8 +26,9 @@ import android.os.connectivity.WifiBatteryStats;
 import android.os.health.HealthStatsParceler;
 import android.telephony.ModemActivityInfo;
 import android.telephony.SignalStrength;
-import com.android.internal.app.IBatteryStatsCallback;
+
 import com.samsung.android.os.SemCompanionDeviceBatteryInfo;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -44,7 +45,8 @@ public interface IBatteryStats extends IInterface {
 
     long getAwakeTimePlugged() throws RemoteException;
 
-    List<BatteryUsageStats> getBatteryUsageStats(List<BatteryUsageStatsQuery> list) throws RemoteException;
+    List<BatteryUsageStats> getBatteryUsageStats(List<BatteryUsageStatsQuery> list)
+            throws RemoteException;
 
     BluetoothBatteryStats getBluetoothBatteryStats() throws RemoteException;
 
@@ -78,9 +80,22 @@ public interface IBatteryStats extends IInterface {
 
     void noteBleScanStopped(WorkSource workSource, boolean z) throws RemoteException;
 
-    void noteBluetoothControllerActivity(BluetoothActivityEnergyInfo bluetoothActivityEnergyInfo) throws RemoteException;
+    void noteBluetoothControllerActivity(BluetoothActivityEnergyInfo bluetoothActivityEnergyInfo)
+            throws RemoteException;
 
-    void noteChangeWakelockFromSource(WorkSource workSource, int i, String str, String str2, int i2, WorkSource workSource2, int i3, String str3, String str4, int i4, boolean z) throws RemoteException;
+    void noteChangeWakelockFromSource(
+            WorkSource workSource,
+            int i,
+            String str,
+            String str2,
+            int i2,
+            WorkSource workSource2,
+            int i3,
+            String str3,
+            String str4,
+            int i4,
+            boolean z)
+            throws RemoteException;
 
     void noteConnectivityChanged(int i, String str) throws RemoteException;
 
@@ -116,11 +131,13 @@ public interface IBatteryStats extends IInterface {
 
     void noteLongPartialWakelockFinish(String str, String str2, int i) throws RemoteException;
 
-    void noteLongPartialWakelockFinishFromSource(String str, String str2, WorkSource workSource) throws RemoteException;
+    void noteLongPartialWakelockFinishFromSource(String str, String str2, WorkSource workSource)
+            throws RemoteException;
 
     void noteLongPartialWakelockStart(String str, String str2, int i) throws RemoteException;
 
-    void noteLongPartialWakelockStartFromSource(String str, String str2, WorkSource workSource) throws RemoteException;
+    void noteLongPartialWakelockStartFromSource(String str, String str2, WorkSource workSource)
+            throws RemoteException;
 
     void noteMobileRadioPowerState(int i, long j, int i2) throws RemoteException;
 
@@ -130,7 +147,8 @@ public interface IBatteryStats extends IInterface {
 
     void noteNetworkStatsEnabled() throws RemoteException;
 
-    void notePhoneDataConnectionState(int i, boolean z, int i2, int i3, int i4) throws RemoteException;
+    void notePhoneDataConnectionState(int i, boolean z, int i2, int i3, int i4)
+            throws RemoteException;
 
     void notePhoneOff() throws RemoteException;
 
@@ -166,9 +184,12 @@ public interface IBatteryStats extends IInterface {
 
     void noteStartVideo(int i) throws RemoteException;
 
-    void noteStartWakelock(int i, int i2, String str, String str2, int i3, boolean z) throws RemoteException;
+    void noteStartWakelock(int i, int i2, String str, String str2, int i3, boolean z)
+            throws RemoteException;
 
-    void noteStartWakelockFromSource(WorkSource workSource, int i, String str, String str2, int i2, boolean z) throws RemoteException;
+    void noteStartWakelockFromSource(
+            WorkSource workSource, int i, String str, String str2, int i2, boolean z)
+            throws RemoteException;
 
     void noteStopAudio(int i) throws RemoteException;
 
@@ -184,7 +205,8 @@ public interface IBatteryStats extends IInterface {
 
     void noteStopWakelock(int i, int i2, String str, String str2, int i3) throws RemoteException;
 
-    void noteStopWakelockFromSource(WorkSource workSource, int i, String str, String str2, int i2) throws RemoteException;
+    void noteStopWakelockFromSource(WorkSource workSource, int i, String str, String str2, int i2)
+            throws RemoteException;
 
     void noteSyncFinish(String str, int i) throws RemoteException;
 
@@ -206,7 +228,8 @@ public interface IBatteryStats extends IInterface {
 
     void noteWifiBatchedScanStoppedFromSource(WorkSource workSource) throws RemoteException;
 
-    void noteWifiControllerActivity(WifiActivityEnergyInfo wifiActivityEnergyInfo) throws RemoteException;
+    void noteWifiControllerActivity(WifiActivityEnergyInfo wifiActivityEnergyInfo)
+            throws RemoteException;
 
     void noteWifiMulticastDisabled(int i) throws RemoteException;
 
@@ -222,7 +245,8 @@ public interface IBatteryStats extends IInterface {
 
     void noteWifiRunning(WorkSource workSource) throws RemoteException;
 
-    void noteWifiRunningChanged(WorkSource workSource, WorkSource workSource2) throws RemoteException;
+    void noteWifiRunningChanged(WorkSource workSource, WorkSource workSource2)
+            throws RemoteException;
 
     void noteWifiScanStarted(int i) throws RemoteException;
 
@@ -238,7 +262,8 @@ public interface IBatteryStats extends IInterface {
 
     void noteWifiSupplicantStateChanged(int i, boolean z) throws RemoteException;
 
-    boolean registerBatteryStatsCallback(IBatteryStatsCallback iBatteryStatsCallback) throws RemoteException;
+    boolean registerBatteryStatsCallback(IBatteryStatsCallback iBatteryStatsCallback)
+            throws RemoteException;
 
     void registerDeviceBatteryInfoChanged(String str) throws RemoteException;
 
@@ -246,13 +271,30 @@ public interface IBatteryStats extends IInterface {
 
     void setBatteryLevel(int i, boolean z) throws RemoteException;
 
-    void setBatteryState(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, long j, int i9, int i10, int i11, int i12, boolean z) throws RemoteException;
+    void setBatteryState(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            long j,
+            int i9,
+            int i10,
+            int i11,
+            int i12,
+            boolean z)
+            throws RemoteException;
 
     void setChargerAcOnline(boolean z, boolean z2) throws RemoteException;
 
     boolean setChargingStateUpdateDelayMillis(int i) throws RemoteException;
 
-    void setDeviceBatteryInfo(String str, SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo) throws RemoteException;
+    void setDeviceBatteryInfo(
+            String str, SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo)
+            throws RemoteException;
 
     void setTemperatureNCurrent(int i, int i2, int i3, int i4, int i5) throws RemoteException;
 
@@ -268,89 +310,76 @@ public interface IBatteryStats extends IInterface {
 
     void unplugBattery(boolean z) throws RemoteException;
 
-    boolean unregisterBatteryStatsCallback(IBatteryStatsCallback iBatteryStatsCallback) throws RemoteException;
+    boolean unregisterBatteryStatsCallback(IBatteryStatsCallback iBatteryStatsCallback)
+            throws RemoteException;
 
     void unsetDeviceBatteryInfo(String str) throws RemoteException;
 
-    void updateSemModemActivityInfo(SemModemActivityInfo semModemActivityInfo) throws RemoteException;
+    void updateSemModemActivityInfo(SemModemActivityInfo semModemActivityInfo)
+            throws RemoteException;
 
-    void updateSpeakerOutEnergyInfo(SpeakerOutEnergyInfo speakerOutEnergyInfo) throws RemoteException;
+    void updateSpeakerOutEnergyInfo(SpeakerOutEnergyInfo speakerOutEnergyInfo)
+            throws RemoteException;
 
     public static class Default implements IBatteryStats {
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStartSensor(int uid, int sensor) throws RemoteException {
-        }
+        public void noteStartSensor(int uid, int sensor) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStopSensor(int uid, int sensor) throws RemoteException {
-        }
+        public void noteStopSensor(int uid, int sensor) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStartVideo(int uid) throws RemoteException {
-        }
+        public void noteStartVideo(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStopVideo(int uid) throws RemoteException {
-        }
+        public void noteStopVideo(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStartAudio(int uid) throws RemoteException {
-        }
+        public void noteStartAudio(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStopAudio(int uid) throws RemoteException {
-        }
+        public void noteStopAudio(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteResetVideo() throws RemoteException {
-        }
+        public void noteResetVideo() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteResetAudio() throws RemoteException {
-        }
+        public void noteResetAudio() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteFlashlightOn(int uid) throws RemoteException {
-        }
+        public void noteFlashlightOn(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteFlashlightOff(int uid) throws RemoteException {
-        }
+        public void noteFlashlightOff(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStartCamera(int uid) throws RemoteException {
-        }
+        public void noteStartCamera(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStopCamera(int uid) throws RemoteException {
-        }
+        public void noteStopCamera(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteResetCamera() throws RemoteException {
-        }
+        public void noteResetCamera() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteResetFlashlight() throws RemoteException {
-        }
+        public void noteResetFlashlight() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWakeupSensorEvent(long elapsedNanos, int uid, int handle) throws RemoteException {
-        }
+        public void noteWakeupSensorEvent(long elapsedNanos, int uid, int handle)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStartGps(int uid) throws RemoteException {
-        }
+        public void noteStartGps(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStopGps(int uid) throws RemoteException {
-        }
+        public void noteStopGps(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteResetGps() throws RemoteException {
-        }
+        public void noteResetGps() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public List<BatteryUsageStats> getBatteryUsageStats(List<BatteryUsageStatsQuery> queries) throws RemoteException {
+        public List<BatteryUsageStats> getBatteryUsageStats(List<BatteryUsageStatsQuery> queries)
+                throws RemoteException {
             return null;
         }
 
@@ -385,224 +414,227 @@ public interface IBatteryStats extends IInterface {
         }
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteEvent(int code, String name, int uid) throws RemoteException {
-        }
+        public void noteEvent(int code, String name, int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteSyncStart(String name, int uid) throws RemoteException {
-        }
+        public void noteSyncStart(String name, int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteSyncFinish(String name, int uid) throws RemoteException {
-        }
+        public void noteSyncFinish(String name, int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteJobStart(String name, int uid) throws RemoteException {
-        }
+        public void noteJobStart(String name, int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteJobFinish(String name, int uid, int stopReason) throws RemoteException {
-        }
+        public void noteJobFinish(String name, int uid, int stopReason) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStartWakelock(int uid, int pid, String name, String historyName, int type, boolean unimportantForLogging) throws RemoteException {
-        }
+        public void noteStartWakelock(
+                int uid,
+                int pid,
+                String name,
+                String historyName,
+                int type,
+                boolean unimportantForLogging)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStopWakelock(int uid, int pid, String name, String historyName, int type) throws RemoteException {
-        }
+        public void noteStopWakelock(int uid, int pid, String name, String historyName, int type)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStartWakelockFromSource(WorkSource ws, int pid, String name, String historyName, int type, boolean unimportantForLogging) throws RemoteException {
-        }
+        public void noteStartWakelockFromSource(
+                WorkSource ws,
+                int pid,
+                String name,
+                String historyName,
+                int type,
+                boolean unimportantForLogging)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteChangeWakelockFromSource(WorkSource ws, int pid, String name, String histyoryName, int type, WorkSource newWs, int newPid, String newName, String newHistoryName, int newType, boolean newUnimportantForLogging) throws RemoteException {
-        }
+        public void noteChangeWakelockFromSource(
+                WorkSource ws,
+                int pid,
+                String name,
+                String histyoryName,
+                int type,
+                WorkSource newWs,
+                int newPid,
+                String newName,
+                String newHistoryName,
+                int newType,
+                boolean newUnimportantForLogging)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStopWakelockFromSource(WorkSource ws, int pid, String name, String historyName, int type) throws RemoteException {
-        }
+        public void noteStopWakelockFromSource(
+                WorkSource ws, int pid, String name, String historyName, int type)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteLongPartialWakelockStart(String name, String historyName, int uid) throws RemoteException {
-        }
+        public void noteLongPartialWakelockStart(String name, String historyName, int uid)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteLongPartialWakelockStartFromSource(String name, String historyName, WorkSource workSource) throws RemoteException {
-        }
+        public void noteLongPartialWakelockStartFromSource(
+                String name, String historyName, WorkSource workSource) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteLongPartialWakelockFinish(String name, String historyName, int uid) throws RemoteException {
-        }
+        public void noteLongPartialWakelockFinish(String name, String historyName, int uid)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteLongPartialWakelockFinishFromSource(String name, String historyName, WorkSource workSource) throws RemoteException {
-        }
+        public void noteLongPartialWakelockFinishFromSource(
+                String name, String historyName, WorkSource workSource) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteVibratorOn(int uid, long durationMillis) throws RemoteException {
-        }
+        public void noteVibratorOn(int uid, long durationMillis) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteVibratorOff(int uid) throws RemoteException {
-        }
+        public void noteVibratorOff(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteGpsChanged(WorkSource oldSource, WorkSource newSource) throws RemoteException {
-        }
+        public void noteGpsChanged(WorkSource oldSource, WorkSource newSource)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteGpsSignalQuality(int signalLevel) throws RemoteException {
-        }
+        public void noteGpsSignalQuality(int signalLevel) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteScreenState(int state) throws RemoteException {
-        }
+        public void noteScreenState(int state) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteScreenBrightness(int brightness) throws RemoteException {
-        }
+        public void noteScreenBrightness(int brightness) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteUserActivity(int uid, int event) throws RemoteException {
-        }
+        public void noteUserActivity(int uid, int event) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWakeUp(String reason, int reasonUid) throws RemoteException {
-        }
+        public void noteWakeUp(String reason, int reasonUid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteInteractive(boolean interactive) throws RemoteException {
-        }
+        public void noteInteractive(boolean interactive) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteConnectivityChanged(int type, String extra) throws RemoteException {
-        }
+        public void noteConnectivityChanged(int type, String extra) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteMobileRadioPowerState(int powerState, long timestampNs, int uid) throws RemoteException {
-        }
+        public void noteMobileRadioPowerState(int powerState, long timestampNs, int uid)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void notePhoneOn() throws RemoteException {
-        }
+        public void notePhoneOn() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void notePhoneOff() throws RemoteException {
-        }
+        public void notePhoneOff() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void notePhoneSignalStrength(SignalStrength signalStrength) throws RemoteException {
-        }
+        public void notePhoneSignalStrength(SignalStrength signalStrength) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void notePhoneDataConnectionState(int dataType, boolean hasData, int serviceType, int nrState, int nrFrequency) throws RemoteException {
-        }
+        public void notePhoneDataConnectionState(
+                int dataType, boolean hasData, int serviceType, int nrState, int nrFrequency)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void notePhoneState(int phoneState) throws RemoteException {
-        }
+        public void notePhoneState(int phoneState) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiOn() throws RemoteException {
-        }
+        public void noteWifiOn() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiOff() throws RemoteException {
-        }
+        public void noteWifiOff() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiRunning(WorkSource ws) throws RemoteException {
-        }
+        public void noteWifiRunning(WorkSource ws) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiRunningChanged(WorkSource oldWs, WorkSource newWs) throws RemoteException {
-        }
+        public void noteWifiRunningChanged(WorkSource oldWs, WorkSource newWs)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiStopped(WorkSource ws) throws RemoteException {
-        }
+        public void noteWifiStopped(WorkSource ws) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiState(int wifiState, String accessPoint) throws RemoteException {
-        }
+        public void noteWifiState(int wifiState, String accessPoint) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiSupplicantStateChanged(int supplState, boolean failedAuth) throws RemoteException {
-        }
+        public void noteWifiSupplicantStateChanged(int supplState, boolean failedAuth)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiRssiChanged(int newRssi) throws RemoteException {
-        }
+        public void noteWifiRssiChanged(int newRssi) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteFullWifiLockAcquired(int uid) throws RemoteException {
-        }
+        public void noteFullWifiLockAcquired(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteFullWifiLockReleased(int uid) throws RemoteException {
-        }
+        public void noteFullWifiLockReleased(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiScanStarted(int uid) throws RemoteException {
-        }
+        public void noteWifiScanStarted(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiScanStopped(int uid) throws RemoteException {
-        }
+        public void noteWifiScanStopped(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiMulticastEnabled(int uid) throws RemoteException {
-        }
+        public void noteWifiMulticastEnabled(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiMulticastDisabled(int uid) throws RemoteException {
-        }
+        public void noteWifiMulticastDisabled(int uid) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteFullWifiLockAcquiredFromSource(WorkSource ws) throws RemoteException {
-        }
+        public void noteFullWifiLockAcquiredFromSource(WorkSource ws) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteFullWifiLockReleasedFromSource(WorkSource ws) throws RemoteException {
-        }
+        public void noteFullWifiLockReleasedFromSource(WorkSource ws) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiScanStartedFromSource(WorkSource ws) throws RemoteException {
-        }
+        public void noteWifiScanStartedFromSource(WorkSource ws) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiScanStoppedFromSource(WorkSource ws) throws RemoteException {
-        }
+        public void noteWifiScanStoppedFromSource(WorkSource ws) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiBatchedScanStartedFromSource(WorkSource ws, int csph) throws RemoteException {
-        }
+        public void noteWifiBatchedScanStartedFromSource(WorkSource ws, int csph)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiBatchedScanStoppedFromSource(WorkSource ws) throws RemoteException {
-        }
+        public void noteWifiBatchedScanStoppedFromSource(WorkSource ws) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiRadioPowerState(int powerState, long timestampNs, int uid) throws RemoteException {
-        }
+        public void noteWifiRadioPowerState(int powerState, long timestampNs, int uid)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteNetworkInterfaceForTransports(String iface, int[] transportTypes) throws RemoteException {
-        }
+        public void noteNetworkInterfaceForTransports(String iface, int[] transportTypes)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteNetworkStatsEnabled() throws RemoteException {
-        }
+        public void noteNetworkStatsEnabled() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteDeviceIdleMode(int mode, String activeReason, int activeUid) throws RemoteException {
-        }
+        public void noteDeviceIdleMode(int mode, String activeReason, int activeUid)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void setBatteryState(int status, int health, int plugType, int level, int temp, int volt, int chargeUAh, int chargeFullUAh, long chargeTimeToFullSeconds, int secEvent, int secOnline, int secCurrentEvent, int secTxShareEvent, boolean otgOnline) throws RemoteException {
-        }
+        public void setBatteryState(
+                int status,
+                int health,
+                int plugType,
+                int level,
+                int temp,
+                int volt,
+                int chargeUAh,
+                int chargeFullUAh,
+                long chargeTimeToFullSeconds,
+                int secEvent,
+                int secOnline,
+                int secCurrentEvent,
+                int secTxShareEvent,
+                boolean otgOnline)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
         public long getAwakeTimeBattery() throws RemoteException {
@@ -615,20 +647,18 @@ public interface IBatteryStats extends IInterface {
         }
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteBleScanStarted(WorkSource ws, boolean isUnoptimized) throws RemoteException {
-        }
+        public void noteBleScanStarted(WorkSource ws, boolean isUnoptimized)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteBleScanStopped(WorkSource ws, boolean isUnoptimized) throws RemoteException {
-        }
+        public void noteBleScanStopped(WorkSource ws, boolean isUnoptimized)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteBleScanReset() throws RemoteException {
-        }
+        public void noteBleScanReset() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteBleScanResults(WorkSource ws, int numNewResults) throws RemoteException {
-        }
+        public void noteBleScanResults(WorkSource ws, int numNewResults) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
         public CellularBatteryStats getCellularBatteryStats() throws RemoteException {
@@ -666,20 +696,19 @@ public interface IBatteryStats extends IInterface {
         }
 
         @Override // com.android.internal.app.IBatteryStats
-        public void takeUidSnapshotsAsync(int[] uid, ResultReceiver result) throws RemoteException {
-        }
+        public void takeUidSnapshotsAsync(int[] uid, ResultReceiver result)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteBluetoothControllerActivity(BluetoothActivityEnergyInfo info) throws RemoteException {
-        }
+        public void noteBluetoothControllerActivity(BluetoothActivityEnergyInfo info)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteModemControllerActivity(ModemActivityInfo info) throws RemoteException {
-        }
+        public void noteModemControllerActivity(ModemActivityInfo info) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteWifiControllerActivity(WifiActivityEnergyInfo info) throws RemoteException {
-        }
+        public void noteWifiControllerActivity(WifiActivityEnergyInfo info)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
         public boolean setChargingStateUpdateDelayMillis(int delay) throws RemoteException {
@@ -687,74 +716,68 @@ public interface IBatteryStats extends IInterface {
         }
 
         @Override // com.android.internal.app.IBatteryStats
-        public void setChargerAcOnline(boolean online, boolean forceUpdate) throws RemoteException {
-        }
+        public void setChargerAcOnline(boolean online, boolean forceUpdate)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void setBatteryLevel(int level, boolean forceUpdate) throws RemoteException {
-        }
+        public void setBatteryLevel(int level, boolean forceUpdate) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void unplugBattery(boolean forceUpdate) throws RemoteException {
-        }
+        public void unplugBattery(boolean forceUpdate) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void resetBattery(boolean forceUpdate) throws RemoteException {
-        }
+        public void resetBattery(boolean forceUpdate) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void suspendBatteryInput() throws RemoteException {
-        }
+        public void suspendBatteryInput() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void setTemperatureNCurrent(int ap_temp, int pa_temp, int skin_temp, int sub_batt_temp, int current) throws RemoteException {
-        }
+        public void setTemperatureNCurrent(
+                int ap_temp, int pa_temp, int skin_temp, int sub_batt_temp, int current)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void updateSpeakerOutEnergyInfo(SpeakerOutEnergyInfo info) throws RemoteException {
-        }
+        public void updateSpeakerOutEnergyInfo(SpeakerOutEnergyInfo info) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public boolean registerBatteryStatsCallback(IBatteryStatsCallback callback) throws RemoteException {
+        public boolean registerBatteryStatsCallback(IBatteryStatsCallback callback)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.app.IBatteryStats
-        public boolean unregisterBatteryStatsCallback(IBatteryStatsCallback callback) throws RemoteException {
+        public boolean unregisterBatteryStatsCallback(IBatteryStatsCallback callback)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteUpdateNetworkStats(String caller) throws RemoteException {
-        }
+        public void noteUpdateNetworkStats(String caller) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStartTxPowerSharing() throws RemoteException {
-        }
+        public void noteStartTxPowerSharing() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteStopTxPowerSharing() throws RemoteException {
-        }
+        public void noteStopTxPowerSharing() throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteBleDutyScanStarted(WorkSource ws, boolean isUnoptimized, int dutyCycle) throws RemoteException {
-        }
+        public void noteBleDutyScanStarted(WorkSource ws, boolean isUnoptimized, int dutyCycle)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteBleDutyScanStopped(WorkSource ws, boolean isUnoptimized, int dutyCycle) throws RemoteException {
-        }
+        public void noteBleDutyScanStopped(WorkSource ws, boolean isUnoptimized, int dutyCycle)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteDualScreenState(int state, int displayId, int screenPolicy) throws RemoteException {
-        }
+        public void noteDualScreenState(int state, int displayId, int screenPolicy)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void noteDualScreenBrightness(int brightness, int displayId, int screenPolicy) throws RemoteException {
-        }
+        public void noteDualScreenBrightness(int brightness, int displayId, int screenPolicy)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void updateSemModemActivityInfo(SemModemActivityInfo info) throws RemoteException {
-        }
+        public void updateSemModemActivityInfo(SemModemActivityInfo info) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
         public SemCompanionDeviceBatteryInfo[] getDeviceBatteryInfos() throws RemoteException {
@@ -762,25 +785,23 @@ public interface IBatteryStats extends IInterface {
         }
 
         @Override // com.android.internal.app.IBatteryStats
-        public SemCompanionDeviceBatteryInfo getDeviceBatteryInfo(String address) throws RemoteException {
+        public SemCompanionDeviceBatteryInfo getDeviceBatteryInfo(String address)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IBatteryStats
-        public void registerDeviceBatteryInfoChanged(String packageName) throws RemoteException {
-        }
+        public void registerDeviceBatteryInfoChanged(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void unRegisterDeviceBatteryInfoChanged(String packageName) throws RemoteException {
-        }
+        public void unRegisterDeviceBatteryInfoChanged(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void setDeviceBatteryInfo(String address, SemCompanionDeviceBatteryInfo info) throws RemoteException {
-        }
+        public void setDeviceBatteryInfo(String address, SemCompanionDeviceBatteryInfo info)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IBatteryStats
-        public void unsetDeviceBatteryInfo(String address) throws RemoteException {
-        }
+        public void unsetDeviceBatteryInfo(String address) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -788,7 +809,7 @@ public interface IBatteryStats extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBatteryStats {
+    public abstract static class Stub extends Binder implements IBatteryStats {
         public static final String DESCRIPTOR = "com.android.internal.app.IBatteryStats";
         static final int TRANSACTION_computeBatteryScreenOffRealtimeMs = 24;
         static final int TRANSACTION_computeBatteryTimeRemaining = 22;
@@ -912,9 +933,15 @@ public interface IBatteryStats extends IInterface {
         static final int TRANSACTION_updateSemModemActivityInfo = 115;
         static final int TRANSACTION_updateSpeakerOutEnergyInfo = 105;
         private final PermissionEnforcer mEnforcer;
-        static final String[] PERMISSIONS_noteNetworkInterfaceForTransports = {Manifest.permission.NETWORK_STACK, NetworkStack.PERMISSION_MAINLINE_NETWORK_STACK};
-        static final String[] PERMISSIONS_getCellularBatteryStats = {Manifest.permission.UPDATE_DEVICE_STATS, Manifest.permission.BATTERY_STATS};
-        static final String[] PERMISSIONS_getWifiBatteryStats = {Manifest.permission.UPDATE_DEVICE_STATS, Manifest.permission.BATTERY_STATS};
+        static final String[] PERMISSIONS_noteNetworkInterfaceForTransports = {
+            Manifest.permission.NETWORK_STACK, NetworkStack.PERMISSION_MAINLINE_NETWORK_STACK
+        };
+        static final String[] PERMISSIONS_getCellularBatteryStats = {
+            Manifest.permission.UPDATE_DEVICE_STATS, Manifest.permission.BATTERY_STATS
+        };
+        static final String[] PERMISSIONS_getWifiBatteryStats = {
+            Manifest.permission.UPDATE_DEVICE_STATS, Manifest.permission.BATTERY_STATS
+        };
 
         public Stub(PermissionEnforcer enforcer) {
             attachInterface(this, DESCRIPTOR);
@@ -926,7 +953,9 @@ public interface IBatteryStats extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IBatteryStats asInterface(IBinder obj) {
@@ -1200,7 +1229,8 @@ public interface IBatteryStats extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -1309,7 +1339,8 @@ public interface IBatteryStats extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 19:
-                    List<BatteryUsageStatsQuery> _arg014 = data.createTypedArrayList(BatteryUsageStatsQuery.CREATOR);
+                    List<BatteryUsageStatsQuery> _arg014 =
+                            data.createTypedArrayList(BatteryUsageStatsQuery.CREATOR);
                     data.enforceNoDataAvail();
                     List<BatteryUsageStats> _result = getBatteryUsageStats(_arg014);
                     reply.writeNoException();
@@ -1427,7 +1458,9 @@ public interface IBatteryStats extends IInterface {
                     int _arg9 = data.readInt();
                     boolean _arg10 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    noteChangeWakelockFromSource(_arg023, _arg112, _arg27, _arg34, _arg44, _arg53, _arg6, _arg7, _arg8, _arg9, _arg10);
+                    noteChangeWakelockFromSource(
+                            _arg023, _arg112, _arg27, _arg34, _arg44, _arg53, _arg6, _arg7, _arg8,
+                            _arg9, _arg10);
                     reply.writeNoException();
                     return true;
                 case 35:
@@ -1554,7 +1587,8 @@ public interface IBatteryStats extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 53:
-                    SignalStrength _arg040 = (SignalStrength) data.readTypedObject(SignalStrength.CREATOR);
+                    SignalStrength _arg040 =
+                            (SignalStrength) data.readTypedObject(SignalStrength.CREATOR);
                     data.enforceNoDataAvail();
                     notePhoneSignalStrength(_arg040);
                     reply.writeNoException();
@@ -1738,7 +1772,9 @@ public interface IBatteryStats extends IInterface {
                     int _arg1210 = data.readInt();
                     boolean _arg133 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    setBatteryState(_arg064, _arg132, _arg217, _arg37, _arg47, _arg54, _arg62, _arg72, _arg82, _arg92, _arg102, _arg11, _arg1210, _arg133);
+                    setBatteryState(
+                            _arg064, _arg132, _arg217, _arg37, _arg47, _arg54, _arg62, _arg72,
+                            _arg82, _arg92, _arg102, _arg11, _arg1210, _arg133);
                     reply.writeNoException();
                     return true;
                 case 81:
@@ -1817,22 +1853,28 @@ public interface IBatteryStats extends IInterface {
                     return true;
                 case 94:
                     int[] _arg070 = data.createIntArray();
-                    ResultReceiver _arg137 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg137 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     takeUidSnapshotsAsync(_arg070, _arg137);
                     return true;
                 case 95:
-                    BluetoothActivityEnergyInfo _arg071 = (BluetoothActivityEnergyInfo) data.readTypedObject(BluetoothActivityEnergyInfo.CREATOR);
+                    BluetoothActivityEnergyInfo _arg071 =
+                            (BluetoothActivityEnergyInfo)
+                                    data.readTypedObject(BluetoothActivityEnergyInfo.CREATOR);
                     data.enforceNoDataAvail();
                     noteBluetoothControllerActivity(_arg071);
                     return true;
                 case 96:
-                    ModemActivityInfo _arg072 = (ModemActivityInfo) data.readTypedObject(ModemActivityInfo.CREATOR);
+                    ModemActivityInfo _arg072 =
+                            (ModemActivityInfo) data.readTypedObject(ModemActivityInfo.CREATOR);
                     data.enforceNoDataAvail();
                     noteModemControllerActivity(_arg072);
                     return true;
                 case 97:
-                    WifiActivityEnergyInfo _arg073 = (WifiActivityEnergyInfo) data.readTypedObject(WifiActivityEnergyInfo.CREATOR);
+                    WifiActivityEnergyInfo _arg073 =
+                            (WifiActivityEnergyInfo)
+                                    data.readTypedObject(WifiActivityEnergyInfo.CREATOR);
                     data.enforceNoDataAvail();
                     noteWifiControllerActivity(_arg073);
                     return true;
@@ -1883,19 +1925,23 @@ public interface IBatteryStats extends IInterface {
                     setTemperatureNCurrent(_arg079, _arg140, _arg218, _arg38, _arg48);
                     return true;
                 case 105:
-                    SpeakerOutEnergyInfo _arg080 = (SpeakerOutEnergyInfo) data.readTypedObject(SpeakerOutEnergyInfo.CREATOR);
+                    SpeakerOutEnergyInfo _arg080 =
+                            (SpeakerOutEnergyInfo)
+                                    data.readTypedObject(SpeakerOutEnergyInfo.CREATOR);
                     data.enforceNoDataAvail();
                     updateSpeakerOutEnergyInfo(_arg080);
                     return true;
                 case 106:
-                    IBatteryStatsCallback _arg081 = IBatteryStatsCallback.Stub.asInterface(data.readStrongBinder());
+                    IBatteryStatsCallback _arg081 =
+                            IBatteryStatsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result18 = registerBatteryStatsCallback(_arg081);
                     reply.writeNoException();
                     reply.writeBoolean(_result18);
                     return true;
                 case 107:
-                    IBatteryStatsCallback _arg082 = IBatteryStatsCallback.Stub.asInterface(data.readStrongBinder());
+                    IBatteryStatsCallback _arg082 =
+                            IBatteryStatsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result19 = unregisterBatteryStatsCallback(_arg082);
                     reply.writeNoException();
@@ -1948,7 +1994,9 @@ public interface IBatteryStats extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 115:
-                    SemModemActivityInfo _arg088 = (SemModemActivityInfo) data.readTypedObject(SemModemActivityInfo.CREATOR);
+                    SemModemActivityInfo _arg088 =
+                            (SemModemActivityInfo)
+                                    data.readTypedObject(SemModemActivityInfo.CREATOR);
                     data.enforceNoDataAvail();
                     updateSemModemActivityInfo(_arg088);
                     return true;
@@ -1978,7 +2026,9 @@ public interface IBatteryStats extends IInterface {
                     return true;
                 case 120:
                     String _arg092 = data.readString();
-                    SemCompanionDeviceBatteryInfo _arg145 = (SemCompanionDeviceBatteryInfo) data.readTypedObject(SemCompanionDeviceBatteryInfo.CREATOR);
+                    SemCompanionDeviceBatteryInfo _arg145 =
+                            (SemCompanionDeviceBatteryInfo)
+                                    data.readTypedObject(SemCompanionDeviceBatteryInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setDeviceBatteryInfo(_arg092, _arg145);
                     reply.writeNoException();
@@ -2210,7 +2260,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteWakeupSensorEvent(long elapsedNanos, int uid, int handle) throws RemoteException {
+            public void noteWakeupSensorEvent(long elapsedNanos, int uid, int handle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2271,7 +2322,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public List<BatteryUsageStats> getBatteryUsageStats(List<BatteryUsageStatsQuery> queries) throws RemoteException {
+            public List<BatteryUsageStats> getBatteryUsageStats(
+                    List<BatteryUsageStatsQuery> queries) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2279,7 +2331,8 @@ public interface IBatteryStats extends IInterface {
                     _data.writeTypedList(queries, 0);
                     this.mRemote.transact(19, _data, _reply, 0);
                     _reply.readException();
-                    List<BatteryUsageStats> _result = _reply.createTypedArrayList(BatteryUsageStats.CREATOR);
+                    List<BatteryUsageStats> _result =
+                            _reply.createTypedArrayList(BatteryUsageStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2295,7 +2348,8 @@ public interface IBatteryStats extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(20, _data, _reply, 0);
                     _reply.readException();
-                    SemBatterySipper _result = (SemBatterySipper) _reply.readTypedObject(SemBatterySipper.CREATOR);
+                    SemBatterySipper _result =
+                            (SemBatterySipper) _reply.readTypedObject(SemBatterySipper.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2466,7 +2520,14 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteStartWakelock(int uid, int pid, String name, String historyName, int type, boolean unimportantForLogging) throws RemoteException {
+            public void noteStartWakelock(
+                    int uid,
+                    int pid,
+                    String name,
+                    String historyName,
+                    int type,
+                    boolean unimportantForLogging)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2486,7 +2547,9 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteStopWakelock(int uid, int pid, String name, String historyName, int type) throws RemoteException {
+            public void noteStopWakelock(
+                    int uid, int pid, String name, String historyName, int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2505,7 +2568,14 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteStartWakelockFromSource(WorkSource ws, int pid, String name, String historyName, int type, boolean unimportantForLogging) throws RemoteException {
+            public void noteStartWakelockFromSource(
+                    WorkSource ws,
+                    int pid,
+                    String name,
+                    String historyName,
+                    int type,
+                    boolean unimportantForLogging)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2525,7 +2595,19 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteChangeWakelockFromSource(WorkSource ws, int pid, String name, String histyoryName, int type, WorkSource newWs, int newPid, String newName, String newHistoryName, int newType, boolean newUnimportantForLogging) throws RemoteException {
+            public void noteChangeWakelockFromSource(
+                    WorkSource ws,
+                    int pid,
+                    String name,
+                    String histyoryName,
+                    int type,
+                    WorkSource newWs,
+                    int newPid,
+                    String newName,
+                    String newHistoryName,
+                    int newType,
+                    boolean newUnimportantForLogging)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2625,7 +2707,9 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteStopWakelockFromSource(WorkSource ws, int pid, String name, String historyName, int type) throws RemoteException {
+            public void noteStopWakelockFromSource(
+                    WorkSource ws, int pid, String name, String historyName, int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2644,7 +2728,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteLongPartialWakelockStart(String name, String historyName, int uid) throws RemoteException {
+            public void noteLongPartialWakelockStart(String name, String historyName, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2661,7 +2746,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteLongPartialWakelockStartFromSource(String name, String historyName, WorkSource workSource) throws RemoteException {
+            public void noteLongPartialWakelockStartFromSource(
+                    String name, String historyName, WorkSource workSource) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2678,7 +2764,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteLongPartialWakelockFinish(String name, String historyName, int uid) throws RemoteException {
+            public void noteLongPartialWakelockFinish(String name, String historyName, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2695,7 +2782,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteLongPartialWakelockFinishFromSource(String name, String historyName, WorkSource workSource) throws RemoteException {
+            public void noteLongPartialWakelockFinishFromSource(
+                    String name, String historyName, WorkSource workSource) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2743,7 +2831,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteGpsChanged(WorkSource oldSource, WorkSource newSource) throws RemoteException {
+            public void noteGpsChanged(WorkSource oldSource, WorkSource newSource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2867,7 +2956,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteMobileRadioPowerState(int powerState, long timestampNs, int uid) throws RemoteException {
+            public void noteMobileRadioPowerState(int powerState, long timestampNs, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2912,7 +3002,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void notePhoneSignalStrength(SignalStrength signalStrength) throws RemoteException {
+            public void notePhoneSignalStrength(SignalStrength signalStrength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2927,7 +3018,9 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void notePhoneDataConnectionState(int dataType, boolean hasData, int serviceType, int nrState, int nrFrequency) throws RemoteException {
+            public void notePhoneDataConnectionState(
+                    int dataType, boolean hasData, int serviceType, int nrState, int nrFrequency)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3004,7 +3097,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteWifiRunningChanged(WorkSource oldWs, WorkSource newWs) throws RemoteException {
+            public void noteWifiRunningChanged(WorkSource oldWs, WorkSource newWs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3051,7 +3145,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteWifiSupplicantStateChanged(int supplState, boolean failedAuth) throws RemoteException {
+            public void noteWifiSupplicantStateChanged(int supplState, boolean failedAuth)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3232,7 +3327,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteWifiBatchedScanStartedFromSource(WorkSource ws, int csph) throws RemoteException {
+            public void noteWifiBatchedScanStartedFromSource(WorkSource ws, int csph)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3263,7 +3359,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteWifiRadioPowerState(int powerState, long timestampNs, int uid) throws RemoteException {
+            public void noteWifiRadioPowerState(int powerState, long timestampNs, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3280,7 +3377,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteNetworkInterfaceForTransports(String iface, int[] transportTypes) throws RemoteException {
+            public void noteNetworkInterfaceForTransports(String iface, int[] transportTypes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3310,7 +3408,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteDeviceIdleMode(int mode, String activeReason, int activeUid) throws RemoteException {
+            public void noteDeviceIdleMode(int mode, String activeReason, int activeUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3327,7 +3426,22 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void setBatteryState(int status, int health, int plugType, int level, int temp, int volt, int chargeUAh, int chargeFullUAh, long chargeTimeToFullSeconds, int secEvent, int secOnline, int secCurrentEvent, int secTxShareEvent, boolean otgOnline) throws RemoteException {
+            public void setBatteryState(
+                    int status,
+                    int health,
+                    int plugType,
+                    int level,
+                    int temp,
+                    int volt,
+                    int chargeUAh,
+                    int chargeFullUAh,
+                    long chargeTimeToFullSeconds,
+                    int secEvent,
+                    int secOnline,
+                    int secCurrentEvent,
+                    int secTxShareEvent,
+                    boolean otgOnline)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3458,7 +3572,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteBleScanStarted(WorkSource ws, boolean isUnoptimized) throws RemoteException {
+            public void noteBleScanStarted(WorkSource ws, boolean isUnoptimized)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3474,7 +3589,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteBleScanStopped(WorkSource ws, boolean isUnoptimized) throws RemoteException {
+            public void noteBleScanStopped(WorkSource ws, boolean isUnoptimized)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3504,7 +3620,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteBleScanResults(WorkSource ws, int numNewResults) throws RemoteException {
+            public void noteBleScanResults(WorkSource ws, int numNewResults)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3527,7 +3644,9 @@ public interface IBatteryStats extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(87, _data, _reply, 0);
                     _reply.readException();
-                    CellularBatteryStats _result = (CellularBatteryStats) _reply.readTypedObject(CellularBatteryStats.CREATOR);
+                    CellularBatteryStats _result =
+                            (CellularBatteryStats)
+                                    _reply.readTypedObject(CellularBatteryStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3543,7 +3662,8 @@ public interface IBatteryStats extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(88, _data, _reply, 0);
                     _reply.readException();
-                    WifiBatteryStats _result = (WifiBatteryStats) _reply.readTypedObject(WifiBatteryStats.CREATOR);
+                    WifiBatteryStats _result =
+                            (WifiBatteryStats) _reply.readTypedObject(WifiBatteryStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3559,7 +3679,8 @@ public interface IBatteryStats extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(89, _data, _reply, 0);
                     _reply.readException();
-                    GpsBatteryStats _result = (GpsBatteryStats) _reply.readTypedObject(GpsBatteryStats.CREATOR);
+                    GpsBatteryStats _result =
+                            (GpsBatteryStats) _reply.readTypedObject(GpsBatteryStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3575,7 +3696,8 @@ public interface IBatteryStats extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(90, _data, _reply, 0);
                     _reply.readException();
-                    WakeLockStats _result = (WakeLockStats) _reply.readTypedObject(WakeLockStats.CREATOR);
+                    WakeLockStats _result =
+                            (WakeLockStats) _reply.readTypedObject(WakeLockStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3591,7 +3713,9 @@ public interface IBatteryStats extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(91, _data, _reply, 0);
                     _reply.readException();
-                    BluetoothBatteryStats _result = (BluetoothBatteryStats) _reply.readTypedObject(BluetoothBatteryStats.CREATOR);
+                    BluetoothBatteryStats _result =
+                            (BluetoothBatteryStats)
+                                    _reply.readTypedObject(BluetoothBatteryStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3608,7 +3732,9 @@ public interface IBatteryStats extends IInterface {
                     _data.writeInt(uid);
                     this.mRemote.transact(92, _data, _reply, 0);
                     _reply.readException();
-                    HealthStatsParceler _result = (HealthStatsParceler) _reply.readTypedObject(HealthStatsParceler.CREATOR);
+                    HealthStatsParceler _result =
+                            (HealthStatsParceler)
+                                    _reply.readTypedObject(HealthStatsParceler.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3625,7 +3751,9 @@ public interface IBatteryStats extends IInterface {
                     _data.writeIntArray(uid);
                     this.mRemote.transact(93, _data, _reply, 0);
                     _reply.readException();
-                    HealthStatsParceler[] _result = (HealthStatsParceler[]) _reply.createTypedArray(HealthStatsParceler.CREATOR);
+                    HealthStatsParceler[] _result =
+                            (HealthStatsParceler[])
+                                    _reply.createTypedArray(HealthStatsParceler.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3634,7 +3762,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void takeUidSnapshotsAsync(int[] uid, ResultReceiver result) throws RemoteException {
+            public void takeUidSnapshotsAsync(int[] uid, ResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -3647,7 +3776,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteBluetoothControllerActivity(BluetoothActivityEnergyInfo info) throws RemoteException {
+            public void noteBluetoothControllerActivity(BluetoothActivityEnergyInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -3671,7 +3801,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteWifiControllerActivity(WifiActivityEnergyInfo info) throws RemoteException {
+            public void noteWifiControllerActivity(WifiActivityEnergyInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -3700,7 +3831,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void setChargerAcOnline(boolean online, boolean forceUpdate) throws RemoteException {
+            public void setChargerAcOnline(boolean online, boolean forceUpdate)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3776,7 +3908,9 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void setTemperatureNCurrent(int ap_temp, int pa_temp, int skin_temp, int sub_batt_temp, int current) throws RemoteException {
+            public void setTemperatureNCurrent(
+                    int ap_temp, int pa_temp, int skin_temp, int sub_batt_temp, int current)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -3792,7 +3926,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void updateSpeakerOutEnergyInfo(SpeakerOutEnergyInfo info) throws RemoteException {
+            public void updateSpeakerOutEnergyInfo(SpeakerOutEnergyInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -3804,7 +3939,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public boolean registerBatteryStatsCallback(IBatteryStatsCallback callback) throws RemoteException {
+            public boolean registerBatteryStatsCallback(IBatteryStatsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3821,7 +3957,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public boolean unregisterBatteryStatsCallback(IBatteryStatsCallback callback) throws RemoteException {
+            public boolean unregisterBatteryStatsCallback(IBatteryStatsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3881,7 +4018,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteBleDutyScanStarted(WorkSource ws, boolean isUnoptimized, int dutyCycle) throws RemoteException {
+            public void noteBleDutyScanStarted(WorkSource ws, boolean isUnoptimized, int dutyCycle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3898,7 +4036,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteBleDutyScanStopped(WorkSource ws, boolean isUnoptimized, int dutyCycle) throws RemoteException {
+            public void noteBleDutyScanStopped(WorkSource ws, boolean isUnoptimized, int dutyCycle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3915,7 +4054,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteDualScreenState(int state, int displayId, int screenPolicy) throws RemoteException {
+            public void noteDualScreenState(int state, int displayId, int screenPolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3932,7 +4072,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void noteDualScreenBrightness(int brightness, int displayId, int screenPolicy) throws RemoteException {
+            public void noteDualScreenBrightness(int brightness, int displayId, int screenPolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3949,7 +4090,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void updateSemModemActivityInfo(SemModemActivityInfo info) throws RemoteException {
+            public void updateSemModemActivityInfo(SemModemActivityInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -3968,7 +4110,9 @@ public interface IBatteryStats extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(116, _data, _reply, 0);
                     _reply.readException();
-                    SemCompanionDeviceBatteryInfo[] _result = (SemCompanionDeviceBatteryInfo[]) _reply.createTypedArray(SemCompanionDeviceBatteryInfo.CREATOR);
+                    SemCompanionDeviceBatteryInfo[] _result =
+                            (SemCompanionDeviceBatteryInfo[])
+                                    _reply.createTypedArray(SemCompanionDeviceBatteryInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3977,7 +4121,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public SemCompanionDeviceBatteryInfo getDeviceBatteryInfo(String address) throws RemoteException {
+            public SemCompanionDeviceBatteryInfo getDeviceBatteryInfo(String address)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3985,7 +4130,9 @@ public interface IBatteryStats extends IInterface {
                     _data.writeString(address);
                     this.mRemote.transact(117, _data, _reply, 0);
                     _reply.readException();
-                    SemCompanionDeviceBatteryInfo _result = (SemCompanionDeviceBatteryInfo) _reply.readTypedObject(SemCompanionDeviceBatteryInfo.CREATOR);
+                    SemCompanionDeviceBatteryInfo _result =
+                            (SemCompanionDeviceBatteryInfo)
+                                    _reply.readTypedObject(SemCompanionDeviceBatteryInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3994,7 +4141,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void registerDeviceBatteryInfoChanged(String packageName) throws RemoteException {
+            public void registerDeviceBatteryInfoChanged(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4009,7 +4157,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void unRegisterDeviceBatteryInfoChanged(String packageName) throws RemoteException {
+            public void unRegisterDeviceBatteryInfoChanged(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4024,7 +4173,8 @@ public interface IBatteryStats extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStats
-            public void setDeviceBatteryInfo(String address, SemCompanionDeviceBatteryInfo info) throws RemoteException {
+            public void setDeviceBatteryInfo(String address, SemCompanionDeviceBatteryInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4056,435 +4206,555 @@ public interface IBatteryStats extends IInterface {
         }
 
         protected void noteStartSensor_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStopSensor_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStartVideo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStopVideo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStartAudio_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStopAudio_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteResetVideo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteResetAudio_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteFlashlightOn_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteFlashlightOff_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStartCamera_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStopCamera_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteResetCamera_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteResetFlashlight_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStartGps_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStopGps_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteResetGps_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getBatteryUsageStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getSemBatteryUsageStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
-        protected void computeBatteryScreenOffRealtimeMs_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+        protected void computeBatteryScreenOffRealtimeMs_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getScreenOffDischargeMah_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteSyncStart_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteSyncFinish_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteJobStart_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteJobFinish_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStartWakelock_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStopWakelock_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStartWakelockFromSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteChangeWakelockFromSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStopWakelockFromSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteLongPartialWakelockStart_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
-        protected void noteLongPartialWakelockStartFromSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+        protected void noteLongPartialWakelockStartFromSource_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteLongPartialWakelockFinish_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
-        protected void noteLongPartialWakelockFinishFromSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+        protected void noteLongPartialWakelockFinishFromSource_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteVibratorOn_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteVibratorOff_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteGpsChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteGpsSignalQuality_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteScreenState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteScreenBrightness_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteUserActivity_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWakeUp_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteInteractive_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteConnectivityChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteMobileRadioPowerState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void notePhoneOn_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void notePhoneOff_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void notePhoneSignalStrength_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void notePhoneDataConnectionState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void notePhoneState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiOn_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiOff_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiRunning_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiRunningChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiStopped_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiSupplicantStateChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiRssiChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteFullWifiLockAcquired_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteFullWifiLockReleased_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiScanStarted_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiScanStopped_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiMulticastEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiMulticastDisabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
-        protected void noteFullWifiLockAcquiredFromSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+        protected void noteFullWifiLockAcquiredFromSource_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
-        protected void noteFullWifiLockReleasedFromSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+        protected void noteFullWifiLockReleasedFromSource_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiScanStartedFromSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiScanStoppedFromSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
-        protected void noteWifiBatchedScanStartedFromSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+        protected void noteWifiBatchedScanStartedFromSource_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
-        protected void noteWifiBatchedScanStoppedFromSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+        protected void noteWifiBatchedScanStoppedFromSource_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiRadioPowerState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
-        protected void noteNetworkInterfaceForTransports_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_noteNetworkInterfaceForTransports, getCallingPid(), getCallingUid());
+        protected void noteNetworkInterfaceForTransports_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_noteNetworkInterfaceForTransports,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void noteNetworkStatsEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteDeviceIdleMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void setBatteryState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getAwakeTimeBattery_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getAwakeTimePlugged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteBleScanStarted_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteBleScanStopped_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteBleScanReset_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteBleScanResults_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getCellularBatteryStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_getCellularBatteryStats, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_getCellularBatteryStats, getCallingPid(), getCallingUid());
         }
 
         protected void getWifiBatteryStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_getWifiBatteryStats, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_getWifiBatteryStats, getCallingPid(), getCallingUid());
         }
 
         protected void getGpsBatteryStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getWakeLockStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getBluetoothBatteryStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
-        protected void noteBluetoothControllerActivity_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+        protected void noteBluetoothControllerActivity_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteModemControllerActivity_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteWifiControllerActivity_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
-        protected void setChargingStateUpdateDelayMillis_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.POWER_SAVER, getCallingPid(), getCallingUid());
+        protected void setChargingStateUpdateDelayMillis_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.POWER_SAVER, getCallingPid(), getCallingUid());
         }
 
         protected void setChargerAcOnline_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
         }
 
         protected void setBatteryLevel_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
         }
 
         protected void unplugBattery_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
         }
 
         protected void resetBattery_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
         }
 
         protected void suspendBatteryInput_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
         }
 
         protected void setTemperatureNCurrent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void updateSpeakerOutEnergyInfo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void registerBatteryStatsCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void unregisterBatteryStatsCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteUpdateNetworkStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStartTxPowerSharing_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteStopTxPowerSharing_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteBleDutyScanStarted_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteBleDutyScanStopped_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteDualScreenState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void noteDualScreenBrightness_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void updateSemModemActivityInfo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

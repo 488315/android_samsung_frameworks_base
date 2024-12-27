@@ -8,14 +8,16 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISemAbTestConfigurationUpdateObserver extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.wifi.ISemAbTestConfigurationUpdateObserver";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.wifi.ISemAbTestConfigurationUpdateObserver";
 
-    void notifyAbTestConfigUpdate(SemAbTestConfiguration semAbTestConfiguration) throws RemoteException;
+    void notifyAbTestConfigUpdate(SemAbTestConfiguration semAbTestConfiguration)
+            throws RemoteException;
 
     public static class Default implements ISemAbTestConfigurationUpdateObserver {
         @Override // com.samsung.android.wifi.ISemAbTestConfigurationUpdateObserver
-        public void notifyAbTestConfigUpdate(SemAbTestConfiguration config) throws RemoteException {
-        }
+        public void notifyAbTestConfigUpdate(SemAbTestConfiguration config)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,8 @@ public interface ISemAbTestConfigurationUpdateObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemAbTestConfigurationUpdateObserver {
+    public abstract static class Stub extends Binder
+            implements ISemAbTestConfigurationUpdateObserver {
         static final int TRANSACTION_notifyAbTestConfigUpdate = 1;
 
         public Stub() {
@@ -34,7 +37,8 @@ public interface ISemAbTestConfigurationUpdateObserver extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(ISemAbTestConfigurationUpdateObserver.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(ISemAbTestConfigurationUpdateObserver.DESCRIPTOR);
             if (iin != null && (iin instanceof ISemAbTestConfigurationUpdateObserver)) {
                 return (ISemAbTestConfigurationUpdateObserver) iin;
             }
@@ -61,7 +65,8 @@ public interface ISemAbTestConfigurationUpdateObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemAbTestConfigurationUpdateObserver.DESCRIPTOR);
             }
@@ -71,7 +76,9 @@ public interface ISemAbTestConfigurationUpdateObserver extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SemAbTestConfiguration _arg0 = (SemAbTestConfiguration) data.readTypedObject(SemAbTestConfiguration.CREATOR);
+                    SemAbTestConfiguration _arg0 =
+                            (SemAbTestConfiguration)
+                                    data.readTypedObject(SemAbTestConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     notifyAbTestConfigUpdate(_arg0);
                     return true;
@@ -97,7 +104,8 @@ public interface ISemAbTestConfigurationUpdateObserver extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemAbTestConfigurationUpdateObserver
-            public void notifyAbTestConfigUpdate(SemAbTestConfiguration config) throws RemoteException {
+            public void notifyAbTestConfigUpdate(SemAbTestConfiguration config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemAbTestConfigurationUpdateObserver.DESCRIPTOR);

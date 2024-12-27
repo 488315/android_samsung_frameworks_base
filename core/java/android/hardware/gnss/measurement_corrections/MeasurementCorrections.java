@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class MeasurementCorrections implements Parcelable {
-    public static final Parcelable.Creator<MeasurementCorrections> CREATOR = new Parcelable.Creator<MeasurementCorrections>() { // from class: android.hardware.gnss.measurement_corrections.MeasurementCorrections.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MeasurementCorrections createFromParcel(Parcel _aidl_source) {
-            MeasurementCorrections _aidl_out = new MeasurementCorrections();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<MeasurementCorrections> CREATOR =
+            new Parcelable.Creator<MeasurementCorrections>() { // from class:
+                // android.hardware.gnss.measurement_corrections.MeasurementCorrections.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MeasurementCorrections createFromParcel(Parcel _aidl_source) {
+                    MeasurementCorrections _aidl_out = new MeasurementCorrections();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MeasurementCorrections[] newArray(int _aidl_size) {
-            return new MeasurementCorrections[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MeasurementCorrections[] newArray(int _aidl_size) {
+                    return new MeasurementCorrections[_aidl_size];
+                }
+            };
     public SingleSatCorrection[] satCorrections;
     public double latitudeDegrees = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     public double longitudeDegrees = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
@@ -120,7 +122,9 @@ public class MeasurementCorrections implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.satCorrections = (SingleSatCorrection[]) _aidl_parcel.createTypedArray(SingleSatCorrection.CREATOR);
+            this.satCorrections =
+                    (SingleSatCorrection[])
+                            _aidl_parcel.createTypedArray(SingleSatCorrection.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

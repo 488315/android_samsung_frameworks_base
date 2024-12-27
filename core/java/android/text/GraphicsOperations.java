@@ -7,9 +7,19 @@ import android.graphics.Paint;
 public interface GraphicsOperations extends CharSequence {
     void drawText(BaseCanvas baseCanvas, int i, int i2, float f, float f2, Paint paint);
 
-    void drawTextRun(BaseCanvas baseCanvas, int i, int i2, int i3, int i4, float f, float f2, boolean z, Paint paint);
+    void drawTextRun(
+            BaseCanvas baseCanvas,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            float f,
+            float f2,
+            boolean z,
+            Paint paint);
 
-    float getTextRunAdvances(int i, int i2, int i3, int i4, boolean z, float[] fArr, int i5, Paint paint);
+    float getTextRunAdvances(
+            int i, int i2, int i3, int i4, boolean z, float[] fArr, int i5, Paint paint);
 
     int getTextRunCursor(int i, int i2, boolean z, int i3, int i4, Paint paint);
 

@@ -3,10 +3,12 @@ package com.android.server.ondeviceintelligence;
 import android.net.shared.InitialConfiguration$$ExternalSyntheticOutline0;
 import android.os.Binder;
 import android.os.ShellCommand;
+
 import com.android.server.AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.am.ActiveServices$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 
@@ -15,7 +17,8 @@ import java.util.Objects;
 public final class OnDeviceIntelligenceShellCommand extends ShellCommand {
     public final OnDeviceIntelligenceManagerService mService;
 
-    public OnDeviceIntelligenceShellCommand(OnDeviceIntelligenceManagerService onDeviceIntelligenceManagerService) {
+    public OnDeviceIntelligenceShellCommand(
+            OnDeviceIntelligenceManagerService onDeviceIntelligenceManagerService) {
         this.mService = onDeviceIntelligenceManagerService;
     }
 
@@ -65,22 +68,40 @@ public final class OnDeviceIntelligenceShellCommand extends ShellCommand {
                 String nextArgRequired2 = getNextArgRequired();
                 String nextArg = getNextArg();
                 int parseInt = Integer.parseInt(getNextArgRequired());
-                OnDeviceIntelligenceManagerService onDeviceIntelligenceManagerService = this.mService;
+                OnDeviceIntelligenceManagerService onDeviceIntelligenceManagerService =
+                        this.mService;
                 String[] strArr = {nextArgRequired, nextArgRequired2};
                 onDeviceIntelligenceManagerService.getClass();
-                OnDeviceIntelligenceManagerService.enforceShellOnly(Binder.getCallingUid(), "setModelBroadcastKeys");
-                onDeviceIntelligenceManagerService.mContext.enforceCallingPermission("android.permission.USE_ON_DEVICE_INTELLIGENCE", "OnDeviceIntelligenceManagerService");
+                OnDeviceIntelligenceManagerService.enforceShellOnly(
+                        Binder.getCallingUid(), "setModelBroadcastKeys");
+                onDeviceIntelligenceManagerService.mContext.enforceCallingPermission(
+                        "android.permission.USE_ON_DEVICE_INTELLIGENCE",
+                        "OnDeviceIntelligenceManagerService");
                 synchronized (onDeviceIntelligenceManagerService.mLock) {
                     try {
                         onDeviceIntelligenceManagerService.mTemporaryBroadcastKeys = strArr;
                         onDeviceIntelligenceManagerService.mBroadcastPackageName = nextArg;
                         if (parseInt != -1) {
-                            onDeviceIntelligenceManagerService.getTemporaryHandler().sendEmptyMessageDelayed(1, parseInt);
+                            onDeviceIntelligenceManagerService
+                                    .getTemporaryHandler()
+                                    .sendEmptyMessageDelayed(1, parseInt);
                         }
                     } finally {
                     }
                 }
-                outPrintWriter.println(ActiveServices$$ExternalSyntheticOutline0.m(parseInt, nextArg, " for ", "ms", InitialConfiguration$$ExternalSyntheticOutline0.m("OnDeviceIntelligence Model Loading broadcast keys temporarily set to ", nextArgRequired, " \n and \n OnDeviceTrustedInferenceService set to ", nextArgRequired2, "\n and Package name set to : ")));
+                outPrintWriter.println(
+                        ActiveServices$$ExternalSyntheticOutline0.m(
+                                parseInt,
+                                nextArg,
+                                " for ",
+                                "ms",
+                                InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                        "OnDeviceIntelligence Model Loading broadcast keys"
+                                            + " temporarily set to ",
+                                        nextArgRequired,
+                                        " \n and \n OnDeviceTrustedInferenceService set to ",
+                                        nextArgRequired2,
+                                        "\n and Package name set to : ")));
                 return 0;
             case 1:
                 PrintWriter outPrintWriter2 = getOutPrintWriter();
@@ -88,45 +109,66 @@ public final class OnDeviceIntelligenceShellCommand extends ShellCommand {
                 StringBuilder sb = new StringBuilder("OnDeviceIntelligenceService set to :  ");
                 sb.append(serviceNames[0]);
                 sb.append(" \n and \n OnDeviceTrustedInferenceService set to : ");
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, serviceNames[1], outPrintWriter2);
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        sb, serviceNames[1], outPrintWriter2);
                 return 0;
             case 2:
                 PrintWriter outPrintWriter3 = getOutPrintWriter();
                 String nextArg2 = getNextArg();
                 String nextArg3 = getNextArg();
                 if (getRemainingArgsCount() == 0 && nextArg2 == null && nextArg3 == null) {
-                    OnDeviceIntelligenceManagerService.enforceShellOnly(Binder.getCallingUid(), "resetTemporaryServices");
+                    OnDeviceIntelligenceManagerService.enforceShellOnly(
+                            Binder.getCallingUid(), "resetTemporaryServices");
                     this.mService.resetTemporaryServices();
                     outPrintWriter3.println("OnDeviceIntelligenceManagerService temporary reset. ");
                 } else {
                     Objects.requireNonNull(nextArg2);
                     Objects.requireNonNull(nextArg3);
                     int parseInt2 = Integer.parseInt(getNextArgRequired());
-                    OnDeviceIntelligenceManagerService onDeviceIntelligenceManagerService2 = this.mService;
+                    OnDeviceIntelligenceManagerService onDeviceIntelligenceManagerService2 =
+                            this.mService;
                     String[] strArr2 = {nextArg2, nextArg3};
                     onDeviceIntelligenceManagerService2.getClass();
-                    OnDeviceIntelligenceManagerService.enforceShellOnly(Binder.getCallingUid(), "setTemporaryServices");
-                    onDeviceIntelligenceManagerService2.mContext.enforceCallingPermission("android.permission.USE_ON_DEVICE_INTELLIGENCE", "OnDeviceIntelligenceManagerService");
+                    OnDeviceIntelligenceManagerService.enforceShellOnly(
+                            Binder.getCallingUid(), "setTemporaryServices");
+                    onDeviceIntelligenceManagerService2.mContext.enforceCallingPermission(
+                            "android.permission.USE_ON_DEVICE_INTELLIGENCE",
+                            "OnDeviceIntelligenceManagerService");
                     synchronized (onDeviceIntelligenceManagerService2.mLock) {
                         try {
                             onDeviceIntelligenceManagerService2.mTemporaryServiceNames = strArr2;
-                            RemoteOnDeviceSandboxedInferenceService remoteOnDeviceSandboxedInferenceService = onDeviceIntelligenceManagerService2.mRemoteInferenceService;
+                            RemoteOnDeviceSandboxedInferenceService
+                                    remoteOnDeviceSandboxedInferenceService =
+                                            onDeviceIntelligenceManagerService2
+                                                    .mRemoteInferenceService;
                             if (remoteOnDeviceSandboxedInferenceService != null) {
                                 remoteOnDeviceSandboxedInferenceService.unbind();
                                 onDeviceIntelligenceManagerService2.mRemoteInferenceService = null;
                             }
-                            RemoteOnDeviceIntelligenceService remoteOnDeviceIntelligenceService = onDeviceIntelligenceManagerService2.mRemoteOnDeviceIntelligenceService;
+                            RemoteOnDeviceIntelligenceService remoteOnDeviceIntelligenceService =
+                                    onDeviceIntelligenceManagerService2
+                                            .mRemoteOnDeviceIntelligenceService;
                             if (remoteOnDeviceIntelligenceService != null) {
                                 remoteOnDeviceIntelligenceService.unbind();
-                                onDeviceIntelligenceManagerService2.mRemoteOnDeviceIntelligenceService = null;
+                                onDeviceIntelligenceManagerService2
+                                                .mRemoteOnDeviceIntelligenceService =
+                                        null;
                             }
                             if (parseInt2 != -1) {
-                                onDeviceIntelligenceManagerService2.getTemporaryHandler().sendEmptyMessageDelayed(0, parseInt2);
+                                onDeviceIntelligenceManagerService2
+                                        .getTemporaryHandler()
+                                        .sendEmptyMessageDelayed(0, parseInt2);
                             }
                         } finally {
                         }
                     }
-                    StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("OnDeviceIntelligenceService temporarily set to ", nextArg2, " \n and \n OnDeviceTrustedInferenceService set to ", nextArg3, " for ");
+                    StringBuilder m =
+                            InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                    "OnDeviceIntelligenceService temporarily set to ",
+                                    nextArg2,
+                                    " \n and \n OnDeviceTrustedInferenceService set to ",
+                                    nextArg3,
+                                    " for ");
                     m.append(parseInt2);
                     m.append("ms");
                     outPrintWriter3.println(m.toString());
@@ -136,21 +178,33 @@ public final class OnDeviceIntelligenceShellCommand extends ShellCommand {
                 PrintWriter outPrintWriter4 = getOutPrintWriter();
                 String nextArg4 = getNextArg();
                 int parseInt3 = Integer.parseInt(getNextArgRequired());
-                OnDeviceIntelligenceManagerService onDeviceIntelligenceManagerService3 = this.mService;
+                OnDeviceIntelligenceManagerService onDeviceIntelligenceManagerService3 =
+                        this.mService;
                 onDeviceIntelligenceManagerService3.getClass();
                 Objects.requireNonNull(nextArg4);
-                OnDeviceIntelligenceManagerService.enforceShellOnly(Binder.getCallingUid(), "setTemporaryDeviceConfigNamespace");
-                onDeviceIntelligenceManagerService3.mContext.enforceCallingPermission("android.permission.USE_ON_DEVICE_INTELLIGENCE", "OnDeviceIntelligenceManagerService");
+                OnDeviceIntelligenceManagerService.enforceShellOnly(
+                        Binder.getCallingUid(), "setTemporaryDeviceConfigNamespace");
+                onDeviceIntelligenceManagerService3.mContext.enforceCallingPermission(
+                        "android.permission.USE_ON_DEVICE_INTELLIGENCE",
+                        "OnDeviceIntelligenceManagerService");
                 synchronized (onDeviceIntelligenceManagerService3.mLock) {
                     try {
                         onDeviceIntelligenceManagerService3.mTemporaryConfigNamespace = nextArg4;
                         if (parseInt3 != -1) {
-                            onDeviceIntelligenceManagerService3.getTemporaryHandler().sendEmptyMessageDelayed(2, parseInt3);
+                            onDeviceIntelligenceManagerService3
+                                    .getTemporaryHandler()
+                                    .sendEmptyMessageDelayed(2, parseInt3);
                         }
                     } finally {
                     }
                 }
-                outPrintWriter4.println(AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0.m(parseInt3, "OnDeviceIntelligence DeviceConfig Namespace temporarily set to ", nextArg4, " for ", "ms"));
+                outPrintWriter4.println(
+                        AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0.m(
+                                parseInt3,
+                                "OnDeviceIntelligence DeviceConfig Namespace temporarily set to ",
+                                nextArg4,
+                                " for ",
+                                "ms"));
                 return 0;
             default:
                 return handleDefaultCommands(str);
@@ -163,8 +217,19 @@ public final class OnDeviceIntelligenceShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println();
-        outPrintWriter.println("  set-temporary-services [IntelligenceServiceComponentName] [InferenceServiceComponentName] [DURATION]");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Temporarily (for DURATION ms) changes the service implementations.", "    To reset, call without any arguments.", "  get-services To get the names of services that are currently being used.", "  set-model-broadcasts [ModelLoadedBroadcastKey] [ModelUnloadedBroadcastKey] [ReceiverPackageName] [DURATION] To set the names of broadcast intent keys that are to be emitted for cts tests.");
-        outPrintWriter.println("  set-deviceconfig-namespace [DeviceConfigNamespace] [DURATION] To set the device config namespace to use for cts tests.");
+        outPrintWriter.println(
+                "  set-temporary-services [IntelligenceServiceComponentName]"
+                    + " [InferenceServiceComponentName] [DURATION]");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Temporarily (for DURATION ms) changes the service implementations.",
+                "    To reset, call without any arguments.",
+                "  get-services To get the names of services that are currently being used.",
+                "  set-model-broadcasts [ModelLoadedBroadcastKey] [ModelUnloadedBroadcastKey]"
+                    + " [ReceiverPackageName] [DURATION] To set the names of broadcast intent keys"
+                    + " that are to be emitted for cts tests.");
+        outPrintWriter.println(
+                "  set-deviceconfig-namespace [DeviceConfigNamespace] [DURATION] To set the device"
+                    + " config namespace to use for cts tests.");
     }
 }

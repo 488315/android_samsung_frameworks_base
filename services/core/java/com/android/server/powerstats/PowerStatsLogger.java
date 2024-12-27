@@ -13,6 +13,7 @@ import android.os.SystemClock;
 import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -45,16 +46,22 @@ public final class PowerStatsLogger extends Handler {
         }
     }
 
-    public PowerStatsLogger(Looper looper, File file, PowerStatsHALWrapper$IPowerStatsHALWrapper powerStatsHALWrapper$IPowerStatsHALWrapper) {
+    public PowerStatsLogger(
+            Looper looper,
+            File file,
+            PowerStatsHALWrapper$IPowerStatsHALWrapper powerStatsHALWrapper$IPowerStatsHALWrapper) {
         super(looper);
         this.mStartWallTime = System.currentTimeMillis() - SystemClock.elapsedRealtime();
         this.mPowerStatsHALWrapper = powerStatsHALWrapper$IPowerStatsHALWrapper;
         this.mDataStoragePath = file;
-        PowerStatsDataStorage powerStatsDataStorage = new PowerStatsDataStorage(file, "log.powerstats.meter.0");
+        PowerStatsDataStorage powerStatsDataStorage =
+                new PowerStatsDataStorage(file, "log.powerstats.meter.0");
         this.mPowerStatsMeterStorage = powerStatsDataStorage;
-        PowerStatsDataStorage powerStatsDataStorage2 = new PowerStatsDataStorage(file, "log.powerstats.model.0");
+        PowerStatsDataStorage powerStatsDataStorage2 =
+                new PowerStatsDataStorage(file, "log.powerstats.model.0");
         this.mPowerStatsModelStorage = powerStatsDataStorage2;
-        PowerStatsDataStorage powerStatsDataStorage3 = new PowerStatsDataStorage(file, "log.powerstats.residency.0");
+        PowerStatsDataStorage powerStatsDataStorage3 =
+                new PowerStatsDataStorage(file, "log.powerstats.residency.0");
         this.mPowerStatsResidencyStorage = powerStatsDataStorage3;
         Channel[] energyMeterInfo = powerStatsHALWrapper$IPowerStatsHALWrapper.getEnergyMeterInfo();
         ProtoOutputStream protoOutputStream = new ProtoOutputStream();
@@ -66,7 +73,8 @@ public final class PowerStatsLogger extends Handler {
             powerStatsDataStorage.deleteLogs();
             updateCacheFile("meterCache", bytes);
         }
-        EnergyConsumer[] energyConsumerInfo = powerStatsHALWrapper$IPowerStatsHALWrapper.getEnergyConsumerInfo();
+        EnergyConsumer[] energyConsumerInfo =
+                powerStatsHALWrapper$IPowerStatsHALWrapper.getEnergyConsumerInfo();
         ProtoOutputStream protoOutputStream2 = new ProtoOutputStream();
         ProtoStreamUtils$ChannelUtils.packProtoMessage(energyConsumerInfo, protoOutputStream2);
         byte[] bytes2 = protoOutputStream2.getBytes();
@@ -76,7 +84,8 @@ public final class PowerStatsLogger extends Handler {
             powerStatsDataStorage2.deleteLogs();
             updateCacheFile("modelCache", bytes2);
         }
-        PowerEntity[] powerEntityInfo = powerStatsHALWrapper$IPowerStatsHALWrapper.getPowerEntityInfo();
+        PowerEntity[] powerEntityInfo =
+                powerStatsHALWrapper$IPowerStatsHALWrapper.getPowerEntityInfo();
         ProtoOutputStream protoOutputStream3 = new ProtoOutputStream();
         ProtoStreamUtils$ChannelUtils.packProtoMessage(powerEntityInfo, protoOutputStream3);
         byte[] bytes3 = protoOutputStream3.getBytes();
@@ -112,9 +121,11 @@ public final class PowerStatsLogger extends Handler {
     public final void handleMessage(Message message) {
         int i = message.what;
         long j = this.mStartWallTime;
-        PowerStatsHALWrapper$IPowerStatsHALWrapper powerStatsHALWrapper$IPowerStatsHALWrapper = this.mPowerStatsHALWrapper;
+        PowerStatsHALWrapper$IPowerStatsHALWrapper powerStatsHALWrapper$IPowerStatsHALWrapper =
+                this.mPowerStatsHALWrapper;
         if (i == 0) {
-            StateResidencyResult[] stateResidency = powerStatsHALWrapper$IPowerStatsHALWrapper.getStateResidency(new int[0]);
+            StateResidencyResult[] stateResidency =
+                    powerStatsHALWrapper$IPowerStatsHALWrapper.getStateResidency(new int[0]);
             if (stateResidency != null) {
                 for (int i2 = 0; i2 < stateResidency.length; i2++) {
                     int length = stateResidency[i2].stateResidencyData.length;
@@ -130,21 +141,24 @@ public final class PowerStatsLogger extends Handler {
         }
         PowerStatsDataStorage powerStatsDataStorage = this.mPowerStatsModelStorage;
         if (i == 1) {
-            EnergyConsumerResult[] energyConsumed = powerStatsHALWrapper$IPowerStatsHALWrapper.getEnergyConsumed(new int[0]);
+            EnergyConsumerResult[] energyConsumed =
+                    powerStatsHALWrapper$IPowerStatsHALWrapper.getEnergyConsumed(new int[0]);
             if (energyConsumed != null) {
                 for (EnergyConsumerResult energyConsumerResult : energyConsumed) {
                     energyConsumerResult.timestampMs += j;
                 }
             }
             ProtoOutputStream protoOutputStream2 = new ProtoOutputStream();
-            ProtoStreamUtils$ChannelUtils.packProtoMessage(energyConsumed, protoOutputStream2, true);
+            ProtoStreamUtils$ChannelUtils.packProtoMessage(
+                    energyConsumed, protoOutputStream2, true);
             powerStatsDataStorage.write(protoOutputStream2.getBytes());
             return;
         }
         if (i != 2) {
             return;
         }
-        EnergyMeasurement[] readEnergyMeter = powerStatsHALWrapper$IPowerStatsHALWrapper.readEnergyMeter(new int[0]);
+        EnergyMeasurement[] readEnergyMeter =
+                powerStatsHALWrapper$IPowerStatsHALWrapper.readEnergyMeter(new int[0]);
         if (readEnergyMeter != null) {
             for (EnergyMeasurement energyMeasurement : readEnergyMeter) {
                 energyMeasurement.timestampMs += j;
@@ -153,7 +167,8 @@ public final class PowerStatsLogger extends Handler {
         ProtoOutputStream protoOutputStream3 = new ProtoOutputStream();
         ProtoStreamUtils$ChannelUtils.packProtoMessage(readEnergyMeter, protoOutputStream3);
         this.mPowerStatsMeterStorage.write(protoOutputStream3.getBytes());
-        EnergyConsumerResult[] energyConsumed2 = powerStatsHALWrapper$IPowerStatsHALWrapper.getEnergyConsumed(new int[0]);
+        EnergyConsumerResult[] energyConsumed2 =
+                powerStatsHALWrapper$IPowerStatsHALWrapper.getEnergyConsumed(new int[0]);
         if (energyConsumed2 != null) {
             for (EnergyConsumerResult energyConsumerResult2 : energyConsumed2) {
                 energyConsumerResult2.timestampMs += j;

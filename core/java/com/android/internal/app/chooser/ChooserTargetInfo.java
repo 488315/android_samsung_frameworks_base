@@ -15,7 +15,11 @@ public interface ChooserTargetInfo extends TargetInfo {
         }
         ChooserTarget ct1 = getChooserTarget();
         ChooserTarget ct2 = other.getChooserTarget();
-        if (ct1 == null || ct2 == null || !ct1.getComponentName().equals(ct2.getComponentName()) || !TextUtils.equals(getDisplayLabel(), other.getDisplayLabel()) || !TextUtils.equals(getExtendedInfo(), other.getExtendedInfo())) {
+        if (ct1 == null
+                || ct2 == null
+                || !ct1.getComponentName().equals(ct2.getComponentName())
+                || !TextUtils.equals(getDisplayLabel(), other.getDisplayLabel())
+                || !TextUtils.equals(getExtendedInfo(), other.getExtendedInfo())) {
             return false;
         }
         return true;

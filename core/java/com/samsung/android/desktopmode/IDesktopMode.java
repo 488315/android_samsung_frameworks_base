@@ -6,9 +6,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.desktopmode.IDesktopModeBlocker;
-import com.samsung.android.desktopmode.IDesktopModeLauncher;
-import com.samsung.android.desktopmode.IDesktopModeListener;
 
 /* loaded from: classes6.dex */
 public interface IDesktopMode extends IInterface {
@@ -28,11 +25,13 @@ public interface IDesktopMode extends IInterface {
 
     void onSecuredAppLaunched(IBinder iBinder, String str) throws RemoteException;
 
-    boolean registerBlocker(IDesktopModeBlocker iDesktopModeBlocker, String str) throws RemoteException;
+    boolean registerBlocker(IDesktopModeBlocker iDesktopModeBlocker, String str)
+            throws RemoteException;
 
     void registerDesktopLauncher(IDesktopModeLauncher iDesktopModeLauncher) throws RemoteException;
 
-    boolean registerDesktopModeListener(IDesktopModeListener iDesktopModeListener, String str) throws RemoteException;
+    boolean registerDesktopModeListener(IDesktopModeListener iDesktopModeListener, String str)
+            throws RemoteException;
 
     void scheduleUpdateDesktopMode(boolean z) throws RemoteException;
 
@@ -40,7 +39,8 @@ public interface IDesktopMode extends IInterface {
 
     boolean unregisterBlocker(IDesktopModeBlocker iDesktopModeBlocker) throws RemoteException;
 
-    boolean unregisterDesktopModeListener(IDesktopModeListener iDesktopModeListener) throws RemoteException;
+    boolean unregisterDesktopModeListener(IDesktopModeListener iDesktopModeListener)
+            throws RemoteException;
 
     public static class Default implements IDesktopMode {
         @Override // com.samsung.android.desktopmode.IDesktopMode
@@ -59,17 +59,20 @@ public interface IDesktopMode extends IInterface {
         }
 
         @Override // com.samsung.android.desktopmode.IDesktopMode
-        public boolean registerDesktopModeListener(IDesktopModeListener callback, String name) throws RemoteException {
+        public boolean registerDesktopModeListener(IDesktopModeListener callback, String name)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.desktopmode.IDesktopMode
-        public boolean registerBlocker(IDesktopModeBlocker blocker, String name) throws RemoteException {
+        public boolean registerBlocker(IDesktopModeBlocker blocker, String name)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.desktopmode.IDesktopMode
-        public boolean unregisterDesktopModeListener(IDesktopModeListener callback) throws RemoteException {
+        public boolean unregisterDesktopModeListener(IDesktopModeListener callback)
+                throws RemoteException {
             return false;
         }
 
@@ -89,8 +92,7 @@ public interface IDesktopMode extends IInterface {
         }
 
         @Override // com.samsung.android.desktopmode.IDesktopMode
-        public void scheduleUpdateDesktopMode(boolean enter) throws RemoteException {
-        }
+        public void scheduleUpdateDesktopMode(boolean enter) throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopMode
         public Bundle getDesktopModeKillPolicy() throws RemoteException {
@@ -98,8 +100,7 @@ public interface IDesktopMode extends IInterface {
         }
 
         @Override // com.samsung.android.desktopmode.IDesktopMode
-        public void registerDesktopLauncher(IDesktopModeLauncher launcher) throws RemoteException {
-        }
+        public void registerDesktopLauncher(IDesktopModeLauncher launcher) throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopMode
         public Bundle sendMessage(Bundle message) throws RemoteException {
@@ -107,8 +108,8 @@ public interface IDesktopMode extends IInterface {
         }
 
         @Override // com.samsung.android.desktopmode.IDesktopMode
-        public void onSecuredAppLaunched(IBinder activityToken, String packageName) throws RemoteException {
-        }
+        public void onSecuredAppLaunched(IBinder activityToken, String packageName)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -116,7 +117,7 @@ public interface IDesktopMode extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDesktopMode {
+    public abstract static class Stub extends Binder implements IDesktopMode {
         static final int TRANSACTION_getDesktopModeKillPolicy = 11;
         static final int TRANSACTION_getDesktopModeState = 3;
         static final int TRANSACTION_isAllowed = 9;
@@ -193,7 +194,8 @@ public interface IDesktopMode extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDesktopMode.DESCRIPTOR);
             }
@@ -218,7 +220,8 @@ public interface IDesktopMode extends IInterface {
                     reply.writeTypedObject(_result3, 1);
                     return true;
                 case 4:
-                    IDesktopModeListener _arg0 = IDesktopModeListener.Stub.asInterface(data.readStrongBinder());
+                    IDesktopModeListener _arg0 =
+                            IDesktopModeListener.Stub.asInterface(data.readStrongBinder());
                     String _arg1 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result4 = registerDesktopModeListener(_arg0, _arg1);
@@ -226,7 +229,8 @@ public interface IDesktopMode extends IInterface {
                     reply.writeBoolean(_result4);
                     return true;
                 case 5:
-                    IDesktopModeBlocker _arg02 = IDesktopModeBlocker.Stub.asInterface(data.readStrongBinder());
+                    IDesktopModeBlocker _arg02 =
+                            IDesktopModeBlocker.Stub.asInterface(data.readStrongBinder());
                     String _arg12 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result5 = registerBlocker(_arg02, _arg12);
@@ -234,14 +238,16 @@ public interface IDesktopMode extends IInterface {
                     reply.writeBoolean(_result5);
                     return true;
                 case 6:
-                    IDesktopModeListener _arg03 = IDesktopModeListener.Stub.asInterface(data.readStrongBinder());
+                    IDesktopModeListener _arg03 =
+                            IDesktopModeListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result6 = unregisterDesktopModeListener(_arg03);
                     reply.writeNoException();
                     reply.writeBoolean(_result6);
                     return true;
                 case 7:
-                    IDesktopModeBlocker _arg04 = IDesktopModeBlocker.Stub.asInterface(data.readStrongBinder());
+                    IDesktopModeBlocker _arg04 =
+                            IDesktopModeBlocker.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result7 = unregisterBlocker(_arg04);
                     reply.writeNoException();
@@ -269,7 +275,8 @@ public interface IDesktopMode extends IInterface {
                     reply.writeTypedObject(_result10, 1);
                     return true;
                 case 12:
-                    IDesktopModeLauncher _arg06 = IDesktopModeLauncher.Stub.asInterface(data.readStrongBinder());
+                    IDesktopModeLauncher _arg06 =
+                            IDesktopModeLauncher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerDesktopLauncher(_arg06);
                     reply.writeNoException();
@@ -349,7 +356,9 @@ public interface IDesktopMode extends IInterface {
                     _data.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    SemDesktopModeState _result = (SemDesktopModeState) _reply.readTypedObject(SemDesktopModeState.CREATOR);
+                    SemDesktopModeState _result =
+                            (SemDesktopModeState)
+                                    _reply.readTypedObject(SemDesktopModeState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -358,7 +367,8 @@ public interface IDesktopMode extends IInterface {
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
-            public boolean registerDesktopModeListener(IDesktopModeListener callback, String name) throws RemoteException {
+            public boolean registerDesktopModeListener(IDesktopModeListener callback, String name)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -376,7 +386,8 @@ public interface IDesktopMode extends IInterface {
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
-            public boolean registerBlocker(IDesktopModeBlocker blocker, String name) throws RemoteException {
+            public boolean registerBlocker(IDesktopModeBlocker blocker, String name)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -394,7 +405,8 @@ public interface IDesktopMode extends IInterface {
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
-            public boolean unregisterDesktopModeListener(IDesktopModeListener callback) throws RemoteException {
+            public boolean unregisterDesktopModeListener(IDesktopModeListener callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -491,7 +503,8 @@ public interface IDesktopMode extends IInterface {
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
-            public void registerDesktopLauncher(IDesktopModeLauncher launcher) throws RemoteException {
+            public void registerDesktopLauncher(IDesktopModeLauncher launcher)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -523,7 +536,8 @@ public interface IDesktopMode extends IInterface {
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
-            public void onSecuredAppLaunched(IBinder activityToken, String packageName) throws RemoteException {
+            public void onSecuredAppLaunched(IBinder activityToken, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

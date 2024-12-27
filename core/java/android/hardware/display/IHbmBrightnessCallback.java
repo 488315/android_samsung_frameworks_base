@@ -14,8 +14,7 @@ public interface IHbmBrightnessCallback extends IInterface {
 
     public static class Default implements IHbmBrightnessCallback {
         @Override // android.hardware.display.IHbmBrightnessCallback
-        public void onChanged(int displayId, boolean isHbm) throws RemoteException {
-        }
+        public void onChanged(int displayId, boolean isHbm) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IHbmBrightnessCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHbmBrightnessCallback {
+    public abstract static class Stub extends Binder implements IHbmBrightnessCallback {
         static final int TRANSACTION_onChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IHbmBrightnessCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IHbmBrightnessCallback.DESCRIPTOR);
             }

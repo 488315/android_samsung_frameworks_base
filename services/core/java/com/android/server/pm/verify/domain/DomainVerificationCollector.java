@@ -4,11 +4,13 @@ import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Patterns;
+
 import com.android.internal.pm.pkg.component.ParsedActivity;
 import com.android.internal.pm.pkg.component.ParsedIntentInfo;
 import com.android.server.SystemConfig;
 import com.android.server.compat.PlatformCompat;
 import com.android.server.pm.pkg.AndroidPackage;
+
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.regex.Matcher;
@@ -20,8 +22,10 @@ public final class DomainVerificationCollector {
     public final Matcher mDomainMatcher = DOMAIN_NAME_WITH_WILDCARD.matcher("");
     public final PlatformCompat mPlatformCompat;
     public final SystemConfig mSystemConfig;
-    public static final Pattern DOMAIN_NAME_WITH_WILDCARD = Pattern.compile("(\\*\\.)?" + Patterns.DOMAIN_NAME.pattern());
-    public static final DomainVerificationCollector$$ExternalSyntheticLambda0 ARRAY_SET_COLLECTOR = new DomainVerificationCollector$$ExternalSyntheticLambda0();
+    public static final Pattern DOMAIN_NAME_WITH_WILDCARD =
+            Pattern.compile("(\\*\\.)?" + Patterns.DOMAIN_NAME.pattern());
+    public static final DomainVerificationCollector$$ExternalSyntheticLambda0 ARRAY_SET_COLLECTOR =
+            new DomainVerificationCollector$$ExternalSyntheticLambda0();
 
     public DomainVerificationCollector(PlatformCompat platformCompat, SystemConfig systemConfig) {
         this.mPlatformCompat = platformCompat;
@@ -35,9 +39,9 @@ public final class DomainVerificationCollector {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:22:0x0079, code lost:
-    
-        if (r4 == false) goto L19;
-     */
+
+       if (r4 == false) goto L19;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r11v0 */
     /* JADX WARN: Type inference failed for: r11v1, types: [int] */
@@ -51,15 +55,29 @@ public final class DomainVerificationCollector {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object collectDomains(com.android.server.pm.pkg.AndroidPackage r18, boolean r19, boolean r20, java.lang.Object r21, java.util.function.BiFunction r22) {
+    public final java.lang.Object collectDomains(
+            com.android.server.pm.pkg.AndroidPackage r18,
+            boolean r19,
+            boolean r20,
+            java.lang.Object r21,
+            java.util.function.BiFunction r22) {
         /*
             Method dump skipped, instructions count: 253
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.verify.domain.DomainVerificationCollector.collectDomains(com.android.server.pm.pkg.AndroidPackage, boolean, boolean, java.lang.Object, java.util.function.BiFunction):java.lang.Object");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.verify.domain.DomainVerificationCollector.collectDomains(com.android.server.pm.pkg.AndroidPackage,"
+                    + " boolean, boolean, java.lang.Object,"
+                    + " java.util.function.BiFunction):java.lang.Object");
     }
 
-    public final Object collectDomainsInternal(AndroidPackage androidPackage, boolean z, boolean z2, Object obj, BiFunction biFunction) {
+    public final Object collectDomainsInternal(
+            AndroidPackage androidPackage,
+            boolean z,
+            boolean z2,
+            Object obj,
+            BiFunction biFunction) {
         boolean matches;
         boolean z3;
         Object obj2;
@@ -74,7 +92,9 @@ public final class DomainVerificationCollector {
             int size2 = intents.size();
             for (int i3 = 0; i3 < size2 && z5; i3++) {
                 IntentFilter intentFilter = ((ParsedIntentInfo) intents.get(i3)).getIntentFilter();
-                if ((!z || intentFilter.getAutoVerify()) && intentFilter.hasCategory("android.intent.category.DEFAULT") && intentFilter.handlesWebUris(z)) {
+                if ((!z || intentFilter.getAutoVerify())
+                        && intentFilter.hasCategory("android.intent.category.DEFAULT")
+                        && intentFilter.handlesWebUris(z)) {
                     int countDataAuthorities = intentFilter.countDataAuthorities();
                     for (int i4 = 0; i4 < countDataAuthorities && z5; i4++) {
                         String host = intentFilter.getDataAuthority(i4).getHost();
@@ -87,7 +107,10 @@ public final class DomainVerificationCollector {
                             z3 = z2;
                         }
                         if (matches == z3) {
-                            int estimatedByteSizeOf = android.content.pm.verify.domain.DomainVerificationUtils.estimatedByteSizeOf(host) + i;
+                            int estimatedByteSizeOf =
+                                    android.content.pm.verify.domain.DomainVerificationUtils
+                                                    .estimatedByteSizeOf(host)
+                                            + i;
                             if (estimatedByteSizeOf < 1048576) {
                                 obj2 = obj;
                                 biFunction2 = biFunction;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
 import com.android.internal.os.RoSystemProperties;
 
 /* loaded from: classes3.dex */
@@ -34,11 +35,14 @@ public final class FactoryTest {
             Log.d(TAG, "Binary type is Factory by Case #0");
             return true;
         }
-        if (mContext != null && Settings.System.getInt(mContext.getContentResolver(), "SHOULD_SHUT_DOWN", 0) == 1) {
+        if (mContext != null
+                && Settings.System.getInt(mContext.getContentResolver(), "SHOULD_SHUT_DOWN", 0)
+                        == 1) {
             Log.d(TAG, "Factory mode is enabled by Case #1");
             return true;
         }
-        if (mTelephonyManager == null || !"999999999999999".equals(mTelephonyManager.getSubscriberId())) {
+        if (mTelephonyManager == null
+                || !"999999999999999".equals(mTelephonyManager.getSubscriberId())) {
             return false;
         }
         Log.d(TAG, "Factory mode is enabled by Case #2");
@@ -46,7 +50,9 @@ public final class FactoryTest {
     }
 
     public static boolean isAutomaticTestMode(Context context) {
-        if (context == null || Settings.System.getInt(context.getContentResolver(), "SHOULD_SHUT_DOWN", 0) != 1) {
+        if (context == null
+                || Settings.System.getInt(context.getContentResolver(), "SHOULD_SHUT_DOWN", 0)
+                        != 1) {
             return false;
         }
         Log.d(TAG, "The AutomaticTest mode was enabled.");
@@ -60,16 +66,18 @@ public final class FactoryTest {
         }
         switch (option) {
             case 0:
-                int value = Settings.System.getInt(context.getContentResolver(), "OPTION_SCREEN_LOCK", 0);
+                int value =
+                        Settings.System.getInt(
+                                context.getContentResolver(), "OPTION_SCREEN_LOCK", 0);
                 Log.d(TAG, "checkAutomationTestOption() : mode_screenlock=" + value);
-                if (value == 1) {
-                }
+                if (value == 1) {}
                 break;
             case 1:
-                int value2 = Settings.System.getInt(context.getContentResolver(), "OPTION_FACTORY_APP", 0);
+                int value2 =
+                        Settings.System.getInt(
+                                context.getContentResolver(), "OPTION_FACTORY_APP", 0);
                 Log.d(TAG, "checkAutomationTestOption() : mode_factoryapp=" + value2);
-                if (value2 == 1) {
-                }
+                if (value2 == 1) {}
                 break;
         }
         return false;
@@ -80,7 +88,8 @@ public final class FactoryTest {
     }
 
     public static boolean isFactoryBinary() {
-        return "factory".equalsIgnoreCase(SystemProperties.get("ro.factory.factory_binary", "Unknown"));
+        return "factory"
+                .equalsIgnoreCase(SystemProperties.get("ro.factory.factory_binary", "Unknown"));
     }
 
     public String getBuildType() {

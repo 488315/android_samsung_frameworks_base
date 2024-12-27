@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.IUpdateEngineCallback;
 import com.samsung.android.media.AudioParameter;
 
 /* loaded from: classes3.dex */
@@ -9,13 +8,15 @@ public interface IUpdateEngine extends IInterface {
 
     void applyPayload(String str, long j, long j2, String[] strArr) throws RemoteException;
 
-    void applyPayloadFd(ParcelFileDescriptor parcelFileDescriptor, long j, long j2, String[] strArr) throws RemoteException;
+    void applyPayloadFd(ParcelFileDescriptor parcelFileDescriptor, long j, long j2, String[] strArr)
+            throws RemoteException;
 
     boolean bind(IUpdateEngineCallback iUpdateEngineCallback) throws RemoteException;
 
     void cancel() throws RemoteException;
 
-    void cleanupSuccessfulUpdate(IUpdateEngineCallback iUpdateEngineCallback) throws RemoteException;
+    void cleanupSuccessfulUpdate(IUpdateEngineCallback iUpdateEngineCallback)
+            throws RemoteException;
 
     void resetShouldSwitchSlotOnReboot() throws RemoteException;
 
@@ -33,12 +34,17 @@ public interface IUpdateEngine extends IInterface {
 
     public static class Default implements IUpdateEngine {
         @Override // android.os.IUpdateEngine
-        public void applyPayload(String url, long payload_offset, long payload_size, String[] headerKeyValuePairs) throws RemoteException {
-        }
+        public void applyPayload(
+                String url, long payload_offset, long payload_size, String[] headerKeyValuePairs)
+                throws RemoteException {}
 
         @Override // android.os.IUpdateEngine
-        public void applyPayloadFd(ParcelFileDescriptor pfd, long payload_offset, long payload_size, String[] headerKeyValuePairs) throws RemoteException {
-        }
+        public void applyPayloadFd(
+                ParcelFileDescriptor pfd,
+                long payload_offset,
+                long payload_size,
+                String[] headerKeyValuePairs)
+                throws RemoteException {}
 
         @Override // android.os.IUpdateEngine
         public boolean bind(IUpdateEngineCallback callback) throws RemoteException {
@@ -51,28 +57,22 @@ public interface IUpdateEngine extends IInterface {
         }
 
         @Override // android.os.IUpdateEngine
-        public void suspend() throws RemoteException {
-        }
+        public void suspend() throws RemoteException {}
 
         @Override // android.os.IUpdateEngine
-        public void resume() throws RemoteException {
-        }
+        public void resume() throws RemoteException {}
 
         @Override // android.os.IUpdateEngine
-        public void cancel() throws RemoteException {
-        }
+        public void cancel() throws RemoteException {}
 
         @Override // android.os.IUpdateEngine
-        public void resetStatus() throws RemoteException {
-        }
+        public void resetStatus() throws RemoteException {}
 
         @Override // android.os.IUpdateEngine
-        public void setShouldSwitchSlotOnReboot(String metadataFilename) throws RemoteException {
-        }
+        public void setShouldSwitchSlotOnReboot(String metadataFilename) throws RemoteException {}
 
         @Override // android.os.IUpdateEngine
-        public void resetShouldSwitchSlotOnReboot() throws RemoteException {
-        }
+        public void resetShouldSwitchSlotOnReboot() throws RemoteException {}
 
         @Override // android.os.IUpdateEngine
         public boolean verifyPayloadApplicable(String metadataFilename) throws RemoteException {
@@ -80,13 +80,14 @@ public interface IUpdateEngine extends IInterface {
         }
 
         @Override // android.os.IUpdateEngine
-        public long allocateSpaceForPayload(String metadataFilename, String[] headerKeyValuePairs) throws RemoteException {
+        public long allocateSpaceForPayload(String metadataFilename, String[] headerKeyValuePairs)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.os.IUpdateEngine
-        public void cleanupSuccessfulUpdate(IUpdateEngineCallback callback) throws RemoteException {
-        }
+        public void cleanupSuccessfulUpdate(IUpdateEngineCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -94,7 +95,7 @@ public interface IUpdateEngine extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUpdateEngine {
+    public abstract static class Stub extends Binder implements IUpdateEngine {
         public static final String DESCRIPTOR = "android.os.IUpdateEngine";
         static final int TRANSACTION_allocateSpaceForPayload = 12;
         static final int TRANSACTION_applyPayload = 1;
@@ -169,7 +170,8 @@ public interface IUpdateEngine extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -188,7 +190,9 @@ public interface IUpdateEngine extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 2:
-                    ParcelFileDescriptor _arg02 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg02 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg12 = data.readLong();
                     long _arg22 = data.readLong();
                     String[] _arg32 = data.createStringArray();
@@ -197,14 +201,16 @@ public interface IUpdateEngine extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 3:
-                    IUpdateEngineCallback _arg03 = IUpdateEngineCallback.Stub.asInterface(data.readStrongBinder());
+                    IUpdateEngineCallback _arg03 =
+                            IUpdateEngineCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result = bind(_arg03);
                     reply.writeNoException();
                     reply.writeBoolean(_result);
                     return true;
                 case 4:
-                    IUpdateEngineCallback _arg04 = IUpdateEngineCallback.Stub.asInterface(data.readStrongBinder());
+                    IUpdateEngineCallback _arg04 =
+                            IUpdateEngineCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result2 = unbind(_arg04);
                     reply.writeNoException();
@@ -252,7 +258,8 @@ public interface IUpdateEngine extends IInterface {
                     reply.writeLong(_result4);
                     return true;
                 case 13:
-                    IUpdateEngineCallback _arg08 = IUpdateEngineCallback.Stub.asInterface(data.readStrongBinder());
+                    IUpdateEngineCallback _arg08 =
+                            IUpdateEngineCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     cleanupSuccessfulUpdate(_arg08);
                     reply.writeNoException();
@@ -279,7 +286,12 @@ public interface IUpdateEngine extends IInterface {
             }
 
             @Override // android.os.IUpdateEngine
-            public void applyPayload(String url, long payload_offset, long payload_size, String[] headerKeyValuePairs) throws RemoteException {
+            public void applyPayload(
+                    String url,
+                    long payload_offset,
+                    long payload_size,
+                    String[] headerKeyValuePairs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -297,7 +309,12 @@ public interface IUpdateEngine extends IInterface {
             }
 
             @Override // android.os.IUpdateEngine
-            public void applyPayloadFd(ParcelFileDescriptor pfd, long payload_offset, long payload_size, String[] headerKeyValuePairs) throws RemoteException {
+            public void applyPayloadFd(
+                    ParcelFileDescriptor pfd,
+                    long payload_offset,
+                    long payload_size,
+                    String[] headerKeyValuePairs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -405,7 +422,8 @@ public interface IUpdateEngine extends IInterface {
             }
 
             @Override // android.os.IUpdateEngine
-            public void setShouldSwitchSlotOnReboot(String metadataFilename) throws RemoteException {
+            public void setShouldSwitchSlotOnReboot(String metadataFilename)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -451,7 +469,8 @@ public interface IUpdateEngine extends IInterface {
             }
 
             @Override // android.os.IUpdateEngine
-            public long allocateSpaceForPayload(String metadataFilename, String[] headerKeyValuePairs) throws RemoteException {
+            public long allocateSpaceForPayload(
+                    String metadataFilename, String[] headerKeyValuePairs) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -469,7 +488,8 @@ public interface IUpdateEngine extends IInterface {
             }
 
             @Override // android.os.IUpdateEngine
-            public void cleanupSuccessfulUpdate(IUpdateEngineCallback callback) throws RemoteException {
+            public void cleanupSuccessfulUpdate(IUpdateEngineCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

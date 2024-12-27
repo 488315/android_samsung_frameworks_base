@@ -8,14 +8,17 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IDeviceIdleControllerAdapter extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telecom.IDeviceIdleControllerAdapter";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telecom.IDeviceIdleControllerAdapter";
 
-    void exemptAppTemporarilyForEvent(String str, long j, int i, String str2) throws RemoteException;
+    void exemptAppTemporarilyForEvent(String str, long j, int i, String str2)
+            throws RemoteException;
 
     public static class Default implements IDeviceIdleControllerAdapter {
         @Override // com.android.internal.telecom.IDeviceIdleControllerAdapter
-        public void exemptAppTemporarilyForEvent(String packageName, long duration, int userHandle, String reason) throws RemoteException {
-        }
+        public void exemptAppTemporarilyForEvent(
+                String packageName, long duration, int userHandle, String reason)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +26,7 @@ public interface IDeviceIdleControllerAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDeviceIdleControllerAdapter {
+    public abstract static class Stub extends Binder implements IDeviceIdleControllerAdapter {
         static final int TRANSACTION_exemptAppTemporarilyForEvent = 1;
 
         public Stub() {
@@ -61,7 +64,8 @@ public interface IDeviceIdleControllerAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDeviceIdleControllerAdapter.DESCRIPTOR);
             }
@@ -101,7 +105,9 @@ public interface IDeviceIdleControllerAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IDeviceIdleControllerAdapter
-            public void exemptAppTemporarilyForEvent(String packageName, long duration, int userHandle, String reason) throws RemoteException {
+            public void exemptAppTemporarilyForEvent(
+                    String packageName, long duration, int userHandle, String reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

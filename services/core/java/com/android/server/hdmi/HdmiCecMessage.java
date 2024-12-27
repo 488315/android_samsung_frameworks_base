@@ -2,10 +2,13 @@ package com.android.server.hdmi;
 
 import android.hardware.hdmi.DeviceFeatures;
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
+
 import com.android.internal.util.FrameworkStatsLog;
+
+import libcore.util.EmptyArray;
+
 import java.util.Arrays;
 import java.util.Objects;
-import libcore.util.EmptyArray;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -68,7 +71,9 @@ public class HdmiCecMessage {
             r3.<init>(r4, r5, r6, r7, r8)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.hdmi.HdmiCecMessage.<init>(int, int, int, byte[]):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.hdmi.HdmiCecMessage.<init>(int, int,"
+                    + " int, byte[]):void");
     }
 
     public static HdmiCecMessage build(int i, int i2, int i3) {
@@ -83,24 +88,51 @@ public class HdmiCecMessage {
             }
             byte b = bArr[0];
             int validateAddress = HdmiCecMessageValidator.validateAddress(i, i2, 32767, 32767);
-            return validateAddress == 0 ? new SetAudioVolumeLevelMessage(i, i2, b, bArr) : new HdmiCecMessage(i, i2, 115, validateAddress, bArr);
+            return validateAddress == 0
+                    ? new SetAudioVolumeLevelMessage(i, i2, b, bArr)
+                    : new HdmiCecMessage(i, i2, 115, validateAddress, bArr);
         }
         if (i4 != 166) {
             return new HdmiCecMessage(i, i2, i4, bArr);
         }
         int validateAddress2 = HdmiCecMessageValidator.validateAddress(i, i2, 32767, 32768);
         if (validateAddress2 != 0) {
-            return new HdmiCecMessage(i, i2, FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_MISSING_PERSONAL_APP, validateAddress2, bArr);
+            return new HdmiCecMessage(
+                    i,
+                    i2,
+                    FrameworkStatsLog
+                            .DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_MISSING_PERSONAL_APP,
+                    validateAddress2,
+                    bArr);
         }
         if (bArr.length < 4) {
-            return new HdmiCecMessage(i, i2, FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_MISSING_PERSONAL_APP, 4, bArr);
+            return new HdmiCecMessage(
+                    i,
+                    i2,
+                    FrameworkStatsLog
+                            .DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_MISSING_PERSONAL_APP,
+                    4,
+                    bArr);
         }
         int unsignedInt = Byte.toUnsignedInt(bArr[0]);
         int endOfSequence = HdmiUtils.getEndOfSequence(2, bArr);
         if (endOfSequence != -1 && HdmiUtils.getEndOfSequence(endOfSequence + 1, bArr) != -1) {
-            return new ReportFeaturesMessage(i, i2, bArr, unsignedInt, DeviceFeatures.fromOperand(Arrays.copyOfRange(bArr, HdmiUtils.getEndOfSequence(2, bArr) + 1, bArr.length)));
+            return new ReportFeaturesMessage(
+                    i,
+                    i2,
+                    bArr,
+                    unsignedInt,
+                    DeviceFeatures.fromOperand(
+                            Arrays.copyOfRange(
+                                    bArr, HdmiUtils.getEndOfSequence(2, bArr) + 1, bArr.length)));
         }
-        return new HdmiCecMessage(i, i2, FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_MISSING_PERSONAL_APP, 4, bArr);
+        return new HdmiCecMessage(
+                i,
+                i2,
+                FrameworkStatsLog
+                        .DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_MISSING_PERSONAL_APP,
+                4,
+                bArr);
     }
 
     public final boolean equals(Object obj) {
@@ -108,11 +140,19 @@ public class HdmiCecMessage {
             return false;
         }
         HdmiCecMessage hdmiCecMessage = (HdmiCecMessage) obj;
-        return this.mSource == hdmiCecMessage.mSource && this.mDestination == hdmiCecMessage.mDestination && this.mOpcode == hdmiCecMessage.mOpcode && Arrays.equals(this.mParams, hdmiCecMessage.mParams) && this.mValidationResult == hdmiCecMessage.mValidationResult;
+        return this.mSource == hdmiCecMessage.mSource
+                && this.mDestination == hdmiCecMessage.mDestination
+                && this.mOpcode == hdmiCecMessage.mOpcode
+                && Arrays.equals(this.mParams, hdmiCecMessage.mParams)
+                && this.mValidationResult == hdmiCecMessage.mValidationResult;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mSource), Integer.valueOf(this.mDestination), Integer.valueOf(this.mOpcode), Integer.valueOf(Arrays.hashCode(this.mParams)));
+        return Objects.hash(
+                Integer.valueOf(this.mSource),
+                Integer.valueOf(this.mDestination),
+                Integer.valueOf(this.mOpcode),
+                Integer.valueOf(Arrays.hashCode(this.mParams)));
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -130,6 +170,8 @@ public class HdmiCecMessage {
             Method dump skipped, instructions count: 1012
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.hdmi.HdmiCecMessage.toString():java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.hdmi.HdmiCecMessage.toString():java.lang.String");
     }
 }

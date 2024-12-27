@@ -3,15 +3,16 @@ package com.android.server.rotationresolver;
 import android.os.ICancellationSignal;
 import android.os.RemoteException;
 import android.util.Slog;
-import com.android.server.rotationresolver.RemoteRotationResolverService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class RemoteRotationResolverService$$ExternalSyntheticLambda1 implements Runnable {
+public final /* synthetic */ class RemoteRotationResolverService$$ExternalSyntheticLambda1
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ RemoteRotationResolverService.RotationRequest f$0;
 
-    public /* synthetic */ RemoteRotationResolverService$$ExternalSyntheticLambda1(RemoteRotationResolverService.RotationRequest rotationRequest, int i) {
+    public /* synthetic */ RemoteRotationResolverService$$ExternalSyntheticLambda1(
+            RemoteRotationResolverService.RotationRequest rotationRequest, int i) {
         this.$r8$classId = i;
         this.f$0 = rotationRequest;
     }
@@ -27,7 +28,9 @@ public final /* synthetic */ class RemoteRotationResolverService$$ExternalSynthe
                     try {
                         if (!rotationRequest.mIsFulfilled) {
                             rotationRequest.mCallbackInternal.onFailure(1);
-                            Slog.d("RemoteRotationResolverService", "Trying to cancel the remote request. Reason: Timed out.");
+                            Slog.d(
+                                    "RemoteRotationResolverService",
+                                    "Trying to cancel the remote request. Reason: Timed out.");
                             rotationRequest.cancelInternal();
                         }
                     } finally {
@@ -49,7 +52,9 @@ public final /* synthetic */ class RemoteRotationResolverService$$ExternalSynthe
                             }
                         } catch (RemoteException unused) {
                             int i3 = RemoteRotationResolverService.$r8$clinit;
-                            Slog.w("RemoteRotationResolverService", "Failed to cancel request in remote service.");
+                            Slog.w(
+                                    "RemoteRotationResolverService",
+                                    "Failed to cancel request in remote service.");
                         }
                         return;
                     } finally {

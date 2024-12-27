@@ -2,6 +2,7 @@ package com.android.server.timedetector;
 
 import android.app.time.UnixEpochTime;
 import android.os.ShellCommand;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -38,7 +39,9 @@ public final class NetworkTimeSuggestion {
                 if (num == null) {
                     throw new IllegalArgumentException("No uncertaintyMillis specified.");
                 }
-                NetworkTimeSuggestion networkTimeSuggestion = new NetworkTimeSuggestion(new UnixEpochTime(l.longValue(), l2.longValue()), num.intValue());
+                NetworkTimeSuggestion networkTimeSuggestion =
+                        new NetworkTimeSuggestion(
+                                new UnixEpochTime(l.longValue(), l2.longValue()), num.intValue());
                 networkTimeSuggestion.addDebugInfo("Command line injection");
                 return networkTimeSuggestion;
             }
@@ -74,7 +77,8 @@ public final class NetworkTimeSuggestion {
             return false;
         }
         NetworkTimeSuggestion networkTimeSuggestion = (NetworkTimeSuggestion) obj;
-        return this.mUnixEpochTime.equals(networkTimeSuggestion.mUnixEpochTime) && this.mUncertaintyMillis == networkTimeSuggestion.mUncertaintyMillis;
+        return this.mUnixEpochTime.equals(networkTimeSuggestion.mUnixEpochTime)
+                && this.mUncertaintyMillis == networkTimeSuggestion.mUncertaintyMillis;
     }
 
     public final int hashCode() {
@@ -82,6 +86,12 @@ public final class NetworkTimeSuggestion {
     }
 
     public final String toString() {
-        return "NetworkTimeSuggestion{mUnixEpochTime=" + this.mUnixEpochTime + ", mUncertaintyMillis=" + this.mUncertaintyMillis + ", mDebugInfo=" + this.mDebugInfo + '}';
+        return "NetworkTimeSuggestion{mUnixEpochTime="
+                + this.mUnixEpochTime
+                + ", mUncertaintyMillis="
+                + this.mUncertaintyMillis
+                + ", mDebugInfo="
+                + this.mDebugInfo
+                + '}';
     }
 }

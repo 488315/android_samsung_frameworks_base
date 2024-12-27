@@ -9,6 +9,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Set;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.BERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
+
 import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
@@ -30,7 +31,13 @@ public class SignedData extends ASN1Object implements PKCSObjectIdentifiers {
         return null;
     }
 
-    public SignedData(ASN1Integer _version, ASN1Set _digestAlgorithms, ContentInfo _contentInfo, ASN1Set _certificates, ASN1Set _crls, ASN1Set _signerInfos) {
+    public SignedData(
+            ASN1Integer _version,
+            ASN1Set _digestAlgorithms,
+            ContentInfo _contentInfo,
+            ASN1Set _certificates,
+            ASN1Set _crls,
+            ASN1Set _signerInfos) {
         this.version = _version;
         this.digestAlgorithms = _digestAlgorithms;
         this.contentInfo = _contentInfo;
@@ -56,7 +63,8 @@ public class SignedData extends ASN1Object implements PKCSObjectIdentifiers {
                         this.crls = ASN1Set.getInstance(tagged, false);
                         break;
                     default:
-                        throw new IllegalArgumentException("unknown tag value " + tagged.getTagNo());
+                        throw new IllegalArgumentException(
+                                "unknown tag value " + tagged.getTagNo());
                 }
             } else {
                 this.signerInfos = (ASN1Set) o;
@@ -88,7 +96,8 @@ public class SignedData extends ASN1Object implements PKCSObjectIdentifiers {
         return this.signerInfos;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(6);
         v.add(this.version);

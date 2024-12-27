@@ -3,6 +3,7 @@ package android.os;
 import android.annotation.SystemApi;
 import android.app.PropertyInvalidatedCache;
 import android.util.ArraySet;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Iterator;
@@ -13,19 +14,20 @@ public class IpcDataCache<Query, Result> extends PropertyInvalidatedCache<Query,
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final String MODULE_BLUETOOTH = "bluetooth";
+
     public static final String MODULE_SYSTEM = "system_server";
     public static final String MODULE_TEST = "test";
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface IpcDataCacheModule {
-    }
+    public @interface IpcDataCacheModule {}
 
     public interface RemoteCall<Query, Result> {
         Result apply(Query query) throws RemoteException;
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public static abstract class QueryHandler<Q, R> extends PropertyInvalidatedCache.QueryHandler<Q, R> {
+    public abstract static class QueryHandler<Q, R>
+            extends PropertyInvalidatedCache.QueryHandler<Q, R> {
         @Override // android.app.PropertyInvalidatedCache.QueryHandler
         public abstract R apply(Q q);
 
@@ -36,7 +38,12 @@ public class IpcDataCache<Query, Result> extends PropertyInvalidatedCache<Query,
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public IpcDataCache(int maxEntries, String module, String api, String cacheName, QueryHandler<Query, Result> computer) {
+    public IpcDataCache(
+            int maxEntries,
+            String module,
+            String api,
+            String cacheName,
+            QueryHandler<Query, Result> computer) {
         super(maxEntries, module, api, cacheName, computer);
     }
 
@@ -157,14 +164,16 @@ public class IpcDataCache<Query, Result> extends PropertyInvalidatedCache<Query,
         super(config.maxEntries(), config.module(), config.api(), config.name(), computer);
     }
 
-    private static class SystemServerCallHandler<Query, Result> extends QueryHandler<Query, Result> {
+    private static class SystemServerCallHandler<Query, Result>
+            extends QueryHandler<Query, Result> {
         private final RemoteCall<Query, Result> mHandler;
 
         public SystemServerCallHandler(RemoteCall handler) {
             this.mHandler = handler;
         }
 
-        @Override // android.os.IpcDataCache.QueryHandler, android.app.PropertyInvalidatedCache.QueryHandler
+        @Override // android.os.IpcDataCache.QueryHandler,
+                  // android.app.PropertyInvalidatedCache.QueryHandler
         public Result apply(Query query) {
             try {
                 return this.mHandler.apply(query);

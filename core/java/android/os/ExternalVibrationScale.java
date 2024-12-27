@@ -1,24 +1,25 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class ExternalVibrationScale implements Parcelable {
-    public static final Parcelable.Creator<ExternalVibrationScale> CREATOR = new Parcelable.Creator<ExternalVibrationScale>() { // from class: android.os.ExternalVibrationScale.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExternalVibrationScale createFromParcel(Parcel _aidl_source) {
-            ExternalVibrationScale _aidl_out = new ExternalVibrationScale();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ExternalVibrationScale> CREATOR =
+            new Parcelable.Creator<
+                    ExternalVibrationScale>() { // from class: android.os.ExternalVibrationScale.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExternalVibrationScale createFromParcel(Parcel _aidl_source) {
+                    ExternalVibrationScale _aidl_out = new ExternalVibrationScale();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExternalVibrationScale[] newArray(int _aidl_size) {
-            return new ExternalVibrationScale[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExternalVibrationScale[] newArray(int _aidl_size) {
+                    return new ExternalVibrationScale[_aidl_size];
+                }
+            };
     public int scaleLevel = 0;
     public float adaptiveHapticsScale = 1.0f;
 

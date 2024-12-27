@@ -10,9 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.PopupWindow;
+
 import com.android.internal.R;
 import com.android.internal.view.menu.MenuBuilder;
 import com.android.internal.widget.floatingtoolbar.FloatingToolbar;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -37,40 +39,51 @@ public final class FloatingActionMode extends ActionMode {
     private final Rect mScreenRect;
     private final int[] mViewPositionOnScreen;
     private final Rect mViewRectOnScreen;
-    private final Runnable mMovingOff = new Runnable() { // from class: com.android.internal.view.FloatingActionMode.1
-        @Override // java.lang.Runnable
-        public void run() {
-            if (FloatingActionMode.this.isViewStillActive()) {
-                FloatingActionMode.this.mFloatingToolbarVisibilityHelper.setMoving(false);
-                FloatingActionMode.this.mFloatingToolbarVisibilityHelper.updateToolbarVisibility();
-            }
-        }
-    };
-    private final Runnable mHideOff = new Runnable() { // from class: com.android.internal.view.FloatingActionMode.2
-        @Override // java.lang.Runnable
-        public void run() {
-            if (FloatingActionMode.this.isViewStillActive()) {
-                FloatingActionMode.this.mFloatingToolbarVisibilityHelper.setHideRequested(false);
-                FloatingActionMode.this.mFloatingToolbarVisibilityHelper.updateToolbarVisibility();
-            }
-        }
-    };
+    private final Runnable mMovingOff =
+            new Runnable() { // from class: com.android.internal.view.FloatingActionMode.1
+                @Override // java.lang.Runnable
+                public void run() {
+                    if (FloatingActionMode.this.isViewStillActive()) {
+                        FloatingActionMode.this.mFloatingToolbarVisibilityHelper.setMoving(false);
+                        FloatingActionMode.this.mFloatingToolbarVisibilityHelper
+                                .updateToolbarVisibility();
+                    }
+                }
+            };
+    private final Runnable mHideOff =
+            new Runnable() { // from class: com.android.internal.view.FloatingActionMode.2
+                @Override // java.lang.Runnable
+                public void run() {
+                    if (FloatingActionMode.this.isViewStillActive()) {
+                        FloatingActionMode.this.mFloatingToolbarVisibilityHelper.setHideRequested(
+                                false);
+                        FloatingActionMode.this.mFloatingToolbarVisibilityHelper
+                                .updateToolbarVisibility();
+                    }
+                }
+            };
 
-    public FloatingActionMode(Context context, ActionMode.Callback2 callback, View originatingView, FloatingToolbar floatingToolbar) {
+    public FloatingActionMode(
+            Context context,
+            ActionMode.Callback2 callback,
+            View originatingView,
+            FloatingToolbar floatingToolbar) {
         this.mContext = (Context) Objects.requireNonNull(context);
         this.mCallback = (ActionMode.Callback2) Objects.requireNonNull(callback);
         this.mMenu = new MenuBuilder(context).setDefaultShowAsAction(1);
         setType(1);
-        this.mMenu.setCallback(new MenuBuilder.Callback() { // from class: com.android.internal.view.FloatingActionMode.3
-            @Override // com.android.internal.view.menu.MenuBuilder.Callback
-            public void onMenuModeChange(MenuBuilder menu) {
-            }
+        this.mMenu.setCallback(
+                new MenuBuilder
+                        .Callback() { // from class: com.android.internal.view.FloatingActionMode.3
+                    @Override // com.android.internal.view.menu.MenuBuilder.Callback
+                    public void onMenuModeChange(MenuBuilder menu) {}
 
-            @Override // com.android.internal.view.menu.MenuBuilder.Callback
-            public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
-                return FloatingActionMode.this.mCallback.onActionItemClicked(FloatingActionMode.this, item);
-            }
-        });
+                    @Override // com.android.internal.view.menu.MenuBuilder.Callback
+                    public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
+                        return FloatingActionMode.this.mCallback.onActionItemClicked(
+                                FloatingActionMode.this, item);
+                    }
+                });
         this.mContentRect = new Rect();
         this.mContentRectOnScreen = new Rect();
         this.mPreviousContentRectOnScreen = new Rect();
@@ -82,21 +95,36 @@ public final class FloatingActionMode extends ActionMode {
         this.mScreenRect = new Rect();
         this.mOriginatingView = (View) Objects.requireNonNull(originatingView);
         this.mOriginatingView.getLocationOnScreen(this.mViewPositionOnScreen);
-        this.mBottomAllowance = Math.max(context.getResources().getDimensionPixelSize(R.dimen.content_rect_bottom_clip_allowance), context.getResources().getDimensionPixelSize(R.dimen.tw_edittext_field_handler_min_width));
+        this.mBottomAllowance =
+                Math.max(
+                        context.getResources()
+                                .getDimensionPixelSize(R.dimen.content_rect_bottom_clip_allowance),
+                        context.getResources()
+                                .getDimensionPixelSize(
+                                        R.dimen.tw_edittext_field_handler_min_width));
         this.mDisplaySize = new Point();
         setFloatingToolbar((FloatingToolbar) Objects.requireNonNull(floatingToolbar));
     }
 
     public void setFloatingToolbar(FloatingToolbar floatingToolbar) {
-        this.mFloatingToolbar = floatingToolbar.setMenu(this.mMenu).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() { // from class: com.android.internal.view.FloatingActionMode$$ExternalSyntheticLambda0
-            @Override // android.view.MenuItem.OnMenuItemClickListener
-            public final boolean onMenuItemClick(MenuItem menuItem) {
-                boolean lambda$setFloatingToolbar$0;
-                lambda$setFloatingToolbar$0 = FloatingActionMode.this.lambda$setFloatingToolbar$0(menuItem);
-                return lambda$setFloatingToolbar$0;
-            }
-        });
-        this.mFloatingToolbarVisibilityHelper = new FloatingToolbarVisibilityHelper(this.mFloatingToolbar);
+        this.mFloatingToolbar =
+                floatingToolbar
+                        .setMenu(this.mMenu)
+                        .setOnMenuItemClickListener(
+                                new MenuItem
+                                        .OnMenuItemClickListener() { // from class:
+                                                                     // com.android.internal.view.FloatingActionMode$$ExternalSyntheticLambda0
+                                    @Override // android.view.MenuItem.OnMenuItemClickListener
+                                    public final boolean onMenuItemClick(MenuItem menuItem) {
+                                        boolean lambda$setFloatingToolbar$0;
+                                        lambda$setFloatingToolbar$0 =
+                                                FloatingActionMode.this.lambda$setFloatingToolbar$0(
+                                                        menuItem);
+                                        return lambda$setFloatingToolbar$0;
+                                    }
+                                });
+        this.mFloatingToolbarVisibilityHelper =
+                new FloatingToolbarVisibilityHelper(this.mFloatingToolbar);
         this.mFloatingToolbarVisibilityHelper.activate();
     }
 
@@ -106,24 +134,19 @@ public final class FloatingActionMode extends ActionMode {
     }
 
     @Override // android.view.ActionMode
-    public void setTitle(CharSequence title) {
-    }
+    public void setTitle(CharSequence title) {}
 
     @Override // android.view.ActionMode
-    public void setTitle(int resId) {
-    }
+    public void setTitle(int resId) {}
 
     @Override // android.view.ActionMode
-    public void setSubtitle(CharSequence subtitle) {
-    }
+    public void setSubtitle(CharSequence subtitle) {}
 
     @Override // android.view.ActionMode
-    public void setSubtitle(int resId) {
-    }
+    public void setSubtitle(int resId) {}
 
     @Override // android.view.ActionMode
-    public void setCustomView(View view) {
-    }
+    public void setCustomView(View view) {}
 
     @Override // android.view.ActionMode
     public void invalidate() {
@@ -148,8 +171,11 @@ public final class FloatingActionMode extends ActionMode {
         this.mOriginatingView.getLocationOnScreen(this.mViewPositionOnScreen);
         this.mOriginatingView.getRootView().getLocationOnScreen(this.mRootViewPositionOnScreen);
         this.mOriginatingView.getGlobalVisibleRect(this.mViewRectOnScreen);
-        this.mViewRectOnScreen.offset(this.mRootViewPositionOnScreen[0], this.mRootViewPositionOnScreen[1]);
-        if (forceRepositionToolbar || !Arrays.equals(this.mViewPositionOnScreen, this.mPreviousViewPositionOnScreen) || !this.mViewRectOnScreen.equals(this.mPreviousViewRectOnScreen)) {
+        this.mViewRectOnScreen.offset(
+                this.mRootViewPositionOnScreen[0], this.mRootViewPositionOnScreen[1]);
+        if (forceRepositionToolbar
+                || !Arrays.equals(this.mViewPositionOnScreen, this.mPreviousViewPositionOnScreen)
+                || !this.mViewRectOnScreen.equals(this.mPreviousViewRectOnScreen)) {
             repositionToolbar();
             this.mPreviousViewPositionOnScreen[0] = this.mViewPositionOnScreen[0];
             this.mPreviousViewPositionOnScreen[1] = this.mViewPositionOnScreen[1];
@@ -159,12 +185,20 @@ public final class FloatingActionMode extends ActionMode {
 
     private void repositionToolbar() {
         this.mContentRectOnScreen.set(this.mContentRect);
-        this.mContentRectOnScreen.offset(this.mViewPositionOnScreen[0], this.mViewPositionOnScreen[1]);
+        this.mContentRectOnScreen.offset(
+                this.mViewPositionOnScreen[0], this.mViewPositionOnScreen[1]);
         if (isContentRectWithinBounds()) {
             this.mFloatingToolbarVisibilityHelper.setOutOfBounds(false);
-            this.mContentRectOnScreen.set(Math.max(this.mContentRectOnScreen.left, this.mViewRectOnScreen.left), Math.max(this.mContentRectOnScreen.top, this.mViewRectOnScreen.top), Math.min(this.mContentRectOnScreen.right, this.mViewRectOnScreen.right), Math.min(this.mContentRectOnScreen.bottom, this.mViewRectOnScreen.bottom + this.mBottomAllowance));
+            this.mContentRectOnScreen.set(
+                    Math.max(this.mContentRectOnScreen.left, this.mViewRectOnScreen.left),
+                    Math.max(this.mContentRectOnScreen.top, this.mViewRectOnScreen.top),
+                    Math.min(this.mContentRectOnScreen.right, this.mViewRectOnScreen.right),
+                    Math.min(
+                            this.mContentRectOnScreen.bottom,
+                            this.mViewRectOnScreen.bottom + this.mBottomAllowance));
             if (!this.mContentRectOnScreen.equals(this.mPreviousContentRectOnScreen)) {
-                if (!this.mPreviousContentRectOnScreen.isEmpty() || this.mPreviousContentRectOnScreen.left != 0) {
+                if (!this.mPreviousContentRectOnScreen.isEmpty()
+                        || this.mPreviousContentRectOnScreen.left != 0) {
                     this.mOriginatingView.removeCallbacks(this.mMovingOff);
                     this.mFloatingToolbarVisibilityHelper.setMoving(true);
                     this.mOriginatingView.postDelayed(this.mMovingOff, 50L);
@@ -183,8 +217,10 @@ public final class FloatingActionMode extends ActionMode {
     private boolean isContentRectWithinBounds() {
         this.mContext.getDisplayNoVerify().getRealSize(this.mDisplaySize);
         this.mScreenRect.set(0, 0, this.mDisplaySize.x, this.mDisplaySize.y);
-        this.mScreenRect.offset(this.mRootViewPositionOnScreen[0], this.mRootViewPositionOnScreen[1]);
-        return intersectsClosed(this.mContentRectOnScreen, this.mScreenRect) && intersectsClosed(this.mContentRectOnScreen, this.mViewRectOnScreen);
+        this.mScreenRect.offset(
+                this.mRootViewPositionOnScreen[0], this.mRootViewPositionOnScreen[1]);
+        return intersectsClosed(this.mContentRectOnScreen, this.mScreenRect)
+                && intersectsClosed(this.mContentRectOnScreen, this.mViewRectOnScreen);
     }
 
     private static boolean intersectsClosed(Rect a, Rect b) {
@@ -207,7 +243,8 @@ public final class FloatingActionMode extends ActionMode {
         this.mOriginatingView.postDelayed(this.mHideOff, duration2);
     }
 
-    public void setOutsideTouchable(boolean outsideTouchable, PopupWindow.OnDismissListener onDismiss) {
+    public void setOutsideTouchable(
+            boolean outsideTouchable, PopupWindow.OnDismissListener onDismiss) {
         this.mFloatingToolbar.setOutsideTouchable(outsideTouchable, onDismiss);
     }
 
@@ -292,7 +329,9 @@ public final class FloatingActionMode extends ActionMode {
         }
 
         public void setMoving(boolean moving) {
-            boolean showingLongEnough = System.currentTimeMillis() - this.mLastShowTime > MIN_SHOW_DURATION_FOR_MOVE_HIDE;
+            boolean showingLongEnough =
+                    System.currentTimeMillis() - this.mLastShowTime
+                            > MIN_SHOW_DURATION_FOR_MOVE_HIDE;
             if (!moving || showingLongEnough) {
                 this.mMoving = moving;
             }
@@ -321,6 +360,8 @@ public final class FloatingActionMode extends ActionMode {
 
     public Point getContentRectOnScreen() {
         Point movedPos = this.mFloatingToolbar.getMovedPos();
-        return new Point(this.mContentRectOnScreen.centerX() - movedPos.x, this.mContentRectOnScreen.centerY() - movedPos.y);
+        return new Point(
+                this.mContentRectOnScreen.centerX() - movedPos.x,
+                this.mContentRectOnScreen.centerY() - movedPos.y);
     }
 }

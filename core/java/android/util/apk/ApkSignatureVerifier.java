@@ -10,11 +10,12 @@ import android.os.incremental.V4Signature;
 import android.util.ArrayMap;
 import android.util.Pair;
 import android.util.Slog;
-import android.util.apk.ApkSignatureSchemeV2Verifier;
-import android.util.apk.ApkSignatureSchemeV3Verifier;
-import android.util.apk.ApkSignatureSchemeV4Verifier;
 import android.util.jar.StrictJarFile;
+
 import com.android.internal.util.ArrayUtils;
+
+import libcore.io.IoUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.DigestException;
@@ -29,25 +30,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.zip.ZipEntry;
-import libcore.io.IoUtils;
 
 /* loaded from: classes4.dex */
 public class ApkSignatureVerifier {
     private static final String LOG_TAG = "ApkSignatureVerifier";
     private static final AtomicReference<byte[]> sBuffer = new AtomicReference<>();
-    private static final ArrayMap<SigningDetails, SigningDetails> sOverrideSigningDetails = new ArrayMap<>();
+    private static final ArrayMap<SigningDetails, SigningDetails> sOverrideSigningDetails =
+            new ArrayMap<>();
 
-    public static ParseResult<SigningDetails> verify(ParseInput input, String apkPath, int minSignatureSchemeVersion) {
+    public static ParseResult<SigningDetails> verify(
+            ParseInput input, String apkPath, int minSignatureSchemeVersion) {
         return verifySignatures(input, apkPath, minSignatureSchemeVersion, true);
     }
 
-    public static ParseResult<SigningDetails> unsafeGetCertsWithoutVerification(ParseInput input, String apkPath, int minSignatureSchemeVersion) {
+    public static ParseResult<SigningDetails> unsafeGetCertsWithoutVerification(
+            ParseInput input, String apkPath, int minSignatureSchemeVersion) {
         return verifySignatures(input, apkPath, minSignatureSchemeVersion, false);
     }
 
-    private static ParseResult<SigningDetails> verifySignatures(ParseInput input, String apkPath, int minSignatureSchemeVersion, boolean verifyFull) {
+    private static ParseResult<SigningDetails> verifySignatures(
+            ParseInput input, String apkPath, int minSignatureSchemeVersion, boolean verifyFull) {
         SigningDetails overrideSigningDetails;
-        ParseResult<SigningDetailsWithDigests> result = verifySignaturesInternal(input, apkPath, minSignatureSchemeVersion, verifyFull);
+        ParseResult<SigningDetailsWithDigests> result =
+                verifySignaturesInternal(input, apkPath, minSignatureSchemeVersion, verifyFull);
         if (result.isError()) {
             return input.error(result);
         }
@@ -64,7 +69,8 @@ public class ApkSignatureVerifier {
         return input.success(signingDetails);
     }
 
-    public static void addOverrideSigningDetails(SigningDetails oldSigningDetails, SigningDetails newSigningDetails) {
+    public static void addOverrideSigningDetails(
+            SigningDetails oldSigningDetails, SigningDetails newSigningDetails) {
         synchronized (sOverrideSigningDetails) {
             sOverrideSigningDetails.put(oldSigningDetails, newSigningDetails);
         }
@@ -82,53 +88,82 @@ public class ApkSignatureVerifier {
         }
     }
 
-    public static ParseResult<SigningDetailsWithDigests> verifySignaturesInternal(ParseInput input, String apkPath, int minSignatureSchemeVersion, boolean verifyFull) {
+    public static ParseResult<SigningDetailsWithDigests> verifySignaturesInternal(
+            ParseInput input, String apkPath, int minSignatureSchemeVersion, boolean verifyFull) {
         if (minSignatureSchemeVersion > 4) {
-            return input.error(-103, "No signature found in package of version " + minSignatureSchemeVersion + " or newer for package " + apkPath);
+            return input.error(
+                    -103,
+                    "No signature found in package of version "
+                            + minSignatureSchemeVersion
+                            + " or newer for package "
+                            + apkPath);
         }
         try {
             return verifyV4Signature(input, apkPath, minSignatureSchemeVersion, verifyFull);
         } catch (SignatureNotFoundException e) {
             if (minSignatureSchemeVersion >= 4) {
-                return input.error(-103, "No APK Signature Scheme v4 signature in package " + apkPath, e);
+                return input.error(
+                        -103, "No APK Signature Scheme v4 signature in package " + apkPath, e);
             }
             if (minSignatureSchemeVersion > 3) {
-                return input.error(-103, "No signature found in package of version " + minSignatureSchemeVersion + " or newer for package " + apkPath);
+                return input.error(
+                        -103,
+                        "No signature found in package of version "
+                                + minSignatureSchemeVersion
+                                + " or newer for package "
+                                + apkPath);
             }
-            return verifyV3AndBelowSignatures(input, apkPath, minSignatureSchemeVersion, verifyFull);
+            return verifyV3AndBelowSignatures(
+                    input, apkPath, minSignatureSchemeVersion, verifyFull);
         }
     }
 
-    private static ParseResult<SigningDetailsWithDigests> verifyV3AndBelowSignatures(ParseInput input, String apkPath, int minSignatureSchemeVersion, boolean verifyFull) {
+    private static ParseResult<SigningDetailsWithDigests> verifyV3AndBelowSignatures(
+            ParseInput input, String apkPath, int minSignatureSchemeVersion, boolean verifyFull) {
         try {
             return verifyV3Signature(input, apkPath, verifyFull);
         } catch (SignatureNotFoundException e) {
             if (minSignatureSchemeVersion >= 3) {
-                return input.error(-103, "No APK Signature Scheme v3 signature in package " + apkPath, e);
+                return input.error(
+                        -103, "No APK Signature Scheme v3 signature in package " + apkPath, e);
             }
             if (minSignatureSchemeVersion > 2) {
-                return input.error(-103, "No signature found in package of version " + minSignatureSchemeVersion + " or newer for package " + apkPath);
+                return input.error(
+                        -103,
+                        "No signature found in package of version "
+                                + minSignatureSchemeVersion
+                                + " or newer for package "
+                                + apkPath);
             }
             try {
                 return verifyV2Signature(input, apkPath, verifyFull);
             } catch (SignatureNotFoundException e2) {
                 if (minSignatureSchemeVersion >= 2) {
-                    return input.error(-103, "No APK Signature Scheme v2 signature in package " + apkPath, e2);
+                    return input.error(
+                            -103, "No APK Signature Scheme v2 signature in package " + apkPath, e2);
                 }
                 if (minSignatureSchemeVersion > 1) {
-                    return input.error(-103, "No signature found in package of version " + minSignatureSchemeVersion + " or newer for package " + apkPath);
+                    return input.error(
+                            -103,
+                            "No signature found in package of version "
+                                    + minSignatureSchemeVersion
+                                    + " or newer for package "
+                                    + apkPath);
                 }
                 return verifyV1Signature(input, apkPath, verifyFull);
             }
         }
     }
 
-    private static ParseResult<SigningDetailsWithDigests> verifyV4Signature(ParseInput input, String apkPath, int minSignatureSchemeVersion, boolean verifyFull) throws SignatureNotFoundException {
+    private static ParseResult<SigningDetailsWithDigests> verifyV4Signature(
+            ParseInput input, String apkPath, int minSignatureSchemeVersion, boolean verifyFull)
+            throws SignatureNotFoundException {
         Trace.traceBegin(262144L, verifyFull ? "verifyV4" : "certsOnlyV4");
         try {
             try {
                 try {
-                    Pair<V4Signature.HashingInfo, V4Signature.SigningInfos> v4Pair = ApkSignatureSchemeV4Verifier.extractSignature(apkPath);
+                    Pair<V4Signature.HashingInfo, V4Signature.SigningInfos> v4Pair =
+                            ApkSignatureSchemeV4Verifier.extractSignature(apkPath);
                     V4Signature.HashingInfo hashingInfo = v4Pair.first;
                     V4Signature.SigningInfos signingInfos = v4Pair.second;
                     Signature[] pastSignerSigs = null;
@@ -137,41 +172,54 @@ public class ApkSignatureVerifier {
                     int v3BlockId = -1;
                     if (verifyFull || signingInfos.signingInfoBlocks.length > 0) {
                         try {
-                            ApkSignatureSchemeV3Verifier.VerifiedSigner v3Signer = ApkSignatureSchemeV3Verifier.unsafeGetCertsWithoutVerification(apkPath);
+                            ApkSignatureSchemeV3Verifier.VerifiedSigner v3Signer =
+                                    ApkSignatureSchemeV3Verifier.unsafeGetCertsWithoutVerification(
+                                            apkPath);
                             nonstreamingDigests = v3Signer.contentDigests;
-                            nonstreamingCerts = new Certificate[][]{v3Signer.certs};
+                            nonstreamingCerts = new Certificate[][] {v3Signer.certs};
                             if (v3Signer.por != null) {
                                 pastSignerSigs = new Signature[v3Signer.por.certs.size()];
                                 for (int i = 0; i < pastSignerSigs.length; i++) {
-                                    pastSignerSigs[i] = new Signature(v3Signer.por.certs.get(i).getEncoded());
-                                    pastSignerSigs[i].setFlags(v3Signer.por.flagsList.get(i).intValue());
+                                    pastSignerSigs[i] =
+                                            new Signature(v3Signer.por.certs.get(i).getEncoded());
+                                    pastSignerSigs[i].setFlags(
+                                            v3Signer.por.flagsList.get(i).intValue());
                                 }
                             }
                             v3BlockId = v3Signer.blockId;
                         } catch (SignatureNotFoundException e) {
                             try {
-                                ApkSignatureSchemeV2Verifier.VerifiedSigner v2Signer = ApkSignatureSchemeV2Verifier.verify(apkPath, false);
+                                ApkSignatureSchemeV2Verifier.VerifiedSigner v2Signer =
+                                        ApkSignatureSchemeV2Verifier.verify(apkPath, false);
                                 nonstreamingDigests = v2Signer.contentDigests;
                                 nonstreamingCerts = v2Signer.certs;
                             } catch (SignatureNotFoundException ee) {
-                                throw new SecurityException("V4 verification failed to collect V2/V3 certificates from : " + apkPath, ee);
+                                throw new SecurityException(
+                                        "V4 verification failed to collect V2/V3 certificates from"
+                                            + " : "
+                                                + apkPath,
+                                        ee);
                             }
                         }
                     }
-                    ApkSignatureSchemeV4Verifier.VerifiedSigner vSigner = ApkSignatureSchemeV4Verifier.verify(apkPath, hashingInfo, signingInfos, v3BlockId);
+                    ApkSignatureSchemeV4Verifier.VerifiedSigner vSigner =
+                            ApkSignatureSchemeV4Verifier.verify(
+                                    apkPath, hashingInfo, signingInfos, v3BlockId);
                     Certificate[][] signerCerts = {vSigner.certs};
                     Signature[] signerSigs = convertToSignatures(signerCerts);
                     if (verifyFull) {
                         Signature[] nonstreamingSigs = convertToSignatures(nonstreamingCerts);
                         if (nonstreamingSigs.length != signerSigs.length) {
-                            throw new SecurityException("Invalid number of certificates: " + nonstreamingSigs.length);
+                            throw new SecurityException(
+                                    "Invalid number of certificates: " + nonstreamingSigs.length);
                         }
                         int i2 = 0;
                         int size = signerSigs.length;
                         while (i2 < size) {
                             Certificate[][] signerCerts2 = signerCerts;
                             if (!nonstreamingSigs[i2].equals(signerSigs[i2])) {
-                                throw new SecurityException("V4 signature certificate does not match V2/V3");
+                                throw new SecurityException(
+                                        "V4 signature certificate does not match V2/V3");
                             }
                             i2++;
                             signerCerts = signerCerts2;
@@ -184,21 +232,35 @@ public class ApkSignatureVerifier {
                             }
                             byte[] nonstreamingDigest = it.next();
                             boolean found2 = found;
-                            if (ArrayUtils.equals(vSigner.apkDigest, nonstreamingDigest, vSigner.apkDigest.length)) {
+                            if (ArrayUtils.equals(
+                                    vSigner.apkDigest,
+                                    nonstreamingDigest,
+                                    vSigner.apkDigest.length)) {
                                 found = true;
                                 break;
                             }
                             found = found2;
                         }
                         if (!found) {
-                            throw new SecurityException("APK digest in V4 signature does not match V2/V3");
+                            throw new SecurityException(
+                                    "APK digest in V4 signature does not match V2/V3");
                         }
                     }
-                    ParseResult<SigningDetailsWithDigests> success = input.success(new SigningDetailsWithDigests(new SigningDetails(signerSigs, 4, pastSignerSigs), vSigner.contentDigests));
+                    ParseResult<SigningDetailsWithDigests> success =
+                            input.success(
+                                    new SigningDetailsWithDigests(
+                                            new SigningDetails(signerSigs, 4, pastSignerSigs),
+                                            vSigner.contentDigests));
                     Trace.traceEnd(262144L);
                     return success;
                 } catch (Exception e2) {
-                    ParseResult<SigningDetailsWithDigests> error = input.error(-103, "Failed to collect certificates from " + apkPath + " using APK Signature Scheme v4", e2);
+                    ParseResult<SigningDetailsWithDigests> error =
+                            input.error(
+                                    -103,
+                                    "Failed to collect certificates from "
+                                            + apkPath
+                                            + " using APK Signature Scheme v4",
+                                    e2);
                     Trace.traceEnd(262144L);
                     return error;
                 }
@@ -211,11 +273,17 @@ public class ApkSignatureVerifier {
         }
     }
 
-    private static ParseResult<SigningDetailsWithDigests> verifyV3Signature(ParseInput input, String apkPath, boolean verifyFull) throws SignatureNotFoundException {
+    private static ParseResult<SigningDetailsWithDigests> verifyV3Signature(
+            ParseInput input, String apkPath, boolean verifyFull)
+            throws SignatureNotFoundException {
         Trace.traceBegin(262144L, verifyFull ? "verifyV3" : "certsOnlyV3");
         try {
             try {
-                ApkSignatureSchemeV3Verifier.VerifiedSigner vSigner = verifyFull ? ApkSignatureSchemeV3Verifier.verify(apkPath) : ApkSignatureSchemeV3Verifier.unsafeGetCertsWithoutVerification(apkPath);
+                ApkSignatureSchemeV3Verifier.VerifiedSigner vSigner =
+                        verifyFull
+                                ? ApkSignatureSchemeV3Verifier.verify(apkPath)
+                                : ApkSignatureSchemeV3Verifier.unsafeGetCertsWithoutVerification(
+                                        apkPath);
                 Certificate[][] signerCerts = {vSigner.certs};
                 Signature[] signerSigs = convertToSignatures(signerCerts);
                 Signature[] pastSignerSigs = null;
@@ -226,13 +294,23 @@ public class ApkSignatureVerifier {
                         pastSignerSigs[i].setFlags(vSigner.por.flagsList.get(i).intValue());
                     }
                 }
-                ParseResult<SigningDetailsWithDigests> success = input.success(new SigningDetailsWithDigests(new SigningDetails(signerSigs, 3, pastSignerSigs), vSigner.contentDigests));
+                ParseResult<SigningDetailsWithDigests> success =
+                        input.success(
+                                new SigningDetailsWithDigests(
+                                        new SigningDetails(signerSigs, 3, pastSignerSigs),
+                                        vSigner.contentDigests));
                 Trace.traceEnd(262144L);
                 return success;
             } catch (SignatureNotFoundException e) {
                 throw e;
             } catch (Exception e2) {
-                ParseResult<SigningDetailsWithDigests> error = input.error(-103, "Failed to collect certificates from " + apkPath + " using APK Signature Scheme v3", e2);
+                ParseResult<SigningDetailsWithDigests> error =
+                        input.error(
+                                -103,
+                                "Failed to collect certificates from "
+                                        + apkPath
+                                        + " using APK Signature Scheme v3",
+                                e2);
                 Trace.traceEnd(262144L);
                 return error;
             }
@@ -242,20 +320,32 @@ public class ApkSignatureVerifier {
         }
     }
 
-    private static ParseResult<SigningDetailsWithDigests> verifyV2Signature(ParseInput input, String apkPath, boolean verifyFull) throws SignatureNotFoundException {
+    private static ParseResult<SigningDetailsWithDigests> verifyV2Signature(
+            ParseInput input, String apkPath, boolean verifyFull)
+            throws SignatureNotFoundException {
         Trace.traceBegin(262144L, verifyFull ? "verifyV2" : "certsOnlyV2");
         try {
             try {
-                ApkSignatureSchemeV2Verifier.VerifiedSigner vSigner = ApkSignatureSchemeV2Verifier.verify(apkPath, verifyFull);
+                ApkSignatureSchemeV2Verifier.VerifiedSigner vSigner =
+                        ApkSignatureSchemeV2Verifier.verify(apkPath, verifyFull);
                 Certificate[][] signerCerts = vSigner.certs;
                 Signature[] signerSigs = convertToSignatures(signerCerts);
-                ParseResult<SigningDetailsWithDigests> success = input.success(new SigningDetailsWithDigests(new SigningDetails(signerSigs, 2), vSigner.contentDigests));
+                ParseResult<SigningDetailsWithDigests> success =
+                        input.success(
+                                new SigningDetailsWithDigests(
+                                        new SigningDetails(signerSigs, 2), vSigner.contentDigests));
                 Trace.traceEnd(262144L);
                 return success;
             } catch (SignatureNotFoundException e) {
                 throw e;
             } catch (Exception e2) {
-                ParseResult<SigningDetailsWithDigests> error = input.error(-103, "Failed to collect certificates from " + apkPath + " using APK Signature Scheme v2", e2);
+                ParseResult<SigningDetailsWithDigests> error =
+                        input.error(
+                                -103,
+                                "Failed to collect certificates from "
+                                        + apkPath
+                                        + " using APK Signature Scheme v2",
+                                e2);
                 Trace.traceEnd(262144L);
                 return error;
             }
@@ -265,7 +355,8 @@ public class ApkSignatureVerifier {
         }
     }
 
-    private static ParseResult<SigningDetailsWithDigests> verifyV1Signature(ParseInput input, String apkPath, boolean verifyFull) {
+    private static ParseResult<SigningDetailsWithDigests> verifyV1Signature(
+            ParseInput input, String apkPath, boolean verifyFull) {
         StrictJarFile jarFile = null;
         try {
             Trace.traceBegin(262144L, "strictJarFileCtor");
@@ -273,21 +364,28 @@ public class ApkSignatureVerifier {
             List<ZipEntry> toVerify = new ArrayList<>();
             ZipEntry manifestEntry = jarFile.findEntry("AndroidManifest.xml");
             if (manifestEntry == null) {
-                ParseResult<SigningDetailsWithDigests> error = input.error(-101, "Package " + apkPath + " has no manifest");
+                ParseResult<SigningDetailsWithDigests> error =
+                        input.error(-101, "Package " + apkPath + " has no manifest");
                 Trace.traceEnd(262144L);
                 closeQuietly(jarFile);
                 return error;
             }
             ParseResult<Certificate[][]> result = loadCertificates(input, jarFile, manifestEntry);
             if (result.isError()) {
-                ParseResult<SigningDetailsWithDigests> error2 = input.error((ParseResult<?>) result);
+                ParseResult<SigningDetailsWithDigests> error2 =
+                        input.error((ParseResult<?>) result);
                 Trace.traceEnd(262144L);
                 closeQuietly(jarFile);
                 return error2;
             }
             Certificate[][] lastCerts = result.getResult();
             if (ArrayUtils.isEmpty(lastCerts)) {
-                ParseResult<SigningDetailsWithDigests> error3 = input.error(-103, "Package " + apkPath + " has no certificates at entry AndroidManifest.xml");
+                ParseResult<SigningDetailsWithDigests> error3 =
+                        input.error(
+                                -103,
+                                "Package "
+                                        + apkPath
+                                        + " has no certificates at entry AndroidManifest.xml");
                 Trace.traceEnd(262144L);
                 closeQuietly(jarFile);
                 return error3;
@@ -299,7 +397,8 @@ public class ApkSignatureVerifier {
                     ZipEntry entry = i.next();
                     if (!entry.isDirectory()) {
                         String entryName = entry.getName();
-                        if (!entryName.startsWith("META-INF/") && !entryName.equals("AndroidManifest.xml")) {
+                        if (!entryName.startsWith("META-INF/")
+                                && !entryName.equals("AndroidManifest.xml")) {
                             toVerify.add(entry);
                         }
                     }
@@ -313,17 +412,28 @@ public class ApkSignatureVerifier {
                     }
                     Certificate[][] entryCerts = ret.getResult();
                     if (ArrayUtils.isEmpty(entryCerts)) {
-                        return input.error(-103, "Package " + apkPath + " has no certificates at entry " + entry2.getName());
+                        return input.error(
+                                -103,
+                                "Package "
+                                        + apkPath
+                                        + " has no certificates at entry "
+                                        + entry2.getName());
                     }
                     Signature[] entrySigs = convertToSignatures(entryCerts);
                     Iterator<ZipEntry> it2 = it;
                     if (!Arrays.equals(lastSigs, entrySigs)) {
-                        return input.error(-104, "Package " + apkPath + " has mismatched certificates at entry " + entry2.getName());
+                        return input.error(
+                                -104,
+                                "Package "
+                                        + apkPath
+                                        + " has mismatched certificates at entry "
+                                        + entry2.getName());
                     }
                     it = it2;
                 }
             }
-            return input.success(new SigningDetailsWithDigests(new SigningDetails(lastSigs, 1), null));
+            return input.success(
+                    new SigningDetailsWithDigests(new SigningDetails(lastSigs, 1), null));
         } catch (GeneralSecurityException e) {
             return input.error(-105, "Failed to collect certificates from " + apkPath, e);
         } catch (IOException | RuntimeException e2) {
@@ -334,7 +444,8 @@ public class ApkSignatureVerifier {
         }
     }
 
-    private static ParseResult<Certificate[][]> loadCertificates(ParseInput input, StrictJarFile jarFile, ZipEntry entry) {
+    private static ParseResult<Certificate[][]> loadCertificates(
+            ParseInput input, StrictJarFile jarFile, ZipEntry entry) {
         InputStream is = null;
         try {
             is = jarFile.getInputStream(entry);
@@ -364,7 +475,8 @@ public class ApkSignatureVerifier {
         }
     }
 
-    private static Signature[] convertToSignatures(Certificate[][] certs) throws CertificateEncodingException {
+    private static Signature[] convertToSignatures(Certificate[][] certs)
+            throws CertificateEncodingException {
         Signature[] res = new Signature[certs.length];
         for (int i = 0; i < certs.length; i++) {
             res[i] = new Signature(certs[i]);
@@ -412,7 +524,12 @@ public class ApkSignatureVerifier {
         }
     }
 
-    public static byte[] generateApkVerity(String apkPath, ByteBufferFactory bufferFactory) throws IOException, SignatureNotFoundException, SecurityException, DigestException, NoSuchAlgorithmException {
+    public static byte[] generateApkVerity(String apkPath, ByteBufferFactory bufferFactory)
+            throws IOException,
+                    SignatureNotFoundException,
+                    SecurityException,
+                    DigestException,
+                    NoSuchAlgorithmException {
         try {
             return ApkSignatureSchemeV3Verifier.generateApkVerity(apkPath, bufferFactory);
         } catch (SignatureNotFoundException e) {
@@ -424,7 +541,8 @@ public class ApkSignatureVerifier {
         public final Map<Integer, byte[]> contentDigests;
         public final SigningDetails signingDetails;
 
-        SigningDetailsWithDigests(SigningDetails signingDetails, Map<Integer, byte[]> contentDigests) {
+        SigningDetailsWithDigests(
+                SigningDetails signingDetails, Map<Integer, byte[]> contentDigests) {
             this.signingDetails = signingDetails;
             this.contentDigests = contentDigests;
         }

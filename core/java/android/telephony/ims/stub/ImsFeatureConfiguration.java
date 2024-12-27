@@ -5,24 +5,28 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.telephony.ims.feature.ImsFeature;
 import android.util.ArraySet;
+
 import java.util.Set;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class ImsFeatureConfiguration implements Parcelable {
-    public static final Parcelable.Creator<ImsFeatureConfiguration> CREATOR = new Parcelable.Creator<ImsFeatureConfiguration>() { // from class: android.telephony.ims.stub.ImsFeatureConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsFeatureConfiguration createFromParcel(Parcel in) {
-            return new ImsFeatureConfiguration(in);
-        }
+    public static final Parcelable.Creator<ImsFeatureConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    ImsFeatureConfiguration>() { // from class:
+                                                 // android.telephony.ims.stub.ImsFeatureConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsFeatureConfiguration createFromParcel(Parcel in) {
+                    return new ImsFeatureConfiguration(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsFeatureConfiguration[] newArray(int size) {
-            return new ImsFeatureConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsFeatureConfiguration[] newArray(int size) {
+                    return new ImsFeatureConfiguration[size];
+                }
+            };
     private final Set<FeatureSlotPair> mFeatures;
 
     public static final class FeatureSlotPair {
@@ -54,7 +58,11 @@ public final class ImsFeatureConfiguration implements Parcelable {
         }
 
         public String toString() {
-            return "{s=" + this.slotId + ", f=" + ImsFeature.FEATURE_LOG_MAP.get(Integer.valueOf(this.featureType)) + "}";
+            return "{s="
+                    + this.slotId
+                    + ", f="
+                    + ImsFeature.FEATURE_LOG_MAP.get(Integer.valueOf(this.featureType))
+                    + "}";
         }
     }
 

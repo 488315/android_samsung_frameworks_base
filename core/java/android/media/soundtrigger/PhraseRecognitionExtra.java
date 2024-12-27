@@ -3,27 +3,30 @@ package android.media.soundtrigger;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class PhraseRecognitionExtra implements Parcelable {
-    public static final Parcelable.Creator<PhraseRecognitionExtra> CREATOR = new Parcelable.Creator<PhraseRecognitionExtra>() { // from class: android.media.soundtrigger.PhraseRecognitionExtra.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhraseRecognitionExtra createFromParcel(Parcel _aidl_source) {
-            PhraseRecognitionExtra _aidl_out = new PhraseRecognitionExtra();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<PhraseRecognitionExtra> CREATOR =
+            new Parcelable.Creator<PhraseRecognitionExtra>() { // from class:
+                // android.media.soundtrigger.PhraseRecognitionExtra.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhraseRecognitionExtra createFromParcel(Parcel _aidl_source) {
+                    PhraseRecognitionExtra _aidl_out = new PhraseRecognitionExtra();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhraseRecognitionExtra[] newArray(int _aidl_size) {
-            return new PhraseRecognitionExtra[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhraseRecognitionExtra[] newArray(int _aidl_size) {
+                    return new PhraseRecognitionExtra[_aidl_size];
+                }
+            };
     public ConfidenceLevel[] levels;
     public int id = 0;
     public int recognitionModes = 0;
@@ -85,7 +88,8 @@ public class PhraseRecognitionExtra implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.levels = (ConfidenceLevel[]) _aidl_parcel.createTypedArray(ConfidenceLevel.CREATOR);
+                this.levels =
+                        (ConfidenceLevel[]) _aidl_parcel.createTypedArray(ConfidenceLevel.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -117,7 +121,14 @@ public class PhraseRecognitionExtra implements Parcelable {
             return false;
         }
         PhraseRecognitionExtra that = (PhraseRecognitionExtra) other;
-        if (Objects.deepEquals(Integer.valueOf(this.id), Integer.valueOf(that.id)) && Objects.deepEquals(Integer.valueOf(this.recognitionModes), Integer.valueOf(that.recognitionModes)) && Objects.deepEquals(Integer.valueOf(this.confidenceLevel), Integer.valueOf(that.confidenceLevel)) && Objects.deepEquals(this.levels, that.levels)) {
+        if (Objects.deepEquals(Integer.valueOf(this.id), Integer.valueOf(that.id))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.recognitionModes),
+                        Integer.valueOf(that.recognitionModes))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.confidenceLevel),
+                        Integer.valueOf(that.confidenceLevel))
+                && Objects.deepEquals(this.levels, that.levels)) {
             return true;
         }
         return false;
@@ -125,7 +136,13 @@ public class PhraseRecognitionExtra implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.id), Integer.valueOf(this.recognitionModes), Integer.valueOf(this.confidenceLevel), this.levels).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.id),
+                                Integer.valueOf(this.recognitionModes),
+                                Integer.valueOf(this.confidenceLevel),
+                                this.levels)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

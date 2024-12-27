@@ -14,56 +14,60 @@ public interface IOnAppsChangedListener extends IInterface {
 
     void onPackageChanged(UserHandle userHandle, String str) throws RemoteException;
 
-    void onPackageLoadingProgressChanged(UserHandle userHandle, String str, float f) throws RemoteException;
+    void onPackageLoadingProgressChanged(UserHandle userHandle, String str, float f)
+            throws RemoteException;
 
     void onPackageRemoved(UserHandle userHandle, String str) throws RemoteException;
 
-    void onPackagesAvailable(UserHandle userHandle, String[] strArr, boolean z) throws RemoteException;
+    void onPackagesAvailable(UserHandle userHandle, String[] strArr, boolean z)
+            throws RemoteException;
 
-    void onPackagesSuspended(UserHandle userHandle, String[] strArr, Bundle bundle) throws RemoteException;
+    void onPackagesSuspended(UserHandle userHandle, String[] strArr, Bundle bundle)
+            throws RemoteException;
 
-    void onPackagesUnavailable(UserHandle userHandle, String[] strArr, boolean z) throws RemoteException;
+    void onPackagesUnavailable(UserHandle userHandle, String[] strArr, boolean z)
+            throws RemoteException;
 
     void onPackagesUnsuspended(UserHandle userHandle, String[] strArr) throws RemoteException;
 
-    void onShortcutChanged(UserHandle userHandle, String str, ParceledListSlice parceledListSlice) throws RemoteException;
+    void onShortcutChanged(UserHandle userHandle, String str, ParceledListSlice parceledListSlice)
+            throws RemoteException;
 
     public static class Default implements IOnAppsChangedListener {
         @Override // android.content.pm.IOnAppsChangedListener
-        public void onPackageRemoved(UserHandle user, String packageName) throws RemoteException {
-        }
+        public void onPackageRemoved(UserHandle user, String packageName) throws RemoteException {}
 
         @Override // android.content.pm.IOnAppsChangedListener
-        public void onPackageAdded(UserHandle user, String packageName) throws RemoteException {
-        }
+        public void onPackageAdded(UserHandle user, String packageName) throws RemoteException {}
 
         @Override // android.content.pm.IOnAppsChangedListener
-        public void onPackageChanged(UserHandle user, String packageName) throws RemoteException {
-        }
+        public void onPackageChanged(UserHandle user, String packageName) throws RemoteException {}
 
         @Override // android.content.pm.IOnAppsChangedListener
-        public void onPackagesAvailable(UserHandle user, String[] packageNames, boolean replacing) throws RemoteException {
-        }
+        public void onPackagesAvailable(UserHandle user, String[] packageNames, boolean replacing)
+                throws RemoteException {}
 
         @Override // android.content.pm.IOnAppsChangedListener
-        public void onPackagesUnavailable(UserHandle user, String[] packageNames, boolean replacing) throws RemoteException {
-        }
+        public void onPackagesUnavailable(UserHandle user, String[] packageNames, boolean replacing)
+                throws RemoteException {}
 
         @Override // android.content.pm.IOnAppsChangedListener
-        public void onPackagesSuspended(UserHandle user, String[] packageNames, Bundle launcherExtras) throws RemoteException {
-        }
+        public void onPackagesSuspended(
+                UserHandle user, String[] packageNames, Bundle launcherExtras)
+                throws RemoteException {}
 
         @Override // android.content.pm.IOnAppsChangedListener
-        public void onPackagesUnsuspended(UserHandle user, String[] packageNames) throws RemoteException {
-        }
+        public void onPackagesUnsuspended(UserHandle user, String[] packageNames)
+                throws RemoteException {}
 
         @Override // android.content.pm.IOnAppsChangedListener
-        public void onShortcutChanged(UserHandle user, String packageName, ParceledListSlice shortcuts) throws RemoteException {
-        }
+        public void onShortcutChanged(
+                UserHandle user, String packageName, ParceledListSlice shortcuts)
+                throws RemoteException {}
 
         @Override // android.content.pm.IOnAppsChangedListener
-        public void onPackageLoadingProgressChanged(UserHandle user, String packageName, float progress) throws RemoteException {
-        }
+        public void onPackageLoadingProgressChanged(
+                UserHandle user, String packageName, float progress) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -71,7 +75,7 @@ public interface IOnAppsChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnAppsChangedListener {
+    public abstract static class Stub extends Binder implements IOnAppsChangedListener {
         public static final String DESCRIPTOR = "android.content.pm.IOnAppsChangedListener";
         static final int TRANSACTION_onPackageAdded = 2;
         static final int TRANSACTION_onPackageChanged = 3;
@@ -134,7 +138,8 @@ public interface IOnAppsChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -191,7 +196,8 @@ public interface IOnAppsChangedListener extends IInterface {
                 case 8:
                     UserHandle _arg08 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     String _arg18 = data.readString();
-                    ParceledListSlice _arg24 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg24 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     onShortcutChanged(_arg08, _arg18, _arg24);
                     return true;
@@ -224,7 +230,8 @@ public interface IOnAppsChangedListener extends IInterface {
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
-            public void onPackageRemoved(UserHandle user, String packageName) throws RemoteException {
+            public void onPackageRemoved(UserHandle user, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -250,7 +257,8 @@ public interface IOnAppsChangedListener extends IInterface {
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
-            public void onPackageChanged(UserHandle user, String packageName) throws RemoteException {
+            public void onPackageChanged(UserHandle user, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -263,7 +271,9 @@ public interface IOnAppsChangedListener extends IInterface {
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
-            public void onPackagesAvailable(UserHandle user, String[] packageNames, boolean replacing) throws RemoteException {
+            public void onPackagesAvailable(
+                    UserHandle user, String[] packageNames, boolean replacing)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -277,7 +287,9 @@ public interface IOnAppsChangedListener extends IInterface {
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
-            public void onPackagesUnavailable(UserHandle user, String[] packageNames, boolean replacing) throws RemoteException {
+            public void onPackagesUnavailable(
+                    UserHandle user, String[] packageNames, boolean replacing)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -291,7 +303,9 @@ public interface IOnAppsChangedListener extends IInterface {
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
-            public void onPackagesSuspended(UserHandle user, String[] packageNames, Bundle launcherExtras) throws RemoteException {
+            public void onPackagesSuspended(
+                    UserHandle user, String[] packageNames, Bundle launcherExtras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -305,7 +319,8 @@ public interface IOnAppsChangedListener extends IInterface {
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
-            public void onPackagesUnsuspended(UserHandle user, String[] packageNames) throws RemoteException {
+            public void onPackagesUnsuspended(UserHandle user, String[] packageNames)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -318,7 +333,9 @@ public interface IOnAppsChangedListener extends IInterface {
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
-            public void onShortcutChanged(UserHandle user, String packageName, ParceledListSlice shortcuts) throws RemoteException {
+            public void onShortcutChanged(
+                    UserHandle user, String packageName, ParceledListSlice shortcuts)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -332,7 +349,8 @@ public interface IOnAppsChangedListener extends IInterface {
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
-            public void onPackageLoadingProgressChanged(UserHandle user, String packageName, float progress) throws RemoteException {
+            public void onPackageLoadingProgressChanged(
+                    UserHandle user, String packageName, float progress) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

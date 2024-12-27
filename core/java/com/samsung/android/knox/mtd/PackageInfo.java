@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class PackageInfo implements Parcelable {
-    public static final Parcelable.Creator<PackageInfo> CREATOR = new Parcelable.Creator<PackageInfo>() { // from class: com.samsung.android.knox.mtd.PackageInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageInfo createFromParcel(Parcel in) {
-            return new PackageInfo(in);
-        }
+    public static final Parcelable.Creator<PackageInfo> CREATOR =
+            new Parcelable.Creator<
+                    PackageInfo>() { // from class: com.samsung.android.knox.mtd.PackageInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageInfo createFromParcel(Parcel in) {
+                    return new PackageInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageInfo[] newArray(int size) {
-            return new PackageInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageInfo[] newArray(int size) {
+                    return new PackageInfo[size];
+                }
+            };
     private String category;
     private String packageName;
 

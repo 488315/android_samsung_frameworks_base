@@ -7,10 +7,11 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
-import com.android.server.smartclip.SpenGarageSpecManager;
+
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,26 +30,45 @@ public final class BleSpenManager {
         this.mBundledRemoteSpenSupport = false;
         this.mUnbundledRemoteSpenSupport = false;
         this.mContext = context;
-        this.mBundledRemoteSpenSupport = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_BLE_SPEN");
-        this.mUnbundledRemoteSpenSupport = SpenGarageSpecManager.getInstance().mSupportedExternalSpenFeatures.contains(SpenGarageSpecManager.SupportedExternalSpenFeature.REMOTE);
+        this.mBundledRemoteSpenSupport =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_BLE_SPEN");
+        this.mUnbundledRemoteSpenSupport =
+                SpenGarageSpecManager.getInstance()
+                        .mSupportedExternalSpenFeatures
+                        .contains(SpenGarageSpecManager.SupportedExternalSpenFeature.REMOTE);
         Handler handler = new Handler();
-        this.mSemInputDeviceManager = (SemInputDeviceManager) context.getSystemService("SemInputDeviceManagerService");
+        this.mSemInputDeviceManager =
+                (SemInputDeviceManager) context.getSystemService("SemInputDeviceManagerService");
         if (isSupportBleSpen()) {
-            context.getContentResolver().registerContentObserver(Settings.System.getUriFor("spen_air_action"), false, new ContentObserver(handler) { // from class: com.android.server.smartclip.BleSpenManager.1
-                @Override // android.database.ContentObserver
-                public final void onChange(boolean z) {
-                    BleSpenManager bleSpenManager = BleSpenManager.this;
-                    boolean isAirActionSettingEnabled = bleSpenManager.isAirActionSettingEnabled();
-                    Log.i("BleSpenManager", "onAirActionSettingChanged : " + isAirActionSettingEnabled);
-                    if (bleSpenManager.isSupportBleSpen()) {
-                        if (isAirActionSettingEnabled) {
-                            bleSpenManager.startRemoteSpenService(bleSpenManager.mContext);
-                        } else {
-                            bleSpenManager.startBlindChargeService(bleSpenManager.mContext);
-                        }
-                    }
-                }
-            }, -1);
+            context.getContentResolver()
+                    .registerContentObserver(
+                            Settings.System.getUriFor("spen_air_action"),
+                            false,
+                            new ContentObserver(
+                                    handler) { // from class:
+                                               // com.android.server.smartclip.BleSpenManager.1
+                                @Override // android.database.ContentObserver
+                                public final void onChange(boolean z) {
+                                    BleSpenManager bleSpenManager = BleSpenManager.this;
+                                    boolean isAirActionSettingEnabled =
+                                            bleSpenManager.isAirActionSettingEnabled();
+                                    Log.i(
+                                            "BleSpenManager",
+                                            "onAirActionSettingChanged : "
+                                                    + isAirActionSettingEnabled);
+                                    if (bleSpenManager.isSupportBleSpen()) {
+                                        if (isAirActionSettingEnabled) {
+                                            bleSpenManager.startRemoteSpenService(
+                                                    bleSpenManager.mContext);
+                                        } else {
+                                            bleSpenManager.startBlindChargeService(
+                                                    bleSpenManager.mContext);
+                                        }
+                                    }
+                                }
+                            },
+                            -1);
         }
     }
 
@@ -133,7 +153,9 @@ public final class BleSpenManager {
         L5f:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.smartclip.BleSpenManager.readStringFromFile(java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.smartclip.BleSpenManager.readStringFromFile(java.lang.String):java.lang.String");
     }
 
     public static void writeStringToFile(String str, String str2) {
@@ -153,31 +175,47 @@ public final class BleSpenManager {
                 e = e;
             }
             if (parentFile == null) {
-                Log.e("BleSpenManager", "writeStringToFile : Parent dir is null! filePathName=".concat(str));
+                Log.e(
+                        "BleSpenManager",
+                        "writeStringToFile : Parent dir is null! filePathName=".concat(str));
                 return;
             }
             if (!parentFile.isDirectory()) {
-                Log.e("BleSpenManager", "writeStringToFile : No directoy, make directoy : " + parentFile.getAbsolutePath());
+                Log.e(
+                        "BleSpenManager",
+                        "writeStringToFile : No directoy, make directoy : "
+                                + parentFile.getAbsolutePath());
                 parentFile.mkdirs();
             }
             if (!parentFile.canRead() && !parentFile.setReadable(true, false)) {
-                Log.e("BleSpenManager", "writeStringToFile : failed setreadable:" + parentFile.toString());
+                Log.e(
+                        "BleSpenManager",
+                        "writeStringToFile : failed setreadable:" + parentFile.toString());
             }
             if (!parentFile.canExecute() && !parentFile.setExecutable(true, false)) {
-                Log.e("BleSpenManager", "writeStringToFile : failed setexecutable:" + parentFile.toString());
+                Log.e(
+                        "BleSpenManager",
+                        "writeStringToFile : failed setexecutable:" + parentFile.toString());
             }
-            BufferedWriter bufferedWriter2 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(str, false)));
+            BufferedWriter bufferedWriter2 =
+                    new BufferedWriter(new OutputStreamWriter(new FileOutputStream(str, false)));
             try {
                 bufferedWriter2.write(str2);
                 File file = new File(str);
                 if (!file.setReadable(true, true)) {
-                    Log.e("BleSpenManager", "writeStringToFile : failed setreadable:" + file.toString());
+                    Log.e(
+                            "BleSpenManager",
+                            "writeStringToFile : failed setreadable:" + file.toString());
                 }
                 if (!file.setExecutable(false, true)) {
-                    Log.e("BleSpenManager", "writeStringToFile : failed setexecutable:" + file.toString());
+                    Log.e(
+                            "BleSpenManager",
+                            "writeStringToFile : failed setexecutable:" + file.toString());
                 }
                 if (!file.setWritable(true, true)) {
-                    Log.e("BleSpenManager", "writeStringToFile : failed setWritable:" + file.toString());
+                    Log.e(
+                            "BleSpenManager",
+                            "writeStringToFile : failed setWritable:" + file.toString());
                 }
                 bufferedWriter2.close();
             } catch (IOException e2) {
@@ -204,7 +242,9 @@ public final class BleSpenManager {
     }
 
     public final boolean isAirActionSettingEnabled() {
-        return Settings.System.semGetIntForUser(this.mContext.getContentResolver(), "spen_air_action", 1, -2) != 0;
+        return Settings.System.semGetIntForUser(
+                        this.mContext.getContentResolver(), "spen_air_action", 1, -2)
+                != 0;
     }
 
     public final synchronized boolean isSupportBleSpen() {
@@ -221,11 +261,16 @@ public final class BleSpenManager {
             return;
         }
         if (SemPersonaManager.isKioskModeEnabled(context)) {
-            Log.i("BleSpenManager", "startBlindChargeService : BLE Spen is disabled on knox container enabled mode");
+            Log.i(
+                    "BleSpenManager",
+                    "startBlindChargeService : BLE Spen is disabled on knox container enabled"
+                        + " mode");
             return;
         }
         try {
-            Intent intent = new Intent("com.samsung.android.service.aircommand.action.SPEN_BLIND_CHARGE_SERVICE");
+            Intent intent =
+                    new Intent(
+                            "com.samsung.android.service.aircommand.action.SPEN_BLIND_CHARGE_SERVICE");
             intent.setPackage("com.samsung.android.service.aircommand");
             if (context.startServiceAsUser(intent, UserHandle.CURRENT) == null) {
                 Log.e("BleSpenManager", "startBlindChargeService : failed to launch the service");
@@ -243,17 +288,22 @@ public final class BleSpenManager {
             return;
         }
         if (SemPersonaManager.isKioskModeEnabled(context)) {
-            Log.i("BleSpenManager", "startRemoteSpenService : BLE Spen is disabled on knox container enabled mode");
+            Log.i(
+                    "BleSpenManager",
+                    "startRemoteSpenService : BLE Spen is disabled on knox container enabled mode");
             return;
         }
         try {
-            Intent intent = new Intent("com.samsung.android.service.aircommand.action.REMOTE_SPEN_SERVICE");
+            Intent intent =
+                    new Intent("com.samsung.android.service.aircommand.action.REMOTE_SPEN_SERVICE");
             intent.setPackage("com.samsung.android.service.aircommand");
             if (context.startServiceAsUser(intent, UserHandle.CURRENT) == null) {
                 Log.e("BleSpenManager", "startRemoteSpenService : failed to launch the service");
             }
         } catch (IllegalStateException | SecurityException e) {
-            Log.e("BleSpenManager", "startRemoteSpenService : Failed to start BLE SPen service " + e);
+            Log.e(
+                    "BleSpenManager",
+                    "startRemoteSpenService : Failed to start BLE SPen service " + e);
         }
     }
 }

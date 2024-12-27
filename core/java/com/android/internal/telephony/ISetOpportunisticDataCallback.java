@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ISetOpportunisticDataCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.ISetOpportunisticDataCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.ISetOpportunisticDataCallback";
 
     void onComplete(int i) throws RemoteException;
 
     public static class Default implements ISetOpportunisticDataCallback {
         @Override // com.android.internal.telephony.ISetOpportunisticDataCallback
-        public void onComplete(int result) throws RemoteException {
-        }
+        public void onComplete(int result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ISetOpportunisticDataCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISetOpportunisticDataCallback {
+    public abstract static class Stub extends Binder implements ISetOpportunisticDataCallback {
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ISetOpportunisticDataCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISetOpportunisticDataCallback.DESCRIPTOR);
             }

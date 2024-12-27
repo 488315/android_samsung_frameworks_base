@@ -1,6 +1,7 @@
 package android.os;
 
 import android.util.Log;
+
 import java.time.Clock;
 import java.time.DateTimeException;
 import java.time.ZoneId;
@@ -28,6 +29,7 @@ public class BestClock extends SimpleClock {
                 Log.w(TAG, e.toString());
             }
         }
-        throw new DateTimeException("No clocks in " + Arrays.toString(this.clocks) + " were able to provide time");
+        throw new DateTimeException(
+                "No clocks in " + Arrays.toString(this.clocks) + " were able to provide time");
     }
 }

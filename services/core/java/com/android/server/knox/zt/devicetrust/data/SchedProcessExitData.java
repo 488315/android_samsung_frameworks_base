@@ -1,14 +1,17 @@
 package com.android.server.knox.zt.devicetrust.data;
 
 import android.os.Bundle;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -17,7 +20,8 @@ public final class SchedProcessExitData extends TracepointData {
     public final int pid;
     public final int prio;
 
-    public SchedProcessExitData(int i, long j, long j2, long j3, String str, String str2, int i2, int i3) {
+    public SchedProcessExitData(
+            int i, long j, long j2, long j3, String str, String str2, int i2, int i3) {
         super(i, j, j2, j3, str);
         this.comm = str2;
         this.pid = i2;
@@ -69,10 +73,14 @@ public final class SchedProcessExitData extends TracepointData {
         int i3 = this.pid;
         int i4 = this.prio;
         String readExtras = readExtras(true);
-        StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(pid, i2, " | pid_base : ", " | uid : ", m);
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, " | comm_base : ", str, " | comm : ", str2);
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i3, i4, " | pid : ", " | prio : ", m);
+        StringBuilder m =
+                SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                pid, i2, " | pid_base : ", " | uid : ", m);
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                m, " | comm_base : ", str, " | comm : ", str2);
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i3, i4, " | pid : ", " | prio : ", m);
         m.append(readExtras);
         return m.toString();
     }

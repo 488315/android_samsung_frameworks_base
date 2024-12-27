@@ -3,26 +3,28 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class EpsQos implements Parcelable {
-    public static final Parcelable.Creator<EpsQos> CREATOR = new Parcelable.Creator<EpsQos>() { // from class: android.hardware.radio.data.EpsQos.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EpsQos createFromParcel(Parcel _aidl_source) {
-            EpsQos _aidl_out = new EpsQos();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<EpsQos> CREATOR =
+            new Parcelable.Creator<EpsQos>() { // from class: android.hardware.radio.data.EpsQos.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EpsQos createFromParcel(Parcel _aidl_source) {
+                    EpsQos _aidl_out = new EpsQos();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EpsQos[] newArray(int _aidl_size) {
-            return new EpsQos[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EpsQos[] newArray(int _aidl_size) {
+                    return new EpsQos[_aidl_size];
+                }
+            };
     public QosBandwidth downlink;
     public int qci = 0;
     public QosBandwidth uplink;

@@ -20,15 +20,15 @@ public interface IPlatformCompatNative extends IInterface {
 
     public static class Default implements IPlatformCompatNative {
         @Override // com.android.internal.compat.IPlatformCompatNative
-        public void reportChangeByPackageName(long changeId, String packageName, int userId) throws RemoteException {
-        }
+        public void reportChangeByPackageName(long changeId, String packageName, int userId)
+                throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompatNative
-        public void reportChangeByUid(long changeId, int uid) throws RemoteException {
-        }
+        public void reportChangeByUid(long changeId, int uid) throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompatNative
-        public boolean isChangeEnabledByPackageName(long changeId, String packageName, int userId) throws RemoteException {
+        public boolean isChangeEnabledByPackageName(long changeId, String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -43,7 +43,7 @@ public interface IPlatformCompatNative extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPlatformCompatNative {
+    public abstract static class Stub extends Binder implements IPlatformCompatNative {
         static final int TRANSACTION_isChangeEnabledByPackageName = 3;
         static final int TRANSACTION_isChangeEnabledByUid = 4;
         static final int TRANSACTION_reportChangeByPackageName = 1;
@@ -90,7 +90,8 @@ public interface IPlatformCompatNative extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPlatformCompatNative.DESCRIPTOR);
             }
@@ -153,7 +154,8 @@ public interface IPlatformCompatNative extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompatNative
-            public void reportChangeByPackageName(long changeId, String packageName, int userId) throws RemoteException {
+            public void reportChangeByPackageName(long changeId, String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -186,7 +188,8 @@ public interface IPlatformCompatNative extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompatNative
-            public boolean isChangeEnabledByPackageName(long changeId, String packageName, int userId) throws RemoteException {
+            public boolean isChangeEnabledByPackageName(
+                    long changeId, String packageName, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

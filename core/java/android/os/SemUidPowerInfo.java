@@ -1,24 +1,25 @@
 package android.os;
 
 import android.hardware.scontext.SContextConstants;
-import android.os.Parcelable;
+
 import java.util.Arrays;
 
 /* loaded from: classes3.dex */
 public class SemUidPowerInfo implements Parcelable {
-    public static final Parcelable.Creator<SemUidPowerInfo> CREATOR = new Parcelable.Creator<SemUidPowerInfo>() { // from class: android.os.SemUidPowerInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemUidPowerInfo createFromParcel(Parcel in) {
-            return new SemUidPowerInfo(in);
-        }
+    public static final Parcelable.Creator<SemUidPowerInfo> CREATOR =
+            new Parcelable.Creator<SemUidPowerInfo>() { // from class: android.os.SemUidPowerInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemUidPowerInfo createFromParcel(Parcel in) {
+                    return new SemUidPowerInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemUidPowerInfo[] newArray(int size) {
-            return new SemUidPowerInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemUidPowerInfo[] newArray(int size) {
+                    return new SemUidPowerInfo[size];
+                }
+            };
     public long actualGpsTime;
     public long audioTime;
     public long bgTime;
@@ -81,7 +82,15 @@ public class SemUidPowerInfo implements Parcelable {
     }
 
     public String toString() {
-        return String.format("power %f cpu %d wake %d mActive %d mPkt %d wPkt %d walarm %d", Double.valueOf(this.power), Long.valueOf(this.cpuTime), Long.valueOf(this.wakelockTime), Long.valueOf(this.mobileActive), Long.valueOf(this.mobilePackets), Long.valueOf(this.wifiPackets), Integer.valueOf(this.wakeupAlarm));
+        return String.format(
+                "power %f cpu %d wake %d mActive %d mPkt %d wPkt %d walarm %d",
+                Double.valueOf(this.power),
+                Long.valueOf(this.cpuTime),
+                Long.valueOf(this.wakelockTime),
+                Long.valueOf(this.mobileActive),
+                Long.valueOf(this.mobilePackets),
+                Long.valueOf(this.wifiPackets),
+                Integer.valueOf(this.wakeupAlarm));
     }
 
     public void update(SemUidPowerInfo info) {

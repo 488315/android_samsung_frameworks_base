@@ -11,6 +11,7 @@ import android.os.SystemClock;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.TimeUtils;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -39,143 +40,213 @@ public abstract class PersistentConnection {
     public final String mTag;
     public final int mUserId;
     public final Object mLock = new Object();
-    public final AnonymousClass1 mServiceConnection = new ServiceConnection() { // from class: com.android.server.am.PersistentConnection.1
-        @Override // android.content.ServiceConnection
-        public final void onBindingDied(ComponentName componentName) {
-            synchronized (PersistentConnection.this.mLock) {
-                try {
-                    PersistentConnection persistentConnection = PersistentConnection.this;
-                    if (!persistentConnection.mBound) {
-                        Log.w(persistentConnection.mTag, "Binding died: " + PersistentConnection.this.mComponentName.flattenToShortString() + " u" + PersistentConnection.this.mUserId + " but not bound, ignore.");
-                        return;
+    public final AnonymousClass1 mServiceConnection =
+            new ServiceConnection() { // from class: com.android.server.am.PersistentConnection.1
+                @Override // android.content.ServiceConnection
+                public final void onBindingDied(ComponentName componentName) {
+                    synchronized (PersistentConnection.this.mLock) {
+                        try {
+                            PersistentConnection persistentConnection = PersistentConnection.this;
+                            if (!persistentConnection.mBound) {
+                                Log.w(
+                                        persistentConnection.mTag,
+                                        "Binding died: "
+                                                + PersistentConnection.this.mComponentName
+                                                        .flattenToShortString()
+                                                + " u"
+                                                + PersistentConnection.this.mUserId
+                                                + " but not bound, ignore.");
+                                return;
+                            }
+                            Log.w(
+                                    persistentConnection.mTag,
+                                    "Binding died: "
+                                            + PersistentConnection.this.mComponentName
+                                                    .flattenToShortString()
+                                            + " u"
+                                            + PersistentConnection.this.mUserId);
+                            PersistentConnection persistentConnection2 = PersistentConnection.this;
+                            persistentConnection2.mNumBindingDied =
+                                    persistentConnection2.mNumBindingDied + 1;
+                            persistentConnection2.scheduleRebindLocked();
+                        } catch (Throwable th) {
+                            throw th;
+                        }
                     }
-                    Log.w(persistentConnection.mTag, "Binding died: " + PersistentConnection.this.mComponentName.flattenToShortString() + " u" + PersistentConnection.this.mUserId);
-                    PersistentConnection persistentConnection2 = PersistentConnection.this;
-                    persistentConnection2.mNumBindingDied = persistentConnection2.mNumBindingDied + 1;
-                    persistentConnection2.scheduleRebindLocked();
-                } catch (Throwable th) {
-                    throw th;
                 }
-            }
-        }
 
-        @Override // android.content.ServiceConnection
-        public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            synchronized (PersistentConnection.this.mLock) {
-                try {
-                    PersistentConnection persistentConnection = PersistentConnection.this;
-                    if (!persistentConnection.mBound) {
-                        Log.w(persistentConnection.mTag, "Connected: " + PersistentConnection.this.mComponentName.flattenToShortString() + " u" + PersistentConnection.this.mUserId + " but not bound, ignore.");
-                        return;
+                @Override // android.content.ServiceConnection
+                public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                    synchronized (PersistentConnection.this.mLock) {
+                        try {
+                            PersistentConnection persistentConnection = PersistentConnection.this;
+                            if (!persistentConnection.mBound) {
+                                Log.w(
+                                        persistentConnection.mTag,
+                                        "Connected: "
+                                                + PersistentConnection.this.mComponentName
+                                                        .flattenToShortString()
+                                                + " u"
+                                                + PersistentConnection.this.mUserId
+                                                + " but not bound, ignore.");
+                                return;
+                            }
+                            Log.i(
+                                    persistentConnection.mTag,
+                                    "Connected: "
+                                            + PersistentConnection.this.mComponentName
+                                                    .flattenToShortString()
+                                            + " u"
+                                            + PersistentConnection.this.mUserId);
+                            PersistentConnection persistentConnection2 = PersistentConnection.this;
+                            persistentConnection2.mNumConnected =
+                                    persistentConnection2.mNumConnected + 1;
+                            persistentConnection2.mIsConnected = true;
+                            persistentConnection2.mLastConnectedTime =
+                                    persistentConnection2.injectUptimeMillis();
+                            PersistentConnection persistentConnection3 = PersistentConnection.this;
+                            persistentConnection3.mService =
+                                    persistentConnection3.asInterface(iBinder);
+                            PersistentConnection persistentConnection4 = PersistentConnection.this;
+                            persistentConnection4.injectRemoveCallbacks(
+                                    persistentConnection4.mStableCheck);
+                            persistentConnection4.injectPostAtTime(
+                                    persistentConnection4.mStableCheck,
+                                    persistentConnection4.injectUptimeMillis()
+                                            + persistentConnection4.mResetBackoffDelay);
+                        } catch (Throwable th) {
+                            throw th;
+                        }
                     }
-                    Log.i(persistentConnection.mTag, "Connected: " + PersistentConnection.this.mComponentName.flattenToShortString() + " u" + PersistentConnection.this.mUserId);
-                    PersistentConnection persistentConnection2 = PersistentConnection.this;
-                    persistentConnection2.mNumConnected = persistentConnection2.mNumConnected + 1;
-                    persistentConnection2.mIsConnected = true;
-                    persistentConnection2.mLastConnectedTime = persistentConnection2.injectUptimeMillis();
-                    PersistentConnection persistentConnection3 = PersistentConnection.this;
-                    persistentConnection3.mService = persistentConnection3.asInterface(iBinder);
-                    PersistentConnection persistentConnection4 = PersistentConnection.this;
-                    persistentConnection4.injectRemoveCallbacks(persistentConnection4.mStableCheck);
-                    persistentConnection4.injectPostAtTime(persistentConnection4.mStableCheck, persistentConnection4.injectUptimeMillis() + persistentConnection4.mResetBackoffDelay);
-                } catch (Throwable th) {
-                    throw th;
                 }
-            }
-        }
 
-        @Override // android.content.ServiceConnection
-        public final void onServiceDisconnected(ComponentName componentName) {
-            synchronized (PersistentConnection.this.mLock) {
-                Log.i(PersistentConnection.this.mTag, "Disconnected: " + PersistentConnection.this.mComponentName.flattenToShortString() + " u" + PersistentConnection.this.mUserId);
-                PersistentConnection persistentConnection = PersistentConnection.this;
-                persistentConnection.mNumDisconnected = persistentConnection.mNumDisconnected + 1;
-                persistentConnection.mIsConnected = false;
-                persistentConnection.injectRemoveCallbacks(persistentConnection.mStableCheck);
-            }
-        }
-    };
+                @Override // android.content.ServiceConnection
+                public final void onServiceDisconnected(ComponentName componentName) {
+                    synchronized (PersistentConnection.this.mLock) {
+                        Log.i(
+                                PersistentConnection.this.mTag,
+                                "Disconnected: "
+                                        + PersistentConnection.this.mComponentName
+                                                .flattenToShortString()
+                                        + " u"
+                                        + PersistentConnection.this.mUserId);
+                        PersistentConnection persistentConnection = PersistentConnection.this;
+                        persistentConnection.mNumDisconnected =
+                                persistentConnection.mNumDisconnected + 1;
+                        persistentConnection.mIsConnected = false;
+                        persistentConnection.injectRemoveCallbacks(
+                                persistentConnection.mStableCheck);
+                    }
+                }
+            };
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.am.PersistentConnection$1] */
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.am.PersistentConnection$$ExternalSyntheticLambda0] */
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.am.PersistentConnection$$ExternalSyntheticLambda0] */
-    public PersistentConnection(String str, Context context, Handler handler, int i, ComponentName componentName, long j, double d, long j2, long j3) {
+    public PersistentConnection(
+            String str,
+            Context context,
+            Handler handler,
+            int i,
+            ComponentName componentName,
+            long j,
+            double d,
+            long j2,
+            long j3) {
         final int i2 = 0;
-        this.mBindForBackoffRunnable = new Runnable(this) { // from class: com.android.server.am.PersistentConnection$$ExternalSyntheticLambda0
-            public final /* synthetic */ PersistentConnection f$0;
+        this.mBindForBackoffRunnable =
+                new Runnable(
+                        this) { // from class:
+                                // com.android.server.am.PersistentConnection$$ExternalSyntheticLambda0
+                    public final /* synthetic */ PersistentConnection f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i3 = i2;
-                PersistentConnection persistentConnection = this.f$0;
-                switch (i3) {
-                    case 0:
-                        synchronized (persistentConnection.mLock) {
-                            try {
-                                if (persistentConnection.mShouldBeBound) {
-                                    persistentConnection.bindInnerLocked(false);
-                                    return;
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i3 = i2;
+                        PersistentConnection persistentConnection = this.f$0;
+                        switch (i3) {
+                            case 0:
+                                synchronized (persistentConnection.mLock) {
+                                    try {
+                                        if (persistentConnection.mShouldBeBound) {
+                                            persistentConnection.bindInnerLocked(false);
+                                            return;
+                                        }
+                                        return;
+                                    } finally {
+                                    }
+                                }
+                            default:
+                                synchronized (persistentConnection.mLock) {
+                                    try {
+                                        long injectUptimeMillis =
+                                                (persistentConnection.mLastConnectedTime
+                                                                + persistentConnection
+                                                                        .mResetBackoffDelay)
+                                                        - persistentConnection.injectUptimeMillis();
+                                        if (persistentConnection.mBound
+                                                && persistentConnection.mIsConnected
+                                                && injectUptimeMillis <= 0) {
+                                            persistentConnection.resetBackoffLocked();
+                                        }
+                                    } finally {
+                                    }
                                 }
                                 return;
-                            } finally {
-                            }
                         }
-                    default:
-                        synchronized (persistentConnection.mLock) {
-                            try {
-                                long injectUptimeMillis = (persistentConnection.mLastConnectedTime + persistentConnection.mResetBackoffDelay) - persistentConnection.injectUptimeMillis();
-                                if (persistentConnection.mBound && persistentConnection.mIsConnected && injectUptimeMillis <= 0) {
-                                    persistentConnection.resetBackoffLocked();
-                                }
-                            } finally {
-                            }
-                        }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         final int i3 = 1;
-        this.mStableCheck = new Runnable(this) { // from class: com.android.server.am.PersistentConnection$$ExternalSyntheticLambda0
-            public final /* synthetic */ PersistentConnection f$0;
+        this.mStableCheck =
+                new Runnable(
+                        this) { // from class:
+                                // com.android.server.am.PersistentConnection$$ExternalSyntheticLambda0
+                    public final /* synthetic */ PersistentConnection f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i32 = i3;
-                PersistentConnection persistentConnection = this.f$0;
-                switch (i32) {
-                    case 0:
-                        synchronized (persistentConnection.mLock) {
-                            try {
-                                if (persistentConnection.mShouldBeBound) {
-                                    persistentConnection.bindInnerLocked(false);
-                                    return;
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i32 = i3;
+                        PersistentConnection persistentConnection = this.f$0;
+                        switch (i32) {
+                            case 0:
+                                synchronized (persistentConnection.mLock) {
+                                    try {
+                                        if (persistentConnection.mShouldBeBound) {
+                                            persistentConnection.bindInnerLocked(false);
+                                            return;
+                                        }
+                                        return;
+                                    } finally {
+                                    }
+                                }
+                            default:
+                                synchronized (persistentConnection.mLock) {
+                                    try {
+                                        long injectUptimeMillis =
+                                                (persistentConnection.mLastConnectedTime
+                                                                + persistentConnection
+                                                                        .mResetBackoffDelay)
+                                                        - persistentConnection.injectUptimeMillis();
+                                        if (persistentConnection.mBound
+                                                && persistentConnection.mIsConnected
+                                                && injectUptimeMillis <= 0) {
+                                            persistentConnection.resetBackoffLocked();
+                                        }
+                                    } finally {
+                                    }
                                 }
                                 return;
-                            } finally {
-                            }
                         }
-                    default:
-                        synchronized (persistentConnection.mLock) {
-                            try {
-                                long injectUptimeMillis = (persistentConnection.mLastConnectedTime + persistentConnection.mResetBackoffDelay) - persistentConnection.injectUptimeMillis();
-                                if (persistentConnection.mBound && persistentConnection.mIsConnected && injectUptimeMillis <= 0) {
-                                    persistentConnection.resetBackoffLocked();
-                                }
-                            } finally {
-                            }
-                        }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         this.mTag = str;
         this.mContext = context;
         this.mHandler = handler;
@@ -206,7 +277,8 @@ public abstract class PersistentConnection {
         Context context = this.mContext;
         int bindFlags = getBindFlags() | 1;
         int i = this.mUserId;
-        if (context.bindServiceAsUser(component, this.mServiceConnection, bindFlags, this.mHandler, UserHandle.of(i))) {
+        if (context.bindServiceAsUser(
+                component, this.mServiceConnection, bindFlags, this.mHandler, UserHandle.of(i))) {
             return;
         }
         Log.e(this.mTag, "Binding: " + component.getComponent() + " u" + i + " failed.");
@@ -223,7 +295,8 @@ public abstract class PersistentConnection {
                 printWriter.print(this.mIsConnected ? " [connected]" : " [not connected]");
                 if (this.mRebindScheduled) {
                     printWriter.print(" reconnect in ");
-                    TimeUtils.formatDuration(this.mReconnectTime - injectUptimeMillis(), printWriter);
+                    TimeUtils.formatDuration(
+                            this.mReconnectTime - injectUptimeMillis(), printWriter);
                 }
                 printWriter.println();
                 printWriter.print(str);
@@ -239,7 +312,8 @@ public abstract class PersistentConnection {
                 printWriter.print(this.mNumBindingDied);
                 if (this.mIsConnected) {
                     printWriter.print("  Duration: ");
-                    TimeUtils.formatDuration(injectUptimeMillis() - this.mLastConnectedTime, printWriter);
+                    TimeUtils.formatDuration(
+                            injectUptimeMillis() - this.mLastConnectedTime, printWriter);
                 }
                 printWriter.println();
             } catch (Throwable th) {
@@ -320,11 +394,19 @@ public abstract class PersistentConnection {
         if (this.mRebindScheduled) {
             return;
         }
-        Log.i(this.mTag, AudioConfig$$ExternalSyntheticOutline0.m(new StringBuilder("Scheduling to reconnect in "), this.mNextBackoffMs, " ms (uptime)"));
+        Log.i(
+                this.mTag,
+                AudioConfig$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Scheduling to reconnect in "),
+                        this.mNextBackoffMs,
+                        " ms (uptime)"));
         long injectUptimeMillis = injectUptimeMillis() + this.mNextBackoffMs;
         this.mReconnectTime = injectUptimeMillis;
         injectPostAtTime(this.mBindForBackoffRunnable, injectUptimeMillis);
-        this.mNextBackoffMs = Math.min(this.mRebindMaxBackoffMs, (long) (this.mNextBackoffMs * this.mRebindBackoffIncrease));
+        this.mNextBackoffMs =
+                Math.min(
+                        this.mRebindMaxBackoffMs,
+                        (long) (this.mNextBackoffMs * this.mRebindBackoffIncrease));
         this.mRebindScheduled = true;
     }
 
@@ -344,7 +426,12 @@ public abstract class PersistentConnection {
         injectRemoveCallbacks(this.mBindForBackoffRunnable);
         this.mRebindScheduled = false;
         if (this.mBound) {
-            Log.i(this.mTag, "Stopping: " + this.mComponentName.flattenToShortString() + " u" + this.mUserId);
+            Log.i(
+                    this.mTag,
+                    "Stopping: "
+                            + this.mComponentName.flattenToShortString()
+                            + " u"
+                            + this.mUserId);
             this.mBound = false;
             this.mContext.unbindService(this.mServiceConnection);
             this.mIsConnected = false;

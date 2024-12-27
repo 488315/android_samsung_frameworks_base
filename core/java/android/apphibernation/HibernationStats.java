@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes.dex */
 public final class HibernationStats implements Parcelable {
-    public static final Parcelable.Creator<HibernationStats> CREATOR = new Parcelable.Creator<HibernationStats>() { // from class: android.apphibernation.HibernationStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HibernationStats createFromParcel(Parcel in) {
-            return new HibernationStats(in);
-        }
+    public static final Parcelable.Creator<HibernationStats> CREATOR =
+            new Parcelable.Creator<
+                    HibernationStats>() { // from class: android.apphibernation.HibernationStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HibernationStats createFromParcel(Parcel in) {
+                    return new HibernationStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HibernationStats[] newArray(int size) {
-            return new HibernationStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HibernationStats[] newArray(int size) {
+                    return new HibernationStats[size];
+                }
+            };
     private final long mDiskBytesSaved;
 
     public HibernationStats(long diskBytesSaved) {

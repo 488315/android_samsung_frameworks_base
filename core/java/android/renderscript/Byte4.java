@@ -8,8 +8,7 @@ public class Byte4 {
     public byte y;
     public byte z;
 
-    public Byte4() {
-    }
+    public Byte4() {}
 
     public Byte4(byte initX, byte initY, byte initZ, byte initW) {
         this.x = initX;

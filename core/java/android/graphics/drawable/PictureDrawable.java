@@ -55,10 +55,8 @@ public class PictureDrawable extends Drawable {
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void setColorFilter(ColorFilter colorFilter) {
-    }
+    public void setColorFilter(ColorFilter colorFilter) {}
 
     @Override // android.graphics.drawable.Drawable
-    public void setAlpha(int alpha) {
-    }
+    public void setAlpha(int alpha) {}
 }

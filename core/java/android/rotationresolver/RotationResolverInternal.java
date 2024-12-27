@@ -13,5 +13,11 @@ public abstract class RotationResolverInternal {
 
     public abstract boolean isRotationResolverSupported();
 
-    public abstract void resolveRotation(RotationResolverCallbackInternal rotationResolverCallbackInternal, String str, int i, int i2, long j, CancellationSignal cancellationSignal);
+    public abstract void resolveRotation(
+            RotationResolverCallbackInternal rotationResolverCallbackInternal,
+            String str,
+            int i,
+            int i2,
+            long j,
+            CancellationSignal cancellationSignal);
 }

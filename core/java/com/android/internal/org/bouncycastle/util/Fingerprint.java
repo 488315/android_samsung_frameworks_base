@@ -1,12 +1,30 @@
 package com.android.internal.org.bouncycastle.util;
 
 import android.text.format.DateFormat;
+
 import com.android.internal.org.bouncycastle.crypto.Digest;
 import com.android.internal.org.bouncycastle.crypto.digests.AndroidDigestFactory;
 
 /* loaded from: classes5.dex */
 public class Fingerprint {
-    private static char[] encodingTable = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.AM_PM, 'b', 'c', DateFormat.DATE, 'e', 'f'};
+    private static char[] encodingTable = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.AM_PM,
+        'b',
+        'c',
+        DateFormat.DATE,
+        'e',
+        'f'
+    };
     private final byte[] fingerprint;
 
     public Fingerprint(byte[] source) {

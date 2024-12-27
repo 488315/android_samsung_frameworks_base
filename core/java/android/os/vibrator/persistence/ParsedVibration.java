@@ -3,6 +3,7 @@ package android.os.vibrator.persistence;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.os.VibratorInfo;
+
 import java.util.Collections;
 import java.util.List;
 

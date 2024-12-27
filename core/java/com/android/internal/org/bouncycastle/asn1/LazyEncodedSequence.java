@@ -26,13 +26,16 @@ class LazyEncodedSequence extends ASN1Sequence {
         return super.getObjects();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence, com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public synchronized int hashCode() {
         force();
         return super.hashCode();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence, com.android.internal.org.bouncycastle.util.Iterable, java.lang.Iterable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence,
+              // com.android.internal.org.bouncycastle.util.Iterable, java.lang.Iterable
     public synchronized Iterator<ASN1Encodable> iterator() {
         force();
         return super.iterator();
@@ -64,7 +67,8 @@ class LazyEncodedSequence extends ASN1Sequence {
         return super.toDLObject().encodedLength();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     synchronized void encode(ASN1OutputStream out, boolean withTag) throws IOException {
         if (this.encoded != null) {
             out.writeEncoded(withTag, 48, this.encoded);
@@ -73,13 +77,15 @@ class LazyEncodedSequence extends ASN1Sequence {
         }
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     synchronized ASN1Primitive toDERObject() {
         force();
         return super.toDERObject();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     synchronized ASN1Primitive toDLObject() {
         force();
         return super.toDLObject();

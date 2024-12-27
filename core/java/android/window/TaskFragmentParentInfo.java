@@ -4,30 +4,39 @@ import android.content.res.Configuration;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.SurfaceControl;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TaskFragmentParentInfo implements Parcelable {
-    public static final Parcelable.Creator<TaskFragmentParentInfo> CREATOR = new Parcelable.Creator<TaskFragmentParentInfo>() { // from class: android.window.TaskFragmentParentInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TaskFragmentParentInfo createFromParcel(Parcel in) {
-            return new TaskFragmentParentInfo(in);
-        }
+    public static final Parcelable.Creator<TaskFragmentParentInfo> CREATOR =
+            new Parcelable.Creator<
+                    TaskFragmentParentInfo>() { // from class:
+                                                // android.window.TaskFragmentParentInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TaskFragmentParentInfo createFromParcel(Parcel in) {
+                    return new TaskFragmentParentInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TaskFragmentParentInfo[] newArray(int size) {
-            return new TaskFragmentParentInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TaskFragmentParentInfo[] newArray(int size) {
+                    return new TaskFragmentParentInfo[size];
+                }
+            };
     private final Configuration mConfiguration;
     private final SurfaceControl mDecorSurface;
     private final int mDisplayId;
     private final boolean mHasDirectActivity;
     private final boolean mVisible;
 
-    public TaskFragmentParentInfo(Configuration configuration, int displayId, boolean visible, boolean hasDirectActivity, SurfaceControl decorSurface) {
+    public TaskFragmentParentInfo(
+            Configuration configuration,
+            int displayId,
+            boolean visible,
+            boolean hasDirectActivity,
+            SurfaceControl decorSurface) {
         this.mConfiguration = new Configuration();
         this.mConfiguration.setTo(configuration);
         this.mDisplayId = displayId;
@@ -62,7 +71,12 @@ public final class TaskFragmentParentInfo implements Parcelable {
     }
 
     public boolean equalsForTaskFragmentOrganizer(TaskFragmentParentInfo that) {
-        return that != null && getWindowingMode() == that.getWindowingMode() && this.mDisplayId == that.mDisplayId && this.mVisible == that.mVisible && this.mHasDirectActivity == that.mHasDirectActivity && this.mDecorSurface == that.mDecorSurface;
+        return that != null
+                && getWindowingMode() == that.getWindowingMode()
+                && this.mDisplayId == that.mDisplayId
+                && this.mVisible == that.mVisible
+                && this.mHasDirectActivity == that.mHasDirectActivity
+                && this.mDecorSurface == that.mDecorSurface;
     }
 
     public SurfaceControl getDecorSurface() {
@@ -74,7 +88,18 @@ public final class TaskFragmentParentInfo implements Parcelable {
     }
 
     public String toString() {
-        return TaskFragmentParentInfo.class.getSimpleName() + ":{config=" + this.mConfiguration + ", displayId=" + this.mDisplayId + ", visible=" + this.mVisible + ", hasDirectActivity=" + this.mHasDirectActivity + ", decorSurface=" + this.mDecorSurface + "}";
+        return TaskFragmentParentInfo.class.getSimpleName()
+                + ":{config="
+                + this.mConfiguration
+                + ", displayId="
+                + this.mDisplayId
+                + ", visible="
+                + this.mVisible
+                + ", hasDirectActivity="
+                + this.mHasDirectActivity
+                + ", decorSurface="
+                + this.mDecorSurface
+                + "}";
     }
 
     public boolean equals(Object obj) {
@@ -85,11 +110,20 @@ public final class TaskFragmentParentInfo implements Parcelable {
             return false;
         }
         TaskFragmentParentInfo that = (TaskFragmentParentInfo) obj;
-        return this.mConfiguration.equals(that.mConfiguration) && this.mDisplayId == that.mDisplayId && this.mVisible == that.mVisible && this.mHasDirectActivity == that.mHasDirectActivity && this.mDecorSurface == that.mDecorSurface;
+        return this.mConfiguration.equals(that.mConfiguration)
+                && this.mDisplayId == that.mDisplayId
+                && this.mVisible == that.mVisible
+                && this.mHasDirectActivity == that.mHasDirectActivity
+                && this.mDecorSurface == that.mDecorSurface;
     }
 
     public int hashCode() {
-        return (((((((this.mConfiguration.hashCode() * 31) + this.mDisplayId) * 31) + (this.mVisible ? 1 : 0)) * 31) + (this.mHasDirectActivity ? 1 : 0)) * 31) + Objects.hashCode(this.mDecorSurface);
+        return (((((((this.mConfiguration.hashCode() * 31) + this.mDisplayId) * 31)
+                                                + (this.mVisible ? 1 : 0))
+                                        * 31)
+                                + (this.mHasDirectActivity ? 1 : 0))
+                        * 31)
+                + Objects.hashCode(this.mDecorSurface);
     }
 
     @Override // android.os.Parcelable

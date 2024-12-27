@@ -3,13 +3,14 @@ package android.net;
 import android.Manifest;
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.net.INetworkRecommendationProvider;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.concurrent.Executor;
 
 @SystemApi
@@ -49,12 +50,14 @@ public abstract class NetworkRecommendationProvider {
         public void requestScores(final NetworkKey[] networks) throws RemoteException {
             enforceCallingPermission();
             if (networks != null && networks.length > 0) {
-                execute(new Runnable() { // from class: android.net.NetworkRecommendationProvider.ServiceWrapper.1
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        NetworkRecommendationProvider.this.onRequestScores(networks);
-                    }
-                });
+                execute(
+                        new Runnable() { // from class:
+                                         // android.net.NetworkRecommendationProvider.ServiceWrapper.1
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                NetworkRecommendationProvider.this.onRequestScores(networks);
+                            }
+                        });
             }
         }
 
@@ -68,7 +71,8 @@ public abstract class NetworkRecommendationProvider {
 
         private void enforceCallingPermission() {
             if (this.mContext != null) {
-                this.mContext.enforceCallingOrSelfPermission(Manifest.permission.REQUEST_NETWORK_SCORES, "Permission denied.");
+                this.mContext.enforceCallingOrSelfPermission(
+                        Manifest.permission.REQUEST_NETWORK_SCORES, "Permission denied.");
             }
         }
     }

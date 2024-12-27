@@ -1,7 +1,5 @@
 package android.app;
 
-import android.app.Activity;
-import android.app.ActivityThread;
 import android.app.servertransaction.PendingTransactionActions;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -9,7 +7,9 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
+
 import com.android.internal.content.ReferrerIntent;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,7 +62,8 @@ public class LocalActivityManager {
             return;
         }
         if (r.curState != 1) {
-            ActivityThread.ActivityClientRecord clientRecord = this.mActivityThread.getActivityClient(r);
+            ActivityThread.ActivityClientRecord clientRecord =
+                    this.mActivityThread.getActivityClient(r);
             if (clientRecord == null) {
                 Log.w(TAG, "Can't get activity record for " + r.id);
                 return;
@@ -75,14 +76,16 @@ public class LocalActivityManager {
                     }
                     if (desiredState == 4) {
                         this.mActivityThread.performRestartActivity(clientRecord, true);
-                        this.mActivityThread.performResumeActivity(clientRecord, true, "moveToState-CREATED");
+                        this.mActivityThread.performResumeActivity(
+                                clientRecord, true, "moveToState-CREATED");
                         r.curState = 4;
                         break;
                     }
                     break;
                 case 3:
                     if (desiredState == 4) {
-                        this.mActivityThread.performResumeActivity(clientRecord, true, "moveToState-STARTED");
+                        this.mActivityThread.performResumeActivity(
+                                clientRecord, true, "moveToState-STARTED");
                         r.instanceState = null;
                         r.curState = 4;
                     }
@@ -107,7 +110,8 @@ public class LocalActivityManager {
             }
             return;
         }
-        HashMap<String, Object> lastNonConfigurationInstances = this.mParent.getLastNonConfigurationChildInstances();
+        HashMap<String, Object> lastNonConfigurationInstances =
+                this.mParent.getLastNonConfigurationChildInstances();
         if (lastNonConfigurationInstances == null) {
             instanceObj = null;
         } else {
@@ -124,13 +128,24 @@ public class LocalActivityManager {
         if (r.activityInfo == null) {
             r.activityInfo = this.mActivityThread.resolveActivityInfo(r.intent);
         }
-        r.activity = this.mActivityThread.startActivityNow(this.mParent, r.id, r.intent, r.activityInfo, r, r.instanceState, instance, r, r);
+        r.activity =
+                this.mActivityThread.startActivityNow(
+                        this.mParent,
+                        r.id,
+                        r.intent,
+                        r.activityInfo,
+                        r,
+                        r.instanceState,
+                        instance,
+                        r,
+                        r);
         if (r.activity == null) {
             return;
         }
         r.window = r.activity.getWindow();
         r.instanceState = null;
-        ActivityThread.ActivityClientRecord clientRecord2 = this.mActivityThread.getActivityClient(r);
+        ActivityThread.ActivityClientRecord clientRecord2 =
+                this.mActivityThread.getActivityClient(r);
         if (!r.activity.mFinished) {
             pendingActions = new PendingTransactionActions();
             pendingActions.setOldState(clientRecord2.state);
@@ -142,14 +157,17 @@ public class LocalActivityManager {
         this.mActivityThread.handleStartActivity(clientRecord2, pendingActions, null);
         r.curState = 3;
         if (desiredState == 4) {
-            this.mActivityThread.performResumeActivity(clientRecord2, true, "moveToState-INITIALIZING");
+            this.mActivityThread.performResumeActivity(
+                    clientRecord2, true, "moveToState-INITIALIZING");
             r.curState = 4;
         }
     }
 
     private void performPause(LocalActivityRecord r, boolean finishing) {
         boolean needState = r.instanceState == null;
-        Bundle instanceState = this.mActivityThread.performPauseActivity(r, finishing, "performPause", (PendingTransactionActions) null);
+        Bundle instanceState =
+                this.mActivityThread.performPauseActivity(
+                        r, finishing, "performPause", (PendingTransactionActions) null);
         if (needState) {
             r.instanceState = instanceState;
         }
@@ -158,7 +176,8 @@ public class LocalActivityManager {
     public Window startActivity(String id, Intent intent) {
         LocalActivityRecord old;
         if (this.mCurState == 1) {
-            throw new IllegalStateException("Activities can't be added until the containing group has been created.");
+            throw new IllegalStateException(
+                    "Activities can't be added until the containing group has been created.");
         }
         boolean adding = false;
         boolean sameIntent = false;
@@ -180,11 +199,14 @@ public class LocalActivityManager {
             this.mActivities.put(id, r);
             this.mActivityArray.add(r);
         } else if (r.activityInfo != null) {
-            if (aInfo == r.activityInfo || (aInfo.name.equals(r.activityInfo.name) && aInfo.packageName.equals(r.activityInfo.packageName))) {
+            if (aInfo == r.activityInfo
+                    || (aInfo.name.equals(r.activityInfo.name)
+                            && aInfo.packageName.equals(r.activityInfo.packageName))) {
                 if (aInfo.launchMode != 0 || (intent.getFlags() & 536870912) != 0) {
                     ArrayList<ReferrerIntent> intents = new ArrayList<>(1);
                     intents.add(new ReferrerIntent(intent, this.mParent.getPackageName()));
-                    ActivityThread.ActivityClientRecord clientRecord = this.mActivityThread.getActivityClient(r);
+                    ActivityThread.ActivityClientRecord clientRecord =
+                            this.mActivityThread.getActivityClient(r);
                     this.mActivityThread.handleNewIntent(clientRecord, intents);
                     r.intent = intent;
                     moveToState(r, this.mCurState);
@@ -219,9 +241,11 @@ public class LocalActivityManager {
         if (r.curState == 4 && !finish) {
             performPause(r, finish);
         }
-        ActivityThread.ActivityClientRecord clientRecord = this.mActivityThread.getActivityClient(r);
+        ActivityThread.ActivityClientRecord clientRecord =
+                this.mActivityThread.getActivityClient(r);
         if (clientRecord != null) {
-            this.mActivityThread.performDestroyActivity(clientRecord, finish, false, "LocalActivityManager::performDestroy");
+            this.mActivityThread.performDestroyActivity(
+                    clientRecord, finish, false, "LocalActivityManager::performDestroy");
         }
         r.activity = null;
         r.window = null;
@@ -359,7 +383,9 @@ public class LocalActivityManager {
         int N = this.mActivityArray.size();
         for (int i = 0; i < N; i++) {
             LocalActivityRecord r = this.mActivityArray.get(i);
-            if (r != null && r.activity != null && (instance = r.activity.onRetainNonConfigurationInstance()) != null) {
+            if (r != null
+                    && r.activity != null
+                    && (instance = r.activity.onRetainNonConfigurationInstance()) != null) {
                 if (instanceMap == null) {
                     instanceMap = new HashMap<>();
                 }
@@ -377,9 +403,11 @@ public class LocalActivityManager {
         int N = this.mActivityArray.size();
         for (int i = 0; i < N; i++) {
             LocalActivityRecord r = this.mActivityArray.get(i);
-            ActivityThread.ActivityClientRecord clientRecord = this.mActivityThread.getActivityClient(r);
+            ActivityThread.ActivityClientRecord clientRecord =
+                    this.mActivityThread.getActivityClient(r);
             if (clientRecord != null) {
-                this.mActivityThread.performDestroyActivity(clientRecord, finishing, false, "LocalActivityManager::dispatchDestroy");
+                this.mActivityThread.performDestroyActivity(
+                        clientRecord, finishing, false, "LocalActivityManager::dispatchDestroy");
             }
         }
         this.mActivities.clear();

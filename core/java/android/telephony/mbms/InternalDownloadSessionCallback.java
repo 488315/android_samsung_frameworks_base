@@ -1,7 +1,7 @@
 package android.telephony.mbms;
 
 import android.os.Binder;
-import android.telephony.mbms.IMbmsDownloadSessionCallback;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -11,7 +11,8 @@ public class InternalDownloadSessionCallback extends IMbmsDownloadSessionCallbac
     private final Executor mExecutor;
     private volatile boolean mIsStopped = false;
 
-    public InternalDownloadSessionCallback(MbmsDownloadSessionCallback appCallback, Executor executor) {
+    public InternalDownloadSessionCallback(
+            MbmsDownloadSessionCallback appCallback, Executor executor) {
         this.mAppCallback = appCallback;
         this.mExecutor = executor;
     }
@@ -23,12 +24,15 @@ public class InternalDownloadSessionCallback extends IMbmsDownloadSessionCallbac
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalDownloadSessionCallback.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalDownloadSessionCallback.this.mAppCallback.onError(errorCode, message);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalDownloadSessionCallback.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalDownloadSessionCallback.this.mAppCallback.onError(
+                                    errorCode, message);
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }
@@ -41,12 +45,15 @@ public class InternalDownloadSessionCallback extends IMbmsDownloadSessionCallbac
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalDownloadSessionCallback.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalDownloadSessionCallback.this.mAppCallback.onFileServicesUpdated(services);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalDownloadSessionCallback.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalDownloadSessionCallback.this.mAppCallback.onFileServicesUpdated(
+                                    services);
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }
@@ -59,12 +66,14 @@ public class InternalDownloadSessionCallback extends IMbmsDownloadSessionCallbac
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalDownloadSessionCallback.3
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalDownloadSessionCallback.this.mAppCallback.onMiddlewareReady();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalDownloadSessionCallback.3
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalDownloadSessionCallback.this.mAppCallback.onMiddlewareReady();
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }

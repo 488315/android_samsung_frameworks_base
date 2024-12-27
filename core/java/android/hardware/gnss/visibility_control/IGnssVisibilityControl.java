@@ -1,6 +1,5 @@
 package android.hardware.gnss.visibility_control;
 
-import android.hardware.gnss.visibility_control.IGnssVisibilityControlCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IGnssVisibilityControl extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$gnss$visibility_control$IGnssVisibilityControl".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$visibility_control$IGnssVisibilityControl".replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";
     public static final int VERSION = 2;
 
@@ -19,16 +19,15 @@ public interface IGnssVisibilityControl extends IInterface {
 
     int getInterfaceVersion() throws RemoteException;
 
-    void setCallback(IGnssVisibilityControlCallback iGnssVisibilityControlCallback) throws RemoteException;
+    void setCallback(IGnssVisibilityControlCallback iGnssVisibilityControlCallback)
+            throws RemoteException;
 
     public static class Default implements IGnssVisibilityControl {
         @Override // android.hardware.gnss.visibility_control.IGnssVisibilityControl
-        public void enableNfwLocationAccess(String[] proxyApps) throws RemoteException {
-        }
+        public void enableNfwLocationAccess(String[] proxyApps) throws RemoteException {}
 
         @Override // android.hardware.gnss.visibility_control.IGnssVisibilityControl
-        public void setCallback(IGnssVisibilityControlCallback callback) throws RemoteException {
-        }
+        public void setCallback(IGnssVisibilityControlCallback callback) throws RemoteException {}
 
         @Override // android.hardware.gnss.visibility_control.IGnssVisibilityControl
         public int getInterfaceVersion() {
@@ -46,7 +45,7 @@ public interface IGnssVisibilityControl extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssVisibilityControl {
+    public abstract static class Stub extends Binder implements IGnssVisibilityControl {
         static final int TRANSACTION_enableNfwLocationAccess = 1;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -94,7 +93,8 @@ public interface IGnssVisibilityControl extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -121,7 +121,9 @@ public interface IGnssVisibilityControl extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IGnssVisibilityControlCallback _arg02 = IGnssVisibilityControlCallback.Stub.asInterface(data.readStrongBinder());
+                    IGnssVisibilityControlCallback _arg02 =
+                            IGnssVisibilityControlCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg02);
                     reply.writeNoException();
@@ -158,7 +160,8 @@ public interface IGnssVisibilityControl extends IInterface {
                     _data.writeStringArray(proxyApps);
                     boolean _status = this.mRemote.transact(1, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method enableNfwLocationAccess is unimplemented.");
+                        throw new RemoteException(
+                                "Method enableNfwLocationAccess is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -168,7 +171,8 @@ public interface IGnssVisibilityControl extends IInterface {
             }
 
             @Override // android.hardware.gnss.visibility_control.IGnssVisibilityControl
-            public void setCallback(IGnssVisibilityControlCallback callback) throws RemoteException {
+            public void setCallback(IGnssVisibilityControlCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

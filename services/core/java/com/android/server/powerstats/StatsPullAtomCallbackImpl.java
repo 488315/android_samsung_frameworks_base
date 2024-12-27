@@ -7,8 +7,9 @@ import android.hardware.power.stats.EnergyMeasurement;
 import android.hardware.power.stats.StateResidency;
 import android.hardware.power.stats.StateResidencyResult;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
-import com.android.server.powerstats.PowerStatsService;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,15 +27,41 @@ public final class StatsPullAtomCallbackImpl implements StatsManager.StatsPullAt
     public final int onPullAtom(int i, List list) {
         if (i == 10005) {
             try {
-                StateResidencyResult[] stateResidencyResultArr = (StateResidencyResult[]) this.mPowerStatsInternal.getStateResidencyAsync(new int[0]).get(2000L, TimeUnit.MILLISECONDS);
+                StateResidencyResult[] stateResidencyResultArr =
+                        (StateResidencyResult[])
+                                this.mPowerStatsInternal
+                                        .getStateResidencyAsync(new int[0])
+                                        .get(2000L, TimeUnit.MILLISECONDS);
                 if (stateResidencyResultArr != null) {
                     for (StateResidencyResult stateResidencyResult : stateResidencyResultArr) {
                         int i2 = 0;
                         while (true) {
-                            StateResidency[] stateResidencyArr = stateResidencyResult.stateResidencyData;
+                            StateResidency[] stateResidencyArr =
+                                    stateResidencyResult.stateResidencyData;
                             if (i2 < stateResidencyArr.length) {
                                 StateResidency stateResidency = stateResidencyArr[i2];
-                                list.add(FrameworkStatsLog.buildStatsEvent(i, (String) ((HashMap) this.mEntityNames).get(Integer.valueOf(stateResidencyResult.id)), (String) ((Map) ((HashMap) this.mStateNames).get(Integer.valueOf(stateResidencyResult.id))).get(Integer.valueOf(stateResidency.id)), stateResidency.totalStateEntryCount, stateResidency.totalTimeInStateMs));
+                                list.add(
+                                        FrameworkStatsLog.buildStatsEvent(
+                                                i,
+                                                (String)
+                                                        ((HashMap) this.mEntityNames)
+                                                                .get(
+                                                                        Integer.valueOf(
+                                                                                stateResidencyResult
+                                                                                        .id)),
+                                                (String)
+                                                        ((Map)
+                                                                        ((HashMap) this.mStateNames)
+                                                                                .get(
+                                                                                        Integer
+                                                                                                .valueOf(
+                                                                                                        stateResidencyResult
+                                                                                                                .id)))
+                                                                .get(
+                                                                        Integer.valueOf(
+                                                                                stateResidency.id)),
+                                                stateResidency.totalStateEntryCount,
+                                                stateResidency.totalTimeInStateMs));
                                 i2++;
                             }
                         }
@@ -47,18 +74,41 @@ public final class StatsPullAtomCallbackImpl implements StatsManager.StatsPullAt
             return 1;
         }
         if (i != 10038) {
-            throw new UnsupportedOperationException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown tagId="));
+            throw new UnsupportedOperationException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown tagId="));
         }
         try {
             PowerStatsService.LocalService localService = this.mPowerStatsInternal;
             localService.getClass();
             CompletableFuture completableFuture = new CompletableFuture();
-            PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this).post(new PowerStatsService$LocalService$$ExternalSyntheticLambda0(localService, completableFuture, new int[0], 1));
-            EnergyMeasurement[] energyMeasurementArr = (EnergyMeasurement[]) completableFuture.get(2000L, TimeUnit.MILLISECONDS);
+            PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this)
+                    .post(
+                            new PowerStatsService$LocalService$$ExternalSyntheticLambda0(
+                                    localService, completableFuture, new int[0], 1));
+            EnergyMeasurement[] energyMeasurementArr =
+                    (EnergyMeasurement[]) completableFuture.get(2000L, TimeUnit.MILLISECONDS);
             if (energyMeasurementArr != null) {
                 for (EnergyMeasurement energyMeasurement : energyMeasurementArr) {
                     if (energyMeasurement.durationMs == energyMeasurement.timestampMs) {
-                        list.add(FrameworkStatsLog.buildStatsEvent(i, ((Channel) ((HashMap) this.mChannels).get(Integer.valueOf(energyMeasurement.id))).subsystem, ((Channel) ((HashMap) this.mChannels).get(Integer.valueOf(energyMeasurement.id))).name, energyMeasurement.durationMs, energyMeasurement.energyUWs));
+                        list.add(
+                                FrameworkStatsLog.buildStatsEvent(
+                                        i,
+                                        ((Channel)
+                                                        ((HashMap) this.mChannels)
+                                                                .get(
+                                                                        Integer.valueOf(
+                                                                                energyMeasurement
+                                                                                        .id)))
+                                                .subsystem,
+                                        ((Channel)
+                                                        ((HashMap) this.mChannels)
+                                                                .get(
+                                                                        Integer.valueOf(
+                                                                                energyMeasurement
+                                                                                        .id)))
+                                                .name,
+                                        energyMeasurement.durationMs,
+                                        energyMeasurement.energyUWs));
                     }
                 }
                 return 0;

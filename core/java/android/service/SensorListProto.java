@@ -35,7 +35,6 @@ public final class SensorListProto {
         public static final long VENDOR = 1138166333443L;
         public static final long VERSION = 1120986464260L;
 
-        public SensorProto() {
-        }
+        public SensorProto() {}
     }
 }

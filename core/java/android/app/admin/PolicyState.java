@@ -3,30 +3,36 @@ package android.app.admin;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.LinkedHashMap;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class PolicyState<V> implements Parcelable {
-    public static final Parcelable.Creator<PolicyState<?>> CREATOR = new Parcelable.Creator<PolicyState<?>>() { // from class: android.app.admin.PolicyState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PolicyState<?> createFromParcel(Parcel source) {
-            return new PolicyState<>(source);
-        }
+    public static final Parcelable.Creator<PolicyState<?>> CREATOR =
+            new Parcelable.Creator<
+                    PolicyState<?>>() { // from class: android.app.admin.PolicyState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PolicyState<?> createFromParcel(Parcel source) {
+                    return new PolicyState<>(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PolicyState<?>[] newArray(int size) {
-            return new PolicyState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PolicyState<?>[] newArray(int size) {
+                    return new PolicyState[size];
+                }
+            };
     private PolicyValue<V> mCurrentResolvedPolicy;
     private final LinkedHashMap<EnforcingAdmin, PolicyValue<V>> mPoliciesSetByAdmins;
     private ResolutionMechanism<V> mResolutionMechanism;
 
-    public PolicyState(LinkedHashMap<EnforcingAdmin, PolicyValue<V>> policiesSetByAdmins, PolicyValue<V> currentEnforcedPolicy, ResolutionMechanism<V> resolutionMechanism) {
+    public PolicyState(
+            LinkedHashMap<EnforcingAdmin, PolicyValue<V>> policiesSetByAdmins,
+            PolicyValue<V> currentEnforcedPolicy,
+            ResolutionMechanism<V> resolutionMechanism) {
         this.mPoliciesSetByAdmins = new LinkedHashMap<>();
         Objects.requireNonNull(policiesSetByAdmins);
         Objects.requireNonNull(resolutionMechanism);
@@ -39,12 +45,17 @@ public final class PolicyState<V> implements Parcelable {
         this.mPoliciesSetByAdmins = new LinkedHashMap<>();
         int size = source.readInt();
         for (int i = 0; i < size; i++) {
-            EnforcingAdmin admin = (EnforcingAdmin) source.readParcelable(EnforcingAdmin.class.getClassLoader());
-            PolicyValue<V> policyValue = (PolicyValue) source.readParcelable(PolicyValue.class.getClassLoader());
+            EnforcingAdmin admin =
+                    (EnforcingAdmin) source.readParcelable(EnforcingAdmin.class.getClassLoader());
+            PolicyValue<V> policyValue =
+                    (PolicyValue) source.readParcelable(PolicyValue.class.getClassLoader());
             this.mPoliciesSetByAdmins.put(admin, policyValue);
         }
-        this.mCurrentResolvedPolicy = (PolicyValue) source.readParcelable(PolicyValue.class.getClassLoader());
-        this.mResolutionMechanism = (ResolutionMechanism) source.readParcelable(ResolutionMechanism.class.getClassLoader());
+        this.mCurrentResolvedPolicy =
+                (PolicyValue) source.readParcelable(PolicyValue.class.getClassLoader());
+        this.mResolutionMechanism =
+                (ResolutionMechanism)
+                        source.readParcelable(ResolutionMechanism.class.getClassLoader());
     }
 
     public LinkedHashMap<EnforcingAdmin, V> getPoliciesSetByAdmins() {
@@ -67,7 +78,13 @@ public final class PolicyState<V> implements Parcelable {
     }
 
     public String toString() {
-        return "PolicyState { mPoliciesSetByAdmins= " + this.mPoliciesSetByAdmins + ", mCurrentResolvedPolicy= " + this.mCurrentResolvedPolicy + ", mResolutionMechanism= " + this.mResolutionMechanism + " }";
+        return "PolicyState { mPoliciesSetByAdmins= "
+                + this.mPoliciesSetByAdmins
+                + ", mCurrentResolvedPolicy= "
+                + this.mCurrentResolvedPolicy
+                + ", mResolutionMechanism= "
+                + this.mResolutionMechanism
+                + " }";
     }
 
     @Override // android.os.Parcelable

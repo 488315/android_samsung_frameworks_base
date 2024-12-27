@@ -5,24 +5,27 @@ import android.media.AudioAttributes;
 import android.media.AudioFormat;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public final class RecognitionRequest implements Parcelable {
-    public static final Parcelable.Creator<RecognitionRequest> CREATOR = new Parcelable.Creator<RecognitionRequest>() { // from class: android.media.musicrecognition.RecognitionRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionRequest createFromParcel(Parcel p) {
-            return new RecognitionRequest(p);
-        }
+    public static final Parcelable.Creator<RecognitionRequest> CREATOR =
+            new Parcelable.Creator<RecognitionRequest>() { // from class:
+                // android.media.musicrecognition.RecognitionRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionRequest createFromParcel(Parcel p) {
+                    return new RecognitionRequest(p);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionRequest[] newArray(int size) {
-            return new RecognitionRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionRequest[] newArray(int size) {
+                    return new RecognitionRequest[size];
+                }
+            };
     private final AudioAttributes mAudioAttributes;
     private final AudioFormat mAudioFormat;
     private final int mCaptureSession;
@@ -59,8 +62,10 @@ public final class RecognitionRequest implements Parcelable {
 
     @SystemApi
     public static final class Builder {
-        private AudioFormat mAudioFormat = new AudioFormat.Builder().setSampleRate(16000).setEncoding(2).build();
-        private AudioAttributes mAudioAttributes = new AudioAttributes.Builder().setContentType(2).build();
+        private AudioFormat mAudioFormat =
+                new AudioFormat.Builder().setSampleRate(16000).setEncoding(2).build();
+        private AudioAttributes mAudioAttributes =
+                new AudioAttributes.Builder().setContentType(2).build();
         private int mCaptureSession = 1;
         private int mMaxAudioLengthSeconds = 24;
         private int mIgnoreBeginningFrames = 0;
@@ -110,8 +115,13 @@ public final class RecognitionRequest implements Parcelable {
     }
 
     private RecognitionRequest(Parcel in) {
-        this.mAudioFormat = (AudioFormat) in.readParcelable(AudioFormat.class.getClassLoader(), AudioFormat.class);
-        this.mAudioAttributes = (AudioAttributes) in.readParcelable(AudioAttributes.class.getClassLoader(), AudioAttributes.class);
+        this.mAudioFormat =
+                (AudioFormat)
+                        in.readParcelable(AudioFormat.class.getClassLoader(), AudioFormat.class);
+        this.mAudioAttributes =
+                (AudioAttributes)
+                        in.readParcelable(
+                                AudioAttributes.class.getClassLoader(), AudioAttributes.class);
         this.mCaptureSession = in.readInt();
         this.mMaxAudioLengthSeconds = in.readInt();
         this.mIgnoreBeginningFrames = in.readInt();

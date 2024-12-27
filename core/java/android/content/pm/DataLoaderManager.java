@@ -11,7 +11,11 @@ public class DataLoaderManager {
         this.mService = service;
     }
 
-    public boolean bindToDataLoader(int dataLoaderId, DataLoaderParamsParcel params, long bindDelayMs, IDataLoaderStatusListener listener) {
+    public boolean bindToDataLoader(
+            int dataLoaderId,
+            DataLoaderParamsParcel params,
+            long bindDelayMs,
+            IDataLoaderStatusListener listener) {
         try {
             return this.mService.bindToDataLoader(dataLoaderId, params, bindDelayMs, listener);
         } catch (RemoteException e) {

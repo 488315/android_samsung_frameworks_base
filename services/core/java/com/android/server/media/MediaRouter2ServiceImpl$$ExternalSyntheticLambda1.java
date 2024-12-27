@@ -6,14 +6,16 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.internal.util.function.QuadConsumer;
-import com.android.server.media.MediaRouter2ServiceImpl;
+
 import java.util.Iterator;
 import java.util.Map;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class MediaRouter2ServiceImpl$$ExternalSyntheticLambda1 implements QuadConsumer {
+public final /* synthetic */ class MediaRouter2ServiceImpl$$ExternalSyntheticLambda1
+        implements QuadConsumer {
     public final /* synthetic */ int $r8$classId;
 
     public /* synthetic */ MediaRouter2ServiceImpl$$ExternalSyntheticLambda1(int i) {
@@ -25,13 +27,25 @@ public final /* synthetic */ class MediaRouter2ServiceImpl$$ExternalSyntheticLam
         MediaRouter2ServiceImpl.UserHandler userHandler = (MediaRouter2ServiceImpl.UserHandler) obj;
         switch (this.$r8$classId) {
             case 0:
-                MediaRouter2ServiceImpl.m653$r8$lambda$e9Sk6TFecCbShGZjiI_FsGfvEs(userHandler, ((Long) obj2).longValue(), (MediaRoute2Info) obj3, ((Integer) obj4).intValue());
+                MediaRouter2ServiceImpl.m653$r8$lambda$e9Sk6TFecCbShGZjiI_FsGfvEs(
+                        userHandler,
+                        ((Long) obj2).longValue(),
+                        (MediaRoute2Info) obj3,
+                        ((Integer) obj4).intValue());
                 break;
             case 1:
-                MediaRouter2ServiceImpl.$r8$lambda$fFTtstVLACy5dqiCA6mMwECkaiQ(userHandler, ((Long) obj2).longValue(), (MediaRouter2ServiceImpl.RouterRecord) obj3, (String) obj4);
+                MediaRouter2ServiceImpl.$r8$lambda$fFTtstVLACy5dqiCA6mMwECkaiQ(
+                        userHandler,
+                        ((Long) obj2).longValue(),
+                        (MediaRouter2ServiceImpl.RouterRecord) obj3,
+                        (String) obj4);
                 break;
             case 2:
-                MediaRouter2ServiceImpl.$r8$lambda$gfBNjj_qEN5gYbuwjbOFgMrSMpU(userHandler, ((Long) obj2).longValue(), (String) obj3, ((Integer) obj4).intValue());
+                MediaRouter2ServiceImpl.$r8$lambda$gfBNjj_qEN5gYbuwjbOFgMrSMpU(
+                        userHandler,
+                        ((Long) obj2).longValue(),
+                        (String) obj3,
+                        ((Integer) obj4).intValue());
                 break;
             case 3:
                 MediaRoute2Provider mediaRoute2Provider = (MediaRoute2Provider) obj2;
@@ -40,48 +54,82 @@ public final /* synthetic */ class MediaRouter2ServiceImpl$$ExternalSyntheticLam
                 Iterator it = userHandler.mSessionCreationRequests.iterator();
                 while (true) {
                     if (it.hasNext()) {
-                        MediaRouter2ServiceImpl.SessionCreationRequest sessionCreationRequest2 = (MediaRouter2ServiceImpl.SessionCreationRequest) it.next();
-                        if (sessionCreationRequest2.mUniqueRequestId == longValue && TextUtils.equals(sessionCreationRequest2.mRoute.getProviderId(), mediaRoute2Provider.mUniqueId)) {
+                        MediaRouter2ServiceImpl.SessionCreationRequest sessionCreationRequest2 =
+                                (MediaRouter2ServiceImpl.SessionCreationRequest) it.next();
+                        if (sessionCreationRequest2.mUniqueRequestId == longValue
+                                && TextUtils.equals(
+                                        sessionCreationRequest2.mRoute.getProviderId(),
+                                        mediaRoute2Provider.mUniqueId)) {
                             sessionCreationRequest = sessionCreationRequest2;
                         }
                     }
                 }
-                long j = sessionCreationRequest != null ? sessionCreationRequest.mManagerRequestId : 0L;
+                long j =
+                        sessionCreationRequest != null
+                                ? sessionCreationRequest.mManagerRequestId
+                                : 0L;
                 boolean z = MediaRouter2ServiceImpl.DEBUG;
                 int i = (int) (j >> 32);
                 int i2 = (int) j;
-                for (MediaRouter2ServiceImpl.ManagerRecord managerRecord : userHandler.getManagerRecords()) {
+                for (MediaRouter2ServiceImpl.ManagerRecord managerRecord :
+                        userHandler.getManagerRecords()) {
                     try {
-                        managerRecord.mManager.notifySessionCreated(managerRecord.mManagerId == i ? i2 : 0, routingSessionInfo);
+                        managerRecord.mManager.notifySessionCreated(
+                                managerRecord.mManagerId == i ? i2 : 0, routingSessionInfo);
                     } catch (RemoteException e) {
-                        Slog.w("MR2ServiceImpl", "notifySessionCreatedToManagers: Failed to notify. Manager probably died.", e);
+                        Slog.w(
+                                "MR2ServiceImpl",
+                                "notifySessionCreatedToManagers: Failed to notify. Manager probably"
+                                    + " died.",
+                                e);
                     }
                 }
                 if (sessionCreationRequest == null) {
-                    Slog.w("MR2ServiceImpl", "Ignoring session creation result for unknown request. uniqueRequestId=" + longValue + ", sessionInfo=" + routingSessionInfo);
+                    Slog.w(
+                            "MR2ServiceImpl",
+                            "Ignoring session creation result for unknown request. uniqueRequestId="
+                                    + longValue
+                                    + ", sessionInfo="
+                                    + routingSessionInfo);
                     break;
                 } else {
                     userHandler.mSessionCreationRequests.remove(sessionCreationRequest);
-                    MediaRoute2Provider findProvider = userHandler.findProvider(sessionCreationRequest.mOldSession.getProviderId());
+                    MediaRoute2Provider findProvider =
+                            userHandler.findProvider(
+                                    sessionCreationRequest.mOldSession.getProviderId());
                     if (findProvider != null) {
-                        findProvider.prepareReleaseSession(sessionCreationRequest.mOldSession.getId());
+                        findProvider.prepareReleaseSession(
+                                sessionCreationRequest.mOldSession.getId());
                     } else {
-                        Slog.w("MR2ServiceImpl", "onSessionCreatedOnHandler: Can't find provider for an old session. session=" + sessionCreationRequest.mOldSession);
+                        Slog.w(
+                                "MR2ServiceImpl",
+                                "onSessionCreatedOnHandler: Can't find provider for an old session."
+                                    + " session="
+                                        + sessionCreationRequest.mOldSession);
                     }
                     Map map = userHandler.mSessionToRouterMap;
                     String id = routingSessionInfo.getId();
-                    MediaRouter2ServiceImpl.RouterRecord routerRecord = sessionCreationRequest.mRouterRecord;
+                    MediaRouter2ServiceImpl.RouterRecord routerRecord =
+                            sessionCreationRequest.mRouterRecord;
                     ((ArrayMap) map).put(id, routerRecord);
-                    if (routingSessionInfo.isSystemSession() && !routerRecord.hasSystemRoutingPermission()) {
+                    if (routingSessionInfo.isSystemSession()
+                            && !routerRecord.hasSystemRoutingPermission()) {
                         routingSessionInfo = userHandler.mSystemProvider.mDefaultSessionInfo;
                     }
                     int i3 = (int) longValue;
                     routerRecord.getClass();
                     try {
-                        routerRecord.mRouter.notifySessionCreated(i3, routerRecord.maybeClearTransferInitiatorIdentity(routingSessionInfo));
+                        routerRecord.mRouter.notifySessionCreated(
+                                i3,
+                                routerRecord.maybeClearTransferInitiatorIdentity(
+                                        routingSessionInfo));
                         break;
                     } catch (RemoteException e2) {
-                        Slog.w("MR2ServiceImpl", "Failed to notify router of the session creation. Router probably died.", e2);
+                        Slog.w(
+                                "MR2ServiceImpl",
+                                "Failed to notify router of the session creation. Router probably"
+                                    + " died.",
+                                e2);
                         return;
                     }
                 }
@@ -95,18 +143,29 @@ public final /* synthetic */ class MediaRouter2ServiceImpl$$ExternalSyntheticLam
                 Iterator it2 = userHandler.mSessionCreationRequests.iterator();
                 while (true) {
                     if (it2.hasNext()) {
-                        MediaRouter2ServiceImpl.SessionCreationRequest sessionCreationRequest3 = (MediaRouter2ServiceImpl.SessionCreationRequest) it2.next();
-                        if (sessionCreationRequest3.mUniqueRequestId == longValue2 && TextUtils.equals(sessionCreationRequest3.mRoute.getProviderId(), mediaRoute2Provider2.mUniqueId)) {
+                        MediaRouter2ServiceImpl.SessionCreationRequest sessionCreationRequest3 =
+                                (MediaRouter2ServiceImpl.SessionCreationRequest) it2.next();
+                        if (sessionCreationRequest3.mUniqueRequestId == longValue2
+                                && TextUtils.equals(
+                                        sessionCreationRequest3.mRoute.getProviderId(),
+                                        mediaRoute2Provider2.mUniqueId)) {
                             sessionCreationRequest = sessionCreationRequest3;
                         }
                     }
                 }
                 if (sessionCreationRequest == null) {
-                    Slog.w("MR2ServiceImpl", TextUtils.formatSimple("handleSessionCreationRequestFailed | No matching request found for provider: %s, uniqueRequestId: %d, reason: %d", new Object[]{mediaRoute2Provider2.mUniqueId, l, num}));
+                    Slog.w(
+                            "MR2ServiceImpl",
+                            TextUtils.formatSimple(
+                                    "handleSessionCreationRequestFailed | No matching request found"
+                                        + " for provider: %s, uniqueRequestId: %d, reason: %d",
+                                    new Object[] {mediaRoute2Provider2.mUniqueId, l, num}));
                     boolean z2 = MediaRouter2ServiceImpl.DEBUG;
-                    MediaRouter2ServiceImpl.ManagerRecord findManagerWithId = userHandler.findManagerWithId((int) (longValue2 >> 32));
+                    MediaRouter2ServiceImpl.ManagerRecord findManagerWithId =
+                            userHandler.findManagerWithId((int) (longValue2 >> 32));
                     if (findManagerWithId != null) {
-                        MediaRouter2ServiceImpl.UserHandler.notifyRequestFailedToManager(findManagerWithId.mManager, (int) longValue2, intValue);
+                        MediaRouter2ServiceImpl.UserHandler.notifyRequestFailedToManager(
+                                findManagerWithId.mManager, (int) longValue2, intValue);
                         break;
                     }
                 } else {
@@ -114,15 +173,24 @@ public final /* synthetic */ class MediaRouter2ServiceImpl$$ExternalSyntheticLam
                     long j2 = sessionCreationRequest.mManagerRequestId;
                     if (j2 == 0) {
                         boolean z3 = MediaRouter2ServiceImpl.DEBUG;
-                        MediaRouter2ServiceImpl.UserHandler.notifySessionCreationFailedToRouter(sessionCreationRequest.mRouterRecord, (int) longValue2);
+                        MediaRouter2ServiceImpl.UserHandler.notifySessionCreationFailedToRouter(
+                                sessionCreationRequest.mRouterRecord, (int) longValue2);
                     } else {
                         boolean z4 = MediaRouter2ServiceImpl.DEBUG;
-                        MediaRouter2ServiceImpl.ManagerRecord findManagerWithId2 = userHandler.findManagerWithId((int) (j2 >> 32));
+                        MediaRouter2ServiceImpl.ManagerRecord findManagerWithId2 =
+                                userHandler.findManagerWithId((int) (j2 >> 32));
                         if (findManagerWithId2 != null) {
-                            MediaRouter2ServiceImpl.UserHandler.notifyRequestFailedToManager(findManagerWithId2.mManager, (int) j2, intValue);
+                            MediaRouter2ServiceImpl.UserHandler.notifyRequestFailedToManager(
+                                    findManagerWithId2.mManager, (int) j2, intValue);
                         }
                     }
-                    Slog.w("MR2ServiceImpl", TextUtils.formatSimple("onRequestFailedOnHandler | Finished handling session creation request failed for provider: %s, uniqueRequestId: %d, reason: %d", new Object[]{mediaRoute2Provider2.mUniqueId, l, num}));
+                    Slog.w(
+                            "MR2ServiceImpl",
+                            TextUtils.formatSimple(
+                                    "onRequestFailedOnHandler | Finished handling session creation"
+                                        + " request failed for provider: %s, uniqueRequestId: %d,"
+                                        + " reason: %d",
+                                    new Object[] {mediaRoute2Provider2.mUniqueId, l, num}));
                     break;
                 }
                 break;

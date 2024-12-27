@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class DemuxFilterSettings implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterSettings> CREATOR = new Parcelable.Creator<DemuxFilterSettings>() { // from class: android.hardware.tv.tuner.DemuxFilterSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterSettings createFromParcel(Parcel _aidl_source) {
-            return new DemuxFilterSettings(_aidl_source);
-        }
+    public static final Parcelable.Creator<DemuxFilterSettings> CREATOR =
+            new Parcelable.Creator<DemuxFilterSettings>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterSettings createFromParcel(Parcel _aidl_source) {
+                    return new DemuxFilterSettings(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterSettings[] newArray(int _aidl_size) {
-            return new DemuxFilterSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterSettings[] newArray(int _aidl_size) {
+                    return new DemuxFilterSettings[_aidl_size];
+                }
+            };
     public static final int alp = 4;
     public static final int ip = 2;
     public static final int mmtp = 1;
@@ -148,23 +150,33 @@ public final class DemuxFilterSettings implements Parcelable {
         int _aidl_tag = _aidl_parcel.readInt();
         switch (_aidl_tag) {
             case 0:
-                DemuxTsFilterSettings _aidl_value = (DemuxTsFilterSettings) _aidl_parcel.readTypedObject(DemuxTsFilterSettings.CREATOR);
+                DemuxTsFilterSettings _aidl_value =
+                        (DemuxTsFilterSettings)
+                                _aidl_parcel.readTypedObject(DemuxTsFilterSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value);
                 return;
             case 1:
-                DemuxMmtpFilterSettings _aidl_value2 = (DemuxMmtpFilterSettings) _aidl_parcel.readTypedObject(DemuxMmtpFilterSettings.CREATOR);
+                DemuxMmtpFilterSettings _aidl_value2 =
+                        (DemuxMmtpFilterSettings)
+                                _aidl_parcel.readTypedObject(DemuxMmtpFilterSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
-                DemuxIpFilterSettings _aidl_value3 = (DemuxIpFilterSettings) _aidl_parcel.readTypedObject(DemuxIpFilterSettings.CREATOR);
+                DemuxIpFilterSettings _aidl_value3 =
+                        (DemuxIpFilterSettings)
+                                _aidl_parcel.readTypedObject(DemuxIpFilterSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value3);
                 return;
             case 3:
-                DemuxTlvFilterSettings _aidl_value4 = (DemuxTlvFilterSettings) _aidl_parcel.readTypedObject(DemuxTlvFilterSettings.CREATOR);
+                DemuxTlvFilterSettings _aidl_value4 =
+                        (DemuxTlvFilterSettings)
+                                _aidl_parcel.readTypedObject(DemuxTlvFilterSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value4);
                 return;
             case 4:
-                DemuxAlpFilterSettings _aidl_value5 = (DemuxAlpFilterSettings) _aidl_parcel.readTypedObject(DemuxAlpFilterSettings.CREATOR);
+                DemuxAlpFilterSettings _aidl_value5 =
+                        (DemuxAlpFilterSettings)
+                                _aidl_parcel.readTypedObject(DemuxAlpFilterSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value5);
                 return;
             default:
@@ -204,7 +216,12 @@ public final class DemuxFilterSettings implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

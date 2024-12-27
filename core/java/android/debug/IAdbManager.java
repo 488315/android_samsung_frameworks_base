@@ -1,6 +1,5 @@
 package android.debug;
 
-import android.debug.IAdbCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -43,24 +42,20 @@ public interface IAdbManager extends IInterface {
 
     public static class Default implements IAdbManager {
         @Override // android.debug.IAdbManager
-        public void allowDebugging(boolean alwaysAllow, String publicKey) throws RemoteException {
-        }
+        public void allowDebugging(boolean alwaysAllow, String publicKey) throws RemoteException {}
 
         @Override // android.debug.IAdbManager
-        public void denyDebugging() throws RemoteException {
-        }
+        public void denyDebugging() throws RemoteException {}
 
         @Override // android.debug.IAdbManager
-        public void clearDebuggingKeys() throws RemoteException {
-        }
+        public void clearDebuggingKeys() throws RemoteException {}
 
         @Override // android.debug.IAdbManager
-        public void allowWirelessDebugging(boolean alwaysAllow, String bssid) throws RemoteException {
-        }
+        public void allowWirelessDebugging(boolean alwaysAllow, String bssid)
+                throws RemoteException {}
 
         @Override // android.debug.IAdbManager
-        public void denyWirelessDebugging() throws RemoteException {
-        }
+        public void denyWirelessDebugging() throws RemoteException {}
 
         @Override // android.debug.IAdbManager
         public FingerprintAndPairDevice[] getPairedDevices() throws RemoteException {
@@ -68,16 +63,14 @@ public interface IAdbManager extends IInterface {
         }
 
         @Override // android.debug.IAdbManager
-        public void unpairDevice(String fingerprint) throws RemoteException {
-        }
+        public void unpairDevice(String fingerprint) throws RemoteException {}
 
         @Override // android.debug.IAdbManager
-        public void enablePairingByPairingCode() throws RemoteException {
-        }
+        public void enablePairingByPairingCode() throws RemoteException {}
 
         @Override // android.debug.IAdbManager
-        public void enablePairingByQrCode(String serviceName, String password) throws RemoteException {
-        }
+        public void enablePairingByQrCode(String serviceName, String password)
+                throws RemoteException {}
 
         @Override // android.debug.IAdbManager
         public int getAdbWirelessPort() throws RemoteException {
@@ -85,8 +78,7 @@ public interface IAdbManager extends IInterface {
         }
 
         @Override // android.debug.IAdbManager
-        public void disablePairing() throws RemoteException {
-        }
+        public void disablePairing() throws RemoteException {}
 
         @Override // android.debug.IAdbManager
         public boolean isAdbWifiSupported() throws RemoteException {
@@ -99,12 +91,10 @@ public interface IAdbManager extends IInterface {
         }
 
         @Override // android.debug.IAdbManager
-        public void registerCallback(IAdbCallback callback) throws RemoteException {
-        }
+        public void registerCallback(IAdbCallback callback) throws RemoteException {}
 
         @Override // android.debug.IAdbManager
-        public void unregisterCallback(IAdbCallback callback) throws RemoteException {
-        }
+        public void unregisterCallback(IAdbCallback callback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -112,7 +102,7 @@ public interface IAdbManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAdbManager {
+    public abstract static class Stub extends Binder implements IAdbManager {
         static final int TRANSACTION_allowDebugging = 1;
         static final int TRANSACTION_allowWirelessDebugging = 4;
         static final int TRANSACTION_clearDebuggingKeys = 3;
@@ -192,7 +182,8 @@ public interface IAdbManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAdbManager.DESCRIPTOR);
             }
@@ -302,7 +293,8 @@ public interface IAdbManager extends IInterface {
             }
 
             @Override // android.debug.IAdbManager
-            public void allowDebugging(boolean alwaysAllow, String publicKey) throws RemoteException {
+            public void allowDebugging(boolean alwaysAllow, String publicKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -346,7 +338,8 @@ public interface IAdbManager extends IInterface {
             }
 
             @Override // android.debug.IAdbManager
-            public void allowWirelessDebugging(boolean alwaysAllow, String bssid) throws RemoteException {
+            public void allowWirelessDebugging(boolean alwaysAllow, String bssid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -383,7 +376,9 @@ public interface IAdbManager extends IInterface {
                     _data.writeInterfaceToken(IAdbManager.DESCRIPTOR);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    FingerprintAndPairDevice[] _result = (FingerprintAndPairDevice[]) _reply.createTypedArray(FingerprintAndPairDevice.CREATOR);
+                    FingerprintAndPairDevice[] _result =
+                            (FingerprintAndPairDevice[])
+                                    _reply.createTypedArray(FingerprintAndPairDevice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -421,7 +416,8 @@ public interface IAdbManager extends IInterface {
             }
 
             @Override // android.debug.IAdbManager
-            public void enablePairingByQrCode(String serviceName, String password) throws RemoteException {
+            public void enablePairingByQrCode(String serviceName, String password)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -1,8 +1,11 @@
 package com.android.internal.os;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.util.ProcFileReader;
+
 import com.samsung.android.security.SemSdCardEncryption;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.function.BiConsumer;
@@ -21,7 +24,10 @@ public class BinderfsStatsReader {
         this.mPath = path;
     }
 
-    public void handleFreeAsyncSpace(Predicate<Integer> predicate, BiConsumer<Integer, Integer> biConsumer, Consumer<Exception> consumer) {
+    public void handleFreeAsyncSpace(
+            Predicate<Integer> predicate,
+            BiConsumer<Integer, Integer> biConsumer,
+            Consumer<Exception> consumer) {
         try {
             ProcFileReader mReader = new ProcFileReader(new FileInputStream(this.mPath));
             while (mReader.hasMoreData()) {
@@ -40,7 +46,8 @@ public class BinderfsStatsReader {
                                 mReader.finishLine();
                             } else if (!mReader.nextString().equals("async")) {
                                 mReader.finishLine();
-                            } else if (!mReader.nextString().equals(NavigationBarInflaterView.NAVSPACE)) {
+                            } else if (!mReader.nextString()
+                                    .equals(NavigationBarInflaterView.NAVSPACE)) {
                                 mReader.finishLine();
                             } else {
                                 int free = mReader.nextInt();

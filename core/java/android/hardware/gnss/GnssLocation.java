@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class GnssLocation implements Parcelable {
-    public static final Parcelable.Creator<GnssLocation> CREATOR = new Parcelable.Creator<GnssLocation>() { // from class: android.hardware.gnss.GnssLocation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GnssLocation createFromParcel(Parcel _aidl_source) {
-            GnssLocation _aidl_out = new GnssLocation();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GnssLocation> CREATOR =
+            new Parcelable.Creator<
+                    GnssLocation>() { // from class: android.hardware.gnss.GnssLocation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GnssLocation createFromParcel(Parcel _aidl_source) {
+                    GnssLocation _aidl_out = new GnssLocation();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GnssLocation[] newArray(int _aidl_size) {
-            return new GnssLocation[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GnssLocation[] newArray(int _aidl_size) {
+                    return new GnssLocation[_aidl_size];
+                }
+            };
     public static final int HAS_ALTITUDE = 2;
     public static final int HAS_BEARING = 8;
     public static final int HAS_BEARING_ACCURACY = 128;
@@ -171,7 +173,8 @@ public class GnssLocation implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.elapsedRealtime = (ElapsedRealtime) _aidl_parcel.readTypedObject(ElapsedRealtime.CREATOR);
+                this.elapsedRealtime =
+                        (ElapsedRealtime) _aidl_parcel.readTypedObject(ElapsedRealtime.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

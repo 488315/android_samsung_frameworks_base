@@ -28,7 +28,15 @@ public interface Menu {
 
     MenuItem add(CharSequence charSequence);
 
-    int addIntentOptions(int i, int i2, int i3, ComponentName componentName, Intent[] intentArr, Intent intent, int i4, MenuItem[] menuItemArr);
+    int addIntentOptions(
+            int i,
+            int i2,
+            int i3,
+            ComponentName componentName,
+            Intent[] intentArr,
+            Intent intent,
+            int i4,
+            MenuItem[] menuItemArr);
 
     SubMenu addSubMenu(int i);
 
@@ -68,9 +76,7 @@ public interface Menu {
 
     int size();
 
-    default void setOptionalIconsVisible(boolean visible) {
-    }
+    default void setOptionalIconsVisible(boolean visible) {}
 
-    default void setGroupDividerEnabled(boolean groupDividerEnabled) {
-    }
+    default void setGroupDividerEnabled(boolean groupDividerEnabled) {}
 }

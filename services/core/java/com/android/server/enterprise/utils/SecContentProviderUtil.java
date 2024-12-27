@@ -5,8 +5,10 @@ import android.content.pm.UserInfo;
 import android.net.Uri;
 import android.os.Binder;
 import android.util.Log;
+
 import com.android.internal.util.FunctionalUtils;
 import com.android.server.enterprise.adapterlayer.PackageManagerAdapter;
+
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -18,10 +20,14 @@ public abstract class SecContentProviderUtil {
             try {
                 Iterator it = PackageManagerAdapter.getUsers(false).iterator();
                 while (it.hasNext()) {
-                    context.getContentResolver().notifyChange(uri, null, true, ((UserInfo) it.next()).id);
+                    context.getContentResolver()
+                            .notifyChange(uri, null, true, ((UserInfo) it.next()).id);
                 }
             } catch (Exception e) {
-                Log.e("SecContentProviderUtil", "notifyPolicyChangesAllUser() : failed to notify. uri = " + uri, e);
+                Log.e(
+                        "SecContentProviderUtil",
+                        "notifyPolicyChangesAllUser() : failed to notify. uri = " + uri,
+                        e);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -34,7 +40,13 @@ public abstract class SecContentProviderUtil {
             try {
                 context.getContentResolver().notifyChange(uri, null, true, i);
             } catch (Exception e) {
-                Log.e("SecContentProviderUtil", "notifyPolicyChangesAsUser() : failed to notify. userId = " + i + ", uri = " + uri, e);
+                Log.e(
+                        "SecContentProviderUtil",
+                        "notifyPolicyChangesAsUser() : failed to notify. userId = "
+                                + i
+                                + ", uri = "
+                                + uri,
+                        e);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -43,11 +55,14 @@ public abstract class SecContentProviderUtil {
 
     public static void notifyPolicyChangesAsUser(final Context context, String str, final int i) {
         final Uri parse = Uri.parse("content://com.sec.knox.provider/".concat(str));
-        Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: com.android.server.enterprise.utils.SecContentProviderUtil$$ExternalSyntheticLambda0
-            public final void runOrThrow() {
-                Context context2 = context;
-                context2.getContentResolver().notifyChange(parse, null, true, i);
-            }
-        });
+        Binder.withCleanCallingIdentity(
+                new FunctionalUtils
+                        .ThrowingRunnable() { // from class:
+                                              // com.android.server.enterprise.utils.SecContentProviderUtil$$ExternalSyntheticLambda0
+                    public final void runOrThrow() {
+                        Context context2 = context;
+                        context2.getContentResolver().notifyChange(parse, null, true, i);
+                    }
+                });
     }
 }

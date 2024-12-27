@@ -11,11 +11,11 @@ import android.content.pm.ResolveInfo;
 import android.os.Message;
 import android.os.UserHandle;
 import android.util.Log;
-import com.android.internal.app.AbstractResolverComparator;
-import com.android.internal.app.AppPredictionServiceResolverComparator;
-import com.android.internal.app.ResolverActivity;
+
 import com.android.internal.app.chooser.TargetInfo;
+
 import com.google.android.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -38,7 +38,13 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
     private ResolverAppPredictorCallback mSortingCallback;
     private final UserHandle mUser;
 
-    AppPredictionServiceResolverComparator(Context context, Intent intent, String referrerPackage, AppPredictor appPredictor, UserHandle user, ChooserActivityLogger chooserActivityLogger) {
+    AppPredictionServiceResolverComparator(
+            Context context,
+            Intent intent,
+            String referrerPackage,
+            AppPredictor appPredictor,
+            UserHandle user,
+            ChooserActivityLogger chooserActivityLogger) {
         super(context, intent, Lists.newArrayList(user));
         this.mContext = context;
         this.mIntent = intent;
@@ -55,7 +61,8 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
         if (this.mResolverRankerService != null) {
             this.mResolverRankerService.destroy();
             this.mResolverRankerService = null;
-            this.mComparatorModel = this.mModelBuilder.buildFallbackModel(this.mResolverRankerService);
+            this.mComparatorModel =
+                    this.mModelBuilder.buildFallbackModel(this.mResolverRankerService);
         }
         if (this.mSortingCallback != null) {
             this.mSortingCallback.destroy();
@@ -94,18 +101,31 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
         }
         List<AppTarget> appTargets = new ArrayList<>();
         for (ResolverActivity.ResolvedComponentInfo target : targets) {
-            appTargets.add(new AppTarget.Builder(new AppTargetId(target.name.flattenToString()), target.name.getPackageName(), this.mUser).setClassName(target.name.getClassName()).build());
+            appTargets.add(
+                    new AppTarget.Builder(
+                                    new AppTargetId(target.name.flattenToString()),
+                                    target.name.getPackageName(),
+                                    this.mUser)
+                            .setClassName(target.name.getClassName())
+                            .build());
         }
         if (this.mSortingCallback != null) {
             this.mSortingCallback.destroy();
         }
-        this.mSortingCallback = new ResolverAppPredictorCallback(new Consumer() { // from class: com.android.internal.app.AppPredictionServiceResolverComparator$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                AppPredictionServiceResolverComparator.this.lambda$doCompute$0(targets, (List) obj);
-            }
-        });
-        this.mAppPredictor.sortTargets(appTargets, Executors.newSingleThreadExecutor(), this.mSortingCallback.asConsumer());
+        this.mSortingCallback =
+                new ResolverAppPredictorCallback(
+                        new Consumer() { // from class:
+                                         // com.android.internal.app.AppPredictionServiceResolverComparator$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                AppPredictionServiceResolverComparator.this.lambda$doCompute$0(
+                                        targets, (List) obj);
+                            }
+                        });
+        this.mAppPredictor.sortTargets(
+                appTargets,
+                Executors.newSingleThreadExecutor(),
+                this.mSortingCallback.asConsumer());
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -120,12 +140,22 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
     }
 
     private void setupFallbackModel(List<ResolverActivity.ResolvedComponentInfo> targets) {
-        this.mResolverRankerService = new ResolverRankerServiceResolverComparator(this.mContext, this.mIntent, this.mReferrerPackage, new AbstractResolverComparator.AfterCompute() { // from class: com.android.internal.app.AppPredictionServiceResolverComparator$$ExternalSyntheticLambda1
-            @Override // com.android.internal.app.AbstractResolverComparator.AfterCompute
-            public final void afterCompute() {
-                AppPredictionServiceResolverComparator.this.lambda$setupFallbackModel$1();
-            }
-        }, getChooserActivityLogger(), this.mUser);
+        this.mResolverRankerService =
+                new ResolverRankerServiceResolverComparator(
+                        this.mContext,
+                        this.mIntent,
+                        this.mReferrerPackage,
+                        new AbstractResolverComparator
+                                .AfterCompute() { // from class:
+                                                  // com.android.internal.app.AppPredictionServiceResolverComparator$$ExternalSyntheticLambda1
+                            @Override // com.android.internal.app.AbstractResolverComparator.AfterCompute
+                            public final void afterCompute() {
+                                AppPredictionServiceResolverComparator.this
+                                        .lambda$setupFallbackModel$1();
+                            }
+                        },
+                        getChooserActivityLogger(),
+                        this.mUser);
         this.mComparatorModel = this.mModelBuilder.buildFallbackModel(this.mResolverRankerService);
         this.mResolverRankerService.compute(targets);
     }
@@ -153,19 +183,29 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
         }
 
         ResolverComparatorModel buildFromRankedList(List<AppTarget> sortedAppTargets) {
-            return new AppPredictionServiceComparatorModel(this.mAppPredictor, this.mUser, buildTargetRanksMapFromSortedTargets(sortedAppTargets));
+            return new AppPredictionServiceComparatorModel(
+                    this.mAppPredictor,
+                    this.mUser,
+                    buildTargetRanksMapFromSortedTargets(sortedAppTargets));
         }
 
-        ResolverComparatorModel buildFallbackModel(ResolverRankerServiceResolverComparator fallback) {
+        ResolverComparatorModel buildFallbackModel(
+                ResolverRankerServiceResolverComparator fallback) {
             return adaptLegacyResolverComparatorToComparatorModel(fallback);
         }
 
-        private Map<ComponentName, Integer> buildTargetRanksMapFromSortedTargets(List<AppTarget> sortedAppTargets) {
+        private Map<ComponentName, Integer> buildTargetRanksMapFromSortedTargets(
+                List<AppTarget> sortedAppTargets) {
             Map<ComponentName, Integer> targetRanks = new HashMap<>();
             for (int i = 0; i < sortedAppTargets.size(); i++) {
-                ComponentName componentName = new ComponentName(sortedAppTargets.get(i).getPackageName(), sortedAppTargets.get(i).getClassName());
+                ComponentName componentName =
+                        new ComponentName(
+                                sortedAppTargets.get(i).getPackageName(),
+                                sortedAppTargets.get(i).getClassName());
                 targetRanks.put(componentName, Integer.valueOf(i));
-                Log.i(AppPredictionServiceResolverComparator.TAG, "handleSortedAppTargets, sortedAppTargets #" + i + ": " + componentName);
+                Log.i(
+                        AppPredictionServiceResolverComparator.TAG,
+                        "handleSortedAppTargets, sortedAppTargets #" + i + ": " + componentName);
             }
             return targetRanks;
         }
@@ -181,11 +221,14 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
             @Override // com.android.internal.app.ResolverComparatorModel
             public Comparator<ResolveInfo> getComparator() {
                 final AbstractResolverComparator abstractResolverComparator = this.val$comparator;
-                return new Comparator() { // from class: com.android.internal.app.AppPredictionServiceResolverComparator$ModelBuilder$1$$ExternalSyntheticLambda0
+                return new Comparator() { // from class:
+                                          // com.android.internal.app.AppPredictionServiceResolverComparator$ModelBuilder$1$$ExternalSyntheticLambda0
                     @Override // java.util.Comparator
                     public final int compare(Object obj, Object obj2) {
                         int compare;
-                        compare = AbstractResolverComparator.this.compare((ResolveInfo) obj, (ResolveInfo) obj2);
+                        compare =
+                                AbstractResolverComparator.this.compare(
+                                        (ResolveInfo) obj, (ResolveInfo) obj2);
                         return compare;
                     }
                 };
@@ -202,7 +245,8 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
             }
         }
 
-        private ResolverComparatorModel adaptLegacyResolverComparatorToComparatorModel(AbstractResolverComparator comparator) {
+        private ResolverComparatorModel adaptLegacyResolverComparatorToComparatorModel(
+                AbstractResolverComparator comparator) {
             return new AnonymousClass1(comparator);
         }
     }
@@ -212,7 +256,10 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
         private final Map<ComponentName, Integer> mTargetRanks;
         private final UserHandle mUser;
 
-        AppPredictionServiceComparatorModel(AppPredictor appPredictor, UserHandle user, Map<ComponentName, Integer> targetRanks) {
+        AppPredictionServiceComparatorModel(
+                AppPredictor appPredictor,
+                UserHandle user,
+                Map<ComponentName, Integer> targetRanks) {
             this.mAppPredictor = appPredictor;
             this.mUser = user;
             this.mTargetRanks = targetRanks;
@@ -220,11 +267,15 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
 
         @Override // com.android.internal.app.ResolverComparatorModel
         public Comparator<ResolveInfo> getComparator() {
-            return new Comparator() { // from class: com.android.internal.app.AppPredictionServiceResolverComparator$AppPredictionServiceComparatorModel$$ExternalSyntheticLambda0
+            return new Comparator() { // from class:
+                                      // com.android.internal.app.AppPredictionServiceResolverComparator$AppPredictionServiceComparatorModel$$ExternalSyntheticLambda0
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
                     int lambda$getComparator$0;
-                    lambda$getComparator$0 = AppPredictionServiceResolverComparator.AppPredictionServiceComparatorModel.this.lambda$getComparator$0((ResolveInfo) obj, (ResolveInfo) obj2);
+                    lambda$getComparator$0 =
+                            AppPredictionServiceResolverComparator
+                                    .AppPredictionServiceComparatorModel.this
+                                    .lambda$getComparator$0((ResolveInfo) obj, (ResolveInfo) obj2);
                     return lambda$getComparator$0;
                 }
             };
@@ -232,8 +283,12 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ int lambda$getComparator$0(ResolveInfo lhs, ResolveInfo rhs) {
-            Integer lhsRank = this.mTargetRanks.get(new ComponentName(lhs.activityInfo.packageName, lhs.activityInfo.name));
-            Integer rhsRank = this.mTargetRanks.get(new ComponentName(rhs.activityInfo.packageName, rhs.activityInfo.name));
+            Integer lhsRank =
+                    this.mTargetRanks.get(
+                            new ComponentName(lhs.activityInfo.packageName, lhs.activityInfo.name));
+            Integer rhsRank =
+                    this.mTargetRanks.get(
+                            new ComponentName(rhs.activityInfo.packageName, rhs.activityInfo.name));
             if (lhsRank == null && rhsRank == null) {
                 return 0;
             }
@@ -250,16 +305,36 @@ class AppPredictionServiceResolverComparator extends AbstractResolverComparator 
         public float getScore(TargetInfo targetInfo) {
             Integer rank = this.mTargetRanks.get(targetInfo.getResolvedComponentName());
             if (rank == null) {
-                Log.w(AppPredictionServiceResolverComparator.TAG, "Score requested for unknown component. Did you call compute yet?");
+                Log.w(
+                        AppPredictionServiceResolverComparator.TAG,
+                        "Score requested for unknown component. Did you call compute yet?");
                 return 0.0f;
             }
-            int consecutiveSumOfRanks = ((this.mTargetRanks.size() - 1) * this.mTargetRanks.size()) / 2;
+            int consecutiveSumOfRanks =
+                    ((this.mTargetRanks.size() - 1) * this.mTargetRanks.size()) / 2;
             return 1.0f - (rank.intValue() / consecutiveSumOfRanks);
         }
 
         @Override // com.android.internal.app.ResolverComparatorModel
         public void notifyOnTargetSelected(TargetInfo targetInfo) {
-            this.mAppPredictor.notifyAppTargetEvent(new AppTargetEvent.Builder(new AppTarget.Builder(new AppTargetId(targetInfo.getResolvedComponentName().toString()), targetInfo.getResolvedComponentName().getPackageName(), this.mUser).setClassName(targetInfo.getResolvedComponentName().getClassName()).build(), 1).build());
+            this.mAppPredictor.notifyAppTargetEvent(
+                    new AppTargetEvent.Builder(
+                                    new AppTarget.Builder(
+                                                    new AppTargetId(
+                                                            targetInfo
+                                                                    .getResolvedComponentName()
+                                                                    .toString()),
+                                                    targetInfo
+                                                            .getResolvedComponentName()
+                                                            .getPackageName(),
+                                                    this.mUser)
+                                            .setClassName(
+                                                    targetInfo
+                                                            .getResolvedComponentName()
+                                                            .getClassName())
+                                            .build(),
+                                    1)
+                            .build());
         }
     }
 }

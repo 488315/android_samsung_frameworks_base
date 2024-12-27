@@ -1,6 +1,7 @@
 package com.android.server.credentials.metrics;
 
 import android.util.Slog;
+
 import java.util.AbstractMap;
 import java.util.Map;
 
@@ -20,7 +21,19 @@ public enum EntryEnum {
         EntryEnum entryEnum = ACTION_ENTRY;
         EntryEnum entryEnum2 = CREDENTIAL_ENTRY;
         EntryEnum entryEnum3 = REMOTE_ENTRY;
-        sKeyToEntryCode = Map.ofEntries(new AbstractMap.SimpleEntry("action_key", Integer.valueOf(entryEnum.mInnerMetricCode)), new AbstractMap.SimpleEntry("authentication_action_key", Integer.valueOf(AUTHENTICATION_ENTRY.mInnerMetricCode)), new AbstractMap.SimpleEntry("remote_entry_key", Integer.valueOf(entryEnum3.mInnerMetricCode)), new AbstractMap.SimpleEntry("credential_key", Integer.valueOf(entryEnum2.mInnerMetricCode)), new AbstractMap.SimpleEntry("save_entry_key", Integer.valueOf(entryEnum2.mInnerMetricCode)));
+        sKeyToEntryCode =
+                Map.ofEntries(
+                        new AbstractMap.SimpleEntry(
+                                "action_key", Integer.valueOf(entryEnum.mInnerMetricCode)),
+                        new AbstractMap.SimpleEntry(
+                                "authentication_action_key",
+                                Integer.valueOf(AUTHENTICATION_ENTRY.mInnerMetricCode)),
+                        new AbstractMap.SimpleEntry(
+                                "remote_entry_key", Integer.valueOf(entryEnum3.mInnerMetricCode)),
+                        new AbstractMap.SimpleEntry(
+                                "credential_key", Integer.valueOf(entryEnum2.mInnerMetricCode)),
+                        new AbstractMap.SimpleEntry(
+                                "save_entry_key", Integer.valueOf(entryEnum2.mInnerMetricCode)));
     }
 
     EntryEnum(String str) {

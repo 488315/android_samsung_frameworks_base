@@ -10,9 +10,11 @@ import android.text.TextUtils;
 import android.util.Printer;
 import android.util.proto.ProtoOutputStream;
 import android.view.autofill.AutofillId;
+
 import com.android.internal.inputmethod.InputMethodDebug;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -24,50 +26,56 @@ import java.util.Set;
 
 /* loaded from: classes4.dex */
 public class EditorInfo implements InputType, Parcelable {
-    public static final Parcelable.Creator<EditorInfo> CREATOR = new Parcelable.Creator<EditorInfo>() { // from class: android.view.inputmethod.EditorInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EditorInfo createFromParcel(Parcel source) {
-            EditorInfo res = new EditorInfo();
-            res.inputType = source.readInt();
-            res.imeOptions = source.readInt();
-            res.privateImeOptions = source.readString();
-            res.internalImeOptions = source.readInt();
-            res.actionLabel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
-            res.actionId = source.readInt();
-            res.initialSelStart = source.readInt();
-            res.initialSelEnd = source.readInt();
-            res.initialCapsMode = source.readInt();
-            res.mInitialToolType = source.readInt();
-            res.hintText = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
-            res.label = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
-            res.packageName = source.readString();
-            res.autofillId = (AutofillId) source.readParcelable(AutofillId.class.getClassLoader(), AutofillId.class);
-            res.fieldId = source.readInt();
-            res.fieldName = source.readString();
-            res.extras = source.readBundle();
-            res.mSupportedHandwritingGestureTypes = source.readInt();
-            res.mSupportedHandwritingGesturePreviewTypes = source.readInt();
-            if (Flags.editorinfoHandwritingEnabled()) {
-                res.mIsStylusHandwritingEnabled = source.readBoolean();
-            }
-            boolean hasInitialSurroundingText = source.readBoolean();
-            if (hasInitialSurroundingText) {
-                res.mInitialSurroundingText = SurroundingText.CREATOR.createFromParcel(source);
-            }
-            LocaleList hintLocales = LocaleList.CREATOR.createFromParcel(source);
-            res.hintLocales = hintLocales.isEmpty() ? null : hintLocales;
-            res.contentMimeTypes = source.readStringArray();
-            res.targetInputMethodUser = UserHandle.readFromParcel(source);
-            return res;
-        }
+    public static final Parcelable.Creator<EditorInfo> CREATOR =
+            new Parcelable.Creator<
+                    EditorInfo>() { // from class: android.view.inputmethod.EditorInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EditorInfo createFromParcel(Parcel source) {
+                    EditorInfo res = new EditorInfo();
+                    res.inputType = source.readInt();
+                    res.imeOptions = source.readInt();
+                    res.privateImeOptions = source.readString();
+                    res.internalImeOptions = source.readInt();
+                    res.actionLabel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
+                    res.actionId = source.readInt();
+                    res.initialSelStart = source.readInt();
+                    res.initialSelEnd = source.readInt();
+                    res.initialCapsMode = source.readInt();
+                    res.mInitialToolType = source.readInt();
+                    res.hintText = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
+                    res.label = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
+                    res.packageName = source.readString();
+                    res.autofillId =
+                            (AutofillId)
+                                    source.readParcelable(
+                                            AutofillId.class.getClassLoader(), AutofillId.class);
+                    res.fieldId = source.readInt();
+                    res.fieldName = source.readString();
+                    res.extras = source.readBundle();
+                    res.mSupportedHandwritingGestureTypes = source.readInt();
+                    res.mSupportedHandwritingGesturePreviewTypes = source.readInt();
+                    if (Flags.editorinfoHandwritingEnabled()) {
+                        res.mIsStylusHandwritingEnabled = source.readBoolean();
+                    }
+                    boolean hasInitialSurroundingText = source.readBoolean();
+                    if (hasInitialSurroundingText) {
+                        res.mInitialSurroundingText =
+                                SurroundingText.CREATOR.createFromParcel(source);
+                    }
+                    LocaleList hintLocales = LocaleList.CREATOR.createFromParcel(source);
+                    res.hintLocales = hintLocales.isEmpty() ? null : hintLocales;
+                    res.contentMimeTypes = source.readStringArray();
+                    res.targetInputMethodUser = UserHandle.readFromParcel(source);
+                    return res;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EditorInfo[] newArray(int size) {
-            return new EditorInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EditorInfo[] newArray(int size) {
+                    return new EditorInfo[size];
+                }
+            };
     public static final int IME_ACTION_DONE = 6;
     public static final int IME_ACTION_GO = 2;
     public static final int IME_ACTION_NEXT = 5;
@@ -89,7 +97,8 @@ public class EditorInfo implements InputType, Parcelable {
     public static final int IME_NULL = 0;
     static final int MAX_INITIAL_SELECTION_LENGTH = 1024;
     static final int MEMORY_EFFICIENT_TEXT_LENGTH = 2048;
-    public static final String STYLUS_HANDWRITING_ENABLED_ANDROIDX_EXTRAS_KEY = "androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED";
+    public static final String STYLUS_HANDWRITING_ENABLED_ANDROIDX_EXTRAS_KEY =
+            "androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED";
     public AutofillId autofillId;
     public Bundle extras;
     public int fieldId;
@@ -121,7 +130,8 @@ public class EditorInfo implements InputType, Parcelable {
         public static final int TAIL = 1;
     }
 
-    public void setSupportedHandwritingGestures(List<Class<? extends HandwritingGesture>> gestures) {
+    public void setSupportedHandwritingGestures(
+            List<Class<? extends HandwritingGesture>> gestures) {
         Objects.requireNonNull(gestures);
         if (gestures.isEmpty()) {
             this.mSupportedHandwritingGestureTypes = 0;
@@ -185,7 +195,8 @@ public class EditorInfo implements InputType, Parcelable {
         return list;
     }
 
-    public void setSupportedHandwritingGesturePreviews(Set<Class<? extends PreviewableHandwritingGesture>> gestures) {
+    public void setSupportedHandwritingGesturePreviews(
+            Set<Class<? extends PreviewableHandwritingGesture>> gestures) {
         Objects.requireNonNull(gestures);
         if (gestures.isEmpty()) {
             this.mSupportedHandwritingGesturePreviewTypes = 0;
@@ -203,13 +214,15 @@ public class EditorInfo implements InputType, Parcelable {
             } else if (gesture.equals(DeleteRangeGesture.class)) {
                 supportedTypes |= 64;
             } else {
-                throw new IllegalArgumentException("Unsupported gesture type for preview: " + gesture);
+                throw new IllegalArgumentException(
+                        "Unsupported gesture type for preview: " + gesture);
             }
         }
         this.mSupportedHandwritingGesturePreviewTypes = supportedTypes;
     }
 
-    public Set<Class<? extends PreviewableHandwritingGesture>> getSupportedHandwritingGesturePreviews() {
+    public Set<Class<? extends PreviewableHandwritingGesture>>
+            getSupportedHandwritingGesturePreviews() {
         Set<Class<? extends PreviewableHandwritingGesture>> set = new HashSet<>();
         if (this.mSupportedHandwritingGesturePreviewTypes == 0) {
             return set;
@@ -251,27 +264,42 @@ public class EditorInfo implements InputType, Parcelable {
             this.mInitialSurroundingText = null;
             return;
         }
-        int subTextSelStart = (this.initialSelStart > this.initialSelEnd ? this.initialSelEnd : this.initialSelStart) - subTextStart;
-        int subTextSelEnd = (this.initialSelStart > this.initialSelEnd ? this.initialSelStart : this.initialSelEnd) - subTextStart;
+        int subTextSelStart =
+                (this.initialSelStart > this.initialSelEnd
+                                ? this.initialSelEnd
+                                : this.initialSelStart)
+                        - subTextStart;
+        int subTextSelEnd =
+                (this.initialSelStart > this.initialSelEnd
+                                ? this.initialSelStart
+                                : this.initialSelEnd)
+                        - subTextStart;
         int subTextLength = subText.length();
         if (subTextStart < 0 || subTextSelStart < 0 || subTextSelEnd > subTextLength) {
             this.mInitialSurroundingText = null;
         } else if (subTextLength <= 2048) {
-            this.mInitialSurroundingText = new SurroundingText(subText, subTextSelStart, subTextSelEnd, subTextStart);
+            this.mInitialSurroundingText =
+                    new SurroundingText(subText, subTextSelStart, subTextSelEnd, subTextStart);
         } else {
             trimLongSurroundingText(subText, subTextSelStart, subTextSelEnd, subTextStart);
         }
     }
 
-    private void trimLongSurroundingText(CharSequence subText, int selStart, int selEnd, int subTextStart) {
+    private void trimLongSurroundingText(
+            CharSequence subText, int selStart, int selEnd, int subTextStart) {
         CharSequence newInitialSurroundingText;
         int sourceSelLength = selEnd - selStart;
         int newSelLength = sourceSelLength > 1024 ? 0 : sourceSelLength;
         int subTextAfterCursorLength = subText.length() - selEnd;
         int maxLengthMinusSelection = 2048 - newSelLength;
-        int possibleMaxBeforeCursorLength = Math.min(selStart, (int) (maxLengthMinusSelection * 0.8d));
-        int newAfterCursorLength = Math.min(subTextAfterCursorLength, maxLengthMinusSelection - possibleMaxBeforeCursorLength);
-        int newBeforeCursorLength = Math.min(selStart, maxLengthMinusSelection - newAfterCursorLength);
+        int possibleMaxBeforeCursorLength =
+                Math.min(selStart, (int) (maxLengthMinusSelection * 0.8d));
+        int newAfterCursorLength =
+                Math.min(
+                        subTextAfterCursorLength,
+                        maxLengthMinusSelection - possibleMaxBeforeCursorLength);
+        int newBeforeCursorLength =
+                Math.min(selStart, maxLengthMinusSelection - newAfterCursorLength);
         int newBeforeCursorHead = selStart - newBeforeCursorLength;
         if (isCutOnSurrogate(subText, selStart - newBeforeCursorLength, 0)) {
             newBeforeCursorHead++;
@@ -282,22 +310,33 @@ public class EditorInfo implements InputType, Parcelable {
         }
         int newTextLength = newBeforeCursorLength + newSelLength + newAfterCursorLength;
         if (newSelLength != sourceSelLength) {
-            CharSequence beforeCursor = subText.subSequence(newBeforeCursorHead, newBeforeCursorHead + newBeforeCursorLength);
+            CharSequence beforeCursor =
+                    subText.subSequence(
+                            newBeforeCursorHead, newBeforeCursorHead + newBeforeCursorLength);
             CharSequence afterCursor = subText.subSequence(selEnd, selEnd + newAfterCursorLength);
             newInitialSurroundingText = TextUtils.concat(beforeCursor, afterCursor);
         } else {
-            newInitialSurroundingText = subText.subSequence(newBeforeCursorHead, newBeforeCursorHead + newTextLength);
+            newInitialSurroundingText =
+                    subText.subSequence(newBeforeCursorHead, newBeforeCursorHead + newTextLength);
         }
         int newSelHead = 0 + newBeforeCursorLength;
         int newOffset = (subTextStart + selStart) - newSelHead;
-        this.mInitialSurroundingText = new SurroundingText(newInitialSurroundingText, newSelHead, newSelHead + newSelLength, newOffset);
+        this.mInitialSurroundingText =
+                new SurroundingText(
+                        newInitialSurroundingText,
+                        newSelHead,
+                        newSelHead + newSelLength,
+                        newOffset);
     }
 
     public CharSequence getInitialTextBeforeCursor(int length, int flags) {
         if (this.mInitialSurroundingText == null) {
             return null;
         }
-        int selStart = Math.min(this.mInitialSurroundingText.getSelectionStart(), this.mInitialSurroundingText.getSelectionEnd());
+        int selStart =
+                Math.min(
+                        this.mInitialSurroundingText.getSelectionStart(),
+                        this.mInitialSurroundingText.getSelectionEnd());
         int n = Math.min(length, selStart);
         if ((flags & 1) != 0) {
             return this.mInitialSurroundingText.getText().subSequence(selStart - n, selStart);
@@ -309,8 +348,14 @@ public class EditorInfo implements InputType, Parcelable {
         if (this.mInitialSurroundingText == null) {
             return null;
         }
-        int correctedTextSelStart = this.initialSelStart > this.initialSelEnd ? this.initialSelEnd : this.initialSelStart;
-        int correctedTextSelEnd = this.initialSelStart > this.initialSelEnd ? this.initialSelStart : this.initialSelEnd;
+        int correctedTextSelStart =
+                this.initialSelStart > this.initialSelEnd
+                        ? this.initialSelEnd
+                        : this.initialSelStart;
+        int correctedTextSelEnd =
+                this.initialSelStart > this.initialSelEnd
+                        ? this.initialSelStart
+                        : this.initialSelEnd;
         int sourceSelLength = correctedTextSelEnd - correctedTextSelStart;
         int selStart = this.mInitialSurroundingText.getSelectionStart();
         int selEnd = this.mInitialSurroundingText.getSelectionEnd();
@@ -333,7 +378,10 @@ public class EditorInfo implements InputType, Parcelable {
             return null;
         }
         int surroundingTextLength = this.mInitialSurroundingText.getText().length();
-        int selEnd = Math.max(this.mInitialSurroundingText.getSelectionStart(), this.mInitialSurroundingText.getSelectionEnd());
+        int selEnd =
+                Math.max(
+                        this.mInitialSurroundingText.getSelectionStart(),
+                        this.mInitialSurroundingText.getSelectionEnd());
         int n = Math.min(length, surroundingTextLength - selEnd);
         if ((flags & 1) != 0) {
             return this.mInitialSurroundingText.getText().subSequence(selEnd, selEnd + n);
@@ -364,7 +412,8 @@ public class EditorInfo implements InputType, Parcelable {
             newText = TextUtils.substring(this.mInitialSurroundingText.getText(), offset, after);
         }
         int newSelEnd = Math.min(selEnd - offset, length);
-        return new SurroundingText(newText, before, newSelEnd, this.mInitialSurroundingText.getOffset() + offset);
+        return new SurroundingText(
+                newText, before, newSelEnd, this.mInitialSurroundingText.getOffset() + offset);
     }
 
     private static boolean isCutOnSurrogate(CharSequence sourceText, int cutPosition, int policy) {
@@ -426,21 +475,67 @@ public class EditorInfo implements InputType, Parcelable {
     }
 
     public void dump(Printer pw, String prefix, boolean dumpExtras) {
-        pw.println(prefix + "inputType=0x" + Integer.toHexString(this.inputType) + " imeOptions=0x" + Integer.toHexString(this.imeOptions) + " privateImeOptions=" + this.privateImeOptions);
-        pw.println(prefix + "actionLabel=" + ((Object) this.actionLabel) + " actionId=" + this.actionId);
-        pw.println(prefix + "initialSelStart=" + this.initialSelStart + " initialSelEnd=" + this.initialSelEnd + " initialToolType=" + this.mInitialToolType + " initialCapsMode=0x" + Integer.toHexString(this.initialCapsMode));
-        pw.println(prefix + "hintText=" + ((Object) this.hintText) + " label=" + ((Object) this.label));
-        pw.println(prefix + "packageName=" + this.packageName + " autofillId=" + this.autofillId + " fieldId=" + this.fieldId + " fieldName=" + this.fieldName);
+        pw.println(
+                prefix
+                        + "inputType=0x"
+                        + Integer.toHexString(this.inputType)
+                        + " imeOptions=0x"
+                        + Integer.toHexString(this.imeOptions)
+                        + " privateImeOptions="
+                        + this.privateImeOptions);
+        pw.println(
+                prefix
+                        + "actionLabel="
+                        + ((Object) this.actionLabel)
+                        + " actionId="
+                        + this.actionId);
+        pw.println(
+                prefix
+                        + "initialSelStart="
+                        + this.initialSelStart
+                        + " initialSelEnd="
+                        + this.initialSelEnd
+                        + " initialToolType="
+                        + this.mInitialToolType
+                        + " initialCapsMode=0x"
+                        + Integer.toHexString(this.initialCapsMode));
+        pw.println(
+                prefix
+                        + "hintText="
+                        + ((Object) this.hintText)
+                        + " label="
+                        + ((Object) this.label));
+        pw.println(
+                prefix
+                        + "packageName="
+                        + this.packageName
+                        + " autofillId="
+                        + this.autofillId
+                        + " fieldId="
+                        + this.fieldId
+                        + " fieldName="
+                        + this.fieldName);
         if (dumpExtras) {
             pw.println(prefix + "extras=" + this.extras);
         }
         pw.println(prefix + "hintLocales=" + this.hintLocales);
-        pw.println(prefix + "supportedHandwritingGestureTypes=" + InputMethodDebug.handwritingGestureTypeFlagsToString(this.mSupportedHandwritingGestureTypes));
-        pw.println(prefix + "supportedHandwritingGesturePreviewTypes=" + InputMethodDebug.handwritingGestureTypeFlagsToString(this.mSupportedHandwritingGesturePreviewTypes));
+        pw.println(
+                prefix
+                        + "supportedHandwritingGestureTypes="
+                        + InputMethodDebug.handwritingGestureTypeFlagsToString(
+                                this.mSupportedHandwritingGestureTypes));
+        pw.println(
+                prefix
+                        + "supportedHandwritingGesturePreviewTypes="
+                        + InputMethodDebug.handwritingGestureTypeFlagsToString(
+                                this.mSupportedHandwritingGesturePreviewTypes));
         pw.println(prefix + "isStylusHandwritingEnabled=" + this.mIsStylusHandwritingEnabled);
         pw.println(prefix + "contentMimeTypes=" + Arrays.toString(this.contentMimeTypes));
         if (this.targetInputMethodUser != null) {
-            pw.println(prefix + "targetInputMethodUserId=" + this.targetInputMethodUser.getIdentifier());
+            pw.println(
+                    prefix
+                            + "targetInputMethodUserId="
+                            + this.targetInputMethodUser.getIdentifier());
         }
     }
 
@@ -468,7 +563,8 @@ public class EditorInfo implements InputType, Parcelable {
         newEditorInfo.contentMimeTypes = (String[]) ArrayUtils.cloneOrNull(this.contentMimeTypes);
         newEditorInfo.targetInputMethodUser = this.targetInputMethodUser;
         newEditorInfo.mSupportedHandwritingGestureTypes = this.mSupportedHandwritingGestureTypes;
-        newEditorInfo.mSupportedHandwritingGesturePreviewTypes = this.mSupportedHandwritingGesturePreviewTypes;
+        newEditorInfo.mSupportedHandwritingGesturePreviewTypes =
+                this.mSupportedHandwritingGesturePreviewTypes;
         return newEditorInfo;
     }
 
@@ -521,13 +617,36 @@ public class EditorInfo implements InputType, Parcelable {
         if (this == that) {
             return true;
         }
-        if (this.inputType != that.inputType || this.imeOptions != that.imeOptions || this.internalImeOptions != that.internalImeOptions || this.actionId != that.actionId || this.initialSelStart != that.initialSelStart || this.initialSelEnd != that.initialSelEnd || this.initialCapsMode != that.initialCapsMode || this.fieldId != that.fieldId || this.mSupportedHandwritingGestureTypes != that.mSupportedHandwritingGestureTypes || this.mSupportedHandwritingGesturePreviewTypes != that.mSupportedHandwritingGesturePreviewTypes || !Objects.equals(this.autofillId, that.autofillId) || !Objects.equals(this.privateImeOptions, that.privateImeOptions) || !Objects.equals(this.packageName, that.packageName) || !Objects.equals(this.fieldName, that.fieldName) || !Objects.equals(this.hintLocales, that.hintLocales) || !Objects.equals(this.targetInputMethodUser, that.targetInputMethodUser) || !Arrays.equals(this.contentMimeTypes, that.contentMimeTypes) || !TextUtils.equals(this.actionLabel, that.actionLabel) || !TextUtils.equals(this.hintText, that.hintText) || !TextUtils.equals(this.label, that.label)) {
+        if (this.inputType != that.inputType
+                || this.imeOptions != that.imeOptions
+                || this.internalImeOptions != that.internalImeOptions
+                || this.actionId != that.actionId
+                || this.initialSelStart != that.initialSelStart
+                || this.initialSelEnd != that.initialSelEnd
+                || this.initialCapsMode != that.initialCapsMode
+                || this.fieldId != that.fieldId
+                || this.mSupportedHandwritingGestureTypes != that.mSupportedHandwritingGestureTypes
+                || this.mSupportedHandwritingGesturePreviewTypes
+                        != that.mSupportedHandwritingGesturePreviewTypes
+                || !Objects.equals(this.autofillId, that.autofillId)
+                || !Objects.equals(this.privateImeOptions, that.privateImeOptions)
+                || !Objects.equals(this.packageName, that.packageName)
+                || !Objects.equals(this.fieldName, that.fieldName)
+                || !Objects.equals(this.hintLocales, that.hintLocales)
+                || !Objects.equals(this.targetInputMethodUser, that.targetInputMethodUser)
+                || !Arrays.equals(this.contentMimeTypes, that.contentMimeTypes)
+                || !TextUtils.equals(this.actionLabel, that.actionLabel)
+                || !TextUtils.equals(this.hintText, that.hintText)
+                || !TextUtils.equals(this.label, that.label)) {
             return false;
         }
-        if (this.extras != that.extras && (this.extras == null || !this.extras.kindofEquals(that.extras))) {
+        if (this.extras != that.extras
+                && (this.extras == null || !this.extras.kindofEquals(that.extras))) {
             return false;
         }
-        if (this.mInitialSurroundingText != that.mInitialSurroundingText && (this.mInitialSurroundingText == null || !this.mInitialSurroundingText.isEqualTo(that.mInitialSurroundingText))) {
+        if (this.mInitialSurroundingText != that.mInitialSurroundingText
+                && (this.mInitialSurroundingText == null
+                        || !this.mInitialSurroundingText.isEqualTo(that.mInitialSurroundingText))) {
             return false;
         }
         return true;

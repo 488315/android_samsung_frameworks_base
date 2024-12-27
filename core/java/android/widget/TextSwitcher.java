@@ -18,7 +18,8 @@ public class TextSwitcher extends ViewSwitcher {
     @Override // android.widget.ViewSwitcher, android.widget.ViewAnimator, android.view.ViewGroup
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
         if (!(child instanceof TextView)) {
-            throw new IllegalArgumentException("TextSwitcher children must be instances of TextView");
+            throw new IllegalArgumentException(
+                    "TextSwitcher children must be instances of TextView");
         }
         super.addView(child, index, params);
     }
@@ -33,7 +34,8 @@ public class TextSwitcher extends ViewSwitcher {
         ((TextView) getCurrentView()).lambda$setTextAsync$0(text);
     }
 
-    @Override // android.widget.ViewSwitcher, android.widget.ViewAnimator, android.widget.FrameLayout, android.view.ViewGroup, android.view.View
+    @Override // android.widget.ViewSwitcher, android.widget.ViewAnimator,
+              // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
     public CharSequence getAccessibilityClassName() {
         return TextSwitcher.class.getName();
     }

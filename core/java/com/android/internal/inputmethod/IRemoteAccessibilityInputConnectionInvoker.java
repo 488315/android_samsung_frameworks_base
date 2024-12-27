@@ -4,7 +4,9 @@ import android.os.RemoteException;
 import android.view.KeyEvent;
 import android.view.inputmethod.SurroundingText;
 import android.view.inputmethod.TextAttribute;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.Objects;
 
 /* loaded from: classes5.dex */
@@ -12,12 +14,14 @@ final class IRemoteAccessibilityInputConnectionInvoker {
     private final IRemoteAccessibilityInputConnection mConnection;
     private final int mSessionId;
 
-    private IRemoteAccessibilityInputConnectionInvoker(IRemoteAccessibilityInputConnection inputContext, int sessionId) {
+    private IRemoteAccessibilityInputConnectionInvoker(
+            IRemoteAccessibilityInputConnection inputContext, int sessionId) {
         this.mConnection = inputContext;
         this.mSessionId = sessionId;
     }
 
-    public static IRemoteAccessibilityInputConnectionInvoker create(IRemoteAccessibilityInputConnection connection) {
+    public static IRemoteAccessibilityInputConnectionInvoker create(
+            IRemoteAccessibilityInputConnection connection) {
         Objects.requireNonNull(connection);
         return new IRemoteAccessibilityInputConnectionInvoker(connection, 0);
     }
@@ -48,10 +52,12 @@ final class IRemoteAccessibilityInputConnectionInvoker {
         }
     }
 
-    public AndroidFuture<SurroundingText> getSurroundingText(int beforeLength, int afterLength, int flags) {
+    public AndroidFuture<SurroundingText> getSurroundingText(
+            int beforeLength, int afterLength, int flags) {
         AndroidFuture<SurroundingText> future = new AndroidFuture<>();
         try {
-            this.mConnection.getSurroundingText(createHeader(), beforeLength, afterLength, flags, future);
+            this.mConnection.getSurroundingText(
+                    createHeader(), beforeLength, afterLength, flags, future);
         } catch (RemoteException e) {
             future.completeExceptionally(e);
         }

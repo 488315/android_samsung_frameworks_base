@@ -2,7 +2,9 @@ package com.android.internal.org.bouncycastle.jcajce.spec;
 
 import com.android.internal.org.bouncycastle.crypto.params.DHParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DHValidationParameters;
+
 import java.math.BigInteger;
+
 import javax.crypto.spec.DHParameterSpec;
 
 /* loaded from: classes5.dex */
@@ -13,7 +15,13 @@ public class DHDomainParameterSpec extends DHParameterSpec {
     private DHValidationParameters validationParameters;
 
     public DHDomainParameterSpec(DHParameters domainParameters) {
-        this(domainParameters.getP(), domainParameters.getQ(), domainParameters.getG(), domainParameters.getJ(), domainParameters.getM(), domainParameters.getL());
+        this(
+                domainParameters.getP(),
+                domainParameters.getQ(),
+                domainParameters.getG(),
+                domainParameters.getJ(),
+                domainParameters.getM(),
+                domainParameters.getL());
         this.validationParameters = domainParameters.getValidationParameters();
     }
 
@@ -29,7 +37,8 @@ public class DHDomainParameterSpec extends DHParameterSpec {
         this(p, q, g, j, 0, l);
     }
 
-    public DHDomainParameterSpec(BigInteger p, BigInteger q, BigInteger g, BigInteger j, int m, int l) {
+    public DHDomainParameterSpec(
+            BigInteger p, BigInteger q, BigInteger g, BigInteger j, int m, int l) {
         super(p, g, l);
         this.q = q;
         this.j = j;
@@ -49,6 +58,7 @@ public class DHDomainParameterSpec extends DHParameterSpec {
     }
 
     public DHParameters getDomainParameters() {
-        return new DHParameters(getP(), getG(), this.q, this.m, getL(), this.j, this.validationParameters);
+        return new DHParameters(
+                getP(), getG(), this.q, this.m, getL(), this.j, this.validationParameters);
     }
 }

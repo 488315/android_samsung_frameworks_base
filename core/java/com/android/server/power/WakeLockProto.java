@@ -17,7 +17,6 @@ public final class WakeLockProto {
         public static final long IS_ON_AFTER_RELEASE = 1133871366146L;
         public static final long SYSTEM_WAKELOCK = 1133871366147L;
 
-        public WakeLockFlagsProto() {
-        }
+        public WakeLockFlagsProto() {}
     }
 }

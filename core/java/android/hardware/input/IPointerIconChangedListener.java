@@ -15,8 +15,7 @@ public interface IPointerIconChangedListener extends IInterface {
 
     public static class Default implements IPointerIconChangedListener {
         @Override // android.hardware.input.IPointerIconChangedListener
-        public void onPointerIconChanged(int type, PointerIcon icon) throws RemoteException {
-        }
+        public void onPointerIconChanged(int type, PointerIcon icon) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +23,7 @@ public interface IPointerIconChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPointerIconChangedListener {
+    public abstract static class Stub extends Binder implements IPointerIconChangedListener {
         static final int TRANSACTION_onPointerIconChanged = 1;
 
         public Stub() {
@@ -62,7 +61,8 @@ public interface IPointerIconChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPointerIconChangedListener.DESCRIPTOR);
             }

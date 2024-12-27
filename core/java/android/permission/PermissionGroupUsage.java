@@ -4,25 +4,30 @@ import android.annotation.NonNull;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class PermissionGroupUsage implements Parcelable {
-    public static final Parcelable.Creator<PermissionGroupUsage> CREATOR = new Parcelable.Creator<PermissionGroupUsage>() { // from class: android.permission.PermissionGroupUsage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PermissionGroupUsage[] newArray(int size) {
-            return new PermissionGroupUsage[size];
-        }
+    public static final Parcelable.Creator<PermissionGroupUsage> CREATOR =
+            new Parcelable.Creator<
+                    PermissionGroupUsage>() { // from class:
+                                              // android.permission.PermissionGroupUsage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PermissionGroupUsage[] newArray(int size) {
+                    return new PermissionGroupUsage[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PermissionGroupUsage createFromParcel(Parcel in) {
-            return new PermissionGroupUsage(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PermissionGroupUsage createFromParcel(Parcel in) {
+                    return new PermissionGroupUsage(in);
+                }
+            };
     private final boolean mActive;
     private final CharSequence mAttributionLabel;
     private final CharSequence mAttributionTag;
@@ -34,20 +39,33 @@ public final class PermissionGroupUsage implements Parcelable {
     private final CharSequence mProxyLabel;
     private final int mUid;
 
-    public PermissionGroupUsage(String packageName, int uid, long lastAccessTimeMillis, String permissionGroupName, boolean active, boolean phoneCall, CharSequence attributionTag, CharSequence attributionLabel, CharSequence proxyLabel, String persistentDeviceId) {
+    public PermissionGroupUsage(
+            String packageName,
+            int uid,
+            long lastAccessTimeMillis,
+            String permissionGroupName,
+            boolean active,
+            boolean phoneCall,
+            CharSequence attributionTag,
+            CharSequence attributionLabel,
+            CharSequence proxyLabel,
+            String persistentDeviceId) {
         this.mPackageName = packageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
         this.mUid = uid;
         this.mLastAccessTimeMillis = lastAccessTimeMillis;
         this.mPermissionGroupName = permissionGroupName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPermissionGroupName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPermissionGroupName);
         this.mActive = active;
         this.mPhoneCall = phoneCall;
         this.mAttributionTag = attributionTag;
         this.mAttributionLabel = attributionLabel;
         this.mProxyLabel = proxyLabel;
         this.mPersistentDeviceId = persistentDeviceId;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPersistentDeviceId);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPersistentDeviceId);
     }
 
     public String getPackageName() {
@@ -91,7 +109,27 @@ public final class PermissionGroupUsage implements Parcelable {
     }
 
     public String toString() {
-        return "PermissionGroupUsage { packageName = " + this.mPackageName + ", uid = " + this.mUid + ", lastAccessTimeMillis = " + this.mLastAccessTimeMillis + ", permissionGroupName = " + this.mPermissionGroupName + ", active = " + this.mActive + ", phoneCall = " + this.mPhoneCall + ", attributionTag = " + ((Object) this.mAttributionTag) + ", attributionLabel = " + ((Object) this.mAttributionLabel) + ", proxyLabel = " + ((Object) this.mProxyLabel) + ", persistentDeviceId = " + this.mPersistentDeviceId + " }";
+        return "PermissionGroupUsage { packageName = "
+                + this.mPackageName
+                + ", uid = "
+                + this.mUid
+                + ", lastAccessTimeMillis = "
+                + this.mLastAccessTimeMillis
+                + ", permissionGroupName = "
+                + this.mPermissionGroupName
+                + ", active = "
+                + this.mActive
+                + ", phoneCall = "
+                + this.mPhoneCall
+                + ", attributionTag = "
+                + ((Object) this.mAttributionTag)
+                + ", attributionLabel = "
+                + ((Object) this.mAttributionLabel)
+                + ", proxyLabel = "
+                + ((Object) this.mProxyLabel)
+                + ", persistentDeviceId = "
+                + this.mPersistentDeviceId
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -102,7 +140,16 @@ public final class PermissionGroupUsage implements Parcelable {
             return false;
         }
         PermissionGroupUsage that = (PermissionGroupUsage) o;
-        if (Objects.equals(this.mPackageName, that.mPackageName) && this.mUid == that.mUid && this.mLastAccessTimeMillis == that.mLastAccessTimeMillis && Objects.equals(this.mPermissionGroupName, that.mPermissionGroupName) && this.mActive == that.mActive && this.mPhoneCall == that.mPhoneCall && Objects.equals(this.mAttributionTag, that.mAttributionTag) && Objects.equals(this.mAttributionLabel, that.mAttributionLabel) && Objects.equals(this.mProxyLabel, that.mProxyLabel) && Objects.equals(this.mPersistentDeviceId, that.mPersistentDeviceId)) {
+        if (Objects.equals(this.mPackageName, that.mPackageName)
+                && this.mUid == that.mUid
+                && this.mLastAccessTimeMillis == that.mLastAccessTimeMillis
+                && Objects.equals(this.mPermissionGroupName, that.mPermissionGroupName)
+                && this.mActive == that.mActive
+                && this.mPhoneCall == that.mPhoneCall
+                && Objects.equals(this.mAttributionTag, that.mAttributionTag)
+                && Objects.equals(this.mAttributionLabel, that.mAttributionLabel)
+                && Objects.equals(this.mProxyLabel, that.mProxyLabel)
+                && Objects.equals(this.mPersistentDeviceId, that.mPersistentDeviceId)) {
             return true;
         }
         return false;
@@ -110,7 +157,34 @@ public final class PermissionGroupUsage implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + Objects.hashCode(this.mPackageName);
-        return (((((((((((((((((_hash * 31) + this.mUid) * 31) + Long.hashCode(this.mLastAccessTimeMillis)) * 31) + Objects.hashCode(this.mPermissionGroupName)) * 31) + Boolean.hashCode(this.mActive)) * 31) + Boolean.hashCode(this.mPhoneCall)) * 31) + Objects.hashCode(this.mAttributionTag)) * 31) + Objects.hashCode(this.mAttributionLabel)) * 31) + Objects.hashCode(this.mProxyLabel)) * 31) + Objects.hashCode(this.mPersistentDeviceId);
+        return (((((((((((((((((_hash * 31) + this.mUid) * 31)
+                                                                                                                                + Long
+                                                                                                                                        .hashCode(
+                                                                                                                                                this
+                                                                                                                                                        .mLastAccessTimeMillis))
+                                                                                                                        * 31)
+                                                                                                                + Objects
+                                                                                                                        .hashCode(
+                                                                                                                                this
+                                                                                                                                        .mPermissionGroupName))
+                                                                                                        * 31)
+                                                                                                + Boolean
+                                                                                                        .hashCode(
+                                                                                                                this
+                                                                                                                        .mActive))
+                                                                                        * 31)
+                                                                                + Boolean.hashCode(
+                                                                                        this
+                                                                                                .mPhoneCall))
+                                                                        * 31)
+                                                                + Objects.hashCode(
+                                                                        this.mAttributionTag))
+                                                        * 31)
+                                                + Objects.hashCode(this.mAttributionLabel))
+                                        * 31)
+                                + Objects.hashCode(this.mProxyLabel))
+                        * 31)
+                + Objects.hashCode(this.mPersistentDeviceId);
     }
 
     @Override // android.os.Parcelable
@@ -163,21 +237,23 @@ public final class PermissionGroupUsage implements Parcelable {
         CharSequence proxyLabel = (flg & 256) == 0 ? null : in.readCharSequence();
         String persistentDeviceId = in.readString();
         this.mPackageName = packageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
         this.mUid = uid;
         this.mLastAccessTimeMillis = lastAccessTimeMillis;
         this.mPermissionGroupName = permissionGroupName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPermissionGroupName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPermissionGroupName);
         this.mActive = active;
         this.mPhoneCall = phoneCall;
         this.mAttributionTag = attributionTag;
         this.mAttributionLabel = attributionLabel;
         this.mProxyLabel = proxyLabel;
         this.mPersistentDeviceId = persistentDeviceId;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPersistentDeviceId);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPersistentDeviceId);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

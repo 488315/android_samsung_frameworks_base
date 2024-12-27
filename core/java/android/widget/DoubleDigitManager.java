@@ -24,15 +24,20 @@ class DoubleDigitManager {
     public void reportDigit(int digit) {
         if (this.intermediateDigit == null) {
             this.intermediateDigit = Integer.valueOf(digit);
-            new Handler().postDelayed(new Runnable() { // from class: android.widget.DoubleDigitManager.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    if (DoubleDigitManager.this.intermediateDigit != null) {
-                        DoubleDigitManager.this.mCallBack.singleDigitFinal(DoubleDigitManager.this.intermediateDigit.intValue());
-                        DoubleDigitManager.this.intermediateDigit = null;
-                    }
-                }
-            }, this.timeoutInMillis);
+            new Handler()
+                    .postDelayed(
+                            new Runnable() { // from class: android.widget.DoubleDigitManager.1
+                                @Override // java.lang.Runnable
+                                public void run() {
+                                    if (DoubleDigitManager.this.intermediateDigit != null) {
+                                        DoubleDigitManager.this.mCallBack.singleDigitFinal(
+                                                DoubleDigitManager.this.intermediateDigit
+                                                        .intValue());
+                                        DoubleDigitManager.this.intermediateDigit = null;
+                                    }
+                                }
+                            },
+                            this.timeoutInMillis);
             if (!this.mCallBack.singleDigitIntermediate(digit)) {
                 this.intermediateDigit = null;
                 this.mCallBack.singleDigitFinal(digit);

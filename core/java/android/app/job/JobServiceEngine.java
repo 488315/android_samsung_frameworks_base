@@ -2,7 +2,6 @@ package android.app.job;
 
 import android.app.Notification;
 import android.app.Service;
-import android.app.job.IJobService;
 import android.compat.Compatibility;
 import android.os.Handler;
 import android.os.IBinder;
@@ -10,8 +9,11 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.os.SomeArgs;
+
 import com.samsung.android.knox.zt.internal.KnoxZtInternalConst;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes.dex */
@@ -41,7 +43,8 @@ public abstract class JobServiceEngine {
         }
 
         @Override // android.app.job.IJobService
-        public void getTransferredDownloadBytes(JobParameters jobParams, JobWorkItem jobWorkItem) throws RemoteException {
+        public void getTransferredDownloadBytes(JobParameters jobParams, JobWorkItem jobWorkItem)
+                throws RemoteException {
             JobServiceEngine service = this.mService.get();
             if (service != null) {
                 SomeArgs args = SomeArgs.obtain();
@@ -52,7 +55,8 @@ public abstract class JobServiceEngine {
         }
 
         @Override // android.app.job.IJobService
-        public void getTransferredUploadBytes(JobParameters jobParams, JobWorkItem jobWorkItem) throws RemoteException {
+        public void getTransferredUploadBytes(JobParameters jobParams, JobWorkItem jobWorkItem)
+                throws RemoteException {
             JobServiceEngine service = this.mService.get();
             if (service != null) {
                 SomeArgs args = SomeArgs.obtain();
@@ -105,7 +109,9 @@ public abstract class JobServiceEngine {
                         ackStartMessage(params, workOngoing);
                         return;
                     } catch (Exception e) {
-                        Log.e(JobServiceEngine.TAG, "Error while executing job: " + params.getJobId());
+                        Log.e(
+                                JobServiceEngine.TAG,
+                                "Error while executing job: " + params.getJobId());
                         throw new RuntimeException(e);
                     }
                 case 1:
@@ -127,7 +133,9 @@ public abstract class JobServiceEngine {
                             callback.jobFinished(params3.getJobId(), needsReschedule);
                             return;
                         } catch (RemoteException e3) {
-                            Log.e(JobServiceEngine.TAG, "Error reporting job finish to system: binder has goneaway.");
+                            Log.e(
+                                    JobServiceEngine.TAG,
+                                    "Error reporting job finish to system: binder has goneaway.");
                             return;
                         }
                     }
@@ -138,12 +146,16 @@ public abstract class JobServiceEngine {
                     JobParameters params4 = (JobParameters) args.arg1;
                     JobWorkItem item = (JobWorkItem) args.arg2;
                     try {
-                        long ret2 = JobServiceEngine.this.getTransferredDownloadBytes(params4, item);
+                        long ret2 =
+                                JobServiceEngine.this.getTransferredDownloadBytes(params4, item);
                         ackGetTransferredDownloadBytesMessage(params4, item, ret2);
                         args.recycle();
                         return;
                     } catch (Exception e4) {
-                        Log.e(JobServiceEngine.TAG, "Application unable to handle getTransferredDownloadBytes.", e4);
+                        Log.e(
+                                JobServiceEngine.TAG,
+                                "Application unable to handle getTransferredDownloadBytes.",
+                                e4);
                         throw new RuntimeException(e4);
                     }
                 case 4:
@@ -156,7 +168,10 @@ public abstract class JobServiceEngine {
                         args2.recycle();
                         return;
                     } catch (Exception e5) {
-                        Log.e(JobServiceEngine.TAG, "Application unable to handle getTransferredUploadBytes.", e5);
+                        Log.e(
+                                JobServiceEngine.TAG,
+                                "Application unable to handle getTransferredUploadBytes.",
+                                e5);
                         throw new RuntimeException(e5);
                     }
                 case 5:
@@ -165,12 +180,21 @@ public abstract class JobServiceEngine {
                     IJobCallback callback2 = params6.getCallback();
                     if (callback2 != null) {
                         try {
-                            callback2.updateTransferredNetworkBytes(params6.getJobId(), (JobWorkItem) args3.arg2, args3.argl1, args3.argl2);
+                            callback2.updateTransferredNetworkBytes(
+                                    params6.getJobId(),
+                                    (JobWorkItem) args3.arg2,
+                                    args3.argl1,
+                                    args3.argl2);
                         } catch (RemoteException e6) {
-                            Log.e(JobServiceEngine.TAG, "Error updating data transfer progress to system: binder has gone away.");
+                            Log.e(
+                                    JobServiceEngine.TAG,
+                                    "Error updating data transfer progress to system: binder has"
+                                            + " gone away.");
                         }
                     } else {
-                        Log.e(JobServiceEngine.TAG, "updateDataTransferProgress() called for a nonexistent job id.");
+                        Log.e(
+                                JobServiceEngine.TAG,
+                                "updateDataTransferProgress() called for a nonexistent job id.");
                     }
                     args3.recycle();
                     return;
@@ -180,12 +204,21 @@ public abstract class JobServiceEngine {
                     IJobCallback callback3 = params7.getCallback();
                     if (callback3 != null) {
                         try {
-                            callback3.updateEstimatedNetworkBytes(params7.getJobId(), (JobWorkItem) args4.arg2, args4.argl1, args4.argl2);
+                            callback3.updateEstimatedNetworkBytes(
+                                    params7.getJobId(),
+                                    (JobWorkItem) args4.arg2,
+                                    args4.argl1,
+                                    args4.argl2);
                         } catch (RemoteException e7) {
-                            Log.e(JobServiceEngine.TAG, "Error updating estimated transfer size to system: binder has gone away.");
+                            Log.e(
+                                    JobServiceEngine.TAG,
+                                    "Error updating estimated transfer size to system: binder has"
+                                            + " gone away.");
                         }
                     } else {
-                        Log.e(JobServiceEngine.TAG, "updateEstimatedNetworkBytes() called for a nonexistent job id.");
+                        Log.e(
+                                JobServiceEngine.TAG,
+                                "updateEstimatedNetworkBytes() called for a nonexistent job id.");
                     }
                     args4.recycle();
                     return;
@@ -196,12 +229,17 @@ public abstract class JobServiceEngine {
                     IJobCallback callback4 = params8.getCallback();
                     if (callback4 != null) {
                         try {
-                            callback4.setNotification(params8.getJobId(), args5.argi1, notification, args5.argi2);
+                            callback4.setNotification(
+                                    params8.getJobId(), args5.argi1, notification, args5.argi2);
                         } catch (RemoteException e8) {
-                            Log.e(JobServiceEngine.TAG, "Error providing notification: binder has gone away.");
+                            Log.e(
+                                    JobServiceEngine.TAG,
+                                    "Error providing notification: binder has gone away.");
                         }
                     } else {
-                        Log.e(JobServiceEngine.TAG, "setNotification() called for a nonexistent job.");
+                        Log.e(
+                                JobServiceEngine.TAG,
+                                "setNotification() called for a nonexistent job.");
                     }
                     args5.recycle();
                     return;
@@ -211,7 +249,9 @@ public abstract class JobServiceEngine {
                         JobServiceEngine.this.onNetworkChanged(params9);
                         return;
                     } catch (Exception e9) {
-                        Log.e(JobServiceEngine.TAG, "Error while executing job: " + params9.getJobId());
+                        Log.e(
+                                JobServiceEngine.TAG,
+                                "Error while executing job: " + params9.getJobId());
                         throw new RuntimeException(e9);
                     }
                 default:
@@ -220,13 +260,16 @@ public abstract class JobServiceEngine {
             }
         }
 
-        private void ackGetTransferredDownloadBytesMessage(JobParameters params, JobWorkItem item, long progress) {
+        private void ackGetTransferredDownloadBytesMessage(
+                JobParameters params, JobWorkItem item, long progress) {
             IJobCallback callback = params.getCallback();
             int jobId = params.getJobId();
             int workId = item == null ? -1 : item.getWorkId();
             if (callback == null) {
                 if (Log.isLoggable(JobServiceEngine.TAG, 3)) {
-                    Log.d(JobServiceEngine.TAG, "Attempting to ack a job that has already been processed.");
+                    Log.d(
+                            JobServiceEngine.TAG,
+                            "Attempting to ack a job that has already been processed.");
                 }
             } else {
                 try {
@@ -237,13 +280,16 @@ public abstract class JobServiceEngine {
             }
         }
 
-        private void ackGetTransferredUploadBytesMessage(JobParameters params, JobWorkItem item, long progress) {
+        private void ackGetTransferredUploadBytesMessage(
+                JobParameters params, JobWorkItem item, long progress) {
             IJobCallback callback = params.getCallback();
             int jobId = params.getJobId();
             int workId = item == null ? -1 : item.getWorkId();
             if (callback == null) {
                 if (Log.isLoggable(JobServiceEngine.TAG, 3)) {
-                    Log.d(JobServiceEngine.TAG, "Attempting to ack a job that has already been processed.");
+                    Log.d(
+                            JobServiceEngine.TAG,
+                            "Attempting to ack a job that has already been processed.");
                 }
             } else {
                 try {
@@ -259,7 +305,9 @@ public abstract class JobServiceEngine {
             int jobId = params.getJobId();
             if (callback == null) {
                 if (Log.isLoggable(JobServiceEngine.TAG, 3)) {
-                    Log.d(JobServiceEngine.TAG, "Attempting to ack a job that has already been processed.");
+                    Log.d(
+                            JobServiceEngine.TAG,
+                            "Attempting to ack a job that has already been processed.");
                 }
             } else {
                 try {
@@ -275,7 +323,9 @@ public abstract class JobServiceEngine {
             int jobId = params.getJobId();
             if (callback == null) {
                 if (Log.isLoggable(JobServiceEngine.TAG, 3)) {
-                    Log.d(JobServiceEngine.TAG, "Attempting to ack a job that has already been processed.");
+                    Log.d(
+                            JobServiceEngine.TAG,
+                            "Attempting to ack a job that has already been processed.");
                 }
             } else {
                 try {
@@ -309,20 +359,23 @@ public abstract class JobServiceEngine {
     }
 
     public long getTransferredDownloadBytes(JobParameters params, JobWorkItem item) {
-        if (Compatibility.isChangeEnabled(JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
+        if (Compatibility.isChangeEnabled(
+                JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
             throw new RuntimeException("Not implemented. Must override in a subclass.");
         }
         return 0L;
     }
 
     public long getTransferredUploadBytes(JobParameters params, JobWorkItem item) {
-        if (Compatibility.isChangeEnabled(JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
+        if (Compatibility.isChangeEnabled(
+                JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
             throw new RuntimeException("Not implemented. Must override in a subclass.");
         }
         return 0L;
     }
 
-    public void updateTransferredNetworkBytes(JobParameters params, JobWorkItem item, long downloadBytes, long uploadBytes) {
+    public void updateTransferredNetworkBytes(
+            JobParameters params, JobWorkItem item, long downloadBytes, long uploadBytes) {
         if (params == null) {
             throw new NullPointerException(KnoxZtInternalConst.Event.LogKeys.PARAMS);
         }
@@ -334,7 +387,8 @@ public abstract class JobServiceEngine {
         this.mHandler.obtainMessage(5, args).sendToTarget();
     }
 
-    public void updateEstimatedNetworkBytes(JobParameters params, JobWorkItem item, long downloadBytes, long uploadBytes) {
+    public void updateEstimatedNetworkBytes(
+            JobParameters params, JobWorkItem item, long downloadBytes, long uploadBytes) {
         if (params == null) {
             throw new NullPointerException(KnoxZtInternalConst.Event.LogKeys.PARAMS);
         }
@@ -346,7 +400,11 @@ public abstract class JobServiceEngine {
         this.mHandler.obtainMessage(6, args).sendToTarget();
     }
 
-    public void setNotification(JobParameters params, int notificationId, Notification notification, int jobEndNotificationPolicy) {
+    public void setNotification(
+            JobParameters params,
+            int notificationId,
+            Notification notification,
+            int jobEndNotificationPolicy) {
         if (params == null) {
             throw new NullPointerException(KnoxZtInternalConst.Event.LogKeys.PARAMS);
         }

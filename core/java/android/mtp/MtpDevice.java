@@ -6,8 +6,11 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.os.CancellationSignal;
 import android.os.ParcelFileDescriptor;
 import android.os.UserManager;
+
 import com.android.internal.util.Preconditions;
+
 import dalvik.system.CloseGuard;
+
 import java.io.IOException;
 
 /* loaded from: classes3.dex */
@@ -38,9 +41,11 @@ public final class MtpDevice {
 
     private native int native_get_parent(int i);
 
-    private native long native_get_partial_object(int i, long j, long j2, byte[] bArr) throws IOException;
+    private native long native_get_partial_object(int i, long j, long j2, byte[] bArr)
+            throws IOException;
 
-    private native int native_get_partial_object_64(int i, long j, long j2, byte[] bArr) throws IOException;
+    private native int native_get_partial_object_64(int i, long j, long j2, byte[] bArr)
+            throws IOException;
 
     private native int native_get_storage_id(int i);
 
@@ -83,7 +88,10 @@ public final class MtpDevice {
                 try {
                     UserManager userManager = (UserManager) context.getSystemService("user");
                     if (!userManager.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER)) {
-                        result = native_open(this.mDevice.getDeviceName(), connection.getFileDescriptor());
+                        result =
+                                native_open(
+                                        this.mDevice.getDeviceName(),
+                                        connection.getFileDescriptor());
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -154,11 +162,13 @@ public final class MtpDevice {
         return native_get_object(objectHandle, objectSize);
     }
 
-    public long getPartialObject(int objectHandle, long offset, long size, byte[] buffer) throws IOException {
+    public long getPartialObject(int objectHandle, long offset, long size, byte[] buffer)
+            throws IOException {
         return native_get_partial_object(objectHandle, offset, size, buffer);
     }
 
-    public long getPartialObject64(int objectHandle, long offset, long size, byte[] buffer) throws IOException {
+    public long getPartialObject64(int objectHandle, long offset, long size, byte[] buffer)
+            throws IOException {
         return native_get_partial_object_64(objectHandle, offset, size, buffer);
     }
 
@@ -206,12 +216,14 @@ public final class MtpDevice {
         final int handle = native_submit_event_request();
         Preconditions.checkState(handle >= 0, "Other thread is reading an event.");
         if (signal != null) {
-            signal.setOnCancelListener(new CancellationSignal.OnCancelListener() { // from class: android.mtp.MtpDevice.1
-                @Override // android.os.CancellationSignal.OnCancelListener
-                public void onCancel() {
-                    MtpDevice.this.native_discard_event_request(handle);
-                }
-            });
+            signal.setOnCancelListener(
+                    new CancellationSignal
+                            .OnCancelListener() { // from class: android.mtp.MtpDevice.1
+                        @Override // android.os.CancellationSignal.OnCancelListener
+                        public void onCancel() {
+                            MtpDevice.this.native_discard_event_request(handle);
+                        }
+                    });
         }
         try {
             return native_reap_event_request(handle);

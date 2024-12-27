@@ -3,6 +3,7 @@ package com.android.server.backup.params;
 import android.app.backup.IBackupManagerMonitor;
 import android.app.backup.IRestoreObserver;
 import android.content.pm.PackageInfo;
+
 import com.android.server.backup.internal.OnTaskFinishedListener;
 import com.android.server.backup.transport.TransportConnection;
 import com.android.server.backup.utils.BackupEligibilityRules;
@@ -21,7 +22,17 @@ public final class RestoreParams {
     public final int pmToken;
     public final long token;
 
-    public RestoreParams(TransportConnection transportConnection, IRestoreObserver iRestoreObserver, IBackupManagerMonitor iBackupManagerMonitor, long j, PackageInfo packageInfo, int i, boolean z, String[] strArr, OnTaskFinishedListener onTaskFinishedListener, BackupEligibilityRules backupEligibilityRules) {
+    public RestoreParams(
+            TransportConnection transportConnection,
+            IRestoreObserver iRestoreObserver,
+            IBackupManagerMonitor iBackupManagerMonitor,
+            long j,
+            PackageInfo packageInfo,
+            int i,
+            boolean z,
+            String[] strArr,
+            OnTaskFinishedListener onTaskFinishedListener,
+            BackupEligibilityRules backupEligibilityRules) {
         this.mTransportConnection = transportConnection;
         this.observer = iRestoreObserver;
         this.monitor = iBackupManagerMonitor;

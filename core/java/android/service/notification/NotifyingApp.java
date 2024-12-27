@@ -3,29 +3,31 @@ package android.service.notification;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateFormat;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class NotifyingApp implements Parcelable, Comparable<NotifyingApp> {
-    public static final Parcelable.Creator<NotifyingApp> CREATOR = new Parcelable.Creator<NotifyingApp>() { // from class: android.service.notification.NotifyingApp.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotifyingApp createFromParcel(Parcel in) {
-            return new NotifyingApp(in);
-        }
+    public static final Parcelable.Creator<NotifyingApp> CREATOR =
+            new Parcelable.Creator<
+                    NotifyingApp>() { // from class: android.service.notification.NotifyingApp.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotifyingApp createFromParcel(Parcel in) {
+                    return new NotifyingApp(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotifyingApp[] newArray(int size) {
-            return new NotifyingApp[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotifyingApp[] newArray(int size) {
+                    return new NotifyingApp[size];
+                }
+            };
     private long mLastNotified;
     private String mPkg;
     private int mUserId;
 
-    public NotifyingApp() {
-    }
+    public NotifyingApp() {}
 
     protected NotifyingApp(Parcel in) {
         this.mUserId = in.readInt();
@@ -80,14 +82,17 @@ public final class NotifyingApp implements Parcelable, Comparable<NotifyingApp> 
             return false;
         }
         NotifyingApp that = (NotifyingApp) o;
-        if (getUserId() == that.getUserId() && getLastNotified() == that.getLastNotified() && Objects.equals(this.mPkg, that.mPkg)) {
+        if (getUserId() == that.getUserId()
+                && getLastNotified() == that.getLastNotified()
+                && Objects.equals(this.mPkg, that.mPkg)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(getUserId()), this.mPkg, Long.valueOf(getLastNotified()));
+        return Objects.hash(
+                Integer.valueOf(getUserId()), this.mPkg, Long.valueOf(getLastNotified()));
     }
 
     @Override // java.lang.Comparable
@@ -102,6 +107,13 @@ public final class NotifyingApp implements Parcelable, Comparable<NotifyingApp> 
     }
 
     public String toString() {
-        return "NotifyingApp{mUserId=" + this.mUserId + ", mPkg='" + this.mPkg + DateFormat.QUOTE + ", mLastNotified=" + this.mLastNotified + '}';
+        return "NotifyingApp{mUserId="
+                + this.mUserId
+                + ", mPkg='"
+                + this.mPkg
+                + DateFormat.QUOTE
+                + ", mLastNotified="
+                + this.mLastNotified
+                + '}';
     }
 }

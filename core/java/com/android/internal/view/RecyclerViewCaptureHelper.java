@@ -5,7 +5,7 @@ import android.os.CancellationSignal;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.internal.view.ScrollCaptureViewHelper;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes5.dex */
@@ -16,13 +16,24 @@ public class RecyclerViewCaptureHelper implements ScrollCaptureViewHelper<ViewGr
     private int mScrollDelta;
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
-    public /* bridge */ /* synthetic */ void onScrollRequested(ViewGroup viewGroup, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer consumer) {
-        onScrollRequested2(viewGroup, rect, rect2, cancellationSignal, (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
+    public /* bridge */ /* synthetic */ void onScrollRequested(
+            ViewGroup viewGroup,
+            Rect rect,
+            Rect rect2,
+            CancellationSignal cancellationSignal,
+            Consumer consumer) {
+        onScrollRequested2(
+                viewGroup,
+                rect,
+                rect2,
+                cancellationSignal,
+                (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
     }
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
     public boolean onAcceptSession(ViewGroup view) {
-        return view.isVisibleToUser() && (view.canScrollVertically(-1) || view.canScrollVertically(1));
+        return view.isVisibleToUser()
+                && (view.canScrollVertically(-1) || view.canScrollVertically(1));
     }
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
@@ -35,7 +46,12 @@ public class RecyclerViewCaptureHelper implements ScrollCaptureViewHelper<ViewGr
     }
 
     /* renamed from: onScrollRequested, reason: avoid collision after fix types in other method */
-    public void onScrollRequested2(ViewGroup recyclerView, Rect scrollBounds, Rect requestRect, CancellationSignal signal, Consumer<ScrollCaptureViewHelper.ScrollResult> resultConsumer) {
+    public void onScrollRequested2(
+            ViewGroup recyclerView,
+            Rect scrollBounds,
+            Rect requestRect,
+            CancellationSignal signal,
+            Consumer<ScrollCaptureViewHelper.ScrollResult> resultConsumer) {
         ScrollCaptureViewHelper.ScrollResult result = new ScrollCaptureViewHelper.ScrollResult();
         result.requestedArea = new Rect(requestRect);
         result.scrollDelta = this.mScrollDelta;
@@ -58,7 +74,10 @@ public class RecyclerViewCaptureHelper implements ScrollCaptureViewHelper<ViewGr
         recyclerView.offsetRectIntoDescendantCoords(anchor, requestedContentBounds);
         int prevAnchorTop = anchor.getTop();
         Rect input = new Rect(requestedContentBounds);
-        int remainingHeight = ((recyclerView.getHeight() - recyclerView.getPaddingTop()) - recyclerView.getPaddingBottom()) - input.height();
+        int remainingHeight =
+                ((recyclerView.getHeight() - recyclerView.getPaddingTop())
+                                - recyclerView.getPaddingBottom())
+                        - input.height();
         if (remainingHeight > 0) {
             input.inset(0, (-remainingHeight) / 2);
         }

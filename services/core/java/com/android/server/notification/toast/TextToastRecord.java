@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.internal.statusbar.IStatusBar;
 import com.android.internal.util.Preconditions;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
@@ -21,7 +22,19 @@ public final class TextToastRecord extends ToastRecord {
     public final StatusBarManagerInternal mStatusBar;
     public final CharSequence text;
 
-    public TextToastRecord(NotificationManagerService notificationManagerService, StatusBarManagerInternal statusBarManagerInternal, int i, int i2, String str, boolean z, IBinder iBinder, CharSequence charSequence, int i3, Binder binder, int i4, ITransientNotificationCallback iTransientNotificationCallback) {
+    public TextToastRecord(
+            NotificationManagerService notificationManagerService,
+            StatusBarManagerInternal statusBarManagerInternal,
+            int i,
+            int i2,
+            String str,
+            boolean z,
+            IBinder iBinder,
+            CharSequence charSequence,
+            int i3,
+            Binder binder,
+            int i4,
+            ITransientNotificationCallback iTransientNotificationCallback) {
         super(notificationManagerService, i, i2, str, z, iBinder, i3, binder, i4);
         this.mStatusBar = statusBarManagerInternal;
         this.mCallback = iTransientNotificationCallback;
@@ -55,7 +68,10 @@ public final class TextToastRecord extends ToastRecord {
         }
         StatusBarManagerInternal statusBarManagerInternal = this.mStatusBar;
         if (statusBarManagerInternal == null) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("StatusBar not available to show text toast for package "), this.pkg, "NotificationService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("StatusBar not available to show text toast for package "),
+                    this.pkg,
+                    "NotificationService");
             return false;
         }
         int i = this.uid;
@@ -71,7 +87,8 @@ public final class TextToastRecord extends ToastRecord {
             return true;
         }
         try {
-            iStatusBar.showToast(i, str, iBinder, charSequence, binder, i2, iTransientNotificationCallback, i3);
+            iStatusBar.showToast(
+                    i, str, iBinder, charSequence, binder, i2, iTransientNotificationCallback, i3);
             return true;
         } catch (RemoteException unused) {
             return true;

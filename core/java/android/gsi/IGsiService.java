@@ -1,13 +1,12 @@
 package android.gsi;
 
-import android.gsi.IGsiServiceCallback;
-import android.gsi.IImageService;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -29,7 +28,8 @@ public interface IGsiService extends IInterface {
 
     boolean commitGsiChunkFromAshmem(long j) throws RemoteException;
 
-    boolean commitGsiChunkFromStream(ParcelFileDescriptor parcelFileDescriptor, long j) throws RemoteException;
+    boolean commitGsiChunkFromStream(ParcelFileDescriptor parcelFileDescriptor, long j)
+            throws RemoteException;
 
     int createPartition(String str, long j, boolean z) throws RemoteException;
 
@@ -39,7 +39,8 @@ public interface IGsiService extends IInterface {
 
     int enableGsi(boolean z, String str) throws RemoteException;
 
-    void enableGsiAsync(boolean z, String str, IGsiServiceCallback iGsiServiceCallback) throws RemoteException;
+    void enableGsiAsync(boolean z, String str, IGsiServiceCallback iGsiServiceCallback)
+            throws RemoteException;
 
     String getActiveDsuSlot() throws RemoteException;
 
@@ -75,7 +76,8 @@ public interface IGsiService extends IInterface {
 
     public static class Default implements IGsiService {
         @Override // android.gsi.IGsiService
-        public boolean commitGsiChunkFromStream(ParcelFileDescriptor stream, long bytes) throws RemoteException {
+        public boolean commitGsiChunkFromStream(ParcelFileDescriptor stream, long bytes)
+                throws RemoteException {
             return false;
         }
 
@@ -100,8 +102,8 @@ public interface IGsiService extends IInterface {
         }
 
         @Override // android.gsi.IGsiService
-        public void enableGsiAsync(boolean oneShot, String dsuSlot, IGsiServiceCallback result) throws RemoteException {
-        }
+        public void enableGsiAsync(boolean oneShot, String dsuSlot, IGsiServiceCallback result)
+                throws RemoteException {}
 
         @Override // android.gsi.IGsiService
         public boolean isGsiEnabled() throws RemoteException {
@@ -124,8 +126,7 @@ public interface IGsiService extends IInterface {
         }
 
         @Override // android.gsi.IGsiService
-        public void removeGsiAsync(IGsiServiceCallback result) throws RemoteException {
-        }
+        public void removeGsiAsync(IGsiServiceCallback result) throws RemoteException {}
 
         @Override // android.gsi.IGsiService
         public boolean disableGsi() throws RemoteException {
@@ -168,7 +169,8 @@ public interface IGsiService extends IInterface {
         }
 
         @Override // android.gsi.IGsiService
-        public int createPartition(String name, long size, boolean readOnly) throws RemoteException {
+        public int createPartition(String name, long size, boolean readOnly)
+                throws RemoteException {
             return 0;
         }
 
@@ -208,7 +210,7 @@ public interface IGsiService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGsiService {
+    public abstract static class Stub extends Binder implements IGsiService {
         static final int TRANSACTION_cancelGsiInstall = 8;
         static final int TRANSACTION_closeInstall = 19;
         static final int TRANSACTION_closePartition = 21;
@@ -321,7 +323,8 @@ public interface IGsiService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGsiService.DESCRIPTOR);
             }
@@ -331,7 +334,9 @@ public interface IGsiService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg1 = data.readLong();
                     data.enforceNoDataAvail();
                     boolean _result = commitGsiChunkFromStream(_arg0, _arg1);
@@ -344,7 +349,9 @@ public interface IGsiService extends IInterface {
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 3:
-                    ParcelFileDescriptor _arg02 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg02 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg12 = data.readLong();
                     data.enforceNoDataAvail();
                     boolean _result3 = setGsiAshmem(_arg02, _arg12);
@@ -369,7 +376,8 @@ public interface IGsiService extends IInterface {
                 case 6:
                     boolean _arg05 = data.readBoolean();
                     String _arg14 = data.readString();
-                    IGsiServiceCallback _arg2 = IGsiServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IGsiServiceCallback _arg2 =
+                            IGsiServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     enableGsiAsync(_arg05, _arg14, _arg2);
                     return true;
@@ -394,7 +402,8 @@ public interface IGsiService extends IInterface {
                     reply.writeBoolean(_result9);
                     return true;
                 case 11:
-                    IGsiServiceCallback _arg06 = IGsiServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IGsiServiceCallback _arg06 =
+                            IGsiServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeGsiAsync(_arg06);
                     return true;
@@ -508,7 +517,8 @@ public interface IGsiService extends IInterface {
             }
 
             @Override // android.gsi.IGsiService
-            public boolean commitGsiChunkFromStream(ParcelFileDescriptor stream, long bytes) throws RemoteException {
+            public boolean commitGsiChunkFromStream(ParcelFileDescriptor stream, long bytes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -542,7 +552,8 @@ public interface IGsiService extends IInterface {
             }
 
             @Override // android.gsi.IGsiService
-            public boolean setGsiAshmem(ParcelFileDescriptor stream, long size) throws RemoteException {
+            public boolean setGsiAshmem(ParcelFileDescriptor stream, long size)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -595,7 +606,8 @@ public interface IGsiService extends IInterface {
             }
 
             @Override // android.gsi.IGsiService
-            public void enableGsiAsync(boolean oneShot, String dsuSlot, IGsiServiceCallback result) throws RemoteException {
+            public void enableGsiAsync(boolean oneShot, String dsuSlot, IGsiServiceCallback result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IGsiService.DESCRIPTOR);
@@ -814,7 +826,8 @@ public interface IGsiService extends IInterface {
             }
 
             @Override // android.gsi.IGsiService
-            public int createPartition(String name, long size, boolean readOnly) throws RemoteException {
+            public int createPartition(String name, long size, boolean readOnly)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -874,7 +887,8 @@ public interface IGsiService extends IInterface {
                     _data.writeString(prefix);
                     this.mRemote.transact(23, _data, _reply, 0);
                     _reply.readException();
-                    IImageService _result = IImageService.Stub.asInterface(_reply.readStrongBinder());
+                    IImageService _result =
+                            IImageService.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

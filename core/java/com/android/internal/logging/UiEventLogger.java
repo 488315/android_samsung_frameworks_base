@@ -17,7 +17,8 @@ public interface UiEventLogger {
 
     void logWithInstanceId(UiEventEnum uiEventEnum, int i, String str, InstanceId instanceId);
 
-    void logWithInstanceIdAndPosition(UiEventEnum uiEventEnum, int i, String str, InstanceId instanceId, int i2);
+    void logWithInstanceIdAndPosition(
+            UiEventEnum uiEventEnum, int i, String str, InstanceId instanceId, int i2);
 
     void logWithPosition(UiEventEnum uiEventEnum, int i, String str, int i2);
 }

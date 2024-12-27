@@ -4,16 +4,19 @@ import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
 import android.util.Log;
+
 import com.android.internal.util.ArrayUtils;
+
+import libcore.io.IoBridge;
+import libcore.io.IoUtils;
+import libcore.io.Memory;
+import libcore.io.Streams;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import libcore.io.IoBridge;
-import libcore.io.IoUtils;
-import libcore.io.Memory;
-import libcore.io.Streams;
 
 @Deprecated
 /* loaded from: classes3.dex */
@@ -30,7 +33,8 @@ public class FileBridge extends Thread {
 
     public FileBridge() {
         try {
-            ParcelFileDescriptor[] fds = ParcelFileDescriptor.createSocketPair(OsConstants.SOCK_STREAM);
+            ParcelFileDescriptor[] fds =
+                    ParcelFileDescriptor.createSocketPair(OsConstants.SOCK_STREAM);
             this.mServer = fds[0];
             this.mClient = fds[1];
         } catch (IOException e) {
@@ -70,9 +74,15 @@ public class FileBridge extends Thread {
                     if (cmd == 1) {
                         int len = Memory.peekInt(temp, 4, ByteOrder.BIG_ENDIAN);
                         while (len > 0) {
-                            int n = IoBridge.read(this.mServer.getFileDescriptor(), temp, 0, Math.min(temp.length, len));
+                            int n =
+                                    IoBridge.read(
+                                            this.mServer.getFileDescriptor(),
+                                            temp,
+                                            0,
+                                            Math.min(temp.length, len));
                             if (n == -1) {
-                                throw new IOException("Unexpected EOF; still expected " + len + " bytes");
+                                throw new IOException(
+                                        "Unexpected EOF; still expected " + len + " bytes");
                             }
                             IoBridge.write(this.mTarget.getFileDescriptor(), temp, 0, n);
                             len -= n;
@@ -130,7 +140,8 @@ public class FileBridge extends Thread {
         private void writeCommandAndBlock(int cmd, String cmdString) throws IOException {
             Memory.pokeInt(this.mTemp, 0, cmd, ByteOrder.BIG_ENDIAN);
             IoBridge.write(this.mClient, this.mTemp, 0, 8);
-            if (IoBridge.read(this.mClient, this.mTemp, 0, 8) == 8 && Memory.peekInt(this.mTemp, 0, ByteOrder.BIG_ENDIAN) == cmd) {
+            if (IoBridge.read(this.mClient, this.mTemp, 0, 8) == 8
+                    && Memory.peekInt(this.mTemp, 0, ByteOrder.BIG_ENDIAN) == cmd) {
             } else {
                 throw new IOException("Failed to execute " + cmdString + " across bridge");
             }

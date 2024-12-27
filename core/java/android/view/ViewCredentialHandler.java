@@ -10,7 +10,9 @@ public class ViewCredentialHandler {
     private OutcomeReceiver<GetCredentialResponse, GetCredentialException> mCallback;
     private GetCredentialRequest mRequest;
 
-    ViewCredentialHandler(GetCredentialRequest request, OutcomeReceiver<GetCredentialResponse, GetCredentialException> callback) {
+    ViewCredentialHandler(
+            GetCredentialRequest request,
+            OutcomeReceiver<GetCredentialResponse, GetCredentialException> callback) {
         this.mRequest = request;
         this.mCallback = callback;
     }

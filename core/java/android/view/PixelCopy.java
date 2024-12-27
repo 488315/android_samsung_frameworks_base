@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.HardwareRenderer;
 import android.graphics.Rect;
 import android.os.Handler;
-import android.view.PixelCopy;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -20,26 +20,43 @@ public final class PixelCopy {
     public static final int SUCCESS = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CopyResultStatus {
-    }
+    public @interface CopyResultStatus {}
 
     public interface OnPixelCopyFinishedListener {
         void onPixelCopyFinished(int i);
     }
 
-    public static void request(SurfaceView source, Bitmap dest, OnPixelCopyFinishedListener listener, Handler listenerThread) {
+    public static void request(
+            SurfaceView source,
+            Bitmap dest,
+            OnPixelCopyFinishedListener listener,
+            Handler listenerThread) {
         request(source.getHolder().getSurface(), dest, listener, listenerThread);
     }
 
-    public static void request(SurfaceView source, Rect srcRect, Bitmap dest, OnPixelCopyFinishedListener listener, Handler listenerThread) {
+    public static void request(
+            SurfaceView source,
+            Rect srcRect,
+            Bitmap dest,
+            OnPixelCopyFinishedListener listener,
+            Handler listenerThread) {
         request(source.getHolder().getSurface(), srcRect, dest, listener, listenerThread);
     }
 
-    public static void request(Surface source, Bitmap dest, OnPixelCopyFinishedListener listener, Handler listenerThread) {
+    public static void request(
+            Surface source,
+            Bitmap dest,
+            OnPixelCopyFinishedListener listener,
+            Handler listenerThread) {
         request(source, (Rect) null, dest, listener, listenerThread);
     }
 
-    public static void request(Surface source, Rect srcRect, Bitmap dest, OnPixelCopyFinishedListener listener, Handler listenerThread) {
+    public static void request(
+            Surface source,
+            Rect srcRect,
+            Bitmap dest,
+            OnPixelCopyFinishedListener listener,
+            Handler listenerThread) {
         validateBitmapDest(dest);
         if (!source.isValid()) {
             throw new IllegalArgumentException("Surface isn't valid, source.isValid() == false");
@@ -47,7 +64,8 @@ public final class PixelCopy {
         if (srcRect != null && srcRect.isEmpty()) {
             throw new IllegalArgumentException("sourceRect is empty");
         }
-        HardwareRenderer.copySurfaceInto(source, new AnonymousClass1(srcRect, dest, listenerThread, listener));
+        HardwareRenderer.copySurfaceInto(
+                source, new AnonymousClass1(srcRect, dest, listenerThread, listener));
     }
 
     /* renamed from: android.view.PixelCopy$1, reason: invalid class name */
@@ -56,7 +74,11 @@ public final class PixelCopy {
         final /* synthetic */ Handler val$listenerThread;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        AnonymousClass1(Rect srcRect, Bitmap destinationBitmap, Handler handler, OnPixelCopyFinishedListener onPixelCopyFinishedListener) {
+        AnonymousClass1(
+                Rect srcRect,
+                Bitmap destinationBitmap,
+                Handler handler,
+                OnPixelCopyFinishedListener onPixelCopyFinishedListener) {
             super(srcRect, destinationBitmap);
             this.val$listenerThread = handler;
             this.val$listener = onPixelCopyFinishedListener;
@@ -66,24 +88,40 @@ public final class PixelCopy {
         public void onCopyFinished(final int result) {
             Handler handler = this.val$listenerThread;
             final OnPixelCopyFinishedListener onPixelCopyFinishedListener = this.val$listener;
-            handler.post(new Runnable() { // from class: android.view.PixelCopy$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    PixelCopy.OnPixelCopyFinishedListener.this.onPixelCopyFinished(result);
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                                     // android.view.PixelCopy$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            PixelCopy.OnPixelCopyFinishedListener.this.onPixelCopyFinished(result);
+                        }
+                    });
         }
     }
 
-    public static void request(Window source, Bitmap dest, OnPixelCopyFinishedListener listener, Handler listenerThread) {
+    public static void request(
+            Window source,
+            Bitmap dest,
+            OnPixelCopyFinishedListener listener,
+            Handler listenerThread) {
         request(source, (Rect) null, dest, listener, listenerThread);
     }
 
-    public static void request(Window source, Rect srcRect, Bitmap dest, OnPixelCopyFinishedListener listener, Handler listenerThread) {
+    public static void request(
+            Window source,
+            Rect srcRect,
+            Bitmap dest,
+            OnPixelCopyFinishedListener listener,
+            Handler listenerThread) {
         validateBitmapDest(dest);
         Rect insets = new Rect();
         Surface surface = sourceForWindow(source, insets);
-        request(surface, adjustSourceRectForInsets(insets, srcRect), dest, listener, listenerThread);
+        request(
+                surface,
+                adjustSourceRectForInsets(insets, srcRect),
+                dest,
+                listener,
+                listenerThread);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -112,7 +150,11 @@ public final class PixelCopy {
         if (root != null) {
             surface = root.mSurface;
             Rect surfaceInsets = root.mWindowAttributes.surfaceInsets;
-            outInsets.set(surfaceInsets.left, surfaceInsets.top, root.mWidth + surfaceInsets.left, root.mHeight + surfaceInsets.top);
+            outInsets.set(
+                    surfaceInsets.left,
+                    surfaceInsets.top,
+                    root.mWidth + surfaceInsets.left,
+                    root.mHeight + surfaceInsets.top);
         }
         if (surface == null || !surface.isValid()) {
             throw new IllegalArgumentException("Window doesn't have a backing surface!");
@@ -146,7 +188,8 @@ public final class PixelCopy {
 
         private void validateStatus() {
             if (this.mStatus != 0) {
-                throw new IllegalStateException("Copy request didn't succeed, status = " + this.mStatus);
+                throw new IllegalStateException(
+                        "Copy request didn't succeed, status = " + this.mStatus);
             }
         }
 
@@ -182,7 +225,8 @@ public final class PixelCopy {
 
             public static Builder ofWindow(View source) {
                 if (source == null || !source.isAttachedToWindow()) {
-                    throw new IllegalArgumentException("View must not be null & must be attached to window");
+                    throw new IllegalArgumentException(
+                            "View must not be null & must be attached to window");
                 }
                 Rect insets = new Rect();
                 Surface surface = null;
@@ -247,14 +291,23 @@ public final class PixelCopy {
 
         public void request(Executor callbackExecutor, final Consumer<Result> listener) {
             if (!this.mSource.isValid()) {
-                callbackExecutor.execute(new Runnable() { // from class: android.view.PixelCopy$Request$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        listener.accept(new PixelCopy.Result(4, null));
-                    }
-                });
+                callbackExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.view.PixelCopy$Request$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                listener.accept(new PixelCopy.Result(4, null));
+                            }
+                        });
             } else {
-                HardwareRenderer.copySurfaceInto(this.mSource, new AnonymousClass1(PixelCopy.adjustSourceRectForInsets(this.mSourceInsets, this.mSrcRect), this.mDest, callbackExecutor, listener));
+                HardwareRenderer.copySurfaceInto(
+                        this.mSource,
+                        new AnonymousClass1(
+                                PixelCopy.adjustSourceRectForInsets(
+                                        this.mSourceInsets, this.mSrcRect),
+                                this.mDest,
+                                callbackExecutor,
+                                listener));
             }
         }
 
@@ -264,7 +317,8 @@ public final class PixelCopy {
             final /* synthetic */ Consumer val$listener;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            AnonymousClass1(Rect srcRect, Bitmap destinationBitmap, Executor executor, Consumer consumer) {
+            AnonymousClass1(
+                    Rect srcRect, Bitmap destinationBitmap, Executor executor, Consumer consumer) {
                 super(srcRect, destinationBitmap);
                 this.val$callbackExecutor = executor;
                 this.val$listener = consumer;
@@ -279,20 +333,23 @@ public final class PixelCopy {
             public void onCopyFinished(final int result) {
                 Executor executor = this.val$callbackExecutor;
                 final Consumer consumer = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.view.PixelCopy$Request$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        PixelCopy.Request.AnonymousClass1.this.lambda$onCopyFinished$0(consumer, result);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.view.PixelCopy$Request$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                PixelCopy.Request.AnonymousClass1.this.lambda$onCopyFinished$0(
+                                        consumer, result);
+                            }
+                        });
             }
         }
     }
 
-    public static void request(Request request, Executor callbackExecutor, Consumer<Result> listener) {
+    public static void request(
+            Request request, Executor callbackExecutor, Consumer<Result> listener) {
         request.request(callbackExecutor, listener);
     }
 
-    private PixelCopy() {
-    }
+    private PixelCopy() {}
 }

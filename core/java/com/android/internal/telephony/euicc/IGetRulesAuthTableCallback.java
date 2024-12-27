@@ -9,14 +9,14 @@ import android.telephony.euicc.EuiccRulesAuthTable;
 
 /* loaded from: classes5.dex */
 public interface IGetRulesAuthTableCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.euicc.IGetRulesAuthTableCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.euicc.IGetRulesAuthTableCallback";
 
     void onComplete(int i, EuiccRulesAuthTable euiccRulesAuthTable) throws RemoteException;
 
     public static class Default implements IGetRulesAuthTableCallback {
         @Override // com.android.internal.telephony.euicc.IGetRulesAuthTableCallback
-        public void onComplete(int resultCode, EuiccRulesAuthTable rat) throws RemoteException {
-        }
+        public void onComplete(int resultCode, EuiccRulesAuthTable rat) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IGetRulesAuthTableCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetRulesAuthTableCallback {
+    public abstract static class Stub extends Binder implements IGetRulesAuthTableCallback {
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IGetRulesAuthTableCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGetRulesAuthTableCallback.DESCRIPTOR);
             }
@@ -73,7 +74,8 @@ public interface IGetRulesAuthTableCallback extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    EuiccRulesAuthTable _arg1 = (EuiccRulesAuthTable) data.readTypedObject(EuiccRulesAuthTable.CREATOR);
+                    EuiccRulesAuthTable _arg1 =
+                            (EuiccRulesAuthTable) data.readTypedObject(EuiccRulesAuthTable.CREATOR);
                     data.enforceNoDataAvail();
                     onComplete(_arg0, _arg1);
                     return true;

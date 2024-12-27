@@ -5,8 +5,7 @@ import java.util.NoSuchElementException;
 
 /* loaded from: classes5.dex */
 public final class Arrays {
-    private Arrays() {
-    }
+    private Arrays() {}
 
     public static boolean areAllZeroes(byte[] buf, int off, int len) {
         int bits = 0;
@@ -24,7 +23,8 @@ public final class Arrays {
         return java.util.Arrays.equals(a, b);
     }
 
-    public static boolean areEqual(byte[] a, int aFromIndex, int aToIndex, byte[] b, int bFromIndex, int bToIndex) {
+    public static boolean areEqual(
+            byte[] a, int aFromIndex, int aToIndex, byte[] b, int bFromIndex, int bToIndex) {
         int aLength = aToIndex - aFromIndex;
         int bLength = bToIndex - bFromIndex;
         if (aLength != bLength) {
@@ -625,7 +625,7 @@ public final class Arrays {
 
     public static byte[] append(byte[] a, byte b) {
         if (a == null) {
-            return new byte[]{b};
+            return new byte[] {b};
         }
         int length = a.length;
         byte[] result = new byte[length + 1];
@@ -636,7 +636,7 @@ public final class Arrays {
 
     public static short[] append(short[] a, short b) {
         if (a == null) {
-            return new short[]{b};
+            return new short[] {b};
         }
         int length = a.length;
         short[] result = new short[length + 1];
@@ -647,7 +647,7 @@ public final class Arrays {
 
     public static int[] append(int[] a, int b) {
         if (a == null) {
-            return new int[]{b};
+            return new int[] {b};
         }
         int length = a.length;
         int[] result = new int[length + 1];
@@ -658,7 +658,7 @@ public final class Arrays {
 
     public static String[] append(String[] a, String b) {
         if (a == null) {
-            return new String[]{b};
+            return new String[] {b};
         }
         int length = a.length;
         String[] result = new String[length + 1];
@@ -763,7 +763,7 @@ public final class Arrays {
 
     public static byte[] prepend(byte[] a, byte b) {
         if (a == null) {
-            return new byte[]{b};
+            return new byte[] {b};
         }
         int length = a.length;
         byte[] result = new byte[length + 1];
@@ -774,7 +774,7 @@ public final class Arrays {
 
     public static short[] prepend(short[] a, short b) {
         if (a == null) {
-            return new short[]{b};
+            return new short[] {b};
         }
         int length = a.length;
         short[] result = new short[length + 1];
@@ -785,7 +785,7 @@ public final class Arrays {
 
     public static int[] prepend(int[] a, int b) {
         if (a == null) {
-            return new int[]{b};
+            return new int[] {b};
         }
         int length = a.length;
         int[] result = new int[length + 1];

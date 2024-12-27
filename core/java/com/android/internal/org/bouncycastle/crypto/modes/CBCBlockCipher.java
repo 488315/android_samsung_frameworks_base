@@ -36,7 +36,8 @@ public class CBCBlockCipher implements BlockCipher {
             ParametersWithIV ivParam = (ParametersWithIV) params;
             byte[] iv = ivParam.getIV();
             if (iv.length != this.blockSize) {
-                throw new IllegalArgumentException("initialisation vector must be the same length as block size");
+                throw new IllegalArgumentException(
+                        "initialisation vector must be the same length as block size");
             }
             System.arraycopy(iv, 0, this.IV, 0, iv.length);
             reset();
@@ -45,7 +46,8 @@ public class CBCBlockCipher implements BlockCipher {
                 return;
             } else {
                 if (oldEncrypting != encrypting) {
-                    throw new IllegalArgumentException("cannot change encrypting state without providing key.");
+                    throw new IllegalArgumentException(
+                            "cannot change encrypting state without providing key.");
                 }
                 return;
             }
@@ -54,7 +56,8 @@ public class CBCBlockCipher implements BlockCipher {
         if (params != null) {
             this.cipher.init(encrypting, params);
         } else if (oldEncrypting != encrypting) {
-            throw new IllegalArgumentException("cannot change encrypting state without providing key.");
+            throw new IllegalArgumentException(
+                    "cannot change encrypting state without providing key.");
         }
     }
 
@@ -69,8 +72,11 @@ public class CBCBlockCipher implements BlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BlockCipher
-    public int processBlock(byte[] in, int inOff, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
-        return this.encrypting ? encryptBlock(in, inOff, out, outOff) : decryptBlock(in, inOff, out, outOff);
+    public int processBlock(byte[] in, int inOff, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
+        return this.encrypting
+                ? encryptBlock(in, inOff, out, outOff)
+                : decryptBlock(in, inOff, out, outOff);
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BlockCipher
@@ -80,7 +86,8 @@ public class CBCBlockCipher implements BlockCipher {
         this.cipher.reset();
     }
 
-    private int encryptBlock(byte[] in, int inOff, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    private int encryptBlock(byte[] in, int inOff, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         if (this.blockSize + inOff > in.length) {
             throw new DataLengthException("input buffer too short");
         }
@@ -93,7 +100,8 @@ public class CBCBlockCipher implements BlockCipher {
         return length;
     }
 
-    private int decryptBlock(byte[] in, int inOff, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    private int decryptBlock(byte[] in, int inOff, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         if (this.blockSize + inOff > in.length) {
             throw new DataLengthException("input buffer too short");
         }

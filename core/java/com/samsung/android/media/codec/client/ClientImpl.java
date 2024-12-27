@@ -2,8 +2,10 @@ package com.samsung.android.media.codec.client;
 
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.samsung.android.media.codec.IVideoTranscodingService;
 import com.samsung.android.media.codec.SemVideoTranscodingService;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Map;
@@ -25,7 +27,12 @@ public abstract class ClientImpl {
 
     public abstract void transcode();
 
-    public ClientImpl(IVideoTranscodingService transcodingService, String id, int mode, Map args, SemVideoTranscodingService.ProgressCallback progressCallback) {
+    public ClientImpl(
+            IVideoTranscodingService transcodingService,
+            String id,
+            int mode,
+            Map args,
+            SemVideoTranscodingService.ProgressCallback progressCallback) {
         this.mTranscodingService = transcodingService;
         this.mID = id;
         this.mMode = mode;

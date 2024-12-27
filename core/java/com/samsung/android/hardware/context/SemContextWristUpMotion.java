@@ -7,25 +7,26 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes6.dex */
 public class SemContextWristUpMotion extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextWristUpMotion> CREATOR = new Parcelable.Creator<SemContextWristUpMotion>() { // from class: com.samsung.android.hardware.context.SemContextWristUpMotion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextWristUpMotion createFromParcel(Parcel in) {
-            return new SemContextWristUpMotion(in);
-        }
+    public static final Parcelable.Creator<SemContextWristUpMotion> CREATOR =
+            new Parcelable.Creator<
+                    SemContextWristUpMotion>() { // from class:
+                                                 // com.samsung.android.hardware.context.SemContextWristUpMotion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextWristUpMotion createFromParcel(Parcel in) {
+                    return new SemContextWristUpMotion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextWristUpMotion[] newArray(int size) {
-            return new SemContextWristUpMotion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextWristUpMotion[] newArray(int size) {
+                    return new SemContextWristUpMotion[size];
+                }
+            };
 
-    @Deprecated
-    public static final int NONE = 0;
+    @Deprecated public static final int NONE = 0;
 
-    @Deprecated
-    public static final int NORMAL = 1;
+    @Deprecated public static final int NORMAL = 1;
     private Bundle mContext;
 
     SemContextWristUpMotion() {

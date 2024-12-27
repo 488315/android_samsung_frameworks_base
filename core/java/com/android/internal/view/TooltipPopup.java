@@ -16,7 +16,9 @@ import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.rune.ViewRune;
 
@@ -32,19 +34,32 @@ public class TooltipPopup {
     private final Rect mTmpDisplayFrame = new Rect();
     private final int[] mTmpAnchorPos = new int[2];
     private final int[] mTmpAppPos = new int[2];
-    private final View.OnLayoutChangeListener mOnLayoutChangeListener = new View.OnLayoutChangeListener() { // from class: com.android.internal.view.TooltipPopup$$ExternalSyntheticLambda0
-        @Override // android.view.View.OnLayoutChangeListener
-        public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-            TooltipPopup.this.lambda$new$0(view, i, i2, i3, i4, i5, i6, i7, i8);
-        }
-    };
+    private final View.OnLayoutChangeListener mOnLayoutChangeListener =
+            new View
+                    .OnLayoutChangeListener() { // from class:
+                                                // com.android.internal.view.TooltipPopup$$ExternalSyntheticLambda0
+                @Override // android.view.View.OnLayoutChangeListener
+                public final void onLayoutChange(
+                        View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
+                    TooltipPopup.this.lambda$new$0(view, i, i2, i3, i4, i5, i6, i7, i8);
+                }
+            };
     private boolean mIsDexMode = false;
     private boolean mIsDexStandAlone = false;
     private boolean mIsCaptionMenuButton = false;
     private boolean mIsCaptionPopupButton = false;
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$new$0(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+    public /* synthetic */ void lambda$new$0(
+            View v,
+            int left,
+            int top,
+            int right,
+            int bottom,
+            int oldLeft,
+            int oldTop,
+            int oldRight,
+            int oldBottom) {
         int orientation = v.getResources().getConfiguration().orientation;
         if (this.mLastOrientation != orientation && this.mContentView != null && isShowing()) {
             this.mLastOrientation = orientation;
@@ -65,7 +80,12 @@ public class TooltipPopup {
                 this.mContext = new ContextThemeWrapper(context, outValue.data);
             }
         }
-        this.mContentView = this.mIsDeviceDefault ? LayoutInflater.from(this.mContext).inflate(R.layout.sem_tooltip, (ViewGroup) null) : LayoutInflater.from(this.mContext).inflate(R.layout.tooltip, (ViewGroup) null);
+        this.mContentView =
+                this.mIsDeviceDefault
+                        ? LayoutInflater.from(this.mContext)
+                                .inflate(R.layout.sem_tooltip, (ViewGroup) null)
+                        : LayoutInflater.from(this.mContext)
+                                .inflate(R.layout.tooltip, (ViewGroup) null);
         this.mMessageView = (TextView) this.mContentView.findViewById(16908299);
         this.mLastOrientation = context.getResources().getConfiguration().orientation;
         this.mLayoutParams.setTitle(this.mContext.getString(R.string.tooltip_popup_title));
@@ -78,7 +98,12 @@ public class TooltipPopup {
         this.mLayoutParams.flags = 24;
     }
 
-    public void show(View anchorView, int anchorX, int anchorY, boolean fromTouch, CharSequence tooltipText) {
+    public void show(
+            View anchorView,
+            int anchorX,
+            int anchorY,
+            boolean fromTouch,
+            CharSequence tooltipText) {
         if (ViewRune.WIDGET_HOVER_POPUP && anchorView == null) {
             Log.e(TAG, "show - anchorView is null");
             return;
@@ -100,7 +125,8 @@ public class TooltipPopup {
         }
         this.mMessageView.lambda$setTextAsync$0(tooltipText);
         computePosition(anchorView, anchorX, anchorY, fromTouch, this.mLayoutParams);
-        if (CoreRune.MW_CAPTION_SHELL && (this.mIsCaptionMenuButton || this.mIsCaptionPopupButton)) {
+        if (CoreRune.MW_CAPTION_SHELL
+                && (this.mIsCaptionMenuButton || this.mIsCaptionPopupButton)) {
             this.mLayoutParams.multiWindowFlags |= 8;
             if (this.mIsCaptionPopupButton) {
                 this.mLayoutParams.multiWindowFlags |= 2;
@@ -129,14 +155,22 @@ public class TooltipPopup {
         return this.mContentView.getParent() != null;
     }
 
-    private void computePosition(View anchorView, int anchorX, int anchorY, boolean fromTouch, WindowManager.LayoutParams outParams) {
+    private void computePosition(
+            View anchorView,
+            int anchorX,
+            int anchorY,
+            boolean fromTouch,
+            WindowManager.LayoutParams outParams) {
         int offsetX;
         int offsetAbove;
         int offsetBelow;
         View appView;
         int leftInset;
         outParams.token = anchorView.getApplicationWindowToken();
-        int tooltipPreciseAnchorThreshold = this.mContext.getResources().getDimensionPixelOffset(R.dimen.tooltip_precise_anchor_threshold);
+        int tooltipPreciseAnchorThreshold =
+                this.mContext
+                        .getResources()
+                        .getDimensionPixelOffset(R.dimen.tooltip_precise_anchor_threshold);
         if (this.mIsDeviceDefault) {
             offsetX = anchorView.getWidth() / 2;
         } else {
@@ -149,7 +183,10 @@ public class TooltipPopup {
             }
         }
         if (anchorView.getHeight() >= tooltipPreciseAnchorThreshold) {
-            int offsetExtra = this.mContext.getResources().getDimensionPixelOffset(R.dimen.tooltip_precise_anchor_extra_offset);
+            int offsetExtra =
+                    this.mContext
+                            .getResources()
+                            .getDimensionPixelOffset(R.dimen.tooltip_precise_anchor_extra_offset);
             int offsetBelow2 = anchorY + offsetExtra;
             int offsetAbove2 = anchorY - offsetExtra;
             offsetAbove = offsetAbove2;
@@ -160,8 +197,16 @@ public class TooltipPopup {
             offsetBelow = offsetBelow3;
         }
         outParams.gravity = 49;
-        int tooltipOffset = this.mContext.getResources().getDimensionPixelOffset(fromTouch ? R.dimen.tooltip_y_offset_touch : R.dimen.tooltip_y_offset_non_touch);
-        View appView2 = WindowManagerGlobal.getInstance().getWindowView(anchorView.getApplicationWindowToken());
+        int tooltipOffset =
+                this.mContext
+                        .getResources()
+                        .getDimensionPixelOffset(
+                                fromTouch
+                                        ? R.dimen.tooltip_y_offset_touch
+                                        : R.dimen.tooltip_y_offset_non_touch);
+        View appView2 =
+                WindowManagerGlobal.getInstance()
+                        .getWindowView(anchorView.getApplicationWindowToken());
         if (appView2 != null) {
             appView = appView2;
         } else {
@@ -183,7 +228,12 @@ public class TooltipPopup {
         }
         int[] appViewScreenPos = new int[2];
         appView.getLocationOnScreen(appViewScreenPos);
-        Rect displayFrame = new Rect(appViewScreenPos[0], appViewScreenPos[1], appViewScreenPos[0] + appView.getWidth(), appViewScreenPos[1] + appView.getHeight());
+        Rect displayFrame =
+                new Rect(
+                        appViewScreenPos[0],
+                        appViewScreenPos[1],
+                        appViewScreenPos[0] + appView.getWidth(),
+                        appViewScreenPos[1] + appView.getHeight());
         this.mTmpDisplayFrame.left = displayFrame.left + leftInset;
         this.mTmpDisplayFrame.right = displayFrame.right;
         appView.getLocationOnScreen(this.mTmpAppPos);
@@ -193,8 +243,12 @@ public class TooltipPopup {
             Log.i(TAG, "computePosition - displayFrame right : " + this.mTmpDisplayFrame.right);
             Log.i(TAG, "computePosition - displayFrame top : " + this.mTmpDisplayFrame.top);
             Log.i(TAG, "computePosition - displayFrame bottom : " + this.mTmpDisplayFrame.bottom);
-            Log.i(TAG, "computePosition - anchorView locationOnScreen x : " + this.mTmpAnchorPos[0]);
-            Log.i(TAG, "computePosition - anchorView locationOnScreen y : " + this.mTmpAnchorPos[1]);
+            Log.i(
+                    TAG,
+                    "computePosition - anchorView locationOnScreen x : " + this.mTmpAnchorPos[0]);
+            Log.i(
+                    TAG,
+                    "computePosition - anchorView locationOnScreen y : " + this.mTmpAnchorPos[1]);
             Log.i(TAG, "computePosition - appView locationOnScreen x : " + this.mTmpAppPos[0]);
             Log.i(TAG, "computePosition - appView locationOnScreen y : " + this.mTmpAppPos[1]);
         }
@@ -204,7 +258,8 @@ public class TooltipPopup {
         iArr2[1] = iArr2[1] - this.mTmpAppPos[1];
         if (this.mIsDeviceDefault) {
             semUpdateMaxWidth();
-            semComputePositionForMultiWindow(anchorView, displayFrame, fromTouch, offsetX, leftInset, outParams);
+            semComputePositionForMultiWindow(
+                    anchorView, displayFrame, fromTouch, offsetX, leftInset, outParams);
             return;
         }
         outParams.x = (this.mTmpAnchorPos[0] + offsetX) - (displayFrame.width() / 2);
@@ -237,11 +292,15 @@ public class TooltipPopup {
         if (mTmpValue.type == 5) {
             tooltipMaxWidth = (int) mTmpValue.getDimension(displayMetrics);
         } else if (mTmpValue.type == 6) {
-            tooltipMaxWidth = (int) mTmpValue.getFraction(displayMetrics.widthPixels, displayMetrics.widthPixels);
+            tooltipMaxWidth =
+                    (int)
+                            mTmpValue.getFraction(
+                                    displayMetrics.widthPixels, displayMetrics.widthPixels);
         }
         int mMessageViewMaxWidth = tooltipMaxWidth;
         if (this.mContentView.getBackground() != null) {
-            mMessageViewMaxWidth -= this.mContentView.getPaddingLeft() + this.mContentView.getPaddingRight();
+            mMessageViewMaxWidth -=
+                    this.mContentView.getPaddingLeft() + this.mContentView.getPaddingRight();
         }
         this.mMessageView.setMaxWidth(mMessageViewMaxWidth);
     }
@@ -262,33 +321,52 @@ public class TooltipPopup {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void semComputePositionForMultiWindow(android.view.View r30, android.graphics.Rect r31, boolean r32, int r33, int r34, android.view.WindowManager.LayoutParams r35) {
+    private void semComputePositionForMultiWindow(
+            android.view.View r30,
+            android.graphics.Rect r31,
+            boolean r32,
+            int r33,
+            int r34,
+            android.view.WindowManager.LayoutParams r35) {
         /*
             Method dump skipped, instructions count: 846
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.view.TooltipPopup.semComputePositionForMultiWindow(android.view.View, android.graphics.Rect, boolean, int, int, android.view.WindowManager$LayoutParams):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.view.TooltipPopup.semComputePositionForMultiWindow(android.view.View,"
+                    + " android.graphics.Rect, boolean, int, int,"
+                    + " android.view.WindowManager$LayoutParams):void");
     }
 
     private boolean isFreeForm() {
-        int windowMode = this.mContext.getResources().getConfiguration().windowConfiguration.getWindowingMode();
+        int windowMode =
+                this.mContext
+                        .getResources()
+                        .getConfiguration()
+                        .windowConfiguration
+                        .getWindowingMode();
         return windowMode == 5;
     }
 
     private boolean isFullScreen() {
-        WindowConfiguration windowConfiguration = this.mContext.getResources().getConfiguration().windowConfiguration;
-        return windowConfiguration.getActivityType() == 1 && windowConfiguration.getWindowingMode() == 1;
+        WindowConfiguration windowConfiguration =
+                this.mContext.getResources().getConfiguration().windowConfiguration;
+        return windowConfiguration.getActivityType() == 1
+                && windowConfiguration.getWindowingMode() == 1;
     }
 
     private boolean isSplitWindow() {
-        return WindowConfiguration.isSplitScreenWindowingMode(this.mContext.getResources().getConfiguration().windowConfiguration);
+        return WindowConfiguration.isSplitScreenWindowingMode(
+                this.mContext.getResources().getConfiguration().windowConfiguration);
     }
 
     private boolean isEmbedded() {
         return this.mContext.getResources().getConfiguration().windowConfiguration.isEmbedded();
     }
 
-    public void semShowActionItemTooltip(int x, int y, int layoutDirection, CharSequence tooltipText) {
+    public void semShowActionItemTooltip(
+            int x, int y, int layoutDirection, CharSequence tooltipText) {
         if (isShowing()) {
             hide();
         }

@@ -36,52 +36,42 @@ public interface IInputMethodClient extends IInterface {
 
     public static class Default implements IInputMethodClient {
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void onBindMethod(InputBindResult res) throws RemoteException {
-        }
+        public void onBindMethod(InputBindResult res) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void onStartInputResult(InputBindResult res, int startInputSeq) throws RemoteException {
-        }
+        public void onStartInputResult(InputBindResult res, int startInputSeq)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void onBindAccessibilityService(InputBindResult res, int id) throws RemoteException {
-        }
+        public void onBindAccessibilityService(InputBindResult res, int id)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void onUnbindMethod(int sequence, int unbindReason) throws RemoteException {
-        }
+        public void onUnbindMethod(int sequence, int unbindReason) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void onUnbindAccessibilityService(int sequence, int id) throws RemoteException {
-        }
+        public void onUnbindAccessibilityService(int sequence, int id) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void setActive(boolean active, boolean fullscreen) throws RemoteException {
-        }
+        public void setActive(boolean active, boolean fullscreen) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void setInteractive(boolean active, boolean fullscreen) throws RemoteException {
-        }
+        public void setInteractive(boolean active, boolean fullscreen) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void setImeVisibility(boolean visible) throws RemoteException {
-        }
+        public void setImeVisibility(boolean visible) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void scheduleStartInputIfNecessary(boolean fullscreen) throws RemoteException {
-        }
+        public void scheduleStartInputIfNecessary(boolean fullscreen) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void reportFullscreenMode(boolean fullscreen) throws RemoteException {
-        }
+        public void reportFullscreenMode(boolean fullscreen) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void setImeTraceEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setImeTraceEnabled(boolean enabled) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodClient
-        public void throwExceptionFromSystem(String message) throws RemoteException {
-        }
+        public void throwExceptionFromSystem(String message) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -89,7 +79,7 @@ public interface IInputMethodClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputMethodClient {
+    public abstract static class Stub extends Binder implements IInputMethodClient {
         static final int TRANSACTION_onBindAccessibilityService = 3;
         static final int TRANSACTION_onBindMethod = 1;
         static final int TRANSACTION_onStartInputResult = 2;
@@ -160,7 +150,8 @@ public interface IInputMethodClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInputMethodClient.DESCRIPTOR);
             }
@@ -170,18 +161,21 @@ public interface IInputMethodClient extends IInterface {
             }
             switch (code) {
                 case 1:
-                    InputBindResult _arg0 = (InputBindResult) data.readTypedObject(InputBindResult.CREATOR);
+                    InputBindResult _arg0 =
+                            (InputBindResult) data.readTypedObject(InputBindResult.CREATOR);
                     data.enforceNoDataAvail();
                     onBindMethod(_arg0);
                     return true;
                 case 2:
-                    InputBindResult _arg02 = (InputBindResult) data.readTypedObject(InputBindResult.CREATOR);
+                    InputBindResult _arg02 =
+                            (InputBindResult) data.readTypedObject(InputBindResult.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     onStartInputResult(_arg02, _arg1);
                     return true;
                 case 3:
-                    InputBindResult _arg03 = (InputBindResult) data.readTypedObject(InputBindResult.CREATOR);
+                    InputBindResult _arg03 =
+                            (InputBindResult) data.readTypedObject(InputBindResult.CREATOR);
                     int _arg12 = data.readInt();
                     data.enforceNoDataAvail();
                     onBindAccessibilityService(_arg03, _arg12);
@@ -269,7 +263,8 @@ public interface IInputMethodClient extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodClient
-            public void onStartInputResult(InputBindResult res, int startInputSeq) throws RemoteException {
+            public void onStartInputResult(InputBindResult res, int startInputSeq)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodClient.DESCRIPTOR);
@@ -282,7 +277,8 @@ public interface IInputMethodClient extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodClient
-            public void onBindAccessibilityService(InputBindResult res, int id) throws RemoteException {
+            public void onBindAccessibilityService(InputBindResult res, int id)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodClient.DESCRIPTOR);

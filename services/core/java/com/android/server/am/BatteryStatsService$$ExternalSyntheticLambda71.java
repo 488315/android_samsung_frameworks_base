@@ -4,7 +4,8 @@ import android.os.WorkSource;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda71 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda71
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ WorkSource f$1;
@@ -12,7 +13,13 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda7
     public final /* synthetic */ long f$3;
     public final /* synthetic */ long f$4;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda71(BatteryStatsService batteryStatsService, WorkSource workSource, WorkSource workSource2, long j, long j2, int i) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda71(
+            BatteryStatsService batteryStatsService,
+            WorkSource workSource,
+            WorkSource workSource2,
+            long j,
+            long j2,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = batteryStatsService;
         this.f$1 = workSource;
@@ -31,7 +38,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda7
                 long j = this.f$3;
                 long j2 = this.f$4;
                 synchronized (batteryStatsService.mStats) {
-                    batteryStatsService.mStats.noteWifiRunningChangedLocked(workSource, workSource2, j, j2);
+                    batteryStatsService.mStats.noteWifiRunningChangedLocked(
+                            workSource, workSource2, j, j2);
                 }
                 return;
             default:
@@ -41,7 +49,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda7
                 long j3 = this.f$3;
                 long j4 = this.f$4;
                 synchronized (batteryStatsService2.mStats) {
-                    batteryStatsService2.mStats.noteGpsChangedLocked(workSource3, workSource4, j3, j4);
+                    batteryStatsService2.mStats.noteGpsChangedLocked(
+                            workSource3, workSource4, j3, j4);
                 }
                 return;
         }

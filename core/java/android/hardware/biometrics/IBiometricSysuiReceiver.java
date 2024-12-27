@@ -24,28 +24,23 @@ public interface IBiometricSysuiReceiver extends IInterface {
 
     public static class Default implements IBiometricSysuiReceiver {
         @Override // android.hardware.biometrics.IBiometricSysuiReceiver
-        public void onDialogDismissed(int reason, byte[] credentialAttestation) throws RemoteException {
-        }
+        public void onDialogDismissed(int reason, byte[] credentialAttestation)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricSysuiReceiver
-        public void onTryAgainPressed() throws RemoteException {
-        }
+        public void onTryAgainPressed() throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricSysuiReceiver
-        public void onDeviceCredentialPressed() throws RemoteException {
-        }
+        public void onDeviceCredentialPressed() throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricSysuiReceiver
-        public void onSystemEvent(int event) throws RemoteException {
-        }
+        public void onSystemEvent(int event) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricSysuiReceiver
-        public void onDialogAnimatedIn(boolean startFingerprintNow) throws RemoteException {
-        }
+        public void onDialogAnimatedIn(boolean startFingerprintNow) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricSysuiReceiver
-        public void onStartFingerprintNow() throws RemoteException {
-        }
+        public void onStartFingerprintNow() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -53,7 +48,7 @@ public interface IBiometricSysuiReceiver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBiometricSysuiReceiver {
+    public abstract static class Stub extends Binder implements IBiometricSysuiReceiver {
         static final int TRANSACTION_onDeviceCredentialPressed = 3;
         static final int TRANSACTION_onDialogAnimatedIn = 5;
         static final int TRANSACTION_onDialogDismissed = 1;
@@ -106,7 +101,8 @@ public interface IBiometricSysuiReceiver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBiometricSysuiReceiver.DESCRIPTOR);
             }
@@ -162,7 +158,8 @@ public interface IBiometricSysuiReceiver extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricSysuiReceiver
-            public void onDialogDismissed(int reason, byte[] credentialAttestation) throws RemoteException {
+            public void onDialogDismissed(int reason, byte[] credentialAttestation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBiometricSysuiReceiver.DESCRIPTOR);

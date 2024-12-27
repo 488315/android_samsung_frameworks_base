@@ -1,6 +1,7 @@
 package com.sec.android.iaft;
 
 import com.android.internal.midi.MidiConstants;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -99,7 +100,8 @@ public class IAFDFileHexUtils {
             return false;
         }
         try {
-            String hexStr = new String(Files.readAllBytes(Paths.get(path + inHexFileName, new String[0])));
+            String hexStr =
+                    new String(Files.readAllBytes(Paths.get(path + inHexFileName, new String[0])));
             boolean result = makeHexStringToFile(path, hexStr, outFileName);
             return result;
         } catch (Exception e) {

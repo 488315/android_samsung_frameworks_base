@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface INfcLedCoverTouchListenerCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.cover.INfcLedCoverTouchListenerCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.cover.INfcLedCoverTouchListenerCallback";
 
     void onCoverTapLeft() throws RemoteException;
 
@@ -25,28 +26,22 @@ public interface INfcLedCoverTouchListenerCallback extends IInterface {
 
     public static class Default implements INfcLedCoverTouchListenerCallback {
         @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-        public void onCoverTouchAccept() throws RemoteException {
-        }
+        public void onCoverTouchAccept() throws RemoteException {}
 
         @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-        public void onCoverTouchReject() throws RemoteException {
-        }
+        public void onCoverTouchReject() throws RemoteException {}
 
         @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-        public void onCoverTapLeft() throws RemoteException {
-        }
+        public void onCoverTapLeft() throws RemoteException {}
 
         @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-        public void onCoverTapMid() throws RemoteException {
-        }
+        public void onCoverTapMid() throws RemoteException {}
 
         @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-        public void onCoverTapRight() throws RemoteException {
-        }
+        public void onCoverTapRight() throws RemoteException {}
 
         @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-        public void onSystemCoverEvent(int event, Bundle args) throws RemoteException {
-        }
+        public void onSystemCoverEvent(int event, Bundle args) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -54,7 +49,7 @@ public interface INfcLedCoverTouchListenerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INfcLedCoverTouchListenerCallback {
+    public abstract static class Stub extends Binder implements INfcLedCoverTouchListenerCallback {
         static final int TRANSACTION_onCoverTapLeft = 3;
         static final int TRANSACTION_onCoverTapMid = 4;
         static final int TRANSACTION_onCoverTapRight = 5;
@@ -107,7 +102,8 @@ public interface INfcLedCoverTouchListenerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(INfcLedCoverTouchListenerCallback.DESCRIPTOR);
             }

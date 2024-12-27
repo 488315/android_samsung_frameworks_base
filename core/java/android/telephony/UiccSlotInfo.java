@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -19,19 +20,20 @@ public class UiccSlotInfo implements Parcelable {
     public static final int CARD_STATE_INFO_ERROR = 3;
     public static final int CARD_STATE_INFO_PRESENT = 2;
     public static final int CARD_STATE_INFO_RESTRICTED = 4;
-    public static final Parcelable.Creator<UiccSlotInfo> CREATOR = new Parcelable.Creator<UiccSlotInfo>() { // from class: android.telephony.UiccSlotInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiccSlotInfo createFromParcel(Parcel in) {
-            return new UiccSlotInfo(in);
-        }
+    public static final Parcelable.Creator<UiccSlotInfo> CREATOR =
+            new Parcelable.Creator<UiccSlotInfo>() { // from class: android.telephony.UiccSlotInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiccSlotInfo createFromParcel(Parcel in) {
+                    return new UiccSlotInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiccSlotInfo[] newArray(int size) {
-            return new UiccSlotInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiccSlotInfo[] newArray(int size) {
+                    return new UiccSlotInfo[size];
+                }
+            };
     private final String mCardId;
     private final int mCardStateInfo;
     private final boolean mIsActive;
@@ -43,8 +45,7 @@ public class UiccSlotInfo implements Parcelable {
     private final List<UiccPortInfo> mPortList;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CardStateInfo {
-    }
+    public @interface CardStateInfo {}
 
     private UiccSlotInfo(Parcel in) {
         this.mLogicalSlotAccessRestricted = false;
@@ -79,7 +80,13 @@ public class UiccSlotInfo implements Parcelable {
     }
 
     @Deprecated
-    public UiccSlotInfo(boolean isActive, boolean isEuicc, String cardId, int cardStateInfo, int logicalSlotIdx, boolean isExtendedApduSupported) {
+    public UiccSlotInfo(
+            boolean isActive,
+            boolean isEuicc,
+            String cardId,
+            int cardStateInfo,
+            int logicalSlotIdx,
+            boolean isExtendedApduSupported) {
         this.mLogicalSlotAccessRestricted = false;
         this.mIsActive = isActive;
         this.mIsEuicc = isEuicc;
@@ -91,7 +98,13 @@ public class UiccSlotInfo implements Parcelable {
         this.mPortList = new ArrayList();
     }
 
-    public UiccSlotInfo(boolean isEuicc, String cardId, int cardStateInfo, boolean isExtendedApduSupported, boolean isRemovable, List<UiccPortInfo> portList) {
+    public UiccSlotInfo(
+            boolean isEuicc,
+            String cardId,
+            int cardStateInfo,
+            boolean isExtendedApduSupported,
+            boolean isRemovable,
+            List<UiccPortInfo> portList) {
         int logicalSlotIndex;
         this.mLogicalSlotAccessRestricted = false;
         this.mIsEuicc = isEuicc;
@@ -112,7 +125,9 @@ public class UiccSlotInfo implements Parcelable {
     @Deprecated
     public boolean getIsActive() {
         if (this.mLogicalSlotAccessRestricted) {
-            throw new UnsupportedOperationException("getIsActive() is not supported by UiccSlotInfo. Please Use UiccPortInfo API instead");
+            throw new UnsupportedOperationException(
+                    "getIsActive() is not supported by UiccSlotInfo. Please Use UiccPortInfo API"
+                        + " instead");
         }
         return this.mIsActive;
     }
@@ -132,7 +147,9 @@ public class UiccSlotInfo implements Parcelable {
     @Deprecated
     public int getLogicalSlotIdx() {
         if (this.mLogicalSlotAccessRestricted) {
-            throw new UnsupportedOperationException("getLogicalSlotIdx() is not supported by UiccSlotInfo. Please use UiccPortInfo API instead");
+            throw new UnsupportedOperationException(
+                    "getLogicalSlotIdx() is not supported by UiccSlotInfo. Please use UiccPortInfo"
+                        + " API instead");
         }
         return this.mLogicalSlotIdx;
     }
@@ -161,17 +178,46 @@ public class UiccSlotInfo implements Parcelable {
             return false;
         }
         UiccSlotInfo that = (UiccSlotInfo) obj;
-        if (this.mIsActive == that.mIsActive && this.mIsEuicc == that.mIsEuicc && Objects.equals(this.mCardId, that.mCardId) && this.mCardStateInfo == that.mCardStateInfo && this.mLogicalSlotIdx == that.mLogicalSlotIdx && this.mIsExtendedApduSupported == that.mIsExtendedApduSupported && this.mIsRemovable == that.mIsRemovable && Objects.equals(this.mPortList, that.mPortList)) {
+        if (this.mIsActive == that.mIsActive
+                && this.mIsEuicc == that.mIsEuicc
+                && Objects.equals(this.mCardId, that.mCardId)
+                && this.mCardStateInfo == that.mCardStateInfo
+                && this.mLogicalSlotIdx == that.mLogicalSlotIdx
+                && this.mIsExtendedApduSupported == that.mIsExtendedApduSupported
+                && this.mIsRemovable == that.mIsRemovable
+                && Objects.equals(this.mPortList, that.mPortList)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mIsActive), Boolean.valueOf(this.mIsEuicc), this.mCardId, Integer.valueOf(this.mCardStateInfo), Integer.valueOf(this.mLogicalSlotIdx), Boolean.valueOf(this.mIsExtendedApduSupported), Boolean.valueOf(this.mIsRemovable), this.mPortList);
+        return Objects.hash(
+                Boolean.valueOf(this.mIsActive),
+                Boolean.valueOf(this.mIsEuicc),
+                this.mCardId,
+                Integer.valueOf(this.mCardStateInfo),
+                Integer.valueOf(this.mLogicalSlotIdx),
+                Boolean.valueOf(this.mIsExtendedApduSupported),
+                Boolean.valueOf(this.mIsRemovable),
+                this.mPortList);
     }
 
     public String toString() {
-        return "UiccSlotInfo (, mIsEuicc=" + this.mIsEuicc + ", mCardId=" + SubscriptionInfo.getPrintableId(this.mCardId) + ", cardState=" + this.mCardStateInfo + ", mIsExtendedApduSupported=" + this.mIsExtendedApduSupported + ", mIsRemovable=" + this.mIsRemovable + ", mPortList=" + this.mPortList + ", mLogicalSlotAccessRestricted=" + this.mLogicalSlotAccessRestricted + NavigationBarInflaterView.KEY_CODE_END;
+        return "UiccSlotInfo (, mIsEuicc="
+                + this.mIsEuicc
+                + ", mCardId="
+                + SubscriptionInfo.getPrintableId(this.mCardId)
+                + ", cardState="
+                + this.mCardStateInfo
+                + ", mIsExtendedApduSupported="
+                + this.mIsExtendedApduSupported
+                + ", mIsRemovable="
+                + this.mIsRemovable
+                + ", mPortList="
+                + this.mPortList
+                + ", mLogicalSlotAccessRestricted="
+                + this.mLogicalSlotAccessRestricted
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

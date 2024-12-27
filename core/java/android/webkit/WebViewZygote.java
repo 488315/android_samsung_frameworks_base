@@ -7,6 +7,7 @@ import android.os.Process;
 import android.os.ZygoteProcess;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.os.Zygote;
 
 /* loaded from: classes4.dex */
@@ -53,7 +54,8 @@ public class WebViewZygote {
 
     public static void setMultiprocessEnabled(boolean enabled) {
         if (Flags.updateServiceV2()) {
-            throw new IllegalStateException("setMultiprocessEnabled shouldn't be called if update_service_v2 flag is set.");
+            throw new IllegalStateException(
+                    "setMultiprocessEnabled shouldn't be called if update_service_v2 flag is set.");
         }
         synchronized (sLock) {
             sMultiprocessEnabled = enabled;
@@ -90,8 +92,23 @@ public class WebViewZygote {
         }
         try {
             String abi = sPackage.applicationInfo.primaryCpuAbi;
-            int runtimeFlags = Zygote.getMemorySafetyRuntimeFlagsForSecondaryZygote(sPackage.applicationInfo, null);
-            sZygote = Process.ZYGOTE_PROCESS.startChildZygote("com.android.internal.os.WebViewZygoteInit", "webview_zygote", 1053, 1053, null, runtimeFlags, "webview_zygote", abi, TextUtils.join(",", Build.SUPPORTED_ABIS), null, Process.FIRST_ISOLATED_UID, Integer.MAX_VALUE);
+            int runtimeFlags =
+                    Zygote.getMemorySafetyRuntimeFlagsForSecondaryZygote(
+                            sPackage.applicationInfo, null);
+            sZygote =
+                    Process.ZYGOTE_PROCESS.startChildZygote(
+                            "com.android.internal.os.WebViewZygoteInit",
+                            "webview_zygote",
+                            1053,
+                            1053,
+                            null,
+                            runtimeFlags,
+                            "webview_zygote",
+                            abi,
+                            TextUtils.join(",", Build.SUPPORTED_ABIS),
+                            null,
+                            Process.FIRST_ISOLATED_UID,
+                            Integer.MAX_VALUE);
             ZygoteProcess.waitForConnectionToZygote(sZygote.getPrimarySocketAddress());
             sZygote.preloadApp(sPackage.applicationInfo, abi);
         } catch (Exception e) {

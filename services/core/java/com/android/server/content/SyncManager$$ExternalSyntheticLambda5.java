@@ -18,7 +18,18 @@ public final /* synthetic */ class SyncManager$$ExternalSyntheticLambda5 {
     public final /* synthetic */ int f$8;
     public final /* synthetic */ int f$9;
 
-    public /* synthetic */ SyncManager$$ExternalSyntheticLambda5(SyncManager syncManager, AccountAndUser accountAndUser, int i, String str, Bundle bundle, int i2, long j, int i3, int i4, int i5, String str2) {
+    public /* synthetic */ SyncManager$$ExternalSyntheticLambda5(
+            SyncManager syncManager,
+            AccountAndUser accountAndUser,
+            int i,
+            String str,
+            Bundle bundle,
+            int i2,
+            long j,
+            int i3,
+            int i4,
+            int i5,
+            String str2) {
         this.f$0 = syncManager;
         this.f$1 = accountAndUser;
         this.f$2 = i;
@@ -37,6 +48,18 @@ public final /* synthetic */ class SyncManager$$ExternalSyntheticLambda5 {
         Bundle bundle = this.f$4;
         SyncManager syncManager = this.f$0;
         syncManager.getClass();
-        syncManager.scheduleSync(accountAndUser.account, accountAndUser.userId, this.f$2, this.f$3, bundle, this.f$5, this.f$6, false, this.f$7, this.f$8, this.f$9, this.f$10);
+        syncManager.scheduleSync(
+                accountAndUser.account,
+                accountAndUser.userId,
+                this.f$2,
+                this.f$3,
+                bundle,
+                this.f$5,
+                this.f$6,
+                false,
+                this.f$7,
+                this.f$8,
+                this.f$9,
+                this.f$10);
     }
 }

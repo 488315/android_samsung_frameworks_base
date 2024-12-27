@@ -2,6 +2,7 @@ package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerVersionChecker;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -28,14 +29,11 @@ public class DvbcFrontendSettings extends FrontendSettings {
     public static final int OUTER_FEC_OUTER_FEC_RS = 2;
     public static final int OUTER_FEC_UNDEFINED = 0;
 
-    @Deprecated
-    public static final int SPECTRAL_INVERSION_INVERTED = 2;
+    @Deprecated public static final int SPECTRAL_INVERSION_INVERTED = 2;
 
-    @Deprecated
-    public static final int SPECTRAL_INVERSION_NORMAL = 1;
+    @Deprecated public static final int SPECTRAL_INVERSION_NORMAL = 1;
 
-    @Deprecated
-    public static final int SPECTRAL_INVERSION_UNDEFINED = 0;
+    @Deprecated public static final int SPECTRAL_INVERSION_UNDEFINED = 0;
     public static final int TIME_INTERLEAVE_MODE_128_1_0 = 2;
     public static final int TIME_INTERLEAVE_MODE_128_1_1 = 4;
     public static final int TIME_INTERLEAVE_MODE_128_2 = 128;
@@ -57,31 +55,34 @@ public class DvbcFrontendSettings extends FrontendSettings {
     private final int mSymbolRate;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Annex {
-    }
+    public @interface Annex {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Bandwidth {
-    }
+    public @interface Bandwidth {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Modulation {
-    }
+    public @interface Modulation {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OuterFec {
-    }
+    public @interface OuterFec {}
 
     @Retention(RetentionPolicy.SOURCE)
     @Deprecated
-    public @interface SpectralInversion {
-    }
+    public @interface SpectralInversion {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TimeInterleaveMode {
-    }
+    public @interface TimeInterleaveMode {}
 
-    private DvbcFrontendSettings(long frequency, int modulation, long innerFec, int symbolRate, int outerFec, int annex, int spectralInversion, int interleaveMode, int bandwidth) {
+    private DvbcFrontendSettings(
+            long frequency,
+            int modulation,
+            long innerFec,
+            int symbolRate,
+            int outerFec,
+            int annex,
+            int spectralInversion,
+            int interleaveMode,
+            int bandwidth) {
         super(frequency);
         this.mModulation = modulation;
         this.mInnerFec = innerFec;
@@ -207,7 +208,16 @@ public class DvbcFrontendSettings extends FrontendSettings {
         }
 
         public DvbcFrontendSettings build() {
-            return new DvbcFrontendSettings(this.mFrequency, this.mModulation, this.mInnerFec, this.mSymbolRate, this.mOuterFec, this.mAnnex, this.mSpectralInversion, this.mInterleaveMode, this.mBandwidth);
+            return new DvbcFrontendSettings(
+                    this.mFrequency,
+                    this.mModulation,
+                    this.mInnerFec,
+                    this.mSymbolRate,
+                    this.mOuterFec,
+                    this.mAnnex,
+                    this.mSpectralInversion,
+                    this.mInterleaveMode,
+                    this.mBandwidth);
         }
     }
 

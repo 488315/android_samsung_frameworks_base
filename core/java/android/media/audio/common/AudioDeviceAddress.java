@@ -3,24 +3,27 @@ package android.media.audio.common;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class AudioDeviceAddress implements Parcelable {
-    public static final Parcelable.Creator<AudioDeviceAddress> CREATOR = new Parcelable.Creator<AudioDeviceAddress>() { // from class: android.media.audio.common.AudioDeviceAddress.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioDeviceAddress createFromParcel(Parcel _aidl_source) {
-            return new AudioDeviceAddress(_aidl_source);
-        }
+    public static final Parcelable.Creator<AudioDeviceAddress> CREATOR =
+            new Parcelable.Creator<AudioDeviceAddress>() { // from class:
+                // android.media.audio.common.AudioDeviceAddress.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioDeviceAddress createFromParcel(Parcel _aidl_source) {
+                    return new AudioDeviceAddress(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioDeviceAddress[] newArray(int _aidl_size) {
-            return new AudioDeviceAddress[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioDeviceAddress[] newArray(int _aidl_size) {
+                    return new AudioDeviceAddress[_aidl_size];
+                }
+            };
     public static final int alsa = 4;
     public static final int id = 0;
     public static final int ipv4 = 2;
@@ -184,15 +187,25 @@ public final class AudioDeviceAddress implements Parcelable {
     public String toString() {
         switch (this._tag) {
             case 0:
-                return "AudioDeviceAddress.id(" + Objects.toString(getId()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioDeviceAddress.id("
+                        + Objects.toString(getId())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "AudioDeviceAddress.mac(" + Arrays.toString(getMac()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioDeviceAddress.mac("
+                        + Arrays.toString(getMac())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 2:
-                return "AudioDeviceAddress.ipv4(" + Arrays.toString(getIpv4()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioDeviceAddress.ipv4("
+                        + Arrays.toString(getIpv4())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 3:
-                return "AudioDeviceAddress.ipv6(" + Arrays.toString(getIpv6()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioDeviceAddress.ipv6("
+                        + Arrays.toString(getIpv6())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 4:
-                return "AudioDeviceAddress.alsa(" + Arrays.toString(getAlsa()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioDeviceAddress.alsa("
+                        + Arrays.toString(getAlsa())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -213,12 +226,18 @@ public final class AudioDeviceAddress implements Parcelable {
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
     }
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

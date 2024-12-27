@@ -7,17 +7,21 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.sysfwutil.Slog;
+
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.UserspaceRebootLogger$$ExternalSyntheticOutline0;
 import com.android.server.usb.UsbDeviceManager;
+
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class UsbGadgetAidl implements UsbGadgetHal {
-    public static final String USB_GADGET_AIDL_SERVICE = AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), IUsbGadget.DESCRIPTOR, "/default");
+    public static final String USB_GADGET_AIDL_SERVICE =
+            AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                    new StringBuilder(), IUsbGadget.DESCRIPTOR, "/default");
     public final UsbDeviceManager mDeviceManager;
     public final IUsbGadget mGadgetProxy;
     public final Object mGadgetProxyLock;
@@ -31,8 +35,7 @@ public final class UsbGadgetAidl implements UsbGadgetHal {
         public final IndentingPrintWriter mPw;
         public final int mRequest;
 
-        public UsbGadgetCallback() {
-        }
+        public UsbGadgetCallback() {}
 
         public UsbGadgetCallback(int i, long j, boolean z) {
             this.mPw = null;
@@ -44,13 +47,20 @@ public final class UsbGadgetAidl implements UsbGadgetHal {
         public final void getCurrentUsbFunctionsCb(long j, int i, long j2) {
             if (i == 0) {
                 IndentingPrintWriter indentingPrintWriter = this.mPw;
-                StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "Usb getCurrentUsbFunctionsCb ,functions:", j, " ,status:");
+                StringBuilder m =
+                        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                i, "Usb getCurrentUsbFunctionsCb ,functions:", j, " ,status:");
                 m.append(" ,transactionId:");
                 m.append(j2);
                 UsbDeviceManager.logAndPrint(4, indentingPrintWriter, m.toString());
             } else {
                 IndentingPrintWriter indentingPrintWriter2 = this.mPw;
-                StringBuilder m2 = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "Usb getCurrentUsbFunctionsCb failed ,functions:", j, " ,status:");
+                StringBuilder m2 =
+                        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                i,
+                                "Usb getCurrentUsbFunctionsCb failed ,functions:",
+                                j,
+                                " ,status:");
                 m2.append(" ,transactionId:");
                 m2.append(j2);
                 UsbDeviceManager.logAndPrint(6, indentingPrintWriter2, m2.toString());
@@ -76,15 +86,18 @@ public final class UsbGadgetAidl implements UsbGadgetHal {
         }
 
         public final void getUsbSpeedCb(int i, long j) {
-            UsbDeviceManager.logAndPrint(4, this.mPw, "getUsbSpeedCb speed:" + i + " ,transactionId:" + j);
+            UsbDeviceManager.logAndPrint(
+                    4, this.mPw, "getUsbSpeedCb speed:" + i + " ,transactionId:" + j);
             UsbGadgetAidl.this.mDeviceManager.mHandler.getUsbSpeedCb(i);
         }
 
         public final void resetCb(int i, long j) {
             if (i == 0) {
-                UsbDeviceManager.logAndPrint(4, this.mPw, "Usb resetCb status:" + i + " ,transactionId:" + j);
+                UsbDeviceManager.logAndPrint(
+                        4, this.mPw, "Usb resetCb status:" + i + " ,transactionId:" + j);
             } else {
-                UsbDeviceManager.logAndPrint(6, this.mPw, "Usb resetCb status" + i + " ,transactionId:" + j);
+                UsbDeviceManager.logAndPrint(
+                        6, this.mPw, "Usb resetCb status" + i + " ,transactionId:" + j);
             }
             UsbGadgetAidl.this.mDeviceManager.mHandler.resetCb(i);
         }
@@ -92,20 +105,28 @@ public final class UsbGadgetAidl implements UsbGadgetHal {
         public final void setCurrentUsbFunctionsCb(long j, int i, long j2) {
             if (i == 0) {
                 IndentingPrintWriter indentingPrintWriter = this.mPw;
-                StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "Usb setCurrentUsbFunctionsCb ,functions:", j, " ,status:");
+                StringBuilder m =
+                        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                i, "Usb setCurrentUsbFunctionsCb ,functions:", j, " ,status:");
                 m.append(" ,transactionId:");
                 m.append(j2);
                 UsbDeviceManager.logAndPrint(4, indentingPrintWriter, m.toString());
             } else {
                 IndentingPrintWriter indentingPrintWriter2 = this.mPw;
-                StringBuilder m2 = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "Usb setCurrentUsbFunctionsCb failed ,functions:", j, " ,status:");
+                StringBuilder m2 =
+                        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                i,
+                                "Usb setCurrentUsbFunctionsCb failed ,functions:",
+                                j,
+                                " ,status:");
                 m2.append(" ,transactionId:");
                 m2.append(j2);
                 UsbDeviceManager.logAndPrint(6, indentingPrintWriter2, m2.toString());
             }
             UsbDeviceManager usbDeviceManager = UsbGadgetAidl.this.mDeviceManager;
             int i2 = this.mRequest;
-            usbDeviceManager.mHandler.setCurrentUsbFunctionsCb(i, j, this.mFunctions, i2, this.mChargingFunctions);
+            usbDeviceManager.mHandler.setCurrentUsbFunctionsCb(
+                    i, j, this.mFunctions, i2, this.mChargingFunctions);
         }
     }
 
@@ -120,9 +141,15 @@ public final class UsbGadgetAidl implements UsbGadgetHal {
                 return;
             }
             try {
-                this.mGadgetProxy = IUsbGadget.Stub.asInterface(ServiceManager.waitForService(USB_GADGET_AIDL_SERVICE));
+                this.mGadgetProxy =
+                        IUsbGadget.Stub.asInterface(
+                                ServiceManager.waitForService(USB_GADGET_AIDL_SERVICE));
             } catch (NoSuchElementException e) {
-                Slog.e("UsbDeviceManager", "connectToProxy: usb gadget hal service not found. Did the service fail to start?", e);
+                Slog.e(
+                        "UsbDeviceManager",
+                        "connectToProxy: usb gadget hal service not found. Did the service fail to"
+                            + " start?",
+                        e);
             }
         }
     }
@@ -134,7 +161,10 @@ public final class UsbGadgetAidl implements UsbGadgetHal {
                 try {
                     this.mGadgetProxy.getCurrentUsbFunctions(new UsbGadgetCallback(), j);
                 } catch (RemoteException e) {
-                    UsbDeviceManager.logAndPrintException(this.mPw, "RemoteException while calling getCurrentUsbFunctions, opID:" + j, e);
+                    UsbDeviceManager.logAndPrintException(
+                            this.mPw,
+                            "RemoteException while calling getCurrentUsbFunctions, opID:" + j,
+                            e);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -160,7 +190,8 @@ public final class UsbGadgetAidl implements UsbGadgetHal {
                 this.mGadgetProxy.getUsbSpeed(new UsbGadgetCallback(), j);
             }
         } catch (RemoteException e) {
-            UsbDeviceManager.logAndPrintException(this.mPw, "RemoteException while calling getUsbSpeed, opID:" + j, e);
+            UsbDeviceManager.logAndPrintException(
+                    this.mPw, "RemoteException while calling getUsbSpeed, opID:" + j, e);
         }
     }
 
@@ -171,7 +202,8 @@ public final class UsbGadgetAidl implements UsbGadgetHal {
                 this.mGadgetProxy.reset(new UsbGadgetCallback(), j);
             }
         } catch (RemoteException e) {
-            UsbDeviceManager.logAndPrintException(this.mPw, "RemoteException while calling getUsbSpeed, opID:" + j, e);
+            UsbDeviceManager.logAndPrintException(
+                    this.mPw, "RemoteException while calling getUsbSpeed, opID:" + j, e);
         }
     }
 
@@ -184,7 +216,12 @@ public final class UsbGadgetAidl implements UsbGadgetHal {
             }
         } catch (RemoteException e) {
             IndentingPrintWriter indentingPrintWriter = this.mPw;
-            StringBuilder m = UserspaceRebootLogger$$ExternalSyntheticOutline0.m(i, "RemoteException while calling setCurrentUsbFunctions: mRequest=", j, ", mFunctions=");
+            StringBuilder m =
+                    UserspaceRebootLogger$$ExternalSyntheticOutline0.m(
+                            i,
+                            "RemoteException while calling setCurrentUsbFunctions: mRequest=",
+                            j,
+                            ", mFunctions=");
             m.append(", mChargingFunctions=");
             m.append(z);
             m.append(", timeout=2500, opID:");

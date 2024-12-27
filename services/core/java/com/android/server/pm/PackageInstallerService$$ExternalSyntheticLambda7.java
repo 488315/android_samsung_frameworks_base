@@ -3,15 +3,17 @@ package com.android.server.pm;
 import android.R;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlSerializer;
-import com.android.server.pm.PackageInstallerService;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class PackageInstallerService$$ExternalSyntheticLambda7 implements Supplier {
+public final /* synthetic */ class PackageInstallerService$$ExternalSyntheticLambda7
+        implements Supplier {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -40,20 +42,24 @@ public final /* synthetic */ class PackageInstallerService$$ExternalSyntheticLam
                         packageInstallerSessionArr = new PackageInstallerSession[size];
                         z = false;
                         for (int i2 = 0; i2 < size; i2++) {
-                            packageInstallerSessionArr[i2] = (PackageInstallerSession) packageInstallerService.mSessions.valueAt(i2);
+                            packageInstallerSessionArr[i2] =
+                                    (PackageInstallerSession)
+                                            packageInstallerService.mSessions.valueAt(i2);
                         }
                     } finally {
                     }
                 }
                 FileOutputStream fileOutputStream = null;
                 try {
-                    FileOutputStream startWrite = packageInstallerService.mSessionsFile.startWrite();
+                    FileOutputStream startWrite =
+                            packageInstallerService.mSessionsFile.startWrite();
                     try {
                         TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(startWrite);
                         resolveSerializer.startDocument((String) null, Boolean.TRUE);
                         resolveSerializer.startTag((String) null, "sessions");
                         for (int i3 = 0; i3 < size; i3++) {
-                            packageInstallerSessionArr[i3].write(resolveSerializer, packageInstallerService.mSessionsDir);
+                            packageInstallerSessionArr[i3].write(
+                                    resolveSerializer, packageInstallerService.mSessionsDir);
                         }
                         resolveSerializer.endTag((String) null, "sessions");
                         resolveSerializer.endDocument();
@@ -70,7 +76,8 @@ public final /* synthetic */ class PackageInstallerService$$ExternalSyntheticLam
                 }
                 return Boolean.valueOf(z);
             default:
-                return ((PackageInstallerService.PackageDeleteObserverAdapter) obj).mContext.getString(R.string.sms_short_code_confirm_message);
+                return ((PackageInstallerService.PackageDeleteObserverAdapter) obj)
+                        .mContext.getString(R.string.sms_short_code_confirm_message);
         }
     }
 }

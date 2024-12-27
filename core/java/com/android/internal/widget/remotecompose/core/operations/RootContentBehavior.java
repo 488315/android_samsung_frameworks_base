@@ -1,11 +1,13 @@
 package com.android.internal.widget.remotecompose.core.operations;
 
 import android.util.Log;
+
 import com.android.internal.widget.remotecompose.core.CompanionOperation;
 import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.RemoteComposeOperation;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -63,10 +65,21 @@ public class RootContentBehavior implements RemoteComposeOperation {
         } else {
             int horizontalContentAlignment = alignment & 240;
             int verticalContentAlignment = alignment & 15;
-            boolean validHorizontalAlignment = horizontalContentAlignment == 16 || horizontalContentAlignment == 32 || horizontalContentAlignment == 64;
-            boolean validVerticalAlignment = verticalContentAlignment == 1 || verticalContentAlignment == 2 || verticalContentAlignment == 4;
+            boolean validHorizontalAlignment =
+                    horizontalContentAlignment == 16
+                            || horizontalContentAlignment == 32
+                            || horizontalContentAlignment == 64;
+            boolean validVerticalAlignment =
+                    verticalContentAlignment == 1
+                            || verticalContentAlignment == 2
+                            || verticalContentAlignment == 4;
             if (!validHorizontalAlignment || !validVerticalAlignment) {
-                Log.e(TAG, "incorrect alignment  h: " + horizontalContentAlignment + " v: " + verticalContentAlignment);
+                Log.e(
+                        TAG,
+                        "incorrect alignment  h: "
+                                + horizontalContentAlignment
+                                + " v: "
+                                + verticalContentAlignment);
             } else {
                 this.mAlignment = alignment;
             }
@@ -112,7 +125,12 @@ public class RootContentBehavior implements RemoteComposeOperation {
     }
 
     public String toString() {
-        return "ROOT_CONTENT_BEHAVIOR scroll: " + this.mScroll + " sizing: " + this.mSizing + " mode: " + this.mMode;
+        return "ROOT_CONTENT_BEHAVIOR scroll: "
+                + this.mScroll
+                + " sizing: "
+                + this.mSizing
+                + " mode: "
+                + this.mMode;
     }
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
@@ -126,8 +144,7 @@ public class RootContentBehavior implements RemoteComposeOperation {
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public String name() {
@@ -153,7 +170,8 @@ public class RootContentBehavior implements RemoteComposeOperation {
             int alignment = buffer.readInt();
             int sizing = buffer.readInt();
             int mode = buffer.readInt();
-            RootContentBehavior rootContentBehavior = new RootContentBehavior(scroll, alignment, sizing, mode);
+            RootContentBehavior rootContentBehavior =
+                    new RootContentBehavior(scroll, alignment, sizing, mode);
             operations.add(rootContentBehavior);
         }
     }

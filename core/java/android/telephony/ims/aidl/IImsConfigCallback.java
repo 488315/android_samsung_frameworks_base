@@ -16,12 +16,10 @@ public interface IImsConfigCallback extends IInterface {
 
     public static class Default implements IImsConfigCallback {
         @Override // android.telephony.ims.aidl.IImsConfigCallback
-        public void onIntConfigChanged(int item, int value) throws RemoteException {
-        }
+        public void onIntConfigChanged(int item, int value) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfigCallback
-        public void onStringConfigChanged(int item, String value) throws RemoteException {
-        }
+        public void onStringConfigChanged(int item, String value) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IImsConfigCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsConfigCallback {
+    public abstract static class Stub extends Binder implements IImsConfigCallback {
         static final int TRANSACTION_onIntConfigChanged = 1;
         static final int TRANSACTION_onStringConfigChanged = 2;
 
@@ -70,7 +68,8 @@ public interface IImsConfigCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsConfigCallback.DESCRIPTOR);
             }

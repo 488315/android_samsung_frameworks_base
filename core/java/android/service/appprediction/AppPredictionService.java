@@ -17,15 +17,15 @@ import android.os.IBinder;
 import android.os.IRemoteCallback;
 import android.os.Looper;
 import android.os.RemoteException;
-import android.service.appprediction.AppPredictionService;
-import android.service.appprediction.IPredictionService;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.util.function.QuadConsumer;
 import com.android.internal.util.function.QuintConsumer;
 import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -34,113 +34,220 @@ import java.util.function.Consumer;
 @SystemApi
 /* loaded from: classes3.dex */
 public abstract class AppPredictionService extends Service {
-    public static final String SERVICE_INTERFACE = "android.service.appprediction.AppPredictionService";
+    public static final String SERVICE_INTERFACE =
+            "android.service.appprediction.AppPredictionService";
     private static final String TAG = "AppPredictionService";
     private Handler mHandler;
-    private final ArrayMap<AppPredictionSessionId, ArrayList<CallbackWrapper>> mSessionCallbacks = new ArrayMap<>();
+    private final ArrayMap<AppPredictionSessionId, ArrayList<CallbackWrapper>> mSessionCallbacks =
+            new ArrayMap<>();
     private final IPredictionService mInterface = new AnonymousClass1();
 
-    public abstract void onAppTargetEvent(AppPredictionSessionId appPredictionSessionId, AppTargetEvent appTargetEvent);
+    public abstract void onAppTargetEvent(
+            AppPredictionSessionId appPredictionSessionId, AppTargetEvent appTargetEvent);
 
-    public abstract void onLaunchLocationShown(AppPredictionSessionId appPredictionSessionId, String str, List<AppTargetId> list);
+    public abstract void onLaunchLocationShown(
+            AppPredictionSessionId appPredictionSessionId, String str, List<AppTargetId> list);
 
     public abstract void onRequestPredictionUpdate(AppPredictionSessionId appPredictionSessionId);
 
-    public abstract void onSortAppTargets(AppPredictionSessionId appPredictionSessionId, List<AppTarget> list, CancellationSignal cancellationSignal, Consumer<List<AppTarget>> consumer);
+    public abstract void onSortAppTargets(
+            AppPredictionSessionId appPredictionSessionId,
+            List<AppTarget> list,
+            CancellationSignal cancellationSignal,
+            Consumer<List<AppTarget>> consumer);
 
     /* renamed from: android.service.appprediction.AppPredictionService$1, reason: invalid class name */
     class AnonymousClass1 extends IPredictionService.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.service.appprediction.IPredictionService
-        public void onCreatePredictionSession(AppPredictionContext context, AppPredictionSessionId sessionId) {
-            AppPredictionService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda8
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((AppPredictionService) obj).doCreatePredictionSession((AppPredictionContext) obj2, (AppPredictionSessionId) obj3);
-                }
-            }, AppPredictionService.this, context, sessionId));
+        public void onCreatePredictionSession(
+                AppPredictionContext context, AppPredictionSessionId sessionId) {
+            AppPredictionService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda8
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((AppPredictionService) obj)
+                                            .doCreatePredictionSession(
+                                                    (AppPredictionContext) obj2,
+                                                    (AppPredictionSessionId) obj3);
+                                }
+                            },
+                            AppPredictionService.this,
+                            context,
+                            sessionId));
         }
 
         @Override // android.service.appprediction.IPredictionService
         public void notifyAppTargetEvent(AppPredictionSessionId sessionId, AppTargetEvent event) {
-            AppPredictionService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda2
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((AppPredictionService) obj).onAppTargetEvent((AppPredictionSessionId) obj2, (AppTargetEvent) obj3);
-                }
-            }, AppPredictionService.this, sessionId, event));
+            AppPredictionService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda2
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((AppPredictionService) obj)
+                                            .onAppTargetEvent(
+                                                    (AppPredictionSessionId) obj2,
+                                                    (AppTargetEvent) obj3);
+                                }
+                            },
+                            AppPredictionService.this,
+                            sessionId,
+                            event));
         }
 
         @Override // android.service.appprediction.IPredictionService
-        public void notifyLaunchLocationShown(AppPredictionSessionId sessionId, String launchLocation, ParceledListSlice targetIds) {
-            AppPredictionService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new QuadConsumer() { // from class: android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda5
-                @Override // com.android.internal.util.function.QuadConsumer
-                public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
-                    ((AppPredictionService) obj).onLaunchLocationShown((AppPredictionSessionId) obj2, (String) obj3, (List) obj4);
-                }
-            }, AppPredictionService.this, sessionId, launchLocation, targetIds.getList()));
+        public void notifyLaunchLocationShown(
+                AppPredictionSessionId sessionId,
+                String launchLocation,
+                ParceledListSlice targetIds) {
+            AppPredictionService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new QuadConsumer() { // from class:
+                                                 // android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda5
+                                @Override // com.android.internal.util.function.QuadConsumer
+                                public final void accept(
+                                        Object obj, Object obj2, Object obj3, Object obj4) {
+                                    ((AppPredictionService) obj)
+                                            .onLaunchLocationShown(
+                                                    (AppPredictionSessionId) obj2,
+                                                    (String) obj3,
+                                                    (List) obj4);
+                                }
+                            },
+                            AppPredictionService.this,
+                            sessionId,
+                            launchLocation,
+                            targetIds.getList()));
         }
 
         @Override // android.service.appprediction.IPredictionService
-        public void sortAppTargets(AppPredictionSessionId sessionId, ParceledListSlice targets, IPredictionCallback callback) {
-            AppPredictionService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new QuintConsumer() { // from class: android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.function.QuintConsumer
-                public final void accept(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-                    ((AppPredictionService) obj).onSortAppTargets((AppPredictionSessionId) obj2, (List) obj3, (CancellationSignal) obj4, (AppPredictionService.CallbackWrapper) obj5);
-                }
-            }, AppPredictionService.this, sessionId, targets.getList(), null, new CallbackWrapper(callback, null)));
+        public void sortAppTargets(
+                AppPredictionSessionId sessionId,
+                ParceledListSlice targets,
+                IPredictionCallback callback) {
+            AppPredictionService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new QuintConsumer() { // from class:
+                                                  // android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda0
+                                @Override // com.android.internal.util.function.QuintConsumer
+                                public final void accept(
+                                        Object obj,
+                                        Object obj2,
+                                        Object obj3,
+                                        Object obj4,
+                                        Object obj5) {
+                                    ((AppPredictionService) obj)
+                                            .onSortAppTargets(
+                                                    (AppPredictionSessionId) obj2,
+                                                    (List) obj3,
+                                                    (CancellationSignal) obj4,
+                                                    (AppPredictionService.CallbackWrapper) obj5);
+                                }
+                            },
+                            AppPredictionService.this,
+                            sessionId,
+                            targets.getList(),
+                            null,
+                            new CallbackWrapper(callback, null)));
         }
 
         @Override // android.service.appprediction.IPredictionService
-        public void registerPredictionUpdates(AppPredictionSessionId sessionId, IPredictionCallback callback) {
-            AppPredictionService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda3
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((AppPredictionService) obj).doRegisterPredictionUpdates((AppPredictionSessionId) obj2, (IPredictionCallback) obj3);
-                }
-            }, AppPredictionService.this, sessionId, callback));
+        public void registerPredictionUpdates(
+                AppPredictionSessionId sessionId, IPredictionCallback callback) {
+            AppPredictionService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda3
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((AppPredictionService) obj)
+                                            .doRegisterPredictionUpdates(
+                                                    (AppPredictionSessionId) obj2,
+                                                    (IPredictionCallback) obj3);
+                                }
+                            },
+                            AppPredictionService.this,
+                            sessionId,
+                            callback));
         }
 
         @Override // android.service.appprediction.IPredictionService
-        public void unregisterPredictionUpdates(AppPredictionSessionId sessionId, IPredictionCallback callback) {
-            AppPredictionService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda7
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((AppPredictionService) obj).doUnregisterPredictionUpdates((AppPredictionSessionId) obj2, (IPredictionCallback) obj3);
-                }
-            }, AppPredictionService.this, sessionId, callback));
+        public void unregisterPredictionUpdates(
+                AppPredictionSessionId sessionId, IPredictionCallback callback) {
+            AppPredictionService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda7
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((AppPredictionService) obj)
+                                            .doUnregisterPredictionUpdates(
+                                                    (AppPredictionSessionId) obj2,
+                                                    (IPredictionCallback) obj3);
+                                }
+                            },
+                            AppPredictionService.this,
+                            sessionId,
+                            callback));
         }
 
         @Override // android.service.appprediction.IPredictionService
         public void requestPredictionUpdate(AppPredictionSessionId sessionId) {
-            AppPredictionService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda6
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((AppPredictionService) obj).doRequestPredictionUpdate((AppPredictionSessionId) obj2);
-                }
-            }, AppPredictionService.this, sessionId));
+            AppPredictionService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new BiConsumer() { // from class:
+                                               // android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda6
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    ((AppPredictionService) obj)
+                                            .doRequestPredictionUpdate(
+                                                    (AppPredictionSessionId) obj2);
+                                }
+                            },
+                            AppPredictionService.this,
+                            sessionId));
         }
 
         @Override // android.service.appprediction.IPredictionService
         public void onDestroyPredictionSession(AppPredictionSessionId sessionId) {
-            AppPredictionService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda4
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((AppPredictionService) obj).doDestroyPredictionSession((AppPredictionSessionId) obj2);
-                }
-            }, AppPredictionService.this, sessionId));
+            AppPredictionService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new BiConsumer() { // from class:
+                                               // android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda4
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    ((AppPredictionService) obj)
+                                            .doDestroyPredictionSession(
+                                                    (AppPredictionSessionId) obj2);
+                                }
+                            },
+                            AppPredictionService.this,
+                            sessionId));
         }
 
         @Override // android.service.appprediction.IPredictionService
-        public void requestServiceFeatures(AppPredictionSessionId sessionId, IRemoteCallback callback) {
-            AppPredictionService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda1
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((AppPredictionService) obj).onRequestServiceFeatures((AppPredictionSessionId) obj2, (AppPredictionService.RemoteCallbackWrapper) obj3);
-                }
-            }, AppPredictionService.this, sessionId, new RemoteCallbackWrapper(callback, null)));
+        public void requestServiceFeatures(
+                AppPredictionSessionId sessionId, IRemoteCallback callback) {
+            AppPredictionService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.appprediction.AppPredictionService$1$$ExternalSyntheticLambda1
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((AppPredictionService) obj)
+                                            .onRequestServiceFeatures(
+                                                    (AppPredictionSessionId) obj2,
+                                                    (AppPredictionService.RemoteCallbackWrapper)
+                                                            obj3);
+                                }
+                            },
+                            AppPredictionService.this,
+                            sessionId,
+                            new RemoteCallbackWrapper(callback, null)));
         }
     }
 
@@ -155,21 +262,27 @@ public abstract class AppPredictionService extends Service {
         if (SERVICE_INTERFACE.equals(intent.getAction())) {
             return this.mInterface.asBinder();
         }
-        Log.w(TAG, "Tried to bind to wrong intent (should be android.service.appprediction.AppPredictionService: " + intent);
+        Log.w(
+                TAG,
+                "Tried to bind to wrong intent (should be"
+                    + " android.service.appprediction.AppPredictionService: "
+                        + intent);
         return null;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void doCreatePredictionSession(AppPredictionContext context, AppPredictionSessionId sessionId) {
+    public void doCreatePredictionSession(
+            AppPredictionContext context, AppPredictionSessionId sessionId) {
         this.mSessionCallbacks.put(sessionId, new ArrayList<>());
         onCreatePredictionSession(context, sessionId);
     }
 
-    public void onCreatePredictionSession(AppPredictionContext context, AppPredictionSessionId sessionId) {
-    }
+    public void onCreatePredictionSession(
+            AppPredictionContext context, AppPredictionSessionId sessionId) {}
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void doRegisterPredictionUpdates(AppPredictionSessionId sessionId, IPredictionCallback callback) {
+    public void doRegisterPredictionUpdates(
+            AppPredictionSessionId sessionId, IPredictionCallback callback) {
         final ArrayList<CallbackWrapper> callbacks = this.mSessionCallbacks.get(sessionId);
         if (callbacks == null) {
             Slog.e(TAG, "Failed to register for updates for unknown session: " + sessionId);
@@ -177,12 +290,17 @@ public abstract class AppPredictionService extends Service {
         }
         CallbackWrapper wrapper = findCallbackWrapper(callbacks, callback);
         if (wrapper == null) {
-            callbacks.add(new CallbackWrapper(callback, new Consumer() { // from class: android.service.appprediction.AppPredictionService$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    AppPredictionService.this.lambda$doRegisterPredictionUpdates$1(callbacks, (AppPredictionService.CallbackWrapper) obj);
-                }
-            }));
+            callbacks.add(
+                    new CallbackWrapper(
+                            callback,
+                            new Consumer() { // from class:
+                                             // android.service.appprediction.AppPredictionService$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    AppPredictionService.this.lambda$doRegisterPredictionUpdates$1(
+                                            callbacks, (AppPredictionService.CallbackWrapper) obj);
+                                }
+                            }));
             if (callbacks.size() == 1) {
                 onStartPredictionUpdates();
             }
@@ -190,20 +308,24 @@ public abstract class AppPredictionService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$doRegisterPredictionUpdates$1(final ArrayList callbacks, final CallbackWrapper callbackWrapper) {
-        this.mHandler.post(new Runnable() { // from class: android.service.appprediction.AppPredictionService$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                AppPredictionService.this.lambda$doRegisterPredictionUpdates$0(callbacks, callbackWrapper);
-            }
-        });
+    public /* synthetic */ void lambda$doRegisterPredictionUpdates$1(
+            final ArrayList callbacks, final CallbackWrapper callbackWrapper) {
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.service.appprediction.AppPredictionService$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        AppPredictionService.this.lambda$doRegisterPredictionUpdates$0(
+                                callbacks, callbackWrapper);
+                    }
+                });
     }
 
-    public void onStartPredictionUpdates() {
-    }
+    public void onStartPredictionUpdates() {}
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void doUnregisterPredictionUpdates(AppPredictionSessionId sessionId, IPredictionCallback callback) {
+    public void doUnregisterPredictionUpdates(
+            AppPredictionSessionId sessionId, IPredictionCallback callback) {
         ArrayList<CallbackWrapper> callbacks = this.mSessionCallbacks.get(sessionId);
         if (callbacks == null) {
             Slog.e(TAG, "Failed to unregister for updates for unknown session: " + sessionId);
@@ -215,7 +337,8 @@ public abstract class AppPredictionService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: removeCallbackWrapper, reason: merged with bridge method [inline-methods] */
-    public void lambda$doRegisterPredictionUpdates$0(ArrayList<CallbackWrapper> callbacks, CallbackWrapper wrapper) {
+    public void lambda$doRegisterPredictionUpdates$0(
+            ArrayList<CallbackWrapper> callbacks, CallbackWrapper wrapper) {
         if (callbacks == null || wrapper == null) {
             return;
         }
@@ -226,8 +349,7 @@ public abstract class AppPredictionService extends Service {
         }
     }
 
-    public void onStopPredictionUpdates() {
-    }
+    public void onStopPredictionUpdates() {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public void doRequestPredictionUpdate(AppPredictionSessionId sessionId) {
@@ -241,21 +363,22 @@ public abstract class AppPredictionService extends Service {
     public void doDestroyPredictionSession(AppPredictionSessionId sessionId) {
         ArrayList<CallbackWrapper> callbacks = this.mSessionCallbacks.remove(sessionId);
         if (callbacks != null) {
-            callbacks.forEach(new Consumer() { // from class: android.service.appprediction.AppPredictionService$$ExternalSyntheticLambda2
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((AppPredictionService.CallbackWrapper) obj).destroy();
-                }
-            });
+            callbacks.forEach(
+                    new Consumer() { // from class:
+                                     // android.service.appprediction.AppPredictionService$$ExternalSyntheticLambda2
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ((AppPredictionService.CallbackWrapper) obj).destroy();
+                        }
+                    });
         }
         onDestroyPredictionSession(sessionId);
     }
 
-    public void onDestroyPredictionSession(AppPredictionSessionId sessionId) {
-    }
+    public void onDestroyPredictionSession(AppPredictionSessionId sessionId) {}
 
-    public void onRequestServiceFeatures(AppPredictionSessionId sessionId, Consumer<Bundle> callback) {
-    }
+    public void onRequestServiceFeatures(
+            AppPredictionSessionId sessionId, Consumer<Bundle> callback) {}
 
     public final void updatePredictions(AppPredictionSessionId sessionId, List<AppTarget> targets) {
         List<CallbackWrapper> callbacks = this.mSessionCallbacks.get(sessionId);
@@ -266,7 +389,8 @@ public abstract class AppPredictionService extends Service {
         }
     }
 
-    private CallbackWrapper findCallbackWrapper(ArrayList<CallbackWrapper> callbacks, IPredictionCallback callback) {
+    private CallbackWrapper findCallbackWrapper(
+            ArrayList<CallbackWrapper> callbacks, IPredictionCallback callback) {
         for (int i = callbacks.size() - 1; i >= 0; i--) {
             if (callbacks.get(i).isCallback(callback)) {
                 return callbacks.get(i);
@@ -276,7 +400,8 @@ public abstract class AppPredictionService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    static final class CallbackWrapper implements Consumer<List<AppTarget>>, IBinder.DeathRecipient {
+    static final class CallbackWrapper
+            implements Consumer<List<AppTarget>>, IBinder.DeathRecipient {
         private IPredictionCallback mCallback;
         private final Consumer<CallbackWrapper> mOnBinderDied;
 
@@ -332,7 +457,8 @@ public abstract class AppPredictionService extends Service {
         private IRemoteCallback mCallback;
         private final Consumer<RemoteCallbackWrapper> mOnBinderDied;
 
-        RemoteCallbackWrapper(IRemoteCallback callback, Consumer<RemoteCallbackWrapper> onBinderDied) {
+        RemoteCallbackWrapper(
+                IRemoteCallback callback, Consumer<RemoteCallbackWrapper> onBinderDied) {
             this.mCallback = callback;
             this.mOnBinderDied = onBinderDied;
             if (this.mOnBinderDied != null) {

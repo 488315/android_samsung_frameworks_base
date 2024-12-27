@@ -3,6 +3,7 @@ package android.media;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +88,15 @@ public final class TimedText {
         public final boolean isUnderlined;
         public final int startChar;
 
-        public Style(int startChar, int endChar, int fontId, boolean isBold, boolean isItalic, boolean isUnderlined, int fontSize, int colorRGBA) {
+        public Style(
+                int startChar,
+                int endChar,
+                int fontId,
+                boolean isBold,
+                boolean isItalic,
+                boolean isUnderlined,
+                int fontSize,
+                int colorRGBA) {
             this.startChar = startChar;
             this.endChar = endChar;
             this.fontID = fontId;
@@ -355,7 +364,16 @@ public final class TimedText {
                     break;
             }
         }
-        Style style = new Style(startChar, endChar, fontId, isBold, isItalic, isUnderlined, fontSize, colorRGBA);
+        Style style =
+                new Style(
+                        startChar,
+                        endChar,
+                        fontId,
+                        isBold,
+                        isItalic,
+                        isUnderlined,
+                        fontSize,
+                        colorRGBA);
         if (this.mStyleList == null) {
             this.mStyleList = new ArrayList();
         }

@@ -4,6 +4,7 @@ import android.R;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Slog;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -14,7 +15,8 @@ public final class OverlayableSystemBooleanResourceWrapper implements AutoClosea
     public final int mUserId;
     public final AtomicBoolean mValueRef;
 
-    public OverlayableSystemBooleanResourceWrapper(int i, AtomicBoolean atomicBoolean, AtomicReference atomicReference) {
+    public OverlayableSystemBooleanResourceWrapper(
+            int i, AtomicBoolean atomicBoolean, AtomicReference atomicReference) {
         this.mUserId = i;
         this.mValueRef = atomicBoolean;
         this.mCleanerRef = atomicReference;
@@ -22,9 +24,14 @@ public final class OverlayableSystemBooleanResourceWrapper implements AutoClosea
 
     public static boolean evaluate(Context context) {
         try {
-            return context.getPackageManager().getResourcesForApplication("android").getBoolean(R.bool.config_keyguardUserSwitcher);
+            return context.getPackageManager()
+                    .getResourcesForApplication("android")
+                    .getBoolean(R.bool.config_keyguardUserSwitcher);
         } catch (PackageManager.NameNotFoundException e) {
-            Slog.e("OverlayableSystemBooleanResourceWrapper", "getResourcesForApplication(\"android\") failed", e);
+            Slog.e(
+                    "OverlayableSystemBooleanResourceWrapper",
+                    "getResourcesForApplication(\"android\") failed",
+                    e);
             return false;
         }
     }

@@ -8,7 +8,9 @@ import android.view.autofill.AutofillId;
 import android.view.inputmethod.InlineSuggestion;
 import android.view.inputmethod.InlineSuggestionInfo;
 import android.view.inputmethod.InlineSuggestionsRequest;
+
 import com.android.server.autofill.RemoteInlineSuggestionRenderService;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,7 +32,13 @@ public final class InlineFillUi {
         public final int mSessionId;
         public final int mUserId;
 
-        public InlineFillUiInfo(InlineSuggestionsRequest inlineSuggestionsRequest, AutofillId autofillId, String str, RemoteInlineSuggestionRenderService remoteInlineSuggestionRenderService, int i, int i2) {
+        public InlineFillUiInfo(
+                InlineSuggestionsRequest inlineSuggestionsRequest,
+                AutofillId autofillId,
+                String str,
+                RemoteInlineSuggestionRenderService remoteInlineSuggestionRenderService,
+                int i,
+                int i2) {
             this.mUserId = i;
             this.mSessionId = i2;
             this.mInlineRequest = inlineSuggestionsRequest;
@@ -90,7 +98,8 @@ public final class InlineFillUi {
         this.mMaxInputLengthForAutofill = i;
     }
 
-    public InlineFillUi(InlineFillUiInfo inlineFillUiInfo, InlineSuggestion inlineSuggestion, int i) {
+    public InlineFillUi(
+            InlineFillUiInfo inlineFillUiInfo, InlineSuggestion inlineSuggestion, int i) {
         this.mMaxInputLengthForAutofill = Integer.MAX_VALUE;
         this.mAutofillId = inlineFillUiInfo.mFocusedId;
         this.mDatasets = null;
@@ -109,7 +118,12 @@ public final class InlineFillUi {
         InlineSuggestionInfo info = inlineSuggestion.getInfo();
         InlineContentProviderImpl inlineContentProviderImpl = contentProvider;
         inlineContentProviderImpl.getClass();
-        InlineSuggestion inlineSuggestion2 = new InlineSuggestion(info, new InlineContentProviderImpl(inlineContentProviderImpl.mRemoteInlineSuggestionViewConnector, inlineContentProviderImpl.mRemoteInlineSuggestionUi));
+        InlineSuggestion inlineSuggestion2 =
+                new InlineSuggestion(
+                        info,
+                        new InlineContentProviderImpl(
+                                inlineContentProviderImpl.mRemoteInlineSuggestionViewConnector,
+                                inlineContentProviderImpl.mRemoteInlineSuggestionUi));
         this.mInlineSuggestions.set(i, inlineSuggestion2);
         return inlineSuggestion2;
     }

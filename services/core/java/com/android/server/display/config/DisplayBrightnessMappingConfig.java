@@ -4,11 +4,13 @@ import android.R;
 import android.content.Context;
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.util.Spline;
+
 import com.android.internal.display.BrightnessSynchronizer;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.display.DisplayDeviceConfig;
 import com.android.server.display.feature.DisplayManagerFlags;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,36 +18,68 @@ import java.util.Map;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class DisplayBrightnessMappingConfig {
-    public static final String DEFAULT_BRIGHTNESS_MAPPING_KEY = AutoBrightnessModeName._default.getRawName() + "_" + AutoBrightnessSettingName.normal.getRawName();
+    public static final String DEFAULT_BRIGHTNESS_MAPPING_KEY =
+            AutoBrightnessModeName._default.getRawName()
+                    + "_"
+                    + AutoBrightnessSettingName.normal.getRawName();
     public final float[] mBrightnessLevelsNits;
     public final Map mBrightnessLevelsMap = new HashMap();
     public final Map mBrightnessLevelsLuxMap = new HashMap();
 
-    public DisplayBrightnessMappingConfig(Context context, DisplayManagerFlags displayManagerFlags, AutoBrightness autoBrightness, Spline spline) {
-        if (displayManagerFlags.mAutoBrightnessModesFlagState.isEnabled() && autoBrightness != null && autoBrightness.getLuxToBrightnessMapping() != null && autoBrightness.getLuxToBrightnessMapping().size() > 0) {
-            for (LuxToBrightnessMapping luxToBrightnessMapping : autoBrightness.getLuxToBrightnessMapping()) {
+    public DisplayBrightnessMappingConfig(
+            Context context,
+            DisplayManagerFlags displayManagerFlags,
+            AutoBrightness autoBrightness,
+            Spline spline) {
+        if (displayManagerFlags.mAutoBrightnessModesFlagState.isEnabled()
+                && autoBrightness != null
+                && autoBrightness.getLuxToBrightnessMapping() != null
+                && autoBrightness.getLuxToBrightnessMapping().size() > 0) {
+            for (LuxToBrightnessMapping luxToBrightnessMapping :
+                    autoBrightness.getLuxToBrightnessMapping()) {
                 int size = luxToBrightnessMapping.map.getPoint().size();
                 float[] fArr = new float[size];
                 float[] fArr2 = new float[size];
                 for (int i = 0; i < size; i++) {
-                    fArr[i] = spline.interpolate(((NonNegativeFloatToFloatPoint) luxToBrightnessMapping.map.getPoint().get(i)).second.floatValue());
-                    fArr2[i] = ((NonNegativeFloatToFloatPoint) luxToBrightnessMapping.map.getPoint().get(i)).first.floatValue();
+                    fArr[i] =
+                            spline.interpolate(
+                                    ((NonNegativeFloatToFloatPoint)
+                                                    luxToBrightnessMapping.map.getPoint().get(i))
+                                            .second.floatValue());
+                    fArr2[i] =
+                            ((NonNegativeFloatToFloatPoint)
+                                            luxToBrightnessMapping.map.getPoint().get(i))
+                                    .first.floatValue();
                 }
                 if (size == 0) {
-                    throw new IllegalArgumentException("A display brightness mapping should not be empty");
+                    throw new IllegalArgumentException(
+                            "A display brightness mapping should not be empty");
                 }
                 if (fArr2[0] != FullScreenMagnificationGestureHandler.MAX_SCALE) {
-                    throw new IllegalArgumentException("The first lux value in the display brightness mapping must be 0");
+                    throw new IllegalArgumentException(
+                            "The first lux value in the display brightness mapping must be 0");
                 }
                 StringBuilder sb = new StringBuilder();
                 AutoBrightnessModeName autoBrightnessModeName = luxToBrightnessMapping.mode;
-                sb.append(autoBrightnessModeName == null ? AutoBrightnessModeName._default.getRawName() : autoBrightnessModeName.getRawName());
+                sb.append(
+                        autoBrightnessModeName == null
+                                ? AutoBrightnessModeName._default.getRawName()
+                                : autoBrightnessModeName.getRawName());
                 sb.append("_");
-                AutoBrightnessSettingName autoBrightnessSettingName = luxToBrightnessMapping.setting;
-                sb.append(autoBrightnessSettingName == null ? AutoBrightnessSettingName.normal.getRawName() : autoBrightnessSettingName.getRawName());
+                AutoBrightnessSettingName autoBrightnessSettingName =
+                        luxToBrightnessMapping.setting;
+                sb.append(
+                        autoBrightnessSettingName == null
+                                ? AutoBrightnessSettingName.normal.getRawName()
+                                : autoBrightnessSettingName.getRawName());
                 String sb2 = sb.toString();
-                if (((HashMap) this.mBrightnessLevelsMap).containsKey(sb2) || ((HashMap) this.mBrightnessLevelsLuxMap).containsKey(sb2)) {
-                    throw new IllegalArgumentException(XmlUtils$$ExternalSyntheticOutline0.m("A display brightness mapping with key ", sb2, " already exists"));
+                if (((HashMap) this.mBrightnessLevelsMap).containsKey(sb2)
+                        || ((HashMap) this.mBrightnessLevelsLuxMap).containsKey(sb2)) {
+                    throw new IllegalArgumentException(
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    "A display brightness mapping with key ",
+                                    sb2,
+                                    " already exists"));
                 }
                 ((HashMap) this.mBrightnessLevelsMap).put(sb2, fArr);
                 ((HashMap) this.mBrightnessLevelsLuxMap).put(sb2, fArr2);
@@ -56,8 +90,12 @@ public final class DisplayBrightnessMappingConfig {
         if (hashMap.containsKey(str) && ((HashMap) this.mBrightnessLevelsLuxMap).containsKey(str)) {
             return;
         }
-        this.mBrightnessLevelsNits = DisplayDeviceConfig.getFloatArray(context.getResources().obtainTypedArray(R.array.config_minimumBrightnessCurveLux));
-        int[] intArray = context.getResources().getIntArray(R.array.config_networkSupportedKeepaliveCount);
+        this.mBrightnessLevelsNits =
+                DisplayDeviceConfig.getFloatArray(
+                        context.getResources()
+                                .obtainTypedArray(R.array.config_minimumBrightnessCurveLux));
+        int[] intArray =
+                context.getResources().getIntArray(R.array.config_networkSupportedKeepaliveCount);
         float[] fArr3 = new float[intArray.length + 1];
         int i2 = 0;
         while (i2 < intArray.length) {
@@ -70,7 +108,8 @@ public final class DisplayBrightnessMappingConfig {
         Map map = this.mBrightnessLevelsMap;
         float[] fArr4 = new float[intArray2.length];
         for (int i4 = 0; i4 < intArray2.length; i4++) {
-            fArr4[i4] = spline.interpolate(BrightnessSynchronizer.brightnessIntToFloat(intArray2[i4]));
+            fArr4[i4] =
+                    spline.interpolate(BrightnessSynchronizer.brightnessIntToFloat(intArray2[i4]));
         }
         ((HashMap) map).put(str, fArr4);
     }
@@ -85,7 +124,8 @@ public final class DisplayBrightnessMappingConfig {
         if (i == 2) {
             return AutoBrightnessModeName.doze.getRawName();
         }
-        throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown auto-brightness mode: "));
+        throw new IllegalArgumentException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown auto-brightness mode: "));
     }
 
     public static String autoBrightnessPresetToString(int i) {
@@ -98,7 +138,9 @@ public final class DisplayBrightnessMappingConfig {
         if (i == 3) {
             return AutoBrightnessSettingName.dim.getRawName();
         }
-        throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown auto-brightness preset value: "));
+        throw new IllegalArgumentException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(
+                        i, "Unknown auto-brightness preset value: "));
     }
 
     public final String toString() {
@@ -124,6 +166,11 @@ public final class DisplayBrightnessMappingConfig {
             sb2.delete(sb2.length() - 2, sb2.length());
         }
         sb2.append("}");
-        return "mBrightnessLevelsNits= " + Arrays.toString(this.mBrightnessLevelsNits) + ", mBrightnessLevelsLuxMap= " + ((Object) sb) + ", mBrightnessLevelsMap= " + ((Object) sb2);
+        return "mBrightnessLevelsNits= "
+                + Arrays.toString(this.mBrightnessLevelsNits)
+                + ", mBrightnessLevelsLuxMap= "
+                + ((Object) sb)
+                + ", mBrightnessLevelsMap= "
+                + ((Object) sb2);
     }
 }

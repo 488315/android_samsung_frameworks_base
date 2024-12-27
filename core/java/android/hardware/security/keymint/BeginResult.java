@@ -1,27 +1,28 @@
 package android.hardware.security.keymint;
 
-import android.hardware.security.keymint.IKeyMintOperation;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class BeginResult implements Parcelable {
-    public static final Parcelable.Creator<BeginResult> CREATOR = new Parcelable.Creator<BeginResult>() { // from class: android.hardware.security.keymint.BeginResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BeginResult createFromParcel(Parcel _aidl_source) {
-            BeginResult _aidl_out = new BeginResult();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<BeginResult> CREATOR =
+            new Parcelable.Creator<
+                    BeginResult>() { // from class: android.hardware.security.keymint.BeginResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BeginResult createFromParcel(Parcel _aidl_source) {
+                    BeginResult _aidl_out = new BeginResult();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BeginResult[] newArray(int _aidl_size) {
-            return new BeginResult[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BeginResult[] newArray(int _aidl_size) {
+                    return new BeginResult[_aidl_size];
+                }
+            };
     public long challenge = 0;
     public IKeyMintOperation operation;
     public KeyParameter[] params;
@@ -73,7 +74,8 @@ public class BeginResult implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.operation = IKeyMintOperation.Stub.asInterface(_aidl_parcel.readStrongBinder());
+                this.operation =
+                        IKeyMintOperation.Stub.asInterface(_aidl_parcel.readStrongBinder());
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

@@ -69,15 +69,15 @@ public class ATCommandAttribute {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x013a, code lost:
-    
-        android.util.Slog.e("ATCommands", "#### Error Command Convention, Must check AT Command List File");
-        android.util.Slog.e("ATCommands", "#### And This command can't operate with attribute");
-     */
+
+       android.util.Slog.e("ATCommands", "#### Error Command Convention, Must check AT Command List File");
+       android.util.Slog.e("ATCommands", "#### And This command can't operate with attribute");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:45:0x01ac, code lost:
-    
-        android.util.Slog.e("ATCommands", "#### Error Command Convention, Must check AT Command List File");
-        android.util.Slog.e("ATCommands", "#### And This command can't operate with attribute");
-     */
+
+       android.util.Slog.e("ATCommands", "#### Error Command Convention, Must check AT Command List File");
+       android.util.Slog.e("ATCommands", "#### And This command can't operate with attribute");
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r10v11 */
     /* JADX WARN: Type inference failed for: r10v14 */
@@ -97,6 +97,8 @@ public class ATCommandAttribute {
             Method dump skipped, instructions count: 504
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.service.ProtectedATCommand.list.ATCommandAttribute.setAttribute(byte[]):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.service.ProtectedATCommand.list.ATCommandAttribute.setAttribute(byte[]):byte[]");
     }
 }

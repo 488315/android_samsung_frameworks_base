@@ -6,8 +6,9 @@ import android.app.job.JobService;
 import android.app.usage.UsageStatsManagerInternal;
 import android.os.AsyncTask;
 import android.os.UserHandle;
+
 import com.android.server.LocalServices;
-import com.android.server.usage.UsageStatsService;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,55 +22,76 @@ public class UsageStatsIdleService extends JobService {
         if (i == -1) {
             return false;
         }
-        AsyncTask.execute(new Runnable() { // from class: com.android.server.usage.UsageStatsIdleService$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                UsageStatsIdleService usageStatsIdleService = UsageStatsIdleService.this;
-                JobParameters jobParameters2 = jobParameters;
-                int i2 = i;
-                int i3 = UsageStatsIdleService.$r8$clinit;
-                usageStatsIdleService.getClass();
-                UsageStatsManagerInternal usageStatsManagerInternal = (UsageStatsManagerInternal) LocalServices.getService(UsageStatsManagerInternal.class);
-                boolean z = false;
-                if (!"usagestats_mapping".equals(jobParameters2.getJobNamespace())) {
-                    UsageStatsService usageStatsService = ((UsageStatsService.LocalService) usageStatsManagerInternal).this$0;
-                    synchronized (usageStatsService.mLock) {
-                        try {
-                            if (usageStatsService.mUserUnlockedStates.contains(Integer.valueOf(i2))) {
-                                UserUsageStatsService userUsageStatsService = (UserUsageStatsService) usageStatsService.mUserState.get(i2);
-                                if (userUsageStatsService != null) {
-                                    z = userUsageStatsService.pruneUninstalledPackagesData();
+        AsyncTask.execute(
+                new Runnable() { // from class:
+                                 // com.android.server.usage.UsageStatsIdleService$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        UsageStatsIdleService usageStatsIdleService = UsageStatsIdleService.this;
+                        JobParameters jobParameters2 = jobParameters;
+                        int i2 = i;
+                        int i3 = UsageStatsIdleService.$r8$clinit;
+                        usageStatsIdleService.getClass();
+                        UsageStatsManagerInternal usageStatsManagerInternal =
+                                (UsageStatsManagerInternal)
+                                        LocalServices.getService(UsageStatsManagerInternal.class);
+                        boolean z = false;
+                        if (!"usagestats_mapping".equals(jobParameters2.getJobNamespace())) {
+                            UsageStatsService usageStatsService =
+                                    ((UsageStatsService.LocalService) usageStatsManagerInternal)
+                                            .this$0;
+                            synchronized (usageStatsService.mLock) {
+                                try {
+                                    if (usageStatsService.mUserUnlockedStates.contains(
+                                            Integer.valueOf(i2))) {
+                                        UserUsageStatsService userUsageStatsService =
+                                                (UserUsageStatsService)
+                                                        usageStatsService.mUserState.get(i2);
+                                        if (userUsageStatsService != null) {
+                                            z =
+                                                    userUsageStatsService
+                                                            .pruneUninstalledPackagesData();
+                                        }
+                                    }
+                                } finally {
                                 }
                             }
-                        } finally {
+                            usageStatsIdleService.jobFinished(jobParameters2, !z);
+                            return;
                         }
-                    }
-                    usageStatsIdleService.jobFinished(jobParameters2, !z);
-                    return;
-                }
-                UsageStatsService usageStatsService2 = ((UsageStatsService.LocalService) usageStatsManagerInternal).this$0;
-                usageStatsService2.getClass();
-                UserHandle of = UserHandle.of(i2);
-                DevicePolicyManagerInternal dpmInternal = usageStatsService2.getDpmInternal();
-                if (dpmInternal == null || dpmInternal.getProfileOwnerOrDeviceOwnerSupervisionComponent(of) == null) {
-                    HashMap installedPackages = usageStatsService2.getInstalledPackages(i2);
-                    synchronized (usageStatsService2.mLock) {
-                        try {
-                            if (usageStatsService2.mUserUnlockedStates.contains(Integer.valueOf(i2))) {
-                                UserUsageStatsService userUsageStatsService2 = (UserUsageStatsService) usageStatsService2.mUserState.get(i2);
-                                if (userUsageStatsService2 != null) {
-                                    z = userUsageStatsService2.updatePackageMappingsLocked(installedPackages);
+                        UsageStatsService usageStatsService2 =
+                                ((UsageStatsService.LocalService) usageStatsManagerInternal).this$0;
+                        usageStatsService2.getClass();
+                        UserHandle of = UserHandle.of(i2);
+                        DevicePolicyManagerInternal dpmInternal =
+                                usageStatsService2.getDpmInternal();
+                        if (dpmInternal == null
+                                || dpmInternal.getProfileOwnerOrDeviceOwnerSupervisionComponent(of)
+                                        == null) {
+                            HashMap installedPackages = usageStatsService2.getInstalledPackages(i2);
+                            synchronized (usageStatsService2.mLock) {
+                                try {
+                                    if (usageStatsService2.mUserUnlockedStates.contains(
+                                            Integer.valueOf(i2))) {
+                                        UserUsageStatsService userUsageStatsService2 =
+                                                (UserUsageStatsService)
+                                                        usageStatsService2.mUserState.get(i2);
+                                        if (userUsageStatsService2 != null) {
+                                            z =
+                                                    userUsageStatsService2
+                                                            .updatePackageMappingsLocked(
+                                                                    installedPackages);
+                                        }
+                                    }
+                                } finally {
                                 }
                             }
-                        } finally {
+                        } else {
+                            z = true;
                         }
+                        usageStatsIdleService.jobFinished(jobParameters2, !z);
                     }
-                } else {
-                    z = true;
-                }
-                usageStatsIdleService.jobFinished(jobParameters2, !z);
-            }
-        });
+                });
         return true;
     }
 

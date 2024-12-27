@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.x509;
 
 import android.hardware.gnss.GnssSignalType;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Choice;
 import com.android.internal.org.bouncycastle.asn1.ASN1GeneralizedTime;
 import com.android.internal.org.bouncycastle.asn1.ASN1Object;
@@ -9,6 +10,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.ASN1UTCTime;
 import com.android.internal.org.bouncycastle.asn1.DERGeneralizedTime;
 import com.android.internal.org.bouncycastle.asn1.DERUTCTime;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -68,7 +70,8 @@ public class Time extends ASN1Object implements ASN1Choice {
         if (obj instanceof ASN1GeneralizedTime) {
             return new Time((ASN1GeneralizedTime) obj);
         }
-        throw new IllegalArgumentException("unknown object in factory: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in factory: " + obj.getClass().getName());
     }
 
     public String getTime() {
@@ -89,7 +92,8 @@ public class Time extends ASN1Object implements ASN1Choice {
         }
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.time;
     }

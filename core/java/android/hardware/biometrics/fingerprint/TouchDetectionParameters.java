@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class TouchDetectionParameters implements Parcelable {
-    public static final Parcelable.Creator<TouchDetectionParameters> CREATOR = new Parcelable.Creator<TouchDetectionParameters>() { // from class: android.hardware.biometrics.fingerprint.TouchDetectionParameters.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TouchDetectionParameters createFromParcel(Parcel _aidl_source) {
-            TouchDetectionParameters _aidl_out = new TouchDetectionParameters();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<TouchDetectionParameters> CREATOR =
+            new Parcelable.Creator<TouchDetectionParameters>() { // from class:
+                // android.hardware.biometrics.fingerprint.TouchDetectionParameters.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TouchDetectionParameters createFromParcel(Parcel _aidl_source) {
+                    TouchDetectionParameters _aidl_out = new TouchDetectionParameters();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TouchDetectionParameters[] newArray(int _aidl_size) {
-            return new TouchDetectionParameters[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TouchDetectionParameters[] newArray(int _aidl_size) {
+                    return new TouchDetectionParameters[_aidl_size];
+                }
+            };
     public float targetSize = 1.0f;
     public float minOverlap = 0.0f;
 

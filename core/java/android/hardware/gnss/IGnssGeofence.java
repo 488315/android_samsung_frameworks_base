@@ -1,6 +1,5 @@
 package android.hardware.gnss;
 
-import android.hardware.gnss.IGnssGeofenceCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -13,7 +12,8 @@ public interface IGnssGeofence extends IInterface {
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";
     public static final int VERSION = 2;
 
-    void addGeofence(int i, double d, double d2, double d3, int i2, int i3, int i4, int i5) throws RemoteException;
+    void addGeofence(int i, double d, double d2, double d3, int i2, int i3, int i4, int i5)
+            throws RemoteException;
 
     String getInterfaceHash() throws RemoteException;
 
@@ -29,24 +29,28 @@ public interface IGnssGeofence extends IInterface {
 
     public static class Default implements IGnssGeofence {
         @Override // android.hardware.gnss.IGnssGeofence
-        public void setCallback(IGnssGeofenceCallback callback) throws RemoteException {
-        }
+        public void setCallback(IGnssGeofenceCallback callback) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssGeofence
-        public void addGeofence(int geofenceId, double latitudeDegrees, double longitudeDegrees, double radiusMeters, int lastTransition, int monitorTransitions, int notificationResponsivenessMs, int unknownTimerMs) throws RemoteException {
-        }
+        public void addGeofence(
+                int geofenceId,
+                double latitudeDegrees,
+                double longitudeDegrees,
+                double radiusMeters,
+                int lastTransition,
+                int monitorTransitions,
+                int notificationResponsivenessMs,
+                int unknownTimerMs)
+                throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssGeofence
-        public void pauseGeofence(int geofenceId) throws RemoteException {
-        }
+        public void pauseGeofence(int geofenceId) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssGeofence
-        public void resumeGeofence(int geofenceId, int monitorTransitions) throws RemoteException {
-        }
+        public void resumeGeofence(int geofenceId, int monitorTransitions) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssGeofence
-        public void removeGeofence(int geofenceId) throws RemoteException {
-        }
+        public void removeGeofence(int geofenceId) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssGeofence
         public int getInterfaceVersion() {
@@ -64,7 +68,7 @@ public interface IGnssGeofence extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssGeofence {
+    public abstract static class Stub extends Binder implements IGnssGeofence {
         static final int TRANSACTION_addGeofence = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -121,7 +125,8 @@ public interface IGnssGeofence extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -142,7 +147,8 @@ public interface IGnssGeofence extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IGnssGeofenceCallback _arg0 = IGnssGeofenceCallback.Stub.asInterface(data.readStrongBinder());
+                    IGnssGeofenceCallback _arg0 =
+                            IGnssGeofenceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg0);
                     reply.writeNoException();
@@ -220,7 +226,16 @@ public interface IGnssGeofence extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnssGeofence
-            public void addGeofence(int geofenceId, double latitudeDegrees, double longitudeDegrees, double radiusMeters, int lastTransition, int monitorTransitions, int notificationResponsivenessMs, int unknownTimerMs) throws RemoteException {
+            public void addGeofence(
+                    int geofenceId,
+                    double latitudeDegrees,
+                    double longitudeDegrees,
+                    double radiusMeters,
+                    int lastTransition,
+                    int monitorTransitions,
+                    int notificationResponsivenessMs,
+                    int unknownTimerMs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -317,7 +332,8 @@ public interface IGnssGeofence extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnssGeofence
-            public void resumeGeofence(int geofenceId, int monitorTransitions) throws RemoteException {
+            public void resumeGeofence(int geofenceId, int monitorTransitions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

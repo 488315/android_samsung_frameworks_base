@@ -1,11 +1,11 @@
 package android.app.admin;
 
-import android.app.admin.SecurityLog;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -16,8 +16,8 @@ public interface IAuditLogEventsCallback extends IInterface {
 
     public static class Default implements IAuditLogEventsCallback {
         @Override // android.app.admin.IAuditLogEventsCallback
-        public void onNewAuditLogEvents(List<SecurityLog.SecurityEvent> events) throws RemoteException {
-        }
+        public void onNewAuditLogEvents(List<SecurityLog.SecurityEvent> events)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +25,7 @@ public interface IAuditLogEventsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAuditLogEventsCallback {
+    public abstract static class Stub extends Binder implements IAuditLogEventsCallback {
         static final int TRANSACTION_onNewAuditLogEvents = 1;
 
         public Stub() {
@@ -63,7 +63,8 @@ public interface IAuditLogEventsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAuditLogEventsCallback.DESCRIPTOR);
             }
@@ -73,7 +74,8 @@ public interface IAuditLogEventsCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<SecurityLog.SecurityEvent> _arg0 = data.createTypedArrayList(SecurityLog.SecurityEvent.CREATOR);
+                    List<SecurityLog.SecurityEvent> _arg0 =
+                            data.createTypedArrayList(SecurityLog.SecurityEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onNewAuditLogEvents(_arg0);
                     return true;
@@ -99,7 +101,8 @@ public interface IAuditLogEventsCallback extends IInterface {
             }
 
             @Override // android.app.admin.IAuditLogEventsCallback
-            public void onNewAuditLogEvents(List<SecurityLog.SecurityEvent> events) throws RemoteException {
+            public void onNewAuditLogEvents(List<SecurityLog.SecurityEvent> events)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAuditLogEventsCallback.DESCRIPTOR);

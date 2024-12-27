@@ -22,13 +22,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.AdapterView;
-import android.widget.Filter;
-import android.widget.PopupWindow;
 import android.window.OnBackInvokedCallback;
 import android.window.OnBackInvokedDispatcher;
 import android.window.WindowOnBackInvokedDispatcher;
+
 import com.android.internal.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -61,8 +60,7 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
     private Validator mValidator;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InputMethodMode {
-    }
+    public @interface InputMethodMode {}
 
     public interface OnDismissListener {
         void onDismiss();
@@ -74,7 +72,8 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         boolean isValid(CharSequence charSequence);
     }
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<AutoCompleteTextView> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<AutoCompleteTextView> {
         private int mCompletionHintId;
         private int mCompletionThresholdId;
         private int mDropDownHeightId;
@@ -89,8 +88,10 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
             this.mCompletionHintId = propertyMapper.mapObject("completionHint", 16843122);
             this.mCompletionThresholdId = propertyMapper.mapInt("completionThreshold", 16843124);
             this.mDropDownHeightId = propertyMapper.mapInt("dropDownHeight", 16843395);
-            this.mDropDownHorizontalOffsetId = propertyMapper.mapInt("dropDownHorizontalOffset", 16843436);
-            this.mDropDownVerticalOffsetId = propertyMapper.mapInt("dropDownVerticalOffset", 16843437);
+            this.mDropDownHorizontalOffsetId =
+                    propertyMapper.mapInt("dropDownHorizontalOffset", 16843436);
+            this.mDropDownVerticalOffsetId =
+                    propertyMapper.mapInt("dropDownVerticalOffset", 16843437);
             this.mDropDownWidthId = propertyMapper.mapInt("dropDownWidth", 16843362);
             this.mPopupBackgroundId = propertyMapper.mapObject("popupBackground", 16843126);
             this.mPropertiesMapped = true;
@@ -104,8 +105,10 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
             propertyReader.readObject(this.mCompletionHintId, node.getCompletionHint());
             propertyReader.readInt(this.mCompletionThresholdId, node.getThreshold());
             propertyReader.readInt(this.mDropDownHeightId, node.getDropDownHeight());
-            propertyReader.readInt(this.mDropDownHorizontalOffsetId, node.getDropDownHorizontalOffset());
-            propertyReader.readInt(this.mDropDownVerticalOffsetId, node.getDropDownVerticalOffset());
+            propertyReader.readInt(
+                    this.mDropDownHorizontalOffsetId, node.getDropDownHorizontalOffset());
+            propertyReader.readInt(
+                    this.mDropDownVerticalOffsetId, node.getDropDownVerticalOffset());
             propertyReader.readInt(this.mDropDownWidthId, node.getDropDownWidth());
             propertyReader.readObject(this.mPopupBackgroundId, node.getDropDownBackground());
         }
@@ -130,25 +133,37 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public AutoCompleteTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public AutoCompleteTextView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         this(context, attrs, defStyleAttr, defStyleRes, null);
     }
 
-    public AutoCompleteTextView(Context context, AttributeSet attributeSet, int i, int i2, Resources.Theme theme) {
+    public AutoCompleteTextView(
+            Context context, AttributeSet attributeSet, int i, int i2, Resources.Theme theme) {
         super(context, attributeSet, i, i2);
         TypedArray typedArray;
         this.mDropDownDismissedOnCompletion = true;
         this.mLastKeyCode = 0;
         this.mValidator = null;
         this.mPopupCanBeUpdated = true;
-        this.mBackCallback = new OnBackInvokedCallback() { // from class: android.widget.AutoCompleteTextView$$ExternalSyntheticLambda0
-            @Override // android.window.OnBackInvokedCallback
-            public final void onBackInvoked() {
-                AutoCompleteTextView.this.lambda$new$0();
-            }
-        };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AutoCompleteTextView, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.AutoCompleteTextView, attributeSet, obtainStyledAttributes, i, i2);
+        this.mBackCallback =
+                new OnBackInvokedCallback() { // from class:
+                                              // android.widget.AutoCompleteTextView$$ExternalSyntheticLambda0
+                    @Override // android.window.OnBackInvokedCallback
+                    public final void onBackInvoked() {
+                        AutoCompleteTextView.this.lambda$new$0();
+                    }
+                };
+        TypedArray obtainStyledAttributes =
+                context.obtainStyledAttributes(
+                        attributeSet, R.styleable.AutoCompleteTextView, i, i2);
+        saveAttributeDataForStyleable(
+                context,
+                R.styleable.AutoCompleteTextView,
+                attributeSet,
+                obtainStyledAttributes,
+                i,
+                i2);
         if (theme == null) {
             int resourceId = obtainStyledAttributes.getResourceId(8, 0);
             if (resourceId != 0) {
@@ -160,8 +175,16 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
             this.mPopupContext = new ContextThemeWrapper(context, theme);
         }
         if (this.mPopupContext != context) {
-            TypedArray obtainStyledAttributes2 = this.mPopupContext.obtainStyledAttributes(attributeSet, R.styleable.AutoCompleteTextView, i, i2);
-            saveAttributeDataForStyleable(context, R.styleable.AutoCompleteTextView, attributeSet, obtainStyledAttributes, i, i2);
+            TypedArray obtainStyledAttributes2 =
+                    this.mPopupContext.obtainStyledAttributes(
+                            attributeSet, R.styleable.AutoCompleteTextView, i, i2);
+            saveAttributeDataForStyleable(
+                    context,
+                    R.styleable.AutoCompleteTextView,
+                    attributeSet,
+                    obtainStyledAttributes,
+                    i,
+                    i2);
             typedArray = obtainStyledAttributes2;
         } else {
             typedArray = obtainStyledAttributes;
@@ -175,12 +198,15 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
             typedArray.recycle();
         }
         this.mPopup = new ListPopupWindow(this.mPopupContext, attributeSet, i, i2);
-        this.mPopup.setOnDismissListener(new PopupWindow.OnDismissListener() { // from class: android.widget.AutoCompleteTextView$$ExternalSyntheticLambda1
-            @Override // android.widget.PopupWindow.OnDismissListener
-            public final void onDismiss() {
-                AutoCompleteTextView.this.lambda$new$1();
-            }
-        });
+        this.mPopup.setOnDismissListener(
+                new PopupWindow
+                        .OnDismissListener() { // from class:
+                                               // android.widget.AutoCompleteTextView$$ExternalSyntheticLambda1
+                    @Override // android.widget.PopupWindow.OnDismissListener
+                    public final void onDismiss() {
+                        AutoCompleteTextView.this.lambda$new$1();
+                    }
+                });
         this.mPopup.setSoftInputMode(16);
         this.mPopup.setPromptPosition(1);
         this.mPopup.setListSelector(drawable);
@@ -222,7 +248,11 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
             this.mHintView = null;
         } else {
             if (this.mHintView == null) {
-                TextView hintView = (TextView) LayoutInflater.from(this.mPopupContext).inflate(this.mHintResource, (ViewGroup) null).findViewById(16908308);
+                TextView hintView =
+                        (TextView)
+                                LayoutInflater.from(this.mPopupContext)
+                                        .inflate(this.mHintResource, (ViewGroup) null)
+                                        .findViewById(16908308);
                 hintView.lambda$setTextAsync$0(this.mHintText);
                 this.mHintView = hintView;
                 this.mPopup.setPromptView(hintView);
@@ -353,13 +383,16 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
     public void setOnDismissListener(final OnDismissListener dismissListener) {
         PopupWindow.OnDismissListener wrappedListener = null;
         if (dismissListener != null) {
-            wrappedListener = new PopupWindow.OnDismissListener() { // from class: android.widget.AutoCompleteTextView.1
-                @Override // android.widget.PopupWindow.OnDismissListener
-                public void onDismiss() {
-                    dismissListener.onDismiss();
-                    AutoCompleteTextView.this.lambda$new$1();
-                }
-            };
+            wrappedListener =
+                    new PopupWindow
+                            .OnDismissListener() { // from class:
+                                                   // android.widget.AutoCompleteTextView.1
+                        @Override // android.widget.PopupWindow.OnDismissListener
+                        public void onDismiss() {
+                            dismissListener.onDismiss();
+                            AutoCompleteTextView.this.lambda$new$1();
+                        }
+                    };
         }
         this.mPopup.setOnDismissListener(wrappedListener);
     }
@@ -387,7 +420,9 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
 
     @Override // android.widget.TextView, android.view.View
     public boolean onKeyPreIme(int keyCode, KeyEvent event) {
-        if ((keyCode == 4 || keyCode == 111) && isPopupShowing() && !this.mPopup.isDropDownAlwaysVisible()) {
+        if ((keyCode == 4 || keyCode == 111)
+                && isPopupShowing()
+                && !this.mPopup.isDropDownAlwaysVisible()) {
             if (event.getAction() == 0 && event.getRepeatCount() == 0) {
                 KeyEvent.DispatcherState state = getKeyDispatcherState();
                 if (state != null) {
@@ -467,8 +502,7 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
     private class MyWatcher implements TextWatcher {
         private boolean mOpenBefore;
 
-        private MyWatcher() {
-        }
+        private MyWatcher() {}
 
         @Override // android.text.TextWatcher
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -489,8 +523,7 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         }
 
         @Override // android.text.TextWatcher
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
+        public void onTextChanged(CharSequence s, int start, int before, int count) {}
     }
 
     void doBeforeTextChanged() {
@@ -677,7 +710,8 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
     }
 
     public void dismissDropDown() {
-        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(InputMethodManager.class);
+        InputMethodManager imm =
+                (InputMethodManager) getContext().getSystemService(InputMethodManager.class);
         if (imm != null) {
             imm.displayCompletions(this, null);
         }
@@ -744,7 +778,11 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
     private void buildImeCompletions() {
         InputMethodManager imm;
         ListAdapter adapter = this.mAdapter;
-        if (adapter != null && (imm = (InputMethodManager) getContext().getSystemService(InputMethodManager.class)) != null) {
+        if (adapter != null
+                && (imm =
+                                (InputMethodManager)
+                                        getContext().getSystemService(InputMethodManager.class))
+                        != null) {
             int count = Math.min(adapter.getCount(), 20);
             CompletionInfo[] completions = new CompletionInfo[count];
             int realCount = 0;
@@ -752,7 +790,8 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
                 if (adapter.isEnabled(i)) {
                     Object item = adapter.getItem(i);
                     long id = adapter.getItemId(i);
-                    completions[realCount] = new CompletionInfo(id, realCount, convertSelectionToString(item));
+                    completions[realCount] =
+                            new CompletionInfo(id, realCount, convertSelectionToString(item));
                     realCount++;
                 }
             }
@@ -817,8 +856,7 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
     }
 
     private class DropDownItemClickListener implements AdapterView.OnItemClickListener {
-        private DropDownItemClickListener() {
-        }
+        private DropDownItemClickListener() {}
 
         @Override // android.widget.AdapterView.OnItemClickListener
         public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -829,8 +867,7 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
     private class PassThroughClickListener implements View.OnClickListener {
         private View.OnClickListener mWrapped;
 
-        private PassThroughClickListener() {
-        }
+        private PassThroughClickListener() {}
 
         @Override // android.view.View.OnClickListener
         public void onClick(View v) {
@@ -846,17 +883,21 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         private final Runnable updateRunnable;
 
         private PopupDataSetObserver(AutoCompleteTextView view) {
-            this.updateRunnable = new Runnable() { // from class: android.widget.AutoCompleteTextView.PopupDataSetObserver.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    ListAdapter adapter;
-                    AutoCompleteTextView textView = (AutoCompleteTextView) PopupDataSetObserver.this.mViewReference.get();
-                    if (textView == null || (adapter = textView.mAdapter) == null) {
-                        return;
-                    }
-                    textView.updateDropDownForFilter(adapter.getCount());
-                }
-            };
+            this.updateRunnable =
+                    new Runnable() { // from class:
+                                     // android.widget.AutoCompleteTextView.PopupDataSetObserver.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            ListAdapter adapter;
+                            AutoCompleteTextView textView =
+                                    (AutoCompleteTextView)
+                                            PopupDataSetObserver.this.mViewReference.get();
+                            if (textView == null || (adapter = textView.mAdapter) == null) {
+                                return;
+                            }
+                            textView.updateDropDownForFilter(adapter.getCount());
+                        }
+                    };
             this.mViewReference = new WeakReference<>(view);
         }
 

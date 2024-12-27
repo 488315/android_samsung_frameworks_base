@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Slog;
+
 import com.samsung.android.knoxguard.service.IntentRelayManager;
 import com.samsung.android.knoxguard.service.KGEventHandler;
 import com.samsung.android.knoxguard.service.KGEventQueue;
@@ -28,40 +29,56 @@ public final class SystemSeReceiver extends BroadcastReceiver {
         String action = intent.getAction();
         Slog.i(TAG, "onReceive " + action);
         if ("android.intent.action.BOOT_COMPLETED".equals(action)) {
-            KGEventQueue.getInstance().enqueueEvent(context, KGEventHandler.SystemEvent.ON_BOOT_COMPLETED, null);
+            KGEventQueue.getInstance()
+                    .enqueueEvent(context, KGEventHandler.SystemEvent.ON_BOOT_COMPLETED, null);
             return;
         }
         if ("android.intent.action.USER_PRESENT".equals(action)) {
-            KGEventQueue.getInstance().enqueueEvent(context, KGEventHandler.SystemEvent.ON_USER_PRESENT, null);
+            KGEventQueue.getInstance()
+                    .enqueueEvent(context, KGEventHandler.SystemEvent.ON_USER_PRESENT, null);
             return;
         }
         if ("android.intent.action.PACKAGE_ADDED".equals(action)) {
-            if (intent.getData() == null || !"com.samsung.android.kgclient".equals(intent.getData().getSchemeSpecificPart())) {
+            if (intent.getData() == null
+                    || !"com.samsung.android.kgclient"
+                            .equals(intent.getData().getSchemeSpecificPart())) {
                 return;
             }
-            IntentRelayManager.sendRequestedIntent(context, Constants.INTENT_KG_PACKAGE_ADDED, intent.getExtras());
+            IntentRelayManager.sendRequestedIntent(
+                    context, Constants.INTENT_KG_PACKAGE_ADDED, intent.getExtras());
             return;
         }
-        if ("android.intent.action.PACKAGE_REPLACED".equals(action) || "android.intent.action.PACKAGE_REMOVED".equals(action) || "android.intent.action.PACKAGE_CHANGED".equals(action)) {
+        if ("android.intent.action.PACKAGE_REPLACED".equals(action)
+                || "android.intent.action.PACKAGE_REMOVED".equals(action)
+                || "android.intent.action.PACKAGE_CHANGED".equals(action)) {
             if (intent.getData() != null) {
                 Uri data = intent.getData();
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(SystemIntentProcessor.KEY_URI, data);
-                KGEventQueue.getInstance().enqueueEvent(context, KGEventHandler.SystemEvent.ON_PACKAGE_REPLACED_OR_REMOVED, bundle);
+                KGEventQueue.getInstance()
+                        .enqueueEvent(
+                                context,
+                                KGEventHandler.SystemEvent.ON_PACKAGE_REPLACED_OR_REMOVED,
+                                bundle);
                 return;
             }
             return;
         }
-        if (Constants.INTENT_SECSETUPWIZARD_COMPLETE.equals(action) || Constants.INTENT_SETUPWIZARD_COMPLETE.equals(action)) {
-            KGEventQueue.getInstance().enqueueEvent(context, KGEventHandler.SystemEvent.ON_SETUP_WIZARD_COMPLETED, null);
+        if (Constants.INTENT_SECSETUPWIZARD_COMPLETE.equals(action)
+                || Constants.INTENT_SETUPWIZARD_COMPLETE.equals(action)) {
+            KGEventQueue.getInstance()
+                    .enqueueEvent(
+                            context, KGEventHandler.SystemEvent.ON_SETUP_WIZARD_COMPLETED, null);
             return;
         }
-        if (!"android.intent.action.PACKAGE_DATA_CLEARED".equals(action) || intent.getData() == null) {
+        if (!"android.intent.action.PACKAGE_DATA_CLEARED".equals(action)
+                || intent.getData() == null) {
             return;
         }
         Uri data2 = intent.getData();
         Bundle bundle2 = new Bundle();
         bundle2.putParcelable(SystemIntentProcessor.KEY_URI, data2);
-        KGEventQueue.getInstance().enqueueEvent(context, KGEventHandler.SystemEvent.ON_PACKAGE_DATA_CLEARED, bundle2);
+        KGEventQueue.getInstance()
+                .enqueueEvent(context, KGEventHandler.SystemEvent.ON_PACKAGE_DATA_CLEARED, bundle2);
     }
 }

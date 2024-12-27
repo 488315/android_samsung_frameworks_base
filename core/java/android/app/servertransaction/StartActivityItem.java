@@ -10,24 +10,29 @@ import android.os.Trace;
 
 /* loaded from: classes.dex */
 public class StartActivityItem extends ActivityLifecycleItem {
-    public static final Parcelable.Creator<StartActivityItem> CREATOR = new Parcelable.Creator<StartActivityItem>() { // from class: android.app.servertransaction.StartActivityItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StartActivityItem createFromParcel(Parcel in) {
-            return new StartActivityItem(in);
-        }
+    public static final Parcelable.Creator<StartActivityItem> CREATOR =
+            new Parcelable.Creator<StartActivityItem>() { // from class:
+                // android.app.servertransaction.StartActivityItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StartActivityItem createFromParcel(Parcel in) {
+                    return new StartActivityItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StartActivityItem[] newArray(int size) {
-            return new StartActivityItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StartActivityItem[] newArray(int size) {
+                    return new StartActivityItem[size];
+                }
+            };
     private static final String TAG = "StartActivityItem";
     private ActivityOptions.SceneTransitionInfo mSceneTransitionInfo;
 
     @Override // android.app.servertransaction.ActivityTransactionItem
-    public void execute(ClientTransactionHandler client, ActivityThread.ActivityClientRecord r, PendingTransactionActions pendingActions) {
+    public void execute(
+            ClientTransactionHandler client,
+            ActivityThread.ActivityClientRecord r,
+            PendingTransactionActions pendingActions) {
         Trace.traceBegin(64L, "startActivityItem");
         client.handleStartActivity(r, pendingActions, this.mSceneTransitionInfo);
         Trace.traceEnd(64L);
@@ -38,10 +43,10 @@ public class StartActivityItem extends ActivityLifecycleItem {
         return 2;
     }
 
-    private StartActivityItem() {
-    }
+    private StartActivityItem() {}
 
-    public static StartActivityItem obtain(IBinder activityToken, ActivityOptions.SceneTransitionInfo sceneTransitionInfo) {
+    public static StartActivityItem obtain(
+            IBinder activityToken, ActivityOptions.SceneTransitionInfo sceneTransitionInfo) {
         StartActivityItem instance = (StartActivityItem) ObjectPool.obtain(StartActivityItem.class);
         if (instance == null) {
             instance = new StartActivityItem();
@@ -51,7 +56,8 @@ public class StartActivityItem extends ActivityLifecycleItem {
         return instance;
     }
 
-    @Override // android.app.servertransaction.ActivityTransactionItem, android.app.servertransaction.ObjectPoolItem
+    @Override // android.app.servertransaction.ActivityTransactionItem,
+    // android.app.servertransaction.ObjectPoolItem
     public void recycle() {
         super.recycle();
         this.mSceneTransitionInfo = null;
@@ -66,7 +72,9 @@ public class StartActivityItem extends ActivityLifecycleItem {
 
     private StartActivityItem(Parcel in) {
         super(in);
-        this.mSceneTransitionInfo = (ActivityOptions.SceneTransitionInfo) in.readTypedObject(ActivityOptions.SceneTransitionInfo.CREATOR);
+        this.mSceneTransitionInfo =
+                (ActivityOptions.SceneTransitionInfo)
+                        in.readTypedObject(ActivityOptions.SceneTransitionInfo.CREATOR);
     }
 
     @Override // android.app.servertransaction.ActivityTransactionItem
@@ -89,6 +97,10 @@ public class StartActivityItem extends ActivityLifecycleItem {
 
     @Override // android.app.servertransaction.ActivityTransactionItem
     public String toString() {
-        return "StartActivityItem{" + super.toString() + ",sceneTransitionInfo=" + this.mSceneTransitionInfo + "}";
+        return "StartActivityItem{"
+                + super.toString()
+                + ",sceneTransitionInfo="
+                + this.mSceneTransitionInfo
+                + "}";
     }
 }

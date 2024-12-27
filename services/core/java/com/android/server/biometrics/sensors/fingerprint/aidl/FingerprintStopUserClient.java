@@ -3,6 +3,7 @@ package com.android.server.biometrics.sensors.fingerprint.aidl;
 import android.hardware.biometrics.fingerprint.ISession;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.biometrics.sensors.ClientMonitorCallback;
 import com.android.server.biometrics.sensors.StopUserClient;
 
@@ -26,6 +27,5 @@ public final class FingerprintStopUserClient extends StopUserClient {
     }
 
     @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public final void unableToStart() {
-    }
+    public final void unableToStart() {}
 }

@@ -6,8 +6,10 @@ import android.os.ParcelUuid;
 import android.os.Parcelable;
 import android.provider.OneTimeUseBuilder;
 import android.text.format.DateFormat;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,25 +17,31 @@ import java.util.regex.Pattern;
 
 /* loaded from: classes.dex */
 public final class BluetoothDeviceFilter implements DeviceFilter<BluetoothDevice> {
-    public static final Parcelable.Creator<BluetoothDeviceFilter> CREATOR = new Parcelable.Creator<BluetoothDeviceFilter>() { // from class: android.companion.BluetoothDeviceFilter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BluetoothDeviceFilter createFromParcel(Parcel in) {
-            return new BluetoothDeviceFilter(in);
-        }
+    public static final Parcelable.Creator<BluetoothDeviceFilter> CREATOR =
+            new Parcelable.Creator<BluetoothDeviceFilter>() { // from class:
+                // android.companion.BluetoothDeviceFilter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BluetoothDeviceFilter createFromParcel(Parcel in) {
+                    return new BluetoothDeviceFilter(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BluetoothDeviceFilter[] newArray(int size) {
-            return new BluetoothDeviceFilter[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BluetoothDeviceFilter[] newArray(int size) {
+                    return new BluetoothDeviceFilter[size];
+                }
+            };
     private final String mAddress;
     private final Pattern mNamePattern;
     private final List<ParcelUuid> mServiceUuidMasks;
     private final List<ParcelUuid> mServiceUuids;
 
-    private BluetoothDeviceFilter(Pattern namePattern, String address, List<ParcelUuid> serviceUuids, List<ParcelUuid> serviceUuidMasks) {
+    private BluetoothDeviceFilter(
+            Pattern namePattern,
+            String address,
+            List<ParcelUuid> serviceUuids,
+            List<ParcelUuid> serviceUuidMasks) {
         this.mNamePattern = namePattern;
         this.mAddress = address;
         this.mServiceUuids = CollectionUtils.emptyIfNull(serviceUuids);
@@ -41,16 +49,24 @@ public final class BluetoothDeviceFilter implements DeviceFilter<BluetoothDevice
     }
 
     private BluetoothDeviceFilter(Parcel in) {
-        this(BluetoothDeviceFilterUtils.patternFromString(in.readString()), in.readString(), readUuids(in), readUuids(in));
+        this(
+                BluetoothDeviceFilterUtils.patternFromString(in.readString()),
+                in.readString(),
+                readUuids(in),
+                readUuids(in));
     }
 
     private static List<ParcelUuid> readUuids(Parcel in) {
-        return in.readParcelableList(new ArrayList(), ParcelUuid.class.getClassLoader(), ParcelUuid.class);
+        return in.readParcelableList(
+                new ArrayList(), ParcelUuid.class.getClassLoader(), ParcelUuid.class);
     }
 
     @Override // android.companion.DeviceFilter
     public boolean matches(BluetoothDevice device) {
-        return BluetoothDeviceFilterUtils.matchesAddress(this.mAddress, device) && BluetoothDeviceFilterUtils.matchesServiceUuids(this.mServiceUuids, this.mServiceUuidMasks, device) && BluetoothDeviceFilterUtils.matchesName(getNamePattern(), device);
+        return BluetoothDeviceFilterUtils.matchesAddress(this.mAddress, device)
+                && BluetoothDeviceFilterUtils.matchesServiceUuids(
+                        this.mServiceUuids, this.mServiceUuidMasks, device)
+                && BluetoothDeviceFilterUtils.matchesName(getNamePattern(), device);
     }
 
     @Override // android.companion.DeviceFilter
@@ -95,18 +111,31 @@ public final class BluetoothDeviceFilter implements DeviceFilter<BluetoothDevice
             return false;
         }
         BluetoothDeviceFilter that = (BluetoothDeviceFilter) o;
-        if (Objects.equals(this.mNamePattern, that.mNamePattern) && Objects.equals(this.mAddress, that.mAddress) && Objects.equals(this.mServiceUuids, that.mServiceUuids) && Objects.equals(this.mServiceUuidMasks, that.mServiceUuidMasks)) {
+        if (Objects.equals(this.mNamePattern, that.mNamePattern)
+                && Objects.equals(this.mAddress, that.mAddress)
+                && Objects.equals(this.mServiceUuids, that.mServiceUuids)
+                && Objects.equals(this.mServiceUuidMasks, that.mServiceUuidMasks)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mNamePattern, this.mAddress, this.mServiceUuids, this.mServiceUuidMasks);
+        return Objects.hash(
+                this.mNamePattern, this.mAddress, this.mServiceUuids, this.mServiceUuidMasks);
     }
 
     public String toString() {
-        return "BluetoothDeviceFilter{mNamePattern=" + this.mNamePattern + ", mAddress='" + this.mAddress + DateFormat.QUOTE + ", mServiceUuids=" + this.mServiceUuids + ", mServiceUuidMasks=" + this.mServiceUuidMasks + '}';
+        return "BluetoothDeviceFilter{mNamePattern="
+                + this.mNamePattern
+                + ", mAddress='"
+                + this.mAddress
+                + DateFormat.QUOTE
+                + ", mServiceUuids="
+                + this.mServiceUuids
+                + ", mServiceUuidMasks="
+                + this.mServiceUuidMasks
+                + '}';
     }
 
     @Override // android.os.Parcelable
@@ -143,7 +172,8 @@ public final class BluetoothDeviceFilter implements DeviceFilter<BluetoothDevice
         @Override // android.provider.OneTimeUseBuilder
         public BluetoothDeviceFilter build() {
             markUsed();
-            return new BluetoothDeviceFilter(this.mNamePattern, this.mAddress, this.mServiceUuid, this.mServiceUuidMask);
+            return new BluetoothDeviceFilter(
+                    this.mNamePattern, this.mAddress, this.mServiceUuid, this.mServiceUuidMask);
         }
     }
 }

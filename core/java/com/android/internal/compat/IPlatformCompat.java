@@ -9,7 +9,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
-import com.android.internal.compat.IOverrideValidator;
 
 /* loaded from: classes5.dex */
 public interface IPlatformCompat extends IInterface {
@@ -43,13 +42,22 @@ public interface IPlatformCompat extends IInterface {
 
     CompatibilityChangeInfo[] listUIChanges() throws RemoteException;
 
-    void putAllOverridesOnReleaseBuilds(CompatibilityOverridesByPackageConfig compatibilityOverridesByPackageConfig) throws RemoteException;
+    void putAllOverridesOnReleaseBuilds(
+            CompatibilityOverridesByPackageConfig compatibilityOverridesByPackageConfig)
+            throws RemoteException;
 
-    void putOverridesOnReleaseBuilds(CompatibilityOverrideConfig compatibilityOverrideConfig, String str) throws RemoteException;
+    void putOverridesOnReleaseBuilds(
+            CompatibilityOverrideConfig compatibilityOverrideConfig, String str)
+            throws RemoteException;
 
-    void removeAllOverridesOnReleaseBuilds(CompatibilityOverridesToRemoveByPackageConfig compatibilityOverridesToRemoveByPackageConfig) throws RemoteException;
+    void removeAllOverridesOnReleaseBuilds(
+            CompatibilityOverridesToRemoveByPackageConfig
+                    compatibilityOverridesToRemoveByPackageConfig)
+            throws RemoteException;
 
-    void removeOverridesOnReleaseBuilds(CompatibilityOverridesToRemoveConfig compatibilityOverridesToRemoveConfig, String str) throws RemoteException;
+    void removeOverridesOnReleaseBuilds(
+            CompatibilityOverridesToRemoveConfig compatibilityOverridesToRemoveConfig, String str)
+            throws RemoteException;
 
     void reportChange(long j, ApplicationInfo applicationInfo) throws RemoteException;
 
@@ -57,30 +65,32 @@ public interface IPlatformCompat extends IInterface {
 
     void reportChangeByUid(long j, int i) throws RemoteException;
 
-    void setOverrides(CompatibilityChangeConfig compatibilityChangeConfig, String str) throws RemoteException;
+    void setOverrides(CompatibilityChangeConfig compatibilityChangeConfig, String str)
+            throws RemoteException;
 
-    void setOverridesForTest(CompatibilityChangeConfig compatibilityChangeConfig, String str) throws RemoteException;
+    void setOverridesForTest(CompatibilityChangeConfig compatibilityChangeConfig, String str)
+            throws RemoteException;
 
     public static class Default implements IPlatformCompat {
         @Override // com.android.internal.compat.IPlatformCompat
-        public void reportChange(long changeId, ApplicationInfo appInfo) throws RemoteException {
-        }
+        public void reportChange(long changeId, ApplicationInfo appInfo) throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public void reportChangeByPackageName(long changeId, String packageName, int userId) throws RemoteException {
-        }
+        public void reportChangeByPackageName(long changeId, String packageName, int userId)
+                throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public void reportChangeByUid(long changeId, int uid) throws RemoteException {
-        }
+        public void reportChangeByUid(long changeId, int uid) throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public boolean isChangeEnabled(long changeId, ApplicationInfo appInfo) throws RemoteException {
+        public boolean isChangeEnabled(long changeId, ApplicationInfo appInfo)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public boolean isChangeEnabledByPackageName(long changeId, String packageName, int userId) throws RemoteException {
+        public boolean isChangeEnabledByPackageName(long changeId, String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -95,20 +105,20 @@ public interface IPlatformCompat extends IInterface {
         }
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public void setOverrides(CompatibilityChangeConfig overrides, String packageName) throws RemoteException {
-        }
+        public void setOverrides(CompatibilityChangeConfig overrides, String packageName)
+                throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public void putAllOverridesOnReleaseBuilds(CompatibilityOverridesByPackageConfig overridesByPackage) throws RemoteException {
-        }
+        public void putAllOverridesOnReleaseBuilds(
+                CompatibilityOverridesByPackageConfig overridesByPackage) throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public void putOverridesOnReleaseBuilds(CompatibilityOverrideConfig overrides, String packageName) throws RemoteException {
-        }
+        public void putOverridesOnReleaseBuilds(
+                CompatibilityOverrideConfig overrides, String packageName) throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public void setOverridesForTest(CompatibilityChangeConfig overrides, String packageName) throws RemoteException {
-        }
+        public void setOverridesForTest(CompatibilityChangeConfig overrides, String packageName)
+                throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompat
         public boolean clearOverride(long changeId, String packageName) throws RemoteException {
@@ -116,38 +126,42 @@ public interface IPlatformCompat extends IInterface {
         }
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public boolean clearOverrideForTest(long changeId, String packageName) throws RemoteException {
+        public boolean clearOverrideForTest(long changeId, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public void removeAllOverridesOnReleaseBuilds(CompatibilityOverridesToRemoveByPackageConfig overridesToRemoveByPackage) throws RemoteException {
-        }
+        public void removeAllOverridesOnReleaseBuilds(
+                CompatibilityOverridesToRemoveByPackageConfig overridesToRemoveByPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public void removeOverridesOnReleaseBuilds(CompatibilityOverridesToRemoveConfig overridesToRemove, String packageName) throws RemoteException {
-        }
+        public void removeOverridesOnReleaseBuilds(
+                CompatibilityOverridesToRemoveConfig overridesToRemove, String packageName)
+                throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public int enableTargetSdkChanges(String packageName, int targetSdkVersion) throws RemoteException {
+        public int enableTargetSdkChanges(String packageName, int targetSdkVersion)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public int disableTargetSdkChanges(String packageName, int targetSdkVersion) throws RemoteException {
+        public int disableTargetSdkChanges(String packageName, int targetSdkVersion)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public void clearOverrides(String packageName) throws RemoteException {
-        }
+        public void clearOverrides(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public void clearOverridesForTest(String packageName) throws RemoteException {
-        }
+        public void clearOverridesForTest(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.compat.IPlatformCompat
-        public CompatibilityChangeConfig getAppConfig(ApplicationInfo appInfo) throws RemoteException {
+        public CompatibilityChangeConfig getAppConfig(ApplicationInfo appInfo)
+                throws RemoteException {
             return null;
         }
 
@@ -172,7 +186,7 @@ public interface IPlatformCompat extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPlatformCompat {
+    public abstract static class Stub extends Binder implements IPlatformCompat {
         static final int TRANSACTION_clearOverride = 12;
         static final int TRANSACTION_clearOverrideForTest = 13;
         static final int TRANSACTION_clearOverrides = 18;
@@ -197,10 +211,18 @@ public interface IPlatformCompat extends IInterface {
         static final int TRANSACTION_setOverrides = 8;
         static final int TRANSACTION_setOverridesForTest = 11;
         private final PermissionEnforcer mEnforcer;
-        static final String[] PERMISSIONS_isChangeEnabled = {Manifest.permission.LOG_COMPAT_CHANGE, Manifest.permission.READ_COMPAT_CHANGE_CONFIG};
-        static final String[] PERMISSIONS_isChangeEnabledByPackageName = {Manifest.permission.LOG_COMPAT_CHANGE, Manifest.permission.READ_COMPAT_CHANGE_CONFIG};
-        static final String[] PERMISSIONS_isChangeEnabledByUid = {Manifest.permission.LOG_COMPAT_CHANGE, Manifest.permission.READ_COMPAT_CHANGE_CONFIG};
-        static final String[] PERMISSIONS_getAppConfig = {Manifest.permission.LOG_COMPAT_CHANGE, Manifest.permission.READ_COMPAT_CHANGE_CONFIG};
+        static final String[] PERMISSIONS_isChangeEnabled = {
+            Manifest.permission.LOG_COMPAT_CHANGE, Manifest.permission.READ_COMPAT_CHANGE_CONFIG
+        };
+        static final String[] PERMISSIONS_isChangeEnabledByPackageName = {
+            Manifest.permission.LOG_COMPAT_CHANGE, Manifest.permission.READ_COMPAT_CHANGE_CONFIG
+        };
+        static final String[] PERMISSIONS_isChangeEnabledByUid = {
+            Manifest.permission.LOG_COMPAT_CHANGE, Manifest.permission.READ_COMPAT_CHANGE_CONFIG
+        };
+        static final String[] PERMISSIONS_getAppConfig = {
+            Manifest.permission.LOG_COMPAT_CHANGE, Manifest.permission.READ_COMPAT_CHANGE_CONFIG
+        };
 
         public Stub(PermissionEnforcer enforcer) {
             attachInterface(this, IPlatformCompat.DESCRIPTOR);
@@ -212,7 +234,9 @@ public interface IPlatformCompat extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IPlatformCompat asInterface(IBinder obj) {
@@ -290,7 +314,8 @@ public interface IPlatformCompat extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPlatformCompat.DESCRIPTOR);
             }
@@ -301,7 +326,8 @@ public interface IPlatformCompat extends IInterface {
             switch (code) {
                 case 1:
                     long _arg0 = data.readLong();
-                    ApplicationInfo _arg1 = (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
+                    ApplicationInfo _arg1 =
+                            (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     reportChange(_arg0, _arg1);
                     reply.writeNoException();
@@ -323,7 +349,8 @@ public interface IPlatformCompat extends IInterface {
                     return true;
                 case 4:
                     long _arg04 = data.readLong();
-                    ApplicationInfo _arg14 = (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
+                    ApplicationInfo _arg14 =
+                            (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result = isChangeEnabled(_arg04, _arg14);
                     reply.writeNoException();
@@ -355,27 +382,36 @@ public interface IPlatformCompat extends IInterface {
                     reply.writeBoolean(_result4);
                     return true;
                 case 8:
-                    CompatibilityChangeConfig _arg08 = (CompatibilityChangeConfig) data.readTypedObject(CompatibilityChangeConfig.CREATOR);
+                    CompatibilityChangeConfig _arg08 =
+                            (CompatibilityChangeConfig)
+                                    data.readTypedObject(CompatibilityChangeConfig.CREATOR);
                     String _arg18 = data.readString();
                     data.enforceNoDataAvail();
                     setOverrides(_arg08, _arg18);
                     reply.writeNoException();
                     return true;
                 case 9:
-                    CompatibilityOverridesByPackageConfig _arg09 = (CompatibilityOverridesByPackageConfig) data.readTypedObject(CompatibilityOverridesByPackageConfig.CREATOR);
+                    CompatibilityOverridesByPackageConfig _arg09 =
+                            (CompatibilityOverridesByPackageConfig)
+                                    data.readTypedObject(
+                                            CompatibilityOverridesByPackageConfig.CREATOR);
                     data.enforceNoDataAvail();
                     putAllOverridesOnReleaseBuilds(_arg09);
                     reply.writeNoException();
                     return true;
                 case 10:
-                    CompatibilityOverrideConfig _arg010 = (CompatibilityOverrideConfig) data.readTypedObject(CompatibilityOverrideConfig.CREATOR);
+                    CompatibilityOverrideConfig _arg010 =
+                            (CompatibilityOverrideConfig)
+                                    data.readTypedObject(CompatibilityOverrideConfig.CREATOR);
                     String _arg19 = data.readString();
                     data.enforceNoDataAvail();
                     putOverridesOnReleaseBuilds(_arg010, _arg19);
                     reply.writeNoException();
                     return true;
                 case 11:
-                    CompatibilityChangeConfig _arg011 = (CompatibilityChangeConfig) data.readTypedObject(CompatibilityChangeConfig.CREATOR);
+                    CompatibilityChangeConfig _arg011 =
+                            (CompatibilityChangeConfig)
+                                    data.readTypedObject(CompatibilityChangeConfig.CREATOR);
                     String _arg110 = data.readString();
                     data.enforceNoDataAvail();
                     setOverridesForTest(_arg011, _arg110);
@@ -398,13 +434,19 @@ public interface IPlatformCompat extends IInterface {
                     reply.writeBoolean(_result6);
                     return true;
                 case 14:
-                    CompatibilityOverridesToRemoveByPackageConfig _arg014 = (CompatibilityOverridesToRemoveByPackageConfig) data.readTypedObject(CompatibilityOverridesToRemoveByPackageConfig.CREATOR);
+                    CompatibilityOverridesToRemoveByPackageConfig _arg014 =
+                            (CompatibilityOverridesToRemoveByPackageConfig)
+                                    data.readTypedObject(
+                                            CompatibilityOverridesToRemoveByPackageConfig.CREATOR);
                     data.enforceNoDataAvail();
                     removeAllOverridesOnReleaseBuilds(_arg014);
                     reply.writeNoException();
                     return true;
                 case 15:
-                    CompatibilityOverridesToRemoveConfig _arg015 = (CompatibilityOverridesToRemoveConfig) data.readTypedObject(CompatibilityOverridesToRemoveConfig.CREATOR);
+                    CompatibilityOverridesToRemoveConfig _arg015 =
+                            (CompatibilityOverridesToRemoveConfig)
+                                    data.readTypedObject(
+                                            CompatibilityOverridesToRemoveConfig.CREATOR);
                     String _arg113 = data.readString();
                     data.enforceNoDataAvail();
                     removeOverridesOnReleaseBuilds(_arg015, _arg113);
@@ -439,7 +481,8 @@ public interface IPlatformCompat extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 20:
-                    ApplicationInfo _arg020 = (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
+                    ApplicationInfo _arg020 =
+                            (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     CompatibilityChangeConfig _result9 = getAppConfig(_arg020);
                     reply.writeNoException();
@@ -482,7 +525,8 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public void reportChange(long changeId, ApplicationInfo appInfo) throws RemoteException {
+            public void reportChange(long changeId, ApplicationInfo appInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -498,7 +542,8 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public void reportChangeByPackageName(long changeId, String packageName, int userId) throws RemoteException {
+            public void reportChangeByPackageName(long changeId, String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -531,7 +576,8 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public boolean isChangeEnabled(long changeId, ApplicationInfo appInfo) throws RemoteException {
+            public boolean isChangeEnabled(long changeId, ApplicationInfo appInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -549,7 +595,8 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public boolean isChangeEnabledByPackageName(long changeId, String packageName, int userId) throws RemoteException {
+            public boolean isChangeEnabledByPackageName(
+                    long changeId, String packageName, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -586,7 +633,8 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public boolean containsOverride(long changeId, String packageName) throws RemoteException {
+            public boolean containsOverride(long changeId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -604,7 +652,8 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public void setOverrides(CompatibilityChangeConfig overrides, String packageName) throws RemoteException {
+            public void setOverrides(CompatibilityChangeConfig overrides, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -620,7 +669,9 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public void putAllOverridesOnReleaseBuilds(CompatibilityOverridesByPackageConfig overridesByPackage) throws RemoteException {
+            public void putAllOverridesOnReleaseBuilds(
+                    CompatibilityOverridesByPackageConfig overridesByPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -635,7 +686,9 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public void putOverridesOnReleaseBuilds(CompatibilityOverrideConfig overrides, String packageName) throws RemoteException {
+            public void putOverridesOnReleaseBuilds(
+                    CompatibilityOverrideConfig overrides, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -651,7 +704,8 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public void setOverridesForTest(CompatibilityChangeConfig overrides, String packageName) throws RemoteException {
+            public void setOverridesForTest(CompatibilityChangeConfig overrides, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -685,7 +739,8 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public boolean clearOverrideForTest(long changeId, String packageName) throws RemoteException {
+            public boolean clearOverrideForTest(long changeId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -703,7 +758,9 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public void removeAllOverridesOnReleaseBuilds(CompatibilityOverridesToRemoveByPackageConfig overridesToRemoveByPackage) throws RemoteException {
+            public void removeAllOverridesOnReleaseBuilds(
+                    CompatibilityOverridesToRemoveByPackageConfig overridesToRemoveByPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -718,7 +775,9 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public void removeOverridesOnReleaseBuilds(CompatibilityOverridesToRemoveConfig overridesToRemove, String packageName) throws RemoteException {
+            public void removeOverridesOnReleaseBuilds(
+                    CompatibilityOverridesToRemoveConfig overridesToRemove, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -734,7 +793,8 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public int enableTargetSdkChanges(String packageName, int targetSdkVersion) throws RemoteException {
+            public int enableTargetSdkChanges(String packageName, int targetSdkVersion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -752,7 +812,8 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public int disableTargetSdkChanges(String packageName, int targetSdkVersion) throws RemoteException {
+            public int disableTargetSdkChanges(String packageName, int targetSdkVersion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -800,7 +861,8 @@ public interface IPlatformCompat extends IInterface {
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
-            public CompatibilityChangeConfig getAppConfig(ApplicationInfo appInfo) throws RemoteException {
+            public CompatibilityChangeConfig getAppConfig(ApplicationInfo appInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -808,7 +870,9 @@ public interface IPlatformCompat extends IInterface {
                     _data.writeTypedObject(appInfo, 0);
                     this.mRemote.transact(20, _data, _reply, 0);
                     _reply.readException();
-                    CompatibilityChangeConfig _result = (CompatibilityChangeConfig) _reply.readTypedObject(CompatibilityChangeConfig.CREATOR);
+                    CompatibilityChangeConfig _result =
+                            (CompatibilityChangeConfig)
+                                    _reply.readTypedObject(CompatibilityChangeConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -824,7 +888,9 @@ public interface IPlatformCompat extends IInterface {
                     _data.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
                     this.mRemote.transact(21, _data, _reply, 0);
                     _reply.readException();
-                    CompatibilityChangeInfo[] _result = (CompatibilityChangeInfo[]) _reply.createTypedArray(CompatibilityChangeInfo.CREATOR);
+                    CompatibilityChangeInfo[] _result =
+                            (CompatibilityChangeInfo[])
+                                    _reply.createTypedArray(CompatibilityChangeInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -840,7 +906,9 @@ public interface IPlatformCompat extends IInterface {
                     _data.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
                     this.mRemote.transact(22, _data, _reply, 0);
                     _reply.readException();
-                    CompatibilityChangeInfo[] _result = (CompatibilityChangeInfo[]) _reply.createTypedArray(CompatibilityChangeInfo.CREATOR);
+                    CompatibilityChangeInfo[] _result =
+                            (CompatibilityChangeInfo[])
+                                    _reply.createTypedArray(CompatibilityChangeInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -856,7 +924,8 @@ public interface IPlatformCompat extends IInterface {
                     _data.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
                     this.mRemote.transact(23, _data, _reply, 0);
                     _reply.readException();
-                    IOverrideValidator _result = IOverrideValidator.Stub.asInterface(_reply.readStrongBinder());
+                    IOverrideValidator _result =
+                            IOverrideValidator.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -866,87 +935,137 @@ public interface IPlatformCompat extends IInterface {
         }
 
         protected void reportChange_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOG_COMPAT_CHANGE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOG_COMPAT_CHANGE, getCallingPid(), getCallingUid());
         }
 
         protected void reportChangeByPackageName_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOG_COMPAT_CHANGE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOG_COMPAT_CHANGE, getCallingPid(), getCallingUid());
         }
 
         protected void reportChangeByUid_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOG_COMPAT_CHANGE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOG_COMPAT_CHANGE, getCallingPid(), getCallingUid());
         }
 
         protected void isChangeEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAllOf(PERMISSIONS_isChangeEnabled, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAllOf(
+                    PERMISSIONS_isChangeEnabled, getCallingPid(), getCallingUid());
         }
 
         protected void isChangeEnabledByPackageName_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAllOf(PERMISSIONS_isChangeEnabledByPackageName, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAllOf(
+                    PERMISSIONS_isChangeEnabledByPackageName, getCallingPid(), getCallingUid());
         }
 
         protected void isChangeEnabledByUid_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAllOf(PERMISSIONS_isChangeEnabledByUid, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAllOf(
+                    PERMISSIONS_isChangeEnabledByUid, getCallingPid(), getCallingUid());
         }
 
         protected void containsOverride_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setOverrides_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void putAllOverridesOnReleaseBuilds_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG_ON_RELEASE_BUILD, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG_ON_RELEASE_BUILD,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void putOverridesOnReleaseBuilds_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG_ON_RELEASE_BUILD, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG_ON_RELEASE_BUILD,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setOverridesForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void clearOverride_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void clearOverrideForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void removeAllOverridesOnReleaseBuilds_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG_ON_RELEASE_BUILD, getCallingPid(), getCallingUid());
+        protected void removeAllOverridesOnReleaseBuilds_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG_ON_RELEASE_BUILD,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void removeOverridesOnReleaseBuilds_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG_ON_RELEASE_BUILD, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG_ON_RELEASE_BUILD,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void enableTargetSdkChanges_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void disableTargetSdkChanges_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void clearOverrides_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void clearOverridesForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_COMPAT_CHANGE_CONFIG,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getAppConfig_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAllOf(PERMISSIONS_getAppConfig, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAllOf(
+                    PERMISSIONS_getAppConfig, getCallingPid(), getCallingUid());
         }
 
         protected void listAllChanges_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.READ_COMPAT_CHANGE_CONFIG, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.READ_COMPAT_CHANGE_CONFIG,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         @Override // android.os.Binder

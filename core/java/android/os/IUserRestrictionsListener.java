@@ -8,8 +8,9 @@ public interface IUserRestrictionsListener extends IInterface {
 
     public static class Default implements IUserRestrictionsListener {
         @Override // android.os.IUserRestrictionsListener
-        public void onUserRestrictionsChanged(int userId, Bundle newRestrictions, Bundle prevRestrictions) throws RemoteException {
-        }
+        public void onUserRestrictionsChanged(
+                int userId, Bundle newRestrictions, Bundle prevRestrictions)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -17,7 +18,7 @@ public interface IUserRestrictionsListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUserRestrictionsListener {
+    public abstract static class Stub extends Binder implements IUserRestrictionsListener {
         static final int TRANSACTION_onUserRestrictionsChanged = 1;
 
         public Stub() {
@@ -55,7 +56,8 @@ public interface IUserRestrictionsListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUserRestrictionsListener.DESCRIPTOR);
             }
@@ -93,7 +95,9 @@ public interface IUserRestrictionsListener extends IInterface {
             }
 
             @Override // android.os.IUserRestrictionsListener
-            public void onUserRestrictionsChanged(int userId, Bundle newRestrictions, Bundle prevRestrictions) throws RemoteException {
+            public void onUserRestrictionsChanged(
+                    int userId, Bundle newRestrictions, Bundle prevRestrictions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IUserRestrictionsListener.DESCRIPTOR);

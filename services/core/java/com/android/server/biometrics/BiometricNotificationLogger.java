@@ -3,6 +3,7 @@ package com.android.server.biometrics;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.biometrics.log.BiometricFrameworkStatsLogger;
 
@@ -11,12 +12,15 @@ import com.android.server.biometrics.log.BiometricFrameworkStatsLogger;
 public final class BiometricNotificationLogger extends NotificationListenerService {
     public final BiometricFrameworkStatsLogger mLogger;
 
-    public BiometricNotificationLogger(BiometricFrameworkStatsLogger biometricFrameworkStatsLogger) {
+    public BiometricNotificationLogger(
+            BiometricFrameworkStatsLogger biometricFrameworkStatsLogger) {
         this.mLogger = biometricFrameworkStatsLogger;
     }
 
     @Override // android.service.notification.NotificationListenerService
-    public final void onNotificationPosted(StatusBarNotification statusBarNotification, NotificationListenerService.RankingMap rankingMap) {
+    public final void onNotificationPosted(
+            StatusBarNotification statusBarNotification,
+            NotificationListenerService.RankingMap rankingMap) {
         if (statusBarNotification == null || statusBarNotification.getTag() == null) {
             return;
         }
@@ -24,21 +28,32 @@ public final class BiometricNotificationLogger extends NotificationListenerServi
         tag.getClass();
         if (tag.equals("FaceEnroll") || tag.equals("FingerprintEnroll")) {
             int i = statusBarNotification.getTag() == "FaceEnroll" ? 4 : 1;
-            Slog.d("FRRNotificationListener", "onNotificationPosted, tag=(" + statusBarNotification.getTag() + ")");
+            Slog.d(
+                    "FRRNotificationListener",
+                    "onNotificationPosted, tag=(" + statusBarNotification.getTag() + ")");
             this.mLogger.getClass();
             FrameworkStatsLog.write(FrameworkStatsLog.BIOMETRIC_FRR_NOTIFICATION, 1, i);
         }
     }
 
     @Override // android.service.notification.NotificationListenerService
-    public final void onNotificationRemoved(StatusBarNotification statusBarNotification, NotificationListenerService.RankingMap rankingMap, int i) {
+    public final void onNotificationRemoved(
+            StatusBarNotification statusBarNotification,
+            NotificationListenerService.RankingMap rankingMap,
+            int i) {
         if (statusBarNotification == null || statusBarNotification.getTag() == null) {
             return;
         }
         String tag = statusBarNotification.getTag();
         tag.getClass();
         if (tag.equals("FaceEnroll") || tag.equals("FingerprintEnroll")) {
-            Slog.d("FRRNotificationListener", "onNotificationRemoved, tag=(" + statusBarNotification.getTag() + "), reason=(" + i + ")");
+            Slog.d(
+                    "FRRNotificationListener",
+                    "onNotificationRemoved, tag=("
+                            + statusBarNotification.getTag()
+                            + "), reason=("
+                            + i
+                            + ")");
             int i2 = statusBarNotification.getTag() == "FaceEnroll" ? 4 : 1;
             if (i == 1) {
                 this.mLogger.getClass();

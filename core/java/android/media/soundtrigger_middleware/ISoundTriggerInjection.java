@@ -3,9 +3,6 @@ package android.media.soundtrigger_middleware;
 import android.media.soundtrigger.Phrase;
 import android.media.soundtrigger.RecognitionConfig;
 import android.media.soundtrigger.SoundModel;
-import android.media.soundtrigger_middleware.IInjectGlobalEvent;
-import android.media.soundtrigger_middleware.IInjectModelEvent;
-import android.media.soundtrigger_middleware.IInjectRecognitionEvent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -14,10 +11,12 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISoundTriggerInjection extends IInterface {
-    public static final String DESCRIPTOR = "android.media.soundtrigger_middleware.ISoundTriggerInjection";
+    public static final String DESCRIPTOR =
+            "android.media.soundtrigger_middleware.ISoundTriggerInjection";
     public static final String FAKE_HAL_ARCH = "injection";
 
-    void onClientAttached(IBinder iBinder, IInjectGlobalEvent iInjectGlobalEvent) throws RemoteException;
+    void onClientAttached(IBinder iBinder, IInjectGlobalEvent iInjectGlobalEvent)
+            throws RemoteException;
 
     void onClientDetached(IBinder iBinder) throws RemoteException;
 
@@ -27,13 +26,24 @@ public interface ISoundTriggerInjection extends IInterface {
 
     void onPreempted() throws RemoteException;
 
-    void onRecognitionStarted(int i, RecognitionConfig recognitionConfig, IInjectRecognitionEvent iInjectRecognitionEvent, IInjectModelEvent iInjectModelEvent) throws RemoteException;
+    void onRecognitionStarted(
+            int i,
+            RecognitionConfig recognitionConfig,
+            IInjectRecognitionEvent iInjectRecognitionEvent,
+            IInjectModelEvent iInjectModelEvent)
+            throws RemoteException;
 
-    void onRecognitionStopped(IInjectRecognitionEvent iInjectRecognitionEvent) throws RemoteException;
+    void onRecognitionStopped(IInjectRecognitionEvent iInjectRecognitionEvent)
+            throws RemoteException;
 
     void onRestarted(IInjectGlobalEvent iInjectGlobalEvent) throws RemoteException;
 
-    void onSoundModelLoaded(SoundModel soundModel, Phrase[] phraseArr, IInjectModelEvent iInjectModelEvent, IInjectGlobalEvent iInjectGlobalEvent) throws RemoteException;
+    void onSoundModelLoaded(
+            SoundModel soundModel,
+            Phrase[] phraseArr,
+            IInjectModelEvent iInjectModelEvent,
+            IInjectGlobalEvent iInjectGlobalEvent)
+            throws RemoteException;
 
     void onSoundModelUnloaded(IInjectModelEvent iInjectModelEvent) throws RemoteException;
 
@@ -41,48 +51,51 @@ public interface ISoundTriggerInjection extends IInterface {
 
     public static class Default implements ISoundTriggerInjection {
         @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-        public void registerGlobalEventInjection(IInjectGlobalEvent globalInjection) throws RemoteException {
-        }
+        public void registerGlobalEventInjection(IInjectGlobalEvent globalInjection)
+                throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-        public void onRestarted(IInjectGlobalEvent globalSession) throws RemoteException {
-        }
+        public void onRestarted(IInjectGlobalEvent globalSession) throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-        public void onFrameworkDetached(IInjectGlobalEvent globalSession) throws RemoteException {
-        }
+        public void onFrameworkDetached(IInjectGlobalEvent globalSession) throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-        public void onClientAttached(IBinder token, IInjectGlobalEvent globalSession) throws RemoteException {
-        }
+        public void onClientAttached(IBinder token, IInjectGlobalEvent globalSession)
+                throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-        public void onClientDetached(IBinder token) throws RemoteException {
-        }
+        public void onClientDetached(IBinder token) throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-        public void onSoundModelLoaded(SoundModel model, Phrase[] phrases, IInjectModelEvent modelInjection, IInjectGlobalEvent globalSession) throws RemoteException {
-        }
+        public void onSoundModelLoaded(
+                SoundModel model,
+                Phrase[] phrases,
+                IInjectModelEvent modelInjection,
+                IInjectGlobalEvent globalSession)
+                throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-        public void onParamSet(int modelParam, int value, IInjectModelEvent modelSession) throws RemoteException {
-        }
+        public void onParamSet(int modelParam, int value, IInjectModelEvent modelSession)
+                throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-        public void onRecognitionStarted(int audioSessionToken, RecognitionConfig config, IInjectRecognitionEvent recognitionInjection, IInjectModelEvent modelSession) throws RemoteException {
-        }
+        public void onRecognitionStarted(
+                int audioSessionToken,
+                RecognitionConfig config,
+                IInjectRecognitionEvent recognitionInjection,
+                IInjectModelEvent modelSession)
+                throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-        public void onRecognitionStopped(IInjectRecognitionEvent recognitionSession) throws RemoteException {
-        }
+        public void onRecognitionStopped(IInjectRecognitionEvent recognitionSession)
+                throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-        public void onSoundModelUnloaded(IInjectModelEvent modelSession) throws RemoteException {
-        }
+        public void onSoundModelUnloaded(IInjectModelEvent modelSession) throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-        public void onPreempted() throws RemoteException {
-        }
+        public void onPreempted() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -90,7 +103,7 @@ public interface ISoundTriggerInjection extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISoundTriggerInjection {
+    public abstract static class Stub extends Binder implements ISoundTriggerInjection {
         static final int TRANSACTION_onClientAttached = 4;
         static final int TRANSACTION_onClientDetached = 5;
         static final int TRANSACTION_onFrameworkDetached = 3;
@@ -124,7 +137,8 @@ public interface ISoundTriggerInjection extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISoundTriggerInjection.DESCRIPTOR);
             }
@@ -134,12 +148,14 @@ public interface ISoundTriggerInjection extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IInjectGlobalEvent _arg0 = IInjectGlobalEvent.Stub.asInterface(data.readStrongBinder());
+                    IInjectGlobalEvent _arg0 =
+                            IInjectGlobalEvent.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerGlobalEventInjection(_arg0);
                     return true;
                 case 2:
-                    IInjectGlobalEvent _arg02 = IInjectGlobalEvent.Stub.asInterface(data.readStrongBinder());
+                    IInjectGlobalEvent _arg02 =
+                            IInjectGlobalEvent.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onRestarted(_arg02);
                     return true;
@@ -151,7 +167,8 @@ public interface ISoundTriggerInjection extends IInterface {
                     return true;
                 case 4:
                     IBinder _arg05 = data.readStrongBinder();
-                    IInjectGlobalEvent _arg1 = IInjectGlobalEvent.Stub.asInterface(data.readStrongBinder());
+                    IInjectGlobalEvent _arg1 =
+                            IInjectGlobalEvent.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onClientAttached(_arg05, _arg1);
                     return true;
@@ -163,33 +180,41 @@ public interface ISoundTriggerInjection extends IInterface {
                 case 6:
                     SoundModel _arg07 = (SoundModel) data.readTypedObject(SoundModel.CREATOR);
                     Phrase[] _arg12 = (Phrase[]) data.createTypedArray(Phrase.CREATOR);
-                    IInjectModelEvent _arg2 = IInjectModelEvent.Stub.asInterface(data.readStrongBinder());
-                    IInjectGlobalEvent _arg3 = IInjectGlobalEvent.Stub.asInterface(data.readStrongBinder());
+                    IInjectModelEvent _arg2 =
+                            IInjectModelEvent.Stub.asInterface(data.readStrongBinder());
+                    IInjectGlobalEvent _arg3 =
+                            IInjectGlobalEvent.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onSoundModelLoaded(_arg07, _arg12, _arg2, _arg3);
                     return true;
                 case 7:
                     int _arg08 = data.readInt();
                     int _arg13 = data.readInt();
-                    IInjectModelEvent _arg22 = IInjectModelEvent.Stub.asInterface(data.readStrongBinder());
+                    IInjectModelEvent _arg22 =
+                            IInjectModelEvent.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onParamSet(_arg08, _arg13, _arg22);
                     return true;
                 case 8:
                     int _arg09 = data.readInt();
-                    RecognitionConfig _arg14 = (RecognitionConfig) data.readTypedObject(RecognitionConfig.CREATOR);
-                    IInjectRecognitionEvent _arg23 = IInjectRecognitionEvent.Stub.asInterface(data.readStrongBinder());
-                    IInjectModelEvent _arg32 = IInjectModelEvent.Stub.asInterface(data.readStrongBinder());
+                    RecognitionConfig _arg14 =
+                            (RecognitionConfig) data.readTypedObject(RecognitionConfig.CREATOR);
+                    IInjectRecognitionEvent _arg23 =
+                            IInjectRecognitionEvent.Stub.asInterface(data.readStrongBinder());
+                    IInjectModelEvent _arg32 =
+                            IInjectModelEvent.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onRecognitionStarted(_arg09, _arg14, _arg23, _arg32);
                     return true;
                 case 9:
-                    IInjectRecognitionEvent _arg010 = IInjectRecognitionEvent.Stub.asInterface(data.readStrongBinder());
+                    IInjectRecognitionEvent _arg010 =
+                            IInjectRecognitionEvent.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onRecognitionStopped(_arg010);
                     return true;
                 case 10:
-                    IInjectModelEvent _arg011 = IInjectModelEvent.Stub.asInterface(data.readStrongBinder());
+                    IInjectModelEvent _arg011 =
+                            IInjectModelEvent.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onSoundModelUnloaded(_arg011);
                     return true;
@@ -218,7 +243,8 @@ public interface ISoundTriggerInjection extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-            public void registerGlobalEventInjection(IInjectGlobalEvent globalInjection) throws RemoteException {
+            public void registerGlobalEventInjection(IInjectGlobalEvent globalInjection)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
@@ -242,7 +268,8 @@ public interface ISoundTriggerInjection extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-            public void onFrameworkDetached(IInjectGlobalEvent globalSession) throws RemoteException {
+            public void onFrameworkDetached(IInjectGlobalEvent globalSession)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
@@ -254,7 +281,8 @@ public interface ISoundTriggerInjection extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-            public void onClientAttached(IBinder token, IInjectGlobalEvent globalSession) throws RemoteException {
+            public void onClientAttached(IBinder token, IInjectGlobalEvent globalSession)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
@@ -279,7 +307,12 @@ public interface ISoundTriggerInjection extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-            public void onSoundModelLoaded(SoundModel model, Phrase[] phrases, IInjectModelEvent modelInjection, IInjectGlobalEvent globalSession) throws RemoteException {
+            public void onSoundModelLoaded(
+                    SoundModel model,
+                    Phrase[] phrases,
+                    IInjectModelEvent modelInjection,
+                    IInjectGlobalEvent globalSession)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
@@ -294,7 +327,8 @@ public interface ISoundTriggerInjection extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-            public void onParamSet(int modelParam, int value, IInjectModelEvent modelSession) throws RemoteException {
+            public void onParamSet(int modelParam, int value, IInjectModelEvent modelSession)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
@@ -308,7 +342,12 @@ public interface ISoundTriggerInjection extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-            public void onRecognitionStarted(int audioSessionToken, RecognitionConfig config, IInjectRecognitionEvent recognitionInjection, IInjectModelEvent modelSession) throws RemoteException {
+            public void onRecognitionStarted(
+                    int audioSessionToken,
+                    RecognitionConfig config,
+                    IInjectRecognitionEvent recognitionInjection,
+                    IInjectModelEvent modelSession)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
@@ -323,7 +362,8 @@ public interface ISoundTriggerInjection extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-            public void onRecognitionStopped(IInjectRecognitionEvent recognitionSession) throws RemoteException {
+            public void onRecognitionStopped(IInjectRecognitionEvent recognitionSession)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
@@ -335,7 +375,8 @@ public interface ISoundTriggerInjection extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
-            public void onSoundModelUnloaded(IInjectModelEvent modelSession) throws RemoteException {
+            public void onSoundModelUnloaded(IInjectModelEvent modelSession)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);

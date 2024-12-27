@@ -33,9 +33,10 @@ import android.view.SurfaceView;
 import android.view.ThreadedRenderer;
 import android.view.View;
 import android.view.ViewRootImpl;
-import android.widget.Magnifier;
+
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -47,7 +48,8 @@ public final class Magnifier {
     public static final int SOURCE_BOUND_MAX_IN_SURFACE = 0;
     public static final int SOURCE_BOUND_MAX_VISIBLE = 1;
     private static final String TAG = "Magnifier";
-    private static final HandlerThread sPixelCopyHandlerThread = new HandlerThread("magnifier pixel copy result handler");
+    private static final HandlerThread sPixelCopyHandlerThread =
+            new HandlerThread("magnifier pixel copy result handler");
     private int mBottomContentBound;
     private Callback mCallback;
     private final Point mClampedCenterZoomCoords;
@@ -89,8 +91,7 @@ public final class Magnifier {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SourceBound {
-    }
+    public @interface SourceBound {}
 
     static {
         sPixelCopyHandlerThread.start();
@@ -104,7 +105,9 @@ public final class Magnifier {
     static Builder createBuilderWithOldMagnifierDefaults(View view) {
         Builder params = new Builder(view);
         Context context = view.getContext();
-        TypedArray a = context.obtainStyledAttributes(null, R.styleable.Magnifier, R.attr.magnifierStyle, 0);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        null, R.styleable.Magnifier, R.attr.magnifierStyle, 0);
         params.mWidth = a.getDimensionPixelSize(5, 0);
         params.mHeight = a.getDimensionPixelSize(2, 0);
         params.mElevation = a.getDimension(1, 0.0f);
@@ -124,7 +127,7 @@ public final class Magnifier {
 
     private static float getDeviceDefaultDialogCornerRadius(Context context) {
         Context deviceDefaultContext = new ContextThemeWrapper(context, 16974120);
-        TypedArray ta = deviceDefaultContext.obtainStyledAttributes(new int[]{16844145});
+        TypedArray ta = deviceDefaultContext.obtainStyledAttributes(new int[] {16844145});
         float dialogCornerRadius = ta.getDimension(0, 0.0f);
         ta.recycle();
         return dialogCornerRadius;
@@ -155,19 +158,30 @@ public final class Magnifier {
         this.mWindowElevation = params.mElevation;
         this.mWindowCornerRadius = params.mCornerRadius;
         this.mOverlay = params.mOverlay;
-        this.mDefaultHorizontalSourceToMagnifierOffset = params.mHorizontalDefaultSourceToMagnifierOffset;
-        this.mDefaultVerticalSourceToMagnifierOffset = params.mVerticalDefaultSourceToMagnifierOffset;
+        this.mDefaultHorizontalSourceToMagnifierOffset =
+                params.mHorizontalDefaultSourceToMagnifierOffset;
+        this.mDefaultVerticalSourceToMagnifierOffset =
+                params.mVerticalDefaultSourceToMagnifierOffset;
         this.mClippingEnabled = params.mClippingEnabled;
         this.mLeftContentBound = params.mLeftContentBound;
         this.mTopContentBound = params.mTopContentBound;
         this.mRightContentBound = params.mRightContentBound;
         this.mBottomContentBound = params.mBottomContentBound;
         this.mViewCoordinatesInSurface = new int[2];
-        this.mRamp = (int) TypedValue.applyDimension(1, FISHEYE_RAMP_WIDTH, this.mView.getContext().getResources().getDisplayMetrics());
+        this.mRamp =
+                (int)
+                        TypedValue.applyDimension(
+                                1,
+                                FISHEYE_RAMP_WIDTH,
+                                this.mView.getContext().getResources().getDisplayMetrics());
     }
 
     public void show(float sourceCenterX, float sourceCenterY) {
-        show(sourceCenterX, sourceCenterY, this.mDefaultHorizontalSourceToMagnifierOffset + sourceCenterX, this.mDefaultVerticalSourceToMagnifierOffset + sourceCenterY);
+        show(
+                sourceCenterX,
+                sourceCenterY,
+                this.mDefaultHorizontalSourceToMagnifierOffset + sourceCenterX,
+                this.mDefaultVerticalSourceToMagnifierOffset + sourceCenterY);
     }
 
     void setDrawCursor(boolean enabled, Drawable cursorDrawable) {
@@ -175,7 +189,11 @@ public final class Magnifier {
         this.mCursorDrawable = cursorDrawable;
     }
 
-    public void show(float sourceCenterX, float sourceCenterY, float magnifierCenterX, float magnifierCenterY) {
+    public void show(
+            float sourceCenterX,
+            float sourceCenterY,
+            float magnifierCenterX,
+            float magnifierCenterY) {
         float magnifierCenterX2;
         float magnifierCenterY2;
         int startX;
@@ -188,9 +206,13 @@ public final class Magnifier {
         int startX2 = this.mClampedCenterZoomCoords.x - (this.mSourceWidth / 2);
         int startY = this.mClampedCenterZoomCoords.y - (this.mSourceHeight / 2);
         if (this.mIsFishEyeStyle) {
-            float magnifierCenterX5 = this.mClampedCenterZoomCoords.x - this.mViewCoordinatesInSurface[0];
-            float magnifierCenterY4 = this.mClampedCenterZoomCoords.y - this.mViewCoordinatesInSurface[1];
-            float rampPre = (this.mSourceWidth - ((this.mSourceWidth - (this.mRamp * 2)) / this.mZoom)) / 2.0f;
+            float magnifierCenterX5 =
+                    this.mClampedCenterZoomCoords.x - this.mViewCoordinatesInSurface[0];
+            float magnifierCenterY4 =
+                    this.mClampedCenterZoomCoords.y - this.mViewCoordinatesInSurface[1];
+            float rampPre =
+                    (this.mSourceWidth - ((this.mSourceWidth - (this.mRamp * 2)) / this.mZoom))
+                            / 2.0f;
             float x0 = sourceCenterX - (this.mSourceWidth / 2.0f);
             float rampX0 = this.mRamp + x0;
             float leftEdge = 0.0f;
@@ -214,7 +236,10 @@ public final class Magnifier {
             }
             int rightBound = Math.max(leftBound, (int) rightEdge);
             int leftBound2 = Math.max(this.mViewCoordinatesInSurface[0] + leftBound, 0);
-            int rightBound2 = Math.min(this.mViewCoordinatesInSurface[0] + rightBound, this.mContentCopySurface.mWidth);
+            int rightBound2 =
+                    Math.min(
+                            this.mViewCoordinatesInSurface[0] + rightBound,
+                            this.mContentCopySurface.mWidth);
             this.mLeftCutWidth = Math.max(0, leftBound2 - startX2);
             this.mRightCutWidth = Math.max(0, (this.mSourceWidth + startX2) - rightBound2);
             magnifierCenterX2 = magnifierCenterX4;
@@ -226,7 +251,9 @@ public final class Magnifier {
             startX = startX2;
         }
         obtainWindowCoordinates(magnifierCenterX2, magnifierCenterY2);
-        if (sourceCenterX != this.mPrevShowSourceCoords.x || sourceCenterY != this.mPrevShowSourceCoords.y || this.mDirtyState) {
+        if (sourceCenterX != this.mPrevShowSourceCoords.x
+                || sourceCenterY != this.mPrevShowSourceCoords.y
+                || this.mDirtyState) {
             if (this.mWindow != null) {
                 magnifierCenterX3 = magnifierCenterX2;
                 magnifierCenterY3 = magnifierCenterY2;
@@ -261,7 +288,22 @@ public final class Magnifier {
                                 }
                             }
                             magnifierCenterX3 = magnifierCenterX2;
-                            this.mWindow = new InternalPopupWindow(context, display, surfaceControl, i, i2, f, i3, f2, f3, drawable, Handler.getMain(), this.mLock, this.mCallback, this.mIsFishEyeStyle);
+                            this.mWindow =
+                                    new InternalPopupWindow(
+                                            context,
+                                            display,
+                                            surfaceControl,
+                                            i,
+                                            i2,
+                                            f,
+                                            i3,
+                                            f2,
+                                            f3,
+                                            drawable,
+                                            Handler.getMain(),
+                                            this.mLock,
+                                            this.mCallback,
+                                            this.mIsFishEyeStyle);
                         } catch (Throwable th3) {
                             th = th3;
                         }
@@ -271,18 +313,24 @@ public final class Magnifier {
                 }
             }
             performPixelCopy(startX, startY, true);
-        } else if (magnifierCenterX2 == this.mPrevShowWindowCoords.x && magnifierCenterY2 == this.mPrevShowWindowCoords.y) {
+        } else if (magnifierCenterX2 == this.mPrevShowWindowCoords.x
+                && magnifierCenterY2 == this.mPrevShowWindowCoords.y) {
             magnifierCenterX3 = magnifierCenterX2;
             magnifierCenterY3 = magnifierCenterY2;
         } else {
             final Point windowCoords = getCurrentClampedWindowCoordinates();
             final InternalPopupWindow currentWindowInstance = this.mWindow;
-            sPixelCopyHandlerThread.getThreadHandler().post(new Runnable() { // from class: android.widget.Magnifier$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    Magnifier.this.lambda$show$0(currentWindowInstance, windowCoords);
-                }
-            });
+            sPixelCopyHandlerThread
+                    .getThreadHandler()
+                    .post(
+                            new Runnable() { // from class:
+                                             // android.widget.Magnifier$$ExternalSyntheticLambda2
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    Magnifier.this.lambda$show$0(
+                                            currentWindowInstance, windowCoords);
+                                }
+                            });
             magnifierCenterX3 = magnifierCenterX2;
             magnifierCenterY3 = magnifierCenterY2;
         }
@@ -293,7 +341,8 @@ public final class Magnifier {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$show$0(InternalPopupWindow currentWindowInstance, Point windowCoords) {
+    public /* synthetic */ void lambda$show$0(
+            InternalPopupWindow currentWindowInstance, Point windowCoords) {
         synchronized (this.mLock) {
             if (this.mWindow != currentWindowInstance) {
                 return;
@@ -321,9 +370,14 @@ public final class Magnifier {
         if (this.mWindow != null) {
             obtainSurfaces();
             if (!this.mDirtyState) {
-                performPixelCopy(this.mPrevStartCoordsInSurface.x, this.mPrevStartCoordsInSurface.y, false);
+                performPixelCopy(
+                        this.mPrevStartCoordsInSurface.x, this.mPrevStartCoordsInSurface.y, false);
             } else {
-                show(this.mPrevShowSourceCoords.x, this.mPrevShowSourceCoords.y, this.mPrevShowWindowCoords.x, this.mPrevShowWindowCoords.y);
+                show(
+                        this.mPrevShowSourceCoords.x,
+                        this.mPrevShowSourceCoords.y,
+                        this.mPrevShowWindowCoords.x,
+                        this.mPrevShowWindowCoords.y);
             }
         }
     }
@@ -347,7 +401,10 @@ public final class Magnifier {
     public void setZoom(float zoom) {
         Preconditions.checkArgumentPositive(zoom, "Zoom should be positive");
         this.mZoom = zoom;
-        this.mSourceWidth = this.mIsFishEyeStyle ? this.mWindowWidth : Math.round(this.mWindowWidth / this.mZoom);
+        this.mSourceWidth =
+                this.mIsFishEyeStyle
+                        ? this.mWindowWidth
+                        : Math.round(this.mWindowWidth / this.mZoom);
         this.mSourceHeight = Math.round(this.mWindowHeight / this.mZoom);
         this.mDirtyState = true;
     }
@@ -403,7 +460,8 @@ public final class Magnifier {
             return null;
         }
         Point position = new Point(this.mPixelCopyRequestRect.left, this.mPixelCopyRequestRect.top);
-        position.offset(-this.mContentCopySurface.mInsets.left, -this.mContentCopySurface.mInsets.top);
+        position.offset(
+                -this.mContentCopySurface.mInsets.left, -this.mContentCopySurface.mInsets.top);
         return new Point(position);
     }
 
@@ -411,11 +469,21 @@ public final class Magnifier {
         ViewRootImpl viewRootImpl;
         Surface mainWindowSurface;
         SurfaceInfo validMainWindowSurface = SurfaceInfo.NULL;
-        if (this.mView.getViewRootImpl() != null && (mainWindowSurface = (viewRootImpl = this.mView.getViewRootImpl()).mSurface) != null && mainWindowSurface.isValid()) {
+        if (this.mView.getViewRootImpl() != null
+                && (mainWindowSurface = (viewRootImpl = this.mView.getViewRootImpl()).mSurface)
+                        != null
+                && mainWindowSurface.isValid()) {
             Rect surfaceInsets = viewRootImpl.mWindowAttributes.surfaceInsets;
             int surfaceWidth = viewRootImpl.getWidth() + surfaceInsets.left + surfaceInsets.right;
             int surfaceHeight = viewRootImpl.getHeight() + surfaceInsets.top + surfaceInsets.bottom;
-            validMainWindowSurface = new SurfaceInfo(viewRootImpl.getSurfaceControl(), mainWindowSurface, surfaceWidth, surfaceHeight, surfaceInsets, true);
+            validMainWindowSurface =
+                    new SurfaceInfo(
+                            viewRootImpl.getSurfaceControl(),
+                            mainWindowSurface,
+                            surfaceWidth,
+                            surfaceHeight,
+                            surfaceInsets,
+                            true);
         }
         SurfaceInfo validSurfaceViewSurface = SurfaceInfo.NULL;
         if (this.mView instanceof SurfaceView) {
@@ -424,11 +492,24 @@ public final class Magnifier {
             Surface surfaceViewSurface = surfaceHolder.getSurface();
             if (sc != null && sc.isValid()) {
                 Rect surfaceFrame = surfaceHolder.getSurfaceFrame();
-                validSurfaceViewSurface = new SurfaceInfo(sc, surfaceViewSurface, surfaceFrame.right, surfaceFrame.bottom, new Rect(), false);
+                validSurfaceViewSurface =
+                        new SurfaceInfo(
+                                sc,
+                                surfaceViewSurface,
+                                surfaceFrame.right,
+                                surfaceFrame.bottom,
+                                new Rect(),
+                                false);
             }
         }
-        this.mParentSurface = validMainWindowSurface != SurfaceInfo.NULL ? validMainWindowSurface : validSurfaceViewSurface;
-        this.mContentCopySurface = this.mView instanceof SurfaceView ? validSurfaceViewSurface : validMainWindowSurface;
+        this.mParentSurface =
+                validMainWindowSurface != SurfaceInfo.NULL
+                        ? validMainWindowSurface
+                        : validSurfaceViewSurface;
+        this.mContentCopySurface =
+                this.mView instanceof SurfaceView
+                        ? validSurfaceViewSurface
+                        : validMainWindowSurface;
     }
 
     private void obtainContentCoordinates(float xPosInView, float yPosInView) {
@@ -438,7 +519,8 @@ public final class Magnifier {
         int prevViewXInSurface = this.mViewCoordinatesInSurface[0];
         int prevViewYInSurface = this.mViewCoordinatesInSurface[1];
         this.mView.getLocationInSurface(this.mViewCoordinatesInSurface);
-        if (this.mViewCoordinatesInSurface[0] != prevViewXInSurface || this.mViewCoordinatesInSurface[1] != prevViewYInSurface) {
+        if (this.mViewCoordinatesInSurface[0] != prevViewXInSurface
+                || this.mViewCoordinatesInSurface[1] != prevViewYInSurface) {
             this.mDirtyState = true;
         }
         if (this.mView instanceof SurfaceView) {
@@ -449,7 +531,8 @@ public final class Magnifier {
             zoomCenterY = Math.round(yPosInView + this.mViewCoordinatesInSurface[1]);
         }
         Rect[] bounds = new Rect[2];
-        Rect surfaceBounds = new Rect(0, 0, this.mContentCopySurface.mWidth, this.mContentCopySurface.mHeight);
+        Rect surfaceBounds =
+                new Rect(0, 0, this.mContentCopySurface.mWidth, this.mContentCopySurface.mHeight);
         bounds[0] = surfaceBounds;
         Rect viewVisibleRegion = new Rect();
         this.mView.getGlobalVisibleRect(viewVisibleRegion);
@@ -458,7 +541,8 @@ public final class Magnifier {
             viewVisibleRegion.offset(surfaceInsets.left, surfaceInsets.top);
         }
         if (this.mView instanceof SurfaceView) {
-            viewVisibleRegion.offset(-this.mViewCoordinatesInSurface[0], -this.mViewCoordinatesInSurface[1]);
+            viewVisibleRegion.offset(
+                    -this.mViewCoordinatesInSurface[0], -this.mViewCoordinatesInSurface[1]);
         }
         bounds[1] = viewVisibleRegion;
         int resolvedLeft = Integer.MIN_VALUE;
@@ -477,21 +561,32 @@ public final class Magnifier {
         for (int i4 = this.mBottomContentBound; i4 >= 0; i4--) {
             resolvedBottom = Math.min(resolvedBottom, bounds[i4].bottom);
         }
-        int resolvedLeft2 = Math.min(resolvedLeft, this.mContentCopySurface.mWidth - this.mSourceWidth);
-        int resolvedTop2 = Math.min(resolvedTop, this.mContentCopySurface.mHeight - this.mSourceHeight);
+        int resolvedLeft2 =
+                Math.min(resolvedLeft, this.mContentCopySurface.mWidth - this.mSourceWidth);
+        int resolvedTop2 =
+                Math.min(resolvedTop, this.mContentCopySurface.mHeight - this.mSourceHeight);
         if (resolvedLeft2 < 0 || resolvedTop2 < 0) {
-            Log.e(TAG, "Magnifier's content is copied from a surface smaller thanthe content requested size. The magnifier will be dismissed.");
+            Log.e(
+                    TAG,
+                    "Magnifier's content is copied from a surface smaller thanthe content requested"
+                        + " size. The magnifier will be dismissed.");
         }
         int resolvedRight2 = Math.max(resolvedRight, this.mSourceWidth + resolvedLeft2);
         int resolvedBottom2 = Math.max(resolvedBottom, this.mSourceHeight + resolvedTop2);
         Point point = this.mClampedCenterZoomCoords;
         if (!this.mIsFishEyeStyle) {
-            max = Math.max((this.mSourceWidth / 2) + resolvedLeft2, Math.min(zoomCenterX, resolvedRight2 - (this.mSourceWidth / 2)));
+            max =
+                    Math.max(
+                            (this.mSourceWidth / 2) + resolvedLeft2,
+                            Math.min(zoomCenterX, resolvedRight2 - (this.mSourceWidth / 2)));
         } else {
             max = Math.max(resolvedLeft2, Math.min(zoomCenterX, resolvedRight2));
         }
         point.x = max;
-        this.mClampedCenterZoomCoords.y = Math.max((this.mSourceHeight / 2) + resolvedTop2, Math.min(zoomCenterY, resolvedBottom2 - (this.mSourceHeight / 2)));
+        this.mClampedCenterZoomCoords.y =
+                Math.max(
+                        (this.mSourceHeight / 2) + resolvedTop2,
+                        Math.min(zoomCenterY, resolvedBottom2 - (this.mSourceHeight / 2)));
     }
 
     private void obtainWindowCoordinates(float xWindowPos, float yWindowPos) {
@@ -515,42 +610,81 @@ public final class Magnifier {
     private void maybeDrawCursor(Canvas canvas) {
         if (this.mDrawCursorEnabled) {
             if (this.mCursorDrawable != null) {
-                this.mCursorDrawable.setBounds(this.mSourceWidth / 2, 0, (this.mSourceWidth / 2) + this.mCursorDrawable.getIntrinsicWidth(), this.mSourceHeight);
+                this.mCursorDrawable.setBounds(
+                        this.mSourceWidth / 2,
+                        0,
+                        (this.mSourceWidth / 2) + this.mCursorDrawable.getIntrinsicWidth(),
+                        this.mSourceHeight);
                 this.mCursorDrawable.draw(canvas);
             } else {
                 Paint paint = new Paint();
                 paint.setColor(-16777216);
-                canvas.drawRect(new Rect((this.mSourceWidth / 2) - 1, 0, (this.mSourceWidth / 2) + 1, this.mSourceHeight), paint);
+                canvas.drawRect(
+                        new Rect(
+                                (this.mSourceWidth / 2) - 1,
+                                0,
+                                (this.mSourceWidth / 2) + 1,
+                                this.mSourceHeight),
+                        paint);
             }
         }
     }
 
-    private void performPixelCopy(int startXInSurface, int startYInSurface, final boolean updateWindowPosition) {
-        if (this.mContentCopySurface.mSurface == null || !this.mContentCopySurface.mSurface.isValid()) {
+    private void performPixelCopy(
+            int startXInSurface, int startYInSurface, final boolean updateWindowPosition) {
+        if (this.mContentCopySurface.mSurface == null
+                || !this.mContentCopySurface.mSurface.isValid()) {
             onPixelCopyFailed();
             return;
         }
         final Point windowCoords = getCurrentClampedWindowCoordinates();
-        this.mPixelCopyRequestRect.set(startXInSurface, startYInSurface, ((this.mSourceWidth + startXInSurface) - this.mLeftCutWidth) - this.mRightCutWidth, this.mSourceHeight + startYInSurface);
+        this.mPixelCopyRequestRect.set(
+                startXInSurface,
+                startYInSurface,
+                ((this.mSourceWidth + startXInSurface) - this.mLeftCutWidth) - this.mRightCutWidth,
+                this.mSourceHeight + startYInSurface);
         this.mPrevStartCoordsInSurface.x = startXInSurface;
         this.mPrevStartCoordsInSurface.y = startYInSurface;
         this.mDirtyState = false;
         final InternalPopupWindow currentWindowInstance = this.mWindow;
         if (this.mPixelCopyRequestRect.width() == 0) {
-            this.mWindow.updateContent(Bitmap.createBitmap(this.mSourceWidth, this.mSourceHeight, Bitmap.Config.ALPHA_8));
+            this.mWindow.updateContent(
+                    Bitmap.createBitmap(
+                            this.mSourceWidth, this.mSourceHeight, Bitmap.Config.ALPHA_8));
         } else {
-            final Bitmap bitmap = Bitmap.createBitmap((this.mSourceWidth - this.mLeftCutWidth) - this.mRightCutWidth, this.mSourceHeight, Bitmap.Config.ARGB_8888);
-            PixelCopy.request(this.mContentCopySurface.mSurface, this.mPixelCopyRequestRect, bitmap, new PixelCopy.OnPixelCopyFinishedListener() { // from class: android.widget.Magnifier$$ExternalSyntheticLambda0
-                @Override // android.view.PixelCopy.OnPixelCopyFinishedListener
-                public final void onPixelCopyFinished(int i) {
-                    Magnifier.this.lambda$performPixelCopy$1(currentWindowInstance, updateWindowPosition, windowCoords, bitmap, i);
-                }
-            }, sPixelCopyHandlerThread.getThreadHandler());
+            final Bitmap bitmap =
+                    Bitmap.createBitmap(
+                            (this.mSourceWidth - this.mLeftCutWidth) - this.mRightCutWidth,
+                            this.mSourceHeight,
+                            Bitmap.Config.ARGB_8888);
+            PixelCopy.request(
+                    this.mContentCopySurface.mSurface,
+                    this.mPixelCopyRequestRect,
+                    bitmap,
+                    new PixelCopy
+                            .OnPixelCopyFinishedListener() { // from class:
+                                                             // android.widget.Magnifier$$ExternalSyntheticLambda0
+                        @Override // android.view.PixelCopy.OnPixelCopyFinishedListener
+                        public final void onPixelCopyFinished(int i) {
+                            Magnifier.this.lambda$performPixelCopy$1(
+                                    currentWindowInstance,
+                                    updateWindowPosition,
+                                    windowCoords,
+                                    bitmap,
+                                    i);
+                        }
+                    },
+                    sPixelCopyHandlerThread.getThreadHandler());
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$performPixelCopy$1(InternalPopupWindow currentWindowInstance, boolean updateWindowPosition, Point windowCoords, Bitmap bitmap, int result) {
+    public /* synthetic */ void lambda$performPixelCopy$1(
+            InternalPopupWindow currentWindowInstance,
+            boolean updateWindowPosition,
+            Point windowCoords,
+            Bitmap bitmap,
+            int result) {
         if (result != 0) {
             onPixelCopyFailed();
             return;
@@ -563,9 +697,16 @@ public final class Magnifier {
                 this.mWindow.setContentPositionForNextDraw(windowCoords.x, windowCoords.y);
             }
             if (bitmap.getWidth() < this.mSourceWidth) {
-                Bitmap newBitmap = Bitmap.createBitmap(this.mSourceWidth, bitmap.getHeight(), bitmap.getConfig());
+                Bitmap newBitmap =
+                        Bitmap.createBitmap(
+                                this.mSourceWidth, bitmap.getHeight(), bitmap.getConfig());
                 Canvas can = new Canvas(newBitmap);
-                Rect dstRect = new Rect(this.mLeftCutWidth, 0, this.mSourceWidth - this.mRightCutWidth, bitmap.getHeight());
+                Rect dstRect =
+                        new Rect(
+                                this.mLeftCutWidth,
+                                0,
+                                this.mSourceWidth - this.mRightCutWidth,
+                                bitmap.getHeight());
                 can.drawBitmap(bitmap, (Rect) null, dstRect, (Paint) null);
                 maybeDrawCursor(can);
                 this.mWindow.updateContent(newBitmap);
@@ -578,12 +719,15 @@ public final class Magnifier {
 
     private void onPixelCopyFailed() {
         Log.e(TAG, "Magnifier failed to copy content from the view Surface. It will be dismissed.");
-        Handler.getMain().postAtFrontOfQueue(new Runnable() { // from class: android.widget.Magnifier$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                Magnifier.this.lambda$onPixelCopyFailed$2();
-            }
-        });
+        Handler.getMain()
+                .postAtFrontOfQueue(
+                        new Runnable() { // from class:
+                                         // android.widget.Magnifier$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                Magnifier.this.lambda$onPixelCopyFailed$2();
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -601,12 +745,25 @@ public final class Magnifier {
         }
         if (this.mParentSurface.mIsMainWindowSurface) {
             Insets systemInsets = this.mView.getRootWindowInsets().getSystemWindowInsets();
-            windowBounds = new Rect(systemInsets.left + this.mParentSurface.mInsets.left, systemInsets.top + this.mParentSurface.mInsets.top, (this.mParentSurface.mWidth - systemInsets.right) - this.mParentSurface.mInsets.right, (this.mParentSurface.mHeight - systemInsets.bottom) - this.mParentSurface.mInsets.bottom);
+            windowBounds =
+                    new Rect(
+                            systemInsets.left + this.mParentSurface.mInsets.left,
+                            systemInsets.top + this.mParentSurface.mInsets.top,
+                            (this.mParentSurface.mWidth - systemInsets.right)
+                                    - this.mParentSurface.mInsets.right,
+                            (this.mParentSurface.mHeight - systemInsets.bottom)
+                                    - this.mParentSurface.mInsets.bottom);
         } else {
             windowBounds = new Rect(0, 0, this.mParentSurface.mWidth, this.mParentSurface.mHeight);
         }
-        int windowCoordsX = Math.max(windowBounds.left, Math.min(windowBounds.right - this.mWindowWidth, this.mWindowCoords.x));
-        int windowCoordsY = Math.max(windowBounds.top, Math.min(windowBounds.bottom - this.mWindowHeight, this.mWindowCoords.y));
+        int windowCoordsX =
+                Math.max(
+                        windowBounds.left,
+                        Math.min(windowBounds.right - this.mWindowWidth, this.mWindowCoords.x));
+        int windowCoordsY =
+                Math.max(
+                        windowBounds.top,
+                        Math.min(windowBounds.bottom - this.mWindowHeight, this.mWindowCoords.y));
         return new Point(windowCoordsX, windowCoordsY);
     }
 
@@ -619,7 +776,13 @@ public final class Magnifier {
         private SurfaceControl mSurfaceControl;
         private int mWidth;
 
-        SurfaceInfo(SurfaceControl surfaceControl, Surface surface, int width, int height, Rect insets, boolean isMainWindowSurface) {
+        SurfaceInfo(
+                SurfaceControl surfaceControl,
+                Surface surface,
+                int width,
+                int height,
+                Rect insets,
+                boolean isMainWindowSurface) {
             this.mSurfaceControl = surfaceControl;
             this.mSurface = surface;
             this.mWidth = width;
@@ -666,7 +829,21 @@ public final class Magnifier {
         private final SurfaceControl.Transaction mTransaction = new SurfaceControl.Transaction();
         private boolean mFirstDraw = true;
 
-        InternalPopupWindow(Context context, Display display, SurfaceControl parentSurfaceControl, int width, int height, float zoom, int ramp, float elevation, float cornerRadius, Drawable overlay, Handler handler, Object lock, Callback callback, boolean isFishEyeStyle) {
+        InternalPopupWindow(
+                Context context,
+                Display display,
+                SurfaceControl parentSurfaceControl,
+                int width,
+                int height,
+                float zoom,
+                int ramp,
+                float elevation,
+                float cornerRadius,
+                Drawable overlay,
+                Handler handler,
+                Object lock,
+                Callback callback,
+                boolean isFishEyeStyle) {
             this.mDisplay = display;
             this.mOverlay = overlay;
             this.mLock = lock;
@@ -680,12 +857,35 @@ public final class Magnifier {
             int surfaceWidth = (this.mOffsetX * 2) + this.mContentWidth;
             int surfaceHeight = this.mContentHeight + (this.mOffsetY * 2);
             this.mSurfaceSession = new SurfaceSession();
-            this.mSurfaceControl = new SurfaceControl.Builder(this.mSurfaceSession).setName("magnifier surface").setFlags(4).setContainerLayer().setParent(parentSurfaceControl).setCallsite("InternalPopupWindow").build();
-            this.mBbqSurfaceControl = new SurfaceControl.Builder(this.mSurfaceSession).setName("magnifier surface bbq wrapper").setHidden(false).setBLASTLayer().setParent(this.mSurfaceControl).setCallsite("InternalPopupWindow").build();
-            this.mBBQ = new BLASTBufferQueue("magnifier surface", this.mBbqSurfaceControl, surfaceWidth, surfaceHeight, -3);
+            this.mSurfaceControl =
+                    new SurfaceControl.Builder(this.mSurfaceSession)
+                            .setName("magnifier surface")
+                            .setFlags(4)
+                            .setContainerLayer()
+                            .setParent(parentSurfaceControl)
+                            .setCallsite("InternalPopupWindow")
+                            .build();
+            this.mBbqSurfaceControl =
+                    new SurfaceControl.Builder(this.mSurfaceSession)
+                            .setName("magnifier surface bbq wrapper")
+                            .setHidden(false)
+                            .setBLASTLayer()
+                            .setParent(this.mSurfaceControl)
+                            .setCallsite("InternalPopupWindow")
+                            .build();
+            this.mBBQ =
+                    new BLASTBufferQueue(
+                            "magnifier surface",
+                            this.mBbqSurfaceControl,
+                            surfaceWidth,
+                            surfaceHeight,
+                            -3);
             this.mSurface = this.mBBQ.createSurface();
-            this.mRenderer = new ThreadedRenderer.SimpleRenderer(context, "magnifier renderer", this.mSurface);
-            this.mBitmapRenderNode = createRenderNodeForBitmap("magnifier content", elevation, cornerRadius);
+            this.mRenderer =
+                    new ThreadedRenderer.SimpleRenderer(
+                            context, "magnifier renderer", this.mSurface);
+            this.mBitmapRenderNode =
+                    createRenderNodeForBitmap("magnifier content", elevation, cornerRadius);
             this.mOverlayRenderNode = createRenderNodeForOverlay("magnifier overlay", cornerRadius);
             setupOverlay();
             RecordingCanvas canvas = this.mRenderer.getRootNode().beginRecording(width, height);
@@ -697,16 +897,22 @@ public final class Magnifier {
                 canvas.disableZ();
                 this.mRenderer.getRootNode().endRecording();
                 if (this.mCallback != null) {
-                    this.mCurrentContent = Bitmap.createBitmap(this.mContentWidth, this.mContentHeight, Bitmap.Config.ARGB_8888);
+                    this.mCurrentContent =
+                            Bitmap.createBitmap(
+                                    this.mContentWidth,
+                                    this.mContentHeight,
+                                    Bitmap.Config.ARGB_8888);
                     updateCurrentContentForTesting();
                 }
                 this.mHandler = handler;
-                this.mMagnifierUpdater = new Runnable() { // from class: android.widget.Magnifier$InternalPopupWindow$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        Magnifier.InternalPopupWindow.this.doDraw();
-                    }
-                };
+                this.mMagnifierUpdater =
+                        new Runnable() { // from class:
+                                         // android.widget.Magnifier$InternalPopupWindow$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                Magnifier.InternalPopupWindow.this.doDraw();
+                            }
+                        };
                 this.mFrameDrawScheduled = false;
                 this.mIsFishEyeStyle = isFishEyeStyle;
                 if (this.mIsFishEyeStyle) {
@@ -729,11 +935,22 @@ public final class Magnifier {
                 Outline outline = new Outline();
                 outline.setRoundRect(0, 0, this.mContentWidth, contentHeight, 0.0f);
                 outline.setAlpha(1.0f);
-                this.mBitmapRenderNode.setLeftTopRightBottom(this.mOffsetX, this.mOffsetY, this.mOffsetX + this.mContentWidth, this.mOffsetY + contentHeight);
+                this.mBitmapRenderNode.setLeftTopRightBottom(
+                        this.mOffsetX,
+                        this.mOffsetY,
+                        this.mOffsetX + this.mContentWidth,
+                        this.mOffsetY + contentHeight);
                 this.mBitmapRenderNode.setOutline(outline);
-                this.mOverlayRenderNode.setLeftTopRightBottom(this.mOffsetX, this.mOffsetY, this.mOffsetX + this.mContentWidth, this.mOffsetY + contentHeight);
+                this.mOverlayRenderNode.setLeftTopRightBottom(
+                        this.mOffsetX,
+                        this.mOffsetY,
+                        this.mOffsetX + this.mContentWidth,
+                        this.mOffsetY + contentHeight);
                 this.mOverlayRenderNode.setOutline(outline);
-                RecordingCanvas canvas = this.mRenderer.getRootNode().beginRecording(this.mContentWidth, contentHeight);
+                RecordingCanvas canvas =
+                        this.mRenderer
+                                .getRootNode()
+                                .beginRecording(this.mContentWidth, contentHeight);
                 try {
                     canvas.enableZ();
                     canvas.drawRenderNode(this.mBitmapRenderNode);
@@ -780,16 +997,22 @@ public final class Magnifier {
             }
         }
 
-        private RenderNode createRenderNodeForBitmap(String name, float elevation, float cornerRadius) {
+        private RenderNode createRenderNodeForBitmap(
+                String name, float elevation, float cornerRadius) {
             RenderNode bitmapRenderNode = RenderNode.create(name, null);
-            bitmapRenderNode.setLeftTopRightBottom(this.mOffsetX, this.mOffsetY, this.mOffsetX + this.mContentWidth, this.mOffsetY + this.mContentHeight);
+            bitmapRenderNode.setLeftTopRightBottom(
+                    this.mOffsetX,
+                    this.mOffsetY,
+                    this.mOffsetX + this.mContentWidth,
+                    this.mOffsetY + this.mContentHeight);
             bitmapRenderNode.setElevation(elevation);
             Outline outline = new Outline();
             outline.setRoundRect(0, 0, this.mContentWidth, this.mContentHeight, cornerRadius);
             outline.setAlpha(1.0f);
             bitmapRenderNode.setOutline(outline);
             bitmapRenderNode.setClipToOutline(true);
-            RecordingCanvas canvas = bitmapRenderNode.beginRecording(this.mContentWidth, this.mContentHeight);
+            RecordingCanvas canvas =
+                    bitmapRenderNode.beginRecording(this.mContentWidth, this.mContentHeight);
             try {
                 canvas.drawColor(Color.GREEN);
                 return bitmapRenderNode;
@@ -800,7 +1023,11 @@ public final class Magnifier {
 
         private RenderNode createRenderNodeForOverlay(String name, float cornerRadius) {
             RenderNode overlayRenderNode = RenderNode.create(name, null);
-            overlayRenderNode.setLeftTopRightBottom(this.mOffsetX, this.mOffsetY, this.mOffsetX + this.mContentWidth, this.mOffsetY + this.mContentHeight);
+            overlayRenderNode.setLeftTopRightBottom(
+                    this.mOffsetX,
+                    this.mOffsetY,
+                    this.mOffsetX + this.mContentWidth,
+                    this.mOffsetY + this.mContentHeight);
             Outline outline = new Outline();
             outline.setRoundRect(0, 0, this.mContentWidth, this.mContentHeight, cornerRadius);
             outline.setAlpha(1.0f);
@@ -811,30 +1038,34 @@ public final class Magnifier {
 
         private void setupOverlay() {
             drawOverlay();
-            this.mOverlay.setCallback(new Drawable.Callback() { // from class: android.widget.Magnifier.InternalPopupWindow.1
-                @Override // android.graphics.drawable.Drawable.Callback
-                public void invalidateDrawable(Drawable who) {
-                    InternalPopupWindow.this.drawOverlay();
-                    if (InternalPopupWindow.this.mCallback != null) {
-                        InternalPopupWindow.this.updateCurrentContentForTesting();
-                    }
-                }
+            this.mOverlay.setCallback(
+                    new Drawable
+                            .Callback() { // from class:
+                                          // android.widget.Magnifier.InternalPopupWindow.1
+                        @Override // android.graphics.drawable.Drawable.Callback
+                        public void invalidateDrawable(Drawable who) {
+                            InternalPopupWindow.this.drawOverlay();
+                            if (InternalPopupWindow.this.mCallback != null) {
+                                InternalPopupWindow.this.updateCurrentContentForTesting();
+                            }
+                        }
 
-                @Override // android.graphics.drawable.Drawable.Callback
-                public void scheduleDrawable(Drawable who, Runnable what, long when) {
-                    Handler.getMain().postAtTime(what, who, when);
-                }
+                        @Override // android.graphics.drawable.Drawable.Callback
+                        public void scheduleDrawable(Drawable who, Runnable what, long when) {
+                            Handler.getMain().postAtTime(what, who, when);
+                        }
 
-                @Override // android.graphics.drawable.Drawable.Callback
-                public void unscheduleDrawable(Drawable who, Runnable what) {
-                    Handler.getMain().removeCallbacks(what, who);
-                }
-            });
+                        @Override // android.graphics.drawable.Drawable.Callback
+                        public void unscheduleDrawable(Drawable who, Runnable what) {
+                            Handler.getMain().removeCallbacks(what, who);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public void drawOverlay() {
-            RecordingCanvas canvas = this.mOverlayRenderNode.beginRecording(this.mContentWidth, this.mContentHeight);
+            RecordingCanvas canvas =
+                    this.mOverlayRenderNode.beginRecording(this.mContentWidth, this.mContentHeight);
             try {
                 this.mOverlay.setBounds(0, 0, this.mContentWidth, this.mContentHeight);
                 this.mOverlay.draw(canvas);
@@ -872,7 +1103,10 @@ public final class Magnifier {
             this.mRenderer.destroy();
             this.mSurface.destroy();
             this.mBBQ.destroy();
-            new SurfaceControl.Transaction().remove(this.mSurfaceControl).remove(this.mBbqSurfaceControl).apply();
+            new SurfaceControl.Transaction()
+                    .remove(this.mSurfaceControl)
+                    .remove(this.mBbqSurfaceControl)
+                    .apply();
             this.mSurfaceSession.kill();
             this.mHandler.removeCallbacks(this.mMagnifierUpdater);
             if (this.mBitmap != null) {
@@ -893,11 +1127,18 @@ public final class Magnifier {
                 Method dump skipped, instructions count: 265
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.widget.Magnifier.InternalPopupWindow.doDraw():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.widget.Magnifier.InternalPopupWindow.doDraw():void");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$doDraw$0(boolean updateWindowPosition, int pendingX, int pendingY, boolean firstDraw, long frame) {
+        public /* synthetic */ void lambda$doDraw$0(
+                boolean updateWindowPosition,
+                int pendingX,
+                int pendingY,
+                boolean firstDraw,
+                long frame) {
             if (!this.mSurface.isValid()) {
                 return;
             }
@@ -915,7 +1156,8 @@ public final class Magnifier {
             Canvas canvas = new Canvas(this.mCurrentContent);
             Rect bounds = new Rect(0, 0, this.mContentWidth, this.mContentHeight);
             if (this.mBitmap != null && !this.mBitmap.isRecycled()) {
-                Rect originalBounds = new Rect(0, 0, this.mBitmap.getWidth(), this.mBitmap.getHeight());
+                Rect originalBounds =
+                        new Rect(0, 0, this.mBitmap.getWidth(), this.mBitmap.getHeight());
                 canvas.drawBitmap(this.mBitmap, originalBounds, bounds, (Paint) null);
             }
             this.mOverlay.setBounds(bounds);
@@ -954,9 +1196,13 @@ public final class Magnifier {
             this.mElevation = resources.getDimension(R.dimen.default_magnifier_elevation);
             this.mCornerRadius = resources.getDimension(R.dimen.default_magnifier_corner_radius);
             this.mZoom = resources.getFloat(R.dimen.default_magnifier_zoom);
-            this.mHorizontalDefaultSourceToMagnifierOffset = resources.getDimensionPixelSize(R.dimen.default_magnifier_horizontal_offset);
-            this.mVerticalDefaultSourceToMagnifierOffset = resources.getDimensionPixelSize(R.dimen.default_magnifier_vertical_offset);
-            this.mOverlay = new ColorDrawable(resources.getColor(R.color.default_magnifier_color_overlay, null));
+            this.mHorizontalDefaultSourceToMagnifierOffset =
+                    resources.getDimensionPixelSize(R.dimen.default_magnifier_horizontal_offset);
+            this.mVerticalDefaultSourceToMagnifierOffset =
+                    resources.getDimensionPixelSize(R.dimen.default_magnifier_vertical_offset);
+            this.mOverlay =
+                    new ColorDrawable(
+                            resources.getColor(R.color.default_magnifier_color_overlay, null));
             this.mClippingEnabled = true;
             this.mLeftContentBound = 1;
             this.mTopContentBound = 1;
@@ -986,7 +1232,8 @@ public final class Magnifier {
         }
 
         public Builder setCornerRadius(float cornerRadius) {
-            Preconditions.checkArgumentNonNegative(cornerRadius, "Corner radius should be non-negative");
+            Preconditions.checkArgumentNonNegative(
+                    cornerRadius, "Corner radius should be non-negative");
             this.mCornerRadius = cornerRadius;
             return this;
         }

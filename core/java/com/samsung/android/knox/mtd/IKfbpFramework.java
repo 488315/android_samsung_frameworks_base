@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.knox.mtd.IMtdCallback;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -19,24 +19,25 @@ public interface IKfbpFramework extends IInterface {
 
     void analyzeUrl(String str, String str2, int i, Intent intent) throws RemoteException;
 
-    void analyzeUrls(List<String> list, IMtdCallback iMtdCallback, String str) throws RemoteException;
+    void analyzeUrls(List<String> list, IMtdCallback iMtdCallback, String str)
+            throws RemoteException;
 
     public static class Default implements IKfbpFramework {
         @Override // com.samsung.android.knox.mtd.IKfbpFramework
-        public void analyzeUrl(String url, String pkgName, int userId, Intent launchIntent) throws RemoteException {
-        }
+        public void analyzeUrl(String url, String pkgName, int userId, Intent launchIntent)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.mtd.IKfbpFramework
-        public void analyzeContent(String content, String pkgName, int userId) throws RemoteException {
-        }
+        public void analyzeContent(String content, String pkgName, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.mtd.IKfbpFramework
-        public void analyzeUrls(List<String> urls, IMtdCallback cb, String location) throws RemoteException {
-        }
+        public void analyzeUrls(List<String> urls, IMtdCallback cb, String location)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.mtd.IKfbpFramework
-        public void analyzeContents(List<String> contents, IMtdCallback cb) throws RemoteException {
-        }
+        public void analyzeContents(List<String> contents, IMtdCallback cb)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -44,7 +45,7 @@ public interface IKfbpFramework extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKfbpFramework {
+    public abstract static class Stub extends Binder implements IKfbpFramework {
         static final int TRANSACTION_analyzeContent = 2;
         static final int TRANSACTION_analyzeContents = 4;
         static final int TRANSACTION_analyzeUrl = 1;
@@ -91,7 +92,8 @@ public interface IKfbpFramework extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKfbpFramework.DESCRIPTOR);
             }
@@ -150,7 +152,8 @@ public interface IKfbpFramework extends IInterface {
             }
 
             @Override // com.samsung.android.knox.mtd.IKfbpFramework
-            public void analyzeUrl(String url, String pkgName, int userId, Intent launchIntent) throws RemoteException {
+            public void analyzeUrl(String url, String pkgName, int userId, Intent launchIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);
@@ -165,7 +168,8 @@ public interface IKfbpFramework extends IInterface {
             }
 
             @Override // com.samsung.android.knox.mtd.IKfbpFramework
-            public void analyzeContent(String content, String pkgName, int userId) throws RemoteException {
+            public void analyzeContent(String content, String pkgName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);
@@ -179,7 +183,8 @@ public interface IKfbpFramework extends IInterface {
             }
 
             @Override // com.samsung.android.knox.mtd.IKfbpFramework
-            public void analyzeUrls(List<String> urls, IMtdCallback cb, String location) throws RemoteException {
+            public void analyzeUrls(List<String> urls, IMtdCallback cb, String location)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);
@@ -193,7 +198,8 @@ public interface IKfbpFramework extends IInterface {
             }
 
             @Override // com.samsung.android.knox.mtd.IKfbpFramework
-            public void analyzeContents(List<String> contents, IMtdCallback cb) throws RemoteException {
+            public void analyzeContents(List<String> contents, IMtdCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);

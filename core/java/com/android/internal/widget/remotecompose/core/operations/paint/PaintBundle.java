@@ -1,11 +1,13 @@
 package com.android.internal.widget.remotecompose.core.operations.paint;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.widget.remotecompose.core.PaintContext;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.VariableSupport;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
 import com.android.internal.widget.remotecompose.core.operations.Utils;
+
 import java.util.Arrays;
 
 /* loaded from: classes5.dex */
@@ -212,7 +214,9 @@ public class PaintBundle {
     private static String asFloatStr(int value) {
         float fValue = Float.intBitsToFloat(value);
         if (Float.isNaN(fValue)) {
-            return NavigationBarInflaterView.SIZE_MOD_START + Utils.idFromNan(fValue) + NavigationBarInflaterView.SIZE_MOD_END;
+            return NavigationBarInflaterView.SIZE_MOD_START
+                    + Utils.idFromNan(fValue)
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
         return Float.toString(fValue);
     }
@@ -265,7 +269,11 @@ public class PaintBundle {
                     continue;
                 case 13:
                     i = i2 + 1;
-                    ret.append("    ColorFilter(color=" + colorInt(this.mArray[i2]) + ", mode=" + blendModeString(cmd2 >> 16));
+                    ret.append(
+                            "    ColorFilter(color="
+                                    + colorInt(this.mArray[i2])
+                                    + ", mode="
+                                    + blendModeString(cmd2 >> 16));
                     continue;
                 case 14:
                     ret.append("    AntiAlias(" + (cmd2 >> 16));
@@ -292,7 +300,10 @@ public class PaintBundle {
                     break;
                 case 19:
                     i = i2 + 1;
-                    ret.append("    ColorId([" + this.mArray[i2] + NavigationBarInflaterView.SIZE_MOD_END);
+                    ret.append(
+                            "    ColorId(["
+                                    + this.mArray[i2]
+                                    + NavigationBarInflaterView.SIZE_MOD_END);
                     continue;
             }
             i = i2;
@@ -519,7 +530,14 @@ public class PaintBundle {
         this.mPos = len;
     }
 
-    public void setLinearGradient(int[] colors, float[] stops, float startX, float startY, float endX, float endY, int tileMode) {
+    public void setLinearGradient(
+            int[] colors,
+            float[] stops,
+            float startX,
+            float startY,
+            float endX,
+            float endY,
+            int tileMode) {
         int i = this.mPos;
         int[] iArr = this.mArray;
         int i2 = this.mPos;
@@ -611,7 +629,8 @@ public class PaintBundle {
         iArr7[i10] = Float.floatToRawIntBits(centerY);
     }
 
-    public void setRadialGradient(int[] colors, float[] stops, float centerX, float centerY, float radius, int tileMode) {
+    public void setRadialGradient(
+            int[] colors, float[] stops, float centerX, float centerY, float radius, int tileMode) {
         int i = this.mPos;
         int[] iArr = this.mArray;
         int i2 = this.mPos;
@@ -760,8 +779,7 @@ public class PaintBundle {
         this.mPos++;
     }
 
-    public void clear(long mask) {
-    }
+    public void clear(long mask) {}
 
     public void reset() {
         this.mPos = 0;

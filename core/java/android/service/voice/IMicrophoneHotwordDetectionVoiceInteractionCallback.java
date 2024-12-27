@@ -10,26 +10,36 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IMicrophoneHotwordDetectionVoiceInteractionCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.voice.IMicrophoneHotwordDetectionVoiceInteractionCallback";
+    public static final String DESCRIPTOR =
+            "android.service.voice.IMicrophoneHotwordDetectionVoiceInteractionCallback";
 
-    void onDetected(HotwordDetectedResult hotwordDetectedResult, AudioFormat audioFormat, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
+    void onDetected(
+            HotwordDetectedResult hotwordDetectedResult,
+            AudioFormat audioFormat,
+            ParcelFileDescriptor parcelFileDescriptor)
+            throws RemoteException;
 
-    void onHotwordDetectionServiceFailure(HotwordDetectionServiceFailure hotwordDetectionServiceFailure) throws RemoteException;
+    void onHotwordDetectionServiceFailure(
+            HotwordDetectionServiceFailure hotwordDetectionServiceFailure) throws RemoteException;
 
     void onRejected(HotwordRejectedResult hotwordRejectedResult) throws RemoteException;
 
     public static class Default implements IMicrophoneHotwordDetectionVoiceInteractionCallback {
         @Override // android.service.voice.IMicrophoneHotwordDetectionVoiceInteractionCallback
-        public void onDetected(HotwordDetectedResult hotwordDetectedResult, AudioFormat audioFormat, ParcelFileDescriptor audioStream) throws RemoteException {
-        }
+        public void onDetected(
+                HotwordDetectedResult hotwordDetectedResult,
+                AudioFormat audioFormat,
+                ParcelFileDescriptor audioStream)
+                throws RemoteException {}
 
         @Override // android.service.voice.IMicrophoneHotwordDetectionVoiceInteractionCallback
-        public void onHotwordDetectionServiceFailure(HotwordDetectionServiceFailure hotwordDetectionServiceFailure) throws RemoteException {
-        }
+        public void onHotwordDetectionServiceFailure(
+                HotwordDetectionServiceFailure hotwordDetectionServiceFailure)
+                throws RemoteException {}
 
         @Override // android.service.voice.IMicrophoneHotwordDetectionVoiceInteractionCallback
-        public void onRejected(HotwordRejectedResult hotwordRejectedResult) throws RemoteException {
-        }
+        public void onRejected(HotwordRejectedResult hotwordRejectedResult)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,7 +47,8 @@ public interface IMicrophoneHotwordDetectionVoiceInteractionCallback extends IIn
         }
     }
 
-    public static abstract class Stub extends Binder implements IMicrophoneHotwordDetectionVoiceInteractionCallback {
+    public abstract static class Stub extends Binder
+            implements IMicrophoneHotwordDetectionVoiceInteractionCallback {
         static final int TRANSACTION_onDetected = 1;
         static final int TRANSACTION_onHotwordDetectionServiceFailure = 2;
         static final int TRANSACTION_onRejected = 3;
@@ -50,8 +61,11 @@ public interface IMicrophoneHotwordDetectionVoiceInteractionCallback extends IIn
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IMicrophoneHotwordDetectionVoiceInteractionCallback.DESCRIPTOR);
-            if (iin != null && (iin instanceof IMicrophoneHotwordDetectionVoiceInteractionCallback)) {
+            IInterface iin =
+                    obj.queryLocalInterface(
+                            IMicrophoneHotwordDetectionVoiceInteractionCallback.DESCRIPTOR);
+            if (iin != null
+                    && (iin instanceof IMicrophoneHotwordDetectionVoiceInteractionCallback)) {
                 return (IMicrophoneHotwordDetectionVoiceInteractionCallback) iin;
             }
             return new Proxy(obj);
@@ -81,9 +95,11 @@ public interface IMicrophoneHotwordDetectionVoiceInteractionCallback extends IIn
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
-                data.enforceInterface(IMicrophoneHotwordDetectionVoiceInteractionCallback.DESCRIPTOR);
+                data.enforceInterface(
+                        IMicrophoneHotwordDetectionVoiceInteractionCallback.DESCRIPTOR);
             }
             if (code == 1598968902) {
                 reply.writeString(IMicrophoneHotwordDetectionVoiceInteractionCallback.DESCRIPTOR);
@@ -91,19 +107,27 @@ public interface IMicrophoneHotwordDetectionVoiceInteractionCallback extends IIn
             }
             switch (code) {
                 case 1:
-                    HotwordDetectedResult _arg0 = (HotwordDetectedResult) data.readTypedObject(HotwordDetectedResult.CREATOR);
+                    HotwordDetectedResult _arg0 =
+                            (HotwordDetectedResult)
+                                    data.readTypedObject(HotwordDetectedResult.CREATOR);
                     AudioFormat _arg1 = (AudioFormat) data.readTypedObject(AudioFormat.CREATOR);
-                    ParcelFileDescriptor _arg2 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg2 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     onDetected(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    HotwordDetectionServiceFailure _arg02 = (HotwordDetectionServiceFailure) data.readTypedObject(HotwordDetectionServiceFailure.CREATOR);
+                    HotwordDetectionServiceFailure _arg02 =
+                            (HotwordDetectionServiceFailure)
+                                    data.readTypedObject(HotwordDetectionServiceFailure.CREATOR);
                     data.enforceNoDataAvail();
                     onHotwordDetectionServiceFailure(_arg02);
                     return true;
                 case 3:
-                    HotwordRejectedResult _arg03 = (HotwordRejectedResult) data.readTypedObject(HotwordRejectedResult.CREATOR);
+                    HotwordRejectedResult _arg03 =
+                            (HotwordRejectedResult)
+                                    data.readTypedObject(HotwordRejectedResult.CREATOR);
                     data.enforceNoDataAvail();
                     onRejected(_arg03);
                     return true;
@@ -129,10 +153,15 @@ public interface IMicrophoneHotwordDetectionVoiceInteractionCallback extends IIn
             }
 
             @Override // android.service.voice.IMicrophoneHotwordDetectionVoiceInteractionCallback
-            public void onDetected(HotwordDetectedResult hotwordDetectedResult, AudioFormat audioFormat, ParcelFileDescriptor audioStream) throws RemoteException {
+            public void onDetected(
+                    HotwordDetectedResult hotwordDetectedResult,
+                    AudioFormat audioFormat,
+                    ParcelFileDescriptor audioStream)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(IMicrophoneHotwordDetectionVoiceInteractionCallback.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            IMicrophoneHotwordDetectionVoiceInteractionCallback.DESCRIPTOR);
                     _data.writeTypedObject(hotwordDetectedResult, 0);
                     _data.writeTypedObject(audioFormat, 0);
                     _data.writeTypedObject(audioStream, 0);
@@ -143,10 +172,13 @@ public interface IMicrophoneHotwordDetectionVoiceInteractionCallback extends IIn
             }
 
             @Override // android.service.voice.IMicrophoneHotwordDetectionVoiceInteractionCallback
-            public void onHotwordDetectionServiceFailure(HotwordDetectionServiceFailure hotwordDetectionServiceFailure) throws RemoteException {
+            public void onHotwordDetectionServiceFailure(
+                    HotwordDetectionServiceFailure hotwordDetectionServiceFailure)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(IMicrophoneHotwordDetectionVoiceInteractionCallback.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            IMicrophoneHotwordDetectionVoiceInteractionCallback.DESCRIPTOR);
                     _data.writeTypedObject(hotwordDetectionServiceFailure, 0);
                     this.mRemote.transact(2, _data, null, 1);
                 } finally {
@@ -155,10 +187,12 @@ public interface IMicrophoneHotwordDetectionVoiceInteractionCallback extends IIn
             }
 
             @Override // android.service.voice.IMicrophoneHotwordDetectionVoiceInteractionCallback
-            public void onRejected(HotwordRejectedResult hotwordRejectedResult) throws RemoteException {
+            public void onRejected(HotwordRejectedResult hotwordRejectedResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(IMicrophoneHotwordDetectionVoiceInteractionCallback.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            IMicrophoneHotwordDetectionVoiceInteractionCallback.DESCRIPTOR);
                     _data.writeTypedObject(hotwordRejectedResult, 0);
                     this.mRemote.transact(3, _data, null, 1);
                 } finally {

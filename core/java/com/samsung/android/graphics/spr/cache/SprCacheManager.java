@@ -3,7 +3,9 @@ package com.samsung.android.graphics.spr.cache;
 import android.graphics.Bitmap;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
+
 import com.samsung.android.graphics.spr.document.debug.SprDebug;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -47,13 +49,35 @@ public class SprCacheManager {
 
     public void printDebug() {
         synchronized (this.mCacheList) {
-            Log.d("SprDrawable", this.mName + NavigationBarInflaterView.KEY_CODE_START + this.mHashCode + ") printDebug start");
+            Log.d(
+                    "SprDrawable",
+                    this.mName
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + this.mHashCode
+                            + ") printDebug start");
             Iterator<SprCache> it = this.mCacheList.iterator();
             while (it.hasNext()) {
                 SprCache cache = it.next();
-                Log.d("SprDrawable", this.mName + NavigationBarInflaterView.KEY_CODE_START + this.mHashCode + ")Cache (" + cache.width + ", " + cache.height + NavigationBarInflaterView.SIZE_MOD_START + cache.dpi + "]) " + cache.refCount);
+                Log.d(
+                        "SprDrawable",
+                        this.mName
+                                + NavigationBarInflaterView.KEY_CODE_START
+                                + this.mHashCode
+                                + ")Cache ("
+                                + cache.width
+                                + ", "
+                                + cache.height
+                                + NavigationBarInflaterView.SIZE_MOD_START
+                                + cache.dpi
+                                + "]) "
+                                + cache.refCount);
             }
-            Log.d("SprDrawable", this.mName + NavigationBarInflaterView.KEY_CODE_START + this.mHashCode + ") printDebug end");
+            Log.d(
+                    "SprDrawable",
+                    this.mName
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + this.mHashCode
+                            + ") printDebug end");
         }
     }
 

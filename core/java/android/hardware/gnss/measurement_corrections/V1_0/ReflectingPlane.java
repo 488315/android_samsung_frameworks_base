@@ -4,6 +4,7 @@ import android.hardware.scontext.SContextConstants;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,18 +23,33 @@ public final class ReflectingPlane {
             return false;
         }
         ReflectingPlane other = (ReflectingPlane) otherObject;
-        if (this.latitudeDegrees == other.latitudeDegrees && this.longitudeDegrees == other.longitudeDegrees && this.altitudeMeters == other.altitudeMeters && this.azimuthDegrees == other.azimuthDegrees) {
+        if (this.latitudeDegrees == other.latitudeDegrees
+                && this.longitudeDegrees == other.longitudeDegrees
+                && this.altitudeMeters == other.altitudeMeters
+                && this.azimuthDegrees == other.azimuthDegrees) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.latitudeDegrees))), Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.longitudeDegrees))), Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.altitudeMeters))), Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.azimuthDegrees))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.latitudeDegrees))),
+                Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.longitudeDegrees))),
+                Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.altitudeMeters))),
+                Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.azimuthDegrees))));
     }
 
     public final String toString() {
-        return "{.latitudeDegrees = " + this.latitudeDegrees + ", .longitudeDegrees = " + this.longitudeDegrees + ", .altitudeMeters = " + this.altitudeMeters + ", .azimuthDegrees = " + this.azimuthDegrees + "}";
+        return "{.latitudeDegrees = "
+                + this.latitudeDegrees
+                + ", .longitudeDegrees = "
+                + this.longitudeDegrees
+                + ", .altitudeMeters = "
+                + this.altitudeMeters
+                + ", .azimuthDegrees = "
+                + this.azimuthDegrees
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -45,7 +61,8 @@ public final class ReflectingPlane {
         ArrayList<ReflectingPlane> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             ReflectingPlane _hidl_vec_element = new ReflectingPlane();
@@ -55,7 +72,8 @@ public final class ReflectingPlane {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.latitudeDegrees = _hidl_blob.getDouble(0 + _hidl_offset);
         this.longitudeDegrees = _hidl_blob.getDouble(8 + _hidl_offset);
         this.altitudeMeters = _hidl_blob.getDouble(16 + _hidl_offset);
@@ -68,7 +86,8 @@ public final class ReflectingPlane {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<ReflectingPlane> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<ReflectingPlane> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

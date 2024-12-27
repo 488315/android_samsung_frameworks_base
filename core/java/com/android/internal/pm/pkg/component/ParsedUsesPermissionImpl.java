@@ -3,9 +3,10 @@ package com.android.internal.pm.pkg.component;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
-import com.android.internal.pm.pkg.component.ParsedUsesPermission;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Parcelling;
+
 import java.lang.annotation.Annotation;
 
 /* loaded from: classes5.dex */
@@ -17,9 +18,13 @@ public class ParsedUsesPermissionImpl implements ParsedUsesPermission, Parcelabl
 
     public ParsedUsesPermissionImpl(String name, int usesPermissionFlags) {
         this.name = name;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) name);
         this.usesPermissionFlags = usesPermissionFlags;
-        AnnotationValidations.validate((Class<? extends Annotation>) ParsedUsesPermission.UsesPermissionFlags.class, (Annotation) null, usesPermissionFlags);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ParsedUsesPermission.UsesPermissionFlags.class,
+                (Annotation) null,
+                usesPermissionFlags);
     }
 
     @Override // com.android.internal.pm.pkg.component.ParsedUsesPermission
@@ -34,13 +39,17 @@ public class ParsedUsesPermissionImpl implements ParsedUsesPermission, Parcelabl
 
     public ParsedUsesPermissionImpl setName(String value) {
         this.name = value;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
         return this;
     }
 
     public ParsedUsesPermissionImpl setUsesPermissionFlags(int value) {
         this.usesPermissionFlags = value;
-        AnnotationValidations.validate((Class<? extends Annotation>) ParsedUsesPermission.UsesPermissionFlags.class, (Annotation) null, this.usesPermissionFlags);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ParsedUsesPermission.UsesPermissionFlags.class,
+                (Annotation) null,
+                this.usesPermissionFlags);
         return this;
     }
 
@@ -49,19 +58,22 @@ public class ParsedUsesPermissionImpl implements ParsedUsesPermission, Parcelabl
         if (sParcellingForName == null) {
             sParcellingForName = Parcelling.Cache.put(new Parcelling.BuiltIn.ForInternedString());
         }
-        CREATOR = new Parcelable.Creator<ParsedUsesPermissionImpl>() { // from class: com.android.internal.pm.pkg.component.ParsedUsesPermissionImpl.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ParsedUsesPermissionImpl[] newArray(int size) {
-                return new ParsedUsesPermissionImpl[size];
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        ParsedUsesPermissionImpl>() { // from class:
+                                                      // com.android.internal.pm.pkg.component.ParsedUsesPermissionImpl.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ParsedUsesPermissionImpl[] newArray(int size) {
+                        return new ParsedUsesPermissionImpl[size];
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ParsedUsesPermissionImpl createFromParcel(Parcel in) {
-                return new ParsedUsesPermissionImpl(in);
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ParsedUsesPermissionImpl createFromParcel(Parcel in) {
+                        return new ParsedUsesPermissionImpl(in);
+                    }
+                };
     }
 
     @Override // android.os.Parcelable
@@ -79,12 +91,15 @@ public class ParsedUsesPermissionImpl implements ParsedUsesPermission, Parcelabl
         String _name = sParcellingForName.unparcel(in);
         int _usesPermissionFlags = in.readInt();
         this.name = _name;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
         this.usesPermissionFlags = _usesPermissionFlags;
-        AnnotationValidations.validate((Class<? extends Annotation>) ParsedUsesPermission.UsesPermissionFlags.class, (Annotation) null, this.usesPermissionFlags);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ParsedUsesPermission.UsesPermissionFlags.class,
+                (Annotation) null,
+                this.usesPermissionFlags);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

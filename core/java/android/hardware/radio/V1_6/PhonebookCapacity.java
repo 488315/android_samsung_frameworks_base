@@ -3,6 +3,7 @@ package android.hardware.radio.V1_6;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -27,18 +28,61 @@ public final class PhonebookCapacity {
             return false;
         }
         PhonebookCapacity other = (PhonebookCapacity) otherObject;
-        if (this.maxAdnRecords == other.maxAdnRecords && this.usedAdnRecords == other.usedAdnRecords && this.maxEmailRecords == other.maxEmailRecords && this.usedEmailRecords == other.usedEmailRecords && this.maxAdditionalNumberRecords == other.maxAdditionalNumberRecords && this.usedAdditionalNumberRecords == other.usedAdditionalNumberRecords && this.maxNameLen == other.maxNameLen && this.maxNumberLen == other.maxNumberLen && this.maxEmailLen == other.maxEmailLen && this.maxAdditionalNumberLen == other.maxAdditionalNumberLen) {
+        if (this.maxAdnRecords == other.maxAdnRecords
+                && this.usedAdnRecords == other.usedAdnRecords
+                && this.maxEmailRecords == other.maxEmailRecords
+                && this.usedEmailRecords == other.usedEmailRecords
+                && this.maxAdditionalNumberRecords == other.maxAdditionalNumberRecords
+                && this.usedAdditionalNumberRecords == other.usedAdditionalNumberRecords
+                && this.maxNameLen == other.maxNameLen
+                && this.maxNumberLen == other.maxNumberLen
+                && this.maxEmailLen == other.maxEmailLen
+                && this.maxAdditionalNumberLen == other.maxAdditionalNumberLen) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxAdnRecords))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.usedAdnRecords))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxEmailRecords))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.usedEmailRecords))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxAdditionalNumberRecords))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.usedAdditionalNumberRecords))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxNameLen))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxNumberLen))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxEmailLen))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxAdditionalNumberLen))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxAdnRecords))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.usedAdnRecords))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxEmailRecords))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.usedEmailRecords))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.maxAdditionalNumberRecords))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(
+                                Integer.valueOf(this.usedAdditionalNumberRecords))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxNameLen))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxNumberLen))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxEmailLen))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.maxAdditionalNumberLen))));
     }
 
     public final String toString() {
-        return "{.maxAdnRecords = " + this.maxAdnRecords + ", .usedAdnRecords = " + this.usedAdnRecords + ", .maxEmailRecords = " + this.maxEmailRecords + ", .usedEmailRecords = " + this.usedEmailRecords + ", .maxAdditionalNumberRecords = " + this.maxAdditionalNumberRecords + ", .usedAdditionalNumberRecords = " + this.usedAdditionalNumberRecords + ", .maxNameLen = " + this.maxNameLen + ", .maxNumberLen = " + this.maxNumberLen + ", .maxEmailLen = " + this.maxEmailLen + ", .maxAdditionalNumberLen = " + this.maxAdditionalNumberLen + "}";
+        return "{.maxAdnRecords = "
+                + this.maxAdnRecords
+                + ", .usedAdnRecords = "
+                + this.usedAdnRecords
+                + ", .maxEmailRecords = "
+                + this.maxEmailRecords
+                + ", .usedEmailRecords = "
+                + this.usedEmailRecords
+                + ", .maxAdditionalNumberRecords = "
+                + this.maxAdditionalNumberRecords
+                + ", .usedAdditionalNumberRecords = "
+                + this.usedAdditionalNumberRecords
+                + ", .maxNameLen = "
+                + this.maxNameLen
+                + ", .maxNumberLen = "
+                + this.maxNumberLen
+                + ", .maxEmailLen = "
+                + this.maxEmailLen
+                + ", .maxAdditionalNumberLen = "
+                + this.maxAdditionalNumberLen
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -50,7 +94,8 @@ public final class PhonebookCapacity {
         ArrayList<PhonebookCapacity> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             PhonebookCapacity _hidl_vec_element = new PhonebookCapacity();
@@ -60,7 +105,8 @@ public final class PhonebookCapacity {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.maxAdnRecords = _hidl_blob.getInt32(0 + _hidl_offset);
         this.usedAdnRecords = _hidl_blob.getInt32(4 + _hidl_offset);
         this.maxEmailRecords = _hidl_blob.getInt32(8 + _hidl_offset);
@@ -79,7 +125,8 @@ public final class PhonebookCapacity {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<PhonebookCapacity> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<PhonebookCapacity> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

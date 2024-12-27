@@ -4,7 +4,9 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+
 import dalvik.system.CloseGuard;
+
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,11 +18,9 @@ import java.util.Objects;
 public abstract class AbstractCursor implements CrossProcessCursor {
     private static final String TAG = "Cursor";
 
-    @Deprecated
-    protected boolean mClosed;
+    @Deprecated protected boolean mClosed;
 
-    @Deprecated
-    protected ContentResolver mContentResolver;
+    @Deprecated protected ContentResolver mContentResolver;
     protected Long mCurrentRowID;
     private Uri mNotifyUri;
     private List<Uri> mNotifyUris;
@@ -33,8 +33,7 @@ public abstract class AbstractCursor implements CrossProcessCursor {
     private final ContentObservable mContentObservable = new ContentObservable();
     private Bundle mExtras = Bundle.EMPTY;
 
-    @Deprecated
-    protected int mPos = -1;
+    @Deprecated protected int mPos = -1;
     private final CloseGuard mCloseGuard = initCloseGuard();
 
     @Override // android.database.Cursor
@@ -268,7 +267,11 @@ public abstract class AbstractCursor implements CrossProcessCursor {
             } catch (Exception e) {
                 Log.d(TAG, "Cannot collect column names for debug purposes", e);
             }
-            throw new IllegalArgumentException("column '" + columnName + "' does not exist. Available columns: " + availableColumns);
+            throw new IllegalArgumentException(
+                    "column '"
+                            + columnName
+                            + "' does not exist. Available columns: "
+                            + availableColumns);
         }
         return index;
     }
@@ -325,7 +328,11 @@ public abstract class AbstractCursor implements CrossProcessCursor {
         setNotificationUris(cr, notifyUris, cr.getUserId(), true);
     }
 
-    public void setNotificationUris(ContentResolver cr, List<Uri> notifyUris, int userHandle, boolean registerSelfObserver) {
+    public void setNotificationUris(
+            ContentResolver cr,
+            List<Uri> notifyUris,
+            int userHandle,
+            boolean registerSelfObserver) {
         synchronized (this.mSelfObserverLock) {
             this.mNotifyUris = notifyUris;
             this.mNotifyUri = this.mNotifyUris.get(0);
@@ -339,7 +346,8 @@ public abstract class AbstractCursor implements CrossProcessCursor {
                 int size = this.mNotifyUris.size();
                 for (int i = 0; i < size; i++) {
                     Uri notifyUri = this.mNotifyUris.get(i);
-                    this.mContentResolver.registerContentObserver(notifyUri, true, this.mSelfObserver, userHandle);
+                    this.mContentResolver.registerContentObserver(
+                            notifyUri, true, this.mSelfObserver, userHandle);
                 }
                 this.mSelfObserverRegistered = true;
             }

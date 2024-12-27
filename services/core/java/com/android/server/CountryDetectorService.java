@@ -11,10 +11,12 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.DumpUtils;
 import com.android.server.location.countrydetector.ComprehensiveCountryDetector;
 import com.android.server.location.countrydetector.CountryDetectorBase;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
@@ -83,7 +85,9 @@ public final class CountryDetectorService extends ICountryDetector.Stub {
                     this.mReceivers.put(iCountryListener.asBinder(), receiver);
                     if (this.mReceivers.size() == 1) {
                         Slog.d("CountryDetector", "The first listener is added");
-                        this.mHandler.post(new CountryDetectorService$$ExternalSyntheticLambda1(this, this.mLocationBasedDetectorListener, 0));
+                        this.mHandler.post(
+                                new CountryDetectorService$$ExternalSyntheticLambda1(
+                                        this, this.mLocationBasedDetectorListener, 0));
                     }
                 } catch (RemoteException e) {
                     Slog.e("CountryDetector", "linkToDeath failed:", e);
@@ -101,7 +105,8 @@ public final class CountryDetectorService extends ICountryDetector.Stub {
         return null;
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         DumpUtils.checkDumpPermission(this.mContext, "CountryDetector", printWriter);
     }
 
@@ -114,11 +119,23 @@ public final class CountryDetectorService extends ICountryDetector.Stub {
         CountryDetectorBase countryDetectorBase;
         String string = this.mContext.getString(R.string.data_usage_mobile_limit_title);
         if (!TextUtils.isEmpty(string)) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("Using custom country detector class: ", string, "CountryDetector");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "Using custom country detector class: ", string, "CountryDetector");
             try {
-                countryDetectorBase = (CountryDetectorBase) Class.forName(string).asSubclass(CountryDetectorBase.class).getConstructor(Context.class).newInstance(this.mContext);
-            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException unused) {
-                Slog.e("CountryDetector", "Could not instantiate the custom country detector class");
+                countryDetectorBase =
+                        (CountryDetectorBase)
+                                Class.forName(string)
+                                        .asSubclass(CountryDetectorBase.class)
+                                        .getConstructor(Context.class)
+                                        .newInstance(this.mContext);
+            } catch (ClassNotFoundException
+                    | IllegalAccessException
+                    | InstantiationException
+                    | NoSuchMethodException
+                    | InvocationTargetException unused) {
+                Slog.e(
+                        "CountryDetector",
+                        "Could not instantiate the custom country detector class");
                 countryDetectorBase = null;
             }
             this.mCountryDetector = countryDetectorBase;
@@ -127,12 +144,16 @@ public final class CountryDetectorService extends ICountryDetector.Stub {
             Slog.d("CountryDetector", "Using default country detector");
             this.mCountryDetector = new ComprehensiveCountryDetector(this.mContext);
         }
-        this.mLocationBasedDetectorListener = new CountryListener() { // from class: com.android.server.CountryDetectorService$$ExternalSyntheticLambda0
-            public final void onCountryDetected(Country country) {
-                CountryDetectorService countryDetectorService = CountryDetectorService.this;
-                countryDetectorService.mHandler.post(new CountryDetectorService$$ExternalSyntheticLambda1(countryDetectorService, country, 1));
-            }
-        };
+        this.mLocationBasedDetectorListener =
+                new CountryListener() { // from class:
+                                        // com.android.server.CountryDetectorService$$ExternalSyntheticLambda0
+                    public final void onCountryDetected(Country country) {
+                        CountryDetectorService countryDetectorService = CountryDetectorService.this;
+                        countryDetectorService.mHandler.post(
+                                new CountryDetectorService$$ExternalSyntheticLambda1(
+                                        countryDetectorService, country, 1));
+                    }
+                };
     }
 
     public boolean isSystemReady() {
@@ -151,7 +172,8 @@ public final class CountryDetectorService extends ICountryDetector.Stub {
             try {
                 this.mReceivers.remove(iBinder);
                 if (this.mReceivers.isEmpty()) {
-                    this.mHandler.post(new CountryDetectorService$$ExternalSyntheticLambda1(this, null, 0));
+                    this.mHandler.post(
+                            new CountryDetectorService$$ExternalSyntheticLambda1(this, null, 0));
                     Slog.d("CountryDetector", "No listener is left");
                 }
             } catch (Throwable th) {

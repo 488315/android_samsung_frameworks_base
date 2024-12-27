@@ -7,7 +7,9 @@ import android.system.OsConstants;
 import android.system.StructTimeval;
 import android.system.UnixSocketAddress;
 import android.util.Slog;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -43,9 +45,11 @@ public final class NativeCrashListener extends Thread {
                 crashInfo.throwMethodName = "unknown";
                 crashInfo.stackTrace = this.mCrashReport;
                 ActivityManagerService activityManagerService = NativeCrashListener.this.mAm;
-                String str = this.mGwpAsanRecoverableCrash ? "native_recoverable_crash" : "native_crash";
+                String str =
+                        this.mGwpAsanRecoverableCrash ? "native_recoverable_crash" : "native_crash";
                 ProcessRecord processRecord = this.mApp;
-                activityManagerService.handleApplicationCrashInner(str, processRecord, processRecord.processName, crashInfo);
+                activityManagerService.handleApplicationCrashInner(
+                        str, processRecord, processRecord.processName, crashInfo);
             } catch (Exception e) {
                 Slog.e("NativeCrashListener", "Unable to report native crash", e);
             }
@@ -57,7 +61,10 @@ public final class NativeCrashListener extends Thread {
     }
 
     public static int unpackInt(int i, byte[] bArr) {
-        return (bArr[i + 3] & 255) | ((bArr[i] & 255) << 24) | ((bArr[i + 1] & 255) << 16) | ((bArr[i + 2] & 255) << 8);
+        return (bArr[i + 3] & 255)
+                | ((bArr[i] & 255) << 24)
+                | ((bArr[i + 1] & 255) << 16)
+                | ((bArr[i + 2] & 255) << 8);
     }
 
     public final void consumeNativeCrashData(FileDescriptor fileDescriptor) {
@@ -102,7 +109,8 @@ public final class NativeCrashListener extends Thread {
                 Slog.w("NativeCrashListener", "Couldn't find ProcessRecord for pid " + unpackInt);
                 return;
             }
-            if (!processRecord.mPersistent || Constants.SYSTEMUI_PACKAGE_NAME.equals(processRecord.processName)) {
+            if (!processRecord.mPersistent
+                    || Constants.SYSTEMUI_PACKAGE_NAME.equals(processRecord.processName)) {
                 while (true) {
                     int read2 = Os.read(fileDescriptor, bArr, 0, 4096);
                     if (read2 > 0) {
@@ -126,9 +134,14 @@ public final class NativeCrashListener extends Thread {
                             ActivityManagerService.boostPriorityForProcLockedSection();
                             synchronized (activityManagerProcLock) {
                                 try {
-                                    ProcessErrorStateRecord processErrorStateRecord = processRecord.mErrorState;
+                                    ProcessErrorStateRecord processErrorStateRecord =
+                                            processRecord.mErrorState;
                                     processErrorStateRecord.mCrashing = true;
-                                    processErrorStateRecord.mApp.mWindowProcessController.mCrashing = true;
+                                    processErrorStateRecord
+                                                    .mApp
+                                                    .mWindowProcessController
+                                                    .mCrashing =
+                                            true;
                                     processRecord.mErrorState.mForceCrashReport = true;
                                 } catch (Throwable th) {
                                     ActivityManagerService.resetPriorityAfterProcLockedSection();
@@ -143,7 +156,12 @@ public final class NativeCrashListener extends Thread {
                     }
                     ActivityManagerService.resetPriorityAfterLockedSection();
                 }
-                new NativeCrashReporter(processRecord, unpackInt2, z, new String(byteArrayOutputStream.toByteArray(), "UTF-8")).start();
+                new NativeCrashReporter(
+                                processRecord,
+                                unpackInt2,
+                                z,
+                                new String(byteArrayOutputStream.toByteArray(), "UTF-8"))
+                        .start();
             }
         } catch (Exception e) {
             Slog.e("NativeCrashListener", "Exception dealing with report", e);

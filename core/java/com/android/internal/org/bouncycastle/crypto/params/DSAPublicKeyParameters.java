@@ -15,7 +15,9 @@ public class DSAPublicKeyParameters extends DSAKeyParameters {
 
     private BigInteger validate(BigInteger y, DSAParameters params) {
         if (params != null) {
-            if (TWO.compareTo(y) <= 0 && params.getP().subtract(TWO).compareTo(y) >= 0 && ONE.equals(y.modPow(params.getQ(), params.getP()))) {
+            if (TWO.compareTo(y) <= 0
+                    && params.getP().subtract(TWO).compareTo(y) >= 0
+                    && ONE.equals(y.modPow(params.getQ(), params.getP()))) {
                 return y;
             }
             throw new IllegalArgumentException("y value does not appear to be in correct group");

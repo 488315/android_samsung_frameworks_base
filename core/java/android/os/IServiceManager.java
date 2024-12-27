@@ -1,7 +1,5 @@
 package android.os;
 
-import android.os.IClientCallback;
-import android.os.IServiceCallback;
 
 /* loaded from: classes3.dex */
 public interface IServiceManager extends IInterface {
@@ -31,13 +29,16 @@ public interface IServiceManager extends IInterface {
 
     String[] listServices(int i) throws RemoteException;
 
-    void registerClientCallback(String str, IBinder iBinder, IClientCallback iClientCallback) throws RemoteException;
+    void registerClientCallback(String str, IBinder iBinder, IClientCallback iClientCallback)
+            throws RemoteException;
 
-    void registerForNotifications(String str, IServiceCallback iServiceCallback) throws RemoteException;
+    void registerForNotifications(String str, IServiceCallback iServiceCallback)
+            throws RemoteException;
 
     void tryUnregisterService(String str, IBinder iBinder) throws RemoteException;
 
-    void unregisterForNotifications(String str, IServiceCallback iServiceCallback) throws RemoteException;
+    void unregisterForNotifications(String str, IServiceCallback iServiceCallback)
+            throws RemoteException;
 
     String updatableViaApex(String str) throws RemoteException;
 
@@ -53,8 +54,9 @@ public interface IServiceManager extends IInterface {
         }
 
         @Override // android.os.IServiceManager
-        public void addService(String name, IBinder service, boolean allowIsolated, int dumpPriority) throws RemoteException {
-        }
+        public void addService(
+                String name, IBinder service, boolean allowIsolated, int dumpPriority)
+                throws RemoteException {}
 
         @Override // android.os.IServiceManager
         public String[] listServices(int dumpPriority) throws RemoteException {
@@ -62,12 +64,12 @@ public interface IServiceManager extends IInterface {
         }
 
         @Override // android.os.IServiceManager
-        public void registerForNotifications(String name, IServiceCallback callback) throws RemoteException {
-        }
+        public void registerForNotifications(String name, IServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IServiceManager
-        public void unregisterForNotifications(String name, IServiceCallback callback) throws RemoteException {
-        }
+        public void unregisterForNotifications(String name, IServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IServiceManager
         public boolean isDeclared(String name) throws RemoteException {
@@ -95,12 +97,11 @@ public interface IServiceManager extends IInterface {
         }
 
         @Override // android.os.IServiceManager
-        public void registerClientCallback(String name, IBinder service, IClientCallback callback) throws RemoteException {
-        }
+        public void registerClientCallback(String name, IBinder service, IClientCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IServiceManager
-        public void tryUnregisterService(String name, IBinder service) throws RemoteException {
-        }
+        public void tryUnregisterService(String name, IBinder service) throws RemoteException {}
 
         @Override // android.os.IServiceManager
         public ServiceDebugInfo[] getServiceDebugInfo() throws RemoteException {
@@ -113,7 +114,7 @@ public interface IServiceManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IServiceManager {
+    public abstract static class Stub extends Binder implements IServiceManager {
         static final int TRANSACTION_addService = 3;
         static final int TRANSACTION_checkService = 2;
         static final int TRANSACTION_getConnectionInfo = 11;
@@ -190,7 +191,8 @@ public interface IServiceManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IServiceManager.DESCRIPTOR);
             }
@@ -231,14 +233,16 @@ public interface IServiceManager extends IInterface {
                     return true;
                 case 5:
                     String _arg05 = data.readString();
-                    IServiceCallback _arg12 = IServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IServiceCallback _arg12 =
+                            IServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerForNotifications(_arg05, _arg12);
                     reply.writeNoException();
                     return true;
                 case 6:
                     String _arg06 = data.readString();
-                    IServiceCallback _arg13 = IServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IServiceCallback _arg13 =
+                            IServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterForNotifications(_arg06, _arg13);
                     reply.writeNoException();
@@ -281,7 +285,8 @@ public interface IServiceManager extends IInterface {
                 case 12:
                     String _arg012 = data.readString();
                     IBinder _arg14 = data.readStrongBinder();
-                    IClientCallback _arg22 = IClientCallback.Stub.asInterface(data.readStrongBinder());
+                    IClientCallback _arg22 =
+                            IClientCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerClientCallback(_arg012, _arg14, _arg22);
                     reply.writeNoException();
@@ -354,7 +359,9 @@ public interface IServiceManager extends IInterface {
             }
 
             @Override // android.os.IServiceManager
-            public void addService(String name, IBinder service, boolean allowIsolated, int dumpPriority) throws RemoteException {
+            public void addService(
+                    String name, IBinder service, boolean allowIsolated, int dumpPriority)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -389,7 +396,8 @@ public interface IServiceManager extends IInterface {
             }
 
             @Override // android.os.IServiceManager
-            public void registerForNotifications(String name, IServiceCallback callback) throws RemoteException {
+            public void registerForNotifications(String name, IServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -405,7 +413,8 @@ public interface IServiceManager extends IInterface {
             }
 
             @Override // android.os.IServiceManager
-            public void unregisterForNotifications(String name, IServiceCallback callback) throws RemoteException {
+            public void unregisterForNotifications(String name, IServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -497,7 +506,8 @@ public interface IServiceManager extends IInterface {
                     _data.writeString(name);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    ConnectionInfo _result = (ConnectionInfo) _reply.readTypedObject(ConnectionInfo.CREATOR);
+                    ConnectionInfo _result =
+                            (ConnectionInfo) _reply.readTypedObject(ConnectionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -506,7 +516,8 @@ public interface IServiceManager extends IInterface {
             }
 
             @Override // android.os.IServiceManager
-            public void registerClientCallback(String name, IBinder service, IClientCallback callback) throws RemoteException {
+            public void registerClientCallback(
+                    String name, IBinder service, IClientCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -546,7 +557,8 @@ public interface IServiceManager extends IInterface {
                     _data.writeInterfaceToken(IServiceManager.DESCRIPTOR);
                     this.mRemote.transact(14, _data, _reply, 0);
                     _reply.readException();
-                    ServiceDebugInfo[] _result = (ServiceDebugInfo[]) _reply.createTypedArray(ServiceDebugInfo.CREATOR);
+                    ServiceDebugInfo[] _result =
+                            (ServiceDebugInfo[]) _reply.createTypedArray(ServiceDebugInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

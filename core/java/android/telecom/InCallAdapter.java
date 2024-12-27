@@ -7,7 +7,9 @@ import android.os.Handler;
 import android.os.OutcomeReceiver;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
+
 import com.android.internal.telecom.IInCallAdapter;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -137,21 +139,29 @@ public final class InCallAdapter {
                 if (resultCode == 0) {
                     Executor executor = this.val$executor;
                     final OutcomeReceiver outcomeReceiver = this.val$callback;
-                    executor.execute(new Runnable() { // from class: android.telecom.InCallAdapter$1$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            OutcomeReceiver.this.onResult(null);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // android.telecom.InCallAdapter$1$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    OutcomeReceiver.this.onResult(null);
+                                }
+                            });
                 } else {
                     Executor executor2 = this.val$executor;
                     final OutcomeReceiver outcomeReceiver2 = this.val$callback;
-                    executor2.execute(new Runnable() { // from class: android.telecom.InCallAdapter$1$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            OutcomeReceiver.this.onError((CallEndpointException) result.getParcelable(CallEndpointException.CHANGE_ERROR, CallEndpointException.class));
-                        }
-                    });
+                    executor2.execute(
+                            new Runnable() { // from class:
+                                             // android.telecom.InCallAdapter$1$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    OutcomeReceiver.this.onError(
+                                            (CallEndpointException)
+                                                    result.getParcelable(
+                                                            CallEndpointException.CHANGE_ERROR,
+                                                            CallEndpointException.class));
+                                }
+                            });
                 }
             } finally {
                 Binder.restoreCallingIdentity(identity);
@@ -159,9 +169,13 @@ public final class InCallAdapter {
         }
     }
 
-    public void requestCallEndpointChange(CallEndpoint endpoint, Executor executor, OutcomeReceiver<Void, CallEndpointException> callback) {
+    public void requestCallEndpointChange(
+            CallEndpoint endpoint,
+            Executor executor,
+            OutcomeReceiver<Void, CallEndpointException> callback) {
         try {
-            this.mAdapter.requestCallEndpointChange(endpoint, new AnonymousClass1(null, executor, callback));
+            this.mAdapter.requestCallEndpointChange(
+                    endpoint, new AnonymousClass1(null, executor, callback));
         } catch (RemoteException e) {
             Log.d(this, "Remote exception calling requestCallEndpointChange", new Object[0]);
         }
@@ -188,7 +202,8 @@ public final class InCallAdapter {
         }
     }
 
-    public void phoneAccountSelected(String callId, PhoneAccountHandle accountHandle, boolean setDefault) {
+    public void phoneAccountSelected(
+            String callId, PhoneAccountHandle accountHandle, boolean setDefault) {
         try {
             this.mAdapter.phoneAccountSelected(callId, accountHandle, setDefault);
         } catch (RemoteException e) {
@@ -327,7 +342,8 @@ public final class InCallAdapter {
         }
     }
 
-    public void handoverTo(String callId, PhoneAccountHandle destAcct, int videoState, Bundle extras) {
+    public void handoverTo(
+            String callId, PhoneAccountHandle destAcct, int videoState, Bundle extras) {
         try {
             this.mAdapter.handoverTo(callId, destAcct, videoState, extras);
         } catch (RemoteException e) {

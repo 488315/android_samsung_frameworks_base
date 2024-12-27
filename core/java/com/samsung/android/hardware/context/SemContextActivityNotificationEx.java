@@ -9,19 +9,22 @@ public class SemContextActivityNotificationEx extends SemContextEventContext {
     public static final int ACCURACY_HIGH = 2;
     public static final int ACCURACY_LOW = 0;
     public static final int ACCURACY_MID = 1;
-    public static final Parcelable.Creator<SemContextActivityNotificationEx> CREATOR = new Parcelable.Creator<SemContextActivityNotificationEx>() { // from class: com.samsung.android.hardware.context.SemContextActivityNotificationEx.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityNotificationEx createFromParcel(Parcel in) {
-            return new SemContextActivityNotificationEx(in);
-        }
+    public static final Parcelable.Creator<SemContextActivityNotificationEx> CREATOR =
+            new Parcelable.Creator<
+                    SemContextActivityNotificationEx>() { // from class:
+                                                          // com.samsung.android.hardware.context.SemContextActivityNotificationEx.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityNotificationEx createFromParcel(Parcel in) {
+                    return new SemContextActivityNotificationEx(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityNotificationEx[] newArray(int size) {
-            return new SemContextActivityNotificationEx[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityNotificationEx[] newArray(int size) {
+                    return new SemContextActivityNotificationEx[size];
+                }
+            };
     public static final int STATUS_CYCLE = 5;
     public static final int STATUS_MOVEMENT = 30;
     public static final int STATUS_RUN = 3;

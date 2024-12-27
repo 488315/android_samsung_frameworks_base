@@ -8,22 +8,25 @@ import android.util.Log;
 import android.util.Singleton;
 import android.view.RemoteAnimationAdapter;
 import android.view.SurfaceControl;
+
 import com.samsung.android.rune.CoreRune;
 
 /* loaded from: classes4.dex */
 public class WindowOrganizer {
-    private static final Singleton<IWindowOrganizerController> IWindowOrganizerControllerSingleton = new Singleton<IWindowOrganizerController>() { // from class: android.window.WindowOrganizer.1
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.util.Singleton
-        public IWindowOrganizerController create() {
-            try {
-                return ActivityTaskManager.getService().getWindowOrganizerController();
-            } catch (RemoteException e) {
-                return null;
-            }
-        }
-    };
+    private static final Singleton<IWindowOrganizerController> IWindowOrganizerControllerSingleton =
+            new Singleton<
+                    IWindowOrganizerController>() { // from class: android.window.WindowOrganizer.1
+                /* JADX INFO: Access modifiers changed from: protected */
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.util.Singleton
+                public IWindowOrganizerController create() {
+                    try {
+                        return ActivityTaskManager.getService().getWindowOrganizerController();
+                    } catch (RemoteException e) {
+                        return null;
+                    }
+                }
+            };
     private static final String TAG = "WindowOrganizer";
 
     public void applyTransaction(WindowContainerTransaction t) {
@@ -36,10 +39,18 @@ public class WindowOrganizer {
         }
     }
 
-    public int applySyncTransaction(WindowContainerTransaction t, WindowContainerTransactionCallback callback) {
+    public int applySyncTransaction(
+            WindowContainerTransaction t, WindowContainerTransactionCallback callback) {
         try {
             if (CoreRune.FW_SHELL_TRANSITION_LOG) {
-                Log.i(TAG, "applySyncTransaction, hasCallback=" + (callback != null) + ", t=" + t + ", caller=" + Debug.getCallers(3));
+                Log.i(
+                        TAG,
+                        "applySyncTransaction, hasCallback="
+                                + (callback != null)
+                                + ", t="
+                                + t
+                                + ", caller="
+                                + Debug.getCallers(3));
             }
             return getWindowOrganizerController().applySyncTransaction(t, callback.mInterface);
         } catch (RemoteException e) {
@@ -50,7 +61,14 @@ public class WindowOrganizer {
     public IBinder startNewTransition(int type, WindowContainerTransaction t) {
         try {
             if (CoreRune.FW_SHELL_TRANSITION_LOG) {
-                Log.i(TAG, "startNewTransition, type=" + type + ", t=" + t + ", caller=" + Debug.getCallers(5));
+                Log.i(
+                        TAG,
+                        "startNewTransition, type="
+                                + type
+                                + ", t="
+                                + t
+                                + ", caller="
+                                + Debug.getCallers(5));
             }
             return getWindowOrganizerController().startNewTransition(type, t);
         } catch (RemoteException e) {
@@ -74,17 +92,26 @@ public class WindowOrganizer {
         }
     }
 
-    public void finishAllTransitions(IBinder transitionToken, WindowContainerTransaction t, WindowContainerTransaction allTransitionInfo) {
+    public void finishAllTransitions(
+            IBinder transitionToken,
+            WindowContainerTransaction t,
+            WindowContainerTransaction allTransitionInfo) {
         try {
-            getWindowOrganizerController().finishAllTransitions(transitionToken, t, allTransitionInfo);
+            getWindowOrganizerController()
+                    .finishAllTransitions(transitionToken, t, allTransitionInfo);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public int startLegacyTransition(int type, RemoteAnimationAdapter adapter, WindowContainerTransactionCallback syncCallback, WindowContainerTransaction t) {
+    public int startLegacyTransition(
+            int type,
+            RemoteAnimationAdapter adapter,
+            WindowContainerTransactionCallback syncCallback,
+            WindowContainerTransaction t) {
         try {
-            return getWindowOrganizerController().startLegacyTransition(type, adapter, syncCallback.mInterface, t);
+            return getWindowOrganizerController()
+                    .startLegacyTransition(type, adapter, syncCallback.mInterface, t);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

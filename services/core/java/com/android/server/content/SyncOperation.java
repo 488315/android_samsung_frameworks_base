@@ -10,15 +10,25 @@ import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
-import com.android.server.content.SyncStorageEngine;
+
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class SyncOperation {
-    public static final String[] REASON_NAMES = {"DataSettingsChanged", "AccountsUpdated", "ServiceChanged", "Periodic", "IsSyncable", "AutoSync", "MasterSyncAuto", "UserStart"};
+    public static final String[] REASON_NAMES = {
+        "DataSettingsChanged",
+        "AccountsUpdated",
+        "ServiceChanged",
+        "Periodic",
+        "IsSyncable",
+        "AutoSync",
+        "MasterSyncAuto",
+        "UserStart"
+    };
     public final boolean allowParallelSyncs;
     public long expectedRuntime;
     public final long flexMillis;
@@ -38,11 +48,45 @@ public final class SyncOperation {
     public final SyncStorageEngine.EndPoint target;
     public String wakeLockName;
 
-    public SyncOperation(Account account, int i, int i2, String str, int i3, int i4, String str2, Bundle bundle, boolean z, int i5) {
-        this(new SyncStorageEngine.EndPoint(account, str2, i), i2, str, i3, i4, bundle, z, false, -1, 0L, 0L, i5);
+    public SyncOperation(
+            Account account,
+            int i,
+            int i2,
+            String str,
+            int i3,
+            int i4,
+            String str2,
+            Bundle bundle,
+            boolean z,
+            int i5) {
+        this(
+                new SyncStorageEngine.EndPoint(account, str2, i),
+                i2,
+                str,
+                i3,
+                i4,
+                bundle,
+                z,
+                false,
+                -1,
+                0L,
+                0L,
+                i5);
     }
 
-    public SyncOperation(SyncStorageEngine.EndPoint endPoint, int i, String str, int i2, int i3, Bundle bundle, boolean z, boolean z2, int i4, long j, long j2, int i5) {
+    public SyncOperation(
+            SyncStorageEngine.EndPoint endPoint,
+            int i,
+            String str,
+            int i2,
+            int i3,
+            Bundle bundle,
+            boolean z,
+            boolean z2,
+            int i4,
+            long j,
+            long j2,
+            int i5) {
         this.target = endPoint;
         this.owningUid = i;
         this.owningPackage = str;
@@ -58,7 +102,14 @@ public final class SyncOperation {
         Bundle bundle2 = this.mImmutableExtras;
         StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m("provider: ");
         m.append(endPoint.provider);
-        m.append(" account {name=" + endPoint.account.name + ", user=" + endPoint.userId + ", type=" + endPoint.account.type + "}");
+        m.append(
+                " account {name="
+                        + endPoint.account.name
+                        + ", user="
+                        + endPoint.userId
+                        + ", type="
+                        + endPoint.account.type
+                        + "}");
         m.append(" isPeriodic: ");
         m.append(z2);
         m.append(" period: ");
@@ -117,15 +168,33 @@ public final class SyncOperation {
                 String substring = next.substring(8);
                 PersistableBundle persistableBundle3 = persistableBundle.getPersistableBundle(next);
                 it = it2;
-                bundle.putParcelable(substring, new Account(persistableBundle3.getString("accountName"), persistableBundle3.getString("accountType")));
+                bundle.putParcelable(
+                        substring,
+                        new Account(
+                                persistableBundle3.getString("accountName"),
+                                persistableBundle3.getString("accountType")));
             }
             it2 = it;
         }
-        SyncOperation syncOperation = new SyncOperation(new SyncStorageEngine.EndPoint(new Account(string, string2), string3, i), i2, string4, i3, i4, bundle, z, z2, i5, j, j2, i6);
+        SyncOperation syncOperation =
+                new SyncOperation(
+                        new SyncStorageEngine.EndPoint(new Account(string, string2), string3, i),
+                        i2,
+                        string4,
+                        i3,
+                        i4,
+                        bundle,
+                        z,
+                        z2,
+                        i5,
+                        j,
+                        j2,
+                        i6);
         syncOperation.jobId = persistableBundle.getInt("jobId");
         syncOperation.expectedRuntime = persistableBundle.getLong("expectedRuntime");
         syncOperation.retries = persistableBundle.getInt("retries");
-        syncOperation.scheduleEjAsRegularJob = persistableBundle.getBoolean("ejDowngradedToRegular");
+        syncOperation.scheduleEjAsRegularJob =
+                persistableBundle.getBoolean("ejDowngradedToRegular");
         return syncOperation;
     }
 
@@ -147,12 +216,28 @@ public final class SyncOperation {
 
     public final SyncOperation createOneTimeSyncOperation() {
         if (this.isPeriodic) {
-            return new SyncOperation(this.target, this.owningUid, this.owningPackage, this.reason, this.syncSource, this.mImmutableExtras, this.allowParallelSyncs, false, this.jobId, this.periodMillis, this.flexMillis, 0);
+            return new SyncOperation(
+                    this.target,
+                    this.owningUid,
+                    this.owningPackage,
+                    this.reason,
+                    this.syncSource,
+                    this.mImmutableExtras,
+                    this.allowParallelSyncs,
+                    false,
+                    this.jobId,
+                    this.periodMillis,
+                    this.flexMillis,
+                    0);
         }
         return null;
     }
 
-    public final String dump(PackageManager packageManager, boolean z, SyncAdapterStateFetcher syncAdapterStateFetcher, boolean z2) {
+    public final String dump(
+            PackageManager packageManager,
+            boolean z,
+            SyncAdapterStateFetcher syncAdapterStateFetcher,
+            boolean z2) {
         int appStandbyBucket;
         Bundle bundle = this.mImmutableExtras;
         StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m("JobId=");
@@ -217,19 +302,28 @@ public final class SyncOperation {
                 if (num != null) {
                     appStandbyBucket = num.intValue();
                 } else {
-                    UsageStatsManagerInternal usageStatsManagerInternal = (UsageStatsManagerInternal) LocalServices.getService(UsageStatsManagerInternal.class);
+                    UsageStatsManagerInternal usageStatsManagerInternal =
+                            (UsageStatsManagerInternal)
+                                    LocalServices.getService(UsageStatsManagerInternal.class);
                     if (usageStatsManagerInternal == null) {
                         appStandbyBucket = -1;
                     } else {
-                        appStandbyBucket = usageStatsManagerInternal.getAppStandbyBucket(userId, str, SystemClock.elapsedRealtime());
-                        syncAdapterStateFetcher.mBucketCache.put(of, Integer.valueOf(appStandbyBucket));
+                        appStandbyBucket =
+                                usageStatsManagerInternal.getAppStandbyBucket(
+                                        userId, str, SystemClock.elapsedRealtime());
+                        syncAdapterStateFetcher.mBucketCache.put(
+                                of, Integer.valueOf(appStandbyBucket));
                     }
                 }
                 m.append(appStandbyBucket);
                 m.append("]");
                 int i2 = this.owningUid;
-                ActivityManagerInternal activityManagerInternal = (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
-                if (activityManagerInternal != null ? activityManagerInternal.isUidActive(i2) : false) {
+                ActivityManagerInternal activityManagerInternal =
+                        (ActivityManagerInternal)
+                                LocalServices.getService(ActivityManagerInternal.class);
+                if (activityManagerInternal != null
+                        ? activityManagerInternal.isUidActive(i2)
+                        : false) {
                     m.append(" [ACTIVE]");
                 }
             }

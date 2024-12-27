@@ -5,7 +5,6 @@ import android.annotation.SystemApi;
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
-import android.provider.BlockedNumberContract;
 import android.telecom.Log;
 
 @SystemApi
@@ -13,25 +12,31 @@ import android.telecom.Log;
 public final class BlockedNumbersManager {
 
     @SystemApi
-    public static final String ACTION_BLOCK_SUPPRESSION_STATE_CHANGED = "android.provider.action.BLOCK_SUPPRESSION_STATE_CHANGED";
+    public static final String ACTION_BLOCK_SUPPRESSION_STATE_CHANGED =
+            "android.provider.action.BLOCK_SUPPRESSION_STATE_CHANGED";
 
     @SystemApi
     public static final String ENHANCED_SETTING_KEY_BLOCK_PAYPHONE = "block_payphone_calls_setting";
 
     @SystemApi
-    public static final String ENHANCED_SETTING_KEY_BLOCK_PRIVATE = "block_private_number_calls_setting";
+    public static final String ENHANCED_SETTING_KEY_BLOCK_PRIVATE =
+            "block_private_number_calls_setting";
 
     @SystemApi
-    public static final String ENHANCED_SETTING_KEY_BLOCK_UNAVAILABLE = "block_unavailable_calls_setting";
+    public static final String ENHANCED_SETTING_KEY_BLOCK_UNAVAILABLE =
+            "block_unavailable_calls_setting";
 
     @SystemApi
     public static final String ENHANCED_SETTING_KEY_BLOCK_UNKNOWN = "block_unknown_calls_setting";
 
     @SystemApi
-    public static final String ENHANCED_SETTING_KEY_BLOCK_UNREGISTERED = "block_numbers_not_in_contacts_setting";
+    public static final String ENHANCED_SETTING_KEY_BLOCK_UNREGISTERED =
+            "block_numbers_not_in_contacts_setting";
 
     @SystemApi
-    public static final String ENHANCED_SETTING_KEY_SHOW_EMERGENCY_CALL_NOTIFICATION = "show_emergency_call_notification";
+    public static final String ENHANCED_SETTING_KEY_SHOW_EMERGENCY_CALL_NOTIFICATION =
+            "show_emergency_call_notification";
+
     private static final String LOG_TAG = BlockedNumbersManager.class.getSimpleName();
     private Context mContext;
 
@@ -44,7 +49,13 @@ public final class BlockedNumbersManager {
         verifyBlockedNumbersPermission();
         try {
             Log.i(LOG_TAG, "notifyEmergencyContact; caller=%s", this.mContext.getOpPackageName());
-            this.mContext.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, BlockedNumberContract.SystemContract.METHOD_NOTIFY_EMERGENCY_CONTACT, (String) null, (Bundle) null);
+            this.mContext
+                    .getContentResolver()
+                    .call(
+                            BlockedNumberContract.AUTHORITY_URI,
+                            BlockedNumberContract.SystemContract.METHOD_NOTIFY_EMERGENCY_CONTACT,
+                            (String) null,
+                            (Bundle) null);
         } catch (IllegalArgumentException | NullPointerException e) {
             Log.w((String) null, "notifyEmergencyContact: provider not ready.", new Object[0]);
         }
@@ -55,11 +66,18 @@ public final class BlockedNumbersManager {
         verifyBlockedNumbersPermission();
         String caller = this.mContext.getOpPackageName();
         Log.i(LOG_TAG, "endBlockSuppression: caller=%s", caller);
-        this.mContext.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, BlockedNumberContract.SystemContract.METHOD_END_BLOCK_SUPPRESSION, (String) null, (Bundle) null);
+        this.mContext
+                .getContentResolver()
+                .call(
+                        BlockedNumberContract.AUTHORITY_URI,
+                        BlockedNumberContract.SystemContract.METHOD_END_BLOCK_SUPPRESSION,
+                        (String) null,
+                        (Bundle) null);
     }
 
     @SystemApi
-    public int shouldSystemBlockNumber(String phoneNumber, int numberPresentation, boolean isNumberInContacts) {
+    public int shouldSystemBlockNumber(
+            String phoneNumber, int numberPresentation, boolean isNumberInContacts) {
         int blockResult;
         verifyBlockedNumbersPermission();
         try {
@@ -67,13 +85,26 @@ public final class BlockedNumbersManager {
             Bundle extras = new Bundle();
             extras.putInt(BlockedNumberContract.EXTRA_CALL_PRESENTATION, numberPresentation);
             extras.putBoolean(BlockedNumberContract.EXTRA_CONTACT_EXIST, isNumberInContacts);
-            Bundle res = this.mContext.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, BlockedNumberContract.SystemContract.METHOD_SHOULD_SYSTEM_BLOCK_NUMBER, phoneNumber, extras);
+            Bundle res =
+                    this.mContext
+                            .getContentResolver()
+                            .call(
+                                    BlockedNumberContract.AUTHORITY_URI,
+                                    BlockedNumberContract.SystemContract
+                                            .METHOD_SHOULD_SYSTEM_BLOCK_NUMBER,
+                                    phoneNumber,
+                                    extras);
             if (res != null) {
                 blockResult = res.getInt(BlockedNumberContract.RES_BLOCK_STATUS, 0);
             } else {
                 blockResult = 0;
             }
-            Log.d(LOG_TAG, "shouldSystemBlockNumber: number=%s, caller=%s, result=%s", Log.piiHandle(phoneNumber), caller, BlockedNumberContract.SystemContract.blockStatusToString(blockResult));
+            Log.d(
+                    LOG_TAG,
+                    "shouldSystemBlockNumber: number=%s, caller=%s, result=%s",
+                    Log.piiHandle(phoneNumber),
+                    caller,
+                    BlockedNumberContract.SystemContract.blockStatusToString(blockResult));
             return blockResult;
         } catch (IllegalArgumentException | NullPointerException e) {
             Log.w((String) null, "shouldSystemBlockNumber: provider not ready.", new Object[0]);
@@ -84,9 +115,29 @@ public final class BlockedNumbersManager {
     @SystemApi
     public BlockSuppressionStatus getBlockSuppressionStatus() {
         verifyBlockedNumbersPermission();
-        Bundle res = this.mContext.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, BlockedNumberContract.SystemContract.METHOD_GET_BLOCK_SUPPRESSION_STATUS, (String) null, (Bundle) null);
-        BlockSuppressionStatus blockSuppressionStatus = new BlockSuppressionStatus(res.getBoolean(BlockedNumberContract.SystemContract.RES_IS_BLOCKING_SUPPRESSED, false), res.getLong(BlockedNumberContract.SystemContract.RES_BLOCKING_SUPPRESSED_UNTIL_TIMESTAMP, 0L));
-        Log.d(LOG_TAG, "getBlockSuppressionStatus: caller=%s, status=%s", this.mContext.getOpPackageName(), blockSuppressionStatus);
+        Bundle res =
+                this.mContext
+                        .getContentResolver()
+                        .call(
+                                BlockedNumberContract.AUTHORITY_URI,
+                                BlockedNumberContract.SystemContract
+                                        .METHOD_GET_BLOCK_SUPPRESSION_STATUS,
+                                (String) null,
+                                (Bundle) null);
+        BlockSuppressionStatus blockSuppressionStatus =
+                new BlockSuppressionStatus(
+                        res.getBoolean(
+                                BlockedNumberContract.SystemContract.RES_IS_BLOCKING_SUPPRESSED,
+                                false),
+                        res.getLong(
+                                BlockedNumberContract.SystemContract
+                                        .RES_BLOCKING_SUPPRESSED_UNTIL_TIMESTAMP,
+                                0L));
+        Log.d(
+                LOG_TAG,
+                "getBlockSuppressionStatus: caller=%s, status=%s",
+                this.mContext.getOpPackageName(),
+                blockSuppressionStatus);
         return blockSuppressionStatus;
     }
 
@@ -94,13 +145,24 @@ public final class BlockedNumbersManager {
     public boolean shouldShowEmergencyCallNotification() {
         verifyBlockedNumbersPermission();
         try {
-            Bundle res = this.mContext.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, BlockedNumberContract.SystemContract.METHOD_SHOULD_SHOW_EMERGENCY_CALL_NOTIFICATION, (String) null, (Bundle) null);
+            Bundle res =
+                    this.mContext
+                            .getContentResolver()
+                            .call(
+                                    BlockedNumberContract.AUTHORITY_URI,
+                                    BlockedNumberContract.SystemContract
+                                            .METHOD_SHOULD_SHOW_EMERGENCY_CALL_NOTIFICATION,
+                                    (String) null,
+                                    (Bundle) null);
             if (res != null) {
                 return res.getBoolean("show_emergency_call_notification", false);
             }
             return false;
         } catch (IllegalArgumentException | NullPointerException e) {
-            Log.w((String) null, "shouldShowEmergencyCallNotification: provider not ready.", new Object[0]);
+            Log.w(
+                    (String) null,
+                    "shouldShowEmergencyCallNotification: provider not ready.",
+                    new Object[0]);
             return false;
         }
     }
@@ -111,7 +173,15 @@ public final class BlockedNumbersManager {
         Bundle extras = new Bundle();
         extras.putString(BlockedNumberContract.EXTRA_ENHANCED_SETTING_KEY, key);
         try {
-            Bundle res = this.mContext.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, BlockedNumberContract.SystemContract.METHOD_GET_ENHANCED_BLOCK_SETTING, (String) null, extras);
+            Bundle res =
+                    this.mContext
+                            .getContentResolver()
+                            .call(
+                                    BlockedNumberContract.AUTHORITY_URI,
+                                    BlockedNumberContract.SystemContract
+                                            .METHOD_GET_ENHANCED_BLOCK_SETTING,
+                                    (String) null,
+                                    extras);
             if (res != null) {
                 return res.getBoolean(BlockedNumberContract.RES_ENHANCED_SETTING_IS_ENABLED, false);
             }
@@ -128,7 +198,13 @@ public final class BlockedNumbersManager {
         Bundle extras = new Bundle();
         extras.putString(BlockedNumberContract.EXTRA_ENHANCED_SETTING_KEY, key);
         extras.putBoolean(BlockedNumberContract.EXTRA_ENHANCED_SETTING_VALUE, value);
-        this.mContext.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, BlockedNumberContract.SystemContract.METHOD_SET_ENHANCED_BLOCK_SETTING, (String) null, extras);
+        this.mContext
+                .getContentResolver()
+                .call(
+                        BlockedNumberContract.AUTHORITY_URI,
+                        BlockedNumberContract.SystemContract.METHOD_SET_ENHANCED_BLOCK_SETTING,
+                        (String) null,
+                        extras);
     }
 
     @SystemApi
@@ -142,7 +218,11 @@ public final class BlockedNumbersManager {
         }
 
         public String toString() {
-            return "[BlockSuppressionStatus; isSuppressed=" + this.mIsSuppressed + ", until=" + this.mUntilTimestampMillis + NavigationBarInflaterView.SIZE_MOD_END;
+            return "[BlockSuppressionStatus; isSuppressed="
+                    + this.mIsSuppressed
+                    + ", until="
+                    + this.mUntilTimestampMillis
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         public boolean getIsSuppressed() {
@@ -155,7 +235,11 @@ public final class BlockedNumbersManager {
     }
 
     private void verifyBlockedNumbersPermission() {
-        this.mContext.enforceCallingOrSelfPermission(Manifest.permission.READ_BLOCKED_NUMBERS, "Caller does not have the android.permission.READ_BLOCKED_NUMBERS permission");
-        this.mContext.enforceCallingOrSelfPermission(Manifest.permission.WRITE_BLOCKED_NUMBERS, "Caller does not have the android.permission.WRITE_BLOCKED_NUMBERS permission");
+        this.mContext.enforceCallingOrSelfPermission(
+                Manifest.permission.READ_BLOCKED_NUMBERS,
+                "Caller does not have the android.permission.READ_BLOCKED_NUMBERS permission");
+        this.mContext.enforceCallingOrSelfPermission(
+                Manifest.permission.WRITE_BLOCKED_NUMBERS,
+                "Caller does not have the android.permission.WRITE_BLOCKED_NUMBERS permission");
     }
 }

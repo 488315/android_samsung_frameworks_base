@@ -3,27 +3,30 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CellIdentityWcdma implements Parcelable {
-    public static final Parcelable.Creator<CellIdentityWcdma> CREATOR = new Parcelable.Creator<CellIdentityWcdma>() { // from class: android.hardware.radio.network.CellIdentityWcdma.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentityWcdma createFromParcel(Parcel _aidl_source) {
-            CellIdentityWcdma _aidl_out = new CellIdentityWcdma();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CellIdentityWcdma> CREATOR =
+            new Parcelable.Creator<CellIdentityWcdma>() { // from class:
+                // android.hardware.radio.network.CellIdentityWcdma.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentityWcdma createFromParcel(Parcel _aidl_source) {
+                    CellIdentityWcdma _aidl_out = new CellIdentityWcdma();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentityWcdma[] newArray(int _aidl_size) {
-            return new CellIdentityWcdma[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentityWcdma[] newArray(int _aidl_size) {
+                    return new CellIdentityWcdma[_aidl_size];
+                }
+            };
     public String[] additionalPlmns;
     public ClosedSubscriberGroupInfo csgInfo;
     public String mcc;
@@ -135,7 +138,9 @@ public class CellIdentityWcdma implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.csgInfo = (ClosedSubscriberGroupInfo) _aidl_parcel.readTypedObject(ClosedSubscriberGroupInfo.CREATOR);
+                this.csgInfo =
+                        (ClosedSubscriberGroupInfo)
+                                _aidl_parcel.readTypedObject(ClosedSubscriberGroupInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

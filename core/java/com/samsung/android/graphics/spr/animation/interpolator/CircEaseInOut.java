@@ -6,11 +6,9 @@ import android.view.animation.Interpolator;
 
 /* loaded from: classes6.dex */
 public class CircEaseInOut implements Interpolator {
-    public CircEaseInOut() {
-    }
+    public CircEaseInOut() {}
 
-    public CircEaseInOut(Context context, AttributeSet attrs) {
-    }
+    public CircEaseInOut(Context context, AttributeSet attrs) {}
 
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float t) {

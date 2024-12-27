@@ -82,11 +82,9 @@ public class SContextConstants {
     public static final int CALL_POSE_UNKNOWN = 0;
     static final int CAPTURE_MOTION = 31;
 
-    @Deprecated
-    public static final int CAPTURE_MOTION_ACTION = 1;
+    @Deprecated public static final int CAPTURE_MOTION_ACTION = 1;
 
-    @Deprecated
-    public static final int CAPTURE_MOTION_UNKNOWN = 0;
+    @Deprecated public static final int CAPTURE_MOTION_UNKNOWN = 0;
     static final int CARRYING_STATUS_MONITOR = 37;
     static final int CURRENT_STATUS_FOR_POSITIONING = 10;
     static final int DEVICE_PHYSICAL_CONTEXT_MONITOR = 51;
@@ -94,7 +92,8 @@ public class SContextConstants {
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_AOD_PROXI_USE_DURATION = 5;
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_AOD_PROXY_CHECK_DURATION = 6;
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_AOD_SCENARIO_CHECK_OVERTURN = 2;
-    public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_AOD_SCENARIO_CHECK_PROXI_PERIODICALLY = 4;
+    public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_AOD_SCENARIO_CHECK_PROXI_PERIODICALLY =
+            4;
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_AOD_SCENARIO_CHECK_TIMEOUT = 1;
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_AOD_SCENARIO_CHECK_USER_CYCLE = 64;
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_AOD_SCENARIO_CHECK_USER_RUNNING = 16;
@@ -105,7 +104,8 @@ public class SContextConstants {
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_AOD_TIMEOUT_DURATION = 3;
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_REASON_OFF_CARRYING_IN = 9;
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_REASON_OFF_LCD_DOWN_START_STATE = 8;
-    public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_REASON_OFF_NO_MOVE_LCD_DOWN_TIME_OUT = 6;
+    public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_REASON_OFF_NO_MOVE_LCD_DOWN_TIME_OUT =
+            6;
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_REASON_OFF_NO_MOVE_LCD_UP_TIME_OUT = 7;
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_REASON_OFF_RUNNING_START = 10;
     public static final int DEVICE_PHYSICAL_CONTEXT_MONITOR_REASON_ON_CARRYING_OUT = 4;
@@ -126,11 +126,9 @@ public class SContextConstants {
     static final int ENVIRONMENT = 8;
     static final int ENVIRONMENT_ADAPTIVE_DISPLAY = 44;
 
-    @Deprecated
-    public static final int ENVIRONMENT_SENSOR_TEMPERATURE_HUMIDITY = 1;
+    @Deprecated public static final int ENVIRONMENT_SENSOR_TEMPERATURE_HUMIDITY = 1;
 
-    @Deprecated
-    public static final double ENVIRONMENT_VALUE_UNKNOWN = 0.0d;
+    @Deprecated public static final double ENVIRONMENT_VALUE_UNKNOWN = 0.0d;
     static final int EXERCISE = 40;
     public static final int EXERCISE_DATA_TYPE_BAROMETER = 2;
     public static final int EXERCISE_DATA_TYPE_GPS = 1;
@@ -181,57 +179,41 @@ public class SContextConstants {
     public static final int MAIN_SCREEN_DETECTION_UP = 1;
     static final int MOTION = 4;
 
-    @Deprecated
-    public static final int MOTION_TYPE_FLAT = 71;
+    @Deprecated public static final int MOTION_TYPE_FLAT = 71;
 
-    @Deprecated
-    public static final int MOTION_TYPE_PICKUP = 1;
+    @Deprecated public static final int MOTION_TYPE_PICKUP = 1;
 
-    @Deprecated
-    public static final int MOTION_TYPE_PUTDOWN = 2;
+    @Deprecated public static final int MOTION_TYPE_PUTDOWN = 2;
 
-    @Deprecated
-    public static final int MOTION_TYPE_SMART_ALERT = 67;
+    @Deprecated public static final int MOTION_TYPE_SMART_ALERT = 67;
 
-    @Deprecated
-    public static final int MOTION_TYPE_TURN_OVER = 10;
+    @Deprecated public static final int MOTION_TYPE_TURN_OVER = 10;
 
-    @Deprecated
-    public static final int MOTION_TYPE_UNKNOWN = 0;
+    @Deprecated public static final int MOTION_TYPE_UNKNOWN = 0;
     static final int MOVEMENT = 5;
     public static final int MOVEMENT_ACTION = 1;
     static final int MOVEMENT_ALERT = 21;
 
-    @Deprecated
-    public static final int MOVEMENT_ALERT_MOVE = 1;
+    @Deprecated public static final int MOVEMENT_ALERT_MOVE = 1;
 
-    @Deprecated
-    public static final int MOVEMENT_ALERT_NO_MOVE = 2;
+    @Deprecated public static final int MOVEMENT_ALERT_NO_MOVE = 2;
 
-    @Deprecated
-    public static final int MOVEMENT_ALERT_UNKNOWN = 0;
+    @Deprecated public static final int MOVEMENT_ALERT_UNKNOWN = 0;
     static final int MOVEMENT_FOR_POSITIONING = 9;
 
-    @Deprecated
-    public static final int MOVEMENT_FOR_POSITIONING_CURRENT_STATUS_MOVE = 5;
+    @Deprecated public static final int MOVEMENT_FOR_POSITIONING_CURRENT_STATUS_MOVE = 5;
 
-    @Deprecated
-    public static final int MOVEMENT_FOR_POSITIONING_CURRENT_STATUS_NOMOVE = 4;
+    @Deprecated public static final int MOVEMENT_FOR_POSITIONING_CURRENT_STATUS_NOMOVE = 4;
 
-    @Deprecated
-    public static final int MOVEMENT_FOR_POSITIONING_CURRENT_STATUS_UNKNOWN = 6;
+    @Deprecated public static final int MOVEMENT_FOR_POSITIONING_CURRENT_STATUS_UNKNOWN = 6;
 
-    @Deprecated
-    public static final int MOVEMENT_FOR_POSITIONING_MOVE_DISTANCE = 2;
+    @Deprecated public static final int MOVEMENT_FOR_POSITIONING_MOVE_DISTANCE = 2;
 
-    @Deprecated
-    public static final int MOVEMENT_FOR_POSITIONING_MOVE_DURATION = 3;
+    @Deprecated public static final int MOVEMENT_FOR_POSITIONING_MOVE_DURATION = 3;
 
-    @Deprecated
-    public static final int MOVEMENT_FOR_POSITIONING_NOMOVE = 1;
+    @Deprecated public static final int MOVEMENT_FOR_POSITIONING_NOMOVE = 1;
 
-    @Deprecated
-    public static final int MOVEMENT_FOR_POSITIONING_NONE = 0;
+    @Deprecated public static final int MOVEMENT_FOR_POSITIONING_NONE = 0;
     public static final int MOVEMENT_NONE = 0;
     static final int PEDOMETER = 2;
     public static final int PEDOMETER_EXERCISE_MODE_END = 2;
@@ -281,11 +263,9 @@ public class SContextConstants {
     public static final int SHAKE_MOTION_STOP = 2;
     static final int SLEEP_MONITOR = 29;
 
-    @Deprecated
-    public static final int SLEEP_MONITOR_STATUS_SLEEP = 0;
+    @Deprecated public static final int SLEEP_MONITOR_STATUS_SLEEP = 0;
 
-    @Deprecated
-    public static final int SLEEP_MONITOR_STATUS_WAKE = 1;
+    @Deprecated public static final int SLEEP_MONITOR_STATUS_WAKE = 1;
     static final int SLOCATION_CORE = 47;
     public static final int SLOCATION_CORE_ACTION_CURRENT_LOCATION_AR_START = 11;
     public static final int SLOCATION_CORE_ACTION_CURRENT_LOCATION_AR_STOP = 12;
@@ -332,32 +312,23 @@ public class SContextConstants {
     public static final int STEP_LEVEL_MONITOR_STEP_LEVEL_STATIONARY = 1;
     static final int TEMPERATURE_ALERT = 23;
 
-    @Deprecated
-    public static final int TEMPERATURE_ALERT_ACTION = 1;
+    @Deprecated public static final int TEMPERATURE_ALERT_ACTION = 1;
 
-    @Deprecated
-    public static final int TEMPERATURE_ALERT_MINUS_INFINITY = -128;
+    @Deprecated public static final int TEMPERATURE_ALERT_MINUS_INFINITY = -128;
 
-    @Deprecated
-    public static final int TEMPERATURE_ALERT_NONE = 0;
+    @Deprecated public static final int TEMPERATURE_ALERT_NONE = 0;
 
-    @Deprecated
-    public static final int TEMPERATURE_ALERT_PLUS_INFINITY = 127;
+    @Deprecated public static final int TEMPERATURE_ALERT_PLUS_INFINITY = 127;
 
-    @Deprecated
-    public static final int TEST_FLAT_MOTION_DOWN = 2;
+    @Deprecated public static final int TEST_FLAT_MOTION_DOWN = 2;
 
-    @Deprecated
-    public static final int TEST_FLAT_MOTION_FALSE = 3;
+    @Deprecated public static final int TEST_FLAT_MOTION_FALSE = 3;
 
-    @Deprecated
-    public static final int TEST_FLAT_MOTION_UNKNOWN = 0;
+    @Deprecated public static final int TEST_FLAT_MOTION_UNKNOWN = 0;
 
-    @Deprecated
-    public static final int TEST_FLAT_MOTION_UP = 1;
+    @Deprecated public static final int TEST_FLAT_MOTION_UP = 1;
 
-    @Deprecated
-    public static final int TEST_FLAT_MOTION_VERTICALITY = 4;
+    @Deprecated public static final int TEST_FLAT_MOTION_VERTICALITY = 4;
     static final int WAKE_UP_VOICE = 16;
     public static final int WAKE_UP_VOICE_DATA_AM = 1;
     public static final int WAKE_UP_VOICE_DATA_DOWNLOADED = -17;
@@ -371,9 +342,7 @@ public class SContextConstants {
     public static final int WIRELESS_CHARGING_DETECTION_NOMOVE = 0;
     static final int WRIST_UP_MOTION = 19;
 
-    @Deprecated
-    public static final int WRIST_UP_MOTION_NONE = 0;
+    @Deprecated public static final int WRIST_UP_MOTION_NONE = 0;
 
-    @Deprecated
-    public static final int WRIST_UP_MOTION_NORMAL = 1;
+    @Deprecated public static final int WRIST_UP_MOTION_NORMAL = 1;
 }

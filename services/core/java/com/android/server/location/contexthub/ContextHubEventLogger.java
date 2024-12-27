@@ -2,18 +2,25 @@ package com.android.server.location.contexthub;
 
 import android.hardware.location.NanoAppMessage;
 import android.util.Log;
+
 import com.android.server.accessibility.magnification.WindowMagnificationGestureHandler$$ExternalSyntheticOutline0;
+
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class ContextHubEventLogger {
     public static ContextHubEventLogger sInstance;
-    public final ConcurrentLinkedEvictingDeque mNanoappLoadEventQueue = new ConcurrentLinkedEvictingDeque();
-    public final ConcurrentLinkedEvictingDeque mNanoappUnloadEventQueue = new ConcurrentLinkedEvictingDeque();
-    public final ConcurrentLinkedEvictingDeque mMessageFromNanoappQueue = new ConcurrentLinkedEvictingDeque();
-    public final ConcurrentLinkedEvictingDeque mMessageToNanoappQueue = new ConcurrentLinkedEvictingDeque();
-    public final ConcurrentLinkedEvictingDeque mContextHubRestartEventQueue = new ConcurrentLinkedEvictingDeque();
+    public final ConcurrentLinkedEvictingDeque mNanoappLoadEventQueue =
+            new ConcurrentLinkedEvictingDeque();
+    public final ConcurrentLinkedEvictingDeque mNanoappUnloadEventQueue =
+            new ConcurrentLinkedEvictingDeque();
+    public final ConcurrentLinkedEvictingDeque mMessageFromNanoappQueue =
+            new ConcurrentLinkedEvictingDeque();
+    public final ConcurrentLinkedEvictingDeque mMessageToNanoappQueue =
+            new ConcurrentLinkedEvictingDeque();
+    public final ConcurrentLinkedEvictingDeque mContextHubRestartEventQueue =
+            new ConcurrentLinkedEvictingDeque();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class ContextHubEventBase {
@@ -32,7 +39,8 @@ public final class ContextHubEventLogger {
             StringBuilder sb = new StringBuilder();
             sb.append(ContextHubServiceUtil.formatDateFromTimestamp(this.timeStampInMs));
             sb.append(": ContextHubRestartEvent[hubId = ");
-            return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(sb, this.contextHubId, ']');
+            return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                    sb, this.contextHubId, ']');
         }
     }
 
@@ -131,13 +139,17 @@ public final class ContextHubEventLogger {
         return contextHubEventLogger;
     }
 
-    public final synchronized void logMessageFromNanoapp(int i, NanoAppMessage nanoAppMessage, boolean z) {
+    public final synchronized void logMessageFromNanoapp(
+            int i, NanoAppMessage nanoAppMessage, boolean z) {
         if (nanoAppMessage == null) {
             return;
         }
-        NanoappMessageEvent nanoappMessageEvent = new NanoappMessageEvent(System.currentTimeMillis(), i, nanoAppMessage, z);
+        NanoappMessageEvent nanoappMessageEvent =
+                new NanoappMessageEvent(System.currentTimeMillis(), i, nanoAppMessage, z);
         if (!this.mMessageFromNanoappQueue.add(nanoappMessageEvent)) {
-            Log.e("ContextHubEventLogger", "Unable to add message from nanoapp event to queue: " + nanoappMessageEvent);
+            Log.e(
+                    "ContextHubEventLogger",
+                    "Unable to add message from nanoapp event to queue: " + nanoappMessageEvent);
         }
     }
 

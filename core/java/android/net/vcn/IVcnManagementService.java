@@ -2,70 +2,81 @@ package android.net.vcn;
 
 import android.net.LinkProperties;
 import android.net.NetworkCapabilities;
-import android.net.vcn.IVcnStatusCallback;
-import android.net.vcn.IVcnUnderlyingNetworkPolicyListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelUuid;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface IVcnManagementService extends IInterface {
     public static final String DESCRIPTOR = "android.net.vcn.IVcnManagementService";
 
-    void addVcnUnderlyingNetworkPolicyListener(IVcnUnderlyingNetworkPolicyListener iVcnUnderlyingNetworkPolicyListener) throws RemoteException;
+    void addVcnUnderlyingNetworkPolicyListener(
+            IVcnUnderlyingNetworkPolicyListener iVcnUnderlyingNetworkPolicyListener)
+            throws RemoteException;
 
     void clearVcnConfig(ParcelUuid parcelUuid, String str) throws RemoteException;
 
     List<ParcelUuid> getConfiguredSubscriptionGroups(String str) throws RemoteException;
 
-    VcnUnderlyingNetworkPolicy getUnderlyingNetworkPolicy(NetworkCapabilities networkCapabilities, LinkProperties linkProperties) throws RemoteException;
+    VcnUnderlyingNetworkPolicy getUnderlyingNetworkPolicy(
+            NetworkCapabilities networkCapabilities, LinkProperties linkProperties)
+            throws RemoteException;
 
-    void registerVcnStatusCallback(ParcelUuid parcelUuid, IVcnStatusCallback iVcnStatusCallback, String str) throws RemoteException;
+    void registerVcnStatusCallback(
+            ParcelUuid parcelUuid, IVcnStatusCallback iVcnStatusCallback, String str)
+            throws RemoteException;
 
-    void removeVcnUnderlyingNetworkPolicyListener(IVcnUnderlyingNetworkPolicyListener iVcnUnderlyingNetworkPolicyListener) throws RemoteException;
+    void removeVcnUnderlyingNetworkPolicyListener(
+            IVcnUnderlyingNetworkPolicyListener iVcnUnderlyingNetworkPolicyListener)
+            throws RemoteException;
 
-    void setVcnConfig(ParcelUuid parcelUuid, VcnConfig vcnConfig, String str) throws RemoteException;
+    void setVcnConfig(ParcelUuid parcelUuid, VcnConfig vcnConfig, String str)
+            throws RemoteException;
 
     void unregisterVcnStatusCallback(IVcnStatusCallback iVcnStatusCallback) throws RemoteException;
 
     public static class Default implements IVcnManagementService {
         @Override // android.net.vcn.IVcnManagementService
-        public void setVcnConfig(ParcelUuid subscriptionGroup, VcnConfig config, String opPkgName) throws RemoteException {
-        }
+        public void setVcnConfig(ParcelUuid subscriptionGroup, VcnConfig config, String opPkgName)
+                throws RemoteException {}
 
         @Override // android.net.vcn.IVcnManagementService
-        public void clearVcnConfig(ParcelUuid subscriptionGroup, String opPkgName) throws RemoteException {
-        }
+        public void clearVcnConfig(ParcelUuid subscriptionGroup, String opPkgName)
+                throws RemoteException {}
 
         @Override // android.net.vcn.IVcnManagementService
-        public List<ParcelUuid> getConfiguredSubscriptionGroups(String opPkgName) throws RemoteException {
+        public List<ParcelUuid> getConfiguredSubscriptionGroups(String opPkgName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.net.vcn.IVcnManagementService
-        public void addVcnUnderlyingNetworkPolicyListener(IVcnUnderlyingNetworkPolicyListener listener) throws RemoteException {
-        }
+        public void addVcnUnderlyingNetworkPolicyListener(
+                IVcnUnderlyingNetworkPolicyListener listener) throws RemoteException {}
 
         @Override // android.net.vcn.IVcnManagementService
-        public void removeVcnUnderlyingNetworkPolicyListener(IVcnUnderlyingNetworkPolicyListener listener) throws RemoteException {
-        }
+        public void removeVcnUnderlyingNetworkPolicyListener(
+                IVcnUnderlyingNetworkPolicyListener listener) throws RemoteException {}
 
         @Override // android.net.vcn.IVcnManagementService
-        public VcnUnderlyingNetworkPolicy getUnderlyingNetworkPolicy(NetworkCapabilities nc, LinkProperties lp) throws RemoteException {
+        public VcnUnderlyingNetworkPolicy getUnderlyingNetworkPolicy(
+                NetworkCapabilities nc, LinkProperties lp) throws RemoteException {
             return null;
         }
 
         @Override // android.net.vcn.IVcnManagementService
-        public void registerVcnStatusCallback(ParcelUuid subscriptionGroup, IVcnStatusCallback callback, String opPkgName) throws RemoteException {
-        }
+        public void registerVcnStatusCallback(
+                ParcelUuid subscriptionGroup, IVcnStatusCallback callback, String opPkgName)
+                throws RemoteException {}
 
         @Override // android.net.vcn.IVcnManagementService
-        public void unregisterVcnStatusCallback(IVcnStatusCallback callback) throws RemoteException {
-        }
+        public void unregisterVcnStatusCallback(IVcnStatusCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -73,7 +84,7 @@ public interface IVcnManagementService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVcnManagementService {
+    public abstract static class Stub extends Binder implements IVcnManagementService {
         static final int TRANSACTION_addVcnUnderlyingNetworkPolicyListener = 4;
         static final int TRANSACTION_clearVcnConfig = 2;
         static final int TRANSACTION_getConfiguredSubscriptionGroups = 3;
@@ -132,7 +143,8 @@ public interface IVcnManagementService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVcnManagementService.DESCRIPTOR);
             }
@@ -164,35 +176,44 @@ public interface IVcnManagementService extends IInterface {
                     reply.writeTypedList(_result, 1);
                     return true;
                 case 4:
-                    IVcnUnderlyingNetworkPolicyListener _arg04 = IVcnUnderlyingNetworkPolicyListener.Stub.asInterface(data.readStrongBinder());
+                    IVcnUnderlyingNetworkPolicyListener _arg04 =
+                            IVcnUnderlyingNetworkPolicyListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addVcnUnderlyingNetworkPolicyListener(_arg04);
                     reply.writeNoException();
                     return true;
                 case 5:
-                    IVcnUnderlyingNetworkPolicyListener _arg05 = IVcnUnderlyingNetworkPolicyListener.Stub.asInterface(data.readStrongBinder());
+                    IVcnUnderlyingNetworkPolicyListener _arg05 =
+                            IVcnUnderlyingNetworkPolicyListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeVcnUnderlyingNetworkPolicyListener(_arg05);
                     reply.writeNoException();
                     return true;
                 case 6:
-                    NetworkCapabilities _arg06 = (NetworkCapabilities) data.readTypedObject(NetworkCapabilities.CREATOR);
-                    LinkProperties _arg13 = (LinkProperties) data.readTypedObject(LinkProperties.CREATOR);
+                    NetworkCapabilities _arg06 =
+                            (NetworkCapabilities) data.readTypedObject(NetworkCapabilities.CREATOR);
+                    LinkProperties _arg13 =
+                            (LinkProperties) data.readTypedObject(LinkProperties.CREATOR);
                     data.enforceNoDataAvail();
-                    VcnUnderlyingNetworkPolicy _result2 = getUnderlyingNetworkPolicy(_arg06, _arg13);
+                    VcnUnderlyingNetworkPolicy _result2 =
+                            getUnderlyingNetworkPolicy(_arg06, _arg13);
                     reply.writeNoException();
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 7:
                     ParcelUuid _arg07 = (ParcelUuid) data.readTypedObject(ParcelUuid.CREATOR);
-                    IVcnStatusCallback _arg14 = IVcnStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    IVcnStatusCallback _arg14 =
+                            IVcnStatusCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg22 = data.readString();
                     data.enforceNoDataAvail();
                     registerVcnStatusCallback(_arg07, _arg14, _arg22);
                     reply.writeNoException();
                     return true;
                 case 8:
-                    IVcnStatusCallback _arg08 = IVcnStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    IVcnStatusCallback _arg08 =
+                            IVcnStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterVcnStatusCallback(_arg08);
                     reply.writeNoException();
@@ -219,7 +240,9 @@ public interface IVcnManagementService extends IInterface {
             }
 
             @Override // android.net.vcn.IVcnManagementService
-            public void setVcnConfig(ParcelUuid subscriptionGroup, VcnConfig config, String opPkgName) throws RemoteException {
+            public void setVcnConfig(
+                    ParcelUuid subscriptionGroup, VcnConfig config, String opPkgName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -236,7 +259,8 @@ public interface IVcnManagementService extends IInterface {
             }
 
             @Override // android.net.vcn.IVcnManagementService
-            public void clearVcnConfig(ParcelUuid subscriptionGroup, String opPkgName) throws RemoteException {
+            public void clearVcnConfig(ParcelUuid subscriptionGroup, String opPkgName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -252,7 +276,8 @@ public interface IVcnManagementService extends IInterface {
             }
 
             @Override // android.net.vcn.IVcnManagementService
-            public List<ParcelUuid> getConfiguredSubscriptionGroups(String opPkgName) throws RemoteException {
+            public List<ParcelUuid> getConfiguredSubscriptionGroups(String opPkgName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -269,7 +294,8 @@ public interface IVcnManagementService extends IInterface {
             }
 
             @Override // android.net.vcn.IVcnManagementService
-            public void addVcnUnderlyingNetworkPolicyListener(IVcnUnderlyingNetworkPolicyListener listener) throws RemoteException {
+            public void addVcnUnderlyingNetworkPolicyListener(
+                    IVcnUnderlyingNetworkPolicyListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -284,7 +310,8 @@ public interface IVcnManagementService extends IInterface {
             }
 
             @Override // android.net.vcn.IVcnManagementService
-            public void removeVcnUnderlyingNetworkPolicyListener(IVcnUnderlyingNetworkPolicyListener listener) throws RemoteException {
+            public void removeVcnUnderlyingNetworkPolicyListener(
+                    IVcnUnderlyingNetworkPolicyListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -299,7 +326,8 @@ public interface IVcnManagementService extends IInterface {
             }
 
             @Override // android.net.vcn.IVcnManagementService
-            public VcnUnderlyingNetworkPolicy getUnderlyingNetworkPolicy(NetworkCapabilities nc, LinkProperties lp) throws RemoteException {
+            public VcnUnderlyingNetworkPolicy getUnderlyingNetworkPolicy(
+                    NetworkCapabilities nc, LinkProperties lp) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -308,7 +336,9 @@ public interface IVcnManagementService extends IInterface {
                     _data.writeTypedObject(lp, 0);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    VcnUnderlyingNetworkPolicy _result = (VcnUnderlyingNetworkPolicy) _reply.readTypedObject(VcnUnderlyingNetworkPolicy.CREATOR);
+                    VcnUnderlyingNetworkPolicy _result =
+                            (VcnUnderlyingNetworkPolicy)
+                                    _reply.readTypedObject(VcnUnderlyingNetworkPolicy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -317,7 +347,9 @@ public interface IVcnManagementService extends IInterface {
             }
 
             @Override // android.net.vcn.IVcnManagementService
-            public void registerVcnStatusCallback(ParcelUuid subscriptionGroup, IVcnStatusCallback callback, String opPkgName) throws RemoteException {
+            public void registerVcnStatusCallback(
+                    ParcelUuid subscriptionGroup, IVcnStatusCallback callback, String opPkgName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -334,7 +366,8 @@ public interface IVcnManagementService extends IInterface {
             }
 
             @Override // android.net.vcn.IVcnManagementService
-            public void unregisterVcnStatusCallback(IVcnStatusCallback callback) throws RemoteException {
+            public void unregisterVcnStatusCallback(IVcnStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

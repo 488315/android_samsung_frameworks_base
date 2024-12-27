@@ -2,6 +2,7 @@ package android.app.ondeviceintelligence;
 
 import android.annotation.SystemApi;
 import android.os.Bundle;
+
 import java.util.function.Consumer;
 
 @SystemApi

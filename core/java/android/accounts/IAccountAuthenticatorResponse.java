@@ -17,16 +17,13 @@ public interface IAccountAuthenticatorResponse extends IInterface {
 
     public static class Default implements IAccountAuthenticatorResponse {
         @Override // android.accounts.IAccountAuthenticatorResponse
-        public void onResult(Bundle value) throws RemoteException {
-        }
+        public void onResult(Bundle value) throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticatorResponse
-        public void onRequestContinued() throws RemoteException {
-        }
+        public void onRequestContinued() throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticatorResponse
-        public void onError(int errorCode, String errorMessage) throws RemoteException {
-        }
+        public void onError(int errorCode, String errorMessage) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -34,7 +31,7 @@ public interface IAccountAuthenticatorResponse extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAccountAuthenticatorResponse {
+    public abstract static class Stub extends Binder implements IAccountAuthenticatorResponse {
         public static final String DESCRIPTOR = "android.accounts.IAccountAuthenticatorResponse";
         static final int TRANSACTION_onError = 3;
         static final int TRANSACTION_onRequestContinued = 2;
@@ -79,7 +76,8 @@ public interface IAccountAuthenticatorResponse extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

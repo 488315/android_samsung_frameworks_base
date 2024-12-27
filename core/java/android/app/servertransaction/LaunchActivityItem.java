@@ -19,27 +19,31 @@ import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.os.Trace;
 import android.window.ActivityWindowInfo;
+
 import com.android.internal.app.IVoiceInteractor;
 import com.android.internal.content.ReferrerIntent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class LaunchActivityItem extends ClientTransactionItem {
-    public static final Parcelable.Creator<LaunchActivityItem> CREATOR = new Parcelable.Creator<LaunchActivityItem>() { // from class: android.app.servertransaction.LaunchActivityItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LaunchActivityItem createFromParcel(Parcel in) {
-            return new LaunchActivityItem(in);
-        }
+    public static final Parcelable.Creator<LaunchActivityItem> CREATOR =
+            new Parcelable.Creator<LaunchActivityItem>() { // from class:
+                // android.app.servertransaction.LaunchActivityItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LaunchActivityItem createFromParcel(Parcel in) {
+                    return new LaunchActivityItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LaunchActivityItem[] newArray(int size) {
-            return new LaunchActivityItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LaunchActivityItem[] newArray(int size) {
+                    return new LaunchActivityItem[size];
+                }
+            };
     private IActivityClientController mActivityClientController;
     private IBinder mActivityToken;
     private ActivityWindowInfo mActivityWindowInfo;
@@ -80,22 +84,69 @@ public class LaunchActivityItem extends ClientTransactionItem {
     @Override // android.app.servertransaction.BaseClientRequest
     public void execute(ClientTransactionHandler client, PendingTransactionActions pendingActions) {
         Trace.traceBegin(64L, "activityStart");
-        ActivityThread.ActivityClientRecord r = new ActivityThread.ActivityClientRecord(this.mActivityToken, this.mIntent, this.mIdent, this.mInfo, this.mOverrideConfig, this.mReferrer, this.mVoiceInteractor, this.mState, this.mPersistentState, this.mPendingResults, this.mPendingNewIntents, this.mSceneTransitionInfo, this.mIsForward, this.mProfilerInfo, client, this.mAssistToken, this.mShareableActivityToken, this.mLaunchedFromBubble, this.mTaskFragmentToken, this.mInitialCallerInfoAccessToken, this.mActivityWindowInfo);
+        ActivityThread.ActivityClientRecord r =
+                new ActivityThread.ActivityClientRecord(
+                        this.mActivityToken,
+                        this.mIntent,
+                        this.mIdent,
+                        this.mInfo,
+                        this.mOverrideConfig,
+                        this.mReferrer,
+                        this.mVoiceInteractor,
+                        this.mState,
+                        this.mPersistentState,
+                        this.mPendingResults,
+                        this.mPendingNewIntents,
+                        this.mSceneTransitionInfo,
+                        this.mIsForward,
+                        this.mProfilerInfo,
+                        client,
+                        this.mAssistToken,
+                        this.mShareableActivityToken,
+                        this.mLaunchedFromBubble,
+                        this.mTaskFragmentToken,
+                        this.mInitialCallerInfoAccessToken,
+                        this.mActivityWindowInfo);
         client.handleLaunchActivity(r, pendingActions, this.mDeviceId, null);
         Trace.traceEnd(64L);
     }
 
     @Override // android.app.servertransaction.BaseClientRequest
-    public void postExecute(ClientTransactionHandler client, PendingTransactionActions pendingActions) {
+    public void postExecute(
+            ClientTransactionHandler client, PendingTransactionActions pendingActions) {
         client.countLaunchingActivities(-1);
     }
 
-    private LaunchActivityItem() {
-    }
+    private LaunchActivityItem() {}
 
-    public static LaunchActivityItem obtain(IBinder activityToken, Intent intent, int ident, ActivityInfo info, Configuration curConfig, Configuration overrideConfig, int deviceId, String referrer, IVoiceInteractor voiceInteractor, int procState, Bundle state, PersistableBundle persistentState, List<ResultInfo> pendingResults, List<ReferrerIntent> pendingNewIntents, ActivityOptions.SceneTransitionInfo sceneTransitionInfo, boolean isForward, ProfilerInfo profilerInfo, IBinder assistToken, IActivityClientController activityClientController, IBinder shareableActivityToken, boolean launchedFromBubble, IBinder taskFragmentToken, IBinder initialCallerInfoAccessToken, ActivityWindowInfo activityWindowInfo) {
+    public static LaunchActivityItem obtain(
+            IBinder activityToken,
+            Intent intent,
+            int ident,
+            ActivityInfo info,
+            Configuration curConfig,
+            Configuration overrideConfig,
+            int deviceId,
+            String referrer,
+            IVoiceInteractor voiceInteractor,
+            int procState,
+            Bundle state,
+            PersistableBundle persistentState,
+            List<ResultInfo> pendingResults,
+            List<ReferrerIntent> pendingNewIntents,
+            ActivityOptions.SceneTransitionInfo sceneTransitionInfo,
+            boolean isForward,
+            ProfilerInfo profilerInfo,
+            IBinder assistToken,
+            IActivityClientController activityClientController,
+            IBinder shareableActivityToken,
+            boolean launchedFromBubble,
+            IBinder taskFragmentToken,
+            IBinder initialCallerInfoAccessToken,
+            ActivityWindowInfo activityWindowInfo) {
         Bundle bundle;
-        LaunchActivityItem instance = (LaunchActivityItem) ObjectPool.obtain(LaunchActivityItem.class);
+        LaunchActivityItem instance =
+                (LaunchActivityItem) ObjectPool.obtain(LaunchActivityItem.class);
         if (instance == null) {
             instance = new LaunchActivityItem();
         }
@@ -108,7 +159,32 @@ public class LaunchActivityItem extends ClientTransactionItem {
         } else {
             bundle = null;
         }
-        setValues(instance, activityToken, intent2, ident, activityInfo, configuration, configuration2, deviceId, referrer, voiceInteractor, procState, bundle, persistentState != null ? new PersistableBundle(persistentState) : null, pendingResults != null ? new ArrayList(pendingResults) : null, pendingNewIntents != null ? new ArrayList(pendingNewIntents) : null, sceneTransitionInfo, isForward, profilerInfo != null ? new ProfilerInfo(profilerInfo) : null, assistToken, activityClientController, shareableActivityToken, launchedFromBubble, taskFragmentToken, initialCallerInfoAccessToken, new ActivityWindowInfo(activityWindowInfo));
+        setValues(
+                instance,
+                activityToken,
+                intent2,
+                ident,
+                activityInfo,
+                configuration,
+                configuration2,
+                deviceId,
+                referrer,
+                voiceInteractor,
+                procState,
+                bundle,
+                persistentState != null ? new PersistableBundle(persistentState) : null,
+                pendingResults != null ? new ArrayList(pendingResults) : null,
+                pendingNewIntents != null ? new ArrayList(pendingNewIntents) : null,
+                sceneTransitionInfo,
+                isForward,
+                profilerInfo != null ? new ProfilerInfo(profilerInfo) : null,
+                assistToken,
+                activityClientController,
+                shareableActivityToken,
+                launchedFromBubble,
+                taskFragmentToken,
+                initialCallerInfoAccessToken,
+                new ActivityWindowInfo(activityWindowInfo));
         return instance;
     }
 
@@ -119,7 +195,9 @@ public class LaunchActivityItem extends ClientTransactionItem {
 
     @Override // android.app.servertransaction.ObjectPoolItem
     public void recycle() {
-        setValues(this, null, null, 0, null, null, null, 0, null, null, 0, null, null, null, null, null, false, null, null, null, null, false, null, null, null);
+        setValues(
+                this, null, null, 0, null, null, null, 0, null, null, 0, null, null, null, null,
+                null, false, null, null, null, null, false, null, null, null);
         ObjectPool.recycle(this);
     }
 
@@ -152,7 +230,33 @@ public class LaunchActivityItem extends ClientTransactionItem {
     }
 
     private LaunchActivityItem(Parcel in) {
-        setValues(this, in.readStrongBinder(), (Intent) in.readTypedObject(Intent.CREATOR), in.readInt(), (ActivityInfo) in.readTypedObject(ActivityInfo.CREATOR), (Configuration) in.readTypedObject(Configuration.CREATOR), (Configuration) in.readTypedObject(Configuration.CREATOR), in.readInt(), in.readString(), IVoiceInteractor.Stub.asInterface(in.readStrongBinder()), in.readInt(), in.readBundle(getClass().getClassLoader()), in.readPersistableBundle(getClass().getClassLoader()), in.createTypedArrayList(ResultInfo.CREATOR), in.createTypedArrayList(ReferrerIntent.CREATOR), (ActivityOptions.SceneTransitionInfo) in.readTypedObject(ActivityOptions.SceneTransitionInfo.CREATOR), in.readBoolean(), (ProfilerInfo) in.readTypedObject(ProfilerInfo.CREATOR), in.readStrongBinder(), IActivityClientController.Stub.asInterface(in.readStrongBinder()), in.readStrongBinder(), in.readBoolean(), in.readStrongBinder(), in.readStrongBinder(), (ActivityWindowInfo) in.readTypedObject(ActivityWindowInfo.CREATOR));
+        setValues(
+                this,
+                in.readStrongBinder(),
+                (Intent) in.readTypedObject(Intent.CREATOR),
+                in.readInt(),
+                (ActivityInfo) in.readTypedObject(ActivityInfo.CREATOR),
+                (Configuration) in.readTypedObject(Configuration.CREATOR),
+                (Configuration) in.readTypedObject(Configuration.CREATOR),
+                in.readInt(),
+                in.readString(),
+                IVoiceInteractor.Stub.asInterface(in.readStrongBinder()),
+                in.readInt(),
+                in.readBundle(getClass().getClassLoader()),
+                in.readPersistableBundle(getClass().getClassLoader()),
+                in.createTypedArrayList(ResultInfo.CREATOR),
+                in.createTypedArrayList(ReferrerIntent.CREATOR),
+                (ActivityOptions.SceneTransitionInfo)
+                        in.readTypedObject(ActivityOptions.SceneTransitionInfo.CREATOR),
+                in.readBoolean(),
+                (ProfilerInfo) in.readTypedObject(ProfilerInfo.CREATOR),
+                in.readStrongBinder(),
+                IActivityClientController.Stub.asInterface(in.readStrongBinder()),
+                in.readStrongBinder(),
+                in.readBoolean(),
+                in.readStrongBinder(),
+                in.readStrongBinder(),
+                (ActivityWindowInfo) in.readTypedObject(ActivityWindowInfo.CREATOR));
     }
 
     public boolean equals(Object o) {
@@ -166,12 +270,25 @@ public class LaunchActivityItem extends ClientTransactionItem {
             return false;
         }
         LaunchActivityItem other = (LaunchActivityItem) o;
-        if ((this.mIntent == null && other.mIntent == null) || (this.mIntent != null && this.mIntent.filterEquals(other.mIntent))) {
+        if ((this.mIntent == null && other.mIntent == null)
+                || (this.mIntent != null && this.mIntent.filterEquals(other.mIntent))) {
             intentsEqual = true;
         } else {
             intentsEqual = false;
         }
-        if (intentsEqual && Objects.equals(this.mActivityToken, other.mActivityToken) && this.mIdent == other.mIdent && activityInfoEqual(other.mInfo) && Objects.equals(this.mCurConfig, other.mCurConfig) && Objects.equals(this.mOverrideConfig, other.mOverrideConfig) && this.mDeviceId == other.mDeviceId && Objects.equals(this.mReferrer, other.mReferrer) && this.mProcState == other.mProcState && areBundlesEqualRoughly(this.mState, other.mState) && areBundlesEqualRoughly(this.mPersistentState, other.mPersistentState) && Objects.equals(this.mPendingResults, other.mPendingResults) && Objects.equals(this.mPendingNewIntents, other.mPendingNewIntents)) {
+        if (intentsEqual
+                && Objects.equals(this.mActivityToken, other.mActivityToken)
+                && this.mIdent == other.mIdent
+                && activityInfoEqual(other.mInfo)
+                && Objects.equals(this.mCurConfig, other.mCurConfig)
+                && Objects.equals(this.mOverrideConfig, other.mOverrideConfig)
+                && this.mDeviceId == other.mDeviceId
+                && Objects.equals(this.mReferrer, other.mReferrer)
+                && this.mProcState == other.mProcState
+                && areBundlesEqualRoughly(this.mState, other.mState)
+                && areBundlesEqualRoughly(this.mPersistentState, other.mPersistentState)
+                && Objects.equals(this.mPendingResults, other.mPendingResults)
+                && Objects.equals(this.mPendingNewIntents, other.mPendingNewIntents)) {
             if (this.mSceneTransitionInfo == null) {
                 z = true;
             } else {
@@ -182,7 +299,15 @@ public class LaunchActivityItem extends ClientTransactionItem {
             } else {
                 z2 = false;
             }
-            if (z == z2 && this.mIsForward == other.mIsForward && Objects.equals(this.mProfilerInfo, other.mProfilerInfo) && Objects.equals(this.mAssistToken, other.mAssistToken) && Objects.equals(this.mShareableActivityToken, other.mShareableActivityToken) && Objects.equals(this.mTaskFragmentToken, other.mTaskFragmentToken) && Objects.equals(this.mInitialCallerInfoAccessToken, other.mInitialCallerInfoAccessToken) && Objects.equals(this.mActivityWindowInfo, other.mActivityWindowInfo)) {
+            if (z == z2
+                    && this.mIsForward == other.mIsForward
+                    && Objects.equals(this.mProfilerInfo, other.mProfilerInfo)
+                    && Objects.equals(this.mAssistToken, other.mAssistToken)
+                    && Objects.equals(this.mShareableActivityToken, other.mShareableActivityToken)
+                    && Objects.equals(this.mTaskFragmentToken, other.mTaskFragmentToken)
+                    && Objects.equals(
+                            this.mInitialCallerInfoAccessToken, other.mInitialCallerInfoAccessToken)
+                    && Objects.equals(this.mActivityWindowInfo, other.mActivityWindowInfo)) {
                 return true;
             }
         }
@@ -190,11 +315,101 @@ public class LaunchActivityItem extends ClientTransactionItem {
     }
 
     public int hashCode() {
-        return (((((((((((((((((((((((((((((((((((((((17 * 31) + Objects.hashCode(this.mActivityToken)) * 31) + this.mIntent.filterHashCode()) * 31) + this.mIdent) * 31) + Objects.hashCode(this.mCurConfig)) * 31) + Objects.hashCode(this.mOverrideConfig)) * 31) + this.mDeviceId) * 31) + Objects.hashCode(this.mReferrer)) * 31) + Objects.hashCode(Integer.valueOf(this.mProcState))) * 31) + getRoughBundleHashCode(this.mState)) * 31) + getRoughBundleHashCode(this.mPersistentState)) * 31) + Objects.hashCode(this.mPendingResults)) * 31) + Objects.hashCode(this.mPendingNewIntents)) * 31) + (this.mSceneTransitionInfo != null ? 1 : 0)) * 31) + (this.mIsForward ? 1 : 0)) * 31) + Objects.hashCode(this.mProfilerInfo)) * 31) + Objects.hashCode(this.mAssistToken)) * 31) + Objects.hashCode(this.mShareableActivityToken)) * 31) + Objects.hashCode(this.mTaskFragmentToken)) * 31) + Objects.hashCode(this.mInitialCallerInfoAccessToken)) * 31) + Objects.hashCode(this.mActivityWindowInfo);
+        return (((((((((((((((((((((((((((((((((((((((17 * 31)
+                                                                                                                                                                                                                                                                                                                                + Objects
+                                                                                                                                                                                                                                                                                                                                        .hashCode(
+                                                                                                                                                                                                                                                                                                                                                this
+                                                                                                                                                                                                                                                                                                                                                        .mActivityToken))
+                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                        .mIntent
+                                                                                                                                                                                                                                                                                                                        .filterHashCode())
+                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                        .mIdent)
+                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                + Objects
+                                                                                                                                                                                                                                                                                        .hashCode(
+                                                                                                                                                                                                                                                                                                this
+                                                                                                                                                                                                                                                                                                        .mCurConfig))
+                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                + Objects
+                                                                                                                                                                                                                                                                        .hashCode(
+                                                                                                                                                                                                                                                                                this
+                                                                                                                                                                                                                                                                                        .mOverrideConfig))
+                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                        .mDeviceId)
+                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                + Objects
+                                                                                                                                                                                                                                        .hashCode(
+                                                                                                                                                                                                                                                this
+                                                                                                                                                                                                                                                        .mReferrer))
+                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                + Objects
+                                                                                                                                                                                                                        .hashCode(
+                                                                                                                                                                                                                                Integer
+                                                                                                                                                                                                                                        .valueOf(
+                                                                                                                                                                                                                                                this
+                                                                                                                                                                                                                                                        .mProcState)))
+                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                + getRoughBundleHashCode(
+                                                                                                                                                                                                        this
+                                                                                                                                                                                                                .mState))
+                                                                                                                                                                                        * 31)
+                                                                                                                                                                                + getRoughBundleHashCode(
+                                                                                                                                                                                        this
+                                                                                                                                                                                                .mPersistentState))
+                                                                                                                                                                        * 31)
+                                                                                                                                                                + Objects
+                                                                                                                                                                        .hashCode(
+                                                                                                                                                                                this
+                                                                                                                                                                                        .mPendingResults))
+                                                                                                                                                        * 31)
+                                                                                                                                                + Objects
+                                                                                                                                                        .hashCode(
+                                                                                                                                                                this
+                                                                                                                                                                        .mPendingNewIntents))
+                                                                                                                                        * 31)
+                                                                                                                                + (this
+                                                                                                                                                        .mSceneTransitionInfo
+                                                                                                                                                != null
+                                                                                                                                        ? 1
+                                                                                                                                        : 0))
+                                                                                                                        * 31)
+                                                                                                                + (this
+                                                                                                                                .mIsForward
+                                                                                                                        ? 1
+                                                                                                                        : 0))
+                                                                                                        * 31)
+                                                                                                + Objects
+                                                                                                        .hashCode(
+                                                                                                                this
+                                                                                                                        .mProfilerInfo))
+                                                                                        * 31)
+                                                                                + Objects.hashCode(
+                                                                                        this
+                                                                                                .mAssistToken))
+                                                                        * 31)
+                                                                + Objects.hashCode(
+                                                                        this
+                                                                                .mShareableActivityToken))
+                                                        * 31)
+                                                + Objects.hashCode(this.mTaskFragmentToken))
+                                        * 31)
+                                + Objects.hashCode(this.mInitialCallerInfoAccessToken))
+                        * 31)
+                + Objects.hashCode(this.mActivityWindowInfo);
     }
 
     private boolean activityInfoEqual(ActivityInfo other) {
-        return this.mInfo == null ? other == null : other != null && this.mInfo.flags == other.flags && this.mInfo.getMaxAspectRatio() == other.getMaxAspectRatio() && Objects.equals(this.mInfo.launchToken, other.launchToken) && Objects.equals(this.mInfo.getComponentName(), other.getComponentName());
+        return this.mInfo == null
+                ? other == null
+                : other != null
+                        && this.mInfo.flags == other.flags
+                        && this.mInfo.getMaxAspectRatio() == other.getMaxAspectRatio()
+                        && Objects.equals(this.mInfo.launchToken, other.launchToken)
+                        && Objects.equals(this.mInfo.getComponentName(), other.getComponentName());
     }
 
     private static int getRoughBundleHashCode(BaseBundle bundle) {
@@ -206,10 +421,71 @@ public class LaunchActivityItem extends ClientTransactionItem {
     }
 
     public String toString() {
-        return "LaunchActivityItem{activityToken=" + this.mActivityToken + ",intent=" + this.mIntent + ",ident=" + this.mIdent + ",info=" + this.mInfo + ",curConfig=" + this.mCurConfig + ",overrideConfig=" + this.mOverrideConfig + ",deviceId=" + this.mDeviceId + ",referrer=" + this.mReferrer + ",procState=" + this.mProcState + ",state=" + this.mState + ",persistentState=" + this.mPersistentState + ",pendingResults=" + this.mPendingResults + ",pendingNewIntents=" + this.mPendingNewIntents + ",sceneTransitionInfo=" + this.mSceneTransitionInfo + ",profilerInfo=" + this.mProfilerInfo + ",assistToken=" + this.mAssistToken + ",shareableActivityToken=" + this.mShareableActivityToken + ",activityWindowInfo=" + this.mActivityWindowInfo + "}";
+        return "LaunchActivityItem{activityToken="
+                + this.mActivityToken
+                + ",intent="
+                + this.mIntent
+                + ",ident="
+                + this.mIdent
+                + ",info="
+                + this.mInfo
+                + ",curConfig="
+                + this.mCurConfig
+                + ",overrideConfig="
+                + this.mOverrideConfig
+                + ",deviceId="
+                + this.mDeviceId
+                + ",referrer="
+                + this.mReferrer
+                + ",procState="
+                + this.mProcState
+                + ",state="
+                + this.mState
+                + ",persistentState="
+                + this.mPersistentState
+                + ",pendingResults="
+                + this.mPendingResults
+                + ",pendingNewIntents="
+                + this.mPendingNewIntents
+                + ",sceneTransitionInfo="
+                + this.mSceneTransitionInfo
+                + ",profilerInfo="
+                + this.mProfilerInfo
+                + ",assistToken="
+                + this.mAssistToken
+                + ",shareableActivityToken="
+                + this.mShareableActivityToken
+                + ",activityWindowInfo="
+                + this.mActivityWindowInfo
+                + "}";
     }
 
-    private static void setValues(LaunchActivityItem instance, IBinder activityToken, Intent intent, int ident, ActivityInfo info, Configuration curConfig, Configuration overrideConfig, int deviceId, String referrer, IVoiceInteractor voiceInteractor, int procState, Bundle state, PersistableBundle persistentState, List<ResultInfo> pendingResults, List<ReferrerIntent> pendingNewIntents, ActivityOptions.SceneTransitionInfo sceneTransitionInfo, boolean isForward, ProfilerInfo profilerInfo, IBinder assistToken, IActivityClientController activityClientController, IBinder shareableActivityToken, boolean launchedFromBubble, IBinder taskFragmentToken, IBinder initialCallerInfoAccessToken, ActivityWindowInfo activityWindowInfo) {
+    private static void setValues(
+            LaunchActivityItem instance,
+            IBinder activityToken,
+            Intent intent,
+            int ident,
+            ActivityInfo info,
+            Configuration curConfig,
+            Configuration overrideConfig,
+            int deviceId,
+            String referrer,
+            IVoiceInteractor voiceInteractor,
+            int procState,
+            Bundle state,
+            PersistableBundle persistentState,
+            List<ResultInfo> pendingResults,
+            List<ReferrerIntent> pendingNewIntents,
+            ActivityOptions.SceneTransitionInfo sceneTransitionInfo,
+            boolean isForward,
+            ProfilerInfo profilerInfo,
+            IBinder assistToken,
+            IActivityClientController activityClientController,
+            IBinder shareableActivityToken,
+            boolean launchedFromBubble,
+            IBinder taskFragmentToken,
+            IBinder initialCallerInfoAccessToken,
+            ActivityWindowInfo activityWindowInfo) {
         instance.mActivityToken = activityToken;
         instance.mIntent = intent;
         instance.mIdent = ident;

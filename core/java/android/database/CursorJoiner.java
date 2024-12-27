@@ -19,9 +19,17 @@ public final class CursorJoiner implements Iterator<Result>, Iterable<Result> {
         BOTH
     }
 
-    public CursorJoiner(Cursor cursorLeft, String[] columnNamesLeft, Cursor cursorRight, String[] columnNamesRight) {
+    public CursorJoiner(
+            Cursor cursorLeft,
+            String[] columnNamesLeft,
+            Cursor cursorRight,
+            String[] columnNamesRight) {
         if (columnNamesLeft.length != columnNamesRight.length) {
-            throw new IllegalArgumentException("you must have the same number of columns on the left and right, " + columnNamesLeft.length + " != " + columnNamesRight.length);
+            throw new IllegalArgumentException(
+                    "you must have the same number of columns on the left and right, "
+                            + columnNamesLeft.length
+                            + " != "
+                            + columnNamesRight.length);
         }
         this.mCursorLeft = cursorLeft;
         this.mCursorRight = cursorRight;
@@ -49,17 +57,24 @@ public final class CursorJoiner implements Iterator<Result>, Iterable<Result> {
     @Override // java.util.Iterator
     public boolean hasNext() {
         if (!this.mCompareResultIsValid) {
-            return (this.mCursorLeft.isAfterLast() && this.mCursorRight.isAfterLast()) ? false : true;
+            return (this.mCursorLeft.isAfterLast() && this.mCursorRight.isAfterLast())
+                    ? false
+                    : true;
         }
         switch (this.mCompareResult) {
             case RIGHT:
-                return (this.mCursorLeft.isAfterLast() && this.mCursorRight.isLast()) ? false : true;
+                return (this.mCursorLeft.isAfterLast() && this.mCursorRight.isLast())
+                        ? false
+                        : true;
             case LEFT:
-                return (this.mCursorLeft.isLast() && this.mCursorRight.isAfterLast()) ? false : true;
+                return (this.mCursorLeft.isLast() && this.mCursorRight.isAfterLast())
+                        ? false
+                        : true;
             case BOTH:
                 return (this.mCursorLeft.isLast() && this.mCursorRight.isLast()) ? false : true;
             default:
-                throw new IllegalStateException("bad value for mCompareResult, " + this.mCompareResult);
+                throw new IllegalStateException(
+                        "bad value for mCompareResult, " + this.mCompareResult);
         }
     }
 
@@ -100,7 +115,8 @@ public final class CursorJoiner implements Iterator<Result>, Iterable<Result> {
         throw new UnsupportedOperationException("not implemented");
     }
 
-    private static void populateValues(String[] values, Cursor cursor, int[] columnIndicies, int startingIndex) {
+    private static void populateValues(
+            String[] values, Cursor cursor, int[] columnIndicies, int startingIndex) {
         for (int i = 0; i < columnIndicies.length; i++) {
             values[(i * 2) + startingIndex] = cursor.getString(columnIndicies[i]);
         }

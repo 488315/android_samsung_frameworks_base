@@ -3,6 +3,7 @@ package com.samsung.android.service.DeviceRootKeyService;
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
+
 import java.util.HashMap;
 
 /* loaded from: classes6.dex */
@@ -38,7 +39,11 @@ public final class DeviceRootKeyServiceManager {
 
     public DeviceRootKeyServiceManager(Context context) {
         this.mContext = context;
-        Log.i(TAG, NavigationBarInflaterView.SIZE_MOD_START + this.mContext.getPackageName() + "] create DeviceRootKeyServiceManager.");
+        Log.i(
+                TAG,
+                NavigationBarInflaterView.SIZE_MOD_START
+                        + this.mContext.getPackageName()
+                        + "] create DeviceRootKeyServiceManager.");
     }
 
     public byte[] createServiceKeySession(String serviceName, int keyType, Tlv tlv) {
@@ -121,13 +126,22 @@ public final class DeviceRootKeyServiceManager {
             this.mModemHash = null;
             this.mSerialHash = null;
             this.mIsHuidMatched = false;
-            if ((infoType & 2) == 2 && (tByteArray3 = DeviceRootKeyServiceManager.this.mTlvEx.getTlvValue(102)) != null && isValidLength(102, tByteArray3.length)) {
+            if ((infoType & 2) == 2
+                    && (tByteArray3 = DeviceRootKeyServiceManager.this.mTlvEx.getTlvValue(102))
+                            != null
+                    && isValidLength(102, tByteArray3.length)) {
                 this.mModemHash = (byte[]) tByteArray3.clone();
             }
-            if ((infoType & 4) == 4 && (tByteArray2 = DeviceRootKeyServiceManager.this.mTlvEx.getTlvValue(104)) != null && isValidLength(104, tByteArray2.length)) {
+            if ((infoType & 4) == 4
+                    && (tByteArray2 = DeviceRootKeyServiceManager.this.mTlvEx.getTlvValue(104))
+                            != null
+                    && isValidLength(104, tByteArray2.length)) {
                 this.mImeiHash = (byte[]) tByteArray2.clone();
             }
-            if ((infoType & 8) == 8 && (tByteArray = DeviceRootKeyServiceManager.this.mTlvEx.getTlvValue(108)) != null && isValidLength(108, tByteArray.length)) {
+            if ((infoType & 8) == 8
+                    && (tByteArray = DeviceRootKeyServiceManager.this.mTlvEx.getTlvValue(108))
+                            != null
+                    && isValidLength(108, tByteArray.length)) {
                 this.mSerialHash = (byte[]) tByteArray.clone();
             }
             byte[] tByteArray4 = DeviceRootKeyServiceManager.this.mTlvEx.getTlvValue(101);
@@ -182,7 +196,10 @@ public final class DeviceRootKeyServiceManager {
             L10:
                 return r1
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.service.DeviceRootKeyService.DeviceRootKeyServiceManager.DeviceInfo.isValidLength(int, int):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.samsung.android.service.DeviceRootKeyService.DeviceRootKeyServiceManager.DeviceInfo.isValidLength(int,"
+                        + " int):boolean");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.channel;
 
 import com.samsung.android.sume.core.buffer.MediaBuffer;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -13,8 +14,7 @@ public interface BufferChannel extends Channel<MediaBuffer> {
     public static final int SURFACE_TRANSIT = 4;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     default void setCapacity(int capacity) {
         throw new UnsupportedOperationException();

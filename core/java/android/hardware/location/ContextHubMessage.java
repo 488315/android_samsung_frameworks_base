@@ -5,26 +5,30 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.telecom.Logging.Session;
-import java.util.Arrays;
+
 import libcore.util.HexEncoding;
+
+import java.util.Arrays;
 
 @SystemApi
 @Deprecated
 /* loaded from: classes2.dex */
 public class ContextHubMessage implements Parcelable {
-    public static final Parcelable.Creator<ContextHubMessage> CREATOR = new Parcelable.Creator<ContextHubMessage>() { // from class: android.hardware.location.ContextHubMessage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContextHubMessage createFromParcel(Parcel in) {
-            return new ContextHubMessage(in);
-        }
+    public static final Parcelable.Creator<ContextHubMessage> CREATOR =
+            new Parcelable.Creator<ContextHubMessage>() { // from class:
+                // android.hardware.location.ContextHubMessage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContextHubMessage createFromParcel(Parcel in) {
+                    return new ContextHubMessage(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContextHubMessage[] newArray(int size) {
-            return new ContextHubMessage[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContextHubMessage[] newArray(int size) {
+                    return new ContextHubMessage[size];
+                }
+            };
     private static final int DEBUG_LOG_NUM_BYTES = 16;
     private byte[] mData;
     private int mType;
@@ -83,7 +87,12 @@ public class ContextHubMessage implements Parcelable {
 
     public String toString() {
         int length = this.mData.length;
-        String ret = "ContextHubMessage[type = " + this.mType + ", length = " + this.mData.length + " bytes](";
+        String ret =
+                "ContextHubMessage[type = "
+                        + this.mType
+                        + ", length = "
+                        + this.mData.length
+                        + " bytes](";
         if (length > 0) {
             ret = ret + "data = 0x";
         }

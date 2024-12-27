@@ -24,7 +24,9 @@ import android.util.Range;
 import android.util.Size;
 import android.util.SparseArray;
 import android.view.Surface;
+
 import com.android.internal.camera.flags.Flags;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -40,7 +42,8 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
     public static final int REQUEST_TYPE_REGULAR = 0;
     public static final int REQUEST_TYPE_REPROCESS = 1;
     public static final int REQUEST_TYPE_ZSL_STILL = 2;
-    private static final String SET_TAG_STRING_PREFIX = "android.hardware.camera2.CaptureRequest.setTag.";
+    private static final String SET_TAG_STRING_PREFIX =
+            "android.hardware.camera2.CaptureRequest.setTag.";
     private final String TAG;
     private boolean mIsPartOfCHSRequestList;
     private boolean mIsReprocess;
@@ -57,109 +60,145 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
     private final Object mSurfacesLock;
     private Object mUserTag;
     private static final ArraySet<Surface> mEmptySurfaceSet = new ArraySet<>();
-    public static final Parcelable.Creator<CaptureRequest> CREATOR = new Parcelable.Creator<CaptureRequest>() { // from class: android.hardware.camera2.CaptureRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CaptureRequest createFromParcel(Parcel in) {
-            CaptureRequest request = new CaptureRequest();
-            request.readFromParcel(in);
-            return request;
-        }
+    public static final Parcelable.Creator<CaptureRequest> CREATOR =
+            new Parcelable.Creator<
+                    CaptureRequest>() { // from class: android.hardware.camera2.CaptureRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CaptureRequest createFromParcel(Parcel in) {
+                    CaptureRequest request = new CaptureRequest();
+                    request.readFromParcel(in);
+                    return request;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CaptureRequest[] newArray(int size) {
-            return new CaptureRequest[size];
-        }
-    };
-
-    @PublicKey
-    public static final Key<Integer> COLOR_CORRECTION_MODE = new Key<>("android.colorCorrection.mode", Integer.TYPE);
-
-    @PublicKey
-    public static final Key<ColorSpaceTransform> COLOR_CORRECTION_TRANSFORM = new Key<>("android.colorCorrection.transform", ColorSpaceTransform.class);
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CaptureRequest[] newArray(int size) {
+                    return new CaptureRequest[size];
+                }
+            };
 
     @PublicKey
-    public static final Key<RggbChannelVector> COLOR_CORRECTION_GAINS = new Key<>("android.colorCorrection.gains", RggbChannelVector.class);
+    public static final Key<Integer> COLOR_CORRECTION_MODE =
+            new Key<>("android.colorCorrection.mode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> COLOR_CORRECTION_ABERRATION_MODE = new Key<>("android.colorCorrection.aberrationMode", Integer.TYPE);
+    public static final Key<ColorSpaceTransform> COLOR_CORRECTION_TRANSFORM =
+            new Key<>("android.colorCorrection.transform", ColorSpaceTransform.class);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_AE_ANTIBANDING_MODE = new Key<>("android.control.aeAntibandingMode", Integer.TYPE);
+    public static final Key<RggbChannelVector> COLOR_CORRECTION_GAINS =
+            new Key<>("android.colorCorrection.gains", RggbChannelVector.class);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_AE_EXPOSURE_COMPENSATION = new Key<>("android.control.aeExposureCompensation", Integer.TYPE);
+    public static final Key<Integer> COLOR_CORRECTION_ABERRATION_MODE =
+            new Key<>("android.colorCorrection.aberrationMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Boolean> CONTROL_AE_LOCK = new Key<>("android.control.aeLock", Boolean.TYPE);
+    public static final Key<Integer> CONTROL_AE_ANTIBANDING_MODE =
+            new Key<>("android.control.aeAntibandingMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_AE_MODE = new Key<>("android.control.aeMode", Integer.TYPE);
+    public static final Key<Integer> CONTROL_AE_EXPOSURE_COMPENSATION =
+            new Key<>("android.control.aeExposureCompensation", Integer.TYPE);
 
     @PublicKey
-    public static final Key<MeteringRectangle[]> CONTROL_AE_REGIONS = new Key<>("android.control.aeRegions", MeteringRectangle[].class);
+    public static final Key<Boolean> CONTROL_AE_LOCK =
+            new Key<>("android.control.aeLock", Boolean.TYPE);
 
     @PublicKey
-    public static final Key<Range<Integer>> CONTROL_AE_TARGET_FPS_RANGE = new Key<>("android.control.aeTargetFpsRange", new TypeReference<Range<Integer>>() { // from class: android.hardware.camera2.CaptureRequest.2
-    });
+    public static final Key<Integer> CONTROL_AE_MODE =
+            new Key<>("android.control.aeMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_AE_PRECAPTURE_TRIGGER = new Key<>("android.control.aePrecaptureTrigger", Integer.TYPE);
+    public static final Key<MeteringRectangle[]> CONTROL_AE_REGIONS =
+            new Key<>("android.control.aeRegions", MeteringRectangle[].class);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_AF_MODE = new Key<>("android.control.afMode", Integer.TYPE);
+    public static final Key<Range<Integer>> CONTROL_AE_TARGET_FPS_RANGE =
+            new Key<>(
+                    "android.control.aeTargetFpsRange",
+                    new TypeReference<Range<Integer>>() { // from class:
+                        // android.hardware.camera2.CaptureRequest.2
+                    });
 
     @PublicKey
-    public static final Key<MeteringRectangle[]> CONTROL_AF_REGIONS = new Key<>("android.control.afRegions", MeteringRectangle[].class);
+    public static final Key<Integer> CONTROL_AE_PRECAPTURE_TRIGGER =
+            new Key<>("android.control.aePrecaptureTrigger", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_AF_TRIGGER = new Key<>("android.control.afTrigger", Integer.TYPE);
+    public static final Key<Integer> CONTROL_AF_MODE =
+            new Key<>("android.control.afMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Boolean> CONTROL_AWB_LOCK = new Key<>("android.control.awbLock", Boolean.TYPE);
+    public static final Key<MeteringRectangle[]> CONTROL_AF_REGIONS =
+            new Key<>("android.control.afRegions", MeteringRectangle[].class);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_AWB_MODE = new Key<>("android.control.awbMode", Integer.TYPE);
+    public static final Key<Integer> CONTROL_AF_TRIGGER =
+            new Key<>("android.control.afTrigger", Integer.TYPE);
 
     @PublicKey
-    public static final Key<MeteringRectangle[]> CONTROL_AWB_REGIONS = new Key<>("android.control.awbRegions", MeteringRectangle[].class);
+    public static final Key<Boolean> CONTROL_AWB_LOCK =
+            new Key<>("android.control.awbLock", Boolean.TYPE);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_CAPTURE_INTENT = new Key<>("android.control.captureIntent", Integer.TYPE);
+    public static final Key<Integer> CONTROL_AWB_MODE =
+            new Key<>("android.control.awbMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_EFFECT_MODE = new Key<>("android.control.effectMode", Integer.TYPE);
+    public static final Key<MeteringRectangle[]> CONTROL_AWB_REGIONS =
+            new Key<>("android.control.awbRegions", MeteringRectangle[].class);
+
+    @PublicKey
+    public static final Key<Integer> CONTROL_CAPTURE_INTENT =
+            new Key<>("android.control.captureIntent", Integer.TYPE);
+
+    @PublicKey
+    public static final Key<Integer> CONTROL_EFFECT_MODE =
+            new Key<>("android.control.effectMode", Integer.TYPE);
 
     @PublicKey
     public static final Key<Integer> CONTROL_MODE = new Key<>("android.control.mode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_SCENE_MODE = new Key<>("android.control.sceneMode", Integer.TYPE);
+    public static final Key<Integer> CONTROL_SCENE_MODE =
+            new Key<>("android.control.sceneMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_VIDEO_STABILIZATION_MODE = new Key<>("android.control.videoStabilizationMode", Integer.TYPE);
+    public static final Key<Integer> CONTROL_VIDEO_STABILIZATION_MODE =
+            new Key<>("android.control.videoStabilizationMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_POST_RAW_SENSITIVITY_BOOST = new Key<>("android.control.postRawSensitivityBoost", Integer.TYPE);
+    public static final Key<Integer> CONTROL_POST_RAW_SENSITIVITY_BOOST =
+            new Key<>("android.control.postRawSensitivityBoost", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Boolean> CONTROL_ENABLE_ZSL = new Key<>("android.control.enableZsl", Boolean.TYPE);
+    public static final Key<Boolean> CONTROL_ENABLE_ZSL =
+            new Key<>("android.control.enableZsl", Boolean.TYPE);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_EXTENDED_SCENE_MODE = new Key<>("android.control.extendedSceneMode", Integer.TYPE);
+    public static final Key<Integer> CONTROL_EXTENDED_SCENE_MODE =
+            new Key<>("android.control.extendedSceneMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Float> CONTROL_ZOOM_RATIO = new Key<>("android.control.zoomRatio", Float.TYPE);
-    public static final Key<Boolean> CONTROL_AF_REGIONS_SET = new Key<>("android.control.afRegionsSet", Boolean.TYPE);
-    public static final Key<Boolean> CONTROL_AE_REGIONS_SET = new Key<>("android.control.aeRegionsSet", Boolean.TYPE);
-    public static final Key<Boolean> CONTROL_AWB_REGIONS_SET = new Key<>("android.control.awbRegionsSet", Boolean.TYPE);
+    public static final Key<Float> CONTROL_ZOOM_RATIO =
+            new Key<>("android.control.zoomRatio", Float.TYPE);
+
+    public static final Key<Boolean> CONTROL_AF_REGIONS_SET =
+            new Key<>("android.control.afRegionsSet", Boolean.TYPE);
+    public static final Key<Boolean> CONTROL_AE_REGIONS_SET =
+            new Key<>("android.control.aeRegionsSet", Boolean.TYPE);
+    public static final Key<Boolean> CONTROL_AWB_REGIONS_SET =
+            new Key<>("android.control.awbRegionsSet", Boolean.TYPE);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_SETTINGS_OVERRIDE = new Key<>("android.control.settingsOverride", Integer.TYPE);
+    public static final Key<Integer> CONTROL_SETTINGS_OVERRIDE =
+            new Key<>("android.control.settingsOverride", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> CONTROL_AUTOFRAMING = new Key<>("android.control.autoframing", Integer.TYPE);
+    public static final Key<Integer> CONTROL_AUTOFRAMING =
+            new Key<>("android.control.autoframing", Integer.TYPE);
 
     @PublicKey
     public static final Key<Integer> EDGE_MODE = new Key<>("android.edge.mode", Integer.TYPE);
@@ -168,95 +207,129 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
     public static final Key<Integer> FLASH_MODE = new Key<>("android.flash.mode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> FLASH_STRENGTH_LEVEL = new Key<>("android.flash.strengthLevel", Integer.TYPE);
+    public static final Key<Integer> FLASH_STRENGTH_LEVEL =
+            new Key<>("android.flash.strengthLevel", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> HOT_PIXEL_MODE = new Key<>("android.hotPixel.mode", Integer.TYPE);
+    public static final Key<Integer> HOT_PIXEL_MODE =
+            new Key<>("android.hotPixel.mode", Integer.TYPE);
 
-    @SyntheticKey
-    @PublicKey
-    public static final Key<Location> JPEG_GPS_LOCATION = new Key<>("android.jpeg.gpsLocation", Location.class);
-    public static final Key<double[]> JPEG_GPS_COORDINATES = new Key<>("android.jpeg.gpsCoordinates", double[].class);
-    public static final Key<String> JPEG_GPS_PROCESSING_METHOD = new Key<>("android.jpeg.gpsProcessingMethod", String.class);
-    public static final Key<Long> JPEG_GPS_TIMESTAMP = new Key<>("android.jpeg.gpsTimestamp", Long.TYPE);
+    @SyntheticKey @PublicKey
+    public static final Key<Location> JPEG_GPS_LOCATION =
+            new Key<>("android.jpeg.gpsLocation", Location.class);
+
+    public static final Key<double[]> JPEG_GPS_COORDINATES =
+            new Key<>("android.jpeg.gpsCoordinates", double[].class);
+    public static final Key<String> JPEG_GPS_PROCESSING_METHOD =
+            new Key<>("android.jpeg.gpsProcessingMethod", String.class);
+    public static final Key<Long> JPEG_GPS_TIMESTAMP =
+            new Key<>("android.jpeg.gpsTimestamp", Long.TYPE);
 
     @PublicKey
-    public static final Key<Integer> JPEG_ORIENTATION = new Key<>("android.jpeg.orientation", Integer.TYPE);
+    public static final Key<Integer> JPEG_ORIENTATION =
+            new Key<>("android.jpeg.orientation", Integer.TYPE);
 
     @PublicKey
     public static final Key<Byte> JPEG_QUALITY = new Key<>("android.jpeg.quality", Byte.TYPE);
 
     @PublicKey
-    public static final Key<Byte> JPEG_THUMBNAIL_QUALITY = new Key<>("android.jpeg.thumbnailQuality", Byte.TYPE);
+    public static final Key<Byte> JPEG_THUMBNAIL_QUALITY =
+            new Key<>("android.jpeg.thumbnailQuality", Byte.TYPE);
 
     @PublicKey
-    public static final Key<Size> JPEG_THUMBNAIL_SIZE = new Key<>("android.jpeg.thumbnailSize", Size.class);
+    public static final Key<Size> JPEG_THUMBNAIL_SIZE =
+            new Key<>("android.jpeg.thumbnailSize", Size.class);
 
     @PublicKey
     public static final Key<Float> LENS_APERTURE = new Key<>("android.lens.aperture", Float.TYPE);
 
     @PublicKey
-    public static final Key<Float> LENS_FILTER_DENSITY = new Key<>("android.lens.filterDensity", Float.TYPE);
+    public static final Key<Float> LENS_FILTER_DENSITY =
+            new Key<>("android.lens.filterDensity", Float.TYPE);
 
     @PublicKey
-    public static final Key<Float> LENS_FOCAL_LENGTH = new Key<>("android.lens.focalLength", Float.TYPE);
+    public static final Key<Float> LENS_FOCAL_LENGTH =
+            new Key<>("android.lens.focalLength", Float.TYPE);
 
     @PublicKey
-    public static final Key<Float> LENS_FOCUS_DISTANCE = new Key<>("android.lens.focusDistance", Float.TYPE);
+    public static final Key<Float> LENS_FOCUS_DISTANCE =
+            new Key<>("android.lens.focusDistance", Float.TYPE);
 
     @PublicKey
-    public static final Key<Integer> LENS_OPTICAL_STABILIZATION_MODE = new Key<>("android.lens.opticalStabilizationMode", Integer.TYPE);
+    public static final Key<Integer> LENS_OPTICAL_STABILIZATION_MODE =
+            new Key<>("android.lens.opticalStabilizationMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> NOISE_REDUCTION_MODE = new Key<>("android.noiseReduction.mode", Integer.TYPE);
-    public static final Key<Integer> REQUEST_ID = new Key<>(RestrictionsManager.REQUEST_KEY_ID, Integer.TYPE);
+    public static final Key<Integer> NOISE_REDUCTION_MODE =
+            new Key<>("android.noiseReduction.mode", Integer.TYPE);
+
+    public static final Key<Integer> REQUEST_ID =
+            new Key<>(RestrictionsManager.REQUEST_KEY_ID, Integer.TYPE);
 
     @PublicKey
-    public static final Key<Rect> SCALER_CROP_REGION = new Key<>("android.scaler.cropRegion", Rect.class);
+    public static final Key<Rect> SCALER_CROP_REGION =
+            new Key<>("android.scaler.cropRegion", Rect.class);
 
     @PublicKey
-    public static final Key<Integer> SCALER_ROTATE_AND_CROP = new Key<>("android.scaler.rotateAndCrop", Integer.TYPE);
-    public static final Key<Boolean> SCALER_CROP_REGION_SET = new Key<>("android.scaler.cropRegionSet", Boolean.TYPE);
+    public static final Key<Integer> SCALER_ROTATE_AND_CROP =
+            new Key<>("android.scaler.rotateAndCrop", Integer.TYPE);
+
+    public static final Key<Boolean> SCALER_CROP_REGION_SET =
+            new Key<>("android.scaler.cropRegionSet", Boolean.TYPE);
 
     @PublicKey
-    public static final Key<Long> SENSOR_EXPOSURE_TIME = new Key<>("android.sensor.exposureTime", Long.TYPE);
+    public static final Key<Long> SENSOR_EXPOSURE_TIME =
+            new Key<>("android.sensor.exposureTime", Long.TYPE);
 
     @PublicKey
-    public static final Key<Long> SENSOR_FRAME_DURATION = new Key<>("android.sensor.frameDuration", Long.TYPE);
+    public static final Key<Long> SENSOR_FRAME_DURATION =
+            new Key<>("android.sensor.frameDuration", Long.TYPE);
 
     @PublicKey
-    public static final Key<Integer> SENSOR_SENSITIVITY = new Key<>("android.sensor.sensitivity", Integer.TYPE);
+    public static final Key<Integer> SENSOR_SENSITIVITY =
+            new Key<>("android.sensor.sensitivity", Integer.TYPE);
 
     @PublicKey
-    public static final Key<int[]> SENSOR_TEST_PATTERN_DATA = new Key<>("android.sensor.testPatternData", int[].class);
+    public static final Key<int[]> SENSOR_TEST_PATTERN_DATA =
+            new Key<>("android.sensor.testPatternData", int[].class);
 
     @PublicKey
-    public static final Key<Integer> SENSOR_TEST_PATTERN_MODE = new Key<>("android.sensor.testPatternMode", Integer.TYPE);
+    public static final Key<Integer> SENSOR_TEST_PATTERN_MODE =
+            new Key<>("android.sensor.testPatternMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> SENSOR_PIXEL_MODE = new Key<>("android.sensor.pixelMode", Integer.TYPE);
+    public static final Key<Integer> SENSOR_PIXEL_MODE =
+            new Key<>("android.sensor.pixelMode", Integer.TYPE);
 
     @PublicKey
     public static final Key<Integer> SHADING_MODE = new Key<>("android.shading.mode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> STATISTICS_FACE_DETECT_MODE = new Key<>("android.statistics.faceDetectMode", Integer.TYPE);
+    public static final Key<Integer> STATISTICS_FACE_DETECT_MODE =
+            new Key<>("android.statistics.faceDetectMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Boolean> STATISTICS_HOT_PIXEL_MAP_MODE = new Key<>("android.statistics.hotPixelMapMode", Boolean.TYPE);
+    public static final Key<Boolean> STATISTICS_HOT_PIXEL_MAP_MODE =
+            new Key<>("android.statistics.hotPixelMapMode", Boolean.TYPE);
 
     @PublicKey
-    public static final Key<Integer> STATISTICS_LENS_SHADING_MAP_MODE = new Key<>("android.statistics.lensShadingMapMode", Integer.TYPE);
+    public static final Key<Integer> STATISTICS_LENS_SHADING_MAP_MODE =
+            new Key<>("android.statistics.lensShadingMapMode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> STATISTICS_OIS_DATA_MODE = new Key<>("android.statistics.oisDataMode", Integer.TYPE);
-    public static final Key<float[]> TONEMAP_CURVE_BLUE = new Key<>("android.tonemap.curveBlue", float[].class);
-    public static final Key<float[]> TONEMAP_CURVE_GREEN = new Key<>("android.tonemap.curveGreen", float[].class);
-    public static final Key<float[]> TONEMAP_CURVE_RED = new Key<>("android.tonemap.curveRed", float[].class);
+    public static final Key<Integer> STATISTICS_OIS_DATA_MODE =
+            new Key<>("android.statistics.oisDataMode", Integer.TYPE);
 
-    @SyntheticKey
-    @PublicKey
-    public static final Key<TonemapCurve> TONEMAP_CURVE = new Key<>("android.tonemap.curve", TonemapCurve.class);
+    public static final Key<float[]> TONEMAP_CURVE_BLUE =
+            new Key<>("android.tonemap.curveBlue", float[].class);
+    public static final Key<float[]> TONEMAP_CURVE_GREEN =
+            new Key<>("android.tonemap.curveGreen", float[].class);
+    public static final Key<float[]> TONEMAP_CURVE_RED =
+            new Key<>("android.tonemap.curveRed", float[].class);
+
+    @SyntheticKey @PublicKey
+    public static final Key<TonemapCurve> TONEMAP_CURVE =
+            new Key<>("android.tonemap.curve", TonemapCurve.class);
 
     @PublicKey
     public static final Key<Integer> TONEMAP_MODE = new Key<>("android.tonemap.mode", Integer.TYPE);
@@ -265,39 +338,54 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
     public static final Key<Float> TONEMAP_GAMMA = new Key<>("android.tonemap.gamma", Float.TYPE);
 
     @PublicKey
-    public static final Key<Integer> TONEMAP_PRESET_CURVE = new Key<>("android.tonemap.presetCurve", Integer.TYPE);
+    public static final Key<Integer> TONEMAP_PRESET_CURVE =
+            new Key<>("android.tonemap.presetCurve", Integer.TYPE);
+
     public static final Key<Boolean> LED_TRANSMIT = new Key<>("android.led.transmit", Boolean.TYPE);
 
     @PublicKey
-    public static final Key<Boolean> BLACK_LEVEL_LOCK = new Key<>("android.blackLevel.lock", Boolean.TYPE);
+    public static final Key<Boolean> BLACK_LEVEL_LOCK =
+            new Key<>("android.blackLevel.lock", Boolean.TYPE);
 
     @PublicKey
-    public static final Key<Float> REPROCESS_EFFECTIVE_EXPOSURE_FACTOR = new Key<>("android.reprocess.effectiveExposureFactor", Float.TYPE);
+    public static final Key<Float> REPROCESS_EFFECTIVE_EXPOSURE_FACTOR =
+            new Key<>("android.reprocess.effectiveExposureFactor", Float.TYPE);
 
     @PublicKey
-    public static final Key<Integer> DISTORTION_CORRECTION_MODE = new Key<>("android.distortionCorrection.mode", Integer.TYPE);
+    public static final Key<Integer> DISTORTION_CORRECTION_MODE =
+            new Key<>("android.distortionCorrection.mode", Integer.TYPE);
 
     @PublicKey
-    public static final Key<Integer> EXTENSION_STRENGTH = new Key<>("android.extension.strength", Integer.TYPE);
+    public static final Key<Integer> EXTENSION_STRENGTH =
+            new Key<>("android.extension.strength", Integer.TYPE);
 
     @ExtensionKey
-    public static final Key<Float> EFV_PADDING_ZOOM_FACTOR = new Key<>("android.efv.paddingZoomFactor", Float.TYPE);
+    public static final Key<Float> EFV_PADDING_ZOOM_FACTOR =
+            new Key<>("android.efv.paddingZoomFactor", Float.TYPE);
 
     @ExtensionKey
-    public static final Key<Boolean> EFV_AUTO_ZOOM = new Key<>("android.efv.autoZoom", Boolean.TYPE);
+    public static final Key<Boolean> EFV_AUTO_ZOOM =
+            new Key<>("android.efv.autoZoom", Boolean.TYPE);
 
     @ExtensionKey
-    public static final Key<Float> EFV_MAX_PADDING_ZOOM_FACTOR = new Key<>("android.efv.maxPaddingZoomFactor", Float.TYPE);
+    public static final Key<Float> EFV_MAX_PADDING_ZOOM_FACTOR =
+            new Key<>("android.efv.maxPaddingZoomFactor", Float.TYPE);
 
     @ExtensionKey
-    public static final Key<Integer> EFV_STABILIZATION_MODE = new Key<>("android.efv.stabilizationMode", Integer.TYPE);
+    public static final Key<Integer> EFV_STABILIZATION_MODE =
+            new Key<>("android.efv.stabilizationMode", Integer.TYPE);
 
     @ExtensionKey
-    public static final Key<Pair<Integer, Integer>> EFV_TRANSLATE_VIEWPORT = new Key<>("android.efv.translateViewport", new TypeReference<Pair<Integer, Integer>>() { // from class: android.hardware.camera2.CaptureRequest.3
-    });
+    public static final Key<Pair<Integer, Integer>> EFV_TRANSLATE_VIEWPORT =
+            new Key<>(
+                    "android.efv.translateViewport",
+                    new TypeReference<Pair<Integer, Integer>>() { // from class:
+                        // android.hardware.camera2.CaptureRequest.3
+                    });
 
     @ExtensionKey
-    public static final Key<Float> EFV_ROTATE_VIEWPORT = new Key<>("android.efv.rotateViewport", Float.TYPE);
+    public static final Key<Float> EFV_ROTATE_VIEWPORT =
+            new Key<>("android.efv.rotateViewport", Float.TYPE);
 
     public static final class Key<T> {
         private final CameraMetadataNative.Key<T> mKey;
@@ -352,7 +440,9 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
                 Boolean enableZsl = (Boolean) this.mLogicalCameraSettings.get(CONTROL_ENABLE_ZSL);
                 boolean isZslStill = false;
                 if (enableZsl != null && enableZsl.booleanValue()) {
-                    int captureIntent = ((Integer) this.mLogicalCameraSettings.get(CONTROL_CAPTURE_INTENT)).intValue();
+                    int captureIntent =
+                            ((Integer) this.mLogicalCameraSettings.get(CONTROL_CAPTURE_INTENT))
+                                    .intValue();
                     if (captureIntent == 2) {
                         isZslStill = true;
                     }
@@ -386,8 +476,10 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
         this.mIsPartOfCHSRequestList = false;
         this.mReleaseSurfaces = false;
         this.mLogicalCameraId = new String(source.mLogicalCameraId);
-        for (Map.Entry<String, CameraMetadataNative> entry : source.mPhysicalCameraSettings.entrySet()) {
-            this.mPhysicalCameraSettings.put(new String(entry.getKey()), new CameraMetadataNative(entry.getValue()));
+        for (Map.Entry<String, CameraMetadataNative> entry :
+                source.mPhysicalCameraSettings.entrySet()) {
+            this.mPhysicalCameraSettings.put(
+                    new String(entry.getKey()), new CameraMetadataNative(entry.getValue()));
         }
         this.mLogicalCameraSettings = this.mPhysicalCameraSettings.get(this.mLogicalCameraId);
         setNativeInstance(this.mLogicalCameraSettings);
@@ -398,7 +490,12 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
         this.mUserTag = source.mUserTag;
     }
 
-    private CaptureRequest(CameraMetadataNative settings, boolean isReprocess, int reprocessableSessionId, String logicalCameraId, Set<String> physicalCameraIdSet) {
+    private CaptureRequest(
+            CameraMetadataNative settings,
+            boolean isReprocess,
+            int reprocessableSessionId,
+            String logicalCameraId,
+            Set<String> physicalCameraIdSet) {
         this.TAG = "CaptureRequest-JV";
         this.mSurfaceSet = new ArraySet<>();
         this.mSurfacesLock = new Object();
@@ -408,21 +505,26 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
         this.mIsPartOfCHSRequestList = false;
         this.mReleaseSurfaces = false;
         if (physicalCameraIdSet != null && isReprocess) {
-            throw new IllegalArgumentException("Create a reprocess capture request with with more than one physical camera is not supported!");
+            throw new IllegalArgumentException(
+                    "Create a reprocess capture request with with more than one physical camera is"
+                            + " not supported!");
         }
         this.mLogicalCameraId = logicalCameraId;
         this.mLogicalCameraSettings = CameraMetadataNative.move(settings);
         this.mPhysicalCameraSettings.put(this.mLogicalCameraId, this.mLogicalCameraSettings);
         if (physicalCameraIdSet != null) {
             for (String physicalId : physicalCameraIdSet) {
-                this.mPhysicalCameraSettings.put(physicalId, new CameraMetadataNative(this.mLogicalCameraSettings));
+                this.mPhysicalCameraSettings.put(
+                        physicalId, new CameraMetadataNative(this.mLogicalCameraSettings));
             }
         }
         setNativeInstance(this.mLogicalCameraSettings);
         this.mIsReprocess = isReprocess;
         if (isReprocess) {
             if (reprocessableSessionId == -1) {
-                throw new IllegalArgumentException("Create a reprocess capture request with an invalid session ID: " + reprocessableSessionId);
+                throw new IllegalArgumentException(
+                        "Create a reprocess capture request with an invalid session ID: "
+                                + reprocessableSessionId);
             }
             this.mReprocessableSessionId = reprocessableSessionId;
             return;
@@ -468,7 +570,9 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
 
     public int getReprocessableSessionId() {
         if (!this.mIsReprocess || this.mReprocessableSessionId == -1) {
-            throw new IllegalStateException("Getting the reprocessable session ID for a non-reprocess capture request is illegal.");
+            throw new IllegalStateException(
+                    "Getting the reprocessable session ID for a non-reprocess capture request is"
+                            + " illegal.");
         }
         return this.mReprocessableSessionId;
     }
@@ -478,18 +582,27 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
     }
 
     private boolean equals(CaptureRequest other) {
-        return other != null && Objects.equals(this.mUserTag, other.mUserTag) && this.mSurfaceSet.equals(other.mSurfaceSet) && this.mPhysicalCameraSettings.equals(other.mPhysicalCameraSettings) && this.mLogicalCameraId.equals(other.mLogicalCameraId) && this.mLogicalCameraSettings.equals(other.mLogicalCameraSettings) && this.mIsReprocess == other.mIsReprocess && this.mReprocessableSessionId == other.mReprocessableSessionId;
+        return other != null
+                && Objects.equals(this.mUserTag, other.mUserTag)
+                && this.mSurfaceSet.equals(other.mSurfaceSet)
+                && this.mPhysicalCameraSettings.equals(other.mPhysicalCameraSettings)
+                && this.mLogicalCameraId.equals(other.mLogicalCameraId)
+                && this.mLogicalCameraSettings.equals(other.mLogicalCameraSettings)
+                && this.mIsReprocess == other.mIsReprocess
+                && this.mReprocessableSessionId == other.mReprocessableSessionId;
     }
 
     public int hashCode() {
-        return HashCodeHelpers.hashCodeGeneric(this.mPhysicalCameraSettings, this.mSurfaceSet, this.mUserTag);
+        return HashCodeHelpers.hashCodeGeneric(
+                this.mPhysicalCameraSettings, this.mSurfaceSet, this.mUserTag);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void readFromParcel(Parcel in) {
         int physicalCameraCount = in.readInt();
         if (physicalCameraCount <= 0) {
-            throw new RuntimeException("Physical camera count" + physicalCameraCount + " should always be positive");
+            throw new RuntimeException(
+                    "Physical camera count" + physicalCameraCount + " should always be positive");
         }
         this.mLogicalCameraId = in.readString();
         this.mLogicalCameraSettings = new CameraMetadataNative();
@@ -507,7 +620,9 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
         this.mReprocessableSessionId = -1;
         synchronized (this.mSurfacesLock) {
             this.mSurfaceSet.clear();
-            Parcelable[] parcelableArray = (Parcelable[]) in.readParcelableArray(Surface.class.getClassLoader(), Surface.class);
+            Parcelable[] parcelableArray =
+                    (Parcelable[])
+                            in.readParcelableArray(Surface.class.getClassLoader(), Surface.class);
             if (parcelableArray != null) {
                 if (Flags.surfaceLeakFix()) {
                     this.mReleaseSurfaces = true;
@@ -536,12 +651,14 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
         if (!this.mPhysicalCameraSettings.containsKey(this.mLogicalCameraId)) {
-            throw new IllegalStateException("Physical camera settings map must contain a key for the logical camera id.");
+            throw new IllegalStateException(
+                    "Physical camera settings map must contain a key for the logical camera id.");
         }
         parcel.writeInt(this.mPhysicalCameraSettings.size());
         parcel.writeString(this.mLogicalCameraId);
         this.mLogicalCameraSettings.writeToParcel(parcel, i);
-        for (Map.Entry<String, CameraMetadataNative> entry : this.mPhysicalCameraSettings.entrySet()) {
+        for (Map.Entry<String, CameraMetadataNative> entry :
+                this.mPhysicalCameraSettings.entrySet()) {
             if (!entry.getKey().equals(this.mLogicalCameraId)) {
                 parcel.writeString(entry.getKey());
                 entry.getValue().writeToParcel(parcel, i);
@@ -549,8 +666,10 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
         }
         parcel.writeInt(this.mIsReprocess ? 1 : 0);
         synchronized (this.mSurfacesLock) {
-            ArraySet<Surface> arraySet = this.mSurfaceConverted ? mEmptySurfaceSet : this.mSurfaceSet;
-            parcel.writeParcelableArray((Surface[]) arraySet.toArray(new Surface[arraySet.size()]), i);
+            ArraySet<Surface> arraySet =
+                    this.mSurfaceConverted ? mEmptySurfaceSet : this.mSurfaceSet;
+            parcel.writeParcelableArray(
+                    (Surface[]) arraySet.toArray(new Surface[arraySet.size()]), i);
             if (this.mSurfaceConverted) {
                 parcel.writeInt(this.mStreamIdxArray.length);
                 for (int i2 = 0; i2 < this.mStreamIdxArray.length; i2++) {
@@ -649,7 +768,8 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
                     if (!streamFound) {
                         this.mStreamIdxArray = null;
                         this.mSurfaceIdxArray = null;
-                        throw new IllegalArgumentException("CaptureRequest contains unconfigured Input/Output Surface!");
+                        throw new IllegalArgumentException(
+                                "CaptureRequest contains unconfigured Input/Output Surface!");
                     }
                 }
                 this.mSurfaceConverted = true;
@@ -684,8 +804,19 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
     public static final class Builder {
         private final CaptureRequest mRequest;
 
-        public Builder(CameraMetadataNative template, boolean reprocess, int reprocessableSessionId, String logicalCameraId, Set<String> physicalCameraIdSet) {
-            this.mRequest = new CaptureRequest(template, reprocess, reprocessableSessionId, logicalCameraId, physicalCameraIdSet);
+        public Builder(
+                CameraMetadataNative template,
+                boolean reprocess,
+                int reprocessableSessionId,
+                String logicalCameraId,
+                Set<String> physicalCameraIdSet) {
+            this.mRequest =
+                    new CaptureRequest(
+                            template,
+                            reprocess,
+                            reprocessableSessionId,
+                            logicalCameraId,
+                            physicalCameraIdSet);
         }
 
         public void addTarget(Surface outputTarget) {
@@ -706,9 +837,11 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
 
         public <T> Builder setPhysicalCameraKey(Key<T> key, T value, String physicalCameraId) {
             if (!this.mRequest.mPhysicalCameraSettings.containsKey(physicalCameraId)) {
-                throw new IllegalArgumentException("Physical camera id: " + physicalCameraId + " is not valid!");
+                throw new IllegalArgumentException(
+                        "Physical camera id: " + physicalCameraId + " is not valid!");
             }
-            ((CameraMetadataNative) this.mRequest.mPhysicalCameraSettings.get(physicalCameraId)).set((Key<Key<T>>) key, (Key<T>) value);
+            ((CameraMetadataNative) this.mRequest.mPhysicalCameraSettings.get(physicalCameraId))
+                    .set((Key<Key<T>>) key, (Key<T>) value);
             return this;
         }
 
@@ -716,7 +849,9 @@ public final class CaptureRequest extends CameraMetadata<Key<?>> implements Parc
             if (!this.mRequest.mPhysicalCameraSettings.containsKey(str)) {
                 throw new IllegalArgumentException("Physical camera id: " + str + " is not valid!");
             }
-            return (T) ((CameraMetadataNative) this.mRequest.mPhysicalCameraSettings.get(str)).get(key);
+            return (T)
+                    ((CameraMetadataNative) this.mRequest.mPhysicalCameraSettings.get(str))
+                            .get(key);
         }
 
         public void setTag(Object tag) {

@@ -16,8 +16,7 @@ import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.view.ViewHierarchyEncoder;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.ActionMenuPresenter;
-import android.widget.LinearLayout;
+
 import com.android.internal.R;
 import com.android.internal.view.menu.ActionMenuItemView;
 import com.android.internal.view.menu.MenuBuilder;
@@ -84,7 +83,8 @@ public class ActionMenuView extends LinearLayout implements MenuBuilder.ItemInvo
         this.mOriginalOverflowEndPadding = a2.getDimensionPixelSize(69, 0);
         this.mOverflowButtonMinWidth = a2.getDimensionPixelSize(36, 0);
         a2.recycle();
-        this.mOverflowBadgeText = context.getResources().getString(R.string.sem_action_menu_overflow_badge_text_n);
+        this.mOverflowBadgeText =
+                context.getResources().getString(R.string.sem_action_menu_overflow_badge_text_n);
     }
 
     public void setPopupTheme(int resId) {
@@ -156,7 +156,8 @@ public class ActionMenuView extends LinearLayout implements MenuBuilder.ItemInvo
             lp.rightMargin = 0;
             lp.leftMargin = 0;
             if (child instanceof ActionMenuItemView) {
-                child.setPaddingRelative(this.mOriginalStartPadding, 0, this.mOriginalEndPadding, 0);
+                child.setPaddingRelative(
+                        this.mOriginalStartPadding, 0, this.mOriginalEndPadding, 0);
                 if (this.mIsThemeDeviceDefaultFamily && i == childCount - 1) {
                     if (((ActionMenuItemView) child).hasText()) {
                         if (getLayoutDirection() == 0) {
@@ -169,17 +170,30 @@ public class ActionMenuView extends LinearLayout implements MenuBuilder.ItemInvo
                     } else {
                         ((ActionMenuItemView) child).setMinWidth(this.mOverflowButtonMinWidth);
                         ((ActionMenuItemView) child).setLayoutParams(lp);
-                        ((ActionMenuItemView) child).setPaddingRelative(this.mOriginalOverflowStartPadding, 0, this.mOriginalOverflowEndPadding, 0);
+                        ((ActionMenuItemView) child)
+                                .setPaddingRelative(
+                                        this.mOriginalOverflowStartPadding,
+                                        0,
+                                        this.mOriginalOverflowEndPadding,
+                                        0);
                     }
                 }
             } else if (lp.isOverflowButton) {
                 if (child instanceof ActionMenuPresenter.SemOverflowMenuButtonContainer) {
                     View child2 = ((ViewGroup) child).getChildAt(0);
-                    child2.setPaddingRelative(this.mOriginalOverflowStartPadding, 0, this.mOriginalOverflowEndPadding, 0);
+                    child2.setPaddingRelative(
+                            this.mOriginalOverflowStartPadding,
+                            0,
+                            this.mOriginalOverflowEndPadding,
+                            0);
                     child2.setMinimumWidth(this.mOverflowButtonMinWidth);
                     ((TextView) child2).setWidth(this.mOverflowButtonMinWidth);
                 } else {
-                    child.setPaddingRelative(this.mOriginalOverflowStartPadding, 0, this.mOriginalOverflowEndPadding, 0);
+                    child.setPaddingRelative(
+                            this.mOriginalOverflowStartPadding,
+                            0,
+                            this.mOriginalOverflowEndPadding,
+                            0);
                     child.setMinimumWidth(this.mOverflowButtonMinWidth);
                 }
             }
@@ -203,20 +217,30 @@ public class ActionMenuView extends LinearLayout implements MenuBuilder.ItemInvo
             Method dump skipped, instructions count: 781
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.ActionMenuView.onMeasureExactFormat(int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.widget.ActionMenuView.onMeasureExactFormat(int,"
+                    + " int):void");
     }
 
-    static int measureChildForCells(View child, int cellSize, int cellsRemaining, int parentHeightMeasureSpec, int parentHeightPadding) {
+    static int measureChildForCells(
+            View child,
+            int cellSize,
+            int cellsRemaining,
+            int parentHeightMeasureSpec,
+            int parentHeightPadding) {
         LayoutParams lp = (LayoutParams) child.getLayoutParams();
-        int childHeightSize = View.MeasureSpec.getSize(parentHeightMeasureSpec) - parentHeightPadding;
+        int childHeightSize =
+                View.MeasureSpec.getSize(parentHeightMeasureSpec) - parentHeightPadding;
         int childHeightMode = View.MeasureSpec.getMode(parentHeightMeasureSpec);
         int childHeightSpec = View.MeasureSpec.makeMeasureSpec(childHeightSize, childHeightMode);
-        ActionMenuItemView itemView = child instanceof ActionMenuItemView ? (ActionMenuItemView) child : null;
+        ActionMenuItemView itemView =
+                child instanceof ActionMenuItemView ? (ActionMenuItemView) child : null;
         boolean expandable = false;
         boolean hasText = itemView != null && itemView.hasText();
         int cellsUsed = 0;
         if (cellsRemaining > 0 && (!hasText || cellsRemaining >= 2)) {
-            int childWidthSpec = View.MeasureSpec.makeMeasureSpec(cellSize * cellsRemaining, Integer.MIN_VALUE);
+            int childWidthSpec =
+                    View.MeasureSpec.makeMeasureSpec(cellSize * cellsRemaining, Integer.MIN_VALUE);
             child.measure(childWidthSpec, childHeightSpec);
             int measuredWidth = child.getMeasuredWidth();
             cellsUsed = measuredWidth / cellSize;
@@ -538,12 +562,12 @@ public class ActionMenuView extends LinearLayout implements MenuBuilder.ItemInvo
     }
 
     private class MenuBuilderCallback implements MenuBuilder.Callback {
-        private MenuBuilderCallback() {
-        }
+        private MenuBuilderCallback() {}
 
         @Override // com.android.internal.view.menu.MenuBuilder.Callback
         public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
-            return ActionMenuView.this.mOnMenuItemClickListener != null && ActionMenuView.this.mOnMenuItemClickListener.onMenuItemClick(item);
+            return ActionMenuView.this.mOnMenuItemClickListener != null
+                    && ActionMenuView.this.mOnMenuItemClickListener.onMenuItemClick(item);
         }
 
         @Override // com.android.internal.view.menu.MenuBuilder.Callback
@@ -555,12 +579,10 @@ public class ActionMenuView extends LinearLayout implements MenuBuilder.ItemInvo
     }
 
     private class ActionMenuPresenterCallback implements MenuPresenter.Callback {
-        private ActionMenuPresenterCallback() {
-        }
+        private ActionMenuPresenterCallback() {}
 
         @Override // com.android.internal.view.menu.MenuPresenter.Callback
-        public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
-        }
+        public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {}
 
         @Override // com.android.internal.view.menu.MenuPresenter.Callback
         public boolean onOpenSubMenu(MenuBuilder subMenu) {
@@ -575,6 +597,7 @@ public class ActionMenuView extends LinearLayout implements MenuBuilder.ItemInvo
 
         @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT)
         public boolean expandable;
+
         public boolean expanded;
 
         @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT)
@@ -609,7 +632,8 @@ public class ActionMenuView extends LinearLayout implements MenuBuilder.ItemInvo
             this.isOverflowButton = isOverflowButton;
         }
 
-        @Override // android.widget.LinearLayout.LayoutParams, android.view.ViewGroup.MarginLayoutParams, android.view.ViewGroup.LayoutParams
+        @Override // android.widget.LinearLayout.LayoutParams,
+                  // android.view.ViewGroup.MarginLayoutParams, android.view.ViewGroup.LayoutParams
         protected void encodeProperties(ViewHierarchyEncoder encoder) {
             super.encodeProperties(encoder);
             encoder.addProperty("layout:overFlowButton", this.isOverflowButton);

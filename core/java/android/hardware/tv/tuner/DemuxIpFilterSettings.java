@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class DemuxIpFilterSettings implements Parcelable {
-    public static final Parcelable.Creator<DemuxIpFilterSettings> CREATOR = new Parcelable.Creator<DemuxIpFilterSettings>() { // from class: android.hardware.tv.tuner.DemuxIpFilterSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxIpFilterSettings createFromParcel(Parcel _aidl_source) {
-            DemuxIpFilterSettings _aidl_out = new DemuxIpFilterSettings();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DemuxIpFilterSettings> CREATOR =
+            new Parcelable.Creator<DemuxIpFilterSettings>() { // from class:
+                // android.hardware.tv.tuner.DemuxIpFilterSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxIpFilterSettings createFromParcel(Parcel _aidl_source) {
+                    DemuxIpFilterSettings _aidl_out = new DemuxIpFilterSettings();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxIpFilterSettings[] newArray(int _aidl_size) {
-            return new DemuxIpFilterSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxIpFilterSettings[] newArray(int _aidl_size) {
+                    return new DemuxIpFilterSettings[_aidl_size];
+                }
+            };
     public DemuxIpFilterSettingsFilterSettings filterSettings;
     public DemuxIpAddress ipAddr;
 
@@ -62,7 +64,10 @@ public class DemuxIpFilterSettings implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.filterSettings = (DemuxIpFilterSettingsFilterSettings) _aidl_parcel.readTypedObject(DemuxIpFilterSettingsFilterSettings.CREATOR);
+                this.filterSettings =
+                        (DemuxIpFilterSettingsFilterSettings)
+                                _aidl_parcel.readTypedObject(
+                                        DemuxIpFilterSettingsFilterSettings.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

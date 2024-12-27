@@ -1,7 +1,6 @@
 package android.media;
 
 import android.graphics.Bitmap;
-import android.media.MediaDescription;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -10,6 +9,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -19,12 +19,15 @@ import java.util.Set;
 public final class MediaMetadata implements Parcelable {
     public static final Parcelable.Creator<MediaMetadata> CREATOR;
     private static final SparseArray<String> EDITOR_KEY_MAPPING;
-    public static final String METADATA_KEY_BT_FOLDER_TYPE = "android.media.metadata.BT_FOLDER_TYPE";
+    public static final String METADATA_KEY_BT_FOLDER_TYPE =
+            "android.media.metadata.BT_FOLDER_TYPE";
     public static final String METADATA_KEY_COMPILATION = "android.media.metadata.COMPILATION";
     public static final String METADATA_KEY_DATE = "android.media.metadata.DATE";
     public static final String METADATA_KEY_DISC_NUMBER = "android.media.metadata.DISC_NUMBER";
-    public static final String METADATA_KEY_DISPLAY_DESCRIPTION = "android.media.metadata.DISPLAY_DESCRIPTION";
-    public static final String METADATA_KEY_DISPLAY_SUBTITLE = "android.media.metadata.DISPLAY_SUBTITLE";
+    public static final String METADATA_KEY_DISPLAY_DESCRIPTION =
+            "android.media.metadata.DISPLAY_DESCRIPTION";
+    public static final String METADATA_KEY_DISPLAY_SUBTITLE =
+            "android.media.metadata.DISPLAY_SUBTITLE";
     public static final String METADATA_KEY_DISPLAY_TITLE = "android.media.metadata.DISPLAY_TITLE";
     public static final String METADATA_KEY_DURATION = "android.media.metadata.DURATION";
     public static final String METADATA_KEY_GENRE = "android.media.metadata.GENRE";
@@ -51,32 +54,41 @@ public final class MediaMetadata implements Parcelable {
     public static final String METADATA_KEY_WRITER = "android.media.metadata.WRITER";
     public static final String METADATA_KEY_AUTHOR = "android.media.metadata.AUTHOR";
     public static final String METADATA_KEY_COMPOSER = "android.media.metadata.COMPOSER";
-    private static final String[] PREFERRED_DESCRIPTION_ORDER = {METADATA_KEY_TITLE, METADATA_KEY_ARTIST, METADATA_KEY_ALBUM, METADATA_KEY_ALBUM_ARTIST, METADATA_KEY_WRITER, METADATA_KEY_AUTHOR, METADATA_KEY_COMPOSER};
+    private static final String[] PREFERRED_DESCRIPTION_ORDER = {
+        METADATA_KEY_TITLE,
+        METADATA_KEY_ARTIST,
+        METADATA_KEY_ALBUM,
+        METADATA_KEY_ALBUM_ARTIST,
+        METADATA_KEY_WRITER,
+        METADATA_KEY_AUTHOR,
+        METADATA_KEY_COMPOSER
+    };
     public static final String METADATA_KEY_DISPLAY_ICON = "android.media.metadata.DISPLAY_ICON";
     public static final String METADATA_KEY_ART = "android.media.metadata.ART";
     public static final String METADATA_KEY_ALBUM_ART = "android.media.metadata.ALBUM_ART";
-    private static final String[] PREFERRED_BITMAP_ORDER = {METADATA_KEY_DISPLAY_ICON, METADATA_KEY_ART, METADATA_KEY_ALBUM_ART};
-    public static final String METADATA_KEY_DISPLAY_ICON_URI = "android.media.metadata.DISPLAY_ICON_URI";
+    private static final String[] PREFERRED_BITMAP_ORDER = {
+        METADATA_KEY_DISPLAY_ICON, METADATA_KEY_ART, METADATA_KEY_ALBUM_ART
+    };
+    public static final String METADATA_KEY_DISPLAY_ICON_URI =
+            "android.media.metadata.DISPLAY_ICON_URI";
     public static final String METADATA_KEY_ART_URI = "android.media.metadata.ART_URI";
     public static final String METADATA_KEY_ALBUM_ART_URI = "android.media.metadata.ALBUM_ART_URI";
-    private static final String[] PREFERRED_URI_ORDER = {METADATA_KEY_DISPLAY_ICON_URI, METADATA_KEY_ART_URI, METADATA_KEY_ALBUM_ART_URI};
+    private static final String[] PREFERRED_URI_ORDER = {
+        METADATA_KEY_DISPLAY_ICON_URI, METADATA_KEY_ART_URI, METADATA_KEY_ALBUM_ART_URI
+    };
     private static final ArrayMap<String, Integer> METADATA_KEYS_TYPE = new ArrayMap<>();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BitmapKey {
-    }
+    public @interface BitmapKey {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LongKey {
-    }
+    public @interface LongKey {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RatingKey {
-    }
+    public @interface RatingKey {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TextKey {
-    }
+    public @interface TextKey {}
 
     static {
         METADATA_KEYS_TYPE.put(METADATA_KEY_TITLE, 1);
@@ -127,19 +139,21 @@ public final class MediaMetadata implements Parcelable {
         EDITOR_KEY_MAPPING.put(7, METADATA_KEY_TITLE);
         EDITOR_KEY_MAPPING.put(11, METADATA_KEY_WRITER);
         EDITOR_KEY_MAPPING.put(8, METADATA_KEY_YEAR);
-        CREATOR = new Parcelable.Creator<MediaMetadata>() { // from class: android.media.MediaMetadata.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public MediaMetadata createFromParcel(Parcel in) {
-                return new MediaMetadata(in);
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        MediaMetadata>() { // from class: android.media.MediaMetadata.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public MediaMetadata createFromParcel(Parcel in) {
+                        return new MediaMetadata(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public MediaMetadata[] newArray(int size) {
-                return new MediaMetadata[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public MediaMetadata[] newArray(int size) {
+                        return new MediaMetadata[size];
+                    }
+                };
     }
 
     private MediaMetadata(Bundle bundle, int bitmapDimensionLimit) {
@@ -285,7 +299,8 @@ public final class MediaMetadata implements Parcelable {
         bob.setMediaUri(mediaUri);
         if (this.mBundle.containsKey(METADATA_KEY_BT_FOLDER_TYPE)) {
             Bundle bundle = new Bundle();
-            bundle.putLong(MediaDescription.EXTRA_BT_FOLDER_TYPE, getLong(METADATA_KEY_BT_FOLDER_TYPE));
+            bundle.putLong(
+                    MediaDescription.EXTRA_BT_FOLDER_TYPE, getLong(METADATA_KEY_BT_FOLDER_TYPE));
             bob.setExtras(bundle);
         }
         this.mDescription = bob.build();
@@ -354,40 +369,50 @@ public final class MediaMetadata implements Parcelable {
         }
 
         public Builder putText(String key, CharSequence value) {
-            if (MediaMetadata.METADATA_KEYS_TYPE.containsKey(key) && ((Integer) MediaMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 1) {
-                throw new IllegalArgumentException("The " + key + " key cannot be used to put a CharSequence");
+            if (MediaMetadata.METADATA_KEYS_TYPE.containsKey(key)
+                    && ((Integer) MediaMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 1) {
+                throw new IllegalArgumentException(
+                        "The " + key + " key cannot be used to put a CharSequence");
             }
             this.mBundle.putCharSequence(key, value);
             return this;
         }
 
         public Builder putString(String key, String value) {
-            if (MediaMetadata.METADATA_KEYS_TYPE.containsKey(key) && ((Integer) MediaMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 1) {
-                throw new IllegalArgumentException("The " + key + " key cannot be used to put a String");
+            if (MediaMetadata.METADATA_KEYS_TYPE.containsKey(key)
+                    && ((Integer) MediaMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 1) {
+                throw new IllegalArgumentException(
+                        "The " + key + " key cannot be used to put a String");
             }
             this.mBundle.putCharSequence(key, value);
             return this;
         }
 
         public Builder putLong(String key, long value) {
-            if (MediaMetadata.METADATA_KEYS_TYPE.containsKey(key) && ((Integer) MediaMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 0) {
-                throw new IllegalArgumentException("The " + key + " key cannot be used to put a long");
+            if (MediaMetadata.METADATA_KEYS_TYPE.containsKey(key)
+                    && ((Integer) MediaMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 0) {
+                throw new IllegalArgumentException(
+                        "The " + key + " key cannot be used to put a long");
             }
             this.mBundle.putLong(key, value);
             return this;
         }
 
         public Builder putRating(String key, Rating value) {
-            if (MediaMetadata.METADATA_KEYS_TYPE.containsKey(key) && ((Integer) MediaMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 3) {
-                throw new IllegalArgumentException("The " + key + " key cannot be used to put a Rating");
+            if (MediaMetadata.METADATA_KEYS_TYPE.containsKey(key)
+                    && ((Integer) MediaMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 3) {
+                throw new IllegalArgumentException(
+                        "The " + key + " key cannot be used to put a Rating");
             }
             this.mBundle.putParcelable(key, value);
             return this;
         }
 
         public Builder putBitmap(String key, Bitmap value) {
-            if (MediaMetadata.METADATA_KEYS_TYPE.containsKey(key) && ((Integer) MediaMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 2) {
-                throw new IllegalArgumentException("The " + key + " key cannot be used to put a Bitmap");
+            if (MediaMetadata.METADATA_KEYS_TYPE.containsKey(key)
+                    && ((Integer) MediaMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 2) {
+                throw new IllegalArgumentException(
+                        "The " + key + " key cannot be used to put a Bitmap");
             }
             this.mBundle.putParcelable(key, value);
             return this;
@@ -397,7 +422,10 @@ public final class MediaMetadata implements Parcelable {
             if (bitmapDimensionLimit > 0) {
                 this.mBitmapDimensionLimit = bitmapDimensionLimit;
             } else {
-                Log.w(MediaMetadata.TAG, "setBitmapDimensionLimit(): Ignoring non-positive bitmapDimensionLimit: " + bitmapDimensionLimit);
+                Log.w(
+                        MediaMetadata.TAG,
+                        "setBitmapDimensionLimit(): Ignoring non-positive bitmapDimensionLimit: "
+                                + bitmapDimensionLimit);
             }
             return this;
         }
@@ -408,7 +436,8 @@ public final class MediaMetadata implements Parcelable {
                     Object value = this.mBundle.get(key);
                     if (value instanceof Bitmap) {
                         Bitmap bmp = (Bitmap) value;
-                        if (bmp.getHeight() > this.mBitmapDimensionLimit || bmp.getWidth() > this.mBitmapDimensionLimit) {
+                        if (bmp.getHeight() > this.mBitmapDimensionLimit
+                                || bmp.getWidth() > this.mBitmapDimensionLimit) {
                             putBitmap(key, scaleBitmap(bmp, this.mBitmapDimensionLimit));
                         }
                     }

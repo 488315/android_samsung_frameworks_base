@@ -11,19 +11,21 @@ public final class OverlayInfoExt implements Parcelable {
     public final int category;
     public final int configFlags;
     public final OverlayInfo info;
-    public static final Parcelable.Creator<OverlayInfoExt> CREATOR = new Parcelable.Creator<OverlayInfoExt>() { // from class: android.content.om.OverlayInfoExt.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverlayInfoExt createFromParcel(Parcel in) {
-            return new OverlayInfoExt(in);
-        }
+    public static final Parcelable.Creator<OverlayInfoExt> CREATOR =
+            new Parcelable.Creator<
+                    OverlayInfoExt>() { // from class: android.content.om.OverlayInfoExt.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverlayInfoExt createFromParcel(Parcel in) {
+                    return new OverlayInfoExt(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverlayInfoExt[] newArray(int size) {
-            return new OverlayInfoExt[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverlayInfoExt[] newArray(int size) {
+                    return new OverlayInfoExt[size];
+                }
+            };
     private static final String TAG = OverlayInfo.class.getSimpleName();
 
     public OverlayInfoExt(int category, int configFlags, OverlayInfo info) {
@@ -54,7 +56,8 @@ public final class OverlayInfoExt implements Parcelable {
         return null;
     }
 
-    public static String getFormattedCategory(String overlayCategory, int category, int configFlags) {
+    public static String getFormattedCategory(
+            String overlayCategory, int category, int configFlags) {
         return TextUtils.emptyIfNull(overlayCategory) + ":" + category + ":" + configFlags;
     }
 
@@ -73,7 +76,8 @@ public final class OverlayInfoExt implements Parcelable {
         return false;
     }
 
-    public static boolean isOverlayInfoExtOfCategory(OverlayInfoExt overlay, int requestedCategory) {
+    public static boolean isOverlayInfoExtOfCategory(
+            OverlayInfoExt overlay, int requestedCategory) {
         return overlay != null && isOverlayInfoExtOfCategory(overlay.info, requestedCategory);
     }
 
@@ -116,7 +120,13 @@ public final class OverlayInfoExt implements Parcelable {
     }
 
     public String toString() {
-        return "OverlayInfoExt{configFlags=" + this.configFlags + ", category=" + this.category + ", info=" + this.info + '}';
+        return "OverlayInfoExt{configFlags="
+                + this.configFlags
+                + ", category="
+                + this.category
+                + ", info="
+                + this.info
+                + '}';
     }
 
     public static final class Category {
@@ -125,7 +135,6 @@ public final class OverlayInfoExt implements Parcelable {
         public static final int THEME = 0;
         public static final int THEME_PARK = 2;
 
-        private Category() {
-        }
+        private Category() {}
     }
 }

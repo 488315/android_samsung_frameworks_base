@@ -7,8 +7,8 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
-import android.telephony.DataSpecificRegistrationInfo;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -20,19 +20,22 @@ import java.util.stream.Collectors;
 
 /* loaded from: classes4.dex */
 public final class NetworkRegistrationInfo implements Parcelable {
-    public static final Parcelable.Creator<NetworkRegistrationInfo> CREATOR = new Parcelable.Creator<NetworkRegistrationInfo>() { // from class: android.telephony.NetworkRegistrationInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkRegistrationInfo createFromParcel(Parcel source) {
-            return new NetworkRegistrationInfo(source);
-        }
+    public static final Parcelable.Creator<NetworkRegistrationInfo> CREATOR =
+            new Parcelable.Creator<
+                    NetworkRegistrationInfo>() { // from class:
+                                                 // android.telephony.NetworkRegistrationInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkRegistrationInfo createFromParcel(Parcel source) {
+                    return new NetworkRegistrationInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkRegistrationInfo[] newArray(int size) {
-            return new NetworkRegistrationInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkRegistrationInfo[] newArray(int size) {
+                    return new NetworkRegistrationInfo[size];
+                }
+            };
     public static final int DOMAIN_CS = 1;
     public static final int DOMAIN_CS_PS = 3;
     public static final int DOMAIN_PS = 2;
@@ -44,26 +47,19 @@ public final class NetworkRegistrationInfo implements Parcelable {
     public static final int NR_STATE_NOT_RESTRICTED = 2;
     public static final int NR_STATE_RESTRICTED = 1;
 
-    @SystemApi
-    public static final int REGISTRATION_STATE_DENIED = 3;
+    @SystemApi public static final int REGISTRATION_STATE_DENIED = 3;
 
-    @SystemApi
-    public static final int REGISTRATION_STATE_EMERGENCY = 6;
+    @SystemApi public static final int REGISTRATION_STATE_EMERGENCY = 6;
 
-    @SystemApi
-    public static final int REGISTRATION_STATE_HOME = 1;
+    @SystemApi public static final int REGISTRATION_STATE_HOME = 1;
 
-    @SystemApi
-    public static final int REGISTRATION_STATE_NOT_REGISTERED_OR_SEARCHING = 0;
+    @SystemApi public static final int REGISTRATION_STATE_NOT_REGISTERED_OR_SEARCHING = 0;
 
-    @SystemApi
-    public static final int REGISTRATION_STATE_NOT_REGISTERED_SEARCHING = 2;
+    @SystemApi public static final int REGISTRATION_STATE_NOT_REGISTERED_SEARCHING = 2;
 
-    @SystemApi
-    public static final int REGISTRATION_STATE_ROAMING = 5;
+    @SystemApi public static final int REGISTRATION_STATE_ROAMING = 5;
 
-    @SystemApi
-    public static final int REGISTRATION_STATE_UNKNOWN = 4;
+    @SystemApi public static final int REGISTRATION_STATE_UNKNOWN = 4;
     public static final long RETURN_REGISTRATION_STATE_EMERGENCY = 255938466;
     public static final int SERVICE_TYPE_DATA = 2;
     public static final int SERVICE_TYPE_EMERGENCY = 5;
@@ -90,22 +86,30 @@ public final class NetworkRegistrationInfo implements Parcelable {
     private VoiceSpecificRegistrationInfo mVoiceSpecificInfo;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Domain {
-    }
+    public @interface Domain {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NRState {
-    }
+    public @interface NRState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RegistrationState {
-    }
+    public @interface RegistrationState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ServiceType {
-    }
+    public @interface ServiceType {}
 
-    private NetworkRegistrationInfo(int domain, int transportType, int registrationState, int accessNetworkTechnology, int rejectCause, boolean emergencyOnly, List<Integer> availableServices, CellIdentity cellIdentity, String rplmn, VoiceSpecificRegistrationInfo voiceSpecificInfo, DataSpecificRegistrationInfo dataSpecificInfo, boolean isNonTerrestrialNetwork) {
+    private NetworkRegistrationInfo(
+            int domain,
+            int transportType,
+            int registrationState,
+            int accessNetworkTechnology,
+            int rejectCause,
+            boolean emergencyOnly,
+            List<Integer> availableServices,
+            CellIdentity cellIdentity,
+            String rplmn,
+            VoiceSpecificRegistrationInfo voiceSpecificInfo,
+            DataSpecificRegistrationInfo dataSpecificInfo,
+            boolean isNonTerrestrialNetwork) {
         this.mDomain = domain;
         this.mTransportType = transportType;
         this.mRegistrationState = registrationState;
@@ -113,7 +117,8 @@ public final class NetworkRegistrationInfo implements Parcelable {
         this.mRoamingType = registrationState == 5 ? 1 : 0;
         setAccessNetworkTechnology(accessNetworkTechnology);
         this.mRejectCause = rejectCause;
-        this.mAvailableServices = availableServices != null ? new ArrayList<>(availableServices) : new ArrayList<>();
+        this.mAvailableServices =
+                availableServices != null ? new ArrayList<>(availableServices) : new ArrayList<>();
         this.mCellIdentity = cellIdentity;
         this.mEmergencyOnly = emergencyOnly;
         this.mNrState = 0;
@@ -124,12 +129,69 @@ public final class NetworkRegistrationInfo implements Parcelable {
         updateNrState();
     }
 
-    public NetworkRegistrationInfo(int domain, int transportType, int registrationState, int accessNetworkTechnology, int rejectCause, boolean emergencyOnly, List<Integer> availableServices, CellIdentity cellIdentity, String rplmn, boolean cssSupported, int roamingIndicator, int systemIsInPrl, int defaultRoamingIndicator) {
-        this(domain, transportType, registrationState, accessNetworkTechnology, rejectCause, emergencyOnly, availableServices, cellIdentity, rplmn, new VoiceSpecificRegistrationInfo(cssSupported, roamingIndicator, systemIsInPrl, defaultRoamingIndicator), null, false);
+    public NetworkRegistrationInfo(
+            int domain,
+            int transportType,
+            int registrationState,
+            int accessNetworkTechnology,
+            int rejectCause,
+            boolean emergencyOnly,
+            List<Integer> availableServices,
+            CellIdentity cellIdentity,
+            String rplmn,
+            boolean cssSupported,
+            int roamingIndicator,
+            int systemIsInPrl,
+            int defaultRoamingIndicator) {
+        this(
+                domain,
+                transportType,
+                registrationState,
+                accessNetworkTechnology,
+                rejectCause,
+                emergencyOnly,
+                availableServices,
+                cellIdentity,
+                rplmn,
+                new VoiceSpecificRegistrationInfo(
+                        cssSupported, roamingIndicator, systemIsInPrl, defaultRoamingIndicator),
+                null,
+                false);
     }
 
-    public NetworkRegistrationInfo(int domain, int transportType, int registrationState, int accessNetworkTechnology, int rejectCause, boolean emergencyOnly, List<Integer> availableServices, CellIdentity cellIdentity, String rplmn, int maxDataCalls, boolean isDcNrRestricted, boolean isNrAvailable, boolean isEndcAvailable, VopsSupportInfo vopsSupportInfo) {
-        this(domain, transportType, registrationState, accessNetworkTechnology, rejectCause, emergencyOnly, availableServices, cellIdentity, rplmn, null, new DataSpecificRegistrationInfo.Builder(maxDataCalls).setDcNrRestricted(isDcNrRestricted).setNrAvailable(isNrAvailable).setEnDcAvailable(isEndcAvailable).setVopsSupportInfo(vopsSupportInfo).build(), false);
+    public NetworkRegistrationInfo(
+            int domain,
+            int transportType,
+            int registrationState,
+            int accessNetworkTechnology,
+            int rejectCause,
+            boolean emergencyOnly,
+            List<Integer> availableServices,
+            CellIdentity cellIdentity,
+            String rplmn,
+            int maxDataCalls,
+            boolean isDcNrRestricted,
+            boolean isNrAvailable,
+            boolean isEndcAvailable,
+            VopsSupportInfo vopsSupportInfo) {
+        this(
+                domain,
+                transportType,
+                registrationState,
+                accessNetworkTechnology,
+                rejectCause,
+                emergencyOnly,
+                availableServices,
+                cellIdentity,
+                rplmn,
+                null,
+                new DataSpecificRegistrationInfo.Builder(maxDataCalls)
+                        .setDcNrRestricted(isDcNrRestricted)
+                        .setNrAvailable(isNrAvailable)
+                        .setEnDcAvailable(isEndcAvailable)
+                        .setVopsSupportInfo(vopsSupportInfo)
+                        .build(),
+                false);
     }
 
     private NetworkRegistrationInfo(Parcel source) {
@@ -143,9 +205,20 @@ public final class NetworkRegistrationInfo implements Parcelable {
         this.mEmergencyOnly = source.readBoolean();
         this.mAvailableServices = new ArrayList<>();
         source.readList(this.mAvailableServices, Integer.class.getClassLoader(), Integer.class);
-        this.mCellIdentity = (CellIdentity) source.readParcelable(CellIdentity.class.getClassLoader(), CellIdentity.class);
-        this.mVoiceSpecificInfo = (VoiceSpecificRegistrationInfo) source.readParcelable(VoiceSpecificRegistrationInfo.class.getClassLoader(), VoiceSpecificRegistrationInfo.class);
-        this.mDataSpecificInfo = (DataSpecificRegistrationInfo) source.readParcelable(DataSpecificRegistrationInfo.class.getClassLoader(), DataSpecificRegistrationInfo.class);
+        this.mCellIdentity =
+                (CellIdentity)
+                        source.readParcelable(
+                                CellIdentity.class.getClassLoader(), CellIdentity.class);
+        this.mVoiceSpecificInfo =
+                (VoiceSpecificRegistrationInfo)
+                        source.readParcelable(
+                                VoiceSpecificRegistrationInfo.class.getClassLoader(),
+                                VoiceSpecificRegistrationInfo.class);
+        this.mDataSpecificInfo =
+                (DataSpecificRegistrationInfo)
+                        source.readParcelable(
+                                DataSpecificRegistrationInfo.class.getClassLoader(),
+                                DataSpecificRegistrationInfo.class);
         this.mNrState = source.readInt();
         this.mRplmn = source.readString();
         this.mIsUsingCarrierAggregation = source.readBoolean();
@@ -200,7 +273,8 @@ public final class NetworkRegistrationInfo implements Parcelable {
     @SystemApi
     @Deprecated
     public int getRegistrationState() {
-        if (this.mRegistrationState == 6 && !CompatChanges.isChangeEnabled(RETURN_REGISTRATION_STATE_EMERGENCY)) {
+        if (this.mRegistrationState == 6
+                && !CompatChanges.isChangeEnabled(RETURN_REGISTRATION_STATE_EMERGENCY)) {
             if (this.mAccessNetworkTechnology == 13) {
                 return 3;
             }
@@ -401,18 +475,80 @@ public final class NetworkRegistrationInfo implements Parcelable {
     }
 
     public String toString() {
-        return "NetworkRegistrationInfo{ domain=" + domainToString(this.mDomain) + " transportType=" + AccessNetworkConstants.transportTypeToString(this.mTransportType) + " registrationState=" + registrationStateToString(this.mRegistrationState) + " networkRegistrationState=" + registrationStateToString(this.mNetworkRegistrationState) + " roamingType=" + ServiceState.roamingTypeToString(this.mRoamingType) + " accessNetworkTechnology=" + TelephonyManager.getNetworkTypeName(this.mAccessNetworkTechnology) + " rejectCause=" + this.mRejectCause + " emergencyEnabled=" + this.mEmergencyOnly + " availableServices=" + (NavigationBarInflaterView.SIZE_MOD_START + (this.mAvailableServices != null ? (String) this.mAvailableServices.stream().map(new Function() { // from class: android.telephony.NetworkRegistrationInfo$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String serviceTypeToString;
-                serviceTypeToString = NetworkRegistrationInfo.serviceTypeToString(((Integer) obj).intValue());
-                return serviceTypeToString;
-            }
-        }).collect(Collectors.joining(",")) : null) + NavigationBarInflaterView.SIZE_MOD_END) + " cellIdentity=" + this.mCellIdentity + " voiceSpecificInfo=" + this.mVoiceSpecificInfo + " dataSpecificInfo=" + this.mDataSpecificInfo + " nrState=" + (Build.IS_DEBUGGABLE ? nrStateToString(this.mNrState) : "****") + " rRplmn=" + this.mRplmn + " isUsingCarrierAggregation=" + this.mIsUsingCarrierAggregation + " isNonTerrestrialNetwork=" + isNonTerrestrialNetworkToString(this.mIsNonTerrestrialNetwork) + "}";
+        return "NetworkRegistrationInfo{ domain="
+                + domainToString(this.mDomain)
+                + " transportType="
+                + AccessNetworkConstants.transportTypeToString(this.mTransportType)
+                + " registrationState="
+                + registrationStateToString(this.mRegistrationState)
+                + " networkRegistrationState="
+                + registrationStateToString(this.mNetworkRegistrationState)
+                + " roamingType="
+                + ServiceState.roamingTypeToString(this.mRoamingType)
+                + " accessNetworkTechnology="
+                + TelephonyManager.getNetworkTypeName(this.mAccessNetworkTechnology)
+                + " rejectCause="
+                + this.mRejectCause
+                + " emergencyEnabled="
+                + this.mEmergencyOnly
+                + " availableServices="
+                + (NavigationBarInflaterView.SIZE_MOD_START
+                        + (this.mAvailableServices != null
+                                ? (String)
+                                        this.mAvailableServices.stream()
+                                                .map(
+                                                        new Function() { // from class:
+                                                                         // android.telephony.NetworkRegistrationInfo$$ExternalSyntheticLambda0
+                                                            @Override // java.util.function.Function
+                                                            public final Object apply(Object obj) {
+                                                                String serviceTypeToString;
+                                                                serviceTypeToString =
+                                                                        NetworkRegistrationInfo
+                                                                                .serviceTypeToString(
+                                                                                        ((Integer)
+                                                                                                        obj)
+                                                                                                .intValue());
+                                                                return serviceTypeToString;
+                                                            }
+                                                        })
+                                                .collect(Collectors.joining(","))
+                                : null)
+                        + NavigationBarInflaterView.SIZE_MOD_END)
+                + " cellIdentity="
+                + this.mCellIdentity
+                + " voiceSpecificInfo="
+                + this.mVoiceSpecificInfo
+                + " dataSpecificInfo="
+                + this.mDataSpecificInfo
+                + " nrState="
+                + (Build.IS_DEBUGGABLE ? nrStateToString(this.mNrState) : "****")
+                + " rRplmn="
+                + this.mRplmn
+                + " isUsingCarrierAggregation="
+                + this.mIsUsingCarrierAggregation
+                + " isNonTerrestrialNetwork="
+                + isNonTerrestrialNetworkToString(this.mIsNonTerrestrialNetwork)
+                + "}";
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mDomain), Integer.valueOf(this.mTransportType), Integer.valueOf(this.mRegistrationState), Integer.valueOf(this.mNetworkRegistrationState), Integer.valueOf(this.mRoamingType), Integer.valueOf(this.mAccessNetworkTechnology), Integer.valueOf(this.mRejectCause), Boolean.valueOf(this.mEmergencyOnly), this.mAvailableServices, this.mCellIdentity, this.mVoiceSpecificInfo, this.mDataSpecificInfo, Integer.valueOf(this.mNrState), this.mRplmn, Boolean.valueOf(this.mIsUsingCarrierAggregation), Boolean.valueOf(this.mIsNonTerrestrialNetwork));
+        return Objects.hash(
+                Integer.valueOf(this.mDomain),
+                Integer.valueOf(this.mTransportType),
+                Integer.valueOf(this.mRegistrationState),
+                Integer.valueOf(this.mNetworkRegistrationState),
+                Integer.valueOf(this.mRoamingType),
+                Integer.valueOf(this.mAccessNetworkTechnology),
+                Integer.valueOf(this.mRejectCause),
+                Boolean.valueOf(this.mEmergencyOnly),
+                this.mAvailableServices,
+                this.mCellIdentity,
+                this.mVoiceSpecificInfo,
+                this.mDataSpecificInfo,
+                Integer.valueOf(this.mNrState),
+                this.mRplmn,
+                Boolean.valueOf(this.mIsUsingCarrierAggregation),
+                Boolean.valueOf(this.mIsNonTerrestrialNetwork));
     }
 
     public boolean equals(Object o) {
@@ -423,7 +559,22 @@ public final class NetworkRegistrationInfo implements Parcelable {
             return false;
         }
         NetworkRegistrationInfo other = (NetworkRegistrationInfo) o;
-        return this.mDomain == other.mDomain && this.mTransportType == other.mTransportType && this.mRegistrationState == other.mRegistrationState && this.mNetworkRegistrationState == other.mNetworkRegistrationState && this.mRoamingType == other.mRoamingType && this.mAccessNetworkTechnology == other.mAccessNetworkTechnology && this.mRejectCause == other.mRejectCause && this.mEmergencyOnly == other.mEmergencyOnly && this.mAvailableServices.equals(other.mAvailableServices) && this.mIsUsingCarrierAggregation == other.mIsUsingCarrierAggregation && Objects.equals(this.mCellIdentity, other.mCellIdentity) && Objects.equals(this.mVoiceSpecificInfo, other.mVoiceSpecificInfo) && Objects.equals(this.mDataSpecificInfo, other.mDataSpecificInfo) && TextUtils.equals(this.mRplmn, other.mRplmn) && this.mNrState == other.mNrState && this.mIsNonTerrestrialNetwork == other.mIsNonTerrestrialNetwork;
+        return this.mDomain == other.mDomain
+                && this.mTransportType == other.mTransportType
+                && this.mRegistrationState == other.mRegistrationState
+                && this.mNetworkRegistrationState == other.mNetworkRegistrationState
+                && this.mRoamingType == other.mRoamingType
+                && this.mAccessNetworkTechnology == other.mAccessNetworkTechnology
+                && this.mRejectCause == other.mRejectCause
+                && this.mEmergencyOnly == other.mEmergencyOnly
+                && this.mAvailableServices.equals(other.mAvailableServices)
+                && this.mIsUsingCarrierAggregation == other.mIsUsingCarrierAggregation
+                && Objects.equals(this.mCellIdentity, other.mCellIdentity)
+                && Objects.equals(this.mVoiceSpecificInfo, other.mVoiceSpecificInfo)
+                && Objects.equals(this.mDataSpecificInfo, other.mDataSpecificInfo)
+                && TextUtils.equals(this.mRplmn, other.mRplmn)
+                && this.mNrState == other.mNrState
+                && this.mIsNonTerrestrialNetwork == other.mIsNonTerrestrialNetwork;
     }
 
     @Override // android.os.Parcelable
@@ -488,8 +639,7 @@ public final class NetworkRegistrationInfo implements Parcelable {
         private int mTransportType;
         private VoiceSpecificRegistrationInfo mVoiceSpecificRegistrationInfo;
 
-        public Builder() {
-        }
+        public Builder() {}
 
         public Builder(NetworkRegistrationInfo nri) {
             this.mDomain = nri.mDomain;
@@ -501,10 +651,12 @@ public final class NetworkRegistrationInfo implements Parcelable {
             this.mAvailableServices = new ArrayList(nri.mAvailableServices);
             this.mCellIdentity = nri.mCellIdentity;
             if (nri.mDataSpecificInfo != null) {
-                this.mDataSpecificRegistrationInfo = new DataSpecificRegistrationInfo(nri.mDataSpecificInfo);
+                this.mDataSpecificRegistrationInfo =
+                        new DataSpecificRegistrationInfo(nri.mDataSpecificInfo);
             }
             if (nri.mVoiceSpecificInfo != null) {
-                this.mVoiceSpecificRegistrationInfo = new VoiceSpecificRegistrationInfo(nri.mVoiceSpecificInfo);
+                this.mVoiceSpecificRegistrationInfo =
+                        new VoiceSpecificRegistrationInfo(nri.mVoiceSpecificInfo);
             }
             this.mIsNonTerrestrialNetwork = nri.mIsNonTerrestrialNetwork;
         }
@@ -574,7 +726,19 @@ public final class NetworkRegistrationInfo implements Parcelable {
 
         @SystemApi
         public NetworkRegistrationInfo build() {
-            return new NetworkRegistrationInfo(this.mDomain, this.mTransportType, this.mNetworkRegistrationState, this.mAccessNetworkTechnology, this.mRejectCause, this.mEmergencyOnly, this.mAvailableServices, this.mCellIdentity, this.mRplmn, this.mVoiceSpecificRegistrationInfo, this.mDataSpecificRegistrationInfo, this.mIsNonTerrestrialNetwork);
+            return new NetworkRegistrationInfo(
+                    this.mDomain,
+                    this.mTransportType,
+                    this.mNetworkRegistrationState,
+                    this.mAccessNetworkTechnology,
+                    this.mRejectCause,
+                    this.mEmergencyOnly,
+                    this.mAvailableServices,
+                    this.mCellIdentity,
+                    this.mRplmn,
+                    this.mVoiceSpecificRegistrationInfo,
+                    this.mDataSpecificRegistrationInfo,
+                    this.mIsNonTerrestrialNetwork);
         }
     }
 }

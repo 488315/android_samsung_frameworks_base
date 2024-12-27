@@ -5,22 +5,26 @@ import android.content.Context;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.Process;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.sepunion.cover.BaseNfcLedCoverController;
 import com.android.server.sepunion.cover.CoverManagerServiceImpl;
 import com.android.server.sepunion.cover.CoverServiceManager;
 import com.android.server.sepunion.cover.CoverTestModeUtils;
+
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.sepunion.IPluginManager;
 import com.samsung.android.sepunion.Log;
 import com.samsung.android.sepunion.SemPluginManagerLocal;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class SemPluginManagerService extends IPluginManager.Stub implements AbsSemSystemService, AbsSemSystemServiceForS {
+public final class SemPluginManagerService extends IPluginManager.Stub
+        implements AbsSemSystemService, AbsSemSystemServiceForS {
     public final Context mContext;
     public CoverManagerServiceImpl mCoverManagerServiceImpl;
     public final boolean mIsCoverSupport;
@@ -28,12 +32,14 @@ public final class SemPluginManagerService extends IPluginManager.Stub implement
     public SemPluginManagerService(Context context) {
         Log.d("SemPluginManagerService", "SemPluginManagerService");
         this.mContext = context;
-        this.mIsCoverSupport = context.getPackageManager().hasSystemFeature("com.sec.feature.cover");
+        this.mIsCoverSupport =
+                context.getPackageManager().hasSystemFeature("com.sec.feature.cover");
         initialize();
     }
 
     @Override // com.android.server.sepunion.AbsSemSystemService
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (strArr == null || strArr.length == 0 || !strArr[0].equals("cover")) {
             dumpCoverInfomation(fileDescriptor, printWriter, strArr);
         } else {
@@ -41,9 +47,13 @@ public final class SemPluginManagerService extends IPluginManager.Stub implement
         }
     }
 
-    public final void dumpCoverInfomation(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dumpCoverInfomation(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (this.mIsCoverSupport) {
-            printWriter.println("\n##### SEP COVER MANAGER SERVICE #####\n##### (dumpsys sepunion cover) #####\n");
+            printWriter.println(
+                    "\n"
+                        + "##### SEP COVER MANAGER SERVICE #####\n"
+                        + "##### (dumpsys sepunion cover) #####\n");
             if (strArr == null || strArr.length == 0) {
                 this.mCoverManagerServiceImpl.dump(fileDescriptor, printWriter, strArr);
                 return;
@@ -59,17 +69,23 @@ public final class SemPluginManagerService extends IPluginManager.Stub implement
                 System.nanoTime();
                 coverManagerServiceImpl2.notifyCoverSwitchStateChanged(true);
             } else if (strArr[0].equals("secure_on")) {
-                if (((DevicePolicyManager) this.mContext.getSystemService("device_policy")).resetPassword("111111", 1)) {
+                if (((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                        .resetPassword("111111", 1)) {
                     return;
                 }
-                Log.d("SemPluginManagerService", "dumpCoverInfomation: resetPassword(secure_on) failed.");
+                Log.d(
+                        "SemPluginManagerService",
+                        "dumpCoverInfomation: resetPassword(secure_on) failed.");
             } else if (!strArr[0].equals("secure_off")) {
                 this.mCoverManagerServiceImpl.dump(fileDescriptor, printWriter, strArr);
             } else {
-                if (((DevicePolicyManager) this.mContext.getSystemService("device_policy")).resetPassword("", 1)) {
+                if (((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                        .resetPassword("", 1)) {
                     return;
                 }
-                Log.d("SemPluginManagerService", "dumpCoverInfomation: resetPassword(secure_off) failed.");
+                Log.d(
+                        "SemPluginManagerService",
+                        "dumpCoverInfomation: resetPassword(secure_off) failed.");
             }
         }
     }
@@ -93,8 +109,10 @@ public final class SemPluginManagerService extends IPluginManager.Stub implement
         if (this.mIsCoverSupport) {
             this.mCoverManagerServiceImpl = new CoverManagerServiceImpl(this.mContext);
         }
-        if (((SemPluginManagerLocal) LocalServices.getService(SemPluginManagerLocal.class)) == null) {
-            LocalServices.addService(SemPluginManagerLocal.class, new SemPluginLocalService(this.mContext));
+        if (((SemPluginManagerLocal) LocalServices.getService(SemPluginManagerLocal.class))
+                == null) {
+            LocalServices.addService(
+                    SemPluginManagerLocal.class, new SemPluginLocalService(this.mContext));
         }
     }
 
@@ -110,24 +128,42 @@ public final class SemPluginManagerService extends IPluginManager.Stub implement
         if (this.mIsCoverSupport) {
             CoverManagerServiceImpl coverManagerServiceImpl = this.mCoverManagerServiceImpl;
             if (!coverManagerServiceImpl.mSystemReady) {
-                Log.d("CoverManager_CoverManagerServiceImpl", "notifySmartCoverAttachStateChanged : return because system is not yet ready");
+                Log.d(
+                        "CoverManager_CoverManagerServiceImpl",
+                        "notifySmartCoverAttachStateChanged : return because system is not yet"
+                            + " ready");
                 return;
             }
             if (!CoverTestModeUtils.isTestMode() && Binder.getCallingUid() != Process.myUid()) {
                 throw new SecurityException("Caller is not SYSTEM_PROCESS");
             }
-            if (coverState != null && coverState.getType() != 9 && coverState.getType() != 10 && !CoverServiceManager.verifySystemFeature(coverManagerServiceImpl.mContext, coverState.getType())) {
-                Log.d("CoverManager_CoverManagerServiceImpl", "notifySmartCoverAttachStateChanged : not supported cover type = " + coverState.getType());
-                Log.addLogString("CoverManager_", "cover attach is failed - not supported cover type = " + coverState.getType());
+            if (coverState != null
+                    && coverState.getType() != 9
+                    && coverState.getType() != 10
+                    && !CoverServiceManager.verifySystemFeature(
+                            coverManagerServiceImpl.mContext, coverState.getType())) {
+                Log.d(
+                        "CoverManager_CoverManagerServiceImpl",
+                        "notifySmartCoverAttachStateChanged : not supported cover type = "
+                                + coverState.getType());
+                Log.addLogString(
+                        "CoverManager_",
+                        "cover attach is failed - not supported cover type = "
+                                + coverState.getType());
                 return;
             }
-            Log.d("CoverManager_CoverManagerServiceImpl", "notifySmartCoverAttachStateChanged : attach = " + z);
+            Log.d(
+                    "CoverManager_CoverManagerServiceImpl",
+                    "notifySmartCoverAttachStateChanged : attach = " + z);
             if (coverState != null) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("cover attach : ", ", cover type : ", z);
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                "cover attach : ", ", cover type : ", z);
                 m.append(coverState.getType());
                 Log.addLogString("CoverManager_", m.toString());
             }
-            BaseNfcLedCoverController baseNfcLedCoverController = coverManagerServiceImpl.mNfcLedCoverController;
+            BaseNfcLedCoverController baseNfcLedCoverController =
+                    coverManagerServiceImpl.mNfcLedCoverController;
             if (baseNfcLedCoverController != null) {
                 baseNfcLedCoverController.notifyAuthenticationResponse();
             }
@@ -244,27 +280,23 @@ public final class SemPluginManagerService extends IPluginManager.Stub implement
         Lbb:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.sepunion.SemPluginManagerService.onBootPhase(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.sepunion.SemPluginManagerService.onBootPhase(int):void");
     }
 
-    public final void onCleanupUser(int i) {
-    }
+    public final void onCleanupUser(int i) {}
 
     @Override // com.android.server.sepunion.AbsSemSystemService
-    public final void onCreate(Bundle bundle) {
-    }
+    public final void onCreate(Bundle bundle) {}
 
-    public final void onDestroy() {
-    }
+    public final void onDestroy() {}
 
-    public final void onStart() {
-    }
+    public final void onStart() {}
 
-    public final void onStartUser(int i) {
-    }
+    public final void onStartUser(int i) {}
 
-    public final void onStopUser(int i) {
-    }
+    public final void onStopUser(int i) {}
 
     public final void onSwitchUser(int i) {
         if (this.mIsCoverSupport) {
@@ -279,16 +311,13 @@ public final class SemPluginManagerService extends IPluginManager.Stub implement
     }
 
     @Override // com.android.server.sepunion.AbsSemSystemServiceForS
-    public final void onUserStarting(int i) {
-    }
+    public final void onUserStarting(int i) {}
 
     @Override // com.android.server.sepunion.AbsSemSystemServiceForS
-    public final void onUserStopped(int i) {
-    }
+    public final void onUserStopped(int i) {}
 
     @Override // com.android.server.sepunion.AbsSemSystemServiceForS
-    public final void onUserStopping(int i) {
-    }
+    public final void onUserStopping(int i) {}
 
     @Override // com.android.server.sepunion.AbsSemSystemServiceForS
     public final void onUserSwitching(int i, int i2) {
@@ -305,6 +334,5 @@ public final class SemPluginManagerService extends IPluginManager.Stub implement
     }
 
     @Override // com.android.server.sepunion.AbsSemSystemServiceForS
-    public final void onUserUnlocking(int i) {
-    }
+    public final void onUserUnlocking(int i) {}
 }

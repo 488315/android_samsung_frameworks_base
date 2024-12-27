@@ -7,6 +7,7 @@ import android.spay.ITAController;
 import android.spay.TACommandRequest;
 import android.spay.TACommandResponse;
 import android.util.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -47,7 +48,9 @@ public final class TAController extends ITAController.Stub {
             Method dump skipped, instructions count: 210
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.spay.TAController.makeSysCallInternal(int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.spay.TAController.makeSysCallInternal(int):boolean");
     }
 
     public final CertInfo checkCertInfo(List list) {
@@ -65,7 +68,10 @@ public final class TAController extends ITAController.Stub {
 
     public final boolean clearDeviceCertificates(String str) {
         PaymentManagerService.checkCallerPermissionFor("clearDeviceCertificates");
-        Log.d("PaymentManagerService", "TAController::clearDeviceCertificates: Deleting the device certificates for " + str);
+        Log.d(
+                "PaymentManagerService",
+                "TAController::clearDeviceCertificates: Deleting the device certificates for "
+                        + str);
         return Utils.deleteDirectory(new File(str));
     }
 
@@ -102,12 +108,16 @@ public final class TAController extends ITAController.Stub {
     public final boolean makeSystemCall(int i) {
         boolean z = DEBUG;
         if (z) {
-            Log.d("PaymentManagerService", "entered makeSystemCall in TAController - System Server process");
+            Log.d(
+                    "PaymentManagerService",
+                    "entered makeSystemCall in TAController - System Server process");
         }
         PaymentManagerService.checkCallerPermissionFor("makeSystemCall");
         if (z) {
             try {
-                Log.d("PaymentManagerService", "makesystemcall - start time: " + System.currentTimeMillis() + " ms");
+                Log.d(
+                        "PaymentManagerService",
+                        "makesystemcall - start time: " + System.currentTimeMillis() + " ms");
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
@@ -120,7 +130,9 @@ public final class TAController extends ITAController.Stub {
         if (!z) {
             return true;
         }
-        Log.d("PaymentManagerService", "makeSystemCall: Successful, end time : " + System.currentTimeMillis() + " ms");
+        Log.d(
+                "PaymentManagerService",
+                "makeSystemCall: Successful, end time : " + System.currentTimeMillis() + " ms");
         return true;
     }
 
@@ -134,7 +146,14 @@ public final class TAController extends ITAController.Stub {
             try {
                 PaymentManagerService.checkCallerPermissionFor("processTACommand");
                 if (DEBUG) {
-                    Log.d("PaymentManagerService", "TAController::processTACommand: request = " + tACommandRequest + "; request.mCommandId = " + tACommandRequest.mCommandId + "; this.mTAId = " + this.mTAId);
+                    Log.d(
+                            "PaymentManagerService",
+                            "TAController::processTACommand: request = "
+                                    + tACommandRequest
+                                    + "; request.mCommandId = "
+                                    + tACommandRequest.mCommandId
+                                    + "; this.mTAId = "
+                                    + this.mTAId);
                 }
                 if (tACommandRequest.mCommandId == 590224) {
                     this.SET_QSEE_SECURE_UI = true;

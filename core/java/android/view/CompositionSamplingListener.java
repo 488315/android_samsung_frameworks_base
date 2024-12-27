@@ -1,7 +1,9 @@
 package android.view;
 
 import android.graphics.Rect;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.concurrent.Executor;
 
 /* loaded from: classes4.dex */
@@ -9,7 +11,8 @@ public abstract class CompositionSamplingListener {
     private final Executor mExecutor;
     private long mNativeListener = nativeCreate(this);
 
-    private static native long nativeCreate(CompositionSamplingListener compositionSamplingListener);
+    private static native long nativeCreate(
+            CompositionSamplingListener compositionSamplingListener);
 
     private static native void nativeDestroy(long j);
 
@@ -40,13 +43,23 @@ public abstract class CompositionSamplingListener {
         }
     }
 
-    public static void register(CompositionSamplingListener listener, int displayId, SurfaceControl stopLayer, Rect samplingArea) {
+    public static void register(
+            CompositionSamplingListener listener,
+            int displayId,
+            SurfaceControl stopLayer,
+            Rect samplingArea) {
         if (listener.mNativeListener == 0) {
             return;
         }
         Preconditions.checkArgument(displayId == 0, "default display only for now");
         long nativeStopLayerObject = stopLayer != null ? stopLayer.mNativeObject : 0L;
-        nativeRegister(listener.mNativeListener, nativeStopLayerObject, samplingArea.left, samplingArea.top, samplingArea.right, samplingArea.bottom);
+        nativeRegister(
+                listener.mNativeListener,
+                nativeStopLayerObject,
+                samplingArea.left,
+                samplingArea.top,
+                samplingArea.right,
+                samplingArea.bottom);
     }
 
     public static void unregister(CompositionSamplingListener listener) {
@@ -56,12 +69,15 @@ public abstract class CompositionSamplingListener {
         nativeUnregister(listener.mNativeListener);
     }
 
-    private static void dispatchOnSampleCollected(final CompositionSamplingListener listener, final float medianLuma) {
-        listener.mExecutor.execute(new Runnable() { // from class: android.view.CompositionSamplingListener$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                CompositionSamplingListener.this.onSampleCollected(medianLuma);
-            }
-        });
+    private static void dispatchOnSampleCollected(
+            final CompositionSamplingListener listener, final float medianLuma) {
+        listener.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.view.CompositionSamplingListener$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        CompositionSamplingListener.this.onSampleCollected(medianLuma);
+                    }
+                });
     }
 }

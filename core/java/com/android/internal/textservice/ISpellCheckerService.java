@@ -6,17 +6,26 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.textservice.ISpellCheckerServiceCallback;
-import com.android.internal.textservice.ISpellCheckerSessionListener;
 
 /* loaded from: classes5.dex */
 public interface ISpellCheckerService extends IInterface {
-    void getISpellCheckerSession(String str, ISpellCheckerSessionListener iSpellCheckerSessionListener, Bundle bundle, int i, ISpellCheckerServiceCallback iSpellCheckerServiceCallback) throws RemoteException;
+    void getISpellCheckerSession(
+            String str,
+            ISpellCheckerSessionListener iSpellCheckerSessionListener,
+            Bundle bundle,
+            int i,
+            ISpellCheckerServiceCallback iSpellCheckerServiceCallback)
+            throws RemoteException;
 
     public static class Default implements ISpellCheckerService {
         @Override // com.android.internal.textservice.ISpellCheckerService
-        public void getISpellCheckerSession(String locale, ISpellCheckerSessionListener listener, Bundle bundle, int supportedAttributes, ISpellCheckerServiceCallback callback) throws RemoteException {
-        }
+        public void getISpellCheckerSession(
+                String locale,
+                ISpellCheckerSessionListener listener,
+                Bundle bundle,
+                int supportedAttributes,
+                ISpellCheckerServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,8 +33,9 @@ public interface ISpellCheckerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpellCheckerService {
-        public static final String DESCRIPTOR = "com.android.internal.textservice.ISpellCheckerService";
+    public abstract static class Stub extends Binder implements ISpellCheckerService {
+        public static final String DESCRIPTOR =
+                "com.android.internal.textservice.ISpellCheckerService";
         static final int TRANSACTION_getISpellCheckerSession = 1;
 
         public Stub() {
@@ -63,7 +73,8 @@ public interface ISpellCheckerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -74,10 +85,12 @@ public interface ISpellCheckerService extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    ISpellCheckerSessionListener _arg1 = ISpellCheckerSessionListener.Stub.asInterface(data.readStrongBinder());
+                    ISpellCheckerSessionListener _arg1 =
+                            ISpellCheckerSessionListener.Stub.asInterface(data.readStrongBinder());
                     Bundle _arg2 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg3 = data.readInt();
-                    ISpellCheckerServiceCallback _arg4 = ISpellCheckerServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    ISpellCheckerServiceCallback _arg4 =
+                            ISpellCheckerServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getISpellCheckerSession(_arg0, _arg1, _arg2, _arg3, _arg4);
                     return true;
@@ -103,7 +116,13 @@ public interface ISpellCheckerService extends IInterface {
             }
 
             @Override // com.android.internal.textservice.ISpellCheckerService
-            public void getISpellCheckerSession(String locale, ISpellCheckerSessionListener listener, Bundle bundle, int supportedAttributes, ISpellCheckerServiceCallback callback) throws RemoteException {
+            public void getISpellCheckerSession(
+                    String locale,
+                    ISpellCheckerSessionListener listener,
+                    Bundle bundle,
+                    int supportedAttributes,
+                    ISpellCheckerServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

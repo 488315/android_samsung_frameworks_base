@@ -1,7 +1,5 @@
 package android.hardware.radio.ims;
 
-import android.hardware.radio.ims.IRadioImsIndication;
-import android.hardware.radio.ims.IRadioImsResponse;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioIms extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$ims$IRadioIms".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$ims$IRadioIms".replace('$', '.');
     public static final String HASH = "ec0dfedf764f3916783848c540ad312a74fa755d";
     public static final int VERSION = 2;
 
@@ -20,7 +19,9 @@ public interface IRadioIms extends IInterface {
 
     void sendAnbrQuery(int i, int i2, int i3, int i4) throws RemoteException;
 
-    void setResponseFunctions(IRadioImsResponse iRadioImsResponse, IRadioImsIndication iRadioImsIndication) throws RemoteException;
+    void setResponseFunctions(
+            IRadioImsResponse iRadioImsResponse, IRadioImsIndication iRadioImsIndication)
+            throws RemoteException;
 
     void setSrvccCallInfo(int i, SrvccCall[] srvccCallArr) throws RemoteException;
 
@@ -36,36 +37,38 @@ public interface IRadioIms extends IInterface {
 
     public static class Default implements IRadioIms {
         @Override // android.hardware.radio.ims.IRadioIms
-        public void setSrvccCallInfo(int serial, SrvccCall[] srvccCalls) throws RemoteException {
-        }
+        public void setSrvccCallInfo(int serial, SrvccCall[] srvccCalls) throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioIms
-        public void updateImsRegistrationInfo(int serial, ImsRegistration imsRegistration) throws RemoteException {
-        }
+        public void updateImsRegistrationInfo(int serial, ImsRegistration imsRegistration)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioIms
-        public void startImsTraffic(int serial, int token, int imsTrafficType, int accessNetworkType, int trafficDirection) throws RemoteException {
-        }
+        public void startImsTraffic(
+                int serial,
+                int token,
+                int imsTrafficType,
+                int accessNetworkType,
+                int trafficDirection)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioIms
-        public void stopImsTraffic(int serial, int token) throws RemoteException {
-        }
+        public void stopImsTraffic(int serial, int token) throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioIms
-        public void triggerEpsFallback(int serial, int reason) throws RemoteException {
-        }
+        public void triggerEpsFallback(int serial, int reason) throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioIms
-        public void setResponseFunctions(IRadioImsResponse radioImsResponse, IRadioImsIndication radioImsIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                IRadioImsResponse radioImsResponse, IRadioImsIndication radioImsIndication)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioIms
-        public void sendAnbrQuery(int serial, int mediaType, int direction, int bitsPerSecond) throws RemoteException {
-        }
+        public void sendAnbrQuery(int serial, int mediaType, int direction, int bitsPerSecond)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioIms
-        public void updateImsCallStatus(int serial, ImsCall[] imsCalls) throws RemoteException {
-        }
+        public void updateImsCallStatus(int serial, ImsCall[] imsCalls) throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioIms
         public int getInterfaceVersion() {
@@ -83,7 +86,7 @@ public interface IRadioIms extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioIms {
+    public abstract static class Stub extends Binder implements IRadioIms {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_sendAnbrQuery = 7;
@@ -117,7 +120,8 @@ public interface IRadioIms extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -145,7 +149,8 @@ public interface IRadioIms extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    ImsRegistration _arg12 = (ImsRegistration) data.readTypedObject(ImsRegistration.CREATOR);
+                    ImsRegistration _arg12 =
+                            (ImsRegistration) data.readTypedObject(ImsRegistration.CREATOR);
                     data.enforceNoDataAvail();
                     updateImsRegistrationInfo(_arg02, _arg12);
                     return true;
@@ -171,8 +176,10 @@ public interface IRadioIms extends IInterface {
                     triggerEpsFallback(_arg05, _arg15);
                     return true;
                 case 6:
-                    IRadioImsResponse _arg06 = IRadioImsResponse.Stub.asInterface(data.readStrongBinder());
-                    IRadioImsIndication _arg16 = IRadioImsIndication.Stub.asInterface(data.readStrongBinder());
+                    IRadioImsResponse _arg06 =
+                            IRadioImsResponse.Stub.asInterface(data.readStrongBinder());
+                    IRadioImsIndication _arg16 =
+                            IRadioImsIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg06, _arg16);
                     return true;
@@ -214,7 +221,8 @@ public interface IRadioIms extends IInterface {
             }
 
             @Override // android.hardware.radio.ims.IRadioIms
-            public void setSrvccCallInfo(int serial, SrvccCall[] srvccCalls) throws RemoteException {
+            public void setSrvccCallInfo(int serial, SrvccCall[] srvccCalls)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -230,7 +238,8 @@ public interface IRadioIms extends IInterface {
             }
 
             @Override // android.hardware.radio.ims.IRadioIms
-            public void updateImsRegistrationInfo(int serial, ImsRegistration imsRegistration) throws RemoteException {
+            public void updateImsRegistrationInfo(int serial, ImsRegistration imsRegistration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -238,7 +247,8 @@ public interface IRadioIms extends IInterface {
                     _data.writeTypedObject(imsRegistration, 0);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method updateImsRegistrationInfo is unimplemented.");
+                        throw new RemoteException(
+                                "Method updateImsRegistrationInfo is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -246,7 +256,13 @@ public interface IRadioIms extends IInterface {
             }
 
             @Override // android.hardware.radio.ims.IRadioIms
-            public void startImsTraffic(int serial, int token, int imsTrafficType, int accessNetworkType, int trafficDirection) throws RemoteException {
+            public void startImsTraffic(
+                    int serial,
+                    int token,
+                    int imsTrafficType,
+                    int accessNetworkType,
+                    int trafficDirection)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -297,7 +313,9 @@ public interface IRadioIms extends IInterface {
             }
 
             @Override // android.hardware.radio.ims.IRadioIms
-            public void setResponseFunctions(IRadioImsResponse radioImsResponse, IRadioImsIndication radioImsIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    IRadioImsResponse radioImsResponse, IRadioImsIndication radioImsIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -313,7 +331,8 @@ public interface IRadioIms extends IInterface {
             }
 
             @Override // android.hardware.radio.ims.IRadioIms
-            public void sendAnbrQuery(int serial, int mediaType, int direction, int bitsPerSecond) throws RemoteException {
+            public void sendAnbrQuery(int serial, int mediaType, int direction, int bitsPerSecond)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);

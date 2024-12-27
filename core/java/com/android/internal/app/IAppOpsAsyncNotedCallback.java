@@ -15,8 +15,7 @@ public interface IAppOpsAsyncNotedCallback extends IInterface {
 
     public static class Default implements IAppOpsAsyncNotedCallback {
         @Override // com.android.internal.app.IAppOpsAsyncNotedCallback
-        public void opNoted(AsyncNotedAppOp op) throws RemoteException {
-        }
+        public void opNoted(AsyncNotedAppOp op) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +23,7 @@ public interface IAppOpsAsyncNotedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppOpsAsyncNotedCallback {
+    public abstract static class Stub extends Binder implements IAppOpsAsyncNotedCallback {
         static final int TRANSACTION_opNoted = 1;
 
         public Stub() {
@@ -62,7 +61,8 @@ public interface IAppOpsAsyncNotedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAppOpsAsyncNotedCallback.DESCRIPTOR);
             }
@@ -72,7 +72,8 @@ public interface IAppOpsAsyncNotedCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AsyncNotedAppOp _arg0 = (AsyncNotedAppOp) data.readTypedObject(AsyncNotedAppOp.CREATOR);
+                    AsyncNotedAppOp _arg0 =
+                            (AsyncNotedAppOp) data.readTypedObject(AsyncNotedAppOp.CREATOR);
                     data.enforceNoDataAvail();
                     opNoted(_arg0);
                     return true;

@@ -19,16 +19,13 @@ public interface IScrollCaptureCallbacks extends IInterface {
 
     public static class Default implements IScrollCaptureCallbacks {
         @Override // android.view.IScrollCaptureCallbacks
-        public void onCaptureStarted() throws RemoteException {
-        }
+        public void onCaptureStarted() throws RemoteException {}
 
         @Override // android.view.IScrollCaptureCallbacks
-        public void onImageRequestCompleted(int flags, Rect capturedArea) throws RemoteException {
-        }
+        public void onImageRequestCompleted(int flags, Rect capturedArea) throws RemoteException {}
 
         @Override // android.view.IScrollCaptureCallbacks
-        public void onCaptureEnded() throws RemoteException {
-        }
+        public void onCaptureEnded() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +33,7 @@ public interface IScrollCaptureCallbacks extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IScrollCaptureCallbacks {
+    public abstract static class Stub extends Binder implements IScrollCaptureCallbacks {
         static final int TRANSACTION_onCaptureEnded = 3;
         static final int TRANSACTION_onCaptureStarted = 1;
         static final int TRANSACTION_onImageRequestCompleted = 2;
@@ -80,7 +77,8 @@ public interface IScrollCaptureCallbacks extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IScrollCaptureCallbacks.DESCRIPTOR);
             }
@@ -134,7 +132,8 @@ public interface IScrollCaptureCallbacks extends IInterface {
             }
 
             @Override // android.view.IScrollCaptureCallbacks
-            public void onImageRequestCompleted(int flags, Rect capturedArea) throws RemoteException {
+            public void onImageRequestCompleted(int flags, Rect capturedArea)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IScrollCaptureCallbacks.DESCRIPTOR);

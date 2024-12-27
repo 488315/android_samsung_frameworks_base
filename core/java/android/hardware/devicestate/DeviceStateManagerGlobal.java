@@ -1,11 +1,6 @@
 package android.hardware.devicestate;
 
 import android.content.Context;
-import android.hardware.devicestate.DeviceStateManager;
-import android.hardware.devicestate.DeviceStateManagerGlobal;
-import android.hardware.devicestate.DeviceStateRequest;
-import android.hardware.devicestate.IDeviceStateManager;
-import android.hardware.devicestate.IDeviceStateManagerCallback;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Handler;
@@ -16,7 +11,9 @@ import android.os.ServiceManager;
 import android.os.Trace;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.samsung.android.view.SemWindowManager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -46,7 +43,8 @@ public final class DeviceStateManagerGlobal {
         DeviceStateManagerGlobal deviceStateManagerGlobal;
         IBinder b;
         synchronized (DeviceStateManagerGlobal.class) {
-            if (sInstance == null && (b = ServiceManager.getService(Context.DEVICE_STATE_SERVICE)) != null) {
+            if (sInstance == null
+                    && (b = ServiceManager.getService(Context.DEVICE_STATE_SERVICE)) != null) {
                 sInstance = new DeviceStateManagerGlobal(IDeviceStateManager.Stub.asInterface(b));
             }
             deviceStateManagerGlobal = sInstance;
@@ -77,8 +75,10 @@ public final class DeviceStateManagerGlobal {
         return copyOf;
     }
 
-    public void requestState(DeviceStateRequest request, Executor executor, DeviceStateRequest.Callback callback) {
-        DeviceStateRequestWrapper requestWrapper = new DeviceStateRequestWrapper(request, callback, executor);
+    public void requestState(
+            DeviceStateRequest request, Executor executor, DeviceStateRequest.Callback callback) {
+        DeviceStateRequestWrapper requestWrapper =
+                new DeviceStateRequestWrapper(request, callback, executor);
         synchronized (this.mLock) {
             if (findRequestTokenLocked(request) != null) {
                 return;
@@ -86,7 +86,8 @@ public final class DeviceStateManagerGlobal {
             IBinder token = new Binder();
             this.mRequests.put(token, requestWrapper);
             try {
-                this.mDeviceStateManager.requestState(token, request.getState(), request.getFlags());
+                this.mDeviceStateManager.requestState(
+                        token, request.getState(), request.getFlags());
             } catch (RemoteException ex) {
                 this.mRequests.remove(token);
                 throw ex.rethrowFromSystemServer();
@@ -108,8 +109,10 @@ public final class DeviceStateManagerGlobal {
         }
     }
 
-    public void requestBaseStateOverride(DeviceStateRequest request, Executor executor, DeviceStateRequest.Callback callback) {
-        DeviceStateRequestWrapper requestWrapper = new DeviceStateRequestWrapper(request, callback, executor);
+    public void requestBaseStateOverride(
+            DeviceStateRequest request, Executor executor, DeviceStateRequest.Callback callback) {
+        DeviceStateRequestWrapper requestWrapper =
+                new DeviceStateRequestWrapper(request, callback, executor);
         synchronized (this.mLock) {
             if (findRequestTokenLocked(request) != null) {
                 return;
@@ -117,7 +120,8 @@ public final class DeviceStateManagerGlobal {
             IBinder token = new Binder();
             this.mRequests.put(token, requestWrapper);
             try {
-                this.mDeviceStateManager.requestBaseStateOverride(token, request.getState(), request.getFlags());
+                this.mDeviceStateManager.requestBaseStateOverride(
+                        token, request.getState(), request.getFlags());
             } catch (RemoteException ex) {
                 this.mRequests.remove(token);
                 throw ex.rethrowFromSystemServer();
@@ -139,7 +143,8 @@ public final class DeviceStateManagerGlobal {
         }
     }
 
-    public void registerDeviceStateCallback(DeviceStateManager.DeviceStateCallback callback, Executor executor) {
+    public void registerDeviceStateCallback(
+            DeviceStateManager.DeviceStateCallback callback, Executor executor) {
         synchronized (this.mLock) {
             int index = findCallbackLocked(callback);
             if (index != -1) {
@@ -148,7 +153,8 @@ public final class DeviceStateManagerGlobal {
             DeviceStateCallbackWrapper wrapper = new DeviceStateCallbackWrapper(callback, executor);
             this.mCallbacks.add(wrapper);
             if (this.mLastReceivedInfo != null) {
-                wrapper.notifySupportedDeviceStatesChanged(List.copyOf(this.mLastReceivedInfo.supportedStates));
+                wrapper.notifySupportedDeviceStatesChanged(
+                        List.copyOf(this.mLastReceivedInfo.supportedStates));
                 wrapper.notifyDeviceStateChanged(this.mLastReceivedInfo.currentState);
             }
         }
@@ -213,7 +219,9 @@ public final class DeviceStateManagerGlobal {
         int diff = oldInfo == null ? -1 : info.diff(oldInfo);
         if ((diff & 1) > 0) {
             for (int i = 0; i < callbacks.size(); i++) {
-                callbacks.get(i).notifySupportedDeviceStatesChanged(List.copyOf(info.supportedStates));
+                callbacks
+                        .get(i)
+                        .notifySupportedDeviceStatesChanged(List.copyOf(info.supportedStates));
             }
         }
         int i2 = diff & 4;
@@ -247,8 +255,7 @@ public final class DeviceStateManagerGlobal {
     }
 
     private final class DeviceStateManagerCallback extends IDeviceStateManagerCallback.Stub {
-        private DeviceStateManagerCallback() {
-        }
+        private DeviceStateManagerCallback() {}
 
         @Override // android.hardware.devicestate.IDeviceStateManagerCallback
         public void onDeviceStateInfoChanged(DeviceStateInfo info) {
@@ -271,32 +278,42 @@ public final class DeviceStateManagerGlobal {
         private final DeviceStateManager.DeviceStateCallback mDeviceStateCallback;
         private final Executor mExecutor;
 
-        DeviceStateCallbackWrapper(DeviceStateManager.DeviceStateCallback callback, Executor executor) {
+        DeviceStateCallbackWrapper(
+                DeviceStateManager.DeviceStateCallback callback, Executor executor) {
             this.mDeviceStateCallback = callback;
             this.mExecutor = executor;
         }
 
         void notifySupportedDeviceStatesChanged(final List<DeviceState> newSupportedDeviceStates) {
-            this.mExecutor.execute(new Runnable() { // from class: android.hardware.devicestate.DeviceStateManagerGlobal$DeviceStateCallbackWrapper$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    DeviceStateManagerGlobal.DeviceStateCallbackWrapper.this.lambda$notifySupportedDeviceStatesChanged$0(newSupportedDeviceStates);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.devicestate.DeviceStateManagerGlobal$DeviceStateCallbackWrapper$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            DeviceStateManagerGlobal.DeviceStateCallbackWrapper.this
+                                    .lambda$notifySupportedDeviceStatesChanged$0(
+                                            newSupportedDeviceStates);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$notifySupportedDeviceStatesChanged$0(List newSupportedDeviceStates) {
+        public /* synthetic */ void lambda$notifySupportedDeviceStatesChanged$0(
+                List newSupportedDeviceStates) {
             this.mDeviceStateCallback.onSupportedStatesChanged(newSupportedDeviceStates);
         }
 
         void notifyDeviceStateChanged(final DeviceState newDeviceState) {
-            execute("notifyDeviceStateChanged", new Runnable() { // from class: android.hardware.devicestate.DeviceStateManagerGlobal$DeviceStateCallbackWrapper$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    DeviceStateManagerGlobal.DeviceStateCallbackWrapper.this.lambda$notifyDeviceStateChanged$1(newDeviceState);
-                }
-            });
+            execute(
+                    "notifyDeviceStateChanged",
+                    new Runnable() { // from class:
+                        // android.hardware.devicestate.DeviceStateManagerGlobal$DeviceStateCallbackWrapper$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            DeviceStateManagerGlobal.DeviceStateCallbackWrapper.this
+                                    .lambda$notifyDeviceStateChanged$1(newDeviceState);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -305,18 +322,22 @@ public final class DeviceStateManagerGlobal {
         }
 
         private void execute(final String traceName, final Runnable r) {
-            this.mExecutor.execute(new Runnable() { // from class: android.hardware.devicestate.DeviceStateManagerGlobal$DeviceStateCallbackWrapper$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    DeviceStateManagerGlobal.DeviceStateCallbackWrapper.this.lambda$execute$2(traceName, r);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.devicestate.DeviceStateManagerGlobal$DeviceStateCallbackWrapper$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            DeviceStateManagerGlobal.DeviceStateCallbackWrapper.this
+                                    .lambda$execute$2(traceName, r);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$execute$2(String traceName, Runnable r) {
             if (DeviceStateManagerGlobal.DEBUG) {
-                Trace.beginSection(this.mDeviceStateCallback.getClass().getSimpleName() + "#" + traceName);
+                Trace.beginSection(
+                        this.mDeviceStateCallback.getClass().getSimpleName() + "#" + traceName);
             }
             try {
                 r.run();
@@ -334,7 +355,10 @@ public final class DeviceStateManagerGlobal {
         private final Executor mExecutor;
         private final DeviceStateRequest mRequest;
 
-        DeviceStateRequestWrapper(DeviceStateRequest request, DeviceStateRequest.Callback callback, Executor executor) {
+        DeviceStateRequestWrapper(
+                DeviceStateRequest request,
+                DeviceStateRequest.Callback callback,
+                Executor executor) {
             validateRequestWrapperParameters(callback, executor);
             this.mRequest = request;
             this.mCallback = callback;
@@ -345,12 +369,15 @@ public final class DeviceStateManagerGlobal {
             if (this.mCallback == null) {
                 return;
             }
-            this.mExecutor.execute(new Runnable() { // from class: android.hardware.devicestate.DeviceStateManagerGlobal$DeviceStateRequestWrapper$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    DeviceStateManagerGlobal.DeviceStateRequestWrapper.this.lambda$notifyRequestActive$0();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.devicestate.DeviceStateManagerGlobal$DeviceStateRequestWrapper$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            DeviceStateManagerGlobal.DeviceStateRequestWrapper.this
+                                    .lambda$notifyRequestActive$0();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -362,12 +389,15 @@ public final class DeviceStateManagerGlobal {
             if (this.mCallback == null) {
                 return;
             }
-            this.mExecutor.execute(new Runnable() { // from class: android.hardware.devicestate.DeviceStateManagerGlobal$DeviceStateRequestWrapper$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    DeviceStateManagerGlobal.DeviceStateRequestWrapper.this.lambda$notifyRequestCanceled$1();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.devicestate.DeviceStateManagerGlobal$DeviceStateRequestWrapper$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            DeviceStateManagerGlobal.DeviceStateRequestWrapper.this
+                                    .lambda$notifyRequestCanceled$1();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -375,7 +405,8 @@ public final class DeviceStateManagerGlobal {
             this.mCallback.onRequestCanceled(this.mRequest);
         }
 
-        private void validateRequestWrapperParameters(DeviceStateRequest.Callback callback, Executor executor) {
+        private void validateRequestWrapperParameters(
+                DeviceStateRequest.Callback callback, Executor executor) {
             if (callback == null && executor != null) {
                 throw new IllegalArgumentException("Callback must be supplied with executor.");
             }
@@ -410,7 +441,8 @@ public final class DeviceStateManagerGlobal {
         }
     }
 
-    public void registerFoldStateListener(SemWindowManager.FoldStateListener listener, Handler handler) {
+    public void registerFoldStateListener(
+            SemWindowManager.FoldStateListener listener, Handler handler) {
         Log.d(TAG, "This device does not support FoldStateListener!");
     }
 

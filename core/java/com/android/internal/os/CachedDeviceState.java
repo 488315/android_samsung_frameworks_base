@@ -1,6 +1,7 @@
 package com.android.internal.os;
 
 import android.os.SystemClock;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
@@ -53,8 +54,7 @@ public class CachedDeviceState {
     }
 
     public class Readonly {
-        public Readonly() {
-        }
+        public Readonly() {}
 
         public boolean isCharging() {
             return CachedDeviceState.this.mCharging;
@@ -82,8 +82,7 @@ public class CachedDeviceState {
         private long mStartTimeMillis;
         private long mTotalTimeMillis;
 
-        public TimeInStateStopwatch() {
-        }
+        public TimeInStateStopwatch() {}
 
         public long getMillis() {
             long elapsedTime;

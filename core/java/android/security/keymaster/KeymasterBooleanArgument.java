@@ -23,6 +23,5 @@ class KeymasterBooleanArgument extends KeymasterArgument {
     }
 
     @Override // android.security.keymaster.KeymasterArgument
-    public void writeValue(Parcel out) {
-    }
+    public void writeValue(Parcel out) {}
 }

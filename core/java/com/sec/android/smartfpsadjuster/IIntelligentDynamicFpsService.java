@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IIntelligentDynamicFpsService extends IInterface {
-    public static final String DESCRIPTOR = "com.sec.android.smartfpsadjuster.IIntelligentDynamicFpsService";
+    public static final String DESCRIPTOR =
+            "com.sec.android.smartfpsadjuster.IIntelligentDynamicFpsService";
 
     int cameraPolicyChange(int i) throws RemoteException;
 
@@ -18,12 +19,10 @@ public interface IIntelligentDynamicFpsService extends IInterface {
 
     public static class Default implements IIntelligentDynamicFpsService {
         @Override // com.sec.android.smartfpsadjuster.IIntelligentDynamicFpsService
-        public void cameraPolicyStart() throws RemoteException {
-        }
+        public void cameraPolicyStart() throws RemoteException {}
 
         @Override // com.sec.android.smartfpsadjuster.IIntelligentDynamicFpsService
-        public void cameraPolicyStop() throws RemoteException {
-        }
+        public void cameraPolicyStop() throws RemoteException {}
 
         @Override // com.sec.android.smartfpsadjuster.IIntelligentDynamicFpsService
         public int cameraPolicyChange(int fps) throws RemoteException {
@@ -36,7 +35,7 @@ public interface IIntelligentDynamicFpsService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIntelligentDynamicFpsService {
+    public abstract static class Stub extends Binder implements IIntelligentDynamicFpsService {
         static final int TRANSACTION_cameraPolicyChange = 3;
         static final int TRANSACTION_cameraPolicyStart = 1;
         static final int TRANSACTION_cameraPolicyStop = 2;
@@ -80,7 +79,8 @@ public interface IIntelligentDynamicFpsService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIntelligentDynamicFpsService.DESCRIPTOR);
             }

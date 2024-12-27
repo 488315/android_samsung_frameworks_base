@@ -7,19 +7,20 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes.dex */
 public class RestoreSet implements Parcelable {
-    public static final Parcelable.Creator<RestoreSet> CREATOR = new Parcelable.Creator<RestoreSet>() { // from class: android.app.backup.RestoreSet.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RestoreSet createFromParcel(Parcel in) {
-            return new RestoreSet(in);
-        }
+    public static final Parcelable.Creator<RestoreSet> CREATOR =
+            new Parcelable.Creator<RestoreSet>() { // from class: android.app.backup.RestoreSet.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RestoreSet createFromParcel(Parcel in) {
+                    return new RestoreSet(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RestoreSet[] newArray(int size) {
-            return new RestoreSet[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RestoreSet[] newArray(int size) {
+                    return new RestoreSet[size];
+                }
+            };
     public final int backupTransportFlags;
     public String device;
     public String name;

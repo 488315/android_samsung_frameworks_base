@@ -12,8 +12,7 @@ public interface IPrintJobStateChangeListener extends IInterface {
 
     public static class Default implements IPrintJobStateChangeListener {
         @Override // android.print.IPrintJobStateChangeListener
-        public void onPrintJobStateChanged(PrintJobId printJobId) throws RemoteException {
-        }
+        public void onPrintJobStateChanged(PrintJobId printJobId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IPrintJobStateChangeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPrintJobStateChangeListener {
+    public abstract static class Stub extends Binder implements IPrintJobStateChangeListener {
         public static final String DESCRIPTOR = "android.print.IPrintJobStateChangeListener";
         static final int TRANSACTION_onPrintJobStateChanged = 1;
 
@@ -60,7 +59,8 @@ public interface IPrintJobStateChangeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

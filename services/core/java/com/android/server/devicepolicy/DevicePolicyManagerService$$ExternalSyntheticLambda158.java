@@ -3,17 +3,21 @@ package com.android.server.devicepolicy;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.util.FunctionalUtils;
+
 import java.util.concurrent.locks.ReentrantLock;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda158 implements FunctionalUtils.ThrowingRunnable {
+public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda158
+        implements FunctionalUtils.ThrowingRunnable {
     public final /* synthetic */ DevicePolicyManagerService f$0;
     public final /* synthetic */ boolean f$1;
     public final /* synthetic */ boolean f$2;
 
-    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda158(DevicePolicyManagerService devicePolicyManagerService, boolean z, boolean z2) {
+    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda158(
+            DevicePolicyManagerService devicePolicyManagerService, boolean z, boolean z2) {
         this.f$0 = devicePolicyManagerService;
         this.f$1 = z;
         this.f$2 = z2;
@@ -53,18 +57,29 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                 ((ReentrantLock) securityLogMonitor.mLock).unlock();
             }
         }
-        if ((!z && devicePolicyManagerService.mOwners.hasDeviceOwner()) || (networkLogger = devicePolicyManagerService.mNetworkLogger) == null || (networkLoggingHandler = networkLogger.mNetworkLoggingHandler) == null) {
+        if ((!z && devicePolicyManagerService.mOwners.hasDeviceOwner())
+                || (networkLogger = devicePolicyManagerService.mNetworkLogger) == null
+                || (networkLoggingHandler = networkLogger.mNetworkLoggingHandler) == null) {
             return;
         }
         synchronized (networkLoggingHandler) {
             try {
                 if (!networkLoggingHandler.mPaused) {
-                    Slog.d("NetworkLoggingHandler", "Attempted to resume network logging, but logging is not paused.");
+                    Slog.d(
+                            "NetworkLoggingHandler",
+                            "Attempted to resume network logging, but logging is not paused.");
                     return;
                 }
-                Slog.d("NetworkLoggingHandler", "Resumed network logging. Current batch=" + networkLoggingHandler.mCurrentBatchToken + ", LastRetrievedBatch=" + networkLoggingHandler.mLastRetrievedBatchToken);
+                Slog.d(
+                        "NetworkLoggingHandler",
+                        "Resumed network logging. Current batch="
+                                + networkLoggingHandler.mCurrentBatchToken
+                                + ", LastRetrievedBatch="
+                                + networkLoggingHandler.mLastRetrievedBatchToken);
                 networkLoggingHandler.mPaused = false;
-                if (networkLoggingHandler.mBatches.size() <= 0 || networkLoggingHandler.mLastRetrievedBatchToken == networkLoggingHandler.mCurrentBatchToken) {
+                if (networkLoggingHandler.mBatches.size() <= 0
+                        || networkLoggingHandler.mLastRetrievedBatchToken
+                                == networkLoggingHandler.mCurrentBatchToken) {
                     bundle = null;
                 } else {
                     networkLoggingHandler.scheduleBatchFinalization();

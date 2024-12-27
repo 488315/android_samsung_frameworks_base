@@ -7,6 +7,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes.dex */
@@ -33,8 +34,7 @@ public abstract class AsyncQueryHandler extends Handler {
         public Uri uri;
         public ContentValues values;
 
-        protected WorkerArgs() {
-        }
+        protected WorkerArgs() {}
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
@@ -56,12 +56,21 @@ public abstract class AsyncQueryHandler extends Handler {
             switch (event) {
                 case 1:
                     try {
-                        cursor = resolver.query(args.uri, args.projection, args.selection, args.selectionArgs, args.orderBy);
+                        cursor =
+                                resolver.query(
+                                        args.uri,
+                                        args.projection,
+                                        args.selection,
+                                        args.selectionArgs,
+                                        args.orderBy);
                         if (cursor != null) {
                             cursor.getCount();
                         }
                     } catch (Exception e) {
-                        Log.w(AsyncQueryHandler.TAG, "Exception thrown during handling EVENT_ARG_QUERY", e);
+                        Log.w(
+                                AsyncQueryHandler.TAG,
+                                "Exception thrown during handling EVENT_ARG_QUERY",
+                                e);
                         cursor = null;
                     }
                     args.result = cursor;
@@ -70,10 +79,18 @@ public abstract class AsyncQueryHandler extends Handler {
                     args.result = resolver.insert(args.uri, args.values);
                     break;
                 case 3:
-                    args.result = Integer.valueOf(resolver.update(args.uri, args.values, args.selection, args.selectionArgs));
+                    args.result =
+                            Integer.valueOf(
+                                    resolver.update(
+                                            args.uri,
+                                            args.values,
+                                            args.selection,
+                                            args.selectionArgs));
                     break;
                 case 4:
-                    args.result = Integer.valueOf(resolver.delete(args.uri, args.selection, args.selectionArgs));
+                    args.result =
+                            Integer.valueOf(
+                                    resolver.delete(args.uri, args.selection, args.selectionArgs));
                     break;
             }
             Message reply = args.handler.obtainMessage(token);
@@ -99,7 +116,14 @@ public abstract class AsyncQueryHandler extends Handler {
         return new WorkerHandler(looper);
     }
 
-    public void startQuery(int token, Object cookie, Uri uri, String[] projection, String selection, String[] selectionArgs, String orderBy) {
+    public void startQuery(
+            int token,
+            Object cookie,
+            Uri uri,
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String orderBy) {
         Message msg = this.mWorkerThreadHandler.obtainMessage(token);
         msg.arg1 = 1;
         WorkerArgs args = new WorkerArgs();
@@ -130,7 +154,13 @@ public abstract class AsyncQueryHandler extends Handler {
         this.mWorkerThreadHandler.sendMessage(msg);
     }
 
-    public final void startUpdate(int token, Object cookie, Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    public final void startUpdate(
+            int token,
+            Object cookie,
+            Uri uri,
+            ContentValues values,
+            String selection,
+            String[] selectionArgs) {
         Message msg = this.mWorkerThreadHandler.obtainMessage(token);
         msg.arg1 = 3;
         WorkerArgs args = new WorkerArgs();
@@ -144,7 +174,8 @@ public abstract class AsyncQueryHandler extends Handler {
         this.mWorkerThreadHandler.sendMessage(msg);
     }
 
-    public final void startDelete(int token, Object cookie, Uri uri, String selection, String[] selectionArgs) {
+    public final void startDelete(
+            int token, Object cookie, Uri uri, String selection, String[] selectionArgs) {
         Message msg = this.mWorkerThreadHandler.obtainMessage(token);
         msg.arg1 = 4;
         WorkerArgs args = new WorkerArgs();
@@ -157,17 +188,13 @@ public abstract class AsyncQueryHandler extends Handler {
         this.mWorkerThreadHandler.sendMessage(msg);
     }
 
-    protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-    }
+    protected void onQueryComplete(int token, Object cookie, Cursor cursor) {}
 
-    protected void onInsertComplete(int token, Object cookie, Uri uri) {
-    }
+    protected void onInsertComplete(int token, Object cookie, Uri uri) {}
 
-    protected void onUpdateComplete(int token, Object cookie, int result) {
-    }
+    protected void onUpdateComplete(int token, Object cookie, int result) {}
 
-    protected void onDeleteComplete(int token, Object cookie, int result) {
-    }
+    protected void onDeleteComplete(int token, Object cookie, int result) {}
 
     @Override // android.os.Handler
     public void handleMessage(Message msg) {

@@ -22,12 +22,10 @@ public interface IOtaDexopt extends IInterface {
 
     public static class Default implements IOtaDexopt {
         @Override // android.content.pm.IOtaDexopt
-        public void prepare() throws RemoteException {
-        }
+        public void prepare() throws RemoteException {}
 
         @Override // android.content.pm.IOtaDexopt
-        public void cleanup() throws RemoteException {
-        }
+        public void cleanup() throws RemoteException {}
 
         @Override // android.content.pm.IOtaDexopt
         public boolean isDone() throws RemoteException {
@@ -40,8 +38,7 @@ public interface IOtaDexopt extends IInterface {
         }
 
         @Override // android.content.pm.IOtaDexopt
-        public void dexoptNextPackage() throws RemoteException {
-        }
+        public void dexoptNextPackage() throws RemoteException {}
 
         @Override // android.content.pm.IOtaDexopt
         public String nextDexoptCommand() throws RemoteException {
@@ -54,7 +51,7 @@ public interface IOtaDexopt extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOtaDexopt {
+    public abstract static class Stub extends Binder implements IOtaDexopt {
         public static final String DESCRIPTOR = "android.content.pm.IOtaDexopt";
         static final int TRANSACTION_cleanup = 2;
         static final int TRANSACTION_dexoptNextPackage = 5;
@@ -108,7 +105,8 @@ public interface IOtaDexopt extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

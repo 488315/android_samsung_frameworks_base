@@ -1,8 +1,11 @@
 package com.android.server.enterprise.auditlog;
 
 import android.util.Log;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -40,7 +43,10 @@ public final class PartialFileNode {
         this.deleteSync = new Object();
         this.mWasWritten = false;
         this.mPackageName = str2;
-        this.mFile = new File(AnyMotionDetector$$ExternalSyntheticOutline0.m(str, "/", String.valueOf(new Date().getTime())));
+        this.mFile =
+                new File(
+                        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                                str, "/", String.valueOf(new Date().getTime())));
         this.mTimestamp = 0L;
         this.mMarkAsDeprecated = false;
         try {
@@ -49,7 +55,8 @@ public final class PartialFileNode {
             randomAccessFile.setLength(524288L);
             FileChannel channel = randomAccessFile.getChannel();
             this.mChannel = channel;
-            MappedByteBuffer map = channel.map(FileChannel.MapMode.READ_WRITE, 0L, (int) channel.size());
+            MappedByteBuffer map =
+                    channel.map(FileChannel.MapMode.READ_WRITE, 0L, (int) channel.size());
             this.mWriteBuffer = map;
             map.mark();
         } catch (Exception e) {
@@ -87,10 +94,16 @@ public final class PartialFileNode {
                     fileOutputStream = new FileOutputStream(file);
                     try {
                         try {
-                            GZIPOutputStream gZIPOutputStream2 = new GZIPOutputStream(fileOutputStream);
+                            GZIPOutputStream gZIPOutputStream2 =
+                                    new GZIPOutputStream(fileOutputStream);
                             try {
-                                byte[] bArr = new byte[EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT];
-                                for (int read = fileInputStream.read(bArr); read > 0; read = fileInputStream.read(bArr)) {
+                                byte[] bArr =
+                                        new byte
+                                                [EndpointMonitorConst
+                                                        .FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT];
+                                for (int read = fileInputStream.read(bArr);
+                                        read > 0;
+                                        read = fileInputStream.read(bArr)) {
                                     gZIPOutputStream2.write(bArr, 0, read);
                                 }
                                 gZIPOutputStream2.finish();

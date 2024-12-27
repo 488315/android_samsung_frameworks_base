@@ -1,6 +1,7 @@
 package android.app.admin;
 
 import android.annotation.SystemApi;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -9,8 +10,7 @@ public final class DevicePolicyIdentifiers {
     public static final String APPLICATION_HIDDEN_POLICY = "applicationHidden";
     public static final String APPLICATION_RESTRICTIONS_POLICY = "applicationRestrictions";
 
-    @SystemApi
-    public static final String AUDIT_LOGGING_POLICY = "auditLogging";
+    @SystemApi public static final String AUDIT_LOGGING_POLICY = "auditLogging";
     public static final String AUTO_TIMEZONE_POLICY = "autoTimezone";
     public static final String AUTO_TIME_POLICY = "autoTime";
     public static final String BACKUP_SERVICE_POLICY = "backupService";
@@ -33,11 +33,11 @@ public final class DevicePolicyIdentifiers {
     public static final String STATUS_BAR_DISABLED_POLICY = "statusBarDisabled";
     public static final String TRUST_AGENT_CONFIGURATION_POLICY = "trustAgentConfiguration";
     public static final String USB_DATA_SIGNALING_POLICY = "usbDataSignaling";
-    public static final String USER_CONTROL_DISABLED_PACKAGES_POLICY = "userControlDisabledPackages";
+    public static final String USER_CONTROL_DISABLED_PACKAGES_POLICY =
+            "userControlDisabledPackages";
     public static final String USER_RESTRICTION_PREFIX = "userRestriction_";
 
-    private DevicePolicyIdentifiers() {
-    }
+    private DevicePolicyIdentifiers() {}
 
     public static String getIdentifierForUserRestriction(String restriction) {
         Objects.requireNonNull(restriction);

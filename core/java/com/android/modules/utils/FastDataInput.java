@@ -128,7 +128,11 @@ public class FastDataInput implements DataInput, Closeable {
             String s = readUTF();
             if (this.mStringRefCount < 65535) {
                 if (this.mStringRefCount == this.mStringRefs.length) {
-                    this.mStringRefs = (String[]) Arrays.copyOf(this.mStringRefs, this.mStringRefCount + (this.mStringRefCount >> 1));
+                    this.mStringRefs =
+                            (String[])
+                                    Arrays.copyOf(
+                                            this.mStringRefs,
+                                            this.mStringRefCount + (this.mStringRefCount >> 1));
                 }
                 String[] strArr = this.mStringRefs;
                 int i = this.mStringRefCount;
@@ -138,7 +142,12 @@ public class FastDataInput implements DataInput, Closeable {
             return s;
         }
         if (ref >= this.mStringRefs.length) {
-            throw new IOException("Invalid interned string reference " + ref + " for " + this.mStringRefs.length + " interned strings");
+            throw new IOException(
+                    "Invalid interned string reference "
+                            + ref
+                            + " for "
+                            + this.mStringRefs.length
+                            + " interned strings");
         }
         return this.mStringRefs[ref];
     }

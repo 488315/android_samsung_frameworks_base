@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.x509;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1EncodableVector;
 import com.android.internal.org.bouncycastle.asn1.ASN1Object;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
@@ -28,7 +29,8 @@ public class DistributionPoint extends ASN1Object {
         if (obj instanceof ASN1Sequence) {
             return new DistributionPoint((ASN1Sequence) obj);
         }
-        throw new IllegalArgumentException("Invalid DistributionPoint: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "Invalid DistributionPoint: " + obj.getClass().getName());
     }
 
     public DistributionPoint(ASN1Sequence seq) {
@@ -45,12 +47,14 @@ public class DistributionPoint extends ASN1Object {
                     this.cRLIssuer = GeneralNames.getInstance(t, false);
                     break;
                 default:
-                    throw new IllegalArgumentException("Unknown tag encountered in structure: " + t.getTagNo());
+                    throw new IllegalArgumentException(
+                            "Unknown tag encountered in structure: " + t.getTagNo());
             }
         }
     }
 
-    public DistributionPoint(DistributionPointName distributionPoint, ReasonFlags reasons, GeneralNames cRLIssuer) {
+    public DistributionPoint(
+            DistributionPointName distributionPoint, ReasonFlags reasons, GeneralNames cRLIssuer) {
         this.distributionPoint = distributionPoint;
         this.reasons = reasons;
         this.cRLIssuer = cRLIssuer;
@@ -68,7 +72,8 @@ public class DistributionPoint extends ASN1Object {
         return this.cRLIssuer;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(3);
         if (this.distributionPoint != null) {

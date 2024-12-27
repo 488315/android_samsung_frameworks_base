@@ -37,7 +37,12 @@ public class FilterSurfaceView extends SurfaceView implements SurfaceHolder.Call
             throw new NullPointerException("Attempting to bind null filter to SurfaceView!");
         }
         if (this.mListener != null && this.mListener != listener) {
-            throw new RuntimeException("Attempting to bind filter " + listener + " to SurfaceView with another open filter " + this.mListener + " attached already!");
+            throw new RuntimeException(
+                    "Attempting to bind filter "
+                            + listener
+                            + " to SurfaceView with another open filter "
+                            + this.mListener
+                            + " attached already!");
         }
         this.mListener = listener;
         if (this.mGLEnv != null && this.mGLEnv != glEnv) {
@@ -77,7 +82,8 @@ public class FilterSurfaceView extends SurfaceView implements SurfaceHolder.Call
     }
 
     @Override // android.view.SurfaceHolder.Callback
-    public synchronized void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    public synchronized void surfaceChanged(
+            SurfaceHolder holder, int format, int width, int height) {
         this.mFormat = format;
         this.mWidth = width;
         this.mHeight = height;
@@ -99,7 +105,10 @@ public class FilterSurfaceView extends SurfaceView implements SurfaceHolder.Call
     private void registerSurface() {
         this.mSurfaceId = this.mGLEnv.registerSurface(getHolder().getSurface());
         if (this.mSurfaceId < 0) {
-            throw new RuntimeException("Could not register Surface: " + getHolder().getSurface() + " in FilterSurfaceView!");
+            throw new RuntimeException(
+                    "Could not register Surface: "
+                            + getHolder().getSurface()
+                            + " in FilterSurfaceView!");
         }
     }
 

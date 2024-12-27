@@ -8,19 +8,21 @@ import android.os.SystemClock;
 @SystemApi
 /* loaded from: classes.dex */
 public final class VirtualSensorEvent implements Parcelable {
-    public static final Parcelable.Creator<VirtualSensorEvent> CREATOR = new Parcelable.Creator<VirtualSensorEvent>() { // from class: android.companion.virtual.sensor.VirtualSensorEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualSensorEvent createFromParcel(Parcel source) {
-            return new VirtualSensorEvent(source);
-        }
+    public static final Parcelable.Creator<VirtualSensorEvent> CREATOR =
+            new Parcelable.Creator<VirtualSensorEvent>() { // from class:
+                // android.companion.virtual.sensor.VirtualSensorEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualSensorEvent createFromParcel(Parcel source) {
+                    return new VirtualSensorEvent(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualSensorEvent[] newArray(int size) {
-            return new VirtualSensorEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualSensorEvent[] newArray(int size) {
+                    return new VirtualSensorEvent[size];
+                }
+            };
     private long mTimestampNanos;
     private float[] mValues;
 
@@ -66,7 +68,8 @@ public final class VirtualSensorEvent implements Parcelable {
 
         public VirtualSensorEvent build() {
             if (this.mValues == null || this.mValues.length == 0) {
-                throw new IllegalArgumentException("Cannot build virtual sensor event with no values.");
+                throw new IllegalArgumentException(
+                        "Cannot build virtual sensor event with no values.");
             }
             if (this.mTimestampNanos <= 0) {
                 this.mTimestampNanos = SystemClock.elapsedRealtimeNanos();

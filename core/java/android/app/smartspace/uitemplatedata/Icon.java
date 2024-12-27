@@ -5,35 +5,43 @@ import android.app.smartspace.SmartspaceUtils;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class Icon implements Parcelable {
-    public static final Parcelable.Creator<Icon> CREATOR = new Parcelable.Creator<Icon>() { // from class: android.app.smartspace.uitemplatedata.Icon.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Icon createFromParcel(Parcel in) {
-            return new Icon(in);
-        }
+    public static final Parcelable.Creator<Icon> CREATOR =
+            new Parcelable.Creator<
+                    Icon>() { // from class: android.app.smartspace.uitemplatedata.Icon.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Icon createFromParcel(Parcel in) {
+                    return new Icon(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Icon[] newArray(int size) {
-            return new Icon[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Icon[] newArray(int size) {
+                    return new Icon[size];
+                }
+            };
     private final CharSequence mContentDescription;
     private final android.graphics.drawable.Icon mIcon;
     private final boolean mShouldTint;
 
     Icon(Parcel in) {
-        this.mIcon = (android.graphics.drawable.Icon) in.readTypedObject(android.graphics.drawable.Icon.CREATOR);
+        this.mIcon =
+                (android.graphics.drawable.Icon)
+                        in.readTypedObject(android.graphics.drawable.Icon.CREATOR);
         this.mContentDescription = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
         this.mShouldTint = in.readBoolean();
     }
 
-    private Icon(android.graphics.drawable.Icon icon, CharSequence contentDescription, boolean shouldTint) {
+    private Icon(
+            android.graphics.drawable.Icon icon,
+            CharSequence contentDescription,
+            boolean shouldTint) {
         this.mIcon = icon;
         this.mContentDescription = contentDescription;
         this.mShouldTint = shouldTint;
@@ -59,11 +67,14 @@ public final class Icon implements Parcelable {
             return false;
         }
         Icon that = (Icon) o;
-        return this.mIcon.toString().equals(that.mIcon.toString()) && SmartspaceUtils.isEqual(this.mContentDescription, that.mContentDescription) && this.mShouldTint == that.mShouldTint;
+        return this.mIcon.toString().equals(that.mIcon.toString())
+                && SmartspaceUtils.isEqual(this.mContentDescription, that.mContentDescription)
+                && this.mShouldTint == that.mShouldTint;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mIcon.toString(), this.mContentDescription, Boolean.valueOf(this.mShouldTint));
+        return Objects.hash(
+                this.mIcon.toString(), this.mContentDescription, Boolean.valueOf(this.mShouldTint));
     }
 
     @Override // android.os.Parcelable
@@ -79,7 +90,13 @@ public final class Icon implements Parcelable {
     }
 
     public String toString() {
-        return "SmartspaceIcon{mIcon=" + this.mIcon + ", mContentDescription=" + ((Object) this.mContentDescription) + ", mShouldTint=" + this.mShouldTint + '}';
+        return "SmartspaceIcon{mIcon="
+                + this.mIcon
+                + ", mContentDescription="
+                + ((Object) this.mContentDescription)
+                + ", mShouldTint="
+                + this.mShouldTint
+                + '}';
     }
 
     @SystemApi

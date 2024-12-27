@@ -4,6 +4,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
+
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +18,7 @@ public class DualDumpOutputStream {
     private final IndentingPrintWriter mIpw;
     private final ProtoOutputStream mProtoStream;
 
-    private static abstract class Dumpable {
+    private abstract static class Dumpable {
         final String name;
 
         abstract void print(IndentingPrintWriter indentingPrintWriter, boolean z);
@@ -106,7 +107,9 @@ public class DualDumpOutputStream {
         if (this.mProtoStream != null) {
             this.mProtoStream.write(fieldId, val);
         } else {
-            this.mDumpObjects.getLast().add(fieldName, new DumpField(fieldName, String.valueOf(val)));
+            this.mDumpObjects
+                    .getLast()
+                    .add(fieldName, new DumpField(fieldName, String.valueOf(val)));
         }
     }
 
@@ -114,7 +117,9 @@ public class DualDumpOutputStream {
         if (this.mProtoStream != null) {
             this.mProtoStream.write(fieldId, val);
         } else {
-            this.mDumpObjects.getLast().add(fieldName, new DumpField(fieldName, String.valueOf(val)));
+            this.mDumpObjects
+                    .getLast()
+                    .add(fieldName, new DumpField(fieldName, String.valueOf(val)));
         }
     }
 
@@ -122,7 +127,9 @@ public class DualDumpOutputStream {
         if (this.mProtoStream != null) {
             this.mProtoStream.write(fieldId, val);
         } else {
-            this.mDumpObjects.getLast().add(fieldName, new DumpField(fieldName, String.valueOf(val)));
+            this.mDumpObjects
+                    .getLast()
+                    .add(fieldName, new DumpField(fieldName, String.valueOf(val)));
         }
     }
 
@@ -130,7 +137,9 @@ public class DualDumpOutputStream {
         if (this.mProtoStream != null) {
             this.mProtoStream.write(fieldId, val);
         } else {
-            this.mDumpObjects.getLast().add(fieldName, new DumpField(fieldName, String.valueOf(val)));
+            this.mDumpObjects
+                    .getLast()
+                    .add(fieldName, new DumpField(fieldName, String.valueOf(val)));
         }
     }
 
@@ -138,7 +147,9 @@ public class DualDumpOutputStream {
         if (this.mProtoStream != null) {
             this.mProtoStream.write(fieldId, val);
         } else {
-            this.mDumpObjects.getLast().add(fieldName, new DumpField(fieldName, Arrays.toString(val)));
+            this.mDumpObjects
+                    .getLast()
+                    .add(fieldName, new DumpField(fieldName, Arrays.toString(val)));
         }
     }
 
@@ -146,7 +157,9 @@ public class DualDumpOutputStream {
         if (this.mProtoStream != null) {
             this.mProtoStream.write(fieldId, val);
         } else {
-            this.mDumpObjects.getLast().add(fieldName, new DumpField(fieldName, String.valueOf(val)));
+            this.mDumpObjects
+                    .getLast()
+                    .add(fieldName, new DumpField(fieldName, String.valueOf(val)));
         }
     }
 
@@ -154,7 +167,9 @@ public class DualDumpOutputStream {
         if (this.mProtoStream != null) {
             this.mProtoStream.write(fieldId, val);
         } else {
-            this.mDumpObjects.getLast().add(fieldName, new DumpField(fieldName, String.valueOf(val)));
+            this.mDumpObjects
+                    .getLast()
+                    .add(fieldName, new DumpField(fieldName, String.valueOf(val)));
         }
     }
 
@@ -174,7 +189,12 @@ public class DualDumpOutputStream {
             return;
         }
         if (System.identityHashCode(this.mDumpObjects.getLast()) != token) {
-            Log.w(LOG_TAG, "Unexpected token for ending " + this.mDumpObjects.getLast().name + " at " + Arrays.toString(Thread.currentThread().getStackTrace()));
+            Log.w(
+                    LOG_TAG,
+                    "Unexpected token for ending "
+                            + this.mDumpObjects.getLast().name
+                            + " at "
+                            + Arrays.toString(Thread.currentThread().getStackTrace()));
         }
         this.mDumpObjects.removeLast();
     }
@@ -196,7 +216,13 @@ public class DualDumpOutputStream {
         if (this.mIpw == null) {
             Log.w(LOG_TAG, "writeNested does not work for proto logging");
         } else {
-            this.mDumpObjects.getLast().add(fieldName, new DumpField(fieldName, new String(nestedState, StandardCharsets.UTF_8).trim()));
+            this.mDumpObjects
+                    .getLast()
+                    .add(
+                            fieldName,
+                            new DumpField(
+                                    fieldName,
+                                    new String(nestedState, StandardCharsets.UTF_8).trim()));
         }
     }
 

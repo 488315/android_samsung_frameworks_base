@@ -7,7 +7,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.window.ITaskOrganizer;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -20,7 +20,8 @@ public interface ITaskOrganizerController extends IInterface {
 
     boolean deleteRootTask(WindowContainerToken windowContainerToken) throws RemoteException;
 
-    List<ActivityManager.RunningTaskInfo> getChildTasks(WindowContainerToken windowContainerToken, int[] iArr) throws RemoteException;
+    List<ActivityManager.RunningTaskInfo> getChildTasks(
+            WindowContainerToken windowContainerToken, int[] iArr) throws RemoteException;
 
     float getFreeformTaskOpacity(int i) throws RemoteException;
 
@@ -30,15 +31,19 @@ public interface ITaskOrganizerController extends IInterface {
 
     boolean isPinStateChangeable(int i) throws RemoteException;
 
-    ParceledListSlice<TaskAppearedInfo> registerTaskOrganizer(ITaskOrganizer iTaskOrganizer) throws RemoteException;
+    ParceledListSlice<TaskAppearedInfo> registerTaskOrganizer(ITaskOrganizer iTaskOrganizer)
+            throws RemoteException;
 
-    void restartTaskTopActivityProcessIfVisible(WindowContainerToken windowContainerToken) throws RemoteException;
+    void restartTaskTopActivityProcessIfVisible(WindowContainerToken windowContainerToken)
+            throws RemoteException;
 
     void setFreeformTaskOpacity(int i, float f) throws RemoteException;
 
-    void setFreeformTaskSurfaceOverlappedWithNavi(WindowContainerToken windowContainerToken, boolean z) throws RemoteException;
+    void setFreeformTaskSurfaceOverlappedWithNavi(
+            WindowContainerToken windowContainerToken, boolean z) throws RemoteException;
 
-    void setInterceptBackPressedOnTaskRoot(WindowContainerToken windowContainerToken, boolean z) throws RemoteException;
+    void setInterceptBackPressedOnTaskRoot(WindowContainerToken windowContainerToken, boolean z)
+            throws RemoteException;
 
     boolean togglePinTaskState(int i) throws RemoteException;
 
@@ -46,21 +51,26 @@ public interface ITaskOrganizerController extends IInterface {
 
     public static class Default implements ITaskOrganizerController {
         @Override // android.window.ITaskOrganizerController
-        public ParceledListSlice<TaskAppearedInfo> registerTaskOrganizer(ITaskOrganizer organizer) throws RemoteException {
+        public ParceledListSlice<TaskAppearedInfo> registerTaskOrganizer(ITaskOrganizer organizer)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.window.ITaskOrganizerController
-        public void unregisterTaskOrganizer(ITaskOrganizer organizer) throws RemoteException {
-        }
+        public void unregisterTaskOrganizer(ITaskOrganizer organizer) throws RemoteException {}
 
         @Override // android.window.ITaskOrganizerController
-        public void createRootTask(int displayId, int windowingMode, IBinder launchCookie, boolean removeWithTaskOrganizer) throws RemoteException {
-        }
+        public void createRootTask(
+                int displayId,
+                int windowingMode,
+                IBinder launchCookie,
+                boolean removeWithTaskOrganizer)
+                throws RemoteException {}
 
         @Override // android.window.ITaskOrganizerController
-        public void createStageRootTask(int displayId, int windowingMode, int stageType, IBinder launchCookie) throws RemoteException {
-        }
+        public void createStageRootTask(
+                int displayId, int windowingMode, int stageType, IBinder launchCookie)
+                throws RemoteException {}
 
         @Override // android.window.ITaskOrganizerController
         public boolean deleteRootTask(WindowContainerToken task) throws RemoteException {
@@ -68,12 +78,14 @@ public interface ITaskOrganizerController extends IInterface {
         }
 
         @Override // android.window.ITaskOrganizerController
-        public List<ActivityManager.RunningTaskInfo> getChildTasks(WindowContainerToken parent, int[] activityTypes) throws RemoteException {
+        public List<ActivityManager.RunningTaskInfo> getChildTasks(
+                WindowContainerToken parent, int[] activityTypes) throws RemoteException {
             return null;
         }
 
         @Override // android.window.ITaskOrganizerController
-        public List<ActivityManager.RunningTaskInfo> getRootTasks(int displayId, int[] activityTypes) throws RemoteException {
+        public List<ActivityManager.RunningTaskInfo> getRootTasks(
+                int displayId, int[] activityTypes) throws RemoteException {
             return null;
         }
 
@@ -83,12 +95,12 @@ public interface ITaskOrganizerController extends IInterface {
         }
 
         @Override // android.window.ITaskOrganizerController
-        public void setInterceptBackPressedOnTaskRoot(WindowContainerToken task, boolean interceptBackPressed) throws RemoteException {
-        }
+        public void setInterceptBackPressedOnTaskRoot(
+                WindowContainerToken task, boolean interceptBackPressed) throws RemoteException {}
 
         @Override // android.window.ITaskOrganizerController
-        public void restartTaskTopActivityProcessIfVisible(WindowContainerToken task) throws RemoteException {
-        }
+        public void restartTaskTopActivityProcessIfVisible(WindowContainerToken task)
+                throws RemoteException {}
 
         @Override // android.window.ITaskOrganizerController
         public float getFreeformTaskOpacity(int taskId) throws RemoteException {
@@ -96,8 +108,7 @@ public interface ITaskOrganizerController extends IInterface {
         }
 
         @Override // android.window.ITaskOrganizerController
-        public void setFreeformTaskOpacity(int taskId, float alpha) throws RemoteException {
-        }
+        public void setFreeformTaskOpacity(int taskId, float alpha) throws RemoteException {}
 
         @Override // android.window.ITaskOrganizerController
         public boolean togglePinTaskState(int taskId) throws RemoteException {
@@ -110,8 +121,8 @@ public interface ITaskOrganizerController extends IInterface {
         }
 
         @Override // android.window.ITaskOrganizerController
-        public void setFreeformTaskSurfaceOverlappedWithNavi(WindowContainerToken task, boolean overlap) throws RemoteException {
-        }
+        public void setFreeformTaskSurfaceOverlappedWithNavi(
+                WindowContainerToken task, boolean overlap) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -119,7 +130,7 @@ public interface ITaskOrganizerController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITaskOrganizerController {
+    public abstract static class Stub extends Binder implements ITaskOrganizerController {
         static final int TRANSACTION_createRootTask = 3;
         static final int TRANSACTION_createStageRootTask = 4;
         static final int TRANSACTION_deleteRootTask = 5;
@@ -199,7 +210,8 @@ public interface ITaskOrganizerController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITaskOrganizerController.DESCRIPTOR);
             }
@@ -216,7 +228,8 @@ public interface ITaskOrganizerController extends IInterface {
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 2:
-                    ITaskOrganizer _arg02 = ITaskOrganizer.Stub.asInterface(data.readStrongBinder());
+                    ITaskOrganizer _arg02 =
+                            ITaskOrganizer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterTaskOrganizer(_arg02);
                     reply.writeNoException();
@@ -240,14 +253,18 @@ public interface ITaskOrganizerController extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 5:
-                    WindowContainerToken _arg05 = (WindowContainerToken) data.readTypedObject(WindowContainerToken.CREATOR);
+                    WindowContainerToken _arg05 =
+                            (WindowContainerToken)
+                                    data.readTypedObject(WindowContainerToken.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result2 = deleteRootTask(_arg05);
                     reply.writeNoException();
                     reply.writeBoolean(_result2);
                     return true;
                 case 6:
-                    WindowContainerToken _arg06 = (WindowContainerToken) data.readTypedObject(WindowContainerToken.CREATOR);
+                    WindowContainerToken _arg06 =
+                            (WindowContainerToken)
+                                    data.readTypedObject(WindowContainerToken.CREATOR);
                     int[] _arg13 = data.createIntArray();
                     data.enforceNoDataAvail();
                     List<ActivityManager.RunningTaskInfo> _result3 = getChildTasks(_arg06, _arg13);
@@ -270,14 +287,18 @@ public interface ITaskOrganizerController extends IInterface {
                     reply.writeTypedObject(_result5, 1);
                     return true;
                 case 9:
-                    WindowContainerToken _arg09 = (WindowContainerToken) data.readTypedObject(WindowContainerToken.CREATOR);
+                    WindowContainerToken _arg09 =
+                            (WindowContainerToken)
+                                    data.readTypedObject(WindowContainerToken.CREATOR);
                     boolean _arg15 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setInterceptBackPressedOnTaskRoot(_arg09, _arg15);
                     reply.writeNoException();
                     return true;
                 case 10:
-                    WindowContainerToken _arg010 = (WindowContainerToken) data.readTypedObject(WindowContainerToken.CREATOR);
+                    WindowContainerToken _arg010 =
+                            (WindowContainerToken)
+                                    data.readTypedObject(WindowContainerToken.CREATOR);
                     data.enforceNoDataAvail();
                     restartTaskTopActivityProcessIfVisible(_arg010);
                     reply.writeNoException();
@@ -311,7 +332,9 @@ public interface ITaskOrganizerController extends IInterface {
                     reply.writeBoolean(_result8);
                     return true;
                 case 15:
-                    WindowContainerToken _arg015 = (WindowContainerToken) data.readTypedObject(WindowContainerToken.CREATOR);
+                    WindowContainerToken _arg015 =
+                            (WindowContainerToken)
+                                    data.readTypedObject(WindowContainerToken.CREATOR);
                     boolean _arg17 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setFreeformTaskSurfaceOverlappedWithNavi(_arg015, _arg17);
@@ -339,7 +362,8 @@ public interface ITaskOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizerController
-            public ParceledListSlice<TaskAppearedInfo> registerTaskOrganizer(ITaskOrganizer organizer) throws RemoteException {
+            public ParceledListSlice<TaskAppearedInfo> registerTaskOrganizer(
+                    ITaskOrganizer organizer) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -347,7 +371,8 @@ public interface ITaskOrganizerController extends IInterface {
                     _data.writeStrongInterface(organizer);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<TaskAppearedInfo> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<TaskAppearedInfo> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -371,7 +396,12 @@ public interface ITaskOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizerController
-            public void createRootTask(int displayId, int windowingMode, IBinder launchCookie, boolean removeWithTaskOrganizer) throws RemoteException {
+            public void createRootTask(
+                    int displayId,
+                    int windowingMode,
+                    IBinder launchCookie,
+                    boolean removeWithTaskOrganizer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -389,7 +419,9 @@ public interface ITaskOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizerController
-            public void createStageRootTask(int displayId, int windowingMode, int stageType, IBinder launchCookie) throws RemoteException {
+            public void createStageRootTask(
+                    int displayId, int windowingMode, int stageType, IBinder launchCookie)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -424,7 +456,8 @@ public interface ITaskOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizerController
-            public List<ActivityManager.RunningTaskInfo> getChildTasks(WindowContainerToken parent, int[] activityTypes) throws RemoteException {
+            public List<ActivityManager.RunningTaskInfo> getChildTasks(
+                    WindowContainerToken parent, int[] activityTypes) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -433,7 +466,8 @@ public interface ITaskOrganizerController extends IInterface {
                     _data.writeIntArray(activityTypes);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    List<ActivityManager.RunningTaskInfo> _result = _reply.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
+                    List<ActivityManager.RunningTaskInfo> _result =
+                            _reply.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -442,7 +476,8 @@ public interface ITaskOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizerController
-            public List<ActivityManager.RunningTaskInfo> getRootTasks(int displayId, int[] activityTypes) throws RemoteException {
+            public List<ActivityManager.RunningTaskInfo> getRootTasks(
+                    int displayId, int[] activityTypes) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -451,7 +486,8 @@ public interface ITaskOrganizerController extends IInterface {
                     _data.writeIntArray(activityTypes);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    List<ActivityManager.RunningTaskInfo> _result = _reply.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
+                    List<ActivityManager.RunningTaskInfo> _result =
+                            _reply.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -468,7 +504,9 @@ public interface ITaskOrganizerController extends IInterface {
                     _data.writeInt(display);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    WindowContainerToken _result = (WindowContainerToken) _reply.readTypedObject(WindowContainerToken.CREATOR);
+                    WindowContainerToken _result =
+                            (WindowContainerToken)
+                                    _reply.readTypedObject(WindowContainerToken.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -477,7 +515,9 @@ public interface ITaskOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizerController
-            public void setInterceptBackPressedOnTaskRoot(WindowContainerToken task, boolean interceptBackPressed) throws RemoteException {
+            public void setInterceptBackPressedOnTaskRoot(
+                    WindowContainerToken task, boolean interceptBackPressed)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -493,7 +533,8 @@ public interface ITaskOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizerController
-            public void restartTaskTopActivityProcessIfVisible(WindowContainerToken task) throws RemoteException {
+            public void restartTaskTopActivityProcessIfVisible(WindowContainerToken task)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -575,7 +616,8 @@ public interface ITaskOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizerController
-            public void setFreeformTaskSurfaceOverlappedWithNavi(WindowContainerToken task, boolean overlap) throws RemoteException {
+            public void setFreeformTaskSurfaceOverlappedWithNavi(
+                    WindowContainerToken task, boolean overlap) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

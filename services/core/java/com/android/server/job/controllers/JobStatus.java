@@ -20,6 +20,7 @@ import android.util.Patterns;
 import android.util.Slog;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.modules.expresslog.Counter;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
@@ -31,8 +32,9 @@ import com.android.server.job.GrantedUriPermissions;
 import com.android.server.job.JobSchedulerInternal;
 import com.android.server.job.JobSchedulerService;
 import com.android.server.job.JobSchedulerService$$ExternalSyntheticLambda1;
-import com.android.server.job.controllers.ContentObserverController;
+
 import dalvik.annotation.optimization.NeverCompile;
+
 import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -128,7 +130,9 @@ public final class JobStatus {
     public long whenStandbyDeferred;
     public static final boolean DEBUG = JobSchedulerService.DEBUG;
     public static final ArrayMap sNamespaceHashCache = new ArrayMap();
-    public static final Uri[] MEDIA_URIS_FOR_STANDBY_EXEMPTION = {MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Video.Media.EXTERNAL_CONTENT_URI};
+    public static final Uri[] MEDIA_URIS_FOR_STANDBY_EXEMPTION = {
+        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+    };
 
     static {
         ArrayMap arrayMap = new ArrayMap();
@@ -160,22 +164,62 @@ public final class JobStatus {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public JobStatus(android.app.job.JobInfo r20, int r21, java.lang.String r22, int r23, int r24, java.lang.String r25, java.lang.String r26, int r27, int r28, long r29, long r31, long r33, long r35, long r37, int r39, int r40) {
+    public JobStatus(
+            android.app.job.JobInfo r20,
+            int r21,
+            java.lang.String r22,
+            int r23,
+            int r24,
+            java.lang.String r25,
+            java.lang.String r26,
+            int r27,
+            int r28,
+            long r29,
+            long r31,
+            long r33,
+            long r35,
+            long r37,
+            int r39,
+            int r40) {
         /*
             Method dump skipped, instructions count: 684
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.controllers.JobStatus.<init>(android.app.job.JobInfo, int, java.lang.String, int, int, java.lang.String, java.lang.String, int, int, long, long, long, long, long, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.job.controllers.JobStatus.<init>(android.app.job.JobInfo,"
+                    + " int, java.lang.String, int, int, java.lang.String, java.lang.String, int,"
+                    + " int, long, long, long, long, long, int, int):void");
     }
 
-    public JobStatus(JobStatus jobStatus, long j, long j2, int i, int i2, long j3, long j4, long j5) {
-        this(jobStatus.job, jobStatus.callingUid, jobStatus.sourcePackageName, jobStatus.sourceUserId, jobStatus.standbyBucket, jobStatus.mNamespace, jobStatus.sourceTag, i, i2, j, j2, j3, j4, j5, jobStatus.mInternalFlags, jobStatus.mDynamicConstraints);
+    public JobStatus(
+            JobStatus jobStatus, long j, long j2, int i, int i2, long j3, long j4, long j5) {
+        this(
+                jobStatus.job,
+                jobStatus.callingUid,
+                jobStatus.sourcePackageName,
+                jobStatus.sourceUserId,
+                jobStatus.standbyBucket,
+                jobStatus.mNamespace,
+                jobStatus.sourceTag,
+                i,
+                i2,
+                j,
+                j2,
+                j3,
+                j4,
+                j5,
+                jobStatus.mInternalFlags,
+                jobStatus.mDynamicConstraints);
     }
 
     public static String applyBasicPiiFilters(String str) {
         for (int size = BASIC_PII_FILTERS.size() - 1; size >= 0; size--) {
             ArrayMap arrayMap = BASIC_PII_FILTERS;
-            str = ((Pattern) arrayMap.keyAt(size)).matcher(str).replaceAll((String) arrayMap.valueAt(size));
+            str =
+                    ((Pattern) arrayMap.keyAt(size))
+                            .matcher(str)
+                            .replaceAll((String) arrayMap.valueAt(size));
         }
         return str;
     }
@@ -201,20 +245,53 @@ public final class JobStatus {
         }
     }
 
-    public static JobStatus createFromJobInfo(JobInfo jobInfo, int i, String str, int i2, String str2, String str3) {
+    public static JobStatus createFromJobInfo(
+            JobInfo jobInfo, int i, String str, int i2, String str2, String str3) {
         long minLatencyMillis;
         long maxExecutionDelayMillis;
         JobSchedulerService.sElapsedRealtimeClock.getClass();
         long elapsedRealtime = SystemClock.elapsedRealtime();
         if (jobInfo.isPeriodic()) {
-            long max = Math.max(JobInfo.getMinPeriodMillis(), Math.min(31536000000L, jobInfo.getIntervalMillis()));
+            long max =
+                    Math.max(
+                            JobInfo.getMinPeriodMillis(),
+                            Math.min(31536000000L, jobInfo.getIntervalMillis()));
             maxExecutionDelayMillis = elapsedRealtime + max;
-            minLatencyMillis = maxExecutionDelayMillis - Math.max(JobInfo.getMinFlexMillis(), Math.min(max, jobInfo.getFlexMillis()));
+            minLatencyMillis =
+                    maxExecutionDelayMillis
+                            - Math.max(
+                                    JobInfo.getMinFlexMillis(),
+                                    Math.min(max, jobInfo.getFlexMillis()));
         } else {
-            minLatencyMillis = jobInfo.hasEarlyConstraint() ? jobInfo.getMinLatencyMillis() + elapsedRealtime : 0L;
-            maxExecutionDelayMillis = jobInfo.hasLateConstraint() ? jobInfo.getMaxExecutionDelayMillis() + elapsedRealtime : Long.MAX_VALUE;
+            minLatencyMillis =
+                    jobInfo.hasEarlyConstraint()
+                            ? jobInfo.getMinLatencyMillis() + elapsedRealtime
+                            : 0L;
+            maxExecutionDelayMillis =
+                    jobInfo.hasLateConstraint()
+                            ? jobInfo.getMaxExecutionDelayMillis() + elapsedRealtime
+                            : Long.MAX_VALUE;
         }
-        return new JobStatus(jobInfo, i, str, i2, JobSchedulerService.standbyBucketForPackage(i2, str != null ? str : jobInfo.getService().getPackageName(), elapsedRealtime), str2, str3, 0, 0, minLatencyMillis, maxExecutionDelayMillis, 0L, 0L, 0L, 0, 0);
+        return new JobStatus(
+                jobInfo,
+                i,
+                str,
+                i2,
+                JobSchedulerService.standbyBucketForPackage(
+                        i2,
+                        str != null ? str : jobInfo.getService().getPackageName(),
+                        elapsedRealtime),
+                str2,
+                str3,
+                0,
+                0,
+                minLatencyMillis,
+                maxExecutionDelayMillis,
+                0L,
+                0L,
+                0L,
+                0,
+                0);
     }
 
     public static void dumpConstraints(int i, PrintWriter printWriter) {
@@ -303,7 +380,8 @@ public final class JobStatus {
         }
     }
 
-    public static void dumpJobWorkItem(IndentingPrintWriter indentingPrintWriter, JobWorkItem jobWorkItem, int i) {
+    public static void dumpJobWorkItem(
+            IndentingPrintWriter indentingPrintWriter, JobWorkItem jobWorkItem, int i) {
         indentingPrintWriter.increaseIndent();
         indentingPrintWriter.print("#");
         indentingPrintWriter.print(i);
@@ -322,7 +400,8 @@ public final class JobStatus {
         indentingPrintWriter.decreaseIndent();
     }
 
-    public static void dumpJobWorkItem(ProtoOutputStream protoOutputStream, long j, JobWorkItem jobWorkItem) {
+    public static void dumpJobWorkItem(
+            ProtoOutputStream protoOutputStream, long j, JobWorkItem jobWorkItem) {
         long start = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, jobWorkItem.getWorkId());
         protoOutputStream.write(1120986464258L, jobWorkItem.getDeliveryCount());
@@ -353,10 +432,13 @@ public final class JobStatus {
     }
 
     public final boolean canRunInDoze() {
-        if (this.appHasDozeExemption || (this.job.getFlags() & 1) != 0 || shouldTreatAsUserInitiatedJob()) {
+        if (this.appHasDozeExemption
+                || (this.job.getFlags() & 1) != 0
+                || shouldTreatAsUserInitiatedJob()) {
             return true;
         }
-        return (shouldTreatAsExpeditedJob() || this.startedAsExpeditedJob) && (this.mDynamicConstraints & 33554432) == 0;
+        return (shouldTreatAsExpeditedJob() || this.startedAsExpeditedJob)
+                && (this.mDynamicConstraints & 33554432) == 0;
     }
 
     public final boolean clearTrackingController(int i) {
@@ -461,7 +543,8 @@ public final class JobStatus {
                 indentingPrintWriter.println("Trigger content URIs:");
                 indentingPrintWriter.increaseIndent();
                 for (int i = 0; i < this.job.getTriggerContentUris().length; i++) {
-                    JobInfo.TriggerContentUri triggerContentUri = this.job.getTriggerContentUris()[i];
+                    JobInfo.TriggerContentUri triggerContentUri =
+                            this.job.getTriggerContentUris()[i];
                     indentingPrintWriter.print(Integer.toHexString(triggerContentUri.getFlags()));
                     indentingPrintWriter.print(' ');
                     indentingPrintWriter.println(triggerContentUri.getUri());
@@ -469,21 +552,28 @@ public final class JobStatus {
                 indentingPrintWriter.decreaseIndent();
                 if (this.job.getTriggerContentUpdateDelay() >= 0) {
                     indentingPrintWriter.print("Trigger update delay: ");
-                    TimeUtils.formatDuration(this.job.getTriggerContentUpdateDelay(), indentingPrintWriter);
+                    TimeUtils.formatDuration(
+                            this.job.getTriggerContentUpdateDelay(), indentingPrintWriter);
                     indentingPrintWriter.println();
                 }
                 if (this.job.getTriggerContentMaxDelay() >= 0) {
                     indentingPrintWriter.print("Trigger max delay: ");
-                    TimeUtils.formatDuration(this.job.getTriggerContentMaxDelay(), indentingPrintWriter);
+                    TimeUtils.formatDuration(
+                            this.job.getTriggerContentMaxDelay(), indentingPrintWriter);
                     indentingPrintWriter.println();
                 }
-                indentingPrintWriter.print("Has media backup exemption", Boolean.valueOf(this.mHasMediaBackupExemption)).println();
+                indentingPrintWriter
+                        .print(
+                                "Has media backup exemption",
+                                Boolean.valueOf(this.mHasMediaBackupExemption))
+                        .println();
             }
             if (this.job.getExtras() != null && !this.job.getExtras().isDefinitelyEmpty()) {
                 indentingPrintWriter.print("Extras: ");
                 indentingPrintWriter.println(this.job.getExtras().toShortString());
             }
-            if (this.job.getTransientExtras() != null && !this.job.getTransientExtras().isDefinitelyEmpty()) {
+            if (this.job.getTransientExtras() != null
+                    && !this.job.getTransientExtras().isDefinitelyEmpty()) {
                 indentingPrintWriter.print("Transient extras: ");
                 indentingPrintWriter.println(this.job.getTransientExtras().toShortString());
             }
@@ -520,7 +610,8 @@ public final class JobStatus {
             }
             if (this.job.getMaxExecutionDelayMillis() != 0) {
                 indentingPrintWriter.print("Max execution delay: ");
-                TimeUtils.formatDuration(this.job.getMaxExecutionDelayMillis(), indentingPrintWriter);
+                TimeUtils.formatDuration(
+                        this.job.getMaxExecutionDelayMillis(), indentingPrintWriter);
                 indentingPrintWriter.println();
             }
             indentingPrintWriter.print("Backoff: policy=");
@@ -779,7 +870,8 @@ public final class JobStatus {
                 int i2 = 0;
                 while (i2 < this.job.getTriggerContentUris().length) {
                     long start3 = protoOutputStream.start(2246267895819L);
-                    JobInfo.TriggerContentUri triggerContentUri = this.job.getTriggerContentUris()[i2];
+                    JobInfo.TriggerContentUri triggerContentUri =
+                            this.job.getTriggerContentUris()[i2];
                     protoOutputStream.write(j2, triggerContentUri.getFlags());
                     Uri uri = triggerContentUri.getUri();
                     if (uri != null) {
@@ -790,7 +882,8 @@ public final class JobStatus {
                     j2 = 1120986464257L;
                 }
                 if (this.job.getTriggerContentUpdateDelay() >= 0) {
-                    protoOutputStream.write(1112396529676L, this.job.getTriggerContentUpdateDelay());
+                    protoOutputStream.write(
+                            1112396529676L, this.job.getTriggerContentUpdateDelay());
                 }
                 if (this.job.getTriggerContentMaxDelay() >= 0) {
                     protoOutputStream.write(1112396529677L, this.job.getTriggerContentMaxDelay());
@@ -799,7 +892,8 @@ public final class JobStatus {
             if (this.job.getExtras() != null && !this.job.getExtras().isDefinitelyEmpty()) {
                 this.job.getExtras().dumpDebug(protoOutputStream, 1146756268046L);
             }
-            if (this.job.getTransientExtras() != null && !this.job.getTransientExtras().isDefinitelyEmpty()) {
+            if (this.job.getTransientExtras() != null
+                    && !this.job.getTransientExtras().isDefinitelyEmpty()) {
                 this.job.getTransientExtras().dumpDebug(protoOutputStream, 1146756268047L);
             }
             if (this.job.getClipData() != null) {
@@ -832,7 +926,10 @@ public final class JobStatus {
         dumpConstraints(protoOutputStream, 2259152797727L, this.mDynamicConstraints);
         if (z) {
             dumpConstraints(protoOutputStream, 2259152797704L, this.satisfiedConstraints);
-            dumpConstraints(protoOutputStream, 2259152797705L, (16777216 | i3) & (~this.satisfiedConstraints));
+            dumpConstraints(
+                    protoOutputStream,
+                    2259152797705L,
+                    (16777216 | i3) & (~this.satisfiedConstraints));
             protoOutputStream.write(1133871366154L, this.appHasDozeExemption);
             protoOutputStream.write(1133871366170L, this.uidActive);
             protoOutputStream.write(1133871366171L, this.job.isExemptedFromAppStandby());
@@ -868,22 +965,28 @@ public final class JobStatus {
         protoOutputStream.end(start5);
         if (this.changedAuthorities != null) {
             for (int i4 = 0; i4 < this.changedAuthorities.size(); i4++) {
-                protoOutputStream.write(2237677961228L, (String) this.changedAuthorities.valueAt(i4));
+                protoOutputStream.write(
+                        2237677961228L, (String) this.changedAuthorities.valueAt(i4));
             }
         }
         if (this.changedUris != null) {
             for (int i5 = 0; i5 < this.changedUris.size(); i5++) {
-                protoOutputStream.write(2237677961229L, ((Uri) this.changedUris.valueAt(i5)).toString());
+                protoOutputStream.write(
+                        2237677961229L, ((Uri) this.changedUris.valueAt(i5)).toString());
             }
         }
         if (this.pendingWork != null) {
             for (int i6 = 0; i6 < this.pendingWork.size(); i6++) {
-                dumpJobWorkItem(protoOutputStream, 2246267895823L, (JobWorkItem) this.pendingWork.get(i6));
+                dumpJobWorkItem(
+                        protoOutputStream, 2246267895823L, (JobWorkItem) this.pendingWork.get(i6));
             }
         }
         if (this.executingWork != null) {
             for (int i7 = 0; i7 < this.executingWork.size(); i7++) {
-                dumpJobWorkItem(protoOutputStream, 2246267895824L, (JobWorkItem) this.executingWork.get(i7));
+                dumpJobWorkItem(
+                        protoOutputStream,
+                        2246267895824L,
+                        (JobWorkItem) this.executingWork.get(i7));
             }
         }
         protoOutputStream.write(1159641169937L, this.standbyBucket);
@@ -929,10 +1032,22 @@ public final class JobStatus {
                 int i = this.sourceUid;
                 String str = this.sourcePackageName;
                 int i2 = this.sourceUserId;
-                grantedUriPermissions = data != null ? GrantedUriPermissions.grantUri(data, i, str, i2, flags, shortString, null) : null;
+                grantedUriPermissions =
+                        data != null
+                                ? GrantedUriPermissions.grantUri(
+                                        data, i, str, i2, flags, shortString, null)
+                                : null;
                 ClipData clipData = intent.getClipData();
                 if (clipData != null) {
-                    grantedUriPermissions = GrantedUriPermissions.grantClip(clipData, i, str, i2, flags, shortString, grantedUriPermissions);
+                    grantedUriPermissions =
+                            GrantedUriPermissions.grantClip(
+                                    clipData,
+                                    i,
+                                    str,
+                                    i2,
+                                    flags,
+                                    shortString,
+                                    grantedUriPermissions);
                 }
             } else {
                 grantedUriPermissions = null;
@@ -944,7 +1059,14 @@ public final class JobStatus {
     }
 
     public final int getEffectivePriority() {
-        int min = Math.min(((this.mInternalFlags & 2) != 0 || (this.job.isUserInitiated() && (this.mInternalFlags & 4) != 0)) ? 400 : 500, this.job.getPriority());
+        int min =
+                Math.min(
+                        ((this.mInternalFlags & 2) != 0
+                                        || (this.job.isUserInitiated()
+                                                && (this.mInternalFlags & 4) != 0))
+                                ? 400
+                                : 500,
+                        this.job.getPriority());
         int i = this.numFailures;
         if (i < 2 || shouldTreatAsUserInitiatedJob()) {
             return min;
@@ -964,11 +1086,17 @@ public final class JobStatus {
 
     public final int getEffectiveStandbyBucket() {
         if (this.mJobSchedulerInternal == null) {
-            this.mJobSchedulerInternal = (JobSchedulerInternal) LocalServices.getService(JobSchedulerInternal.class);
+            this.mJobSchedulerInternal =
+                    (JobSchedulerInternal) LocalServices.getService(JobSchedulerInternal.class);
         }
         JobSchedulerInternal jobSchedulerInternal = this.mJobSchedulerInternal;
         int i = this.callingUid;
-        boolean isAppConsideredBuggy = jobSchedulerInternal.isAppConsideredBuggy(UserHandle.getUserId(i), this.job.getService().getPackageName(), getTimeoutBlameUserId(), getTimeoutBlamePackageName());
+        boolean isAppConsideredBuggy =
+                jobSchedulerInternal.isAppConsideredBuggy(
+                        UserHandle.getUserId(i),
+                        this.job.getService().getPackageName(),
+                        getTimeoutBlameUserId(),
+                        getTimeoutBlamePackageName());
         int i2 = this.standbyBucket;
         if (i2 == 6) {
             if (isAppConsideredBuggy) {
@@ -977,7 +1105,8 @@ public final class JobStatus {
                 if (!packageName.equals(str)) {
                     str = this.job.getService().getPackageName() + "/" + str;
                 }
-                PinnerService$$ExternalSyntheticOutline0.m("Exempted app ", str, " considered buggy", "JobScheduler.JobStatus");
+                PinnerService$$ExternalSyntheticOutline0.m(
+                        "Exempted app ", str, " considered buggy", "JobScheduler.JobStatus");
             }
             return i2;
         }
@@ -994,7 +1123,8 @@ public final class JobStatus {
             if (UserHandle.isCore(i)) {
                 i = this.sourceUid;
             }
-            Counter.logIncrementWithUid("job_scheduler.value_job_quota_reduced_due_to_buggy_uid", i);
+            Counter.logIncrementWithUid(
+                    "job_scheduler.value_job_quota_reduced_due_to_buggy_uid", i);
             this.mIsDowngradedDueToBuggyApp = true;
         }
         return 1;
@@ -1070,7 +1200,9 @@ public final class JobStatus {
     }
 
     public final String getTimeoutBlamePackageName() {
-        return UserHandle.isCore(this.callingUid) ? this.sourcePackageName : this.job.getService().getPackageName();
+        return UserHandle.isCore(this.callingUid)
+                ? this.sourcePackageName
+                : this.job.getService().getPackageName();
     }
 
     public final int getTimeoutBlameUserId() {
@@ -1096,7 +1228,14 @@ public final class JobStatus {
 
     public final UserVisibleJobSummary getUserVisibleJobSummary() {
         if (this.mUserVisibleJobSummary == null) {
-            this.mUserVisibleJobSummary = new UserVisibleJobSummary(this.callingUid, this.job.getService().getPackageName(), this.sourceUserId, this.sourcePackageName, this.mNamespace, this.job.getId());
+            this.mUserVisibleJobSummary =
+                    new UserVisibleJobSummary(
+                            this.callingUid,
+                            this.job.getService().getPackageName(),
+                            this.sourceUserId,
+                            this.sourcePackageName,
+                            this.mNamespace,
+                            this.job.getId());
         }
         return this.mUserVisibleJobSummary;
     }
@@ -1120,7 +1259,9 @@ public final class JobStatus {
     }
 
     public final boolean hasConstraint(int i) {
-        return ((this.requiredConstraints & i) == 0 && (this.mDynamicConstraints & i) == 0) ? false : true;
+        return ((this.requiredConstraints & i) == 0 && (this.mDynamicConstraints & i) == 0)
+                ? false
+                : true;
     }
 
     public final boolean hasContentTriggerConstraint() {
@@ -1148,7 +1289,11 @@ public final class JobStatus {
     }
 
     public final boolean isReady(int i) {
-        if ((this.mReadyWithinQuota || this.mReadyDynamicSatisfied || shouldTreatAsExpeditedJob()) && getEffectiveStandbyBucket() != 4 && this.mReadyNotDozing && this.mReadyNotRestrictedInBg && this.serviceProcessName != null) {
+        if ((this.mReadyWithinQuota || this.mReadyDynamicSatisfied || shouldTreatAsExpeditedJob())
+                && getEffectiveStandbyBucket() != 4
+                && this.mReadyNotDozing
+                && this.mReadyNotRestrictedInBg
+                && this.serviceProcessName != null) {
             return this.mReadyDeadlineSatisfied || isConstraintsSatisfied(i);
         }
         return false;
@@ -1163,11 +1308,19 @@ public final class JobStatus {
     }
 
     public final boolean matches(int i, int i2, String str) {
-        return this.job.getId() == i2 && this.callingUid == i && Objects.equals(this.mNamespace, str);
+        return this.job.getId() == i2
+                && this.callingUid == i
+                && Objects.equals(this.mNamespace, str);
     }
 
-    public final void maybeAddForegroundExemption(JobSchedulerService$$ExternalSyntheticLambda1 jobSchedulerService$$ExternalSyntheticLambda1) {
-        if (this.job.hasEarlyConstraint() || this.job.hasLateConstraint() || (this.mInternalFlags & 1) != 0 || !jobSchedulerService$$ExternalSyntheticLambda1.test(Integer.valueOf(this.sourceUid))) {
+    public final void maybeAddForegroundExemption(
+            JobSchedulerService$$ExternalSyntheticLambda1
+                    jobSchedulerService$$ExternalSyntheticLambda1) {
+        if (this.job.hasEarlyConstraint()
+                || this.job.hasLateConstraint()
+                || (this.mInternalFlags & 1) != 0
+                || !jobSchedulerService$$ExternalSyntheticLambda1.test(
+                        Integer.valueOf(this.sourceUid))) {
             return;
         }
         this.mInternalFlags |= 1;
@@ -1186,7 +1339,15 @@ public final class JobStatus {
             int clipGrantFlags = this.job.getClipGrantFlags();
             String shortString = toShortString();
             if ((clipGrantFlags & 3) != 0) {
-                grantedUriPermissions = GrantedUriPermissions.grantClip(clipData, this.sourceUid, this.sourcePackageName, this.sourceUserId, clipGrantFlags, shortString, null);
+                grantedUriPermissions =
+                        GrantedUriPermissions.grantClip(
+                                clipData,
+                                this.sourceUid,
+                                this.sourcePackageName,
+                                this.sourceUserId,
+                                clipGrantFlags,
+                                shortString,
+                                null);
             }
             this.uriPerms = grantedUriPermissions;
         }
@@ -1296,7 +1457,9 @@ public final class JobStatus {
                     } else if (i != 16777216) {
                         if (i != 33554432) {
                             if (i != 268435456) {
-                                Slog.wtf("JobScheduler.JobStatus", "Unsupported constraint (" + i + ") --stop reason mapping");
+                                Slog.wtf(
+                                        "JobScheduler.JobStatus",
+                                        "Unsupported constraint (" + i + ") --stop reason mapping");
                             } else {
                                 i2 = 7;
                             }
@@ -1515,7 +1678,9 @@ public final class JobStatus {
             r4.mHasMediaBackupExemption = r0
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.controllers.JobStatus.updateMediaBackupExemptionStatus():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.job.controllers.JobStatus.updateMediaBackupExemptionStatus():boolean");
     }
 
     public final void updateNetworkBytesLocked() {
@@ -1532,7 +1697,8 @@ public final class JobStatus {
         this.mMinimumNetworkChunkBytes = this.job.getMinimumNetworkChunkBytes();
         if (this.pendingWork != null) {
             for (int i = 0; i < this.pendingWork.size(); i++) {
-                long estimatedNetworkDownloadBytes2 = ((JobWorkItem) this.pendingWork.get(i)).getEstimatedNetworkDownloadBytes();
+                long estimatedNetworkDownloadBytes2 =
+                        ((JobWorkItem) this.pendingWork.get(i)).getEstimatedNetworkDownloadBytes();
                 if (estimatedNetworkDownloadBytes2 != -1 && estimatedNetworkDownloadBytes2 > 0) {
                     long j = this.mTotalNetworkDownloadBytes;
                     if (j != -1) {
@@ -1541,7 +1707,8 @@ public final class JobStatus {
                         this.mTotalNetworkDownloadBytes = estimatedNetworkDownloadBytes2;
                     }
                 }
-                long estimatedNetworkUploadBytes2 = ((JobWorkItem) this.pendingWork.get(i)).getEstimatedNetworkUploadBytes();
+                long estimatedNetworkUploadBytes2 =
+                        ((JobWorkItem) this.pendingWork.get(i)).getEstimatedNetworkUploadBytes();
                 if (estimatedNetworkUploadBytes2 != -1 && estimatedNetworkUploadBytes2 > 0) {
                     long j2 = this.mTotalNetworkUploadBytes;
                     if (j2 != -1) {
@@ -1550,7 +1717,8 @@ public final class JobStatus {
                         this.mTotalNetworkUploadBytes = estimatedNetworkUploadBytes2;
                     }
                 }
-                long minimumNetworkChunkBytes = ((JobWorkItem) this.pendingWork.get(i)).getMinimumNetworkChunkBytes();
+                long minimumNetworkChunkBytes =
+                        ((JobWorkItem) this.pendingWork.get(i)).getMinimumNetworkChunkBytes();
                 long j3 = this.mMinimumNetworkChunkBytes;
                 if (j3 == -1) {
                     this.mMinimumNetworkChunkBytes = minimumNetworkChunkBytes;

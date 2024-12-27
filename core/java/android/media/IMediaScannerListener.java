@@ -13,8 +13,7 @@ public interface IMediaScannerListener extends IInterface {
 
     public static class Default implements IMediaScannerListener {
         @Override // android.media.IMediaScannerListener
-        public void scanCompleted(String path, Uri uri) throws RemoteException {
-        }
+        public void scanCompleted(String path, Uri uri) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +21,7 @@ public interface IMediaScannerListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaScannerListener {
+    public abstract static class Stub extends Binder implements IMediaScannerListener {
         public static final String DESCRIPTOR = "android.media.IMediaScannerListener";
         static final int TRANSACTION_scanCompleted = 1;
 
@@ -61,7 +60,8 @@ public interface IMediaScannerListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

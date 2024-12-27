@@ -3,6 +3,7 @@ package android.hardware.radio.V1_6;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,18 +23,37 @@ public final class RouteSelectionDescriptor {
             return false;
         }
         RouteSelectionDescriptor other = (RouteSelectionDescriptor) otherObject;
-        if (this.precedence == other.precedence && HidlSupport.deepEquals(this.sessionType, other.sessionType) && HidlSupport.deepEquals(this.sscMode, other.sscMode) && HidlSupport.deepEquals(this.sliceInfo, other.sliceInfo) && HidlSupport.deepEquals(this.dnn, other.dnn)) {
+        if (this.precedence == other.precedence
+                && HidlSupport.deepEquals(this.sessionType, other.sessionType)
+                && HidlSupport.deepEquals(this.sscMode, other.sscMode)
+                && HidlSupport.deepEquals(this.sliceInfo, other.sliceInfo)
+                && HidlSupport.deepEquals(this.dnn, other.dnn)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.precedence))), Integer.valueOf(HidlSupport.deepHashCode(this.sessionType)), Integer.valueOf(HidlSupport.deepHashCode(this.sscMode)), Integer.valueOf(HidlSupport.deepHashCode(this.sliceInfo)), Integer.valueOf(HidlSupport.deepHashCode(this.dnn)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.precedence))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.sessionType)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.sscMode)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.sliceInfo)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.dnn)));
     }
 
     public final String toString() {
-        return "{.precedence = " + ((int) this.precedence) + ", .sessionType = " + this.sessionType + ", .sscMode = " + this.sscMode + ", .sliceInfo = " + this.sliceInfo + ", .dnn = " + this.dnn + "}";
+        return "{.precedence = "
+                + ((int) this.precedence)
+                + ", .sessionType = "
+                + this.sessionType
+                + ", .sscMode = "
+                + this.sscMode
+                + ", .sliceInfo = "
+                + this.sliceInfo
+                + ", .dnn = "
+                + this.dnn
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -45,7 +65,8 @@ public final class RouteSelectionDescriptor {
         ArrayList<RouteSelectionDescriptor> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 48, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 48, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             RouteSelectionDescriptor _hidl_vec_element = new RouteSelectionDescriptor();
@@ -55,12 +76,15 @@ public final class RouteSelectionDescriptor {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.precedence = _hidl_blob.getInt8(_hidl_offset + 0);
         this.sessionType.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 4);
         this.sscMode.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 12);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 16 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 20, _hidl_blob.handle(), _hidl_offset + 16 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 20, _hidl_blob.handle(), _hidl_offset + 16 + 0, true);
         this.sliceInfo.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SliceInfo _hidl_vec_element = new SliceInfo();
@@ -68,12 +92,18 @@ public final class RouteSelectionDescriptor {
             this.sliceInfo.add(_hidl_vec_element);
         }
         int _hidl_vec_size2 = _hidl_blob.getInt32(_hidl_offset + 32 + 8);
-        HwBlob childBlob2 = parcel.readEmbeddedBuffer(_hidl_vec_size2 * 16, _hidl_blob.handle(), _hidl_offset + 32 + 0, true);
+        HwBlob childBlob2 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size2 * 16, _hidl_blob.handle(), _hidl_offset + 32 + 0, true);
         this.dnn.clear();
         for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
             new String();
             String _hidl_vec_element2 = childBlob2.getString(_hidl_index_02 * 16);
-            parcel.readEmbeddedBuffer(_hidl_vec_element2.getBytes().length + 1, childBlob2.handle(), (_hidl_index_02 * 16) + 0, false);
+            parcel.readEmbeddedBuffer(
+                    _hidl_vec_element2.getBytes().length + 1,
+                    childBlob2.handle(),
+                    (_hidl_index_02 * 16) + 0,
+                    false);
             this.dnn.add(_hidl_vec_element2);
         }
     }
@@ -84,7 +114,8 @@ public final class RouteSelectionDescriptor {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<RouteSelectionDescriptor> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<RouteSelectionDescriptor> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

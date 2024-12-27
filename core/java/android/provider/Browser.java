@@ -8,8 +8,8 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.MatrixCursor;
 import android.net.Uri;
-import android.provider.BrowserContract;
 import android.webkit.WebIconDatabase;
+
 import com.android.internal.R;
 
 /* loaded from: classes3.dex */
@@ -36,7 +36,18 @@ public class Browser {
     public static final int TRUNCATE_HISTORY_PROJECTION_ID_INDEX = 0;
     public static final int TRUNCATE_N_OLDEST = 5;
     public static final Uri BOOKMARKS_URI = Uri.parse("content://browser/bookmarks");
-    public static final String[] HISTORY_PROJECTION = {"_id", "url", "visits", "date", "bookmark", "title", "favicon", "thumbnail", "touch_icon", "user_entered"};
+    public static final String[] HISTORY_PROJECTION = {
+        "_id",
+        "url",
+        "visits",
+        "date",
+        "bookmark",
+        "title",
+        "favicon",
+        "thumbnail",
+        "touch_icon",
+        "user_entered"
+    };
     public static final String[] TRUNCATE_HISTORY_PROJECTION = {"_id", "date"};
     public static final Uri SEARCHES_URI = Uri.parse("content://browser/searches");
     public static final String[] SEARCHES_PROJECTION = {"_id", "search", "date"};
@@ -58,12 +69,10 @@ public class Browser {
         public static final String DATE = "date";
         public static final String SEARCH = "search";
 
-        @Deprecated
-        public static final String URL = "url";
+        @Deprecated public static final String URL = "url";
     }
 
-    public static final void saveBookmark(Context c, String title, String url) {
-    }
+    public static final void saveBookmark(Context c, String title, String url) {}
 
     public static final void sendString(Context context, String string) {
         sendString(context, string, context.getString(R.string.sendText));
@@ -82,11 +91,11 @@ public class Browser {
     }
 
     public static final Cursor getAllBookmarks(ContentResolver cr) throws IllegalStateException {
-        return new MatrixCursor(new String[]{"url"}, 0);
+        return new MatrixCursor(new String[] {"url"}, 0);
     }
 
     public static final Cursor getAllVisitedUrls(ContentResolver cr) throws IllegalStateException {
-        return new MatrixCursor(new String[]{"url"}, 0);
+        return new MatrixCursor(new String[] {"url"}, 0);
     }
 
     private static final void addOrUrlEquals(StringBuilder sb) {
@@ -123,39 +132,37 @@ public class Browser {
             DatabaseUtils.appendEscapedSQLString(whereClause2, "http://" + wwwString);
             whereClause = whereClause2;
         }
-        return cr.query(BrowserContract.History.CONTENT_URI, new String[]{"_id", "visits"}, whereClause.toString(), null, null);
+        return cr.query(
+                BrowserContract.History.CONTENT_URI,
+                new String[] {"_id", "visits"},
+                whereClause.toString(),
+                null,
+                null);
     }
 
-    public static final void updateVisitedHistory(ContentResolver cr, String url, boolean real) {
-    }
+    public static final void updateVisitedHistory(ContentResolver cr, String url, boolean real) {}
 
     @Deprecated
     public static final String[] getVisitedHistory(ContentResolver cr) {
         return new String[0];
     }
 
-    public static final void truncateHistory(ContentResolver cr) {
-    }
+    public static final void truncateHistory(ContentResolver cr) {}
 
     public static final boolean canClearHistory(ContentResolver cr) {
         return false;
     }
 
-    public static final void clearHistory(ContentResolver cr) {
-    }
+    public static final void clearHistory(ContentResolver cr) {}
 
-    public static final void deleteHistoryTimeFrame(ContentResolver cr, long begin, long end) {
-    }
+    public static final void deleteHistoryTimeFrame(ContentResolver cr, long begin, long end) {}
 
-    public static final void deleteFromHistory(ContentResolver cr, String url) {
-    }
+    public static final void deleteFromHistory(ContentResolver cr, String url) {}
 
-    public static final void addSearchUrl(ContentResolver cr, String search) {
-    }
+    public static final void addSearchUrl(ContentResolver cr, String search) {}
 
-    public static final void clearSearches(ContentResolver cr) {
-    }
+    public static final void clearSearches(ContentResolver cr) {}
 
-    public static final void requestAllIcons(ContentResolver cr, String where, WebIconDatabase.IconListener listener) {
-    }
+    public static final void requestAllIcons(
+            ContentResolver cr, String where, WebIconDatabase.IconListener listener) {}
 }

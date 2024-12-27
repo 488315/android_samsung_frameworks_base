@@ -3,7 +3,9 @@ package android.util;
 import android.content.Context;
 import android.graphics.BLASTBufferQueue;
 import android.os.SystemProperties;
+
 import dalvik.system.PathClassLoader;
+
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -205,7 +207,8 @@ public class BoostFramework {
                     sPerfHintFunc = sPerfClass.getMethod("perfHint", argClasses2);
                     sReleaseFunc = sPerfClass.getMethod("perfLockRelease", new Class[0]);
                     Class[] argClasses3 = {Integer.TYPE};
-                    sReleaseHandlerFunc = sPerfClass.getDeclaredMethod("perfLockReleaseHandler", argClasses3);
+                    sReleaseHandlerFunc =
+                            sPerfClass.getDeclaredMethod("perfLockReleaseHandler", argClasses3);
                     Class[] argClasses4 = {Integer.TYPE, String.class};
                     sFeedbackFunc = sPerfClass.getMethod("perfGetFeedback", argClasses4);
                     Class[] argClasses5 = {Integer.TYPE, String.class, Integer.TYPE, int[].class};
@@ -215,27 +218,50 @@ public class BoostFramework {
                     sIOPStop = sPerfClass.getDeclaredMethod("perfIOPrefetchStop", new Class[0]);
                     Class[] argClasses7 = {String.class, String.class};
                     sPerfGetPropFunc = sPerfClass.getMethod("perfGetProp", argClasses7);
-                    Class[] argClasses8 = {Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE, int[].class};
+                    Class[] argClasses8 = {
+                        Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE, int[].class
+                    };
                     sAcqAndReleaseFunc = sPerfClass.getMethod("perfLockAcqAndRelease", argClasses8);
                     Class[] argClasses9 = {Integer.TYPE, String.class, Integer.TYPE, int[].class};
                     sPerfEventFunc = sPerfClass.getMethod("perfEvent", argClasses9);
                     Class[] argClasses10 = {Integer.TYPE};
                     sPerfSyncRequest = sPerfClass.getMethod("perfSyncRequest", argClasses10);
-                    Class[] argClasses11 = {Integer.TYPE, Integer.TYPE, String.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, int[].class};
+                    Class[] argClasses11 = {
+                        Integer.TYPE,
+                        Integer.TYPE,
+                        String.class,
+                        Integer.TYPE,
+                        Integer.TYPE,
+                        Integer.TYPE,
+                        int[].class
+                    };
                     sperfHintAcqRelFunc = sPerfClass.getMethod("perfHintAcqRel", argClasses11);
-                    Class[] argClasses12 = {Integer.TYPE, Integer.TYPE, String.class, Integer.TYPE, Integer.TYPE, Integer.TYPE, int[].class};
+                    Class[] argClasses12 = {
+                        Integer.TYPE,
+                        Integer.TYPE,
+                        String.class,
+                        Integer.TYPE,
+                        Integer.TYPE,
+                        Integer.TYPE,
+                        int[].class
+                    };
                     sperfHintRenewFunc = sPerfClass.getMethod("perfHintRenew", argClasses12);
                     try {
-                        sPerfGetPerfHalVerFunc = sPerfClass.getMethod("perfGetHalVer", new Class[0]);
+                        sPerfGetPerfHalVerFunc =
+                                sPerfClass.getMethod("perfGetHalVer", new Class[0]);
                     } catch (Exception e) {
                         Log.i(TAG, "BoostFramework() : Exception_1 = perfGetHalVer not supported");
                         sPerfGetPerfHalVerFunc = null;
                     }
                     try {
-                        Class[] argClasses13 = {Integer.TYPE, Integer.TYPE, String.class, Integer.TYPE, String.class};
-                        sUXEngineEvents = sPerfClass.getDeclaredMethod("perfUXEngine_events", argClasses13);
+                        Class[] argClasses13 = {
+                            Integer.TYPE, Integer.TYPE, String.class, Integer.TYPE, String.class
+                        };
+                        sUXEngineEvents =
+                                sPerfClass.getDeclaredMethod("perfUXEngine_events", argClasses13);
                         Class[] argClasses14 = {Integer.TYPE};
-                        sUXEngineTrigger = sPerfClass.getDeclaredMethod("perfUXEngine_trigger", argClasses14);
+                        sUXEngineTrigger =
+                                sPerfClass.getDeclaredMethod("perfUXEngine_trigger", argClasses14);
                     } catch (Exception e2) {
                         Log.i(TAG, "BoostFramework() : Exception_4 = PreferredApps not supported");
                     }
@@ -246,7 +272,8 @@ public class BoostFramework {
                 try {
                     sUxPerfClass = Class.forName(UXPERFORMANCE_CLASS);
                     Class[] argUxClasses = {Integer.TYPE, String.class, String.class};
-                    sUxIOPStart = sUxPerfClass.getDeclaredMethod("perfIOPrefetchStart", argUxClasses);
+                    sUxIOPStart =
+                            sUxPerfClass.getDeclaredMethod("perfIOPrefetchStart", argUxClasses);
                     sUxIsLoaded = true;
                 } catch (Exception e4) {
                     Log.e(TAG, "BoostFramework() Ux Perf: Exception = " + e4);
@@ -310,7 +337,13 @@ public class BoostFramework {
             return -1;
         }
         try {
-            Object retVal = sPerfHintFunc.invoke(this.mPerf, Integer.valueOf(hint), userDataStr, Integer.valueOf(userData1), Integer.valueOf(userData2));
+            Object retVal =
+                    sPerfHintFunc.invoke(
+                            this.mPerf,
+                            Integer.valueOf(hint),
+                            userDataStr,
+                            Integer.valueOf(userData1),
+                            Integer.valueOf(userData2));
             int ret = ((Integer) retVal).intValue();
             return ret;
         } catch (Exception e) {
@@ -352,7 +385,13 @@ public class BoostFramework {
             if (sFeedbackFuncExtn == null) {
                 return -1;
             }
-            Object retVal = sFeedbackFuncExtn.invoke(this.mPerf, Integer.valueOf(req), pkg_name, Integer.valueOf(numArgs), list);
+            Object retVal =
+                    sFeedbackFuncExtn.invoke(
+                            this.mPerf,
+                            Integer.valueOf(req),
+                            pkg_name,
+                            Integer.valueOf(numArgs),
+                            list);
             int ret = ((Integer) retVal).intValue();
             return ret;
         } catch (Exception e) {
@@ -370,7 +409,8 @@ public class BoostFramework {
             Log.e(TAG, "Exception " + e);
         }
         try {
-            Object retVal2 = sUxIOPStart.invoke(this.mUxPerf, Integer.valueOf(pid), pkgName, codePath);
+            Object retVal2 =
+                    sUxIOPStart.invoke(this.mUxPerf, Integer.valueOf(pid), pkgName, codePath);
             int ret2 = ((Integer) retVal2).intValue();
             return ret2;
         } catch (Exception e2) {
@@ -399,7 +439,14 @@ public class BoostFramework {
             if (sUXEngineEvents == null) {
                 return -1;
             }
-            Object retVal = sUXEngineEvents.invoke(this.mPerf, Integer.valueOf(opcode), Integer.valueOf(pid), pkgName, Integer.valueOf(lat), codePath);
+            Object retVal =
+                    sUXEngineEvents.invoke(
+                            this.mPerf,
+                            Integer.valueOf(opcode),
+                            Integer.valueOf(pid),
+                            pkgName,
+                            Integer.valueOf(lat),
+                            codePath);
             int ret = ((Integer) retVal).intValue();
             return ret;
         } catch (Exception e) {
@@ -450,12 +497,20 @@ public class BoostFramework {
         }
     }
 
-    public int perfLockAcqAndRelease(int handle, int duration, int numArgs, int reserveNumArgs, int... list) {
+    public int perfLockAcqAndRelease(
+            int handle, int duration, int numArgs, int reserveNumArgs, int... list) {
         try {
             if (sAcqAndReleaseFunc == null) {
                 return -1;
             }
-            Object retVal = sAcqAndReleaseFunc.invoke(this.mPerf, Integer.valueOf(handle), Integer.valueOf(duration), Integer.valueOf(numArgs), Integer.valueOf(reserveNumArgs), list);
+            Object retVal =
+                    sAcqAndReleaseFunc.invoke(
+                            this.mPerf,
+                            Integer.valueOf(handle),
+                            Integer.valueOf(duration),
+                            Integer.valueOf(numArgs),
+                            Integer.valueOf(reserveNumArgs),
+                            list);
             int ret = ((Integer) retVal).intValue();
             return ret;
         } catch (Exception e) {
@@ -471,7 +526,12 @@ public class BoostFramework {
     public void perfEvent(int eventId, String pkg_name, int numArgs, int... list) {
         try {
             if (sPerfEventFunc != null) {
-                sPerfEventFunc.invoke(this.mPerf, Integer.valueOf(eventId), pkg_name, Integer.valueOf(numArgs), list);
+                sPerfEventFunc.invoke(
+                        this.mPerf,
+                        Integer.valueOf(eventId),
+                        pkg_name,
+                        Integer.valueOf(numArgs),
+                        list);
             }
         } catch (Exception e) {
             Log.e(TAG, "Exception " + e);
@@ -490,13 +550,29 @@ public class BoostFramework {
         return perfHintAcqRel(handle, hint, pkg_name, duration, hintType, 0, new int[0]);
     }
 
-    public int perfHintAcqRel(int handle, int hint, String pkg_name, int duration, int hintType, int numArgs, int... list) {
+    public int perfHintAcqRel(
+            int handle,
+            int hint,
+            String pkg_name,
+            int duration,
+            int hintType,
+            int numArgs,
+            int... list) {
         try {
             if (sperfHintAcqRelFunc == null) {
                 return -1;
             }
             try {
-                Object retVal = sperfHintAcqRelFunc.invoke(this.mPerf, Integer.valueOf(handle), Integer.valueOf(hint), pkg_name, Integer.valueOf(duration), Integer.valueOf(hintType), Integer.valueOf(numArgs), list);
+                Object retVal =
+                        sperfHintAcqRelFunc.invoke(
+                                this.mPerf,
+                                Integer.valueOf(handle),
+                                Integer.valueOf(hint),
+                                pkg_name,
+                                Integer.valueOf(duration),
+                                Integer.valueOf(hintType),
+                                Integer.valueOf(numArgs),
+                                list);
                 int ret = ((Integer) retVal).intValue();
                 return ret;
             } catch (Exception e) {
@@ -521,13 +597,29 @@ public class BoostFramework {
         return perfHintRenew(handle, hint, pkg_name, duration, hintType, 0, new int[0]);
     }
 
-    public int perfHintRenew(int handle, int hint, String pkg_name, int duration, int hintType, int numArgs, int... list) {
+    public int perfHintRenew(
+            int handle,
+            int hint,
+            String pkg_name,
+            int duration,
+            int hintType,
+            int numArgs,
+            int... list) {
         try {
             if (sperfHintRenewFunc == null) {
                 return -1;
             }
             try {
-                Object retVal = sperfHintRenewFunc.invoke(this.mPerf, Integer.valueOf(handle), Integer.valueOf(hint), pkg_name, Integer.valueOf(duration), Integer.valueOf(hintType), Integer.valueOf(numArgs), list);
+                Object retVal =
+                        sperfHintRenewFunc.invoke(
+                                this.mPerf,
+                                Integer.valueOf(handle),
+                                Integer.valueOf(hint),
+                                pkg_name,
+                                Integer.valueOf(duration),
+                                Integer.valueOf(hintType),
+                                Integer.valueOf(numArgs),
+                                list);
                 int ret = ((Integer) retVal).intValue();
                 return ret;
             } catch (Exception e) {
@@ -544,7 +636,8 @@ public class BoostFramework {
         public static final int FLING_END = 0;
         public static final int FLING_START = 1;
         private static final String QXPERFORMANCE_JAR = "/system/framework/QXPerformance.jar";
-        private static final String SCROLL_OPT_CLASS = "com.qualcomm.qti.QXPerformance.ScrollOptimizer";
+        private static final String SCROLL_OPT_CLASS =
+                "com.qualcomm.qti.QXPerformance.ScrollOptimizer";
         private static final String SCROLL_OPT_PROP = "ro.vendor.perf.scroll_opt";
         private static boolean sScrollOptProp = false;
         private static boolean sScrollOptEnable = false;
@@ -572,7 +665,8 @@ public class BoostFramework {
                     sQXIsLoaded = true;
                     return;
                 }
-                PathClassLoader qXPerfClassLoader = new PathClassLoader(QXPERFORMANCE_JAR, ClassLoader.getSystemClassLoader());
+                PathClassLoader qXPerfClassLoader =
+                        new PathClassLoader(QXPERFORMANCE_JAR, ClassLoader.getSystemClassLoader());
                 sQXPerfClass = qXPerfClassLoader.loadClass(SCROLL_OPT_CLASS);
                 Class[] argClasses = {Long.TYPE};
                 sSetFrameInterval = sQXPerfClass.getMethod("setFrameInterval", argClasses);
@@ -590,7 +684,8 @@ public class BoostFramework {
                 Class[] argClasses7 = {Long.TYPE};
                 sGetFrameDelay = sQXPerfClass.getMethod("getFrameDelay", argClasses7);
                 Class[] argClasses8 = {Long.TYPE};
-                sGetAdjustedAnimationClock = sQXPerfClass.getMethod("getAdjustedAnimationClock", argClasses8);
+                sGetAdjustedAnimationClock =
+                        sQXPerfClass.getMethod("getAdjustedAnimationClock", argClasses8);
                 sQXIsLoaded = true;
             } catch (Exception e) {
                 Log.e(BoostFramework.TAG, "initQXPerfFuncs failed");
@@ -611,21 +706,26 @@ public class BoostFramework {
                 }
                 return;
             }
-            Thread initThread = new Thread(new Runnable() { // from class: android.util.BoostFramework.ScrollOptimizer.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        ScrollOptimizer.initQXPerfFuncs();
-                        if (ScrollOptimizer.sScrollOptProp && ScrollOptimizer.sSetFrameInterval != null) {
-                            ScrollOptimizer.sSetFrameInterval.invoke(null, Long.valueOf(frameIntervalNanos));
-                            ScrollOptimizer.sScrollOptEnable = true;
-                        }
-                    } catch (Exception e2) {
-                        Log.e(BoostFramework.TAG, "Failed to run initThread.");
-                        e2.printStackTrace();
-                    }
-                }
-            });
+            Thread initThread =
+                    new Thread(
+                            new Runnable() { // from class:
+                                             // android.util.BoostFramework.ScrollOptimizer.1
+                                @Override // java.lang.Runnable
+                                public void run() {
+                                    try {
+                                        ScrollOptimizer.initQXPerfFuncs();
+                                        if (ScrollOptimizer.sScrollOptProp
+                                                && ScrollOptimizer.sSetFrameInterval != null) {
+                                            ScrollOptimizer.sSetFrameInterval.invoke(
+                                                    null, Long.valueOf(frameIntervalNanos));
+                                            ScrollOptimizer.sScrollOptEnable = true;
+                                        }
+                                    } catch (Exception e2) {
+                                        Log.e(BoostFramework.TAG, "Failed to run initThread.");
+                                        e2.printStackTrace();
+                                    }
+                                }
+                            });
             initThread.start();
         }
 
@@ -712,7 +812,8 @@ public class BoostFramework {
                 return frameTimeNanos;
             }
             try {
-                Object retVal = sGetAdjustedAnimationClock.invoke(null, Long.valueOf(frameTimeNanos));
+                Object retVal =
+                        sGetAdjustedAnimationClock.invoke(null, Long.valueOf(frameTimeNanos));
                 long newFrameTimeNanos = ((Long) retVal).longValue();
                 return newFrameTimeNanos;
             } catch (Exception e) {

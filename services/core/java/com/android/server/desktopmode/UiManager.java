@@ -11,14 +11,16 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
-import com.android.server.desktopmode.StateManager;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.DesktopModeUiConstants;
 import com.samsung.android.desktopmode.IDesktopModeUiService;
 import com.samsung.android.desktopmode.IDesktopModeUiServiceCallback;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -45,27 +47,31 @@ public final class UiManager {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.desktopmode.UiManager$1, reason: invalid class name */
     public final class AnonymousClass1 implements ServiceConnection {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // android.content.ServiceConnection
         public final void onBindingDied(ComponentName componentName) {
-            Utils.runOnHandlerThread(UiManager.this.mHandler, new UiManager$1$$ExternalSyntheticLambda0(this, componentName, 1));
+            Utils.runOnHandlerThread(
+                    UiManager.this.mHandler,
+                    new UiManager$1$$ExternalSyntheticLambda0(this, componentName, 1));
         }
 
         @Override // android.content.ServiceConnection
         public final void onNullBinding(ComponentName componentName) {
-            Utils.runOnHandlerThread(UiManager.this.mHandler, new UiManager$1$$ExternalSyntheticLambda0(this, componentName, 0));
+            Utils.runOnHandlerThread(
+                    UiManager.this.mHandler,
+                    new UiManager$1$$ExternalSyntheticLambda0(this, componentName, 0));
         }
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            Utils.runOnHandlerThread(UiManager.this.mHandler, new UiManager$1$$ExternalSyntheticLambda0(this, iBinder, 2));
+            Utils.runOnHandlerThread(
+                    UiManager.this.mHandler,
+                    new UiManager$1$$ExternalSyntheticLambda0(this, iBinder, 2));
         }
 
         @Override // android.content.ServiceConnection
-        public final void onServiceDisconnected(ComponentName componentName) {
-        }
+        public final void onServiceDisconnected(ComponentName componentName) {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -79,32 +85,23 @@ public final class UiManager {
             this.val$callback = obj;
         }
 
-        private final void onAnimationComplete$com$android$server$desktopmode$UiManager$4() {
-        }
+        private final void onAnimationComplete$com$android$server$desktopmode$UiManager$4() {}
 
-        private final void onAnimationComplete$com$android$server$desktopmode$UiManager$6() {
-        }
+        private final void onAnimationComplete$com$android$server$desktopmode$UiManager$6() {}
 
-        private final void onClickButtonNegative$com$android$server$desktopmode$UiManager$4() {
-        }
+        private final void onClickButtonNegative$com$android$server$desktopmode$UiManager$4() {}
 
-        private final void onClickButtonNegative$com$android$server$desktopmode$UiManager$5() {
-        }
+        private final void onClickButtonNegative$com$android$server$desktopmode$UiManager$5() {}
 
-        private final void onClickButtonPositive$com$android$server$desktopmode$UiManager$4() {
-        }
+        private final void onClickButtonPositive$com$android$server$desktopmode$UiManager$4() {}
 
-        private final void onClickButtonPositive$com$android$server$desktopmode$UiManager$5() {
-        }
+        private final void onClickButtonPositive$com$android$server$desktopmode$UiManager$5() {}
 
-        private final void onDismiss$com$android$server$desktopmode$UiManager$5() {
-        }
+        private final void onDismiss$com$android$server$desktopmode$UiManager$5() {}
 
-        private final void onShow$com$android$server$desktopmode$UiManager$4() {
-        }
+        private final void onShow$com$android$server$desktopmode$UiManager$4() {}
 
-        private final void onShow$com$android$server$desktopmode$UiManager$5() {
-        }
+        private final void onShow$com$android$server$desktopmode$UiManager$5() {}
 
         public final void onAnimationComplete() {
             switch (this.$r8$classId) {
@@ -184,17 +181,13 @@ public final class UiManager {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class InternalUiCallback {
-        public void onAnimationComplete() {
-        }
+        public void onAnimationComplete() {}
 
-        public void onClickButtonPositive() {
-        }
+        public void onClickButtonPositive() {}
 
-        public void onDismiss() {
-        }
+        public void onDismiss() {}
 
-        public void onShow() {
-        }
+        public void onShow() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -203,7 +196,8 @@ public final class UiManager {
 
         public UiCommandHandler(Looper looper) {
             super(looper);
-            DockTaWarningDialogMessage dockTaWarningDialogMessage = new DockTaWarningDialogMessage();
+            DockTaWarningDialogMessage dockTaWarningDialogMessage =
+                    new DockTaWarningDialogMessage();
             dockTaWarningDialogMessage.mNotFastChargerDialogCommand = null;
             this.mDockTaWarningDialogMessage = dockTaWarningDialogMessage;
         }
@@ -213,7 +207,10 @@ public final class UiManager {
             if (DesktopModeFeature.DEBUG) {
                 StringBuilder sb = new StringBuilder("handleMessage(), msg=");
                 int i = message.what;
-                sb.append(i != 1 ? VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown=") : "MSG_DOCK_TA_WARNING_DIALOG");
+                sb.append(
+                        i != 1
+                                ? VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown=")
+                                : "MSG_DOCK_TA_WARNING_DIALOG");
                 Log.d("[DMS]UiManager", sb.toString());
             }
             ((Runnable) message.obj).run();
@@ -229,11 +226,15 @@ public final class UiManager {
                 StringBuilder sb = new StringBuilder("schedule(), type=");
                 sb.append(DesktopModeUiConstants.typeToString(i));
                 sb.append(", ");
-                sb.append(i2 != 1 ? VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "Unknown=") : "MSG_DOCK_TA_WARNING_DIALOG");
+                sb.append(
+                        i2 != 1
+                                ? VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "Unknown=")
+                                : "MSG_DOCK_TA_WARNING_DIALOG");
                 Log.d("[DMS]UiManager", sb.toString());
             }
             if (i2 == 1) {
-                DockTaWarningDialogMessage dockTaWarningDialogMessage = this.mDockTaWarningDialogMessage;
+                DockTaWarningDialogMessage dockTaWarningDialogMessage =
+                        this.mDockTaWarningDialogMessage;
                 if (i == 3) {
                     dockTaWarningDialogMessage.mNotFastChargerDialogCommand = runnable;
                 } else {
@@ -252,238 +253,254 @@ public final class UiManager {
     /* JADX WARN: Type inference failed for: r3v3, types: [com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda9] */
     public UiManager(Context context, ServiceThread serviceThread, IStateManager iStateManager) {
         final int i = 0;
-        this.mBindServiceRunnable = new Runnable(this) { // from class: com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6
-            public final /* synthetic */ UiManager f$0;
+        this.mBindServiceRunnable =
+                new Runnable(this) { // from class:
+                    // com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6
+                    public final /* synthetic */ UiManager f$0;
 
-            {
-                this.f$0 = this;
-            }
-
-            /* JADX WARN: Code restructure failed: missing block: B:19:0x002c, code lost:
-            
-                if (r4.mService.hasUiElement() != false) goto L15;
-             */
-            @Override // java.lang.Runnable
-            /*
-                Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
-            */
-            public final void run() {
-                /*
-                    r4 = this;
-                    int r0 = r2
-                    com.android.server.desktopmode.UiManager r4 = r4.f$0
-                    switch(r0) {
-                        case 0: goto L5b;
-                        case 1: goto L15;
-                        default: goto L7;
+                    {
+                        this.f$0 = this;
                     }
-                L7:
-                    r4.getClass()
-                    java.lang.String r0 = "[DMS]UiManager"
-                    java.lang.String r1 = "Binder supposed established connection but actual connection to service timed out, trying again"
-                    com.android.server.desktopmode.Log.w(r0, r1)
-                    r4.retryConnectionWithBackoff()
-                    return
-                L15:
-                    com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService
-                    com.android.server.desktopmode.PendingUiCommands r1 = r4.mPendingUiCommands
-                    r2 = 0
-                    if (r0 == 0) goto L36
-                    java.util.List r0 = r1.mUiCommands     // Catch: android.os.RemoteException -> L2f
-                    java.util.ArrayList r0 = (java.util.ArrayList) r0     // Catch: android.os.RemoteException -> L2f
-                    boolean r0 = r0.isEmpty()     // Catch: android.os.RemoteException -> L2f
-                    if (r0 == 0) goto L31
-                    com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService     // Catch: android.os.RemoteException -> L2f
-                    boolean r0 = r0.hasUiElement()     // Catch: android.os.RemoteException -> L2f
-                    if (r0 == 0) goto L36
-                    goto L31
-                L2f:
-                    r0 = move-exception
-                    goto L33
-                L31:
-                    r2 = 1
-                    goto L36
-                L33:
-                    r4.handleRemoteException(r0)
-                L36:
-                    boolean r0 = com.samsung.android.desktopmode.DesktopModeFeature.DEBUG
-                    if (r0 == 0) goto L4e
-                    java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                    java.lang.String r3 = "unbindServiceIfHasNoUiElement(), hasElement="
-                    r0.<init>(r3)
-                    r0.append(r2)
-                    java.lang.String r0 = r0.toString()
-                    java.lang.String r3 = "[DMS]UiManager"
-                    com.android.server.desktopmode.Log.d(r3, r0)
-                L4e:
-                    if (r2 != 0) goto L5a
-                    java.util.List r0 = r1.mUiCommands
-                    java.util.ArrayList r0 = (java.util.ArrayList) r0
-                    r0.clear()
-                    r4.unbindService()
-                L5a:
-                    return
-                L5b:
-                    r4.bindService()
-                    return
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6.run():void");
-            }
-        };
+
+                    /* JADX WARN: Code restructure failed: missing block: B:19:0x002c, code lost:
+
+                       if (r4.mService.hasUiElement() != false) goto L15;
+                    */
+                    @Override // java.lang.Runnable
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                        To view partially-correct code enable 'Show inconsistent code' option in preferences
+                    */
+                    public final void run() {
+                        /*
+                            r4 = this;
+                            int r0 = r2
+                            com.android.server.desktopmode.UiManager r4 = r4.f$0
+                            switch(r0) {
+                                case 0: goto L5b;
+                                case 1: goto L15;
+                                default: goto L7;
+                            }
+                        L7:
+                            r4.getClass()
+                            java.lang.String r0 = "[DMS]UiManager"
+                            java.lang.String r1 = "Binder supposed established connection but actual connection to service timed out, trying again"
+                            com.android.server.desktopmode.Log.w(r0, r1)
+                            r4.retryConnectionWithBackoff()
+                            return
+                        L15:
+                            com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService
+                            com.android.server.desktopmode.PendingUiCommands r1 = r4.mPendingUiCommands
+                            r2 = 0
+                            if (r0 == 0) goto L36
+                            java.util.List r0 = r1.mUiCommands     // Catch: android.os.RemoteException -> L2f
+                            java.util.ArrayList r0 = (java.util.ArrayList) r0     // Catch: android.os.RemoteException -> L2f
+                            boolean r0 = r0.isEmpty()     // Catch: android.os.RemoteException -> L2f
+                            if (r0 == 0) goto L31
+                            com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService     // Catch: android.os.RemoteException -> L2f
+                            boolean r0 = r0.hasUiElement()     // Catch: android.os.RemoteException -> L2f
+                            if (r0 == 0) goto L36
+                            goto L31
+                        L2f:
+                            r0 = move-exception
+                            goto L33
+                        L31:
+                            r2 = 1
+                            goto L36
+                        L33:
+                            r4.handleRemoteException(r0)
+                        L36:
+                            boolean r0 = com.samsung.android.desktopmode.DesktopModeFeature.DEBUG
+                            if (r0 == 0) goto L4e
+                            java.lang.StringBuilder r0 = new java.lang.StringBuilder
+                            java.lang.String r3 = "unbindServiceIfHasNoUiElement(), hasElement="
+                            r0.<init>(r3)
+                            r0.append(r2)
+                            java.lang.String r0 = r0.toString()
+                            java.lang.String r3 = "[DMS]UiManager"
+                            com.android.server.desktopmode.Log.d(r3, r0)
+                        L4e:
+                            if (r2 != 0) goto L5a
+                            java.util.List r0 = r1.mUiCommands
+                            java.util.ArrayList r0 = (java.util.ArrayList) r0
+                            r0.clear()
+                            r4.unbindService()
+                        L5a:
+                            return
+                        L5b:
+                            r4.bindService()
+                            return
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6.run():void");
+                    }
+                };
         final int i2 = 1;
-        this.mUnbindServiceRunnable = new Runnable(this) { // from class: com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6
-            public final /* synthetic */ UiManager f$0;
+        this.mUnbindServiceRunnable =
+                new Runnable(this) { // from class:
+                    // com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6
+                    public final /* synthetic */ UiManager f$0;
 
-            {
-                this.f$0 = this;
-            }
-
-            @Override // java.lang.Runnable
-            public final void run() {
-                /*
-                    this = this;
-                    int r0 = r2
-                    com.android.server.desktopmode.UiManager r4 = r4.f$0
-                    switch(r0) {
-                        case 0: goto L5b;
-                        case 1: goto L15;
-                        default: goto L7;
+                    {
+                        this.f$0 = this;
                     }
-                L7:
-                    r4.getClass()
-                    java.lang.String r0 = "[DMS]UiManager"
-                    java.lang.String r1 = "Binder supposed established connection but actual connection to service timed out, trying again"
-                    com.android.server.desktopmode.Log.w(r0, r1)
-                    r4.retryConnectionWithBackoff()
-                    return
-                L15:
-                    com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService
-                    com.android.server.desktopmode.PendingUiCommands r1 = r4.mPendingUiCommands
-                    r2 = 0
-                    if (r0 == 0) goto L36
-                    java.util.List r0 = r1.mUiCommands     // Catch: android.os.RemoteException -> L2f
-                    java.util.ArrayList r0 = (java.util.ArrayList) r0     // Catch: android.os.RemoteException -> L2f
-                    boolean r0 = r0.isEmpty()     // Catch: android.os.RemoteException -> L2f
-                    if (r0 == 0) goto L31
-                    com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService     // Catch: android.os.RemoteException -> L2f
-                    boolean r0 = r0.hasUiElement()     // Catch: android.os.RemoteException -> L2f
-                    if (r0 == 0) goto L36
-                    goto L31
-                L2f:
-                    r0 = move-exception
-                    goto L33
-                L31:
-                    r2 = 1
-                    goto L36
-                L33:
-                    r4.handleRemoteException(r0)
-                L36:
-                    boolean r0 = com.samsung.android.desktopmode.DesktopModeFeature.DEBUG
-                    if (r0 == 0) goto L4e
-                    java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                    java.lang.String r3 = "unbindServiceIfHasNoUiElement(), hasElement="
-                    r0.<init>(r3)
-                    r0.append(r2)
-                    java.lang.String r0 = r0.toString()
-                    java.lang.String r3 = "[DMS]UiManager"
-                    com.android.server.desktopmode.Log.d(r3, r0)
-                L4e:
-                    if (r2 != 0) goto L5a
-                    java.util.List r0 = r1.mUiCommands
-                    java.util.ArrayList r0 = (java.util.ArrayList) r0
-                    r0.clear()
-                    r4.unbindService()
-                L5a:
-                    return
-                L5b:
-                    r4.bindService()
-                    return
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6.run():void");
-            }
-        };
+
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        /*
+                            this = this;
+                            int r0 = r2
+                            com.android.server.desktopmode.UiManager r4 = r4.f$0
+                            switch(r0) {
+                                case 0: goto L5b;
+                                case 1: goto L15;
+                                default: goto L7;
+                            }
+                        L7:
+                            r4.getClass()
+                            java.lang.String r0 = "[DMS]UiManager"
+                            java.lang.String r1 = "Binder supposed established connection but actual connection to service timed out, trying again"
+                            com.android.server.desktopmode.Log.w(r0, r1)
+                            r4.retryConnectionWithBackoff()
+                            return
+                        L15:
+                            com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService
+                            com.android.server.desktopmode.PendingUiCommands r1 = r4.mPendingUiCommands
+                            r2 = 0
+                            if (r0 == 0) goto L36
+                            java.util.List r0 = r1.mUiCommands     // Catch: android.os.RemoteException -> L2f
+                            java.util.ArrayList r0 = (java.util.ArrayList) r0     // Catch: android.os.RemoteException -> L2f
+                            boolean r0 = r0.isEmpty()     // Catch: android.os.RemoteException -> L2f
+                            if (r0 == 0) goto L31
+                            com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService     // Catch: android.os.RemoteException -> L2f
+                            boolean r0 = r0.hasUiElement()     // Catch: android.os.RemoteException -> L2f
+                            if (r0 == 0) goto L36
+                            goto L31
+                        L2f:
+                            r0 = move-exception
+                            goto L33
+                        L31:
+                            r2 = 1
+                            goto L36
+                        L33:
+                            r4.handleRemoteException(r0)
+                        L36:
+                            boolean r0 = com.samsung.android.desktopmode.DesktopModeFeature.DEBUG
+                            if (r0 == 0) goto L4e
+                            java.lang.StringBuilder r0 = new java.lang.StringBuilder
+                            java.lang.String r3 = "unbindServiceIfHasNoUiElement(), hasElement="
+                            r0.<init>(r3)
+                            r0.append(r2)
+                            java.lang.String r0 = r0.toString()
+                            java.lang.String r3 = "[DMS]UiManager"
+                            com.android.server.desktopmode.Log.d(r3, r0)
+                        L4e:
+                            if (r2 != 0) goto L5a
+                            java.util.List r0 = r1.mUiCommands
+                            java.util.ArrayList r0 = (java.util.ArrayList) r0
+                            r0.clear()
+                            r4.unbindService()
+                        L5a:
+                            return
+                        L5b:
+                            r4.bindService()
+                            return
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6.run():void");
+                    }
+                };
         final int i3 = 2;
-        this.mDeferredConnectionCallback = new Runnable(this) { // from class: com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6
-            public final /* synthetic */ UiManager f$0;
+        this.mDeferredConnectionCallback =
+                new Runnable(this) { // from class:
+                    // com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6
+                    public final /* synthetic */ UiManager f$0;
 
-            {
-                this.f$0 = this;
-            }
-
-            @Override // java.lang.Runnable
-            public final void run() {
-                /*
-                    this = this;
-                    int r0 = r2
-                    com.android.server.desktopmode.UiManager r4 = r4.f$0
-                    switch(r0) {
-                        case 0: goto L5b;
-                        case 1: goto L15;
-                        default: goto L7;
+                    {
+                        this.f$0 = this;
                     }
-                L7:
-                    r4.getClass()
-                    java.lang.String r0 = "[DMS]UiManager"
-                    java.lang.String r1 = "Binder supposed established connection but actual connection to service timed out, trying again"
-                    com.android.server.desktopmode.Log.w(r0, r1)
-                    r4.retryConnectionWithBackoff()
-                    return
-                L15:
-                    com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService
-                    com.android.server.desktopmode.PendingUiCommands r1 = r4.mPendingUiCommands
-                    r2 = 0
-                    if (r0 == 0) goto L36
-                    java.util.List r0 = r1.mUiCommands     // Catch: android.os.RemoteException -> L2f
-                    java.util.ArrayList r0 = (java.util.ArrayList) r0     // Catch: android.os.RemoteException -> L2f
-                    boolean r0 = r0.isEmpty()     // Catch: android.os.RemoteException -> L2f
-                    if (r0 == 0) goto L31
-                    com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService     // Catch: android.os.RemoteException -> L2f
-                    boolean r0 = r0.hasUiElement()     // Catch: android.os.RemoteException -> L2f
-                    if (r0 == 0) goto L36
-                    goto L31
-                L2f:
-                    r0 = move-exception
-                    goto L33
-                L31:
-                    r2 = 1
-                    goto L36
-                L33:
-                    r4.handleRemoteException(r0)
-                L36:
-                    boolean r0 = com.samsung.android.desktopmode.DesktopModeFeature.DEBUG
-                    if (r0 == 0) goto L4e
-                    java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                    java.lang.String r3 = "unbindServiceIfHasNoUiElement(), hasElement="
-                    r0.<init>(r3)
-                    r0.append(r2)
-                    java.lang.String r0 = r0.toString()
-                    java.lang.String r3 = "[DMS]UiManager"
-                    com.android.server.desktopmode.Log.d(r3, r0)
-                L4e:
-                    if (r2 != 0) goto L5a
-                    java.util.List r0 = r1.mUiCommands
-                    java.util.ArrayList r0 = (java.util.ArrayList) r0
-                    r0.clear()
-                    r4.unbindService()
-                L5a:
-                    return
-                L5b:
-                    r4.bindService()
-                    return
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6.run():void");
-            }
-        };
-        StateManager.StateListener stateListener = new StateManager.StateListener() { // from class: com.android.server.desktopmode.UiManager.2
-            @Override // com.android.server.desktopmode.StateManager.StateListener
-            public final void onUserChanged(StateManager.InternalState internalState) {
-                int i4 = internalState.mCurrentUserId;
-                UiManager uiManager = UiManager.this;
-                uiManager.getClass();
-                Utils.runOnHandlerThread(uiManager.mHandler, new UiManager$$ExternalSyntheticLambda0(uiManager, i4, 3));
-            }
-        };
+
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        /*
+                            this = this;
+                            int r0 = r2
+                            com.android.server.desktopmode.UiManager r4 = r4.f$0
+                            switch(r0) {
+                                case 0: goto L5b;
+                                case 1: goto L15;
+                                default: goto L7;
+                            }
+                        L7:
+                            r4.getClass()
+                            java.lang.String r0 = "[DMS]UiManager"
+                            java.lang.String r1 = "Binder supposed established connection but actual connection to service timed out, trying again"
+                            com.android.server.desktopmode.Log.w(r0, r1)
+                            r4.retryConnectionWithBackoff()
+                            return
+                        L15:
+                            com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService
+                            com.android.server.desktopmode.PendingUiCommands r1 = r4.mPendingUiCommands
+                            r2 = 0
+                            if (r0 == 0) goto L36
+                            java.util.List r0 = r1.mUiCommands     // Catch: android.os.RemoteException -> L2f
+                            java.util.ArrayList r0 = (java.util.ArrayList) r0     // Catch: android.os.RemoteException -> L2f
+                            boolean r0 = r0.isEmpty()     // Catch: android.os.RemoteException -> L2f
+                            if (r0 == 0) goto L31
+                            com.samsung.android.desktopmode.IDesktopModeUiService r0 = r4.mService     // Catch: android.os.RemoteException -> L2f
+                            boolean r0 = r0.hasUiElement()     // Catch: android.os.RemoteException -> L2f
+                            if (r0 == 0) goto L36
+                            goto L31
+                        L2f:
+                            r0 = move-exception
+                            goto L33
+                        L31:
+                            r2 = 1
+                            goto L36
+                        L33:
+                            r4.handleRemoteException(r0)
+                        L36:
+                            boolean r0 = com.samsung.android.desktopmode.DesktopModeFeature.DEBUG
+                            if (r0 == 0) goto L4e
+                            java.lang.StringBuilder r0 = new java.lang.StringBuilder
+                            java.lang.String r3 = "unbindServiceIfHasNoUiElement(), hasElement="
+                            r0.<init>(r3)
+                            r0.append(r2)
+                            java.lang.String r0 = r0.toString()
+                            java.lang.String r3 = "[DMS]UiManager"
+                            com.android.server.desktopmode.Log.d(r3, r0)
+                        L4e:
+                            if (r2 != 0) goto L5a
+                            java.util.List r0 = r1.mUiCommands
+                            java.util.ArrayList r0 = (java.util.ArrayList) r0
+                            r0.clear()
+                            r4.unbindService()
+                        L5a:
+                            return
+                        L5b:
+                            r4.bindService()
+                            return
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda6.run():void");
+                    }
+                };
+        StateManager.StateListener stateListener =
+                new StateManager
+                        .StateListener() { // from class: com.android.server.desktopmode.UiManager.2
+                    @Override // com.android.server.desktopmode.StateManager.StateListener
+                    public final void onUserChanged(StateManager.InternalState internalState) {
+                        int i4 = internalState.mCurrentUserId;
+                        UiManager uiManager = UiManager.this;
+                        uiManager.getClass();
+                        Utils.runOnHandlerThread(
+                                uiManager.mHandler,
+                                new UiManager$$ExternalSyntheticLambda0(uiManager, i4, 3));
+                    }
+                };
         this.mConnectionBackoffAttempts = 0;
         this.mChangingStandaloneMode = false;
         this.mCurrentUserId = -10000;
@@ -494,20 +511,25 @@ public final class UiManager {
         this.mHandler = new UiCommandHandler(serviceThread.getLooper());
         this.mStateManager = iStateManager;
         ((StateManager) iStateManager).registerListener(stateListener);
-        this.mDeathRecipient = new IBinder.DeathRecipient() { // from class: com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda9
-            @Override // android.os.IBinder.DeathRecipient
-            public final void binderDied() {
-                UiManager uiManager = UiManager.this;
-                uiManager.getClass();
-                Log.w("[DMS]UiManager", "Binder died, reconnecting");
-                Utils.runOnHandlerThread(uiManager.mHandler, uiManager.mBindServiceRunnable);
-            }
-        };
+        this.mDeathRecipient =
+                new IBinder
+                        .DeathRecipient() { // from class:
+                                            // com.android.server.desktopmode.UiManager$$ExternalSyntheticLambda9
+                    @Override // android.os.IBinder.DeathRecipient
+                    public final void binderDied() {
+                        UiManager uiManager = UiManager.this;
+                        uiManager.getClass();
+                        Log.w("[DMS]UiManager", "Binder died, reconnecting");
+                        Utils.runOnHandlerThread(
+                                uiManager.mHandler, uiManager.mBindServiceRunnable);
+                    }
+                };
     }
 
     public final void bindService() {
         UiCommandHandler uiCommandHandler = this.mHandler;
-        UiManager$$ExternalSyntheticLambda6 uiManager$$ExternalSyntheticLambda6 = this.mDeferredConnectionCallback;
+        UiManager$$ExternalSyntheticLambda6 uiManager$$ExternalSyntheticLambda6 =
+                this.mDeferredConnectionCallback;
         if (uiCommandHandler.hasCallbacks(uiManager$$ExternalSyntheticLambda6)) {
             return;
         }
@@ -518,7 +540,15 @@ public final class UiManager {
         uiCommandHandler.removeCallbacks(this.mBindServiceRunnable);
         removeUnbindServiceRunnable();
         try {
-            boolean bindServiceAsUser = this.mContext.bindServiceAsUser(new Intent().setClassName("com.sec.android.desktopmode.uiservice", "com.sec.android.desktopmode.uiservice.DesktopModeUiService"), this.mServiceConnection, 1, UserHandle.of(this.mCurrentUserId));
+            boolean bindServiceAsUser =
+                    this.mContext.bindServiceAsUser(
+                            new Intent()
+                                    .setClassName(
+                                            "com.sec.android.desktopmode.uiservice",
+                                            "com.sec.android.desktopmode.uiservice.DesktopModeUiService"),
+                            this.mServiceConnection,
+                            1,
+                            UserHandle.of(this.mCurrentUserId));
             this.mBound = bindServiceAsUser;
             if (bindServiceAsUser) {
                 uiCommandHandler.postDelayed(uiManager$$ExternalSyntheticLambda6, 5000L);
@@ -541,7 +571,9 @@ public final class UiManager {
 
     public final void dismissDialog(int i, int i2) {
         if (DesktopModeFeature.DEBUG) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "dismissDialog(), displayId=", ", type=");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "dismissDialog(), displayId=", ", type=");
             m.append(DesktopModeUiConstants.typeToString(i2));
             Log.d("[DMS]UiManager", m.toString());
         }
@@ -550,21 +582,30 @@ public final class UiManager {
 
     public final void dismissOverlay(int i, int i2) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "dismissOverlay(), where=" + DesktopModeUiConstants.whereToString(i) + ", type=" + DesktopModeUiConstants.typeToString(i2));
+            Log.d(
+                    "[DMS]UiManager",
+                    "dismissOverlay(), where="
+                            + DesktopModeUiConstants.whereToString(i)
+                            + ", type="
+                            + DesktopModeUiConstants.typeToString(i2));
         }
         this.mHandler.schedule(new UiManager$$ExternalSyntheticLambda2(this, i, i2, 0), i2);
     }
 
     public final void finishActivity(int i) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "finishActivity(), type=" + DesktopModeUiConstants.typeToString(i));
+            Log.d(
+                    "[DMS]UiManager",
+                    "finishActivity(), type=" + DesktopModeUiConstants.typeToString(i));
         }
         this.mHandler.schedule(new UiManager$$ExternalSyntheticLambda0(this, i, 2), i);
     }
 
     public final int getCurrentOverlayType(int i) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "getCurrentOverlayType(), where=" + DesktopModeUiConstants.whereToString(i));
+            Log.d(
+                    "[DMS]UiManager",
+                    "getCurrentOverlayType(), where=" + DesktopModeUiConstants.whereToString(i));
         }
         IDesktopModeUiService iDesktopModeUiService = this.mService;
         if (iDesktopModeUiService == null) {
@@ -580,13 +621,25 @@ public final class UiManager {
 
     public final void handleNavBarIcon() {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "handleNavBarIcon(), type=" + DesktopModeUiConstants.typeToString(400));
+            Log.d(
+                    "[DMS]UiManager",
+                    "handleNavBarIcon(), type=" + DesktopModeUiConstants.typeToString(400));
         }
-        if (bindUiServiceWithPendingCommand(FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, 400, -1, new UiManager$$ExternalSyntheticLambda0(this, 13))) {
+        if (bindUiServiceWithPendingCommand(
+                FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                400,
+                -1,
+                new UiManager$$ExternalSyntheticLambda0(this, 13))) {
             try {
                 this.mService.showNavBarIcon(400);
             } catch (RemoteException e) {
-                handleRemoteException(e, true, FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, 400, -1, new UiManager$$ExternalSyntheticLambda0(this, 14));
+                handleRemoteException(
+                        e,
+                        true,
+                        FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                        400,
+                        -1,
+                        new UiManager$$ExternalSyntheticLambda0(this, 14));
             }
         }
     }
@@ -595,56 +648,85 @@ public final class UiManager {
         handleRemoteException(remoteException, false, -1, -1, -1, null);
     }
 
-    public final void handleRemoteException(RemoteException remoteException, boolean z, int i, int i2, int i3, Runnable runnable) {
+    public final void handleRemoteException(
+            RemoteException remoteException, boolean z, int i, int i2, int i3, Runnable runnable) {
         Log.e("[DMS]UiManager", "handleRemoteException(), preserve=" + z, remoteException);
         if (!z || runnable == null) {
             return;
         }
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "handleRemoteException(), adding pending commands, type=" + DesktopModeUiConstants.typeToString(i2) + ", where=" + DesktopModeUiConstants.whereToString(i3));
+            Log.d(
+                    "[DMS]UiManager",
+                    "handleRemoteException(), adding pending commands, type="
+                            + DesktopModeUiConstants.typeToString(i2)
+                            + ", where="
+                            + DesktopModeUiConstants.whereToString(i3));
         }
         this.mPendingUiCommands.queue(i, i2, i3, runnable);
     }
 
     public final void handleRemoveNavBarIcon() {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "handleRemoveNavBarIcon(), type=" + DesktopModeUiConstants.typeToString(400));
+            Log.d(
+                    "[DMS]UiManager",
+                    "handleRemoveNavBarIcon(), type=" + DesktopModeUiConstants.typeToString(400));
         }
-        if (bindUiServiceWithPendingCommand(901, 400, -1, new UiManager$$ExternalSyntheticLambda0(this, 11))) {
+        if (bindUiServiceWithPendingCommand(
+                901, 400, -1, new UiManager$$ExternalSyntheticLambda0(this, 11))) {
             try {
                 this.mService.removeNavBarIcon(400);
                 postUnbindServiceRunnable();
             } catch (RemoteException e) {
-                handleRemoteException(e, true, 901, 400, -1, new UiManager$$ExternalSyntheticLambda0(this, 12));
+                handleRemoteException(
+                        e, true, 901, 400, -1, new UiManager$$ExternalSyntheticLambda0(this, 12));
             }
         }
     }
 
     public final void handleRemoveNotification(int i) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "handleRemoveNotification(), type=" + DesktopModeUiConstants.typeToString(i));
+            Log.d(
+                    "[DMS]UiManager",
+                    "handleRemoveNotification(), type=" + DesktopModeUiConstants.typeToString(i));
         }
-        if (bindUiServiceWithPendingCommand(901, i, -1, new UiManager$$ExternalSyntheticLambda0(this, i, 7))) {
+        if (bindUiServiceWithPendingCommand(
+                901, i, -1, new UiManager$$ExternalSyntheticLambda0(this, i, 7))) {
             try {
                 this.mService.removeNotification(i);
                 postUnbindServiceRunnable();
             } catch (RemoteException e) {
-                handleRemoteException(e, true, 901, i, -1, new UiManager$$ExternalSyntheticLambda0(this, i, 8));
+                handleRemoteException(
+                        e, true, 901, i, -1, new UiManager$$ExternalSyntheticLambda0(this, i, 8));
             }
         }
     }
 
     public final void handleShowDialog(int i, int i2, final InternalUiCallback internalUiCallback) {
         if (DesktopModeFeature.DEBUG) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "handleShowDialog(), displayId=", ", dialogType=");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "handleShowDialog(), displayId=", ", dialogType=");
             m.append(DesktopModeUiConstants.typeToString(i2));
             Log.d("[DMS]UiManager", m.toString());
         }
-        UiManager$$ExternalSyntheticLambda1 uiManager$$ExternalSyntheticLambda1 = new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 3);
-        if (bindUiServiceWithPendingCommand(FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, i2, i, uiManager$$ExternalSyntheticLambda1)) {
+        UiManager$$ExternalSyntheticLambda1 uiManager$$ExternalSyntheticLambda1 =
+                new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 3);
+        if (bindUiServiceWithPendingCommand(
+                FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                i2,
+                i,
+                uiManager$$ExternalSyntheticLambda1)) {
             if (this.mChangingStandaloneMode) {
-                this.mPendingUiCommands.queue(FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, i2, i, uiManager$$ExternalSyntheticLambda1);
-                StringBuilder m2 = BatteryService$$ExternalSyntheticOutline0.m(i, "showDialog() mChangingStandaloneMode!! displayId=", ", dialogType=");
+                this.mPendingUiCommands.queue(
+                        FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                        i2,
+                        i,
+                        uiManager$$ExternalSyntheticLambda1);
+                StringBuilder m2 =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                i,
+                                "showDialog() mChangingStandaloneMode!! displayId=",
+                                ", dialogType=");
                 m2.append(DesktopModeUiConstants.typeToString(i2));
                 Log.w("[DMS]UiManager", m2.toString());
                 return;
@@ -663,51 +745,64 @@ public final class UiManager {
                 case 5:
                 case 8:
                 case 10:
-                    iDesktopModeUiServiceCallback = new IDesktopModeUiServiceCallback.Stub() { // from class: com.android.server.desktopmode.UiManager.3
-                        public final void onAnimationComplete() {
-                        }
+                    iDesktopModeUiServiceCallback =
+                            new IDesktopModeUiServiceCallback
+                                    .Stub() { // from class:
+                                              // com.android.server.desktopmode.UiManager.3
+                                public final void onAnimationComplete() {}
 
-                        public final void onClickButtonNegative() {
-                            InternalUiCallback internalUiCallback2 = internalUiCallback;
-                            if (internalUiCallback2 != null) {
-                                UiCommandHandler uiCommandHandler = UiManager.this.mHandler;
-                                Objects.requireNonNull(internalUiCallback2);
-                                uiCommandHandler.post(new UiManager$3$$ExternalSyntheticLambda0(internalUiCallback2, 1));
-                            }
-                        }
+                                public final void onClickButtonNegative() {
+                                    InternalUiCallback internalUiCallback2 = internalUiCallback;
+                                    if (internalUiCallback2 != null) {
+                                        UiCommandHandler uiCommandHandler = UiManager.this.mHandler;
+                                        Objects.requireNonNull(internalUiCallback2);
+                                        uiCommandHandler.post(
+                                                new UiManager$3$$ExternalSyntheticLambda0(
+                                                        internalUiCallback2, 1));
+                                    }
+                                }
 
-                        public final void onClickButtonPositive() {
-                            InternalUiCallback internalUiCallback2 = internalUiCallback;
-                            if (internalUiCallback2 != null) {
-                                UiCommandHandler uiCommandHandler = UiManager.this.mHandler;
-                                Objects.requireNonNull(internalUiCallback2);
-                                uiCommandHandler.post(new UiManager$3$$ExternalSyntheticLambda0(internalUiCallback2, 0));
-                            }
-                        }
+                                public final void onClickButtonPositive() {
+                                    InternalUiCallback internalUiCallback2 = internalUiCallback;
+                                    if (internalUiCallback2 != null) {
+                                        UiCommandHandler uiCommandHandler = UiManager.this.mHandler;
+                                        Objects.requireNonNull(internalUiCallback2);
+                                        uiCommandHandler.post(
+                                                new UiManager$3$$ExternalSyntheticLambda0(
+                                                        internalUiCallback2, 0));
+                                    }
+                                }
 
-                        public final void onDismiss() {
-                            InternalUiCallback internalUiCallback2 = internalUiCallback;
-                            if (internalUiCallback2 != null) {
-                                UiCommandHandler uiCommandHandler = UiManager.this.mHandler;
-                                Objects.requireNonNull(internalUiCallback2);
-                                uiCommandHandler.post(new UiManager$3$$ExternalSyntheticLambda0(internalUiCallback2, 3));
-                            }
-                            UiManager.this.postUnbindServiceRunnable();
-                        }
+                                public final void onDismiss() {
+                                    InternalUiCallback internalUiCallback2 = internalUiCallback;
+                                    if (internalUiCallback2 != null) {
+                                        UiCommandHandler uiCommandHandler = UiManager.this.mHandler;
+                                        Objects.requireNonNull(internalUiCallback2);
+                                        uiCommandHandler.post(
+                                                new UiManager$3$$ExternalSyntheticLambda0(
+                                                        internalUiCallback2, 3));
+                                    }
+                                    UiManager.this.postUnbindServiceRunnable();
+                                }
 
-                        public final void onShow() {
-                            InternalUiCallback internalUiCallback2 = internalUiCallback;
-                            if (internalUiCallback2 != null) {
-                                UiCommandHandler uiCommandHandler = UiManager.this.mHandler;
-                                Objects.requireNonNull(internalUiCallback2);
-                                uiCommandHandler.post(new UiManager$3$$ExternalSyntheticLambda0(internalUiCallback2, 2));
-                            }
-                        }
-                    };
+                                public final void onShow() {
+                                    InternalUiCallback internalUiCallback2 = internalUiCallback;
+                                    if (internalUiCallback2 != null) {
+                                        UiCommandHandler uiCommandHandler = UiManager.this.mHandler;
+                                        Objects.requireNonNull(internalUiCallback2);
+                                        uiCommandHandler.post(
+                                                new UiManager$3$$ExternalSyntheticLambda0(
+                                                        internalUiCallback2, 2));
+                                    }
+                                }
+                            };
                     break;
                 case 6:
                 default:
-                    Log.e("[DMS]UiManager", "showDialog() wrong type value!! dialogType=" + DesktopModeUiConstants.typeToString(i2));
+                    Log.e(
+                            "[DMS]UiManager",
+                            "showDialog() wrong type value!! dialogType="
+                                    + DesktopModeUiConstants.typeToString(i2));
                     break;
             }
             IDesktopModeUiService iDesktopModeUiService = this.mService;
@@ -715,7 +810,14 @@ public final class UiManager {
                 try {
                     iDesktopModeUiService.showDialog(i, i2, iDesktopModeUiServiceCallback);
                 } catch (RemoteException e) {
-                    handleRemoteException(e, true, FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, i2, i, new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 4));
+                    handleRemoteException(
+                            e,
+                            true,
+                            FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                            i2,
+                            i,
+                            new UiManager$$ExternalSyntheticLambda1(
+                                    this, i, i2, internalUiCallback, 4));
                 }
             }
         }
@@ -723,33 +825,73 @@ public final class UiManager {
 
     public final void handleShowNotification(int i) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "handleShowNotification(), type=" + DesktopModeUiConstants.typeToString(i));
+            Log.d(
+                    "[DMS]UiManager",
+                    "handleShowNotification(), type=" + DesktopModeUiConstants.typeToString(i));
         }
-        if (bindUiServiceWithPendingCommand(FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, i, -1, new UiManager$$ExternalSyntheticLambda0(this, i, 4))) {
+        if (bindUiServiceWithPendingCommand(
+                FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                i,
+                -1,
+                new UiManager$$ExternalSyntheticLambda0(this, i, 4))) {
             if (!this.mChangingStandaloneMode) {
                 try {
                     this.mService.showNotification(i);
                     return;
                 } catch (RemoteException e) {
-                    handleRemoteException(e, true, FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, i, -1, new UiManager$$ExternalSyntheticLambda0(this, i, 6));
+                    handleRemoteException(
+                            e,
+                            true,
+                            FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                            i,
+                            -1,
+                            new UiManager$$ExternalSyntheticLambda0(this, i, 6));
                     return;
                 }
             }
-            this.mPendingUiCommands.queue(FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, i, -1, new UiManager$$ExternalSyntheticLambda0(this, i, 5));
-            Log.w("[DMS]UiManager", "handleShowNotification(), mChangingStandaloneMode!!type=" + DesktopModeUiConstants.typeToString(i));
+            this.mPendingUiCommands.queue(
+                    FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                    i,
+                    -1,
+                    new UiManager$$ExternalSyntheticLambda0(this, i, 5));
+            Log.w(
+                    "[DMS]UiManager",
+                    "handleShowNotification(), mChangingStandaloneMode!!type="
+                            + DesktopModeUiConstants.typeToString(i));
         }
     }
 
     public final void handleShowOverlay(int i, int i2, InternalUiCallback internalUiCallback) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "handleShowOverlay(), where=" + DesktopModeUiConstants.whereToString(i) + ", type=" + DesktopModeUiConstants.typeToString(i2));
+            Log.d(
+                    "[DMS]UiManager",
+                    "handleShowOverlay(), where="
+                            + DesktopModeUiConstants.whereToString(i)
+                            + ", type="
+                            + DesktopModeUiConstants.typeToString(i2));
         }
-        UiManager$$ExternalSyntheticLambda1 uiManager$$ExternalSyntheticLambda1 = new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 2);
-        if (bindUiServiceWithPendingCommand(FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, i2, i, uiManager$$ExternalSyntheticLambda1)) {
+        UiManager$$ExternalSyntheticLambda1 uiManager$$ExternalSyntheticLambda1 =
+                new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 2);
+        if (bindUiServiceWithPendingCommand(
+                FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                i2,
+                i,
+                uiManager$$ExternalSyntheticLambda1)) {
             try {
-                this.mService.showOverlay(i, i2, internalUiCallback != null ? new AnonymousClass5(0, internalUiCallback) : null);
+                this.mService.showOverlay(
+                        i,
+                        i2,
+                        internalUiCallback != null
+                                ? new AnonymousClass5(0, internalUiCallback)
+                                : null);
             } catch (RemoteException e) {
-                handleRemoteException(e, true, FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, i2, -1, uiManager$$ExternalSyntheticLambda1);
+                handleRemoteException(
+                        e,
+                        true,
+                        FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                        i2,
+                        -1,
+                        uiManager$$ExternalSyntheticLambda1);
             }
         }
     }
@@ -758,19 +900,35 @@ public final class UiManager {
         if (DesktopModeFeature.DEBUG) {
             Log.d("[DMS]UiManager", "handleStartActivity(), displayId=" + i + ", type=" + i2);
         }
-        UiManager$$ExternalSyntheticLambda1 uiManager$$ExternalSyntheticLambda1 = new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 1);
-        if (bindUiServiceWithPendingCommand(FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, i2, -1, uiManager$$ExternalSyntheticLambda1)) {
+        UiManager$$ExternalSyntheticLambda1 uiManager$$ExternalSyntheticLambda1 =
+                new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 1);
+        if (bindUiServiceWithPendingCommand(
+                FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                i2,
+                -1,
+                uiManager$$ExternalSyntheticLambda1)) {
             try {
                 this.mService.startActivity(i, i2, new AnonymousClass5(1, internalUiCallback));
             } catch (RemoteException e) {
-                handleRemoteException(e, true, FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, i2, -1, uiManager$$ExternalSyntheticLambda1);
+                handleRemoteException(
+                        e,
+                        true,
+                        FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                        i2,
+                        -1,
+                        uiManager$$ExternalSyntheticLambda1);
             }
         }
     }
 
     public final boolean hasOverlay(int i) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "hasOverlay(), where=" + DesktopModeUiConstants.whereToString(101) + ", type=" + DesktopModeUiConstants.typeToString(i));
+            Log.d(
+                    "[DMS]UiManager",
+                    "hasOverlay(), where="
+                            + DesktopModeUiConstants.whereToString(101)
+                            + ", type="
+                            + DesktopModeUiConstants.typeToString(i));
         }
         IDesktopModeUiService iDesktopModeUiService = this.mService;
         if (iDesktopModeUiService == null) {
@@ -786,7 +944,11 @@ public final class UiManager {
 
     public final void postUnbindServiceRunnable() {
         int i;
-        if ((!this.mBound && this.mService == null) || (i = ((StateManager) this.mStateManager).getState().mDesktopModeState.enabled) == 3 || i == 4 || i == 1) {
+        if ((!this.mBound && this.mService == null)
+                || (i = ((StateManager) this.mStateManager).getState().mDesktopModeState.enabled)
+                        == 3
+                || i == 4
+                || i == 1) {
             return;
         }
         if (DesktopModeFeature.DEBUG) {
@@ -798,7 +960,9 @@ public final class UiManager {
 
     public final void removeNotification(int i) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "removeNotification(), type=" + DesktopModeUiConstants.typeToString(i));
+            Log.d(
+                    "[DMS]UiManager",
+                    "removeNotification(), type=" + DesktopModeUiConstants.typeToString(i));
         }
         removeUnbindServiceRunnable();
         this.mHandler.schedule(new UiManager$$ExternalSyntheticLambda0(this, i, 0), i);
@@ -810,29 +974,41 @@ public final class UiManager {
 
     public final void retryConnectionWithBackoff() {
         UiCommandHandler uiCommandHandler = this.mHandler;
-        UiManager$$ExternalSyntheticLambda6 uiManager$$ExternalSyntheticLambda6 = this.mBindServiceRunnable;
+        UiManager$$ExternalSyntheticLambda6 uiManager$$ExternalSyntheticLambda6 =
+                this.mBindServiceRunnable;
         if (uiCommandHandler.hasCallbacks(uiManager$$ExternalSyntheticLambda6)) {
             return;
         }
         long min = (long) Math.min(Math.scalb(1000.0f, this.mConnectionBackoffAttempts), 600000.0f);
         uiCommandHandler.postDelayed(uiManager$$ExternalSyntheticLambda6, min);
         this.mConnectionBackoffAttempts++;
-        Log.w("[DMS]UiManager", "Failed to bind service on attempt " + this.mConnectionBackoffAttempts + " will try again in " + min + "ms");
+        Log.w(
+                "[DMS]UiManager",
+                "Failed to bind service on attempt "
+                        + this.mConnectionBackoffAttempts
+                        + " will try again in "
+                        + min
+                        + "ms");
     }
 
     public final void showDialog(int i, int i2, InternalUiCallback internalUiCallback) {
         if (DesktopModeFeature.DEBUG) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "showDialog(), displayId=", ", dialogType=");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "showDialog(), displayId=", ", dialogType=");
             m.append(DesktopModeUiConstants.typeToString(i2));
             Log.d("[DMS]UiManager", m.toString());
         }
         removeUnbindServiceRunnable();
-        this.mHandler.schedule(new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 5), i2);
+        this.mHandler.schedule(
+                new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 5), i2);
     }
 
     public final void showNotification(int i) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "showNotification(), type=" + DesktopModeUiConstants.typeToString(i));
+            Log.d(
+                    "[DMS]UiManager",
+                    "showNotification(), type=" + DesktopModeUiConstants.typeToString(i));
         }
         removeUnbindServiceRunnable();
         this.mHandler.schedule(new UiManager$$ExternalSyntheticLambda0(this, i, 1), i);
@@ -840,10 +1016,16 @@ public final class UiManager {
 
     public final void showOverlay(int i, int i2, InternalUiCallback internalUiCallback) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]UiManager", "showOverlay(), where=" + DesktopModeUiConstants.whereToString(i) + ", type=" + DesktopModeUiConstants.typeToString(i2));
+            Log.d(
+                    "[DMS]UiManager",
+                    "showOverlay(), where="
+                            + DesktopModeUiConstants.whereToString(i)
+                            + ", type="
+                            + DesktopModeUiConstants.typeToString(i2));
         }
         removeUnbindServiceRunnable();
-        this.mHandler.schedule(new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 0), i2);
+        this.mHandler.schedule(
+                new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 0), i2);
     }
 
     public final void startActivity(int i, int i2, InternalUiCallback internalUiCallback) {
@@ -851,13 +1033,16 @@ public final class UiManager {
             Log.d("[DMS]UiManager", "startActivity(), displayId=" + i + ", type=" + i2);
         }
         removeUnbindServiceRunnable();
-        this.mHandler.schedule(new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 6), i2);
+        this.mHandler.schedule(
+                new UiManager$$ExternalSyntheticLambda1(this, i, i2, internalUiCallback, 6), i2);
     }
 
     public final void unbindService() {
         if (this.mBound || this.mService != null) {
             if (DesktopModeFeature.DEBUG) {
-                Log.d("[DMS]UiManager", "unbindService(), mBound=" + this.mBound + ", mService=" + this.mService);
+                Log.d(
+                        "[DMS]UiManager",
+                        "unbindService(), mBound=" + this.mBound + ", mService=" + this.mService);
             }
             if (this.mBound) {
                 this.mContext.unbindService(this.mServiceConnection);

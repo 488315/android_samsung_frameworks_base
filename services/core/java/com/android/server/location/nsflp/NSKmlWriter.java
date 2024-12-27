@@ -2,9 +2,11 @@ package com.android.server.location.nsflp;
 
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.Binder;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,7 +44,15 @@ public final class NSKmlWriter {
         public final String time;
         public final String type;
 
-        public DebugInfo(String str, String str2, long j, String str3, String str4, String str5, String str6, String str7) {
+        public DebugInfo(
+                String str,
+                String str2,
+                long j,
+                String str3,
+                String str4,
+                String str5,
+                String str6,
+                String str7) {
             this.receivedTime = str;
             this.type = str2;
             this.sessionNumber = j;
@@ -64,7 +74,14 @@ public final class NSKmlWriter {
         public final float speed;
         public final String time;
 
-        public KmlInfo(String str, double d, double d2, float f, float f2, String str2, SATELLITE_STATE satellite_state) {
+        public KmlInfo(
+                String str,
+                double d,
+                double d2,
+                float f,
+                float f2,
+                String str2,
+                SATELLITE_STATE satellite_state) {
             this.provider = str;
             this.latitude = d;
             this.longitude = d2;
@@ -154,7 +171,27 @@ public final class NSKmlWriter {
         double sin2 = d3 - (Math.sin(d8) * d6);
         double cos2 = d5 - (Math.cos(d8) * d6);
         double d9 = d7 - sSixtyRadian;
-        String str = d2 + "," + d4 + ",0.0 " + d3 + "," + d5 + ",0.0 " + sin2 + "," + cos2 + ",0.0 " + (d3 - (Math.sin(d9) * d6)) + "," + (d5 - (Math.cos(d9) * d6)) + ",0.0 " + d3 + "," + d5 + ",0.0";
+        String str =
+                d2
+                        + ","
+                        + d4
+                        + ",0.0 "
+                        + d3
+                        + ","
+                        + d5
+                        + ",0.0 "
+                        + sin2
+                        + ","
+                        + cos2
+                        + ",0.0 "
+                        + (d3 - (Math.sin(d9) * d6))
+                        + ","
+                        + (d5 - (Math.cos(d9) * d6))
+                        + ",0.0 "
+                        + d3
+                        + ","
+                        + d5
+                        + ",0.0";
         StringBuilder sb = new StringBuilder("<LineString><coordinates>\n");
         sb.append(str + "\n");
         sb.append("</coordinates></LineString>\n");
@@ -164,7 +201,8 @@ public final class NSKmlWriter {
     public static DebugInfo getDebugKmlInfo(String[] strArr) {
         int length = strArr.length;
         if (length < 8) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(length, "getDebugKmlInfo, wrong data length : ", "NSKmlWriter");
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    length, "getDebugKmlInfo, wrong data length : ", "NSKmlWriter");
             return null;
         }
         String str = strArr[0];
@@ -175,7 +213,17 @@ public final class NSKmlWriter {
         String str5 = strArr[5];
         String str6 = strArr[6];
         String str7 = strArr[8];
-        return new DebugInfo(str, str2, parseLong, str3, str4, str5, str6, (!"ENGINE_OFF".equals(str2) || length <= 10) ? str7 : AnyMotionDetector$$ExternalSyntheticOutline0.m(str7, "/", strArr[10]));
+        return new DebugInfo(
+                str,
+                str2,
+                parseLong,
+                str3,
+                str4,
+                str5,
+                str6,
+                (!"ENGINE_OFF".equals(str2) || length <= 10)
+                        ? str7
+                        : AnyMotionDetector$$ExternalSyntheticOutline0.m(str7, "/", strArr[10]));
     }
 
     public static KmlInfo getNmeaKmlInfo(String[] strArr) {
@@ -204,7 +252,13 @@ public final class NSKmlWriter {
                 if (Integer.parseInt(substring.substring(7, 8)) >= 5) {
                     calendar.add(13, 1);
                 }
-                substring = String.format(Locale.getDefault(), "%02d%02d%02d", Integer.valueOf(calendar.get(11)), Integer.valueOf(calendar.get(12)), Integer.valueOf(calendar.get(13)));
+                substring =
+                        String.format(
+                                Locale.getDefault(),
+                                "%02d%02d%02d",
+                                Integer.valueOf(calendar.get(11)),
+                                Integer.valueOf(calendar.get(12)),
+                                Integer.valueOf(calendar.get(13)));
             } catch (ParseException e) {
                 e.printStackTrace();
                 substring = "";
@@ -215,7 +269,14 @@ public final class NSKmlWriter {
         double d2 = (int) d;
         double d3 = parseDouble2 * 0.01d;
         double d4 = (int) d3;
-        return new KmlInfo("gps", (((d - d2) * 1.6666666666666667d) + d2) * ("S".equals(upperCase) ? -1.0d : 1.0d), (((d3 - d4) * 1.6666666666666667d) + d4) * ("W".equals(upperCase2) ? -1.0d : 1.0d), parseFloat, f2, m$1, null);
+        return new KmlInfo(
+                "gps",
+                (((d - d2) * 1.6666666666666667d) + d2) * ("S".equals(upperCase) ? -1.0d : 1.0d),
+                (((d3 - d4) * 1.6666666666666667d) + d4) * ("W".equals(upperCase2) ? -1.0d : 1.0d),
+                parseFloat,
+                f2,
+                m$1,
+                null);
     }
 
     public static KmlInfo getPositionKmlInfo(String[] strArr) {
@@ -223,7 +284,8 @@ public final class NSKmlWriter {
         int length = strArr.length;
         SATELLITE_STATE satellite_state = null;
         if (length < 8) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(length, "getPositionKmlInfo, wrong data length : ", "NSKmlWriter");
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    length, "getPositionKmlInfo, wrong data length : ", "NSKmlWriter");
             return null;
         }
         String str = strArr[0];
@@ -232,13 +294,21 @@ public final class NSKmlWriter {
         double parseDouble2 = Double.parseDouble(strArr[3]);
         float parseFloat = Float.parseFloat(strArr[5]);
         float parseFloat2 = Float.parseFloat(strArr[7]);
-        if ("gps".equals(str2) && length > 8 && (parseInt = Integer.parseInt(strArr[8])) >= 0 && parseInt < SATELLITE_STATE.values().length) {
+        if ("gps".equals(str2)
+                && length > 8
+                && (parseInt = Integer.parseInt(strArr[8])) >= 0
+                && parseInt < SATELLITE_STATE.values().length) {
             satellite_state = SATELLITE_STATE.values()[parseInt];
         }
-        return new KmlInfo(str2, parseDouble, parseDouble2, parseFloat, parseFloat2, str, satellite_state);
+        return new KmlInfo(
+                str2, parseDouble, parseDouble2, parseFloat, parseFloat2, str, satellite_state);
     }
 
     public static String getStyle(String str, boolean z) {
-        return "gps".equals(str) ? z ? "#lineStyleRed" : "#pointStyleRed" : "network".equals(str) ? z ? "#lineStyleYellow" : "#pointStyleYellow" : z ? "#lineStyleGreen" : "#pointStyleGreen";
+        return "gps".equals(str)
+                ? z ? "#lineStyleRed" : "#pointStyleRed"
+                : "network".equals(str)
+                        ? z ? "#lineStyleYellow" : "#pointStyleYellow"
+                        : z ? "#lineStyleGreen" : "#pointStyleGreen";
     }
 }

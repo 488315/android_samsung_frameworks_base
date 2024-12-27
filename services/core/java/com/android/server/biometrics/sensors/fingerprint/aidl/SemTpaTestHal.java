@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.util.Slog;
 import android.util.SparseLongArray;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
 import com.android.server.am.PendingIntentController$$ExternalSyntheticOutline0;
@@ -20,8 +21,9 @@ import com.android.server.audio.AudioService$$ExternalSyntheticLambda1;
 import com.android.server.biometrics.HardwareAuthTokenUtils;
 import com.android.server.biometrics.SemBiometricFeature;
 import com.android.server.biometrics.sensors.SemTestHalHelper;
-import com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal;
+
 import com.att.iqi.lib.metrics.mm.MM05;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -62,48 +64,61 @@ public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Cal
         public final ICancellationSignal authenticate(final long j) {
             Slog.w("fingerprint.aidl.SemTpaTestHal", "authenticate, " + j);
             final CancellationSignal cancellationSignal = new CancellationSignal();
-            cancellationSignal.setOnCancelListener(new SemTpaTestHal$1$$ExternalSyntheticLambda3(this, this.val$handler, this.val$sessionCallback, 1));
+            cancellationSignal.setOnCancelListener(
+                    new SemTpaTestHal$1$$ExternalSyntheticLambda3(
+                            this, this.val$handler, this.val$sessionCallback, 1));
             long j2 = SemTpaTestHal.this.mTestHalHelper.mDelayAuthAction;
             Handler handler = this.val$handler;
-            Runnable runnable = new Runnable() { // from class: com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal$1$$ExternalSyntheticLambda7
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SemTpaTestHal.AnonymousClass1 anonymousClass1 = SemTpaTestHal.AnonymousClass1.this;
-                    long j3 = j;
-                    CancellationSignal cancellationSignal2 = cancellationSignal;
-                    if (SemTpaTestHal.this.mEnrolledIds.isEmpty()) {
-                        SemTpaTestHal.this.deliverErrorEvent(8, 1004);
-                        return;
-                    }
-                    List list = SemTpaTestHal.this.mTestHalHelper.mAuthActionList;
-                    StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("start authenticateTPA: ", j3, ", action size = ");
-                    ArrayList arrayList = (ArrayList) list;
-                    m.append(arrayList.size());
-                    Slog.d("fingerprint.aidl.SemTpaTestHal", m.toString());
-                    Iterator it = arrayList.iterator();
-                    while (it.hasNext()) {
-                        SemTestHalHelper.Action action = (SemTestHalHelper.Action) it.next();
-                        if (cancellationSignal2.isCanceled()) {
-                            return;
-                        }
-                        SemTpaTestHal.this.mActionDelayLatch = new CountDownLatch(1);
-                        try {
-                            SemTpaTestHal.this.mActionDelayLatch.await(action.delay, TimeUnit.MILLISECONDS);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        action.run();
-                        if (SemBiometricFeature.FP_FEATURE_SENSOR_IS_OPTICAL && action.callbackType == SemTestHalHelper.CallbackType.TSP_FOD && action.value == 2) {
-                            SemTpaTestHal.this.mTspDelayLatch = new CountDownLatch(1);
-                            try {
-                                SemTpaTestHal.this.mTspDelayLatch.await(10000L, TimeUnit.MICROSECONDS);
-                            } catch (InterruptedException e2) {
-                                e2.printStackTrace();
+            Runnable runnable =
+                    new Runnable() { // from class:
+                                     // com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal$1$$ExternalSyntheticLambda7
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SemTpaTestHal.AnonymousClass1 anonymousClass1 =
+                                    SemTpaTestHal.AnonymousClass1.this;
+                            long j3 = j;
+                            CancellationSignal cancellationSignal2 = cancellationSignal;
+                            if (SemTpaTestHal.this.mEnrolledIds.isEmpty()) {
+                                SemTpaTestHal.this.deliverErrorEvent(8, 1004);
+                                return;
+                            }
+                            List list = SemTpaTestHal.this.mTestHalHelper.mAuthActionList;
+                            StringBuilder m =
+                                    BatteryService$$ExternalSyntheticOutline0.m(
+                                            "start authenticateTPA: ", j3, ", action size = ");
+                            ArrayList arrayList = (ArrayList) list;
+                            m.append(arrayList.size());
+                            Slog.d("fingerprint.aidl.SemTpaTestHal", m.toString());
+                            Iterator it = arrayList.iterator();
+                            while (it.hasNext()) {
+                                SemTestHalHelper.Action action =
+                                        (SemTestHalHelper.Action) it.next();
+                                if (cancellationSignal2.isCanceled()) {
+                                    return;
+                                }
+                                SemTpaTestHal.this.mActionDelayLatch = new CountDownLatch(1);
+                                try {
+                                    SemTpaTestHal.this.mActionDelayLatch.await(
+                                            action.delay, TimeUnit.MILLISECONDS);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                action.run();
+                                if (SemBiometricFeature.FP_FEATURE_SENSOR_IS_OPTICAL
+                                        && action.callbackType
+                                                == SemTestHalHelper.CallbackType.TSP_FOD
+                                        && action.value == 2) {
+                                    SemTpaTestHal.this.mTspDelayLatch = new CountDownLatch(1);
+                                    try {
+                                        SemTpaTestHal.this.mTspDelayLatch.await(
+                                                10000L, TimeUnit.MICROSECONDS);
+                                    } catch (InterruptedException e2) {
+                                        e2.printStackTrace();
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-            };
+                    };
             if (j2 == 0) {
                 j2 = 600;
             }
@@ -112,7 +127,8 @@ public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Cal
             return new AnonymousClass2(cancellationSignal);
         }
 
-        public final ICancellationSignal authenticateWithContext(long j, OperationContext operationContext) {
+        public final ICancellationSignal authenticateWithContext(
+                long j, OperationContext operationContext) {
             return authenticate(j);
         }
 
@@ -126,93 +142,123 @@ public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Cal
             CancellationSignal cancellationSignal = new CancellationSignal();
             final Handler handler = this.val$handler;
             final ISessionCallback iSessionCallback = this.val$sessionCallback;
-            cancellationSignal.setOnCancelListener(new CancellationSignal.OnCancelListener() { // from class: com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal$1$$ExternalSyntheticLambda1
-                @Override // android.os.CancellationSignal.OnCancelListener
-                public final void onCancel() {
-                    handler.post(new SemTpaTestHal$$ExternalSyntheticLambda0(iSessionCallback, 2));
-                }
-            });
-            this.val$handler.postDelayed(new SemTpaTestHal$1$$ExternalSyntheticLambda2(this, this.val$sessionCallback, 0), 600L);
+            cancellationSignal.setOnCancelListener(
+                    new CancellationSignal
+                            .OnCancelListener() { // from class:
+                                                  // com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal$1$$ExternalSyntheticLambda1
+                        @Override // android.os.CancellationSignal.OnCancelListener
+                        public final void onCancel() {
+                            handler.post(
+                                    new SemTpaTestHal$$ExternalSyntheticLambda0(
+                                            iSessionCallback, 2));
+                        }
+                    });
+            this.val$handler.postDelayed(
+                    new SemTpaTestHal$1$$ExternalSyntheticLambda2(
+                            this, this.val$sessionCallback, 0),
+                    600L);
             SemTpaTestHal.this.getClass();
             return new AnonymousClass2(cancellationSignal);
         }
 
-        public final ICancellationSignal detectInteractionWithContext(OperationContext operationContext) {
+        public final ICancellationSignal detectInteractionWithContext(
+                OperationContext operationContext) {
             return detectInteraction();
         }
 
         public final ICancellationSignal enroll(HardwareAuthToken hardwareAuthToken) {
             Slog.w("fingerprint.aidl.SemTpaTestHal", "enroll: " + hardwareAuthToken);
             final CancellationSignal cancellationSignal = new CancellationSignal();
-            cancellationSignal.setOnCancelListener(new SemTpaTestHal$1$$ExternalSyntheticLambda3(this, this.val$handler, this.val$sessionCallback, 0));
+            cancellationSignal.setOnCancelListener(
+                    new SemTpaTestHal$1$$ExternalSyntheticLambda3(
+                            this, this.val$handler, this.val$sessionCallback, 0));
             Handler handler = this.val$handler;
             final int i = this.val$userId;
-            handler.postDelayed(new Runnable() { // from class: com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal$1$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SemTpaTestHal.AnonymousClass1 anonymousClass1 = SemTpaTestHal.AnonymousClass1.this;
-                    CancellationSignal cancellationSignal2 = cancellationSignal;
-                    int i2 = i;
-                    anonymousClass1.getClass();
-                    Random random = new Random();
-                    int nextInt = random.nextInt();
-                    while (SemTpaTestHal.this.mEnrolledIds.contains(Integer.valueOf(nextInt))) {
-                        nextInt = random.nextInt();
-                    }
-                    SemTpaTestHal semTpaTestHal = SemTpaTestHal.this;
-                    semTpaTestHal.mCurrentEnrollmentId = nextInt;
-                    List list = semTpaTestHal.mTestHalHelper.mEnrollActionList;
-                    StringBuilder sb = new StringBuilder("start enrollTPA: ");
-                    sb.append(SemTpaTestHal.this.mCurrentEnrollmentId);
-                    sb.append(", action size = ");
-                    ArrayList arrayList = (ArrayList) list;
-                    sb.append(arrayList.size());
-                    Slog.d("fingerprint.aidl.SemTpaTestHal", sb.toString());
-                    Iterator it = arrayList.iterator();
-                    while (it.hasNext()) {
-                        SemTestHalHelper.Action action = (SemTestHalHelper.Action) it.next();
-                        if (cancellationSignal2.isCanceled()) {
-                            return;
+            handler.postDelayed(
+                    new Runnable() { // from class:
+                                     // com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal$1$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SemTpaTestHal.AnonymousClass1 anonymousClass1 =
+                                    SemTpaTestHal.AnonymousClass1.this;
+                            CancellationSignal cancellationSignal2 = cancellationSignal;
+                            int i2 = i;
+                            anonymousClass1.getClass();
+                            Random random = new Random();
+                            int nextInt = random.nextInt();
+                            while (SemTpaTestHal.this.mEnrolledIds.contains(
+                                    Integer.valueOf(nextInt))) {
+                                nextInt = random.nextInt();
+                            }
+                            SemTpaTestHal semTpaTestHal = SemTpaTestHal.this;
+                            semTpaTestHal.mCurrentEnrollmentId = nextInt;
+                            List list = semTpaTestHal.mTestHalHelper.mEnrollActionList;
+                            StringBuilder sb = new StringBuilder("start enrollTPA: ");
+                            sb.append(SemTpaTestHal.this.mCurrentEnrollmentId);
+                            sb.append(", action size = ");
+                            ArrayList arrayList = (ArrayList) list;
+                            sb.append(arrayList.size());
+                            Slog.d("fingerprint.aidl.SemTpaTestHal", sb.toString());
+                            Iterator it = arrayList.iterator();
+                            while (it.hasNext()) {
+                                SemTestHalHelper.Action action =
+                                        (SemTestHalHelper.Action) it.next();
+                                if (cancellationSignal2.isCanceled()) {
+                                    return;
+                                }
+                                SemTpaTestHal.this.mActionDelayLatch = new CountDownLatch(1);
+                                try {
+                                    SemTpaTestHal.this.mActionDelayLatch.await(
+                                            action.delay, TimeUnit.MILLISECONDS);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                action.run();
+                                if (action.callbackType
+                                                == SemTestHalHelper.CallbackType.ENROLL_RESULT
+                                        && action.value == 0) {
+                                    SemTpaTestHal semTpaTestHal2 = SemTpaTestHal.this;
+                                    semTpaTestHal2.mEnrolledIds.add(
+                                            Integer.valueOf(semTpaTestHal2.mCurrentEnrollmentId));
+                                    SemTpaTestHal semTpaTestHal3 = SemTpaTestHal.this;
+                                    semTpaTestHal3.mCurrentEnrollmentId = 0;
+                                    semTpaTestHal3.mAuthenticatorID.put(i2, random.nextLong());
+                                }
+                            }
                         }
-                        SemTpaTestHal.this.mActionDelayLatch = new CountDownLatch(1);
-                        try {
-                            SemTpaTestHal.this.mActionDelayLatch.await(action.delay, TimeUnit.MILLISECONDS);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        action.run();
-                        if (action.callbackType == SemTestHalHelper.CallbackType.ENROLL_RESULT && action.value == 0) {
-                            SemTpaTestHal semTpaTestHal2 = SemTpaTestHal.this;
-                            semTpaTestHal2.mEnrolledIds.add(Integer.valueOf(semTpaTestHal2.mCurrentEnrollmentId));
-                            SemTpaTestHal semTpaTestHal3 = SemTpaTestHal.this;
-                            semTpaTestHal3.mCurrentEnrollmentId = 0;
-                            semTpaTestHal3.mAuthenticatorID.put(i2, random.nextLong());
-                        }
-                    }
-                }
-            }, 600L);
+                    },
+                    600L);
             SemTpaTestHal.this.getClass();
             return new AnonymousClass2(cancellationSignal);
         }
 
-        public final ICancellationSignal enrollWithContext(HardwareAuthToken hardwareAuthToken, OperationContext operationContext) {
+        public final ICancellationSignal enrollWithContext(
+                HardwareAuthToken hardwareAuthToken, OperationContext operationContext) {
             return enroll(hardwareAuthToken);
         }
 
         public final void enumerateEnrollments() {
-            Slog.w("fingerprint.aidl.SemTpaTestHal", "enumerateEnrollments: " + SemTpaTestHal.this.mEnrolledIds.size());
-            this.val$sessionCallback.onEnrollmentsEnumerated(SemTpaTestHal.this.mEnrolledIds.stream().mapToInt(new AudioService$$ExternalSyntheticLambda1(2)).toArray());
+            Slog.w(
+                    "fingerprint.aidl.SemTpaTestHal",
+                    "enumerateEnrollments: " + SemTpaTestHal.this.mEnrolledIds.size());
+            this.val$sessionCallback.onEnrollmentsEnumerated(
+                    SemTpaTestHal.this.mEnrolledIds.stream()
+                            .mapToInt(new AudioService$$ExternalSyntheticLambda1(2))
+                            .toArray());
         }
 
         public final void generateChallenge() {
             Slog.w("fingerprint.aidl.SemTpaTestHal", "generateChallenge");
             SemTpaTestHal.this.mChallenge = new Random().nextLong();
-            this.val$handler.post(new SemTpaTestHal$1$$ExternalSyntheticLambda2(this, this.val$sessionCallback, 1));
+            this.val$handler.post(
+                    new SemTpaTestHal$1$$ExternalSyntheticLambda2(
+                            this, this.val$sessionCallback, 1));
         }
 
         public final void getAuthenticatorId() {
             Slog.w("fingerprint.aidl.SemTpaTestHal", "getAuthenticatorId");
-            this.val$sessionCallback.onAuthenticatorIdRetrieved(SemTpaTestHal.this.mAuthenticatorID.get(this.val$userId, 0L));
+            this.val$sessionCallback.onAuthenticatorIdRetrieved(
+                    SemTpaTestHal.this.mAuthenticatorID.get(this.val$userId, 0L));
         }
 
         public final String getInterfaceHash() {
@@ -226,7 +272,8 @@ public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Cal
         public final void invalidateAuthenticatorId() {
             Slog.w("fingerprint.aidl.SemTpaTestHal", "invalidateAuthenticatorId");
             SemTpaTestHal.this.mAuthenticatorID.put(this.val$userId, new Random().nextLong());
-            this.val$sessionCallback.onAuthenticatorIdInvalidated(SemTpaTestHal.this.mAuthenticatorID.get(this.val$userId, 0L));
+            this.val$sessionCallback.onAuthenticatorIdInvalidated(
+                    SemTpaTestHal.this.mAuthenticatorID.get(this.val$userId, 0L));
         }
 
         public final void onContextChanged(OperationContext operationContext) {
@@ -242,7 +289,12 @@ public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Cal
         }
 
         public final void onPointerDownWithContext(PointerContext pointerContext) {
-            onPointerDown(pointerContext.pointerId, (int) pointerContext.x, (int) pointerContext.y, pointerContext.minor, pointerContext.major);
+            onPointerDown(
+                    pointerContext.pointerId,
+                    (int) pointerContext.x,
+                    (int) pointerContext.y,
+                    pointerContext.minor,
+                    pointerContext.major);
         }
 
         public final void onPointerUp(int i) {
@@ -274,16 +326,18 @@ public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Cal
             Slog.w("fingerprint.aidl.SemTpaTestHal", "revokeChallenge: " + j);
             Handler handler = this.val$handler;
             final ISessionCallback iSessionCallback = this.val$sessionCallback;
-            handler.post(new Runnable() { // from class: com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal$1$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    try {
-                        iSessionCallback.onChallengeRevoked(j);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal$1$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            try {
+                                iSessionCallback.onChallengeRevoked(j);
+                            } catch (RemoteException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
         }
 
         public final void setIgnoreDisplayTouches(boolean z) {
@@ -319,7 +373,8 @@ public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Cal
 
     @Override // com.android.server.biometrics.sensors.fingerprint.aidl.TestHal
     public final ISession createSession(int i, int i2, ISessionCallback iSessionCallback) {
-        PendingIntentController$$ExternalSyntheticOutline0.m(i, i2, "createSession, sensorId: ", " userId: ", "fingerprint.aidl.SemTpaTestHal");
+        PendingIntentController$$ExternalSyntheticOutline0.m(
+                i, i2, "createSession, sensorId: ", " userId: ", "fingerprint.aidl.SemTpaTestHal");
         if (this.mThread == null) {
             this.mTestHalHelper.initActions();
             SemTestSehFingerprint semTestSehFingerprint = this.mSehFingerprint;
@@ -330,7 +385,8 @@ public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Cal
                 serviceThread.quitSafely();
                 this.mThread = null;
             }
-            ServiceThread serviceThread2 = new ServiceThread(-2, "fingerprint.aidl.SemTpaTestHal", true);
+            ServiceThread serviceThread2 =
+                    new ServiceThread(-2, "fingerprint.aidl.SemTpaTestHal", true);
             this.mThread = serviceThread2;
             serviceThread2.start();
         }
@@ -392,7 +448,9 @@ public final class SemTpaTestHal extends TestHal implements SemTestHalHelper.Cal
         }
         try {
             if (i != 0) {
-                this.mISessionCallback.onAuthenticationSucceeded(((Integer) this.mEnrolledIds.iterator().next()).intValue(), HardwareAuthTokenUtils.toHardwareAuthToken(new byte[69]));
+                this.mISessionCallback.onAuthenticationSucceeded(
+                        ((Integer) this.mEnrolledIds.iterator().next()).intValue(),
+                        HardwareAuthTokenUtils.toHardwareAuthToken(new byte[69]));
             } else {
                 this.mISessionCallback.onAuthenticationFailed();
             }

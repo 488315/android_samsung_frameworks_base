@@ -14,7 +14,7 @@ import android.util.IndentingPrintWriter;
 import android.util.IntArray;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
-import com.android.server.vibrator.GroupedAggregatedLogRecords;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -25,7 +25,8 @@ import java.util.concurrent.CompletableFuture;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class VibratorControlService extends IVibratorControlService.Stub {
-    public static final DateTimeFormatter DEBUG_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
+    public static final DateTimeFormatter DEBUG_DATE_TIME_FORMATTER =
+            DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
     public final Object mLock;
     public final int[] mRequestVibrationParamsForUsages;
     public final VibratorFrameworkStatsLogger mStatsLogger;
@@ -65,7 +66,7 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
                 PUSH = operation2;
                 Operation operation3 = new Operation("CLEAR", 2);
                 CLEAR = operation3;
-                $VALUES = new Operation[]{operation, operation2, operation3};
+                $VALUES = new Operation[] {operation, operation2, operation3};
             }
 
             public static Operation valueOf(String str) {
@@ -78,7 +79,8 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
         }
 
         @Override // com.android.server.vibrator.GroupedAggregatedLogRecords
-        public final synchronized void dumpGroupHeader(IndentingPrintWriter indentingPrintWriter, int i) {
+        public final synchronized void dumpGroupHeader(
+                IndentingPrintWriter indentingPrintWriter, int i) {
             try {
                 if (i == 0) {
                     indentingPrintWriter.println("SCALE:");
@@ -97,13 +99,15 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class VibrationScaleParamRecord implements GroupedAggregatedLogRecords.SingleLogRecord {
+    public final class VibrationScaleParamRecord
+            implements GroupedAggregatedLogRecords.SingleLogRecord {
         public final long mCreateTime;
         public final VibrationParamsRecords.Operation mOperation;
         public final float mScale;
         public final int mTypesMask;
 
-        public VibrationScaleParamRecord(VibrationParamsRecords.Operation operation, long j, int i, float f) {
+        public VibrationScaleParamRecord(
+                VibrationParamsRecords.Operation operation, long j, int i, float f) {
             this.mOperation = operation;
             this.mCreateTime = j;
             this.mTypesMask = i;
@@ -113,28 +117,43 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
         @Override // com.android.server.vibrator.GroupedAggregatedLogRecords.SingleLogRecord
         public final void dump(IndentingPrintWriter indentingPrintWriter) {
             Locale locale = Locale.ROOT;
-            String format = VibratorControlService.DEBUG_DATE_TIME_FORMATTER.withZone(ZoneId.systemDefault()).format(Instant.ofEpochMilli(this.mCreateTime));
+            String format =
+                    VibratorControlService.DEBUG_DATE_TIME_FORMATTER
+                            .withZone(ZoneId.systemDefault())
+                            .format(Instant.ofEpochMilli(this.mCreateTime));
             String lowerCase = this.mOperation.name().toLowerCase(locale);
             float f = this.mScale;
             String format2 = f == -1.0f ? "" : String.format(locale, "%.2f", Float.valueOf(f));
             int i = this.mTypesMask;
             String binaryString = Long.toBinaryString(i);
             StringBuilder sb = new StringBuilder();
-            int[] mapFromAdaptiveVibrationTypeToVibrationUsages = VibratorControlService.mapFromAdaptiveVibrationTypeToVibrationUsages(i);
+            int[] mapFromAdaptiveVibrationTypeToVibrationUsages =
+                    VibratorControlService.mapFromAdaptiveVibrationTypeToVibrationUsages(i);
             for (int i2 = 0; i2 < mapFromAdaptiveVibrationTypeToVibrationUsages.length; i2++) {
                 if (i2 > 0) {
                     sb.append(", ");
                 }
-                sb.append(VibrationAttributes.usageToString(mapFromAdaptiveVibrationTypeToVibrationUsages[i2]));
+                sb.append(
+                        VibrationAttributes.usageToString(
+                                mapFromAdaptiveVibrationTypeToVibrationUsages[i2]));
             }
-            indentingPrintWriter.println(String.format(locale, "%s | %6s | scale: %5s | typesMask: %6s | usages: %s", format, lowerCase, format2, binaryString, sb.toString()));
+            indentingPrintWriter.println(
+                    String.format(
+                            locale,
+                            "%s | %6s | scale: %5s | typesMask: %6s | usages: %s",
+                            format,
+                            lowerCase,
+                            format2,
+                            binaryString,
+                            sb.toString()));
         }
 
         @Override // com.android.server.vibrator.GroupedAggregatedLogRecords.SingleLogRecord
         public final void dump(ProtoOutputStream protoOutputStream, long j) {
             long start = protoOutputStream.start(j);
             protoOutputStream.write(1112396529666L, this.mCreateTime);
-            protoOutputStream.write(1133871366147L, this.mOperation == VibrationParamsRecords.Operation.PULL);
+            protoOutputStream.write(
+                    1133871366147L, this.mOperation == VibrationParamsRecords.Operation.PULL);
             long start2 = protoOutputStream.start(1146756268033L);
             protoOutputStream.write(1120986464257L, this.mTypesMask);
             protoOutputStream.write(1108101562370L, this.mScale);
@@ -153,16 +172,25 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
         }
 
         @Override // com.android.server.vibrator.GroupedAggregatedLogRecords.SingleLogRecord
-        public final boolean mayAggregate(GroupedAggregatedLogRecords.SingleLogRecord singleLogRecord) {
+        public final boolean mayAggregate(
+                GroupedAggregatedLogRecords.SingleLogRecord singleLogRecord) {
             if (!(singleLogRecord instanceof VibrationScaleParamRecord)) {
                 return false;
             }
-            VibrationScaleParamRecord vibrationScaleParamRecord = (VibrationScaleParamRecord) singleLogRecord;
-            return this.mTypesMask == vibrationScaleParamRecord.mTypesMask && this.mOperation == vibrationScaleParamRecord.mOperation;
+            VibrationScaleParamRecord vibrationScaleParamRecord =
+                    (VibrationScaleParamRecord) singleLogRecord;
+            return this.mTypesMask == vibrationScaleParamRecord.mTypesMask
+                    && this.mOperation == vibrationScaleParamRecord.mOperation;
         }
     }
 
-    public VibratorControlService(Context context, VibratorControllerHolder vibratorControllerHolder, VibrationScaler vibrationScaler, VibrationSettings vibrationSettings, VibratorFrameworkStatsLogger vibratorFrameworkStatsLogger, Object obj) {
+    public VibratorControlService(
+            Context context,
+            VibratorControllerHolder vibratorControllerHolder,
+            VibrationScaler vibrationScaler,
+            VibrationSettings vibrationSettings,
+            VibratorFrameworkStatsLogger vibratorFrameworkStatsLogger,
+            Object obj) {
         markVintfStability();
         attachInterface(this, IVibratorControlService.DESCRIPTOR);
         this.mVibrationParamRequest = null;
@@ -170,8 +198,14 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
         this.mVibrationScaler = vibrationScaler;
         this.mStatsLogger = vibratorFrameworkStatsLogger;
         this.mLock = obj;
-        this.mRequestVibrationParamsForUsages = vibrationSettings.mVibrationConfig.getRequestVibrationParamsForUsages();
-        this.mVibrationParamsRecords = new VibrationParamsRecords(context.getResources().getInteger(R.integer.config_shortPressOnSleepBehavior), context.getResources().getInteger(R.integer.config_shortPressOnSettingsBehavior));
+        this.mRequestVibrationParamsForUsages =
+                vibrationSettings.mVibrationConfig.getRequestVibrationParamsForUsages();
+        this.mVibrationParamsRecords =
+                new VibrationParamsRecords(
+                        context.getResources()
+                                .getInteger(R.integer.config_shortPressOnSleepBehavior),
+                        context.getResources()
+                                .getInteger(R.integer.config_shortPressOnSettingsBehavior));
     }
 
     public static int[] mapFromAdaptiveVibrationTypeToVibrationUsages(int i) {
@@ -201,16 +235,33 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
         Objects.requireNonNull(iVibratorController);
         synchronized (this.mLock) {
             try {
-                IVibratorController iVibratorController2 = this.mVibratorControllerHolder.mVibratorController;
+                IVibratorController iVibratorController2 =
+                        this.mVibratorControllerHolder.mVibratorController;
                 if (iVibratorController2 == null) {
-                    Slog.w("VibratorControlService", "Received request to clear VibrationParams for IVibratorController = " + iVibratorController + ", but no controller was previously registered. Request Ignored.");
+                    Slog.w(
+                            "VibratorControlService",
+                            "Received request to clear VibrationParams for IVibratorController = "
+                                    + iVibratorController
+                                    + ", but no controller was previously registered. Request"
+                                    + " Ignored.");
                     return;
                 }
-                if (Objects.equals(((IVibratorController.Stub.Proxy) iVibratorController2).mRemote, ((IVibratorController.Stub.Proxy) iVibratorController).mRemote)) {
+                if (Objects.equals(
+                        ((IVibratorController.Stub.Proxy) iVibratorController2).mRemote,
+                        ((IVibratorController.Stub.Proxy) iVibratorController).mRemote)) {
                     updateAdaptiveHapticsScales(-1.0f, i);
-                    this.mVibrationParamsRecords.add(new VibrationScaleParamRecord(VibrationParamsRecords.Operation.CLEAR, SystemClock.uptimeMillis(), i, -1.0f));
+                    this.mVibrationParamsRecords.add(
+                            new VibrationScaleParamRecord(
+                                    VibrationParamsRecords.Operation.CLEAR,
+                                    SystemClock.uptimeMillis(),
+                                    i,
+                                    -1.0f));
                 } else {
-                    Slog.wtf("VibratorControlService", "Failed to clear VibrationParams. The provided controller doesn't match the registered one. " + this);
+                    Slog.wtf(
+                            "VibratorControlService",
+                            "Failed to clear VibrationParams. The provided controller doesn't match"
+                                + " the registered one. "
+                                    + this);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -240,14 +291,20 @@ public final class VibratorControlService extends IVibratorControlService.Stub {
     }
 
     public final void recordUpdateVibrationParams(VibrationParam[] vibrationParamArr, boolean z) {
-        VibrationParamsRecords.Operation operation = z ? VibrationParamsRecords.Operation.PULL : VibrationParamsRecords.Operation.PUSH;
+        VibrationParamsRecords.Operation operation =
+                z ? VibrationParamsRecords.Operation.PULL : VibrationParamsRecords.Operation.PUSH;
         long uptimeMillis = SystemClock.uptimeMillis();
         for (VibrationParam vibrationParam : vibrationParamArr) {
             if (vibrationParam._tag != 0) {
-                Slog.w("VibratorControlService", "Unsupported vibration param ignored from dumpsys records: " + vibrationParam);
+                Slog.w(
+                        "VibratorControlService",
+                        "Unsupported vibration param ignored from dumpsys records: "
+                                + vibrationParam);
             } else {
                 ScaleParam scale = vibrationParam.getScale();
-                this.mVibrationParamsRecords.add(new VibrationScaleParamRecord(operation, uptimeMillis, scale.typesMask, scale.scale));
+                this.mVibrationParamsRecords.add(
+                        new VibrationScaleParamRecord(
+                                operation, uptimeMillis, scale.typesMask, scale.scale));
             }
         }
     }

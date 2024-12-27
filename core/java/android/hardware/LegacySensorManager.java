@@ -5,6 +5,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.view.IRotationWatcher;
 import android.view.IWindowManager;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,15 +21,21 @@ final class LegacySensorManager {
         this.mSensorManager = sensorManager;
         synchronized (SensorManager.class) {
             if (!sInitialized) {
-                sWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
+                sWindowManager =
+                        IWindowManager.Stub.asInterface(
+                                ServiceManager.getService(Context.WINDOW_SERVICE));
                 if (sWindowManager != null) {
                     try {
-                        sRotation = sWindowManager.watchRotation(new IRotationWatcher.Stub() { // from class: android.hardware.LegacySensorManager.1
-                            @Override // android.view.IRotationWatcher
-                            public void onRotationChanged(int rotation) {
-                                LegacySensorManager.onRotationChanged(rotation);
-                            }
-                        }, 0);
+                        sRotation =
+                                sWindowManager.watchRotation(
+                                        new IRotationWatcher.Stub() { // from class:
+                                            // android.hardware.LegacySensorManager.1
+                                            @Override // android.view.IRotationWatcher
+                                            public void onRotationChanged(int rotation) {
+                                                LegacySensorManager.onRotationChanged(rotation);
+                                            }
+                                        },
+                                        0);
                     } catch (RemoteException e) {
                     }
                 }
@@ -66,10 +73,12 @@ final class LegacySensorManager {
         return registerLegacyListener(4, 7, listener, sensors, rate) || result4;
     }
 
-    private boolean registerLegacyListener(int legacyType, int type, SensorListener listener, int sensors, int rate) {
+    private boolean registerLegacyListener(
+            int legacyType, int type, SensorListener listener, int sensors, int rate) {
         Sensor sensor;
         boolean result = false;
-        if ((sensors & legacyType) != 0 && (sensor = this.mSensorManager.getDefaultSensor(type)) != null) {
+        if ((sensors & legacyType) != 0
+                && (sensor = this.mSensorManager.getDefaultSensor(type)) != null) {
             synchronized (this.mLegacyListenersMap) {
                 LegacyListener legacyListener = this.mLegacyListenersMap.get(listener);
                 if (legacyListener == null) {
@@ -97,9 +106,11 @@ final class LegacySensorManager {
         unregisterLegacyListener(4, 7, listener, sensors);
     }
 
-    private void unregisterLegacyListener(int legacyType, int type, SensorListener listener, int sensors) {
+    private void unregisterLegacyListener(
+            int legacyType, int type, SensorListener listener, int sensors) {
         Sensor sensor;
-        if ((sensors & legacyType) != 0 && (sensor = this.mSensorManager.getDefaultSensor(type)) != null) {
+        if ((sensors & legacyType) != 0
+                && (sensor = this.mSensorManager.getDefaultSensor(type)) != null) {
             synchronized (this.mLegacyListenersMap) {
                 LegacyListener legacyListener = this.mLegacyListenersMap.get(listener);
                 if (legacyListener != null && legacyListener.unregisterSensor(legacyType)) {
@@ -150,7 +161,9 @@ final class LegacySensorManager {
                 return false;
             }
             this.mSensors &= ~legacyType;
-            return (hasOrientationSensor(legacyType) && hasOrientationSensor(this.mSensors)) ? false : true;
+            return (hasOrientationSensor(legacyType) && hasOrientationSensor(this.mSensors))
+                    ? false
+                    : true;
         }
 
         boolean hasSensors() {

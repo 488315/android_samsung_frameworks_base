@@ -1,10 +1,5 @@
 package android.hardware;
 
-import android.hardware.ICamera;
-import android.hardware.ICameraClient;
-import android.hardware.ICameraServiceListener;
-import android.hardware.IDeviceInjectorCallback;
-import android.hardware.IRemoteDevice;
 import android.hardware.camera2.ICameraDeviceCallbacks;
 import android.hardware.camera2.ICameraDeviceUser;
 import android.hardware.camera2.ICameraInjectionCallback;
@@ -22,6 +17,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
+
 import com.samsung.android.camera.IRequestInjectorCallback;
 
 /* loaded from: classes.dex */
@@ -59,17 +55,43 @@ public interface ICameraService extends IInterface {
     public static final int USE_CALLING_PID = -1;
     public static final int USE_CALLING_UID = -1;
 
-    CameraStatus[] addListener(ICameraServiceListener iCameraServiceListener) throws RemoteException;
+    CameraStatus[] addListener(ICameraServiceListener iCameraServiceListener)
+            throws RemoteException;
 
-    boolean applyExtraRequestsToRequestInjector(PersistableBundle[] persistableBundleArr) throws RemoteException;
+    boolean applyExtraRequestsToRequestInjector(PersistableBundle[] persistableBundleArr)
+            throws RemoteException;
 
-    ICamera connect(ICameraClient iCameraClient, int i, String str, int i2, int i3, int i4, int i5, boolean z, int i6, int i7) throws RemoteException;
+    ICamera connect(
+            ICameraClient iCameraClient,
+            int i,
+            String str,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            boolean z,
+            int i6,
+            int i7)
+            throws RemoteException;
 
-    ICameraDeviceUser connectDevice(ICameraDeviceCallbacks iCameraDeviceCallbacks, String str, String str2, String str3, int i, int i2, int i3, int i4, int i5, int i6) throws RemoteException;
+    ICameraDeviceUser connectDevice(
+            ICameraDeviceCallbacks iCameraDeviceCallbacks,
+            String str,
+            String str2,
+            String str3,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6)
+            throws RemoteException;
 
-    CameraMetadataNative createDefaultRequest(String str, int i, int i2, int i3) throws RemoteException;
+    CameraMetadataNative createDefaultRequest(String str, int i, int i2, int i3)
+            throws RemoteException;
 
-    CameraMetadataNative getCameraCharacteristics(String str, int i, int i2, int i3, int i4) throws RemoteException;
+    CameraMetadataNative getCameraCharacteristics(String str, int i, int i2, int i3, int i4)
+            throws RemoteException;
 
     CameraInfo getCameraInfo(int i, int i2, int i3, int i4) throws RemoteException;
 
@@ -83,21 +105,33 @@ public interface ICameraService extends IInterface {
 
     int getNumberOfCameras(int i, int i2, int i3) throws RemoteException;
 
-    CameraMetadataNative getSessionCharacteristics(String str, int i, int i2, SessionConfiguration sessionConfiguration, int i3, int i4) throws RemoteException;
+    CameraMetadataNative getSessionCharacteristics(
+            String str, int i, int i2, SessionConfiguration sessionConfiguration, int i3, int i4)
+            throws RemoteException;
 
     int getTorchStrengthLevel(String str, int i, int i2) throws RemoteException;
 
-    ICameraInjectionSession injectCamera(String str, String str2, String str3, ICameraInjectionCallback iCameraInjectionCallback) throws RemoteException;
+    ICameraInjectionSession injectCamera(
+            String str, String str2, String str3, ICameraInjectionCallback iCameraInjectionCallback)
+            throws RemoteException;
 
-    void injectSessionParams(String str, CameraMetadataNative cameraMetadataNative) throws RemoteException;
+    void injectSessionParams(String str, CameraMetadataNative cameraMetadataNative)
+            throws RemoteException;
 
-    boolean isConcurrentSessionConfigurationSupported(CameraIdAndSessionConfiguration[] cameraIdAndSessionConfigurationArr, int i, int i2, int i3) throws RemoteException;
+    boolean isConcurrentSessionConfigurationSupported(
+            CameraIdAndSessionConfiguration[] cameraIdAndSessionConfigurationArr,
+            int i,
+            int i2,
+            int i3)
+            throws RemoteException;
 
     boolean isHiddenIdPermittedPackage(String str) throws RemoteException;
 
     boolean isHiddenPhysicalCamera(String str) throws RemoteException;
 
-    boolean isSessionConfigurationWithParametersSupported(String str, int i, SessionConfiguration sessionConfiguration, int i2, int i3) throws RemoteException;
+    boolean isSessionConfigurationWithParametersSupported(
+            String str, int i, SessionConfiguration sessionConfiguration, int i2, int i3)
+            throws RemoteException;
 
     void notifyDeviceInjectorOrientationChange() throws RemoteException;
 
@@ -115,44 +149,82 @@ public interface ICameraService extends IInterface {
 
     void removeRequestInjectorCallback() throws RemoteException;
 
-    String reportExtensionSessionStats(CameraExtensionSessionStats cameraExtensionSessionStats) throws RemoteException;
+    String reportExtensionSessionStats(CameraExtensionSessionStats cameraExtensionSessionStats)
+            throws RemoteException;
 
     void setDeviceInjectorPending(boolean z) throws RemoteException;
 
-    boolean setRequestInjectorCallback(IRequestInjectorCallback iRequestInjectorCallback) throws RemoteException;
+    boolean setRequestInjectorCallback(IRequestInjectorCallback iRequestInjectorCallback)
+            throws RemoteException;
 
     void setTorchMode(String str, boolean z, IBinder iBinder, int i, int i2) throws RemoteException;
 
-    void startDeviceInjector(String[] strArr, String[] strArr2, String str, IDeviceInjectorCallback iDeviceInjectorCallback) throws RemoteException;
+    void startDeviceInjector(
+            String[] strArr,
+            String[] strArr2,
+            String str,
+            IDeviceInjectorCallback iDeviceInjectorCallback)
+            throws RemoteException;
 
-    void startRemoteDeviceInjector(String[] strArr, String[] strArr2, IRemoteDevice iRemoteDevice, IDeviceInjectorCallback iDeviceInjectorCallback) throws RemoteException;
+    void startRemoteDeviceInjector(
+            String[] strArr,
+            String[] strArr2,
+            IRemoteDevice iRemoteDevice,
+            IDeviceInjectorCallback iDeviceInjectorCallback)
+            throws RemoteException;
 
     void stopDeviceInjector() throws RemoteException;
 
     boolean supportsCameraApi(String str, int i) throws RemoteException;
 
-    void turnOnTorchWithStrengthLevel(String str, int i, IBinder iBinder, int i2, int i3) throws RemoteException;
+    void turnOnTorchWithStrengthLevel(String str, int i, IBinder iBinder, int i2, int i3)
+            throws RemoteException;
 
     void updateRequestInjectorAllowedList(String[] strArr) throws RemoteException;
 
     public static class Default implements ICameraService {
         @Override // android.hardware.ICameraService
-        public int getNumberOfCameras(int type, int deviceId, int devicePolicy) throws RemoteException {
+        public int getNumberOfCameras(int type, int deviceId, int devicePolicy)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.ICameraService
-        public CameraInfo getCameraInfo(int cameraId, int rotationOverride, int deviceId, int devicePolicy) throws RemoteException {
+        public CameraInfo getCameraInfo(
+                int cameraId, int rotationOverride, int deviceId, int devicePolicy)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.ICameraService
-        public ICamera connect(ICameraClient client, int cameraId, String opPackageName, int clientUid, int clientPid, int targetSdkVersion, int rotationOverride, boolean forceSlowJpegMode, int deviceId, int devicePolicy) throws RemoteException {
+        public ICamera connect(
+                ICameraClient client,
+                int cameraId,
+                String opPackageName,
+                int clientUid,
+                int clientPid,
+                int targetSdkVersion,
+                int rotationOverride,
+                boolean forceSlowJpegMode,
+                int deviceId,
+                int devicePolicy)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.ICameraService
-        public ICameraDeviceUser connectDevice(ICameraDeviceCallbacks callbacks, String cameraId, String opPackageName, String featureId, int clientUid, int oomScoreOffset, int targetSdkVersion, int rotationOverride, int deviceId, int devicePolicy) throws RemoteException {
+        public ICameraDeviceUser connectDevice(
+                ICameraDeviceCallbacks callbacks,
+                String cameraId,
+                String opPackageName,
+                String featureId,
+                int clientUid,
+                int oomScoreOffset,
+                int targetSdkVersion,
+                int rotationOverride,
+                int deviceId,
+                int devicePolicy)
+                throws RemoteException {
             return null;
         }
 
@@ -167,20 +239,30 @@ public interface ICameraService extends IInterface {
         }
 
         @Override // android.hardware.ICameraService
-        public boolean isConcurrentSessionConfigurationSupported(CameraIdAndSessionConfiguration[] sessions, int targetSdkVersion, int deviceId, int devicePolicy) throws RemoteException {
+        public boolean isConcurrentSessionConfigurationSupported(
+                CameraIdAndSessionConfiguration[] sessions,
+                int targetSdkVersion,
+                int deviceId,
+                int devicePolicy)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.ICameraService
-        public void injectSessionParams(String cameraId, CameraMetadataNative sessionParams) throws RemoteException {
-        }
+        public void injectSessionParams(String cameraId, CameraMetadataNative sessionParams)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public void removeListener(ICameraServiceListener listener) throws RemoteException {
-        }
+        public void removeListener(ICameraServiceListener listener) throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public CameraMetadataNative getCameraCharacteristics(String cameraId, int targetSdkVersion, int rotationOverride, int deviceId, int devicePolicy) throws RemoteException {
+        public CameraMetadataNative getCameraCharacteristics(
+                String cameraId,
+                int targetSdkVersion,
+                int rotationOverride,
+                int deviceId,
+                int devicePolicy)
+                throws RemoteException {
             return null;
         }
 
@@ -210,56 +292,84 @@ public interface ICameraService extends IInterface {
         }
 
         @Override // android.hardware.ICameraService
-        public ICameraInjectionSession injectCamera(String packageName, String internalCamId, String externalCamId, ICameraInjectionCallback CameraInjectionCallback) throws RemoteException {
+        public ICameraInjectionSession injectCamera(
+                String packageName,
+                String internalCamId,
+                String externalCamId,
+                ICameraInjectionCallback CameraInjectionCallback)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.ICameraService
-        public void setTorchMode(String cameraId, boolean enabled, IBinder clientBinder, int deviceId, int devicePolicy) throws RemoteException {
-        }
+        public void setTorchMode(
+                String cameraId,
+                boolean enabled,
+                IBinder clientBinder,
+                int deviceId,
+                int devicePolicy)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public void turnOnTorchWithStrengthLevel(String cameraId, int strengthLevel, IBinder clientBinder, int deviceId, int devicePolicy) throws RemoteException {
-        }
+        public void turnOnTorchWithStrengthLevel(
+                String cameraId,
+                int strengthLevel,
+                IBinder clientBinder,
+                int deviceId,
+                int devicePolicy)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public int getTorchStrengthLevel(String cameraId, int deviceId, int devicePolicy) throws RemoteException {
+        public int getTorchStrengthLevel(String cameraId, int deviceId, int devicePolicy)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.ICameraService
-        public void notifySystemEvent(int eventId, int[] args) throws RemoteException {
-        }
+        public void notifySystemEvent(int eventId, int[] args) throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public void notifyDisplayConfigurationChange() throws RemoteException {
-        }
+        public void notifyDisplayConfigurationChange() throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public void notifyDeviceStateChange(long newState) throws RemoteException {
-        }
+        public void notifyDeviceStateChange(long newState) throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public String reportExtensionSessionStats(CameraExtensionSessionStats stats) throws RemoteException {
+        public String reportExtensionSessionStats(CameraExtensionSessionStats stats)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.ICameraService
-        public void notifyDeviceStateChangeSync(long newState) throws RemoteException {
-        }
+        public void notifyDeviceStateChangeSync(long newState) throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public CameraMetadataNative createDefaultRequest(String cameraId, int templateId, int deviceId, int devicePolicy) throws RemoteException {
+        public CameraMetadataNative createDefaultRequest(
+                String cameraId, int templateId, int deviceId, int devicePolicy)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.ICameraService
-        public boolean isSessionConfigurationWithParametersSupported(String cameraId, int targetSdkVersion, SessionConfiguration sessionConfiguration, int deviceId, int devicePolicy) throws RemoteException {
+        public boolean isSessionConfigurationWithParametersSupported(
+                String cameraId,
+                int targetSdkVersion,
+                SessionConfiguration sessionConfiguration,
+                int deviceId,
+                int devicePolicy)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.ICameraService
-        public CameraMetadataNative getSessionCharacteristics(String cameraId, int targetSdkVersion, int rotationOverride, SessionConfiguration sessionConfiguration, int deviceId, int devicePolicy) throws RemoteException {
+        public CameraMetadataNative getSessionCharacteristics(
+                String cameraId,
+                int targetSdkVersion,
+                int rotationOverride,
+                SessionConfiguration sessionConfiguration,
+                int deviceId,
+                int devicePolicy)
+                throws RemoteException {
             return null;
         }
 
@@ -269,46 +379,51 @@ public interface ICameraService extends IInterface {
         }
 
         @Override // android.hardware.ICameraService
-        public void notifyPkgListParamChange(int type, String[] pkgList, String[] args) throws RemoteException {
-        }
+        public void notifyPkgListParamChange(int type, String[] pkgList, String[] args)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public boolean applyExtraRequestsToRequestInjector(PersistableBundle[] bundles) throws RemoteException {
+        public boolean applyExtraRequestsToRequestInjector(PersistableBundle[] bundles)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.ICameraService
-        public void updateRequestInjectorAllowedList(String[] pkgList) throws RemoteException {
-        }
+        public void updateRequestInjectorAllowedList(String[] pkgList) throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public boolean setRequestInjectorCallback(IRequestInjectorCallback callback) throws RemoteException {
+        public boolean setRequestInjectorCallback(IRequestInjectorCallback callback)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.ICameraService
-        public void removeRequestInjectorCallback() throws RemoteException {
-        }
+        public void removeRequestInjectorCallback() throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public void startDeviceInjector(String[] targetPackages, String[] targetIds, String sourceId, IDeviceInjectorCallback deviceInjectorCallback) throws RemoteException {
-        }
+        public void startDeviceInjector(
+                String[] targetPackages,
+                String[] targetIds,
+                String sourceId,
+                IDeviceInjectorCallback deviceInjectorCallback)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public void startRemoteDeviceInjector(String[] targetPackages, String[] targetIds, IRemoteDevice sourceDevice, IDeviceInjectorCallback deviceInjectorCallback) throws RemoteException {
-        }
+        public void startRemoteDeviceInjector(
+                String[] targetPackages,
+                String[] targetIds,
+                IRemoteDevice sourceDevice,
+                IDeviceInjectorCallback deviceInjectorCallback)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public void stopDeviceInjector() throws RemoteException {
-        }
+        public void stopDeviceInjector() throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public void setDeviceInjectorPending(boolean pending) throws RemoteException {
-        }
+        public void setDeviceInjectorPending(boolean pending) throws RemoteException {}
 
         @Override // android.hardware.ICameraService
-        public void notifyDeviceInjectorOrientationChange() throws RemoteException {
-        }
+        public void notifyDeviceInjectorOrientationChange() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -316,7 +431,7 @@ public interface ICameraService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICameraService {
+    public abstract static class Stub extends Binder implements ICameraService {
         public static final String DESCRIPTOR = "android.hardware.ICameraService";
         static final int TRANSACTION_addListener = 5;
         static final int TRANSACTION_applyExtraRequestsToRequestInjector = 30;
@@ -466,7 +581,8 @@ public interface ICameraService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -506,12 +622,16 @@ public interface ICameraService extends IInterface {
                     int _arg8 = data.readInt();
                     int _arg9 = data.readInt();
                     data.enforceNoDataAvail();
-                    ICamera _result3 = connect(_arg03, _arg13, _arg23, _arg32, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
+                    ICamera _result3 =
+                            connect(
+                                    _arg03, _arg13, _arg23, _arg32, _arg4, _arg5, _arg6, _arg7,
+                                    _arg8, _arg9);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result3);
                     return true;
                 case 4:
-                    ICameraDeviceCallbacks _arg04 = ICameraDeviceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    ICameraDeviceCallbacks _arg04 =
+                            ICameraDeviceCallbacks.Stub.asInterface(data.readStrongBinder());
                     String _arg14 = data.readString();
                     String _arg24 = data.readString();
                     String _arg33 = data.readString();
@@ -522,12 +642,16 @@ public interface ICameraService extends IInterface {
                     int _arg82 = data.readInt();
                     int _arg92 = data.readInt();
                     data.enforceNoDataAvail();
-                    ICameraDeviceUser _result4 = connectDevice(_arg04, _arg14, _arg24, _arg33, _arg42, _arg52, _arg62, _arg72, _arg82, _arg92);
+                    ICameraDeviceUser _result4 =
+                            connectDevice(
+                                    _arg04, _arg14, _arg24, _arg33, _arg42, _arg52, _arg62, _arg72,
+                                    _arg82, _arg92);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result4);
                     return true;
                 case 5:
-                    ICameraServiceListener _arg05 = ICameraServiceListener.Stub.asInterface(data.readStrongBinder());
+                    ICameraServiceListener _arg05 =
+                            ICameraServiceListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     CameraStatus[] _result5 = addListener(_arg05);
                     reply.writeNoException();
@@ -539,24 +663,31 @@ public interface ICameraService extends IInterface {
                     reply.writeTypedArray(_result6, 1);
                     return true;
                 case 7:
-                    CameraIdAndSessionConfiguration[] _arg06 = (CameraIdAndSessionConfiguration[]) data.createTypedArray(CameraIdAndSessionConfiguration.CREATOR);
+                    CameraIdAndSessionConfiguration[] _arg06 =
+                            (CameraIdAndSessionConfiguration[])
+                                    data.createTypedArray(CameraIdAndSessionConfiguration.CREATOR);
                     int _arg15 = data.readInt();
                     int _arg25 = data.readInt();
                     int _arg34 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result7 = isConcurrentSessionConfigurationSupported(_arg06, _arg15, _arg25, _arg34);
+                    boolean _result7 =
+                            isConcurrentSessionConfigurationSupported(
+                                    _arg06, _arg15, _arg25, _arg34);
                     reply.writeNoException();
                     reply.writeBoolean(_result7);
                     return true;
                 case 8:
                     String _arg07 = data.readString();
-                    CameraMetadataNative _arg16 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg16 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     data.enforceNoDataAvail();
                     injectSessionParams(_arg07, _arg16);
                     reply.writeNoException();
                     return true;
                 case 9:
-                    ICameraServiceListener _arg08 = ICameraServiceListener.Stub.asInterface(data.readStrongBinder());
+                    ICameraServiceListener _arg08 =
+                            ICameraServiceListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeListener(_arg08);
                     reply.writeNoException();
@@ -568,7 +699,8 @@ public interface ICameraService extends IInterface {
                     int _arg35 = data.readInt();
                     int _arg43 = data.readInt();
                     data.enforceNoDataAvail();
-                    CameraMetadataNative _result8 = getCameraCharacteristics(_arg09, _arg17, _arg26, _arg35, _arg43);
+                    CameraMetadataNative _result8 =
+                            getCameraCharacteristics(_arg09, _arg17, _arg26, _arg35, _arg43);
                     reply.writeNoException();
                     reply.writeTypedObject(_result8, 1);
                     return true;
@@ -608,9 +740,11 @@ public interface ICameraService extends IInterface {
                     String _arg013 = data.readString();
                     String _arg19 = data.readString();
                     String _arg27 = data.readString();
-                    ICameraInjectionCallback _arg36 = ICameraInjectionCallback.Stub.asInterface(data.readStrongBinder());
+                    ICameraInjectionCallback _arg36 =
+                            ICameraInjectionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    ICameraInjectionSession _result14 = injectCamera(_arg013, _arg19, _arg27, _arg36);
+                    ICameraInjectionSession _result14 =
+                            injectCamera(_arg013, _arg19, _arg27, _arg36);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result14);
                     return true;
@@ -658,7 +792,9 @@ public interface ICameraService extends IInterface {
                     notifyDeviceStateChange(_arg018);
                     return true;
                 case 23:
-                    CameraExtensionSessionStats _arg019 = (CameraExtensionSessionStats) data.readTypedObject(CameraExtensionSessionStats.CREATOR);
+                    CameraExtensionSessionStats _arg019 =
+                            (CameraExtensionSessionStats)
+                                    data.readTypedObject(CameraExtensionSessionStats.CREATOR);
                     data.enforceNoDataAvail();
                     String _result16 = reportExtensionSessionStats(_arg019);
                     reply.writeNoException();
@@ -676,18 +812,23 @@ public interface ICameraService extends IInterface {
                     int _arg211 = data.readInt();
                     int _arg39 = data.readInt();
                     data.enforceNoDataAvail();
-                    CameraMetadataNative _result17 = createDefaultRequest(_arg021, _arg114, _arg211, _arg39);
+                    CameraMetadataNative _result17 =
+                            createDefaultRequest(_arg021, _arg114, _arg211, _arg39);
                     reply.writeNoException();
                     reply.writeTypedObject(_result17, 1);
                     return true;
                 case 26:
                     String _arg022 = data.readString();
                     int _arg115 = data.readInt();
-                    SessionConfiguration _arg212 = (SessionConfiguration) data.readTypedObject(SessionConfiguration.CREATOR);
+                    SessionConfiguration _arg212 =
+                            (SessionConfiguration)
+                                    data.readTypedObject(SessionConfiguration.CREATOR);
                     int _arg310 = data.readInt();
                     int _arg46 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result18 = isSessionConfigurationWithParametersSupported(_arg022, _arg115, _arg212, _arg310, _arg46);
+                    boolean _result18 =
+                            isSessionConfigurationWithParametersSupported(
+                                    _arg022, _arg115, _arg212, _arg310, _arg46);
                     reply.writeNoException();
                     reply.writeBoolean(_result18);
                     return true;
@@ -695,11 +836,15 @@ public interface ICameraService extends IInterface {
                     String _arg023 = data.readString();
                     int _arg116 = data.readInt();
                     int _arg213 = data.readInt();
-                    SessionConfiguration _arg311 = (SessionConfiguration) data.readTypedObject(SessionConfiguration.CREATOR);
+                    SessionConfiguration _arg311 =
+                            (SessionConfiguration)
+                                    data.readTypedObject(SessionConfiguration.CREATOR);
                     int _arg47 = data.readInt();
                     int _arg53 = data.readInt();
                     data.enforceNoDataAvail();
-                    CameraMetadataNative _result19 = getSessionCharacteristics(_arg023, _arg116, _arg213, _arg311, _arg47, _arg53);
+                    CameraMetadataNative _result19 =
+                            getSessionCharacteristics(
+                                    _arg023, _arg116, _arg213, _arg311, _arg47, _arg53);
                     reply.writeNoException();
                     reply.writeTypedObject(_result19, 1);
                     return true;
@@ -718,7 +863,8 @@ public interface ICameraService extends IInterface {
                     notifyPkgListParamChange(_arg025, _arg117, _arg214);
                     return true;
                 case 30:
-                    PersistableBundle[] _arg026 = (PersistableBundle[]) data.createTypedArray(PersistableBundle.CREATOR);
+                    PersistableBundle[] _arg026 =
+                            (PersistableBundle[]) data.createTypedArray(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result21 = applyExtraRequestsToRequestInjector(_arg026);
                     reply.writeNoException();
@@ -731,7 +877,8 @@ public interface ICameraService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 32:
-                    IRequestInjectorCallback _arg028 = IRequestInjectorCallback.Stub.asInterface(data.readStrongBinder());
+                    IRequestInjectorCallback _arg028 =
+                            IRequestInjectorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result22 = setRequestInjectorCallback(_arg028);
                     reply.writeNoException();
@@ -745,7 +892,8 @@ public interface ICameraService extends IInterface {
                     String[] _arg029 = data.createStringArray();
                     String[] _arg118 = data.createStringArray();
                     String _arg215 = data.readString();
-                    IDeviceInjectorCallback _arg312 = IDeviceInjectorCallback.Stub.asInterface(data.readStrongBinder());
+                    IDeviceInjectorCallback _arg312 =
+                            IDeviceInjectorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startDeviceInjector(_arg029, _arg118, _arg215, _arg312);
                     reply.writeNoException();
@@ -754,7 +902,8 @@ public interface ICameraService extends IInterface {
                     String[] _arg030 = data.createStringArray();
                     String[] _arg119 = data.createStringArray();
                     IRemoteDevice _arg216 = IRemoteDevice.Stub.asInterface(data.readStrongBinder());
-                    IDeviceInjectorCallback _arg313 = IDeviceInjectorCallback.Stub.asInterface(data.readStrongBinder());
+                    IDeviceInjectorCallback _arg313 =
+                            IDeviceInjectorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startRemoteDeviceInjector(_arg030, _arg119, _arg216, _arg313);
                     reply.writeNoException();
@@ -794,7 +943,8 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public int getNumberOfCameras(int type, int deviceId, int devicePolicy) throws RemoteException {
+            public int getNumberOfCameras(int type, int deviceId, int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -813,7 +963,9 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public CameraInfo getCameraInfo(int cameraId, int rotationOverride, int deviceId, int devicePolicy) throws RemoteException {
+            public CameraInfo getCameraInfo(
+                    int cameraId, int rotationOverride, int deviceId, int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -833,7 +985,18 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public ICamera connect(ICameraClient client, int cameraId, String opPackageName, int clientUid, int clientPid, int targetSdkVersion, int rotationOverride, boolean forceSlowJpegMode, int deviceId, int devicePolicy) throws RemoteException {
+            public ICamera connect(
+                    ICameraClient client,
+                    int cameraId,
+                    String opPackageName,
+                    int clientUid,
+                    int clientPid,
+                    int targetSdkVersion,
+                    int rotationOverride,
+                    boolean forceSlowJpegMode,
+                    int deviceId,
+                    int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -859,7 +1022,18 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public ICameraDeviceUser connectDevice(ICameraDeviceCallbacks callbacks, String cameraId, String opPackageName, String featureId, int clientUid, int oomScoreOffset, int targetSdkVersion, int rotationOverride, int deviceId, int devicePolicy) throws RemoteException {
+            public ICameraDeviceUser connectDevice(
+                    ICameraDeviceCallbacks callbacks,
+                    String cameraId,
+                    String opPackageName,
+                    String featureId,
+                    int clientUid,
+                    int oomScoreOffset,
+                    int targetSdkVersion,
+                    int rotationOverride,
+                    int deviceId,
+                    int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -876,7 +1050,8 @@ public interface ICameraService extends IInterface {
                     _data.writeInt(devicePolicy);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ICameraDeviceUser _result = ICameraDeviceUser.Stub.asInterface(_reply.readStrongBinder());
+                    ICameraDeviceUser _result =
+                            ICameraDeviceUser.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -885,7 +1060,8 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public CameraStatus[] addListener(ICameraServiceListener listener) throws RemoteException {
+            public CameraStatus[] addListener(ICameraServiceListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -893,7 +1069,8 @@ public interface ICameraService extends IInterface {
                     _data.writeStrongInterface(listener);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    CameraStatus[] _result = (CameraStatus[]) _reply.createTypedArray(CameraStatus.CREATOR);
+                    CameraStatus[] _result =
+                            (CameraStatus[]) _reply.createTypedArray(CameraStatus.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -909,7 +1086,9 @@ public interface ICameraService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    ConcurrentCameraIdCombination[] _result = (ConcurrentCameraIdCombination[]) _reply.createTypedArray(ConcurrentCameraIdCombination.CREATOR);
+                    ConcurrentCameraIdCombination[] _result =
+                            (ConcurrentCameraIdCombination[])
+                                    _reply.createTypedArray(ConcurrentCameraIdCombination.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -918,7 +1097,12 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public boolean isConcurrentSessionConfigurationSupported(CameraIdAndSessionConfiguration[] sessions, int targetSdkVersion, int deviceId, int devicePolicy) throws RemoteException {
+            public boolean isConcurrentSessionConfigurationSupported(
+                    CameraIdAndSessionConfiguration[] sessions,
+                    int targetSdkVersion,
+                    int deviceId,
+                    int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -938,7 +1122,8 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public void injectSessionParams(String cameraId, CameraMetadataNative sessionParams) throws RemoteException {
+            public void injectSessionParams(String cameraId, CameraMetadataNative sessionParams)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -969,7 +1154,13 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public CameraMetadataNative getCameraCharacteristics(String cameraId, int targetSdkVersion, int rotationOverride, int deviceId, int devicePolicy) throws RemoteException {
+            public CameraMetadataNative getCameraCharacteristics(
+                    String cameraId,
+                    int targetSdkVersion,
+                    int rotationOverride,
+                    int deviceId,
+                    int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -981,7 +1172,9 @@ public interface ICameraService extends IInterface {
                     _data.writeInt(devicePolicy);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    CameraMetadataNative _result = (CameraMetadataNative) _reply.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _result =
+                            (CameraMetadataNative)
+                                    _reply.readTypedObject(CameraMetadataNative.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -997,7 +1190,9 @@ public interface ICameraService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    VendorTagDescriptor _result = (VendorTagDescriptor) _reply.readTypedObject(VendorTagDescriptor.CREATOR);
+                    VendorTagDescriptor _result =
+                            (VendorTagDescriptor)
+                                    _reply.readTypedObject(VendorTagDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1013,7 +1208,9 @@ public interface ICameraService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(12, _data, _reply, 0);
                     _reply.readException();
-                    VendorTagDescriptorCache _result = (VendorTagDescriptorCache) _reply.readTypedObject(VendorTagDescriptorCache.CREATOR);
+                    VendorTagDescriptorCache _result =
+                            (VendorTagDescriptorCache)
+                                    _reply.readTypedObject(VendorTagDescriptorCache.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1039,7 +1236,8 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public boolean supportsCameraApi(String cameraId, int apiVersion) throws RemoteException {
+            public boolean supportsCameraApi(String cameraId, int apiVersion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1074,7 +1272,12 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public ICameraInjectionSession injectCamera(String packageName, String internalCamId, String externalCamId, ICameraInjectionCallback CameraInjectionCallback) throws RemoteException {
+            public ICameraInjectionSession injectCamera(
+                    String packageName,
+                    String internalCamId,
+                    String externalCamId,
+                    ICameraInjectionCallback CameraInjectionCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1085,7 +1288,8 @@ public interface ICameraService extends IInterface {
                     _data.writeStrongInterface(CameraInjectionCallback);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    ICameraInjectionSession _result = ICameraInjectionSession.Stub.asInterface(_reply.readStrongBinder());
+                    ICameraInjectionSession _result =
+                            ICameraInjectionSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1094,7 +1298,13 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public void setTorchMode(String cameraId, boolean enabled, IBinder clientBinder, int deviceId, int devicePolicy) throws RemoteException {
+            public void setTorchMode(
+                    String cameraId,
+                    boolean enabled,
+                    IBinder clientBinder,
+                    int deviceId,
+                    int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1113,7 +1323,13 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public void turnOnTorchWithStrengthLevel(String cameraId, int strengthLevel, IBinder clientBinder, int deviceId, int devicePolicy) throws RemoteException {
+            public void turnOnTorchWithStrengthLevel(
+                    String cameraId,
+                    int strengthLevel,
+                    IBinder clientBinder,
+                    int deviceId,
+                    int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1132,7 +1348,8 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public int getTorchStrengthLevel(String cameraId, int deviceId, int devicePolicy) throws RemoteException {
+            public int getTorchStrengthLevel(String cameraId, int deviceId, int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1187,7 +1404,8 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public String reportExtensionSessionStats(CameraExtensionSessionStats stats) throws RemoteException {
+            public String reportExtensionSessionStats(CameraExtensionSessionStats stats)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1219,7 +1437,9 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public CameraMetadataNative createDefaultRequest(String cameraId, int templateId, int deviceId, int devicePolicy) throws RemoteException {
+            public CameraMetadataNative createDefaultRequest(
+                    String cameraId, int templateId, int deviceId, int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1230,7 +1450,9 @@ public interface ICameraService extends IInterface {
                     _data.writeInt(devicePolicy);
                     this.mRemote.transact(25, _data, _reply, 0);
                     _reply.readException();
-                    CameraMetadataNative _result = (CameraMetadataNative) _reply.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _result =
+                            (CameraMetadataNative)
+                                    _reply.readTypedObject(CameraMetadataNative.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1239,7 +1461,13 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public boolean isSessionConfigurationWithParametersSupported(String cameraId, int targetSdkVersion, SessionConfiguration sessionConfiguration, int deviceId, int devicePolicy) throws RemoteException {
+            public boolean isSessionConfigurationWithParametersSupported(
+                    String cameraId,
+                    int targetSdkVersion,
+                    SessionConfiguration sessionConfiguration,
+                    int deviceId,
+                    int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1260,7 +1488,14 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public CameraMetadataNative getSessionCharacteristics(String cameraId, int targetSdkVersion, int rotationOverride, SessionConfiguration sessionConfiguration, int deviceId, int devicePolicy) throws RemoteException {
+            public CameraMetadataNative getSessionCharacteristics(
+                    String cameraId,
+                    int targetSdkVersion,
+                    int rotationOverride,
+                    SessionConfiguration sessionConfiguration,
+                    int deviceId,
+                    int devicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1273,7 +1508,9 @@ public interface ICameraService extends IInterface {
                     _data.writeInt(devicePolicy);
                     this.mRemote.transact(27, _data, _reply, 0);
                     _reply.readException();
-                    CameraMetadataNative _result = (CameraMetadataNative) _reply.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _result =
+                            (CameraMetadataNative)
+                                    _reply.readTypedObject(CameraMetadataNative.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1299,7 +1536,8 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public void notifyPkgListParamChange(int type, String[] pkgList, String[] args) throws RemoteException {
+            public void notifyPkgListParamChange(int type, String[] pkgList, String[] args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1313,7 +1551,8 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public boolean applyExtraRequestsToRequestInjector(PersistableBundle[] bundles) throws RemoteException {
+            public boolean applyExtraRequestsToRequestInjector(PersistableBundle[] bundles)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1345,7 +1584,8 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public boolean setRequestInjectorCallback(IRequestInjectorCallback callback) throws RemoteException {
+            public boolean setRequestInjectorCallback(IRequestInjectorCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1376,7 +1616,12 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public void startDeviceInjector(String[] targetPackages, String[] targetIds, String sourceId, IDeviceInjectorCallback deviceInjectorCallback) throws RemoteException {
+            public void startDeviceInjector(
+                    String[] targetPackages,
+                    String[] targetIds,
+                    String sourceId,
+                    IDeviceInjectorCallback deviceInjectorCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1394,7 +1639,12 @@ public interface ICameraService extends IInterface {
             }
 
             @Override // android.hardware.ICameraService
-            public void startRemoteDeviceInjector(String[] targetPackages, String[] targetIds, IRemoteDevice sourceDevice, IDeviceInjectorCallback deviceInjectorCallback) throws RemoteException {
+            public void startRemoteDeviceInjector(
+                    String[] targetPackages,
+                    String[] targetIds,
+                    IRemoteDevice sourceDevice,
+                    IDeviceInjectorCallback deviceInjectorCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

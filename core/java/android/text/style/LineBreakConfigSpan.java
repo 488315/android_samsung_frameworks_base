@@ -4,27 +4,36 @@ import android.graphics.text.LineBreakConfig;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.ParcelableSpan;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class LineBreakConfigSpan implements ParcelableSpan {
     private final LineBreakConfig mLineBreakConfig;
-    private static final LineBreakConfig sNoHyphenationConfig = new LineBreakConfig.Builder().setHyphenation(0).build();
-    private static final LineBreakConfig sNoBreakConfig = new LineBreakConfig.Builder().setLineBreakStyle(4).build();
-    public static final Parcelable.Creator<LineBreakConfigSpan> CREATOR = new Parcelable.Creator<LineBreakConfigSpan>() { // from class: android.text.style.LineBreakConfigSpan.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LineBreakConfigSpan createFromParcel(Parcel source) {
-            LineBreakConfig lbc = (LineBreakConfig) source.readParcelable(LineBreakConfig.class.getClassLoader(), LineBreakConfig.class);
-            return new LineBreakConfigSpan(lbc);
-        }
+    private static final LineBreakConfig sNoHyphenationConfig =
+            new LineBreakConfig.Builder().setHyphenation(0).build();
+    private static final LineBreakConfig sNoBreakConfig =
+            new LineBreakConfig.Builder().setLineBreakStyle(4).build();
+    public static final Parcelable.Creator<LineBreakConfigSpan> CREATOR =
+            new Parcelable.Creator<
+                    LineBreakConfigSpan>() { // from class: android.text.style.LineBreakConfigSpan.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LineBreakConfigSpan createFromParcel(Parcel source) {
+                    LineBreakConfig lbc =
+                            (LineBreakConfig)
+                                    source.readParcelable(
+                                            LineBreakConfig.class.getClassLoader(),
+                                            LineBreakConfig.class);
+                    return new LineBreakConfigSpan(lbc);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LineBreakConfigSpan[] newArray(int size) {
-            return new LineBreakConfigSpan[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LineBreakConfigSpan[] newArray(int size) {
+                    return new LineBreakConfigSpan[size];
+                }
+            };
 
     public LineBreakConfigSpan(LineBreakConfig lineBreakConfig) {
         this.mLineBreakConfig = lineBreakConfig;

@@ -1,7 +1,5 @@
 package android.app;
 
-import android.app.ILocalWallpaperColorConsumer;
-import android.app.IWallpaperManagerCallback;
 import android.content.ComponentName;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -13,11 +11,18 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface IWallpaperManager extends IInterface {
-    void addOnLocalColorsChangedListener(ILocalWallpaperColorConsumer iLocalWallpaperColorConsumer, List<RectF> list, int i, int i2, int i3) throws RemoteException;
+    void addOnLocalColorsChangedListener(
+            ILocalWallpaperColorConsumer iLocalWallpaperColorConsumer,
+            List<RectF> list,
+            int i,
+            int i2,
+            int i3)
+            throws RemoteException;
 
     void clearWallpaper(String str, int i, int i2) throws RemoteException;
 
@@ -39,7 +44,8 @@ public interface IWallpaperManager extends IInterface {
 
     int getDisplayId(int i) throws RemoteException;
 
-    List getFutureBitmapCrops(Point point, List<Point> list, int[] iArr, List<Rect> list2) throws RemoteException;
+    List getFutureBitmapCrops(Point point, List<Point> list, int[] iArr, List<Rect> list2)
+            throws RemoteException;
 
     int getHeightHint(int i) throws RemoteException;
 
@@ -53,7 +59,9 @@ public interface IWallpaperManager extends IInterface {
 
     int getLidState() throws RemoteException;
 
-    ParcelFileDescriptor getLockWallpaper(IWallpaperManagerCallback iWallpaperManagerCallback, Bundle bundle, int i, int i2) throws RemoteException;
+    ParcelFileDescriptor getLockWallpaper(
+            IWallpaperManagerCallback iWallpaperManagerCallback, Bundle bundle, int i, int i2)
+            throws RemoteException;
 
     int getLockWallpaperType() throws RemoteException;
 
@@ -61,7 +69,8 @@ public interface IWallpaperManager extends IInterface {
 
     String getName() throws RemoteException;
 
-    ParcelFileDescriptor getScreenshotFileDescriptor(int i, int i2, Bundle bundle) throws RemoteException;
+    ParcelFileDescriptor getScreenshotFileDescriptor(int i, int i2, Bundle bundle)
+            throws RemoteException;
 
     int getSnapshotCount(int i) throws RemoteException;
 
@@ -74,9 +83,16 @@ public interface IWallpaperManager extends IInterface {
     String getVideoPackage(int i) throws RemoteException;
 
     @Deprecated
-    ParcelFileDescriptor getWallpaper(String str, IWallpaperManagerCallback iWallpaperManagerCallback, int i, Bundle bundle, int i2) throws RemoteException;
+    ParcelFileDescriptor getWallpaper(
+            String str,
+            IWallpaperManagerCallback iWallpaperManagerCallback,
+            int i,
+            Bundle bundle,
+            int i2)
+            throws RemoteException;
 
-    ParcelFileDescriptor getWallpaperAssetFile(String str, int i, int i2, String str2) throws RemoteException;
+    ParcelFileDescriptor getWallpaperAssetFile(String str, int i, int i2, String str2)
+            throws RemoteException;
 
     Bundle getWallpaperAssets(int i, int i2) throws RemoteException;
 
@@ -98,9 +114,20 @@ public interface IWallpaperManager extends IInterface {
 
     int getWallpaperOrientation(int i, int i2) throws RemoteException;
 
-    ParcelFileDescriptor getWallpaperThumbnailFileDescriptor(int i, int i2, int i3, int i4, int i5) throws RemoteException;
+    ParcelFileDescriptor getWallpaperThumbnailFileDescriptor(int i, int i2, int i3, int i4, int i5)
+            throws RemoteException;
 
-    ParcelFileDescriptor getWallpaperWithFeature(String str, String str2, IWallpaperManagerCallback iWallpaperManagerCallback, int i, Bundle bundle, int i2, boolean z, boolean z2, int i3) throws RemoteException;
+    ParcelFileDescriptor getWallpaperWithFeature(
+            String str,
+            String str2,
+            IWallpaperManagerCallback iWallpaperManagerCallback,
+            int i,
+            Bundle bundle,
+            int i2,
+            boolean z,
+            boolean z2,
+            int i3)
+            throws RemoteException;
 
     int getWidthHint(int i) throws RemoteException;
 
@@ -154,9 +181,17 @@ public interface IWallpaperManager extends IInterface {
 
     void notifyWakingUp(int i, int i2, Bundle bundle) throws RemoteException;
 
-    void registerWallpaperColorsCallback(IWallpaperManagerCallback iWallpaperManagerCallback, int i, int i2) throws RemoteException;
+    void registerWallpaperColorsCallback(
+            IWallpaperManagerCallback iWallpaperManagerCallback, int i, int i2)
+            throws RemoteException;
 
-    void removeOnLocalColorsChangedListener(ILocalWallpaperColorConsumer iLocalWallpaperColorConsumer, List<RectF> list, int i, int i2, int i3) throws RemoteException;
+    void removeOnLocalColorsChangedListener(
+            ILocalWallpaperColorConsumer iLocalWallpaperColorConsumer,
+            List<RectF> list,
+            int i,
+            int i2,
+            int i3)
+            throws RemoteException;
 
     void removeSnapshotByKey(int i) throws RemoteException;
 
@@ -172,7 +207,8 @@ public interface IWallpaperManager extends IInterface {
 
     Rect semGetSmartCropRect(int i) throws RemoteException;
 
-    ParcelFileDescriptor semGetThumbnailFileDescriptor(int i, int i2, int i3) throws RemoteException;
+    ParcelFileDescriptor semGetThumbnailFileDescriptor(int i, int i2, int i3)
+            throws RemoteException;
 
     String semGetUri(int i, String str) throws RemoteException;
 
@@ -190,17 +226,33 @@ public interface IWallpaperManager extends IInterface {
 
     void semSendWallpaperCommand(int i, String str, Bundle bundle) throws RemoteException;
 
-    void semSetDLSWallpaperColors(SemWallpaperColors semWallpaperColors, int i) throws RemoteException;
+    void semSetDLSWallpaperColors(SemWallpaperColors semWallpaperColors, int i)
+            throws RemoteException;
 
     void semSetSmartCropRect(int i, Rect rect, Rect rect2) throws RemoteException;
 
-    void semSetUri(String str, boolean z, int i, int i2, String str2, int i3, Bundle bundle) throws RemoteException;
+    void semSetUri(String str, boolean z, int i, int i2, String str2, int i3, Bundle bundle)
+            throws RemoteException;
 
-    ParcelFileDescriptor semSetWallpaper(String str, String str2, int[] iArr, List<Rect> list, boolean z, Bundle bundle, int i, IWallpaperManagerCallback iWallpaperManagerCallback, int i2, int i3, boolean z2, Bundle bundle2) throws RemoteException;
+    ParcelFileDescriptor semSetWallpaper(
+            String str,
+            String str2,
+            int[] iArr,
+            List<Rect> list,
+            boolean z,
+            Bundle bundle,
+            int i,
+            IWallpaperManagerCallback iWallpaperManagerCallback,
+            int i2,
+            int i3,
+            boolean z2,
+            Bundle bundle2)
+            throws RemoteException;
 
     void setAnimatedWallpaper(String str, String str2, int i, boolean z) throws RemoteException;
 
-    boolean setCoverWallpaperCallback(IWallpaperManagerCallback iWallpaperManagerCallback) throws RemoteException;
+    boolean setCoverWallpaperCallback(IWallpaperManagerCallback iWallpaperManagerCallback)
+            throws RemoteException;
 
     void setDimensionHints(int i, int i2, String str, int i3) throws RemoteException;
 
@@ -208,7 +260,8 @@ public interface IWallpaperManager extends IInterface {
 
     void setInAmbientMode(boolean z, long j) throws RemoteException;
 
-    boolean setLockWallpaperCallback(IWallpaperManagerCallback iWallpaperManagerCallback) throws RemoteException;
+    boolean setLockWallpaperCallback(IWallpaperManagerCallback iWallpaperManagerCallback)
+            throws RemoteException;
 
     void setMotionWallpaper(String str, String str2, int i, boolean z) throws RemoteException;
 
@@ -216,61 +269,126 @@ public interface IWallpaperManager extends IInterface {
 
     void setSnapshotTestMode(boolean z) throws RemoteException;
 
-    void setVideoWallpaper(String str, String str2, String str3, String str4, int i, int i2, boolean z, Bundle bundle) throws RemoteException;
+    void setVideoWallpaper(
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            int i,
+            int i2,
+            boolean z,
+            Bundle bundle)
+            throws RemoteException;
 
-    ParcelFileDescriptor setWallpaper(String str, String str2, int[] iArr, List<Rect> list, boolean z, Bundle bundle, int i, IWallpaperManagerCallback iWallpaperManagerCallback, int i2, int i3, boolean z2, Bundle bundle2) throws RemoteException;
+    ParcelFileDescriptor setWallpaper(
+            String str,
+            String str2,
+            int[] iArr,
+            List<Rect> list,
+            boolean z,
+            Bundle bundle,
+            int i,
+            IWallpaperManagerCallback iWallpaperManagerCallback,
+            int i2,
+            int i3,
+            boolean z2,
+            Bundle bundle2)
+            throws RemoteException;
 
     void setWallpaperComponent(ComponentName componentName) throws RemoteException;
 
-    void setWallpaperComponentChecked(ComponentName componentName, String str, int i, int i2, Bundle bundle) throws RemoteException;
+    void setWallpaperComponentChecked(
+            ComponentName componentName, String str, int i, int i2, Bundle bundle)
+            throws RemoteException;
 
     void setWallpaperDimAmount(float f) throws RemoteException;
 
     void settingsRestored() throws RemoteException;
 
-    void unregisterWallpaperColorsCallback(IWallpaperManagerCallback iWallpaperManagerCallback, int i, int i2) throws RemoteException;
+    void unregisterWallpaperColorsCallback(
+            IWallpaperManagerCallback iWallpaperManagerCallback, int i, int i2)
+            throws RemoteException;
 
     public static class Default implements IWallpaperManager {
         @Override // android.app.IWallpaperManager
-        public ParcelFileDescriptor setWallpaper(String name, String callingPackage, int[] screenOrientations, List<Rect> crops, boolean allowBackup, Bundle extras, int which, IWallpaperManagerCallback completion, int userId, int type, boolean isPreloaded, Bundle inputExtras) throws RemoteException {
+        public ParcelFileDescriptor setWallpaper(
+                String name,
+                String callingPackage,
+                int[] screenOrientations,
+                List<Rect> crops,
+                boolean allowBackup,
+                Bundle extras,
+                int which,
+                IWallpaperManagerCallback completion,
+                int userId,
+                int type,
+                boolean isPreloaded,
+                Bundle inputExtras)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IWallpaperManager
-        public void setWallpaperComponentChecked(ComponentName name, String callingPackage, int which, int userId, Bundle extras) throws RemoteException {
-        }
+        public void setWallpaperComponentChecked(
+                ComponentName name, String callingPackage, int which, int userId, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void setWallpaperComponent(ComponentName name) throws RemoteException {
-        }
+        public void setWallpaperComponent(ComponentName name) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public ParcelFileDescriptor getWallpaper(String callingPkg, IWallpaperManagerCallback cb, int which, Bundle outParams, int userId) throws RemoteException {
+        public ParcelFileDescriptor getWallpaper(
+                String callingPkg,
+                IWallpaperManagerCallback cb,
+                int which,
+                Bundle outParams,
+                int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IWallpaperManager
-        public ParcelFileDescriptor getWallpaperWithFeature(String callingPkg, String callingFeatureId, IWallpaperManagerCallback cb, int which, Bundle outParams, int userId, boolean getCropped, boolean includeCopied, int wpType) throws RemoteException {
+        public ParcelFileDescriptor getWallpaperWithFeature(
+                String callingPkg,
+                String callingFeatureId,
+                IWallpaperManagerCallback cb,
+                int which,
+                Bundle outParams,
+                int userId,
+                boolean getCropped,
+                boolean includeCopied,
+                int wpType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IWallpaperManager
-        public ParcelFileDescriptor getLockWallpaper(IWallpaperManagerCallback cb, Bundle outParams, int userId, int which) throws RemoteException {
+        public ParcelFileDescriptor getLockWallpaper(
+                IWallpaperManagerCallback cb, Bundle outParams, int userId, int which)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IWallpaperManager
-        public List getBitmapCrops(List<Point> displaySizes, int which, boolean originalBitmap, int userId) throws RemoteException {
+        public List getBitmapCrops(
+                List<Point> displaySizes, int which, boolean originalBitmap, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IWallpaperManager
-        public List getFutureBitmapCrops(Point bitmapSize, List<Point> displaySizes, int[] screenOrientations, List<Rect> crops) throws RemoteException {
+        public List getFutureBitmapCrops(
+                Point bitmapSize,
+                List<Point> displaySizes,
+                int[] screenOrientations,
+                List<Rect> crops)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IWallpaperManager
-        public Rect getBitmapCrop(Point bitmapSize, int[] screenOrientations, List<Rect> crops) throws RemoteException {
+        public Rect getBitmapCrop(Point bitmapSize, int[] screenOrientations, List<Rect> crops)
+                throws RemoteException {
             return null;
         }
 
@@ -285,7 +403,8 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public WallpaperInfo getWallpaperInfoWithFlags(int which, int userId) throws RemoteException {
+        public WallpaperInfo getWallpaperInfoWithFlags(int which, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -295,8 +414,8 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void clearWallpaper(String callingPackage, int which, int userId) throws RemoteException {
-        }
+        public void clearWallpaper(String callingPackage, int which, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public boolean hasNamedWallpaper(String name) throws RemoteException {
@@ -304,8 +423,8 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void setDimensionHints(int width, int height, String callingPackage, int displayId) throws RemoteException {
-        }
+        public void setDimensionHints(int width, int height, String callingPackage, int displayId)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public int getWidthHint(int displayId) throws RemoteException {
@@ -318,8 +437,8 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void setDisplayPadding(Rect padding, String callingPackage, int displayId) throws RemoteException {
-        }
+        public void setDisplayPadding(Rect padding, String callingPackage, int displayId)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public String getName() throws RemoteException {
@@ -327,8 +446,7 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void settingsRestored() throws RemoteException {
-        }
+        public void settingsRestored() throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public boolean isWallpaperSupported(String callingPackage) throws RemoteException {
@@ -346,7 +464,20 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public ParcelFileDescriptor semSetWallpaper(String name, String callingPackage, int[] screenOrientations, List<Rect> crops, boolean allowBackup, Bundle extras, int which, IWallpaperManagerCallback completion, int userId, int wallpaperType, boolean isPreloaded, Bundle inputExtras) throws RemoteException {
+        public ParcelFileDescriptor semSetWallpaper(
+                String name,
+                String callingPackage,
+                int[] screenOrientations,
+                List<Rect> crops,
+                boolean allowBackup,
+                Bundle extras,
+                int which,
+                IWallpaperManagerCallback completion,
+                int userId,
+                int wallpaperType,
+                boolean isPreloaded,
+                Bundle inputExtras)
+                throws RemoteException {
             return null;
         }
 
@@ -356,51 +487,61 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public boolean setLockWallpaperCallback(IWallpaperManagerCallback cb) throws RemoteException {
+        public boolean setLockWallpaperCallback(IWallpaperManagerCallback cb)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IWallpaperManager
-        public boolean setCoverWallpaperCallback(IWallpaperManagerCallback cb) throws RemoteException {
+        public boolean setCoverWallpaperCallback(IWallpaperManagerCallback cb)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IWallpaperManager
-        public WallpaperColors getWallpaperColors(int which, int userId, int displayId) throws RemoteException {
+        public WallpaperColors getWallpaperColors(int which, int userId, int displayId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IWallpaperManager
-        public void removeOnLocalColorsChangedListener(ILocalWallpaperColorConsumer callback, List<RectF> area, int which, int userId, int displayId) throws RemoteException {
-        }
+        public void removeOnLocalColorsChangedListener(
+                ILocalWallpaperColorConsumer callback,
+                List<RectF> area,
+                int which,
+                int userId,
+                int displayId)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void addOnLocalColorsChangedListener(ILocalWallpaperColorConsumer callback, List<RectF> regions, int which, int userId, int displayId) throws RemoteException {
-        }
+        public void addOnLocalColorsChangedListener(
+                ILocalWallpaperColorConsumer callback,
+                List<RectF> regions,
+                int which,
+                int userId,
+                int displayId)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void registerWallpaperColorsCallback(IWallpaperManagerCallback cb, int userId, int displayId) throws RemoteException {
-        }
+        public void registerWallpaperColorsCallback(
+                IWallpaperManagerCallback cb, int userId, int displayId) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void unregisterWallpaperColorsCallback(IWallpaperManagerCallback cb, int userId, int displayId) throws RemoteException {
-        }
+        public void unregisterWallpaperColorsCallback(
+                IWallpaperManagerCallback cb, int userId, int displayId) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void setInAmbientMode(boolean inAmbientMode, long animationDuration) throws RemoteException {
-        }
+        public void setInAmbientMode(boolean inAmbientMode, long animationDuration)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void notifyWakingUp(int x, int y, Bundle extras) throws RemoteException {
-        }
+        public void notifyWakingUp(int x, int y, Bundle extras) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void notifyGoingToSleep(int x, int y, Bundle extras) throws RemoteException {
-        }
+        public void notifyGoingToSleep(int x, int y, Bundle extras) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void setWallpaperDimAmount(float dimAmount) throws RemoteException {
-        }
+        public void setWallpaperDimAmount(float dimAmount) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public float getWallpaperDimAmount() throws RemoteException {
@@ -448,7 +589,8 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public ComponentName semGetWallpaperComponent(int which, int userId) throws RemoteException {
+        public ComponentName semGetWallpaperComponent(int which, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -468,8 +610,16 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void setVideoWallpaper(String videoFilePath, String themePackage, String videoColor, String callingPackage, int userId, int which, boolean allowBackup, Bundle extras) throws RemoteException {
-        }
+        public void setVideoWallpaper(
+                String videoFilePath,
+                String themePackage,
+                String videoColor,
+                String callingPackage,
+                int userId,
+                int which,
+                boolean allowBackup,
+                Bundle extras)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public boolean isVideoWallpaper() throws RemoteException {
@@ -482,12 +632,14 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public ParcelFileDescriptor semGetThumbnailFileDescriptor(int which, int userId, int rotation) throws RemoteException {
+        public ParcelFileDescriptor semGetThumbnailFileDescriptor(
+                int which, int userId, int rotation) throws RemoteException {
             return null;
         }
 
         @Override // android.app.IWallpaperManager
-        public ParcelFileDescriptor getWallpaperThumbnailFileDescriptor(int type, int userId, int which, int orientation, int mode) throws RemoteException {
+        public ParcelFileDescriptor getWallpaperThumbnailFileDescriptor(
+                int type, int userId, int which, int orientation, int mode) throws RemoteException {
             return null;
         }
 
@@ -507,8 +659,9 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void setMotionWallpaper(String pkgName, String callingPackage, int which, boolean allowBackup) throws RemoteException {
-        }
+        public void setMotionWallpaper(
+                String pkgName, String callingPackage, int which, boolean allowBackup)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public String getMotionWallpaperPkgName(int which) throws RemoteException {
@@ -516,20 +669,18 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void setAnimatedWallpaper(String pkgName, String callingPackage, int which, boolean allowBackup) throws RemoteException {
-        }
+        public void setAnimatedWallpaper(
+                String pkgName, String callingPackage, int which, boolean allowBackup)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void removeSnapshotByWhich(int which) throws RemoteException {
-        }
+        public void removeSnapshotByWhich(int which) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void removeSnapshotByKey(int key) throws RemoteException {
-        }
+        public void removeSnapshotByKey(int key) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void removeSnapshotBySource(String source) throws RemoteException {
-        }
+        public void removeSnapshotBySource(String source) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public int makeSnapshot(int which, int key, Bundle extras) throws RemoteException {
@@ -547,8 +698,7 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void setSnapshotTestMode(boolean enable) throws RemoteException {
-        }
+        public void setSnapshotTestMode(boolean enable) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public int getSnapshotCount(int which) throws RemoteException {
@@ -591,17 +741,18 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public String getLastCallingPackageWithPrefix(int which, boolean includePrefix) throws RemoteException {
+        public String getLastCallingPackageWithPrefix(int which, boolean includePrefix)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IWallpaperManager
-        public void copyFileToWallpaperFile(int which, String callingPackage) throws RemoteException {
-        }
+        public void copyFileToWallpaperFile(int which, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void copyPreloadedFileToWallpaperFile(int which, String callingPackage) throws RemoteException {
-        }
+        public void copyPreloadedFileToWallpaperFile(int which, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public boolean isSystemAndLockPaired(int mode) throws RemoteException {
@@ -629,12 +780,15 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public ParcelFileDescriptor getWallpaperAssetFile(String callingPkg, int which, int userId, String assetFilePath) throws RemoteException {
+        public ParcelFileDescriptor getWallpaperAssetFile(
+                String callingPkg, int which, int userId, String assetFilePath)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IWallpaperManager
-        public ParcelFileDescriptor getScreenshotFileDescriptor(int which, int userId, Bundle extras) throws RemoteException {
+        public ParcelFileDescriptor getScreenshotFileDescriptor(
+                int which, int userId, Bundle extras) throws RemoteException {
             return null;
         }
 
@@ -644,8 +798,8 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void semSendWallpaperCommand(int which, String action, Bundle extras) throws RemoteException {
-        }
+        public void semSendWallpaperCommand(int which, String action, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public SemWallpaperColors semGetWallpaperColors(int which) throws RemoteException {
@@ -658,20 +812,20 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void semClearWallpaperThumbnailCache(int which, int userId, String callingPackage) throws RemoteException {
-        }
+        public void semClearWallpaperThumbnailCache(int which, int userId, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void semRequestWallpaperColorsAnalysis(int which, String callingPackage) throws RemoteException {
-        }
+        public void semRequestWallpaperColorsAnalysis(int which, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void semSetDLSWallpaperColors(SemWallpaperColors colors, int which) throws RemoteException {
-        }
+        public void semSetDLSWallpaperColors(SemWallpaperColors colors, int which)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void semSetSmartCropRect(int which, Rect original, Rect smartCrop) throws RemoteException {
-        }
+        public void semSetSmartCropRect(int which, Rect original, Rect smartCrop)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public Rect semGetSmartCropRect(int which) throws RemoteException {
@@ -699,8 +853,15 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void semSetUri(String uri, boolean allowBackup, int which, int type, String callerPackage, int userId, Bundle extras) throws RemoteException {
-        }
+        public void semSetUri(
+                String uri,
+                boolean allowBackup,
+                int which,
+                int type,
+                String callerPackage,
+                int userId,
+                Bundle extras)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public String semGetUri(int which, String callerPackage) throws RemoteException {
@@ -708,12 +869,11 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void forceRebindWallpaper(int which, int userId) throws RemoteException {
-        }
+        public void forceRebindWallpaper(int which, int userId) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
-        public void notifyPid(int uid, int pid, String packageName, boolean enable) throws RemoteException {
-        }
+        public void notifyPid(int uid, int pid, String packageName, boolean enable)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public boolean isWallpaperDataExists(int userId, int which) throws RemoteException {
@@ -721,8 +881,7 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.app.IWallpaperManager
-        public void notifyAodVisibilityState(int state) throws RemoteException {
-        }
+        public void notifyAodVisibilityState(int state) throws RemoteException {}
 
         @Override // android.app.IWallpaperManager
         public boolean isStockLiveWallpaper(int which, int userId) throws RemoteException {
@@ -735,7 +894,7 @@ public interface IWallpaperManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWallpaperManager {
+    public abstract static class Stub extends Binder implements IWallpaperManager {
         public static final String DESCRIPTOR = "android.app.IWallpaperManager";
         static final int TRANSACTION_addOnLocalColorsChangedListener = 31;
         static final int TRANSACTION_clearWallpaper = 14;
@@ -1089,7 +1248,8 @@ public interface IWallpaperManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -1106,19 +1266,24 @@ public interface IWallpaperManager extends IInterface {
                     boolean _arg4 = data.readBoolean();
                     Bundle _arg5 = new Bundle();
                     int _arg6 = data.readInt();
-                    IWallpaperManagerCallback _arg7 = IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IWallpaperManagerCallback _arg7 =
+                            IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg8 = data.readInt();
                     int _arg9 = data.readInt();
                     boolean _arg10 = data.readBoolean();
                     Bundle _arg11 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result = setWallpaper(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10, _arg11);
+                    ParcelFileDescriptor _result =
+                            setWallpaper(
+                                    _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8,
+                                    _arg9, _arg10, _arg11);
                     reply.writeNoException();
                     reply.writeTypedObject(_result, 1);
                     reply.writeTypedObject(_arg5, 1);
                     return true;
                 case 2:
-                    ComponentName _arg02 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg02 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg12 = data.readString();
                     int _arg22 = data.readInt();
                     int _arg32 = data.readInt();
@@ -1128,19 +1293,22 @@ public interface IWallpaperManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 3:
-                    ComponentName _arg03 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg03 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     setWallpaperComponent(_arg03);
                     reply.writeNoException();
                     return true;
                 case 4:
                     String _arg04 = data.readString();
-                    IWallpaperManagerCallback _arg13 = IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IWallpaperManagerCallback _arg13 =
+                            IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg23 = data.readInt();
                     Bundle _arg33 = new Bundle();
                     int _arg43 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result2 = getWallpaper(_arg04, _arg13, _arg23, _arg33, _arg43);
+                    ParcelFileDescriptor _result2 =
+                            getWallpaper(_arg04, _arg13, _arg23, _arg33, _arg43);
                     reply.writeNoException();
                     reply.writeTypedObject(_result2, 1);
                     reply.writeTypedObject(_arg33, 1);
@@ -1148,7 +1316,8 @@ public interface IWallpaperManager extends IInterface {
                 case 5:
                     String _arg05 = data.readString();
                     String _arg14 = data.readString();
-                    IWallpaperManagerCallback _arg24 = IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IWallpaperManagerCallback _arg24 =
+                            IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg34 = data.readInt();
                     Bundle _arg44 = new Bundle();
                     int _arg52 = data.readInt();
@@ -1156,18 +1325,23 @@ public interface IWallpaperManager extends IInterface {
                     boolean _arg72 = data.readBoolean();
                     int _arg82 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result3 = getWallpaperWithFeature(_arg05, _arg14, _arg24, _arg34, _arg44, _arg52, _arg62, _arg72, _arg82);
+                    ParcelFileDescriptor _result3 =
+                            getWallpaperWithFeature(
+                                    _arg05, _arg14, _arg24, _arg34, _arg44, _arg52, _arg62, _arg72,
+                                    _arg82);
                     reply.writeNoException();
                     reply.writeTypedObject(_result3, 1);
                     reply.writeTypedObject(_arg44, 1);
                     return true;
                 case 6:
-                    IWallpaperManagerCallback _arg06 = IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IWallpaperManagerCallback _arg06 =
+                            IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
                     Bundle _arg15 = new Bundle();
                     int _arg25 = data.readInt();
                     int _arg35 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result4 = getLockWallpaper(_arg06, _arg15, _arg25, _arg35);
+                    ParcelFileDescriptor _result4 =
+                            getLockWallpaper(_arg06, _arg15, _arg25, _arg35);
                     reply.writeNoException();
                     reply.writeTypedObject(_result4, 1);
                     reply.writeTypedObject(_arg15, 1);
@@ -1316,13 +1490,17 @@ public interface IWallpaperManager extends IInterface {
                     boolean _arg45 = data.readBoolean();
                     Bundle _arg53 = new Bundle();
                     int _arg63 = data.readInt();
-                    IWallpaperManagerCallback _arg73 = IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IWallpaperManagerCallback _arg73 =
+                            IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg83 = data.readInt();
                     int _arg92 = data.readInt();
                     boolean _arg102 = data.readBoolean();
                     Bundle _arg116 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result19 = semSetWallpaper(_arg023, _arg115, _arg212, _arg39, _arg45, _arg53, _arg63, _arg73, _arg83, _arg92, _arg102, _arg116);
+                    ParcelFileDescriptor _result19 =
+                            semSetWallpaper(
+                                    _arg023, _arg115, _arg212, _arg39, _arg45, _arg53, _arg63,
+                                    _arg73, _arg83, _arg92, _arg102, _arg116);
                     reply.writeNoException();
                     reply.writeTypedObject(_result19, 1);
                     reply.writeTypedObject(_arg53, 1);
@@ -1336,14 +1514,16 @@ public interface IWallpaperManager extends IInterface {
                     reply.writeBoolean(_result20);
                     return true;
                 case 27:
-                    IWallpaperManagerCallback _arg025 = IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IWallpaperManagerCallback _arg025 =
+                            IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result21 = setLockWallpaperCallback(_arg025);
                     reply.writeNoException();
                     reply.writeBoolean(_result21);
                     return true;
                 case 28:
-                    IWallpaperManagerCallback _arg026 = IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IWallpaperManagerCallback _arg026 =
+                            IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result22 = setCoverWallpaperCallback(_arg026);
                     reply.writeNoException();
@@ -1359,7 +1539,8 @@ public interface IWallpaperManager extends IInterface {
                     reply.writeTypedObject(_result23, 1);
                     return true;
                 case 30:
-                    ILocalWallpaperColorConsumer _arg028 = ILocalWallpaperColorConsumer.Stub.asInterface(data.readStrongBinder());
+                    ILocalWallpaperColorConsumer _arg028 =
+                            ILocalWallpaperColorConsumer.Stub.asInterface(data.readStrongBinder());
                     List<RectF> _arg119 = data.createTypedArrayList(RectF.CREATOR);
                     int _arg214 = data.readInt();
                     int _arg310 = data.readInt();
@@ -1369,7 +1550,8 @@ public interface IWallpaperManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 31:
-                    ILocalWallpaperColorConsumer _arg029 = ILocalWallpaperColorConsumer.Stub.asInterface(data.readStrongBinder());
+                    ILocalWallpaperColorConsumer _arg029 =
+                            ILocalWallpaperColorConsumer.Stub.asInterface(data.readStrongBinder());
                     List<RectF> _arg120 = data.createTypedArrayList(RectF.CREATOR);
                     int _arg215 = data.readInt();
                     int _arg311 = data.readInt();
@@ -1379,7 +1561,8 @@ public interface IWallpaperManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 32:
-                    IWallpaperManagerCallback _arg030 = IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IWallpaperManagerCallback _arg030 =
+                            IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg121 = data.readInt();
                     int _arg216 = data.readInt();
                     data.enforceNoDataAvail();
@@ -1387,7 +1570,8 @@ public interface IWallpaperManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 33:
-                    IWallpaperManagerCallback _arg031 = IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IWallpaperManagerCallback _arg031 =
+                            IWallpaperManagerCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg122 = data.readInt();
                     int _arg217 = data.readInt();
                     data.enforceNoDataAvail();
@@ -1511,7 +1695,8 @@ public interface IWallpaperManager extends IInterface {
                     boolean _arg64 = data.readBoolean();
                     Bundle _arg74 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    setVideoWallpaper(_arg043, _arg128, _arg220, _arg312, _arg48, _arg54, _arg64, _arg74);
+                    setVideoWallpaper(
+                            _arg043, _arg128, _arg220, _arg312, _arg48, _arg54, _arg64, _arg74);
                     reply.writeNoException();
                     return true;
                 case 52:
@@ -1529,7 +1714,8 @@ public interface IWallpaperManager extends IInterface {
                     int _arg129 = data.readInt();
                     int _arg221 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result39 = semGetThumbnailFileDescriptor(_arg044, _arg129, _arg221);
+                    ParcelFileDescriptor _result39 =
+                            semGetThumbnailFileDescriptor(_arg044, _arg129, _arg221);
                     reply.writeNoException();
                     reply.writeTypedObject(_result39, 1);
                     return true;
@@ -1540,7 +1726,9 @@ public interface IWallpaperManager extends IInterface {
                     int _arg313 = data.readInt();
                     int _arg49 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result40 = getWallpaperThumbnailFileDescriptor(_arg045, _arg130, _arg222, _arg313, _arg49);
+                    ParcelFileDescriptor _result40 =
+                            getWallpaperThumbnailFileDescriptor(
+                                    _arg045, _arg130, _arg222, _arg313, _arg49);
                     reply.writeNoException();
                     reply.writeTypedObject(_result40, 1);
                     return true;
@@ -1756,7 +1944,8 @@ public interface IWallpaperManager extends IInterface {
                     int _arg226 = data.readInt();
                     String _arg316 = data.readString();
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result62 = getWallpaperAssetFile(_arg072, _arg143, _arg226, _arg316);
+                    ParcelFileDescriptor _result62 =
+                            getWallpaperAssetFile(_arg072, _arg143, _arg226, _arg316);
                     reply.writeNoException();
                     reply.writeTypedObject(_result62, 1);
                     return true;
@@ -1765,7 +1954,8 @@ public interface IWallpaperManager extends IInterface {
                     int _arg144 = data.readInt();
                     Bundle _arg227 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result63 = getScreenshotFileDescriptor(_arg073, _arg144, _arg227);
+                    ParcelFileDescriptor _result63 =
+                            getScreenshotFileDescriptor(_arg073, _arg144, _arg227);
                     reply.writeNoException();
                     reply.writeTypedObject(_result63, 1);
                     return true;
@@ -1815,7 +2005,8 @@ public interface IWallpaperManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 93:
-                    SemWallpaperColors _arg080 = (SemWallpaperColors) data.readTypedObject(SemWallpaperColors.CREATOR);
+                    SemWallpaperColors _arg080 =
+                            (SemWallpaperColors) data.readTypedObject(SemWallpaperColors.CREATOR);
                     int _arg149 = data.readInt();
                     data.enforceNoDataAvail();
                     semSetDLSWallpaperColors(_arg080, _arg149);
@@ -1943,7 +2134,20 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public ParcelFileDescriptor setWallpaper(String name, String callingPackage, int[] screenOrientations, List<Rect> crops, boolean allowBackup, Bundle extras, int which, IWallpaperManagerCallback completion, int userId, int type, boolean isPreloaded, Bundle inputExtras) throws RemoteException {
+            public ParcelFileDescriptor setWallpaper(
+                    String name,
+                    String callingPackage,
+                    int[] screenOrientations,
+                    List<Rect> crops,
+                    boolean allowBackup,
+                    Bundle extras,
+                    int which,
+                    IWallpaperManagerCallback completion,
+                    int userId,
+                    int type,
+                    boolean isPreloaded,
+                    Bundle inputExtras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2020,7 +2224,9 @@ public interface IWallpaperManager extends IInterface {
                         try {
                             this.mRemote.transact(1, _data, _reply, 0);
                             _reply.readException();
-                            ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                            ParcelFileDescriptor _result =
+                                    (ParcelFileDescriptor)
+                                            _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                             if (_reply.readInt() != 0) {
                                 try {
                                     extras.readFromParcel(_reply);
@@ -2055,7 +2261,9 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void setWallpaperComponentChecked(ComponentName name, String callingPackage, int which, int userId, Bundle extras) throws RemoteException {
+            public void setWallpaperComponentChecked(
+                    ComponentName name, String callingPackage, int which, int userId, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2089,7 +2297,13 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public ParcelFileDescriptor getWallpaper(String callingPkg, IWallpaperManagerCallback cb, int which, Bundle outParams, int userId) throws RemoteException {
+            public ParcelFileDescriptor getWallpaper(
+                    String callingPkg,
+                    IWallpaperManagerCallback cb,
+                    int which,
+                    Bundle outParams,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2100,7 +2314,9 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     if (_reply.readInt() != 0) {
                         outParams.readFromParcel(_reply);
                     }
@@ -2112,7 +2328,17 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public ParcelFileDescriptor getWallpaperWithFeature(String callingPkg, String callingFeatureId, IWallpaperManagerCallback cb, int which, Bundle outParams, int userId, boolean getCropped, boolean includeCopied, int wpType) throws RemoteException {
+            public ParcelFileDescriptor getWallpaperWithFeature(
+                    String callingPkg,
+                    String callingFeatureId,
+                    IWallpaperManagerCallback cb,
+                    int which,
+                    Bundle outParams,
+                    int userId,
+                    boolean getCropped,
+                    boolean includeCopied,
+                    int wpType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2127,7 +2353,9 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(wpType);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     if (_reply.readInt() != 0) {
                         outParams.readFromParcel(_reply);
                     }
@@ -2139,7 +2367,9 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public ParcelFileDescriptor getLockWallpaper(IWallpaperManagerCallback cb, Bundle outParams, int userId, int which) throws RemoteException {
+            public ParcelFileDescriptor getLockWallpaper(
+                    IWallpaperManagerCallback cb, Bundle outParams, int userId, int which)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2149,7 +2379,9 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(which);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     if (_reply.readInt() != 0) {
                         outParams.readFromParcel(_reply);
                     }
@@ -2161,7 +2393,9 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public List getBitmapCrops(List<Point> displaySizes, int which, boolean originalBitmap, int userId) throws RemoteException {
+            public List getBitmapCrops(
+                    List<Point> displaySizes, int which, boolean originalBitmap, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2182,7 +2416,12 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public List getFutureBitmapCrops(Point bitmapSize, List<Point> displaySizes, int[] screenOrientations, List<Rect> crops) throws RemoteException {
+            public List getFutureBitmapCrops(
+                    Point bitmapSize,
+                    List<Point> displaySizes,
+                    int[] screenOrientations,
+                    List<Rect> crops)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2203,7 +2442,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public Rect getBitmapCrop(Point bitmapSize, int[] screenOrientations, List<Rect> crops) throws RemoteException {
+            public Rect getBitmapCrop(Point bitmapSize, int[] screenOrientations, List<Rect> crops)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2248,7 +2488,8 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    WallpaperInfo _result = (WallpaperInfo) _reply.readTypedObject(WallpaperInfo.CREATOR);
+                    WallpaperInfo _result =
+                            (WallpaperInfo) _reply.readTypedObject(WallpaperInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2257,7 +2498,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public WallpaperInfo getWallpaperInfoWithFlags(int which, int userId) throws RemoteException {
+            public WallpaperInfo getWallpaperInfoWithFlags(int which, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2266,7 +2508,8 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(12, _data, _reply, 0);
                     _reply.readException();
-                    WallpaperInfo _result = (WallpaperInfo) _reply.readTypedObject(WallpaperInfo.CREATOR);
+                    WallpaperInfo _result =
+                            (WallpaperInfo) _reply.readTypedObject(WallpaperInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2283,7 +2526,9 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(13, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2292,7 +2537,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void clearWallpaper(String callingPackage, int which, int userId) throws RemoteException {
+            public void clearWallpaper(String callingPackage, int which, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2326,7 +2572,9 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void setDimensionHints(int width, int height, String callingPackage, int displayId) throws RemoteException {
+            public void setDimensionHints(
+                    int width, int height, String callingPackage, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2378,7 +2626,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void setDisplayPadding(Rect padding, String callingPackage, int displayId) throws RemoteException {
+            public void setDisplayPadding(Rect padding, String callingPackage, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2477,7 +2726,20 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public ParcelFileDescriptor semSetWallpaper(String name, String callingPackage, int[] screenOrientations, List<Rect> crops, boolean allowBackup, Bundle extras, int which, IWallpaperManagerCallback completion, int userId, int wallpaperType, boolean isPreloaded, Bundle inputExtras) throws RemoteException {
+            public ParcelFileDescriptor semSetWallpaper(
+                    String name,
+                    String callingPackage,
+                    int[] screenOrientations,
+                    List<Rect> crops,
+                    boolean allowBackup,
+                    Bundle extras,
+                    int which,
+                    IWallpaperManagerCallback completion,
+                    int userId,
+                    int wallpaperType,
+                    boolean isPreloaded,
+                    Bundle inputExtras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2554,7 +2816,9 @@ public interface IWallpaperManager extends IInterface {
                         try {
                             this.mRemote.transact(25, _data, _reply, 0);
                             _reply.readException();
-                            ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                            ParcelFileDescriptor _result =
+                                    (ParcelFileDescriptor)
+                                            _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                             if (_reply.readInt() != 0) {
                                 try {
                                     extras.readFromParcel(_reply);
@@ -2607,7 +2871,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public boolean setLockWallpaperCallback(IWallpaperManagerCallback cb) throws RemoteException {
+            public boolean setLockWallpaperCallback(IWallpaperManagerCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2624,7 +2889,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public boolean setCoverWallpaperCallback(IWallpaperManagerCallback cb) throws RemoteException {
+            public boolean setCoverWallpaperCallback(IWallpaperManagerCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2641,7 +2907,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public WallpaperColors getWallpaperColors(int which, int userId, int displayId) throws RemoteException {
+            public WallpaperColors getWallpaperColors(int which, int userId, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2651,7 +2918,8 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(29, _data, _reply, 0);
                     _reply.readException();
-                    WallpaperColors _result = (WallpaperColors) _reply.readTypedObject(WallpaperColors.CREATOR);
+                    WallpaperColors _result =
+                            (WallpaperColors) _reply.readTypedObject(WallpaperColors.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2660,7 +2928,13 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void removeOnLocalColorsChangedListener(ILocalWallpaperColorConsumer callback, List<RectF> area, int which, int userId, int displayId) throws RemoteException {
+            public void removeOnLocalColorsChangedListener(
+                    ILocalWallpaperColorConsumer callback,
+                    List<RectF> area,
+                    int which,
+                    int userId,
+                    int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2679,7 +2953,13 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void addOnLocalColorsChangedListener(ILocalWallpaperColorConsumer callback, List<RectF> regions, int which, int userId, int displayId) throws RemoteException {
+            public void addOnLocalColorsChangedListener(
+                    ILocalWallpaperColorConsumer callback,
+                    List<RectF> regions,
+                    int which,
+                    int userId,
+                    int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2698,7 +2978,9 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void registerWallpaperColorsCallback(IWallpaperManagerCallback cb, int userId, int displayId) throws RemoteException {
+            public void registerWallpaperColorsCallback(
+                    IWallpaperManagerCallback cb, int userId, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2715,7 +2997,9 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void unregisterWallpaperColorsCallback(IWallpaperManagerCallback cb, int userId, int displayId) throws RemoteException {
+            public void unregisterWallpaperColorsCallback(
+                    IWallpaperManagerCallback cb, int userId, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2732,7 +3016,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void setInAmbientMode(boolean inAmbientMode, long animationDuration) throws RemoteException {
+            public void setInAmbientMode(boolean inAmbientMode, long animationDuration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2935,7 +3220,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public ComponentName semGetWallpaperComponent(int which, int userId) throws RemoteException {
+            public ComponentName semGetWallpaperComponent(int which, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2944,7 +3230,8 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(47, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3005,7 +3292,16 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void setVideoWallpaper(String videoFilePath, String themePackage, String videoColor, String callingPackage, int userId, int which, boolean allowBackup, Bundle extras) throws RemoteException {
+            public void setVideoWallpaper(
+                    String videoFilePath,
+                    String themePackage,
+                    String videoColor,
+                    String callingPackage,
+                    int userId,
+                    int which,
+                    boolean allowBackup,
+                    Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3059,7 +3355,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public ParcelFileDescriptor semGetThumbnailFileDescriptor(int which, int userId, int rotation) throws RemoteException {
+            public ParcelFileDescriptor semGetThumbnailFileDescriptor(
+                    int which, int userId, int rotation) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3069,7 +3366,9 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(rotation);
                     this.mRemote.transact(54, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3078,7 +3377,9 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public ParcelFileDescriptor getWallpaperThumbnailFileDescriptor(int type, int userId, int which, int orientation, int mode) throws RemoteException {
+            public ParcelFileDescriptor getWallpaperThumbnailFileDescriptor(
+                    int type, int userId, int which, int orientation, int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3090,7 +3391,9 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(mode);
                     this.mRemote.transact(55, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3150,7 +3453,9 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void setMotionWallpaper(String pkgName, String callingPackage, int which, boolean allowBackup) throws RemoteException {
+            public void setMotionWallpaper(
+                    String pkgName, String callingPackage, int which, boolean allowBackup)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3185,7 +3490,9 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void setAnimatedWallpaper(String pkgName, String callingPackage, int which, boolean allowBackup) throws RemoteException {
+            public void setAnimatedWallpaper(
+                    String pkgName, String callingPackage, int which, boolean allowBackup)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3452,7 +3759,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public String getLastCallingPackageWithPrefix(int which, boolean includePrefix) throws RemoteException {
+            public String getLastCallingPackageWithPrefix(int which, boolean includePrefix)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3470,7 +3778,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void copyFileToWallpaperFile(int which, String callingPackage) throws RemoteException {
+            public void copyFileToWallpaperFile(int which, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3486,7 +3795,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void copyPreloadedFileToWallpaperFile(int which, String callingPackage) throws RemoteException {
+            public void copyPreloadedFileToWallpaperFile(int which, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3536,7 +3846,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public Bundle getWallpaperComponentExtras(int which, int userId) throws RemoteException {
+            public Bundle getWallpaperComponentExtras(int which, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3590,7 +3901,9 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public ParcelFileDescriptor getWallpaperAssetFile(String callingPkg, int which, int userId, String assetFilePath) throws RemoteException {
+            public ParcelFileDescriptor getWallpaperAssetFile(
+                    String callingPkg, int which, int userId, String assetFilePath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3601,7 +3914,9 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeString(assetFilePath);
                     this.mRemote.transact(85, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3610,7 +3925,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public ParcelFileDescriptor getScreenshotFileDescriptor(int which, int userId, Bundle extras) throws RemoteException {
+            public ParcelFileDescriptor getScreenshotFileDescriptor(
+                    int which, int userId, Bundle extras) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3620,7 +3936,9 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeTypedObject(extras, 0);
                     this.mRemote.transact(86, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3647,7 +3965,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void semSendWallpaperCommand(int which, String action, Bundle extras) throws RemoteException {
+            public void semSendWallpaperCommand(int which, String action, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3672,7 +3991,8 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(which);
                     this.mRemote.transact(89, _data, _reply, 0);
                     _reply.readException();
-                    SemWallpaperColors _result = (SemWallpaperColors) _reply.readTypedObject(SemWallpaperColors.CREATOR);
+                    SemWallpaperColors _result =
+                            (SemWallpaperColors) _reply.readTypedObject(SemWallpaperColors.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3681,7 +4001,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public SemWallpaperColors semGetPrimaryWallpaperColors(int which) throws RemoteException {
+            public SemWallpaperColors semGetPrimaryWallpaperColors(int which)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3689,7 +4010,8 @@ public interface IWallpaperManager extends IInterface {
                     _data.writeInt(which);
                     this.mRemote.transact(90, _data, _reply, 0);
                     _reply.readException();
-                    SemWallpaperColors _result = (SemWallpaperColors) _reply.readTypedObject(SemWallpaperColors.CREATOR);
+                    SemWallpaperColors _result =
+                            (SemWallpaperColors) _reply.readTypedObject(SemWallpaperColors.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3698,7 +4020,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void semClearWallpaperThumbnailCache(int which, int userId, String callingPackage) throws RemoteException {
+            public void semClearWallpaperThumbnailCache(
+                    int which, int userId, String callingPackage) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3715,7 +4038,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void semRequestWallpaperColorsAnalysis(int which, String callingPackage) throws RemoteException {
+            public void semRequestWallpaperColorsAnalysis(int which, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3731,7 +4055,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void semSetDLSWallpaperColors(SemWallpaperColors colors, int which) throws RemoteException {
+            public void semSetDLSWallpaperColors(SemWallpaperColors colors, int which)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3747,7 +4072,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void semSetSmartCropRect(int which, Rect original, Rect smartCrop) throws RemoteException {
+            public void semSetSmartCropRect(int which, Rect original, Rect smartCrop)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3849,7 +4175,15 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void semSetUri(String uri, boolean allowBackup, int which, int type, String callerPackage, int userId, Bundle extras) throws RemoteException {
+            public void semSetUri(
+                    String uri,
+                    boolean allowBackup,
+                    int which,
+                    int type,
+                    String callerPackage,
+                    int userId,
+                    Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3904,7 +4238,8 @@ public interface IWallpaperManager extends IInterface {
             }
 
             @Override // android.app.IWallpaperManager
-            public void notifyPid(int uid, int pid, String packageName, boolean enable) throws RemoteException {
+            public void notifyPid(int uid, int pid, String packageName, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

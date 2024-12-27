@@ -1,6 +1,7 @@
 package android.hardware.audio.common.V2_0;
 
 import android.os.HidlSupport;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,11 +27,32 @@ public final class AudioOffloadInfo {
             return false;
         }
         AudioOffloadInfo audioOffloadInfo = (AudioOffloadInfo) obj;
-        return this.sampleRateHz == audioOffloadInfo.sampleRateHz && this.channelMask == audioOffloadInfo.channelMask && this.format == audioOffloadInfo.format && this.streamType == audioOffloadInfo.streamType && this.bitRatePerSecond == audioOffloadInfo.bitRatePerSecond && this.durationMicroseconds == audioOffloadInfo.durationMicroseconds && this.hasVideo == audioOffloadInfo.hasVideo && this.isStreaming == audioOffloadInfo.isStreaming && this.bitWidth == audioOffloadInfo.bitWidth && this.bufferSize == audioOffloadInfo.bufferSize && this.usage == audioOffloadInfo.usage;
+        return this.sampleRateHz == audioOffloadInfo.sampleRateHz
+                && this.channelMask == audioOffloadInfo.channelMask
+                && this.format == audioOffloadInfo.format
+                && this.streamType == audioOffloadInfo.streamType
+                && this.bitRatePerSecond == audioOffloadInfo.bitRatePerSecond
+                && this.durationMicroseconds == audioOffloadInfo.durationMicroseconds
+                && this.hasVideo == audioOffloadInfo.hasVideo
+                && this.isStreaming == audioOffloadInfo.isStreaming
+                && this.bitWidth == audioOffloadInfo.bitWidth
+                && this.bufferSize == audioOffloadInfo.bufferSize
+                && this.usage == audioOffloadInfo.usage;
     }
 
     public final int hashCode() {
-        return Objects.hash(AudioConfig$$ExternalSyntheticOutline0.m(this.sampleRateHz), AudioConfig$$ExternalSyntheticOutline0.m(this.channelMask), AudioConfig$$ExternalSyntheticOutline0.m(this.format), AudioConfig$$ExternalSyntheticOutline0.m(this.streamType), AudioConfig$$ExternalSyntheticOutline0.m(this.bitRatePerSecond), Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.durationMicroseconds))), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.hasVideo), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.isStreaming), AudioConfig$$ExternalSyntheticOutline0.m(this.bitWidth), AudioConfig$$ExternalSyntheticOutline0.m(this.bufferSize), AudioConfig$$ExternalSyntheticOutline0.m(this.usage));
+        return Objects.hash(
+                AudioConfig$$ExternalSyntheticOutline0.m(this.sampleRateHz),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.channelMask),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.format),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.streamType),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.bitRatePerSecond),
+                Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.durationMicroseconds))),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.hasVideo),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.isStreaming),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.bitWidth),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.bufferSize),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.usage));
     }
 
     public final String toString() {
@@ -43,7 +65,56 @@ public final class AudioOffloadInfo {
         sb.append(", .streamType = ");
         int i = this.streamType;
         String str = "CNT";
-        sb.append(i == -1 ? "DEFAULT" : i == 0 ? "MIN" : i == 0 ? "VOICE_CALL" : i == 1 ? "SYSTEM" : i == 2 ? "RING" : i == 3 ? "MUSIC" : i == 4 ? "ALARM" : i == 5 ? "NOTIFICATION" : i == 6 ? "BLUETOOTH_SCO" : i == 7 ? "ENFORCED_AUDIBLE" : i == 8 ? "DTMF" : i == 9 ? "TTS" : i == 10 ? "ACCESSIBILITY" : i == 11 ? "REROUTING" : i == 12 ? "PATCH" : i == 11 ? "PUBLIC_CNT" : i == 12 ? "FOR_POLICY_CNT" : i == 13 ? "CNT" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i));
+        sb.append(
+                i == -1
+                        ? "DEFAULT"
+                        : i == 0
+                                ? "MIN"
+                                : i == 0
+                                        ? "VOICE_CALL"
+                                        : i == 1
+                                                ? "SYSTEM"
+                                                : i == 2
+                                                        ? "RING"
+                                                        : i == 3
+                                                                ? "MUSIC"
+                                                                : i == 4
+                                                                        ? "ALARM"
+                                                                        : i == 5
+                                                                                ? "NOTIFICATION"
+                                                                                : i == 6
+                                                                                        ? "BLUETOOTH_SCO"
+                                                                                        : i == 7
+                                                                                                ? "ENFORCED_AUDIBLE"
+                                                                                                : i
+                                                                                                                == 8
+                                                                                                        ? "DTMF"
+                                                                                                        : i
+                                                                                                                        == 9
+                                                                                                                ? "TTS"
+                                                                                                                : i
+                                                                                                                                == 10
+                                                                                                                        ? "ACCESSIBILITY"
+                                                                                                                        : i
+                                                                                                                                        == 11
+                                                                                                                                ? "REROUTING"
+                                                                                                                                : i
+                                                                                                                                                == 12
+                                                                                                                                        ? "PATCH"
+                                                                                                                                        : i
+                                                                                                                                                        == 11
+                                                                                                                                                ? "PUBLIC_CNT"
+                                                                                                                                                : i
+                                                                                                                                                                == 12
+                                                                                                                                                        ? "FOR_POLICY_CNT"
+                                                                                                                                                        : i
+                                                                                                                                                                        == 13
+                                                                                                                                                                ? "CNT"
+                                                                                                                                                                : AudioChannelMask$$ExternalSyntheticOutline0
+                                                                                                                                                                        .m(
+                                                                                                                                                                                new StringBuilder(
+                                                                                                                                                                                        "0x"),
+                                                                                                                                                                                i));
         sb.append(", .bitRatePerSecond = ");
         sb.append(this.bitRatePerSecond);
         sb.append(", .durationMicroseconds = ");
@@ -93,7 +164,11 @@ public final class AudioOffloadInfo {
         } else if (i2 == 16) {
             str = "ASSISTANT";
         } else if (i2 != 17) {
-            str = i2 == 16 ? "MAX" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i2);
+            str =
+                    i2 == 16
+                            ? "MAX"
+                            : AudioChannelMask$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("0x"), i2);
         }
         return AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, str, "}");
     }

@@ -5,8 +5,10 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.metrics.DefaultNetworkEvent;
 import android.os.SystemClock;
+
 import com.android.internal.util.BitUtils;
 import com.android.internal.util.RingBuffer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +32,19 @@ public final class DefaultNetworkMetrics {
         this.mCurrentDefaultNetwork = defaultNetworkEvent;
     }
 
-    public static void fillLinkInfo(DefaultNetworkEvent defaultNetworkEvent, Network network, LinkProperties linkProperties, NetworkCapabilities networkCapabilities) {
+    public static void fillLinkInfo(
+            DefaultNetworkEvent defaultNetworkEvent,
+            Network network,
+            LinkProperties linkProperties,
+            NetworkCapabilities networkCapabilities) {
         defaultNetworkEvent.netId = network.getNetId();
-        defaultNetworkEvent.transports = (int) (defaultNetworkEvent.transports | BitUtils.packBits(networkCapabilities.getTransportTypes()));
+        defaultNetworkEvent.transports =
+                (int)
+                        (defaultNetworkEvent.transports
+                                | BitUtils.packBits(networkCapabilities.getTransportTypes()));
         boolean z = false;
-        defaultNetworkEvent.ipv4 |= linkProperties.hasIpv4Address() && linkProperties.hasIpv4DefaultRoute();
+        defaultNetworkEvent.ipv4 |=
+                linkProperties.hasIpv4Address() && linkProperties.hasIpv4DefaultRoute();
         boolean z2 = defaultNetworkEvent.ipv6;
         if (linkProperties.hasGlobalIpv6Address() && linkProperties.hasIpv6DefaultRoute()) {
             z = true;
@@ -42,10 +52,16 @@ public final class DefaultNetworkMetrics {
         defaultNetworkEvent.ipv6 = z2 | z;
     }
 
-    public final void logCurrentDefaultNetwork(long j, Network network, int i, LinkProperties linkProperties, NetworkCapabilities networkCapabilities) {
+    public final void logCurrentDefaultNetwork(
+            long j,
+            Network network,
+            int i,
+            LinkProperties linkProperties,
+            NetworkCapabilities networkCapabilities) {
         if (this.mIsCurrentlyValid) {
             DefaultNetworkEvent defaultNetworkEvent = this.mCurrentDefaultNetwork;
-            defaultNetworkEvent.validatedMs = (j - this.mLastValidationTimeMs) + defaultNetworkEvent.validatedMs;
+            defaultNetworkEvent.validatedMs =
+                    (j - this.mLastValidationTimeMs) + defaultNetworkEvent.validatedMs;
         }
         DefaultNetworkEvent defaultNetworkEvent2 = this.mCurrentDefaultNetwork;
         defaultNetworkEvent2.updateDuration(j);

@@ -3,6 +3,7 @@ package com.android.net.module.util;
 import android.util.ArrayMap;
 import android.util.Pair;
 import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -12,8 +13,7 @@ import java.util.function.Predicate;
 
 /* loaded from: classes5.dex */
 public final class CollectionUtils {
-    private CollectionUtils() {
-    }
+    private CollectionUtils() {}
 
     public static <T> boolean isEmpty(T[] array) {
         return array == null || array.length == 0;
@@ -194,7 +194,8 @@ public final class CollectionUtils {
         return -1 != indexOf(haystack, condition);
     }
 
-    public static <T, R> ArrayList<R> map(Collection<T> source, Function<? super T, ? extends R> transform) {
+    public static <T, R> ArrayList<R> map(
+            Collection<T> source, Function<? super T, ? extends R> transform) {
         ArrayList<R> dest = new ArrayList<>(source.size());
         for (T e : source) {
             dest.add(transform.apply(e));
@@ -223,7 +224,8 @@ public final class CollectionUtils {
         for (int i = 0; i < size; i++) {
             T key = keys.get(i);
             if (dest.containsKey(key)) {
-                throw new IllegalArgumentException("assoc : keys may not contain the same value twice");
+                throw new IllegalArgumentException(
+                        "assoc : keys may not contain the same value twice");
             }
             dest.put(key, values.get(i));
         }

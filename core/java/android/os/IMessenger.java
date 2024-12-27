@@ -6,8 +6,7 @@ public interface IMessenger extends IInterface {
 
     public static class Default implements IMessenger {
         @Override // android.os.IMessenger
-        public void send(Message msg) throws RemoteException {
-        }
+        public void send(Message msg) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -15,7 +14,7 @@ public interface IMessenger extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMessenger {
+    public abstract static class Stub extends Binder implements IMessenger {
         public static final String DESCRIPTOR = "android.os.IMessenger";
         static final int TRANSACTION_send = 1;
 
@@ -54,7 +53,8 @@ public interface IMessenger extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

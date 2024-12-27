@@ -14,7 +14,15 @@ public class DvbtFrontendCapabilities extends FrontendCapabilities {
     private final boolean mIsT2Supported;
     private final int mTransmissionModeCap;
 
-    private DvbtFrontendCapabilities(int transmissionModeCap, int bandwidthCap, int constellationCap, int codeRateCap, int hierarchyCap, int guardIntervalCap, boolean isT2Supported, boolean isMisoSupported) {
+    private DvbtFrontendCapabilities(
+            int transmissionModeCap,
+            int bandwidthCap,
+            int constellationCap,
+            int codeRateCap,
+            int hierarchyCap,
+            int guardIntervalCap,
+            boolean isT2Supported,
+            boolean isMisoSupported) {
         this.mTransmissionModeCap = transmissionModeCap;
         this.mBandwidthCap = bandwidthCap;
         this.mConstellationCap = constellationCap;

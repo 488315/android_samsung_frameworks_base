@@ -5,23 +5,27 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 
 /* loaded from: classes6.dex */
 public final class SemEdgeLightingInfo implements Parcelable {
-    public static final Parcelable.Creator<SemEdgeLightingInfo> CREATOR = new Parcelable.Creator<SemEdgeLightingInfo>() { // from class: com.samsung.android.edge.SemEdgeLightingInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemEdgeLightingInfo createFromParcel(Parcel source) {
-            return new SemEdgeLightingInfo(source);
-        }
+    public static final Parcelable.Creator<SemEdgeLightingInfo> CREATOR =
+            new Parcelable.Creator<
+                    SemEdgeLightingInfo>() { // from class:
+                                             // com.samsung.android.edge.SemEdgeLightingInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemEdgeLightingInfo createFromParcel(Parcel source) {
+                    return new SemEdgeLightingInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemEdgeLightingInfo[] newArray(int size) {
-            return new SemEdgeLightingInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemEdgeLightingInfo[] newArray(int size) {
+                    return new SemEdgeLightingInfo[size];
+                }
+            };
     public static final int REPEAT_INFINITE = -1;
     public static final int TYPE_APPLICATION = 1;
     private static final int TYPE_INTERNAL = 2000;
@@ -37,7 +41,7 @@ public final class SemEdgeLightingInfo implements Parcelable {
         this.mUserId = 0;
         this.DEFAULT_LIGHTING_COLOR = -8081686;
         this.mType = 1;
-        this.mEffectColors = new int[]{this.DEFAULT_LIGHTING_COLOR};
+        this.mEffectColors = new int[] {this.DEFAULT_LIGHTING_COLOR};
         this.mRepeatCount = 0;
     }
 
@@ -47,7 +51,7 @@ public final class SemEdgeLightingInfo implements Parcelable {
         enforceEdgeLightingType(type);
         this.mType = type;
         if (color == null || color.length == 0) {
-            this.mEffectColors = new int[]{this.DEFAULT_LIGHTING_COLOR};
+            this.mEffectColors = new int[] {this.DEFAULT_LIGHTING_COLOR};
         } else {
             this.mEffectColors = color;
         }
@@ -68,7 +72,10 @@ public final class SemEdgeLightingInfo implements Parcelable {
 
     private void enforceEdgeLightingType(int type) {
         if (type >= 2000 && Binder.getCallingUid() != 1000) {
-            throw new SecurityException("only SYSTEM can use the type(" + type + NavigationBarInflaterView.KEY_CODE_END);
+            throw new SecurityException(
+                    "only SYSTEM can use the type("
+                            + type
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
     }
 
@@ -116,7 +123,15 @@ public final class SemEdgeLightingInfo implements Parcelable {
     }
 
     public String toString() {
-        return "SemEdgeLighitngInfo{type = " + this.mType + ", colors= " + Arrays.toString(this.mEffectColors) + ", repeat= " + this.mRepeatCount + ", userId = " + this.mUserId + "}";
+        return "SemEdgeLighitngInfo{type = "
+                + this.mType
+                + ", colors= "
+                + Arrays.toString(this.mEffectColors)
+                + ", repeat= "
+                + this.mRepeatCount
+                + ", userId = "
+                + this.mUserId
+                + "}";
     }
 
     @Override // android.os.Parcelable

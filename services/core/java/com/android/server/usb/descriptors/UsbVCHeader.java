@@ -11,7 +11,8 @@ public final class UsbVCHeader extends UsbVCInterface {
     public final void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
         textReportCanvas.openList();
-        textReportCanvas.writeListItem("Release: " + TextReportCanvas.getBCDString(this.mVDCRelease));
+        textReportCanvas.writeListItem(
+                "Release: " + TextReportCanvas.getBCDString(this.mVDCRelease));
         textReportCanvas.writeListItem("Total Length: 0");
         textReportCanvas.closeList();
     }

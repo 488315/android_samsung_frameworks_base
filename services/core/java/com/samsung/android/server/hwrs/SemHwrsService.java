@@ -5,8 +5,10 @@ import android.content.Context;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.SystemService;
+
 import com.samsung.android.server.hwrs.common.HwrsUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -23,8 +25,7 @@ public final class SemHwrsService extends SystemService {
     }
 
     @Override // com.android.server.SystemService
-    public final void onBootPhase(int i) {
-    }
+    public final void onBootPhase(int i) {}
 
     @Override // com.android.server.SystemService
     public final void onStart() {
@@ -43,28 +44,36 @@ public final class SemHwrsService extends SystemService {
     }
 
     @Override // com.android.server.SystemService
-    public final void onUserSwitching(SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
-        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("onUserSwitching : ", targetUser != null ? targetUser.getUserHandle().toString() : null, "->");
+    public final void onUserSwitching(
+            SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
+        StringBuilder m =
+                DumpUtils$$ExternalSyntheticOutline0.m(
+                        "onUserSwitching : ",
+                        targetUser != null ? targetUser.getUserHandle().toString() : null,
+                        "->");
         m.append(targetUser2.getUserHandle().toString());
         Log.d("[HWRS_SYS]Service", m.toString());
         final UserHandle userHandle = targetUser2.getUserHandle();
         final SemHwrsServiceImpl semHwrsServiceImpl = this.mSvcImpl;
         semHwrsServiceImpl.getClass();
-        Runnable runnable = new Runnable() { // from class: com.samsung.android.server.hwrs.AbstractSemHwrsServiceImpl$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                AbstractSemHwrsServiceImpl abstractSemHwrsServiceImpl = AbstractSemHwrsServiceImpl.this;
-                UserHandle userHandle2 = userHandle;
-                if (abstractSemHwrsServiceImpl.mCurrentUserId != -10000) {
-                    Log.d("[HWRS_SYS]SemHwrsService", "stopUser entered");
-                    abstractSemHwrsServiceImpl.mPrecondManager.stopUser();
-                }
-                abstractSemHwrsServiceImpl.mCurrentUserId = userHandle2.semGetIdentifier();
-                abstractSemHwrsServiceImpl.setCurrentUserHandle(userHandle2);
-                abstractSemHwrsServiceImpl.mPrecondManager.startUser(userHandle2);
-                Log.d("[HWRS_SYS]SemHwrsService", "startUser entered");
-            }
-        };
+        Runnable runnable =
+                new Runnable() { // from class:
+                                 // com.samsung.android.server.hwrs.AbstractSemHwrsServiceImpl$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        AbstractSemHwrsServiceImpl abstractSemHwrsServiceImpl =
+                                AbstractSemHwrsServiceImpl.this;
+                        UserHandle userHandle2 = userHandle;
+                        if (abstractSemHwrsServiceImpl.mCurrentUserId != -10000) {
+                            Log.d("[HWRS_SYS]SemHwrsService", "stopUser entered");
+                            abstractSemHwrsServiceImpl.mPrecondManager.stopUser();
+                        }
+                        abstractSemHwrsServiceImpl.mCurrentUserId = userHandle2.semGetIdentifier();
+                        abstractSemHwrsServiceImpl.setCurrentUserHandle(userHandle2);
+                        abstractSemHwrsServiceImpl.mPrecondManager.startUser(userHandle2);
+                        Log.d("[HWRS_SYS]SemHwrsService", "startUser entered");
+                    }
+                };
         if (Looper.getMainLooper().equals(Looper.myLooper())) {
             runnable.run();
         } else {
@@ -80,7 +89,9 @@ public final class SemHwrsService extends SystemService {
         semHwrsServiceImpl.getClass();
         int semGetIdentifier = userHandle.semGetIdentifier();
         boolean isManagedProfile = semHwrsServiceImpl.mUserManager.isManagedProfile();
-        Log.i("[HWRS_SYS]SemHwrsService", "onUserUnlocking - " + semGetIdentifier + ", " + isManagedProfile);
+        Log.i(
+                "[HWRS_SYS]SemHwrsService",
+                "onUserUnlocking - " + semGetIdentifier + ", " + isManagedProfile);
         if (semGetIdentifier != ActivityManager.semGetCurrentUser() || isManagedProfile) {
             return;
         }

@@ -18,8 +18,7 @@ public @interface RadioAccessFamily {
     public static final int IWLAN = 262144;
     public static final int LTE = 16384;
 
-    @Deprecated
-    public static final int LTE_CA = 524288;
+    @Deprecated public static final int LTE_CA = 524288;
     public static final int NR = 1048576;
     public static final int ONE_X_RTT = 64;
     public static final int TD_SCDMA = 131072;

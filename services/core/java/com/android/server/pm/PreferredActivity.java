@@ -1,6 +1,7 @@
 package com.android.server.pm;
 
 import android.content.ComponentName;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.server.utils.SnapshotCache;
 
@@ -15,7 +16,8 @@ public final class PreferredActivity extends WatchedIntentFilter {
     public final class AnonymousClass1 extends SnapshotCache {
         @Override // com.android.server.utils.SnapshotCache
         public final Object createSnapshot() {
-            PreferredActivity preferredActivity = new PreferredActivity((PreferredActivity) this.mSource);
+            PreferredActivity preferredActivity =
+                    new PreferredActivity((PreferredActivity) this.mSource);
             preferredActivity.seal();
             return preferredActivity;
         }
@@ -32,7 +34,12 @@ public final class PreferredActivity extends WatchedIntentFilter {
         this.mSnapshot = new SnapshotCache.Auto();
     }
 
-    public PreferredActivity(WatchedIntentFilter watchedIntentFilter, int i, ComponentName[] componentNameArr, ComponentName componentName, boolean z) {
+    public PreferredActivity(
+            WatchedIntentFilter watchedIntentFilter,
+            int i,
+            ComponentName[] componentNameArr,
+            ComponentName componentName,
+            boolean z) {
         super(watchedIntentFilter.mFilter);
         this.mPref = new PreferredComponent(this, i, componentNameArr, componentName, z);
         this.mSnapshot = new AnonymousClass1(this, this, null);
@@ -49,6 +56,10 @@ public final class PreferredActivity extends WatchedIntentFilter {
     }
 
     public final String toString() {
-        return "PreferredActivity{0x" + Integer.toHexString(System.identityHashCode(this)) + " " + this.mPref.mComponent.flattenToShortString() + "}";
+        return "PreferredActivity{0x"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + this.mPref.mComponent.flattenToShortString()
+                + "}";
     }
 }

@@ -2,13 +2,16 @@ package com.android.server.locksettings;
 
 import android.app.ActivityManagerNative;
 import android.os.RemoteException;
+
 import com.android.server.DssController$$ExternalSyntheticThrowCCEIfNotNull0;
 import com.android.server.knox.dar.DarManagerService;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class LockSettingsService$Lifecycle$$ExternalSyntheticLambda0 implements Consumer {
+public final /* synthetic */ class LockSettingsService$Lifecycle$$ExternalSyntheticLambda0
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
 
     public /* synthetic */ LockSettingsService$Lifecycle$$ExternalSyntheticLambda0(int i) {
@@ -22,7 +25,9 @@ public final /* synthetic */ class LockSettingsService$Lifecycle$$ExternalSynthe
                 DarManagerService darManagerService = (DarManagerService) obj;
                 darManagerService.getClass();
                 try {
-                    ActivityManagerNative.getDefault().registerUserSwitchObserver(darManagerService.mUserSwitchObserver, "DarManagerService");
+                    ActivityManagerNative.getDefault()
+                            .registerUserSwitchObserver(
+                                    darManagerService.mUserSwitchObserver, "DarManagerService");
                     return;
                 } catch (RemoteException e) {
                     e.printStackTrace();

@@ -16,9 +16,7 @@ public interface SemFingerprintViewListener {
 
     void onStopped();
 
-    default void onAuthenticationSucceeded() {
-    }
+    default void onAuthenticationSucceeded() {}
 
-    default void onEvent(int event) {
-    }
+    default void onEvent(int event) {}
 }

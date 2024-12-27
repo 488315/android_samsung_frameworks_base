@@ -13,12 +13,18 @@ final class StructuralMessageInfo implements MessageInfo {
     private final boolean messageSetWireFormat;
     private final ProtoSyntax syntax;
 
-    StructuralMessageInfo(ProtoSyntax syntax, boolean messageSetWireFormat, int[] checkInitialized, FieldInfo[] fields, Object defaultInstance) {
+    StructuralMessageInfo(
+            ProtoSyntax syntax,
+            boolean messageSetWireFormat,
+            int[] checkInitialized,
+            FieldInfo[] fields,
+            Object defaultInstance) {
         this.syntax = syntax;
         this.messageSetWireFormat = messageSetWireFormat;
         this.checkInitialized = checkInitialized;
         this.fields = fields;
-        this.defaultInstance = (MessageLite) Internal.checkNotNull(defaultInstance, "defaultInstance");
+        this.defaultInstance =
+                (MessageLite) Internal.checkNotNull(defaultInstance, "defaultInstance");
     }
 
     @Override // com.android.framework.protobuf.MessageInfo
@@ -102,7 +108,12 @@ final class StructuralMessageInfo implements MessageInfo {
             }
             this.wasBuilt = true;
             Collections.sort(this.fields);
-            return new StructuralMessageInfo(this.syntax, this.messageSetWireFormat, this.checkInitialized, (FieldInfo[]) this.fields.toArray(new FieldInfo[0]), this.defaultInstance);
+            return new StructuralMessageInfo(
+                    this.syntax,
+                    this.messageSetWireFormat,
+                    this.checkInitialized,
+                    (FieldInfo[]) this.fields.toArray(new FieldInfo[0]),
+                    this.defaultInstance);
         }
     }
 }

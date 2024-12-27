@@ -3,6 +3,7 @@ package com.samsung.android.sume.core.controller;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.message.Event;
 import com.samsung.android.sume.core.message.Request;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,23 +23,33 @@ public interface MediaController<T> {
     void setOnEventListener(OnEventListener onEventListener);
 
     default T run(final MediaBuffer mediabuffer) {
-        return run(new ArrayList<MediaBuffer>() { // from class: com.samsung.android.sume.core.controller.MediaController.1
-            {
-                add(mediabuffer);
-            }
-        }, new ArrayList());
+        return run(
+                new ArrayList<
+                        MediaBuffer>() { // from class:
+                                         // com.samsung.android.sume.core.controller.MediaController.1
+                    {
+                        add(mediabuffer);
+                    }
+                },
+                new ArrayList());
     }
 
     default T run(final MediaBuffer inBuffer, final MediaBuffer outBuffer) {
-        return run(new ArrayList<MediaBuffer>() { // from class: com.samsung.android.sume.core.controller.MediaController.2
-            {
-                add(inBuffer);
-            }
-        }, new ArrayList<MediaBuffer>() { // from class: com.samsung.android.sume.core.controller.MediaController.3
-            {
-                add(outBuffer);
-            }
-        });
+        return run(
+                new ArrayList<
+                        MediaBuffer>() { // from class:
+                                         // com.samsung.android.sume.core.controller.MediaController.2
+                    {
+                        add(inBuffer);
+                    }
+                },
+                new ArrayList<
+                        MediaBuffer>() { // from class:
+                                         // com.samsung.android.sume.core.controller.MediaController.3
+                    {
+                        add(outBuffer);
+                    }
+                });
     }
 
     default T run(List<MediaBuffer> inBuffers) {

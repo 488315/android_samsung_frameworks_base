@@ -14,7 +14,8 @@ import android.view.MotionEvent;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class MotionEventInjector extends BaseEventStreamTransformation implements Handler.Callback {
+public final class MotionEventInjector extends BaseEventStreamTransformation
+        implements Handler.Callback {
     public static MotionEvent.PointerCoords[] sPointerCoords;
     public static MotionEvent.PointerProperties[] sPointerProps;
     public long mDownTime;
@@ -34,7 +35,8 @@ public final class MotionEventInjector extends BaseEventStreamTransformation imp
         this.mTrace = accessibilityTraceManager;
     }
 
-    public static int findPointByStrokeId(GestureDescription.TouchPoint[] touchPointArr, int i, int i2) {
+    public static int findPointByStrokeId(
+            GestureDescription.TouchPoint[] touchPointArr, int i, int i2) {
         for (int i3 = 0; i3 < i; i3++) {
             if (touchPointArr[i3].mStrokeId == i2) {
                 return i3;
@@ -49,7 +51,8 @@ public final class MotionEventInjector extends BaseEventStreamTransformation imp
             Boolean bool = Boolean.FALSE;
             if (((Boolean) sparseArray.get(4098, bool)).booleanValue()) {
                 long uptimeMillis = SystemClock.uptimeMillis();
-                MotionEvent obtainMotionEvent = obtainMotionEvent(uptimeMillis, uptimeMillis, 3, getLastTouchPoints(), 1);
+                MotionEvent obtainMotionEvent =
+                        obtainMotionEvent(uptimeMillis, uptimeMillis, 3, getLastTouchPoints(), 1);
                 sendMotionEventToNext(obtainMotionEvent, obtainMotionEvent, 1073872896);
                 this.mOpenGesturesInProgress.put(4098, bool);
             }
@@ -61,7 +64,10 @@ public final class MotionEventInjector extends BaseEventStreamTransformation imp
             this.mHandler.removeMessages(1);
             cancelAnyGestureInProgress();
             for (int size = this.mSequencesInProgress.size() - 1; size >= 0; size--) {
-                notifyService(this.mServiceInterfaceForCurrentGesture, this.mSequencesInProgress.get(size), false);
+                notifyService(
+                        this.mServiceInterfaceForCurrentGesture,
+                        this.mSequencesInProgress.get(size),
+                        false);
                 this.mSequencesInProgress.remove(size);
             }
         } else if (this.mNumLastTouchPoints != 0) {
@@ -91,9 +97,9 @@ public final class MotionEventInjector extends BaseEventStreamTransformation imp
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:62:0x013c, code lost:
-    
-        if (r5 == 0) goto L66;
-     */
+
+       if (r5 == 0) goto L66;
+    */
     @Override // android.os.Handler.Callback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -104,20 +110,28 @@ public final class MotionEventInjector extends BaseEventStreamTransformation imp
             Method dump skipped, instructions count: 872
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.MotionEventInjector.handleMessage(android.os.Message):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.MotionEventInjector.handleMessage(android.os.Message):boolean");
     }
 
-    public final void notifyService(IAccessibilityServiceClient iAccessibilityServiceClient, int i, boolean z) {
+    public final void notifyService(
+            IAccessibilityServiceClient iAccessibilityServiceClient, int i, boolean z) {
         try {
             iAccessibilityServiceClient.onPerformGestureResult(i, z);
         } catch (RemoteException e) {
-            Slog.e("MotionEventInjector", "Error sending motion event injection status to " + this.mServiceInterfaceForCurrentGesture, e);
+            Slog.e(
+                    "MotionEventInjector",
+                    "Error sending motion event injection status to "
+                            + this.mServiceInterfaceForCurrentGesture,
+                    e);
         } catch (NullPointerException unused) {
             Slog.e("MotionEventInjector", "Null pointer exception in notifyService");
         }
     }
 
-    public final MotionEvent obtainMotionEvent(long j, long j2, int i, GestureDescription.TouchPoint[] touchPointArr, int i2) {
+    public final MotionEvent obtainMotionEvent(
+            long j, long j2, int i, GestureDescription.TouchPoint[] touchPointArr, int i2) {
         MotionEvent.PointerCoords[] pointerCoordsArr = sPointerCoords;
         if (pointerCoordsArr == null || pointerCoordsArr.length < i2) {
             sPointerCoords = new MotionEvent.PointerCoords[i2];
@@ -159,7 +173,8 @@ public final class MotionEventInjector extends BaseEventStreamTransformation imp
             pointerCoords.x = touchPoint.mX;
             pointerCoords.y = touchPoint.mY;
         }
-        return MotionEvent.obtain(j, j2, i, i2, sPointerProps, sPointerCoords, 0, 0, 1.0f, 1.0f, -1, 0, 4098, 0);
+        return MotionEvent.obtain(
+                j, j2, i, i2, sPointerProps, sPointerCoords, 0, 0, 1.0f, 1.0f, -1, 0, 4098, 0);
     }
 
     @Override // com.android.server.accessibility.EventStreamTransformation
@@ -171,16 +186,23 @@ public final class MotionEventInjector extends BaseEventStreamTransformation imp
     @Override // com.android.server.accessibility.EventStreamTransformation
     public final void onMotionEvent(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
         if (this.mTrace.isA11yTracingEnabledForTypes(12288L)) {
-            this.mTrace.logTrace("MotionEventInjector.onMotionEvent", 12288L, "event=" + motionEvent + ";rawEvent=" + motionEvent2 + ";policyFlags=" + i);
+            this.mTrace.logTrace(
+                    "MotionEventInjector.onMotionEvent",
+                    12288L,
+                    "event=" + motionEvent + ";rawEvent=" + motionEvent2 + ";policyFlags=" + i);
         }
-        if (motionEvent.isFromSource(8194) && motionEvent.getActionMasked() == 7 && ((Boolean) this.mOpenGesturesInProgress.get(4098, Boolean.FALSE)).booleanValue()) {
+        if (motionEvent.isFromSource(8194)
+                && motionEvent.getActionMasked() == 7
+                && ((Boolean) this.mOpenGesturesInProgress.get(4098, Boolean.FALSE))
+                        .booleanValue()) {
             return;
         }
         cancelAnyPendingInjectedEvents();
         sendMotionEventToNext(motionEvent, motionEvent2, i | 131072);
     }
 
-    public final void sendMotionEventToNext(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
+    public final void sendMotionEventToNext(
+            MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
         if (this.mNext != null) {
             super.onMotionEvent(motionEvent, motionEvent2, i);
             if (motionEvent.getActionMasked() == 0) {

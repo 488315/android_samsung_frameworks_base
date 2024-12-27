@@ -5,7 +5,9 @@ import android.os.vibrator.RampSegment;
 import android.os.vibrator.StepSegment;
 import android.os.vibrator.VibrationEffectSegment;
 import android.util.MathUtils;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +22,11 @@ public final class RampToStepAdapter implements VibrationSegmentsAdapter {
     }
 
     public static float fillEmptyFrequency(VibratorInfo vibratorInfo, float f) {
-        return Float.isNaN(vibratorInfo.getResonantFrequencyHz()) ? FullScreenMagnificationGestureHandler.MAX_SCALE : f == FullScreenMagnificationGestureHandler.MAX_SCALE ? vibratorInfo.getResonantFrequencyHz() : f;
+        return Float.isNaN(vibratorInfo.getResonantFrequencyHz())
+                ? FullScreenMagnificationGestureHandler.MAX_SCALE
+                : f == FullScreenMagnificationGestureHandler.MAX_SCALE
+                        ? vibratorInfo.getResonantFrequencyHz()
+                        : f;
     }
 
     @Override // com.android.server.vibrator.VibrationSegmentsAdapter
@@ -40,9 +46,15 @@ public final class RampToStepAdapter implements VibrationSegmentsAdapter {
             RampSegment rampSegment = (VibrationEffectSegment) arrayList.get(i5);
             if (rampSegment instanceof RampSegment) {
                 RampSegment rampSegment2 = rampSegment;
-                if (Float.compare(rampSegment2.getStartAmplitude(), rampSegment2.getEndAmplitude()) == 0) {
+                if (Float.compare(rampSegment2.getStartAmplitude(), rampSegment2.getEndAmplitude())
+                        == 0) {
                     StepSegment[] stepSegmentArr = new StepSegment[1];
-                    stepSegmentArr[i4] = new StepSegment(rampSegment2.getStartAmplitude(), fillEmptyFrequency(vibratorInfo, rampSegment2.getStartFrequencyHz()), (int) rampSegment2.getDuration());
+                    stepSegmentArr[i4] =
+                            new StepSegment(
+                                    rampSegment2.getStartAmplitude(),
+                                    fillEmptyFrequency(
+                                            vibratorInfo, rampSegment2.getStartFrequencyHz()),
+                                    (int) rampSegment2.getDuration());
                     list2 = Arrays.asList(stepSegmentArr);
                 } else {
                     ArrayList arrayList2 = new ArrayList();
@@ -56,11 +68,30 @@ public final class RampToStepAdapter implements VibrationSegmentsAdapter {
                             break;
                         }
                         float f = i9 / i8;
-                        arrayList2.add(new StepSegment(MathUtils.lerp(rampSegment2.getStartAmplitude(), rampSegment2.getEndAmplitude(), f), MathUtils.lerp(fillEmptyFrequency(vibratorInfo, rampSegment2.getStartFrequencyHz()), fillEmptyFrequency(vibratorInfo, rampSegment2.getEndFrequencyHz()), f), i7));
+                        arrayList2.add(
+                                new StepSegment(
+                                        MathUtils.lerp(
+                                                rampSegment2.getStartAmplitude(),
+                                                rampSegment2.getEndAmplitude(),
+                                                f),
+                                        MathUtils.lerp(
+                                                fillEmptyFrequency(
+                                                        vibratorInfo,
+                                                        rampSegment2.getStartFrequencyHz()),
+                                                fillEmptyFrequency(
+                                                        vibratorInfo,
+                                                        rampSegment2.getEndFrequencyHz()),
+                                                f),
+                                        i7));
                         i9++;
                         i8 = i8;
                     }
-                    arrayList2.add(new StepSegment(rampSegment2.getEndAmplitude(), fillEmptyFrequency(vibratorInfo, rampSegment2.getEndFrequencyHz()), ((int) rampSegment2.getDuration()) - (i7 * i2)));
+                    arrayList2.add(
+                            new StepSegment(
+                                    rampSegment2.getEndAmplitude(),
+                                    fillEmptyFrequency(
+                                            vibratorInfo, rampSegment2.getEndFrequencyHz()),
+                                    ((int) rampSegment2.getDuration()) - (i7 * i2)));
                     list2 = arrayList2;
                 }
                 arrayList.remove(i5);

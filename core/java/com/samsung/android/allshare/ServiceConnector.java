@@ -14,7 +14,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import com.samsung.android.allshare.IAllShareConnector;
+
 import com.samsung.android.allshare.extension.SECDownloader;
 import com.samsung.android.allshare.media.Const;
 import com.samsung.android.allshare.media.MediaServiceProvider;
@@ -22,6 +22,7 @@ import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor;
 import com.sec.android.allshare.iface.CVMessage;
 import com.sec.android.allshare.iface.ISubscriber;
+
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -53,8 +54,7 @@ public class ServiceConnector {
         UNKNOWN
     }
 
-    ServiceConnector() {
-    }
+    ServiceConnector() {}
 
     static Context getContext() {
         Context ctx;
@@ -64,60 +64,76 @@ public class ServiceConnector {
         return ctx;
     }
 
-    public static ERROR createServiceProvider(final Context ctx, final IServiceConnectEventListener l) {
+    public static ERROR createServiceProvider(
+            final Context ctx, final IServiceConnectEventListener l) {
         DLog.v_api(TAG_CONNECTOR, "createServiceProvider(v1)");
         if (ctx == null || l == null) {
-            DLog.w_api(TAG_CONNECTOR, "Context or ServiceConnectEventListener is null : " + ctx + " || " + l);
+            DLog.w_api(
+                    TAG_CONNECTOR,
+                    "Context or ServiceConnectEventListener is null : " + ctx + " || " + l);
             return ERROR.INVALID_ARGUMENT;
         }
         DLog.setAPIVersionTag();
         mContextRef = new WeakReference<>(ctx);
         final AllShareConnector connector = new AllShareConnector(ctx, null);
-        Handler.Callback callback = new Handler.Callback() { // from class: com.samsung.android.allshare.ServiceConnector.1
-            private IServiceConnectEventListener mListener;
-            private ServiceProviderImpl mServiceProvider;
+        Handler.Callback callback =
+                new Handler
+                        .Callback() { // from class: com.samsung.android.allshare.ServiceConnector.1
+                    private IServiceConnectEventListener mListener;
+                    private ServiceProviderImpl mServiceProvider;
 
-            {
-                this.mListener = IServiceConnectEventListener.this;
-                this.mServiceProvider = new ServiceProviderImpl(ctx, connector);
-            }
+                    {
+                        this.mListener = IServiceConnectEventListener.this;
+                        this.mServiceProvider = new ServiceProviderImpl(ctx, connector);
+                    }
 
-            @Override // android.os.Handler.Callback
-            public boolean handleMessage(Message msg) {
-                if (msg.obj == null || !(msg.obj instanceof IAllShareConnector.AllShareServiceState)) {
-                    return false;
-                }
-                IAllShareConnector.AllShareServiceState state = (IAllShareConnector.AllShareServiceState) msg.obj;
-                switch (AnonymousClass3.$SwitchMap$com$samsung$android$allshare$IAllShareConnector$AllShareServiceState[state.ordinal()]) {
-                    case 1:
-                        this.mServiceProvider.mServiceState = ServiceState.ENABLED;
-                        try {
-                            this.mListener.onCreated(this.mServiceProvider, ServiceState.ENABLED);
-                            return true;
-                        } catch (Error e) {
-                            DLog.w_api(ServiceConnector.TAG_CONNECTOR, "handleMessage Error", e);
-                            return true;
-                        } catch (Exception e2) {
-                            DLog.w_api(ServiceConnector.TAG_CONNECTOR, "handleMessage Exception", e2);
-                            return true;
+                    @Override // android.os.Handler.Callback
+                    public boolean handleMessage(Message msg) {
+                        if (msg.obj == null
+                                || !(msg.obj instanceof IAllShareConnector.AllShareServiceState)) {
+                            return false;
                         }
-                    case 2:
-                        this.mServiceProvider.mServiceState = ServiceState.DISABLED;
-                        try {
-                            this.mListener.onDeleted(this.mServiceProvider);
-                            return true;
-                        } catch (Error err) {
-                            DLog.w_api(ServiceConnector.TAG_CONNECTOR, "", err);
-                            return true;
-                        } catch (Exception e3) {
-                            DLog.w_api(ServiceConnector.TAG_CONNECTOR, "", e3);
-                            return true;
+                        IAllShareConnector.AllShareServiceState state =
+                                (IAllShareConnector.AllShareServiceState) msg.obj;
+                        switch (AnonymousClass3
+                                .$SwitchMap$com$samsung$android$allshare$IAllShareConnector$AllShareServiceState[
+                                state.ordinal()]) {
+                            case 1:
+                                this.mServiceProvider.mServiceState = ServiceState.ENABLED;
+                                try {
+                                    this.mListener.onCreated(
+                                            this.mServiceProvider, ServiceState.ENABLED);
+                                    return true;
+                                } catch (Error e) {
+                                    DLog.w_api(
+                                            ServiceConnector.TAG_CONNECTOR,
+                                            "handleMessage Error",
+                                            e);
+                                    return true;
+                                } catch (Exception e2) {
+                                    DLog.w_api(
+                                            ServiceConnector.TAG_CONNECTOR,
+                                            "handleMessage Exception",
+                                            e2);
+                                    return true;
+                                }
+                            case 2:
+                                this.mServiceProvider.mServiceState = ServiceState.DISABLED;
+                                try {
+                                    this.mListener.onDeleted(this.mServiceProvider);
+                                    return true;
+                                } catch (Error err) {
+                                    DLog.w_api(ServiceConnector.TAG_CONNECTOR, "", err);
+                                    return true;
+                                } catch (Exception e3) {
+                                    DLog.w_api(ServiceConnector.TAG_CONNECTOR, "", e3);
+                                    return true;
+                                }
+                            default:
+                                return true;
                         }
-                    default:
-                        return true;
-                }
-            }
-        };
+                    }
+                };
         connector.setCallback(callback);
         connector.connect();
         return ERROR.SUCCESS;
@@ -125,86 +141,121 @@ public class ServiceConnector {
 
     /* renamed from: com.samsung.android.allshare.ServiceConnector$3, reason: invalid class name */
     static /* synthetic */ class AnonymousClass3 {
-        static final /* synthetic */ int[] $SwitchMap$com$samsung$android$allshare$IAllShareConnector$AllShareServiceState = new int[IAllShareConnector.AllShareServiceState.values().length];
+        static final /* synthetic */ int[]
+                $SwitchMap$com$samsung$android$allshare$IAllShareConnector$AllShareServiceState =
+                        new int[IAllShareConnector.AllShareServiceState.values().length];
 
         static {
             try {
-                $SwitchMap$com$samsung$android$allshare$IAllShareConnector$AllShareServiceState[IAllShareConnector.AllShareServiceState.ALLSHARE_SERVICE_CONNECTED.ordinal()] = 1;
+                $SwitchMap$com$samsung$android$allshare$IAllShareConnector$AllShareServiceState[
+                                IAllShareConnector.AllShareServiceState.ALLSHARE_SERVICE_CONNECTED
+                                        .ordinal()] =
+                        1;
             } catch (NoSuchFieldError e) {
             }
             try {
-                $SwitchMap$com$samsung$android$allshare$IAllShareConnector$AllShareServiceState[IAllShareConnector.AllShareServiceState.ALLSHARE_SERVICE_DISCONNECTED.ordinal()] = 2;
+                $SwitchMap$com$samsung$android$allshare$IAllShareConnector$AllShareServiceState[
+                                IAllShareConnector.AllShareServiceState
+                                        .ALLSHARE_SERVICE_DISCONNECTED
+                                        .ordinal()] =
+                        2;
             } catch (NoSuchFieldError e2) {
             }
         }
     }
 
-    public static ERROR createServiceProvider(final Context ctx, final IServiceConnectEventListener l, final String serviceType) {
+    public static ERROR createServiceProvider(
+            final Context ctx, final IServiceConnectEventListener l, final String serviceType) {
         DLog.v_api(TAG_CONNECTOR, "createServiceProvider of " + serviceType);
         if (ctx == null || l == null) {
-            DLog.w_api(TAG_CONNECTOR, "Context or ServiceConnectEventListener is null : " + ctx + " || " + l);
+            DLog.w_api(
+                    TAG_CONNECTOR,
+                    "Context or ServiceConnectEventListener is null : " + ctx + " || " + l);
             return ERROR.INVALID_ARGUMENT;
         }
         SemFloatingFeature floatingFeature = SemFloatingFeature.getInstance();
         if (floatingFeature != null) {
-            DLog.i_api(TAG_CONNECTOR, "ALLSHARE_CONFIG : " + floatingFeature.getString("SEC_FLOATING_FEATURE_ALLSHARE_CONFIG_VERSION"));
+            DLog.i_api(
+                    TAG_CONNECTOR,
+                    "ALLSHARE_CONFIG : "
+                            + floatingFeature.getString(
+                                    "SEC_FLOATING_FEATURE_ALLSHARE_CONFIG_VERSION"));
         }
         DLog.setAPIVersionTag();
         mContextRef = new WeakReference<>(ctx);
         final AllShareConnector connector = new AllShareConnector(ctx, null);
-        Handler.Callback callback = new Handler.Callback() { // from class: com.samsung.android.allshare.ServiceConnector.2
-            private IServiceConnectEventListener mListener;
-            private ServiceProvider mServiceProvider;
+        Handler.Callback callback =
+                new Handler
+                        .Callback() { // from class: com.samsung.android.allshare.ServiceConnector.2
+                    private IServiceConnectEventListener mListener;
+                    private ServiceProvider mServiceProvider;
 
-            {
-                this.mListener = IServiceConnectEventListener.this;
-                this.mServiceProvider = createServiceProvierImpl(ctx, connector, serviceType);
-            }
+                    {
+                        this.mListener = IServiceConnectEventListener.this;
+                        this.mServiceProvider =
+                                createServiceProvierImpl(ctx, connector, serviceType);
+                    }
 
-            @Override // android.os.Handler.Callback
-            public boolean handleMessage(Message msg) {
-                if (msg.obj == null || !(msg.obj instanceof IAllShareConnector.AllShareServiceState)) {
-                    return false;
-                }
-                IAllShareConnector.AllShareServiceState state = (IAllShareConnector.AllShareServiceState) msg.obj;
-                switch (AnonymousClass3.$SwitchMap$com$samsung$android$allshare$IAllShareConnector$AllShareServiceState[state.ordinal()]) {
-                    case 1:
-                        ((IServiceStateSetter) this.mServiceProvider).setServiceState(ServiceState.ENABLED);
-                        try {
-                            this.mListener.onCreated(this.mServiceProvider, ServiceState.ENABLED);
-                            return true;
-                        } catch (Error e) {
-                            DLog.w_api(ServiceConnector.TAG_CONNECTOR, "handleMessage Error", e);
-                            return true;
-                        } catch (Exception e2) {
-                            DLog.w_api(ServiceConnector.TAG_CONNECTOR, "handleMessage Exception", e2);
-                            return true;
+                    @Override // android.os.Handler.Callback
+                    public boolean handleMessage(Message msg) {
+                        if (msg.obj == null
+                                || !(msg.obj instanceof IAllShareConnector.AllShareServiceState)) {
+                            return false;
                         }
-                    case 2:
-                        ((IServiceStateSetter) this.mServiceProvider).setServiceState(ServiceState.DISABLED);
-                        try {
-                            this.mListener.onDeleted(this.mServiceProvider);
-                            return true;
-                        } catch (Error err) {
-                            DLog.w_api(ServiceConnector.TAG_CONNECTOR, "", err);
-                            return true;
-                        } catch (Exception e3) {
-                            DLog.w_api(ServiceConnector.TAG_CONNECTOR, "", e3);
-                            return true;
+                        IAllShareConnector.AllShareServiceState state =
+                                (IAllShareConnector.AllShareServiceState) msg.obj;
+                        switch (AnonymousClass3
+                                .$SwitchMap$com$samsung$android$allshare$IAllShareConnector$AllShareServiceState[
+                                state.ordinal()]) {
+                            case 1:
+                                ((IServiceStateSetter) this.mServiceProvider)
+                                        .setServiceState(ServiceState.ENABLED);
+                                try {
+                                    this.mListener.onCreated(
+                                            this.mServiceProvider, ServiceState.ENABLED);
+                                    return true;
+                                } catch (Error e) {
+                                    DLog.w_api(
+                                            ServiceConnector.TAG_CONNECTOR,
+                                            "handleMessage Error",
+                                            e);
+                                    return true;
+                                } catch (Exception e2) {
+                                    DLog.w_api(
+                                            ServiceConnector.TAG_CONNECTOR,
+                                            "handleMessage Exception",
+                                            e2);
+                                    return true;
+                                }
+                            case 2:
+                                ((IServiceStateSetter) this.mServiceProvider)
+                                        .setServiceState(ServiceState.DISABLED);
+                                try {
+                                    this.mListener.onDeleted(this.mServiceProvider);
+                                    return true;
+                                } catch (Error err) {
+                                    DLog.w_api(ServiceConnector.TAG_CONNECTOR, "", err);
+                                    return true;
+                                } catch (Exception e3) {
+                                    DLog.w_api(ServiceConnector.TAG_CONNECTOR, "", e3);
+                                    return true;
+                                }
+                            default:
+                                return true;
                         }
-                    default:
-                        return true;
-                }
-            }
+                    }
 
-            private ServiceProvider createServiceProvierImpl(Context ctx2, AllShareConnector connector2, String serviceType2) {
-                if (serviceType2 != null && serviceType2.equals(ServiceProvider.SERVICE_MEDIA)) {
-                    connector2.setProfileConstData(new ProfileConstData(Const.SERVICE_PACKAGE));
-                    return new MediaServiceProviderImpl(ctx2, connector2);
-                }
-                return new ServiceProviderImpl(ctx2, connector2);
-            }
-        };
+                    private ServiceProvider createServiceProvierImpl(
+                            Context ctx2, AllShareConnector connector2, String serviceType2) {
+                        if (serviceType2 != null
+                                && serviceType2.equals(ServiceProvider.SERVICE_MEDIA)) {
+                            connector2.setProfileConstData(
+                                    new ProfileConstData(Const.SERVICE_PACKAGE));
+                            return new MediaServiceProviderImpl(ctx2, connector2);
+                        }
+                        return new ServiceProviderImpl(ctx2, connector2);
+                    }
+                };
         connector.setCallback(callback);
         connector.connect();
         return ERROR.SUCCESS;
@@ -216,7 +267,8 @@ public class ServiceConnector {
             DLog.w_api(TAG_CONNECTOR, "deleteServiceProvider : ServiceProvider is null");
             return;
         }
-        AllShareConnector connector = ((IServiceConnectorGetter) serviceProvider).getAllShareConnector();
+        AllShareConnector connector =
+                ((IServiceConnectorGetter) serviceProvider).getAllShareConnector();
         connector.unsubscribeAllEvents();
         connector.destroyInstance();
     }
@@ -229,7 +281,8 @@ public class ServiceConnector {
         return ctx.getMainLooper();
     }
 
-    private static class ServiceProviderImpl extends ServiceProvider implements IServiceStateSetter, IServiceConnectorGetter {
+    private static class ServiceProviderImpl extends ServiceProvider
+            implements IServiceStateSetter, IServiceConnectorGetter {
         AllShareConnector mConnector;
         DeviceFinderImpl mDeviceFinder;
         SECDownloader mDownloader;
@@ -262,7 +315,9 @@ public class ServiceConnector {
         @Override // com.samsung.android.allshare.ServiceProvider
         public String getServiceVersion() {
             if (this.mConnector == null) {
-                DLog.w_api("ServiceProviderImpl", "Connection FAIL: AllShare Service Connector does not exist");
+                DLog.w_api(
+                        "ServiceProviderImpl",
+                        "Connection FAIL: AllShare Service Connector does not exist");
                 return "";
             }
             return this.mConnector.getServiceVersion();
@@ -279,7 +334,8 @@ public class ServiceConnector {
         }
     }
 
-    private static class MediaServiceProviderImpl extends MediaServiceProvider implements IServiceStateSetter, IServiceConnectorGetter {
+    private static class MediaServiceProviderImpl extends MediaServiceProvider
+            implements IServiceStateSetter, IServiceConnectorGetter {
         SECDownloader mDownloader;
         MediaDeviceFinderImpl mMediaDeviceFinder;
         AllShareConnector mMediaServiceConnector;
@@ -299,7 +355,8 @@ public class ServiceConnector {
             return this.mDownloader;
         }
 
-        @Override // com.samsung.android.allshare.media.MediaServiceProvider, com.samsung.android.allshare.ServiceProvider
+        @Override // com.samsung.android.allshare.media.MediaServiceProvider,
+                  // com.samsung.android.allshare.ServiceProvider
         public MediaDeviceFinderImpl getDeviceFinder() {
             return this.mMediaDeviceFinder;
         }
@@ -312,7 +369,9 @@ public class ServiceConnector {
         @Override // com.samsung.android.allshare.ServiceProvider
         public String getServiceVersion() {
             if (this.mMediaServiceConnector == null) {
-                DLog.w_api("MediaServiceProviderImpl", "Connection FAIL: AllShare Media Service Connector does not exist");
+                DLog.w_api(
+                        "MediaServiceProviderImpl",
+                        "Connection FAIL: AllShare Media Service Connector does not exist");
                 return "";
             }
             return this.mMediaServiceConnector.getServiceVersion();
@@ -351,7 +410,8 @@ public class ServiceConnector {
             this.START_SERVICE = com.sec.android.allshare.iface.Const.START_SERVICE;
             this.START_MESSAGE = com.sec.android.allshare.iface.Const.START_MESSAGE;
             this.STOP_MESSAGE = com.sec.android.allshare.iface.Const.STOP_MESSAGE;
-            this.SERVICE_MANAGER_NAME_VERSION_1 = com.sec.android.allshare.iface.Const.SERVICE_MANAGER_NAME_VERSION_1;
+            this.SERVICE_MANAGER_NAME_VERSION_1 =
+                    com.sec.android.allshare.iface.Const.SERVICE_MANAGER_NAME_VERSION_1;
             this.SUBSCRIBER_FIELD = "com.sec.android.allshare.iface.subscriber";
             this.SUBSCRIPTION_MESSAGE = com.sec.android.allshare.iface.Const.SUBSCRIPTION_MESSAGE;
             this.SET_NAME_MESSAGE = com.sec.android.allshare.iface.Const.SET_NAME_MESSAGE;
@@ -364,7 +424,8 @@ public class ServiceConnector {
             this.START_SERVICE = com.sec.android.allshare.iface.Const.START_SERVICE;
             this.START_MESSAGE = com.sec.android.allshare.iface.Const.START_MESSAGE;
             this.STOP_MESSAGE = com.sec.android.allshare.iface.Const.STOP_MESSAGE;
-            this.SERVICE_MANAGER_NAME_VERSION_1 = com.sec.android.allshare.iface.Const.SERVICE_MANAGER_NAME_VERSION_1;
+            this.SERVICE_MANAGER_NAME_VERSION_1 =
+                    com.sec.android.allshare.iface.Const.SERVICE_MANAGER_NAME_VERSION_1;
             this.SUBSCRIBER_FIELD = "com.sec.android.allshare.iface.subscriber";
             this.SUBSCRIPTION_MESSAGE = com.sec.android.allshare.iface.Const.SUBSCRIPTION_MESSAGE;
             this.SET_NAME_MESSAGE = com.sec.android.allshare.iface.Const.SET_NAME_MESSAGE;
@@ -396,42 +457,65 @@ public class ServiceConnector {
         private Handler.Callback mConnectionCallback = null;
         private final HashSet<EventHandler> mEventHandlerSet = new HashSet<>();
         private ComponentName mComponentName = null;
-        private ServiceConnection mAllShareConnection = new ServiceConnection() { // from class: com.samsung.android.allshare.ServiceConnector.AllShareConnector.1
-            @Override // android.content.ServiceConnection
-            public void onServiceConnected(ComponentName component, IBinder binder) {
-                DLog.i_api(AllShareConnector.TAG, "Subscriber onServiceConnected to " + AllShareConnector.this.mSubscriberTag);
-                AllShareConnector.this.mISubscriber = ISubscriber.Stub.asInterface(binder);
-                AllShareConnector.this.mComponentName = component;
-                AllShareConnector.this.onConnected();
-            }
+        private ServiceConnection mAllShareConnection =
+                new ServiceConnection() { // from class:
+                                          // com.samsung.android.allshare.ServiceConnector.AllShareConnector.1
+                    @Override // android.content.ServiceConnection
+                    public void onServiceConnected(ComponentName component, IBinder binder) {
+                        DLog.i_api(
+                                AllShareConnector.TAG,
+                                "Subscriber onServiceConnected to "
+                                        + AllShareConnector.this.mSubscriberTag);
+                        AllShareConnector.this.mISubscriber = ISubscriber.Stub.asInterface(binder);
+                        AllShareConnector.this.mComponentName = component;
+                        AllShareConnector.this.onConnected();
+                    }
 
-            @Override // android.content.ServiceConnection
-            public void onServiceDisconnected(ComponentName component) {
-                DLog.i_api(AllShareConnector.TAG, "Subscriber onServiceDisconnected from " + AllShareConnector.this.mSubscriberTag);
-                AllShareConnector.this.mISubscriber = null;
-                AllShareConnector.this.mComponentName = null;
-                AllShareConnector.this.onDisconnected();
-            }
-        };
-        private BroadcastReceiver mReceiver = new BroadcastReceiver() { // from class: com.samsung.android.allshare.ServiceConnector.AllShareConnector.2
-            @Override // android.content.BroadcastReceiver
-            public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-                if (action == null) {
-                    DLog.w_api(AllShareConnector.TAG, AllShareConnector.this.mSubscriberTag + " : intent.getAction() == null!");
-                    return;
-                }
-                if (action.equals(AllShareConnector.this.mConstData.START_MESSAGE)) {
-                    DLog.d_api(AllShareConnector.TAG, AllShareConnector.this.mSubscriberTag + " : onReceive AllShare Service Start message...^^");
-                    AllShareConnector.this.connect();
-                } else if (action.equals(AllShareConnector.this.mConstData.STOP_MESSAGE)) {
-                    DLog.d_api(AllShareConnector.TAG, AllShareConnector.this.mSubscriberTag + " : onReceive AllShare Service Stop message...^^");
-                    AllShareConnector.this.onDisconnected();
-                } else {
-                    DLog.w_api(AllShareConnector.TAG, AllShareConnector.this.mSubscriberTag + " : onReceive Unknown action - " + action);
-                }
-            }
-        };
+                    @Override // android.content.ServiceConnection
+                    public void onServiceDisconnected(ComponentName component) {
+                        DLog.i_api(
+                                AllShareConnector.TAG,
+                                "Subscriber onServiceDisconnected from "
+                                        + AllShareConnector.this.mSubscriberTag);
+                        AllShareConnector.this.mISubscriber = null;
+                        AllShareConnector.this.mComponentName = null;
+                        AllShareConnector.this.onDisconnected();
+                    }
+                };
+        private BroadcastReceiver mReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.samsung.android.allshare.ServiceConnector.AllShareConnector.2
+                    @Override // android.content.BroadcastReceiver
+                    public void onReceive(Context context, Intent intent) {
+                        String action = intent.getAction();
+                        if (action == null) {
+                            DLog.w_api(
+                                    AllShareConnector.TAG,
+                                    AllShareConnector.this.mSubscriberTag
+                                            + " : intent.getAction() == null!");
+                            return;
+                        }
+                        if (action.equals(AllShareConnector.this.mConstData.START_MESSAGE)) {
+                            DLog.d_api(
+                                    AllShareConnector.TAG,
+                                    AllShareConnector.this.mSubscriberTag
+                                            + " : onReceive AllShare Service Start message...^^");
+                            AllShareConnector.this.connect();
+                        } else if (action.equals(AllShareConnector.this.mConstData.STOP_MESSAGE)) {
+                            DLog.d_api(
+                                    AllShareConnector.TAG,
+                                    AllShareConnector.this.mSubscriberTag
+                                            + " : onReceive AllShare Service Stop message...^^");
+                            AllShareConnector.this.onDisconnected();
+                        } else {
+                            DLog.w_api(
+                                    AllShareConnector.TAG,
+                                    AllShareConnector.this.mSubscriberTag
+                                            + " : onReceive Unknown action - "
+                                            + action);
+                        }
+                    }
+                };
 
         public AllShareConnector(Context context, String id) {
             this.mContextRef = null;
@@ -467,7 +551,10 @@ public class ServiceConnector {
             }
             this.mConnecting = true;
             if (isAllShareServiceConnected()) {
-                DLog.i_api(TAG, this.mSubscriberTag + " is Already connected to AllShare service framework");
+                DLog.i_api(
+                        TAG,
+                        this.mSubscriberTag
+                                + " is Already connected to AllShare service framework");
                 return;
             }
             if (startAllShareLauncher()) {
@@ -480,7 +567,9 @@ public class ServiceConnector {
             DLog.v_api(TAG, this.mSubscriberTag + " : bindAllShareService...");
             Context context = this.mContextRef.get();
             if (context == null) {
-                DLog.e_api(TAG, this.mSubscriberTag + " : bindAllShareService error - context is null");
+                DLog.e_api(
+                        TAG,
+                        this.mSubscriberTag + " : bindAllShareService error - context is null");
                 return false;
             }
             Intent bind_service = new Intent(this.mConstData.SUBSCRIPTION_MESSAGE);
@@ -492,7 +581,11 @@ public class ServiceConnector {
             if (!bindResult) {
                 startAllShareLauncher();
                 this.mConnecting = false;
-                DLog.e_api(TAG, this.mSubscriberTag + " : bindAllShareService FAIL - check if app use ApplicationContext or not");
+                DLog.e_api(
+                        TAG,
+                        this.mSubscriberTag
+                                + " : bindAllShareService FAIL - check if app use"
+                                + " ApplicationContext or not");
                 return false;
             }
             return true;
@@ -501,7 +594,9 @@ public class ServiceConnector {
         private void registerSvcCastReceiver() {
             Context context = this.mContextRef.get();
             if (context == null) {
-                DLog.w_api(TAG, this.mSubscriberTag + " registerSvcCastReceiver error - context is null");
+                DLog.w_api(
+                        TAG,
+                        this.mSubscriberTag + " registerSvcCastReceiver error - context is null");
                 return;
             }
             IntentFilter filter = new IntentFilter();
@@ -514,7 +609,10 @@ public class ServiceConnector {
             try {
                 Context context = this.mContextRef.get();
                 if (context == null) {
-                    DLog.w_api(TAG, this.mSubscriberTag + " unregisterSvcCastReceiver error - context is null");
+                    DLog.w_api(
+                            TAG,
+                            this.mSubscriberTag
+                                    + " unregisterSvcCastReceiver error - context is null");
                 } else {
                     context.unregisterReceiver(this.mReceiver);
                 }
@@ -530,7 +628,8 @@ public class ServiceConnector {
                 try {
                     Context context = this.mContextRef.get();
                     if (context == null) {
-                        DLog.w_api(TAG, this.mSubscriberTag + " disconnect error - context is null");
+                        DLog.w_api(
+                                TAG, this.mSubscriberTag + " disconnect error - context is null");
                     } else {
                         context.unbindService(this.mAllShareConnection);
                         if (isAllShareServiceConnected()) {
@@ -560,7 +659,8 @@ public class ServiceConnector {
         private void notifyAllShareEnable() {
             if (this.mConnectionCallback != null) {
                 Message msg = new Message();
-                IAllShareConnector.AllShareServiceState state = IAllShareConnector.AllShareServiceState.ALLSHARE_SERVICE_CONNECTED;
+                IAllShareConnector.AllShareServiceState state =
+                        IAllShareConnector.AllShareServiceState.ALLSHARE_SERVICE_CONNECTED;
                 msg.obj = state;
                 this.mConnectionCallback.handleMessage(msg);
             }
@@ -569,7 +669,8 @@ public class ServiceConnector {
         private void notifyAllShareDisable() {
             if (this.mConnectionCallback != null) {
                 Message msg = new Message();
-                IAllShareConnector.AllShareServiceState state = IAllShareConnector.AllShareServiceState.ALLSHARE_SERVICE_DISCONNECTED;
+                IAllShareConnector.AllShareServiceState state =
+                        IAllShareConnector.AllShareServiceState.ALLSHARE_SERVICE_DISCONNECTED;
                 msg.obj = state;
                 this.mConnectionCallback.handleMessage(msg);
             }
@@ -600,7 +701,9 @@ public class ServiceConnector {
         private boolean startAllShareLauncher() {
             Context context = this.mContextRef.get();
             if (context == null) {
-                DLog.w_api(TAG, this.mSubscriberTag + " startAllShareLauncher error - context is null");
+                DLog.w_api(
+                        TAG,
+                        this.mSubscriberTag + " startAllShareLauncher error - context is null");
                 return false;
             }
             Intent i = new Intent(this.mConstData.START_SERVICE);
@@ -609,12 +712,17 @@ public class ServiceConnector {
             }
             try {
                 if (context.startService(i) == null) {
-                    DLog.w_api(TAG, this.mSubscriberTag + " : AllShare Service is not installed yet...");
+                    DLog.w_api(
+                            TAG,
+                            this.mSubscriberTag + " : AllShare Service is not installed yet...");
                     return false;
                 }
                 return true;
             } catch (SecurityException e) {
-                DLog.w_api(TAG, this.mSubscriberTag + " startAllShareLauncher error...SecurityException ", e);
+                DLog.w_api(
+                        TAG,
+                        this.mSubscriberTag + " startAllShareLauncher error...SecurityException ",
+                        e);
                 return false;
             } catch (Exception e2) {
                 DLog.w_api(TAG, this.mSubscriberTag + " startAllShareLauncher exception ", e2);
@@ -646,12 +754,16 @@ public class ServiceConnector {
             cvm.setMessenger(new Messenger(handler));
             try {
                 if (!this.mISubscriber.requestCVAsync(this.mID, cvm)) {
-                    DLog.d_api(TAG, this.mSubscriberTag + " requestCVMAsync fail...Maybe Invalid Action Request");
+                    DLog.d_api(
+                            TAG,
+                            this.mSubscriberTag
+                                    + " requestCVMAsync fail...Maybe Invalid Action Request");
                     return -1L;
                 }
                 return req_id;
             } catch (RemoteException rex) {
-                DLog.w_api(TAG, this.mSubscriberTag + " requestCVMAsync error...RemoteException", rex);
+                DLog.w_api(
+                        TAG, this.mSubscriberTag + " requestCVMAsync error...RemoteException", rex);
                 return -1L;
             } catch (Exception ex) {
                 DLog.w_api(TAG, this.mSubscriberTag + " requestCVMAsync error...Exception", ex);
@@ -673,7 +785,8 @@ public class ServiceConnector {
                 return res;
             } catch (RemoteException rex) {
                 CVMessage res2 = new CVMessage();
-                DLog.w_api(TAG, this.mSubscriberTag + " requestCVMSync error...RemoteException", rex);
+                DLog.w_api(
+                        TAG, this.mSubscriberTag + " requestCVMSync error...RemoteException", rex);
                 return res2;
             } catch (Exception ex) {
                 DLog.w_api(TAG, this.mSubscriberTag + " requestCVMSync error...Exception", ex);
@@ -682,7 +795,8 @@ public class ServiceConnector {
         }
 
         @Override // com.samsung.android.allshare.IAllShareConnector
-        public boolean subscribeAllShareEvent(String event, Bundle bundle, AllShareEventHandler handler) {
+        public boolean subscribeAllShareEvent(
+                String event, Bundle bundle, AllShareEventHandler handler) {
             if (this.mISubscriber == null) {
                 return false;
             }
@@ -706,7 +820,8 @@ public class ServiceConnector {
         }
 
         @Override // com.samsung.android.allshare.IAllShareConnector
-        public void unsubscribeAllShareEvent(String event, Bundle bundle, AllShareEventHandler handler) {
+        public void unsubscribeAllShareEvent(
+                String event, Bundle bundle, AllShareEventHandler handler) {
             if (this.mISubscriber == null) {
                 return;
             }
@@ -776,7 +891,9 @@ public class ServiceConnector {
                     return false;
                 }
                 EventHandler obj = (EventHandler) o;
-                if (!obj.mEventId.equals(this.mEventId) || !obj.mBundle.equals(this.mBundle) || !obj.mHanlder.equals(this.mHanlder)) {
+                if (!obj.mEventId.equals(this.mEventId)
+                        || !obj.mBundle.equals(this.mBundle)
+                        || !obj.mHanlder.equals(this.mHanlder)) {
                     return false;
                 }
                 return true;
@@ -787,14 +904,16 @@ public class ServiceConnector {
             }
         }
 
-        private void addHandlerToHashSet(String event, Bundle bundle, AllShareEventHandler handler) {
+        private void addHandlerToHashSet(
+                String event, Bundle bundle, AllShareEventHandler handler) {
             synchronized (this.mEventHandlerSet) {
                 EventHandler value = new EventHandler(event, bundle, handler);
                 this.mEventHandlerSet.add(value);
             }
         }
 
-        private void removeHandlerFromHashSet(String event, Bundle bundle, AllShareEventHandler handler) {
+        private void removeHandlerFromHashSet(
+                String event, Bundle bundle, AllShareEventHandler handler) {
             synchronized (this.mEventHandlerSet) {
                 EventHandler value = new EventHandler(event, bundle, handler);
                 this.mEventHandlerSet.remove(value);

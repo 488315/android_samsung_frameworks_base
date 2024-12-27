@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.GeneratedMessageLite;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +8,8 @@ import java.util.Map;
 public class ExtensionRegistryLite {
     static final String EXTENSION_CLASS_NAME = "com.android.framework.protobuf.Extension";
     private static volatile ExtensionRegistryLite emptyRegistry;
-    private final Map<ObjectIntPair, GeneratedMessageLite.GeneratedExtension<?, ?>> extensionsByNumber;
+    private final Map<ObjectIntPair, GeneratedMessageLite.GeneratedExtension<?, ?>>
+            extensionsByNumber;
     private static volatile boolean eagerlyParseMessageSets = false;
     private static boolean doFullRuntimeInheritanceCheck = true;
     static final ExtensionRegistryLite EMPTY_REGISTRY_LITE = new ExtensionRegistryLite(true);
@@ -17,8 +17,7 @@ public class ExtensionRegistryLite {
     private static class ExtensionClassHolder {
         static final Class<?> INSTANCE = resolveExtensionClass();
 
-        private ExtensionClassHolder() {
-        }
+        private ExtensionClassHolder() {}
 
         static Class<?> resolveExtensionClass() {
             try {
@@ -68,12 +67,19 @@ public class ExtensionRegistryLite {
         return new ExtensionRegistryLite(this);
     }
 
-    public <ContainingType extends MessageLite> GeneratedMessageLite.GeneratedExtension<ContainingType, ?> findLiteExtensionByNumber(ContainingType containingTypeDefaultInstance, int fieldNumber) {
-        return (GeneratedMessageLite.GeneratedExtension) this.extensionsByNumber.get(new ObjectIntPair(containingTypeDefaultInstance, fieldNumber));
+    public <ContainingType extends MessageLite>
+            GeneratedMessageLite.GeneratedExtension<ContainingType, ?> findLiteExtensionByNumber(
+                    ContainingType containingTypeDefaultInstance, int fieldNumber) {
+        return (GeneratedMessageLite.GeneratedExtension)
+                this.extensionsByNumber.get(
+                        new ObjectIntPair(containingTypeDefaultInstance, fieldNumber));
     }
 
     public final void add(GeneratedMessageLite.GeneratedExtension<?, ?> extension) {
-        this.extensionsByNumber.put(new ObjectIntPair(extension.getContainingTypeDefaultInstance(), extension.getNumber()), extension);
+        this.extensionsByNumber.put(
+                new ObjectIntPair(
+                        extension.getContainingTypeDefaultInstance(), extension.getNumber()),
+                extension);
     }
 
     public final void add(ExtensionLite<?, ?> extension) {
@@ -86,7 +92,8 @@ public class ExtensionRegistryLite {
         try {
             getClass().getMethod("add", ExtensionClassHolder.INSTANCE).invoke(this, extension);
         } catch (Exception e) {
-            throw new IllegalArgumentException(String.format("Could not invoke ExtensionRegistry#add for %s", extension), e);
+            throw new IllegalArgumentException(
+                    String.format("Could not invoke ExtensionRegistry#add for %s", extension), e);
         }
     }
 

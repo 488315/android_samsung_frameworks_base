@@ -8,7 +8,9 @@ import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.IFingerprintServiceReceiver;
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import com.android.server.biometrics.sensors.face.SemFaceUtils;
+
 import com.samsung.android.bio.fingerprint.ISemFingerprintRequestCallback;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -37,14 +39,16 @@ public final class ClientMonitorCallbackConverter {
         this.mFingerprintServiceReceiver = iFingerprintServiceReceiver;
     }
 
-    public ClientMonitorCallbackConverter(ISemFingerprintRequestCallback iSemFingerprintRequestCallback) {
+    public ClientMonitorCallbackConverter(
+            ISemFingerprintRequestCallback iSemFingerprintRequestCallback) {
         this.mFingerprintRequestReceiver = iSemFingerprintRequestCallback;
         this.mSensorReceiver = null;
         this.mFaceServiceReceiver = null;
         this.mFingerprintServiceReceiver = null;
     }
 
-    public final void onAuthenticationSucceeded(int i, BiometricAuthenticator.Identifier identifier, byte[] bArr, int i2, boolean z) {
+    public final void onAuthenticationSucceeded(
+            int i, BiometricAuthenticator.Identifier identifier, byte[] bArr, int i2, boolean z) {
         if (this.mSensorReceiver != null) {
             Bundle bundle = new Bundle();
             if (identifier != null) {
@@ -57,9 +61,11 @@ public final class ClientMonitorCallbackConverter {
             return;
         }
         if (this.mFaceServiceReceiver == null) {
-            IFingerprintServiceReceiver iFingerprintServiceReceiver = this.mFingerprintServiceReceiver;
+            IFingerprintServiceReceiver iFingerprintServiceReceiver =
+                    this.mFingerprintServiceReceiver;
             if (iFingerprintServiceReceiver != null) {
-                iFingerprintServiceReceiver.onAuthenticationSucceeded((Fingerprint) identifier, i2, z);
+                iFingerprintServiceReceiver.onAuthenticationSucceeded(
+                        (Fingerprint) identifier, i2, z);
                 return;
             }
             return;

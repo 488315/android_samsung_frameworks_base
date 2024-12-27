@@ -9,16 +9,14 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
-import com.android.internal.policy.IKeyguardDismissCallback;
-import com.android.internal.policy.IKeyguardDrawnCallback;
-import com.android.internal.policy.IKeyguardExitCallback;
-import com.android.internal.policy.IKeyguardStateCallback;
 
 /* loaded from: classes5.dex */
 public interface IKeyguardService extends IInterface {
-    void addStateMonitorCallback(IKeyguardStateCallback iKeyguardStateCallback) throws RemoteException;
+    void addStateMonitorCallback(IKeyguardStateCallback iKeyguardStateCallback)
+            throws RemoteException;
 
-    void dismiss(IKeyguardDismissCallback iKeyguardDismissCallback, CharSequence charSequence) throws RemoteException;
+    void dismiss(IKeyguardDismissCallback iKeyguardDismissCallback, CharSequence charSequence)
+            throws RemoteException;
 
     void dismissKeyguardToLaunch(Intent intent) throws RemoteException;
 
@@ -64,7 +62,8 @@ public interface IKeyguardService extends IInterface {
 
     void setOccluded(boolean z, boolean z2) throws RemoteException;
 
-    void setPendingIntentAfterUnlock(PendingIntent pendingIntent, Intent intent) throws RemoteException;
+    void setPendingIntentAfterUnlock(PendingIntent pendingIntent, Intent intent)
+            throws RemoteException;
 
     void setSwitchingUser(boolean z) throws RemoteException;
 
@@ -80,128 +79,103 @@ public interface IKeyguardService extends IInterface {
 
     public static class Default implements IKeyguardService {
         @Override // com.android.internal.policy.IKeyguardService
-        public void setOccluded(boolean isOccluded, boolean animate) throws RemoteException {
-        }
+        public void setOccluded(boolean isOccluded, boolean animate) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void addStateMonitorCallback(IKeyguardStateCallback callback) throws RemoteException {
-        }
+        public void addStateMonitorCallback(IKeyguardStateCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void verifyUnlock(IKeyguardExitCallback callback) throws RemoteException {
-        }
+        public void verifyUnlock(IKeyguardExitCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void dismiss(IKeyguardDismissCallback callback, CharSequence message) throws RemoteException {
-        }
+        public void dismiss(IKeyguardDismissCallback callback, CharSequence message)
+                throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onDreamingStarted() throws RemoteException {
-        }
+        public void onDreamingStarted() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onDreamingStopped() throws RemoteException {
-        }
+        public void onDreamingStopped() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onStartedGoingToSleep(int pmSleepReason) throws RemoteException {
-        }
+        public void onStartedGoingToSleep(int pmSleepReason) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onFinishedGoingToSleep(int pmSleepReason, boolean cameraGestureTriggered) throws RemoteException {
-        }
+        public void onFinishedGoingToSleep(int pmSleepReason, boolean cameraGestureTriggered)
+                throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onStartedWakingUp(int pmWakeReason, boolean cameraGestureTriggered) throws RemoteException {
-        }
+        public void onStartedWakingUp(int pmWakeReason, boolean cameraGestureTriggered)
+                throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onFinishedWakingUp() throws RemoteException {
-        }
+        public void onFinishedWakingUp() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onScreenTurningOn(IKeyguardDrawnCallback callback) throws RemoteException {
-        }
+        public void onScreenTurningOn(IKeyguardDrawnCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onScreenTurnedOn() throws RemoteException {
-        }
+        public void onScreenTurnedOn() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onScreenTurningOff() throws RemoteException {
-        }
+        public void onScreenTurningOff() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onScreenTurnedOff() throws RemoteException {
-        }
+        public void onScreenTurnedOff() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void setKeyguardEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setKeyguardEnabled(boolean enabled) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onSystemReady() throws RemoteException {
-        }
+        public void onSystemReady() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void doKeyguardTimeout(Bundle options) throws RemoteException {
-        }
+        public void doKeyguardTimeout(Bundle options) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void setSwitchingUser(boolean switching) throws RemoteException {
-        }
+        public void setSwitchingUser(boolean switching) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void setCurrentUser(int userId) throws RemoteException {
-        }
+        public void setCurrentUser(int userId) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onBootCompleted() throws RemoteException {
-        }
+        public void onBootCompleted() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void startKeyguardExitAnimation(long startTime, long fadeoutDuration) throws RemoteException {
-        }
+        public void startKeyguardExitAnimation(long startTime, long fadeoutDuration)
+                throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onShortPowerPressedGoHome() throws RemoteException {
-        }
+        public void onShortPowerPressedGoHome() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void dismissKeyguardToLaunch(Intent intentToLaunch) throws RemoteException {
-        }
+        public void dismissKeyguardToLaunch(Intent intentToLaunch) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onSystemKeyPressed(int keycode) throws RemoteException {
-        }
+        public void onSystemKeyPressed(int keycode) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void showDismissibleKeyguard() throws RemoteException {
-        }
+        public void showDismissibleKeyguard() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void setPendingIntentAfterUnlock(PendingIntent pendingIntent, Intent fillInIntent) throws RemoteException {
-        }
+        public void setPendingIntentAfterUnlock(PendingIntent pendingIntent, Intent fillInIntent)
+                throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void startFingerprintAuthentication() throws RemoteException {
-        }
+        public void startFingerprintAuthentication() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void onFinishedBootAnim() throws RemoteException {
-        }
+        public void onFinishedBootAnim() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void startedEarlyWakingUp(int reason) throws RemoteException {
-        }
+        public void startedEarlyWakingUp(int reason) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void setDexOccluded(boolean isOccluded) throws RemoteException {
-        }
+        public void setDexOccluded(boolean isOccluded) throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardService
-        public void setCoverOccluded(boolean isOccluded) throws RemoteException {
-        }
+        public void setCoverOccluded(boolean isOccluded) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -209,7 +183,7 @@ public interface IKeyguardService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyguardService {
+    public abstract static class Stub extends Binder implements IKeyguardService {
         public static final String DESCRIPTOR = "com.android.internal.policy.IKeyguardService";
         static final int TRANSACTION_addStateMonitorCallback = 2;
         static final int TRANSACTION_dismiss = 4;
@@ -338,7 +312,8 @@ public interface IKeyguardService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -354,18 +329,22 @@ public interface IKeyguardService extends IInterface {
                     setOccluded(_arg0, _arg1);
                     return true;
                 case 2:
-                    IKeyguardStateCallback _arg02 = IKeyguardStateCallback.Stub.asInterface(data.readStrongBinder());
+                    IKeyguardStateCallback _arg02 =
+                            IKeyguardStateCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addStateMonitorCallback(_arg02);
                     return true;
                 case 3:
-                    IKeyguardExitCallback _arg03 = IKeyguardExitCallback.Stub.asInterface(data.readStrongBinder());
+                    IKeyguardExitCallback _arg03 =
+                            IKeyguardExitCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     verifyUnlock(_arg03);
                     return true;
                 case 4:
-                    IKeyguardDismissCallback _arg04 = IKeyguardDismissCallback.Stub.asInterface(data.readStrongBinder());
-                    CharSequence _arg12 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    IKeyguardDismissCallback _arg04 =
+                            IKeyguardDismissCallback.Stub.asInterface(data.readStrongBinder());
+                    CharSequence _arg12 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     dismiss(_arg04, _arg12);
                     return true;
@@ -396,7 +375,8 @@ public interface IKeyguardService extends IInterface {
                     onFinishedWakingUp();
                     return true;
                 case 11:
-                    IKeyguardDrawnCallback _arg08 = IKeyguardDrawnCallback.Stub.asInterface(data.readStrongBinder());
+                    IKeyguardDrawnCallback _arg08 =
+                            IKeyguardDrawnCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onScreenTurningOn(_arg08);
                     return true;
@@ -458,7 +438,8 @@ public interface IKeyguardService extends IInterface {
                     showDismissibleKeyguard();
                     return true;
                 case 26:
-                    PendingIntent _arg016 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg016 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     Intent _arg16 = (Intent) data.readTypedObject(Intent.CREATOR);
                     data.enforceNoDataAvail();
                     setPendingIntentAfterUnlock(_arg016, _arg16);
@@ -519,7 +500,8 @@ public interface IKeyguardService extends IInterface {
             }
 
             @Override // com.android.internal.policy.IKeyguardService
-            public void addStateMonitorCallback(IKeyguardStateCallback callback) throws RemoteException {
+            public void addStateMonitorCallback(IKeyguardStateCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -543,7 +525,8 @@ public interface IKeyguardService extends IInterface {
             }
 
             @Override // com.android.internal.policy.IKeyguardService
-            public void dismiss(IKeyguardDismissCallback callback, CharSequence message) throws RemoteException {
+            public void dismiss(IKeyguardDismissCallback callback, CharSequence message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -595,7 +578,8 @@ public interface IKeyguardService extends IInterface {
             }
 
             @Override // com.android.internal.policy.IKeyguardService
-            public void onFinishedGoingToSleep(int pmSleepReason, boolean cameraGestureTriggered) throws RemoteException {
+            public void onFinishedGoingToSleep(int pmSleepReason, boolean cameraGestureTriggered)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -608,7 +592,8 @@ public interface IKeyguardService extends IInterface {
             }
 
             @Override // com.android.internal.policy.IKeyguardService
-            public void onStartedWakingUp(int pmWakeReason, boolean cameraGestureTriggered) throws RemoteException {
+            public void onStartedWakingUp(int pmWakeReason, boolean cameraGestureTriggered)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -747,7 +732,8 @@ public interface IKeyguardService extends IInterface {
             }
 
             @Override // com.android.internal.policy.IKeyguardService
-            public void startKeyguardExitAnimation(long startTime, long fadeoutDuration) throws RemoteException {
+            public void startKeyguardExitAnimation(long startTime, long fadeoutDuration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -806,7 +792,8 @@ public interface IKeyguardService extends IInterface {
             }
 
             @Override // com.android.internal.policy.IKeyguardService
-            public void setPendingIntentAfterUnlock(PendingIntent pendingIntent, Intent fillInIntent) throws RemoteException {
+            public void setPendingIntentAfterUnlock(
+                    PendingIntent pendingIntent, Intent fillInIntent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

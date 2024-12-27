@@ -13,11 +13,18 @@ public abstract class MARsDebugConfig {
     public static boolean DEBUG_NETLINK;
     public static boolean DEBUG_OLAF;
     public static final boolean ENABLE_ALARM_WAKEUP_BLOCK;
-    public static final boolean DEBUG_MID = SystemProperties.get("ro.boot.debug_level", "").equals("0x494d");
-    public static final boolean DEBUG_HIGH = SystemProperties.get("ro.boot.debug_level", "").equals("0x4948");
+    public static final boolean DEBUG_MID =
+            SystemProperties.get("ro.boot.debug_level", "").equals("0x494d");
+    public static final boolean DEBUG_HIGH =
+            SystemProperties.get("ro.boot.debug_level", "").equals("0x4948");
 
     static {
-        boolean z = (SystemProperties.get("ro.build.type", "user").equals("user") && SystemProperties.get("ro.boot.debug_level", "0x4f4c").equals("0x4f4c")) ? false : true;
+        boolean z =
+                (SystemProperties.get("ro.build.type", "user").equals("user")
+                                && SystemProperties.get("ro.boot.debug_level", "0x4f4c")
+                                        .equals("0x4f4c"))
+                        ? false
+                        : true;
         DEBUG_ENG = z;
         ENABLE_ALARM_WAKEUP_BLOCK = true;
         DEBUG_MARs = z;

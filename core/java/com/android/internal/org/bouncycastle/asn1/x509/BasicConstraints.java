@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.x509;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Boolean;
 import com.android.internal.org.bouncycastle.asn1.ASN1EncodableVector;
 import com.android.internal.org.bouncycastle.asn1.ASN1Integer;
@@ -9,6 +10,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -34,7 +36,8 @@ public class BasicConstraints extends ASN1Object {
     }
 
     public static BasicConstraints fromExtensions(Extensions extensions) {
-        return getInstance(Extensions.getExtensionParsedValue(extensions, Extension.basicConstraints));
+        return getInstance(
+                Extensions.getExtensionParsedValue(extensions, Extension.basicConstraints));
     }
 
     private BasicConstraints(ASN1Sequence seq) {
@@ -89,7 +92,8 @@ public class BasicConstraints extends ASN1Object {
         return null;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         if (this.cA != null) {
@@ -105,6 +109,9 @@ public class BasicConstraints extends ASN1Object {
         if (this.pathLenConstraint == null) {
             return "BasicConstraints: isCa(" + isCA() + NavigationBarInflaterView.KEY_CODE_END;
         }
-        return "BasicConstraints: isCa(" + isCA() + "), pathLenConstraint = " + this.pathLenConstraint.getValue();
+        return "BasicConstraints: isCa("
+                + isCA()
+                + "), pathLenConstraint = "
+                + this.pathLenConstraint.getValue();
     }
 }

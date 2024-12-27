@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.provider.Settings;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,7 +23,8 @@ public final class OneFingerPanningSettingsProvider {
 
     public static boolean isOneFingerPanningEnabledDefault(Context context) {
         try {
-            return context.getResources().getBoolean(R.bool.config_faceAuthSupportsSelfIllumination);
+            return context.getResources()
+                    .getBoolean(R.bool.config_faceAuthSupportsSelfIllumination);
         } catch (Resources.NotFoundException unused) {
             return false;
         }

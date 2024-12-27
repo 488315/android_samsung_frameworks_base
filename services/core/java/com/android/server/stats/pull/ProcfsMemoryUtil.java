@@ -2,13 +2,16 @@ package com.android.server.stats.pull;
 
 import android.os.Process;
 import android.util.SparseArray;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class ProcfsMemoryUtil {
     public static final int[] CMDLINE_OUT = {4096};
-    public static final String[] STATUS_KEYS = {"Uid:", "VmHWM:", "VmRSS:", "RssAnon:", "RssShmem:", "VmSwap:"};
+    public static final String[] STATUS_KEYS = {
+        "Uid:", "VmHWM:", "VmRSS:", "RssAnon:", "RssShmem:", "VmSwap:"
+    };
     public static final String[] VMSTAT_KEYS = {"oom_kill"};
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -43,12 +46,23 @@ public abstract class ProcfsMemoryUtil {
 
     public static String readCmdlineFromProcfs(int i) {
         String[] strArr = new String[1];
-        return !Process.readProcFile(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "/proc/", "/cmdline"), CMDLINE_OUT, strArr, null, null) ? "" : strArr[0];
+        return !Process.readProcFile(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i, "/proc/", "/cmdline"),
+                        CMDLINE_OUT,
+                        strArr,
+                        null,
+                        null)
+                ? ""
+                : strArr[0];
     }
 
     public static MemorySnapshot readMemorySnapshotFromProcfs(int i) {
         long[] jArr = {-1, 0, 0, -1, -1, -1};
-        Process.readProcLines(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "/proc/", "/status"), STATUS_KEYS, jArr);
+        Process.readProcLines(
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "/proc/", "/status"),
+                STATUS_KEYS,
+                jArr);
         long j = jArr[0];
         if (j == -1) {
             return null;

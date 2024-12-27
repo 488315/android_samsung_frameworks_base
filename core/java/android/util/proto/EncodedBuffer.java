@@ -2,7 +2,9 @@ package android.util.proto;
 
 import android.os.BatteryStats;
 import android.util.Log;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.util.ArrayList;
 
 /* loaded from: classes4.dex */
@@ -86,8 +88,18 @@ public final class EncodedBuffer {
     }
 
     public byte readRawByte() {
-        if (this.mReadBufIndex > this.mBufferCount || (this.mReadBufIndex == this.mBufferCount - 1 && this.mReadIndex >= this.mReadLimit)) {
-            throw new IndexOutOfBoundsException("Trying to read too much data mReadBufIndex=" + this.mReadBufIndex + " mBufferCount=" + this.mBufferCount + " mReadIndex=" + this.mReadIndex + " mReadLimit=" + this.mReadLimit);
+        if (this.mReadBufIndex > this.mBufferCount
+                || (this.mReadBufIndex == this.mBufferCount - 1
+                        && this.mReadIndex >= this.mReadLimit)) {
+            throw new IndexOutOfBoundsException(
+                    "Trying to read too much data mReadBufIndex="
+                            + this.mReadBufIndex
+                            + " mBufferCount="
+                            + this.mBufferCount
+                            + " mReadIndex="
+                            + this.mReadIndex
+                            + " mReadLimit="
+                            + this.mReadLimit);
         }
         if (this.mReadIndex >= this.mChunkSize) {
             this.mReadBufIndex++;
@@ -115,7 +127,10 @@ public final class EncodedBuffer {
     }
 
     public int readRawFixed32() {
-        return (readRawByte() & 255) | ((readRawByte() & 255) << 8) | ((readRawByte() & 255) << 16) | ((readRawByte() & 255) << 24);
+        return (readRawByte() & 255)
+                | ((readRawByte() & 255) << 8)
+                | ((readRawByte() & 255) << 16)
+                | ((readRawByte() & 255) << 24);
     }
 
     private void nextWriteBuffer() {
@@ -241,7 +256,10 @@ public final class EncodedBuffer {
         if (val == null) {
             return;
         }
-        int amt = length < this.mChunkSize - this.mWriteIndex ? length : this.mChunkSize - this.mWriteIndex;
+        int amt =
+                length < this.mChunkSize - this.mWriteIndex
+                        ? length
+                        : this.mChunkSize - this.mWriteIndex;
         if (amt > 0) {
             System.arraycopy(val, offset, this.mWriteBuffer, this.mWriteIndex, amt);
             this.mWriteIndex += amt;
@@ -263,10 +281,22 @@ public final class EncodedBuffer {
             throw new IllegalStateException("writeFromThisBuffer before startEditing");
         }
         if (srcOffset < getWritePos()) {
-            throw new IllegalArgumentException("Can only move forward in the buffer -- srcOffset=" + srcOffset + " size=" + size + " " + getDebugString());
+            throw new IllegalArgumentException(
+                    "Can only move forward in the buffer -- srcOffset="
+                            + srcOffset
+                            + " size="
+                            + size
+                            + " "
+                            + getDebugString());
         }
         if (srcOffset + size > this.mReadableSize) {
-            throw new IllegalArgumentException("Trying to move more data than there is -- srcOffset=" + srcOffset + " size=" + size + " " + getDebugString());
+            throw new IllegalArgumentException(
+                    "Trying to move more data than there is -- srcOffset="
+                            + srcOffset
+                            + " size="
+                            + size
+                            + " "
+                            + getDebugString());
         }
         if (size == 0) {
             return;
@@ -328,14 +358,26 @@ public final class EncodedBuffer {
     }
 
     public int getRawFixed32At(int pos) {
-        return (this.mBuffers.get(pos / this.mChunkSize)[pos % this.mChunkSize] & 255) | ((this.mBuffers.get((pos + 1) / this.mChunkSize)[(pos + 1) % this.mChunkSize] & 255) << 8) | ((this.mBuffers.get((pos + 2) / this.mChunkSize)[(pos + 2) % this.mChunkSize] & 255) << 16) | ((this.mBuffers.get((pos + 3) / this.mChunkSize)[(pos + 3) % this.mChunkSize] & 255) << 24);
+        return (this.mBuffers.get(pos / this.mChunkSize)[pos % this.mChunkSize] & 255)
+                | ((this.mBuffers.get((pos + 1) / this.mChunkSize)[(pos + 1) % this.mChunkSize]
+                                & 255)
+                        << 8)
+                | ((this.mBuffers.get((pos + 2) / this.mChunkSize)[(pos + 2) % this.mChunkSize]
+                                & 255)
+                        << 16)
+                | ((this.mBuffers.get((pos + 3) / this.mChunkSize)[(pos + 3) % this.mChunkSize]
+                                & 255)
+                        << 24);
     }
 
     public void editRawFixed32(int pos, int val) {
         this.mBuffers.get(pos / this.mChunkSize)[pos % this.mChunkSize] = (byte) val;
-        this.mBuffers.get((pos + 1) / this.mChunkSize)[(pos + 1) % this.mChunkSize] = (byte) (val >> 8);
-        this.mBuffers.get((pos + 2) / this.mChunkSize)[(pos + 2) % this.mChunkSize] = (byte) (val >> 16);
-        this.mBuffers.get((pos + 3) / this.mChunkSize)[(pos + 3) % this.mChunkSize] = (byte) (val >> 24);
+        this.mBuffers.get((pos + 1) / this.mChunkSize)[(pos + 1) % this.mChunkSize] =
+                (byte) (val >> 8);
+        this.mBuffers.get((pos + 2) / this.mChunkSize)[(pos + 2) % this.mChunkSize] =
+                (byte) (val >> 16);
+        this.mBuffers.get((pos + 3) / this.mChunkSize)[(pos + 3) % this.mChunkSize] =
+                (byte) (val >> 24);
     }
 
     private static int zigZag32(int val) {
@@ -376,7 +418,25 @@ public final class EncodedBuffer {
     }
 
     public String getDebugString() {
-        return "EncodedBuffer( mChunkSize=" + this.mChunkSize + " mBuffers.size=" + this.mBuffers.size() + " mBufferCount=" + this.mBufferCount + " mWriteIndex=" + this.mWriteIndex + " mWriteBufIndex=" + this.mWriteBufIndex + " mReadBufIndex=" + this.mReadBufIndex + " mReadIndex=" + this.mReadIndex + " mReadableSize=" + this.mReadableSize + " mReadLimit=" + this.mReadLimit + " )";
+        return "EncodedBuffer( mChunkSize="
+                + this.mChunkSize
+                + " mBuffers.size="
+                + this.mBuffers.size()
+                + " mBufferCount="
+                + this.mBufferCount
+                + " mWriteIndex="
+                + this.mWriteIndex
+                + " mWriteBufIndex="
+                + this.mWriteBufIndex
+                + " mReadBufIndex="
+                + this.mReadBufIndex
+                + " mReadIndex="
+                + this.mReadIndex
+                + " mReadableSize="
+                + this.mReadableSize
+                + " mReadLimit="
+                + this.mReadLimit
+                + " )";
     }
 
     public void dumpBuffers(String tag) {

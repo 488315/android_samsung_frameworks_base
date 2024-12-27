@@ -5,35 +5,47 @@ import android.hardware.biometrics.BiometricRequestConstants;
 import android.hardware.biometrics.BiometricSourceType;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class AuthenticationErrorInfo implements Parcelable {
-    public static final Parcelable.Creator<AuthenticationErrorInfo> CREATOR = new Parcelable.Creator<AuthenticationErrorInfo>() { // from class: android.hardware.biometrics.events.AuthenticationErrorInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationErrorInfo[] newArray(int size) {
-            return new AuthenticationErrorInfo[size];
-        }
+    public static final Parcelable.Creator<AuthenticationErrorInfo> CREATOR =
+            new Parcelable.Creator<AuthenticationErrorInfo>() { // from class:
+                // android.hardware.biometrics.events.AuthenticationErrorInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationErrorInfo[] newArray(int size) {
+                    return new AuthenticationErrorInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationErrorInfo createFromParcel(Parcel in) {
-            return new AuthenticationErrorInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationErrorInfo createFromParcel(Parcel in) {
+                    return new AuthenticationErrorInfo(in);
+                }
+            };
     private final BiometricSourceType mBiometricSourceType;
     private final int mErrCode;
     private final String mErrString;
     private final int mRequestReason;
 
-    AuthenticationErrorInfo(BiometricSourceType biometricSourceType, int requestReason, String errString, int errCode) {
+    AuthenticationErrorInfo(
+            BiometricSourceType biometricSourceType,
+            int requestReason,
+            String errString,
+            int errCode) {
         this.mBiometricSourceType = biometricSourceType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
         this.mRequestReason = requestReason;
-        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                (Annotation) null,
+                this.mRequestReason);
         this.mErrString = errString;
         this.mErrCode = errCode;
     }
@@ -62,7 +74,10 @@ public final class AuthenticationErrorInfo implements Parcelable {
             return false;
         }
         AuthenticationErrorInfo that = (AuthenticationErrorInfo) o;
-        if (Objects.equals(this.mBiometricSourceType, that.mBiometricSourceType) && this.mRequestReason == that.mRequestReason && Objects.equals(this.mErrString, that.mErrString) && this.mErrCode == that.mErrCode) {
+        if (Objects.equals(this.mBiometricSourceType, that.mBiometricSourceType)
+                && this.mRequestReason == that.mRequestReason
+                && Objects.equals(this.mErrString, that.mErrString)
+                && this.mErrCode == that.mErrCode) {
             return true;
         }
         return false;
@@ -70,7 +85,9 @@ public final class AuthenticationErrorInfo implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + Objects.hashCode(this.mBiometricSourceType);
-        return (((((_hash * 31) + this.mRequestReason) * 31) + Objects.hashCode(this.mErrString)) * 31) + this.mErrCode;
+        return (((((_hash * 31) + this.mRequestReason) * 31) + Objects.hashCode(this.mErrString))
+                        * 31)
+                + this.mErrCode;
     }
 
     @Override // android.os.Parcelable
@@ -92,14 +109,19 @@ public final class AuthenticationErrorInfo implements Parcelable {
 
     AuthenticationErrorInfo(Parcel in) {
         byte flg = in.readByte();
-        BiometricSourceType biometricSourceType = (BiometricSourceType) in.readTypedObject(BiometricSourceType.CREATOR);
+        BiometricSourceType biometricSourceType =
+                (BiometricSourceType) in.readTypedObject(BiometricSourceType.CREATOR);
         int requestReason = in.readInt();
         String errString = (flg & 4) == 0 ? null : in.readString();
         int errCode = in.readInt();
         this.mBiometricSourceType = biometricSourceType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
         this.mRequestReason = requestReason;
-        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                (Annotation) null,
+                this.mRequestReason);
         this.mErrString = errString;
         this.mErrCode = errCode;
     }
@@ -111,11 +133,21 @@ public final class AuthenticationErrorInfo implements Parcelable {
         private String mErrString;
         private int mRequestReason;
 
-        public Builder(BiometricSourceType biometricSourceType, int requestReason, String errString, int errCode) {
+        public Builder(
+                BiometricSourceType biometricSourceType,
+                int requestReason,
+                String errString,
+                int errCode) {
             this.mBiometricSourceType = biometricSourceType;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class,
+                    (NonNull) null,
+                    (Object) this.mBiometricSourceType);
             this.mRequestReason = requestReason;
-            AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+            AnnotationValidations.validate(
+                    (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                    (Annotation) null,
+                    this.mRequestReason);
             this.mErrString = errString;
             this.mErrCode = errCode;
         }
@@ -151,18 +183,23 @@ public final class AuthenticationErrorInfo implements Parcelable {
         public AuthenticationErrorInfo build() {
             checkNotUsed();
             this.mBuilderFieldsSet |= 16;
-            AuthenticationErrorInfo o = new AuthenticationErrorInfo(this.mBiometricSourceType, this.mRequestReason, this.mErrString, this.mErrCode);
+            AuthenticationErrorInfo o =
+                    new AuthenticationErrorInfo(
+                            this.mBiometricSourceType,
+                            this.mRequestReason,
+                            this.mErrString,
+                            this.mErrCode);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 16) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

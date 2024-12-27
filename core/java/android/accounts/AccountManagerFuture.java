@@ -9,7 +9,8 @@ public interface AccountManagerFuture<V> {
 
     V getResult() throws OperationCanceledException, IOException, AuthenticatorException;
 
-    V getResult(long j, TimeUnit timeUnit) throws OperationCanceledException, IOException, AuthenticatorException;
+    V getResult(long j, TimeUnit timeUnit)
+            throws OperationCanceledException, IOException, AuthenticatorException;
 
     boolean isCancelled();
 

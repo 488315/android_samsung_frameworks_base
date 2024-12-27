@@ -4,7 +4,8 @@ import com.android.server.power.stats.BatteryStatsImpl;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda82 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda82
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ String f$1;
@@ -13,7 +14,14 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
     public final /* synthetic */ long f$4;
     public final /* synthetic */ long f$5;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda82(BatteryStatsService batteryStatsService, int i, String str, int i2, long j, long j2, int i3) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda82(
+            BatteryStatsService batteryStatsService,
+            int i,
+            String str,
+            int i2,
+            long j,
+            long j2,
+            int i3) {
         this.$r8$classId = i3;
         this.f$0 = batteryStatsService;
         this.f$2 = i;
@@ -23,7 +31,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
         this.f$5 = j2;
     }
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda82(BatteryStatsService batteryStatsService, int i, String str, long j, long j2, int i2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda82(
+            BatteryStatsService batteryStatsService, int i, String str, long j, long j2, int i2) {
         this.$r8$classId = 0;
         this.f$0 = batteryStatsService;
         this.f$1 = str;

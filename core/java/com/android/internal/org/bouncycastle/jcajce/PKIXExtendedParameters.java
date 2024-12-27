@@ -1,7 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce;
 
 import com.android.internal.org.bouncycastle.asn1.x509.GeneralName;
-import com.android.internal.org.bouncycastle.jcajce.PKIXCertStoreSelector;
+
 import java.security.cert.CertPathParameters;
 import java.security.cert.CertSelector;
 import java.security.cert.CertStore;
@@ -144,7 +144,8 @@ public class PKIXExtendedParameters implements CertPathParameters {
         this.validityDate = builder.validityDate;
         this.date = builder.date;
         this.extraCertStores = Collections.unmodifiableList(builder.extraCertStores);
-        this.namedCertificateStoreMap = Collections.unmodifiableMap(new HashMap(builder.namedCertificateStoreMap));
+        this.namedCertificateStoreMap =
+                Collections.unmodifiableMap(new HashMap(builder.namedCertificateStoreMap));
         this.extraCRLStores = Collections.unmodifiableList(builder.extraCRLStores);
         this.namedCRLStoreMap = Collections.unmodifiableMap(new HashMap(builder.namedCRLStoreMap));
         this.targetConstraints = builder.targetConstraints;

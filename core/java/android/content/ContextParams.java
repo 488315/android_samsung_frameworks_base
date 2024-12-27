@@ -3,6 +3,7 @@ package android.content;
 import android.Manifest;
 import android.annotation.SystemApi;
 import android.app.ActivityThread;
+
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -15,10 +16,15 @@ public final class ContextParams {
     private final Set<String> mRenouncedPermissions;
     private final boolean mShouldRegisterAttributionSource;
 
-    private ContextParams(String attributionTag, AttributionSource next, Set<String> renouncedPermissions, boolean shouldRegister) {
+    private ContextParams(
+            String attributionTag,
+            AttributionSource next,
+            Set<String> renouncedPermissions,
+            boolean shouldRegister) {
         this.mAttributionTag = attributionTag;
         this.mNext = next;
-        this.mRenouncedPermissions = renouncedPermissions != null ? renouncedPermissions : Collections.emptySet();
+        this.mRenouncedPermissions =
+                renouncedPermissions != null ? renouncedPermissions : Collections.emptySet();
         this.mShouldRegisterAttributionSource = shouldRegister;
     }
 
@@ -78,15 +84,24 @@ public final class ContextParams {
 
         @SystemApi
         public Builder setRenouncedPermissions(Set<String> renouncedPermissions) {
-            if (renouncedPermissions != null && !renouncedPermissions.isEmpty() && ActivityThread.currentApplication().checkSelfPermission(Manifest.permission.RENOUNCE_PERMISSIONS) != 0) {
-                throw new SecurityException("Renouncing permissions requires: android.permission.RENOUNCE_PERMISSIONS");
+            if (renouncedPermissions != null
+                    && !renouncedPermissions.isEmpty()
+                    && ActivityThread.currentApplication()
+                                    .checkSelfPermission(Manifest.permission.RENOUNCE_PERMISSIONS)
+                            != 0) {
+                throw new SecurityException(
+                        "Renouncing permissions requires: android.permission.RENOUNCE_PERMISSIONS");
             }
             this.mRenouncedPermissions = renouncedPermissions;
             return this;
         }
 
         public ContextParams build() {
-            return new ContextParams(this.mAttributionTag, this.mNext, this.mRenouncedPermissions, this.mShouldRegisterAttributionSource);
+            return new ContextParams(
+                    this.mAttributionTag,
+                    this.mNext,
+                    this.mRenouncedPermissions,
+                    this.mShouldRegisterAttributionSource);
         }
     }
 }

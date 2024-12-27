@@ -1,9 +1,6 @@
 package android.media.midi;
 
 import android.bluetooth.BluetoothDevice;
-import android.media.midi.IMidiDeviceListener;
-import android.media.midi.IMidiDeviceOpenCallback;
-import android.media.midi.IMidiDeviceServer;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -23,21 +20,42 @@ public interface IMidiManager extends IInterface {
 
     MidiDeviceInfo getServiceDeviceInfo(String str, String str2) throws RemoteException;
 
-    void openBluetoothDevice(IBinder iBinder, BluetoothDevice bluetoothDevice, IMidiDeviceOpenCallback iMidiDeviceOpenCallback) throws RemoteException;
+    void openBluetoothDevice(
+            IBinder iBinder,
+            BluetoothDevice bluetoothDevice,
+            IMidiDeviceOpenCallback iMidiDeviceOpenCallback)
+            throws RemoteException;
 
-    void openDevice(IBinder iBinder, MidiDeviceInfo midiDeviceInfo, IMidiDeviceOpenCallback iMidiDeviceOpenCallback) throws RemoteException;
+    void openDevice(
+            IBinder iBinder,
+            MidiDeviceInfo midiDeviceInfo,
+            IMidiDeviceOpenCallback iMidiDeviceOpenCallback)
+            throws RemoteException;
 
-    MidiDeviceInfo registerDeviceServer(IMidiDeviceServer iMidiDeviceServer, int i, int i2, String[] strArr, String[] strArr2, Bundle bundle, int i3, int i4) throws RemoteException;
+    MidiDeviceInfo registerDeviceServer(
+            IMidiDeviceServer iMidiDeviceServer,
+            int i,
+            int i2,
+            String[] strArr,
+            String[] strArr2,
+            Bundle bundle,
+            int i3,
+            int i4)
+            throws RemoteException;
 
-    void registerListener(IBinder iBinder, IMidiDeviceListener iMidiDeviceListener) throws RemoteException;
+    void registerListener(IBinder iBinder, IMidiDeviceListener iMidiDeviceListener)
+            throws RemoteException;
 
-    void setDeviceStatus(IMidiDeviceServer iMidiDeviceServer, MidiDeviceStatus midiDeviceStatus) throws RemoteException;
+    void setDeviceStatus(IMidiDeviceServer iMidiDeviceServer, MidiDeviceStatus midiDeviceStatus)
+            throws RemoteException;
 
     void unregisterDeviceServer(IMidiDeviceServer iMidiDeviceServer) throws RemoteException;
 
-    void unregisterListener(IBinder iBinder, IMidiDeviceListener iMidiDeviceListener) throws RemoteException;
+    void unregisterListener(IBinder iBinder, IMidiDeviceListener iMidiDeviceListener)
+            throws RemoteException;
 
-    void updateTotalBytes(IMidiDeviceServer iMidiDeviceServer, int i, int i2) throws RemoteException;
+    void updateTotalBytes(IMidiDeviceServer iMidiDeviceServer, int i, int i2)
+            throws RemoteException;
 
     public static class Default implements IMidiManager {
         @Override // android.media.midi.IMidiManager
@@ -51,36 +69,48 @@ public interface IMidiManager extends IInterface {
         }
 
         @Override // android.media.midi.IMidiManager
-        public void registerListener(IBinder clientToken, IMidiDeviceListener listener) throws RemoteException {
-        }
+        public void registerListener(IBinder clientToken, IMidiDeviceListener listener)
+                throws RemoteException {}
 
         @Override // android.media.midi.IMidiManager
-        public void unregisterListener(IBinder clientToken, IMidiDeviceListener listener) throws RemoteException {
-        }
+        public void unregisterListener(IBinder clientToken, IMidiDeviceListener listener)
+                throws RemoteException {}
 
         @Override // android.media.midi.IMidiManager
-        public void openDevice(IBinder clientToken, MidiDeviceInfo device, IMidiDeviceOpenCallback callback) throws RemoteException {
-        }
+        public void openDevice(
+                IBinder clientToken, MidiDeviceInfo device, IMidiDeviceOpenCallback callback)
+                throws RemoteException {}
 
         @Override // android.media.midi.IMidiManager
-        public void openBluetoothDevice(IBinder clientToken, BluetoothDevice bluetoothDevice, IMidiDeviceOpenCallback callback) throws RemoteException {
-        }
+        public void openBluetoothDevice(
+                IBinder clientToken,
+                BluetoothDevice bluetoothDevice,
+                IMidiDeviceOpenCallback callback)
+                throws RemoteException {}
 
         @Override // android.media.midi.IMidiManager
-        public void closeDevice(IBinder clientToken, IBinder deviceToken) throws RemoteException {
-        }
+        public void closeDevice(IBinder clientToken, IBinder deviceToken) throws RemoteException {}
 
         @Override // android.media.midi.IMidiManager
-        public MidiDeviceInfo registerDeviceServer(IMidiDeviceServer server, int numInputPorts, int numOutputPorts, String[] inputPortNames, String[] outputPortNames, Bundle properties, int type, int defaultProtocol) throws RemoteException {
+        public MidiDeviceInfo registerDeviceServer(
+                IMidiDeviceServer server,
+                int numInputPorts,
+                int numOutputPorts,
+                String[] inputPortNames,
+                String[] outputPortNames,
+                Bundle properties,
+                int type,
+                int defaultProtocol)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.midi.IMidiManager
-        public void unregisterDeviceServer(IMidiDeviceServer server) throws RemoteException {
-        }
+        public void unregisterDeviceServer(IMidiDeviceServer server) throws RemoteException {}
 
         @Override // android.media.midi.IMidiManager
-        public MidiDeviceInfo getServiceDeviceInfo(String packageName, String className) throws RemoteException {
+        public MidiDeviceInfo getServiceDeviceInfo(String packageName, String className)
+                throws RemoteException {
             return null;
         }
 
@@ -90,12 +120,12 @@ public interface IMidiManager extends IInterface {
         }
 
         @Override // android.media.midi.IMidiManager
-        public void setDeviceStatus(IMidiDeviceServer server, MidiDeviceStatus status) throws RemoteException {
-        }
+        public void setDeviceStatus(IMidiDeviceServer server, MidiDeviceStatus status)
+                throws RemoteException {}
 
         @Override // android.media.midi.IMidiManager
-        public void updateTotalBytes(IMidiDeviceServer server, int inputBytes, int outputBytes) throws RemoteException {
-        }
+        public void updateTotalBytes(IMidiDeviceServer server, int inputBytes, int outputBytes)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -103,7 +133,7 @@ public interface IMidiManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMidiManager {
+    public abstract static class Stub extends Binder implements IMidiManager {
         public static final String DESCRIPTOR = "android.media.midi.IMidiManager";
         static final int TRANSACTION_closeDevice = 7;
         static final int TRANSACTION_getDeviceStatus = 11;
@@ -178,7 +208,8 @@ public interface IMidiManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -201,30 +232,36 @@ public interface IMidiManager extends IInterface {
                     return true;
                 case 3:
                     IBinder _arg02 = data.readStrongBinder();
-                    IMidiDeviceListener _arg1 = IMidiDeviceListener.Stub.asInterface(data.readStrongBinder());
+                    IMidiDeviceListener _arg1 =
+                            IMidiDeviceListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerListener(_arg02, _arg1);
                     reply.writeNoException();
                     return true;
                 case 4:
                     IBinder _arg03 = data.readStrongBinder();
-                    IMidiDeviceListener _arg12 = IMidiDeviceListener.Stub.asInterface(data.readStrongBinder());
+                    IMidiDeviceListener _arg12 =
+                            IMidiDeviceListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterListener(_arg03, _arg12);
                     reply.writeNoException();
                     return true;
                 case 5:
                     IBinder _arg04 = data.readStrongBinder();
-                    MidiDeviceInfo _arg13 = (MidiDeviceInfo) data.readTypedObject(MidiDeviceInfo.CREATOR);
-                    IMidiDeviceOpenCallback _arg2 = IMidiDeviceOpenCallback.Stub.asInterface(data.readStrongBinder());
+                    MidiDeviceInfo _arg13 =
+                            (MidiDeviceInfo) data.readTypedObject(MidiDeviceInfo.CREATOR);
+                    IMidiDeviceOpenCallback _arg2 =
+                            IMidiDeviceOpenCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     openDevice(_arg04, _arg13, _arg2);
                     reply.writeNoException();
                     return true;
                 case 6:
                     IBinder _arg05 = data.readStrongBinder();
-                    BluetoothDevice _arg14 = (BluetoothDevice) data.readTypedObject(BluetoothDevice.CREATOR);
-                    IMidiDeviceOpenCallback _arg22 = IMidiDeviceOpenCallback.Stub.asInterface(data.readStrongBinder());
+                    BluetoothDevice _arg14 =
+                            (BluetoothDevice) data.readTypedObject(BluetoothDevice.CREATOR);
+                    IMidiDeviceOpenCallback _arg22 =
+                            IMidiDeviceOpenCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     openBluetoothDevice(_arg05, _arg14, _arg22);
                     reply.writeNoException();
@@ -237,7 +274,8 @@ public interface IMidiManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 8:
-                    IMidiDeviceServer _arg07 = IMidiDeviceServer.Stub.asInterface(data.readStrongBinder());
+                    IMidiDeviceServer _arg07 =
+                            IMidiDeviceServer.Stub.asInterface(data.readStrongBinder());
                     int _arg16 = data.readInt();
                     int _arg23 = data.readInt();
                     String[] _arg3 = data.createStringArray();
@@ -246,12 +284,15 @@ public interface IMidiManager extends IInterface {
                     int _arg6 = data.readInt();
                     int _arg7 = data.readInt();
                     data.enforceNoDataAvail();
-                    MidiDeviceInfo _result3 = registerDeviceServer(_arg07, _arg16, _arg23, _arg3, _arg4, _arg5, _arg6, _arg7);
+                    MidiDeviceInfo _result3 =
+                            registerDeviceServer(
+                                    _arg07, _arg16, _arg23, _arg3, _arg4, _arg5, _arg6, _arg7);
                     reply.writeNoException();
                     reply.writeTypedObject(_result3, 1);
                     return true;
                 case 9:
-                    IMidiDeviceServer _arg08 = IMidiDeviceServer.Stub.asInterface(data.readStrongBinder());
+                    IMidiDeviceServer _arg08 =
+                            IMidiDeviceServer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterDeviceServer(_arg08);
                     reply.writeNoException();
@@ -265,21 +306,25 @@ public interface IMidiManager extends IInterface {
                     reply.writeTypedObject(_result4, 1);
                     return true;
                 case 11:
-                    MidiDeviceInfo _arg010 = (MidiDeviceInfo) data.readTypedObject(MidiDeviceInfo.CREATOR);
+                    MidiDeviceInfo _arg010 =
+                            (MidiDeviceInfo) data.readTypedObject(MidiDeviceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     MidiDeviceStatus _result5 = getDeviceStatus(_arg010);
                     reply.writeNoException();
                     reply.writeTypedObject(_result5, 1);
                     return true;
                 case 12:
-                    IMidiDeviceServer _arg011 = IMidiDeviceServer.Stub.asInterface(data.readStrongBinder());
-                    MidiDeviceStatus _arg18 = (MidiDeviceStatus) data.readTypedObject(MidiDeviceStatus.CREATOR);
+                    IMidiDeviceServer _arg011 =
+                            IMidiDeviceServer.Stub.asInterface(data.readStrongBinder());
+                    MidiDeviceStatus _arg18 =
+                            (MidiDeviceStatus) data.readTypedObject(MidiDeviceStatus.CREATOR);
                     data.enforceNoDataAvail();
                     setDeviceStatus(_arg011, _arg18);
                     reply.writeNoException();
                     return true;
                 case 13:
-                    IMidiDeviceServer _arg012 = IMidiDeviceServer.Stub.asInterface(data.readStrongBinder());
+                    IMidiDeviceServer _arg012 =
+                            IMidiDeviceServer.Stub.asInterface(data.readStrongBinder());
                     int _arg19 = data.readInt();
                     int _arg24 = data.readInt();
                     data.enforceNoDataAvail();
@@ -315,7 +360,8 @@ public interface IMidiManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    MidiDeviceInfo[] _result = (MidiDeviceInfo[]) _reply.createTypedArray(MidiDeviceInfo.CREATOR);
+                    MidiDeviceInfo[] _result =
+                            (MidiDeviceInfo[]) _reply.createTypedArray(MidiDeviceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -332,7 +378,8 @@ public interface IMidiManager extends IInterface {
                     _data.writeInt(transport);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    MidiDeviceInfo[] _result = (MidiDeviceInfo[]) _reply.createTypedArray(MidiDeviceInfo.CREATOR);
+                    MidiDeviceInfo[] _result =
+                            (MidiDeviceInfo[]) _reply.createTypedArray(MidiDeviceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -341,7 +388,8 @@ public interface IMidiManager extends IInterface {
             }
 
             @Override // android.media.midi.IMidiManager
-            public void registerListener(IBinder clientToken, IMidiDeviceListener listener) throws RemoteException {
+            public void registerListener(IBinder clientToken, IMidiDeviceListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -357,7 +405,8 @@ public interface IMidiManager extends IInterface {
             }
 
             @Override // android.media.midi.IMidiManager
-            public void unregisterListener(IBinder clientToken, IMidiDeviceListener listener) throws RemoteException {
+            public void unregisterListener(IBinder clientToken, IMidiDeviceListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -373,7 +422,9 @@ public interface IMidiManager extends IInterface {
             }
 
             @Override // android.media.midi.IMidiManager
-            public void openDevice(IBinder clientToken, MidiDeviceInfo device, IMidiDeviceOpenCallback callback) throws RemoteException {
+            public void openDevice(
+                    IBinder clientToken, MidiDeviceInfo device, IMidiDeviceOpenCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -390,7 +441,11 @@ public interface IMidiManager extends IInterface {
             }
 
             @Override // android.media.midi.IMidiManager
-            public void openBluetoothDevice(IBinder clientToken, BluetoothDevice bluetoothDevice, IMidiDeviceOpenCallback callback) throws RemoteException {
+            public void openBluetoothDevice(
+                    IBinder clientToken,
+                    BluetoothDevice bluetoothDevice,
+                    IMidiDeviceOpenCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -407,7 +462,8 @@ public interface IMidiManager extends IInterface {
             }
 
             @Override // android.media.midi.IMidiManager
-            public void closeDevice(IBinder clientToken, IBinder deviceToken) throws RemoteException {
+            public void closeDevice(IBinder clientToken, IBinder deviceToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -423,7 +479,16 @@ public interface IMidiManager extends IInterface {
             }
 
             @Override // android.media.midi.IMidiManager
-            public MidiDeviceInfo registerDeviceServer(IMidiDeviceServer server, int numInputPorts, int numOutputPorts, String[] inputPortNames, String[] outputPortNames, Bundle properties, int type, int defaultProtocol) throws RemoteException {
+            public MidiDeviceInfo registerDeviceServer(
+                    IMidiDeviceServer server,
+                    int numInputPorts,
+                    int numOutputPorts,
+                    String[] inputPortNames,
+                    String[] outputPortNames,
+                    Bundle properties,
+                    int type,
+                    int defaultProtocol)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -438,7 +503,8 @@ public interface IMidiManager extends IInterface {
                     _data.writeInt(defaultProtocol);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    MidiDeviceInfo _result = (MidiDeviceInfo) _reply.readTypedObject(MidiDeviceInfo.CREATOR);
+                    MidiDeviceInfo _result =
+                            (MidiDeviceInfo) _reply.readTypedObject(MidiDeviceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -462,7 +528,8 @@ public interface IMidiManager extends IInterface {
             }
 
             @Override // android.media.midi.IMidiManager
-            public MidiDeviceInfo getServiceDeviceInfo(String packageName, String className) throws RemoteException {
+            public MidiDeviceInfo getServiceDeviceInfo(String packageName, String className)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -471,7 +538,8 @@ public interface IMidiManager extends IInterface {
                     _data.writeString(className);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    MidiDeviceInfo _result = (MidiDeviceInfo) _reply.readTypedObject(MidiDeviceInfo.CREATOR);
+                    MidiDeviceInfo _result =
+                            (MidiDeviceInfo) _reply.readTypedObject(MidiDeviceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -480,7 +548,8 @@ public interface IMidiManager extends IInterface {
             }
 
             @Override // android.media.midi.IMidiManager
-            public MidiDeviceStatus getDeviceStatus(MidiDeviceInfo deviceInfo) throws RemoteException {
+            public MidiDeviceStatus getDeviceStatus(MidiDeviceInfo deviceInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -488,7 +557,8 @@ public interface IMidiManager extends IInterface {
                     _data.writeTypedObject(deviceInfo, 0);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    MidiDeviceStatus _result = (MidiDeviceStatus) _reply.readTypedObject(MidiDeviceStatus.CREATOR);
+                    MidiDeviceStatus _result =
+                            (MidiDeviceStatus) _reply.readTypedObject(MidiDeviceStatus.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -497,7 +567,8 @@ public interface IMidiManager extends IInterface {
             }
 
             @Override // android.media.midi.IMidiManager
-            public void setDeviceStatus(IMidiDeviceServer server, MidiDeviceStatus status) throws RemoteException {
+            public void setDeviceStatus(IMidiDeviceServer server, MidiDeviceStatus status)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -513,7 +584,8 @@ public interface IMidiManager extends IInterface {
             }
 
             @Override // android.media.midi.IMidiManager
-            public void updateTotalBytes(IMidiDeviceServer server, int inputBytes, int outputBytes) throws RemoteException {
+            public void updateTotalBytes(IMidiDeviceServer server, int inputBytes, int outputBytes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

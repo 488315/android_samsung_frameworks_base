@@ -25,7 +25,9 @@ public class GLTextureTarget extends Filter {
     @Override // android.filterfw.core.Filter
     public void process(FilterContext context) {
         Frame input = pullInput("frame");
-        FrameFormat format = ImageFormat.create(input.getFormat().getWidth(), input.getFormat().getHeight(), 3, 3);
+        FrameFormat format =
+                ImageFormat.create(
+                        input.getFormat().getWidth(), input.getFormat().getHeight(), 3, 3);
         Frame frame = context.getFrameManager().newBoundFrame(format, 100, this.mTexId);
         frame.setDataFromFrame(input);
         frame.release();

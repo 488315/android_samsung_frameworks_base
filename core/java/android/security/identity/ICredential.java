@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.security.identity.IWritableCredential;
 
 /* loaded from: classes3.dex */
 public interface ICredential extends IInterface {
@@ -32,7 +31,15 @@ public interface ICredential extends IInterface {
 
     byte[] getCredentialKeyCertificateChain() throws RemoteException;
 
-    GetEntriesResultParcel getEntries(byte[] bArr, RequestNamespaceParcel[] requestNamespaceParcelArr, byte[] bArr2, byte[] bArr3, boolean z, boolean z2, boolean z3) throws RemoteException;
+    GetEntriesResultParcel getEntries(
+            byte[] bArr,
+            RequestNamespaceParcel[] requestNamespaceParcelArr,
+            byte[] bArr2,
+            byte[] bArr3,
+            boolean z,
+            boolean z2,
+            boolean z3)
+            throws RemoteException;
 
     byte[] proveOwnership(byte[] bArr) throws RemoteException;
 
@@ -42,9 +49,11 @@ public interface ICredential extends IInterface {
 
     void setReaderEphemeralPublicKey(byte[] bArr) throws RemoteException;
 
-    void storeStaticAuthenticationData(AuthKeyParcel authKeyParcel, byte[] bArr) throws RemoteException;
+    void storeStaticAuthenticationData(AuthKeyParcel authKeyParcel, byte[] bArr)
+            throws RemoteException;
 
-    void storeStaticAuthenticationDataWithExpiration(AuthKeyParcel authKeyParcel, long j, byte[] bArr) throws RemoteException;
+    void storeStaticAuthenticationDataWithExpiration(
+            AuthKeyParcel authKeyParcel, long j, byte[] bArr) throws RemoteException;
 
     IWritableCredential update() throws RemoteException;
 
@@ -55,8 +64,7 @@ public interface ICredential extends IInterface {
         }
 
         @Override // android.security.identity.ICredential
-        public void setReaderEphemeralPublicKey(byte[] publicKey) throws RemoteException {
-        }
+        public void setReaderEphemeralPublicKey(byte[] publicKey) throws RemoteException {}
 
         @Override // android.security.identity.ICredential
         public byte[] deleteCredential() throws RemoteException {
@@ -79,18 +87,30 @@ public interface ICredential extends IInterface {
         }
 
         @Override // android.security.identity.ICredential
-        public long selectAuthKey(boolean allowUsingExhaustedKeys, boolean allowUsingExpiredKeys, boolean incrementUsageCount) throws RemoteException {
+        public long selectAuthKey(
+                boolean allowUsingExhaustedKeys,
+                boolean allowUsingExpiredKeys,
+                boolean incrementUsageCount)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.security.identity.ICredential
-        public GetEntriesResultParcel getEntries(byte[] requestMessage, RequestNamespaceParcel[] requestNamespaces, byte[] sessionTranscript, byte[] readerSignature, boolean allowUsingExhaustedKeys, boolean allowUsingExpiredKeys, boolean incrementUsageCount) throws RemoteException {
+        public GetEntriesResultParcel getEntries(
+                byte[] requestMessage,
+                RequestNamespaceParcel[] requestNamespaces,
+                byte[] sessionTranscript,
+                byte[] readerSignature,
+                boolean allowUsingExhaustedKeys,
+                boolean allowUsingExpiredKeys,
+                boolean incrementUsageCount)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.security.identity.ICredential
-        public void setAvailableAuthenticationKeys(int keyCount, int maxUsesPerKey, long minValidTimeMillis) throws RemoteException {
-        }
+        public void setAvailableAuthenticationKeys(
+                int keyCount, int maxUsesPerKey, long minValidTimeMillis) throws RemoteException {}
 
         @Override // android.security.identity.ICredential
         public AuthKeyParcel[] getAuthKeysNeedingCertification() throws RemoteException {
@@ -98,12 +118,15 @@ public interface ICredential extends IInterface {
         }
 
         @Override // android.security.identity.ICredential
-        public void storeStaticAuthenticationData(AuthKeyParcel authenticationKey, byte[] staticAuthData) throws RemoteException {
-        }
+        public void storeStaticAuthenticationData(
+                AuthKeyParcel authenticationKey, byte[] staticAuthData) throws RemoteException {}
 
         @Override // android.security.identity.ICredential
-        public void storeStaticAuthenticationDataWithExpiration(AuthKeyParcel authenticationKey, long expirationDateMillisSinceEpoch, byte[] staticAuthData) throws RemoteException {
-        }
+        public void storeStaticAuthenticationDataWithExpiration(
+                AuthKeyParcel authenticationKey,
+                long expirationDateMillisSinceEpoch,
+                byte[] staticAuthData)
+                throws RemoteException {}
 
         @Override // android.security.identity.ICredential
         public int[] getAuthenticationDataUsageCount() throws RemoteException {
@@ -126,7 +149,7 @@ public interface ICredential extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICredential {
+    public abstract static class Stub extends Binder implements ICredential {
         static final int TRANSACTION_createEphemeralKeyPair = 1;
         static final int TRANSACTION_deleteCredential = 3;
         static final int TRANSACTION_deleteWithChallenge = 4;
@@ -206,7 +229,8 @@ public interface ICredential extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICredential.DESCRIPTOR);
             }
@@ -261,14 +285,17 @@ public interface ICredential extends IInterface {
                     return true;
                 case 8:
                     byte[] _arg05 = data.createByteArray();
-                    RequestNamespaceParcel[] _arg12 = (RequestNamespaceParcel[]) data.createTypedArray(RequestNamespaceParcel.CREATOR);
+                    RequestNamespaceParcel[] _arg12 =
+                            (RequestNamespaceParcel[])
+                                    data.createTypedArray(RequestNamespaceParcel.CREATOR);
                     byte[] _arg22 = data.createByteArray();
                     byte[] _arg3 = data.createByteArray();
                     boolean _arg4 = data.readBoolean();
                     boolean _arg5 = data.readBoolean();
                     boolean _arg6 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    GetEntriesResultParcel _result7 = getEntries(_arg05, _arg12, _arg22, _arg3, _arg4, _arg5, _arg6);
+                    GetEntriesResultParcel _result7 =
+                            getEntries(_arg05, _arg12, _arg22, _arg3, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeTypedObject(_result7, 1);
                     return true;
@@ -286,14 +313,16 @@ public interface ICredential extends IInterface {
                     reply.writeTypedArray(_result8, 1);
                     return true;
                 case 11:
-                    AuthKeyParcel _arg07 = (AuthKeyParcel) data.readTypedObject(AuthKeyParcel.CREATOR);
+                    AuthKeyParcel _arg07 =
+                            (AuthKeyParcel) data.readTypedObject(AuthKeyParcel.CREATOR);
                     byte[] _arg14 = data.createByteArray();
                     data.enforceNoDataAvail();
                     storeStaticAuthenticationData(_arg07, _arg14);
                     reply.writeNoException();
                     return true;
                 case 12:
-                    AuthKeyParcel _arg08 = (AuthKeyParcel) data.readTypedObject(AuthKeyParcel.CREATOR);
+                    AuthKeyParcel _arg08 =
+                            (AuthKeyParcel) data.readTypedObject(AuthKeyParcel.CREATOR);
                     long _arg15 = data.readLong();
                     byte[] _arg24 = data.createByteArray();
                     data.enforceNoDataAvail();
@@ -434,7 +463,11 @@ public interface ICredential extends IInterface {
             }
 
             @Override // android.security.identity.ICredential
-            public long selectAuthKey(boolean allowUsingExhaustedKeys, boolean allowUsingExpiredKeys, boolean incrementUsageCount) throws RemoteException {
+            public long selectAuthKey(
+                    boolean allowUsingExhaustedKeys,
+                    boolean allowUsingExpiredKeys,
+                    boolean incrementUsageCount)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -453,7 +486,15 @@ public interface ICredential extends IInterface {
             }
 
             @Override // android.security.identity.ICredential
-            public GetEntriesResultParcel getEntries(byte[] requestMessage, RequestNamespaceParcel[] requestNamespaces, byte[] sessionTranscript, byte[] readerSignature, boolean allowUsingExhaustedKeys, boolean allowUsingExpiredKeys, boolean incrementUsageCount) throws RemoteException {
+            public GetEntriesResultParcel getEntries(
+                    byte[] requestMessage,
+                    RequestNamespaceParcel[] requestNamespaces,
+                    byte[] sessionTranscript,
+                    byte[] readerSignature,
+                    boolean allowUsingExhaustedKeys,
+                    boolean allowUsingExpiredKeys,
+                    boolean incrementUsageCount)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -467,7 +508,9 @@ public interface ICredential extends IInterface {
                     _data.writeBoolean(incrementUsageCount);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    GetEntriesResultParcel _result = (GetEntriesResultParcel) _reply.readTypedObject(GetEntriesResultParcel.CREATOR);
+                    GetEntriesResultParcel _result =
+                            (GetEntriesResultParcel)
+                                    _reply.readTypedObject(GetEntriesResultParcel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -476,7 +519,9 @@ public interface ICredential extends IInterface {
             }
 
             @Override // android.security.identity.ICredential
-            public void setAvailableAuthenticationKeys(int keyCount, int maxUsesPerKey, long minValidTimeMillis) throws RemoteException {
+            public void setAvailableAuthenticationKeys(
+                    int keyCount, int maxUsesPerKey, long minValidTimeMillis)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -500,7 +545,8 @@ public interface ICredential extends IInterface {
                     _data.writeInterfaceToken(ICredential.DESCRIPTOR);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    AuthKeyParcel[] _result = (AuthKeyParcel[]) _reply.createTypedArray(AuthKeyParcel.CREATOR);
+                    AuthKeyParcel[] _result =
+                            (AuthKeyParcel[]) _reply.createTypedArray(AuthKeyParcel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -509,7 +555,8 @@ public interface ICredential extends IInterface {
             }
 
             @Override // android.security.identity.ICredential
-            public void storeStaticAuthenticationData(AuthKeyParcel authenticationKey, byte[] staticAuthData) throws RemoteException {
+            public void storeStaticAuthenticationData(
+                    AuthKeyParcel authenticationKey, byte[] staticAuthData) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -525,7 +572,11 @@ public interface ICredential extends IInterface {
             }
 
             @Override // android.security.identity.ICredential
-            public void storeStaticAuthenticationDataWithExpiration(AuthKeyParcel authenticationKey, long expirationDateMillisSinceEpoch, byte[] staticAuthData) throws RemoteException {
+            public void storeStaticAuthenticationDataWithExpiration(
+                    AuthKeyParcel authenticationKey,
+                    long expirationDateMillisSinceEpoch,
+                    byte[] staticAuthData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -581,7 +632,8 @@ public interface ICredential extends IInterface {
                     _data.writeInterfaceToken(ICredential.DESCRIPTOR);
                     this.mRemote.transact(15, _data, _reply, 0);
                     _reply.readException();
-                    IWritableCredential _result = IWritableCredential.Stub.asInterface(_reply.readStrongBinder());
+                    IWritableCredential _result =
+                            IWritableCredential.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

@@ -24,8 +24,7 @@ public class NetworkPinner extends ConnectivityManager.NetworkCallback {
     }
 
     private static class Callback extends ConnectivityManager.NetworkCallback {
-        private Callback() {
-        }
+        private Callback() {}
 
         @Override // android.net.ConnectivityManager.NetworkCallback
         public void onAvailable(Network network) {
@@ -33,10 +32,13 @@ public class NetworkPinner extends ConnectivityManager.NetworkCallback {
                 if (this != NetworkPinner.sCallback) {
                     return;
                 }
-                if (NetworkPinner.sCM.getBoundNetworkForProcess() == null && NetworkPinner.sNetwork == null) {
+                if (NetworkPinner.sCM.getBoundNetworkForProcess() == null
+                        && NetworkPinner.sNetwork == null) {
                     NetworkPinner.sCM.bindProcessToNetwork(network);
                     NetworkPinner.sNetwork = network;
-                    Log.d(NetworkPinner.TAG, "Wifi alternate reality enabled on network " + network);
+                    Log.d(
+                            NetworkPinner.TAG,
+                            "Wifi alternate reality enabled on network " + network);
                 }
                 NetworkPinner.sLock.notify();
             }
@@ -48,9 +50,12 @@ public class NetworkPinner extends ConnectivityManager.NetworkCallback {
                 if (this != NetworkPinner.sCallback) {
                     return;
                 }
-                if (network.equals(NetworkPinner.sNetwork) && network.equals(NetworkPinner.sCM.getBoundNetworkForProcess())) {
+                if (network.equals(NetworkPinner.sNetwork)
+                        && network.equals(NetworkPinner.sCM.getBoundNetworkForProcess())) {
                     NetworkPinner.unpin();
-                    Log.d(NetworkPinner.TAG, "Wifi alternate reality disabled on network " + network);
+                    Log.d(
+                            NetworkPinner.TAG,
+                            "Wifi alternate reality disabled on network " + network);
                 }
                 NetworkPinner.sLock.notify();
             }

@@ -6,9 +6,8 @@ import android.os.PersistableBundle;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseLongArray;
+
 import com.android.internal.os.PowerStats;
-import com.android.server.power.stats.BatteryStatsImpl;
-import com.android.server.power.stats.PowerStatsCollector;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -35,7 +34,12 @@ public class EnergyConsumerPowerStatsCollector extends PowerStatsCollector {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public EnergyConsumerPowerStatsCollector(com.android.server.power.stats.BatteryStatsImpl.PowerStatsCollectorInjector r8, int r9, java.lang.String r10, int r11, com.android.server.power.stats.BinaryStatePowerStatsLayout r12) {
+    public EnergyConsumerPowerStatsCollector(
+            com.android.server.power.stats.BatteryStatsImpl.PowerStatsCollectorInjector r8,
+            int r9,
+            java.lang.String r10,
+            int r11,
+            com.android.server.power.stats.BinaryStatePowerStatsLayout r12) {
         /*
             r7 = this;
             com.android.server.power.stats.BatteryStatsImpl r0 = com.android.server.power.stats.BatteryStatsImpl.this
@@ -62,7 +66,11 @@ public class EnergyConsumerPowerStatsCollector extends PowerStatsCollector {
             r7.mLayout = r12
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.EnergyConsumerPowerStatsCollector.<init>(com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector, int, java.lang.String, int, com.android.server.power.stats.BinaryStatePowerStatsLayout):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.stats.EnergyConsumerPowerStatsCollector.<init>(com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector,"
+                    + " int, java.lang.String, int,"
+                    + " com.android.server.power.stats.BinaryStatePowerStatsLayout):void");
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
@@ -70,7 +78,12 @@ public class EnergyConsumerPowerStatsCollector extends PowerStatsCollector {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public EnergyConsumerPowerStatsCollector(com.android.server.power.stats.BatteryStatsImpl.PowerStatsCollectorInjector r8, int r9, java.lang.String r10, int r11, com.android.server.power.stats.EnergyConsumerPowerStatsLayout r12) {
+    public EnergyConsumerPowerStatsCollector(
+            com.android.server.power.stats.BatteryStatsImpl.PowerStatsCollectorInjector r8,
+            int r9,
+            java.lang.String r10,
+            int r11,
+            com.android.server.power.stats.EnergyConsumerPowerStatsLayout r12) {
         /*
             r7 = this;
             com.android.server.power.stats.BatteryStatsImpl r0 = com.android.server.power.stats.BatteryStatsImpl.this
@@ -100,7 +113,11 @@ public class EnergyConsumerPowerStatsCollector extends PowerStatsCollector {
             r7.mLayout = r12
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.EnergyConsumerPowerStatsCollector.<init>(com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector, int, java.lang.String, int, com.android.server.power.stats.EnergyConsumerPowerStatsLayout):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.stats.EnergyConsumerPowerStatsCollector.<init>(com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector,"
+                    + " int, java.lang.String, int,"
+                    + " com.android.server.power.stats.EnergyConsumerPowerStatsLayout):void");
     }
 
     @Override // com.android.server.power.stats.PowerStatsCollector
@@ -113,23 +130,39 @@ public class EnergyConsumerPowerStatsCollector extends PowerStatsCollector {
             if (!this.mEnabled) {
                 return null;
             }
-            BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector = this.mInjector;
-            PowerStatsCollector.ConsumedEnergyRetrieverImpl consumedEnergyRetrieverImpl = powerStatsCollectorInjector.mConsumedEnergyRetriever;
+            BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector =
+                    this.mInjector;
+            PowerStatsCollector.ConsumedEnergyRetrieverImpl consumedEnergyRetrieverImpl =
+                    powerStatsCollectorInjector.mConsumedEnergyRetriever;
             this.mConsumedEnergyRetriever = consumedEnergyRetrieverImpl;
-            this.mVoltageSupplier = new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0(powerStatsCollectorInjector);
+            this.mVoltageSupplier =
+                    new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0(
+                            powerStatsCollectorInjector);
             if (this.mEnergyConsumerIds == null) {
-                this.mEnergyConsumerIds = consumedEnergyRetrieverImpl.getEnergyConsumerIds(this.mEnergyConsumerType, this.mEnergyConsumerName);
+                this.mEnergyConsumerIds =
+                        consumedEnergyRetrieverImpl.getEnergyConsumerIds(
+                                this.mEnergyConsumerType, this.mEnergyConsumerName);
             }
             PersistableBundle persistableBundle = new PersistableBundle();
             energyConsumerPowerStatsLayout.toExtras(persistableBundle);
-            this.mPowerStats = new PowerStats(new PowerStats.Descriptor(this.mPowerComponentId, this.mPowerComponentName, energyConsumerPowerStatsLayout.mDeviceStatsArrayLength, (SparseArray) null, 0, energyConsumerPowerStatsLayout.mUidStatsArrayLength, persistableBundle));
+            this.mPowerStats =
+                    new PowerStats(
+                            new PowerStats.Descriptor(
+                                    this.mPowerComponentId,
+                                    this.mPowerComponentName,
+                                    energyConsumerPowerStatsLayout.mDeviceStatsArrayLength,
+                                    (SparseArray) null,
+                                    0,
+                                    energyConsumerPowerStatsLayout.mUidStatsArrayLength,
+                                    persistableBundle));
             this.mIsInitialized = true;
         }
         int[] iArr = this.mEnergyConsumerIds;
         if (iArr.length == 0) {
             return null;
         }
-        EnergyConsumerResult[] consumedEnergy = this.mConsumedEnergyRetriever.getConsumedEnergy(iArr);
+        EnergyConsumerResult[] consumedEnergy =
+                this.mConsumedEnergyRetriever.getConsumedEnergy(iArr);
         long j3 = 0;
         if (consumedEnergy != null) {
             j = 0;
@@ -154,28 +187,36 @@ public class EnergyConsumerPowerStatsCollector extends PowerStatsCollector {
         int asInt = this.mVoltageSupplier.getAsInt();
         int i = 0;
         if (asInt <= 0) {
-            Slog.wtf("EnergyConsumerPowerStatsCollector", "Unexpected battery voltage (" + asInt + " mV) when querying energy consumers");
+            Slog.wtf(
+                    "EnergyConsumerPowerStatsCollector",
+                    "Unexpected battery voltage (" + asInt + " mV) when querying energy consumers");
             asInt = 0;
         }
         int i2 = this.mLastVoltageMv;
         int i3 = i2 != 0 ? (i2 + asInt) / 2 : asInt;
         this.mLastVoltageMv = asInt;
-        energyConsumerPowerStatsLayout.setConsumedEnergy(this.mPowerStats.stats, 0, PowerStatsCollector.uJtoUc(i3, j6));
+        energyConsumerPowerStatsLayout.setConsumedEnergy(
+                this.mPowerStats.stats, 0, PowerStatsCollector.uJtoUc(i3, j6));
         for (int size = this.mPowerStats.uidStats.size() - 1; size >= 0; size--) {
-            ((long[]) this.mPowerStats.uidStats.valueAt(size))[energyConsumerPowerStatsLayout.mUidEnergyConsumerPosition] = 0;
+            ((long[]) this.mPowerStats.uidStats.valueAt(size))
+                            [energyConsumerPowerStatsLayout.mUidEnergyConsumerPosition] =
+                    0;
         }
         if (consumedEnergy != null) {
             int length2 = consumedEnergy.length - 1;
             while (length2 >= 0) {
-                EnergyConsumerAttribution[] energyConsumerAttributionArr = consumedEnergy[length2].attribution;
+                EnergyConsumerAttribution[] energyConsumerAttributionArr =
+                        consumedEnergy[length2].attribution;
                 if (energyConsumerAttributionArr != null) {
                     int length3 = energyConsumerAttributionArr.length;
                     int i4 = i;
                     while (i4 < length3) {
-                        EnergyConsumerAttribution energyConsumerAttribution = energyConsumerAttributionArr[i4];
+                        EnergyConsumerAttribution energyConsumerAttribution =
+                                energyConsumerAttributionArr[i4];
                         int mapUid = this.mUidResolver.mapUid(energyConsumerAttribution.uid);
                         long j7 = this.mLastConsumerEnergyPerUid.get(mapUid, -1L);
-                        this.mLastConsumerEnergyPerUid.put(mapUid, energyConsumerAttribution.energyUWs);
+                        this.mLastConsumerEnergyPerUid.put(
+                                mapUid, energyConsumerAttribution.energyUWs);
                         if (j7 == -1) {
                             j2 = 0;
                         } else {
@@ -184,10 +225,17 @@ public class EnergyConsumerPowerStatsCollector extends PowerStatsCollector {
                             if (j8 > 0) {
                                 long[] jArr = (long[]) this.mPowerStats.uidStats.get(mapUid);
                                 if (jArr == null) {
-                                    jArr = new long[energyConsumerPowerStatsLayout.mUidStatsArrayLength];
+                                    jArr =
+                                            new long
+                                                    [energyConsumerPowerStatsLayout
+                                                            .mUidStatsArrayLength];
                                     this.mPowerStats.uidStats.put(mapUid, jArr);
                                 }
-                                jArr[energyConsumerPowerStatsLayout.mUidEnergyConsumerPosition] = PowerStatsCollector.uJtoUc(i3, j8) + jArr[energyConsumerPowerStatsLayout.mUidEnergyConsumerPosition];
+                                jArr[energyConsumerPowerStatsLayout.mUidEnergyConsumerPosition] =
+                                        PowerStatsCollector.uJtoUc(i3, j8)
+                                                + jArr[
+                                                        energyConsumerPowerStatsLayout
+                                                                .mUidEnergyConsumerPosition];
                             }
                         }
                         i4++;

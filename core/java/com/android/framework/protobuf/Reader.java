@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.MapEntryLite;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +14,11 @@ interface Reader {
 
     int getTag();
 
-    <T> void mergeGroupField(T t, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    <T> void mergeGroupField(T t, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
-    <T> void mergeMessageField(T t, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    <T> void mergeMessageField(T t, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
     boolean readBool() throws IOException;
 
@@ -51,13 +52,17 @@ interface Reader {
     <T> T readGroup(Class<T> cls, ExtensionRegistryLite extensionRegistryLite) throws IOException;
 
     @Deprecated
-    <T> T readGroupBySchemaWithCheck(Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    <T> T readGroupBySchemaWithCheck(Schema<T> schema, ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
     @Deprecated
-    <T> void readGroupList(List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    <T> void readGroupList(
+            List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
     @Deprecated
-    <T> void readGroupList(List<T> list, Class<T> cls, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    <T> void readGroupList(List<T> list, Class<T> cls, ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
     int readInt32() throws IOException;
 
@@ -67,15 +72,24 @@ interface Reader {
 
     void readInt64List(List<Long> list) throws IOException;
 
-    <K, V> void readMap(Map<K, V> map, MapEntryLite.Metadata<K, V> metadata, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    <K, V> void readMap(
+            Map<K, V> map,
+            MapEntryLite.Metadata<K, V> metadata,
+            ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
     <T> T readMessage(Class<T> cls, ExtensionRegistryLite extensionRegistryLite) throws IOException;
 
-    <T> T readMessageBySchemaWithCheck(Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    <T> T readMessageBySchemaWithCheck(
+            Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException;
 
-    <T> void readMessageList(List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    <T> void readMessageList(
+            List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
-    <T> void readMessageList(List<T> list, Class<T> cls, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    <T> void readMessageList(
+            List<T> list, Class<T> cls, ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
     int readSFixed32() throws IOException;
 

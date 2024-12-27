@@ -1,6 +1,7 @@
 package android.telephony.satellite;
 
 import android.annotation.SystemApi;
+
 import java.util.List;
 
 @SystemApi
@@ -8,6 +9,6 @@ import java.util.List;
 public interface SatelliteProvisionStateCallback {
     void onSatelliteProvisionStateChanged(boolean z);
 
-    default void onSatelliteSubscriptionProvisionStateChanged(List<SatelliteSubscriberProvisionStatus> satelliteSubscriberProvisionStatus) {
-    }
+    default void onSatelliteSubscriptionProvisionStateChanged(
+            List<SatelliteSubscriberProvisionStatus> satelliteSubscriberProvisionStatus) {}
 }

@@ -22,7 +22,12 @@ public class ResponseData extends ASN1Object {
     private ASN1Integer version;
     private boolean versionPresent;
 
-    public ResponseData(ASN1Integer version, ResponderID responderID, ASN1GeneralizedTime producedAt, ASN1Sequence responses, Extensions responseExtensions) {
+    public ResponseData(
+            ASN1Integer version,
+            ResponderID responderID,
+            ASN1GeneralizedTime producedAt,
+            ASN1Sequence responses,
+            Extensions responseExtensions) {
         this.version = version;
         this.responderID = responderID;
         this.producedAt = producedAt;
@@ -30,11 +35,24 @@ public class ResponseData extends ASN1Object {
         this.responseExtensions = responseExtensions;
     }
 
-    public ResponseData(ResponderID responderID, ASN1GeneralizedTime producedAt, ASN1Sequence responses, X509Extensions responseExtensions) {
-        this(V1, responderID, ASN1GeneralizedTime.getInstance(producedAt), responses, Extensions.getInstance(responseExtensions));
+    public ResponseData(
+            ResponderID responderID,
+            ASN1GeneralizedTime producedAt,
+            ASN1Sequence responses,
+            X509Extensions responseExtensions) {
+        this(
+                V1,
+                responderID,
+                ASN1GeneralizedTime.getInstance(producedAt),
+                responses,
+                Extensions.getInstance(responseExtensions));
     }
 
-    public ResponseData(ResponderID responderID, ASN1GeneralizedTime producedAt, ASN1Sequence responses, Extensions responseExtensions) {
+    public ResponseData(
+            ResponderID responderID,
+            ASN1GeneralizedTime producedAt,
+            ASN1Sequence responses,
+            Extensions responseExtensions) {
         this(V1, responderID, producedAt, responses, responseExtensions);
     }
 
@@ -59,7 +77,8 @@ public class ResponseData extends ASN1Object {
         int index4 = index3 + 1;
         this.responses = (ASN1Sequence) seq.getObjectAt(index3);
         if (seq.size() > index4) {
-            this.responseExtensions = Extensions.getInstance((ASN1TaggedObject) seq.getObjectAt(index4), true);
+            this.responseExtensions =
+                    Extensions.getInstance((ASN1TaggedObject) seq.getObjectAt(index4), true);
         }
     }
 
@@ -97,7 +116,8 @@ public class ResponseData extends ASN1Object {
         return this.responseExtensions;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(5);
         if (this.versionPresent || !this.version.equals((ASN1Primitive) V1)) {

@@ -5,8 +5,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.util.SparseArray;
+
 import com.android.server.cocktailbar.mode.CocktailBarModeManager;
 import com.android.server.cocktailbar.settings.CocktailBarSettings;
+
 import com.samsung.android.cocktailbar.Cocktail;
 import com.samsung.android.cocktailbar.CocktailProviderInfo;
 import com.samsung.android.util.SemLog;
@@ -39,7 +41,10 @@ public final class CocktailWhisperPolicy extends AbsCocktailPolicy {
                 }
             }
             if (this.packageName == null) {
-                this.packageName = cocktail.getProvider() != null ? cocktail.getProvider().getPackageName() : null;
+                this.packageName =
+                        cocktail.getProvider() != null
+                                ? cocktail.getProvider().getPackageName()
+                                : null;
                 this.uid = cocktail.getUid();
             }
         }
@@ -80,13 +85,21 @@ public final class CocktailWhisperPolicy extends AbsCocktailPolicy {
                 try {
                     if (i == 1 || i == 2) {
                         if (cocktail.getProviderInfo().whisper != null) {
-                            this.mWhisperInfoList.put(cocktail.getCocktailId(), new WhisperInfo(this.mContext, cocktail.getProviderInfo().whisper, cocktail));
+                            this.mWhisperInfoList.put(
+                                    cocktail.getCocktailId(),
+                                    new WhisperInfo(
+                                            this.mContext,
+                                            cocktail.getProviderInfo().whisper,
+                                            cocktail));
                         } else {
                             SparseArray sparseArray = this.mWhisperInfoList;
                             int cocktailId = cocktail.getCocktailId();
                             WhisperInfo whisperInfo = new WhisperInfo();
                             cocktail.getCocktailId();
-                            whisperInfo.packageName = cocktail.getProvider() != null ? cocktail.getProvider().getPackageName() : null;
+                            whisperInfo.packageName =
+                                    cocktail.getProvider() != null
+                                            ? cocktail.getProvider().getPackageName()
+                                            : null;
                             whisperInfo.uid = cocktail.getUid();
                             sparseArray.put(cocktailId, whisperInfo);
                         }
@@ -105,7 +118,8 @@ public final class CocktailWhisperPolicy extends AbsCocktailPolicy {
     }
 
     @Override // com.android.server.cocktailbar.policy.cocktail.AbsCocktailPolicy
-    public final boolean isAcceptCloseCocktail(Cocktail cocktail, CocktailBarSettings cocktailBarSettings, int i, boolean z) {
+    public final boolean isAcceptCloseCocktail(
+            Cocktail cocktail, CocktailBarSettings cocktailBarSettings, int i, boolean z) {
         if (!z) {
             return true;
         }
@@ -114,17 +128,25 @@ public final class CocktailWhisperPolicy extends AbsCocktailPolicy {
     }
 
     @Override // com.android.server.cocktailbar.policy.cocktail.AbsCocktailPolicy
-    public final boolean isAcceptShowCocktail(Cocktail cocktail, CocktailBarSettings cocktailBarSettings, boolean z) {
+    public final boolean isAcceptShowCocktail(
+            Cocktail cocktail, CocktailBarSettings cocktailBarSettings, boolean z) {
         return false;
     }
 
     @Override // com.android.server.cocktailbar.policy.cocktail.AbsCocktailPolicy
-    public final boolean isAcceptUpdateCocktail(Cocktail cocktail, CocktailBarSettings cocktailBarSettings, CocktailBarModeManager cocktailBarModeManager, int i, boolean z) {
+    public final boolean isAcceptUpdateCocktail(
+            Cocktail cocktail,
+            CocktailBarSettings cocktailBarSettings,
+            CocktailBarModeManager cocktailBarModeManager,
+            int i,
+            boolean z) {
         synchronized (this.mLock) {
             try {
                 int callingUid = Binder.getCallingUid();
-                WhisperInfo whisperInfo = (WhisperInfo) this.mCurrentWhisperInfo.get(cocktail.getCocktailId());
-                if (whisperInfo == null || (callingUid != cocktail.getUid() && callingUid != whisperInfo.uid)) {
+                WhisperInfo whisperInfo =
+                        (WhisperInfo) this.mCurrentWhisperInfo.get(cocktail.getCocktailId());
+                if (whisperInfo == null
+                        || (callingUid != cocktail.getUid() && callingUid != whisperInfo.uid)) {
                     return false;
                 }
                 this.mListener.enableUpdatableCocktail(cocktail.getCocktailId(), i);

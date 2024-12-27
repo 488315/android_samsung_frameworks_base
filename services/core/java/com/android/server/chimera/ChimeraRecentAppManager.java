@@ -11,8 +11,9 @@ import android.os.Message;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
-import com.android.server.chimera.SystemRepository;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -60,61 +61,85 @@ public final class ChimeraRecentAppManager {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class ResourceUsageInfo {
-    }
+    public final class ResourceUsageInfo {}
 
-    public ChimeraRecentAppManager(SystemRepository systemRepository, SettingRepository settingRepository, Looper looper) {
-        SystemRepository.ChimeraProcessObserver chimeraProcessObserver = new SystemRepository.ChimeraProcessObserver() { // from class: com.android.server.chimera.ChimeraRecentAppManager.1
-            @Override // com.android.server.chimera.SystemRepository.ChimeraProcessObserver
-            public final void onForegroundActivitiesChanged(int i, int i2, boolean z, int i3, String[] strArr, boolean z2) {
-                if (!z || z2) {
-                    return;
-                }
-                ChimeraRecentAppManager chimeraRecentAppManager = ChimeraRecentAppManager.this;
-                if (chimeraRecentAppManager.mSettingRepository.mIsDynamicTargetFreeEnabled) {
-                    boolean z3 = false;
-                    String str = strArr[0];
-                    SystemRepository systemRepository2 = chimeraRecentAppManager.mSystemRepository;
-                    if (((ArrayMap) systemRepository2.mPkgIconMap).containsKey(str)) {
-                        z3 = ((Boolean) ((ArrayMap) systemRepository2.mPkgIconMap).get(str)).booleanValue();
-                    } else {
-                        Intent intent = new Intent("android.intent.action.MAIN", (Uri) null);
-                        intent.addCategory("android.intent.category.LAUNCHER");
-                        intent.setPackage(str);
-                        List queryIntentActivitiesAsUser = systemRepository2.mPackageManager.queryIntentActivitiesAsUser(intent, 0, i3);
-                        if (queryIntentActivitiesAsUser != null && queryIntentActivitiesAsUser.size() > 0) {
-                            z3 = true;
+    public ChimeraRecentAppManager(
+            SystemRepository systemRepository, SettingRepository settingRepository, Looper looper) {
+        SystemRepository.ChimeraProcessObserver chimeraProcessObserver =
+                new SystemRepository
+                        .ChimeraProcessObserver() { // from class:
+                                                    // com.android.server.chimera.ChimeraRecentAppManager.1
+                    @Override // com.android.server.chimera.SystemRepository.ChimeraProcessObserver
+                    public final void onForegroundActivitiesChanged(
+                            int i, int i2, boolean z, int i3, String[] strArr, boolean z2) {
+                        if (!z || z2) {
+                            return;
                         }
-                        ((ArrayMap) systemRepository2.mPkgIconMap).put(str, Boolean.valueOf(z3));
-                    }
-                    if (z3) {
-                        RecentAppHandler recentAppHandler = chimeraRecentAppManager.mHandler;
-                        Integer valueOf = Integer.valueOf(i2);
-                        systemRepository2.getClass();
-                        if (recentAppHandler != null) {
-                            recentAppHandler.sendMessage(Message.obtain(recentAppHandler, 1, valueOf));
-                        }
-                        if (chimeraRecentAppManager.mPsiSomeTotalList.containsKey(Integer.valueOf(i2))) {
-                            RecentAppHandler recentAppHandler2 = chimeraRecentAppManager.mHandler;
-                            Integer valueOf2 = Integer.valueOf(i2);
-                            systemRepository2.getClass();
-                            if (recentAppHandler2.hasMessages(2, valueOf2)) {
-                                RecentAppHandler recentAppHandler3 = chimeraRecentAppManager.mHandler;
-                                Integer valueOf3 = Integer.valueOf(i2);
+                        ChimeraRecentAppManager chimeraRecentAppManager =
+                                ChimeraRecentAppManager.this;
+                        if (chimeraRecentAppManager
+                                .mSettingRepository
+                                .mIsDynamicTargetFreeEnabled) {
+                            boolean z3 = false;
+                            String str = strArr[0];
+                            SystemRepository systemRepository2 =
+                                    chimeraRecentAppManager.mSystemRepository;
+                            if (((ArrayMap) systemRepository2.mPkgIconMap).containsKey(str)) {
+                                z3 =
+                                        ((Boolean)
+                                                        ((ArrayMap) systemRepository2.mPkgIconMap)
+                                                                .get(str))
+                                                .booleanValue();
+                            } else {
+                                Intent intent =
+                                        new Intent("android.intent.action.MAIN", (Uri) null);
+                                intent.addCategory("android.intent.category.LAUNCHER");
+                                intent.setPackage(str);
+                                List queryIntentActivitiesAsUser =
+                                        systemRepository2.mPackageManager
+                                                .queryIntentActivitiesAsUser(intent, 0, i3);
+                                if (queryIntentActivitiesAsUser != null
+                                        && queryIntentActivitiesAsUser.size() > 0) {
+                                    z3 = true;
+                                }
+                                ((ArrayMap) systemRepository2.mPkgIconMap)
+                                        .put(str, Boolean.valueOf(z3));
+                            }
+                            if (z3) {
+                                RecentAppHandler recentAppHandler =
+                                        chimeraRecentAppManager.mHandler;
+                                Integer valueOf = Integer.valueOf(i2);
                                 systemRepository2.getClass();
-                                recentAppHandler3.removeMessages(2, valueOf3);
+                                if (recentAppHandler != null) {
+                                    recentAppHandler.sendMessage(
+                                            Message.obtain(recentAppHandler, 1, valueOf));
+                                }
+                                if (chimeraRecentAppManager.mPsiSomeTotalList.containsKey(
+                                        Integer.valueOf(i2))) {
+                                    RecentAppHandler recentAppHandler2 =
+                                            chimeraRecentAppManager.mHandler;
+                                    Integer valueOf2 = Integer.valueOf(i2);
+                                    systemRepository2.getClass();
+                                    if (recentAppHandler2.hasMessages(2, valueOf2)) {
+                                        RecentAppHandler recentAppHandler3 =
+                                                chimeraRecentAppManager.mHandler;
+                                        Integer valueOf3 = Integer.valueOf(i2);
+                                        systemRepository2.getClass();
+                                        recentAppHandler3.removeMessages(2, valueOf3);
+                                    }
+                                }
+                                RecentAppHandler recentAppHandler4 =
+                                        chimeraRecentAppManager.mHandler;
+                                Integer valueOf4 = Integer.valueOf(i2);
+                                systemRepository2.getClass();
+                                if (recentAppHandler4 != null) {
+                                    recentAppHandler4.sendMessageDelayed(
+                                            Message.obtain(recentAppHandler4, 2, valueOf4), 1000L);
+                                }
                             }
                         }
-                        RecentAppHandler recentAppHandler4 = chimeraRecentAppManager.mHandler;
-                        Integer valueOf4 = Integer.valueOf(i2);
-                        systemRepository2.getClass();
-                        if (recentAppHandler4 != null) {
-                            recentAppHandler4.sendMessageDelayed(Message.obtain(recentAppHandler4, 2, valueOf4), 1000L);
-                        }
                     }
-                }
-            }
-        };
+                };
         this.mProcessObserver = chimeraProcessObserver;
         this.mSystemRepository = systemRepository;
         this.mSettingRepository = settingRepository;
@@ -133,7 +158,11 @@ public final class ChimeraRecentAppManager {
         if (file.isDirectory() && (list = file.list()) != null) {
             for (int i2 = 0; i2 < list.length; i2++) {
                 if (list[i2].contains("pid")) {
-                    String m2 = AudioOffloadInfo$$ExternalSyntheticOutline0.m(Preconditions$$ExternalSyntheticOutline0.m(m, "/"), list[i2], "/cgroup.procs");
+                    String m2 =
+                            AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                    Preconditions$$ExternalSyntheticOutline0.m(m, "/"),
+                                    list[i2],
+                                    "/cgroup.procs");
                     try {
                         bufferedReader = new BufferedReader(new FileReader(m2));
                     } catch (IOException e) {
@@ -144,7 +173,9 @@ public final class ChimeraRecentAppManager {
                     }
                     try {
                         try {
-                            for (String readLine = bufferedReader.readLine(); readLine != null; readLine = bufferedReader.readLine()) {
+                            for (String readLine = bufferedReader.readLine();
+                                    readLine != null;
+                                    readLine = bufferedReader.readLine()) {
                                 hashSet.add(Integer.valueOf(readLine));
                             }
                             try {
@@ -240,6 +271,8 @@ public final class ChimeraRecentAppManager {
             Method dump skipped, instructions count: 250
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.ChimeraRecentAppManager.updatePsiInfo(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.chimera.ChimeraRecentAppManager.updatePsiInfo(int):void");
     }
 }

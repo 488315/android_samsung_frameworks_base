@@ -3,6 +3,7 @@ package android.content;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Handler;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -18,7 +19,11 @@ public class ContentQueryMap extends Observable {
     private Map<String, ContentValues> mValues = null;
     private boolean mDirty = false;
 
-    public ContentQueryMap(Cursor cursor, String columnNameOfKey, boolean keepUpdated, Handler handlerForUpdateNotifications) {
+    public ContentQueryMap(
+            Cursor cursor,
+            String columnNameOfKey,
+            boolean keepUpdated,
+            Handler handlerForUpdateNotifications) {
         this.mHandlerForUpdateNotifications = null;
         this.mCursor = cursor;
         this.mColumnNames = this.mCursor.getColumnNames();
@@ -44,16 +49,18 @@ public class ContentQueryMap extends Observable {
             this.mHandlerForUpdateNotifications = new Handler();
         }
         if (this.mContentObserver == null) {
-            this.mContentObserver = new ContentObserver(this.mHandlerForUpdateNotifications) { // from class: android.content.ContentQueryMap.1
-                @Override // android.database.ContentObserver
-                public void onChange(boolean selfChange) {
-                    if (ContentQueryMap.this.countObservers() != 0) {
-                        ContentQueryMap.this.requery();
-                    } else {
-                        ContentQueryMap.this.mDirty = true;
-                    }
-                }
-            };
+            this.mContentObserver =
+                    new ContentObserver(this.mHandlerForUpdateNotifications) { // from class:
+                        // android.content.ContentQueryMap.1
+                        @Override // android.database.ContentObserver
+                        public void onChange(boolean selfChange) {
+                            if (ContentQueryMap.this.countObservers() != 0) {
+                                ContentQueryMap.this.requery();
+                            } else {
+                                ContentQueryMap.this.mDirty = true;
+                            }
+                        }
+                    };
         }
         this.mCursor.registerContentObserver(this.mContentObserver);
         this.mDirty = true;

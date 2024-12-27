@@ -7,10 +7,11 @@ import android.print.IPrinterDiscoveryObserver;
 import android.print.PrintJobId;
 import android.print.PrinterId;
 import android.util.Log;
+
 import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.internal.util.function.pooled.PooledSupplier;
-import com.android.server.print.UserState;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,16 +36,21 @@ public final /* synthetic */ class UserState$$ExternalSyntheticLambda4 implement
                         if (userState.mPrintJobStateChangeListenerRecords == null) {
                             return;
                         }
-                        ArrayList arrayList = new ArrayList(userState.mPrintJobStateChangeListenerRecords);
+                        ArrayList arrayList =
+                                new ArrayList(userState.mPrintJobStateChangeListenerRecords);
                         int size = arrayList.size();
                         for (int i = 0; i < size; i++) {
-                            UserState.AnonymousClass2 anonymousClass2 = (UserState.AnonymousClass2) arrayList.get(i);
+                            UserState.AnonymousClass2 anonymousClass2 =
+                                    (UserState.AnonymousClass2) arrayList.get(i);
                             int i2 = anonymousClass2.appId;
                             if (i2 == -2 || i2 == asInt) {
                                 try {
                                     anonymousClass2.listener.onPrintJobStateChanged(printJobId);
                                 } catch (RemoteException e) {
-                                    Log.e("UserState", "Error notifying for print job state change", e);
+                                    Log.e(
+                                            "UserState",
+                                            "Error notifying for print job state change",
+                                            e);
                                 }
                             }
                         }
@@ -56,13 +62,23 @@ public final /* synthetic */ class UserState$$ExternalSyntheticLambda4 implement
                 RemotePrintService remotePrintService = (RemotePrintService) obj2;
                 ((UserState.AnonymousClass1) obj).getClass();
                 remotePrintService.getClass();
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda1(1), remotePrintService, (List) obj3));
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new RemotePrintService$$ExternalSyntheticLambda1(1),
+                                        remotePrintService,
+                                        (List) obj3));
                 return;
             case 2:
                 RemotePrintService remotePrintService2 = (RemotePrintService) obj2;
                 ((UserState.AnonymousClass1) obj).getClass();
                 remotePrintService2.getClass();
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda1(5), remotePrintService2, (PrinterId) obj3));
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new RemotePrintService$$ExternalSyntheticLambda1(5),
+                                        remotePrintService2,
+                                        (PrinterId) obj3));
                 return;
             case 3:
                 ArrayList arrayList2 = (ArrayList) obj2;
@@ -70,13 +86,20 @@ public final /* synthetic */ class UserState$$ExternalSyntheticLambda4 implement
                 ((UserState.AnonymousClass1) obj).getClass();
                 int size2 = arrayList2.size();
                 for (int i3 = 0; i3 < size2; i3++) {
-                    RemotePrintService remotePrintService3 = (RemotePrintService) arrayList2.get(i3);
+                    RemotePrintService remotePrintService3 =
+                            (RemotePrintService) arrayList2.get(i3);
                     remotePrintService3.getClass();
-                    Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda1(4), remotePrintService3, list));
+                    Handler.getMain()
+                            .sendMessage(
+                                    PooledLambda.obtainMessage(
+                                            new RemotePrintService$$ExternalSyntheticLambda1(4),
+                                            remotePrintService3,
+                                            list));
                 }
                 return;
             case 4:
-                IPrinterDiscoveryObserver iPrinterDiscoveryObserver = (IPrinterDiscoveryObserver) obj2;
+                IPrinterDiscoveryObserver iPrinterDiscoveryObserver =
+                        (IPrinterDiscoveryObserver) obj2;
                 ArrayList arrayList3 = (ArrayList) obj3;
                 ((UserState.AnonymousClass1) obj).getClass();
                 try {
@@ -90,7 +113,12 @@ public final /* synthetic */ class UserState$$ExternalSyntheticLambda4 implement
                 RemotePrintService remotePrintService4 = (RemotePrintService) obj2;
                 ((UserState.AnonymousClass1) obj).getClass();
                 remotePrintService4.getClass();
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda1(6), remotePrintService4, (PrinterId) obj3));
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new RemotePrintService$$ExternalSyntheticLambda1(6),
+                                        remotePrintService4,
+                                        (PrinterId) obj3));
                 return;
         }
     }

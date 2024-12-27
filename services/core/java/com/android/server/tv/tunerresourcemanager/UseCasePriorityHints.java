@@ -4,13 +4,16 @@ import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -22,7 +25,7 @@ public final class UseCasePriorityHints {
     public Set mVendorDefinedUseCase;
 
     public final void addNewUseCasePriority(int i, int i2, int i3) {
-        this.mPriorityHints.append(i, new int[]{i2, i3});
+        this.mPriorityHints.append(i, new int[] {i2, i3});
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -36,12 +39,15 @@ public final class UseCasePriorityHints {
             if (resolvePullParser.getEventType() == 2) {
                 String name = resolvePullParser.getName();
                 if (name.equals("useCaseDefault")) {
-                    this.mDefaultForeground = resolvePullParser.getAttributeInt((String) null, "fgPriority");
-                    this.mDefaultBackground = resolvePullParser.getAttributeInt((String) null, "bgPriority");
+                    this.mDefaultForeground =
+                            resolvePullParser.getAttributeInt((String) null, "fgPriority");
+                    this.mDefaultBackground =
+                            resolvePullParser.getAttributeInt((String) null, "bgPriority");
                     resolvePullParser.nextTag();
                     resolvePullParser.require(3, (String) null, name);
                 } else if (name.equals("useCasePreDefined")) {
-                    String attributeValue = resolvePullParser.getAttributeValue((String) null, "type");
+                    String attributeValue =
+                            resolvePullParser.getAttributeValue((String) null, "type");
                     attributeValue.getClass();
                     switch (attributeValue.hashCode()) {
                         case -884787515:
@@ -104,15 +110,23 @@ public final class UseCasePriorityHints {
                             break;
                     }
                     if (i == -1) {
-                        Slog.e("UseCasePriorityHints", "Wrong predefined use case name given in the vendor config.");
+                        Slog.e(
+                                "UseCasePriorityHints",
+                                "Wrong predefined use case name given in the vendor config.");
                     } else {
-                        addNewUseCasePriority(i, resolvePullParser.getAttributeInt((String) null, "fgPriority"), resolvePullParser.getAttributeInt((String) null, "bgPriority"));
+                        addNewUseCasePriority(
+                                i,
+                                resolvePullParser.getAttributeInt((String) null, "fgPriority"),
+                                resolvePullParser.getAttributeInt((String) null, "bgPriority"));
                         resolvePullParser.nextTag();
                         resolvePullParser.require(3, (String) null, name);
                     }
                 } else if (name.equals("useCaseVendor")) {
                     int attributeInt = resolvePullParser.getAttributeInt((String) null, "id");
-                    addNewUseCasePriority(attributeInt, resolvePullParser.getAttributeInt((String) null, "fgPriority"), resolvePullParser.getAttributeInt((String) null, "bgPriority"));
+                    addNewUseCasePriority(
+                            attributeInt,
+                            resolvePullParser.getAttributeInt((String) null, "fgPriority"),
+                            resolvePullParser.getAttributeInt((String) null, "bgPriority"));
                     ((HashSet) this.mVendorDefinedUseCase).add(Integer.valueOf(attributeInt));
                     resolvePullParser.nextTag();
                     resolvePullParser.require(3, (String) null, name);
@@ -137,13 +151,20 @@ public final class UseCasePriorityHints {
             int keyAt = this.mPriorityHints.keyAt(i3);
             int[] iArr = (int[]) this.mPriorityHints.get(keyAt);
             if (DEBUG) {
-                Slog.d("UseCasePriorityHints", "{defaultFg=" + this.mDefaultForeground + ", defaultBg=" + this.mDefaultBackground + "}");
+                Slog.d(
+                        "UseCasePriorityHints",
+                        "{defaultFg="
+                                + this.mDefaultForeground
+                                + ", defaultBg="
+                                + this.mDefaultBackground
+                                + "}");
                 StringBuilder sb = new StringBuilder("{useCase=");
                 sb.append(keyAt);
                 sb.append(", fg=");
                 sb.append(iArr[0]);
                 sb.append(", bg=");
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, iArr[1], "}", "UseCasePriorityHints");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        sb, iArr[1], "}", "UseCasePriorityHints");
             }
         }
     }

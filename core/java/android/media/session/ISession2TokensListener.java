@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
@@ -16,8 +17,7 @@ public interface ISession2TokensListener extends IInterface {
 
     public static class Default implements ISession2TokensListener {
         @Override // android.media.session.ISession2TokensListener
-        public void onSession2TokensChanged(List<Session2Token> tokens) throws RemoteException {
-        }
+        public void onSession2TokensChanged(List<Session2Token> tokens) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +25,7 @@ public interface ISession2TokensListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISession2TokensListener {
+    public abstract static class Stub extends Binder implements ISession2TokensListener {
         static final int TRANSACTION_onSession2TokensChanged = 1;
 
         public Stub() {
@@ -63,7 +63,8 @@ public interface ISession2TokensListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISession2TokensListener.DESCRIPTOR);
             }

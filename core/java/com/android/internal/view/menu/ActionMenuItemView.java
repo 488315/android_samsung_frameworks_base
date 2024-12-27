@@ -23,12 +23,15 @@ import android.widget.Button;
 import android.widget.ForwardingListener;
 import android.widget.TextView;
 import android.widget.Toolbar;
+
 import com.android.internal.R;
-import com.android.internal.view.menu.MenuBuilder;
-import com.android.internal.view.menu.MenuView;
 
 /* loaded from: classes5.dex */
-public class ActionMenuItemView extends TextView implements MenuView.ItemView, View.OnClickListener, ActionMenuView.ActionMenuChildView, View.OnLongClickListener {
+public class ActionMenuItemView extends TextView
+        implements MenuView.ItemView,
+                View.OnClickListener,
+                ActionMenuView.ActionMenuChildView,
+                View.OnLongClickListener {
     private static final int MAX_ICON_SIZE = 32;
     private static final String TAG = "ActionMenuItemView";
     private boolean mAllowTextWithIcon;
@@ -49,7 +52,7 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
     private int mSavedPaddingLeft;
     private CharSequence mTitle;
 
-    public static abstract class PopupCallback {
+    public abstract static class PopupCallback {
         public abstract ShowableListMenu getPopup();
     }
 
@@ -65,7 +68,8 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public ActionMenuItemView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ActionMenuItemView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mIsChangedRelativePadding = false;
         this.mIsDarkTheme = false;
@@ -74,7 +78,9 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
         this.mMaxFontScale = 1.3f;
         Resources res = context.getResources();
         this.mAllowTextWithIcon = shouldAllowTextWithIcon();
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ActionMenuItemView, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.ActionMenuItemView, defStyleAttr, defStyleRes);
         this.mMinWidth = a.getDimensionPixelSize(0, 0);
         a.recycle();
         float density = res.getDisplayMetrics().density;
@@ -89,10 +95,14 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
         context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefaultDark, outValue, true);
         this.mIsDarkTheme = outValue.data != 0;
         if (this.mIsThemeDeviceDefaultFamily) {
-            TypedArray a2 = context.getTheme().obtainStyledAttributes(null, R.styleable.Theme, 0, 0);
+            TypedArray a2 =
+                    context.getTheme().obtainStyledAttributes(null, R.styleable.Theme, 0, 0);
             int actionMeneTextAppearnceId = a2.getResourceId(187, 0);
             a2.recycle();
-            TypedArray a3 = getContext().obtainStyledAttributes(actionMeneTextAppearnceId, R.styleable.TextAppearance);
+            TypedArray a3 =
+                    getContext()
+                            .obtainStyledAttributes(
+                                    actionMeneTextAppearnceId, R.styleable.TextAppearance);
             TypedValue outValue2 = a3.peekValue(0);
             a3.recycle();
             if (outValue2 != null) {
@@ -151,14 +161,18 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
         setId(itemData.getItemId());
         setVisibility(itemData.isVisible() ? 0 : 8);
         setEnabled(itemData.isEnabled());
-        if (itemData.hasSubMenu() && !this.mIsThemeDeviceDefaultFamily && this.mForwardingListener == null) {
+        if (itemData.hasSubMenu()
+                && !this.mIsThemeDeviceDefaultFamily
+                && this.mForwardingListener == null) {
             this.mForwardingListener = new ActionMenuItemForwardingListener();
         }
     }
 
     @Override // android.widget.TextView, android.view.View
     public boolean onTouchEvent(MotionEvent e) {
-        if (this.mItemData.hasSubMenu() && this.mForwardingListener != null && this.mForwardingListener.onTouch(this, e)) {
+        if (this.mItemData.hasSubMenu()
+                && this.mForwardingListener != null
+                && this.mForwardingListener.onTouch(this, e)) {
             return true;
         }
         return super.onTouchEvent(e);
@@ -170,7 +184,9 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
         if (this.mItemInvoker != null) {
             this.mItemInvoker.invokeItem(this.mItemData);
         }
-        if (this.mPopupCallback != null && (popup = this.mPopupCallback.getPopup()) != null && popup.isShowing()) {
+        if (this.mPopupCallback != null
+                && (popup = this.mPopupCallback.getPopup()) != null
+                && popup.isShowing()) {
             v.setTooltipNull(true);
         }
     }
@@ -189,12 +205,10 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
     }
 
     @Override // com.android.internal.view.menu.MenuView.ItemView
-    public void setCheckable(boolean checkable) {
-    }
+    public void setCheckable(boolean checkable) {}
 
     @Override // com.android.internal.view.menu.MenuView.ItemView
-    public void setChecked(boolean checked) {
-    }
+    public void setChecked(boolean checked) {}
 
     public void setExpandedFormat(boolean expandedFormat) {
         if (this.mExpandedFormat != expandedFormat) {
@@ -206,7 +220,11 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
     }
 
     private void updateTextButtonVisibility() {
-        boolean visible = (!TextUtils.isEmpty(this.mTitle)) & (this.mIcon == null || (this.mItemData.showsTextAsAction() && (this.mAllowTextWithIcon || this.mExpandedFormat)));
+        boolean visible =
+                (!TextUtils.isEmpty(this.mTitle))
+                        & (this.mIcon == null
+                                || (this.mItemData.showsTextAsAction()
+                                        && (this.mAllowTextWithIcon || this.mExpandedFormat)));
         if (this.mIsThemeDeviceDefaultFamily && this.mDefaultTextSize > 0.0f) {
             float fontScale = getContext().getResources().getConfiguration().fontScale;
             if (fontScale > this.mMaxFontScale) {
@@ -268,8 +286,7 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
     }
 
     @Override // com.android.internal.view.menu.MenuView.ItemView
-    public void setShortcut(boolean showShortcut, char shortcutKey) {
-    }
+    public void setShortcut(boolean showShortcut, char shortcutKey) {}
 
     @Override // com.android.internal.view.menu.MenuView.ItemView
     public void setTitle(CharSequence title) {
@@ -350,18 +367,24 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
             getLocationInWindow(windowPos);
             Rect displayFrame = new Rect();
             getWindowVisibleDisplayFrame(displayFrame);
-            Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+            Display display =
+                    ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE))
+                            .getDefaultDisplay();
             DisplayMetrics realDisplayMetrics = new DisplayMetrics();
             display.getRealMetrics(realDisplayMetrics);
             int diff = 0;
             View menuView = (View) getParent();
             View toolbar = menuView != null ? (View) menuView.getParent() : null;
-            if ((toolbar instanceof Toolbar) && toolbar.getWidth() < displayFrame.right - displayFrame.left) {
+            if ((toolbar instanceof Toolbar)
+                    && toolbar.getWidth() < displayFrame.right - displayFrame.left) {
                 diff = (screenPos[0] - windowPos[0]) - displayFrame.left;
             }
             int yOffset = windowPos[1] + height;
             if (getLayoutDirection() == 0) {
-                xOffset = (((displayFrame.right - displayFrame.left) - (windowPos[0] + width)) + (((width - paddingStart) - paddingEnd) / 2)) - diff;
+                xOffset =
+                        (((displayFrame.right - displayFrame.left) - (windowPos[0] + width))
+                                        + (((width - paddingStart) - paddingEnd) / 2))
+                                - diff;
                 if (checkNaviBarForLandscape()) {
                     float navigationBarHeight = getNavigationBarHeight();
                     float density = res.getDisplayMetrics().density;
@@ -378,7 +401,9 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
     boolean checkNaviBarForLandscape() {
         Context context = getContext();
         Resources res = context.getResources();
-        Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        Display display =
+                ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE))
+                        .getDefaultDisplay();
         Rect displayFrame = new Rect();
         getWindowVisibleDisplayFrame(displayFrame);
         Point displaySize = new Point();
@@ -408,21 +433,27 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         boolean textVisible = hasText();
         if (textVisible && this.mSavedPaddingLeft >= 0) {
-            super.setPadding(this.mSavedPaddingLeft, getPaddingTop(), getPaddingRight(), getPaddingBottom());
+            super.setPadding(
+                    this.mSavedPaddingLeft, getPaddingTop(), getPaddingRight(), getPaddingBottom());
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int widthMode = View.MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = View.MeasureSpec.getSize(widthMeasureSpec);
         int oldMeasuredWidth = getMeasuredWidth();
-        int targetWidth = widthMode == Integer.MIN_VALUE ? Math.min(widthSize, this.mMinWidth) : this.mMinWidth;
+        int targetWidth =
+                widthMode == Integer.MIN_VALUE
+                        ? Math.min(widthSize, this.mMinWidth)
+                        : this.mMinWidth;
         if (widthMode != 1073741824 && this.mMinWidth > 0 && oldMeasuredWidth < targetWidth) {
-            super.onMeasure(View.MeasureSpec.makeMeasureSpec(targetWidth, 1073741824), heightMeasureSpec);
+            super.onMeasure(
+                    View.MeasureSpec.makeMeasureSpec(targetWidth, 1073741824), heightMeasureSpec);
         }
         if (!textVisible && this.mIcon != null) {
             int w = getMeasuredWidth();
             int dw = this.mIcon.getBounds().width();
             if (!this.mIsChangedRelativePadding) {
-                super.setPadding((w - dw) / 2, getPaddingTop(), getPaddingRight(), getPaddingBottom());
+                super.setPadding(
+                        (w - dw) / 2, getPaddingTop(), getPaddingRight(), getPaddingBottom());
             }
         }
     }
@@ -443,7 +474,11 @@ public class ActionMenuItemView extends TextView implements MenuView.ItemView, V
         @Override // android.widget.ForwardingListener
         protected boolean onForwardingStarted() {
             ShowableListMenu popup;
-            return ActionMenuItemView.this.mItemInvoker != null && ActionMenuItemView.this.mItemInvoker.invokeItem(ActionMenuItemView.this.mItemData) && (popup = getPopup()) != null && popup.isShowing();
+            return ActionMenuItemView.this.mItemInvoker != null
+                    && ActionMenuItemView.this.mItemInvoker.invokeItem(
+                            ActionMenuItemView.this.mItemData)
+                    && (popup = getPopup()) != null
+                    && popup.isShowing();
         }
     }
 

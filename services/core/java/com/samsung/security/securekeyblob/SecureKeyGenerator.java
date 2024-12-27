@@ -13,7 +13,9 @@ import android.security.keymaster.KeymasterDefs;
 import android.security.securekeygeneration.ISecureKeyGeneration;
 import android.security.securekeygeneration.SecureKeyInfo;
 import android.util.Log;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.security.InvalidAlgorithmParameterException;
@@ -49,7 +51,10 @@ public final class SecureKeyGenerator {
             byteArrayOutputStream.write(bArr, 0, bArr.length);
         }
         try {
-            arrayList = CertificateFactory.getInstance("X.509").generateCertificates(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
+            arrayList =
+                    CertificateFactory.getInstance("X.509")
+                            .generateCertificates(
+                                    new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
         } catch (CertificateException e) {
             Log.w("SecureKeyGenerator", "Couldn't parse certificates in keystore", e);
             arrayList = new ArrayList<>();
@@ -64,12 +69,37 @@ public final class SecureKeyGenerator {
     }
 
     public static KeyStoreException getKeyStoreException(int i) {
-        return i > 0 ? i != 2 ? i != 3 ? i != 4 ? i != 6 ? i != 7 ? i != 8 ? i != 17 ? new KeyStoreException(i, String.valueOf(i)) : new KeyStoreException(i, "Key permanently invalidated") : new KeyStoreException(i, "Key blob corrupted") : new KeyStoreException(i, "Key not found") : new KeyStoreException(i, "Permission denied") : new KeyStoreException(i, "System error") : new KeyStoreException(i, "Keystore not initialized") : new KeyStoreException(i, "User authentication required") : i != -16 ? new KeyStoreException(i, KeymasterDefs.getErrorMessage(i)) : new KeyStoreException(i, "Invalid user authentication validity duration");
+        return i > 0
+                ? i != 2
+                        ? i != 3
+                                ? i != 4
+                                        ? i != 6
+                                                ? i != 7
+                                                        ? i != 8
+                                                                ? i != 17
+                                                                        ? new KeyStoreException(
+                                                                                i,
+                                                                                String.valueOf(i))
+                                                                        : new KeyStoreException(
+                                                                                i,
+                                                                                "Key permanently"
+                                                                                    + " invalidated")
+                                                                : new KeyStoreException(
+                                                                        i, "Key blob corrupted")
+                                                        : new KeyStoreException(i, "Key not found")
+                                                : new KeyStoreException(i, "Permission denied")
+                                        : new KeyStoreException(i, "System error")
+                                : new KeyStoreException(i, "Keystore not initialized")
+                        : new KeyStoreException(i, "User authentication required")
+                : i != -16
+                        ? new KeyStoreException(i, KeymasterDefs.getErrorMessage(i))
+                        : new KeyStoreException(i, "Invalid user authentication validity duration");
     }
 
     public static KeyParameter makeBytes(int i, byte[] bArr) {
         if (KeymasterDefs.getTagType(i) != -1879048192) {
-            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Not a bytes tag: "));
+            throw new IllegalArgumentException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Not a bytes tag: "));
         }
         KeyParameter keyParameter = new KeyParameter();
         keyParameter.tag = i;
@@ -101,11 +131,14 @@ public final class SecureKeyGenerator {
                 keyParameter.value = KeyParameterValue.paddingMode(i2);
                 return keyParameter;
             default:
-                throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Not an enum or repeatable enum tag: "));
+                throw new IllegalArgumentException(
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                i, "Not an enum or repeatable enum tag: "));
         }
     }
 
-    public final SecureKeyResult generateKeyPair(SecureKeyGenParameterSpec secureKeyGenParameterSpec) {
+    public final SecureKeyResult generateKeyPair(
+            SecureKeyGenParameterSpec secureKeyGenParameterSpec) {
         android.hardware.security.keymint.Certificate[] certificateArr;
         byte[] bArr = secureKeyGenParameterSpec.mServiceTAName;
         if (bArr == null) {
@@ -125,22 +158,33 @@ public final class SecureKeyGenerator {
                 throw new IllegalArgumentException("RSA key size must be >= 512 and <= 8192");
             }
         } else if (i != 224 && i != 256 && i != 384 && i != 521) {
-            throw new IllegalArgumentException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "Unsupported EC key size: ", " bits."));
+            throw new IllegalArgumentException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "Unsupported EC key size: ", " bits."));
         }
         if (secureKeyGenParameterSpec.mChallenge == null) {
             throw new IllegalArgumentException("challenge should not be null");
         }
         try {
             ArrayList arrayList = new ArrayList();
-            SecureKeyInfo handleRemoteExceptionSecureKeyGeneration = handleRemoteExceptionSecureKeyGeneration(new SecureKeyGenerator$$ExternalSyntheticLambda0(this, secureKeyGenParameterSpec));
-            if (handleRemoteExceptionSecureKeyGeneration == null || (certificateArr = handleRemoteExceptionSecureKeyGeneration.attestedCertificates) == null) {
+            SecureKeyInfo handleRemoteExceptionSecureKeyGeneration =
+                    handleRemoteExceptionSecureKeyGeneration(
+                            new SecureKeyGenerator$$ExternalSyntheticLambda0(
+                                    this, secureKeyGenParameterSpec));
+            if (handleRemoteExceptionSecureKeyGeneration == null
+                    || (certificateArr =
+                                    handleRemoteExceptionSecureKeyGeneration.attestedCertificates)
+                            == null) {
                 throw new NullPointerException("SecureKeyGeneration fail");
             }
             for (android.hardware.security.keymint.Certificate certificate : certificateArr) {
                 arrayList.add(certificate.encodedCertificate);
             }
             if (arrayList.size() < 3) {
-                throw new ProviderException("Attestation certificate chain contained " + arrayList.size() + " entries. At least three are required.");
+                throw new ProviderException(
+                        "Attestation certificate chain contained "
+                                + arrayList.size()
+                                + " entries. At least three are required.");
             }
             X509Certificate[] certificates = getCertificates(arrayList);
             byte[] bArr2 = handleRemoteExceptionSecureKeyGeneration.blob;
@@ -151,26 +195,37 @@ public final class SecureKeyGenerator {
             return secureKeyResult;
         } catch (KeyStoreException e) {
             if (e.getErrorCode() == -66) {
-                throw new DeviceAttestationException("Failed to generate attestation certificate chain with deviceIds", getKeyStoreException(e.getErrorCode()));
+                throw new DeviceAttestationException(
+                        "Failed to generate attestation certificate chain with deviceIds",
+                        getKeyStoreException(e.getErrorCode()));
             }
-            throw new ProviderException("Failed to generate attestation certificate chain", getKeyStoreException(e.getErrorCode()));
+            throw new ProviderException(
+                    "Failed to generate attestation certificate chain",
+                    getKeyStoreException(e.getErrorCode()));
         }
     }
 
-    public final SecureKeyInfo handleRemoteExceptionSecureKeyGeneration(SecureKeyGenerator$$ExternalSyntheticLambda0 secureKeyGenerator$$ExternalSyntheticLambda0) {
+    public final SecureKeyInfo handleRemoteExceptionSecureKeyGeneration(
+            SecureKeyGenerator$$ExternalSyntheticLambda0
+                    secureKeyGenerator$$ExternalSyntheticLambda0) {
         ISecureKeyGeneration iSecureKeyGeneration;
         ISecureKeyGeneration iSecureKeyGeneration2;
         synchronized (this) {
             try {
                 if (this.mSamsungSecurekeyGeneratorBinder == null) {
-                    IBinder checkService = ServiceManager.checkService("android.security.securekeygeneration");
+                    IBinder checkService =
+                            ServiceManager.checkService("android.security.securekeygeneration");
                     int i = ISecureKeyGeneration.Stub.$r8$clinit;
                     if (checkService == null) {
                         iSecureKeyGeneration2 = null;
                     } else {
-                        IInterface queryLocalInterface = checkService.queryLocalInterface("android.security.securekeygeneration.ISecureKeyGeneration");
-                        if (queryLocalInterface == null || !(queryLocalInterface instanceof ISecureKeyGeneration)) {
-                            ISecureKeyGeneration.Stub.Proxy proxy = new ISecureKeyGeneration.Stub.Proxy();
+                        IInterface queryLocalInterface =
+                                checkService.queryLocalInterface(
+                                        "android.security.securekeygeneration.ISecureKeyGeneration");
+                        if (queryLocalInterface == null
+                                || !(queryLocalInterface instanceof ISecureKeyGeneration)) {
+                            ISecureKeyGeneration.Stub.Proxy proxy =
+                                    new ISecureKeyGeneration.Stub.Proxy();
                             proxy.mRemote = checkService;
                             iSecureKeyGeneration2 = proxy;
                         } else {

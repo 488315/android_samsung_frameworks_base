@@ -4,24 +4,29 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.List;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class ClassificationsRequest implements Parcelable {
-    public static final Parcelable.Creator<ClassificationsRequest> CREATOR = new Parcelable.Creator<ClassificationsRequest>() { // from class: android.app.contentsuggestions.ClassificationsRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClassificationsRequest createFromParcel(Parcel source) {
-            return new ClassificationsRequest(source.createTypedArrayList(ContentSelection.CREATOR), source.readBundle());
-        }
+    public static final Parcelable.Creator<ClassificationsRequest> CREATOR =
+            new Parcelable.Creator<ClassificationsRequest>() { // from class:
+                // android.app.contentsuggestions.ClassificationsRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClassificationsRequest createFromParcel(Parcel source) {
+                    return new ClassificationsRequest(
+                            source.createTypedArrayList(ContentSelection.CREATOR),
+                            source.readBundle());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClassificationsRequest[] newArray(int size) {
-            return new ClassificationsRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClassificationsRequest[] newArray(int size) {
+                    return new ClassificationsRequest[size];
+                }
+            };
     private final Bundle mExtras;
     private final List<ContentSelection> mSelections;
 

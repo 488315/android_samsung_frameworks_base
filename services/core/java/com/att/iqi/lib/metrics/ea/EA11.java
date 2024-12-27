@@ -2,7 +2,9 @@ package com.att.iqi.lib.metrics.ea;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.att.iqi.lib.Metric;
+
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 
@@ -20,33 +22,57 @@ public class EA11 extends Metric {
     public static final Metric.ID ID = new Metric.ID("EA11");
     private static final byte[] ALL_SETTINGS_UNKNOWN = {-86, -86, -86, -86};
     public static final String KEY_ENABLE_ALERTS_MASTER_TOGGLE = "enable_alerts_master_toggle";
-    public static final String KEY_ENABLE_CMAS_PRESIDENTIAL_ALERTS = "enable_cmas_presidential_alerts";
-    public static final String KEY_ENABLE_CMAS_EXTREME_THREAT_ALERTS = "enable_cmas_extreme_threat_alerts";
-    public static final String KEY_ENABLE_CMAS_SEVERE_THREAT_ALERTS = "enable_cmas_severe_threat_alerts";
+    public static final String KEY_ENABLE_CMAS_PRESIDENTIAL_ALERTS =
+            "enable_cmas_presidential_alerts";
+    public static final String KEY_ENABLE_CMAS_EXTREME_THREAT_ALERTS =
+            "enable_cmas_extreme_threat_alerts";
+    public static final String KEY_ENABLE_CMAS_SEVERE_THREAT_ALERTS =
+            "enable_cmas_severe_threat_alerts";
     public static final String KEY_ENABLE_CMAS_AMBER_ALERTS = "enable_cmas_amber_alerts";
     public static final String KEY_ENABLE_PUBLIC_SAFETY_MESSAGES = "enable_public_safety_messages";
     public static final String KEY_ENABLE_EMERGENCY_ALERTS = "enable_emergency_alerts";
     public static final String KEY_ENABLE_TEST_ALERTS = "enable_test_alerts";
     public static final String KEY_ENABLE_EXERCISE_ALERTS = "enable_exercise_alerts";
     public static final String KEY_OPERATOR_DEFINED_ALERTS = "enable_operator_defined_alerts";
-    public static final String KEY_ENABLE_STATE_LOCAL_TEST_ALERTS = "enable_state_local_test_alerts";
-    public static final String KEY_ENABLE_PUBLIC_SAFETY_MESSAGES_FULL_SCREEN = "enable_public_safety_messages_full_screen";
+    public static final String KEY_ENABLE_STATE_LOCAL_TEST_ALERTS =
+            "enable_state_local_test_alerts";
+    public static final String KEY_ENABLE_PUBLIC_SAFETY_MESSAGES_FULL_SCREEN =
+            "enable_public_safety_messages_full_screen";
     public static final String KEY_ENABLE_ALERT_VIBRATE = "enable_alert_vibrate";
     public static final String KEY_ENABLE_ALERT_SPEECH = "enable_alert_speech";
     public static final String KEY_OVERRIDE_DND = "override_dnd";
-    public static final String KEY_RECEIVE_CMAS_IN_SECOND_LANGUAGE = "receive_cmas_in_second_language";
-    private static final String[] sPreferenceKeys = {KEY_ENABLE_ALERTS_MASTER_TOGGLE, KEY_ENABLE_CMAS_PRESIDENTIAL_ALERTS, KEY_ENABLE_CMAS_EXTREME_THREAT_ALERTS, KEY_ENABLE_CMAS_SEVERE_THREAT_ALERTS, KEY_ENABLE_CMAS_AMBER_ALERTS, KEY_ENABLE_PUBLIC_SAFETY_MESSAGES, KEY_ENABLE_EMERGENCY_ALERTS, KEY_ENABLE_TEST_ALERTS, KEY_ENABLE_EXERCISE_ALERTS, KEY_OPERATOR_DEFINED_ALERTS, KEY_ENABLE_STATE_LOCAL_TEST_ALERTS, KEY_ENABLE_PUBLIC_SAFETY_MESSAGES_FULL_SCREEN, KEY_ENABLE_ALERT_VIBRATE, KEY_ENABLE_ALERT_SPEECH, KEY_OVERRIDE_DND, KEY_RECEIVE_CMAS_IN_SECOND_LANGUAGE};
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.ea.EA11.1
-        @Override // android.os.Parcelable.Creator
-        public EA11 createFromParcel(Parcel parcel) {
-            return new EA11(parcel);
-        }
-
-        @Override // android.os.Parcelable.Creator
-        public EA11[] newArray(int i) {
-            return new EA11[i];
-        }
+    public static final String KEY_RECEIVE_CMAS_IN_SECOND_LANGUAGE =
+            "receive_cmas_in_second_language";
+    private static final String[] sPreferenceKeys = {
+        KEY_ENABLE_ALERTS_MASTER_TOGGLE,
+        KEY_ENABLE_CMAS_PRESIDENTIAL_ALERTS,
+        KEY_ENABLE_CMAS_EXTREME_THREAT_ALERTS,
+        KEY_ENABLE_CMAS_SEVERE_THREAT_ALERTS,
+        KEY_ENABLE_CMAS_AMBER_ALERTS,
+        KEY_ENABLE_PUBLIC_SAFETY_MESSAGES,
+        KEY_ENABLE_EMERGENCY_ALERTS,
+        KEY_ENABLE_TEST_ALERTS,
+        KEY_ENABLE_EXERCISE_ALERTS,
+        KEY_OPERATOR_DEFINED_ALERTS,
+        KEY_ENABLE_STATE_LOCAL_TEST_ALERTS,
+        KEY_ENABLE_PUBLIC_SAFETY_MESSAGES_FULL_SCREEN,
+        KEY_ENABLE_ALERT_VIBRATE,
+        KEY_ENABLE_ALERT_SPEECH,
+        KEY_OVERRIDE_DND,
+        KEY_RECEIVE_CMAS_IN_SECOND_LANGUAGE
     };
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.ea.EA11.1
+                @Override // android.os.Parcelable.Creator
+                public EA11 createFromParcel(Parcel parcel) {
+                    return new EA11(parcel);
+                }
+
+                @Override // android.os.Parcelable.Creator
+                public EA11[] newArray(int i) {
+                    return new EA11[i];
+                }
+            };
 
     public EA11() {
         byte[] bArr = ALL_SETTINGS_UNKNOWN;

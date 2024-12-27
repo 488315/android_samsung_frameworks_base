@@ -3,28 +3,30 @@ package android.telecom;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Locale;
 
 @SystemApi
 @Deprecated
 /* loaded from: classes3.dex */
 public class AudioState implements Parcelable {
-    public static final Parcelable.Creator<AudioState> CREATOR = new Parcelable.Creator<AudioState>() { // from class: android.telecom.AudioState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioState createFromParcel(Parcel source) {
-            boolean isMuted = source.readByte() != 0;
-            int route = source.readInt();
-            int supportedRouteMask = source.readInt();
-            return new AudioState(isMuted, route, supportedRouteMask);
-        }
+    public static final Parcelable.Creator<AudioState> CREATOR =
+            new Parcelable.Creator<AudioState>() { // from class: android.telecom.AudioState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioState createFromParcel(Parcel source) {
+                    boolean isMuted = source.readByte() != 0;
+                    int route = source.readInt();
+                    int supportedRouteMask = source.readInt();
+                    return new AudioState(isMuted, route, supportedRouteMask);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioState[] newArray(int size) {
-            return new AudioState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioState[] newArray(int size) {
+                    return new AudioState[size];
+                }
+            };
     private static final int ROUTE_ALL = 15;
     public static final int ROUTE_BLUETOOTH = 2;
     public static final int ROUTE_EARPIECE = 1;
@@ -58,11 +60,18 @@ public class AudioState implements Parcelable {
             return false;
         }
         AudioState state = (AudioState) obj;
-        return isMuted() == state.isMuted() && getRoute() == state.getRoute() && getSupportedRouteMask() == state.getSupportedRouteMask();
+        return isMuted() == state.isMuted()
+                && getRoute() == state.getRoute()
+                && getSupportedRouteMask() == state.getSupportedRouteMask();
     }
 
     public String toString() {
-        return String.format(Locale.US, "[AudioState isMuted: %b, route: %s, supportedRouteMask: %s]", Boolean.valueOf(this.isMuted), audioRouteToString(this.route), audioRouteToString(this.supportedRouteMask));
+        return String.format(
+                Locale.US,
+                "[AudioState isMuted: %b, route: %s, supportedRouteMask: %s]",
+                Boolean.valueOf(this.isMuted),
+                audioRouteToString(this.route),
+                audioRouteToString(this.supportedRouteMask));
     }
 
     public static String audioRouteToString(int route) {

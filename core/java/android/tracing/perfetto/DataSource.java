@@ -1,10 +1,10 @@
 package android.tracing.perfetto;
 
-import android.tracing.perfetto.DataSourceInstance;
 import android.util.proto.ProtoInputStream;
 
 /* loaded from: classes4.dex */
-public abstract class DataSource<DataSourceInstanceType extends DataSourceInstance, TlsStateType, IncrementalStateType> {
+public abstract class DataSource<
+        DataSourceInstanceType extends DataSourceInstance, TlsStateType, IncrementalStateType> {
     protected final long mNativeObj;
     public final String name;
 
@@ -37,7 +37,8 @@ public abstract class DataSource<DataSourceInstanceType extends DataSourceInstan
         this.mNativeObj = nativeCreate(this, name);
     }
 
-    public final void trace(TraceFunction<DataSourceInstanceType, TlsStateType, IncrementalStateType> fun) {
+    public final void trace(
+            TraceFunction<DataSourceInstanceType, TlsStateType, IncrementalStateType> fun) {
         boolean startedIterator = nativePerfettoDsTraceIterateBegin(this.mNativeObj);
         if (!startedIterator) {
             return;
@@ -45,7 +46,8 @@ public abstract class DataSource<DataSourceInstanceType extends DataSourceInstan
         do {
             try {
                 int instanceIndex = nativeGetPerfettoDsInstanceIndex(this.mNativeObj);
-                TracingContext<DataSourceInstanceType, TlsStateType, IncrementalStateType> ctx = new TracingContext<>(this, instanceIndex);
+                TracingContext<DataSourceInstanceType, TlsStateType, IncrementalStateType> ctx =
+                        new TracingContext<>(this, instanceIndex);
                 fun.trace(ctx);
                 nativeWritePackets(this.mNativeObj, ctx.getAndClearAllPendingTracePackets());
             } finally {
@@ -62,12 +64,17 @@ public abstract class DataSource<DataSourceInstanceType extends DataSourceInstan
         return null;
     }
 
-    public IncrementalStateType createIncrementalState(CreateIncrementalStateArgs<DataSourceInstanceType> args) {
+    public IncrementalStateType createIncrementalState(
+            CreateIncrementalStateArgs<DataSourceInstanceType> args) {
         return null;
     }
 
     public void register(DataSourceParams params) {
-        nativeRegisterDataSource(this.mNativeObj, params.bufferExhaustedPolicy, params.willNotifyOnStop, params.noFlush);
+        nativeRegisterDataSource(
+                this.mNativeObj,
+                params.bufferExhaustedPolicy,
+                params.willNotifyOnStop,
+                params.noFlush);
     }
 
     public DataSourceInstanceType getDataSourceInstanceLocked(int i) {

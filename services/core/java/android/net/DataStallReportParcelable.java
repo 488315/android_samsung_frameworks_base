@@ -5,6 +5,7 @@ import android.hardware.broadcastradio.AmFmBandRange$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -56,13 +57,15 @@ public class DataStallReportParcelable implements Parcelable {
                             if (parcel.dataPosition() - dataPosition < readInt) {
                                 this.dnsConsecutiveTimeouts = parcel.readInt();
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                                 parcel.setDataPosition(dataPosition + readInt);
                                 return;
                             }
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -89,7 +92,25 @@ public class DataStallReportParcelable implements Parcelable {
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         stringJoiner.add("timestampMillis: " + this.timestampMillis);
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("detectionMethod: "), this.detectionMethod, stringJoiner, "tcpPacketFailRate: "), this.tcpPacketFailRate, stringJoiner, "tcpMetricsCollectionPeriodMillis: "), this.tcpMetricsCollectionPeriodMillis, stringJoiner, "dnsConsecutiveTimeouts: "), this.dnsConsecutiveTimeouts, stringJoiner, "DataStallReportParcelable"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                                new StringBuilder("detectionMethod: "),
+                                                this.detectionMethod,
+                                                stringJoiner,
+                                                "tcpPacketFailRate: "),
+                                        this.tcpPacketFailRate,
+                                        stringJoiner,
+                                        "tcpMetricsCollectionPeriodMillis: "),
+                                this.tcpMetricsCollectionPeriodMillis,
+                                stringJoiner,
+                                "dnsConsecutiveTimeouts: "),
+                        this.dnsConsecutiveTimeouts,
+                        stringJoiner,
+                        "DataStallReportParcelable"));
     }
 
     @Override // android.os.Parcelable
@@ -100,7 +121,9 @@ public class DataStallReportParcelable implements Parcelable {
         parcel.writeInt(this.detectionMethod);
         parcel.writeInt(this.tcpPacketFailRate);
         parcel.writeInt(this.tcpMetricsCollectionPeriodMillis);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.dnsConsecutiveTimeouts, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.dnsConsecutiveTimeouts, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

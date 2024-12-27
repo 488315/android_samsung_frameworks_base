@@ -4,10 +4,12 @@ import android.content.Context;
 import android.net.shared.InitialConfiguration$$ExternalSyntheticOutline0;
 import android.os.SystemProperties;
 import android.provider.Settings;
+
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.EnterpriseService;
 import com.android.server.enterprise.license.EnterpriseLicenseService;
 import com.android.server.enterprise.license.IActivationKlmElmObserver;
+
 import com.samsung.android.knox.analytics.activation.model.ActivationInfo;
 import com.samsung.android.knox.analytics.activation.model.IActivationObserver;
 import com.samsung.android.knox.analytics.util.B2CFeatures;
@@ -15,6 +17,7 @@ import com.samsung.android.knox.analytics.util.Log;
 import com.samsung.android.knox.analytics.util.UserManagerHelper;
 import com.samsung.android.knox.license.LicenseInfo;
 import com.samsung.android.knox.license.LicenseResult;
+
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Iterator;
@@ -48,21 +51,27 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.knox.analytics.activation.ActivationMonitor$2, reason: invalid class name */
     public final /* synthetic */ class AnonymousClass2 {
-        public static final /* synthetic */ int[] $SwitchMap$com$samsung$android$knox$analytics$activation$model$ActivationInfo$ActivationStatus;
+        public static final /* synthetic */ int[]
+                $SwitchMap$com$samsung$android$knox$analytics$activation$model$ActivationInfo$ActivationStatus;
 
         static {
             int[] iArr = new int[ActivationInfo.ActivationStatus.values().length];
-            $SwitchMap$com$samsung$android$knox$analytics$activation$model$ActivationInfo$ActivationStatus = iArr;
+            $SwitchMap$com$samsung$android$knox$analytics$activation$model$ActivationInfo$ActivationStatus =
+                    iArr;
             try {
                 iArr[ActivationInfo.ActivationStatus.ON.ordinal()] = 1;
             } catch (NoSuchFieldError unused) {
             }
             try {
-                $SwitchMap$com$samsung$android$knox$analytics$activation$model$ActivationInfo$ActivationStatus[ActivationInfo.ActivationStatus.OFF.ordinal()] = 2;
+                $SwitchMap$com$samsung$android$knox$analytics$activation$model$ActivationInfo$ActivationStatus[
+                                ActivationInfo.ActivationStatus.OFF.ordinal()] =
+                        2;
             } catch (NoSuchFieldError unused2) {
             }
             try {
-                $SwitchMap$com$samsung$android$knox$analytics$activation$model$ActivationInfo$ActivationStatus[ActivationInfo.ActivationStatus.OFF_FORCEFUL.ordinal()] = 3;
+                $SwitchMap$com$samsung$android$knox$analytics$activation$model$ActivationInfo$ActivationStatus[
+                                ActivationInfo.ActivationStatus.OFF_FORCEFUL.ordinal()] =
+                        3;
             } catch (NoSuchFieldError unused3) {
             }
         }
@@ -154,42 +163,47 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
             Log.d(TAG, "bootChecking() - Device country is china, returning ...");
         } else {
             Log.d(TAG, "bootChecking()");
-            new Thread(new Runnable() { // from class: com.samsung.android.knox.analytics.activation.ActivationMonitor.1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    String str = ActivationMonitor.TAG;
-                    Log.d(str, "bootChecking() - run");
-                    ActivationMonitor activationMonitor = ActivationMonitor.this;
-                    activationMonitor.mIsOnBootCheckings = true;
-                    if (activationMonitor.mTriggers.cardinality() == 0) {
-                        ActivationMonitor.this.checkDOOnBoot();
-                    }
-                    if (ActivationMonitor.this.mTriggers.cardinality() == 0) {
-                        ActivationMonitor.this.checkPOOnBoot();
-                    }
-                    if (ActivationMonitor.this.mTriggers.cardinality() == 0) {
-                        ActivationMonitor.this.checkKLMOnBoot();
-                    }
-                    if (ActivationMonitor.this.mTriggers.cardinality() == 0) {
-                        ActivationMonitor.this.checkKesOnBoot();
-                    }
-                    if (ActivationMonitor.this.mTriggers.cardinality() == 0) {
-                        ActivationMonitor.this.checkELMOnBoot();
-                    }
-                    if (ActivationMonitor.this.mTriggers.cardinality() == 0) {
-                        ActivationMonitor.this.checkB2COnBoot();
-                    }
-                    ActivationMonitor.this.checkConditionsToStart();
-                    ActivationMonitor.this.mIsOnBootCheckings = false;
-                    Log.d(str, "bootChecking() - finished");
-                }
-            }).start();
+            new Thread(
+                            new Runnable() { // from class:
+                                             // com.samsung.android.knox.analytics.activation.ActivationMonitor.1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    String str = ActivationMonitor.TAG;
+                                    Log.d(str, "bootChecking() - run");
+                                    ActivationMonitor activationMonitor = ActivationMonitor.this;
+                                    activationMonitor.mIsOnBootCheckings = true;
+                                    if (activationMonitor.mTriggers.cardinality() == 0) {
+                                        ActivationMonitor.this.checkDOOnBoot();
+                                    }
+                                    if (ActivationMonitor.this.mTriggers.cardinality() == 0) {
+                                        ActivationMonitor.this.checkPOOnBoot();
+                                    }
+                                    if (ActivationMonitor.this.mTriggers.cardinality() == 0) {
+                                        ActivationMonitor.this.checkKLMOnBoot();
+                                    }
+                                    if (ActivationMonitor.this.mTriggers.cardinality() == 0) {
+                                        ActivationMonitor.this.checkKesOnBoot();
+                                    }
+                                    if (ActivationMonitor.this.mTriggers.cardinality() == 0) {
+                                        ActivationMonitor.this.checkELMOnBoot();
+                                    }
+                                    if (ActivationMonitor.this.mTriggers.cardinality() == 0) {
+                                        ActivationMonitor.this.checkB2COnBoot();
+                                    }
+                                    ActivationMonitor.this.checkConditionsToStart();
+                                    ActivationMonitor.this.mIsOnBootCheckings = false;
+                                    Log.d(str, "bootChecking() - finished");
+                                }
+                            })
+                    .start();
         }
     }
 
     public final void checkB2C(String str, String str2, boolean z) {
         String str3 = TAG;
-        StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("checkB2C() - package ", str, " feature ", str2, " isActivation? ");
+        StringBuilder m =
+                InitialConfiguration$$ExternalSyntheticOutline0.m(
+                        "checkB2C() - package ", str, " feature ", str2, " isActivation? ");
         m.append(z);
         Log.d(str3, m.toString());
         if (str != null) {
@@ -231,7 +245,10 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
             return;
         }
         this.mActivationStatus = checkNewStatus;
-        int i = AnonymousClass2.$SwitchMap$com$samsung$android$knox$analytics$activation$model$ActivationInfo$ActivationStatus[checkNewStatus.ordinal()];
+        int i =
+                AnonymousClass2
+                        .$SwitchMap$com$samsung$android$knox$analytics$activation$model$ActivationInfo$ActivationStatus[
+                        checkNewStatus.ordinal()];
         if (i == 1) {
             notifyKnoxAnalyticsActivation(!this.mIsOnBootCheckings);
         } else if (i == 2) {
@@ -292,7 +309,9 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
     }
 
     public final void checkOnPremise() {
-        int i = Settings.Secure.getInt(this.mContext.getContentResolver(), SETTINGS_KEY_KLM_ON_PREMISE_STATUS, 0);
+        int i =
+                Settings.Secure.getInt(
+                        this.mContext.getContentResolver(), SETTINGS_KEY_KLM_ON_PREMISE_STATUS, 0);
         boolean z = i == 1;
         String str = TAG;
         Log.d(str, "checkOnPremise(): " + i);
@@ -319,7 +338,9 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
 
     public final EnterpriseLicenseService getLicenseService() {
         if (this.mLicenseService == null) {
-            this.mLicenseService = (EnterpriseLicenseService) EnterpriseService.getPolicyService("enterprise_license_policy");
+            this.mLicenseService =
+                    (EnterpriseLicenseService)
+                            EnterpriseService.getPolicyService("enterprise_license_policy");
         }
         return this.mLicenseService;
     }
@@ -334,13 +355,19 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
     }
 
     public final boolean isKesActive() {
-        boolean z = Settings.Secure.getInt(this.mContext.getContentResolver(), SETTINGS_KEY_KES_STATUS, 0) > 0;
+        boolean z =
+                Settings.Secure.getInt(
+                                this.mContext.getContentResolver(), SETTINGS_KEY_KES_STATUS, 0)
+                        > 0;
         Log.d(TAG, "isKesActive(): " + String.valueOf(z));
         return z;
     }
 
     public final boolean isKlmActive() {
-        boolean z = Settings.Secure.getInt(this.mContext.getContentResolver(), SETTINGS_KEY_KLM_STATUS, 0) > 0;
+        boolean z =
+                Settings.Secure.getInt(
+                                this.mContext.getContentResolver(), SETTINGS_KEY_KLM_STATUS, 0)
+                        > 0;
         Log.d(TAG, "checkKLM(): " + String.valueOf(z));
         return z;
     }
@@ -373,7 +400,9 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
 
     public final void notifyStatusChanged(int i, boolean z, String str) {
         String str2 = TAG;
-        StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i, "notifyStatusChanged() pkg: ", str, " trigger: ", " status ");
+        StringBuilder m =
+                StorageManagerService$$ExternalSyntheticOutline0.m(
+                        i, "notifyStatusChanged() pkg: ", str, " trigger: ", " status ");
         m.append(z);
         Log.d(str2, m.toString());
         Iterator it = this.mObservers.iterator();
@@ -384,7 +413,9 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
 
     public final void notifyTriggerChanged(int i, boolean z, String str) {
         String str2 = TAG;
-        StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i, "notifyTriggerChanged() pkg: ", str, " trigger: ", " status ");
+        StringBuilder m =
+                StorageManagerService$$ExternalSyntheticOutline0.m(
+                        i, "notifyTriggerChanged() pkg: ", str, " trigger: ", " status ");
         m.append(z);
         Log.d(str2, m.toString());
         Iterator it = this.mObservers.iterator();
@@ -431,12 +462,12 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
     }
 
     @Override // com.android.server.enterprise.license.IActivationKlmElmObserver
-    public final /* bridge */ /* synthetic */ void onUpdateContainerLicenseStatus(String str) {
-    }
+    public final /* bridge */ /* synthetic */ void onUpdateContainerLicenseStatus(String str) {}
 
     @Override // com.android.server.enterprise.license.IActivationKlmElmObserver
     public final void onUpdateElm(String str, LicenseResult licenseResult) {
-        if (!licenseResult.isSuccess() || licenseResult.getType() == LicenseResult.Type.ELM_VALIDATION) {
+        if (!licenseResult.isSuccess()
+                || licenseResult.getType() == LicenseResult.Type.ELM_VALIDATION) {
             return;
         }
         checkELM(str, licenseResult.isActivation());
@@ -444,7 +475,8 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
 
     @Override // com.android.server.enterprise.license.IActivationKlmElmObserver
     public final void onUpdateKlm(String str, LicenseResult licenseResult) {
-        if (!licenseResult.isSuccess() || licenseResult.getType() == LicenseResult.Type.KLM_VALIDATION) {
+        if (!licenseResult.isSuccess()
+                || licenseResult.getType() == LicenseResult.Type.KLM_VALIDATION) {
             return;
         }
         checkKLM(str, licenseResult.isActivation());
@@ -464,7 +496,10 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
         b2CListener.register();
         EnterpriseLicenseService licenseService = getLicenseService();
         if (licenseService == null) {
-            Log.e(str, "registerListenersObservers() - EnterpriseLicenseService is null, can't observe license");
+            Log.e(
+                    str,
+                    "registerListenersObservers() - EnterpriseLicenseService is null, can't observe"
+                        + " license");
         } else {
             licenseService.enforcePermission$1();
             ((ArrayList) licenseService.mKlmElmChangeList).add(this);
@@ -481,7 +516,9 @@ public final class ActivationMonitor implements IActivationKlmElmObserver {
         Log.d(str2, "setTrigger(" + triggers.getValue() + ", " + String.valueOf(z) + ") , " + z2);
         BitSet bitSet = (BitSet) this.mTriggers.clone();
         if (isPackageAllowedToRunAnalytics(str)) {
-            if (!this.mIsOnBootCheckings && !this.mIsOnPremiseActivated && !isPackageBlacklisted(str)) {
+            if (!this.mIsOnBootCheckings
+                    && !this.mIsOnPremiseActivated
+                    && !isPackageBlacklisted(str)) {
                 notifyStatusChanged(triggers.getId(), z2, str);
             }
             if (z) {

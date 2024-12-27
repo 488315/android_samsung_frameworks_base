@@ -6,6 +6,7 @@ import android.telephony.ims.FeatureTagState;
 import android.telephony.ims.SipDelegateConfiguration;
 import android.telephony.ims.SipDelegateConnection;
 import android.telephony.ims.SipDelegateImsConfiguration;
+
 import java.util.Set;
 
 @SystemApi
@@ -17,7 +18,8 @@ public interface DelegateConnectionStateCallback {
 
     void onDestroyed(int i);
 
-    void onFeatureTagStatusChanged(DelegateRegistrationState delegateRegistrationState, Set<FeatureTagState> set);
+    void onFeatureTagStatusChanged(
+            DelegateRegistrationState delegateRegistrationState, Set<FeatureTagState> set);
 
     @Deprecated
     default void onImsConfigurationChanged(SipDelegateImsConfiguration registeredSipConfig) {

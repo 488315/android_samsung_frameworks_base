@@ -14,6 +14,7 @@ import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
 import android.util.proto.ProtoUtils;
 import android.util.proto.WireTypeMismatchException;
+
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
@@ -33,7 +34,8 @@ public abstract class ProtoStreamUtils$ChannelUtils {
         }
     }
 
-    public static void packProtoMessage(EnergyConsumer[] energyConsumerArr, ProtoOutputStream protoOutputStream) {
+    public static void packProtoMessage(
+            EnergyConsumer[] energyConsumerArr, ProtoOutputStream protoOutputStream) {
         if (energyConsumerArr == null) {
             return;
         }
@@ -47,7 +49,10 @@ public abstract class ProtoStreamUtils$ChannelUtils {
         }
     }
 
-    public static void packProtoMessage(EnergyConsumerResult[] energyConsumerResultArr, ProtoOutputStream protoOutputStream, boolean z) {
+    public static void packProtoMessage(
+            EnergyConsumerResult[] energyConsumerResultArr,
+            ProtoOutputStream protoOutputStream,
+            boolean z) {
         if (energyConsumerResultArr == null) {
             return;
         }
@@ -61,7 +66,8 @@ public abstract class ProtoStreamUtils$ChannelUtils {
                 int length = energyConsumerResultArr[i].attribution.length;
                 int i2 = 0;
                 while (i2 < length) {
-                    EnergyConsumerAttribution energyConsumerAttribution = energyConsumerResultArr[i].attribution[i2];
+                    EnergyConsumerAttribution energyConsumerAttribution =
+                            energyConsumerResultArr[i].attribution[i2];
                     long start2 = protoOutputStream.start(2246267895812L);
                     protoOutputStream.write(j, energyConsumerAttribution.uid);
                     protoOutputStream.write(1112396529666L, energyConsumerAttribution.energyUWs);
@@ -74,7 +80,8 @@ public abstract class ProtoStreamUtils$ChannelUtils {
         }
     }
 
-    public static void packProtoMessage(EnergyMeasurement[] energyMeasurementArr, ProtoOutputStream protoOutputStream) {
+    public static void packProtoMessage(
+            EnergyMeasurement[] energyMeasurementArr, ProtoOutputStream protoOutputStream) {
         if (energyMeasurementArr == null) {
             return;
         }
@@ -88,7 +95,8 @@ public abstract class ProtoStreamUtils$ChannelUtils {
         }
     }
 
-    public static void packProtoMessage(PowerEntity[] powerEntityArr, ProtoOutputStream protoOutputStream) {
+    public static void packProtoMessage(
+            PowerEntity[] powerEntityArr, ProtoOutputStream protoOutputStream) {
         if (powerEntityArr == null) {
             return;
         }
@@ -111,7 +119,8 @@ public abstract class ProtoStreamUtils$ChannelUtils {
         }
     }
 
-    public static void packProtoMessage(StateResidencyResult[] stateResidencyResultArr, ProtoOutputStream protoOutputStream) {
+    public static void packProtoMessage(
+            StateResidencyResult[] stateResidencyResultArr, ProtoOutputStream protoOutputStream) {
         if (stateResidencyResultArr == null) {
             return;
         }
@@ -138,14 +147,18 @@ public abstract class ProtoStreamUtils$ChannelUtils {
         }
     }
 
-    public static EnergyConsumerAttribution unpackEnergyConsumerAttributionProto(ProtoInputStream protoInputStream) {
+    public static EnergyConsumerAttribution unpackEnergyConsumerAttributionProto(
+            ProtoInputStream protoInputStream) {
         int nextField;
         EnergyConsumerAttribution energyConsumerAttribution = new EnergyConsumerAttribution();
         while (true) {
             try {
                 nextField = protoInputStream.nextField();
             } catch (WireTypeMismatchException unused) {
-                Slog.e("ProtoStreamUtils", "Wire Type mismatch in EnergyConsumerAttributionProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Wire Type mismatch in EnergyConsumerAttributionProto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             }
             if (nextField == -1) {
                 return energyConsumerAttribution;
@@ -153,14 +166,18 @@ public abstract class ProtoStreamUtils$ChannelUtils {
             if (nextField == 1) {
                 energyConsumerAttribution.uid = protoInputStream.readInt(1120986464257L);
             } else if (nextField != 2) {
-                Slog.e("ProtoStreamUtils", "Unhandled field in EnergyConsumerAttributionProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Unhandled field in EnergyConsumerAttributionProto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             } else {
                 energyConsumerAttribution.energyUWs = protoInputStream.readLong(1112396529666L);
             }
         }
     }
 
-    public static EnergyConsumerResult unpackEnergyConsumerResultProto(ProtoInputStream protoInputStream) {
+    public static EnergyConsumerResult unpackEnergyConsumerResultProto(
+            ProtoInputStream protoInputStream) {
         int nextField;
         EnergyConsumerResult energyConsumerResult = new EnergyConsumerResult();
         ArrayList arrayList = new ArrayList();
@@ -168,10 +185,15 @@ public abstract class ProtoStreamUtils$ChannelUtils {
             try {
                 nextField = protoInputStream.nextField();
             } catch (WireTypeMismatchException unused) {
-                Slog.e("ProtoStreamUtils", "Wire Type mismatch in EnergyConsumerResultProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Wire Type mismatch in EnergyConsumerResultProto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             }
             if (nextField == -1) {
-                energyConsumerResult.attribution = (EnergyConsumerAttribution[]) arrayList.toArray(new EnergyConsumerAttribution[arrayList.size()]);
+                energyConsumerResult.attribution =
+                        (EnergyConsumerAttribution[])
+                                arrayList.toArray(new EnergyConsumerAttribution[arrayList.size()]);
                 return energyConsumerResult;
             }
             if (nextField == 1) {
@@ -181,7 +203,10 @@ public abstract class ProtoStreamUtils$ChannelUtils {
             } else if (nextField == 3) {
                 energyConsumerResult.energyUWs = protoInputStream.readLong(1112396529667L);
             } else if (nextField != 4) {
-                Slog.e("ProtoStreamUtils", "Unhandled field in EnergyConsumerResultProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Unhandled field in EnergyConsumerResultProto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             } else {
                 long start = protoInputStream.start(2246267895812L);
                 arrayList.add(unpackEnergyConsumerAttributionProto(protoInputStream));
@@ -190,14 +215,18 @@ public abstract class ProtoStreamUtils$ChannelUtils {
         }
     }
 
-    public static EnergyMeasurement unpackEnergyMeasurementProto(ProtoInputStream protoInputStream) {
+    public static EnergyMeasurement unpackEnergyMeasurementProto(
+            ProtoInputStream protoInputStream) {
         int nextField;
         EnergyMeasurement energyMeasurement = new EnergyMeasurement();
         while (true) {
             try {
                 nextField = protoInputStream.nextField();
             } catch (WireTypeMismatchException unused) {
-                Slog.e("ProtoStreamUtils", "Wire Type mismatch in EnergyMeasurementProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Wire Type mismatch in EnergyMeasurementProto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             }
             if (nextField == -1) {
                 return energyMeasurement;
@@ -209,7 +238,10 @@ public abstract class ProtoStreamUtils$ChannelUtils {
             } else if (nextField == 3) {
                 energyMeasurement.energyUWs = protoInputStream.readLong(1112396529667L);
             } else if (nextField != 4) {
-                Slog.e("ProtoStreamUtils", "Unhandled field in EnergyMeasurementProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Unhandled field in EnergyMeasurementProto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             } else {
                 energyMeasurement.durationMs = protoInputStream.readLong(1112396529668L);
             }
@@ -228,12 +260,19 @@ public abstract class ProtoStreamUtils$ChannelUtils {
                     protoInputStream.end(start);
                 } else {
                     if (nextField == -1) {
-                        return (EnergyConsumerResult[]) arrayList.toArray(new EnergyConsumerResult[arrayList.size()]);
+                        return (EnergyConsumerResult[])
+                                arrayList.toArray(new EnergyConsumerResult[arrayList.size()]);
                     }
-                    Slog.e("ProtoStreamUtils", "Unhandled field in proto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                    Slog.e(
+                            "ProtoStreamUtils",
+                            "Unhandled field in proto: "
+                                    + ProtoUtils.currentFieldToString(protoInputStream));
                 }
             } catch (WireTypeMismatchException unused) {
-                Slog.e("ProtoStreamUtils", "Wire Type mismatch in proto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Wire Type mismatch in proto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             }
         }
     }
@@ -251,12 +290,19 @@ public abstract class ProtoStreamUtils$ChannelUtils {
                     protoInputStream.end(start);
                 } else {
                     if (nextField == -1) {
-                        return (EnergyMeasurement[]) arrayList.toArray(new EnergyMeasurement[arrayList.size()]);
+                        return (EnergyMeasurement[])
+                                arrayList.toArray(new EnergyMeasurement[arrayList.size()]);
                     }
-                    Slog.e("ProtoStreamUtils", "Unhandled field in proto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                    Slog.e(
+                            "ProtoStreamUtils",
+                            "Unhandled field in proto: "
+                                    + ProtoUtils.currentFieldToString(protoInputStream));
                 }
             } catch (WireTypeMismatchException unused) {
-                Slog.e("ProtoStreamUtils", "Wire Type mismatch in proto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Wire Type mismatch in proto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             }
         }
     }
@@ -274,12 +320,19 @@ public abstract class ProtoStreamUtils$ChannelUtils {
                     protoInputStream.end(start);
                 } else {
                     if (nextField == -1) {
-                        return (StateResidencyResult[]) arrayList.toArray(new StateResidencyResult[arrayList.size()]);
+                        return (StateResidencyResult[])
+                                arrayList.toArray(new StateResidencyResult[arrayList.size()]);
                     }
-                    Slog.e("ProtoStreamUtils", "Unhandled field in PowerStatsServiceResidencyProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                    Slog.e(
+                            "ProtoStreamUtils",
+                            "Unhandled field in PowerStatsServiceResidencyProto: "
+                                    + ProtoUtils.currentFieldToString(protoInputStream));
                 }
             } catch (WireTypeMismatchException unused) {
-                Slog.e("ProtoStreamUtils", "Wire Type mismatch in PowerStatsServiceResidencyProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Wire Type mismatch in PowerStatsServiceResidencyProto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             }
         }
     }
@@ -291,7 +344,10 @@ public abstract class ProtoStreamUtils$ChannelUtils {
             try {
                 nextField = protoInputStream.nextField();
             } catch (WireTypeMismatchException unused) {
-                Slog.e("ProtoStreamUtils", "Wire Type mismatch in StateResidencyProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Wire Type mismatch in StateResidencyProto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             }
             if (nextField == -1) {
                 return stateResidency;
@@ -303,14 +359,18 @@ public abstract class ProtoStreamUtils$ChannelUtils {
             } else if (nextField == 3) {
                 stateResidency.totalStateEntryCount = protoInputStream.readLong(1112396529667L);
             } else if (nextField != 4) {
-                Slog.e("ProtoStreamUtils", "Unhandled field in StateResidencyProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Unhandled field in StateResidencyProto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             } else {
                 stateResidency.lastEntryTimestampMs = protoInputStream.readLong(1112396529668L);
             }
         }
     }
 
-    public static StateResidencyResult unpackStateResidencyResultProto(ProtoInputStream protoInputStream) {
+    public static StateResidencyResult unpackStateResidencyResultProto(
+            ProtoInputStream protoInputStream) {
         int nextField;
         StateResidencyResult stateResidencyResult = new StateResidencyResult();
         ArrayList arrayList = new ArrayList();
@@ -318,16 +378,23 @@ public abstract class ProtoStreamUtils$ChannelUtils {
             try {
                 nextField = protoInputStream.nextField();
             } catch (WireTypeMismatchException unused) {
-                Slog.e("ProtoStreamUtils", "Wire Type mismatch in StateResidencyResultProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Wire Type mismatch in StateResidencyResultProto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             }
             if (nextField == -1) {
-                stateResidencyResult.stateResidencyData = (StateResidency[]) arrayList.toArray(new StateResidency[arrayList.size()]);
+                stateResidencyResult.stateResidencyData =
+                        (StateResidency[]) arrayList.toArray(new StateResidency[arrayList.size()]);
                 return stateResidencyResult;
             }
             if (nextField == 1) {
                 stateResidencyResult.id = protoInputStream.readInt(1120986464257L);
             } else if (nextField != 2) {
-                Slog.e("ProtoStreamUtils", "Unhandled field in StateResidencyResultProto: " + ProtoUtils.currentFieldToString(protoInputStream));
+                Slog.e(
+                        "ProtoStreamUtils",
+                        "Unhandled field in StateResidencyResultProto: "
+                                + ProtoUtils.currentFieldToString(protoInputStream));
             } else {
                 long start = protoInputStream.start(2246267895810L);
                 arrayList.add(unpackStateResidencyProto(protoInputStream));

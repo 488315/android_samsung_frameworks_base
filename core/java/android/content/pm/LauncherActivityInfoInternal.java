@@ -7,25 +7,28 @@ import android.os.UserHandle;
 
 /* loaded from: classes.dex */
 public class LauncherActivityInfoInternal implements Parcelable {
-    public static final Parcelable.Creator<LauncherActivityInfoInternal> CREATOR = new Parcelable.Creator<LauncherActivityInfoInternal>() { // from class: android.content.pm.LauncherActivityInfoInternal.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LauncherActivityInfoInternal createFromParcel(Parcel source) {
-            return new LauncherActivityInfoInternal(source);
-        }
+    public static final Parcelable.Creator<LauncherActivityInfoInternal> CREATOR =
+            new Parcelable.Creator<LauncherActivityInfoInternal>() { // from class:
+                // android.content.pm.LauncherActivityInfoInternal.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LauncherActivityInfoInternal createFromParcel(Parcel source) {
+                    return new LauncherActivityInfoInternal(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LauncherActivityInfoInternal[] newArray(int size) {
-            return new LauncherActivityInfoInternal[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LauncherActivityInfoInternal[] newArray(int size) {
+                    return new LauncherActivityInfoInternal[size];
+                }
+            };
     private ActivityInfo mActivityInfo;
     private ComponentName mComponentName;
     private IncrementalStatesInfo mIncrementalStatesInfo;
     private UserHandle mUser;
 
-    public LauncherActivityInfoInternal(ActivityInfo info, IncrementalStatesInfo incrementalStatesInfo, UserHandle user) {
+    public LauncherActivityInfoInternal(
+            ActivityInfo info, IncrementalStatesInfo incrementalStatesInfo, UserHandle user) {
         this.mActivityInfo = info;
         this.mComponentName = new ComponentName(info.packageName, info.name);
         this.mIncrementalStatesInfo = incrementalStatesInfo;
@@ -34,8 +37,10 @@ public class LauncherActivityInfoInternal implements Parcelable {
 
     public LauncherActivityInfoInternal(Parcel source) {
         this.mActivityInfo = (ActivityInfo) source.readTypedObject(ActivityInfo.CREATOR);
-        this.mComponentName = new ComponentName(this.mActivityInfo.packageName, this.mActivityInfo.name);
-        this.mIncrementalStatesInfo = (IncrementalStatesInfo) source.readTypedObject(IncrementalStatesInfo.CREATOR);
+        this.mComponentName =
+                new ComponentName(this.mActivityInfo.packageName, this.mActivityInfo.name);
+        this.mIncrementalStatesInfo =
+                (IncrementalStatesInfo) source.readTypedObject(IncrementalStatesInfo.CREATOR);
         this.mUser = (UserHandle) source.readTypedObject(UserHandle.CREATOR);
     }
 

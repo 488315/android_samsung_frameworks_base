@@ -8,6 +8,5 @@ import android.content.Intent;
 public interface GameSessionActivityCallback {
     void onActivityResult(int i, Intent intent);
 
-    default void onActivityStartFailed(Throwable t) {
-    }
+    default void onActivityStartFailed(Throwable t) {}
 }

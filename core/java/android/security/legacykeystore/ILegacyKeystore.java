@@ -30,12 +30,10 @@ public interface ILegacyKeystore extends IInterface {
         }
 
         @Override // android.security.legacykeystore.ILegacyKeystore
-        public void put(String alias, int uid, byte[] blob) throws RemoteException {
-        }
+        public void put(String alias, int uid, byte[] blob) throws RemoteException {}
 
         @Override // android.security.legacykeystore.ILegacyKeystore
-        public void remove(String alias, int uid) throws RemoteException {
-        }
+        public void remove(String alias, int uid) throws RemoteException {}
 
         @Override // android.security.legacykeystore.ILegacyKeystore
         public String[] list(String prefix, int uid) throws RemoteException {
@@ -48,7 +46,7 @@ public interface ILegacyKeystore extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILegacyKeystore {
+    public abstract static class Stub extends Binder implements ILegacyKeystore {
         static final int TRANSACTION_get = 1;
         static final int TRANSACTION_list = 4;
         static final int TRANSACTION_put = 2;
@@ -95,7 +93,8 @@ public interface ILegacyKeystore extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ILegacyKeystore.DESCRIPTOR);
             }

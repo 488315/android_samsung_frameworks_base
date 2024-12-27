@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.Surface;
+
 import java.nio.ByteBuffer;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,8 +34,9 @@ public final class MediaSync {
     private List<AudioBuffer> mAudioBuffers = new LinkedList();
     private float mPlaybackRate = 0.0f;
 
-    public static abstract class Callback {
-        public abstract void onAudioBufferConsumed(MediaSync mediaSync, ByteBuffer byteBuffer, int i);
+    public abstract static class Callback {
+        public abstract void onAudioBufferConsumed(
+                MediaSync mediaSync, ByteBuffer byteBuffer, int i);
     }
 
     public interface OnErrorListener {
@@ -158,7 +160,8 @@ public final class MediaSync {
         synchronized (this.mAudioLock) {
             this.mPlaybackRate = native_setPlaybackParams(params);
         }
-        if (this.mPlaybackRate != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && this.mAudioThread != null) {
+        if (this.mPlaybackRate != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                && this.mAudioThread != null) {
             postRenderAudio(0L);
         }
     }
@@ -167,7 +170,8 @@ public final class MediaSync {
         synchronized (this.mAudioLock) {
             this.mPlaybackRate = native_setSyncParams(params);
         }
-        if (this.mPlaybackRate != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && this.mAudioThread != null) {
+        if (this.mPlaybackRate != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                && this.mAudioThread != null) {
             postRenderAudio(0L);
         }
     }
@@ -211,64 +215,83 @@ public final class MediaSync {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void postRenderAudio(long delayMillis) {
-        this.mAudioHandler.postDelayed(new Runnable() { // from class: android.media.MediaSync.1
-            @Override // java.lang.Runnable
-            public void run() {
-                synchronized (MediaSync.this.mAudioLock) {
-                    if (MediaSync.this.mPlaybackRate == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
-                        return;
-                    }
-                    if (MediaSync.this.mAudioBuffers.isEmpty()) {
-                        return;
-                    }
-                    AudioBuffer audioBuffer = (AudioBuffer) MediaSync.this.mAudioBuffers.get(0);
-                    int size = audioBuffer.mByteBuffer.remaining();
-                    if (size > 0 && MediaSync.this.mAudioTrack.getPlayState() != 3) {
-                        try {
-                            MediaSync.this.mAudioTrack.play();
-                        } catch (IllegalStateException e) {
-                            Log.w(MediaSync.TAG, "could not start audio track");
-                        }
-                    }
-                    int sizeWritten = MediaSync.this.mAudioTrack.write(audioBuffer.mByteBuffer, size, 1);
-                    if (sizeWritten > 0) {
-                        if (audioBuffer.mPresentationTimeUs != -1) {
-                            MediaSync.this.native_updateQueuedAudioData(size, audioBuffer.mPresentationTimeUs);
-                            audioBuffer.mPresentationTimeUs = -1L;
-                        }
-                        if (sizeWritten == size) {
-                            MediaSync.this.postReturnByteBuffer(audioBuffer);
-                            MediaSync.this.mAudioBuffers.remove(0);
-                            if (!MediaSync.this.mAudioBuffers.isEmpty()) {
-                                MediaSync.this.postRenderAudio(0L);
+        this.mAudioHandler.postDelayed(
+                new Runnable() { // from class: android.media.MediaSync.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        synchronized (MediaSync.this.mAudioLock) {
+                            if (MediaSync.this.mPlaybackRate
+                                    == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
+                                return;
                             }
-                            return;
+                            if (MediaSync.this.mAudioBuffers.isEmpty()) {
+                                return;
+                            }
+                            AudioBuffer audioBuffer =
+                                    (AudioBuffer) MediaSync.this.mAudioBuffers.get(0);
+                            int size = audioBuffer.mByteBuffer.remaining();
+                            if (size > 0 && MediaSync.this.mAudioTrack.getPlayState() != 3) {
+                                try {
+                                    MediaSync.this.mAudioTrack.play();
+                                } catch (IllegalStateException e) {
+                                    Log.w(MediaSync.TAG, "could not start audio track");
+                                }
+                            }
+                            int sizeWritten =
+                                    MediaSync.this.mAudioTrack.write(
+                                            audioBuffer.mByteBuffer, size, 1);
+                            if (sizeWritten > 0) {
+                                if (audioBuffer.mPresentationTimeUs != -1) {
+                                    MediaSync.this.native_updateQueuedAudioData(
+                                            size, audioBuffer.mPresentationTimeUs);
+                                    audioBuffer.mPresentationTimeUs = -1L;
+                                }
+                                if (sizeWritten == size) {
+                                    MediaSync.this.postReturnByteBuffer(audioBuffer);
+                                    MediaSync.this.mAudioBuffers.remove(0);
+                                    if (!MediaSync.this.mAudioBuffers.isEmpty()) {
+                                        MediaSync.this.postRenderAudio(0L);
+                                    }
+                                    return;
+                                }
+                            }
+                            long pendingTimeMs =
+                                    TimeUnit.MICROSECONDS.toMillis(
+                                            MediaSync.this
+                                                    .native_getPlayTimeForPendingAudioFrames());
+                            MediaSync.this.postRenderAudio(pendingTimeMs / 2);
                         }
                     }
-                    long pendingTimeMs = TimeUnit.MICROSECONDS.toMillis(MediaSync.this.native_getPlayTimeForPendingAudioFrames());
-                    MediaSync.this.postRenderAudio(pendingTimeMs / 2);
-                }
-            }
-        }, delayMillis);
+                },
+                delayMillis);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public final void postReturnByteBuffer(final AudioBuffer audioBuffer) {
         synchronized (this.mCallbackLock) {
             if (this.mCallbackHandler != null) {
-                this.mCallbackHandler.post(new Runnable() { // from class: android.media.MediaSync.2
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        synchronized (MediaSync.this.mCallbackLock) {
-                            Callback callback = MediaSync.this.mCallback;
-                            if (MediaSync.this.mCallbackHandler != null && MediaSync.this.mCallbackHandler.getLooper().getThread() == Thread.currentThread()) {
-                                if (callback != null) {
-                                    callback.onAudioBufferConsumed(sync, audioBuffer.mByteBuffer, audioBuffer.mBufferIndex);
+                this.mCallbackHandler.post(
+                        new Runnable() { // from class: android.media.MediaSync.2
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                synchronized (MediaSync.this.mCallbackLock) {
+                                    Callback callback = MediaSync.this.mCallback;
+                                    if (MediaSync.this.mCallbackHandler != null
+                                            && MediaSync.this
+                                                            .mCallbackHandler
+                                                            .getLooper()
+                                                            .getThread()
+                                                    == Thread.currentThread()) {
+                                        if (callback != null) {
+                                            callback.onAudioBufferConsumed(
+                                                    sync,
+                                                    audioBuffer.mByteBuffer,
+                                                    audioBuffer.mBufferIndex);
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }
-                });
+                        });
             }
         }
     }
@@ -283,18 +306,19 @@ public final class MediaSync {
     }
 
     private void createAudioThread() {
-        this.mAudioThread = new Thread() { // from class: android.media.MediaSync.3
-            @Override // java.lang.Thread, java.lang.Runnable
-            public void run() {
-                Looper.prepare();
-                synchronized (MediaSync.this.mAudioLock) {
-                    MediaSync.this.mAudioLooper = Looper.myLooper();
-                    MediaSync.this.mAudioHandler = new Handler();
-                    MediaSync.this.mAudioLock.notify();
-                }
-                Looper.loop();
-            }
-        };
+        this.mAudioThread =
+                new Thread() { // from class: android.media.MediaSync.3
+                    @Override // java.lang.Thread, java.lang.Runnable
+                    public void run() {
+                        Looper.prepare();
+                        synchronized (MediaSync.this.mAudioLock) {
+                            MediaSync.this.mAudioLooper = Looper.myLooper();
+                            MediaSync.this.mAudioHandler = new Handler();
+                            MediaSync.this.mAudioLock.notify();
+                        }
+                        Looper.loop();
+                    }
+                };
         this.mAudioThread.start();
         synchronized (this.mAudioLock) {
             try {

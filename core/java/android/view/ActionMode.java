@@ -74,20 +74,17 @@ public abstract class ActionMode {
         return this.mType;
     }
 
-    public void invalidateContentRect() {
-    }
+    public void invalidateContentRect() {}
 
-    public void hide(long duration) {
-    }
+    public void hide(long duration) {}
 
-    public void onWindowFocusChanged(boolean hasWindowFocus) {
-    }
+    public void onWindowFocusChanged(boolean hasWindowFocus) {}
 
     public boolean isUiFocusable() {
         return true;
     }
 
-    public static abstract class Callback2 implements Callback {
+    public abstract static class Callback2 implements Callback {
         public void onGetContentRect(ActionMode mode, View view, Rect outRect) {
             if (view != null) {
                 outRect.set(0, 0, view.getWidth(), view.getHeight());

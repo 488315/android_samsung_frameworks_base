@@ -4,16 +4,19 @@ import android.app.appsearch.GenericDocument;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.samsung.android.share.SemShareConstants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Array;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Objects;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* loaded from: classes.dex */
 public class AppFunctionExecutionRecord {
@@ -24,7 +27,8 @@ public class AppFunctionExecutionRecord {
     private static final String TAG = AppFunctionExecutionRecord.class.getSimpleName();
     private static final Integer JSON_INDENTATION = 4;
     private static final Integer MAX_STRING_MASKING_NUMBER = 30;
-    private final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+    private final DateTimeFormatter TIME_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
     LocalDateTime invocationTime = LocalDateTime.now();
 
     public AppFunctionExecutionRecord(ExecuteAppFunctionAidlRequest requestInternal) {
@@ -80,7 +84,9 @@ public class AppFunctionExecutionRecord {
         }
     }
 
-    void appendPropertyToJson(JSONObject jsonObject, String propertyName, Object propertyValue, boolean needToMask) throws JSONException {
+    void appendPropertyToJson(
+            JSONObject jsonObject, String propertyName, Object propertyValue, boolean needToMask)
+            throws JSONException {
         if (propertyValue instanceof GenericDocument[]) {
             JSONArray jsonArray = new JSONArray();
             GenericDocument[] documentValues = (GenericDocument[]) propertyValue;
@@ -106,7 +112,9 @@ public class AppFunctionExecutionRecord {
         jsonObject.put(propertyName, jsonArray2);
     }
 
-    void appendGenericDocumentToJson(JSONObject jsonObject, GenericDocument document, boolean needToMask) throws JSONException {
+    void appendGenericDocumentToJson(
+            JSONObject jsonObject, GenericDocument document, boolean needToMask)
+            throws JSONException {
         jsonObject.put(Settings.EXTRA_NAMESPACE, document.getNamespace());
         jsonObject.put("id", document.getId());
         jsonObject.put(SemShareConstants.SHARE_STAR_KEY_SCORE, document.getScore());
@@ -156,7 +164,34 @@ public class AppFunctionExecutionRecord {
     public String toFullString(boolean needToMask) {
         StringBuilder sb = new StringBuilder();
         try {
-            sb.append(NavigationBarInflaterView.SIZE_MOD_START).append(this.TIME_FORMATTER.format(this.invocationTime)).append(" - ").append(this.TIME_FORMATTER.format(this.returnTime)).append("][duration :").append(getDuration()).append("ms]\n").append("  callingPackage : ").append(this.requestInternal.getCallingPackage()).append("\n").append("  targetPackage : ").append(this.requestInternal.getClientRequest().getTargetPackageName()).append("\n").append("  functionIdentifier : ").append(this.requestInternal.getClientRequest().getFunctionIdentifier()).append("\n").append("  params :  ").append(toJson(this.requestInternal.getClientRequest().getParameters(), needToMask)).append("\n").append("  result :  ").append(getResult(needToMask)).append("\n").append("  resultCode : ").append(getResultCode()).append("\n");
+            sb.append(NavigationBarInflaterView.SIZE_MOD_START)
+                    .append(this.TIME_FORMATTER.format(this.invocationTime))
+                    .append(" - ")
+                    .append(this.TIME_FORMATTER.format(this.returnTime))
+                    .append("][duration :")
+                    .append(getDuration())
+                    .append("ms]\n")
+                    .append("  callingPackage : ")
+                    .append(this.requestInternal.getCallingPackage())
+                    .append("\n")
+                    .append("  targetPackage : ")
+                    .append(this.requestInternal.getClientRequest().getTargetPackageName())
+                    .append("\n")
+                    .append("  functionIdentifier : ")
+                    .append(this.requestInternal.getClientRequest().getFunctionIdentifier())
+                    .append("\n")
+                    .append("  params :  ")
+                    .append(
+                            toJson(
+                                    this.requestInternal.getClientRequest().getParameters(),
+                                    needToMask))
+                    .append("\n")
+                    .append("  result :  ")
+                    .append(getResult(needToMask))
+                    .append("\n")
+                    .append("  resultCode : ")
+                    .append(getResultCode())
+                    .append("\n");
         } catch (Exception e) {
             Slog.e(TAG, "toFullString : ", e);
             sb.append("exception");
@@ -166,7 +201,25 @@ public class AppFunctionExecutionRecord {
 
     public String toSummaryString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(NavigationBarInflaterView.SIZE_MOD_START).append(this.TIME_FORMATTER.format(this.invocationTime)).append(" - ").append(this.TIME_FORMATTER.format(this.returnTime)).append("][duration :").append(getDuration()).append("ms]\n").append("  callingPackage : ").append(this.requestInternal.getCallingPackage()).append("\n").append("  targetPackage : ").append(this.requestInternal.getClientRequest().getTargetPackageName()).append("\n").append("  functionIdentifier : ").append(this.requestInternal.getClientRequest().getFunctionIdentifier()).append("\n").append("  resultCode : ").append(getResultCode()).append("\n");
+        sb.append(NavigationBarInflaterView.SIZE_MOD_START)
+                .append(this.TIME_FORMATTER.format(this.invocationTime))
+                .append(" - ")
+                .append(this.TIME_FORMATTER.format(this.returnTime))
+                .append("][duration :")
+                .append(getDuration())
+                .append("ms]\n")
+                .append("  callingPackage : ")
+                .append(this.requestInternal.getCallingPackage())
+                .append("\n")
+                .append("  targetPackage : ")
+                .append(this.requestInternal.getClientRequest().getTargetPackageName())
+                .append("\n")
+                .append("  functionIdentifier : ")
+                .append(this.requestInternal.getClientRequest().getFunctionIdentifier())
+                .append("\n")
+                .append("  resultCode : ")
+                .append(getResultCode())
+                .append("\n");
         return sb.toString();
     }
 }

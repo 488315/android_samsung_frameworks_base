@@ -1,10 +1,12 @@
 package com.samsung.android.sume.core.channel;
 
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer$$ExternalSyntheticLambda3;
 import com.samsung.android.sume.core.evaluate.Evaluator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -53,38 +55,54 @@ public class ReceiveChannelRouter extends ChannelRouterBase {
             if (!this.evChannelMap.isEmpty()) {
                 this.channels.addAll(new ArrayList(this.evChannelMap.values()));
             }
-            this.receiveOp = new Supplier() { // from class: com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda0
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    MediaBuffer receiveAny;
-                    receiveAny = ReceiveChannelRouter.this.receiveAny();
-                    return receiveAny;
-                }
-            };
+            this.receiveOp =
+                    new Supplier() { // from class:
+                                     // com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Supplier
+                        public final Object get() {
+                            MediaBuffer receiveAny;
+                            receiveAny = ReceiveChannelRouter.this.receiveAny();
+                            return receiveAny;
+                        }
+                    };
         } else {
             this.evChannelMap.clear();
-            this.receiveOp = new Supplier() { // from class: com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda1
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    MediaBuffer receiveAll;
-                    receiveAll = ReceiveChannelRouter.this.receiveAll();
-                    return receiveAll;
-                }
-            };
+            this.receiveOp =
+                    new Supplier() { // from class:
+                                     // com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda1
+                        @Override // java.util.function.Supplier
+                        public final Object get() {
+                            MediaBuffer receiveAll;
+                            receiveAll = ReceiveChannelRouter.this.receiveAll();
+                            return receiveAll;
+                        }
+                    };
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public MediaBuffer receiveAll() {
-        final List<MediaBuffer> buffers = (List) ((Stream) this.channels.stream().parallel()).map(new ReceiveChannelRouter$$ExternalSyntheticLambda3()).collect(Collectors.toList());
-        int primaryId = IntStream.range(0, buffers.size()).filter(new IntPredicate() { // from class: com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda4
-            @Override // java.util.function.IntPredicate
-            public final boolean test(int i) {
-                boolean containsExtra;
-                containsExtra = ((MediaBuffer) buffers.get(i)).containsExtra("primary");
-                return containsExtra;
-            }
-        }).findFirst().orElse(0);
+        final List<MediaBuffer> buffers =
+                (List)
+                        ((Stream) this.channels.stream().parallel())
+                                .map(new ReceiveChannelRouter$$ExternalSyntheticLambda3())
+                                .collect(Collectors.toList());
+        int primaryId =
+                IntStream.range(0, buffers.size())
+                        .filter(
+                                new IntPredicate() { // from class:
+                                                     // com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda4
+                                    @Override // java.util.function.IntPredicate
+                                    public final boolean test(int i) {
+                                        boolean containsExtra;
+                                        containsExtra =
+                                                ((MediaBuffer) buffers.get(i))
+                                                        .containsExtra("primary");
+                                        return containsExtra;
+                                    }
+                                })
+                        .findFirst()
+                        .orElse(0);
         return MediaBuffer.groupOf(primaryId, buffers);
     }
 
@@ -94,47 +112,75 @@ public class ReceiveChannelRouter extends ChannelRouterBase {
         Def.require(!this.channels.isEmpty());
         if (this.channels.size() == 1) {
             Log.d(TAG, "channel: " + this.channels.get(0));
-            return (MediaBuffer) this.channels.stream().findFirst().map(new ReceiveChannelRouter$$ExternalSyntheticLambda3()).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
+            return (MediaBuffer)
+                    this.channels.stream()
+                            .findFirst()
+                            .map(new ReceiveChannelRouter$$ExternalSyntheticLambda3())
+                            .orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
         }
         final BlockingQueue<Integer> queue = new LinkedBlockingQueue<>(this.channels.size());
         final ExecutorService threadPool = Executors.newFixedThreadPool(this.channels.size());
-        Map<Integer, Future<MediaBuffer>> results = (Map) IntStream.range(0, this.channels.size()).boxed().collect(Collectors.toMap(Function.identity(), new Function() { // from class: com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda5
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ReceiveChannelRouter.this.m9119x12a5943b(threadPool, queue, (Integer) obj);
-            }
-        }));
+        Map<Integer, Future<MediaBuffer>> results =
+                (Map)
+                        IntStream.range(0, this.channels.size())
+                                .boxed()
+                                .collect(
+                                        Collectors.toMap(
+                                                Function.identity(),
+                                                new Function() { // from class:
+                                                                 // com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda5
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        return ReceiveChannelRouter.this
+                                                                .m9119x12a5943b(
+                                                                        threadPool,
+                                                                        queue,
+                                                                        (Integer) obj);
+                                                    }
+                                                }));
         while (!results.isEmpty()) {
             try {
                 try {
                     int id = queue.take().intValue();
-                    MediaBuffer buffer = (MediaBuffer) ((Future) Objects.requireNonNull(results.remove(Integer.valueOf(id)))).get();
+                    MediaBuffer buffer =
+                            (MediaBuffer)
+                                    ((Future)
+                                                    Objects.requireNonNull(
+                                                            results.remove(Integer.valueOf(id))))
+                                            .get();
                     if (buffer != null) {
                         return buffer;
                     }
                 } catch (InterruptedException | ExecutionException e) {
-                    throw new CancellationException("buffer-channels receive thread are interrupted");
+                    throw new CancellationException(
+                            "buffer-channels receive thread are interrupted");
                 }
             } finally {
-                results.values().forEach(new Consumer() { // from class: com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda6
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        ((Future) obj).cancel(true);
-                    }
-                });
+                results.values()
+                        .forEach(
+                                new Consumer() { // from class:
+                                                 // com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda6
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        ((Future) obj).cancel(true);
+                                    }
+                                });
             }
         }
         throw new CancellationException("all buffer-channels are canceled");
     }
 
     /* renamed from: lambda$receiveAny$2$com-samsung-android-sume-core-channel-ReceiveChannelRouter, reason: not valid java name */
-    /* synthetic */ Future m9119x12a5943b(ExecutorService threadPool, final BlockingQueue queue, final Integer it) {
-        return threadPool.submit(new Callable() { // from class: com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda2
-            @Override // java.util.concurrent.Callable
-            public final Object call() {
-                return ReceiveChannelRouter.this.m9118xca1c8dc(it, queue);
-            }
-        });
+    /* synthetic */ Future m9119x12a5943b(
+            ExecutorService threadPool, final BlockingQueue queue, final Integer it) {
+        return threadPool.submit(
+                new Callable() { // from class:
+                                 // com.samsung.android.sume.core.channel.ReceiveChannelRouter$$ExternalSyntheticLambda2
+                    @Override // java.util.concurrent.Callable
+                    public final Object call() {
+                        return ReceiveChannelRouter.this.m9118xca1c8dc(it, queue);
+                    }
+                });
     }
 
     /* renamed from: lambda$receiveAny$1$com-samsung-android-sume-core-channel-ReceiveChannelRouter, reason: not valid java name */
@@ -162,12 +208,10 @@ public class ReceiveChannelRouter extends ChannelRouterBase {
     }
 
     @Override // com.samsung.android.sume.core.channel.Channel
-    public void close() {
-    }
+    public void close() {}
 
     @Override // com.samsung.android.sume.core.channel.Channel
-    public void cancel() {
-    }
+    public void cancel() {}
 
     @Override // com.samsung.android.sume.core.channel.Channel
     public boolean isClosedForSend() {

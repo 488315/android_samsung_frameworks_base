@@ -4,14 +4,16 @@ import android.content.Context;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerService;
 import com.android.server.chimera.ChimeraCommonUtil;
-import com.android.server.chimera.heimdall.HeimdallTriggerManager;
 import com.android.server.chimera.heimdall.HeimdallTriggerManager.HeimdallSpecManager;
 import com.android.server.clipboard.ClipboardService;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -41,11 +43,13 @@ public final class HeimdallPhaseManager {
             this.this$0$1 = heimdallPhaseManager;
         }
 
-        private final void sendBgTrimIfAppNeed$com$android$server$chimera$heimdall$HeimdallPhaseManager$DefaultStrategy(HeimdallProcessData heimdallProcessData) {
-        }
+        private final void
+                sendBgTrimIfAppNeed$com$android$server$chimera$heimdall$HeimdallPhaseManager$DefaultStrategy(
+                        HeimdallProcessData heimdallProcessData) {}
     }
 
-    public HeimdallPhaseManager(Looper looper, Context context, ActivityManagerService activityManagerService) {
+    public HeimdallPhaseManager(
+            Looper looper, Context context, ActivityManagerService activityManagerService) {
         this.mService = activityManagerService;
         HeimdallProcessList heimdallProcessList = new HeimdallProcessList();
         heimdallProcessList.mTimeoutReportProtectedHour = 24;
@@ -57,7 +61,8 @@ public final class HeimdallPhaseManager {
         heimdallTriggerManager.ENABLE_GLOBAL_KILL = true;
         heimdallTriggerManager.ENABLE_SPEC_KILL = true;
         heimdallTriggerManager.mAlwaysRunningGlobalQuotaSpec = 31744;
-        HeimdallTriggerManager.HeimdallSpecManager heimdallSpecManager = heimdallTriggerManager.new HeimdallSpecManager();
+        HeimdallTriggerManager.HeimdallSpecManager heimdallSpecManager =
+                heimdallTriggerManager.new HeimdallSpecManager();
         heimdallTriggerManager.mSpecManager = heimdallSpecManager;
         boolean equals = "0x4f4c".equals(SystemProperties.get("ro.boot.debug_level", "0x4f4c"));
         boolean equals2 = "eng".equals(SystemProperties.get("ro.build.type", "eng"));
@@ -86,31 +91,54 @@ public final class HeimdallPhaseManager {
         heimdallKillManager.mAlwaysRunningKillCntAfterBoot = 0;
         heimdallKillManager.mService = activityManagerService;
         this.mHeimdallKillManager = heimdallKillManager;
-        this.mHeimdallReportManager = new HeimdallReportManager(looper, context, activityManagerService);
+        this.mHeimdallReportManager =
+                new HeimdallReportManager(looper, context, activityManagerService);
     }
 
     public final void dumpKillStatus(PrintWriter printWriter) {
         HeimdallKillManager heimdallKillManager = this.mHeimdallKillManager;
         heimdallKillManager.getClass();
         printWriter.println("\nKill status");
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  Spec kill count after boot: "), heimdallKillManager.mSpecKillCntAfterBoot, printWriter, "  Global kill count after boot: "), heimdallKillManager.mGlobalKillCntAfterBoot, printWriter, "  AlwaysRunning kill count after boot: "), heimdallKillManager.mAlwaysRunningKillCntAfterBoot, printWriter);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("  Spec kill count after boot: "),
+                                heimdallKillManager.mSpecKillCntAfterBoot,
+                                printWriter,
+                                "  Global kill count after boot: "),
+                        heimdallKillManager.mGlobalKillCntAfterBoot,
+                        printWriter,
+                        "  AlwaysRunning kill count after boot: "),
+                heimdallKillManager.mAlwaysRunningKillCntAfterBoot,
+                printWriter);
     }
 
     public final void dumpProcessList(PrintWriter printWriter) {
         HeimdallProcessList heimdallProcessList = this.mHeimdallProcessList;
         heimdallProcessList.getClass();
         printWriter.println("\nProcess List");
-        printWriter.println("  In-progress process List (length=" + heimdallProcessList.mInProgressProcesses.size() + ")");
+        printWriter.println(
+                "  In-progress process List (length="
+                        + heimdallProcessList.mInProgressProcesses.size()
+                        + ")");
         Iterator it = heimdallProcessList.mInProgressProcesses.iterator();
         while (it.hasNext()) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(printWriter, "    ", (String) it.next());
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(
+                    printWriter, "    ", (String) it.next());
         }
-        printWriter.println("  Protected process List (length=" + heimdallProcessList.mProtectedProcesses.size() + ")");
+        printWriter.println(
+                "  Protected process List (length="
+                        + heimdallProcessList.mProtectedProcesses.size()
+                        + ")");
         Iterator it2 = heimdallProcessList.mProtectedProcesses.iterator();
         while (it2.hasNext()) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(printWriter, "    ", (String) it2.next());
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(
+                    printWriter, "    ", (String) it2.next());
         }
-        printWriter.println("  Reported process List (length=" + ((LinkedList) heimdallProcessList.mReportedProcesses).size() + ")");
+        printWriter.println(
+                "  Reported process List (length="
+                        + ((LinkedList) heimdallProcessList.mReportedProcesses).size()
+                        + ")");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:64:0x01b1  */
@@ -119,12 +147,15 @@ public final class HeimdallPhaseManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean processScanPhase(com.android.server.chimera.heimdall.HeimdallProcessData r14) {
+    public final boolean processScanPhase(
+            com.android.server.chimera.heimdall.HeimdallProcessData r14) {
         /*
             Method dump skipped, instructions count: 820
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.heimdall.HeimdallPhaseManager.processScanPhase(com.android.server.chimera.heimdall.HeimdallProcessData):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.chimera.heimdall.HeimdallPhaseManager.processScanPhase(com.android.server.chimera.heimdall.HeimdallProcessData):boolean");
     }
 
     public final boolean processStartPhase(HeimdallProcessData heimdallProcessData) {
@@ -133,15 +164,25 @@ public final class HeimdallPhaseManager {
             return false;
         }
         if (!heimdallProcessList.mReportedProcesses.isEmpty()) {
-            long elapsedRealtime = SystemClock.elapsedRealtime() - (heimdallProcessList.mTimeoutReportProtectedHour * ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
+            long elapsedRealtime =
+                    SystemClock.elapsedRealtime()
+                            - (heimdallProcessList.mTimeoutReportProtectedHour
+                                    * ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
             while (!heimdallProcessList.mReportedProcesses.isEmpty()) {
-                HeimdallAlwaysRunningProcInfo heimdallAlwaysRunningProcInfo = (HeimdallAlwaysRunningProcInfo) ((LinkedList) heimdallProcessList.mReportedProcesses).peek();
+                HeimdallAlwaysRunningProcInfo heimdallAlwaysRunningProcInfo =
+                        (HeimdallAlwaysRunningProcInfo)
+                                ((LinkedList) heimdallProcessList.mReportedProcesses).peek();
                 if (heimdallAlwaysRunningProcInfo.reportTime > elapsedRealtime) {
                     break;
                 }
-                Heimdall.log(String.format("Report-protecting (%dh) is expired. " + heimdallAlwaysRunningProcInfo.toDumpString(), Integer.valueOf(heimdallProcessList.mTimeoutReportProtectedHour)));
+                Heimdall.log(
+                        String.format(
+                                "Report-protecting (%dh) is expired. "
+                                        + heimdallAlwaysRunningProcInfo.toDumpString(),
+                                Integer.valueOf(heimdallProcessList.mTimeoutReportProtectedHour)));
                 ((LinkedList) heimdallProcessList.mReportedProcesses).poll();
-                heimdallProcessList.mInProgressProcesses.remove(heimdallAlwaysRunningProcInfo.processName);
+                heimdallProcessList.mInProgressProcesses.remove(
+                        heimdallAlwaysRunningProcInfo.processName);
             }
         }
         if (heimdallProcessList.mInProgressProcesses.contains(heimdallProcessData.processName)) {

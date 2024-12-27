@@ -1,10 +1,9 @@
 package android.os;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.os.PackageTagsList;
-import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,30 +14,31 @@ import java.util.function.Function;
 
 /* loaded from: classes3.dex */
 public final class PackageTagsList implements Parcelable {
-    public static final Parcelable.Creator<PackageTagsList> CREATOR = new Parcelable.Creator<PackageTagsList>() { // from class: android.os.PackageTagsList.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageTagsList createFromParcel(Parcel in) {
-            int count = in.readInt();
-            ArrayMap arrayMap = new ArrayMap(count);
-            int i = 0;
-            while (true) {
-                if (i < count) {
-                    String key = in.readString8();
-                    arrayMap.append(key, in.readArraySet(null));
-                    i++;
-                } else {
-                    return new PackageTagsList(arrayMap);
+    public static final Parcelable.Creator<PackageTagsList> CREATOR =
+            new Parcelable.Creator<PackageTagsList>() { // from class: android.os.PackageTagsList.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageTagsList createFromParcel(Parcel in) {
+                    int count = in.readInt();
+                    ArrayMap arrayMap = new ArrayMap(count);
+                    int i = 0;
+                    while (true) {
+                        if (i < count) {
+                            String key = in.readString8();
+                            arrayMap.append(key, in.readArraySet(null));
+                            i++;
+                        } else {
+                            return new PackageTagsList(arrayMap);
+                        }
+                    }
                 }
-            }
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageTagsList[] newArray(int size) {
-            return new PackageTagsList[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageTagsList[] newArray(int size) {
+                    return new PackageTagsList[size];
+                }
+            };
     private final ArrayMap<String, ArraySet<String>> mPackageTags;
 
     private PackageTagsList(ArrayMap<String, ArraySet<String>> packageTags) {
@@ -182,12 +182,17 @@ public final class PackageTagsList implements Parcelable {
         }
 
         public Builder add(String packageName) {
-            this.mPackageTags.computeIfAbsent(packageName, new Function() { // from class: android.os.PackageTagsList$Builder$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return PackageTagsList.Builder.lambda$add$0((String) obj);
-                }
-            }).clear();
+            this.mPackageTags
+                    .computeIfAbsent(
+                            packageName,
+                            new Function() { // from class:
+                                             // android.os.PackageTagsList$Builder$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Function
+                                public final Object apply(Object obj) {
+                                    return PackageTagsList.Builder.lambda$add$0((String) obj);
+                                }
+                            })
+                    .clear();
             return this;
         }
 
@@ -282,12 +287,14 @@ public final class PackageTagsList implements Parcelable {
             return new PackageTagsList(copy(this.mPackageTags));
         }
 
-        private static ArrayMap<String, ArraySet<String>> copy(ArrayMap<String, ArraySet<String>> value) {
+        private static ArrayMap<String, ArraySet<String>> copy(
+                ArrayMap<String, ArraySet<String>> value) {
             int size = value.size();
             ArrayMap<String, ArraySet<String>> copy = new ArrayMap<>(size);
             for (int i = 0; i < size; i++) {
                 String packageName = value.keyAt(i);
-                ArraySet<String> tags = new ArraySet<>((ArraySet<String>) Objects.requireNonNull(value.valueAt(i)));
+                ArraySet<String> tags =
+                        new ArraySet<>((ArraySet<String>) Objects.requireNonNull(value.valueAt(i)));
                 copy.append(packageName, tags);
             }
             return copy;

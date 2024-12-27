@@ -7,9 +7,14 @@ import android.text.GraphicsOperations;
 import android.text.SpannableString;
 import android.text.SpannedString;
 import android.text.TextUtils;
+
 import com.android.text.flags.Flags;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -17,7 +22,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public class Paint {
@@ -100,27 +104,25 @@ public class Paint {
     static final Align[] sAlignArray = {Align.LEFT, Align.CENTER, Align.RIGHT};
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CursorOption {
-    }
+    public @interface CursorOption {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EndHyphenEdit {
-    }
+    public @interface EndHyphenEdit {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PaintFlag {
-    }
+    public @interface PaintFlag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StartHyphenEdit {
-    }
+    public @interface StartHyphenEdit {}
 
     @CriticalNative
     private static native float nAscent(long j);
 
-    private static native int nBreakText(long j, String str, boolean z, float f, int i, float[] fArr);
+    private static native int nBreakText(
+            long j, String str, boolean z, float f, int i, float[] fArr);
 
-    private static native int nBreakText(long j, char[] cArr, int i, int i2, float f, int i3, float[] fArr);
+    private static native int nBreakText(
+            long j, char[] cArr, int i, int i2, float f, int i3, float[] fArr);
 
     @CriticalNative
     private static native float nDescent(long j);
@@ -128,7 +130,8 @@ public class Paint {
     @CriticalNative
     private static native boolean nEqualsForTextMeasurement(long j, long j2);
 
-    private static native void nGetCharArrayBounds(long j, char[] cArr, int i, int i2, int i3, Rect rect);
+    private static native void nGetCharArrayBounds(
+            long j, char[] cArr, int i, int i2, int i3, Rect rect);
 
     @CriticalNative
     private static native int nGetElegantTextHeight(long j);
@@ -148,9 +151,25 @@ public class Paint {
     @FastNative
     private static native int nGetFontMetricsInt(long j, FontMetricsInt fontMetricsInt, boolean z);
 
-    private static native void nGetFontMetricsIntForText(long j, String str, int i, int i2, int i3, int i4, boolean z, FontMetricsInt fontMetricsInt);
+    private static native void nGetFontMetricsIntForText(
+            long j,
+            String str,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            boolean z,
+            FontMetricsInt fontMetricsInt);
 
-    private static native void nGetFontMetricsIntForText(long j, char[] cArr, int i, int i2, int i3, int i4, boolean z, FontMetricsInt fontMetricsInt);
+    private static native void nGetFontMetricsIntForText(
+            long j,
+            char[] cArr,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            boolean z,
+            FontMetricsInt fontMetricsInt);
 
     @CriticalNative
     private static native int nGetHinting(long j);
@@ -161,13 +180,38 @@ public class Paint {
     /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetNativeFinalizer();
 
-    private static native int nGetOffsetForAdvance(long j, char[] cArr, int i, int i2, int i3, int i4, boolean z, float f);
+    private static native int nGetOffsetForAdvance(
+            long j, char[] cArr, int i, int i2, int i3, int i4, boolean z, float f);
 
-    private static native float nGetRunAdvance(long j, char[] cArr, int i, int i2, int i3, int i4, boolean z, int i5);
+    private static native float nGetRunAdvance(
+            long j, char[] cArr, int i, int i2, int i3, int i4, boolean z, int i5);
 
-    private static native float nGetRunCharacterAdvance(long j, char[] cArr, int i, int i2, int i3, int i4, boolean z, int i5, float[] fArr, int i6, RectF rectF);
+    private static native float nGetRunCharacterAdvance(
+            long j,
+            char[] cArr,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            boolean z,
+            int i5,
+            float[] fArr,
+            int i6,
+            RectF rectF);
 
-    private static native float nGetRunCharacterAdvance(long j, char[] cArr, int i, int i2, int i3, int i4, boolean z, int i5, float[] fArr, int i6, RectF rectF, RunInfo runInfo);
+    private static native float nGetRunCharacterAdvance(
+            long j,
+            char[] cArr,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            boolean z,
+            int i5,
+            float[] fArr,
+            int i6,
+            RectF rectF,
+            RunInfo runInfo);
 
     @CriticalNative
     private static native int nGetStartHyphenEdit(long j);
@@ -178,7 +222,8 @@ public class Paint {
     @CriticalNative
     private static native float nGetStrikeThruThickness(long j);
 
-    private static native void nGetStringBounds(long j, String str, int i, int i2, int i3, Rect rect);
+    private static native void nGetStringBounds(
+            long j, String str, int i, int i2, int i3, Rect rect);
 
     @CriticalNative
     private static native int nGetStrokeCap(long j);
@@ -195,20 +240,25 @@ public class Paint {
     @CriticalNative
     private static native int nGetStyle(long j);
 
-    private static native float nGetTextAdvances(long j, String str, int i, int i2, int i3, int i4, int i5, float[] fArr, int i6);
+    private static native float nGetTextAdvances(
+            long j, String str, int i, int i2, int i3, int i4, int i5, float[] fArr, int i6);
 
-    private static native float nGetTextAdvances(long j, char[] cArr, int i, int i2, int i3, int i4, int i5, float[] fArr, int i6);
+    private static native float nGetTextAdvances(
+            long j, char[] cArr, int i, int i2, int i3, int i4, int i5, float[] fArr, int i6);
 
     @CriticalNative
     private static native int nGetTextAlign(long j);
 
-    private static native void nGetTextPath(long j, int i, String str, int i2, int i3, float f, float f2, long j2);
+    private static native void nGetTextPath(
+            long j, int i, String str, int i2, int i3, float f, float f2, long j2);
 
-    private static native void nGetTextPath(long j, int i, char[] cArr, int i2, int i3, float f, float f2, long j2);
+    private static native void nGetTextPath(
+            long j, int i, char[] cArr, int i2, int i3, float f, float f2, long j2);
 
     private native int nGetTextRunCursor(long j, String str, int i, int i2, int i3, int i4, int i5);
 
-    private native int nGetTextRunCursor(long j, char[] cArr, int i, int i2, int i3, int i4, int i5);
+    private native int nGetTextRunCursor(
+            long j, char[] cArr, int i, int i2, int i3, int i4, int i5);
 
     @CriticalNative
     private static native float nGetTextScaleX(long j);
@@ -300,7 +350,8 @@ public class Paint {
     private static native long nSetShader(long j, long j2);
 
     @CriticalNative
-    private static native void nSetShadowLayer(long j, float f, float f2, float f3, long j2, long j3);
+    private static native void nSetShadowLayer(
+            long j, float f, float f2, float f3, long j2, long j3);
 
     @CriticalNative
     private static native void nSetStartHyphenEdit(long j, int i);
@@ -357,10 +408,11 @@ public class Paint {
     private static native void nSetXfermode(long j, int i);
 
     private static class NoImagePreloadHolder {
-        public static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(Paint.class.getClassLoader(), Paint.nGetNativeFinalizer());
+        public static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        Paint.class.getClassLoader(), Paint.nGetNativeFinalizer());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     public enum Style {
@@ -513,7 +565,8 @@ public class Paint {
             this.mNativeShader = newNativeShader;
             nSetShader(this.mNativePaint, this.mNativeShader);
         }
-        long newNativeColorFilter = this.mColorFilter != null ? this.mColorFilter.getNativeInstance() : 0L;
+        long newNativeColorFilter =
+                this.mColorFilter != null ? this.mColorFilter.getNativeInstance() : 0L;
         if (newNativeColorFilter != this.mNativeColorFilter) {
             this.mNativeColorFilter = newNativeColorFilter;
             nSetColorFilter(this.mNativePaint, this.mNativeColorFilter);
@@ -904,7 +957,9 @@ public class Paint {
                 nSetMyanmarEncoding(this.mNativePaint, MyanmarEncoding.ME_UNICODE.nativeInt);
             }
         }
-        if (this.mLocales != null && this.mLocales.size() == 1 && locale.equals(this.mLocales.get(0))) {
+        if (this.mLocales != null
+                && this.mLocales.size() == 1
+                && locale.equals(this.mLocales.get(0))) {
             return;
         }
         this.mLocales = new LocaleList(locale);
@@ -945,7 +1000,8 @@ public class Paint {
                 int newID = nSetTextLocales(this.mNativePaint, languageTags);
                 sMinikinLocaleListIdCache.put(languageTags, Integer.valueOf(newID));
             } else {
-                nSetTextLocalesByMinikinLocaleListId(this.mNativePaint, minikinLocaleListId.intValue());
+                nSetTextLocalesByMinikinLocaleListId(
+                        this.mNativePaint, minikinLocaleListId.intValue());
             }
         }
     }
@@ -1037,12 +1093,15 @@ public class Paint {
 
     public boolean setFontVariationSettings(String fontVariationSettings) {
         String settings = TextUtils.nullIfEmpty(fontVariationSettings);
-        if (settings == this.mFontVariationSettings || (settings != null && settings.equals(this.mFontVariationSettings))) {
+        if (settings == this.mFontVariationSettings
+                || (settings != null && settings.equals(this.mFontVariationSettings))) {
             return true;
         }
         if (settings == null || settings.length() == 0) {
             this.mFontVariationSettings = null;
-            setTypeface(Typeface.createFromTypefaceWithVariation(this.mTypeface, Collections.emptyList()));
+            setTypeface(
+                    Typeface.createFromTypefaceWithVariation(
+                            this.mTypeface, Collections.emptyList()));
             return true;
         }
         Typeface targetTypeface = this.mTypeface == null ? Typeface.DEFAULT : this.mTypeface;
@@ -1100,18 +1159,37 @@ public class Paint {
                 return false;
             }
             FontMetrics that = (FontMetrics) o;
-            if (that.top == this.top && that.ascent == this.ascent && that.descent == this.descent && that.bottom == this.bottom && that.leading == this.leading) {
+            if (that.top == this.top
+                    && that.ascent == this.ascent
+                    && that.descent == this.descent
+                    && that.bottom == this.bottom
+                    && that.leading == this.leading) {
                 return true;
             }
             return false;
         }
 
         public int hashCode() {
-            return Objects.hash(Float.valueOf(this.top), Float.valueOf(this.ascent), Float.valueOf(this.descent), Float.valueOf(this.bottom), Float.valueOf(this.leading));
+            return Objects.hash(
+                    Float.valueOf(this.top),
+                    Float.valueOf(this.ascent),
+                    Float.valueOf(this.descent),
+                    Float.valueOf(this.bottom),
+                    Float.valueOf(this.leading));
         }
 
         public String toString() {
-            return "FontMetrics{top=" + this.top + ", ascent=" + this.ascent + ", descent=" + this.descent + ", bottom=" + this.bottom + ", leading=" + this.leading + '}';
+            return "FontMetrics{top="
+                    + this.top
+                    + ", ascent="
+                    + this.ascent
+                    + ", descent="
+                    + this.descent
+                    + ", bottom="
+                    + this.bottom
+                    + ", leading="
+                    + this.leading
+                    + '}';
         }
     }
 
@@ -1129,7 +1207,14 @@ public class Paint {
         nGetFontMetrics(this.mNativePaint, metrics, true);
     }
 
-    public void getFontMetricsInt(CharSequence text, int start, int count, int contextStart, int contextCount, boolean isRtl, FontMetricsInt outMetrics) {
+    public void getFontMetricsInt(
+            CharSequence text,
+            int start,
+            int count,
+            int contextStart,
+            int contextCount,
+            boolean isRtl,
+            FontMetricsInt outMetrics) {
         if (text == null) {
             throw new IllegalArgumentException("text must not be null");
         }
@@ -1153,19 +1238,42 @@ public class Paint {
             return;
         }
         if (text instanceof String) {
-            nGetFontMetricsIntForText(this.mNativePaint, (String) text, start, count, contextStart, contextCount, isRtl, outMetrics);
+            nGetFontMetricsIntForText(
+                    this.mNativePaint,
+                    (String) text,
+                    start,
+                    count,
+                    contextStart,
+                    contextCount,
+                    isRtl,
+                    outMetrics);
             return;
         }
         char[] buf = TemporaryBuffer.obtain(contextCount);
         try {
             TextUtils.getChars(text, contextStart, contextStart + contextCount, buf, 0);
-            nGetFontMetricsIntForText(this.mNativePaint, buf, start - contextStart, count, 0, contextCount, isRtl, outMetrics);
+            nGetFontMetricsIntForText(
+                    this.mNativePaint,
+                    buf,
+                    start - contextStart,
+                    count,
+                    0,
+                    contextCount,
+                    isRtl,
+                    outMetrics);
         } finally {
             TemporaryBuffer.recycle(buf);
         }
     }
 
-    public void getFontMetricsInt(char[] text, int start, int count, int contextStart, int contextCount, boolean isRtl, FontMetricsInt outMetrics) {
+    public void getFontMetricsInt(
+            char[] text,
+            int start,
+            int count,
+            int contextStart,
+            int contextCount,
+            boolean isRtl,
+            FontMetricsInt outMetrics) {
         if (text == null) {
             throw new IllegalArgumentException("text must not be null");
         }
@@ -1187,7 +1295,15 @@ public class Paint {
         if (count == 0) {
             getFontMetricsInt(outMetrics);
         } else {
-            nGetFontMetricsIntForText(this.mNativePaint, text, start, count, contextStart, contextCount, isRtl, outMetrics);
+            nGetFontMetricsIntForText(
+                    this.mNativePaint,
+                    text,
+                    start,
+                    count,
+                    contextStart,
+                    contextCount,
+                    isRtl,
+                    outMetrics);
         }
     }
 
@@ -1215,7 +1331,16 @@ public class Paint {
         }
 
         public String toString() {
-            return "FontMetricsInt: top=" + this.top + " ascent=" + this.ascent + " descent=" + this.descent + " bottom=" + this.bottom + " leading=" + this.leading;
+            return "FontMetricsInt: top="
+                    + this.top
+                    + " ascent="
+                    + this.ascent
+                    + " descent="
+                    + this.descent
+                    + " bottom="
+                    + this.bottom
+                    + " leading="
+                    + this.leading;
         }
 
         public boolean equals(Object o) {
@@ -1226,11 +1351,20 @@ public class Paint {
                 return false;
             }
             FontMetricsInt that = (FontMetricsInt) o;
-            return this.top == that.top && this.ascent == that.ascent && this.descent == that.descent && this.bottom == that.bottom && this.leading == that.leading;
+            return this.top == that.top
+                    && this.ascent == that.ascent
+                    && this.descent == that.descent
+                    && this.bottom == that.bottom
+                    && this.leading == that.leading;
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.top), Integer.valueOf(this.ascent), Integer.valueOf(this.descent), Integer.valueOf(this.bottom), Integer.valueOf(this.leading));
+            return Objects.hash(
+                    Integer.valueOf(this.top),
+                    Integer.valueOf(this.ascent),
+                    Integer.valueOf(this.descent),
+                    Integer.valueOf(this.bottom),
+                    Integer.valueOf(this.leading));
         }
     }
 
@@ -1280,11 +1414,32 @@ public class Paint {
             if (this.mHasCompatScaling) {
                 float oldSize = getTextSize();
                 setTextSize(this.mCompatScaling * oldSize);
-                float w = nGetTextAdvances(this.mNativePaint, text, index, count, index, count, this.mBidiFlags, (float[]) null, 0);
+                float w =
+                        nGetTextAdvances(
+                                this.mNativePaint,
+                                text,
+                                index,
+                                count,
+                                index,
+                                count,
+                                this.mBidiFlags,
+                                (float[]) null,
+                                0);
                 setTextSize(oldSize);
                 return (float) Math.ceil(this.mInvCompatScaling * w);
             }
-            return (float) Math.ceil(nGetTextAdvances(this.mNativePaint, text, index, count, index, count, this.mBidiFlags, (float[]) null, 0));
+            return (float)
+                    Math.ceil(
+                            nGetTextAdvances(
+                                    this.mNativePaint,
+                                    text,
+                                    index,
+                                    count,
+                                    index,
+                                    count,
+                                    this.mBidiFlags,
+                                    (float[]) null,
+                                    0));
         } finally {
             setFlags(oldFlag);
         }
@@ -1306,11 +1461,32 @@ public class Paint {
             if (this.mHasCompatScaling) {
                 float oldSize = getTextSize();
                 setTextSize(this.mCompatScaling * oldSize);
-                float w = nGetTextAdvances(this.mNativePaint, text, start, end, start, end, this.mBidiFlags, (float[]) null, 0);
+                float w =
+                        nGetTextAdvances(
+                                this.mNativePaint,
+                                text,
+                                start,
+                                end,
+                                start,
+                                end,
+                                this.mBidiFlags,
+                                (float[]) null,
+                                0);
                 setTextSize(oldSize);
                 return (float) Math.ceil(this.mInvCompatScaling * w);
             }
-            return (float) Math.ceil(nGetTextAdvances(this.mNativePaint, text, start, end, start, end, this.mBidiFlags, (float[]) null, 0));
+            return (float)
+                    Math.ceil(
+                            nGetTextAdvances(
+                                    this.mNativePaint,
+                                    text,
+                                    start,
+                                    end,
+                                    start,
+                                    end,
+                                    this.mBidiFlags,
+                                    (float[]) null,
+                                    0));
         } finally {
             setFlags(oldFlag);
         }
@@ -1360,11 +1536,26 @@ public class Paint {
             return 0;
         }
         if (!this.mHasCompatScaling) {
-            return nBreakText(this.mNativePaint, text, index, count, maxWidth, this.mBidiFlags, measuredWidth);
+            return nBreakText(
+                    this.mNativePaint,
+                    text,
+                    index,
+                    count,
+                    maxWidth,
+                    this.mBidiFlags,
+                    measuredWidth);
         }
         float oldSize = getTextSize();
         setTextSize(this.mCompatScaling * oldSize);
-        int res = nBreakText(this.mNativePaint, text, index, count, maxWidth * this.mCompatScaling, this.mBidiFlags, measuredWidth);
+        int res =
+                nBreakText(
+                        this.mNativePaint,
+                        text,
+                        index,
+                        count,
+                        maxWidth * this.mCompatScaling,
+                        this.mBidiFlags,
+                        measuredWidth);
         setTextSize(oldSize);
         if (measuredWidth != null) {
             measuredWidth[0] = measuredWidth[0] * this.mInvCompatScaling;
@@ -1372,7 +1563,13 @@ public class Paint {
         return res;
     }
 
-    public int breakText(CharSequence text, int start, int end, boolean measureForwards, float maxWidth, float[] measuredWidth) {
+    public int breakText(
+            CharSequence text,
+            int start,
+            int end,
+            boolean measureForwards,
+            float maxWidth,
+            float[] measuredWidth) {
         int result;
         if (text == null) {
             throw new IllegalArgumentException("text cannot be null");
@@ -1398,7 +1595,8 @@ public class Paint {
         return result;
     }
 
-    public int breakText(String text, boolean measureForwards, float maxWidth, float[] measuredWidth) {
+    public int breakText(
+            String text, boolean measureForwards, float maxWidth, float[] measuredWidth) {
         if (text == null) {
             throw new IllegalArgumentException("text cannot be null");
         }
@@ -1406,11 +1604,24 @@ public class Paint {
             return 0;
         }
         if (!this.mHasCompatScaling) {
-            return nBreakText(this.mNativePaint, text, measureForwards, maxWidth, this.mBidiFlags, measuredWidth);
+            return nBreakText(
+                    this.mNativePaint,
+                    text,
+                    measureForwards,
+                    maxWidth,
+                    this.mBidiFlags,
+                    measuredWidth);
         }
         float oldSize = getTextSize();
         setTextSize(this.mCompatScaling * oldSize);
-        int res = nBreakText(this.mNativePaint, text, measureForwards, maxWidth * this.mCompatScaling, this.mBidiFlags, measuredWidth);
+        int res =
+                nBreakText(
+                        this.mNativePaint,
+                        text,
+                        measureForwards,
+                        maxWidth * this.mCompatScaling,
+                        this.mBidiFlags,
+                        measuredWidth);
         setTextSize(oldSize);
         if (measuredWidth != null) {
             measuredWidth[0] = measuredWidth[0] * this.mInvCompatScaling;
@@ -1432,12 +1643,30 @@ public class Paint {
         setFlags(getFlags() | 24576);
         try {
             if (!this.mHasCompatScaling) {
-                nGetTextAdvances(this.mNativePaint, text, index, count, index, count, this.mBidiFlags, widths, 0);
+                nGetTextAdvances(
+                        this.mNativePaint,
+                        text,
+                        index,
+                        count,
+                        index,
+                        count,
+                        this.mBidiFlags,
+                        widths,
+                        0);
                 return count;
             }
             float oldSize = getTextSize();
             setTextSize(this.mCompatScaling * oldSize);
-            nGetTextAdvances(this.mNativePaint, text, index, count, index, count, this.mBidiFlags, widths, 0);
+            nGetTextAdvances(
+                    this.mNativePaint,
+                    text,
+                    index,
+                    count,
+                    index,
+                    count,
+                    this.mBidiFlags,
+                    widths,
+                    0);
             setTextSize(oldSize);
             for (int i = 0; i < count; i++) {
                 widths[i] = widths[i] * this.mInvCompatScaling;
@@ -1494,12 +1723,22 @@ public class Paint {
         setFlags(getFlags() | 24576);
         try {
             if (!this.mHasCompatScaling) {
-                nGetTextAdvances(this.mNativePaint, text, start, end, start, end, this.mBidiFlags, widths, 0);
+                nGetTextAdvances(
+                        this.mNativePaint,
+                        text,
+                        start,
+                        end,
+                        start,
+                        end,
+                        this.mBidiFlags,
+                        widths,
+                        0);
                 return end - start;
             }
             float oldSize = getTextSize();
             setTextSize(this.mCompatScaling * oldSize);
-            nGetTextAdvances(this.mNativePaint, text, start, end, start, end, this.mBidiFlags, widths, 0);
+            nGetTextAdvances(
+                    this.mNativePaint, text, start, end, start, end, this.mBidiFlags, widths, 0);
             setTextSize(oldSize);
             for (int i = 0; i < end - start; i++) {
                 widths[i] = widths[i] * this.mInvCompatScaling;
@@ -1515,22 +1754,59 @@ public class Paint {
         return getTextWidths(text, 0, text.length(), widths);
     }
 
-    public float getTextRunAdvances(char[] chars, int index, int count, int contextIndex, int contextCount, boolean isRtl, float[] advances, int advancesIndex) {
+    public float getTextRunAdvances(
+            char[] chars,
+            int index,
+            int count,
+            int contextIndex,
+            int contextCount,
+            boolean isRtl,
+            float[] advances,
+            int advancesIndex) {
         if (chars == null) {
             throw new IllegalArgumentException("text cannot be null");
         }
-        if ((index | count | contextIndex | contextCount | advancesIndex | (index - contextIndex) | (contextCount - count) | ((contextIndex + contextCount) - (index + count)) | (chars.length - (contextIndex + contextCount)) | (advances == null ? 0 : advances.length - (advancesIndex + count))) < 0) {
+        if ((index
+                        | count
+                        | contextIndex
+                        | contextCount
+                        | advancesIndex
+                        | (index - contextIndex)
+                        | (contextCount - count)
+                        | ((contextIndex + contextCount) - (index + count))
+                        | (chars.length - (contextIndex + contextCount))
+                        | (advances == null ? 0 : advances.length - (advancesIndex + count)))
+                < 0) {
             throw new IndexOutOfBoundsException();
         }
         if (chars.length == 0 || count == 0) {
             return 0.0f;
         }
         if (!this.mHasCompatScaling) {
-            return nGetTextAdvances(this.mNativePaint, chars, index, count, contextIndex, contextCount, isRtl ? 5 : 4, advances, advancesIndex);
+            return nGetTextAdvances(
+                    this.mNativePaint,
+                    chars,
+                    index,
+                    count,
+                    contextIndex,
+                    contextCount,
+                    isRtl ? 5 : 4,
+                    advances,
+                    advancesIndex);
         }
         float oldSize = getTextSize();
         setTextSize(this.mCompatScaling * oldSize);
-        float res = nGetTextAdvances(this.mNativePaint, chars, index, count, contextIndex, contextCount, isRtl ? 5 : 4, advances, advancesIndex);
+        float res =
+                nGetTextAdvances(
+                        this.mNativePaint,
+                        chars,
+                        index,
+                        count,
+                        contextIndex,
+                        contextCount,
+                        isRtl ? 5 : 4,
+                        advances,
+                        advancesIndex);
         setTextSize(oldSize);
         if (advances != null) {
             int i = advancesIndex;
@@ -1545,18 +1821,29 @@ public class Paint {
 
     public int getTextRunCursor(char[] cArr, int i, int i2, boolean z, int i3, int i4) {
         int i5 = i + i2;
-        if ((i | i5 | i3 | (i5 - i) | (i3 - i) | (i5 - i3) | (cArr.length - i5) | i4) < 0 || i4 > 4) {
+        if ((i | i5 | i3 | (i5 - i) | (i3 - i) | (i5 - i3) | (cArr.length - i5) | i4) < 0
+                || i4 > 4) {
             throw new IndexOutOfBoundsException();
         }
         return nGetTextRunCursor(this.mNativePaint, cArr, i, i2, z ? 1 : 0, i3, i4);
     }
 
-    public int getTextRunCursor(CharSequence text, int contextStart, int contextEnd, boolean isRtl, int offset, int cursorOpt) {
-        if ((text instanceof String) || (text instanceof SpannedString) || (text instanceof SpannableString)) {
-            return getTextRunCursor(text.toString(), contextStart, contextEnd, isRtl, offset, cursorOpt);
+    public int getTextRunCursor(
+            CharSequence text,
+            int contextStart,
+            int contextEnd,
+            boolean isRtl,
+            int offset,
+            int cursorOpt) {
+        if ((text instanceof String)
+                || (text instanceof SpannedString)
+                || (text instanceof SpannableString)) {
+            return getTextRunCursor(
+                    text.toString(), contextStart, contextEnd, isRtl, offset, cursorOpt);
         }
         if (text instanceof GraphicsOperations) {
-            return ((GraphicsOperations) text).getTextRunCursor(contextStart, contextEnd, isRtl, offset, cursorOpt, this);
+            return ((GraphicsOperations) text)
+                    .getTextRunCursor(contextStart, contextEnd, isRtl, offset, cursorOpt, this);
         }
         int contextLen = contextEnd - contextStart;
         char[] buf = TemporaryBuffer.obtain(contextLen);
@@ -1570,7 +1857,8 @@ public class Paint {
     }
 
     public int getTextRunCursor(String str, int i, int i2, boolean z, int i3, int i4) {
-        if ((i | i2 | i3 | (i2 - i) | (i3 - i) | (i2 - i3) | (str.length() - i2) | i4) < 0 || i4 > 4) {
+        if ((i | i2 | i3 | (i2 - i) | (i3 - i) | (i2 - i3) | (str.length() - i2) | i4) < 0
+                || i4 > 4) {
             throw new IndexOutOfBoundsException();
         }
         return nGetTextRunCursor(this.mNativePaint, str, i, i2, z ? 1 : 0, i3, i4);
@@ -1578,7 +1866,8 @@ public class Paint {
 
     public void getTextPath(char[] text, int index, int count, float x, float y, Path path) {
         if ((index | count) >= 0 && index + count <= text.length) {
-            nGetTextPath(this.mNativePaint, this.mBidiFlags, text, index, count, x, y, path.mutateNI());
+            nGetTextPath(
+                    this.mNativePaint, this.mBidiFlags, text, index, count, x, y, path.mutateNI());
             return;
         }
         throw new ArrayIndexOutOfBoundsException();
@@ -1586,7 +1875,8 @@ public class Paint {
 
     public void getTextPath(String text, int start, int end, float x, float y, Path path) {
         if ((start | end | (end - start) | (text.length() - end)) >= 0) {
-            nGetTextPath(this.mNativePaint, this.mBidiFlags, text, start, end, x, y, path.mutateNI());
+            nGetTextPath(
+                    this.mNativePaint, this.mBidiFlags, text, start, end, x, y, path.mutateNI());
             return;
         }
         throw new IndexOutOfBoundsException();
@@ -1629,24 +1919,59 @@ public class Paint {
         return nHasGlyph(this.mNativePaint, this.mBidiFlags, string);
     }
 
-    public float getRunAdvance(char[] text, int start, int end, int contextStart, int contextEnd, boolean isRtl, int offset) {
+    public float getRunAdvance(
+            char[] text,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean isRtl,
+            int offset) {
         if (text == null) {
             throw new IllegalArgumentException("text cannot be null");
         }
-        if ((contextStart | start | offset | end | contextEnd | (start - contextStart) | (offset - start) | (end - offset) | (contextEnd - end) | (text.length - contextEnd)) < 0) {
+        if ((contextStart
+                        | start
+                        | offset
+                        | end
+                        | contextEnd
+                        | (start - contextStart)
+                        | (offset - start)
+                        | (end - offset)
+                        | (contextEnd - end)
+                        | (text.length - contextEnd))
+                < 0) {
             throw new IndexOutOfBoundsException();
         }
         if (end == start) {
             return 0.0f;
         }
-        return nGetRunAdvance(this.mNativePaint, text, start, end, contextStart, contextEnd, isRtl, offset);
+        return nGetRunAdvance(
+                this.mNativePaint, text, start, end, contextStart, contextEnd, isRtl, offset);
     }
 
-    public float getRunAdvance(CharSequence text, int start, int end, int contextStart, int contextEnd, boolean isRtl, int offset) {
+    public float getRunAdvance(
+            CharSequence text,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean isRtl,
+            int offset) {
         if (text == null) {
             throw new IllegalArgumentException("text cannot be null");
         }
-        if ((contextStart | start | offset | end | contextEnd | (start - contextStart) | (offset - start) | (end - offset) | (contextEnd - end) | (text.length() - contextEnd)) < 0) {
+        if ((contextStart
+                        | start
+                        | offset
+                        | end
+                        | contextEnd
+                        | (start - contextStart)
+                        | (offset - start)
+                        | (end - offset)
+                        | (contextEnd - end)
+                        | (text.length() - contextEnd))
+                < 0) {
             throw new IndexOutOfBoundsException();
         }
         if (end == start) {
@@ -1654,30 +1979,90 @@ public class Paint {
         }
         char[] buf = TemporaryBuffer.obtain(contextEnd - contextStart);
         TextUtils.getChars(text, contextStart, contextEnd, buf, 0);
-        float result = getRunAdvance(buf, start - contextStart, end - contextStart, 0, contextEnd - contextStart, isRtl, offset - contextStart);
+        float result =
+                getRunAdvance(
+                        buf,
+                        start - contextStart,
+                        end - contextStart,
+                        0,
+                        contextEnd - contextStart,
+                        isRtl,
+                        offset - contextStart);
         TemporaryBuffer.recycle(buf);
         return result;
     }
 
-    public float getRunCharacterAdvance(char[] text, int start, int end, int contextStart, int contextEnd, boolean isRtl, int offset, float[] advances, int advancesIndex) {
-        return getRunCharacterAdvance(text, start, end, contextStart, contextEnd, isRtl, offset, advances, advancesIndex, (RectF) null, (RunInfo) null);
+    public float getRunCharacterAdvance(
+            char[] text,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean isRtl,
+            int offset,
+            float[] advances,
+            int advancesIndex) {
+        return getRunCharacterAdvance(
+                text,
+                start,
+                end,
+                contextStart,
+                contextEnd,
+                isRtl,
+                offset,
+                advances,
+                advancesIndex,
+                (RectF) null,
+                (RunInfo) null);
     }
 
-    public float getRunCharacterAdvance(char[] text, int start, int end, int contextStart, int contextEnd, boolean isRtl, int offset, float[] advances, int advancesIndex, RectF drawBounds, RunInfo runInfo) {
+    public float getRunCharacterAdvance(
+            char[] text,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean isRtl,
+            int offset,
+            float[] advances,
+            int advancesIndex,
+            RectF drawBounds,
+            RunInfo runInfo) {
         if (text == null) {
             throw new IllegalArgumentException("text cannot be null");
         }
         if (contextStart < 0 || contextEnd > text.length) {
-            throw new IndexOutOfBoundsException("Invalid Context Range: " + contextStart + ", " + contextEnd + " must be in 0, " + text.length);
+            throw new IndexOutOfBoundsException(
+                    "Invalid Context Range: "
+                            + contextStart
+                            + ", "
+                            + contextEnd
+                            + " must be in 0, "
+                            + text.length);
         }
         if (start < contextStart || contextEnd < end) {
-            throw new IndexOutOfBoundsException("Invalid start/end range: " + start + ", " + end + " must be in " + contextStart + ", " + contextEnd);
+            throw new IndexOutOfBoundsException(
+                    "Invalid start/end range: "
+                            + start
+                            + ", "
+                            + end
+                            + " must be in "
+                            + contextStart
+                            + ", "
+                            + contextEnd);
         }
         if (offset < start || end < offset) {
-            throw new IndexOutOfBoundsException("Invalid offset position: " + offset + " must be in " + start + ", " + end);
+            throw new IndexOutOfBoundsException(
+                    "Invalid offset position: " + offset + " must be in " + start + ", " + end);
         }
         if (advances != null && advances.length < (advancesIndex - start) + end) {
-            throw new IndexOutOfBoundsException("Given array doesn't have enough space to receive the result, advances.length: " + advances.length + " advanceIndex: " + advancesIndex + " needed space: " + (offset - start));
+            throw new IndexOutOfBoundsException(
+                    "Given array doesn't have enough space to receive the result, advances.length: "
+                            + advances.length
+                            + " advanceIndex: "
+                            + advancesIndex
+                            + " needed space: "
+                            + (offset - start));
         }
         if (end == start) {
             if (runInfo != null) {
@@ -1686,59 +2071,175 @@ public class Paint {
             }
             return 0.0f;
         }
-        return nGetRunCharacterAdvance(this.mNativePaint, text, start, end, contextStart, contextEnd, isRtl, offset, advances, advancesIndex, drawBounds, runInfo);
+        return nGetRunCharacterAdvance(
+                this.mNativePaint,
+                text,
+                start,
+                end,
+                contextStart,
+                contextEnd,
+                isRtl,
+                offset,
+                advances,
+                advancesIndex,
+                drawBounds,
+                runInfo);
     }
 
-    public float getRunCharacterAdvance(CharSequence text, int start, int end, int contextStart, int contextEnd, boolean isRtl, int offset, float[] advances, int advancesIndex) {
-        return getRunCharacterAdvance(text, start, end, contextStart, contextEnd, isRtl, offset, advances, advancesIndex, (RectF) null, (RunInfo) null);
+    public float getRunCharacterAdvance(
+            CharSequence text,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean isRtl,
+            int offset,
+            float[] advances,
+            int advancesIndex) {
+        return getRunCharacterAdvance(
+                text,
+                start,
+                end,
+                contextStart,
+                contextEnd,
+                isRtl,
+                offset,
+                advances,
+                advancesIndex,
+                (RectF) null,
+                (RunInfo) null);
     }
 
-    public float getRunCharacterAdvance(CharSequence text, int start, int end, int contextStart, int contextEnd, boolean isRtl, int offset, float[] advances, int advancesIndex, RectF drawBounds, RunInfo runInfo) {
+    public float getRunCharacterAdvance(
+            CharSequence text,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean isRtl,
+            int offset,
+            float[] advances,
+            int advancesIndex,
+            RectF drawBounds,
+            RunInfo runInfo) {
         if (text == null) {
             throw new IllegalArgumentException("text cannot be null");
         }
         if (contextStart < 0 || contextEnd > text.length()) {
-            throw new IndexOutOfBoundsException("Invalid Context Range: " + contextStart + ", " + contextEnd + " must be in 0, " + text.length());
+            throw new IndexOutOfBoundsException(
+                    "Invalid Context Range: "
+                            + contextStart
+                            + ", "
+                            + contextEnd
+                            + " must be in 0, "
+                            + text.length());
         }
         if (start < contextStart || contextEnd < end) {
-            throw new IndexOutOfBoundsException("Invalid start/end range: " + start + ", " + end + " must be in " + contextStart + ", " + contextEnd);
+            throw new IndexOutOfBoundsException(
+                    "Invalid start/end range: "
+                            + start
+                            + ", "
+                            + end
+                            + " must be in "
+                            + contextStart
+                            + ", "
+                            + contextEnd);
         }
         if (offset < start || end < offset) {
-            throw new IndexOutOfBoundsException("Invalid offset position: " + offset + " must be in " + start + ", " + end);
+            throw new IndexOutOfBoundsException(
+                    "Invalid offset position: " + offset + " must be in " + start + ", " + end);
         }
         if (advances != null && advances.length < (advancesIndex - start) + end) {
-            throw new IndexOutOfBoundsException("Given array doesn't have enough space to receive the result, advances.length: " + advances.length + " advanceIndex: " + advancesIndex + " needed space: " + (offset - start));
+            throw new IndexOutOfBoundsException(
+                    "Given array doesn't have enough space to receive the result, advances.length: "
+                            + advances.length
+                            + " advanceIndex: "
+                            + advancesIndex
+                            + " needed space: "
+                            + (offset - start));
         }
         if (end == start) {
             return 0.0f;
         }
         char[] buf = TemporaryBuffer.obtain(contextEnd - contextStart);
         TextUtils.getChars(text, contextStart, contextEnd, buf, 0);
-        float result = getRunCharacterAdvance(buf, start - contextStart, end - contextStart, 0, contextEnd - contextStart, isRtl, offset - contextStart, advances, advancesIndex, drawBounds, runInfo);
+        float result =
+                getRunCharacterAdvance(
+                        buf,
+                        start - contextStart,
+                        end - contextStart,
+                        0,
+                        contextEnd - contextStart,
+                        isRtl,
+                        offset - contextStart,
+                        advances,
+                        advancesIndex,
+                        drawBounds,
+                        runInfo);
         TemporaryBuffer.recycle(buf);
         return result;
     }
 
-    public int getOffsetForAdvance(char[] text, int start, int end, int contextStart, int contextEnd, boolean isRtl, float advance) {
+    public int getOffsetForAdvance(
+            char[] text,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean isRtl,
+            float advance) {
         if (text == null) {
             throw new IllegalArgumentException("text cannot be null");
         }
-        if ((contextStart | start | end | contextEnd | (start - contextStart) | (end - start) | (contextEnd - end) | (text.length - contextEnd)) >= 0) {
-            return nGetOffsetForAdvance(this.mNativePaint, text, start, end, contextStart, contextEnd, isRtl, advance);
+        if ((contextStart
+                        | start
+                        | end
+                        | contextEnd
+                        | (start - contextStart)
+                        | (end - start)
+                        | (contextEnd - end)
+                        | (text.length - contextEnd))
+                >= 0) {
+            return nGetOffsetForAdvance(
+                    this.mNativePaint, text, start, end, contextStart, contextEnd, isRtl, advance);
         }
         throw new IndexOutOfBoundsException();
     }
 
-    public int getOffsetForAdvance(CharSequence text, int start, int end, int contextStart, int contextEnd, boolean isRtl, float advance) {
+    public int getOffsetForAdvance(
+            CharSequence text,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean isRtl,
+            float advance) {
         if (text == null) {
             throw new IllegalArgumentException("text cannot be null");
         }
-        if ((contextStart | start | end | contextEnd | (start - contextStart) | (end - start) | (contextEnd - end) | (text.length() - contextEnd)) < 0) {
+        if ((contextStart
+                        | start
+                        | end
+                        | contextEnd
+                        | (start - contextStart)
+                        | (end - start)
+                        | (contextEnd - end)
+                        | (text.length() - contextEnd))
+                < 0) {
             throw new IndexOutOfBoundsException();
         }
         char[] buf = TemporaryBuffer.obtain(contextEnd - contextStart);
         TextUtils.getChars(text, contextStart, contextEnd, buf, 0);
-        int result = getOffsetForAdvance(buf, start - contextStart, end - contextStart, 0, contextEnd - contextStart, isRtl, advance) + contextStart;
+        int result =
+                getOffsetForAdvance(
+                                buf,
+                                start - contextStart,
+                                end - contextStart,
+                                0,
+                                contextEnd - contextStart,
+                                isRtl,
+                                advance)
+                        + contextStart;
         TemporaryBuffer.recycle(buf);
         return result;
     }
@@ -1776,7 +2277,9 @@ public class Paint {
         if (!this.mUseCustomMyanmarEncoding && locale != null) {
             MyanmarEncoding myanmarEncoding = MyanmarEncoding.ME_UNICODE;
             String country = locale.getCountry();
-            if (LocaleList.getDefault().size() > 1 && ((country == null || "".equals(country)) && (myLocale = LocaleList.getDefault().get(1)) != null)) {
+            if (LocaleList.getDefault().size() > 1
+                    && ((country == null || "".equals(country))
+                            && (myLocale = LocaleList.getDefault().get(1)) != null)) {
                 country = myLocale.getCountry();
             }
             if ("ZG".equals(country)) {

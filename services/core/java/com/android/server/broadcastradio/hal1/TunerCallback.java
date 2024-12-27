@@ -6,7 +6,9 @@ import android.hardware.radio.ProgramSelector;
 import android.hardware.radio.RadioManager;
 import android.os.IBinder;
 import android.os.RemoteException;
+
 import com.android.server.utils.Slogf;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
@@ -73,7 +75,8 @@ class TunerCallback implements ITunerCallback {
         this.mClientCallback.onAntennaState(z);
     }
 
-    public final /* synthetic */ void lambda$onBackgroundScanAvailabilityChange$6(boolean z) throws RemoteException {
+    public final /* synthetic */ void lambda$onBackgroundScanAvailabilityChange$6(boolean z)
+            throws RemoteException {
         this.mClientCallback.onBackgroundScanAvailabilityChange(z);
     }
 
@@ -81,15 +84,18 @@ class TunerCallback implements ITunerCallback {
         this.mClientCallback.onBackgroundScanComplete();
     }
 
-    public final /* synthetic */ void lambda$onConfigurationChanged$1(RadioManager.BandConfig bandConfig) throws RemoteException {
+    public final /* synthetic */ void lambda$onConfigurationChanged$1(
+            RadioManager.BandConfig bandConfig) throws RemoteException {
         this.mClientCallback.onConfigurationChanged(bandConfig);
     }
 
-    public final /* synthetic */ void lambda$onCurrentProgramInfoChanged$2(RadioManager.ProgramInfo programInfo) throws RemoteException {
+    public final /* synthetic */ void lambda$onCurrentProgramInfoChanged$2(
+            RadioManager.ProgramInfo programInfo) throws RemoteException {
         this.mClientCallback.onCurrentProgramInfoChanged(programInfo);
     }
 
-    public final /* synthetic */ void lambda$onEmergencyAnnouncement$4(boolean z) throws RemoteException {
+    public final /* synthetic */ void lambda$onEmergencyAnnouncement$4(boolean z)
+            throws RemoteException {
         this.mClientCallback.onEmergencyAnnouncement(z);
     }
 
@@ -101,15 +107,18 @@ class TunerCallback implements ITunerCallback {
         this.mClientCallback.onProgramListChanged();
     }
 
-    public final /* synthetic */ void lambda$onProgramListUpdated$10(ProgramList.Chunk chunk) throws RemoteException {
+    public final /* synthetic */ void lambda$onProgramListUpdated$10(ProgramList.Chunk chunk)
+            throws RemoteException {
         this.mClientCallback.onProgramListUpdated(chunk);
     }
 
-    public final /* synthetic */ void lambda$onTrafficAnnouncement$3(boolean z) throws RemoteException {
+    public final /* synthetic */ void lambda$onTrafficAnnouncement$3(boolean z)
+            throws RemoteException {
         this.mClientCallback.onTrafficAnnouncement(z);
     }
 
-    public final /* synthetic */ void lambda$sendProgramListUpdate$9(ProgramList.Chunk chunk) throws RemoteException {
+    public final /* synthetic */ void lambda$sendProgramListUpdate$9(ProgramList.Chunk chunk)
+            throws RemoteException {
         this.mClientCallback.onProgramListUpdated(chunk);
     }
 
@@ -143,12 +152,14 @@ class TunerCallback implements ITunerCallback {
     }
 
     public final void onError(final int i) {
-        dispatch(new RunnableThrowingRemoteException() { // from class: com.android.server.broadcastradio.hal1.TunerCallback$$ExternalSyntheticLambda9
-            @Override // com.android.server.broadcastradio.hal1.TunerCallback.RunnableThrowingRemoteException
-            public final void run() {
-                TunerCallback.this.lambda$onError$0(i);
-            }
-        });
+        dispatch(
+                new RunnableThrowingRemoteException() { // from class:
+                                                        // com.android.server.broadcastradio.hal1.TunerCallback$$ExternalSyntheticLambda9
+                    @Override // com.android.server.broadcastradio.hal1.TunerCallback.RunnableThrowingRemoteException
+                    public final void run() {
+                        TunerCallback.this.lambda$onError$0(i);
+                    }
+                });
     }
 
     public final void onParametersUpdated(Map map) {
@@ -178,7 +189,19 @@ class TunerCallback implements ITunerCallback {
             return;
         }
         try {
-            dispatch(new TunerCallback$$ExternalSyntheticLambda0(this, new ProgramList.Chunk(true, true, (Set) this.mTuner.getProgramList(filter.getVendorFilter()).stream().collect(Collectors.toSet()), (Set) null), 0));
+            dispatch(
+                    new TunerCallback$$ExternalSyntheticLambda0(
+                            this,
+                            new ProgramList.Chunk(
+                                    true,
+                                    true,
+                                    (Set)
+                                            this.mTuner
+                                                    .getProgramList(filter.getVendorFilter())
+                                                    .stream()
+                                                    .collect(Collectors.toSet()),
+                                    (Set) null),
+                            0));
         } catch (IllegalStateException unused) {
             Slogf.d(TAG, "Program list not ready yet");
         }

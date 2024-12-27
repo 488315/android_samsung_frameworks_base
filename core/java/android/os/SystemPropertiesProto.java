@@ -38,8 +38,7 @@ public final class SystemPropertiesProto {
         public static final long NAME = 1138166333441L;
         public static final long VALUE = 1138166333442L;
 
-        public Property() {
-        }
+        public Property() {}
     }
 
     public final class AacDrc {
@@ -49,8 +48,7 @@ public final class SystemPropertiesProto {
         public static final long HEAVY = 1120986464260L;
         public static final long REFERENCE_LEVEL = 1120986464261L;
 
-        public AacDrc() {
-        }
+        public AacDrc() {}
     }
 
     public final class Aaudio {
@@ -61,16 +59,14 @@ public final class SystemPropertiesProto {
         public static final long MMAP_POLICY = 1120986464261L;
         public static final long WAKEUP_DELAY_USEC = 1120986464262L;
 
-        public Aaudio() {
-        }
+        public Aaudio() {}
     }
 
     public final class Camera {
         public static final long DISABLE_ZSL_MODE = 1133871366145L;
         public static final long FIFO_DISABLE = 1120986464258L;
 
-        public Camera() {
-        }
+        public Camera() {}
     }
 
     public final class DalvikVm {
@@ -129,8 +125,7 @@ public final class SystemPropertiesProto {
         public static final long USEJITPROFILES = 1133871366197L;
         public static final long ZYGOTE_MAX_BOOT_RETRY = 1120986464310L;
 
-        public DalvikVm() {
-        }
+        public DalvikVm() {}
     }
 
     public final class InitSvc {
@@ -179,16 +174,14 @@ public final class SystemPropertiesProto {
         public static final long ZYGOTE = 1159641169960L;
         public static final long ZYGOTE_SECONDARY = 1159641169961L;
 
-        public InitSvc() {
-        }
+        public InitSvc() {}
     }
 
     public final class Log {
         public static final long TAG_STATS_LOG = 1138166333442L;
         public static final long TAG_WIFI_HAL = 1138166333441L;
 
-        public Log() {
-        }
+        public Log() {}
     }
 
     public final class Persist {
@@ -204,8 +197,7 @@ public final class SystemPropertiesProto {
         public static final long SYS_SF_COLOR_SATURATION = 1108101562378L;
         public static final long SYS_TIMEZONE = 1138166333451L;
 
-        public Persist() {
-        }
+        public Persist() {}
     }
 
     public final class PmDexopt {
@@ -215,8 +207,7 @@ public final class SystemPropertiesProto {
         public static final long FIRST_BOOT = 1138166333444L;
         public static final long INSTALL = 1138166333445L;
 
-        public PmDexopt() {
-        }
+        public PmDexopt() {}
     }
 
     public final class Ro {
@@ -265,8 +256,7 @@ public final class SystemPropertiesProto {
         public static final long VTS_COVERAGE = 1120986464299L;
         public static final long ZYGOTE = 1138166333484L;
 
-        public Ro() {
-        }
+        public Ro() {}
 
         public final class Boot {
             public static final long AVB_VERSION = 1138166333441L;
@@ -290,8 +280,7 @@ public final class SystemPropertiesProto {
             public static final long VERITYMODE = 1138166333459L;
             public static final long WIFICOUNTRYCODE = 1138166333460L;
 
-            public Boot() {
-            }
+            public Boot() {}
         }
 
         public final class BootImage {
@@ -299,8 +288,7 @@ public final class SystemPropertiesProto {
             public static final long BUILD_DATE_UTC = 1112396529666L;
             public static final long BUILD_FINGERPRINT = 1138166333443L;
 
-            public BootImage() {
-            }
+            public BootImage() {}
         }
 
         public final class Build {
@@ -317,8 +305,7 @@ public final class SystemPropertiesProto {
             public static final long USER = 1138166333451L;
             public static final long VERSION = 1146756268044L;
 
-            public Build() {
-            }
+            public Build() {}
 
             public final class Version {
                 public static final long BASE_OS = 1138166333441L;
@@ -329,8 +316,7 @@ public final class SystemPropertiesProto {
                 public static final long SDK = 1120986464262L;
                 public static final long SECURITY_PATCH = 1138166333447L;
 
-                public Version() {
-                }
+                public Version() {}
             }
         }
 
@@ -341,8 +327,7 @@ public final class SystemPropertiesProto {
             public static final long RINGTONE = 1138166333444L;
             public static final long VC_CALL_VOL_STEPS = 1120986464261L;
 
-            public Config() {
-            }
+            public Config() {}
         }
 
         public final class Hardware {
@@ -386,8 +371,7 @@ public final class SystemPropertiesProto {
             public static final long VIRTUAL_DEVICE = 1138166333478L;
             public static final long VULKAN = 1138166333479L;
 
-            public Hardware() {
-            }
+            public Hardware() {}
         }
 
         public final class Product {
@@ -404,8 +388,7 @@ public final class SystemPropertiesProto {
             public static final long NAME = 1138166333451L;
             public static final long VENDOR = 1146756268044L;
 
-            public Product() {
-            }
+            public Product() {}
 
             public final class Vendor {
                 public static final long BRAND = 1138166333441L;
@@ -414,8 +397,7 @@ public final class SystemPropertiesProto {
                 public static final long MODEL = 1138166333444L;
                 public static final long NAME = 1138166333445L;
 
-                public Vendor() {
-                }
+                public Vendor() {}
             }
         }
 
@@ -424,8 +406,7 @@ public final class SystemPropertiesProto {
             public static final long DEFAULT_CDMA_SUB = 1120986464258L;
             public static final long DEFAULT_NETWORK = 1120986464259L;
 
-            public Telephony() {
-            }
+            public Telephony() {}
         }
 
         public final class Vendor {
@@ -433,8 +414,7 @@ public final class SystemPropertiesProto {
             public static final long BUILD_DATE_UTC = 1112396529666L;
             public static final long BUILD_FINGERPRINT = 1138166333443L;
 
-            public Vendor() {
-            }
+            public Vendor() {}
         }
     }
 
@@ -445,8 +425,7 @@ public final class SystemPropertiesProto {
         public static final long SHUTDOWN_REQUESTED = 1138166333444L;
         public static final long USB = 1146756268037L;
 
-        public Sys() {
-        }
+        public Sys() {}
 
         public final class Usb {
             public static final long CONFIG = 1138166333441L;
@@ -459,8 +438,7 @@ public final class SystemPropertiesProto {
             public static final long MTP_DEVICE_TYPE = 1120986464264L;
             public static final long STATE = 1138166333449L;
 
-            public Usb() {
-            }
+            public Usb() {}
         }
     }
 }

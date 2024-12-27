@@ -1,8 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.InvalidProtocolBufferException;
-import com.android.framework.protobuf.MapEntryLite;
-import com.android.framework.protobuf.WireFormat;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.List;
@@ -27,8 +24,7 @@ abstract class BinaryReader implements Reader {
         throw new IllegalArgumentException("Direct buffers not yet supported");
     }
 
-    private BinaryReader() {
-    }
+    private BinaryReader() {}
 
     @Override // com.android.framework.protobuf.Reader
     public boolean shouldDiscardUnknownFields() {
@@ -181,18 +177,23 @@ abstract class BinaryReader implements Reader {
         }
 
         @Override // com.android.framework.protobuf.Reader
-        public <T> T readMessage(Class<T> cls, ExtensionRegistryLite extensionRegistryLite) throws IOException {
+        public <T> T readMessage(Class<T> cls, ExtensionRegistryLite extensionRegistryLite)
+                throws IOException {
             requireWireType(2);
-            return (T) readMessage(Protobuf.getInstance().schemaFor((Class) cls), extensionRegistryLite);
+            return (T)
+                    readMessage(
+                            Protobuf.getInstance().schemaFor((Class) cls), extensionRegistryLite);
         }
 
         @Override // com.android.framework.protobuf.Reader
-        public <T> T readMessageBySchemaWithCheck(Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
+        public <T> T readMessageBySchemaWithCheck(
+                Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
             requireWireType(2);
             return (T) readMessage(schema, extensionRegistryLite);
         }
 
-        private <T> T readMessage(Schema<T> schema, ExtensionRegistryLite extensionRegistry) throws IOException {
+        private <T> T readMessage(Schema<T> schema, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             T newInstance = schema.newInstance();
             mergeMessageField(newInstance, schema, extensionRegistry);
             schema.makeImmutable(newInstance);
@@ -200,7 +201,9 @@ abstract class BinaryReader implements Reader {
         }
 
         @Override // com.android.framework.protobuf.Reader
-        public <T> void mergeMessageField(T target, Schema<T> schema, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T> void mergeMessageField(
+                T target, Schema<T> schema, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             int size = readVarint32();
             requireBytes(size);
             int prevLimit = this.limit;
@@ -218,19 +221,23 @@ abstract class BinaryReader implements Reader {
 
         @Override // com.android.framework.protobuf.Reader
         @Deprecated
-        public <T> T readGroup(Class<T> cls, ExtensionRegistryLite extensionRegistryLite) throws IOException {
+        public <T> T readGroup(Class<T> cls, ExtensionRegistryLite extensionRegistryLite)
+                throws IOException {
             requireWireType(3);
-            return (T) readGroup(Protobuf.getInstance().schemaFor((Class) cls), extensionRegistryLite);
+            return (T)
+                    readGroup(Protobuf.getInstance().schemaFor((Class) cls), extensionRegistryLite);
         }
 
         @Override // com.android.framework.protobuf.Reader
         @Deprecated
-        public <T> T readGroupBySchemaWithCheck(Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
+        public <T> T readGroupBySchemaWithCheck(
+                Schema<T> schema, ExtensionRegistryLite extensionRegistryLite) throws IOException {
             requireWireType(3);
             return (T) readGroup(schema, extensionRegistryLite);
         }
 
-        private <T> T readGroup(Schema<T> schema, ExtensionRegistryLite extensionRegistry) throws IOException {
+        private <T> T readGroup(Schema<T> schema, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             T newInstance = schema.newInstance();
             mergeGroupField(newInstance, schema, extensionRegistry);
             schema.makeImmutable(newInstance);
@@ -238,7 +245,9 @@ abstract class BinaryReader implements Reader {
         }
 
         @Override // com.android.framework.protobuf.Reader
-        public <T> void mergeGroupField(T target, Schema<T> schema, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T> void mergeGroupField(
+                T target, Schema<T> schema, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             int prevEndGroupTag = this.endGroupTag;
             this.endGroupTag = WireFormat.makeTag(WireFormat.getTagFieldNumber(this.tag), 4);
             try {
@@ -346,7 +355,9 @@ abstract class BinaryReader implements Reader {
                     verifyPackedFixed64Length(bytes2);
                     int fieldEndPos2 = this.pos + bytes2;
                     while (this.pos < fieldEndPos2) {
-                        target.add(Double.valueOf(Double.longBitsToDouble(readLittleEndian64_NoCheck())));
+                        target.add(
+                                Double.valueOf(
+                                        Double.longBitsToDouble(readLittleEndian64_NoCheck())));
                     }
                     return;
                 default:
@@ -402,7 +413,8 @@ abstract class BinaryReader implements Reader {
                     verifyPackedFixed32Length(bytes2);
                     int fieldEndPos2 = this.pos + bytes2;
                     while (this.pos < fieldEndPos2) {
-                        target.add(Float.valueOf(Float.intBitsToFloat(readLittleEndian32_NoCheck())));
+                        target.add(
+                                Float.valueOf(Float.intBitsToFloat(readLittleEndian32_NoCheck())));
                     }
                     return;
                 case 5:
@@ -787,7 +799,8 @@ abstract class BinaryReader implements Reader {
             readStringListInternal(target, true);
         }
 
-        public void readStringListInternal(List<String> target, boolean requireUtf8) throws IOException {
+        public void readStringListInternal(List<String> target, boolean requireUtf8)
+                throws IOException {
             int prevPos;
             int nextTag;
             int prevPos2;
@@ -820,14 +833,18 @@ abstract class BinaryReader implements Reader {
         }
 
         @Override // com.android.framework.protobuf.Reader
-        public <T> void readMessageList(List<T> target, Class<T> targetType, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T> void readMessageList(
+                List<T> target, Class<T> targetType, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             Schema<T> schema = Protobuf.getInstance().schemaFor((Class) targetType);
             readMessageList(target, schema, extensionRegistry);
         }
 
         /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.framework.protobuf.Reader
-        public <T> void readMessageList(List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T> void readMessageList(
+                List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             int prevPos;
             int nextTag;
             if (WireFormat.getTagWireType(this.tag) != 2) {
@@ -847,7 +864,9 @@ abstract class BinaryReader implements Reader {
 
         @Override // com.android.framework.protobuf.Reader
         @Deprecated
-        public <T> void readGroupList(List<T> target, Class<T> targetType, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T> void readGroupList(
+                List<T> target, Class<T> targetType, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             Schema<T> schema = Protobuf.getInstance().schemaFor((Class) targetType);
             readGroupList(target, schema, extensionRegistry);
         }
@@ -855,7 +874,9 @@ abstract class BinaryReader implements Reader {
         /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.framework.protobuf.Reader
         @Deprecated
-        public <T> void readGroupList(List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T> void readGroupList(
+                List<T> list, Schema<T> schema, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             int prevPos;
             int nextTag;
             if (WireFormat.getTagWireType(this.tag) != 3) {
@@ -1166,7 +1187,8 @@ abstract class BinaryReader implements Reader {
                     int bytes2 = readVarint32();
                     int fieldEndPos2 = this.pos + bytes2;
                     while (this.pos < fieldEndPos2) {
-                        target.add(Integer.valueOf(CodedInputStream.decodeZigZag32(readVarint32())));
+                        target.add(
+                                Integer.valueOf(CodedInputStream.decodeZigZag32(readVarint32())));
                     }
                     return;
             }
@@ -1241,7 +1263,11 @@ abstract class BinaryReader implements Reader {
 
         /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.framework.protobuf.Reader
-        public <K, V> void readMap(Map<K, V> map, MapEntryLite.Metadata<K, V> metadata, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <K, V> void readMap(
+                Map<K, V> map,
+                MapEntryLite.Metadata<K, V> metadata,
+                ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             requireWireType(2);
             int size = readVarint32();
             requireBytes(size);
@@ -1258,16 +1284,23 @@ abstract class BinaryReader implements Reader {
                             case 1:
                                 obj = readField(metadata.keyType, null, null);
                             case 2:
-                                obj2 = readField(metadata.valueType, metadata.defaultValue.getClass(), extensionRegistry);
+                                obj2 =
+                                        readField(
+                                                metadata.valueType,
+                                                metadata.defaultValue.getClass(),
+                                                extensionRegistry);
                             default:
                                 try {
                                     if (!skipField()) {
-                                        throw new InvalidProtocolBufferException("Unable to parse map entry.");
+                                        throw new InvalidProtocolBufferException(
+                                                "Unable to parse map entry.");
                                         break;
                                     }
-                                } catch (InvalidProtocolBufferException.InvalidWireTypeException e) {
+                                } catch (
+                                        InvalidProtocolBufferException.InvalidWireTypeException e) {
                                     if (!skipField()) {
-                                        throw new InvalidProtocolBufferException("Unable to parse map entry.");
+                                        throw new InvalidProtocolBufferException(
+                                                "Unable to parse map entry.");
                                     }
                                 }
                         }
@@ -1281,8 +1314,13 @@ abstract class BinaryReader implements Reader {
             }
         }
 
-        private Object readField(WireFormat.FieldType fieldType, Class<?> messageType, ExtensionRegistryLite extensionRegistry) throws IOException {
-            switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[fieldType.ordinal()]) {
+        private Object readField(
+                WireFormat.FieldType fieldType,
+                Class<?> messageType,
+                ExtensionRegistryLite extensionRegistry)
+                throws IOException {
+            switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                    fieldType.ordinal()]) {
                 case 1:
                     return Boolean.valueOf(readBool());
                 case 2:
@@ -1367,7 +1405,8 @@ abstract class BinaryReader implements Reader {
                                         if (this.buffer[i6] < 0) {
                                             i6 = i3 + 1;
                                             if (this.buffer[i3] < 0) {
-                                                throw InvalidProtocolBufferException.malformedVarint();
+                                                throw InvalidProtocolBufferException
+                                                        .malformedVarint();
                                             }
                                         }
                                     }
@@ -1449,7 +1488,8 @@ abstract class BinaryReader implements Reader {
                                         } else {
                                             i3 = i7 + 1;
                                             if (buffer[i7] < 0) {
-                                                throw InvalidProtocolBufferException.malformedVarint();
+                                                throw InvalidProtocolBufferException
+                                                        .malformedVarint();
                                             }
                                         }
                                     }
@@ -1499,14 +1539,24 @@ abstract class BinaryReader implements Reader {
             int p = this.pos;
             byte[] buffer = this.buffer;
             this.pos = p + 4;
-            return (buffer[p] & 255) | ((buffer[p + 1] & 255) << 8) | ((buffer[p + 2] & 255) << 16) | ((buffer[p + 3] & 255) << 24);
+            return (buffer[p] & 255)
+                    | ((buffer[p + 1] & 255) << 8)
+                    | ((buffer[p + 2] & 255) << 16)
+                    | ((buffer[p + 3] & 255) << 24);
         }
 
         private long readLittleEndian64_NoCheck() {
             int p = this.pos;
             byte[] buffer = this.buffer;
             this.pos = p + 8;
-            return (buffer[p] & 255) | ((buffer[p + 1] & 255) << 8) | ((buffer[p + 2] & 255) << 16) | ((buffer[p + 3] & 255) << 24) | ((buffer[p + 4] & 255) << 32) | ((buffer[p + 5] & 255) << 40) | ((buffer[p + 6] & 255) << 48) | ((255 & buffer[p + 7]) << 56);
+            return (buffer[p] & 255)
+                    | ((buffer[p + 1] & 255) << 8)
+                    | ((buffer[p + 2] & 255) << 16)
+                    | ((buffer[p + 3] & 255) << 24)
+                    | ((buffer[p + 4] & 255) << 32)
+                    | ((buffer[p + 5] & 255) << 40)
+                    | ((buffer[p + 6] & 255) << 48)
+                    | ((255 & buffer[p + 7]) << 56);
         }
 
         private void skipVarint() throws IOException {
@@ -1545,8 +1595,7 @@ abstract class BinaryReader implements Reader {
         private void skipGroup() throws IOException {
             int prevEndGroupTag = this.endGroupTag;
             this.endGroupTag = WireFormat.makeTag(WireFormat.getTagFieldNumber(this.tag), 4);
-            while (getFieldNumber() != Integer.MAX_VALUE && skipField()) {
-            }
+            while (getFieldNumber() != Integer.MAX_VALUE && skipField()) {}
             if (this.tag != this.endGroupTag) {
                 throw InvalidProtocolBufferException.parseFailure();
             }
@@ -1588,75 +1637,110 @@ abstract class BinaryReader implements Reader {
 
     /* renamed from: com.android.framework.protobuf.BinaryReader$1, reason: invalid class name */
     static /* synthetic */ class AnonymousClass1 {
-        static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType = new int[WireFormat.FieldType.values().length];
+        static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType =
+                new int[WireFormat.FieldType.values().length];
 
         static {
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.BOOL.ordinal()] = 1;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.BOOL.ordinal()] =
+                        1;
             } catch (NoSuchFieldError e) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.BYTES.ordinal()] = 2;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.BYTES.ordinal()] =
+                        2;
             } catch (NoSuchFieldError e2) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.DOUBLE.ordinal()] = 3;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.DOUBLE.ordinal()] =
+                        3;
             } catch (NoSuchFieldError e3) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.ENUM.ordinal()] = 4;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.ENUM.ordinal()] =
+                        4;
             } catch (NoSuchFieldError e4) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.FIXED32.ordinal()] = 5;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.FIXED32.ordinal()] =
+                        5;
             } catch (NoSuchFieldError e5) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.FIXED64.ordinal()] = 6;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.FIXED64.ordinal()] =
+                        6;
             } catch (NoSuchFieldError e6) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.FLOAT.ordinal()] = 7;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.FLOAT.ordinal()] =
+                        7;
             } catch (NoSuchFieldError e7) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.INT32.ordinal()] = 8;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.INT32.ordinal()] =
+                        8;
             } catch (NoSuchFieldError e8) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.INT64.ordinal()] = 9;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.INT64.ordinal()] =
+                        9;
             } catch (NoSuchFieldError e9) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.MESSAGE.ordinal()] = 10;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.MESSAGE.ordinal()] =
+                        10;
             } catch (NoSuchFieldError e10) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SFIXED32.ordinal()] = 11;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SFIXED32.ordinal()] =
+                        11;
             } catch (NoSuchFieldError e11) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SFIXED64.ordinal()] = 12;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SFIXED64.ordinal()] =
+                        12;
             } catch (NoSuchFieldError e12) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SINT32.ordinal()] = 13;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SINT32.ordinal()] =
+                        13;
             } catch (NoSuchFieldError e13) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SINT64.ordinal()] = 14;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SINT64.ordinal()] =
+                        14;
             } catch (NoSuchFieldError e14) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.STRING.ordinal()] = 15;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.STRING.ordinal()] =
+                        15;
             } catch (NoSuchFieldError e15) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.UINT32.ordinal()] = 16;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.UINT32.ordinal()] =
+                        16;
             } catch (NoSuchFieldError e16) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.UINT64.ordinal()] = 17;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.UINT64.ordinal()] =
+                        17;
             } catch (NoSuchFieldError e17) {
             }
         }

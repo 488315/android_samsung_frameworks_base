@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Process;
 import android.util.Log;
 import android.util.LruCache;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.List;
@@ -89,7 +90,14 @@ public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
         if (network != null && network.rssiCurve != null) {
             score = network.rssiCurve.lookupScore(result.level);
             if (DBG) {
-                Log.d(TAG, "getNetworkScore found scored network " + network.networkKey + " score " + Integer.toString(score) + " RSSI " + result.level);
+                Log.d(
+                        TAG,
+                        "getNetworkScore found scored network "
+                                + network.networkKey
+                                + " score "
+                                + Integer.toString(score)
+                                + " RSSI "
+                                + result.level);
             }
         }
         return score;
@@ -106,7 +114,16 @@ public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
         if (network != null && network.rssiCurve != null) {
             score = network.rssiCurve.lookupScore(result.level, isActiveNetwork);
             if (DBG) {
-                Log.d(TAG, "getNetworkScore found scored network " + network.networkKey + " score " + Integer.toString(score) + " RSSI " + result.level + " isActiveNetwork " + isActiveNetwork);
+                Log.d(
+                        TAG,
+                        "getNetworkScore found scored network "
+                                + network.networkKey
+                                + " score "
+                                + Integer.toString(score)
+                                + " RSSI "
+                                + result.level
+                                + " isActiveNetwork "
+                                + isActiveNetwork);
             }
         }
         return score;
@@ -149,7 +166,10 @@ public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
 
     private String buildNetworkKey(NetworkKey networkKey) {
         String key;
-        if (networkKey == null || networkKey.wifiKey == null || networkKey.type != 1 || (key = networkKey.wifiKey.ssid) == null) {
+        if (networkKey == null
+                || networkKey.wifiKey == null
+                || networkKey.type != 1
+                || (key = networkKey.wifiKey.ssid) == null) {
             return null;
         }
         if (networkKey.wifiKey.bssid != null) {
@@ -174,7 +194,10 @@ public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
     @Override // android.os.Binder
     protected final void dump(FileDescriptor fd, PrintWriter writer, String[] args) {
         this.mContext.enforceCallingOrSelfPermission(Manifest.permission.DUMP, TAG);
-        String header = String.format("WifiNetworkScoreCache (%s/%d)", this.mContext.getPackageName(), Integer.valueOf(Process.myUid()));
+        String header =
+                String.format(
+                        "WifiNetworkScoreCache (%s/%d)",
+                        this.mContext.getPackageName(), Integer.valueOf(Process.myUid()));
         writer.println(header);
         writer.println("  All score curves:");
         synchronized (this.mLock) {
@@ -184,7 +207,8 @@ public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
             writer.println("  Network scores for latest ScanResults:");
             WifiManager wifiManager = (WifiManager) this.mContext.getSystemService("wifi");
             for (ScanResult scanResult : wifiManager.getScanResults()) {
-                writer.println("    " + buildNetworkKey(scanResult) + ": " + getNetworkScore(scanResult));
+                writer.println(
+                        "    " + buildNetworkKey(scanResult) + ": " + getNetworkScore(scanResult));
             }
         }
     }
@@ -201,7 +225,7 @@ public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
         }
     }
 
-    public static abstract class CacheListener {
+    public abstract static class CacheListener {
         private Handler mHandler;
 
         public abstract void networkCacheUpdated(List<ScoredNetwork> list);
@@ -212,12 +236,14 @@ public class WifiNetworkScoreCache extends INetworkScoreCache.Stub {
         }
 
         void post(final List<ScoredNetwork> updatedNetworks) {
-            this.mHandler.post(new Runnable() { // from class: android.net.wifi.WifiNetworkScoreCache.CacheListener.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    CacheListener.this.networkCacheUpdated(updatedNetworks);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.net.wifi.WifiNetworkScoreCache.CacheListener.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            CacheListener.this.networkCacheUpdated(updatedNetworks);
+                        }
+                    });
         }
     }
 }

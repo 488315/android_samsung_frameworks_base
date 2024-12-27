@@ -10,26 +10,29 @@ import android.os.RemoteException;
 @SystemApi
 /* loaded from: classes.dex */
 public final class VirtualSensor implements Parcelable {
-    public static final Parcelable.Creator<VirtualSensor> CREATOR = new Parcelable.Creator<VirtualSensor>() { // from class: android.companion.virtual.sensor.VirtualSensor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualSensor createFromParcel(Parcel in) {
-            return new VirtualSensor(in);
-        }
+    public static final Parcelable.Creator<VirtualSensor> CREATOR =
+            new Parcelable.Creator<VirtualSensor>() { // from class:
+                // android.companion.virtual.sensor.VirtualSensor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualSensor createFromParcel(Parcel in) {
+                    return new VirtualSensor(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualSensor[] newArray(int size) {
-            return new VirtualSensor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualSensor[] newArray(int size) {
+                    return new VirtualSensor[size];
+                }
+            };
     private final int mHandle;
     private final String mName;
     private final IBinder mToken;
     private final int mType;
     private final IVirtualDevice mVirtualDevice;
 
-    public VirtualSensor(int handle, int type, String name, IVirtualDevice virtualDevice, IBinder token) {
+    public VirtualSensor(
+            int handle, int type, String name, IVirtualDevice virtualDevice, IBinder token) {
         this.mHandle = handle;
         this.mType = type;
         this.mName = name;

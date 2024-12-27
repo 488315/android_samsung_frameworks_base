@@ -3,14 +3,14 @@ package com.android.internal.org.bouncycastle.math.ec;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
 import com.android.internal.org.bouncycastle.util.Integers;
+
 import java.math.BigInteger;
 import java.util.Random;
 
 /* loaded from: classes5.dex */
 public abstract class ECFieldElement implements ECConstants {
 
-    public static abstract class AbstractFp extends ECFieldElement {
-    }
+    public abstract static class AbstractFp extends ECFieldElement {}
 
     public abstract ECFieldElement add(ECFieldElement eCFieldElement);
 
@@ -48,11 +48,13 @@ public abstract class ECFieldElement implements ECConstants {
         return toBigInteger().signum() == 0;
     }
 
-    public ECFieldElement multiplyMinusProduct(ECFieldElement b, ECFieldElement x, ECFieldElement y) {
+    public ECFieldElement multiplyMinusProduct(
+            ECFieldElement b, ECFieldElement x, ECFieldElement y) {
         return multiply(b).subtract(x.multiply(y));
     }
 
-    public ECFieldElement multiplyPlusProduct(ECFieldElement b, ECFieldElement x, ECFieldElement y) {
+    public ECFieldElement multiplyPlusProduct(
+            ECFieldElement b, ECFieldElement x, ECFieldElement y) {
         return multiply(b).add(x.multiply(y));
     }
 
@@ -158,7 +160,8 @@ public abstract class ECFieldElement implements ECConstants {
         }
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
-        public ECFieldElement multiplyMinusProduct(ECFieldElement b, ECFieldElement x, ECFieldElement y) {
+        public ECFieldElement multiplyMinusProduct(
+                ECFieldElement b, ECFieldElement x, ECFieldElement y) {
             BigInteger ax = this.x;
             BigInteger bx = b.toBigInteger();
             BigInteger xx = x.toBigInteger();
@@ -169,7 +172,8 @@ public abstract class ECFieldElement implements ECConstants {
         }
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
-        public ECFieldElement multiplyPlusProduct(ECFieldElement b, ECFieldElement x, ECFieldElement y) {
+        public ECFieldElement multiplyPlusProduct(
+                ECFieldElement b, ECFieldElement x, ECFieldElement y) {
             BigInteger ax = this.x;
             BigInteger bx = b.toBigInteger();
             BigInteger xx = x.toBigInteger();
@@ -254,7 +258,10 @@ public abstract class ECFieldElement implements ECConstants {
             Random rand = new Random();
             while (true) {
                 BigInteger P = new BigInteger(this.q.bitLength(), rand);
-                if (P.compareTo(this.q) < 0 && modReduce(P.multiply(P).subtract(fourX)).modPow(legendreExponent, this.q).equals(qMinusOne)) {
+                if (P.compareTo(this.q) < 0
+                        && modReduce(P.multiply(P).subtract(fourX))
+                                .modPow(legendreExponent, this.q)
+                                .equals(qMinusOne)) {
                     BigInteger[] result = lucasSequence(P, X, k);
                     BigInteger U = result[0];
                     BigInteger V = result[1];
@@ -307,7 +314,7 @@ public abstract class ECFieldElement implements ECConstants {
                 Vl2 = modReduce(Vl2.multiply(Vl2).subtract(Ql3.shiftLeft(1)));
                 Ql3 = modMult(Ql3, Ql3);
             }
-            return new BigInteger[]{Uh2, Vl2};
+            return new BigInteger[] {Uh2, Vl2};
         }
 
         protected BigInteger modAdd(BigInteger x1, BigInteger x2) {
@@ -399,7 +406,7 @@ public abstract class ECFieldElement implements ECConstants {
         }
     }
 
-    public static abstract class AbstractF2m extends ECFieldElement {
+    public abstract static class AbstractF2m extends ECFieldElement {
         public ECFieldElement halfTrace() {
             int m = getFieldSize();
             if ((m & 1) == 0) {
@@ -462,7 +469,7 @@ public abstract class ECFieldElement implements ECConstants {
             }
             if (k2 == 0 && k3 == 0) {
                 this.representation = 2;
-                this.ks = new int[]{k1};
+                this.ks = new int[] {k1};
             } else {
                 if (k2 >= k3) {
                     throw new IllegalArgumentException("k2 must be smaller than k3");
@@ -471,7 +478,7 @@ public abstract class ECFieldElement implements ECConstants {
                     throw new IllegalArgumentException("k2 must be larger than 0");
                 }
                 this.representation = 3;
-                this.ks = new int[]{k1, k2, k3};
+                this.ks = new int[] {k1, k2, k3};
             }
             this.m = m;
             this.x = new LongArray(x);
@@ -543,12 +550,14 @@ public abstract class ECFieldElement implements ECConstants {
         }
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
-        public ECFieldElement multiplyMinusProduct(ECFieldElement b, ECFieldElement x, ECFieldElement y) {
+        public ECFieldElement multiplyMinusProduct(
+                ECFieldElement b, ECFieldElement x, ECFieldElement y) {
             return multiplyPlusProduct(b, x, y);
         }
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
-        public ECFieldElement multiplyPlusProduct(ECFieldElement b, ECFieldElement x, ECFieldElement y) {
+        public ECFieldElement multiplyPlusProduct(
+                ECFieldElement b, ECFieldElement x, ECFieldElement y) {
             LongArray ax = this.x;
             LongArray bx = ((F2m) b).x;
             LongArray xx = ((F2m) x).x;
@@ -601,7 +610,9 @@ public abstract class ECFieldElement implements ECConstants {
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
         public ECFieldElement squarePow(int pow) {
-            return pow < 1 ? this : new F2m(this.m, this.ks, this.x.modSquareN(pow, this.m, this.ks));
+            return pow < 1
+                    ? this
+                    : new F2m(this.m, this.ks, this.x.modSquareN(pow, this.m, this.ks));
         }
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
@@ -648,7 +659,10 @@ public abstract class ECFieldElement implements ECConstants {
                 return false;
             }
             F2m b = (F2m) anObject;
-            return this.m == b.m && this.representation == b.representation && Arrays.areEqual(this.ks, b.ks) && this.x.equals(b.x);
+            return this.m == b.m
+                    && this.representation == b.representation
+                    && Arrays.areEqual(this.ks, b.ks)
+                    && this.x.equals(b.x);
         }
 
         public int hashCode() {

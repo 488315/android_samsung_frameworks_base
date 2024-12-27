@@ -1,6 +1,5 @@
 package com.android.server.location.geofence;
 
-import com.android.server.location.geofence.GeofenceManager;
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -18,7 +17,8 @@ public final /* synthetic */ class GeofenceManager$$ExternalSyntheticLambda5 imp
     public final boolean test(Object obj) {
         int i = this.$r8$classId;
         int i2 = this.f$0;
-        GeofenceManager.GeofenceRegistration geofenceRegistration = (GeofenceManager.GeofenceRegistration) obj;
+        GeofenceManager.GeofenceRegistration geofenceRegistration =
+                (GeofenceManager.GeofenceRegistration) obj;
         switch (i) {
             case 0:
                 return geofenceRegistration.mIdentity.getUserId() == i2;

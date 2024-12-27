@@ -4,5 +4,6 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public abstract class CameraConstrainedHighSpeedCaptureSession extends CameraCaptureSession {
-    public abstract List<CaptureRequest> createHighSpeedRequestList(CaptureRequest captureRequest) throws CameraAccessException;
+    public abstract List<CaptureRequest> createHighSpeedRequestList(CaptureRequest captureRequest)
+            throws CameraAccessException;
 }

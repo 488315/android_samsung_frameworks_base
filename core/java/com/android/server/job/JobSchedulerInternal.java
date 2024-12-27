@@ -2,6 +2,7 @@ package com.android.server.job;
 
 import android.app.job.JobInfo;
 import android.util.proto.ProtoOutputStream;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -61,7 +62,18 @@ public interface JobSchedulerInternal {
         }
 
         public String toString() {
-            return "FirstLoad: " + this.countAllJobsLoaded + "/" + this.countSystemServerJobsLoaded + "/" + this.countSystemSyncManagerJobsLoaded + " LastSave: " + this.countAllJobsSaved + "/" + this.countSystemServerJobsSaved + "/" + this.countSystemSyncManagerJobsSaved;
+            return "FirstLoad: "
+                    + this.countAllJobsLoaded
+                    + "/"
+                    + this.countSystemServerJobsLoaded
+                    + "/"
+                    + this.countSystemSyncManagerJobsLoaded
+                    + " LastSave: "
+                    + this.countAllJobsSaved
+                    + "/"
+                    + this.countSystemServerJobsSaved
+                    + "/"
+                    + this.countSystemSyncManagerJobsSaved;
         }
 
         public void dumpDebug(ProtoOutputStream proto, long fieldId) {

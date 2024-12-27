@@ -2,25 +2,29 @@ package com.samsung.android.knox.mpos;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public class TACommandRequest implements Parcelable {
-    public static final Parcelable.Creator<TACommandRequest> CREATOR = new Parcelable.Creator<TACommandRequest>() { // from class: com.samsung.android.knox.mpos.TACommandRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TACommandRequest createFromParcel(Parcel in) {
-            return new TACommandRequest(in);
-        }
+    public static final Parcelable.Creator<TACommandRequest> CREATOR =
+            new Parcelable.Creator<
+                    TACommandRequest>() { // from class:
+                                          // com.samsung.android.knox.mpos.TACommandRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TACommandRequest createFromParcel(Parcel in) {
+                    return new TACommandRequest(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TACommandRequest[] newArray(int size) {
-            return new TACommandRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TACommandRequest[] newArray(int size) {
+                    return new TACommandRequest[size];
+                }
+            };
     public static final int HEADER_SIZE = 100;
     public static final int MAX_BUFFER_SIZE = 5242880;
     public static final int MAX_DATA_TRANSACTION_SIZE = 3072;
@@ -107,7 +111,13 @@ public class TACommandRequest implements Parcelable {
         return 0;
     }
 
-    private TACommandRequest(int _version, byte[] _magicNum, int _commandId, int _length, int _offset, byte[] _requestPayload) {
+    private TACommandRequest(
+            int _version,
+            byte[] _magicNum,
+            int _commandId,
+            int _length,
+            int _offset,
+            byte[] _requestPayload) {
         this.mVersion = -1;
         this.mMagicNum = null;
         this.mLength = 0;
@@ -145,13 +155,26 @@ public class TACommandRequest implements Parcelable {
         }
         int offset = 0;
         while (offset + 2972 < this.mLength) {
-            arr.add(new TACommandRequest(this.mVersion, this.mMagicNum, this.mCommandId, this.mLength, offset, Arrays.copyOfRange(this.mRequest, offset, offset + 2972)));
+            arr.add(
+                    new TACommandRequest(
+                            this.mVersion,
+                            this.mMagicNum,
+                            this.mCommandId,
+                            this.mLength,
+                            offset,
+                            Arrays.copyOfRange(this.mRequest, offset, offset + 2972)));
             offset += 2972;
         }
-        arr.add(new TACommandRequest(this.mVersion, this.mMagicNum, this.mCommandId, this.mLength, offset, Arrays.copyOfRange(this.mRequest, offset, this.mLength)));
+        arr.add(
+                new TACommandRequest(
+                        this.mVersion,
+                        this.mMagicNum,
+                        this.mCommandId,
+                        this.mLength,
+                        offset,
+                        Arrays.copyOfRange(this.mRequest, offset, this.mLength)));
         return arr;
     }
 
-    public void dump() {
-    }
+    public void dump() {}
 }

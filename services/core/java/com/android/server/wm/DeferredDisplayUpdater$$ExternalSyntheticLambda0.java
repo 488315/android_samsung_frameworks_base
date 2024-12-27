@@ -1,11 +1,13 @@
 package com.android.server.wm;
 
 import android.view.DisplayInfo;
+
 import com.android.server.wm.utils.DisplayInfoOverrides$DisplayInfoFieldsUpdater;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class DeferredDisplayUpdater$$ExternalSyntheticLambda0 implements DisplayInfoOverrides$DisplayInfoFieldsUpdater {
+public final /* synthetic */ class DeferredDisplayUpdater$$ExternalSyntheticLambda0
+        implements DisplayInfoOverrides$DisplayInfoFieldsUpdater {
     @Override // com.android.server.wm.utils.DisplayInfoOverrides$DisplayInfoFieldsUpdater
     public final void setFields(DisplayInfo displayInfo, DisplayInfo displayInfo2) {
         displayInfo.uniqueId = displayInfo2.uniqueId;

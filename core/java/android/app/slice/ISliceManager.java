@@ -11,7 +11,8 @@ import android.os.RemoteException;
 public interface ISliceManager extends IInterface {
     void applyRestore(byte[] bArr, int i) throws RemoteException;
 
-    int checkSlicePermission(Uri uri, String str, int i, int i2, String[] strArr) throws RemoteException;
+    int checkSlicePermission(Uri uri, String str, int i, int i2, String[] strArr)
+            throws RemoteException;
 
     byte[] getBackupPayload(int i) throws RemoteException;
 
@@ -19,13 +20,15 @@ public interface ISliceManager extends IInterface {
 
     SliceSpec[] getPinnedSpecs(Uri uri, String str) throws RemoteException;
 
-    void grantPermissionFromUser(Uri uri, String str, String str2, boolean z) throws RemoteException;
+    void grantPermissionFromUser(Uri uri, String str, String str2, boolean z)
+            throws RemoteException;
 
     void grantSlicePermission(String str, String str2, Uri uri) throws RemoteException;
 
     boolean hasSliceAccess(String str) throws RemoteException;
 
-    void pinSlice(String str, Uri uri, SliceSpec[] sliceSpecArr, IBinder iBinder) throws RemoteException;
+    void pinSlice(String str, Uri uri, SliceSpec[] sliceSpecArr, IBinder iBinder)
+            throws RemoteException;
 
     void revokeSlicePermission(String str, String str2, Uri uri) throws RemoteException;
 
@@ -33,12 +36,11 @@ public interface ISliceManager extends IInterface {
 
     public static class Default implements ISliceManager {
         @Override // android.app.slice.ISliceManager
-        public void pinSlice(String pkg, Uri uri, SliceSpec[] specs, IBinder token) throws RemoteException {
-        }
+        public void pinSlice(String pkg, Uri uri, SliceSpec[] specs, IBinder token)
+                throws RemoteException {}
 
         @Override // android.app.slice.ISliceManager
-        public void unpinSlice(String pkg, Uri uri, IBinder token) throws RemoteException {
-        }
+        public void unpinSlice(String pkg, Uri uri, IBinder token) throws RemoteException {}
 
         @Override // android.app.slice.ISliceManager
         public boolean hasSliceAccess(String pkg) throws RemoteException {
@@ -61,25 +63,26 @@ public interface ISliceManager extends IInterface {
         }
 
         @Override // android.app.slice.ISliceManager
-        public void applyRestore(byte[] payload, int user) throws RemoteException {
-        }
+        public void applyRestore(byte[] payload, int user) throws RemoteException {}
 
         @Override // android.app.slice.ISliceManager
-        public void grantSlicePermission(String callingPkg, String toPkg, Uri uri) throws RemoteException {
-        }
+        public void grantSlicePermission(String callingPkg, String toPkg, Uri uri)
+                throws RemoteException {}
 
         @Override // android.app.slice.ISliceManager
-        public void revokeSlicePermission(String callingPkg, String toPkg, Uri uri) throws RemoteException {
-        }
+        public void revokeSlicePermission(String callingPkg, String toPkg, Uri uri)
+                throws RemoteException {}
 
         @Override // android.app.slice.ISliceManager
-        public int checkSlicePermission(Uri uri, String callingPkg, int pid, int uid, String[] autoGrantPermissions) throws RemoteException {
+        public int checkSlicePermission(
+                Uri uri, String callingPkg, int pid, int uid, String[] autoGrantPermissions)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.slice.ISliceManager
-        public void grantPermissionFromUser(Uri uri, String pkg, String callingPkg, boolean allSlices) throws RemoteException {
-        }
+        public void grantPermissionFromUser(
+                Uri uri, String pkg, String callingPkg, boolean allSlices) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -87,7 +90,7 @@ public interface ISliceManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISliceManager {
+    public abstract static class Stub extends Binder implements ISliceManager {
         public static final String DESCRIPTOR = "android.app.slice.ISliceManager";
         static final int TRANSACTION_applyRestore = 7;
         static final int TRANSACTION_checkSlicePermission = 10;
@@ -156,7 +159,8 @@ public interface ISliceManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -276,7 +280,8 @@ public interface ISliceManager extends IInterface {
             }
 
             @Override // android.app.slice.ISliceManager
-            public void pinSlice(String pkg, Uri uri, SliceSpec[] specs, IBinder token) throws RemoteException {
+            public void pinSlice(String pkg, Uri uri, SliceSpec[] specs, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -396,7 +401,8 @@ public interface ISliceManager extends IInterface {
             }
 
             @Override // android.app.slice.ISliceManager
-            public void grantSlicePermission(String callingPkg, String toPkg, Uri uri) throws RemoteException {
+            public void grantSlicePermission(String callingPkg, String toPkg, Uri uri)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -413,7 +419,8 @@ public interface ISliceManager extends IInterface {
             }
 
             @Override // android.app.slice.ISliceManager
-            public void revokeSlicePermission(String callingPkg, String toPkg, Uri uri) throws RemoteException {
+            public void revokeSlicePermission(String callingPkg, String toPkg, Uri uri)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -430,7 +437,9 @@ public interface ISliceManager extends IInterface {
             }
 
             @Override // android.app.slice.ISliceManager
-            public int checkSlicePermission(Uri uri, String callingPkg, int pid, int uid, String[] autoGrantPermissions) throws RemoteException {
+            public int checkSlicePermission(
+                    Uri uri, String callingPkg, int pid, int uid, String[] autoGrantPermissions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -451,7 +460,9 @@ public interface ISliceManager extends IInterface {
             }
 
             @Override // android.app.slice.ISliceManager
-            public void grantPermissionFromUser(Uri uri, String pkg, String callingPkg, boolean allSlices) throws RemoteException {
+            public void grantPermissionFromUser(
+                    Uri uri, String pkg, String callingPkg, boolean allSlices)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

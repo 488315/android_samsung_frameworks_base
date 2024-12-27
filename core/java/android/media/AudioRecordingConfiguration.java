@@ -5,6 +5,7 @@ import android.media.audiofx.AudioEffect;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -28,25 +29,38 @@ public final class AudioRecordingConfiguration implements Parcelable {
     private final int mDeviceSource;
     private final int mPatchHandle;
     private static final String TAG = new String("AudioRecordingConfiguration");
-    public static final Parcelable.Creator<AudioRecordingConfiguration> CREATOR = new Parcelable.Creator<AudioRecordingConfiguration>() { // from class: android.media.AudioRecordingConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioRecordingConfiguration createFromParcel(Parcel p) {
-            return new AudioRecordingConfiguration(p);
-        }
+    public static final Parcelable.Creator<AudioRecordingConfiguration> CREATOR =
+            new Parcelable.Creator<AudioRecordingConfiguration>() { // from class:
+                // android.media.AudioRecordingConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioRecordingConfiguration createFromParcel(Parcel p) {
+                    return new AudioRecordingConfiguration(p);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioRecordingConfiguration[] newArray(int size) {
-            return new AudioRecordingConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioRecordingConfiguration[] newArray(int size) {
+                    return new AudioRecordingConfiguration[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioSource {
-    }
+    public @interface AudioSource {}
 
-    public AudioRecordingConfiguration(int uid, int session, int source, AudioFormat clientFormat, AudioFormat devFormat, int patchHandle, String packageName, int clientPortId, boolean clientSilenced, int deviceSource, AudioEffect.Descriptor[] clientEffects, AudioEffect.Descriptor[] deviceEffects) {
+    public AudioRecordingConfiguration(
+            int uid,
+            int session,
+            int source,
+            AudioFormat clientFormat,
+            AudioFormat devFormat,
+            int patchHandle,
+            String packageName,
+            int clientPortId,
+            boolean clientSilenced,
+            int deviceSource,
+            AudioEffect.Descriptor[] clientEffects,
+            AudioEffect.Descriptor[] deviceEffects) {
         this.mClientUid = uid;
         this.mClientSessionId = session;
         this.mClientSource = source;
@@ -61,8 +75,27 @@ public final class AudioRecordingConfiguration implements Parcelable {
         this.mDeviceEffects = deviceEffects;
     }
 
-    public AudioRecordingConfiguration(int uid, int session, int source, AudioFormat clientFormat, AudioFormat devFormat, int patchHandle, String packageName) {
-        this(uid, session, source, clientFormat, devFormat, patchHandle, packageName, 0, false, 0, new AudioEffect.Descriptor[0], new AudioEffect.Descriptor[0]);
+    public AudioRecordingConfiguration(
+            int uid,
+            int session,
+            int source,
+            AudioFormat clientFormat,
+            AudioFormat devFormat,
+            int patchHandle,
+            String packageName) {
+        this(
+                uid,
+                session,
+                source,
+                clientFormat,
+                devFormat,
+                patchHandle,
+                packageName,
+                0,
+                false,
+                0,
+                new AudioEffect.Descriptor[0],
+                new AudioEffect.Descriptor[0]);
     }
 
     public void dump(PrintWriter pw) {
@@ -78,11 +111,45 @@ public final class AudioRecordingConfiguration implements Parcelable {
         for (AudioEffect.Descriptor desc2 : arc.mDeviceEffects) {
             deviceEffects = deviceEffects + "'" + desc2.name + "' ";
         }
-        return new String("session:" + arc.mClientSessionId + " -- source client=" + MediaRecorder.toLogFriendlyAudioSource(arc.mClientSource) + ", dev=" + arc.mDeviceFormat.toLogFriendlyString() + " -- uid:" + arc.mClientUid + " -- patch:" + arc.mPatchHandle + " -- pack:" + arc.mClientPackageName + " -- format client=" + arc.mClientFormat.toLogFriendlyString() + ", dev=" + arc.mDeviceFormat.toLogFriendlyString() + " -- silenced:" + arc.mClientSilenced + " -- effects client=" + clientEffects + ", dev=" + deviceEffects);
+        return new String(
+                "session:"
+                        + arc.mClientSessionId
+                        + " -- source client="
+                        + MediaRecorder.toLogFriendlyAudioSource(arc.mClientSource)
+                        + ", dev="
+                        + arc.mDeviceFormat.toLogFriendlyString()
+                        + " -- uid:"
+                        + arc.mClientUid
+                        + " -- patch:"
+                        + arc.mPatchHandle
+                        + " -- pack:"
+                        + arc.mClientPackageName
+                        + " -- format client="
+                        + arc.mClientFormat.toLogFriendlyString()
+                        + ", dev="
+                        + arc.mDeviceFormat.toLogFriendlyString()
+                        + " -- silenced:"
+                        + arc.mClientSilenced
+                        + " -- effects client="
+                        + clientEffects
+                        + ", dev="
+                        + deviceEffects);
     }
 
     public static AudioRecordingConfiguration anonymizedCopy(AudioRecordingConfiguration in) {
-        return new AudioRecordingConfiguration(-1, in.mClientSessionId, in.mClientSource, in.mClientFormat, in.mDeviceFormat, in.mPatchHandle, "", in.mClientPortId, in.mClientSilenced, in.mDeviceSource, in.mClientEffects, in.mDeviceEffects);
+        return new AudioRecordingConfiguration(
+                -1,
+                in.mClientSessionId,
+                in.mClientSource,
+                in.mClientFormat,
+                in.mDeviceFormat,
+                in.mPatchHandle,
+                "",
+                in.mClientPortId,
+                in.mClientSilenced,
+                in.mDeviceSource,
+                in.mClientEffects,
+                in.mDeviceEffects);
     }
 
     public int getClientAudioSource() {
@@ -160,7 +227,8 @@ public final class AudioRecordingConfiguration implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mClientSessionId), Integer.valueOf(this.mClientSource));
+        return Objects.hash(
+                Integer.valueOf(this.mClientSessionId), Integer.valueOf(this.mClientSource));
     }
 
     @Override // android.os.Parcelable
@@ -220,7 +288,18 @@ public final class AudioRecordingConfiguration implements Parcelable {
             return false;
         }
         AudioRecordingConfiguration that = (AudioRecordingConfiguration) o;
-        if (this.mClientUid == that.mClientUid && this.mClientSessionId == that.mClientSessionId && this.mClientSource == that.mClientSource && this.mPatchHandle == that.mPatchHandle && this.mClientFormat.equals(that.mClientFormat) && this.mDeviceFormat.equals(that.mDeviceFormat) && this.mClientPackageName.equals(that.mClientPackageName) && this.mClientPortId == that.mClientPortId && this.mClientSilenced == that.mClientSilenced && this.mDeviceSource == that.mDeviceSource && Arrays.equals(this.mClientEffects, that.mClientEffects) && Arrays.equals(this.mDeviceEffects, that.mDeviceEffects)) {
+        if (this.mClientUid == that.mClientUid
+                && this.mClientSessionId == that.mClientSessionId
+                && this.mClientSource == that.mClientSource
+                && this.mPatchHandle == that.mPatchHandle
+                && this.mClientFormat.equals(that.mClientFormat)
+                && this.mDeviceFormat.equals(that.mDeviceFormat)
+                && this.mClientPackageName.equals(that.mClientPackageName)
+                && this.mClientPortId == that.mClientPortId
+                && this.mClientSilenced == that.mClientSilenced
+                && this.mDeviceSource == that.mDeviceSource
+                && Arrays.equals(this.mClientEffects, that.mClientEffects)
+                && Arrays.equals(this.mDeviceEffects, that.mDeviceEffects)) {
             return true;
         }
         return false;

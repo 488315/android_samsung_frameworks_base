@@ -4,7 +4,7 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.ComponentName;
 import android.util.SparseArray;
-import com.android.server.backup.UserBackupManagerService;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -12,7 +12,8 @@ import java.util.Objects;
 public class FullBackupJob extends JobService {
     public static final int MAX_JOB_ID = 52419896;
     public static final int MIN_JOB_ID = 52418896;
-    public static final ComponentName sIdleService = new ComponentName("android", FullBackupJob.class.getName());
+    public static final ComponentName sIdleService =
+            new ComponentName("android", FullBackupJob.class.getName());
     public final SparseArray mParamsForUser = new SparseArray();
 
     public static int getJobIdForUserId(int i) {
@@ -29,7 +30,11 @@ public class FullBackupJob extends JobService {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void schedule(int r6, android.content.Context r7, long r8, com.android.server.backup.UserBackupManagerService r10) {
+    public static void schedule(
+            int r6,
+            android.content.Context r7,
+            long r8,
+            com.android.server.backup.UserBackupManagerService r10) {
         /*
             boolean r0 = r10.isFrameworkSchedulingEnabled()
             if (r0 != 0) goto L7
@@ -104,7 +109,10 @@ public class FullBackupJob extends JobService {
             monitor-exit(r10)     // Catch: java.lang.Throwable -> L89
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.FullBackupJob.schedule(int, android.content.Context, long, com.android.server.backup.UserBackupManagerService):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.backup.FullBackupJob.schedule(int,"
+                    + " android.content.Context, long,"
+                    + " com.android.server.backup.UserBackupManagerService):void");
     }
 
     public final void finishBackupPass(int i) {
@@ -138,7 +146,9 @@ public class FullBackupJob extends JobService {
             Method dump skipped, instructions count: 612
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.FullBackupJob.onStartJob(android.app.job.JobParameters):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.FullBackupJob.onStartJob(android.app.job.JobParameters):boolean");
     }
 
     @Override // android.app.job.JobService
@@ -152,8 +162,16 @@ public class FullBackupJob extends JobService {
                 }
                 BackupManagerService backupManagerService = BackupManagerService.sInstance;
                 Objects.requireNonNull(backupManagerService);
-                if (backupManagerService.isUserReadyForBackup(i) && (serviceForUserIfCallerHasPermission = backupManagerService.getServiceForUserIfCallerHasPermission(i, "endFullBackup()")) != null) {
-                    new Thread(new UserBackupManagerService.AnonymousClass1(1, serviceForUserIfCallerHasPermission), "end-full-backup").start();
+                if (backupManagerService.isUserReadyForBackup(i)
+                        && (serviceForUserIfCallerHasPermission =
+                                        backupManagerService.getServiceForUserIfCallerHasPermission(
+                                                i, "endFullBackup()"))
+                                != null) {
+                    new Thread(
+                                    new UserBackupManagerService.AnonymousClass1(
+                                            1, serviceForUserIfCallerHasPermission),
+                                    "end-full-backup")
+                            .start();
                 }
                 return false;
             } catch (Throwable th) {

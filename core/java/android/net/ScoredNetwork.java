@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,22 +12,26 @@ import java.util.Set;
 @Deprecated
 /* loaded from: classes3.dex */
 public class ScoredNetwork implements Parcelable {
-    public static final String ATTRIBUTES_KEY_BADGING_CURVE = "android.net.attributes.key.BADGING_CURVE";
-    public static final String ATTRIBUTES_KEY_HAS_CAPTIVE_PORTAL = "android.net.attributes.key.HAS_CAPTIVE_PORTAL";
-    public static final String ATTRIBUTES_KEY_RANKING_SCORE_OFFSET = "android.net.attributes.key.RANKING_SCORE_OFFSET";
-    public static final Parcelable.Creator<ScoredNetwork> CREATOR = new Parcelable.Creator<ScoredNetwork>() { // from class: android.net.ScoredNetwork.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ScoredNetwork createFromParcel(Parcel in) {
-            return new ScoredNetwork(in);
-        }
+    public static final String ATTRIBUTES_KEY_BADGING_CURVE =
+            "android.net.attributes.key.BADGING_CURVE";
+    public static final String ATTRIBUTES_KEY_HAS_CAPTIVE_PORTAL =
+            "android.net.attributes.key.HAS_CAPTIVE_PORTAL";
+    public static final String ATTRIBUTES_KEY_RANKING_SCORE_OFFSET =
+            "android.net.attributes.key.RANKING_SCORE_OFFSET";
+    public static final Parcelable.Creator<ScoredNetwork> CREATOR =
+            new Parcelable.Creator<ScoredNetwork>() { // from class: android.net.ScoredNetwork.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ScoredNetwork createFromParcel(Parcel in) {
+                    return new ScoredNetwork(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ScoredNetwork[] newArray(int size) {
-            return new ScoredNetwork[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ScoredNetwork[] newArray(int size) {
+                    return new ScoredNetwork[size];
+                }
+            };
     public final Bundle attributes;
     public final boolean meteredHint;
     public final NetworkKey networkKey;
@@ -40,7 +45,8 @@ public class ScoredNetwork implements Parcelable {
         this(networkKey, rssiCurve, meteredHint, null);
     }
 
-    public ScoredNetwork(NetworkKey networkKey, RssiCurve rssiCurve, boolean meteredHint, Bundle attributes) {
+    public ScoredNetwork(
+            NetworkKey networkKey, RssiCurve rssiCurve, boolean meteredHint, Bundle attributes) {
         this.networkKey = networkKey;
         this.rssiCurve = rssiCurve;
         this.meteredHint = meteredHint;
@@ -84,7 +90,11 @@ public class ScoredNetwork implements Parcelable {
             return false;
         }
         ScoredNetwork that = (ScoredNetwork) o;
-        if (Objects.equals(this.networkKey, that.networkKey) && Objects.equals(this.rssiCurve, that.rssiCurve) && Objects.equals(Boolean.valueOf(this.meteredHint), Boolean.valueOf(that.meteredHint)) && bundleEquals(this.attributes, that.attributes)) {
+        if (Objects.equals(this.networkKey, that.networkKey)
+                && Objects.equals(this.rssiCurve, that.rssiCurve)
+                && Objects.equals(
+                        Boolean.valueOf(this.meteredHint), Boolean.valueOf(that.meteredHint))
+                && bundleEquals(this.attributes, that.attributes)) {
             return true;
         }
         return false;
@@ -109,11 +119,22 @@ public class ScoredNetwork implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(this.networkKey, this.rssiCurve, Boolean.valueOf(this.meteredHint), this.attributes);
+        return Objects.hash(
+                this.networkKey,
+                this.rssiCurve,
+                Boolean.valueOf(this.meteredHint),
+                this.attributes);
     }
 
     public String toString() {
-        StringBuilder out = new StringBuilder("ScoredNetwork{networkKey=" + this.networkKey + ", rssiCurve=" + this.rssiCurve + ", meteredHint=" + this.meteredHint);
+        StringBuilder out =
+                new StringBuilder(
+                        "ScoredNetwork{networkKey="
+                                + this.networkKey
+                                + ", rssiCurve="
+                                + this.rssiCurve
+                                + ", meteredHint="
+                                + this.meteredHint);
         if (this.attributes != null && !this.attributes.isEmpty()) {
             out.append(", attributes=" + this.attributes);
         }
@@ -122,14 +143,21 @@ public class ScoredNetwork implements Parcelable {
     }
 
     public boolean hasRankingScore() {
-        return this.rssiCurve != null || (this.attributes != null && this.attributes.containsKey(ATTRIBUTES_KEY_RANKING_SCORE_OFFSET));
+        return this.rssiCurve != null
+                || (this.attributes != null
+                        && this.attributes.containsKey(ATTRIBUTES_KEY_RANKING_SCORE_OFFSET));
     }
 
     public int calculateRankingScore(int rssi) throws UnsupportedOperationException {
         if (!hasRankingScore()) {
-            throw new UnsupportedOperationException("Either rssiCurve or rankingScoreOffset is required to calculate the ranking score");
+            throw new UnsupportedOperationException(
+                    "Either rssiCurve or rankingScoreOffset is required to calculate the ranking"
+                        + " score");
         }
-        int offset = this.attributes != null ? 0 + this.attributes.getInt(ATTRIBUTES_KEY_RANKING_SCORE_OFFSET, 0) : 0;
+        int offset =
+                this.attributes != null
+                        ? 0 + this.attributes.getInt(ATTRIBUTES_KEY_RANKING_SCORE_OFFSET, 0)
+                        : 0;
         int score = this.rssiCurve != null ? this.rssiCurve.lookupScore(rssi) << 8 : 0;
         try {
             return Math.addExact(score, offset);
@@ -140,7 +168,10 @@ public class ScoredNetwork implements Parcelable {
 
     public int calculateBadge(int rssi) {
         if (this.attributes != null && this.attributes.containsKey(ATTRIBUTES_KEY_BADGING_CURVE)) {
-            RssiCurve badgingCurve = (RssiCurve) this.attributes.getParcelable(ATTRIBUTES_KEY_BADGING_CURVE, RssiCurve.class);
+            RssiCurve badgingCurve =
+                    (RssiCurve)
+                            this.attributes.getParcelable(
+                                    ATTRIBUTES_KEY_BADGING_CURVE, RssiCurve.class);
             return badgingCurve.lookupScore(rssi);
         }
         return 0;

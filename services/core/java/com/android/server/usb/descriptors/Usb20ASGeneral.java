@@ -30,16 +30,20 @@ public final class Usb20ASGeneral extends UsbACInterface implements UsbAudioChan
         return this.mLength;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbACInterface, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbACInterface,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public final void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
         textReportCanvas.openList();
         textReportCanvas.writeListItem("Terminal Link: " + ((int) this.mTerminalLink));
-        textReportCanvas.writeListItem("Controls: " + TextReportCanvas.getHexString(this.mControls));
-        textReportCanvas.writeListItem("Format Type: " + TextReportCanvas.getHexString(this.mFormatType));
+        textReportCanvas.writeListItem(
+                "Controls: " + TextReportCanvas.getHexString(this.mControls));
+        textReportCanvas.writeListItem(
+                "Format Type: " + TextReportCanvas.getHexString(this.mFormatType));
         textReportCanvas.writeListItem("Formats: " + TextReportCanvas.getHexString(this.mFormats));
         textReportCanvas.writeListItem("Channel Count: " + ((int) this.mNumChannels));
-        textReportCanvas.writeListItem("Channel Config: " + TextReportCanvas.getHexString(this.mChannelConfig));
+        textReportCanvas.writeListItem(
+                "Channel Config: " + TextReportCanvas.getHexString(this.mChannelConfig));
         textReportCanvas.writeListItem("Channel Names String ID: " + ((int) this.mChannelNames));
         textReportCanvas.closeList();
     }

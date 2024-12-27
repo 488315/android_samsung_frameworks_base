@@ -6,7 +6,9 @@ import android.content.om.wallpapertheme.TemplateManager;
 import android.content.om.wallpapertheme.ThemePalette;
 import android.content.om.wallpapertheme.ThemeUtil;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -22,8 +24,10 @@ public final class OverlayGenerator {
     public final ArrayList createMonetOverlay() {
         String valueOf;
         String str;
-        FabricatedOverlay build = new FabricatedOverlay.Builder("android", "SemWT_MonetPalette", "android").build();
-        FabricatedOverlay build2 = new FabricatedOverlay.Builder("android", "SemWT_G_MonetPalette", "android").build();
+        FabricatedOverlay build =
+                new FabricatedOverlay.Builder("android", "SemWT_MonetPalette", "android").build();
+        FabricatedOverlay build2 =
+                new FabricatedOverlay.Builder("android", "SemWT_G_MonetPalette", "android").build();
         for (int i = 0; i < 5; i++) {
             if (i < 3) {
                 valueOf = String.valueOf(i + 1);
@@ -50,8 +54,10 @@ public final class OverlayGenerator {
                     sb.append("50");
                 }
                 String sb3 = sb.toString();
-                build.setResourceValue(sb3, 28, this.mThemePalette.getMonetColorSS(i, i2), (String) null);
-                build2.setResourceValue(sb3, 28, this.mThemePalette.getMonetColorGG(i, i2), (String) null);
+                build.setResourceValue(
+                        sb3, 28, this.mThemePalette.getMonetColorSS(i, i2), (String) null);
+                build2.setResourceValue(
+                        sb3, 28, this.mThemePalette.getMonetColorGG(i, i2), (String) null);
             }
         }
         Iterator it = this.mMetaDataManager.getPackageList().iterator();
@@ -68,7 +74,10 @@ public final class OverlayGenerator {
 
     public final FabricatedOverlay createOverlayForPkg(MetaDataManager.Package r5) {
         List uidList = r5.getUidList();
-        FabricatedOverlay build = new FabricatedOverlay.Builder("android", "SemWT_" + r5.getPackageName(), r5.getPackageName()).build();
+        FabricatedOverlay build =
+                new FabricatedOverlay.Builder(
+                                "android", "SemWT_" + r5.getPackageName(), r5.getPackageName())
+                        .build();
         writeResources(uidList, build);
         return build;
     }
@@ -78,7 +87,8 @@ public final class OverlayGenerator {
         Iterator it = this.mMetaDataManager.getPackageList().iterator();
         while (it.hasNext()) {
             MetaDataManager.Package r2 = (MetaDataManager.Package) it.next();
-            if (!"SESL".equals(r2.getPackageName()) && !"Multi window".equals(r2.getPackageName())) {
+            if (!"SESL".equals(r2.getPackageName())
+                    && !"Multi window".equals(r2.getPackageName())) {
                 arrayList.add(createOverlayForPkg(r2));
             }
         }
@@ -96,32 +106,57 @@ public final class OverlayGenerator {
                 String[] split = destAttribName.split(",");
                 int type = uid.getType();
                 if (type == 1) {
-                    int parseInt = uid.getOpacity() != null ? Integer.parseInt(uid.getOpacity()) : 100;
+                    int parseInt =
+                            uid.getOpacity() != null ? Integer.parseInt(uid.getOpacity()) : 100;
                     List colors = this.mTemplateManager.getColors(uid.getUidValue());
                     if (colors != null) {
                         if (parseInt != 100) {
                             float f = parseInt / 100.0f;
-                            colors.set(0, ThemeUtil.adjustAlpha(f, ((Integer) colors.get(0)).intValue()));
-                            colors.set(1, ThemeUtil.adjustAlpha(f, ((Integer) colors.get(1)).intValue()));
+                            colors.set(
+                                    0,
+                                    ThemeUtil.adjustAlpha(f, ((Integer) colors.get(0)).intValue()));
+                            colors.set(
+                                    1,
+                                    ThemeUtil.adjustAlpha(f, ((Integer) colors.get(1)).intValue()));
                         }
                         for (String str : split) {
-                            String m = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("color/", str.trim());
-                            fabricatedOverlay.setResourceValue(m, 28, ((Integer) colors.get(0)).intValue(), (String) null);
-                            fabricatedOverlay.setResourceValue(m, 28, ((Integer) colors.get(1)).intValue(), "night");
+                            String m =
+                                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                            "color/", str.trim());
+                            fabricatedOverlay.setResourceValue(
+                                    m, 28, ((Integer) colors.get(0)).intValue(), (String) null);
+                            fabricatedOverlay.setResourceValue(
+                                    m, 28, ((Integer) colors.get(1)).intValue(), "night");
                         }
                     }
                 } else if (type == 2) {
                     Integer integer = this.mTemplateManager.getInteger(uidValue);
                     if (integer != null) {
                         for (String str2 : split) {
-                            fabricatedOverlay.setResourceValue(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("integer/", str2.trim()), 16, integer.intValue(), (String) null);
+                            fabricatedOverlay.setResourceValue(
+                                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                            "integer/", str2.trim()),
+                                    16,
+                                    integer.intValue(),
+                                    (String) null);
                         }
                     }
-                } else if (type == 3 && (booleans = this.mTemplateManager.getBooleans(uidValue)) != null) {
+                } else if (type == 3
+                        && (booleans = this.mTemplateManager.getBooleans(uidValue)) != null) {
                     for (String str3 : split) {
-                        String m2 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("bool/", str3.trim());
-                        fabricatedOverlay.setResourceValue(m2, 18, ((Boolean) booleans.get(0)).booleanValue() ? 1 : 0, (String) null);
-                        fabricatedOverlay.setResourceValue(m2, 18, ((Boolean) booleans.get(1)).booleanValue() ? 1 : 0, "night");
+                        String m2 =
+                                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                        "bool/", str3.trim());
+                        fabricatedOverlay.setResourceValue(
+                                m2,
+                                18,
+                                ((Boolean) booleans.get(0)).booleanValue() ? 1 : 0,
+                                (String) null);
+                        fabricatedOverlay.setResourceValue(
+                                m2,
+                                18,
+                                ((Boolean) booleans.get(1)).booleanValue() ? 1 : 0,
+                                "night");
                     }
                 }
             }

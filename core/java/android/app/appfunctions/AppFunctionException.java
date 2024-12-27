@@ -3,25 +3,28 @@ package android.app.appfunctions;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class AppFunctionException extends Exception implements Parcelable {
-    public static final Parcelable.Creator<AppFunctionException> CREATOR = new Parcelable.Creator<AppFunctionException>() { // from class: android.app.appfunctions.AppFunctionException.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppFunctionException createFromParcel(Parcel in) {
-            return new AppFunctionException(in);
-        }
+    public static final Parcelable.Creator<AppFunctionException> CREATOR =
+            new Parcelable.Creator<AppFunctionException>() { // from class:
+                // android.app.appfunctions.AppFunctionException.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppFunctionException createFromParcel(Parcel in) {
+                    return new AppFunctionException(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppFunctionException[] newArray(int size) {
-            return new AppFunctionException[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppFunctionException[] newArray(int size) {
+                    return new AppFunctionException[size];
+                }
+            };
     public static final int ERROR_APP_UNKNOWN_ERROR = 3000;
     public static final int ERROR_CANCELLED = 2001;
     public static final int ERROR_CATEGORY_APP = 3;
@@ -38,12 +41,10 @@ public final class AppFunctionException extends Exception implements Parcelable 
     private final Bundle mExtras;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ErrorCategory {
-    }
+    public @interface ErrorCategory {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ErrorCode {
-    }
+    public @interface ErrorCode {}
 
     public AppFunctionException(int errorCode, String errorMessage) {
         this(errorCode, errorMessage, Bundle.EMPTY);

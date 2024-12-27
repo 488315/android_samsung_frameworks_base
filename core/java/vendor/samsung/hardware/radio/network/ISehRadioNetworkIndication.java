@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioNetworkIndication extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$network$ISehRadioNetworkIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$network$ISehRadioNetworkIndication".replace('$', '.');
     public static final String HASH = "8fb94cb4cf759f224987eb2d1908582a1f6f1600";
     public static final int VERSION = 1;
 
@@ -24,7 +25,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
 
     void execute(int i, String str) throws RemoteException;
 
-    void extendedRegistrationState(int i, SehExtendedRegStateResult sehExtendedRegStateResult) throws RemoteException;
+    void extendedRegistrationState(int i, SehExtendedRegStateResult sehExtendedRegStateResult)
+            throws RemoteException;
 
     String getInterfaceHash() throws RemoteException;
 
@@ -44,68 +46,59 @@ public interface ISehRadioNetworkIndication extends IInterface {
 
     void signalLevelInfoChanged(int i, SehSignalBar sehSignalBar) throws RemoteException;
 
-    void vendorConfigurationChanged(int i, SehVendorConfiguration[] sehVendorConfigurationArr) throws RemoteException;
+    void vendorConfigurationChanged(int i, SehVendorConfiguration[] sehVendorConfigurationArr)
+            throws RemoteException;
 
     public static class Default implements ISehRadioNetworkIndication {
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void acbInfoChanged(int type, int[] acbInfo) throws RemoteException {
-        }
+        public void acbInfoChanged(int type, int[] acbInfo) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void callDetailsChanged(int type, SehCallDetails[] callDetails) throws RemoteException {
-        }
+        public void callDetailsChanged(int type, SehCallDetails[] callDetails)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void csFallback(int type, int state) throws RemoteException {
-        }
+        public void csFallback(int type, int state) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void currentNetworkScanIsRequested(int type, byte mode) throws RemoteException {
-        }
+        public void currentNetworkScanIsRequested(int type, byte mode) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void eriInfoReceived(int type, SehEriInfo eriInfo) throws RemoteException {
-        }
+        public void eriInfoReceived(int type, SehEriInfo eriInfo) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void execute(int type, String cmd) throws RemoteException {
-        }
+        public void execute(int type, String cmd) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void extendedRegistrationState(int type, SehExtendedRegStateResult state) throws RemoteException {
-        }
+        public void extendedRegistrationState(int type, SehExtendedRegStateResult state)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void imsPreferenceChanged(int type, int[] imsPref) throws RemoteException {
-        }
+        public void imsPreferenceChanged(int type, int[] imsPref) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void needTurnOnRadioIndication(int type) throws RemoteException {
-        }
+        public void needTurnOnRadioIndication(int type) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void nrBearerAllocationChanged(int type, int status) throws RemoteException {
-        }
+        public void nrBearerAllocationChanged(int type, int status) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void nrIconTypeChanged(int type, int nrIconType) throws RemoteException {
-        }
+        public void nrIconTypeChanged(int type, int nrIconType) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void nrNetworkTypeAdded(int type, int status) throws RemoteException {
-        }
+        public void nrNetworkTypeAdded(int type, int status) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void roamingNetworkScanIsRequested(int type, byte[] scanData) throws RemoteException {
-        }
+        public void roamingNetworkScanIsRequested(int type, byte[] scanData)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void signalLevelInfoChanged(int type, SehSignalBar signalBarInfo) throws RemoteException {
-        }
+        public void signalLevelInfoChanged(int type, SehSignalBar signalBarInfo)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-        public void vendorConfigurationChanged(int type, SehVendorConfiguration[] configurations) throws RemoteException {
-        }
+        public void vendorConfigurationChanged(int type, SehVendorConfiguration[] configurations)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
         public int getInterfaceVersion() {
@@ -123,7 +116,7 @@ public interface ISehRadioNetworkIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioNetworkIndication {
+    public abstract static class Stub extends Binder implements ISehRadioNetworkIndication {
         static final int TRANSACTION_acbInfoChanged = 1;
         static final int TRANSACTION_callDetailsChanged = 2;
         static final int TRANSACTION_csFallback = 3;
@@ -164,7 +157,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -192,7 +186,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    SehCallDetails[] _arg12 = (SehCallDetails[]) data.createTypedArray(SehCallDetails.CREATOR);
+                    SehCallDetails[] _arg12 =
+                            (SehCallDetails[]) data.createTypedArray(SehCallDetails.CREATOR);
                     data.enforceNoDataAvail();
                     callDetailsChanged(_arg02, _arg12);
                     reply.writeNoException();
@@ -224,7 +219,9 @@ public interface ISehRadioNetworkIndication extends IInterface {
                     return true;
                 case 7:
                     int _arg07 = data.readInt();
-                    SehExtendedRegStateResult _arg17 = (SehExtendedRegStateResult) data.readTypedObject(SehExtendedRegStateResult.CREATOR);
+                    SehExtendedRegStateResult _arg17 =
+                            (SehExtendedRegStateResult)
+                                    data.readTypedObject(SehExtendedRegStateResult.CREATOR);
                     data.enforceNoDataAvail();
                     extendedRegistrationState(_arg07, _arg17);
                     reply.writeNoException();
@@ -266,14 +263,17 @@ public interface ISehRadioNetworkIndication extends IInterface {
                     return true;
                 case 14:
                     int _arg014 = data.readInt();
-                    SehSignalBar _arg113 = (SehSignalBar) data.readTypedObject(SehSignalBar.CREATOR);
+                    SehSignalBar _arg113 =
+                            (SehSignalBar) data.readTypedObject(SehSignalBar.CREATOR);
                     data.enforceNoDataAvail();
                     signalLevelInfoChanged(_arg014, _arg113);
                     reply.writeNoException();
                     return true;
                 case 15:
                     int _arg015 = data.readInt();
-                    SehVendorConfiguration[] _arg114 = (SehVendorConfiguration[]) data.createTypedArray(SehVendorConfiguration.CREATOR);
+                    SehVendorConfiguration[] _arg114 =
+                            (SehVendorConfiguration[])
+                                    data.createTypedArray(SehVendorConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     vendorConfigurationChanged(_arg015, _arg114);
                     reply.writeNoException();
@@ -318,7 +318,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-            public void callDetailsChanged(int type, SehCallDetails[] callDetails) throws RemoteException {
+            public void callDetailsChanged(int type, SehCallDetails[] callDetails)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -361,7 +362,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
                     _data.writeByte(mode);
                     boolean _status = this.mRemote.transact(4, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method currentNetworkScanIsRequested is unimplemented.");
+                        throw new RemoteException(
+                                "Method currentNetworkScanIsRequested is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -404,7 +406,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-            public void extendedRegistrationState(int type, SehExtendedRegStateResult state) throws RemoteException {
+            public void extendedRegistrationState(int type, SehExtendedRegStateResult state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -413,7 +416,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
                     _data.writeTypedObject(state, 0);
                     boolean _status = this.mRemote.transact(7, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method extendedRegistrationState is unimplemented.");
+                        throw new RemoteException(
+                                "Method extendedRegistrationState is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -446,7 +450,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(9, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method needTurnOnRadioIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method needTurnOnRadioIndication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -462,7 +467,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
                     _data.writeInt(status);
                     boolean _status = this.mRemote.transact(10, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method nrBearerAllocationChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method nrBearerAllocationChanged is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -502,7 +508,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-            public void roamingNetworkScanIsRequested(int type, byte[] scanData) throws RemoteException {
+            public void roamingNetworkScanIsRequested(int type, byte[] scanData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -510,7 +517,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
                     _data.writeByteArray(scanData);
                     boolean _status = this.mRemote.transact(13, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method roamingNetworkScanIsRequested is unimplemented.");
+                        throw new RemoteException(
+                                "Method roamingNetworkScanIsRequested is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -518,7 +526,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-            public void signalLevelInfoChanged(int type, SehSignalBar signalBarInfo) throws RemoteException {
+            public void signalLevelInfoChanged(int type, SehSignalBar signalBarInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -527,7 +536,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
                     _data.writeTypedObject(signalBarInfo, 0);
                     boolean _status = this.mRemote.transact(14, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method signalLevelInfoChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method signalLevelInfoChanged is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -537,7 +547,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication
-            public void vendorConfigurationChanged(int type, SehVendorConfiguration[] configurations) throws RemoteException {
+            public void vendorConfigurationChanged(
+                    int type, SehVendorConfiguration[] configurations) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -546,7 +557,8 @@ public interface ISehRadioNetworkIndication extends IInterface {
                     _data.writeTypedArray(configurations, 0);
                     boolean _status = this.mRemote.transact(15, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method vendorConfigurationChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method vendorConfigurationChanged is unimplemented.");
                     }
                     _reply.readException();
                 } finally {

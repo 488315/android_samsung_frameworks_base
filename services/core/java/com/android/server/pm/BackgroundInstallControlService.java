@@ -30,10 +30,12 @@ import android.util.SparseArrayMap;
 import android.util.SparseSetArray;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.HeapdumpWatcher$$ExternalSyntheticOutline0;
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
 import com.android.server.SystemService;
 import com.android.server.pm.permission.PermissionManagerService;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -74,7 +76,10 @@ public final class BackgroundInstallControlService extends SystemService {
 
         public final ParceledListSlice getBackgroundInstalledPackages(long j, int i) {
             if (Flags.bicClient()) {
-                this.mService.mContext.enforceCallingOrSelfPermission("android.permission.GET_BACKGROUND_INSTALLED_PACKAGES", "User is not permitted to call service: android.permission.GET_BACKGROUND_INSTALLED_PACKAGES");
+                this.mService.mContext.enforceCallingOrSelfPermission(
+                        "android.permission.GET_BACKGROUND_INSTALLED_PACKAGES",
+                        "User is not permitted to call service:"
+                            + " android.permission.GET_BACKGROUND_INSTALLED_PACKAGES");
             }
             if (!Build.IS_DEBUGGABLE) {
                 return this.mService.getBackgroundInstalledPackages(j, i);
@@ -89,23 +94,30 @@ public final class BackgroundInstallControlService extends SystemService {
             ArrayList arrayList = new ArrayList();
             for (String str2 : split) {
                 try {
-                    arrayList.add(backgroundInstallControlService.mPackageManager.getPackageInfo(str2, PackageManager.PackageInfoFlags.of(131072L)));
+                    arrayList.add(
+                            backgroundInstallControlService.mPackageManager.getPackageInfo(
+                                    str2, PackageManager.PackageInfoFlags.of(131072L)));
                 } catch (PackageManager.NameNotFoundException unused) {
-                    HeimdAllFsService$$ExternalSyntheticOutline0.m("Package's PackageInfo not found ", str2, "BackgroundInstallControlService");
+                    HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                            "Package's PackageInfo not found ",
+                            str2,
+                            "BackgroundInstallControlService");
                 }
             }
             return new ParceledListSlice(arrayList);
         }
 
         public final void registerBackgroundInstallCallback(IRemoteCallback iRemoteCallback) {
-            BackgroundInstallControlCallbackHelper backgroundInstallControlCallbackHelper = this.mService.mCallbackHelper;
+            BackgroundInstallControlCallbackHelper backgroundInstallControlCallbackHelper =
+                    this.mService.mCallbackHelper;
             synchronized (backgroundInstallControlCallbackHelper.mCallbacks) {
                 backgroundInstallControlCallbackHelper.mCallbacks.register(iRemoteCallback, null);
             }
         }
 
         public final void unregisterBackgroundInstallCallback(IRemoteCallback iRemoteCallback) {
-            BackgroundInstallControlCallbackHelper backgroundInstallControlCallbackHelper = this.mService.mCallbackHelper;
+            BackgroundInstallControlCallbackHelper backgroundInstallControlCallbackHelper =
+                    this.mService.mCallbackHelper;
             synchronized (backgroundInstallControlCallbackHelper.mCallbacks) {
                 backgroundInstallControlCallbackHelper.mCallbacks.unregister(iRemoteCallback);
             }
@@ -116,7 +128,8 @@ public final class BackgroundInstallControlService extends SystemService {
     public final class EventHandler extends Handler {
         public final BackgroundInstallControlService mService;
 
-        public EventHandler(Looper looper, BackgroundInstallControlService backgroundInstallControlService) {
+        public EventHandler(
+                Looper looper, BackgroundInstallControlService backgroundInstallControlService) {
             super(looper);
             this.mService = backgroundInstallControlService;
         }
@@ -132,26 +145,44 @@ public final class BackgroundInstallControlService extends SystemService {
                 int i3 = event.mEventType;
                 if (i3 == 1 || i3 == 2 || i3 == 23) {
                     String str = event.mPackage;
-                    if (backgroundInstallControlService.mInstallerForegroundTimeFrames.contains(i2, str) || PermissionManagerService.this.checkPermission(str, "android.permission.INSTALL_PACKAGES", "default:0", i2) == 0) {
-                        if (!backgroundInstallControlService.mInstallerForegroundTimeFrames.contains(i2, event.mPackage)) {
-                            backgroundInstallControlService.mInstallerForegroundTimeFrames.add(i2, event.mPackage, new TreeSet());
+                    if (backgroundInstallControlService.mInstallerForegroundTimeFrames.contains(
+                                    i2, str)
+                            || PermissionManagerService.this.checkPermission(
+                                            str,
+                                            "android.permission.INSTALL_PACKAGES",
+                                            "default:0",
+                                            i2)
+                                    == 0) {
+                        if (!backgroundInstallControlService.mInstallerForegroundTimeFrames
+                                .contains(i2, event.mPackage)) {
+                            backgroundInstallControlService.mInstallerForegroundTimeFrames.add(
+                                    i2, event.mPackage, new TreeSet());
                         }
-                        TreeSet treeSet = (TreeSet) backgroundInstallControlService.mInstallerForegroundTimeFrames.get(i2, event.mPackage);
-                        if (treeSet.size() == 0 || ((ForegroundTimeFrame) treeSet.last()).endTimeStampMillis != 0) {
+                        TreeSet treeSet =
+                                (TreeSet)
+                                        backgroundInstallControlService
+                                                .mInstallerForegroundTimeFrames.get(
+                                                i2, event.mPackage);
+                        if (treeSet.size() == 0
+                                || ((ForegroundTimeFrame) treeSet.last()).endTimeStampMillis != 0) {
                             if (event.mEventType != 1) {
                                 return;
                             } else {
                                 treeSet.add(new ForegroundTimeFrame(event.mTimeStamp));
                             }
                         }
-                        ForegroundTimeFrame foregroundTimeFrame = (ForegroundTimeFrame) treeSet.last();
+                        ForegroundTimeFrame foregroundTimeFrame =
+                                (ForegroundTimeFrame) treeSet.last();
                         foregroundTimeFrame.getClass();
                         int i4 = event.mEventType;
                         if (i4 == 1) {
-                            ((ArraySet) foregroundTimeFrame.activities).add(Integer.valueOf(event.mInstanceId));
+                            ((ArraySet) foregroundTimeFrame.activities)
+                                    .add(Integer.valueOf(event.mInstanceId));
                         } else if (i4 == 2 || i4 == 23) {
-                            if (((ArraySet) foregroundTimeFrame.activities).contains(Integer.valueOf(event.mInstanceId))) {
-                                ((ArraySet) foregroundTimeFrame.activities).remove(Integer.valueOf(event.mInstanceId));
+                            if (((ArraySet) foregroundTimeFrame.activities)
+                                    .contains(Integer.valueOf(event.mInstanceId))) {
+                                ((ArraySet) foregroundTimeFrame.activities)
+                                        .remove(Integer.valueOf(event.mInstanceId));
                                 if (((ArraySet) foregroundTimeFrame.activities).size() == 0) {
                                     foregroundTimeFrame.endTimeStampMillis = event.mTimeStamp;
                                 }
@@ -169,7 +200,10 @@ public final class BackgroundInstallControlService extends SystemService {
             }
             if (i != 1) {
                 if (i != 2) {
-                    HeapdumpWatcher$$ExternalSyntheticOutline0.m(new StringBuilder("Unknown message: "), message.what, "BackgroundInstallControlService");
+                    HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("Unknown message: "),
+                            message.what,
+                            "BackgroundInstallControlService");
                     return;
                 }
                 BackgroundInstallControlService backgroundInstallControlService2 = this.mService;
@@ -185,37 +219,60 @@ public final class BackgroundInstallControlService extends SystemService {
             int i6 = message.arg1;
             backgroundInstallControlService3.getClass();
             try {
-                ApplicationInfo applicationInfoAsUser = backgroundInstallControlService3.mPackageManager.getApplicationInfoAsUser(str3, PackageManager.ApplicationInfoFlags.of(0L), i6);
+                ApplicationInfo applicationInfoAsUser =
+                        backgroundInstallControlService3.mPackageManager.getApplicationInfoAsUser(
+                                str3, PackageManager.ApplicationInfoFlags.of(0L), i6);
                 try {
-                    InstallSourceInfo installSourceInfo = backgroundInstallControlService3.mPackageManager.getInstallSourceInfo(str3);
+                    InstallSourceInfo installSourceInfo =
+                            backgroundInstallControlService3.mPackageManager.getInstallSourceInfo(
+                                    str3);
                     String installingPackageName = installSourceInfo.getInstallingPackageName();
                     String initiatingPackageName = installSourceInfo.getInitiatingPackageName();
-                    if (PermissionManagerService.this.checkPermission(installingPackageName, "android.permission.INSTALL_PACKAGES", "default:0", i6) != 0) {
+                    if (PermissionManagerService.this.checkPermission(
+                                    installingPackageName,
+                                    "android.permission.INSTALL_PACKAGES",
+                                    "default:0",
+                                    i6)
+                            != 0) {
                         return;
                     }
                     long currentTimeMillis = System.currentTimeMillis();
                     long uptimeMillis = SystemClock.uptimeMillis();
                     long j = applicationInfoAsUser.createTimestamp;
                     try {
-                        Optional latestInstallSession = backgroundInstallControlService3.getLatestInstallSession(i6, str3);
+                        Optional latestInstallSession =
+                                backgroundInstallControlService3.getLatestInstallSession(i6, str3);
                         if (latestInstallSession.isEmpty()) {
-                            Slog.w("BackgroundInstallControlService", "Package's historical install session not found, falling back to appInfo.createTimestamp: " + str3);
+                            Slog.w(
+                                    "BackgroundInstallControlService",
+                                    "Package's historical install session not found, falling back"
+                                        + " to appInfo.createTimestamp: "
+                                            + str3);
                         } else {
-                            j = ((PackageInstaller.SessionInfo) latestInstallSession.get()).getCreatedMillis();
+                            j =
+                                    ((PackageInstaller.SessionInfo) latestInstallSession.get())
+                                            .getCreatedMillis();
                         }
                     } catch (Exception e) {
-                        Slog.w("BackgroundInstallControlService", "Retrieval of install time from historical session failed, falling back to appInfo.createTimestamp");
+                        Slog.w(
+                                "BackgroundInstallControlService",
+                                "Retrieval of install time from historical session failed, falling"
+                                    + " back to appInfo.createTimestamp");
                         Slog.w("BackgroundInstallControlService", Log.getStackTraceString(e));
                     }
                     long j2 = currentTimeMillis - (uptimeMillis - j);
                     if (PackageManagerServiceUtils.isInstalledByAdb(initiatingPackageName)) {
                         return;
                     }
-                    TreeSet treeSet2 = (TreeSet) backgroundInstallControlService3.mInstallerForegroundTimeFrames.get(i6, installingPackageName);
+                    TreeSet treeSet2 =
+                            (TreeSet)
+                                    backgroundInstallControlService3.mInstallerForegroundTimeFrames
+                                            .get(i6, installingPackageName);
                     if (treeSet2 != null) {
                         Iterator it = treeSet2.iterator();
                         while (it.hasNext()) {
-                            ForegroundTimeFrame foregroundTimeFrame2 = (ForegroundTimeFrame) it.next();
+                            ForegroundTimeFrame foregroundTimeFrame2 =
+                                    (ForegroundTimeFrame) it.next();
                             if (foregroundTimeFrame2.startTimeStampMillis <= j2) {
                                 long j3 = foregroundTimeFrame2.endTimeStampMillis;
                                 if (j3 == 0 || j2 <= j3) {
@@ -226,36 +283,55 @@ public final class BackgroundInstallControlService extends SystemService {
                     }
                     backgroundInstallControlService3.initBackgroundInstalledPackages();
                     backgroundInstallControlService3.mBackgroundInstalledPackages.add(i6, str3);
-                    final BackgroundInstallControlCallbackHelper backgroundInstallControlCallbackHelper = backgroundInstallControlService3.mCallbackHelper;
+                    final BackgroundInstallControlCallbackHelper
+                            backgroundInstallControlCallbackHelper =
+                                    backgroundInstallControlService3.mCallbackHelper;
                     backgroundInstallControlCallbackHelper.getClass();
                     final Bundle bundle = new Bundle();
                     bundle.putCharSequence("packageName", str3);
                     bundle.putInt("userId", i6);
                     synchronized (backgroundInstallControlCallbackHelper.mCallbacks) {
-                        backgroundInstallControlCallbackHelper.mHandler.post(new Runnable() { // from class: com.android.server.pm.BackgroundInstallControlCallbackHelper$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                BackgroundInstallControlCallbackHelper backgroundInstallControlCallbackHelper2 = BackgroundInstallControlCallbackHelper.this;
-                                final Bundle bundle2 = bundle;
-                                backgroundInstallControlCallbackHelper2.mCallbacks.broadcast(new Consumer() { // from class: com.android.server.pm.BackgroundInstallControlCallbackHelper$$ExternalSyntheticLambda1
-                                    @Override // java.util.function.Consumer
-                                    public final void accept(Object obj) {
-                                        try {
-                                            ((IRemoteCallback) obj).sendResult(bundle2);
-                                        } catch (RemoteException e2) {
-                                            Slog.e("BackgroundInstallControlCallbackHelper", "error detected: " + e2.getLocalizedMessage(), e2);
-                                        }
+                        backgroundInstallControlCallbackHelper.mHandler.post(
+                                new Runnable() { // from class:
+                                    // com.android.server.pm.BackgroundInstallControlCallbackHelper$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        BackgroundInstallControlCallbackHelper
+                                                backgroundInstallControlCallbackHelper2 =
+                                                        BackgroundInstallControlCallbackHelper.this;
+                                        final Bundle bundle2 = bundle;
+                                        backgroundInstallControlCallbackHelper2.mCallbacks
+                                                .broadcast(
+                                                        new Consumer() { // from class:
+                                                            // com.android.server.pm.BackgroundInstallControlCallbackHelper$$ExternalSyntheticLambda1
+                                                            @Override // java.util.function.Consumer
+                                                            public final void accept(Object obj) {
+                                                                try {
+                                                                    ((IRemoteCallback) obj)
+                                                                            .sendResult(bundle2);
+                                                                } catch (RemoteException e2) {
+                                                                    Slog.e(
+                                                                            "BackgroundInstallControlCallbackHelper",
+                                                                            "error detected: "
+                                                                                    + e2
+                                                                                            .getLocalizedMessage(),
+                                                                            e2);
+                                                                }
+                                                            }
+                                                        });
                                     }
                                 });
-                            }
-                        });
                     }
                     backgroundInstallControlService3.writeBackgroundInstalledPackagesToDisk();
                 } catch (PackageManager.NameNotFoundException unused) {
-                    HeimdAllFsService$$ExternalSyntheticOutline0.m("Package's installer not found ", str3, "BackgroundInstallControlService");
+                    HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                            "Package's installer not found ",
+                            str3,
+                            "BackgroundInstallControlService");
                 }
             } catch (PackageManager.NameNotFoundException unused2) {
-                HeimdAllFsService$$ExternalSyntheticOutline0.m("Package's appInfo not found ", str3, "BackgroundInstallControlService");
+                HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                        "Package's appInfo not found ", str3, "BackgroundInstallControlService");
             }
         }
     }
@@ -273,14 +349,17 @@ public final class BackgroundInstallControlService extends SystemService {
         @Override // java.lang.Comparable
         public final int compareTo(Object obj) {
             ForegroundTimeFrame foregroundTimeFrame = (ForegroundTimeFrame) obj;
-            int compare = Long.compare(this.startTimeStampMillis, foregroundTimeFrame.startTimeStampMillis);
-            return compare != 0 ? compare : Integer.compare(hashCode(), foregroundTimeFrame.hashCode());
+            int compare =
+                    Long.compare(
+                            this.startTimeStampMillis, foregroundTimeFrame.startTimeStampMillis);
+            return compare != 0
+                    ? compare
+                    : Integer.compare(hashCode(), foregroundTimeFrame.hashCode());
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Injector {
-    }
+    public interface Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InjectorImpl implements Injector {
@@ -300,7 +379,8 @@ public final class BackgroundInstallControlService extends SystemService {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public BackgroundInstallControlService(com.android.server.pm.BackgroundInstallControlService.Injector r6) {
+    public BackgroundInstallControlService(
+            com.android.server.pm.BackgroundInstallControlService.Injector r6) {
         /*
             r5 = this;
             com.android.server.pm.BackgroundInstallControlService$InjectorImpl r6 = (com.android.server.pm.BackgroundInstallControlService.InjectorImpl) r6
@@ -359,17 +439,22 @@ public final class BackgroundInstallControlService extends SystemService {
             r5.mBinderService = r6
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.BackgroundInstallControlService.<init>(com.android.server.pm.BackgroundInstallControlService$Injector):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.BackgroundInstallControlService.<init>(com.android.server.pm.BackgroundInstallControlService$Injector):void");
     }
 
     public ParceledListSlice getBackgroundInstalledPackages(long j, int i) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            List installedPackagesAsUser = this.mPackageManager.getInstalledPackagesAsUser(PackageManager.PackageInfoFlags.of(j), i);
+            List installedPackagesAsUser =
+                    this.mPackageManager.getInstalledPackagesAsUser(
+                            PackageManager.PackageInfoFlags.of(j), i);
             initBackgroundInstalledPackages();
             ListIterator listIterator = installedPackagesAsUser.listIterator();
             while (listIterator.hasNext()) {
-                if (!this.mBackgroundInstalledPackages.contains(i, ((PackageInfo) listIterator.next()).packageName)) {
+                if (!this.mBackgroundInstalledPackages.contains(
+                        i, ((PackageInfo) listIterator.next()).packageName)) {
                     listIterator.remove();
                 }
             }
@@ -392,7 +477,8 @@ public final class BackgroundInstallControlService extends SystemService {
 
     public final Optional getLatestInstallSession(int i, final String str) {
         int i2;
-        PackageInstallerService packageInstallerService = PackageManagerService.this.mInstallerService;
+        PackageInstallerService packageInstallerService =
+                PackageManagerService.this.mInstallerService;
         packageInstallerService.getClass();
         int callingUid = Binder.getCallingUid();
         Computer snapshotComputer = packageInstallerService.mPm.snapshotComputer();
@@ -401,7 +487,10 @@ public final class BackgroundInstallControlService extends SystemService {
         synchronized (packageInstallerService.mSessions) {
             while (i2 < ((ArrayList) packageInstallerService.mHistoricalSessions).size()) {
                 try {
-                    PackageInstallerHistoricalSession packageInstallerHistoricalSession = (PackageInstallerHistoricalSession) ((ArrayList) packageInstallerService.mHistoricalSessions).get(i2);
+                    PackageInstallerHistoricalSession packageInstallerHistoricalSession =
+                            (PackageInstallerHistoricalSession)
+                                    ((ArrayList) packageInstallerService.mHistoricalSessions)
+                                            .get(i2);
                     i2 = (i == -1 || packageInstallerHistoricalSession.userId == i) ? 0 : i2 + 1;
                     arrayList.add(packageInstallerHistoricalSession.generateInfo());
                 } catch (Throwable th) {
@@ -409,13 +498,24 @@ public final class BackgroundInstallControlService extends SystemService {
                 }
             }
         }
-        arrayList.removeIf(new PackageInstallerService$$ExternalSyntheticLambda0(packageInstallerService, snapshotComputer, callingUid, 0));
-        return new ParceledListSlice(arrayList).getList().stream().filter(new Predicate() { // from class: com.android.server.pm.BackgroundInstallControlService$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return str.equals(((PackageInstaller.SessionInfo) obj).getAppPackageName());
-            }
-        }).max(Comparator.comparingLong(new BackgroundInstallControlService$$ExternalSyntheticLambda2()));
+        arrayList.removeIf(
+                new PackageInstallerService$$ExternalSyntheticLambda0(
+                        packageInstallerService, snapshotComputer, callingUid, 0));
+        return new ParceledListSlice(arrayList)
+                .getList().stream()
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.android.server.pm.BackgroundInstallControlService$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return str.equals(
+                                                ((PackageInstaller.SessionInfo) obj)
+                                                        .getAppPackageName());
+                                    }
+                                })
+                        .max(
+                                Comparator.comparingLong(
+                                        new BackgroundInstallControlService$$ExternalSyntheticLambda2()));
     }
 
     public void initBackgroundInstalledPackages() {
@@ -438,14 +538,19 @@ public final class BackgroundInstallControlService extends SystemService {
                                 if (fieldNumber == 1) {
                                     str = protoInputStream.readString(1138166333441L);
                                 } else if (fieldNumber != 2) {
-                                    Slog.w("BackgroundInstallControlService", "Undefined field in proto: " + protoInputStream.getFieldNumber());
+                                    Slog.w(
+                                            "BackgroundInstallControlService",
+                                            "Undefined field in proto: "
+                                                    + protoInputStream.getFieldNumber());
                                 } else {
                                     i = protoInputStream.readInt(1120986464258L) - 1;
                                 }
                             }
                             protoInputStream.end(start);
                             if (str == null || i == -10000) {
-                                Slog.w("BackgroundInstallControlService", "Fails to get packageName or UserId from proto file");
+                                Slog.w(
+                                        "BackgroundInstallControlService",
+                                        "Fails to get packageName or UserId from proto file");
                             } else {
                                 this.mBackgroundInstalledPackages.add(i, str);
                             }
@@ -494,11 +599,17 @@ public final class BackgroundInstallControlService extends SystemService {
                 protoOutputStream.flush();
                 atomicFile.finishWrite(startWrite);
             } catch (Exception e) {
-                Slog.e("BackgroundInstallControlService", "Failed to finish write to states protobuf.", e);
+                Slog.e(
+                        "BackgroundInstallControlService",
+                        "Failed to finish write to states protobuf.",
+                        e);
                 atomicFile.failWrite(startWrite);
             }
         } catch (IOException e2) {
-            Slog.e("BackgroundInstallControlService", "Failed to start write to states protobuf.", e2);
+            Slog.e(
+                    "BackgroundInstallControlService",
+                    "Failed to start write to states protobuf.",
+                    e2);
         }
     }
 }

@@ -24,8 +24,7 @@ public final class JobSchedulerServiceDumpProto {
         public static final long IS_RESTRICTING = 1133871366146L;
         public static final long REASON = 1159641169921L;
 
-        public JobRestriction() {
-        }
+        public JobRestriction() {}
     }
 
     public final class RegisteredJob {
@@ -41,16 +40,14 @@ public final class JobSchedulerServiceDumpProto {
         public static final long IS_UID_BACKING_UP = 1133871366151L;
         public static final long RESTRICTIONS = 2246267895820L;
 
-        public RegisteredJob() {
-        }
+        public RegisteredJob() {}
     }
 
     public final class PriorityOverride {
         public static final long OVERRIDE_VALUE = 1172526071810L;
         public static final long UID = 1120986464257L;
 
-        public PriorityOverride() {
-        }
+        public PriorityOverride() {}
     }
 
     public final class PendingJob {
@@ -59,23 +56,20 @@ public final class JobSchedulerServiceDumpProto {
         public static final long INFO = 1146756268033L;
         public static final long PENDING_DURATION_MS = 1112396529668L;
 
-        public PendingJob() {
-        }
+        public PendingJob() {}
     }
 
     public final class ActiveJob {
         public static final long INACTIVE = 1146756268033L;
         public static final long RUNNING = 1146756268034L;
 
-        public ActiveJob() {
-        }
+        public ActiveJob() {}
 
         public final class InactiveJob {
             public static final long STOPPED_REASON = 1138166333442L;
             public static final long TIME_SINCE_STOPPED_MS = 1112396529665L;
 
-            public InactiveJob() {
-            }
+            public InactiveJob() {}
         }
 
         public final class RunningJob {
@@ -87,8 +81,7 @@ public final class JobSchedulerServiceDumpProto {
             public static final long TIME_SINCE_MADE_ACTIVE_MS = 1112396529670L;
             public static final long TIME_UNTIL_TIMEOUT_MS = 1112396529667L;
 
-            public RunningJob() {
-            }
+            public RunningJob() {}
         }
     }
 }

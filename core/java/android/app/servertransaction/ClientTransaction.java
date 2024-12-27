@@ -7,7 +7,9 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+
 import com.android.window.flags.Flags;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,22 +17,23 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class ClientTransaction implements Parcelable, ObjectPoolItem {
-    public static final Parcelable.Creator<ClientTransaction> CREATOR = new Parcelable.Creator<ClientTransaction>() { // from class: android.app.servertransaction.ClientTransaction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClientTransaction createFromParcel(Parcel in) {
-            return new ClientTransaction(in);
-        }
+    public static final Parcelable.Creator<ClientTransaction> CREATOR =
+            new Parcelable.Creator<ClientTransaction>() { // from class:
+                // android.app.servertransaction.ClientTransaction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClientTransaction createFromParcel(Parcel in) {
+                    return new ClientTransaction(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClientTransaction[] newArray(int size) {
-            return new ClientTransaction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClientTransaction[] newArray(int size) {
+                    return new ClientTransaction[size];
+                }
+            };
 
-    @Deprecated
-    private List<ClientTransactionItem> mActivityCallbacks;
+    @Deprecated private List<ClientTransactionItem> mActivityCallbacks;
     private IBinder mActivityToken;
     private IApplicationThread mClient;
     private ActivityLifecycleItem mLifecycleStateRequest;
@@ -120,8 +123,7 @@ public class ClientTransaction implements Parcelable, ObjectPoolItem {
         this.mClient.scheduleTransaction(this);
     }
 
-    private ClientTransaction() {
-    }
+    private ClientTransaction() {}
 
     public static ClientTransaction obtain(IApplicationThread client) {
         ClientTransaction instance = (ClientTransaction) ObjectPool.obtain(ClientTransaction.class);
@@ -183,7 +185,10 @@ public class ClientTransaction implements Parcelable, ObjectPoolItem {
         boolean readTransactionItems = in.readBoolean();
         if (readTransactionItems) {
             this.mTransactionItems = new ArrayList();
-            in.readParcelableList(this.mTransactionItems, getClass().getClassLoader(), ClientTransactionItem.class);
+            in.readParcelableList(
+                    this.mTransactionItems,
+                    getClass().getClassLoader(),
+                    ClientTransactionItem.class);
             int size = this.mTransactionItems.size();
             for (int i = 0; i < size; i++) {
                 ClientTransactionItem item = this.mTransactionItems.get(i);
@@ -195,12 +200,17 @@ public class ClientTransaction implements Parcelable, ObjectPoolItem {
             }
             return;
         }
-        this.mLifecycleStateRequest = (ActivityLifecycleItem) in.readParcelable(getClass().getClassLoader(), ActivityLifecycleItem.class);
+        this.mLifecycleStateRequest =
+                (ActivityLifecycleItem)
+                        in.readParcelable(getClass().getClassLoader(), ActivityLifecycleItem.class);
         setActivityTokenIfNotSet(this.mLifecycleStateRequest);
         boolean readActivityCallbacks = in.readBoolean();
         if (readActivityCallbacks) {
             this.mActivityCallbacks = new ArrayList();
-            in.readParcelableList(this.mActivityCallbacks, getClass().getClassLoader(), ClientTransactionItem.class);
+            in.readParcelableList(
+                    this.mActivityCallbacks,
+                    getClass().getClassLoader(),
+                    ClientTransactionItem.class);
             int size2 = this.mActivityCallbacks.size();
             for (int i2 = 0; this.mActivityToken == null && i2 < size2; i2++) {
                 setActivityTokenIfNotSet(this.mActivityCallbacks.get(i2));
@@ -221,7 +231,11 @@ public class ClientTransaction implements Parcelable, ObjectPoolItem {
             return false;
         }
         ClientTransaction other = (ClientTransaction) o;
-        if (Objects.equals(this.mTransactionItems, other.mTransactionItems) && Objects.equals(this.mActivityCallbacks, other.mActivityCallbacks) && Objects.equals(this.mLifecycleStateRequest, other.mLifecycleStateRequest) && this.mClient == other.mClient && Objects.equals(this.mActivityToken, other.mActivityToken)) {
+        if (Objects.equals(this.mTransactionItems, other.mTransactionItems)
+                && Objects.equals(this.mActivityCallbacks, other.mActivityCallbacks)
+                && Objects.equals(this.mLifecycleStateRequest, other.mLifecycleStateRequest)
+                && this.mClient == other.mClient
+                && Objects.equals(this.mActivityToken, other.mActivityToken)) {
             return true;
         }
         return false;
@@ -229,7 +243,12 @@ public class ClientTransaction implements Parcelable, ObjectPoolItem {
 
     public int hashCode() {
         int result = (17 * 31) + Objects.hashCode(this.mTransactionItems);
-        return (((((((result * 31) + Objects.hashCode(this.mActivityCallbacks)) * 31) + Objects.hashCode(this.mLifecycleStateRequest)) * 31) + Objects.hashCode(this.mClient)) * 31) + Objects.hashCode(this.mActivityToken);
+        return (((((((result * 31) + Objects.hashCode(this.mActivityCallbacks)) * 31)
+                                                + Objects.hashCode(this.mLifecycleStateRequest))
+                                        * 31)
+                                + Objects.hashCode(this.mClient))
+                        * 31)
+                + Objects.hashCode(this.mActivityToken);
     }
 
     public String toString() {

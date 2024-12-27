@@ -1,10 +1,10 @@
 package android.accessibilityservice;
 
-import android.accessibilityservice.TouchInteractionController;
 import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.view.MotionEvent;
 import android.view.accessibility.AccessibilityInteractionClient;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.LinkedList;
@@ -35,8 +35,7 @@ public final class TouchInteractionController {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    private @interface State {
-    }
+    private @interface State {}
 
     TouchInteractionController(AccessibilityService service, Object lock, int displayId) {
         this.mDisplayId = displayId;
@@ -97,12 +96,14 @@ public final class TouchInteractionController {
             final Callback callback = entries.keyAt(i);
             Executor executor = entries.valueAt(i);
             if (executor != null) {
-                executor.execute(new Runnable() { // from class: android.accessibilityservice.TouchInteractionController$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        TouchInteractionController.Callback.this.onMotionEvent(event);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                            // android.accessibilityservice.TouchInteractionController$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                TouchInteractionController.Callback.this.onMotionEvent(event);
+                            }
+                        });
             } else {
                 callback.onMotionEvent(event);
             }
@@ -120,12 +121,14 @@ public final class TouchInteractionController {
             final Callback callback = entries.keyAt(i);
             Executor executor = entries.valueAt(i);
             if (executor != null) {
-                executor.execute(new Runnable() { // from class: android.accessibilityservice.TouchInteractionController$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        TouchInteractionController.Callback.this.onStateChanged(state);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                            // android.accessibilityservice.TouchInteractionController$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                TouchInteractionController.Callback.this.onStateChanged(state);
+                            }
+                        });
             } else {
                 callback.onStateChanged(state);
             }
@@ -138,7 +141,8 @@ public final class TouchInteractionController {
 
     private void setServiceDetectsGestures(boolean mode) {
         AccessibilityInteractionClient.getInstance();
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
         if (connection != null) {
             try {
                 connection.setServiceDetectsGesturesEnabled(this.mDisplayId, mode);
@@ -152,7 +156,8 @@ public final class TouchInteractionController {
     public void requestTouchExploration() {
         validateTransitionRequest();
         AccessibilityInteractionClient.getInstance();
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
         if (connection != null) {
             try {
                 connection.requestTouchExploration(this.mDisplayId);
@@ -169,7 +174,8 @@ public final class TouchInteractionController {
             throw new IllegalArgumentException("Invalid pointer id: " + pointerId);
         }
         AccessibilityInteractionClient.getInstance();
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
         if (connection != null) {
             try {
                 connection.requestDragging(this.mDisplayId, pointerId);
@@ -183,7 +189,8 @@ public final class TouchInteractionController {
     public void requestDelegating() {
         validateTransitionRequest();
         AccessibilityInteractionClient.getInstance();
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
         if (connection != null) {
             try {
                 connection.requestDelegating(this.mDisplayId);
@@ -196,7 +203,8 @@ public final class TouchInteractionController {
 
     public void performClick() {
         AccessibilityInteractionClient.getInstance();
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
         if (connection != null) {
             try {
                 connection.onDoubleTap(this.mDisplayId);
@@ -208,7 +216,8 @@ public final class TouchInteractionController {
 
     public void performLongClickAndStartDrag() {
         AccessibilityInteractionClient.getInstance();
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mService.getConnectionId());
         if (connection != null) {
             try {
                 connection.onDoubleTapAndHold(this.mDisplayId);
@@ -220,10 +229,12 @@ public final class TouchInteractionController {
 
     private void validateTransitionRequest() {
         if (!this.mServiceDetectsGestures || this.mCallbacks.size() == 0) {
-            throw new IllegalStateException("State transitions are not allowed without first adding a callback.");
+            throw new IllegalStateException(
+                    "State transitions are not allowed without first adding a callback.");
         }
         if (this.mState == 4 || this.mState == 2) {
-            throw new IllegalStateException("State transition requests are not allowed in " + stateToString(this.mState));
+            throw new IllegalStateException(
+                    "State transition requests are not allowed in " + stateToString(this.mState));
         }
     }
 

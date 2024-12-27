@@ -10,6 +10,7 @@ import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.asn1.x509.Certificate;
 import com.android.internal.org.bouncycastle.asn1.x509.X509CertificateStructure;
 import com.android.internal.org.bouncycastle.asn1.x509.X509Name;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -65,7 +66,8 @@ public class IssuerAndSerialNumber extends ASN1Object {
         return this.serialNumber;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         v.add(this.name);

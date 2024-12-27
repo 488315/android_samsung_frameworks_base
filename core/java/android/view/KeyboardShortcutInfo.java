@@ -3,23 +3,26 @@ package android.view;
 import android.graphics.drawable.Icon;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes4.dex */
 public final class KeyboardShortcutInfo implements Parcelable {
-    public static final Parcelable.Creator<KeyboardShortcutInfo> CREATOR = new Parcelable.Creator<KeyboardShortcutInfo>() { // from class: android.view.KeyboardShortcutInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyboardShortcutInfo createFromParcel(Parcel source) {
-            return new KeyboardShortcutInfo(source);
-        }
+    public static final Parcelable.Creator<KeyboardShortcutInfo> CREATOR =
+            new Parcelable.Creator<
+                    KeyboardShortcutInfo>() { // from class: android.view.KeyboardShortcutInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyboardShortcutInfo createFromParcel(Parcel source) {
+                    return new KeyboardShortcutInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyboardShortcutInfo[] newArray(int size) {
-            return new KeyboardShortcutInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyboardShortcutInfo[] newArray(int size) {
+                    return new KeyboardShortcutInfo[size];
+                }
+            };
     private final char mBaseCharacter;
     private Icon mIcon;
     private final int mKeycode;

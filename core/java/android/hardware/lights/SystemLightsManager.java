@@ -1,12 +1,12 @@
 package android.hardware.lights;
 
 import android.content.Context;
-import android.hardware.lights.ILightsManager;
-import android.hardware.lights.LightsManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.CloseGuard;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.ref.Reference;
 import java.util.List;
 
@@ -16,7 +16,10 @@ public final class SystemLightsManager extends LightsManager {
     private final ILightsManager mService;
 
     public SystemLightsManager(Context context) throws ServiceManager.ServiceNotFoundException {
-        this(context, ILightsManager.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.LIGHTS_SERVICE)));
+        this(
+                context,
+                ILightsManager.Stub.asInterface(
+                        ServiceManager.getServiceOrThrow(Context.LIGHTS_SERVICE)));
     }
 
     public SystemLightsManager(Context context, ILightsManager service) {
@@ -64,7 +67,8 @@ public final class SystemLightsManager extends LightsManager {
         }
     }
 
-    public final class SystemLightsSession extends LightsManager.LightsSession implements AutoCloseable {
+    public final class SystemLightsSession extends LightsManager.LightsSession
+            implements AutoCloseable {
         private final CloseGuard mCloseGuard;
         private boolean mClosed;
 

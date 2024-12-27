@@ -10,6 +10,7 @@ import android.net.NetworkStack;
 import android.os.Binder;
 import android.os.UserHandle;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -23,28 +24,29 @@ public class LocationPermissionChecker {
     private final Context mContext;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LocationPermissionCheckStatus {
-    }
+    public @interface LocationPermissionCheckStatus {}
 
     public LocationPermissionChecker(Context context) {
         this.mContext = context;
         this.mAppOpsManager = (AppOpsManager) this.mContext.getSystemService(AppOpsManager.class);
     }
 
-    public boolean checkLocationPermission(String pkgName, String featureId, int uid, String message) {
+    public boolean checkLocationPermission(
+            String pkgName, String featureId, int uid, String message) {
         return checkLocationPermissionInternal(pkgName, featureId, uid, message) == 0;
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:5:0x002d, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int checkLocationPermissionWithDetailInfo(java.lang.String r5, java.lang.String r6, int r7, java.lang.String r8) {
+    public int checkLocationPermissionWithDetailInfo(
+            java.lang.String r5, java.lang.String r6, int r7, java.lang.String r8) {
         /*
             r4 = this;
             int r0 = r4.checkLocationPermissionInternal(r5, r6, r7, r8)
@@ -73,10 +75,14 @@ public class LocationPermissionChecker {
         L2d:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.net.module.util.LocationPermissionChecker.checkLocationPermissionWithDetailInfo(java.lang.String, java.lang.String, int, java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.net.module.util.LocationPermissionChecker.checkLocationPermissionWithDetailInfo(java.lang.String,"
+                    + " java.lang.String, int, java.lang.String):int");
     }
 
-    public void enforceLocationPermission(String pkgName, String featureId, int uid, String message) throws SecurityException {
+    public void enforceLocationPermission(String pkgName, String featureId, int uid, String message)
+            throws SecurityException {
         int result = checkLocationPermissionInternal(pkgName, featureId, uid, message);
         switch (result) {
             case 1:
@@ -88,9 +94,13 @@ public class LocationPermissionChecker {
         }
     }
 
-    private int checkLocationPermissionInternal(String pkgName, String featureId, int uid, String message) {
+    private int checkLocationPermissionInternal(
+            String pkgName, String featureId, int uid, String message) {
         checkPackage(uid, pkgName);
-        if (checkNetworkSettingsPermission(uid) || checkNetworkSetupWizardPermission(uid) || checkNetworkStackPermission(uid) || checkMainlineNetworkStackPermission(uid)) {
+        if (checkNetworkSettingsPermission(uid)
+                || checkNetworkSetupWizardPermission(uid)
+                || checkNetworkStackPermission(uid)
+                || checkMainlineNetworkStackPermission(uid)) {
             return 0;
         }
         if (isLocationModeEnabled()) {
@@ -99,7 +109,12 @@ public class LocationPermissionChecker {
         return 1;
     }
 
-    public boolean checkCallersLocationPermission(String pkgName, String featureId, int uid, boolean coarseForTargetSdkLessThanQ, String message) {
+    public boolean checkCallersLocationPermission(
+            String pkgName,
+            String featureId,
+            int uid,
+            boolean coarseForTargetSdkLessThanQ,
+            String message) {
         String permissionType;
         boolean isTargetSdkLessThanQ = isTargetSdkLessThan(pkgName, 29, uid);
         if (coarseForTargetSdkLessThanQ && isTargetSdkLessThanQ) {
@@ -110,18 +125,22 @@ public class LocationPermissionChecker {
         if (getUidPermission(permissionType, uid) == -1) {
             return false;
         }
-        boolean isFineLocationAllowed = noteAppOpAllowed(AppOpsManager.OPSTR_FINE_LOCATION, pkgName, featureId, uid, message);
+        boolean isFineLocationAllowed =
+                noteAppOpAllowed(
+                        AppOpsManager.OPSTR_FINE_LOCATION, pkgName, featureId, uid, message);
         if (isFineLocationAllowed) {
             return true;
         }
         if (coarseForTargetSdkLessThanQ && isTargetSdkLessThanQ) {
-            return noteAppOpAllowed(AppOpsManager.OPSTR_COARSE_LOCATION, pkgName, featureId, uid, message);
+            return noteAppOpAllowed(
+                    AppOpsManager.OPSTR_COARSE_LOCATION, pkgName, featureId, uid, message);
         }
         return false;
     }
 
     public boolean isLocationModeEnabled() {
-        LocationManager LocationManager = (LocationManager) this.mContext.getSystemService(LocationManager.class);
+        LocationManager LocationManager =
+                (LocationManager) this.mContext.getSystemService(LocationManager.class);
         try {
             return LocationManager.isLocationEnabledForUser(UserHandle.of(getCurrentUser()));
         } catch (Exception e) {
@@ -133,7 +152,12 @@ public class LocationPermissionChecker {
     private boolean isTargetSdkLessThan(String packageName, int versionCode, int callingUid) {
         long ident = Binder.clearCallingIdentity();
         try {
-            if (this.mContext.getPackageManager().getApplicationInfoAsUser(packageName, 0, UserHandle.getUserHandleForUid(callingUid)).targetSdkVersion < versionCode) {
+            if (this.mContext
+                            .getPackageManager()
+                            .getApplicationInfoAsUser(
+                                    packageName, 0, UserHandle.getUserHandleForUid(callingUid))
+                            .targetSdkVersion
+                    < versionCode) {
                 Binder.restoreCallingIdentity(ident);
                 return true;
             }
@@ -146,7 +170,8 @@ public class LocationPermissionChecker {
         return false;
     }
 
-    private boolean noteAppOpAllowed(String op, String pkgName, String featureId, int uid, String message) {
+    private boolean noteAppOpAllowed(
+            String op, String pkgName, String featureId, int uid, String message) {
         return this.mAppOpsManager.noteOp(op, uid, pkgName, featureId, message) == 0;
     }
 

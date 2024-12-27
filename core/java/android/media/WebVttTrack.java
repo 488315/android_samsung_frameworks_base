@@ -1,7 +1,7 @@
 package android.media;
 
-import android.media.SubtitleTrack;
 import android.util.Log;
+
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +40,11 @@ class WebVttTrack extends SubtitleTrack implements WebVttCueListener {
             String str = new String(data, "UTF-8");
             synchronized (this.mParser) {
                 if (this.mCurrentRunID != null && runID != this.mCurrentRunID.longValue()) {
-                    throw new IllegalStateException("Run #" + this.mCurrentRunID + " in progress.  Cannot process run #" + runID);
+                    throw new IllegalStateException(
+                            "Run #"
+                                    + this.mCurrentRunID
+                                    + " in progress.  Cannot process run #"
+                                    + runID);
                 }
                 this.mCurrentRunID = Long.valueOf(runID);
                 this.mParser.parse(str);
@@ -71,11 +75,18 @@ class WebVttTrack extends SubtitleTrack implements WebVttCueListener {
             }
             cue.mLines = this.mExtractor.getText();
             if (this.DEBUG) {
-                Log.v(TAG, cue.appendLinesToBuilder(cue.appendStringsToBuilder(new StringBuilder()).append(" simplified to: ")).toString());
+                Log.v(
+                        TAG,
+                        cue.appendLinesToBuilder(
+                                        cue.appendStringsToBuilder(new StringBuilder())
+                                                .append(" simplified to: "))
+                                .toString());
             }
             for (TextTrackCueSpan[] line : cue.mLines) {
                 for (TextTrackCueSpan span : line) {
-                    if (span.mTimestampMs > cue.mStartTimeMs && span.mTimestampMs < cue.mEndTimeMs && !this.mTimestamps.contains(Long.valueOf(span.mTimestampMs))) {
+                    if (span.mTimestampMs > cue.mStartTimeMs
+                            && span.mTimestampMs < cue.mEndTimeMs
+                            && !this.mTimestamps.contains(Long.valueOf(span.mTimestampMs))) {
                         this.mTimestamps.add(Long.valueOf(span.mTimestampMs));
                     }
                 }
@@ -108,7 +119,11 @@ class WebVttTrack extends SubtitleTrack implements WebVttCueListener {
         }
         if (this.DEBUG && this.mTimeProvider != null) {
             try {
-                Log.d(TAG, "at " + (this.mTimeProvider.getCurrentTimeUs(false, true) / 1000) + " ms the active cues are:");
+                Log.d(
+                        TAG,
+                        "at "
+                                + (this.mTimeProvider.getCurrentTimeUs(false, true) / 1000)
+                                + " ms the active cues are:");
             } catch (IllegalStateException e) {
                 Log.d(TAG, "at (illegal state) the active cues are:");
             }

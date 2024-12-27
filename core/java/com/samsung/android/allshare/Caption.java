@@ -4,27 +4,31 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.sec.clipboard.util.HtmlUtils;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
 /* loaded from: classes3.dex */
 public class Caption implements Parcelable {
-    public static final Parcelable.Creator<Caption> CREATOR = new Parcelable.Creator<Caption>() { // from class: com.samsung.android.allshare.Caption.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Caption[] newArray(int size) {
-            return new Caption[size];
-        }
+    public static final Parcelable.Creator<Caption> CREATOR =
+            new Parcelable.Creator<
+                    Caption>() { // from class: com.samsung.android.allshare.Caption.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Caption[] newArray(int size) {
+                    return new Caption[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Caption createFromParcel(Parcel source) {
-            return new Caption(source);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Caption createFromParcel(Parcel source) {
+                    return new Caption(source);
+                }
+            };
     private static final String TAG = "Caption";
     private String mCaptionType;
     private String mCaptionUri;
@@ -113,8 +117,7 @@ public class Caption implements Parcelable {
         }
     }
 
-    public Caption() {
-    }
+    public Caption() {}
 
     public void setName(String name) {
         if (name == null) {
@@ -279,7 +282,9 @@ public class Caption implements Parcelable {
                                             } else if (attributeName.equals("name")) {
                                                 caption.setName(parser.getAttributeValue(i));
                                             } else if (attributeName.equals("captionType")) {
-                                                caption.setCaptionType(CaptionType.stringToEnum(parser.getAttributeValue(i)));
+                                                caption.setCaptionType(
+                                                        CaptionType.stringToEnum(
+                                                                parser.getAttributeValue(i)));
                                             } else if (attributeName.equals("language")) {
                                                 String language = parser.getAttributeValue(i);
                                                 caption.setLanguage(language);
@@ -320,11 +325,29 @@ public class Caption implements Parcelable {
             return null;
         }
         String textString = htmlString.replaceAll("<br>", "\n");
-        return textString.replaceAll("&gt;", ">").replaceAll("&lt;", "<").replaceAll("&quot;", "\"").replaceAll("&nbsp;", " ").replaceAll("&amp;", "&").replaceAll(HtmlUtils.HTML_LINE_FEED, "\n");
+        return textString
+                .replaceAll("&gt;", ">")
+                .replaceAll("&lt;", "<")
+                .replaceAll("&quot;", "\"")
+                .replaceAll("&nbsp;", " ")
+                .replaceAll("&amp;", "&")
+                .replaceAll(HtmlUtils.HTML_LINE_FEED, "\n");
     }
 
     public String toString() {
-        return "Caption ResourceURI[" + this.mResourceUri + "] Name[" + this.mName + "] CaptionURI[" + this.mCaptionUri + "] CaptionType[" + this.mCaptionType + "] Language[" + this.mLanguage + "] encoding[" + this.mEncoding + NavigationBarInflaterView.SIZE_MOD_END;
+        return "Caption ResourceURI["
+                + this.mResourceUri
+                + "] Name["
+                + this.mName
+                + "] CaptionURI["
+                + this.mCaptionUri
+                + "] CaptionType["
+                + this.mCaptionType
+                + "] Language["
+                + this.mLanguage
+                + "] encoding["
+                + this.mEncoding
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     @Override // android.os.Parcelable

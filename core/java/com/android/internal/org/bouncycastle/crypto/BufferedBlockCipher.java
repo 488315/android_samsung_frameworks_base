@@ -9,8 +9,7 @@ public class BufferedBlockCipher {
     protected boolean partialBlockOkay;
     protected boolean pgpCFB;
 
-    protected BufferedBlockCipher() {
-    }
+    protected BufferedBlockCipher() {}
 
     public BufferedBlockCipher(BlockCipher cipher) {
         this.cipher = cipher;
@@ -34,7 +33,8 @@ public class BufferedBlockCipher {
         return this.cipher;
     }
 
-    public void init(boolean forEncryption, CipherParameters params) throws IllegalArgumentException {
+    public void init(boolean forEncryption, CipherParameters params)
+            throws IllegalArgumentException {
         this.forEncryption = forEncryption;
         reset();
         this.cipher.init(forEncryption, params);
@@ -63,7 +63,8 @@ public class BufferedBlockCipher {
         return this.bufOff + length;
     }
 
-    public int processByte(byte in, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int processByte(byte in, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         byte[] bArr = this.buf;
         int i = this.bufOff;
         this.bufOff = i + 1;
@@ -76,7 +77,8 @@ public class BufferedBlockCipher {
         return resultLen;
     }
 
-    public int processBytes(byte[] in, int inOff, int len, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int processBytes(byte[] in, int inOff, int len, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         if (len < 0) {
             throw new IllegalArgumentException("Can't have a negative input length!");
         }
@@ -102,14 +104,16 @@ public class BufferedBlockCipher {
         System.arraycopy(in, inOff, this.buf, this.bufOff, len);
         this.bufOff += len;
         if (this.bufOff == this.buf.length) {
-            int resultLen2 = resultLen + this.cipher.processBlock(this.buf, 0, out, outOff + resultLen);
+            int resultLen2 =
+                    resultLen + this.cipher.processBlock(this.buf, 0, out, outOff + resultLen);
             this.bufOff = 0;
             return resultLen2;
         }
         return resultLen;
     }
 
-    public int doFinal(byte[] out, int outOff) throws DataLengthException, IllegalStateException, InvalidCipherTextException {
+    public int doFinal(byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException, InvalidCipherTextException {
         int resultLen = 0;
         try {
             if (this.bufOff + outOff > out.length) {

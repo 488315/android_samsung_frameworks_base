@@ -28,7 +28,9 @@ public final class PortRole implements Parcelable {
                 portRole._value = valueOf2;
             } else {
                 if (readInt != 2) {
-                    throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(readInt, "union: unknown tag: "));
+                    throw new IllegalArgumentException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                    readInt, "union: unknown tag: "));
                 }
                 Byte valueOf3 = Byte.valueOf(parcel.readByte());
                 portRole._tag = readInt;
@@ -53,14 +55,16 @@ public final class PortRole implements Parcelable {
         if (i == 2) {
             return "mode";
         }
-        throw new IllegalStateException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "unknown field: "));
+        throw new IllegalStateException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "unknown field: "));
     }
 
     public final void _assertTag(int i) {
         if (this._tag == i) {
             return;
         }
-        throw new IllegalStateException("bad access: " + _tagString(i) + ", " + _tagString(this._tag) + " is available.");
+        throw new IllegalStateException(
+                "bad access: " + _tagString(i) + ", " + _tagString(this._tag) + " is available.");
     }
 
     @Override // android.os.Parcelable

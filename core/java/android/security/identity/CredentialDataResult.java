@@ -17,8 +17,7 @@ public abstract class CredentialDataResult {
         public static final int STATUS_USER_AUTHENTICATION_FAILED = 4;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Status {
-        }
+        public @interface Status {}
 
         byte[] getEntry(String str, String str2);
 
@@ -41,8 +40,7 @@ public abstract class CredentialDataResult {
 
     public abstract byte[] getStaticAuthenticationData();
 
-    protected CredentialDataResult() {
-    }
+    protected CredentialDataResult() {}
 
     public byte[] getDeviceSignature() {
         throw new UnsupportedOperationException();

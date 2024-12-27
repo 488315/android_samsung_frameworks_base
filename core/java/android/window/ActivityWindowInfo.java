@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public final class ActivityWindowInfo implements Parcelable {
-    public static final Parcelable.Creator<ActivityWindowInfo> CREATOR = new Parcelable.Creator<ActivityWindowInfo>() { // from class: android.window.ActivityWindowInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityWindowInfo createFromParcel(Parcel in) {
-            return new ActivityWindowInfo(in);
-        }
+    public static final Parcelable.Creator<ActivityWindowInfo> CREATOR =
+            new Parcelable.Creator<
+                    ActivityWindowInfo>() { // from class: android.window.ActivityWindowInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityWindowInfo createFromParcel(Parcel in) {
+                    return new ActivityWindowInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityWindowInfo[] newArray(int size) {
-            return new ActivityWindowInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityWindowInfo[] newArray(int size) {
+                    return new ActivityWindowInfo[size];
+                }
+            };
     private boolean mIsEmbedded;
     private final Rect mTaskBounds;
     private final Rect mTaskFragmentBounds;
@@ -84,17 +86,27 @@ public final class ActivityWindowInfo implements Parcelable {
             return false;
         }
         ActivityWindowInfo other = (ActivityWindowInfo) o;
-        if (this.mIsEmbedded == other.mIsEmbedded && this.mTaskBounds.equals(other.mTaskBounds) && this.mTaskFragmentBounds.equals(other.mTaskFragmentBounds)) {
+        if (this.mIsEmbedded == other.mIsEmbedded
+                && this.mTaskBounds.equals(other.mTaskBounds)
+                && this.mTaskFragmentBounds.equals(other.mTaskFragmentBounds)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return (((((17 * 31) + (this.mIsEmbedded ? 1 : 0)) * 31) + this.mTaskBounds.hashCode()) * 31) + this.mTaskFragmentBounds.hashCode();
+        return (((((17 * 31) + (this.mIsEmbedded ? 1 : 0)) * 31) + this.mTaskBounds.hashCode())
+                        * 31)
+                + this.mTaskFragmentBounds.hashCode();
     }
 
     public String toString() {
-        return "ActivityWindowInfo{isEmbedded=" + this.mIsEmbedded + ", taskBounds=" + this.mTaskBounds + ", taskFragmentBounds=" + this.mTaskFragmentBounds + "}";
+        return "ActivityWindowInfo{isEmbedded="
+                + this.mIsEmbedded
+                + ", taskBounds="
+                + this.mTaskBounds
+                + ", taskFragmentBounds="
+                + this.mTaskFragmentBounds
+                + "}";
     }
 }

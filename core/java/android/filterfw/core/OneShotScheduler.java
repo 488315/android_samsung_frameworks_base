@@ -1,6 +1,7 @@
 package android.filterfw.core;
 
 import android.util.Log;
+
 import java.util.HashMap;
 
 /* loaded from: classes.dex */
@@ -37,7 +38,12 @@ public class OneShotScheduler extends RoundRobinScheduler {
                     this.scheduled.put(filter.getName(), 1);
                 }
                 if (this.mLogVerbose) {
-                    Log.v(TAG, "Scheduling filter \"" + filter.getName() + "\" of type " + filter.getFilterClassName());
+                    Log.v(
+                            TAG,
+                            "Scheduling filter \""
+                                    + filter.getName()
+                                    + "\" of type "
+                                    + filter.getFilterClassName());
                 }
                 return filter;
             }

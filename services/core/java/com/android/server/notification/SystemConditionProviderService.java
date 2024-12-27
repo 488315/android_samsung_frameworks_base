@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.service.notification.ConditionProviderService;
 import android.service.notification.IConditionProvider;
 import android.util.TimeUtils;
+
 import java.io.PrintWriter;
 import java.util.Date;
 

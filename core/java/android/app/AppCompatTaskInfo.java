@@ -3,24 +3,27 @@ package android.app;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes.dex */
 public class AppCompatTaskInfo implements Parcelable {
-    public static final Parcelable.Creator<AppCompatTaskInfo> CREATOR = new Parcelable.Creator<AppCompatTaskInfo>() { // from class: android.app.AppCompatTaskInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppCompatTaskInfo createFromParcel(Parcel in) {
-            return new AppCompatTaskInfo(in);
-        }
+    public static final Parcelable.Creator<AppCompatTaskInfo> CREATOR =
+            new Parcelable.Creator<
+                    AppCompatTaskInfo>() { // from class: android.app.AppCompatTaskInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppCompatTaskInfo createFromParcel(Parcel in) {
+                    return new AppCompatTaskInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppCompatTaskInfo[] newArray(int size) {
-            return new AppCompatTaskInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppCompatTaskInfo[] newArray(int size) {
+                    return new AppCompatTaskInfo[size];
+                }
+            };
     private static final int FLAGS_COMPAT_UI_INTERESTED = 99307;
     private static final int FLAGS_ORGANIZER_INTERESTED = 99296;
     private static final int FLAG_BASE = 1;
@@ -49,8 +52,7 @@ public class AppCompatTaskInfo implements Parcelable {
     public int topActivityLetterboxWidth;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TopActivityFlag {
-    }
+    public @interface TopActivityFlag {}
 
     private AppCompatTaskInfo() {
         this.topActivityLetterboxVerticalPosition = -1;
@@ -83,7 +85,10 @@ public class AppCompatTaskInfo implements Parcelable {
     }
 
     public boolean hasCompatUI() {
-        return isTopActivityInSizeCompat() || eligibleForLetterboxEducation() || isLetterboxDoubleTapEnabled() || eligibleForUserAspectRatioButton();
+        return isTopActivityInSizeCompat()
+                || eligibleForLetterboxEducation()
+                || isLetterboxDoubleTapEnabled()
+                || eligibleForUserAspectRatioButton();
     }
 
     public boolean isTopActivityPillarboxed() {
@@ -191,11 +196,33 @@ public class AppCompatTaskInfo implements Parcelable {
     }
 
     public boolean equalsForTaskOrganizer(AppCompatTaskInfo that) {
-        return that != null && (this.mTopActivityFlags & FLAGS_ORGANIZER_INTERESTED) == (FLAGS_ORGANIZER_INTERESTED & that.mTopActivityFlags) && this.topActivityLetterboxVerticalPosition == that.topActivityLetterboxVerticalPosition && this.topActivityLetterboxWidth == that.topActivityLetterboxWidth && this.topActivityLetterboxHeight == that.topActivityLetterboxHeight && this.topActivityLetterboxAppWidth == that.topActivityLetterboxAppWidth && this.topActivityLetterboxAppHeight == that.topActivityLetterboxAppHeight && this.topActivityLetterboxHorizontalPosition == that.topActivityLetterboxHorizontalPosition && this.cameraCompatTaskInfo.equalsForTaskOrganizer(that.cameraCompatTaskInfo);
+        return that != null
+                && (this.mTopActivityFlags & FLAGS_ORGANIZER_INTERESTED)
+                        == (FLAGS_ORGANIZER_INTERESTED & that.mTopActivityFlags)
+                && this.topActivityLetterboxVerticalPosition
+                        == that.topActivityLetterboxVerticalPosition
+                && this.topActivityLetterboxWidth == that.topActivityLetterboxWidth
+                && this.topActivityLetterboxHeight == that.topActivityLetterboxHeight
+                && this.topActivityLetterboxAppWidth == that.topActivityLetterboxAppWidth
+                && this.topActivityLetterboxAppHeight == that.topActivityLetterboxAppHeight
+                && this.topActivityLetterboxHorizontalPosition
+                        == that.topActivityLetterboxHorizontalPosition
+                && this.cameraCompatTaskInfo.equalsForTaskOrganizer(that.cameraCompatTaskInfo);
     }
 
     public boolean equalsForCompatUi(AppCompatTaskInfo that) {
-        return that != null && (this.mTopActivityFlags & FLAGS_COMPAT_UI_INTERESTED) == (FLAGS_COMPAT_UI_INTERESTED & that.mTopActivityFlags) && this.topActivityLetterboxVerticalPosition == that.topActivityLetterboxVerticalPosition && this.topActivityLetterboxHorizontalPosition == that.topActivityLetterboxHorizontalPosition && this.topActivityLetterboxWidth == that.topActivityLetterboxWidth && this.topActivityLetterboxHeight == that.topActivityLetterboxHeight && this.topActivityLetterboxAppWidth == that.topActivityLetterboxAppWidth && this.topActivityLetterboxAppHeight == that.topActivityLetterboxAppHeight && this.cameraCompatTaskInfo.equalsForCompatUi(that.cameraCompatTaskInfo);
+        return that != null
+                && (this.mTopActivityFlags & FLAGS_COMPAT_UI_INTERESTED)
+                        == (FLAGS_COMPAT_UI_INTERESTED & that.mTopActivityFlags)
+                && this.topActivityLetterboxVerticalPosition
+                        == that.topActivityLetterboxVerticalPosition
+                && this.topActivityLetterboxHorizontalPosition
+                        == that.topActivityLetterboxHorizontalPosition
+                && this.topActivityLetterboxWidth == that.topActivityLetterboxWidth
+                && this.topActivityLetterboxHeight == that.topActivityLetterboxHeight
+                && this.topActivityLetterboxAppWidth == that.topActivityLetterboxAppWidth
+                && this.topActivityLetterboxAppHeight == that.topActivityLetterboxAppHeight
+                && this.cameraCompatTaskInfo.equalsForCompatUi(that.cameraCompatTaskInfo);
     }
 
     void readFromParcel(Parcel source) {
@@ -206,7 +233,8 @@ public class AppCompatTaskInfo implements Parcelable {
         this.topActivityLetterboxHeight = source.readInt();
         this.topActivityLetterboxAppWidth = source.readInt();
         this.topActivityLetterboxAppHeight = source.readInt();
-        this.cameraCompatTaskInfo = (CameraCompatTaskInfo) source.readTypedObject(CameraCompatTaskInfo.CREATOR);
+        this.cameraCompatTaskInfo =
+                (CameraCompatTaskInfo) source.readTypedObject(CameraCompatTaskInfo.CREATOR);
         this.topActivityBounds = (Rect) source.readTypedObject(Rect.CREATOR);
     }
 
@@ -224,7 +252,45 @@ public class AppCompatTaskInfo implements Parcelable {
     }
 
     public String toString() {
-        return "AppCompatTaskInfo { topActivityInSizeCompat=" + isTopActivityInSizeCompat() + " eligibleForLetterboxEducation= " + eligibleForLetterboxEducation() + " isLetterboxEducationEnabled= " + isLetterboxEducationEnabled() + " isLetterboxDoubleTapEnabled= " + isLetterboxDoubleTapEnabled() + " eligibleForUserAspectRatioButton= " + eligibleForUserAspectRatioButton() + " topActivityBoundsLetterboxed= " + isTopActivityLetterboxed() + " isFromLetterboxDoubleTap= " + isFromLetterboxDoubleTap() + " topActivityLetterboxVerticalPosition= " + this.topActivityLetterboxVerticalPosition + " topActivityLetterboxHorizontalPosition= " + this.topActivityLetterboxHorizontalPosition + " topActivityLetterboxWidth=" + this.topActivityLetterboxWidth + " topActivityLetterboxHeight=" + this.topActivityLetterboxHeight + " topActivityLetterboxAppWidth=" + this.topActivityLetterboxAppWidth + " topActivityLetterboxAppHeight=" + this.topActivityLetterboxAppHeight + " isUserFullscreenOverrideEnabled=" + isUserFullscreenOverrideEnabled() + " isSystemFullscreenOverrideEnabled=" + isSystemFullscreenOverrideEnabled() + " hasMinAspectRatioOverride=" + hasMinAspectRatioOverride() + " cameraCompatTaskInfo=" + this.cameraCompatTaskInfo.toString() + " topActivityBounds=" + this.topActivityBounds + " topActivityInDisplayCompat=" + this.topActivityInDisplayCompat + "}";
+        return "AppCompatTaskInfo { topActivityInSizeCompat="
+                + isTopActivityInSizeCompat()
+                + " eligibleForLetterboxEducation= "
+                + eligibleForLetterboxEducation()
+                + " isLetterboxEducationEnabled= "
+                + isLetterboxEducationEnabled()
+                + " isLetterboxDoubleTapEnabled= "
+                + isLetterboxDoubleTapEnabled()
+                + " eligibleForUserAspectRatioButton= "
+                + eligibleForUserAspectRatioButton()
+                + " topActivityBoundsLetterboxed= "
+                + isTopActivityLetterboxed()
+                + " isFromLetterboxDoubleTap= "
+                + isFromLetterboxDoubleTap()
+                + " topActivityLetterboxVerticalPosition= "
+                + this.topActivityLetterboxVerticalPosition
+                + " topActivityLetterboxHorizontalPosition= "
+                + this.topActivityLetterboxHorizontalPosition
+                + " topActivityLetterboxWidth="
+                + this.topActivityLetterboxWidth
+                + " topActivityLetterboxHeight="
+                + this.topActivityLetterboxHeight
+                + " topActivityLetterboxAppWidth="
+                + this.topActivityLetterboxAppWidth
+                + " topActivityLetterboxAppHeight="
+                + this.topActivityLetterboxAppHeight
+                + " isUserFullscreenOverrideEnabled="
+                + isUserFullscreenOverrideEnabled()
+                + " isSystemFullscreenOverrideEnabled="
+                + isSystemFullscreenOverrideEnabled()
+                + " hasMinAspectRatioOverride="
+                + hasMinAspectRatioOverride()
+                + " cameraCompatTaskInfo="
+                + this.cameraCompatTaskInfo.toString()
+                + " topActivityBounds="
+                + this.topActivityBounds
+                + " topActivityInDisplayCompat="
+                + this.topActivityInDisplayCompat
+                + "}";
     }
 
     private void setTopActivityFlag(int flag, boolean enable) {

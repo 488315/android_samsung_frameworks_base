@@ -2,6 +2,7 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -9,19 +10,21 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class SignalThresholdInfo implements Parcelable {
-    public static final Parcelable.Creator<SignalThresholdInfo> CREATOR = new Parcelable.Creator<SignalThresholdInfo>() { // from class: android.telephony.SignalThresholdInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalThresholdInfo createFromParcel(Parcel in) {
-            return new SignalThresholdInfo(in);
-        }
+    public static final Parcelable.Creator<SignalThresholdInfo> CREATOR =
+            new Parcelable.Creator<
+                    SignalThresholdInfo>() { // from class: android.telephony.SignalThresholdInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalThresholdInfo createFromParcel(Parcel in) {
+                    return new SignalThresholdInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalThresholdInfo[] newArray(int size) {
-            return new SignalThresholdInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalThresholdInfo[] newArray(int size) {
+                    return new SignalThresholdInfo[size];
+                }
+            };
     private static final int HYSTERESIS_DB_DEFAULT = 2;
     public static final int HYSTERESIS_DB_MINIMUM = 0;
     public static final int HYSTERESIS_MS_DISABLED = 0;
@@ -63,10 +66,15 @@ public final class SignalThresholdInfo implements Parcelable {
     private final int[] mThresholds;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SignalMeasurementType {
-    }
+    public @interface SignalMeasurementType {}
 
-    private SignalThresholdInfo(int ran, int signalMeasurementType, int hysteresisMs, int hysteresisDb, int[] thresholds, boolean isEnabled) {
+    private SignalThresholdInfo(
+            int ran,
+            int signalMeasurementType,
+            int hysteresisMs,
+            int hysteresisDb,
+            int[] thresholds,
+            boolean isEnabled) {
         Objects.requireNonNull(thresholds, "thresholds must not be null");
         validateRanWithMeasurementType(ran, signalMeasurementType);
         validateThresholdRange(signalMeasurementType, thresholds);
@@ -129,7 +137,13 @@ public final class SignalThresholdInfo implements Parcelable {
         }
 
         public SignalThresholdInfo build() {
-            return new SignalThresholdInfo(this.mRan, this.mSignalMeasurementType, this.mHysteresisMs, this.mHysteresisDb, this.mThresholds, this.mIsEnabled);
+            return new SignalThresholdInfo(
+                    this.mRan,
+                    this.mSignalMeasurementType,
+                    this.mHysteresisMs,
+                    this.mHysteresisDb,
+                    this.mThresholds,
+                    this.mIsEnabled);
         }
     }
 
@@ -197,15 +211,38 @@ public final class SignalThresholdInfo implements Parcelable {
             return false;
         }
         SignalThresholdInfo other = (SignalThresholdInfo) o;
-        return this.mRan == other.mRan && this.mSignalMeasurementType == other.mSignalMeasurementType && this.mHysteresisMs == other.mHysteresisMs && this.mHysteresisDb == other.mHysteresisDb && Arrays.equals(this.mThresholds, other.mThresholds) && this.mIsEnabled == other.mIsEnabled;
+        return this.mRan == other.mRan
+                && this.mSignalMeasurementType == other.mSignalMeasurementType
+                && this.mHysteresisMs == other.mHysteresisMs
+                && this.mHysteresisDb == other.mHysteresisDb
+                && Arrays.equals(this.mThresholds, other.mThresholds)
+                && this.mIsEnabled == other.mIsEnabled;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mRan), Integer.valueOf(this.mSignalMeasurementType), Integer.valueOf(this.mHysteresisMs), Integer.valueOf(this.mHysteresisDb), Integer.valueOf(Arrays.hashCode(this.mThresholds)), Boolean.valueOf(this.mIsEnabled));
+        return Objects.hash(
+                Integer.valueOf(this.mRan),
+                Integer.valueOf(this.mSignalMeasurementType),
+                Integer.valueOf(this.mHysteresisMs),
+                Integer.valueOf(this.mHysteresisDb),
+                Integer.valueOf(Arrays.hashCode(this.mThresholds)),
+                Boolean.valueOf(this.mIsEnabled));
     }
 
     public String toString() {
-        return "SignalThresholdInfo{mRan=" + this.mRan + " mSignalMeasurementType=" + this.mSignalMeasurementType + " mHysteresisMs=" + this.mHysteresisMs + " mHysteresisDb=" + this.mHysteresisDb + " mThresholds=" + Arrays.toString(this.mThresholds) + " mIsEnabled=" + this.mIsEnabled + "}";
+        return "SignalThresholdInfo{mRan="
+                + this.mRan
+                + " mSignalMeasurementType="
+                + this.mSignalMeasurementType
+                + " mHysteresisMs="
+                + this.mHysteresisMs
+                + " mHysteresisDb="
+                + this.mHysteresisDb
+                + " mThresholds="
+                + Arrays.toString(this.mThresholds)
+                + " mIsEnabled="
+                + this.mIsEnabled
+                + "}";
     }
 
     private static boolean isValidThreshold(int type, int threshold) {
@@ -278,14 +315,19 @@ public final class SignalThresholdInfo implements Parcelable {
 
     private void validateRanWithMeasurementType(int ran, int signalMeasurement) {
         if (!isValidRanWithMeasurementType(ran, signalMeasurement)) {
-            throw new IllegalArgumentException("invalid RAN: " + ran + " with signal measurement type: " + signalMeasurement);
+            throw new IllegalArgumentException(
+                    "invalid RAN: " + ran + " with signal measurement type: " + signalMeasurement);
         }
     }
 
     private void validateThresholdRange(int signalMeasurement, int[] thresholds) {
         for (int threshold : thresholds) {
             if (!isValidThreshold(signalMeasurement, threshold)) {
-                throw new IllegalArgumentException("invalid signal measurement type: " + signalMeasurement + " with threshold: " + threshold);
+                throw new IllegalArgumentException(
+                        "invalid signal measurement type: "
+                                + signalMeasurement
+                                + " with threshold: "
+                                + threshold);
             }
         }
     }

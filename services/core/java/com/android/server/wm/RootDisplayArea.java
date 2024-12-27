@@ -1,9 +1,9 @@
 package com.android.server.wm;
 
 import android.util.Slog;
+
 import com.android.server.policy.WindowManagerPolicy;
-import com.android.server.wm.DisplayArea;
-import com.android.server.wm.DisplayAreaPolicyBuilder;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +27,10 @@ public abstract class RootDisplayArea extends DisplayArea.Dimmable {
     }
 
     public DisplayArea.Tokens findAreaForTokenInLayer(WindowToken windowToken) {
-        return findAreaForWindowTypeInLayer(windowToken.windowType, windowToken.mOwnerCanManageAppTokens, windowToken.mRoundedCornerOverlay);
+        return findAreaForWindowTypeInLayer(
+                windowToken.windowType,
+                windowToken.mOwnerCanManageAppTokens,
+                windowToken.mRoundedCornerOverlay);
     }
 
     public DisplayArea.Tokens findAreaForWindowTypeInLayer(int i, boolean z, boolean z2) {
@@ -62,17 +65,21 @@ public abstract class RootDisplayArea extends DisplayArea.Dimmable {
         RootDisplayArea rootDisplayArea = tokens.getRootDisplayArea();
         List list = this.mFeatures;
         for (int i = 0; i < list.size(); i++) {
-            DisplayAreaPolicyBuilder.Feature feature = (DisplayAreaPolicyBuilder.Feature) list.get(i);
+            DisplayAreaPolicyBuilder.Feature feature =
+                    (DisplayAreaPolicyBuilder.Feature) list.get(i);
             if (feature.mId == 7) {
                 List list2 = (List) this.mFeatureToDisplayAreas.get(feature);
                 if (list2.size() != 1) {
-                    throw new IllegalStateException("There must be exactly one DisplayArea for the FEATURE_IME_PLACEHOLDER");
+                    throw new IllegalStateException(
+                            "There must be exactly one DisplayArea for the"
+                                + " FEATURE_IME_PLACEHOLDER");
                 }
                 WindowManagerPolicy windowManagerPolicy = rootDisplayArea.mWmService.mPolicy;
                 DisplayArea.Tokens[] tokensArr = rootDisplayArea.mAreaForLayer;
                 windowManagerPolicy.getClass();
                 tokensArr[WindowManagerPolicy.getWindowLayerFromTypeLw(2011)] = null;
-                rootDisplayArea.mAreaForLayer[WindowManagerPolicy.getWindowLayerFromTypeLw(2012)] = null;
+                rootDisplayArea.mAreaForLayer[WindowManagerPolicy.getWindowLayerFromTypeLw(2012)] =
+                        null;
                 tokens.reparent((WindowContainer) list2.get(0), Integer.MAX_VALUE);
                 WindowManagerPolicy windowManagerPolicy2 = this.mWmService.mPolicy;
                 DisplayArea.Tokens[] tokensArr2 = this.mAreaForLayer;
@@ -83,7 +90,10 @@ public abstract class RootDisplayArea extends DisplayArea.Dimmable {
             }
         }
         if (!isDescendantOf(rootDisplayArea)) {
-            Slog.w("WindowManager", "The IME target is not in the same root as the IME container, but there is no DisplayArea of FEATURE_IME_PLACEHOLDER in the target RootDisplayArea");
+            Slog.w(
+                    "WindowManager",
+                    "The IME target is not in the same root as the IME container, but there is no"
+                        + " DisplayArea of FEATURE_IME_PLACEHOLDER in the target RootDisplayArea");
         }
         return false;
     }

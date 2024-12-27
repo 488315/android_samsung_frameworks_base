@@ -3,9 +3,11 @@ package com.samsung.android.multiwindow;
 import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.Rect;
+
 import com.samsung.android.core.CompatUtils;
 import com.samsung.android.core.SizeCompatInfo;
 import com.samsung.android.util.InterpolatorUtils;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes6.dex */
@@ -22,7 +24,13 @@ public class DexSizeCompatResizeGuide extends SizeCompatResizeGuide {
     }
 
     @Override // com.samsung.android.multiwindow.SizeCompatResizeGuide
-    public void adjustBounds(SizeCompatInfo sizeCompatInfo, int ctrlType, Rect repositionTaskBounds, Rect taskBoundsAtDragStart, boolean update, Consumer<Rect> adjustTaskBoundsWithCaptionHeight) {
+    public void adjustBounds(
+            SizeCompatInfo sizeCompatInfo,
+            int ctrlType,
+            Rect repositionTaskBounds,
+            Rect taskBoundsAtDragStart,
+            boolean update,
+            Consumer<Rect> adjustTaskBoundsWithCaptionHeight) {
         int deltaX;
         int delta;
         int displayOrientation;
@@ -33,8 +41,11 @@ public class DexSizeCompatResizeGuide extends SizeCompatResizeGuide {
         int bottom = taskBoundsAtDragStart.bottom - repositionTaskBounds.bottom;
         int displayWidth = sizeCompatInfo.getDisplayWidth();
         int displayHeight = sizeCompatInfo.getDisplayHeight();
-        int displayOrientation2 = CompatUtils.getConfigurationOrientation(displayWidth, displayHeight);
-        int taskOrientation = CompatUtils.getConfigurationOrientation(taskBoundsAtDragStart.width(), taskBoundsAtDragStart.height());
+        int displayOrientation2 =
+                CompatUtils.getConfigurationOrientation(displayWidth, displayHeight);
+        int taskOrientation =
+                CompatUtils.getConfigurationOrientation(
+                        taskBoundsAtDragStart.width(), taskBoundsAtDragStart.height());
         boolean isRotated = isRotatable && displayOrientation2 != taskOrientation;
         if (isRotatable) {
             if (displayOrientation2 == 1) {
@@ -61,7 +72,8 @@ public class DexSizeCompatResizeGuide extends SizeCompatResizeGuide {
         int maxHeight = sizeCompatInfo.getMaxHeight();
         int top2 = maxWidth + 0;
         int right2 = maxHeight + 0;
-        boolean isMaxSize = repositionTaskBounds.width() >= top2 && repositionTaskBounds.height() >= right2;
+        boolean isMaxSize =
+                repositionTaskBounds.width() >= top2 && repositionTaskBounds.height() >= right2;
         if (isMaxSize) {
             repositionTaskBounds.set(0, 0, maxWidth, maxHeight);
             displayOrientation = 0;
@@ -90,17 +102,23 @@ public class DexSizeCompatResizeGuide extends SizeCompatResizeGuide {
                 } else {
                     int minWidthThreshold2 = minWidth + 400;
                     int minHeightThreshold = minHeight + 400;
-                    isMinSize = repositionTaskBounds.width() <= minWidthThreshold2 && repositionTaskBounds.height() <= minHeightThreshold;
+                    isMinSize =
+                            repositionTaskBounds.width() <= minWidthThreshold2
+                                    && repositionTaskBounds.height() <= minHeightThreshold;
                 }
             } else {
-                isMinSize = repositionTaskBounds.width() <= minWidth || repositionTaskBounds.height() <= minHeight;
+                isMinSize =
+                        repositionTaskBounds.width() <= minWidth
+                                || repositionTaskBounds.height() <= minHeight;
             }
             if (isMinSize) {
                 repositionTaskBounds.set(0, 0, minWidth, minHeight);
                 displayOrientation = 0;
             } else if (!isRotatable) {
                 this.mTmpRect.set(0, 0, maxWidth, maxHeight);
-                float repositionScale = CompatUtils.adjustRoundScale(CompatUtils.getCompatScale(this.mTmpRect, repositionTaskBounds));
+                float repositionScale =
+                        CompatUtils.adjustRoundScale(
+                                CompatUtils.getCompatScale(this.mTmpRect, repositionTaskBounds));
                 if (repositionScale <= 0.0f) {
                     repositionTaskBounds.set(taskBoundsAtDragStart);
                     return;
@@ -111,19 +129,28 @@ public class DexSizeCompatResizeGuide extends SizeCompatResizeGuide {
                 }
             } else {
                 if (update && !isMaxSize2) {
-                    cancelAnimation(repositionTaskBounds, taskBoundsAtDragStart, adjustTaskBoundsWithCaptionHeight);
+                    cancelAnimation(
+                            repositionTaskBounds,
+                            taskBoundsAtDragStart,
+                            adjustTaskBoundsWithCaptionHeight);
                     return;
                 }
                 displayOrientation = 0;
             }
         }
-        if (isRotatable || ctrlType == 0 || (repositionTaskBounds.width() == taskBoundsAtDragStart.width() && repositionTaskBounds.height() == taskBoundsAtDragStart.height())) {
+        if (isRotatable
+                || ctrlType == 0
+                || (repositionTaskBounds.width() == taskBoundsAtDragStart.width()
+                        && repositionTaskBounds.height() == taskBoundsAtDragStart.height())) {
             CompatUtils.adjustBoundsToCenter(taskBoundsAtDragStart, repositionTaskBounds);
         } else {
             int i = (ctrlType & 1) != 0 ? 1 : displayOrientation;
             int i2 = (ctrlType & 4) != 0 ? 1 : displayOrientation;
             repositionTaskBounds.offsetTo(taskBoundsAtDragStart.left, taskBoundsAtDragStart.top);
-            int dx = i != 0 ? taskBoundsAtDragStart.width() - repositionTaskBounds.width() : displayOrientation;
+            int dx =
+                    i != 0
+                            ? taskBoundsAtDragStart.width() - repositionTaskBounds.width()
+                            : displayOrientation;
             if (i2 != 0) {
                 displayOrientation = taskBoundsAtDragStart.height() - repositionTaskBounds.height();
             }
@@ -137,7 +164,10 @@ public class DexSizeCompatResizeGuide extends SizeCompatResizeGuide {
     }
 
     @Override // com.samsung.android.multiwindow.SizeCompatResizeGuide
-    public void cancelAnimation(Rect repositionTaskBounds, Rect taskBoundsAtDragStart, Consumer<Rect> adjustTaskBoundsWithCaptionHeight) {
+    public void cancelAnimation(
+            Rect repositionTaskBounds,
+            Rect taskBoundsAtDragStart,
+            Consumer<Rect> adjustTaskBoundsWithCaptionHeight) {
         this.mTmpRect.set(repositionTaskBounds);
         if (adjustTaskBoundsWithCaptionHeight != null) {
             adjustTaskBoundsWithCaptionHeight.accept(this.mTmpRect);

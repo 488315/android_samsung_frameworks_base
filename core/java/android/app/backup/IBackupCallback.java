@@ -14,8 +14,7 @@ public interface IBackupCallback extends IInterface {
 
     public static class Default implements IBackupCallback {
         @Override // android.app.backup.IBackupCallback
-        public void operationComplete(long result) throws RemoteException {
-        }
+        public void operationComplete(long result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IBackupCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBackupCallback {
+    public abstract static class Stub extends Binder implements IBackupCallback {
         static final int TRANSACTION_operationComplete = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IBackupCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBackupCallback.DESCRIPTOR);
             }

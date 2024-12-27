@@ -59,7 +59,8 @@ public class Rfc822Token {
         int len = name.length();
         for (int i = 0; i < len; i++) {
             char c = name.charAt(i);
-            if ((c < 'A' || c > 'Z') && ((c < 'a' || c > 'z') && c != ' ' && (c < '0' || c > '9'))) {
+            if ((c < 'A' || c > 'Z')
+                    && ((c < 'a' || c > 'z') && c != ' ' && (c < '0' || c > '9'))) {
                 return '\"' + quoteName(name) + '\"';
             }
         }
@@ -112,6 +113,8 @@ public class Rfc822Token {
             return false;
         }
         Rfc822Token other = (Rfc822Token) o;
-        return stringEquals(this.mName, other.mName) && stringEquals(this.mAddress, other.mAddress) && stringEquals(this.mComment, other.mComment);
+        return stringEquals(this.mName, other.mName)
+                && stringEquals(this.mAddress, other.mAddress)
+                && stringEquals(this.mComment, other.mComment);
     }
 }

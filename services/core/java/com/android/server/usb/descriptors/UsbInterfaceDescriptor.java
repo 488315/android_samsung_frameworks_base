@@ -3,9 +3,11 @@ package com.android.server.usb.descriptors;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.usb.descriptors.report.TextReportCanvas;
 import com.android.server.usb.descriptors.report.UsbStrings;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -59,8 +61,10 @@ public final class UsbInterfaceDescriptor extends UsbDescriptor {
         }
         textReportCanvas.openList();
         textReportCanvas.writeListItem("Interface #" + this.mInterfaceNumber);
-        textReportCanvas.writeListItem("Class: " + TextReportCanvas.getHexString(i) + ": " + className);
-        textReportCanvas.writeListItem("Subclass: " + TextReportCanvas.getHexString(i2) + ": " + str);
+        textReportCanvas.writeListItem(
+                "Class: " + TextReportCanvas.getHexString(i) + ": " + className);
+        textReportCanvas.writeListItem(
+                "Subclass: " + TextReportCanvas.getHexString(i2) + ": " + str);
         StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i3, "Protocol: ", ": ");
         m.append(TextReportCanvas.getHexString(i3));
         textReportCanvas.writeListItem(m.toString());
@@ -69,12 +73,25 @@ public final class UsbInterfaceDescriptor extends UsbDescriptor {
     }
 
     public final UsbInterface toAndroid(UsbDescriptorParser usbDescriptorParser) {
-        UsbInterface usbInterface = new UsbInterface(this.mInterfaceNumber, this.mAlternateSetting, usbDescriptorParser.getDescriptorString(this.mDescrIndex), this.mUsbClass, this.mUsbSubclass, this.mProtocol);
+        UsbInterface usbInterface =
+                new UsbInterface(
+                        this.mInterfaceNumber,
+                        this.mAlternateSetting,
+                        usbDescriptorParser.getDescriptorString(this.mDescrIndex),
+                        this.mUsbClass,
+                        this.mUsbSubclass,
+                        this.mProtocol);
         UsbEndpoint[] usbEndpointArr = new UsbEndpoint[this.mEndpointDescriptors.size()];
         for (int i = 0; i < this.mEndpointDescriptors.size(); i++) {
-            UsbEndpointDescriptor usbEndpointDescriptor = (UsbEndpointDescriptor) this.mEndpointDescriptors.get(i);
+            UsbEndpointDescriptor usbEndpointDescriptor =
+                    (UsbEndpointDescriptor) this.mEndpointDescriptors.get(i);
             usbEndpointDescriptor.getClass();
-            usbEndpointArr[i] = new UsbEndpoint(usbEndpointDescriptor.mEndpointAddress, usbEndpointDescriptor.mAttributes, usbEndpointDescriptor.mPacketSize, usbEndpointDescriptor.mInterval);
+            usbEndpointArr[i] =
+                    new UsbEndpoint(
+                            usbEndpointDescriptor.mEndpointAddress,
+                            usbEndpointDescriptor.mAttributes,
+                            usbEndpointDescriptor.mPacketSize,
+                            usbEndpointDescriptor.mInterval);
         }
         usbInterface.setEndpoints(usbEndpointArr);
         return usbInterface;

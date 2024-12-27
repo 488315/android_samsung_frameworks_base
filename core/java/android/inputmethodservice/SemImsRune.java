@@ -6,8 +6,7 @@ final class SemImsRune {
     static final boolean enableCtsWorkaround = true;
     static final boolean supportPreferredMinDisplayRefreshRate;
 
-    SemImsRune() {
-    }
+    SemImsRune() {}
 
     static {
         supportPreferredMinDisplayRefreshRate = Integer.parseInt("3") != 4;

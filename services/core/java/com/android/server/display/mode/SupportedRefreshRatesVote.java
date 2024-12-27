@@ -28,15 +28,21 @@ public final class SupportedRefreshRatesVote implements Vote {
                 return false;
             }
             RefreshRates refreshRates = (RefreshRates) obj;
-            return Float.compare(refreshRates.mPeakRefreshRate, this.mPeakRefreshRate) == 0 && Float.compare(refreshRates.mVsyncRate, this.mVsyncRate) == 0;
+            return Float.compare(refreshRates.mPeakRefreshRate, this.mPeakRefreshRate) == 0
+                    && Float.compare(refreshRates.mVsyncRate, this.mVsyncRate) == 0;
         }
 
         public final int hashCode() {
-            return Objects.hash(Float.valueOf(this.mPeakRefreshRate), Float.valueOf(this.mVsyncRate));
+            return Objects.hash(
+                    Float.valueOf(this.mPeakRefreshRate), Float.valueOf(this.mVsyncRate));
         }
 
         public final String toString() {
-            return "RefreshRates{ mPeakRefreshRate=" + this.mPeakRefreshRate + ", mVsyncRate=" + this.mVsyncRate + " }";
+            return "RefreshRates{ mPeakRefreshRate="
+                    + this.mPeakRefreshRate
+                    + ", mVsyncRate="
+                    + this.mVsyncRate
+                    + " }";
         }
     }
 

@@ -12,8 +12,6 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.WindowCallbacks;
-import com.android.internal.jank.FrameTracker;
-import com.android.internal.jank.InteractionJankMonitor;
 
 /* loaded from: classes5.dex */
 class InteractionMonitorDebugOverlay implements WindowCallbacks {
@@ -42,12 +40,15 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
 
     void dispose() {
         if (this.mViewRoot != null && this.mHandler != null) {
-            this.mHandler.runWithScissors(new Runnable() { // from class: com.android.internal.jank.InteractionMonitorDebugOverlay$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    InteractionMonitorDebugOverlay.this.lambda$dispose$0();
-                }
-            }, 500L);
+            this.mHandler.runWithScissors(
+                    new Runnable() { // from class:
+                                     // com.android.internal.jank.InteractionMonitorDebugOverlay$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            InteractionMonitorDebugOverlay.this.lambda$dispose$0();
+                        }
+                    },
+                    500L);
             forceRedraw();
         }
         this.mHandler = null;
@@ -68,18 +69,23 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
         Trace.asyncTraceForTrackBegin(4096L, TRACK_NAME, "DEBUG_OVERLAY_DRAW", 0);
         this.mHandler = tracker.mConfig.getHandler();
         this.mViewRoot = viewRoot;
-        this.mHandler.runWithScissors(new Runnable() { // from class: com.android.internal.jank.InteractionMonitorDebugOverlay$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                InteractionMonitorDebugOverlay.this.lambda$attachViewRootIfNeeded$1(viewRoot);
-            }
-        }, 500L);
+        this.mHandler.runWithScissors(
+                new Runnable() { // from class:
+                                 // com.android.internal.jank.InteractionMonitorDebugOverlay$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        InteractionMonitorDebugOverlay.this.lambda$attachViewRootIfNeeded$1(
+                                viewRoot);
+                    }
+                },
+                500L);
         forceRedraw();
         return true;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$attachViewRootIfNeeded$1(FrameTracker.ViewRootWrapper viewRoot) {
+    public /* synthetic */ void lambda$attachViewRootIfNeeded$1(
+            FrameTracker.ViewRootWrapper viewRoot) {
         viewRoot.addWindowCallbacks(this);
     }
 
@@ -111,12 +117,15 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
 
     private void forceRedraw() {
         if (this.mViewRoot != null && this.mHandler != null) {
-            this.mHandler.runWithScissors(new Runnable() { // from class: com.android.internal.jank.InteractionMonitorDebugOverlay$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    InteractionMonitorDebugOverlay.this.lambda$forceRedraw$2();
-                }
-            }, 500L);
+            this.mHandler.runWithScissors(
+                    new Runnable() { // from class:
+                                     // com.android.internal.jank.InteractionMonitorDebugOverlay$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            InteractionMonitorDebugOverlay.this.lambda$forceRedraw$2();
+                        }
+                    },
+                    500L);
         }
     }
 
@@ -126,7 +135,10 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
         this.mViewRoot.getView().invalidate();
     }
 
-    void onTrackerRemoved(int removedCuj, int reason, SparseArray<InteractionJankMonitor.RunningTracker> runningTrackers) {
+    void onTrackerRemoved(
+            int removedCuj,
+            int reason,
+            SparseArray<InteractionJankMonitor.RunningTracker> runningTrackers) {
         synchronized (this.mLock) {
             this.mRunningCujs.put(removedCuj, reason);
             boolean isLoggable = Log.isLoggable(TAG, 3);
@@ -148,7 +160,8 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
                         if (i >= runningTrackers.size()) {
                             break;
                         }
-                        if (!this.mViewRoot.equals(runningTrackers.valueAt(i).mTracker.getViewRoot())) {
+                        if (!this.mViewRoot.equals(
+                                runningTrackers.valueAt(i).mTracker.getViewRoot())) {
                             i++;
                         } else {
                             needsNewViewRoot = false;
@@ -158,8 +171,10 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
                 }
                 if (needsNewViewRoot) {
                     dispose();
-                    for (int i2 = 0; i2 < runningTrackers.size() && !attachViewRootIfNeeded(runningTrackers.valueAt(i2)); i2++) {
-                    }
+                    for (int i2 = 0;
+                            i2 < runningTrackers.size()
+                                    && !attachViewRootIfNeeded(runningTrackers.valueAt(i2));
+                            i2++) {}
                 } else {
                     forceRedraw();
                 }
@@ -180,16 +195,15 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
     }
 
     @Override // android.view.WindowCallbacks
-    public void onWindowSizeIsChanging(Rect newBounds, boolean fullscreen, Rect systemInsets, Rect stableInsets) {
-    }
+    public void onWindowSizeIsChanging(
+            Rect newBounds, boolean fullscreen, Rect systemInsets, Rect stableInsets) {}
 
     @Override // android.view.WindowCallbacks
-    public void onWindowDragResizeStart(Rect initialBounds, boolean fullscreen, Rect systemInsets, Rect stableInsets) {
-    }
+    public void onWindowDragResizeStart(
+            Rect initialBounds, boolean fullscreen, Rect systemInsets, Rect stableInsets) {}
 
     @Override // android.view.WindowCallbacks
-    public void onWindowDragResizeEnd() {
-    }
+    public void onWindowDragResizeEnd() {}
 
     @Override // android.view.WindowCallbacks
     public boolean onContentDrawn(int offsetX, int offsetY, int sizeX, int sizeY) {
@@ -197,8 +211,7 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
     }
 
     @Override // android.view.WindowCallbacks
-    public void onRequestDraw(boolean reportNextDraw) {
-    }
+    public void onRequestDraw(boolean reportNextDraw) {}
 
     @Override // android.view.WindowCallbacks
     public void onPostDraw(RecordingCanvas canvas) {
@@ -217,7 +230,14 @@ class InteractionMonitorDebugOverlay implements WindowCallbacks {
                     int dx = (int) ((w - maxLength) / 2.0f);
                     canvas.translate(dx, dy);
                     this.mDebugPaint.setColor(this.mBgColor);
-                    canvas.drawRect((-padding) * 2, -padding, (padding * 2) + maxLength, (this.mRunningCujs.size() * cujNameTextHeight) + (padding * 2) + packageNameTextHeight, this.mDebugPaint);
+                    canvas.drawRect(
+                            (-padding) * 2,
+                            -padding,
+                            (padding * 2) + maxLength,
+                            (this.mRunningCujs.size() * cujNameTextHeight)
+                                    + (padding * 2)
+                                    + packageNameTextHeight,
+                            this.mDebugPaint);
                     this.mDebugPaint.setTextSize(packageNameFontSize);
                     this.mDebugPaint.setColor(-16777216);
                     this.mDebugPaint.setStrikeThruText(false);

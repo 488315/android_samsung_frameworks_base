@@ -10,12 +10,13 @@ import android.os.RemoteException;
 public interface IDeviceVolumeBehaviorDispatcher extends IInterface {
     public static final String DESCRIPTOR = "android.media.IDeviceVolumeBehaviorDispatcher";
 
-    void dispatchDeviceVolumeBehaviorChanged(AudioDeviceAttributes audioDeviceAttributes, int i) throws RemoteException;
+    void dispatchDeviceVolumeBehaviorChanged(AudioDeviceAttributes audioDeviceAttributes, int i)
+            throws RemoteException;
 
     public static class Default implements IDeviceVolumeBehaviorDispatcher {
         @Override // android.media.IDeviceVolumeBehaviorDispatcher
-        public void dispatchDeviceVolumeBehaviorChanged(AudioDeviceAttributes device, int deviceVolumeBehavior) throws RemoteException {
-        }
+        public void dispatchDeviceVolumeBehaviorChanged(
+                AudioDeviceAttributes device, int deviceVolumeBehavior) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface IDeviceVolumeBehaviorDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDeviceVolumeBehaviorDispatcher {
+    public abstract static class Stub extends Binder implements IDeviceVolumeBehaviorDispatcher {
         static final int TRANSACTION_dispatchDeviceVolumeBehaviorChanged = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface IDeviceVolumeBehaviorDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDeviceVolumeBehaviorDispatcher.DESCRIPTOR);
             }
@@ -71,7 +73,9 @@ public interface IDeviceVolumeBehaviorDispatcher extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AudioDeviceAttributes _arg0 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     dispatchDeviceVolumeBehaviorChanged(_arg0, _arg1);
@@ -98,7 +102,8 @@ public interface IDeviceVolumeBehaviorDispatcher extends IInterface {
             }
 
             @Override // android.media.IDeviceVolumeBehaviorDispatcher
-            public void dispatchDeviceVolumeBehaviorChanged(AudioDeviceAttributes device, int deviceVolumeBehavior) throws RemoteException {
+            public void dispatchDeviceVolumeBehaviorChanged(
+                    AudioDeviceAttributes device, int deviceVolumeBehavior) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceVolumeBehaviorDispatcher.DESCRIPTOR);

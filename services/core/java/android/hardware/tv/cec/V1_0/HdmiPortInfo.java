@@ -7,6 +7,7 @@ import android.hardware.broadcastradio.V2_0.AmFmBandRange$$ExternalSyntheticOutl
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -23,7 +24,8 @@ public final class HdmiPortInfo {
         ArrayList arrayList = new ArrayList();
         HwBlob readBuffer = hwParcel.readBuffer(16L);
         int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 12, readBuffer.handle(), 0L, true);
+        HwBlob readEmbeddedBuffer =
+                hwParcel.readEmbeddedBuffer(int32 * 12, readBuffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             HdmiPortInfo hdmiPortInfo = new HdmiPortInfo();
@@ -51,17 +53,32 @@ public final class HdmiPortInfo {
             return false;
         }
         HdmiPortInfo hdmiPortInfo = (HdmiPortInfo) obj;
-        return this.type == hdmiPortInfo.type && this.portId == hdmiPortInfo.portId && this.cecSupported == hdmiPortInfo.cecSupported && this.arcSupported == hdmiPortInfo.arcSupported && this.physicalAddress == hdmiPortInfo.physicalAddress;
+        return this.type == hdmiPortInfo.type
+                && this.portId == hdmiPortInfo.portId
+                && this.cecSupported == hdmiPortInfo.cecSupported
+                && this.arcSupported == hdmiPortInfo.arcSupported
+                && this.physicalAddress == hdmiPortInfo.physicalAddress;
     }
 
     public final int hashCode() {
-        return Objects.hash(AudioConfig$$ExternalSyntheticOutline0.m(this.type), AudioConfig$$ExternalSyntheticOutline0.m(this.portId), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.cecSupported), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.arcSupported), Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.physicalAddress))));
+        return Objects.hash(
+                AudioConfig$$ExternalSyntheticOutline0.m(this.type),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.portId),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.cecSupported),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.arcSupported),
+                Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.physicalAddress))));
     }
 
     public final String toString() {
         StringBuilder sb = new StringBuilder("{.type = ");
         int i = this.type;
-        sb.append(i == 0 ? "INPUT" : i == 1 ? "OUTPUT" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i));
+        sb.append(
+                i == 0
+                        ? "INPUT"
+                        : i == 1
+                                ? "OUTPUT"
+                                : AudioChannelMask$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("0x"), i));
         sb.append(", .portId = ");
         sb.append(this.portId);
         sb.append(", .cecSupported = ");

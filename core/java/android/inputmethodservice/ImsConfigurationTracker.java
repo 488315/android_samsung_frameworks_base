@@ -2,6 +2,7 @@ package android.inputmethodservice;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes2.dex */
@@ -27,11 +28,15 @@ public final class ImsConfigurationTracker {
         this.mHandledConfigChanges = configChanges;
     }
 
-    public void onConfigurationChanged(Configuration newConfig, Runnable resetStateForNewConfigurationRunner) {
+    public void onConfigurationChanged(
+            Configuration newConfig, Runnable resetStateForNewConfigurationRunner) {
         if (!this.mInitialized) {
             return;
         }
-        int diff = this.mLastKnownConfig != null ? this.mLastKnownConfig.diffPublicOnly(newConfig) : -1;
+        int diff =
+                this.mLastKnownConfig != null
+                        ? this.mLastKnownConfig.diffPublicOnly(newConfig)
+                        : -1;
         int unhandledDiff = (~this.mHandledConfigChanges) & diff;
         if (unhandledDiff != 0) {
             resetStateForNewConfigurationRunner.run();

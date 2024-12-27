@@ -1,7 +1,9 @@
 package com.android.server.desktopmode;
 
 import android.os.RemoteException;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.DesktopModeUiConstants;
 import com.samsung.android.desktopmode.IDesktopModeUiService;
@@ -14,7 +16,8 @@ public final /* synthetic */ class UiManager$$ExternalSyntheticLambda2 implement
     public final /* synthetic */ int f$1;
     public final /* synthetic */ int f$2;
 
-    public /* synthetic */ UiManager$$ExternalSyntheticLambda2(UiManager uiManager, int i, int i2, int i3) {
+    public /* synthetic */ UiManager$$ExternalSyntheticLambda2(
+            UiManager uiManager, int i, int i2, int i3) {
         this.$r8$classId = i3;
         this.f$0 = uiManager;
         this.f$1 = i;
@@ -30,7 +33,12 @@ public final /* synthetic */ class UiManager$$ExternalSyntheticLambda2 implement
                 int i2 = this.f$2;
                 uiManager.getClass();
                 if (DesktopModeFeature.DEBUG) {
-                    Log.d("[DMS]UiManager", "handleDismissOverlay(), where=" + DesktopModeUiConstants.whereToString(i) + ", type=" + DesktopModeUiConstants.typeToString(i2));
+                    Log.d(
+                            "[DMS]UiManager",
+                            "handleDismissOverlay(), where="
+                                    + DesktopModeUiConstants.whereToString(i)
+                                    + ", type="
+                                    + DesktopModeUiConstants.typeToString(i2));
                 }
                 IDesktopModeUiService iDesktopModeUiService = uiManager.mService;
                 if (iDesktopModeUiService != null) {
@@ -49,7 +57,9 @@ public final /* synthetic */ class UiManager$$ExternalSyntheticLambda2 implement
                 int i4 = this.f$2;
                 uiManager2.getClass();
                 if (DesktopModeFeature.DEBUG) {
-                    StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i3, "handleDismissDialog(), displayId=", ", type=");
+                    StringBuilder m =
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    i3, "handleDismissDialog(), displayId=", ", type=");
                     m.append(DesktopModeUiConstants.typeToString(i4));
                     Log.d("[DMS]UiManager", m.toString());
                 }

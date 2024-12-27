@@ -5,8 +5,10 @@ import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.window.IScreenRecordingCallback;
+
 import com.samsung.android.knox.remotecontrol.IRemoteInjection;
 import com.samsung.android.knox.remotecontrol.IRemoteScreenWatcherCallback;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
@@ -38,20 +40,26 @@ public final class KnoxRemoteScreenCallbackController {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteScreenWatcherCallback extends IRemoteScreenWatcherCallback.Stub {
-        public RemoteScreenWatcherCallback() {
-        }
+        public RemoteScreenWatcherCallback() {}
 
         public final void onRemoteScreenStart() {
-            KnoxRemoteScreenCallbackController knoxRemoteScreenCallbackController = KnoxRemoteScreenCallbackController.this;
-            WindowManagerGlobalLock windowManagerGlobalLock = knoxRemoteScreenCallbackController.mWms.mGlobalLock;
+            KnoxRemoteScreenCallbackController knoxRemoteScreenCallbackController =
+                    KnoxRemoteScreenCallbackController.this;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    knoxRemoteScreenCallbackController.mWms.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    knoxRemoteScreenCallbackController.mRecordedWC = knoxRemoteScreenCallbackController.mWms.mRoot.mDefaultDisplay;
+                    knoxRemoteScreenCallbackController.mRecordedWC =
+                            knoxRemoteScreenCallbackController.mWms.mRoot.mDefaultDisplay;
                     ArraySet arraySet = new ArraySet();
                     DisplayContent displayContent = knoxRemoteScreenCallbackController.mRecordedWC;
                     if (displayContent != null) {
-                        displayContent.forAllActivities((Consumer) new KnoxRemoteScreenCallbackController$$ExternalSyntheticLambda2(knoxRemoteScreenCallbackController, arraySet), true);
+                        displayContent.forAllActivities(
+                                (Consumer)
+                                        new KnoxRemoteScreenCallbackController$$ExternalSyntheticLambda2(
+                                                knoxRemoteScreenCallbackController, arraySet),
+                                true);
                     }
                     knoxRemoteScreenCallbackController.dispatchCallbacks(arraySet, true);
                 } catch (Throwable th) {
@@ -63,15 +71,21 @@ public final class KnoxRemoteScreenCallbackController {
         }
 
         public final void onRemoteScreenStop() {
-            KnoxRemoteScreenCallbackController knoxRemoteScreenCallbackController = KnoxRemoteScreenCallbackController.this;
-            WindowManagerGlobalLock windowManagerGlobalLock = knoxRemoteScreenCallbackController.mWms.mGlobalLock;
+            KnoxRemoteScreenCallbackController knoxRemoteScreenCallbackController =
+                    KnoxRemoteScreenCallbackController.this;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    knoxRemoteScreenCallbackController.mWms.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
                     ArraySet arraySet = new ArraySet();
                     DisplayContent displayContent = knoxRemoteScreenCallbackController.mRecordedWC;
                     if (displayContent != null) {
-                        displayContent.forAllActivities((Consumer) new KnoxRemoteScreenCallbackController$$ExternalSyntheticLambda2(knoxRemoteScreenCallbackController, arraySet), true);
+                        displayContent.forAllActivities(
+                                (Consumer)
+                                        new KnoxRemoteScreenCallbackController$$ExternalSyntheticLambda2(
+                                                knoxRemoteScreenCallbackController, arraySet),
+                                true);
                     }
                     knoxRemoteScreenCallbackController.dispatchCallbacks(arraySet, false);
                     knoxRemoteScreenCallbackController.mRecordedWC = null;
@@ -101,19 +115,22 @@ public final class KnoxRemoteScreenCallbackController {
                 arrayList.add(((Callback) this.mCallbacks.valueAt(i2)).mCallback);
             }
         }
-        this.mWms.mH.post(new Runnable() { // from class: com.android.server.wm.KnoxRemoteScreenCallbackController$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                ArrayList arrayList2 = arrayList;
-                boolean z2 = z;
-                for (int i3 = 0; i3 < arrayList2.size(); i3++) {
-                    try {
-                        ((IScreenRecordingCallback) arrayList2.get(i3)).onScreenRecordingStateChanged(z2);
-                    } catch (RemoteException unused) {
+        this.mWms.mH.post(
+                new Runnable() { // from class:
+                                 // com.android.server.wm.KnoxRemoteScreenCallbackController$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ArrayList arrayList2 = arrayList;
+                        boolean z2 = z;
+                        for (int i3 = 0; i3 < arrayList2.size(); i3++) {
+                            try {
+                                ((IScreenRecordingCallback) arrayList2.get(i3))
+                                        .onScreenRecordingStateChanged(z2);
+                            } catch (RemoteException unused) {
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
     }
 
     public final void unregister(IScreenRecordingCallback iScreenRecordingCallback) {

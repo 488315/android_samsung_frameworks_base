@@ -6,7 +6,6 @@ import android.media.soundtrigger.Properties;
 import android.media.soundtrigger.RecognitionConfig;
 import android.media.soundtrigger.SoundModel;
 import android.os.IBinder;
-import com.android.server.soundtrigger_middleware.ISoundTriggerHal;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -57,14 +56,16 @@ public final class SoundTriggerHalMaxModelLimiter implements ISoundTriggerHal {
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadPhraseSoundModel(PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+    public final int loadPhraseSoundModel(
+            PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
         int loadPhraseSoundModel;
         synchronized (this) {
             try {
                 if (this.mNumLoadedModels == this.mMaxModels) {
                     throw new RecoverableException(1);
                 }
-                loadPhraseSoundModel = this.mDelegate.loadPhraseSoundModel(phraseSoundModel, modelCallback);
+                loadPhraseSoundModel =
+                        this.mDelegate.loadPhraseSoundModel(phraseSoundModel, modelCallback);
                 this.mNumLoadedModels++;
             } catch (Throwable th) {
                 throw th;
@@ -74,7 +75,8 @@ public final class SoundTriggerHalMaxModelLimiter implements ISoundTriggerHal {
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadSoundModel(SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+    public final int loadSoundModel(
+            SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
         int loadSoundModel;
         synchronized (this) {
             try {

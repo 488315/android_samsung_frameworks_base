@@ -3,6 +3,7 @@ package android.media.metrics;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Size;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -11,19 +12,21 @@ import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class MediaItemInfo implements Parcelable {
-    public static final Parcelable.Creator<MediaItemInfo> CREATOR = new Parcelable.Creator<MediaItemInfo>() { // from class: android.media.metrics.MediaItemInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaItemInfo[] newArray(int size) {
-            return new MediaItemInfo[size];
-        }
+    public static final Parcelable.Creator<MediaItemInfo> CREATOR =
+            new Parcelable.Creator<
+                    MediaItemInfo>() { // from class: android.media.metrics.MediaItemInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaItemInfo[] newArray(int size) {
+                    return new MediaItemInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaItemInfo createFromParcel(Parcel in) {
-            return new MediaItemInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaItemInfo createFromParcel(Parcel in) {
+                    return new MediaItemInfo(in);
+                }
+            };
     public static final long DATA_TYPE_AUDIO = 4;
     public static final long DATA_TYPE_DEPTH = 16;
     public static final long DATA_TYPE_GAIN_MAP = 32;
@@ -60,14 +63,26 @@ public final class MediaItemInfo implements Parcelable {
     private final Size mVideoSize;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DataType {
-    }
+    public @interface DataType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SourceType {
-    }
+    public @interface SourceType {}
 
-    private MediaItemInfo(int sourceType, long dataTypes, long durationMillis, long clipDurationMillis, String containerMimeType, List<String> sampleMimeTypes, List<String> codecNames, int audioSampleRateHz, int audioChannelCount, long audioSampleCount, Size videoSize, int videoDataSpace, float videoFrameRate, long videoSampleCount) {
+    private MediaItemInfo(
+            int sourceType,
+            long dataTypes,
+            long durationMillis,
+            long clipDurationMillis,
+            String containerMimeType,
+            List<String> sampleMimeTypes,
+            List<String> codecNames,
+            int audioSampleRateHz,
+            int audioChannelCount,
+            long audioSampleCount,
+            Size videoSize,
+            int videoDataSpace,
+            float videoFrameRate,
+            long videoSampleCount) {
         this.mSourceType = sourceType;
         this.mDataTypes = dataTypes;
         this.mDurationMillis = durationMillis;
@@ -227,12 +242,54 @@ public final class MediaItemInfo implements Parcelable {
         }
 
         public MediaItemInfo build() {
-            return new MediaItemInfo(this.mSourceType, this.mDataTypes, this.mDurationMillis, this.mClipDurationMillis, this.mContainerMimeType, this.mSampleMimeTypes, this.mCodecNames, this.mAudioSampleRateHz, this.mAudioChannelCount, this.mAudioSampleCount, this.mVideoSize, this.mVideoDataSpace, this.mVideoFrameRate, this.mVideoSampleCount);
+            return new MediaItemInfo(
+                    this.mSourceType,
+                    this.mDataTypes,
+                    this.mDurationMillis,
+                    this.mClipDurationMillis,
+                    this.mContainerMimeType,
+                    this.mSampleMimeTypes,
+                    this.mCodecNames,
+                    this.mAudioSampleRateHz,
+                    this.mAudioChannelCount,
+                    this.mAudioSampleCount,
+                    this.mVideoSize,
+                    this.mVideoDataSpace,
+                    this.mVideoFrameRate,
+                    this.mVideoSampleCount);
         }
     }
 
     public String toString() {
-        return "MediaItemInfo { sourceType = " + this.mSourceType + ", dataTypes = " + this.mDataTypes + ", durationMillis = " + this.mDurationMillis + ", clipDurationMillis = " + this.mClipDurationMillis + ", containerMimeType = " + this.mContainerMimeType + ", sampleMimeTypes = " + this.mSampleMimeTypes + ", codecNames = " + this.mCodecNames + ", audioSampleRateHz = " + this.mAudioSampleRateHz + ", audioChannelCount = " + this.mAudioChannelCount + ", audioSampleCount = " + this.mAudioSampleCount + ", videoSize = " + this.mVideoSize + ", videoDataSpace = " + this.mVideoDataSpace + ", videoFrameRate = " + this.mVideoFrameRate + ", videoSampleCount = " + this.mVideoSampleCount + " }";
+        return "MediaItemInfo { sourceType = "
+                + this.mSourceType
+                + ", dataTypes = "
+                + this.mDataTypes
+                + ", durationMillis = "
+                + this.mDurationMillis
+                + ", clipDurationMillis = "
+                + this.mClipDurationMillis
+                + ", containerMimeType = "
+                + this.mContainerMimeType
+                + ", sampleMimeTypes = "
+                + this.mSampleMimeTypes
+                + ", codecNames = "
+                + this.mCodecNames
+                + ", audioSampleRateHz = "
+                + this.mAudioSampleRateHz
+                + ", audioChannelCount = "
+                + this.mAudioChannelCount
+                + ", audioSampleCount = "
+                + this.mAudioSampleCount
+                + ", videoSize = "
+                + this.mVideoSize
+                + ", videoDataSpace = "
+                + this.mVideoDataSpace
+                + ", videoFrameRate = "
+                + this.mVideoFrameRate
+                + ", videoSampleCount = "
+                + this.mVideoSampleCount
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -243,7 +300,22 @@ public final class MediaItemInfo implements Parcelable {
             return false;
         }
         MediaItemInfo that = (MediaItemInfo) o;
-        if (this.mSourceType == that.mSourceType && this.mDataTypes == that.mDataTypes && this.mDurationMillis == that.mDurationMillis && this.mClipDurationMillis == that.mClipDurationMillis && Objects.equals(this.mContainerMimeType, that.mContainerMimeType) && this.mSampleMimeTypes.equals(that.mSampleMimeTypes) && this.mCodecNames.equals(that.mCodecNames) && this.mAudioSampleRateHz == that.mAudioSampleRateHz && this.mAudioChannelCount == that.mAudioChannelCount && this.mAudioSampleCount == that.mAudioSampleCount && Objects.equals(this.mVideoSize, that.mVideoSize) && Objects.equals(Integer.valueOf(this.mVideoDataSpace), Integer.valueOf(that.mVideoDataSpace)) && this.mVideoFrameRate == that.mVideoFrameRate && this.mVideoSampleCount == that.mVideoSampleCount) {
+        if (this.mSourceType == that.mSourceType
+                && this.mDataTypes == that.mDataTypes
+                && this.mDurationMillis == that.mDurationMillis
+                && this.mClipDurationMillis == that.mClipDurationMillis
+                && Objects.equals(this.mContainerMimeType, that.mContainerMimeType)
+                && this.mSampleMimeTypes.equals(that.mSampleMimeTypes)
+                && this.mCodecNames.equals(that.mCodecNames)
+                && this.mAudioSampleRateHz == that.mAudioSampleRateHz
+                && this.mAudioChannelCount == that.mAudioChannelCount
+                && this.mAudioSampleCount == that.mAudioSampleCount
+                && Objects.equals(this.mVideoSize, that.mVideoSize)
+                && Objects.equals(
+                        Integer.valueOf(this.mVideoDataSpace),
+                        Integer.valueOf(that.mVideoDataSpace))
+                && this.mVideoFrameRate == that.mVideoFrameRate
+                && this.mVideoSampleCount == that.mVideoSampleCount) {
             return true;
         }
         return false;

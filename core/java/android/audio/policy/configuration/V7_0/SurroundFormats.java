@@ -1,12 +1,15 @@
 package android.audio.policy.configuration.V7_0;
 
 import android.provider.Telephony;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class SurroundFormats {
@@ -49,7 +52,8 @@ public class SurroundFormats {
             this.subformats = subformats;
         }
 
-        static Format read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static Format read(XmlPullParser _parser)
+                throws XmlPullParserException, IOException, DatatypeConfigurationException {
             Format _instance = new Format();
             String _raw = _parser.getAttributeValue(null, "name");
             if (_raw != null) {
@@ -75,7 +79,8 @@ public class SurroundFormats {
         return this.format;
     }
 
-    static SurroundFormats read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static SurroundFormats read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         SurroundFormats _instance = new SurroundFormats();
         _parser.getDepth();

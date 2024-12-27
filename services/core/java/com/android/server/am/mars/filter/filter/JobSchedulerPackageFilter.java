@@ -4,11 +4,13 @@ import android.app.job.JobInfo;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Message;
+
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.am.FreecessController$$ExternalSyntheticOutline0;
 import com.android.server.am.FreecessHandler;
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.filter.IFilter;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -38,7 +40,9 @@ public final class JobSchedulerPackageFilter implements IFilter {
             if (freecessHandler.mMainHandler == null) {
                 return;
             }
-            Bundle m = FreecessController$$ExternalSyntheticOutline0.m(i, "packageName", packageName, "uid");
+            Bundle m =
+                    FreecessController$$ExternalSyntheticOutline0.m(
+                            i, "packageName", packageName, "uid");
             m.putString("reason", "JOB_ADD");
             Message obtainMessage = freecessHandler.mMainHandler.obtainMessage(17);
             obtainMessage.setData(m);
@@ -47,8 +51,7 @@ public final class JobSchedulerPackageFilter implements IFilter {
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void deInit() {
-    }
+    public final void deInit() {}
 
     @Override // com.android.server.am.mars.filter.IFilter
     public final int filter(int i, int i2, int i3, String str) {
@@ -65,12 +68,14 @@ public final class JobSchedulerPackageFilter implements IFilter {
             }
             return 0;
         } catch (Exception e) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder(" isRunningJobPkg unknow err:"), "MARs:JobSchedulerPackageFilter");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder(" isRunningJobPkg unknow err:"),
+                    "MARs:JobSchedulerPackageFilter");
             return 0;
         }
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void init(Context context) {
-    }
+    public final void init(Context context) {}
 }

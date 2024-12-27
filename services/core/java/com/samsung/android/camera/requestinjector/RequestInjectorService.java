@@ -11,11 +11,14 @@ import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
+
 import com.samsung.android.camera.CameraServiceWorker;
 import com.samsung.android.camera.IRequestInjector;
 import com.samsung.android.camera.IRequestInjectorCallback;
 import com.samsung.android.camera.Logger;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -30,41 +33,50 @@ public final class RequestInjectorService extends IRequestInjector.Stub {
     public final Object mRequestInjectorLock = new Object();
     public final ArrayMap mExtraRequestMap = new ArrayMap();
     public final CopyOnWriteArrayList mCallbackList = new CopyOnWriteArrayList();
-    public final RequestInjectorCallbackProxy mRequestInjectorCallbackProxy = new RequestInjectorCallbackProxy();
+    public final RequestInjectorCallbackProxy mRequestInjectorCallbackProxy =
+            new RequestInjectorCallbackProxy();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RequestInjectorCallbackProxy extends IRequestInjectorCallback.Stub {
-        public RequestInjectorCallbackProxy() {
-        }
+        public RequestInjectorCallbackProxy() {}
 
         /* JADX WARN: Multi-variable type inference failed */
         public final IBinder asBinder() {
             return this;
         }
 
-        public final void onCaptureResult(CameraMetadataNative cameraMetadataNative, String str, String str2, int i, long j) {
+        public final void onCaptureResult(
+                CameraMetadataNative cameraMetadataNative, String str, String str2, int i, long j) {
             Iterator it = RequestInjectorService.this.mCallbackList.iterator();
             while (it.hasNext()) {
                 IBinder iBinder = (IBinder) it.next();
                 try {
-                    IRequestInjectorCallback.Stub.asInterface(iBinder).onCaptureResult(cameraMetadataNative, str, str2, i, j);
+                    IRequestInjectorCallback.Stub.asInterface(iBinder)
+                            .onCaptureResult(cameraMetadataNative, str, str2, i, j);
                 } catch (DeadObjectException unused) {
-                    Slog.i("RequestInjectorService", "onCaptureResult: Callback has removed by DeadObjectException clientName = " + str);
+                    Slog.i(
+                            "RequestInjectorService",
+                            "onCaptureResult: Callback has removed by DeadObjectException"
+                                + " clientName = "
+                                    + str);
                     RequestInjectorService.this.unregisterCallback(iBinder);
                 }
             }
         }
     }
 
-    public RequestInjectorService(CameraServiceWorker cameraServiceWorker, Context context, Handler handler) {
+    public RequestInjectorService(
+            CameraServiceWorker cameraServiceWorker, Context context, Handler handler) {
         this.mCameraServiceWorker = cameraServiceWorker;
         this.mContext = context;
         this.mHandler = handler;
     }
 
     public final void applyRequests(PersistableBundle[] persistableBundleArr) {
-        if (this.mContext.checkCallingPermission("android.permission.CAMERA_SEND_SYSTEM_EVENTS") != 0) {
-            throw new SecurityException("Requires permission android.permission.CAMERA_SEND_SYSTEM_EVENTS");
+        if (this.mContext.checkCallingPermission("android.permission.CAMERA_SEND_SYSTEM_EVENTS")
+                != 0) {
+            throw new SecurityException(
+                    "Requires permission android.permission.CAMERA_SEND_SYSTEM_EVENTS");
         }
         Logger.ID id = Logger.ID.REQUEST_INJECTOR_SERVICE;
         if (persistableBundleArr == null || persistableBundleArr.length < 1) {
@@ -72,7 +84,9 @@ public final class RequestInjectorService extends IRequestInjector.Stub {
             throw new IllegalArgumentException("Invalid request, null or 0 size");
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
-        Slog.i("RequestInjectorService", "applyRequests requests size = " + persistableBundleArr.length);
+        Slog.i(
+                "RequestInjectorService",
+                "applyRequests requests size = " + persistableBundleArr.length);
         Logger.log(id, "applyRequests requests size = " + persistableBundleArr.length);
         try {
             for (PersistableBundle persistableBundle : persistableBundleArr) {
@@ -83,7 +97,8 @@ public final class RequestInjectorService extends IRequestInjector.Stub {
                     Logger.log(id, "Invalid request, no TAG_NAME");
                     throw new IllegalArgumentException("Invalid request, no TAG_NAME");
                 }
-                if (persistableBundle.getIntArray("key.i32") == null && persistableBundle.getIntArray("key.u8") == null) {
+                if (persistableBundle.getIntArray("key.i32") == null
+                        && persistableBundle.getIntArray("key.u8") == null) {
                     Logger.log(id, "Invalid request, no KEY_I32/KEY_U8");
                     throw new IllegalArgumentException("Invalid request, no KEY_I32/KEY_U8");
                 }
@@ -97,8 +112,10 @@ public final class RequestInjectorService extends IRequestInjector.Stub {
     }
 
     public final void clearRequests() {
-        if (this.mContext.checkCallingPermission("android.permission.CAMERA_SEND_SYSTEM_EVENTS") != 0) {
-            throw new SecurityException("Requires permission android.permission.CAMERA_SEND_SYSTEM_EVENTS");
+        if (this.mContext.checkCallingPermission("android.permission.CAMERA_SEND_SYSTEM_EVENTS")
+                != 0) {
+            throw new SecurityException(
+                    "Requires permission android.permission.CAMERA_SEND_SYSTEM_EVENTS");
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -117,7 +134,8 @@ public final class RequestInjectorService extends IRequestInjector.Stub {
                         }
                         arrayList.add(deepCopy);
                     }
-                    sendExtraRequestsToRequestInjector((PersistableBundle[]) arrayList.toArray(new PersistableBundle[0]));
+                    sendExtraRequestsToRequestInjector(
+                            (PersistableBundle[]) arrayList.toArray(new PersistableBundle[0]));
                 } finally {
                 }
             }
@@ -133,7 +151,8 @@ public final class RequestInjectorService extends IRequestInjector.Stub {
             int i2 = i + 1;
             if (i >= 3) {
                 Slog.w("RequestInjectorService", "Native camera service not available.");
-                Logger.log(Logger.ID.REQUEST_INJECTOR_SERVICE, "Native camera service not available.");
+                Logger.log(
+                        Logger.ID.REQUEST_INJECTOR_SERVICE, "Native camera service not available.");
                 return null;
             }
             try {
@@ -155,13 +174,20 @@ public final class RequestInjectorService extends IRequestInjector.Stub {
         Slog.i("RequestInjectorService", "sendAllExtraRequestsToRequestInjector");
         Logger.log(Logger.ID.REQUEST_INJECTOR_SERVICE, "sendAllExtraRequestsToRequestInjector");
         synchronized (this.mRequestInjectorLock) {
-            sendExtraRequestsToRequestInjector((PersistableBundle[]) this.mExtraRequestMap.values().toArray(new PersistableBundle[0]));
+            sendExtraRequestsToRequestInjector(
+                    (PersistableBundle[])
+                            this.mExtraRequestMap.values().toArray(new PersistableBundle[0]));
         }
     }
 
     public final void sendExtraRequestsToRequestInjector(PersistableBundle[] persistableBundleArr) {
-        SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("sendExtraRequestsToRequestInjector updated size = "), persistableBundleArr.length, "RequestInjectorService");
-        Logger.log(Logger.ID.REQUEST_INJECTOR_SERVICE, "sendExtraRequestsToRequestInjector updated size = " + persistableBundleArr.length);
+        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                new StringBuilder("sendExtraRequestsToRequestInjector updated size = "),
+                persistableBundleArr.length,
+                "RequestInjectorService");
+        Logger.log(
+                Logger.ID.REQUEST_INJECTOR_SERVICE,
+                "sendExtraRequestsToRequestInjector updated size = " + persistableBundleArr.length);
         try {
             synchronized (this.mRequestInjectorLock) {
                 try {
@@ -169,14 +195,17 @@ public final class RequestInjectorService extends IRequestInjector.Stub {
                         Slog.i("RequestInjectorService", "  " + persistableBundle);
                         Logger.log(Logger.ID.REQUEST_INJECTOR_SERVICE, "  " + persistableBundle);
                         if (persistableBundle.getIntArray("key.i32") != null) {
-                            if (persistableBundle.getIntArray("key.i32").length <= 0) {
-                            }
-                            this.mExtraRequestMap.put(persistableBundle.getString("key.tagName"), persistableBundle);
+                            if (persistableBundle.getIntArray("key.i32").length <= 0) {}
+                            this.mExtraRequestMap.put(
+                                    persistableBundle.getString("key.tagName"), persistableBundle);
                         }
-                        if (persistableBundle.getIntArray("key.u8") == null || persistableBundle.getIntArray("key.u8").length <= 0) {
-                            this.mExtraRequestMap.remove(persistableBundle.getString("key.tagName"));
+                        if (persistableBundle.getIntArray("key.u8") == null
+                                || persistableBundle.getIntArray("key.u8").length <= 0) {
+                            this.mExtraRequestMap.remove(
+                                    persistableBundle.getString("key.tagName"));
                         }
-                        this.mExtraRequestMap.put(persistableBundle.getString("key.tagName"), persistableBundle);
+                        this.mExtraRequestMap.put(
+                                persistableBundle.getString("key.tagName"), persistableBundle);
                     }
                     ICameraService iCameraService = getICameraService();
                     if (iCameraService == null) {
@@ -184,22 +213,33 @@ public final class RequestInjectorService extends IRequestInjector.Stub {
                     }
                     try {
                     } catch (RemoteException e) {
-                        Slog.e("RequestInjectorService", "Fail to apply ExtraRequests to Request Injector", e);
-                        Logger.log(Logger.ID.REQUEST_INJECTOR_SERVICE, "Fail to apply ExtraRequests to Request Injector" + e);
+                        Slog.e(
+                                "RequestInjectorService",
+                                "Fail to apply ExtraRequests to Request Injector",
+                                e);
+                        Logger.log(
+                                Logger.ID.REQUEST_INJECTOR_SERVICE,
+                                "Fail to apply ExtraRequests to Request Injector" + e);
                     }
                     if (iCameraService.applyExtraRequestsToRequestInjector(persistableBundleArr)) {
                         return;
                     }
-                    Slog.e("RequestInjectorService", "Fail to apply ExtraRequests to Request Injector, maybe type mismatch");
-                    Logger.log(Logger.ID.REQUEST_INJECTOR_SERVICE, "Fail to apply ExtraRequests to Request Injector, maybe type mismatch");
-                    throw new UnsupportedOperationException("Fail to apply request. Please check log");
+                    Slog.e(
+                            "RequestInjectorService",
+                            "Fail to apply ExtraRequests to Request Injector, maybe type mismatch");
+                    Logger.log(
+                            Logger.ID.REQUEST_INJECTOR_SERVICE,
+                            "Fail to apply ExtraRequests to Request Injector, maybe type mismatch");
+                    throw new UnsupportedOperationException(
+                            "Fail to apply request. Please check log");
                 } catch (Throwable th) {
                     throw th;
                 }
             }
         } finally {
             Slog.i("RequestInjectorService", "sendExtraRequestsToRequestInjector done");
-            Logger.log(Logger.ID.REQUEST_INJECTOR_SERVICE, "sendExtraRequestsToRequestInjector done");
+            Logger.log(
+                    Logger.ID.REQUEST_INJECTOR_SERVICE, "sendExtraRequestsToRequestInjector done");
         }
     }
 
@@ -215,12 +255,20 @@ public final class RequestInjectorService extends IRequestInjector.Stub {
                 try {
                     int i2 = i + 1;
                     if (i >= 3) {
-                        Slog.w("RequestInjectorService", "Can not register request injector callback. return null");
-                        Logger.log(Logger.ID.REQUEST_INJECTOR_SERVICE, "Can not register request injector callback.");
+                        Slog.w(
+                                "RequestInjectorService",
+                                "Can not register request injector callback. return null");
+                        Logger.log(
+                                Logger.ID.REQUEST_INJECTOR_SERVICE,
+                                "Can not register request injector callback.");
                         return;
                     }
                     try {
-                        Slog.w("RequestInjectorService", "Can not register request injector callback. wait 300ms retry count : " + i2);
+                        Slog.w(
+                                "RequestInjectorService",
+                                "Can not register request injector callback. wait 300ms retry count"
+                                    + " : "
+                                        + i2);
                         Thread.sleep(300L);
                     } catch (InterruptedException unused) {
                     }

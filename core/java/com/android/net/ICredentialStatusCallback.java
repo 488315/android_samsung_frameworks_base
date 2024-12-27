@@ -16,12 +16,10 @@ public interface ICredentialStatusCallback extends IInterface {
 
     public static class Default implements ICredentialStatusCallback {
         @Override // com.android.net.ICredentialStatusCallback
-        public void onSuccess() throws RemoteException {
-        }
+        public void onSuccess() throws RemoteException {}
 
         @Override // com.android.net.ICredentialStatusCallback
-        public void onFail(int status) throws RemoteException {
-        }
+        public void onFail(int status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ICredentialStatusCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICredentialStatusCallback {
+    public abstract static class Stub extends Binder implements ICredentialStatusCallback {
         static final int TRANSACTION_onFail = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -70,7 +68,8 @@ public interface ICredentialStatusCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICredentialStatusCallback.DESCRIPTOR);
             }

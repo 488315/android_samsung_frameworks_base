@@ -9,7 +9,7 @@ import android.os.RemoteException;
 import android.telecom.CallAudioState;
 import android.telecom.CallEndpoint;
 import android.telecom.ParcelableCall;
-import com.android.internal.telecom.IInCallAdapter;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -50,72 +50,57 @@ public interface IInCallService extends IInterface {
 
     public static class Default implements IInCallService {
         @Override // com.android.internal.telecom.IInCallService
-        public void setInCallAdapter(IInCallAdapter inCallAdapter) throws RemoteException {
-        }
+        public void setInCallAdapter(IInCallAdapter inCallAdapter) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void addCall(ParcelableCall call) throws RemoteException {
-        }
+        public void addCall(ParcelableCall call) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void updateCall(ParcelableCall call) throws RemoteException {
-        }
+        public void updateCall(ParcelableCall call) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void setPostDial(String callId, String remaining) throws RemoteException {
-        }
+        public void setPostDial(String callId, String remaining) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void setPostDialWait(String callId, String remaining) throws RemoteException {
-        }
+        public void setPostDialWait(String callId, String remaining) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void onCallAudioStateChanged(CallAudioState callAudioState) throws RemoteException {
-        }
+        public void onCallAudioStateChanged(CallAudioState callAudioState) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void onCallEndpointChanged(CallEndpoint callEndpoint) throws RemoteException {
-        }
+        public void onCallEndpointChanged(CallEndpoint callEndpoint) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void onAvailableCallEndpointsChanged(List<CallEndpoint> availableCallEndpoints) throws RemoteException {
-        }
+        public void onAvailableCallEndpointsChanged(List<CallEndpoint> availableCallEndpoints)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void onMuteStateChanged(boolean isMuted) throws RemoteException {
-        }
+        public void onMuteStateChanged(boolean isMuted) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void bringToForeground(boolean showDialpad) throws RemoteException {
-        }
+        public void bringToForeground(boolean showDialpad) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void onCanAddCallChanged(boolean canAddCall) throws RemoteException {
-        }
+        public void onCanAddCallChanged(boolean canAddCall) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void silenceRinger() throws RemoteException {
-        }
+        public void silenceRinger() throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void onConnectionEvent(String callId, String event, Bundle extras) throws RemoteException {
-        }
+        public void onConnectionEvent(String callId, String event, Bundle extras)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void onRttUpgradeRequest(String callId, int id) throws RemoteException {
-        }
+        public void onRttUpgradeRequest(String callId, int id) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void onRttInitiationFailure(String callId, int reason) throws RemoteException {
-        }
+        public void onRttInitiationFailure(String callId, int reason) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void onHandoverFailed(String callId, int error) throws RemoteException {
-        }
+        public void onHandoverFailed(String callId, int error) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallService
-        public void onHandoverComplete(String callId) throws RemoteException {
-        }
+        public void onHandoverComplete(String callId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -123,7 +108,7 @@ public interface IInCallService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInCallService {
+    public abstract static class Stub extends Binder implements IInCallService {
         public static final String DESCRIPTOR = "com.android.internal.telecom.IInCallService";
         static final int TRANSACTION_addCall = 2;
         static final int TRANSACTION_bringToForeground = 10;
@@ -210,7 +195,8 @@ public interface IInCallService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -225,12 +211,14 @@ public interface IInCallService extends IInterface {
                     setInCallAdapter(_arg0);
                     return true;
                 case 2:
-                    ParcelableCall _arg02 = (ParcelableCall) data.readTypedObject(ParcelableCall.CREATOR);
+                    ParcelableCall _arg02 =
+                            (ParcelableCall) data.readTypedObject(ParcelableCall.CREATOR);
                     data.enforceNoDataAvail();
                     addCall(_arg02);
                     return true;
                 case 3:
-                    ParcelableCall _arg03 = (ParcelableCall) data.readTypedObject(ParcelableCall.CREATOR);
+                    ParcelableCall _arg03 =
+                            (ParcelableCall) data.readTypedObject(ParcelableCall.CREATOR);
                     data.enforceNoDataAvail();
                     updateCall(_arg03);
                     return true;
@@ -247,7 +235,8 @@ public interface IInCallService extends IInterface {
                     setPostDialWait(_arg05, _arg12);
                     return true;
                 case 6:
-                    CallAudioState _arg06 = (CallAudioState) data.readTypedObject(CallAudioState.CREATOR);
+                    CallAudioState _arg06 =
+                            (CallAudioState) data.readTypedObject(CallAudioState.CREATOR);
                     data.enforceNoDataAvail();
                     onCallAudioStateChanged(_arg06);
                     return true;
@@ -393,7 +382,8 @@ public interface IInCallService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallService
-            public void onCallAudioStateChanged(CallAudioState callAudioState) throws RemoteException {
+            public void onCallAudioStateChanged(CallAudioState callAudioState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -417,7 +407,8 @@ public interface IInCallService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallService
-            public void onAvailableCallEndpointsChanged(List<CallEndpoint> availableCallEndpoints) throws RemoteException {
+            public void onAvailableCallEndpointsChanged(List<CallEndpoint> availableCallEndpoints)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -476,7 +467,8 @@ public interface IInCallService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallService
-            public void onConnectionEvent(String callId, String event, Bundle extras) throws RemoteException {
+            public void onConnectionEvent(String callId, String event, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

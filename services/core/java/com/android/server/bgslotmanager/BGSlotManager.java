@@ -2,8 +2,10 @@ package com.android.server.bgslotmanager;
 
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import com.android.server.am.ActivityManagerConstants;
 import com.android.server.am.DynamicHiddenApp;
+
 import com.samsung.android.knox.analytics.activation.ActivationMonitor;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -16,10 +18,17 @@ public final class BGSlotManager {
     public static int MIN_EMPTY_APPS = BgAppPropManager.getSlmkPropertyInt("dha_empty_min", "8");
     public static int MAX_EMPTY_APPS = BgAppPropManager.getSlmkPropertyInt("dha_empty_max", "24");
     public static int BONUS_MAX_CACHED_APPS_PER_SWAP = 0;
-    public static final int STATIC_MAX_EMPTY_FOR_OVER_8GB = BgAppPropManager.getSlmkPropertyInt("dha_empty_limit", "32");
-    public static final boolean IS_CHINA_MODEL = "china".equals(SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY, "").toLowerCase());
-    public static final boolean HRT_MaxCached_Enable = BgAppPropManager.getSlmkPropertyBool("dha_hrt_max_enable", "true");
-    public final int CHN_REDUCE_CACHED = BgAppPropManager.getSlmkPropertyInt("reduce_chn_cached_max", "0");
+    public static final int STATIC_MAX_EMPTY_FOR_OVER_8GB =
+            BgAppPropManager.getSlmkPropertyInt("dha_empty_limit", "32");
+    public static final boolean IS_CHINA_MODEL =
+            "china"
+                    .equals(
+                            SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY, "")
+                                    .toLowerCase());
+    public static final boolean HRT_MaxCached_Enable =
+            BgAppPropManager.getSlmkPropertyBool("dha_hrt_max_enable", "true");
+    public final int CHN_REDUCE_CACHED =
+            BgAppPropManager.getSlmkPropertyInt("reduce_chn_cached_max", "0");
     public int originCachedMax = MAX_CACHED_APPS;
     public int originCachedMin = MIN_CACHED_APPS;
     public int originEmptyMax = MAX_EMPTY_APPS;
@@ -50,11 +59,25 @@ public final class BGSlotManager {
         if ((i4 & 8) > 0) {
             i7 += 6;
         }
-        Slog.i("DynamicHiddenApp_BGSlotManager", "Before ChangeBGSlot CachedMax: " + MAX_CACHED_APPS + ", CachedMin: " + MIN_CACHED_APPS + ", EmptyMax: " + MAX_EMPTY_APPS);
+        Slog.i(
+                "DynamicHiddenApp_BGSlotManager",
+                "Before ChangeBGSlot CachedMax: "
+                        + MAX_CACHED_APPS
+                        + ", CachedMin: "
+                        + MIN_CACHED_APPS
+                        + ", EmptyMax: "
+                        + MAX_EMPTY_APPS);
         MAX_CACHED_APPS = Math.max(0, i + i7 + BONUS_MAX_CACHED_APPS_PER_SWAP);
         MIN_CACHED_APPS = Math.max(0, i2);
         MAX_EMPTY_APPS = Math.max(0, i3);
-        Slog.i("DynamicHiddenApp_BGSlotManager", "After ChangeBGSlot CachedMax: " + MAX_CACHED_APPS + ", CachedMin: " + MIN_CACHED_APPS + ", EmptyMax: " + MAX_EMPTY_APPS);
+        Slog.i(
+                "DynamicHiddenApp_BGSlotManager",
+                "After ChangeBGSlot CachedMax: "
+                        + MAX_CACHED_APPS
+                        + ", CachedMin: "
+                        + MIN_CACHED_APPS
+                        + ", EmptyMax: "
+                        + MAX_EMPTY_APPS);
         updateDefaultCachedMAX();
     }
 
@@ -97,7 +120,8 @@ public final class BGSlotManager {
         ActivityManagerConstants.EMPTY_RATE = 1.0f - (i / (i + i2));
         ActivityManagerConstants activityManagerConstants = dynamicHiddenApp.mConstants;
         if (activityManagerConstants != null) {
-            activityManagerConstants.MAX_CACHED_PROCESSES = ActivityManagerConstants.DEFAULT_MAX_CACHED_PROCESSES;
+            activityManagerConstants.MAX_CACHED_PROCESSES =
+                    ActivityManagerConstants.DEFAULT_MAX_CACHED_PROCESSES;
             activityManagerConstants.updateMaxCachedProcesses();
         }
     }

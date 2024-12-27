@@ -15,12 +15,10 @@ public interface IAccountManagerResponse extends IInterface {
 
     public static class Default implements IAccountManagerResponse {
         @Override // android.accounts.IAccountManagerResponse
-        public void onResult(Bundle value) throws RemoteException {
-        }
+        public void onResult(Bundle value) throws RemoteException {}
 
         @Override // android.accounts.IAccountManagerResponse
-        public void onError(int errorCode, String errorMessage) throws RemoteException {
-        }
+        public void onError(int errorCode, String errorMessage) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +26,7 @@ public interface IAccountManagerResponse extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAccountManagerResponse {
+    public abstract static class Stub extends Binder implements IAccountManagerResponse {
         public static final String DESCRIPTOR = "android.accounts.IAccountManagerResponse";
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onResult = 1;
@@ -70,7 +68,8 @@ public interface IAccountManagerResponse extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

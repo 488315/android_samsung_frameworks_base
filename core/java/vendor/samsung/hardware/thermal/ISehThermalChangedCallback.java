@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISehThermalChangedCallback extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$thermal$ISehThermalChangedCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$thermal$ISehThermalChangedCallback".replace('$', '.');
     public static final String HASH = "261f5623a2c8ff2223f5f289e93242b275eadfcd";
     public static final int VERSION = 1;
 
@@ -20,8 +21,7 @@ public interface ISehThermalChangedCallback extends IInterface {
 
     public static class Default implements ISehThermalChangedCallback {
         @Override // vendor.samsung.hardware.thermal.ISehThermalChangedCallback
-        public void notifyTemperatures(SehTemperature[] temperatures) throws RemoteException {
-        }
+        public void notifyTemperatures(SehTemperature[] temperatures) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.thermal.ISehThermalChangedCallback
         public int getInterfaceVersion() {
@@ -39,7 +39,7 @@ public interface ISehThermalChangedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehThermalChangedCallback {
+    public abstract static class Stub extends Binder implements ISehThermalChangedCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_notifyTemperatures = 1;
@@ -84,7 +84,8 @@ public interface ISehThermalChangedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -105,7 +106,8 @@ public interface ISehThermalChangedCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SehTemperature[] _arg0 = (SehTemperature[]) data.createTypedArray(SehTemperature.CREATOR);
+                    SehTemperature[] _arg0 =
+                            (SehTemperature[]) data.createTypedArray(SehTemperature.CREATOR);
                     data.enforceNoDataAvail();
                     notifyTemperatures(_arg0);
                     break;

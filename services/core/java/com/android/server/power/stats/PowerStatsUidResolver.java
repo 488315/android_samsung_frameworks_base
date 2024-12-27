@@ -2,6 +2,7 @@ package com.android.server.power.stats;
 
 import android.util.Slog;
 import android.util.SparseIntArray;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +39,14 @@ public final class PowerStatsUidResolver {
                 int size = this.mIsolatedUids.size();
                 for (int i = 0; i < size; i++) {
                     int keyAt = this.mIsolatedUids.keyAt(i);
-                    printWriter.println("  " + keyAt + "->" + this.mIsolatedUids.valueAt(i) + " (ref count = " + this.mIsolatedUidRefCounts.get(keyAt) + ")");
+                    printWriter.println(
+                            "  "
+                                    + keyAt
+                                    + "->"
+                                    + this.mIsolatedUids.valueAt(i)
+                                    + " (ref count = "
+                                    + this.mIsolatedUidRefCounts.get(keyAt)
+                                    + ")");
                 }
             } catch (Throwable th) {
                 throw th;
@@ -64,7 +72,9 @@ public final class PowerStatsUidResolver {
                 }
                 int indexOfKey = this.mIsolatedUids.indexOfKey(i);
                 if (indexOfKey < 0) {
-                    Slog.w("PowerStatsUidResolver", "Attempted to remove untracked child uid (" + i + ")");
+                    Slog.w(
+                            "PowerStatsUidResolver",
+                            "Attempted to remove untracked child uid (" + i + ")");
                     return;
                 }
                 int valueAt = this.mIsolatedUids.valueAt(indexOfKey);
@@ -88,7 +98,9 @@ public final class PowerStatsUidResolver {
                     this.mIsolatedUidRefCounts.put(i, i2 + 1);
                     return;
                 }
-                Slog.w("PowerStatsUidResolver", "Attempted to increment ref counted of untracked isolated uid (" + i + ")");
+                Slog.w(
+                        "PowerStatsUidResolver",
+                        "Attempted to increment ref counted of untracked isolated uid (" + i + ")");
             } catch (Throwable th) {
                 throw th;
             }

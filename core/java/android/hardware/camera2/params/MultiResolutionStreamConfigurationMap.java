@@ -2,7 +2,9 @@ package android.hardware.camera2.params;
 
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,12 +17,16 @@ import java.util.Map;
 /* loaded from: classes2.dex */
 public final class MultiResolutionStreamConfigurationMap {
     private final Map<String, StreamConfiguration[]> mConfigurations;
-    private final Map<Integer, List<MultiResolutionStreamInfo>> mMultiResolutionOutputConfigs = new HashMap();
-    private final Map<Integer, List<MultiResolutionStreamInfo>> mMultiResolutionInputConfigs = new HashMap();
+    private final Map<Integer, List<MultiResolutionStreamInfo>> mMultiResolutionOutputConfigs =
+            new HashMap();
+    private final Map<Integer, List<MultiResolutionStreamInfo>> mMultiResolutionInputConfigs =
+            new HashMap();
 
-    public MultiResolutionStreamConfigurationMap(Map<String, StreamConfiguration[]> configurations) {
+    public MultiResolutionStreamConfigurationMap(
+            Map<String, StreamConfiguration[]> configurations) {
         Map<Integer, List<MultiResolutionStreamInfo>> destMap;
-        Preconditions.checkNotNull(configurations, "multi-resolution configurations must not be null");
+        Preconditions.checkNotNull(
+                configurations, "multi-resolution configurations must not be null");
         if (configurations.size() == 0) {
             throw new IllegalArgumentException("multi-resolution configurations must not be empty");
         }
@@ -30,14 +36,17 @@ public final class MultiResolutionStreamConfigurationMap {
             StreamConfiguration[] configs = entry.getValue();
             for (StreamConfiguration config : configs) {
                 int format = config.getFormat();
-                MultiResolutionStreamInfo multiResolutionStreamInfo = new MultiResolutionStreamInfo(config.getWidth(), config.getHeight(), cameraId);
+                MultiResolutionStreamInfo multiResolutionStreamInfo =
+                        new MultiResolutionStreamInfo(
+                                config.getWidth(), config.getHeight(), cameraId);
                 if (config.isInput()) {
                     destMap = this.mMultiResolutionInputConfigs;
                 } else {
                     destMap = this.mMultiResolutionOutputConfigs;
                 }
                 if (!destMap.containsKey(Integer.valueOf(format))) {
-                    List<MultiResolutionStreamInfo> multiResolutionStreamInfoList = new ArrayList<>();
+                    List<MultiResolutionStreamInfo> multiResolutionStreamInfoList =
+                            new ArrayList<>();
                     destMap.put(Integer.valueOf(format), multiResolutionStreamInfoList);
                 }
                 destMap.get(Integer.valueOf(format)).add(multiResolutionStreamInfo);
@@ -48,7 +57,8 @@ public final class MultiResolutionStreamConfigurationMap {
     public static class SizeComparator implements Comparator<MultiResolutionStreamInfo> {
         @Override // java.util.Comparator
         public int compare(MultiResolutionStreamInfo lhs, MultiResolutionStreamInfo rhs) {
-            return StreamConfigurationMap.compareSizes(lhs.getWidth(), lhs.getHeight(), rhs.getWidth(), rhs.getHeight());
+            return StreamConfigurationMap.compareSizes(
+                    lhs.getWidth(), lhs.getHeight(), rhs.getWidth(), rhs.getHeight());
         }
     }
 
@@ -61,7 +71,8 @@ public final class MultiResolutionStreamConfigurationMap {
     }
 
     private int[] getPublicImageFormats(boolean output) {
-        Map<Integer, List<MultiResolutionStreamInfo>> multiResolutionConfigs = output ? this.mMultiResolutionOutputConfigs : this.mMultiResolutionInputConfigs;
+        Map<Integer, List<MultiResolutionStreamInfo>> multiResolutionConfigs =
+                output ? this.mMultiResolutionOutputConfigs : this.mMultiResolutionInputConfigs;
         int formatCount = multiResolutionConfigs.size();
         int[] formats = new int[formatCount];
         int i = 0;
@@ -82,9 +93,11 @@ public final class MultiResolutionStreamConfigurationMap {
 
     private Collection<MultiResolutionStreamInfo> getInfo(int format, boolean output) {
         int internalFormat = StreamConfigurationMap.imageFormatToInternal(format);
-        Map<Integer, List<MultiResolutionStreamInfo>> multiResolutionConfigs = output ? this.mMultiResolutionOutputConfigs : this.mMultiResolutionInputConfigs;
+        Map<Integer, List<MultiResolutionStreamInfo>> multiResolutionConfigs =
+                output ? this.mMultiResolutionOutputConfigs : this.mMultiResolutionInputConfigs;
         if (multiResolutionConfigs.containsKey(Integer.valueOf(internalFormat))) {
-            return Collections.unmodifiableCollection(multiResolutionConfigs.get(Integer.valueOf(internalFormat)));
+            return Collections.unmodifiableCollection(
+                    multiResolutionConfigs.get(Integer.valueOf(internalFormat)));
         }
         return Collections.emptyList();
     }
@@ -95,9 +108,17 @@ public final class MultiResolutionStreamConfigurationMap {
         if (formats != null) {
             for (int format : formats) {
                 Collection<MultiResolutionStreamInfo> streamInfoList = getInfo(format, output);
-                sb.append(NavigationBarInflaterView.SIZE_MOD_START + StreamConfigurationMap.formatToString(format) + ":");
+                sb.append(
+                        NavigationBarInflaterView.SIZE_MOD_START
+                                + StreamConfigurationMap.formatToString(format)
+                                + ":");
                 for (MultiResolutionStreamInfo streamInfo : streamInfoList) {
-                    sb.append(String.format("[w:%d, h:%d, id:%s], ", Integer.valueOf(streamInfo.getWidth()), Integer.valueOf(streamInfo.getHeight()), streamInfo.getPhysicalCameraId()));
+                    sb.append(
+                            String.format(
+                                    "[w:%d, h:%d, id:%s], ",
+                                    Integer.valueOf(streamInfo.getWidth()),
+                                    Integer.valueOf(streamInfo.getHeight()),
+                                    streamInfo.getPhysicalCameraId()));
                 }
                 if (sb.charAt(sb.length() - 1) == ' ') {
                     sb.delete(sb.length() - 2, sb.length());
@@ -131,7 +152,10 @@ public final class MultiResolutionStreamConfigurationMap {
     }
 
     public int hashCode() {
-        return HashCodeHelpers.hashCodeGeneric(this.mConfigurations, this.mMultiResolutionOutputConfigs, this.mMultiResolutionInputConfigs);
+        return HashCodeHelpers.hashCodeGeneric(
+                this.mConfigurations,
+                this.mMultiResolutionOutputConfigs,
+                this.mMultiResolutionInputConfigs);
     }
 
     public String toString() {

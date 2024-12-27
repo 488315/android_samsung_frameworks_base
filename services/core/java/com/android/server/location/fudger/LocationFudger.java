@@ -2,6 +2,7 @@ package com.android.server.location.fudger;
 
 import android.location.Location;
 import android.location.LocationResult;
+
 import java.time.Clock;
 import java.util.Random;
 
@@ -53,8 +54,10 @@ public final class LocationFudger {
                     long millis = this.mClock.millis();
                     if (millis >= this.mNextUpdateRealtimeMs) {
                         double d = OLD_WEIGHT;
-                        this.mLatitudeOffsetM = (nextRandomOffset() * 0.03d) + (this.mLatitudeOffsetM * d);
-                        this.mLongitudeOffsetM = (nextRandomOffset() * 0.03d) + (d * this.mLongitudeOffsetM);
+                        this.mLatitudeOffsetM =
+                                (nextRandomOffset() * 0.03d) + (this.mLatitudeOffsetM * d);
+                        this.mLongitudeOffsetM =
+                                (nextRandomOffset() * 0.03d) + (d * this.mLongitudeOffsetM);
                         this.mNextUpdateRealtimeMs = millis + 3600000;
                     }
                 }
@@ -64,10 +67,21 @@ public final class LocationFudger {
                 location2.removeAltitude();
                 location2.setExtras(null);
                 double wrapLatitude = wrapLatitude(location2.getLatitude());
-                double wrapLongitude = wrapLongitude((this.mLongitudeOffsetM / 111000.0d) / Math.cos(Math.toRadians(wrapLatitude))) + wrapLongitude(location2.getLongitude());
-                double wrapLatitude2 = wrapLatitude(this.mLatitudeOffsetM / 111000.0d) + wrapLatitude;
-                double wrapLatitude3 = wrapLatitude(Math.round(wrapLatitude2 / r1) * (this.mAccuracyM / 111000.0d));
-                double wrapLongitude2 = wrapLongitude(Math.round(wrapLongitude / r3) * ((this.mAccuracyM / 111000.0d) / Math.cos(Math.toRadians(wrapLatitude3))));
+                double wrapLongitude =
+                        wrapLongitude(
+                                        (this.mLongitudeOffsetM / 111000.0d)
+                                                / Math.cos(Math.toRadians(wrapLatitude)))
+                                + wrapLongitude(location2.getLongitude());
+                double wrapLatitude2 =
+                        wrapLatitude(this.mLatitudeOffsetM / 111000.0d) + wrapLatitude;
+                double wrapLatitude3 =
+                        wrapLatitude(
+                                Math.round(wrapLatitude2 / r1) * (this.mAccuracyM / 111000.0d));
+                double wrapLongitude2 =
+                        wrapLongitude(
+                                Math.round(wrapLongitude / r3)
+                                        * ((this.mAccuracyM / 111000.0d)
+                                                / Math.cos(Math.toRadians(wrapLatitude3))));
                 location2.setLatitude(wrapLatitude3);
                 location2.setLongitude(wrapLongitude2);
                 location2.setAccuracy(Math.max(this.mAccuracyM, location2.getAccuracy()));

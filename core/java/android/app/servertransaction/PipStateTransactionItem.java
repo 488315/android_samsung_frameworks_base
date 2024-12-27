@@ -6,35 +6,42 @@ import android.app.PictureInPictureUiState;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class PipStateTransactionItem extends ActivityTransactionItem {
-    public static final Parcelable.Creator<PipStateTransactionItem> CREATOR = new Parcelable.Creator<PipStateTransactionItem>() { // from class: android.app.servertransaction.PipStateTransactionItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PipStateTransactionItem createFromParcel(Parcel in) {
-            return new PipStateTransactionItem(in);
-        }
+    public static final Parcelable.Creator<PipStateTransactionItem> CREATOR =
+            new Parcelable.Creator<PipStateTransactionItem>() { // from class:
+                // android.app.servertransaction.PipStateTransactionItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PipStateTransactionItem createFromParcel(Parcel in) {
+                    return new PipStateTransactionItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PipStateTransactionItem[] newArray(int size) {
-            return new PipStateTransactionItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PipStateTransactionItem[] newArray(int size) {
+                    return new PipStateTransactionItem[size];
+                }
+            };
     private PictureInPictureUiState mPipState;
 
     @Override // android.app.servertransaction.ActivityTransactionItem
-    public void execute(ClientTransactionHandler client, ActivityThread.ActivityClientRecord r, PendingTransactionActions pendingActions) {
+    public void execute(
+            ClientTransactionHandler client,
+            ActivityThread.ActivityClientRecord r,
+            PendingTransactionActions pendingActions) {
         client.handlePictureInPictureStateChanged(r, this.mPipState);
     }
 
-    private PipStateTransactionItem() {
-    }
+    private PipStateTransactionItem() {}
 
-    public static PipStateTransactionItem obtain(IBinder activityToken, PictureInPictureUiState pipState) {
-        PipStateTransactionItem instance = (PipStateTransactionItem) ObjectPool.obtain(PipStateTransactionItem.class);
+    public static PipStateTransactionItem obtain(
+            IBinder activityToken, PictureInPictureUiState pipState) {
+        PipStateTransactionItem instance =
+                (PipStateTransactionItem) ObjectPool.obtain(PipStateTransactionItem.class);
         if (instance == null) {
             instance = new PipStateTransactionItem();
         }
@@ -43,7 +50,8 @@ public final class PipStateTransactionItem extends ActivityTransactionItem {
         return instance;
     }
 
-    @Override // android.app.servertransaction.ActivityTransactionItem, android.app.servertransaction.ObjectPoolItem
+    @Override // android.app.servertransaction.ActivityTransactionItem,
+    // android.app.servertransaction.ObjectPoolItem
     public void recycle() {
         super.recycle();
         this.mPipState = null;

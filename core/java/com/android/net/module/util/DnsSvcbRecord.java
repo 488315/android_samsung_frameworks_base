@@ -2,8 +2,7 @@ package com.android.net.module.util;
 
 import android.text.TextUtils;
 import android.util.SparseArray;
-import com.android.net.module.util.DnsPacket;
-import com.android.net.module.util.DnsPacketUtils;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.BufferUnderflowException;
@@ -31,7 +30,8 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
     private final int mSvcPriority;
     private final String mTargetName;
 
-    public DnsSvcbRecord(int rType, ByteBuffer buff) throws IllegalStateException, DnsPacket.ParseException {
+    public DnsSvcbRecord(int rType, ByteBuffer buff)
+            throws IllegalStateException, DnsPacket.ParseException {
         super(rType, buff);
         this.mAllSvcParams = new SparseArray<>();
         if (this.nsType != 64) {
@@ -53,18 +53,24 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
         this.mSvcPriority = Short.toUnsignedInt(buf.getShort());
         this.mTargetName = DnsPacketUtils.DnsRecordParser.parseName(buf, 0, false);
         if (this.mTargetName.length() > 255) {
-            throw new DnsPacket.ParseException("Failed to parse SVCB target name, name size is too long: " + this.mTargetName.length());
+            throw new DnsPacket.ParseException(
+                    "Failed to parse SVCB target name, name size is too long: "
+                            + this.mTargetName.length());
         }
         while (buf.remaining() >= 4) {
             SvcParam svcParam = parseSvcParam(buf);
             int key = svcParam.getKey();
             if (this.mAllSvcParams.get(key) != null) {
-                throw new DnsPacket.ParseException("Invalid DnsSvcbRecord, key " + key + " is repeated");
+                throw new DnsPacket.ParseException(
+                        "Invalid DnsSvcbRecord, key " + key + " is repeated");
             }
             this.mAllSvcParams.put(key, svcParam);
         }
         if (buf.hasRemaining()) {
-            throw new DnsPacket.ParseException("Invalid DnsSvcbRecord. Got " + buf.remaining() + " remaining bytes after parsing");
+            throw new DnsPacket.ParseException(
+                    "Invalid DnsSvcbRecord. Got "
+                            + buf.remaining()
+                            + " remaining bytes after parsing");
         }
     }
 
@@ -113,7 +119,15 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
         for (int i = 0; i < this.mAllSvcParams.size(); i++) {
             sj.add(this.mAllSvcParams.valueAt(i).toString());
         }
-        return this.dName + " " + this.ttl + " IN SVCB " + this.mSvcPriority + " " + this.mTargetName + " " + sj.toString();
+        return this.dName
+                + " "
+                + this.ttl
+                + " IN SVCB "
+                + this.mSvcPriority
+                + " "
+                + this.mTargetName
+                + " "
+                + sj.toString();
     }
 
     private static SvcParam parseSvcParam(ByteBuffer buf) throws DnsPacket.ParseException {
@@ -144,7 +158,7 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
         }
     }
 
-    private static abstract class SvcParam<T> {
+    private abstract static class SvcParam<T> {
         private final int mKey;
 
         abstract T getValue();
@@ -161,7 +175,8 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
     private static class SvcParamMandatory extends SvcParam<short[]> {
         private final short[] mValue;
 
-        private SvcParamMandatory(ByteBuffer buf) throws BufferUnderflowException, DnsPacket.ParseException {
+        private SvcParamMandatory(ByteBuffer buf)
+                throws BufferUnderflowException, DnsPacket.ParseException {
             super(0);
             int len = Short.toUnsignedInt(buf.getShort());
             ByteBuffer svcParamValue = DnsSvcbRecord.sliceAndAdvance(buf, len);
@@ -211,7 +226,8 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
     }
 
     private static class SvcParamNoDefaultAlpn extends SvcParam<Void> {
-        SvcParamNoDefaultAlpn(ByteBuffer buf) throws BufferUnderflowException, DnsPacket.ParseException {
+        SvcParamNoDefaultAlpn(ByteBuffer buf)
+                throws BufferUnderflowException, DnsPacket.ParseException {
             super(2);
             int len = buf.getShort();
             if (len != 0) {
@@ -257,13 +273,15 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
     private static class SvcParamIpHint extends SvcParam<List<InetAddress>> {
         private final List<InetAddress> mValue;
 
-        private SvcParamIpHint(int key, ByteBuffer buf, int addrLen) throws BufferUnderflowException, DnsPacket.ParseException {
+        private SvcParamIpHint(int key, ByteBuffer buf, int addrLen)
+                throws BufferUnderflowException, DnsPacket.ParseException {
             super(key);
             int len = Short.toUnsignedInt(buf.getShort());
             ByteBuffer svcParamValue = DnsSvcbRecord.sliceAndAdvance(buf, len);
             this.mValue = SvcParamValueUtil.toInetAddressList(svcParamValue, addrLen);
             if (this.mValue.isEmpty()) {
-                throw new DnsPacket.ParseException(DnsSvcbRecord.toKeyName(getKey()) + " value must be non-empty");
+                throw new DnsPacket.ParseException(
+                        DnsSvcbRecord.toKeyName(getKey()) + " value must be non-empty");
             }
         }
 
@@ -288,7 +306,9 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        SvcParamIpv4Hint(java.nio.ByteBuffer r3) throws java.nio.BufferUnderflowException, com.android.net.module.util.DnsPacket.ParseException {
+        SvcParamIpv4Hint(java.nio.ByteBuffer r3)
+                throws java.nio.BufferUnderflowException,
+                        com.android.net.module.util.DnsPacket.ParseException {
             /*
                 r2 = this;
                 r0 = 4
@@ -296,7 +316,9 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
                 r2.<init>(r0, r3, r0)
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.net.module.util.DnsSvcbRecord.SvcParamIpv4Hint.<init>(java.nio.ByteBuffer):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.net.module.util.DnsSvcbRecord.SvcParamIpv4Hint.<init>(java.nio.ByteBuffer):void");
         }
     }
 
@@ -337,7 +359,8 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
     private static class SvcParamGeneric extends SvcParam<byte[]> {
         private final byte[] mValue;
 
-        SvcParamGeneric(int key, ByteBuffer buf) throws BufferUnderflowException, DnsPacket.ParseException {
+        SvcParamGeneric(int key, ByteBuffer buf)
+                throws BufferUnderflowException, DnsPacket.ParseException {
             super(key);
             int len = Short.toUnsignedInt(buf.getShort());
             this.mValue = new byte[len];
@@ -385,7 +408,8 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
         }
     }
 
-    public static ByteBuffer sliceAndAdvance(ByteBuffer buf, int length) throws BufferUnderflowException {
+    public static ByteBuffer sliceAndAdvance(ByteBuffer buf, int length)
+            throws BufferUnderflowException {
         if (buf.remaining() < length) {
             throw new BufferUnderflowException();
         }
@@ -396,11 +420,11 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
     }
 
     private static class SvcParamValueUtil {
-        private SvcParamValueUtil() {
-        }
+        private SvcParamValueUtil() {}
 
         /* JADX INFO: Access modifiers changed from: private */
-        public static List<String> toStringList(ByteBuffer buf) throws BufferUnderflowException, DnsPacket.ParseException {
+        public static List<String> toStringList(ByteBuffer buf)
+                throws BufferUnderflowException, DnsPacket.ParseException {
             List<String> out = new ArrayList<>();
             while (buf.hasRemaining()) {
                 int alpnLen = Byte.toUnsignedInt(buf.get());
@@ -415,7 +439,8 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public static short[] toShortArray(ByteBuffer buf) throws BufferUnderflowException, DnsPacket.ParseException {
+        public static short[] toShortArray(ByteBuffer buf)
+                throws BufferUnderflowException, DnsPacket.ParseException {
             if (buf.remaining() % 2 != 0) {
                 throw new DnsPacket.ParseException("Can't parse whole byte array");
             }
@@ -426,7 +451,8 @@ public final class DnsSvcbRecord extends DnsPacket.DnsRecord {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public static List<InetAddress> toInetAddressList(ByteBuffer buf, int addrLen) throws BufferUnderflowException, DnsPacket.ParseException {
+        public static List<InetAddress> toInetAddressList(ByteBuffer buf, int addrLen)
+                throws BufferUnderflowException, DnsPacket.ParseException {
             if (buf.remaining() % addrLen != 0) {
                 throw new DnsPacket.ParseException("Can't parse whole byte array");
             }

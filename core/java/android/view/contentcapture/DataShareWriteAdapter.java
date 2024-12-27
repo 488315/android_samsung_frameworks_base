@@ -8,6 +8,5 @@ public interface DataShareWriteAdapter {
 
     void onWrite(ParcelFileDescriptor parcelFileDescriptor);
 
-    default void onError(int errorCode) {
-    }
+    default void onError(int errorCode) {}
 }

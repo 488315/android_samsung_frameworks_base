@@ -42,10 +42,8 @@ public class TimeAnimator extends ValueAnimator {
     }
 
     @Override // android.animation.ValueAnimator
-    void animateValue(float fraction) {
-    }
+    void animateValue(float fraction) {}
 
     @Override // android.animation.ValueAnimator
-    void initAnimation() {
-    }
+    void initAnimation() {}
 }

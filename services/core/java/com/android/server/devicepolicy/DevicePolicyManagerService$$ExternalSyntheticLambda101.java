@@ -1,25 +1,30 @@
 package com.android.server.devicepolicy;
 
 import android.content.Context;
+
 import com.android.internal.util.FunctionalUtils;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda101 implements FunctionalUtils.ThrowingRunnable {
+public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda101
+        implements FunctionalUtils.ThrowingRunnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
     public final /* synthetic */ int f$1;
     public final /* synthetic */ Object f$2;
 
-    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda101(int i, Context context, List list) {
+    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda101(
+            int i, Context context, List list) {
         this.$r8$classId = 2;
         this.f$2 = list;
         this.f$0 = context;
         this.f$1 = i;
     }
 
-    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda101(DevicePolicyManagerService devicePolicyManagerService, int i, Object obj, int i2) {
+    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda101(
+            DevicePolicyManagerService devicePolicyManagerService, int i, Object obj, int i2) {
         this.$r8$classId = i2;
         this.f$0 = devicePolicyManagerService;
         this.f$1 = i;
@@ -113,6 +118,8 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
             r0.setProfileNetworkPreferences(r1, r3, r2, r2)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.devicepolicy.DevicePolicyManagerService$$ExternalSyntheticLambda101.runOrThrow():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.devicepolicy.DevicePolicyManagerService$$ExternalSyntheticLambda101.runOrThrow():void");
     }
 }

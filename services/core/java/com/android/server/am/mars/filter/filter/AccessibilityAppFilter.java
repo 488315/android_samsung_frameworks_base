@@ -6,8 +6,10 @@ import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.server.am.mars.MARsDebugConfig;
 import com.android.server.am.mars.filter.IFilter;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -32,7 +34,11 @@ public final class AccessibilityAppFilter implements IFilter {
                     if (!this.mEnabledAccessibilityPackages.contains(str2)) {
                         this.mEnabledAccessibilityPackages.add(str2);
                         if (MARsDebugConfig.DEBUG_FILTER) {
-                            Slog.d("MARs:AccessibilityAppFilter", "getEnabledAccessibilityPackage: add mEnabledAccessibilityPackages " + str2);
+                            Slog.d(
+                                    "MARs:AccessibilityAppFilter",
+                                    "getEnabledAccessibilityPackage: add"
+                                        + " mEnabledAccessibilityPackages "
+                                            + str2);
                         }
                     }
                 } finally {
@@ -48,11 +54,15 @@ public final class AccessibilityAppFilter implements IFilter {
         }
         try {
             if (this.mRegisteredAccessibilityContentObserver) {
-                this.mContext.getContentResolver().unregisterContentObserver(this.mAccessibilityContentObserver);
+                this.mContext
+                        .getContentResolver()
+                        .unregisterContentObserver(this.mAccessibilityContentObserver);
                 this.mRegisteredAccessibilityContentObserver = false;
             }
         } catch (IllegalArgumentException unused) {
-            Slog.e("MARs:AccessibilityAppFilter", "IllegalArgumentException occurred in unregisterContentObserver()");
+            Slog.e(
+                    "MARs:AccessibilityAppFilter",
+                    "IllegalArgumentException occurred in unregisterContentObserver()");
         }
     }
 
@@ -60,7 +70,10 @@ public final class AccessibilityAppFilter implements IFilter {
     public final int filter(int i, int i2, int i3, String str) {
         ArrayList arrayList;
         Context context = this.mContext;
-        if (context == null || i != context.getUserId() || str == null || (arrayList = this.mEnabledAccessibilityPackages) == null) {
+        if (context == null
+                || i != context.getUserId()
+                || str == null
+                || (arrayList = this.mEnabledAccessibilityPackages) == null) {
             return 0;
         }
         synchronized (arrayList) {
@@ -75,7 +88,9 @@ public final class AccessibilityAppFilter implements IFilter {
         synchronized (this.mEnabledAccessibilityPackages) {
             this.mEnabledAccessibilityPackages.clear();
         }
-        String string = Settings.Secure.getString(this.mContext.getContentResolver(), "enabled_accessibility_services");
+        String string =
+                Settings.Secure.getString(
+                        this.mContext.getContentResolver(), "enabled_accessibility_services");
         if (string == null) {
             return;
         }
@@ -101,13 +116,22 @@ public final class AccessibilityAppFilter implements IFilter {
         if (this.mRegisteredAccessibilityContentObserver) {
             return;
         }
-        this.mAccessibilityContentObserver = new ContentObserver(new Handler()) { // from class: com.android.server.am.mars.filter.filter.AccessibilityAppFilter.1
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z, Uri uri) {
-                AccessibilityAppFilter.this.getEnabledAccessibilityPackage();
-            }
-        };
-        this.mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("enabled_accessibility_services"), false, this.mAccessibilityContentObserver, this.mContext.getUserId());
+        this.mAccessibilityContentObserver =
+                new ContentObserver(
+                        new Handler()) { // from class:
+                                         // com.android.server.am.mars.filter.filter.AccessibilityAppFilter.1
+                    @Override // android.database.ContentObserver
+                    public final void onChange(boolean z, Uri uri) {
+                        AccessibilityAppFilter.this.getEnabledAccessibilityPackage();
+                    }
+                };
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        Settings.Secure.getUriFor("enabled_accessibility_services"),
+                        false,
+                        this.mAccessibilityContentObserver,
+                        this.mContext.getUserId());
         this.mRegisteredAccessibilityContentObserver = true;
     }
 }

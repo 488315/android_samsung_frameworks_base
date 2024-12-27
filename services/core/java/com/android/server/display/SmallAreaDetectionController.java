@@ -7,10 +7,12 @@ import android.provider.DeviceConfig;
 import android.provider.DeviceConfigInterface;
 import android.util.ArrayMap;
 import android.util.SparseArray;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.server.LocalServices;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.pm.pkg.PackageStateInternal;
+
 import java.util.Map;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,34 +24,45 @@ final class SmallAreaDetectionController {
     public final Map mAllowPkgMap = new ArrayMap();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class OnPropertiesChangedListener implements DeviceConfig.OnPropertiesChangedListener {
-        public OnPropertiesChangedListener() {
-        }
+    public final class OnPropertiesChangedListener
+            implements DeviceConfig.OnPropertiesChangedListener {
+        public OnPropertiesChangedListener() {}
 
         public final void onPropertiesChanged(DeviceConfig.Properties properties) {
             if (properties.getKeyset().contains("small_area_detection_allowlist")) {
-                SmallAreaDetectionController.this.updateAllowlist(properties.getString("small_area_detection_allowlist", (String) null));
+                SmallAreaDetectionController.this.updateAllowlist(
+                        properties.getString("small_area_detection_allowlist", (String) null));
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageReceiver implements PackageManagerInternal.PackageListObserver {
-        public PackageReceiver() {
-        }
+        public PackageReceiver() {}
 
         @Override // android.content.pm.PackageManagerInternal.PackageListObserver
         public final void onPackageAdded(String str, int i) {
             float floatValue;
             synchronized (SmallAreaDetectionController.this.mLock) {
                 try {
-                    floatValue = ((ArrayMap) SmallAreaDetectionController.this.mAllowPkgMap).containsKey(str) ? ((Float) ((ArrayMap) SmallAreaDetectionController.this.mAllowPkgMap).get(str)).floatValue() : 0.0f;
+                    floatValue =
+                            ((ArrayMap) SmallAreaDetectionController.this.mAllowPkgMap)
+                                            .containsKey(str)
+                                    ? ((Float)
+                                                    ((ArrayMap)
+                                                                    SmallAreaDetectionController
+                                                                            .this
+                                                                            .mAllowPkgMap)
+                                                            .get(str))
+                                            .floatValue()
+                                    : 0.0f;
                 } catch (Throwable th) {
                     throw th;
                 }
             }
             if (floatValue > FullScreenMagnificationGestureHandler.MAX_SCALE) {
-                SmallAreaDetectionController smallAreaDetectionController = SmallAreaDetectionController.this;
+                SmallAreaDetectionController smallAreaDetectionController =
+                        SmallAreaDetectionController.this;
                 int appId = UserHandle.getAppId(i);
                 smallAreaDetectionController.getClass();
                 SmallAreaDetectionController.setSmallAreaDetectionThreshold(floatValue, appId);
@@ -57,11 +70,16 @@ final class SmallAreaDetectionController {
         }
     }
 
-    public SmallAreaDetectionController(Context context, DeviceConfigInterface deviceConfigInterface) {
+    public SmallAreaDetectionController(
+            Context context, DeviceConfigInterface deviceConfigInterface) {
         this.mContext = context;
-        PackageManagerInternal packageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        PackageManagerInternal packageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
         this.mPackageManager = packageManagerInternal;
-        deviceConfigInterface.addOnPropertiesChangedListener("display_manager", BackgroundThread.getExecutor(), new OnPropertiesChangedListener());
+        deviceConfigInterface.addOnPropertiesChangedListener(
+                "display_manager",
+                BackgroundThread.getExecutor(),
+                new OnPropertiesChangedListener());
         packageManagerInternal.getPackageList(new PackageReceiver());
     }
 
@@ -108,7 +126,8 @@ final class SmallAreaDetectionController {
                 for (String str4 : arrayMap.keySet()) {
                     Float f = (Float) arrayMap.get(str4);
                     f.floatValue();
-                    PackageStateInternal packageStateInternal = this.mPackageManager.getPackageStateInternal(str4);
+                    PackageStateInternal packageStateInternal =
+                            this.mPackageManager.getPackageStateInternal(str4);
                     if (packageStateInternal != null) {
                         sparseArray.put(packageStateInternal.getAppId(), f);
                     }

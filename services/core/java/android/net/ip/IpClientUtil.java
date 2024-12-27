@@ -3,10 +3,10 @@ package android.net.ip;
 import android.content.Context;
 import android.net.DhcpResultsParcelable;
 import android.net.LinkProperties;
-import android.net.ip.IIpClientCallbacks;
 import android.net.networkstack.ModuleNetworkStackClient;
 import android.net.networkstack.aidl.ip.ReachabilityLossInfoParcelable;
 import android.os.ConditionVariable;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.List;
@@ -85,7 +85,8 @@ public class IpClientUtil {
         }
 
         @Override // android.net.ip.IIpClientCallbacks
-        public final void onReachabilityFailure(ReachabilityLossInfoParcelable reachabilityLossInfoParcelable) {
+        public final void onReachabilityFailure(
+                ReachabilityLossInfoParcelable reachabilityLossInfoParcelable) {
             this.mCb.onReachabilityFailure(reachabilityLossInfoParcelable);
         }
 
@@ -138,11 +139,17 @@ public class IpClientUtil {
         }
     }
 
-    public static void dumpIpClient(IIpClient iIpClient, FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public static void dumpIpClient(
+            IIpClient iIpClient,
+            FileDescriptor fileDescriptor,
+            PrintWriter printWriter,
+            String[] strArr) {
         printWriter.println("IpClient logs have moved to dumpsys network_stack");
     }
 
-    public static void makeIpClient(Context context, String str, IpClientCallbacks ipClientCallbacks) {
-        ModuleNetworkStackClient.getInstance(context).makeIpClient(str, new IpClientCallbacksProxy(ipClientCallbacks));
+    public static void makeIpClient(
+            Context context, String str, IpClientCallbacks ipClientCallbacks) {
+        ModuleNetworkStackClient.getInstance(context)
+                .makeIpClient(str, new IpClientCallbacksProxy(ipClientCallbacks));
     }
 }

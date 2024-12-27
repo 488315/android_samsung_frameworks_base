@@ -35,44 +35,34 @@ public interface ITestSession extends IInterface {
 
     public static class Default implements ITestSession {
         @Override // android.hardware.biometrics.ITestSession
-        public void setTestHalEnabled(boolean enableTestHal) throws RemoteException {
-        }
+        public void setTestHalEnabled(boolean enableTestHal) throws RemoteException {}
 
         @Override // android.hardware.biometrics.ITestSession
-        public void startEnroll(int userId) throws RemoteException {
-        }
+        public void startEnroll(int userId) throws RemoteException {}
 
         @Override // android.hardware.biometrics.ITestSession
-        public void finishEnroll(int userId) throws RemoteException {
-        }
+        public void finishEnroll(int userId) throws RemoteException {}
 
         @Override // android.hardware.biometrics.ITestSession
-        public void acceptAuthentication(int userId) throws RemoteException {
-        }
+        public void acceptAuthentication(int userId) throws RemoteException {}
 
         @Override // android.hardware.biometrics.ITestSession
-        public void rejectAuthentication(int userId) throws RemoteException {
-        }
+        public void rejectAuthentication(int userId) throws RemoteException {}
 
         @Override // android.hardware.biometrics.ITestSession
-        public void notifyAcquired(int userId, int acquireInfo) throws RemoteException {
-        }
+        public void notifyAcquired(int userId, int acquireInfo) throws RemoteException {}
 
         @Override // android.hardware.biometrics.ITestSession
-        public void notifyError(int userId, int errorCode) throws RemoteException {
-        }
+        public void notifyError(int userId, int errorCode) throws RemoteException {}
 
         @Override // android.hardware.biometrics.ITestSession
-        public void cleanupInternalState(int userId) throws RemoteException {
-        }
+        public void cleanupInternalState(int userId) throws RemoteException {}
 
         @Override // android.hardware.biometrics.ITestSession
-        public void notifyVendorAcquired(int userId, int vendorAcquired) throws RemoteException {
-        }
+        public void notifyVendorAcquired(int userId, int vendorAcquired) throws RemoteException {}
 
         @Override // android.hardware.biometrics.ITestSession
-        public void notifyVendorError(int userId, int vendorErrorCode) throws RemoteException {
-        }
+        public void notifyVendorError(int userId, int vendorErrorCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -80,7 +70,7 @@ public interface ITestSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITestSession {
+    public abstract static class Stub extends Binder implements ITestSession {
         static final int TRANSACTION_acceptAuthentication = 4;
         static final int TRANSACTION_cleanupInternalState = 8;
         static final int TRANSACTION_finishEnroll = 3;
@@ -103,7 +93,9 @@ public interface ITestSession extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static ITestSession asInterface(IBinder obj) {
@@ -155,7 +147,8 @@ public interface ITestSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITestSession.DESCRIPTOR);
             }
@@ -372,7 +365,8 @@ public interface ITestSession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.ITestSession
-            public void notifyVendorAcquired(int userId, int vendorAcquired) throws RemoteException {
+            public void notifyVendorAcquired(int userId, int vendorAcquired)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -405,43 +399,53 @@ public interface ITestSession extends IInterface {
         }
 
         protected void setTestHalEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void startEnroll_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void finishEnroll_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void acceptAuthentication_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void rejectAuthentication_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void notifyAcquired_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void notifyError_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void cleanupInternalState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void notifyVendorAcquired_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void notifyVendorError_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

@@ -22,7 +22,10 @@ public class SliceQuery {
                 return item;
             }
             if (!compareTypes(item, "slice") || !item.hasHint(Slice.HINT_LIST)) {
-                if (!item.hasHint(Slice.HINT_ACTIONS) && !item.hasHint(Slice.HINT_LIST_ITEM) && !compareTypes(item, "action") && (icon = find(item, "image")) != null) {
+                if (!item.hasHint(Slice.HINT_ACTIONS)
+                        && !item.hasHint(Slice.HINT_LIST_ITEM)
+                        && !compareTypes(item, "action")
+                        && (icon = find(item, "image")) != null) {
                     return icon;
                 }
             }
@@ -45,12 +48,18 @@ public class SliceQuery {
         if (container == null || item == null) {
             return false;
         }
-        return stream(container).filter(new Predicate() { // from class: android.app.slice.SliceQuery$$ExternalSyntheticLambda2
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return SliceQuery.lambda$contains$0(SliceItem.this, (SliceItem) obj);
-            }
-        }).findAny().isPresent();
+        return stream(container)
+                .filter(
+                        new Predicate() { // from class:
+                            // android.app.slice.SliceQuery$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return SliceQuery.lambda$contains$0(
+                                        SliceItem.this, (SliceItem) obj);
+                            }
+                        })
+                .findAny()
+                .isPresent();
     }
 
     static /* synthetic */ boolean lambda$contains$0(SliceItem item, SliceItem s) {
@@ -62,24 +71,32 @@ public class SliceQuery {
     }
 
     public static List<SliceItem> findAll(SliceItem s, String type, String hints, String nonHints) {
-        return findAll(s, type, new String[]{hints}, new String[]{nonHints});
+        return findAll(s, type, new String[] {hints}, new String[] {nonHints});
     }
 
-    public static List<SliceItem> findAll(SliceItem s, final String type, final String[] hints, final String[] nonHints) {
-        return (List) stream(s).filter(new Predicate() { // from class: android.app.slice.SliceQuery$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return SliceQuery.lambda$findAll$1(type, hints, nonHints, (SliceItem) obj);
-            }
-        }).collect(Collectors.toList());
+    public static List<SliceItem> findAll(
+            SliceItem s, final String type, final String[] hints, final String[] nonHints) {
+        return (List)
+                stream(s)
+                        .filter(
+                                new Predicate() { // from class:
+                                    // android.app.slice.SliceQuery$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return SliceQuery.lambda$findAll$1(
+                                                type, hints, nonHints, (SliceItem) obj);
+                                    }
+                                })
+                        .collect(Collectors.toList());
     }
 
-    static /* synthetic */ boolean lambda$findAll$1(String type, String[] hints, String[] nonHints, SliceItem item) {
+    static /* synthetic */ boolean lambda$findAll$1(
+            String type, String[] hints, String[] nonHints, SliceItem item) {
         return compareTypes(item, type) && item.hasHints(hints) && !item.hasAnyHints(nonHints);
     }
 
     public static SliceItem find(Slice s, String type, String hints, String nonHints) {
-        return find(s, type, new String[]{hints}, new String[]{nonHints});
+        return find(s, type, new String[] {hints}, new String[] {nonHints});
     }
 
     public static SliceItem find(Slice s, String type) {
@@ -91,46 +108,61 @@ public class SliceQuery {
     }
 
     public static SliceItem find(SliceItem s, String type, String hints, String nonHints) {
-        return find(s, type, new String[]{hints}, new String[]{nonHints});
+        return find(s, type, new String[] {hints}, new String[] {nonHints});
     }
 
     public static SliceItem find(Slice s, String type, String[] hints, String[] nonHints) {
         List<String> h = s.getHints();
-        return find(new SliceItem(s, "slice", (String) null, (String[]) h.toArray(new String[h.size()])), type, hints, nonHints);
+        return find(
+                new SliceItem(
+                        s, "slice", (String) null, (String[]) h.toArray(new String[h.size()])),
+                type,
+                hints,
+                nonHints);
     }
 
-    public static SliceItem find(SliceItem s, final String type, final String[] hints, final String[] nonHints) {
-        return stream(s).filter(new Predicate() { // from class: android.app.slice.SliceQuery$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return SliceQuery.lambda$find$2(type, hints, nonHints, (SliceItem) obj);
-            }
-        }).findFirst().orElse(null);
+    public static SliceItem find(
+            SliceItem s, final String type, final String[] hints, final String[] nonHints) {
+        return stream(s)
+                .filter(
+                        new Predicate() { // from class:
+                            // android.app.slice.SliceQuery$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return SliceQuery.lambda$find$2(
+                                        type, hints, nonHints, (SliceItem) obj);
+                            }
+                        })
+                .findFirst()
+                .orElse(null);
     }
 
-    static /* synthetic */ boolean lambda$find$2(String type, String[] hints, String[] nonHints, SliceItem item) {
+    static /* synthetic */ boolean lambda$find$2(
+            String type, String[] hints, String[] nonHints, SliceItem item) {
         return compareTypes(item, type) && item.hasHints(hints) && !item.hasAnyHints(nonHints);
     }
 
     public static Stream<SliceItem> stream(SliceItem slice) {
         final Queue<SliceItem> items = new LinkedList<>();
         items.add(slice);
-        Iterator<SliceItem> iterator = new Iterator<SliceItem>() { // from class: android.app.slice.SliceQuery.1
-            @Override // java.util.Iterator
-            public boolean hasNext() {
-                return items.size() != 0;
-            }
+        Iterator<SliceItem> iterator =
+                new Iterator<SliceItem>() { // from class: android.app.slice.SliceQuery.1
+                    @Override // java.util.Iterator
+                    public boolean hasNext() {
+                        return items.size() != 0;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // java.util.Iterator
-            public SliceItem next() {
-                SliceItem item = (SliceItem) items.poll();
-                if (SliceQuery.compareTypes(item, "slice") || SliceQuery.compareTypes(item, "action")) {
-                    items.addAll(item.getSlice().getItems());
-                }
-                return item;
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // java.util.Iterator
+                    public SliceItem next() {
+                        SliceItem item = (SliceItem) items.poll();
+                        if (SliceQuery.compareTypes(item, "slice")
+                                || SliceQuery.compareTypes(item, "action")) {
+                            items.addAll(item.getSlice().getItems());
+                        }
+                        return item;
+                    }
+                };
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterator, 0), false);
     }
 
@@ -142,6 +174,7 @@ public class SliceQuery {
         if (item.getSubType() == null && desiredType.indexOf(47) < 0) {
             return item.getFormat().equals(desiredType);
         }
-        return (item.getFormat() + "/" + item.getSubType()).matches(desiredType.replaceAll("\\*", ".*"));
+        return (item.getFormat() + "/" + item.getSubType())
+                .matches(desiredType.replaceAll("\\*", ".*"));
     }
 }

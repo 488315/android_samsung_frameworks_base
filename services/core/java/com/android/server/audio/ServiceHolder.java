@@ -6,6 +6,7 @@ import android.os.IServiceCallback;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
@@ -30,19 +31,23 @@ public final class ServiceHolder implements IBinder.DeathRecipient {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.audio.ServiceHolder$2, reason: invalid class name */
-    public final class AnonymousClass2 {
-    }
+    public final class AnonymousClass2 {}
 
-    public ServiceHolder(DefaultAudioPolicyFacade$$ExternalSyntheticLambda0 defaultAudioPolicyFacade$$ExternalSyntheticLambda0, Executor executor) {
+    public ServiceHolder(
+            DefaultAudioPolicyFacade$$ExternalSyntheticLambda0
+                    defaultAudioPolicyFacade$$ExternalSyntheticLambda0,
+            Executor executor) {
         AnonymousClass2 anonymousClass2 = new AnonymousClass2();
         this.mService = new AtomicReference();
         this.mOnStartTasks = ConcurrentHashMap.newKeySet();
         this.mOnDeathTasks = ConcurrentHashMap.newKeySet();
-        IServiceCallback.Stub stub = new IServiceCallback.Stub() { // from class: com.android.server.audio.ServiceHolder.1
-            public final void onRegistration(String str, IBinder iBinder) {
-                ServiceHolder.this.onServiceInited(iBinder);
-            }
-        };
+        IServiceCallback.Stub stub =
+                new IServiceCallback
+                        .Stub() { // from class: com.android.server.audio.ServiceHolder.1
+                    public final void onRegistration(String str, IBinder iBinder) {
+                        ServiceHolder.this.onServiceInited(iBinder);
+                    }
+                };
         this.mServiceName = "media.audio_policy";
         this.mCastFunction = defaultAudioPolicyFacade$$ExternalSyntheticLambda0;
         Objects.requireNonNull(executor);
@@ -58,11 +63,15 @@ public final class ServiceHolder implements IBinder.DeathRecipient {
 
     public final void attemptClear(IBinder iBinder) {
         IInterface iInterface = (IInterface) this.mService.get();
-        if (iInterface != null && Objects.equals(iInterface.asBinder(), iBinder) && this.mService.compareAndSet(iInterface, null)) {
+        if (iInterface != null
+                && Objects.equals(iInterface.asBinder(), iBinder)
+                && this.mService.compareAndSet(iInterface, null)) {
             iBinder.unlinkToDeath(this, 0);
             Iterator it = this.mOnDeathTasks.iterator();
             while (it.hasNext()) {
-                this.mExecutor.execute(new ServiceHolder$$ExternalSyntheticLambda0((Consumer) it.next(), iInterface, 0));
+                this.mExecutor.execute(
+                        new ServiceHolder$$ExternalSyntheticLambda0(
+                                (Consumer) it.next(), iInterface, 0));
             }
         }
     }
@@ -85,7 +94,9 @@ public final class ServiceHolder implements IBinder.DeathRecipient {
         }
         Iterator it = this.mOnStartTasks.iterator();
         while (it.hasNext()) {
-            this.mExecutor.execute(new ServiceHolder$$ExternalSyntheticLambda0((Consumer) it.next(), iInterface, 2));
+            this.mExecutor.execute(
+                    new ServiceHolder$$ExternalSyntheticLambda0(
+                            (Consumer) it.next(), iInterface, 2));
         }
         try {
             iBinder.linkToDeath(this, 0);

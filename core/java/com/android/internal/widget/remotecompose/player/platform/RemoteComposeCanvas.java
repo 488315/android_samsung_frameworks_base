@@ -7,9 +7,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+
 import com.android.internal.widget.remotecompose.core.CoreDocument;
 import com.android.internal.widget.remotecompose.player.RemoteComposeDocument;
-import com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas;
+
 import java.util.Set;
 
 /* loaded from: classes5.dex */
@@ -92,10 +93,17 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
         if (this.mDocument == null) {
             return;
         }
-        Set<CoreDocument.ClickAreaRepresentation> clickAreas = this.mDocument.getDocument().getClickAreas();
+        Set<CoreDocument.ClickAreaRepresentation> clickAreas =
+                this.mDocument.getDocument().getClickAreas();
         removeAllViews();
         for (final CoreDocument.ClickAreaRepresentation area : clickAreas) {
-            View viewArea = new ClickAreaView(getContext(), this.mDebug, area.getId(), area.getContentDescription(), area.getMetadata());
+            View viewArea =
+                    new ClickAreaView(
+                            getContext(),
+                            this.mDebug,
+                            area.getId(),
+                            area.getContentDescription(),
+                            area.getMetadata());
             int w = (int) area.width();
             int h = (int) area.height();
             FrameLayout.LayoutParams param = new FrameLayout.LayoutParams(w, h);
@@ -103,18 +111,22 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
             param.height = h;
             param.leftMargin = (int) area.getLeft();
             param.topMargin = (int) area.getTop();
-            viewArea.setOnClickListener(new View.OnClickListener() { // from class: com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas$$ExternalSyntheticLambda0
-                @Override // android.view.View.OnClickListener
-                public final void onClick(View view2) {
-                    RemoteComposeCanvas.this.lambda$onViewAttachedToWindow$0(area, view2);
-                }
-            });
+            viewArea.setOnClickListener(
+                    new View
+                            .OnClickListener() { // from class:
+                                                 // com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas$$ExternalSyntheticLambda0
+                        @Override // android.view.View.OnClickListener
+                        public final void onClick(View view2) {
+                            RemoteComposeCanvas.this.lambda$onViewAttachedToWindow$0(area, view2);
+                        }
+                    });
             addView(viewArea, param);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$onViewAttachedToWindow$0(CoreDocument.ClickAreaRepresentation area, View view1) {
+    public /* synthetic */ void lambda$onViewAttachedToWindow$0(
+            CoreDocument.ClickAreaRepresentation area, View view1) {
         this.mDocument.getDocument().performClick(area.getId());
     }
 
@@ -127,12 +139,17 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
         if (this.mDocument == null) {
             return;
         }
-        this.mDocument.getDocument().addClickListener(new CoreDocument.ClickCallbacks() { // from class: com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas$$ExternalSyntheticLambda1
-            @Override // com.android.internal.widget.remotecompose.core.CoreDocument.ClickCallbacks
-            public final void click(int i, String str) {
-                RemoteComposeCanvas.ClickCallbacks.this.click(i, str);
-            }
-        });
+        this.mDocument
+                .getDocument()
+                .addClickListener(
+                        new CoreDocument
+                                .ClickCallbacks() { // from class:
+                                                    // com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas$$ExternalSyntheticLambda1
+                            @Override // com.android.internal.widget.remotecompose.core.CoreDocument.ClickCallbacks
+                            public final void click(int i, String str) {
+                                RemoteComposeCanvas.ClickCallbacks.this.click(i, str);
+                            }
+                        });
     }
 
     public int getTheme() {

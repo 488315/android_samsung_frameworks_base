@@ -3,6 +3,7 @@ package com.samsung.android.wifi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateFormat;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
@@ -31,21 +32,41 @@ public class SemWifiApBleScanResult implements Parcelable {
     public int version;
     public static int MHS_WIFI_6_NETWORK = 16;
     public static int MHS_WIFI_6E_NETWORK = 32;
-    public static final Parcelable.Creator<SemWifiApBleScanResult> CREATOR = new Parcelable.Creator<SemWifiApBleScanResult>() { // from class: com.samsung.android.wifi.SemWifiApBleScanResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiApBleScanResult createFromParcel(Parcel source) {
-            return new SemWifiApBleScanResult(source);
-        }
+    public static final Parcelable.Creator<SemWifiApBleScanResult> CREATOR =
+            new Parcelable.Creator<
+                    SemWifiApBleScanResult>() { // from class:
+                                                // com.samsung.android.wifi.SemWifiApBleScanResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiApBleScanResult createFromParcel(Parcel source) {
+                    return new SemWifiApBleScanResult(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiApBleScanResult[] newArray(int size) {
-            return new SemWifiApBleScanResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiApBleScanResult[] newArray(int size) {
+                    return new SemWifiApBleScanResult[size];
+                }
+            };
 
-    public SemWifiApBleScanResult(String device, int tMHSdeviceType, int tBattery, int tNetworkType, int tNetworkSignalStrength, String tWifiMAC, String tUserName, String tSSID, int thidden, int tSecurity, long tTimeStamp, int tBLERssi, int ver, boolean dataSaverEnabled, boolean isWifiProfileShareEnabled, boolean isMobileDataLimitReached, int source) {
+    public SemWifiApBleScanResult(
+            String device,
+            int tMHSdeviceType,
+            int tBattery,
+            int tNetworkType,
+            int tNetworkSignalStrength,
+            String tWifiMAC,
+            String tUserName,
+            String tSSID,
+            int thidden,
+            int tSecurity,
+            long tTimeStamp,
+            int tBLERssi,
+            int ver,
+            boolean dataSaverEnabled,
+            boolean isWifiProfileShareEnabled,
+            boolean isMobileDataLimitReached,
+            int source) {
         this.mDevice = device;
         this.mBattery = tBattery;
         this.mMHSdeviceType = tMHSdeviceType;
@@ -157,6 +178,46 @@ public class SemWifiApBleScanResult implements Parcelable {
     }
 
     public String toString() {
-        return "SemWifiApBleScanResult{mMHSdeviceType=" + this.mMHSdeviceType + ", mDevice='" + this.mDevice + DateFormat.QUOTE + ", mBattery=" + this.mBattery + ", mNetworkType=" + this.mNetworkType + ", mNetworkSignalStrength=" + this.mNetworkSignalStrength + ", mWifiMac='" + this.mWifiMac + DateFormat.QUOTE + ", mUserName='" + this.mUserName + DateFormat.QUOTE + ", mSSID='" + this.mSSID + DateFormat.QUOTE + ", mhidden=" + this.mhidden + ", mSecurity=" + this.mSecurity + ", mTimeStamp=" + this.mTimeStamp + ", mBLERssi=" + this.mBLERssi + ", version=" + this.version + ", isDataSaverEnabled=" + this.isDataSaverEnabled + ", isWifiProfileShareEnabled=" + this.isWifiProfileShareEnabled + ", isMobileDataLimitReached=" + this.isMobileDataLimitReached + ", isNotValidNetwork=" + this.isNotValidNetwork + ", mProtocol=" + this.mProtocol + '}';
+        return "SemWifiApBleScanResult{mMHSdeviceType="
+                + this.mMHSdeviceType
+                + ", mDevice='"
+                + this.mDevice
+                + DateFormat.QUOTE
+                + ", mBattery="
+                + this.mBattery
+                + ", mNetworkType="
+                + this.mNetworkType
+                + ", mNetworkSignalStrength="
+                + this.mNetworkSignalStrength
+                + ", mWifiMac='"
+                + this.mWifiMac
+                + DateFormat.QUOTE
+                + ", mUserName='"
+                + this.mUserName
+                + DateFormat.QUOTE
+                + ", mSSID='"
+                + this.mSSID
+                + DateFormat.QUOTE
+                + ", mhidden="
+                + this.mhidden
+                + ", mSecurity="
+                + this.mSecurity
+                + ", mTimeStamp="
+                + this.mTimeStamp
+                + ", mBLERssi="
+                + this.mBLERssi
+                + ", version="
+                + this.version
+                + ", isDataSaverEnabled="
+                + this.isDataSaverEnabled
+                + ", isWifiProfileShareEnabled="
+                + this.isWifiProfileShareEnabled
+                + ", isMobileDataLimitReached="
+                + this.isMobileDataLimitReached
+                + ", isNotValidNetwork="
+                + this.isNotValidNetwork
+                + ", mProtocol="
+                + this.mProtocol
+                + '}';
     }
 }

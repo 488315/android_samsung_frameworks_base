@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x509.Certificate;
+
 import java.io.ByteArrayInputStream;
 import java.security.KeyPairGenerator;
 import java.security.KeyStore;
@@ -28,14 +30,17 @@ import java.util.Set;
 public final class AttestationVerificationSelfTrustedVerifierForTesting {
     public static final boolean DEBUG;
     public static final String GOLDEN_ALIAS;
-    public static volatile AttestationVerificationSelfTrustedVerifierForTesting sAttestationVerificationSelfTrustedVerifier;
+    public static volatile AttestationVerificationSelfTrustedVerifierForTesting
+            sAttestationVerificationSelfTrustedVerifier;
     public final X509Certificate mGoldenRootCert;
     public final CertificateFactory mCertificateFactory = CertificateFactory.getInstance("X.509");
     public final CertPathValidator mCertPathValidator = CertPathValidator.getInstance("PKIX");
 
     static {
         DEBUG = Build.IS_DEBUGGABLE && Log.isLoggable("AVF", 2);
-        GOLDEN_ALIAS = AttestationVerificationSelfTrustedVerifierForTesting.class.getCanonicalName() + ".Golden";
+        GOLDEN_ALIAS =
+                AttestationVerificationSelfTrustedVerifierForTesting.class.getCanonicalName()
+                        + ".Golden";
         sAttestationVerificationSelfTrustedVerifier = null;
     }
 
@@ -44,15 +49,30 @@ public final class AttestationVerificationSelfTrustedVerifierForTesting {
         keyStore.load(null);
         String str = GOLDEN_ALIAS;
         if (!keyStore.containsAlias(str)) {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("EC", "AndroidKeyStore");
-            keyPairGenerator.initialize(new KeyGenParameterSpec.Builder(str, 12).setAttestationChallenge(str.getBytes()).setDigests("SHA-256", "SHA-512").build());
+            KeyPairGenerator keyPairGenerator =
+                    KeyPairGenerator.getInstance("EC", "AndroidKeyStore");
+            keyPairGenerator.initialize(
+                    new KeyGenParameterSpec.Builder(str, 12)
+                            .setAttestationChallenge(str.getBytes())
+                            .setDigests("SHA-256", "SHA-512")
+                            .build());
             keyPairGenerator.generateKeyPair();
         }
-        this.mGoldenRootCert = ((X509Certificate[]) ((KeyStore.PrivateKeyEntry) keyStore.getEntry(str, null)).getCertificateChain())[r0.length - 1];
+        this.mGoldenRootCert =
+                ((X509Certificate[])
+                                ((KeyStore.PrivateKeyEntry) keyStore.getEntry(str, null))
+                                        .getCertificateChain())
+                        [r0.length - 1];
     }
 
     public static byte[] getChallengeFromCert(X509Certificate x509Certificate) {
-        return Certificate.getInstance(new ASN1InputStream(x509Certificate.getEncoded()).readObject()).getTBSCertificate().getExtensions().getExtensionParsedValue(new ASN1ObjectIdentifier("1.3.6.1.4.1.11129.2.1.17")).getObjectAt(4).getOctets();
+        return Certificate.getInstance(
+                        new ASN1InputStream(x509Certificate.getEncoded()).readObject())
+                .getTBSCertificate()
+                .getExtensions()
+                .getExtensionParsedValue(new ASN1ObjectIdentifier("1.3.6.1.4.1.11129.2.1.17"))
+                .getObjectAt(4)
+                .getOctets();
     }
 
     public final int verifyAttestation(int i, byte[] bArr, Bundle bundle) {
@@ -61,7 +81,9 @@ public final class AttestationVerificationSelfTrustedVerifierForTesting {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
         while (byteArrayInputStream.available() > 0) {
             try {
-                arrayList.add((X509Certificate) this.mCertificateFactory.generateCertificate(byteArrayInputStream));
+                arrayList.add(
+                        (X509Certificate)
+                                this.mCertificateFactory.generateCertificate(byteArrayInputStream));
             } catch (CertificateException e) {
                 if (z) {
                     Slog.v("AVF", "Unable to parse certificates from attestation", e);
@@ -76,11 +98,20 @@ public final class AttestationVerificationSelfTrustedVerifierForTesting {
                 }
             } else if (bundle.containsKey("localbinding.challenge")) {
                 try {
-                    if (Arrays.equals(bundle.getByteArray("localbinding.challenge"), getChallengeFromCert((X509Certificate) arrayList.get(0)))) {
+                    if (Arrays.equals(
+                            bundle.getByteArray("localbinding.challenge"),
+                            getChallengeFromCert((X509Certificate) arrayList.get(0)))) {
                         if (arrayList.size() >= 2) {
                             try {
-                                CertPath generateCertPath = this.mCertificateFactory.generateCertPath(arrayList);
-                                PKIXParameters pKIXParameters = new PKIXParameters((Set<TrustAnchor>) Collections.singleton(new TrustAnchor(this.mGoldenRootCert, null)));
+                                CertPath generateCertPath =
+                                        this.mCertificateFactory.generateCertPath(arrayList);
+                                PKIXParameters pKIXParameters =
+                                        new PKIXParameters(
+                                                (Set<TrustAnchor>)
+                                                        Collections.singleton(
+                                                                new TrustAnchor(
+                                                                        this.mGoldenRootCert,
+                                                                        null)));
                                 pKIXParameters.setRevocationEnabled(false);
                                 this.mCertPathValidator.validate(generateCertPath, pKIXParameters);
                                 return 1;

@@ -3,6 +3,7 @@ package com.android.framework.protobuf;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 import com.samsung.android.transcode.constants.EncodeConstants;
+
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
@@ -118,7 +119,8 @@ final class Utf8 {
             }
         }
         if (utf8Length < utf16Length) {
-            throw new IllegalArgumentException("UTF-8 length does not fit in int: " + (utf8Length + 4294967296L));
+            throw new IllegalArgumentException(
+                    "UTF-8 length does not fit in int: " + (utf8Length + 4294967296L));
         }
         return utf8Length;
     }
@@ -158,11 +160,13 @@ final class Utf8 {
         return processor.partialIsValidUtf8(state, buffer, index, limit);
     }
 
-    static String decodeUtf8(ByteBuffer buffer, int index, int size) throws InvalidProtocolBufferException {
+    static String decodeUtf8(ByteBuffer buffer, int index, int size)
+            throws InvalidProtocolBufferException {
         return processor.decodeUtf8(buffer, index, size);
     }
 
-    static String decodeUtf8(byte[] bytes, int index, int size) throws InvalidProtocolBufferException {
+    static String decodeUtf8(byte[] bytes, int index, int size)
+            throws InvalidProtocolBufferException {
         return processor.decodeUtf8(bytes, index, size);
     }
 
@@ -180,10 +184,12 @@ final class Utf8 {
         return i - index;
     }
 
-    static abstract class Processor {
-        abstract String decodeUtf8(byte[] bArr, int i, int i2) throws InvalidProtocolBufferException;
+    abstract static class Processor {
+        abstract String decodeUtf8(byte[] bArr, int i, int i2)
+                throws InvalidProtocolBufferException;
 
-        abstract String decodeUtf8Direct(ByteBuffer byteBuffer, int i, int i2) throws InvalidProtocolBufferException;
+        abstract String decodeUtf8Direct(ByteBuffer byteBuffer, int i, int i2)
+                throws InvalidProtocolBufferException;
 
         abstract int encodeUtf8(CharSequence charSequence, byte[] bArr, int i, int i2);
 
@@ -193,8 +199,7 @@ final class Utf8 {
 
         abstract int partialIsValidUtf8Direct(int i, ByteBuffer byteBuffer, int i2, int i3);
 
-        Processor() {
-        }
+        Processor() {}
 
         final boolean isValidUtf8(byte[] bytes, int index, int limit) {
             return partialIsValidUtf8(0, bytes, index, limit) == 0;
@@ -240,7 +245,8 @@ final class Utf8 {
                         }
                         index = index3;
                     }
-                    if (byte2 <= -65 && ((byte1 != -32 || byte2 >= -96) && (byte1 != -19 || byte2 < -96))) {
+                    if (byte2 <= -65
+                            && ((byte1 != -32 || byte2 >= -96) && (byte1 != -19 || byte2 < -96))) {
                         int index4 = index + 1;
                         if (buffer.get(index) <= -65) {
                             index = index4;
@@ -268,7 +274,12 @@ final class Utf8 {
                     }
                     index = index6;
                 }
-                if (byte22 <= -65 && (((byte1 << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN) + (byte22 + SprAttributeBase.TYPE_SHADOW)) >> 30) == 0 && byte3 <= -65) {
+                if (byte22 <= -65
+                        && (((byte1 << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN)
+                                                + (byte22 + SprAttributeBase.TYPE_SHADOW))
+                                        >> 30)
+                                == 0
+                        && byte3 <= -65) {
                     int index7 = index + 1;
                     if (buffer.get(index) <= -65) {
                         index = index7;
@@ -300,7 +311,10 @@ final class Utf8 {
                     }
                     int index4 = index3 + 1;
                     byte byte2 = buffer.get(index3);
-                    if (byte2 > -65 || ((byte1 == -32 && byte2 < -96) || ((byte1 == -19 && byte2 >= -96) || buffer.get(index4) > -65))) {
+                    if (byte2 > -65
+                            || ((byte1 == -32 && byte2 < -96)
+                                    || ((byte1 == -19 && byte2 >= -96)
+                                            || buffer.get(index4) > -65))) {
                         return -1;
                     }
                     index2 = index4 + 1;
@@ -314,8 +328,7 @@ final class Utf8 {
                         int index6 = index5 + 1;
                         if (buffer.get(index5) <= -65) {
                             index2 = index6 + 1;
-                            if (buffer.get(index6) > -65) {
-                            }
+                            if (buffer.get(index6) > -65) {}
                         }
                     }
                     return -1;
@@ -324,7 +337,8 @@ final class Utf8 {
             return 0;
         }
 
-        final String decodeUtf8(ByteBuffer buffer, int index, int size) throws InvalidProtocolBufferException {
+        final String decodeUtf8(ByteBuffer buffer, int index, int size)
+                throws InvalidProtocolBufferException {
             if (buffer.hasArray()) {
                 int offset = buffer.arrayOffset();
                 return decodeUtf8(buffer.array(), offset + index, size);
@@ -335,9 +349,15 @@ final class Utf8 {
             return decodeUtf8Default(buffer, index, size);
         }
 
-        final String decodeUtf8Default(ByteBuffer buffer, int index, int size) throws InvalidProtocolBufferException {
+        final String decodeUtf8Default(ByteBuffer buffer, int index, int size)
+                throws InvalidProtocolBufferException {
             if ((index | size | ((buffer.limit() - index) - size)) < 0) {
-                throw new ArrayIndexOutOfBoundsException(String.format("buffer limit=%d, index=%d, limit=%d", Integer.valueOf(buffer.limit()), Integer.valueOf(index), Integer.valueOf(size)));
+                throw new ArrayIndexOutOfBoundsException(
+                        String.format(
+                                "buffer limit=%d, index=%d, limit=%d",
+                                Integer.valueOf(buffer.limit()),
+                                Integer.valueOf(index),
+                                Integer.valueOf(size)));
             }
             int offset = index;
             int limit = offset + size;
@@ -382,7 +402,8 @@ final class Utf8 {
                         throw InvalidProtocolBufferException.invalidUtf8();
                     }
                     int offset3 = offset2 + 1;
-                    DecodeUtil.handleThreeBytes(byte1, buffer.get(offset2), buffer.get(offset3), resultArr, resultPos2);
+                    DecodeUtil.handleThreeBytes(
+                            byte1, buffer.get(offset2), buffer.get(offset3), resultArr, resultPos2);
                     offset = offset3 + 1;
                     resultPos2++;
                 } else {
@@ -392,7 +413,13 @@ final class Utf8 {
                     int offset4 = offset2 + 1;
                     byte b3 = buffer.get(offset2);
                     int offset5 = offset4 + 1;
-                    DecodeUtil.handleFourBytes(byte1, b3, buffer.get(offset4), buffer.get(offset5), resultArr, resultPos2);
+                    DecodeUtil.handleFourBytes(
+                            byte1,
+                            b3,
+                            buffer.get(offset4),
+                            buffer.get(offset5),
+                            resultArr,
+                            resultPos2);
                     offset = offset5 + 1;
                     resultPos2 = resultPos2 + 1 + 1;
                 }
@@ -403,7 +430,8 @@ final class Utf8 {
         final void encodeUtf8(CharSequence in, ByteBuffer out) {
             if (out.hasArray()) {
                 int offset = out.arrayOffset();
-                int endIndex = Utf8.encode(in, out.array(), out.position() + offset, out.remaining());
+                int endIndex =
+                        Utf8.encode(in, out.array(), out.position() + offset, out.remaining());
                 out.position(endIndex - offset);
             } else if (out.isDirect()) {
                 encodeUtf8Direct(in, out);
@@ -425,8 +453,10 @@ final class Utf8 {
                     out.put(outIx + inIx, (byte) c);
                     inIx++;
                 } catch (IndexOutOfBoundsException e) {
-                    int badWriteIndex = out.position() + Math.max(inIx, (outIx - out.position()) + 1);
-                    throw new ArrayIndexOutOfBoundsException("Failed writing " + in.charAt(inIx) + " at index " + badWriteIndex);
+                    int badWriteIndex =
+                            out.position() + Math.max(inIx, (outIx - out.position()) + 1);
+                    throw new ArrayIndexOutOfBoundsException(
+                            "Failed writing " + in.charAt(inIx) + " at index " + badWriteIndex);
                 }
             }
             if (inIx == inLength) {
@@ -446,8 +476,13 @@ final class Utf8 {
                         outIx2 = outIx3;
                     } catch (IndexOutOfBoundsException e2) {
                         outIx = outIx3;
-                        int badWriteIndex2 = out.position() + Math.max(inIx, (outIx - out.position()) + 1);
-                        throw new ArrayIndexOutOfBoundsException("Failed writing " + in.charAt(inIx) + " at index " + badWriteIndex2);
+                        int badWriteIndex2 =
+                                out.position() + Math.max(inIx, (outIx - out.position()) + 1);
+                        throw new ArrayIndexOutOfBoundsException(
+                                "Failed writing "
+                                        + in.charAt(inIx)
+                                        + " at index "
+                                        + badWriteIndex2);
                     }
                 } else if (c2 < 55296 || 57343 < c2) {
                     int outIx4 = outIx2 + 1;
@@ -472,8 +507,14 @@ final class Utf8 {
                                 outIx2 = outIx7;
                             } catch (IndexOutOfBoundsException e3) {
                                 outIx = outIx5;
-                                int badWriteIndex22 = out.position() + Math.max(inIx, (outIx - out.position()) + 1);
-                                throw new ArrayIndexOutOfBoundsException("Failed writing " + in.charAt(inIx) + " at index " + badWriteIndex22);
+                                int badWriteIndex22 =
+                                        out.position()
+                                                + Math.max(inIx, (outIx - out.position()) + 1);
+                                throw new ArrayIndexOutOfBoundsException(
+                                        "Failed writing "
+                                                + in.charAt(inIx)
+                                                + " at index "
+                                                + badWriteIndex22);
                             }
                         }
                     }
@@ -487,8 +528,7 @@ final class Utf8 {
     }
 
     static final class SafeProcessor extends Processor {
-        SafeProcessor() {
-        }
+        SafeProcessor() {}
 
         @Override // com.android.framework.protobuf.Utf8.Processor
         int partialIsValidUtf8(int state, byte[] bytes, int index, int limit) {
@@ -516,7 +556,8 @@ final class Utf8 {
                         }
                         index = index3;
                     }
-                    if (byte2 <= -65 && ((byte1 != -32 || byte2 >= -96) && (byte1 != -19 || byte2 < -96))) {
+                    if (byte2 <= -65
+                            && ((byte1 != -32 || byte2 >= -96) && (byte1 != -19 || byte2 < -96))) {
                         int index4 = index + 1;
                         if (bytes[index] <= -65) {
                             index = index4;
@@ -544,7 +585,9 @@ final class Utf8 {
                     }
                     index = index6;
                 }
-                if (byte22 <= -65 && (((byte1 << 28) + (byte22 + 112)) >> 30) == 0 && byte3 <= -65) {
+                if (byte22 <= -65
+                        && (((byte1 << 28) + (byte22 + 112)) >> 30) == 0
+                        && byte3 <= -65) {
                     int index7 = index + 1;
                     if (bytes[index] <= -65) {
                         index = index7;
@@ -563,7 +606,12 @@ final class Utf8 {
         @Override // com.android.framework.protobuf.Utf8.Processor
         String decodeUtf8(byte[] bytes, int index, int size) throws InvalidProtocolBufferException {
             if ((index | size | ((bytes.length - index) - size)) < 0) {
-                throw new ArrayIndexOutOfBoundsException(String.format("buffer length=%d, index=%d, size=%d", Integer.valueOf(bytes.length), Integer.valueOf(index), Integer.valueOf(size)));
+                throw new ArrayIndexOutOfBoundsException(
+                        String.format(
+                                "buffer length=%d, index=%d, size=%d",
+                                Integer.valueOf(bytes.length),
+                                Integer.valueOf(index),
+                                Integer.valueOf(size)));
             }
             int offset = index;
             int limit = offset + size;
@@ -608,7 +656,8 @@ final class Utf8 {
                         throw InvalidProtocolBufferException.invalidUtf8();
                     }
                     int offset3 = offset2 + 1;
-                    DecodeUtil.handleThreeBytes(byte1, bytes[offset2], bytes[offset3], resultArr, resultPos2);
+                    DecodeUtil.handleThreeBytes(
+                            byte1, bytes[offset2], bytes[offset3], resultArr, resultPos2);
                     offset = offset3 + 1;
                     resultPos2++;
                 } else {
@@ -618,7 +667,8 @@ final class Utf8 {
                     int offset4 = offset2 + 1;
                     byte b3 = bytes[offset2];
                     int offset5 = offset4 + 1;
-                    DecodeUtil.handleFourBytes(byte1, b3, bytes[offset4], bytes[offset5], resultArr, resultPos2);
+                    DecodeUtil.handleFourBytes(
+                            byte1, b3, bytes[offset4], bytes[offset5], resultArr, resultPos2);
                     offset = offset5 + 1;
                     resultPos2 = resultPos2 + 1 + 1;
                 }
@@ -627,14 +677,15 @@ final class Utf8 {
         }
 
         @Override // com.android.framework.protobuf.Utf8.Processor
-        String decodeUtf8Direct(ByteBuffer buffer, int index, int size) throws InvalidProtocolBufferException {
+        String decodeUtf8Direct(ByteBuffer buffer, int index, int size)
+                throws InvalidProtocolBufferException {
             return decodeUtf8Default(buffer, index, size);
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:12:0x0023, code lost:
-        
-            return r13 + r0;
-         */
+
+           return r13 + r0;
+        */
         @Override // com.android.framework.protobuf.Utf8.Processor
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -645,7 +696,10 @@ final class Utf8 {
                 Method dump skipped, instructions count: 269
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.framework.protobuf.Utf8.SafeProcessor.encodeUtf8(java.lang.CharSequence, byte[], int, int):int");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.framework.protobuf.Utf8.SafeProcessor.encodeUtf8(java.lang.CharSequence,"
+                        + " byte[], int, int):int");
         }
 
         @Override // com.android.framework.protobuf.Utf8.Processor
@@ -676,8 +730,7 @@ final class Utf8 {
                         }
                         if (byte1 >= -62) {
                             index = index2 + 1;
-                            if (bytes[index2] > -65) {
-                            }
+                            if (bytes[index2] > -65) {}
                         }
                         return -1;
                     }
@@ -687,10 +740,11 @@ final class Utf8 {
                         }
                         int index3 = index2 + 1;
                         int byte2 = bytes[index2];
-                        if (byte2 <= -65 && ((byte1 != -32 || byte2 >= -96) && (byte1 != -19 || byte2 < -96))) {
+                        if (byte2 <= -65
+                                && ((byte1 != -32 || byte2 >= -96)
+                                        && (byte1 != -19 || byte2 < -96))) {
                             index = index3 + 1;
-                            if (bytes[index3] > -65) {
-                            }
+                            if (bytes[index3] > -65) {}
                         }
                         return -1;
                     }
@@ -703,8 +757,7 @@ final class Utf8 {
                         int index5 = index4 + 1;
                         if (bytes[index4] <= -65) {
                             index = index5 + 1;
-                            if (bytes[index5] > -65) {
-                            }
+                            if (bytes[index5] > -65) {}
                         }
                     }
                     return -1;
@@ -715,17 +768,22 @@ final class Utf8 {
     }
 
     static final class UnsafeProcessor extends Processor {
-        UnsafeProcessor() {
-        }
+        UnsafeProcessor() {}
 
         static boolean isAvailable() {
-            return UnsafeUtil.hasUnsafeArrayOperations() && UnsafeUtil.hasUnsafeByteBufferOperations();
+            return UnsafeUtil.hasUnsafeArrayOperations()
+                    && UnsafeUtil.hasUnsafeByteBufferOperations();
         }
 
         @Override // com.android.framework.protobuf.Utf8.Processor
         int partialIsValidUtf8(int state, byte[] bytes, int index, int limit) {
             if ((index | limit | (bytes.length - limit)) < 0) {
-                throw new ArrayIndexOutOfBoundsException(String.format("Array length=%d, index=%d, limit=%d", Integer.valueOf(bytes.length), Integer.valueOf(index), Integer.valueOf(limit)));
+                throw new ArrayIndexOutOfBoundsException(
+                        String.format(
+                                "Array length=%d, index=%d, limit=%d",
+                                Integer.valueOf(bytes.length),
+                                Integer.valueOf(index),
+                                Integer.valueOf(limit)));
             }
             long offset = index;
             long offsetLimit = limit;
@@ -753,7 +811,8 @@ final class Utf8 {
                         }
                         offset = offset3;
                     }
-                    if (byte2 <= -65 && ((byte1 != -32 || byte2 >= -96) && (byte1 != -19 || byte2 < -96))) {
+                    if (byte2 <= -65
+                            && ((byte1 != -32 || byte2 >= -96) && (byte1 != -19 || byte2 < -96))) {
                         long offset4 = 1 + offset;
                         if (UnsafeUtil.getByte(bytes, offset) <= -65) {
                             offset = offset4;
@@ -781,7 +840,9 @@ final class Utf8 {
                     }
                     offset = offset6;
                 }
-                if (byte22 <= -65 && (((byte1 << 28) + (byte22 + 112)) >> 30) == 0 && byte3 <= -65) {
+                if (byte22 <= -65
+                        && (((byte1 << 28) + (byte22 + 112)) >> 30) == 0
+                        && byte3 <= -65) {
                     long offset7 = 1 + offset;
                     if (UnsafeUtil.getByte(bytes, offset) <= -65) {
                         offset = offset7;
@@ -795,7 +856,12 @@ final class Utf8 {
         @Override // com.android.framework.protobuf.Utf8.Processor
         int partialIsValidUtf8Direct(int state, ByteBuffer buffer, int index, int limit) {
             if ((index | limit | (buffer.limit() - limit)) < 0) {
-                throw new ArrayIndexOutOfBoundsException(String.format("buffer limit=%d, index=%d, limit=%d", Integer.valueOf(buffer.limit()), Integer.valueOf(index), Integer.valueOf(limit)));
+                throw new ArrayIndexOutOfBoundsException(
+                        String.format(
+                                "buffer limit=%d, index=%d, limit=%d",
+                                Integer.valueOf(buffer.limit()),
+                                Integer.valueOf(index),
+                                Integer.valueOf(limit)));
             }
             long address = UnsafeUtil.addressOffset(buffer) + index;
             long addressLimit = (limit - index) + address;
@@ -823,7 +889,8 @@ final class Utf8 {
                         }
                         address = address3;
                     }
-                    if (byte2 <= -65 && ((byte1 != -32 || byte2 >= -96) && (byte1 != -19 || byte2 < -96))) {
+                    if (byte2 <= -65
+                            && ((byte1 != -32 || byte2 >= -96) && (byte1 != -19 || byte2 < -96))) {
                         long address4 = 1 + address;
                         if (UnsafeUtil.getByte(address) <= -65) {
                             address = address4;
@@ -851,7 +918,9 @@ final class Utf8 {
                     }
                     address = address6;
                 }
-                if (byte22 <= -65 && (((byte1 << 28) + (byte22 + 112)) >> 30) == 0 && byte3 <= -65) {
+                if (byte22 <= -65
+                        && (((byte1 << 28) + (byte22 + 112)) >> 30) == 0
+                        && byte3 <= -65) {
                     long address7 = 1 + address;
                     if (UnsafeUtil.getByte(address) <= -65) {
                         address = address7;
@@ -868,14 +937,16 @@ final class Utf8 {
             if (!s.contains("�")) {
                 return s;
             }
-            if (Arrays.equals(s.getBytes(Internal.UTF_8), Arrays.copyOfRange(bytes, index, index + size))) {
+            if (Arrays.equals(
+                    s.getBytes(Internal.UTF_8), Arrays.copyOfRange(bytes, index, index + size))) {
                 return s;
             }
             throw InvalidProtocolBufferException.invalidUtf8();
         }
 
         @Override // com.android.framework.protobuf.Utf8.Processor
-        String decodeUtf8Direct(ByteBuffer buffer, int index, int size) throws InvalidProtocolBufferException {
+        String decodeUtf8Direct(ByteBuffer buffer, int index, int size)
+                throws InvalidProtocolBufferException {
             if ((index | size | ((buffer.limit() - index) - size)) >= 0) {
                 long address = UnsafeUtil.addressOffset(buffer) + index;
                 long addressLimit = size + address;
@@ -912,7 +983,8 @@ final class Utf8 {
                         if (address2 >= addressLimit) {
                             throw InvalidProtocolBufferException.invalidUtf8();
                         }
-                        DecodeUtil.handleTwoBytes(byte1, UnsafeUtil.getByte(address2), resultArr, resultPos2);
+                        DecodeUtil.handleTwoBytes(
+                                byte1, UnsafeUtil.getByte(address2), resultArr, resultPos2);
                         resultPos2++;
                         address = address2 + 1;
                     } else if (DecodeUtil.isThreeBytes(byte1)) {
@@ -920,7 +992,12 @@ final class Utf8 {
                             throw InvalidProtocolBufferException.invalidUtf8();
                         }
                         long address3 = address2 + 1;
-                        DecodeUtil.handleThreeBytes(byte1, UnsafeUtil.getByte(address2), UnsafeUtil.getByte(address3), resultArr, resultPos2);
+                        DecodeUtil.handleThreeBytes(
+                                byte1,
+                                UnsafeUtil.getByte(address2),
+                                UnsafeUtil.getByte(address3),
+                                resultArr,
+                                resultPos2);
                         address = address3 + 1;
                         resultPos2++;
                     } else {
@@ -929,14 +1006,25 @@ final class Utf8 {
                         }
                         long address4 = address2 + 1;
                         long address5 = address4 + 1;
-                        DecodeUtil.handleFourBytes(byte1, UnsafeUtil.getByte(address2), UnsafeUtil.getByte(address4), UnsafeUtil.getByte(address5), resultArr, resultPos2);
+                        DecodeUtil.handleFourBytes(
+                                byte1,
+                                UnsafeUtil.getByte(address2),
+                                UnsafeUtil.getByte(address4),
+                                UnsafeUtil.getByte(address5),
+                                resultArr,
+                                resultPos2);
                         resultPos2 = resultPos2 + 1 + 1;
                         address = address5 + 1;
                     }
                 }
                 return new String(resultArr, 0, resultPos2);
             }
-            throw new ArrayIndexOutOfBoundsException(String.format("buffer limit=%d, index=%d, limit=%d", Integer.valueOf(buffer.limit()), Integer.valueOf(index), Integer.valueOf(size)));
+            throw new ArrayIndexOutOfBoundsException(
+                    String.format(
+                            "buffer limit=%d, index=%d, limit=%d",
+                            Integer.valueOf(buffer.limit()),
+                            Integer.valueOf(index),
+                            Integer.valueOf(size)));
         }
 
         @Override // com.android.framework.protobuf.Utf8.Processor
@@ -949,7 +1037,11 @@ final class Utf8 {
             long outLimit = length + outIx2;
             int inLimit = in.length();
             if (inLimit > length || out.length - length < offset) {
-                throw new ArrayIndexOutOfBoundsException("Failed writing " + in.charAt(inLimit - 1) + " at index " + (offset + length));
+                throw new ArrayIndexOutOfBoundsException(
+                        "Failed writing "
+                                + in.charAt(inLimit - 1)
+                                + " at index "
+                                + (offset + length));
             }
             int inIx = 0;
             while (true) {
@@ -974,7 +1066,12 @@ final class Utf8 {
                     outIx = outLimit;
                 } else if (c3 < 2048 && outIx2 <= outLimit - 2) {
                     long outIx3 = outIx2 + j;
-                    UnsafeUtil.putByte(out, outIx2, (byte) ((c3 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
+                    UnsafeUtil.putByte(
+                            out,
+                            outIx2,
+                            (byte)
+                                    ((c3 >>> 6)
+                                            | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
                     outIx2 = outIx3 + j;
                     UnsafeUtil.putByte(out, outIx3, (byte) ((c3 & '?') | 128));
                     outIx = outLimit;
@@ -982,10 +1079,15 @@ final class Utf8 {
                 } else {
                     if ((c3 >= 55296 && 57343 >= c3) || outIx2 > outLimit - 3) {
                         if (outIx2 > outLimit - 4) {
-                            if (55296 <= c3 && c3 <= 57343 && (inIx + 1 == inLimit || !Character.isSurrogatePair(c3, in.charAt(inIx + 1)))) {
+                            if (55296 <= c3
+                                    && c3 <= 57343
+                                    && (inIx + 1 == inLimit
+                                            || !Character.isSurrogatePair(
+                                                    c3, in.charAt(inIx + 1)))) {
                                 throw new UnpairedSurrogateException(inIx, inLimit);
                             }
-                            throw new ArrayIndexOutOfBoundsException("Failed writing " + c3 + " at index " + outIx2);
+                            throw new ArrayIndexOutOfBoundsException(
+                                    "Failed writing " + c3 + " at index " + outIx2);
                         }
                         if (inIx + 1 != inLimit) {
                             inIx++;
@@ -997,9 +1099,11 @@ final class Utf8 {
                                 UnsafeUtil.putByte(out, outIx2, (byte) ((codePoint >>> 18) | 240));
                                 long outIx4 = outLimit2 + 1;
                                 c = 128;
-                                UnsafeUtil.putByte(out, outLimit2, (byte) (((codePoint >>> 12) & 63) | 128));
+                                UnsafeUtil.putByte(
+                                        out, outLimit2, (byte) (((codePoint >>> 12) & 63) | 128));
                                 long outIx5 = outIx4 + 1;
-                                UnsafeUtil.putByte(out, outIx4, (byte) (((codePoint >>> 6) & 63) | 128));
+                                UnsafeUtil.putByte(
+                                        out, outIx4, (byte) (((codePoint >>> 6) & 63) | 128));
                                 outIx2 = outIx5 + 1;
                                 UnsafeUtil.putByte(out, outIx5, (byte) ((codePoint & 63) | 128));
                             }
@@ -1035,7 +1139,8 @@ final class Utf8 {
             long outLimit = out.limit() + address;
             int inLimit = in.length();
             if (inLimit > outLimit - outIx2) {
-                throw new ArrayIndexOutOfBoundsException("Failed writing " + in.charAt(inLimit - 1) + " at index " + out.limit());
+                throw new ArrayIndexOutOfBoundsException(
+                        "Failed writing " + in.charAt(inLimit - 1) + " at index " + out.limit());
             }
             int inIx = 0;
             while (true) {
@@ -1072,10 +1177,12 @@ final class Utf8 {
                                     long outIx3 = outIx2 + j;
                                     UnsafeUtil.putByte(outIx2, (byte) ((codePoint >>> 18) | 240));
                                     long outIx4 = outIx3 + 1;
-                                    UnsafeUtil.putByte(outIx3, (byte) (((codePoint >>> 12) & 63) | 128));
+                                    UnsafeUtil.putByte(
+                                            outIx3, (byte) (((codePoint >>> 12) & 63) | 128));
                                     long outIx5 = outIx4 + 1;
                                     c2 = 128;
-                                    UnsafeUtil.putByte(outIx4, (byte) (((codePoint >>> 6) & 63) | 128));
+                                    UnsafeUtil.putByte(
+                                            outIx4, (byte) (((codePoint >>> 6) & 63) | 128));
                                     j2 = 1;
                                     outIx2 = outIx5 + 1;
                                     UnsafeUtil.putByte(outIx5, (byte) ((codePoint & 63) | 128));
@@ -1083,10 +1190,14 @@ final class Utf8 {
                             }
                             throw new UnpairedSurrogateException(inIx - 1, inLimit);
                         }
-                        if (55296 <= c4 && c4 <= 57343 && (inIx + 1 == inLimit || !Character.isSurrogatePair(c4, in.charAt(inIx + 1)))) {
+                        if (55296 <= c4
+                                && c4 <= 57343
+                                && (inIx + 1 == inLimit
+                                        || !Character.isSurrogatePair(c4, in.charAt(inIx + 1)))) {
                             throw new UnpairedSurrogateException(inIx, inLimit);
                         }
-                        throw new ArrayIndexOutOfBoundsException("Failed writing " + c4 + " at index " + outIx2);
+                        throw new ArrayIndexOutOfBoundsException(
+                                "Failed writing " + c4 + " at index " + outIx2);
                     }
                     long outIx6 = outIx2 + j;
                     UnsafeUtil.putByte(outIx2, (byte) ((c4 >>> '\f') | 480));
@@ -1099,7 +1210,11 @@ final class Utf8 {
                 } else {
                     outIx = address;
                     long outIx8 = outIx2 + j;
-                    UnsafeUtil.putByte(outIx2, (byte) ((c4 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
+                    UnsafeUtil.putByte(
+                            outIx2,
+                            (byte)
+                                    ((c4 >>> 6)
+                                            | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
                     UnsafeUtil.putByte(outIx8, (byte) ((c4 & '?') | 128));
                     outIx2 = outIx8 + j;
                     j2 = j;
@@ -1128,7 +1243,12 @@ final class Utf8 {
                     return i;
                 }
             }
-            while (i + 8 <= maxChars && (UnsafeUtil.getLong((Object) bytes, UnsafeUtil.BYTE_ARRAY_BASE_OFFSET + offset) & Utf8.ASCII_MASK_LONG) == 0) {
+            while (i + 8 <= maxChars
+                    && (UnsafeUtil.getLong(
+                                            (Object) bytes,
+                                            UnsafeUtil.BYTE_ARRAY_BASE_OFFSET + offset)
+                                    & Utf8.ASCII_MASK_LONG)
+                            == 0) {
                 offset += 8;
                 i += 8;
             }
@@ -1168,9 +1288,9 @@ final class Utf8 {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:74:0x003b, code lost:
-        
-            return -1;
-         */
+
+           return -1;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1284,13 +1404,16 @@ final class Utf8 {
             L9c:
                 return r6
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.framework.protobuf.Utf8.UnsafeProcessor.partialIsValidUtf8(byte[], long, int):int");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.framework.protobuf.Utf8.UnsafeProcessor.partialIsValidUtf8(byte[],"
+                        + " long, int):int");
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:74:0x003b, code lost:
-        
-            return -1;
-         */
+
+           return -1;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1402,17 +1525,24 @@ final class Utf8 {
             L9a:
                 return r6
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.framework.protobuf.Utf8.UnsafeProcessor.partialIsValidUtf8(long, int):int");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.framework.protobuf.Utf8.UnsafeProcessor.partialIsValidUtf8(long,"
+                        + " int):int");
         }
 
-        private static int unsafeIncompleteStateFor(byte[] bytes, int byte1, long offset, int remaining) {
+        private static int unsafeIncompleteStateFor(
+                byte[] bytes, int byte1, long offset, int remaining) {
             switch (remaining) {
                 case 0:
                     return Utf8.incompleteStateFor(byte1);
                 case 1:
                     return Utf8.incompleteStateFor(byte1, UnsafeUtil.getByte(bytes, offset));
                 case 2:
-                    return Utf8.incompleteStateFor(byte1, UnsafeUtil.getByte(bytes, offset), UnsafeUtil.getByte(bytes, 1 + offset));
+                    return Utf8.incompleteStateFor(
+                            byte1,
+                            UnsafeUtil.getByte(bytes, offset),
+                            UnsafeUtil.getByte(bytes, 1 + offset));
                 default:
                     throw new AssertionError();
             }
@@ -1425,7 +1555,8 @@ final class Utf8 {
                 case 1:
                     return Utf8.incompleteStateFor(byte1, UnsafeUtil.getByte(address));
                 case 2:
-                    return Utf8.incompleteStateFor(byte1, UnsafeUtil.getByte(address), UnsafeUtil.getByte(1 + address));
+                    return Utf8.incompleteStateFor(
+                            byte1, UnsafeUtil.getByte(address), UnsafeUtil.getByte(1 + address));
                 default:
                     throw new AssertionError();
             }
@@ -1433,8 +1564,7 @@ final class Utf8 {
     }
 
     private static class DecodeUtil {
-        private DecodeUtil() {
-        }
+        private DecodeUtil() {}
 
         /* JADX INFO: Access modifiers changed from: private */
         public static boolean isOneByte(byte b) {
@@ -1457,27 +1587,51 @@ final class Utf8 {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public static void handleTwoBytes(byte byte1, byte byte2, char[] resultArr, int resultPos) throws InvalidProtocolBufferException {
+        public static void handleTwoBytes(byte byte1, byte byte2, char[] resultArr, int resultPos)
+                throws InvalidProtocolBufferException {
             if (byte1 < -62 || isNotTrailingByte(byte2)) {
                 throw InvalidProtocolBufferException.invalidUtf8();
             }
-            resultArr[resultPos] = (char) (((byte1 & SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN) << 6) | trailingByteValue(byte2));
+            resultArr[resultPos] =
+                    (char)
+                            (((byte1 & SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN) << 6)
+                                    | trailingByteValue(byte2));
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public static void handleThreeBytes(byte byte1, byte byte2, byte byte3, char[] resultArr, int resultPos) throws InvalidProtocolBufferException {
-            if (isNotTrailingByte(byte2) || ((byte1 == -32 && byte2 < -96) || ((byte1 == -19 && byte2 >= -96) || isNotTrailingByte(byte3)))) {
+        public static void handleThreeBytes(
+                byte byte1, byte byte2, byte byte3, char[] resultArr, int resultPos)
+                throws InvalidProtocolBufferException {
+            if (isNotTrailingByte(byte2)
+                    || ((byte1 == -32 && byte2 < -96)
+                            || ((byte1 == -19 && byte2 >= -96) || isNotTrailingByte(byte3)))) {
                 throw InvalidProtocolBufferException.invalidUtf8();
             }
-            resultArr[resultPos] = (char) (((byte1 & 15) << 12) | (trailingByteValue(byte2) << 6) | trailingByteValue(byte3));
+            resultArr[resultPos] =
+                    (char)
+                            (((byte1 & 15) << 12)
+                                    | (trailingByteValue(byte2) << 6)
+                                    | trailingByteValue(byte3));
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public static void handleFourBytes(byte byte1, byte byte2, byte byte3, byte byte4, char[] resultArr, int resultPos) throws InvalidProtocolBufferException {
-            if (isNotTrailingByte(byte2) || (((byte1 << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN) + (byte2 + SprAttributeBase.TYPE_SHADOW)) >> 30) != 0 || isNotTrailingByte(byte3) || isNotTrailingByte(byte4)) {
+        public static void handleFourBytes(
+                byte byte1, byte byte2, byte byte3, byte byte4, char[] resultArr, int resultPos)
+                throws InvalidProtocolBufferException {
+            if (isNotTrailingByte(byte2)
+                    || (((byte1 << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN)
+                                            + (byte2 + SprAttributeBase.TYPE_SHADOW))
+                                    >> 30)
+                            != 0
+                    || isNotTrailingByte(byte3)
+                    || isNotTrailingByte(byte4)) {
                 throw InvalidProtocolBufferException.invalidUtf8();
             }
-            int codepoint = ((byte1 & 7) << 18) | (trailingByteValue(byte2) << 12) | (trailingByteValue(byte3) << 6) | trailingByteValue(byte4);
+            int codepoint =
+                    ((byte1 & 7) << 18)
+                            | (trailingByteValue(byte2) << 12)
+                            | (trailingByteValue(byte3) << 6)
+                            | trailingByteValue(byte4);
             resultArr[resultPos] = highSurrogate(codepoint);
             resultArr[resultPos + 1] = lowSurrogate(codepoint);
         }
@@ -1499,6 +1653,5 @@ final class Utf8 {
         }
     }
 
-    private Utf8() {
-    }
+    private Utf8() {}
 }

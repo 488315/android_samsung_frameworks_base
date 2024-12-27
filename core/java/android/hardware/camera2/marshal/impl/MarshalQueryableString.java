@@ -3,6 +3,7 @@ package android.hardware.camera2.marshal.impl;
 import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.utils.TypeReference;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
@@ -15,8 +16,7 @@ public class MarshalQueryableString implements MarshalQueryable<String> {
     private static class PreloadHolder {
         public static final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
-        private PreloadHolder() {
-        }
+        private PreloadHolder() {}
     }
 
     private class MarshalerString extends Marshaler<String> {

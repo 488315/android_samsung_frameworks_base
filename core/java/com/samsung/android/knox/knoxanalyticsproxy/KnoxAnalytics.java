@@ -5,7 +5,6 @@ import android.os.RemoteException;
 import android.os.SemSystemProperties;
 import android.os.ServiceManager;
 import android.util.Log;
-import com.samsung.android.knox.knoxanalyticsproxy.IKnoxAnalyticsProxy;
 
 /* loaded from: classes6.dex */
 public class KnoxAnalytics {
@@ -45,7 +44,9 @@ public class KnoxAnalytics {
 
     public static boolean getService() {
         if (mService == null) {
-            mService = IKnoxAnalyticsProxy.Stub.asInterface(ServiceManager.getService(KNOXANALYTICS_PROXY_SERVICE));
+            mService =
+                    IKnoxAnalyticsProxy.Stub.asInterface(
+                            ServiceManager.getService(KNOXANALYTICS_PROXY_SERVICE));
         }
         return mService != null;
     }

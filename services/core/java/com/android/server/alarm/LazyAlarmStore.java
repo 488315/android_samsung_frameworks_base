@@ -4,8 +4,9 @@ import android.content.Intent;
 import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOutline0;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.StatLogger;
-import com.android.server.alarm.AlarmStore;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,12 +18,20 @@ import java.util.function.Predicate;
 /* loaded from: classes.dex */
 public final class LazyAlarmStore implements AlarmStore {
     static final String TAG = "LazyAlarmStore";
-    public static final Comparator sDecreasingTimeOrder = Comparator.comparingLong(new LazyAlarmStore$$ExternalSyntheticLambda0()).reversed();
+    public static final Comparator sDecreasingTimeOrder =
+            Comparator.comparingLong(new LazyAlarmStore$$ExternalSyntheticLambda0()).reversed();
     public Runnable mOnAlarmClockRemoved;
     public final ArrayList mAlarms = new ArrayList();
-    public final StatLogger mStatLogger = new StatLogger(AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), TAG, " stats"), new String[]{"GET_NEXT_DELIVERY_TIME", "GET_NEXT_WAKEUP_DELIVERY_TIME", "GET_COUNT"});
+    public final StatLogger mStatLogger =
+            new StatLogger(
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                            new StringBuilder(), TAG, " stats"),
+                    new String[] {
+                        "GET_NEXT_DELIVERY_TIME", "GET_NEXT_WAKEUP_DELIVERY_TIME", "GET_COUNT"
+                    });
 
-    public final void dump(IndentingPrintWriter indentingPrintWriter, long j, SimpleDateFormat simpleDateFormat) {
+    public final void dump(
+            IndentingPrintWriter indentingPrintWriter, long j, SimpleDateFormat simpleDateFormat) {
         indentingPrintWriter.println(this.mAlarms.size() + " pending alarms: ");
         indentingPrintWriter.increaseIndent();
         AlarmManagerService.dumpAlarmList(indentingPrintWriter, this.mAlarms, j, simpleDateFormat);
@@ -73,7 +82,8 @@ public final class LazyAlarmStore implements AlarmStore {
         return arrayList;
     }
 
-    public final boolean updateAlarmDeliveries(AlarmStore.AlarmDeliveryCalculator alarmDeliveryCalculator) {
+    public final boolean updateAlarmDeliveries(
+            AlarmStore.AlarmDeliveryCalculator alarmDeliveryCalculator) {
         Iterator it = this.mAlarms.iterator();
         boolean z = false;
         while (it.hasNext()) {

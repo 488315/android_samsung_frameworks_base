@@ -1,14 +1,6 @@
 package android.app;
 
 import android.annotation.SystemApi;
-import android.app.ActivityManager;
-import android.app.ActivityOptions;
-import android.app.AlertDialog;
-import android.app.Application;
-import android.app.IRequestFinishCallback;
-import android.app.Instrumentation;
-import android.app.PictureInPictureParams;
-import android.app.VoiceInteractor;
 import android.app.assist.AssistContent;
 import android.app.compat.CompatChanges;
 import android.content.ComponentCallbacks;
@@ -109,6 +101,7 @@ import android.window.OnBackInvokedCallback;
 import android.window.OnBackInvokedDispatcher;
 import android.window.SplashScreen;
 import android.window.WindowOnBackInvokedDispatcher;
+
 import com.android.internal.R;
 import com.android.internal.app.IVoiceInteractionManagerService;
 import com.android.internal.app.IVoiceInteractor;
@@ -117,11 +110,14 @@ import com.android.internal.app.WindowDecorActionBar;
 import com.android.internal.policy.DecorView;
 import com.android.internal.policy.PhoneWindow;
 import com.android.internal.util.dump.DumpableContainerImpl;
+
+import dalvik.system.VMRuntime;
+
 import com.samsung.android.core.CompatSandbox;
 import com.samsung.android.multiwindow.MultiWindowCoreState;
 import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.rune.CoreRune;
-import dalvik.system.VMRuntime;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
@@ -137,7 +133,14 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 /* loaded from: classes.dex */
-public class Activity extends ContextThemeWrapper implements LayoutInflater.Factory2, Window.Callback, KeyEvent.Callback, View.OnCreateContextMenuListener, ComponentCallbacks2, Window.OnWindowDismissedCallback, ContentCaptureManager.ContentCaptureClient {
+public class Activity extends ContextThemeWrapper
+        implements LayoutInflater.Factory2,
+                Window.Callback,
+                KeyEvent.Callback,
+                View.OnCreateContextMenuListener,
+                ComponentCallbacks2,
+                Window.OnWindowDismissedCallback,
+                ContentCaptureManager.ContentCaptureClient {
     private static final int CONTENT_CAPTURE_PAUSE = 3;
     private static final int CONTENT_CAPTURE_RESUME = 2;
     private static final int CONTENT_CAPTURE_START = 1;
@@ -161,8 +164,10 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     static final String FRAGMENTS_TAG = "android:fragments";
     public static final int FULLSCREEN_MODE_REQUEST_ENTER = 1;
     public static final int FULLSCREEN_MODE_REQUEST_EXIT = 0;
-    private static final String HAS_CURRENT_PERMISSIONS_REQUEST_KEY = "android:hasCurrentPermissionsRequest";
-    private static final String KEYBOARD_SHORTCUTS_RECEIVER_DESKTOP_PKG_NAME = "com.sec.android.dexsystemui";
+    private static final String HAS_CURRENT_PERMISSIONS_REQUEST_KEY =
+            "android:hasCurrentPermissionsRequest";
+    private static final String KEYBOARD_SHORTCUTS_RECEIVER_DESKTOP_PKG_NAME =
+            "com.sec.android.dexsystemui";
     private static final String KEYBOARD_SHORTCUTS_RECEIVER_PKG_NAME = "com.android.systemui";
     private static final int LOG_AM_ON_ACTIVITY_RESULT_CALLED = 30062;
     private static final int LOG_AM_ON_CREATE_CALLED = 30057;
@@ -251,7 +256,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     private boolean mCanEnterPictureInPicture = false;
     boolean mChangingConfigurations = false;
     Configuration mCurrentConfig = Configuration.EMPTY;
-    private final ArrayList<Application.ActivityLifecycleCallbacks> mActivityLifecycleCallbacks = new ArrayList<>();
+    private final ArrayList<Application.ActivityLifecycleCallbacks> mActivityLifecycleCallbacks =
+            new ArrayList<>();
     View mDecor = null;
     boolean mWindowAdded = false;
     boolean mVisibleFromServer = false;
@@ -267,73 +273,75 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     private int mActionModeTypeStarting = 0;
     private int mDefaultKeyMode = 0;
     private SpannableStringBuilder mDefaultKeySsb = null;
-    private final ActivityManager.TaskDescription mTaskDescription = new ActivityManager.TaskDescription();
+    private final ActivityManager.TaskDescription mTaskDescription =
+            new ActivityManager.TaskDescription();
     private int mLastRequestedOrientation = -2;
     private final Object mInstanceTracker = StrictMode.trackActivity(this);
     final ActivityTransitionState mActivityTransitionState = new ActivityTransitionState();
     SharedElementCallback mEnterTransitionListener = SharedElementCallback.NULL_CALLBACK;
     SharedElementCallback mExitTransitionListener = SharedElementCallback.NULL_CALLBACK;
-    private final Window.WindowControllerCallback mWindowControllerCallback = new Window.WindowControllerCallback() { // from class: android.app.Activity.1
-        @Override // android.view.Window.WindowControllerCallback
-        public void toggleFreeformWindowingMode() {
-            ActivityClient.getInstance().toggleFreeformWindowingMode(Activity.this.mToken);
-        }
+    private final Window.WindowControllerCallback mWindowControllerCallback =
+            new Window.WindowControllerCallback() { // from class: android.app.Activity.1
+                @Override // android.view.Window.WindowControllerCallback
+                public void toggleFreeformWindowingMode() {
+                    ActivityClient.getInstance().toggleFreeformWindowingMode(Activity.this.mToken);
+                }
 
-        @Override // android.view.Window.WindowControllerCallback
-        public void enterPictureInPictureModeIfPossible() {
-            if (Activity.this.mActivityInfo.supportsPictureInPicture()) {
-                Activity.this.enterPictureInPictureMode();
-            }
-        }
+                @Override // android.view.Window.WindowControllerCallback
+                public void enterPictureInPictureModeIfPossible() {
+                    if (Activity.this.mActivityInfo.supportsPictureInPicture()) {
+                        Activity.this.enterPictureInPictureMode();
+                    }
+                }
 
-        @Override // android.view.Window.WindowControllerCallback
-        public boolean isTaskRoot() {
-            return ActivityClient.getInstance().getTaskForActivity(Activity.this.mToken, true) >= 0;
-        }
+                @Override // android.view.Window.WindowControllerCallback
+                public boolean isTaskRoot() {
+                    return ActivityClient.getInstance()
+                                    .getTaskForActivity(Activity.this.mToken, true)
+                            >= 0;
+                }
 
-        @Override // android.view.Window.WindowControllerCallback
-        public void updateStatusBarColor(int color) {
-            Activity.this.mTaskDescription.setStatusBarColor(color);
-            Activity.this.setTaskDescription(Activity.this.mTaskDescription);
-        }
+                @Override // android.view.Window.WindowControllerCallback
+                public void updateStatusBarColor(int color) {
+                    Activity.this.mTaskDescription.setStatusBarColor(color);
+                    Activity.this.setTaskDescription(Activity.this.mTaskDescription);
+                }
 
-        @Override // android.view.Window.WindowControllerCallback
-        public void updateSystemBarsAppearance(int appearance) {
-            Activity.this.mTaskDescription.setSystemBarsAppearance(appearance);
-            Activity.this.setTaskDescription(Activity.this.mTaskDescription);
-        }
+                @Override // android.view.Window.WindowControllerCallback
+                public void updateSystemBarsAppearance(int appearance) {
+                    Activity.this.mTaskDescription.setSystemBarsAppearance(appearance);
+                    Activity.this.setTaskDescription(Activity.this.mTaskDescription);
+                }
 
-        @Override // android.view.Window.WindowControllerCallback
-        public void updateNavigationBarColor(int color) {
-            Activity.this.mTaskDescription.setNavigationBarColor(color);
-            Activity.this.setTaskDescription(Activity.this.mTaskDescription);
-        }
-    };
+                @Override // android.view.Window.WindowControllerCallback
+                public void updateNavigationBarColor(int color) {
+                    Activity.this.mTaskDescription.setNavigationBarColor(color);
+                    Activity.this.setTaskDescription(Activity.this.mTaskDescription);
+                }
+            };
     private int mDexTaskDocking = -1;
     private boolean mIsPopOver = false;
-    private final GestureDetector.SimpleOnGestureListener mLongPressListener = new GestureDetector.SimpleOnGestureListener() { // from class: android.app.Activity.3
-        @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
-        public void onLongPress(MotionEvent e) {
-            Activity.this.mInOutsideLongPress = true;
-            Activity.this.applyTransparentPopOver();
-        }
-    };
+    private final GestureDetector.SimpleOnGestureListener mLongPressListener =
+            new GestureDetector.SimpleOnGestureListener() { // from class: android.app.Activity.3
+                @Override // android.view.GestureDetector.SimpleOnGestureListener,
+                // android.view.GestureDetector.OnGestureListener
+                public void onLongPress(MotionEvent e) {
+                    Activity.this.mInOutsideLongPress = true;
+                    Activity.this.applyTransparentPopOver();
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ContentCaptureNotificationType {
-    }
+    @interface ContentCaptureNotificationType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface DefaultKeyMode {
-    }
+    @interface DefaultKeyMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FullscreenModeRequest {
-    }
+    public @interface FullscreenModeRequest {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OverrideTransition {
-    }
+    public @interface OverrideTransition {}
 
     public interface ScreenCaptureCallback {
         void onScreenCaptured();
@@ -354,8 +362,7 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         Bundle mArgs;
         Dialog mDialog;
 
-        private ManagedDialog() {
-        }
+        private ManagedDialog() {}
     }
 
     static final class NonConfigurationInstances {
@@ -365,8 +372,7 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         ArrayMap<String, LoaderManager> loaders;
         VoiceInteractor voiceInteractor;
 
-        NonConfigurationInstances() {
-        }
+        NonConfigurationInstances() {}
     }
 
     private static final class ManagedCursor {
@@ -402,7 +408,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     public void setLocusContext(LocusId locusId, Bundle bundle) {
         try {
-            ActivityManager.getService().setActivityLocusContext(this.mComponent, locusId, this.mToken);
+            ActivityManager.getService()
+                    .setActivityLocusContext(this.mComponent, locusId, this.mToken);
         } catch (RemoteException re) {
             re.rethrowFromSystemServer();
         }
@@ -450,7 +457,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             return null;
         }
         if (this.mContentCaptureManager == null) {
-            this.mContentCaptureManager = (ContentCaptureManager) getSystemService(ContentCaptureManager.class);
+            this.mContentCaptureManager =
+                    (ContentCaptureManager) getSystemService(ContentCaptureManager.class);
         }
         return this.mContentCaptureManager;
     }
@@ -472,7 +480,12 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     private void notifyContentCaptureManagerIfNeeded(int type) {
         if (Trace.isTagEnabled(64L)) {
-            Trace.traceBegin(64L, "notifyContentCapture(" + getContentCaptureTypeAsString(type) + ") for " + this.mComponent.toShortString());
+            Trace.traceBegin(
+                    64L,
+                    "notifyContentCapture("
+                            + getContentCaptureTypeAsString(type)
+                            + ") for "
+                            + this.mComponent.toShortString());
         }
         try {
             ContentCaptureManager cm = getContentCaptureManager();
@@ -485,7 +498,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
                     if (window != null) {
                         cm.updateWindowAttributes(window.getAttributes());
                     }
-                    cm.onActivityCreated(this.mToken, this.mShareableActivityToken, getComponentName());
+                    cm.onActivityCreated(
+                            this.mToken, this.mShareableActivityToken, getComponentName());
                     break;
                 case 2:
                     cm.onActivityResumed();
@@ -510,11 +524,13 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         if (cm == null) {
             return;
         }
-        ContentCaptureContext.Builder contentCaptureContextBuilder = new ContentCaptureContext.Builder(locusId);
+        ContentCaptureContext.Builder contentCaptureContextBuilder =
+                new ContentCaptureContext.Builder(locusId);
         if (bundle != null) {
             contentCaptureContextBuilder.setExtras(bundle);
         }
-        cm.getMainContentCaptureSession().setContentCaptureContext(contentCaptureContextBuilder.build());
+        cm.getMainContentCaptureSession()
+                .setContentCaptureContext(contentCaptureContextBuilder.build());
     }
 
     @Override // android.view.ContextThemeWrapper, android.content.ContextWrapper
@@ -543,13 +559,15 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         return this;
     }
 
-    public void registerActivityLifecycleCallbacks(Application.ActivityLifecycleCallbacks callback) {
+    public void registerActivityLifecycleCallbacks(
+            Application.ActivityLifecycleCallbacks callback) {
         synchronized (this.mActivityLifecycleCallbacks) {
             this.mActivityLifecycleCallbacks.add(callback);
         }
     }
 
-    public void unregisterActivityLifecycleCallbacks(Application.ActivityLifecycleCallbacks callback) {
+    public void unregisterActivityLifecycleCallbacks(
+            Application.ActivityLifecycleCallbacks callback) {
         synchronized (this.mActivityLifecycleCallbacks) {
             this.mActivityLifecycleCallbacks.remove(callback);
         }
@@ -557,7 +575,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     @Override // android.content.ContextWrapper, android.content.Context
     public void registerComponentCallbacks(ComponentCallbacks callback) {
-        if (CompatChanges.isChangeEnabled(Context.OVERRIDABLE_COMPONENT_CALLBACKS) && this.mCallbacksController == null) {
+        if (CompatChanges.isChangeEnabled(Context.OVERRIDABLE_COMPONENT_CALLBACKS)
+                && this.mCallbacksController == null) {
             this.mCallbacksController = new ComponentCallbacksController();
         }
         if (this.mCallbacksController != null) {
@@ -581,7 +600,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (Object obj : callbacks) {
-                ((Application.ActivityLifecycleCallbacks) obj).onActivityPreCreated(this, savedInstanceState);
+                ((Application.ActivityLifecycleCallbacks) obj)
+                        .onActivityPreCreated(this, savedInstanceState);
             }
         }
     }
@@ -591,7 +611,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (Object obj : callbacks) {
-                ((Application.ActivityLifecycleCallbacks) obj).onActivityCreated(this, savedInstanceState);
+                ((Application.ActivityLifecycleCallbacks) obj)
+                        .onActivityCreated(this, savedInstanceState);
             }
         }
     }
@@ -600,7 +621,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (Object obj : callbacks) {
-                ((Application.ActivityLifecycleCallbacks) obj).onActivityPostCreated(this, savedInstanceState);
+                ((Application.ActivityLifecycleCallbacks) obj)
+                        .onActivityPostCreated(this, savedInstanceState);
             }
         }
         getApplication().dispatchActivityPostCreated(this, savedInstanceState);
@@ -731,7 +753,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (int i = callbacks.length - 1; i >= 0; i--) {
-                ((Application.ActivityLifecycleCallbacks) callbacks[i]).onActivityPreSaveInstanceState(this, outState);
+                ((Application.ActivityLifecycleCallbacks) callbacks[i])
+                        .onActivityPreSaveInstanceState(this, outState);
             }
         }
     }
@@ -740,7 +763,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (int i = callbacks.length - 1; i >= 0; i--) {
-                ((Application.ActivityLifecycleCallbacks) callbacks[i]).onActivitySaveInstanceState(this, outState);
+                ((Application.ActivityLifecycleCallbacks) callbacks[i])
+                        .onActivitySaveInstanceState(this, outState);
             }
         }
         getApplication().dispatchActivitySaveInstanceState(this, outState);
@@ -750,7 +774,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (int i = callbacks.length - 1; i >= 0; i--) {
-                ((Application.ActivityLifecycleCallbacks) callbacks[i]).onActivityPostSaveInstanceState(this, outState);
+                ((Application.ActivityLifecycleCallbacks) callbacks[i])
+                        .onActivityPostSaveInstanceState(this, outState);
             }
         }
         getApplication().dispatchActivityPostSaveInstanceState(this, outState);
@@ -761,7 +786,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (int i = callbacks.length - 1; i >= 0; i--) {
-                ((Application.ActivityLifecycleCallbacks) callbacks[i]).onActivityPreDestroyed(this);
+                ((Application.ActivityLifecycleCallbacks) callbacks[i])
+                        .onActivityPreDestroyed(this);
             }
         }
     }
@@ -780,7 +806,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (int i = callbacks.length - 1; i >= 0; i--) {
-                ((Application.ActivityLifecycleCallbacks) callbacks[i]).onActivityPostDestroyed(this);
+                ((Application.ActivityLifecycleCallbacks) callbacks[i])
+                        .onActivityPostDestroyed(this);
             }
         }
         getApplication().dispatchActivityPostDestroyed(this);
@@ -810,9 +837,14 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     private void notifyVoiceInteractionManagerServiceActivityEvent(int type) {
         if (this.mVoiceInteractionManagerService == null) {
-            this.mVoiceInteractionManagerService = IVoiceInteractionManagerService.Stub.asInterface(ServiceManager.getService(Context.VOICE_INTERACTION_MANAGER_SERVICE));
+            this.mVoiceInteractionManagerService =
+                    IVoiceInteractionManagerService.Stub.asInterface(
+                            ServiceManager.getService(Context.VOICE_INTERACTION_MANAGER_SERVICE));
             if (this.mVoiceInteractionManagerService == null) {
-                Log.w(TAG, "notifyVoiceInteractionManagerServiceActivityEvent: Can not get VoiceInteractionManagerService");
+                Log.w(
+                        TAG,
+                        "notifyVoiceInteractionManagerServiceActivityEvent: Can not get"
+                                + " VoiceInteractionManagerService");
                 return;
             }
         }
@@ -836,7 +868,11 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         if (savedInstanceState != null) {
             getAutofillClientController().onActivityCreated(savedInstanceState);
             Parcelable p = savedInstanceState.getParcelable(FRAGMENTS_TAG);
-            this.mFragments.restoreAllState(p, this.mLastNonConfigurationInstances != null ? this.mLastNonConfigurationInstances.fragments : null);
+            this.mFragments.restoreAllState(
+                    p,
+                    this.mLastNonConfigurationInstances != null
+                            ? this.mLastNonConfigurationInstances.fragments
+                            : null);
         }
         this.mFragments.dispatchCreate();
         dispatchActivityCreated(savedInstanceState);
@@ -845,15 +881,19 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         }
         this.mRestoredFromBundle = savedInstanceState != null;
         this.mCalled = true;
-        boolean aheadOfTimeBack = WindowOnBackInvokedDispatcher.isOnBackInvokedCallbackEnabled(this);
+        boolean aheadOfTimeBack =
+                WindowOnBackInvokedDispatcher.isOnBackInvokedCallbackEnabled(this);
         if (aheadOfTimeBack) {
-            this.mDefaultBackCallback = new OnBackInvokedCallback() { // from class: android.app.Activity$$ExternalSyntheticLambda0
-                @Override // android.window.OnBackInvokedCallback
-                public final void onBackInvoked() {
-                    Activity.this.onBackInvoked();
-                }
-            };
-            getOnBackInvokedDispatcher().registerSystemOnBackInvokedCallback(this.mDefaultBackCallback);
+            this.mDefaultBackCallback =
+                    new OnBackInvokedCallback() { // from class:
+                        // android.app.Activity$$ExternalSyntheticLambda0
+                        @Override // android.window.OnBackInvokedCallback
+                        public final void onBackInvoked() {
+                            Activity.this.onBackInvoked();
+                        }
+                    };
+            getOnBackInvokedDispatcher()
+                    .registerSystemOnBackInvokedCallback(this.mDefaultBackCallback);
         }
     }
 
@@ -881,7 +921,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         restoreManagedDialogs(savedInstanceState);
     }
 
-    final void performRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
+    final void performRestoreInstanceState(
+            Bundle savedInstanceState, PersistableBundle persistentState) {
         onRestoreInstanceState(savedInstanceState, persistentState);
         if (savedInstanceState != null) {
             restoreManagedDialogs(savedInstanceState);
@@ -890,12 +931,14 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         Bundle windowState;
-        if (this.mWindow != null && (windowState = savedInstanceState.getBundle(WINDOW_HIERARCHY_TAG)) != null) {
+        if (this.mWindow != null
+                && (windowState = savedInstanceState.getBundle(WINDOW_HIERARCHY_TAG)) != null) {
             this.mWindow.restoreHierarchyState(windowState);
         }
     }
 
-    public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
+    public void onRestoreInstanceState(
+            Bundle savedInstanceState, PersistableBundle persistentState) {
         if (savedInstanceState != null) {
             onRestoreInstanceState(savedInstanceState);
         }
@@ -967,8 +1010,7 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Deprecated
-    public void onStateNotSaved() {
-    }
+    public void onStateNotSaved() {}
 
     protected void onResume() {
         dispatchActivityResumed();
@@ -976,7 +1018,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         getAutofillClientController().onActivityResumed();
         notifyContentCaptureManagerIfNeeded(2);
         this.mCalled = true;
-        if (this.mIsInPictureInPictureMode && getResources().getConfiguration().windowConfiguration.getWindowingMode() != 2) {
+        if (this.mIsInPictureInPictureMode
+                && getResources().getConfiguration().windowConfiguration.getWindowingMode() != 2) {
             Slog.w(TAG, "[PipTaskOrganizer] init mIsInPictureInPictureMode false activity=" + this);
             this.mIsInPictureInPictureMode = false;
         }
@@ -994,19 +1037,23 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         this.mCalled = true;
     }
 
-    public void onTopResumedActivityChanged(boolean isTopResumedActivity) {
-    }
+    public void onTopResumedActivityChanged(boolean isTopResumedActivity) {}
 
     final void performTopResumedActivityChanged(boolean isTopResumedActivity, String reason) {
-        if (MultiWindowCoreState.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED && this.mResumed && !"pausing".equals(reason) && (!isTopResumedActivity || this.mIsTopResumedActivity)) {
+        if (MultiWindowCoreState.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED
+                && this.mResumed
+                && !"pausing".equals(reason)
+                && (!isTopResumedActivity || this.mIsTopResumedActivity)) {
             return;
         }
         this.mIsTopResumedActivity = isTopResumedActivity;
         onTopResumedActivityChanged(isTopResumedActivity);
         if (isTopResumedActivity) {
-            EventLogTags.writeWmOnTopResumedGainedCalled(this.mIdent, getComponentName().getClassName(), reason);
+            EventLogTags.writeWmOnTopResumedGainedCalled(
+                    this.mIdent, getComponentName().getClassName(), reason);
         } else {
-            EventLogTags.writeWmOnTopResumedLostCalled(this.mIdent, getComponentName().getClassName(), reason);
+            EventLogTags.writeWmOnTopResumedLostCalled(
+                    this.mIdent, getComponentName().getClassName(), reason);
         }
     }
 
@@ -1014,7 +1061,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         if (this.mVoiceInteractor != null) {
             VoiceInteractor.Request[] requests = this.mVoiceInteractor.getActiveRequests();
             if (requests != null) {
-                for (VoiceInteractor.Request activeRequest : this.mVoiceInteractor.getActiveRequests()) {
+                for (VoiceInteractor.Request activeRequest :
+                        this.mVoiceInteractor.getActiveRequests()) {
                     activeRequest.cancel();
                     activeRequest.clear();
                 }
@@ -1023,7 +1071,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         if (voiceInteractor == null) {
             this.mVoiceInteractor = null;
         } else {
-            this.mVoiceInteractor = new VoiceInteractor(voiceInteractor, this, this, Looper.myLooper());
+            this.mVoiceInteractor =
+                    new VoiceInteractor(voiceInteractor, this, this, Looper.myLooper());
         }
     }
 
@@ -1037,7 +1086,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     public boolean isVoiceInteractionRoot() {
-        return this.mVoiceInteractor != null && ActivityClient.getInstance().isRootVoiceInteraction(this.mToken);
+        return this.mVoiceInteractor != null
+                && ActivityClient.getInstance().isRootVoiceInteraction(this.mToken);
     }
 
     public VoiceInteractor getVoiceInteractor() {
@@ -1056,18 +1106,15 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         ActivityClient.getInstance().startLocalVoiceInteraction(this.mToken, privateOptions);
     }
 
-    public void onLocalVoiceInteractionStarted() {
-    }
+    public void onLocalVoiceInteractionStarted() {}
 
-    public void onLocalVoiceInteractionStopped() {
-    }
+    public void onLocalVoiceInteractionStopped() {}
 
     public void stopLocalVoiceInteraction() {
         ActivityClient.getInstance().stopLocalVoiceInteraction(this.mToken);
     }
 
-    protected void onNewIntent(Intent intent) {
-    }
+    protected void onNewIntent(Intent intent) {}
 
     public void onNewIntent(Intent intent, ComponentCaller caller) {
         onNewIntent(intent);
@@ -1132,8 +1179,7 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         this.mCalled = true;
     }
 
-    protected void onUserLeaveHint() {
-    }
+    protected void onUserLeaveHint() {}
 
     @Deprecated
     public boolean onCreateThumbnail(Bitmap outBitmap, Canvas canvas) {
@@ -1144,21 +1190,25 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         return null;
     }
 
-    public void onProvideAssistData(Bundle data) {
-    }
+    public void onProvideAssistData(Bundle data) {}
 
-    public void onProvideAssistContent(AssistContent outContent) {
-    }
+    public void onProvideAssistContent(AssistContent outContent) {}
 
-    public void onGetDirectActions(CancellationSignal cancellationSignal, Consumer<List<DirectAction>> callback) {
+    public void onGetDirectActions(
+            CancellationSignal cancellationSignal, Consumer<List<DirectAction>> callback) {
         callback.accept(Collections.emptyList());
     }
 
-    public void onPerformDirectAction(String actionId, Bundle arguments, CancellationSignal cancellationSignal, Consumer<Bundle> resultListener) {
-    }
+    public void onPerformDirectAction(
+            String actionId,
+            Bundle arguments,
+            CancellationSignal cancellationSignal,
+            Consumer<Bundle> resultListener) {}
 
     public final void requestShowKeyboardShortcuts() {
-        ComponentName sysuiComponent = ComponentName.unflattenFromString(getResources().getString(R.string.config_systemUIServiceComponent));
+        ComponentName sysuiComponent =
+                ComponentName.unflattenFromString(
+                        getResources().getString(R.string.config_systemUIServiceComponent));
         Intent intent = new Intent(Intent.ACTION_SHOW_KEYBOARD_SHORTCUTS);
         intent.setPackage(sysuiComponent.getPackageName());
         if (getDisplay().getDisplayId() == 2) {
@@ -1168,7 +1218,9 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     public final void dismissKeyboardShortcutsHelper() {
-        ComponentName sysuiComponent = ComponentName.unflattenFromString(getResources().getString(R.string.config_systemUIServiceComponent));
+        ComponentName sysuiComponent =
+                ComponentName.unflattenFromString(
+                        getResources().getString(R.string.config_systemUIServiceComponent));
         Intent intent = new Intent(Intent.ACTION_DISMISS_KEYBOARD_SHORTCUTS);
         intent.setPackage(sysuiComponent.getPackageName());
         if (getDisplay().getDisplayId() == 2) {
@@ -1178,7 +1230,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Override // android.view.Window.Callback
-    public void onProvideKeyboardShortcuts(List<KeyboardShortcutGroup> data, Menu menu, int deviceId) {
+    public void onProvideKeyboardShortcuts(
+            List<KeyboardShortcutGroup> data, Menu menu, int deviceId) {
         if (menu == null) {
             return;
         }
@@ -1269,7 +1322,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             }
             this.mDoReportFullyDrawn = false;
             try {
-                ActivityClient.getInstance().reportActivityFullyDrawn(this.mToken, this.mRestoredFromBundle);
+                ActivityClient.getInstance()
+                        .reportActivityFullyDrawn(this.mToken, this.mRestoredFromBundle);
                 VMRuntime.getRuntime().notifyStartupCompleted();
             } finally {
                 Trace.traceEnd(64L);
@@ -1282,23 +1336,21 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Deprecated
-    public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
-    }
+    public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {}
 
     public boolean isInMultiWindowMode() {
         return this.mIsInMultiWindowMode;
     }
 
-    public void onPictureInPictureModeChanged(boolean isInPictureInPictureMode, Configuration newConfig) {
+    public void onPictureInPictureModeChanged(
+            boolean isInPictureInPictureMode, Configuration newConfig) {
         onPictureInPictureModeChanged(isInPictureInPictureMode);
     }
 
-    public void onPictureInPictureUiStateChanged(PictureInPictureUiState pipState) {
-    }
+    public void onPictureInPictureUiStateChanged(PictureInPictureUiState pipState) {}
 
     @Deprecated
-    public void onPictureInPictureModeChanged(boolean isInPictureInPictureMode) {
-    }
+    public void onPictureInPictureModeChanged(boolean isInPictureInPictureMode) {}
 
     public boolean isInPictureInPictureMode() {
         return this.mIsInPictureInPictureMode;
@@ -1319,7 +1371,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         if (!this.mCanEnterPictureInPicture) {
             throw new IllegalStateException("Activity must be resumed to enter picture-in-picture");
         }
-        this.mIsInPictureInPictureMode = ActivityClient.getInstance().enterPictureInPictureMode(this.mToken, params);
+        this.mIsInPictureInPictureMode =
+                ActivityClient.getInstance().enterPictureInPictureMode(this.mToken, params);
         return this.mIsInPictureInPictureMode;
     }
 
@@ -1348,8 +1401,10 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         return false;
     }
 
-    public void requestFullscreenMode(int request, OutcomeReceiver<Void, Throwable> approvalCallback) {
-        FullscreenRequestHandler.requestFullscreenMode(request, approvalCallback, this.mCurrentConfig, getActivityToken());
+    public void requestFullscreenMode(
+            int request, OutcomeReceiver<Void, Throwable> approvalCallback) {
+        FullscreenRequestHandler.requestFullscreenMode(
+                request, approvalCallback, this.mCurrentConfig, getActivityToken());
     }
 
     public void setShouldDockBigOverlays(boolean shouldDockBigOverlays) {
@@ -1366,8 +1421,7 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         onMovedToDisplay(displayId, config);
     }
 
-    public void onMovedToDisplay(int displayId, Configuration config) {
-    }
+    public void onMovedToDisplay(int displayId, Configuration config) {}
 
     @Override // android.content.ComponentCallbacks
     public void onConfigurationChanged(Configuration newConfig) {
@@ -1427,7 +1481,11 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         this.mFragments.doLoaderStart();
         this.mFragments.doLoaderStop(true);
         ArrayMap<String, LoaderManager> loaders = this.mFragments.retainLoaderNonConfig();
-        if (activity == null && children == null && fragments == null && loaders == null && this.mVoiceInteractor == null) {
+        if (activity == null
+                && children == null
+                && fragments == null
+                && loaders == null
+                && this.mVoiceInteractor == null) {
             return null;
         }
         NonConfigurationInstances nci = new NonConfigurationInstances();
@@ -1466,11 +1524,11 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Deprecated
-    public void onAttachFragment(Fragment fragment) {
-    }
+    public void onAttachFragment(Fragment fragment) {}
 
     @Deprecated
-    public final Cursor managedQuery(Uri uri, String[] projection, String selection, String sortOrder) {
+    public final Cursor managedQuery(
+            Uri uri, String[] projection, String selection, String sortOrder) {
         Cursor c = getContentResolver().query(uri, projection, selection, null, sortOrder);
         if (c != null) {
             startManagingCursor(c);
@@ -1479,7 +1537,12 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Deprecated
-    public final Cursor managedQuery(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public final Cursor managedQuery(
+            Uri uri,
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String sortOrder) {
         Cursor c = getContentResolver().query(uri, projection, selection, selectionArgs, sortOrder);
         if (c != null) {
             startManagingCursor(c);
@@ -1515,8 +1578,7 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Deprecated
-    public void setPersistent(boolean isPersistent) {
-    }
+    public void setPersistent(boolean isPersistent) {}
 
     public <T extends View> T findViewById(int i) {
         return (T) getWindow().findViewById(i);
@@ -1538,7 +1600,10 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     public void setActionBar(Toolbar toolbar) {
         ActionBar ab = getActionBar();
         if (ab instanceof WindowDecorActionBar) {
-            throw new IllegalStateException("This Activity already has an action bar supplied by the window decor. Do not request Window.FEATURE_ACTION_BAR and set android:windowActionBar to false in your theme to use a Toolbar instead.");
+            throw new IllegalStateException(
+                    "This Activity already has an action bar supplied by the window decor. Do not"
+                        + " request Window.FEATURE_ACTION_BAR and set android:windowActionBar to"
+                        + " false in your theme to use a Toolbar instead.");
         }
         this.mMenuInflater = null;
         if (ab != null) {
@@ -1660,13 +1725,16 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             clearSpannable = true;
             handled = false;
         } else {
-            handled = TextKeyListener.getInstance().onKeyDown(null, this.mDefaultKeySsb, keyCode, event);
+            handled =
+                    TextKeyListener.getInstance()
+                            .onKeyDown(null, this.mDefaultKeySsb, keyCode, event);
             if (handled && this.mDefaultKeySsb.length() > 0) {
                 String str = this.mDefaultKeySsb.toString();
                 clearSpannable = true;
                 switch (this.mDefaultKeyMode) {
                     case 1:
-                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(WebView.SCHEME_TEL + str));
+                        Intent intent =
+                                new Intent(Intent.ACTION_DIAL, Uri.parse(WebView.SCHEME_TEL + str));
                         intent.addFlags(268435456);
                         startActivity(intent);
                         break;
@@ -1696,13 +1764,23 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         int sdkVersion = getApplicationInfo().targetSdkVersion;
         if (sdkVersion >= 5) {
-            if (keyCode == 4 && event.isTracking() && !event.isCanceled() && this.mDefaultBackCallback == null) {
+            if (keyCode == 4
+                    && event.isTracking()
+                    && !event.isCanceled()
+                    && this.mDefaultBackCallback == null) {
                 onBackPressed();
                 return true;
             }
             if (keyCode == 4) {
                 boolean hasCallback = this.mDefaultBackCallback != null;
-                Slog.d(TAG, "onKeyUp(KEYCODE_BACK) isTracking()=" + event.isTracking() + " isCanceled()=" + event.isCanceled() + " hasCallback=" + hasCallback);
+                Slog.d(
+                        TAG,
+                        "onKeyUp(KEYCODE_BACK) isTracking()="
+                                + event.isTracking()
+                                + " isCanceled()="
+                                + event.isCanceled()
+                                + " hasCallback="
+                                + hasCallback);
             }
         }
         return keyCode == 111 && event.isTracking();
@@ -1726,12 +1804,14 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             if (activity != null) {
                 Handler handler = activity.mHandler;
                 Objects.requireNonNull(activity);
-                handler.post(new Runnable() { // from class: android.app.Activity$RequestFinishCallback$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        Activity.this.finishAfterTransition();
-                    }
-                });
+                handler.post(
+                        new Runnable() { // from class:
+                            // android.app.Activity$RequestFinishCallback$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                Activity.this.finishAfterTransition();
+                            }
+                        });
             }
         }
     }
@@ -1751,7 +1831,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     /* JADX INFO: Access modifiers changed from: private */
     public void onBackInvoked() {
         Slog.d(TAG, "onBackInvoked, activity=" + this + ", caller=" + Debug.getCallers(3));
-        ActivityClient.getInstance().onBackPressed(this.mToken, new RequestFinishCallback(new WeakReference(this)));
+        ActivityClient.getInstance()
+                .onBackPressed(this.mToken, new RequestFinishCallback(new WeakReference(this)));
         if (isTaskRoot()) {
             getAutofillClientController().onActivityBackPressed(this.mIntent);
         }
@@ -1778,8 +1859,7 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         return false;
     }
 
-    public void onUserInteraction() {
-    }
+    public void onUserInteraction() {}
 
     @Override // android.view.Window.Callback
     public void onWindowAttributesChanged(WindowManager.LayoutParams params) {
@@ -1793,20 +1873,16 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Override // android.view.Window.Callback
-    public void onContentChanged() {
-    }
+    public void onContentChanged() {}
 
     @Override // android.view.Window.Callback
-    public void onWindowFocusChanged(boolean hasFocus) {
-    }
+    public void onWindowFocusChanged(boolean hasFocus) {}
 
     @Override // android.view.Window.Callback
-    public void onAttachedToWindow() {
-    }
+    public void onAttachedToWindow() {}
 
     @Override // android.view.Window.Callback
-    public void onDetachedFromWindow() {
-    }
+    public void onDetachedFromWindow() {}
 
     public boolean hasWindowFocus() {
         View d;
@@ -1939,10 +2015,13 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
                 if (titleCondensed != null) {
                     EventLog.writeEvent(50000, 0, titleCondensed.toString());
                 }
-                if (onOptionsItemSelected(item) || this.mFragments.dispatchOptionsItemSelected(item)) {
+                if (onOptionsItemSelected(item)
+                        || this.mFragments.dispatchOptionsItemSelected(item)) {
                     return true;
                 }
-                if (item.getItemId() != 16908332 || this.mActionBar == null || (this.mActionBar.getDisplayOptions() & 4) == 0) {
+                if (item.getItemId() != 16908332
+                        || this.mActionBar == null
+                        || (this.mActionBar.getDisplayOptions() & 4) == 0) {
                     return false;
                 }
                 if (this.mParent == null) {
@@ -2043,8 +2122,7 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         builder.addParentStack(this);
     }
 
-    public void onPrepareNavigateUpTaskStack(TaskStackBuilder builder) {
-    }
+    public void onPrepareNavigateUpTaskStack(TaskStackBuilder builder) {}
 
     public void onOptionsMenuClosed(Menu menu) {
         if (this.mParent != null) {
@@ -2069,8 +2147,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Override // android.view.View.OnCreateContextMenuListener
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-    }
+    public void onCreateContextMenu(
+            ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {}
 
     public void registerForContextMenu(View view) {
         view.setOnCreateContextMenuListener(this);
@@ -2161,7 +2239,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     private IllegalArgumentException missingDialog(int id) {
-        return new IllegalArgumentException("no dialog with id " + id + " was ever shown via Activity#showDialog");
+        return new IllegalArgumentException(
+                "no dialog with id " + id + " was ever shown via Activity#showDialog");
     }
 
     @Deprecated
@@ -2195,9 +2274,14 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         return this.mSearchEvent;
     }
 
-    public void startSearch(String initialQuery, boolean selectInitialQuery, Bundle appSearchData, boolean globalSearch) {
+    public void startSearch(
+            String initialQuery,
+            boolean selectInitialQuery,
+            Bundle appSearchData,
+            boolean globalSearch) {
         ensureSearchManager();
-        this.mSearchManager.startSearch(initialQuery, selectInitialQuery, getComponentName(), appSearchData, globalSearch);
+        this.mSearchManager.startSearch(
+                initialQuery, selectInitialQuery, getComponentName(), appSearchData, globalSearch);
     }
 
     public void triggerSearch(String query, Bundle appSearchData) {
@@ -2245,7 +2329,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         return this.mMenuInflater;
     }
 
-    @Override // android.view.ContextThemeWrapper, android.content.ContextWrapper, android.content.Context
+    @Override // android.view.ContextThemeWrapper, android.content.ContextWrapper,
+    // android.content.Context
     public void setTheme(int resid) {
         super.setTheme(resid);
         this.mWindow.setTheme(resid);
@@ -2264,7 +2349,9 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             theme.applyStyle(resid, false);
         }
         TypedArray a = theme.obtainStyledAttributes(R.styleable.ActivityTaskDescription);
-        if (this.mTaskDescription.getPrimaryColor() == 0 && (colorPrimary = a.getColor(1, 0)) != 0 && Color.alpha(colorPrimary) == 255) {
+        if (this.mTaskDescription.getPrimaryColor() == 0
+                && (colorPrimary = a.getColor(1, 0)) != 0
+                && Color.alpha(colorPrimary) == 255) {
             this.mTaskDescription.setPrimaryColor(colorPrimary);
         }
         int colorBackground = a.getColor(0, 0);
@@ -2287,10 +2374,14 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         boolean targetPreQ = targetSdk < 29;
         if (!targetPreQ) {
             this.mTaskDescription.setEnsureStatusBarContrastWhenTransparent(a.getBoolean(5, false));
-            this.mTaskDescription.setEnsureNavigationBarContrastWhenTransparent(a.getBoolean(6, true));
+            this.mTaskDescription.setEnsureNavigationBarContrastWhenTransparent(
+                    a.getBoolean(6, true));
         }
         a.recycle();
-        if (first && this.mTaskDescription.getSystemBarsAppearance() == 0 && this.mWindow != null && this.mWindow.getSystemBarAppearance() != 0) {
+        if (first
+                && this.mTaskDescription.getSystemBarsAppearance() == 0
+                && this.mWindow != null
+                && this.mWindow.getSystemBarAppearance() != 0) {
             this.mTaskDescription.setSystemBarsAppearance(this.mWindow.getSystemBarAppearance());
         }
         setTaskDescription(this.mTaskDescription);
@@ -2313,21 +2404,26 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             int permissionCount = permissions.length;
             for (int i = 0; i < permissionCount; i++) {
                 if (getAttributionSource().getRenouncedPermissions().contains(permissions[i])) {
-                    throw new IllegalArgumentException("Cannot request renounced permission: " + permissions[i]);
+                    throw new IllegalArgumentException(
+                            "Cannot request renounced permission: " + permissions[i]);
                 }
             }
         }
         int permissionCount2 = getDeviceId();
-        PackageManager packageManager = permissionCount2 == deviceId ? getPackageManager() : createDeviceContext(deviceId).getPackageManager();
+        PackageManager packageManager =
+                permissionCount2 == deviceId
+                        ? getPackageManager()
+                        : createDeviceContext(deviceId).getPackageManager();
         Intent intent = packageManager.buildRequestPermissionsIntent(permissions);
         startActivityForResult(REQUEST_PERMISSIONS_WHO_PREFIX, intent, requestCode, null);
         this.mHasCurrentPermissionsRequest = true;
     }
 
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    }
+    public void onRequestPermissionsResult(
+            int requestCode, String[] permissions, int[] grantResults) {}
 
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults, int deviceId) {
+    public void onRequestPermissionsResult(
+            int requestCode, String[] permissions, int[] grantResults, int deviceId) {
         onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -2336,7 +2432,10 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     public boolean shouldShowRequestPermissionRationale(String permission, int deviceId) {
-        PackageManager packageManager = getDeviceId() == deviceId ? getPackageManager() : createDeviceContext(deviceId).getPackageManager();
+        PackageManager packageManager =
+                getDeviceId() == deviceId
+                        ? getPackageManager()
+                        : createDeviceContext(deviceId).getPackageManager();
         return packageManager.shouldShowRequestPermissionRationale(permission);
     }
 
@@ -2347,9 +2446,22 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     public void startActivityForResult(Intent intent, int requestCode, Bundle options) {
         if (this.mParent == null) {
             Bundle options2 = transferSpringboardActivityOptions(options);
-            Instrumentation.ActivityResult ar = this.mInstrumentation.execStartActivity(this, this.mMainThread.getApplicationThread(), this.mToken, this, intent, requestCode, options2);
+            Instrumentation.ActivityResult ar =
+                    this.mInstrumentation.execStartActivity(
+                            this,
+                            this.mMainThread.getApplicationThread(),
+                            this.mToken,
+                            this,
+                            intent,
+                            requestCode,
+                            options2);
             if (ar != null) {
-                this.mMainThread.sendActivityResult(this.mToken, this.mEmbeddedID, requestCode, ar.getResultCode(), ar.getResultData());
+                this.mMainThread.sendActivityResult(
+                        this.mToken,
+                        this.mEmbeddedID,
+                        requestCode,
+                        ar.getResultCode(),
+                        ar.getResultData());
             }
             if (requestCode >= 0) {
                 this.mStartedActivity = true;
@@ -2380,7 +2492,10 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     private Bundle transferSpringboardActivityOptions(Bundle options) {
         ActivityOptions.SceneTransitionInfo info;
-        if (options == null && this.mWindow != null && !this.mWindow.isActive() && (info = getSceneTransitionInfo()) != null) {
+        if (options == null
+                && this.mWindow != null
+                && !this.mWindow.isActive()
+                && (info = getSceneTransitionInfo()) != null) {
             return ActivityOptions.makeBasic().setSceneTransitionInfo(info).toBundle();
         }
         return options;
@@ -2392,19 +2507,35 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @SystemApi
-    public void startActivityForResultAsUser(Intent intent, int requestCode, Bundle options, UserHandle user) {
+    public void startActivityForResultAsUser(
+            Intent intent, int requestCode, Bundle options, UserHandle user) {
         startActivityForResultAsUser(intent, this.mEmbeddedID, requestCode, options, user);
     }
 
     @SystemApi
-    public void startActivityForResultAsUser(Intent intent, String resultWho, int requestCode, Bundle options, UserHandle user) {
+    public void startActivityForResultAsUser(
+            Intent intent, String resultWho, int requestCode, Bundle options, UserHandle user) {
         if (this.mParent != null) {
             throw new RuntimeException("Can't be called from a child");
         }
         Bundle options2 = transferSpringboardActivityOptions(options);
-        Instrumentation.ActivityResult ar = this.mInstrumentation.execStartActivity(this, this.mMainThread.getApplicationThread(), this.mToken, resultWho, intent, requestCode, options2, user);
+        Instrumentation.ActivityResult ar =
+                this.mInstrumentation.execStartActivity(
+                        this,
+                        this.mMainThread.getApplicationThread(),
+                        this.mToken,
+                        resultWho,
+                        intent,
+                        requestCode,
+                        options2,
+                        user);
         if (ar != null) {
-            this.mMainThread.sendActivityResult(this.mToken, this.mEmbeddedID, requestCode, ar.getResultCode(), ar.getResultData());
+            this.mMainThread.sendActivityResult(
+                    this.mToken,
+                    this.mEmbeddedID,
+                    requestCode,
+                    ar.getResultCode(),
+                    ar.getResultData());
         }
         if (requestCode >= 0) {
             this.mStartedActivity = true;
@@ -2423,48 +2554,134 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             throw new RuntimeException("Can't be called from a child");
         }
         Bundle options2 = transferSpringboardActivityOptions(options);
-        Instrumentation.ActivityResult ar = this.mInstrumentation.execStartActivity(this, this.mMainThread.getApplicationThread(), this.mToken, this.mEmbeddedID, intent, -1, options2, user);
+        Instrumentation.ActivityResult ar =
+                this.mInstrumentation.execStartActivity(
+                        this,
+                        this.mMainThread.getApplicationThread(),
+                        this.mToken,
+                        this.mEmbeddedID,
+                        intent,
+                        -1,
+                        options2,
+                        user);
         if (ar != null) {
-            this.mMainThread.sendActivityResult(this.mToken, this.mEmbeddedID, -1, ar.getResultCode(), ar.getResultData());
+            this.mMainThread.sendActivityResult(
+                    this.mToken, this.mEmbeddedID, -1, ar.getResultCode(), ar.getResultData());
         }
         cancelInputsAndStartExitTransition(options2);
     }
 
-    public void startActivityAsCaller(Intent intent, Bundle options, boolean ignoreTargetSecurity, int userId) {
+    public void startActivityAsCaller(
+            Intent intent, Bundle options, boolean ignoreTargetSecurity, int userId) {
         startActivityAsCaller(intent, options, ignoreTargetSecurity, userId, -1);
     }
 
-    public void startActivityAsCaller(Intent intent, Bundle options, boolean ignoreTargetSecurity, int userId, int requestCode) {
+    public void startActivityAsCaller(
+            Intent intent,
+            Bundle options,
+            boolean ignoreTargetSecurity,
+            int userId,
+            int requestCode) {
         if (this.mParent != null) {
             throw new RuntimeException("Can't be called from a child");
         }
         Bundle options2 = transferSpringboardActivityOptions(options);
-        Instrumentation.ActivityResult ar = this.mInstrumentation.execStartActivityAsCaller(this, this.mMainThread.getApplicationThread(), this.mToken, this, intent, requestCode, options2, ignoreTargetSecurity, userId);
+        Instrumentation.ActivityResult ar =
+                this.mInstrumentation.execStartActivityAsCaller(
+                        this,
+                        this.mMainThread.getApplicationThread(),
+                        this.mToken,
+                        this,
+                        intent,
+                        requestCode,
+                        options2,
+                        ignoreTargetSecurity,
+                        userId);
         if (ar != null) {
-            this.mMainThread.sendActivityResult(this.mToken, this.mEmbeddedID, requestCode, ar.getResultCode(), ar.getResultData());
+            this.mMainThread.sendActivityResult(
+                    this.mToken,
+                    this.mEmbeddedID,
+                    requestCode,
+                    ar.getResultCode(),
+                    ar.getResultData());
         }
         cancelInputsAndStartExitTransition(options2);
     }
 
-    public void startIntentSenderForResult(IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags) throws IntentSender.SendIntentException {
-        startIntentSenderForResult(intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags, (Bundle) null);
+    public void startIntentSenderForResult(
+            IntentSender intent,
+            int requestCode,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            int extraFlags)
+            throws IntentSender.SendIntentException {
+        startIntentSenderForResult(
+                intent,
+                requestCode,
+                fillInIntent,
+                flagsMask,
+                flagsValues,
+                extraFlags,
+                (Bundle) null);
     }
 
-    public void startIntentSenderForResult(IntentSender intent, String who, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, Bundle options) throws IntentSender.SendIntentException {
-        startIntentSenderForResultInner(intent, who, requestCode, fillInIntent, flagsMask, flagsValues, options);
+    public void startIntentSenderForResult(
+            IntentSender intent,
+            String who,
+            int requestCode,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            Bundle options)
+            throws IntentSender.SendIntentException {
+        startIntentSenderForResultInner(
+                intent, who, requestCode, fillInIntent, flagsMask, flagsValues, options);
     }
 
-    public void startIntentSenderForResult(IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) throws IntentSender.SendIntentException {
+    public void startIntentSenderForResult(
+            IntentSender intent,
+            int requestCode,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            int extraFlags,
+            Bundle options)
+            throws IntentSender.SendIntentException {
         if (this.mParent == null) {
-            startIntentSenderForResultInner(intent, this.mEmbeddedID, requestCode, fillInIntent, flagsMask, flagsValues, options);
+            startIntentSenderForResultInner(
+                    intent,
+                    this.mEmbeddedID,
+                    requestCode,
+                    fillInIntent,
+                    flagsMask,
+                    flagsValues,
+                    options);
         } else if (options != null) {
-            this.mParent.startIntentSenderFromChild(this, intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags, options);
+            this.mParent.startIntentSenderFromChild(
+                    this,
+                    intent,
+                    requestCode,
+                    fillInIntent,
+                    flagsMask,
+                    flagsValues,
+                    extraFlags,
+                    options);
         } else {
-            this.mParent.startIntentSenderFromChild(this, intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags);
+            this.mParent.startIntentSenderFromChild(
+                    this, intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags);
         }
     }
 
-    public void startIntentSenderForResultInner(IntentSender intent, String who, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, Bundle options) throws IntentSender.SendIntentException {
+    public void startIntentSenderForResultInner(
+            IntentSender intent,
+            String who,
+            int requestCode,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            Bundle options)
+            throws IntentSender.SendIntentException {
         Bundle options2;
         int result;
         try {
@@ -2478,7 +2695,20 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
                 } catch (RemoteException e) {
                 }
             }
-            result = ActivityTaskManager.getService().startActivityIntentSender(this.mMainThread.getApplicationThread(), intent != null ? intent.getTarget() : null, intent != null ? intent.getWhitelistToken() : null, fillInIntent, resolvedType, this.mToken, who, requestCode, flagsMask, flagsValues, options2);
+            result =
+                    ActivityTaskManager.getService()
+                            .startActivityIntentSender(
+                                    this.mMainThread.getApplicationThread(),
+                                    intent != null ? intent.getTarget() : null,
+                                    intent != null ? intent.getWhitelistToken() : null,
+                                    fillInIntent,
+                                    resolvedType,
+                                    this.mToken,
+                                    who,
+                                    requestCode,
+                                    flagsMask,
+                                    flagsValues,
+                                    options2);
         } catch (RemoteException e2) {
         }
         if (result == -96) {
@@ -2515,20 +2745,36 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     @Override // android.content.ContextWrapper, android.content.Context
     public void startActivities(Intent[] intents, Bundle options) {
-        this.mInstrumentation.execStartActivities(this, this.mMainThread.getApplicationThread(), this.mToken, this, intents, options);
+        this.mInstrumentation.execStartActivities(
+                this, this.mMainThread.getApplicationThread(), this.mToken, this, intents, options);
     }
 
     @Override // android.content.ContextWrapper, android.content.Context
-    public void startIntentSender(IntentSender intent, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags) throws IntentSender.SendIntentException {
+    public void startIntentSender(
+            IntentSender intent,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            int extraFlags)
+            throws IntentSender.SendIntentException {
         startIntentSender(intent, fillInIntent, flagsMask, flagsValues, extraFlags, null);
     }
 
     @Override // android.content.ContextWrapper, android.content.Context
-    public void startIntentSender(IntentSender intent, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) throws IntentSender.SendIntentException {
+    public void startIntentSender(
+            IntentSender intent,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            int extraFlags,
+            Bundle options)
+            throws IntentSender.SendIntentException {
         if (options != null) {
-            startIntentSenderForResult(intent, -1, fillInIntent, flagsMask, flagsValues, extraFlags, options);
+            startIntentSenderForResult(
+                    intent, -1, fillInIntent, flagsMask, flagsValues, extraFlags, options);
         } else {
-            startIntentSenderForResult(intent, -1, fillInIntent, flagsMask, flagsValues, extraFlags);
+            startIntentSenderForResult(
+                    intent, -1, fillInIntent, flagsMask, flagsValues, extraFlags);
         }
     }
 
@@ -2539,7 +2785,15 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     public boolean startActivityIfNeeded(Intent intent, int requestCode, Bundle options) {
         int result;
         if (Instrumentation.DEBUG_START_ACTIVITY) {
-            Log.d("Instrumentation", "startActivity: intent=" + intent + " requestCode=" + requestCode + " options=" + options, new Throwable());
+            Log.d(
+                    "Instrumentation",
+                    "startActivity: intent="
+                            + intent
+                            + " requestCode="
+                            + requestCode
+                            + " options="
+                            + options,
+                    new Throwable());
         }
         if (this.mParent == null) {
             try {
@@ -2549,7 +2803,20 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
                 }
                 intent.migrateExtraStreamToClipData(this);
                 intent.prepareToLeaveProcess(this);
-                int result2 = ActivityTaskManager.getService().startActivity(this.mMainThread.getApplicationThread(), getOpPackageName(), getAttributionTag(), intent, intent.resolveTypeIfNeeded(getContentResolver()), this.mToken, this.mEmbeddedID, requestCode, 1, null, options);
+                int result2 =
+                        ActivityTaskManager.getService()
+                                .startActivity(
+                                        this.mMainThread.getApplicationThread(),
+                                        getOpPackageName(),
+                                        getAttributionTag(),
+                                        intent,
+                                        intent.resolveTypeIfNeeded(getContentResolver()),
+                                        this.mToken,
+                                        this.mEmbeddedID,
+                                        requestCode,
+                                        1,
+                                        null,
+                                        options);
                 result = result2;
             } catch (RemoteException e) {
                 result = 1;
@@ -2560,7 +2827,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             }
             return result != 1;
         }
-        throw new UnsupportedOperationException("startActivityIfNeeded can only be called from a top-level activity");
+        throw new UnsupportedOperationException(
+                "startActivityIfNeeded can only be called from a top-level activity");
     }
 
     public boolean startNextMatchingActivity(Intent intent) {
@@ -2572,12 +2840,14 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             try {
                 intent.migrateExtraStreamToClipData(this);
                 intent.prepareToLeaveProcess(this);
-                return ActivityTaskManager.getService().startNextMatchingActivity(this.mToken, intent, options);
+                return ActivityTaskManager.getService()
+                        .startNextMatchingActivity(this.mToken, intent, options);
             } catch (RemoteException e) {
                 return false;
             }
         }
-        throw new UnsupportedOperationException("startNextMatchingActivity can only be called from a top-level activity");
+        throw new UnsupportedOperationException(
+                "startNextMatchingActivity can only be called from a top-level activity");
     }
 
     @Deprecated
@@ -2586,11 +2856,25 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Deprecated
-    public void startActivityFromChild(Activity child, Intent intent, int requestCode, Bundle options) {
+    public void startActivityFromChild(
+            Activity child, Intent intent, int requestCode, Bundle options) {
         Bundle options2 = transferSpringboardActivityOptions(options);
-        Instrumentation.ActivityResult ar = this.mInstrumentation.execStartActivity(this, this.mMainThread.getApplicationThread(), this.mToken, child, intent, requestCode, options2);
+        Instrumentation.ActivityResult ar =
+                this.mInstrumentation.execStartActivity(
+                        this,
+                        this.mMainThread.getApplicationThread(),
+                        this.mToken,
+                        child,
+                        intent,
+                        requestCode,
+                        options2);
         if (ar != null) {
-            this.mMainThread.sendActivityResult(this.mToken, child.mEmbeddedID, requestCode, ar.getResultCode(), ar.getResultData());
+            this.mMainThread.sendActivityResult(
+                    this.mToken,
+                    child.mEmbeddedID,
+                    requestCode,
+                    ar.getResultCode(),
+                    ar.getResultData());
         }
         cancelInputsAndStartExitTransition(options2);
     }
@@ -2601,12 +2885,14 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Deprecated
-    public void startActivityFromFragment(Fragment fragment, Intent intent, int requestCode, Bundle options) {
+    public void startActivityFromFragment(
+            Fragment fragment, Intent intent, int requestCode, Bundle options) {
         startActivityForResult(fragment.mWho, intent, requestCode, options);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void startActivityAsUserFromFragment(Fragment fragment, Intent intent, int requestCode, Bundle options, UserHandle user) {
+    public void startActivityAsUserFromFragment(
+            Fragment fragment, Intent intent, int requestCode, Bundle options, UserHandle user) {
         startActivityForResultAsUser(intent, fragment.mWho, requestCode, options, user);
     }
 
@@ -2617,9 +2903,18 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             intent.putExtra(Intent.EXTRA_REFERRER, referrer);
         }
         Bundle options2 = transferSpringboardActivityOptions(options);
-        Instrumentation.ActivityResult ar = this.mInstrumentation.execStartActivity(this, this.mMainThread.getApplicationThread(), this.mToken, who, intent, requestCode, options2);
+        Instrumentation.ActivityResult ar =
+                this.mInstrumentation.execStartActivity(
+                        this,
+                        this.mMainThread.getApplicationThread(),
+                        this.mToken,
+                        who,
+                        intent,
+                        requestCode,
+                        options2);
         if (ar != null) {
-            this.mMainThread.sendActivityResult(this.mToken, who, requestCode, ar.getResultCode(), ar.getResultData());
+            this.mMainThread.sendActivityResult(
+                    this.mToken, who, requestCode, ar.getResultCode(), ar.getResultData());
         }
         cancelInputsAndStartExitTransition(options2);
     }
@@ -2630,46 +2925,87 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Deprecated
-    public void startIntentSenderFromChild(Activity child, IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags) throws IntentSender.SendIntentException {
-        startIntentSenderFromChild(child, intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags, null);
+    public void startIntentSenderFromChild(
+            Activity child,
+            IntentSender intent,
+            int requestCode,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            int extraFlags)
+            throws IntentSender.SendIntentException {
+        startIntentSenderFromChild(
+                child, intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags, null);
     }
 
     @Deprecated
-    public void startIntentSenderFromChild(Activity child, IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) throws IntentSender.SendIntentException {
-        startIntentSenderForResultInner(intent, child.mEmbeddedID, requestCode, fillInIntent, flagsMask, flagsValues, options);
+    public void startIntentSenderFromChild(
+            Activity child,
+            IntentSender intent,
+            int requestCode,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            int extraFlags,
+            Bundle options)
+            throws IntentSender.SendIntentException {
+        startIntentSenderForResultInner(
+                intent,
+                child.mEmbeddedID,
+                requestCode,
+                fillInIntent,
+                flagsMask,
+                flagsValues,
+                options);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void startIntentSenderFromFragment(Fragment fragment, IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, Bundle options) throws IntentSender.SendIntentException {
-        startIntentSenderForResultInner(intent, fragment.mWho, requestCode, fillInIntent, flagsMask, flagsValues, options);
+    public void startIntentSenderFromFragment(
+            Fragment fragment,
+            IntentSender intent,
+            int requestCode,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            Bundle options)
+            throws IntentSender.SendIntentException {
+        startIntentSenderForResultInner(
+                intent, fragment.mWho, requestCode, fillInIntent, flagsMask, flagsValues, options);
     }
 
     public void overrideActivityTransition(int overrideType, int enterAnim, int exitAnim) {
         overrideActivityTransition(overrideType, enterAnim, exitAnim, 0);
     }
 
-    public void overrideActivityTransition(int overrideType, int enterAnim, int exitAnim, int backgroundColor) {
+    public void overrideActivityTransition(
+            int overrideType, int enterAnim, int exitAnim, int backgroundColor) {
         if (overrideType != 0 && overrideType != 1) {
             throw new IllegalArgumentException("Override type must be either open or close");
         }
-        ActivityClient.getInstance().overrideActivityTransition(this.mToken, overrideType == 0, enterAnim, exitAnim, backgroundColor);
+        ActivityClient.getInstance()
+                .overrideActivityTransition(
+                        this.mToken, overrideType == 0, enterAnim, exitAnim, backgroundColor);
     }
 
     public void clearOverrideActivityTransition(int overrideType) {
         if (overrideType != 0 && overrideType != 1) {
             throw new IllegalArgumentException("Override type must be either open or close");
         }
-        ActivityClient.getInstance().clearOverrideActivityTransition(this.mToken, overrideType == 0);
+        ActivityClient.getInstance()
+                .clearOverrideActivityTransition(this.mToken, overrideType == 0);
     }
 
-    public void semAdjustPopOverOptions(int[] widthDp, int[] heightDp, Point[] marginDp, int[] position) {
+    public void semAdjustPopOverOptions(
+            int[] widthDp, int[] heightDp, Point[] marginDp, int[] position) {
         if (widthDp == null || widthDp.length == 2) {
             if (heightDp == null || heightDp.length == 2) {
                 if (marginDp == null || marginDp.length == 2) {
                     if (position != null && position.length != 2) {
                         return;
                     }
-                    ActivityClient.getInstance().adjustPopOverOptions(this.mToken, widthDp, heightDp, marginDp, position);
+                    ActivityClient.getInstance()
+                            .adjustPopOverOptions(
+                                    this.mToken, widthDp, heightDp, marginDp, position);
                 }
             }
         }
@@ -2681,12 +3017,15 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     public void semOverridePendingTransition(int enterAnim, int exitAnim) {
-        ActivityClient.getInstance().overridePendingTaskTransition(this.mToken, getPackageName(), enterAnim, exitAnim);
+        ActivityClient.getInstance()
+                .overridePendingTaskTransition(this.mToken, getPackageName(), enterAnim, exitAnim);
     }
 
     @Deprecated
     public void overridePendingTransition(int enterAnim, int exitAnim, int backgroundColor) {
-        ActivityClient.getInstance().overridePendingTransition(this.mToken, getPackageName(), enterAnim, exitAnim, backgroundColor);
+        ActivityClient.getInstance()
+                .overridePendingTransition(
+                        this.mToken, getPackageName(), enterAnim, exitAnim, backgroundColor);
     }
 
     public final void setResult(int resultCode) {
@@ -2717,7 +3056,10 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
                 return null;
             }
             Log.d("SPEG", "Pretend to be the default launcher");
-            return new Uri.Builder().scheme("android-app").authority(resolveInfo.activityInfo.packageName).build();
+            return new Uri.Builder()
+                    .scheme("android-app")
+                    .authority(resolveInfo.activityInfo.packageName)
+                    .build();
         }
         Intent intent = getIntent();
         if (intent != null) {
@@ -2731,7 +3073,10 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
                     return Uri.parse(referrerName);
                 }
             } catch (BadParcelableException e) {
-                Log.w(TAG, "Cannot read referrer from intent; intent extras contain unknown custom Parcelable objects");
+                Log.w(
+                        TAG,
+                        "Cannot read referrer from intent; intent extras contain unknown custom"
+                                + " Parcelable objects");
             }
         }
         if (this.mReferrer != null) {
@@ -2766,7 +3111,9 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     public ComponentCaller getCurrentCaller() {
         if (this.mCurrentCaller == null) {
-            throw new IllegalStateException("The caller is null because #getCurrentCaller should be called within #onNewIntent or #onActivityResult methods");
+            throw new IllegalStateException(
+                    "The caller is null because #getCurrentCaller should be called within"
+                            + " #onNewIntent or #onActivityResult methods");
         }
         return this.mCurrentCaller;
     }
@@ -2826,7 +3173,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             if (resultData != null) {
                 resultData.prepareToLeaveProcess(this);
             }
-            if (ActivityClient.getInstance().finishActivity(this.mToken, resultCode, resultData, finishTask)) {
+            if (ActivityClient.getInstance()
+                    .finishActivity(this.mToken, resultCode, resultData, finishTask)) {
                 this.mFinished = true;
             }
         } else {
@@ -2864,7 +3212,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     public void finishActivity(int requestCode) {
         if (this.mParent == null) {
-            ActivityClient.getInstance().finishSubActivity(this.mToken, this.mEmbeddedID, requestCode);
+            ActivityClient.getInstance()
+                    .finishSubActivity(this.mToken, this.mEmbeddedID, requestCode);
         } else {
             this.mParent.finishActivityFromChild(this, requestCode);
         }
@@ -2883,21 +3232,33 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         return ActivityClient.getInstance().releaseActivityInstance(this.mToken);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {}
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data, ComponentCaller caller) {
+    public void onActivityResult(
+            int requestCode, int resultCode, Intent data, ComponentCaller caller) {
         onActivityResult(requestCode, resultCode, data);
     }
 
-    public void onActivityReenter(int resultCode, Intent data) {
-    }
+    public void onActivityReenter(int resultCode, Intent data) {}
 
     public PendingIntent createPendingResult(int requestCode, Intent data, int flags) {
         String packageName = getPackageName();
         try {
             data.prepareToLeaveProcess(this);
-            IIntentSender target = ActivityManager.getService().getIntentSenderWithFeature(3, packageName, getAttributionTag(), this.mParent == null ? this.mToken : this.mParent.mToken, this.mEmbeddedID, requestCode, new Intent[]{data}, null, flags, null, getUserId());
+            IIntentSender target =
+                    ActivityManager.getService()
+                            .getIntentSenderWithFeature(
+                                    3,
+                                    packageName,
+                                    getAttributionTag(),
+                                    this.mParent == null ? this.mToken : this.mParent.mToken,
+                                    this.mEmbeddedID,
+                                    requestCode,
+                                    new Intent[] {data},
+                                    null,
+                                    flags,
+                                    null,
+                                    getUserId());
             if (target != null) {
                 return new PendingIntent(target);
             }
@@ -2979,10 +3340,12 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         }
     }
 
-    @Override // android.view.ContextThemeWrapper, android.content.ContextWrapper, android.content.Context
+    @Override // android.view.ContextThemeWrapper, android.content.ContextWrapper,
+    // android.content.Context
     public Object getSystemService(String name) {
         if (getBaseContext() == null) {
-            throw new IllegalStateException("System services not available to Activities before onCreate()");
+            throw new IllegalStateException(
+                    "System services not available to Activities before onCreate()");
         }
         if (Context.WINDOW_SERVICE.equals(name)) {
             return this.mWindowManager;
@@ -3035,15 +3398,15 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         }
     }
 
-    protected void onChildTitleChanged(Activity childActivity, CharSequence title) {
-    }
+    protected void onChildTitleChanged(Activity childActivity, CharSequence title) {}
 
     public void setTaskDescription(ActivityManager.TaskDescription taskDescription) {
         if (this.mTaskDescription != taskDescription) {
             this.mTaskDescription.copyFromPreserveHiddenFields(taskDescription);
             if (taskDescription.getIconFilename() == null && taskDescription.getIcon() != null) {
                 int size = ActivityManager.getLauncherLargeIconSizeInner(this);
-                Bitmap icon = Bitmap.createScaledBitmap(taskDescription.getIcon(), size, size, true);
+                Bitmap icon =
+                        Bitmap.createScaledBitmap(taskDescription.getIcon(), size, size, true);
                 this.mTaskDescription.setIcon(Icon.createWithBitmap(icon));
             }
         }
@@ -3215,7 +3578,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
                     } else {
                         String[] prunedArgs = new String[args.length - 2];
                         System.arraycopy(args, 2, prunedArgs, 0, prunedArgs.length);
-                        this.mDumpableContainer.dumpOneDumpable(prefix, writer, args[1], prunedArgs);
+                        this.mDumpableContainer.dumpOneDumpable(
+                                prefix, writer, args[1], prunedArgs);
                         break;
                     }
                 default:
@@ -3265,7 +3629,9 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         if (getWindow() instanceof PhoneWindow) {
             ((PhoneWindow) getWindow()).dumpColors(prefix, fd, writer, args);
         }
-        if (getWindow() != null && getWindow().peekDecorView() != null && getWindow().peekDecorView().getViewRootImpl() != null) {
+        if (getWindow() != null
+                && getWindow().peekDecorView() != null
+                && getWindow().peekDecorView().getViewRootImpl() != null) {
             getWindow().peekDecorView().getViewRootImpl().dump(prefix, writer);
         }
         this.mHandler.getLooper().dump(new PrintWriterPrinter(writer), prefix);
@@ -3275,8 +3641,11 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         }
     }
 
-    private void dumpLegacyDumpable(String prefix, PrintWriter writer, String legacyOption, String dumpableName) {
-        writer.printf("%s%s option deprecated. Use %s %s instead\n", prefix, legacyOption, DUMP_ARG_DUMP_DUMPABLE, dumpableName);
+    private void dumpLegacyDumpable(
+            String prefix, PrintWriter writer, String legacyOption, String dumpableName) {
+        writer.printf(
+                "%s%s option deprecated. Use %s %s instead\n",
+                prefix, legacyOption, DUMP_ARG_DUMP_DUMPABLE, dumpableName);
     }
 
     public boolean isImmersive() {
@@ -3312,17 +3681,24 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     public void semConvertFromTranslucent(boolean skipSetWindowOpaque) {
-        Log.d(TAG, "semConvertFromTranslucent, activity=" + this + ", caller=" + Debug.getCallers(3));
+        Log.d(
+                TAG,
+                "semConvertFromTranslucent, activity=" + this + ", caller=" + Debug.getCallers(3));
         this.mTranslucentCallback = null;
-        if (ActivityClient.getInstance().convertFromTranslucent(this.mToken, skipSetWindowOpaque) && !skipSetWindowOpaque) {
+        if (ActivityClient.getInstance().convertFromTranslucent(this.mToken, skipSetWindowOpaque)
+                && !skipSetWindowOpaque) {
             WindowManagerGlobal.getInstance().changeCanvasOpacity(this.mToken, true);
         }
     }
 
     @SystemApi
-    public boolean convertToTranslucent(TranslucentConversionListener callback, ActivityOptions options) {
+    public boolean convertToTranslucent(
+            TranslucentConversionListener callback, ActivityOptions options) {
         this.mTranslucentCallback = callback;
-        this.mChangeCanvasToTranslucent = ActivityClient.getInstance().convertToTranslucent(this.mToken, options == null ? null : options.toBundle());
+        this.mChangeCanvasToTranslucent =
+                ActivityClient.getInstance()
+                        .convertToTranslucent(
+                                this.mToken, options == null ? null : options.toBundle());
         WindowManagerGlobal.getInstance().changeCanvasOpacity(this.mToken, false);
         if (!this.mChangeCanvasToTranslucent && this.mTranslucentCallback != null) {
             this.mTranslucentCallback.onTranslucentConversionComplete(true);
@@ -3332,14 +3708,16 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     public boolean semConvertToTranslucent(final SemTranslucentConversionListener callback) {
         Log.d(TAG, "semConvertToTranslucent, activity=" + this + ", caller=" + Debug.getCallers(3));
-        return convertToTranslucent(new TranslucentConversionListener() { // from class: android.app.Activity.2
-            @Override // android.app.Activity.TranslucentConversionListener
-            public void onTranslucentConversionComplete(boolean drawComplete) {
-                if (callback != null) {
-                    callback.onTranslucentConversionCompleted(drawComplete);
-                }
-            }
-        }, null);
+        return convertToTranslucent(
+                new TranslucentConversionListener() { // from class: android.app.Activity.2
+                    @Override // android.app.Activity.TranslucentConversionListener
+                    public void onTranslucentConversionComplete(boolean drawComplete) {
+                        if (callback != null) {
+                            callback.onTranslucentConversionCompleted(drawComplete);
+                        }
+                    }
+                },
+                null);
     }
 
     void onTranslucentConversionComplete(boolean drawComplete) {
@@ -3383,11 +3761,9 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     @SystemApi
     @Deprecated
-    public void onBackgroundVisibleBehindChanged(boolean visible) {
-    }
+    public void onBackgroundVisibleBehindChanged(boolean visible) {}
 
-    public void onEnterAnimationComplete() {
-    }
+    public void onEnterAnimationComplete() {}
 
     public void dispatchEnterAnimationComplete() {
         this.mEnterAnimationComplete = true;
@@ -3403,7 +3779,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         ActivityClient.getInstance().setImmersive(this.mToken, i);
     }
 
-    public void setVrModeEnabled(boolean enabled, ComponentName requestedComponent) throws PackageManager.NameNotFoundException {
+    public void setVrModeEnabled(boolean enabled, ComponentName requestedComponent)
+            throws PackageManager.NameNotFoundException {
         if (ActivityClient.getInstance().setVrMode(this.mToken, enabled, requestedComponent) != 0) {
             throw new PackageManager.NameNotFoundException(requestedComponent.flattenToString());
         }
@@ -3440,12 +3817,10 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     @Override // android.view.Window.Callback
-    public void onActionModeStarted(ActionMode mode) {
-    }
+    public void onActionModeStarted(ActionMode mode) {}
 
     @Override // android.view.Window.Callback
-    public void onActionModeFinished(ActionMode mode) {
-    }
+    public void onActionModeFinished(ActionMode mode) {}
 
     public boolean shouldUpRecreateTask(Intent targetIntent) {
         try {
@@ -3458,7 +3833,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             if (info.taskAffinity == null) {
                 return false;
             }
-            return ActivityClient.getInstance().shouldUpRecreateTask(this.mToken, info.taskAffinity);
+            return ActivityClient.getInstance()
+                    .shouldUpRecreateTask(this.mToken, info.taskAffinity);
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
@@ -3489,7 +3865,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             }
             upIntent2.prepareToLeaveProcess(this);
             String resolvedType = upIntent2.resolveTypeIfNeeded(getContentResolver());
-            return ActivityClient.getInstance().navigateUpTo(this.mToken, upIntent2, resolvedType, resultCode, resultData);
+            return ActivityClient.getInstance()
+                    .navigateUpTo(this.mToken, upIntent2, resolvedType, resultCode, resultData);
         }
         return this.mParent.navigateUpToFromChild(this, upIntent);
     }
@@ -3515,7 +3892,11 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             Intent parentIntent2 = new Intent().setComponent(target);
             return parentIntent2;
         } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "getParentActivityIntent: bad parentActivityName '" + parentName + "' in manifest");
+            Log.e(
+                    TAG,
+                    "getParentActivityIntent: bad parentActivityName '"
+                            + parentName
+                            + "' in manifest");
             return null;
         }
     }
@@ -3554,11 +3935,70 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         this.mParent = parent;
     }
 
-    final void attach(Context context, ActivityThread aThread, Instrumentation instr, IBinder token, int ident, Application application, Intent intent, ActivityInfo info, CharSequence title, Activity parent, String id, NonConfigurationInstances lastNonConfigurationInstances, Configuration config, String referrer, IVoiceInteractor voiceInteractor, Window window, ViewRootImpl.ActivityConfigCallback activityConfigCallback, IBinder assistToken, IBinder shareableActivityToken) {
-        attach(context, aThread, instr, token, ident, application, intent, info, title, parent, id, lastNonConfigurationInstances, config, referrer, voiceInteractor, window, activityConfigCallback, assistToken, shareableActivityToken, null);
+    final void attach(
+            Context context,
+            ActivityThread aThread,
+            Instrumentation instr,
+            IBinder token,
+            int ident,
+            Application application,
+            Intent intent,
+            ActivityInfo info,
+            CharSequence title,
+            Activity parent,
+            String id,
+            NonConfigurationInstances lastNonConfigurationInstances,
+            Configuration config,
+            String referrer,
+            IVoiceInteractor voiceInteractor,
+            Window window,
+            ViewRootImpl.ActivityConfigCallback activityConfigCallback,
+            IBinder assistToken,
+            IBinder shareableActivityToken) {
+        attach(
+                context,
+                aThread,
+                instr,
+                token,
+                ident,
+                application,
+                intent,
+                info,
+                title,
+                parent,
+                id,
+                lastNonConfigurationInstances,
+                config,
+                referrer,
+                voiceInteractor,
+                window,
+                activityConfigCallback,
+                assistToken,
+                shareableActivityToken,
+                null);
     }
 
-    final void attach(Context context, ActivityThread aThread, Instrumentation instr, IBinder token, int ident, Application application, Intent intent, ActivityInfo info, CharSequence title, Activity parent, String id, NonConfigurationInstances lastNonConfigurationInstances, Configuration config, String referrer, IVoiceInteractor voiceInteractor, Window window, ViewRootImpl.ActivityConfigCallback activityConfigCallback, IBinder assistToken, IBinder shareableActivityToken, IBinder initialCallerInfoAccessToken) {
+    final void attach(
+            Context context,
+            ActivityThread aThread,
+            Instrumentation instr,
+            IBinder token,
+            int ident,
+            Application application,
+            Intent intent,
+            ActivityInfo info,
+            CharSequence title,
+            Activity parent,
+            String id,
+            NonConfigurationInstances lastNonConfigurationInstances,
+            Configuration config,
+            String referrer,
+            IVoiceInteractor voiceInteractor,
+            Window window,
+            ViewRootImpl.ActivityConfigCallback activityConfigCallback,
+            IBinder assistToken,
+            IBinder shareableActivityToken,
+            IBinder initialCallerInfoAccessToken) {
         String referrer2;
         if (com.android.sdksandbox.flags.Flags.sandboxActivitySdkBasedContext()) {
             this.mIntent = intent;
@@ -3606,10 +4046,15 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             if (lastNonConfigurationInstances != null) {
                 this.mVoiceInteractor = lastNonConfigurationInstances.voiceInteractor;
             } else {
-                this.mVoiceInteractor = new VoiceInteractor(voiceInteractor, this, this, Looper.myLooper());
+                this.mVoiceInteractor =
+                        new VoiceInteractor(voiceInteractor, this, this, Looper.myLooper());
             }
         }
-        this.mWindow.setWindowManager((WindowManager) context.getSystemService(Context.WINDOW_SERVICE), this.mToken, this.mComponent.flattenToString(), (info.flags & 512) != 0);
+        this.mWindow.setWindowManager(
+                (WindowManager) context.getSystemService(Context.WINDOW_SERVICE),
+                this.mToken,
+                this.mComponent.flattenToString(),
+                (info.flags & 512) != 0);
         if (this.mParent != null) {
             this.mWindow.setContainer(this.mParent.getWindow());
         }
@@ -3624,7 +4069,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         this.mIsPopOver = config.windowConfiguration.isPopOver();
         this.mDexTaskDocking = config.windowConfiguration.getDexTaskDockingState();
         if (android.security.Flags.contentUriPermissionApis()) {
-            this.mInitialCaller = new ComponentCaller(getActivityToken(), initialCallerInfoAccessToken);
+            this.mInitialCaller =
+                    new ComponentCaller(getActivityToken(), initialCallerInfoAccessToken);
             this.mCaller = this.mInitialCaller;
         }
     }
@@ -3639,7 +4085,9 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
     }
 
     public final IBinder getShareableActivityToken() {
-        return this.mParent != null ? this.mParent.getShareableActivityToken() : this.mShareableActivityToken;
+        return this.mParent != null
+                ? this.mParent.getShareableActivityToken()
+                : this.mShareableActivityToken;
     }
 
     public final ActivityThread getActivityThread() {
@@ -3660,10 +4108,14 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         }
         dispatchActivityPreCreated(icicle);
         this.mCanEnterPictureInPicture = true;
-        int windowingMode = CompatSandbox.getCompatWindowingMode(getResources().getConfiguration(), getResources().getConfiguration().windowConfiguration.getWindowingMode());
+        int windowingMode =
+                CompatSandbox.getCompatWindowingMode(
+                        getResources().getConfiguration(),
+                        getResources().getConfiguration().windowConfiguration.getWindowingMode());
         this.mIsInMultiWindowMode = WindowConfiguration.inMultiWindowMode(windowingMode);
         this.mIsInPictureInPictureMode = windowingMode == 2;
-        this.mShouldDockBigOverlays = getResources().getBoolean(R.bool.config_dockBigOverlayWindows);
+        this.mShouldDockBigOverlays =
+                getResources().getBoolean(R.bool.config_dockBigOverlayWindows);
         restoreHasCurrentPermissionRequest(icicle);
         long startTime = SystemClock.uptimeMillis();
         if (persistentState != null) {
@@ -3672,7 +4124,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             onCreate(icicle);
         }
         long duration = SystemClock.uptimeMillis() - startTime;
-        EventLogTags.writeWmOnCreateCalled(this.mIdent, getComponentName().getClassName(), "performCreate", duration);
+        EventLogTags.writeWmOnCreateCalled(
+                this.mIdent, getComponentName().getClassName(), "performCreate", duration);
         this.mActivityTransitionState.readState(icicle);
         this.mVisibleFromClient = true ^ this.mWindow.getWindowStyle().getBoolean(10, false);
         this.mFragments.dispatchActivityCreated();
@@ -3710,18 +4163,30 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         long startTime = SystemClock.uptimeMillis();
         this.mInstrumentation.callActivityOnStart(this);
         long duration = SystemClock.uptimeMillis() - startTime;
-        EventLogTags.writeWmOnStartCalled(this.mIdent, getComponentName().getClassName(), reason, duration);
+        EventLogTags.writeWmOnStartCalled(
+                this.mIdent, getComponentName().getClassName(), reason, duration);
         if (!this.mCalled) {
-            throw new SuperNotCalledException("Activity " + this.mComponent.toShortString() + " did not call through to super.onStart()");
+            throw new SuperNotCalledException(
+                    "Activity "
+                            + this.mComponent.toShortString()
+                            + " did not call through to super.onStart()");
         }
         this.mFragments.dispatchStart();
         this.mFragments.reportLoaderStart();
         boolean isAppDebuggable = (this.mApplication.getApplicationInfo().flags & 2) != 0;
         if (isAppDebuggable && (dlwarning = getDlWarning()) != null) {
             String appName = getApplicationInfo().loadLabel(getPackageManager()).toString();
-            String warning = "Detected problems with app native libraries\n(please consult log for detail):\n" + dlwarning;
+            String warning =
+                    "Detected problems with app native libraries\n"
+                            + "(please consult log for detail):\n"
+                            + dlwarning;
             if (isAppDebuggable) {
-                new AlertDialog.Builder(this).setTitle(appName).setMessage(warning).setPositiveButton(17039370, (DialogInterface.OnClickListener) null).setCancelable(false).show();
+                new AlertDialog.Builder(this)
+                        .setTitle(appName)
+                        .setMessage(warning)
+                        .setPositiveButton(17039370, (DialogInterface.OnClickListener) null)
+                        .setCancelable(false)
+                        .show();
             } else {
                 Toast.makeText(this, appName + "\n" + warning, 1).show();
             }
@@ -3755,7 +4220,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
                     ManagedCursor mc = this.mManagedCursors.get(i);
                     if (mc.mReleased || mc.mUpdated) {
                         if (!mc.mCursor.requery() && getApplicationInfo().targetSdkVersion >= 14) {
-                            throw new IllegalStateException("trying to requery an already closed cursor  " + mc.mCursor);
+                            throw new IllegalStateException(
+                                    "trying to requery an already closed cursor  " + mc.mCursor);
                         }
                         mc.mReleased = false;
                         mc.mUpdated = false;
@@ -3766,9 +4232,13 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             long startTime = SystemClock.uptimeMillis();
             this.mInstrumentation.callActivityOnRestart(this);
             long duration = SystemClock.uptimeMillis() - startTime;
-            EventLogTags.writeWmOnRestartCalled(this.mIdent, getComponentName().getClassName(), "performRestart", duration);
+            EventLogTags.writeWmOnRestartCalled(
+                    this.mIdent, getComponentName().getClassName(), "performRestart", duration);
             if (!this.mCalled) {
-                throw new SuperNotCalledException("Activity " + this.mComponent.toShortString() + " did not call through to super.onRestart()");
+                throw new SuperNotCalledException(
+                        "Activity "
+                                + this.mComponent.toShortString()
+                                + " did not call through to super.onRestart()");
             }
             if (start) {
                 performStart("performRestart");
@@ -3789,14 +4259,21 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         long startTime = SystemClock.uptimeMillis();
         this.mInstrumentation.callActivityOnResume(this);
         long duration = SystemClock.uptimeMillis() - startTime;
-        EventLogTags.writeWmOnResumeCalled(this.mIdent, getComponentName().getClassName(), reason, duration);
+        EventLogTags.writeWmOnResumeCalled(
+                this.mIdent, getComponentName().getClassName(), reason, duration);
         if (!this.mCalled) {
-            throw new SuperNotCalledException("Activity " + this.mComponent.toShortString() + " did not call through to super.onResume()");
+            throw new SuperNotCalledException(
+                    "Activity "
+                            + this.mComponent.toShortString()
+                            + " did not call through to super.onResume()");
         }
         if (!this.mVisibleFromClient && !this.mFinished) {
             Log.w(TAG, "An activity without a UI must call finish() before onResume() completes");
             if (getApplicationInfo().targetSdkVersion > 22) {
-                throw new IllegalStateException("Activity " + this.mComponent.toShortString() + " did not call finish() prior to onResume() completing");
+                throw new IllegalStateException(
+                        "Activity "
+                                + this.mComponent.toShortString()
+                                + " did not call finish() prior to onResume() completing");
             }
         }
         this.mCalled = false;
@@ -3804,7 +4281,10 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         this.mFragments.execPendingActions();
         onPostResume();
         if (!this.mCalled) {
-            throw new SuperNotCalledException("Activity " + this.mComponent.toShortString() + " did not call through to super.onPostResume()");
+            throw new SuperNotCalledException(
+                    "Activity "
+                            + this.mComponent.toShortString()
+                            + " did not call through to super.onPostResume()");
         }
         dispatchActivityPostResumed();
         Trace.traceEnd(32L);
@@ -3814,7 +4294,9 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         if (Trace.isTagEnabled(32L)) {
             Trace.traceBegin(32L, "performPause:" + this.mComponent.getClassName());
         }
-        if (MultiWindowCoreState.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED && this.mIsTopResumedActivity && this.mResumed) {
+        if (MultiWindowCoreState.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED
+                && this.mIsTopResumedActivity
+                && this.mResumed) {
             performTopResumedActivityChanged(false, "pausing");
         }
         dispatchActivityPrePaused();
@@ -3824,10 +4306,14 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         long startTime = SystemClock.uptimeMillis();
         onPause();
         long duration = SystemClock.uptimeMillis() - startTime;
-        EventLogTags.writeWmOnPausedCalled(this.mIdent, getComponentName().getClassName(), "performPause", duration);
+        EventLogTags.writeWmOnPausedCalled(
+                this.mIdent, getComponentName().getClassName(), "performPause", duration);
         this.mResumed = false;
         if (!this.mCalled && getApplicationInfo().targetSdkVersion >= 9) {
-            throw new SuperNotCalledException("Activity " + this.mComponent.toShortString() + " did not call through to super.onPause()");
+            throw new SuperNotCalledException(
+                    "Activity "
+                            + this.mComponent.toShortString()
+                            + " did not call through to super.onPause()");
         }
         dispatchActivityPostPaused();
         Trace.traceEnd(32L);
@@ -3858,9 +4344,13 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             long startTime = SystemClock.uptimeMillis();
             this.mInstrumentation.callActivityOnStop(this);
             long duration = SystemClock.uptimeMillis() - startTime;
-            EventLogTags.writeWmOnStopCalled(this.mIdent, getComponentName().getClassName(), reason, duration);
+            EventLogTags.writeWmOnStopCalled(
+                    this.mIdent, getComponentName().getClassName(), reason, duration);
             if (!this.mCalled) {
-                throw new SuperNotCalledException("Activity " + this.mComponent.toShortString() + " did not call through to super.onStop()");
+                throw new SuperNotCalledException(
+                        "Activity "
+                                + this.mComponent.toShortString()
+                                + " did not call through to super.onStop()");
             }
             synchronized (this.mManagedCursors) {
                 int N = this.mManagedCursors.size();
@@ -3890,7 +4380,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         long startTime = SystemClock.uptimeMillis();
         onDestroy();
         long duration = SystemClock.uptimeMillis() - startTime;
-        EventLogTags.writeWmOnDestroyCalled(this.mIdent, getComponentName().getClassName(), "performDestroy", duration);
+        EventLogTags.writeWmOnDestroyCalled(
+                this.mIdent, getComponentName().getClassName(), "performDestroy", duration);
         this.mFragments.doLoaderDestroy();
         if (this.mVoiceInteractor != null) {
             this.mVoiceInteractor.detachActivity();
@@ -3899,13 +4390,18 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         Trace.traceEnd(32L);
     }
 
-    final void dispatchMultiWindowModeChanged(boolean isInMultiWindowMode, Configuration newConfig) {
+    final void dispatchMultiWindowModeChanged(
+            boolean isInMultiWindowMode, Configuration newConfig) {
         this.mIsInMultiWindowMode = isInMultiWindowMode;
         this.mFragments.dispatchMultiWindowModeChanged(isInMultiWindowMode, newConfig);
         this.mWindowingMode = newConfig.windowConfiguration.getWindowingMode();
         if (this.mWindow.getDecorView() != null) {
-            boolean split = this.mWindowingMode == 6 && WindowConfiguration.isSplitScreenWindowingMode(newConfig.windowConfiguration);
-            ((DecorView) this.mWindow.getDecorView()).onWindowingModeChanged(this.mWindowingMode, split);
+            boolean split =
+                    this.mWindowingMode == 6
+                            && WindowConfiguration.isSplitScreenWindowingMode(
+                                    newConfig.windowConfiguration);
+            ((DecorView) this.mWindow.getDecorView())
+                    .onWindowingModeChanged(this.mWindowingMode, split);
         }
         if (this.mWindow != null) {
             this.mWindow.onMultiWindowModeChanged();
@@ -3913,7 +4409,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         onMultiWindowModeChanged(isInMultiWindowMode, newConfig);
     }
 
-    final void dispatchPictureInPictureModeChanged(boolean isInPictureInPictureMode, Configuration newConfig) {
+    final void dispatchPictureInPictureModeChanged(
+            boolean isInPictureInPictureMode, Configuration newConfig) {
         this.mIsInPictureInPictureMode = isInPictureInPictureMode;
         this.mFragments.dispatchPictureInPictureModeChanged(isInPictureInPictureMode, newConfig);
         if (this.mWindow != null) {
@@ -3939,23 +4436,43 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     private void restoreHasCurrentPermissionRequest(Bundle bundle) {
         if (bundle != null) {
-            this.mHasCurrentPermissionsRequest = bundle.getBoolean(HAS_CURRENT_PERMISSIONS_REQUEST_KEY, false);
+            this.mHasCurrentPermissionsRequest =
+                    bundle.getBoolean(HAS_CURRENT_PERMISSIONS_REQUEST_KEY, false);
         }
     }
 
-    void dispatchActivityResult(String who, int requestCode, int resultCode, Intent data, ComponentCaller caller, String reason) {
+    void dispatchActivityResult(
+            String who,
+            int requestCode,
+            int resultCode,
+            Intent data,
+            ComponentCaller caller,
+            String reason) {
         internalDispatchActivityResult(who, requestCode, resultCode, data, caller, reason);
     }
 
-    void dispatchActivityResult(String who, int requestCode, int resultCode, Intent data, String reason) {
+    void dispatchActivityResult(
+            String who, int requestCode, int resultCode, Intent data, String reason) {
         if (android.security.Flags.contentUriPermissionApis()) {
-            internalDispatchActivityResult(who, requestCode, resultCode, data, new ComponentCaller(getActivityToken(), null), reason);
+            internalDispatchActivityResult(
+                    who,
+                    requestCode,
+                    resultCode,
+                    data,
+                    new ComponentCaller(getActivityToken(), null),
+                    reason);
         } else {
             internalDispatchActivityResult(who, requestCode, resultCode, data, null, reason);
         }
     }
 
-    private void internalDispatchActivityResult(String who, int requestCode, int resultCode, Intent data, ComponentCaller caller, String reason) {
+    private void internalDispatchActivityResult(
+            String who,
+            int requestCode,
+            int resultCode,
+            Intent data,
+            ComponentCaller caller,
+            String reason) {
         this.mFragments.noteStateNotSaved();
         if (who == null) {
             if (android.security.Flags.contentUriPermissionApis()) {
@@ -3976,11 +4493,14 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
                 }
             }
         } else if (who.startsWith("@android:view:")) {
-            ArrayList<ViewRootImpl> views = WindowManagerGlobal.getInstance().getRootViews(getActivityToken());
+            ArrayList<ViewRootImpl> views =
+                    WindowManagerGlobal.getInstance().getRootViews(getActivityToken());
             Iterator<ViewRootImpl> it = views.iterator();
             while (it.hasNext()) {
                 ViewRootImpl viewRoot = it.next();
-                if (viewRoot.getView() != null && viewRoot.getView().dispatchActivityResult(who, requestCode, resultCode, data)) {
+                if (viewRoot.getView() != null
+                        && viewRoot.getView()
+                                .dispatchActivityResult(who, requestCode, resultCode, data)) {
                     return;
                 }
             }
@@ -3992,7 +4512,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
                 frag2.onActivityResult(requestCode, resultCode, data);
             }
         }
-        EventLogTags.writeWmOnActivityResultCalled(this.mIdent, getComponentName().getClassName(), reason);
+        EventLogTags.writeWmOnActivityResultCalled(
+                this.mIdent, getComponentName().getClassName(), reason);
     }
 
     public void startLockTask() {
@@ -4017,15 +4538,31 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     private void dispatchRequestPermissionsResult(int requestCode, Intent data) {
         this.mHasCurrentPermissionsRequest = false;
-        String[] permissions = data != null ? data.getStringArrayExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_NAMES) : new String[0];
-        int[] grantResults = data != null ? data.getIntArrayExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_RESULTS) : new int[0];
-        int deviceId = data != null ? data.getIntExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_DEVICE_ID, 0) : 0;
+        String[] permissions =
+                data != null
+                        ? data.getStringArrayExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_NAMES)
+                        : new String[0];
+        int[] grantResults =
+                data != null
+                        ? data.getIntArrayExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_RESULTS)
+                        : new int[0];
+        int deviceId =
+                data != null
+                        ? data.getIntExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_DEVICE_ID, 0)
+                        : 0;
         onRequestPermissionsResult(requestCode, permissions, grantResults, deviceId);
     }
 
-    private void dispatchRequestPermissionsResultToFragment(int requestCode, Intent data, Fragment fragment) {
-        String[] permissions = data != null ? data.getStringArrayExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_NAMES) : new String[0];
-        int[] grantResults = data != null ? data.getIntArrayExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_RESULTS) : new int[0];
+    private void dispatchRequestPermissionsResultToFragment(
+            int requestCode, Intent data, Fragment fragment) {
+        String[] permissions =
+                data != null
+                        ? data.getStringArrayExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_NAMES)
+                        : new String[0];
+        int[] grantResults =
+                data != null
+                        ? data.getIntArrayExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_RESULTS)
+                        : new int[0];
         fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -4070,11 +4607,18 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         ActivityClient.getInstance().unregisterRemoteAnimations(this.mToken);
     }
 
-    public void updateUiTranslationState(int state, TranslationSpec sourceSpec, TranslationSpec targetSpec, List<AutofillId> viewIds, UiTranslationSpec uiTranslationSpec) {
+    public void updateUiTranslationState(
+            int state,
+            TranslationSpec sourceSpec,
+            TranslationSpec targetSpec,
+            List<AutofillId> viewIds,
+            UiTranslationSpec uiTranslationSpec) {
         if (this.mUiTranslationController == null) {
-            this.mUiTranslationController = new UiTranslationController(this, getApplicationContext());
+            this.mUiTranslationController =
+                    new UiTranslationController(this, getApplicationContext());
         }
-        this.mUiTranslationController.updateUiTranslationState(state, sourceSpec, targetSpec, viewIds, uiTranslationSpec);
+        this.mUiTranslationController.updateUiTranslationState(
+                state, sourceSpec, targetSpec, viewIds, uiTranslationSpec);
     }
 
     public void enableTaskLocaleOverride() {
@@ -4131,28 +4675,60 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
         }
 
         @Override // android.app.FragmentHostCallback
-        public void onStartActivityFromFragment(Fragment fragment, Intent intent, int requestCode, Bundle options) {
+        public void onStartActivityFromFragment(
+                Fragment fragment, Intent intent, int requestCode, Bundle options) {
             Activity.this.startActivityFromFragment(fragment, intent, requestCode, options);
         }
 
         @Override // android.app.FragmentHostCallback
-        public void onStartActivityAsUserFromFragment(Fragment fragment, Intent intent, int requestCode, Bundle options, UserHandle user) {
-            Activity.this.startActivityAsUserFromFragment(fragment, intent, requestCode, options, user);
+        public void onStartActivityAsUserFromFragment(
+                Fragment fragment,
+                Intent intent,
+                int requestCode,
+                Bundle options,
+                UserHandle user) {
+            Activity.this.startActivityAsUserFromFragment(
+                    fragment, intent, requestCode, options, user);
         }
 
         @Override // android.app.FragmentHostCallback
-        public void onStartIntentSenderFromFragment(Fragment fragment, IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) throws IntentSender.SendIntentException {
+        public void onStartIntentSenderFromFragment(
+                Fragment fragment,
+                IntentSender intent,
+                int requestCode,
+                Intent fillInIntent,
+                int flagsMask,
+                int flagsValues,
+                int extraFlags,
+                Bundle options)
+                throws IntentSender.SendIntentException {
             if (Activity.this.mParent == null) {
-                Activity.this.startIntentSenderForResultInner(intent, fragment.mWho, requestCode, fillInIntent, flagsMask, flagsValues, options);
+                Activity.this.startIntentSenderForResultInner(
+                        intent,
+                        fragment.mWho,
+                        requestCode,
+                        fillInIntent,
+                        flagsMask,
+                        flagsValues,
+                        options);
             } else if (options != null) {
-                Activity.this.mParent.startIntentSenderFromFragment(fragment, intent, requestCode, fillInIntent, flagsMask, flagsValues, options);
+                Activity.this.mParent.startIntentSenderFromFragment(
+                        fragment,
+                        intent,
+                        requestCode,
+                        fillInIntent,
+                        flagsMask,
+                        flagsValues,
+                        options);
             }
         }
 
         @Override // android.app.FragmentHostCallback
-        public void onRequestPermissionsFromFragment(Fragment fragment, String[] permissions, int requestCode) {
+        public void onRequestPermissionsFromFragment(
+                Fragment fragment, String[] permissions, int requestCode) {
             String who = Activity.REQUEST_PERMISSIONS_WHO_PREFIX + fragment.mWho;
-            Intent intent = Activity.this.getPackageManager().buildRequestPermissionsIntent(permissions);
+            Intent intent =
+                    Activity.this.getPackageManager().buildRequestPermissionsIntent(permissions);
             Activity.this.startActivityForResult(who, intent, requestCode, null);
         }
 
@@ -4189,7 +4765,8 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     public OnBackInvokedDispatcher getOnBackInvokedDispatcher() {
         if (this.mWindow == null) {
-            throw new IllegalStateException("OnBackInvokedDispatcher are not available on non-visual activities");
+            throw new IllegalStateException(
+                    "OnBackInvokedDispatcher are not available on non-visual activities");
         }
         return this.mWindow.getOnBackInvokedDispatcher();
     }
@@ -4260,7 +4837,9 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
             showWhenLocked = true;
         }
         try {
-            ActivityTaskManager.getService().startAppLockService(this.mToken, getIntent(), showWhenLocked, getPackageName());
+            ActivityTaskManager.getService()
+                    .startAppLockService(
+                            this.mToken, getIntent(), showWhenLocked, getPackageName());
         } catch (RemoteException e) {
         }
     }
@@ -4286,7 +4865,14 @@ public class Activity extends ContextThemeWrapper implements LayoutInflater.Fact
 
     void onDexTaskDockingChanged(int state) {
         if (CoreRune.IS_DEBUG_LEVEL_MID) {
-            Log.i(TAG, "onDexTaskDockingChanged=" + WindowConfiguration.dexTaskDockingStateToString(state) + "   mDecor=" + this.mDecor + " state in number?" + state);
+            Log.i(
+                    TAG,
+                    "onDexTaskDockingChanged="
+                            + WindowConfiguration.dexTaskDockingStateToString(state)
+                            + "   mDecor="
+                            + this.mDecor
+                            + " state in number?"
+                            + state);
         }
         if (this.mDecor != null) {
             ((DecorView) this.mDecor).onDexTaskDockingChanged(state);

@@ -32,12 +32,13 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.util.DumpUtils;
-import com.android.server.NetworkScorerAppManager;
 import com.android.server.pm.permission.DefaultPermissionGrantPolicy;
 import com.android.server.pm.permission.LegacyPermissionManagerInternal$PackagesProvider;
 import com.android.server.pm.permission.LegacyPermissionManagerService;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -131,7 +132,9 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
             if (NetworkScoreService.DBG) {
-                Log.d("NetworkScoreService", String.format("onChange(%s, %s)", Boolean.valueOf(z), uri));
+                Log.d(
+                        "NetworkScoreService",
+                        String.format("onChange(%s, %s)", Boolean.valueOf(z), uri));
             }
             Integer num = (Integer) ((ArrayMap) this.mUriEventMap).get(uri);
             if (num != null) {
@@ -150,7 +153,12 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         public UnaryOperator mScanResultsFilter;
         public final List mScoredNetworkList;
 
-        public FilteringCacheUpdatingConsumer(Context context, List list, int i, UnaryOperator unaryOperator, UnaryOperator unaryOperator2) {
+        public FilteringCacheUpdatingConsumer(
+                Context context,
+                List list,
+                int i,
+                UnaryOperator unaryOperator,
+                UnaryOperator unaryOperator2) {
             this.mContext = context;
             this.mScoredNetworkList = list;
             this.mNetworkType = i;
@@ -162,14 +170,20 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         public final void accept(Object obj, Object obj2) {
             INetworkScoreCache iNetworkScoreCache = (INetworkScoreCache) obj;
             try {
-                List filterScores = filterScores(obj2 instanceof Integer ? ((Integer) obj2).intValue() : 0, this.mScoredNetworkList);
+                List filterScores =
+                        filterScores(
+                                obj2 instanceof Integer ? ((Integer) obj2).intValue() : 0,
+                                this.mScoredNetworkList);
                 if (filterScores.isEmpty()) {
                     return;
                 }
                 iNetworkScoreCache.updateScores(filterScores);
             } catch (RemoteException e) {
                 if (NetworkScoreService.VERBOSE) {
-                    Log.v("NetworkScoreService", "Unable to update scores of type " + this.mNetworkType, e);
+                    Log.v(
+                            "NetworkScoreService",
+                            "Unable to update scores of type " + this.mNetworkType,
+                            e);
                 }
             }
         }
@@ -180,16 +194,20 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
             }
             if (i == 1) {
                 if (this.mCurrentNetworkFilter == null) {
-                    this.mCurrentNetworkFilter = new CurrentNetworkScoreCacheFilter(new WifiInfoSupplier(this.mContext, 0));
+                    this.mCurrentNetworkFilter =
+                            new CurrentNetworkScoreCacheFilter(
+                                    new WifiInfoSupplier(this.mContext, 0));
                 }
                 return (List) this.mCurrentNetworkFilter.apply(list);
             }
             if (i != 2) {
-                NetworkScoreService$$ExternalSyntheticOutline0.m(i, "Unknown filter type: ", "NetworkScoreService");
+                NetworkScoreService$$ExternalSyntheticOutline0.m(
+                        i, "Unknown filter type: ", "NetworkScoreService");
                 return list;
             }
             if (this.mScanResultsFilter == null) {
-                this.mScanResultsFilter = new ScanResultsScoreCacheFilter(new WifiInfoSupplier(this.mContext, 1));
+                this.mScanResultsFilter =
+                        new ScanResultsScoreCacheFilter(new WifiInfoSupplier(this.mContext, 1));
             }
             return (List) this.mScanResultsFilter.apply(list);
         }
@@ -201,7 +219,13 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
 
         public Lifecycle(Context context) {
             super(context);
-            this.mService = new NetworkScoreService(context, new NetworkScorerAppManager(context, new NetworkScorerAppManager.SettingsFacade()), new NetworkScoreService$$ExternalSyntheticLambda2(), Looper.myLooper());
+            this.mService =
+                    new NetworkScoreService(
+                            context,
+                            new NetworkScorerAppManager(
+                                    context, new NetworkScorerAppManager.SettingsFacade()),
+                            new NetworkScoreService$$ExternalSyntheticLambda2(),
+                            Looper.myLooper());
         }
 
         @Override // com.android.server.SystemService
@@ -223,13 +247,21 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
                 Log.d("NetworkScoreService", "systemReady");
             }
             Uri uriFor = Settings.Global.getUriFor("network_recommendations_package");
-            DispatchingContentObserver dispatchingContentObserver = networkScoreService.mRecommendationSettingsObserver;
+            DispatchingContentObserver dispatchingContentObserver =
+                    networkScoreService.mRecommendationSettingsObserver;
             ((ArrayMap) dispatchingContentObserver.mUriEventMap).put(uriFor, 1);
-            dispatchingContentObserver.mContext.getContentResolver().registerContentObserver(uriFor, false, dispatchingContentObserver);
+            dispatchingContentObserver
+                    .mContext
+                    .getContentResolver()
+                    .registerContentObserver(uriFor, false, dispatchingContentObserver);
             Uri uriFor2 = Settings.Global.getUriFor("network_recommendations_enabled");
-            DispatchingContentObserver dispatchingContentObserver2 = networkScoreService.mRecommendationSettingsObserver;
+            DispatchingContentObserver dispatchingContentObserver2 =
+                    networkScoreService.mRecommendationSettingsObserver;
             ((ArrayMap) dispatchingContentObserver2.mUriEventMap).put(uriFor2, 2);
-            dispatchingContentObserver2.mContext.getContentResolver().registerContentObserver(uriFor2, false, dispatchingContentObserver2);
+            dispatchingContentObserver2
+                    .mContext
+                    .getContentResolver()
+                    .registerContentObserver(uriFor2, false, dispatchingContentObserver2);
         }
 
         @Override // com.android.server.SystemService
@@ -251,9 +283,12 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
             if (this.mPackageToWatch.equals(str)) {
                 boolean z2 = NetworkScoreService.DBG;
                 if (z2) {
-                    Log.d("NetworkScoreService", "Evaluating binding for: " + str + ", forceUnbind=" + z);
+                    Log.d(
+                            "NetworkScoreService",
+                            "Evaluating binding for: " + str + ", forceUnbind=" + z);
                 }
-                NetworkScorerAppData activeScorer = NetworkScoreService.this.mNetworkScorerAppManager.getActiveScorer();
+                NetworkScorerAppData activeScorer =
+                        NetworkScoreService.this.mNetworkScorerAppManager.getActiveScorer();
                 if (activeScorer == null) {
                     if (z2) {
                         Log.d("NetworkScoreService", "No active scorers available.");
@@ -265,7 +300,11 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
                     NetworkScoreService.this.unbindFromScoringServiceIfNeeded();
                 }
                 if (z2) {
-                    Log.d("NetworkScoreService", "Binding to " + activeScorer.getRecommendationServiceComponent() + " if needed.");
+                    Log.d(
+                            "NetworkScoreService",
+                            "Binding to "
+                                    + activeScorer.getRecommendationServiceComponent()
+                                    + " if needed.");
                 }
                 NetworkScoreService.this.bindToScoringServiceIfNeeded(activeScorer);
             }
@@ -306,7 +345,8 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
             int size = list.size();
             this.mScanResultKeys = new ArraySet(size);
             for (int i = 0; i < size; i++) {
-                NetworkKey createFromScanResult = NetworkKey.createFromScanResult((ScanResult) list.get(i));
+                NetworkKey createFromScanResult =
+                        NetworkKey.createFromScanResult((ScanResult) list.get(i));
                 if (createFromScanResult != null) {
                     ((ArraySet) this.mScanResultKeys).add(createFromScanResult);
                 }
@@ -377,7 +417,9 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             if (NetworkScoreService.DBG) {
-                Log.d("NetworkScoreService", "ScoringServiceConnection: " + componentName.flattenToString());
+                Log.d(
+                        "NetworkScoreService",
+                        "ScoringServiceConnection: " + componentName.flattenToString());
             }
             this.mConnected = true;
             this.mRecommendationProvider = INetworkRecommendationProvider.Stub.asInterface(iBinder);
@@ -386,7 +428,10 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         @Override // android.content.ServiceConnection
         public final void onServiceDisconnected(ComponentName componentName) {
             if (NetworkScoreService.DBG) {
-                Log.d("NetworkScoreService", "ScoringServiceConnection, disconnected: " + componentName.flattenToString());
+                Log.d(
+                        "NetworkScoreService",
+                        "ScoringServiceConnection, disconnected: "
+                                + componentName.flattenToString());
             }
             this.mConnected = false;
             this.mRecommendationProvider = null;
@@ -419,7 +464,8 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         public final void handleMessage(Message message) {
             int i = message.what;
             if (i != 1 && i != 2) {
-                NetworkScoreService$$ExternalSyntheticOutline0.m(i, "Unknown message: ", "NetworkScoreService");
+                NetworkScoreService$$ExternalSyntheticOutline0.m(
+                        i, "Unknown message: ", "NetworkScoreService");
             } else {
                 boolean z = NetworkScoreService.DBG;
                 NetworkScoreService.this.refreshBinding();
@@ -441,18 +487,24 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         public final Object get() {
             switch (this.$r8$classId) {
                 case 0:
-                    WifiManager wifiManager = (WifiManager) this.mContext.getSystemService(WifiManager.class);
+                    WifiManager wifiManager =
+                            (WifiManager) this.mContext.getSystemService(WifiManager.class);
                     if (wifiManager != null) {
                         return wifiManager.getConnectionInfo();
                     }
-                    Log.w("NetworkScoreService", "WifiManager is null, failed to return the WifiInfo.");
+                    Log.w(
+                            "NetworkScoreService",
+                            "WifiManager is null, failed to return the WifiInfo.");
                     return null;
                 default:
-                    WifiScanner wifiScanner = (WifiScanner) this.mContext.getSystemService(WifiScanner.class);
+                    WifiScanner wifiScanner =
+                            (WifiScanner) this.mContext.getSystemService(WifiScanner.class);
                     if (wifiScanner != null) {
                         return wifiScanner.getSingleScanResults();
                     }
-                    Log.w("NetworkScoreService", "WifiScanner is null, failed to return scan results.");
+                    Log.w(
+                            "NetworkScoreService",
+                            "WifiScanner is null, failed to return scan results.");
                     return Collections.emptyList();
             }
         }
@@ -468,69 +520,93 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         VERBOSE = z2;
     }
 
-    public NetworkScoreService(Context context, NetworkScorerAppManager networkScorerAppManager, Function function, Looper looper) {
+    public NetworkScoreService(
+            Context context,
+            NetworkScorerAppManager networkScorerAppManager,
+            Function function,
+            Looper looper) {
         final int i = 0;
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(this) { // from class: com.android.server.NetworkScoreService.1
-            public final /* synthetic */ NetworkScoreService this$0;
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.NetworkScoreService.1
+                    public final /* synthetic */ NetworkScoreService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                switch (i) {
-                    case 0:
-                        String action = intent.getAction();
-                        int intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000);
-                        if (NetworkScoreService.DBG) {
-                            NetworkScoreService$$ExternalSyntheticOutline0.m(intExtra, "Received ", action, " for userId ", "NetworkScoreService");
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        switch (i) {
+                            case 0:
+                                String action = intent.getAction();
+                                int intExtra =
+                                        intent.getIntExtra(
+                                                "android.intent.extra.user_handle", -10000);
+                                if (NetworkScoreService.DBG) {
+                                    NetworkScoreService$$ExternalSyntheticOutline0.m(
+                                            intExtra,
+                                            "Received ",
+                                            action,
+                                            " for userId ",
+                                            "NetworkScoreService");
+                                }
+                                if (intExtra != -10000
+                                        && "android.intent.action.USER_UNLOCKED".equals(action)) {
+                                    this.this$0.onUserUnlocked(intExtra);
+                                    break;
+                                }
+                                break;
+                            default:
+                                if ("android.location.MODE_CHANGED".equals(intent.getAction())) {
+                                    this.this$0.refreshBinding();
+                                    break;
+                                }
+                                break;
                         }
-                        if (intExtra != -10000 && "android.intent.action.USER_UNLOCKED".equals(action)) {
-                            this.this$0.onUserUnlocked(intExtra);
-                            break;
-                        }
-                        break;
-                    default:
-                        if ("android.location.MODE_CHANGED".equals(intent.getAction())) {
-                            this.this$0.refreshBinding();
-                            break;
-                        }
-                        break;
-                }
-            }
-        };
+                    }
+                };
         final int i2 = 1;
-        BroadcastReceiver broadcastReceiver2 = new BroadcastReceiver(this) { // from class: com.android.server.NetworkScoreService.1
-            public final /* synthetic */ NetworkScoreService this$0;
+        BroadcastReceiver broadcastReceiver2 =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.NetworkScoreService.1
+                    public final /* synthetic */ NetworkScoreService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                switch (i2) {
-                    case 0:
-                        String action = intent.getAction();
-                        int intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000);
-                        if (NetworkScoreService.DBG) {
-                            NetworkScoreService$$ExternalSyntheticOutline0.m(intExtra, "Received ", action, " for userId ", "NetworkScoreService");
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        switch (i2) {
+                            case 0:
+                                String action = intent.getAction();
+                                int intExtra =
+                                        intent.getIntExtra(
+                                                "android.intent.extra.user_handle", -10000);
+                                if (NetworkScoreService.DBG) {
+                                    NetworkScoreService$$ExternalSyntheticOutline0.m(
+                                            intExtra,
+                                            "Received ",
+                                            action,
+                                            " for userId ",
+                                            "NetworkScoreService");
+                                }
+                                if (intExtra != -10000
+                                        && "android.intent.action.USER_UNLOCKED".equals(action)) {
+                                    this.this$0.onUserUnlocked(intExtra);
+                                    break;
+                                }
+                                break;
+                            default:
+                                if ("android.location.MODE_CHANGED".equals(intent.getAction())) {
+                                    this.this$0.refreshBinding();
+                                    break;
+                                }
+                                break;
                         }
-                        if (intExtra != -10000 && "android.intent.action.USER_UNLOCKED".equals(action)) {
-                            this.this$0.onUserUnlocked(intExtra);
-                            break;
-                        }
-                        break;
-                    default:
-                        if ("android.location.MODE_CHANGED".equals(intent.getAction())) {
-                            this.this$0.refreshBinding();
-                            break;
-                        }
-                        break;
-                }
-            }
-        };
+                    }
+                };
         this.mContext = context;
         this.mNetworkScorerAppManager = networkScorerAppManager;
         this.mScoreCaches = new ArrayMap();
@@ -538,40 +614,82 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         UserHandle userHandle = UserHandle.SYSTEM;
         context.registerReceiverAsUser(broadcastReceiver, userHandle, intentFilter, null, null);
         ServiceHandler serviceHandler = new ServiceHandler(looper);
-        context.registerReceiverAsUser(broadcastReceiver2, userHandle, new IntentFilter("android.location.MODE_CHANGED"), null, serviceHandler);
-        this.mRecommendationSettingsObserver = new DispatchingContentObserver(context, serviceHandler);
+        context.registerReceiverAsUser(
+                broadcastReceiver2,
+                userHandle,
+                new IntentFilter("android.location.MODE_CHANGED"),
+                null,
+                serviceHandler);
+        this.mRecommendationSettingsObserver =
+                new DispatchingContentObserver(context, serviceHandler);
         this.mServiceConnProducer = function;
-        context.getContentResolver().registerContentObserver(Settings.Global.getUriFor("use_open_wifi_package"), false, new ContentObserver(serviceHandler) { // from class: com.android.server.NetworkScoreService.3
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z, Uri uri, int i3) {
-                if (Settings.Global.getUriFor("use_open_wifi_package").equals(uri)) {
-                    String string = Settings.Global.getString(NetworkScoreService.this.mContext.getContentResolver(), "use_open_wifi_package");
-                    if (TextUtils.isEmpty(string)) {
-                        return;
-                    }
-                    DefaultPermissionGrantPolicy defaultPermissionGrantPolicy = LegacyPermissionManagerService.this.mDefaultPermissionGrantPolicy;
-                    defaultPermissionGrantPolicy.getClass();
-                    Log.i("DefaultPermGrantPolicy", "Granting permissions to default Use Open WiFi app for user:" + i3);
-                    Set[] setArr = {DefaultPermissionGrantPolicy.ALWAYS_LOCATION_PERMISSIONS};
-                    DefaultPermissionGrantPolicy.AnonymousClass1 anonymousClass1 = defaultPermissionGrantPolicy.NO_PM_CACHE;
-                    defaultPermissionGrantPolicy.grantPermissionsToPackage(anonymousClass1, anonymousClass1.getPackageInfo(string), i3, false, true, setArr);
-                }
-            }
-        });
-        LegacyPermissionManagerService.Internal internal = (LegacyPermissionManagerService.Internal) LocalServices.getService(LegacyPermissionManagerService.Internal.class);
-        LegacyPermissionManagerInternal$PackagesProvider legacyPermissionManagerInternal$PackagesProvider = new LegacyPermissionManagerInternal$PackagesProvider() { // from class: com.android.server.NetworkScoreService$$ExternalSyntheticLambda1
-            @Override // com.android.server.pm.permission.LegacyPermissionManagerInternal$PackagesProvider
-            public final String[] getPackages(int i3) {
-                String string = Settings.Global.getString(NetworkScoreService.this.mContext.getContentResolver(), "use_open_wifi_package");
-                if (TextUtils.isEmpty(string)) {
-                    return null;
-                }
-                return new String[]{string};
-            }
-        };
-        DefaultPermissionGrantPolicy defaultPermissionGrantPolicy = LegacyPermissionManagerService.this.mDefaultPermissionGrantPolicy;
+        context.getContentResolver()
+                .registerContentObserver(
+                        Settings.Global.getUriFor("use_open_wifi_package"),
+                        false,
+                        new ContentObserver(serviceHandler) { // from class:
+                            // com.android.server.NetworkScoreService.3
+                            @Override // android.database.ContentObserver
+                            public final void onChange(boolean z, Uri uri, int i3) {
+                                if (Settings.Global.getUriFor("use_open_wifi_package")
+                                        .equals(uri)) {
+                                    String string =
+                                            Settings.Global.getString(
+                                                    NetworkScoreService.this.mContext
+                                                            .getContentResolver(),
+                                                    "use_open_wifi_package");
+                                    if (TextUtils.isEmpty(string)) {
+                                        return;
+                                    }
+                                    DefaultPermissionGrantPolicy defaultPermissionGrantPolicy =
+                                            LegacyPermissionManagerService.this
+                                                    .mDefaultPermissionGrantPolicy;
+                                    defaultPermissionGrantPolicy.getClass();
+                                    Log.i(
+                                            "DefaultPermGrantPolicy",
+                                            "Granting permissions to default Use Open WiFi app for"
+                                                + " user:"
+                                                    + i3);
+                                    Set[] setArr = {
+                                        DefaultPermissionGrantPolicy.ALWAYS_LOCATION_PERMISSIONS
+                                    };
+                                    DefaultPermissionGrantPolicy.AnonymousClass1 anonymousClass1 =
+                                            defaultPermissionGrantPolicy.NO_PM_CACHE;
+                                    defaultPermissionGrantPolicy.grantPermissionsToPackage(
+                                            anonymousClass1,
+                                            anonymousClass1.getPackageInfo(string),
+                                            i3,
+                                            false,
+                                            true,
+                                            setArr);
+                                }
+                            }
+                        });
+        LegacyPermissionManagerService.Internal internal =
+                (LegacyPermissionManagerService.Internal)
+                        LocalServices.getService(LegacyPermissionManagerService.Internal.class);
+        LegacyPermissionManagerInternal$PackagesProvider
+                legacyPermissionManagerInternal$PackagesProvider =
+                        new LegacyPermissionManagerInternal$PackagesProvider() { // from class:
+                                                                                 // com.android.server.NetworkScoreService$$ExternalSyntheticLambda1
+                            @Override // com.android.server.pm.permission.LegacyPermissionManagerInternal$PackagesProvider
+                            public final String[] getPackages(int i3) {
+                                String string =
+                                        Settings.Global.getString(
+                                                NetworkScoreService.this.mContext
+                                                        .getContentResolver(),
+                                                "use_open_wifi_package");
+                                if (TextUtils.isEmpty(string)) {
+                                    return null;
+                                }
+                                return new String[] {string};
+                            }
+                        };
+        DefaultPermissionGrantPolicy defaultPermissionGrantPolicy =
+                LegacyPermissionManagerService.this.mDefaultPermissionGrantPolicy;
         synchronized (defaultPermissionGrantPolicy.mLock) {
-            defaultPermissionGrantPolicy.mUseOpenWifiAppPackagesProvider = legacyPermissionManagerInternal$PackagesProvider;
+            defaultPermissionGrantPolicy.mUseOpenWifiAppPackagesProvider =
+                    legacyPermissionManagerInternal$PackagesProvider;
         }
     }
 
@@ -584,7 +702,9 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
                     int beginBroadcast = remoteCallbackList.beginBroadcast();
                     for (int i = 0; i < beginBroadcast; i++) {
                         try {
-                            biConsumer.accept(remoteCallbackList.getBroadcastItem(i), remoteCallbackList.getBroadcastCookie(i));
+                            biConsumer.accept(
+                                    remoteCallbackList.getBroadcastItem(i),
+                                    remoteCallbackList.getBroadcastCookie(i));
                         } finally {
                         }
                     }
@@ -596,7 +716,9 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
 
     public final void bindToScoringServiceIfNeeded(NetworkScorerAppData networkScorerAppData) {
         if (DBG) {
-            Log.d("NetworkScoreService", "bindToScoringServiceIfNeeded(" + networkScorerAppData + ")");
+            Log.d(
+                    "NetworkScoreService",
+                    "bindToScoringServiceIfNeeded(" + networkScorerAppData + ")");
         }
         if (networkScorerAppData == null) {
             unbindFromScoringServiceIfNeeded();
@@ -605,11 +727,14 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         synchronized (this.mServiceConnectionLock) {
             try {
                 ScoringServiceConnection scoringServiceConnection = this.mServiceConnection;
-                if (scoringServiceConnection != null && !scoringServiceConnection.getAppData().equals(networkScorerAppData)) {
+                if (scoringServiceConnection != null
+                        && !scoringServiceConnection.getAppData().equals(networkScorerAppData)) {
                     unbindFromScoringServiceIfNeeded();
                 }
                 if (this.mServiceConnection == null) {
-                    this.mServiceConnection = (ScoringServiceConnection) this.mServiceConnProducer.apply(networkScorerAppData);
+                    this.mServiceConnection =
+                            (ScoringServiceConnection)
+                                    this.mServiceConnProducer.apply(networkScorerAppData);
                 }
                 this.mServiceConnection.bind(this.mContext);
             } finally {
@@ -628,8 +753,11 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
 
     public final boolean clearScores() {
         int callingUid = INetworkScoreService.Stub.getCallingUid();
-        if (this.mContext.checkCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES") != 0 && !isCallerActiveScorer(callingUid)) {
-            throw new SecurityException("Caller is neither the system process or the active network scorer.");
+        if (this.mContext.checkCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES")
+                        != 0
+                && !isCallerActiveScorer(callingUid)) {
+            throw new SecurityException(
+                    "Caller is neither the system process or the active network scorer.");
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -644,12 +772,16 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
 
     public final void disableScoring() {
         int callingUid = INetworkScoreService.Stub.getCallingUid();
-        if (this.mContext.checkCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES") != 0 && !isCallerActiveScorer(callingUid)) {
-            throw new SecurityException("Caller is neither the system process or the active network scorer.");
+        if (this.mContext.checkCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES")
+                        != 0
+                && !isCallerActiveScorer(callingUid)) {
+            throw new SecurityException(
+                    "Caller is neither the system process or the active network scorer.");
         }
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (DumpUtils.checkDumpPermission(this.mContext, "NetworkScoreService", printWriter)) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
@@ -663,11 +795,14 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
                     ScoringServiceConnection scoringServiceConnection = this.mServiceConnection;
                     if (scoringServiceConnection != null) {
                         StringBuilder sb = new StringBuilder("ScoringServiceConnection: ");
-                        sb.append(scoringServiceConnection.mAppData.getRecommendationServiceComponent());
+                        sb.append(
+                                scoringServiceConnection.mAppData
+                                        .getRecommendationServiceComponent());
                         sb.append(", bound: ");
                         sb.append(scoringServiceConnection.mBound);
                         sb.append(", connected: ");
-                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, scoringServiceConnection.mConnected, printWriter);
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                sb, scoringServiceConnection.mConnected, printWriter);
                     } else {
                         printWriter.println("ScoringServiceConnection: null");
                     }
@@ -680,13 +815,19 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
     }
 
     public final NetworkScorerAppData getActiveScorer() {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES", "Caller must be granted REQUEST_NETWORK_SCORES.");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.REQUEST_NETWORK_SCORES",
+                "Caller must be granted REQUEST_NETWORK_SCORES.");
         return this.mNetworkScorerAppManager.getActiveScorer();
     }
 
     public final String getActiveScorerPackage() {
-        if (this.mContext.checkCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES") != 0 && this.mContext.checkCallingOrSelfPermission("android.permission.SCORE_NETWORKS") != 0) {
-            throw new SecurityException("Caller is neither the system process or a network scorer.");
+        if (this.mContext.checkCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES")
+                        != 0
+                && this.mContext.checkCallingOrSelfPermission("android.permission.SCORE_NETWORKS")
+                        != 0) {
+            throw new SecurityException(
+                    "Caller is neither the system process or a network scorer.");
         }
         NetworkScorerAppData activeScorer = this.mNetworkScorerAppManager.getActiveScorer();
         if (activeScorer == null) {
@@ -696,7 +837,9 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
     }
 
     public final List getAllValidScorers() {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES", "Caller must be granted REQUEST_NETWORK_SCORES.");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.REQUEST_NETWORK_SCORES",
+                "Caller must be granted REQUEST_NETWORK_SCORES.");
         return this.mNetworkScorerAppManager.getAllValidScorers();
     }
 
@@ -705,7 +848,9 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         synchronized (this.mServiceConnectionLock) {
             try {
                 ScoringServiceConnection scoringServiceConnection = this.mServiceConnection;
-                z = scoringServiceConnection != null && scoringServiceConnection.getAppData().packageUid == i;
+                z =
+                        scoringServiceConnection != null
+                                && scoringServiceConnection.getAppData().packageUid == i;
             } finally {
             }
         }
@@ -714,7 +859,8 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
 
     public void onUserUnlocked(int i) {
         if (DBG) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "onUserUnlocked(", ")", "NetworkScoreService");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i, "onUserUnlocked(", ")", "NetworkScoreService");
         }
         refreshBinding();
     }
@@ -734,21 +880,31 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
             try {
                 if (this.mPackageMonitor != null) {
                     if (activeScorer != null) {
-                        if (!activeScorer.getRecommendationServicePackageName().equals(this.mPackageMonitor.mPackageToWatch)) {
-                        }
+                        if (!activeScorer
+                                .getRecommendationServicePackageName()
+                                .equals(this.mPackageMonitor.mPackageToWatch)) {}
                     }
                     if (z) {
-                        Log.d("NetworkScoreService", "Unregistering package monitor for " + this.mPackageMonitor.mPackageToWatch);
+                        Log.d(
+                                "NetworkScoreService",
+                                "Unregistering package monitor for "
+                                        + this.mPackageMonitor.mPackageToWatch);
                     }
                     this.mPackageMonitor.unregister();
                     this.mPackageMonitor = null;
                 }
                 if (activeScorer != null && this.mPackageMonitor == null) {
-                    NetworkScorerPackageMonitor networkScorerPackageMonitor = new NetworkScorerPackageMonitor(activeScorer.getRecommendationServicePackageName());
+                    NetworkScorerPackageMonitor networkScorerPackageMonitor =
+                            new NetworkScorerPackageMonitor(
+                                    activeScorer.getRecommendationServicePackageName());
                     this.mPackageMonitor = networkScorerPackageMonitor;
-                    networkScorerPackageMonitor.register(this.mContext, (Looper) null, UserHandle.SYSTEM, false);
+                    networkScorerPackageMonitor.register(
+                            this.mContext, (Looper) null, UserHandle.SYSTEM, false);
                     if (z) {
-                        Log.d("NetworkScoreService", "Registered package monitor for " + this.mPackageMonitor.mPackageToWatch);
+                        Log.d(
+                                "NetworkScoreService",
+                                "Registered package monitor for "
+                                        + this.mPackageMonitor.mPackageToWatch);
                     }
                 }
             } catch (Throwable th) {
@@ -761,13 +917,18 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
         bindToScoringServiceIfNeeded(this.mNetworkScorerAppManager.getActiveScorer());
     }
 
-    public final void registerNetworkScoreCache(int i, INetworkScoreCache iNetworkScoreCache, int i2) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES", "Caller must be granted REQUEST_NETWORK_SCORES.");
+    public final void registerNetworkScoreCache(
+            int i, INetworkScoreCache iNetworkScoreCache, int i2) {
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.REQUEST_NETWORK_SCORES",
+                "Caller must be granted REQUEST_NETWORK_SCORES.");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (this.mScoreCaches) {
                 try {
-                    RemoteCallbackList remoteCallbackList = (RemoteCallbackList) ((ArrayMap) this.mScoreCaches).get(Integer.valueOf(i));
+                    RemoteCallbackList remoteCallbackList =
+                            (RemoteCallbackList)
+                                    ((ArrayMap) this.mScoreCaches).get(Integer.valueOf(i));
                     if (remoteCallbackList == null) {
                         remoteCallbackList = new RemoteCallbackList();
                         ((ArrayMap) this.mScoreCaches).put(Integer.valueOf(i), remoteCallbackList);
@@ -777,7 +938,9 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
                             ((ArrayMap) this.mScoreCaches).remove(Integer.valueOf(i));
                         }
                         if (Log.isLoggable("NetworkScoreService", 2)) {
-                            Log.v("NetworkScoreService", "Unable to register NetworkScoreCache for type " + i);
+                            Log.v(
+                                    "NetworkScoreService",
+                                    "Unable to register NetworkScoreCache for type " + i);
                         }
                     }
                 } catch (Throwable th) {
@@ -791,13 +954,18 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
 
     public final boolean requestScores(NetworkKey[] networkKeyArr) {
         INetworkRecommendationProvider recommendationProvider;
-        this.mContext.enforceCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES", "Caller must be granted REQUEST_NETWORK_SCORES.");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.REQUEST_NETWORK_SCORES",
+                "Caller must be granted REQUEST_NETWORK_SCORES.");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (this.mServiceConnectionLock) {
                 try {
                     ScoringServiceConnection scoringServiceConnection = this.mServiceConnection;
-                    recommendationProvider = scoringServiceConnection != null ? scoringServiceConnection.getRecommendationProvider() : null;
+                    recommendationProvider =
+                            scoringServiceConnection != null
+                                    ? scoringServiceConnection.getRecommendationProvider()
+                                    : null;
                 } finally {
                 }
             }
@@ -819,7 +987,10 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
     }
 
     public final boolean setActiveScorer(String str) {
-        if (this.mContext.checkCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES") == 0 || this.mContext.checkCallingOrSelfPermission("android.permission.SCORE_NETWORKS") == 0) {
+        if (this.mContext.checkCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES")
+                        == 0
+                || this.mContext.checkCallingOrSelfPermission("android.permission.SCORE_NETWORKS")
+                        == 0) {
             return this.mNetworkScorerAppManager.setActiveScorer(str);
         }
         throw new SecurityException("Caller is neither the system process or a network scorer.");
@@ -836,7 +1007,12 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
                 if (scoringServiceConnection != null) {
                     scoringServiceConnection.unbind(this.mContext);
                     if (z) {
-                        Log.d("NetworkScoreService", "Disconnected from: " + this.mServiceConnection.getAppData().getRecommendationServiceComponent());
+                        Log.d(
+                                "NetworkScoreService",
+                                "Disconnected from: "
+                                        + this.mServiceConnection
+                                                .getAppData()
+                                                .getRecommendationServiceComponent());
                     }
                 }
                 this.mServiceConnection = null;
@@ -848,19 +1024,26 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
     }
 
     public final void unregisterNetworkScoreCache(int i, INetworkScoreCache iNetworkScoreCache) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.REQUEST_NETWORK_SCORES", "Caller must be granted REQUEST_NETWORK_SCORES.");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.REQUEST_NETWORK_SCORES",
+                "Caller must be granted REQUEST_NETWORK_SCORES.");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (this.mScoreCaches) {
                 try {
-                    RemoteCallbackList remoteCallbackList = (RemoteCallbackList) ((ArrayMap) this.mScoreCaches).get(Integer.valueOf(i));
-                    if (remoteCallbackList != null && remoteCallbackList.unregister(iNetworkScoreCache)) {
+                    RemoteCallbackList remoteCallbackList =
+                            (RemoteCallbackList)
+                                    ((ArrayMap) this.mScoreCaches).get(Integer.valueOf(i));
+                    if (remoteCallbackList != null
+                            && remoteCallbackList.unregister(iNetworkScoreCache)) {
                         if (remoteCallbackList.getRegisteredCallbackCount() == 0) {
                             ((ArrayMap) this.mScoreCaches).remove(Integer.valueOf(i));
                         }
                     }
                     if (Log.isLoggable("NetworkScoreService", 2)) {
-                        Log.v("NetworkScoreService", "Unable to unregister NetworkScoreCache for type " + i);
+                        Log.v(
+                                "NetworkScoreService",
+                                "Unable to unregister NetworkScoreCache for type " + i);
                     }
                 } finally {
                 }
@@ -873,7 +1056,10 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
     public final boolean updateScores(ScoredNetwork[] scoredNetworkArr) {
         RemoteCallbackList remoteCallbackList;
         if (!isCallerActiveScorer(INetworkScoreService.Stub.getCallingUid())) {
-            throw new SecurityException("Caller with UID " + INetworkScoreService.Stub.getCallingUid() + " is not the active scorer.");
+            throw new SecurityException(
+                    "Caller with UID "
+                            + INetworkScoreService.Stub.getCallingUid()
+                            + " is not the active scorer.");
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -896,17 +1082,29 @@ public final class NetworkScoreService extends INetworkScoreService.Stub {
                 Map.Entry entry = (Map.Entry) it.next();
                 synchronized (this.mScoreCaches) {
                     try {
-                        remoteCallbackList = (RemoteCallbackList) ((ArrayMap) this.mScoreCaches).get(entry.getKey());
-                        if (remoteCallbackList != null && remoteCallbackList.getRegisteredCallbackCount() != 0) {
+                        remoteCallbackList =
+                                (RemoteCallbackList)
+                                        ((ArrayMap) this.mScoreCaches).get(entry.getKey());
+                        if (remoteCallbackList != null
+                                && remoteCallbackList.getRegisteredCallbackCount() != 0) {
                             z = false;
                         }
                     } finally {
                     }
                 }
                 if (!z) {
-                    sendCacheUpdateCallback(new FilteringCacheUpdatingConsumer(this.mContext, (List) entry.getValue(), ((Integer) entry.getKey()).intValue(), null, null), Collections.singleton(remoteCallbackList));
+                    sendCacheUpdateCallback(
+                            new FilteringCacheUpdatingConsumer(
+                                    this.mContext,
+                                    (List) entry.getValue(),
+                                    ((Integer) entry.getKey()).intValue(),
+                                    null,
+                                    null),
+                            Collections.singleton(remoteCallbackList));
                 } else if (Log.isLoggable("NetworkScoreService", 2)) {
-                    Log.v("NetworkScoreService", "No scorer registered for type " + entry.getKey() + ", discarding");
+                    Log.v(
+                            "NetworkScoreService",
+                            "No scorer registered for type " + entry.getKey() + ", discarding");
                 }
             }
         } catch (Throwable th) {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.FileUtils;
 import android.util.Log;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -25,7 +26,9 @@ public abstract class FotaPreferenceUtils {
                 file2.createNewFile();
             }
         } catch (IOException e) {
-            Log.e("SWT_FotaPreferenceUtils", "getPreferences: Unable to create file, " + e.getMessage());
+            Log.e(
+                    "SWT_FotaPreferenceUtils",
+                    "getPreferences: Unable to create file, " + e.getMessage());
         }
         return context.createDeviceProtectedStorageContext().getSharedPreferences(file2, 0);
     }

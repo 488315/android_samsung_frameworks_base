@@ -5,6 +5,7 @@ import android.os.SharedMemory;
 import android.system.ErrnoException;
 import android.util.Log;
 import android.util.SparseArray;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Objects;
@@ -17,7 +18,8 @@ public final class VirtualSensorDirectChannelWriter implements AutoCloseable {
     private static final long UINT32_MAX = 4294967295L;
     private final SparseArray<SharedMemoryWrapper> mChannels = new SparseArray<>();
     private final Object mChannelsLock = new Object();
-    private final SparseArray<SparseArray<DirectChannelConfiguration>> mConfiguredChannels = new SparseArray<>();
+    private final SparseArray<SparseArray<DirectChannelConfiguration>> mConfiguredChannels =
+            new SparseArray<>();
 
     @Override // java.lang.AutoCloseable
     public void close() {
@@ -35,7 +37,10 @@ public final class VirtualSensorDirectChannelWriter implements AutoCloseable {
             if (this.mChannels.contains(channelHandle)) {
                 Log.w(TAG, "Channel with handle " + channelHandle + " already added.");
             } else {
-                this.mChannels.put(channelHandle, new SharedMemoryWrapper((SharedMemory) Objects.requireNonNull(sharedMemory)));
+                this.mChannels.put(
+                        channelHandle,
+                        new SharedMemoryWrapper(
+                                (SharedMemory) Objects.requireNonNull(sharedMemory)));
             }
         }
     }
@@ -52,14 +57,21 @@ public final class VirtualSensorDirectChannelWriter implements AutoCloseable {
         }
     }
 
-    public boolean configureChannel(int channelHandle, VirtualSensor sensor, int rateLevel, int reportToken) {
+    public boolean configureChannel(
+            int channelHandle, VirtualSensor sensor, int rateLevel, int reportToken) {
         synchronized (this.mChannelsLock) {
-            SparseArray<DirectChannelConfiguration> configs = this.mConfiguredChannels.get(((VirtualSensor) Objects.requireNonNull(sensor)).getHandle());
+            SparseArray<DirectChannelConfiguration> configs =
+                    this.mConfiguredChannels.get(
+                            ((VirtualSensor) Objects.requireNonNull(sensor)).getHandle());
             if (rateLevel == 0) {
                 if (configs != null && configs.removeReturnOld(channelHandle) != null) {
                     return true;
                 }
-                Log.w(TAG, "Channel configuration failed - channel with handle " + channelHandle + " not found");
+                Log.w(
+                        TAG,
+                        "Channel configuration failed - channel with handle "
+                                + channelHandle
+                                + " not found");
                 return false;
             }
             if (configs == null) {
@@ -68,10 +80,17 @@ public final class VirtualSensorDirectChannelWriter implements AutoCloseable {
             }
             SharedMemoryWrapper sharedMemoryWrapper = this.mChannels.get(channelHandle);
             if (sharedMemoryWrapper == null) {
-                Log.w(TAG, "Channel configuration failed - channel with handle " + channelHandle + " not found");
+                Log.w(
+                        TAG,
+                        "Channel configuration failed - channel with handle "
+                                + channelHandle
+                                + " not found");
                 return false;
             }
-            configs.put(channelHandle, new DirectChannelConfiguration(reportToken, sensor.getType(), sharedMemoryWrapper));
+            configs.put(
+                    channelHandle,
+                    new DirectChannelConfiguration(
+                            reportToken, sensor.getType(), sharedMemoryWrapper));
             return true;
         }
     }
@@ -79,14 +98,19 @@ public final class VirtualSensorDirectChannelWriter implements AutoCloseable {
     public boolean writeSensorEvent(VirtualSensor sensor, VirtualSensorEvent event) {
         Objects.requireNonNull(event);
         synchronized (this.mChannelsLock) {
-            SparseArray<DirectChannelConfiguration> configs = this.mConfiguredChannels.get(((VirtualSensor) Objects.requireNonNull(sensor)).getHandle());
+            SparseArray<DirectChannelConfiguration> configs =
+                    this.mConfiguredChannels.get(
+                            ((VirtualSensor) Objects.requireNonNull(sensor)).getHandle());
             if (configs != null && configs.size() != 0) {
                 for (int i = 0; i < configs.size(); i++) {
                     configs.valueAt(i).write((VirtualSensorEvent) Objects.requireNonNull(event));
                 }
                 return true;
             }
-            Log.w(TAG, "Sensor event write failed - no direct sensor channels configured for sensor " + sensor.getName());
+            Log.w(
+                    TAG,
+                    "Sensor event write failed - no direct sensor channels configured for sensor "
+                            + sensor.getName());
             return false;
         }
     }
@@ -144,7 +168,8 @@ public final class VirtualSensorDirectChannelWriter implements AutoCloseable {
         private final int mSensorType;
         private final SharedMemoryWrapper mSharedMemoryWrapper;
 
-        DirectChannelConfiguration(int reportToken, int sensorType, SharedMemoryWrapper sharedMemoryWrapper) {
+        DirectChannelConfiguration(
+                int reportToken, int sensorType, SharedMemoryWrapper sharedMemoryWrapper) {
             this.mReportToken = reportToken;
             this.mSensorType = sensorType;
             this.mSharedMemoryWrapper = sharedMemoryWrapper;
@@ -153,7 +178,8 @@ public final class VirtualSensorDirectChannelWriter implements AutoCloseable {
         void write(VirtualSensorEvent event) {
             long currentCounter = this.mEventCounter.getAcquire();
             long currentCounter2 = currentCounter + 1;
-            this.mSharedMemoryWrapper.write(this.mReportToken, this.mSensorType, currentCounter, event);
+            this.mSharedMemoryWrapper.write(
+                    this.mReportToken, this.mSensorType, currentCounter, event);
             if (currentCounter2 == 4294967296L) {
                 currentCounter2 = 1;
             }

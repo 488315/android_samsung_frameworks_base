@@ -8,6 +8,7 @@ import android.os.StatFs;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +25,7 @@ import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Set;
+
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
@@ -72,7 +74,14 @@ public class BnRFileHelper {
             long blockSizeInBytes = stat.getBlockSizeLong();
             long freeSpaceInBytes = availableBlocks * blockSizeInBytes;
             if (freeSpaceInBytes < 10485760) {
-                Slog.d(TAG, "StatFs : availableBlocks = " + availableBlocks + " blockSizeInBytes = " + blockSizeInBytes + " freeSpaceInBytes = " + freeSpaceInBytes);
+                Slog.d(
+                        TAG,
+                        "StatFs : availableBlocks = "
+                                + availableBlocks
+                                + " blockSizeInBytes = "
+                                + blockSizeInBytes
+                                + " freeSpaceInBytes = "
+                                + freeSpaceInBytes);
                 ErrorCode errorCode2 = ErrorCode.STORAGE_FULL;
                 return errorCode2;
             }
@@ -97,7 +106,12 @@ public class BnRFileHelper {
 
     public static boolean copyDir(String targetFilePath, String sourceFilePath, String key) {
         if (TextUtils.isEmpty(sourceFilePath) || TextUtils.isEmpty(targetFilePath)) {
-            Log.d(TAG, "copyDir: filePath is empty. source = " + sourceFilePath + ", target = " + targetFilePath);
+            Log.d(
+                    TAG,
+                    "copyDir: filePath is empty. source = "
+                            + sourceFilePath
+                            + ", target = "
+                            + targetFilePath);
             return false;
         }
         try {
@@ -107,7 +121,12 @@ public class BnRFileHelper {
             File destDir = new File(targetFilePath);
             if (!destDir.exists()) {
                 boolean success = destDir.mkdirs();
-                Log.d(TAG, "copydir: " + destDir.getPath() + " is not exist. create success = " + success);
+                Log.d(
+                        TAG,
+                        "copydir: "
+                                + destDir.getPath()
+                                + " is not exist. create success = "
+                                + success);
             }
             String[] files = srcDir.list();
             if (files == null) {
@@ -140,10 +159,12 @@ public class BnRFileHelper {
             String targetFilePath = targetDir + fileName;
             Log.i(TAG, "copyAssets: to " + targetFilePath);
             if (TextUtils.isEmpty(key) || fileName.endsWith(".xml")) {
-                if (!copyFile(targetFilePath, (ParcelFileDescriptor) assets.getParcelable(fileName))) {
+                if (!copyFile(
+                        targetFilePath, (ParcelFileDescriptor) assets.getParcelable(fileName))) {
                     return false;
                 }
-            } else if (!copyEncryptFile(targetFilePath, (ParcelFileDescriptor) assets.getParcelable(fileName), key)) {
+            } else if (!copyEncryptFile(
+                    targetFilePath, (ParcelFileDescriptor) assets.getParcelable(fileName), key)) {
                 return false;
             }
         }
@@ -259,7 +280,8 @@ public class BnRFileHelper {
         }
     }
 
-    public static boolean copyEncryptFile(String dest, ParcelFileDescriptor source, String sessionKey) {
+    public static boolean copyEncryptFile(
+            String dest, ParcelFileDescriptor source, String sessionKey) {
         File file = new File(dest);
         if (!file.exists() && file.getParentFile() != null) {
             file.getParentFile().mkdirs();
@@ -452,8 +474,14 @@ public class BnRFileHelper {
         }
     }
 
-    public static boolean copyEncryptFile(String sourceImagePath, String destImagePath, String sessionKey) {
-        Slog.d(TAG, "copyEncryptFile sourceImagePath = " + sourceImagePath + " destImagePath = " + destImagePath);
+    public static boolean copyEncryptFile(
+            String sourceImagePath, String destImagePath, String sessionKey) {
+        Slog.d(
+                TAG,
+                "copyEncryptFile sourceImagePath = "
+                        + sourceImagePath
+                        + " destImagePath = "
+                        + destImagePath);
         File file = new File(destImagePath);
         if (!file.exists() && file.getParentFile() != null) {
             file.getParentFile().mkdirs();
@@ -659,7 +687,8 @@ public class BnRFileHelper {
         }
     }
 
-    public static InputStream getInputStreamFromPath(String imagePath, int securityLevel, String saveKey) {
+    public static InputStream getInputStreamFromPath(
+            String imagePath, int securityLevel, String saveKey) {
         try {
             InputStream stream = new FileInputStream(imagePath);
             switch (securityLevel) {

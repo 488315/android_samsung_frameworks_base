@@ -8,8 +8,7 @@ public class MidiEventMultiScheduler {
     private final Object mMultiLock = new Object();
 
     private class MultiLockMidiEventScheduler extends MidiEventScheduler {
-        private MultiLockMidiEventScheduler() {
-        }
+        private MultiLockMidiEventScheduler() {}
 
         @Override // com.android.internal.midi.EventScheduler
         public void close() {

@@ -6,13 +6,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
-import android.content.pm.IShortcutService;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+
 import com.android.internal.infra.AndroidFuture;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -29,8 +31,7 @@ public class ShortcutManager {
     private final IShortcutService mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ShortcutMatchFlags {
-    }
+    public @interface ShortcutMatchFlags {}
 
     public ShortcutManager(Context context, IShortcutService service) {
         this.mContext = context;
@@ -43,7 +44,10 @@ public class ShortcutManager {
 
     public boolean setDynamicShortcuts(List<ShortcutInfo> shortcutInfoList) {
         try {
-            return this.mService.setDynamicShortcuts(this.mContext.getPackageName(), new ParceledListSlice(shortcutInfoList), injectMyUserId());
+            return this.mService.setDynamicShortcuts(
+                    this.mContext.getPackageName(),
+                    new ParceledListSlice(shortcutInfoList),
+                    injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -51,7 +55,9 @@ public class ShortcutManager {
 
     public List<ShortcutInfo> getDynamicShortcuts() {
         try {
-            return this.mService.getShortcuts(this.mContext.getPackageName(), 2, injectMyUserId()).getList();
+            return this.mService
+                    .getShortcuts(this.mContext.getPackageName(), 2, injectMyUserId())
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -59,7 +65,9 @@ public class ShortcutManager {
 
     public List<ShortcutInfo> getManifestShortcuts() {
         try {
-            return this.mService.getShortcuts(this.mContext.getPackageName(), 1, injectMyUserId()).getList();
+            return this.mService
+                    .getShortcuts(this.mContext.getPackageName(), 1, injectMyUserId())
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -67,7 +75,9 @@ public class ShortcutManager {
 
     public List<ShortcutInfo> getShortcuts(int matchFlags) {
         try {
-            return this.mService.getShortcuts(this.mContext.getPackageName(), matchFlags, injectMyUserId()).getList();
+            return this.mService
+                    .getShortcuts(this.mContext.getPackageName(), matchFlags, injectMyUserId())
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -75,7 +85,10 @@ public class ShortcutManager {
 
     public boolean addDynamicShortcuts(List<ShortcutInfo> shortcutInfoList) {
         try {
-            return this.mService.addDynamicShortcuts(this.mContext.getPackageName(), new ParceledListSlice(shortcutInfoList), injectMyUserId());
+            return this.mService.addDynamicShortcuts(
+                    this.mContext.getPackageName(),
+                    new ParceledListSlice(shortcutInfoList),
+                    injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -83,7 +96,8 @@ public class ShortcutManager {
 
     public void removeDynamicShortcuts(List<String> shortcutIds) {
         try {
-            this.mService.removeDynamicShortcuts(this.mContext.getPackageName(), shortcutIds, injectMyUserId());
+            this.mService.removeDynamicShortcuts(
+                    this.mContext.getPackageName(), shortcutIds, injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -91,7 +105,8 @@ public class ShortcutManager {
 
     public void removeAllDynamicShortcuts() {
         try {
-            this.mService.removeAllDynamicShortcuts(this.mContext.getPackageName(), injectMyUserId());
+            this.mService.removeAllDynamicShortcuts(
+                    this.mContext.getPackageName(), injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -99,7 +114,8 @@ public class ShortcutManager {
 
     public void removeLongLivedShortcuts(List<String> shortcutIds) {
         try {
-            this.mService.removeLongLivedShortcuts(this.mContext.getPackageName(), shortcutIds, injectMyUserId());
+            this.mService.removeLongLivedShortcuts(
+                    this.mContext.getPackageName(), shortcutIds, injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -107,7 +123,9 @@ public class ShortcutManager {
 
     public List<ShortcutInfo> getPinnedShortcuts() {
         try {
-            return this.mService.getShortcuts(this.mContext.getPackageName(), 4, injectMyUserId()).getList();
+            return this.mService
+                    .getShortcuts(this.mContext.getPackageName(), 4, injectMyUserId())
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -115,7 +133,10 @@ public class ShortcutManager {
 
     public boolean updateShortcuts(List<ShortcutInfo> shortcutInfoList) {
         try {
-            return this.mService.updateShortcuts(this.mContext.getPackageName(), new ParceledListSlice(shortcutInfoList), injectMyUserId());
+            return this.mService.updateShortcuts(
+                    this.mContext.getPackageName(),
+                    new ParceledListSlice(shortcutInfoList),
+                    injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -123,7 +144,8 @@ public class ShortcutManager {
 
     public void disableShortcuts(List<String> shortcutIds) {
         try {
-            this.mService.disableShortcuts(this.mContext.getPackageName(), shortcutIds, null, 0, injectMyUserId());
+            this.mService.disableShortcuts(
+                    this.mContext.getPackageName(), shortcutIds, null, 0, injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -131,7 +153,12 @@ public class ShortcutManager {
 
     public void disableShortcuts(List<String> shortcutIds, int disabledMessageResId) {
         try {
-            this.mService.disableShortcuts(this.mContext.getPackageName(), shortcutIds, null, disabledMessageResId, injectMyUserId());
+            this.mService.disableShortcuts(
+                    this.mContext.getPackageName(),
+                    shortcutIds,
+                    null,
+                    disabledMessageResId,
+                    injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -143,7 +170,12 @@ public class ShortcutManager {
 
     public void disableShortcuts(List<String> shortcutIds, CharSequence disabledMessage) {
         try {
-            this.mService.disableShortcuts(this.mContext.getPackageName(), shortcutIds, disabledMessage, 0, injectMyUserId());
+            this.mService.disableShortcuts(
+                    this.mContext.getPackageName(),
+                    shortcutIds,
+                    disabledMessage,
+                    0,
+                    injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -151,7 +183,8 @@ public class ShortcutManager {
 
     public void enableShortcuts(List<String> shortcutIds) {
         try {
-            this.mService.enableShortcuts(this.mContext.getPackageName(), shortcutIds, injectMyUserId());
+            this.mService.enableShortcuts(
+                    this.mContext.getPackageName(), shortcutIds, injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -163,7 +196,8 @@ public class ShortcutManager {
 
     public int getMaxShortcutCountPerActivity() {
         try {
-            return this.mService.getMaxShortcutCountPerActivity(this.mContext.getPackageName(), injectMyUserId());
+            return this.mService.getMaxShortcutCountPerActivity(
+                    this.mContext.getPackageName(), injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -171,7 +205,8 @@ public class ShortcutManager {
 
     public int getRemainingCallCount() {
         try {
-            return this.mService.getRemainingCallCount(this.mContext.getPackageName(), injectMyUserId());
+            return this.mService.getRemainingCallCount(
+                    this.mContext.getPackageName(), injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -179,7 +214,8 @@ public class ShortcutManager {
 
     public long getRateLimitResetTime() {
         try {
-            return this.mService.getRateLimitResetTime(this.mContext.getPackageName(), injectMyUserId());
+            return this.mService.getRateLimitResetTime(
+                    this.mContext.getPackageName(), injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -187,7 +223,9 @@ public class ShortcutManager {
 
     public boolean isRateLimitingActive() {
         try {
-            return this.mService.getRemainingCallCount(this.mContext.getPackageName(), injectMyUserId()) == 0;
+            return this.mService.getRemainingCallCount(
+                            this.mContext.getPackageName(), injectMyUserId())
+                    == 0;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -195,7 +233,8 @@ public class ShortcutManager {
 
     public int getIconMaxWidth() {
         try {
-            return this.mService.getIconMaxDimensions(this.mContext.getPackageName(), injectMyUserId());
+            return this.mService.getIconMaxDimensions(
+                    this.mContext.getPackageName(), injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -203,7 +242,8 @@ public class ShortcutManager {
 
     public int getIconMaxHeight() {
         try {
-            return this.mService.getIconMaxDimensions(this.mContext.getPackageName(), injectMyUserId());
+            return this.mService.getIconMaxDimensions(
+                    this.mContext.getPackageName(), injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -211,7 +251,8 @@ public class ShortcutManager {
 
     public void reportShortcutUsed(String shortcutId) {
         try {
-            this.mService.reportShortcutUsed(this.mContext.getPackageName(), shortcutId, injectMyUserId());
+            this.mService.reportShortcutUsed(
+                    this.mContext.getPackageName(), shortcutId, injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -231,12 +272,29 @@ public class ShortcutManager {
             if (DesktopModeFeature.isDesktopMode(this.mContext)) {
                 boolean isDualMode = this.mContext.getResources().getConfiguration().dexMode == 2;
                 if (isDualMode) {
-                    this.mService.requestPinShortcutAsDisplay(this.mContext.getPackageName(), shortcut, resultIntent, injectMyUserId(), 2, ret);
+                    this.mService.requestPinShortcutAsDisplay(
+                            this.mContext.getPackageName(),
+                            shortcut,
+                            resultIntent,
+                            injectMyUserId(),
+                            2,
+                            ret);
                 } else {
-                    this.mService.requestPinShortcutAsDisplay(this.mContext.getPackageName(), shortcut, resultIntent, injectMyUserId(), this.mContext.getDisplayId(), ret);
+                    this.mService.requestPinShortcutAsDisplay(
+                            this.mContext.getPackageName(),
+                            shortcut,
+                            resultIntent,
+                            injectMyUserId(),
+                            this.mContext.getDisplayId(),
+                            ret);
                 }
             } else {
-                this.mService.requestPinShortcut(this.mContext.getPackageName(), shortcut, resultIntent, injectMyUserId(), ret);
+                this.mService.requestPinShortcut(
+                        this.mContext.getPackageName(),
+                        shortcut,
+                        resultIntent,
+                        injectMyUserId(),
+                        ret);
             }
             return Boolean.parseBoolean((String) getFutureOrThrow(ret));
         } catch (RemoteException e) {
@@ -247,7 +305,8 @@ public class ShortcutManager {
     public Intent createShortcutResultIntent(ShortcutInfo shortcut) {
         AndroidFuture<Intent> ret = new AndroidFuture<>();
         try {
-            this.mService.createShortcutResultIntent(this.mContext.getPackageName(), shortcut, injectMyUserId(), ret);
+            this.mService.createShortcutResultIntent(
+                    this.mContext.getPackageName(), shortcut, injectMyUserId(), ret);
             Intent result = (Intent) getFutureOrThrow(ret);
             if (result != null) {
                 result.prepareToEnterProcess(32, this.mContext.getAttributionSource());
@@ -273,7 +332,9 @@ public class ShortcutManager {
     @SystemApi
     public List<ShareShortcutInfo> getShareTargets(IntentFilter filter) {
         try {
-            return this.mService.getShareTargets(this.mContext.getPackageName(), filter, injectMyUserId()).getList();
+            return this.mService
+                    .getShareTargets(this.mContext.getPackageName(), filter, injectMyUserId())
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -281,19 +342,21 @@ public class ShortcutManager {
 
     @SystemApi
     public static final class ShareShortcutInfo implements Parcelable {
-        public static final Parcelable.Creator<ShareShortcutInfo> CREATOR = new Parcelable.Creator<ShareShortcutInfo>() { // from class: android.content.pm.ShortcutManager.ShareShortcutInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ShareShortcutInfo createFromParcel(Parcel in) {
-                return new ShareShortcutInfo(in);
-            }
+        public static final Parcelable.Creator<ShareShortcutInfo> CREATOR =
+                new Parcelable.Creator<ShareShortcutInfo>() { // from class:
+                    // android.content.pm.ShortcutManager.ShareShortcutInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ShareShortcutInfo createFromParcel(Parcel in) {
+                        return new ShareShortcutInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ShareShortcutInfo[] newArray(int size) {
-                return new ShareShortcutInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ShareShortcutInfo[] newArray(int size) {
+                        return new ShareShortcutInfo[size];
+                    }
+                };
         private final ShortcutInfo mShortcutInfo;
         private final ComponentName mTargetComponent;
 
@@ -309,8 +372,14 @@ public class ShortcutManager {
         }
 
         private ShareShortcutInfo(Parcel in) {
-            this.mShortcutInfo = (ShortcutInfo) in.readParcelable(ShortcutInfo.class.getClassLoader(), ShortcutInfo.class);
-            this.mTargetComponent = (ComponentName) in.readParcelable(ComponentName.class.getClassLoader(), ComponentName.class);
+            this.mShortcutInfo =
+                    (ShortcutInfo)
+                            in.readParcelable(
+                                    ShortcutInfo.class.getClassLoader(), ShortcutInfo.class);
+            this.mTargetComponent =
+                    (ComponentName)
+                            in.readParcelable(
+                                    ComponentName.class.getClassLoader(), ComponentName.class);
         }
 
         public ShortcutInfo getShortcutInfo() {
@@ -336,7 +405,8 @@ public class ShortcutManager {
     @SystemApi
     public boolean hasShareTargets(String packageName) {
         try {
-            return this.mService.hasShareTargets(this.mContext.getPackageName(), packageName, injectMyUserId());
+            return this.mService.hasShareTargets(
+                    this.mContext.getPackageName(), packageName, injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -344,7 +414,8 @@ public class ShortcutManager {
 
     public void pushDynamicShortcut(ShortcutInfo shortcut) {
         try {
-            this.mService.pushDynamicShortcut(this.mContext.getPackageName(), shortcut, injectMyUserId());
+            this.mService.pushDynamicShortcut(
+                    this.mContext.getPackageName(), shortcut, injectMyUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

@@ -4,29 +4,32 @@ import android.net.TransportInfo;
 import android.net.wifi.WifiInfo;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public class VcnTransportInfo implements TransportInfo, Parcelable {
-    public static final Parcelable.Creator<VcnTransportInfo> CREATOR = new Parcelable.Creator<VcnTransportInfo>() { // from class: android.net.vcn.VcnTransportInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VcnTransportInfo createFromParcel(Parcel in) {
-            int subId = in.readInt();
-            WifiInfo wifiInfo = (WifiInfo) in.readParcelable(null, WifiInfo.class);
-            int minUdpPort4500NatTimeoutSeconds = in.readInt();
-            if (wifiInfo == null && subId == -1 && minUdpPort4500NatTimeoutSeconds == -1) {
-                return null;
-            }
-            return new VcnTransportInfo(wifiInfo, subId, minUdpPort4500NatTimeoutSeconds);
-        }
+    public static final Parcelable.Creator<VcnTransportInfo> CREATOR =
+            new Parcelable.Creator<
+                    VcnTransportInfo>() { // from class: android.net.vcn.VcnTransportInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VcnTransportInfo createFromParcel(Parcel in) {
+                    int subId = in.readInt();
+                    WifiInfo wifiInfo = (WifiInfo) in.readParcelable(null, WifiInfo.class);
+                    int minUdpPort4500NatTimeoutSeconds = in.readInt();
+                    if (wifiInfo == null && subId == -1 && minUdpPort4500NatTimeoutSeconds == -1) {
+                        return null;
+                    }
+                    return new VcnTransportInfo(wifiInfo, subId, minUdpPort4500NatTimeoutSeconds);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VcnTransportInfo[] newArray(int size) {
-            return new VcnTransportInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VcnTransportInfo[] newArray(int size) {
+                    return new VcnTransportInfo[size];
+                }
+            };
     private final int mMinUdpPort4500NatTimeoutSeconds;
     private final int mSubId;
     private final WifiInfo mWifiInfo;
@@ -66,7 +69,10 @@ public class VcnTransportInfo implements TransportInfo, Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(this.mWifiInfo, Integer.valueOf(this.mSubId), Integer.valueOf(this.mMinUdpPort4500NatTimeoutSeconds));
+        return Objects.hash(
+                this.mWifiInfo,
+                Integer.valueOf(this.mSubId),
+                Integer.valueOf(this.mMinUdpPort4500NatTimeoutSeconds));
     }
 
     public boolean equals(Object o) {
@@ -74,7 +80,9 @@ public class VcnTransportInfo implements TransportInfo, Parcelable {
             return false;
         }
         VcnTransportInfo that = (VcnTransportInfo) o;
-        return Objects.equals(this.mWifiInfo, that.mWifiInfo) && this.mSubId == that.mSubId && this.mMinUdpPort4500NatTimeoutSeconds == that.mMinUdpPort4500NatTimeoutSeconds;
+        return Objects.equals(this.mWifiInfo, that.mWifiInfo)
+                && this.mSubId == that.mSubId
+                && this.mMinUdpPort4500NatTimeoutSeconds == that.mMinUdpPort4500NatTimeoutSeconds;
     }
 
     @Override // android.os.Parcelable
@@ -86,7 +94,10 @@ public class VcnTransportInfo implements TransportInfo, Parcelable {
         if ((4 & redactions) != 0) {
             return new VcnTransportInfo(null, -1, -1);
         }
-        return new VcnTransportInfo(this.mWifiInfo != null ? this.mWifiInfo.makeCopy(redactions) : null, this.mSubId, this.mMinUdpPort4500NatTimeoutSeconds);
+        return new VcnTransportInfo(
+                this.mWifiInfo != null ? this.mWifiInfo.makeCopy(redactions) : null,
+                this.mSubId,
+                this.mMinUdpPort4500NatTimeoutSeconds);
     }
 
     public long getApplicableRedactions() {
@@ -105,6 +116,10 @@ public class VcnTransportInfo implements TransportInfo, Parcelable {
     }
 
     public String toString() {
-        return "VcnTransportInfo { mWifiInfo = " + this.mWifiInfo + ", mSubId = " + this.mSubId + " }";
+        return "VcnTransportInfo { mWifiInfo = "
+                + this.mWifiInfo
+                + ", mSubId = "
+                + this.mSubId
+                + " }";
     }
 }

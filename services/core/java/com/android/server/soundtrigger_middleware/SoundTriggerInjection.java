@@ -10,6 +10,7 @@ import android.media.soundtrigger_middleware.ISoundTriggerInjection;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,7 +35,8 @@ public final class SoundTriggerInjection implements ISoundTriggerInjection, IBin
         synchronized (this.mClientLock) {
             try {
                 ISoundTriggerInjection iSoundTriggerInjection = this.mClient;
-                if (iSoundTriggerInjection != null && iBinder == iSoundTriggerInjection.asBinder()) {
+                if (iSoundTriggerInjection != null
+                        && iBinder == iSoundTriggerInjection.asBinder()) {
                     this.mClient = null;
                 }
             } catch (Throwable th) {
@@ -103,14 +105,19 @@ public final class SoundTriggerInjection implements ISoundTriggerInjection, IBin
         Slog.wtf("SoundTriggerInjection", "Unexpected preempted!");
     }
 
-    public final void onRecognitionStarted(int i, RecognitionConfig recognitionConfig, IInjectRecognitionEvent iInjectRecognitionEvent, IInjectModelEvent iInjectModelEvent) {
+    public final void onRecognitionStarted(
+            int i,
+            RecognitionConfig recognitionConfig,
+            IInjectRecognitionEvent iInjectRecognitionEvent,
+            IInjectModelEvent iInjectModelEvent) {
         synchronized (this.mClientLock) {
             ISoundTriggerInjection iSoundTriggerInjection = this.mClient;
             if (iSoundTriggerInjection == null) {
                 return;
             }
             try {
-                iSoundTriggerInjection.onRecognitionStarted(i, recognitionConfig, iInjectRecognitionEvent, iInjectModelEvent);
+                iSoundTriggerInjection.onRecognitionStarted(
+                        i, recognitionConfig, iInjectRecognitionEvent, iInjectModelEvent);
             } catch (RemoteException unused) {
                 this.mClient = null;
             }
@@ -145,14 +152,19 @@ public final class SoundTriggerInjection implements ISoundTriggerInjection, IBin
         }
     }
 
-    public final void onSoundModelLoaded(SoundModel soundModel, Phrase[] phraseArr, IInjectModelEvent iInjectModelEvent, IInjectGlobalEvent iInjectGlobalEvent) {
+    public final void onSoundModelLoaded(
+            SoundModel soundModel,
+            Phrase[] phraseArr,
+            IInjectModelEvent iInjectModelEvent,
+            IInjectGlobalEvent iInjectGlobalEvent) {
         synchronized (this.mClientLock) {
             ISoundTriggerInjection iSoundTriggerInjection = this.mClient;
             if (iSoundTriggerInjection == null) {
                 return;
             }
             try {
-                iSoundTriggerInjection.onSoundModelLoaded(soundModel, phraseArr, iInjectModelEvent, iInjectGlobalEvent);
+                iSoundTriggerInjection.onSoundModelLoaded(
+                        soundModel, phraseArr, iInjectModelEvent, iInjectGlobalEvent);
             } catch (RemoteException unused) {
                 this.mClient = null;
             }

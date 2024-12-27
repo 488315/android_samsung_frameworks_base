@@ -3,15 +3,16 @@ package android.text.format;
 import android.icu.util.Calendar;
 import android.icu.util.ULocale;
 import android.util.LruCache;
+
 import java.text.FieldPosition;
 import java.util.TimeZone;
 
 /* loaded from: classes4.dex */
 public final class DateIntervalFormat {
-    private static final LruCache<String, android.icu.text.DateIntervalFormat> CACHED_FORMATTERS = new LruCache<>(8);
+    private static final LruCache<String, android.icu.text.DateIntervalFormat> CACHED_FORMATTERS =
+            new LruCache<>(8);
 
-    private DateIntervalFormat() {
-    }
+    private DateIntervalFormat() {}
 
     public static String formatDateRange(long startMs, long endMs, int flags, String olsonId) {
         if ((flags & 8192) != 0) {
@@ -23,7 +24,12 @@ public final class DateIntervalFormat {
         return formatDateRange(icuLocale, icuTimeZone, startMs, endMs, flags);
     }
 
-    public static String formatDateRange(ULocale icuLocale, android.icu.util.TimeZone icuTimeZone, long startMs, long endMs, int flags) {
+    public static String formatDateRange(
+            ULocale icuLocale,
+            android.icu.util.TimeZone icuTimeZone,
+            long startMs,
+            long endMs,
+            int flags) {
         Calendar endCalendar;
         String stringBuffer;
         Calendar startCalendar = DateUtilsBridge.createIcuCalendar(icuTimeZone, icuLocale, startMs);
@@ -34,26 +40,39 @@ public final class DateIntervalFormat {
         }
         if (isExactlyMidnight(endCalendar)) {
             boolean showTime = (flags & 1) == 1;
-            boolean endsDayAfterStart = DateUtilsBridge.dayDistance(startCalendar, endCalendar) == 1;
-            if ((!showTime && startMs != endMs) || (endsDayAfterStart && !DateUtilsBridge.isDisplayMidnightUsingSkeleton(startCalendar))) {
+            boolean endsDayAfterStart =
+                    DateUtilsBridge.dayDistance(startCalendar, endCalendar) == 1;
+            if ((!showTime && startMs != endMs)
+                    || (endsDayAfterStart
+                            && !DateUtilsBridge.isDisplayMidnightUsingSkeleton(startCalendar))) {
                 endCalendar.add(5, -1);
             }
         }
         String skeleton = DateUtilsBridge.toSkeleton(startCalendar, endCalendar, flags);
         synchronized (CACHED_FORMATTERS) {
-            android.icu.text.DateIntervalFormat formatter = getFormatter(skeleton, icuLocale, icuTimeZone);
-            stringBuffer = formatter.format(startCalendar, endCalendar, new StringBuffer(), new FieldPosition(0)).toString();
+            android.icu.text.DateIntervalFormat formatter =
+                    getFormatter(skeleton, icuLocale, icuTimeZone);
+            stringBuffer =
+                    formatter
+                            .format(
+                                    startCalendar,
+                                    endCalendar,
+                                    new StringBuffer(),
+                                    new FieldPosition(0))
+                            .toString();
         }
         return stringBuffer;
     }
 
-    private static android.icu.text.DateIntervalFormat getFormatter(String skeleton, ULocale locale, android.icu.util.TimeZone icuTimeZone) {
+    private static android.icu.text.DateIntervalFormat getFormatter(
+            String skeleton, ULocale locale, android.icu.util.TimeZone icuTimeZone) {
         String key = skeleton + "\t" + locale + "\t" + icuTimeZone;
         android.icu.text.DateIntervalFormat formatter = CACHED_FORMATTERS.get(key);
         if (formatter != null) {
             return formatter;
         }
-        android.icu.text.DateIntervalFormat formatter2 = android.icu.text.DateIntervalFormat.getInstance(skeleton, locale);
+        android.icu.text.DateIntervalFormat formatter2 =
+                android.icu.text.DateIntervalFormat.getInstance(skeleton, locale);
         formatter2.setTimeZone(icuTimeZone);
         CACHED_FORMATTERS.put(key, formatter2);
         return formatter2;

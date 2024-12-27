@@ -37,6 +37,7 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseSetArray;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.XmlUtils;
 import com.android.internal.util.function.TriPredicate;
 import com.android.modules.utils.TypedXmlPullParser;
@@ -48,9 +49,8 @@ import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.HermesService$3$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.ProxyManager$$ExternalSyntheticOutline0;
-import com.android.server.notification.ManagedServices;
-import com.android.server.notification.NotificationManagerService;
 import com.android.server.utils.TimingsTraceAndSlog;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,7 +109,13 @@ public abstract class ManagedServices {
 
         @Override // android.content.ServiceConnection
         public final void onBindingDied(final ComponentName componentName) {
-            Slog.w(ManagedServices.this.TAG, this.val$userid + " " + ManagedServices.this.mConfig.caption + " binding died: " + componentName);
+            Slog.w(
+                    ManagedServices.this.TAG,
+                    this.val$userid
+                            + " "
+                            + ManagedServices.this.mConfig.caption
+                            + " binding died: "
+                            + componentName);
             synchronized (ManagedServices.this.mMutex) {
                 try {
                     int size = ManagedServices.this.mServices.size() - 1;
@@ -117,37 +123,54 @@ public abstract class ManagedServices {
                         if (size < 0) {
                             break;
                         }
-                        ManagedServiceInfo managedServiceInfo = (ManagedServiceInfo) ManagedServices.this.mServices.get(size);
-                        if (managedServiceInfo.isSystem && componentName.equals(managedServiceInfo.component)) {
+                        ManagedServiceInfo managedServiceInfo =
+                                (ManagedServiceInfo) ManagedServices.this.mServices.get(size);
+                        if (managedServiceInfo.isSystem
+                                && componentName.equals(managedServiceInfo.component)) {
                             this.mRemovedInfo = managedServiceInfo;
                             break;
                         }
                         size--;
                     }
                     ManagedServices.this.unbindService(this, componentName, this.val$userid);
-                    if (ManagedServices.this.mServicesRebinding.contains(this.val$servicesBindingTag)) {
-                        Slog.v(ManagedServices.this.TAG, ManagedServices.this.mConfig.caption + " not rebinding in user " + this.val$userid + " as a previous rebind attempt was made: " + componentName);
+                    if (ManagedServices.this.mServicesRebinding.contains(
+                            this.val$servicesBindingTag)) {
+                        Slog.v(
+                                ManagedServices.this.TAG,
+                                ManagedServices.this.mConfig.caption
+                                        + " not rebinding in user "
+                                        + this.val$userid
+                                        + " as a previous rebind attempt was made: "
+                                        + componentName);
                     } else {
                         ManagedServices.this.mServicesRebinding.add(this.val$servicesBindingTag);
                         Handler handler = ManagedServices.this.mHandler;
                         final int i = this.val$userid;
-                        handler.postDelayed(new Runnable() { // from class: com.android.server.notification.ManagedServices$1$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                ManagedServices.AnonymousClass1 anonymousClass1 = ManagedServices.AnonymousClass1.this;
-                                ComponentName componentName2 = componentName;
-                                int i2 = i;
-                                ManagedServices.ManagedServiceInfo managedServiceInfo2 = anonymousClass1.mRemovedInfo;
-                                if (managedServiceInfo2 == null || !managedServiceInfo2.isSystem) {
-                                    ManagedServices.this.reregisterService(componentName2, i2);
-                                    return;
-                                }
-                                ManagedServices managedServices = ManagedServices.this;
-                                synchronized (managedServices.mMutex) {
-                                    managedServices.registerServiceLocked(i2, componentName2, true);
-                                }
-                            }
-                        }, 10000L);
+                        handler.postDelayed(
+                                new Runnable() { // from class:
+                                                 // com.android.server.notification.ManagedServices$1$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        ManagedServices.AnonymousClass1 anonymousClass1 =
+                                                ManagedServices.AnonymousClass1.this;
+                                        ComponentName componentName2 = componentName;
+                                        int i2 = i;
+                                        ManagedServices.ManagedServiceInfo managedServiceInfo2 =
+                                                anonymousClass1.mRemovedInfo;
+                                        if (managedServiceInfo2 == null
+                                                || !managedServiceInfo2.isSystem) {
+                                            ManagedServices.this.reregisterService(
+                                                    componentName2, i2);
+                                            return;
+                                        }
+                                        ManagedServices managedServices = ManagedServices.this;
+                                        synchronized (managedServices.mMutex) {
+                                            managedServices.registerServiceLocked(
+                                                    i2, componentName2, true);
+                                        }
+                                    }
+                                },
+                                10000L);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -157,7 +180,9 @@ public abstract class ManagedServices {
 
         @Override // android.content.ServiceConnection
         public final void onNullBinding(ComponentName componentName) {
-            Slog.v(ManagedServices.this.TAG, "onNullBinding() called with: name = [" + componentName + "]");
+            Slog.v(
+                    ManagedServices.this.TAG,
+                    "onNullBinding() called with: name = [" + componentName + "]");
             ManagedServices.this.mContext.unbindService(this);
         }
 
@@ -168,7 +193,8 @@ public abstract class ManagedServices {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void onServiceConnected(android.content.ComponentName r14, android.os.IBinder r15) {
+        public final void onServiceConnected(
+                android.content.ComponentName r14, android.os.IBinder r15) {
             /*
                 r13 = this;
                 com.android.server.notification.ManagedServices r0 = com.android.server.notification.ManagedServices.this
@@ -242,12 +268,21 @@ public abstract class ManagedServices {
                 monitor-exit(r0)     // Catch: java.lang.Throwable -> L64
                 throw r13
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.ManagedServices.AnonymousClass1.onServiceConnected(android.content.ComponentName, android.os.IBinder):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.notification.ManagedServices.AnonymousClass1.onServiceConnected(android.content.ComponentName,"
+                        + " android.os.IBinder):void");
         }
 
         @Override // android.content.ServiceConnection
         public final void onServiceDisconnected(ComponentName componentName) {
-            Slog.v(ManagedServices.this.TAG, this.val$userid + " " + ManagedServices.this.mConfig.caption + " connection lost: " + componentName);
+            Slog.v(
+                    ManagedServices.this.TAG,
+                    this.val$userid
+                            + " "
+                            + ManagedServices.this.mConfig.caption
+                            + " connection lost: "
+                            + componentName);
         }
     }
 
@@ -275,7 +310,14 @@ public abstract class ManagedServices {
         public final int uid;
         public final int userid;
 
-        public ManagedServiceInfo(IInterface iInterface, ComponentName componentName, int i, boolean z, ServiceConnection serviceConnection, int i2, int i3) {
+        public ManagedServiceInfo(
+                IInterface iInterface,
+                ComponentName componentName,
+                int i,
+                boolean z,
+                ServiceConnection serviceConnection,
+                int i2,
+                int i3) {
             this.service = iInterface;
             this.component = componentName;
             this.userid = i;
@@ -295,7 +337,8 @@ public abstract class ManagedServices {
             ManagedServices.this.removeServiceImpl(this.service, this.userid);
         }
 
-        public final void dumpDebug(ProtoOutputStream protoOutputStream, ManagedServices managedServices) {
+        public final void dumpDebug(
+                ProtoOutputStream protoOutputStream, ManagedServices managedServices) {
             long start = protoOutputStream.start(2246267895812L);
             this.component.dumpDebug(protoOutputStream, 1146756268033L);
             protoOutputStream.write(1120986464258L, this.userid);
@@ -314,15 +357,20 @@ public abstract class ManagedServices {
             if (i2 == -1 || this.isSystem || i == -1 || i == i2) {
                 return true;
             }
-            if (this.targetSdkVersion < 21 || !ManagedServices.this.mUserProfiles.isCurrentProfile(i)) {
+            if (this.targetSdkVersion < 21
+                    || !ManagedServices.this.mUserProfiles.isCurrentProfile(i)) {
                 return false;
             }
             ManagedServices managedServices = ManagedServices.this;
             if (managedServices.mUserProfiles.isProfileUser(managedServices.mContext, i)) {
-                DevicePolicyManager devicePolicyManager = (DevicePolicyManager) ManagedServices.this.mContext.getSystemService("device_policy");
+                DevicePolicyManager devicePolicyManager =
+                        (DevicePolicyManager)
+                                ManagedServices.this.mContext.getSystemService("device_policy");
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    isNotificationListenerServicePermitted = devicePolicyManager.isNotificationListenerServicePermitted(this.component.getPackageName(), i);
+                    isNotificationListenerServicePermitted =
+                            devicePolicyManager.isNotificationListenerServicePermitted(
+                                    this.component.getPackageName(), i);
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
@@ -340,11 +388,22 @@ public abstract class ManagedServices {
                 return false;
             }
             ManagedServiceInfo managedServiceInfo = (ManagedServiceInfo) obj;
-            return this.userid == managedServiceInfo.userid && this.isSystem == managedServiceInfo.isSystem && this.targetSdkVersion == managedServiceInfo.targetSdkVersion && Objects.equals(this.service, managedServiceInfo.service) && Objects.equals(this.component, managedServiceInfo.component) && Objects.equals(this.connection, managedServiceInfo.connection);
+            return this.userid == managedServiceInfo.userid
+                    && this.isSystem == managedServiceInfo.isSystem
+                    && this.targetSdkVersion == managedServiceInfo.targetSdkVersion
+                    && Objects.equals(this.service, managedServiceInfo.service)
+                    && Objects.equals(this.component, managedServiceInfo.component)
+                    && Objects.equals(this.connection, managedServiceInfo.connection);
         }
 
         public final int hashCode() {
-            return Objects.hash(this.service, this.component, Integer.valueOf(this.userid), Boolean.valueOf(this.isSystem), this.connection, Integer.valueOf(this.targetSdkVersion));
+            return Objects.hash(
+                    this.service,
+                    this.component,
+                    Integer.valueOf(this.userid),
+                    Boolean.valueOf(this.isSystem),
+                    this.connection,
+                    Integer.valueOf(this.targetSdkVersion));
         }
 
         public final boolean isEnabledForCurrentProfiles() {
@@ -356,7 +415,9 @@ public abstract class ManagedServices {
                 return false;
             }
             synchronized (ManagedServices.this.mMutex) {
-                contains = ManagedServices.this.mEnabledServicesForCurrentProfiles.contains(this.component);
+                contains =
+                        ManagedServices.this.mEnabledServicesForCurrentProfiles.contains(
+                                this.component);
             }
             return contains;
         }
@@ -427,7 +488,9 @@ public abstract class ManagedServices {
                     if (userInfo.isProfile()) {
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            if (((UserManager) context.getSystemService(UserManager.class)).getProfileParent(userInfo.id) != null) {
+                            if (((UserManager) context.getSystemService(UserManager.class))
+                                            .getProfileParent(userInfo.id)
+                                    != null) {
                                 r7 = true;
                             }
                         } finally {
@@ -457,7 +520,11 @@ public abstract class ManagedServices {
         }
     }
 
-    public ManagedServices(Context context, Object obj, UserProfiles userProfiles, IPackageManager iPackageManager) {
+    public ManagedServices(
+            Context context,
+            Object obj,
+            UserProfiles userProfiles,
+            IPackageManager iPackageManager) {
         String simpleName = getClass().getSimpleName();
         this.TAG = simpleName;
         this.DEBUG = Log.isLoggable(simpleName, 3);
@@ -488,7 +555,8 @@ public abstract class ManagedServices {
         return unflattenFromString != null ? unflattenFromString.getPackageName() : str;
     }
 
-    public static void populateComponentsToUnbind(boolean z, Set set, SparseArray sparseArray, SparseArray sparseArray2) {
+    public static void populateComponentsToUnbind(
+            boolean z, Set set, SparseArray sparseArray, SparseArray sparseArray2) {
         Iterator it = ((ArraySet) set).iterator();
         while (it.hasNext()) {
             ManagedServiceInfo managedServiceInfo = (ManagedServiceInfo) it.next();
@@ -570,7 +638,9 @@ public abstract class ManagedServices {
 
     public final void checkNotNull(IInterface iInterface) {
         if (iInterface == null) {
-            throw new IllegalArgumentException(AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mConfig.caption, " must not be null"));
+            throw new IllegalArgumentException(
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                            new StringBuilder(), this.mConfig.caption, " must not be null"));
         }
     }
 
@@ -580,13 +650,19 @@ public abstract class ManagedServices {
         if (serviceFromTokenLocked != null) {
             return serviceFromTokenLocked;
         }
-        throw new SecurityException("Disallowed call from unknown " + this.mConfig.caption + ": " + iInterface + " " + iInterface.getClass());
+        throw new SecurityException(
+                "Disallowed call from unknown "
+                        + this.mConfig.caption
+                        + ": "
+                        + iInterface
+                        + " "
+                        + iInterface.getClass());
     }
 
-    public void clearApprovedList() {
-    }
+    public void clearApprovedList() {}
 
-    public final void dump(ProtoOutputStream protoOutputStream, NotificationManagerService.DumpFilter dumpFilter) {
+    public final void dump(
+            ProtoOutputStream protoOutputStream, NotificationManagerService.DumpFilter dumpFilter) {
         int i;
         protoOutputStream.write(1138166333441L, this.mConfig.caption);
         synchronized (this.mApproved) {
@@ -668,7 +744,8 @@ public abstract class ManagedServices {
         int i;
         SparseSetArray sparseSetArray;
         Bundle bundle;
-        ProxyManager$$ExternalSyntheticOutline0.m(printWriter, this.mConfig.caption, "s:", new StringBuilder("    Allowed "));
+        ProxyManager$$ExternalSyntheticOutline0.m(
+                printWriter, this.mConfig.caption, "s:", new StringBuilder("    Allowed "));
         synchronized (this.mApproved) {
             try {
                 int size = this.mApproved.size();
@@ -701,7 +778,11 @@ public abstract class ManagedServices {
                 for (Integer num2 : this.mUserSetServices.keySet()) {
                     int intValue2 = num2.intValue();
                     if (this.mIsUserChanged.get(num2) == null) {
-                        printWriter.println("      userId=" + intValue2 + " value=" + this.mUserSetServices.get(num2));
+                        printWriter.println(
+                                "      userId="
+                                        + intValue2
+                                        + " value="
+                                        + this.mUserSetServices.get(num2));
                     }
                 }
             } finally {
@@ -709,7 +790,12 @@ public abstract class ManagedServices {
         }
         synchronized (this.mMutex) {
             try {
-                printWriter.println("    All " + this.mConfig.caption + "s (" + this.mEnabledServicesForCurrentProfiles.size() + ") enabled for current profiles:");
+                printWriter.println(
+                        "    All "
+                                + this.mConfig.caption
+                                + "s ("
+                                + this.mEnabledServicesForCurrentProfiles.size()
+                                + ") enabled for current profiles:");
                 Iterator it = this.mEnabledServicesForCurrentProfiles.iterator();
                 while (it.hasNext()) {
                     ComponentName componentName = (ComponentName) it.next();
@@ -717,7 +803,8 @@ public abstract class ManagedServices {
                         printWriter.println("      " + componentName);
                     }
                 }
-                printWriter.println("    Live " + this.mConfig.caption + "s (" + this.mServices.size() + "):");
+                printWriter.println(
+                        "    Live " + this.mConfig.caption + "s (" + this.mServices.size() + "):");
                 Iterator it2 = this.mServices.iterator();
                 while (it2.hasNext()) {
                     ManagedServiceInfo managedServiceInfo = (ManagedServiceInfo) it2.next();
@@ -740,7 +827,8 @@ public abstract class ManagedServices {
         synchronized (this.mSnoozing) {
             sparseSetArray = new SparseSetArray(this.mSnoozing);
         }
-        printWriter.println("    Snoozed " + this.mConfig.caption + "s (" + sparseSetArray.size() + "):");
+        printWriter.println(
+                "    Snoozed " + this.mConfig.caption + "s (" + sparseSetArray.size() + "):");
         for (i = 0; i < sparseSetArray.size(); i++) {
             printWriter.println("      User: " + sparseSetArray.keyAt(i));
             Iterator it3 = sparseSetArray.valuesAt(i).iterator();
@@ -750,10 +838,17 @@ public abstract class ManagedServices {
                 StringBuilder sb3 = new StringBuilder("        ");
                 sb3.append(componentName2.flattenToShortString());
                 boolean z = true;
-                if (serviceInfo != null && (bundle = serviceInfo.metaData) != null && bundle.containsKey("android.service.notification.default_autobind_listenerservice")) {
-                    z = serviceInfo.metaData.getBoolean("android.service.notification.default_autobind_listenerservice", true);
+                if (serviceInfo != null
+                        && (bundle = serviceInfo.metaData) != null
+                        && bundle.containsKey(
+                                "android.service.notification.default_autobind_listenerservice")) {
+                    z =
+                            serviceInfo.metaData.getBoolean(
+                                    "android.service.notification.default_autobind_listenerservice",
+                                    true);
                 }
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb3, z ? "" : " (META_DATA_DEFAULT_AUTOBIND=false)", printWriter);
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        sb3, z ? "" : " (META_DATA_DEFAULT_AUTOBIND=false)", printWriter);
             }
         }
     }
@@ -785,11 +880,14 @@ public abstract class ManagedServices {
                                 for (int i4 = 0; i4 < arraySet3.size(); i4++) {
                                     String str = (String) arraySet3.valueAt(i4);
                                     if (!TextUtils.isEmpty(str)) {
-                                        ComponentName unflattenFromString = ComponentName.unflattenFromString(str);
+                                        ComponentName unflattenFromString =
+                                                ComponentName.unflattenFromString(str);
                                         if (unflattenFromString != null) {
                                             arraySet.add(unflattenFromString);
                                         } else {
-                                            arraySet.addAll((Collection) queryPackageForServices(0, i2, str));
+                                            arraySet.addAll(
+                                                    (Collection)
+                                                            queryPackageForServices(0, i2, str));
                                         }
                                     }
                                 }
@@ -809,11 +907,13 @@ public abstract class ManagedServices {
         ArrayList arrayList = new ArrayList();
         synchronized (this.mApproved) {
             try {
-                ArrayMap arrayMap = (ArrayMap) this.mApproved.getOrDefault(Integer.valueOf(i), new ArrayMap());
+                ArrayMap arrayMap =
+                        (ArrayMap) this.mApproved.getOrDefault(Integer.valueOf(i), new ArrayMap());
                 for (int i2 = 0; i2 < arrayMap.size(); i2++) {
                     ArraySet arraySet = (ArraySet) arrayMap.valueAt(i2);
                     for (int i3 = 0; i3 < arraySet.size(); i3++) {
-                        ComponentName unflattenFromString = ComponentName.unflattenFromString((String) arraySet.valueAt(i3));
+                        ComponentName unflattenFromString =
+                                ComponentName.unflattenFromString((String) arraySet.valueAt(i3));
                         if (unflattenFromString != null) {
                             arrayList.add(unflattenFromString);
                         }
@@ -830,7 +930,8 @@ public abstract class ManagedServices {
         ArrayList arrayList = new ArrayList();
         synchronized (this.mApproved) {
             try {
-                ArrayMap arrayMap = (ArrayMap) this.mApproved.getOrDefault(Integer.valueOf(i), new ArrayMap());
+                ArrayMap arrayMap =
+                        (ArrayMap) this.mApproved.getOrDefault(Integer.valueOf(i), new ArrayMap());
                 for (int i2 = 0; i2 < arrayMap.size(); i2++) {
                     ArraySet arraySet = (ArraySet) arrayMap.valueAt(i2);
                     for (int i3 = 0; i3 < arraySet.size(); i3++) {
@@ -886,7 +987,8 @@ public abstract class ManagedServices {
             try {
                 int size = this.mServices.size();
                 for (int i = 0; i < size; i++) {
-                    ManagedServiceInfo managedServiceInfo = (ManagedServiceInfo) this.mServices.get(i);
+                    ManagedServiceInfo managedServiceInfo =
+                            (ManagedServiceInfo) this.mServices.get(i);
                     if (managedServiceInfo.service.asBinder() == asBinder) {
                         return managedServiceInfo;
                     }
@@ -930,7 +1032,8 @@ public abstract class ManagedServices {
         }
         synchronized (this.mApproved) {
             try {
-                ArrayMap arrayMap = (ArrayMap) this.mApproved.getOrDefault(Integer.valueOf(i), new ArrayMap());
+                ArrayMap arrayMap =
+                        (ArrayMap) this.mApproved.getOrDefault(Integer.valueOf(i), new ArrayMap());
                 for (int i2 = 0; i2 < arrayMap.size(); i2++) {
                     Iterator it = ((ArraySet) arrayMap.valueAt(i2)).iterator();
                     while (it.hasNext()) {
@@ -955,7 +1058,8 @@ public abstract class ManagedServices {
     public final boolean isPackageOrComponentAllowed(int i, String str) {
         synchronized (this.mApproved) {
             try {
-                ArrayMap arrayMap = (ArrayMap) this.mApproved.getOrDefault(Integer.valueOf(i), new ArrayMap());
+                ArrayMap arrayMap =
+                        (ArrayMap) this.mApproved.getOrDefault(Integer.valueOf(i), new ArrayMap());
                 for (int i2 = 0; i2 < arrayMap.size(); i2++) {
                     if (((ArraySet) arrayMap.valueAt(i2)).contains(str)) {
                         return true;
@@ -984,7 +1088,8 @@ public abstract class ManagedServices {
     }
 
     public boolean isValidEntry(int i, String str) {
-        return !TextUtils.isEmpty(str) && queryPackageForServices(0, i, getPackageName(str)).size() > 0;
+        return !TextUtils.isEmpty(str)
+                && queryPackageForServices(0, i, getPackageName(str)).size() > 0;
     }
 
     public abstract void loadDefaultsFromConfig();
@@ -993,11 +1098,15 @@ public abstract class ManagedServices {
         for (UserInfo userInfo : this.mUm.getUsers()) {
             ContentResolver contentResolver = this.mContext.getContentResolver();
             if (!TextUtils.isEmpty(getConfig().secureSettingName)) {
-                String stringForUser = Settings.Secure.getStringForUser(contentResolver, getConfig().secureSettingName, userInfo.id);
+                String stringForUser =
+                        Settings.Secure.getStringForUser(
+                                contentResolver, getConfig().secureSettingName, userInfo.id);
                 addApprovedList(userInfo.id, stringForUser, stringForUser, true);
             }
             if (!TextUtils.isEmpty(getConfig().secondarySettingName)) {
-                String stringForUser2 = Settings.Secure.getStringForUser(contentResolver, getConfig().secondarySettingName, userInfo.id);
+                String stringForUser2 =
+                        Settings.Secure.getStringForUser(
+                                contentResolver, getConfig().secondarySettingName, userInfo.id);
                 addApprovedList(userInfo.id, stringForUser2, stringForUser2, false);
             }
         }
@@ -1068,14 +1177,19 @@ public abstract class ManagedServices {
                             }
                         }
                         i3 = min;
-                        ArraySet arraySet2 = (ArraySet) this.mUserSetServices.get(Integer.valueOf(userId));
+                        ArraySet arraySet2 =
+                                (ArraySet) this.mUserSetServices.get(Integer.valueOf(userId));
                         if (arraySet2 != null) {
                             for (int size3 = arraySet2.size() - 1; size3 >= 0; size3--) {
                                 String str5 = (String) arraySet2.valueAt(size3);
                                 if (TextUtils.equals(str2, getPackageName(str5))) {
                                     arraySet2.removeAt(size3);
                                     if (this.DEBUG) {
-                                        Slog.v(this.TAG, "Removing " + str5 + " from user-set list; uninstalled");
+                                        Slog.v(
+                                                this.TAG,
+                                                "Removing "
+                                                        + str5
+                                                        + " from user-set list; uninstalled");
                                     }
                                 }
                             }
@@ -1108,7 +1222,8 @@ public abstract class ManagedServices {
                         int userId2 = UserHandle.getUserId(i10);
                         synchronized (this.mApproved) {
                             try {
-                                ArrayMap arrayMap2 = (ArrayMap) this.mApproved.get(Integer.valueOf(userId2));
+                                ArrayMap arrayMap2 =
+                                        (ArrayMap) this.mApproved.get(Integer.valueOf(userId2));
                                 if (arrayMap2 == null) {
                                     i = length;
                                 } else {
@@ -1117,21 +1232,37 @@ public abstract class ManagedServices {
                                         int size4 = arraySet3.size() - 1;
                                         while (size4 >= 0) {
                                             String str7 = (String) arraySet3.valueAt(size4);
-                                            if (!TextUtils.equals(getPackageName(str7), str6) || (unflattenFromString = ComponentName.unflattenFromString(str7)) == null) {
+                                            if (!TextUtils.equals(getPackageName(str7), str6)
+                                                    || (unflattenFromString =
+                                                                    ComponentName
+                                                                            .unflattenFromString(
+                                                                                    str7))
+                                                            == null) {
                                                 i2 = length;
                                             } else {
-                                                ServiceInfo serviceInfo = getServiceInfo(userId2, unflattenFromString);
+                                                ServiceInfo serviceInfo =
+                                                        getServiceInfo(
+                                                                userId2, unflattenFromString);
                                                 if (serviceInfo == null) {
                                                     i2 = length;
                                                     equals = false;
                                                 } else {
                                                     i2 = length;
-                                                    equals = this.mConfig.bindPermission.equals(serviceInfo.permission);
+                                                    equals =
+                                                            this.mConfig.bindPermission.equals(
+                                                                    serviceInfo.permission);
                                                 }
                                                 if (!equals) {
                                                     arraySet3.removeAt(size4);
                                                     if (this.DEBUG) {
-                                                        Slog.v(this.TAG, "Removing " + str7 + " from approved list; no bind permission found " + this.mConfig.bindPermission);
+                                                        Slog.v(
+                                                                this.TAG,
+                                                                "Removing "
+                                                                        + str7
+                                                                        + " from approved list; no"
+                                                                        + " bind permission found "
+                                                                        + this.mConfig
+                                                                                .bindPermission);
                                                     }
                                                 }
                                             }
@@ -1171,15 +1302,31 @@ public abstract class ManagedServices {
         if (this.mUseXml) {
             return;
         }
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m("Restored managed service setting: ", str, this.TAG);
-        if (this.mConfig.secureSettingName.equals(str) || ((str3 = this.mConfig.secondarySettingName) != null && str3.equals(str))) {
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                "Restored managed service setting: ", str, this.TAG);
+        if (this.mConfig.secureSettingName.equals(str)
+                || ((str3 = this.mConfig.secondarySettingName) != null && str3.equals(str))) {
             if (i < 26) {
                 boolean equals = this.mConfig.secureSettingName.equals(str);
                 synchronized (this.mApproved) {
-                    join = String.join(":", (ArraySet) ((ArrayMap) this.mApproved.getOrDefault(Integer.valueOf(i2), new ArrayMap())).getOrDefault(Boolean.valueOf(equals), new ArraySet()));
+                    join =
+                            String.join(
+                                    ":",
+                                    (ArraySet)
+                                            ((ArrayMap)
+                                                            this.mApproved.getOrDefault(
+                                                                    Integer.valueOf(i2),
+                                                                    new ArrayMap()))
+                                                    .getOrDefault(
+                                                            Boolean.valueOf(equals),
+                                                            new ArraySet()));
                 }
                 if (!TextUtils.isEmpty(join)) {
-                    str2 = !TextUtils.isEmpty(str2) ? AnyMotionDetector$$ExternalSyntheticOutline0.m(str2, ":", join) : join;
+                    str2 =
+                            !TextUtils.isEmpty(str2)
+                                    ? AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                                            str2, ":", join)
+                                    : join;
                 }
             }
             if (this instanceof NotificationManagerService.NotificationListeners) {
@@ -1187,7 +1334,11 @@ public abstract class ManagedServices {
             }
             Iterator it = this.mUm.getUsers().iterator();
             while (it.hasNext()) {
-                addApprovedList(((UserInfo) it.next()).id, str2, str2, this.mConfig.secureSettingName.equals(str));
+                addApprovedList(
+                        ((UserInfo) it.next()).id,
+                        str2,
+                        str2,
+                        this.mConfig.secureSettingName.equals(str));
             }
             Slog.d(this.TAG, "Done loading approved values from settings");
             rebindServices(i2, false);
@@ -1195,7 +1346,8 @@ public abstract class ManagedServices {
     }
 
     public void onUserRemoved(int i) {
-        HermesService$3$$ExternalSyntheticOutline0.m(i, "Removing approved services for removed user ", this.TAG);
+        HermesService$3$$ExternalSyntheticOutline0.m(
+                i, "Removing approved services for removed user ", this.TAG);
         synchronized (this.mApproved) {
             this.mApproved.remove(Integer.valueOf(i));
         }
@@ -1216,7 +1368,8 @@ public abstract class ManagedServices {
         rebindServices(i, true);
     }
 
-    public final void populateComponentsToBind(SparseArray sparseArray, IntArray intArray, SparseArray sparseArray2) {
+    public final void populateComponentsToBind(
+            SparseArray sparseArray, IntArray intArray, SparseArray sparseArray2) {
         this.mEnabledServicesForCurrentProfiles.clear();
         this.mEnabledServicesPackageNames.clear();
         int size = intArray.size();
@@ -1240,7 +1393,8 @@ public abstract class ManagedServices {
                 sparseArray.put(i2, hashSet);
                 this.mEnabledServicesForCurrentProfiles.addAll(arraySet);
                 for (int i3 = 0; i3 < arraySet.size(); i3++) {
-                    this.mEnabledServicesPackageNames.add(((ComponentName) arraySet.valueAt(i3)).getPackageName());
+                    this.mEnabledServicesPackageNames.add(
+                            ((ComponentName) arraySet.valueAt(i3)).getPackageName());
                 }
             }
         }
@@ -1254,7 +1408,8 @@ public abstract class ManagedServices {
         if (!TextUtils.isEmpty(str)) {
             intent.setPackage(str);
         }
-        List queryIntentServicesAsUser = packageManager.queryIntentServicesAsUser(intent, i | 132, i2);
+        List queryIntentServicesAsUser =
+                packageManager.queryIntentServicesAsUser(intent, i | 132, i2);
         boolean z = this.DEBUG;
         String str2 = this.TAG;
         if (z) {
@@ -1263,8 +1418,10 @@ public abstract class ManagedServices {
         if (queryIntentServicesAsUser != null) {
             int size = queryIntentServicesAsUser.size();
             for (int i3 = 0; i3 < size; i3++) {
-                ServiceInfo serviceInfo = ((ResolveInfo) queryIntentServicesAsUser.get(i3)).serviceInfo;
-                ComponentName componentName = new ComponentName(serviceInfo.packageName, serviceInfo.name);
+                ServiceInfo serviceInfo =
+                        ((ResolveInfo) queryIntentServicesAsUser.get(i3)).serviceInfo;
+                ComponentName componentName =
+                        new ComponentName(serviceInfo.packageName, serviceInfo.name);
                 if (config.bindPermission.equals(serviceInfo.permission)) {
                     arraySet.add(componentName);
                 } else {
@@ -1275,17 +1432,18 @@ public abstract class ManagedServices {
                     sb.append("/");
                     sb.append(serviceInfo.name);
                     sb.append(": it does not require the permission ");
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, config.bindPermission, str2);
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            sb, config.bindPermission, str2);
                 }
             }
         }
         return arraySet;
     }
 
-    public void readExtraTag(TypedXmlPullParser typedXmlPullParser, String str) {
-    }
+    public void readExtraTag(TypedXmlPullParser typedXmlPullParser, String str) {}
 
-    public final void readXml(TypedXmlPullParser typedXmlPullParser, TriPredicate triPredicate, boolean z, int i) {
+    public final void readXml(
+            TypedXmlPullParser typedXmlPullParser, TriPredicate triPredicate, boolean z, int i) {
         String readStringAttribute = XmlUtils.readStringAttribute(typedXmlPullParser, "version");
         String readStringAttribute2 = XmlUtils.readStringAttribute(typedXmlPullParser, "defaults");
         if (!TextUtils.isEmpty(readStringAttribute2)) {
@@ -1294,7 +1452,8 @@ public abstract class ManagedServices {
                 for (int i2 = 0; i2 < split.length; i2++) {
                     try {
                         if (!TextUtils.isEmpty(split[i2])) {
-                            ComponentName unflattenFromString = ComponentName.unflattenFromString(split[i2]);
+                            ComponentName unflattenFromString =
+                                    ComponentName.unflattenFromString(split[i2]);
                             if (unflattenFromString != null) {
                                 this.mDefaultPackages.add(unflattenFromString.getPackageName());
                                 this.mDefaultComponents.add(unflattenFromString);
@@ -1319,20 +1478,32 @@ public abstract class ManagedServices {
             }
             if (next == 2) {
                 if ("service_listing".equals(name)) {
-                    BootReceiver$$ExternalSyntheticOutline0.m59m(new StringBuilder("Read "), this.mConfig.caption, " permissions from xml", this.TAG);
-                    String readStringAttribute3 = XmlUtils.readStringAttribute(typedXmlPullParser, "approved");
-                    int attributeInt = z ? i : typedXmlPullParser.getAttributeInt((String) null, "user", 0);
-                    boolean attributeBoolean = typedXmlPullParser.getAttributeBoolean((String) null, "primary", true);
-                    String readStringAttribute4 = XmlUtils.readStringAttribute(typedXmlPullParser, "user_changed");
-                    String readStringAttribute5 = XmlUtils.readStringAttribute(typedXmlPullParser, "user_set");
-                    String readStringAttribute6 = XmlUtils.readStringAttribute(typedXmlPullParser, "user_set_services");
+                    BootReceiver$$ExternalSyntheticOutline0.m59m(
+                            new StringBuilder("Read "),
+                            this.mConfig.caption,
+                            " permissions from xml",
+                            this.TAG);
+                    String readStringAttribute3 =
+                            XmlUtils.readStringAttribute(typedXmlPullParser, "approved");
+                    int attributeInt =
+                            z ? i : typedXmlPullParser.getAttributeInt((String) null, "user", 0);
+                    boolean attributeBoolean =
+                            typedXmlPullParser.getAttributeBoolean((String) null, "primary", true);
+                    String readStringAttribute4 =
+                            XmlUtils.readStringAttribute(typedXmlPullParser, "user_changed");
+                    String readStringAttribute5 =
+                            XmlUtils.readStringAttribute(typedXmlPullParser, "user_set");
+                    String readStringAttribute6 =
+                            XmlUtils.readStringAttribute(typedXmlPullParser, "user_set_services");
                     if (!"4".equals(readStringAttribute)) {
                         if (readStringAttribute6 == null) {
-                            if (readStringAttribute5 == null || !Boolean.valueOf(readStringAttribute5).booleanValue()) {
+                            if (readStringAttribute5 == null
+                                    || !Boolean.valueOf(readStringAttribute5).booleanValue()) {
                                 readStringAttribute6 = "";
                             } else {
                                 synchronized (this.mApproved) {
-                                    this.mIsUserChanged.put(Integer.valueOf(attributeInt), Boolean.TRUE);
+                                    this.mIsUserChanged.put(
+                                            Integer.valueOf(attributeInt), Boolean.TRUE);
                                 }
                                 readStringAttribute6 = readStringAttribute3;
                                 z2 = false;
@@ -1343,16 +1514,30 @@ public abstract class ManagedServices {
                         readStringAttribute6 = TextUtils.emptyIfNull(readStringAttribute6);
                     } else {
                         synchronized (this.mApproved) {
-                            this.mIsUserChanged.put(Integer.valueOf(attributeInt), Boolean.valueOf(readStringAttribute4));
+                            this.mIsUserChanged.put(
+                                    Integer.valueOf(attributeInt),
+                                    Boolean.valueOf(readStringAttribute4));
                         }
-                        readStringAttribute6 = Boolean.valueOf(readStringAttribute4).booleanValue() ? readStringAttribute3 : "";
+                        readStringAttribute6 =
+                                Boolean.valueOf(readStringAttribute4).booleanValue()
+                                        ? readStringAttribute3
+                                        : "";
                         if (z && readStringAttribute3.isEmpty()) {
                             clearApprovedList();
                         }
                     }
-                    if (triPredicate == null || triPredicate.test(getPackageName(readStringAttribute3), Integer.valueOf(attributeInt), getRequiredPermission()) || readStringAttribute3.isEmpty()) {
+                    if (triPredicate == null
+                            || triPredicate.test(
+                                    getPackageName(readStringAttribute3),
+                                    Integer.valueOf(attributeInt),
+                                    getRequiredPermission())
+                            || readStringAttribute3.isEmpty()) {
                         if (this.mUm.getUserInfo(attributeInt) != null) {
-                            addApprovedList(attributeInt, readStringAttribute3, readStringAttribute6, attributeBoolean);
+                            addApprovedList(
+                                    attributeInt,
+                                    readStringAttribute3,
+                                    readStringAttribute6,
+                                    attributeBoolean);
                         }
                         this.mUseXml = true;
                     }
@@ -1361,7 +1546,10 @@ public abstract class ManagedServices {
                 }
             }
         }
-        if (TextUtils.isEmpty(readStringAttribute) || "1".equals(readStringAttribute) || "2".equals(readStringAttribute) || "3".equals(readStringAttribute)) {
+        if (TextUtils.isEmpty(readStringAttribute)
+                || "1".equals(readStringAttribute)
+                || "2".equals(readStringAttribute)
+                || "3".equals(readStringAttribute)) {
             upgradeDefaultsXmlVersion();
         }
         if (z2) {
@@ -1392,14 +1580,29 @@ public abstract class ManagedServices {
             for (ComponentName componentName : (Set) sparseArray.get(keyAt)) {
                 ServiceInfo serviceInfo = getServiceInfo(keyAt, componentName);
                 if (serviceInfo == null) {
-                    Slog.w(this.TAG, "Not binding " + this.mConfig.caption + " service " + componentName + ": service not found");
+                    Slog.w(
+                            this.TAG,
+                            "Not binding "
+                                    + this.mConfig.caption
+                                    + " service "
+                                    + componentName
+                                    + ": service not found");
                 } else if (this.mConfig.bindPermission.equals(serviceInfo.permission)) {
                     Bundle bundle = serviceInfo.metaData;
                     boolean z2 = true;
-                    if (!((bundle == null || !bundle.containsKey("android.service.notification.default_autobind_listenerservice")) ? true : serviceInfo.metaData.getBoolean("android.service.notification.default_autobind_listenerservice", true))) {
+                    if (!((bundle == null
+                                    || !bundle.containsKey(
+                                            "android.service.notification.default_autobind_listenerservice"))
+                            ? true
+                            : serviceInfo.metaData.getBoolean(
+                                    "android.service.notification.default_autobind_listenerservice",
+                                    true))) {
                         synchronized (this.mMutex) {
                             try {
-                                if (!isBound(componentName, keyAt) && !this.mServicesRebinding.contains(Pair.create(componentName, Integer.valueOf(keyAt)))) {
+                                if (!isBound(componentName, keyAt)
+                                        && !this.mServicesRebinding.contains(
+                                                Pair.create(
+                                                        componentName, Integer.valueOf(keyAt)))) {
                                     z2 = false;
                                 }
                             } finally {
@@ -1407,14 +1610,21 @@ public abstract class ManagedServices {
                         }
                         if (!z2) {
                             synchronized (this.mSnoozing) {
-                                Slog.d(this.TAG, "Not binding " + this.mConfig.caption + " service " + componentName + ": has META_DATA_DEFAULT_AUTOBIND = false");
+                                Slog.d(
+                                        this.TAG,
+                                        "Not binding "
+                                                + this.mConfig.caption
+                                                + " service "
+                                                + componentName
+                                                + ": has META_DATA_DEFAULT_AUTOBIND = false");
                                 this.mSnoozing.add(keyAt, componentName);
                             }
                         }
                     }
                     String str = this.TAG;
                     StringBuilder sb = new StringBuilder("enabling ");
-                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(keyAt, this.mConfig.caption, " for ", ": ", sb);
+                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                            keyAt, this.mConfig.caption, " for ", ": ", sb);
                     sb.append(componentName);
                     Slog.v(str, sb.toString());
                     registerService(serviceInfo, keyAt);
@@ -1425,7 +1635,8 @@ public abstract class ManagedServices {
                     sb2.append(" service ");
                     sb2.append(componentName);
                     sb2.append(": it does not require the permission ");
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb2, this.mConfig.bindPermission, str2);
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            sb2, this.mConfig.bindPermission, str2);
                 }
             }
         }
@@ -1479,12 +1690,21 @@ public abstract class ManagedServices {
                 break;
             }
             ManagedServiceInfo managedServiceInfo = (ManagedServiceInfo) this.mServices.get(size);
-            if (componentName.equals(managedServiceInfo.component) && managedServiceInfo.userid == i) {
-                Slog.v(str, "    disconnecting old " + config.caption + ": " + managedServiceInfo.service);
+            if (componentName.equals(managedServiceInfo.component)
+                    && managedServiceInfo.userid == i) {
+                Slog.v(
+                        str,
+                        "    disconnecting old "
+                                + config.caption
+                                + ": "
+                                + managedServiceInfo.service);
                 removeServiceLocked(size);
                 ServiceConnection serviceConnection = managedServiceInfo.connection;
                 if (serviceConnection != null) {
-                    unbindService(serviceConnection, managedServiceInfo.component, managedServiceInfo.userid);
+                    unbindService(
+                            serviceConnection,
+                            managedServiceInfo.component,
+                            managedServiceInfo.userid);
                 }
             }
             size--;
@@ -1494,9 +1714,19 @@ public abstract class ManagedServices {
         intent.putExtra("android.intent.extra.client_label", config.clientLabel);
         ActivityOptions makeBasic = ActivityOptions.makeBasic();
         makeBasic.setPendingIntentCreatorBackgroundActivityStartMode(2);
-        intent.putExtra("android.intent.extra.client_intent", PendingIntent.getActivity(this.mContext, 0, new Intent(config.settingsAction), 67108864, makeBasic.toBundle()));
+        intent.putExtra(
+                "android.intent.extra.client_intent",
+                PendingIntent.getActivity(
+                        this.mContext,
+                        0,
+                        new Intent(config.settingsAction),
+                        67108864,
+                        makeBasic.toBundle()));
         try {
-            applicationInfo = this.mContext.getPackageManager().getApplicationInfoAsUser(componentName.getPackageName(), 0, i);
+            applicationInfo =
+                    this.mContext
+                            .getPackageManager()
+                            .getApplicationInfoAsUser(componentName.getPackageName(), 0, i);
         } catch (PackageManager.NameNotFoundException unused) {
             applicationInfo = null;
         }
@@ -1504,11 +1734,17 @@ public abstract class ManagedServices {
         int i3 = applicationInfo != null ? applicationInfo.uid : -1;
         try {
             Slog.v(str, "binding: " + intent);
-            if (this.mContext.bindServiceAsUser(intent, new AnonymousClass1(i, create, z, i2, i3), getBindFlags(), new UserHandle(i))) {
+            if (this.mContext.bindServiceAsUser(
+                    intent,
+                    new AnonymousClass1(i, create, z, i2, i3),
+                    getBindFlags(),
+                    new UserHandle(i))) {
                 return;
             }
             this.mServicesBound.remove(create);
-            Slog.w(str, "Unable to bind " + config.caption + " service: " + intent + " in user " + i);
+            Slog.w(
+                    str,
+                    "Unable to bind " + config.caption + " service: " + intent + " in user " + i);
         } catch (SecurityException e) {
             this.mServicesBound.remove(create);
             Slog.e(str, "Unable to bind " + config.caption + " service: " + intent, e);
@@ -1524,9 +1760,13 @@ public abstract class ManagedServices {
             try {
                 managedServiceInfo = null;
                 for (int size = this.mServices.size() - 1; size >= 0; size--) {
-                    ManagedServiceInfo managedServiceInfo2 = (ManagedServiceInfo) this.mServices.get(size);
-                    if (managedServiceInfo2.service.asBinder() == iInterface.asBinder() && managedServiceInfo2.userid == i) {
-                        Slog.d(this.TAG, "Removing active service " + managedServiceInfo2.component);
+                    ManagedServiceInfo managedServiceInfo2 =
+                            (ManagedServiceInfo) this.mServices.get(size);
+                    if (managedServiceInfo2.service.asBinder() == iInterface.asBinder()
+                            && managedServiceInfo2.userid == i) {
+                        Slog.d(
+                                this.TAG,
+                                "Removing active service " + managedServiceInfo2.component);
                         managedServiceInfo = removeServiceLocked(size);
                     }
                 }
@@ -1546,7 +1786,9 @@ public abstract class ManagedServices {
     public void reregisterService(ComponentName componentName, int i) {
         ServiceInfo serviceInfo;
         boolean z = false;
-        if ((isPackageOrComponentAllowed(i, componentName.flattenToString()) || isPackageOrComponentAllowed(i, componentName.getPackageName())) && (serviceInfo = getServiceInfo(i, componentName)) != null) {
+        if ((isPackageOrComponentAllowed(i, componentName.flattenToString())
+                        || isPackageOrComponentAllowed(i, componentName.getPackageName()))
+                && (serviceInfo = getServiceInfo(i, componentName)) != null) {
             z = this.mConfig.bindPermission.equals(serviceInfo.permission);
         }
         if (z) {
@@ -1564,8 +1806,10 @@ public abstract class ManagedServices {
                 arrayList = new ArrayList(this.mDefaultComponents.size());
                 arrayList2 = new ArrayList(this.mDefaultComponents.size());
                 for (int i2 = 0; i2 < this.mDefaultComponents.size() && arraySet.size() > 0; i2++) {
-                    ComponentName componentName = (ComponentName) this.mDefaultComponents.valueAt(i2);
-                    if (str.equals(componentName.getPackageName()) && !arraySet.contains(componentName)) {
+                    ComponentName componentName =
+                            (ComponentName) this.mDefaultComponents.valueAt(i2);
+                    if (str.equals(componentName.getPackageName())
+                            && !arraySet.contains(componentName)) {
                         arrayList.add(componentName);
                     }
                 }
@@ -1578,11 +1822,18 @@ public abstract class ManagedServices {
                             for (int i3 = 0; i3 < size; i3++) {
                                 ArraySet arraySet2 = (ArraySet) arrayMap.valueAt(i3);
                                 for (int i4 = 0; i4 < arraySet.size(); i4++) {
-                                    ComponentName componentName2 = (ComponentName) arraySet.valueAt(i4);
-                                    if (str.equals(componentName2.getPackageName()) && !this.mDefaultComponents.contains(componentName2) && arraySet2.remove(componentName2.flattenToString())) {
+                                    ComponentName componentName2 =
+                                            (ComponentName) arraySet.valueAt(i4);
+                                    if (str.equals(componentName2.getPackageName())
+                                            && !this.mDefaultComponents.contains(componentName2)
+                                            && arraySet2.remove(componentName2.flattenToString())) {
                                         arrayList2.add(componentName2);
-                                        String approvedValue = getApprovedValue(componentName2.flattenToString());
-                                        ArraySet arraySet3 = (ArraySet) this.mUserSetServices.get(Integer.valueOf(i));
+                                        String approvedValue =
+                                                getApprovedValue(componentName2.flattenToString());
+                                        ArraySet arraySet3 =
+                                                (ArraySet)
+                                                        this.mUserSetServices.get(
+                                                                Integer.valueOf(i));
                                         if (arraySet3 != null) {
                                             arraySet3.remove(approvedValue);
                                         }
@@ -1590,7 +1841,10 @@ public abstract class ManagedServices {
                                     }
                                 }
                                 for (int i5 = 0; i5 < arrayList.size(); i5++) {
-                                    z |= arraySet2.add(((ComponentName) arrayList.get(i5)).flattenToString());
+                                    z |=
+                                            arraySet2.add(
+                                                    ((ComponentName) arrayList.get(i5))
+                                                            .flattenToString());
                                 }
                             }
                         } else {
@@ -1709,14 +1963,18 @@ public abstract class ManagedServices {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lf
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.ManagedServices.setComponentState(int, android.content.ComponentName, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.ManagedServices.setComponentState(int,"
+                    + " android.content.ComponentName, boolean):void");
     }
 
     public void setPackageOrComponentEnabled(int i, String str, boolean z, boolean z2, boolean z3) {
         String str2 = this.TAG;
         StringBuilder sb = new StringBuilder();
         sb.append(z2 ? " Allowing " : "Disallowing ");
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, this.mConfig.caption, " ", str, " (userSet: ");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                sb, this.mConfig.caption, " ", str, " (userSet: ");
         sb.append(z3);
         sb.append(")");
         Slog.i(str2, sb.toString());
@@ -1762,7 +2020,8 @@ public abstract class ManagedServices {
             int keyAt = sparseArray.keyAt(i);
             for (ComponentName componentName : (Set) sparseArray.get(keyAt)) {
                 StringBuilder sb = new StringBuilder("disabling ");
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(keyAt, this.mConfig.caption, " for user ", ": ", sb);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        keyAt, this.mConfig.caption, " for user ", ": ", sb);
                 sb.append(componentName);
                 Slog.v(this.TAG, sb.toString());
                 synchronized (this.mMutex) {
@@ -1779,11 +2038,15 @@ public abstract class ManagedServices {
         timingsTraceAndSlog.traceEnd();
     }
 
-    public final void unbindService(ServiceConnection serviceConnection, ComponentName componentName, int i) {
+    public final void unbindService(
+            ServiceConnection serviceConnection, ComponentName componentName, int i) {
         try {
             this.mContext.unbindService(serviceConnection);
         } catch (IllegalArgumentException e) {
-            Slog.e(this.TAG, this.mConfig.caption + " " + componentName + " could not be unbound", e);
+            Slog.e(
+                    this.TAG,
+                    this.mConfig.caption + " " + componentName + " could not be unbound",
+                    e);
         }
         synchronized (this.mMutex) {
             this.mServicesBound.remove(Pair.create(componentName, Integer.valueOf(i)));
@@ -1791,9 +2054,9 @@ public abstract class ManagedServices {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:19:0x002b, code lost:
-    
-        if (r3.userid != r7) goto L32;
-     */
+
+       if (r3.userid != r7) goto L32;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1843,17 +2106,24 @@ public abstract class ManagedServices {
             monitor-exit(r1)     // Catch: java.lang.Throwable -> L25
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.ManagedServices.unbindServicesImpl(int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.ManagedServices.unbindServicesImpl(int,"
+                    + " boolean):void");
     }
 
     public final void unregisterServiceLocked(int i, ComponentName componentName) {
         for (int size = this.mServices.size() - 1; size >= 0; size--) {
             ManagedServiceInfo managedServiceInfo = (ManagedServiceInfo) this.mServices.get(size);
-            if (componentName.equals(managedServiceInfo.component) && managedServiceInfo.userid == i) {
+            if (componentName.equals(managedServiceInfo.component)
+                    && managedServiceInfo.userid == i) {
                 removeServiceLocked(size);
                 ServiceConnection serviceConnection = managedServiceInfo.connection;
                 if (serviceConnection != null) {
-                    unbindService(serviceConnection, managedServiceInfo.component, managedServiceInfo.userid);
+                    unbindService(
+                            serviceConnection,
+                            managedServiceInfo.component,
+                            managedServiceInfo.userid);
                 }
             }
         }
@@ -1875,7 +2145,8 @@ public abstract class ManagedServices {
                     if (i2 >= arrayList.size()) {
                         break;
                     }
-                    addDefaultComponentOrPackage(((ComponentName) arrayList.get(i2)).flattenToString());
+                    addDefaultComponentOrPackage(
+                            ((ComponentName) arrayList.get(i2)).flattenToString());
                     i2++;
                 }
             }
@@ -1899,25 +2170,25 @@ public abstract class ManagedServices {
         }
     }
 
-    public void upgradeUserSet() {
-    }
+    public void upgradeUserSet() {}
 
     public void writeDefaults(TypedXmlSerializer typedXmlSerializer) {
         synchronized (this.mDefaultsLock) {
             try {
                 ArrayList arrayList = new ArrayList(this.mDefaultComponents.size());
                 for (int i = 0; i < this.mDefaultComponents.size(); i++) {
-                    arrayList.add(((ComponentName) this.mDefaultComponents.valueAt(i)).flattenToString());
+                    arrayList.add(
+                            ((ComponentName) this.mDefaultComponents.valueAt(i)).flattenToString());
                 }
-                typedXmlSerializer.attribute((String) null, "defaults", String.join(":", arrayList));
+                typedXmlSerializer.attribute(
+                        (String) null, "defaults", String.join(":", arrayList));
             } catch (Throwable th) {
                 throw th;
             }
         }
     }
 
-    public void writeExtraXmlTags(TypedXmlSerializer typedXmlSerializer) {
-    }
+    public void writeExtraXmlTags(TypedXmlSerializer typedXmlSerializer) {}
 
     public final void writeXml(int i, TypedXmlSerializer typedXmlSerializer, boolean z) {
         int i2 = i;
@@ -1935,9 +2206,18 @@ public abstract class ManagedServices {
                                 String str = (String) arraySet.valueAt(size);
                                 if (!isValidEntry(i2, str)) {
                                     arraySet.removeAt(size);
-                                    Slog.v(this.TAG, "Removing " + str + " from approved list; no matching services found");
+                                    Slog.v(
+                                            this.TAG,
+                                            "Removing "
+                                                    + str
+                                                    + " from approved list; no matching services"
+                                                    + " found");
                                 } else if (this.DEBUG) {
-                                    Slog.v(this.TAG, "Keeping " + str + " on approved list; matching services found");
+                                    Slog.v(
+                                            this.TAG,
+                                            "Keeping "
+                                                    + str
+                                                    + " on approved list; matching services found");
                                 }
                             }
                         }
@@ -1959,23 +2239,39 @@ public abstract class ManagedServices {
                         if (arrayMap2 != null) {
                             int size3 = arrayMap2.size();
                             for (int i5 = 0; i5 < size3; i5++) {
-                                boolean booleanValue = ((Boolean) arrayMap2.keyAt(i5)).booleanValue();
+                                boolean booleanValue =
+                                        ((Boolean) arrayMap2.keyAt(i5)).booleanValue();
                                 Set set = (Set) arrayMap2.valueAt(i5);
                                 Set set2 = (Set) this.mUserSetServices.get(num);
                                 if (set != null || set2 != null || bool != null) {
                                     String join = set == null ? "" : String.join(":", set);
                                     typedXmlSerializer.startTag((String) null, "service_listing");
                                     typedXmlSerializer.attribute((String) null, "approved", join);
-                                    typedXmlSerializer.attributeInt((String) null, "user", intValue);
-                                    typedXmlSerializer.attributeBoolean((String) null, "primary", booleanValue);
+                                    typedXmlSerializer.attributeInt(
+                                            (String) null, "user", intValue);
+                                    typedXmlSerializer.attributeBoolean(
+                                            (String) null, "primary", booleanValue);
                                     if (bool != null) {
-                                        typedXmlSerializer.attributeBoolean((String) null, "user_changed", bool.booleanValue());
+                                        typedXmlSerializer.attributeBoolean(
+                                                (String) null, "user_changed", bool.booleanValue());
                                     } else if (set2 != null) {
-                                        typedXmlSerializer.attribute((String) null, "user_set_services", String.join(":", set2));
+                                        typedXmlSerializer.attribute(
+                                                (String) null,
+                                                "user_set_services",
+                                                String.join(":", set2));
                                     }
                                     typedXmlSerializer.endTag((String) null, "service_listing");
-                                    if (!z && booleanValue && (this instanceof NotificationManagerService.NotificationListeners)) {
-                                        Settings.Secure.putStringForUser(this.mContext.getContentResolver(), getConfig().secureSettingName, join, intValue);
+                                    if (!z
+                                            && booleanValue
+                                            && (this
+                                                    instanceof
+                                                    NotificationManagerService
+                                                            .NotificationListeners)) {
+                                        Settings.Secure.putStringForUser(
+                                                this.mContext.getContentResolver(),
+                                                getConfig().secureSettingName,
+                                                join,
+                                                intValue);
                                     }
                                 }
                             }

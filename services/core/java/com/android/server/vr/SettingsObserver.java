@@ -7,6 +7,7 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.ArraySet;
+
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
@@ -23,7 +24,10 @@ public final class SettingsObserver {
 
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
-                if ("android.os.action.SETTING_RESTORED".equals(intent.getAction()) && Objects.equals(intent.getStringExtra("setting_name"), this.val$secureSettingName)) {
+                if ("android.os.action.SETTING_RESTORED".equals(intent.getAction())
+                        && Objects.equals(
+                                intent.getStringExtra("setting_name"),
+                                this.val$secureSettingName)) {
                     intent.getStringExtra("previous_value");
                     intent.getStringExtra("new_value");
                     SettingsObserver settingsObserver = SettingsObserver.this;
@@ -35,16 +39,24 @@ public final class SettingsObserver {
                 }
             }
         };
-        context.getContentResolver().registerContentObserver(uri, false, new ContentObserver(handler) { // from class: com.android.server.vr.SettingsObserver.2
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z, Uri uri2) {
-                if (uri2 == null || uri.equals(uri2)) {
-                    Iterator it = ((ArraySet) SettingsObserver.this.mSettingsListeners).iterator();
-                    while (it.hasNext()) {
-                        ((EnabledComponentsObserver) it.next()).rebuildAll();
-                    }
-                }
-            }
-        }, -1);
+        context.getContentResolver()
+                .registerContentObserver(
+                        uri,
+                        false,
+                        new ContentObserver(
+                                handler) { // from class: com.android.server.vr.SettingsObserver.2
+                            @Override // android.database.ContentObserver
+                            public final void onChange(boolean z, Uri uri2) {
+                                if (uri2 == null || uri.equals(uri2)) {
+                                    Iterator it =
+                                            ((ArraySet) SettingsObserver.this.mSettingsListeners)
+                                                    .iterator();
+                                    while (it.hasNext()) {
+                                        ((EnabledComponentsObserver) it.next()).rebuildAll();
+                                    }
+                                }
+                            }
+                        },
+                        -1);
     }
 }

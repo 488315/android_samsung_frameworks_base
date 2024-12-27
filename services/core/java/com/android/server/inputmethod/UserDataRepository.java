@@ -3,8 +3,10 @@ package com.android.server.inputmethod;
 import android.content.pm.UserInfo;
 import android.os.Handler;
 import android.util.SparseArray;
+
 import com.android.server.accessibility.magnification.WindowMagnificationGestureHandler$$ExternalSyntheticOutline0;
 import com.android.server.pm.UserManagerInternal;
+
 import java.util.function.IntFunction;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,12 +26,14 @@ public final class UserDataRepository {
 
         @Override // com.android.server.pm.UserManagerInternal.UserLifecycleListener
         public final void onUserCreated(UserInfo userInfo, Object obj) {
-            this.val$handler.post(new UserDataRepository$1$$ExternalSyntheticLambda0(this, userInfo.id, 1));
+            this.val$handler.post(
+                    new UserDataRepository$1$$ExternalSyntheticLambda0(this, userInfo.id, 1));
         }
 
         @Override // com.android.server.pm.UserManagerInternal.UserLifecycleListener
         public final void onUserRemoved(UserInfo userInfo) {
-            this.val$handler.post(new UserDataRepository$1$$ExternalSyntheticLambda0(this, userInfo.id, 0));
+            this.val$handler.post(
+                    new UserDataRepository$1$$ExternalSyntheticLambda0(this, userInfo.id, 0));
         }
     }
 
@@ -44,11 +48,13 @@ public final class UserDataRepository {
         }
 
         public final String toString() {
-            return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(new StringBuilder("UserData{mUserId="), this.mUserId, '}');
+            return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("UserData{mUserId="), this.mUserId, '}');
         }
     }
 
-    public UserDataRepository(Handler handler, UserManagerInternal userManagerInternal, IntFunction intFunction) {
+    public UserDataRepository(
+            Handler handler, UserManagerInternal userManagerInternal, IntFunction intFunction) {
         this.mBindingControllerFactory = intFunction;
         userManagerInternal.addUserLifecycleListener(new AnonymousClass1(handler));
     }
@@ -58,7 +64,9 @@ public final class UserDataRepository {
         if (userData != null) {
             return userData;
         }
-        UserData userData2 = new UserData(i, (InputMethodBindingController) this.mBindingControllerFactory.apply(i));
+        UserData userData2 =
+                new UserData(
+                        i, (InputMethodBindingController) this.mBindingControllerFactory.apply(i));
         this.mUserData.put(i, userData2);
         return userData2;
     }

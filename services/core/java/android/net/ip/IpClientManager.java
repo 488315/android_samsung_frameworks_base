@@ -31,11 +31,13 @@ public class IpClientManager {
         Log.e(this.mTag, str, th);
     }
 
-    public boolean addKeepalivePacketFilter(int i, NattKeepalivePacketData nattKeepalivePacketData) {
+    public boolean addKeepalivePacketFilter(
+            int i, NattKeepalivePacketData nattKeepalivePacketData) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                this.mIpClient.addNattKeepalivePacketFilter(i, KeepalivePacketDataUtil.toStableParcelable(nattKeepalivePacketData));
+                this.mIpClient.addNattKeepalivePacketFilter(
+                        i, KeepalivePacketDataUtil.toStableParcelable(nattKeepalivePacketData));
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return true;
             } catch (RemoteException e) {
@@ -50,11 +52,13 @@ public class IpClientManager {
     }
 
     public boolean addKeepalivePacketFilter(int i, TcpKeepalivePacketData tcpKeepalivePacketData) {
-        return addKeepalivePacketFilter(i, KeepalivePacketDataUtil.toStableParcelable(tcpKeepalivePacketData));
+        return addKeepalivePacketFilter(
+                i, KeepalivePacketDataUtil.toStableParcelable(tcpKeepalivePacketData));
     }
 
     @Deprecated
-    public boolean addKeepalivePacketFilter(int i, TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable) {
+    public boolean addKeepalivePacketFilter(
+            int i, TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {

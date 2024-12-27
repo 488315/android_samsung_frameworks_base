@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+
 import java.util.HashMap;
 
 /* loaded from: classes6.dex */
@@ -21,12 +22,15 @@ public class SemShareLogging {
     }
 
     private boolean hasSurveyPermission() {
-        return this.mContext.checkCallingOrSelfPermission(SemShareConstants.SURVERY_PERMISSION) == 0;
+        return this.mContext.checkCallingOrSelfPermission(SemShareConstants.SURVERY_PERMISSION)
+                == 0;
     }
 
     private boolean hasDMA() {
         try {
-            this.mContext.getPackageManager().getPackageInfo(SemShareConstants.DMA_SURVEY_DMA_PACKAGE, 0);
+            this.mContext
+                    .getPackageManager()
+                    .getPackageInfo(SemShareConstants.DMA_SURVEY_DMA_PACKAGE, 0);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "isSupportDMALogging: ", e);
@@ -39,10 +43,14 @@ public class SemShareLogging {
 
     private static Bundle getFeatureBundle(String feature) {
         Bundle bundle = new Bundle();
-        bundle.putString(SemShareConstants.DMA_SURVEY_FEATURE_TRACKING_ID, SemShareConstants.DMA_SURVEY_DETAIL_TRACKING_ID);
+        bundle.putString(
+                SemShareConstants.DMA_SURVEY_FEATURE_TRACKING_ID,
+                SemShareConstants.DMA_SURVEY_DETAIL_TRACKING_ID);
         bundle.putString("feature", feature);
         bundle.putString("type", SemShareConstants.SURVEY_CONTENT_TYPE_VALUE);
-        bundle.putString(SemShareConstants.SURVEY_EXTRA_OWN_PACKAGE, SemShareConstants.SURVEY_EXTRA_OWN_PACKAGE_VALUE);
+        bundle.putString(
+                SemShareConstants.SURVEY_EXTRA_OWN_PACKAGE,
+                SemShareConstants.SURVEY_EXTRA_OWN_PACKAGE_VALUE);
         return bundle;
     }
 
@@ -70,7 +78,8 @@ public class SemShareLogging {
         sendLog(bundle);
     }
 
-    public void semInsertStartSelectLog(String caller, String callee, String mimeType, String action, boolean isAlways) {
+    public void semInsertStartSelectLog(
+            String caller, String callee, String mimeType, String action, boolean isAlways) {
         String str;
         if (!this.mHasDMA || !hasSurveyPermission()) {
             return;
@@ -79,7 +88,9 @@ public class SemShareLogging {
         dimension.put("caller", caller);
         dimension.put(SemShareConstants.DMA_SURVEY_KEY_RESOLVER_CALLEE, callee);
         dimension.put("mime", mimeType);
-        dimension.put(SemShareConstants.DMA_SURVEY_KEY_RESOLVER_MIME_CALLEE, String.format("%s_%s", mimeType, callee));
+        dimension.put(
+                SemShareConstants.DMA_SURVEY_KEY_RESOLVER_MIME_CALLEE,
+                String.format("%s_%s", mimeType, callee));
         dimension.put(SemShareConstants.DMA_SURVEY_KEY_RESOLVER_ACTION, action);
         if (isAlways) {
             str = "0";

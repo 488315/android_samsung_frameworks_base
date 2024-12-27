@@ -15,7 +15,8 @@ public final class KeyAttestationApplicationId implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            KeyAttestationApplicationId keyAttestationApplicationId = new KeyAttestationApplicationId();
+            KeyAttestationApplicationId keyAttestationApplicationId =
+                    new KeyAttestationApplicationId();
             int dataPosition = parcel.dataPosition();
             int readInt = parcel.readInt();
             try {
@@ -23,7 +24,9 @@ public final class KeyAttestationApplicationId implements Parcelable {
                     throw new BadParcelableException("Parcelable too small");
                 }
                 if (parcel.dataPosition() - dataPosition < readInt) {
-                    keyAttestationApplicationId.packageInfos = (KeyAttestationPackageInfo[]) parcel.createTypedArray(KeyAttestationPackageInfo.CREATOR);
+                    keyAttestationApplicationId.packageInfos =
+                            (KeyAttestationPackageInfo[])
+                                    parcel.createTypedArray(KeyAttestationPackageInfo.CREATOR);
                     if (dataPosition > Integer.MAX_VALUE - readInt) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }

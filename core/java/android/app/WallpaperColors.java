@@ -13,12 +13,14 @@ import android.os.SystemProperties;
 import android.os.Trace;
 import android.util.MathUtils;
 import android.util.Size;
+
 import com.android.internal.graphics.ColorUtils;
 import com.android.internal.graphics.cam.Cam;
 import com.android.internal.graphics.palette.CelebiQuantizer;
 import com.android.internal.graphics.palette.Palette;
 import com.android.internal.graphics.palette.VariationalKMeansQuantizer;
 import com.android.internal.util.ContrastColorUtil;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -45,25 +47,27 @@ public final class WallpaperColors implements Parcelable {
     private final Map<Integer, Integer> mAllColors;
     private int mColorHints;
     private final List<Color> mMainColors;
-    private static final float BRIGHT_IMAGE_MEAN_LUMINANCE = SystemProperties.getInt("persist.wallpapercolors.threshold", 70) / 100.0f;
-    private static final float MAX_DARK_AREA = SystemProperties.getInt("persist.wallpapercolors.max_dark_area", 5) / 100.0f;
-    public static final Parcelable.Creator<WallpaperColors> CREATOR = new Parcelable.Creator<WallpaperColors>() { // from class: android.app.WallpaperColors.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WallpaperColors createFromParcel(Parcel in) {
-            return new WallpaperColors(in);
-        }
+    private static final float BRIGHT_IMAGE_MEAN_LUMINANCE =
+            SystemProperties.getInt("persist.wallpapercolors.threshold", 70) / 100.0f;
+    private static final float MAX_DARK_AREA =
+            SystemProperties.getInt("persist.wallpapercolors.max_dark_area", 5) / 100.0f;
+    public static final Parcelable.Creator<WallpaperColors> CREATOR =
+            new Parcelable.Creator<WallpaperColors>() { // from class: android.app.WallpaperColors.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WallpaperColors createFromParcel(Parcel in) {
+                    return new WallpaperColors(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WallpaperColors[] newArray(int size) {
-            return new WallpaperColors[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WallpaperColors[] newArray(int size) {
+                    return new WallpaperColors[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ColorsHints {
-    }
+    public @interface ColorsHints {}
 
     public WallpaperColors(Parcel parcel) {
         this.mMainColors = new ArrayList();
@@ -97,7 +101,9 @@ public final class WallpaperColors implements Parcelable {
             height = 112;
         }
         Size optimalSize = calculateOptimalSize(width, height);
-        Bitmap bitmap = Bitmap.createBitmap(optimalSize.getWidth(), optimalSize.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap bitmap =
+                Bitmap.createBitmap(
+                        optimalSize.getWidth(), optimalSize.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas bmpCanvas = new Canvas(bitmap);
         drawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
         drawable.draw(bmpCanvas);
@@ -124,27 +130,41 @@ public final class WallpaperColors implements Parcelable {
         if (bitmapArea > MAX_WALLPAPER_EXTRACTION_AREA) {
             shouldRecycle = true;
             Size optimalSize = calculateOptimalSize(bitmap.getWidth(), bitmap.getHeight());
-            bitmap = Bitmap.createScaledBitmap(bitmap, optimalSize.getWidth(), optimalSize.getHeight(), false);
+            bitmap =
+                    Bitmap.createScaledBitmap(
+                            bitmap, optimalSize.getWidth(), optimalSize.getHeight(), false);
         }
         if (ActivityManager.isLowRamDeviceStatic()) {
-            palette = Palette.from(bitmap, new VariationalKMeansQuantizer()).maximumColorCount(5).resizeBitmapArea(MAX_WALLPAPER_EXTRACTION_AREA).generate();
+            palette =
+                    Palette.from(bitmap, new VariationalKMeansQuantizer())
+                            .maximumColorCount(5)
+                            .resizeBitmapArea(MAX_WALLPAPER_EXTRACTION_AREA)
+                            .generate();
         } else {
             int numberOfColors = Math.max(5, Math.min(128, bitmapArea / 16));
-            palette = Palette.from(bitmap, new CelebiQuantizer()).maximumColorCount(numberOfColors).resizeBitmapArea(MAX_WALLPAPER_EXTRACTION_AREA).generate();
+            palette =
+                    Palette.from(bitmap, new CelebiQuantizer())
+                            .maximumColorCount(numberOfColors)
+                            .resizeBitmapArea(MAX_WALLPAPER_EXTRACTION_AREA)
+                            .generate();
         }
         ArrayList<Palette.Swatch> swatches = new ArrayList<>(palette.getSwatches());
-        swatches.sort(new Comparator() { // from class: android.app.WallpaperColors$$ExternalSyntheticLambda0
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                return WallpaperColors.lambda$fromBitmap$0((Palette.Swatch) obj, (Palette.Swatch) obj2);
-            }
-        });
+        swatches.sort(
+                new Comparator() { // from class:
+                    // android.app.WallpaperColors$$ExternalSyntheticLambda0
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        return WallpaperColors.lambda$fromBitmap$0(
+                                (Palette.Swatch) obj, (Palette.Swatch) obj2);
+                    }
+                });
         int swatchesSize = swatches.size();
         Map<Integer, Integer> populationByColor = new HashMap<>();
         for (int i = 0; i < swatchesSize; i++) {
             Palette.Swatch swatch = swatches.get(i);
             int colorInt = swatch.getInt();
-            populationByColor.put(Integer.valueOf(colorInt), Integer.valueOf(swatch.getPopulation()));
+            populationByColor.put(
+                    Integer.valueOf(colorInt), Integer.valueOf(swatch.getPopulation()));
         }
         int hints = calculateDarkHints(bitmap, dimAmount);
         if (shouldRecycle) {
@@ -168,7 +188,8 @@ public final class WallpaperColors implements Parcelable {
         }
     }
 
-    public WallpaperColors(Color primaryColor, Color secondaryColor, Color tertiaryColor, int colorHints) {
+    public WallpaperColors(
+            Color primaryColor, Color secondaryColor, Color tertiaryColor, int colorHints) {
         if (primaryColor == null) {
             throw new IllegalArgumentException("Primary color should never be null.");
         }
@@ -182,7 +203,8 @@ public final class WallpaperColors implements Parcelable {
         }
         if (tertiaryColor != null) {
             if (secondaryColor == null) {
-                throw new IllegalArgumentException("tertiaryColor can't be specified when secondaryColor is null");
+                throw new IllegalArgumentException(
+                        "tertiaryColor can't be specified when secondaryColor is null");
             }
             this.mMainColors.add(tertiaryColor);
             this.mAllColors.put(Integer.valueOf(tertiaryColor.toArgb()), 0);
@@ -199,7 +221,8 @@ public final class WallpaperColors implements Parcelable {
             colorToCam.put(Integer.valueOf(color), Cam.fromInt(color));
         }
         double[] hueProportions = hueProportions(colorToCam, colorToPopulation);
-        Map<Integer, Double> colorToHueProportion = colorToHueProportion(colorToPopulation.keySet(), colorToCam, hueProportions);
+        Map<Integer, Double> colorToHueProportion =
+                colorToHueProportion(colorToPopulation.keySet(), colorToCam, hueProportions);
         Map<Integer, Double> colorToScore = new HashMap<>();
         for (Map.Entry<Integer, Double> mapEntry : colorToHueProportion.entrySet()) {
             int color2 = mapEntry.getKey().intValue();
@@ -208,14 +231,18 @@ public final class WallpaperColors implements Parcelable {
             colorToScore.put(Integer.valueOf(color2), Double.valueOf(score));
         }
         ArrayList<Map.Entry<Integer, Double>> mapEntries = new ArrayList<>(colorToScore.entrySet());
-        mapEntries.sort(new Comparator() { // from class: android.app.WallpaperColors$$ExternalSyntheticLambda1
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int compareTo;
-                compareTo = ((Double) ((Map.Entry) obj2).getValue()).compareTo((Double) ((Map.Entry) obj).getValue());
-                return compareTo;
-            }
-        });
+        mapEntries.sort(
+                new Comparator() { // from class:
+                    // android.app.WallpaperColors$$ExternalSyntheticLambda1
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        int compareTo;
+                        compareTo =
+                                ((Double) ((Map.Entry) obj2).getValue())
+                                        .compareTo((Double) ((Map.Entry) obj).getValue());
+                        return compareTo;
+                    }
+                });
         List<Integer> colorsByScoreDescending = new ArrayList<>();
         Iterator<Map.Entry<Integer, Double>> it2 = mapEntries.iterator();
         while (it2.hasNext()) {
@@ -259,7 +286,8 @@ public final class WallpaperColors implements Parcelable {
         return cam.getChroma() + (100.0d * proportion);
     }
 
-    private static Map<Integer, Double> colorToHueProportion(Set<Integer> colors, Map<Integer, Cam> colorToCam, double[] hueProportions) {
+    private static Map<Integer, Double> colorToHueProportion(
+            Set<Integer> colors, Map<Integer, Cam> colorToCam, double[] hueProportions) {
         Map<Integer, Double> colorToHueProportion = new HashMap<>();
         Iterator<Integer> it = colors.iterator();
         while (it.hasNext()) {
@@ -284,7 +312,8 @@ public final class WallpaperColors implements Parcelable {
         return degrees;
     }
 
-    private static double[] hueProportions(Map<Integer, Cam> colorToCam, Map<Integer, Integer> colorToPopulation) {
+    private static double[] hueProportions(
+            Map<Integer, Cam> colorToCam, Map<Integer, Integer> colorToPopulation) {
         double[] proportions = new double[360];
         double totalPopulation = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         for (Map.Entry<Integer, Integer> entry : colorToPopulation.entrySet()) {
@@ -357,7 +386,9 @@ public final class WallpaperColors implements Parcelable {
             return false;
         }
         WallpaperColors other = (WallpaperColors) o;
-        return this.mMainColors.equals(other.mMainColors) && this.mAllColors.equals(other.mAllColors) && this.mColorHints == other.mColorHints;
+        return this.mMainColors.equals(other.mMainColors)
+                && this.mAllColors.equals(other.mAllColors)
+                && this.mColorHints == other.mColorHints;
     }
 
     public int hashCode() {
@@ -387,7 +418,8 @@ public final class WallpaperColors implements Parcelable {
             int alpha = Color.alpha(pixelColor);
             int compositeColors = ColorUtils.compositeColors(blackTransparent, pixelColor);
             double adjustedLuminance = ColorUtils.calculateLuminance(compositeColors);
-            boolean satisfiesTextContrast = ContrastColorUtil.calculateContrast(pixelColor, -16777216) > 5.5d;
+            boolean satisfiesTextContrast =
+                    ContrastColorUtil.calculateContrast(pixelColor, -16777216) > 5.5d;
             if (!satisfiesTextContrast && alpha != 0) {
                 darkPixels++;
             }
@@ -427,6 +459,10 @@ public final class WallpaperColors implements Parcelable {
         for (int i = 0; i < this.mMainColors.size(); i++) {
             colors.append(Integer.toHexString(this.mMainColors.get(i).toArgb())).append(" ");
         }
-        return "[WallpaperColors: " + colors.toString() + "h: " + this.mColorHints + NavigationBarInflaterView.SIZE_MOD_END;
+        return "[WallpaperColors: "
+                + colors.toString()
+                + "h: "
+                + this.mColorHints
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

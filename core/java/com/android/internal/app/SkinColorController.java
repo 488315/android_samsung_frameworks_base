@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.internal.logging.MetricsLogger;
 
 /* loaded from: classes5.dex */
@@ -28,31 +29,50 @@ public final class SkinColorController {
     public SkinColorController(Context context, int userId) {
         this.mContext = context.getApplicationContext();
         this.mUserId = userId;
-        this.mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) { // from class: com.android.internal.app.SkinColorController.1
-            @Override // android.database.ContentObserver
-            public void onChange(boolean selfChange, Uri uri) {
-                super.onChange(selfChange, uri);
-                String setting = uri == null ? null : uri.getLastPathSegment();
-                if (setting != null) {
-                    SkinColorController.this.onSettingChanged(setting);
-                }
-            }
-        };
+        this.mContentObserver =
+                new ContentObserver(
+                        new Handler(
+                                Looper
+                                        .getMainLooper())) { // from class:
+                                                             // com.android.internal.app.SkinColorController.1
+                    @Override // android.database.ContentObserver
+                    public void onChange(boolean selfChange, Uri uri) {
+                        super.onChange(selfChange, uri);
+                        String setting = uri == null ? null : uri.getLastPathSegment();
+                        if (setting != null) {
+                            SkinColorController.this.onSettingChanged(setting);
+                        }
+                    }
+                };
     }
 
     public boolean isActivated() {
-        return Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.SKIN_COLOR_DISPLAY_ACTIVATED, 0, this.mUserId) == 1;
+        return Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.SKIN_COLOR_DISPLAY_ACTIVATED,
+                        0,
+                        this.mUserId)
+                == 1;
     }
 
     public boolean setActivated(boolean z) {
         if (!z) {
             setSkinColorLevel(getDefaultSkinColorLevel());
         }
-        return Settings.Secure.putIntForUser(this.mContext.getContentResolver(), Settings.Secure.SKIN_COLOR_DISPLAY_ACTIVATED, z ? 1 : 0, this.mUserId);
+        return Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.SKIN_COLOR_DISPLAY_ACTIVATED,
+                z ? 1 : 0,
+                this.mUserId);
     }
 
     public int getSkinColorLevel() {
-        int colorLevel = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.SKIN_COLOR_DISPLAY_COLOR_LEVEL, -1, this.mUserId);
+        int colorLevel =
+                Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.SKIN_COLOR_DISPLAY_COLOR_LEVEL,
+                        -1,
+                        this.mUserId);
         if (colorLevel == -1) {
             Slog.d(TAG, "Using default value for setting: skin_color_display_color_level");
             return getDefaultSkinColorLevel();
@@ -61,7 +81,11 @@ public final class SkinColorController {
     }
 
     public boolean setSkinColorLevel(int level) {
-        return Settings.Secure.putIntForUser(this.mContext.getContentResolver(), Settings.Secure.SKIN_COLOR_DISPLAY_COLOR_LEVEL, level, this.mUserId);
+        return Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.SKIN_COLOR_DISPLAY_COLOR_LEVEL,
+                level,
+                this.mUserId);
     }
 
     public int getMinimumSkinColorLevel() {
@@ -120,8 +144,16 @@ public final class SkinColorController {
                 this.mContext.getContentResolver().unregisterContentObserver(this.mContentObserver);
             } else if (oldCallback == null) {
                 ContentResolver cr = this.mContext.getContentResolver();
-                cr.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.SKIN_COLOR_DISPLAY_ACTIVATED), false, this.mContentObserver, this.mUserId);
-                cr.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.SKIN_COLOR_DISPLAY_COLOR_LEVEL), false, this.mContentObserver, this.mUserId);
+                cr.registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.SKIN_COLOR_DISPLAY_ACTIVATED),
+                        false,
+                        this.mContentObserver,
+                        this.mUserId);
+                cr.registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.SKIN_COLOR_DISPLAY_COLOR_LEVEL),
+                        false,
+                        this.mContentObserver,
+                        this.mUserId);
             }
         }
     }
@@ -138,10 +170,8 @@ public final class SkinColorController {
     }
 
     public interface Callback {
-        default void onActivated(boolean activated) {
-        }
+        default void onActivated(boolean activated) {}
 
-        default void onLevelChanged(int level) {
-        }
+        default void onLevelChanged(int level) {}
     }
 }

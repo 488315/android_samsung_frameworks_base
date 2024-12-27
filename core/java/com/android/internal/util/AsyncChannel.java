@@ -12,6 +12,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.util.Objects;
 import java.util.Stack;
 
@@ -55,7 +56,8 @@ public class AsyncChannel {
         return null;
     }
 
-    public int connectSrcHandlerToPackageSync(Context context, Handler handler, String str, String str2) {
+    public int connectSrcHandlerToPackageSync(
+            Context context, Handler handler, String str, String str2) {
         this.mConnection = new AsyncChannelConnection();
         this.mSrcContext = context;
         this.mSrcHandler = handler;
@@ -84,26 +86,39 @@ public class AsyncChannel {
         return status;
     }
 
-    public void connect(Context srcContext, Handler srcHandler, String dstPackageName, String dstClassName) {
-        new Thread(new Runnable(srcContext, srcHandler, dstPackageName, dstClassName) { // from class: com.android.internal.util.AsyncChannel.1ConnectAsync
-            String mDstClassName;
-            String mDstPackageName;
-            Context mSrcCtx;
-            Handler mSrcHdlr;
+    public void connect(
+            Context srcContext, Handler srcHandler, String dstPackageName, String dstClassName) {
+        new Thread(
+                        new Runnable(
+                                srcContext,
+                                srcHandler,
+                                dstPackageName,
+                                dstClassName) { // from class:
+                                                // com.android.internal.util.AsyncChannel.1ConnectAsync
+                            String mDstClassName;
+                            String mDstPackageName;
+                            Context mSrcCtx;
+                            Handler mSrcHdlr;
 
-            {
-                this.mSrcCtx = srcContext;
-                this.mSrcHdlr = srcHandler;
-                this.mDstPackageName = dstPackageName;
-                this.mDstClassName = dstClassName;
-            }
+                            {
+                                this.mSrcCtx = srcContext;
+                                this.mSrcHdlr = srcHandler;
+                                this.mDstPackageName = dstPackageName;
+                                this.mDstClassName = dstClassName;
+                            }
 
-            @Override // java.lang.Runnable
-            public void run() {
-                int result = AsyncChannel.this.connectSrcHandlerToPackageSync(this.mSrcCtx, this.mSrcHdlr, this.mDstPackageName, this.mDstClassName);
-                AsyncChannel.this.replyHalfConnected(result);
-            }
-        }).start();
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                int result =
+                                        AsyncChannel.this.connectSrcHandlerToPackageSync(
+                                                this.mSrcCtx,
+                                                this.mSrcHdlr,
+                                                this.mDstPackageName,
+                                                this.mDstClassName);
+                                AsyncChannel.this.replyHalfConnected(result);
+                            }
+                        })
+                .start();
     }
 
     public void connect(Context srcContext, Handler srcHandler, Class<?> klass) {
@@ -306,8 +321,7 @@ public class AsyncChannel {
         private static Stack<SyncMessenger> sStack = new Stack<>();
         private static int sCount = 0;
 
-        private SyncMessenger() {
-        }
+        private SyncMessenger() {}
 
         private class SyncHandler extends Handler {
             private Object mLockObject;
@@ -422,8 +436,7 @@ public class AsyncChannel {
     }
 
     class AsyncChannelConnection implements ServiceConnection {
-        AsyncChannelConnection() {
-        }
+        AsyncChannelConnection() {}
 
         @Override // android.content.ServiceConnection
         public void onServiceConnected(ComponentName className, IBinder service) {
@@ -442,8 +455,7 @@ public class AsyncChannel {
     }
 
     private final class DeathMonitor implements IBinder.DeathRecipient {
-        DeathMonitor() {
-        }
+        DeathMonitor() {}
 
         @Override // android.os.IBinder.DeathRecipient
         public void binderDied() {

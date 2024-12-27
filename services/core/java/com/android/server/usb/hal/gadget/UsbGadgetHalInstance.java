@@ -4,8 +4,10 @@ import android.hardware.usb.gadget.V1_0.IUsbGadget;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.sysfwutil.Slog;
+
 import com.android.server.usb.UsbDeviceManager;
 import com.android.server.usb.UsbPortManager;
+
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -31,10 +33,16 @@ public abstract class UsbGadgetHalInstance {
             IUsbGadget.getService(true);
         } catch (RemoteException e2) {
             Set set2 = UsbDeviceManager.sDenyInterfaces;
-            Slog.e("UsbDeviceManager", "IUSBGadget hal service present but failed to get service", e2);
+            Slog.e(
+                    "UsbDeviceManager",
+                    "IUSBGadget hal service present but failed to get service",
+                    e2);
         } catch (NoSuchElementException e3) {
             Set set3 = UsbDeviceManager.sDenyInterfaces;
-            Slog.e("UsbDeviceManager", "connectToProxy: usb gadget hidl hal service not found.", e3);
+            Slog.e(
+                    "UsbDeviceManager",
+                    "connectToProxy: usb gadget hidl hal service not found.",
+                    e3);
             Slog.println(6, "UsbPortManager", "USB Gadget HAL AIDL/HIDL not present");
             return null;
         }

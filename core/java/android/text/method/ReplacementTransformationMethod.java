@@ -39,7 +39,9 @@ public abstract class ReplacementTransformationMethod implements TransformationM
             }
             if (!(source instanceof Spannable)) {
                 if (source instanceof Spanned) {
-                    return new SpannedString(new SpannedReplacementCharSequence((Spanned) source, original, replacement));
+                    return new SpannedString(
+                            new SpannedReplacementCharSequence(
+                                    (Spanned) source, original, replacement));
                 }
                 return new ReplacementCharSequence(source, original, replacement).toString();
             }
@@ -52,8 +54,12 @@ public abstract class ReplacementTransformationMethod implements TransformationM
     }
 
     @Override // android.text.method.TransformationMethod
-    public void onFocusChanged(View view, CharSequence sourceText, boolean focused, int direction, Rect previouslyFocusedRect) {
-    }
+    public void onFocusChanged(
+            View view,
+            CharSequence sourceText,
+            boolean focused,
+            int direction,
+            Rect previouslyFocusedRect) {}
 
     private static class ReplacementCharSequence implements CharSequence, GetChars {
         private char[] mOriginal;
@@ -113,7 +119,8 @@ public abstract class ReplacementTransformationMethod implements TransformationM
         }
     }
 
-    private static class SpannedReplacementCharSequence extends ReplacementCharSequence implements Spanned {
+    private static class SpannedReplacementCharSequence extends ReplacementCharSequence
+            implements Spanned {
         private Spanned mSpanned;
 
         public SpannedReplacementCharSequence(Spanned source, char[] original, char[] replacement) {
@@ -121,7 +128,8 @@ public abstract class ReplacementTransformationMethod implements TransformationM
             this.mSpanned = source;
         }
 
-        @Override // android.text.method.ReplacementTransformationMethod.ReplacementCharSequence, java.lang.CharSequence
+        @Override // android.text.method.ReplacementTransformationMethod.ReplacementCharSequence,
+                  // java.lang.CharSequence
         public CharSequence subSequence(int start, int end) {
             return new SpannedString(this).subSequence(start, end);
         }

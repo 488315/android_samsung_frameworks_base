@@ -22,9 +22,12 @@ public final class FgsTempAllowList {
                 long elapsedRealtime = SystemClock.elapsedRealtime();
                 int size = this.mTempAllowList.size();
                 if (size > this.mMaxSize) {
-                    Slog.w("ActivityManager", "FgsTempAllowList length:" + size + " exceeds maxSize" + this.mMaxSize);
+                    Slog.w(
+                            "ActivityManager",
+                            "FgsTempAllowList length:" + size + " exceeds maxSize" + this.mMaxSize);
                     for (int i2 = size + (-1); i2 >= 0; i2--) {
-                        if (((Long) ((Pair) this.mTempAllowList.valueAt(i2)).first).longValue() < elapsedRealtime) {
+                        if (((Long) ((Pair) this.mTempAllowList.valueAt(i2)).first).longValue()
+                                < elapsedRealtime) {
                             this.mTempAllowList.removeAt(i2);
                         }
                     }
@@ -40,14 +43,17 @@ public final class FgsTempAllowList {
         }
     }
 
-    public final void forEach(ActivityManagerService$$ExternalSyntheticLambda27 activityManagerService$$ExternalSyntheticLambda27) {
+    public final void forEach(
+            ActivityManagerService$$ExternalSyntheticLambda27
+                    activityManagerService$$ExternalSyntheticLambda27) {
         synchronized (this.mLock) {
             for (int i = 0; i < this.mTempAllowList.size(); i++) {
                 try {
                     int keyAt = this.mTempAllowList.keyAt(i);
                     Pair pair = (Pair) this.mTempAllowList.valueAt(i);
                     if (pair != null) {
-                        activityManagerService$$ExternalSyntheticLambda27.accept(Integer.valueOf(keyAt), pair);
+                        activityManagerService$$ExternalSyntheticLambda27.accept(
+                                Integer.valueOf(keyAt), pair);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -63,7 +69,8 @@ public final class FgsTempAllowList {
                 if (indexOfKey < 0) {
                     return null;
                 }
-                if (((Long) ((Pair) this.mTempAllowList.valueAt(indexOfKey)).first).longValue() < SystemClock.elapsedRealtime()) {
+                if (((Long) ((Pair) this.mTempAllowList.valueAt(indexOfKey)).first).longValue()
+                        < SystemClock.elapsedRealtime()) {
                     this.mTempAllowList.removeAt(indexOfKey);
                     return null;
                 }

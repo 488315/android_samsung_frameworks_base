@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SizeCompatInfo implements Parcelable {
-    public static final Parcelable.Creator<SizeCompatInfo> CREATOR = new Parcelable.Creator<SizeCompatInfo>() { // from class: com.samsung.android.core.SizeCompatInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SizeCompatInfo createFromParcel(Parcel in) {
-            return new SizeCompatInfo(in);
-        }
+    public static final Parcelable.Creator<SizeCompatInfo> CREATOR =
+            new Parcelable.Creator<
+                    SizeCompatInfo>() { // from class: com.samsung.android.core.SizeCompatInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SizeCompatInfo createFromParcel(Parcel in) {
+                    return new SizeCompatInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SizeCompatInfo[] newArray(int size) {
-            return new SizeCompatInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SizeCompatInfo[] newArray(int size) {
+                    return new SizeCompatInfo[size];
+                }
+            };
     private final Bundle mBundle;
 
     public @interface DragMode {

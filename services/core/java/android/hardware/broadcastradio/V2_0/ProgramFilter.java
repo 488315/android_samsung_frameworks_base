@@ -3,6 +3,7 @@ package android.hardware.broadcastradio.V2_0;
 import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOutline0;
 import android.hardware.biometrics.face.V1_0.OptionalBool$$ExternalSyntheticOutline0;
 import android.os.HidlSupport;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,11 +23,18 @@ public final class ProgramFilter {
             return false;
         }
         ProgramFilter programFilter = (ProgramFilter) obj;
-        return HidlSupport.deepEquals(this.identifierTypes, programFilter.identifierTypes) && HidlSupport.deepEquals(this.identifiers, programFilter.identifiers) && this.includeCategories == programFilter.includeCategories && this.excludeModifications == programFilter.excludeModifications;
+        return HidlSupport.deepEquals(this.identifierTypes, programFilter.identifierTypes)
+                && HidlSupport.deepEquals(this.identifiers, programFilter.identifiers)
+                && this.includeCategories == programFilter.includeCategories
+                && this.excludeModifications == programFilter.excludeModifications;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.identifierTypes)), Integer.valueOf(HidlSupport.deepHashCode(this.identifiers)), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.includeCategories), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.excludeModifications));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.identifierTypes)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.identifiers)),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.includeCategories),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.excludeModifications));
     }
 
     public final String toString() {

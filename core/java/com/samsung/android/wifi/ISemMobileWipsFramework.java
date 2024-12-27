@@ -6,6 +6,7 @@ import android.os.IInterface;
 import android.os.Message;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -20,7 +21,18 @@ public interface ISemMobileWipsFramework extends IInterface {
 
     void partialScanStart(Message message) throws RemoteException;
 
-    void sendHWParamToHQMwithAppId(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9) throws RemoteException;
+    void sendHWParamToHQMwithAppId(
+            int i,
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            String str6,
+            String str7,
+            String str8,
+            String str9)
+            throws RemoteException;
 
     public static class Default implements ISemMobileWipsFramework {
         @Override // com.samsung.android.wifi.ISemMobileWipsFramework
@@ -34,8 +46,7 @@ public interface ISemMobileWipsFramework extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemMobileWipsFramework
-        public void partialScanStart(Message msg) throws RemoteException {
-        }
+        public void partialScanStart(Message msg) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemMobileWipsFramework
         public List<SemMobileWipsScanResult> getScanResults() throws RemoteException {
@@ -43,8 +54,18 @@ public interface ISemMobileWipsFramework extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemMobileWipsFramework
-        public void sendHWParamToHQMwithAppId(int type, String compId, String feature, String hitType, String compVer, String compManufacture, String devCustomDataSet, String basicCustomDataSet, String priCustomDataSet, String appId) throws RemoteException {
-        }
+        public void sendHWParamToHQMwithAppId(
+                int type,
+                String compId,
+                String feature,
+                String hitType,
+                String compVer,
+                String compManufacture,
+                String devCustomDataSet,
+                String basicCustomDataSet,
+                String priCustomDataSet,
+                String appId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -52,7 +73,7 @@ public interface ISemMobileWipsFramework extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemMobileWipsFramework {
+    public abstract static class Stub extends Binder implements ISemMobileWipsFramework {
         static final int TRANSACTION_getScanResults = 4;
         static final int TRANSACTION_invokeMethodBool = 1;
         static final int TRANSACTION_invokeMethodStr = 2;
@@ -102,7 +123,8 @@ public interface ISemMobileWipsFramework extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemMobileWipsFramework.DESCRIPTOR);
             }
@@ -148,7 +170,8 @@ public interface ISemMobileWipsFramework extends IInterface {
                     String _arg8 = data.readString();
                     String _arg9 = data.readString();
                     data.enforceNoDataAvail();
-                    sendHWParamToHQMwithAppId(_arg04, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
+                    sendHWParamToHQMwithAppId(
+                            _arg04, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
                     reply.writeNoException();
                     return true;
                 default:
@@ -229,7 +252,8 @@ public interface ISemMobileWipsFramework extends IInterface {
                     _data.writeInterfaceToken(ISemMobileWipsFramework.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    List<SemMobileWipsScanResult> _result = _reply.createTypedArrayList(SemMobileWipsScanResult.CREATOR);
+                    List<SemMobileWipsScanResult> _result =
+                            _reply.createTypedArrayList(SemMobileWipsScanResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -238,7 +262,18 @@ public interface ISemMobileWipsFramework extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsFramework
-            public void sendHWParamToHQMwithAppId(int type, String compId, String feature, String hitType, String compVer, String compManufacture, String devCustomDataSet, String basicCustomDataSet, String priCustomDataSet, String appId) throws RemoteException {
+            public void sendHWParamToHQMwithAppId(
+                    int type,
+                    String compId,
+                    String feature,
+                    String hitType,
+                    String compVer,
+                    String compManufacture,
+                    String devCustomDataSet,
+                    String basicCustomDataSet,
+                    String priCustomDataSet,
+                    String appId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

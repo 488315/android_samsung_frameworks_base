@@ -11,30 +11,34 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Printer;
+
 import com.android.internal.util.FastPrintWriter;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.lang.Thread;
 
 /* loaded from: classes.dex */
 public class ApplicationErrorReport implements Parcelable {
-    public static final Parcelable.Creator<ApplicationErrorReport> CREATOR = new Parcelable.Creator<ApplicationErrorReport>() { // from class: android.app.ApplicationErrorReport.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApplicationErrorReport createFromParcel(Parcel source) {
-            return new ApplicationErrorReport(source);
-        }
+    public static final Parcelable.Creator<ApplicationErrorReport> CREATOR =
+            new Parcelable.Creator<
+                    ApplicationErrorReport>() { // from class: android.app.ApplicationErrorReport.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApplicationErrorReport createFromParcel(Parcel source) {
+                    return new ApplicationErrorReport(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApplicationErrorReport[] newArray(int size) {
-            return new ApplicationErrorReport[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApplicationErrorReport[] newArray(int size) {
+                    return new ApplicationErrorReport[size];
+                }
+            };
     static final String DEFAULT_ERROR_RECEIVER_PROPERTY = "ro.error.receiver.default";
     private static final String PLAY_STORE_ERROR_RECEIVER_PACKAGE_NAME = "com.android.vending";
-    private static final String SAMSUNG_MEMBERS_ERROR_RECEIVER_PACKAGE_NAME = "com.samsung.android.voc";
+    private static final String SAMSUNG_MEMBERS_ERROR_RECEIVER_PACKAGE_NAME =
+            "com.samsung.android.voc";
     private static final String START_WITH_SAMSUNG = "com.samsung.";
     private static final String START_WITH_SEC = "com.sec.";
     static final String SYSTEM_APPS_ERROR_RECEIVER_PROPERTY = "ro.error.receiver.system.apps";
@@ -54,17 +58,19 @@ public class ApplicationErrorReport implements Parcelable {
     public long time;
     public int type;
 
-    public ApplicationErrorReport() {
-    }
+    public ApplicationErrorReport() {}
 
     ApplicationErrorReport(Parcel in) {
         readFromParcel(in);
     }
 
-    public static ComponentName getErrorReportReceiver(Context context, String packageName, int appFlags) {
+    public static ComponentName getErrorReportReceiver(
+            Context context, String packageName, int appFlags) {
         ComponentName result;
         ComponentName errorReportReceiver;
-        int enabled = Settings.Global.getInt(context.getContentResolver(), Settings.Global.SEND_ACTION_APP_ERROR, 0);
+        int enabled =
+                Settings.Global.getInt(
+                        context.getContentResolver(), Settings.Global.SEND_ACTION_APP_ERROR, 0);
         boolean samsungPackage = isSamsungPackage(packageName);
         if (enabled == 0 && !samsungPackage) {
             return null;
@@ -76,15 +82,23 @@ public class ApplicationErrorReport implements Parcelable {
         } catch (IllegalArgumentException e) {
         }
         if (samsungPackage && !PLAY_STORE_ERROR_RECEIVER_PACKAGE_NAME.equals(candidate)) {
-            int provisioned = Settings.Global.getInt(context.getContentResolver(), "device_provisioned", 0);
-            if (provisioned != 0 && (errorReportReceiver = getErrorReportReceiver(pm, packageName, SAMSUNG_MEMBERS_ERROR_RECEIVER_PACKAGE_NAME)) != null) {
+            int provisioned =
+                    Settings.Global.getInt(context.getContentResolver(), "device_provisioned", 0);
+            if (provisioned != 0
+                    && (errorReportReceiver =
+                                    getErrorReportReceiver(
+                                            pm,
+                                            packageName,
+                                            SAMSUNG_MEMBERS_ERROR_RECEIVER_PACKAGE_NAME))
+                            != null) {
                 return errorReportReceiver;
             }
         }
         if (enabled == 0) {
             return null;
         }
-        if (candidate != null && (result = getErrorReportReceiver(pm, packageName, candidate)) != null) {
+        if (candidate != null
+                && (result = getErrorReportReceiver(pm, packageName, candidate)) != null) {
             return result;
         }
         if ((appFlags & 1) != 0) {
@@ -98,8 +112,11 @@ public class ApplicationErrorReport implements Parcelable {
         return getErrorReportReceiver(pm, packageName, candidate3);
     }
 
-    static ComponentName getErrorReportReceiver(PackageManager pm, String errorPackage, String receiverPackage) {
-        if (receiverPackage == null || receiverPackage.length() == 0 || receiverPackage.equals(errorPackage)) {
+    static ComponentName getErrorReportReceiver(
+            PackageManager pm, String errorPackage, String receiverPackage) {
+        if (receiverPackage == null
+                || receiverPackage.length() == 0
+                || receiverPackage.equals(errorPackage)) {
             return null;
         }
         Intent intent = new Intent(Intent.ACTION_APP_ERROR);
@@ -186,8 +203,7 @@ public class ApplicationErrorReport implements Parcelable {
         public int throwLineNumber;
         public String throwMethodName;
 
-        public CrashInfo() {
-        }
+        public CrashInfo() {}
 
         public CrashInfo(Throwable tr) {
             StringWriter sw = new StringWriter();
@@ -236,7 +252,8 @@ public class ApplicationErrorReport implements Parcelable {
         private String sanitizeString(String s) {
             int acceptableLength = 10240 + 10240;
             if (s != null && s.length() > acceptableLength) {
-                String replacement = "\n[TRUNCATED " + (s.length() - acceptableLength) + " CHARS]\n";
+                String replacement =
+                        "\n[TRUNCATED " + (s.length() - acceptableLength) + " CHARS]\n";
                 StringBuilder sb = new StringBuilder(replacement.length() + acceptableLength);
                 sb.append(s.substring(0, 10240));
                 sb.append(replacement);
@@ -285,22 +302,23 @@ public class ApplicationErrorReport implements Parcelable {
     }
 
     public static class ParcelableCrashInfo extends CrashInfo implements Parcelable {
-        public static final Parcelable.Creator<ParcelableCrashInfo> CREATOR = new Parcelable.Creator<ParcelableCrashInfo>() { // from class: android.app.ApplicationErrorReport.ParcelableCrashInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ParcelableCrashInfo createFromParcel(Parcel in) {
-                return new ParcelableCrashInfo(in);
-            }
+        public static final Parcelable.Creator<ParcelableCrashInfo> CREATOR =
+                new Parcelable.Creator<ParcelableCrashInfo>() { // from class:
+                    // android.app.ApplicationErrorReport.ParcelableCrashInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ParcelableCrashInfo createFromParcel(Parcel in) {
+                        return new ParcelableCrashInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ParcelableCrashInfo[] newArray(int size) {
-                return new ParcelableCrashInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ParcelableCrashInfo[] newArray(int size) {
+                        return new ParcelableCrashInfo[size];
+                    }
+                };
 
-        public ParcelableCrashInfo() {
-        }
+        public ParcelableCrashInfo() {}
 
         public ParcelableCrashInfo(Throwable tr) {
             super(tr);
@@ -321,8 +339,7 @@ public class ApplicationErrorReport implements Parcelable {
         public String cause;
         public String info;
 
-        public AnrInfo() {
-        }
+        public AnrInfo() {}
 
         public AnrInfo(Parcel in) {
             this.activity = in.readString();
@@ -349,8 +366,7 @@ public class ApplicationErrorReport implements Parcelable {
         public String usageDetails;
         public int usagePercent;
 
-        public BatteryInfo() {
-        }
+        public BatteryInfo() {}
 
         public BatteryInfo(Parcel in) {
             this.usagePercent = in.readInt();
@@ -378,8 +394,7 @@ public class ApplicationErrorReport implements Parcelable {
         public long durationMillis;
         public String serviceDetails;
 
-        public RunningServiceInfo() {
-        }
+        public RunningServiceInfo() {}
 
         public RunningServiceInfo(Parcel in) {
             this.durationMillis = in.readLong();

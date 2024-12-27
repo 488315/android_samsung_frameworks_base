@@ -59,7 +59,8 @@ public class ContextMenuBuilder extends MenuBuilder implements ContextMenu {
             EventLog.writeEvent(50001, 1);
             int[] location = new int[2];
             originalView.getLocationOnScreen(location);
-            MenuPopupHelper helper = new MenuPopupHelper(context, this, originalView, false, 16844033);
+            MenuPopupHelper helper =
+                    new MenuPopupHelper(context, this, originalView, false, 16844033);
             helper.setIsContextMenuPopup(true);
             helper.show(Math.round(x), Math.round(y));
             return helper;

@@ -6,11 +6,13 @@ import java.io.FileDescriptor;
 public interface IVoldMountCallback extends IInterface {
     public static final String DESCRIPTOR = "android.os.IVoldMountCallback";
 
-    boolean onVolumeChecking(FileDescriptor fileDescriptor, String str, String str2) throws RemoteException;
+    boolean onVolumeChecking(FileDescriptor fileDescriptor, String str, String str2)
+            throws RemoteException;
 
     public static class Default implements IVoldMountCallback {
         @Override // android.os.IVoldMountCallback
-        public boolean onVolumeChecking(FileDescriptor fuseFd, String path, String internalPath) throws RemoteException {
+        public boolean onVolumeChecking(FileDescriptor fuseFd, String path, String internalPath)
+                throws RemoteException {
             return false;
         }
 
@@ -20,7 +22,7 @@ public interface IVoldMountCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoldMountCallback {
+    public abstract static class Stub extends Binder implements IVoldMountCallback {
         static final int TRANSACTION_onVolumeChecking = 1;
 
         public Stub() {
@@ -58,7 +60,8 @@ public interface IVoldMountCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVoldMountCallback.DESCRIPTOR);
             }
@@ -98,7 +101,8 @@ public interface IVoldMountCallback extends IInterface {
             }
 
             @Override // android.os.IVoldMountCallback
-            public boolean onVolumeChecking(FileDescriptor fuseFd, String path, String internalPath) throws RemoteException {
+            public boolean onVolumeChecking(FileDescriptor fuseFd, String path, String internalPath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

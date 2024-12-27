@@ -33,7 +33,14 @@ class StopWatch {
         this.mNumCalls++;
         this.mStartTime = -1L;
         if (this.mNumCalls % this.STOP_WATCH_LOGGING_PERIOD == 0) {
-            Log.i(this.TAG, "AVG ms/call " + this.mName + ": " + String.format("%.1f", Float.valueOf((this.mTotalTime * 1.0f) / this.mNumCalls)));
+            Log.i(
+                    this.TAG,
+                    "AVG ms/call "
+                            + this.mName
+                            + ": "
+                            + String.format(
+                                    "%.1f",
+                                    Float.valueOf((this.mTotalTime * 1.0f) / this.mNumCalls)));
             this.mTotalTime = 0L;
             this.mNumCalls = 0;
         }

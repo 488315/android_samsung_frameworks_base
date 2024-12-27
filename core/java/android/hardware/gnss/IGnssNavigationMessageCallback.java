@@ -10,7 +10,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IGnssNavigationMessageCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$gnss$IGnssNavigationMessageCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$IGnssNavigationMessageCallback".replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";
     public static final int VERSION = 2;
 
@@ -18,12 +19,12 @@ public interface IGnssNavigationMessageCallback extends IInterface {
 
     int getInterfaceVersion() throws RemoteException;
 
-    void gnssNavigationMessageCb(GnssNavigationMessage gnssNavigationMessage) throws RemoteException;
+    void gnssNavigationMessageCb(GnssNavigationMessage gnssNavigationMessage)
+            throws RemoteException;
 
     public static class Default implements IGnssNavigationMessageCallback {
         @Override // android.hardware.gnss.IGnssNavigationMessageCallback
-        public void gnssNavigationMessageCb(GnssNavigationMessage message) throws RemoteException {
-        }
+        public void gnssNavigationMessageCb(GnssNavigationMessage message) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssNavigationMessageCallback
         public int getInterfaceVersion() {
@@ -41,7 +42,7 @@ public interface IGnssNavigationMessageCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssNavigationMessageCallback {
+    public abstract static class Stub extends Binder implements IGnssNavigationMessageCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_gnssNavigationMessageCb = 1;
@@ -86,7 +87,8 @@ public interface IGnssNavigationMessageCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -107,7 +109,9 @@ public interface IGnssNavigationMessageCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    GnssNavigationMessage _arg0 = (GnssNavigationMessage) data.readTypedObject(GnssNavigationMessage.CREATOR);
+                    GnssNavigationMessage _arg0 =
+                            (GnssNavigationMessage)
+                                    data.readTypedObject(GnssNavigationMessage.CREATOR);
                     data.enforceNoDataAvail();
                     gnssNavigationMessageCb(_arg0);
                     reply.writeNoException();
@@ -135,7 +139,8 @@ public interface IGnssNavigationMessageCallback extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnssNavigationMessageCallback
-            public void gnssNavigationMessageCb(GnssNavigationMessage message) throws RemoteException {
+            public void gnssNavigationMessageCb(GnssNavigationMessage message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -143,7 +148,8 @@ public interface IGnssNavigationMessageCallback extends IInterface {
                     _data.writeTypedObject(message, 0);
                     boolean _status = this.mRemote.transact(1, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method gnssNavigationMessageCb is unimplemented.");
+                        throw new RemoteException(
+                                "Method gnssNavigationMessageCb is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -199,21 +205,23 @@ public interface IGnssNavigationMessageCallback extends IInterface {
     }
 
     public static class GnssNavigationMessage implements Parcelable {
-        public static final Parcelable.Creator<GnssNavigationMessage> CREATOR = new Parcelable.Creator<GnssNavigationMessage>() { // from class: android.hardware.gnss.IGnssNavigationMessageCallback.GnssNavigationMessage.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GnssNavigationMessage createFromParcel(Parcel _aidl_source) {
-                GnssNavigationMessage _aidl_out = new GnssNavigationMessage();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<GnssNavigationMessage> CREATOR =
+                new Parcelable.Creator<GnssNavigationMessage>() { // from class:
+                    // android.hardware.gnss.IGnssNavigationMessageCallback.GnssNavigationMessage.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GnssNavigationMessage createFromParcel(Parcel _aidl_source) {
+                        GnssNavigationMessage _aidl_out = new GnssNavigationMessage();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GnssNavigationMessage[] newArray(int _aidl_size) {
-                return new GnssNavigationMessage[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GnssNavigationMessage[] newArray(int _aidl_size) {
+                        return new GnssNavigationMessage[_aidl_size];
+                    }
+                };
         public static final int STATUS_PARITY_PASSED = 1;
         public static final int STATUS_PARITY_REBUILT = 2;
         public static final int STATUS_UNKNOWN = 0;

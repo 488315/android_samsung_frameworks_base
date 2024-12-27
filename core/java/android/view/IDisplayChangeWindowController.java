@@ -5,19 +5,29 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.view.IDisplayChangeWindowCallback;
 import android.window.DisplayAreaInfo;
 
 /* loaded from: classes4.dex */
 public interface IDisplayChangeWindowController extends IInterface {
     public static final String DESCRIPTOR = "android.view.IDisplayChangeWindowController";
 
-    void onDisplayChange(int i, int i2, int i3, DisplayAreaInfo displayAreaInfo, IDisplayChangeWindowCallback iDisplayChangeWindowCallback) throws RemoteException;
+    void onDisplayChange(
+            int i,
+            int i2,
+            int i3,
+            DisplayAreaInfo displayAreaInfo,
+            IDisplayChangeWindowCallback iDisplayChangeWindowCallback)
+            throws RemoteException;
 
     public static class Default implements IDisplayChangeWindowController {
         @Override // android.view.IDisplayChangeWindowController
-        public void onDisplayChange(int displayId, int fromRotation, int toRotation, DisplayAreaInfo newDisplayAreaInfo, IDisplayChangeWindowCallback callback) throws RemoteException {
-        }
+        public void onDisplayChange(
+                int displayId,
+                int fromRotation,
+                int toRotation,
+                DisplayAreaInfo newDisplayAreaInfo,
+                IDisplayChangeWindowCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +35,7 @@ public interface IDisplayChangeWindowController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDisplayChangeWindowController {
+    public abstract static class Stub extends Binder implements IDisplayChangeWindowController {
         static final int TRANSACTION_onDisplayChange = 1;
 
         public Stub() {
@@ -63,7 +73,8 @@ public interface IDisplayChangeWindowController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDisplayChangeWindowController.DESCRIPTOR);
             }
@@ -76,8 +87,10 @@ public interface IDisplayChangeWindowController extends IInterface {
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
                     int _arg2 = data.readInt();
-                    DisplayAreaInfo _arg3 = (DisplayAreaInfo) data.readTypedObject(DisplayAreaInfo.CREATOR);
-                    IDisplayChangeWindowCallback _arg4 = IDisplayChangeWindowCallback.Stub.asInterface(data.readStrongBinder());
+                    DisplayAreaInfo _arg3 =
+                            (DisplayAreaInfo) data.readTypedObject(DisplayAreaInfo.CREATOR);
+                    IDisplayChangeWindowCallback _arg4 =
+                            IDisplayChangeWindowCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onDisplayChange(_arg0, _arg1, _arg2, _arg3, _arg4);
                     return true;
@@ -103,7 +116,13 @@ public interface IDisplayChangeWindowController extends IInterface {
             }
 
             @Override // android.view.IDisplayChangeWindowController
-            public void onDisplayChange(int displayId, int fromRotation, int toRotation, DisplayAreaInfo newDisplayAreaInfo, IDisplayChangeWindowCallback callback) throws RemoteException {
+            public void onDisplayChange(
+                    int displayId,
+                    int fromRotation,
+                    int toRotation,
+                    DisplayAreaInfo newDisplayAreaInfo,
+                    IDisplayChangeWindowCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayChangeWindowController.DESCRIPTOR);

@@ -33,7 +33,14 @@ public interface IBinder {
 
     IInterface queryLocalInterface(String str);
 
-    void shellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) throws RemoteException;
+    void shellCommand(
+            FileDescriptor fileDescriptor,
+            FileDescriptor fileDescriptor2,
+            FileDescriptor fileDescriptor3,
+            String[] strArr,
+            ShellCallback shellCallback,
+            ResultReceiver resultReceiver)
+            throws RemoteException;
 
     boolean transact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException;
 

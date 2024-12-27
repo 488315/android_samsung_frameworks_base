@@ -8,9 +8,7 @@ public interface ServiceConnection {
 
     void onServiceDisconnected(ComponentName componentName);
 
-    default void onBindingDied(ComponentName name) {
-    }
+    default void onBindingDied(ComponentName name) {}
 
-    default void onNullBinding(ComponentName name) {
-    }
+    default void onNullBinding(ComponentName name) {}
 }

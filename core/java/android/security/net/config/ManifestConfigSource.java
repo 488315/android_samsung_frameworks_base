@@ -3,6 +3,7 @@ package android.security.net.config;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.util.Pair;
+
 import java.util.Set;
 
 /* loaded from: classes3.dex */
@@ -38,11 +39,11 @@ public class ManifestConfigSource implements ConfigSource {
             int configResource = this.mApplicationInfo.networkSecurityConfigRes;
             boolean usesCleartextTraffic = true;
             if (configResource != 0) {
-                if ((this.mApplicationInfo.flags & 2) != 0) {
-                }
+                if ((this.mApplicationInfo.flags & 2) != 0) {}
                 source = new XmlConfigSource(this.mContext, configResource, this.mApplicationInfo);
             } else {
-                if ((this.mApplicationInfo.flags & 134217728) == 0 || this.mApplicationInfo.isInstantApp()) {
+                if ((this.mApplicationInfo.flags & 134217728) == 0
+                        || this.mApplicationInfo.isInstantApp()) {
                     usesCleartextTraffic = false;
                 }
                 source = new DefaultConfigSource(usesCleartextTraffic, this.mApplicationInfo);
@@ -56,7 +57,10 @@ public class ManifestConfigSource implements ConfigSource {
         private final NetworkSecurityConfig mDefaultConfig;
 
         DefaultConfigSource(boolean usesCleartextTraffic, ApplicationInfo info) {
-            this.mDefaultConfig = NetworkSecurityConfig.getDefaultBuilder(info).setCleartextTrafficPermitted(usesCleartextTraffic).build();
+            this.mDefaultConfig =
+                    NetworkSecurityConfig.getDefaultBuilder(info)
+                            .setCleartextTrafficPermitted(usesCleartextTraffic)
+                            .build();
         }
 
         @Override // android.security.net.config.ConfigSource

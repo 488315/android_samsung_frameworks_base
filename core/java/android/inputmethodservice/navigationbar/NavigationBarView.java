@@ -14,14 +14,17 @@ import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+
 import com.android.internal.R;
+
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /* loaded from: classes2.dex */
 public final class NavigationBarView extends FrameLayout {
     private static final boolean DEBUG = false;
-    private static final Interpolator FAST_OUT_SLOW_IN = new PathInterpolator(0.4f, 0.0f, 0.2f, 1.0f);
+    private static final Interpolator FAST_OUT_SLOW_IN =
+            new PathInterpolator(0.4f, 0.0f, 0.2f, 1.0f);
     private static final String TAG = "NavBarView";
     private KeyButtonDrawable mBackIcon;
     private final SparseArray<ButtonDispatcher> mButtonDispatchers;
@@ -56,19 +59,29 @@ public final class NavigationBarView extends FrameLayout {
         this.mConfiguration = new Configuration();
         this.mTmpLastConfiguration = new Configuration();
         this.mConfiguration.updateFrom(context.getResources().getConfiguration());
-        this.mButtonDispatchers.put(R.id.input_method_nav_back, new ButtonDispatcher(R.id.input_method_nav_back));
-        this.mButtonDispatchers.put(R.id.input_method_nav_ime_switcher, new ButtonDispatcher(R.id.input_method_nav_ime_switcher));
-        this.mButtonDispatchers.put(R.id.input_method_nav_home_handle, new ButtonDispatcher(R.id.input_method_nav_home_handle));
+        this.mButtonDispatchers.put(
+                R.id.input_method_nav_back, new ButtonDispatcher(R.id.input_method_nav_back));
+        this.mButtonDispatchers.put(
+                R.id.input_method_nav_ime_switcher,
+                new ButtonDispatcher(R.id.input_method_nav_ime_switcher));
+        this.mButtonDispatchers.put(
+                R.id.input_method_nav_home_handle,
+                new ButtonDispatcher(R.id.input_method_nav_home_handle));
         this.mDeadZone = new DeadZone(this);
         getBackButton().setLongClickable(false);
         ButtonDispatcher imeSwitchButton = getImeSwitchButton();
         imeSwitchButton.setLongClickable(false);
-        imeSwitchButton.setOnClickListener(new View.OnClickListener() { // from class: android.inputmethodservice.navigationbar.NavigationBarView$$ExternalSyntheticLambda0
-            @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
-                ((InputMethodManager) view.getContext().getSystemService(InputMethodManager.class)).showInputMethodPicker();
-            }
-        });
+        imeSwitchButton.setOnClickListener(
+                new View.OnClickListener() { // from class:
+                    // android.inputmethodservice.navigationbar.NavigationBarView$$ExternalSyntheticLambda0
+                    @Override // android.view.View.OnClickListener
+                    public final void onClick(View view) {
+                        ((InputMethodManager)
+                                        view.getContext()
+                                                .getSystemService(InputMethodManager.class))
+                                .showInputMethodPicker();
+                    }
+                });
     }
 
     @Override // android.view.ViewGroup
@@ -84,9 +97,9 @@ public final class NavigationBarView extends FrameLayout {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0022, code lost:
-    
-        return true;
-     */
+
+       return true;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -126,7 +139,9 @@ public final class NavigationBarView extends FrameLayout {
         L22:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.inputmethodservice.navigationbar.NavigationBarView.shouldDeadZoneConsumeTouchEvents(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.inputmethodservice.navigationbar.NavigationBarView.shouldDeadZoneConsumeTouchEvents(android.view.MotionEvent):boolean");
     }
 
     public View getCurrentView() {
@@ -162,7 +177,8 @@ public final class NavigationBarView extends FrameLayout {
     private void updateIcons(Configuration oldConfig) {
         boolean orientationChange = oldConfig.orientation != this.mConfiguration.orientation;
         boolean densityChange = oldConfig.densityDpi != this.mConfiguration.densityDpi;
-        boolean dirChange = oldConfig.getLayoutDirection() != this.mConfiguration.getLayoutDirection();
+        boolean dirChange =
+                oldConfig.getLayoutDirection() != this.mConfiguration.getLayoutDirection();
         if (densityChange || dirChange) {
             this.mImeSwitcherIcon = getDrawable(R.drawable.ic_ime_switcher);
         }
@@ -201,14 +217,21 @@ public final class NavigationBarView extends FrameLayout {
         if (useAltBack) {
             targetY = -NavigationBarUtils.dpToPx(2.0f, getResources());
         }
-        ObjectAnimator navBarAnimator = ObjectAnimator.ofPropertyValuesHolder(drawable, PropertyValuesHolder.ofFloat(KeyButtonDrawable.KEY_DRAWABLE_ROTATE, degrees), PropertyValuesHolder.ofFloat(KeyButtonDrawable.KEY_DRAWABLE_TRANSLATE_Y, targetY));
+        ObjectAnimator navBarAnimator =
+                ObjectAnimator.ofPropertyValuesHolder(
+                        drawable,
+                        PropertyValuesHolder.ofFloat(
+                                KeyButtonDrawable.KEY_DRAWABLE_ROTATE, degrees),
+                        PropertyValuesHolder.ofFloat(
+                                KeyButtonDrawable.KEY_DRAWABLE_TRANSLATE_Y, targetY));
         navBarAnimator.setInterpolator(FAST_OUT_SLOW_IN);
         navBarAnimator.setDuration(200L);
         navBarAnimator.start();
     }
 
     private KeyButtonDrawable getDrawable(int icon) {
-        return KeyButtonDrawable.create(this.mLightContext, this.mLightIconColor, this.mDarkIconColor, icon, true, null);
+        return KeyButtonDrawable.create(
+                this.mLightContext, this.mLightIconColor, this.mDarkIconColor, icon, true, null);
     }
 
     @Override // android.view.View
@@ -221,10 +244,8 @@ public final class NavigationBarView extends FrameLayout {
         if (hints == this.mNavigationIconHints) {
             return;
         }
-        if ((hints & 1) != 0) {
-        }
-        if ((this.mNavigationIconHints & 1) != 0) {
-        }
+        if ((hints & 1) != 0) {}
+        if ((this.mNavigationIconHints & 1) != 0) {}
         this.mNavigationIconHints = hints;
         updateNavButtonIcons();
     }
@@ -247,7 +268,8 @@ public final class NavigationBarView extends FrameLayout {
     @Override // android.view.View
     public void onFinishInflate() {
         super.onFinishInflate();
-        this.mNavigationInflaterView = (NavigationBarInflaterView) findViewById(R.id.input_method_nav_inflater);
+        this.mNavigationInflaterView =
+                (NavigationBarInflaterView) findViewById(R.id.input_method_nav_inflater);
         this.mNavigationInflaterView.setButtonDispatchers(this.mButtonDispatchers);
         updateOrientationViews();
         reloadNavIcons();
@@ -279,12 +301,18 @@ public final class NavigationBarView extends FrameLayout {
 
     private void reorient() {
         updateCurrentView();
-        NavigationBarFrame frame = (NavigationBarFrame) getRootView().findViewByPredicate(new Predicate() { // from class: android.inputmethodservice.navigationbar.NavigationBarView$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return NavigationBarView.lambda$reorient$1((View) obj);
-            }
-        });
+        NavigationBarFrame frame =
+                (NavigationBarFrame)
+                        getRootView()
+                                .findViewByPredicate(
+                                        new Predicate() { // from class:
+                                            // android.inputmethodservice.navigationbar.NavigationBarView$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Predicate
+                                            public final boolean test(Object obj) {
+                                                return NavigationBarView.lambda$reorient$1(
+                                                        (View) obj);
+                                            }
+                                        });
         frame.setDeadZone(this.mDeadZone);
         this.mDeadZone.onConfigurationChanged(this.mCurrentRotation);
         if (!isLayoutDirectionResolved()) {
@@ -303,7 +331,9 @@ public final class NavigationBarView extends FrameLayout {
         this.mTmpLastConfiguration.updateFrom(this.mConfiguration);
         this.mConfiguration.updateFrom(newConfig);
         updateIcons(this.mTmpLastConfiguration);
-        if (this.mTmpLastConfiguration.densityDpi != this.mConfiguration.densityDpi || this.mTmpLastConfiguration.getLayoutDirection() != this.mConfiguration.getLayoutDirection()) {
+        if (this.mTmpLastConfiguration.densityDpi != this.mConfiguration.densityDpi
+                || this.mTmpLastConfiguration.getLayoutDirection()
+                        != this.mConfiguration.getLayoutDirection()) {
             updateNavButtonIcons();
         }
     }

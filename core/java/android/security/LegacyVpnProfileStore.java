@@ -14,7 +14,8 @@ public class LegacyVpnProfileStore {
     private static final String TAG = "LegacyVpnProfileStore";
 
     private static ILegacyKeystore getService() {
-        return ILegacyKeystore.Stub.asInterface(ServiceManager.checkService(LEGACY_KEYSTORE_SERVICE_NAME));
+        return ILegacyKeystore.Stub.asInterface(
+                ServiceManager.checkService(LEGACY_KEYSTORE_SERVICE_NAME));
     }
 
     public static boolean put(String alias, byte[] profile) {

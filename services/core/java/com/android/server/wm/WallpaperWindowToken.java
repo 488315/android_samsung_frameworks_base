@@ -5,11 +5,13 @@ import android.os.IBinder;
 import android.util.SparseArray;
 import android.view.DisplayAddress;
 import android.view.SurfaceControl;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
-import com.android.server.wm.BLASTSyncEngine;
 import com.android.window.flags.Flags;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -27,8 +29,21 @@ public final class WallpaperWindowToken extends WindowToken {
     public float mWallpaperYStep;
     public String stringInfo;
 
-    public WallpaperWindowToken(WindowManagerService windowManagerService, IBinder iBinder, DisplayContent displayContent, Bundle bundle) {
-        super(windowManagerService, iBinder, 2013, true, displayContent, true, false, false, bundle);
+    public WallpaperWindowToken(
+            WindowManagerService windowManagerService,
+            IBinder iBinder,
+            DisplayContent displayContent,
+            Bundle bundle) {
+        super(
+                windowManagerService,
+                iBinder,
+                2013,
+                true,
+                displayContent,
+                true,
+                false,
+                false,
+                bundle);
         this.mShowWhenLocked = false;
         this.mWallpaperX = -1.0f;
         this.mWallpaperY = -1.0f;
@@ -69,7 +84,14 @@ public final class WallpaperWindowToken extends WindowToken {
             return;
         }
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_APP_TRANSITIONS_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS, 7214407534407465113L, 60, null, String.valueOf(this), Boolean.valueOf(this.mClientVisible), Boolean.valueOf(this.mVisibleRequested));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS,
+                    7214407534407465113L,
+                    60,
+                    null,
+                    String.valueOf(this),
+                    Boolean.valueOf(this.mClientVisible),
+                    Boolean.valueOf(this.mVisibleRequested));
         }
         setVisibleRequested(z);
         setVisible$1(z);
@@ -134,7 +156,8 @@ public final class WallpaperWindowToken extends WindowToken {
     /* JADX WARN: Type inference failed for: r3v2, types: [com.android.server.wm.WindowContainer] */
     @Override // com.android.server.wm.WindowContainer
     public final boolean needRemoteWallpaperAnim() {
-        if (this.mTransitionController.isCollecting() && (this.mTransitionController.mCollectingTransition.mFlags & 276736) != 0) {
+        if (this.mTransitionController.isCollecting()
+                && (this.mTransitionController.mCollectingTransition.mFlags & 276736) != 0) {
             return false;
         }
         while (this != 0) {
@@ -156,11 +179,14 @@ public final class WallpaperWindowToken extends WindowToken {
     public final void prepareSurfaces() {
         SurfaceControl surfaceControl;
         super.prepareSurfaces();
-        if (!Flags.ensureWallpaperInTransitions() || this.mTransitionController.inTransition(this)) {
+        if (!Flags.ensureWallpaperInTransitions()
+                || this.mTransitionController.inTransition(this)) {
             return;
         }
         getSyncTransaction().setVisibility(this.mSurfaceControl, this.mClientVisible);
-        if (!this.mIsPortraitWindowToken || (surfaceControl = this.mFixedRotationTransformLeash) == null || surfaceControl == null) {
+        if (!this.mIsPortraitWindowToken
+                || (surfaceControl = this.mFixedRotationTransformLeash) == null
+                || surfaceControl == null) {
             return;
         }
         SurfaceControl.Transaction syncTransaction = getSyncTransaction();
@@ -182,12 +208,21 @@ public final class WallpaperWindowToken extends WindowToken {
         ActivityRecord activityRecord;
         if (this.mVisibleRequested != z) {
             WindowState windowState = this.mDisplayContent.mWallpaperController.mWallpaperTarget;
-            if ((windowState != null && ((activityRecord = windowState.mActivityRecord) == null || this.mTransitionController.isCollecting(activityRecord))) || z || (CoreRune.FW_SHELL_TRANSITION_AOD_APPEAR && this.mTransitionController.isCollecting() && (this.mTransitionController.mCollectingTransition.mFlags & 262144) != 0)) {
+            if ((windowState != null
+                            && ((activityRecord = windowState.mActivityRecord) == null
+                                    || this.mTransitionController.isCollecting(activityRecord)))
+                    || z
+                    || (CoreRune.FW_SHELL_TRANSITION_AOD_APPEAR
+                            && this.mTransitionController.isCollecting()
+                            && (this.mTransitionController.mCollectingTransition.mFlags & 262144)
+                                    != 0)) {
                 this.mTransitionController.collect(this);
             }
             setVisibleRequested(z);
         }
-        if (z || !(this.mTransitionController.inTransition() || getDisplayContent().mAppTransition.mAppTransitionState == 2)) {
+        if (z
+                || !(this.mTransitionController.inTransition()
+                        || getDisplayContent().mAppTransition.mAppTransitionState == 2)) {
             commitVisibility(z);
         }
     }
@@ -220,7 +255,12 @@ public final class WallpaperWindowToken extends WindowToken {
     @Override // com.android.server.wm.WindowToken
     public final String toString() {
         if (this.stringName == null) {
-            this.stringName = "WallpaperWindowToken{" + Integer.toHexString(System.identityHashCode(this)) + " token=" + this.token + '}';
+            this.stringName =
+                    "WallpaperWindowToken{"
+                            + Integer.toHexString(System.identityHashCode(this))
+                            + " token="
+                            + this.token
+                            + '}';
         }
         return this.stringName + toStringInfo(false);
     }
@@ -242,7 +282,9 @@ public final class WallpaperWindowToken extends WindowToken {
     public final void updateWallpaperOffset(boolean z) {
         WallpaperController wallpaperController = this.mDisplayContent.mWallpaperController;
         for (int size = this.mChildren.size() - 1; size >= 0; size--) {
-            if (wallpaperController.updateWallpaperOffset((WindowState) this.mChildren.get(size), z && !this.mWmService.mFlags.mWallpaperOffsetAsync)) {
+            if (wallpaperController.updateWallpaperOffset(
+                    (WindowState) this.mChildren.get(size),
+                    z && !this.mWmService.mFlags.mWallpaperOffsetAsync)) {
                 z = false;
             }
         }

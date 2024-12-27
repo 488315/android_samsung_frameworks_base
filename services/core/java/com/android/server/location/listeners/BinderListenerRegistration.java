@@ -3,13 +3,16 @@ package com.android.server.location.listeners;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.listeners.ListenerExecutor;
+
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public abstract class BinderListenerRegistration extends RemovableListenerRegistration implements IBinder.DeathRecipient {
+public abstract class BinderListenerRegistration extends RemovableListenerRegistration
+        implements IBinder.DeathRecipient {
     @Override // android.os.IBinder.DeathRecipient
     public final void binderDied() {
         try {
@@ -25,7 +28,8 @@ public abstract class BinderListenerRegistration extends RemovableListenerRegist
     public abstract IBinder getBinderFromKey(Object obj);
 
     @Override // com.android.server.location.listeners.RemovableListenerRegistration
-    public final void onOperationFailure(ListenerExecutor.ListenerOperation listenerOperation, Exception exc) {
+    public final void onOperationFailure(
+            ListenerExecutor.ListenerOperation listenerOperation, Exception exc) {
         if (!(exc instanceof RemoteException)) {
             throw new AssertionError(exc);
         }

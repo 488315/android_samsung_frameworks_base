@@ -14,11 +14,13 @@ public class ScalarSplitParameters {
 
     private static void checkVector(BigInteger[] v, String name) {
         if (v == null || v.length != 2 || v[0] == null || v[1] == null) {
-            throw new IllegalArgumentException("'" + name + "' must consist of exactly 2 (non-null) values");
+            throw new IllegalArgumentException(
+                    "'" + name + "' must consist of exactly 2 (non-null) values");
         }
     }
 
-    public ScalarSplitParameters(BigInteger[] v1, BigInteger[] v2, BigInteger g1, BigInteger g2, int bits) {
+    public ScalarSplitParameters(
+            BigInteger[] v1, BigInteger[] v2, BigInteger g1, BigInteger g2, int bits) {
         checkVector(v1, "v1");
         checkVector(v2, "v2");
         this.v1A = v1[0];

@@ -10,7 +10,8 @@ public final class PowerStatsExporter {
     public final PowerStatsAggregator mPowerStatsAggregator;
     public final PowerStatsStore mPowerStatsStore;
 
-    public PowerStatsExporter(PowerStatsStore powerStatsStore, PowerStatsAggregator powerStatsAggregator) {
+    public PowerStatsExporter(
+            PowerStatsStore powerStatsStore, PowerStatsAggregator powerStatsAggregator) {
         this.mPowerStatsStore = powerStatsStore;
         this.mPowerStatsAggregator = powerStatsAggregator;
     }
@@ -42,11 +43,16 @@ public final class PowerStatsExporter {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void populateBatteryUsageStatsBuilder(android.os.BatteryUsageStats.Builder r32, com.android.server.power.stats.AggregatedPowerStats r33) {
+    public static void populateBatteryUsageStatsBuilder(
+            android.os.BatteryUsageStats.Builder r32,
+            com.android.server.power.stats.AggregatedPowerStats r33) {
         /*
             Method dump skipped, instructions count: 742
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.PowerStatsExporter.populateBatteryUsageStatsBuilder(android.os.BatteryUsageStats$Builder, com.android.server.power.stats.AggregatedPowerStats):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.stats.PowerStatsExporter.populateBatteryUsageStatsBuilder(android.os.BatteryUsageStats$Builder,"
+                    + " com.android.server.power.stats.AggregatedPowerStats):void");
     }
 }

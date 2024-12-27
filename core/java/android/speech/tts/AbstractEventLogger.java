@@ -48,7 +48,9 @@ abstract class AbstractEventLogger {
         if (!this.mLogWritten) {
             this.mLogWritten = true;
             SystemClock.elapsedRealtime();
-            if (statusCode == 0 && this.mPlaybackStartTime != -1 && this.mEngineCompleteTime != -1) {
+            if (statusCode == 0
+                    && this.mPlaybackStartTime != -1
+                    && this.mEngineCompleteTime != -1) {
                 long audioLatency = this.mPlaybackStartTime - this.mReceivedTime;
                 long engineLatency = this.mEngineStartTime - this.mRequestProcessingStartTime;
                 long engineTotal = this.mEngineCompleteTime - this.mRequestProcessingStartTime;

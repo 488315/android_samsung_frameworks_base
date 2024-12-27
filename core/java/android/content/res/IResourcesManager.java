@@ -12,11 +12,15 @@ import android.os.RemoteException;
 public interface IResourcesManager extends IInterface {
     public static final String DESCRIPTOR = "android.content.res.IResourcesManager";
 
-    boolean dumpResources(String str, ParcelFileDescriptor parcelFileDescriptor, RemoteCallback remoteCallback) throws RemoteException;
+    boolean dumpResources(
+            String str, ParcelFileDescriptor parcelFileDescriptor, RemoteCallback remoteCallback)
+            throws RemoteException;
 
     public static class Default implements IResourcesManager {
         @Override // android.content.res.IResourcesManager
-        public boolean dumpResources(String process, ParcelFileDescriptor fd, RemoteCallback finishCallback) throws RemoteException {
+        public boolean dumpResources(
+                String process, ParcelFileDescriptor fd, RemoteCallback finishCallback)
+                throws RemoteException {
             return false;
         }
 
@@ -26,7 +30,7 @@ public interface IResourcesManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IResourcesManager {
+    public abstract static class Stub extends Binder implements IResourcesManager {
         static final int TRANSACTION_dumpResources = 1;
 
         public Stub() {
@@ -64,7 +68,8 @@ public interface IResourcesManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IResourcesManager.DESCRIPTOR);
             }
@@ -75,8 +80,11 @@ public interface IResourcesManager extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    ParcelFileDescriptor _arg1 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    RemoteCallback _arg2 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    ParcelFileDescriptor _arg1 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    RemoteCallback _arg2 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result = dumpResources(_arg0, _arg1, _arg2);
                     reply.writeNoException();
@@ -104,7 +112,9 @@ public interface IResourcesManager extends IInterface {
             }
 
             @Override // android.content.res.IResourcesManager
-            public boolean dumpResources(String process, ParcelFileDescriptor fd, RemoteCallback finishCallback) throws RemoteException {
+            public boolean dumpResources(
+                    String process, ParcelFileDescriptor fd, RemoteCallback finishCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

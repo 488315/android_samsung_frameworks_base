@@ -18,10 +18,10 @@ import android.os.storage.StorageVolume;
 import android.service.storage.IExternalStorageService;
 import android.util.SparseArray;
 import android.util.sysfwutil.Slog;
+
 import com.android.internal.util.Preconditions;
 import com.android.server.LocalServices;
-import com.android.server.storage.StorageSessionController;
-import com.android.server.storage.StorageUserConnection;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -51,15 +51,16 @@ public final class StorageUserConnection {
         public CompletableFuture mRemoteFuture;
         public AnonymousClass1 mServiceConnection;
 
-        public ActiveConnection() {
-        }
+        public ActiveConnection() {}
 
         @Override // java.lang.AutoCloseable
         public final void close() {
             AnonymousClass1 anonymousClass1;
             synchronized (this.mLock) {
                 try {
-                    Slog.i("StorageUserConnection", "Closing connection for user " + StorageUserConnection.this.mUserId);
+                    Slog.i(
+                            "StorageUserConnection",
+                            "Closing connection for user " + StorageUserConnection.this.mUserId);
                     anonymousClass1 = this.mServiceConnection;
                     this.mServiceConnection = null;
                     CompletableFuture completableFuture = this.mRemoteFuture;
@@ -87,14 +88,19 @@ public final class StorageUserConnection {
 
         public final void freeCache(final String str, final long j, final String str2) {
             try {
-                waitForAsyncVoid(new AsyncStorageServiceCall() { // from class: com.android.server.storage.StorageUserConnection$ActiveConnection$$ExternalSyntheticLambda0
-                    @Override // com.android.server.storage.StorageUserConnection.AsyncStorageServiceCall
-                    public final void run(IExternalStorageService iExternalStorageService, RemoteCallback remoteCallback) {
-                        iExternalStorageService.freeCache(str, str2, j, remoteCallback);
-                    }
-                });
+                waitForAsyncVoid(
+                        new AsyncStorageServiceCall() { // from class:
+                                                        // com.android.server.storage.StorageUserConnection$ActiveConnection$$ExternalSyntheticLambda0
+                            @Override // com.android.server.storage.StorageUserConnection.AsyncStorageServiceCall
+                            public final void run(
+                                    IExternalStorageService iExternalStorageService,
+                                    RemoteCallback remoteCallback) {
+                                iExternalStorageService.freeCache(str, str2, j, remoteCallback);
+                            }
+                        });
             } catch (Exception e) {
-                throw new StorageSessionController.ExternalStorageServiceException("Failed to free " + j + " bytes for volumeUuid : " + str2, e);
+                throw new StorageSessionController.ExternalStorageServiceException(
+                        "Failed to free " + j + " bytes for volumeUuid : " + str2, e);
             }
         }
 
@@ -103,12 +109,17 @@ public final class StorageUserConnection {
                 try {
                     CompletableFuture completableFuture = this.mRemoteFuture;
                     if (completableFuture == null) {
-                        Slog.w("StorageUserConnection", "Dropping async request service is not bound");
+                        Slog.w(
+                                "StorageUserConnection",
+                                "Dropping async request service is not bound");
                         return;
                     }
-                    IExternalStorageService iExternalStorageService = (IExternalStorageService) completableFuture.getNow(null);
+                    IExternalStorageService iExternalStorageService =
+                            (IExternalStorageService) completableFuture.getNow(null);
                     if (iExternalStorageService == null) {
-                        Slog.w("StorageUserConnection", "Dropping async request service is not connected");
+                        Slog.w(
+                                "StorageUserConnection",
+                                "Dropping async request service is not connected");
                         return;
                     }
                     try {
@@ -125,74 +136,133 @@ public final class StorageUserConnection {
         public final void waitForAsyncVoid(final AsyncStorageServiceCall asyncStorageServiceCall) {
             final CompletableFuture completableFuture;
             final CompletableFuture completableFuture2 = new CompletableFuture();
-            final RemoteCallback remoteCallback = new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: com.android.server.storage.StorageUserConnection$ActiveConnection$$ExternalSyntheticLambda3
-                public final void onResult(Bundle bundle) {
-                    StorageUserConnection.ActiveConnection activeConnection = StorageUserConnection.ActiveConnection.this;
-                    CompletableFuture completableFuture3 = completableFuture2;
-                    activeConnection.getClass();
-                    ParcelableException parcelableException = (ParcelableException) bundle.getParcelable("android.service.storage.extra.error", ParcelableException.class);
-                    if (parcelableException != null) {
-                        completableFuture3.completeExceptionally(parcelableException);
-                    } else {
-                        completableFuture3.complete(null);
-                    }
-                }
-            });
+            final RemoteCallback remoteCallback =
+                    new RemoteCallback(
+                            new RemoteCallback
+                                    .OnResultListener() { // from class:
+                                                          // com.android.server.storage.StorageUserConnection$ActiveConnection$$ExternalSyntheticLambda3
+                                public final void onResult(Bundle bundle) {
+                                    StorageUserConnection.ActiveConnection activeConnection =
+                                            StorageUserConnection.ActiveConnection.this;
+                                    CompletableFuture completableFuture3 = completableFuture2;
+                                    activeConnection.getClass();
+                                    ParcelableException parcelableException =
+                                            (ParcelableException)
+                                                    bundle.getParcelable(
+                                                            "android.service.storage.extra.error",
+                                                            ParcelableException.class);
+                                    if (parcelableException != null) {
+                                        completableFuture3.completeExceptionally(
+                                                parcelableException);
+                                    } else {
+                                        completableFuture3.complete(null);
+                                    }
+                                }
+                            });
             ArrayList arrayList = this.mOutstandingOps;
-            ComponentName componentName = StorageUserConnection.this.mSessionController.mExternalStorageServiceComponent;
+            ComponentName componentName =
+                    StorageUserConnection.this.mSessionController.mExternalStorageServiceComponent;
             if (componentName == null) {
-                throw new StorageSessionController.ExternalStorageServiceException("Not ready to bind to the ExternalStorageService for user " + StorageUserConnection.this.mUserId);
+                throw new StorageSessionController.ExternalStorageServiceException(
+                        "Not ready to bind to the ExternalStorageService for user "
+                                + StorageUserConnection.this.mUserId);
             }
             synchronized (this.mLock) {
                 try {
                     completableFuture = this.mRemoteFuture;
                     if (completableFuture == null) {
                         completableFuture = new CompletableFuture();
-                        this.mServiceConnection = new ServiceConnection() { // from class: com.android.server.storage.StorageUserConnection.ActiveConnection.1
-                            public final void handleDisconnection() {
-                                ActiveConnection.this.close();
-                                StorageUserConnection storageUserConnection = StorageUserConnection.this;
-                                synchronized (storageUserConnection.mSessionsLock) {
-                                    try {
-                                        if (((HashMap) storageUserConnection.mSessions).isEmpty()) {
-                                            return;
+                        this.mServiceConnection =
+                                new ServiceConnection() { // from class:
+                                                          // com.android.server.storage.StorageUserConnection.ActiveConnection.1
+                                    public final void handleDisconnection() {
+                                        ActiveConnection.this.close();
+                                        StorageUserConnection storageUserConnection =
+                                                StorageUserConnection.this;
+                                        synchronized (storageUserConnection.mSessionsLock) {
+                                            try {
+                                                if (((HashMap) storageUserConnection.mSessions)
+                                                        .isEmpty()) {
+                                                    return;
+                                                }
+                                                storageUserConnection.mSmInternal.resetUser(
+                                                        storageUserConnection.mUserId);
+                                            } finally {
+                                            }
                                         }
-                                        storageUserConnection.mSmInternal.resetUser(storageUserConnection.mUserId);
-                                    } finally {
                                     }
-                                }
-                            }
 
-                            @Override // android.content.ServiceConnection
-                            public final void onBindingDied(ComponentName componentName2) {
-                                Slog.i("StorageUserConnection", "Service: [" + componentName2 + "] died. User [" + StorageUserConnection.this.mUserId + "]");
-                                handleDisconnection();
-                            }
+                                    @Override // android.content.ServiceConnection
+                                    public final void onBindingDied(ComponentName componentName2) {
+                                        Slog.i(
+                                                "StorageUserConnection",
+                                                "Service: ["
+                                                        + componentName2
+                                                        + "] died. User ["
+                                                        + StorageUserConnection.this.mUserId
+                                                        + "]");
+                                        handleDisconnection();
+                                    }
 
-                            @Override // android.content.ServiceConnection
-                            public final void onNullBinding(ComponentName componentName2) {
-                                Slog.wtf("StorageUserConnection", "Service: [" + componentName2 + "] is null. User [" + StorageUserConnection.this.mUserId + "]");
-                            }
+                                    @Override // android.content.ServiceConnection
+                                    public final void onNullBinding(ComponentName componentName2) {
+                                        Slog.wtf(
+                                                "StorageUserConnection",
+                                                "Service: ["
+                                                        + componentName2
+                                                        + "] is null. User ["
+                                                        + StorageUserConnection.this.mUserId
+                                                        + "]");
+                                    }
 
-                            @Override // android.content.ServiceConnection
-                            public final void onServiceConnected(ComponentName componentName2, IBinder iBinder) {
-                                Slog.i("StorageUserConnection", "Service: [" + componentName2 + "] connected. User [" + StorageUserConnection.this.mUserId + "]");
-                                synchronized (ActiveConnection.this.mLock) {
-                                    completableFuture.complete(IExternalStorageService.Stub.asInterface(iBinder));
-                                }
-                            }
+                                    @Override // android.content.ServiceConnection
+                                    public final void onServiceConnected(
+                                            ComponentName componentName2, IBinder iBinder) {
+                                        Slog.i(
+                                                "StorageUserConnection",
+                                                "Service: ["
+                                                        + componentName2
+                                                        + "] connected. User ["
+                                                        + StorageUserConnection.this.mUserId
+                                                        + "]");
+                                        synchronized (ActiveConnection.this.mLock) {
+                                            completableFuture.complete(
+                                                    IExternalStorageService.Stub.asInterface(
+                                                            iBinder));
+                                        }
+                                    }
 
-                            @Override // android.content.ServiceConnection
-                            public final void onServiceDisconnected(ComponentName componentName2) {
-                                Slog.i("StorageUserConnection", "Service: [" + componentName2 + "] disconnected. User [" + StorageUserConnection.this.mUserId + "]");
-                                handleDisconnection();
-                            }
-                        };
-                        Slog.i("StorageUserConnection", "Binding to the ExternalStorageService for user " + StorageUserConnection.this.mUserId);
-                        if (!StorageUserConnection.this.mContext.bindServiceAsUser(new Intent().setComponent(componentName), this.mServiceConnection, 65, StorageUserConnection.this.mHandlerThread.getThreadHandler(), UserHandle.of(StorageUserConnection.this.mUserId))) {
-                            throw new StorageSessionController.ExternalStorageServiceException("Failed to bind to the ExternalStorageService for user " + StorageUserConnection.this.mUserId);
+                                    @Override // android.content.ServiceConnection
+                                    public final void onServiceDisconnected(
+                                            ComponentName componentName2) {
+                                        Slog.i(
+                                                "StorageUserConnection",
+                                                "Service: ["
+                                                        + componentName2
+                                                        + "] disconnected. User ["
+                                                        + StorageUserConnection.this.mUserId
+                                                        + "]");
+                                        handleDisconnection();
+                                    }
+                                };
+                        Slog.i(
+                                "StorageUserConnection",
+                                "Binding to the ExternalStorageService for user "
+                                        + StorageUserConnection.this.mUserId);
+                        if (!StorageUserConnection.this.mContext.bindServiceAsUser(
+                                new Intent().setComponent(componentName),
+                                this.mServiceConnection,
+                                65,
+                                StorageUserConnection.this.mHandlerThread.getThreadHandler(),
+                                UserHandle.of(StorageUserConnection.this.mUserId))) {
+                            throw new StorageSessionController.ExternalStorageServiceException(
+                                    "Failed to bind to the ExternalStorageService for user "
+                                            + StorageUserConnection.this.mUserId);
                         }
-                        Slog.i("StorageUserConnection", "Bound to the ExternalStorageService for user " + StorageUserConnection.this.mUserId);
+                        Slog.i(
+                                "StorageUserConnection",
+                                "Bound to the ExternalStorageService for user "
+                                        + StorageUserConnection.this.mUserId);
                         this.mRemoteFuture = completableFuture;
                     }
                 } finally {
@@ -202,20 +272,28 @@ public final class StorageUserConnection {
                 synchronized (this.mLock) {
                     arrayList.add(completableFuture2);
                 }
-                completableFuture.thenCompose(new Function() { // from class: com.android.server.storage.StorageUserConnection$ActiveConnection$$ExternalSyntheticLambda5
-                    @Override // java.util.function.Function
-                    public final Object apply(Object obj) {
-                        StorageUserConnection.AsyncStorageServiceCall asyncStorageServiceCall2 = StorageUserConnection.AsyncStorageServiceCall.this;
-                        RemoteCallback remoteCallback2 = remoteCallback;
-                        CompletableFuture completableFuture3 = completableFuture2;
-                        try {
-                            asyncStorageServiceCall2.run((IExternalStorageService) obj, remoteCallback2);
-                        } catch (RemoteException e) {
-                            completableFuture3.completeExceptionally(e);
-                        }
-                        return completableFuture3;
-                    }
-                }).get(20L, TimeUnit.SECONDS);
+                completableFuture
+                        .thenCompose(
+                                new Function() { // from class:
+                                                 // com.android.server.storage.StorageUserConnection$ActiveConnection$$ExternalSyntheticLambda5
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        StorageUserConnection.AsyncStorageServiceCall
+                                                asyncStorageServiceCall2 =
+                                                        StorageUserConnection
+                                                                .AsyncStorageServiceCall.this;
+                                        RemoteCallback remoteCallback2 = remoteCallback;
+                                        CompletableFuture completableFuture3 = completableFuture2;
+                                        try {
+                                            asyncStorageServiceCall2.run(
+                                                    (IExternalStorageService) obj, remoteCallback2);
+                                        } catch (RemoteException e) {
+                                            completableFuture3.completeExceptionally(e);
+                                        }
+                                        return completableFuture3;
+                                    }
+                                })
+                        .get(20L, TimeUnit.SECONDS);
                 synchronized (this.mLock) {
                     arrayList.remove(completableFuture2);
                 }
@@ -255,14 +333,19 @@ public final class StorageUserConnection {
         }
     }
 
-    public StorageUserConnection(Context context, int i, StorageSessionController storageSessionController) {
+    public StorageUserConnection(
+            Context context, int i, StorageSessionController storageSessionController) {
         Objects.requireNonNull(context);
         this.mContext = context;
         int checkArgumentNonnegative = Preconditions.checkArgumentNonnegative(i);
         this.mUserId = checkArgumentNonnegative;
         this.mSessionController = storageSessionController;
-        this.mSmInternal = (StorageManagerInternal) LocalServices.getService(StorageManagerInternal.class);
-        HandlerThread handlerThread = new HandlerThread(VibrationParam$1$$ExternalSyntheticOutline0.m(checkArgumentNonnegative, "StorageUserConnectionThread-"));
+        this.mSmInternal =
+                (StorageManagerInternal) LocalServices.getService(StorageManagerInternal.class);
+        HandlerThread handlerThread =
+                new HandlerThread(
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                checkArgumentNonnegative, "StorageUserConnectionThread-"));
         this.mHandlerThread = handlerThread;
         handlerThread.start();
     }
@@ -279,9 +362,12 @@ public final class StorageUserConnection {
                 ActiveConnection activeConnection = this.mActiveConnection;
                 activeConnection.getClass();
                 try {
-                    activeConnection.waitForAsyncVoid(new StorageUserConnection$ActiveConnection$$ExternalSyntheticLambda1(str, storageVolume));
+                    activeConnection.waitForAsyncVoid(
+                            new StorageUserConnection$ActiveConnection$$ExternalSyntheticLambda1(
+                                    str, storageVolume));
                 } catch (Exception e) {
-                    throw new StorageSessionController.ExternalStorageServiceException("Failed to notify volume state changed for vol : " + storageVolume, e);
+                    throw new StorageSessionController.ExternalStorageServiceException(
+                            "Failed to notify volume state changed for vol : " + storageVolume, e);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -308,14 +394,20 @@ public final class StorageUserConnection {
         ActiveConnection activeConnection = this.mActiveConnection;
         activeConnection.getClass();
         try {
-            activeConnection.waitForAsyncVoid(new AsyncStorageServiceCall() { // from class: com.android.server.storage.StorageUserConnection$ActiveConnection$$ExternalSyntheticLambda2
-                @Override // com.android.server.storage.StorageUserConnection.AsyncStorageServiceCall
-                public final void run(IExternalStorageService iExternalStorageService, RemoteCallback remoteCallback) {
-                    iExternalStorageService.endSession(StorageUserConnection.Session.this.sessionId, remoteCallback);
-                }
-            });
+            activeConnection.waitForAsyncVoid(
+                    new AsyncStorageServiceCall() { // from class:
+                                                    // com.android.server.storage.StorageUserConnection$ActiveConnection$$ExternalSyntheticLambda2
+                        @Override // com.android.server.storage.StorageUserConnection.AsyncStorageServiceCall
+                        public final void run(
+                                IExternalStorageService iExternalStorageService,
+                                RemoteCallback remoteCallback) {
+                            iExternalStorageService.endSession(
+                                    StorageUserConnection.Session.this.sessionId, remoteCallback);
+                        }
+                    });
         } catch (Exception e) {
-            throw new StorageSessionController.ExternalStorageServiceException("Failed to end session: " + removeSession, e);
+            throw new StorageSessionController.ExternalStorageServiceException(
+                    "Failed to end session: " + removeSession, e);
         }
     }
 }

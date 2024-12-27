@@ -15,13 +15,12 @@ import android.os.Looper;
 import android.os.Trace;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Surface;
-import android.view.SurfaceControl;
-import android.view.ThreadedRenderer;
-import android.view.View;
 import android.view.animation.AnimationUtils;
+
 import com.android.internal.R;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -32,8 +31,10 @@ public final class ThreadedRenderer extends HardwareRenderer {
     public static final String DEBUG_FORCE_DARK = "debug.hwui.force_dark";
     public static final String DEBUG_FPS_DIVISOR = "debug.hwui.fps_divisor";
     public static final String DEBUG_OVERDRAW_PROPERTY = "debug.hwui.overdraw";
-    public static final String DEBUG_SHOW_LAYERS_UPDATES_PROPERTY = "debug.hwui.show_layers_updates";
-    public static final String DEBUG_SHOW_NON_RECTANGULAR_CLIP_PROPERTY = "debug.hwui.show_non_rect_clip";
+    public static final String DEBUG_SHOW_LAYERS_UPDATES_PROPERTY =
+            "debug.hwui.show_layers_updates";
+    public static final String DEBUG_SHOW_NON_RECTANGULAR_CLIP_PROPERTY =
+            "debug.hwui.show_non_rect_clip";
     public static final String OVERDRAW_PROPERTY_SHOW = "show";
     static final String PRINT_CONFIG_PROPERTY = "debug.hwui.print_config";
     static final String PROFILE_MAXFRAMES_PROPERTY = "debug.hwui.profile.maxframes";
@@ -68,8 +69,7 @@ public final class ThreadedRenderer extends HardwareRenderer {
         void onPreDraw(RecordingCanvas recordingCanvas);
     }
 
-    public static void enableForegroundTrimming() {
-    }
+    public static void enableForegroundTrimming() {}
 
     public static void initForSystemProcess() {
         if (!ActivityManager.isHighEndGfx()) {
@@ -82,8 +82,11 @@ public final class ThreadedRenderer extends HardwareRenderer {
         return new ThreadedRenderer(context, translucent, name);
     }
 
-    private static final class WebViewOverlayProvider implements HardwareRenderer.PrepareSurfaceControlForWebviewCallback, HardwareRenderer.ASurfaceTransactionCallback {
-        private static final boolean sOverlaysAreEnabled = ThreadedRenderer.isWebViewOverlaysEnabled();
+    private static final class WebViewOverlayProvider
+            implements HardwareRenderer.PrepareSurfaceControlForWebviewCallback,
+                    HardwareRenderer.ASurfaceTransactionCallback {
+        private static final boolean sOverlaysAreEnabled =
+                ThreadedRenderer.isWebViewOverlaysEnabled();
         private BLASTBufferQueue mBLASTBufferQueue;
         private boolean mHasWebViewOverlays;
         private SurfaceControl mSurfaceControl;
@@ -105,7 +108,11 @@ public final class ThreadedRenderer extends HardwareRenderer {
         }
 
         public boolean shouldEnableOverlaySupport() {
-            return (!sOverlaysAreEnabled || this.mSurfaceControl == null || this.mBLASTBufferQueue == null) ? false : true;
+            return (!sOverlaysAreEnabled
+                            || this.mSurfaceControl == null
+                            || this.mBLASTBufferQueue == null)
+                    ? false
+                    : true;
         }
 
         public void setSurfaceControl(SurfaceControl surfaceControl) {
@@ -134,7 +141,8 @@ public final class ThreadedRenderer extends HardwareRenderer {
         }
 
         @Override // android.graphics.HardwareRenderer.ASurfaceTransactionCallback
-        public boolean onMergeTransaction(long nativeTransactionObj, long aSurfaceControlNativeObj, long frameNr) {
+        public boolean onMergeTransaction(
+                long nativeTransactionObj, long aSurfaceControlNativeObj, long frameNr) {
             synchronized (this) {
                 if (this.mBLASTBufferQueue == null) {
                     return false;
@@ -197,7 +205,9 @@ public final class ThreadedRenderer extends HardwareRenderer {
         return status;
     }
 
-    boolean initializeIfNeeded(int width, int height, View.AttachInfo attachInfo, Surface surface, Rect surfaceInsets) throws Surface.OutOfResourcesException {
+    boolean initializeIfNeeded(
+            int width, int height, View.AttachInfo attachInfo, Surface surface, Rect surfaceInsets)
+            throws Surface.OutOfResourcesException {
         if (isRequested() && !isEnabled() && initialize(surface)) {
             setup(width, height, attachInfo, surfaceInsets);
             return true;
@@ -249,7 +259,11 @@ public final class ThreadedRenderer extends HardwareRenderer {
     void setup(int width, int height, View.AttachInfo attachInfo, Rect surfaceInsets, Rect bounds) {
         this.mWidth = width;
         this.mHeight = height;
-        if (surfaceInsets != null && (surfaceInsets.left != 0 || surfaceInsets.right != 0 || surfaceInsets.top != 0 || surfaceInsets.bottom != 0)) {
+        if (surfaceInsets != null
+                && (surfaceInsets.left != 0
+                        || surfaceInsets.right != 0
+                        || surfaceInsets.top != 0
+                        || surfaceInsets.bottom != 0)) {
             this.mInsetLeft = surfaceInsets.left;
             this.mInsetTop = surfaceInsets.top;
             this.mSurfaceWidth = this.mInsetLeft + width + surfaceInsets.right;
@@ -261,7 +275,8 @@ public final class ThreadedRenderer extends HardwareRenderer {
             this.mSurfaceWidth = width;
             this.mSurfaceHeight = height;
         }
-        this.mRootNode.setLeftTopRightBottom(-this.mInsetLeft, -this.mInsetTop, this.mSurfaceWidth, this.mSurfaceHeight);
+        this.mRootNode.setLeftTopRightBottom(
+                -this.mInsetLeft, -this.mInsetTop, this.mSurfaceWidth, this.mSurfaceHeight);
         if (CoreRune.MW_CAPTION_SHELL_BUG_FIX) {
             setLightCenter(attachInfo, bounds);
         } else {
@@ -292,7 +307,8 @@ public final class ThreadedRenderer extends HardwareRenderer {
     }
 
     @Override // android.graphics.HardwareRenderer
-    public void setSurfaceControl(SurfaceControl surfaceControl, BLASTBufferQueue blastBufferQueue) {
+    public void setSurfaceControl(
+            SurfaceControl surfaceControl, BLASTBufferQueue blastBufferQueue) {
         super.setSurfaceControl(surfaceControl, blastBufferQueue);
         this.mWebViewOverlayProvider.setSurfaceControl(surfaceControl);
         this.mWebViewOverlayProvider.setBLASTBufferQueue(blastBufferQueue);
@@ -320,7 +336,10 @@ public final class ThreadedRenderer extends HardwareRenderer {
     void setLightCenter(View.AttachInfo attachInfo, Rect bounds) {
         ActivityThread thread = ActivityThread.currentActivityThread();
         if (thread != null && thread.getApplication() != null && thread.isDexCompatMode()) {
-            Rect maxBounds = ((WindowManager) thread.getApplication().getSystemService(WindowManager.class)).getMaximumWindowMetrics().getBounds();
+            Rect maxBounds =
+                    ((WindowManager) thread.getApplication().getSystemService(WindowManager.class))
+                            .getMaximumWindowMetrics()
+                            .getBounds();
             float lightX = (maxBounds.width() / 2.0f) - attachInfo.mWindowLeft;
             float lightY = this.mLightY - attachInfo.mWindowTop;
             setLightSourceGeometry(lightX, lightY, this.mLightZ, this.mLightRadius);
@@ -328,9 +347,19 @@ public final class ThreadedRenderer extends HardwareRenderer {
         }
         DisplayMetrics displayMetrics = new DisplayMetrics();
         attachInfo.mDisplay.getRealMetrics(displayMetrics);
-        float lightX2 = (displayMetrics.widthPixels / 2.0f) - ((!CoreRune.MW_CAPTION_SHELL_BUG_FIX || bounds == null) ? attachInfo.mWindowLeft : bounds.left);
-        float lightY2 = this.mLightY - ((!CoreRune.MW_CAPTION_SHELL_BUG_FIX || bounds == null) ? attachInfo.mWindowTop : bounds.top);
-        float zRatio = Math.min(displayMetrics.widthPixels, displayMetrics.heightPixels) / (displayMetrics.density * 450.0f);
+        float lightX2 =
+                (displayMetrics.widthPixels / 2.0f)
+                        - ((!CoreRune.MW_CAPTION_SHELL_BUG_FIX || bounds == null)
+                                ? attachInfo.mWindowLeft
+                                : bounds.left);
+        float lightY2 =
+                this.mLightY
+                        - ((!CoreRune.MW_CAPTION_SHELL_BUG_FIX || bounds == null)
+                                ? attachInfo.mWindowTop
+                                : bounds.top);
+        float zRatio =
+                Math.min(displayMetrics.widthPixels, displayMetrics.heightPixels)
+                        / (displayMetrics.density * 450.0f);
         float zWeightedAdjustment = (2.0f + zRatio) / 3.0f;
         float lightZ = this.mLightZ * zWeightedAdjustment;
         setLightSourceGeometry(lightX2, lightY2, lightZ, this.mLightRadius);
@@ -428,12 +457,14 @@ public final class ThreadedRenderer extends HardwareRenderer {
         Trace.traceBegin(8L, "Record View#draw()");
         updateViewTreeDisplayList(view);
         if (this.mNextRtFrameCallbacks != null) {
-            ArrayList<HardwareRenderer.FrameDrawingCallback> frameCallbacks = this.mNextRtFrameCallbacks;
+            ArrayList<HardwareRenderer.FrameDrawingCallback> frameCallbacks =
+                    this.mNextRtFrameCallbacks;
             this.mNextRtFrameCallbacks = null;
             setFrameCallback(new AnonymousClass1(frameCallbacks));
         }
         if (this.mRootNodeNeedsUpdate || !this.mRootNode.hasDisplayList()) {
-            RecordingCanvas canvas = this.mRootNode.beginRecording(this.mSurfaceWidth, this.mSurfaceHeight);
+            RecordingCanvas canvas =
+                    this.mRootNode.beginRecording(this.mSurfaceWidth, this.mSurfaceHeight);
             try {
                 int saveCount = canvas.save();
                 canvas.translate(this.mInsetLeft, this.mInsetTop);
@@ -460,14 +491,16 @@ public final class ThreadedRenderer extends HardwareRenderer {
         }
 
         @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
-        public void onFrameDraw(long frame) {
-        }
+        public void onFrameDraw(long frame) {}
 
         @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
         public HardwareRenderer.FrameCommitCallback onFrameDraw(int syncResult, long frame) {
-            final ArrayList<HardwareRenderer.FrameCommitCallback> frameCommitCallbacks = new ArrayList<>();
+            final ArrayList<HardwareRenderer.FrameCommitCallback> frameCommitCallbacks =
+                    new ArrayList<>();
             for (int i = 0; i < this.val$frameCallbacks.size(); i++) {
-                HardwareRenderer.FrameCommitCallback frameCommitCallback = ((HardwareRenderer.FrameDrawingCallback) this.val$frameCallbacks.get(i)).onFrameDraw(syncResult, frame);
+                HardwareRenderer.FrameCommitCallback frameCommitCallback =
+                        ((HardwareRenderer.FrameDrawingCallback) this.val$frameCallbacks.get(i))
+                                .onFrameDraw(syncResult, frame);
                 if (frameCommitCallback != null) {
                     frameCommitCallbacks.add(frameCommitCallback);
                 }
@@ -475,7 +508,9 @@ public final class ThreadedRenderer extends HardwareRenderer {
             if (frameCommitCallbacks.isEmpty()) {
                 return null;
             }
-            return new HardwareRenderer.FrameCommitCallback() { // from class: android.view.ThreadedRenderer$1$$ExternalSyntheticLambda0
+            return new HardwareRenderer
+                    .FrameCommitCallback() { // from class:
+                                             // android.view.ThreadedRenderer$1$$ExternalSyntheticLambda0
                 @Override // android.graphics.HardwareRenderer.FrameCommitCallback
                 public final void onFrameCommit(boolean z) {
                     ThreadedRenderer.AnonymousClass1.lambda$onFrameDraw$0(frameCommitCallbacks, z);
@@ -483,9 +518,11 @@ public final class ThreadedRenderer extends HardwareRenderer {
             };
         }
 
-        static /* synthetic */ void lambda$onFrameDraw$0(ArrayList frameCommitCallbacks, boolean didProduceBuffer) {
+        static /* synthetic */ void lambda$onFrameDraw$0(
+                ArrayList frameCommitCallbacks, boolean didProduceBuffer) {
             for (int i = 0; i < frameCommitCallbacks.size(); i++) {
-                ((HardwareRenderer.FrameCommitCallback) frameCommitCallbacks.get(i)).onFrameCommit(didProduceBuffer);
+                ((HardwareRenderer.FrameCommitCallback) frameCommitCallbacks.get(i))
+                        .onFrameCommit(didProduceBuffer);
             }
         }
     }
@@ -509,7 +546,8 @@ public final class ThreadedRenderer extends HardwareRenderer {
         long start = System.nanoTime();
         int syncResult = syncAndDrawFrame(frameInfo);
         long end = System.nanoTime();
-        Choreographer choreographer = Looper.myLooper() != null ? Choreographer.getInstance() : null;
+        Choreographer choreographer =
+                Looper.myLooper() != null ? Choreographer.getInstance() : null;
         if (choreographer != null) {
             choreographer.setSyncAndDrawFrameDuration(end - start);
         }
@@ -551,7 +589,9 @@ public final class ThreadedRenderer extends HardwareRenderer {
             display.getRealMetrics(displayMetrics);
             float lightX = (displayMetrics.widthPixels / 2.0f) - windowLeft;
             float lightY = this.mLightY - windowTop;
-            float zRatio = Math.min(displayMetrics.widthPixels, displayMetrics.heightPixels) / (displayMetrics.density * 450.0f);
+            float zRatio =
+                    Math.min(displayMetrics.widthPixels, displayMetrics.heightPixels)
+                            / (displayMetrics.density * 450.0f);
             float zWeightedAdjustment = (2.0f + zRatio) / 3.0f;
             float lightZ = this.mLightZ * zWeightedAdjustment;
             setLightSourceGeometry(lightX, lightY, lightZ, this.mLightRadius);

@@ -9,9 +9,12 @@ import android.os.storage.IStorageManager;
 import android.os.storage.StorageVolume;
 import android.util.DataUnit;
 import android.util.Log;
+
 import com.android.internal.content.InstallLocationUtils;
 import com.android.internal.content.NativeLibraryHelper;
+
 import com.samsung.android.media.AudioParameter;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,7 +33,8 @@ public class PackageHelperExt {
     private static final long MB_IN_BYTES = DataUnit.MEBIBYTES.toBytes(1);
 
     public interface StorageManagerExt {
-        int createSecureContainer(String str, int i, String str2, String str3, int i2, boolean z) throws RemoteException;
+        int createSecureContainer(String str, int i, String str2, String str3, int i2, boolean z)
+                throws RemoteException;
 
         int destroySecureContainer(String str, boolean z) throws RemoteException;
 
@@ -64,12 +68,21 @@ public class PackageHelperExt {
     }
 
     public static StorageManagerExt getStorageManagerExt() throws RemoteException {
-        return new StorageManagerExt() { // from class: com.samsung.android.core.pm.containerservice.PackageHelperExt.1
+        return new StorageManagerExt() { // from class:
+                                         // com.samsung.android.core.pm.containerservice.PackageHelperExt.1
             IStorageManager mStorageManager = PackageHelperExt.getStorageManager();
 
             @Override // com.samsung.android.core.pm.containerservice.PackageHelperExt.StorageManagerExt
-            public int createSecureContainer(String id, int sizeMb, String fstype, String key, int ownerUid, boolean external) throws RemoteException {
-                return this.mStorageManager.createSecureContainer(id, sizeMb, fstype, key, ownerUid, external);
+            public int createSecureContainer(
+                    String id,
+                    int sizeMb,
+                    String fstype,
+                    String key,
+                    int ownerUid,
+                    boolean external)
+                    throws RemoteException {
+                return this.mStorageManager.createSecureContainer(
+                        id, sizeMb, fstype, key, ownerUid, external);
             }
 
             @Override // com.samsung.android.core.pm.containerservice.PackageHelperExt.StorageManagerExt
@@ -78,12 +91,14 @@ public class PackageHelperExt {
             }
 
             @Override // com.samsung.android.core.pm.containerservice.PackageHelperExt.StorageManagerExt
-            public int resizeSecureContainer(String id, int sizeMb, String key) throws RemoteException {
+            public int resizeSecureContainer(String id, int sizeMb, String key)
+                    throws RemoteException {
                 return this.mStorageManager.resizeSecureContainer(id, sizeMb, key);
             }
 
             @Override // com.samsung.android.core.pm.containerservice.PackageHelperExt.StorageManagerExt
-            public int mountSecureContainer(String id, String key, int ownerUid, boolean readOnly) throws RemoteException {
+            public int mountSecureContainer(String id, String key, int ownerUid, boolean readOnly)
+                    throws RemoteException {
                 return this.mStorageManager.mountSecureContainer(id, key, ownerUid, readOnly);
             }
 
@@ -123,7 +138,8 @@ public class PackageHelperExt {
             }
 
             @Override // com.samsung.android.core.pm.containerservice.PackageHelperExt.StorageManagerExt
-            public int fixPermissionsSecureContainer(String id, int gid, String filename) throws RemoteException {
+            public int fixPermissionsSecureContainer(String id, int gid, String filename)
+                    throws RemoteException {
                 return this.mStorageManager.fixPermissionsSecureContainer(id, gid, filename);
             }
 
@@ -138,12 +154,14 @@ public class PackageHelperExt {
             }
 
             @Override // com.samsung.android.core.pm.containerservice.PackageHelperExt.StorageManagerExt
-            public int trimSecureContainer(String id, int sizeMb, String key) throws RemoteException {
+            public int trimSecureContainer(String id, int sizeMb, String key)
+                    throws RemoteException {
                 return this.mStorageManager.trimSecureContainer(id, sizeMb, key);
             }
 
             @Override // com.samsung.android.core.pm.containerservice.PackageHelperExt.StorageManagerExt
-            public StorageVolume[] getVolumeList(int userId, String callingPackage, int flags) throws RemoteException {
+            public StorageVolume[] getVolumeList(int userId, String callingPackage, int flags)
+                    throws RemoteException {
                 return this.mStorageManager.getVolumeList(userId, callingPackage, flags);
             }
         };
@@ -158,7 +176,9 @@ public class PackageHelperExt {
         throw new RemoteException("Could not contact storagemanager service");
     }
 
-    public static long calculateInstalledSize(PackageLite pkg, NativeLibraryHelper.Handle handle, String abiOverride) throws IOException {
+    public static long calculateInstalledSize(
+            PackageLite pkg, NativeLibraryHelper.Handle handle, String abiOverride)
+            throws IOException {
         return InstallLocationUtils.calculateInstalledSize(pkg, handle, abiOverride);
     }
 
@@ -168,7 +188,8 @@ public class PackageHelperExt {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String createSdDir(long r10, java.lang.String r12, java.lang.String r13, int r14, boolean r15) {
+    public static java.lang.String createSdDir(
+            long r10, java.lang.String r12, java.lang.String r13, int r14, boolean r15) {
         /*
             double r0 = (double) r10
             r2 = 4607317526788838523(0x3ff07ae147ae147b, double:1.03)
@@ -234,7 +255,10 @@ public class PackageHelperExt {
             android.util.Log.e(r2, r3)
             return r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.core.pm.containerservice.PackageHelperExt.createSdDir(long, java.lang.String, java.lang.String, int, boolean):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.core.pm.containerservice.PackageHelperExt.createSdDir(long,"
+                    + " java.lang.String, java.lang.String, int, boolean):java.lang.String");
     }
 
     public static boolean resizeSdDir(long sizeBytes, String cid, String sdEncKey) {
@@ -313,7 +337,9 @@ public class PackageHelperExt {
         try {
             return getStorageManagerExt().getSecureContainerFilesystemPath(cid);
         } catch (RemoteException e) {
-            Log.e(TAG, "Failed to get container file system path for " + cid + " with exception " + e);
+            Log.e(
+                    TAG,
+                    "Failed to get container file system path for " + cid + " with exception " + e);
             return null;
         }
     }
@@ -406,7 +432,9 @@ public class PackageHelperExt {
                 while (it.hasNext()) {
                     ZipEntry zipEntry = (ZipEntry) it.next();
                     String zipEntryName = zipEntry.getName();
-                    if ("AndroidManifest.xml".equals(zipEntryName) || "resources.arsc".equals(zipEntryName) || zipEntryName.startsWith("res/")) {
+                    if ("AndroidManifest.xml".equals(zipEntryName)
+                            || "resources.arsc".equals(zipEntryName)
+                            || zipEntryName.startsWith("res/")) {
                         size += zipEntry.getSize();
                         if (publicZipFile != null) {
                             copyZipEntry(zipEntry, privateZip, publicZipOutStream);
@@ -432,7 +460,8 @@ public class PackageHelperExt {
         }
     }
 
-    private static void copyZipEntry(ZipEntry zipEntry, ZipFile inZipFile, ZipOutputStream outZipStream) throws IOException {
+    private static void copyZipEntry(
+            ZipEntry zipEntry, ZipFile inZipFile, ZipOutputStream outZipStream) throws IOException {
         ZipEntry newEntry;
         byte[] buffer = new byte[4096];
         if (zipEntry.getMethod() == 0) {

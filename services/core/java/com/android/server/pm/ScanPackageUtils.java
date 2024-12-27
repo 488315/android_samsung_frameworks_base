@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.jar.StrictJarFile;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageHidden;
 import com.android.internal.pm.parsing.pkg.ParsedPackage;
 import com.android.internal.pm.pkg.component.ParsedMainComponent;
@@ -13,6 +14,7 @@ import com.android.server.pm.parsing.library.PackageBackwardCompatibility;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageUserStateImpl;
 import com.android.server.utils.WatchedArraySet;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,7 +62,8 @@ public abstract class ScanPackageUtils {
         }
     }
 
-    public static List applyAdjustedAbiToSharedUser(SharedUserSetting sharedUserSetting, ParsedPackage parsedPackage, String str) {
+    public static List applyAdjustedAbiToSharedUser(
+            SharedUserSetting sharedUserSetting, ParsedPackage parsedPackage, String str) {
         if (parsedPackage != null) {
             parsedPackage.setPrimaryCpuAbi(str);
         }
@@ -68,12 +71,15 @@ public abstract class ScanPackageUtils {
         ArrayList arrayList = null;
         for (int i = 0; i < watchedArraySet.mStorage.size(); i++) {
             PackageSetting packageSetting = (PackageSetting) watchedArraySet.mStorage.valueAt(i);
-            if ((parsedPackage == null || !parsedPackage.getPackageName().equals(packageSetting.mName)) && packageSetting.mPrimaryCpuAbi == null) {
+            if ((parsedPackage == null
+                            || !parsedPackage.getPackageName().equals(packageSetting.mName))
+                    && packageSetting.mPrimaryCpuAbi == null) {
                 packageSetting.mPrimaryCpuAbi = str;
                 packageSetting.onChanged$2();
                 packageSetting.onChanged$2();
                 AndroidPackageHidden androidPackageHidden = packageSetting.pkg;
-                if (androidPackageHidden != null && !TextUtils.equals(str, androidPackageHidden.getPrimaryCpuAbi())) {
+                if (androidPackageHidden != null
+                        && !TextUtils.equals(str, androidPackageHidden.getPrimaryCpuAbi())) {
                     if (arrayList == null) {
                         arrayList = new ArrayList();
                     }
@@ -84,7 +90,8 @@ public abstract class ScanPackageUtils {
         return arrayList;
     }
 
-    public static void applyPolicy(ParsedPackage parsedPackage, int i, AndroidPackage androidPackage, boolean z) {
+    public static void applyPolicy(
+            ParsedPackage parsedPackage, int i, AndroidPackage androidPackage, boolean z) {
         boolean z2;
         boolean z3 = false;
         if ((65536 & i) != 0) {
@@ -92,13 +99,20 @@ public abstract class ScanPackageUtils {
             if (parsedPackage.isDirectBootAware()) {
                 parsedPackage.setAllComponentsDirectBootAware(true);
             }
-            File[] compressedFiles = PackageManagerServiceUtils.getCompressedFiles(parsedPackage.getPath());
+            File[] compressedFiles =
+                    PackageManagerServiceUtils.getCompressedFiles(parsedPackage.getPath());
             if (compressedFiles != null && compressedFiles.length > 0) {
                 parsedPackage.setStub(true);
             }
             z2 = true;
         } else {
-            parsedPackage.clearProtectedBroadcasts().setCoreApp(false).setPersistent(false).setDefaultToDeviceProtectedStorage(false).setDirectBootAware(false).capPermissionPriorities();
+            parsedPackage
+                    .clearProtectedBroadcasts()
+                    .setCoreApp(false)
+                    .setPersistent(false)
+                    .setDefaultToDeviceProtectedStorage(false)
+                    .setDirectBootAware(false)
+                    .capPermissionPriorities();
             z2 = z;
         }
         int i2 = 131072 & i;
@@ -106,8 +120,19 @@ public abstract class ScanPackageUtils {
             parsedPackage.markNotActivitiesAsNotExportedIfSingleUser();
         }
         parsedPackage.setApex((67108864 & i) != 0);
-        parsedPackage.setPrivileged(i2 != 0).setOem((262144 & i) != 0).setVendor((524288 & i) != 0).setProduct((1048576 & i) != 0).setSystemExt((2097152 & i) != 0).setOdm((i & 4194304) != 0);
-        if ("android".equals(parsedPackage.getPackageName()) || (androidPackage != null && PackageManagerServiceUtils.compareSignatures(androidPackage.getSigningDetails(), parsedPackage.getSigningDetails()) == 0)) {
+        parsedPackage
+                .setPrivileged(i2 != 0)
+                .setOem((262144 & i) != 0)
+                .setVendor((524288 & i) != 0)
+                .setProduct((1048576 & i) != 0)
+                .setSystemExt((2097152 & i) != 0)
+                .setOdm((i & 4194304) != 0);
+        if ("android".equals(parsedPackage.getPackageName())
+                || (androidPackage != null
+                        && PackageManagerServiceUtils.compareSignatures(
+                                        androidPackage.getSigningDetails(),
+                                        parsedPackage.getSigningDetails())
+                                == 0)) {
             z3 = true;
         }
         parsedPackage.setSignedWithPlatformKey(z3);
@@ -117,14 +142,16 @@ public abstract class ScanPackageUtils {
         PackageBackwardCompatibility.modifySharedLibraries(parsedPackage, z2, z);
     }
 
-    public static void assertPackageProcesses(AndroidPackage androidPackage, List list, Map map, String str) {
+    public static void assertPackageProcesses(
+            AndroidPackage androidPackage, List list, Map map, String str) {
         if (list == null) {
             return;
         }
         for (int size = list.size() - 1; size >= 0; size--) {
             ParsedMainComponent parsedMainComponent = (ParsedMainComponent) list.get(size);
             if (!map.containsKey(parsedMainComponent.getProcessName())) {
-                StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Can't install because ", str, " ");
+                StringBuilder m =
+                        DumpUtils$$ExternalSyntheticOutline0.m("Can't install because ", str, " ");
                 m.append(parsedMainComponent.getClassName());
                 m.append("'s process attribute ");
                 m.append(parsedMainComponent.getProcessName());
@@ -142,57 +169,81 @@ public abstract class ScanPackageUtils {
             return;
         }
         if (processes.containsKey(androidPackage.getProcessName())) {
-            assertPackageProcesses(androidPackage, androidPackage.getActivities(), processes, "activity");
-            assertPackageProcesses(androidPackage, androidPackage.getServices(), processes, "service");
-            assertPackageProcesses(androidPackage, androidPackage.getReceivers(), processes, "receiver");
-            assertPackageProcesses(androidPackage, androidPackage.getProviders(), processes, "provider");
+            assertPackageProcesses(
+                    androidPackage, androidPackage.getActivities(), processes, "activity");
+            assertPackageProcesses(
+                    androidPackage, androidPackage.getServices(), processes, "service");
+            assertPackageProcesses(
+                    androidPackage, androidPackage.getReceivers(), processes, "receiver");
+            assertPackageProcesses(
+                    androidPackage, androidPackage.getProviders(), processes, "provider");
             return;
         }
-        throw new PackageManagerException(-122, "Can't install because application tag's process attribute " + androidPackage.getProcessName() + " (in package " + androidPackage.getPackageName() + ") is not included in the <processes> list");
+        throw new PackageManagerException(
+                -122,
+                "Can't install because application tag's process attribute "
+                        + androidPackage.getProcessName()
+                        + " (in package "
+                        + androidPackage.getPackageName()
+                        + ") is not included in the <processes> list");
     }
 
     public static void assertStaticSharedLibraryIsValid(AndroidPackage androidPackage, int i) {
         if (androidPackage.getTargetSdkVersion() < 26) {
-            throw PackageManagerException.ofInternalError(-22, "Packages declaring static-shared libs must target O SDK or higher");
+            throw PackageManagerException.ofInternalError(
+                    -22, "Packages declaring static-shared libs must target O SDK or higher");
         }
         if ((i & 8192) != 0) {
-            throw PackageManagerException.ofInternalError(-23, "Packages declaring static-shared libs cannot be instant apps");
+            throw PackageManagerException.ofInternalError(
+                    -23, "Packages declaring static-shared libs cannot be instant apps");
         }
         if (!ArrayUtils.isEmpty(androidPackage.getOriginalPackages())) {
-            throw PackageManagerException.ofInternalError(-24, "Packages declaring static-shared libs cannot be renamed");
+            throw PackageManagerException.ofInternalError(
+                    -24, "Packages declaring static-shared libs cannot be renamed");
         }
         if (!ArrayUtils.isEmpty(androidPackage.getLibraryNames())) {
-            throw PackageManagerException.ofInternalError(-25, "Packages declaring static-shared libs cannot declare dynamic libs");
+            throw PackageManagerException.ofInternalError(
+                    -25, "Packages declaring static-shared libs cannot declare dynamic libs");
         }
         if (androidPackage.getSharedUserId() != null) {
-            throw PackageManagerException.ofInternalError(-26, "Packages declaring static-shared libs cannot declare shared users");
+            throw PackageManagerException.ofInternalError(
+                    -26, "Packages declaring static-shared libs cannot declare shared users");
         }
         if (!androidPackage.getActivities().isEmpty()) {
-            throw PackageManagerException.ofInternalError(-27, "Static shared libs cannot declare activities");
+            throw PackageManagerException.ofInternalError(
+                    -27, "Static shared libs cannot declare activities");
         }
         if (!androidPackage.getServices().isEmpty()) {
-            throw PackageManagerException.ofInternalError(-28, "Static shared libs cannot declare services");
+            throw PackageManagerException.ofInternalError(
+                    -28, "Static shared libs cannot declare services");
         }
         if (!androidPackage.getProviders().isEmpty()) {
-            throw PackageManagerException.ofInternalError(-29, "Static shared libs cannot declare content providers");
+            throw PackageManagerException.ofInternalError(
+                    -29, "Static shared libs cannot declare content providers");
         }
         if (!androidPackage.getReceivers().isEmpty()) {
-            throw PackageManagerException.ofInternalError(-30, "Static shared libs cannot declare broadcast receivers");
+            throw PackageManagerException.ofInternalError(
+                    -30, "Static shared libs cannot declare broadcast receivers");
         }
         if (!androidPackage.getPermissionGroups().isEmpty()) {
-            throw PackageManagerException.ofInternalError(-31, "Static shared libs cannot declare permission groups");
+            throw PackageManagerException.ofInternalError(
+                    -31, "Static shared libs cannot declare permission groups");
         }
         if (!androidPackage.getAttributions().isEmpty()) {
-            throw PackageManagerException.ofInternalError(-32, "Static shared libs cannot declare features");
+            throw PackageManagerException.ofInternalError(
+                    -32, "Static shared libs cannot declare features");
         }
         if (!androidPackage.getPermissions().isEmpty()) {
-            throw PackageManagerException.ofInternalError(-33, "Static shared libs cannot declare permissions");
+            throw PackageManagerException.ofInternalError(
+                    -33, "Static shared libs cannot declare permissions");
         }
         if (!androidPackage.getProtectedBroadcasts().isEmpty()) {
-            throw PackageManagerException.ofInternalError(-34, "Static shared libs cannot declare protected broadcasts");
+            throw PackageManagerException.ofInternalError(
+                    -34, "Static shared libs cannot declare protected broadcasts");
         }
         if (androidPackage.getOverlayTarget() != null) {
-            throw PackageManagerException.ofInternalError(-35, "Static shared libs cannot be overlay targets");
+            throw PackageManagerException.ofInternalError(
+                    -35, "Static shared libs cannot be overlay targets");
         }
     }
 
@@ -249,15 +300,29 @@ public abstract class ScanPackageUtils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.pm.ScanResult scanPackageOnlyLI(com.android.server.pm.ScanRequest r81, com.android.server.pm.PackageManagerServiceInjector r82, boolean r83, long r84) throws com.android.server.pm.PackageManagerException {
+    public static com.android.server.pm.ScanResult scanPackageOnlyLI(
+            com.android.server.pm.ScanRequest r81,
+            com.android.server.pm.PackageManagerServiceInjector r82,
+            boolean r83,
+            long r84)
+            throws com.android.server.pm.PackageManagerException {
         /*
             Method dump skipped, instructions count: 3449
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.ScanPackageUtils.scanPackageOnlyLI(com.android.server.pm.ScanRequest, com.android.server.pm.PackageManagerServiceInjector, boolean, long):com.android.server.pm.ScanResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.ScanPackageUtils.scanPackageOnlyLI(com.android.server.pm.ScanRequest,"
+                    + " com.android.server.pm.PackageManagerServiceInjector, boolean,"
+                    + " long):com.android.server.pm.ScanResult");
     }
 
-    public static void setInstantAppForUser(PackageManagerServiceInjector packageManagerServiceInjector, PackageSetting packageSetting, int i, boolean z, boolean z2) {
+    public static void setInstantAppForUser(
+            PackageManagerServiceInjector packageManagerServiceInjector,
+            PackageSetting packageSetting,
+            int i,
+            boolean z,
+            boolean z2) {
         if (z || z2) {
             if (i != -1) {
                 if (z && !packageSetting.getInstantApp(i)) {

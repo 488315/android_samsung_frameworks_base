@@ -13,9 +13,11 @@ public interface IProxyService extends IInterface {
 
     void deregisterAgent(String str) throws RemoteException;
 
-    boolean registerAgentByAction(String str, int i, String str2, String str3) throws RemoteException;
+    boolean registerAgentByAction(String str, int i, String str2, String str3)
+            throws RemoteException;
 
-    boolean registerAgentByMetadata(String str, int i, String str2, String str3) throws RemoteException;
+    boolean registerAgentByMetadata(String str, int i, String str2, String str3)
+            throws RemoteException;
 
     Bundle relay(String str, String str2, String str3, Bundle bundle) throws RemoteException;
 
@@ -23,26 +25,31 @@ public interface IProxyService extends IInterface {
 
     public static class Default implements IProxyService {
         @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
-        public boolean registerAgentByAction(String agentName, int userId, String packageName, String actionName) throws RemoteException {
+        public boolean registerAgentByAction(
+                String agentName, int userId, String packageName, String actionName)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
-        public boolean registerAgentByMetadata(String agentName, int userId, String packageName, String metaDataName) throws RemoteException {
+        public boolean registerAgentByMetadata(
+                String agentName, int userId, String packageName, String metaDataName)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
-        public void deregisterAgent(String agentName) throws RemoteException {
-        }
+        public void deregisterAgent(String agentName) throws RemoteException {}
 
         @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
-        public Bundle relay(String agentName, String svcName, String action, Bundle params) throws RemoteException {
+        public Bundle relay(String agentName, String svcName, String action, Bundle params)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
-        public Bundle relayAsync(String agentName, String svcName, String action, Bundle params) throws RemoteException {
+        public Bundle relayAsync(String agentName, String svcName, String action, Bundle params)
+                throws RemoteException {
             return null;
         }
 
@@ -52,7 +59,7 @@ public interface IProxyService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProxyService {
+    public abstract static class Stub extends Binder implements IProxyService {
         static final int TRANSACTION_deregisterAgent = 3;
         static final int TRANSACTION_registerAgentByAction = 1;
         static final int TRANSACTION_registerAgentByMetadata = 2;
@@ -102,7 +109,8 @@ public interface IProxyService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IProxyService.DESCRIPTOR);
             }
@@ -179,7 +187,9 @@ public interface IProxyService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
-            public boolean registerAgentByAction(String agentName, int userId, String packageName, String actionName) throws RemoteException {
+            public boolean registerAgentByAction(
+                    String agentName, int userId, String packageName, String actionName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -199,7 +209,9 @@ public interface IProxyService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
-            public boolean registerAgentByMetadata(String agentName, int userId, String packageName, String metaDataName) throws RemoteException {
+            public boolean registerAgentByMetadata(
+                    String agentName, int userId, String packageName, String metaDataName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -234,7 +246,8 @@ public interface IProxyService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
-            public Bundle relay(String agentName, String svcName, String action, Bundle params) throws RemoteException {
+            public Bundle relay(String agentName, String svcName, String action, Bundle params)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -254,7 +267,8 @@ public interface IProxyService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
-            public Bundle relayAsync(String agentName, String svcName, String action, Bundle params) throws RemoteException {
+            public Bundle relayAsync(String agentName, String svcName, String action, Bundle params)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

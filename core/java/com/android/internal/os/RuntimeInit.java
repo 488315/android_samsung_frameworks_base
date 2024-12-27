@@ -18,20 +18,24 @@ import android.os.SystemProperties;
 import android.os.Trace;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.logging.AndroidConfig;
-import com.samsung.android.rune.CoreRune;
-import com.samsung.isrb.IsrbHooks;
+
 import dalvik.system.RuntimeHooks;
 import dalvik.system.VMRuntime;
+
+import libcore.content.type.MimeMap;
+
+import com.samsung.android.rune.CoreRune;
+import com.samsung.isrb.IsrbHooks;
+
 import java.io.PrintStream;
-import java.lang.Thread;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.logging.LogManager;
-import libcore.content.type.MimeMap;
 
 /* loaded from: classes5.dex */
 public class RuntimeInit {
@@ -48,7 +52,12 @@ public class RuntimeInit {
     public static PrintStream sOut$ravenwood;
 
     public interface ApplicationWtfHandler {
-        boolean handleApplicationWtf(IBinder iBinder, String str, boolean z, ApplicationErrorReport.ParcelableCrashInfo parcelableCrashInfo, int i);
+        boolean handleApplicationWtf(
+                IBinder iBinder,
+                String str,
+                boolean z,
+                ApplicationErrorReport.ParcelableCrashInfo parcelableCrashInfo,
+                int i);
     }
 
     private static final native void nativeFinishInit();
@@ -89,12 +98,18 @@ public class RuntimeInit {
                 return;
             }
             if (RuntimeInit.mApplicationObject == null && 1000 == Process.myUid()) {
-                RuntimeInit.Clog_e(RuntimeInit.TAG, "!@*** FATAL EXCEPTION IN SYSTEM PROCESS: " + t.getName(), e);
-                RuntimeInit.mCrashCount = SystemProperties.getInt(RuntimeInit.SYSPROP_CRASH_COUNT, 0) + 1;
-                SystemProperties.set(RuntimeInit.SYSPROP_CRASH_COUNT, String.valueOf(RuntimeInit.mCrashCount));
+                RuntimeInit.Clog_e(
+                        RuntimeInit.TAG,
+                        "!@*** FATAL EXCEPTION IN SYSTEM PROCESS: " + t.getName(),
+                        e);
+                RuntimeInit.mCrashCount =
+                        SystemProperties.getInt(RuntimeInit.SYSPROP_CRASH_COUNT, 0) + 1;
+                SystemProperties.set(
+                        RuntimeInit.SYSPROP_CRASH_COUNT, String.valueOf(RuntimeInit.mCrashCount));
                 return;
             }
-            RuntimeInit.logUncaught(t.getName(), ActivityThread.currentProcessName(), Process.myPid(), e);
+            RuntimeInit.logUncaught(
+                    t.getName(), ActivityThread.currentProcessName(), Process.myPid(), e);
         }
     }
 
@@ -129,7 +144,8 @@ public class RuntimeInit {
             if (ActivityThread.currentActivityThread() != null) {
                 ActivityThread.currentActivityThread().stopProfiling();
             }
-            if (SystemProperties.getInt(RuntimeInit.SYSPROP_SYSTEMSERVER_PID, 0) == Process.myPid()) {
+            if (SystemProperties.getInt(RuntimeInit.SYSPROP_SYSTEMSERVER_PID, 0)
+                    == Process.myPid()) {
                 String reason = Debug.PLATFORM_EXCEPTION;
                 String extraInfo = t.getName();
                 String silentResetInfo = getSilentResetInfo(e);
@@ -137,10 +153,14 @@ public class RuntimeInit {
                     reason = Debug.PLATFORM_SILENT_RESET;
                     extraInfo = silentResetInfo;
                 }
-                RuntimeInit.Mlog_i(RuntimeInit.TAG, "!@*** saveResetReason with reason = " + reason, null);
+                RuntimeInit.Mlog_i(
+                        RuntimeInit.TAG, "!@*** saveResetReason with reason = " + reason, null);
                 Debug.saveResetReason(reason, extraInfo);
             }
-            ActivityManager.getService().handleApplicationCrash(RuntimeInit.mApplicationObject, new ApplicationErrorReport.ParcelableCrashInfo(e));
+            ActivityManager.getService()
+                    .handleApplicationCrash(
+                            RuntimeInit.mApplicationObject,
+                            new ApplicationErrorReport.ParcelableCrashInfo(e));
         }
 
         private String getSilentResetInfo(Throwable e) {
@@ -169,12 +189,14 @@ public class RuntimeInit {
 
     public static void preForkInit() {
         enableDdms();
-        MimeMap.setDefaultSupplier(new Supplier() { // from class: com.android.internal.os.RuntimeInit$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return DefaultMimeMapFactory.create();
-            }
-        });
+        MimeMap.setDefaultSupplier(
+                new Supplier() { // from class:
+                                 // com.android.internal.os.RuntimeInit$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        return DefaultMimeMapFactory.create();
+                    }
+                });
     }
 
     protected static final void commonInit() {
@@ -182,14 +204,16 @@ public class RuntimeInit {
         RuntimeHooks.setUncaughtExceptionPreHandler(loggingHandler);
         Thread.setDefaultUncaughtExceptionHandler(new KillApplicationHandler(loggingHandler));
         IsrbHooks.init();
-        RuntimeHooks.setTimeZoneIdSupplier(new Supplier() { // from class: com.android.internal.os.RuntimeInit$$ExternalSyntheticLambda1
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                String str;
-                str = SystemProperties.get("persist.sys.timezone");
-                return str;
-            }
-        });
+        RuntimeHooks.setTimeZoneIdSupplier(
+                new Supplier() { // from class:
+                                 // com.android.internal.os.RuntimeInit$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        String str;
+                        str = SystemProperties.get("persist.sys.timezone");
+                        return str;
+                    }
+                });
         LogManager.getLogManager().reset();
         new AndroidConfig();
         String userAgent = getDefaultUserAgent();
@@ -221,14 +245,16 @@ public class RuntimeInit {
         return result.toString();
     }
 
-    protected static Runnable findStaticMain(String className, String[] argv, ClassLoader classLoader) {
+    protected static Runnable findStaticMain(
+            String className, String[] argv, ClassLoader classLoader) {
         try {
             Class<?> cl = Class.forName(className, true, classLoader);
             try {
                 Method m = cl.getMethod("main", String[].class);
                 int modifiers = m.getModifiers();
                 if (!Modifier.isStatic(modifiers) || !Modifier.isPublic(modifiers)) {
-                    throw new RuntimeException("Main method is not public and static on " + className);
+                    throw new RuntimeException(
+                            "Main method is not public and static on " + className);
                 }
                 return new MethodAndArgsCaller(m, argv);
             } catch (NoSuchMethodException ex) {
@@ -250,7 +276,11 @@ public class RuntimeInit {
         nativeFinishInit();
     }
 
-    protected static Runnable applicationInit(int targetSdkVersion, long[] disabledCompatChanges, String[] argv, ClassLoader classLoader) {
+    protected static Runnable applicationInit(
+            int targetSdkVersion,
+            long[] disabledCompatChanges,
+            String[] argv,
+            ClassLoader classLoader) {
         nativeSetExitWithoutCleanup(true);
         VMRuntime.getRuntime().setTargetSdkVersion(targetSdkVersion);
         VMRuntime.getRuntime().setDisabledCompatChanges(disabledCompatChanges);
@@ -282,11 +312,23 @@ public class RuntimeInit {
         try {
             IActivityManager am = ActivityManager.getService();
             if (am != null) {
-                exit = am.handleApplicationWtf(mApplicationObject, tag, system, new ApplicationErrorReport.ParcelableCrashInfo(t), Process.myPid());
+                exit =
+                        am.handleApplicationWtf(
+                                mApplicationObject,
+                                tag,
+                                system,
+                                new ApplicationErrorReport.ParcelableCrashInfo(t),
+                                Process.myPid());
             } else {
                 ApplicationWtfHandler handler = sDefaultApplicationWtfHandler;
                 if (handler != null) {
-                    exit = handler.handleApplicationWtf(mApplicationObject, tag, system, new ApplicationErrorReport.ParcelableCrashInfo(t), Process.myPid());
+                    exit =
+                            handler.handleApplicationWtf(
+                                    mApplicationObject,
+                                    tag,
+                                    system,
+                                    new ApplicationErrorReport.ParcelableCrashInfo(t),
+                                    Process.myPid());
                 } else {
                     Slog.e(TAG, "Original WTF:", t);
                 }
@@ -303,8 +345,7 @@ public class RuntimeInit {
         }
     }
 
-    public static void wtf$ravenwood(String tag, Throwable t, boolean system) {
-    }
+    public static void wtf$ravenwood(String tag, Throwable t, boolean system) {}
 
     public static void setDefaultApplicationWtfHandler(ApplicationWtfHandler handler) {
         sDefaultApplicationWtfHandler = handler;

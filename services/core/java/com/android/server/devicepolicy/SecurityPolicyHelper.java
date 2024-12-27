@@ -13,7 +13,9 @@ public final class SecurityPolicyHelper {
     public SecurityPolicyHelper(Context context) {
         this.mContext = context;
         if (this.mDPM == null) {
-            this.mDPM = IDevicePolicyManager.Stub.asInterface(ServiceManager.getService("device_policy"));
+            this.mDPM =
+                    IDevicePolicyManager.Stub.asInterface(
+                            ServiceManager.getService("device_policy"));
         }
         this.mDPM = this.mDPM;
     }

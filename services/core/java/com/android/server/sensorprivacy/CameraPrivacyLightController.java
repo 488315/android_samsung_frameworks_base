@@ -19,7 +19,9 @@ import android.os.SystemClock;
 import android.permission.PermissionManager;
 import android.util.ArraySet;
 import android.util.Pair;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,8 @@ import java.util.concurrent.TimeUnit;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class CameraPrivacyLightController implements AppOpsManager.OnOpActiveChangedListener, SensorEventListener {
+public final class CameraPrivacyLightController
+        implements AppOpsManager.OnOpActiveChangedListener, SensorEventListener {
     public static final double LIGHT_VALUE_MULTIPLIER = 1.0d / Math.log(1.1d);
     public final AppOpsManager mAppOpsManager;
     public final int[] mColors;
@@ -54,7 +57,8 @@ public final class CameraPrivacyLightController implements AppOpsManager.OnOpAct
     public long mElapsedRealTime = -1;
 
     public CameraPrivacyLightController(Context context, Looper looper) {
-        int[] intArray = context.getResources().getIntArray(R.array.config_roundedCornerBottomRadiusArray);
+        int[] intArray =
+                context.getResources().getIntArray(R.array.config_roundedCornerBottomRadiusArray);
         this.mColors = intArray;
         if (ArrayUtils.isEmpty(intArray)) {
             this.mHandler = null;
@@ -75,13 +79,21 @@ public final class CameraPrivacyLightController implements AppOpsManager.OnOpAct
         this.mAppOpsManager = (AppOpsManager) context.getSystemService(AppOpsManager.class);
         this.mLightsManager = (LightsManager) context.getSystemService(LightsManager.class);
         this.mSensorManager = (SensorManager) context.getSystemService(SensorManager.class);
-        this.mMovingAverageIntervalMillis = context.getResources().getInteger(R.integer.config_defaultNotificationVibrationIntensity);
-        int[] intArray2 = context.getResources().getIntArray(R.array.config_roundedCornerBottomRadiusAdjustmentArray);
+        this.mMovingAverageIntervalMillis =
+                context.getResources()
+                        .getInteger(R.integer.config_defaultNotificationVibrationIntensity);
+        int[] intArray2 =
+                context.getResources()
+                        .getIntArray(R.array.config_roundedCornerBottomRadiusAdjustmentArray);
         if (intArray2.length != intArray.length - 1) {
-            StringBuilder sb = new StringBuilder("There must be exactly one more color than thresholds. Found ");
+            StringBuilder sb =
+                    new StringBuilder(
+                            "There must be exactly one more color than thresholds. Found ");
             sb.append(intArray.length);
             sb.append(" colors and ");
-            throw new IllegalStateException(AmFmBandRange$$ExternalSyntheticOutline0.m(intArray2.length, sb, " thresholds."));
+            throw new IllegalStateException(
+                    AmFmBandRange$$ExternalSyntheticOutline0.m(
+                            intArray2.length, sb, " thresholds."));
         }
         this.mThresholds = new long[intArray2.length];
         for (int i = 0; i < intArray2.length; i++) {
@@ -97,7 +109,10 @@ public final class CameraPrivacyLightController implements AppOpsManager.OnOpAct
         if (this.mCameraLights.isEmpty()) {
             this.mLightSensor = null;
         } else {
-            this.mAppOpsManager.startWatchingActive(new String[]{"android:camera", "android:phone_call_camera"}, this.mExecutor, this);
+            this.mAppOpsManager.startWatchingActive(
+                    new String[] {"android:camera", "android:phone_call_camera"},
+                    this.mExecutor,
+                    this);
             this.mLightSensor = this.mSensorManager.getDefaultSensor(5);
         }
     }
@@ -112,8 +127,7 @@ public final class CameraPrivacyLightController implements AppOpsManager.OnOpAct
     }
 
     @Override // android.hardware.SensorEventListener
-    public final void onAccuracyChanged(Sensor sensor, int i) {
-    }
+    public final void onAccuracyChanged(Sensor sensor, int i) {}
 
     @Override // android.app.AppOpsManager.OnOpActiveChangedListener
     public final void onOpActiveChanged(String str, int i, String str2, boolean z) {
@@ -138,15 +152,23 @@ public final class CameraPrivacyLightController implements AppOpsManager.OnOpAct
         long millis = TimeUnit.NANOSECONDS.toMillis(sensorEvent.timestamp);
         int max = Math.max(0, (int) (Math.log(sensorEvent.values[0]) * LIGHT_VALUE_MULTIPLIER));
         if (this.mAmbientLightValues.isEmpty()) {
-            this.mAmbientLightValues.add(new Pair(Long.valueOf((millis - getCurrentIntervalMillis()) - 1), Integer.valueOf(max)));
+            this.mAmbientLightValues.add(
+                    new Pair(
+                            Long.valueOf((millis - getCurrentIntervalMillis()) - 1),
+                            Integer.valueOf(max)));
         }
         Pair pair = (Pair) this.mAmbientLightValues.peekLast();
         this.mAmbientLightValues.add(new Pair(Long.valueOf(millis), Integer.valueOf(max)));
-        this.mAlvSum = ((millis - ((Long) pair.first).longValue()) * ((Integer) pair.second).intValue()) + this.mAlvSum;
+        this.mAlvSum =
+                ((millis - ((Long) pair.first).longValue()) * ((Integer) pair.second).intValue())
+                        + this.mAlvSum;
         removeObsoleteData(millis);
         updateLightSession();
         this.mHandler.removeCallbacksAndMessages(this.mDelayedUpdateToken);
-        this.mHandler.postDelayed(new CameraPrivacyLightController$$ExternalSyntheticLambda0(this), this.mDelayedUpdateToken, this.mMovingAverageIntervalMillis);
+        this.mHandler.postDelayed(
+                new CameraPrivacyLightController$$ExternalSyntheticLambda0(this),
+                this.mDelayedUpdateToken,
+                this.mMovingAverageIntervalMillis);
     }
 
     public final void removeObsoleteData(long j) {
@@ -157,7 +179,9 @@ public final class CameraPrivacyLightController implements AppOpsManager.OnOpAct
                 this.mAmbientLightValues.addFirst(pair);
                 return;
             }
-            this.mAlvSum -= (((Long) pair2.first).longValue() - ((Long) pair.first).longValue()) * ((Integer) pair.second).intValue();
+            this.mAlvSum -=
+                    (((Long) pair2.first).longValue() - ((Long) pair.first).longValue())
+                            * ((Integer) pair.second).intValue();
         }
     }
 
@@ -173,8 +197,11 @@ public final class CameraPrivacyLightController implements AppOpsManager.OnOpAct
             this.mHandler.post(new CameraPrivacyLightController$$ExternalSyntheticLambda0(this));
             return;
         }
-        Set indicatorExemptedPackages = PermissionManager.getIndicatorExemptedPackages(this.mContext);
-        boolean z = indicatorExemptedPackages.containsAll(this.mActivePackages) && indicatorExemptedPackages.containsAll(this.mActivePhonePackages);
+        Set indicatorExemptedPackages =
+                PermissionManager.getIndicatorExemptedPackages(this.mContext);
+        boolean z =
+                indicatorExemptedPackages.containsAll(this.mActivePackages)
+                        && indicatorExemptedPackages.containsAll(this.mActivePhonePackages);
         if (z && this.mIsAmbientLightListenerRegistered) {
             this.mSensorManager.unregisterListener(this);
             this.mIsAmbientLightListenerRegistered = false;
@@ -207,7 +234,22 @@ public final class CameraPrivacyLightController implements AppOpsManager.OnOpAct
                 }
                 removeObsoleteData(j2);
                 Pair pair = (Pair) this.mAmbientLightValues.peekFirst();
-                longValue = ((j2 - ((Long) ((Pair) this.mAmbientLightValues.peekLast()).first).longValue()) * ((Integer) r5.second).intValue()) + (this.mAlvSum - (Math.max(0L, (j2 - getCurrentIntervalMillis()) - ((Long) pair.first).longValue()) * ((Integer) pair.second).intValue()));
+                longValue =
+                        ((j2
+                                                - ((Long)
+                                                                ((Pair)
+                                                                                this
+                                                                                        .mAmbientLightValues
+                                                                                        .peekLast())
+                                                                        .first)
+                                                        .longValue())
+                                        * ((Integer) r5.second).intValue())
+                                + (this.mAlvSum
+                                        - (Math.max(
+                                                        0L,
+                                                        (j2 - getCurrentIntervalMillis())
+                                                                - ((Long) pair.first).longValue())
+                                                * ((Integer) pair.second).intValue()));
             }
             long currentIntervalMillis = getCurrentIntervalMillis();
             int i2 = 0;
@@ -233,7 +275,9 @@ public final class CameraPrivacyLightController implements AppOpsManager.OnOpAct
             this.mLastLightColor = i;
             LightsRequest.Builder builder = new LightsRequest.Builder();
             for (int i3 = 0; i3 < ((ArrayList) this.mCameraLights).size(); i3++) {
-                builder.addLight((Light) ((ArrayList) this.mCameraLights).get(i3), new LightState.Builder().setColor(i).build());
+                builder.addLight(
+                        (Light) ((ArrayList) this.mCameraLights).get(i3),
+                        new LightState.Builder().setColor(i).build());
             }
             if (this.mLightsSession == null) {
                 this.mLightsSession = this.mLightsManager.openSession(Integer.MAX_VALUE);

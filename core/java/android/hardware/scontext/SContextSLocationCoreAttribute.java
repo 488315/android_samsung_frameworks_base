@@ -57,7 +57,15 @@ public class SContextSLocationCoreAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    public SContextSLocationCoreAttribute(int mode, int action, int fence_id, double latitude, double longitude, int radius, int total_gps_cnt, int success_gps_cnt) {
+    public SContextSLocationCoreAttribute(
+            int mode,
+            int action,
+            int fence_id,
+            double latitude,
+            double longitude,
+            int radius,
+            int total_gps_cnt,
+            int success_gps_cnt) {
         this.mMode = -1;
         this.mAction = -1;
         this.mFenceId = 0;
@@ -102,7 +110,8 @@ public class SContextSLocationCoreAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    public SContextSLocationCoreAttribute(int mode, int action, int fence_id, int radius, int status) {
+    public SContextSLocationCoreAttribute(
+            int mode, int action, int fence_id, int radius, int status) {
         this.mMode = -1;
         this.mAction = -1;
         this.mFenceId = 0;
@@ -145,7 +154,8 @@ public class SContextSLocationCoreAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    public SContextSLocationCoreAttribute(int mode, int action, double latitude, double longitude, int accuracy, long timestamp) {
+    public SContextSLocationCoreAttribute(
+            int mode, int action, double latitude, double longitude, int accuracy, long timestamp) {
         this.mMode = -1;
         this.mAction = -1;
         this.mFenceId = 0;
@@ -168,7 +178,8 @@ public class SContextSLocationCoreAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mMode < -1 || this.mMode > 1) {
             Log.d(TAG, "Mode value is wrong!!");
@@ -236,7 +247,9 @@ public class SContextSLocationCoreAttribute extends SContextAttribute {
             case 0:
                 if (this.mAction == 1) {
                     double[] doubleType = {this.mLatitude, this.mLongitude};
-                    int[] intType = {this.mFenceId, this.mRadius, this.mTotalGpsCnt, this.mSuccessGpsCnt};
+                    int[] intType = {
+                        this.mFenceId, this.mRadius, this.mTotalGpsCnt, this.mSuccessGpsCnt
+                    };
                     attribute.putIntArray("IntType", intType);
                     attribute.putDoubleArray("DoubleType", doubleType);
                     break;
@@ -272,7 +285,12 @@ public class SContextSLocationCoreAttribute extends SContextAttribute {
         }
         attribute.putInt("Mode", this.mMode);
         attribute.putInt("Action", this.mAction);
-        Log.d(TAG, "setAttribute() mode : " + attribute.getInt("Mode") + " action : " + attribute.getInt("Action"));
+        Log.d(
+                TAG,
+                "setAttribute() mode : "
+                        + attribute.getInt("Mode")
+                        + " action : "
+                        + attribute.getInt("Action"));
         super.setAttribute(47, attribute);
     }
 }

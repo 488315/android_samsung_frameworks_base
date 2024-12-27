@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -24,21 +25,24 @@ public class ListFragment extends Fragment {
     View mProgressContainer;
     TextView mStandardEmptyView;
     private final Handler mHandler = new Handler();
-    private final Runnable mRequestFocus = new Runnable() { // from class: android.app.ListFragment.1
-        @Override // java.lang.Runnable
-        public void run() {
-            ListFragment.this.mList.focusableViewAvailable(ListFragment.this.mList);
-        }
-    };
-    private final AdapterView.OnItemClickListener mOnClickListener = new AdapterView.OnItemClickListener() { // from class: android.app.ListFragment.2
-        @Override // android.widget.AdapterView.OnItemClickListener
-        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            ListFragment.this.onListItemClick((ListView) parent, v, position, id);
-        }
-    };
+    private final Runnable mRequestFocus =
+            new Runnable() { // from class: android.app.ListFragment.1
+                @Override // java.lang.Runnable
+                public void run() {
+                    ListFragment.this.mList.focusableViewAvailable(ListFragment.this.mList);
+                }
+            };
+    private final AdapterView.OnItemClickListener mOnClickListener =
+            new AdapterView.OnItemClickListener() { // from class: android.app.ListFragment.2
+                @Override // android.widget.AdapterView.OnItemClickListener
+                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                    ListFragment.this.onListItemClick((ListView) parent, v, position, id);
+                }
+            };
 
     @Override // android.app.Fragment
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(17367060, container, false);
     }
 
@@ -60,8 +64,7 @@ public class ListFragment extends Fragment {
         super.onDestroyView();
     }
 
-    public void onListItemClick(ListView l, View v, int position, long id) {
-    }
+    public void onListItemClick(ListView l, View v, int position, long id) {}
 
     public void setListAdapter(ListAdapter adapter) {
         boolean hadAdapter = this.mAdapter != null;
@@ -125,8 +128,10 @@ public class ListFragment extends Fragment {
         this.mListShown = shown;
         if (shown) {
             if (animate) {
-                this.mProgressContainer.startAnimation(AnimationUtils.loadAnimation(getContext(), 17432577));
-                this.mListContainer.startAnimation(AnimationUtils.loadAnimation(getContext(), 17432576));
+                this.mProgressContainer.startAnimation(
+                        AnimationUtils.loadAnimation(getContext(), 17432577));
+                this.mListContainer.startAnimation(
+                        AnimationUtils.loadAnimation(getContext(), 17432576));
             } else {
                 this.mProgressContainer.clearAnimation();
                 this.mListContainer.clearAnimation();
@@ -136,8 +141,10 @@ public class ListFragment extends Fragment {
             return;
         }
         if (animate) {
-            this.mProgressContainer.startAnimation(AnimationUtils.loadAnimation(getContext(), 17432576));
-            this.mListContainer.startAnimation(AnimationUtils.loadAnimation(getContext(), 17432577));
+            this.mProgressContainer.startAnimation(
+                    AnimationUtils.loadAnimation(getContext(), 17432576));
+            this.mListContainer.startAnimation(
+                    AnimationUtils.loadAnimation(getContext(), 17432577));
         } else {
             this.mProgressContainer.clearAnimation();
             this.mListContainer.clearAnimation();
@@ -171,11 +178,15 @@ public class ListFragment extends Fragment {
             this.mListContainer = root.findViewById(R.id.listContainer);
             View rawListView = root.findViewById(16908298);
             if (!(rawListView instanceof ListView)) {
-                throw new RuntimeException("Content has view with id attribute 'android.R.id.list' that is not a ListView class");
+                throw new RuntimeException(
+                        "Content has view with id attribute 'android.R.id.list' that is not a"
+                                + " ListView class");
             }
             this.mList = (ListView) rawListView;
             if (this.mList == null) {
-                throw new RuntimeException("Your content must have a ListView whose id attribute is 'android.R.id.list'");
+                throw new RuntimeException(
+                        "Your content must have a ListView whose id attribute is"
+                                + " 'android.R.id.list'");
             }
             if (this.mEmptyView != null) {
                 this.mList.setEmptyView(this.mEmptyView);

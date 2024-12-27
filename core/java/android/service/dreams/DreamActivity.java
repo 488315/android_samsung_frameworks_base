@@ -3,7 +3,6 @@ package android.service.dreams;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.dreams.DreamService;
 import android.text.TextUtils;
 
 /* loaded from: classes3.dex */

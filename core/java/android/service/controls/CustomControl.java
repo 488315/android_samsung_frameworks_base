@@ -5,25 +5,29 @@ import android.graphics.drawable.Icon;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public class CustomControl implements Parcelable {
-    public static final Parcelable.Creator<CustomControl> CREATOR = new Parcelable.Creator<CustomControl>() { // from class: android.service.controls.CustomControl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CustomControl createFromParcel(Parcel source) {
-            return new CustomControl(source);
-        }
+    public static final Parcelable.Creator<CustomControl> CREATOR =
+            new Parcelable.Creator<
+                    CustomControl>() { // from class: android.service.controls.CustomControl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CustomControl createFromParcel(Parcel source) {
+                    return new CustomControl(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CustomControl[] newArray(int size) {
-            return new CustomControl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CustomControl[] newArray(int size) {
+                    return new CustomControl[size];
+                }
+            };
     public static final int CUSTOM_SOUND_AUTOMATION_ERROR = 1;
     public static final int CUSTOM_SOUND_AUTOMATION_SUCCESS = 2;
     public static final int CUSTOM_SOUND_MEDIA_PAUSE = 3;
@@ -54,16 +58,13 @@ public class CustomControl implements Parcelable {
     private boolean mUseFullScreenDetailDialog;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CustomSound {
-    }
+    public @interface CustomSound {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LayoutType {
-    }
+    public @interface LayoutType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StatusIconType {
-    }
+    public @interface StatusIconType {}
 
     CustomControl() {
         this.mCustomIconAnimationJson = "";
@@ -251,25 +252,30 @@ public class CustomControl implements Parcelable {
         private int mCustomIconAnimationEndFrame = -1;
         private int mCustomIconAnimationRepeatCount = -1;
 
-        public CustomStatelessBuilder() {
-        }
+        public CustomStatelessBuilder() {}
 
         public CustomStatelessBuilder(CustomControl customControl) {
             setUseCustomIconWithoutShadowBg(customControl.mUseCustomIconWithoutShadowBg);
             setUseCustomIconWithoutPadding(customControl.mUseCustomIconWithoutPadding);
             setLayoutType(customControl.mLayoutType);
-            setCustomIconAnimationJson(customControl.mCustomIconAnimationJson, customControl.mCustomIconAnimationJsonCache);
-            setCustomIconAnimationStartAndEndFrame(customControl.mCustomIconAnimationStartFrame, customControl.mCustomIconAnimationEndFrame);
+            setCustomIconAnimationJson(
+                    customControl.mCustomIconAnimationJson,
+                    customControl.mCustomIconAnimationJsonCache);
+            setCustomIconAnimationStartAndEndFrame(
+                    customControl.mCustomIconAnimationStartFrame,
+                    customControl.mCustomIconAnimationEndFrame);
             setCustomIconAnimationRepeatCount(customControl.mCustomIconAnimationRepeatCount);
             setOverlayCustomIcon(customControl.mOverlayCustomIcon);
         }
 
-        public CustomStatelessBuilder setUseCustomIconWithoutShadowBg(boolean useCustomIconWithoutShadowBg) {
+        public CustomStatelessBuilder setUseCustomIconWithoutShadowBg(
+                boolean useCustomIconWithoutShadowBg) {
             this.mUseCustomIconWithoutShadowBg = useCustomIconWithoutShadowBg;
             return this;
         }
 
-        public CustomStatelessBuilder setUseCustomIconWithoutPadding(boolean useCustomIconWithoutPadding) {
+        public CustomStatelessBuilder setUseCustomIconWithoutPadding(
+                boolean useCustomIconWithoutPadding) {
             this.mUseCustomIconWithoutPadding = useCustomIconWithoutPadding;
             return this;
         }
@@ -279,14 +285,16 @@ public class CustomControl implements Parcelable {
             return this;
         }
 
-        public CustomStatelessBuilder setCustomIconAnimationJson(String jsonString, String jsonCache) {
+        public CustomStatelessBuilder setCustomIconAnimationJson(
+                String jsonString, String jsonCache) {
             Preconditions.checkNotNull(jsonString);
             this.mCustomIconAnimationJson = jsonString;
             this.mCustomIconAnimationJsonCache = jsonCache;
             return this;
         }
 
-        public CustomStatelessBuilder setCustomIconAnimationStartAndEndFrame(int startFrame, int endFrame) {
+        public CustomStatelessBuilder setCustomIconAnimationStartAndEndFrame(
+                int startFrame, int endFrame) {
             this.mCustomIconAnimationStartFrame = startFrame;
             this.mCustomIconAnimationEndFrame = endFrame;
             return this;
@@ -337,12 +345,15 @@ public class CustomControl implements Parcelable {
         private int mLayoutType = 0;
         private int mCustomSound = 0;
 
-        public CustomStatefulBuilder() {
-        }
+        public CustomStatefulBuilder() {}
 
         public CustomStatefulBuilder(CustomControl customControl) {
-            setCustomIconAnimationJson(customControl.mCustomIconAnimationJson, customControl.mCustomIconAnimationJsonCache);
-            setCustomIconAnimationStartAndEndFrame(customControl.mCustomIconAnimationStartFrame, customControl.mCustomIconAnimationEndFrame);
+            setCustomIconAnimationJson(
+                    customControl.mCustomIconAnimationJson,
+                    customControl.mCustomIconAnimationJsonCache);
+            setCustomIconAnimationStartAndEndFrame(
+                    customControl.mCustomIconAnimationStartFrame,
+                    customControl.mCustomIconAnimationEndFrame);
             setCustomIconAnimationRepeatCount(customControl.mCustomIconAnimationRepeatCount);
             setActionIcon(customControl.mActionIcon);
             setUseFullScreenDetailDialog(customControl.mUseFullScreenDetailDialog);
@@ -358,7 +369,8 @@ public class CustomControl implements Parcelable {
             setOverlayCustomIcon(customControl.mOverlayCustomIcon);
         }
 
-        public CustomStatefulBuilder setCustomIconAnimationJson(String jsonString, String jsonCache) {
+        public CustomStatefulBuilder setCustomIconAnimationJson(
+                String jsonString, String jsonCache) {
             Preconditions.checkNotNull(jsonString);
             Preconditions.checkNotNull(jsonCache);
             this.mCustomIconAnimationJson = jsonString;
@@ -366,7 +378,8 @@ public class CustomControl implements Parcelable {
             return this;
         }
 
-        public CustomStatefulBuilder setCustomIconAnimationStartAndEndFrame(int startFrame, int endFrame) {
+        public CustomStatefulBuilder setCustomIconAnimationStartAndEndFrame(
+                int startFrame, int endFrame) {
             this.mCustomIconAnimationStartFrame = startFrame;
             this.mCustomIconAnimationEndFrame = endFrame;
             return this;
@@ -382,12 +395,14 @@ public class CustomControl implements Parcelable {
             return this;
         }
 
-        public CustomStatefulBuilder setUseFullScreenDetailDialog(boolean useFullScreenDetailDialog) {
+        public CustomStatefulBuilder setUseFullScreenDetailDialog(
+                boolean useFullScreenDetailDialog) {
             this.mUseFullScreenDetailDialog = useFullScreenDetailDialog;
             return this;
         }
 
-        public CustomStatefulBuilder setAllowBasicActionWhenLocked(boolean allowBasicActionWhenLocked) {
+        public CustomStatefulBuilder setAllowBasicActionWhenLocked(
+                boolean allowBasicActionWhenLocked) {
             this.mAllowBasicActionWhenLocked = allowBasicActionWhenLocked;
             return this;
         }
@@ -407,12 +422,14 @@ public class CustomControl implements Parcelable {
             return this;
         }
 
-        public CustomStatefulBuilder setUseCustomIconWithoutShadowBg(boolean useCustomIconWithoutShadowBg) {
+        public CustomStatefulBuilder setUseCustomIconWithoutShadowBg(
+                boolean useCustomIconWithoutShadowBg) {
             this.mUseCustomIconWithoutShadowBg = useCustomIconWithoutShadowBg;
             return this;
         }
 
-        public CustomStatefulBuilder setUseCustomIconWithoutPadding(boolean useCustomIconWithoutPadding) {
+        public CustomStatefulBuilder setUseCustomIconWithoutPadding(
+                boolean useCustomIconWithoutPadding) {
             this.mUseCustomIconWithoutPadding = useCustomIconWithoutPadding;
             return this;
         }

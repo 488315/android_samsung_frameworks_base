@@ -9,9 +9,11 @@ import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.view.Display;
 import android.window.WindowProviderService;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -33,16 +35,17 @@ public final class WindowContextListenerController {
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class DeathRecipient implements IBinder.DeathRecipient {
-            public DeathRecipient() {
-            }
+            public DeathRecipient() {}
 
             @Override // android.os.IBinder.DeathRecipient
             public final void binderDied() {
-                WindowManagerGlobalLock windowManagerGlobalLock = WindowContextListenerImpl.this.mContainer.mWmService.mGlobalLock;
+                WindowManagerGlobalLock windowManagerGlobalLock =
+                        WindowContextListenerImpl.this.mContainer.mWmService.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock) {
                     try {
-                        WindowContextListenerImpl windowContextListenerImpl = WindowContextListenerImpl.this;
+                        WindowContextListenerImpl windowContextListenerImpl =
+                                WindowContextListenerImpl.this;
                         windowContextListenerImpl.mDeathRecipient = null;
                         windowContextListenerImpl.unregister();
                     } catch (Throwable th) {
@@ -54,7 +57,12 @@ public final class WindowContextListenerController {
             }
         }
 
-        public WindowContextListenerImpl(WindowProcessController windowProcessController, IBinder iBinder, WindowContainer windowContainer, int i, Bundle bundle) {
+        public WindowContextListenerImpl(
+                WindowProcessController windowProcessController,
+                IBinder iBinder,
+                WindowContainer windowContainer,
+                int i,
+                Bundle bundle) {
             this.mWpc = windowProcessController;
             this.mClientToken = iBinder;
             Objects.requireNonNull(windowContainer);
@@ -67,7 +75,13 @@ public final class WindowContextListenerController {
                 this.mDeathRecipient = deathRecipient;
             } catch (RemoteException unused) {
                 if (ProtoLogImpl_54989576.Cache.WM_ERROR_enabled[4]) {
-                    ProtoLogImpl_54989576.e(ProtoLogGroup.WM_ERROR, 6139364662459841509L, 0, "Could not register window container listener token=%s, container=%s", String.valueOf(iBinder), String.valueOf(this.mContainer));
+                    ProtoLogImpl_54989576.e(
+                            ProtoLogGroup.WM_ERROR,
+                            6139364662459841509L,
+                            0,
+                            "Could not register window container listener token=%s, container=%s",
+                            String.valueOf(iBinder),
+                            String.valueOf(this.mContainer));
                 }
             }
         }
@@ -78,7 +92,8 @@ public final class WindowContextListenerController {
             }
             DisplayContent displayContent = this.mContainer.getDisplayContent();
             if (displayContent.isReady()) {
-                if (!WindowProviderService.isWindowProviderService(this.mOptions) && Display.isSuspendedState(displayContent.mDisplayInfo.state)) {
+                if (!WindowProviderService.isWindowProviderService(this.mOptions)
+                        && Display.isSuspendedState(displayContent.mDisplayInfo.state)) {
                     this.mHasPendingConfiguration = true;
                     return;
                 }
@@ -87,12 +102,14 @@ public final class WindowContextListenerController {
                 if (this.mLastReportedConfig == null) {
                     this.mLastReportedConfig = new Configuration();
                 }
-                if (configuration.equals(this.mLastReportedConfig) && i == this.mLastReportedDisplay) {
+                if (configuration.equals(this.mLastReportedConfig)
+                        && i == this.mLastReportedDisplay) {
                     return;
                 }
                 this.mLastReportedConfig.setTo(configuration);
                 this.mLastReportedDisplay = i;
-                this.mWpc.scheduleClientTransactionItem(WindowContextInfoChangeItem.obtain(this.mClientToken, configuration, i));
+                this.mWpc.scheduleClientTransactionItem(
+                        WindowContextInfoChangeItem.obtain(this.mClientToken, configuration, i));
                 this.mHasPendingConfiguration = false;
             }
         }
@@ -118,13 +135,24 @@ public final class WindowContextListenerController {
                 throw new IllegalStateException("Invalid client token: " + this.mClientToken);
             }
             WindowToken asWindowToken = this.mContainer.asWindowToken();
-            if (asWindowToken != null && asWindowToken.mFromClientToken && (displayContent = asWindowToken.mWmService.mRoot.getDisplayContent(this.mLastReportedDisplay)) != null) {
-                updateContainer(displayContent.findAreaForWindowType(asWindowToken.windowType, asWindowToken.mOptions, asWindowToken.mOwnerCanManageAppTokens, asWindowToken.mRoundedCornerOverlay));
+            if (asWindowToken != null
+                    && asWindowToken.mFromClientToken
+                    && (displayContent =
+                                    asWindowToken.mWmService.mRoot.getDisplayContent(
+                                            this.mLastReportedDisplay))
+                            != null) {
+                updateContainer(
+                        displayContent.findAreaForWindowType(
+                                asWindowToken.windowType,
+                                asWindowToken.mOptions,
+                                asWindowToken.mOwnerCanManageAppTokens,
+                                asWindowToken.mRoundedCornerOverlay));
                 return;
             }
             DeathRecipient deathRecipient = this.mDeathRecipient;
             WindowContextListenerImpl.this.mClientToken.unlinkToDeath(deathRecipient, 0);
-            this.mWpc.scheduleClientTransactionItem(WindowContextWindowRemovalItem.obtain(this.mClientToken));
+            this.mWpc.scheduleClientTransactionItem(
+                    WindowContextWindowRemovalItem.obtain(this.mClientToken));
             unregister();
         }
 
@@ -139,7 +167,11 @@ public final class WindowContextListenerController {
         }
 
         public final String toString() {
-            return "WindowContextListenerImpl{clientToken=" + this.mClientToken + ", container=" + this.mContainer + "}";
+            return "WindowContextListenerImpl{clientToken="
+                    + this.mClientToken
+                    + ", container="
+                    + this.mContainer
+                    + "}";
         }
 
         public final void unregister() {
@@ -161,12 +193,14 @@ public final class WindowContextListenerController {
     }
 
     public final boolean assertCallerCanModifyListener(int i, boolean z, IBinder iBinder) {
-        WindowContextListenerImpl windowContextListenerImpl = (WindowContextListenerImpl) this.mListeners.get(iBinder);
+        WindowContextListenerImpl windowContextListenerImpl =
+                (WindowContextListenerImpl) this.mListeners.get(iBinder);
         if (windowContextListenerImpl == null) {
             if (!ProtoLogImpl_54989576.Cache.WM_DEBUG_ADD_REMOVE_enabled[2]) {
                 return false;
             }
-            ProtoLogImpl_54989576.i(ProtoLogGroup.WM_DEBUG_ADD_REMOVE, 2163930285157267092L, 0, null, null);
+            ProtoLogImpl_54989576.i(
+                    ProtoLogGroup.WM_DEBUG_ADD_REMOVE, 2163930285157267092L, 0, null, null);
             return false;
         }
         if (z) {
@@ -176,14 +210,23 @@ public final class WindowContextListenerController {
         if (i == windowProcessController.mUid) {
             return true;
         }
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Uid mismatch. Caller uid is ", ", while the listener's owner is from ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        i, "Uid mismatch. Caller uid is ", ", while the listener's owner is from ");
         m.append(windowProcessController.mUid);
         throw new UnsupportedOperationException(m.toString());
     }
 
-    public final void registerWindowContainerListener(WindowProcessController windowProcessController, IBinder iBinder, WindowContainer windowContainer, int i, Bundle bundle) {
+    public final void registerWindowContainerListener(
+            WindowProcessController windowProcessController,
+            IBinder iBinder,
+            WindowContainer windowContainer,
+            int i,
+            Bundle bundle) {
         if (((WindowContextListenerImpl) this.mListeners.get(iBinder)) == null) {
-            new WindowContextListenerImpl(windowProcessController, iBinder, windowContainer, i, bundle).register(false);
+            new WindowContextListenerImpl(
+                            windowProcessController, iBinder, windowContainer, i, bundle)
+                    .register(false);
         } else {
             updateContainerForWindowContextListener(iBinder, windowContainer);
         }
@@ -202,8 +245,10 @@ public final class WindowContextListenerController {
         return sb.toString();
     }
 
-    public final void updateContainerForWindowContextListener(IBinder iBinder, WindowContainer windowContainer) {
-        WindowContextListenerImpl windowContextListenerImpl = (WindowContextListenerImpl) this.mListeners.get(iBinder);
+    public final void updateContainerForWindowContextListener(
+            IBinder iBinder, WindowContainer windowContainer) {
+        WindowContextListenerImpl windowContextListenerImpl =
+                (WindowContextListenerImpl) this.mListeners.get(iBinder);
         if (windowContextListenerImpl != null) {
             windowContextListenerImpl.updateContainer(windowContainer);
         } else {

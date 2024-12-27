@@ -22,7 +22,6 @@ public final class BluetoothManagerServiceDumpProto {
         public static final long REASON = 1159641169924L;
         public static final long TIMESTAMP_MS = 1112396529665L;
 
-        public ActiveLog() {
-        }
+        public ActiveLog() {}
     }
 }

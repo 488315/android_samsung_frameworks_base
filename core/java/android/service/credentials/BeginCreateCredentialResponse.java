@@ -4,32 +4,39 @@ import android.annotation.NonNull;
 import android.content.pm.ParceledListSlice;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class BeginCreateCredentialResponse implements Parcelable {
-    public static final Parcelable.Creator<BeginCreateCredentialResponse> CREATOR = new Parcelable.Creator<BeginCreateCredentialResponse>() { // from class: android.service.credentials.BeginCreateCredentialResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BeginCreateCredentialResponse createFromParcel(Parcel in) {
-            return new BeginCreateCredentialResponse(in);
-        }
+    public static final Parcelable.Creator<BeginCreateCredentialResponse> CREATOR =
+            new Parcelable.Creator<
+                    BeginCreateCredentialResponse>() { // from class:
+                                                       // android.service.credentials.BeginCreateCredentialResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BeginCreateCredentialResponse createFromParcel(Parcel in) {
+                    return new BeginCreateCredentialResponse(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BeginCreateCredentialResponse[] newArray(int size) {
-            return new BeginCreateCredentialResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BeginCreateCredentialResponse[] newArray(int size) {
+                    return new BeginCreateCredentialResponse[size];
+                }
+            };
     private final ParceledListSlice<CreateEntry> mCreateEntries;
     private final RemoteEntry mRemoteCreateEntry;
 
     public BeginCreateCredentialResponse() {
-        this((ParceledListSlice<CreateEntry>) new ParceledListSlice(new ArrayList()), (RemoteEntry) null);
+        this(
+                (ParceledListSlice<CreateEntry>) new ParceledListSlice(new ArrayList()),
+                (RemoteEntry) null);
     }
 
     private BeginCreateCredentialResponse(Parcel in) {
@@ -48,9 +55,11 @@ public final class BeginCreateCredentialResponse implements Parcelable {
         return 0;
     }
 
-    BeginCreateCredentialResponse(ParceledListSlice<CreateEntry> createEntries, RemoteEntry remoteCreateEntry) {
+    BeginCreateCredentialResponse(
+            ParceledListSlice<CreateEntry> createEntries, RemoteEntry remoteCreateEntry) {
         this.mCreateEntries = createEntries;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCreateEntries);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCreateEntries);
         this.mRemoteCreateEntry = remoteCreateEntry;
     }
 
@@ -68,7 +77,10 @@ public final class BeginCreateCredentialResponse implements Parcelable {
 
         public Builder setCreateEntries(List<CreateEntry> createEntries) {
             Preconditions.checkCollectionNotEmpty(createEntries, "createEntries");
-            this.mCreateEntries = (List) Preconditions.checkCollectionElementsNotNull(createEntries, "createEntries");
+            this.mCreateEntries =
+                    (List)
+                            Preconditions.checkCollectionElementsNotNull(
+                                    createEntries, "createEntries");
             return this;
         }
 
@@ -83,7 +95,9 @@ public final class BeginCreateCredentialResponse implements Parcelable {
         }
 
         public BeginCreateCredentialResponse build() {
-            return new BeginCreateCredentialResponse((ParceledListSlice<CreateEntry>) new ParceledListSlice(this.mCreateEntries), this.mRemoteCreateEntry);
+            return new BeginCreateCredentialResponse(
+                    (ParceledListSlice<CreateEntry>) new ParceledListSlice(this.mCreateEntries),
+                    this.mRemoteCreateEntry);
         }
     }
 }

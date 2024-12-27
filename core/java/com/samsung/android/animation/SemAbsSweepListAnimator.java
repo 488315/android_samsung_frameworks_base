@@ -62,8 +62,7 @@ abstract class SemAbsSweepListAnimator {
 
     abstract void setForegroundViewResId(int i);
 
-    SemAbsSweepListAnimator() {
-    }
+    SemAbsSweepListAnimator() {}
 
     private View findTouchedView(MotionEvent event) {
         int position = this.mListView.pointToPosition((int) event.getX(), (int) event.getY());
@@ -130,7 +129,9 @@ abstract class SemAbsSweepListAnimator {
         L34:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.animation.SemAbsSweepListAnimator.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.animation.SemAbsSweepListAnimator.onInterceptTouchEvent(android.view.MotionEvent):boolean");
     }
 
     private boolean handleTouchDownEvent(MotionEvent event) {
@@ -142,7 +143,9 @@ abstract class SemAbsSweepListAnimator {
             return false;
         }
         this.mCurrentPosition = this.mListView.getPositionForView(this.mForegroundView);
-        if (this.mCurrentPosition == -1 || this.mCurrentPosition < this.mListView.getFirstVisiblePosition() || this.mCurrentPosition > this.mListView.getLastVisiblePosition()) {
+        if (this.mCurrentPosition == -1
+                || this.mCurrentPosition < this.mListView.getFirstVisiblePosition()
+                || this.mCurrentPosition > this.mListView.getLastVisiblePosition()) {
             return false;
         }
         this.downX = event.getX();
@@ -152,7 +155,9 @@ abstract class SemAbsSweepListAnimator {
     }
 
     private boolean handleTouchMoveEvent(MotionEvent event) {
-        if (this.mListView != null && (this.mCurrentPosition < this.mListView.getFirstVisiblePosition() || this.mCurrentPosition > this.mListView.getLastVisiblePosition())) {
+        if (this.mListView != null
+                && (this.mCurrentPosition < this.mListView.getFirstVisiblePosition()
+                        || this.mCurrentPosition > this.mListView.getLastVisiblePosition())) {
             return false;
         }
         if (this.mListView != null) {
@@ -184,12 +189,26 @@ abstract class SemAbsSweepListAnimator {
         int actionIndex = event.getActionIndex();
         int currentPointerId = event.getPointerId(actionIndex);
         if (currentPointerId == this.mActivePointerId && this.mItemPressed) {
-            boolean isSweepPattern = sweepPatternIsIndeedFling(this.mVelocityTracker.getXVelocity());
+            boolean isSweepPattern =
+                    sweepPatternIsIndeedFling(this.mVelocityTracker.getXVelocity());
             onActionUp(event, this.mForegroundView, this.mCurrentPosition, isSweepPattern);
         } else {
-            Log.d(TAG, "handleTouchUpEvent : event.getAction() = " + event.getAction() + ", currentPointerId = " + currentPointerId + ", mActivePointerId = " + this.mActivePointerId + ", mItemPressed = " + this.mItemPressed + ", mSwiping = " + this.mSwiping);
+            Log.d(
+                    TAG,
+                    "handleTouchUpEvent : event.getAction() = "
+                            + event.getAction()
+                            + ", currentPointerId = "
+                            + currentPointerId
+                            + ", mActivePointerId = "
+                            + this.mActivePointerId
+                            + ", mItemPressed = "
+                            + this.mItemPressed
+                            + ", mSwiping = "
+                            + this.mSwiping);
             if (this.mItemPressed && this.mSwiping) {
-                Log.d(TAG, "handleTouchUpEvent : call onActionCancel to remove remaining sweepBitmap");
+                Log.d(
+                        TAG,
+                        "handleTouchUpEvent : call onActionCancel to remove remaining sweepBitmap");
                 onActionCancel(event, this.mForegroundView, this.mCurrentPosition);
             }
         }
@@ -209,7 +228,8 @@ abstract class SemAbsSweepListAnimator {
     }
 
     private boolean isTouchEventSkipped() {
-        if ((this.mSwiping && this.mSwipingPosition != this.mCurrentPosition) || !this.mListView.isEnabled()) {
+        if ((this.mSwiping && this.mSwipingPosition != this.mCurrentPosition)
+                || !this.mListView.isEnabled()) {
             return true;
         }
         return false;
@@ -271,8 +291,15 @@ abstract class SemAbsSweepListAnimator {
 
     private void trackSweepDistanceAndDirection(MotionEvent event) {
         if (this.mSweepPrevPosX == -1.0f) {
-            Log.d(TAG, "trackSweepDistanceAndDirection : first calling trackSweepDistanceAndDirection");
-            Log.d(TAG, "trackSweepDistanceAndDirection : mSweepPrevPosX is set to mDownX, mSweepPrevPosX = " + this.mDownX);
+            Log.d(
+                    TAG,
+                    "trackSweepDistanceAndDirection : first calling"
+                        + " trackSweepDistanceAndDirection");
+            Log.d(
+                    TAG,
+                    "trackSweepDistanceAndDirection : mSweepPrevPosX is set to mDownX,"
+                        + " mSweepPrevPosX = "
+                            + this.mDownX);
             this.mSweepPrevPosX = this.mDownX;
         }
         if (this.mSweepPrevPosX != -1.0f) {
@@ -288,7 +315,10 @@ abstract class SemAbsSweepListAnimator {
         }
         if (this.mPrevSweepDirection != -1 && this.mPrevSweepDirection != this.mSweepDirection) {
             Log.d(TAG, "trackSweepDistanceAndDirection : SweepDirection is changed");
-            Log.d(TAG, "trackSweepDistanceAndDirection : changed direction = " + getCurrentSweepDirection(this.mSweepDirection));
+            Log.d(
+                    TAG,
+                    "trackSweepDistanceAndDirection : changed direction = "
+                            + getCurrentSweepDirection(this.mSweepDirection));
             if (this.mSweepDirection == 1) {
                 Log.d(TAG, "trackSweepDistanceAndDirection : Set mSweepRightDistance = 0");
                 this.mSweepRightDistance = 0.0f;
@@ -313,9 +343,16 @@ abstract class SemAbsSweepListAnimator {
         Log.d(TAG, "sweepPatternIsIndeedFling : mSweepRightDistance = " + this.mSweepRightDistance);
         Log.d(TAG, "sweepPatternIsIndeedFling : mSweepLeftDistance = " + this.mSweepLeftDistance);
         int minimalDistanceThreshold = this.mScaledTouchSlop * 2;
-        Log.d(TAG, "sweepPatternIsIndeedFling : minimalDistanceThreshold = " + minimalDistanceThreshold);
-        if ((velocity > 0.0f && this.mSweepRightDistance < minimalDistanceThreshold) || (velocity < 0.0f && this.mSweepLeftDistance < minimalDistanceThreshold)) {
-            Log.d(TAG, "sweepPatternIsIndeedFling : SweepDistance is less than minDistance, return false #1");
+        Log.d(
+                TAG,
+                "sweepPatternIsIndeedFling : minimalDistanceThreshold = "
+                        + minimalDistanceThreshold);
+        if ((velocity > 0.0f && this.mSweepRightDistance < minimalDistanceThreshold)
+                || (velocity < 0.0f && this.mSweepLeftDistance < minimalDistanceThreshold)) {
+            Log.d(
+                    TAG,
+                    "sweepPatternIsIndeedFling : SweepDistance is less than minDistance, return"
+                        + " false #1");
             Log.d(TAG, "***** End sweepPatternIsIndeedFling *****");
             return false;
         }
@@ -331,7 +368,9 @@ abstract class SemAbsSweepListAnimator {
         float totalVelocity = 0.0f;
         int totalWeight = 0;
         for (int i = 0; i < HISTORICAL_VELOCITY_COUNT; i++) {
-            float vel = mHistoricalVelocities[((this.mHistoricalVelocityIndex - 1) + i) % HISTORICAL_VELOCITY_COUNT];
+            float vel =
+                    mHistoricalVelocities[
+                            ((this.mHistoricalVelocityIndex - 1) + i) % HISTORICAL_VELOCITY_COUNT];
             if (vel != 0.0f) {
                 totalVelocity += 1 * vel;
                 totalWeight++;

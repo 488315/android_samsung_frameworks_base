@@ -6,8 +6,9 @@ import android.graphics.Region;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.IBinder;
 import android.util.Size;
-import android.view.SurfaceControl;
+
 import com.android.window.flags.Flags;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -46,8 +47,7 @@ public final class InputWindowHandle {
     private IBinder windowToken;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InputConfigFlags {
-    }
+    public @interface InputConfigFlags {}
 
     private native void nativeDispose();
 
@@ -100,7 +100,28 @@ public final class InputWindowHandle {
     }
 
     public String toString() {
-        return (this.name != null ? this.name : "") + ", frame=[" + this.frame + NavigationBarInflaterView.SIZE_MOD_END + ", touchableRegion=" + this.touchableRegion + ", scaleFactor=" + this.scaleFactor + ", transform=" + this.transform + ", windowToken=" + this.windowToken + ", displayId=" + this.displayId + ", isClone=" + ((this.inputConfig & 65536) != 0) + ", contentSize=" + this.contentSize + ", alpha=" + this.alpha + ", canOccludePresentation=" + this.canOccludePresentation;
+        return (this.name != null ? this.name : "")
+                + ", frame=["
+                + this.frame
+                + NavigationBarInflaterView.SIZE_MOD_END
+                + ", touchableRegion="
+                + this.touchableRegion
+                + ", scaleFactor="
+                + this.scaleFactor
+                + ", transform="
+                + this.transform
+                + ", windowToken="
+                + this.windowToken
+                + ", displayId="
+                + this.displayId
+                + ", isClone="
+                + ((this.inputConfig & 65536) != 0)
+                + ", contentSize="
+                + this.contentSize
+                + ", alpha="
+                + this.alpha
+                + ", canOccludePresentation="
+                + this.canOccludePresentation;
     }
 
     protected void finalize() throws Throwable {
@@ -136,7 +157,8 @@ public final class InputWindowHandle {
         }
     }
 
-    public void setTrustedOverlay(SurfaceControl.Transaction t, SurfaceControl sc, boolean isTrusted) {
+    public void setTrustedOverlay(
+            SurfaceControl.Transaction t, SurfaceControl sc, boolean isTrusted) {
         if (Flags.surfaceTrustedOverlay()) {
             t.setTrustedOverlay(sc, isTrusted);
         } else if (isTrusted) {

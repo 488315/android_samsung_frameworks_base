@@ -6,24 +6,29 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.InsetsFlags;
 import android.view.ViewDebug;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Objects;
 
 /* loaded from: classes5.dex */
 public class LetterboxDetails implements Parcelable {
-    public static final Parcelable.Creator<LetterboxDetails> CREATOR = new Parcelable.Creator<LetterboxDetails>() { // from class: com.android.internal.statusbar.LetterboxDetails.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LetterboxDetails[] newArray(int size) {
-            return new LetterboxDetails[size];
-        }
+    public static final Parcelable.Creator<LetterboxDetails> CREATOR =
+            new Parcelable.Creator<
+                    LetterboxDetails>() { // from class:
+                                          // com.android.internal.statusbar.LetterboxDetails.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LetterboxDetails[] newArray(int size) {
+                    return new LetterboxDetails[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LetterboxDetails createFromParcel(Parcel in) {
-            return new LetterboxDetails(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LetterboxDetails createFromParcel(Parcel in) {
+                    return new LetterboxDetails(in);
+                }
+            };
     private final int mAppAppearance;
     private final Rect mLetterboxFullBounds;
     private final Rect mLetterboxInnerBounds;
@@ -44,16 +49,27 @@ public class LetterboxDetails implements Parcelable {
         return ViewDebug.flagsToString(InsetsFlags.class, "appearance", this.mAppAppearance);
     }
 
-    public LetterboxDetails(Rect letterboxInnerBounds, Rect letterboxFullBounds, int appAppearance) {
+    public LetterboxDetails(
+            Rect letterboxInnerBounds, Rect letterboxFullBounds, int appAppearance) {
         this.mLetterboxInnerBounds = letterboxInnerBounds;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLetterboxInnerBounds);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mLetterboxInnerBounds);
         this.mLetterboxFullBounds = letterboxFullBounds;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLetterboxFullBounds);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLetterboxFullBounds);
         this.mAppAppearance = appAppearance;
     }
 
     public String toString() {
-        return "LetterboxDetails { letterboxInnerBounds = " + this.mLetterboxInnerBounds + ", letterboxFullBounds = " + this.mLetterboxFullBounds + ", appAppearance = " + appAppearanceToString() + " }";
+        return "LetterboxDetails { letterboxInnerBounds = "
+                + this.mLetterboxInnerBounds
+                + ", letterboxFullBounds = "
+                + this.mLetterboxFullBounds
+                + ", appAppearance = "
+                + appAppearanceToString()
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -64,7 +80,9 @@ public class LetterboxDetails implements Parcelable {
             return false;
         }
         LetterboxDetails that = (LetterboxDetails) o;
-        if (Objects.equals(this.mLetterboxInnerBounds, that.mLetterboxInnerBounds) && Objects.equals(this.mLetterboxFullBounds, that.mLetterboxFullBounds) && this.mAppAppearance == that.mAppAppearance) {
+        if (Objects.equals(this.mLetterboxInnerBounds, that.mLetterboxInnerBounds)
+                && Objects.equals(this.mLetterboxFullBounds, that.mLetterboxFullBounds)
+                && this.mAppAppearance == that.mAppAppearance) {
             return true;
         }
         return false;
@@ -72,7 +90,8 @@ public class LetterboxDetails implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + Objects.hashCode(this.mLetterboxInnerBounds);
-        return (((_hash * 31) + Objects.hashCode(this.mLetterboxFullBounds)) * 31) + this.mAppAppearance;
+        return (((_hash * 31) + Objects.hashCode(this.mLetterboxFullBounds)) * 31)
+                + this.mAppAppearance;
     }
 
     @Override // android.os.Parcelable
@@ -92,13 +111,16 @@ public class LetterboxDetails implements Parcelable {
         Rect letterboxFullBounds = (Rect) in.readTypedObject(Rect.CREATOR);
         int appAppearance = in.readInt();
         this.mLetterboxInnerBounds = letterboxInnerBounds;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLetterboxInnerBounds);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mLetterboxInnerBounds);
         this.mLetterboxFullBounds = letterboxFullBounds;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLetterboxFullBounds);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLetterboxFullBounds);
         this.mAppAppearance = appAppearance;
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

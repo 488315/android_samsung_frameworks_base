@@ -5,12 +5,11 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import vendor.samsung.hardware.radio.data.ISehRadioDataIndication;
-import vendor.samsung.hardware.radio.data.ISehRadioDataResponse;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioData extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$data$ISehRadioData".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$data$ISehRadioData".replace('$', '.');
     public static final String HASH = "1c18f89373d68cf0030dbdb95f4a9287fe232a2e";
     public static final int VERSION = 1;
 
@@ -18,24 +17,29 @@ public interface ISehRadioData extends IInterface {
 
     int getInterfaceVersion() throws RemoteException;
 
-    void setDataAllowed(int i, boolean z, SehAllowDataParam sehAllowDataParam) throws RemoteException;
+    void setDataAllowed(int i, boolean z, SehAllowDataParam sehAllowDataParam)
+            throws RemoteException;
 
     void setMobileDataSetting(int i, boolean z, boolean z2) throws RemoteException;
 
-    void setResponseFunctions(ISehRadioDataResponse iSehRadioDataResponse, ISehRadioDataIndication iSehRadioDataIndication) throws RemoteException;
+    void setResponseFunctions(
+            ISehRadioDataResponse iSehRadioDataResponse,
+            ISehRadioDataIndication iSehRadioDataIndication)
+            throws RemoteException;
 
     public static class Default implements ISehRadioData {
         @Override // vendor.samsung.hardware.radio.data.ISehRadioData
-        public void setDataAllowed(int serial, boolean allow, SehAllowDataParam param) throws RemoteException {
-        }
+        public void setDataAllowed(int serial, boolean allow, SehAllowDataParam param)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.data.ISehRadioData
-        public void setMobileDataSetting(int serial, boolean enabled, boolean roamingEnabled) throws RemoteException {
-        }
+        public void setMobileDataSetting(int serial, boolean enabled, boolean roamingEnabled)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.data.ISehRadioData
-        public void setResponseFunctions(ISehRadioDataResponse radioResponse, ISehRadioDataIndication radioIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                ISehRadioDataResponse radioResponse, ISehRadioDataIndication radioIndication)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.data.ISehRadioData
         public int getInterfaceVersion() {
@@ -53,7 +57,7 @@ public interface ISehRadioData extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioData {
+    public abstract static class Stub extends Binder implements ISehRadioData {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_setDataAllowed = 1;
@@ -82,7 +86,8 @@ public interface ISehRadioData extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -105,7 +110,8 @@ public interface ISehRadioData extends IInterface {
                 case 1:
                     int _arg0 = data.readInt();
                     boolean _arg1 = data.readBoolean();
-                    SehAllowDataParam _arg2 = (SehAllowDataParam) data.readTypedObject(SehAllowDataParam.CREATOR);
+                    SehAllowDataParam _arg2 =
+                            (SehAllowDataParam) data.readTypedObject(SehAllowDataParam.CREATOR);
                     data.enforceNoDataAvail();
                     setDataAllowed(_arg0, _arg1, _arg2);
                     return true;
@@ -117,8 +123,10 @@ public interface ISehRadioData extends IInterface {
                     setMobileDataSetting(_arg02, _arg12, _arg22);
                     return true;
                 case 3:
-                    ISehRadioDataResponse _arg03 = ISehRadioDataResponse.Stub.asInterface(data.readStrongBinder());
-                    ISehRadioDataIndication _arg13 = ISehRadioDataIndication.Stub.asInterface(data.readStrongBinder());
+                    ISehRadioDataResponse _arg03 =
+                            ISehRadioDataResponse.Stub.asInterface(data.readStrongBinder());
+                    ISehRadioDataIndication _arg13 =
+                            ISehRadioDataIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg03, _arg13);
                     reply.writeNoException();
@@ -147,7 +155,8 @@ public interface ISehRadioData extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioData
-            public void setDataAllowed(int serial, boolean allow, SehAllowDataParam param) throws RemoteException {
+            public void setDataAllowed(int serial, boolean allow, SehAllowDataParam param)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -164,7 +173,8 @@ public interface ISehRadioData extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioData
-            public void setMobileDataSetting(int serial, boolean enabled, boolean roamingEnabled) throws RemoteException {
+            public void setMobileDataSetting(int serial, boolean enabled, boolean roamingEnabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -181,7 +191,9 @@ public interface ISehRadioData extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioData
-            public void setResponseFunctions(ISehRadioDataResponse radioResponse, ISehRadioDataIndication radioIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    ISehRadioDataResponse radioResponse, ISehRadioDataIndication radioIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

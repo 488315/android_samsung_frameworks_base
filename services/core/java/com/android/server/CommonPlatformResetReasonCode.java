@@ -28,7 +28,8 @@ public abstract class CommonPlatformResetReasonCode extends ResetReasonCode {
                     sb.append(str);
                 }
             } else {
-                if (str.contains("NPE by silent reset. It's normal operation caused by device care")) {
+                if (str.contains(
+                        "NPE by silent reset. It's normal operation caused by device care")) {
                     sb2.append("devicecare");
                     break;
                 }

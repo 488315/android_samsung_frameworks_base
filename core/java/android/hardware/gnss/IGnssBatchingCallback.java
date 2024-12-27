@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IGnssBatchingCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$gnss$IGnssBatchingCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$IGnssBatchingCallback".replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";
     public static final int VERSION = 2;
 
@@ -20,8 +21,7 @@ public interface IGnssBatchingCallback extends IInterface {
 
     public static class Default implements IGnssBatchingCallback {
         @Override // android.hardware.gnss.IGnssBatchingCallback
-        public void gnssLocationBatchCb(GnssLocation[] locations) throws RemoteException {
-        }
+        public void gnssLocationBatchCb(GnssLocation[] locations) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssBatchingCallback
         public int getInterfaceVersion() {
@@ -39,7 +39,7 @@ public interface IGnssBatchingCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssBatchingCallback {
+    public abstract static class Stub extends Binder implements IGnssBatchingCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_gnssLocationBatchCb = 1;
@@ -84,7 +84,8 @@ public interface IGnssBatchingCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -105,7 +106,8 @@ public interface IGnssBatchingCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    GnssLocation[] _arg0 = (GnssLocation[]) data.createTypedArray(GnssLocation.CREATOR);
+                    GnssLocation[] _arg0 =
+                            (GnssLocation[]) data.createTypedArray(GnssLocation.CREATOR);
                     data.enforceNoDataAvail();
                     gnssLocationBatchCb(_arg0);
                     reply.writeNoException();

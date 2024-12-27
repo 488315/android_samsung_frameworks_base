@@ -9,11 +9,12 @@ public class InstantFilter extends DecorateFilter {
         super(filter);
     }
 
-    @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.filter.MediaFilter
-    public void prepare() {
-    }
+    @Override // com.samsung.android.sume.core.filter.DecorateFilter,
+              // com.samsung.android.sume.core.filter.MediaFilter
+    public void prepare() {}
 
-    @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.functional.Operator
+    @Override // com.samsung.android.sume.core.filter.DecorateFilter,
+              // com.samsung.android.sume.core.functional.Operator
     public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) {
         super.prepare();
         MutableMediaBuffer obuf2 = super.run(ibuf, obuf);
@@ -21,7 +22,7 @@ public class InstantFilter extends DecorateFilter {
         return obuf2;
     }
 
-    @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.filter.MediaFilter
-    public void release() {
-    }
+    @Override // com.samsung.android.sume.core.filter.DecorateFilter,
+              // com.samsung.android.sume.core.filter.MediaFilter
+    public void release() {}
 }

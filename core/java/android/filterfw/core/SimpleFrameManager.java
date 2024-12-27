@@ -15,7 +15,10 @@ public class SimpleFrameManager extends FrameManager {
                 glFrame.init(getGLEnvironment());
                 return glFrame;
             default:
-                throw new RuntimeException("Attached frames are not supported for target type: " + FrameFormat.targetToString(format.getTarget()) + "!");
+                throw new RuntimeException(
+                        "Attached frames are not supported for target type: "
+                                + FrameFormat.targetToString(format.getTarget())
+                                + "!");
         }
     }
 
@@ -35,7 +38,10 @@ public class SimpleFrameManager extends FrameManager {
                 Frame result3 = new VertexFrame(format, this);
                 return result3;
             default:
-                throw new RuntimeException("Unsupported frame target type: " + FrameFormat.targetToString(format.getTarget()) + "!");
+                throw new RuntimeException(
+                        "Unsupported frame target type: "
+                                + FrameFormat.targetToString(format.getTarget())
+                                + "!");
         }
     }
 

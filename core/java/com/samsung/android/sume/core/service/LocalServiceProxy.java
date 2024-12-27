@@ -8,6 +8,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.ConditionVariable;
 import android.os.IBinder;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.controller.MediaController;
 import com.samsung.android.sume.core.functional.ExceptionHandler;
@@ -16,7 +17,7 @@ import com.samsung.android.sume.core.message.Message;
 import com.samsung.android.sume.core.message.Request;
 import com.samsung.android.sume.core.message.Response;
 import com.samsung.android.sume.core.message.ResponseHolder;
-import com.samsung.android.sume.core.service.LocalService;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Map;
@@ -42,39 +43,47 @@ public class LocalServiceProxy implements ServiceProxy, MediaController.OnEventL
     private final BlockingQueue<Request> requestChannel = new LinkedBlockingQueue();
     private ExecutorService requestThreadPool = Executors.newCachedThreadPool();
     private final List<ResponseHolder> responseList = new CopyOnWriteArrayList();
-    private ServiceConnection connection = new ServiceConnection() { // from class: com.samsung.android.sume.core.service.LocalServiceProxy.1
-        @Override // android.content.ServiceConnection
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            LocalServiceProxy.this.localService = ((LocalService.LocalBinder) service).getService();
-            LocalServiceProxy.this.localService.setEventListener(this);
-            LocalServiceProxy.this.mediaFilterControllerId = LocalServiceProxy.this.localService.createMediaFilterController();
-            LocalServiceProxy.this.mfControllerSync.open();
-        }
+    private ServiceConnection connection =
+            new ServiceConnection() { // from class:
+                                      // com.samsung.android.sume.core.service.LocalServiceProxy.1
+                @Override // android.content.ServiceConnection
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    LocalServiceProxy.this.localService =
+                            ((LocalService.LocalBinder) service).getService();
+                    LocalServiceProxy.this.localService.setEventListener(this);
+                    LocalServiceProxy.this.mediaFilterControllerId =
+                            LocalServiceProxy.this.localService.createMediaFilterController();
+                    LocalServiceProxy.this.mfControllerSync.open();
+                }
 
-        @Override // android.content.ServiceConnection
-        public void onServiceDisconnected(ComponentName name) {
-            Log.e(LocalServiceProxy.TAG, "onServiceDisconnected E");
-            Exception exception = new IllegalStateException("service disconnected abnormally");
-            LocalServiceProxy.this.onError(Response.of(-4, exception));
-            Log.e(LocalServiceProxy.TAG, "onServiceDisconnected X");
-        }
+                @Override // android.content.ServiceConnection
+                public void onServiceDisconnected(ComponentName name) {
+                    Log.e(LocalServiceProxy.TAG, "onServiceDisconnected E");
+                    Exception exception =
+                            new IllegalStateException("service disconnected abnormally");
+                    LocalServiceProxy.this.onError(Response.of(-4, exception));
+                    Log.e(LocalServiceProxy.TAG, "onServiceDisconnected X");
+                }
 
-        @Override // android.content.ServiceConnection
-        public void onBindingDied(ComponentName name) {
-            super.onBindingDied(name);
-        }
+                @Override // android.content.ServiceConnection
+                public void onBindingDied(ComponentName name) {
+                    super.onBindingDied(name);
+                }
 
-        @Override // android.content.ServiceConnection
-        public void onNullBinding(ComponentName name) {
-            super.onNullBinding(name);
-        }
-    };
-    private Future<Void> requestJob = this.requestThreadPool.submit(new Runnable() { // from class: com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda0
-        @Override // java.lang.Runnable
-        public final void run() {
-            LocalServiceProxy.this.m9208x9a09a3ff();
-        }
-    });
+                @Override // android.content.ServiceConnection
+                public void onNullBinding(ComponentName name) {
+                    super.onNullBinding(name);
+                }
+            };
+    private Future<Void> requestJob =
+            this.requestThreadPool.submit(
+                    new Runnable() { // from class:
+                                     // com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            LocalServiceProxy.this.m9208x9a09a3ff();
+                        }
+                    });
 
     public LocalServiceProxy(Context context, Class<?> serviceClass, Map<Integer, Object> options) {
         this.context = context;
@@ -96,7 +105,8 @@ public class LocalServiceProxy implements ServiceProxy, MediaController.OnEventL
             try {
                 Request request = this.requestChannel.take();
                 Log.d(TAG, "take request: " + request);
-                Response response = this.localService.request(this.mediaFilterControllerId, request).get();
+                Response response =
+                        this.localService.request(this.mediaFilterControllerId, request).get();
                 if (response != null && response.getResponseListener() != null) {
                     response.getResponseListener().accept(response);
                 }
@@ -137,23 +147,28 @@ public class LocalServiceProxy implements ServiceProxy, MediaController.OnEventL
                 responseHolder.put(Response.of(0));
             } else {
                 Log.d(TAG, "add response-listener for " + request.getCode());
-                request.then(new Consumer() { // from class: com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda3
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        LocalServiceProxy.lambda$request$1(ResponseHolder.this, (Message) obj);
-                    }
-                });
+                request.then(
+                        new Consumer() { // from class:
+                                         // com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda3
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                LocalServiceProxy.lambda$request$1(
+                                        ResponseHolder.this, (Message) obj);
+                            }
+                        });
             }
             this.requestChannel.put(request);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return this.requestThreadPool.submit(new Callable() { // from class: com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda4
-            @Override // java.util.concurrent.Callable
-            public final Object call() {
-                return LocalServiceProxy.this.m9209x6d0c7cb0(request, responseHolder);
-            }
-        });
+        return this.requestThreadPool.submit(
+                new Callable() { // from class:
+                                 // com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda4
+                    @Override // java.util.concurrent.Callable
+                    public final Object call() {
+                        return LocalServiceProxy.this.m9209x6d0c7cb0(request, responseHolder);
+                    }
+                });
     }
 
     static /* synthetic */ void lambda$request$1(ResponseHolder responseHolder, Message response) {
@@ -162,7 +177,8 @@ public class LocalServiceProxy implements ServiceProxy, MediaController.OnEventL
     }
 
     /* renamed from: lambda$request$2$com-samsung-android-sume-core-service-LocalServiceProxy, reason: not valid java name */
-    /* synthetic */ Response m9209x6d0c7cb0(Request request, ResponseHolder responseHolder) throws Exception {
+    /* synthetic */ Response m9209x6d0c7cb0(Request request, ResponseHolder responseHolder)
+            throws Exception {
         try {
             if (!request.isOneWay()) {
                 Log.d(TAG, "wait response...E: " + request.getCode());
@@ -178,7 +194,9 @@ public class LocalServiceProxy implements ServiceProxy, MediaController.OnEventL
         }
         this.responseList.remove(responseHolder);
         Response response = responseHolder.reset();
-        if (response.getException() != null && (this.exceptionHandler == null || !this.exceptionHandler.accept(response.getException()))) {
+        if (response.getException() != null
+                && (this.exceptionHandler == null
+                        || !this.exceptionHandler.accept(response.getException()))) {
             throw response.getException();
         }
         return response;
@@ -199,12 +217,14 @@ public class LocalServiceProxy implements ServiceProxy, MediaController.OnEventL
             }
             this.connection = null;
         }
-        this.responseList.forEach(new Consumer() { // from class: com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda1
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                LocalServiceProxy.lambda$release$3((ResponseHolder) obj);
-            }
-        });
+        this.responseList.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        LocalServiceProxy.lambda$release$3((ResponseHolder) obj);
+                    }
+                });
         if (this.requestJob != null) {
             this.requestJob.cancel(true);
             this.requestJob = null;
@@ -229,16 +249,24 @@ public class LocalServiceProxy implements ServiceProxy, MediaController.OnEventL
 
     private void onWarn(final Response response) {
         Log.d(TAG, "onWarn: " + response);
-        this.responseList.forEach(new Consumer() { // from class: com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda5
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                LocalServiceProxy.lambda$onWarn$4(Response.this, (ResponseHolder) obj);
-            }
-        });
+        this.responseList.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda5
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        LocalServiceProxy.lambda$onWarn$4(Response.this, (ResponseHolder) obj);
+                    }
+                });
     }
 
     static /* synthetic */ void lambda$onWarn$4(Response response, ResponseHolder it) {
-        Log.w(TAG, "send response(" + response.getCode() + ") for request(" + it.getCode() + NavigationBarInflaterView.KEY_CODE_END);
+        Log.w(
+                TAG,
+                "send response("
+                        + response.getCode()
+                        + ") for request("
+                        + it.getCode()
+                        + NavigationBarInflaterView.KEY_CODE_END);
         Log.w(TAG, "\tmessage: " + ((String) response.get("message", "")));
         it.put(response);
         it.signal();
@@ -250,17 +278,27 @@ public class LocalServiceProxy implements ServiceProxy, MediaController.OnEventL
         if (this.exceptionHandler != null) {
             this.exceptionHandler.accept(exception);
         } else {
-            this.responseList.forEach(new Consumer() { // from class: com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda2
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    LocalServiceProxy.lambda$onError$5(Response.this, exception, (ResponseHolder) obj);
-                }
-            });
+            this.responseList.forEach(
+                    new Consumer() { // from class:
+                                     // com.samsung.android.sume.core.service.LocalServiceProxy$$ExternalSyntheticLambda2
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            LocalServiceProxy.lambda$onError$5(
+                                    Response.this, exception, (ResponseHolder) obj);
+                        }
+                    });
         }
     }
 
-    static /* synthetic */ void lambda$onError$5(Response response, Exception exception, ResponseHolder it) {
-        Log.e(TAG, "send response(" + response.getCode() + ") for request(" + it.getCode() + NavigationBarInflaterView.KEY_CODE_END);
+    static /* synthetic */ void lambda$onError$5(
+            Response response, Exception exception, ResponseHolder it) {
+        Log.e(
+                TAG,
+                "send response("
+                        + response.getCode()
+                        + ") for request("
+                        + it.getCode()
+                        + NavigationBarInflaterView.KEY_CODE_END);
         Log.e(TAG, "\tmessage: " + ((String) response.get("message", "")));
         if (it.get() != null) {
             it.get().setException(exception);

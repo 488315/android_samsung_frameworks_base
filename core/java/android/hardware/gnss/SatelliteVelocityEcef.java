@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class SatelliteVelocityEcef implements Parcelable {
-    public static final Parcelable.Creator<SatelliteVelocityEcef> CREATOR = new Parcelable.Creator<SatelliteVelocityEcef>() { // from class: android.hardware.gnss.SatelliteVelocityEcef.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteVelocityEcef createFromParcel(Parcel _aidl_source) {
-            SatelliteVelocityEcef _aidl_out = new SatelliteVelocityEcef();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SatelliteVelocityEcef> CREATOR =
+            new Parcelable.Creator<SatelliteVelocityEcef>() { // from class:
+                // android.hardware.gnss.SatelliteVelocityEcef.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteVelocityEcef createFromParcel(Parcel _aidl_source) {
+                    SatelliteVelocityEcef _aidl_out = new SatelliteVelocityEcef();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteVelocityEcef[] newArray(int _aidl_size) {
-            return new SatelliteVelocityEcef[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteVelocityEcef[] newArray(int _aidl_size) {
+                    return new SatelliteVelocityEcef[_aidl_size];
+                }
+            };
     public double velXMps = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     public double velYMps = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     public double velZMps = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;

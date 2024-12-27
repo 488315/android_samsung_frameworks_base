@@ -5,7 +5,9 @@ import android.content.res.Resources;
 import android.os.SystemProperties;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.internal.R;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,7 +27,9 @@ public class FallbackCategoryProvider {
         assets.addAssetPath("/system/framework/framework-res.apk");
         Resources res = new Resources(assets, null, null);
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(res.openRawResource(R.raw.fallback_categories)));
+            BufferedReader reader =
+                    new BufferedReader(
+                            new InputStreamReader(res.openRawResource(R.raw.fallback_categories)));
             while (true) {
                 try {
                     String line = reader.readLine();
@@ -33,7 +37,8 @@ public class FallbackCategoryProvider {
                         if (line.charAt(0) != '#') {
                             String[] split = line.split(",");
                             if (split.length == 2) {
-                                sFallbacks.put(split[0], Integer.valueOf(Integer.parseInt(split[1])));
+                                sFallbacks.put(
+                                        split[0], Integer.valueOf(Integer.parseInt(split[1])));
                             }
                         }
                     } else {

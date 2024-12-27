@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,18 +23,37 @@ public final class CdmaNumberInfoRecord {
             return false;
         }
         CdmaNumberInfoRecord other = (CdmaNumberInfoRecord) otherObject;
-        if (HidlSupport.deepEquals(this.number, other.number) && this.numberType == other.numberType && this.numberPlan == other.numberPlan && this.pi == other.pi && this.si == other.si) {
+        if (HidlSupport.deepEquals(this.number, other.number)
+                && this.numberType == other.numberType
+                && this.numberPlan == other.numberPlan
+                && this.pi == other.pi
+                && this.si == other.si) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.number)), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.numberType))), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.numberPlan))), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.pi))), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.si))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.number)),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.numberType))),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.numberPlan))),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.pi))),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.si))));
     }
 
     public final String toString() {
-        return "{.number = " + this.number + ", .numberType = " + ((int) this.numberType) + ", .numberPlan = " + ((int) this.numberPlan) + ", .pi = " + ((int) this.pi) + ", .si = " + ((int) this.si) + "}";
+        return "{.number = "
+                + this.number
+                + ", .numberType = "
+                + ((int) this.numberType)
+                + ", .numberPlan = "
+                + ((int) this.numberPlan)
+                + ", .pi = "
+                + ((int) this.pi)
+                + ", .si = "
+                + ((int) this.si)
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -45,7 +65,8 @@ public final class CdmaNumberInfoRecord {
         ArrayList<CdmaNumberInfoRecord> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CdmaNumberInfoRecord _hidl_vec_element = new CdmaNumberInfoRecord();
@@ -55,9 +76,14 @@ public final class CdmaNumberInfoRecord {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.number = _hidl_blob.getString(_hidl_offset + 0);
-        parcel.readEmbeddedBuffer(this.number.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 0 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.number.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 0 + 0,
+                false);
         this.numberType = _hidl_blob.getInt8(16 + _hidl_offset);
         this.numberPlan = _hidl_blob.getInt8(17 + _hidl_offset);
         this.pi = _hidl_blob.getInt8(18 + _hidl_offset);
@@ -70,7 +96,8 @@ public final class CdmaNumberInfoRecord {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<CdmaNumberInfoRecord> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<CdmaNumberInfoRecord> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

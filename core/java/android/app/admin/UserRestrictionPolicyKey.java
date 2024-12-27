@@ -5,24 +5,27 @@ import android.app.admin.flags.Flags;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class UserRestrictionPolicyKey extends PolicyKey {
-    public static final Parcelable.Creator<UserRestrictionPolicyKey> CREATOR = new Parcelable.Creator<UserRestrictionPolicyKey>() { // from class: android.app.admin.UserRestrictionPolicyKey.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UserRestrictionPolicyKey createFromParcel(Parcel source) {
-            return new UserRestrictionPolicyKey(source);
-        }
+    public static final Parcelable.Creator<UserRestrictionPolicyKey> CREATOR =
+            new Parcelable.Creator<UserRestrictionPolicyKey>() { // from class:
+                // android.app.admin.UserRestrictionPolicyKey.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UserRestrictionPolicyKey createFromParcel(Parcel source) {
+                    return new UserRestrictionPolicyKey(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UserRestrictionPolicyKey[] newArray(int size) {
-            return new UserRestrictionPolicyKey[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UserRestrictionPolicyKey[] newArray(int size) {
+                    return new UserRestrictionPolicyKey[size];
+                }
+            };
     private final String mRestriction;
 
     public UserRestrictionPolicyKey(String identifier, String restriction) {

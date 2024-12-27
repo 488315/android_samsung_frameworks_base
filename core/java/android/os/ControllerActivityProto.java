@@ -12,7 +12,6 @@ public final class ControllerActivityProto {
         public static final long DURATION_MS = 1112396529666L;
         public static final long LEVEL = 1120986464257L;
 
-        public TxLevel() {
-        }
+        public TxLevel() {}
     }
 }

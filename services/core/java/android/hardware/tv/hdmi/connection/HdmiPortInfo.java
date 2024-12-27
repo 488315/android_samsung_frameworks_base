@@ -46,16 +46,20 @@ public final class HdmiPortInfo implements Parcelable {
                                     if (parcel.dataPosition() - dataPosition < readInt) {
                                         hdmiPortInfo.physicalAddress = parcel.readInt();
                                         if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -101,7 +105,9 @@ public final class HdmiPortInfo implements Parcelable {
         parcel.writeBoolean(this.cecSupported);
         parcel.writeBoolean(this.arcSupported);
         parcel.writeBoolean(this.eArcSupported);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.physicalAddress, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.physicalAddress, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

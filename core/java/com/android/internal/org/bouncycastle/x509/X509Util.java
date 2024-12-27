@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.x509;
 
 import android.media.MediaMetrics;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encoding;
 import com.android.internal.org.bouncycastle.asn1.ASN1Integer;
@@ -14,6 +15,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.jce.X509Principal;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -31,6 +33,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes5.dex */
@@ -39,8 +42,7 @@ class X509Util {
     private static Hashtable params = new Hashtable();
     private static Set noParams = new HashSet();
 
-    X509Util() {
-    }
+    X509Util() {}
 
     static {
         algorithms.put("MD5WITHRSAENCRYPTION", PKCSObjectIdentifiers.md5WithRSAEncryption);
@@ -82,20 +84,29 @@ class X509Util {
         noParams.add(NISTObjectIdentifiers.dsa_with_sha256);
         noParams.add(NISTObjectIdentifiers.dsa_with_sha384);
         noParams.add(NISTObjectIdentifiers.dsa_with_sha512);
-        AlgorithmIdentifier sha1AlgId = new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);
+        AlgorithmIdentifier sha1AlgId =
+                new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);
         params.put("SHA1WITHRSAANDMGF1", creatPSSParams(sha1AlgId, 20));
-        AlgorithmIdentifier sha224AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha224, DERNull.INSTANCE);
+        AlgorithmIdentifier sha224AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha224, DERNull.INSTANCE);
         params.put("SHA224WITHRSAANDMGF1", creatPSSParams(sha224AlgId, 28));
-        AlgorithmIdentifier sha256AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha256, DERNull.INSTANCE);
+        AlgorithmIdentifier sha256AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha256, DERNull.INSTANCE);
         params.put("SHA256WITHRSAANDMGF1", creatPSSParams(sha256AlgId, 32));
-        AlgorithmIdentifier sha384AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha384, DERNull.INSTANCE);
+        AlgorithmIdentifier sha384AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha384, DERNull.INSTANCE);
         params.put("SHA384WITHRSAANDMGF1", creatPSSParams(sha384AlgId, 48));
-        AlgorithmIdentifier sha512AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha512, DERNull.INSTANCE);
+        AlgorithmIdentifier sha512AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha512, DERNull.INSTANCE);
         params.put("SHA512WITHRSAANDMGF1", creatPSSParams(sha512AlgId, 64));
     }
 
     private static RSASSAPSSparams creatPSSParams(AlgorithmIdentifier hashAlgId, int saltSize) {
-        return new RSASSAPSSparams(hashAlgId, new AlgorithmIdentifier(PKCSObjectIdentifiers.id_mgf1, hashAlgId), new ASN1Integer(saltSize), new ASN1Integer(1L));
+        return new RSASSAPSSparams(
+                hashAlgId,
+                new AlgorithmIdentifier(PKCSObjectIdentifiers.id_mgf1, hashAlgId),
+                new ASN1Integer(saltSize),
+                new ASN1Integer(1L));
     }
 
     static ASN1ObjectIdentifier getAlgorithmOID(String algorithmName) {
@@ -130,14 +141,21 @@ class X509Util {
         return Signature.getInstance(algorithm);
     }
 
-    static Signature getSignatureInstance(String algorithm, String provider) throws NoSuchProviderException, NoSuchAlgorithmException {
+    static Signature getSignatureInstance(String algorithm, String provider)
+            throws NoSuchProviderException, NoSuchAlgorithmException {
         if (provider != null) {
             return Signature.getInstance(algorithm, provider);
         }
         return Signature.getInstance(algorithm);
     }
 
-    static byte[] calculateSignature(ASN1ObjectIdentifier sigOid, String sigName, PrivateKey key, SecureRandom random, ASN1Encodable object) throws IOException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    static byte[] calculateSignature(
+            ASN1ObjectIdentifier sigOid,
+            String sigName,
+            PrivateKey key,
+            SecureRandom random,
+            ASN1Encodable object)
+            throws IOException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
         if (sigOid == null) {
             throw new IllegalStateException("no signature algorithm specified");
         }
@@ -151,7 +169,18 @@ class X509Util {
         return sig.sign();
     }
 
-    static byte[] calculateSignature(ASN1ObjectIdentifier sigOid, String sigName, String provider, PrivateKey key, SecureRandom random, ASN1Encodable object) throws IOException, NoSuchProviderException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    static byte[] calculateSignature(
+            ASN1ObjectIdentifier sigOid,
+            String sigName,
+            String provider,
+            PrivateKey key,
+            SecureRandom random,
+            ASN1Encodable object)
+            throws IOException,
+                    NoSuchProviderException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    SignatureException {
         if (sigOid == null) {
             throw new IllegalStateException("no signature algorithm specified");
         }
@@ -191,11 +220,13 @@ class X509Util {
         }
     }
 
-    static Implementation getImplementation(String baseName, String algorithm, Provider prov) throws NoSuchAlgorithmException {
+    static Implementation getImplementation(String baseName, String algorithm, Provider prov)
+            throws NoSuchAlgorithmException {
         Class cls;
         String algorithm2 = Strings.toUpperCase(algorithm);
         while (true) {
-            String alias = prov.getProperty("Alg.Alias." + baseName + MediaMetrics.SEPARATOR + algorithm2);
+            String alias =
+                    prov.getProperty("Alg.Alias." + baseName + MediaMetrics.SEPARATOR + algorithm2);
             if (alias == null) {
                 break;
             }
@@ -212,18 +243,35 @@ class X509Util {
                 }
                 return new Implementation(cls.newInstance(), prov);
             } catch (ClassNotFoundException e) {
-                throw new IllegalStateException("algorithm " + algorithm2 + " in provider " + prov.getName() + " but no class \"" + className + "\" found!");
+                throw new IllegalStateException(
+                        "algorithm "
+                                + algorithm2
+                                + " in provider "
+                                + prov.getName()
+                                + " but no class \""
+                                + className
+                                + "\" found!");
             } catch (Exception e2) {
-                throw new IllegalStateException("algorithm " + algorithm2 + " in provider " + prov.getName() + " but class \"" + className + "\" inaccessible!");
+                throw new IllegalStateException(
+                        "algorithm "
+                                + algorithm2
+                                + " in provider "
+                                + prov.getName()
+                                + " but class \""
+                                + className
+                                + "\" inaccessible!");
             }
         }
-        throw new NoSuchAlgorithmException("cannot find implementation " + algorithm2 + " for provider " + prov.getName());
+        throw new NoSuchAlgorithmException(
+                "cannot find implementation " + algorithm2 + " for provider " + prov.getName());
     }
 
-    static Implementation getImplementation(String baseName, String algorithm) throws NoSuchAlgorithmException {
+    static Implementation getImplementation(String baseName, String algorithm)
+            throws NoSuchAlgorithmException {
         Provider[] prov = Security.getProviders();
         for (int i = 0; i != prov.length; i++) {
-            Implementation imp = getImplementation(baseName, Strings.toUpperCase(algorithm), prov[i]);
+            Implementation imp =
+                    getImplementation(baseName, Strings.toUpperCase(algorithm), prov[i]);
             if (imp != null) {
                 return imp;
             }

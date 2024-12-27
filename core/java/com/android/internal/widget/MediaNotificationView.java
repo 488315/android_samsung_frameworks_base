@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.RemoteViews;
+
 import java.util.ArrayList;
 
 @RemoteViews.RemoteView
@@ -27,7 +28,8 @@ public class MediaNotificationView extends FrameLayout {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public MediaNotificationView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public MediaNotificationView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

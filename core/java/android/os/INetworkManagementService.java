@@ -28,13 +28,16 @@ public interface INetworkManagementService extends IInterface {
 
     void addOrRemoveSystemAppFromDataSaverWhitelist(boolean z, int i) throws RemoteException;
 
-    void addPortFwdRules(String str, String str2, String str3, String str4, int i) throws RemoteException;
+    void addPortFwdRules(String str, String str2, String str3, String str4, int i)
+            throws RemoteException;
 
-    void addSocksRule(String str, String str2, String str3, int i, String str4) throws RemoteException;
+    void addSocksRule(String str, String str2, String str3, int i, String str4)
+            throws RemoteException;
 
     void addSocksSkipRule(String str, String str2, String str3) throws RemoteException;
 
-    void addSocksSkipRuleProto(String str, String str2, String str3, int i, String str4) throws RemoteException;
+    void addSocksSkipRuleProto(String str, String str2, String str3, int i, String str4)
+            throws RemoteException;
 
     void addSourcePortAcceptRule(String str, String str2, int i) throws RemoteException;
 
@@ -42,7 +45,8 @@ public interface INetworkManagementService extends IInterface {
 
     void addTosPolicy(int i, int i2) throws RemoteException;
 
-    void addUidSocksRule(String str, String str2, String str3, int i, int i2, String str4) throws RemoteException;
+    void addUidSocksRule(String str, String str2, String str3, int i, int i2, String str4)
+            throws RemoteException;
 
     void addUidToChain(String str, String str2, int i) throws RemoteException;
 
@@ -132,7 +136,8 @@ public interface INetworkManagementService extends IInterface {
 
     void registerNetdTetherEventListener() throws RemoteException;
 
-    void registerObserver(INetworkManagementEventObserver iNetworkManagementEventObserver) throws RemoteException;
+    void registerObserver(INetworkManagementEventObserver iNetworkManagementEventObserver)
+            throws RemoteException;
 
     void removeChain(String str, String str2) throws RemoteException;
 
@@ -140,21 +145,25 @@ public interface INetworkManagementService extends IInterface {
 
     void removeInterfaceQuota(String str) throws RemoteException;
 
-    void removeLegacyRoute(int i, String str, String str2, String str3, int i2) throws RemoteException;
+    void removeLegacyRoute(int i, String str, String str2, String str3, int i2)
+            throws RemoteException;
 
     void removeMptcpLink(String str) throws RemoteException;
 
-    void removeSocksRule(String str, String str2, String str3, int i, String str4) throws RemoteException;
+    void removeSocksRule(String str, String str2, String str3, int i, String str4)
+            throws RemoteException;
 
     void removeSocksSkipRule(String str, String str2, String str3) throws RemoteException;
 
-    void removeSocksSkipRuleProto(String str, String str2, String str3, int i, String str4) throws RemoteException;
+    void removeSocksSkipRuleProto(String str, String str2, String str3, int i, String str4)
+            throws RemoteException;
 
     void removeTosPolicy(int i) throws RemoteException;
 
     void removeUidFromChain(String str, String str2, int i) throws RemoteException;
 
-    void removeUidSocksRule(String str, String str2, String str3, int i, int i2, String str4) throws RemoteException;
+    void removeUidSocksRule(String str, String str2, String str3, int i, int i2, String str4)
+            throws RemoteException;
 
     int replaceApeRule(String str, int i, int i2) throws RemoteException;
 
@@ -184,7 +193,8 @@ public interface INetworkManagementService extends IInterface {
 
     boolean setDataSaverModeEnabled(boolean z) throws RemoteException;
 
-    void setDestinationBasedMarkRule(boolean z, String str, String str2, int i, int i2) throws RemoteException;
+    void setDestinationBasedMarkRule(boolean z, String str, String str2, int i, int i2)
+            throws RemoteException;
 
     void setDnsForwardersForKnoxVpn(int i, String[] strArr) throws RemoteException;
 
@@ -206,7 +216,8 @@ public interface INetworkManagementService extends IInterface {
 
     void setInterfaceAlert(String str, long j) throws RemoteException;
 
-    void setInterfaceConfig(String str, InterfaceConfiguration interfaceConfiguration) throws RemoteException;
+    void setInterfaceConfig(String str, InterfaceConfiguration interfaceConfiguration)
+            throws RemoteException;
 
     void setInterfaceDown(String str) throws RemoteException;
 
@@ -274,7 +285,8 @@ public interface INetworkManagementService extends IInterface {
 
     void unregisterNetdTetherEventListener() throws RemoteException;
 
-    void unregisterObserver(INetworkManagementEventObserver iNetworkManagementEventObserver) throws RemoteException;
+    void unregisterObserver(INetworkManagementEventObserver iNetworkManagementEventObserver)
+            throws RemoteException;
 
     void untetherInterface(String str) throws RemoteException;
 
@@ -294,12 +306,11 @@ public interface INetworkManagementService extends IInterface {
 
     public static class Default implements INetworkManagementService {
         @Override // android.os.INetworkManagementService
-        public void registerObserver(INetworkManagementEventObserver obs) throws RemoteException {
-        }
+        public void registerObserver(INetworkManagementEventObserver obs) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void unregisterObserver(INetworkManagementEventObserver obs) throws RemoteException {
-        }
+        public void unregisterObserver(INetworkManagementEventObserver obs)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public String[] listInterfaces() throws RemoteException {
@@ -312,40 +323,33 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void setInterfaceConfig(String iface, InterfaceConfiguration cfg) throws RemoteException {
-        }
+        public void setInterfaceConfig(String iface, InterfaceConfiguration cfg)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void clearInterfaceAddresses(String iface) throws RemoteException {
-        }
+        public void clearInterfaceAddresses(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setInterfaceDown(String iface) throws RemoteException {
-        }
+        public void setInterfaceDown(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setInterfaceUp(String iface) throws RemoteException {
-        }
+        public void setInterfaceUp(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setInterfaceIpv6PrivacyExtensions(String iface, boolean enable) throws RemoteException {
-        }
+        public void setInterfaceIpv6PrivacyExtensions(String iface, boolean enable)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void disableIpv6(String iface) throws RemoteException {
-        }
+        public void disableIpv6(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void enableIpv6(String iface) throws RemoteException {
-        }
+        public void enableIpv6(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setIPv6AddrGenMode(String iface, int mode) throws RemoteException {
-        }
+        public void setIPv6AddrGenMode(String iface, int mode) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void shutdown() throws RemoteException {
-        }
+        public void shutdown() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public boolean getIpForwardingEnabled() throws RemoteException {
@@ -353,16 +357,13 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void setIpForwardingEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setIpForwardingEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void startTethering(String[] dhcpRanges) throws RemoteException {
-        }
+        public void startTethering(String[] dhcpRanges) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void stopTethering() throws RemoteException {
-        }
+        public void stopTethering() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public boolean isTetheringStarted() throws RemoteException {
@@ -370,12 +371,10 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void tetherInterface(String iface) throws RemoteException {
-        }
+        public void tetherInterface(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void untetherInterface(String iface) throws RemoteException {
-        }
+        public void untetherInterface(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public String[] listTetheredInterfaces() throws RemoteException {
@@ -383,36 +382,32 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void enableNat(String internalInterface, String externalInterface) throws RemoteException {
-        }
+        public void enableNat(String internalInterface, String externalInterface)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void disableNat(String internalInterface, String externalInterface) throws RemoteException {
-        }
+        public void disableNat(String internalInterface, String externalInterface)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setInterfaceQuota(String iface, long quotaBytes) throws RemoteException {
-        }
+        public void setInterfaceQuota(String iface, long quotaBytes) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void removeInterfaceQuota(String iface) throws RemoteException {
-        }
+        public void removeInterfaceQuota(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setInterfaceAlert(String iface, long alertBytes) throws RemoteException {
-        }
+        public void setInterfaceAlert(String iface, long alertBytes) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void removeInterfaceAlert(String iface) throws RemoteException {
-        }
+        public void removeInterfaceAlert(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setUidOnMeteredNetworkDenylist(int uid, boolean enable) throws RemoteException {
-        }
+        public void setUidOnMeteredNetworkDenylist(int uid, boolean enable)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setUidOnMeteredNetworkAllowlist(int uid, boolean enable) throws RemoteException {
-        }
+        public void setUidOnMeteredNetworkAllowlist(int uid, boolean enable)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public boolean setDataSaverModeEnabled(boolean enable) throws RemoteException {
@@ -420,8 +415,7 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void setUidCleartextNetworkPolicy(int uid, int policy) throws RemoteException {
-        }
+        public void setUidCleartextNetworkPolicy(int uid, int policy) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public boolean isBandwidthControlEnabled() throws RemoteException {
@@ -429,8 +423,7 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void setFirewallEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setFirewallEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public boolean isFirewallEnabled() throws RemoteException {
@@ -438,36 +431,29 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void setFirewallUidRule(int chain, int uid, int rule) throws RemoteException {
-        }
+        public void setFirewallUidRule(int chain, int uid, int rule) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setFirewallUidRules(int chain, int[] uids, int[] rules) throws RemoteException {
-        }
+        public void setFirewallUidRules(int chain, int[] uids, int[] rules)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setFirewallChainEnabled(int chain, boolean enable) throws RemoteException {
-        }
+        public void setFirewallChainEnabled(int chain, boolean enable) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void closeSocketsForFreecess(int chain, String chainName) throws RemoteException {
-        }
+        public void closeSocketsForFreecess(int chain, String chainName) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void closeSocketsForUids(int[] uids) throws RemoteException {
-        }
+        public void closeSocketsForUids(int[] uids) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void closeSocketsForUid(int uid) throws RemoteException {
-        }
+        public void closeSocketsForUid(int uid) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void allowProtect(int uid) throws RemoteException {
-        }
+        public void allowProtect(int uid) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void denyProtect(int uid) throws RemoteException {
-        }
+        public void denyProtect(int uid) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public boolean isNetworkRestricted(int uid) throws RemoteException {
@@ -475,36 +461,33 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void spegRestrictNetworkConnection(int uid, boolean restrict) throws RemoteException {
-        }
+        public void spegRestrictNetworkConnection(int uid, boolean restrict)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setDnsForwardersForKnoxVpn(int netId, String[] dns) throws RemoteException {
-        }
+        public void setDnsForwardersForKnoxVpn(int netId, String[] dns) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setNetworkInfo(int netId, boolean chainedNetwork, int vpnClientUid) throws RemoteException {
-        }
+        public void setNetworkInfo(int netId, boolean chainedNetwork, int vpnClientUid)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addOrRemoveSystemAppFromDataSaverWhitelist(boolean enable, int uid) throws RemoteException {
-        }
+        public void addOrRemoveSystemAppFromDataSaverWhitelist(boolean enable, int uid)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void updateInputFilterExemptRules(int uid, int update) throws RemoteException {
-        }
+        public void updateInputFilterExemptRules(int uid, int update) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void updateInputFilterUserWideRules(int[] userIds, int ifaceIndex, int update) throws RemoteException {
-        }
+        public void updateInputFilterUserWideRules(int[] userIds, int ifaceIndex, int update)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void updateInputFilterAppWideRules(int[] uids, int ifaceIndex, int update) throws RemoteException {
-        }
+        public void updateInputFilterAppWideRules(int[] uids, int ifaceIndex, int update)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void clearEbpfMap(int mapId) throws RemoteException {
-        }
+        public void clearEbpfMap(int mapId) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public String runKnoxFirewallRulesCommand(int target, String cmd) throws RemoteException {
@@ -512,35 +495,31 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void runKnoxRulesCommand(int cmd, String[] params) throws RemoteException {
-        }
+        public void runKnoxRulesCommand(int cmd, String[] params) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void enableKnoxVpnFlagForTether(boolean enabled) throws RemoteException {
-        }
+        public void enableKnoxVpnFlagForTether(boolean enabled) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void registerNetdTetherEventListener() throws RemoteException {
-        }
+        public void registerNetdTetherEventListener() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void unregisterNetdTetherEventListener() throws RemoteException {
-        }
+        public void unregisterNetdTetherEventListener() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setKnoxVpn(int netId, boolean isKnoxVpn) throws RemoteException {
-        }
+        public void setKnoxVpn(int netId, boolean isKnoxVpn) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void startNetworkStatsOnPorts(String iface, int inport, int outport) throws RemoteException {
-        }
+        public void startNetworkStatsOnPorts(String iface, int inport, int outport)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void stopNetworkStatsOnPorts(String iface, int inport, int outport) throws RemoteException {
-        }
+        public void stopNetworkStatsOnPorts(String iface, int inport, int outport)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public long getNetworkStatsVideoCall(String iface, int sport, int dport) throws RemoteException {
+        public long getNetworkStatsVideoCall(String iface, int sport, int dport)
+                throws RemoteException {
             return 0L;
         }
 
@@ -550,26 +529,25 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public int addApeRule(boolean add, String infName, int bandwidthMbps) throws RemoteException {
+        public int addApeRule(boolean add, String infName, int bandwidthMbps)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.INetworkManagementService
-        public int replaceApeRule(String infName, int oldBandwidthMbps, int newBandwidthMbps) throws RemoteException {
+        public int replaceApeRule(String infName, int oldBandwidthMbps, int newBandwidthMbps)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.INetworkManagementService
-        public void startQbox(String iface) throws RemoteException {
-        }
+        public void startQbox(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void stopQbox() throws RemoteException {
-        }
+        public void stopQbox() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setQboxUid(int uid, boolean allow) throws RemoteException {
-        }
+        public void setQboxUid(int uid, boolean allow) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public int startL4s(String iface) throws RemoteException {
@@ -587,24 +565,19 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void startTosMarker(String ifname) throws RemoteException {
-        }
+        public void startTosMarker(String ifname) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void stopTosMarker(String ifname) throws RemoteException {
-        }
+        public void stopTosMarker(String ifname) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addTosPolicy(int uid, int tosValue) throws RemoteException {
-        }
+        public void addTosPolicy(int uid, int tosValue) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void removeTosPolicy(int uid) throws RemoteException {
-        }
+        public void removeTosPolicy(int uid) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void clearTosMap() throws RemoteException {
-        }
+        public void clearTosMap() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public int[] getTcpLocalPorts(int[] uids) throws RemoteException {
@@ -612,104 +585,96 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void enableEpdg(String mobileInterface, String tunnelingInterface, boolean deleteSkip) throws RemoteException {
-        }
+        public void enableEpdg(
+                String mobileInterface, String tunnelingInterface, boolean deleteSkip)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void disableEpdg(String mobileInterface, String tunnelingInterface) throws RemoteException {
-        }
+        public void disableEpdg(String mobileInterface, String tunnelingInterface)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setEpdgInterfaceDropRule(String iface, String src, boolean add) throws RemoteException {
-        }
+        public void setEpdgInterfaceDropRule(String iface, String src, boolean add)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void updateDefaultGatewayForEpdg(Network network) throws RemoteException {
-        }
+        public void updateDefaultGatewayForEpdg(Network network) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void disableDAD(String ifName) throws RemoteException {
-        }
+        public void disableDAD(String ifName) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setBlockAllDNSPackets(boolean enabled) throws RemoteException {
-        }
+        public void setBlockAllDNSPackets(boolean enabled) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setBlockListIPs(String addr) throws RemoteException {
-        }
+        public void setBlockListIPs(String addr) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setAllowListIPs(String addr) throws RemoteException {
-        }
+        public void setAllowListIPs(String addr) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setBlockHostAlone(String addr) throws RemoteException {
-        }
+        public void setBlockHostAlone(String addr) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setAllowHostAlone(String addr) throws RemoteException {
-        }
+        public void setAllowHostAlone(String addr) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void cleanAllBlock() throws RemoteException {
-        }
+        public void cleanAllBlock() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setBlockAllPackets() throws RemoteException {
-        }
+        public void setBlockAllPackets() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setBlockPorts(String protocol, int directionBitMask, String ports) throws RemoteException {
-        }
+        public void setBlockPorts(String protocol, int directionBitMask, String ports)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void cleanBlockPorts() throws RemoteException {
-        }
+        public void cleanBlockPorts() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setOnlyAllowIPs(String addr) throws RemoteException {
-        }
+        public void setOnlyAllowIPs(String addr) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void cleanOnlyAllowIPs() throws RemoteException {
-        }
+        public void cleanOnlyAllowIPs() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setUrlFirewallRuleMobileData(int uid, String url, boolean allow) throws RemoteException {
-        }
+        public void setUrlFirewallRuleMobileData(int uid, String url, boolean allow)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setUrlFirewallRuleWifi(int uid, String url, boolean allow) throws RemoteException {
-        }
+        public void setUrlFirewallRuleWifi(int uid, String url, boolean allow)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void buildFirewall() throws RemoteException {
-        }
+        public void buildFirewall() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setFirewallRuleWifi(int uid, boolean allow) throws RemoteException {
-        }
+        public void setFirewallRuleWifi(int uid, boolean allow) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setFirewallRuleMobileData(int uid, boolean allow) throws RemoteException {
-        }
+        public void setFirewallRuleMobileData(int uid, boolean allow) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addPortFwdRules(String externalIface, String interfanIface, String externalIp, String internalIp, int port) throws RemoteException {
-        }
+        public void addPortFwdRules(
+                String externalIface,
+                String interfanIface,
+                String externalIp,
+                String internalIp,
+                int port)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setAutoConf(String iface, boolean enable) throws RemoteException {
-        }
+        public void setAutoConf(String iface, boolean enable) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addLegacyRoute(int netId, String ifName, String destination, String nextHop, int uid) throws RemoteException {
-        }
+        public void addLegacyRoute(
+                int netId, String ifName, String destination, String nextHop, int uid)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void removeLegacyRoute(int netId, String ifName, String destination, String nextHop, int uid) throws RemoteException {
-        }
+        public void removeLegacyRoute(
+                int netId, String ifName, String destination, String nextHop, int uid)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public int prioritizeMnxbApp(boolean add, int uid) throws RemoteException {
@@ -717,18 +682,19 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public int addMnxbRule(boolean add, String infName, int bandwidthMbps) throws RemoteException {
+        public int addMnxbRule(boolean add, String infName, int bandwidthMbps)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.INetworkManagementService
-        public int replaceMnxbRule(String infName, int oldBandwidthMbps, int newBandwidthMbps) throws RemoteException {
+        public int replaceMnxbRule(String infName, int oldBandwidthMbps, int newBandwidthMbps)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.INetworkManagementService
-        public void setAdvertiseWindowSize(int newAdvertiseWindow) throws RemoteException {
-        }
+        public void setAdvertiseWindowSize(int newAdvertiseWindow) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
         public long[] l4StatsGet() throws RemoteException {
@@ -736,148 +702,137 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.INetworkManagementService
-        public void activateClo(String ifaceName) throws RemoteException {
-        }
+        public void activateClo(String ifaceName) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void deactivateClo(String ifaceName) throws RemoteException {
-        }
+        public void deactivateClo(String ifaceName) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void activateCloGro() throws RemoteException {
-        }
+        public void activateCloGro() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void deactivateCloGro() throws RemoteException {
-        }
+        public void deactivateCloGro() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void registerCloEventObserver(ICloEventObserver observer) throws RemoteException {
-        }
+        public void registerCloEventObserver(ICloEventObserver observer) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void unregisterCloEventObserver() throws RemoteException {
-        }
+        public void unregisterCloEventObserver() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void updateGroFlushTime(long flushTime) throws RemoteException {
-        }
+        public void updateGroFlushTime(long flushTime) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void updateGroPshOption(int pshOption) throws RemoteException {
-        }
+        public void updateGroPshOption(int pshOption) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addMptcpLink(String iface) throws RemoteException {
-        }
+        public void addMptcpLink(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void removeMptcpLink(String iface) throws RemoteException {
-        }
+        public void removeMptcpLink(String iface) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addChain(String chain, String ip_type) throws RemoteException {
-        }
+        public void addChain(String chain, String ip_type) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void removeChain(String chain, String ip_type) throws RemoteException {
-        }
+        public void removeChain(String chain, String ip_type) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addSocksRule(String iface, String chain, String proto, int port, String ip_type) throws RemoteException {
-        }
+        public void addSocksRule(String iface, String chain, String proto, int port, String ip_type)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void removeSocksRule(String iface, String chain, String proto, int port, String ip_type) throws RemoteException {
-        }
+        public void removeSocksRule(
+                String iface, String chain, String proto, int port, String ip_type)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addUidSocksRule(String iface, String chain, String proto, int port, int uid, String ip_type) throws RemoteException {
-        }
+        public void addUidSocksRule(
+                String iface, String chain, String proto, int port, int uid, String ip_type)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void removeUidSocksRule(String iface, String chain, String proto, int port, int uid, String ip_type) throws RemoteException {
-        }
+        public void removeUidSocksRule(
+                String iface, String chain, String proto, int port, int uid, String ip_type)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addSocksSkipRule(String chain, String addr, String ip_type) throws RemoteException {
-        }
+        public void addSocksSkipRule(String chain, String addr, String ip_type)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void removeSocksSkipRule(String chain, String addr, String ip_type) throws RemoteException {
-        }
+        public void removeSocksSkipRule(String chain, String addr, String ip_type)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addSocksSkipRuleProto(String chain, String addr, String proto, int port, String ip_type) throws RemoteException {
-        }
+        public void addSocksSkipRuleProto(
+                String chain, String addr, String proto, int port, String ip_type)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void removeSocksSkipRuleProto(String chain, String addr, String proto, int port, String ip_type) throws RemoteException {
-        }
+        public void removeSocksSkipRuleProto(
+                String chain, String addr, String proto, int port, String ip_type)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addUidToChain(String chain, String proto, int uid) throws RemoteException {
-        }
+        public void addUidToChain(String chain, String proto, int uid) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void removeUidFromChain(String chain, String proto, int uid) throws RemoteException {
-        }
+        public void removeUidFromChain(String chain, String proto, int uid)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addIpAcceptRule(String chain, String dest, String proto) throws RemoteException {
-        }
+        public void addIpAcceptRule(String chain, String dest, String proto)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void delIpAcceptRule(String chain, String dest, String proto) throws RemoteException {
-        }
+        public void delIpAcceptRule(String chain, String dest, String proto)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setTcpBufferSize(String rmem, String wmem) throws RemoteException {
-        }
+        public void setTcpBufferSize(String rmem, String wmem) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setMptcpMtuValue(String iface, int mtu) throws RemoteException {
-        }
+        public void setMptcpMtuValue(String iface, int mtu) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void enableMptcp(String value) throws RemoteException {
-        }
+        public void enableMptcp(String value) throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void disableMptcp() throws RemoteException {
-        }
+        public void disableMptcp() throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addSourceRoute(String iface, String addr, String gateway) throws RemoteException {
-        }
+        public void addSourceRoute(String iface, String addr, String gateway)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void delSourceRoute(String iface, String addr, String gateway) throws RemoteException {
-        }
+        public void delSourceRoute(String iface, String addr, String gateway)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void addSourcePortAcceptRule(String chain, String proto, int port) throws RemoteException {
-        }
+        public void addSourcePortAcceptRule(String chain, String proto, int port)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void delSourcePortAcceptRule(String chain, String proto, int port) throws RemoteException {
-        }
+        public void delSourcePortAcceptRule(String chain, String proto, int port)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void updateSourceRule(boolean add, String ipAddr, String ifaceName) throws RemoteException {
-        }
+        public void updateSourceRule(boolean add, String ipAddr, String ifaceName)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setPrivateIpRoute(boolean add, String ifaceName, int mark) throws RemoteException {
-        }
+        public void setPrivateIpRoute(boolean add, String ifaceName, int mark)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setDestinationBasedMarkRule(boolean add, String addr, String outInterface, int mark, int uid) throws RemoteException {
-        }
+        public void setDestinationBasedMarkRule(
+                boolean add, String addr, String outInterface, int mark, int uid)
+                throws RemoteException {}
 
         @Override // android.os.INetworkManagementService
-        public void setUIDRoute(boolean add, String iface, int uid, String pref, String ip_type) throws RemoteException {
-        }
+        public void setUIDRoute(boolean add, String iface, int uid, String pref, String ip_type)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -885,7 +840,7 @@ public interface INetworkManagementService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INetworkManagementService {
+    public abstract static class Stub extends Binder implements INetworkManagementService {
         public static final String DESCRIPTOR = "android.os.INetworkManagementService";
         static final int TRANSACTION_activateClo = 106;
         static final int TRANSACTION_activateCloGro = 108;
@@ -1040,7 +995,9 @@ public interface INetworkManagementService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static INetworkManagementService asInterface(IBinder obj) {
@@ -1354,7 +1311,8 @@ public interface INetworkManagementService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -1364,13 +1322,17 @@ public interface INetworkManagementService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    INetworkManagementEventObserver _arg0 = INetworkManagementEventObserver.Stub.asInterface(data.readStrongBinder());
+                    INetworkManagementEventObserver _arg0 =
+                            INetworkManagementEventObserver.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerObserver(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    INetworkManagementEventObserver _arg02 = INetworkManagementEventObserver.Stub.asInterface(data.readStrongBinder());
+                    INetworkManagementEventObserver _arg02 =
+                            INetworkManagementEventObserver.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterObserver(_arg02);
                     reply.writeNoException();
@@ -1389,7 +1351,9 @@ public interface INetworkManagementService extends IInterface {
                     return true;
                 case 5:
                     String _arg04 = data.readString();
-                    InterfaceConfiguration _arg1 = (InterfaceConfiguration) data.readTypedObject(InterfaceConfiguration.CREATOR);
+                    InterfaceConfiguration _arg1 =
+                            (InterfaceConfiguration)
+                                    data.readTypedObject(InterfaceConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     setInterfaceConfig(_arg04, _arg1);
                     reply.writeNoException();
@@ -2071,7 +2035,8 @@ public interface INetworkManagementService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 110:
-                    ICloEventObserver _arg089 = ICloEventObserver.Stub.asInterface(data.readStrongBinder());
+                    ICloEventObserver _arg089 =
+                            ICloEventObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCloEventObserver(_arg089);
                     reply.writeNoException();
@@ -2342,7 +2307,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void registerObserver(INetworkManagementEventObserver obs) throws RemoteException {
+            public void registerObserver(INetworkManagementEventObserver obs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2357,7 +2323,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void unregisterObserver(INetworkManagementEventObserver obs) throws RemoteException {
+            public void unregisterObserver(INetworkManagementEventObserver obs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2396,7 +2363,9 @@ public interface INetworkManagementService extends IInterface {
                     _data.writeString(iface);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    InterfaceConfiguration _result = (InterfaceConfiguration) _reply.readTypedObject(InterfaceConfiguration.CREATOR);
+                    InterfaceConfiguration _result =
+                            (InterfaceConfiguration)
+                                    _reply.readTypedObject(InterfaceConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2405,7 +2374,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setInterfaceConfig(String iface, InterfaceConfiguration cfg) throws RemoteException {
+            public void setInterfaceConfig(String iface, InterfaceConfiguration cfg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2466,7 +2436,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setInterfaceIpv6PrivacyExtensions(String iface, boolean enable) throws RemoteException {
+            public void setInterfaceIpv6PrivacyExtensions(String iface, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2664,7 +2635,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void enableNat(String internalInterface, String externalInterface) throws RemoteException {
+            public void enableNat(String internalInterface, String externalInterface)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2680,7 +2652,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void disableNat(String internalInterface, String externalInterface) throws RemoteException {
+            public void disableNat(String internalInterface, String externalInterface)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2758,7 +2731,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setUidOnMeteredNetworkDenylist(int uid, boolean enable) throws RemoteException {
+            public void setUidOnMeteredNetworkDenylist(int uid, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2774,7 +2748,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setUidOnMeteredNetworkAllowlist(int uid, boolean enable) throws RemoteException {
+            public void setUidOnMeteredNetworkAllowlist(int uid, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2887,7 +2862,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setFirewallUidRules(int chain, int[] uids, int[] rules) throws RemoteException {
+            public void setFirewallUidRules(int chain, int[] uids, int[] rules)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2920,7 +2896,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void closeSocketsForFreecess(int chain, String chainName) throws RemoteException {
+            public void closeSocketsForFreecess(int chain, String chainName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3013,7 +2990,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void spegRestrictNetworkConnection(int uid, boolean restrict) throws RemoteException {
+            public void spegRestrictNetworkConnection(int uid, boolean restrict)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3045,7 +3023,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setNetworkInfo(int netId, boolean chainedNetwork, int vpnClientUid) throws RemoteException {
+            public void setNetworkInfo(int netId, boolean chainedNetwork, int vpnClientUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3062,7 +3041,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void addOrRemoveSystemAppFromDataSaverWhitelist(boolean enable, int uid) throws RemoteException {
+            public void addOrRemoveSystemAppFromDataSaverWhitelist(boolean enable, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3094,7 +3074,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void updateInputFilterUserWideRules(int[] userIds, int ifaceIndex, int update) throws RemoteException {
+            public void updateInputFilterUserWideRules(int[] userIds, int ifaceIndex, int update)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3111,7 +3092,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void updateInputFilterAppWideRules(int[] uids, int ifaceIndex, int update) throws RemoteException {
+            public void updateInputFilterAppWideRules(int[] uids, int ifaceIndex, int update)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3143,7 +3125,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public String runKnoxFirewallRulesCommand(int target, String cmd) throws RemoteException {
+            public String runKnoxFirewallRulesCommand(int target, String cmd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3236,7 +3219,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void startNetworkStatsOnPorts(String iface, int inport, int outport) throws RemoteException {
+            public void startNetworkStatsOnPorts(String iface, int inport, int outport)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3253,7 +3237,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void stopNetworkStatsOnPorts(String iface, int inport, int outport) throws RemoteException {
+            public void stopNetworkStatsOnPorts(String iface, int inport, int outport)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3270,7 +3255,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public long getNetworkStatsVideoCall(String iface, int sport, int dport) throws RemoteException {
+            public long getNetworkStatsVideoCall(String iface, int sport, int dport)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3307,7 +3293,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public int addApeRule(boolean add, String infName, int bandwidthMbps) throws RemoteException {
+            public int addApeRule(boolean add, String infName, int bandwidthMbps)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3326,7 +3313,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public int replaceApeRule(String infName, int oldBandwidthMbps, int newBandwidthMbps) throws RemoteException {
+            public int replaceApeRule(String infName, int oldBandwidthMbps, int newBandwidthMbps)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3532,7 +3520,9 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void enableEpdg(String mobileInterface, String tunnelingInterface, boolean deleteSkip) throws RemoteException {
+            public void enableEpdg(
+                    String mobileInterface, String tunnelingInterface, boolean deleteSkip)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3549,7 +3539,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void disableEpdg(String mobileInterface, String tunnelingInterface) throws RemoteException {
+            public void disableEpdg(String mobileInterface, String tunnelingInterface)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3565,7 +3556,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setEpdgInterfaceDropRule(String iface, String src, boolean add) throws RemoteException {
+            public void setEpdgInterfaceDropRule(String iface, String src, boolean add)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3715,7 +3707,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setBlockPorts(String protocol, int directionBitMask, String ports) throws RemoteException {
+            public void setBlockPorts(String protocol, int directionBitMask, String ports)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3775,7 +3768,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setUrlFirewallRuleMobileData(int uid, String url, boolean allow) throws RemoteException {
+            public void setUrlFirewallRuleMobileData(int uid, String url, boolean allow)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3792,7 +3786,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setUrlFirewallRuleWifi(int uid, String url, boolean allow) throws RemoteException {
+            public void setUrlFirewallRuleWifi(int uid, String url, boolean allow)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3855,7 +3850,13 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void addPortFwdRules(String externalIface, String interfanIface, String externalIp, String internalIp, int port) throws RemoteException {
+            public void addPortFwdRules(
+                    String externalIface,
+                    String interfanIface,
+                    String externalIp,
+                    String internalIp,
+                    int port)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3890,7 +3891,9 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void addLegacyRoute(int netId, String ifName, String destination, String nextHop, int uid) throws RemoteException {
+            public void addLegacyRoute(
+                    int netId, String ifName, String destination, String nextHop, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3909,7 +3912,9 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void removeLegacyRoute(int netId, String ifName, String destination, String nextHop, int uid) throws RemoteException {
+            public void removeLegacyRoute(
+                    int netId, String ifName, String destination, String nextHop, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3946,7 +3951,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public int addMnxbRule(boolean add, String infName, int bandwidthMbps) throws RemoteException {
+            public int addMnxbRule(boolean add, String infName, int bandwidthMbps)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3965,7 +3971,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public int replaceMnxbRule(String infName, int oldBandwidthMbps, int newBandwidthMbps) throws RemoteException {
+            public int replaceMnxbRule(String infName, int oldBandwidthMbps, int newBandwidthMbps)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4073,7 +4080,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void registerCloEventObserver(ICloEventObserver observer) throws RemoteException {
+            public void registerCloEventObserver(ICloEventObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4194,7 +4202,9 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void addSocksRule(String iface, String chain, String proto, int port, String ip_type) throws RemoteException {
+            public void addSocksRule(
+                    String iface, String chain, String proto, int port, String ip_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4213,7 +4223,9 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void removeSocksRule(String iface, String chain, String proto, int port, String ip_type) throws RemoteException {
+            public void removeSocksRule(
+                    String iface, String chain, String proto, int port, String ip_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4232,7 +4244,9 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void addUidSocksRule(String iface, String chain, String proto, int port, int uid, String ip_type) throws RemoteException {
+            public void addUidSocksRule(
+                    String iface, String chain, String proto, int port, int uid, String ip_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4252,7 +4266,9 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void removeUidSocksRule(String iface, String chain, String proto, int port, int uid, String ip_type) throws RemoteException {
+            public void removeUidSocksRule(
+                    String iface, String chain, String proto, int port, int uid, String ip_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4272,7 +4288,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void addSocksSkipRule(String chain, String addr, String ip_type) throws RemoteException {
+            public void addSocksSkipRule(String chain, String addr, String ip_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4289,7 +4306,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void removeSocksSkipRule(String chain, String addr, String ip_type) throws RemoteException {
+            public void removeSocksSkipRule(String chain, String addr, String ip_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4306,7 +4324,9 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void addSocksSkipRuleProto(String chain, String addr, String proto, int port, String ip_type) throws RemoteException {
+            public void addSocksSkipRuleProto(
+                    String chain, String addr, String proto, int port, String ip_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4325,7 +4345,9 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void removeSocksSkipRuleProto(String chain, String addr, String proto, int port, String ip_type) throws RemoteException {
+            public void removeSocksSkipRuleProto(
+                    String chain, String addr, String proto, int port, String ip_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4361,7 +4383,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void removeUidFromChain(String chain, String proto, int uid) throws RemoteException {
+            public void removeUidFromChain(String chain, String proto, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4378,7 +4401,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void addIpAcceptRule(String chain, String dest, String proto) throws RemoteException {
+            public void addIpAcceptRule(String chain, String dest, String proto)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4395,7 +4419,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void delIpAcceptRule(String chain, String dest, String proto) throws RemoteException {
+            public void delIpAcceptRule(String chain, String dest, String proto)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4473,7 +4498,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void addSourceRoute(String iface, String addr, String gateway) throws RemoteException {
+            public void addSourceRoute(String iface, String addr, String gateway)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4490,7 +4516,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void delSourceRoute(String iface, String addr, String gateway) throws RemoteException {
+            public void delSourceRoute(String iface, String addr, String gateway)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4507,7 +4534,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void addSourcePortAcceptRule(String chain, String proto, int port) throws RemoteException {
+            public void addSourcePortAcceptRule(String chain, String proto, int port)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4524,7 +4552,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void delSourcePortAcceptRule(String chain, String proto, int port) throws RemoteException {
+            public void delSourcePortAcceptRule(String chain, String proto, int port)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4541,7 +4570,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void updateSourceRule(boolean add, String ipAddr, String ifaceName) throws RemoteException {
+            public void updateSourceRule(boolean add, String ipAddr, String ifaceName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4558,7 +4588,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setPrivateIpRoute(boolean add, String ifaceName, int mark) throws RemoteException {
+            public void setPrivateIpRoute(boolean add, String ifaceName, int mark)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4575,7 +4606,9 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setDestinationBasedMarkRule(boolean add, String addr, String outInterface, int mark, int uid) throws RemoteException {
+            public void setDestinationBasedMarkRule(
+                    boolean add, String addr, String outInterface, int mark, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4594,7 +4627,8 @@ public interface INetworkManagementService extends IInterface {
             }
 
             @Override // android.os.INetworkManagementService
-            public void setUIDRoute(boolean add, String iface, int uid, String pref, String ip_type) throws RemoteException {
+            public void setUIDRoute(boolean add, String iface, int uid, String pref, String ip_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4614,15 +4648,18 @@ public interface INetworkManagementService extends IInterface {
         }
 
         protected void shutdown_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SHUTDOWN, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SHUTDOWN, getCallingPid(), getCallingUid());
         }
 
         protected void setDataSaverModeEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.NETWORK_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.NETWORK_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void isNetworkRestricted_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OBSERVE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OBSERVE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

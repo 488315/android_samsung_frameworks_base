@@ -1,6 +1,7 @@
 package android.graphics.fonts;
 
 import android.text.TextUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +13,8 @@ public final class FontVariationAxis {
     private final int mTag;
     private final String mTagString;
     private static final Pattern TAG_PATTERN = Pattern.compile("[ -~]{4}");
-    private static final Pattern STYLE_VALUE_PATTERN = Pattern.compile("-?(([0-9]+(\\.[0-9]+)?)|(\\.[0-9]+))");
+    private static final Pattern STYLE_VALUE_PATTERN =
+            Pattern.compile("-?(([0-9]+(\\.[0-9]+)?)|(\\.[0-9]+))");
 
     public FontVariationAxis(String tagString, float styleValue) {
         if (!isValidTag(tagString)) {
@@ -66,7 +68,8 @@ public final class FontVariationAxis {
             char c = settings.charAt(i);
             if (!Character.isWhitespace(c)) {
                 if ((c != '\'' && c != '\"') || length < i + 6 || settings.charAt(i + 5) != c) {
-                    throw new IllegalArgumentException("Tag should be wrapped with double or single quote: " + settings);
+                    throw new IllegalArgumentException(
+                            "Tag should be wrapped with double or single quote: " + settings);
                 }
                 String tagString = settings.substring(i + 1, i + 5);
                 int i2 = i + 6;
@@ -79,7 +82,8 @@ public final class FontVariationAxis {
                     axisList.add(new FontVariationAxis(tagString, value));
                     i = endOfValueString;
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("Failed to parse float string: " + e.getMessage());
+                    throw new IllegalArgumentException(
+                            "Failed to parse float string: " + e.getMessage());
                 }
             }
             i++;

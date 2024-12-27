@@ -2,7 +2,18 @@ package android.gesture;
 
 /* loaded from: classes.dex */
 class Instance {
-    private static final float[] ORIENTATIONS = {0.0f, 0.7853982f, 1.5707964f, 2.3561945f, 3.1415927f, 0.0f, -0.7853982f, -1.5707964f, -2.3561945f, -3.1415927f};
+    private static final float[] ORIENTATIONS = {
+        0.0f,
+        0.7853982f,
+        1.5707964f,
+        2.3561945f,
+        3.1415927f,
+        0.0f,
+        -0.7853982f,
+        -1.5707964f,
+        -2.3561945f,
+        -3.1415927f
+    };
     private static final int PATCH_SAMPLE_SIZE = 16;
     private static final int SEQUENCE_SAMPLE_SIZE = 16;
     final long id;
@@ -28,7 +39,8 @@ class Instance {
         }
     }
 
-    static Instance createInstance(int sequenceType, int orientationType, Gesture gesture, String label) {
+    static Instance createInstance(
+            int sequenceType, int orientationType, Gesture gesture, String label) {
         if (sequenceType == 2) {
             float[] pts = temporalSampler(orientationType, gesture);
             Instance instance = new Instance(gesture.getID(), pts, label);

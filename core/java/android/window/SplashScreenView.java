@@ -26,10 +26,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.window.SplashScreenView;
+
 import com.android.internal.R;
 import com.android.internal.jank.InteractionJankMonitor;
 import com.android.internal.policy.DecorView;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.time.Duration;
@@ -91,22 +92,32 @@ public final class SplashScreenView extends FrameLayout {
             this.mBackgroundColor = parcelable.getBackgroundColor();
             this.mSurfacePackage = parcelable.mSurfacePackage;
             if (this.mSurfacePackage == null && parcelable.mIconBitmap != null) {
-                this.mIconDrawable = new BitmapDrawable(this.mContext.getResources(), parcelable.mIconBitmap);
+                this.mIconDrawable =
+                        new BitmapDrawable(this.mContext.getResources(), parcelable.mIconBitmap);
                 this.mParceledIconBitmap = parcelable.mIconBitmap;
             }
             if (parcelable.mIconBackground != null) {
-                this.mIconBackground = new BitmapDrawable(this.mContext.getResources(), parcelable.mIconBackground);
+                this.mIconBackground =
+                        new BitmapDrawable(
+                                this.mContext.getResources(), parcelable.mIconBackground);
                 this.mParceledIconBackgroundBitmap = parcelable.mIconBackground;
             }
             if (parcelable.mBrandingBitmap != null) {
-                setBrandingDrawable(new BitmapDrawable(this.mContext.getResources(), parcelable.mBrandingBitmap), parcelable.mBrandingWidth, parcelable.mBrandingHeight);
+                setBrandingDrawable(
+                        new BitmapDrawable(
+                                this.mContext.getResources(), parcelable.mBrandingBitmap),
+                        parcelable.mBrandingWidth,
+                        parcelable.mBrandingHeight);
                 this.mParceledBrandingBitmap = parcelable.mBrandingBitmap;
             }
             this.mIconAnimationStart = Instant.ofEpochMilli(parcelable.mIconAnimationStartMillis);
-            this.mIconAnimationDuration = Duration.ofMillis(parcelable.mIconAnimationDurationMillis);
+            this.mIconAnimationDuration =
+                    Duration.ofMillis(parcelable.mIconAnimationDurationMillis);
             this.mClientCallback = parcelable.mClientCallback;
             if (SplashScreenView.DEBUG) {
-                Log.d(SplashScreenView.TAG, String.format("Building from parcel drawable: %s", this.mIconDrawable));
+                Log.d(
+                        SplashScreenView.TAG,
+                        String.format("Building from parcel drawable: %s", this.mIconDrawable));
             }
             return this;
         }
@@ -156,7 +167,10 @@ public final class SplashScreenView extends FrameLayout {
         public SplashScreenView build() {
             Trace.traceBegin(32L, "SplashScreenView#build");
             LayoutInflater layoutInflater = LayoutInflater.from(this.mContext);
-            final SplashScreenView view = (SplashScreenView) layoutInflater.inflate(R.layout.splash_screen_view, (ViewGroup) null, false);
+            final SplashScreenView view =
+                    (SplashScreenView)
+                            layoutInflater.inflate(
+                                    R.layout.splash_screen_view, (ViewGroup) null, false);
             view.mInitBackgroundColor = this.mBackgroundColor;
             if (this.mOverlayDrawable != null) {
                 view.setBackground(this.mOverlayDrawable);
@@ -166,15 +180,18 @@ public final class SplashScreenView extends FrameLayout {
             view.mClientCallback = this.mClientCallback;
             view.mBrandingImageView = view.findViewById(R.id.splashscreen_branding_view);
             boolean hasIcon = false;
-            if ((this.mIconDrawable instanceof IconAnimateListener) || this.mSurfacePackage != null) {
+            if ((this.mIconDrawable instanceof IconAnimateListener)
+                    || this.mSurfacePackage != null) {
                 hasIcon = true;
                 if (this.mUiThreadInitTask != null) {
-                    this.mUiThreadInitTask.accept(new Runnable() { // from class: android.window.SplashScreenView$Builder$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            SplashScreenView.Builder.this.lambda$build$0(view);
-                        }
-                    });
+                    this.mUiThreadInitTask.accept(
+                            new Runnable() { // from class:
+                                             // android.window.SplashScreenView$Builder$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    SplashScreenView.Builder.this.lambda$build$0(view);
+                                }
+                            });
                 } else {
                     view.mIconView = createSurfaceView(view);
                 }
@@ -201,7 +218,9 @@ public final class SplashScreenView extends FrameLayout {
             }
             view.mParceledIconBackgroundBitmap = this.mParceledIconBackgroundBitmap;
             view.mParceledIconBitmap = this.mParceledIconBitmap;
-            if (this.mBrandingImageHeight > 0 && this.mBrandingImageWidth > 0 && this.mBrandingDrawable != null) {
+            if (this.mBrandingImageHeight > 0
+                    && this.mBrandingImageWidth > 0
+                    && this.mBrandingDrawable != null) {
                 ViewGroup.LayoutParams params2 = view.mBrandingImageView.getLayoutParams();
                 params2.width = this.mBrandingImageWidth;
                 params2.height = this.mBrandingImageHeight;
@@ -214,7 +233,24 @@ public final class SplashScreenView extends FrameLayout {
                 view.mParceledBrandingBitmap = this.mParceledBrandingBitmap;
             }
             if (SplashScreenView.DEBUG) {
-                Log.d(SplashScreenView.TAG, "Build " + view + "\nIcon: view: " + view.mIconView + " drawable: " + this.mIconDrawable + " size: " + this.mIconSize + "\nBranding: view: " + view.mBrandingImageView + " drawable: " + this.mBrandingDrawable + " size w: " + this.mBrandingImageWidth + " h: " + this.mBrandingImageHeight);
+                Log.d(
+                        SplashScreenView.TAG,
+                        "Build "
+                                + view
+                                + "\nIcon: view: "
+                                + view.mIconView
+                                + " drawable: "
+                                + this.mIconDrawable
+                                + " size: "
+                                + this.mIconSize
+                                + "\nBranding: view: "
+                                + view.mBrandingImageView
+                                + " drawable: "
+                                + this.mBrandingDrawable
+                                + " size w: "
+                                + this.mBrandingImageWidth
+                                + " h: "
+                                + this.mBrandingImageHeight);
             }
             Trace.traceEnd(32L);
             return view;
@@ -233,18 +269,32 @@ public final class SplashScreenView extends FrameLayout {
             surfaceView.setBackground(this.mIconBackground);
             if (this.mSurfacePackage == null) {
                 if (SplashScreenView.DEBUG) {
-                    Log.d(SplashScreenView.TAG, "SurfaceControlViewHost created on thread " + Thread.currentThread().getId());
+                    Log.d(
+                            SplashScreenView.TAG,
+                            "SurfaceControlViewHost created on thread "
+                                    + Thread.currentThread().getId());
                 }
                 AttachedSurfaceControl attachedSurfaceControl = surfaceView.getRootSurfaceControl();
-                SurfaceControlViewHost viewHost = new SurfaceControlViewHost(viewContext, viewContext.getDisplay(), attachedSurfaceControl == null ? null : attachedSurfaceControl.getInputTransferToken(), "SplashScreenView");
+                SurfaceControlViewHost viewHost =
+                        new SurfaceControlViewHost(
+                                viewContext,
+                                viewContext.getDisplay(),
+                                attachedSurfaceControl == null
+                                        ? null
+                                        : attachedSurfaceControl.getInputTransferToken(),
+                                "SplashScreenView");
                 ImageView imageView = new ImageView(viewContext);
                 imageView.setBackground(this.mIconDrawable);
-                viewHost.setView(imageView, new WindowManager.LayoutParams(this.mIconSize, this.mIconSize, 2, 131096, -2));
+                viewHost.setView(
+                        imageView,
+                        new WindowManager.LayoutParams(
+                                this.mIconSize, this.mIconSize, 2, 131096, -2));
                 SurfaceControlViewHost.SurfacePackage surfacePackage = viewHost.getSurfacePackage();
                 surfaceView.setChildSurfacePackage(surfacePackage);
                 splashScreenView.mSurfacePackage = surfacePackage;
                 splashScreenView.mSurfaceHost = viewHost;
-                splashScreenView.mSurfacePackageCopy = new SurfaceControlViewHost.SurfacePackage(surfacePackage);
+                splashScreenView.mSurfacePackageCopy =
+                        new SurfaceControlViewHost.SurfacePackage(surfacePackage);
             } else {
                 if (SplashScreenView.DEBUG) {
                     Log.d(SplashScreenView.TAG, "Using copy of SurfacePackage in the client");
@@ -252,7 +302,8 @@ public final class SplashScreenView extends FrameLayout {
                 splashScreenView.mSurfacePackage = this.mSurfacePackage;
             }
             if (this.mIconSize != 0) {
-                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(this.mIconSize, this.mIconSize);
+                FrameLayout.LayoutParams lp =
+                        new FrameLayout.LayoutParams(this.mIconSize, this.mIconSize);
                 lp.gravity = 17;
                 surfaceView.setLayoutParams(lp);
                 if (SplashScreenView.DEBUG) {
@@ -326,12 +377,23 @@ public final class SplashScreenView extends FrameLayout {
             return;
         }
         if (DEBUG) {
-            this.mSurfacePackage.getSurfaceControl().addOnReparentListener(new SurfaceControl.OnReparentListener() { // from class: android.window.SplashScreenView$$ExternalSyntheticLambda0
-                @Override // android.view.SurfaceControl.OnReparentListener
-                public final void onReparent(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl) {
-                    Log.e(SplashScreenView.TAG, String.format("SurfacePackage'surface reparented to %s", surfaceControl));
-                }
-            });
+            this.mSurfacePackage
+                    .getSurfaceControl()
+                    .addOnReparentListener(
+                            new SurfaceControl
+                                    .OnReparentListener() { // from class:
+                                                            // android.window.SplashScreenView$$ExternalSyntheticLambda0
+                                @Override // android.view.SurfaceControl.OnReparentListener
+                                public final void onReparent(
+                                        SurfaceControl.Transaction transaction,
+                                        SurfaceControl surfaceControl) {
+                                    Log.e(
+                                            SplashScreenView.TAG,
+                                            String.format(
+                                                    "SurfacePackage'surface reparented to %s",
+                                                    surfaceControl));
+                                }
+                            });
             Log.d(TAG, "Transferring surface " + this.mSurfaceView.toString());
         }
         this.mSurfaceView.setChildSurfacePackage(this.mSurfacePackage);
@@ -343,28 +405,34 @@ public final class SplashScreenView extends FrameLayout {
             return;
         }
         IconAnimateListener aniDrawable = (IconAnimateListener) drawable;
-        aniDrawable.prepareAnimate(new LongConsumer() { // from class: android.window.SplashScreenView$$ExternalSyntheticLambda1
-            @Override // java.util.function.LongConsumer
-            public final void accept(long j) {
-                SplashScreenView.this.animationStartCallback(j);
-            }
-        });
-        aniDrawable.setAnimationJankMonitoring(new AnimatorListenerAdapter() { // from class: android.window.SplashScreenView.1
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationCancel(Animator animation) {
-                InteractionJankMonitor.getInstance().cancel(38);
-            }
+        aniDrawable.prepareAnimate(
+                new LongConsumer() { // from class:
+                                     // android.window.SplashScreenView$$ExternalSyntheticLambda1
+                    @Override // java.util.function.LongConsumer
+                    public final void accept(long j) {
+                        SplashScreenView.this.animationStartCallback(j);
+                    }
+                });
+        aniDrawable.setAnimationJankMonitoring(
+                new AnimatorListenerAdapter() { // from class: android.window.SplashScreenView.1
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationCancel(Animator animation) {
+                        InteractionJankMonitor.getInstance().cancel(38);
+                    }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                InteractionJankMonitor.getInstance().end(38);
-            }
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        InteractionJankMonitor.getInstance().end(38);
+                    }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationStart(Animator animation) {
-                InteractionJankMonitor.getInstance().begin(SplashScreenView.this, 38);
-            }
-        });
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationStart(Animator animation) {
+                        InteractionJankMonitor.getInstance().begin(SplashScreenView.this, 38);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -448,7 +516,8 @@ public final class SplashScreenView extends FrameLayout {
         this.mIconView.getLocationInWindow(this.mTmpPos);
         this.mIconView.getDrawingRect(this.mTmpRect);
         int iconHeight = this.mTmpRect.height();
-        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) this.mBrandingImageView.getLayoutParams();
+        ViewGroup.MarginLayoutParams params =
+                (ViewGroup.MarginLayoutParams) this.mBrandingImageView.getLayoutParams();
         if (params == null) {
             Log.e(TAG, "Unable to adjust branding image layout, layout changed?");
             return;
@@ -467,7 +536,10 @@ public final class SplashScreenView extends FrameLayout {
     private void releaseAnimationSurfaceHost() {
         if (this.mSurfaceHost != null && !this.mIsCopied) {
             if (DEBUG) {
-                Log.d(TAG, "Shell removed splash screen. Releasing SurfaceControlViewHost on thread #" + Thread.currentThread().getId());
+                Log.d(
+                        TAG,
+                        "Shell removed splash screen. Releasing SurfaceControlViewHost on thread #"
+                                + Thread.currentThread().getId());
             }
             releaseIconHost(this.mSurfaceHost);
             this.mSurfaceHost = null;
@@ -508,24 +580,26 @@ public final class SplashScreenView extends FrameLayout {
 
         void stopAnimation();
 
-        default void setAnimationJankMonitoring(AnimatorListenerAdapter listener) {
-        }
+        default void setAnimationJankMonitoring(AnimatorListenerAdapter listener) {}
     }
 
     public static class SplashScreenViewParcelable implements Parcelable {
-        public static final Parcelable.Creator<SplashScreenViewParcelable> CREATOR = new Parcelable.Creator<SplashScreenViewParcelable>() { // from class: android.window.SplashScreenView.SplashScreenViewParcelable.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SplashScreenViewParcelable createFromParcel(Parcel source) {
-                return new SplashScreenViewParcelable(source);
-            }
+        public static final Parcelable.Creator<SplashScreenViewParcelable> CREATOR =
+                new Parcelable.Creator<
+                        SplashScreenViewParcelable>() { // from class:
+                                                        // android.window.SplashScreenView.SplashScreenViewParcelable.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SplashScreenViewParcelable createFromParcel(Parcel source) {
+                        return new SplashScreenViewParcelable(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SplashScreenViewParcelable[] newArray(int size) {
-                return new SplashScreenViewParcelable[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SplashScreenViewParcelable[] newArray(int size) {
+                        return new SplashScreenViewParcelable[size];
+                    }
+                };
         private int mBackgroundColor;
         private Bitmap mBrandingBitmap;
         private int mBrandingHeight;
@@ -546,7 +620,10 @@ public final class SplashScreenView extends FrameLayout {
             this.mIconBackground = iconView != null ? copyDrawable(iconView.getBackground()) : null;
             this.mSurfacePackage = view.mSurfacePackageCopy;
             if (this.mSurfacePackage == null) {
-                this.mIconBitmap = iconView != null ? copyDrawable(((ImageView) view.getIconView()).getDrawable()) : null;
+                this.mIconBitmap =
+                        iconView != null
+                                ? copyDrawable(((ImageView) view.getIconView()).getDrawable())
+                                : null;
             }
             this.mBrandingBitmap = copyDrawable(view.getBrandingView().getBackground());
             ViewGroup.LayoutParams params = view.getBrandingView().getLayoutParams();
@@ -594,7 +671,9 @@ public final class SplashScreenView extends FrameLayout {
             this.mIconAnimationStartMillis = source.readLong();
             this.mIconAnimationDurationMillis = source.readLong();
             this.mIconBackground = (Bitmap) source.readTypedObject(Bitmap.CREATOR);
-            this.mSurfacePackage = (SurfaceControlViewHost.SurfacePackage) source.readTypedObject(SurfaceControlViewHost.SurfacePackage.CREATOR);
+            this.mSurfacePackage =
+                    (SurfaceControlViewHost.SurfacePackage)
+                            source.readTypedObject(SurfaceControlViewHost.SurfacePackage.CREATOR);
             this.mClientCallback = (RemoteCallback) source.readTypedObject(RemoteCallback.CREATOR);
         }
 

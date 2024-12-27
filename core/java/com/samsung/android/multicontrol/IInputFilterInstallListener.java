@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IInputFilterInstallListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.multicontrol.IInputFilterInstallListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.multicontrol.IInputFilterInstallListener";
 
     void onInstalled() throws RemoteException;
 
@@ -16,12 +17,10 @@ public interface IInputFilterInstallListener extends IInterface {
 
     public static class Default implements IInputFilterInstallListener {
         @Override // com.samsung.android.multicontrol.IInputFilterInstallListener
-        public void onInstalled() throws RemoteException {
-        }
+        public void onInstalled() throws RemoteException {}
 
         @Override // com.samsung.android.multicontrol.IInputFilterInstallListener
-        public void onUninstalled() throws RemoteException {
-        }
+        public void onUninstalled() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface IInputFilterInstallListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputFilterInstallListener {
+    public abstract static class Stub extends Binder implements IInputFilterInstallListener {
         static final int TRANSACTION_onInstalled = 1;
         static final int TRANSACTION_onUninstalled = 2;
 
@@ -70,7 +69,8 @@ public interface IInputFilterInstallListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInputFilterInstallListener.DESCRIPTOR);
             }

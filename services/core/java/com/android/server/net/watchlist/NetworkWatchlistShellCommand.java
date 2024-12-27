@@ -8,7 +8,9 @@ import android.os.ParcelFileDescriptor;
 import android.os.ShellCommand;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.PrintWriter;
 
@@ -18,7 +20,8 @@ public final class NetworkWatchlistShellCommand extends ShellCommand {
     public final Context mContext;
     public final NetworkWatchlistService mService;
 
-    public NetworkWatchlistShellCommand(NetworkWatchlistService networkWatchlistService, Context context) {
+    public NetworkWatchlistShellCommand(
+            NetworkWatchlistService networkWatchlistService, Context context) {
         this.mContext = context;
         this.mService = networkWatchlistService;
     }
@@ -82,7 +85,9 @@ public final class NetworkWatchlistShellCommand extends ShellCommand {
             r0.println(r5)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.watchlist.NetworkWatchlistShellCommand.onCommand(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.watchlist.NetworkWatchlistShellCommand.onCommand(java.lang.String):int");
     }
 
     public final void onHelp() {
@@ -91,7 +96,11 @@ public final class NetworkWatchlistShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println("  set-test-config your_watchlist_config.xml");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Set network watchlist test config file.", "  force-generate-report", "    Force generate watchlist test report.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Set network watchlist test config file.",
+                "  force-generate-report",
+                "    Force generate watchlist test report.");
     }
 
     public final int runForceGenerateReport() {
@@ -99,14 +108,17 @@ public final class NetworkWatchlistShellCommand extends ShellCommand {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (WatchlistConfig.sInstance.mIsSecureConfig) {
-                outPrintWriter.println("Error: Cannot force generate report under production config");
+                outPrintWriter.println(
+                        "Error: Cannot force generate report under production config");
                 return -1;
             }
-            Settings.Global.putLong(this.mContext.getContentResolver(), "network_watchlist_last_report_time", 0L);
+            Settings.Global.putLong(
+                    this.mContext.getContentResolver(), "network_watchlist_last_report_time", 0L);
             NetworkWatchlistService networkWatchlistService = this.mService;
             long currentTimeMillis = System.currentTimeMillis();
             if (!networkWatchlistService.mConfig.mIsSecureConfig) {
-                WatchlistLoggingHandler watchlistLoggingHandler = networkWatchlistService.mNetworkWatchlistHandler;
+                WatchlistLoggingHandler watchlistLoggingHandler =
+                        networkWatchlistService.mNetworkWatchlistHandler;
                 Message obtainMessage = watchlistLoggingHandler.obtainMessage(3);
                 obtainMessage.obj = Long.valueOf(currentTimeMillis);
                 watchlistLoggingHandler.sendMessage(obtainMessage);
@@ -131,14 +143,18 @@ public final class NetworkWatchlistShellCommand extends ShellCommand {
                 outPrintWriter.println("Error: can't open input file " + nextArgRequired);
                 return -1;
             }
-            ParcelFileDescriptor.AutoCloseInputStream autoCloseInputStream = new ParcelFileDescriptor.AutoCloseInputStream(openFileForSystem);
+            ParcelFileDescriptor.AutoCloseInputStream autoCloseInputStream =
+                    new ParcelFileDescriptor.AutoCloseInputStream(openFileForSystem);
             try {
                 WatchlistConfig watchlistConfig = WatchlistConfig.sInstance;
                 watchlistConfig.getClass();
                 Log.i("WatchlistConfig", "Setting watchlist testing config");
-                FileUtils.copyToFileOrThrow(autoCloseInputStream, new File("/data/misc/network_watchlist/network_watchlist_for_test.xml"));
+                FileUtils.copyToFileOrThrow(
+                        autoCloseInputStream,
+                        new File("/data/misc/network_watchlist/network_watchlist_for_test.xml"));
                 watchlistConfig.mIsSecureConfig = false;
-                watchlistConfig.mXmlFile = new File("/data/misc/network_watchlist/network_watchlist_for_test.xml");
+                watchlistConfig.mXmlFile =
+                        new File("/data/misc/network_watchlist/network_watchlist_for_test.xml");
                 watchlistConfig.reloadConfig();
                 autoCloseInputStream.close();
                 outPrintWriter.println("Success!");

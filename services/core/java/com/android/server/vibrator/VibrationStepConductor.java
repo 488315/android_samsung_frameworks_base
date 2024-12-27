@@ -14,10 +14,9 @@ import android.os.vibrator.VibrationEffectSegment;
 import android.util.IntArray;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.modules.expresslog.Counter;
-import com.android.server.vibrator.Vibration;
-import com.android.server.vibrator.VibrationScaler;
-import com.android.server.vibrator.VibratorManagerService;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -55,7 +54,14 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
     public Vibration.EndInfo mCancelledVibrationEndInfo = null;
     public boolean mCancelledImmediately = false;
 
-    public VibrationStepConductor(HalVibration halVibration, VibrationSettings vibrationSettings, DeviceAdapter deviceAdapter, VibrationScaler vibrationScaler, VibratorFrameworkStatsLogger vibratorFrameworkStatsLogger, CompletableFuture completableFuture, VibratorManagerService.VibrationThreadCallbacks vibrationThreadCallbacks) {
+    public VibrationStepConductor(
+            HalVibration halVibration,
+            VibrationSettings vibrationSettings,
+            DeviceAdapter deviceAdapter,
+            VibrationScaler vibrationScaler,
+            VibratorFrameworkStatsLogger vibratorFrameworkStatsLogger,
+            CompletableFuture completableFuture,
+            VibratorManagerService.VibrationThreadCallbacks vibrationThreadCallbacks) {
         this.mVibration = halVibration;
         this.vibrationSettings = vibrationSettings;
         this.mDeviceAdapter = deviceAdapter;
@@ -67,23 +73,30 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
         String str = halVibration.callerInfo.reason;
         if (str != null && str.contains("DynamicEffect_")) {
             try {
-                this.mDynamicEffectLoop = Integer.parseInt(halVibration.callerInfo.reason.replace("DynamicEffect_", ""));
+                this.mDynamicEffectLoop =
+                        Integer.parseInt(
+                                halVibration.callerInfo.reason.replace("DynamicEffect_", ""));
             } catch (NumberFormatException unused) {
                 Slog.w("VibrationThread", "Failed to parse DynamicEffect reason.");
             }
         }
-        this.mSignalVibratorsComplete = new IntArray(this.mDeviceAdapter.mAvailableVibratorIds.length);
+        this.mSignalVibratorsComplete =
+                new IntArray(this.mDeviceAdapter.mAvailableVibratorIds.length);
         CombinedVibration.Mono mono = halVibration.mEffectToPlay;
         if (mono instanceof CombinedVibration.Mono) {
             this.mComposed = mono.getEffect();
         } else if (mono instanceof CombinedVibration.Stereo) {
-            this.mComposed = (VibrationEffect.Composed) ((CombinedVibration.Stereo) mono).getEffects().get(0);
+            this.mComposed =
+                    (VibrationEffect.Composed)
+                            ((CombinedVibration.Stereo) mono).getEffects().get(0);
         }
     }
 
     public static void expectIsVibrationThread(boolean z) {
         if ((Thread.currentThread() instanceof VibrationThread) != z) {
-            Slog.wtfStack("VibrationStepConductor", "Thread caller assertion failed, expected isVibrationThread=" + z);
+            Slog.wtfStack(
+                    "VibrationStepConductor",
+                    "Thread caller assertion failed, expected isVibrationThread=" + z);
         }
     }
 
@@ -103,7 +116,12 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
         return this.mPendingOnVibratorCompleteSteps.isEmpty() && this.mNextSteps.isEmpty();
     }
 
-    public final AbstractVibratorStep nextVibrateStep(long j, VibratorController vibratorController, VibrationEffect.Composed composed, int i, long j2) {
+    public final AbstractVibratorStep nextVibrateStep(
+            long j,
+            VibratorController vibratorController,
+            VibrationEffect.Composed composed,
+            int i,
+            long j2) {
         int i2;
         int repeatIndex;
         if (Build.IS_DEBUGGABLE) {
@@ -124,20 +142,25 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
         if (i2 < 0) {
             return new CompleteEffectVibratorStep(this, j, false, vibratorController, j2);
         }
-        VibrationEffectSegment vibrationEffectSegment = (VibrationEffectSegment) composed.getSegments().get(i2);
+        VibrationEffectSegment vibrationEffectSegment =
+                (VibrationEffectSegment) composed.getSegments().get(i2);
         if (vibrationEffectSegment instanceof PrebakedSegment) {
-            return new PerformPrebakedVibratorStep(this, Math.max(j, j2), vibratorController, composed, i2, j2);
+            return new PerformPrebakedVibratorStep(
+                    this, Math.max(j, j2), vibratorController, composed, i2, j2);
         }
         if (vibrationEffectSegment instanceof PrimitiveSegment) {
-            return new ComposePrimitivesVibratorStep(this, Math.max(j, j2), vibratorController, composed, i2, j2);
+            return new ComposePrimitivesVibratorStep(
+                    this, Math.max(j, j2), vibratorController, composed, i2, j2);
         }
         if (vibrationEffectSegment instanceof RampSegment) {
-            return new ComposePwleVibratorStep(this, Math.max(j, j2), vibratorController, composed, i2, j2);
+            return new ComposePwleVibratorStep(
+                    this, Math.max(j, j2), vibratorController, composed, i2, j2);
         }
         if (!(vibrationEffectSegment instanceof SemHapticSegment)) {
             return new SetAmplitudeVibratorStep(this, j, vibratorController, composed, i2, j2);
         }
-        SemHapticStep semHapticStep = new SemHapticStep(this, j, vibratorController, composed, i2, j2);
+        SemHapticStep semHapticStep =
+                new SemHapticStep(this, j, vibratorController, composed, i2, j2);
         semHapticStep.mNextOffTime = j2;
         return semHapticStep;
     }
@@ -146,17 +169,29 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
         if (Build.IS_DEBUGGABLE) {
             expectIsVibrationThread(false);
         }
-        Slog.d("VibrationThread", "Vibration cancel requested with signal=" + endInfo + ", immediate=" + z);
+        Slog.d(
+                "VibrationThread",
+                "Vibration cancel requested with signal=" + endInfo + ", immediate=" + z);
         if (!endInfo.status.name().startsWith("CANCEL")) {
-            Slog.w("VibrationThread", "Vibration cancel requested with bad signal=" + endInfo + ", using CANCELLED_UNKNOWN_REASON to ensure cancellation.");
+            Slog.w(
+                    "VibrationThread",
+                    "Vibration cancel requested with bad signal="
+                            + endInfo
+                            + ", using CANCELLED_UNKNOWN_REASON to ensure cancellation.");
             endInfo = new Vibration.EndInfo(Vibration.Status.CANCELLED_BY_UNKNOWN_REASON, null);
         }
         synchronized (this.mLock) {
             if (z) {
                 try {
-                    if (!this.mSignalCancelImmediate) {
-                    }
-                    Slog.d("VibrationThread", "Vibration cancel request ignored as the vibration " + this.mVibration.id + "is already being cancelled with signal=" + this.mSignalCancel + ", immediate=" + this.mSignalCancelImmediate);
+                    if (!this.mSignalCancelImmediate) {}
+                    Slog.d(
+                            "VibrationThread",
+                            "Vibration cancel request ignored as the vibration "
+                                    + this.mVibration.id
+                                    + "is already being cancelled with signal="
+                                    + this.mSignalCancel
+                                    + ", immediate="
+                                    + this.mSignalCancelImmediate);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -167,7 +202,14 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
                 if (endInfo2 == null) {
                     this.mSignalCancel = endInfo;
                 } else {
-                    Slog.d("VibrationThread", "Vibration cancel request new signal=" + endInfo + " ignored as the vibration was already cancelled with signal=" + this.mSignalCancel + ", but immediate flag was updated to " + this.mSignalCancelImmediate);
+                    Slog.d(
+                            "VibrationThread",
+                            "Vibration cancel request new signal="
+                                    + endInfo
+                                    + " ignored as the vibration was already cancelled with signal="
+                                    + this.mSignalCancel
+                                    + ", but immediate flag was updated to "
+                                    + this.mSignalCancelImmediate);
                 }
                 CompletableFuture completableFuture = this.mRequestVibrationParamsFuture;
                 if (completableFuture != null) {
@@ -176,7 +218,14 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
                 this.mLock.notify();
                 return;
             }
-            Slog.d("VibrationThread", "Vibration cancel request ignored as the vibration " + this.mVibration.id + "is already being cancelled with signal=" + this.mSignalCancel + ", immediate=" + this.mSignalCancelImmediate);
+            Slog.d(
+                    "VibrationThread",
+                    "Vibration cancel request ignored as the vibration "
+                            + this.mVibration.id
+                            + "is already being cancelled with signal="
+                            + this.mSignalCancel
+                            + ", immediate="
+                            + this.mSignalCancelImmediate);
         }
     }
 
@@ -198,7 +247,9 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
         if (Build.IS_DEBUGGABLE) {
             expectIsVibrationThread(true);
         }
-        return !this.mPendingOnVibratorCompleteSteps.isEmpty() ? (Step) ((LinkedList) this.mPendingOnVibratorCompleteSteps).poll() : (Step) this.mNextSteps.poll();
+        return !this.mPendingOnVibratorCompleteSteps.isEmpty()
+                ? (Step) ((LinkedList) this.mPendingOnVibratorCompleteSteps).poll()
+                : (Step) this.mNextSteps.poll();
     }
 
     public final void prepareToStart() {
@@ -216,15 +267,24 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
                 CompletableFuture completableFuture = this.mRequestVibrationParamsFuture;
                 if (completableFuture != null) {
                     try {
-                        completableFuture.get(this.vibrationSettings.mVibrationConfig.getRequestVibrationParamsTimeoutMs(), TimeUnit.MILLISECONDS);
+                        completableFuture.get(
+                                this.vibrationSettings.mVibrationConfig
+                                        .getRequestVibrationParamsTimeoutMs(),
+                                TimeUnit.MILLISECONDS);
                     } catch (CancellationException e) {
-                        Slog.d("VibrationThread", "Request for vibration params cancelled, maybe superseded or vibrator controller unregistered. Skipping params...", e);
+                        Slog.d(
+                                "VibrationThread",
+                                "Request for vibration params cancelled, maybe superseded or"
+                                    + " vibrator controller unregistered. Skipping params...",
+                                e);
                     } catch (TimeoutException e2) {
                         Slog.d("VibrationThread", "Request for vibration params timed out", e2);
-                        VibratorFrameworkStatsLogger vibratorFrameworkStatsLogger = this.mStatsLogger;
+                        VibratorFrameworkStatsLogger vibratorFrameworkStatsLogger =
+                                this.mStatsLogger;
                         int i = this.mVibration.callerInfo.uid;
                         vibratorFrameworkStatsLogger.getClass();
-                        Counter.logIncrementWithUid("vibrator.value_vibration_param_request_timeout", i);
+                        Counter.logIncrementWithUid(
+                                "vibrator.value_vibration_param_request_timeout", i);
                     } catch (Throwable th) {
                         Slog.w("VibrationThread", "Failed to retrieve vibration params.", th);
                     }
@@ -246,14 +306,20 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
                 VibrationEffect.Composed composed = (VibrationEffect) sparseArray.valueAt(i2);
                 if (composed instanceof VibrationEffect.Composed) {
                     int effectStrength = vibrationScaler.getEffectStrength(usage);
-                    VibrationScaler.ScaleLevel scaleLevel = (VibrationScaler.ScaleLevel) vibrationScaler.mScaleLevels.get(vibrationScaler.getScaleLevel(usage));
+                    VibrationScaler.ScaleLevel scaleLevel =
+                            (VibrationScaler.ScaleLevel)
+                                    vibrationScaler.mScaleLevels.get(
+                                            vibrationScaler.getScaleLevel(usage));
                     float adaptiveHapticsScale2 = vibrationScaler.getAdaptiveHapticsScale(usage);
                     if (scaleLevel == null) {
-                        StringBuilder sb = new StringBuilder("No configured scaling level found! (current=");
+                        StringBuilder sb =
+                                new StringBuilder("No configured scaling level found! (current=");
                         VibrationSettings vibrationSettings = vibrationScaler.mSettingsController;
                         sb.append(vibrationSettings.getCurrentIntensity(usage));
                         sb.append(", default= ");
-                        sb.append(vibrationSettings.mVibrationConfig.getDefaultVibrationIntensity(usage));
+                        sb.append(
+                                vibrationSettings.mVibrationConfig.getDefaultVibrationIntensity(
+                                        usage));
                         sb.append(")");
                         Slog.e("VibrationScaler", sb.toString());
                         scaleLevel = VibrationScaler.SCALE_LEVEL_NONE;
@@ -262,14 +328,23 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
                     ArrayList arrayList = new ArrayList(composed2.getSegments());
                     int size = arrayList.size();
                     for (int i3 = 0; i3 < size; i3++) {
-                        arrayList.set(i3, ((VibrationEffectSegment) arrayList.get(i3)).resolve(vibrationScaler.mDefaultVibrationAmplitude).applyEffectStrength(effectStrength).scale(scaleLevel.factor).scaleLinearly(adaptiveHapticsScale2));
+                        arrayList.set(
+                                i3,
+                                ((VibrationEffectSegment) arrayList.get(i3))
+                                        .resolve(vibrationScaler.mDefaultVibrationAmplitude)
+                                        .applyEffectStrength(effectStrength)
+                                        .scale(scaleLevel.factor)
+                                        .scaleLinearly(adaptiveHapticsScale2));
                     }
                     if (!arrayList.equals(composed2.getSegments())) {
-                        composed = new VibrationEffect.Composed(arrayList, composed2.getRepeatIndex());
+                        composed =
+                                new VibrationEffect.Composed(arrayList, composed2.getRepeatIndex());
                         composed.validate();
                     }
                 } else {
-                    Slog.wtf("VibrationScaler", "Error scaling unsupported vibration effect: " + composed);
+                    Slog.wtf(
+                            "VibrationScaler",
+                            "Error scaling unsupported vibration effect: " + composed);
                 }
                 sparseArray.setValueAt(i2, composed);
             }
@@ -280,10 +355,19 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
             halVibration2.mEffectToPlay = adapt;
         }
         CombinedVibration.Sequential sequential = this.mVibration.mEffectToPlay;
-        CombinedVibration.Sequential combine = sequential instanceof CombinedVibration.Sequential ? sequential : CombinedVibration.startSequential().addNext(sequential).combine();
+        CombinedVibration.Sequential combine =
+                sequential instanceof CombinedVibration.Sequential
+                        ? sequential
+                        : CombinedVibration.startSequential().addNext(sequential).combine();
         this.mPendingVibrateSteps++;
         this.mRemainingStartSequentialEffectSteps = combine.getEffects().size();
-        this.mNextSteps.offer(new StartSequentialEffectStep(this, ((Integer) combine.getDelays().get(0)).intValue() + SystemClock.uptimeMillis(), combine, 0));
+        this.mNextSteps.offer(
+                new StartSequentialEffectStep(
+                        this,
+                        ((Integer) combine.getDelays().get(0)).intValue()
+                                + SystemClock.uptimeMillis(),
+                        combine,
+                        0));
         VibrationStats vibrationStats2 = this.mVibration.stats;
         if (vibrationStats2.mEndUptimeMillis <= 0 && vibrationStats2.mStartUptimeMillis == 0) {
             vibrationStats2.mStartUptimeMillis = SystemClock.uptimeMillis();
@@ -299,7 +383,10 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
         if (pollNext != null) {
             StringBuilder sb = new StringBuilder("Playing vibration id ");
             sb.append(this.mVibration.id);
-            sb.append(pollNext instanceof AbstractVibratorStep ? " on vibrator " + ((AbstractVibratorStep) pollNext).getVibratorId() : "");
+            sb.append(
+                    pollNext instanceof AbstractVibratorStep
+                            ? " on vibrator " + ((AbstractVibratorStep) pollNext).getVibratorId()
+                            : "");
             sb.append(" ");
             sb.append(pollNext.getClass().getSimpleName());
             sb.append(pollNext.isCleanUp() ? " (cleanup)" : "");
@@ -338,7 +425,8 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
                 iArr = null;
                 if (this.mSignalCancelImmediate) {
                     if (this.mCancelledImmediately) {
-                        Slog.wtf("VibrationThread", "Immediate cancellation signal processed twice");
+                        Slog.wtf(
+                                "VibrationThread", "Immediate cancellation signal processed twice");
                     }
                     endInfo = this.mSignalCancel;
                     z = true;
@@ -411,7 +499,8 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
         if (this.mCancelledImmediately) {
             return false;
         }
-        if (!this.mPendingOnVibratorCompleteSteps.isEmpty() || (step = (Step) this.mNextSteps.peek()) == null) {
+        if (!this.mPendingOnVibratorCompleteSteps.isEmpty()
+                || (step = (Step) this.mNextSteps.peek()) == null) {
             return true;
         }
         long j = step.startTime;
@@ -423,7 +512,9 @@ public final class VibrationStepConductor implements IBinder.DeathRecipient {
             if (Build.IS_DEBUGGABLE) {
                 expectIsVibrationThread(true);
             }
-            if ((this.mSignalCancel != null && this.mCancelledVibrationEndInfo == null) || ((this.mSignalCancelImmediate && !this.mCancelledImmediately) || this.mSignalVibratorsComplete.size() > 0)) {
+            if ((this.mSignalCancel != null && this.mCancelledVibrationEndInfo == null)
+                    || ((this.mSignalCancelImmediate && !this.mCancelledImmediately)
+                            || this.mSignalVibratorsComplete.size() > 0)) {
                 return false;
             }
             try {

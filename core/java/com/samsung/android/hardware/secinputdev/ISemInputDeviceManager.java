@@ -5,13 +5,15 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.hardware.secinputdev.SemInputConstants;
 
 /* loaded from: classes6.dex */
 public interface ISemInputDeviceManager extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.hardware.secinputdev.ISemInputDeviceManager";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.hardware.secinputdev.ISemInputDeviceManager";
 
-    int activate(SemInputConstants.Device device, SemInputConstants.DisplayState displayState, boolean z) throws RemoteException;
+    int activate(
+            SemInputConstants.Device device, SemInputConstants.DisplayState displayState, boolean z)
+            throws RemoteException;
 
     int enableMotion(String str, boolean z, String str2) throws RemoteException;
 
@@ -23,7 +25,8 @@ public interface ISemInputDeviceManager extends IInterface {
 
     int getMotionControl(String str, String str2) throws RemoteException;
 
-    String getProperty(SemInputConstants.Device device, SemInputConstants.Property property) throws RemoteException;
+    String getProperty(SemInputConstants.Device device, SemInputConstants.Property property)
+            throws RemoteException;
 
     int getSupportDevice(SemInputConstants.Device device) throws RemoteException;
 
@@ -47,7 +50,8 @@ public interface ISemInputDeviceManager extends IInterface {
 
     int setAotEnable(int i) throws RemoteException;
 
-    int setCommand(SemInputConstants.Device device, SemInputConstants.Command command, String str) throws RemoteException;
+    int setCommand(SemInputConstants.Device device, SemInputConstants.Command command, String str)
+            throws RemoteException;
 
     int setFodEnable(int i, int i2, int i3, int i4) throws RemoteException;
 
@@ -57,7 +61,9 @@ public interface ISemInputDeviceManager extends IInterface {
 
     int setMotionControl(String str, int i, String str2) throws RemoteException;
 
-    int setProperty(SemInputConstants.Device device, SemInputConstants.Property property, String str) throws RemoteException;
+    int setProperty(
+            SemInputConstants.Device device, SemInputConstants.Property property, String str)
+            throws RemoteException;
 
     int setSingletapEnable(int i) throws RemoteException;
 
@@ -83,17 +89,20 @@ public interface ISemInputDeviceManager extends IInterface {
         }
 
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-        public boolean registerListener(IBinder binder, int type, String client) throws RemoteException {
+        public boolean registerListener(IBinder binder, int type, String client)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-        public boolean unregisterListener(IBinder binder, int type, String client) throws RemoteException {
+        public boolean unregisterListener(IBinder binder, int type, String client)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-        public int sendRawdataTsp(SemInputConstants.Device device, int[] data) throws RemoteException {
+        public int sendRawdataTsp(SemInputConstants.Device device, int[] data)
+                throws RemoteException {
             return 0;
         }
 
@@ -113,7 +122,8 @@ public interface ISemInputDeviceManager extends IInterface {
         }
 
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-        public int setMotionControl(String subtype, int control, String client) throws RemoteException {
+        public int setMotionControl(String subtype, int control, String client)
+                throws RemoteException {
             return 0;
         }
 
@@ -168,7 +178,8 @@ public interface ISemInputDeviceManager extends IInterface {
         }
 
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-        public int setFodEnable(int mode, int pressFast, int strictMode, int control) throws RemoteException {
+        public int setFodEnable(int mode, int pressFast, int strictMode, int control)
+                throws RemoteException {
             return 0;
         }
 
@@ -198,27 +209,36 @@ public interface ISemInputDeviceManager extends IInterface {
         }
 
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-        public int activate(SemInputConstants.Device device, SemInputConstants.DisplayState mode, boolean state) throws RemoteException {
+        public int activate(
+                SemInputConstants.Device device, SemInputConstants.DisplayState mode, boolean state)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-        public int setCommand(SemInputConstants.Device device, SemInputConstants.Command command, String mode) throws RemoteException {
+        public int setCommand(
+                SemInputConstants.Device device, SemInputConstants.Command command, String mode)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-        public int setProperty(SemInputConstants.Device device, SemInputConstants.Property property, String mode) throws RemoteException {
+        public int setProperty(
+                SemInputConstants.Device device, SemInputConstants.Property property, String mode)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-        public String getProperty(SemInputConstants.Device device, SemInputConstants.Property property) throws RemoteException {
+        public String getProperty(
+                SemInputConstants.Device device, SemInputConstants.Property property)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-        public String runCommand(SemInputConstants.Device device, String cmd) throws RemoteException {
+        public String runCommand(SemInputConstants.Device device, String cmd)
+                throws RemoteException {
             return null;
         }
 
@@ -228,7 +248,7 @@ public interface ISemInputDeviceManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemInputDeviceManager {
+    public abstract static class Stub extends Binder implements ISemInputDeviceManager {
         static final int TRANSACTION_activate = 26;
         static final int TRANSACTION_enableMotion = 7;
         static final int TRANSACTION_getCommandList = 14;
@@ -353,7 +373,8 @@ public interface ISemInputDeviceManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemInputDeviceManager.DESCRIPTOR);
             }
@@ -393,7 +414,9 @@ public interface ISemInputDeviceManager extends IInterface {
                     reply.writeBoolean(_result4);
                     return true;
                 case 5:
-                    SemInputConstants.Device _arg04 = (SemInputConstants.Device) data.readTypedObject(SemInputConstants.Device.CREATOR);
+                    SemInputConstants.Device _arg04 =
+                            (SemInputConstants.Device)
+                                    data.readTypedObject(SemInputConstants.Device.CREATOR);
                     int[] _arg13 = data.createIntArray();
                     data.enforceNoDataAvail();
                     int _result5 = sendRawdataTsp(_arg04, _arg13);
@@ -442,28 +465,36 @@ public interface ISemInputDeviceManager extends IInterface {
                     reply.writeInt(_result10);
                     return true;
                 case 11:
-                    SemInputConstants.Device _arg010 = (SemInputConstants.Device) data.readTypedObject(SemInputConstants.Device.CREATOR);
+                    SemInputConstants.Device _arg010 =
+                            (SemInputConstants.Device)
+                                    data.readTypedObject(SemInputConstants.Device.CREATOR);
                     data.enforceNoDataAvail();
                     int _result11 = getSupportDevice(_arg010);
                     reply.writeNoException();
                     reply.writeInt(_result11);
                     return true;
                 case 12:
-                    SemInputConstants.Device _arg011 = (SemInputConstants.Device) data.readTypedObject(SemInputConstants.Device.CREATOR);
+                    SemInputConstants.Device _arg011 =
+                            (SemInputConstants.Device)
+                                    data.readTypedObject(SemInputConstants.Device.CREATOR);
                     data.enforceNoDataAvail();
                     int _result12 = getTspSupportFeature(_arg011);
                     reply.writeNoException();
                     reply.writeInt(_result12);
                     return true;
                 case 13:
-                    SemInputConstants.Device _arg012 = (SemInputConstants.Device) data.readTypedObject(SemInputConstants.Device.CREATOR);
+                    SemInputConstants.Device _arg012 =
+                            (SemInputConstants.Device)
+                                    data.readTypedObject(SemInputConstants.Device.CREATOR);
                     data.enforceNoDataAvail();
                     int _result13 = getDeviceEnabled(_arg012);
                     reply.writeNoException();
                     reply.writeInt(_result13);
                     return true;
                 case 14:
-                    SemInputConstants.Device _arg013 = (SemInputConstants.Device) data.readTypedObject(SemInputConstants.Device.CREATOR);
+                    SemInputConstants.Device _arg013 =
+                            (SemInputConstants.Device)
+                                    data.readTypedObject(SemInputConstants.Device.CREATOR);
                     data.enforceNoDataAvail();
                     String _result14 = getCommandList(_arg013);
                     reply.writeNoException();
@@ -560,8 +591,12 @@ public interface ISemInputDeviceManager extends IInterface {
                     reply.writeInt(_result25);
                     return true;
                 case 26:
-                    SemInputConstants.Device _arg025 = (SemInputConstants.Device) data.readTypedObject(SemInputConstants.Device.CREATOR);
-                    SemInputConstants.DisplayState _arg113 = (SemInputConstants.DisplayState) data.readTypedObject(SemInputConstants.DisplayState.CREATOR);
+                    SemInputConstants.Device _arg025 =
+                            (SemInputConstants.Device)
+                                    data.readTypedObject(SemInputConstants.Device.CREATOR);
+                    SemInputConstants.DisplayState _arg113 =
+                            (SemInputConstants.DisplayState)
+                                    data.readTypedObject(SemInputConstants.DisplayState.CREATOR);
                     boolean _arg210 = data.readBoolean();
                     data.enforceNoDataAvail();
                     int _result26 = activate(_arg025, _arg113, _arg210);
@@ -569,8 +604,12 @@ public interface ISemInputDeviceManager extends IInterface {
                     reply.writeInt(_result26);
                     return true;
                 case 27:
-                    SemInputConstants.Device _arg026 = (SemInputConstants.Device) data.readTypedObject(SemInputConstants.Device.CREATOR);
-                    SemInputConstants.Command _arg114 = (SemInputConstants.Command) data.readTypedObject(SemInputConstants.Command.CREATOR);
+                    SemInputConstants.Device _arg026 =
+                            (SemInputConstants.Device)
+                                    data.readTypedObject(SemInputConstants.Device.CREATOR);
+                    SemInputConstants.Command _arg114 =
+                            (SemInputConstants.Command)
+                                    data.readTypedObject(SemInputConstants.Command.CREATOR);
                     String _arg211 = data.readString();
                     data.enforceNoDataAvail();
                     int _result27 = setCommand(_arg026, _arg114, _arg211);
@@ -578,8 +617,12 @@ public interface ISemInputDeviceManager extends IInterface {
                     reply.writeInt(_result27);
                     return true;
                 case 28:
-                    SemInputConstants.Device _arg027 = (SemInputConstants.Device) data.readTypedObject(SemInputConstants.Device.CREATOR);
-                    SemInputConstants.Property _arg115 = (SemInputConstants.Property) data.readTypedObject(SemInputConstants.Property.CREATOR);
+                    SemInputConstants.Device _arg027 =
+                            (SemInputConstants.Device)
+                                    data.readTypedObject(SemInputConstants.Device.CREATOR);
+                    SemInputConstants.Property _arg115 =
+                            (SemInputConstants.Property)
+                                    data.readTypedObject(SemInputConstants.Property.CREATOR);
                     String _arg212 = data.readString();
                     data.enforceNoDataAvail();
                     int _result28 = setProperty(_arg027, _arg115, _arg212);
@@ -587,15 +630,21 @@ public interface ISemInputDeviceManager extends IInterface {
                     reply.writeInt(_result28);
                     return true;
                 case 29:
-                    SemInputConstants.Device _arg028 = (SemInputConstants.Device) data.readTypedObject(SemInputConstants.Device.CREATOR);
-                    SemInputConstants.Property _arg116 = (SemInputConstants.Property) data.readTypedObject(SemInputConstants.Property.CREATOR);
+                    SemInputConstants.Device _arg028 =
+                            (SemInputConstants.Device)
+                                    data.readTypedObject(SemInputConstants.Device.CREATOR);
+                    SemInputConstants.Property _arg116 =
+                            (SemInputConstants.Property)
+                                    data.readTypedObject(SemInputConstants.Property.CREATOR);
                     data.enforceNoDataAvail();
                     String _result29 = getProperty(_arg028, _arg116);
                     reply.writeNoException();
                     reply.writeString(_result29);
                     return true;
                 case 30:
-                    SemInputConstants.Device _arg029 = (SemInputConstants.Device) data.readTypedObject(SemInputConstants.Device.CREATOR);
+                    SemInputConstants.Device _arg029 =
+                            (SemInputConstants.Device)
+                                    data.readTypedObject(SemInputConstants.Device.CREATOR);
                     String _arg117 = data.readString();
                     data.enforceNoDataAvail();
                     String _result30 = runCommand(_arg029, _arg117);
@@ -657,7 +706,8 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public boolean registerListener(IBinder binder, int type, String client) throws RemoteException {
+            public boolean registerListener(IBinder binder, int type, String client)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -676,7 +726,8 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public boolean unregisterListener(IBinder binder, int type, String client) throws RemoteException {
+            public boolean unregisterListener(IBinder binder, int type, String client)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -695,7 +746,8 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public int sendRawdataTsp(SemInputConstants.Device device, int[] data) throws RemoteException {
+            public int sendRawdataTsp(SemInputConstants.Device device, int[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -730,7 +782,8 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public int enableMotion(String type, boolean enable, String client) throws RemoteException {
+            public int enableMotion(String type, boolean enable, String client)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -767,7 +820,8 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public int setMotionControl(String subtype, int control, String client) throws RemoteException {
+            public int setMotionControl(String subtype, int control, String client)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -821,7 +875,8 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public int getTspSupportFeature(SemInputConstants.Device device) throws RemoteException {
+            public int getTspSupportFeature(SemInputConstants.Device device)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -962,7 +1017,8 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public int setFodEnable(int mode, int pressFast, int strictMode, int control) throws RemoteException {
+            public int setFodEnable(int mode, int pressFast, int strictMode, int control)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1072,7 +1128,11 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public int activate(SemInputConstants.Device device, SemInputConstants.DisplayState mode, boolean state) throws RemoteException {
+            public int activate(
+                    SemInputConstants.Device device,
+                    SemInputConstants.DisplayState mode,
+                    boolean state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1091,7 +1151,9 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public int setCommand(SemInputConstants.Device device, SemInputConstants.Command command, String mode) throws RemoteException {
+            public int setCommand(
+                    SemInputConstants.Device device, SemInputConstants.Command command, String mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1110,7 +1172,11 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public int setProperty(SemInputConstants.Device device, SemInputConstants.Property property, String mode) throws RemoteException {
+            public int setProperty(
+                    SemInputConstants.Device device,
+                    SemInputConstants.Property property,
+                    String mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1129,7 +1195,9 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public String getProperty(SemInputConstants.Device device, SemInputConstants.Property property) throws RemoteException {
+            public String getProperty(
+                    SemInputConstants.Device device, SemInputConstants.Property property)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1147,7 +1215,8 @@ public interface ISemInputDeviceManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
-            public String runCommand(SemInputConstants.Device device, String cmd) throws RemoteException {
+            public String runCommand(SemInputConstants.Device device, String cmd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

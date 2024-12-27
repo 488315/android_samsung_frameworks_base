@@ -2,6 +2,7 @@ package android.net.metrics;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.MacAddress;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes3.dex */
@@ -18,8 +19,11 @@ public class WakeupEvent {
     public int uid;
 
     public String toString() {
-        StringJoiner j = new StringJoiner(", ", "WakeupEvent(", NavigationBarInflaterView.KEY_CODE_END);
-        j.add(String.format("%tT.%tL", Long.valueOf(this.timestampMs), Long.valueOf(this.timestampMs)));
+        StringJoiner j =
+                new StringJoiner(", ", "WakeupEvent(", NavigationBarInflaterView.KEY_CODE_END);
+        j.add(
+                String.format(
+                        "%tT.%tL", Long.valueOf(this.timestampMs), Long.valueOf(this.timestampMs)));
         j.add(this.iface);
         j.add("uid: " + Integer.toString(this.uid));
         j.add("eth=0x" + Integer.toHexString(this.ethertype));

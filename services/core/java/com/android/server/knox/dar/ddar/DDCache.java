@@ -4,6 +4,7 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.os.Process;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+
 import com.samsung.android.knox.ISemPersonaManager;
 import com.samsung.android.knox.dar.ddar.proxy.IProxyAgentService;
 
@@ -14,8 +15,12 @@ public final class DDCache extends IProxyAgentService {
     public ISemPersonaManager semPersonaManager;
 
     public static void enforceCallingUser(int i) {
-        if (UserHandle.getAppId(i) != 5250 && UserHandle.getAppId(i) != 1000 && UserHandle.getAppId(i) != Process.myUid()) {
-            throw new SecurityException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Can only be called by system user. callingUid: "));
+        if (UserHandle.getAppId(i) != 5250
+                && UserHandle.getAppId(i) != 1000
+                && UserHandle.getAppId(i) != Process.myUid()) {
+            throw new SecurityException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(
+                            i, "Can only be called by system user. callingUid: "));
         }
     }
 
@@ -47,7 +52,8 @@ public final class DDCache extends IProxyAgentService {
     public final ISemPersonaManager getPersonaService() {
         if (this.semPersonaManager == null) {
             try {
-                this.semPersonaManager = ISemPersonaManager.Stub.asInterface(ServiceManager.getService("persona"));
+                this.semPersonaManager =
+                        ISemPersonaManager.Stub.asInterface(ServiceManager.getService("persona"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -144,7 +150,9 @@ public final class DDCache extends IProxyAgentService {
             r8.printStackTrace()
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.dar.ddar.DDCache.onMessage(int, java.lang.String, android.os.Bundle):android.os.Bundle");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.knox.dar.ddar.DDCache.onMessage(int,"
+                    + " java.lang.String, android.os.Bundle):android.os.Bundle");
     }
 
     public final void set(int i, String str, String str2) {

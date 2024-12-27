@@ -9,6 +9,5 @@ public final class ListenerContainer {
     public final HashMap mIntentActionMap = new HashMap();
     public final HashMap mCustomEventMap = new HashMap();
 
-    public ListenerContainer(int i) {
-    }
+    public ListenerContainer(int i) {}
 }

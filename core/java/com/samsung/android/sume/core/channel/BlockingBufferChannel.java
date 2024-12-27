@@ -2,8 +2,10 @@ package com.samsung.android.sume.core.channel;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -30,11 +32,17 @@ public class BlockingBufferChannel implements BufferChannel {
                 return this.queue.take();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                Log.d(TAG, "receive buffer[" + this.queue.size() + NavigationBarInflaterView.SIZE_MOD_END);
+                Log.d(
+                        TAG,
+                        "receive buffer["
+                                + this.queue.size()
+                                + NavigationBarInflaterView.SIZE_MOD_END);
                 return null;
             }
         } finally {
-            Log.d(TAG, "receive buffer[" + this.queue.size() + NavigationBarInflaterView.SIZE_MOD_END);
+            Log.d(
+                    TAG,
+                    "receive buffer[" + this.queue.size() + NavigationBarInflaterView.SIZE_MOD_END);
         }
     }
 

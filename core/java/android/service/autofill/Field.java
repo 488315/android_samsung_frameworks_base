@@ -1,7 +1,7 @@
 package android.service.autofill;
 
-import android.service.autofill.Dataset;
 import android.view.autofill.AutofillValue;
+
 import java.util.regex.Pattern;
 
 /* loaded from: classes3.dex */
@@ -68,7 +68,8 @@ public final class Field {
 
         private void checkNotUsed() {
             if (this.mDestroyed) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }

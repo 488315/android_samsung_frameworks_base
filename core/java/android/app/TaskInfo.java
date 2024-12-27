@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.LocusId;
@@ -11,8 +10,10 @@ import android.graphics.Rect;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.window.WindowContainerToken;
+
 import com.samsung.android.core.SizeCompatInfo;
 import com.samsung.android.rune.CoreRune;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -85,8 +86,7 @@ public class TaskInfo {
     public AppCompatTaskInfo appCompatTaskInfo = AppCompatTaskInfo.create();
     public boolean isAiKeyRemoveAppTask = false;
 
-    TaskInfo() {
-    }
+    TaskInfo() {}
 
     private TaskInfo(Parcel source) {
         readFromParcel(source);
@@ -160,21 +160,54 @@ public class TaskInfo {
             return false;
         }
         if (CoreRune.MW_CAPTION_SHELL) {
-            if (this.isCaptionHandlerHidden != that.isCaptionHandlerHidden || this.isTranslucentTask != that.isTranslucentTask || this.configuration.fontScale != that.getConfiguration().fontScale) {
+            if (this.isCaptionHandlerHidden != that.isCaptionHandlerHidden
+                    || this.isTranslucentTask != that.isTranslucentTask
+                    || this.configuration.fontScale != that.getConfiguration().fontScale) {
                 return false;
             }
-            if (isFreeform() && this.configuration.semDisplayDeviceType != that.getConfiguration().semDisplayDeviceType) {
+            if (isFreeform()
+                    && this.configuration.semDisplayDeviceType
+                            != that.getConfiguration().semDisplayDeviceType) {
                 return false;
             }
         }
-        if ((CoreRune.MW_CAPTION_SHELL_FULL_SCREEN && this.isFullScreenCaptionState != that.isFullScreenCaptionState) || this.isForceHidden != that.isForceHidden) {
+        if ((CoreRune.MW_CAPTION_SHELL_FULL_SCREEN
+                        && this.isFullScreenCaptionState != that.isFullScreenCaptionState)
+                || this.isForceHidden != that.isForceHidden) {
             return false;
         }
-        if (CoreRune.MW_CAPTION_SHELL_KEEP_SCREEN_ON && this.isKeepScreenOn != that.isKeepScreenOn) {
+        if (CoreRune.MW_CAPTION_SHELL_KEEP_SCREEN_ON
+                && this.isKeepScreenOn != that.isKeepScreenOn) {
             return false;
         }
-        if (!CoreRune.MD_DEX_COMPAT_CAPTION_SHELL || this.isRotationButtonVisible == that.isRotationButtonVisible) {
-            return (!CoreRune.MW_SPLIT_FLEX_PANEL_MODE || this.configuration.windowConfiguration.isFlexPanelEnabled() == that.configuration.windowConfiguration.isFlexPanelEnabled()) && this.topActivityType == that.topActivityType && this.isResizeable == that.isResizeable && this.supportsMultiWindow == that.supportsMultiWindow && this.displayAreaFeatureId == that.displayAreaFeatureId && Objects.equals(this.positionInParent, that.positionInParent) && Objects.equals(this.pictureInPictureParams, that.pictureInPictureParams) && Objects.equals(Boolean.valueOf(this.shouldDockBigOverlays), Boolean.valueOf(that.shouldDockBigOverlays)) && Objects.equals(this.displayCutoutInsets, that.displayCutoutInsets) && getWindowingMode() == that.getWindowingMode() && this.configuration.uiMode == that.configuration.uiMode && Objects.equals(this.taskDescription, that.taskDescription) && this.isFocused == that.isFocused && this.isVisible == that.isVisible && this.isVisibleRequested == that.isVisibleRequested && this.isSleeping == that.isSleeping && Objects.equals(this.mTopActivityLocusId, that.mTopActivityLocusId) && this.parentTaskId == that.parentTaskId && Objects.equals(this.topActivity, that.topActivity) && this.isTopActivityTransparent == that.isTopActivityTransparent && this.isTopActivityStyleFloating == that.isTopActivityStyleFloating && this.appCompatTaskInfo.equalsForTaskOrganizer(that.appCompatTaskInfo);
+        if (!CoreRune.MD_DEX_COMPAT_CAPTION_SHELL
+                || this.isRotationButtonVisible == that.isRotationButtonVisible) {
+            return (!CoreRune.MW_SPLIT_FLEX_PANEL_MODE
+                            || this.configuration.windowConfiguration.isFlexPanelEnabled()
+                                    == that.configuration.windowConfiguration.isFlexPanelEnabled())
+                    && this.topActivityType == that.topActivityType
+                    && this.isResizeable == that.isResizeable
+                    && this.supportsMultiWindow == that.supportsMultiWindow
+                    && this.displayAreaFeatureId == that.displayAreaFeatureId
+                    && Objects.equals(this.positionInParent, that.positionInParent)
+                    && Objects.equals(this.pictureInPictureParams, that.pictureInPictureParams)
+                    && Objects.equals(
+                            Boolean.valueOf(this.shouldDockBigOverlays),
+                            Boolean.valueOf(that.shouldDockBigOverlays))
+                    && Objects.equals(this.displayCutoutInsets, that.displayCutoutInsets)
+                    && getWindowingMode() == that.getWindowingMode()
+                    && this.configuration.uiMode == that.configuration.uiMode
+                    && Objects.equals(this.taskDescription, that.taskDescription)
+                    && this.isFocused == that.isFocused
+                    && this.isVisible == that.isVisible
+                    && this.isVisibleRequested == that.isVisibleRequested
+                    && this.isSleeping == that.isSleeping
+                    && Objects.equals(this.mTopActivityLocusId, that.mTopActivityLocusId)
+                    && this.parentTaskId == that.parentTaskId
+                    && Objects.equals(this.topActivity, that.topActivity)
+                    && this.isTopActivityTransparent == that.isTopActivityTransparent
+                    && this.isTopActivityStyleFloating == that.isTopActivityStyleFloating
+                    && this.appCompatTaskInfo.equalsForTaskOrganizer(that.appCompatTaskInfo);
         }
         return false;
     }
@@ -184,13 +217,24 @@ public class TaskInfo {
             return false;
         }
         boolean hasCompatUI = this.appCompatTaskInfo.hasCompatUI();
-        if (this.displayId != that.displayId || this.taskId != that.taskId || this.topActivityInSizeCompat != that.topActivityInSizeCompat || this.isFocused != that.isFocused || this.isTopActivityTransparent != that.isTopActivityTransparent || !this.appCompatTaskInfo.equalsForCompatUi(that.appCompatTaskInfo)) {
+        if (this.displayId != that.displayId
+                || this.taskId != that.taskId
+                || this.topActivityInSizeCompat != that.topActivityInSizeCompat
+                || this.isFocused != that.isFocused
+                || this.isTopActivityTransparent != that.isTopActivityTransparent
+                || !this.appCompatTaskInfo.equalsForCompatUi(that.appCompatTaskInfo)) {
             return false;
         }
-        if (hasCompatUI && !this.configuration.windowConfiguration.getBounds().equals(that.configuration.windowConfiguration.getBounds())) {
+        if (hasCompatUI
+                && !this.configuration
+                        .windowConfiguration
+                        .getBounds()
+                        .equals(that.configuration.windowConfiguration.getBounds())) {
             return false;
         }
-        if (hasCompatUI && this.configuration.getLayoutDirection() != that.configuration.getLayoutDirection()) {
+        if (hasCompatUI
+                && this.configuration.getLayoutDirection()
+                        != that.configuration.getLayoutDirection()) {
             return false;
         }
         if (!hasCompatUI || this.configuration.uiMode == that.configuration.uiMode) {
@@ -211,13 +255,16 @@ public class TaskInfo {
         this.realActivity = ComponentName.readFromParcel(source);
         this.numActivities = source.readInt();
         this.lastActiveTime = source.readLong();
-        this.taskDescription = (ActivityManager.TaskDescription) source.readTypedObject(ActivityManager.TaskDescription.CREATOR);
+        this.taskDescription =
+                (ActivityManager.TaskDescription)
+                        source.readTypedObject(ActivityManager.TaskDescription.CREATOR);
         this.supportsMultiWindow = source.readBoolean();
         this.resizeMode = source.readInt();
         this.configuration.readFromParcel(source);
         this.token = WindowContainerToken.CREATOR.createFromParcel(source);
         this.topActivityType = source.readInt();
-        this.pictureInPictureParams = (PictureInPictureParams) source.readTypedObject(PictureInPictureParams.CREATOR);
+        this.pictureInPictureParams =
+                (PictureInPictureParams) source.readTypedObject(PictureInPictureParams.CREATOR);
         this.shouldDockBigOverlays = source.readBoolean();
         this.launchIntoPipHostTaskId = source.readInt();
         this.lastParentTaskIdBeforePip = source.readInt();
@@ -238,7 +285,8 @@ public class TaskInfo {
         this.displayAreaFeatureId = source.readInt();
         this.isTopActivityTransparent = source.readBoolean();
         this.isTopActivityStyleFloating = source.readBoolean();
-        this.appCompatTaskInfo = (AppCompatTaskInfo) source.readTypedObject(AppCompatTaskInfo.CREATOR);
+        this.appCompatTaskInfo =
+                (AppCompatTaskInfo) source.readTypedObject(AppCompatTaskInfo.CREATOR);
         this.lastGainFocusTime = source.readLong();
         this.originallySupportedMultiWindow = source.readBoolean();
         this.supportsPipOnly = source.readBoolean();
@@ -359,6 +407,118 @@ public class TaskInfo {
     }
 
     public String toString() {
-        return "TaskInfo{userId=" + this.userId + " taskId=" + this.taskId + " displayId=" + this.displayId + " isRunning=" + this.isRunning + " baseIntent=" + this.baseIntent + " baseActivity=" + this.baseActivity + " topActivity=" + this.topActivity + " origActivity=" + this.origActivity + " realActivity=" + this.realActivity + " numActivities=" + this.numActivities + " lastActiveTime=" + this.lastActiveTime + " supportsMultiWindow=" + this.supportsMultiWindow + " resizeMode=" + this.resizeMode + " isResizeable=" + this.isResizeable + " minWidth=" + this.minWidth + " minHeight=" + this.minHeight + " maxWidth=" + this.maxWidth + " maxHeight=" + this.maxHeight + " defaultMinSize=" + this.defaultMinSize + " token=" + this.token + " topActivityType=" + this.topActivityType + " pictureInPictureParams=" + this.pictureInPictureParams + " shouldDockBigOverlays=" + this.shouldDockBigOverlays + " launchIntoPipHostTaskId=" + this.launchIntoPipHostTaskId + " lastParentTaskIdBeforePip=" + this.lastParentTaskIdBeforePip + " displayCutoutSafeInsets=" + this.displayCutoutInsets + " topActivityInfo=" + this.topActivityInfo + " launchCookies=" + this.launchCookies + " positionInParent=" + this.positionInParent + " parentTaskId=" + this.parentTaskId + " isFocused=" + this.isFocused + " isVisible=" + this.isVisible + " isVisibleRequested=" + this.isVisibleRequested + " isSleeping=" + this.isSleeping + " topActivityInSizeCompat=" + this.topActivityInSizeCompat + " locusId=" + this.mTopActivityLocusId + " displayAreaFeatureId=" + this.displayAreaFeatureId + " isTopActivityTransparent=" + this.isTopActivityTransparent + " isTopActivityStyleFloating=" + this.isTopActivityStyleFloating + " appCompatTaskInfo=" + this.appCompatTaskInfo + " originallySupportedMultiWindow=" + this.originallySupportedMultiWindow + (this.supportsPipOnly ? " pipOnly=true" : "") + " hasWallpaper=" + this.hasWallpaper + " rootAffinity=" + this.rootAffinity + " isTopTaskInStage=" + this.isTopTaskInStage + (this.isTranslucentTask ? " isTranslucentTask=true" : "") + (this.isCaptionHandlerHidden ? " handlerHidden=true" : "") + (this.topActivityUiMode != 0 ? " topActivityUiMode=" + this.topActivityUiMode : "") + (this.isFullScreenCaptionState ? "FullScreenCaptionState=true" : "") + " CoverLauncherWidgetTask=" + this.isCoverLauncherWidgetTask + (this.isKeepScreenOn ? " isKeepScreenOn=true" : "") + " isAllowedSeamlessRotation=" + this.isAllowedSeamlessRotation + " isTopTransparentActivity=" + this.isTopTransparentActivity + " snappingGuideBounds=" + this.snappingGuideBounds + " hasPopOver=" + this.hasPopOver + " isAliasManaged=" + this.isAliasManaged + " hasConfigChanged=" + this.hasConfigChanged + " isAiKeyRemoveAppTask=" + this.isAiKeyRemoveAppTask + "}";
+        return "TaskInfo{userId="
+                + this.userId
+                + " taskId="
+                + this.taskId
+                + " displayId="
+                + this.displayId
+                + " isRunning="
+                + this.isRunning
+                + " baseIntent="
+                + this.baseIntent
+                + " baseActivity="
+                + this.baseActivity
+                + " topActivity="
+                + this.topActivity
+                + " origActivity="
+                + this.origActivity
+                + " realActivity="
+                + this.realActivity
+                + " numActivities="
+                + this.numActivities
+                + " lastActiveTime="
+                + this.lastActiveTime
+                + " supportsMultiWindow="
+                + this.supportsMultiWindow
+                + " resizeMode="
+                + this.resizeMode
+                + " isResizeable="
+                + this.isResizeable
+                + " minWidth="
+                + this.minWidth
+                + " minHeight="
+                + this.minHeight
+                + " maxWidth="
+                + this.maxWidth
+                + " maxHeight="
+                + this.maxHeight
+                + " defaultMinSize="
+                + this.defaultMinSize
+                + " token="
+                + this.token
+                + " topActivityType="
+                + this.topActivityType
+                + " pictureInPictureParams="
+                + this.pictureInPictureParams
+                + " shouldDockBigOverlays="
+                + this.shouldDockBigOverlays
+                + " launchIntoPipHostTaskId="
+                + this.launchIntoPipHostTaskId
+                + " lastParentTaskIdBeforePip="
+                + this.lastParentTaskIdBeforePip
+                + " displayCutoutSafeInsets="
+                + this.displayCutoutInsets
+                + " topActivityInfo="
+                + this.topActivityInfo
+                + " launchCookies="
+                + this.launchCookies
+                + " positionInParent="
+                + this.positionInParent
+                + " parentTaskId="
+                + this.parentTaskId
+                + " isFocused="
+                + this.isFocused
+                + " isVisible="
+                + this.isVisible
+                + " isVisibleRequested="
+                + this.isVisibleRequested
+                + " isSleeping="
+                + this.isSleeping
+                + " topActivityInSizeCompat="
+                + this.topActivityInSizeCompat
+                + " locusId="
+                + this.mTopActivityLocusId
+                + " displayAreaFeatureId="
+                + this.displayAreaFeatureId
+                + " isTopActivityTransparent="
+                + this.isTopActivityTransparent
+                + " isTopActivityStyleFloating="
+                + this.isTopActivityStyleFloating
+                + " appCompatTaskInfo="
+                + this.appCompatTaskInfo
+                + " originallySupportedMultiWindow="
+                + this.originallySupportedMultiWindow
+                + (this.supportsPipOnly ? " pipOnly=true" : "")
+                + " hasWallpaper="
+                + this.hasWallpaper
+                + " rootAffinity="
+                + this.rootAffinity
+                + " isTopTaskInStage="
+                + this.isTopTaskInStage
+                + (this.isTranslucentTask ? " isTranslucentTask=true" : "")
+                + (this.isCaptionHandlerHidden ? " handlerHidden=true" : "")
+                + (this.topActivityUiMode != 0
+                        ? " topActivityUiMode=" + this.topActivityUiMode
+                        : "")
+                + (this.isFullScreenCaptionState ? "FullScreenCaptionState=true" : "")
+                + " CoverLauncherWidgetTask="
+                + this.isCoverLauncherWidgetTask
+                + (this.isKeepScreenOn ? " isKeepScreenOn=true" : "")
+                + " isAllowedSeamlessRotation="
+                + this.isAllowedSeamlessRotation
+                + " isTopTransparentActivity="
+                + this.isTopTransparentActivity
+                + " snappingGuideBounds="
+                + this.snappingGuideBounds
+                + " hasPopOver="
+                + this.hasPopOver
+                + " isAliasManaged="
+                + this.isAliasManaged
+                + " hasConfigChanged="
+                + this.hasConfigChanged
+                + " isAiKeyRemoveAppTask="
+                + this.isAiKeyRemoveAppTask
+                + "}";
     }
 }

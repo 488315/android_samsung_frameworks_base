@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class RecordSettings implements Parcelable {
-    public static final Parcelable.Creator<RecordSettings> CREATOR = new Parcelable.Creator<RecordSettings>() { // from class: android.hardware.tv.tuner.RecordSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecordSettings createFromParcel(Parcel _aidl_source) {
-            RecordSettings _aidl_out = new RecordSettings();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RecordSettings> CREATOR =
+            new Parcelable.Creator<
+                    RecordSettings>() { // from class: android.hardware.tv.tuner.RecordSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecordSettings createFromParcel(Parcel _aidl_source) {
+                    RecordSettings _aidl_out = new RecordSettings();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecordSettings[] newArray(int _aidl_size) {
-            return new RecordSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecordSettings[] newArray(int _aidl_size) {
+                    return new RecordSettings[_aidl_size];
+                }
+            };
     public int statusMask = 0;
     public long lowThreshold = 0;
     public long highThreshold = 0;

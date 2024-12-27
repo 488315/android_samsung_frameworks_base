@@ -8,7 +8,6 @@ public final class SystemCodeRoutingManagerProto {
         public static final long NFCID2 = 1138166333442L;
         public static final long SYSTEM_CODE = 1138166333441L;
 
-        public T3tIdentifier() {
-        }
+        public T3tIdentifier() {}
     }
 }

@@ -1,6 +1,5 @@
 package android.speech.tts;
 
-import android.speech.tts.TextToSpeechService;
 import android.util.Log;
 
 /* loaded from: classes3.dex */
@@ -18,7 +17,13 @@ class PlaybackSynthesisCallback extends AbstractSynthesisCallback {
     private final Object mStateLock;
     protected int mStatusCode;
 
-    PlaybackSynthesisCallback(TextToSpeechService.AudioOutputParams audioParams, AudioPlaybackHandler audioTrackHandler, TextToSpeechService.UtteranceProgressDispatcher dispatcher, Object callerIdentity, AbstractEventLogger logger, boolean clientIsUsingV2) {
+    PlaybackSynthesisCallback(
+            TextToSpeechService.AudioOutputParams audioParams,
+            AudioPlaybackHandler audioTrackHandler,
+            TextToSpeechService.UtteranceProgressDispatcher dispatcher,
+            Object callerIdentity,
+            AbstractEventLogger logger,
+            boolean clientIsUsingV2) {
         super(clientIsUsingV2);
         this.mStateLock = new Object();
         this.mItem = null;
@@ -78,7 +83,12 @@ class PlaybackSynthesisCallback extends AbstractSynthesisCallback {
     @Override // android.speech.tts.SynthesisCallback
     public int start(int sampleRateInHz, int audioFormat, int channelCount) {
         if (audioFormat != 3 && audioFormat != 2 && audioFormat != 4) {
-            Log.w(TAG, "Audio format encoding " + audioFormat + " not supported. Please use one of AudioFormat.ENCODING_PCM_8BIT, AudioFormat.ENCODING_PCM_16BIT or AudioFormat.ENCODING_PCM_FLOAT");
+            Log.w(
+                    TAG,
+                    "Audio format encoding "
+                            + audioFormat
+                            + " not supported. Please use one of AudioFormat.ENCODING_PCM_8BIT,"
+                            + " AudioFormat.ENCODING_PCM_16BIT or AudioFormat.ENCODING_PCM_FLOAT");
         }
         this.mDispatcher.dispatchOnBeginSynthesis(sampleRateInHz, audioFormat, channelCount);
         int channelConfig = BlockingAudioTrack.getChannelConfig(channelCount);
@@ -98,7 +108,15 @@ class PlaybackSynthesisCallback extends AbstractSynthesisCallback {
                 Log.e(TAG, "Start called twice");
                 return -1;
             }
-            SynthesisPlaybackQueueItem item = new SynthesisPlaybackQueueItem(this.mAudioParams, sampleRateInHz, audioFormat, channelCount, this.mDispatcher, this.mCallerIdentity, this.mLogger);
+            SynthesisPlaybackQueueItem item =
+                    new SynthesisPlaybackQueueItem(
+                            this.mAudioParams,
+                            sampleRateInHz,
+                            audioFormat,
+                            channelCount,
+                            this.mDispatcher,
+                            this.mCallerIdentity,
+                            this.mLogger);
             this.mAudioTrackHandler.enqueue(item);
             this.mItem = item;
             return 0;
@@ -108,7 +126,8 @@ class PlaybackSynthesisCallback extends AbstractSynthesisCallback {
     @Override // android.speech.tts.SynthesisCallback
     public int audioAvailable(byte[] buffer, int offset, int length) {
         if (length > getMaxBufferSize() || length <= 0) {
-            throw new IllegalArgumentException("buffer is too large or of zero length (" + length + " bytes)");
+            throw new IllegalArgumentException(
+                    "buffer is too large or of zero length (" + length + " bytes)");
         }
         synchronized (this.mStateLock) {
             if (this.mItem == null) {

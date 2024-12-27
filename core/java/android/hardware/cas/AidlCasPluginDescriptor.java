@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AidlCasPluginDescriptor implements Parcelable {
-    public static final Parcelable.Creator<AidlCasPluginDescriptor> CREATOR = new Parcelable.Creator<AidlCasPluginDescriptor>() { // from class: android.hardware.cas.AidlCasPluginDescriptor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AidlCasPluginDescriptor createFromParcel(Parcel _aidl_source) {
-            AidlCasPluginDescriptor _aidl_out = new AidlCasPluginDescriptor();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AidlCasPluginDescriptor> CREATOR =
+            new Parcelable.Creator<AidlCasPluginDescriptor>() { // from class:
+                // android.hardware.cas.AidlCasPluginDescriptor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AidlCasPluginDescriptor createFromParcel(Parcel _aidl_source) {
+                    AidlCasPluginDescriptor _aidl_out = new AidlCasPluginDescriptor();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AidlCasPluginDescriptor[] newArray(int _aidl_size) {
-            return new AidlCasPluginDescriptor[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AidlCasPluginDescriptor[] newArray(int _aidl_size) {
+                    return new AidlCasPluginDescriptor[_aidl_size];
+                }
+            };
     public int caSystemId = 0;
     public String name;
 

@@ -4,27 +4,30 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SoundModel implements Parcelable {
-    public static final Parcelable.Creator<SoundModel> CREATOR = new Parcelable.Creator<SoundModel>() { // from class: android.media.soundtrigger.SoundModel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SoundModel createFromParcel(Parcel _aidl_source) {
-            SoundModel _aidl_out = new SoundModel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SoundModel> CREATOR =
+            new Parcelable.Creator<
+                    SoundModel>() { // from class: android.media.soundtrigger.SoundModel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SoundModel createFromParcel(Parcel _aidl_source) {
+                    SoundModel _aidl_out = new SoundModel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SoundModel[] newArray(int _aidl_size) {
-            return new SoundModel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SoundModel[] newArray(int _aidl_size) {
+                    return new SoundModel[_aidl_size];
+                }
+            };
     public ParcelFileDescriptor data;
     public String uuid;
     public String vendorUuid;
@@ -89,7 +92,9 @@ public class SoundModel implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.data = (ParcelFileDescriptor) _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+            this.data =
+                    (ParcelFileDescriptor)
+                            _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -129,14 +134,26 @@ public class SoundModel implements Parcelable {
             return false;
         }
         SoundModel that = (SoundModel) other;
-        if (Objects.deepEquals(Integer.valueOf(this.type), Integer.valueOf(that.type)) && Objects.deepEquals(this.uuid, that.uuid) && Objects.deepEquals(this.vendorUuid, that.vendorUuid) && Objects.deepEquals(this.data, that.data) && Objects.deepEquals(Integer.valueOf(this.dataSize), Integer.valueOf(that.dataSize))) {
+        if (Objects.deepEquals(Integer.valueOf(this.type), Integer.valueOf(that.type))
+                && Objects.deepEquals(this.uuid, that.uuid)
+                && Objects.deepEquals(this.vendorUuid, that.vendorUuid)
+                && Objects.deepEquals(this.data, that.data)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.dataSize), Integer.valueOf(that.dataSize))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.type), this.uuid, this.vendorUuid, this.data, Integer.valueOf(this.dataSize)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.type),
+                                this.uuid,
+                                this.vendorUuid,
+                                this.data,
+                                Integer.valueOf(this.dataSize))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

@@ -17,12 +17,10 @@ public interface ISecImsMmTelEventListener extends IInterface {
 
     public static class Default implements ISecImsMmTelEventListener {
         @Override // com.android.ims.internal.ISecImsMmTelEventListener
-        public void onIncomingCall(int callId, Bundle extras) throws RemoteException {
-        }
+        public void onIncomingCall(int callId, Bundle extras) throws RemoteException {}
 
         @Override // com.android.ims.internal.ISecImsMmTelEventListener
-        public void onCdpnInfo(String calledPartyNumber, int timeout) throws RemoteException {
-        }
+        public void onCdpnInfo(String calledPartyNumber, int timeout) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +28,7 @@ public interface ISecImsMmTelEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISecImsMmTelEventListener {
+    public abstract static class Stub extends Binder implements ISecImsMmTelEventListener {
         static final int TRANSACTION_onCdpnInfo = 2;
         static final int TRANSACTION_onIncomingCall = 1;
 
@@ -71,7 +69,8 @@ public interface ISecImsMmTelEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISecImsMmTelEventListener.DESCRIPTOR);
             }

@@ -3,6 +3,7 @@ package com.android.server.accounts;
 import android.accounts.Account;
 import android.util.LruCache;
 import android.util.Pair;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,11 +35,16 @@ public final class TokenCache {
                 return false;
             }
             Key key = (Key) obj;
-            return Objects.equals(this.account, key.account) && Objects.equals(this.packageName, key.packageName) && Objects.equals(this.tokenType, key.tokenType) && Arrays.equals(this.sigDigest, key.sigDigest);
+            return Objects.equals(this.account, key.account)
+                    && Objects.equals(this.packageName, key.packageName)
+                    && Objects.equals(this.tokenType, key.tokenType)
+                    && Arrays.equals(this.sigDigest, key.sigDigest);
         }
 
         public final int hashCode() {
-            return Arrays.hashCode(this.sigDigest) ^ ((this.account.hashCode() ^ this.packageName.hashCode()) ^ this.tokenType.hashCode());
+            return Arrays.hashCode(this.sigDigest)
+                    ^ ((this.account.hashCode() ^ this.packageName.hashCode())
+                            ^ this.tokenType.hashCode());
         }
     }
 
@@ -51,8 +57,7 @@ public final class TokenCache {
         public final class Evictor {
             public final List mKeys = new ArrayList();
 
-            public Evictor() {
-            }
+            public Evictor() {}
 
             public final void evict() {
                 Iterator it = ((ArrayList) this.mKeys).iterator();
@@ -68,7 +73,13 @@ public final class TokenCache {
             Key key = (Key) obj;
             Value value = (Value) obj2;
             Value value2 = (Value) obj3;
-            if (value == null || value2 != null || (evictor = (Evictor) this.mTokenEvictors.remove(new Pair(key.account.type, value.token))) == null) {
+            if (value == null
+                    || value2 != null
+                    || (evictor =
+                                    (Evictor)
+                                            this.mTokenEvictors.remove(
+                                                    new Pair(key.account.type, value.token)))
+                            == null) {
                 return;
             }
             evictor.evict();
@@ -91,7 +102,8 @@ public final class TokenCache {
         }
     }
 
-    public final void put(Account account, String str, String str2, String str3, byte[] bArr, long j) {
+    public final void put(
+            Account account, String str, String str2, String str3, byte[] bArr, long j) {
         Objects.requireNonNull(account);
         if (System.currentTimeMillis() > j) {
             return;
@@ -101,13 +113,15 @@ public final class TokenCache {
         TokenLruCache tokenLruCache = this.mCachedTokens;
         tokenLruCache.getClass();
         Pair pair = new Pair(account.type, str);
-        TokenLruCache.Evictor evictor = (TokenLruCache.Evictor) tokenLruCache.mTokenEvictors.get(pair);
+        TokenLruCache.Evictor evictor =
+                (TokenLruCache.Evictor) tokenLruCache.mTokenEvictors.get(pair);
         if (evictor == null) {
             evictor = tokenLruCache.new Evictor();
         }
         ((ArrayList) evictor.mKeys).add(key);
         tokenLruCache.mTokenEvictors.put(pair, evictor);
-        TokenLruCache.Evictor evictor2 = (TokenLruCache.Evictor) tokenLruCache.mAccountEvictors.get(account);
+        TokenLruCache.Evictor evictor2 =
+                (TokenLruCache.Evictor) tokenLruCache.mAccountEvictors.get(account);
         if (evictor2 == null) {
             evictor2 = tokenLruCache.new Evictor();
         }

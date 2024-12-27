@@ -11,6 +11,7 @@ import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 import com.android.internal.org.bouncycastle.operator.SignatureAlgorithmIdentifierFinder;
 import com.android.internal.org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder;
 import com.android.internal.org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
+
 import java.security.Provider;
 import java.security.PublicKey;
 import java.security.cert.CertificateException;
@@ -20,8 +21,10 @@ import java.security.cert.X509Certificate;
 public class JcaSignerInfoVerifierBuilder {
     private DigestCalculatorProvider digestProvider;
     private Helper helper = new Helper();
-    private CMSSignatureAlgorithmNameGenerator sigAlgNameGen = new DefaultCMSSignatureAlgorithmNameGenerator();
-    private SignatureAlgorithmIdentifierFinder sigAlgIDFinder = new DefaultSignatureAlgorithmIdentifierFinder();
+    private CMSSignatureAlgorithmNameGenerator sigAlgNameGen =
+            new DefaultCMSSignatureAlgorithmNameGenerator();
+    private SignatureAlgorithmIdentifierFinder sigAlgIDFinder =
+            new DefaultSignatureAlgorithmIdentifierFinder();
 
     public JcaSignerInfoVerifierBuilder(DigestCalculatorProvider digestProvider) {
         this.digestProvider = digestProvider;
@@ -37,41 +40,59 @@ public class JcaSignerInfoVerifierBuilder {
         return this;
     }
 
-    public JcaSignerInfoVerifierBuilder setSignatureAlgorithmNameGenerator(CMSSignatureAlgorithmNameGenerator sigAlgNameGen) {
+    public JcaSignerInfoVerifierBuilder setSignatureAlgorithmNameGenerator(
+            CMSSignatureAlgorithmNameGenerator sigAlgNameGen) {
         this.sigAlgNameGen = sigAlgNameGen;
         return this;
     }
 
-    public JcaSignerInfoVerifierBuilder setSignatureAlgorithmFinder(SignatureAlgorithmIdentifierFinder sigAlgIDFinder) {
+    public JcaSignerInfoVerifierBuilder setSignatureAlgorithmFinder(
+            SignatureAlgorithmIdentifierFinder sigAlgIDFinder) {
         this.sigAlgIDFinder = sigAlgIDFinder;
         return this;
     }
 
-    public SignerInformationVerifier build(X509CertificateHolder certHolder) throws OperatorCreationException, CertificateException {
-        return new SignerInformationVerifier(this.sigAlgNameGen, this.sigAlgIDFinder, this.helper.createContentVerifierProvider(certHolder), this.digestProvider);
+    public SignerInformationVerifier build(X509CertificateHolder certHolder)
+            throws OperatorCreationException, CertificateException {
+        return new SignerInformationVerifier(
+                this.sigAlgNameGen,
+                this.sigAlgIDFinder,
+                this.helper.createContentVerifierProvider(certHolder),
+                this.digestProvider);
     }
 
-    public SignerInformationVerifier build(X509Certificate certificate) throws OperatorCreationException {
-        return new SignerInformationVerifier(this.sigAlgNameGen, this.sigAlgIDFinder, this.helper.createContentVerifierProvider(certificate), this.digestProvider);
+    public SignerInformationVerifier build(X509Certificate certificate)
+            throws OperatorCreationException {
+        return new SignerInformationVerifier(
+                this.sigAlgNameGen,
+                this.sigAlgIDFinder,
+                this.helper.createContentVerifierProvider(certificate),
+                this.digestProvider);
     }
 
     public SignerInformationVerifier build(PublicKey pubKey) throws OperatorCreationException {
-        return new SignerInformationVerifier(this.sigAlgNameGen, this.sigAlgIDFinder, this.helper.createContentVerifierProvider(pubKey), this.digestProvider);
+        return new SignerInformationVerifier(
+                this.sigAlgNameGen,
+                this.sigAlgIDFinder,
+                this.helper.createContentVerifierProvider(pubKey),
+                this.digestProvider);
     }
 
     private class Helper {
-        private Helper() {
-        }
+        private Helper() {}
 
-        ContentVerifierProvider createContentVerifierProvider(PublicKey publicKey) throws OperatorCreationException {
+        ContentVerifierProvider createContentVerifierProvider(PublicKey publicKey)
+                throws OperatorCreationException {
             return new JcaContentVerifierProviderBuilder().build(publicKey);
         }
 
-        ContentVerifierProvider createContentVerifierProvider(X509Certificate certificate) throws OperatorCreationException {
+        ContentVerifierProvider createContentVerifierProvider(X509Certificate certificate)
+                throws OperatorCreationException {
             return new JcaContentVerifierProviderBuilder().build(certificate);
         }
 
-        ContentVerifierProvider createContentVerifierProvider(X509CertificateHolder certHolder) throws OperatorCreationException, CertificateException {
+        ContentVerifierProvider createContentVerifierProvider(X509CertificateHolder certHolder)
+                throws OperatorCreationException, CertificateException {
             return new JcaContentVerifierProviderBuilder().build(certHolder);
         }
 
@@ -89,13 +110,19 @@ public class JcaSignerInfoVerifierBuilder {
         }
 
         @Override // com.android.internal.org.bouncycastle.cms.jcajce.JcaSignerInfoVerifierBuilder.Helper
-        ContentVerifierProvider createContentVerifierProvider(PublicKey publicKey) throws OperatorCreationException {
-            return new JcaContentVerifierProviderBuilder().setProvider(this.providerName).build(publicKey);
+        ContentVerifierProvider createContentVerifierProvider(PublicKey publicKey)
+                throws OperatorCreationException {
+            return new JcaContentVerifierProviderBuilder()
+                    .setProvider(this.providerName)
+                    .build(publicKey);
         }
 
         @Override // com.android.internal.org.bouncycastle.cms.jcajce.JcaSignerInfoVerifierBuilder.Helper
-        ContentVerifierProvider createContentVerifierProvider(X509Certificate certificate) throws OperatorCreationException {
-            return new JcaContentVerifierProviderBuilder().setProvider(this.providerName).build(certificate);
+        ContentVerifierProvider createContentVerifierProvider(X509Certificate certificate)
+                throws OperatorCreationException {
+            return new JcaContentVerifierProviderBuilder()
+                    .setProvider(this.providerName)
+                    .build(certificate);
         }
 
         @Override // com.android.internal.org.bouncycastle.cms.jcajce.JcaSignerInfoVerifierBuilder.Helper
@@ -104,8 +131,11 @@ public class JcaSignerInfoVerifierBuilder {
         }
 
         @Override // com.android.internal.org.bouncycastle.cms.jcajce.JcaSignerInfoVerifierBuilder.Helper
-        ContentVerifierProvider createContentVerifierProvider(X509CertificateHolder certHolder) throws OperatorCreationException, CertificateException {
-            return new JcaContentVerifierProviderBuilder().setProvider(this.providerName).build(certHolder);
+        ContentVerifierProvider createContentVerifierProvider(X509CertificateHolder certHolder)
+                throws OperatorCreationException, CertificateException {
+            return new JcaContentVerifierProviderBuilder()
+                    .setProvider(this.providerName)
+                    .build(certHolder);
         }
     }
 
@@ -118,13 +148,19 @@ public class JcaSignerInfoVerifierBuilder {
         }
 
         @Override // com.android.internal.org.bouncycastle.cms.jcajce.JcaSignerInfoVerifierBuilder.Helper
-        ContentVerifierProvider createContentVerifierProvider(PublicKey publicKey) throws OperatorCreationException {
-            return new JcaContentVerifierProviderBuilder().setProvider(this.provider).build(publicKey);
+        ContentVerifierProvider createContentVerifierProvider(PublicKey publicKey)
+                throws OperatorCreationException {
+            return new JcaContentVerifierProviderBuilder()
+                    .setProvider(this.provider)
+                    .build(publicKey);
         }
 
         @Override // com.android.internal.org.bouncycastle.cms.jcajce.JcaSignerInfoVerifierBuilder.Helper
-        ContentVerifierProvider createContentVerifierProvider(X509Certificate certificate) throws OperatorCreationException {
-            return new JcaContentVerifierProviderBuilder().setProvider(this.provider).build(certificate);
+        ContentVerifierProvider createContentVerifierProvider(X509Certificate certificate)
+                throws OperatorCreationException {
+            return new JcaContentVerifierProviderBuilder()
+                    .setProvider(this.provider)
+                    .build(certificate);
         }
 
         @Override // com.android.internal.org.bouncycastle.cms.jcajce.JcaSignerInfoVerifierBuilder.Helper
@@ -133,8 +169,11 @@ public class JcaSignerInfoVerifierBuilder {
         }
 
         @Override // com.android.internal.org.bouncycastle.cms.jcajce.JcaSignerInfoVerifierBuilder.Helper
-        ContentVerifierProvider createContentVerifierProvider(X509CertificateHolder certHolder) throws OperatorCreationException, CertificateException {
-            return new JcaContentVerifierProviderBuilder().setProvider(this.provider).build(certHolder);
+        ContentVerifierProvider createContentVerifierProvider(X509CertificateHolder certHolder)
+                throws OperatorCreationException, CertificateException {
+            return new JcaContentVerifierProviderBuilder()
+                    .setProvider(this.provider)
+                    .build(certHolder);
         }
     }
 }

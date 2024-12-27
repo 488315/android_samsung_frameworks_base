@@ -3,15 +3,16 @@ package com.android.internal.org.bouncycastle.jce.provider;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.asn1.x500.X500NameStyle;
 import com.android.internal.org.bouncycastle.x509.X509AttributeCertificate;
+
 import java.security.cert.TrustAnchor;
 import java.security.cert.X509CRL;
 import java.security.cert.X509Certificate;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes5.dex */
 class PrincipalUtils {
-    PrincipalUtils() {
-    }
+    PrincipalUtils() {}
 
     static X500Name getCA(TrustAnchor trustAnchor) {
         return getX500Name(notNull(trustAnchor).getCA());
@@ -21,7 +22,8 @@ class PrincipalUtils {
         if (cert instanceof X509Certificate) {
             return getIssuerPrincipal((X509Certificate) cert);
         }
-        return getX500Name((X500Principal) ((X509AttributeCertificate) cert).getIssuer().getPrincipals()[0]);
+        return getX500Name(
+                (X500Principal) ((X509AttributeCertificate) cert).getIssuer().getPrincipals()[0]);
     }
 
     static X500Name getIssuerPrincipal(X509Certificate certificate) {

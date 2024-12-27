@@ -91,8 +91,7 @@ public final class DisconnectCause {
     public static final int WFC_SERVICE_NOT_AVAILABLE_IN_THIS_LOCATION = 79;
     public static final int WIFI_LOST = 59;
 
-    private DisconnectCause() {
-    }
+    private DisconnectCause() {}
 
     public static String toString(int cause) {
         switch (cause) {

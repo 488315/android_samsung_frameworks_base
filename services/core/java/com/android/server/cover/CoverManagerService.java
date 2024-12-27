@@ -1,8 +1,10 @@
 package com.android.server.cover;
 
 import android.content.Context;
+
 import com.android.server.LocalServices;
 import com.android.server.SystemService;
+
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.sepunion.SemPluginManagerLocal;
 
@@ -16,7 +18,8 @@ public final class CoverManagerService extends SystemService {
         CoverManagerServiceImpl coverManagerServiceImpl = new CoverManagerServiceImpl();
         new CoverState();
         coverManagerServiceImpl.mSystemReady = false;
-        coverManagerServiceImpl.mUnionLocal = (SemPluginManagerLocal) LocalServices.getService(SemPluginManagerLocal.class);
+        coverManagerServiceImpl.mUnionLocal =
+                (SemPluginManagerLocal) LocalServices.getService(SemPluginManagerLocal.class);
         this.mCoverManagerServiceImpl = coverManagerServiceImpl;
     }
 

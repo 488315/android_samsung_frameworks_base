@@ -55,6 +55,8 @@ public class ElasticCustom extends BaseInterpolator {
             a = 1.0f;
             s = p / 4.0f;
         }
-        return (float) ((a * Math.pow(2.0d, (-10.0f) * t) * Math.sin(((t - s) * 6.283185307179586d) / p)) + 1.0d);
+        return (float)
+                ((a * Math.pow(2.0d, (-10.0f) * t) * Math.sin(((t - s) * 6.283185307179586d) / p))
+                        + 1.0d);
     }
 }

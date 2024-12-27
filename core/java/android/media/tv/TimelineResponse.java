@@ -6,20 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class TimelineResponse extends BroadcastInfoResponse implements Parcelable {
-    public static final Parcelable.Creator<TimelineResponse> CREATOR = new Parcelable.Creator<TimelineResponse>() { // from class: android.media.tv.TimelineResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimelineResponse createFromParcel(Parcel source) {
-            source.readInt();
-            return TimelineResponse.createFromParcelBody(source);
-        }
+    public static final Parcelable.Creator<TimelineResponse> CREATOR =
+            new Parcelable.Creator<
+                    TimelineResponse>() { // from class: android.media.tv.TimelineResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimelineResponse createFromParcel(Parcel source) {
+                    source.readInt();
+                    return TimelineResponse.createFromParcelBody(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimelineResponse[] newArray(int size) {
-            return new TimelineResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimelineResponse[] newArray(int size) {
+                    return new TimelineResponse[size];
+                }
+            };
     private static final int RESPONSE_TYPE = 8;
     private final String mSelector;
     private final long mTicks;
@@ -31,7 +33,15 @@ public final class TimelineResponse extends BroadcastInfoResponse implements Par
         return new TimelineResponse(in);
     }
 
-    public TimelineResponse(int requestId, int sequence, int responseResult, String selector, int unitsPerTick, int unitsPerSecond, long wallClock, long ticks) {
+    public TimelineResponse(
+            int requestId,
+            int sequence,
+            int responseResult,
+            String selector,
+            int unitsPerTick,
+            int unitsPerSecond,
+            long wallClock,
+            long ticks) {
         super(8, requestId, sequence, responseResult);
         this.mSelector = selector;
         this.mUnitsPerTick = unitsPerTick;

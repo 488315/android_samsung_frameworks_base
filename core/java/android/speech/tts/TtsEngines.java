@@ -10,13 +10,16 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.provider.Settings;
-import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.internal.R;
 import com.android.internal.accessibility.common.ShortcutConstants;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +29,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes3.dex */
 public class TtsEngines {
@@ -63,7 +65,9 @@ public class TtsEngines {
     }
 
     public String getDefaultEngine() {
-        String engine = Settings.Secure.getString(this.mContext.getContentResolver(), Settings.Secure.TTS_DEFAULT_SYNTH);
+        String engine =
+                Settings.Secure.getString(
+                        this.mContext.getContentResolver(), Settings.Secure.TTS_DEFAULT_SYNTH);
         return isEngineInstalled(engine) ? engine : getHighestRankedEngineName();
     }
 
@@ -120,7 +124,10 @@ public class TtsEngines {
         Intent intent = new Intent(TextToSpeech.Engine.INTENT_ACTION_TTS_SERVICE);
         intent.setPackage(engine);
         List<ResolveInfo> resolveInfos = pm.queryIntentServices(intent, 65664);
-        if (resolveInfos != null && resolveInfos.size() == 1 && (service = resolveInfos.get(0).serviceInfo) != null && (settings = settingsActivityFromServiceInfo(service, pm)) != null) {
+        if (resolveInfos != null
+                && resolveInfos.size() == 1
+                && (service = resolveInfos.get(0).serviceInfo) != null
+                && (settings = settingsActivityFromServiceInfo(service, pm)) != null) {
             Intent i = new Intent();
             i.setClassName(engine, settings);
             return i;
@@ -134,7 +141,8 @@ public class TtsEngines {
         try {
             try {
                 try {
-                    XmlResourceParser parser2 = si.loadXmlMetaData(pm, TextToSpeech.Engine.SERVICE_META_DATA);
+                    XmlResourceParser parser2 =
+                            si.loadXmlMetaData(pm, TextToSpeech.Engine.SERVICE_META_DATA);
                     if (parser2 == null) {
                         Log.w(TAG, "No meta-data found for :" + si);
                         if (parser2 != null) {
@@ -213,8 +221,7 @@ public class TtsEngines {
     private static class EngineInfoComparator implements Comparator<TextToSpeech.EngineInfo> {
         static EngineInfoComparator INSTANCE = new EngineInfoComparator();
 
-        private EngineInfoComparator() {
-        }
+        private EngineInfoComparator() {}
 
         @Override // java.util.Comparator
         public int compare(TextToSpeech.EngineInfo lhs, TextToSpeech.EngineInfo rhs) {
@@ -229,7 +236,10 @@ public class TtsEngines {
     }
 
     public Locale getLocalePrefForEngine(String engineName) {
-        return getLocalePrefForEngine(engineName, Settings.Secure.getString(this.mContext.getContentResolver(), Settings.Secure.TTS_DEFAULT_LOCALE));
+        return getLocalePrefForEngine(
+                engineName,
+                Settings.Secure.getString(
+                        this.mContext.getContentResolver(), Settings.Secure.TTS_DEFAULT_LOCALE));
     }
 
     public Locale getLocalePrefForEngine(String engineName, String prefValue) {
@@ -246,7 +256,12 @@ public class TtsEngines {
     }
 
     public boolean isLocaleSetToDefaultForEngine(String engineName) {
-        return TextUtils.isEmpty(parseEnginePrefFromList(Settings.Secure.getString(this.mContext.getContentResolver(), Settings.Secure.TTS_DEFAULT_LOCALE), engineName));
+        return TextUtils.isEmpty(
+                parseEnginePrefFromList(
+                        Settings.Secure.getString(
+                                this.mContext.getContentResolver(),
+                                Settings.Secure.TTS_DEFAULT_LOCALE),
+                        engineName));
     }
 
     public Locale parseLocaleString(String localeString) {
@@ -258,11 +273,19 @@ public class TtsEngines {
             String[] split = localeString.split("[-_]");
             language = split[0].toLowerCase();
             if (split.length == 0) {
-                Log.w(TAG, "Failed to convert " + localeString + " to a valid Locale object. Only separators");
+                Log.w(
+                        TAG,
+                        "Failed to convert "
+                                + localeString
+                                + " to a valid Locale object. Only separators");
                 return null;
             }
             if (split.length > 3) {
-                Log.w(TAG, "Failed to convert " + localeString + " to a valid Locale object. Too many separators");
+                Log.w(
+                        TAG,
+                        "Failed to convert "
+                                + localeString
+                                + " to a valid Locale object. Too many separators");
                 return null;
             }
             country = split.length >= 2 ? split[1].toUpperCase() : "";
@@ -293,11 +316,13 @@ public class TtsEngines {
         String normalizedCountry;
         String normalizedLanguage;
         String language = ttsLocale.getLanguage();
-        if (!TextUtils.isEmpty(language) && (normalizedLanguage = sNormalizeLanguage.get(language)) != null) {
+        if (!TextUtils.isEmpty(language)
+                && (normalizedLanguage = sNormalizeLanguage.get(language)) != null) {
             language = normalizedLanguage;
         }
         String country = ttsLocale.getCountry();
-        if (!TextUtils.isEmpty(country) && (normalizedCountry = sNormalizeCountry.get(country)) != null) {
+        if (!TextUtils.isEmpty(country)
+                && (normalizedCountry = sNormalizeCountry.get(country)) != null) {
             country = normalizedCountry;
         }
         return new Locale(language, country, ttsLocale.getVariant());
@@ -311,7 +336,7 @@ public class TtsEngines {
             ret[2] = locale.getVariant();
             return ret;
         } catch (MissingResourceException e) {
-            return new String[]{"eng", "USA", ""};
+            return new String[] {"eng", "USA", ""};
         }
     }
 
@@ -330,9 +355,16 @@ public class TtsEngines {
     }
 
     public synchronized void updateLocalePrefForEngine(String engineName, Locale newLocale) {
-        String prefList = Settings.Secure.getString(this.mContext.getContentResolver(), Settings.Secure.TTS_DEFAULT_LOCALE);
-        String newPrefList = updateValueInCommaSeparatedList(prefList, engineName, newLocale != null ? newLocale.toString() : "");
-        Settings.Secure.putString(this.mContext.getContentResolver(), Settings.Secure.TTS_DEFAULT_LOCALE, newPrefList.toString());
+        String prefList =
+                Settings.Secure.getString(
+                        this.mContext.getContentResolver(), Settings.Secure.TTS_DEFAULT_LOCALE);
+        String newPrefList =
+                updateValueInCommaSeparatedList(
+                        prefList, engineName, newLocale != null ? newLocale.toString() : "");
+        Settings.Secure.putString(
+                this.mContext.getContentResolver(),
+                Settings.Secure.TTS_DEFAULT_LOCALE,
+                newPrefList.toString());
     }
 
     private String updateValueInCommaSeparatedList(String list, String key, String newValue) {
@@ -353,7 +385,10 @@ public class TtsEngines {
                             newPrefList.append(',');
                         }
                         found = true;
-                        newPrefList.append(key).append(ShortcutConstants.SERVICES_SEPARATOR).append(newValue);
+                        newPrefList
+                                .append(key)
+                                .append(ShortcutConstants.SERVICES_SEPARATOR)
+                                .append(newValue);
                     } else {
                         if (first) {
                             first = false;
@@ -366,7 +401,10 @@ public class TtsEngines {
             }
             if (!found) {
                 newPrefList.append(',');
-                newPrefList.append(key).append(ShortcutConstants.SERVICES_SEPARATOR).append(newValue);
+                newPrefList
+                        .append(key)
+                        .append(ShortcutConstants.SERVICES_SEPARATOR)
+                        .append(newValue);
             }
         }
         return newPrefList.toString();

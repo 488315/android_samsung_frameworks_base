@@ -12,8 +12,7 @@ public interface IGetOtaStatusCallback extends IInterface {
 
     public static class Default implements IGetOtaStatusCallback {
         @Override // android.service.euicc.IGetOtaStatusCallback
-        public void onSuccess(int status) throws RemoteException {
-        }
+        public void onSuccess(int status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IGetOtaStatusCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetOtaStatusCallback {
+    public abstract static class Stub extends Binder implements IGetOtaStatusCallback {
         public static final String DESCRIPTOR = "android.service.euicc.IGetOtaStatusCallback";
         static final int TRANSACTION_onSuccess = 1;
 
@@ -60,7 +59,8 @@ public interface IGetOtaStatusCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

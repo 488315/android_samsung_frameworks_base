@@ -2,6 +2,7 @@ package com.samsung.android.app;
 
 import android.app.ActivityManager;
 import android.content.Context;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */

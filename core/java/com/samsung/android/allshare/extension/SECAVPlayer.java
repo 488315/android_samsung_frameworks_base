@@ -3,6 +3,7 @@ package com.samsung.android.allshare.extension;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
+
 import com.samsung.android.allshare.Caption;
 import com.samsung.android.allshare.DLog;
 import com.samsung.android.allshare.Device;
@@ -13,12 +14,17 @@ import com.samsung.android.allshare.media.AVPlayer;
 import com.samsung.android.allshare.media.ContentInfo;
 import com.samsung.android.allshare.media.MediaInfo;
 import com.sec.android.allshare.iface.message.AllShareEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /* loaded from: classes3.dex */
-public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventListener, AVPlayer.IAVPlayerExtensionEventListener, AVPlayer.IAVPlayerPlaybackResponseListener, AVPlayer.IAVPlayerExtensionResponseListener {
+public class SECAVPlayer extends AVPlayer
+        implements AVPlayer.IAVPlayerEventListener,
+                AVPlayer.IAVPlayerExtensionEventListener,
+                AVPlayer.IAVPlayerPlaybackResponseListener,
+                AVPlayer.IAVPlayerExtensionResponseListener {
     private static final String TAG_CLASS = "SECAVPlayer";
     private AVPlayer mAVPlayer;
     private Handler mHandlerPlayInfo;
@@ -28,92 +34,105 @@ public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventList
     boolean mChangeMute = false;
     boolean mRequestChangeMute = false;
     private State mState = new State();
-    private Runnable mNotifyStopRunnable = new Runnable() { // from class: com.samsung.android.allshare.extension.SECAVPlayer.1
-        @Override // java.lang.Runnable
-        public void run() {
-            DLog.i_api("SECAVPLAYER", " mNotifyStopRunnable : " + SECAVPlayer.this.mState.currentState);
-            if (SECAVPlayer.this.mState.currentState == SECAVPlayerState.STOPPED) {
-                SECAVPlayer.this.notifyOnStop();
-            }
-        }
-    };
+    private Runnable mNotifyStopRunnable =
+            new Runnable() { // from class: com.samsung.android.allshare.extension.SECAVPlayer.1
+                @Override // java.lang.Runnable
+                public void run() {
+                    DLog.i_api(
+                            "SECAVPLAYER",
+                            " mNotifyStopRunnable : " + SECAVPlayer.this.mState.currentState);
+                    if (SECAVPlayer.this.mState.currentState == SECAVPlayerState.STOPPED) {
+                        SECAVPlayer.this.notifyOnStop();
+                    }
+                }
+            };
     private ISECAVPlayerStateListener mSECLabListener = null;
     private ISECAVPlayerExtensionEventListener mSECExtensionListener = null;
     private boolean mIsPlayInfoThreadRunning = false;
-    private Runnable mRunnablePlayInfo = new Runnable() { // from class: com.samsung.android.allshare.extension.SECAVPlayer.2
-        @Override // java.lang.Runnable
-        public void run() {
-            SECAVPlayer.this.mAVPlayer.getPlayPosition();
-            SECAVPlayer.this.mAVPlayer.getState();
-            if (SECAVPlayer.this.mState.getMediaInfo() == null || SECAVPlayer.this.mState.getMediaInfo().getDuration() <= 0) {
-                SECAVPlayer.this.mAVPlayer.getMediaInfo();
-            }
-            if (SECAVPlayer.this.mIsPlayInfoThreadRunning) {
-                SECAVPlayer.this.mHandlerPlayInfo.postDelayed(SECAVPlayer.this.mRunnablePlayInfo, 1000L);
-            }
-        }
-    };
+    private Runnable mRunnablePlayInfo =
+            new Runnable() { // from class: com.samsung.android.allshare.extension.SECAVPlayer.2
+                @Override // java.lang.Runnable
+                public void run() {
+                    SECAVPlayer.this.mAVPlayer.getPlayPosition();
+                    SECAVPlayer.this.mAVPlayer.getState();
+                    if (SECAVPlayer.this.mState.getMediaInfo() == null
+                            || SECAVPlayer.this.mState.getMediaInfo().getDuration() <= 0) {
+                        SECAVPlayer.this.mAVPlayer.getMediaInfo();
+                    }
+                    if (SECAVPlayer.this.mIsPlayInfoThreadRunning) {
+                        SECAVPlayer.this.mHandlerPlayInfo.postDelayed(
+                                SECAVPlayer.this.mRunnablePlayInfo, 1000L);
+                    }
+                }
+            };
     private boolean mIsSubscriberRequested = false;
     private AVPlayer.IAVPlayerPlaybackResponseListener mAVPlayerPlaybackResponseListener = null;
     private AVPlayer.IAVPlayerVolumeResponseListener mAVPlayerVolumeResponseListener = null;
     private AVPlayer.IAVPlayerExtensionResponseListener mAVPlayerExtensionResponseListener = null;
-    private AVPlayer.IAVPlayerVolumeResponseListener mSECAvPlayerVolumeResponseListener = new AVPlayer.IAVPlayerVolumeResponseListener() { // from class: com.samsung.android.allshare.extension.SECAVPlayer.4
-        @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerVolumeResponseListener
-        public void onGetVolumeResponseReceived(int volume, ERROR error) {
-            SECAVPlayer.this.mRequestVolume = false;
-            if (error == ERROR.SUCCESS) {
-                DLog.i_api("SECAVPLAYER", " onGetVolumeResponseReceived - " + volume);
-                SECAVPlayer.this.setVolumeDelta(volume);
-            } else {
-                SECAVPlayer.this.mVolumeDelta = 0;
-                DLog.i_api("SECAVPLAYER", " onGetVolumeResponseReceived - " + error);
-            }
-            if (SECAVPlayer.this.mAVPlayerVolumeResponseListener != null) {
-                SECAVPlayer.this.mAVPlayerVolumeResponseListener.onGetVolumeResponseReceived(volume, error);
-            }
-        }
-
-        @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerVolumeResponseListener
-        public void onSetVolumeResponseReceived(int volume, ERROR error) {
-            if (error == ERROR.SUCCESS) {
-                DLog.i_api("SECAVPLAYER", " onSetVolumeResponseReceived - " + volume);
-            } else {
-                DLog.i_api("SECAVPLAYER", " onSetVolumeResponseReceived - " + error);
-            }
-            if (SECAVPlayer.this.mAVPlayerVolumeResponseListener != null) {
-                SECAVPlayer.this.mAVPlayerVolumeResponseListener.onSetVolumeResponseReceived(volume, error);
-            }
-        }
-
-        @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerVolumeResponseListener
-        public void onGetMuteResponseReceived(boolean ret, ERROR error) {
-            SECAVPlayer.this.mRequestChangeMute = false;
-            if (error == ERROR.SUCCESS) {
-                DLog.i_api("SECAVPLAYER", " onGetMuteResponseReceived - " + ret);
-                if (SECAVPlayer.this.mChangeMute) {
-                    SECAVPlayer.this.mAVPlayer.setMute(!ret);
+    private AVPlayer.IAVPlayerVolumeResponseListener mSECAvPlayerVolumeResponseListener =
+            new AVPlayer
+                    .IAVPlayerVolumeResponseListener() { // from class:
+                                                         // com.samsung.android.allshare.extension.SECAVPlayer.4
+                @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerVolumeResponseListener
+                public void onGetVolumeResponseReceived(int volume, ERROR error) {
+                    SECAVPlayer.this.mRequestVolume = false;
+                    if (error == ERROR.SUCCESS) {
+                        DLog.i_api("SECAVPLAYER", " onGetVolumeResponseReceived - " + volume);
+                        SECAVPlayer.this.setVolumeDelta(volume);
+                    } else {
+                        SECAVPlayer.this.mVolumeDelta = 0;
+                        DLog.i_api("SECAVPLAYER", " onGetVolumeResponseReceived - " + error);
+                    }
+                    if (SECAVPlayer.this.mAVPlayerVolumeResponseListener != null) {
+                        SECAVPlayer.this.mAVPlayerVolumeResponseListener
+                                .onGetVolumeResponseReceived(volume, error);
+                    }
                 }
-            } else {
-                DLog.i_api("SECAVPLAYER", " onGetMuteResponseReceived - " + error);
-            }
-            SECAVPlayer.this.mChangeMute = false;
-            if (SECAVPlayer.this.mAVPlayerVolumeResponseListener != null) {
-                SECAVPlayer.this.mAVPlayerVolumeResponseListener.onGetMuteResponseReceived(ret, error);
-            }
-        }
 
-        @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerVolumeResponseListener
-        public void onSetMuteResponseReceived(boolean ret, ERROR error) {
-            if (error == ERROR.SUCCESS) {
-                DLog.i_api("SECAVPLAYER", " onSetMuteResponseReceived - " + ret);
-            } else {
-                DLog.i_api("SECAVPLAYER", " onSetMuteResponseReceived - " + error);
-            }
-            if (SECAVPlayer.this.mAVPlayerVolumeResponseListener != null) {
-                SECAVPlayer.this.mAVPlayerVolumeResponseListener.onSetMuteResponseReceived(ret, error);
-            }
-        }
-    };
+                @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerVolumeResponseListener
+                public void onSetVolumeResponseReceived(int volume, ERROR error) {
+                    if (error == ERROR.SUCCESS) {
+                        DLog.i_api("SECAVPLAYER", " onSetVolumeResponseReceived - " + volume);
+                    } else {
+                        DLog.i_api("SECAVPLAYER", " onSetVolumeResponseReceived - " + error);
+                    }
+                    if (SECAVPlayer.this.mAVPlayerVolumeResponseListener != null) {
+                        SECAVPlayer.this.mAVPlayerVolumeResponseListener
+                                .onSetVolumeResponseReceived(volume, error);
+                    }
+                }
+
+                @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerVolumeResponseListener
+                public void onGetMuteResponseReceived(boolean ret, ERROR error) {
+                    SECAVPlayer.this.mRequestChangeMute = false;
+                    if (error == ERROR.SUCCESS) {
+                        DLog.i_api("SECAVPLAYER", " onGetMuteResponseReceived - " + ret);
+                        if (SECAVPlayer.this.mChangeMute) {
+                            SECAVPlayer.this.mAVPlayer.setMute(!ret);
+                        }
+                    } else {
+                        DLog.i_api("SECAVPLAYER", " onGetMuteResponseReceived - " + error);
+                    }
+                    SECAVPlayer.this.mChangeMute = false;
+                    if (SECAVPlayer.this.mAVPlayerVolumeResponseListener != null) {
+                        SECAVPlayer.this.mAVPlayerVolumeResponseListener.onGetMuteResponseReceived(
+                                ret, error);
+                    }
+                }
+
+                @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerVolumeResponseListener
+                public void onSetMuteResponseReceived(boolean ret, ERROR error) {
+                    if (error == ERROR.SUCCESS) {
+                        DLog.i_api("SECAVPLAYER", " onSetMuteResponseReceived - " + ret);
+                    } else {
+                        DLog.i_api("SECAVPLAYER", " onSetMuteResponseReceived - " + error);
+                    }
+                    if (SECAVPlayer.this.mAVPlayerVolumeResponseListener != null) {
+                        SECAVPlayer.this.mAVPlayerVolumeResponseListener.onSetMuteResponseReceived(
+                                ret, error);
+                    }
+                }
+            };
 
     public interface ISECAVPlayerExtensionEventListener {
         void onAspectRatio(String str, ERROR error);
@@ -352,7 +371,9 @@ public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventList
 
     @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerPlaybackResponseListener
     public void onGetPlayPositionResponseReceived(long position, ERROR err) {
-        if (this.mAVPlayerPlaybackResponseListener == null || !this.mIsPlayInfoThreadRunning || err.equals(ERROR.INVALID_DEVICE)) {
+        if (this.mAVPlayerPlaybackResponseListener == null
+                || !this.mIsPlayInfoThreadRunning
+                || err.equals(ERROR.INVALID_DEVICE)) {
             this.mHandlerPlayInfo.removeCallbacks(this.mRunnablePlayInfo);
             this.mIsPlayInfoThreadRunning = false;
         }
@@ -361,7 +382,8 @@ public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventList
         if (mediaInfo != null && mediaInfo.getDuration() > 0) {
             mediaDuration = mediaInfo.getDuration();
         }
-        if ((position == 0 || position == mediaDuration || position == mediaDuration - 1) && this.mState.compareAndSetNearlyFinished(true, false)) {
+        if ((position == 0 || position == mediaDuration || position == mediaDuration - 1)
+                && this.mState.compareAndSetNearlyFinished(true, false)) {
             this.mState.setLastPos(mediaDuration);
             notifyOnProgress(mediaDuration);
             DLog.i_api("SECAVPLAYER", " finish : " + position + " - " + mediaDuration);
@@ -401,7 +423,8 @@ public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventList
     @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerPlaybackResponseListener
     public void onPlayResponseReceived(Item ai, ContentInfo ci, ERROR err) {
         if (ERROR.SUCCESS.equals(err)) {
-            if (this.mState.getMediaInfo() == null || this.mState.getMediaInfo().getDuration() <= 0) {
+            if (this.mState.getMediaInfo() == null
+                    || this.mState.getMediaInfo().getDuration() <= 0) {
                 this.mAVPlayer.getMediaInfo();
             }
         } else {
@@ -485,19 +508,28 @@ public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventList
     public void getMediaInfo() {
         this.mIsSubscriberRequested = true;
         this.mAVPlayer.getMediaInfo();
-        new Handler().postDelayed(new Runnable() { // from class: com.samsung.android.allshare.extension.SECAVPlayer.3
-            @Override // java.lang.Runnable
-            public void run() {
-                if (SECAVPlayer.this.mIsSubscriberRequested) {
-                    SECAVPlayer.this.mIsSubscriberRequested = false;
-                    if (SECAVPlayer.this.mAVPlayerPlaybackResponseListener != null) {
-                        SECAVPlayer.this.mAVPlayerPlaybackResponseListener.onGetMediaInfoResponseReceived(null, ERROR.FAIL);
-                    } else {
-                        DLog.w_api(SECAVPlayer.TAG_CLASS, "getMediaInfo timeout over 3sec, but no way to response FAIL");
-                    }
-                }
-            }
-        }, 3000L);
+        new Handler()
+                .postDelayed(
+                        new Runnable() { // from class:
+                            // com.samsung.android.allshare.extension.SECAVPlayer.3
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                if (SECAVPlayer.this.mIsSubscriberRequested) {
+                                    SECAVPlayer.this.mIsSubscriberRequested = false;
+                                    if (SECAVPlayer.this.mAVPlayerPlaybackResponseListener
+                                            != null) {
+                                        SECAVPlayer.this.mAVPlayerPlaybackResponseListener
+                                                .onGetMediaInfoResponseReceived(null, ERROR.FAIL);
+                                    } else {
+                                        DLog.w_api(
+                                                SECAVPlayer.TAG_CLASS,
+                                                "getMediaInfo timeout over 3sec, but no way to"
+                                                    + " response FAIL");
+                                    }
+                                }
+                            }
+                        },
+                        3000L);
     }
 
     @Override // com.samsung.android.allshare.Device
@@ -580,12 +612,10 @@ public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventList
     }
 
     @Override // com.samsung.android.allshare.media.AVPlayer
-    public void setEventListener(AVPlayer.IAVPlayerEventListener l) {
-    }
+    public void setEventListener(AVPlayer.IAVPlayerEventListener l) {}
 
     @Override // com.samsung.android.allshare.media.AVPlayer
-    public void setExtensionEventListener(AVPlayer.IAVPlayerExtensionEventListener l) {
-    }
+    public void setExtensionEventListener(AVPlayer.IAVPlayerExtensionEventListener l) {}
 
     @Override // com.samsung.android.allshare.media.AVPlayer
     public void setMute(boolean m) {
@@ -927,7 +957,8 @@ public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventList
     @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerExtensionResponseListener
     public void onAspectRatioStateResponseReceived(String aspectRatio, ERROR err) {
         if (this.mAVPlayerExtensionResponseListener != null) {
-            this.mAVPlayerExtensionResponseListener.onAspectRatioStateResponseReceived(aspectRatio, err);
+            this.mAVPlayerExtensionResponseListener.onAspectRatioStateResponseReceived(
+                    aspectRatio, err);
         }
     }
 
@@ -960,9 +991,11 @@ public class SECAVPlayer extends AVPlayer implements AVPlayer.IAVPlayerEventList
     }
 
     @Override // com.samsung.android.allshare.media.AVPlayer.IAVPlayerExtensionResponseListener
-    public void onCaptionStateResponseReceived(List<Caption> availableCaptions, List<Caption> enabledCaptions, ERROR err) {
+    public void onCaptionStateResponseReceived(
+            List<Caption> availableCaptions, List<Caption> enabledCaptions, ERROR err) {
         if (this.mAVPlayerExtensionResponseListener != null) {
-            this.mAVPlayerExtensionResponseListener.onCaptionStateResponseReceived(availableCaptions, enabledCaptions, err);
+            this.mAVPlayerExtensionResponseListener.onCaptionStateResponseReceived(
+                    availableCaptions, enabledCaptions, err);
         }
     }
 

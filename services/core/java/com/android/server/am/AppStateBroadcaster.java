@@ -8,12 +8,14 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.app.ProcessMap;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.ExplicitHealthCheckController$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
+
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -25,14 +27,19 @@ public abstract class AppStateBroadcaster {
     public static final boolean DEBUG = "eng".equals(SystemProperties.get("ro.build.type"));
     public static volatile boolean mIsBroadcastEnabled = false;
     public static String mLastFocusAppName = null;
-    public static final String[] sPackages = {"com.tmobile.echolocate", "com.tmobile.pr.mytmobile", "com.sprint.ms.smf.services"};
-    public static final String[] APP_TERM_REASONS = {"NORMAL_SYSTEM_HALT", "USER_HALTED", "ANR", "CRASH"};
+    public static final String[] sPackages = {
+        "com.tmobile.echolocate", "com.tmobile.pr.mytmobile", "com.sprint.ms.smf.services"
+    };
+    public static final String[] APP_TERM_REASONS = {
+        "NORMAL_SYSTEM_HALT", "USER_HALTED", "ANR", "CRASH"
+    };
     public static final HashMap sKnownRunningPackages = new HashMap();
 
     public static void broadcastAppState(String str, String str2) {
         boolean z = DEBUG;
         if (z) {
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(" packageName : ", str, " appState : ", str2, "AppStateBroadcaster");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    " packageName : ", str, " appState : ", str2, "AppStateBroadcaster");
         }
         if (mContext == null || str == null || str2.equals("EXITED")) {
             if (z) {
@@ -42,11 +49,14 @@ public abstract class AppStateBroadcaster {
             return;
         }
         for (String str3 : sPackages) {
-            Intent m = ExplicitHealthCheckController$$ExternalSyntheticOutline0.m("diagandroid.app.ApplicationState", str3);
+            Intent m =
+                    ExplicitHealthCheckController$$ExternalSyntheticOutline0.m(
+                            "diagandroid.app.ApplicationState", str3);
             m.putExtra("ApplicationPackageName", stripPackageName(str));
             m.putExtra("ApplicationState", str2);
             m.putExtra("oemIntentTimestamp", System.currentTimeMillis());
-            mContext.sendBroadcastAsUser(m, UserHandle.ALL, "diagandroid.app.receiveDetailedApplicationState");
+            mContext.sendBroadcastAsUser(
+                    m, UserHandle.ALL, "diagandroid.app.receiveDetailedApplicationState");
         }
     }
 
@@ -77,16 +87,25 @@ public abstract class AppStateBroadcaster {
         if (z) {
             logOriginFunction("sendApplicationFocusLoss(" + str + ")");
         }
-        if (!mIsBroadcastEnabled || TextUtils.isEmpty(str) || TextUtils.isEmpty(mLastFocusAppName)) {
+        if (!mIsBroadcastEnabled
+                || TextUtils.isEmpty(str)
+                || TextUtils.isEmpty(mLastFocusAppName)) {
             return;
         }
         broadcastAppState(str, "FOCUS_LOSS");
         if (z) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("sendApplicationFocusLoss sent APP_STATE_FOCUS_LOSS for ", str, "AppStateBroadcaster");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "sendApplicationFocusLoss sent APP_STATE_FOCUS_LOSS for ",
+                    str,
+                    "AppStateBroadcaster");
         }
         if (str.equals(mLastFocusAppName)) {
             if (z) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("packageName is same as mLastFocusAppName: "), mLastFocusAppName, "; setting it to null", "AppStateBroadcaster");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("packageName is same as mLastFocusAppName: "),
+                        mLastFocusAppName,
+                        "; setting it to null",
+                        "AppStateBroadcaster");
             }
             mLastFocusAppName = null;
         }
@@ -104,9 +123,17 @@ public abstract class AppStateBroadcaster {
                 String stripPackageName = stripPackageName(str);
                 z = DEBUG;
                 if (z) {
-                    Slog.d("AppStateBroadcaster", "packageRunning for " + stripPackageName + " with processId " + i + " packageName " + str);
+                    Slog.d(
+                            "AppStateBroadcaster",
+                            "packageRunning for "
+                                    + stripPackageName
+                                    + " with processId "
+                                    + i
+                                    + " packageName "
+                                    + str);
                 }
-                ApplicationState applicationState = (ApplicationState) hashMap.get(stripPackageName);
+                ApplicationState applicationState =
+                        (ApplicationState) hashMap.get(stripPackageName);
                 z2 = false;
                 if (applicationState == null) {
                     applicationState = new ApplicationState();
@@ -123,7 +150,9 @@ public abstract class AppStateBroadcaster {
         if (z2) {
             broadcastAppState(str, "START");
             if (z) {
-                Slog.d("AppStateBroadcaster", "packageRunning sent APP_STATE_START for ".concat(str));
+                Slog.d(
+                        "AppStateBroadcaster",
+                        "packageRunning sent APP_STATE_START for ".concat(str));
             }
         }
     }

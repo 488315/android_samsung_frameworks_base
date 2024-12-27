@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -14,19 +15,22 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class HotspotNetwork implements Parcelable {
-    public static final Parcelable.Creator<HotspotNetwork> CREATOR = new Parcelable.Creator<HotspotNetwork>() { // from class: android.net.wifi.sharedconnectivity.app.HotspotNetwork.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HotspotNetwork createFromParcel(Parcel in) {
-            return HotspotNetwork.readFromParcel(in);
-        }
+    public static final Parcelable.Creator<HotspotNetwork> CREATOR =
+            new Parcelable.Creator<
+                    HotspotNetwork>() { // from class:
+                                        // android.net.wifi.sharedconnectivity.app.HotspotNetwork.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HotspotNetwork createFromParcel(Parcel in) {
+                    return HotspotNetwork.readFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HotspotNetwork[] newArray(int size) {
-            return new HotspotNetwork[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HotspotNetwork[] newArray(int size) {
+                    return new HotspotNetwork[size];
+                }
+            };
     public static final int NETWORK_TYPE_CELLULAR = 1;
     public static final int NETWORK_TYPE_ETHERNET = 3;
     public static final int NETWORK_TYPE_UNKNOWN = 0;
@@ -41,8 +45,7 @@ public final class HotspotNetwork implements Parcelable {
     private final int mNetworkType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NetworkType {
-    }
+    public @interface NetworkType {}
 
     public static final class Builder {
         private String mHotspotBssid;
@@ -95,11 +98,23 @@ public final class HotspotNetwork implements Parcelable {
         }
 
         public HotspotNetwork build() {
-            return new HotspotNetwork(this.mDeviceId, this.mNetworkProviderInfo, this.mNetworkType, this.mNetworkName, this.mHotspotSsid, this.mHotspotBssid, this.mHotspotSecurityTypes, this.mExtras);
+            return new HotspotNetwork(
+                    this.mDeviceId,
+                    this.mNetworkProviderInfo,
+                    this.mNetworkType,
+                    this.mNetworkName,
+                    this.mHotspotSsid,
+                    this.mHotspotBssid,
+                    this.mHotspotSecurityTypes,
+                    this.mExtras);
         }
     }
 
-    private static void validate(long deviceId, int networkType, String networkName, NetworkProviderInfo networkProviderInfo) {
+    private static void validate(
+            long deviceId,
+            int networkType,
+            String networkName,
+            NetworkProviderInfo networkProviderInfo) {
         if (deviceId < 0) {
             throw new IllegalArgumentException("DeviceId must be set");
         }
@@ -114,7 +129,15 @@ public final class HotspotNetwork implements Parcelable {
         }
     }
 
-    private HotspotNetwork(long deviceId, NetworkProviderInfo networkProviderInfo, int networkType, String networkName, String hotspotSsid, String hotspotBssid, ArraySet<Integer> hotspotSecurityTypes, Bundle extras) {
+    private HotspotNetwork(
+            long deviceId,
+            NetworkProviderInfo networkProviderInfo,
+            int networkType,
+            String networkName,
+            String hotspotSsid,
+            String hotspotBssid,
+            ArraySet<Integer> hotspotSecurityTypes,
+            Bundle extras) {
         validate(deviceId, networkType, networkName, networkProviderInfo);
         this.mDeviceId = deviceId;
         this.mNetworkProviderInfo = networkProviderInfo;
@@ -163,11 +186,23 @@ public final class HotspotNetwork implements Parcelable {
             return false;
         }
         HotspotNetwork other = (HotspotNetwork) obj;
-        return this.mDeviceId == other.getDeviceId() && Objects.equals(this.mNetworkProviderInfo, other.getNetworkProviderInfo()) && this.mNetworkType == other.getHostNetworkType() && Objects.equals(this.mNetworkName, other.getNetworkName()) && Objects.equals(this.mHotspotSsid, other.getHotspotSsid()) && Objects.equals(this.mHotspotBssid, other.getHotspotBssid()) && Objects.equals(this.mHotspotSecurityTypes, other.getHotspotSecurityTypes());
+        return this.mDeviceId == other.getDeviceId()
+                && Objects.equals(this.mNetworkProviderInfo, other.getNetworkProviderInfo())
+                && this.mNetworkType == other.getHostNetworkType()
+                && Objects.equals(this.mNetworkName, other.getNetworkName())
+                && Objects.equals(this.mHotspotSsid, other.getHotspotSsid())
+                && Objects.equals(this.mHotspotBssid, other.getHotspotBssid())
+                && Objects.equals(this.mHotspotSecurityTypes, other.getHotspotSecurityTypes());
     }
 
     public int hashCode() {
-        return Objects.hash(Long.valueOf(this.mDeviceId), this.mNetworkProviderInfo, this.mNetworkName, this.mHotspotSsid, this.mHotspotBssid, this.mHotspotSecurityTypes);
+        return Objects.hash(
+                Long.valueOf(this.mDeviceId),
+                this.mNetworkProviderInfo,
+                this.mNetworkName,
+                this.mHotspotSsid,
+                this.mHotspotBssid,
+                this.mHotspotSecurityTypes);
     }
 
     @Override // android.os.Parcelable
@@ -188,10 +223,34 @@ public final class HotspotNetwork implements Parcelable {
     }
 
     public static HotspotNetwork readFromParcel(Parcel in) {
-        return new HotspotNetwork(in.readLong(), NetworkProviderInfo.readFromParcel(in), in.readInt(), in.readString(), in.readString(), in.readString(), in.readArraySet(null), in.readBundle());
+        return new HotspotNetwork(
+                in.readLong(),
+                NetworkProviderInfo.readFromParcel(in),
+                in.readInt(),
+                in.readString(),
+                in.readString(),
+                in.readString(),
+                in.readArraySet(null),
+                in.readBundle());
     }
 
     public String toString() {
-        return "HotspotNetwork[deviceId=" + this.mDeviceId + ", networkType=" + this.mNetworkType + ", networkProviderInfo=" + this.mNetworkProviderInfo.toString() + ", networkName=" + this.mNetworkName + ", hotspotSsid=" + this.mHotspotSsid + ", hotspotBssid=" + this.mHotspotBssid + ", hotspotSecurityTypes=" + this.mHotspotSecurityTypes.toString() + ", extras=" + this.mExtras.toString() + NavigationBarInflaterView.SIZE_MOD_END;
+        return "HotspotNetwork[deviceId="
+                + this.mDeviceId
+                + ", networkType="
+                + this.mNetworkType
+                + ", networkProviderInfo="
+                + this.mNetworkProviderInfo.toString()
+                + ", networkName="
+                + this.mNetworkName
+                + ", hotspotSsid="
+                + this.mHotspotSsid
+                + ", hotspotBssid="
+                + this.mHotspotBssid
+                + ", hotspotSecurityTypes="
+                + this.mHotspotSecurityTypes.toString()
+                + ", extras="
+                + this.mExtras.toString()
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

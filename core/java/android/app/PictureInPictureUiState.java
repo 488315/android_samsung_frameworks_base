@@ -2,23 +2,26 @@ package android.app;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class PictureInPictureUiState implements Parcelable {
-    public static final Parcelable.Creator<PictureInPictureUiState> CREATOR = new Parcelable.Creator<PictureInPictureUiState>() { // from class: android.app.PictureInPictureUiState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PictureInPictureUiState createFromParcel(Parcel in) {
-            return new PictureInPictureUiState(in);
-        }
+    public static final Parcelable.Creator<PictureInPictureUiState> CREATOR =
+            new Parcelable.Creator<PictureInPictureUiState>() { // from class:
+                // android.app.PictureInPictureUiState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PictureInPictureUiState createFromParcel(Parcel in) {
+                    return new PictureInPictureUiState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PictureInPictureUiState[] newArray(int size) {
-            return new PictureInPictureUiState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PictureInPictureUiState[] newArray(int size) {
+                    return new PictureInPictureUiState[size];
+                }
+            };
     private final boolean mIsStashed;
     private final boolean mIsTransitioningToPip;
 
@@ -52,11 +55,13 @@ public final class PictureInPictureUiState implements Parcelable {
             return false;
         }
         PictureInPictureUiState that = (PictureInPictureUiState) o;
-        return this.mIsStashed == that.mIsStashed && this.mIsTransitioningToPip == that.mIsTransitioningToPip;
+        return this.mIsStashed == that.mIsStashed
+                && this.mIsTransitioningToPip == that.mIsTransitioningToPip;
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mIsStashed), Boolean.valueOf(this.mIsTransitioningToPip));
+        return Objects.hash(
+                Boolean.valueOf(this.mIsStashed), Boolean.valueOf(this.mIsTransitioningToPip));
     }
 
     @Override // android.os.Parcelable

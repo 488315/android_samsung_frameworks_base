@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class FaceEnrollCell implements Parcelable {
-    public static final Parcelable.Creator<FaceEnrollCell> CREATOR = new Parcelable.Creator<FaceEnrollCell>() { // from class: android.hardware.face.FaceEnrollCell.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceEnrollCell createFromParcel(Parcel source) {
-            return new FaceEnrollCell(source);
-        }
+    public static final Parcelable.Creator<FaceEnrollCell> CREATOR =
+            new Parcelable.Creator<
+                    FaceEnrollCell>() { // from class: android.hardware.face.FaceEnrollCell.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceEnrollCell createFromParcel(Parcel source) {
+                    return new FaceEnrollCell(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceEnrollCell[] newArray(int size) {
-            return new FaceEnrollCell[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceEnrollCell[] newArray(int size) {
+                    return new FaceEnrollCell[size];
+                }
+            };
     private final int mX;
     private final int mY;
     private final int mZ;

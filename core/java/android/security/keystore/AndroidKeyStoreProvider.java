@@ -2,6 +2,7 @@ package android.security.keystore;
 
 import android.annotation.SystemApi;
 import android.security.keystore2.AndroidKeyStoreLoadStoreParameter;
+
 import java.io.IOException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -21,18 +22,22 @@ public class AndroidKeyStoreProvider extends Provider {
     }
 
     public static long getKeyStoreOperationHandle(Object cryptoPrimitive) {
-        return android.security.keystore2.AndroidKeyStoreProvider.getKeyStoreOperationHandle(cryptoPrimitive);
+        return android.security.keystore2.AndroidKeyStoreProvider.getKeyStoreOperationHandle(
+                cryptoPrimitive);
     }
 
     @SystemApi
-    public static KeyStore getKeyStoreForUid(int uid) throws KeyStoreException, NoSuchProviderException {
-        KeyStore.LoadStoreParameter loadParameter = new AndroidKeyStoreLoadStoreParameter(KeyProperties.legacyUidToNamespace(uid));
+    public static KeyStore getKeyStoreForUid(int uid)
+            throws KeyStoreException, NoSuchProviderException {
+        KeyStore.LoadStoreParameter loadParameter =
+                new AndroidKeyStoreLoadStoreParameter(KeyProperties.legacyUidToNamespace(uid));
         KeyStore result = KeyStore.getInstance("AndroidKeyStore");
         try {
             result.load(loadParameter);
             return result;
         } catch (IOException | NoSuchAlgorithmException | CertificateException e) {
-            throw new KeyStoreException("Failed to load AndroidKeyStore KeyStore for UID " + uid, e);
+            throw new KeyStoreException(
+                    "Failed to load AndroidKeyStore KeyStore for UID " + uid, e);
         }
     }
 }

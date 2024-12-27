@@ -2,30 +2,30 @@ package android.os;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.AudioAttributes;
-import android.os.IBinder;
-import android.os.IExternalVibrationController;
-import android.os.Parcelable;
-import android.os.VibrationAttributes;
 import android.util.Slog;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 /* loaded from: classes3.dex */
 public class ExternalVibration implements Parcelable {
-    public static final Parcelable.Creator<ExternalVibration> CREATOR = new Parcelable.Creator<ExternalVibration>() { // from class: android.os.ExternalVibration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExternalVibration createFromParcel(Parcel in) {
-            return new ExternalVibration(in);
-        }
+    public static final Parcelable.Creator<ExternalVibration> CREATOR =
+            new Parcelable.Creator<
+                    ExternalVibration>() { // from class: android.os.ExternalVibration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExternalVibration createFromParcel(Parcel in) {
+                    return new ExternalVibration(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExternalVibration[] newArray(int size) {
-            return new ExternalVibration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExternalVibration[] newArray(int size) {
+                    return new ExternalVibration[size];
+                }
+            };
     private static final String TAG = "ExternalVibration";
     private AudioAttributes mAttrs;
     private IExternalVibrationController mController;
@@ -33,11 +33,17 @@ public class ExternalVibration implements Parcelable {
     private IBinder mToken;
     private int mUid;
 
-    public ExternalVibration(int uid, String pkg, AudioAttributes attrs, IExternalVibrationController controller) {
+    public ExternalVibration(
+            int uid, String pkg, AudioAttributes attrs, IExternalVibrationController controller) {
         this(uid, pkg, attrs, controller, new Binder());
     }
 
-    public ExternalVibration(int uid, String pkg, AudioAttributes attrs, IExternalVibrationController controller, IBinder token) {
+    public ExternalVibration(
+            int uid,
+            String pkg,
+            AudioAttributes attrs,
+            IExternalVibrationController controller,
+            IBinder token) {
         this.mUid = uid;
         this.mPkg = (String) Preconditions.checkNotNull(pkg);
         this.mAttrs = (AudioAttributes) Preconditions.checkNotNull(attrs);
@@ -47,7 +53,12 @@ public class ExternalVibration implements Parcelable {
     }
 
     private ExternalVibration(Parcel in) {
-        this(in.readInt(), in.readString(), readAudioAttributes(in), IExternalVibrationController.Stub.asInterface(in.readStrongBinder()), in.readStrongBinder());
+        this(
+                in.readInt(),
+                in.readString(),
+                readAudioAttributes(in),
+                IExternalVibrationController.Stub.asInterface(in.readStrongBinder()),
+                in.readStrongBinder());
     }
 
     private static AudioAttributes readAudioAttributes(Parcel in) {
@@ -60,7 +71,12 @@ public class ExternalVibration implements Parcelable {
             tags.add(tag);
         }
         AudioAttributes.Builder builder = new AudioAttributes.Builder();
-        return builder.setUsage(usage).setContentType(contentType).setCapturePreset(capturePreset).setFlags(flags).addTags(tags).build();
+        return builder.setUsage(usage)
+                .setContentType(contentType)
+                .setCapturePreset(capturePreset)
+                .setFlags(flags)
+                .addTags(tags)
+                .build();
     }
 
     public int getUid() {
@@ -128,7 +144,17 @@ public class ExternalVibration implements Parcelable {
     }
 
     public String toString() {
-        return "ExternalVibration{uid=" + this.mUid + ", pkg=" + this.mPkg + ", attrs=" + this.mAttrs + ", controller=" + this.mController + "token=" + this.mToken + "}";
+        return "ExternalVibration{uid="
+                + this.mUid
+                + ", pkg="
+                + this.mPkg
+                + ", attrs="
+                + this.mAttrs
+                + ", controller="
+                + this.mController
+                + "token="
+                + this.mToken
+                + "}";
     }
 
     @Override // android.os.Parcelable

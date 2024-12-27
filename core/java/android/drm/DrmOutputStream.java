@@ -5,13 +5,16 @@ import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
 import android.util.Log;
+
 import com.android.internal.util.ArrayUtils;
+
+import libcore.io.IoBridge;
+import libcore.io.Streams;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.UnknownServiceException;
-import libcore.io.IoBridge;
-import libcore.io.Streams;
 
 @Deprecated
 /* loaded from: classes.dex */
@@ -22,7 +25,8 @@ public class DrmOutputStream extends OutputStream {
     private final ParcelFileDescriptor mPfd;
     private int mSessionId;
 
-    public DrmOutputStream(DrmManagerClient client, ParcelFileDescriptor pfd, String mimeType) throws IOException {
+    public DrmOutputStream(DrmManagerClient client, ParcelFileDescriptor pfd, String mimeType)
+            throws IOException {
         this.mSessionId = -1;
         this.mClient = client;
         this.mPfd = pfd;

@@ -1,6 +1,7 @@
 package android.os;
 
 import android.util.Slog;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -18,7 +19,8 @@ public class SELinux {
     private static final String TAG = "SELinux";
     private static Object lock = new Object();
 
-    public static final native boolean checkSELinuxAccess(String str, String str2, String str3, String str4);
+    public static final native boolean checkSELinuxAccess(
+            String str, String str2, String str3, String str4);
 
     public static native boolean compareHashValue(int i);
 
@@ -42,7 +44,8 @@ public class SELinux {
 
     public static final native String getSEPolicyVersion();
 
-    private static final native String getType(int i, String str, String str2, boolean z, boolean z2);
+    private static final native String getType(
+            int i, String str, String str2, boolean z, boolean z2);
 
     public static final native boolean isSELinuxEnabled();
 
@@ -101,14 +104,16 @@ public class SELinux {
         return native_recursive_restorecon_with_category(pathname, userid);
     }
 
-    public static String getDomain(int uid, String seinfo, String pkgname, boolean isSystemServer) throws NullPointerException {
+    public static String getDomain(int uid, String seinfo, String pkgname, boolean isSystemServer)
+            throws NullPointerException {
         if (pkgname == null || seinfo == null) {
             throw new NullPointerException();
         }
         return getType(uid, seinfo, pkgname, isSystemServer, true);
     }
 
-    public static String getFileType(int uid, String seinfo, String pkgname, boolean isSystemServer) throws NullPointerException {
+    public static String getFileType(int uid, String seinfo, String pkgname, boolean isSystemServer)
+            throws NullPointerException {
         if (pkgname == null || seinfo == null) {
             throw new NullPointerException();
         }

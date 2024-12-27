@@ -3,7 +3,6 @@ package android.companion.virtual;
 import android.Manifest;
 import android.app.ActivityThread;
 import android.app.PendingIntent;
-import android.companion.virtual.IVirtualDeviceIntentInterceptor;
 import android.companion.virtual.audio.IAudioConfigChangedCallback;
 import android.companion.virtual.audio.IAudioRoutingCallback;
 import android.companion.virtual.camera.VirtualCameraConfig;
@@ -32,6 +31,7 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -42,17 +42,25 @@ public interface IVirtualDevice extends IInterface {
 
     void close() throws RemoteException;
 
-    void createVirtualDpad(VirtualDpadConfig virtualDpadConfig, IBinder iBinder) throws RemoteException;
+    void createVirtualDpad(VirtualDpadConfig virtualDpadConfig, IBinder iBinder)
+            throws RemoteException;
 
-    void createVirtualKeyboard(VirtualKeyboardConfig virtualKeyboardConfig, IBinder iBinder) throws RemoteException;
+    void createVirtualKeyboard(VirtualKeyboardConfig virtualKeyboardConfig, IBinder iBinder)
+            throws RemoteException;
 
-    void createVirtualMouse(VirtualMouseConfig virtualMouseConfig, IBinder iBinder) throws RemoteException;
+    void createVirtualMouse(VirtualMouseConfig virtualMouseConfig, IBinder iBinder)
+            throws RemoteException;
 
-    void createVirtualNavigationTouchpad(VirtualNavigationTouchpadConfig virtualNavigationTouchpadConfig, IBinder iBinder) throws RemoteException;
+    void createVirtualNavigationTouchpad(
+            VirtualNavigationTouchpadConfig virtualNavigationTouchpadConfig, IBinder iBinder)
+            throws RemoteException;
 
-    void createVirtualStylus(VirtualStylusConfig virtualStylusConfig, IBinder iBinder) throws RemoteException;
+    void createVirtualStylus(VirtualStylusConfig virtualStylusConfig, IBinder iBinder)
+            throws RemoteException;
 
-    void createVirtualTouchscreen(VirtualTouchscreenConfig virtualTouchscreenConfig, IBinder iBinder) throws RemoteException;
+    void createVirtualTouchscreen(
+            VirtualTouchscreenConfig virtualTouchscreenConfig, IBinder iBinder)
+            throws RemoteException;
 
     int getAssociationId() throws RemoteException;
 
@@ -74,35 +82,53 @@ public interface IVirtualDevice extends IInterface {
 
     boolean hasCustomAudioInputSupport() throws RemoteException;
 
-    void launchPendingIntent(int i, PendingIntent pendingIntent, ResultReceiver resultReceiver) throws RemoteException;
+    void launchPendingIntent(int i, PendingIntent pendingIntent, ResultReceiver resultReceiver)
+            throws RemoteException;
 
     void onAudioSessionEnded() throws RemoteException;
 
-    void onAudioSessionStarting(int i, IAudioRoutingCallback iAudioRoutingCallback, IAudioConfigChangedCallback iAudioConfigChangedCallback) throws RemoteException;
+    void onAudioSessionStarting(
+            int i,
+            IAudioRoutingCallback iAudioRoutingCallback,
+            IAudioConfigChangedCallback iAudioConfigChangedCallback)
+            throws RemoteException;
 
-    void registerIntentInterceptor(IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptor, IntentFilter intentFilter) throws RemoteException;
+    void registerIntentInterceptor(
+            IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptor,
+            IntentFilter intentFilter)
+            throws RemoteException;
 
     void registerVirtualCamera(VirtualCameraConfig virtualCameraConfig) throws RemoteException;
 
     void removeActivityPolicyExemption(ComponentName componentName) throws RemoteException;
 
-    boolean sendButtonEvent(IBinder iBinder, VirtualMouseButtonEvent virtualMouseButtonEvent) throws RemoteException;
+    boolean sendButtonEvent(IBinder iBinder, VirtualMouseButtonEvent virtualMouseButtonEvent)
+            throws RemoteException;
 
-    boolean sendDpadKeyEvent(IBinder iBinder, VirtualKeyEvent virtualKeyEvent) throws RemoteException;
+    boolean sendDpadKeyEvent(IBinder iBinder, VirtualKeyEvent virtualKeyEvent)
+            throws RemoteException;
 
     boolean sendKeyEvent(IBinder iBinder, VirtualKeyEvent virtualKeyEvent) throws RemoteException;
 
-    boolean sendRelativeEvent(IBinder iBinder, VirtualMouseRelativeEvent virtualMouseRelativeEvent) throws RemoteException;
+    boolean sendRelativeEvent(IBinder iBinder, VirtualMouseRelativeEvent virtualMouseRelativeEvent)
+            throws RemoteException;
 
-    boolean sendScrollEvent(IBinder iBinder, VirtualMouseScrollEvent virtualMouseScrollEvent) throws RemoteException;
+    boolean sendScrollEvent(IBinder iBinder, VirtualMouseScrollEvent virtualMouseScrollEvent)
+            throws RemoteException;
 
-    boolean sendSensorEvent(IBinder iBinder, VirtualSensorEvent virtualSensorEvent) throws RemoteException;
+    boolean sendSensorEvent(IBinder iBinder, VirtualSensorEvent virtualSensorEvent)
+            throws RemoteException;
 
-    boolean sendStylusButtonEvent(IBinder iBinder, VirtualStylusButtonEvent virtualStylusButtonEvent) throws RemoteException;
+    boolean sendStylusButtonEvent(
+            IBinder iBinder, VirtualStylusButtonEvent virtualStylusButtonEvent)
+            throws RemoteException;
 
-    boolean sendStylusMotionEvent(IBinder iBinder, VirtualStylusMotionEvent virtualStylusMotionEvent) throws RemoteException;
+    boolean sendStylusMotionEvent(
+            IBinder iBinder, VirtualStylusMotionEvent virtualStylusMotionEvent)
+            throws RemoteException;
 
-    boolean sendTouchEvent(IBinder iBinder, VirtualTouchEvent virtualTouchEvent) throws RemoteException;
+    boolean sendTouchEvent(IBinder iBinder, VirtualTouchEvent virtualTouchEvent)
+            throws RemoteException;
 
     void setDevicePolicy(int i, int i2) throws RemoteException;
 
@@ -112,7 +138,8 @@ public interface IVirtualDevice extends IInterface {
 
     void unregisterInputDevice(IBinder iBinder) throws RemoteException;
 
-    void unregisterIntentInterceptor(IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptor) throws RemoteException;
+    void unregisterIntentInterceptor(
+            IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptor) throws RemoteException;
 
     void unregisterVirtualCamera(VirtualCameraConfig virtualCameraConfig) throws RemoteException;
 
@@ -148,56 +175,53 @@ public interface IVirtualDevice extends IInterface {
         }
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void setDevicePolicy(int policyType, int devicePolicy) throws RemoteException {
-        }
+        public void setDevicePolicy(int policyType, int devicePolicy) throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void addActivityPolicyExemption(ComponentName exemption) throws RemoteException {
-        }
+        public void addActivityPolicyExemption(ComponentName exemption) throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void removeActivityPolicyExemption(ComponentName exemption) throws RemoteException {
-        }
+        public void removeActivityPolicyExemption(ComponentName exemption) throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void onAudioSessionStarting(int displayId, IAudioRoutingCallback routingCallback, IAudioConfigChangedCallback configChangedCallback) throws RemoteException {
-        }
+        public void onAudioSessionStarting(
+                int displayId,
+                IAudioRoutingCallback routingCallback,
+                IAudioConfigChangedCallback configChangedCallback)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void onAudioSessionEnded() throws RemoteException {
-        }
+        public void onAudioSessionEnded() throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void createVirtualDpad(VirtualDpadConfig config, IBinder token) throws RemoteException {
-        }
+        public void createVirtualDpad(VirtualDpadConfig config, IBinder token)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void createVirtualKeyboard(VirtualKeyboardConfig config, IBinder token) throws RemoteException {
-        }
+        public void createVirtualKeyboard(VirtualKeyboardConfig config, IBinder token)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void createVirtualMouse(VirtualMouseConfig config, IBinder token) throws RemoteException {
-        }
+        public void createVirtualMouse(VirtualMouseConfig config, IBinder token)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void createVirtualTouchscreen(VirtualTouchscreenConfig config, IBinder token) throws RemoteException {
-        }
+        public void createVirtualTouchscreen(VirtualTouchscreenConfig config, IBinder token)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void createVirtualNavigationTouchpad(VirtualNavigationTouchpadConfig config, IBinder token) throws RemoteException {
-        }
+        public void createVirtualNavigationTouchpad(
+                VirtualNavigationTouchpadConfig config, IBinder token) throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void createVirtualStylus(VirtualStylusConfig config, IBinder token) throws RemoteException {
-        }
+        public void createVirtualStylus(VirtualStylusConfig config, IBinder token)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void unregisterInputDevice(IBinder token) throws RemoteException {
-        }
+        public void unregisterInputDevice(IBinder token) throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
         public int getInputDeviceId(IBinder token) throws RemoteException {
@@ -205,7 +229,8 @@ public interface IVirtualDevice extends IInterface {
         }
 
         @Override // android.companion.virtual.IVirtualDevice
-        public boolean sendDpadKeyEvent(IBinder token, VirtualKeyEvent event) throws RemoteException {
+        public boolean sendDpadKeyEvent(IBinder token, VirtualKeyEvent event)
+                throws RemoteException {
             return false;
         }
 
@@ -215,32 +240,38 @@ public interface IVirtualDevice extends IInterface {
         }
 
         @Override // android.companion.virtual.IVirtualDevice
-        public boolean sendButtonEvent(IBinder token, VirtualMouseButtonEvent event) throws RemoteException {
+        public boolean sendButtonEvent(IBinder token, VirtualMouseButtonEvent event)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.companion.virtual.IVirtualDevice
-        public boolean sendRelativeEvent(IBinder token, VirtualMouseRelativeEvent event) throws RemoteException {
+        public boolean sendRelativeEvent(IBinder token, VirtualMouseRelativeEvent event)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.companion.virtual.IVirtualDevice
-        public boolean sendScrollEvent(IBinder token, VirtualMouseScrollEvent event) throws RemoteException {
+        public boolean sendScrollEvent(IBinder token, VirtualMouseScrollEvent event)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.companion.virtual.IVirtualDevice
-        public boolean sendTouchEvent(IBinder token, VirtualTouchEvent event) throws RemoteException {
+        public boolean sendTouchEvent(IBinder token, VirtualTouchEvent event)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.companion.virtual.IVirtualDevice
-        public boolean sendStylusMotionEvent(IBinder token, VirtualStylusMotionEvent event) throws RemoteException {
+        public boolean sendStylusMotionEvent(IBinder token, VirtualStylusMotionEvent event)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.companion.virtual.IVirtualDevice
-        public boolean sendStylusButtonEvent(IBinder token, VirtualStylusButtonEvent event) throws RemoteException {
+        public boolean sendStylusButtonEvent(IBinder token, VirtualStylusButtonEvent event)
+                throws RemoteException {
             return false;
         }
 
@@ -250,13 +281,15 @@ public interface IVirtualDevice extends IInterface {
         }
 
         @Override // android.companion.virtual.IVirtualDevice
-        public boolean sendSensorEvent(IBinder token, VirtualSensorEvent event) throws RemoteException {
+        public boolean sendSensorEvent(IBinder token, VirtualSensorEvent event)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void launchPendingIntent(int displayId, PendingIntent pendingIntent, ResultReceiver resultReceiver) throws RemoteException {
-        }
+        public void launchPendingIntent(
+                int displayId, PendingIntent pendingIntent, ResultReceiver resultReceiver)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
         public PointF getCursorPosition(IBinder token) throws RemoteException {
@@ -264,28 +297,25 @@ public interface IVirtualDevice extends IInterface {
         }
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void setShowPointerIcon(boolean showPointerIcon) throws RemoteException {
-        }
+        public void setShowPointerIcon(boolean showPointerIcon) throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void setDisplayImePolicy(int displayId, int policy) throws RemoteException {
-        }
+        public void setDisplayImePolicy(int displayId, int policy) throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void registerIntentInterceptor(IVirtualDeviceIntentInterceptor intentInterceptor, IntentFilter filter) throws RemoteException {
-        }
+        public void registerIntentInterceptor(
+                IVirtualDeviceIntentInterceptor intentInterceptor, IntentFilter filter)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void unregisterIntentInterceptor(IVirtualDeviceIntentInterceptor intentInterceptor) throws RemoteException {
-        }
+        public void unregisterIntentInterceptor(IVirtualDeviceIntentInterceptor intentInterceptor)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void registerVirtualCamera(VirtualCameraConfig camera) throws RemoteException {
-        }
+        public void registerVirtualCamera(VirtualCameraConfig camera) throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
-        public void unregisterVirtualCamera(VirtualCameraConfig camera) throws RemoteException {
-        }
+        public void unregisterVirtualCamera(VirtualCameraConfig camera) throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDevice
         public String getVirtualCameraId(VirtualCameraConfig camera) throws RemoteException {
@@ -298,7 +328,7 @@ public interface IVirtualDevice extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualDevice {
+    public abstract static class Stub extends Binder implements IVirtualDevice {
         static final int TRANSACTION_addActivityPolicyExemption = 9;
         static final int TRANSACTION_close = 7;
         static final int TRANSACTION_createVirtualDpad = 13;
@@ -350,7 +380,9 @@ public interface IVirtualDevice extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IVirtualDevice asInterface(IBinder obj) {
@@ -460,7 +492,8 @@ public interface IVirtualDevice extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVirtualDevice.DESCRIPTOR);
             }
@@ -513,21 +546,25 @@ public interface IVirtualDevice extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 9:
-                    ComponentName _arg03 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg03 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     addActivityPolicyExemption(_arg03);
                     reply.writeNoException();
                     return true;
                 case 10:
-                    ComponentName _arg04 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg04 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     removeActivityPolicyExemption(_arg04);
                     reply.writeNoException();
                     return true;
                 case 11:
                     int _arg05 = data.readInt();
-                    IAudioRoutingCallback _arg12 = IAudioRoutingCallback.Stub.asInterface(data.readStrongBinder());
-                    IAudioConfigChangedCallback _arg2 = IAudioConfigChangedCallback.Stub.asInterface(data.readStrongBinder());
+                    IAudioRoutingCallback _arg12 =
+                            IAudioRoutingCallback.Stub.asInterface(data.readStrongBinder());
+                    IAudioConfigChangedCallback _arg2 =
+                            IAudioConfigChangedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onAudioSessionStarting(_arg05, _arg12, _arg2);
                     reply.writeNoException();
@@ -537,42 +574,51 @@ public interface IVirtualDevice extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 13:
-                    VirtualDpadConfig _arg06 = (VirtualDpadConfig) data.readTypedObject(VirtualDpadConfig.CREATOR);
+                    VirtualDpadConfig _arg06 =
+                            (VirtualDpadConfig) data.readTypedObject(VirtualDpadConfig.CREATOR);
                     IBinder _arg13 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     createVirtualDpad(_arg06, _arg13);
                     reply.writeNoException();
                     return true;
                 case 14:
-                    VirtualKeyboardConfig _arg07 = (VirtualKeyboardConfig) data.readTypedObject(VirtualKeyboardConfig.CREATOR);
+                    VirtualKeyboardConfig _arg07 =
+                            (VirtualKeyboardConfig)
+                                    data.readTypedObject(VirtualKeyboardConfig.CREATOR);
                     IBinder _arg14 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     createVirtualKeyboard(_arg07, _arg14);
                     reply.writeNoException();
                     return true;
                 case 15:
-                    VirtualMouseConfig _arg08 = (VirtualMouseConfig) data.readTypedObject(VirtualMouseConfig.CREATOR);
+                    VirtualMouseConfig _arg08 =
+                            (VirtualMouseConfig) data.readTypedObject(VirtualMouseConfig.CREATOR);
                     IBinder _arg15 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     createVirtualMouse(_arg08, _arg15);
                     reply.writeNoException();
                     return true;
                 case 16:
-                    VirtualTouchscreenConfig _arg09 = (VirtualTouchscreenConfig) data.readTypedObject(VirtualTouchscreenConfig.CREATOR);
+                    VirtualTouchscreenConfig _arg09 =
+                            (VirtualTouchscreenConfig)
+                                    data.readTypedObject(VirtualTouchscreenConfig.CREATOR);
                     IBinder _arg16 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     createVirtualTouchscreen(_arg09, _arg16);
                     reply.writeNoException();
                     return true;
                 case 17:
-                    VirtualNavigationTouchpadConfig _arg010 = (VirtualNavigationTouchpadConfig) data.readTypedObject(VirtualNavigationTouchpadConfig.CREATOR);
+                    VirtualNavigationTouchpadConfig _arg010 =
+                            (VirtualNavigationTouchpadConfig)
+                                    data.readTypedObject(VirtualNavigationTouchpadConfig.CREATOR);
                     IBinder _arg17 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     createVirtualNavigationTouchpad(_arg010, _arg17);
                     reply.writeNoException();
                     return true;
                 case 18:
-                    VirtualStylusConfig _arg011 = (VirtualStylusConfig) data.readTypedObject(VirtualStylusConfig.CREATOR);
+                    VirtualStylusConfig _arg011 =
+                            (VirtualStylusConfig) data.readTypedObject(VirtualStylusConfig.CREATOR);
                     IBinder _arg18 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     createVirtualStylus(_arg011, _arg18);
@@ -593,7 +639,8 @@ public interface IVirtualDevice extends IInterface {
                     return true;
                 case 21:
                     IBinder _arg014 = data.readStrongBinder();
-                    VirtualKeyEvent _arg19 = (VirtualKeyEvent) data.readTypedObject(VirtualKeyEvent.CREATOR);
+                    VirtualKeyEvent _arg19 =
+                            (VirtualKeyEvent) data.readTypedObject(VirtualKeyEvent.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result8 = sendDpadKeyEvent(_arg014, _arg19);
                     reply.writeNoException();
@@ -601,7 +648,8 @@ public interface IVirtualDevice extends IInterface {
                     return true;
                 case 22:
                     IBinder _arg015 = data.readStrongBinder();
-                    VirtualKeyEvent _arg110 = (VirtualKeyEvent) data.readTypedObject(VirtualKeyEvent.CREATOR);
+                    VirtualKeyEvent _arg110 =
+                            (VirtualKeyEvent) data.readTypedObject(VirtualKeyEvent.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result9 = sendKeyEvent(_arg015, _arg110);
                     reply.writeNoException();
@@ -609,7 +657,9 @@ public interface IVirtualDevice extends IInterface {
                     return true;
                 case 23:
                     IBinder _arg016 = data.readStrongBinder();
-                    VirtualMouseButtonEvent _arg111 = (VirtualMouseButtonEvent) data.readTypedObject(VirtualMouseButtonEvent.CREATOR);
+                    VirtualMouseButtonEvent _arg111 =
+                            (VirtualMouseButtonEvent)
+                                    data.readTypedObject(VirtualMouseButtonEvent.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result10 = sendButtonEvent(_arg016, _arg111);
                     reply.writeNoException();
@@ -617,7 +667,9 @@ public interface IVirtualDevice extends IInterface {
                     return true;
                 case 24:
                     IBinder _arg017 = data.readStrongBinder();
-                    VirtualMouseRelativeEvent _arg112 = (VirtualMouseRelativeEvent) data.readTypedObject(VirtualMouseRelativeEvent.CREATOR);
+                    VirtualMouseRelativeEvent _arg112 =
+                            (VirtualMouseRelativeEvent)
+                                    data.readTypedObject(VirtualMouseRelativeEvent.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result11 = sendRelativeEvent(_arg017, _arg112);
                     reply.writeNoException();
@@ -625,7 +677,9 @@ public interface IVirtualDevice extends IInterface {
                     return true;
                 case 25:
                     IBinder _arg018 = data.readStrongBinder();
-                    VirtualMouseScrollEvent _arg113 = (VirtualMouseScrollEvent) data.readTypedObject(VirtualMouseScrollEvent.CREATOR);
+                    VirtualMouseScrollEvent _arg113 =
+                            (VirtualMouseScrollEvent)
+                                    data.readTypedObject(VirtualMouseScrollEvent.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result12 = sendScrollEvent(_arg018, _arg113);
                     reply.writeNoException();
@@ -633,7 +687,8 @@ public interface IVirtualDevice extends IInterface {
                     return true;
                 case 26:
                     IBinder _arg019 = data.readStrongBinder();
-                    VirtualTouchEvent _arg114 = (VirtualTouchEvent) data.readTypedObject(VirtualTouchEvent.CREATOR);
+                    VirtualTouchEvent _arg114 =
+                            (VirtualTouchEvent) data.readTypedObject(VirtualTouchEvent.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result13 = sendTouchEvent(_arg019, _arg114);
                     reply.writeNoException();
@@ -641,7 +696,9 @@ public interface IVirtualDevice extends IInterface {
                     return true;
                 case 27:
                     IBinder _arg020 = data.readStrongBinder();
-                    VirtualStylusMotionEvent _arg115 = (VirtualStylusMotionEvent) data.readTypedObject(VirtualStylusMotionEvent.CREATOR);
+                    VirtualStylusMotionEvent _arg115 =
+                            (VirtualStylusMotionEvent)
+                                    data.readTypedObject(VirtualStylusMotionEvent.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result14 = sendStylusMotionEvent(_arg020, _arg115);
                     reply.writeNoException();
@@ -649,7 +706,9 @@ public interface IVirtualDevice extends IInterface {
                     return true;
                 case 28:
                     IBinder _arg021 = data.readStrongBinder();
-                    VirtualStylusButtonEvent _arg116 = (VirtualStylusButtonEvent) data.readTypedObject(VirtualStylusButtonEvent.CREATOR);
+                    VirtualStylusButtonEvent _arg116 =
+                            (VirtualStylusButtonEvent)
+                                    data.readTypedObject(VirtualStylusButtonEvent.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result15 = sendStylusButtonEvent(_arg021, _arg116);
                     reply.writeNoException();
@@ -662,7 +721,8 @@ public interface IVirtualDevice extends IInterface {
                     return true;
                 case 30:
                     IBinder _arg022 = data.readStrongBinder();
-                    VirtualSensorEvent _arg117 = (VirtualSensorEvent) data.readTypedObject(VirtualSensorEvent.CREATOR);
+                    VirtualSensorEvent _arg117 =
+                            (VirtualSensorEvent) data.readTypedObject(VirtualSensorEvent.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result17 = sendSensorEvent(_arg022, _arg117);
                     reply.writeNoException();
@@ -670,8 +730,10 @@ public interface IVirtualDevice extends IInterface {
                     return true;
                 case 31:
                     int _arg023 = data.readInt();
-                    PendingIntent _arg118 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    ResultReceiver _arg22 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    PendingIntent _arg118 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    ResultReceiver _arg22 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     launchPendingIntent(_arg023, _arg118, _arg22);
                     reply.writeNoException();
@@ -697,32 +759,40 @@ public interface IVirtualDevice extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 35:
-                    IVirtualDeviceIntentInterceptor _arg027 = IVirtualDeviceIntentInterceptor.Stub.asInterface(data.readStrongBinder());
-                    IntentFilter _arg120 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
+                    IVirtualDeviceIntentInterceptor _arg027 =
+                            IVirtualDeviceIntentInterceptor.Stub.asInterface(
+                                    data.readStrongBinder());
+                    IntentFilter _arg120 =
+                            (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
                     data.enforceNoDataAvail();
                     registerIntentInterceptor(_arg027, _arg120);
                     reply.writeNoException();
                     return true;
                 case 36:
-                    IVirtualDeviceIntentInterceptor _arg028 = IVirtualDeviceIntentInterceptor.Stub.asInterface(data.readStrongBinder());
+                    IVirtualDeviceIntentInterceptor _arg028 =
+                            IVirtualDeviceIntentInterceptor.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterIntentInterceptor(_arg028);
                     reply.writeNoException();
                     return true;
                 case 37:
-                    VirtualCameraConfig _arg029 = (VirtualCameraConfig) data.readTypedObject(VirtualCameraConfig.CREATOR);
+                    VirtualCameraConfig _arg029 =
+                            (VirtualCameraConfig) data.readTypedObject(VirtualCameraConfig.CREATOR);
                     data.enforceNoDataAvail();
                     registerVirtualCamera(_arg029);
                     reply.writeNoException();
                     return true;
                 case 38:
-                    VirtualCameraConfig _arg030 = (VirtualCameraConfig) data.readTypedObject(VirtualCameraConfig.CREATOR);
+                    VirtualCameraConfig _arg030 =
+                            (VirtualCameraConfig) data.readTypedObject(VirtualCameraConfig.CREATOR);
                     data.enforceNoDataAvail();
                     unregisterVirtualCamera(_arg030);
                     reply.writeNoException();
                     return true;
                 case 39:
-                    VirtualCameraConfig _arg031 = (VirtualCameraConfig) data.readTypedObject(VirtualCameraConfig.CREATOR);
+                    VirtualCameraConfig _arg031 =
+                            (VirtualCameraConfig) data.readTypedObject(VirtualCameraConfig.CREATOR);
                     data.enforceNoDataAvail();
                     String _result19 = getVirtualCameraId(_arg031);
                     reply.writeNoException();
@@ -892,7 +962,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public void removeActivityPolicyExemption(ComponentName exemption) throws RemoteException {
+            public void removeActivityPolicyExemption(ComponentName exemption)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -907,7 +978,11 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public void onAudioSessionStarting(int displayId, IAudioRoutingCallback routingCallback, IAudioConfigChangedCallback configChangedCallback) throws RemoteException {
+            public void onAudioSessionStarting(
+                    int displayId,
+                    IAudioRoutingCallback routingCallback,
+                    IAudioConfigChangedCallback configChangedCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -938,7 +1013,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public void createVirtualDpad(VirtualDpadConfig config, IBinder token) throws RemoteException {
+            public void createVirtualDpad(VirtualDpadConfig config, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -954,7 +1030,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public void createVirtualKeyboard(VirtualKeyboardConfig config, IBinder token) throws RemoteException {
+            public void createVirtualKeyboard(VirtualKeyboardConfig config, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -970,7 +1047,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public void createVirtualMouse(VirtualMouseConfig config, IBinder token) throws RemoteException {
+            public void createVirtualMouse(VirtualMouseConfig config, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -986,7 +1064,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public void createVirtualTouchscreen(VirtualTouchscreenConfig config, IBinder token) throws RemoteException {
+            public void createVirtualTouchscreen(VirtualTouchscreenConfig config, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1002,7 +1081,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public void createVirtualNavigationTouchpad(VirtualNavigationTouchpadConfig config, IBinder token) throws RemoteException {
+            public void createVirtualNavigationTouchpad(
+                    VirtualNavigationTouchpadConfig config, IBinder token) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1018,7 +1098,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public void createVirtualStylus(VirtualStylusConfig config, IBinder token) throws RemoteException {
+            public void createVirtualStylus(VirtualStylusConfig config, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1066,7 +1147,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public boolean sendDpadKeyEvent(IBinder token, VirtualKeyEvent event) throws RemoteException {
+            public boolean sendDpadKeyEvent(IBinder token, VirtualKeyEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1084,7 +1166,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public boolean sendKeyEvent(IBinder token, VirtualKeyEvent event) throws RemoteException {
+            public boolean sendKeyEvent(IBinder token, VirtualKeyEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1102,7 +1185,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public boolean sendButtonEvent(IBinder token, VirtualMouseButtonEvent event) throws RemoteException {
+            public boolean sendButtonEvent(IBinder token, VirtualMouseButtonEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1120,7 +1204,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public boolean sendRelativeEvent(IBinder token, VirtualMouseRelativeEvent event) throws RemoteException {
+            public boolean sendRelativeEvent(IBinder token, VirtualMouseRelativeEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1138,7 +1223,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public boolean sendScrollEvent(IBinder token, VirtualMouseScrollEvent event) throws RemoteException {
+            public boolean sendScrollEvent(IBinder token, VirtualMouseScrollEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1156,7 +1242,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public boolean sendTouchEvent(IBinder token, VirtualTouchEvent event) throws RemoteException {
+            public boolean sendTouchEvent(IBinder token, VirtualTouchEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1174,7 +1261,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public boolean sendStylusMotionEvent(IBinder token, VirtualStylusMotionEvent event) throws RemoteException {
+            public boolean sendStylusMotionEvent(IBinder token, VirtualStylusMotionEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1192,7 +1280,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public boolean sendStylusButtonEvent(IBinder token, VirtualStylusButtonEvent event) throws RemoteException {
+            public boolean sendStylusButtonEvent(IBinder token, VirtualStylusButtonEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1217,7 +1306,8 @@ public interface IVirtualDevice extends IInterface {
                     _data.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
                     this.mRemote.transact(29, _data, _reply, 0);
                     _reply.readException();
-                    List<VirtualSensor> _result = _reply.createTypedArrayList(VirtualSensor.CREATOR);
+                    List<VirtualSensor> _result =
+                            _reply.createTypedArrayList(VirtualSensor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1226,7 +1316,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public boolean sendSensorEvent(IBinder token, VirtualSensorEvent event) throws RemoteException {
+            public boolean sendSensorEvent(IBinder token, VirtualSensorEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1244,7 +1335,9 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public void launchPendingIntent(int displayId, PendingIntent pendingIntent, ResultReceiver resultReceiver) throws RemoteException {
+            public void launchPendingIntent(
+                    int displayId, PendingIntent pendingIntent, ResultReceiver resultReceiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1309,7 +1402,9 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public void registerIntentInterceptor(IVirtualDeviceIntentInterceptor intentInterceptor, IntentFilter filter) throws RemoteException {
+            public void registerIntentInterceptor(
+                    IVirtualDeviceIntentInterceptor intentInterceptor, IntentFilter filter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1325,7 +1420,8 @@ public interface IVirtualDevice extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDevice
-            public void unregisterIntentInterceptor(IVirtualDeviceIntentInterceptor intentInterceptor) throws RemoteException {
+            public void unregisterIntentInterceptor(
+                    IVirtualDeviceIntentInterceptor intentInterceptor) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1388,123 +1484,154 @@ public interface IVirtualDevice extends IInterface {
         }
 
         protected void close_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void setDevicePolicy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void addActivityPolicyExemption_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void removeActivityPolicyExemption_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void onAudioSessionStarting_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void onAudioSessionEnded_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void createVirtualDpad_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void createVirtualKeyboard_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void createVirtualMouse_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void createVirtualTouchscreen_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
-        protected void createVirtualNavigationTouchpad_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+        protected void createVirtualNavigationTouchpad_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void createVirtualStylus_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void unregisterInputDevice_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void sendDpadKeyEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void sendKeyEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void sendButtonEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void sendRelativeEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void sendScrollEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void sendTouchEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void sendStylusMotionEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void sendStylusButtonEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void getVirtualSensorList_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void sendSensorEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void setShowPointerIcon_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void setDisplayImePolicy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void registerIntentInterceptor_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void unregisterIntentInterceptor_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void registerVirtualCamera_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void unregisterVirtualCamera_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void getVirtualCameraId_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

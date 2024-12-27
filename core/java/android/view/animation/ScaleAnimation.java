@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.animation.Animation;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -118,7 +118,8 @@ public class ScaleAnimation extends Animation {
         this.mPivotY = 0.0f;
     }
 
-    public ScaleAnimation(float fromX, float toX, float fromY, float toY, float pivotX, float pivotY) {
+    public ScaleAnimation(
+            float fromX, float toX, float fromY, float toY, float pivotX, float pivotY) {
         this.mFromXType = 0;
         this.mToXType = 0;
         this.mFromYType = 0;
@@ -143,7 +144,15 @@ public class ScaleAnimation extends Animation {
         initializePivotPoint();
     }
 
-    public ScaleAnimation(float fromX, float toX, float fromY, float toY, int pivotXType, float pivotXValue, int pivotYType, float pivotYValue) {
+    public ScaleAnimation(
+            float fromX,
+            float toX,
+            float fromY,
+            float toY,
+            int pivotXType,
+            float pivotXValue,
+            int pivotYType,
+            float pivotYValue) {
         this.mFromXType = 0;
         this.mToXType = 0;
         this.mFromYType = 0;
@@ -213,9 +222,11 @@ public class ScaleAnimation extends Animation {
     @Override // android.view.animation.Animation
     public void initialize(int width, int height, int parentWidth, int parentHeight) {
         super.initialize(width, height, parentWidth, parentHeight);
-        this.mFromX = resolveScale(this.mFromX, this.mFromXType, this.mFromXData, width, parentWidth);
+        this.mFromX =
+                resolveScale(this.mFromX, this.mFromXType, this.mFromXData, width, parentWidth);
         this.mToX = resolveScale(this.mToX, this.mToXType, this.mToXData, width, parentWidth);
-        this.mFromY = resolveScale(this.mFromY, this.mFromYType, this.mFromYData, height, parentHeight);
+        this.mFromY =
+                resolveScale(this.mFromY, this.mFromYType, this.mFromYData, height, parentHeight);
         this.mToY = resolveScale(this.mToY, this.mToYType, this.mToYData, height, parentHeight);
         this.mPivotX = resolveSize(this.mPivotXType, this.mPivotXValue, width, parentWidth);
         this.mPivotY = resolveSize(this.mPivotYType, this.mPivotYValue, height, parentHeight);

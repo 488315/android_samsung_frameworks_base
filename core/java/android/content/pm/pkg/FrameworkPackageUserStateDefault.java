@@ -1,6 +1,7 @@
 package android.content.pm.pkg;
 
 import android.content.pm.overlay.OverlayPaths;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -8,8 +9,7 @@ import java.util.Set;
 @Deprecated
 /* loaded from: classes.dex */
 class FrameworkPackageUserStateDefault implements FrameworkPackageUserState {
-    FrameworkPackageUserStateDefault() {
-    }
+    FrameworkPackageUserStateDefault() {}
 
     @Override // android.content.pm.pkg.FrameworkPackageUserState
     public int getEnabledState() {

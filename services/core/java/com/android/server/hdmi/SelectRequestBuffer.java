@@ -3,6 +3,7 @@ package com.android.server.hdmi;
 import android.hardware.hdmi.IHdmiControlCallback;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -15,8 +16,7 @@ public class SelectRequestBuffer {
     /* renamed from: com.android.server.hdmi.SelectRequestBuffer$1, reason: invalid class name */
     public final class AnonymousClass1 extends SelectRequestBuffer {
         @Override // com.android.server.hdmi.SelectRequestBuffer
-        public final void process() {
-        }
+        public final void process() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,7 +26,11 @@ public class SelectRequestBuffer {
         public final int mId;
         public final HdmiControlService mService;
 
-        public PortSelectRequest(HdmiControlService hdmiControlService, int i, IHdmiControlCallback iHdmiControlCallback, int i2) {
+        public PortSelectRequest(
+                HdmiControlService hdmiControlService,
+                int i,
+                IHdmiControlCallback iHdmiControlCallback,
+                int i2) {
             this.$r8$classId = i2;
             this.mService = hdmiControlService;
             this.mId = i;
@@ -64,7 +68,8 @@ public class SelectRequestBuffer {
                         HdmiControlService hdmiControlService = portSelectRequest.mService;
                         HdmiCecLocalDeviceTv tv = hdmiControlService.tv();
                         if (tv == null) {
-                            HdmiCecLocalDeviceAudioSystem audioSystem = hdmiControlService.audioSystem();
+                            HdmiCecLocalDeviceAudioSystem audioSystem =
+                                    hdmiControlService.audioSystem();
                             if (audioSystem != null) {
                                 audioSystem.doManualPortSwitching(i, portSelectRequest.mCallback);
                                 break;
@@ -79,8 +84,12 @@ public class SelectRequestBuffer {
                     if (portSelectRequest.isLocalDeviceReady()) {
                         StringBuilder sb2 = new StringBuilder("calling delayed deviceSelect id:");
                         int i2 = portSelectRequest.mId;
-                        GmsAlarmManager$$ExternalSyntheticOutline0.m(sb2, i2, "SelectRequestBuffer");
-                        portSelectRequest.mService.tv().deviceSelect(i2, portSelectRequest.mCallback);
+                        GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                                sb2, i2, "SelectRequestBuffer");
+                        portSelectRequest
+                                .mService
+                                .tv()
+                                .deviceSelect(i2, portSelectRequest.mCallback);
                         break;
                     }
                     break;

@@ -7,7 +7,9 @@ import android.media.tv.tuner.filter.Filter;
 import android.os.ParcelFileDescriptor;
 import android.os.Process;
 import android.util.Log;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -30,8 +32,7 @@ public class DvrPlayback implements AutoCloseable {
     private int mUserId = Process.myUid();
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface PlaybackStatus {
-    }
+    @interface PlaybackStatus {}
 
     private native int nativeAttachFilter(Filter filter);
 
@@ -76,12 +77,14 @@ public class DvrPlayback implements AutoCloseable {
         }
         synchronized (this.mListenerLock) {
             if (this.mExecutor != null && this.mListener != null) {
-                this.mExecutor.execute(new Runnable() { // from class: android.media.tv.tuner.dvr.DvrPlayback$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        DvrPlayback.this.lambda$onPlaybackStatusChanged$0(status);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.media.tv.tuner.dvr.DvrPlayback$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                DvrPlayback.this.lambda$onPlaybackStatusChanged$0(status);
+                            }
+                        });
             }
         }
     }
@@ -110,7 +113,8 @@ public class DvrPlayback implements AutoCloseable {
     }
 
     public int setPlaybackBufferStatusCheckIntervalHint(long durationInMs) {
-        if (!TunerVersionChecker.checkHigherOrEqualVersionTo(196608, "Set status check interval hint")) {
+        if (!TunerVersionChecker.checkHigherOrEqualVersionTo(
+                196608, "Set status check interval hint")) {
             return 1;
         }
         return nativeSetStatusCheckIntervalHint(durationInMs);
@@ -152,7 +156,8 @@ public class DvrPlayback implements AutoCloseable {
 
     public long read(byte[] buffer, long offset, long size) {
         if (size + offset > buffer.length) {
-            throw new ArrayIndexOutOfBoundsException("Array length=" + buffer.length + ", offset=" + offset + ", size=" + size);
+            throw new ArrayIndexOutOfBoundsException(
+                    "Array length=" + buffer.length + ", offset=" + offset + ", size=" + size);
         }
         return nativeRead(buffer, offset, size);
     }

@@ -4,7 +4,9 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.IBinder;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import dalvik.system.PathClassLoader;
+
 import java.lang.reflect.Method;
 
 /* loaded from: classes6.dex */
@@ -17,11 +19,19 @@ public class SemCodecSolutionService {
         this.mClass = null;
         this.mService = null;
         try {
-            PathClassLoader loader = new PathClassLoader("/system/framework/vendor.samsung.frameworks.codecsolution-service.jar", getClass().getClassLoader());
-            Class classICS = loader.loadClass("vendor.samsung.frameworks.codecsolution.ISehCodecSolution");
-            Class classStub = loader.loadClass("vendor.samsung.frameworks.codecsolution.ISehCodecSolution$Stub");
+            PathClassLoader loader =
+                    new PathClassLoader(
+                            "/system/framework/vendor.samsung.frameworks.codecsolution-service.jar",
+                            getClass().getClassLoader());
+            Class classICS =
+                    loader.loadClass("vendor.samsung.frameworks.codecsolution.ISehCodecSolution");
+            Class classStub =
+                    loader.loadClass(
+                            "vendor.samsung.frameworks.codecsolution.ISehCodecSolution$Stub");
             Method asInterface = classStub.getDeclaredMethod("asInterface", IBinder.class);
-            IBinder service = ServiceManager.getService("vendor.samsung.frameworks.codecsolution.ISehCodecSolution/default");
+            IBinder service =
+                    ServiceManager.getService(
+                            "vendor.samsung.frameworks.codecsolution.ISehCodecSolution/default");
             Object proxy = asInterface.invoke(classStub, service);
             this.mClass = classICS;
             this.mService = proxy;

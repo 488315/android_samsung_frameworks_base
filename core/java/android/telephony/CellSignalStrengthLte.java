@@ -4,6 +4,7 @@ import android.content.pm.PackageManager;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -29,29 +30,41 @@ public final class CellSignalStrengthLte extends CellSignalStrength implements P
     private int mRssnr;
     private int mSignalStrength;
     private int mTimingAdvance;
-    private static final int[] sRsrpThresholds = {PackageManager.INSTALL_FAILED_ABORTED, -105, -95, -85};
+    private static final int[] sRsrpThresholds = {
+        PackageManager.INSTALL_FAILED_ABORTED, -105, -95, -85
+    };
     private static final int[] sRsrqThresholds = {-19, -17, -14, -12};
     private static final int[] sRssnrThresholds = {-3, 1, 5, 13};
     private static final CellSignalStrengthLte sInvalid = new CellSignalStrengthLte();
-    public static final Parcelable.Creator<CellSignalStrengthLte> CREATOR = new Parcelable.Creator<CellSignalStrengthLte>() { // from class: android.telephony.CellSignalStrengthLte.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellSignalStrengthLte createFromParcel(Parcel in) {
-            return new CellSignalStrengthLte(in);
-        }
+    public static final Parcelable.Creator<CellSignalStrengthLte> CREATOR =
+            new Parcelable.Creator<
+                    CellSignalStrengthLte>() { // from class:
+                                               // android.telephony.CellSignalStrengthLte.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellSignalStrengthLte createFromParcel(Parcel in) {
+                    return new CellSignalStrengthLte(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellSignalStrengthLte[] newArray(int size) {
-            return new CellSignalStrengthLte[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellSignalStrengthLte[] newArray(int size) {
+                    return new CellSignalStrengthLte[size];
+                }
+            };
 
     public CellSignalStrengthLte() {
         setDefaultValues();
     }
 
-    public CellSignalStrengthLte(int rssi, int rsrp, int rsrq, int rssnr, int cqiTableIndex, int cqi, int timingAdvance) {
+    public CellSignalStrengthLte(
+            int rssi,
+            int rsrp,
+            int rsrq,
+            int rssnr,
+            int cqiTableIndex,
+            int cqi,
+            int timingAdvance) {
         this.mRssi = inRangeOrUnavailable(rssi, -113, -51);
         this.mSignalStrength = this.mRssi;
         this.mRsrp = inRangeOrUnavailable(rsrp, -140, -43);
@@ -63,7 +76,8 @@ public final class CellSignalStrengthLte extends CellSignalStrength implements P
         updateLevel(null, null);
     }
 
-    public CellSignalStrengthLte(int rssi, int rsrp, int rsrq, int rssnr, int cqi, int timingAdvance) {
+    public CellSignalStrengthLte(
+            int rssi, int rsrp, int rsrq, int rssnr, int cqi, int timingAdvance) {
         this(rssi, rsrp, rsrq, rssnr, Integer.MAX_VALUE, cqi, timingAdvance);
     }
 
@@ -128,15 +142,25 @@ public final class CellSignalStrengthLte extends CellSignalStrength implements P
             rsrpOnly = false;
         } else {
             if (ss != null && ss.isUsingNonTerrestrialNetwork()) {
-                this.mParametersUseForLevel = cc.getInt(CarrierConfigManager.KEY_PARAMETERS_USED_FOR_NTN_LTE_SIGNAL_BAR_INT);
-                rsrpThresholds = cc.getIntArray(CarrierConfigManager.KEY_NTN_LTE_RSRP_THRESHOLDS_INT_ARRAY);
-                rsrqThresholds = cc.getIntArray(CarrierConfigManager.KEY_NTN_LTE_RSRQ_THRESHOLDS_INT_ARRAY);
-                rssnrThresholds = cc.getIntArray(CarrierConfigManager.KEY_NTN_LTE_RSSNR_THRESHOLDS_INT_ARRAY);
+                this.mParametersUseForLevel =
+                        cc.getInt(
+                                CarrierConfigManager
+                                        .KEY_PARAMETERS_USED_FOR_NTN_LTE_SIGNAL_BAR_INT);
+                rsrpThresholds =
+                        cc.getIntArray(CarrierConfigManager.KEY_NTN_LTE_RSRP_THRESHOLDS_INT_ARRAY);
+                rsrqThresholds =
+                        cc.getIntArray(CarrierConfigManager.KEY_NTN_LTE_RSRQ_THRESHOLDS_INT_ARRAY);
+                rssnrThresholds =
+                        cc.getIntArray(CarrierConfigManager.KEY_NTN_LTE_RSSNR_THRESHOLDS_INT_ARRAY);
             } else {
-                this.mParametersUseForLevel = cc.getInt(CarrierConfigManager.KEY_PARAMETERS_USED_FOR_LTE_SIGNAL_BAR_INT);
-                rsrpThresholds = cc.getIntArray(CarrierConfigManager.KEY_LTE_RSRP_THRESHOLDS_INT_ARRAY);
-                rsrqThresholds = cc.getIntArray(CarrierConfigManager.KEY_LTE_RSRQ_THRESHOLDS_INT_ARRAY);
-                rssnrThresholds = cc.getIntArray(CarrierConfigManager.KEY_LTE_RSSNR_THRESHOLDS_INT_ARRAY);
+                this.mParametersUseForLevel =
+                        cc.getInt(CarrierConfigManager.KEY_PARAMETERS_USED_FOR_LTE_SIGNAL_BAR_INT);
+                rsrpThresholds =
+                        cc.getIntArray(CarrierConfigManager.KEY_LTE_RSRP_THRESHOLDS_INT_ARRAY);
+                rsrqThresholds =
+                        cc.getIntArray(CarrierConfigManager.KEY_LTE_RSRQ_THRESHOLDS_INT_ARRAY);
+                rssnrThresholds =
+                        cc.getIntArray(CarrierConfigManager.KEY_LTE_RSSNR_THRESHOLDS_INT_ARRAY);
             }
             if (rsrpThresholds == null) {
                 rsrpThresholds = sRsrpThresholds;
@@ -147,14 +171,17 @@ public final class CellSignalStrengthLte extends CellSignalStrength implements P
             if (rssnrThresholds == null) {
                 rssnrThresholds = sRssnrThresholds;
             }
-            rsrpOnly = cc.getBoolean(CarrierConfigManager.KEY_USE_ONLY_RSRP_FOR_LTE_SIGNAL_BAR_BOOL, false);
+            rsrpOnly =
+                    cc.getBoolean(
+                            CarrierConfigManager.KEY_USE_ONLY_RSRP_FOR_LTE_SIGNAL_BAR_BOOL, false);
         }
         int rsrpBoost = 0;
         if (ss != null) {
             rsrpBoost = ss.getArfcnRsrpBoost();
         }
         int rsrp = inRangeOrUnavailable(this.mRsrp + rsrpBoost, -140, -44);
-        if (rsrpOnly && (level = updateLevelWithMeasure(rsrp, rsrpThresholds)) != Integer.MAX_VALUE) {
+        if (rsrpOnly
+                && (level = updateLevelWithMeasure(rsrp, rsrpThresholds)) != Integer.MAX_VALUE) {
             this.mLevel = level;
             return;
         }
@@ -271,7 +298,15 @@ public final class CellSignalStrengthLte extends CellSignalStrength implements P
 
     @Override // android.telephony.CellSignalStrength
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mRssi), Integer.valueOf(this.mRsrp), Integer.valueOf(this.mRsrq), Integer.valueOf(this.mRssnr), Integer.valueOf(this.mCqiTableIndex), Integer.valueOf(this.mCqi), Integer.valueOf(this.mTimingAdvance), Integer.valueOf(this.mLevel));
+        return Objects.hash(
+                Integer.valueOf(this.mRssi),
+                Integer.valueOf(this.mRsrp),
+                Integer.valueOf(this.mRsrq),
+                Integer.valueOf(this.mRssnr),
+                Integer.valueOf(this.mCqiTableIndex),
+                Integer.valueOf(this.mCqi),
+                Integer.valueOf(this.mTimingAdvance),
+                Integer.valueOf(this.mLevel));
     }
 
     @Override // android.telephony.CellSignalStrength
@@ -285,11 +320,35 @@ public final class CellSignalStrengthLte extends CellSignalStrength implements P
             return false;
         }
         CellSignalStrengthLte s = (CellSignalStrengthLte) o;
-        return this.mRssi == s.mRssi && this.mRsrp == s.mRsrp && this.mRsrq == s.mRsrq && this.mRssnr == s.mRssnr && this.mCqiTableIndex == s.mCqiTableIndex && this.mCqi == s.mCqi && this.mTimingAdvance == s.mTimingAdvance && this.mLevel == s.mLevel;
+        return this.mRssi == s.mRssi
+                && this.mRsrp == s.mRsrp
+                && this.mRsrq == s.mRsrq
+                && this.mRssnr == s.mRssnr
+                && this.mCqiTableIndex == s.mCqiTableIndex
+                && this.mCqi == s.mCqi
+                && this.mTimingAdvance == s.mTimingAdvance
+                && this.mLevel == s.mLevel;
     }
 
     public String toString() {
-        return "CellSignalStrengthLte: rssi=" + this.mRssi + " rsrp=" + this.mRsrp + " rsrq=" + this.mRsrq + " rssnr=" + this.mRssnr + " cqiTableIndex=" + this.mCqiTableIndex + " cqi=" + this.mCqi + " ta=" + this.mTimingAdvance + " level=" + this.mLevel + " parametersUseForLevel=" + this.mParametersUseForLevel;
+        return "CellSignalStrengthLte: rssi="
+                + this.mRssi
+                + " rsrp="
+                + this.mRsrp
+                + " rsrq="
+                + this.mRsrq
+                + " rssnr="
+                + this.mRssnr
+                + " cqiTableIndex="
+                + this.mCqiTableIndex
+                + " cqi="
+                + this.mCqi
+                + " ta="
+                + this.mTimingAdvance
+                + " level="
+                + this.mLevel
+                + " parametersUseForLevel="
+                + this.mParametersUseForLevel;
     }
 
     @Override // android.os.Parcelable
@@ -334,7 +393,8 @@ public final class CellSignalStrengthLte extends CellSignalStrength implements P
             return Integer.MAX_VALUE;
         }
         if (rssiAsu < 0 || rssiAsu > 31) {
-            com.android.telephony.Rlog.e(LOG_TAG, "convertRssiAsuToDBm: invalid RSSI in ASU=" + rssiAsu);
+            com.android.telephony.Rlog.e(
+                    LOG_TAG, "convertRssiAsuToDBm: invalid RSSI in ASU=" + rssiAsu);
             return Integer.MAX_VALUE;
         }
         return (rssiAsu * 2) - 113;

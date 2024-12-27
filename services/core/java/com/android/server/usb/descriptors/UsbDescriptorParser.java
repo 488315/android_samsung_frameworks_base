@@ -4,9 +4,11 @@ import android.hardware.usb.UsbConfiguration;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbInterface;
 import android.util.Log;
+
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.usb.UsbAlsaManager$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -53,13 +55,28 @@ public final class UsbDescriptorParser {
                         usbDescriptor.postParse(byteStream);
                     } catch (Exception e2) {
                         usbDescriptor.postParse(byteStream);
-                        Log.w("UsbDescriptorParser", "Exception parsing USB descriptors. type:0x" + ((int) usbDescriptor.mType) + " status:" + usbDescriptor.mStatus);
+                        Log.w(
+                                "UsbDescriptorParser",
+                                "Exception parsing USB descriptors. type:0x"
+                                        + ((int) usbDescriptor.mType)
+                                        + " status:"
+                                        + usbDescriptor.mStatus);
                         StackTraceElement[] stackTrace = e2.getStackTrace();
                         if (stackTrace.length > 0) {
-                            Log.i("UsbDescriptorParser", "  class:" + stackTrace[0].getClassName() + " @ " + stackTrace[0].getLineNumber());
+                            Log.i(
+                                    "UsbDescriptorParser",
+                                    "  class:"
+                                            + stackTrace[0].getClassName()
+                                            + " @ "
+                                            + stackTrace[0].getLineNumber());
                         }
                         if (stackTrace.length > 1) {
-                            Log.i("UsbDescriptorParser", "  class:" + stackTrace[1].getClassName() + " @ " + stackTrace[1].getLineNumber());
+                            Log.i(
+                                    "UsbDescriptorParser",
+                                    "  class:"
+                                            + stackTrace[1].getClassName()
+                                            + " @ "
+                                            + stackTrace[1].getLineNumber());
                         }
                         usbDescriptor.mStatus = 4;
                     }
@@ -74,7 +91,8 @@ public final class UsbDescriptorParser {
         int i = 0;
         int i2 = 0;
         for (int i3 = 0; i3 < arrayList.size(); i3++) {
-            UsbInterfaceDescriptor usbInterfaceDescriptor = (UsbInterfaceDescriptor) arrayList.get(i3);
+            UsbInterfaceDescriptor usbInterfaceDescriptor =
+                    (UsbInterfaceDescriptor) arrayList.get(i3);
             for (int i4 = 0; i4 < usbInterfaceDescriptor.mNumEndpoints; i4++) {
                 if (usbInterfaceDescriptor.getEndpointDescriptor(i4).getDirection() == 0) {
                     i++;
@@ -95,12 +113,15 @@ public final class UsbDescriptorParser {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.usb.descriptors.UsbDescriptor allocDescriptor(com.android.server.usb.descriptors.ByteStream r12) {
+    public final com.android.server.usb.descriptors.UsbDescriptor allocDescriptor(
+            com.android.server.usb.descriptors.ByteStream r12) {
         /*
             Method dump skipped, instructions count: 758
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usb.descriptors.UsbDescriptorParser.allocDescriptor(com.android.server.usb.descriptors.ByteStream):com.android.server.usb.descriptors.UsbDescriptor");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usb.descriptors.UsbDescriptorParser.allocDescriptor(com.android.server.usb.descriptors.ByteStream):com.android.server.usb.descriptors.UsbDescriptor");
     }
 
     public final int calculateNumLegacyMidiPorts(boolean z) {
@@ -122,7 +143,8 @@ public final class UsbDescriptorParser {
                 StringBuilder sb = new StringBuilder("Unrecognized Config l: ");
                 sb.append(usbDescriptor3.mLength);
                 sb.append(" t:0x");
-                UsbAlsaManager$$ExternalSyntheticOutline0.m(usbDescriptor3.mType, sb, "UsbDescriptorParser");
+                UsbAlsaManager$$ExternalSyntheticOutline0.m(
+                        usbDescriptor3.mType, sb, "UsbDescriptorParser");
             }
         }
         if (usbConfigDescriptor == null) {
@@ -133,7 +155,12 @@ public final class UsbDescriptorParser {
         Iterator it2 = usbConfigDescriptor.mInterfaceDescriptors.iterator();
         while (it2.hasNext()) {
             UsbInterfaceDescriptor usbInterfaceDescriptor = (UsbInterfaceDescriptor) it2.next();
-            if (usbInterfaceDescriptor.mUsbClass == 1 && usbInterfaceDescriptor.mUsbSubclass == 3 && (usbDescriptor2 = usbInterfaceDescriptor.mMidiHeaderInterfaceDescriptor) != null && (usbDescriptor2 instanceof UsbMSMidiHeader) && ((UsbMSMidiHeader) usbDescriptor2).mMidiStreamingClass == 256) {
+            if (usbInterfaceDescriptor.mUsbClass == 1
+                    && usbInterfaceDescriptor.mUsbSubclass == 3
+                    && (usbDescriptor2 = usbInterfaceDescriptor.mMidiHeaderInterfaceDescriptor)
+                            != null
+                    && (usbDescriptor2 instanceof UsbMSMidiHeader)
+                    && ((UsbMSMidiHeader) usbDescriptor2).mMidiStreamingClass == 256) {
                 arrayList.add(usbInterfaceDescriptor);
             }
         }
@@ -142,8 +169,12 @@ public final class UsbDescriptorParser {
         while (it3.hasNext()) {
             UsbInterfaceDescriptor usbInterfaceDescriptor2 = (UsbInterfaceDescriptor) it3.next();
             for (int i2 = 0; i2 < usbInterfaceDescriptor2.mNumEndpoints; i2++) {
-                UsbEndpointDescriptor endpointDescriptor = usbInterfaceDescriptor2.getEndpointDescriptor(i2);
-                if ((endpointDescriptor.getDirection() == 0) == z && (usbDescriptor = endpointDescriptor.mClassSpecificEndpointDescriptor) != null && (usbDescriptor instanceof UsbACMidi10Endpoint)) {
+                UsbEndpointDescriptor endpointDescriptor =
+                        usbInterfaceDescriptor2.getEndpointDescriptor(i2);
+                if ((endpointDescriptor.getDirection() == 0) == z
+                        && (usbDescriptor = endpointDescriptor.mClassSpecificEndpointDescriptor)
+                                != null
+                        && (usbDescriptor instanceof UsbACMidi10Endpoint)) {
                     i += ((UsbACMidi10Endpoint) usbDescriptor).mNumJacks;
                 }
             }
@@ -159,15 +190,21 @@ public final class UsbDescriptorParser {
         while (it.hasNext()) {
             UsbDescriptor usbDescriptor2 = (UsbDescriptor) it.next();
             if (usbDescriptor2 instanceof UsbInterfaceDescriptor) {
-                UsbInterfaceDescriptor usbInterfaceDescriptor = (UsbInterfaceDescriptor) usbDescriptor2;
-                if (usbInterfaceDescriptor.mUsbSubclass == 3 && (usbDescriptor = usbInterfaceDescriptor.mMidiHeaderInterfaceDescriptor) != null && (usbDescriptor instanceof UsbMSMidiHeader) && ((UsbMSMidiHeader) usbDescriptor).mMidiStreamingClass == i) {
+                UsbInterfaceDescriptor usbInterfaceDescriptor =
+                        (UsbInterfaceDescriptor) usbDescriptor2;
+                if (usbInterfaceDescriptor.mUsbSubclass == 3
+                        && (usbDescriptor = usbInterfaceDescriptor.mMidiHeaderInterfaceDescriptor)
+                                != null
+                        && (usbDescriptor instanceof UsbMSMidiHeader)
+                        && ((UsbMSMidiHeader) usbDescriptor).mMidiStreamingClass == i) {
                     arrayList.add(usbInterfaceDescriptor);
                 }
             } else {
                 StringBuilder sb = new StringBuilder("Undefined Audio Class Interface l: ");
                 sb.append(usbDescriptor2.mLength);
                 sb.append(" t:0x");
-                UsbAlsaManager$$ExternalSyntheticOutline0.m(usbDescriptor2.mType, sb, "UsbDescriptorParser");
+                UsbAlsaManager$$ExternalSyntheticOutline0.m(
+                        usbDescriptor2.mType, sb, "UsbDescriptorParser");
             }
         }
         return arrayList;
@@ -188,7 +225,8 @@ public final class UsbDescriptorParser {
                     StringBuilder sb = new StringBuilder("Unrecognized Audio Interface len: ");
                     sb.append(usbDescriptor.mLength);
                     sb.append(" type:0x");
-                    UsbAlsaManager$$ExternalSyntheticOutline0.m(usbDescriptor.mType, sb, "UsbDescriptorParser");
+                    UsbAlsaManager$$ExternalSyntheticOutline0.m(
+                            usbDescriptor.mType, sb, "UsbDescriptorParser");
                 }
             }
         }
@@ -209,7 +247,8 @@ public final class UsbDescriptorParser {
                     StringBuilder sb = new StringBuilder("Unrecognized Interface l: ");
                     sb.append(usbDescriptor.mLength);
                     sb.append(" t:0x");
-                    UsbAlsaManager$$ExternalSyntheticOutline0.m(usbDescriptor.mType, sb, "UsbDescriptorParser");
+                    UsbAlsaManager$$ExternalSyntheticOutline0.m(
+                            usbDescriptor.mType, sb, "UsbDescriptorParser");
                 } else if (((UsbInterfaceDescriptor) usbDescriptor).mUsbClass == i) {
                     arrayList.add(usbDescriptor);
                 }
@@ -228,7 +267,9 @@ public final class UsbDescriptorParser {
             UsbDescriptor usbDescriptor = (UsbDescriptor) it.next();
             if (usbDescriptor instanceof UsbACTerminal) {
                 UsbACTerminal usbACTerminal = (UsbACTerminal) usbDescriptor;
-                if (usbACTerminal.mSubclass == 1 && usbACTerminal.mSubtype == i && usbACTerminal.mTerminalType == 257) {
+                if (usbACTerminal.mSubclass == 1
+                        && usbACTerminal.mSubtype == i
+                        && usbACTerminal.mTerminalType == 257) {
                     return true;
                 }
             }
@@ -242,7 +283,9 @@ public final class UsbDescriptorParser {
             UsbDescriptor usbDescriptor = (UsbDescriptor) it.next();
             if (usbDescriptor instanceof UsbACTerminal) {
                 UsbACTerminal usbACTerminal = (UsbACTerminal) usbDescriptor;
-                if (usbACTerminal.mSubclass == 1 && usbACTerminal.mSubtype == i && usbACTerminal.mTerminalType != 257) {
+                if (usbACTerminal.mSubclass == 1
+                        && usbACTerminal.mSubtype == i
+                        && usbACTerminal.mTerminalType != 257) {
                     return true;
                 }
             }
@@ -262,7 +305,8 @@ public final class UsbDescriptorParser {
                 StringBuilder sb = new StringBuilder("Undefined Audio Class Interface l: ");
                 sb.append(usbDescriptor.mLength);
                 sb.append(" t:0x");
-                UsbAlsaManager$$ExternalSyntheticOutline0.m(usbDescriptor.mType, sb, "UsbDescriptorParser");
+                UsbAlsaManager$$ExternalSyntheticOutline0.m(
+                        usbDescriptor.mType, sb, "UsbDescriptorParser");
             } else if (((UsbInterfaceDescriptor) usbDescriptor).mUsbSubclass == 3) {
                 return true;
             }
@@ -280,7 +324,10 @@ public final class UsbDescriptorParser {
                 StringBuilder sb = new StringBuilder("Undefined Audio Output terminal l: ");
                 sb.append(((UsbDescriptor) aCInterfaceDescriptors.get(0)).mLength);
                 sb.append(" t:0x");
-                UsbAlsaManager$$ExternalSyntheticOutline0.m(((UsbDescriptor) aCInterfaceDescriptors.get(0)).mType, sb, "UsbDescriptorParser");
+                UsbAlsaManager$$ExternalSyntheticOutline0.m(
+                        ((UsbDescriptor) aCInterfaceDescriptors.get(0)).mType,
+                        sb,
+                        "UsbDescriptorParser");
             } else if (((UsbACTerminal) aCInterfaceDescriptors.get(0)).mTerminalType == 1538) {
                 return true;
             }
@@ -307,7 +354,8 @@ public final class UsbDescriptorParser {
                     StringBuilder sb = new StringBuilder("Undefined Audio Input terminal l: ");
                     sb.append(usbDescriptor.mLength);
                     sb.append(" t:0x");
-                    UsbAlsaManager$$ExternalSyntheticOutline0.m(usbDescriptor.mType, sb, "UsbDescriptorParser");
+                    UsbAlsaManager$$ExternalSyntheticOutline0.m(
+                            usbDescriptor.mType, sb, "UsbDescriptorParser");
                 }
             }
             z = false;
@@ -324,7 +372,8 @@ public final class UsbDescriptorParser {
                     StringBuilder sb2 = new StringBuilder("Undefined Audio Output terminal l: ");
                     sb2.append(usbDescriptor2.mLength);
                     sb2.append(" t:0x");
-                    UsbAlsaManager$$ExternalSyntheticOutline0.m(usbDescriptor2.mType, sb2, "UsbDescriptorParser");
+                    UsbAlsaManager$$ExternalSyntheticOutline0.m(
+                            usbDescriptor2.mType, sb2, "UsbDescriptorParser");
                 }
             }
             z2 = false;
@@ -346,7 +395,8 @@ public final class UsbDescriptorParser {
             Iterator it = getACInterfaceDescriptors((byte) 3).iterator();
             boolean z2 = false;
             boolean z3 = false;
-            loop0: while (true) {
+            loop0:
+            while (true) {
                 z = z3;
                 while (it.hasNext()) {
                     UsbDescriptor usbDescriptor = (UsbDescriptor) it.next();
@@ -365,7 +415,8 @@ public final class UsbDescriptorParser {
                         StringBuilder sb = new StringBuilder("Undefined Audio Output terminal l: ");
                         sb.append(usbDescriptor.mLength);
                         sb.append(" t:0x");
-                        UsbAlsaManager$$ExternalSyntheticOutline0.m(usbDescriptor.mType, sb, "UsbDescriptorParser");
+                        UsbAlsaManager$$ExternalSyntheticOutline0.m(
+                                usbDescriptor.mType, sb, "UsbDescriptorParser");
                     }
                 }
                 z3 = true;
@@ -404,15 +455,24 @@ public final class UsbDescriptorParser {
         byte b = usbDeviceDescriptor.mMfgIndex;
         String str = this.mDeviceAddr;
         String descriptorString_native = getDescriptorString_native(str, b);
-        String descriptorString_native2 = getDescriptorString_native(str, usbDeviceDescriptor.mProductIndex);
+        String descriptorString_native2 =
+                getDescriptorString_native(str, usbDeviceDescriptor.mProductIndex);
         String deviceReleaseString = usbDeviceDescriptor.getDeviceReleaseString();
-        String descriptorString_native3 = getDescriptorString_native(str, usbDeviceDescriptor.mSerialIndex);
+        String descriptorString_native3 =
+                getDescriptorString_native(str, usbDeviceDescriptor.mSerialIndex);
         int size = usbDeviceDescriptor.mConfigDescriptors.size();
         UsbConfiguration[] usbConfigurationArr = new UsbConfiguration[size];
-        NetworkScoreService$$ExternalSyntheticOutline0.m(size, "  ", " configs", "UsbDeviceDescriptor");
+        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                size, "  ", " configs", "UsbDeviceDescriptor");
         for (int i = 0; i < usbDeviceDescriptor.mConfigDescriptors.size(); i++) {
-            UsbConfigDescriptor usbConfigDescriptor = (UsbConfigDescriptor) usbDeviceDescriptor.mConfigDescriptors.get(i);
-            UsbConfiguration usbConfiguration = new UsbConfiguration(usbConfigDescriptor.mConfigValue, getDescriptorString_native(str, usbConfigDescriptor.mConfigIndex), usbConfigDescriptor.mAttribs, usbConfigDescriptor.mMaxPower);
+            UsbConfigDescriptor usbConfigDescriptor =
+                    (UsbConfigDescriptor) usbDeviceDescriptor.mConfigDescriptors.get(i);
+            UsbConfiguration usbConfiguration =
+                    new UsbConfiguration(
+                            usbConfigDescriptor.mConfigValue,
+                            getDescriptorString_native(str, usbConfigDescriptor.mConfigIndex),
+                            usbConfigDescriptor.mAttribs,
+                            usbConfigDescriptor.mMaxPower);
             ArrayList arrayList = new ArrayList();
             Iterator it = usbConfigDescriptor.mInterfaceDescriptors.iterator();
             while (it.hasNext()) {
@@ -451,6 +511,22 @@ public final class UsbDescriptorParser {
                 break;
             }
         }
-        return new UsbDevice.Builder(this.mDeviceAddr, i2, i3, i4, i5, i6, descriptorString_native, descriptorString_native2, deviceReleaseString, usbConfigurationArr, descriptorString_native3, z3, z4, hasMIDIInterface, z, z2);
+        return new UsbDevice.Builder(
+                this.mDeviceAddr,
+                i2,
+                i3,
+                i4,
+                i5,
+                i6,
+                descriptorString_native,
+                descriptorString_native2,
+                deviceReleaseString,
+                usbConfigurationArr,
+                descriptorString_native3,
+                z3,
+                z4,
+                hasMIDIInterface,
+                z,
+                z2);
     }
 }

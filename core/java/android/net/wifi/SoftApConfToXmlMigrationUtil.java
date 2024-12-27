@@ -1,11 +1,15 @@
 package android.net.wifi;
 
 import android.net.MacAddress;
-import android.net.wifi.SoftApConfiguration;
 import android.os.Environment;
 import android.util.Log;
+
 import com.android.internal.util.FastXmlSerializer;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -16,8 +20,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
 
 /* loaded from: classes3.dex */
 public final class SoftApConfToXmlMigrationUtil {
@@ -94,7 +96,8 @@ public final class SoftApConfToXmlMigrationUtil {
                     if (channel == 0) {
                         configBuilder.setBand(convertWifiConfigBandToSoftApConfigBand(band));
                     } else {
-                        configBuilder.setChannel(channel, convertWifiConfigBandToSoftApConfigBand(band));
+                        configBuilder.setChannel(
+                                channel, convertWifiConfigBandToSoftApConfigBand(band));
                     }
                 }
                 if (version >= 3) {
@@ -143,15 +146,29 @@ public final class SoftApConfToXmlMigrationUtil {
             }
             XmlUtils.writeValueXml(Integer.valueOf(softApConf.getBand()), XML_TAG_AP_BAND, out);
             XmlUtils.writeValueXml(Integer.valueOf(softApConf.getChannel()), XML_TAG_CHANNEL, out);
-            XmlUtils.writeValueXml(Boolean.valueOf(softApConf.isHiddenSsid()), XML_TAG_HIDDEN_SSID, out);
-            XmlUtils.writeValueXml(Integer.valueOf(softApConf.getSecurityType()), XML_TAG_SECURITY_TYPE, out);
+            XmlUtils.writeValueXml(
+                    Boolean.valueOf(softApConf.isHiddenSsid()), XML_TAG_HIDDEN_SSID, out);
+            XmlUtils.writeValueXml(
+                    Integer.valueOf(softApConf.getSecurityType()), XML_TAG_SECURITY_TYPE, out);
             if (softApConf.getSecurityType() != 0) {
                 XmlUtils.writeValueXml(softApConf.getPassphrase(), XML_TAG_PASSPHRASE, out);
             }
-            XmlUtils.writeValueXml(Integer.valueOf(softApConf.getMaxNumberOfClients()), XML_TAG_MAX_NUMBER_OF_CLIENTS, out);
-            XmlUtils.writeValueXml(Boolean.valueOf(softApConf.isClientControlByUserEnabled()), XML_TAG_CLIENT_CONTROL_BY_USER, out);
-            XmlUtils.writeValueXml(Boolean.valueOf(softApConf.isAutoShutdownEnabled()), XML_TAG_AUTO_SHUTDOWN_ENABLED, out);
-            XmlUtils.writeValueXml(Long.valueOf(softApConf.getShutdownTimeoutMillis()), XML_TAG_SHUTDOWN_TIMEOUT_MILLIS, out);
+            XmlUtils.writeValueXml(
+                    Integer.valueOf(softApConf.getMaxNumberOfClients()),
+                    XML_TAG_MAX_NUMBER_OF_CLIENTS,
+                    out);
+            XmlUtils.writeValueXml(
+                    Boolean.valueOf(softApConf.isClientControlByUserEnabled()),
+                    XML_TAG_CLIENT_CONTROL_BY_USER,
+                    out);
+            XmlUtils.writeValueXml(
+                    Boolean.valueOf(softApConf.isAutoShutdownEnabled()),
+                    XML_TAG_AUTO_SHUTDOWN_ENABLED,
+                    out);
+            XmlUtils.writeValueXml(
+                    Long.valueOf(softApConf.getShutdownTimeoutMillis()),
+                    XML_TAG_SHUTDOWN_TIMEOUT_MILLIS,
+                    out);
             out.startTag(null, XML_TAG_BLOCKED_CLIENT_LIST);
             for (MacAddress mac : softApConf.getBlockedClientList()) {
                 XmlUtils.writeValueXml(mac.toString(), XML_TAG_CLIENT_MACADDRESS, out);
@@ -172,8 +189,7 @@ public final class SoftApConfToXmlMigrationUtil {
         }
     }
 
-    private SoftApConfToXmlMigrationUtil() {
-    }
+    private SoftApConfToXmlMigrationUtil() {}
 
     public static InputStream convert(InputStream fis) {
         byte[] xmlBytes;

@@ -8,6 +8,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes3.dex */
@@ -20,12 +21,11 @@ public interface IGameSessionController extends IInterface {
 
     public static class Default implements IGameSessionController {
         @Override // android.service.games.IGameSessionController
-        public void takeScreenshot(int taskId, AndroidFuture gameScreenshotResultFuture) throws RemoteException {
-        }
+        public void takeScreenshot(int taskId, AndroidFuture gameScreenshotResultFuture)
+                throws RemoteException {}
 
         @Override // android.service.games.IGameSessionController
-        public void restartGame(int taskId) throws RemoteException {
-        }
+        public void restartGame(int taskId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +33,7 @@ public interface IGameSessionController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGameSessionController {
+    public abstract static class Stub extends Binder implements IGameSessionController {
         static final int TRANSACTION_restartGame = 2;
         static final int TRANSACTION_takeScreenshot = 1;
         private final PermissionEnforcer mEnforcer;
@@ -48,7 +48,9 @@ public interface IGameSessionController extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IGameSessionController asInterface(IBinder obj) {
@@ -84,7 +86,8 @@ public interface IGameSessionController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGameSessionController.DESCRIPTOR);
             }
@@ -95,7 +98,8 @@ public interface IGameSessionController extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    AndroidFuture _arg1 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg1 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     takeScreenshot(_arg0, _arg1);
                     return true;
@@ -126,7 +130,8 @@ public interface IGameSessionController extends IInterface {
             }
 
             @Override // android.service.games.IGameSessionController
-            public void takeScreenshot(int taskId, AndroidFuture gameScreenshotResultFuture) throws RemoteException {
+            public void takeScreenshot(int taskId, AndroidFuture gameScreenshotResultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IGameSessionController.DESCRIPTOR);
@@ -152,11 +157,13 @@ public interface IGameSessionController extends IInterface {
         }
 
         protected void takeScreenshot_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_GAME_ACTIVITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_GAME_ACTIVITY, getCallingPid(), getCallingUid());
         }
 
         protected void restartGame_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_GAME_ACTIVITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_GAME_ACTIVITY, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

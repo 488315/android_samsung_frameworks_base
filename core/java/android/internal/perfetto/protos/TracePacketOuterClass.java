@@ -99,7 +99,6 @@ public final class TracePacketOuterClass {
         public static final long VULKAN_MEMORY_EVENT = 1146756268094L;
         public static final long WINSCOPE_EXTENSIONS = 1146756268144L;
 
-        public TracePacket() {
-        }
+        public TracePacket() {}
     }
 }

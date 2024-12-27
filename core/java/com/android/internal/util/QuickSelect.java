@@ -5,7 +5,8 @@ import java.util.List;
 
 /* loaded from: classes5.dex */
 public final class QuickSelect {
-    private static <T> int selectImpl(List<T> list, int left, int right, int k, Comparator<? super T> comparator) {
+    private static <T> int selectImpl(
+            List<T> list, int left, int right, int k, Comparator<? super T> comparator) {
         while (left != right) {
             int pivotIndex = partition(list, left, right, (left + right) >> 1, comparator);
             if (k == pivotIndex) {
@@ -50,7 +51,8 @@ public final class QuickSelect {
         return left;
     }
 
-    private static <T> int selectImpl(T[] array, int left, int right, int k, Comparator<? super T> comparator) {
+    private static <T> int selectImpl(
+            T[] array, int left, int right, int k, Comparator<? super T> comparator) {
         while (left != right) {
             int pivotIndex = partition(array, left, right, (left + right) >> 1, comparator);
             if (k == pivotIndex) {
@@ -65,7 +67,8 @@ public final class QuickSelect {
         return left;
     }
 
-    private static <T> int partition(List<T> list, int left, int right, int pivotIndex, Comparator<? super T> comparator) {
+    private static <T> int partition(
+            List<T> list, int left, int right, int pivotIndex, Comparator<? super T> comparator) {
         T pivotValue = list.get(pivotIndex);
         swap(list, right, pivotIndex);
         int storeIndex = left;
@@ -107,7 +110,8 @@ public final class QuickSelect {
         return storeIndex;
     }
 
-    private static <T> int partition(T[] array, int left, int right, int pivotIndex, Comparator<? super T> comparator) {
+    private static <T> int partition(
+            T[] array, int left, int right, int pivotIndex, Comparator<? super T> comparator) {
         T pivotValue = array[pivotIndex];
         swap(array, right, pivotIndex);
         int storeIndex = left;
@@ -145,29 +149,51 @@ public final class QuickSelect {
         array[right] = tmp;
     }
 
-    public static <T> T select(List<T> list, int start, int length, int k, Comparator<? super T> comparator) {
-        if (list == null || start < 0 || length <= 0 || list.size() < start + length || k < 0 || length <= k) {
+    public static <T> T select(
+            List<T> list, int start, int length, int k, Comparator<? super T> comparator) {
+        if (list == null
+                || start < 0
+                || length <= 0
+                || list.size() < start + length
+                || k < 0
+                || length <= k) {
             throw new IllegalArgumentException();
         }
         return list.get(selectImpl(list, start, (start + length) - 1, k + start, comparator));
     }
 
     public static int select(int[] array, int start, int length, int k) {
-        if (array == null || start < 0 || length <= 0 || array.length < start + length || k < 0 || length <= k) {
+        if (array == null
+                || start < 0
+                || length <= 0
+                || array.length < start + length
+                || k < 0
+                || length <= k) {
             throw new IllegalArgumentException();
         }
         return array[selectImpl(array, start, (start + length) - 1, k + start)];
     }
 
     public static long select(long[] array, int start, int length, int k) {
-        if (array == null || start < 0 || length <= 0 || array.length < start + length || k < 0 || length <= k) {
+        if (array == null
+                || start < 0
+                || length <= 0
+                || array.length < start + length
+                || k < 0
+                || length <= k) {
             throw new IllegalArgumentException();
         }
         return array[selectImpl(array, start, (start + length) - 1, k + start)];
     }
 
-    public static <T> T select(T[] array, int start, int length, int k, Comparator<? super T> comparator) {
-        if (array == null || start < 0 || length <= 0 || array.length < start + length || k < 0 || length <= k) {
+    public static <T> T select(
+            T[] array, int start, int length, int k, Comparator<? super T> comparator) {
+        if (array == null
+                || start < 0
+                || length <= 0
+                || array.length < start + length
+                || k < 0
+                || length <= k) {
             throw new IllegalArgumentException();
         }
         return array[selectImpl(array, start, (start + length) - 1, k + start, comparator)];

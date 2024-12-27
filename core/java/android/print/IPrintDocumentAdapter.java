@@ -8,9 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
-import android.print.ILayoutResultCallback;
-import android.print.IPrintDocumentAdapterObserver;
-import android.print.IWriteResultCallback;
 
 /* loaded from: classes3.dex */
 public interface IPrintDocumentAdapter extends IInterface {
@@ -18,38 +15,55 @@ public interface IPrintDocumentAdapter extends IInterface {
 
     void kill(String str) throws RemoteException;
 
-    void layout(PrintAttributes printAttributes, PrintAttributes printAttributes2, ILayoutResultCallback iLayoutResultCallback, Bundle bundle, int i) throws RemoteException;
+    void layout(
+            PrintAttributes printAttributes,
+            PrintAttributes printAttributes2,
+            ILayoutResultCallback iLayoutResultCallback,
+            Bundle bundle,
+            int i)
+            throws RemoteException;
 
-    void setObserver(IPrintDocumentAdapterObserver iPrintDocumentAdapterObserver) throws RemoteException;
+    void setObserver(IPrintDocumentAdapterObserver iPrintDocumentAdapterObserver)
+            throws RemoteException;
 
     void start() throws RemoteException;
 
-    void write(PageRange[] pageRangeArr, ParcelFileDescriptor parcelFileDescriptor, IWriteResultCallback iWriteResultCallback, int i) throws RemoteException;
+    void write(
+            PageRange[] pageRangeArr,
+            ParcelFileDescriptor parcelFileDescriptor,
+            IWriteResultCallback iWriteResultCallback,
+            int i)
+            throws RemoteException;
 
     public static class Default implements IPrintDocumentAdapter {
         @Override // android.print.IPrintDocumentAdapter
-        public void setObserver(IPrintDocumentAdapterObserver observer) throws RemoteException {
-        }
+        public void setObserver(IPrintDocumentAdapterObserver observer) throws RemoteException {}
 
         @Override // android.print.IPrintDocumentAdapter
-        public void start() throws RemoteException {
-        }
+        public void start() throws RemoteException {}
 
         @Override // android.print.IPrintDocumentAdapter
-        public void layout(PrintAttributes oldAttributes, PrintAttributes newAttributes, ILayoutResultCallback callback, Bundle metadata, int sequence) throws RemoteException {
-        }
+        public void layout(
+                PrintAttributes oldAttributes,
+                PrintAttributes newAttributes,
+                ILayoutResultCallback callback,
+                Bundle metadata,
+                int sequence)
+                throws RemoteException {}
 
         @Override // android.print.IPrintDocumentAdapter
-        public void write(PageRange[] pages, ParcelFileDescriptor fd, IWriteResultCallback callback, int sequence) throws RemoteException {
-        }
+        public void write(
+                PageRange[] pages,
+                ParcelFileDescriptor fd,
+                IWriteResultCallback callback,
+                int sequence)
+                throws RemoteException {}
 
         @Override // android.print.IPrintDocumentAdapter
-        public void finish() throws RemoteException {
-        }
+        public void finish() throws RemoteException {}
 
         @Override // android.print.IPrintDocumentAdapter
-        public void kill(String reason) throws RemoteException {
-        }
+        public void kill(String reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -57,7 +71,7 @@ public interface IPrintDocumentAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPrintDocumentAdapter {
+    public abstract static class Stub extends Binder implements IPrintDocumentAdapter {
         public static final String DESCRIPTOR = "android.print.IPrintDocumentAdapter";
         static final int TRANSACTION_finish = 5;
         static final int TRANSACTION_kill = 6;
@@ -111,7 +125,8 @@ public interface IPrintDocumentAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -121,7 +136,8 @@ public interface IPrintDocumentAdapter extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IPrintDocumentAdapterObserver _arg0 = IPrintDocumentAdapterObserver.Stub.asInterface(data.readStrongBinder());
+                    IPrintDocumentAdapterObserver _arg0 =
+                            IPrintDocumentAdapterObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setObserver(_arg0);
                     return true;
@@ -129,9 +145,12 @@ public interface IPrintDocumentAdapter extends IInterface {
                     start();
                     return true;
                 case 3:
-                    PrintAttributes _arg02 = (PrintAttributes) data.readTypedObject(PrintAttributes.CREATOR);
-                    PrintAttributes _arg1 = (PrintAttributes) data.readTypedObject(PrintAttributes.CREATOR);
-                    ILayoutResultCallback _arg2 = ILayoutResultCallback.Stub.asInterface(data.readStrongBinder());
+                    PrintAttributes _arg02 =
+                            (PrintAttributes) data.readTypedObject(PrintAttributes.CREATOR);
+                    PrintAttributes _arg1 =
+                            (PrintAttributes) data.readTypedObject(PrintAttributes.CREATOR);
+                    ILayoutResultCallback _arg2 =
+                            ILayoutResultCallback.Stub.asInterface(data.readStrongBinder());
                     Bundle _arg3 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg4 = data.readInt();
                     data.enforceNoDataAvail();
@@ -139,8 +158,11 @@ public interface IPrintDocumentAdapter extends IInterface {
                     return true;
                 case 4:
                     PageRange[] _arg03 = (PageRange[]) data.createTypedArray(PageRange.CREATOR);
-                    ParcelFileDescriptor _arg12 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    IWriteResultCallback _arg22 = IWriteResultCallback.Stub.asInterface(data.readStrongBinder());
+                    ParcelFileDescriptor _arg12 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    IWriteResultCallback _arg22 =
+                            IWriteResultCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg32 = data.readInt();
                     data.enforceNoDataAvail();
                     write(_arg03, _arg12, _arg22, _arg32);
@@ -198,7 +220,13 @@ public interface IPrintDocumentAdapter extends IInterface {
             }
 
             @Override // android.print.IPrintDocumentAdapter
-            public void layout(PrintAttributes oldAttributes, PrintAttributes newAttributes, ILayoutResultCallback callback, Bundle metadata, int sequence) throws RemoteException {
+            public void layout(
+                    PrintAttributes oldAttributes,
+                    PrintAttributes newAttributes,
+                    ILayoutResultCallback callback,
+                    Bundle metadata,
+                    int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -214,7 +242,12 @@ public interface IPrintDocumentAdapter extends IInterface {
             }
 
             @Override // android.print.IPrintDocumentAdapter
-            public void write(PageRange[] pages, ParcelFileDescriptor fd, IWriteResultCallback callback, int sequence) throws RemoteException {
+            public void write(
+                    PageRange[] pages,
+                    ParcelFileDescriptor fd,
+                    IWriteResultCallback callback,
+                    int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -21,7 +21,13 @@ public class BackgroundFallback {
         return this.mBackgroundFallback != null;
     }
 
-    public void draw(ViewGroup boundsView, ViewGroup root, Canvas c, View content, View coveringView1, View coveringView2) {
+    public void draw(
+            ViewGroup boundsView,
+            ViewGroup root,
+            Canvas c,
+            View content,
+            View coveringView1,
+            View coveringView2) {
         int i;
         if (!hasFallback()) {
             return;
@@ -41,15 +47,15 @@ public class BackgroundFallback {
             int childCount2 = childCount;
             Drawable childBg = child.getBackground();
             if (child == content) {
-                if (childBg == null && (child instanceof ViewGroup) && ((ViewGroup) child).getChildCount() == 0) {
-                }
+                if (childBg == null
+                        && (child instanceof ViewGroup)
+                        && ((ViewGroup) child).getChildCount() == 0) {}
                 left = Math.min(left, child.getLeft() + rootOffsetX);
                 top = Math.min(top, child.getTop() + rootOffsetY);
                 right = Math.max(right, child.getRight() + rootOffsetX);
                 bottom = Math.max(bottom, child.getBottom() + rootOffsetY);
             } else if (child.getVisibility() == 0) {
-                if (!isOpaque(childBg)) {
-                }
+                if (!isOpaque(childBg)) {}
                 left = Math.min(left, child.getLeft() + rootOffsetX);
                 top = Math.min(top, child.getTop() + rootOffsetY);
                 right = Math.max(right, child.getRight() + rootOffsetX);
@@ -62,26 +68,43 @@ public class BackgroundFallback {
         int i3 = 0;
         while (i3 < 2) {
             View v = i3 == 0 ? coveringView1 : coveringView2;
-            if (v == null || v.getVisibility() != 0 || v.getAlpha() != 1.0f || !isOpaque(v.getBackground())) {
+            if (v == null
+                    || v.getVisibility() != 0
+                    || v.getAlpha() != 1.0f
+                    || !isOpaque(v.getBackground())) {
                 childCount3 = 0;
             } else {
-                if (v.getTop() <= 0 && v.getBottom() >= height && v.getLeft() <= 0 && v.getRight() >= left) {
+                if (v.getTop() <= 0
+                        && v.getBottom() >= height
+                        && v.getLeft() <= 0
+                        && v.getRight() >= left) {
                     left = 0;
                 }
-                if (v.getTop() <= 0 && v.getBottom() >= height && v.getLeft() <= right && v.getRight() >= width) {
+                if (v.getTop() <= 0
+                        && v.getBottom() >= height
+                        && v.getLeft() <= right
+                        && v.getRight() >= width) {
                     right = width;
                 }
-                if (v.getTop() <= 0 && v.getBottom() >= top && v.getLeft() <= 0 && v.getRight() >= width) {
+                if (v.getTop() <= 0
+                        && v.getBottom() >= top
+                        && v.getLeft() <= 0
+                        && v.getRight() >= width) {
                     top = 0;
                 }
-                if (v.getTop() <= bottom && v.getBottom() >= height && v.getLeft() <= 0 && v.getRight() >= width) {
+                if (v.getTop() <= bottom
+                        && v.getBottom() >= height
+                        && v.getLeft() <= 0
+                        && v.getRight() >= width) {
                     bottom = height;
                 }
                 childCount3 &= (v.getTop() > 0 || v.getBottom() < top) ? 0 : 1;
             }
             i3++;
         }
-        if (childCount3 != 0 && (viewsCoverEntireWidth(coveringView1, coveringView2, width) || viewsCoverEntireWidth(coveringView2, coveringView1, width))) {
+        if (childCount3 != 0
+                && (viewsCoverEntireWidth(coveringView1, coveringView2, width)
+                        || viewsCoverEntireWidth(coveringView2, coveringView1, width))) {
             top = 0;
         }
         if (left >= right || top >= bottom) {
@@ -113,6 +136,8 @@ public class BackgroundFallback {
     }
 
     private boolean viewsCoverEntireWidth(View view1, View view2, int width) {
-        return view1.getLeft() <= 0 && view1.getRight() >= view2.getLeft() && view2.getRight() >= width;
+        return view1.getLeft() <= 0
+                && view1.getRight() >= view2.getLeft()
+                && view2.getRight() >= width;
     }
 }

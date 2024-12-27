@@ -1,12 +1,15 @@
 package android.hardware.usb;
 
 import android.media.midi.MidiDeviceInfo;
+
 import com.android.internal.util.dump.DualDumpOutputStream;
-import java.io.IOException;
-import java.util.Objects;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
+
+import java.io.IOException;
+import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public class AccessoryFilter {
@@ -32,7 +35,8 @@ public class AccessoryFilter {
         this.mVersion = filter.mVersion;
     }
 
-    public static AccessoryFilter read(XmlPullParser parser) throws XmlPullParserException, IOException {
+    public static AccessoryFilter read(XmlPullParser parser)
+            throws XmlPullParserException, IOException {
         String manufacturer = null;
         String model = null;
         String version = null;
@@ -76,7 +80,8 @@ public class AccessoryFilter {
     }
 
     public boolean contains(AccessoryFilter accessory) {
-        if (this.mManufacturer != null && !Objects.equals(accessory.mManufacturer, this.mManufacturer)) {
+        if (this.mManufacturer != null
+                && !Objects.equals(accessory.mManufacturer, this.mManufacturer)) {
             return false;
         }
         if (this.mModel == null || Objects.equals(accessory.mModel, this.mModel)) {
@@ -91,21 +96,33 @@ public class AccessoryFilter {
         }
         if (obj instanceof AccessoryFilter) {
             AccessoryFilter filter = (AccessoryFilter) obj;
-            return this.mManufacturer.equals(filter.mManufacturer) && this.mModel.equals(filter.mModel) && this.mVersion.equals(filter.mVersion);
+            return this.mManufacturer.equals(filter.mManufacturer)
+                    && this.mModel.equals(filter.mModel)
+                    && this.mVersion.equals(filter.mVersion);
         }
         if (!(obj instanceof UsbAccessory)) {
             return false;
         }
         UsbAccessory accessory = (UsbAccessory) obj;
-        return this.mManufacturer.equals(accessory.getManufacturer()) && this.mModel.equals(accessory.getModel()) && this.mVersion.equals(accessory.getVersion());
+        return this.mManufacturer.equals(accessory.getManufacturer())
+                && this.mModel.equals(accessory.getModel())
+                && this.mVersion.equals(accessory.getVersion());
     }
 
     public int hashCode() {
-        return ((this.mManufacturer == null ? 0 : this.mManufacturer.hashCode()) ^ (this.mModel == null ? 0 : this.mModel.hashCode())) ^ (this.mVersion != null ? this.mVersion.hashCode() : 0);
+        return ((this.mManufacturer == null ? 0 : this.mManufacturer.hashCode())
+                        ^ (this.mModel == null ? 0 : this.mModel.hashCode()))
+                ^ (this.mVersion != null ? this.mVersion.hashCode() : 0);
     }
 
     public String toString() {
-        return "AccessoryFilter[mManufacturer=\"" + this.mManufacturer + "\", mModel=\"" + this.mModel + "\", mVersion=\"" + this.mVersion + "\"]";
+        return "AccessoryFilter[mManufacturer=\""
+                + this.mManufacturer
+                + "\", mModel=\""
+                + this.mModel
+                + "\", mVersion=\""
+                + this.mVersion
+                + "\"]";
     }
 
     public void dump(DualDumpOutputStream dump, String idName, long id) {

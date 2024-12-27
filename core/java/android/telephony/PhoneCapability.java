@@ -3,7 +3,9 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telephony.TelephonyFeatures;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -18,11 +20,9 @@ public final class PhoneCapability implements Parcelable {
     public static final PhoneCapability DEFAULT_DSDS_CAPABILITY;
     public static final PhoneCapability DEFAULT_SSSS_CAPABILITY;
 
-    @SystemApi
-    public static final int DEVICE_NR_CAPABILITY_NSA = 1;
+    @SystemApi public static final int DEVICE_NR_CAPABILITY_NSA = 1;
 
-    @SystemApi
-    public static final int DEVICE_NR_CAPABILITY_SA = 2;
+    @SystemApi public static final int DEVICE_NR_CAPABILITY_SA = 2;
     private final int[] mDeviceNrCapabilities;
     private final List<ModemInfo> mLogicalModemList;
     private final int mMaxActiveDataSubscriptions;
@@ -30,8 +30,7 @@ public final class PhoneCapability implements Parcelable {
     private final boolean mNetworkValidationBeforeSwitchSupported;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeviceNrCapability {
-    }
+    public @interface DeviceNrCapability {}
 
     static {
         ModemInfo modemInfo1 = new ModemInfo(0, 0, true, true);
@@ -40,28 +39,37 @@ public final class PhoneCapability implements Parcelable {
         logicalModemList.add(modemInfo1);
         logicalModemList.add(modemInfo2);
         int[] deviceNrCapabilities = new int[0];
-        DEFAULT_DSDS_CAPABILITY = new PhoneCapability(1, 1, logicalModemList, false, deviceNrCapabilities);
+        DEFAULT_DSDS_CAPABILITY =
+                new PhoneCapability(1, 1, logicalModemList, false, deviceNrCapabilities);
         List<ModemInfo> logicalModemList2 = new ArrayList<>();
         logicalModemList2.add(modemInfo1);
-        DEFAULT_SSSS_CAPABILITY = new PhoneCapability(1, 1, logicalModemList2, false, deviceNrCapabilities);
-        CREATOR = new Parcelable.Creator() { // from class: android.telephony.PhoneCapability.1
-            @Override // android.os.Parcelable.Creator
-            public PhoneCapability createFromParcel(Parcel in) {
-                return new PhoneCapability(in);
-            }
+        DEFAULT_SSSS_CAPABILITY =
+                new PhoneCapability(1, 1, logicalModemList2, false, deviceNrCapabilities);
+        CREATOR =
+                new Parcelable.Creator() { // from class: android.telephony.PhoneCapability.1
+                    @Override // android.os.Parcelable.Creator
+                    public PhoneCapability createFromParcel(Parcel in) {
+                        return new PhoneCapability(in);
+                    }
 
-            @Override // android.os.Parcelable.Creator
-            public PhoneCapability[] newArray(int size) {
-                return new PhoneCapability[size];
-            }
-        };
+                    @Override // android.os.Parcelable.Creator
+                    public PhoneCapability[] newArray(int size) {
+                        return new PhoneCapability[size];
+                    }
+                };
     }
 
-    public PhoneCapability(int maxActiveVoiceSubscriptions, int maxActiveDataSubscriptions, List<ModemInfo> logicalModemList, boolean networkValidationBeforeSwitchSupported, int[] deviceNrCapabilities) {
+    public PhoneCapability(
+            int maxActiveVoiceSubscriptions,
+            int maxActiveDataSubscriptions,
+            List<ModemInfo> logicalModemList,
+            boolean networkValidationBeforeSwitchSupported,
+            int[] deviceNrCapabilities) {
         this.mMaxActiveVoiceSubscriptions = maxActiveVoiceSubscriptions;
         this.mMaxActiveDataSubscriptions = maxActiveDataSubscriptions;
         this.mLogicalModemList = logicalModemList == null ? new ArrayList<>() : logicalModemList;
-        if (TelephonyFeatures.isSubOperatorSpecific(1, "XMO", "CCT") || TelephonyFeatures.isSubOperatorSpecific(0, "XMO", "CCT")) {
+        if (TelephonyFeatures.isSubOperatorSpecific(1, "XMO", "CCT")
+                || TelephonyFeatures.isSubOperatorSpecific(0, "XMO", "CCT")) {
             this.mNetworkValidationBeforeSwitchSupported = true;
         } else {
             this.mNetworkValidationBeforeSwitchSupported = networkValidationBeforeSwitchSupported;
@@ -72,13 +80,22 @@ public final class PhoneCapability implements Parcelable {
     private PhoneCapability(Builder builder) {
         this.mMaxActiveVoiceSubscriptions = builder.mMaxActiveVoiceSubscriptions;
         this.mMaxActiveDataSubscriptions = builder.mMaxActiveDataSubscriptions;
-        this.mLogicalModemList = builder.mLogicalModemList == null ? new ArrayList<>() : builder.mLogicalModemList;
-        this.mNetworkValidationBeforeSwitchSupported = builder.mNetworkValidationBeforeSwitchSupported;
+        this.mLogicalModemList =
+                builder.mLogicalModemList == null ? new ArrayList<>() : builder.mLogicalModemList;
+        this.mNetworkValidationBeforeSwitchSupported =
+                builder.mNetworkValidationBeforeSwitchSupported;
         this.mDeviceNrCapabilities = builder.mDeviceNrCapabilities;
     }
 
     public String toString() {
-        return "mMaxActiveVoiceSubscriptions=" + this.mMaxActiveVoiceSubscriptions + " mMaxActiveDataSubscriptions=" + this.mMaxActiveDataSubscriptions + " mNetworkValidationBeforeSwitchSupported=" + this.mNetworkValidationBeforeSwitchSupported + " mDeviceNrCapability " + Arrays.toString(this.mDeviceNrCapabilities);
+        return "mMaxActiveVoiceSubscriptions="
+                + this.mMaxActiveVoiceSubscriptions
+                + " mMaxActiveDataSubscriptions="
+                + this.mMaxActiveDataSubscriptions
+                + " mNetworkValidationBeforeSwitchSupported="
+                + this.mNetworkValidationBeforeSwitchSupported
+                + " mDeviceNrCapability "
+                + Arrays.toString(this.mDeviceNrCapabilities);
     }
 
     private PhoneCapability(Parcel in) {
@@ -96,7 +113,12 @@ public final class PhoneCapability implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mMaxActiveVoiceSubscriptions), Integer.valueOf(this.mMaxActiveDataSubscriptions), this.mLogicalModemList, Boolean.valueOf(this.mNetworkValidationBeforeSwitchSupported), Integer.valueOf(Arrays.hashCode(this.mDeviceNrCapabilities)));
+        return Objects.hash(
+                Integer.valueOf(this.mMaxActiveVoiceSubscriptions),
+                Integer.valueOf(this.mMaxActiveDataSubscriptions),
+                this.mLogicalModemList,
+                Boolean.valueOf(this.mNetworkValidationBeforeSwitchSupported),
+                Integer.valueOf(Arrays.hashCode(this.mDeviceNrCapabilities)));
     }
 
     public boolean equals(Object o) {
@@ -107,7 +129,12 @@ public final class PhoneCapability implements Parcelable {
             return true;
         }
         PhoneCapability s = (PhoneCapability) o;
-        if (this.mMaxActiveVoiceSubscriptions != s.mMaxActiveVoiceSubscriptions || this.mMaxActiveDataSubscriptions != s.mMaxActiveDataSubscriptions || this.mNetworkValidationBeforeSwitchSupported != s.mNetworkValidationBeforeSwitchSupported || !this.mLogicalModemList.equals(s.mLogicalModemList) || !Arrays.equals(this.mDeviceNrCapabilities, s.mDeviceNrCapabilities)) {
+        if (this.mMaxActiveVoiceSubscriptions != s.mMaxActiveVoiceSubscriptions
+                || this.mMaxActiveDataSubscriptions != s.mMaxActiveDataSubscriptions
+                || this.mNetworkValidationBeforeSwitchSupported
+                        != s.mNetworkValidationBeforeSwitchSupported
+                || !this.mLogicalModemList.equals(s.mLogicalModemList)
+                || !Arrays.equals(this.mDeviceNrCapabilities, s.mDeviceNrCapabilities)) {
             return false;
         }
         return true;
@@ -173,7 +200,8 @@ public final class PhoneCapability implements Parcelable {
             this.mDeviceNrCapabilities = new int[0];
             this.mMaxActiveVoiceSubscriptions = phoneCapability.mMaxActiveVoiceSubscriptions;
             this.mMaxActiveDataSubscriptions = phoneCapability.mMaxActiveDataSubscriptions;
-            this.mNetworkValidationBeforeSwitchSupported = phoneCapability.mNetworkValidationBeforeSwitchSupported;
+            this.mNetworkValidationBeforeSwitchSupported =
+                    phoneCapability.mNetworkValidationBeforeSwitchSupported;
             this.mLogicalModemList = phoneCapability.mLogicalModemList;
             this.mDeviceNrCapabilities = phoneCapability.mDeviceNrCapabilities;
         }
@@ -188,7 +216,8 @@ public final class PhoneCapability implements Parcelable {
             return this;
         }
 
-        public Builder setNetworkValidationBeforeSwitchSupported(boolean networkValidationBeforeSwitchSupported) {
+        public Builder setNetworkValidationBeforeSwitchSupported(
+                boolean networkValidationBeforeSwitchSupported) {
             this.mNetworkValidationBeforeSwitchSupported = networkValidationBeforeSwitchSupported;
             return this;
         }

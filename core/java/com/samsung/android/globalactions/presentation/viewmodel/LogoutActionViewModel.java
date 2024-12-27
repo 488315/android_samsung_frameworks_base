@@ -2,6 +2,7 @@ package com.samsung.android.globalactions.presentation.viewmodel;
 
 import android.app.ActivityManager;
 import android.os.RemoteException;
+
 import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.util.HandlerUtil;
 import com.samsung.android.globalactions.util.LogWrapper;
@@ -14,7 +15,10 @@ public class LogoutActionViewModel implements ActionViewModel {
     private ActionInfo mInfo;
     private final LogWrapper mLogWrapper;
 
-    public LogoutActionViewModel(SamsungGlobalActions samsungGlobalActions, HandlerUtil handlerUtil, LogWrapper logWrapper) {
+    public LogoutActionViewModel(
+            SamsungGlobalActions samsungGlobalActions,
+            HandlerUtil handlerUtil,
+            LogWrapper logWrapper) {
         this.mGlobalActions = samsungGlobalActions;
         this.mHandler = handlerUtil;
         this.mLogWrapper = logWrapper;
@@ -32,12 +36,15 @@ public class LogoutActionViewModel implements ActionViewModel {
 
     @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
     public void onPress() {
-        this.mHandler.postDelayed(new Runnable() { // from class: com.samsung.android.globalactions.presentation.viewmodel.LogoutActionViewModel$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                LogoutActionViewModel.this.lambda$onPress$0();
-            }
-        }, 500L);
+        this.mHandler.postDelayed(
+                new Runnable() { // from class:
+                                 // com.samsung.android.globalactions.presentation.viewmodel.LogoutActionViewModel$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        LogoutActionViewModel.this.lambda$onPress$0();
+                    }
+                },
+                500L);
         this.mGlobalActions.dismissDialog(true);
     }
 

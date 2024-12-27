@@ -1,6 +1,5 @@
 package com.android.server.am;
 
-import com.android.server.am.BaseAppStateEventsTracker;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -10,7 +9,11 @@ public abstract class BaseAppStateTimeSlotEvents extends BaseAppStateEvents {
     public final long[] mCurSlotStartTime;
     public final long mTimeSlotSize;
 
-    public BaseAppStateTimeSlotEvents(int i, String str, long j, BaseAppStateEventsTracker.BaseAppStateEventsPolicy baseAppStateEventsPolicy) {
+    public BaseAppStateTimeSlotEvents(
+            int i,
+            String str,
+            long j,
+            BaseAppStateEventsTracker.BaseAppStateEventsPolicy baseAppStateEventsPolicy) {
         super(i, str, 1, baseAppStateEventsPolicy);
         this.mTimeSlotSize = j;
         this.mCurSlotStartTime = new long[1];
@@ -27,8 +30,10 @@ public abstract class BaseAppStateTimeSlotEvents extends BaseAppStateEvents {
         int i;
         BaseAppStateTimeSlotEvents baseAppStateTimeSlotEvents2 = this;
         if (baseAppStateEvents instanceof BaseAppStateTimeSlotEvents) {
-            BaseAppStateTimeSlotEvents baseAppStateTimeSlotEvents3 = (BaseAppStateTimeSlotEvents) baseAppStateEvents;
-            if (baseAppStateTimeSlotEvents2.mEvents.length != baseAppStateTimeSlotEvents3.mEvents.length) {
+            BaseAppStateTimeSlotEvents baseAppStateTimeSlotEvents3 =
+                    (BaseAppStateTimeSlotEvents) baseAppStateEvents;
+            if (baseAppStateTimeSlotEvents2.mEvents.length
+                    != baseAppStateTimeSlotEvents3.mEvents.length) {
                 return;
             }
             int i2 = 0;
@@ -61,7 +66,14 @@ public abstract class BaseAppStateTimeSlotEvents extends BaseAppStateEvents {
                         long max = Math.max(j, j2);
                         long min = Math.min(j4, size2);
                         while (min <= max) {
-                            linkedList3.add(Integer.valueOf(((min < j4 || min > j) ? 0 : ((Integer) it.next()).intValue()) + ((min < size2 || min > j2) ? 0 : ((Integer) it2.next()).intValue())));
+                            linkedList3.add(
+                                    Integer.valueOf(
+                                            ((min < j4 || min > j)
+                                                            ? 0
+                                                            : ((Integer) it.next()).intValue())
+                                                    + ((min < size2 || min > j2)
+                                                            ? 0
+                                                            : ((Integer) it2.next()).intValue())));
                             min += j3;
                         }
                         this.mEvents[i3] = linkedList3;
@@ -136,7 +148,9 @@ public abstract class BaseAppStateTimeSlotEvents extends BaseAppStateEvents {
         }
         long j2 = this.mTimeSlotSize;
         long j3 = j - (j % j2);
-        for (long size = this.mCurSlotStartTime[i] - ((linkedList.size() - 1) * j2); size < j3 && linkedList.size() > 0; size += j2) {
+        for (long size = this.mCurSlotStartTime[i] - ((linkedList.size() - 1) * j2);
+                size < j3 && linkedList.size() > 0;
+                size += j2) {
             linkedList.pop();
         }
     }

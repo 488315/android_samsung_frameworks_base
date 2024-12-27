@@ -21,10 +21,22 @@ public class NinePatch {
         public final float outlineRadius;
         public final Rect outlineRect;
 
-        InsetStruct(int opticalLeft, int opticalTop, int opticalRight, int opticalBottom, int outlineLeft, int outlineTop, int outlineRight, int outlineBottom, float outlineRadius, int outlineAlpha, float decodeScale) {
+        InsetStruct(
+                int opticalLeft,
+                int opticalTop,
+                int opticalRight,
+                int opticalBottom,
+                int outlineLeft,
+                int outlineTop,
+                int outlineRight,
+                int outlineBottom,
+                float outlineRadius,
+                int outlineAlpha,
+                float decodeScale) {
             this.opticalRect = new Rect(opticalLeft, opticalTop, opticalRight, opticalBottom);
             this.opticalRect.scale(decodeScale);
-            this.outlineRect = scaleInsets(outlineLeft, outlineTop, outlineRight, outlineBottom, decodeScale);
+            this.outlineRect =
+                    scaleInsets(outlineLeft, outlineTop, outlineRight, outlineBottom, decodeScale);
             this.outlineRadius = outlineRadius * decodeScale;
             this.outlineAlpha = outlineAlpha / 255.0f;
         }
@@ -108,7 +120,9 @@ public class NinePatch {
     }
 
     public final Region getTransparentRegion(Rect bounds) {
-        long r = nativeGetTransparentRegion(this.mBitmap.getNativeInstance(), this.mNativeChunk, bounds);
+        long r =
+                nativeGetTransparentRegion(
+                        this.mBitmap.getNativeInstance(), this.mNativeChunk, bounds);
         if (r != 0) {
             return new Region(r);
         }

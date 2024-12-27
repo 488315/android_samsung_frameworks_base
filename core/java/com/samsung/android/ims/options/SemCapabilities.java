@@ -6,7 +6,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SemSystemProperties;
 import android.util.Log;
+
 import com.samsung.android.ims.settings.SemImsProfile;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,12 +19,15 @@ import java.util.Map;
 public class SemCapabilities implements Parcelable, Cloneable {
     public static final Parcelable.Creator<SemCapabilities> CREATOR;
     public static final long FEATURE_ALL = 1152921504606846975L;
-    public static final String FEATURE_TAG_CANCEL_MESSAGE = "+g.3gpp.iari-ref=\"urn%3Aurn-7%3A3gpp-application.ims.iari.rcs.cancelmessage\"";
+    public static final String FEATURE_TAG_CANCEL_MESSAGE =
+            "+g.3gpp.iari-ref=\"urn%3Aurn-7%3A3gpp-application.ims.iari.rcs.cancelmessage\"";
     public static final String FEATURE_TAG_IPCALL = "+g.gsma.rcs.ipcall";
     public static final String FEATURE_TAG_IPCALL_VIDEO = "+g.gsma.rcs.ipcall;video";
     public static final String FEATURE_TAG_IPCALL_VIDEO_ONLY = "+g.gsma.rcs.ipvideocallonly";
-    public static final String FEATURE_TAG_MMTEL = "+g.3gpp.icsi-ref=\"urn%3Aurn-7%3A3gpp-service.ims.icsi.mmtel\"";
-    public static final String FEATURE_TAG_MMTEL_VIDEO = "+g.3gpp.icsi-ref=\"urn%3Aurn-7%3A3gpp-service.ims.icsi.mmtel\";video";
+    public static final String FEATURE_TAG_MMTEL =
+            "+g.3gpp.icsi-ref=\"urn%3Aurn-7%3A3gpp-service.ims.icsi.mmtel\"";
+    public static final String FEATURE_TAG_MMTEL_VIDEO =
+            "+g.3gpp.icsi-ref=\"urn%3Aurn-7%3A3gpp-service.ims.icsi.mmtel\";video";
     private static final String LOG_TAG = "SemCapexInfo";
     private long mAvailableFeatures;
     private String mBotServiceId;
@@ -32,7 +37,8 @@ public class SemCapabilities implements Parcelable, Cloneable {
     private boolean mIsExpired;
     private boolean mIsLegacyLatching;
     private Date mTimestamp;
-    private static final boolean SHIP_BUILD = "true".equals(SemSystemProperties.get("ro.product_ship", "false"));
+    private static final boolean SHIP_BUILD =
+            "true".equals(SemSystemProperties.get("ro.product_ship", "false"));
     public static int FEATURE_NON_RCS_USER = 16777216;
     public static int FEATURE_NOT_UPDATED = 33554432;
     public static int FEATURE_OFFLINE_RCS_USER = 0;
@@ -52,8 +58,7 @@ public class SemCapabilities implements Parcelable, Cloneable {
     public static int FEATURE_STICKER = 134217728;
     public static long FEATURE_ENRICHED_CALL_COMPOSER = 68719476736L;
 
-    @Deprecated
-    public static long FEATURE_CHATBOT_COMMUNICATION = 1099511627776L;
+    @Deprecated public static long FEATURE_CHATBOT_COMMUNICATION = 1099511627776L;
     public static long FEATURE_CHATBOT_ROLE = 2199023255552L;
     public static long FEATURE_CHATBOT_STANDALONE_MSG = FrontendInnerFec.FEC_20_30;
     public static long FEATURE_MMTEL_CALL_COMPOSER = FrontendInnerFec.FEC_96_180;
@@ -87,19 +92,22 @@ public class SemCapabilities implements Parcelable, Cloneable {
         sFeatures.put(Long.valueOf(FEATURE_CANCEL_MESSAGE), "cancelmessage");
         sFeatures.put(Long.valueOf(FEATURE_CHATBOT_STANDALONE_MSG), "chatbot_standalone_msg");
         sFeatures.put(Long.valueOf(FEATURE_CHATBOT_ROLE), "isbot");
-        CREATOR = new Parcelable.Creator<SemCapabilities>() { // from class: com.samsung.android.ims.options.SemCapabilities.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SemCapabilities createFromParcel(Parcel in) {
-                return new SemCapabilities(in);
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        SemCapabilities>() { // from class:
+                                             // com.samsung.android.ims.options.SemCapabilities.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SemCapabilities createFromParcel(Parcel in) {
+                        return new SemCapabilities(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SemCapabilities[] newArray(int size) {
-                return new SemCapabilities[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SemCapabilities[] newArray(int size) {
+                        return new SemCapabilities[size];
+                    }
+                };
     }
 
     @Deprecated
@@ -107,8 +115,7 @@ public class SemCapabilities implements Parcelable, Cloneable {
         public static final int FETCH_TYPE_OTHER = 0;
         public static final int FETCH_TYPE_POLL = 1;
 
-        public FetchType() {
-        }
+        public FetchType() {}
     }
 
     public SemCapabilities(Builder builder) {
@@ -233,7 +240,21 @@ public class SemCapabilities implements Parcelable, Cloneable {
     }
 
     public String toString() {
-        return "Capabilities [mIsAvailable=" + this.mIsAvailable + ", mFeatures=" + Long.toHexString(this.mFeatures) + ", mIsLegacyLatching=" + this.mIsLegacyLatching + ", mBotServiceId=" + (SHIP_BUILD ? "xxxxx" : this.mBotServiceId) + ", mTimestamp=" + this.mTimestamp + ", mAvailableFeatures=" + dumpServices(this.mAvailableFeatures) + ", mFeatures=" + dumpServices(this.mFeatures) + NavigationBarInflaterView.SIZE_MOD_END;
+        return "Capabilities [mIsAvailable="
+                + this.mIsAvailable
+                + ", mFeatures="
+                + Long.toHexString(this.mFeatures)
+                + ", mIsLegacyLatching="
+                + this.mIsLegacyLatching
+                + ", mBotServiceId="
+                + (SHIP_BUILD ? "xxxxx" : this.mBotServiceId)
+                + ", mTimestamp="
+                + this.mTimestamp
+                + ", mAvailableFeatures="
+                + dumpServices(this.mAvailableFeatures)
+                + ", mFeatures="
+                + dumpServices(this.mFeatures)
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public static Builder getBuilder() {

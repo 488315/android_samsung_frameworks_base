@@ -24,7 +24,6 @@ public final class BinaryLogEntry {
         public static final long VAL_INT64 = 1112396529667L;
         public static final long VAL_STRING = 1138166333444L;
 
-        public Elem() {
-        }
+        public Elem() {}
     }
 }

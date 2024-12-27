@@ -20,15 +20,18 @@ import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.server.backup.BackupManagerConstants;
 import com.android.server.enterprise.EnterpriseService;
 import com.android.server.enterprise.EnterpriseServiceCallback;
 import com.android.server.enterprise.storage.EdmStorageProvider;
 import com.android.server.enterprise.utils.Utils;
+
 import com.samsung.android.knox.analytics.KnoxAnalytics;
 import com.samsung.android.knox.analytics.KnoxAnalyticsData;
 import com.samsung.android.knox.analytics.service.EventQueue;
 import com.samsung.android.knox.analytics.service.KnoxAnalyticsSystemService;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.util.Calendar;
@@ -49,7 +52,9 @@ public final class LicenseLogService extends Binder implements EnterpriseService
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if ("android.intent.action.LOCKED_BOOT_COMPLETED".equals(action) || "com.samsung.android.knox.intent.action.LICENSE_LOG_DELETE_OLD_RECORDS_INTERNAL".equals(action)) {
+            if ("android.intent.action.LOCKED_BOOT_COMPLETED".equals(action)
+                    || "com.samsung.android.knox.intent.action.LICENSE_LOG_DELETE_OLD_RECORDS_INTERNAL"
+                            .equals(action)) {
                 Log.v("LicenseLogService", "License log delete old records for action " + action);
                 LicenseLogService.mHandler.sendMessage(LicenseLogService.mHandler.obtainMessage(1));
             }
@@ -86,25 +91,53 @@ public final class LicenseLogService extends Binder implements EnterpriseService
                     long clearCallingIdentity2 = Binder.clearCallingIdentity();
                     try {
                         try {
-                            String packageNameForUid = LicenseLogService.mEdmStorageProvider.getPackageNameForUid(i2);
+                            String packageNameForUid =
+                                    LicenseLogService.mEdmStorageProvider.getPackageNameForUid(i2);
                             if (packageNameForUid == null) {
-                                packageNameForUid = licenseLogService.mContext.getPackageManager().getNameForUid(i2);
+                                packageNameForUid =
+                                        licenseLogService
+                                                .mContext
+                                                .getPackageManager()
+                                                .getNameForUid(i2);
                             }
                             if (i4 > 0) {
-                                str = LicenseLogService.mEdmStorageProvider.getPackageNameForUid(i4);
+                                str =
+                                        LicenseLogService.mEdmStorageProvider.getPackageNameForUid(
+                                                i4);
                                 if (str == null) {
-                                    str = licenseLogService.mContext.getPackageManager().getNameForUid(i4);
+                                    str =
+                                            licenseLogService
+                                                    .mContext
+                                                    .getPackageManager()
+                                                    .getNameForUid(i4);
                                 }
                             } else {
                                 str = null;
                             }
                             if (packageNameForUid != null) {
-                                IEDMProxy service = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
-                                if (service != null && service.isAllowedMamPackage(packageNameForUid)) {
-                                    Log.d("LicenseLogService", "skip _log - caller: " + packageNameForUid + ", apiName: " + string);
-                                } else if (Utils.isPlatformSignedApp(licenseLogService.mContext, packageNameForUid, UserHandle.getUserId(i2)) || ((enterpriseLicenseService = LicenseLogService.mLicenseService) != null && enterpriseLicenseService.getLicenseInfoByAdmin(packageNameForUid) != null)) {
+                                IEDMProxy service =
+                                        EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
+                                if (service != null
+                                        && service.isAllowedMamPackage(packageNameForUid)) {
+                                    Log.d(
+                                            "LicenseLogService",
+                                            "skip _log - caller: "
+                                                    + packageNameForUid
+                                                    + ", apiName: "
+                                                    + string);
+                                } else if (Utils.isPlatformSignedApp(
+                                                licenseLogService.mContext,
+                                                packageNameForUid,
+                                                UserHandle.getUserId(i2))
+                                        || ((enterpriseLicenseService =
+                                                                LicenseLogService.mLicenseService)
+                                                        != null
+                                                && enterpriseLicenseService.getLicenseInfoByAdmin(
+                                                                packageNameForUid)
+                                                        != null)) {
                                     LicenseLogService._log_for_old(string, packageNameForUid);
-                                    licenseLogService._log_for_ka(string, packageNameForUid, z, z2, i3, z3, str);
+                                    licenseLogService._log_for_ka(
+                                            string, packageNameForUid, z, z2, i3, z3, str);
                                 }
                             }
                         } catch (Exception e) {
@@ -132,33 +165,65 @@ public final class LicenseLogService extends Binder implements EnterpriseService
                         contentValues.put("date<=?", Long.valueOf(j));
                         LicenseLogService.mEdmStorageProvider.delete("LICENSE_LOG", contentValues);
                         clearCallingIdentity = Binder.clearCallingIdentity();
-                        long j2 = timeInMillis + BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
+                        long j2 =
+                                timeInMillis
+                                        + BackupManagerConstants
+                                                .DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
                         try {
-                            AlarmManager alarmManager = (AlarmManager) licenseLogService.mContext.getSystemService("alarm");
-                            PendingIntent broadcast = PendingIntent.getBroadcast(licenseLogService.mContext, 0, new Intent("com.samsung.android.knox.intent.action.LICENSE_LOG_DELETE_OLD_RECORDS_INTERNAL"), 1207959552);
+                            AlarmManager alarmManager =
+                                    (AlarmManager)
+                                            licenseLogService.mContext.getSystemService("alarm");
+                            PendingIntent broadcast =
+                                    PendingIntent.getBroadcast(
+                                            licenseLogService.mContext,
+                                            0,
+                                            new Intent(
+                                                    "com.samsung.android.knox.intent.action.LICENSE_LOG_DELETE_OLD_RECORDS_INTERNAL"),
+                                            1207959552);
                             alarmManager.cancel(broadcast);
                             if (j2 != 0) {
                                 alarmManager.set(1, j2, broadcast);
                             }
                         } catch (Exception e2) {
                             e = e2;
-                            Log.w("LicenseLogService", "handleLicenseLogCleanNotification() failed");
-                            Slog.w("LicenseLogService", "handleLicenseLogCleanNotification() failed", e);
+                            Log.w(
+                                    "LicenseLogService",
+                                    "handleLicenseLogCleanNotification() failed");
+                            Slog.w(
+                                    "LicenseLogService",
+                                    "handleLicenseLogCleanNotification() failed",
+                                    e);
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         }
                     } catch (Throwable th) {
                         long clearCallingIdentity3 = Binder.clearCallingIdentity();
-                        long j3 = timeInMillis + BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
+                        long j3 =
+                                timeInMillis
+                                        + BackupManagerConstants
+                                                .DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
                         try {
-                            AlarmManager alarmManager2 = (AlarmManager) licenseLogService.mContext.getSystemService("alarm");
-                            PendingIntent broadcast2 = PendingIntent.getBroadcast(licenseLogService.mContext, 0, new Intent("com.samsung.android.knox.intent.action.LICENSE_LOG_DELETE_OLD_RECORDS_INTERNAL"), 1207959552);
+                            AlarmManager alarmManager2 =
+                                    (AlarmManager)
+                                            licenseLogService.mContext.getSystemService("alarm");
+                            PendingIntent broadcast2 =
+                                    PendingIntent.getBroadcast(
+                                            licenseLogService.mContext,
+                                            0,
+                                            new Intent(
+                                                    "com.samsung.android.knox.intent.action.LICENSE_LOG_DELETE_OLD_RECORDS_INTERNAL"),
+                                            1207959552);
                             alarmManager2.cancel(broadcast2);
                             if (j3 != 0) {
                                 alarmManager2.set(1, j3, broadcast2);
                             }
                         } catch (Exception e3) {
-                            Log.w("LicenseLogService", "handleLicenseLogCleanNotification() failed");
-                            Slog.w("LicenseLogService", "handleLicenseLogCleanNotification() failed", e3);
+                            Log.w(
+                                    "LicenseLogService",
+                                    "handleLicenseLogCleanNotification() failed");
+                            Slog.w(
+                                    "LicenseLogService",
+                                    "handleLicenseLogCleanNotification() failed",
+                                    e3);
                         }
                         Binder.restoreCallingIdentity(clearCallingIdentity3);
                         throw th;
@@ -167,10 +232,20 @@ public final class LicenseLogService extends Binder implements EnterpriseService
                     Log.w("LicenseLogService", "handleLicenseLogCleanNotification() failed");
                     Slog.w("LicenseLogService", "handleLicenseLogCleanNotification() failed", e4);
                     clearCallingIdentity = Binder.clearCallingIdentity();
-                    long j4 = timeInMillis + BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
+                    long j4 =
+                            timeInMillis
+                                    + BackupManagerConstants
+                                            .DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
                     try {
-                        AlarmManager alarmManager3 = (AlarmManager) licenseLogService.mContext.getSystemService("alarm");
-                        PendingIntent broadcast3 = PendingIntent.getBroadcast(licenseLogService.mContext, 0, new Intent("com.samsung.android.knox.intent.action.LICENSE_LOG_DELETE_OLD_RECORDS_INTERNAL"), 1207959552);
+                        AlarmManager alarmManager3 =
+                                (AlarmManager) licenseLogService.mContext.getSystemService("alarm");
+                        PendingIntent broadcast3 =
+                                PendingIntent.getBroadcast(
+                                        licenseLogService.mContext,
+                                        0,
+                                        new Intent(
+                                                "com.samsung.android.knox.intent.action.LICENSE_LOG_DELETE_OLD_RECORDS_INTERNAL"),
+                                        1207959552);
                         alarmManager3.cancel(broadcast3);
                         if (j4 != 0) {
                             alarmManager3.set(1, j4, broadcast3);
@@ -178,7 +253,10 @@ public final class LicenseLogService extends Binder implements EnterpriseService
                     } catch (Exception e5) {
                         e = e5;
                         Log.w("LicenseLogService", "handleLicenseLogCleanNotification() failed");
-                        Slog.w("LicenseLogService", "handleLicenseLogCleanNotification() failed", e);
+                        Slog.w(
+                                "LicenseLogService",
+                                "handleLicenseLogCleanNotification() failed",
+                                e);
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     }
                 }
@@ -192,10 +270,13 @@ public final class LicenseLogService extends Binder implements EnterpriseService
         AnonymousClass1 anonymousClass1 = new AnonymousClass1();
         this.mContext = context;
         mEdmStorageProvider = new EdmStorageProvider(context);
-        mLicenseService = (EnterpriseLicenseService) EnterpriseService.getPolicyService("enterprise_license_policy");
+        mLicenseService =
+                (EnterpriseLicenseService)
+                        EnterpriseService.getPolicyService("enterprise_license_policy");
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.LOCKED_BOOT_COMPLETED");
-        intentFilter.addAction("com.samsung.android.knox.intent.action.LICENSE_LOG_DELETE_OLD_RECORDS_INTERNAL");
+        intentFilter.addAction(
+                "com.samsung.android.knox.intent.action.LICENSE_LOG_DELETE_OLD_RECORDS_INTERNAL");
         context.registerReceiver(anonymousClass1, intentFilter, 2);
         HandlerThread handlerThread = new HandlerThread("LicenseLogService");
         this.mHandlerThread = handlerThread;
@@ -224,8 +305,10 @@ public final class LicenseLogService extends Binder implements EnterpriseService
         mEdmStorageProvider.putValues("LICENSE_LOG", contentValues2, contentValues);
     }
 
-    public final void _log_for_ka(String str, String str2, boolean z, boolean z2, int i, boolean z3, String str3) {
-        KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData(EventQueue.API_USAGE_FEATURE_NAME, 1, str);
+    public final void _log_for_ka(
+            String str, String str2, boolean z, boolean z2, int i, boolean z3, String str3) {
+        KnoxAnalyticsData knoxAnalyticsData =
+                new KnoxAnalyticsData(EventQueue.API_USAGE_FEATURE_NAME, 1, str);
         knoxAnalyticsData.setProperty("pN", str3 != null ? str3 : str2);
         knoxAnalyticsData.setUserTypeProperty(i);
         knoxAnalyticsData.setProperty("ppi", z3 ? 1 : 0);
@@ -237,30 +320,29 @@ public final class LicenseLogService extends Binder implements EnterpriseService
             knoxAnalyticsData.setProperty("ons", 1);
         }
         try {
-            knoxAnalyticsData.setProperty(KnoxAnalyticsSystemService.PUB_KEY_MD5_PARAMETER_NAME, Utils.getApplicationPubKeyMD5(this.mContext, str2));
-        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException | CertificateException unused) {
+            knoxAnalyticsData.setProperty(
+                    KnoxAnalyticsSystemService.PUB_KEY_MD5_PARAMETER_NAME,
+                    Utils.getApplicationPubKeyMD5(this.mContext, str2));
+        } catch (PackageManager.NameNotFoundException
+                | NoSuchAlgorithmException
+                | CertificateException unused) {
             Log.e("LicenseLogService", "error getApplicationPubKeyMD5");
         }
         KnoxAnalytics.log(knoxAnalyticsData);
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminRemoved(int i) {
-    }
+    public final void onAdminRemoved(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onPreAdminRemoval(int i) {
-    }
+    public final void onPreAdminRemoval(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void systemReady() {
-    }
+    public final void systemReady() {}
 }

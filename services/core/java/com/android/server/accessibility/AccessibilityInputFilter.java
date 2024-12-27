@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.view.accessibility.AccessibilityEvent;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
@@ -29,6 +30,7 @@ import com.android.server.accessibility.magnification.OneFingerPanningSettingsPr
 import com.android.server.accessibility.magnification.WindowMagnificationGestureHandler;
 import com.android.server.accessibility.magnification.WindowMagnificationPromptController;
 import com.android.server.policy.WindowManagerPolicy;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -37,7 +39,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class AccessibilityInputFilter extends InputFilter implements EventStreamTransformation {
+public final class AccessibilityInputFilter extends InputFilter
+        implements EventStreamTransformation {
     public final AccessibilityManagerService mAms;
     public AutoActionController mAutoActionController;
     public AutoclickController mAutoclickController;
@@ -97,12 +100,12 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GenericMotionEventStreamState extends EventStreamState {
-        public GenericMotionEventStreamState() {
-        }
+        public GenericMotionEventStreamState() {}
 
         @Override // com.android.server.accessibility.AccessibilityInputFilter.EventStreamState
         public final boolean shouldProcessMotionEvent(MotionEvent motionEvent) {
-            return AccessibilityInputFilter.m114$$Nest$manyServiceWantsGenericMotionEvent(AccessibilityInputFilter.this, motionEvent);
+            return AccessibilityInputFilter.m114$$Nest$manyServiceWantsGenericMotionEvent(
+                    AccessibilityInputFilter.this, motionEvent);
         }
     }
 
@@ -201,16 +204,21 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
     }
 
     /* renamed from: -$$Nest$manyServiceWantsGenericMotionEvent, reason: not valid java name */
-    public static boolean m114$$Nest$manyServiceWantsGenericMotionEvent(AccessibilityInputFilter accessibilityInputFilter, MotionEvent motionEvent) {
+    public static boolean m114$$Nest$manyServiceWantsGenericMotionEvent(
+            AccessibilityInputFilter accessibilityInputFilter, MotionEvent motionEvent) {
         accessibilityInputFilter.getClass();
-        if (!motionEvent.isFromSource(4098) || (accessibilityInputFilter.mEnabledFeatures & 2) == 0) {
-            return (accessibilityInputFilter.mCombinedGenericMotionEventSources & (motionEvent.getSource() & (-256))) != 0;
+        if (!motionEvent.isFromSource(4098)
+                || (accessibilityInputFilter.mEnabledFeatures & 2) == 0) {
+            return (accessibilityInputFilter.mCombinedGenericMotionEventSources
+                            & (motionEvent.getSource() & (-256)))
+                    != 0;
         }
         return false;
     }
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    public AccessibilityInputFilter(Context context, AccessibilityManagerService accessibilityManagerService) {
+    public AccessibilityInputFilter(
+            Context context, AccessibilityManagerService accessibilityManagerService) {
         super(context.getMainLooper());
         SparseArray sparseArray = new SparseArray(0);
         this.mTouchExplorer = new SparseArray(0);
@@ -227,8 +235,10 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
         this.mEventHandler = sparseArray;
     }
 
-    public final void addFirstEventHandler(int i, EventStreamTransformation eventStreamTransformation) {
-        EventStreamTransformation eventStreamTransformation2 = (EventStreamTransformation) this.mEventHandler.get(i);
+    public final void addFirstEventHandler(
+            int i, EventStreamTransformation eventStreamTransformation) {
+        EventStreamTransformation eventStreamTransformation2 =
+                (EventStreamTransformation) this.mEventHandler.get(i);
         if (eventStreamTransformation2 != null) {
             eventStreamTransformation.setNext(eventStreamTransformation2);
         } else {
@@ -238,10 +248,10 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
     }
 
     @Override // com.android.server.accessibility.EventStreamTransformation
-    public final void clearEvents(int i) {
-    }
+    public final void clearEvents(int i) {}
 
-    public final MagnificationGestureHandler createMagnificationGestureHandler(Context context, int i) {
+    public final MagnificationGestureHandler createMagnificationGestureHandler(
+            Context context, int i) {
         int magnificationModeLocked;
         int i2 = this.mEnabledFeatures;
         boolean z = (i2 & 1) != 0;
@@ -249,28 +259,61 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
         boolean z3 = (i2 & 64) != 0;
         AccessibilityManagerService accessibilityManagerService = this.mAms;
         synchronized (accessibilityManagerService.mLock) {
-            magnificationModeLocked = accessibilityManagerService.getUserStateLocked(accessibilityManagerService.mCurrentUserId).getMagnificationModeLocked(i);
+            magnificationModeLocked =
+                    accessibilityManagerService
+                            .getUserStateLocked(accessibilityManagerService.mCurrentUserId)
+                            .getMagnificationModeLocked(i);
         }
         if (magnificationModeLocked == 2) {
             Context createWindowContext = context.createWindowContext(2039, null);
-            MagnificationConnectionManager magnificationConnectionManager = this.mAms.getMagnificationConnectionManager();
+            MagnificationConnectionManager magnificationConnectionManager =
+                    this.mAms.getMagnificationConnectionManager();
             AccessibilityManagerService accessibilityManagerService2 = this.mAms;
-            return new WindowMagnificationGestureHandler(createWindowContext, magnificationConnectionManager, accessibilityManagerService2.mTraceManager, accessibilityManagerService2.mMagnificationController, z, z2, z3, i);
+            return new WindowMagnificationGestureHandler(
+                    createWindowContext,
+                    magnificationConnectionManager,
+                    accessibilityManagerService2.mTraceManager,
+                    accessibilityManagerService2.mMagnificationController,
+                    z,
+                    z2,
+                    z3,
+                    i);
         }
         Context createWindowContext2 = context.createWindowContext(2027, null);
-        FullScreenMagnificationVibrationHelper fullScreenMagnificationVibrationHelper = new FullScreenMagnificationVibrationHelper(createWindowContext2);
-        FullScreenMagnificationController fullScreenMagnificationController = this.mAms.mMagnificationController.getFullScreenMagnificationController();
+        FullScreenMagnificationVibrationHelper fullScreenMagnificationVibrationHelper =
+                new FullScreenMagnificationVibrationHelper(createWindowContext2);
+        FullScreenMagnificationController fullScreenMagnificationController =
+                this.mAms.mMagnificationController.getFullScreenMagnificationController();
         AccessibilityManagerService accessibilityManagerService3 = this.mAms;
-        AccessibilityTraceManager accessibilityTraceManager = accessibilityManagerService3.mTraceManager;
-        MagnificationController magnificationController = accessibilityManagerService3.mMagnificationController;
-        WindowMagnificationPromptController windowMagnificationPromptController = new WindowMagnificationPromptController(context, this.mUserId);
+        AccessibilityTraceManager accessibilityTraceManager =
+                accessibilityManagerService3.mTraceManager;
+        MagnificationController magnificationController =
+                accessibilityManagerService3.mMagnificationController;
+        WindowMagnificationPromptController windowMagnificationPromptController =
+                new WindowMagnificationPromptController(context, this.mUserId);
         ViewConfiguration viewConfiguration = ViewConfiguration.get(createWindowContext2);
         Flags.enableMagnificationOneFingerPanningGesture();
-        OneFingerPanningSettingsProvider oneFingerPanningSettingsProvider = new OneFingerPanningSettingsProvider();
+        OneFingerPanningSettingsProvider oneFingerPanningSettingsProvider =
+                new OneFingerPanningSettingsProvider();
         AtomicBoolean atomicBoolean = new AtomicBoolean();
         oneFingerPanningSettingsProvider.mCached = atomicBoolean;
-        atomicBoolean.set(OneFingerPanningSettingsProvider.isOneFingerPanningEnabledDefault(createWindowContext2));
-        return new FullScreenMagnificationGestureHandler(createWindowContext2, fullScreenMagnificationController, accessibilityTraceManager, magnificationController, z, z2, z3, windowMagnificationPromptController, i, fullScreenMagnificationVibrationHelper, null, viewConfiguration, oneFingerPanningSettingsProvider);
+        atomicBoolean.set(
+                OneFingerPanningSettingsProvider.isOneFingerPanningEnabledDefault(
+                        createWindowContext2));
+        return new FullScreenMagnificationGestureHandler(
+                createWindowContext2,
+                fullScreenMagnificationController,
+                accessibilityTraceManager,
+                magnificationController,
+                z,
+                z2,
+                z3,
+                windowMagnificationPromptController,
+                i,
+                fullScreenMagnificationVibrationHelper,
+                null,
+                viewConfiguration,
+                oneFingerPanningSettingsProvider);
     }
 
     public final void disableFeatures() {
@@ -310,7 +353,8 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
     }
 
     public final void disableFeaturesForDisplay(int i) {
-        MotionEventInjector motionEventInjector = (MotionEventInjector) this.mMotionEventInjectors.get(i);
+        MotionEventInjector motionEventInjector =
+                (MotionEventInjector) this.mMotionEventInjectors.get(i);
         if (motionEventInjector != null) {
             motionEventInjector.onDestroy();
             this.mMotionEventInjectors.remove(i);
@@ -323,7 +367,8 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
             }
             this.mTouchExplorer.remove(i);
         }
-        MagnificationGestureHandler magnificationGestureHandler = (MagnificationGestureHandler) this.mMagnificationGestureHandler.get(i);
+        MagnificationGestureHandler magnificationGestureHandler =
+                (MagnificationGestureHandler) this.mMagnificationGestureHandler.get(i);
         if (magnificationGestureHandler != null) {
             magnificationGestureHandler.onDestroy();
             this.mMagnificationGestureHandler.remove(i);
@@ -333,7 +378,8 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
         }
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (this.mEventHandler == null) {
             return;
         }
@@ -342,7 +388,8 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
         ArrayList validDisplayList = this.mAms.getValidDisplayList();
         for (int i = 0; i < validDisplayList.size(); i++) {
             int displayId = ((Display) validDisplayList.get(i)).getDisplayId();
-            EventStreamTransformation eventStreamTransformation = (EventStreamTransformation) this.mEventHandler.get(displayId);
+            EventStreamTransformation eventStreamTransformation =
+                    (EventStreamTransformation) this.mEventHandler.get(displayId);
             if (eventStreamTransformation != null) {
                 printWriter.append("Enabled features of Display [");
                 printWriter.append((CharSequence) Integer.toString(displayId));
@@ -367,11 +414,13 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
             printWriter.println();
         }
         try {
-            printWriter.append((CharSequence) ("mEnabledFeatures : " + String.format("0x%08X", Integer.valueOf(this.mEnabledFeatures))));
-            if (this.mTouchExplorer.size() > 0) {
-            }
-            if (this.mMagnificationGestureHandler.size() > 0) {
-            }
+            printWriter.append(
+                    (CharSequence)
+                            ("mEnabledFeatures : "
+                                    + String.format(
+                                            "0x%08X", Integer.valueOf(this.mEnabledFeatures))));
+            if (this.mTouchExplorer.size() > 0) {}
+            if (this.mMagnificationGestureHandler.size() > 0) {}
         } catch (Exception unused) {
         }
     }
@@ -391,7 +440,11 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
             }
         }
         if ((this.mEnabledFeatures & 4) != 0) {
-            KeyboardInterceptor keyboardInterceptor = new KeyboardInterceptor(this.mAms, (WindowManagerPolicy) LocalServices.getService(WindowManagerPolicy.class));
+            KeyboardInterceptor keyboardInterceptor =
+                    new KeyboardInterceptor(
+                            this.mAms,
+                            (WindowManagerPolicy)
+                                    LocalServices.getService(WindowManagerPolicy.class));
             this.mKeyboardInterceptor = keyboardInterceptor;
             addFirstEventHandler(0, keyboardInterceptor);
         }
@@ -408,12 +461,19 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
         }
         if ((this.mEnabledFeatures & 8) != 0) {
             if (this.mAutoclickController == null) {
-                this.mAutoclickController = new AutoclickController(this.mContext, this.mUserId, this.mAms.mTraceManager);
+                this.mAutoclickController =
+                        new AutoclickController(
+                                this.mContext, this.mUserId, this.mAms.mTraceManager);
             }
             addFirstEventHandler(displayId, this.mAutoclickController);
         }
         if ((this.mEnabledFeatures & 2) != 0) {
-            TouchExplorer touchExplorer = new TouchExplorer(createDisplayContext, this.mAms, null, new Handler(createDisplayContext.getMainLooper()));
+            TouchExplorer touchExplorer =
+                    new TouchExplorer(
+                            createDisplayContext,
+                            this.mAms,
+                            null,
+                            new Handler(createDisplayContext.getMainLooper()));
             int i = this.mEnabledFeatures;
             int i2 = i & 128;
             GestureManifold gestureManifold = touchExplorer.mGestureDetector;
@@ -422,11 +482,14 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
             }
             if ((i & 256) != 0 && !gestureManifold.mMultiFingerGesturesEnabled) {
                 gestureManifold.mMultiFingerGesturesEnabled = true;
-                ((ArrayList) gestureManifold.mGestures).addAll(gestureManifold.mMultiFingerGestures);
+                ((ArrayList) gestureManifold.mGestures)
+                        .addAll(gestureManifold.mMultiFingerGestures);
             }
-            if ((this.mEnabledFeatures & 512) != 0 && !gestureManifold.mTwoFingerPassthroughEnabled) {
+            if ((this.mEnabledFeatures & 512) != 0
+                    && !gestureManifold.mTwoFingerPassthroughEnabled) {
                 gestureManifold.mTwoFingerPassthroughEnabled = true;
-                ((ArrayList) gestureManifold.mMultiFingerGestures).removeAll(gestureManifold.mTwoFingerSwipes);
+                ((ArrayList) gestureManifold.mMultiFingerGestures)
+                        .removeAll(gestureManifold.mTwoFingerSwipes);
                 ((ArrayList) gestureManifold.mGestures).removeAll(gestureManifold.mTwoFingerSwipes);
             }
             int i3 = this.mEnabledFeatures;
@@ -441,78 +504,90 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
                 touchExplorer.mSendTouchExplorationEndDelayed.mDelay = i4;
                 touchExplorer.mSendTouchInteractionEndDelayed.mDelay = i4;
             }
-            touchExplorer.setServiceDetectsGestures(((Boolean) this.mServiceDetectsGestures.get(displayId)).booleanValue());
+            touchExplorer.setServiceDetectsGestures(
+                    ((Boolean) this.mServiceDetectsGestures.get(displayId)).booleanValue());
             addFirstEventHandler(displayId, touchExplorer);
             this.mTouchExplorer.put(displayId, touchExplorer);
         }
         if ((this.mEnabledFeatures & 2048) != 0) {
-            addFirstEventHandler(displayId, new BaseEventStreamTransformation() { // from class: com.android.server.accessibility.AccessibilityInputFilter.1
-                /* JADX WARN: Code restructure failed: missing block: B:9:0x002e, code lost:
-                
-                    if (((r0.mCombinedMotionEventObservedSources & r0.mCombinedGenericMotionEventSources) & (r6.getSource() & (-256))) != 0) goto L13;
-                 */
-                @Override // com.android.server.accessibility.EventStreamTransformation
-                /*
-                    Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
-                */
-                public final void onMotionEvent(android.view.MotionEvent r6, android.view.MotionEvent r7, int r8) {
-                    /*
-                        r5 = this;
-                        com.android.server.accessibility.AccessibilityInputFilter r0 = com.android.server.accessibility.AccessibilityInputFilter.this
-                        boolean r1 = com.android.server.accessibility.AccessibilityInputFilter.m114$$Nest$manyServiceWantsGenericMotionEvent(r0, r6)
-                        r2 = 1
-                        if (r1 == 0) goto L32
-                        com.android.server.accessibility.AccessibilityManagerService r1 = r0.mAms
-                        boolean r1 = r1.sendMotionEventToListeningServices(r6)
-                        r1 = r1 ^ r2
-                        r0.getClass()
-                        r3 = 4098(0x1002, float:5.743E-42)
-                        boolean r3 = r6.isFromSource(r3)
-                        if (r3 == 0) goto L22
-                        int r3 = r0.mEnabledFeatures
-                        r3 = r3 & 2
-                        if (r3 == 0) goto L22
-                        goto L31
-                    L22:
-                        int r3 = r6.getSource()
-                        r3 = r3 & (-256(0xffffffffffffff00, float:NaN))
-                        int r4 = r0.mCombinedGenericMotionEventSources
-                        int r0 = r0.mCombinedMotionEventObservedSources
-                        r0 = r0 & r4
-                        r0 = r0 & r3
-                        if (r0 == 0) goto L31
-                        goto L32
-                    L31:
-                        r2 = r1
-                    L32:
-                        if (r2 == 0) goto L37
-                        super.onMotionEvent(r6, r7, r8)
-                    L37:
-                        return
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.AccessibilityInputFilter.AnonymousClass1.onMotionEvent(android.view.MotionEvent, android.view.MotionEvent, int):void");
-                }
-            });
+            addFirstEventHandler(
+                    displayId,
+                    new BaseEventStreamTransformation() { // from class:
+                        // com.android.server.accessibility.AccessibilityInputFilter.1
+                        /* JADX WARN: Code restructure failed: missing block: B:9:0x002e, code lost:
+
+                           if (((r0.mCombinedMotionEventObservedSources & r0.mCombinedGenericMotionEventSources) & (r6.getSource() & (-256))) != 0) goto L13;
+                        */
+                        @Override // com.android.server.accessibility.EventStreamTransformation
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                            To view partially-correct code enable 'Show inconsistent code' option in preferences
+                        */
+                        public final void onMotionEvent(
+                                android.view.MotionEvent r6, android.view.MotionEvent r7, int r8) {
+                            /*
+                                r5 = this;
+                                com.android.server.accessibility.AccessibilityInputFilter r0 = com.android.server.accessibility.AccessibilityInputFilter.this
+                                boolean r1 = com.android.server.accessibility.AccessibilityInputFilter.m114$$Nest$manyServiceWantsGenericMotionEvent(r0, r6)
+                                r2 = 1
+                                if (r1 == 0) goto L32
+                                com.android.server.accessibility.AccessibilityManagerService r1 = r0.mAms
+                                boolean r1 = r1.sendMotionEventToListeningServices(r6)
+                                r1 = r1 ^ r2
+                                r0.getClass()
+                                r3 = 4098(0x1002, float:5.743E-42)
+                                boolean r3 = r6.isFromSource(r3)
+                                if (r3 == 0) goto L22
+                                int r3 = r0.mEnabledFeatures
+                                r3 = r3 & 2
+                                if (r3 == 0) goto L22
+                                goto L31
+                            L22:
+                                int r3 = r6.getSource()
+                                r3 = r3 & (-256(0xffffffffffffff00, float:NaN))
+                                int r4 = r0.mCombinedGenericMotionEventSources
+                                int r0 = r0.mCombinedMotionEventObservedSources
+                                r0 = r0 & r4
+                                r0 = r0 & r3
+                                if (r0 == 0) goto L31
+                                goto L32
+                            L31:
+                                r2 = r1
+                            L32:
+                                if (r2 == 0) goto L37
+                                super.onMotionEvent(r6, r7, r8)
+                            L37:
+                                return
+                            */
+                            throw new UnsupportedOperationException(
+                                    "Method not decompiled:"
+                                        + " com.android.server.accessibility.AccessibilityInputFilter.AnonymousClass1.onMotionEvent(android.view.MotionEvent,"
+                                        + " android.view.MotionEvent, int):void");
+                        }
+                    });
         }
         int i5 = this.mEnabledFeatures;
         if ((i5 & 32) != 0 || (i5 & 1) != 0 || (i5 & 4096) != 0 || (i5 & 64) != 0) {
-            MagnificationGestureHandler createMagnificationGestureHandler = createMagnificationGestureHandler(createDisplayContext, displayId);
+            MagnificationGestureHandler createMagnificationGestureHandler =
+                    createMagnificationGestureHandler(createDisplayContext, displayId);
             addFirstEventHandler(displayId, createMagnificationGestureHandler);
             this.mMagnificationGestureHandler.put(displayId, createMagnificationGestureHandler);
         }
         if ((this.mEnabledFeatures & 16) != 0) {
-            MotionEventInjector motionEventInjector = new MotionEventInjector(this.mContext.getMainLooper(), this.mAms.mTraceManager);
+            MotionEventInjector motionEventInjector =
+                    new MotionEventInjector(this.mContext.getMainLooper(), this.mAms.mTraceManager);
             addFirstEventHandler(displayId, motionEventInjector);
             this.mMotionEventInjectors.put(displayId, motionEventInjector);
         }
         if ((this.mEnabledFeatures & Integer.MIN_VALUE) != 0) {
-            SamsungTapDuration samsungTapDuration = new SamsungTapDuration(this.mContext, this.mUserId);
+            SamsungTapDuration samsungTapDuration =
+                    new SamsungTapDuration(this.mContext, this.mUserId);
             this.mTapDuration = samsungTapDuration;
             addFirstEventHandler(displayId, samsungTapDuration);
         }
         if ((this.mEnabledFeatures & 16777216) != 0) {
-            SamsungTouchBlocker samsungTouchBlocker = new SamsungTouchBlocker(this.mContext, this.mUserId);
+            SamsungTouchBlocker samsungTouchBlocker =
+                    new SamsungTouchBlocker(this.mContext, this.mUserId);
             this.mTouchBlocker = samsungTouchBlocker;
             addFirstEventHandler(displayId, samsungTouchBlocker);
         }
@@ -520,7 +595,8 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
         if ((i6 & 2048) == 0 && (i6 & 4096) == 0) {
             return;
         }
-        AutoActionController autoActionController = new AutoActionController(this.mContext, this.mUserId);
+        AutoActionController autoActionController =
+                new AutoActionController(this.mContext, this.mUserId);
         this.mAutoActionController = autoActionController;
         addFirstEventHandler(displayId, autoActionController);
     }
@@ -531,13 +607,12 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
     }
 
     @Override // com.android.server.accessibility.EventStreamTransformation
-    public final void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
-    }
+    public final void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {}
 
     /* JADX WARN: Code restructure failed: missing block: B:83:0x00a1, code lost:
-    
-        if (r5 != 4096) goto L33;
-     */
+
+       if (r5 != 4096) goto L33;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -547,7 +622,10 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
             Method dump skipped, instructions count: 401
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.AccessibilityInputFilter.onInputEvent(android.view.InputEvent, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.AccessibilityInputFilter.onInputEvent(android.view.InputEvent,"
+                    + " int):void");
     }
 
     public final void onInstalled() {
@@ -576,7 +654,9 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
         if (this.mInstalled) {
             sendInputEvent(motionEvent, i);
         } else {
-            Slog.w("AccessibilityInputFilter", "onMotionEvent called before input filter installed!");
+            Slog.w(
+                    "AccessibilityInputFilter",
+                    "onMotionEvent called before input filter installed!");
         }
     }
 
@@ -594,21 +674,28 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
     public final void refreshMagnificationMode(Display display) {
         int magnificationModeLocked;
         int displayId = display.getDisplayId();
-        MagnificationGestureHandler magnificationGestureHandler = (MagnificationGestureHandler) this.mMagnificationGestureHandler.get(displayId);
+        MagnificationGestureHandler magnificationGestureHandler =
+                (MagnificationGestureHandler) this.mMagnificationGestureHandler.get(displayId);
         if (magnificationGestureHandler == null) {
             return;
         }
         int mode = magnificationGestureHandler.getMode();
         AccessibilityManagerService accessibilityManagerService = this.mAms;
         synchronized (accessibilityManagerService.mLock) {
-            magnificationModeLocked = accessibilityManagerService.getUserStateLocked(accessibilityManagerService.mCurrentUserId).getMagnificationModeLocked(displayId);
+            magnificationModeLocked =
+                    accessibilityManagerService
+                            .getUserStateLocked(accessibilityManagerService.mCurrentUserId)
+                            .getMagnificationModeLocked(displayId);
         }
         if (mode == magnificationModeLocked) {
             return;
         }
         magnificationGestureHandler.onDestroy();
-        MagnificationGestureHandler createMagnificationGestureHandler = createMagnificationGestureHandler(this.mContext.createDisplayContext(display), displayId);
-        EventStreamTransformation eventStreamTransformation = (EventStreamTransformation) this.mEventHandler.get(displayId);
+        MagnificationGestureHandler createMagnificationGestureHandler =
+                createMagnificationGestureHandler(
+                        this.mContext.createDisplayContext(display), displayId);
+        EventStreamTransformation eventStreamTransformation =
+                (EventStreamTransformation) this.mEventHandler.get(displayId);
         if (eventStreamTransformation != null) {
             if (eventStreamTransformation == magnificationGestureHandler) {
                 createMagnificationGestureHandler.mNext = magnificationGestureHandler.mNext;
@@ -636,30 +723,42 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
             TouchState touchState = touchExplorer.mState;
             if (touchState.mServiceDetectsGestures) {
                 if (touchState.isTouchExploring()) {
-                    TouchExplorer.SendHoverExitDelayed sendHoverExitDelayed = touchExplorer.mSendHoverExitDelayed;
+                    TouchExplorer.SendHoverExitDelayed sendHoverExitDelayed =
+                            touchExplorer.mSendHoverExitDelayed;
                     if (sendHoverExitDelayed.isPending() && sendHoverExitDelayed.isPending()) {
                         sendHoverExitDelayed.run();
                         sendHoverExitDelayed.cancel();
                     }
-                    TouchExplorer.SendAccessibilityEventDelayed sendAccessibilityEventDelayed = touchExplorer.mSendTouchExplorationEndDelayed;
+                    TouchExplorer.SendAccessibilityEventDelayed sendAccessibilityEventDelayed =
+                            touchExplorer.mSendTouchExplorationEndDelayed;
                     if (sendAccessibilityEventDelayed.isPending()) {
                         sendAccessibilityEventDelayed.forceSendAndRemove();
                     }
                 }
                 int i2 = touchState.mState;
                 if (!(i2 == 1) && i2 != 3) {
-                    Slog.e("TouchExplorer", "Error: Trying to delegate from " + TouchState.getStateSymbolicName(touchState.mState));
+                    Slog.e(
+                            "TouchExplorer",
+                            "Error: Trying to delegate from "
+                                    + TouchState.getStateSymbolicName(touchState.mState));
                     return;
                 }
                 MotionEvent motionEvent = touchState.mLastReceivedEvent;
                 MotionEvent motionEvent2 = touchState.mLastReceivedRawEvent;
                 if (motionEvent == null || motionEvent2 == null) {
-                    Slog.d("TouchExplorer", "Unable to start delegating: unable to get last received event.");
+                    Slog.d(
+                            "TouchExplorer",
+                            "Unable to start delegating: unable to get last received event.");
                     return;
                 }
                 int i3 = touchState.mLastReceivedPolicyFlags;
                 if (i2 == 3) {
-                    touchExplorer.mDispatcher.sendMotionEvent(1, 1 << touchExplorer.mDraggingPointerId, i3, motionEvent, motionEvent2);
+                    touchExplorer.mDispatcher.sendMotionEvent(
+                            1,
+                            1 << touchExplorer.mDraggingPointerId,
+                            i3,
+                            motionEvent,
+                            motionEvent2);
                 }
                 touchState.setState(4);
                 touchExplorer.mDispatcher.sendDownForAllNotInjectedPointers(i3, motionEvent);
@@ -673,49 +772,67 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
             TouchState touchState = touchExplorer.mState;
             if (touchState.mServiceDetectsGestures) {
                 if (i2 >= 0 && i2 <= 32) {
-                    TouchState.ReceivedPointerTracker receivedPointerTracker = touchExplorer.mReceivedPointerTracker;
+                    TouchState.ReceivedPointerTracker receivedPointerTracker =
+                            touchExplorer.mReceivedPointerTracker;
                     if (((1 << i2) & receivedPointerTracker.mReceivedPointersDown) != 0) {
                         if (touchState.isTouchExploring()) {
-                            TouchExplorer.SendHoverExitDelayed sendHoverExitDelayed = touchExplorer.mSendHoverExitDelayed;
-                            if (sendHoverExitDelayed.isPending() && sendHoverExitDelayed.isPending()) {
+                            TouchExplorer.SendHoverExitDelayed sendHoverExitDelayed =
+                                    touchExplorer.mSendHoverExitDelayed;
+                            if (sendHoverExitDelayed.isPending()
+                                    && sendHoverExitDelayed.isPending()) {
                                 sendHoverExitDelayed.run();
                                 sendHoverExitDelayed.cancel();
                             }
-                            TouchExplorer.SendAccessibilityEventDelayed sendAccessibilityEventDelayed = touchExplorer.mSendTouchExplorationEndDelayed;
+                            TouchExplorer.SendAccessibilityEventDelayed
+                                    sendAccessibilityEventDelayed =
+                                            touchExplorer.mSendTouchExplorationEndDelayed;
                             if (sendAccessibilityEventDelayed.isPending()) {
                                 sendAccessibilityEventDelayed.forceSendAndRemove();
                             }
                         }
                         if (touchState.mState != 1) {
-                            Slog.e("TouchExplorer", "Error: Trying to drag from " + TouchState.getStateSymbolicName(touchState.mState));
+                            Slog.e(
+                                    "TouchExplorer",
+                                    "Error: Trying to drag from "
+                                            + TouchState.getStateSymbolicName(touchState.mState));
                             return;
                         }
                         touchExplorer.mDraggingPointerId = i2;
                         if (TouchExplorer.DEBUG) {
-                            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("Drag requested on pointer "), touchExplorer.mDraggingPointerId, "TouchExplorer");
+                            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("Drag requested on pointer "),
+                                    touchExplorer.mDraggingPointerId,
+                                    "TouchExplorer");
                         }
                         MotionEvent motionEvent = touchState.mLastReceivedEvent;
                         MotionEvent motionEvent2 = touchState.mLastReceivedRawEvent;
                         if (motionEvent == null || motionEvent2 == null) {
-                            Slog.e("TouchExplorer", "Unable to start dragging: unable to get last event.");
+                            Slog.e(
+                                    "TouchExplorer",
+                                    "Unable to start dragging: unable to get last event.");
                             return;
                         }
                         int i3 = touchState.mLastReceivedPolicyFlags;
                         int i4 = 1 << touchExplorer.mDraggingPointerId;
                         motionEvent.setEdgeFlags(receivedPointerTracker.mLastReceivedDownEdgeFlags);
-                        MotionEvent computeDownEventForDrag = touchExplorer.computeDownEventForDrag(motionEvent);
+                        MotionEvent computeDownEventForDrag =
+                                touchExplorer.computeDownEventForDrag(motionEvent);
                         touchState.setState(3);
                         if (computeDownEventForDrag == null) {
-                            touchExplorer.mDispatcher.sendMotionEvent(0, i4, i3, motionEvent, motionEvent2);
+                            touchExplorer.mDispatcher.sendMotionEvent(
+                                    0, i4, i3, motionEvent, motionEvent2);
                             return;
                         } else {
-                            touchExplorer.mDispatcher.sendMotionEvent(0, i4, i3, computeDownEventForDrag, motionEvent2);
-                            touchExplorer.mDispatcher.sendMotionEvent(2, i4, i3, motionEvent, motionEvent2);
+                            touchExplorer.mDispatcher.sendMotionEvent(
+                                    0, i4, i3, computeDownEventForDrag, motionEvent2);
+                            touchExplorer.mDispatcher.sendMotionEvent(
+                                    2, i4, i3, motionEvent, motionEvent2);
                             return;
                         }
                     }
                 }
-                NandswapManager$$ExternalSyntheticOutline0.m(i2, "Trying to drag with invalid pointer: ", "TouchExplorer");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        i2, "Trying to drag with invalid pointer: ", "TouchExplorer");
             }
         }
     }
@@ -732,18 +849,24 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
             if (touchState.mServiceDetectsGestures) {
                 if (touchState.mState == 1) {
                     Handler handler = touchExplorer.mHandler;
-                    TouchExplorer.SendHoverExitDelayed sendHoverExitDelayed = touchExplorer.mSendHoverEnterAndMoveDelayed;
+                    TouchExplorer.SendHoverExitDelayed sendHoverExitDelayed =
+                            touchExplorer.mSendHoverEnterAndMoveDelayed;
                     handler.removeCallbacks(sendHoverExitDelayed);
-                    TouchState.ReceivedPointerTracker receivedPointerTracker = touchExplorer.mReceivedPointerTracker;
+                    TouchState.ReceivedPointerTracker receivedPointerTracker =
+                            touchExplorer.mReceivedPointerTracker;
                     int primaryPointerId = receivedPointerTracker.getPrimaryPointerId();
-                    if (primaryPointerId == -1 && (motionEvent = touchState.mLastReceivedEvent) != null) {
+                    if (primaryPointerId == -1
+                            && (motionEvent = touchState.mLastReceivedEvent) != null) {
                         primaryPointerId = motionEvent.getPointerId(0);
                     }
                     if (primaryPointerId == -1) {
-                        Slog.e("TouchExplorer", "Unable to find a valid pointer for touch exploration.");
+                        Slog.e(
+                                "TouchExplorer",
+                                "Unable to find a valid pointer for touch exploration.");
                         return;
                     }
-                    touchExplorer.sendHoverExitAndTouchExplorationGestureEndIfNeeded(primaryPointerId);
+                    touchExplorer.sendHoverExitAndTouchExplorationGestureEndIfNeeded(
+                            primaryPointerId);
                     int i2 = touchState.mLastReceivedPolicyFlags;
                     sendHoverExitDelayed.mPointerIdBits = 1 << primaryPointerId;
                     sendHoverExitDelayed.mPolicyFlags = i2;
@@ -782,8 +905,7 @@ public final class AccessibilityInputFilter extends InputFilter implements Event
     }
 
     @Override // com.android.server.accessibility.EventStreamTransformation
-    public final void setNext(EventStreamTransformation eventStreamTransformation) {
-    }
+    public final void setNext(EventStreamTransformation eventStreamTransformation) {}
 
     public final void setUserAndEnabledFeatures(int i, int i2) {
         if (this.mEnabledFeatures == i2 && this.mUserId == i) {

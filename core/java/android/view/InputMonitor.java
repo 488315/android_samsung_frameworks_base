@@ -4,24 +4,25 @@ import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
-import android.view.IInputMonitorHost;
+
 import com.android.internal.util.AnnotationValidations;
 
 /* loaded from: classes4.dex */
 public final class InputMonitor implements Parcelable {
-    public static final Parcelable.Creator<InputMonitor> CREATOR = new Parcelable.Creator<InputMonitor>() { // from class: android.view.InputMonitor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputMonitor[] newArray(int size) {
-            return new InputMonitor[size];
-        }
+    public static final Parcelable.Creator<InputMonitor> CREATOR =
+            new Parcelable.Creator<InputMonitor>() { // from class: android.view.InputMonitor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputMonitor[] newArray(int size) {
+                    return new InputMonitor[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputMonitor createFromParcel(Parcel in) {
-            return new InputMonitor(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputMonitor createFromParcel(Parcel in) {
+                    return new InputMonitor(in);
+                }
+            };
     private static final boolean DEBUG = false;
     private static final String TAG = "InputMonitor";
     private final IInputMonitorHost mHost;
@@ -48,11 +49,14 @@ public final class InputMonitor implements Parcelable {
 
     public InputMonitor(InputChannel inputChannel, IInputMonitorHost host, SurfaceControl surface) {
         this.mInputChannel = inputChannel;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInputChannel);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInputChannel);
         this.mHost = host;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHost);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHost);
         this.mSurface = surface;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSurface);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSurface);
     }
 
     public InputChannel getInputChannel() {
@@ -68,7 +72,13 @@ public final class InputMonitor implements Parcelable {
     }
 
     public String toString() {
-        return "InputMonitor { inputChannel = " + this.mInputChannel + ", host = " + this.mHost + ", surface = " + this.mSurface + " }";
+        return "InputMonitor { inputChannel = "
+                + this.mInputChannel
+                + ", host = "
+                + this.mHost
+                + ", surface = "
+                + this.mSurface
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -88,14 +98,16 @@ public final class InputMonitor implements Parcelable {
         IInputMonitorHost host = IInputMonitorHost.Stub.asInterface(in.readStrongBinder());
         SurfaceControl surface = (SurfaceControl) in.readTypedObject(SurfaceControl.CREATOR);
         this.mInputChannel = inputChannel;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInputChannel);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInputChannel);
         this.mHost = host;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHost);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHost);
         this.mSurface = surface;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSurface);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSurface);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

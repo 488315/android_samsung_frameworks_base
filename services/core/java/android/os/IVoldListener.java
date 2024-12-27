@@ -12,52 +12,44 @@ public interface IVoldListener extends IInterface {
         }
 
         @Override // android.os.IVoldListener
-        public void onDiskCreated(String str, int i) throws RemoteException {
-        }
+        public void onDiskCreated(String str, int i) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onDiskDestroyed(String str) throws RemoteException {
-        }
+        public void onDiskDestroyed(String str) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onDiskMetadataChanged(String str, long j, String str2, String str3) throws RemoteException {
-        }
+        public void onDiskMetadataChanged(String str, long j, String str2, String str3)
+                throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onDiskScanned(String str) throws RemoteException {
-        }
+        public void onDiskScanned(String str) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onEncryptionStateChanged(String str, String str2, String str3) throws RemoteException {
-        }
+        public void onEncryptionStateChanged(String str, String str2, String str3)
+                throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumeCreated(String str, int i, String str2, String str3, int i2) throws RemoteException {
-        }
+        public void onVolumeCreated(String str, int i, String str2, String str3, int i2)
+                throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumeDestroyed(String str) throws RemoteException {
-        }
+        public void onVolumeDestroyed(String str) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumeInternalPathChanged(String str, String str2) throws RemoteException {
-        }
+        public void onVolumeInternalPathChanged(String str, String str2) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumeMetadataChanged(String str, String str2, String str3, String str4) throws RemoteException {
-        }
+        public void onVolumeMetadataChanged(String str, String str2, String str3, String str4)
+                throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumePathChanged(String str, String str2) throws RemoteException {
-        }
+        public void onVolumePathChanged(String str, String str2) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void onVolumeStateChanged(String str, int i, int i2) throws RemoteException {
-        }
+        public void onVolumeStateChanged(String str, int i, int i2) throws RemoteException {}
 
         @Override // android.os.IVoldListener
-        public void sendVoldMessage(String str) throws RemoteException {
-        }
+        public void sendVoldMessage(String str) throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -193,7 +185,8 @@ public interface IVoldListener extends IInterface {
             }
 
             @Override // android.os.IVoldListener
-            public final void onVolumeMetadataChanged(String str, String str2, String str3, String str4) {
+            public final void onVolumeMetadataChanged(
+                    String str, String str2, String str3, String str4) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 try {
                     obtain.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -270,7 +263,8 @@ public interface IVoldListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(DESCRIPTOR);
             }
@@ -372,13 +366,15 @@ public interface IVoldListener extends IInterface {
 
     void onEncryptionStateChanged(String str, String str2, String str3) throws RemoteException;
 
-    void onVolumeCreated(String str, int i, String str2, String str3, int i2) throws RemoteException;
+    void onVolumeCreated(String str, int i, String str2, String str3, int i2)
+            throws RemoteException;
 
     void onVolumeDestroyed(String str) throws RemoteException;
 
     void onVolumeInternalPathChanged(String str, String str2) throws RemoteException;
 
-    void onVolumeMetadataChanged(String str, String str2, String str3, String str4) throws RemoteException;
+    void onVolumeMetadataChanged(String str, String str2, String str3, String str4)
+            throws RemoteException;
 
     void onVolumePathChanged(String str, String str2) throws RemoteException;
 

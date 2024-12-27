@@ -3,6 +3,7 @@ package android.hardware.radio.V1_6;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,18 +23,37 @@ public final class PhonebookRecordInfo {
             return false;
         }
         PhonebookRecordInfo other = (PhonebookRecordInfo) otherObject;
-        if (this.recordId == other.recordId && HidlSupport.deepEquals(this.name, other.name) && HidlSupport.deepEquals(this.number, other.number) && HidlSupport.deepEquals(this.emails, other.emails) && HidlSupport.deepEquals(this.additionalNumbers, other.additionalNumbers)) {
+        if (this.recordId == other.recordId
+                && HidlSupport.deepEquals(this.name, other.name)
+                && HidlSupport.deepEquals(this.number, other.number)
+                && HidlSupport.deepEquals(this.emails, other.emails)
+                && HidlSupport.deepEquals(this.additionalNumbers, other.additionalNumbers)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.recordId))), Integer.valueOf(HidlSupport.deepHashCode(this.name)), Integer.valueOf(HidlSupport.deepHashCode(this.number)), Integer.valueOf(HidlSupport.deepHashCode(this.emails)), Integer.valueOf(HidlSupport.deepHashCode(this.additionalNumbers)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.recordId))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.name)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.number)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.emails)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.additionalNumbers)));
     }
 
     public final String toString() {
-        return "{.recordId = " + this.recordId + ", .name = " + this.name + ", .number = " + this.number + ", .emails = " + this.emails + ", .additionalNumbers = " + this.additionalNumbers + "}";
+        return "{.recordId = "
+                + this.recordId
+                + ", .name = "
+                + this.name
+                + ", .number = "
+                + this.number
+                + ", .emails = "
+                + this.emails
+                + ", .additionalNumbers = "
+                + this.additionalNumbers
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -45,7 +65,8 @@ public final class PhonebookRecordInfo {
         ArrayList<PhonebookRecordInfo> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 72, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 72, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             PhonebookRecordInfo _hidl_vec_element = new PhonebookRecordInfo();
@@ -55,28 +76,46 @@ public final class PhonebookRecordInfo {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.recordId = _hidl_blob.getInt32(_hidl_offset + 0);
         this.name = _hidl_blob.getString(_hidl_offset + 8);
-        parcel.readEmbeddedBuffer(this.name.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.name.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
         this.number = _hidl_blob.getString(_hidl_offset + 24);
-        parcel.readEmbeddedBuffer(this.number.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 24 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.number.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 24 + 0,
+                false);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 40 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 40 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 40 + 0, true);
         this.emails.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             new String();
             String _hidl_vec_element = childBlob.getString(_hidl_index_0 * 16);
-            parcel.readEmbeddedBuffer(_hidl_vec_element.getBytes().length + 1, childBlob.handle(), (_hidl_index_0 * 16) + 0, false);
+            parcel.readEmbeddedBuffer(
+                    _hidl_vec_element.getBytes().length + 1,
+                    childBlob.handle(),
+                    (_hidl_index_0 * 16) + 0,
+                    false);
             this.emails.add(_hidl_vec_element);
         }
         int _hidl_vec_size2 = _hidl_blob.getInt32(_hidl_offset + 56 + 8);
-        HwBlob childBlob2 = parcel.readEmbeddedBuffer(_hidl_vec_size2 * 16, _hidl_blob.handle(), _hidl_offset + 56 + 0, true);
+        HwBlob childBlob2 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size2 * 16, _hidl_blob.handle(), _hidl_offset + 56 + 0, true);
         this.additionalNumbers.clear();
         for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
             new String();
             String _hidl_vec_element2 = childBlob2.getString(_hidl_index_02 * 16);
-            parcel.readEmbeddedBuffer(_hidl_vec_element2.getBytes().length + 1, childBlob2.handle(), (_hidl_index_02 * 16) + 0, false);
+            parcel.readEmbeddedBuffer(
+                    _hidl_vec_element2.getBytes().length + 1,
+                    childBlob2.handle(),
+                    (_hidl_index_02 * 16) + 0,
+                    false);
             this.additionalNumbers.add(_hidl_vec_element2);
         }
     }
@@ -87,7 +126,8 @@ public final class PhonebookRecordInfo {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<PhonebookRecordInfo> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<PhonebookRecordInfo> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

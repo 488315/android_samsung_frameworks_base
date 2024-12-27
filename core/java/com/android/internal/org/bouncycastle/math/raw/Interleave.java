@@ -24,11 +24,33 @@ public class Interleave {
     }
 
     public static long expand32to64(int x) {
-        return (((r6 >>> 1) & M32) << 32) | (M32 & Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 65280, 8), 15728880, 4), 202116108, 2), 572662306, 1));
+        return (((r6 >>> 1) & M32) << 32)
+                | (M32
+                        & Bits.bitPermuteStep(
+                                Bits.bitPermuteStep(
+                                        Bits.bitPermuteStep(
+                                                Bits.bitPermuteStep(x, 65280, 8), 15728880, 4),
+                                        202116108,
+                                        2),
+                                572662306,
+                                1));
     }
 
     public static void expand64To128(long x, long[] z, int zOff) {
-        long x2 = Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 4294901760L, 16), 280375465148160L, 8), 67555025218437360L, 4), 868082074056920076L, 2), 2459565876494606882L, 1);
+        long x2 =
+                Bits.bitPermuteStep(
+                        Bits.bitPermuteStep(
+                                Bits.bitPermuteStep(
+                                        Bits.bitPermuteStep(
+                                                Bits.bitPermuteStep(x, 4294901760L, 16),
+                                                280375465148160L,
+                                                8),
+                                        67555025218437360L,
+                                        4),
+                                868082074056920076L,
+                                2),
+                        2459565876494606882L,
+                        1);
         z[zOff] = x2 & M64;
         z[zOff + 1] = M64 & (x2 >>> 1);
     }
@@ -41,45 +63,126 @@ public class Interleave {
     }
 
     public static void expand64To128Rev(long x, long[] z, int zOff) {
-        long x2 = Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 4294901760L, 16), 280375465148160L, 8), 67555025218437360L, 4), 868082074056920076L, 2), 2459565876494606882L, 1);
+        long x2 =
+                Bits.bitPermuteStep(
+                        Bits.bitPermuteStep(
+                                Bits.bitPermuteStep(
+                                        Bits.bitPermuteStep(
+                                                Bits.bitPermuteStep(x, 4294901760L, 16),
+                                                280375465148160L,
+                                                8),
+                                        67555025218437360L,
+                                        4),
+                                868082074056920076L,
+                                2),
+                        2459565876494606882L,
+                        1);
         z[zOff] = x2 & M64R;
         z[zOff + 1] = M64R & (x2 << 1);
     }
 
     public static int shuffle(int x) {
-        return Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 65280, 8), 15728880, 4), 202116108, 2), 572662306, 1);
+        return Bits.bitPermuteStep(
+                Bits.bitPermuteStep(
+                        Bits.bitPermuteStep(Bits.bitPermuteStep(x, 65280, 8), 15728880, 4),
+                        202116108,
+                        2),
+                572662306,
+                1);
     }
 
     public static long shuffle(long x) {
-        return Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 4294901760L, 16), 280375465148160L, 8), 67555025218437360L, 4), 868082074056920076L, 2), 2459565876494606882L, 1);
+        return Bits.bitPermuteStep(
+                Bits.bitPermuteStep(
+                        Bits.bitPermuteStep(
+                                Bits.bitPermuteStep(
+                                        Bits.bitPermuteStep(x, 4294901760L, 16),
+                                        280375465148160L,
+                                        8),
+                                67555025218437360L,
+                                4),
+                        868082074056920076L,
+                        2),
+                2459565876494606882L,
+                1);
     }
 
     public static int shuffle2(int x) {
-        return Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 11141290, 7), 52428, 14), 15728880, 4), 65280, 8);
+        return Bits.bitPermuteStep(
+                Bits.bitPermuteStep(
+                        Bits.bitPermuteStep(Bits.bitPermuteStep(x, 11141290, 7), 52428, 14),
+                        15728880,
+                        4),
+                65280,
+                8);
     }
 
     public static long shuffle2(long x) {
-        return Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 4278255360L, 24), 57421771435671756L, 6), 264913582878960L, 12), 723401728380766730L, 3);
+        return Bits.bitPermuteStep(
+                Bits.bitPermuteStep(
+                        Bits.bitPermuteStep(
+                                Bits.bitPermuteStep(x, 4278255360L, 24), 57421771435671756L, 6),
+                        264913582878960L,
+                        12),
+                723401728380766730L,
+                3);
     }
 
     public static long shuffle3(long x) {
-        return Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 47851476196393130L, 7), 225176545447116L, 14), 4042322160L, 28);
+        return Bits.bitPermuteStep(
+                Bits.bitPermuteStep(
+                        Bits.bitPermuteStep(x, 47851476196393130L, 7), 225176545447116L, 14),
+                4042322160L,
+                28);
     }
 
     public static int unshuffle(int x) {
-        return Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 572662306, 1), 202116108, 2), 15728880, 4), 65280, 8);
+        return Bits.bitPermuteStep(
+                Bits.bitPermuteStep(
+                        Bits.bitPermuteStep(Bits.bitPermuteStep(x, 572662306, 1), 202116108, 2),
+                        15728880,
+                        4),
+                65280,
+                8);
     }
 
     public static long unshuffle(long x) {
-        return Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 2459565876494606882L, 1), 868082074056920076L, 2), 67555025218437360L, 4), 280375465148160L, 8), 4294901760L, 16);
+        return Bits.bitPermuteStep(
+                Bits.bitPermuteStep(
+                        Bits.bitPermuteStep(
+                                Bits.bitPermuteStep(
+                                        Bits.bitPermuteStep(x, 2459565876494606882L, 1),
+                                        868082074056920076L,
+                                        2),
+                                67555025218437360L,
+                                4),
+                        280375465148160L,
+                        8),
+                4294901760L,
+                16);
     }
 
     public static int unshuffle2(int x) {
-        return Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 65280, 8), 15728880, 4), 52428, 14), 11141290, 7);
+        return Bits.bitPermuteStep(
+                Bits.bitPermuteStep(
+                        Bits.bitPermuteStep(Bits.bitPermuteStep(x, 65280, 8), 15728880, 4),
+                        52428,
+                        14),
+                11141290,
+                7);
     }
 
     public static long unshuffle2(long x) {
-        return Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(Bits.bitPermuteStep(x, 723401728380766730L, 3), 264913582878960L, 12), 57421771435671756L, 6), 4278255360L, 24);
+        return Bits.bitPermuteStep(
+                Bits.bitPermuteStep(
+                        Bits.bitPermuteStep(
+                                Bits.bitPermuteStep(x, 723401728380766730L, 3),
+                                264913582878960L,
+                                12),
+                        57421771435671756L,
+                        6),
+                4278255360L,
+                24);
     }
 
     public static long unshuffle3(long x) {

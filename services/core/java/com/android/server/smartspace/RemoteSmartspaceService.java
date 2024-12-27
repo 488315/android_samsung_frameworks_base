@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.service.smartspace.ISmartspaceService;
 import android.util.Slog;
+
 import com.android.internal.infra.AbstractMultiplePendingRequestsRemoteService;
 import com.android.internal.infra.AbstractRemoteService;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
@@ -16,11 +17,26 @@ public final class RemoteSmartspaceService extends AbstractMultiplePendingReques
     public final RemoteSmartspaceServiceCallbacks mCallback;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface RemoteSmartspaceServiceCallbacks extends AbstractRemoteService.VultureCallback {
-    }
+    public interface RemoteSmartspaceServiceCallbacks
+            extends AbstractRemoteService.VultureCallback {}
 
-    public RemoteSmartspaceService(Context context, ComponentName componentName, int i, RemoteSmartspaceServiceCallbacks remoteSmartspaceServiceCallbacks, boolean z, boolean z2) {
-        super(context, "android.service.smartspace.SmartspaceService", componentName, i, remoteSmartspaceServiceCallbacks, context.getMainThreadHandler(), z ? 4194304 : 0, z2, 1);
+    public RemoteSmartspaceService(
+            Context context,
+            ComponentName componentName,
+            int i,
+            RemoteSmartspaceServiceCallbacks remoteSmartspaceServiceCallbacks,
+            boolean z,
+            boolean z2) {
+        super(
+                context,
+                "android.service.smartspace.SmartspaceService",
+                componentName,
+                i,
+                remoteSmartspaceServiceCallbacks,
+                context.getMainThreadHandler(),
+                z ? 4194304 : 0,
+                z2,
+                1);
         this.mCallback = remoteSmartspaceServiceCallbacks;
     }
 
@@ -43,16 +59,20 @@ public final class RemoteSmartspaceService extends AbstractMultiplePendingReques
     public final void handleOnConnectedStateChanged(boolean z) {
         RemoteSmartspaceServiceCallbacks remoteSmartspaceServiceCallbacks = this.mCallback;
         if (remoteSmartspaceServiceCallbacks != null) {
-            SmartspacePerUserService smartspacePerUserService = (SmartspacePerUserService) remoteSmartspaceServiceCallbacks;
+            SmartspacePerUserService smartspacePerUserService =
+                    (SmartspacePerUserService) remoteSmartspaceServiceCallbacks;
             if (smartspacePerUserService.mMaster.debug) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m("onConnectedStateChanged(): connected=", "SmartspacePerUserService", z);
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        "onConnectedStateChanged(): connected=", "SmartspacePerUserService", z);
             }
             if (z) {
                 synchronized (smartspacePerUserService.mLock) {
                     try {
                         if (smartspacePerUserService.mZombie) {
                             if (smartspacePerUserService.mRemoteService == null) {
-                                Slog.w("SmartspacePerUserService", "Cannot resurrect sessions because remote service is null");
+                                Slog.w(
+                                        "SmartspacePerUserService",
+                                        "Cannot resurrect sessions because remote service is null");
                             } else {
                                 smartspacePerUserService.mZombie = false;
                                 smartspacePerUserService.resurrectSessionsLocked$3();

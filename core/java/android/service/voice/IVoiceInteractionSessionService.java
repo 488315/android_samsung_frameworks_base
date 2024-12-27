@@ -13,8 +13,7 @@ public interface IVoiceInteractionSessionService extends IInterface {
 
     public static class Default implements IVoiceInteractionSessionService {
         @Override // android.service.voice.IVoiceInteractionSessionService
-        public void newSession(IBinder token, Bundle args, int startFlags) throws RemoteException {
-        }
+        public void newSession(IBinder token, Bundle args, int startFlags) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,8 +21,9 @@ public interface IVoiceInteractionSessionService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoiceInteractionSessionService {
-        public static final String DESCRIPTOR = "android.service.voice.IVoiceInteractionSessionService";
+    public abstract static class Stub extends Binder implements IVoiceInteractionSessionService {
+        public static final String DESCRIPTOR =
+                "android.service.voice.IVoiceInteractionSessionService";
         static final int TRANSACTION_newSession = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IVoiceInteractionSessionService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -99,7 +100,8 @@ public interface IVoiceInteractionSessionService extends IInterface {
             }
 
             @Override // android.service.voice.IVoiceInteractionSessionService
-            public void newSession(IBinder token, Bundle args, int startFlags) throws RemoteException {
+            public void newSession(IBinder token, Bundle args, int startFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

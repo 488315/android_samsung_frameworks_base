@@ -12,21 +12,28 @@ public final class AppWaitingForDebuggerDialog extends BaseErrorDialog {
     public final ProcessRecord mProc;
     public final ActivityManagerService mService;
 
-    public AppWaitingForDebuggerDialog(ActivityManagerService activityManagerService, Context context, ProcessRecord processRecord) {
+    public AppWaitingForDebuggerDialog(
+            ActivityManagerService activityManagerService,
+            Context context,
+            ProcessRecord processRecord) {
         super(context);
-        Handler handler = new Handler() { // from class: com.android.server.am.AppWaitingForDebuggerDialog.1
-            @Override // android.os.Handler
-            public final void handleMessage(Message message) {
-                if (message.what != 1) {
-                    return;
-                }
-                AppWaitingForDebuggerDialog appWaitingForDebuggerDialog = AppWaitingForDebuggerDialog.this;
-                appWaitingForDebuggerDialog.mService.killAppAtUsersRequest(appWaitingForDebuggerDialog.mProc);
-            }
-        };
+        Handler handler =
+                new Handler() { // from class: com.android.server.am.AppWaitingForDebuggerDialog.1
+                    @Override // android.os.Handler
+                    public final void handleMessage(Message message) {
+                        if (message.what != 1) {
+                            return;
+                        }
+                        AppWaitingForDebuggerDialog appWaitingForDebuggerDialog =
+                                AppWaitingForDebuggerDialog.this;
+                        appWaitingForDebuggerDialog.mService.killAppAtUsersRequest(
+                                appWaitingForDebuggerDialog.mProc);
+                    }
+                };
         this.mService = activityManagerService;
         this.mProc = processRecord;
-        CharSequence applicationLabel = context.getPackageManager().getApplicationLabel(processRecord.info);
+        CharSequence applicationLabel =
+                context.getPackageManager().getApplicationLabel(processRecord.info);
         setCancelable(false);
         StringBuilder sb = new StringBuilder();
         if (applicationLabel == null || applicationLabel.length() <= 0) {
@@ -50,6 +57,5 @@ public final class AppWaitingForDebuggerDialog extends BaseErrorDialog {
     }
 
     @Override // com.android.server.am.BaseErrorDialog
-    public final void closeDialog() {
-    }
+    public final void closeDialog() {}
 }

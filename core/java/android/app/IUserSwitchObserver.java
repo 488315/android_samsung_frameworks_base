@@ -21,24 +21,19 @@ public interface IUserSwitchObserver extends IInterface {
 
     public static class Default implements IUserSwitchObserver {
         @Override // android.app.IUserSwitchObserver
-        public void onBeforeUserSwitching(int newUserId) throws RemoteException {
-        }
+        public void onBeforeUserSwitching(int newUserId) throws RemoteException {}
 
         @Override // android.app.IUserSwitchObserver
-        public void onUserSwitching(int newUserId, IRemoteCallback reply) throws RemoteException {
-        }
+        public void onUserSwitching(int newUserId, IRemoteCallback reply) throws RemoteException {}
 
         @Override // android.app.IUserSwitchObserver
-        public void onUserSwitchComplete(int newUserId) throws RemoteException {
-        }
+        public void onUserSwitchComplete(int newUserId) throws RemoteException {}
 
         @Override // android.app.IUserSwitchObserver
-        public void onForegroundProfileSwitch(int newProfileId) throws RemoteException {
-        }
+        public void onForegroundProfileSwitch(int newProfileId) throws RemoteException {}
 
         @Override // android.app.IUserSwitchObserver
-        public void onLockedBootComplete(int newUserId) throws RemoteException {
-        }
+        public void onLockedBootComplete(int newUserId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -46,7 +41,7 @@ public interface IUserSwitchObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUserSwitchObserver {
+    public abstract static class Stub extends Binder implements IUserSwitchObserver {
         public static final String DESCRIPTOR = "android.app.IUserSwitchObserver";
         static final int TRANSACTION_onBeforeUserSwitching = 1;
         static final int TRANSACTION_onForegroundProfileSwitch = 4;
@@ -97,7 +92,8 @@ public interface IUserSwitchObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -113,7 +109,8 @@ public interface IUserSwitchObserver extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    IRemoteCallback _arg1 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg1 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onUserSwitching(_arg02, _arg1);
                     return true;
@@ -166,7 +163,8 @@ public interface IUserSwitchObserver extends IInterface {
             }
 
             @Override // android.app.IUserSwitchObserver
-            public void onUserSwitching(int newUserId, IRemoteCallback reply) throws RemoteException {
+            public void onUserSwitching(int newUserId, IRemoteCallback reply)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

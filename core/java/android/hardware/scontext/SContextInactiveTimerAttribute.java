@@ -23,7 +23,8 @@ public class SContextInactiveTimerAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    public SContextInactiveTimerAttribute(int deviceType, int duration, int alertCount, int startTime, int endTime) {
+    public SContextInactiveTimerAttribute(
+            int deviceType, int duration, int alertCount, int startTime, int endTime) {
         this.mDeviceType = 1;
         this.mDuration = 3600;
         this.mAlertCount = 1;
@@ -37,7 +38,8 @@ public class SContextInactiveTimerAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mDeviceType != 1 && this.mDeviceType != 2) {
             Log.e(TAG, "The deivce type is wrong.");

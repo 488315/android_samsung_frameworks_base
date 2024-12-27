@@ -5,7 +5,9 @@ import android.util.Dumpable;
 import android.util.DumpableContainer;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
+
 import com.android.internal.accessibility.common.ShortcutConstants;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -20,12 +22,16 @@ public final class DumpableContainerImpl implements DumpableContainer {
     public boolean addDumpable(final Dumpable dumpable) {
         Objects.requireNonNull(dumpable, "dumpable");
         String name = dumpable.getDumpableName();
-        Objects.requireNonNull(name, (Supplier<String>) new Supplier() { // from class: com.android.internal.util.dump.DumpableContainerImpl$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return DumpableContainerImpl.lambda$addDumpable$0(Dumpable.this);
-            }
-        });
+        Objects.requireNonNull(
+                name,
+                (Supplier<String>)
+                        new Supplier() { // from class:
+                                         // com.android.internal.util.dump.DumpableContainerImpl$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                return DumpableContainerImpl.lambda$addDumpable$0(Dumpable.this);
+                            }
+                        });
         if (this.mDumpables.containsKey(name)) {
             return false;
         }
@@ -46,7 +52,14 @@ public final class DumpableContainerImpl implements DumpableContainer {
             return false;
         }
         if (candidate != dumpable) {
-            Log.w(TAG, "removeDumpable(): passed dumpable (" + dumpable + ") named " + name + ", but internal dumpable with that name is " + candidate);
+            Log.w(
+                    TAG,
+                    "removeDumpable(): passed dumpable ("
+                            + dumpable
+                            + ") named "
+                            + name
+                            + ", but internal dumpable with that name is "
+                            + candidate);
             return false;
         }
         this.mDumpables.remove(name);
@@ -109,7 +122,8 @@ public final class DumpableContainerImpl implements DumpableContainer {
         }
     }
 
-    public void dumpOneDumpable(String prefix, PrintWriter writer, String dumpableName, String[] args) {
+    public void dumpOneDumpable(
+            String prefix, PrintWriter writer, String dumpableName, String[] args) {
         IndentingPrintWriter ipw = new IndentingPrintWriter(writer, prefix, prefix);
         Dumpable dumpable = this.mDumpables.get(dumpableName);
         if (dumpable == null) {

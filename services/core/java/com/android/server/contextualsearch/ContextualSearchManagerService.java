@@ -27,14 +27,15 @@ import android.provider.Settings;
 import android.util.Log;
 import android.util.Slog;
 import android.view.IWindowManager;
+
 import com.android.internal.util.FunctionalUtils;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.SystemService;
 import com.android.server.am.AssistDataRequester;
-import com.android.server.contextualsearch.ContextualSearchManagerService;
 import com.android.server.wm.ActivityTaskManagerInternal;
 import com.android.server.wm.WindowManagerInternal;
+
 import java.io.FileDescriptor;
 import java.util.Objects;
 import java.util.Set;
@@ -78,7 +79,9 @@ public final class ContextualSearchManagerService extends SystemService {
                         }
                         return;
                     } else {
-                        Slog.wtf("ContextualSearchManagerService", "invalid handler msg: " + message);
+                        Slog.wtf(
+                                "ContextualSearchManagerService",
+                                "invalid handler msg: " + message);
                         return;
                     }
                 default:
@@ -86,7 +89,9 @@ public final class ContextualSearchManagerService extends SystemService {
                         ((ContextualSearchManagerStub) this.this$0).invalidateToken();
                         return;
                     }
-                    Slog.wtf("ContextualSearchManagerService", "invalid token handler msg: " + message);
+                    Slog.wtf(
+                            "ContextualSearchManagerService",
+                            "invalid token handler msg: " + message);
                     return;
             }
         }
@@ -97,15 +102,16 @@ public final class ContextualSearchManagerService extends SystemService {
         public CallbackToken mToken;
         public AnonymousClass2 mTokenHandler;
 
-        public ContextualSearchManagerStub() {
-        }
+        public ContextualSearchManagerStub() {}
 
-        public final void getContextualSearchState(IBinder iBinder, final IContextualSearchCallback iContextualSearchCallback) {
+        public final void getContextualSearchState(
+                IBinder iBinder, final IContextualSearchCallback iContextualSearchCallback) {
             ContextualSearchManagerService contextualSearchManagerService;
             CallbackToken callbackToken = this.mToken;
             if (callbackToken == null || !callbackToken.getToken().equals(iBinder)) {
                 try {
-                    iContextualSearchCallback.onError(new ParcelableException(new IllegalArgumentException("Invalid token")));
+                    iContextualSearchCallback.onError(
+                            new ParcelableException(new IllegalArgumentException("Invalid token")));
                     return;
                 } catch (RemoteException e) {
                     Log.e("ContextualSearchManagerService", "Could not invoke onError callback", e);
@@ -117,28 +123,50 @@ public final class ContextualSearchManagerService extends SystemService {
                 issueToken();
                 final Bundle bundle = new Bundle();
                 bundle.putParcelable("android.app.contextualsearch.extra.TOKEN", this.mToken);
-                Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: com.android.server.contextualsearch.ContextualSearchManagerService$ContextualSearchManagerStub$$ExternalSyntheticLambda0
-                    public final void runOrThrow() {
-                        ContextualSearchManagerService.ContextualSearchManagerStub contextualSearchManagerStub = ContextualSearchManagerService.ContextualSearchManagerStub.this;
-                        Bundle bundle2 = bundle;
-                        IContextualSearchCallback iContextualSearchCallback2 = iContextualSearchCallback;
-                        WindowManagerInternal windowManagerInternal = ContextualSearchManagerService.this.mWmInternal;
-                        if (windowManagerInternal != null) {
-                            bundle2.putParcelable("android.app.contextualsearch.extra.SCREENSHOT", windowManagerInternal.takeAssistScreenshot(Set.of(2000, 2019, 2024, 2018)).asBitmap().asShared());
-                        }
-                        try {
-                            iContextualSearchCallback2.onResult(new ContextualSearchState((AssistStructure) null, (AssistContent) null, bundle2));
-                        } catch (RemoteException e2) {
-                            Log.e("ContextualSearchManagerService", "Error invoking ContextualSearchCallback", e2);
-                        }
-                    }
-                });
+                Binder.withCleanCallingIdentity(
+                        new FunctionalUtils
+                                .ThrowingRunnable() { // from class:
+                                                      // com.android.server.contextualsearch.ContextualSearchManagerService$ContextualSearchManagerStub$$ExternalSyntheticLambda0
+                            public final void runOrThrow() {
+                                ContextualSearchManagerService.ContextualSearchManagerStub
+                                        contextualSearchManagerStub =
+                                                ContextualSearchManagerService
+                                                        .ContextualSearchManagerStub.this;
+                                Bundle bundle2 = bundle;
+                                IContextualSearchCallback iContextualSearchCallback2 =
+                                        iContextualSearchCallback;
+                                WindowManagerInternal windowManagerInternal =
+                                        ContextualSearchManagerService.this.mWmInternal;
+                                if (windowManagerInternal != null) {
+                                    bundle2.putParcelable(
+                                            "android.app.contextualsearch.extra.SCREENSHOT",
+                                            windowManagerInternal
+                                                    .takeAssistScreenshot(
+                                                            Set.of(2000, 2019, 2024, 2018))
+                                                    .asBitmap()
+                                                    .asShared());
+                                }
+                                try {
+                                    iContextualSearchCallback2.onResult(
+                                            new ContextualSearchState(
+                                                    (AssistStructure) null,
+                                                    (AssistContent) null,
+                                                    bundle2));
+                                } catch (RemoteException e2) {
+                                    Log.e(
+                                            "ContextualSearchManagerService",
+                                            "Error invoking ContextualSearchCallback",
+                                            e2);
+                                }
+                            }
+                        });
             }
             synchronized (ContextualSearchManagerService.this.mLock) {
                 contextualSearchManagerService = ContextualSearchManagerService.this;
                 contextualSearchManagerService.mStateCallback = iContextualSearchCallback;
             }
-            AssistDataRequester assistDataRequester = contextualSearchManagerService.mAssistDataRequester;
+            AssistDataRequester assistDataRequester =
+                    contextualSearchManagerService.mAssistDataRequester;
             assistDataRequester.flushPendingAssistData();
             assistDataRequester.tryDispatchRequestComplete();
         }
@@ -170,7 +198,8 @@ public final class ContextualSearchManagerService extends SystemService {
                         anonymousClass2.removeMessages(1);
                     }
                     AnonymousClass2 anonymousClass22 = this.mTokenHandler;
-                    ContextualSearchManagerService contextualSearchManagerService = ContextualSearchManagerService.this;
+                    ContextualSearchManagerService contextualSearchManagerService =
+                            ContextualSearchManagerService.this;
                     synchronized (contextualSearchManagerService) {
                         j = contextualSearchManagerService.mTokenValidDurationMs;
                     }
@@ -182,54 +211,84 @@ public final class ContextualSearchManagerService extends SystemService {
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-            new ContextualSearchManagerShellCommand(ContextualSearchManagerService.this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+        public final void onShellCommand(
+                FileDescriptor fileDescriptor,
+                FileDescriptor fileDescriptor2,
+                FileDescriptor fileDescriptor3,
+                String[] strArr,
+                ShellCallback shellCallback,
+                ResultReceiver resultReceiver) {
+            new ContextualSearchManagerShellCommand(ContextualSearchManagerService.this)
+                    .exec(
+                            this,
+                            fileDescriptor,
+                            fileDescriptor2,
+                            fileDescriptor3,
+                            strArr,
+                            shellCallback,
+                            resultReceiver);
         }
 
         public final void startContextualSearch(final int i) {
             synchronized (this) {
-                ContextualSearchManagerService.m386$$Nest$menforcePermission(ContextualSearchManagerService.this);
+                ContextualSearchManagerService.m386$$Nest$menforcePermission(
+                        ContextualSearchManagerService.this);
                 final int identifier = Binder.getCallingUserHandle().getIdentifier();
-                AssistDataRequester assistDataRequester = ContextualSearchManagerService.this.mAssistDataRequester;
+                AssistDataRequester assistDataRequester =
+                        ContextualSearchManagerService.this.mAssistDataRequester;
                 assistDataRequester.mCanceled = true;
                 assistDataRequester.mPendingDataCount = 0;
                 assistDataRequester.mPendingScreenshotCount = 0;
                 assistDataRequester.mAssistData.clear();
                 assistDataRequester.mAssistScreenshot.clear();
                 issueToken();
-                Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: com.android.server.contextualsearch.ContextualSearchManagerService$ContextualSearchManagerStub$$ExternalSyntheticLambda1
-                    /* JADX WARN: Removed duplicated region for block: B:12:0x013c  */
-                    /* JADX WARN: Removed duplicated region for block: B:15:? A[RETURN, SYNTHETIC] */
-                    /* JADX WARN: Removed duplicated region for block: B:38:0x00ee  */
-                    /* JADX WARN: Removed duplicated region for block: B:40:0x0112  */
-                    /* JADX WARN: Removed duplicated region for block: B:42:0x011a  */
-                    /* JADX WARN: Removed duplicated region for block: B:47:0x0135  */
-                    /* JADX WARN: Removed duplicated region for block: B:48:0x0117  */
-                    /* JADX WARN: Removed duplicated region for block: B:49:0x010f  */
-                    /*
-                        Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
-                    */
-                    public final void runOrThrow() {
-                        /*
-                            Method dump skipped, instructions count: 358
-                            To view this dump change 'Code comments level' option to 'DEBUG'
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.server.contextualsearch.ContextualSearchManagerService$ContextualSearchManagerStub$$ExternalSyntheticLambda1.runOrThrow():void");
-                    }
-                });
+                Binder.withCleanCallingIdentity(
+                        new FunctionalUtils.ThrowingRunnable() { // from class:
+                            // com.android.server.contextualsearch.ContextualSearchManagerService$ContextualSearchManagerStub$$ExternalSyntheticLambda1
+                            /* JADX WARN: Removed duplicated region for block: B:12:0x013c  */
+                            /* JADX WARN: Removed duplicated region for block: B:15:? A[RETURN, SYNTHETIC] */
+                            /* JADX WARN: Removed duplicated region for block: B:38:0x00ee  */
+                            /* JADX WARN: Removed duplicated region for block: B:40:0x0112  */
+                            /* JADX WARN: Removed duplicated region for block: B:42:0x011a  */
+                            /* JADX WARN: Removed duplicated region for block: B:47:0x0135  */
+                            /* JADX WARN: Removed duplicated region for block: B:48:0x0117  */
+                            /* JADX WARN: Removed duplicated region for block: B:49:0x010f  */
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                                To view partially-correct code enable 'Show inconsistent code' option in preferences
+                            */
+                            public final void runOrThrow() {
+                                /*
+                                    Method dump skipped, instructions count: 358
+                                    To view this dump change 'Code comments level' option to 'DEBUG'
+                                */
+                                throw new UnsupportedOperationException(
+                                        "Method not decompiled:"
+                                            + " com.android.server.contextualsearch.ContextualSearchManagerService$ContextualSearchManagerStub$$ExternalSyntheticLambda1.runOrThrow():void");
+                            }
+                        });
             }
         }
     }
 
     /* renamed from: -$$Nest$menforcePermission, reason: not valid java name */
-    public static void m386$$Nest$menforcePermission(ContextualSearchManagerService contextualSearchManagerService) {
+    public static void m386$$Nest$menforcePermission(
+            ContextualSearchManagerService contextualSearchManagerService) {
         boolean z;
-        if (contextualSearchManagerService.getContext().checkCallingPermission("android.permission.ACCESS_CONTEXTUAL_SEARCH") != 0) {
+        if (contextualSearchManagerService
+                        .getContext()
+                        .checkCallingPermission("android.permission.ACCESS_CONTEXTUAL_SEARCH")
+                != 0) {
             synchronized (contextualSearchManagerService) {
                 try {
                     String str = contextualSearchManagerService.mTemporaryPackage;
-                    z = str != null && str.equals(contextualSearchManagerService.getContext().getPackageManager().getNameForUid(Binder.getCallingUid()));
+                    z =
+                            str != null
+                                    && str.equals(
+                                            contextualSearchManagerService
+                                                    .getContext()
+                                                    .getPackageManager()
+                                                    .getNameForUid(Binder.getCallingUid()));
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -237,7 +296,11 @@ public final class ContextualSearchManagerService extends SystemService {
             if (z) {
                 return;
             }
-            throw new SecurityException("Permission Denial: Cannot call startContextualSearch from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid());
+            throw new SecurityException(
+                    "Permission Denial: Cannot call startContextualSearch from pid="
+                            + Binder.getCallingPid()
+                            + ", uid="
+                            + Binder.getCallingUid());
         }
     }
 
@@ -245,60 +308,97 @@ public final class ContextualSearchManagerService extends SystemService {
         super(context);
         Object obj = new Object();
         this.mLock = obj;
-        AssistDataRequester.AssistDataRequesterCallbacks assistDataRequesterCallbacks = new AssistDataRequester.AssistDataRequesterCallbacks() { // from class: com.android.server.contextualsearch.ContextualSearchManagerService.1
-            @Override // com.android.server.am.AssistDataRequester.AssistDataRequesterCallbacks
-            public final boolean canHandleReceivedAssistDataLocked() {
-                boolean z;
-                synchronized (ContextualSearchManagerService.this.mLock) {
-                    z = ContextualSearchManagerService.this.mStateCallback != null;
-                }
-                return z;
-            }
+        AssistDataRequester.AssistDataRequesterCallbacks assistDataRequesterCallbacks =
+                new AssistDataRequester
+                        .AssistDataRequesterCallbacks() { // from class:
+                                                          // com.android.server.contextualsearch.ContextualSearchManagerService.1
+                    @Override // com.android.server.am.AssistDataRequester.AssistDataRequesterCallbacks
+                    public final boolean canHandleReceivedAssistDataLocked() {
+                        boolean z;
+                        synchronized (ContextualSearchManagerService.this.mLock) {
+                            z = ContextualSearchManagerService.this.mStateCallback != null;
+                        }
+                        return z;
+                    }
 
-            @Override // com.android.server.am.AssistDataRequester.AssistDataRequesterCallbacks
-            public final void onAssistDataReceivedLocked(int i, int i2, Bundle bundle) {
-                IContextualSearchCallback iContextualSearchCallback;
-                synchronized (ContextualSearchManagerService.this.mLock) {
-                    iContextualSearchCallback = ContextualSearchManagerService.this.mStateCallback;
-                }
-                if (iContextualSearchCallback == null) {
-                    Log.w("ContextualSearchManagerService", "Callback went away!");
-                    return;
-                }
-                try {
-                    iContextualSearchCallback.onResult(new ContextualSearchState((AssistStructure) bundle.getParcelable("structure", AssistStructure.class), (AssistContent) bundle.getParcelable("content", AssistContent.class), bundle));
-                } catch (RemoteException e) {
-                    Log.e("ContextualSearchManagerService", "Error invoking ContextualSearchCallback", e);
-                }
-            }
+                    @Override // com.android.server.am.AssistDataRequester.AssistDataRequesterCallbacks
+                    public final void onAssistDataReceivedLocked(int i, int i2, Bundle bundle) {
+                        IContextualSearchCallback iContextualSearchCallback;
+                        synchronized (ContextualSearchManagerService.this.mLock) {
+                            iContextualSearchCallback =
+                                    ContextualSearchManagerService.this.mStateCallback;
+                        }
+                        if (iContextualSearchCallback == null) {
+                            Log.w("ContextualSearchManagerService", "Callback went away!");
+                            return;
+                        }
+                        try {
+                            iContextualSearchCallback.onResult(
+                                    new ContextualSearchState(
+                                            (AssistStructure)
+                                                    bundle.getParcelable(
+                                                            "structure", AssistStructure.class),
+                                            (AssistContent)
+                                                    bundle.getParcelable(
+                                                            "content", AssistContent.class),
+                                            bundle));
+                        } catch (RemoteException e) {
+                            Log.e(
+                                    "ContextualSearchManagerService",
+                                    "Error invoking ContextualSearchCallback",
+                                    e);
+                        }
+                    }
 
-            @Override // com.android.server.am.AssistDataRequester.AssistDataRequesterCallbacks
-            public final void onAssistRequestCompleted() {
-                synchronized (ContextualSearchManagerService.this.mLock) {
-                    ContextualSearchManagerService.this.mStateCallback = null;
-                }
-            }
-        };
+                    @Override // com.android.server.am.AssistDataRequester.AssistDataRequesterCallbacks
+                    public final void onAssistRequestCompleted() {
+                        synchronized (ContextualSearchManagerService.this.mLock) {
+                            ContextualSearchManagerService.this.mStateCallback = null;
+                        }
+                    }
+                };
         this.mTemporaryPackage = null;
         this.mTokenValidDurationMs = 600000L;
         this.mContext = context;
-        ActivityTaskManagerInternal activityTaskManagerInternal = (ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class);
+        ActivityTaskManagerInternal activityTaskManagerInternal =
+                (ActivityTaskManagerInternal)
+                        LocalServices.getService(ActivityTaskManagerInternal.class);
         Objects.requireNonNull(activityTaskManagerInternal);
         this.mAtmInternal = activityTaskManagerInternal;
-        this.mPackageManager = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
-        WindowManagerInternal windowManagerInternal = (WindowManagerInternal) LocalServices.getService(WindowManagerInternal.class);
+        this.mPackageManager =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        WindowManagerInternal windowManagerInternal =
+                (WindowManagerInternal) LocalServices.getService(WindowManagerInternal.class);
         Objects.requireNonNull(windowManagerInternal);
         this.mWmInternal = windowManagerInternal;
-        this.mDpmInternal = (DevicePolicyManagerInternal) LocalServices.getService(DevicePolicyManagerInternal.class);
-        this.mAssistDataRequester = new AssistDataRequester(context, IWindowManager.Stub.asInterface(ServiceManager.getService("window")), (AppOpsManager) context.getSystemService(AppOpsManager.class), assistDataRequesterCallbacks, obj, 50);
-        Settings.Secure.putString(context.getContentResolver(), "contextual_search_package", getContextualSearchPackageName());
+        this.mDpmInternal =
+                (DevicePolicyManagerInternal)
+                        LocalServices.getService(DevicePolicyManagerInternal.class);
+        this.mAssistDataRequester =
+                new AssistDataRequester(
+                        context,
+                        IWindowManager.Stub.asInterface(ServiceManager.getService("window")),
+                        (AppOpsManager) context.getSystemService(AppOpsManager.class),
+                        assistDataRequesterCallbacks,
+                        obj,
+                        50);
+        Settings.Secure.putString(
+                context.getContentResolver(),
+                "contextual_search_package",
+                getContextualSearchPackageName());
     }
 
     public static void enforceOverridingPermission(String str) {
-        if (Binder.getCallingUid() == 2000 || Binder.getCallingUid() == 0 || Binder.getCallingUid() == 1000) {
+        if (Binder.getCallingUid() == 2000
+                || Binder.getCallingUid() == 0
+                || Binder.getCallingUid() == 1000) {
             return;
         }
-        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Permission Denial: Cannot override Contextual Search. Called ", str, " from pid=");
+        StringBuilder m =
+                DumpUtils$$ExternalSyntheticOutline0.m(
+                        "Permission Denial: Cannot override Contextual Search. Called ",
+                        str,
+                        " from pid=");
         m.append(Binder.getCallingPid());
         m.append(", uid=");
         m.append(Binder.getCallingUid());
@@ -310,7 +410,10 @@ public final class ContextualSearchManagerService extends SystemService {
         synchronized (this) {
             str = this.mTemporaryPackage;
             if (str == null) {
-                str = this.mContext.getResources().getString(R.string.date_picker_prev_month_button);
+                str =
+                        this.mContext
+                                .getResources()
+                                .getString(R.string.date_picker_prev_month_button);
             }
         }
         return str;
@@ -331,7 +434,10 @@ public final class ContextualSearchManagerService extends SystemService {
                     this.mTemporaryHandler = null;
                 }
                 this.mTemporaryPackage = null;
-                Settings.Secure.putString(this.mContext.getContentResolver(), "contextual_search_package", getContextualSearchPackageName());
+                Settings.Secure.putString(
+                        this.mContext.getContentResolver(),
+                        "contextual_search_package",
+                        getContextualSearchPackageName());
             } catch (Throwable th) {
                 throw th;
             }
@@ -343,7 +449,8 @@ public final class ContextualSearchManagerService extends SystemService {
             try {
                 enforceOverridingPermission("setTokenValidDurationMs");
                 if (i > 600000) {
-                    throw new IllegalArgumentException("Token max duration is 600000 (called with " + i + ")");
+                    throw new IllegalArgumentException(
+                            "Token max duration is 600000 (called with " + i + ")");
                 }
                 this.mTokenValidDurationMs = i;
             } catch (Throwable th) {

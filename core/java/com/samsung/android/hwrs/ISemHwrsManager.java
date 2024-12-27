@@ -10,7 +10,8 @@ import android.os.RemoteException;
 public interface ISemHwrsManager extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.hwrs.ISemHwrsManager";
 
-    boolean addShare(String str, String str2, String str3, String str4, String str5) throws RemoteException;
+    boolean addShare(String str, String str2, String str3, String str4, String str5)
+            throws RemoteException;
 
     boolean addUser(String str, String str2) throws RemoteException;
 
@@ -30,7 +31,13 @@ public interface ISemHwrsManager extends IInterface {
 
     public static class Default implements ISemHwrsManager {
         @Override // com.samsung.android.hwrs.ISemHwrsManager
-        public boolean addShare(String aResName, String aResPath, String aUserName, String aGroupName, String aMaxConnections) throws RemoteException {
+        public boolean addShare(
+                String aResName,
+                String aResPath,
+                String aUserName,
+                String aGroupName,
+                String aMaxConnections)
+                throws RemoteException {
             return false;
         }
 
@@ -80,7 +87,7 @@ public interface ISemHwrsManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemHwrsManager {
+    public abstract static class Stub extends Binder implements ISemHwrsManager {
         static final int TRANSACTION_addShare = 1;
         static final int TRANSACTION_addUser = 2;
         static final int TRANSACTION_deleteUser = 3;
@@ -142,7 +149,8 @@ public interface ISemHwrsManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemHwrsManager.DESCRIPTOR);
             }
@@ -229,7 +237,13 @@ public interface ISemHwrsManager extends IInterface {
             }
 
             @Override // com.samsung.android.hwrs.ISemHwrsManager
-            public boolean addShare(String aResName, String aResPath, String aUserName, String aGroupName, String aMaxConnections) throws RemoteException {
+            public boolean addShare(
+                    String aResName,
+                    String aResPath,
+                    String aUserName,
+                    String aGroupName,
+                    String aMaxConnections)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

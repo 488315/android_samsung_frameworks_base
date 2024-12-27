@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothHearingAid;
 import android.bluetooth.BluetoothLeAudio;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,19 +22,21 @@ public final class BluetoothProfileMonitor {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProfileListener implements BluetoothProfile.ServiceListener {
-        public ProfileListener() {
-        }
+        public ProfileListener() {}
 
         @Override // android.bluetooth.BluetoothProfile.ServiceListener
         public final void onServiceConnected(int i, BluetoothProfile bluetoothProfile) {
             synchronized (BluetoothProfileMonitor.this) {
                 try {
                     if (i == 2) {
-                        BluetoothProfileMonitor.this.mA2dpProfile = (BluetoothA2dp) bluetoothProfile;
+                        BluetoothProfileMonitor.this.mA2dpProfile =
+                                (BluetoothA2dp) bluetoothProfile;
                     } else if (i == 21) {
-                        BluetoothProfileMonitor.this.mHearingAidProfile = (BluetoothHearingAid) bluetoothProfile;
+                        BluetoothProfileMonitor.this.mHearingAidProfile =
+                                (BluetoothHearingAid) bluetoothProfile;
                     } else if (i == 22) {
-                        BluetoothProfileMonitor.this.mLeAudioProfile = (BluetoothLeAudio) bluetoothProfile;
+                        BluetoothProfileMonitor.this.mLeAudioProfile =
+                                (BluetoothLeAudio) bluetoothProfile;
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -102,7 +105,8 @@ public final class BluetoothProfileMonitor {
                     bluetoothProfile = this.mHearingAidProfile;
                 } else {
                     if (i != 22) {
-                        throw new IllegalArgumentException(i + " is not supported as Bluetooth profile");
+                        throw new IllegalArgumentException(
+                                i + " is not supported as Bluetooth profile");
                     }
                     bluetoothProfile = this.mLeAudioProfile;
                 }

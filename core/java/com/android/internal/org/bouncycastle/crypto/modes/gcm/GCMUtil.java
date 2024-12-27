@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto.modes.gcm;
 
 import android.content.Context;
+
 import com.android.internal.org.bouncycastle.math.raw.Interleave;
 import com.android.internal.org.bouncycastle.util.Longs;
 import com.android.internal.org.bouncycastle.util.Pack;
@@ -144,7 +145,9 @@ public abstract class GCMUtil {
         long z2 = (((h2 ^ h1) ^ h3) ^ h5) ^ ((h3 << 62) ^ (h3 << 57));
         long z0 = h0 ^ (((z2 ^ (z2 >>> 1)) ^ (z2 >>> 2)) ^ (z2 >>> 7));
         x[0] = z0;
-        x[1] = (z1 ^ (((h3 ^ (h3 >>> 1)) ^ (h3 >>> 2)) ^ (h3 >>> 7))) ^ (((z2 << 63) ^ (z2 << 62)) ^ (z2 << 57));
+        x[1] =
+                (z1 ^ (((h3 ^ (h3 >>> 1)) ^ (h3 >>> 2)) ^ (h3 >>> 7)))
+                        ^ (((z2 << 63) ^ (z2 << 62)) ^ (z2 << 57));
     }
 
     public static void multiplyP(int[] x) {
@@ -266,7 +269,9 @@ public abstract class GCMUtil {
         long z3 = t[3];
         long z22 = z2 ^ (((z3 << 63) ^ (z3 << 62)) ^ (z3 << 57));
         z[0] = z0 ^ ((((z22 >>> 1) ^ z22) ^ (z22 >>> 2)) ^ (z22 >>> 7));
-        z[1] = (z1 ^ ((((z3 >>> 1) ^ z3) ^ (z3 >>> 2)) ^ (z3 >>> 7))) ^ (((z22 << 62) ^ (z22 << 63)) ^ (z22 << 57));
+        z[1] =
+                (z1 ^ ((((z3 >>> 1) ^ z3) ^ (z3 >>> 2)) ^ (z3 >>> 7)))
+                        ^ (((z22 << 62) ^ (z22 << 63)) ^ (z22 << 57));
     }
 
     public static void xor(byte[] x, byte[] y) {
@@ -385,6 +390,9 @@ public abstract class GCMUtil {
         long z1 = (((x0 * y1) ^ (x1 * y0)) ^ (x2 * y3)) ^ (x3 * y2);
         long z2 = (((x0 * y2) ^ (x1 * y1)) ^ (x2 * y0)) ^ (x3 * y3);
         long z3 = (((x0 * y3) ^ (x1 * y2)) ^ (x2 * y1)) ^ (x3 * y0);
-        return (z0 & 1229782938247303441L) | (z1 & 2459565876494606882L) | (z2 & 4919131752989213764L) | (z3 & (-8608480567731124088L));
+        return (z0 & 1229782938247303441L)
+                | (z1 & 2459565876494606882L)
+                | (z2 & 4919131752989213764L)
+                | (z3 & (-8608480567731124088L));
     }
 }

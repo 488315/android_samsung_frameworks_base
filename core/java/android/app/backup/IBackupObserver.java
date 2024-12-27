@@ -16,16 +16,14 @@ public interface IBackupObserver extends IInterface {
 
     public static class Default implements IBackupObserver {
         @Override // android.app.backup.IBackupObserver
-        public void onUpdate(String currentPackage, BackupProgress backupProgress) throws RemoteException {
-        }
+        public void onUpdate(String currentPackage, BackupProgress backupProgress)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupObserver
-        public void onResult(String target, int status) throws RemoteException {
-        }
+        public void onResult(String target, int status) throws RemoteException {}
 
         @Override // android.app.backup.IBackupObserver
-        public void backupFinished(int status) throws RemoteException {
-        }
+        public void backupFinished(int status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +31,7 @@ public interface IBackupObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBackupObserver {
+    public abstract static class Stub extends Binder implements IBackupObserver {
         public static final String DESCRIPTOR = "android.app.backup.IBackupObserver";
         static final int TRANSACTION_backupFinished = 3;
         static final int TRANSACTION_onResult = 2;
@@ -78,7 +76,8 @@ public interface IBackupObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -89,7 +88,8 @@ public interface IBackupObserver extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    BackupProgress _arg1 = (BackupProgress) data.readTypedObject(BackupProgress.CREATOR);
+                    BackupProgress _arg1 =
+                            (BackupProgress) data.readTypedObject(BackupProgress.CREATOR);
                     data.enforceNoDataAvail();
                     onUpdate(_arg0, _arg1);
                     return true;
@@ -126,7 +126,8 @@ public interface IBackupObserver extends IInterface {
             }
 
             @Override // android.app.backup.IBackupObserver
-            public void onUpdate(String currentPackage, BackupProgress backupProgress) throws RemoteException {
+            public void onUpdate(String currentPackage, BackupProgress backupProgress)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

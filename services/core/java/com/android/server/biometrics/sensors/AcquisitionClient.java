@@ -12,6 +12,7 @@ import android.os.SystemClock;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.ServiceKeeper$$ExternalSyntheticOutline0;
@@ -23,6 +24,7 @@ import com.android.server.biometrics.log.BiometricContextSessionInfo;
 import com.android.server.biometrics.log.BiometricFrameworkStatsLogger;
 import com.android.server.biometrics.log.BiometricLogger;
 import com.android.server.biometrics.log.OperationContextExt;
+
 import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -39,8 +41,31 @@ public abstract class AcquisitionClient extends HalClientMonitor implements Erro
         VibrationEffect.get(1);
     }
 
-    public AcquisitionClient(Context context, Supplier supplier, IBinder iBinder, ClientMonitorCallbackConverter clientMonitorCallbackConverter, int i, String str, int i2, int i3, boolean z, BiometricLogger biometricLogger, BiometricContext biometricContext, boolean z2) {
-        super(context, supplier, iBinder, clientMonitorCallbackConverter, i, str, i2, i3, biometricLogger, biometricContext, z2);
+    public AcquisitionClient(
+            Context context,
+            Supplier supplier,
+            IBinder iBinder,
+            ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+            int i,
+            String str,
+            int i2,
+            int i3,
+            boolean z,
+            BiometricLogger biometricLogger,
+            BiometricContext biometricContext,
+            boolean z2) {
+        super(
+                context,
+                supplier,
+                iBinder,
+                clientMonitorCallbackConverter,
+                i,
+                str,
+                i2,
+                i3,
+                biometricLogger,
+                biometricContext,
+                z2);
         this.mShouldSendErrorToClient = true;
         this.mPowerManager = (PowerManager) context.getSystemService(PowerManager.class);
         this.mShouldVibrate = z;
@@ -94,12 +119,15 @@ public abstract class AcquisitionClient extends HalClientMonitor implements Erro
                 biometricLogger.mFirstAcquireTimeMs = System.currentTimeMillis();
             }
             if (BiometricLogger.DEBUG) {
-                StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i4, i3, "Acquired! Modality: ", ", User: ", ", IsCrypto: ");
+                StringBuilder m =
+                        ArrayUtils$$ExternalSyntheticOutline0.m(
+                                i4, i3, "Acquired! Modality: ", ", User: ", ", IsCrypto: ");
                 m.append(operationContext.mAidlContext.isCrypto);
                 m.append(", Action: ");
                 m.append(biometricLogger.mStatsAction);
                 m.append(", Client: ");
-                ServiceKeeper$$ExternalSyntheticOutline0.m(biometricLogger.mStatsClient, i, ", AcquiredInfo: ", ", VendorCode: ", m);
+                ServiceKeeper$$ExternalSyntheticOutline0.m(
+                        biometricLogger.mStatsClient, i, ", AcquiredInfo: ", ", VendorCode: ", m);
                 GmsAlarmManager$$ExternalSyntheticOutline0.m(m, i2, "BiometricLogger");
             }
             if (!biometricLogger.shouldSkipLogging()) {
@@ -113,14 +141,41 @@ public abstract class AcquisitionClient extends HalClientMonitor implements Erro
                 boolean z6 = operationContext2.isAod;
                 boolean z7 = operationContext.mIsDisplayOn;
                 int i7 = operationContext.mDockState;
-                int orientationType = BiometricFrameworkStatsLogger.orientationType(operationContext.mOrientation);
+                int orientationType =
+                        BiometricFrameworkStatsLogger.orientationType(
+                                operationContext.mOrientation);
                 int i8 = operationContext.mFoldState;
                 int i9 = i8 != 1 ? i8 != 2 ? i8 != 3 ? 0 : 2 : 1 : 3;
-                BiometricContextSessionInfo biometricContextSessionInfo = operationContext.mSessionInfo;
-                FrameworkStatsLog.write(87, biometricLogger.mStatsModality, i3, z5, biometricLogger.mStatsAction, biometricLogger.mStatsClient, i, i2, isDebugEnabled, -1, i5, i6, z6, z7, i7, orientationType, i9, biometricContextSessionInfo != null ? biometricContextSessionInfo.mOrder.getAndIncrement() : -1, BiometricFrameworkStatsLogger.toProtoWakeReason(operationContext));
+                BiometricContextSessionInfo biometricContextSessionInfo =
+                        operationContext.mSessionInfo;
+                FrameworkStatsLog.write(
+                        87,
+                        biometricLogger.mStatsModality,
+                        i3,
+                        z5,
+                        biometricLogger.mStatsAction,
+                        biometricLogger.mStatsClient,
+                        i,
+                        i2,
+                        isDebugEnabled,
+                        -1,
+                        i5,
+                        i6,
+                        z6,
+                        z7,
+                        i7,
+                        orientationType,
+                        i9,
+                        biometricContextSessionInfo != null
+                                ? biometricContextSessionInfo.mOrder.getAndIncrement()
+                                : -1,
+                        BiometricFrameworkStatsLogger.toProtoWakeReason(operationContext));
             }
         }
-        ProxyManager$$ExternalSyntheticOutline0.m("Biometrics/AcquisitionClient", ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "Acquired: ", " ", ", shouldSend: "), z);
+        ProxyManager$$ExternalSyntheticOutline0.m(
+                "Biometrics/AcquisitionClient",
+                ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "Acquired: ", " ", ", shouldSend: "),
+                z);
         if (i == 0) {
             z2 = false;
             this.mPowerManager.userActivity(SystemClock.uptimeMillis(), 2, 0);
@@ -131,15 +186,18 @@ public abstract class AcquisitionClient extends HalClientMonitor implements Erro
             try {
                 ClientMonitorCallbackConverter clientMonitorCallbackConverter = this.mListener;
                 int i10 = this.mSensorId;
-                IBiometricSensorReceiver iBiometricSensorReceiver = clientMonitorCallbackConverter.mSensorReceiver;
+                IBiometricSensorReceiver iBiometricSensorReceiver =
+                        clientMonitorCallbackConverter.mSensorReceiver;
                 if (iBiometricSensorReceiver != null) {
                     iBiometricSensorReceiver.onAcquired(i10, i, i2);
                 } else {
-                    IFaceServiceReceiver iFaceServiceReceiver = clientMonitorCallbackConverter.mFaceServiceReceiver;
+                    IFaceServiceReceiver iFaceServiceReceiver =
+                            clientMonitorCallbackConverter.mFaceServiceReceiver;
                     if (iFaceServiceReceiver != null) {
                         iFaceServiceReceiver.onAcquired(i, i2);
                     } else {
-                        IFingerprintServiceReceiver iFingerprintServiceReceiver = clientMonitorCallbackConverter.mFingerprintServiceReceiver;
+                        IFingerprintServiceReceiver iFingerprintServiceReceiver =
+                                clientMonitorCallbackConverter.mFingerprintServiceReceiver;
                         if (iFingerprintServiceReceiver != null) {
                             iFingerprintServiceReceiver.onAcquired(i, i2);
                         }
@@ -160,7 +218,8 @@ public abstract class AcquisitionClient extends HalClientMonitor implements Erro
     public final void onErrorInternal(int i, int i2, boolean z) {
         Slog.d("Biometrics/AcquisitionClient", "onErrorInternal code: " + i + ", finish: " + z);
         if (this.mShouldSendErrorToClient) {
-            this.mLogger.logOnError(this.mContext, getOperationContext(), i, i2, this.mTargetUserId);
+            this.mLogger.logOnError(
+                    this.mContext, getOperationContext(), i, i2, this.mTargetUserId);
             try {
                 this.mShouldSendErrorToClient = false;
                 this.mListener.onError(this.mSensorId, this.mCookie, i, i2);
@@ -171,7 +230,9 @@ public abstract class AcquisitionClient extends HalClientMonitor implements Erro
         if (z) {
             ClientMonitorCallback clientMonitorCallback = this.mCallback;
             if (clientMonitorCallback == null) {
-                Slog.e("Biometrics/AcquisitionClient", "Callback is null, perhaps the client hasn't been started yet?");
+                Slog.e(
+                        "Biometrics/AcquisitionClient",
+                        "Callback is null, perhaps the client hasn't been started yet?");
             } else {
                 clientMonitorCallback.onClientFinished(this, false);
             }
@@ -197,6 +258,5 @@ public abstract class AcquisitionClient extends HalClientMonitor implements Erro
 
     public abstract void vibrateError();
 
-    public void vibrateSuccess() {
-    }
+    public void vibrateSuccess() {}
 }

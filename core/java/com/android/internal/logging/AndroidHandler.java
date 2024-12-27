@@ -2,7 +2,9 @@ package com.android.internal.logging;
 
 import android.media.MediaMetrics;
 import android.util.Log;
+
 import com.android.internal.util.FastPrintWriter;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -14,34 +16,33 @@ import java.util.logging.Logger;
 
 /* loaded from: classes5.dex */
 public class AndroidHandler extends Handler {
-    private static final Formatter THE_FORMATTER = new Formatter() { // from class: com.android.internal.logging.AndroidHandler.1
-        @Override // java.util.logging.Formatter
-        public String format(LogRecord r) {
-            Throwable thrown = r.getThrown();
-            if (thrown != null) {
-                StringWriter sw = new StringWriter();
-                PrintWriter pw = new FastPrintWriter((Writer) sw, false, 256);
-                sw.write(r.getMessage());
-                sw.write("\n");
-                thrown.printStackTrace(pw);
-                pw.flush();
-                return sw.toString();
-            }
-            return r.getMessage();
-        }
-    };
+    private static final Formatter THE_FORMATTER =
+            new Formatter() { // from class: com.android.internal.logging.AndroidHandler.1
+                @Override // java.util.logging.Formatter
+                public String format(LogRecord r) {
+                    Throwable thrown = r.getThrown();
+                    if (thrown != null) {
+                        StringWriter sw = new StringWriter();
+                        PrintWriter pw = new FastPrintWriter((Writer) sw, false, 256);
+                        sw.write(r.getMessage());
+                        sw.write("\n");
+                        thrown.printStackTrace(pw);
+                        pw.flush();
+                        return sw.toString();
+                    }
+                    return r.getMessage();
+                }
+            };
 
     public AndroidHandler() {
         setFormatter(THE_FORMATTER);
     }
 
     @Override // java.util.logging.Handler
-    public void close() {
-    }
+    public void close() {}
 
     @Override // java.util.logging.Handler
-    public void flush() {
-    }
+    public void flush() {}
 
     private static String loggerNameToTag(String loggerName) {
         if (loggerName == null) {

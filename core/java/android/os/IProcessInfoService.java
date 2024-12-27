@@ -2,18 +2,18 @@ package android.os;
 
 /* loaded from: classes3.dex */
 public interface IProcessInfoService extends IInterface {
-    void getProcessStatesAndOomScoresFromPids(int[] iArr, int[] iArr2, int[] iArr3) throws RemoteException;
+    void getProcessStatesAndOomScoresFromPids(int[] iArr, int[] iArr2, int[] iArr3)
+            throws RemoteException;
 
     void getProcessStatesFromPids(int[] iArr, int[] iArr2) throws RemoteException;
 
     public static class Default implements IProcessInfoService {
         @Override // android.os.IProcessInfoService
-        public void getProcessStatesFromPids(int[] pids, int[] states) throws RemoteException {
-        }
+        public void getProcessStatesFromPids(int[] pids, int[] states) throws RemoteException {}
 
         @Override // android.os.IProcessInfoService
-        public void getProcessStatesAndOomScoresFromPids(int[] pids, int[] states, int[] scores) throws RemoteException {
-        }
+        public void getProcessStatesAndOomScoresFromPids(int[] pids, int[] states, int[] scores)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +21,7 @@ public interface IProcessInfoService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProcessInfoService {
+    public abstract static class Stub extends Binder implements IProcessInfoService {
         public static final String DESCRIPTOR = "android.os.IProcessInfoService";
         static final int TRANSACTION_getProcessStatesAndOomScoresFromPids = 2;
         static final int TRANSACTION_getProcessStatesFromPids = 1;
@@ -63,7 +63,8 @@ public interface IProcessInfoService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             int[] _arg1;
             int[] _arg12;
             int[] _arg2;
@@ -147,7 +148,8 @@ public interface IProcessInfoService extends IInterface {
             }
 
             @Override // android.os.IProcessInfoService
-            public void getProcessStatesAndOomScoresFromPids(int[] pids, int[] states, int[] scores) throws RemoteException {
+            public void getProcessStatesAndOomScoresFromPids(int[] pids, int[] states, int[] scores)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -6,7 +6,8 @@ import android.telephony.ims.SipDetails;
 import android.telephony.ims.stub.RcsCapabilityExchangeImplBase;
 
 /* loaded from: classes4.dex */
-public class RcsPublishResponseAidlWrapper implements RcsCapabilityExchangeImplBase.PublishResponseCallback {
+public class RcsPublishResponseAidlWrapper
+        implements RcsCapabilityExchangeImplBase.PublishResponseCallback {
     private final IPublishResponseCallback mResponseBinder;
 
     public RcsPublishResponseAidlWrapper(IPublishResponseCallback responseBinder) {
@@ -25,7 +26,8 @@ public class RcsPublishResponseAidlWrapper implements RcsCapabilityExchangeImplB
     @Override // android.telephony.ims.stub.RcsCapabilityExchangeImplBase.PublishResponseCallback
     @Deprecated
     public void onNetworkResponse(int code, String reasonPhrase) throws ImsException {
-        SipDetails details = new SipDetails.Builder(2).setSipResponseCode(code, reasonPhrase).build();
+        SipDetails details =
+                new SipDetails.Builder(2).setSipResponseCode(code, reasonPhrase).build();
         try {
             this.mResponseBinder.onNetworkResponse(details);
         } catch (RemoteException e) {
@@ -35,8 +37,14 @@ public class RcsPublishResponseAidlWrapper implements RcsCapabilityExchangeImplB
 
     @Override // android.telephony.ims.stub.RcsCapabilityExchangeImplBase.PublishResponseCallback
     @Deprecated
-    public void onNetworkResponse(int code, String reasonPhrase, int reasonHeaderCause, String reasonHeaderText) throws ImsException {
-        SipDetails details = new SipDetails.Builder(2).setSipResponseCode(code, reasonPhrase).setSipResponseReasonHeader(reasonHeaderCause, reasonHeaderText).build();
+    public void onNetworkResponse(
+            int code, String reasonPhrase, int reasonHeaderCause, String reasonHeaderText)
+            throws ImsException {
+        SipDetails details =
+                new SipDetails.Builder(2)
+                        .setSipResponseCode(code, reasonPhrase)
+                        .setSipResponseReasonHeader(reasonHeaderCause, reasonHeaderText)
+                        .build();
         try {
             this.mResponseBinder.onNetworkResponse(details);
         } catch (RemoteException e) {

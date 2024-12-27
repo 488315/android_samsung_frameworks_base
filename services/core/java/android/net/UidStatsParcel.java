@@ -89,146 +89,419 @@ public class UidStatsParcel implements Parcelable {
                                             this.ipv6Addr2 = parcel.readInt();
                                             if (parcel.dataPosition() - dataPosition < readInt) {
                                                 this.ipv6Addr3 = parcel.readInt();
-                                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                                if (parcel.dataPosition() - dataPosition
+                                                        < readInt) {
                                                     this.ipv6Addr4 = parcel.readInt();
-                                                    if (parcel.dataPosition() - dataPosition < readInt) {
+                                                    if (parcel.dataPosition() - dataPosition
+                                                            < readInt) {
                                                         this.ipv4sAddr = parcel.readInt();
-                                                        if (parcel.dataPosition() - dataPosition < readInt) {
+                                                        if (parcel.dataPosition() - dataPosition
+                                                                < readInt) {
                                                             this.ipv6sAddr1 = parcel.readInt();
-                                                            if (parcel.dataPosition() - dataPosition < readInt) {
+                                                            if (parcel.dataPosition() - dataPosition
+                                                                    < readInt) {
                                                                 this.ipv6sAddr2 = parcel.readInt();
-                                                                if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                    this.ipv6sAddr3 = parcel.readInt();
-                                                                    if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                        this.ipv6sAddr4 = parcel.readInt();
-                                                                        if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                            this.tcpPackets = parcel.readInt();
-                                                                            if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                this.udpPackets = parcel.readInt();
-                                                                                if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                    this.rxPackets = parcel.readInt();
-                                                                                    if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                        this.txPackets = parcel.readInt();
-                                                                                        if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                            this.rxBytes = parcel.readLong();
-                                                                                            if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                this.txBytes = parcel.readLong();
-                                                                                                if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                    this.firstTxTime = parcel.readLong();
-                                                                                                    if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                        this.maxTxPacketSize = parcel.readInt();
-                                                                                                        if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                            this.minTxPacketSize = parcel.readInt();
-                                                                                                            if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                                this.maxTxInterPacketTime = parcel.readLong();
-                                                                                                                if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                                    this.minTxInterPacketTime = parcel.readLong();
-                                                                                                                    if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                                        this.latestTxTime = parcel.readLong();
-                                                                                                                        if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                                            this.maxRxPacketSize = parcel.readInt();
-                                                                                                                            if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                                                this.minRxPacketSize = parcel.readInt();
-                                                                                                                                if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                                                    this.maxRxInterPacketTime2 = parcel.readLong();
-                                                                                                                                    if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                                                        this.maxRxInterPacketTime = parcel.readLong();
-                                                                                                                                        if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                                                            this.latestRxTime = parcel.readLong();
-                                                                                                                                            if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                                                                this.cliMacAddr = parcel.readLong();
-                                                                                                                                                if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                if (parcel.dataPosition()
+                                                                                - dataPosition
+                                                                        < readInt) {
+                                                                    this.ipv6sAddr3 =
+                                                                            parcel.readInt();
+                                                                    if (parcel.dataPosition()
+                                                                                    - dataPosition
+                                                                            < readInt) {
+                                                                        this.ipv6sAddr4 =
+                                                                                parcel.readInt();
+                                                                        if (parcel.dataPosition()
+                                                                                        - dataPosition
+                                                                                < readInt) {
+                                                                            this.tcpPackets =
+                                                                                    parcel
+                                                                                            .readInt();
+                                                                            if (parcel
+                                                                                                    .dataPosition()
+                                                                                            - dataPosition
+                                                                                    < readInt) {
+                                                                                this.udpPackets =
+                                                                                        parcel
+                                                                                                .readInt();
+                                                                                if (parcel
+                                                                                                        .dataPosition()
+                                                                                                - dataPosition
+                                                                                        < readInt) {
+                                                                                    this.rxPackets =
+                                                                                            parcel
+                                                                                                    .readInt();
+                                                                                    if (parcel
+                                                                                                            .dataPosition()
+                                                                                                    - dataPosition
+                                                                                            < readInt) {
+                                                                                        this
+                                                                                                        .txPackets =
+                                                                                                parcel
+                                                                                                        .readInt();
+                                                                                        if (parcel
+                                                                                                                .dataPosition()
+                                                                                                        - dataPosition
+                                                                                                < readInt) {
+                                                                                            this
+                                                                                                            .rxBytes =
+                                                                                                    parcel
+                                                                                                            .readLong();
+                                                                                            if (parcel
+                                                                                                                    .dataPosition()
+                                                                                                            - dataPosition
+                                                                                                    < readInt) {
+                                                                                                this
+                                                                                                                .txBytes =
+                                                                                                        parcel
+                                                                                                                .readLong();
+                                                                                                if (parcel
+                                                                                                                        .dataPosition()
+                                                                                                                - dataPosition
+                                                                                                        < readInt) {
+                                                                                                    this
+                                                                                                                    .firstTxTime =
+                                                                                                            parcel
+                                                                                                                    .readLong();
+                                                                                                    if (parcel
+                                                                                                                            .dataPosition()
+                                                                                                                    - dataPosition
+                                                                                                            < readInt) {
+                                                                                                        this
+                                                                                                                        .maxTxPacketSize =
+                                                                                                                parcel
+                                                                                                                        .readInt();
+                                                                                                        if (parcel
+                                                                                                                                .dataPosition()
+                                                                                                                        - dataPosition
+                                                                                                                < readInt) {
+                                                                                                            this
+                                                                                                                            .minTxPacketSize =
+                                                                                                                    parcel
+                                                                                                                            .readInt();
+                                                                                                            if (parcel
+                                                                                                                                    .dataPosition()
+                                                                                                                            - dataPosition
+                                                                                                                    < readInt) {
+                                                                                                                this
+                                                                                                                                .maxTxInterPacketTime =
+                                                                                                                        parcel
+                                                                                                                                .readLong();
+                                                                                                                if (parcel
+                                                                                                                                        .dataPosition()
+                                                                                                                                - dataPosition
+                                                                                                                        < readInt) {
+                                                                                                                    this
+                                                                                                                                    .minTxInterPacketTime =
+                                                                                                                            parcel
+                                                                                                                                    .readLong();
+                                                                                                                    if (parcel
+                                                                                                                                            .dataPosition()
+                                                                                                                                    - dataPosition
+                                                                                                                            < readInt) {
+                                                                                                                        this
+                                                                                                                                        .latestTxTime =
+                                                                                                                                parcel
+                                                                                                                                        .readLong();
+                                                                                                                        if (parcel
+                                                                                                                                                .dataPosition()
+                                                                                                                                        - dataPosition
+                                                                                                                                < readInt) {
+                                                                                                                            this
+                                                                                                                                            .maxRxPacketSize =
+                                                                                                                                    parcel
+                                                                                                                                            .readInt();
+                                                                                                                            if (parcel
+                                                                                                                                                    .dataPosition()
+                                                                                                                                            - dataPosition
+                                                                                                                                    < readInt) {
+                                                                                                                                this
+                                                                                                                                                .minRxPacketSize =
+                                                                                                                                        parcel
+                                                                                                                                                .readInt();
+                                                                                                                                if (parcel
+                                                                                                                                                        .dataPosition()
+                                                                                                                                                - dataPosition
+                                                                                                                                        < readInt) {
+                                                                                                                                    this
+                                                                                                                                                    .maxRxInterPacketTime2 =
+                                                                                                                                            parcel
+                                                                                                                                                    .readLong();
+                                                                                                                                    if (parcel
+                                                                                                                                                            .dataPosition()
+                                                                                                                                                    - dataPosition
+                                                                                                                                            < readInt) {
+                                                                                                                                        this
+                                                                                                                                                        .maxRxInterPacketTime =
+                                                                                                                                                parcel
+                                                                                                                                                        .readLong();
+                                                                                                                                        if (parcel
+                                                                                                                                                                .dataPosition()
+                                                                                                                                                        - dataPosition
+                                                                                                                                                < readInt) {
+                                                                                                                                            this
+                                                                                                                                                            .latestRxTime =
+                                                                                                                                                    parcel
+                                                                                                                                                            .readLong();
+                                                                                                                                            if (parcel
+                                                                                                                                                                    .dataPosition()
+                                                                                                                                                            - dataPosition
+                                                                                                                                                    < readInt) {
+                                                                                                                                                this
+                                                                                                                                                                .cliMacAddr =
+                                                                                                                                                        parcel
+                                                                                                                                                                .readLong();
+                                                                                                                                                if (dataPosition
+                                                                                                                                                        > Integer
+                                                                                                                                                                        .MAX_VALUE
+                                                                                                                                                                - readInt) {
+                                                                                                                                                    throw new BadParcelableException(
+                                                                                                                                                            "Overflow"
+                                                                                                                                                                + " in the"
+                                                                                                                                                                + " size"
+                                                                                                                                                                + " of parcelable");
                                                                                                                                                 }
-                                                                                                                                                parcel.setDataPosition(dataPosition + readInt);
+                                                                                                                                                parcel
+                                                                                                                                                        .setDataPosition(
+                                                                                                                                                                dataPosition
+                                                                                                                                                                        + readInt);
                                                                                                                                                 return;
                                                                                                                                             }
-                                                                                                                                            if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                                                            if (dataPosition
+                                                                                                                                                    > Integer
+                                                                                                                                                                    .MAX_VALUE
+                                                                                                                                                            - readInt) {
+                                                                                                                                                throw new BadParcelableException(
+                                                                                                                                                        "Overflow"
+                                                                                                                                                            + " in the"
+                                                                                                                                                            + " size"
+                                                                                                                                                            + " of parcelable");
                                                                                                                                             }
-                                                                                                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                                                        } else if (dataPosition
+                                                                                                                                                > Integer
+                                                                                                                                                                .MAX_VALUE
+                                                                                                                                                        - readInt) {
+                                                                                                                                            throw new BadParcelableException(
+                                                                                                                                                    "Overflow"
+                                                                                                                                                        + " in the"
+                                                                                                                                                        + " size"
+                                                                                                                                                        + " of parcelable");
                                                                                                                                         }
-                                                                                                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                                                    } else if (dataPosition
+                                                                                                                                            > Integer
+                                                                                                                                                            .MAX_VALUE
+                                                                                                                                                    - readInt) {
+                                                                                                                                        throw new BadParcelableException(
+                                                                                                                                                "Overflow"
+                                                                                                                                                    + " in the"
+                                                                                                                                                    + " size"
+                                                                                                                                                    + " of parcelable");
                                                                                                                                     }
-                                                                                                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                                                } else if (dataPosition
+                                                                                                                                        > Integer
+                                                                                                                                                        .MAX_VALUE
+                                                                                                                                                - readInt) {
+                                                                                                                                    throw new BadParcelableException(
+                                                                                                                                            "Overflow"
+                                                                                                                                                + " in the"
+                                                                                                                                                + " size"
+                                                                                                                                                + " of parcelable");
                                                                                                                                 }
-                                                                                                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                                            } else if (dataPosition
+                                                                                                                                    > Integer
+                                                                                                                                                    .MAX_VALUE
+                                                                                                                                            - readInt) {
+                                                                                                                                throw new BadParcelableException(
+                                                                                                                                        "Overflow"
+                                                                                                                                            + " in the"
+                                                                                                                                            + " size"
+                                                                                                                                            + " of parcelable");
                                                                                                                             }
-                                                                                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                                        } else if (dataPosition
+                                                                                                                                > Integer
+                                                                                                                                                .MAX_VALUE
+                                                                                                                                        - readInt) {
+                                                                                                                            throw new BadParcelableException(
+                                                                                                                                    "Overflow"
+                                                                                                                                        + " in the"
+                                                                                                                                        + " size"
+                                                                                                                                        + " of parcelable");
                                                                                                                         }
-                                                                                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                                    } else if (dataPosition
+                                                                                                                            > Integer
+                                                                                                                                            .MAX_VALUE
+                                                                                                                                    - readInt) {
+                                                                                                                        throw new BadParcelableException(
+                                                                                                                                "Overflow"
+                                                                                                                                    + " in the"
+                                                                                                                                    + " size"
+                                                                                                                                    + " of parcelable");
                                                                                                                     }
-                                                                                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                                } else if (dataPosition
+                                                                                                                        > Integer
+                                                                                                                                        .MAX_VALUE
+                                                                                                                                - readInt) {
+                                                                                                                    throw new BadParcelableException(
+                                                                                                                            "Overflow"
+                                                                                                                                + " in the"
+                                                                                                                                + " size"
+                                                                                                                                + " of parcelable");
                                                                                                                 }
-                                                                                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                            } else if (dataPosition
+                                                                                                                    > Integer
+                                                                                                                                    .MAX_VALUE
+                                                                                                                            - readInt) {
+                                                                                                                throw new BadParcelableException(
+                                                                                                                        "Overflow"
+                                                                                                                            + " in the"
+                                                                                                                            + " size"
+                                                                                                                            + " of parcelable");
                                                                                                             }
-                                                                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                        } else if (dataPosition
+                                                                                                                > Integer
+                                                                                                                                .MAX_VALUE
+                                                                                                                        - readInt) {
+                                                                                                            throw new BadParcelableException(
+                                                                                                                    "Overflow"
+                                                                                                                        + " in the"
+                                                                                                                        + " size"
+                                                                                                                        + " of parcelable");
                                                                                                         }
-                                                                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                    } else if (dataPosition
+                                                                                                            > Integer
+                                                                                                                            .MAX_VALUE
+                                                                                                                    - readInt) {
+                                                                                                        throw new BadParcelableException(
+                                                                                                                "Overflow"
+                                                                                                                    + " in the"
+                                                                                                                    + " size"
+                                                                                                                    + " of parcelable");
                                                                                                     }
-                                                                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                                } else if (dataPosition
+                                                                                                        > Integer
+                                                                                                                        .MAX_VALUE
+                                                                                                                - readInt) {
+                                                                                                    throw new BadParcelableException(
+                                                                                                            "Overflow"
+                                                                                                                + " in the"
+                                                                                                                + " size"
+                                                                                                                + " of parcelable");
                                                                                                 }
-                                                                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                            } else if (dataPosition
+                                                                                                    > Integer
+                                                                                                                    .MAX_VALUE
+                                                                                                            - readInt) {
+                                                                                                throw new BadParcelableException(
+                                                                                                        "Overflow"
+                                                                                                            + " in the"
+                                                                                                            + " size"
+                                                                                                            + " of parcelable");
                                                                                             }
-                                                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                        } else if (dataPosition
+                                                                                                > Integer
+                                                                                                                .MAX_VALUE
+                                                                                                        - readInt) {
+                                                                                            throw new BadParcelableException(
+                                                                                                    "Overflow"
+                                                                                                        + " in the"
+                                                                                                        + " size"
+                                                                                                        + " of parcelable");
                                                                                         }
-                                                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                    } else if (dataPosition
+                                                                                            > Integer
+                                                                                                            .MAX_VALUE
+                                                                                                    - readInt) {
+                                                                                        throw new BadParcelableException(
+                                                                                                "Overflow"
+                                                                                                    + " in the"
+                                                                                                    + " size"
+                                                                                                    + " of parcelable");
                                                                                     }
-                                                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                } else if (dataPosition
+                                                                                        > Integer
+                                                                                                        .MAX_VALUE
+                                                                                                - readInt) {
+                                                                                    throw new BadParcelableException(
+                                                                                            "Overflow"
+                                                                                                + " in the"
+                                                                                                + " size"
+                                                                                                + " of parcelable");
                                                                                 }
-                                                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                            } else if (dataPosition
+                                                                                    > Integer
+                                                                                                    .MAX_VALUE
+                                                                                            - readInt) {
+                                                                                throw new BadParcelableException(
+                                                                                        "Overflow"
+                                                                                            + " in the"
+                                                                                            + " size"
+                                                                                            + " of parcelable");
                                                                             }
-                                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                        } else if (dataPosition
+                                                                                > Integer.MAX_VALUE
+                                                                                        - readInt) {
+                                                                            throw new BadParcelableException(
+                                                                                    "Overflow in"
+                                                                                        + " the size"
+                                                                                        + " of parcelable");
                                                                         }
-                                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                    } else if (dataPosition
+                                                                            > Integer.MAX_VALUE
+                                                                                    - readInt) {
+                                                                        throw new BadParcelableException(
+                                                                                "Overflow in the"
+                                                                                    + " size of"
+                                                                                    + " parcelable");
                                                                     }
-                                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                } else if (dataPosition
+                                                                        > Integer.MAX_VALUE
+                                                                                - readInt) {
+                                                                    throw new BadParcelableException(
+                                                                            "Overflow in the size"
+                                                                                + " of parcelable");
                                                                 }
-                                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                            } else if (dataPosition
+                                                                    > Integer.MAX_VALUE - readInt) {
+                                                                throw new BadParcelableException(
+                                                                        "Overflow in the size of"
+                                                                            + " parcelable");
                                                             }
-                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                        } else if (dataPosition
+                                                                > Integer.MAX_VALUE - readInt) {
+                                                            throw new BadParcelableException(
+                                                                    "Overflow in the size of"
+                                                                        + " parcelable");
                                                         }
-                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                    } else if (dataPosition
+                                                            > Integer.MAX_VALUE - readInt) {
+                                                        throw new BadParcelableException(
+                                                                "Overflow in the size of"
+                                                                    + " parcelable");
                                                     }
-                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                } else if (dataPosition
+                                                        > Integer.MAX_VALUE - readInt) {
+                                                    throw new BadParcelableException(
+                                                            "Overflow in the size of parcelable");
                                                 }
                                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                throw new BadParcelableException(
+                                                        "Overflow in the size of parcelable");
                                             }
                                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -291,6 +564,7 @@ public class UidStatsParcel implements Parcelable {
         parcel.writeLong(this.cliMacAddr);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

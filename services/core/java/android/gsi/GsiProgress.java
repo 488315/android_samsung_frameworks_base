@@ -51,7 +51,8 @@ public class GsiProgress implements Parcelable {
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             this.total_bytes = parcel.readLong();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                             parcel.setDataPosition(dataPosition + readInt);
                             return;
@@ -88,6 +89,7 @@ public class GsiProgress implements Parcelable {
         parcel.writeLong(this.total_bytes);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

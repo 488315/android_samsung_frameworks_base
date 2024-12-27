@@ -12,6 +12,7 @@ import com.android.internal.org.bouncycastle.crypto.params.DSAParameters;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
 import com.android.internal.org.bouncycastle.crypto.signers.DSAEncoding;
 import com.android.internal.org.bouncycastle.crypto.signers.StandardDSAEncoding;
+
 import java.math.BigInteger;
 import java.security.AlgorithmParameters;
 import java.security.InvalidKeyException;
@@ -23,7 +24,8 @@ import java.security.SignatureSpi;
 import java.security.spec.AlgorithmParameterSpec;
 
 /* loaded from: classes5.dex */
-public class DSASigner extends SignatureSpi implements PKCSObjectIdentifiers, X509ObjectIdentifiers {
+public class DSASigner extends SignatureSpi
+        implements PKCSObjectIdentifiers, X509ObjectIdentifiers {
     private Digest digest;
     private DSAEncoding encoding = StandardDSAEncoding.INSTANCE;
     private SecureRandom random;
@@ -42,7 +44,8 @@ public class DSASigner extends SignatureSpi implements PKCSObjectIdentifiers, X5
     }
 
     @Override // java.security.SignatureSpi
-    protected void engineInitSign(PrivateKey privateKey, SecureRandom random) throws InvalidKeyException {
+    protected void engineInitSign(PrivateKey privateKey, SecureRandom random)
+            throws InvalidKeyException {
         this.random = random;
         engineInitSign(privateKey);
     }
@@ -108,7 +111,8 @@ public class DSASigner extends SignatureSpi implements PKCSObjectIdentifiers, X5
         int valueN = params.getQ().bitLength();
         int digestSize = this.digest.getDigestSize();
         if (valueL < 1024 || valueL > 3072 || valueL % 1024 != 0) {
-            throw new InvalidKeyException("valueL values must be between 1024 and 3072 and a multiple of 1024");
+            throw new InvalidKeyException(
+                    "valueL values must be between 1024 and 3072 and a multiple of 1024");
         }
         if (valueL == 1024 && valueN != 160) {
             throw new InvalidKeyException("valueN must be 160 for valueL = 1024");
@@ -136,25 +140,33 @@ public class DSASigner extends SignatureSpi implements PKCSObjectIdentifiers, X5
 
     public static class stdDSA extends DSASigner {
         public stdDSA() {
-            super(AndroidDigestFactory.getSHA1(), new com.android.internal.org.bouncycastle.crypto.signers.DSASigner());
+            super(
+                    AndroidDigestFactory.getSHA1(),
+                    new com.android.internal.org.bouncycastle.crypto.signers.DSASigner());
         }
     }
 
     public static class dsa224 extends DSASigner {
         public dsa224() {
-            super(AndroidDigestFactory.getSHA224(), new com.android.internal.org.bouncycastle.crypto.signers.DSASigner());
+            super(
+                    AndroidDigestFactory.getSHA224(),
+                    new com.android.internal.org.bouncycastle.crypto.signers.DSASigner());
         }
     }
 
     public static class dsa256 extends DSASigner {
         public dsa256() {
-            super(AndroidDigestFactory.getSHA256(), new com.android.internal.org.bouncycastle.crypto.signers.DSASigner());
+            super(
+                    AndroidDigestFactory.getSHA256(),
+                    new com.android.internal.org.bouncycastle.crypto.signers.DSASigner());
         }
     }
 
     public static class noneDSA extends DSASigner {
         public noneDSA() {
-            super(new NullDigest(), new com.android.internal.org.bouncycastle.crypto.signers.DSASigner());
+            super(
+                    new NullDigest(),
+                    new com.android.internal.org.bouncycastle.crypto.signers.DSASigner());
         }
     }
 }

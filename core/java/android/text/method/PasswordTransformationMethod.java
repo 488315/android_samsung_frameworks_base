@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.UpdateLayout;
 import android.view.View;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes4.dex */
@@ -42,8 +43,7 @@ public class PasswordTransformationMethod implements TransformationMethod, TextW
     }
 
     @Override // android.text.TextWatcher
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    }
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
     @Override // android.text.TextWatcher
     public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -71,11 +71,15 @@ public class PasswordTransformationMethod implements TransformationMethod, TextW
     }
 
     @Override // android.text.TextWatcher
-    public void afterTextChanged(Editable s) {
-    }
+    public void afterTextChanged(Editable s) {}
 
     @Override // android.text.method.TransformationMethod
-    public void onFocusChanged(View view, CharSequence sourceText, boolean focused, int direction, Rect previouslyFocusedRect) {
+    public void onFocusChanged(
+            View view,
+            CharSequence sourceText,
+            boolean focused,
+            int direction,
+            Rect previouslyFocusedRect) {
         if (!focused && (sourceText instanceof Spannable)) {
             Spannable sp = (Spannable) sourceText;
             removeVisibleSpans(sp);

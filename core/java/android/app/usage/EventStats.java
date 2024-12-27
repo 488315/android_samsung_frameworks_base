@@ -5,26 +5,27 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class EventStats implements Parcelable {
-    public static final Parcelable.Creator<EventStats> CREATOR = new Parcelable.Creator<EventStats>() { // from class: android.app.usage.EventStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EventStats createFromParcel(Parcel in) {
-            EventStats stats = new EventStats();
-            stats.mEventType = in.readInt();
-            stats.mBeginTimeStamp = in.readLong();
-            stats.mEndTimeStamp = in.readLong();
-            stats.mLastEventTime = in.readLong();
-            stats.mTotalTime = in.readLong();
-            stats.mCount = in.readInt();
-            return stats;
-        }
+    public static final Parcelable.Creator<EventStats> CREATOR =
+            new Parcelable.Creator<EventStats>() { // from class: android.app.usage.EventStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EventStats createFromParcel(Parcel in) {
+                    EventStats stats = new EventStats();
+                    stats.mEventType = in.readInt();
+                    stats.mBeginTimeStamp = in.readLong();
+                    stats.mEndTimeStamp = in.readLong();
+                    stats.mLastEventTime = in.readLong();
+                    stats.mTotalTime = in.readLong();
+                    stats.mCount = in.readInt();
+                    return stats;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EventStats[] newArray(int size) {
-            return new EventStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EventStats[] newArray(int size) {
+                    return new EventStats[size];
+                }
+            };
     public long mBeginTimeStamp;
     public int mCount;
     public long mEndTimeStamp;
@@ -32,8 +33,7 @@ public final class EventStats implements Parcelable {
     public long mLastEventTime;
     public long mTotalTime;
 
-    public EventStats() {
-    }
+    public EventStats() {}
 
     public EventStats(EventStats stats) {
         this.mEventType = stats.mEventType;
@@ -70,7 +70,11 @@ public final class EventStats implements Parcelable {
 
     public void add(EventStats right) {
         if (this.mEventType != right.mEventType) {
-            throw new IllegalArgumentException("Can't merge EventStats for event #" + this.mEventType + " with EventStats for event #" + right.mEventType);
+            throw new IllegalArgumentException(
+                    "Can't merge EventStats for event #"
+                            + this.mEventType
+                            + " with EventStats for event #"
+                            + right.mEventType);
         }
         if (right.mBeginTimeStamp > this.mBeginTimeStamp) {
             this.mLastEventTime = Math.max(this.mLastEventTime, right.mLastEventTime);

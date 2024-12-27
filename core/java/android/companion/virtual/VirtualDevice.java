@@ -1,7 +1,6 @@
 package android.companion.virtual;
 
 import android.annotation.SystemApi;
-import android.companion.virtual.IVirtualDevice;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,19 +8,21 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public final class VirtualDevice implements Parcelable {
-    public static final Parcelable.Creator<VirtualDevice> CREATOR = new Parcelable.Creator<VirtualDevice>() { // from class: android.companion.virtual.VirtualDevice.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualDevice createFromParcel(Parcel in) {
-            return new VirtualDevice(in);
-        }
+    public static final Parcelable.Creator<VirtualDevice> CREATOR =
+            new Parcelable.Creator<
+                    VirtualDevice>() { // from class: android.companion.virtual.VirtualDevice.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualDevice createFromParcel(Parcel in) {
+                    return new VirtualDevice(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualDevice[] newArray(int size) {
-            return new VirtualDevice[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualDevice[] newArray(int size) {
+                    return new VirtualDevice[size];
+                }
+            };
     private final CharSequence mDisplayName;
     private final int mId;
     private final String mName;
@@ -32,7 +33,12 @@ public final class VirtualDevice implements Parcelable {
         this(virtualDevice, id, persistentId, name, null);
     }
 
-    public VirtualDevice(IVirtualDevice virtualDevice, int id, String persistentId, String name, CharSequence displayName) {
+    public VirtualDevice(
+            IVirtualDevice virtualDevice,
+            int id,
+            String persistentId,
+            String name,
+            CharSequence displayName) {
         if (id <= 0) {
             throw new IllegalArgumentException("VirtualDevice ID must be greater than 0");
         }
@@ -116,6 +122,14 @@ public final class VirtualDevice implements Parcelable {
     }
 
     public String toString() {
-        return "VirtualDevice( mId=" + this.mId + " mPersistentId=" + this.mPersistentId + " mName=" + this.mName + " mDisplayName=" + ((Object) this.mDisplayName) + NavigationBarInflaterView.KEY_CODE_END;
+        return "VirtualDevice( mId="
+                + this.mId
+                + " mPersistentId="
+                + this.mPersistentId
+                + " mName="
+                + this.mName
+                + " mDisplayName="
+                + ((Object) this.mDisplayName)
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

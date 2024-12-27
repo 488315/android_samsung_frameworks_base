@@ -26,7 +26,8 @@ public final class StateResidencyResult implements Parcelable {
                 if (parcel.dataPosition() - dataPosition < readInt) {
                     stateResidencyResult.id = parcel.readInt();
                     if (parcel.dataPosition() - dataPosition < readInt) {
-                        stateResidencyResult.stateResidencyData = (StateResidency[]) parcel.createTypedArray(StateResidency.CREATOR);
+                        stateResidencyResult.stateResidencyData =
+                                (StateResidency[]) parcel.createTypedArray(StateResidency.CREATOR);
                         if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }

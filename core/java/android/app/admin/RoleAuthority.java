@@ -3,6 +3,7 @@ package android.app.admin;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -11,19 +12,21 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes.dex */
 public final class RoleAuthority extends Authority {
-    public static final Parcelable.Creator<RoleAuthority> CREATOR = new Parcelable.Creator<RoleAuthority>() { // from class: android.app.admin.RoleAuthority.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RoleAuthority createFromParcel(Parcel source) {
-            return new RoleAuthority(source);
-        }
+    public static final Parcelable.Creator<RoleAuthority> CREATOR =
+            new Parcelable.Creator<
+                    RoleAuthority>() { // from class: android.app.admin.RoleAuthority.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RoleAuthority createFromParcel(Parcel source) {
+                    return new RoleAuthority(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RoleAuthority[] newArray(int size) {
-            return new RoleAuthority[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RoleAuthority[] newArray(int size) {
+                    return new RoleAuthority[size];
+                }
+            };
     private final Set<String> mRoles;
 
     public RoleAuthority(Set<String> roles) {

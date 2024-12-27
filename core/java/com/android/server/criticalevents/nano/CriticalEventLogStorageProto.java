@@ -6,6 +6,7 @@ import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -62,7 +63,8 @@ public final class CriticalEventLogStorageProto extends MessageNano {
     }
 
     @Override // com.android.framework.protobuf.nano.MessageNano
-    public CriticalEventLogStorageProto mergeFrom(CodedInputByteBufferNano input) throws IOException {
+    public CriticalEventLogStorageProto mergeFrom(CodedInputByteBufferNano input)
+            throws IOException {
         while (true) {
             int tag = input.readTag();
             switch (tag) {
@@ -94,11 +96,14 @@ public final class CriticalEventLogStorageProto extends MessageNano {
         }
     }
 
-    public static CriticalEventLogStorageProto parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
-        return (CriticalEventLogStorageProto) MessageNano.mergeFrom(new CriticalEventLogStorageProto(), data);
+    public static CriticalEventLogStorageProto parseFrom(byte[] data)
+            throws InvalidProtocolBufferNanoException {
+        return (CriticalEventLogStorageProto)
+                MessageNano.mergeFrom(new CriticalEventLogStorageProto(), data);
     }
 
-    public static CriticalEventLogStorageProto parseFrom(CodedInputByteBufferNano input) throws IOException {
+    public static CriticalEventLogStorageProto parseFrom(CodedInputByteBufferNano input)
+            throws IOException {
         return new CriticalEventLogStorageProto().mergeFrom(input);
     }
 }

@@ -20,7 +20,8 @@ public class SContextAutoRotationAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mDeviceType != 0 && this.mDeviceType != 2 && this.mDeviceType != 4) {
             Log.e(TAG, "The device type is wrong.");

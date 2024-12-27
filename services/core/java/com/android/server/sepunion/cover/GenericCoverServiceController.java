@@ -10,8 +10,10 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.RemoteException;
+
 import com.samsung.android.cover.INfcLedCoverTouchListenerCallback;
 import com.samsung.android.sepunion.Log;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -31,7 +33,8 @@ public final class GenericCoverServiceController {
         public final int type;
         public final int uid;
 
-        public GenericPressEventListenerInfo(IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
+        public GenericPressEventListenerInfo(
+                IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
             this.token = iBinder;
             this.component = componentName;
             this.pid = i;
@@ -41,7 +44,9 @@ public final class GenericCoverServiceController {
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
-            Log.v("CoverManager_GenericCoverServiceController", "binderDied : binder = " + this.token);
+            Log.v(
+                    "CoverManager_GenericCoverServiceController",
+                    "binderDied : binder = " + this.token);
             synchronized (GenericCoverServiceController.this.mListeners) {
                 GenericCoverServiceController.this.mListeners.remove(this);
             }
@@ -51,16 +56,22 @@ public final class GenericCoverServiceController {
         public final void onSystemCoverEvent(int i, Bundle bundle) {
             IBinder iBinder = this.token;
             if (iBinder == null) {
-                Log.w("CoverManager_GenericCoverServiceController", "null listener received onSystemCoverEvent!");
+                Log.w(
+                        "CoverManager_GenericCoverServiceController",
+                        "null listener received onSystemCoverEvent!");
                 return;
             }
             try {
-                INfcLedCoverTouchListenerCallback asInterface = INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder);
+                INfcLedCoverTouchListenerCallback asInterface =
+                        INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder);
                 if (asInterface != null) {
                     asInterface.onSystemCoverEvent(i, bundle);
                 }
             } catch (RemoteException e) {
-                Log.e("CoverManager_GenericCoverServiceController", "Failed onSystemCoverEvent callback", e);
+                Log.e(
+                        "CoverManager_GenericCoverServiceController",
+                        "Failed onSystemCoverEvent callback",
+                        e);
             }
         }
     }
@@ -75,13 +86,15 @@ public final class GenericCoverServiceController {
         public final void handleMessage(Message message) {
             int i = message.what;
             if (i == 0) {
-                GenericCoverServiceController genericCoverServiceController = GenericCoverServiceController.this;
+                GenericCoverServiceController genericCoverServiceController =
+                        GenericCoverServiceController.this;
                 Bundle bundle = (Bundle) message.obj;
                 synchronized (genericCoverServiceController.mListeners) {
                     try {
                         Iterator it = genericCoverServiceController.mListeners.iterator();
                         while (it.hasNext()) {
-                            GenericPressEventListenerInfo genericPressEventListenerInfo = (GenericPressEventListenerInfo) it.next();
+                            GenericPressEventListenerInfo genericPressEventListenerInfo =
+                                    (GenericPressEventListenerInfo) it.next();
                             if (genericPressEventListenerInfo.type == 10) {
                                 genericPressEventListenerInfo.onSystemCoverEvent(1, bundle);
                             }
@@ -89,7 +102,8 @@ public final class GenericCoverServiceController {
                     } finally {
                     }
                 }
-                PowerManager.WakeLock wakeLock = genericCoverServiceController.mSendPowerKeyWakeLock;
+                PowerManager.WakeLock wakeLock =
+                        genericCoverServiceController.mSendPowerKeyWakeLock;
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     if (wakeLock.isHeld()) {
@@ -104,13 +118,15 @@ public final class GenericCoverServiceController {
             if (i != 1) {
                 return;
             }
-            GenericCoverServiceController genericCoverServiceController2 = GenericCoverServiceController.this;
+            GenericCoverServiceController genericCoverServiceController2 =
+                    GenericCoverServiceController.this;
             Bundle bundle2 = (Bundle) message.obj;
             synchronized (genericCoverServiceController2.mListeners) {
                 try {
                     Iterator it2 = genericCoverServiceController2.mListeners.iterator();
                     while (it2.hasNext()) {
-                        GenericPressEventListenerInfo genericPressEventListenerInfo2 = (GenericPressEventListenerInfo) it2.next();
+                        GenericPressEventListenerInfo genericPressEventListenerInfo2 =
+                                (GenericPressEventListenerInfo) it2.next();
                         if (genericPressEventListenerInfo2.type == 4) {
                             genericPressEventListenerInfo2.onSystemCoverEvent(4, bundle2);
                         }
@@ -132,12 +148,10 @@ public final class GenericCoverServiceController {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class ListenerTypes {
-    }
+    public final class ListenerTypes {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class SystemEvents {
-    }
+    public final class SystemEvents {}
 
     public GenericCoverServiceController(Looper looper, Context context) {
         PowerManager powerManager = (PowerManager) context.getSystemService("power");
@@ -152,7 +166,9 @@ public final class GenericCoverServiceController {
     }
 
     public final void setLcdOffDisabledByCover(boolean z) {
-        Log.d("CoverManager_GenericCoverServiceController", "setLcdOffDisabledByCover disabled:" + z);
+        Log.d(
+                "CoverManager_GenericCoverServiceController",
+                "setLcdOffDisabledByCover disabled:" + z);
         PowerManager.WakeLock wakeLock = this.mDisableLcdOffWakeLock;
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {

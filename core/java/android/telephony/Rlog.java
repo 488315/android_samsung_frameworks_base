@@ -5,6 +5,7 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -12,8 +13,7 @@ import java.security.NoSuchAlgorithmException;
 public final class Rlog {
     private static final boolean USER_BUILD = Build.IS_USER;
 
-    private Rlog() {
-    }
+    private Rlog() {}
 
     public static int v(String tag, String msg) {
         return Log.println_native(1, 2, tag, msg);
@@ -72,7 +72,9 @@ public final class Rlog {
         if (pii == null || TextUtils.isEmpty(val) || isLoggable(tag, 2)) {
             return val;
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(val.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START
+                + secureHash(val.getBytes())
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public static String pii(boolean enablePiiLogging, Object pii) {
@@ -80,7 +82,9 @@ public final class Rlog {
         if (pii == null || TextUtils.isEmpty(val) || enablePiiLogging) {
             return val;
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(val.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START
+                + secureHash(val.getBytes())
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     private static String secureHash(byte[] input) {

@@ -1,6 +1,5 @@
 package android.app.timedetector;
 
-import android.app.timedetector.ITimeDetectorService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 
@@ -8,7 +7,9 @@ import android.os.ServiceManager;
 public final class TimeDetectorImpl implements TimeDetector {
     private static final boolean DEBUG = false;
     private static final String TAG = "timedetector.TimeDetector";
-    private final ITimeDetectorService mITimeDetectorService = ITimeDetectorService.Stub.asInterface(ServiceManager.getServiceOrThrow("time_detector"));
+    private final ITimeDetectorService mITimeDetectorService =
+            ITimeDetectorService.Stub.asInterface(
+                    ServiceManager.getServiceOrThrow("time_detector"));
 
     @Override // android.app.timedetector.TimeDetector
     public void suggestTelephonyTime(TelephonyTimeSuggestion timeSuggestion) {

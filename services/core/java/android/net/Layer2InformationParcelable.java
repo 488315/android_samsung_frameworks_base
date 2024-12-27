@@ -6,6 +6,7 @@ import android.hardware.broadcastradio.DabTableEntry$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -22,7 +23,8 @@ public class Layer2InformationParcelable implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            Layer2InformationParcelable layer2InformationParcelable = new Layer2InformationParcelable();
+            Layer2InformationParcelable layer2InformationParcelable =
+                    new Layer2InformationParcelable();
             layer2InformationParcelable.readFromParcel(parcel);
             return layer2InformationParcelable;
         }
@@ -85,10 +87,20 @@ public class Layer2InformationParcelable implements Parcelable {
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        StringBuilder m = DabTableEntry$$ExternalSyntheticOutline0.m(this.cluster, "bssid: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.l2Key, "cluster: ", new StringBuilder("l2Key: "), stringJoiner), stringJoiner);
+        StringBuilder m =
+                DabTableEntry$$ExternalSyntheticOutline0.m(
+                        this.cluster,
+                        "bssid: ",
+                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                this.l2Key,
+                                "cluster: ",
+                                new StringBuilder("l2Key: "),
+                                stringJoiner),
+                        stringJoiner);
         m.append(Objects.toString(this.bssid));
         stringJoiner.add(m.toString());
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, new StringBuilder("Layer2InformationParcelable"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner, new StringBuilder("Layer2InformationParcelable"));
     }
 
     @Override // android.os.Parcelable
@@ -100,6 +112,7 @@ public class Layer2InformationParcelable implements Parcelable {
         parcel.writeTypedObject(this.bssid, i);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

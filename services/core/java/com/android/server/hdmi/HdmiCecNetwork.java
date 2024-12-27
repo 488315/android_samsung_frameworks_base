@@ -9,9 +9,10 @@ import android.util.ArraySet;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
-import com.android.server.hdmi.HdmiControlService;
 import com.android.server.location.gnss.hal.GnssNative;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,7 +37,10 @@ public class HdmiCecNetwork {
     public List mPortInfo = Collections.emptyList();
     public int mPhysicalAddress = GnssNative.GNSS_AIDING_TYPE_ALL;
 
-    public HdmiCecNetwork(HdmiControlService hdmiControlService, HdmiCecController hdmiCecController, HdmiMhlControllerStub hdmiMhlControllerStub) {
+    public HdmiCecNetwork(
+            HdmiControlService hdmiControlService,
+            HdmiCecController hdmiCecController,
+            HdmiMhlControllerStub hdmiMhlControllerStub) {
         this.mHdmiControlService = hdmiControlService;
         this.mHdmiCecController = hdmiCecController;
         this.mHdmiMhlController = hdmiMhlControllerStub;
@@ -79,7 +83,9 @@ public class HdmiCecNetwork {
                 }
                 HdmiCecLocalDevice hdmiCecLocalDevice = (HdmiCecLocalDevice) it.next();
                 if (hdmiCecLocalDevice.getDeviceInfo().getLogicalAddress() == logicalAddress) {
-                    HdmiLogger.debug("allocate logical address for " + hdmiCecLocalDevice.getDeviceInfo(), new Object[0]);
+                    HdmiLogger.debug(
+                            "allocate logical address for " + hdmiCecLocalDevice.getDeviceInfo(),
+                            new Object[0]);
                     ArrayList arrayList = new ArrayList();
                     arrayList.add(hdmiCecLocalDevice);
                     hdmiControlService.allocateLogicalAddress(arrayList, 4);
@@ -106,7 +112,8 @@ public class HdmiCecNetwork {
         Iterator it = ((ArrayList) HdmiUtils.sparseArrayToList(this.mDeviceInfos)).iterator();
         while (it.hasNext()) {
             HdmiDeviceInfo hdmiDeviceInfo = (HdmiDeviceInfo) it.next();
-            if (hdmiDeviceInfo.getPhysicalAddress() != getPhysicalAddress() && hdmiDeviceInfo.getPhysicalAddress() != 65535) {
+            if (hdmiDeviceInfo.getPhysicalAddress() != getPhysicalAddress()
+                    && hdmiDeviceInfo.getPhysicalAddress() != 65535) {
                 invokeDeviceEventListener(hdmiDeviceInfo, 2);
             }
         }
@@ -209,7 +216,9 @@ public class HdmiCecNetwork {
         for (HdmiPortInfo hdmiPortInfo : hdmiPortInfoArr) {
             sparseIntArray.put(hdmiPortInfo.getAddress(), hdmiPortInfo.getId());
             sparseArray.put(hdmiPortInfo.getId(), hdmiPortInfo);
-            sparseArray2.put(hdmiPortInfo.getId(), HdmiDeviceInfo.hardwarePort(hdmiPortInfo.getAddress(), hdmiPortInfo.getId()));
+            sparseArray2.put(
+                    hdmiPortInfo.getId(),
+                    HdmiDeviceInfo.hardwarePort(hdmiPortInfo.getAddress(), hdmiPortInfo.getId()));
         }
         this.mPortIdMap = new UnmodifiableSparseIntArray(sparseIntArray);
         this.mPortInfoMap = new UnmodifiableSparseArray(sparseArray);
@@ -232,7 +241,16 @@ public class HdmiCecNetwork {
         ArrayList arrayList = new ArrayList(hdmiPortInfoArr.length);
         for (HdmiPortInfo hdmiPortInfo3 : hdmiPortInfoArr) {
             if (arraySet.contains(Integer.valueOf(hdmiPortInfo3.getId()))) {
-                arrayList.add(new HdmiPortInfo.Builder(hdmiPortInfo3.getId(), hdmiPortInfo3.getType(), hdmiPortInfo3.getAddress()).setCecSupported(hdmiPortInfo3.isCecSupported()).setMhlSupported(true).setArcSupported(hdmiPortInfo3.isArcSupported()).setEarcSupported(hdmiPortInfo3.isEarcSupported()).build());
+                arrayList.add(
+                        new HdmiPortInfo.Builder(
+                                        hdmiPortInfo3.getId(),
+                                        hdmiPortInfo3.getType(),
+                                        hdmiPortInfo3.getAddress())
+                                .setCecSupported(hdmiPortInfo3.isCecSupported())
+                                .setMhlSupported(true)
+                                .setArcSupported(hdmiPortInfo3.isArcSupported())
+                                .setEarcSupported(hdmiPortInfo3.isEarcSupported())
+                                .build());
             } else {
                 arrayList.add(hdmiPortInfo3);
             }
@@ -249,7 +267,8 @@ public class HdmiCecNetwork {
             Iterator it = hdmiControlService.mDeviceEventListenerRecords.iterator();
             while (it.hasNext()) {
                 try {
-                    ((HdmiControlService.DeviceEventListenerRecord) it.next()).mListener.onStatusChanged(hdmiDeviceInfo, i);
+                    ((HdmiControlService.DeviceEventListenerRecord) it.next())
+                            .mListener.onStatusChanged(hdmiDeviceInfo, i);
                 } catch (RemoteException e) {
                     Slog.e("HdmiControlService", "Failed to report device event:" + e);
                 }
@@ -260,7 +279,8 @@ public class HdmiCecNetwork {
     public final boolean isAllocatedLocalDeviceAddress(int i) {
         assertRunOnServiceThread();
         for (int i2 = 0; i2 < this.mLocalDevices.size(); i2++) {
-            HdmiCecLocalDevice hdmiCecLocalDevice = (HdmiCecLocalDevice) this.mLocalDevices.valueAt(i2);
+            HdmiCecLocalDevice hdmiCecLocalDevice =
+                    (HdmiCecLocalDevice) this.mLocalDevices.valueAt(i2);
             hdmiCecLocalDevice.assertRunOnServiceThread();
             if (i == hdmiCecLocalDevice.mDeviceInfo.getLogicalAddress()) {
                 return true;
@@ -271,7 +291,10 @@ public class HdmiCecNetwork {
 
     public final boolean isLocalDeviceAddress(int i) {
         for (int i2 = 0; i2 < this.mLocalDevices.size(); i2++) {
-            if (((HdmiCecLocalDevice) this.mLocalDevices.get(this.mLocalDevices.keyAt(i2))).getDeviceInfo().getLogicalAddress() == i) {
+            if (((HdmiCecLocalDevice) this.mLocalDevices.get(this.mLocalDevices.keyAt(i2)))
+                            .getDeviceInfo()
+                            .getLogicalAddress()
+                    == i) {
                 return true;
             }
         }
@@ -358,7 +381,8 @@ public class HdmiCecNetwork {
         assertRunOnServiceThread();
         HdmiDeviceInfo cecDeviceInfo = getCecDeviceInfo(i);
         if (cecDeviceInfo == null) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Can not update CEC version of non-existing device:", "HdmiCecNetwork");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i, "Can not update CEC version of non-existing device:", "HdmiCecNetwork");
         } else {
             if (cecDeviceInfo.getCecVersion() == i2) {
                 return;
@@ -370,7 +394,8 @@ public class HdmiCecNetwork {
     public final void updateDevicePowerStatus(int i, int i2) {
         HdmiDeviceInfo cecDeviceInfo = getCecDeviceInfo(i);
         if (cecDeviceInfo == null) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Can not update power status of non-existing device:", "HdmiCecNetwork");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i, "Can not update power status of non-existing device:", "HdmiCecNetwork");
         } else {
             if (cecDeviceInfo.getDevicePowerStatus() == i2) {
                 return;
@@ -385,7 +410,9 @@ public class HdmiCecNetwork {
         ArrayList arrayList = new ArrayList();
         for (int i = 0; i < this.mDeviceInfos.size(); i++) {
             HdmiDeviceInfo hdmiDeviceInfo = (HdmiDeviceInfo) this.mDeviceInfos.valueAt(i);
-            if (!isLocalDeviceAddress(hdmiDeviceInfo.getLogicalAddress()) && hdmiDeviceInfo.isSourceType() && !hideDevicesBehindLegacySwitch(hdmiDeviceInfo)) {
+            if (!isLocalDeviceAddress(hdmiDeviceInfo.getLogicalAddress())
+                    && hdmiDeviceInfo.isSourceType()
+                    && !hideDevicesBehindLegacySwitch(hdmiDeviceInfo)) {
                 arrayList.add(hdmiDeviceInfo);
             }
         }

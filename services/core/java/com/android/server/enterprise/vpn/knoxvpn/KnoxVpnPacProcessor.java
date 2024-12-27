@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.net.IProxyService;
 import com.android.net.module.util.NetworkStackConstants;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
@@ -19,6 +20,9 @@ import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.vpn.knoxvpn.profile.VpnProfileConfig;
 import com.android.server.enterprise.vpn.knoxvpn.profile.VpnProfileInfo;
+
+import libcore.net.InetAddressUtils;
+
 import java.io.BufferedReader;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -41,7 +45,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import libcore.net.InetAddressUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -86,10 +89,15 @@ public class KnoxVpnPacProcessor {
                 Context context = KnoxVpnPacProcessor.mContext;
                 knoxVpnPacProcessor.downloadPacUrl(i, str, str2, str3, str4);
             } catch (IllegalArgumentException unused) {
-                Log.e("KnoxVpnPacProcessor", "Exception occured while downloading the pac url due to unknown format");
+                Log.e(
+                        "KnoxVpnPacProcessor",
+                        "Exception occured while downloading the pac url due to unknown format");
                 KnoxVpnPacProcessor.getDownloadStatus().put(this.profileName, 1);
             } catch (Exception unused2) {
-                Log.e("KnoxVpnPacProcessor", "Exception occured while trying to start the download thread to start downloading the pac url ");
+                Log.e(
+                        "KnoxVpnPacProcessor",
+                        "Exception occured while trying to start the download thread to start"
+                            + " downloading the pac url ");
             }
         }
     }
@@ -106,14 +114,36 @@ public class KnoxVpnPacProcessor {
 
         @Override // android.content.ServiceConnection
         public final synchronized void onBindingDied(ComponentName componentName) {
-            Log.d("KnoxVpnPacProcessor", "onBindingDied is reached for user and trying to bind again " + this.userId + this.profile);
-            ((ArrayList) KnoxVpnPacProcessor.this.mKnoxVpnProxyClientStatus).add("onBindingDied callback has been recieved for the proxy client in user " + this.userId + " and for profile " + this.profile + " at " + System.currentTimeMillis());
+            Log.d(
+                    "KnoxVpnPacProcessor",
+                    "onBindingDied is reached for user and trying to bind again "
+                            + this.userId
+                            + this.profile);
+            ((ArrayList) KnoxVpnPacProcessor.this.mKnoxVpnProxyClientStatus)
+                    .add(
+                            "onBindingDied callback has been recieved for the proxy client in user "
+                                    + this.userId
+                                    + " and for profile "
+                                    + this.profile
+                                    + " at "
+                                    + System.currentTimeMillis());
         }
 
         @Override // android.content.ServiceConnection
-        public final synchronized void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            Log.d("KnoxVpnPacProcessor", "onServiceConnected is reached for user " + this.userId + this.profile);
-            ((ArrayList) KnoxVpnPacProcessor.this.mKnoxVpnProxyClientStatus).add("onServiceConnected callback has been recieved for the proxy client in user " + this.userId + " and for profile " + this.profile + " at " + System.currentTimeMillis());
+        public final synchronized void onServiceConnected(
+                ComponentName componentName, IBinder iBinder) {
+            Log.d(
+                    "KnoxVpnPacProcessor",
+                    "onServiceConnected is reached for user " + this.userId + this.profile);
+            ((ArrayList) KnoxVpnPacProcessor.this.mKnoxVpnProxyClientStatus)
+                    .add(
+                            "onServiceConnected callback has been recieved for the proxy client in"
+                                + " user "
+                                    + this.userId
+                                    + " and for profile "
+                                    + this.profile
+                                    + " at "
+                                    + System.currentTimeMillis());
             IProxyService asInterface = IProxyService.Stub.asInterface(iBinder);
             if (asInterface == null) {
                 Log.d("KnoxVpnPacProcessor", "Got a null IBinder reference, aborting...");
@@ -125,27 +155,42 @@ public class KnoxVpnPacProcessor {
             Log.d("KnoxVpnPacProcessor", "hasProxyService is being called for the userId " + i);
             HashMap hashMap = KnoxVpnPacProcessor.mProxyServiceList;
             if (hashMap.containsKey(Integer.valueOf(i))) {
-                Log.d("KnoxVpnPacProcessor", "onServiceConnected:Binder object already exists for the user " + this.userId);
+                Log.d(
+                        "KnoxVpnPacProcessor",
+                        "onServiceConnected:Binder object already exists for the user "
+                                + this.userId);
                 return;
             }
-            Log.d("KnoxVpnPacProcessor", "onServiceConnected:After onservice disconnect for unknown reason or for the first onservice connect");
+            Log.d(
+                    "KnoxVpnPacProcessor",
+                    "onServiceConnected:After onservice disconnect for unknown reason or for the"
+                        + " first onservice connect");
             KnoxVpnPacProcessor knoxVpnPacProcessor2 = KnoxVpnPacProcessor.this;
             int i2 = this.userId;
             knoxVpnPacProcessor2.getClass();
             Log.d("KnoxVpnPacProcessor", "setProxyService is being called for the userId " + i2);
             hashMap.put(Integer.valueOf(i2), asInterface);
             if (KnoxVpnPacProcessor.this.getVpnConfigInstance() != null) {
-                for (VpnProfileInfo vpnProfileInfo : KnoxVpnPacProcessor.this.mVpnConfig.vpnProfileInfoMap.values()) {
+                for (VpnProfileInfo vpnProfileInfo :
+                        KnoxVpnPacProcessor.this.mVpnConfig.vpnProfileInfoMap.values()) {
                     String str = vpnProfileInfo.mProfileName;
-                    if (KnoxVpnPacProcessor.this.getConfiguredUser(str) == this.userId && vpnProfileInfo.activateState == 1) {
+                    if (KnoxVpnPacProcessor.this.getConfiguredUser(str) == this.userId
+                            && vpnProfileInfo.activateState == 1) {
                         String str2 = vpnProfileInfo.mInterfaceName;
                         Uri uri = vpnProfileInfo.mPacurl;
                         String str3 = vpnProfileInfo.mProxyServer;
                         int i3 = vpnProfileInfo.mNetId;
                         if (uri != Uri.EMPTY) {
                             try {
-                                boolean startPacSystemForKnoxProfile = asInterface.startPacSystemForKnoxProfile(str);
-                                Log.d("KnoxVpnPacProcessor", "pac support for the profile" + str + " is started since the service is connected and the result is " + startPacSystemForKnoxProfile);
+                                boolean startPacSystemForKnoxProfile =
+                                        asInterface.startPacSystemForKnoxProfile(str);
+                                Log.d(
+                                        "KnoxVpnPacProcessor",
+                                        "pac support for the profile"
+                                                + str
+                                                + " is started since the service is connected and"
+                                                + " the result is "
+                                                + startPacSystemForKnoxProfile);
                                 if (startPacSystemForKnoxProfile && str2 != null) {
                                     KnoxVpnPacProcessor.this.setCurrentProxyScript(str, str2, uri);
                                 }
@@ -169,13 +214,28 @@ public class KnoxVpnPacProcessor {
         @Override // android.content.ServiceConnection
         public final synchronized void onServiceDisconnected(ComponentName componentName) {
             try {
-                Log.d("KnoxVpnPacProcessor", "onServicedisconnected is reached for user " + this.userId + this.profile);
-                ((ArrayList) KnoxVpnPacProcessor.this.mKnoxVpnProxyClientStatus).add("onServiceDisconnected callback has been recieved for the proxy client in user " + this.userId + " and for profile " + this.profile + " at " + System.currentTimeMillis());
+                Log.d(
+                        "KnoxVpnPacProcessor",
+                        "onServicedisconnected is reached for user " + this.userId + this.profile);
+                ((ArrayList) KnoxVpnPacProcessor.this.mKnoxVpnProxyClientStatus)
+                        .add(
+                                "onServiceDisconnected callback has been recieved for the proxy"
+                                    + " client in user "
+                                        + this.userId
+                                        + " and for profile "
+                                        + this.profile
+                                        + " at "
+                                        + System.currentTimeMillis());
                 KnoxVpnPacProcessor.getDownloadStatus().clear();
                 KnoxVpnPacProcessor.getCurrentRetryStatus().clear();
                 KnoxVpnPacProcessor.getDownloadThread().clear();
                 if (KnoxVpnPacProcessor.this.getVpnConfigInstance() != null) {
-                    Iterator it = KnoxVpnPacProcessor.this.mVpnConfig.vpnProfileInfoMap.values().iterator();
+                    Iterator it =
+                            KnoxVpnPacProcessor.this
+                                    .mVpnConfig
+                                    .vpnProfileInfoMap
+                                    .values()
+                                    .iterator();
                     while (it.hasNext()) {
                         String str = ((VpnProfileInfo) it.next()).mProfileName;
                         KnoxVpnPacProcessor.this.getClass();
@@ -193,12 +253,15 @@ public class KnoxVpnPacProcessor {
         }
     }
 
-    public static void closeExistingConnection(Socket socket, BufferedReader bufferedReader, PrintStream printStream) {
+    public static void closeExistingConnection(
+            Socket socket, BufferedReader bufferedReader, PrintStream printStream) {
         if (socket != null) {
             try {
                 socket.close();
             } catch (IOException unused) {
-                Log.e("KnoxVpnPacProcessor", "IOException occured while trying to close the socket");
+                Log.e(
+                        "KnoxVpnPacProcessor",
+                        "IOException occured while trying to close the socket");
                 return;
             }
         }
@@ -285,11 +348,19 @@ public class KnoxVpnPacProcessor {
                 }
             }
         } catch (NullPointerException unused) {
-            Log.e("KnoxVpnPacProcessor", "error occured while trying to get download status pac file due to some values being not intialized successfully");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "error occured while trying to get download status pac file due to some values"
+                        + " being not intialized successfully");
         } catch (Exception unused2) {
-            Log.e("KnoxVpnPacProcessor", " error occured while trying to get download status pac file");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    " error occured while trying to get download status pac file");
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("check to see if the pac url has been downloaded successfully ", "KnoxVpnPacProcessor", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "check to see if the pac url has been downloaded successfully ",
+                "KnoxVpnPacProcessor",
+                z);
         return z;
     }
 
@@ -309,7 +380,10 @@ public class KnoxVpnPacProcessor {
             default:
                 throw new IllegalArgumentException();
         }
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "The pac file is going to be downloaded from the remote port ", "KnoxVpnPacProcessor");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i,
+                "The pac file is going to be downloaded from the remote port ",
+                "KnoxVpnPacProcessor");
         return i;
     }
 
@@ -322,7 +396,8 @@ public class KnoxVpnPacProcessor {
     }
 
     public static void removePacInterface(int i) {
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "removePacInterface is being called for the userId ", "KnoxVpnPacProcessor");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i, "removePacInterface is being called for the userId ", "KnoxVpnPacProcessor");
         HashMap hashMap = mProxyServiceList;
         if (hashMap.containsKey(Integer.valueOf(i))) {
             hashMap.remove(Integer.valueOf(i));
@@ -347,14 +422,20 @@ public class KnoxVpnPacProcessor {
     }
 
     public final void bindProxyService(int i, String str) {
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "Binding to the proxy service for the user ", "KnoxVpnPacProcessor");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i, "Binding to the proxy service for the user ", "KnoxVpnPacProcessor");
         HashMap hashMap = mproxyConnectionList;
         if (hashMap.containsKey(Integer.valueOf(i))) {
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "unbinding previous service before binding again for the user ", "KnoxVpnPacProcessor");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    i,
+                    "unbinding previous service before binding again for the user ",
+                    "KnoxVpnPacProcessor");
             try {
                 mContext.unbindService((ServiceConnection) hashMap.get(Integer.valueOf(i)));
             } catch (Exception unused) {
-                Log.e("KnoxVpnPacProcessor", "unbinding failed since the service is already unbinded or not existing");
+                Log.e(
+                        "KnoxVpnPacProcessor",
+                        "unbinding failed since the service is already unbinded or not existing");
             }
             mproxyConnectionList.remove(Integer.valueOf(i));
         }
@@ -375,11 +456,21 @@ public class KnoxVpnPacProcessor {
             bindProxyService(configuredUser, str);
             return;
         }
-        Log.e("KnoxVpnPacProcessor", "Already binded to proxy service for the user " + configuredUser);
+        Log.e(
+                "KnoxVpnPacProcessor",
+                "Already binded to proxy service for the user " + configuredUser);
         try {
             if (uri != Uri.EMPTY) {
-                boolean startPacSystemForKnoxProfile = getProxyService(configuredUser).startPacSystemForKnoxProfile(str);
-                Log.d("KnoxVpnPacProcessor", "pac support for the profile" + str + " is started since the service is connected and the result is " + startPacSystemForKnoxProfile + "user " + configuredUser);
+                boolean startPacSystemForKnoxProfile =
+                        getProxyService(configuredUser).startPacSystemForKnoxProfile(str);
+                Log.d(
+                        "KnoxVpnPacProcessor",
+                        "pac support for the profile"
+                                + str
+                                + " is started since the service is connected and the result is "
+                                + startPacSystemForKnoxProfile
+                                + "user "
+                                + configuredUser);
                 if (startPacSystemForKnoxProfile) {
                     setCurrentProxyScript(str, str2, uri);
                 }
@@ -398,8 +489,14 @@ public class KnoxVpnPacProcessor {
     public final void checkIfRetryNeeded(String str) {
         try {
             VpnProfileInfo profileEntry = getVpnConfigInstance().getProfileEntry(str);
-            if (profileEntry == null || profileEntry.mPackageMap.size() <= 0 || profileEntry.activateState != 1) {
-                Log.d("KnoxVpnPacProcessor", "vpn profile is in unknown state, resetting the retry-Status to default value " + str);
+            if (profileEntry == null
+                    || profileEntry.mPackageMap.size() <= 0
+                    || profileEntry.activateState != 1) {
+                Log.d(
+                        "KnoxVpnPacProcessor",
+                        "vpn profile is in unknown state, resetting the retry-Status to default"
+                            + " value "
+                                + str);
                 if (getCurrentRetryStatus().containsKey(str)) {
                     getCurrentRetryStatus().remove(str);
                     return;
@@ -407,14 +504,21 @@ public class KnoxVpnPacProcessor {
                 return;
             }
             if (!getCurrentRetryStatus().containsKey(str)) {
-                Log.d("KnoxVpnPacProcessor", "Downloading the pac url failed for the first time, start the retry process " + str);
+                Log.d(
+                        "KnoxVpnPacProcessor",
+                        "Downloading the pac url failed for the first time, start the retry process"
+                            + " "
+                                + str);
                 getCurrentRetryStatus().put(str, 0);
                 startRetryAttempt(profileEntry);
                 return;
             }
             if (((Integer) getCurrentRetryStatus().get(str)).intValue() >= 10) {
                 if (((Integer) getCurrentRetryStatus().get(str)).intValue() == 10) {
-                    Log.d("KnoxVpnPacProcessor", "Downloading the pac url failed even after the final retry attempt " + str);
+                    Log.d(
+                            "KnoxVpnPacProcessor",
+                            "Downloading the pac url failed even after the final retry attempt "
+                                    + str);
                     if (getDownloadThread().get(str) != null) {
                         getDownloadThread().remove(str);
                         return;
@@ -423,8 +527,17 @@ public class KnoxVpnPacProcessor {
                 }
                 return;
             }
-            getCurrentRetryStatus().put(str, Integer.valueOf(((Integer) getCurrentRetryStatus().get(str)).intValue() + 1));
-            Log.d("KnoxVpnPacProcessor", "Downloading the pac url failed, going to retry for the " + getCurrentRetryStatus().get(str) + "attempt " + str);
+            getCurrentRetryStatus()
+                    .put(
+                            str,
+                            Integer.valueOf(
+                                    ((Integer) getCurrentRetryStatus().get(str)).intValue() + 1));
+            Log.d(
+                    "KnoxVpnPacProcessor",
+                    "Downloading the pac url failed, going to retry for the "
+                            + getCurrentRetryStatus().get(str)
+                            + "attempt "
+                            + str);
             try {
                 Thread.currentThread();
                 Thread.sleep(5000L);
@@ -432,7 +545,10 @@ public class KnoxVpnPacProcessor {
             }
             startRetryAttempt(profileEntry);
         } catch (Exception unused2) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("Exception occured while retry attempt to download pac file ", str, "KnoxVpnPacProcessor");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "Exception occured while retry attempt to download pac file ",
+                    str,
+                    "KnoxVpnPacProcessor");
         }
     }
 
@@ -486,7 +602,8 @@ public class KnoxVpnPacProcessor {
                     if (DBG) {
                         Log.d("KnoxVpnPacProcessor", "The host name to resolve is " + str2);
                     }
-                    Socket validEndPointAddress = getValidEndPointAddress(profileEntry.mVpnClientType, i, i2, str2, str4);
+                    Socket validEndPointAddress =
+                            getValidEndPointAddress(profileEntry.mVpnClientType, i, i2, str2, str4);
                     try {
                         if (validEndPointAddress == null) {
                             throw new ConnectException();
@@ -511,7 +628,9 @@ public class KnoxVpnPacProcessor {
                                     } else {
                                         if (z2) {
                                             if (DBG) {
-                                                Log.d("KnoxVpnPacProcessor", "The pac line printed is " + readLine);
+                                                Log.d(
+                                                        "KnoxVpnPacProcessor",
+                                                        "The pac line printed is " + readLine);
                                             }
                                             sb.append(readLine.trim());
                                             sb.append("\n");
@@ -524,10 +643,16 @@ public class KnoxVpnPacProcessor {
                                     getDownloadStatus().put(str, 1);
                                 } else {
                                     try {
-                                        z = getProxyService(getConfiguredUser(str)).setPacFileForKnoxProfile(str, sb2);
+                                        z =
+                                                getProxyService(getConfiguredUser(str))
+                                                        .setPacFileForKnoxProfile(str, sb2);
                                     } catch (NullPointerException unused8) {
-                                        Log.e("KnoxVpnPacProcessor", "Exception occured due to the pac service not intialized");
-                                        closeExistingConnection(validEndPointAddress, bufferedReader, printStream);
+                                        Log.e(
+                                                "KnoxVpnPacProcessor",
+                                                "Exception occured due to the pac service not"
+                                                    + " intialized");
+                                        closeExistingConnection(
+                                                validEndPointAddress, bufferedReader, printStream);
                                         getDownloadStatus().put(str, 2);
                                         checkIfRetryNeeded(str);
                                         z = false;
@@ -535,16 +660,25 @@ public class KnoxVpnPacProcessor {
                                     if (z) {
                                         getDownloadStatus().put(str, 0);
                                         if (getCurrentRetryStatus().containsKey(str)) {
-                                            Log.d("KnoxVpnPacProcessor", "The pac file has been downloaded successfully,cancelling further retry attempts");
+                                            Log.d(
+                                                    "KnoxVpnPacProcessor",
+                                                    "The pac file has been downloaded"
+                                                        + " successfully,cancelling further retry"
+                                                        + " attempts");
                                             getCurrentRetryStatus().remove(str);
                                         }
                                         if (getDownloadThread().get(str) != null) {
                                             getDownloadThread().remove(str);
                                         }
-                                        Log.d("KnoxVpnPacProcessor", "The Misc value for the pac file has been set successfully " + setMiscValueForPacProfile(i2, str, str4));
+                                        Log.d(
+                                                "KnoxVpnPacProcessor",
+                                                "The Misc value for the pac file has been set"
+                                                    + " successfully "
+                                                        + setMiscValueForPacProfile(i2, str, str4));
                                         sendPacServiceStatus(1, str);
                                     } else {
-                                        closeExistingConnection(validEndPointAddress, bufferedReader, printStream);
+                                        closeExistingConnection(
+                                                validEndPointAddress, bufferedReader, printStream);
                                         getDownloadStatus().put(str, 2);
                                         checkIfRetryNeeded(str);
                                     }
@@ -552,27 +686,38 @@ public class KnoxVpnPacProcessor {
                                 socket = validEndPointAddress;
                             } catch (IllegalArgumentException unused9) {
                                 socket = validEndPointAddress;
-                                Log.e("KnoxVpnPacProcessor", "cannot find the dns server to resolve the pac url");
+                                Log.e(
+                                        "KnoxVpnPacProcessor",
+                                        "cannot find the dns server to resolve the pac url");
                                 closeExistingConnection(socket, bufferedReader, printStream);
                                 getDownloadStatus().put(str, 1);
                                 closeExistingConnection(socket, bufferedReader, printStream);
                             } catch (ConnectException unused10) {
                                 socket = validEndPointAddress;
-                                Log.e("KnoxVpnPacProcessor", "ConnectException occured while trying to download the pac url");
+                                Log.e(
+                                        "KnoxVpnPacProcessor",
+                                        "ConnectException occured while trying to download the pac"
+                                            + " url");
                                 closeExistingConnection(socket, bufferedReader, printStream);
                                 getDownloadStatus().put(str, 2);
                                 checkIfRetryNeeded(str);
                                 closeExistingConnection(socket, bufferedReader, printStream);
                             } catch (SocketException unused11) {
                                 socket = validEndPointAddress;
-                                Log.e("KnoxVpnPacProcessor", "SocketException occured while trying to download the pac url");
+                                Log.e(
+                                        "KnoxVpnPacProcessor",
+                                        "SocketException occured while trying to download the pac"
+                                            + " url");
                                 closeExistingConnection(socket, bufferedReader, printStream);
                                 getDownloadStatus().put(str, 2);
                                 checkIfRetryNeeded(str);
                                 closeExistingConnection(socket, bufferedReader, printStream);
                             } catch (UnknownHostException unused12) {
                                 socket = validEndPointAddress;
-                                Log.e("KnoxVpnPacProcessor", "UnknownHostException occured while trying to download the pac url ");
+                                Log.e(
+                                        "KnoxVpnPacProcessor",
+                                        "UnknownHostException occured while trying to download the"
+                                            + " pac url ");
                                 try {
                                     str.wait(5000L);
                                     closeExistingConnection(socket, bufferedReader, printStream);
@@ -580,7 +725,10 @@ public class KnoxVpnPacProcessor {
                                     checkIfRetryNeeded(str);
                                     closeExistingConnection(socket, bufferedReader, printStream);
                                 } catch (InterruptedException unused13) {
-                                    Log.e("KnoxVpnPacProcessor", "Got Interruption while trying to resolve the domain name ");
+                                    Log.e(
+                                            "KnoxVpnPacProcessor",
+                                            "Got Interruption while trying to resolve the domain"
+                                                + " name ");
                                     closeExistingConnection(socket, bufferedReader, printStream);
                                     getDownloadStatus().put(str, 2);
                                     closeExistingConnection(socket, bufferedReader, printStream);
@@ -588,20 +736,28 @@ public class KnoxVpnPacProcessor {
                                 }
                             } catch (ClosedByInterruptException unused14) {
                                 socket = validEndPointAddress;
-                                Log.e("KnoxVpnPacProcessor", "Downloading the pac url failed due to Interruption, close the existing connections");
+                                Log.e(
+                                        "KnoxVpnPacProcessor",
+                                        "Downloading the pac url failed due to Interruption, close"
+                                            + " the existing connections");
                                 closeExistingConnection(socket, bufferedReader, printStream);
                                 getDownloadStatus().put(str, 2);
                                 closeExistingConnection(socket, bufferedReader, printStream);
                             } catch (IOException unused15) {
                                 socket = validEndPointAddress;
-                                Log.e("KnoxVpnPacProcessor", "IOException occured while trying to download the pac url ");
+                                Log.e(
+                                        "KnoxVpnPacProcessor",
+                                        "IOException occured while trying to download the pac url"
+                                            + " ");
                                 closeExistingConnection(socket, bufferedReader, printStream);
                                 getDownloadStatus().put(str, 2);
                                 checkIfRetryNeeded(str);
                                 closeExistingConnection(socket, bufferedReader, printStream);
                             } catch (Exception unused16) {
                                 socket = validEndPointAddress;
-                                Log.e("KnoxVpnPacProcessor", "Exception occured while trying to pac url ");
+                                Log.e(
+                                        "KnoxVpnPacProcessor",
+                                        "Exception occured while trying to pac url ");
                                 closeExistingConnection(socket, bufferedReader, printStream);
                                 getDownloadStatus().put(str, 1);
                                 closeExistingConnection(socket, bufferedReader, printStream);
@@ -672,27 +828,45 @@ public class KnoxVpnPacProcessor {
             int port = url.getPort();
             int portFromProtocol = port == -1 ? getPortFromProtocol(protocol) : port;
             if (getDownloadThread().get(str) != null) {
-                Log.d("KnoxVpnPacProcessor", "The current status of the download thread of the profile " + str + "is " + ((DownloadUrlThread) getDownloadThread().get(str)).getState());
+                Log.d(
+                        "KnoxVpnPacProcessor",
+                        "The current status of the download thread of the profile "
+                                + str
+                                + "is "
+                                + ((DownloadUrlThread) getDownloadThread().get(str)).getState());
                 if (((DownloadUrlThread) getDownloadThread().get(str)).isAlive()) {
                     ((DownloadUrlThread) getDownloadThread().get(str)).interrupt();
                 }
                 getDownloadThread().remove(str);
             }
-            DownloadUrlThread downloadUrlThread = new DownloadUrlThread(str, host, path, portFromProtocol, str2);
+            DownloadUrlThread downloadUrlThread =
+                    new DownloadUrlThread(str, host, path, portFromProtocol, str2);
             downloadUrlThread.start();
             getDownloadThread().put(str, downloadUrlThread);
         } catch (IllegalArgumentException unused) {
             getDownloadStatus().put(str, 1);
-            Log.e("KnoxVpnPacProcessor", "error occured while trying to download the pac file due to unknown port number");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "error occured while trying to download the pac file due to unknown port"
+                        + " number");
         } catch (NullPointerException unused2) {
             getDownloadStatus().put(str, 1);
-            Log.e("KnoxVpnPacProcessor", "error occured while trying to download the pac file due to some values being not intialized successfully");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "error occured while trying to download the pac file due to some values being"
+                        + " not intialized successfully");
         } catch (MalformedURLException unused3) {
             getDownloadStatus().put(str, 1);
-            Log.e("KnoxVpnPacProcessor", "error occured while trying to download the pac file due to unknow url format, remove and create the profile again");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "error occured while trying to download the pac file due to unknow url format,"
+                        + " remove and create the profile again");
         } catch (Exception unused4) {
             getDownloadStatus().put(str, 1);
-            Log.e("KnoxVpnPacProcessor", "error occured while trying to download the pac file after the vpn connection is established");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "error occured while trying to download the pac file after the vpn connection"
+                        + " is established");
         }
     }
 
@@ -712,10 +886,17 @@ public class KnoxVpnPacProcessor {
         try {
             return getProxyService(getConfiguredUser(str)).getProxyPortForProfile(str);
         } catch (NullPointerException unused) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("The knox vpn proxy service has not yet started for profile while querying for port ", str, "KnoxVpnPacProcessor");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "The knox vpn proxy service has not yet started for profile while querying for"
+                        + " port ",
+                    str,
+                    "KnoxVpnPacProcessor");
             return -1;
         } catch (Exception unused2) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("unknown error occured for profile while querying for port ", str, "KnoxVpnPacProcessor");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "unknown error occured for profile while querying for port ",
+                    str,
+                    "KnoxVpnPacProcessor");
             return -1;
         }
     }
@@ -724,10 +905,17 @@ public class KnoxVpnPacProcessor {
         try {
             return getProxyService(getConfiguredUser(str)).getProxythreadStatus(str);
         } catch (NullPointerException unused) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("The knox vpn proxy service has not yet started for profile while querying for proxy thread Status ", str, "KnoxVpnPacProcessor");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "The knox vpn proxy service has not yet started for profile while querying for"
+                        + " proxy thread Status ",
+                    str,
+                    "KnoxVpnPacProcessor");
             return "IntialValue";
         } catch (Exception unused2) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("unknown error occured for profile while querying for proxy thread Status ", str, "KnoxVpnPacProcessor");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "unknown error occured for profile while querying for proxy thread Status ",
+                    str,
+                    "KnoxVpnPacProcessor");
             return "IntialValue";
         }
     }
@@ -739,18 +927,24 @@ public class KnoxVpnPacProcessor {
         try {
             inetAddress = InetAddressUtils.parseNumericAddress(str);
         } catch (IllegalArgumentException unused) {
-            Log.d("KnoxVpnPacProcessor", "The pac url being entered is not of numeric form and need to do a dns look up");
+            Log.d(
+                    "KnoxVpnPacProcessor",
+                    "The pac url being entered is not of numeric form and need to do a dns look"
+                        + " up");
             inetAddress = null;
         }
         if (inetAddress == null) {
             try {
                 allByNameOnNet = InetAddress.getAllByNameOnNet(str, i3);
             } catch (Exception unused2) {
-                Log.e("KnoxVpnPacProcessor", "UnknownHostException occured while trying to query the ip address for the pac url domain name");
+                Log.e(
+                        "KnoxVpnPacProcessor",
+                        "UnknownHostException occured while trying to query the ip address for the"
+                            + " pac url domain name");
                 throw new UnknownHostException();
             }
         } else {
-            allByNameOnNet = new InetAddress[]{inetAddress};
+            allByNameOnNet = new InetAddress[] {inetAddress};
         }
         if (allByNameOnNet == null) {
             return null;
@@ -764,26 +958,43 @@ public class KnoxVpnPacProcessor {
                     boolean z = inetAddress2 instanceof Inet4Address;
                     boolean z2 = DBG;
                     if (z) {
-                        Log.d("KnoxVpnPacProcessor", "The pac file is going to be downloaded from an interface having ipv4 address");
+                        Log.d(
+                                "KnoxVpnPacProcessor",
+                                "The pac file is going to be downloaded from an interface having"
+                                    + " ipv4 address");
                         str3 = inetAddress2.getHostAddress();
                         if (z2) {
-                            Log.d("KnoxVpnPacProcessor", "The resolved host address is a ipv4 address " + str3);
+                            Log.d(
+                                    "KnoxVpnPacProcessor",
+                                    "The resolved host address is a ipv4 address " + str3);
                         }
                         socket.bind(new InetSocketAddress(NetworkStackConstants.IPV4_ADDR_ANY, 0));
                     } else if (inetAddress2 instanceof Inet6Address) {
-                        Log.d("KnoxVpnPacProcessor", "The pac file is going to be downloaded from an interface having ipv6 address");
+                        Log.d(
+                                "KnoxVpnPacProcessor",
+                                "The pac file is going to be downloaded from an interface having"
+                                    + " ipv6 address");
                         str3 = inetAddress2.getHostAddress();
                         if (z2) {
-                            Log.d("KnoxVpnPacProcessor", "The resolved host address is a ipv6 address " + str3);
+                            Log.d(
+                                    "KnoxVpnPacProcessor",
+                                    "The resolved host address is a ipv6 address " + str3);
                         }
                         socket.bind(new InetSocketAddress(NetworkStackConstants.IPV6_ADDR_ANY, 0));
                     }
                     FileDescriptor fileDescriptor$ = socket.getFileDescriptor$();
                     if (fileDescriptor$.getInt$() != -1) {
                         try {
-                            Log.d("KnoxVpnPacProcessor", "bindResult value is " + jnibindSocketToInterface(i, i3, fileDescriptor$.getInt$(), str2));
+                            Log.d(
+                                    "KnoxVpnPacProcessor",
+                                    "bindResult value is "
+                                            + jnibindSocketToInterface(
+                                                    i, i3, fileDescriptor$.getInt$(), str2));
                         } catch (Exception unused3) {
-                            Log.e("KnoxVpnPacProcessor", "Exception occured while trying to bind the socket to the interface ");
+                            Log.e(
+                                    "KnoxVpnPacProcessor",
+                                    "Exception occured while trying to bind the socket to the"
+                                        + " interface ");
                         }
                     }
                     socket.setSoTimeout(10000);
@@ -792,7 +1003,11 @@ public class KnoxVpnPacProcessor {
                     }
                 } catch (Exception unused4) {
                     socket2 = socket;
-                    StorageManagerService$$ExternalSyntheticOutline0.m("IO Exception occured while trying to connect to the pac url remote address ", str3, "KnoxVpnPacProcessor");
+                    StorageManagerService$$ExternalSyntheticOutline0.m(
+                            "IO Exception occured while trying to connect to the pac url remote"
+                                + " address ",
+                            str3,
+                            "KnoxVpnPacProcessor");
                     if (socket2 != null) {
                         try {
                             socket2.close();
@@ -801,8 +1016,7 @@ public class KnoxVpnPacProcessor {
                         }
                     } else {
                         socket = socket2;
-                        if (socket == null) {
-                        }
+                        if (socket == null) {}
                         socket2 = socket;
                     }
                 }
@@ -831,10 +1045,17 @@ public class KnoxVpnPacProcessor {
         try {
             return getProxyService(getConfiguredUser(str)).isProxyThreadAlive(str);
         } catch (NullPointerException unused) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("The knox vpn proxy service has not yet started for profile while querying for proxy thread alive ", str, "KnoxVpnPacProcessor");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "The knox vpn proxy service has not yet started for profile while querying for"
+                        + " proxy thread alive ",
+                    str,
+                    "KnoxVpnPacProcessor");
             return false;
         } catch (Exception unused2) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("unknown error occured for profile while querying for proxy thread alive ", str, "KnoxVpnPacProcessor");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "unknown error occured for profile while querying for proxy thread alive ",
+                    str,
+                    "KnoxVpnPacProcessor");
             return false;
         }
     }
@@ -843,10 +1064,18 @@ public class KnoxVpnPacProcessor {
         try {
             return getProxyService(getConfiguredUser(str)).isProxyThreadRunning(str);
         } catch (NullPointerException unused) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("The knox vpn proxy service has not yet started for profile while querying for proxy thread running or not ", str, "KnoxVpnPacProcessor");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "The knox vpn proxy service has not yet started for profile while querying for"
+                        + " proxy thread running or not ",
+                    str,
+                    "KnoxVpnPacProcessor");
             return false;
         } catch (Exception unused2) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("unknown error occured for profile while querying for proxy thread running or not ", str, "KnoxVpnPacProcessor");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "unknown error occured for profile while querying for proxy thread running or"
+                        + " not ",
+                    str,
+                    "KnoxVpnPacProcessor");
             return false;
         }
     }
@@ -856,11 +1085,17 @@ public class KnoxVpnPacProcessor {
     public final void setCurrentProxyScript(String str, String str2, Uri uri) {
         try {
             if (uri == Uri.EMPTY) {
-                Log.d("KnoxVpnPacProcessor", "The proxy script is not being set since the pac url is empty or a static proxy has been configured");
+                Log.d(
+                        "KnoxVpnPacProcessor",
+                        "The proxy script is not being set since the pac url is empty or a static"
+                            + " proxy has been configured");
                 return;
             }
             if (getProxyService(getConfiguredUser(str)) == null) {
-                Log.d("KnoxVpnPacProcessor", "The proxy service has not been intialized while trying to set the proxy script, trying to bind again");
+                Log.d(
+                        "KnoxVpnPacProcessor",
+                        "The proxy service has not been intialized while trying to set the proxy"
+                            + " script, trying to bind again");
                 bindProxyService(getConfiguredUser(str), str);
                 return;
             }
@@ -872,26 +1107,41 @@ public class KnoxVpnPacProcessor {
             if (((Integer) mDownloadStatus.get(str)).intValue() != 2) {
                 return;
             }
-            Log.d("KnoxVpnPacProcessor", "Try to download the pac url for the profile after the interface is up for the profile " + str);
+            Log.d(
+                    "KnoxVpnPacProcessor",
+                    "Try to download the pac url for the profile after the interface is up for the"
+                        + " profile "
+                            + str);
             if (getCurrentRetryStatus().containsKey(str)) {
                 getCurrentRetryStatus().remove(str);
             }
             extractUrlParameters(str, str2, uri.toString());
         } catch (NullPointerException unused) {
-            Log.e("KnoxVpnPacProcessor", "error occured while trying to get current status pac file due to some values being not intialized successfully");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "error occured while trying to get current status pac file due to some values"
+                        + " being not intialized successfully");
         } catch (Exception unused2) {
-            Log.e("KnoxVpnPacProcessor", " error occured while trying to get current status pac file");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    " error occured while trying to get current status pac file");
         }
     }
 
     public final boolean setMiscValueForPacProfile(int i, String str, String str2) {
         boolean z = false;
         try {
-            z = getProxyService(getConfiguredUser(str)).setMiscValueForPacProfile(i, str, str2, getConfiguredUser(str));
-            Log.d("KnoxVpnPacProcessor", "checking if the Misc value has been set for the knox pac profile " + z);
+            z =
+                    getProxyService(getConfiguredUser(str))
+                            .setMiscValueForPacProfile(i, str, str2, getConfiguredUser(str));
+            Log.d(
+                    "KnoxVpnPacProcessor",
+                    "checking if the Misc value has been set for the knox pac profile " + z);
             return z;
         } catch (Exception unused) {
-            Log.e("KnoxVpnPacProcessor", "Exception occurred while trying to set the misc value for the pac profile ");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "Exception occurred while trying to set the misc value for the pac profile ");
             return z;
         }
     }
@@ -904,9 +1154,19 @@ public class KnoxVpnPacProcessor {
         try {
             String str2 = profileEntry.mProxyusername;
             String str3 = profileEntry.mProxyPassword;
-            return getProxyService(getConfiguredUser(str)).startProxyServerForKnoxProfile(str, profileEntry.proxyAuthRequried, str2, str3, profileEntry.credentialsPredefined, profileEntry.mProxyServer, profileEntry.mProxyPort);
+            return getProxyService(getConfiguredUser(str))
+                    .startProxyServerForKnoxProfile(
+                            str,
+                            profileEntry.proxyAuthRequried,
+                            str2,
+                            str3,
+                            profileEntry.credentialsPredefined,
+                            profileEntry.mProxyServer,
+                            profileEntry.mProxyPort);
         } catch (Exception e) {
-            StringBuilder sb = new StringBuilder("Error occured while trying to start the proxy server for the profile");
+            StringBuilder sb =
+                    new StringBuilder(
+                            "Error occured while trying to start the proxy server for the profile");
             sb.append(str);
             VpnManagerService$$ExternalSyntheticOutline0.m(e, sb, "KnoxVpnPacProcessor");
             return -1;
@@ -928,22 +1188,36 @@ public class KnoxVpnPacProcessor {
                 port = getPortFromProtocol(protocol);
             }
             int i = port;
-            if (str == null || str2 == null || uri == null || ((Integer) getDownloadStatus().get(str)).intValue() != 2) {
+            if (str == null
+                    || str2 == null
+                    || uri == null
+                    || ((Integer) getDownloadStatus().get(str)).intValue() != 2) {
                 return;
             }
             downloadPacUrl(i, str, host, path, str2);
         } catch (IllegalArgumentException unused) {
             getDownloadStatus().put(str, 1);
-            Log.e("KnoxVpnPacProcessor", "retry attempt: Invalid port value is defined when trying to download the pac url");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "retry attempt: Invalid port value is defined when trying to download the pac"
+                        + " url");
         } catch (NullPointerException unused2) {
             getDownloadStatus().put(str, 1);
-            Log.e("KnoxVpnPacProcessor", "retry attempt: Some profile values are not intialized when trying to download the pac url");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "retry attempt: Some profile values are not intialized when trying to download"
+                        + " the pac url");
         } catch (MalformedURLException unused3) {
             getDownloadStatus().put(str, 1);
-            Log.e("KnoxVpnPacProcessor", "retry attempt: error occured while trying to download the pac file due to unknow url format");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "retry attempt: error occured while trying to download the pac file due to"
+                        + " unknow url format");
         } catch (Exception unused4) {
             getDownloadStatus().put(str, 1);
-            Log.e("KnoxVpnPacProcessor", "retry attempt: error occured while trying to download the pac file");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "retry attempt: error occured while trying to download the pac file");
         }
     }
 
@@ -961,15 +1235,25 @@ public class KnoxVpnPacProcessor {
             if (getDownloadThread().containsKey(str)) {
                 getDownloadThread().remove(str);
             }
-            boolean stopPacSystemForKnoxProfile = getProxyService(getConfiguredUser(str)).stopPacSystemForKnoxProfile(str);
-            Log.d("KnoxVpnPacProcessor", "check to see if the pac support is removed for the profile " + stopPacSystemForKnoxProfile);
+            boolean stopPacSystemForKnoxProfile =
+                    getProxyService(getConfiguredUser(str)).stopPacSystemForKnoxProfile(str);
+            Log.d(
+                    "KnoxVpnPacProcessor",
+                    "check to see if the pac support is removed for the profile "
+                            + stopPacSystemForKnoxProfile);
             if (stopPacSystemForKnoxProfile) {
                 getProxyService(getConfiguredUser(str)).stopProxyServerForKnoxProfile(str);
             }
         } catch (NullPointerException unused) {
-            Log.e("KnoxVpnPacProcessor", "error occured while trying to remove the pac support due to some values being not intialized successfully");
+            Log.e(
+                    "KnoxVpnPacProcessor",
+                    "error occured while trying to remove the pac support due to some values being"
+                        + " not intialized successfully");
         } catch (Exception unused2) {
-            StorageManagerService$$ExternalSyntheticOutline0.m(" error occured while trying to remove the pac script for the profile ", str, "KnoxVpnPacProcessor");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    " error occured while trying to remove the pac script for the profile ",
+                    str,
+                    "KnoxVpnPacProcessor");
         }
     }
 
@@ -1002,7 +1286,8 @@ public class KnoxVpnPacProcessor {
                     if (this.mFirewallHelper == null) {
                         this.mFirewallHelper = KnoxVpnFirewallHelper.getInstance();
                     }
-                    this.mFirewallHelper.addRulesToAllowAccessToLocalHostWithValidMark(i2, profileEntry.mInterface_type, profileEntry.mInterfaceName);
+                    this.mFirewallHelper.addRulesToAllowAccessToLocalHostWithValidMark(
+                            i2, profileEntry.mInterface_type, profileEntry.mInterfaceName);
                     return;
                 }
                 if (i != 1) {
@@ -1015,10 +1300,15 @@ public class KnoxVpnPacProcessor {
                 if (this.mFirewallHelper == null) {
                     this.mFirewallHelper = KnoxVpnFirewallHelper.getInstance();
                 }
-                this.mFirewallHelper.removeRulesToAllowAccessToLocalHostWithValidMark(i2, profileEntry.mInterface_type, profileEntry.mInterfaceName);
+                this.mFirewallHelper.removeRulesToAllowAccessToLocalHostWithValidMark(
+                        i2, profileEntry.mInterface_type, profileEntry.mInterfaceName);
             }
         } catch (Exception unused) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("Exception occurred while trying to apply rules to access local host for the vpn profile ", str, "KnoxVpnPacProcessor");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "Exception occurred while trying to apply rules to access local host for the"
+                        + " vpn profile ",
+                    str,
+                    "KnoxVpnPacProcessor");
         }
     }
 }

@@ -1,8 +1,10 @@
 package com.android.server.biometrics.sensors;
 
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
+
 import com.android.server.FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
+
 import java.time.Clock;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,12 +37,21 @@ public final class MultiBiometricLockoutState {
             ((AuthenticatorState) authMapForUser.get(15)).mPermanentlyLockedOut = false;
         } else if (i2 != 255) {
             if (i2 != 4095) {
-                NandswapManager$$ExternalSyntheticOutline0.m(i2, "increaseLockoutTime called for invalid strength : ", "MultiBiometricLockoutState");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        i2,
+                        "increaseLockoutTime called for invalid strength : ",
+                        "MultiBiometricLockoutState");
                 return;
             }
             ((AuthenticatorState) authMapForUser.get(4095)).mPermanentlyLockedOut = false;
         }
-        ((AuthenticatorState) authMapForUser.get(Integer.valueOf(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT))).mPermanentlyLockedOut = false;
+        ((AuthenticatorState)
+                                authMapForUser.get(
+                                        Integer.valueOf(
+                                                IDnsResolverUnsolicitedEventListener
+                                                        .DNS_HEALTH_RESULT_TIMEOUT)))
+                        .mPermanentlyLockedOut =
+                false;
         ((AuthenticatorState) authMapForUser.get(4095)).mPermanentlyLockedOut = false;
     }
 
@@ -50,12 +61,21 @@ public final class MultiBiometricLockoutState {
             ((AuthenticatorState) authMapForUser.get(15)).mTimedLockout = false;
         } else if (i2 != 255) {
             if (i2 != 4095) {
-                NandswapManager$$ExternalSyntheticOutline0.m(i2, "increaseLockoutTime called for invalid strength : ", "MultiBiometricLockoutState");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        i2,
+                        "increaseLockoutTime called for invalid strength : ",
+                        "MultiBiometricLockoutState");
                 return;
             }
             ((AuthenticatorState) authMapForUser.get(4095)).mTimedLockout = false;
         }
-        ((AuthenticatorState) authMapForUser.get(Integer.valueOf(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT))).mTimedLockout = false;
+        ((AuthenticatorState)
+                                authMapForUser.get(
+                                        Integer.valueOf(
+                                                IDnsResolverUnsolicitedEventListener
+                                                        .DNS_HEALTH_RESULT_TIMEOUT)))
+                        .mTimedLockout =
+                false;
         ((AuthenticatorState) authMapForUser.get(4095)).mTimedLockout = false;
     }
 
@@ -65,7 +85,8 @@ public final class MultiBiometricLockoutState {
             Integer valueOf = Integer.valueOf(i);
             HashMap hashMap = new HashMap();
             hashMap.put(15, new AuthenticatorState(15));
-            Integer valueOf2 = Integer.valueOf(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+            Integer valueOf2 =
+                    Integer.valueOf(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
             hashMap.put(valueOf2, new AuthenticatorState(valueOf2));
             hashMap.put(4095, new AuthenticatorState(4095));
             ((HashMap) map).put(valueOf, hashMap);
@@ -76,10 +97,15 @@ public final class MultiBiometricLockoutState {
     public final int getLockoutState(int i, int i2) {
         Map authMapForUser = getAuthMapForUser(i);
         if (!authMapForUser.containsKey(Integer.valueOf(i2))) {
-            FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0.m(i2, "Error, getLockoutState for unknown strength: ", " returning LOCKOUT_NONE", "MultiBiometricLockoutState");
+            FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0.m(
+                    i2,
+                    "Error, getLockoutState for unknown strength: ",
+                    " returning LOCKOUT_NONE",
+                    "MultiBiometricLockoutState");
             return 0;
         }
-        AuthenticatorState authenticatorState = (AuthenticatorState) authMapForUser.get(Integer.valueOf(i2));
+        AuthenticatorState authenticatorState =
+                (AuthenticatorState) authMapForUser.get(Integer.valueOf(i2));
         if (authenticatorState.mPermanentlyLockedOut) {
             return 2;
         }
@@ -90,7 +116,18 @@ public final class MultiBiometricLockoutState {
         this.mClock.millis();
         String str = "Permanent Lockouts\n";
         for (Map.Entry entry : ((HashMap) this.mCanUserAuthenticate).entrySet()) {
-            str = str + "UserId=" + ((Integer) entry.getKey()).intValue() + ", {" + ((String) ((Map) entry.getValue()).entrySet().stream().map(new MultiBiometricLockoutState$$ExternalSyntheticLambda0()).collect(Collectors.joining(", "))) + "}\n";
+            str =
+                    str
+                            + "UserId="
+                            + ((Integer) entry.getKey()).intValue()
+                            + ", {"
+                            + ((String)
+                                    ((Map) entry.getValue())
+                                            .entrySet().stream()
+                                                    .map(
+                                                            new MultiBiometricLockoutState$$ExternalSyntheticLambda0())
+                                                    .collect(Collectors.joining(", ")))
+                            + "}\n";
         }
         return str;
     }

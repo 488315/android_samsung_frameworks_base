@@ -1,6 +1,7 @@
 package com.android.server.flags;
 
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -13,7 +14,8 @@ public class FlagsShellCommand {
     }
 
     public static void printHelp(PrintWriter printWriter) {
-        printWriter.println("Feature Flags command, allowing listing, setting, getting, and erasing of");
+        printWriter.println(
+                "Feature Flags command, allowing listing, setting, getting, and erasing of");
         printWriter.println("local flag overrides on a device.");
         printWriter.println();
         printWriter.println("Commands:");
@@ -31,16 +33,21 @@ public class FlagsShellCommand {
         printWriter.flush();
     }
 
-    public static boolean validateNumArguments(String[] strArr, int i, int i2, String str, PrintWriter printWriter) {
+    public static boolean validateNumArguments(
+            String[] strArr, int i, int i2, String str, PrintWriter printWriter) {
         int length = strArr.length - 1;
         if (length < i) {
-            printWriter.println(AccountManagerService$$ExternalSyntheticOutline0.m(i, "Less than ", " arguments provided for \"", str, "\" command."));
+            printWriter.println(
+                    AccountManagerService$$ExternalSyntheticOutline0.m(
+                            i, "Less than ", " arguments provided for \"", str, "\" command."));
             return false;
         }
         if (length <= i2) {
             return true;
         }
-        printWriter.println(AccountManagerService$$ExternalSyntheticOutline0.m(i2, "More than ", " arguments provided for \"", str, "\" command."));
+        printWriter.println(
+                AccountManagerService$$ExternalSyntheticOutline0.m(
+                        i2, "More than ", " arguments provided for \"", str, "\" command."));
         return false;
     }
 }

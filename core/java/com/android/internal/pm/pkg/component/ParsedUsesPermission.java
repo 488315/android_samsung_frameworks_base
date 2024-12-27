@@ -8,8 +8,7 @@ public interface ParsedUsesPermission {
     public static final int FLAG_NEVER_FOR_LOCATION = 65536;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UsesPermissionFlags {
-    }
+    public @interface UsesPermissionFlags {}
 
     String getName();
 

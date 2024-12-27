@@ -8,7 +8,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
+
 import dalvik.system.CloseGuard;
+
 import java.io.PrintWriter;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
@@ -33,7 +35,10 @@ public abstract class InputEventReceiver {
 
     private static native void nativeFinishInputEvent(long j, int i, boolean z);
 
-    private static native long nativeInit(WeakReference<InputEventReceiver> weakReference, InputChannel inputChannel, MessageQueue messageQueue);
+    private static native long nativeInit(
+            WeakReference<InputEventReceiver> weakReference,
+            InputChannel inputChannel,
+            MessageQueue messageQueue);
 
     private static native boolean nativeProbablyHasInput(long j);
 
@@ -51,7 +56,8 @@ public abstract class InputEventReceiver {
             }
             this.mInputChannel = inputChannel;
             this.mMessageQueue = looper.getQueue();
-            this.mReceiverPtr = nativeInit(new WeakReference(this), this.mInputChannel, this.mMessageQueue);
+            this.mReceiverPtr =
+                    nativeInit(new WeakReference(this), this.mInputChannel, this.mMessageQueue);
             this.mCloseGuard.open("InputEventReceiver.dispose");
         }
     }
@@ -102,21 +108,17 @@ public abstract class InputEventReceiver {
         finishInputEvent(event, false);
     }
 
-    public void onFocusEvent(boolean hasFocus) {
-    }
+    public void onFocusEvent(boolean hasFocus) {}
 
     public void setImprovementEvent(boolean enhancedPerformance, float xdpi, float ydpi) {
         nativeSetImprovementEvent(this.mReceiverPtr, enhancedPerformance, xdpi, ydpi);
     }
 
-    public void onPointerCaptureEvent(boolean pointerCaptureEnabled) {
-    }
+    public void onPointerCaptureEvent(boolean pointerCaptureEnabled) {}
 
-    public void onDragEvent(boolean isExiting, float x, float y) {
-    }
+    public void onDragEvent(boolean isExiting, float x, float y) {}
 
-    public void onTouchModeChanged(boolean inTouchMode) {
-    }
+    public void onTouchModeChanged(boolean inTouchMode) {}
 
     public void onBatchedInputEventPending(int source) {
         consumeBatchedInputEvents(-1L);
@@ -129,7 +131,10 @@ public abstract class InputEventReceiver {
                     throw new IllegalArgumentException("event must not be null");
                 }
                 if (this.mReceiverPtr == 0) {
-                    Log.w(TAG, "Attempted to finish an input event but the input event receiver has already been disposed.");
+                    Log.w(
+                            TAG,
+                            "Attempted to finish an input event but the input event receiver has"
+                                + " already been disposed.");
                 } else {
                     int index = this.mSeqMap.indexOfKey(event.getSequenceNumber());
                     if (index < 0) {
@@ -158,7 +163,10 @@ public abstract class InputEventReceiver {
     public final boolean consumeBatchedInputEvents(long frameTimeNanos) {
         synchronized (this) {
             if (this.mReceiverPtr == 0) {
-                Log.w(TAG, "Attempted to consume batched input events but the input event receiver has already been disposed.");
+                Log.w(
+                        TAG,
+                        "Attempted to consume batched input events but the input event receiver has"
+                            + " already been disposed.");
                 return false;
             }
             return nativeConsumeBatchedInputEvents(this.mReceiverPtr, frameTimeNanos);
@@ -170,7 +178,8 @@ public abstract class InputEventReceiver {
         if (this.mChoreographer == null) {
             this.mChoreographer = Looper.myLooper() != null ? Choreographer.getInstance() : null;
         }
-        if (this.mChoreographer != null && (slopMetrics = this.mChoreographer.getMetrics()) != null) {
+        if (this.mChoreographer != null
+                && (slopMetrics = this.mChoreographer.getMetrics()) != null) {
             return TypedValue.applyDimension(1, 8.0f, slopMetrics);
         }
         return -1.0f;
@@ -180,7 +189,8 @@ public abstract class InputEventReceiver {
         try {
             Log.d(TAG_DOT, "IER.scheduleInputVsync");
             if (this.mChoreographer == null) {
-                this.mChoreographer = Looper.myLooper() != null ? Choreographer.getInstance() : null;
+                this.mChoreographer =
+                        Looper.myLooper() != null ? Choreographer.getInstance() : null;
             }
             if (this.mChoreographer != null) {
                 Choreographer choreographer = this.mChoreographer;
@@ -202,11 +212,21 @@ public abstract class InputEventReceiver {
     private String getShortDescription(InputEvent event) {
         if (event instanceof MotionEvent) {
             MotionEvent motion = (MotionEvent) event;
-            return "MotionEvent " + MotionEvent.actionToString(motion.getAction()) + " deviceId=" + motion.getDeviceId() + " source=0x" + Integer.toHexString(motion.getSource()) + " historySize=" + motion.getHistorySize();
+            return "MotionEvent "
+                    + MotionEvent.actionToString(motion.getAction())
+                    + " deviceId="
+                    + motion.getDeviceId()
+                    + " source=0x"
+                    + Integer.toHexString(motion.getSource())
+                    + " historySize="
+                    + motion.getHistorySize();
         }
         if (event instanceof KeyEvent) {
             KeyEvent key = (KeyEvent) event;
-            return "KeyEvent " + KeyEvent.actionToString(key.getAction()) + " deviceId=" + key.getDeviceId();
+            return "KeyEvent "
+                    + KeyEvent.actionToString(key.getAction())
+                    + " deviceId="
+                    + key.getDeviceId();
         }
         Log.wtf(TAG, "Illegal InputEvent type: " + event);
         return "InputEvent";

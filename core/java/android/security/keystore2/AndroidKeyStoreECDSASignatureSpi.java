@@ -5,17 +5,23 @@ import android.security.KeyStoreException;
 import android.security.KeyStoreOperation;
 import android.security.keystore.KeyProperties;
 import android.system.keystore2.Authorization;
+
+import libcore.util.EmptyArray;
+
 import java.io.ByteArrayOutputStream;
 import java.security.InvalidKeyException;
 import java.security.spec.NamedParameterSpec;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import libcore.util.EmptyArray;
 
 /* loaded from: classes3.dex */
 abstract class AndroidKeyStoreECDSASignatureSpi extends AndroidKeyStoreSignatureSpiBase {
-    private static final Set<String> ACCEPTED_SIGNING_SCHEMES = Set.of(KeyProperties.KEY_ALGORITHM_EC.toLowerCase(), NamedParameterSpec.ED25519.getName().toLowerCase(), "eddsa");
+    private static final Set<String> ACCEPTED_SIGNING_SCHEMES =
+            Set.of(
+                    KeyProperties.KEY_ALGORITHM_EC.toLowerCase(),
+                    NamedParameterSpec.ED25519.getName().toLowerCase(),
+                    "eddsa");
     private int mGroupSizeBits = -1;
     private final int mKeymasterDigest;
 
@@ -30,24 +36,29 @@ abstract class AndroidKeyStoreECDSASignatureSpi extends AndroidKeyStoreSignature
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreSignatureSpiBase
-        protected KeyStoreCryptoOperationStreamer createMainDataStreamer(KeyStoreOperation operation) {
-            return new TruncateToFieldSizeMessageStreamer(super.createMainDataStreamer(operation), getGroupSizeBits());
+        protected KeyStoreCryptoOperationStreamer createMainDataStreamer(
+                KeyStoreOperation operation) {
+            return new TruncateToFieldSizeMessageStreamer(
+                    super.createMainDataStreamer(operation), getGroupSizeBits());
         }
 
-        private static class TruncateToFieldSizeMessageStreamer implements KeyStoreCryptoOperationStreamer {
+        private static class TruncateToFieldSizeMessageStreamer
+                implements KeyStoreCryptoOperationStreamer {
             private long mConsumedInputSizeBytes;
             private final KeyStoreCryptoOperationStreamer mDelegate;
             private final int mGroupSizeBits;
             private final ByteArrayOutputStream mInputBuffer;
 
-            private TruncateToFieldSizeMessageStreamer(KeyStoreCryptoOperationStreamer delegate, int groupSizeBits) {
+            private TruncateToFieldSizeMessageStreamer(
+                    KeyStoreCryptoOperationStreamer delegate, int groupSizeBits) {
                 this.mInputBuffer = new ByteArrayOutputStream();
                 this.mDelegate = delegate;
                 this.mGroupSizeBits = groupSizeBits;
             }
 
             @Override // android.security.keystore2.KeyStoreCryptoOperationStreamer
-            public byte[] update(byte[] input, int inputOffset, int inputLength) throws KeyStoreException {
+            public byte[] update(byte[] input, int inputOffset, int inputLength)
+                    throws KeyStoreException {
                 if (inputLength > 0) {
                     this.mInputBuffer.write(input, inputOffset, inputLength);
                     this.mConsumedInputSizeBytes += inputLength;
@@ -56,14 +67,19 @@ abstract class AndroidKeyStoreECDSASignatureSpi extends AndroidKeyStoreSignature
             }
 
             @Override // android.security.keystore2.KeyStoreCryptoOperationStreamer
-            public byte[] doFinal(byte[] input, int inputOffset, int inputLength, byte[] signature) throws KeyStoreException {
+            public byte[] doFinal(byte[] input, int inputOffset, int inputLength, byte[] signature)
+                    throws KeyStoreException {
                 if (inputLength > 0) {
                     this.mConsumedInputSizeBytes += inputLength;
                     this.mInputBuffer.write(input, inputOffset, inputLength);
                 }
                 byte[] bufferedInput = this.mInputBuffer.toByteArray();
                 this.mInputBuffer.reset();
-                return this.mDelegate.doFinal(bufferedInput, 0, Math.min(bufferedInput.length, (this.mGroupSizeBits + 7) / 8), signature);
+                return this.mDelegate.doFinal(
+                        bufferedInput,
+                        0,
+                        Math.min(bufferedInput.length, (this.mGroupSizeBits + 7) / 8),
+                        signature);
             }
 
             @Override // android.security.keystore2.KeyStoreCryptoOperationStreamer
@@ -151,7 +167,12 @@ abstract class AndroidKeyStoreECDSASignatureSpi extends AndroidKeyStoreSignature
     @Override // android.security.keystore2.AndroidKeyStoreSignatureSpiBase
     protected final void initKey(AndroidKeyStoreKey key) throws InvalidKeyException {
         if (!ACCEPTED_SIGNING_SCHEMES.contains(key.getAlgorithm().toLowerCase())) {
-            throw new InvalidKeyException("Unsupported key algorithm: " + key.getAlgorithm() + ". Only " + Arrays.toString(ACCEPTED_SIGNING_SCHEMES.stream().toArray()) + " supported");
+            throw new InvalidKeyException(
+                    "Unsupported key algorithm: "
+                            + key.getAlgorithm()
+                            + ". Only "
+                            + Arrays.toString(ACCEPTED_SIGNING_SCHEMES.stream().toArray())
+                            + " supported");
         }
         long keySizeBits = -1;
         Authorization[] authorizations = key.getAuthorizations();
@@ -168,7 +189,8 @@ abstract class AndroidKeyStoreECDSASignatureSpi extends AndroidKeyStoreSignature
             } else if (a.keyParameter.tag != 268435466) {
                 i++;
             } else {
-                keySizeBits = KeyProperties.EcCurve.fromKeymasterCurve(a.keyParameter.value.getEcCurve());
+                keySizeBits =
+                        KeyProperties.EcCurve.fromKeymasterCurve(a.keyParameter.value.getEcCurve());
                 break;
             }
         }

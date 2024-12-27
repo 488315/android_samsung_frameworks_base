@@ -2,25 +2,29 @@ package android.telephony.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class NetworkSlicingConfig implements Parcelable {
-    public static final Parcelable.Creator<NetworkSlicingConfig> CREATOR = new Parcelable.Creator<NetworkSlicingConfig>() { // from class: android.telephony.data.NetworkSlicingConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkSlicingConfig createFromParcel(Parcel source) {
-            return new NetworkSlicingConfig(source);
-        }
+    public static final Parcelable.Creator<NetworkSlicingConfig> CREATOR =
+            new Parcelable.Creator<
+                    NetworkSlicingConfig>() { // from class:
+                                              // android.telephony.data.NetworkSlicingConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkSlicingConfig createFromParcel(Parcel source) {
+                    return new NetworkSlicingConfig(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkSlicingConfig[] newArray(int size) {
-            return new NetworkSlicingConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkSlicingConfig[] newArray(int size) {
+                    return new NetworkSlicingConfig[size];
+                }
+            };
     private final List<NetworkSliceInfo> mSliceInfo;
     private final List<UrspRule> mUrspRules;
 
@@ -67,7 +71,10 @@ public final class NetworkSlicingConfig implements Parcelable {
             return false;
         }
         NetworkSlicingConfig that = (NetworkSlicingConfig) o;
-        if (this.mUrspRules.size() == that.mUrspRules.size() && this.mUrspRules.containsAll(that.mUrspRules) && this.mSliceInfo.size() == that.mSliceInfo.size() && this.mSliceInfo.containsAll(that.mSliceInfo)) {
+        if (this.mUrspRules.size() == that.mUrspRules.size()
+                && this.mUrspRules.containsAll(that.mUrspRules)
+                && this.mSliceInfo.size() == that.mSliceInfo.size()
+                && this.mSliceInfo.containsAll(that.mSliceInfo)) {
             return true;
         }
         return false;

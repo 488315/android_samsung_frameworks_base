@@ -9,7 +9,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.os.RemoteException;
-import android.provider.SyncStateContract;
 import android.util.Pair;
 
 /* loaded from: classes3.dex */
@@ -22,7 +21,11 @@ public class BrowserContract {
     public static final class Accounts {
         public static final String ACCOUNT_NAME = "account_name";
         public static final String ACCOUNT_TYPE = "account_type";
-        public static final Uri CONTENT_URI = BrowserContract.AUTHORITY_URI.buildUpon().appendPath(AccountManager.KEY_ACCOUNTS).build();
+        public static final Uri CONTENT_URI =
+                BrowserContract.AUTHORITY_URI
+                        .buildUpon()
+                        .appendPath(AccountManager.KEY_ACCOUNTS)
+                        .build();
         public static final String ROOT_ID = "root_id";
     }
 
@@ -75,8 +78,7 @@ public class BrowserContract {
         public static final String FOLDER_NAME_ROOT = "google_chrome";
         public static final String SERVER_UNIQUE = "sync3";
 
-        private ChromeSyncColumns() {
-        }
+        private ChromeSyncColumns() {}
     }
 
     public static final class Bookmarks implements CommonColumns, ImageColumns, SyncColumns {
@@ -87,8 +89,10 @@ public class BrowserContract {
         public static final int BOOKMARK_TYPE_OTHER_FOLDER = 4;
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/bookmark";
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/bookmark";
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "bookmarks");
-        public static final Uri CONTENT_URI_DEFAULT_FOLDER = Uri.withAppendedPath(CONTENT_URI, "folder");
+        public static final Uri CONTENT_URI =
+                Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "bookmarks");
+        public static final Uri CONTENT_URI_DEFAULT_FOLDER =
+                Uri.withAppendedPath(CONTENT_URI, "folder");
         public static final String INSERT_AFTER = "insert_after";
         public static final String INSERT_AFTER_SOURCE_ID = "insert_after_source";
         public static final String IS_DELETED = "deleted";
@@ -101,8 +105,7 @@ public class BrowserContract {
         public static final String QUERY_PARAMETER_SHOW_DELETED = "show_deleted";
         public static final String TYPE = "type";
 
-        private Bookmarks() {
-        }
+        private Bookmarks() {}
 
         public static final Uri buildFolderUri(long folderId) {
             return ContentUris.withAppendedId(CONTENT_URI_DEFAULT_FOLDER, folderId);
@@ -112,40 +115,43 @@ public class BrowserContract {
     public static final class History implements CommonColumns, HistoryColumns, ImageColumns {
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/browser-history";
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/browser-history";
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "history");
+        public static final Uri CONTENT_URI =
+                Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "history");
 
-        private History() {
-        }
+        private History() {}
     }
 
     public static final class Searches {
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/searches";
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/searches";
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "searches");
+        public static final Uri CONTENT_URI =
+                Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "searches");
         public static final String DATE = "date";
         public static final String SEARCH = "search";
         public static final String _ID = "_id";
 
-        private Searches() {
-        }
+        private Searches() {}
     }
 
     public static final class SyncState implements SyncStateContract.Columns {
         public static final String CONTENT_DIRECTORY = "syncstate";
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "syncstate");
+        public static final Uri CONTENT_URI =
+                Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "syncstate");
 
-        private SyncState() {
-        }
+        private SyncState() {}
 
-        public static byte[] get(ContentProviderClient provider, Account account) throws RemoteException {
+        public static byte[] get(ContentProviderClient provider, Account account)
+                throws RemoteException {
             return SyncStateContract.Helpers.get(provider, CONTENT_URI, account);
         }
 
-        public static Pair<Uri, byte[]> getWithUri(ContentProviderClient provider, Account account) throws RemoteException {
+        public static Pair<Uri, byte[]> getWithUri(ContentProviderClient provider, Account account)
+                throws RemoteException {
             return SyncStateContract.Helpers.getWithUri(provider, CONTENT_URI, account);
         }
 
-        public static void set(ContentProviderClient provider, Account account, byte[] data) throws RemoteException {
+        public static void set(ContentProviderClient provider, Account account, byte[] data)
+                throws RemoteException {
             SyncStateContract.Helpers.set(provider, CONTENT_URI, account, data);
         }
 
@@ -157,7 +163,8 @@ public class BrowserContract {
     public static final class Images implements ImageColumns {
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/images";
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/images";
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "images");
+        public static final Uri CONTENT_URI =
+                Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "images");
         public static final String DATA = "data";
         public static final int IMAGE_TYPE_FAVICON = 1;
         public static final int IMAGE_TYPE_PRECOMPOSED_TOUCH_ICON = 2;
@@ -165,40 +172,39 @@ public class BrowserContract {
         public static final String TYPE = "type";
         public static final String URL = "url_key";
 
-        private Images() {
-        }
+        private Images() {}
     }
 
     public static final class ImageMappings implements ImageMappingColumns {
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/image_mappings";
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/image_mappings";
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "image_mappings");
+        public static final Uri CONTENT_URI =
+                Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "image_mappings");
 
-        private ImageMappings() {
-        }
+        private ImageMappings() {}
     }
 
     public static final class Combined implements CommonColumns, HistoryColumns, ImageColumns {
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "combined");
+        public static final Uri CONTENT_URI =
+                Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "combined");
         public static final String IS_BOOKMARK = "bookmark";
 
-        private Combined() {
-        }
+        private Combined() {}
     }
 
     public static final class Settings {
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "settings");
+        public static final Uri CONTENT_URI =
+                Uri.withAppendedPath(BrowserContract.AUTHORITY_URI, "settings");
         public static final String KEY = "key";
         public static final String KEY_SYNC_ENABLED = "sync_enabled";
         public static final String VALUE = "value";
 
-        private Settings() {
-        }
+        private Settings() {}
 
         /* JADX WARN: Code restructure failed: missing block: B:17:0x0038, code lost:
-        
-            r0.close();
-         */
+
+           r0.close();
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -242,7 +248,9 @@ public class BrowserContract {
             L42:
                 throw r1
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.provider.BrowserContract.Settings.isSyncEnabled(android.content.Context):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.provider.BrowserContract.Settings.isSyncEnabled(android.content.Context):boolean");
         }
 
         public static void setSyncEnabled(Context context, boolean z) {

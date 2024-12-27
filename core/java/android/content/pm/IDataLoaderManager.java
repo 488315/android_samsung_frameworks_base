@@ -1,7 +1,5 @@
 package android.content.pm;
 
-import android.content.pm.IDataLoader;
-import android.content.pm.IDataLoaderStatusListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -12,7 +10,12 @@ import android.os.RemoteException;
 public interface IDataLoaderManager extends IInterface {
     public static final String DESCRIPTOR = "android.content.pm.IDataLoaderManager";
 
-    boolean bindToDataLoader(int i, DataLoaderParamsParcel dataLoaderParamsParcel, long j, IDataLoaderStatusListener iDataLoaderStatusListener) throws RemoteException;
+    boolean bindToDataLoader(
+            int i,
+            DataLoaderParamsParcel dataLoaderParamsParcel,
+            long j,
+            IDataLoaderStatusListener iDataLoaderStatusListener)
+            throws RemoteException;
 
     IDataLoader getDataLoader(int i) throws RemoteException;
 
@@ -20,7 +23,12 @@ public interface IDataLoaderManager extends IInterface {
 
     public static class Default implements IDataLoaderManager {
         @Override // android.content.pm.IDataLoaderManager
-        public boolean bindToDataLoader(int id, DataLoaderParamsParcel params, long bindDelayMs, IDataLoaderStatusListener listener) throws RemoteException {
+        public boolean bindToDataLoader(
+                int id,
+                DataLoaderParamsParcel params,
+                long bindDelayMs,
+                IDataLoaderStatusListener listener)
+                throws RemoteException {
             return false;
         }
 
@@ -30,8 +38,7 @@ public interface IDataLoaderManager extends IInterface {
         }
 
         @Override // android.content.pm.IDataLoaderManager
-        public void unbindFromDataLoader(int dataLoaderId) throws RemoteException {
-        }
+        public void unbindFromDataLoader(int dataLoaderId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -39,7 +46,7 @@ public interface IDataLoaderManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDataLoaderManager {
+    public abstract static class Stub extends Binder implements IDataLoaderManager {
         static final int TRANSACTION_bindToDataLoader = 1;
         static final int TRANSACTION_getDataLoader = 2;
         static final int TRANSACTION_unbindFromDataLoader = 3;
@@ -83,7 +90,8 @@ public interface IDataLoaderManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDataLoaderManager.DESCRIPTOR);
             }
@@ -94,9 +102,12 @@ public interface IDataLoaderManager extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    DataLoaderParamsParcel _arg1 = (DataLoaderParamsParcel) data.readTypedObject(DataLoaderParamsParcel.CREATOR);
+                    DataLoaderParamsParcel _arg1 =
+                            (DataLoaderParamsParcel)
+                                    data.readTypedObject(DataLoaderParamsParcel.CREATOR);
                     long _arg2 = data.readLong();
-                    IDataLoaderStatusListener _arg3 = IDataLoaderStatusListener.Stub.asInterface(data.readStrongBinder());
+                    IDataLoaderStatusListener _arg3 =
+                            IDataLoaderStatusListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result = bindToDataLoader(_arg0, _arg1, _arg2, _arg3);
                     reply.writeNoException();
@@ -137,7 +148,12 @@ public interface IDataLoaderManager extends IInterface {
             }
 
             @Override // android.content.pm.IDataLoaderManager
-            public boolean bindToDataLoader(int id, DataLoaderParamsParcel params, long bindDelayMs, IDataLoaderStatusListener listener) throws RemoteException {
+            public boolean bindToDataLoader(
+                    int id,
+                    DataLoaderParamsParcel params,
+                    long bindDelayMs,
+                    IDataLoaderStatusListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

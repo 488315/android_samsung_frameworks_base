@@ -29,17 +29,22 @@ public class RoSystemProperties {
         FACTORYTEST = SystemProperties.getInt("ro.factorytest", 0);
         CONTROL_PRIVAPP_PERMISSIONS = SystemProperties.get("ro.control_privapp_permissions");
         SUPPORT_ONE_HANDED_MODE = SystemProperties.getBoolean("ro.support_one_handed_mode", false);
-        CEC_AUDIO_DEVICE_FORWARD_VOLUME_KEYS_SYSTEM_AUDIO_MODE_OFF = HdmiProperties.forward_volume_keys_when_system_audio_mode_off().orElse(false).booleanValue();
+        CEC_AUDIO_DEVICE_FORWARD_VOLUME_KEYS_SYSTEM_AUDIO_MODE_OFF =
+                HdmiProperties.forward_volume_keys_when_system_audio_mode_off()
+                        .orElse(false)
+                        .booleanValue();
         CONFIG_AVOID_GFX_ACCEL = SystemProperties.getBoolean("ro.config.avoid_gfx_accel", false);
         CONFIG_LOW_RAM = SystemProperties.getBoolean("ro.config.low_ram", false);
         CONFIG_SMALL_BATTERY = SystemProperties.getBoolean("ro.config.small_battery", false);
-        MULTIUSER_HEADLESS_SYSTEM_USER = SystemProperties.getBoolean("ro.fw.mu.headless_system_user", false);
+        MULTIUSER_HEADLESS_SYSTEM_USER =
+                SystemProperties.getBoolean("ro.fw.mu.headless_system_user", false);
         CRYPTO_STATE = CryptoProperties.state().orElse(CryptoProperties.state_values.UNSUPPORTED);
         CRYPTO_TYPE = CryptoProperties.type().orElse(CryptoProperties.type_values.NONE);
         CRYPTO_ENCRYPTED = CRYPTO_STATE == CryptoProperties.state_values.ENCRYPTED;
         CRYPTO_FILE_ENCRYPTED = CRYPTO_TYPE == CryptoProperties.type_values.FILE;
         CONTROL_PRIVAPP_PERMISSIONS_LOG = "log".equalsIgnoreCase(CONTROL_PRIVAPP_PERMISSIONS);
-        CONTROL_PRIVAPP_PERMISSIONS_ENFORCE = "enforce".equalsIgnoreCase(CONTROL_PRIVAPP_PERMISSIONS);
+        CONTROL_PRIVAPP_PERMISSIONS_ENFORCE =
+                "enforce".equalsIgnoreCase(CONTROL_PRIVAPP_PERMISSIONS);
         if (!CONTROL_PRIVAPP_PERMISSIONS_LOG && !CONTROL_PRIVAPP_PERMISSIONS_ENFORCE) {
             z = true;
         }

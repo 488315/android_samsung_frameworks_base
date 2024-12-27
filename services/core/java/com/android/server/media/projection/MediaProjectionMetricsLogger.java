@@ -11,7 +11,10 @@ public final class MediaProjectionMetricsLogger {
     public final MediaProjectionSessionIdGenerator mSessionIdGenerator;
     public final MediaProjectionTimestampStore mTimestampStore;
 
-    public MediaProjectionMetricsLogger(FrameworkStatsLogWrapper frameworkStatsLogWrapper, MediaProjectionSessionIdGenerator mediaProjectionSessionIdGenerator, MediaProjectionTimestampStore mediaProjectionTimestampStore) {
+    public MediaProjectionMetricsLogger(
+            FrameworkStatsLogWrapper frameworkStatsLogWrapper,
+            MediaProjectionSessionIdGenerator mediaProjectionSessionIdGenerator,
+            MediaProjectionTimestampStore mediaProjectionTimestampStore) {
         this.mFrameworkStatsLogWrapper = frameworkStatsLogWrapper;
         this.mSessionIdGenerator = mediaProjectionSessionIdGenerator;
         this.mTimestampStore = mediaProjectionTimestampStore;
@@ -37,7 +40,8 @@ public final class MediaProjectionMetricsLogger {
     public final void writeStateChanged(int i, int i2, int i3, int i4, int i5, int i6) {
         int i7 = this.mPreviousState;
         this.mFrameworkStatsLogWrapper.getClass();
-        FrameworkStatsLog.write(FrameworkStatsLog.MEDIA_PROJECTION_STATE_CHANGED, i, i2, i7, i3, i4, i5, i6);
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.MEDIA_PROJECTION_STATE_CHANGED, i, i2, i7, i3, i4, i5, i6);
         this.mPreviousState = i2;
     }
 }

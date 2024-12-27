@@ -8,25 +8,28 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes.dex */
 public final class RuntimePermissionPresentationInfo implements Parcelable {
-    public static final Parcelable.Creator<RuntimePermissionPresentationInfo> CREATOR = new Parcelable.Creator<RuntimePermissionPresentationInfo>() { // from class: android.content.pm.permission.RuntimePermissionPresentationInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RuntimePermissionPresentationInfo createFromParcel(Parcel source) {
-            return new RuntimePermissionPresentationInfo(source);
-        }
+    public static final Parcelable.Creator<RuntimePermissionPresentationInfo> CREATOR =
+            new Parcelable.Creator<RuntimePermissionPresentationInfo>() { // from class:
+                // android.content.pm.permission.RuntimePermissionPresentationInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RuntimePermissionPresentationInfo createFromParcel(Parcel source) {
+                    return new RuntimePermissionPresentationInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RuntimePermissionPresentationInfo[] newArray(int size) {
-            return new RuntimePermissionPresentationInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RuntimePermissionPresentationInfo[] newArray(int size) {
+                    return new RuntimePermissionPresentationInfo[size];
+                }
+            };
     private static final int FLAG_GRANTED = 1;
     private static final int FLAG_STANDARD = 2;
     private final int mFlags;
     private final CharSequence mLabel;
 
-    public RuntimePermissionPresentationInfo(CharSequence label, boolean granted, boolean standard) {
+    public RuntimePermissionPresentationInfo(
+            CharSequence label, boolean granted, boolean standard) {
         this.mLabel = label;
         int flags = granted ? 0 | 1 : 0;
         this.mFlags = standard ? flags | 2 : flags;

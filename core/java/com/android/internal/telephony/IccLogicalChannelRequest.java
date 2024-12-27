@@ -4,27 +4,31 @@ import android.os.BadParcelableException;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes5.dex */
 public class IccLogicalChannelRequest implements Parcelable {
-    public static final Parcelable.Creator<IccLogicalChannelRequest> CREATOR = new Parcelable.Creator<IccLogicalChannelRequest>() { // from class: com.android.internal.telephony.IccLogicalChannelRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IccLogicalChannelRequest createFromParcel(Parcel _aidl_source) {
-            IccLogicalChannelRequest _aidl_out = new IccLogicalChannelRequest();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<IccLogicalChannelRequest> CREATOR =
+            new Parcelable.Creator<
+                    IccLogicalChannelRequest>() { // from class:
+                                                  // com.android.internal.telephony.IccLogicalChannelRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IccLogicalChannelRequest createFromParcel(Parcel _aidl_source) {
+                    IccLogicalChannelRequest _aidl_out = new IccLogicalChannelRequest();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IccLogicalChannelRequest[] newArray(int _aidl_size) {
-            return new IccLogicalChannelRequest[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IccLogicalChannelRequest[] newArray(int _aidl_size) {
+                    return new IccLogicalChannelRequest[_aidl_size];
+                }
+            };
     public String aid;
     public IBinder binder;
     public String callingPackage;
@@ -157,14 +161,33 @@ public class IccLogicalChannelRequest implements Parcelable {
             return false;
         }
         IccLogicalChannelRequest that = (IccLogicalChannelRequest) other;
-        if (Objects.deepEquals(Integer.valueOf(this.subId), Integer.valueOf(that.subId)) && Objects.deepEquals(Integer.valueOf(this.slotIndex), Integer.valueOf(that.slotIndex)) && Objects.deepEquals(Integer.valueOf(this.portIndex), Integer.valueOf(that.portIndex)) && Objects.deepEquals(this.callingPackage, that.callingPackage) && Objects.deepEquals(this.aid, that.aid) && Objects.deepEquals(Integer.valueOf(this.p2), Integer.valueOf(that.p2)) && Objects.deepEquals(Integer.valueOf(this.channel), Integer.valueOf(that.channel)) && Objects.deepEquals(this.binder, that.binder)) {
+        if (Objects.deepEquals(Integer.valueOf(this.subId), Integer.valueOf(that.subId))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.slotIndex), Integer.valueOf(that.slotIndex))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.portIndex), Integer.valueOf(that.portIndex))
+                && Objects.deepEquals(this.callingPackage, that.callingPackage)
+                && Objects.deepEquals(this.aid, that.aid)
+                && Objects.deepEquals(Integer.valueOf(this.p2), Integer.valueOf(that.p2))
+                && Objects.deepEquals(Integer.valueOf(this.channel), Integer.valueOf(that.channel))
+                && Objects.deepEquals(this.binder, that.binder)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.subId), Integer.valueOf(this.slotIndex), Integer.valueOf(this.portIndex), this.callingPackage, this.aid, Integer.valueOf(this.p2), Integer.valueOf(this.channel), this.binder).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.subId),
+                                Integer.valueOf(this.slotIndex),
+                                Integer.valueOf(this.portIndex),
+                                this.callingPackage,
+                                this.aid,
+                                Integer.valueOf(this.p2),
+                                Integer.valueOf(this.channel),
+                                this.binder)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

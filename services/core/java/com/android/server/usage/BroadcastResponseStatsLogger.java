@@ -3,9 +3,10 @@ package com.android.server.usage;
 import android.app.ActivityManager;
 import android.text.TextUtils;
 import android.util.TimeUtils;
+
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.internal.util.RingBuffer;
-import com.android.server.usage.BroadcastResponseStatsLogger;
+
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
 
@@ -36,7 +37,16 @@ public final class BroadcastResponseStatsLogger {
             String str = this.targetPackage;
             int i2 = this.targetUserId;
             long j = this.idForResponseEvent;
-            return TextUtils.formatSimple("broadcast:%s; srcUid=%d, tgtPkg=%s, tgtUsr=%d, id=%d, state=%s", new Object[]{TimeUtils.formatDuration(this.timestampMs), Integer.valueOf(i), str, Integer.valueOf(i2), Long.valueOf(j), ActivityManager.procStateToString(this.targetUidProcessState)});
+            return TextUtils.formatSimple(
+                    "broadcast:%s; srcUid=%d, tgtPkg=%s, tgtUsr=%d, id=%d, state=%s",
+                    new Object[] {
+                        TimeUtils.formatDuration(this.timestampMs),
+                        Integer.valueOf(i),
+                        str,
+                        Integer.valueOf(i2),
+                        Long.valueOf(j),
+                        ActivityManager.procStateToString(this.targetUidProcessState)
+                    });
         }
     }
 
@@ -46,8 +56,7 @@ public final class BroadcastResponseStatsLogger {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class LogBuffer extends RingBuffer {
-    }
+    public final class LogBuffer extends RingBuffer {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationEvent implements Data {
@@ -62,7 +71,8 @@ public final class BroadcastResponseStatsLogger {
         }
 
         public final String toString() {
-            return BroadcastResponseStatsLogger.getNotificationEventLog(this.type, this.userId, this.timestampMs, this.packageName);
+            return BroadcastResponseStatsLogger.getNotificationEventLog(
+                    this.type, this.userId, this.timestampMs, this.packageName);
         }
     }
 
@@ -72,58 +82,78 @@ public final class BroadcastResponseStatsLogger {
 
     public BroadcastResponseStatsLogger() {
         final int i = 0;
-        Supplier supplier = new Supplier() { // from class: com.android.server.usage.BroadcastResponseStatsLogger$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                switch (i) {
-                    case 0:
-                        return new BroadcastResponseStatsLogger.BroadcastEvent();
-                    default:
-                        return new BroadcastResponseStatsLogger.NotificationEvent();
-                }
-            }
-        };
+        Supplier supplier =
+                new Supplier() { // from class:
+                                 // com.android.server.usage.BroadcastResponseStatsLogger$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        switch (i) {
+                            case 0:
+                                return new BroadcastResponseStatsLogger.BroadcastEvent();
+                            default:
+                                return new BroadcastResponseStatsLogger.NotificationEvent();
+                        }
+                    }
+                };
         final int i2 = 0;
-        IntFunction intFunction = new IntFunction() { // from class: com.android.server.usage.BroadcastResponseStatsLogger$$ExternalSyntheticLambda1
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i3) {
-                switch (i2) {
-                    case 0:
-                        return new BroadcastResponseStatsLogger.BroadcastEvent[i3];
-                    default:
-                        return new BroadcastResponseStatsLogger.NotificationEvent[i3];
-                }
-            }
-        };
+        IntFunction intFunction =
+                new IntFunction() { // from class:
+                                    // com.android.server.usage.BroadcastResponseStatsLogger$$ExternalSyntheticLambda1
+                    @Override // java.util.function.IntFunction
+                    public final Object apply(int i3) {
+                        switch (i2) {
+                            case 0:
+                                return new BroadcastResponseStatsLogger.BroadcastEvent[i3];
+                            default:
+                                return new BroadcastResponseStatsLogger.NotificationEvent[i3];
+                        }
+                    }
+                };
         int i3 = MAX_LOG_SIZE;
         this.mBroadcastEventsBuffer = new LogBuffer(supplier, intFunction, i3);
         final int i4 = 1;
         final int i5 = 1;
-        this.mNotificationEventsBuffer = new LogBuffer(new Supplier() { // from class: com.android.server.usage.BroadcastResponseStatsLogger$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                switch (i4) {
-                    case 0:
-                        return new BroadcastResponseStatsLogger.BroadcastEvent();
-                    default:
-                        return new BroadcastResponseStatsLogger.NotificationEvent();
-                }
-            }
-        }, new IntFunction() { // from class: com.android.server.usage.BroadcastResponseStatsLogger$$ExternalSyntheticLambda1
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i32) {
-                switch (i5) {
-                    case 0:
-                        return new BroadcastResponseStatsLogger.BroadcastEvent[i32];
-                    default:
-                        return new BroadcastResponseStatsLogger.NotificationEvent[i32];
-                }
-            }
-        }, i3);
+        this.mNotificationEventsBuffer =
+                new LogBuffer(
+                        new Supplier() { // from class:
+                                         // com.android.server.usage.BroadcastResponseStatsLogger$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                switch (i4) {
+                                    case 0:
+                                        return new BroadcastResponseStatsLogger.BroadcastEvent();
+                                    default:
+                                        return new BroadcastResponseStatsLogger.NotificationEvent();
+                                }
+                            }
+                        },
+                        new IntFunction() { // from class:
+                                            // com.android.server.usage.BroadcastResponseStatsLogger$$ExternalSyntheticLambda1
+                            @Override // java.util.function.IntFunction
+                            public final Object apply(int i32) {
+                                switch (i5) {
+                                    case 0:
+                                        return new BroadcastResponseStatsLogger.BroadcastEvent[i32];
+                                    default:
+                                        return new BroadcastResponseStatsLogger.NotificationEvent
+                                                [i32];
+                                }
+                            }
+                        },
+                        i3);
     }
 
     public static String getNotificationEventLog(int i, int i2, long j, String str) {
-        return TextUtils.formatSimple("notification:%s; event=<%s>, pkg=%s, usr=%d", new Object[]{TimeUtils.formatDuration(j), i != 0 ? i != 1 ? i != 2 ? String.valueOf(i) : "cancelled" : "updated" : "posted", str, Integer.valueOf(i2)});
+        return TextUtils.formatSimple(
+                "notification:%s; event=<%s>, pkg=%s, usr=%d",
+                new Object[] {
+                    TimeUtils.formatDuration(j),
+                    i != 0
+                            ? i != 1 ? i != 2 ? String.valueOf(i) : "cancelled" : "updated"
+                            : "posted",
+                    str,
+                    Integer.valueOf(i2)
+                });
     }
 
     public final void dumpLogs(IndentingPrintWriter indentingPrintWriter) {

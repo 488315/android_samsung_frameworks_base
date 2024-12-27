@@ -22,28 +22,23 @@ public interface IUidObserver extends IInterface {
 
     public static class Default implements IUidObserver {
         @Override // android.app.IUidObserver
-        public void onUidGone(int uid, boolean disabled) throws RemoteException {
-        }
+        public void onUidGone(int uid, boolean disabled) throws RemoteException {}
 
         @Override // android.app.IUidObserver
-        public void onUidActive(int uid) throws RemoteException {
-        }
+        public void onUidActive(int uid) throws RemoteException {}
 
         @Override // android.app.IUidObserver
-        public void onUidIdle(int uid, boolean disabled) throws RemoteException {
-        }
+        public void onUidIdle(int uid, boolean disabled) throws RemoteException {}
 
         @Override // android.app.IUidObserver
-        public void onUidStateChanged(int uid, int procState, long procStateSeq, int capability) throws RemoteException {
-        }
+        public void onUidStateChanged(int uid, int procState, long procStateSeq, int capability)
+                throws RemoteException {}
 
         @Override // android.app.IUidObserver
-        public void onUidProcAdjChanged(int uid, int adj) throws RemoteException {
-        }
+        public void onUidProcAdjChanged(int uid, int adj) throws RemoteException {}
 
         @Override // android.app.IUidObserver
-        public void onUidCachedChanged(int uid, boolean cached) throws RemoteException {
-        }
+        public void onUidCachedChanged(int uid, boolean cached) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -51,7 +46,7 @@ public interface IUidObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUidObserver {
+    public abstract static class Stub extends Binder implements IUidObserver {
         public static final String DESCRIPTOR = "android.app.IUidObserver";
         static final int TRANSACTION_onUidActive = 2;
         static final int TRANSACTION_onUidCachedChanged = 6;
@@ -105,7 +100,8 @@ public interface IUidObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -211,7 +207,8 @@ public interface IUidObserver extends IInterface {
             }
 
             @Override // android.app.IUidObserver
-            public void onUidStateChanged(int uid, int procState, long procStateSeq, int capability) throws RemoteException {
+            public void onUidStateChanged(int uid, int procState, long procStateSeq, int capability)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

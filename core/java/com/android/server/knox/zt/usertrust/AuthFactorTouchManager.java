@@ -7,6 +7,7 @@ import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.MotionEvent;
+
 import com.samsung.android.knox.zt.usertrust.IAuthTouchEventListener;
 
 /* loaded from: classes5.dex */
@@ -15,7 +16,8 @@ public class AuthFactorTouchManager {
     private static AuthFactorTouchManager mAuthFactorTouchManager;
     private Context mContext;
     private PackageManager packageManager;
-    private final RemoteCallbackList<IAuthTouchEventListener> mAuthTouchEventListener = new RemoteCallbackList<>();
+    private final RemoteCallbackList<IAuthTouchEventListener> mAuthTouchEventListener =
+            new RemoteCallbackList<>();
     private boolean isServiceConnected = false;
     private boolean isEnableListenerRegistered = false;
 
@@ -31,8 +33,7 @@ public class AuthFactorTouchManager {
         return mAuthFactorTouchManager;
     }
 
-    private void connectService() {
-    }
+    private void connectService() {}
 
     public boolean isServiceConnected() {
         return this.isServiceConnected;

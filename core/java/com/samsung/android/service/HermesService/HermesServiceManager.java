@@ -4,9 +4,9 @@ import android.content.Context;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.util.Log;
+
 import com.samsung.android.sepunion.SemUnionManager;
 import com.samsung.android.sepunion.UnionConstants;
-import com.samsung.android.service.HermesService.IHermesService;
 
 /* loaded from: classes6.dex */
 public final class HermesServiceManager {
@@ -20,7 +20,8 @@ public final class HermesServiceManager {
     private IHermesService bindHermesService() {
         if (this.mService == null) {
             Log.i(TAG, "bindHermesService() is called");
-            SemUnionManager um = (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
+            SemUnionManager um =
+                    (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
             IBinder b = um.getSemSystemService(UnionConstants.SERVICE_HERMES);
             this.mService = IHermesService.Stub.asInterface(b);
         }

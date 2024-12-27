@@ -1,7 +1,6 @@
 package com.samsung.android.authenticator;
 
 import android.os.ParcelFileDescriptor;
-import com.samsung.android.authenticator.SemTrustedApplicationExecutor;
 
 /* loaded from: classes5.dex */
 final class HalService {
@@ -30,12 +29,20 @@ final class HalService {
         return reference;
     }
 
-    public static boolean load(SemTrustedApplicationExecutor.TrustedAppType type, ParcelFileDescriptor fd, long offset, long len) {
+    public static boolean load(
+            SemTrustedApplicationExecutor.TrustedAppType type,
+            ParcelFileDescriptor fd,
+            long offset,
+            long len) {
         XidlHalService service = (XidlHalService) checkNotNullState(getService());
         return service.load(type, fd, offset, len);
     }
 
-    public static boolean load(SemTrustedApplicationExecutor.TrustedAppAssetType type, ParcelFileDescriptor fd, long offset, long len) {
+    public static boolean load(
+            SemTrustedApplicationExecutor.TrustedAppAssetType type,
+            ParcelFileDescriptor fd,
+            long offset,
+            long len) {
         XidlHalService service = (XidlHalService) checkNotNullState(getService());
         return service.load(type, fd, offset, len);
     }
@@ -50,12 +57,14 @@ final class HalService {
         return service.unload(type);
     }
 
-    public static byte[] execute(SemTrustedApplicationExecutor.TrustedAppType type, byte[] command) {
+    public static byte[] execute(
+            SemTrustedApplicationExecutor.TrustedAppType type, byte[] command) {
         XidlHalService service = (XidlHalService) checkNotNullState(getService());
         return service.execute(type, command);
     }
 
-    public static byte[] execute(SemTrustedApplicationExecutor.TrustedAppAssetType type, byte[] command) {
+    public static byte[] execute(
+            SemTrustedApplicationExecutor.TrustedAppAssetType type, byte[] command) {
         XidlHalService service = (XidlHalService) checkNotNullState(getService());
         return service.execute(type, command);
     }

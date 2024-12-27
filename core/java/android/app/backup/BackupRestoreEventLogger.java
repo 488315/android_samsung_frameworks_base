@@ -6,7 +6,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.server.backup.Flags;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.nio.charset.StandardCharsets;
@@ -27,12 +29,10 @@ public final class BackupRestoreEventLogger {
     private final Map<String, DataTypeResult> mResults = new HashMap();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BackupRestoreDataType {
-    }
+    public @interface BackupRestoreDataType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BackupRestoreError {
-    }
+    public @interface BackupRestoreError {}
 
     public BackupRestoreEventLogger(int operationType) {
         this.mOperationType = operationType;
@@ -97,13 +97,17 @@ public final class BackupRestoreEventLogger {
         }
         dataTypeResult.mFailCount += count;
         if (error != null) {
-            dataTypeResult.mErrors.merge(error, Integer.valueOf(count), new BackupRestoreEventLogger$$ExternalSyntheticLambda0());
+            dataTypeResult.mErrors.merge(
+                    error,
+                    Integer.valueOf(count),
+                    new BackupRestoreEventLogger$$ExternalSyntheticLambda0());
         }
     }
 
     private void logMetaData(int operationType, String dataType, String metaData) {
         DataTypeResult dataTypeResult;
-        if (this.mHashDigest == null || (dataTypeResult = getDataTypeResult(operationType, dataType)) == null) {
+        if (this.mHashDigest == null
+                || (dataTypeResult = getDataTypeResult(operationType, dataType)) == null) {
             return;
         }
         dataTypeResult.mMetadataHash = getMetaDataHash(metaData);
@@ -111,7 +115,12 @@ public final class BackupRestoreEventLogger {
 
     private DataTypeResult getDataTypeResult(int operationType, String dataType) {
         if (operationType != this.mOperationType) {
-            Slog.d(TAG, "Operation type mismatch: logger created for " + this.mOperationType + ", trying to log for " + operationType);
+            Slog.d(
+                    TAG,
+                    "Operation type mismatch: logger created for "
+                            + this.mOperationType
+                            + ", trying to log for "
+                            + operationType);
             return null;
         }
         if (!this.mResults.containsKey(dataType)) {
@@ -136,33 +145,35 @@ public final class BackupRestoreEventLogger {
     }
 
     public static final class DataTypeResult implements Parcelable {
-        public static final Parcelable.Creator<DataTypeResult> CREATOR = new Parcelable.Creator<DataTypeResult>() { // from class: android.app.backup.BackupRestoreEventLogger.DataTypeResult.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public DataTypeResult createFromParcel(Parcel in) {
-                String dataType = in.readString();
-                int successCount = in.readInt();
-                int failCount = in.readInt();
-                ArrayMap arrayMap = new ArrayMap();
-                Bundle errorsBundle = in.readBundle(getClass().getClassLoader());
-                for (String key : errorsBundle.keySet()) {
-                    arrayMap.put(key, Integer.valueOf(errorsBundle.getInt(key)));
-                }
-                byte[] metadataHash = in.createByteArray();
-                DataTypeResult result = new DataTypeResult(dataType);
-                result.mSuccessCount = successCount;
-                result.mFailCount = failCount;
-                result.mErrors.putAll(arrayMap);
-                result.mMetadataHash = metadataHash;
-                return result;
-            }
+        public static final Parcelable.Creator<DataTypeResult> CREATOR =
+                new Parcelable.Creator<DataTypeResult>() { // from class:
+                    // android.app.backup.BackupRestoreEventLogger.DataTypeResult.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public DataTypeResult createFromParcel(Parcel in) {
+                        String dataType = in.readString();
+                        int successCount = in.readInt();
+                        int failCount = in.readInt();
+                        ArrayMap arrayMap = new ArrayMap();
+                        Bundle errorsBundle = in.readBundle(getClass().getClassLoader());
+                        for (String key : errorsBundle.keySet()) {
+                            arrayMap.put(key, Integer.valueOf(errorsBundle.getInt(key)));
+                        }
+                        byte[] metadataHash = in.createByteArray();
+                        DataTypeResult result = new DataTypeResult(dataType);
+                        result.mSuccessCount = successCount;
+                        result.mFailCount = failCount;
+                        result.mErrors.putAll(arrayMap);
+                        result.mMetadataHash = metadataHash;
+                        return result;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public DataTypeResult[] newArray(int size) {
-                return new DataTypeResult[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public DataTypeResult[] newArray(int size) {
+                        return new DataTypeResult[size];
+                    }
+                };
         private final String mDataType;
         private final Map<String, Integer> mErrors = new HashMap();
         private int mFailCount;

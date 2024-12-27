@@ -3,27 +3,30 @@ package android.media.soundtrigger;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class ModelParameterRange implements Parcelable {
-    public static final Parcelable.Creator<ModelParameterRange> CREATOR = new Parcelable.Creator<ModelParameterRange>() { // from class: android.media.soundtrigger.ModelParameterRange.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ModelParameterRange createFromParcel(Parcel _aidl_source) {
-            ModelParameterRange _aidl_out = new ModelParameterRange();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ModelParameterRange> CREATOR =
+            new Parcelable.Creator<ModelParameterRange>() { // from class:
+                // android.media.soundtrigger.ModelParameterRange.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ModelParameterRange createFromParcel(Parcel _aidl_source) {
+                    ModelParameterRange _aidl_out = new ModelParameterRange();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ModelParameterRange[] newArray(int _aidl_size) {
-            return new ModelParameterRange[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ModelParameterRange[] newArray(int _aidl_size) {
+                    return new ModelParameterRange[_aidl_size];
+                }
+            };
     public int minInclusive = 0;
     public int maxInclusive = 0;
 
@@ -95,14 +98,21 @@ public class ModelParameterRange implements Parcelable {
             return false;
         }
         ModelParameterRange that = (ModelParameterRange) other;
-        if (Objects.deepEquals(Integer.valueOf(this.minInclusive), Integer.valueOf(that.minInclusive)) && Objects.deepEquals(Integer.valueOf(this.maxInclusive), Integer.valueOf(that.maxInclusive))) {
+        if (Objects.deepEquals(
+                        Integer.valueOf(this.minInclusive), Integer.valueOf(that.minInclusive))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.maxInclusive), Integer.valueOf(that.maxInclusive))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.minInclusive), Integer.valueOf(this.maxInclusive)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.minInclusive),
+                                Integer.valueOf(this.maxInclusive))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

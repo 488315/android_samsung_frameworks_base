@@ -3,6 +3,7 @@ package android.content;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.util.DebugUtils;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
@@ -124,8 +125,7 @@ public class Loader<D> {
         onStartLoading();
     }
 
-    protected void onStartLoading() {
-    }
+    protected void onStartLoading() {}
 
     public boolean cancelLoad() {
         return onCancelLoad();
@@ -139,24 +139,21 @@ public class Loader<D> {
         onForceLoad();
     }
 
-    protected void onForceLoad() {
-    }
+    protected void onForceLoad() {}
 
     public void stopLoading() {
         this.mStarted = false;
         onStopLoading();
     }
 
-    protected void onStopLoading() {
-    }
+    protected void onStopLoading() {}
 
     public void abandon() {
         this.mAbandoned = true;
         onAbandon();
     }
 
-    protected void onAbandon() {
-    }
+    protected void onAbandon() {}
 
     public void reset() {
         onReset();
@@ -167,8 +164,7 @@ public class Loader<D> {
         this.mProcessingChange = false;
     }
 
-    protected void onReset() {
-    }
+    protected void onReset() {}
 
     public boolean takeContentChanged() {
         boolean res = this.mContentChanged;

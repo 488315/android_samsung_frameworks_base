@@ -14,6 +14,7 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,7 +34,13 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public Cursor query(AttributionSource attributionSource, Uri url, String[] projection, Bundle queryArgs, ICancellationSignal cancellationSignal) throws RemoteException {
+    public Cursor query(
+            AttributionSource attributionSource,
+            Uri url,
+            String[] projection,
+            Bundle queryArgs,
+            ICancellationSignal cancellationSignal)
+            throws RemoteException {
         BulkCursorToCursorAdaptor adaptor = new BulkCursorToCursorAdaptor();
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
@@ -52,12 +59,14 @@ final class ContentProviderProxy implements IContentProvider {
                 }
                 data.writeBundle(queryArgs);
                 data.writeStrongBinder(adaptor.getObserver().asBinder());
-                data.writeStrongBinder(cancellationSignal != null ? cancellationSignal.asBinder() : null);
+                data.writeStrongBinder(
+                        cancellationSignal != null ? cancellationSignal.asBinder() : null);
                 this.mRemote.transact(1, data, reply, 0);
                 DatabaseUtils.readExceptionFromParcel(reply);
                 if (reply.readInt() != 0) {
                     BulkCursorDescriptor d = BulkCursorDescriptor.CREATOR.createFromParcel(reply);
-                    Binder.copyAllowBlocking(this.mRemote, d.cursor != null ? d.cursor.asBinder() : null);
+                    Binder.copyAllowBlocking(
+                            this.mRemote, d.cursor != null ? d.cursor.asBinder() : null);
                     adaptor.initialize(d);
                 } else {
                     adaptor.close();
@@ -96,7 +105,8 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public void getTypeAsync(AttributionSource attributionSource, Uri uri, RemoteCallback callback) throws RemoteException {
+    public void getTypeAsync(AttributionSource attributionSource, Uri uri, RemoteCallback callback)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         try {
             data.writeInterfaceToken(IContentProvider.descriptor);
@@ -123,7 +133,9 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public Uri insert(AttributionSource attributionSource, Uri url, ContentValues values, Bundle extras) throws RemoteException {
+    public Uri insert(
+            AttributionSource attributionSource, Uri url, ContentValues values, Bundle extras)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {
@@ -143,7 +155,8 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public int bulkInsert(AttributionSource attributionSource, Uri url, ContentValues[] values) throws RemoteException {
+    public int bulkInsert(AttributionSource attributionSource, Uri url, ContentValues[] values)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {
@@ -162,7 +175,11 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public ContentProviderResult[] applyBatch(AttributionSource attributionSource, String authority, ArrayList<ContentProviderOperation> operations) throws RemoteException, OperationApplicationException {
+    public ContentProviderResult[] applyBatch(
+            AttributionSource attributionSource,
+            String authority,
+            ArrayList<ContentProviderOperation> operations)
+            throws RemoteException, OperationApplicationException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {
@@ -177,7 +194,8 @@ final class ContentProviderProxy implements IContentProvider {
             }
             this.mRemote.transact(20, data, reply, 0);
             DatabaseUtils.readExceptionWithOperationApplicationExceptionFromParcel(reply);
-            ContentProviderResult[] results = (ContentProviderResult[]) reply.createTypedArray(ContentProviderResult.CREATOR);
+            ContentProviderResult[] results =
+                    (ContentProviderResult[]) reply.createTypedArray(ContentProviderResult.CREATOR);
             return results;
         } finally {
             data.recycle();
@@ -186,7 +204,8 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public int delete(AttributionSource attributionSource, Uri url, Bundle extras) throws RemoteException {
+    public int delete(AttributionSource attributionSource, Uri url, Bundle extras)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {
@@ -205,7 +224,9 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public int update(AttributionSource attributionSource, Uri url, ContentValues values, Bundle extras) throws RemoteException {
+    public int update(
+            AttributionSource attributionSource, Uri url, ContentValues values, Bundle extras)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {
@@ -225,7 +246,9 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public ParcelFileDescriptor openFile(AttributionSource attributionSource, Uri url, String mode, ICancellationSignal signal) throws RemoteException, FileNotFoundException {
+    public ParcelFileDescriptor openFile(
+            AttributionSource attributionSource, Uri url, String mode, ICancellationSignal signal)
+            throws RemoteException, FileNotFoundException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {
@@ -249,7 +272,9 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public AssetFileDescriptor openAssetFile(AttributionSource attributionSource, Uri url, String mode, ICancellationSignal signal) throws RemoteException, FileNotFoundException {
+    public AssetFileDescriptor openAssetFile(
+            AttributionSource attributionSource, Uri url, String mode, ICancellationSignal signal)
+            throws RemoteException, FileNotFoundException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {
@@ -273,7 +298,13 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public Bundle call(AttributionSource attributionSource, String authority, String method, String request, Bundle extras) throws RemoteException {
+    public Bundle call(
+            AttributionSource attributionSource,
+            String authority,
+            String method,
+            String request,
+            Bundle extras)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {
@@ -294,7 +325,9 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public String[] getStreamTypes(AttributionSource attributionSource, Uri url, String mimeTypeFilter) throws RemoteException {
+    public String[] getStreamTypes(
+            AttributionSource attributionSource, Uri url, String mimeTypeFilter)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {
@@ -313,7 +346,13 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public AssetFileDescriptor openTypedAssetFile(AttributionSource attributionSource, Uri url, String mimeType, Bundle opts, ICancellationSignal signal) throws RemoteException, FileNotFoundException {
+    public AssetFileDescriptor openTypedAssetFile(
+            AttributionSource attributionSource,
+            Uri url,
+            String mimeType,
+            Bundle opts,
+            ICancellationSignal signal)
+            throws RemoteException, FileNotFoundException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {
@@ -345,7 +384,8 @@ final class ContentProviderProxy implements IContentProvider {
             data.writeInterfaceToken(IContentProvider.descriptor);
             this.mRemote.transact(24, data, reply, 0);
             DatabaseUtils.readExceptionFromParcel(reply);
-            ICancellationSignal cancellationSignal = ICancellationSignal.Stub.asInterface(reply.readStrongBinder());
+            ICancellationSignal cancellationSignal =
+                    ICancellationSignal.Stub.asInterface(reply.readStrongBinder());
             return cancellationSignal;
         } finally {
             data.recycle();
@@ -372,7 +412,9 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public void canonicalizeAsync(AttributionSource attributionSource, Uri uri, RemoteCallback callback) throws RemoteException {
+    public void canonicalizeAsync(
+            AttributionSource attributionSource, Uri uri, RemoteCallback callback)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         try {
             data.writeInterfaceToken(IContentProvider.descriptor);
@@ -404,7 +446,9 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public void uncanonicalizeAsync(AttributionSource attributionSource, Uri uri, RemoteCallback callback) throws RemoteException {
+    public void uncanonicalizeAsync(
+            AttributionSource attributionSource, Uri uri, RemoteCallback callback)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         try {
             data.writeInterfaceToken(IContentProvider.descriptor);
@@ -418,7 +462,9 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public boolean refresh(AttributionSource attributionSource, Uri url, Bundle extras, ICancellationSignal signal) throws RemoteException {
+    public boolean refresh(
+            AttributionSource attributionSource, Uri url, Bundle extras, ICancellationSignal signal)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {
@@ -438,7 +484,9 @@ final class ContentProviderProxy implements IContentProvider {
     }
 
     @Override // android.content.IContentProvider
-    public int checkUriPermission(AttributionSource attributionSource, Uri url, int uid, int modeFlags) throws RemoteException {
+    public int checkUriPermission(
+            AttributionSource attributionSource, Uri url, int uid, int modeFlags)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         try {

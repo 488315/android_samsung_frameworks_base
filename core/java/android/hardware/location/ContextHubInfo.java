@@ -7,24 +7,27 @@ import android.media.MediaMetrics;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.proto.ProtoOutputStream;
+
 import java.util.Arrays;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public class ContextHubInfo implements Parcelable {
-    public static final Parcelable.Creator<ContextHubInfo> CREATOR = new Parcelable.Creator<ContextHubInfo>() { // from class: android.hardware.location.ContextHubInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContextHubInfo createFromParcel(Parcel in) {
-            return new ContextHubInfo(in);
-        }
+    public static final Parcelable.Creator<ContextHubInfo> CREATOR =
+            new Parcelable.Creator<
+                    ContextHubInfo>() { // from class: android.hardware.location.ContextHubInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContextHubInfo createFromParcel(Parcel in) {
+                    return new ContextHubInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContextHubInfo[] newArray(int size) {
-            return new ContextHubInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContextHubInfo[] newArray(int size) {
+                    return new ContextHubInfo[size];
+                }
+            };
     private byte mChreApiMajorVersion;
     private byte mChreApiMinorVersion;
     private short mChrePatchVersion;
@@ -44,8 +47,7 @@ public class ContextHubInfo implements Parcelable {
     private int mToolchainVersion;
     private String mVendor;
 
-    public ContextHubInfo() {
-    }
+    public ContextHubInfo() {}
 
     public ContextHubInfo(ContextHub contextHub) {
         this.mId = contextHub.hubId;
@@ -80,7 +82,8 @@ public class ContextHubInfo implements Parcelable {
         this.mSleepPowerDrawMw = 0.0f;
         this.mPeakPowerDrawMw = 0.0f;
         this.mMaxPacketLengthBytes = contextHub.maxSupportedMessageLengthBytes;
-        this.mSupportsReliableMessages = Flags.reliableMessageImplementation() && contextHub.supportsReliableMessages;
+        this.mSupportsReliableMessages =
+                Flags.reliableMessageImplementation() && contextHub.supportsReliableMessages;
         this.mChrePlatformId = contextHub.chrePlatformId;
         this.mChreApiMajorVersion = contextHub.chreApiMajorVersion;
         this.mChreApiMinorVersion = contextHub.chreApiMinorVersion;
@@ -118,7 +121,9 @@ public class ContextHubInfo implements Parcelable {
     }
 
     public int getStaticSwVersion() {
-        return (Byte.toUnsignedInt(this.mChreApiMajorVersion) << 24) | (Byte.toUnsignedInt(this.mChreApiMinorVersion) << 16) | Short.toUnsignedInt(this.mChrePatchVersion);
+        return (Byte.toUnsignedInt(this.mChreApiMajorVersion) << 24)
+                | (Byte.toUnsignedInt(this.mChreApiMinorVersion) << 16)
+                | Short.toUnsignedInt(this.mChrePatchVersion);
     }
 
     public int getToolchainVersion() {
@@ -167,7 +172,45 @@ public class ContextHubInfo implements Parcelable {
 
     public String toString() {
         String retVal = "ID/handle : " + this.mId;
-        return (((((((((((retVal + ", Name : " + this.mName) + "\n\tVendor : " + this.mVendor) + ", Toolchain : " + this.mToolchain) + ", Toolchain version: 0x" + Integer.toHexString(this.mToolchainVersion)) + "\n\tPlatformVersion : 0x" + Integer.toHexString(this.mPlatformVersion)) + ", SwVersion : " + Byte.toUnsignedInt(this.mChreApiMajorVersion) + MediaMetrics.SEPARATOR + Byte.toUnsignedInt(this.mChreApiMinorVersion) + MediaMetrics.SEPARATOR + Short.toUnsignedInt(this.mChrePatchVersion)) + ", CHRE platform ID: 0x" + Long.toHexString(this.mChrePlatformId)) + "\n\tPeakMips : " + this.mPeakMips) + ", StoppedPowerDraw : " + this.mStoppedPowerDrawMw + " mW") + ", PeakPowerDraw : " + this.mPeakPowerDrawMw + " mW") + ", MaxPacketLength : " + this.mMaxPacketLengthBytes + " Bytes") + ", SupportsReliableMessage : " + this.mSupportsReliableMessages;
+        return (((((((((((retVal + ", Name : " + this.mName) + "\n\tVendor : " + this.mVendor)
+                                                                                        + ", Toolchain"
+                                                                                        + " : "
+                                                                                        + this
+                                                                                                .mToolchain)
+                                                                                + ", Toolchain"
+                                                                                + " version: 0x"
+                                                                                + Integer
+                                                                                        .toHexString(
+                                                                                                this
+                                                                                                        .mToolchainVersion))
+                                                                        + "\n\tPlatformVersion : 0x"
+                                                                        + Integer.toHexString(
+                                                                                this
+                                                                                        .mPlatformVersion))
+                                                                + ", SwVersion : "
+                                                                + Byte.toUnsignedInt(
+                                                                        this.mChreApiMajorVersion)
+                                                                + MediaMetrics.SEPARATOR
+                                                                + Byte.toUnsignedInt(
+                                                                        this.mChreApiMinorVersion)
+                                                                + MediaMetrics.SEPARATOR
+                                                                + Short.toUnsignedInt(
+                                                                        this.mChrePatchVersion))
+                                                        + ", CHRE platform ID: 0x"
+                                                        + Long.toHexString(this.mChrePlatformId))
+                                                + "\n\tPeakMips : "
+                                                + this.mPeakMips)
+                                        + ", StoppedPowerDraw : "
+                                        + this.mStoppedPowerDrawMw
+                                        + " mW")
+                                + ", PeakPowerDraw : "
+                                + this.mPeakPowerDrawMw
+                                + " mW")
+                        + ", MaxPacketLength : "
+                        + this.mMaxPacketLengthBytes
+                        + " Bytes")
+                + ", SupportsReliableMessage : "
+                + this.mSupportsReliableMessages;
     }
 
     public void dump(ProtoOutputStream proto) {
@@ -195,7 +238,24 @@ public class ContextHubInfo implements Parcelable {
             return false;
         }
         ContextHubInfo other = (ContextHubInfo) object;
-        boolean isEqual = other.getId() == this.mId && other.getName().equals(this.mName) && other.getVendor().equals(this.mVendor) && other.getToolchain().equals(this.mToolchain) && other.getToolchainVersion() == this.mToolchainVersion && other.getStaticSwVersion() == getStaticSwVersion() && other.getChrePlatformId() == this.mChrePlatformId && other.getPeakMips() == this.mPeakMips && other.getStoppedPowerDrawMw() == this.mStoppedPowerDrawMw && other.getSleepPowerDrawMw() == this.mSleepPowerDrawMw && other.getPeakPowerDrawMw() == this.mPeakPowerDrawMw && other.getMaxPacketLengthBytes() == this.mMaxPacketLengthBytes && (!Flags.reliableMessage() || other.supportsReliableMessages() == this.mSupportsReliableMessages) && Arrays.equals(other.getSupportedSensors(), this.mSupportedSensors) && Arrays.equals(other.getMemoryRegions(), this.mMemoryRegions);
+        boolean isEqual =
+                other.getId() == this.mId
+                        && other.getName().equals(this.mName)
+                        && other.getVendor().equals(this.mVendor)
+                        && other.getToolchain().equals(this.mToolchain)
+                        && other.getToolchainVersion() == this.mToolchainVersion
+                        && other.getStaticSwVersion() == getStaticSwVersion()
+                        && other.getChrePlatformId() == this.mChrePlatformId
+                        && other.getPeakMips() == this.mPeakMips
+                        && other.getStoppedPowerDrawMw() == this.mStoppedPowerDrawMw
+                        && other.getSleepPowerDrawMw() == this.mSleepPowerDrawMw
+                        && other.getPeakPowerDrawMw() == this.mPeakPowerDrawMw
+                        && other.getMaxPacketLengthBytes() == this.mMaxPacketLengthBytes
+                        && (!Flags.reliableMessage()
+                                || other.supportsReliableMessages()
+                                        == this.mSupportsReliableMessages)
+                        && Arrays.equals(other.getSupportedSensors(), this.mSupportedSensors)
+                        && Arrays.equals(other.getMemoryRegions(), this.mMemoryRegions);
         return isEqual;
     }
 

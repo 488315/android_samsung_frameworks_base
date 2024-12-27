@@ -3,24 +3,28 @@ package vendor.samsung.hardware.radio.satellite;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehSatSimAuthRespData implements Parcelable {
-    public static final Parcelable.Creator<SehSatSimAuthRespData> CREATOR = new Parcelable.Creator<SehSatSimAuthRespData>() { // from class: vendor.samsung.hardware.radio.satellite.SehSatSimAuthRespData.1
-        @Override // android.os.Parcelable.Creator
-        public SehSatSimAuthRespData createFromParcel(Parcel _aidl_source) {
-            SehSatSimAuthRespData _aidl_out = new SehSatSimAuthRespData();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehSatSimAuthRespData> CREATOR =
+            new Parcelable.Creator<
+                    SehSatSimAuthRespData>() { // from class:
+                                               // vendor.samsung.hardware.radio.satellite.SehSatSimAuthRespData.1
+                @Override // android.os.Parcelable.Creator
+                public SehSatSimAuthRespData createFromParcel(Parcel _aidl_source) {
+                    SehSatSimAuthRespData _aidl_out = new SehSatSimAuthRespData();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehSatSimAuthRespData[] newArray(int _aidl_size) {
-            return new SehSatSimAuthRespData[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehSatSimAuthRespData[] newArray(int _aidl_size) {
+                    return new SehSatSimAuthRespData[_aidl_size];
+                }
+            };
     public String auts;
     public String ck;
     public String ik;

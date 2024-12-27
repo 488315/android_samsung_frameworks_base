@@ -87,7 +87,9 @@ public class StyleSpan extends MetricAffectingSpan implements ParcelableSpan {
         } else {
             tf = Typeface.create(old, want);
         }
-        if ((style & 1) != 0 && fontWeightAdjustment != 0 && fontWeightAdjustment != Integer.MAX_VALUE) {
+        if ((style & 1) != 0
+                && fontWeightAdjustment != 0
+                && fontWeightAdjustment != Integer.MAX_VALUE) {
             int newWeight = Math.min(Math.max(tf.getWeight() + fontWeightAdjustment, 1), 1000);
             boolean italic = (want & 2) != 0;
             tf = Typeface.create(tf, newWeight, italic);
@@ -104,6 +106,10 @@ public class StyleSpan extends MetricAffectingSpan implements ParcelableSpan {
     }
 
     public String toString() {
-        return "StyleSpan{style=" + getStyle() + ", fontWeightAdjustment=" + getFontWeightAdjustment() + '}';
+        return "StyleSpan{style="
+                + getStyle()
+                + ", fontWeightAdjustment="
+                + getFontWeightAdjustment()
+                + '}';
     }
 }

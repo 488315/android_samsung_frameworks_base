@@ -21,24 +21,23 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.UserHandle;
+
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
 import com.android.server.VcnManagementService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
-import com.android.server.desktopmode.ModeChanger;
-import com.android.server.desktopmode.SettingsHelper;
-import com.android.server.desktopmode.StateManager;
-import com.android.server.desktopmode.UiManager;
 import com.android.server.wm.ActivityTaskManagerInternal;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.WindowManagerInternal;
+
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.DesktopModeUiConstants;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.multiwindow.MultiWindowManager;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -102,7 +101,8 @@ public final class DualModeChanger extends ModeChanger {
                     if (DesktopModeFeature.DEBUG) {
                         Log.d("[DMS]DualModeChanger", "onClickButtonPositive()");
                     }
-                    DesktopModeSettings.setSettings(this.this$0.mResolver, "stabilizer_mode_consent", true);
+                    DesktopModeSettings.setSettings(
+                            this.this$0.mResolver, "stabilizer_mode_consent", true);
                     break;
             }
         }
@@ -123,7 +123,8 @@ public final class DualModeChanger extends ModeChanger {
                     if (DesktopModeFeature.DEBUG) {
                         Log.d("[DMS]DualModeChanger", "mStateListener unregistered");
                     }
-                    ((StateManager) dualModeChanger.mStateManager).unregisterListener(dualModeChanger.mStateListener);
+                    ((StateManager) dualModeChanger.mStateManager)
+                            .unregisterListener(dualModeChanger.mStateListener);
                     dualModeChanger.mStateListener = null;
                     return;
                 }
@@ -142,7 +143,9 @@ public final class DualModeChanger extends ModeChanger {
                 dualModeChanger.mLoadingScreenAnimationComplete = true;
                 if (!dualModeChanger.hasPackageTask(state.mDesktopDisplayId)) {
                     if (z) {
-                        Log.d("[DMS]DualModeChanger", "DeX Home task does not exist in DeX display");
+                        Log.d(
+                                "[DMS]DualModeChanger",
+                                "DeX Home task does not exist in DeX display");
                     }
                     int i3 = dualModeChanger.mDesktopDisplayId;
                     if (i3 != -1) {
@@ -152,7 +155,12 @@ public final class DualModeChanger extends ModeChanger {
             }
             if (state.mDesktopModeState.state != 50) {
                 if (DesktopModeFeature.DEBUG) {
-                    StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("Failed to stop loading screen. onDesktopDisplayConfigured() is not called! enter=", ", desktopModeState=", booleanValue);
+                    StringBuilder m =
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    "Failed to stop loading screen. onDesktopDisplayConfigured() is"
+                                        + " not called! enter=",
+                                    ", desktopModeState=",
+                                    booleanValue);
                     m.append(state.mDesktopModeState);
                     Log.w("[DMS]DualModeChanger", m.toString());
                     return;
@@ -161,10 +169,13 @@ public final class DualModeChanger extends ModeChanger {
             }
             boolean z2 = DesktopModeFeature.DEBUG;
             if (z2) {
-                Log.i("[DMS]DualModeChanger", "Stopping loading screen... enter=" + booleanValue + " state=" + state);
+                Log.i(
+                        "[DMS]DualModeChanger",
+                        "Stopping loading screen... enter=" + booleanValue + " state=" + state);
             }
             if (dualModeChanger.mTopTaskIdValid && booleanValue) {
-                dualModeChanger.bringTaskToForeground(dualModeChanger.mTopTaskId, dualModeChanger.mDesktopDisplayId, 5);
+                dualModeChanger.bringTaskToForeground(
+                        dualModeChanger.mTopTaskId, dualModeChanger.mDesktopDisplayId, 5);
                 dualModeChanger.mTopTaskIdValid = false;
             }
             UiManager uiManager = dualModeChanger.mUiManager;
@@ -172,7 +183,11 @@ public final class DualModeChanger extends ModeChanger {
             ((StateManager) dualModeChanger.mStateManager).setModeChangeLocked(false);
             dualModeChanger.setDesktopModeState(booleanValue ? 4 : 2, 0);
             if (z2) {
-                DesktopModeService$$ExternalSyntheticOutline0.m("notifyDualStopLoadingScreen(enter=", ")", "[DMS]StateManager", booleanValue);
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        "notifyDualStopLoadingScreen(enter=",
+                        ")",
+                        "[DMS]StateManager",
+                        booleanValue);
             }
             Iterator it = stateManager.mStateListeners.iterator();
             while (it.hasNext()) {
@@ -184,12 +199,20 @@ public final class DualModeChanger extends ModeChanger {
                     dualModeChanger.mUiManager.showDialog(state.mDesktopDisplayId, 2, null);
                     dualModeChanger.mDisplayUnsupportDialogShown = true;
                 }
-                if (dualModeChanger.mDesktopDisplayContext != null && DesktopModeSettings.getSettingsAsUser(dualModeChanger.mResolver, "auto_open_last_app", false, DesktopModeSettings.sCurrentUserId)) {
+                if (dualModeChanger.mDesktopDisplayContext != null
+                        && DesktopModeSettings.getSettingsAsUser(
+                                dualModeChanger.mResolver,
+                                "auto_open_last_app",
+                                false,
+                                DesktopModeSettings.sCurrentUserId)) {
                     Context context = dualModeChanger.mDesktopDisplayContext;
                     List list = ToastManager.sToasts;
                     ToastManager.showToast(context, context.getString(R.string.hardware), 1);
                 }
-                dualModeChanger.showDexMirroringTipsNotification(dualModeChanger.mContext.getString(R.string.heavy_weight_notification_detail), dualModeChanger.mContext.getString(R.string.heavy_weight_notification));
+                dualModeChanger.showDexMirroringTipsNotification(
+                        dualModeChanger.mContext.getString(
+                                R.string.heavy_weight_notification_detail),
+                        dualModeChanger.mContext.getString(R.string.heavy_weight_notification));
                 if (state.isWirelessDexConnected()) {
                     uiManager.showNotification(204);
                 }
@@ -208,8 +231,7 @@ public final class DualModeChanger extends ModeChanger {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModeChangeReceiver extends BroadcastReceiver {
-        public ModeChangeReceiver() {
-        }
+        public ModeChangeReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -218,7 +240,8 @@ public final class DualModeChanger extends ModeChanger {
             if (z) {
                 Log.d("[DMS]DualModeChanger", "onReceive(), action=" + action);
             }
-            StateManager.InternalState state = ((StateManager) DualModeChanger.this.mStateManager).getState();
+            StateManager.InternalState state =
+                    ((StateManager) DualModeChanger.this.mStateManager).getState();
             if ("com.samsung.android.intent.action.WALLPAPER_ENGINE_SHOWN".equals(action)) {
                 DualModeChanger dualModeChanger = DualModeChanger.this;
                 if (dualModeChanger.mWallpaperShown) {
@@ -232,12 +255,15 @@ public final class DualModeChanger extends ModeChanger {
                 long freeMemory = Process.getFreeMemory();
                 if (freeMemory < 419430400) {
                     if (z) {
-                        Log.w("[DMS]DualModeChanger", "Low memory warning: " + (freeMemory / 1048576) + "MB");
+                        Log.w(
+                                "[DMS]DualModeChanger",
+                                "Low memory warning: " + (freeMemory / 1048576) + "MB");
                     }
                     Context context2 = DualModeChanger.this.mDesktopDisplayContext;
                     if (context2 != null) {
                         List list = ToastManager.sToasts;
-                        ToastManager.showToast(context2, context2.getString(R.string.httpErrorFileNotFound), 1);
+                        ToastManager.showToast(
+                                context2, context2.getString(R.string.httpErrorFileNotFound), 1);
                         return;
                     }
                     return;
@@ -247,58 +273,97 @@ public final class DualModeChanger extends ModeChanger {
             if ("com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_PRESSED".equals(action)) {
                 int intExtra = intent.getIntExtra("ACTION_CLICK_DISPLAYID", 0);
                 if (z) {
-                    DesktopModeService$$ExternalSyntheticOutline0.m(intExtra, "SPen notification clicked, displayID=", "[DMS]DualModeChanger");
+                    DesktopModeService$$ExternalSyntheticOutline0.m(
+                            intExtra,
+                            "SPen notification clicked, displayID=",
+                            "[DMS]DualModeChanger");
                 }
                 DualModeChanger.m408$$Nest$mcollapsePanelsToDisplay(DualModeChanger.this, intExtra);
                 DualModeChanger.this.mUiManager.showDialog(intExtra, 6, null);
                 return;
             }
-            if ("com.samsung.android.desktopmode.action.TOUCHPAD_NOTIFICATION_PRESSED".equals(action)) {
+            if ("com.samsung.android.desktopmode.action.TOUCHPAD_NOTIFICATION_PRESSED"
+                    .equals(action)) {
                 int intExtra2 = intent.getIntExtra("CLICK_DISPLAYID", 0);
-                DualModeChanger.m408$$Nest$mcollapsePanelsToDisplay(DualModeChanger.this, intExtra2);
+                DualModeChanger.m408$$Nest$mcollapsePanelsToDisplay(
+                        DualModeChanger.this, intExtra2);
                 if (z) {
-                    DesktopModeService$$ExternalSyntheticOutline0.m(intExtra2, "Touchpad notification clicked, displayID=", "[DMS]DualModeChanger");
+                    DesktopModeService$$ExternalSyntheticOutline0.m(
+                            intExtra2,
+                            "Touchpad notification clicked, displayID=",
+                            "[DMS]DualModeChanger");
                 }
                 DualModeChanger.this.mUiManager.showDialog(intExtra2, 1, null);
                 return;
             }
-            if ("com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_CHANGE_MODE_PRESSED".equals(action)) {
+            if ("com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_CHANGE_MODE_PRESSED"
+                    .equals(action)) {
                 int intExtra3 = intent.getIntExtra("ACTION_CLICK_DISPLAYID", 0);
                 if (z) {
-                    DesktopModeService$$ExternalSyntheticOutline0.m(intExtra3, "SPen notification change mode clicked, displayID=", "[DMS]DualModeChanger");
+                    DesktopModeService$$ExternalSyntheticOutline0.m(
+                            intExtra3,
+                            "SPen notification change mode clicked, displayID=",
+                            "[DMS]DualModeChanger");
                 }
-                DualModeChanger.m408$$Nest$mcollapsePanelsToDisplay(DualModeChanger.this, intExtra3);
+                DualModeChanger.m408$$Nest$mcollapsePanelsToDisplay(
+                        DualModeChanger.this, intExtra3);
                 DualModeChanger dualModeChanger2 = DualModeChanger.this;
                 dualModeChanger2.getClass();
-                Intent flags = new Intent().setComponent(new ComponentName("com.sec.android.app.desktoplauncher", "com.android.launcher3.settings.SPenInputModePreferenceActivity")).setFlags(337641472);
+                Intent flags =
+                        new Intent()
+                                .setComponent(
+                                        new ComponentName(
+                                                "com.sec.android.app.desktoplauncher",
+                                                "com.android.launcher3.settings.SPenInputModePreferenceActivity"))
+                                .setFlags(337641472);
                 if (state.mDesktopDisplayId != -1) {
                     ActivityOptions makeBasic = ActivityOptions.makeBasic();
                     makeBasic.setLaunchDisplayId(state.mDesktopDisplayId);
-                    dualModeChanger2.mContext.startActivityAsUser(flags, makeBasic.toBundle(), UserHandle.of(state.mCurrentUserId));
+                    dualModeChanger2.mContext.startActivityAsUser(
+                            flags, makeBasic.toBundle(), UserHandle.of(state.mCurrentUserId));
                     return;
                 }
                 return;
             }
-            if (!"com.samsung.android.desktopmode.action.TOUCHPAD_AVAILABLE_NOTIFICATION_PRESSED".equals(action)) {
-                if ("android.intent.action.ACTION_SHUTDOWN".equals(action) && getSendingUserId() == -1 && state.mDesktopDisplayId != -1) {
-                    DualModeChanger.this.mMultiResolutionManager.setDualDisplayResolutionDensity(false);
+            if (!"com.samsung.android.desktopmode.action.TOUCHPAD_AVAILABLE_NOTIFICATION_PRESSED"
+                    .equals(action)) {
+                if ("android.intent.action.ACTION_SHUTDOWN".equals(action)
+                        && getSendingUserId() == -1
+                        && state.mDesktopDisplayId != -1) {
+                    DualModeChanger.this.mMultiResolutionManager.setDualDisplayResolutionDensity(
+                            false);
                     return;
                 }
                 return;
             }
-            DualModeChanger.m408$$Nest$mcollapsePanelsToDisplay(DualModeChanger.this, intent.getIntExtra("CLICK_DISPLAYID", 0));
+            DualModeChanger.m408$$Nest$mcollapsePanelsToDisplay(
+                    DualModeChanger.this, intent.getIntExtra("CLICK_DISPLAYID", 0));
             DualModeChanger dualModeChanger3 = DualModeChanger.this;
             TouchpadManager touchpadManager = dualModeChanger3.mTouchpadManager;
             dualModeChanger3.mUiManager.startActivity(0, 300, touchpadManager.mInternalUiCallback);
             dualModeChanger3.mActivityTaskManagerInternal.minimizeAllTasks(0, true);
-            if (dualModeChanger3.mKeyguardManager.isKeyguardLocked() && dualModeChanger3.mKeyguardManager.isKeyguardSecure() && !state.mIsNavBarGestureEnabled && dualModeChanger3.mContext.getResources().getBoolean(R.bool.config_sms_decode_gsm_8bit_data)) {
+            if (dualModeChanger3.mKeyguardManager.isKeyguardLocked()
+                    && dualModeChanger3.mKeyguardManager.isKeyguardSecure()
+                    && !state.mIsNavBarGestureEnabled
+                    && dualModeChanger3
+                            .mContext
+                            .getResources()
+                            .getBoolean(R.bool.config_sms_decode_gsm_8bit_data)) {
                 dualModeChanger3.mKeyguardManager.semDismissKeyguard();
                 return;
             }
             if (!touchpadManager.mTouchpadRequested.get()) {
-                int settingsAsUser = DesktopModeSettings.getSettingsAsUser(touchpadManager.mContext.getContentResolver(), "touchpad_auto_run_guide_count", 0, DesktopModeSettings.sCurrentUserId);
+                int settingsAsUser =
+                        DesktopModeSettings.getSettingsAsUser(
+                                touchpadManager.mContext.getContentResolver(),
+                                "touchpad_auto_run_guide_count",
+                                0,
+                                DesktopModeSettings.sCurrentUserId);
                 if (settingsAsUser < 3) {
-                    DesktopModeSettings.setSettings(touchpadManager.mContext.getContentResolver(), "touchpad_auto_run_guide_count", settingsAsUser + 1);
+                    DesktopModeSettings.setSettings(
+                            touchpadManager.mContext.getContentResolver(),
+                            "touchpad_auto_run_guide_count",
+                            settingsAsUser + 1);
                 }
                 touchpadManager.mTouchpadRequested.set(true);
             }
@@ -308,14 +373,16 @@ public final class DualModeChanger extends ModeChanger {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModeChangeStateListener extends StateManager.StateListener {
-        public ModeChangeStateListener() {
-        }
+        public ModeChangeStateListener() {}
 
         @Override // com.android.server.desktopmode.StateManager.StateListener
-        public final void onExternalDisplayConnectionChanged(StateManager.InternalState internalState) {
+        public final void onExternalDisplayConnectionChanged(
+                StateManager.InternalState internalState) {
             if (internalState.mIsExternalDisplayConnected) {
                 DualModeChanger dualModeChanger = DualModeChanger.this;
-                if (!dualModeChanger.mDisplayUnsupportDialogShown && internalState.mDesktopModeState.enabled == 4 && internalState.mDisplayResolutionUnsupported) {
+                if (!dualModeChanger.mDisplayUnsupportDialogShown
+                        && internalState.mDesktopModeState.enabled == 4
+                        && internalState.mDisplayResolutionUnsupported) {
                     dualModeChanger.mUiManager.showDialog(internalState.mDesktopDisplayId, 2, null);
                     dualModeChanger.mDisplayUnsupportDialogShown = true;
                 }
@@ -327,7 +394,8 @@ public final class DualModeChanger extends ModeChanger {
             if (DesktopModeFeature.DEBUG) {
                 Log.d("[DMS]DualModeChanger", "onNavBarGestureEnabled(), state=" + internalState);
             }
-            DualModeChanger.m411$$Nest$mupdateTouchpadNotification(DualModeChanger.this, internalState);
+            DualModeChanger.m411$$Nest$mupdateTouchpadNotification(
+                    DualModeChanger.this, internalState);
         }
 
         @Override // com.android.server.desktopmode.StateManager.StateListener
@@ -338,7 +406,9 @@ public final class DualModeChanger extends ModeChanger {
         @Override // com.android.server.desktopmode.StateManager.StateListener
         public final void onTouchpadAvailabilityChanged(StateManager.InternalState internalState) {
             if (DesktopModeFeature.DEBUG) {
-                Log.d("[DMS]DualModeChanger", "onTouchpadAvailabilityChanged(), state=" + internalState);
+                Log.d(
+                        "[DMS]DualModeChanger",
+                        "onTouchpadAvailabilityChanged(), state=" + internalState);
             }
             DualModeChanger dualModeChanger = DualModeChanger.this;
             DualModeChanger.m411$$Nest$mupdateTouchpadNotification(dualModeChanger, internalState);
@@ -347,14 +417,25 @@ public final class DualModeChanger extends ModeChanger {
                 dualModeChanger.mUiManager.finishActivity(300);
                 return;
             }
-            if (DesktopModeSettings.getSettingsAsUser(dualModeChanger.mResolver, "touchpad_auto_run", false, DesktopModeSettings.sCurrentUserId)) {
-                dualModeChanger.mUiManager.startActivity(0, 300, dualModeChanger.mTouchpadManager.mInternalUiCallback);
+            if (DesktopModeSettings.getSettingsAsUser(
+                    dualModeChanger.mResolver,
+                    "touchpad_auto_run",
+                    false,
+                    DesktopModeSettings.sCurrentUserId)) {
+                dualModeChanger.mUiManager.startActivity(
+                        0, 300, dualModeChanger.mTouchpadManager.mInternalUiCallback);
             }
-            if (DesktopModeSettings.getSettingsAsUser(dualModeChanger.mResolver, "how_to_open_touchpad_shown", false, DesktopModeSettings.sCurrentUserId)) {
+            if (DesktopModeSettings.getSettingsAsUser(
+                    dualModeChanger.mResolver,
+                    "how_to_open_touchpad_shown",
+                    false,
+                    DesktopModeSettings.sCurrentUserId)) {
                 return;
             }
-            dualModeChanger.mUiManager.showDialog(0, !dualModeChanger.canShowTouchpadNotification(internalState) ? 9 : 7, null);
-            DesktopModeSettings.setSettings(dualModeChanger.mResolver, "how_to_open_touchpad_shown", true);
+            dualModeChanger.mUiManager.showDialog(
+                    0, !dualModeChanger.canShowTouchpadNotification(internalState) ? 9 : 7, null);
+            DesktopModeSettings.setSettings(
+                    dualModeChanger.mResolver, "how_to_open_touchpad_shown", true);
         }
 
         @Override // com.android.server.desktopmode.StateManager.StateListener
@@ -383,13 +464,17 @@ public final class DualModeChanger extends ModeChanger {
     }
 
     /* renamed from: -$$Nest$mupdateNavBarIcon, reason: not valid java name */
-    public static void m409$$Nest$mupdateNavBarIcon(DualModeChanger dualModeChanger, StateManager.InternalState internalState) {
+    public static void m409$$Nest$mupdateNavBarIcon(
+            DualModeChanger dualModeChanger, StateManager.InternalState internalState) {
         dualModeChanger.getClass();
         boolean z = DesktopModeFeature.DEBUG;
         if (z) {
             Log.d("[DMS]DualModeChanger", "updateNavBarIcon(), state=" + internalState);
         }
-        if (!dualModeChanger.mContext.getResources().getBoolean(R.bool.config_sms_decode_gsm_8bit_data)) {
+        if (!dualModeChanger
+                .mContext
+                .getResources()
+                .getBoolean(R.bool.config_sms_decode_gsm_8bit_data)) {
             if (z) {
                 Log.i("[DMS]DualModeChanger", "Skip updateNavBarIcon");
                 return;
@@ -401,7 +486,9 @@ public final class DualModeChanger extends ModeChanger {
         if (z2) {
             uiManager.getClass();
             if (z) {
-                Log.d("[DMS]UiManager", "showNavBarIcon(), type=" + DesktopModeUiConstants.typeToString(400));
+                Log.d(
+                        "[DMS]UiManager",
+                        "showNavBarIcon(), type=" + DesktopModeUiConstants.typeToString(400));
             }
             uiManager.removeUnbindServiceRunnable();
             uiManager.mHandler.schedule(new UiManager$$ExternalSyntheticLambda0(uiManager, 9), 400);
@@ -409,14 +496,17 @@ public final class DualModeChanger extends ModeChanger {
         }
         uiManager.getClass();
         if (z) {
-            Log.d("[DMS]UiManager", "removeNavBarIcon(), type=" + DesktopModeUiConstants.typeToString(400));
+            Log.d(
+                    "[DMS]UiManager",
+                    "removeNavBarIcon(), type=" + DesktopModeUiConstants.typeToString(400));
         }
         uiManager.removeUnbindServiceRunnable();
         uiManager.mHandler.schedule(new UiManager$$ExternalSyntheticLambda0(uiManager, 10), 400);
     }
 
     /* renamed from: -$$Nest$mupdateSpenNotification, reason: not valid java name */
-    public static void m410$$Nest$mupdateSpenNotification(DualModeChanger dualModeChanger, StateManager.InternalState internalState) {
+    public static void m410$$Nest$mupdateSpenNotification(
+            DualModeChanger dualModeChanger, StateManager.InternalState internalState) {
         dualModeChanger.getClass();
         if (DesktopModeFeature.DEBUG) {
             Log.d("[DMS]DualModeChanger", "updateSpenNotification(), state=" + internalState);
@@ -431,15 +521,20 @@ public final class DualModeChanger extends ModeChanger {
     }
 
     /* renamed from: -$$Nest$mupdateTouchpadNotification, reason: not valid java name */
-    public static void m411$$Nest$mupdateTouchpadNotification(DualModeChanger dualModeChanger, StateManager.InternalState internalState) {
+    public static void m411$$Nest$mupdateTouchpadNotification(
+            DualModeChanger dualModeChanger, StateManager.InternalState internalState) {
         dualModeChanger.getClass();
         if (DesktopModeFeature.DEBUG) {
             Log.d("[DMS]DualModeChanger", "updateTouchpadNotification(), state=" + internalState);
         }
-        boolean canShowTouchpadNotification = dualModeChanger.canShowTouchpadNotification(internalState);
+        boolean canShowTouchpadNotification =
+                dualModeChanger.canShowTouchpadNotification(internalState);
         UiManager uiManager = dualModeChanger.mUiManager;
         if (canShowTouchpadNotification) {
-            uiManager.showNotification((!DesktopModeFeature.SUPPORT_SPEN || internalState.mDockState.isDexStation()) ? 201 : 202);
+            uiManager.showNotification(
+                    (!DesktopModeFeature.SUPPORT_SPEN || internalState.mDockState.isDexStation())
+                            ? 201
+                            : 202);
         } else {
             uiManager.removeNotification(200);
         }
@@ -447,8 +542,37 @@ public final class DualModeChanger extends ModeChanger {
 
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.desktopmode.DualModeChanger$1] */
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.desktopmode.DualModeChanger$1] */
-    public DualModeChanger(Context context, IStateManager iStateManager, SemDesktopModeStateNotifier semDesktopModeStateNotifier, ServiceThread serviceThread, IStatusBarService iStatusBarService, UiManager uiManager, SettingsHelper settingsHelper, MultiResolutionManager multiResolutionManager, ActivityTaskManagerService activityTaskManagerService, ActivityTaskManagerInternal activityTaskManagerInternal, ActivityManagerInternal activityManagerInternal, WindowManagerInternal windowManagerInternal, MultiWindowManager multiWindowManager, CoverStateManager coverStateManager, KeyguardManager keyguardManager, TouchpadManager touchpadManager, PowerManager powerManager, PowerManagerInternal powerManagerInternal) {
-        super(context, iStateManager, semDesktopModeStateNotifier, uiManager, settingsHelper, multiResolutionManager, activityTaskManagerService, activityTaskManagerInternal, activityManagerInternal, windowManagerInternal, multiWindowManager);
+    public DualModeChanger(
+            Context context,
+            IStateManager iStateManager,
+            SemDesktopModeStateNotifier semDesktopModeStateNotifier,
+            ServiceThread serviceThread,
+            IStatusBarService iStatusBarService,
+            UiManager uiManager,
+            SettingsHelper settingsHelper,
+            MultiResolutionManager multiResolutionManager,
+            ActivityTaskManagerService activityTaskManagerService,
+            ActivityTaskManagerInternal activityTaskManagerInternal,
+            ActivityManagerInternal activityManagerInternal,
+            WindowManagerInternal windowManagerInternal,
+            MultiWindowManager multiWindowManager,
+            CoverStateManager coverStateManager,
+            KeyguardManager keyguardManager,
+            TouchpadManager touchpadManager,
+            PowerManager powerManager,
+            PowerManagerInternal powerManagerInternal) {
+        super(
+                context,
+                iStateManager,
+                semDesktopModeStateNotifier,
+                uiManager,
+                settingsHelper,
+                multiResolutionManager,
+                activityTaskManagerService,
+                activityTaskManagerInternal,
+                activityManagerInternal,
+                windowManagerInternal,
+                multiWindowManager);
         this.mDualModeEnabled = false;
         this.mLoadingScreenAnimationComplete = false;
         this.mWallpaperShown = false;
@@ -458,78 +582,90 @@ public final class DualModeChanger extends ModeChanger {
         this.mDesktopDisplayId = -1;
         this.mPrevDesktopDisplayId = -1;
         this.mTopTaskId = -1;
-        this.mTouchpadSettingChangedListener = new SettingsHelper.OnSettingChangedListener(this, 0) { // from class: com.android.server.desktopmode.DualModeChanger.1
-            public final /* synthetic */ int $r8$classId;
-            public final /* synthetic */ DualModeChanger this$0;
+        this.mTouchpadSettingChangedListener =
+                new SettingsHelper.OnSettingChangedListener(
+                        this, 0) { // from class: com.android.server.desktopmode.DualModeChanger.1
+                    public final /* synthetic */ int $r8$classId;
+                    public final /* synthetic */ DualModeChanger this$0;
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            {
-                super("touchpad_enabled");
-                this.$r8$classId = r2;
-                switch (r2) {
-                    case 1:
-                        this.this$0 = this;
-                        super("stabilizer_mode");
-                        break;
-                    default:
-                        this.this$0 = this;
-                        break;
-                }
-            }
-
-            @Override // com.android.server.desktopmode.SettingsHelper.OnSettingChangedListener
-            public final void onSettingChanged(String str) {
-                switch (this.$r8$classId) {
-                    case 0:
-                        DualModeChanger dualModeChanger = this.this$0;
-                        if (!dualModeChanger.mTouchpadRequestedByNotification && Boolean.parseBoolean(str)) {
-                            dualModeChanger.mUiManager.startActivity(0, 300, dualModeChanger.mTouchpadManager.mInternalUiCallback);
-                            dualModeChanger.mTouchpadRequestedByNotification = true;
-                            break;
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    {
+                        super("touchpad_enabled");
+                        this.$r8$classId = r2;
+                        switch (r2) {
+                            case 1:
+                                this.this$0 = this;
+                                super("stabilizer_mode");
+                                break;
+                            default:
+                                this.this$0 = this;
+                                break;
                         }
-                        break;
-                    default:
-                        this.this$0.showStabilizerModeDialogIfNeeded();
-                        break;
-                }
-            }
-        };
-        this.mStabilizerModeChangedListener = new SettingsHelper.OnSettingChangedListener(this, 1) { // from class: com.android.server.desktopmode.DualModeChanger.1
-            public final /* synthetic */ int $r8$classId;
-            public final /* synthetic */ DualModeChanger this$0;
+                    }
 
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            {
-                super("touchpad_enabled");
-                this.$r8$classId = r2;
-                switch (r2) {
-                    case 1:
-                        this.this$0 = this;
-                        super("stabilizer_mode");
-                        break;
-                    default:
-                        this.this$0 = this;
-                        break;
-                }
-            }
-
-            @Override // com.android.server.desktopmode.SettingsHelper.OnSettingChangedListener
-            public final void onSettingChanged(String str) {
-                switch (this.$r8$classId) {
-                    case 0:
-                        DualModeChanger dualModeChanger = this.this$0;
-                        if (!dualModeChanger.mTouchpadRequestedByNotification && Boolean.parseBoolean(str)) {
-                            dualModeChanger.mUiManager.startActivity(0, 300, dualModeChanger.mTouchpadManager.mInternalUiCallback);
-                            dualModeChanger.mTouchpadRequestedByNotification = true;
-                            break;
+                    @Override // com.android.server.desktopmode.SettingsHelper.OnSettingChangedListener
+                    public final void onSettingChanged(String str) {
+                        switch (this.$r8$classId) {
+                            case 0:
+                                DualModeChanger dualModeChanger = this.this$0;
+                                if (!dualModeChanger.mTouchpadRequestedByNotification
+                                        && Boolean.parseBoolean(str)) {
+                                    dualModeChanger.mUiManager.startActivity(
+                                            0,
+                                            300,
+                                            dualModeChanger.mTouchpadManager.mInternalUiCallback);
+                                    dualModeChanger.mTouchpadRequestedByNotification = true;
+                                    break;
+                                }
+                                break;
+                            default:
+                                this.this$0.showStabilizerModeDialogIfNeeded();
+                                break;
                         }
-                        break;
-                    default:
-                        this.this$0.showStabilizerModeDialogIfNeeded();
-                        break;
-                }
-            }
-        };
+                    }
+                };
+        this.mStabilizerModeChangedListener =
+                new SettingsHelper.OnSettingChangedListener(
+                        this, 1) { // from class: com.android.server.desktopmode.DualModeChanger.1
+                    public final /* synthetic */ int $r8$classId;
+                    public final /* synthetic */ DualModeChanger this$0;
+
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    {
+                        super("touchpad_enabled");
+                        this.$r8$classId = r2;
+                        switch (r2) {
+                            case 1:
+                                this.this$0 = this;
+                                super("stabilizer_mode");
+                                break;
+                            default:
+                                this.this$0 = this;
+                                break;
+                        }
+                    }
+
+                    @Override // com.android.server.desktopmode.SettingsHelper.OnSettingChangedListener
+                    public final void onSettingChanged(String str) {
+                        switch (this.$r8$classId) {
+                            case 0:
+                                DualModeChanger dualModeChanger = this.this$0;
+                                if (!dualModeChanger.mTouchpadRequestedByNotification
+                                        && Boolean.parseBoolean(str)) {
+                                    dualModeChanger.mUiManager.startActivity(
+                                            0,
+                                            300,
+                                            dualModeChanger.mTouchpadManager.mInternalUiCallback);
+                                    dualModeChanger.mTouchpadRequestedByNotification = true;
+                                    break;
+                                }
+                                break;
+                            default:
+                                this.this$0.showStabilizerModeDialogIfNeeded();
+                                break;
+                        }
+                    }
+                };
         this.mHandler = new ModeChangeHandler(serviceThread.getLooper());
         this.mStatusBarService = iStatusBarService;
         this.mCoverStateManager = coverStateManager;
@@ -542,10 +678,17 @@ public final class DualModeChanger extends ModeChanger {
 
     public final boolean canShowTouchpadNotification(StateManager.InternalState internalState) {
         boolean z = internalState.mIsNavBarGestureEnabled;
-        boolean z2 = this.mContext.getResources().getBoolean(R.bool.config_sms_decode_gsm_8bit_data);
+        boolean z2 =
+                this.mContext.getResources().getBoolean(R.bool.config_sms_decode_gsm_8bit_data);
         boolean z3 = internalState.mTouchpadAvailable;
         boolean z4 = internalState.mTouchpadEnabled;
-        StringBuilder m = FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("canShowTouchpadNotification navBarGestureEnabled=", z, ", hasNavigationBar=", z2, ", isTouchpadAvailable=");
+        StringBuilder m =
+                FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                        "canShowTouchpadNotification navBarGestureEnabled=",
+                        z,
+                        ", hasNavigationBar=",
+                        z2,
+                        ", isTouchpadAvailable=");
         m.append(z3);
         m.append(", isTouchpadEnabled=");
         m.append(z4);
@@ -554,9 +697,14 @@ public final class DualModeChanger extends ModeChanger {
     }
 
     public final void scheduleStopLoadingScreenIfPossible(boolean z) {
-        SemDesktopModeState semDesktopModeState = ((StateManager) this.mStateManager).getState().mDesktopModeState;
+        SemDesktopModeState semDesktopModeState =
+                ((StateManager) this.mStateManager).getState().mDesktopModeState;
         if (DesktopModeFeature.DEBUG) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("scheduleStopLoadingScreenIfPossible(), enter=", ", mWallpaperShown=", z);
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            "scheduleStopLoadingScreenIfPossible(), enter=",
+                            ", mWallpaperShown=",
+                            z);
             m.append(this.mWallpaperShown);
             m.append(", mLoadingScreenAnimationComplete=");
             m.append(this.mLoadingScreenAnimationComplete);
@@ -584,22 +732,33 @@ public final class DualModeChanger extends ModeChanger {
             try {
                 if (stateManager.mInternalState.mDesktopDisplayId != i) {
                     stateManager.mInternalState.mDesktopDisplayId = i;
-                    stateManager.mHandler.post(new StateManager$$ExternalSyntheticLambda2(stateManager, stateManager.copyInternalStateLocked(stateManager.mInternalState), 3));
+                    stateManager.mHandler.post(
+                            new StateManager$$ExternalSyntheticLambda2(
+                                    stateManager,
+                                    stateManager.copyInternalStateLocked(
+                                            stateManager.mInternalState),
+                                    3));
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
-        this.mDesktopDisplayContext = i != -1 ? Utils.getDisplayContext(this.mContext, this.mDesktopDisplayId) : null;
+        this.mDesktopDisplayContext =
+                i != -1 ? Utils.getDisplayContext(this.mContext, this.mDesktopDisplayId) : null;
     }
 
-    public final void setDesktopMode(StateManager.InternalState internalState, boolean z, ModeChanger.ModeToModeChangeInfo modeToModeChangeInfo) {
+    public final void setDesktopMode(
+            StateManager.InternalState internalState,
+            boolean z,
+            ModeChanger.ModeToModeChangeInfo modeToModeChangeInfo) {
         boolean z2;
         int i;
         int i2;
         boolean z3 = DesktopModeFeature.DEBUG;
         if (z3) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("setDesktopMode(), enter=", ", isModeChangeLocked=", z);
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            "setDesktopMode(), enter=", ", isModeChangeLocked=", z);
             m.append(internalState.mModeChangeLocked);
             Log.d("[DMS]DualModeChanger", m.toString());
         }
@@ -607,7 +766,8 @@ public final class DualModeChanger extends ModeChanger {
         StateManager stateManager = (StateManager) iStateManager;
         stateManager.getClass();
         if (z3) {
-            DesktopModeService$$ExternalSyntheticOutline0.m("notifyDualSetDesktopMode(enter=", ")", "[DMS]StateManager", z);
+            DesktopModeService$$ExternalSyntheticOutline0.m(
+                    "notifyDualSetDesktopMode(enter=", ")", "[DMS]StateManager", z);
         }
         Iterator it = stateManager.mStateListeners.iterator();
         while (it.hasNext()) {
@@ -616,11 +776,21 @@ public final class DualModeChanger extends ModeChanger {
         ((StateManager) iStateManager).setModeChangeLocked(true);
         DesktopModeSettings.setSettings(this.mResolver, "display_type", z ? 102 : 0);
         this.mModeToModeChangeInfo = modeToModeChangeInfo;
-        int settingsAsUser = (internalState.mDockState.mIsAdapter || internalState.isDexOnPcOrWirelessDexConnected()) ? DesktopModeSettings.getSettingsAsUser(this.mResolver, "max_visible_freeform_count", 5, DesktopModeSettings.sCurrentUserId) : -1;
+        int settingsAsUser =
+                (internalState.mDockState.mIsAdapter
+                                || internalState.isDexOnPcOrWirelessDexConnected())
+                        ? DesktopModeSettings.getSettingsAsUser(
+                                this.mResolver,
+                                "max_visible_freeform_count",
+                                5,
+                                DesktopModeSettings.sCurrentUserId)
+                        : -1;
         this.mMultiWindowManager.setMaxVisibleFreeformCountForDex(settingsAsUser, settingsAsUser);
         if (!this.mTopTaskIdValid) {
             if (modeToModeChangeInfo == null || modeToModeChangeInfo.mModeToMode != 2) {
-                this.mTopTaskId = this.mActivityTaskManagerInternal.getForegroundTaskId(z ? 0 : this.mDesktopDisplayId);
+                this.mTopTaskId =
+                        this.mActivityTaskManagerInternal.getForegroundTaskId(
+                                z ? 0 : this.mDesktopDisplayId);
             } else {
                 this.mTopTaskId = modeToModeChangeInfo.mTopTaskId;
             }
@@ -652,10 +822,18 @@ public final class DualModeChanger extends ModeChanger {
             this.mActivityManagerInternal.cancelKillProcessWhenDexExit();
             ModeChangeReceiver modeChangeReceiver = new ModeChangeReceiver();
             this.mReceiver = modeChangeReceiver;
-            IntentFilter m2 = VcnManagementService$$ExternalSyntheticOutline0.m("android.intent.action.TIME_TICK", "com.samsung.android.intent.action.WALLPAPER_ENGINE_SHOWN", "com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_PRESSED", "com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_CHANGE_MODE_PRESSED", "com.samsung.android.desktopmode.action.TOUCHPAD_NOTIFICATION_PRESSED");
-            m2.addAction("com.samsung.android.desktopmode.action.TOUCHPAD_AVAILABLE_NOTIFICATION_PRESSED");
+            IntentFilter m2 =
+                    VcnManagementService$$ExternalSyntheticOutline0.m(
+                            "android.intent.action.TIME_TICK",
+                            "com.samsung.android.intent.action.WALLPAPER_ENGINE_SHOWN",
+                            "com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_PRESSED",
+                            "com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_CHANGE_MODE_PRESSED",
+                            "com.samsung.android.desktopmode.action.TOUCHPAD_NOTIFICATION_PRESSED");
+            m2.addAction(
+                    "com.samsung.android.desktopmode.action.TOUCHPAD_AVAILABLE_NOTIFICATION_PRESSED");
             m2.addAction("android.intent.action.ACTION_SHUTDOWN");
-            this.mContext.registerReceiverAsUser(modeChangeReceiver, UserHandle.ALL, m2, null, this.mHandler, 2);
+            this.mContext.registerReceiverAsUser(
+                    modeChangeReceiver, UserHandle.ALL, m2, null, this.mHandler, 2);
             if (this.mStateListener == null) {
                 this.mStateListener = new ModeChangeStateListener();
                 if (DesktopModeFeature.DEBUG) {
@@ -672,14 +850,24 @@ public final class DualModeChanger extends ModeChanger {
             CoverStateManager coverStateManager = this.mCoverStateManager;
             CoverState coverState = coverStateManager.mCoverState;
             if (DesktopModeFeature.DEBUG) {
-                Log.d("[DMS]CoverStateManager", "goToSleepIfFlipTypeCoverClosed(), coverState=" + coverState);
+                Log.d(
+                        "[DMS]CoverStateManager",
+                        "goToSleepIfFlipTypeCoverClosed(), coverState=" + coverState);
             }
-            if (coverState.attached && CoverStateManager.isFlipTypeCover(coverState) && (i = coverState.type) != 1 && i != 3 && i != 6 && i != 8 && i != 15 && !coverState.switchState) {
+            if (coverState.attached
+                    && CoverStateManager.isFlipTypeCover(coverState)
+                    && (i = coverState.type) != 1
+                    && i != 3
+                    && i != 6
+                    && i != 8
+                    && i != 15
+                    && !coverState.switchState) {
                 coverStateManager.mPowerManager.goToSleep(SystemClock.uptimeMillis());
             } else if (this.mPowerManagerInternal.isInternalDisplayOff()) {
                 this.mPowerManager.wakeUp(SystemClock.uptimeMillis(), 114, "android.server:DeX");
             }
-            if (this.mTopTaskIdValid && (modeToModeChangeInfo == null || modeToModeChangeInfo.mModeToMode == 2)) {
+            if (this.mTopTaskIdValid
+                    && (modeToModeChangeInfo == null || modeToModeChangeInfo.mModeToMode == 2)) {
                 z2 = false;
                 bringTaskToForeground(this.mTopTaskId, 0, 1);
                 this.mTopTaskIdValid = false;
@@ -710,7 +898,13 @@ public final class DualModeChanger extends ModeChanger {
             } else {
                 i2 = 1;
                 ModeChanger.ModeToModeChangeInfo modeToModeChangeInfo2 = this.mModeToModeChangeInfo;
-                uiManager.showOverlay(103, (modeToModeChangeInfo2 == null || !modeToModeChangeInfo2.mShowModeChangeScreen) ? 113 : 117, new AnonymousClass3(this, 0));
+                uiManager.showOverlay(
+                        103,
+                        (modeToModeChangeInfo2 == null
+                                        || !modeToModeChangeInfo2.mShowModeChangeScreen)
+                                ? 113
+                                : 117,
+                        new AnonymousClass3(this, 0));
             }
             this.mSettingsHelper.registerListener(anonymousClass12);
             this.mSettingsHelper.registerListener(anonymousClass1);
@@ -722,7 +916,8 @@ public final class DualModeChanger extends ModeChanger {
         }
         stateManager.getClass();
         if (z4) {
-            DesktopModeService$$ExternalSyntheticOutline0.m("notifyDualStartLoadingScreen(enter=", ")", "[DMS]StateManager", z);
+            DesktopModeService$$ExternalSyntheticOutline0.m(
+                    "notifyDualStartLoadingScreen(enter=", ")", "[DMS]StateManager", z);
         }
         Iterator it2 = stateManager.mStateListeners.iterator();
         while (it2.hasNext()) {
@@ -732,10 +927,11 @@ public final class DualModeChanger extends ModeChanger {
         if (z5) {
             Log.d("[DMS]DualModeChanger", "setDesktopModeInternal(), enter=" + z);
         }
-        this.mUiManager.dismissDialog(0, new int[]{0}[0]);
+        this.mUiManager.dismissDialog(0, new int[] {0}[0]);
         setDesktopModeState(z ? 3 : i2, 30);
         if (z5) {
-            DesktopModeService$$ExternalSyntheticOutline0.m("notifyDualModeSetDesktopModeInternal(enter=", ")", "[DMS]StateManager", z);
+            DesktopModeService$$ExternalSyntheticOutline0.m(
+                    "notifyDualModeSetDesktopModeInternal(enter=", ")", "[DMS]StateManager", z);
         }
         Iterator it3 = stateManager.mStateListeners.iterator();
         while (it3.hasNext()) {
@@ -753,7 +949,8 @@ public final class DualModeChanger extends ModeChanger {
 
     @Override // com.android.server.desktopmode.ModeChanger
     public final void setDesktopModeState(int i, int i2) {
-        SemDesktopModeState semDesktopModeState = new SemDesktopModeState(i, i2, (i == 2 && i2 == 0) ? 0 : 102);
+        SemDesktopModeState semDesktopModeState =
+                new SemDesktopModeState(i, i2, (i == 2 && i2 == 0) ? 0 : 102);
         Log.d("[DMS]DualModeChanger", "setDesktopModeState(), newState=" + semDesktopModeState);
         StateManager stateManager = (StateManager) this.mStateManager;
         if (stateManager.getState().mDesktopModeState.equals(semDesktopModeState)) {
@@ -764,24 +961,50 @@ public final class DualModeChanger extends ModeChanger {
     }
 
     public final void showStabilizerModeDialogIfNeeded() {
-        boolean settingsAsUser = DesktopModeSettings.getSettingsAsUser(this.mResolver, "stabilizer_mode_consent", false, DesktopModeSettings.sCurrentUserId);
-        if (!DesktopModeSettings.getSettingsAsUser(this.mResolver, "stabilizer_mode", false, DesktopModeSettings.sCurrentUserId) || settingsAsUser) {
+        boolean settingsAsUser =
+                DesktopModeSettings.getSettingsAsUser(
+                        this.mResolver,
+                        "stabilizer_mode_consent",
+                        false,
+                        DesktopModeSettings.sCurrentUserId);
+        if (!DesktopModeSettings.getSettingsAsUser(
+                        this.mResolver,
+                        "stabilizer_mode",
+                        false,
+                        DesktopModeSettings.sCurrentUserId)
+                || settingsAsUser) {
             return;
         }
         AnonymousClass3 anonymousClass3 = new AnonymousClass3(this, 1);
         IStateManager iStateManager = this.mStateManager;
         if (((StateManager) iStateManager).getState().mDesktopDisplayId != 0) {
-            this.mUiManager.showDialog(((StateManager) iStateManager).getState().mDesktopDisplayId, 10, anonymousClass3);
+            this.mUiManager.showDialog(
+                    ((StateManager) iStateManager).getState().mDesktopDisplayId,
+                    10,
+                    anonymousClass3);
         }
     }
 
     public final void startHome(StateManager.InternalState internalState, int i) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]DualModeChanger", ActivityManagerService$$ExternalSyntheticOutline0.m(internalState.mCurrentUserId, i, ", displayId=", ")", new StringBuilder("startHome(userId=")));
+            Log.d(
+                    "[DMS]DualModeChanger",
+                    ActivityManagerService$$ExternalSyntheticOutline0.m(
+                            internalState.mCurrentUserId,
+                            i,
+                            ", displayId=",
+                            ")",
+                            new StringBuilder("startHome(userId=")));
         }
-        Intent intent = new Intent("android.intent.action.MAIN").addCategory("android.intent.category.HOME").setFlags(270598144).putExtra("DesktopModeService", true).setPackage("com.sec.android.app.desktoplauncher");
+        Intent intent =
+                new Intent("android.intent.action.MAIN")
+                        .addCategory("android.intent.category.HOME")
+                        .setFlags(270598144)
+                        .putExtra("DesktopModeService", true)
+                        .setPackage("com.sec.android.app.desktoplauncher");
         ActivityOptions makeBasic = ActivityOptions.makeBasic();
         makeBasic.setLaunchDisplayId(i);
-        this.mContext.startActivityAsUser(intent, makeBasic.toBundle(), UserHandle.of(internalState.mCurrentUserId));
+        this.mContext.startActivityAsUser(
+                intent, makeBasic.toBundle(), UserHandle.of(internalState.mCurrentUserId));
     }
 }

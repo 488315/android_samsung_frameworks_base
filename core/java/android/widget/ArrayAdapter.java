@@ -7,7 +7,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -54,7 +54,12 @@ public class ArrayAdapter<T> extends BaseAdapter implements Filterable, ThemedSp
         this(context, resource, textViewResourceId, objects, false);
     }
 
-    private ArrayAdapter(Context context, int resource, int textViewResourceId, List<T> objects, boolean objsFromResources) {
+    private ArrayAdapter(
+            Context context,
+            int resource,
+            int textViewResourceId,
+            List<T> objects,
+            boolean objsFromResources) {
         this.mLock = new Object();
         this.mFieldId = 0;
         this.mNotifyOnChange = true;
@@ -199,10 +204,16 @@ public class ArrayAdapter<T> extends BaseAdapter implements Filterable, ThemedSp
 
     @Override // android.widget.Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        return createViewFromResource(this.mInflater, position, convertView, parent, this.mResource);
+        return createViewFromResource(
+                this.mInflater, position, convertView, parent, this.mResource);
     }
 
-    private View createViewFromResource(LayoutInflater inflater, int position, View convertView, ViewGroup parent, int resource) {
+    private View createViewFromResource(
+            LayoutInflater inflater,
+            int position,
+            View convertView,
+            ViewGroup parent,
+            int resource) {
         View view;
         TextView text;
         if (convertView == null) {
@@ -216,7 +227,10 @@ public class ArrayAdapter<T> extends BaseAdapter implements Filterable, ThemedSp
             } else {
                 text = (TextView) view.findViewById(this.mFieldId);
                 if (text == null) {
-                    throw new RuntimeException("Failed to find view with ID " + this.mContext.getResources().getResourceName(this.mFieldId) + " in item layout");
+                    throw new RuntimeException(
+                            "Failed to find view with ID "
+                                    + this.mContext.getResources().getResourceName(this.mFieldId)
+                                    + " in item layout");
                 }
             }
             T item = getItem(position);
@@ -228,7 +242,8 @@ public class ArrayAdapter<T> extends BaseAdapter implements Filterable, ThemedSp
             return view;
         } catch (ClassCastException e) {
             Log.e("ArrayAdapter", "You must supply a resource ID for a TextView");
-            throw new IllegalStateException("ArrayAdapter requires the resource ID to be a TextView", e);
+            throw new IllegalStateException(
+                    "ArrayAdapter requires the resource ID to be a TextView", e);
         }
     }
 
@@ -258,11 +273,14 @@ public class ArrayAdapter<T> extends BaseAdapter implements Filterable, ThemedSp
 
     @Override // android.widget.BaseAdapter, android.widget.SpinnerAdapter
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = this.mDropDownInflater == null ? this.mInflater : this.mDropDownInflater;
-        return createViewFromResource(inflater, position, convertView, parent, this.mDropDownResource);
+        LayoutInflater inflater =
+                this.mDropDownInflater == null ? this.mInflater : this.mDropDownInflater;
+        return createViewFromResource(
+                inflater, position, convertView, parent, this.mDropDownResource);
     }
 
-    public static ArrayAdapter<CharSequence> createFromResource(Context context, int textArrayResId, int textViewResId) {
+    public static ArrayAdapter<CharSequence> createFromResource(
+            Context context, int textArrayResId, int textViewResId) {
         CharSequence[] strings = context.getResources().getTextArray(textArrayResId);
         return new ArrayAdapter<>(context, textViewResId, 0, Arrays.asList(strings), true);
     }
@@ -291,8 +309,7 @@ public class ArrayAdapter<T> extends BaseAdapter implements Filterable, ThemedSp
     }
 
     private class ArrayFilter extends Filter {
-        private ArrayFilter() {
-        }
+        private ArrayFilter() {}
 
         @Override // android.widget.Filter
         protected Filter.FilterResults performFiltering(CharSequence prefix) {

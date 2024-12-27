@@ -1,30 +1,29 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class DynamicEffect extends VibrationEffect implements Parcelable {
-    public static final Parcelable.Creator<DynamicEffect> CREATOR = new Parcelable.Creator<DynamicEffect>() { // from class: android.os.DynamicEffect.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DynamicEffect createFromParcel(Parcel in) {
-            return new DynamicEffect(in);
-        }
+    public static final Parcelable.Creator<DynamicEffect> CREATOR =
+            new Parcelable.Creator<DynamicEffect>() { // from class: android.os.DynamicEffect.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DynamicEffect createFromParcel(Parcel in) {
+                    return new DynamicEffect(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DynamicEffect[] newArray(int size) {
-            return new DynamicEffect[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DynamicEffect[] newArray(int size) {
+                    return new DynamicEffect[size];
+                }
+            };
     private String mJson;
 
     public static DynamicEffect create(String json) {
         return new DynamicEffect(json);
     }
 
-    DynamicEffect(Parcel in) {
-    }
+    DynamicEffect(Parcel in) {}
 
     public DynamicEffect(String json) {
         this.mJson = json;
@@ -35,8 +34,7 @@ public final class DynamicEffect extends VibrationEffect implements Parcelable {
     }
 
     @Override // android.os.VibrationEffect
-    public void validate() {
-    }
+    public void validate() {}
 
     @Override // android.os.VibrationEffect
     public long getDuration() {
@@ -94,6 +92,5 @@ public final class DynamicEffect extends VibrationEffect implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-    }
+    public void writeToParcel(Parcel dest, int flags) {}
 }

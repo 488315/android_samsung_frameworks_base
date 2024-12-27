@@ -7,7 +7,9 @@ import android.os.Parcelable;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.DebugUtils;
+
 import com.android.internal.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -24,25 +26,25 @@ public class UserInfo implements Parcelable {
     public static final int ATTR_RESET_ON_BOOT = 64;
     public static final int ATTR_SUPER_LOCKED = 12;
     public static final int ATTR_TRUST_AGENT_UI_ENABLED = 256;
-    public static final Parcelable.Creator<UserInfo> CREATOR = new Parcelable.Creator<UserInfo>() { // from class: android.content.pm.UserInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UserInfo createFromParcel(Parcel source) {
-            return new UserInfo(source);
-        }
+    public static final Parcelable.Creator<UserInfo> CREATOR =
+            new Parcelable.Creator<UserInfo>() { // from class: android.content.pm.UserInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UserInfo createFromParcel(Parcel source) {
+                    return new UserInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UserInfo[] newArray(int size) {
-            return new UserInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UserInfo[] newArray(int size) {
+                    return new UserInfo[size];
+                }
+            };
     public static final int FLAG_ADMIN = 2;
     public static final int FLAG_BMODE = 134217728;
     public static final int FLAG_BMODE_LEGACY = 65536;
 
-    @Deprecated
-    public static final int FLAG_DEMO = 512;
+    @Deprecated public static final int FLAG_DEMO = 512;
     public static final int FLAG_DIGITAL_LEGACY_MODE = 16777216;
     public static final int FLAG_DISABLED = 64;
     public static final int FLAG_DUALAPP_PROFILE = 536870912;
@@ -54,24 +56,20 @@ public class UserInfo implements Parcelable {
     public static final int FLAG_FOR_TESTING = 32768;
     public static final int FLAG_FULL = 1024;
 
-    @Deprecated
-    public static final int FLAG_GUEST = 4;
+    @Deprecated public static final int FLAG_GUEST = 4;
     public static final int FLAG_INITIALIZED = 16;
     public static final int FLAG_KNOX_APPSEPARATION = 1073741824;
     public static final int FLAG_KNOX_WORKSPACE = 268435456;
     public static final int FLAG_MAIN = 16384;
     public static final int FLAG_MAINTENANCE_MODE = 524288;
 
-    @Deprecated
-    public static final int FLAG_MANAGED_PROFILE = 32;
+    @Deprecated public static final int FLAG_MANAGED_PROFILE = 32;
 
-    @Deprecated
-    public static final int FLAG_PRIMARY = 1;
+    @Deprecated public static final int FLAG_PRIMARY = 1;
     public static final int FLAG_PROFILE = 4096;
     public static final int FLAG_QUIET_MODE = 128;
 
-    @Deprecated
-    public static final int FLAG_RESTRICTED = 8;
+    @Deprecated public static final int FLAG_RESTRICTED = 8;
     public static final int FLAG_SDP_NOT_SUPPORTED_SECURE_FOLDER = 262144;
     public static final int FLAG_SECURE_FOLDER = 131072;
     public static final int FLAG_SYSTEM = 2048;
@@ -96,8 +94,7 @@ public class UserInfo implements Parcelable {
     public String userType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UserInfoFlag {
-    }
+    public @interface UserInfoFlag {}
 
     public UserInfo(int id, String name, int flags) {
         this(id, name, null, flags);
@@ -120,7 +117,10 @@ public class UserInfo implements Parcelable {
 
     public static String getDefaultUserType(int userInfoFlag) {
         if ((userInfoFlag & 2048) != 0) {
-            throw new IllegalArgumentException("Cannot getDefaultUserType for flags " + Integer.toHexString(userInfoFlag) + " because it corresponds to a SYSTEM user type.");
+            throw new IllegalArgumentException(
+                    "Cannot getDefaultUserType for flags "
+                            + Integer.toHexString(userInfoFlag)
+                            + " because it corresponds to a SYSTEM user type.");
         }
         switch (userInfoFlag & 556) {
             case 0:
@@ -134,7 +134,10 @@ public class UserInfo implements Parcelable {
             case 512:
                 return UserManager.USER_TYPE_FULL_DEMO;
             default:
-                throw new IllegalArgumentException("Cannot getDefaultUserType for flags " + Integer.toHexString(userInfoFlag) + " because it doesn't correspond to a valid user type.");
+                throw new IllegalArgumentException(
+                        "Cannot getDefaultUserType for flags "
+                                + Integer.toHexString(userInfoFlag)
+                                + " because it doesn't correspond to a valid user type.");
         }
     }
 
@@ -223,7 +226,8 @@ public class UserInfo implements Parcelable {
     }
 
     private boolean canSwitchToHeadlessSystemUser() {
-        return UserManager.USER_TYPE_SYSTEM_HEADLESS.equals(this.userType) && Resources.getSystem().getBoolean(R.bool.config_canSwitchToHeadlessSystemUser);
+        return UserManager.USER_TYPE_SYSTEM_HEADLESS.equals(this.userType)
+                && Resources.getSystem().getBoolean(R.bool.config_canSwitchToHeadlessSystemUser);
     }
 
     @Deprecated
@@ -255,7 +259,9 @@ public class UserInfo implements Parcelable {
     }
 
     public boolean isSuperLocked() {
-        return (this.flags & 100663296) > 0 ? (this.attributes & 28) > 0 : (this.attributes & 12) > 0;
+        return (this.flags & 100663296) > 0
+                ? (this.attributes & 28) > 0
+                : (this.attributes & 12) > 0;
     }
 
     public boolean isAdminLocked() {
@@ -287,8 +293,7 @@ public class UserInfo implements Parcelable {
     }
 
     @Deprecated
-    public UserInfo() {
-    }
+    public UserInfo() {}
 
     public UserInfo(UserInfo orig) {
         this.name = orig.name;
@@ -315,11 +320,28 @@ public class UserInfo implements Parcelable {
     }
 
     public String toString() {
-        return "UserInfo{" + this.id + ":" + this.name + ":" + Integer.toHexString(this.flags) + "}";
+        return "UserInfo{"
+                + this.id
+                + ":"
+                + this.name
+                + ":"
+                + Integer.toHexString(this.flags)
+                + "}";
     }
 
     public String toFullString() {
-        return "UserInfo[id=" + this.id + ", name=" + this.name + ", type=" + this.userType + ", flags=" + flagsToString(this.flags) + (this.preCreated ? " (pre-created)" : "") + (this.convertedFromPreCreated ? " (converted)" : "") + (this.partial ? " (partial)" : "") + NavigationBarInflaterView.SIZE_MOD_END;
+        return "UserInfo[id="
+                + this.id
+                + ", name="
+                + this.name
+                + ", type="
+                + this.userType
+                + ", flags="
+                + flagsToString(this.flags)
+                + (this.preCreated ? " (pre-created)" : "")
+                + (this.convertedFromPreCreated ? " (converted)" : "")
+                + (this.partial ? " (partial)" : "")
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public static String flagsToString(int flags) {

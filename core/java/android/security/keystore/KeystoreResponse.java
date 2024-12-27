@@ -5,21 +5,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class KeystoreResponse implements Parcelable {
-    public static final Parcelable.Creator<KeystoreResponse> CREATOR = new Parcelable.Creator<KeystoreResponse>() { // from class: android.security.keystore.KeystoreResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeystoreResponse createFromParcel(Parcel in) {
-            int error_code = in.readInt();
-            String error_msg = in.readString();
-            return new KeystoreResponse(error_code, error_msg);
-        }
+    public static final Parcelable.Creator<KeystoreResponse> CREATOR =
+            new Parcelable.Creator<
+                    KeystoreResponse>() { // from class:
+                                          // android.security.keystore.KeystoreResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeystoreResponse createFromParcel(Parcel in) {
+                    int error_code = in.readInt();
+                    String error_msg = in.readString();
+                    return new KeystoreResponse(error_code, error_msg);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeystoreResponse[] newArray(int size) {
-            return new KeystoreResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeystoreResponse[] newArray(int size) {
+                    return new KeystoreResponse[size];
+                }
+            };
     public final int error_code_;
     public final String error_msg_;
 

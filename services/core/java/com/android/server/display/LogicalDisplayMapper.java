@@ -18,6 +18,7 @@ import android.util.SparseIntArray;
 import android.view.DisplayAddress;
 import android.view.DisplayInfo;
 import android.view.SurfaceControl;
+
 import com.android.internal.foldables.FoldGracePeriodProvider;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
@@ -27,8 +28,6 @@ import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.HeapdumpWatcher$$ExternalSyntheticOutline0;
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
 import com.android.server.desktopmode.DesktopModeService$$ExternalSyntheticOutline0;
-import com.android.server.display.DisplayDeviceRepository;
-import com.android.server.display.DisplayManagerService;
 import com.android.server.display.feature.DisplayManagerFlags;
 import com.android.server.display.layout.Layout;
 import com.android.server.display.mode.SyntheticModeManager;
@@ -36,8 +35,10 @@ import com.android.server.display.utils.DebugUtils;
 import com.android.server.policy.PhoneWindowManager;
 import com.android.server.policy.WindowManagerPolicy;
 import com.android.server.utils.FoldSettingProvider;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,8 +103,18 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         }
     }
 
-    public LogicalDisplayMapper(Context context, FoldSettingProvider foldSettingProvider, FoldGracePeriodProvider foldGracePeriodProvider, DisplayDeviceRepository displayDeviceRepository, DisplayManagerService.AnonymousClass1 anonymousClass1, DisplayManagerService.SyncRoot syncRoot, DisplayManagerService.DisplayManagerHandler displayManagerHandler, DisplayManagerFlags displayManagerFlags) {
-        DeviceStateToLayoutMap deviceStateToLayoutMap = new DeviceStateToLayoutMap(new LogicalDisplayMapper$$ExternalSyntheticLambda2(0), displayManagerFlags);
+    public LogicalDisplayMapper(
+            Context context,
+            FoldSettingProvider foldSettingProvider,
+            FoldGracePeriodProvider foldGracePeriodProvider,
+            DisplayDeviceRepository displayDeviceRepository,
+            DisplayManagerService.AnonymousClass1 anonymousClass1,
+            DisplayManagerService.SyncRoot syncRoot,
+            DisplayManagerService.DisplayManagerHandler displayManagerHandler,
+            DisplayManagerFlags displayManagerFlags) {
+        DeviceStateToLayoutMap deviceStateToLayoutMap =
+                new DeviceStateToLayoutMap(
+                        new LogicalDisplayMapper$$ExternalSyntheticLambda2(0), displayManagerFlags);
         SyntheticModeManager syntheticModeManager = new SyntheticModeManager(displayManagerFlags);
         this.mTempDisplayInfo = new DisplayInfo();
         this.mTempNonOverrideDisplayInfo = new DisplayInfo();
@@ -134,15 +145,18 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         this.mListener = anonymousClass1;
         this.mFoldSettingProvider = foldSettingProvider;
         this.mFoldGracePeriodProvider = foldGracePeriodProvider;
-        this.mSingleDisplayDemoMode = SystemProperties.getBoolean("persist.demo.singledisplay", false);
+        this.mSingleDisplayDemoMode =
+                SystemProperties.getBoolean("persist.demo.singledisplay", false);
         context.getResources().getBoolean(R.bool.config_systemCaptionsServiceCallsEnabled);
-        int[] intArray = context.getResources().getIntArray(R.array.config_telephonyEuiccDeviceCapabilities);
+        int[] intArray =
+                context.getResources().getIntArray(R.array.config_telephonyEuiccDeviceCapabilities);
         SparseBooleanArray sparseBooleanArray = new SparseBooleanArray(2);
         for (int i = 0; intArray != null && i < intArray.length; i++) {
             sparseBooleanArray.put(intArray[i], true);
         }
         this.mDeviceStatesOnWhichToWakeUp = sparseBooleanArray;
-        int[] intArray2 = context.getResources().getIntArray(R.array.config_system_condition_providers);
+        int[] intArray2 =
+                context.getResources().getIntArray(R.array.config_system_condition_providers);
         SparseBooleanArray sparseBooleanArray2 = new SparseBooleanArray(2);
         for (int i2 = 0; intArray2 != null && i2 < intArray2.length; i2++) {
             sparseBooleanArray2.put(intArray2[i2], true);
@@ -159,17 +173,22 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         WindowManagerPolicy windowManagerPolicy;
         Layout layout = this.mCurrentLayout;
         this.mCurrentLayout = this.mDeviceStateToLayoutMap.get(this.mDeviceState);
-        Slog.i("LogicalDisplayMapper", "Applying layout: " + this.mCurrentLayout + ", Previous layout: " + layout);
+        Slog.i(
+                "LogicalDisplayMapper",
+                "Applying layout: " + this.mCurrentLayout + ", Previous layout: " + layout);
         int size = ((ArrayList) this.mCurrentLayout.mDisplays).size();
         for (int i = 0; i < size; i++) {
-            Layout.Display display = (Layout.Display) ((ArrayList) this.mCurrentLayout.mDisplays).get(i);
+            Layout.Display display =
+                    (Layout.Display) ((ArrayList) this.mCurrentLayout.mDisplays).get(i);
             DisplayAddress displayAddress = display.mAddress;
-            DisplayDevice byAddressLocked = this.mDisplayDeviceRepo.getByAddressLocked(displayAddress);
+            DisplayDevice byAddressLocked =
+                    this.mDisplayDeviceRepo.getByAddressLocked(displayAddress);
             if (byAddressLocked == null) {
                 StringBuilder sb = new StringBuilder("applyLayoutLocked: The display device (");
                 sb.append(displayAddress);
                 sb.append("), is not available for the display state ");
-                HeapdumpWatcher$$ExternalSyntheticOutline0.m(sb, this.mDeviceState, "LogicalDisplayMapper");
+                HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                        sb, this.mDeviceState, "LogicalDisplayMapper");
             } else {
                 int i2 = display.mLogicalDisplayId;
                 LogicalDisplay displayLocked = getDisplayLocked(i2, true);
@@ -183,12 +202,16 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
                 int i3 = displayLocked.mDisplayId;
                 if (displayLocked != displayLocked2) {
                     if (!z && (windowManagerPolicy = this.mWindowManagerPolicy) != null) {
-                        PhoneWindowManager phoneWindowManager = (PhoneWindowManager) windowManagerPolicy;
+                        PhoneWindowManager phoneWindowManager =
+                                (PhoneWindowManager) windowManagerPolicy;
                         if (i3 == 0) {
-                            phoneWindowManager.mDefaultDisplayPolicy.mDisplayContent.mDisplayUpdater.onDisplaySwitching(true);
+                            phoneWindowManager.mDefaultDisplayPolicy.mDisplayContent.mDisplayUpdater
+                                    .onDisplaySwitching(true);
                         }
                     }
-                    displayLocked.setPrimaryDisplayDeviceLocked(displayLocked2.setPrimaryDisplayDeviceLocked(displayLocked.mPrimaryDisplayDevice));
+                    displayLocked.setPrimaryDisplayDeviceLocked(
+                            displayLocked2.setPrimaryDisplayDeviceLocked(
+                                    displayLocked.mPrimaryDisplayDevice));
                 }
                 DisplayDeviceConfig displayDeviceConfig = byAddressLocked.getDisplayDeviceConfig();
                 int i4 = displayLocked.mDevicePosition;
@@ -203,7 +226,12 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
                 }
                 displayDeviceConfig.getClass();
                 String str = display.mRefreshRateZoneId;
-                SurfaceControl.RefreshRateRange refreshRateRange = TextUtils.isEmpty(str) ? null : (SurfaceControl.RefreshRateRange) ((HashMap) displayDeviceConfig.mRefreshRateZoneProfiles).get(str);
+                SurfaceControl.RefreshRateRange refreshRateRange =
+                        TextUtils.isEmpty(str)
+                                ? null
+                                : (SurfaceControl.RefreshRateRange)
+                                        ((HashMap) displayDeviceConfig.mRefreshRateZoneProfiles)
+                                                .get(str);
                 if (!Objects.equals(refreshRateRange, displayLocked.mLayoutLimitedRefreshRate)) {
                     displayLocked.mLayoutLimitedRefreshRate = refreshRateRange;
                     displayLocked.mDirty = true;
@@ -212,7 +240,9 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
                 if (str2 == null) {
                     str2 = "default";
                 }
-                SparseArray<?> sparseArray = (SparseArray) ((HashMap) displayDeviceConfig.mRefreshRateThrottlingMap).get(str2);
+                SparseArray<?> sparseArray =
+                        (SparseArray)
+                                ((HashMap) displayDeviceConfig.mRefreshRateThrottlingMap).get(str2);
                 if (sparseArray == null) {
                     sparseArray = new SparseArray<>();
                 }
@@ -245,7 +275,9 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         int size = this.mLogicalDisplays.size();
         for (int i = 0; i < size; i++) {
             LogicalDisplay logicalDisplay = (LogicalDisplay) this.mLogicalDisplays.valueAt(i);
-            if (logicalDisplay.mIsInTransition && (displayDevice = logicalDisplay.mPrimaryDisplayDevice) != null && displayDevice.getDisplayDeviceInfoLocked().state != 1) {
+            if (logicalDisplay.mIsInTransition
+                    && (displayDevice = logicalDisplay.mPrimaryDisplayDevice) != null
+                    && displayDevice.getDisplayDeviceInfoLocked().state != 1) {
                 return false;
             }
         }
@@ -259,18 +291,31 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
             Integer num = (Integer) this.mVirtualDeviceDisplayMapping.get(displayDevice.mUniqueId);
             int i = logicalDisplay.mDisplayId;
             int displayGroupIdFromDisplayIdLocked = getDisplayGroupIdFromDisplayIdLocked(i);
-            Integer valueOf = (num == null || this.mDeviceDisplayGroupIds.indexOfKey(num.intValue()) <= 0) ? null : Integer.valueOf(this.mDeviceDisplayGroupIds.get(num.intValue()));
-            DisplayGroup displayGroupLocked = getDisplayGroupLocked(displayGroupIdFromDisplayIdLocked);
+            Integer valueOf =
+                    (num == null || this.mDeviceDisplayGroupIds.indexOfKey(num.intValue()) <= 0)
+                            ? null
+                            : Integer.valueOf(this.mDeviceDisplayGroupIds.get(num.intValue()));
+            DisplayGroup displayGroupLocked =
+                    getDisplayGroupLocked(displayGroupIdFromDisplayIdLocked);
             String str = logicalDisplay.mDisplayGroupName;
             DisplayDeviceInfo displayDeviceInfoLocked = displayDevice.getDisplayDeviceInfoLocked();
-            boolean z = ((displayDeviceInfoLocked.flags & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION) == 0 && TextUtils.isEmpty(str) && displayGroupIdFromDisplayIdLocked != 2) ? false : true;
+            boolean z =
+                    ((displayDeviceInfoLocked.flags
+                                                    & EndpointMonitorConst
+                                                            .FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION)
+                                            == 0
+                                    && TextUtils.isEmpty(str)
+                                    && displayGroupIdFromDisplayIdLocked != 2)
+                            ? false
+                            : true;
             boolean z2 = displayGroupIdFromDisplayIdLocked != 0;
             boolean z3 = (z || num == null) ? false : true;
             boolean z4 = valueOf != null && displayGroupIdFromDisplayIdLocked == valueOf.intValue();
             if (displayGroupIdFromDisplayIdLocked == -1 || z2 != z || z4 != z3) {
                 if (i == 2) {
                     displayGroupIdFromDisplayIdLocked = 2;
-                } else if (!CoreRune.CARLIFE_DISPLAY_GROUP || (displayDeviceInfoLocked.flags & Integer.MIN_VALUE) == 0) {
+                } else if (!CoreRune.CARLIFE_DISPLAY_GROUP
+                        || (displayDeviceInfoLocked.flags & Integer.MIN_VALUE) == 0) {
                     String str2 = logicalDisplay.mDisplayGroupName;
                     if (z3 && num != null) {
                         intValue = this.mDeviceDisplayGroupIds.get(num.intValue());
@@ -296,7 +341,8 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
                     displayGroupIdFromDisplayIdLocked = 4;
                 }
             }
-            DisplayGroup displayGroupLocked2 = getDisplayGroupLocked(displayGroupIdFromDisplayIdLocked);
+            DisplayGroup displayGroupLocked2 =
+                    getDisplayGroupLocked(displayGroupIdFromDisplayIdLocked);
             if (displayGroupLocked2 == null) {
                 displayGroupLocked2 = new DisplayGroup(displayGroupIdFromDisplayIdLocked);
                 this.mDisplayGroups.append(displayGroupIdFromDisplayIdLocked, displayGroupLocked2);
@@ -314,8 +360,17 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
                     logicalDisplay.mDisplayGroupId = displayGroupIdFromDisplayIdLocked;
                     logicalDisplay.mDirty = true;
                 }
-                StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(displayGroupIdFromDisplayIdLocked, i, "Setting new display group ", " for display ", ", from previous group: ");
-                m.append(displayGroupLocked != null ? Integer.valueOf(displayGroupLocked.mGroupId) : "null");
+                StringBuilder m =
+                        ArrayUtils$$ExternalSyntheticOutline0.m(
+                                displayGroupIdFromDisplayIdLocked,
+                                i,
+                                "Setting new display group ",
+                                " for display ",
+                                ", from previous group: ");
+                m.append(
+                        displayGroupLocked != null
+                                ? Integer.valueOf(displayGroupLocked.mGroupId)
+                                : "null");
                 Slog.i("LogicalDisplayMapper", m.toString());
             }
         }
@@ -323,9 +378,17 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
 
     public final LogicalDisplay createNewLogicalDisplayLocked(DisplayDevice displayDevice, int i) {
         DisplayManagerFlags displayManagerFlags = this.mFlags;
-        LogicalDisplay logicalDisplay = new LogicalDisplay(i, i, displayDevice, displayManagerFlags.mPixelAnisotropyCorrectionEnabled.isEnabled(), displayManagerFlags.mAlwaysRotateDisplayDevice.isEnabled());
+        LogicalDisplay logicalDisplay =
+                new LogicalDisplay(
+                        i,
+                        i,
+                        displayDevice,
+                        displayManagerFlags.mPixelAnisotropyCorrectionEnabled.isEnabled(),
+                        displayManagerFlags.mAlwaysRotateDisplayDevice.isEnabled());
         logicalDisplay.updateLocked(this.mDisplayDeviceRepo, this.mSyntheticModeManager);
-        if (logicalDisplay.getDisplayInfoLocked().type == 1 && this.mDeviceStateToLayoutMap.mLayoutMap.size() > 1 && logicalDisplay.mIsEnabled) {
+        if (logicalDisplay.getDisplayInfoLocked().type == 1
+                && this.mDeviceStateToLayoutMap.mLayoutMap.size() > 1
+                && logicalDisplay.mIsEnabled) {
             logicalDisplay.mDirty = true;
             logicalDisplay.mIsEnabled = false;
         }
@@ -337,18 +400,31 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         printWriter.println("LogicalDisplayMapper:");
         PrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, "  ");
         indentingPrintWriter.increaseIndent();
-        StringBuilder m = DesktopModeService$$ExternalSyntheticOutline0.m(new StringBuilder("mSingleDisplayDemoMode="), this.mSingleDisplayDemoMode, (IndentingPrintWriter) indentingPrintWriter, "mCurrentLayout=");
+        StringBuilder m =
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("mSingleDisplayDemoMode="),
+                        this.mSingleDisplayDemoMode,
+                        (IndentingPrintWriter) indentingPrintWriter,
+                        "mCurrentLayout=");
         m.append(this.mCurrentLayout);
         indentingPrintWriter.println(m.toString());
-        indentingPrintWriter.println("mDeviceStatesOnWhichToWakeUp=" + this.mDeviceStatesOnWhichToWakeUp);
-        indentingPrintWriter.println("mDeviceStatesOnWhichSelectiveSleep=" + this.mDeviceStatesOnWhichToSelectiveSleep);
-        StringBuilder m2 = DesktopModeService$$ExternalSyntheticOutline0.m(new StringBuilder("mInteractive="), this.mInteractive, (IndentingPrintWriter) indentingPrintWriter, "mBootCompleted=");
+        indentingPrintWriter.println(
+                "mDeviceStatesOnWhichToWakeUp=" + this.mDeviceStatesOnWhichToWakeUp);
+        indentingPrintWriter.println(
+                "mDeviceStatesOnWhichSelectiveSleep=" + this.mDeviceStatesOnWhichToSelectiveSleep);
+        StringBuilder m2 =
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("mInteractive="),
+                        this.mInteractive,
+                        (IndentingPrintWriter) indentingPrintWriter,
+                        "mBootCompleted=");
         m2.append(this.mBootCompleted);
         indentingPrintWriter.println(m2.toString());
         indentingPrintWriter.println();
         indentingPrintWriter.println("mDeviceState=" + this.mDeviceState);
         indentingPrintWriter.println("mPendingDeviceState=" + this.mPendingDeviceState);
-        indentingPrintWriter.println("mDeviceStateToBeAppliedAfterBoot=" + this.mDeviceStateToBeAppliedAfterBoot);
+        indentingPrintWriter.println(
+                "mDeviceStateToBeAppliedAfterBoot=" + this.mDeviceStateToBeAppliedAfterBoot);
         int size = this.mLogicalDisplays.size();
         indentingPrintWriter.println();
         indentingPrintWriter.println("Logical Displays: size=" + size);
@@ -365,10 +441,16 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         deviceStateToLayoutMap.getClass();
         indentingPrintWriter.println("DeviceStateToLayoutMap:");
         indentingPrintWriter.increaseIndent();
-        indentingPrintWriter.println("mIsPortInDisplayLayoutEnabled=" + deviceStateToLayoutMap.mIsPortInDisplayLayoutEnabled);
+        indentingPrintWriter.println(
+                "mIsPortInDisplayLayoutEnabled="
+                        + deviceStateToLayoutMap.mIsPortInDisplayLayoutEnabled);
         indentingPrintWriter.println("Registered Layouts:");
         for (int i2 = 0; i2 < deviceStateToLayoutMap.mLayoutMap.size(); i2++) {
-            indentingPrintWriter.println("state(" + deviceStateToLayoutMap.mLayoutMap.keyAt(i2) + "): " + deviceStateToLayoutMap.mLayoutMap.valueAt(i2));
+            indentingPrintWriter.println(
+                    "state("
+                            + deviceStateToLayoutMap.mLayoutMap.keyAt(i2)
+                            + "): "
+                            + deviceStateToLayoutMap.mLayoutMap.valueAt(i2));
         }
     }
 
@@ -379,12 +461,24 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         if (i == -1) {
             return;
         }
-        boolean z4 = this.mDeviceStatesOnWhichToWakeUp.get(i) && !this.mDeviceStatesOnWhichToWakeUp.get(this.mDeviceState) && !this.mInteractive && this.mBootCompleted;
-        if (this.mDeviceStatesOnWhichToSelectiveSleep.get(this.mPendingDeviceState) && !this.mDeviceStatesOnWhichToSelectiveSleep.get(this.mDeviceState) && this.mInteractive && this.mBootCompleted) {
+        boolean z4 =
+                this.mDeviceStatesOnWhichToWakeUp.get(i)
+                        && !this.mDeviceStatesOnWhichToWakeUp.get(this.mDeviceState)
+                        && !this.mInteractive
+                        && this.mBootCompleted;
+        if (this.mDeviceStatesOnWhichToSelectiveSleep.get(this.mPendingDeviceState)
+                && !this.mDeviceStatesOnWhichToSelectiveSleep.get(this.mDeviceState)
+                && this.mInteractive
+                && this.mBootCompleted) {
             FoldSettingProvider foldSettingProvider = this.mFoldSettingProvider;
-            if (!foldSettingProvider.getFoldSettingValue().equals("stay_awake_on_fold_key") && (!foldSettingProvider.getFoldSettingValue().equals("selective_stay_awake_key") || !this.mFoldGracePeriodProvider.isEnabled())) {
+            if (!foldSettingProvider.getFoldSettingValue().equals("stay_awake_on_fold_key")
+                    && (!foldSettingProvider
+                                    .getFoldSettingValue()
+                                    .equals("selective_stay_awake_key")
+                            || !this.mFoldGracePeriodProvider.isEnabled())) {
                 z2 = true;
-                boolean areAllTransitioningDisplaysOffLocked = areAllTransitioningDisplaysOffLocked();
+                boolean areAllTransitioningDisplaysOffLocked =
+                        areAllTransitioningDisplaysOffLocked();
                 z3 = (areAllTransitioningDisplaysOffLocked || z4 || z2) ? false : true;
                 if (!z3 || z) {
                     resetLayoutLocked(this.mDeviceState, this.mPendingDeviceState, false);
@@ -395,7 +489,18 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
                     this.mHandler.removeMessages(1);
                 }
                 if (DEBUG) {
-                    Slog.d("LogicalDisplayMapper", "Not yet ready to transition to state=" + this.mPendingDeviceState + " with displays-off=" + areAllTransitioningDisplaysOffLocked + ", force=" + z + ", mInteractive=" + this.mInteractive + ", isReady=" + z3);
+                    Slog.d(
+                            "LogicalDisplayMapper",
+                            "Not yet ready to transition to state="
+                                    + this.mPendingDeviceState
+                                    + " with displays-off="
+                                    + areAllTransitioningDisplaysOffLocked
+                                    + ", force="
+                                    + z
+                                    + ", mInteractive="
+                                    + this.mInteractive
+                                    + ", isReady="
+                                    + z3);
                     return;
                 }
                 return;
@@ -403,10 +508,8 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         }
         z2 = false;
         boolean areAllTransitioningDisplaysOffLocked2 = areAllTransitioningDisplaysOffLocked();
-        if (areAllTransitioningDisplaysOffLocked2) {
-        }
-        if (z3) {
-        }
+        if (areAllTransitioningDisplaysOffLocked2) {}
+        if (z3) {}
         resetLayoutLocked(this.mDeviceState, this.mPendingDeviceState, false);
         this.mDeviceState = this.mPendingDeviceState;
         this.mPendingDeviceState = -1;
@@ -432,7 +535,8 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         }
         int size = this.mDisplayGroups.size();
         for (int i2 = 0; i2 < size; i2++) {
-            if (((ArrayList) ((DisplayGroup) this.mDisplayGroups.valueAt(i2)).mDisplays).contains(displayLocked)) {
+            if (((ArrayList) ((DisplayGroup) this.mDisplayGroups.valueAt(i2)).mDisplays)
+                    .contains(displayLocked)) {
                 return this.mDisplayGroups.keyAt(i2);
             }
         }
@@ -446,7 +550,8 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
     public final DisplayInfo getDisplayInfoForStateLocked(int i, int i2) {
         Layout layout = this.mDeviceStateToLayoutMap.get(i);
         if (layout == null) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "Cannot get layout for given state:", "LogicalDisplayMapper");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "Cannot get layout for given state:", "LogicalDisplayMapper");
             return null;
         }
         Layout.Display byId = layout.getById(i2);
@@ -459,7 +564,8 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
             StringBuilder sb = new StringBuilder("The display device (");
             sb.append(byId.mAddress);
             sb.append("), is not available for the display state ");
-            HeapdumpWatcher$$ExternalSyntheticOutline0.m(sb, this.mDeviceState, "LogicalDisplayMapper");
+            HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                    sb, this.mDeviceState, "LogicalDisplayMapper");
             return null;
         }
         LogicalDisplay displayLocked = getDisplayLocked(byAddressLocked);
@@ -471,7 +577,8 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         StringBuilder sb2 = new StringBuilder("The logical display associated with address (");
         sb2.append(byId.mAddress);
         sb2.append("), is not available for the display state ");
-        HeapdumpWatcher$$ExternalSyntheticOutline0.m(sb2, this.mDeviceState, "LogicalDisplayMapper");
+        HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                sb2, this.mDeviceState, "LogicalDisplayMapper");
         return null;
     }
 
@@ -508,16 +615,26 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
             DisplayDevice displayDevice = logicalDisplay.mPrimaryDisplayDevice;
             if (displayDevice != null) {
                 DisplayAddress displayAddress = displayDevice.getDisplayDeviceInfoLocked().address;
-                Layout.Display byAddress = displayAddress != null ? layout.getByAddress(displayAddress) : null;
-                Layout.Display byAddress2 = displayAddress != null ? layout2.getByAddress(displayAddress) : null;
+                Layout.Display byAddress =
+                        displayAddress != null ? layout.getByAddress(displayAddress) : null;
+                Layout.Display byAddress2 =
+                        displayAddress != null ? layout2.getByAddress(displayAddress) : null;
                 boolean z2 = (byAddress == null) != (byAddress2 == null);
                 boolean z3 = byAddress == null || byAddress.mIsEnabled;
                 boolean z4 = byAddress2 == null || byAddress2.mIsEnabled;
-                boolean z5 = (byAddress == null || byAddress2 == null || byAddress.mLogicalDisplayId == byAddress2.mLogicalDisplayId) ? false : true;
+                boolean z5 =
+                        (byAddress == null
+                                        || byAddress2 == null
+                                        || byAddress.mLogicalDisplayId
+                                                == byAddress2.mLogicalDisplayId)
+                                ? false
+                                : true;
                 boolean z6 = logicalDisplay.mIsInTransition;
                 if (z6 || z3 != z4 || z5 || z2) {
                     if (z != z6) {
-                        Slog.i("LogicalDisplayMapper", "Set isInTransition on display " + i4 + ": " + z);
+                        Slog.i(
+                                "LogicalDisplayMapper",
+                                "Set isInTransition on display " + i4 + ": " + z);
                     }
                     logicalDisplay.mIsInTransition = z;
                     this.mUpdatedLogicalDisplays.put(i4, 1);
@@ -541,14 +658,17 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
             Method dump skipped, instructions count: 1054
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.LogicalDisplayMapper.sendUpdatesForDisplaysLocked(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.LogicalDisplayMapper.sendUpdatesForDisplaysLocked(int):void");
     }
 
     public final void sendUpdatesForGroupsLocked(int i) {
         for (int size = this.mDisplayGroupsToUpdate.size() - 1; size >= 0; size--) {
             if (this.mDisplayGroupsToUpdate.valueAt(size) == i) {
                 int keyAt = this.mDisplayGroupsToUpdate.keyAt(size);
-                DisplayManagerService.DisplayManagerHandler displayManagerHandler = DisplayManagerService.this.mHandler;
+                DisplayManagerService.DisplayManagerHandler displayManagerHandler =
+                        DisplayManagerService.this.mHandler;
                 displayManagerHandler.sendMessage(displayManagerHandler.obtainMessage(8, keyAt, i));
                 if (i == 3) {
                     this.mDisplayGroups.delete(keyAt);
@@ -566,23 +686,38 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         boolean z2 = DEBUG;
         if (!z) {
             if (z2) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Postponing transition to state: "), this.mPendingDeviceState, " until boot is completed", "LogicalDisplayMapper");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Postponing transition to state: "),
+                        this.mPendingDeviceState,
+                        " until boot is completed",
+                        "LogicalDisplayMapper");
             }
             this.mDeviceStateToBeAppliedAfterBoot = i;
             return;
         }
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Requesting Transition to state: ", ", from state=");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        i, "Requesting Transition to state: ", ", from state=");
         m.append(this.mDeviceState);
         m.append(", interactive=");
         m.append(this.mInteractive);
         m.append(", mBootCompleted=");
-        HeimdAllFsService$$ExternalSyntheticOutline0.m("LogicalDisplayMapper", m, this.mBootCompleted);
+        HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                "LogicalDisplayMapper", m, this.mBootCompleted);
         resetLayoutLocked(this.mDeviceState, i, true);
         this.mPendingDeviceState = i;
         this.mDeviceStateToBeAppliedAfterBoot = -1;
-        boolean shouldDeviceBeWoken = shouldDeviceBeWoken(i, this.mDeviceState, this.mInteractive, this.mBootCompleted);
-        boolean shouldDeviceBePutToSleep = shouldDeviceBePutToSleep(this.mPendingDeviceState, this.mDeviceState, this.mInteractive, this.mBootCompleted);
-        if (areAllTransitioningDisplaysOffLocked() && !shouldDeviceBeWoken && !shouldDeviceBePutToSleep) {
+        boolean shouldDeviceBeWoken =
+                shouldDeviceBeWoken(i, this.mDeviceState, this.mInteractive, this.mBootCompleted);
+        boolean shouldDeviceBePutToSleep =
+                shouldDeviceBePutToSleep(
+                        this.mPendingDeviceState,
+                        this.mDeviceState,
+                        this.mInteractive,
+                        this.mBootCompleted);
+        if (areAllTransitioningDisplaysOffLocked()
+                && !shouldDeviceBeWoken
+                && !shouldDeviceBePutToSleep) {
             resetLayoutLocked(this.mDeviceState, this.mPendingDeviceState, false);
             this.mDeviceState = this.mPendingDeviceState;
             this.mPendingDeviceState = -1;
@@ -591,27 +726,40 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
             return;
         }
         if (z2) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("Postponing transition to state: "), this.mPendingDeviceState, "LogicalDisplayMapper");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Postponing transition to state: "),
+                    this.mPendingDeviceState,
+                    "LogicalDisplayMapper");
         }
         updateLogicalDisplaysLocked$1();
         LogicalDisplayMapperHandler logicalDisplayMapperHandler = this.mHandler;
         if (shouldDeviceBeWoken || shouldDeviceBePutToSleep) {
             if (shouldDeviceBeWoken) {
-                logicalDisplayMapperHandler.post(new Runnable() { // from class: com.android.server.display.LogicalDisplayMapper$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        LogicalDisplayMapper.this.mPowerManager.wakeUp(SystemClock.uptimeMillis(), 12, "server.display:unfold");
-                    }
-                });
+                logicalDisplayMapperHandler.post(
+                        new Runnable() { // from class:
+                                         // com.android.server.display.LogicalDisplayMapper$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                LogicalDisplayMapper.this.mPowerManager.wakeUp(
+                                        SystemClock.uptimeMillis(), 12, "server.display:unfold");
+                            }
+                        });
             } else if (shouldDeviceBePutToSleep) {
-                final int i2 = this.mFoldSettingProvider.getFoldSettingValue().equals("sleep_on_fold_key") ? 0 : 2;
-                logicalDisplayMapperHandler.post(new Runnable() { // from class: com.android.server.display.LogicalDisplayMapper$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        LogicalDisplayMapper logicalDisplayMapper = LogicalDisplayMapper.this;
-                        logicalDisplayMapper.mPowerManager.goToSleep(SystemClock.uptimeMillis(), 13, i2);
-                    }
-                });
+                final int i2 =
+                        this.mFoldSettingProvider.getFoldSettingValue().equals("sleep_on_fold_key")
+                                ? 0
+                                : 2;
+                logicalDisplayMapperHandler.post(
+                        new Runnable() { // from class:
+                                         // com.android.server.display.LogicalDisplayMapper$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                LogicalDisplayMapper logicalDisplayMapper =
+                                        LogicalDisplayMapper.this;
+                                logicalDisplayMapper.mPowerManager.goToSleep(
+                                        SystemClock.uptimeMillis(), 13, i2);
+                            }
+                        });
             }
         }
         logicalDisplayMapperHandler.sendEmptyMessageDelayed(1, 3000L);
@@ -626,7 +774,8 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
             StringBuilder sb = new StringBuilder("Display is already ");
             sb.append(z2 ? "enabled" : "disabled");
             sb.append(": ");
-            HeapdumpWatcher$$ExternalSyntheticOutline0.m(sb, logicalDisplay.mDisplayId, "LogicalDisplayMapper");
+            HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                    sb, logicalDisplay.mDisplayId, "LogicalDisplayMapper");
         }
     }
 
@@ -634,7 +783,11 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
         int i = logicalDisplay.mDisplayId;
         boolean z2 = this.mSingleDisplayDemoMode && logicalDisplay.getDisplayInfoLocked().type != 1;
         if (z && z2) {
-            Slog.i("LogicalDisplayMapper", "Not creating a logical display for a secondary display because single display demo mode is enabled: " + logicalDisplay.getDisplayInfoLocked());
+            Slog.i(
+                    "LogicalDisplayMapper",
+                    "Not creating a logical display for a secondary display because single display"
+                        + " demo mode is enabled: "
+                            + logicalDisplay.getDisplayInfoLocked());
             z = false;
         }
         if (logicalDisplay.mIsEnabled != z) {
@@ -647,11 +800,21 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
     }
 
     public boolean shouldDeviceBePutToSleep(int i, int i2, boolean z, boolean z2) {
-        return i2 != -1 && this.mDeviceStatesOnWhichToSelectiveSleep.get(i) && !this.mDeviceStatesOnWhichToSelectiveSleep.get(i2) && z && z2 && !this.mFoldSettingProvider.getFoldSettingValue().equals("stay_awake_on_fold_key");
+        return i2 != -1
+                && this.mDeviceStatesOnWhichToSelectiveSleep.get(i)
+                && !this.mDeviceStatesOnWhichToSelectiveSleep.get(i2)
+                && z
+                && z2
+                && !this.mFoldSettingProvider
+                        .getFoldSettingValue()
+                        .equals("stay_awake_on_fold_key");
     }
 
     public boolean shouldDeviceBeWoken(int i, int i2, boolean z, boolean z2) {
-        return this.mDeviceStatesOnWhichToWakeUp.get(i) && !this.mDeviceStatesOnWhichToWakeUp.get(i2) && !z && z2;
+        return this.mDeviceStatesOnWhichToWakeUp.get(i)
+                && !this.mDeviceStatesOnWhichToWakeUp.get(i2)
+                && !z
+                && z2;
     }
 
     public void updateLogicalDisplays() {
@@ -661,9 +824,9 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:54:0x014d, code lost:
-    
-        if (com.android.server.display.DisplayDeviceRepository.isExternalDisplayDeviceForDexLocked(r8) != false) goto L68;
-     */
+
+       if (com.android.server.display.DisplayDeviceRepository.isExternalDisplayDeviceForDexLocked(r8) != false) goto L68;
+    */
     /* JADX WARN: Removed duplicated region for block: B:15:0x0112 A[ADDED_TO_REGION] */
     /* JADX WARN: Removed duplicated region for block: B:22:0x0135  */
     /*
@@ -675,7 +838,10 @@ public final class LogicalDisplayMapper implements DisplayDeviceRepository.Liste
             Method dump skipped, instructions count: 752
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.LogicalDisplayMapper.updateLogicalDisplaysLocked(int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.LogicalDisplayMapper.updateLogicalDisplaysLocked(int,"
+                    + " boolean):void");
     }
 
     public final void updateLogicalDisplaysLocked$1() {

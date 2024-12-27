@@ -7,7 +7,7 @@ import android.content.pm.ApplicationInfo;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.util.Slog;
-import com.android.server.am.PlatformCompatCache;
+
 import com.android.server.wm.ClientLifecycleManager;
 import com.android.server.wm.WindowProcessController;
 
@@ -128,7 +128,13 @@ public final class ProcessStateRecord {
             long j = PlatformCompatCache.CACHED_COMPAT_CHANGE_IDS_MAPPING[i];
             platformCompatCache.getClass();
             try {
-                i2 = platformCompatCache.mCacheEnabled ? ((PlatformCompatCache.CacheItem) platformCompatCache.mCaches.get(j)).isChangeEnabled(applicationInfo) : platformCompatCache.mIPlatformCompatProxy.isChangeEnabled(j, applicationInfo);
+                i2 =
+                        platformCompatCache.mCacheEnabled
+                                ? ((PlatformCompatCache.CacheItem)
+                                                platformCompatCache.mCaches.get(j))
+                                        .isChangeEnabled(applicationInfo)
+                                : platformCompatCache.mIPlatformCompatProxy.isChangeEnabled(
+                                        j, applicationInfo);
             } catch (RemoteException e) {
                 Slog.w("ActivityManager", "Error reading platform compat change " + j, e);
                 i2 = 0;
@@ -226,12 +232,19 @@ public final class ProcessStateRecord {
         int i2 = windowProcessController.mRepProcState;
         windowProcessController.mRepProcState = i;
         IApplicationThread iApplicationThread = windowProcessController.mThread;
-        if (i2 < 16 || i >= 16 || iApplicationThread == null || !windowProcessController.mHasCachedConfiguration) {
+        if (i2 < 16
+                || i >= 16
+                || iApplicationThread == null
+                || !windowProcessController.mHasCachedConfiguration) {
             return;
         }
         synchronized (windowProcessController.mLastReportedConfiguration) {
-            windowProcessController.onConfigurationChangePreScheduled(windowProcessController.mLastReportedConfiguration);
-            obtain = ConfigurationChangeItem.obtain(windowProcessController.mLastReportedConfiguration, windowProcessController.mLastTopActivityDeviceId);
+            windowProcessController.onConfigurationChangePreScheduled(
+                    windowProcessController.mLastReportedConfiguration);
+            obtain =
+                    ConfigurationChangeItem.obtain(
+                            windowProcessController.mLastReportedConfiguration,
+                            windowProcessController.mLastTopActivityDeviceId);
         }
         try {
             windowProcessController.mAtm.mLifecycleManager.getClass();
@@ -239,7 +252,13 @@ public final class ProcessStateRecord {
             obtain2.addTransactionItem(obtain);
             ClientLifecycleManager.scheduleTransaction(obtain2);
         } catch (Exception e) {
-            Slog.e("ActivityTaskManager", "Failed to schedule ConfigurationChangeItem=" + obtain + " owner=" + windowProcessController.mOwner, e);
+            Slog.e(
+                    "ActivityTaskManager",
+                    "Failed to schedule ConfigurationChangeItem="
+                            + obtain
+                            + " owner="
+                            + windowProcessController.mOwner,
+                    e);
         }
     }
 

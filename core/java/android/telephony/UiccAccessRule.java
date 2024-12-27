@@ -7,7 +7,9 @@ import android.content.pm.SigningInfo;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.telephony.uicc.IccUtils;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -24,19 +26,21 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class UiccAccessRule implements Parcelable {
-    public static final Parcelable.Creator<UiccAccessRule> CREATOR = new Parcelable.Creator<UiccAccessRule>() { // from class: android.telephony.UiccAccessRule.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiccAccessRule createFromParcel(Parcel in) {
-            return new UiccAccessRule(in);
-        }
+    public static final Parcelable.Creator<UiccAccessRule> CREATOR =
+            new Parcelable.Creator<
+                    UiccAccessRule>() { // from class: android.telephony.UiccAccessRule.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiccAccessRule createFromParcel(Parcel in) {
+                    return new UiccAccessRule(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiccAccessRule[] newArray(int size) {
-            return new UiccAccessRule[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiccAccessRule[] newArray(int size) {
+                    return new UiccAccessRule[size];
+                }
+            };
     private static final String DELIMITER_CERTIFICATE_HASH_PACKAGE_NAMES = ":";
     private static final String DELIMITER_INDIVIDUAL_PACKAGE_NAMES = ",";
     private static final int ENCODING_VERSION = 1;
@@ -68,7 +72,8 @@ public final class UiccAccessRule implements Parcelable {
             output.close();
             return baos.toByteArray();
         } catch (IOException e) {
-            throw new IllegalStateException("ByteArrayOutputStream should never lead to an IOException", e);
+            throw new IllegalStateException(
+                    "ByteArrayOutputStream should never lead to an IOException", e);
         }
     }
 
@@ -85,11 +90,14 @@ public final class UiccAccessRule implements Parcelable {
             } else {
                 String[] packageNames = splitStr[1].split(",");
                 for (String packageName : packageNames) {
-                    carrierConfigAccessRulesArray.add(new UiccAccessRule(certificateHash, packageName, 0L));
+                    carrierConfigAccessRulesArray.add(
+                            new UiccAccessRule(certificateHash, packageName, 0L));
                 }
             }
         }
-        return (UiccAccessRule[]) carrierConfigAccessRulesArray.toArray(new UiccAccessRule[carrierConfigAccessRulesArray.size()]);
+        return (UiccAccessRule[])
+                carrierConfigAccessRulesArray.toArray(
+                        new UiccAccessRule[carrierConfigAccessRulesArray.size()]);
     }
 
     public static UiccAccessRule[] decodeRules(byte[] encodedRules) {
@@ -117,7 +125,8 @@ public final class UiccAccessRule implements Parcelable {
             } finally {
             }
         } catch (IOException e) {
-            throw new IllegalStateException("ByteArrayInputStream should never lead to an IOException", e);
+            throw new IllegalStateException(
+                    "ByteArrayInputStream should never lead to an IOException", e);
         }
     }
 
@@ -151,7 +160,8 @@ public final class UiccAccessRule implements Parcelable {
     public int getCarrierPrivilegeStatus(PackageInfo packageInfo) {
         List<Signature> signatures = getSignatures(packageInfo);
         if (signatures.isEmpty()) {
-            throw new IllegalArgumentException("Must use GET_SIGNING_CERTIFICATES when looking up package info");
+            throw new IllegalArgumentException(
+                    "Must use GET_SIGNING_CERTIFICATES when looking up package info");
         }
         for (Signature sig : signatures) {
             int accessStatus = getCarrierPrivilegeStatus(sig, packageInfo.packageName);
@@ -179,7 +189,9 @@ public final class UiccAccessRule implements Parcelable {
     }
 
     private boolean matches(byte[] certHash, String packageName) {
-        return certHash != null && Arrays.equals(this.mCertificateHash, certHash) && (TextUtils.isEmpty(this.mPackageName) || this.mPackageName.equals(packageName));
+        return certHash != null
+                && Arrays.equals(this.mCertificateHash, certHash)
+                && (TextUtils.isEmpty(this.mPackageName) || this.mPackageName.equals(packageName));
     }
 
     public boolean equals(Object obj) {
@@ -190,7 +202,9 @@ public final class UiccAccessRule implements Parcelable {
             return false;
         }
         UiccAccessRule that = (UiccAccessRule) obj;
-        if (Arrays.equals(this.mCertificateHash, that.mCertificateHash) && Objects.equals(this.mPackageName, that.mPackageName) && this.mAccessType == that.mAccessType) {
+        if (Arrays.equals(this.mCertificateHash, that.mCertificateHash)
+                && Objects.equals(this.mPackageName, that.mPackageName)
+                && this.mAccessType == that.mAccessType) {
             return true;
         }
         return false;
@@ -198,11 +212,17 @@ public final class UiccAccessRule implements Parcelable {
 
     public int hashCode() {
         int result = (1 * 31) + Arrays.hashCode(this.mCertificateHash);
-        return (((result * 31) + Objects.hashCode(this.mPackageName)) * 31) + Objects.hashCode(Long.valueOf(this.mAccessType));
+        return (((result * 31) + Objects.hashCode(this.mPackageName)) * 31)
+                + Objects.hashCode(Long.valueOf(this.mAccessType));
     }
 
     public String toString() {
-        return "cert: " + IccUtils.bytesToHexString(this.mCertificateHash) + " pkg: " + this.mPackageName + " access: " + this.mAccessType;
+        return "cert: "
+                + IccUtils.bytesToHexString(this.mCertificateHash)
+                + " pkg: "
+                + this.mPackageName
+                + " access: "
+                + this.mAccessType;
     }
 
     @Override // android.os.Parcelable

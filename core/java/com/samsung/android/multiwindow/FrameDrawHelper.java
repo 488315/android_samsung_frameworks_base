@@ -6,8 +6,10 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
+
 import com.android.internal.R;
 import com.android.internal.policy.DecorView;
+
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.util.SemViewUtils;
 
@@ -52,7 +54,10 @@ public class FrameDrawHelper {
         } else {
             res = this.mContext.getResources();
         }
-        this.mIsNightMode = activityConfig != null ? activityConfig.isNightModeActive() : res.getConfiguration().isNightModeActive();
+        this.mIsNightMode =
+                activityConfig != null
+                        ? activityConfig.isNightModeActive()
+                        : res.getConfiguration().isNightModeActive();
         if (this.mIsNightMode) {
             i = R.color.sec_decor_caption_color_dark;
         } else {
@@ -79,10 +84,27 @@ public class FrameDrawHelper {
         if (dexDockingState != 0 && dexDockingState != -1) {
             return;
         }
-        canvas.drawPath(SemViewUtils.getRoundedCorner(1, 0, captionHeight, (int) this.mStrokeRadius), this.mPaintContent);
-        canvas.drawPath(SemViewUtils.getRoundedCorner(2, (int) (width - this.mStrokeRadius), captionHeight, (int) this.mStrokeRadius), this.mPaintContent);
-        canvas.drawPath(SemViewUtils.getRoundedCorner(4, 0, (int) (height - this.mStrokeRadius), (int) this.mStrokeRadius), this.mPaintContent);
-        canvas.drawPath(SemViewUtils.getRoundedCorner(8, (int) (width - this.mStrokeRadius), (int) (height - this.mStrokeRadius), (int) this.mStrokeRadius), this.mPaintContent);
+        canvas.drawPath(
+                SemViewUtils.getRoundedCorner(1, 0, captionHeight, (int) this.mStrokeRadius),
+                this.mPaintContent);
+        canvas.drawPath(
+                SemViewUtils.getRoundedCorner(
+                        2,
+                        (int) (width - this.mStrokeRadius),
+                        captionHeight,
+                        (int) this.mStrokeRadius),
+                this.mPaintContent);
+        canvas.drawPath(
+                SemViewUtils.getRoundedCorner(
+                        4, 0, (int) (height - this.mStrokeRadius), (int) this.mStrokeRadius),
+                this.mPaintContent);
+        canvas.drawPath(
+                SemViewUtils.getRoundedCorner(
+                        8,
+                        (int) (width - this.mStrokeRadius),
+                        (int) (height - this.mStrokeRadius),
+                        (int) this.mStrokeRadius),
+                this.mPaintContent);
         if (CoreRune.MW_CAPTION_SHELL_CUSTOMIZABLE_WINDOW_HEADERS && captionHeight != 0) {
             canvas.drawRect(0.0f, 0.0f, width, captionHeight, this.mPaintContent);
         }

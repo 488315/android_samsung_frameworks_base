@@ -17,10 +17,13 @@ import android.util.Log;
 import android.util.NtpTrustedTime;
 import android.view.SurfaceControl;
 import android.view.WindowManager;
+
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.window.flags.Flags;
+
 import com.samsung.android.multiwindow.MultiWindowUtils;
 import com.samsung.android.rune.CoreRune;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -31,19 +34,21 @@ import java.util.function.Predicate;
 
 /* loaded from: classes4.dex */
 public final class TransitionInfo implements Parcelable {
-    public static final Parcelable.Creator<TransitionInfo> CREATOR = new Parcelable.Creator<TransitionInfo>() { // from class: android.window.TransitionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TransitionInfo createFromParcel(Parcel in) {
-            return new TransitionInfo(in);
-        }
+    public static final Parcelable.Creator<TransitionInfo> CREATOR =
+            new Parcelable.Creator<
+                    TransitionInfo>() { // from class: android.window.TransitionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TransitionInfo createFromParcel(Parcel in) {
+                    return new TransitionInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TransitionInfo[] newArray(int size) {
-            return new TransitionInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TransitionInfo[] newArray(int size) {
+                    return new TransitionInfo[size];
+                }
+            };
     public static final int FLAG2_TRANSPARENT = 1;
     public static final int FLAGS_IS_NON_APP_WINDOW = 65794;
     public static final int FLAGS_IS_OCCLUDED_NO_ANIMATION = 294912;
@@ -85,8 +90,7 @@ public final class TransitionInfo implements Parcelable {
     private int mDebugId;
     private int mFlags;
 
-    @Deprecated
-    private AnimationOptions mOptions;
+    @Deprecated private AnimationOptions mOptions;
     private IApplicationThread mRemoteAppThread;
     private RemoteTransition mRemoteTransition;
     private final ArrayList<Root> mRoots;
@@ -95,23 +99,22 @@ public final class TransitionInfo implements Parcelable {
     private final int mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ChangeFlags {
-    }
+    public @interface ChangeFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ChangeFlags2 {
-    }
+    public @interface ChangeFlags2 {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TransitionMode {
-    }
+    public @interface TransitionMode {}
 
     public Change getChangeForAppsEdgeActivity() {
         Iterator<Change> it = this.mChanges.iterator();
         while (it.hasNext()) {
             Change change = it.next();
             ActivityManager.RunningTaskInfo taskInfo = change.getTaskInfo();
-            if (taskInfo != null && taskInfo.realActivity != null && MultiWindowUtils.isAppsEdgeActivity(taskInfo.realActivity)) {
+            if (taskInfo != null
+                    && taskInfo.realActivity != null
+                    && MultiWindowUtils.isAppsEdgeActivity(taskInfo.realActivity)) {
                 return change;
             }
         }
@@ -165,7 +168,8 @@ public final class TransitionInfo implements Parcelable {
             }
         }
         if (CoreRune.MW_PIP_REMOTE_TRANSITION) {
-            this.mRemoteTransition = (RemoteTransition) in.readTypedObject(RemoteTransition.CREATOR);
+            this.mRemoteTransition =
+                    (RemoteTransition) in.readTypedObject(RemoteTransition.CREATOR);
         }
     }
 
@@ -198,8 +202,15 @@ public final class TransitionInfo implements Parcelable {
         this.mRoots.add(new Root(displayId, leash, offsetLeft, offsetTop));
     }
 
-    public void addRootLeash(int displayId, SurfaceControl leash, int offsetLeft, int offsetTop, Configuration rootConfig, boolean isActivityRootLeash) {
-        this.mRoots.add(new Root(displayId, leash, offsetLeft, offsetTop, rootConfig, isActivityRootLeash));
+    public void addRootLeash(
+            int displayId,
+            SurfaceControl leash,
+            int offsetLeft,
+            int offsetTop,
+            Configuration rootConfig,
+            boolean isActivityRootLeash) {
+        this.mRoots.add(
+                new Root(displayId, leash, offsetLeft, offsetTop, rootConfig, isActivityRootLeash));
     }
 
     public void addRoot(Root other) {
@@ -277,7 +288,9 @@ public final class TransitionInfo implements Parcelable {
     }
 
     public boolean hasChangesOrSideEffects() {
-        return (this.mChanges.isEmpty() && !isKeyguardGoingAway() && (this.mFlags & 2048) == 0) ? false : true;
+        return (this.mChanges.isEmpty() && !isKeyguardGoingAway() && (this.mFlags & 2048) == 0)
+                ? false
+                : true;
     }
 
     public boolean isKeyguardGoingAway() {
@@ -342,7 +355,14 @@ public final class TransitionInfo implements Parcelable {
             perChangeLineStart = "\n" + innerPrefix;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("{id=").append(this.mDebugId).append(" t=").append(WindowManager.transitTypeToString(this.mType)).append(" f=0x").append(Integer.toHexString(this.mFlags)).append(" trk=").append(this.mTrack);
+        sb.append("{id=")
+                .append(this.mDebugId)
+                .append(" t=")
+                .append(WindowManager.transitTypeToString(this.mType))
+                .append(" f=0x")
+                .append(Integer.toHexString(this.mFlags))
+                .append(" trk=")
+                .append(this.mTrack);
         if (this.mOptions != null) {
             sb.append(" opt=").append(this.mOptions);
         }
@@ -413,80 +433,106 @@ public final class TransitionInfo implements Parcelable {
             sb.append("IS_INPUT_METHOD");
         }
         if ((flags & 4) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("TRANSLUCENT");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("TRANSLUCENT");
         }
         if ((flags & 8) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("STARTING_WINDOW_TRANSFER");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("STARTING_WINDOW_TRANSFER");
         }
         if ((flags & 16) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("IS_VOICE_INTERACTION");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("IS_VOICE_INTERACTION");
         }
         if ((flags & 32) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("IS_DISPLAY");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("IS_DISPLAY");
         }
         if ((flags & 128) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("DISPLAY_HAS_ALERT_WINDOWS");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("DISPLAY_HAS_ALERT_WINDOWS");
         }
         if ((flags & 512) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("IN_TASK_WITH_EMBEDDED_ACTIVITY");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("IN_TASK_WITH_EMBEDDED_ACTIVITY");
         }
         if ((flags & 1024) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("FILLS_TASK");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("FILLS_TASK");
         }
         if ((flags & 16384) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("IS_BEHIND_STARTING_WINDOW");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("IS_BEHIND_STARTING_WINDOW");
         }
         if ((32768 & flags) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("IS_OCCLUDED");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("IS_OCCLUDED");
         }
         if ((65536 & flags) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("FLAG_IS_SYSTEM_WINDOW");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("FLAG_IS_SYSTEM_WINDOW");
         }
         if ((131072 & flags) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("FLAG_BACK_GESTURE_ANIMATED");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("FLAG_BACK_GESTURE_ANIMATED");
         }
         if ((262144 & flags) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("NO_ANIMATION");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("NO_ANIMATION");
         }
         if ((524288 & flags) != 0) {
-            sb.append((sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER) + "TASK_LAUNCHING_BEHIND");
+            sb.append(
+                    (sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                            + "TASK_LAUNCHING_BEHIND");
         }
         if ((2097152 & flags) != 0) {
-            sb.append((sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER) + "SYNC");
+            sb.append(
+                    (sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                            + "SYNC");
         }
         if ((8388608 & flags) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("FIRST_CUSTOM");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("FIRST_CUSTOM");
         }
         if ((4194304 & flags) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("CONFIG_AT_END");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("CONFIG_AT_END");
         }
         if ((1048576 & flags) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("MOVE_TO_TOP");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("MOVE_TO_TOP");
         }
         if (CoreRune.MW_SHELL_TRANSITION) {
             if ((16777216 & flags) != 0) {
-                sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("IS_ACTIVITY");
+                sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                        .append("IS_ACTIVITY");
             }
             if ((33554432 & flags) != 0) {
-                sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("IS_TASK_DISPLAY_AREA");
+                sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                        .append("IS_TASK_DISPLAY_AREA");
             }
         }
         if ((67108864 & flags) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("EDGE_EXTENSION_RESTRICTION");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("EDGE_EXTENSION_RESTRICTION");
         }
         if (CoreRune.MW_SHELL_DISPLAY_CHANGE_TRANSITION) {
             if ((268435456 & flags) != 0) {
-                sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("CUSTOM_DISPLAY_CHANGE_TRANSITION");
+                sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                        .append("CUSTOM_DISPLAY_CHANGE_TRANSITION");
             }
             if ((536870912 & flags) != 0) {
-                sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("FAST_ANIMATION");
+                sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                        .append("FAST_ANIMATION");
             }
         }
         if (CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY && (134217728 & flags) != 0) {
-            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append("TRANSIENT_LAUNCH_OVERLAY");
+            sb.append(sb.length() == 0 ? "" : NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                    .append("TRANSIENT_LAUNCH_OVERLAY");
         }
         if ((1073741824 & flags) != 0) {
-            sb.append(sb.length() != 0 ? NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER : "").append("IS_FIXED_PORTRAIT");
+            sb.append(sb.length() != 0 ? NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER : "")
+                    .append("IS_FIXED_PORTRAIT");
         }
         return sb.toString();
     }
@@ -565,19 +611,21 @@ public final class TransitionInfo implements Parcelable {
     }
 
     public static final class Change implements Parcelable {
-        public static final Parcelable.Creator<Change> CREATOR = new Parcelable.Creator<Change>() { // from class: android.window.TransitionInfo.Change.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Change createFromParcel(Parcel in) {
-                return new Change(in);
-            }
+        public static final Parcelable.Creator<Change> CREATOR =
+                new Parcelable.Creator<
+                        Change>() { // from class: android.window.TransitionInfo.Change.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Change createFromParcel(Parcel in) {
+                        return new Change(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Change[] newArray(int size) {
-                return new Change[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Change[] newArray(int size) {
+                        return new Change[size];
+                    }
+                };
         private ComponentName mActivityComponent;
         private boolean mAffordanceTargetFreeformTask;
         private boolean mAllowEnterPip;
@@ -704,9 +752,11 @@ public final class TransitionInfo implements Parcelable {
             this.mMinimizePoint = new PointF();
             this.mFreeformStashScale = 1.0f;
             this.mTaskIdForActivity = -1;
-            this.mContainer = (WindowContainerToken) in.readTypedObject(WindowContainerToken.CREATOR);
+            this.mContainer =
+                    (WindowContainerToken) in.readTypedObject(WindowContainerToken.CREATOR);
             this.mParent = (WindowContainerToken) in.readTypedObject(WindowContainerToken.CREATOR);
-            this.mLastParent = (WindowContainerToken) in.readTypedObject(WindowContainerToken.CREATOR);
+            this.mLastParent =
+                    (WindowContainerToken) in.readTypedObject(WindowContainerToken.CREATOR);
             this.mLeash = new SurfaceControl();
             this.mLeash.readFromParcel(in);
             this.mMode = in.readInt();
@@ -714,7 +764,9 @@ public final class TransitionInfo implements Parcelable {
             this.mStartAbsBounds.readFromParcel(in);
             this.mEndAbsBounds.readFromParcel(in);
             this.mEndRelOffset.readFromParcel(in);
-            this.mTaskInfo = (ActivityManager.RunningTaskInfo) in.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+            this.mTaskInfo =
+                    (ActivityManager.RunningTaskInfo)
+                            in.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
             this.mAllowEnterPip = in.readBoolean();
             this.mStartDisplayId = in.readInt();
             this.mEndDisplayId = in.readInt();
@@ -726,7 +778,8 @@ public final class TransitionInfo implements Parcelable {
             this.mSnapshot = (SurfaceControl) in.readTypedObject(SurfaceControl.CREATOR);
             this.mSnapshotLuma = in.readFloat();
             this.mActivityComponent = (ComponentName) in.readTypedObject(ComponentName.CREATOR);
-            this.mAnimationOptions = (AnimationOptions) in.readTypedObject(AnimationOptions.CREATOR);
+            this.mAnimationOptions =
+                    (AnimationOptions) in.readTypedObject(AnimationOptions.CREATOR);
             if (CoreRune.MW_SHELL_TRANSITION) {
                 this.mConfiguration.readFromParcel(in);
             }
@@ -764,7 +817,8 @@ public final class TransitionInfo implements Parcelable {
 
         /* JADX INFO: Access modifiers changed from: private */
         public Change localRemoteCopy() {
-            Change out = new Change(this.mContainer, new SurfaceControl(this.mLeash, "localRemote"));
+            Change out =
+                    new Change(this.mContainer, new SurfaceControl(this.mLeash, "localRemote"));
             out.mParent = this.mParent;
             out.mLastParent = this.mLastParent;
             out.mMode = this.mMode;
@@ -781,7 +835,10 @@ public final class TransitionInfo implements Parcelable {
             out.mEndFixedRotation = this.mEndFixedRotation;
             out.mRotationAnimation = this.mRotationAnimation;
             out.mBackgroundColor = this.mBackgroundColor;
-            out.mSnapshot = this.mSnapshot != null ? new SurfaceControl(this.mSnapshot, "localRemote") : null;
+            out.mSnapshot =
+                    this.mSnapshot != null
+                            ? new SurfaceControl(this.mSnapshot, "localRemote")
+                            : null;
             out.mSnapshotLuma = this.mSnapshotLuma;
             out.mActivityComponent = this.mActivityComponent;
             out.mAnimationOptions = this.mAnimationOptions;
@@ -789,7 +846,10 @@ public final class TransitionInfo implements Parcelable {
                 out.mConfiguration.setTo(this.mConfiguration);
             }
             if (CoreRune.MW_SHELL_CHANGE_TRANSITION) {
-                out.mChangeLeash = this.mChangeLeash != null ? new SurfaceControl(this.mChangeLeash, "localRemote") : null;
+                out.mChangeLeash =
+                        this.mChangeLeash != null
+                                ? new SurfaceControl(this.mChangeLeash, "localRemote")
+                                : null;
                 out.mChangeTransitMode = this.mChangeTransitMode;
                 out.mChangeStartOutsets.set(this.mChangeStartOutsets);
                 out.mChangeEndOutsets.set(this.mChangeEndOutsets);
@@ -1176,7 +1236,8 @@ public final class TransitionInfo implements Parcelable {
             if (this.mForceHidingTransit != 0) {
                 sb.append(" fht=").append(this.mForceHidingTransit);
             }
-            if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && this.mAffordanceTargetFreeformTask) {
+            if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION
+                    && this.mAffordanceTargetFreeformTask) {
                 sb.append(" affordanceTargetFreeformTask=").append("true");
             }
             if (this.mFadeInOutRotationNeeded) {
@@ -1220,7 +1281,10 @@ public final class TransitionInfo implements Parcelable {
         }
 
         public boolean hasChangeStartOutsets() {
-            return this.mChangeStartOutsets.left > 0 || this.mChangeStartOutsets.top > 0 || this.mChangeStartOutsets.right > 0 || this.mChangeStartOutsets.bottom > 0;
+            return this.mChangeStartOutsets.left > 0
+                    || this.mChangeStartOutsets.top > 0
+                    || this.mChangeStartOutsets.right > 0
+                    || this.mChangeStartOutsets.bottom > 0;
         }
 
         public Rect getChangeEndOutsets() {
@@ -1232,7 +1296,10 @@ public final class TransitionInfo implements Parcelable {
         }
 
         public boolean hasChangeEndOutsets() {
-            return this.mChangeEndOutsets.left > 0 || this.mChangeEndOutsets.top > 0 || this.mChangeEndOutsets.right > 0 || this.mChangeEndOutsets.bottom > 0;
+            return this.mChangeEndOutsets.left > 0
+                    || this.mChangeEndOutsets.top > 0
+                    || this.mChangeEndOutsets.right > 0
+                    || this.mChangeEndOutsets.bottom > 0;
         }
 
         public void setForceHidingTransit(int forceHidingTransit) {
@@ -1325,19 +1392,22 @@ public final class TransitionInfo implements Parcelable {
     }
 
     public static final class AnimationOptions implements Parcelable {
-        public static final Parcelable.Creator<AnimationOptions> CREATOR = new Parcelable.Creator<AnimationOptions>() { // from class: android.window.TransitionInfo.AnimationOptions.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AnimationOptions createFromParcel(Parcel in) {
-                return new AnimationOptions(in);
-            }
+        public static final Parcelable.Creator<AnimationOptions> CREATOR =
+                new Parcelable.Creator<
+                        AnimationOptions>() { // from class:
+                                              // android.window.TransitionInfo.AnimationOptions.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AnimationOptions createFromParcel(Parcel in) {
+                        return new AnimationOptions(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AnimationOptions[] newArray(int size) {
-                return new AnimationOptions[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AnimationOptions[] newArray(int size) {
+                        return new AnimationOptions[size];
+                    }
+                };
         public static final int DEFAULT_ANIMATION_RESOURCES_ID = -1;
         private int mAnimations;
         private int mBackgroundColor;
@@ -1375,8 +1445,10 @@ public final class TransitionInfo implements Parcelable {
             this.mTransitionBounds.readFromParcel(in);
             this.mThumbnail = (HardwareBuffer) in.readTypedObject(HardwareBuffer.CREATOR);
             this.mAnimations = in.readInt();
-            this.mCustomActivityOpenTransition = (CustomActivityTransition) in.readTypedObject(CustomActivityTransition.CREATOR);
-            this.mCustomActivityCloseTransition = (CustomActivityTransition) in.readTypedObject(CustomActivityTransition.CREATOR);
+            this.mCustomActivityOpenTransition =
+                    (CustomActivityTransition) in.readTypedObject(CustomActivityTransition.CREATOR);
+            this.mCustomActivityCloseTransition =
+                    (CustomActivityTransition) in.readTypedObject(CustomActivityTransition.CREATOR);
         }
 
         public static AnimationOptions makeCommonAnimOptions(String packageName) {
@@ -1385,7 +1457,8 @@ public final class TransitionInfo implements Parcelable {
             return options;
         }
 
-        public static AnimationOptions makeAnimOptionsFromLayoutParameters(WindowManager.LayoutParams lp) {
+        public static AnimationOptions makeAnimOptionsFromLayoutParameters(
+                WindowManager.LayoutParams lp) {
             AnimationOptions options = new AnimationOptions(14);
             options.mPackageName = lp.packageName;
             options.mAnimations = lp.windowAnimations;
@@ -1396,8 +1469,12 @@ public final class TransitionInfo implements Parcelable {
             this.mAnimations = lp.windowAnimations;
         }
 
-        public void addCustomActivityTransition(boolean isOpen, int enterResId, int exitResId, int backgroundColor) {
-            CustomActivityTransition customTransition = isOpen ? this.mCustomActivityOpenTransition : this.mCustomActivityCloseTransition;
+        public void addCustomActivityTransition(
+                boolean isOpen, int enterResId, int exitResId, int backgroundColor) {
+            CustomActivityTransition customTransition =
+                    isOpen
+                            ? this.mCustomActivityOpenTransition
+                            : this.mCustomActivityCloseTransition;
             if (customTransition == null) {
                 customTransition = new CustomActivityTransition();
                 if (isOpen) {
@@ -1409,11 +1486,28 @@ public final class TransitionInfo implements Parcelable {
             customTransition.addCustomActivityTransition(enterResId, exitResId, backgroundColor);
         }
 
-        public static AnimationOptions makeCustomAnimOptions(String packageName, int enterResId, int exitResId, int backgroundColor, boolean overrideTaskTransition) {
-            return makeCustomAnimOptions(packageName, enterResId, -1, exitResId, backgroundColor, overrideTaskTransition);
+        public static AnimationOptions makeCustomAnimOptions(
+                String packageName,
+                int enterResId,
+                int exitResId,
+                int backgroundColor,
+                boolean overrideTaskTransition) {
+            return makeCustomAnimOptions(
+                    packageName,
+                    enterResId,
+                    -1,
+                    exitResId,
+                    backgroundColor,
+                    overrideTaskTransition);
         }
 
-        public static AnimationOptions makeCustomAnimOptions(String packageName, int enterResId, int changeResId, int exitResId, int backgroundColor, boolean overrideTaskTransition) {
+        public static AnimationOptions makeCustomAnimOptions(
+                String packageName,
+                int enterResId,
+                int changeResId,
+                int exitResId,
+                int backgroundColor,
+                boolean overrideTaskTransition) {
             AnimationOptions options = new AnimationOptions(1);
             options.mPackageName = packageName;
             options.mEnterResId = enterResId;
@@ -1424,19 +1518,22 @@ public final class TransitionInfo implements Parcelable {
             return options;
         }
 
-        public static AnimationOptions makeClipRevealAnimOptions(int startX, int startY, int width, int height) {
+        public static AnimationOptions makeClipRevealAnimOptions(
+                int startX, int startY, int width, int height) {
             AnimationOptions options = new AnimationOptions(11);
             options.mTransitionBounds.set(startX, startY, startX + width, startY + height);
             return options;
         }
 
-        public static AnimationOptions makeScaleUpAnimOptions(int startX, int startY, int width, int height) {
+        public static AnimationOptions makeScaleUpAnimOptions(
+                int startX, int startY, int width, int height) {
             AnimationOptions options = new AnimationOptions(2);
             options.mTransitionBounds.set(startX, startY, startX + width, startY + height);
             return options;
         }
 
-        public static AnimationOptions makeThumbnailAnimOptions(HardwareBuffer srcThumb, int startX, int startY, boolean scaleUp) {
+        public static AnimationOptions makeThumbnailAnimOptions(
+                HardwareBuffer srcThumb, int startX, int startY, boolean scaleUp) {
             AnimationOptions options = new AnimationOptions(scaleUp ? 3 : 4);
             options.mTransitionBounds.set(startX, startY, startX, startY);
             options.mThumbnail = srcThumb;
@@ -1453,7 +1550,8 @@ public final class TransitionInfo implements Parcelable {
             return options;
         }
 
-        public static AnimationOptions makeCustomDisplayChangeAnimOptions(int enterResId, int exitResId) {
+        public static AnimationOptions makeCustomDisplayChangeAnimOptions(
+                int enterResId, int exitResId) {
             AnimationOptions options = new AnimationOptions(15);
             options.mEnterResId = enterResId;
             options.mExitResId = exitResId;
@@ -1577,19 +1675,22 @@ public final class TransitionInfo implements Parcelable {
         }
 
         public static final class CustomActivityTransition implements Parcelable {
-            public static final Parcelable.Creator<CustomActivityTransition> CREATOR = new Parcelable.Creator<CustomActivityTransition>() { // from class: android.window.TransitionInfo.AnimationOptions.CustomActivityTransition.1
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public CustomActivityTransition createFromParcel(Parcel in) {
-                    return new CustomActivityTransition(in);
-                }
+            public static final Parcelable.Creator<CustomActivityTransition> CREATOR =
+                    new Parcelable.Creator<
+                            CustomActivityTransition>() { // from class:
+                                                          // android.window.TransitionInfo.AnimationOptions.CustomActivityTransition.1
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public CustomActivityTransition createFromParcel(Parcel in) {
+                            return new CustomActivityTransition(in);
+                        }
 
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public CustomActivityTransition[] newArray(int size) {
-                    return new CustomActivityTransition[size];
-                }
-            };
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public CustomActivityTransition[] newArray(int size) {
+                            return new CustomActivityTransition[size];
+                        }
+                    };
             private int mCustomBackgroundColor;
             private int mCustomEnterResId;
             private int mCustomExitResId;
@@ -1606,8 +1707,7 @@ public final class TransitionInfo implements Parcelable {
                 return this.mCustomBackgroundColor;
             }
 
-            CustomActivityTransition() {
-            }
+            CustomActivityTransition() {}
 
             CustomActivityTransition(Parcel in) {
                 this.mCustomEnterResId = in.readInt();
@@ -1615,7 +1715,8 @@ public final class TransitionInfo implements Parcelable {
                 this.mCustomBackgroundColor = in.readInt();
             }
 
-            public void addCustomActivityTransition(int enterResId, int exitResId, int backgroundColor) {
+            public void addCustomActivityTransition(
+                    int enterResId, int exitResId, int backgroundColor) {
                 this.mCustomEnterResId = enterResId;
                 this.mCustomExitResId = exitResId;
                 this.mCustomBackgroundColor = backgroundColor;
@@ -1636,19 +1737,20 @@ public final class TransitionInfo implements Parcelable {
     }
 
     public static final class Root implements Parcelable {
-        public static final Parcelable.Creator<Root> CREATOR = new Parcelable.Creator<Root>() { // from class: android.window.TransitionInfo.Root.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Root createFromParcel(Parcel in) {
-                return new Root(in);
-            }
+        public static final Parcelable.Creator<Root> CREATOR =
+                new Parcelable.Creator<Root>() { // from class: android.window.TransitionInfo.Root.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Root createFromParcel(Parcel in) {
+                        return new Root(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Root[] newArray(int size) {
-                return new Root[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Root[] newArray(int size) {
+                        return new Root[size];
+                    }
+                };
         private final Configuration mConfiguration;
         private final int mDisplayId;
         private boolean mIsActivityRootLeash;
@@ -1663,7 +1765,13 @@ public final class TransitionInfo implements Parcelable {
             this.mOffset.set(offsetLeft, offsetTop);
         }
 
-        public Root(int displayId, SurfaceControl leash, int offsetLeft, int offsetTop, Configuration rootConfig, boolean isActivityRootLeash) {
+        public Root(
+                int displayId,
+                SurfaceControl leash,
+                int offsetLeft,
+                int offsetTop,
+                Configuration rootConfig,
+                boolean isActivityRootLeash) {
             this(displayId, leash, offsetLeft, offsetTop);
             if (CoreRune.MW_SPLIT_SHELL_TRANSITION) {
                 if (rootConfig != null) {
@@ -1690,9 +1798,19 @@ public final class TransitionInfo implements Parcelable {
         /* JADX INFO: Access modifiers changed from: private */
         public Root localRemoteCopy() {
             if (CoreRune.MW_SHELL_TRANSITION) {
-                return new Root(this.mDisplayId, new SurfaceControl(this.mLeash, "localRemote"), this.mOffset.x, this.mOffset.y, this.mConfiguration, this.mIsActivityRootLeash);
+                return new Root(
+                        this.mDisplayId,
+                        new SurfaceControl(this.mLeash, "localRemote"),
+                        this.mOffset.x,
+                        this.mOffset.y,
+                        this.mConfiguration,
+                        this.mIsActivityRootLeash);
             }
-            return new Root(this.mDisplayId, new SurfaceControl(this.mLeash, "localRemote"), this.mOffset.x, this.mOffset.y);
+            return new Root(
+                    this.mDisplayId,
+                    new SurfaceControl(this.mLeash, "localRemote"),
+                    this.mOffset.x,
+                    this.mOffset.y);
         }
 
         public int getDisplayId() {
@@ -1765,7 +1883,12 @@ public final class TransitionInfo implements Parcelable {
     public void setSeparatedFromCustomDisplayChange(boolean separated) {
         if (this.mSeparatedFromCustomDisplayChange != separated) {
             this.mSeparatedFromCustomDisplayChange = separated;
-            Log.d(TAG, "setSeparatedFromCustomDisplayChange: " + separated + ", Callers=" + Debug.getCallers(3));
+            Log.d(
+                    TAG,
+                    "setSeparatedFromCustomDisplayChange: "
+                            + separated
+                            + ", Callers="
+                            + Debug.getCallers(3));
         }
     }
 }

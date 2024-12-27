@@ -48,7 +48,8 @@ public class ResRune {
     public static final boolean THEME_RESOURCE_MAPPING = true;
     public static final boolean THEME_SUPPORT = true;
     public static final boolean THEME_WALLPAPER_THEMING = true;
-    public static final boolean THEME_WALLPAPER_THEMING_DEBUG = SystemProperties.getBoolean("debug.wallpaper.theme.enable", false);
+    public static final boolean THEME_WALLPAPER_THEMING_DEBUG =
+            SystemProperties.getBoolean("debug.wallpaper.theme.enable", false);
     public static final boolean THEME_WINDOW_BACKGROUND_CROP = true;
     public static final boolean ZIPPED_OVERLAY_SUPPORT = true;
     public static final boolean ZIPPED_OVERLAY_SUPPORT_CLEANUP = true;

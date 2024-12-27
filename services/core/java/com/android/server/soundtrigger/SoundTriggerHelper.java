@@ -7,13 +7,14 @@ import android.hardware.soundtrigger.SoundTriggerModule;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.HeapdumpWatcher$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
-import com.android.server.soundtrigger.DeviceStateHandler;
 import com.android.server.utils.EventLogger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -37,7 +38,8 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
     public final HashMap mModelDataMap = new HashMap();
     public final HashMap mKeyphraseUuidMap = new HashMap();
     public boolean mIsDetached = false;
-    public DeviceStateHandler.SoundTriggerDeviceState mDeviceState = DeviceStateHandler.SoundTriggerDeviceState.DISABLE;
+    public DeviceStateHandler.SoundTriggerDeviceState mDeviceState =
+            DeviceStateHandler.SoundTriggerDeviceState.DISABLE;
     public boolean mIsAppOpPermitted = true;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -107,7 +109,9 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             } catch (Throwable th) {
                 throw th;
             }
-            return "Model type: " + (i != -1 ? i != 0 ? i != 1 ? null : "Generic" : "Keyphrase" : "Unknown") + "\n";
+            return "Model type: "
+                    + (i != -1 ? i != 0 ? i != 1 ? null : "Generic" : "Keyphrase" : "Unknown")
+                    + "\n";
         }
 
         public final synchronized void setRequested(boolean z) {
@@ -240,11 +244,20 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                 monitor-exit(r3)
                 throw r0
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.soundtrigger.SoundTriggerHelper.ModelData.toString():java.lang.String");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.soundtrigger.SoundTriggerHelper.ModelData.toString():java.lang.String");
         }
     }
 
-    public SoundTriggerHelper(Context context, EventLogger eventLogger, SoundTriggerService$$ExternalSyntheticLambda1 soundTriggerService$$ExternalSyntheticLambda1, int i, SoundTriggerService$$ExternalSyntheticLambda2 soundTriggerService$$ExternalSyntheticLambda2) {
+    public SoundTriggerHelper(
+            Context context,
+            EventLogger eventLogger,
+            SoundTriggerService$$ExternalSyntheticLambda1
+                    soundTriggerService$$ExternalSyntheticLambda1,
+            int i,
+            SoundTriggerService$$ExternalSyntheticLambda2
+                    soundTriggerService$$ExternalSyntheticLambda2) {
         this.mModuleId = i;
         this.mContext = context;
         this.mModuleProvider = soundTriggerService$$ExternalSyntheticLambda1;
@@ -253,7 +266,8 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         if (i == -1) {
             this.mModule = null;
         } else {
-            this.mModule = (SoundTriggerModule) soundTriggerService$$ExternalSyntheticLambda1.apply(this);
+            this.mModule =
+                    (SoundTriggerModule) soundTriggerService$$ExternalSyntheticLambda1.apply(this);
         }
     }
 
@@ -280,7 +294,8 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         }
     }
 
-    public final void forceStopAndUnloadModelLocked(ModelData modelData, Exception exc, Iterator it) {
+    public final void forceStopAndUnloadModelLocked(
+            ModelData modelData, Exception exc, Iterator it) {
         if (exc != null) {
             Slog.e("SoundTriggerHelper", "forceStopAndUnloadModel", exc);
         }
@@ -288,7 +303,9 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             return;
         }
         if (modelData.isModelStarted()) {
-            Slog.d("SoundTriggerHelper", "Stopping previously started dangling model " + modelData.getHandle());
+            Slog.d(
+                    "SoundTriggerHelper",
+                    "Stopping previously started dangling model " + modelData.getHandle());
             if (this.mModule.stopRecognition(modelData.getHandle()) == 0) {
                 modelData.setStopped();
                 modelData.setRequested(false);
@@ -297,7 +314,9 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             }
         }
         if (modelData.isModelLoaded()) {
-            Slog.d("SoundTriggerHelper", "Unloading previously loaded dangling model " + modelData.getHandle());
+            Slog.d(
+                    "SoundTriggerHelper",
+                    "Unloading previously loaded dangling model " + modelData.getHandle());
             if (this.mModule.unloadSoundModel(modelData.getHandle()) != 0) {
                 Slog.e("SoundTriggerHelper", "Failed to unload model " + modelData.getHandle());
                 return;
@@ -328,16 +347,23 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                     ModelData modelData = (ModelData) this.mModelDataMap.get(uuid);
                     if (modelData != null && modelData.isGenericModel()) {
                         if (!modelData.isModelLoaded()) {
-                            Slog.i("SoundTriggerHelper", "GetGenericModelState: Given generic model is not loaded:" + uuid);
+                            Slog.i(
+                                    "SoundTriggerHelper",
+                                    "GetGenericModelState: Given generic model is not loaded:"
+                                            + uuid);
                             return Integer.MIN_VALUE;
                         }
                         if (modelData.isModelStarted()) {
                             return this.mModule.getModelState(modelData.getHandle());
                         }
-                        Slog.i("SoundTriggerHelper", "GetGenericModelState: Given generic model is not started:" + uuid);
+                        Slog.i(
+                                "SoundTriggerHelper",
+                                "GetGenericModelState: Given generic model is not started:" + uuid);
                         return Integer.MIN_VALUE;
                     }
-                    Slog.w("SoundTriggerHelper", "GetGenericModelState error: Invalid generic model id:" + uuid);
+                    Slog.w(
+                            "SoundTriggerHelper",
+                            "GetGenericModelState error: Invalid generic model id:" + uuid);
                     return Integer.MIN_VALUE;
                 }
                 return Integer.MIN_VALUE;
@@ -369,12 +395,16 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                 throw new IllegalStateException("SoundTriggerHelper has been detached");
             }
         }
-        for (SoundTrigger.ModuleProperties moduleProperties : (List) this.mModulePropertiesProvider.get()) {
+        for (SoundTrigger.ModuleProperties moduleProperties :
+                (List) this.mModulePropertiesProvider.get()) {
             if (moduleProperties.getId() == this.mModuleId) {
                 return moduleProperties;
             }
         }
-        VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("Module properties not found for existing moduleId "), this.mModuleId, "SoundTriggerHelper");
+        VaultKeeperService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("Module properties not found for existing moduleId "),
+                this.mModuleId,
+                "SoundTriggerHelper");
         return null;
     }
 
@@ -411,7 +441,8 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         return z;
     }
 
-    public final void onDeviceStateChanged(DeviceStateHandler.SoundTriggerDeviceState soundTriggerDeviceState) {
+    public final void onDeviceStateChanged(
+            DeviceStateHandler.SoundTriggerDeviceState soundTriggerDeviceState) {
         synchronized (this.mLock) {
             try {
                 if (!this.mIsDetached && this.mDeviceState != soundTriggerDeviceState) {
@@ -423,17 +454,24 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         }
     }
 
-    public final void onGenericRecognitionLocked(SoundTrigger.GenericRecognitionEvent genericRecognitionEvent) {
+    public final void onGenericRecognitionLocked(
+            SoundTrigger.GenericRecognitionEvent genericRecognitionEvent) {
         IBinder iBinder;
         SoundTrigger.RecognitionConfig recognitionConfig;
         boolean z;
-        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type = SoundTriggerEvent$SessionEvent$Type.RECOGNITION;
+        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type =
+                SoundTriggerEvent$SessionEvent$Type.RECOGNITION;
         MetricsLogger.count(this.mContext, "sth_generic_recognition_event", 1);
         int i = genericRecognitionEvent.status;
         if (i == 0 || i == 3) {
-            ModelData modelDataForLocked = getModelDataForLocked(genericRecognitionEvent.soundModelHandle);
+            ModelData modelDataForLocked =
+                    getModelDataForLocked(genericRecognitionEvent.soundModelHandle);
             if (modelDataForLocked == null || !modelDataForLocked.isGenericModel()) {
-                HeapdumpWatcher$$ExternalSyntheticOutline0.m(new StringBuilder("Generic recognition event: Model does not exist for handle: "), genericRecognitionEvent.soundModelHandle, "SoundTriggerHelper");
+                HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                        new StringBuilder(
+                                "Generic recognition event: Model does not exist for handle: "),
+                        genericRecognitionEvent.soundModelHandle,
+                        "SoundTriggerHelper");
                 return;
             }
             IBinder token = genericRecognitionEvent.getToken();
@@ -443,20 +481,33 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             if (Objects.equals(token, iBinder)) {
                 IRecognitionStatusCallback callback = modelDataForLocked.getCallback();
                 if (callback == null) {
-                    HeapdumpWatcher$$ExternalSyntheticOutline0.m(new StringBuilder("Generic recognition event: Null callback for model handle: "), genericRecognitionEvent.soundModelHandle, "SoundTriggerHelper");
+                    HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                            new StringBuilder(
+                                    "Generic recognition event: Null callback for model handle: "),
+                            genericRecognitionEvent.soundModelHandle,
+                            "SoundTriggerHelper");
                     return;
                 }
                 if (!genericRecognitionEvent.recognitionStillActive) {
                     modelDataForLocked.setStopped();
                 }
                 try {
-                    this.mEventLogger.enqueue(new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type, modelDataForLocked.getModelId(), (String) null));
+                    this.mEventLogger.enqueue(
+                            new SoundTriggerEvent$ServiceEvent(
+                                    soundTriggerEvent$SessionEvent$Type,
+                                    modelDataForLocked.getModelId(),
+                                    (String) null));
                     callback.onGenericSoundTriggerDetected(genericRecognitionEvent);
                     synchronized (modelDataForLocked) {
                         recognitionConfig = modelDataForLocked.mRecognitionConfig;
                     }
                     if (recognitionConfig == null) {
-                        HeapdumpWatcher$$ExternalSyntheticOutline0.m(new StringBuilder("Generic recognition event: Null RecognitionConfig for model handle: "), genericRecognitionEvent.soundModelHandle, "SoundTriggerHelper");
+                        HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(
+                                        "Generic recognition event: Null RecognitionConfig for"
+                                            + " model handle: "),
+                                genericRecognitionEvent.soundModelHandle,
+                                "SoundTriggerHelper");
                         return;
                     }
                     modelDataForLocked.setRequested(recognitionConfig.allowMultipleTriggers);
@@ -468,7 +519,11 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                     }
                 } catch (RemoteException e) {
                     EventLogger eventLogger = this.mEventLogger;
-                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent = new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type, modelDataForLocked.getModelId(), "RemoteException");
+                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent =
+                            new SoundTriggerEvent$ServiceEvent(
+                                    soundTriggerEvent$SessionEvent$Type,
+                                    modelDataForLocked.getModelId(),
+                                    "RemoteException");
                     soundTriggerEvent$ServiceEvent.printLog(2, "SoundTriggerHelper");
                     eventLogger.enqueue(soundTriggerEvent$ServiceEvent);
                     forceStopAndUnloadModelLocked(modelDataForLocked, e, null);
@@ -477,18 +532,21 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         }
     }
 
-    public final void onKeyphraseRecognitionLocked(SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent) {
+    public final void onKeyphraseRecognitionLocked(
+            SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent) {
         IBinder iBinder;
         SoundTrigger.RecognitionConfig recognitionConfig;
         boolean z;
-        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type = SoundTriggerEvent$SessionEvent$Type.RECOGNITION;
+        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type =
+                SoundTriggerEvent$SessionEvent$Type.RECOGNITION;
         Slog.i("SoundTriggerHelper", "Recognition success");
         MetricsLogger.count(this.mContext, "sth_keyphrase_recognition_event", 1);
         int i = Integer.MIN_VALUE;
         if (keyphraseRecognitionEvent == null) {
             Slog.w("SoundTriggerHelper", "Null RecognitionEvent received.");
         } else {
-            SoundTrigger.KeyphraseRecognitionExtra[] keyphraseRecognitionExtraArr = keyphraseRecognitionEvent.keyphraseExtras;
+            SoundTrigger.KeyphraseRecognitionExtra[] keyphraseRecognitionExtraArr =
+                    keyphraseRecognitionEvent.keyphraseExtras;
             if (keyphraseRecognitionExtraArr == null || keyphraseRecognitionExtraArr.length == 0) {
                 Slog.w("SoundTriggerHelper", "Invalid keyphrase recognition event!");
             } else {
@@ -497,7 +555,8 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         }
         ModelData keyphraseModelDataLocked = getKeyphraseModelDataLocked(i);
         if (keyphraseModelDataLocked == null || !keyphraseModelDataLocked.isKeyphraseModel()) {
-            NandswapManager$$ExternalSyntheticOutline0.m(i, "Keyphase model data does not exist for ID:", "SoundTriggerHelper");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    i, "Keyphase model data does not exist for ID:", "SoundTriggerHelper");
             return;
         }
         IBinder token = keyphraseRecognitionEvent.getToken();
@@ -506,15 +565,23 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         }
         if (Objects.equals(token, iBinder)) {
             if (keyphraseModelDataLocked.getCallback() == null) {
-                Slog.w("SoundTriggerHelper", "Received onRecognition event without callback for keyphrase model.");
+                Slog.w(
+                        "SoundTriggerHelper",
+                        "Received onRecognition event without callback for keyphrase model.");
                 return;
             }
             if (!keyphraseRecognitionEvent.recognitionStillActive) {
                 keyphraseModelDataLocked.setStopped();
             }
             try {
-                this.mEventLogger.enqueue(new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type, keyphraseModelDataLocked.getModelId(), (String) null));
-                keyphraseModelDataLocked.getCallback().onKeyphraseDetected(keyphraseRecognitionEvent);
+                this.mEventLogger.enqueue(
+                        new SoundTriggerEvent$ServiceEvent(
+                                soundTriggerEvent$SessionEvent$Type,
+                                keyphraseModelDataLocked.getModelId(),
+                                (String) null));
+                keyphraseModelDataLocked
+                        .getCallback()
+                        .onKeyphraseDetected(keyphraseRecognitionEvent);
                 synchronized (keyphraseModelDataLocked) {
                     recognitionConfig = keyphraseModelDataLocked.mRecognitionConfig;
                 }
@@ -529,7 +596,11 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                 }
             } catch (RemoteException e) {
                 EventLogger eventLogger = this.mEventLogger;
-                SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent = new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type, keyphraseModelDataLocked.getModelId(), "RemoteException");
+                SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent =
+                        new SoundTriggerEvent$ServiceEvent(
+                                soundTriggerEvent$SessionEvent$Type,
+                                keyphraseModelDataLocked.getModelId(),
+                                "RemoteException");
                 soundTriggerEvent$ServiceEvent.printLog(2, "SoundTriggerHelper");
                 eventLogger.enqueue(soundTriggerEvent$ServiceEvent);
                 forceStopAndUnloadModelLocked(keyphraseModelDataLocked, e, null);
@@ -555,8 +626,11 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             Slog.w("SoundTriggerHelper", "Null recognition event!");
             return;
         }
-        if (!(recognitionEvent instanceof SoundTrigger.KeyphraseRecognitionEvent) && !(recognitionEvent instanceof SoundTrigger.GenericRecognitionEvent)) {
-            Slog.w("SoundTriggerHelper", "Invalid recognition event type (not one of generic or keyphrase)!");
+        if (!(recognitionEvent instanceof SoundTrigger.KeyphraseRecognitionEvent)
+                && !(recognitionEvent instanceof SoundTrigger.GenericRecognitionEvent)) {
+            Slog.w(
+                    "SoundTriggerHelper",
+                    "Invalid recognition event type (not one of generic or keyphrase)!");
             return;
         }
         synchronized (this.mLock) {
@@ -569,9 +643,11 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                     }
                 }
                 if (recognitionEvent instanceof SoundTrigger.KeyphraseRecognitionEvent) {
-                    onKeyphraseRecognitionLocked((SoundTrigger.KeyphraseRecognitionEvent) recognitionEvent);
+                    onKeyphraseRecognitionLocked(
+                            (SoundTrigger.KeyphraseRecognitionEvent) recognitionEvent);
                 } else {
-                    onGenericRecognitionLocked((SoundTrigger.GenericRecognitionEvent) recognitionEvent);
+                    onGenericRecognitionLocked(
+                            (SoundTrigger.GenericRecognitionEvent) recognitionEvent);
                 }
             } finally {
             }
@@ -580,7 +656,8 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
 
     public final void onRecognitionAbortLocked(SoundTrigger.RecognitionEvent recognitionEvent) {
         IBinder iBinder;
-        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type = SoundTriggerEvent$SessionEvent$Type.PAUSE;
+        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type =
+                SoundTriggerEvent$SessionEvent$Type.PAUSE;
         Slog.w("SoundTriggerHelper", "Recognition aborted");
         MetricsLogger.count(this.mContext, "sth_recognition_aborted", 1);
         ModelData modelDataForLocked = getModelDataForLocked(recognitionEvent.soundModelHandle);
@@ -596,12 +673,20 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             try {
                 IRecognitionStatusCallback callback = modelDataForLocked.getCallback();
                 if (callback != null) {
-                    this.mEventLogger.enqueue(new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type, modelDataForLocked.getModelId(), (String) null));
+                    this.mEventLogger.enqueue(
+                            new SoundTriggerEvent$ServiceEvent(
+                                    soundTriggerEvent$SessionEvent$Type,
+                                    modelDataForLocked.getModelId(),
+                                    (String) null));
                     callback.onRecognitionPaused();
                 }
             } catch (RemoteException e) {
                 EventLogger eventLogger = this.mEventLogger;
-                SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent = new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type, modelDataForLocked.getModelId(), "RemoteException");
+                SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent =
+                        new SoundTriggerEvent$ServiceEvent(
+                                soundTriggerEvent$SessionEvent$Type,
+                                modelDataForLocked.getModelId(),
+                                "RemoteException");
                 soundTriggerEvent$ServiceEvent.printLog(2, "SoundTriggerHelper");
                 eventLogger.enqueue(soundTriggerEvent$ServiceEvent);
                 forceStopAndUnloadModelLocked(modelDataForLocked, e, null);
@@ -611,7 +696,11 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
 
     public final void onResourcesAvailable() {
         synchronized (this.mLock) {
-            this.mEventLogger.enqueue(new SoundTriggerEvent$ServiceEvent(SoundTriggerEvent$SessionEvent$Type.RESOURCES_AVAILABLE, (UUID) null, (String) null));
+            this.mEventLogger.enqueue(
+                    new SoundTriggerEvent$ServiceEvent(
+                            SoundTriggerEvent$SessionEvent$Type.RESOURCES_AVAILABLE,
+                            (UUID) null,
+                            (String) null));
             updateAllRecognitionsLocked();
         }
     }
@@ -625,7 +714,8 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
     }
 
     public final void onServiceDiedLocked() {
-        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type = SoundTriggerEvent$SessionEvent$Type.MODULE_DIED;
+        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type =
+                SoundTriggerEvent$SessionEvent$Type.MODULE_DIED;
         try {
             MetricsLogger.count(this.mContext, "sth_service_died", 1);
             for (ModelData modelData : this.mModelDataMap.values()) {
@@ -633,13 +723,21 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                 if (callback != null) {
                     try {
                         EventLogger eventLogger = this.mEventLogger;
-                        SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent = new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type, modelData.getModelId(), (String) null);
+                        SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent =
+                                new SoundTriggerEvent$ServiceEvent(
+                                        soundTriggerEvent$SessionEvent$Type,
+                                        modelData.getModelId(),
+                                        (String) null);
                         soundTriggerEvent$ServiceEvent.printLog(2, "SoundTriggerHelper");
                         eventLogger.enqueue(soundTriggerEvent$ServiceEvent);
                         callback.onModuleDied();
                     } catch (RemoteException unused) {
                         EventLogger eventLogger2 = this.mEventLogger;
-                        SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent2 = new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type, modelData.getModelId(), "RemoteException");
+                        SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent2 =
+                                new SoundTriggerEvent$ServiceEvent(
+                                        soundTriggerEvent$SessionEvent$Type,
+                                        modelData.getModelId(),
+                                        "RemoteException");
                         soundTriggerEvent$ServiceEvent2.printLog(2, "SoundTriggerHelper");
                         eventLogger2.enqueue(soundTriggerEvent$ServiceEvent2);
                     }
@@ -710,7 +808,12 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int startGenericRecognition(java.util.UUID r11, android.hardware.soundtrigger.SoundTrigger.GenericSoundModel r12, android.hardware.soundtrigger.IRecognitionStatusCallback r13, android.hardware.soundtrigger.SoundTrigger.RecognitionConfig r14, boolean r15) {
+    public final int startGenericRecognition(
+            java.util.UUID r11,
+            android.hardware.soundtrigger.SoundTrigger.GenericSoundModel r12,
+            android.hardware.soundtrigger.IRecognitionStatusCallback r13,
+            android.hardware.soundtrigger.SoundTrigger.RecognitionConfig r14,
+            boolean r15) {
         /*
             r10 = this;
             android.content.Context r0 = r10.mContext
@@ -781,10 +884,21 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             android.util.Slog.w(r10, r11)
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.soundtrigger.SoundTriggerHelper.startGenericRecognition(java.util.UUID, android.hardware.soundtrigger.SoundTrigger$GenericSoundModel, android.hardware.soundtrigger.IRecognitionStatusCallback, android.hardware.soundtrigger.SoundTrigger$RecognitionConfig, boolean):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.soundtrigger.SoundTriggerHelper.startGenericRecognition(java.util.UUID,"
+                    + " android.hardware.soundtrigger.SoundTrigger$GenericSoundModel,"
+                    + " android.hardware.soundtrigger.IRecognitionStatusCallback,"
+                    + " android.hardware.soundtrigger.SoundTrigger$RecognitionConfig,"
+                    + " boolean):int");
     }
 
-    public final int startRecognition(SoundTrigger.SoundModel soundModel, ModelData modelData, IRecognitionStatusCallback iRecognitionStatusCallback, SoundTrigger.RecognitionConfig recognitionConfig, boolean z) {
+    public final int startRecognition(
+            SoundTrigger.SoundModel soundModel,
+            ModelData modelData,
+            IRecognitionStatusCallback iRecognitionStatusCallback,
+            SoundTrigger.RecognitionConfig recognitionConfig,
+            boolean z) {
         SoundTrigger.SoundModel soundModel2;
         SoundTrigger.SoundModel soundModel3;
         SoundTrigger.SoundModel soundModel4;
@@ -794,7 +908,9 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         synchronized (this.mLock) {
             IRecognitionStatusCallback callback = modelData.getCallback();
             if (callback != null && callback.asBinder() != iRecognitionStatusCallback.asBinder()) {
-                Slog.w("SoundTriggerHelper", "Canceling previous recognition for model id: " + modelData.getModelId());
+                Slog.w(
+                        "SoundTriggerHelper",
+                        "Canceling previous recognition for model id: " + modelData.getModelId());
                 try {
                     callback.onPreempted();
                 } catch (RemoteException e) {
@@ -826,8 +942,12 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                         z3 = modelData.isModelLoaded();
                     }
                 }
-                if ((z2 || z3) && (tryStopAndUnloadLocked = tryStopAndUnloadLocked(modelData, z2, z3)) != 0) {
-                    Slog.w("SoundTriggerHelper", "Unable to stop or unload previous model: " + modelData.toString());
+                if ((z2 || z3)
+                        && (tryStopAndUnloadLocked = tryStopAndUnloadLocked(modelData, z2, z3))
+                                != 0) {
+                    Slog.w(
+                            "SoundTriggerHelper",
+                            "Unable to stop or unload previous model: " + modelData.toString());
                     return tryStopAndUnloadLocked;
                 }
             }
@@ -856,11 +976,19 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             }
             if (iRecognitionStatusCallback != null) {
                 try {
-                    this.mEventLogger.enqueue(new SoundTriggerEvent$ServiceEvent(SoundTriggerEvent$SessionEvent$Type.PAUSE, modelData.getModelId(), (String) null));
+                    this.mEventLogger.enqueue(
+                            new SoundTriggerEvent$ServiceEvent(
+                                    SoundTriggerEvent$SessionEvent$Type.PAUSE,
+                                    modelData.getModelId(),
+                                    (String) null));
                     iRecognitionStatusCallback.onRecognitionPaused();
                 } catch (RemoteException e2) {
                     EventLogger eventLogger = this.mEventLogger;
-                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent = new SoundTriggerEvent$ServiceEvent(SoundTriggerEvent$SessionEvent$Type.PAUSE, modelData.getModelId(), "RemoteException");
+                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent =
+                            new SoundTriggerEvent$ServiceEvent(
+                                    SoundTriggerEvent$SessionEvent$Type.PAUSE,
+                                    modelData.getModelId(),
+                                    "RemoteException");
                     soundTriggerEvent$ServiceEvent.printLog(2, "SoundTriggerHelper");
                     eventLogger.enqueue(soundTriggerEvent$ServiceEvent);
                     forceStopAndUnloadModelLocked(modelData, e2, null);
@@ -870,7 +998,8 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         }
     }
 
-    public final int stopGenericRecognition(UUID uuid, IRecognitionStatusCallback iRecognitionStatusCallback) {
+    public final int stopGenericRecognition(
+            UUID uuid, IRecognitionStatusCallback iRecognitionStatusCallback) {
         synchronized (this.mLock) {
             try {
                 MetricsLogger.count(this.mContext, "sth_stop_recognition", 1);
@@ -880,16 +1009,23 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                     }
                     ModelData modelData = (ModelData) this.mModelDataMap.get(uuid);
                     if (modelData != null && modelData.isGenericModel()) {
-                        int stopRecognition = stopRecognition(modelData, iRecognitionStatusCallback);
+                        int stopRecognition =
+                                stopRecognition(modelData, iRecognitionStatusCallback);
                         if (stopRecognition != 0) {
-                            Slog.w("SoundTriggerHelper", "stopGenericRecognition failed: " + stopRecognition);
+                            Slog.w(
+                                    "SoundTriggerHelper",
+                                    "stopGenericRecognition failed: " + stopRecognition);
                         }
                         return stopRecognition;
                     }
-                    Slog.w("SoundTriggerHelper", "Attempting stopRecognition on invalid model with id:" + uuid);
+                    Slog.w(
+                            "SoundTriggerHelper",
+                            "Attempting stopRecognition on invalid model with id:" + uuid);
                     return Integer.MIN_VALUE;
                 }
-                Slog.e("SoundTriggerHelper", "Null callbackreceived for stopGenericRecognition() for modelid:" + uuid);
+                Slog.e(
+                        "SoundTriggerHelper",
+                        "Null callbackreceived for stopGenericRecognition() for modelid:" + uuid);
                 return Integer.MIN_VALUE;
             } catch (Throwable th) {
                 throw th;
@@ -897,20 +1033,26 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         }
     }
 
-    public final int stopKeyphraseRecognition(int i, IRecognitionStatusCallback iRecognitionStatusCallback) {
+    public final int stopKeyphraseRecognition(
+            int i, IRecognitionStatusCallback iRecognitionStatusCallback) {
         synchronized (this.mLock) {
             try {
                 MetricsLogger.count(this.mContext, "sth_stop_recognition", 1);
                 if (iRecognitionStatusCallback == null) {
-                    Slog.e("SoundTriggerHelper", "Null callback received for stopKeyphraseRecognition() for keyphraseId:" + i);
+                    Slog.e(
+                            "SoundTriggerHelper",
+                            "Null callback received for stopKeyphraseRecognition() for keyphraseId:"
+                                    + i);
                     return Integer.MIN_VALUE;
                 }
                 if (this.mIsDetached) {
                     throw new IllegalStateException("SoundTriggerHelper has been detached");
                 }
                 ModelData keyphraseModelDataLocked = getKeyphraseModelDataLocked(i);
-                if (keyphraseModelDataLocked != null && keyphraseModelDataLocked.isKeyphraseModel()) {
-                    int stopRecognition = stopRecognition(keyphraseModelDataLocked, iRecognitionStatusCallback);
+                if (keyphraseModelDataLocked != null
+                        && keyphraseModelDataLocked.isKeyphraseModel()) {
+                    int stopRecognition =
+                            stopRecognition(keyphraseModelDataLocked, iRecognitionStatusCallback);
                     return stopRecognition != 0 ? stopRecognition : stopRecognition;
                 }
                 Slog.w("SoundTriggerHelper", "No model exists for given keyphrase Id " + i);
@@ -921,7 +1063,8 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         }
     }
 
-    public final int stopRecognition(ModelData modelData, IRecognitionStatusCallback iRecognitionStatusCallback) {
+    public final int stopRecognition(
+            ModelData modelData, IRecognitionStatusCallback iRecognitionStatusCallback) {
         boolean z;
         synchronized (this.mLock) {
             try {
@@ -939,7 +1082,9 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                     }
                     if (z || modelData.isModelStarted()) {
                         if (callback.asBinder() != iRecognitionStatusCallback.asBinder()) {
-                            Slog.w("SoundTriggerHelper", "Attempting stopRecognition for another recognition");
+                            Slog.w(
+                                    "SoundTriggerHelper",
+                                    "Attempting stopRecognition for another recognition");
                             return Integer.MIN_VALUE;
                         }
                         modelData.setRequested(false);
@@ -959,7 +1104,9 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                         return updateRecognitionLocked;
                     }
                 }
-                Slog.w("SoundTriggerHelper", "Attempting stopRecognition without a successful startRecognition");
+                Slog.w(
+                        "SoundTriggerHelper",
+                        "Attempting stopRecognition without a successful startRecognition");
                 return Integer.MIN_VALUE;
             } catch (Throwable th) {
                 throw th;
@@ -968,27 +1115,38 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
     }
 
     public final int stopRecognitionLocked(ModelData modelData, boolean z) {
-        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type = SoundTriggerEvent$SessionEvent$Type.PAUSE;
-        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type2 = SoundTriggerEvent$SessionEvent$Type.PAUSE_FAILED;
+        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type =
+                SoundTriggerEvent$SessionEvent$Type.PAUSE;
+        SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type2 =
+                SoundTriggerEvent$SessionEvent$Type.PAUSE_FAILED;
         if (this.mModule == null) {
             return Integer.MIN_VALUE;
         }
         IRecognitionStatusCallback callback = modelData.getCallback();
         int stopRecognition = this.mModule.stopRecognition(modelData.getHandle());
         if (stopRecognition != 0) {
-            NandswapManager$$ExternalSyntheticOutline0.m(stopRecognition, "stopRecognition call failed with ", "SoundTriggerHelper");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    stopRecognition, "stopRecognition call failed with ", "SoundTriggerHelper");
             MetricsLogger.count(this.mContext, "sth_stop_recognition_error", 1);
             if (z) {
                 try {
                     EventLogger eventLogger = this.mEventLogger;
-                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent = new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type2, modelData.getModelId(), String.valueOf(stopRecognition));
+                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent =
+                            new SoundTriggerEvent$ServiceEvent(
+                                    soundTriggerEvent$SessionEvent$Type2,
+                                    modelData.getModelId(),
+                                    String.valueOf(stopRecognition));
                     soundTriggerEvent$ServiceEvent.printLog(2, "SoundTriggerHelper");
                     eventLogger.enqueue(soundTriggerEvent$ServiceEvent);
                     modelData.setRequested(false);
                     callback.onPauseFailed(stopRecognition);
                 } catch (RemoteException e) {
                     EventLogger eventLogger2 = this.mEventLogger;
-                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent2 = new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type2, modelData.getModelId(), String.valueOf(stopRecognition) + " - RemoteException");
+                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent2 =
+                            new SoundTriggerEvent$ServiceEvent(
+                                    soundTriggerEvent$SessionEvent$Type2,
+                                    modelData.getModelId(),
+                                    String.valueOf(stopRecognition) + " - RemoteException");
                     soundTriggerEvent$ServiceEvent2.printLog(2, "SoundTriggerHelper");
                     eventLogger2.enqueue(soundTriggerEvent$ServiceEvent2);
                     forceStopAndUnloadModelLocked(modelData, e, null);
@@ -999,11 +1157,19 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             MetricsLogger.count(this.mContext, "sth_stop_recognition_success", 1);
             if (z) {
                 try {
-                    this.mEventLogger.enqueue(new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type, modelData.getModelId(), (String) null));
+                    this.mEventLogger.enqueue(
+                            new SoundTriggerEvent$ServiceEvent(
+                                    soundTriggerEvent$SessionEvent$Type,
+                                    modelData.getModelId(),
+                                    (String) null));
                     callback.onRecognitionPaused();
                 } catch (RemoteException e2) {
                     EventLogger eventLogger3 = this.mEventLogger;
-                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent3 = new SoundTriggerEvent$ServiceEvent(soundTriggerEvent$SessionEvent$Type, modelData.getModelId(), "RemoteException");
+                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent3 =
+                            new SoundTriggerEvent$ServiceEvent(
+                                    soundTriggerEvent$SessionEvent$Type,
+                                    modelData.getModelId(),
+                                    "RemoteException");
                     soundTriggerEvent$ServiceEvent3.printLog(2, "SoundTriggerHelper");
                     eventLogger3.enqueue(soundTriggerEvent$ServiceEvent3);
                     forceStopAndUnloadModelLocked(modelData, e2, null);
@@ -1024,7 +1190,8 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             return 0;
         }
         if (z && modelData.isModelStarted() && (i = stopRecognitionLocked(modelData, false)) != 0) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "stopRecognition failed: ", "SoundTriggerHelper");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i, "stopRecognition failed: ", "SoundTriggerHelper");
             return i;
         }
         if (z2 && modelData.isModelLoaded()) {
@@ -1036,7 +1203,8 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             i = soundTriggerModule.unloadSoundModel(modelData.getHandle());
             MetricsLogger.count(this.mContext, "sth_unloading_stale_model", 1);
             if (i != 0) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i, "unloadSoundModel call failed with ", "SoundTriggerHelper");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i, "unloadSoundModel call failed with ", "SoundTriggerHelper");
             } else {
                 modelData.clearState();
             }
@@ -1056,25 +1224,40 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                     ModelData modelData = (ModelData) this.mModelDataMap.get(uuid);
                     if (modelData != null && modelData.isGenericModel()) {
                         if (!modelData.isModelLoaded()) {
-                            Slog.i("SoundTriggerHelper", "Unload: Given generic model is not loaded:" + uuid);
+                            Slog.i(
+                                    "SoundTriggerHelper",
+                                    "Unload: Given generic model is not loaded:" + uuid);
                             return 0;
                         }
-                        if (modelData.isModelStarted() && (stopRecognitionLocked = stopRecognitionLocked(modelData, false)) != 0) {
-                            Slog.w("SoundTriggerHelper", "stopGenericRecognition failed: " + stopRecognitionLocked);
+                        if (modelData.isModelStarted()
+                                && (stopRecognitionLocked = stopRecognitionLocked(modelData, false))
+                                        != 0) {
+                            Slog.w(
+                                    "SoundTriggerHelper",
+                                    "stopGenericRecognition failed: " + stopRecognitionLocked);
                         }
                         SoundTriggerModule soundTriggerModule = this.mModule;
                         if (soundTriggerModule == null) {
                             return Integer.MIN_VALUE;
                         }
-                        int unloadSoundModel = soundTriggerModule.unloadSoundModel(modelData.getHandle());
+                        int unloadSoundModel =
+                                soundTriggerModule.unloadSoundModel(modelData.getHandle());
                         if (unloadSoundModel != 0) {
-                            Slog.w("SoundTriggerHelper", "unloadGenericSoundModel() call failed with " + unloadSoundModel);
-                            Slog.w("SoundTriggerHelper", "unloadGenericSoundModel() force-marking model as unloaded.");
+                            Slog.w(
+                                    "SoundTriggerHelper",
+                                    "unloadGenericSoundModel() call failed with "
+                                            + unloadSoundModel);
+                            Slog.w(
+                                    "SoundTriggerHelper",
+                                    "unloadGenericSoundModel() force-marking model as unloaded.");
                         }
                         this.mModelDataMap.remove(uuid);
                         return unloadSoundModel;
                     }
-                    Slog.w("SoundTriggerHelper", "Unload error: Attempting unload invalid generic model with id:" + uuid);
+                    Slog.w(
+                            "SoundTriggerHelper",
+                            "Unload error: Attempting unload invalid generic model with id:"
+                                    + uuid);
                     return Integer.MIN_VALUE;
                 }
                 return Integer.MIN_VALUE;
@@ -1088,18 +1271,28 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             try {
                 MetricsLogger.count(this.mContext, "sth_unload_keyphrase_sound_model", 1);
                 ModelData keyphraseModelDataLocked = getKeyphraseModelDataLocked(i);
-                if (this.mModule != null && keyphraseModelDataLocked != null && keyphraseModelDataLocked.isModelLoaded() && keyphraseModelDataLocked.isKeyphraseModel()) {
+                if (this.mModule != null
+                        && keyphraseModelDataLocked != null
+                        && keyphraseModelDataLocked.isModelLoaded()
+                        && keyphraseModelDataLocked.isKeyphraseModel()) {
                     if (this.mIsDetached) {
                         throw new IllegalStateException("SoundTriggerHelper has been detached");
                     }
                     keyphraseModelDataLocked.setRequested(false);
-                    int updateRecognitionLocked = updateRecognitionLocked(keyphraseModelDataLocked, false);
+                    int updateRecognitionLocked =
+                            updateRecognitionLocked(keyphraseModelDataLocked, false);
                     if (updateRecognitionLocked != 0) {
-                        Slog.w("SoundTriggerHelper", "Stop recognition failed for keyphrase ID:" + updateRecognitionLocked);
+                        Slog.w(
+                                "SoundTriggerHelper",
+                                "Stop recognition failed for keyphrase ID:"
+                                        + updateRecognitionLocked);
                     }
-                    int unloadSoundModel = this.mModule.unloadSoundModel(keyphraseModelDataLocked.getHandle());
+                    int unloadSoundModel =
+                            this.mModule.unloadSoundModel(keyphraseModelDataLocked.getHandle());
                     if (unloadSoundModel != 0) {
-                        Slog.w("SoundTriggerHelper", "unloadKeyphraseSoundModel call failed with " + unloadSoundModel);
+                        Slog.w(
+                                "SoundTriggerHelper",
+                                "unloadKeyphraseSoundModel call failed with " + unloadSoundModel);
                     }
                     UUID uuid = (UUID) this.mKeyphraseUuidMap.get(Integer.valueOf(i));
                     if (uuid != null) {
@@ -1139,15 +1332,27 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
         }
         int i2 = Integer.MIN_VALUE;
         if (this.mModule == null) {
-            Slog.w("SoundTriggerHelper", "prepareForRecognition: cannot attach to sound trigger module");
+            Slog.w(
+                    "SoundTriggerHelper",
+                    "prepareForRecognition: cannot attach to sound trigger module");
             i = Integer.MIN_VALUE;
         } else {
             if (!modelData.isModelLoaded()) {
                 Iterator it = this.mModelDataMap.entrySet().iterator();
                 while (it.hasNext()) {
                     ModelData modelData2 = (ModelData) ((Map.Entry) it.next()).getValue();
-                    if (modelData2.isModelLoaded() && (modelData2.getCallback() == null || (modelData2.getCallback().asBinder() != null && !modelData2.getCallback().asBinder().pingBinder()))) {
-                        Slog.w("SoundTriggerHelper", "Removing model " + modelData2.getHandle() + " that has no clients");
+                    if (modelData2.isModelLoaded()
+                            && (modelData2.getCallback() == null
+                                    || (modelData2.getCallback().asBinder() != null
+                                            && !modelData2
+                                                    .getCallback()
+                                                    .asBinder()
+                                                    .pingBinder()))) {
+                        Slog.w(
+                                "SoundTriggerHelper",
+                                "Removing model "
+                                        + modelData2.getHandle()
+                                        + " that has no clients");
                         forceStopAndUnloadModelLocked(modelData2, null, it);
                     }
                 }
@@ -1158,7 +1363,10 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                 }
                 i = soundTriggerModule.loadSoundModel(soundModel, iArr);
                 if (i != 0) {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(i, "prepareForRecognition: loadSoundModel failed with status: ", "SoundTriggerHelper");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            i,
+                            "prepareForRecognition: loadSoundModel failed with status: ",
+                            "SoundTriggerHelper");
                 } else {
                     int i3 = iArr[0];
                     synchronized (modelData) {
@@ -1172,7 +1380,9 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             i = 0;
         }
         if (i != 0) {
-            Slog.w("SoundTriggerHelper", "startRecognition failed to prepare model for recognition");
+            Slog.w(
+                    "SoundTriggerHelper",
+                    "startRecognition failed to prepare model for recognition");
             return i;
         }
         IRecognitionStatusCallback callback = modelData.getCallback();
@@ -1191,7 +1401,9 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
             SoundTriggerModule soundTriggerModule2 = this.mModule;
             if (soundTriggerModule2 != null) {
                 try {
-                    startRecognitionWithToken = soundTriggerModule2.startRecognitionWithToken(modelData.getHandle(), recognitionConfig);
+                    startRecognitionWithToken =
+                            soundTriggerModule2.startRecognitionWithToken(
+                                    modelData.getHandle(), recognitionConfig);
                 } catch (Exception e) {
                     i2 = SoundTrigger.handleException(e);
                 }
@@ -1199,19 +1411,28 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                     modelData.mRecognitionToken = startRecognitionWithToken;
                     i2 = 0;
                     if (i2 != 0) {
-                        DeviceIdleController$$ExternalSyntheticOutline0.m(i2, "startRecognition failed with ", "SoundTriggerHelper");
+                        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                i2, "startRecognition failed with ", "SoundTriggerHelper");
                         MetricsLogger.count(this.mContext, "sth_start_recognition_error", 1);
                         if (z) {
                             try {
                                 EventLogger eventLogger = this.mEventLogger;
-                                SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent = new SoundTriggerEvent$ServiceEvent(SoundTriggerEvent$SessionEvent$Type.RESUME_FAILED, modelData.getModelId(), String.valueOf(i2));
+                                SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent =
+                                        new SoundTriggerEvent$ServiceEvent(
+                                                SoundTriggerEvent$SessionEvent$Type.RESUME_FAILED,
+                                                modelData.getModelId(),
+                                                String.valueOf(i2));
                                 soundTriggerEvent$ServiceEvent.printLog(2, "SoundTriggerHelper");
                                 eventLogger.enqueue(soundTriggerEvent$ServiceEvent);
                                 modelData.setRequested(false);
                                 callback.onResumeFailed(i2);
                             } catch (RemoteException e2) {
                                 EventLogger eventLogger2 = this.mEventLogger;
-                                SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent2 = new SoundTriggerEvent$ServiceEvent(SoundTriggerEvent$SessionEvent$Type.RESUME_FAILED, modelData.getModelId(), String.valueOf(i2) + " - RemoteException");
+                                SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent2 =
+                                        new SoundTriggerEvent$ServiceEvent(
+                                                SoundTriggerEvent$SessionEvent$Type.RESUME_FAILED,
+                                                modelData.getModelId(),
+                                                String.valueOf(i2) + " - RemoteException");
                                 soundTriggerEvent$ServiceEvent2.printLog(2, "SoundTriggerHelper");
                                 eventLogger2.enqueue(soundTriggerEvent$ServiceEvent2);
                                 forceStopAndUnloadModelLocked(modelData, e2, null);
@@ -1224,12 +1445,21 @@ public final class SoundTriggerHelper implements SoundTrigger.StatusListener {
                             modelData.mModelState = 2;
                             if (z) {
                                 try {
-                                    this.mEventLogger.enqueue(new SoundTriggerEvent$ServiceEvent(SoundTriggerEvent$SessionEvent$Type.RESUME, modelData.getModelId(), (String) null));
+                                    this.mEventLogger.enqueue(
+                                            new SoundTriggerEvent$ServiceEvent(
+                                                    SoundTriggerEvent$SessionEvent$Type.RESUME,
+                                                    modelData.getModelId(),
+                                                    (String) null));
                                     callback.onRecognitionResumed();
                                 } catch (RemoteException e3) {
                                     EventLogger eventLogger3 = this.mEventLogger;
-                                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent3 = new SoundTriggerEvent$ServiceEvent(SoundTriggerEvent$SessionEvent$Type.RESUME, modelData.getModelId(), "RemoteException");
-                                    soundTriggerEvent$ServiceEvent3.printLog(2, "SoundTriggerHelper");
+                                    SoundTriggerEvent$ServiceEvent soundTriggerEvent$ServiceEvent3 =
+                                            new SoundTriggerEvent$ServiceEvent(
+                                                    SoundTriggerEvent$SessionEvent$Type.RESUME,
+                                                    modelData.getModelId(),
+                                                    "RemoteException");
+                                    soundTriggerEvent$ServiceEvent3.printLog(
+                                            2, "SoundTriggerHelper");
                                     eventLogger3.enqueue(soundTriggerEvent$ServiceEvent3);
                                     forceStopAndUnloadModelLocked(modelData, e3, null);
                                 }

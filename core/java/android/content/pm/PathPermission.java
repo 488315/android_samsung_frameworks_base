@@ -6,19 +6,21 @@ import android.os.PatternMatcher;
 
 /* loaded from: classes.dex */
 public class PathPermission extends PatternMatcher {
-    public static final Parcelable.Creator<PathPermission> CREATOR = new Parcelable.Creator<PathPermission>() { // from class: android.content.pm.PathPermission.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PathPermission createFromParcel(Parcel source) {
-            return new PathPermission(source);
-        }
+    public static final Parcelable.Creator<PathPermission> CREATOR =
+            new Parcelable.Creator<
+                    PathPermission>() { // from class: android.content.pm.PathPermission.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PathPermission createFromParcel(Parcel source) {
+                    return new PathPermission(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PathPermission[] newArray(int size) {
-            return new PathPermission[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PathPermission[] newArray(int size) {
+                    return new PathPermission[size];
+                }
+            };
     private final String mReadPermission;
     private final String mWritePermission;
 

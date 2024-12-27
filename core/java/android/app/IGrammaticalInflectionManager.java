@@ -11,9 +11,11 @@ import android.os.RemoteException;
 public interface IGrammaticalInflectionManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.IGrammaticalInflectionManager";
 
-    int getSystemGrammaticalGender(AttributionSource attributionSource, int i) throws RemoteException;
+    int getSystemGrammaticalGender(AttributionSource attributionSource, int i)
+            throws RemoteException;
 
-    int peekSystemGrammaticalGenderByUserId(AttributionSource attributionSource, int i) throws RemoteException;
+    int peekSystemGrammaticalGenderByUserId(AttributionSource attributionSource, int i)
+            throws RemoteException;
 
     void setRequestedApplicationGrammaticalGender(String str, int i, int i2) throws RemoteException;
 
@@ -21,20 +23,21 @@ public interface IGrammaticalInflectionManager extends IInterface {
 
     public static class Default implements IGrammaticalInflectionManager {
         @Override // android.app.IGrammaticalInflectionManager
-        public void setRequestedApplicationGrammaticalGender(String appPackageName, int userId, int gender) throws RemoteException {
-        }
+        public void setRequestedApplicationGrammaticalGender(
+                String appPackageName, int userId, int gender) throws RemoteException {}
 
         @Override // android.app.IGrammaticalInflectionManager
-        public void setSystemWideGrammaticalGender(int gender, int userId) throws RemoteException {
-        }
+        public void setSystemWideGrammaticalGender(int gender, int userId) throws RemoteException {}
 
         @Override // android.app.IGrammaticalInflectionManager
-        public int getSystemGrammaticalGender(AttributionSource attributionSource, int userId) throws RemoteException {
+        public int getSystemGrammaticalGender(AttributionSource attributionSource, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IGrammaticalInflectionManager
-        public int peekSystemGrammaticalGenderByUserId(AttributionSource attributionSource, int userId) throws RemoteException {
+        public int peekSystemGrammaticalGenderByUserId(
+                AttributionSource attributionSource, int userId) throws RemoteException {
             return 0;
         }
 
@@ -44,7 +47,7 @@ public interface IGrammaticalInflectionManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGrammaticalInflectionManager {
+    public abstract static class Stub extends Binder implements IGrammaticalInflectionManager {
         static final int TRANSACTION_getSystemGrammaticalGender = 3;
         static final int TRANSACTION_peekSystemGrammaticalGenderByUserId = 4;
         static final int TRANSACTION_setRequestedApplicationGrammaticalGender = 1;
@@ -91,7 +94,8 @@ public interface IGrammaticalInflectionManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGrammaticalInflectionManager.DESCRIPTOR);
             }
@@ -116,7 +120,8 @@ public interface IGrammaticalInflectionManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 3:
-                    AttributionSource _arg03 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+                    AttributionSource _arg03 =
+                            (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result = getSystemGrammaticalGender(_arg03, _arg13);
@@ -124,7 +129,8 @@ public interface IGrammaticalInflectionManager extends IInterface {
                     reply.writeInt(_result);
                     return true;
                 case 4:
-                    AttributionSource _arg04 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+                    AttributionSource _arg04 =
+                            (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
                     int _arg14 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result2 = peekSystemGrammaticalGenderByUserId(_arg04, _arg14);
@@ -153,7 +159,8 @@ public interface IGrammaticalInflectionManager extends IInterface {
             }
 
             @Override // android.app.IGrammaticalInflectionManager
-            public void setRequestedApplicationGrammaticalGender(String appPackageName, int userId, int gender) throws RemoteException {
+            public void setRequestedApplicationGrammaticalGender(
+                    String appPackageName, int userId, int gender) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -170,7 +177,8 @@ public interface IGrammaticalInflectionManager extends IInterface {
             }
 
             @Override // android.app.IGrammaticalInflectionManager
-            public void setSystemWideGrammaticalGender(int gender, int userId) throws RemoteException {
+            public void setSystemWideGrammaticalGender(int gender, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -186,7 +194,8 @@ public interface IGrammaticalInflectionManager extends IInterface {
             }
 
             @Override // android.app.IGrammaticalInflectionManager
-            public int getSystemGrammaticalGender(AttributionSource attributionSource, int userId) throws RemoteException {
+            public int getSystemGrammaticalGender(AttributionSource attributionSource, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -204,7 +213,8 @@ public interface IGrammaticalInflectionManager extends IInterface {
             }
 
             @Override // android.app.IGrammaticalInflectionManager
-            public int peekSystemGrammaticalGenderByUserId(AttributionSource attributionSource, int userId) throws RemoteException {
+            public int peekSystemGrammaticalGenderByUserId(
+                    AttributionSource attributionSource, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

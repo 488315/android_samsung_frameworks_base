@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
 import java.util.ArrayList;
 
 /* loaded from: classes2.dex */
@@ -77,12 +78,18 @@ class ReverseLinearLayout extends LinearLayout {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private static void reverseParams(ViewGroup.LayoutParams params, View view, boolean isLayoutReverse) {
+    private static void reverseParams(
+            ViewGroup.LayoutParams params, View view, boolean isLayoutReverse) {
         if (view instanceof Reversible) {
             ((Reversible) view).reverse(isLayoutReverse);
         }
-        if (view.getPaddingLeft() == view.getPaddingRight() && view.getPaddingTop() == view.getPaddingBottom()) {
-            view.setPadding(view.getPaddingTop(), view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingLeft());
+        if (view.getPaddingLeft() == view.getPaddingRight()
+                && view.getPaddingTop() == view.getPaddingBottom()) {
+            view.setPadding(
+                    view.getPaddingTop(),
+                    view.getPaddingLeft(),
+                    view.getPaddingTop(),
+                    view.getPaddingLeft());
         }
         if (params == null) {
             return;

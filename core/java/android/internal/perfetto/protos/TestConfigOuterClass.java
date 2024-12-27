@@ -11,8 +11,7 @@ public final class TestConfigOuterClass {
         public static final long SEED = 1155346202627L;
         public static final long SEND_BATCH_ON_REGISTER = 1133871366149L;
 
-        public TestConfig() {
-        }
+        public TestConfig() {}
 
         public final class DummyFields {
             public static final long FIELD_BYTES = 1151051235342L;
@@ -30,8 +29,7 @@ public final class TestConfigOuterClass {
             public static final long FIELD_UINT32 = 1155346202625L;
             public static final long FIELD_UINT64 = 1116691496963L;
 
-            public DummyFields() {
-            }
+            public DummyFields() {}
         }
     }
 }

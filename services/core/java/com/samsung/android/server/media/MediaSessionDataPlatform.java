@@ -9,13 +9,15 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Process;
 import android.util.Log;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.media.MediaSessionRecord;
 import com.android.server.utils.EventLogger;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.media.SemMediaResourceHelper;
 import com.samsung.android.server.audio.AudioExecutor;
-import com.samsung.android.server.media.MediaSessionDataPlatform;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -101,14 +103,37 @@ public final class MediaSessionDataPlatform {
         }
 
         public final String toString() {
-            return "packageName:" + this.packageName + ", title:" + this.title + ", artist:" + this.artist + ", album:" + this.album + ", genre:" + this.genre + ", mediaType:" + this.mediaType + ", castType:" + this.castType + ", startTime:" + this.startTime + ", endTime:" + this.endTime + ", playingTime:" + this.playingTime + ", duration: " + this.duration;
+            return "packageName:"
+                    + this.packageName
+                    + ", title:"
+                    + this.title
+                    + ", artist:"
+                    + this.artist
+                    + ", album:"
+                    + this.album
+                    + ", genre:"
+                    + this.genre
+                    + ", mediaType:"
+                    + this.mediaType
+                    + ", castType:"
+                    + this.castType
+                    + ", startTime:"
+                    + this.startTime
+                    + ", endTime:"
+                    + this.endTime
+                    + ", playingTime:"
+                    + this.playingTime
+                    + ", duration: "
+                    + this.duration;
         }
     }
 
     public MediaSessionDataPlatform(Context context) {
         this.mSemMediaResourceHelper = null;
         mCr = context.getContentResolver();
-        this.mUri = Uri.parse("content://com.samsung.android.moneta.datacollector.reception.external.data/media_history");
+        this.mUri =
+                Uri.parse(
+                        "content://com.samsung.android.moneta.datacollector.reception.external.data/media_history");
         Log.i("MediaSessionDataPlatform", "createMediaResourceHelper");
         try {
             this.mSemMediaResourceHelper = SemMediaResourceHelper.createInstance(2, false);
@@ -121,7 +146,8 @@ public final class MediaSessionDataPlatform {
         return str != null ? (str.equals(str2) || str2 == null) ? false : true : str2 != null;
     }
 
-    public static int isMetadataChanged(ListeningToMusic listeningToMusic, MediaMetadata mediaMetadata) {
+    public static int isMetadataChanged(
+            ListeningToMusic listeningToMusic, MediaMetadata mediaMetadata) {
         String str;
         if (listeningToMusic == null || (str = listeningToMusic.title) == null) {
             return mediaMetadata != null ? 1 : 0;
@@ -141,10 +167,14 @@ public final class MediaSessionDataPlatform {
             if (compareString(str2, string)) {
                 return 2;
             }
-            if (compareString(listeningToMusic.album, mediaMetadata.getString("android.media.metadata.ALBUM"))) {
+            if (compareString(
+                    listeningToMusic.album,
+                    mediaMetadata.getString("android.media.metadata.ALBUM"))) {
                 return 3;
             }
-            if (mediaMetadata.getLong("android.media.metadata.DURATION") > 0 && listeningToMusic.duration != mediaMetadata.getLong("android.media.metadata.DURATION")) {
+            if (mediaMetadata.getLong("android.media.metadata.DURATION") > 0
+                    && listeningToMusic.duration
+                            != mediaMetadata.getLong("android.media.metadata.DURATION")) {
                 return 4;
             }
         }
@@ -158,11 +188,14 @@ public final class MediaSessionDataPlatform {
             if (mediaResourceInfo != null) {
                 Iterator it = mediaResourceInfo.iterator();
                 while (it.hasNext()) {
-                    SemMediaResourceHelper.MediaResourceInfo mediaResourceInfo2 = (SemMediaResourceHelper.MediaResourceInfo) it.next();
+                    SemMediaResourceHelper.MediaResourceInfo mediaResourceInfo2 =
+                            (SemMediaResourceHelper.MediaResourceInfo) it.next();
                     boolean isEncoder = mediaResourceInfo2.isEncoder();
                     int uidForPid = Process.getUidForPid(mediaResourceInfo2.getPid());
                     if (!isEncoder && uidForPid == i) {
-                        EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("getMediaType for uid: " + i + " Video");
+                        EventLogger.StringEvent stringEvent =
+                                new EventLogger.StringEvent(
+                                        "getMediaType for uid: " + i + " Video");
                         stringEvent.printLog(0, "MediaSessionDataPlatform");
                         eventLogger.enqueue(stringEvent);
                         return "Video";
@@ -182,17 +215,23 @@ public final class MediaSessionDataPlatform {
                 Log.i("MediaSessionDataPlatform", "IllegalStateException SemMediaResourceHelper");
             }
         }
-        EventLogger.StringEvent stringEvent2 = new EventLogger.StringEvent(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "getMediaType for uid: ", " Audio"));
+        EventLogger.StringEvent stringEvent2 =
+                new EventLogger.StringEvent(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i, "getMediaType for uid: ", " Audio"));
         stringEvent2.printLog(0, "MediaSessionDataPlatform");
         eventLogger.enqueue(stringEvent2);
         return "Audio";
     }
 
     public final void sendData(MediaSessionRecord mediaSessionRecord) {
-        final ListeningToMusic listeningToMusic = (ListeningToMusic) this.mPlayList.get(Integer.valueOf(mediaSessionRecord.mOwnerUid));
+        final ListeningToMusic listeningToMusic =
+                (ListeningToMusic)
+                        this.mPlayList.get(Integer.valueOf(mediaSessionRecord.mOwnerUid));
         EventLogger eventLogger = this.mEventLogger;
         if (listeningToMusic == null) {
-            EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("Failed: insert data is null");
+            EventLogger.StringEvent stringEvent =
+                    new EventLogger.StringEvent("Failed: insert data is null");
             stringEvent.printLog(0, "MediaSessionDataPlatform");
             eventLogger.enqueue(stringEvent);
             return;
@@ -202,32 +241,49 @@ public final class MediaSessionDataPlatform {
         long j = epochMilli - listeningToMusic.startTime;
         listeningToMusic.playingTime = j;
         if (j >= 59500) {
-            AudioExecutor.execute(new Runnable() { // from class: com.samsung.android.server.media.MediaSessionDataPlatform$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    MediaSessionDataPlatform mediaSessionDataPlatform = MediaSessionDataPlatform.this;
-                    MediaSessionDataPlatform.ListeningToMusic listeningToMusic2 = listeningToMusic;
-                    mediaSessionDataPlatform.getClass();
-                    try {
-                        Uri insert = MediaSessionDataPlatform.mCr.insert(mediaSessionDataPlatform.mUri, listeningToMusic2.makeContentValues());
-                        EventLogger eventLogger2 = mediaSessionDataPlatform.mEventLogger;
-                        if (insert != null) {
-                            EventLogger.StringEvent stringEvent2 = new EventLogger.StringEvent("Succeeded: insert " + listeningToMusic2);
-                            stringEvent2.printLog(0, "MediaSessionDataPlatform");
-                            eventLogger2.enqueue(stringEvent2);
-                        } else {
-                            EventLogger.StringEvent stringEvent3 = new EventLogger.StringEvent("Failed: insert " + listeningToMusic2);
-                            stringEvent3.printLog(0, "MediaSessionDataPlatform");
-                            eventLogger2.enqueue(stringEvent3);
+            AudioExecutor.execute(
+                    new Runnable() { // from class:
+                                     // com.samsung.android.server.media.MediaSessionDataPlatform$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            MediaSessionDataPlatform mediaSessionDataPlatform =
+                                    MediaSessionDataPlatform.this;
+                            MediaSessionDataPlatform.ListeningToMusic listeningToMusic2 =
+                                    listeningToMusic;
+                            mediaSessionDataPlatform.getClass();
+                            try {
+                                Uri insert =
+                                        MediaSessionDataPlatform.mCr.insert(
+                                                mediaSessionDataPlatform.mUri,
+                                                listeningToMusic2.makeContentValues());
+                                EventLogger eventLogger2 = mediaSessionDataPlatform.mEventLogger;
+                                if (insert != null) {
+                                    EventLogger.StringEvent stringEvent2 =
+                                            new EventLogger.StringEvent(
+                                                    "Succeeded: insert " + listeningToMusic2);
+                                    stringEvent2.printLog(0, "MediaSessionDataPlatform");
+                                    eventLogger2.enqueue(stringEvent2);
+                                } else {
+                                    EventLogger.StringEvent stringEvent3 =
+                                            new EventLogger.StringEvent(
+                                                    "Failed: insert " + listeningToMusic2);
+                                    stringEvent3.printLog(0, "MediaSessionDataPlatform");
+                                    eventLogger2.enqueue(stringEvent3);
+                                }
+                            } catch (Exception e) {
+                                Log.w("MediaSessionDataPlatform", e.getMessage());
+                            }
                         }
-                    } catch (Exception e) {
-                        Log.w("MediaSessionDataPlatform", e.getMessage());
-                    }
-                }
-            });
+                    });
             return;
         }
-        EventLogger.StringEvent stringEvent2 = new EventLogger.StringEvent(AudioConfig$$ExternalSyntheticOutline0.m(new StringBuilder("Do not send data because playing time too short "), listeningToMusic.playingTime, "ms"));
+        EventLogger.StringEvent stringEvent2 =
+                new EventLogger.StringEvent(
+                        AudioConfig$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(
+                                        "Do not send data because playing time too short "),
+                                listeningToMusic.playingTime,
+                                "ms"));
         stringEvent2.printLog(0, "MediaSessionDataPlatform");
         eventLogger.enqueue(stringEvent2);
     }

@@ -1,6 +1,7 @@
 package com.android.server.wm;
 
 import android.graphics.Rect;
+
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -30,7 +31,8 @@ public final /* synthetic */ class DisplayContent$$ExternalSyntheticLambda20 imp
             default:
                 boolean[] zArr = (boolean[]) obj2;
                 ActivityRecord activityRecord = (ActivityRecord) obj;
-                if (activityRecord.mImeInsetsFrozenUntilStartInput && activityRecord.isVisibleRequested()) {
+                if (activityRecord.mImeInsetsFrozenUntilStartInput
+                        && activityRecord.isVisibleRequested()) {
                     activityRecord.mImeInsetsFrozenUntilStartInput = false;
                     zArr[0] = true;
                     break;

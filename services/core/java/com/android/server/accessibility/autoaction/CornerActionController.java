@@ -15,6 +15,7 @@ import android.view.DisplayInfo;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityNodeInfo;
+
 import com.android.server.accessibility.autoaction.actiontype.BrightnessAction;
 import com.android.server.accessibility.autoaction.actiontype.CornerActionType;
 import com.android.server.accessibility.autoaction.actiontype.NavigationBarAction;
@@ -28,7 +29,9 @@ import com.android.server.accessibility.autoaction.actiontype.SendSOSMessages;
 import com.android.server.accessibility.autoaction.actiontype.SoundAction;
 import com.android.server.accessibility.autoaction.actiontype.TalkToBixby;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import com.samsung.android.widget.SemTipPopup;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -67,22 +70,35 @@ public final class CornerActionController {
         hashMap.put("click_and_hold", 128);
         hashMap.put("drag", 256);
         hashMap.put("drag_and_drop", 512);
-        POPUP_GRAVITY = new int[]{51, 53, 83, 85};
-        POPUP_DIRECTION = new int[]{3, 2, 1, 0};
-        TTS_CORNER = new int[]{R.string.accessibility_uncheck_legacy_item_warning, R.string.action_bar_home_description, R.string.accessibility_system_action_quick_settings_label, R.string.accessibility_system_action_recents_label};
+        POPUP_GRAVITY = new int[] {51, 53, 83, 85};
+        POPUP_DIRECTION = new int[] {3, 2, 1, 0};
+        TTS_CORNER =
+                new int[] {
+                    R.string.accessibility_uncheck_legacy_item_warning,
+                    R.string.action_bar_home_description,
+                    R.string.accessibility_system_action_quick_settings_label,
+                    R.string.accessibility_system_action_recents_label
+                };
     }
 
     public CornerActionController(Context context, int i) {
-        ContentObserver contentObserver = new ContentObserver(new Handler()) { // from class: com.android.server.accessibility.autoaction.CornerActionController.1
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z) {
-                CornerActionController cornerActionController = CornerActionController.this;
-                String stringForUser = Settings.Secure.getStringForUser(cornerActionController.mContentResolver, "accessibility_corner_actions", cornerActionController.mUserId);
-                if (stringForUser != null) {
-                    cornerActionController.mCornerActions = stringForUser.split(":");
-                }
-            }
-        };
+        ContentObserver contentObserver =
+                new ContentObserver(
+                        new Handler()) { // from class:
+                                         // com.android.server.accessibility.autoaction.CornerActionController.1
+                    @Override // android.database.ContentObserver
+                    public final void onChange(boolean z) {
+                        CornerActionController cornerActionController = CornerActionController.this;
+                        String stringForUser =
+                                Settings.Secure.getStringForUser(
+                                        cornerActionController.mContentResolver,
+                                        "accessibility_corner_actions",
+                                        cornerActionController.mUserId);
+                        if (stringForUser != null) {
+                            cornerActionController.mCornerActions = stringForUser.split(":");
+                        }
+                    }
+                };
         this.mContext = context;
         ContentResolver contentResolver = context.getContentResolver();
         this.mContentResolver = contentResolver;
@@ -95,7 +111,11 @@ public final class CornerActionController {
         layoutParams.type = 2006;
         layoutParams.flags = 32;
         layoutParams.samsungFlags |= 131072;
-        contentResolver.registerContentObserver(Settings.Secure.getUriFor("accessibility_corner_actions"), false, contentObserver, i);
+        contentResolver.registerContentObserver(
+                Settings.Secure.getUriFor("accessibility_corner_actions"),
+                false,
+                contentObserver,
+                i);
         contentObserver.onChange(true);
     }
 
@@ -103,7 +123,8 @@ public final class CornerActionController {
         CornerActionCircleCue cornerActionCircleCue = this.mDurationProgress;
         if (cornerActionCircleCue != null) {
             cornerActionCircleCue.getClass();
-            cornerActionCircleCue.runOnUiThread(new CornerActionCircleCue$$ExternalSyntheticLambda0(cornerActionCircleCue, 1));
+            cornerActionCircleCue.runOnUiThread(
+                    new CornerActionCircleCue$$ExternalSyntheticLambda0(cornerActionCircleCue, 1));
             this.mIsAnimating = false;
         }
     }
@@ -124,13 +145,15 @@ public final class CornerActionController {
             return 0;
         }
         int i2 = this.mScreenWidth;
-        if ((f == i2 - 1 && f2 < 40.0f) || (i2 - f < 40.0f && f2 == FullScreenMagnificationGestureHandler.MAX_SCALE)) {
+        if ((f == i2 - 1 && f2 < 40.0f)
+                || (i2 - f < 40.0f && f2 == FullScreenMagnificationGestureHandler.MAX_SCALE)) {
             return 1;
         }
         if (f < 40.0f && f2 == this.mScreenHeight - 1) {
             return 2;
         }
-        if (f == FullScreenMagnificationGestureHandler.MAX_SCALE && this.mScreenHeight - f2 < 40.0f) {
+        if (f == FullScreenMagnificationGestureHandler.MAX_SCALE
+                && this.mScreenHeight - f2 < 40.0f) {
             return 2;
         }
         if (i2 - f >= 40.0f || f2 != this.mScreenHeight - 1) {
@@ -142,7 +165,10 @@ public final class CornerActionController {
     public final Context getDisplayContext(int i) {
         Display display;
         DisplayManager displayManager = (DisplayManager) this.mContext.getSystemService("display");
-        return (displayManager == null || (display = displayManager.getDisplay(i)) == null) ? this.mContext : new ContextThemeWrapper(this.mContext.createDisplayContext(display), this.mContext.getTheme());
+        return (displayManager == null || (display = displayManager.getDisplay(i)) == null)
+                ? this.mContext
+                : new ContextThemeWrapper(
+                        this.mContext.createDisplayContext(display), this.mContext.getTheme());
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -165,7 +191,12 @@ public final class CornerActionController {
             case "swipe_right":
             case "double_click":
                 this.mGestureAction = str;
-                int intForUser = Settings.Secure.getIntForUser(this.mContentResolver, "accessibility_corner_action_tip_shown", 0, i3);
+                int intForUser =
+                        Settings.Secure.getIntForUser(
+                                this.mContentResolver,
+                                "accessibility_corner_action_tip_shown",
+                                0,
+                                i3);
                 int intValue = ((Integer) mGestureActionFlag.get(str)).intValue();
                 if ((intForUser & intValue) == 0) {
                     View view = new View(getDisplayContext(i));
@@ -175,55 +206,84 @@ public final class CornerActionController {
                     this.mWindowManager.addView(view, layoutParams);
                     this.mTipPopup = new SemTipPopup(this.mTipAnchorView);
                     Context context = this.mContext;
-                    String string = context.getString(R.string.accessibility_system_action_screenshot_label, context.getString(CornerActionType.getTitleResId(str)));
+                    String string =
+                            context.getString(
+                                    R.string.accessibility_system_action_screenshot_label,
+                                    context.getString(CornerActionType.getTitleResId(str)));
                     this.mTipPopup.setMessage(string);
                     this.mTipPopup.setExpanded(true);
-                    this.mTipPopup.setTargetPosition(i2 % 2 == 0 ? 0 : this.mScreenWidth, i2 < 2 ? 0 : this.mScreenHeight);
+                    this.mTipPopup.setTargetPosition(
+                            i2 % 2 == 0 ? 0 : this.mScreenWidth, i2 < 2 ? 0 : this.mScreenHeight);
                     final boolean[] zArr = {false};
-                    Runnable runnable = new Runnable() { // from class: com.android.server.accessibility.autoaction.CornerActionController$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            CornerActionController cornerActionController = CornerActionController.this;
-                            boolean[] zArr2 = zArr;
-                            if (cornerActionController.mTipPopup.isShowing()) {
-                                zArr2[0] = true;
-                                cornerActionController.mTipPopup.dismiss(false);
-                            }
-                        }
-                    };
-                    this.mTipPopup.setOnDismissListener(new SemTipPopup.OnDismissListener() { // from class: com.android.server.accessibility.autoaction.CornerActionController$$ExternalSyntheticLambda1
-                        public final void onDismiss() {
-                            View view2;
-                            CornerActionController cornerActionController = CornerActionController.this;
-                            boolean[] zArr2 = zArr;
-                            cornerActionController.getClass();
-                            if (!zArr2[0] || (view2 = cornerActionController.mTipAnchorView) == null) {
-                                return;
-                            }
-                            cornerActionController.mWindowManager.removeView(view2);
-                            cornerActionController.mTipAnchorView = null;
-                            zArr2[0] = false;
-                        }
-                    });
+                    Runnable runnable =
+                            new Runnable() { // from class:
+                                             // com.android.server.accessibility.autoaction.CornerActionController$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    CornerActionController cornerActionController =
+                                            CornerActionController.this;
+                                    boolean[] zArr2 = zArr;
+                                    if (cornerActionController.mTipPopup.isShowing()) {
+                                        zArr2[0] = true;
+                                        cornerActionController.mTipPopup.dismiss(false);
+                                    }
+                                }
+                            };
+                    this.mTipPopup.setOnDismissListener(
+                            new SemTipPopup
+                                    .OnDismissListener() { // from class:
+                                                           // com.android.server.accessibility.autoaction.CornerActionController$$ExternalSyntheticLambda1
+                                public final void onDismiss() {
+                                    View view2;
+                                    CornerActionController cornerActionController =
+                                            CornerActionController.this;
+                                    boolean[] zArr2 = zArr;
+                                    cornerActionController.getClass();
+                                    if (!zArr2[0]
+                                            || (view2 = cornerActionController.mTipAnchorView)
+                                                    == null) {
+                                        return;
+                                    }
+                                    cornerActionController.mWindowManager.removeView(view2);
+                                    cornerActionController.mTipAnchorView = null;
+                                    zArr2[0] = false;
+                                }
+                            });
                     View contentView = this.mTipPopup.semGetBalloonPopupWindow().getContentView();
                     contentView.setFocusable(true);
                     contentView.setContentDescription(string);
-                    contentView.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.server.accessibility.autoaction.CornerActionController.2
-                        @Override // android.view.View.AccessibilityDelegate
-                        public final void onInitializeAccessibilityNodeInfo(View view2, AccessibilityNodeInfo accessibilityNodeInfo) {
-                            super.onInitializeAccessibilityNodeInfo(view2, accessibilityNodeInfo);
-                            accessibilityNodeInfo.addAction(new AccessibilityNodeInfo.AccessibilityAction(16, CornerActionController.this.mContext.getString(R.string.config_useragentprofile_url)));
-                        }
-                    });
+                    contentView.setAccessibilityDelegate(
+                            new View
+                                    .AccessibilityDelegate() { // from class:
+                                                               // com.android.server.accessibility.autoaction.CornerActionController.2
+                                @Override // android.view.View.AccessibilityDelegate
+                                public final void onInitializeAccessibilityNodeInfo(
+                                        View view2, AccessibilityNodeInfo accessibilityNodeInfo) {
+                                    super.onInitializeAccessibilityNodeInfo(
+                                            view2, accessibilityNodeInfo);
+                                    accessibilityNodeInfo.addAction(
+                                            new AccessibilityNodeInfo.AccessibilityAction(
+                                                    16,
+                                                    CornerActionController.this.mContext.getString(
+                                                            R.string.config_useragentprofile_url)));
+                                }
+                            });
                     Handler handler = new Handler(Looper.getMainLooper());
-                    handler.post(new Runnable() { // from class: com.android.server.accessibility.autoaction.CornerActionController$$ExternalSyntheticLambda2
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            CornerActionController.this.mTipPopup.show(CornerActionController.POPUP_DIRECTION[i2]);
-                        }
-                    });
+                    handler.post(
+                            new Runnable() { // from class:
+                                             // com.android.server.accessibility.autoaction.CornerActionController$$ExternalSyntheticLambda2
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    CornerActionController.this.mTipPopup.show(
+                                            CornerActionController.POPUP_DIRECTION[i2]);
+                                }
+                            });
                     handler.postDelayed(runnable, 5000L);
-                    Settings.Secure.putIntForUser(this.mContentResolver, "accessibility_corner_action_tip_shown", intForUser | intValue, i3);
+                    Settings.Secure.putIntForUser(
+                            this.mContentResolver,
+                            "accessibility_corner_action_tip_shown",
+                            intForUser | intValue,
+                            i3);
                 }
                 return 1;
             case "pause_resume_auto_click":
@@ -377,7 +437,8 @@ public final class CornerActionController {
                 }
                 switch (c) {
                     case 0:
-                        OpenCloseNotifications openCloseNotifications2 = new OpenCloseNotifications();
+                        OpenCloseNotifications openCloseNotifications2 =
+                                new OpenCloseNotifications();
                         openCloseNotifications2.mContext = context2;
                         openCloseNotifications = openCloseNotifications2;
                         break;
@@ -403,7 +464,8 @@ public final class CornerActionController {
                     case 17:
                     case 18:
                         SoundAction soundAction = new SoundAction();
-                        soundAction.mAudioManager = (AudioManager) context2.getSystemService("audio");
+                        soundAction.mAudioManager =
+                                (AudioManager) context2.getSystemService("audio");
                         soundAction.mType = str;
                         openCloseNotifications = soundAction;
                         break;

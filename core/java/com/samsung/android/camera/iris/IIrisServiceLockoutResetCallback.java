@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IIrisServiceLockoutResetCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.camera.iris.IIrisServiceLockoutResetCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.camera.iris.IIrisServiceLockoutResetCallback";
 
     void onLockoutReset(long j) throws RemoteException;
 
     public static class Default implements IIrisServiceLockoutResetCallback {
         @Override // com.samsung.android.camera.iris.IIrisServiceLockoutResetCallback
-        public void onLockoutReset(long deviceId) throws RemoteException {
-        }
+        public void onLockoutReset(long deviceId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IIrisServiceLockoutResetCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIrisServiceLockoutResetCallback {
+    public abstract static class Stub extends Binder implements IIrisServiceLockoutResetCallback {
         static final int TRANSACTION_onLockoutReset = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IIrisServiceLockoutResetCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIrisServiceLockoutResetCallback.DESCRIPTOR);
             }

@@ -1,8 +1,10 @@
 package com.google.android.mms.pdu;
 
 import android.util.Log;
+
 import com.google.android.mms.ContentType;
 import com.google.android.mms.InvalidHeaderValueException;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
@@ -85,7 +87,10 @@ public class PduParser {
                 byte[] contentType = retrieveConf.getContentType();
                 if (contentType != null) {
                     String ctTypeStr = new String(contentType);
-                    if (!ctTypeStr.equals(ContentType.MULTIPART_MIXED) && !ctTypeStr.equals(ContentType.MULTIPART_RELATED) && !ctTypeStr.equals("text/plain") && !ctTypeStr.equals(ContentType.MULTIPART_ALTERNATIVE)) {
+                    if (!ctTypeStr.equals(ContentType.MULTIPART_MIXED)
+                            && !ctTypeStr.equals(ContentType.MULTIPART_RELATED)
+                            && !ctTypeStr.equals("text/plain")
+                            && !ctTypeStr.equals(ContentType.MULTIPART_ALTERNATIVE)) {
                         if (ctTypeStr.equals(ContentType.MULTIPART_ALTERNATIVE)) {
                             PduPart firstPart = this.mBody.getPart(0);
                             this.mBody.removeAll();
@@ -244,7 +249,11 @@ public class PduParser {
                             headers.setOctet(value3, headerField);
                             break;
                         } catch (InvalidHeaderValueException e9) {
-                            log("Set invalid Octet value: " + value3 + " into the header filed: " + headerField);
+                            log(
+                                    "Set invalid Octet value: "
+                                            + value3
+                                            + " into the header filed: "
+                                            + headerField);
                             return null;
                         } catch (RuntimeException e10) {
                             log(headerField + "is not Octet header field!");
@@ -299,7 +308,10 @@ public class PduParser {
                                 }
                             } else {
                                 try {
-                                    from = new EncodedStringValue(PduHeaders.FROM_INSERT_ADDRESS_TOKEN_STR.getBytes());
+                                    from =
+                                            new EncodedStringValue(
+                                                    PduHeaders.FROM_INSERT_ADDRESS_TOKEN_STR
+                                                            .getBytes());
                                 } catch (NullPointerException e15) {
                                     log(headerField + "is not Encoded-String-Value header field!");
                                     return null;
@@ -325,7 +337,8 @@ public class PduParser {
                         if (messageClass >= 128) {
                             if (128 == messageClass) {
                                 try {
-                                    headers.setTextString(PduHeaders.MESSAGE_CLASS_PERSONAL_STR.getBytes(), 138);
+                                    headers.setTextString(
+                                            PduHeaders.MESSAGE_CLASS_PERSONAL_STR.getBytes(), 138);
                                     break;
                                 } catch (NullPointerException e19) {
                                     log("null pointer error!");
@@ -335,10 +348,12 @@ public class PduParser {
                                     return null;
                                 }
                             } else if (129 == messageClass) {
-                                headers.setTextString(PduHeaders.MESSAGE_CLASS_ADVERTISEMENT_STR.getBytes(), 138);
+                                headers.setTextString(
+                                        PduHeaders.MESSAGE_CLASS_ADVERTISEMENT_STR.getBytes(), 138);
                                 break;
                             } else if (130 == messageClass) {
-                                headers.setTextString(PduHeaders.MESSAGE_CLASS_INFORMATIONAL_STR.getBytes(), 138);
+                                headers.setTextString(
+                                        PduHeaders.MESSAGE_CLASS_INFORMATIONAL_STR.getBytes(), 138);
                                 break;
                             } else if (131 != messageClass) {
                                 break;
@@ -388,7 +403,11 @@ public class PduParser {
                                     headers.setOctet(messageType, headerField);
                                     break;
                                 } catch (InvalidHeaderValueException e23) {
-                                    log("Set invalid Octet value: " + messageType + " into the header filed: " + headerField);
+                                    log(
+                                            "Set invalid Octet value: "
+                                                    + messageType
+                                                    + " into the header filed: "
+                                                    + headerField);
                                     return null;
                                 } catch (RuntimeException e24) {
                                     log(headerField + "is not Octet header field!");
@@ -401,7 +420,11 @@ public class PduParser {
                             headers.setOctet(version, 141);
                             break;
                         } catch (InvalidHeaderValueException e25) {
-                            log("Set invalid Octet value: " + version + " into the header filed: " + headerField);
+                            log(
+                                    "Set invalid Octet value: "
+                                            + version
+                                            + " into the header filed: "
+                                            + headerField);
                             return null;
                         } catch (RuntimeException e26) {
                             log(headerField + "is not Octet header field!");
@@ -449,7 +472,8 @@ public class PduParser {
                             parseValueLength(pduDataStream);
                             try {
                                 parseIntegerValue(pduDataStream);
-                                EncodedStringValue previouslySentBy = parseEncodedStringValue(pduDataStream);
+                                EncodedStringValue previouslySentBy =
+                                        parseEncodedStringValue(pduDataStream);
                                 if (previouslySentBy == null) {
                                     break;
                                 } else {
@@ -460,7 +484,10 @@ public class PduParser {
                                         log("null pointer error!");
                                         break;
                                     } catch (RuntimeException e32) {
-                                        log(headerField + "is not Encoded-String-Value header field!");
+                                        log(
+                                                headerField
+                                                        + "is not Encoded-String-Value header"
+                                                        + " field!");
                                         return null;
                                     }
                                 }
@@ -545,104 +572,107 @@ public class PduParser {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:42:0x0141, code lost:
-    
-        r2 = new byte[r10];
-        r17 = r3;
-        r20 = r5;
-        r3 = new java.lang.String(r11.getContentType());
-        r6 = r23.read(r2, 0, r10);
-     */
+
+       r2 = new byte[r10];
+       r17 = r3;
+       r20 = r5;
+       r3 = new java.lang.String(r11.getContentType());
+       r6 = r23.read(r2, 0, r10);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:43:0x0156, code lost:
-    
-        if (r6 != (-1)) goto L57;
-     */
+
+       if (r6 != (-1)) goto L57;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:45:0x0160, code lost:
-    
-        if (r3.equalsIgnoreCase(com.google.android.mms.ContentType.MULTIPART_ALTERNATIVE) == false) goto L64;
-     */
+
+       if (r3.equalsIgnoreCase(com.google.android.mms.ContentType.MULTIPART_ALTERNATIVE) == false) goto L64;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x0162, code lost:
-    
-        r5 = r0.parseParts(new java.io.ByteArrayInputStream(r2), r14);
-     */
+
+       r5 = r0.parseParts(new java.io.ByteArrayInputStream(r2), r14);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:47:0x016b, code lost:
-    
-        if (r5 != null) goto L62;
-     */
+
+       if (r5 != null) goto L62;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:48:0x016d, code lost:
-    
-        log("childBody is null");
-     */
+
+       log("childBody is null");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:49:0x0178, code lost:
-    
-        r0 = null;
-     */
+
+       r0 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:57:0x0173, code lost:
-    
-        r11 = r5.getPart(0);
-     */
+
+       r11 = r5.getPart(0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x017a, code lost:
-    
-        r0 = r11.getContentTransferEncoding();
-     */
+
+       r0 = r11.getContentTransferEncoding();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:59:0x017e, code lost:
-    
-        if (r0 == null) goto L72;
-     */
+
+       if (r0 == null) goto L72;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:60:0x0180, code lost:
-    
-        r5 = new java.lang.String(r0);
-     */
+
+       r5 = new java.lang.String(r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:61:0x018d, code lost:
-    
-        if (r5.equalsIgnoreCase(com.google.android.mms.pdu.PduPart.P_BASE64) == false) goto L69;
-     */
+
+       if (r5.equalsIgnoreCase(com.google.android.mms.pdu.PduPart.P_BASE64) == false) goto L69;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:62:0x018f, code lost:
-    
-        r2 = com.google.android.mms.pdu.Base64.decodeBase64(r2);
-     */
+
+       r2 = com.google.android.mms.pdu.Base64.decodeBase64(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:63:0x01a4, code lost:
-    
-        if (r2 != null) goto L76;
-     */
+
+       if (r2 != null) goto L76;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:64:0x01ad, code lost:
-    
-        r0 = null;
-        r11.setData(r2);
-     */
+
+       r0 = null;
+       r11.setData(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:66:0x01a6, code lost:
-    
-        log("Decode part data error!");
-     */
+
+       log("Decode part data error!");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:67:0x01ac, code lost:
-    
-        return null;
-     */
+
+       return null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:69:0x019b, code lost:
-    
-        if (r5.equalsIgnoreCase(com.google.android.mms.pdu.PduPart.P_QUOTED_PRINTABLE) == false) goto L73;
-     */
+
+       if (r5.equalsIgnoreCase(com.google.android.mms.pdu.PduPart.P_QUOTED_PRINTABLE) == false) goto L73;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:70:0x019d, code lost:
-    
-        r2 = com.google.android.mms.pdu.QuotedPrintable.decodeQuotedPrintable(r2);
-     */
+
+       r2 = com.google.android.mms.pdu.QuotedPrintable.decodeQuotedPrintable(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:73:0x0158, code lost:
-    
-        return null;
-     */
+
+       return null;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected com.google.android.mms.pdu.PduBody parseParts(java.io.ByteArrayInputStream r23, byte[] r24) {
+    protected com.google.android.mms.pdu.PduBody parseParts(
+            java.io.ByteArrayInputStream r23, byte[] r24) {
         /*
             Method dump skipped, instructions count: 473
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.mms.pdu.PduParser.parseParts(java.io.ByteArrayInputStream, byte[]):com.google.android.mms.pdu.PduBody");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.google.android.mms.pdu.PduParser.parseParts(java.io.ByteArrayInputStream,"
+                    + " byte[]):com.google.android.mms.pdu.PduBody");
     }
 
-    private static void log(String text) {
-    }
+    private static void log(String text) {}
 
     protected static int parseUnsignedInt(ByteArrayInputStream pduDataStream) {
         int result = 0;
@@ -672,7 +702,8 @@ public class PduParser {
         throw new IllegalArgumentException("Value length > LENGTH_QUOTE!");
     }
 
-    protected static EncodedStringValue parseEncodedStringValue(ByteArrayInputStream pduDataStream) {
+    protected static EncodedStringValue parseEncodedStringValue(
+            ByteArrayInputStream pduDataStream) {
         EncodedStringValue returnValue;
         pduDataStream.mark(1);
         int charset = 0;
@@ -818,7 +849,8 @@ public class PduParser {
         return readLen;
     }
 
-    protected static void parseContentTypeParams(ByteArrayInputStream pduDataStream, HashMap<Integer, Object> map, Integer length) {
+    protected static void parseContentTypeParams(
+            ByteArrayInputStream pduDataStream, HashMap<Integer, Object> map, Integer length) {
         int startPos = pduDataStream.available();
         int lastLen = length.intValue();
         while (lastLen > 0) {
@@ -903,7 +935,8 @@ public class PduParser {
         }
     }
 
-    protected static byte[] parseContentType(ByteArrayInputStream pduDataStream, HashMap<Integer, Object> map) {
+    protected static byte[] parseContentType(
+            ByteArrayInputStream pduDataStream, HashMap<Integer, Object> map) {
         byte[] contentType;
         pduDataStream.mark(1);
         int temp = pduDataStream.read();
@@ -914,7 +947,12 @@ public class PduParser {
                 int length = parseValueLength(pduDataStream);
                 int startPos = pduDataStream.available();
                 if (length > startPos) {
-                    Log.e(LOG_TAG, "parseContentType: Invalid length " + length + " when available bytes are " + startPos);
+                    Log.e(
+                            LOG_TAG,
+                            "parseContentType: Invalid length "
+                                    + length
+                                    + " when available bytes are "
+                                    + startPos);
                     return PduContentTypes.contentTypes[0].getBytes();
                 }
                 pduDataStream.mark(1);
@@ -955,11 +993,13 @@ public class PduParser {
             byte[] contentType2 = parseWapString(pduDataStream, 0);
             return contentType2;
         }
-        byte[] contentType3 = PduContentTypes.contentTypes[parseShortInteger(pduDataStream)].getBytes();
+        byte[] contentType3 =
+                PduContentTypes.contentTypes[parseShortInteger(pduDataStream)].getBytes();
         return contentType3;
     }
 
-    protected boolean parsePartHeaders(ByteArrayInputStream pduDataStream, PduPart part, int length) {
+    protected boolean parsePartHeaders(
+            ByteArrayInputStream pduDataStream, PduPart part, int length) {
         int startPos = pduDataStream.available();
         int lastLen = length;
         while (lastLen > 0) {
@@ -1033,7 +1073,9 @@ public class PduParser {
             } else if (header >= 32 && header <= 127) {
                 byte[] tempHeader = parseWapString(pduDataStream, 0);
                 byte[] tempValue = parseWapString(pduDataStream, 0);
-                if (true == PduPart.CONTENT_TRANSFER_ENCODING.equalsIgnoreCase(new String(tempHeader))) {
+                if (true
+                        == PduPart.CONTENT_TRANSFER_ENCODING.equalsIgnoreCase(
+                                new String(tempHeader))) {
                     part.setContentTransferEncoding(tempValue);
                 }
                 int tempPos4 = pduDataStream.available();
@@ -1059,7 +1101,11 @@ public class PduParser {
             return 1;
         }
         if (mStartParam == null) {
-            return (mTypeParam == null || (contentType = part.getContentType()) == null || true != Arrays.equals(mTypeParam, contentType)) ? 1 : 0;
+            return (mTypeParam == null
+                            || (contentType = part.getContentType()) == null
+                            || true != Arrays.equals(mTypeParam, contentType))
+                    ? 1
+                    : 0;
         }
         byte[] contentId = part.getContentId();
         return (contentId == null || true != Arrays.equals(mStartParam, contentId)) ? 1 : 0;
@@ -1081,8 +1127,7 @@ public class PduParser {
                     EncodedStringValue srFrom = headers.getEncodedStringValue(137);
                     if (srFrom != null) {
                         byte[] srTransactionId = headers.getTextString(152);
-                        if (srTransactionId == null) {
-                        }
+                        if (srTransactionId == null) {}
                     }
                 }
                 break;
@@ -1090,8 +1135,7 @@ public class PduParser {
                 int scResponseStatus = headers.getOctet(146);
                 if (scResponseStatus != 0) {
                     byte[] scTransactionId = headers.getTextString(152);
-                    if (scTransactionId == null) {
-                    }
+                    if (scTransactionId == null) {}
                 }
                 break;
             case 130:
@@ -1104,8 +1148,7 @@ public class PduParser {
                             long niMessageSize = headers.getLongInteger(142);
                             if (-1 != niMessageSize) {
                                 byte[] niTransactionId = headers.getTextString(152);
-                                if (niTransactionId == null) {
-                                }
+                                if (niTransactionId == null) {}
                             }
                         }
                     }
@@ -1115,22 +1158,19 @@ public class PduParser {
                 int nriStatus = headers.getOctet(149);
                 if (nriStatus != 0) {
                     byte[] nriTransactionId = headers.getTextString(152);
-                    if (nriTransactionId == null) {
-                    }
+                    if (nriTransactionId == null) {}
                 }
                 break;
             case 132:
                 byte[] rcContentType = headers.getTextString(132);
                 if (rcContentType != null) {
                     long rcDate = headers.getLongInteger(133);
-                    if (-1 == rcDate) {
-                    }
+                    if (-1 == rcDate) {}
                 }
                 break;
             case 133:
                 byte[] aiTransactionId = headers.getTextString(152);
-                if (aiTransactionId == null) {
-                }
+                if (aiTransactionId == null) {}
                 break;
             case 134:
                 long diDate = headers.getLongInteger(133);
@@ -1140,8 +1180,7 @@ public class PduParser {
                         int diStatus = headers.getOctet(149);
                         if (diStatus != 0) {
                             EncodedStringValue[] diTo = headers.getEncodedStringValues(151);
-                            if (diTo == null) {
-                            }
+                            if (diTo == null) {}
                         }
                     }
                 }
@@ -1154,8 +1193,7 @@ public class PduParser {
                         int rrReadStatus = headers.getOctet(155);
                         if (rrReadStatus != 0) {
                             EncodedStringValue[] rrTo = headers.getEncodedStringValues(151);
-                            if (rrTo == null) {
-                            }
+                            if (rrTo == null) {}
                         }
                     }
                 }
@@ -1170,8 +1208,7 @@ public class PduParser {
                             int roReadStatus = headers.getOctet(155);
                             if (roReadStatus != 0) {
                                 EncodedStringValue[] roTo = headers.getEncodedStringValues(151);
-                                if (roTo == null) {
-                                }
+                                if (roTo == null) {}
                             }
                         }
                     }
@@ -1189,7 +1226,8 @@ public class PduParser {
         this.mParseContentDisposition = true;
     }
 
-    protected static EncodedStringValue parseEncodedSubjectValue(ByteArrayInputStream pduDataStream) {
+    protected static EncodedStringValue parseEncodedSubjectValue(
+            ByteArrayInputStream pduDataStream) {
         pduDataStream.mark(1);
         EncodedStringValue returnValue = null;
         int charset = 0;

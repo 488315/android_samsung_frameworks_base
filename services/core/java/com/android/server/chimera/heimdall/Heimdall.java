@@ -14,8 +14,9 @@ import android.os.Message;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.server.am.ActivityManagerService;
-import com.android.server.chimera.heimdall.HeimdallTriggerManager;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -50,21 +51,21 @@ public class Heimdall {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:16:0x004a, code lost:
-        
-            if (r6.allowAlwaysRunning != false) goto L18;
-         */
+
+           if (r6.allowAlwaysRunning != false) goto L18;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:19:0x004f, code lost:
-        
-            if (r6.ignoreAlwaysRunningSpecKill == false) goto L21;
-         */
+
+           if (r6.ignoreAlwaysRunningSpecKill == false) goto L21;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:20:0x0051, code lost:
-        
-            r4 = 2;
-         */
+
+           r4 = 2;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:21:0x0053, code lost:
-        
-            r4 = true;
-         */
+
+           r4 = true;
+        */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -75,13 +76,20 @@ public class Heimdall {
                 Method dump skipped, instructions count: 782
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.heimdall.Heimdall.PhaseHandler.handleMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.chimera.heimdall.Heimdall.PhaseHandler.handleMessage(android.os.Message):void");
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScpmManager extends BroadcastReceiver {
-        public final Uri POLICY_ITEM_URI = Uri.withAppendedPath(Uri.withAppendedPath(Uri.parse("content://com.samsung.android.sm.policy"), "policy_item"), "heimdall");
+        public final Uri POLICY_ITEM_URI =
+                Uri.withAppendedPath(
+                        Uri.withAppendedPath(
+                                Uri.parse("content://com.samsung.android.sm.policy"),
+                                "policy_item"),
+                        "heimdall");
 
         public ScpmManager(Context context) {
             IntentFilter intentFilter = new IntentFilter();
@@ -96,7 +104,16 @@ public class Heimdall {
             String str2;
             if ("sec.app.policy.UPDATE.heimdall".equals(intent.getAction())) {
                 String trim = SystemProperties.get("ro.product.device", "").trim();
-                if ("".equals(trim) || (query = context.getContentResolver().query(this.POLICY_ITEM_URI, null, null, null, null)) == null) {
+                if ("".equals(trim)
+                        || (query =
+                                        context.getContentResolver()
+                                                .query(
+                                                        this.POLICY_ITEM_URI,
+                                                        null,
+                                                        null,
+                                                        null,
+                                                        null))
+                                == null) {
                     return;
                 }
                 while (true) {
@@ -140,9 +157,9 @@ public class Heimdall {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:37:0x0054, code lost:
-        
-            if ((r3 & 4) == 0) goto L27;
-         */
+
+           if ((r3 & 4) == 0) goto L27;
+        */
         /* JADX WARN: Removed duplicated region for block: B:19:0x0051  */
         /* JADX WARN: Removed duplicated region for block: B:36:0x0052 A[Catch: Exception -> 0x0021, TryCatch #1 {Exception -> 0x0021, blocks: (B:6:0x000c, B:8:0x0014, B:11:0x0024, B:13:0x002f, B:17:0x0040, B:23:0x005b, B:24:0x005f, B:33:0x006c, B:36:0x0052, B:38:0x0039, B:41:0x006d, B:43:0x0077, B:45:0x0083, B:47:0x008d, B:51:0x009f, B:53:0x00a6, B:55:0x00b0, B:57:0x00c8, B:26:0x0060, B:27:0x0067), top: B:5:0x000c, inners: #0 }] */
         @Override // android.database.ContentObserver
@@ -155,7 +172,10 @@ public class Heimdall {
                 Method dump skipped, instructions count: 231
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.heimdall.Heimdall.SettingsObserver.onChange(boolean, android.net.Uri):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.chimera.heimdall.Heimdall.SettingsObserver.onChange(boolean,"
+                        + " android.net.Uri):void");
         }
     }
 
@@ -163,10 +183,12 @@ public class Heimdall {
         String str = SystemProperties.get("persist.sys.heimdalld.alwaysrunning_disable", "");
         str.getClass();
         this.PROP_ALWAYS_RUNNING_DISABLE = !str.equals("0") ? !str.equals("1") ? -1 : 1 : 0;
-        this.DISABLED = "true".equals(SystemProperties.get("persist.sys.heimdalld.disable", "false"));
-        boolean equals = "1".equals(SystemProperties.get("persist.sys.heimdalld.kill_disable", "0"));
+        this.DISABLED =
+                "true".equals(SystemProperties.get("persist.sys.heimdalld.disable", "false"));
+        boolean equals =
+                "1".equals(SystemProperties.get("persist.sys.heimdalld.kill_disable", "0"));
         this.KILL_DISABLED = equals;
-        this.mAnomalyTypeArray = new int[]{16, 8, 4, 2, 1};
+        this.mAnomalyTypeArray = new int[] {16, 8, 4, 2, 1};
         this.mAnomalyType = 24;
         Uri uriFor = Settings.Global.getUriFor("heimdall_spec_update");
         this.mUriSpecUpdate = uriFor;
@@ -179,7 +201,8 @@ public class Heimdall {
         Uri uriFor5 = Settings.Global.getUriFor("heimdall_random_sample_rate");
         this.mUriRandomSampleRate = uriFor5;
         try {
-            HeimdallPhaseManager heimdallPhaseManager = new HeimdallPhaseManager(looper, context, activityManagerService);
+            HeimdallPhaseManager heimdallPhaseManager =
+                    new HeimdallPhaseManager(looper, context, activityManagerService);
             this.mHeimdallPhaseManager = heimdallPhaseManager;
             this.mHeimdallReportManager = heimdallPhaseManager.mHeimdallReportManager;
             this.mPhaseHandler = new PhaseHandler(looper);
@@ -219,12 +242,18 @@ public class Heimdall {
     public final void checkAlwaysRunningProcesses(List list) {
         Iterator it = ((ArrayList) list).iterator();
         while (it.hasNext()) {
-            HeimdallAlwaysRunningProcInfo heimdallAlwaysRunningProcInfo = (HeimdallAlwaysRunningProcInfo) it.next();
-            if (this.mHeimdallReportManager.mReportedAlwaysRunningProcesses.contains(heimdallAlwaysRunningProcInfo.processName)) {
-                log("Skip always running checking for " + heimdallAlwaysRunningProcInfo.processName + " , heimdall already reported it");
+            HeimdallAlwaysRunningProcInfo heimdallAlwaysRunningProcInfo =
+                    (HeimdallAlwaysRunningProcInfo) it.next();
+            if (this.mHeimdallReportManager.mReportedAlwaysRunningProcesses.contains(
+                    heimdallAlwaysRunningProcInfo.processName)) {
+                log(
+                        "Skip always running checking for "
+                                + heimdallAlwaysRunningProcInfo.processName
+                                + " , heimdall already reported it");
             } else {
                 PhaseHandler phaseHandler = this.mPhaseHandler;
-                Message obtainMessage = phaseHandler.obtainMessage(2, heimdallAlwaysRunningProcInfo);
+                Message obtainMessage =
+                        phaseHandler.obtainMessage(2, heimdallAlwaysRunningProcInfo);
                 phaseHandler.mNumberOfPendingMessages.incrementAndGet();
                 phaseHandler.sendMessage(obtainMessage);
             }
@@ -249,8 +278,15 @@ public class Heimdall {
                     sb2.append(!this.KILL_DISABLED);
                     printWriter.println(sb2.toString());
                     printWriter.println("  SCAN_VERSION: 1");
-                    printWriter.println("  SPEC_VERSION: " + heimdallPhaseManager.mHeimdallTriggerManager.mSpecVersion);
-                    printWriter.println("  Load spec success: " + this.mHeimdallPhaseManager.mHeimdallTriggerManager.mSpecManager.mLoadSuccess);
+                    printWriter.println(
+                            "  SPEC_VERSION: "
+                                    + heimdallPhaseManager.mHeimdallTriggerManager.mSpecVersion);
+                    printWriter.println(
+                            "  Load spec success: "
+                                    + this.mHeimdallPhaseManager
+                                            .mHeimdallTriggerManager
+                                            .mSpecManager
+                                            .mLoadSuccess);
                     StringBuilder sb3 = new StringBuilder();
                     sb3.append("  Anomaly type enable: ");
                     int i = this.mAnomalyType;
@@ -266,17 +302,31 @@ public class Heimdall {
                     sb3.append(sb4.reverse().toString());
                     printWriter.println(sb3.toString());
                     this.mHeimdallReportManager.getClass();
-                    printWriter.println(String.format("  Random sample rate: " + HeimdallReportManager.sRandomSampleRate + ", block %.1f%% reports", Double.valueOf(100.0d - (HeimdallReportManager.sRandomSampleRate * 0.1d))));
+                    printWriter.println(
+                            String.format(
+                                    "  Random sample rate: "
+                                            + HeimdallReportManager.sRandomSampleRate
+                                            + ", block %.1f%% reports",
+                                    Double.valueOf(
+                                            100.0d
+                                                    - (HeimdallReportManager.sRandomSampleRate
+                                                            * 0.1d))));
                     heimdallPhaseManager.dumpKillStatus(printWriter);
                     heimdallPhaseManager.dumpProcessList(printWriter);
                     printWriter.println("\nOthers");
                     PhaseHandler phaseHandler = this.mPhaseHandler;
                     if (phaseHandler != null) {
-                        printWriter.println("  The number of pending message in phase handler: " + phaseHandler.mNumberOfPendingMessages.get());
+                        printWriter.println(
+                                "  The number of pending message in phase handler: "
+                                        + phaseHandler.mNumberOfPendingMessages.get());
                     }
                     HeimdallAlwaysRunningMonitor.INSTANCE.dump(printWriter);
                     heimdallPhaseManager.mHeimdallReportManager.dumpReportHistory(printWriter);
-                    printWriter.println("report_interval(hour): " + heimdallPhaseManager.mHeimdallProcessList.mTimeoutReportProtectedHour);
+                    printWriter.println(
+                            "report_interval(hour): "
+                                    + heimdallPhaseManager
+                                            .mHeimdallProcessList
+                                            .mTimeoutReportProtectedHour);
                 }
             } else if (strArr.length >= 2) {
                 if (!this.DISABLED && heimdallPhaseManager != null) {
@@ -295,7 +345,8 @@ public class Heimdall {
         if (i <= 0) {
             return;
         }
-        HeimdallTriggerManager.HeimdallSpecManager heimdallSpecManager = this.mHeimdallPhaseManager.mHeimdallTriggerManager.mSpecManager;
+        HeimdallTriggerManager.HeimdallSpecManager heimdallSpecManager =
+                this.mHeimdallPhaseManager.mHeimdallTriggerManager.mSpecManager;
         if (i <= 0) {
             heimdallSpecManager.getClass();
             return;
@@ -305,7 +356,8 @@ public class Heimdall {
         while (it.hasNext()) {
             for (HeimdallTriggerManager.HeimdallProcSpec heimdallProcSpec : (List) it.next()) {
                 if (!heimdallProcSpec.ignoreAlwaysRunningSpecKill) {
-                    heimdallProcSpec.alwaysRunningSpecSize = Math.min(heimdallProcSpec.alwaysRunningSpecSizeInitial, i);
+                    heimdallProcSpec.alwaysRunningSpecSize =
+                            Math.min(heimdallProcSpec.alwaysRunningSpecSizeInitial, i);
                 }
             }
         }
@@ -352,11 +404,15 @@ public class Heimdall {
             return;
         }
         for (String str : string.split(";")) {
-            HeimdallTriggerManager heimdallTriggerManager = this.mHeimdallPhaseManager.mHeimdallTriggerManager;
-            HeimdallTriggerManager.HeimdallSpecManager heimdallSpecManager = heimdallTriggerManager.mSpecManager;
+            HeimdallTriggerManager heimdallTriggerManager =
+                    this.mHeimdallPhaseManager.mHeimdallTriggerManager;
+            HeimdallTriggerManager.HeimdallSpecManager heimdallSpecManager =
+                    heimdallTriggerManager.mSpecManager;
             try {
                 String[] split = str.split(",");
-                if (split.length > 7 && (parseInt = Integer.parseInt(split[0])) > heimdallTriggerManager.mSpecVersion) {
+                if (split.length > 7
+                        && (parseInt = Integer.parseInt(split[0]))
+                                > heimdallTriggerManager.mSpecVersion) {
                     String[] strArr = new String[7];
                     boolean z = true;
                     System.arraycopy(split, 1, strArr, 0, 7);
@@ -369,19 +425,26 @@ public class Heimdall {
                             if (!it.hasNext()) {
                                 break;
                             }
-                            HeimdallTriggerManager.HeimdallProcSpec heimdallProcSpec = (HeimdallTriggerManager.HeimdallProcSpec) it.next();
+                            HeimdallTriggerManager.HeimdallProcSpec heimdallProcSpec =
+                                    (HeimdallTriggerManager.HeimdallProcSpec) it.next();
                             if (str3.equals(heimdallProcSpec.procName)) {
                                 if (heimdallProcSpec.specVersion >= parseInt) {
                                     z = false;
                                     break;
                                 }
-                                HeimdallTriggerManager.HeimdallProcSpec heimdallProcSpec2 = new HeimdallTriggerManager.HeimdallProcSpec(heimdallTriggerManager, strArr);
+                                HeimdallTriggerManager.HeimdallProcSpec heimdallProcSpec2 =
+                                        new HeimdallTriggerManager.HeimdallProcSpec(
+                                                heimdallTriggerManager, strArr);
                                 heimdallProcSpec.specSize = heimdallProcSpec2.specSize;
-                                heimdallProcSpec.ignoreGlobalKill = heimdallProcSpec2.ignoreGlobalKill;
+                                heimdallProcSpec.ignoreGlobalKill =
+                                        heimdallProcSpec2.ignoreGlobalKill;
                                 heimdallProcSpec.ignoreSpecKill = heimdallProcSpec2.ignoreSpecKill;
-                                heimdallProcSpec.allowAlwaysRunning = heimdallProcSpec2.allowAlwaysRunning;
-                                heimdallProcSpec.ignoreAlwaysRunningSpecKill = heimdallProcSpec2.ignoreAlwaysRunningSpecKill;
-                                heimdallProcSpec.alwaysRunningSpecSize = heimdallProcSpec2.alwaysRunningSpecSize;
+                                heimdallProcSpec.allowAlwaysRunning =
+                                        heimdallProcSpec2.allowAlwaysRunning;
+                                heimdallProcSpec.ignoreAlwaysRunningSpecKill =
+                                        heimdallProcSpec2.ignoreAlwaysRunningSpecKill;
+                                heimdallProcSpec.alwaysRunningSpecSize =
+                                        heimdallProcSpec2.alwaysRunningSpecSize;
                                 heimdallProcSpec.specVersion = parseInt;
                                 z = false;
                             }
@@ -391,7 +454,9 @@ public class Heimdall {
                         heimdallSpecManager.mSpecMap.put(str2, list);
                     }
                     if (z) {
-                        list.add(new HeimdallTriggerManager.HeimdallProcSpec(heimdallTriggerManager, strArr));
+                        list.add(
+                                new HeimdallTriggerManager.HeimdallProcSpec(
+                                        heimdallTriggerManager, strArr));
                     }
                 }
             } catch (RuntimeException e) {

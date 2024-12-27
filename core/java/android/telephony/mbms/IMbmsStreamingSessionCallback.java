@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -17,16 +18,14 @@ public interface IMbmsStreamingSessionCallback extends IInterface {
 
     public static class Default implements IMbmsStreamingSessionCallback {
         @Override // android.telephony.mbms.IMbmsStreamingSessionCallback
-        public void onError(int errorCode, String message) throws RemoteException {
-        }
+        public void onError(int errorCode, String message) throws RemoteException {}
 
         @Override // android.telephony.mbms.IMbmsStreamingSessionCallback
-        public void onStreamingServicesUpdated(List<StreamingServiceInfo> services) throws RemoteException {
-        }
+        public void onStreamingServicesUpdated(List<StreamingServiceInfo> services)
+                throws RemoteException {}
 
         @Override // android.telephony.mbms.IMbmsStreamingSessionCallback
-        public void onMiddlewareReady() throws RemoteException {
-        }
+        public void onMiddlewareReady() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -34,8 +33,9 @@ public interface IMbmsStreamingSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMbmsStreamingSessionCallback {
-        public static final String DESCRIPTOR = "android.telephony.mbms.IMbmsStreamingSessionCallback";
+    public abstract static class Stub extends Binder implements IMbmsStreamingSessionCallback {
+        public static final String DESCRIPTOR =
+                "android.telephony.mbms.IMbmsStreamingSessionCallback";
         static final int TRANSACTION_onError = 1;
         static final int TRANSACTION_onMiddlewareReady = 3;
         static final int TRANSACTION_onStreamingServicesUpdated = 2;
@@ -79,7 +79,8 @@ public interface IMbmsStreamingSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -95,7 +96,8 @@ public interface IMbmsStreamingSessionCallback extends IInterface {
                     onError(_arg0, _arg1);
                     return true;
                 case 2:
-                    List<StreamingServiceInfo> _arg02 = data.createTypedArrayList(StreamingServiceInfo.CREATOR);
+                    List<StreamingServiceInfo> _arg02 =
+                            data.createTypedArrayList(StreamingServiceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onStreamingServicesUpdated(_arg02);
                     return true;
@@ -137,7 +139,8 @@ public interface IMbmsStreamingSessionCallback extends IInterface {
             }
 
             @Override // android.telephony.mbms.IMbmsStreamingSessionCallback
-            public void onStreamingServicesUpdated(List<StreamingServiceInfo> services) throws RemoteException {
+            public void onStreamingServicesUpdated(List<StreamingServiceInfo> services)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

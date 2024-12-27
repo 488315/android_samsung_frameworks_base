@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioSimIndication extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$sim$IRadioSimIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$sim$IRadioSimIndication".replace('$', '.');
     public static final String HASH = "ea7be3035be8d4869237a6478d2e0bb0efcc1e87";
     public static final int VERSION = 3;
 
@@ -22,7 +23,8 @@ public interface IRadioSimIndication extends IInterface {
 
     void simPhonebookChanged(int i) throws RemoteException;
 
-    void simPhonebookRecordsReceived(int i, byte b, PhonebookRecordInfo[] phonebookRecordInfoArr) throws RemoteException;
+    void simPhonebookRecordsReceived(int i, byte b, PhonebookRecordInfo[] phonebookRecordInfoArr)
+            throws RemoteException;
 
     void simRefresh(int i, SimRefreshResult simRefreshResult) throws RemoteException;
 
@@ -40,48 +42,40 @@ public interface IRadioSimIndication extends IInterface {
 
     public static class Default implements IRadioSimIndication {
         @Override // android.hardware.radio.sim.IRadioSimIndication
-        public void carrierInfoForImsiEncryption(int info) throws RemoteException {
-        }
+        public void carrierInfoForImsiEncryption(int info) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSimIndication
-        public void cdmaSubscriptionSourceChanged(int type, int cdmaSource) throws RemoteException {
-        }
+        public void cdmaSubscriptionSourceChanged(int type, int cdmaSource)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSimIndication
-        public void simPhonebookChanged(int type) throws RemoteException {
-        }
+        public void simPhonebookChanged(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSimIndication
-        public void simPhonebookRecordsReceived(int type, byte status, PhonebookRecordInfo[] records) throws RemoteException {
-        }
+        public void simPhonebookRecordsReceived(
+                int type, byte status, PhonebookRecordInfo[] records) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSimIndication
-        public void simRefresh(int type, SimRefreshResult refreshResult) throws RemoteException {
-        }
+        public void simRefresh(int type, SimRefreshResult refreshResult) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSimIndication
-        public void simStatusChanged(int type) throws RemoteException {
-        }
+        public void simStatusChanged(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSimIndication
-        public void stkEventNotify(int type, String cmd) throws RemoteException {
-        }
+        public void stkEventNotify(int type, String cmd) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSimIndication
-        public void stkProactiveCommand(int type, String cmd) throws RemoteException {
-        }
+        public void stkProactiveCommand(int type, String cmd) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSimIndication
-        public void stkSessionEnd(int type) throws RemoteException {
-        }
+        public void stkSessionEnd(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSimIndication
-        public void subscriptionStatusChanged(int type, boolean activate) throws RemoteException {
-        }
+        public void subscriptionStatusChanged(int type, boolean activate) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSimIndication
-        public void uiccApplicationsEnablementChanged(int type, boolean enabled) throws RemoteException {
-        }
+        public void uiccApplicationsEnablementChanged(int type, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSimIndication
         public int getInterfaceVersion() {
@@ -99,7 +93,7 @@ public interface IRadioSimIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioSimIndication {
+    public abstract static class Stub extends Binder implements IRadioSimIndication {
         static final int TRANSACTION_carrierInfoForImsiEncryption = 1;
         static final int TRANSACTION_cdmaSubscriptionSourceChanged = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -136,7 +130,8 @@ public interface IRadioSimIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -175,13 +170,16 @@ public interface IRadioSimIndication extends IInterface {
                 case 4:
                     int _arg04 = data.readInt();
                     byte _arg12 = data.readByte();
-                    PhonebookRecordInfo[] _arg2 = (PhonebookRecordInfo[]) data.createTypedArray(PhonebookRecordInfo.CREATOR);
+                    PhonebookRecordInfo[] _arg2 =
+                            (PhonebookRecordInfo[])
+                                    data.createTypedArray(PhonebookRecordInfo.CREATOR);
                     data.enforceNoDataAvail();
                     simPhonebookRecordsReceived(_arg04, _arg12, _arg2);
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    SimRefreshResult _arg13 = (SimRefreshResult) data.readTypedObject(SimRefreshResult.CREATOR);
+                    SimRefreshResult _arg13 =
+                            (SimRefreshResult) data.readTypedObject(SimRefreshResult.CREATOR);
                     data.enforceNoDataAvail();
                     simRefresh(_arg05, _arg13);
                     return true;
@@ -250,7 +248,8 @@ public interface IRadioSimIndication extends IInterface {
                     _data.writeInt(info);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method carrierInfoForImsiEncryption is unimplemented.");
+                        throw new RemoteException(
+                                "Method carrierInfoForImsiEncryption is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -258,7 +257,8 @@ public interface IRadioSimIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSimIndication
-            public void cdmaSubscriptionSourceChanged(int type, int cdmaSource) throws RemoteException {
+            public void cdmaSubscriptionSourceChanged(int type, int cdmaSource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -266,7 +266,8 @@ public interface IRadioSimIndication extends IInterface {
                     _data.writeInt(cdmaSource);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method cdmaSubscriptionSourceChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method cdmaSubscriptionSourceChanged is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -289,7 +290,8 @@ public interface IRadioSimIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSimIndication
-            public void simPhonebookRecordsReceived(int type, byte status, PhonebookRecordInfo[] records) throws RemoteException {
+            public void simPhonebookRecordsReceived(
+                    int type, byte status, PhonebookRecordInfo[] records) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -298,7 +300,8 @@ public interface IRadioSimIndication extends IInterface {
                     _data.writeTypedArray(records, 0);
                     boolean _status = this.mRemote.transact(4, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method simPhonebookRecordsReceived is unimplemented.");
+                        throw new RemoteException(
+                                "Method simPhonebookRecordsReceived is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -306,7 +309,8 @@ public interface IRadioSimIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSimIndication
-            public void simRefresh(int type, SimRefreshResult refreshResult) throws RemoteException {
+            public void simRefresh(int type, SimRefreshResult refreshResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -384,7 +388,8 @@ public interface IRadioSimIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSimIndication
-            public void subscriptionStatusChanged(int type, boolean activate) throws RemoteException {
+            public void subscriptionStatusChanged(int type, boolean activate)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -392,7 +397,8 @@ public interface IRadioSimIndication extends IInterface {
                     _data.writeBoolean(activate);
                     boolean _status = this.mRemote.transact(10, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method subscriptionStatusChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method subscriptionStatusChanged is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -400,7 +406,8 @@ public interface IRadioSimIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSimIndication
-            public void uiccApplicationsEnablementChanged(int type, boolean enabled) throws RemoteException {
+            public void uiccApplicationsEnablementChanged(int type, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -408,7 +415,8 @@ public interface IRadioSimIndication extends IInterface {
                     _data.writeBoolean(enabled);
                     boolean _status = this.mRemote.transact(11, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method uiccApplicationsEnablementChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method uiccApplicationsEnablementChanged is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

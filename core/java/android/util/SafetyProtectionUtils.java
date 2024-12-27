@@ -3,6 +3,7 @@ package android.util;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.DeviceConfig;
+
 import com.samsung.android.knox.zt.internal.KnoxZtInternalConst;
 
 /* loaded from: classes4.dex */
@@ -11,7 +12,18 @@ public class SafetyProtectionUtils {
 
     public static boolean shouldShowSafetyProtectionResources(Context context) {
         try {
-            if (DeviceConfig.getBoolean(KnoxZtInternalConst.Event.LogKeys.PRIVACY, SAFETY_PROTECTION_RESOURCES_ENABLED, false) && context.getResources().getBoolean(Resources.getSystem().getIdentifier("config_safetyProtectionEnabled", "bool", "android")) && context.getDrawable(17301685) != null) {
+            if (DeviceConfig.getBoolean(
+                            KnoxZtInternalConst.Event.LogKeys.PRIVACY,
+                            SAFETY_PROTECTION_RESOURCES_ENABLED,
+                            false)
+                    && context.getResources()
+                            .getBoolean(
+                                    Resources.getSystem()
+                                            .getIdentifier(
+                                                    "config_safetyProtectionEnabled",
+                                                    "bool",
+                                                    "android"))
+                    && context.getDrawable(17301685) != null) {
                 return !context.getString(17039425).isEmpty();
             }
             return false;

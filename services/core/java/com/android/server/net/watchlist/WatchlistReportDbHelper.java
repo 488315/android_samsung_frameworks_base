@@ -5,8 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Slog;
+
 import com.android.internal.util.HexDump;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +32,11 @@ public final class WatchlistReportDbHelper extends SQLiteOpenHelper {
 
     public final void cleanup(long j) {
         try {
-            getWritableDatabase().delete("records", DeviceIdleController$$ExternalSyntheticOutline0.m(j, "timestamp< "), null);
+            getWritableDatabase()
+                    .delete(
+                            "records",
+                            DeviceIdleController$$ExternalSyntheticOutline0.m(j, "timestamp< "),
+                            null);
         } catch (SQLiteException e) {
             Slog.e("WatchlistReportDbHelper", "Error opening the database to cleanup", e);
         }
@@ -40,7 +46,18 @@ public final class WatchlistReportDbHelper extends SQLiteOpenHelper {
         Cursor cursor = null;
         try {
             try {
-                Cursor query = getReadableDatabase().query(true, "records", DIGEST_DOMAIN_PROJECTION, "timestamp < ?", new String[]{Long.toString(j)}, null, null, null, null);
+                Cursor query =
+                        getReadableDatabase()
+                                .query(
+                                        true,
+                                        "records",
+                                        DIGEST_DOMAIN_PROJECTION,
+                                        "timestamp < ?",
+                                        new String[] {Long.toString(j)},
+                                        null,
+                                        null,
+                                        null,
+                                        null);
                 if (query == null) {
                     if (query != null) {
                         query.close();
@@ -81,12 +98,16 @@ public final class WatchlistReportDbHelper extends SQLiteOpenHelper {
 
     @Override // android.database.sqlite.SQLiteOpenHelper
     public final void onCreate(SQLiteDatabase sQLiteDatabase) {
-        sQLiteDatabase.execSQL("CREATE TABLE records(app_digest BLOB,cnc_domain TEXT,timestamp INTEGER DEFAULT 0 )");
+        sQLiteDatabase.execSQL(
+                "CREATE TABLE records(app_digest BLOB,cnc_domain TEXT,timestamp INTEGER DEFAULT 0"
+                    + " )");
     }
 
     @Override // android.database.sqlite.SQLiteOpenHelper
     public final void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
         sQLiteDatabase.execSQL("DROP TABLE IF EXISTS records");
-        sQLiteDatabase.execSQL("CREATE TABLE records(app_digest BLOB,cnc_domain TEXT,timestamp INTEGER DEFAULT 0 )");
+        sQLiteDatabase.execSQL(
+                "CREATE TABLE records(app_digest BLOB,cnc_domain TEXT,timestamp INTEGER DEFAULT 0"
+                    + " )");
     }
 }

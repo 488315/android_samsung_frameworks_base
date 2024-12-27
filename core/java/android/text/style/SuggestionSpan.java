@@ -9,7 +9,9 @@ import android.os.SystemClock;
 import android.text.ParcelableSpan;
 import android.text.TextPaint;
 import android.util.Log;
+
 import com.android.internal.R;
+
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -18,19 +20,22 @@ public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
 
     @Deprecated
     public static final String ACTION_SUGGESTION_PICKED = "android.text.style.SUGGESTION_PICKED";
-    public static final Parcelable.Creator<SuggestionSpan> CREATOR = new Parcelable.Creator<SuggestionSpan>() { // from class: android.text.style.SuggestionSpan.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SuggestionSpan createFromParcel(Parcel source) {
-            return new SuggestionSpan(source);
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SuggestionSpan[] newArray(int size) {
-            return new SuggestionSpan[size];
-        }
-    };
+    public static final Parcelable.Creator<SuggestionSpan> CREATOR =
+            new Parcelable.Creator<
+                    SuggestionSpan>() { // from class: android.text.style.SuggestionSpan.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SuggestionSpan createFromParcel(Parcel source) {
+                    return new SuggestionSpan(source);
+                }
+
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SuggestionSpan[] newArray(int size) {
+                    return new SuggestionSpan[size];
+                }
+            };
     public static final int FLAG_AUTO_CORRECTION = 4;
     public static final int FLAG_EASY_CORRECT = 1;
     public static final int FLAG_GRAMMAR_ERROR = 8;
@@ -39,14 +44,11 @@ public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
     public static final int SEM_FLAG_TYPO_SUGGESTION = 8192;
     public static final int SUGGESTIONS_MAX_SIZE = 5;
 
-    @Deprecated
-    public static final String SUGGESTION_SPAN_PICKED_AFTER = "after";
+    @Deprecated public static final String SUGGESTION_SPAN_PICKED_AFTER = "after";
 
-    @Deprecated
-    public static final String SUGGESTION_SPAN_PICKED_BEFORE = "before";
+    @Deprecated public static final String SUGGESTION_SPAN_PICKED_BEFORE = "before";
 
-    @Deprecated
-    public static final String SUGGESTION_SPAN_PICKED_HASHCODE = "hashcode";
+    @Deprecated public static final String SUGGESTION_SPAN_PICKED_HASHCODE = "hashcode";
     private static final String TAG = "SuggestionSpan";
     private int mAutoCorrectionUnderlineColor;
     private float mAutoCorrectionUnderlineThickness;
@@ -74,7 +76,12 @@ public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
         this(null, locale, suggestions, flags, null);
     }
 
-    public SuggestionSpan(Context context, Locale locale, String[] suggestions, int flags, Class<?> notificationTargetClass) {
+    public SuggestionSpan(
+            Context context,
+            Locale locale,
+            String[] suggestions,
+            int flags,
+            Class<?> notificationTargetClass) {
         Locale sourceLocale;
         int N = Math.min(5, suggestions.length);
         this.mSuggestions = (String[]) Arrays.copyOf(suggestions, N);
@@ -89,7 +96,9 @@ public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
         }
         this.mLocaleStringForCompatibility = sourceLocale == null ? "" : sourceLocale.toString();
         this.mLanguageTag = sourceLocale != null ? sourceLocale.toLanguageTag() : "";
-        this.mHashCode = hashCodeInternal(this.mSuggestions, this.mLanguageTag, this.mLocaleStringForCompatibility);
+        this.mHashCode =
+                hashCodeInternal(
+                        this.mSuggestions, this.mLanguageTag, this.mLocaleStringForCompatibility);
         initStyle(context);
     }
 
@@ -105,19 +114,39 @@ public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
             this.mAutoCorrectionUnderlineColor = -16777216;
             return;
         }
-        TypedArray typedArray = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceMisspelledSuggestion, 0);
+        TypedArray typedArray =
+                context.obtainStyledAttributes(
+                        null,
+                        R.styleable.SuggestionSpan,
+                        R.attr.textAppearanceMisspelledSuggestion,
+                        0);
         this.mMisspelledUnderlineThickness = typedArray.getDimension(1, 0.0f);
         this.mMisspelledUnderlineColor = typedArray.getColor(0, -16777216);
         typedArray.recycle();
-        TypedArray typedArray2 = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceGrammarErrorSuggestion, 0);
+        TypedArray typedArray2 =
+                context.obtainStyledAttributes(
+                        null,
+                        R.styleable.SuggestionSpan,
+                        R.attr.textAppearanceGrammarErrorSuggestion,
+                        0);
         this.mGrammarErrorUnderlineThickness = typedArray2.getDimension(1, 0.0f);
         this.mGrammarErrorUnderlineColor = typedArray2.getColor(0, -16777216);
         typedArray2.recycle();
-        TypedArray typedArray3 = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceEasyCorrectSuggestion, 0);
+        TypedArray typedArray3 =
+                context.obtainStyledAttributes(
+                        null,
+                        R.styleable.SuggestionSpan,
+                        R.attr.textAppearanceEasyCorrectSuggestion,
+                        0);
         this.mEasyCorrectUnderlineThickness = typedArray3.getDimension(1, 0.0f);
         this.mEasyCorrectUnderlineColor = typedArray3.getColor(0, -16777216);
         typedArray3.recycle();
-        TypedArray typedArray4 = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceAutoCorrectionSuggestion, 0);
+        TypedArray typedArray4 =
+                context.obtainStyledAttributes(
+                        null,
+                        R.styleable.SuggestionSpan,
+                        R.attr.textAppearanceAutoCorrectionSuggestion,
+                        0);
         this.mAutoCorrectionUnderlineThickness = typedArray4.getDimension(1, 0.0f);
         this.mAutoCorrectionUnderlineColor = typedArray4.getColor(0, -16777216);
         typedArray4.recycle();
@@ -231,18 +260,28 @@ public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
         return this.mHashCode;
     }
 
-    private static int hashCodeInternal(String[] suggestions, String languageTag, String localeStringForCompatibility) {
-        return Arrays.hashCode(new Object[]{Long.valueOf(SystemClock.uptimeMillis()), suggestions, languageTag, localeStringForCompatibility});
+    private static int hashCodeInternal(
+            String[] suggestions, String languageTag, String localeStringForCompatibility) {
+        return Arrays.hashCode(
+                new Object[] {
+                    Long.valueOf(SystemClock.uptimeMillis()),
+                    suggestions,
+                    languageTag,
+                    localeStringForCompatibility
+                });
     }
 
     @Override // android.text.style.CharacterStyle
     public void updateDrawState(TextPaint tp) {
         if ((this.mFlags & 4096) != 0) {
-            tp.setUnderlineText(this.mGrammarSuggestionUnderlineColor, this.mGrammarSuggestionUnderlineThickness);
+            tp.setUnderlineText(
+                    this.mGrammarSuggestionUnderlineColor,
+                    this.mGrammarSuggestionUnderlineThickness);
             return;
         }
         if ((this.mFlags & 8192) != 0) {
-            tp.setUnderlineText(this.mTypoSuggestionUnderlineColor, this.mTypoSuggestionUnderlineThickness);
+            tp.setUnderlineText(
+                    this.mTypoSuggestionUnderlineColor, this.mTypoSuggestionUnderlineThickness);
             return;
         }
         boolean misspelled = (this.mFlags & 2) != 0;
@@ -251,15 +290,19 @@ public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
         boolean grammarError = (this.mFlags & 8) != 0;
         if (easy) {
             if (!misspelled && !grammarError) {
-                tp.setUnderlineText(this.mEasyCorrectUnderlineColor, this.mEasyCorrectUnderlineThickness);
+                tp.setUnderlineText(
+                        this.mEasyCorrectUnderlineColor, this.mEasyCorrectUnderlineThickness);
                 return;
             } else {
                 if (tp.underlineColor == 0) {
                     if (grammarError) {
-                        tp.setUnderlineText(this.mGrammarErrorUnderlineColor, this.mGrammarErrorUnderlineThickness);
+                        tp.setUnderlineText(
+                                this.mGrammarErrorUnderlineColor,
+                                this.mGrammarErrorUnderlineThickness);
                         return;
                     } else {
-                        tp.setUnderlineText(this.mMisspelledUnderlineColor, this.mMisspelledUnderlineThickness);
+                        tp.setUnderlineText(
+                                this.mMisspelledUnderlineColor, this.mMisspelledUnderlineThickness);
                         return;
                     }
                 }
@@ -267,11 +310,13 @@ public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
             }
         }
         if (autoCorrection) {
-            tp.setUnderlineText(this.mAutoCorrectionUnderlineColor, this.mAutoCorrectionUnderlineThickness);
+            tp.setUnderlineText(
+                    this.mAutoCorrectionUnderlineColor, this.mAutoCorrectionUnderlineThickness);
         } else if (misspelled) {
             tp.setUnderlineText(this.mMisspelledUnderlineColor, this.mMisspelledUnderlineThickness);
         } else if (grammarError) {
-            tp.setUnderlineText(this.mGrammarErrorUnderlineColor, this.mGrammarErrorUnderlineThickness);
+            tp.setUnderlineText(
+                    this.mGrammarErrorUnderlineColor, this.mGrammarErrorUnderlineThickness);
         }
     }
 

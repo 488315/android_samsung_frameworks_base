@@ -2,6 +2,7 @@ package com.android.server.display.brightness;
 
 import android.hardware.display.DisplayManagerInternal;
 import android.os.HandlerExecutor;
+
 import com.android.internal.display.BrightnessSynchronizer;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.display.AutomaticBrightnessController;
@@ -34,18 +35,24 @@ public final class DisplayBrightnessController {
     public float mLastUserSetScreenBrightness = Float.NaN;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class Injector {
-    }
+    class Injector {}
 
     /* JADX WARN: Code restructure failed: missing block: B:16:0x0078, code lost:
-    
-        if (java.lang.Float.isNaN(r0) != false) goto L17;
-     */
+
+       if (java.lang.Float.isNaN(r0) != false) goto L17;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public DisplayBrightnessController(android.content.Context r5, int r6, float r7, com.android.server.display.BrightnessSetting r8, com.android.server.display.DisplayPowerController$$ExternalSyntheticLambda2 r9, android.os.HandlerExecutor r10, com.android.server.display.feature.DisplayManagerFlags r11) {
+    public DisplayBrightnessController(
+            android.content.Context r5,
+            int r6,
+            float r7,
+            com.android.server.display.BrightnessSetting r8,
+            com.android.server.display.DisplayPowerController$$ExternalSyntheticLambda2 r9,
+            android.os.HandlerExecutor r10,
+            com.android.server.display.feature.DisplayManagerFlags r11) {
         /*
             r4 = this;
             r4.<init>()
@@ -118,11 +125,18 @@ public final class DisplayBrightnessController {
             r4.mTag = r5
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.brightness.DisplayBrightnessController.<init>(android.content.Context, int, float, com.android.server.display.BrightnessSetting, com.android.server.display.DisplayPowerController$$ExternalSyntheticLambda2, android.os.HandlerExecutor, com.android.server.display.feature.DisplayManagerFlags):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.brightness.DisplayBrightnessController.<init>(android.content.Context,"
+                    + " int, float, com.android.server.display.BrightnessSetting,"
+                    + " com.android.server.display.DisplayPowerController$$ExternalSyntheticLambda2,"
+                    + " android.os.HandlerExecutor,"
+                    + " com.android.server.display.feature.DisplayManagerFlags):void");
     }
 
     public final float convertToAdjustedNits(float f) {
-        AutomaticBrightnessController automaticBrightnessController = this.mAutomaticBrightnessController;
+        AutomaticBrightnessController automaticBrightnessController =
+                this.mAutomaticBrightnessController;
         if (automaticBrightnessController == null) {
             return -1.0f;
         }
@@ -130,7 +144,8 @@ public final class DisplayBrightnessController {
     }
 
     public final float convertToNits(float f) {
-        AutomaticBrightnessController automaticBrightnessController = this.mAutomaticBrightnessController;
+        AutomaticBrightnessController automaticBrightnessController =
+                this.mAutomaticBrightnessController;
         if (automaticBrightnessController == null) {
             return -1.0f;
         }
@@ -138,7 +153,8 @@ public final class DisplayBrightnessController {
     }
 
     public final float getBrightnessFromNits(float f) {
-        AutomaticBrightnessController automaticBrightnessController = this.mAutomaticBrightnessController;
+        AutomaticBrightnessController automaticBrightnessController =
+                this.mAutomaticBrightnessController;
         if (automaticBrightnessController == null) {
             return Float.NaN;
         }
@@ -187,7 +203,10 @@ public final class DisplayBrightnessController {
         synchronized (this.mLock) {
             try {
                 if (Float.isNaN(f)) {
-                    Slog.d(this.mTag, "getScreenBrightnessSetting: default: " + this.mScreenBrightnessDefault);
+                    Slog.d(
+                            this.mTag,
+                            "getScreenBrightnessSetting: default: "
+                                    + this.mScreenBrightnessDefault);
                     f = this.mScreenBrightnessDefault;
                 }
                 clampAbsoluteBrightness = BrightnessUtils.clampAbsoluteBrightness(f);
@@ -220,7 +239,8 @@ public final class DisplayBrightnessController {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setAutomaticBrightnessController(com.android.server.display.AutomaticBrightnessController r6) {
+    public void setAutomaticBrightnessController(
+            com.android.server.display.AutomaticBrightnessController r6) {
         /*
             r5 = this;
             r5.mAutomaticBrightnessController = r6
@@ -287,7 +307,9 @@ public final class DisplayBrightnessController {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L69
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.brightness.DisplayBrightnessController.setAutomaticBrightnessController(com.android.server.display.AutomaticBrightnessController):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.brightness.DisplayBrightnessController.setAutomaticBrightnessController(com.android.server.display.AutomaticBrightnessController):void");
     }
 
     public final void setBrightness(float f, float f2) {
@@ -308,17 +330,22 @@ public final class DisplayBrightnessController {
 
     public final void setBrightnessToFollow(boolean z, float f) {
         synchronized (this.mLock) {
-            FollowerBrightnessStrategy followerBrightnessStrategy = this.mDisplayBrightnessStrategySelector.mFollowerBrightnessStrategy;
+            FollowerBrightnessStrategy followerBrightnessStrategy =
+                    this.mDisplayBrightnessStrategySelector.mFollowerBrightnessStrategy;
             followerBrightnessStrategy.mBrightnessToFollow = f;
             followerBrightnessStrategy.mBrightnessToFollowSlowChange = z;
         }
     }
 
-    public final DisplayBrightnessState updateBrightness(DisplayManagerInternal.DisplayPowerRequest displayPowerRequest, int i, DisplayManagerInternal.DisplayOffloadSession displayOffloadSession) {
+    public final DisplayBrightnessState updateBrightness(
+            DisplayManagerInternal.DisplayPowerRequest displayPowerRequest,
+            int i,
+            DisplayManagerInternal.DisplayOffloadSession displayOffloadSession) {
         float f;
         DisplayBrightnessState updateBrightness;
         synchronized (this.mLock) {
-            DisplayBrightnessStrategySelector displayBrightnessStrategySelector = this.mDisplayBrightnessStrategySelector;
+            DisplayBrightnessStrategySelector displayBrightnessStrategySelector =
+                    this.mDisplayBrightnessStrategySelector;
             boolean updateUserSetScreenBrightness = updateUserSetScreenBrightness();
             synchronized (this.mLock) {
                 f = this.mLastUserSetScreenBrightness;
@@ -329,11 +356,18 @@ public final class DisplayBrightnessController {
             strategySelectionRequest.mLastUserSetScreenBrightness = f;
             strategySelectionRequest.mUserSetBrightnessChanged = updateUserSetScreenBrightness;
             strategySelectionRequest.mDisplayOffloadSession = displayOffloadSession;
-            DisplayBrightnessStrategy selectStrategy = displayBrightnessStrategySelector.selectStrategy(strategySelectionRequest);
+            DisplayBrightnessStrategy selectStrategy =
+                    displayBrightnessStrategySelector.selectStrategy(strategySelectionRequest);
             this.mDisplayBrightnessStrategy = selectStrategy;
-            updateBrightness = selectStrategy.updateBrightness(new StrategyExecutionRequest(displayPowerRequest, getCurrentBrightness(), this.mUserSetScreenBrightnessUpdated));
+            updateBrightness =
+                    selectStrategy.updateBrightness(
+                            new StrategyExecutionRequest(
+                                    displayPowerRequest,
+                                    getCurrentBrightness(),
+                                    this.mUserSetScreenBrightnessUpdated));
         }
-        AutomaticBrightnessStrategy2 automaticBrightnessStrategy2 = this.mDisplayBrightnessStrategySelector.mAutomaticBrightnessStrategy;
+        AutomaticBrightnessStrategy2 automaticBrightnessStrategy2 =
+                this.mDisplayBrightnessStrategySelector.mAutomaticBrightnessStrategy;
         DisplayBrightnessState.Builder builder = new DisplayBrightnessState.Builder();
         builder.mBrightness = updateBrightness.mBrightness;
         builder.mSdrBrightness = updateBrightness.mSdrBrightness;
@@ -344,11 +378,14 @@ public final class DisplayBrightnessController {
         builder.mMaxBrightness = updateBrightness.mMaxBrightness;
         builder.mMinBrightness = updateBrightness.mMinBrightness;
         builder.mCustomAnimationRate = updateBrightness.mCustomAnimationRate;
-        builder.mShouldUpdateScreenBrightnessSetting = updateBrightness.mShouldUpdateScreenBrightnessSetting;
+        builder.mShouldUpdateScreenBrightnessSetting =
+                updateBrightness.mShouldUpdateScreenBrightnessSetting;
         builder.mBrightnessEvent = updateBrightness.mBrightnessEvent;
         builder.mBrightnessAdjustmentFlag = updateBrightness.mBrightnessAdjustmentFlag;
         builder.mIsUserInitiatedChange = updateBrightness.mIsUserInitiatedChange;
-        builder.mShouldUseAutoBrightness = automaticBrightnessStrategy2 != null && automaticBrightnessStrategy2.shouldUseAutoBrightness();
+        builder.mShouldUseAutoBrightness =
+                automaticBrightnessStrategy2 != null
+                        && automaticBrightnessStrategy2.shouldUseAutoBrightness();
         return new DisplayBrightnessState(builder);
     }
 
@@ -375,8 +412,15 @@ public final class DisplayBrightnessController {
         synchronized (this.mLock) {
             try {
                 if (!BrightnessUtils.isValidBrightnessValue(this.mPendingScreenBrightness)) {
-                    if (BrightnessSynchronizer.floatEquals(this.mDisplayBrightnessStrategySelector.mTemporaryBrightnessStrategy.mTemporaryScreenBrightness, this.mCurrentScreenBrightness)) {
-                        this.mDisplayBrightnessStrategySelector.mTemporaryBrightnessStrategy.mTemporaryScreenBrightness = Float.NaN;
+                    if (BrightnessSynchronizer.floatEquals(
+                            this.mDisplayBrightnessStrategySelector
+                                    .mTemporaryBrightnessStrategy
+                                    .mTemporaryScreenBrightness,
+                            this.mCurrentScreenBrightness)) {
+                        this.mDisplayBrightnessStrategySelector
+                                        .mTemporaryBrightnessStrategy
+                                        .mTemporaryScreenBrightness =
+                                Float.NaN;
                     }
                     return false;
                 }
@@ -384,7 +428,10 @@ public final class DisplayBrightnessController {
                 float f2 = this.mPendingScreenBrightness;
                 if (f == f2) {
                     this.mPendingScreenBrightness = Float.NaN;
-                    this.mDisplayBrightnessStrategySelector.mTemporaryBrightnessStrategy.mTemporaryScreenBrightness = Float.NaN;
+                    this.mDisplayBrightnessStrategySelector
+                                    .mTemporaryBrightnessStrategy
+                                    .mTemporaryScreenBrightness =
+                            Float.NaN;
                     return false;
                 }
                 if (f2 != f) {
@@ -392,7 +439,10 @@ public final class DisplayBrightnessController {
                 }
                 this.mLastUserSetScreenBrightness = f2;
                 this.mPendingScreenBrightness = Float.NaN;
-                this.mDisplayBrightnessStrategySelector.mTemporaryBrightnessStrategy.mTemporaryScreenBrightness = Float.NaN;
+                this.mDisplayBrightnessStrategySelector
+                                .mTemporaryBrightnessStrategy
+                                .mTemporaryScreenBrightness =
+                        Float.NaN;
                 this.mBrightnessChangeExecutor.execute(this.mOnBrightnessChangeRunnable);
                 this.mUserSetScreenBrightnessUpdated = true;
                 return true;

@@ -7,8 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 public interface SynthesisCallback {
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SupportedAudioFormat {
-    }
+    public @interface SupportedAudioFormat {}
 
     int audioAvailable(byte[] bArr, int i, int i2);
 
@@ -26,6 +25,5 @@ public interface SynthesisCallback {
 
     int start(int i, int i2, int i3);
 
-    default void rangeStart(int markerInFrames, int start, int end) {
-    }
+    default void rangeStart(int markerInFrames, int start, int end) {}
 }

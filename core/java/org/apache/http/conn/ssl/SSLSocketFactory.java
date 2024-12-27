@@ -1,5 +1,10 @@
 package org.apache.http.conn.ssl;
 
+import org.apache.http.conn.scheme.HostNameResolver;
+import org.apache.http.conn.scheme.LayeredSocketFactory;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -11,6 +16,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
+
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
@@ -18,10 +24,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
-import org.apache.http.conn.scheme.HostNameResolver;
-import org.apache.http.conn.scheme.LayeredSocketFactory;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 
 @Deprecated
 /* loaded from: classes6.dex */
@@ -33,25 +35,38 @@ public class SSLSocketFactory implements LayeredSocketFactory {
     private final HostNameResolver nameResolver;
     private final javax.net.ssl.SSLSocketFactory socketfactory;
     private final SSLContext sslcontext;
-    public static final X509HostnameVerifier ALLOW_ALL_HOSTNAME_VERIFIER = new AllowAllHostnameVerifier();
-    public static final X509HostnameVerifier BROWSER_COMPATIBLE_HOSTNAME_VERIFIER = new BrowserCompatHostnameVerifier();
-    public static final X509HostnameVerifier STRICT_HOSTNAME_VERIFIER = new StrictHostnameVerifier();
+    public static final X509HostnameVerifier ALLOW_ALL_HOSTNAME_VERIFIER =
+            new AllowAllHostnameVerifier();
+    public static final X509HostnameVerifier BROWSER_COMPATIBLE_HOSTNAME_VERIFIER =
+            new BrowserCompatHostnameVerifier();
+    public static final X509HostnameVerifier STRICT_HOSTNAME_VERIFIER =
+            new StrictHostnameVerifier();
 
     private static class NoPreloadHolder {
         private static final SSLSocketFactory DEFAULT_FACTORY = new SSLSocketFactory();
 
-        private NoPreloadHolder() {
-        }
+        private NoPreloadHolder() {}
     }
 
     public static SSLSocketFactory getSocketFactory() {
         return NoPreloadHolder.DEFAULT_FACTORY;
     }
 
-    public SSLSocketFactory(String algorithm, KeyStore keystore, String keystorePassword, KeyStore truststore, SecureRandom random, HostNameResolver nameResolver) throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
+    public SSLSocketFactory(
+            String algorithm,
+            KeyStore keystore,
+            String keystorePassword,
+            KeyStore truststore,
+            SecureRandom random,
+            HostNameResolver nameResolver)
+            throws NoSuchAlgorithmException,
+                    KeyManagementException,
+                    KeyStoreException,
+                    UnrecoverableKeyException {
         this.hostnameVerifier = BROWSER_COMPATIBLE_HOSTNAME_VERIFIER;
         algorithm = algorithm == null ? TLS : algorithm;
-        KeyManager[] keymanagers = keystore != null ? createKeyManagers(keystore, keystorePassword) : null;
+        KeyManager[] keymanagers =
+                keystore != null ? createKeyManagers(keystore, keystorePassword) : null;
         TrustManager[] trustmanagers = truststore != null ? createTrustManagers(truststore) : null;
         this.sslcontext = SSLContext.getInstance(algorithm);
         this.sslcontext.init(keymanagers, trustmanagers, random);
@@ -59,15 +74,27 @@ public class SSLSocketFactory implements LayeredSocketFactory {
         this.nameResolver = nameResolver;
     }
 
-    public SSLSocketFactory(KeyStore keystore, String keystorePassword, KeyStore truststore) throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
+    public SSLSocketFactory(KeyStore keystore, String keystorePassword, KeyStore truststore)
+            throws NoSuchAlgorithmException,
+                    KeyManagementException,
+                    KeyStoreException,
+                    UnrecoverableKeyException {
         this(TLS, keystore, keystorePassword, truststore, null, null);
     }
 
-    public SSLSocketFactory(KeyStore keystore, String keystorePassword) throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
+    public SSLSocketFactory(KeyStore keystore, String keystorePassword)
+            throws NoSuchAlgorithmException,
+                    KeyManagementException,
+                    KeyStoreException,
+                    UnrecoverableKeyException {
         this(TLS, keystore, keystorePassword, null, null, null);
     }
 
-    public SSLSocketFactory(KeyStore truststore) throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
+    public SSLSocketFactory(KeyStore truststore)
+            throws NoSuchAlgorithmException,
+                    KeyManagementException,
+                    KeyStoreException,
+                    UnrecoverableKeyException {
         this(TLS, null, null, truststore, null, null);
     }
 
@@ -85,20 +112,24 @@ public class SSLSocketFactory implements LayeredSocketFactory {
         this.nameResolver = null;
     }
 
-    private static KeyManager[] createKeyManagers(KeyStore keystore, String password) throws KeyStoreException, NoSuchAlgorithmException, UnrecoverableKeyException {
+    private static KeyManager[] createKeyManagers(KeyStore keystore, String password)
+            throws KeyStoreException, NoSuchAlgorithmException, UnrecoverableKeyException {
         if (keystore == null) {
             throw new IllegalArgumentException("Keystore may not be null");
         }
-        KeyManagerFactory kmfactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+        KeyManagerFactory kmfactory =
+                KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
         kmfactory.init(keystore, password != null ? password.toCharArray() : null);
         return kmfactory.getKeyManagers();
     }
 
-    private static TrustManager[] createTrustManagers(KeyStore keystore) throws KeyStoreException, NoSuchAlgorithmException {
+    private static TrustManager[] createTrustManagers(KeyStore keystore)
+            throws KeyStoreException, NoSuchAlgorithmException {
         if (keystore == null) {
             throw new IllegalArgumentException("Keystore may not be null");
         }
-        TrustManagerFactory tmfactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        TrustManagerFactory tmfactory =
+                TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
         tmfactory.init(keystore);
         return tmfactory.getTrustManagers();
     }
@@ -109,7 +140,14 @@ public class SSLSocketFactory implements LayeredSocketFactory {
     }
 
     @Override // org.apache.http.conn.scheme.SocketFactory
-    public Socket connectSocket(Socket sock, String host, int port, InetAddress localAddress, int localPort, HttpParams params) throws IOException {
+    public Socket connectSocket(
+            Socket sock,
+            String host,
+            int port,
+            InetAddress localAddress,
+            int localPort,
+            HttpParams params)
+            throws IOException {
         InetSocketAddress remoteAddress;
         if (host == null) {
             throw new IllegalArgumentException("Target host may not be null.");
@@ -162,8 +200,10 @@ public class SSLSocketFactory implements LayeredSocketFactory {
     }
 
     @Override // org.apache.http.conn.scheme.LayeredSocketFactory
-    public Socket createSocket(Socket socket, String host, int port, boolean autoClose) throws IOException, UnknownHostException {
-        SSLSocket sslSocket = (SSLSocket) this.socketfactory.createSocket(socket, host, port, autoClose);
+    public Socket createSocket(Socket socket, String host, int port, boolean autoClose)
+            throws IOException, UnknownHostException {
+        SSLSocket sslSocket =
+                (SSLSocket) this.socketfactory.createSocket(socket, host, port, autoClose);
         sslSocket.startHandshake();
         this.hostnameVerifier.verify(host, sslSocket);
         return sslSocket;

@@ -2,6 +2,7 @@ package android.net;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -9,19 +10,20 @@ import java.util.StringJoiner;
 
 /* loaded from: classes3.dex */
 public final class VpnProfileState implements Parcelable {
-    public static final Parcelable.Creator<VpnProfileState> CREATOR = new Parcelable.Creator<VpnProfileState>() { // from class: android.net.VpnProfileState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VpnProfileState createFromParcel(Parcel in) {
-            return new VpnProfileState(in);
-        }
+    public static final Parcelable.Creator<VpnProfileState> CREATOR =
+            new Parcelable.Creator<VpnProfileState>() { // from class: android.net.VpnProfileState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VpnProfileState createFromParcel(Parcel in) {
+                    return new VpnProfileState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VpnProfileState[] newArray(int size) {
-            return new VpnProfileState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VpnProfileState[] newArray(int size) {
+                    return new VpnProfileState[size];
+                }
+            };
     public static final int STATE_CONNECTED = 2;
     public static final int STATE_CONNECTING = 1;
     public static final int STATE_DISCONNECTED = 0;
@@ -32,8 +34,7 @@ public final class VpnProfileState implements Parcelable {
     private final int mState;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-    }
+    public @interface State {}
 
     public VpnProfileState(int state, String sessionKey, boolean alwaysOn, boolean lockdown) {
         this.mState = state;
@@ -107,10 +108,17 @@ public final class VpnProfileState implements Parcelable {
             return false;
         }
         VpnProfileState that = (VpnProfileState) obj;
-        return getState() == that.getState() && Objects.equals(getSessionId(), that.getSessionId()) && isAlwaysOn() == that.isAlwaysOn() && isLockdownEnabled() == that.isLockdownEnabled();
+        return getState() == that.getState()
+                && Objects.equals(getSessionId(), that.getSessionId())
+                && isAlwaysOn() == that.isAlwaysOn()
+                && isLockdownEnabled() == that.isLockdownEnabled();
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(getState()), getSessionId(), Boolean.valueOf(isAlwaysOn()), Boolean.valueOf(isLockdownEnabled()));
+        return Objects.hash(
+                Integer.valueOf(getState()),
+                getSessionId(),
+                Boolean.valueOf(isAlwaysOn()),
+                Boolean.valueOf(isLockdownEnabled()));
     }
 }

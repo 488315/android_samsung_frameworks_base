@@ -5,6 +5,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.autofill.Helper;
 import android.widget.RemoteViews;
+
 import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
@@ -13,7 +14,10 @@ public abstract class InternalTransformation implements Transformation, Parcelab
 
     abstract void apply(ValueFinder valueFinder, RemoteViews remoteViews, int i) throws Exception;
 
-    public static boolean batchApply(ValueFinder finder, RemoteViews template, ArrayList<Pair<Integer, InternalTransformation>> transformations) {
+    public static boolean batchApply(
+            ValueFinder finder,
+            RemoteViews template,
+            ArrayList<Pair<Integer, InternalTransformation>> transformations) {
         int size = transformations.size();
         if (Helper.sDebug) {
             Log.d(TAG, "getPresentation(): applying " + size + " transformations");
@@ -28,7 +32,9 @@ public abstract class InternalTransformation implements Transformation, Parcelab
             try {
                 transformation.apply(finder, template, id);
             } catch (Exception e) {
-                Log.e(TAG, "Could not apply transformation " + transformation + ": " + e.getClass());
+                Log.e(
+                        TAG,
+                        "Could not apply transformation " + transformation + ": " + e.getClass());
                 return false;
             }
         }

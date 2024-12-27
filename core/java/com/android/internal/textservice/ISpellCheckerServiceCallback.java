@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.textservice.ISpellCheckerSession;
 
 /* loaded from: classes5.dex */
 public interface ISpellCheckerServiceCallback extends IInterface {
@@ -13,8 +12,7 @@ public interface ISpellCheckerServiceCallback extends IInterface {
 
     public static class Default implements ISpellCheckerServiceCallback {
         @Override // com.android.internal.textservice.ISpellCheckerServiceCallback
-        public void onSessionCreated(ISpellCheckerSession newSession) throws RemoteException {
-        }
+        public void onSessionCreated(ISpellCheckerSession newSession) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,8 +20,9 @@ public interface ISpellCheckerServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpellCheckerServiceCallback {
-        public static final String DESCRIPTOR = "com.android.internal.textservice.ISpellCheckerServiceCallback";
+    public abstract static class Stub extends Binder implements ISpellCheckerServiceCallback {
+        public static final String DESCRIPTOR =
+                "com.android.internal.textservice.ISpellCheckerServiceCallback";
         static final int TRANSACTION_onSessionCreated = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface ISpellCheckerServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -71,7 +71,8 @@ public interface ISpellCheckerServiceCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ISpellCheckerSession _arg0 = ISpellCheckerSession.Stub.asInterface(data.readStrongBinder());
+                    ISpellCheckerSession _arg0 =
+                            ISpellCheckerSession.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onSessionCreated(_arg0);
                     return true;

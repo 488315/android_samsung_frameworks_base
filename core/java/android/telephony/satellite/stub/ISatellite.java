@@ -7,9 +7,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.IBooleanConsumer;
 import android.telephony.IIntegerConsumer;
-import android.telephony.satellite.stub.INtnSignalStrengthConsumer;
-import android.telephony.satellite.stub.ISatelliteCapabilitiesConsumer;
-import android.telephony.satellite.stub.ISatelliteListener;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -18,136 +16,183 @@ public interface ISatellite extends IInterface {
 
     void abortSendingSatelliteDatagrams(IIntegerConsumer iIntegerConsumer) throws RemoteException;
 
-    void enableTerrestrialNetworkScanWhileSatelliteModeIsOn(boolean z, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void enableTerrestrialNetworkScanWhileSatelliteModeIsOn(
+            boolean z, IIntegerConsumer iIntegerConsumer) throws RemoteException;
 
     void pollPendingSatelliteDatagrams(IIntegerConsumer iIntegerConsumer) throws RemoteException;
 
-    void requestIsSatelliteEnabled(IIntegerConsumer iIntegerConsumer, IBooleanConsumer iBooleanConsumer) throws RemoteException;
+    void requestIsSatelliteEnabled(
+            IIntegerConsumer iIntegerConsumer, IBooleanConsumer iBooleanConsumer)
+            throws RemoteException;
 
-    void requestIsSatelliteEnabledForCarrier(int i, IIntegerConsumer iIntegerConsumer, IBooleanConsumer iBooleanConsumer) throws RemoteException;
+    void requestIsSatelliteEnabledForCarrier(
+            int i, IIntegerConsumer iIntegerConsumer, IBooleanConsumer iBooleanConsumer)
+            throws RemoteException;
 
-    void requestIsSatelliteSupported(IIntegerConsumer iIntegerConsumer, IBooleanConsumer iBooleanConsumer) throws RemoteException;
+    void requestIsSatelliteSupported(
+            IIntegerConsumer iIntegerConsumer, IBooleanConsumer iBooleanConsumer)
+            throws RemoteException;
 
-    void requestSatelliteCapabilities(IIntegerConsumer iIntegerConsumer, ISatelliteCapabilitiesConsumer iSatelliteCapabilitiesConsumer) throws RemoteException;
+    void requestSatelliteCapabilities(
+            IIntegerConsumer iIntegerConsumer,
+            ISatelliteCapabilitiesConsumer iSatelliteCapabilitiesConsumer)
+            throws RemoteException;
 
-    void requestSatelliteEnabled(SatelliteModemEnableRequestAttributes satelliteModemEnableRequestAttributes, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void requestSatelliteEnabled(
+            SatelliteModemEnableRequestAttributes satelliteModemEnableRequestAttributes,
+            IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
-    void requestSatelliteListeningEnabled(boolean z, int i, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void requestSatelliteListeningEnabled(boolean z, int i, IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
-    void requestSatelliteModemState(IIntegerConsumer iIntegerConsumer, IIntegerConsumer iIntegerConsumer2) throws RemoteException;
+    void requestSatelliteModemState(
+            IIntegerConsumer iIntegerConsumer, IIntegerConsumer iIntegerConsumer2)
+            throws RemoteException;
 
-    void requestSignalStrength(IIntegerConsumer iIntegerConsumer, INtnSignalStrengthConsumer iNtnSignalStrengthConsumer) throws RemoteException;
+    void requestSignalStrength(
+            IIntegerConsumer iIntegerConsumer,
+            INtnSignalStrengthConsumer iNtnSignalStrengthConsumer)
+            throws RemoteException;
 
-    void requestTimeForNextSatelliteVisibility(IIntegerConsumer iIntegerConsumer, IIntegerConsumer iIntegerConsumer2) throws RemoteException;
+    void requestTimeForNextSatelliteVisibility(
+            IIntegerConsumer iIntegerConsumer, IIntegerConsumer iIntegerConsumer2)
+            throws RemoteException;
 
-    void sendSatelliteDatagram(SatelliteDatagram satelliteDatagram, boolean z, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void sendSatelliteDatagram(
+            SatelliteDatagram satelliteDatagram, boolean z, IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
-    void setSatelliteEnabledForCarrier(int i, boolean z, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void setSatelliteEnabledForCarrier(int i, boolean z, IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
     void setSatelliteListener(ISatelliteListener iSatelliteListener) throws RemoteException;
 
-    void setSatellitePlmn(int i, List<String> list, List<String> list2, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void setSatellitePlmn(
+            int i, List<String> list, List<String> list2, IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
     void startSendingNtnSignalStrength(IIntegerConsumer iIntegerConsumer) throws RemoteException;
 
-    void startSendingSatellitePointingInfo(IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void startSendingSatellitePointingInfo(IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
     void stopSendingNtnSignalStrength(IIntegerConsumer iIntegerConsumer) throws RemoteException;
 
     void stopSendingSatellitePointingInfo(IIntegerConsumer iIntegerConsumer) throws RemoteException;
 
-    void updateSatelliteSubscription(String str, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void updateSatelliteSubscription(String str, IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
-    void updateSystemSelectionChannels(List<SystemSelectionSpecifier> list, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void updateSystemSelectionChannels(
+            List<SystemSelectionSpecifier> list, IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
     public static class Default implements ISatellite {
         @Override // android.telephony.satellite.stub.ISatellite
-        public void setSatelliteListener(ISatelliteListener listener) throws RemoteException {
-        }
+        public void setSatelliteListener(ISatelliteListener listener) throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void requestSatelliteListeningEnabled(boolean enable, int timeout, IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void requestSatelliteListeningEnabled(
+                boolean enable, int timeout, IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void enableTerrestrialNetworkScanWhileSatelliteModeIsOn(boolean enabled, IIntegerConsumer errorCallback) throws RemoteException {
-        }
+        public void enableTerrestrialNetworkScanWhileSatelliteModeIsOn(
+                boolean enabled, IIntegerConsumer errorCallback) throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void requestSatelliteEnabled(SatelliteModemEnableRequestAttributes enableAttributes, IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void requestSatelliteEnabled(
+                SatelliteModemEnableRequestAttributes enableAttributes,
+                IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void requestIsSatelliteEnabled(IIntegerConsumer resultCallback, IBooleanConsumer callback) throws RemoteException {
-        }
+        public void requestIsSatelliteEnabled(
+                IIntegerConsumer resultCallback, IBooleanConsumer callback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void requestIsSatelliteSupported(IIntegerConsumer resultCallback, IBooleanConsumer callback) throws RemoteException {
-        }
+        public void requestIsSatelliteSupported(
+                IIntegerConsumer resultCallback, IBooleanConsumer callback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void requestSatelliteCapabilities(IIntegerConsumer resultCallback, ISatelliteCapabilitiesConsumer callback) throws RemoteException {
-        }
+        public void requestSatelliteCapabilities(
+                IIntegerConsumer resultCallback, ISatelliteCapabilitiesConsumer callback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void startSendingSatellitePointingInfo(IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void startSendingSatellitePointingInfo(IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void stopSendingSatellitePointingInfo(IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void stopSendingSatellitePointingInfo(IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void pollPendingSatelliteDatagrams(IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void pollPendingSatelliteDatagrams(IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void sendSatelliteDatagram(SatelliteDatagram datagram, boolean isEmergency, IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void sendSatelliteDatagram(
+                SatelliteDatagram datagram, boolean isEmergency, IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void requestSatelliteModemState(IIntegerConsumer resultCallback, IIntegerConsumer callback) throws RemoteException {
-        }
+        public void requestSatelliteModemState(
+                IIntegerConsumer resultCallback, IIntegerConsumer callback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void requestTimeForNextSatelliteVisibility(IIntegerConsumer resultCallback, IIntegerConsumer callback) throws RemoteException {
-        }
+        public void requestTimeForNextSatelliteVisibility(
+                IIntegerConsumer resultCallback, IIntegerConsumer callback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void setSatellitePlmn(int simSlot, List<String> carrierPlmnList, List<String> allSatellitePlmnList, IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void setSatellitePlmn(
+                int simSlot,
+                List<String> carrierPlmnList,
+                List<String> allSatellitePlmnList,
+                IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void setSatelliteEnabledForCarrier(int simSlot, boolean satelliteEnabled, IIntegerConsumer callback) throws RemoteException {
-        }
+        public void setSatelliteEnabledForCarrier(
+                int simSlot, boolean satelliteEnabled, IIntegerConsumer callback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void requestIsSatelliteEnabledForCarrier(int simSlot, IIntegerConsumer resultCallback, IBooleanConsumer callback) throws RemoteException {
-        }
+        public void requestIsSatelliteEnabledForCarrier(
+                int simSlot, IIntegerConsumer resultCallback, IBooleanConsumer callback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void requestSignalStrength(IIntegerConsumer resultCallback, INtnSignalStrengthConsumer callback) throws RemoteException {
-        }
+        public void requestSignalStrength(
+                IIntegerConsumer resultCallback, INtnSignalStrengthConsumer callback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void startSendingNtnSignalStrength(IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void startSendingNtnSignalStrength(IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void stopSendingNtnSignalStrength(IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void stopSendingNtnSignalStrength(IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void abortSendingSatelliteDatagrams(IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void abortSendingSatelliteDatagrams(IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void updateSatelliteSubscription(String iccId, IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void updateSatelliteSubscription(String iccId, IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatellite
-        public void updateSystemSelectionChannels(List<SystemSelectionSpecifier> systemSelectionSpecifiers, IIntegerConsumer resultCallback) throws RemoteException {
-        }
+        public void updateSystemSelectionChannels(
+                List<SystemSelectionSpecifier> systemSelectionSpecifiers,
+                IIntegerConsumer resultCallback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -155,7 +200,7 @@ public interface ISatellite extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatellite {
+    public abstract static class Stub extends Binder implements ISatellite {
         static final int TRANSACTION_abortSendingSatelliteDatagrams = 20;
         static final int TRANSACTION_enableTerrestrialNetworkScanWhileSatelliteModeIsOn = 3;
         static final int TRANSACTION_pollPendingSatelliteDatagrams = 10;
@@ -256,7 +301,8 @@ public interface ISatellite extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISatellite.DESCRIPTOR);
             }
@@ -266,78 +312,101 @@ public interface ISatellite extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ISatelliteListener _arg0 = ISatelliteListener.Stub.asInterface(data.readStrongBinder());
+                    ISatelliteListener _arg0 =
+                            ISatelliteListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setSatelliteListener(_arg0);
                     return true;
                 case 2:
                     boolean _arg02 = data.readBoolean();
                     int _arg1 = data.readInt();
-                    IIntegerConsumer _arg2 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg2 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestSatelliteListeningEnabled(_arg02, _arg1, _arg2);
                     return true;
                 case 3:
                     boolean _arg03 = data.readBoolean();
-                    IIntegerConsumer _arg12 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg12 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     enableTerrestrialNetworkScanWhileSatelliteModeIsOn(_arg03, _arg12);
                     return true;
                 case 4:
-                    SatelliteModemEnableRequestAttributes _arg04 = (SatelliteModemEnableRequestAttributes) data.readTypedObject(SatelliteModemEnableRequestAttributes.CREATOR);
-                    IIntegerConsumer _arg13 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    SatelliteModemEnableRequestAttributes _arg04 =
+                            (SatelliteModemEnableRequestAttributes)
+                                    data.readTypedObject(
+                                            SatelliteModemEnableRequestAttributes.CREATOR);
+                    IIntegerConsumer _arg13 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestSatelliteEnabled(_arg04, _arg13);
                     return true;
                 case 5:
-                    IIntegerConsumer _arg05 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
-                    IBooleanConsumer _arg14 = IBooleanConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg05 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IBooleanConsumer _arg14 =
+                            IBooleanConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestIsSatelliteEnabled(_arg05, _arg14);
                     return true;
                 case 6:
-                    IIntegerConsumer _arg06 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
-                    IBooleanConsumer _arg15 = IBooleanConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg06 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IBooleanConsumer _arg15 =
+                            IBooleanConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestIsSatelliteSupported(_arg06, _arg15);
                     return true;
                 case 7:
-                    IIntegerConsumer _arg07 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
-                    ISatelliteCapabilitiesConsumer _arg16 = ISatelliteCapabilitiesConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg07 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    ISatelliteCapabilitiesConsumer _arg16 =
+                            ISatelliteCapabilitiesConsumer.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestSatelliteCapabilities(_arg07, _arg16);
                     return true;
                 case 8:
-                    IIntegerConsumer _arg08 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg08 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startSendingSatellitePointingInfo(_arg08);
                     return true;
                 case 9:
-                    IIntegerConsumer _arg09 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg09 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     stopSendingSatellitePointingInfo(_arg09);
                     return true;
                 case 10:
-                    IIntegerConsumer _arg010 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg010 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     pollPendingSatelliteDatagrams(_arg010);
                     return true;
                 case 11:
-                    SatelliteDatagram _arg011 = (SatelliteDatagram) data.readTypedObject(SatelliteDatagram.CREATOR);
+                    SatelliteDatagram _arg011 =
+                            (SatelliteDatagram) data.readTypedObject(SatelliteDatagram.CREATOR);
                     boolean _arg17 = data.readBoolean();
-                    IIntegerConsumer _arg22 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg22 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     sendSatelliteDatagram(_arg011, _arg17, _arg22);
                     return true;
                 case 12:
-                    IIntegerConsumer _arg012 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
-                    IIntegerConsumer _arg18 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg012 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg18 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestSatelliteModemState(_arg012, _arg18);
                     return true;
                 case 13:
-                    IIntegerConsumer _arg013 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
-                    IIntegerConsumer _arg19 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg013 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg19 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestTimeForNextSatelliteVisibility(_arg013, _arg19);
                     return true;
@@ -345,54 +414,66 @@ public interface ISatellite extends IInterface {
                     int _arg014 = data.readInt();
                     List<String> _arg110 = data.createStringArrayList();
                     List<String> _arg23 = data.createStringArrayList();
-                    IIntegerConsumer _arg3 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg3 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setSatellitePlmn(_arg014, _arg110, _arg23, _arg3);
                     return true;
                 case 15:
                     int _arg015 = data.readInt();
                     boolean _arg111 = data.readBoolean();
-                    IIntegerConsumer _arg24 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg24 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setSatelliteEnabledForCarrier(_arg015, _arg111, _arg24);
                     return true;
                 case 16:
                     int _arg016 = data.readInt();
-                    IIntegerConsumer _arg112 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
-                    IBooleanConsumer _arg25 = IBooleanConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg112 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IBooleanConsumer _arg25 =
+                            IBooleanConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestIsSatelliteEnabledForCarrier(_arg016, _arg112, _arg25);
                     return true;
                 case 17:
-                    IIntegerConsumer _arg017 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
-                    INtnSignalStrengthConsumer _arg113 = INtnSignalStrengthConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg017 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    INtnSignalStrengthConsumer _arg113 =
+                            INtnSignalStrengthConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestSignalStrength(_arg017, _arg113);
                     return true;
                 case 18:
-                    IIntegerConsumer _arg018 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg018 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startSendingNtnSignalStrength(_arg018);
                     return true;
                 case 19:
-                    IIntegerConsumer _arg019 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg019 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     stopSendingNtnSignalStrength(_arg019);
                     return true;
                 case 20:
-                    IIntegerConsumer _arg020 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg020 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     abortSendingSatelliteDatagrams(_arg020);
                     return true;
                 case 21:
                     String _arg021 = data.readString();
-                    IIntegerConsumer _arg114 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg114 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     updateSatelliteSubscription(_arg021, _arg114);
                     return true;
                 case 22:
-                    List<SystemSelectionSpecifier> _arg022 = data.createTypedArrayList(SystemSelectionSpecifier.CREATOR);
-                    IIntegerConsumer _arg115 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    List<SystemSelectionSpecifier> _arg022 =
+                            data.createTypedArrayList(SystemSelectionSpecifier.CREATOR);
+                    IIntegerConsumer _arg115 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     updateSystemSelectionChannels(_arg022, _arg115);
                     return true;
@@ -430,7 +511,9 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void requestSatelliteListeningEnabled(boolean enable, int timeout, IIntegerConsumer resultCallback) throws RemoteException {
+            public void requestSatelliteListeningEnabled(
+                    boolean enable, int timeout, IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -444,7 +527,8 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void enableTerrestrialNetworkScanWhileSatelliteModeIsOn(boolean enabled, IIntegerConsumer errorCallback) throws RemoteException {
+            public void enableTerrestrialNetworkScanWhileSatelliteModeIsOn(
+                    boolean enabled, IIntegerConsumer errorCallback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -457,7 +541,10 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void requestSatelliteEnabled(SatelliteModemEnableRequestAttributes enableAttributes, IIntegerConsumer resultCallback) throws RemoteException {
+            public void requestSatelliteEnabled(
+                    SatelliteModemEnableRequestAttributes enableAttributes,
+                    IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -470,7 +557,9 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void requestIsSatelliteEnabled(IIntegerConsumer resultCallback, IBooleanConsumer callback) throws RemoteException {
+            public void requestIsSatelliteEnabled(
+                    IIntegerConsumer resultCallback, IBooleanConsumer callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -483,7 +572,9 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void requestIsSatelliteSupported(IIntegerConsumer resultCallback, IBooleanConsumer callback) throws RemoteException {
+            public void requestIsSatelliteSupported(
+                    IIntegerConsumer resultCallback, IBooleanConsumer callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -496,7 +587,9 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void requestSatelliteCapabilities(IIntegerConsumer resultCallback, ISatelliteCapabilitiesConsumer callback) throws RemoteException {
+            public void requestSatelliteCapabilities(
+                    IIntegerConsumer resultCallback, ISatelliteCapabilitiesConsumer callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -509,7 +602,8 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void startSendingSatellitePointingInfo(IIntegerConsumer resultCallback) throws RemoteException {
+            public void startSendingSatellitePointingInfo(IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -521,7 +615,8 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void stopSendingSatellitePointingInfo(IIntegerConsumer resultCallback) throws RemoteException {
+            public void stopSendingSatellitePointingInfo(IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -533,7 +628,8 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void pollPendingSatelliteDatagrams(IIntegerConsumer resultCallback) throws RemoteException {
+            public void pollPendingSatelliteDatagrams(IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -545,7 +641,11 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void sendSatelliteDatagram(SatelliteDatagram datagram, boolean isEmergency, IIntegerConsumer resultCallback) throws RemoteException {
+            public void sendSatelliteDatagram(
+                    SatelliteDatagram datagram,
+                    boolean isEmergency,
+                    IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -559,7 +659,9 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void requestSatelliteModemState(IIntegerConsumer resultCallback, IIntegerConsumer callback) throws RemoteException {
+            public void requestSatelliteModemState(
+                    IIntegerConsumer resultCallback, IIntegerConsumer callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -572,7 +674,9 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void requestTimeForNextSatelliteVisibility(IIntegerConsumer resultCallback, IIntegerConsumer callback) throws RemoteException {
+            public void requestTimeForNextSatelliteVisibility(
+                    IIntegerConsumer resultCallback, IIntegerConsumer callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -585,7 +689,12 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void setSatellitePlmn(int simSlot, List<String> carrierPlmnList, List<String> allSatellitePlmnList, IIntegerConsumer resultCallback) throws RemoteException {
+            public void setSatellitePlmn(
+                    int simSlot,
+                    List<String> carrierPlmnList,
+                    List<String> allSatellitePlmnList,
+                    IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -600,7 +709,9 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void setSatelliteEnabledForCarrier(int simSlot, boolean satelliteEnabled, IIntegerConsumer callback) throws RemoteException {
+            public void setSatelliteEnabledForCarrier(
+                    int simSlot, boolean satelliteEnabled, IIntegerConsumer callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -614,7 +725,9 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void requestIsSatelliteEnabledForCarrier(int simSlot, IIntegerConsumer resultCallback, IBooleanConsumer callback) throws RemoteException {
+            public void requestIsSatelliteEnabledForCarrier(
+                    int simSlot, IIntegerConsumer resultCallback, IBooleanConsumer callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -628,7 +741,9 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void requestSignalStrength(IIntegerConsumer resultCallback, INtnSignalStrengthConsumer callback) throws RemoteException {
+            public void requestSignalStrength(
+                    IIntegerConsumer resultCallback, INtnSignalStrengthConsumer callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -641,7 +756,8 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void startSendingNtnSignalStrength(IIntegerConsumer resultCallback) throws RemoteException {
+            public void startSendingNtnSignalStrength(IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -653,7 +769,8 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void stopSendingNtnSignalStrength(IIntegerConsumer resultCallback) throws RemoteException {
+            public void stopSendingNtnSignalStrength(IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -665,7 +782,8 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void abortSendingSatelliteDatagrams(IIntegerConsumer resultCallback) throws RemoteException {
+            public void abortSendingSatelliteDatagrams(IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -677,7 +795,8 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void updateSatelliteSubscription(String iccId, IIntegerConsumer resultCallback) throws RemoteException {
+            public void updateSatelliteSubscription(String iccId, IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);
@@ -690,7 +809,10 @@ public interface ISatellite extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
-            public void updateSystemSelectionChannels(List<SystemSelectionSpecifier> systemSelectionSpecifiers, IIntegerConsumer resultCallback) throws RemoteException {
+            public void updateSystemSelectionChannels(
+                    List<SystemSelectionSpecifier> systemSelectionSpecifiers,
+                    IIntegerConsumer resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatellite.DESCRIPTOR);

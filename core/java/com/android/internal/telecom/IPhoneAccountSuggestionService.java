@@ -5,18 +5,20 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.telecom.IPhoneAccountSuggestionCallback;
 
 /* loaded from: classes5.dex */
 public interface IPhoneAccountSuggestionService extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telecom.IPhoneAccountSuggestionService";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telecom.IPhoneAccountSuggestionService";
 
-    void onAccountSuggestionRequest(IPhoneAccountSuggestionCallback iPhoneAccountSuggestionCallback, String str) throws RemoteException;
+    void onAccountSuggestionRequest(
+            IPhoneAccountSuggestionCallback iPhoneAccountSuggestionCallback, String str)
+            throws RemoteException;
 
     public static class Default implements IPhoneAccountSuggestionService {
         @Override // com.android.internal.telecom.IPhoneAccountSuggestionService
-        public void onAccountSuggestionRequest(IPhoneAccountSuggestionCallback callback, String number) throws RemoteException {
-        }
+        public void onAccountSuggestionRequest(
+                IPhoneAccountSuggestionCallback callback, String number) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +26,7 @@ public interface IPhoneAccountSuggestionService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPhoneAccountSuggestionService {
+    public abstract static class Stub extends Binder implements IPhoneAccountSuggestionService {
         static final int TRANSACTION_onAccountSuggestionRequest = 1;
 
         public Stub() {
@@ -62,7 +64,8 @@ public interface IPhoneAccountSuggestionService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPhoneAccountSuggestionService.DESCRIPTOR);
             }
@@ -72,7 +75,9 @@ public interface IPhoneAccountSuggestionService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IPhoneAccountSuggestionCallback _arg0 = IPhoneAccountSuggestionCallback.Stub.asInterface(data.readStrongBinder());
+                    IPhoneAccountSuggestionCallback _arg0 =
+                            IPhoneAccountSuggestionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg1 = data.readString();
                     data.enforceNoDataAvail();
                     onAccountSuggestionRequest(_arg0, _arg1);
@@ -99,7 +104,9 @@ public interface IPhoneAccountSuggestionService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IPhoneAccountSuggestionService
-            public void onAccountSuggestionRequest(IPhoneAccountSuggestionCallback callback, String number) throws RemoteException {
+            public void onAccountSuggestionRequest(
+                    IPhoneAccountSuggestionCallback callback, String number)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPhoneAccountSuggestionService.DESCRIPTOR);

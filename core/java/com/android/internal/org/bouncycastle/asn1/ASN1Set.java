@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Iterable;
+
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -26,7 +27,8 @@ public abstract class ASN1Set extends ASN1Primitive implements Iterable<ASN1Enco
             try {
                 return getInstance(ASN1Primitive.fromByteArray((byte[]) obj));
             } catch (IOException e) {
-                throw new IllegalArgumentException("failed to construct set from byte[]: " + e.getMessage());
+                throw new IllegalArgumentException(
+                        "failed to construct set from byte[]: " + e.getMessage());
             }
         }
         if (obj instanceof ASN1Encodable) {
@@ -35,7 +37,8 @@ public abstract class ASN1Set extends ASN1Primitive implements Iterable<ASN1Enco
                 return (ASN1Set) primitive;
             }
         }
-        throw new IllegalArgumentException("unknown object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in getInstance: " + obj.getClass().getName());
     }
 
     public static ASN1Set getInstance(ASN1TaggedObject taggedObject, boolean explicit) {
@@ -66,7 +69,8 @@ public abstract class ASN1Set extends ASN1Primitive implements Iterable<ASN1Enco
             }
             return new DLSet(false, elements);
         }
-        throw new IllegalArgumentException("unknown object in getInstance: " + taggedObject.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in getInstance: " + taggedObject.getClass().getName());
     }
 
     protected ASN1Set() {
@@ -78,7 +82,7 @@ public abstract class ASN1Set extends ASN1Primitive implements Iterable<ASN1Enco
         if (element == null) {
             throw new NullPointerException("'element' cannot be null");
         }
-        this.elements = new ASN1Encodable[]{element};
+        this.elements = new ASN1Encodable[] {element};
         this.isSorted = true;
     }
 
@@ -115,7 +119,8 @@ public abstract class ASN1Set extends ASN1Primitive implements Iterable<ASN1Enco
     }
 
     public Enumeration getObjects() {
-        return new Enumeration() { // from class: com.android.internal.org.bouncycastle.asn1.ASN1Set.1
+        return new Enumeration() { // from class:
+                                   // com.android.internal.org.bouncycastle.asn1.ASN1Set.1
             private int pos = 0;
 
             @Override // java.util.Enumeration
@@ -150,7 +155,8 @@ public abstract class ASN1Set extends ASN1Primitive implements Iterable<ASN1Enco
 
     public ASN1SetParser parser() {
         final int count = size();
-        return new ASN1SetParser() { // from class: com.android.internal.org.bouncycastle.asn1.ASN1Set.2
+        return new ASN1SetParser() { // from class:
+                                     // com.android.internal.org.bouncycastle.asn1.ASN1Set.2
             private int pos = 0;
 
             @Override // com.android.internal.org.bouncycastle.asn1.ASN1SetParser
@@ -183,7 +189,8 @@ public abstract class ASN1Set extends ASN1Primitive implements Iterable<ASN1Enco
         };
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         int i = this.elements.length;
         int hc = i + 1;

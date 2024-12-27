@@ -2,6 +2,7 @@ package android.transition;
 
 import android.util.ArrayMap;
 import android.view.View;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -12,15 +13,16 @@ public class TransitionValues {
     final ArrayList<Transition> targetedTransitions = new ArrayList<>();
 
     @Deprecated
-    public TransitionValues() {
-    }
+    public TransitionValues() {}
 
     public TransitionValues(View view) {
         this.view = view;
     }
 
     public boolean equals(Object other) {
-        if ((other instanceof TransitionValues) && this.view == ((TransitionValues) other).view && this.values.equals(((TransitionValues) other).values)) {
+        if ((other instanceof TransitionValues)
+                && this.view == ((TransitionValues) other).view
+                && this.values.equals(((TransitionValues) other).values)) {
             return true;
         }
         return false;

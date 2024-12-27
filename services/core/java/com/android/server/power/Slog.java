@@ -2,6 +2,7 @@ package com.android.server.power;
 
 import android.os.FileUtils;
 import android.os.Process;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +18,8 @@ public abstract class Slog {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class TimeUtil {
-        public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
+        public static final DateTimeFormatter FORMATTER =
+                DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
     }
 
     public static synchronized void addPMSLogList(String str) {
@@ -92,7 +94,8 @@ public abstract class Slog {
                 i("PMS_SLog", "Normal_log size is zero");
             } else {
                 try {
-                    FileUtils.stringToFile(new File("/data/log/Last.kpsn"), String.join("\n", sLogList));
+                    FileUtils.stringToFile(
+                            new File("/data/log/Last.kpsn"), String.join("\n", sLogList));
                 } catch (IOException unused) {
                 }
             }

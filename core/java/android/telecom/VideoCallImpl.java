@@ -6,12 +6,12 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import android.telecom.InCallService;
-import android.telecom.VideoProfile;
 import android.view.Surface;
+
 import com.android.internal.os.SomeArgs;
 import com.android.internal.telecom.IVideoCallback;
 import com.android.internal.telecom.IVideoProvider;
+
 import java.util.NoSuchElementException;
 
 /* loaded from: classes3.dex */
@@ -24,19 +24,19 @@ public class VideoCallImpl extends InCallService.VideoCall {
     private final IVideoProvider mVideoProvider;
     private int mVideoQuality = 0;
     private int mVideoState = 0;
-    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() { // from class: android.telecom.VideoCallImpl.1
-        @Override // android.os.IBinder.DeathRecipient
-        public void binderDied() {
-            try {
-                VideoCallImpl.this.mVideoProvider.asBinder().unlinkToDeath(this, 0);
-            } catch (NoSuchElementException e) {
-            }
-        }
-    };
+    private IBinder.DeathRecipient mDeathRecipient =
+            new IBinder.DeathRecipient() { // from class: android.telecom.VideoCallImpl.1
+                @Override // android.os.IBinder.DeathRecipient
+                public void binderDied() {
+                    try {
+                        VideoCallImpl.this.mVideoProvider.asBinder().unlinkToDeath(this, 0);
+                    } catch (NoSuchElementException e) {
+                    }
+                }
+            };
 
     private final class VideoCallListenerBinder extends IVideoCallback.Stub {
-        private VideoCallListenerBinder() {
-        }
+        private VideoCallListenerBinder() {}
 
         @Override // com.android.internal.telecom.IVideoCallback
         public void receiveSessionModifyRequest(VideoProfile videoProfile) {
@@ -47,7 +47,8 @@ public class VideoCallImpl extends InCallService.VideoCall {
         }
 
         @Override // com.android.internal.telecom.IVideoCallback
-        public void receiveSessionModifyResponse(int status, VideoProfile requestProfile, VideoProfile responseProfile) {
+        public void receiveSessionModifyResponse(
+                int status, VideoProfile requestProfile, VideoProfile responseProfile) {
             if (VideoCallImpl.this.mHandler == null) {
                 return;
             }
@@ -123,7 +124,8 @@ public class VideoCallImpl extends InCallService.VideoCall {
             }
             switch (msg.what) {
                 case 1:
-                    VideoCallImpl.this.mCallback.onSessionModifyRequestReceived((VideoProfile) msg.obj);
+                    VideoCallImpl.this.mCallback.onSessionModifyRequestReceived(
+                            (VideoProfile) msg.obj);
                     return;
                 case 2:
                     args = (SomeArgs) msg.obj;
@@ -131,7 +133,8 @@ public class VideoCallImpl extends InCallService.VideoCall {
                         int status = ((Integer) args.arg1).intValue();
                         VideoProfile requestProfile = (VideoProfile) args.arg2;
                         VideoProfile responseProfile = (VideoProfile) args.arg3;
-                        VideoCallImpl.this.mCallback.onSessionModifyResponseReceived(status, requestProfile, responseProfile);
+                        VideoCallImpl.this.mCallback.onSessionModifyResponseReceived(
+                                status, requestProfile, responseProfile);
                         return;
                     } finally {
                     }
@@ -148,10 +151,12 @@ public class VideoCallImpl extends InCallService.VideoCall {
                     } finally {
                     }
                 case 5:
-                    VideoCallImpl.this.mCallback.onCallDataUsageChanged(((Long) msg.obj).longValue());
+                    VideoCallImpl.this.mCallback.onCallDataUsageChanged(
+                            ((Long) msg.obj).longValue());
                     return;
                 case 6:
-                    VideoCallImpl.this.mCallback.onCameraCapabilitiesChanged((VideoProfile.CameraCapabilities) msg.obj);
+                    VideoCallImpl.this.mCallback.onCameraCapabilitiesChanged(
+                            (VideoProfile.CameraCapabilities) msg.obj);
                     return;
                 case 7:
                     VideoCallImpl.this.mVideoQuality = msg.arg1;
@@ -163,7 +168,8 @@ public class VideoCallImpl extends InCallService.VideoCall {
         }
     }
 
-    VideoCallImpl(IVideoProvider videoProvider, String callingPackageName, int targetSdkVersion) throws RemoteException {
+    VideoCallImpl(IVideoProvider videoProvider, String callingPackageName, int targetSdkVersion)
+            throws RemoteException {
         this.mVideoProvider = videoProvider;
         this.mVideoProvider.asBinder().linkToDeath(this.mDeathRecipient, 0);
         this.mBinder = new VideoCallListenerBinder();
@@ -216,7 +222,8 @@ public class VideoCallImpl extends InCallService.VideoCall {
     public void setCamera(String cameraId) {
         try {
             Log.w(this, "setCamera: cameraId=%s, calling=%s", cameraId, this.mCallingPackageName);
-            this.mVideoProvider.setCamera(cameraId, this.mCallingPackageName, this.mTargetSdkVersion);
+            this.mVideoProvider.setCamera(
+                    cameraId, this.mCallingPackageName, this.mTargetSdkVersion);
         } catch (RemoteException e) {
         }
     }

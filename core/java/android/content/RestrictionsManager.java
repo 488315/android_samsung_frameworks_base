@@ -10,19 +10,25 @@ import android.os.RemoteException;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.internal.R;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class RestrictionsManager {
-    public static final String ACTION_PERMISSION_RESPONSE_RECEIVED = "android.content.action.PERMISSION_RESPONSE_RECEIVED";
-    public static final String ACTION_REQUEST_LOCAL_APPROVAL = "android.content.action.REQUEST_LOCAL_APPROVAL";
-    public static final String ACTION_REQUEST_PERMISSION = "android.content.action.REQUEST_PERMISSION";
+    public static final String ACTION_PERMISSION_RESPONSE_RECEIVED =
+            "android.content.action.PERMISSION_RESPONSE_RECEIVED";
+    public static final String ACTION_REQUEST_LOCAL_APPROVAL =
+            "android.content.action.REQUEST_LOCAL_APPROVAL";
+    public static final String ACTION_REQUEST_PERMISSION =
+            "android.content.action.REQUEST_PERMISSION";
     public static final String EXTRA_PACKAGE_NAME = "android.content.extra.PACKAGE_NAME";
     public static final String EXTRA_REQUEST_BUNDLE = "android.content.extra.REQUEST_BUNDLE";
     public static final String EXTRA_REQUEST_ID = "android.content.extra.REQUEST_ID";
@@ -74,7 +80,8 @@ public class RestrictionsManager {
     public List<Bundle> getApplicationRestrictionsPerAdmin() {
         try {
             if (this.mService != null) {
-                return this.mService.getApplicationRestrictionsPerAdminForUser(this.mContext.getUserId(), this.mContext.getPackageName());
+                return this.mService.getApplicationRestrictionsPerAdminForUser(
+                        this.mContext.getUserId(), this.mContext.getPackageName());
             }
             return null;
         } catch (RemoteException re) {
@@ -105,7 +112,8 @@ public class RestrictionsManager {
         }
         try {
             if (this.mService != null) {
-                this.mService.requestPermission(this.mContext.getPackageName(), requestType, requestId, request);
+                this.mService.requestPermission(
+                        this.mContext.getPackageName(), requestType, requestId, request);
             }
         } catch (RemoteException re) {
             throw re.rethrowFromSystemServer();
@@ -115,7 +123,8 @@ public class RestrictionsManager {
     public Intent createLocalApprovalIntent() {
         Intent result = null;
         try {
-            if (this.mService != null && (result = this.mService.createLocalApprovalIntent()) != null) {
+            if (this.mService != null
+                    && (result = this.mService.createLocalApprovalIntent()) != null) {
                 result.prepareToEnterProcess(32, this.mContext.getAttributionSource());
             }
             return result;
@@ -148,18 +157,22 @@ public class RestrictionsManager {
 
     public List<RestrictionEntry> getManifestRestrictions(String packageName) {
         try {
-            ApplicationInfo appInfo = this.mContext.getPackageManager().getApplicationInfo(packageName, 128);
+            ApplicationInfo appInfo =
+                    this.mContext.getPackageManager().getApplicationInfo(packageName, 128);
             if (appInfo == null || !appInfo.metaData.containsKey(META_DATA_APP_RESTRICTIONS)) {
                 return null;
             }
-            XmlResourceParser xml = appInfo.loadXmlMetaData(this.mContext.getPackageManager(), META_DATA_APP_RESTRICTIONS);
+            XmlResourceParser xml =
+                    appInfo.loadXmlMetaData(
+                            this.mContext.getPackageManager(), META_DATA_APP_RESTRICTIONS);
             return loadManifestRestrictions(packageName, xml);
         } catch (PackageManager.NameNotFoundException e) {
             throw new IllegalArgumentException("No such package " + packageName);
         }
     }
 
-    private List<RestrictionEntry> loadManifestRestrictions(String packageName, XmlResourceParser xml) {
+    private List<RestrictionEntry> loadManifestRestrictions(
+            String packageName, XmlResourceParser xml) {
         try {
             Context appContext = this.mContext.createPackageContext(packageName, 0);
             ArrayList<RestrictionEntry> restrictions = new ArrayList<>();
@@ -187,7 +200,8 @@ public class RestrictionsManager {
         }
     }
 
-    private RestrictionEntry loadRestrictionElement(Context appContext, XmlResourceParser xml) throws IOException, XmlPullParserException {
+    private RestrictionEntry loadRestrictionElement(Context appContext, XmlResourceParser xml)
+            throws IOException, XmlPullParserException {
         AttributeSet attrSet;
         if (xml.getName().equals(TAG_RESTRICTION) && (attrSet = Xml.asAttributeSet(xml)) != null) {
             TypedArray a = appContext.obtainStyledAttributes(attrSet, R.styleable.RestrictionEntry);
@@ -196,7 +210,9 @@ public class RestrictionsManager {
         return null;
     }
 
-    private RestrictionEntry loadRestriction(Context appContext, TypedArray a, XmlResourceParser xml) throws IOException, XmlPullParserException {
+    private RestrictionEntry loadRestriction(
+            Context appContext, TypedArray a, XmlResourceParser xml)
+            throws IOException, XmlPullParserException {
         Context context = appContext;
         String key = a.getString(3);
         int restrictionType = a.getInt(6, -1);
@@ -237,7 +253,8 @@ public class RestrictionsManager {
             case 4:
                 int resId = a.getResourceId(4, 0);
                 if (resId != 0) {
-                    restriction.setAllSelectedStrings(appContext.getResources().getStringArray(resId));
+                    restriction.setAllSelectedStrings(
+                            appContext.getResources().getStringArray(resId));
                 }
                 return restriction;
             case 5:
@@ -254,12 +271,19 @@ public class RestrictionsManager {
                     } else {
                         restrictionEntries.add(childEntry);
                         if (restrictionType == 8 && childEntry.getType() != 7) {
-                            Log.w(TAG, "bundle_array " + key + " can only contain entries of type bundle");
+                            Log.w(
+                                    TAG,
+                                    "bundle_array "
+                                            + key
+                                            + " can only contain entries of type bundle");
                         }
                     }
                     context = appContext;
                 }
-                restriction.setRestrictions((RestrictionEntry[]) restrictionEntries.toArray(new RestrictionEntry[restrictionEntries.size()]));
+                restriction.setRestrictions(
+                        (RestrictionEntry[])
+                                restrictionEntries.toArray(
+                                        new RestrictionEntry[restrictionEntries.size()]));
                 return restriction;
         }
     }
@@ -298,18 +322,23 @@ public class RestrictionsManager {
                 RestrictionEntry[] bundleRestrictionArray = entry.getRestrictions();
                 Bundle[] bundleArray = new Bundle[bundleRestrictionArray.length];
                 for (int i = 0; i < bundleRestrictionArray.length; i++) {
-                    RestrictionEntry[] bundleRestrictions = bundleRestrictionArray[i].getRestrictions();
+                    RestrictionEntry[] bundleRestrictions =
+                            bundleRestrictionArray[i].getRestrictions();
                     if (bundleRestrictions == null) {
-                        Log.w(TAG, "addRestrictionToBundle: Non-bundle entry found in bundle array");
+                        Log.w(
+                                TAG,
+                                "addRestrictionToBundle: Non-bundle entry found in bundle array");
                         bundleArray[i] = new Bundle();
                     } else {
-                        bundleArray[i] = convertRestrictionsToBundle(Arrays.asList(bundleRestrictions));
+                        bundleArray[i] =
+                                convertRestrictionsToBundle(Arrays.asList(bundleRestrictions));
                     }
                 }
                 bundle.putParcelableArray(entry.getKey(), bundleArray);
                 return bundle;
             default:
-                throw new IllegalArgumentException("Unsupported restrictionEntry type: " + entry.getType());
+                throw new IllegalArgumentException(
+                        "Unsupported restrictionEntry type: " + entry.getType());
         }
     }
 }

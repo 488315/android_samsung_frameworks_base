@@ -3,7 +3,9 @@ package com.android.server.timezonedetector;
 import android.util.ArrayMap;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.util.ArrayDeque;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -19,7 +21,8 @@ public final class ArrayMapWithHistory {
                 StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "key idx: ", "=");
                 m.append(this.mMap.keyAt(i));
                 indentingPrintWriter.println(m.toString());
-                ReferenceWithHistory referenceWithHistory = (ReferenceWithHistory) this.mMap.valueAt(i);
+                ReferenceWithHistory referenceWithHistory =
+                        (ReferenceWithHistory) this.mMap.valueAt(i);
                 indentingPrintWriter.println("val idx: " + i + "=" + referenceWithHistory);
                 indentingPrintWriter.increaseIndent();
                 indentingPrintWriter.println("Historic values=[");
@@ -36,7 +39,8 @@ public final class ArrayMapWithHistory {
     public final Object get(Object obj) {
         ReferenceWithHistory referenceWithHistory;
         ArrayMap arrayMap = this.mMap;
-        if (arrayMap == null || (referenceWithHistory = (ReferenceWithHistory) arrayMap.get(obj)) == null) {
+        if (arrayMap == null
+                || (referenceWithHistory = (ReferenceWithHistory) arrayMap.get(obj)) == null) {
             return null;
         }
         ArrayDeque arrayDeque = referenceWithHistory.mValues;
@@ -49,7 +53,8 @@ public final class ArrayMapWithHistory {
     public int getHistoryCountForKeyForTests(Object obj) {
         ReferenceWithHistory referenceWithHistory;
         ArrayMap arrayMap = this.mMap;
-        if (arrayMap == null || (referenceWithHistory = (ReferenceWithHistory) arrayMap.get(obj)) == null) {
+        if (arrayMap == null
+                || (referenceWithHistory = (ReferenceWithHistory) arrayMap.get(obj)) == null) {
             return 0;
         }
         ArrayDeque arrayDeque = referenceWithHistory.mValues;
@@ -60,7 +65,9 @@ public final class ArrayMapWithHistory {
             }
             return arrayDeque2.size();
         }
-        Log.w("ArrayMapWithHistory", "getValuesSizeForKeyForTests(\"" + obj + "\") was unexpectedly empty");
+        Log.w(
+                "ArrayMapWithHistory",
+                "getValuesSizeForKeyForTests(\"" + obj + "\") was unexpectedly empty");
         return 0;
     }
 

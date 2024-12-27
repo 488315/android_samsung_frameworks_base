@@ -10,33 +10,35 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Printer;
 import android.util.Slog;
+
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class ResolveInfo implements Parcelable {
-    public static final Parcelable.Creator<ResolveInfo> CREATOR = new Parcelable.Creator<ResolveInfo>() { // from class: android.content.pm.ResolveInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResolveInfo createFromParcel(Parcel source) {
-            return new ResolveInfo(source);
-        }
+    public static final Parcelable.Creator<ResolveInfo> CREATOR =
+            new Parcelable.Creator<ResolveInfo>() { // from class: android.content.pm.ResolveInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResolveInfo createFromParcel(Parcel source) {
+                    return new ResolveInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResolveInfo[] newArray(int size) {
-            return new ResolveInfo[size];
-        }
-    };
-    private static final String INTENT_FORWARDER_ACTIVITY = "com.android.internal.app.IntentForwarderActivity";
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResolveInfo[] newArray(int size) {
+                    return new ResolveInfo[size];
+                }
+            };
+    private static final String INTENT_FORWARDER_ACTIVITY =
+            "com.android.internal.app.IntentForwarderActivity";
     private static final String TAG = "ResolveInfo";
     public ActivityInfo activityInfo;
     public AuxiliaryResolveInfo auxiliaryInfo;
     public IntentFilter filter;
 
-    @SystemApi
-    public boolean handleAllWebDataURI;
+    @SystemApi public boolean handleAllWebDataURI;
     public int icon;
     public int iconResourceId;
     public boolean isDefault;
@@ -76,7 +78,9 @@ public class ResolveInfo implements Parcelable {
             return this.nonLocalizedLabel;
         }
         Objects.requireNonNull(pm);
-        if (this.resolvePackageName != null && this.labelRes != 0 && (label2 = pm.getText(this.resolvePackageName, this.labelRes, null)) != null) {
+        if (this.resolvePackageName != null
+                && this.labelRes != 0
+                && (label2 = pm.getText(this.resolvePackageName, this.labelRes, null)) != null) {
             return label2.toString().trim();
         }
         ComponentInfo ci = getComponentInfo();
@@ -153,12 +157,30 @@ public class ResolveInfo implements Parcelable {
             pw.println(prefix + "Filter:");
             this.filter.dump(pw, prefix + "  ");
         }
-        pw.println(prefix + "priority=" + this.priority + " preferredOrder=" + this.preferredOrder + " match=0x" + Integer.toHexString(this.match) + " specificIndex=" + this.specificIndex + " isDefault=" + this.isDefault);
+        pw.println(
+                prefix
+                        + "priority="
+                        + this.priority
+                        + " preferredOrder="
+                        + this.preferredOrder
+                        + " match=0x"
+                        + Integer.toHexString(this.match)
+                        + " specificIndex="
+                        + this.specificIndex
+                        + " isDefault="
+                        + this.isDefault);
         if (this.resolvePackageName != null) {
             pw.println(prefix + "resolvePackageName=" + this.resolvePackageName);
         }
         if (this.labelRes != 0 || this.nonLocalizedLabel != null || this.icon != 0) {
-            pw.println(prefix + "labelRes=0x" + Integer.toHexString(this.labelRes) + " nonLocalizedLabel=" + ((Object) this.nonLocalizedLabel) + " icon=0x" + Integer.toHexString(this.icon));
+            pw.println(
+                    prefix
+                            + "labelRes=0x"
+                            + Integer.toHexString(this.labelRes)
+                            + " nonLocalizedLabel="
+                            + ((Object) this.nonLocalizedLabel)
+                            + " icon=0x"
+                            + Integer.toHexString(this.icon));
         }
         if (this.activityInfo != null) {
             pw.println(prefix + "ActivityInfo:");
@@ -173,7 +195,8 @@ public class ResolveInfo implements Parcelable {
     }
 
     public boolean isCrossProfileIntentForwarderActivity() {
-        return this.activityInfo != null && INTENT_FORWARDER_ACTIVITY.equals(this.activityInfo.targetActivity);
+        return this.activityInfo != null
+                && INTENT_FORWARDER_ACTIVITY.equals(this.activityInfo.targetActivity);
     }
 
     public boolean isAutoResolutionAllowed() {

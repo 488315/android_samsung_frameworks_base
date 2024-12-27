@@ -6,10 +6,11 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.EventLog;
 import android.util.SparseIntArray;
-import com.android.internal.os.BinderCallsStats;
-import com.android.internal.os.BinderInternal;
+
 import com.android.internal.util.Preconditions;
+
 import dalvik.system.VMRuntime;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,7 +22,8 @@ public class BinderInternal {
     static WeakReference<GcWatcher> sGcWatcher = new WeakReference<>(new GcWatcher());
     static ArrayList<Runnable> sGcWatchers = new ArrayList<>();
     static Runnable[] sTmpWatchers = new Runnable[1];
-    static final BinderProxyCountEventListenerDelegate sBinderProxyCountEventListenerDelegate = new BinderProxyCountEventListenerDelegate();
+    static final BinderProxyCountEventListenerDelegate sBinderProxyCountEventListenerDelegate =
+            new BinderProxyCountEventListenerDelegate();
 
     public static class CallSession {
         public Class<? extends Binder> binderClass;
@@ -70,14 +72,15 @@ public class BinderInternal {
     public static final native void setMaxThreads(int i);
 
     static final class GcWatcher {
-        GcWatcher() {
-        }
+        GcWatcher() {}
 
         protected void finalize() throws Throwable {
             BinderInternal.handleGc();
             BinderInternal.sLastGcTime = SystemClock.uptimeMillis();
             synchronized (BinderInternal.sGcWatchers) {
-                BinderInternal.sTmpWatchers = (Runnable[]) BinderInternal.sGcWatchers.toArray(BinderInternal.sTmpWatchers);
+                BinderInternal.sTmpWatchers =
+                        (Runnable[])
+                                BinderInternal.sGcWatchers.toArray(BinderInternal.sTmpWatchers);
             }
             for (int i = 0; i < BinderInternal.sTmpWatchers.length; i++) {
                 if (BinderInternal.sTmpWatchers[i] != null) {
@@ -110,8 +113,7 @@ public class BinderInternal {
     public interface BinderProxyCountEventListener {
         void onLimitReached(int i);
 
-        default void onWarningThresholdReached(int uid) {
-        }
+        default void onWarningThresholdReached(int uid) {}
     }
 
     public static void binderProxyLimitCallbackFromNative(int uid) {
@@ -122,8 +124,12 @@ public class BinderInternal {
         sBinderProxyCountEventListenerDelegate.notifyWarningReached(uid);
     }
 
-    public static void setBinderProxyCountCallback(BinderProxyCountEventListener listener, Handler handler) {
-        Preconditions.checkNotNull(handler, "Must provide NonNull Handler to setBinderProxyCountCallback when setting BinderProxyCountEventListener");
+    public static void setBinderProxyCountCallback(
+            BinderProxyCountEventListener listener, Handler handler) {
+        Preconditions.checkNotNull(
+                handler,
+                "Must provide NonNull Handler to setBinderProxyCountCallback when setting"
+                    + " BinderProxyCountEventListener");
         sBinderProxyCountEventListenerDelegate.setListener(listener, handler);
     }
 
@@ -136,8 +142,7 @@ public class BinderInternal {
         private BinderProxyCountEventListener mBinderProxyCountEventListener;
         private Handler mHandler;
 
-        private BinderProxyCountEventListenerDelegate() {
-        }
+        private BinderProxyCountEventListenerDelegate() {}
 
         void setListener(BinderProxyCountEventListener listener, Handler handler) {
             synchronized (this) {
@@ -149,12 +154,15 @@ public class BinderInternal {
         void notifyLimitReached(final int uid) {
             synchronized (this) {
                 if (this.mBinderProxyCountEventListener != null) {
-                    this.mHandler.post(new Runnable() { // from class: com.android.internal.os.BinderInternal$BinderProxyCountEventListenerDelegate$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            BinderInternal.BinderProxyCountEventListenerDelegate.this.lambda$notifyLimitReached$0(uid);
-                        }
-                    });
+                    this.mHandler.post(
+                            new Runnable() { // from class:
+                                             // com.android.internal.os.BinderInternal$BinderProxyCountEventListenerDelegate$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    BinderInternal.BinderProxyCountEventListenerDelegate.this
+                                            .lambda$notifyLimitReached$0(uid);
+                                }
+                            });
                 }
             }
         }
@@ -167,12 +175,15 @@ public class BinderInternal {
         void notifyWarningReached(final int uid) {
             synchronized (this) {
                 if (this.mBinderProxyCountEventListener != null) {
-                    this.mHandler.post(new Runnable() { // from class: com.android.internal.os.BinderInternal$BinderProxyCountEventListenerDelegate$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            BinderInternal.BinderProxyCountEventListenerDelegate.this.lambda$notifyWarningReached$1(uid);
-                        }
-                    });
+                    this.mHandler.post(
+                            new Runnable() { // from class:
+                                             // com.android.internal.os.BinderInternal$BinderProxyCountEventListenerDelegate$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    BinderInternal.BinderProxyCountEventListenerDelegate.this
+                                            .lambda$notifyWarningReached$1(uid);
+                                }
+                            });
                 }
             }
         }

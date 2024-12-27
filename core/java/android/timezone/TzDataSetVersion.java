@@ -2,6 +2,7 @@ package android.timezone;
 
 import com.android.i18n.timezone.TimeZoneDataFiles;
 import com.android.i18n.timezone.TzDataSetVersion;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -18,7 +19,8 @@ public final class TzDataSetVersion {
     }
 
     public static boolean isCompatibleWithThisDevice(TzDataSetVersion tzDataSetVersion) {
-        return com.android.i18n.timezone.TzDataSetVersion.isCompatibleWithThisDevice(tzDataSetVersion.mDelegate);
+        return com.android.i18n.timezone.TzDataSetVersion.isCompatibleWithThisDevice(
+                tzDataSetVersion.mDelegate);
     }
 
     public static TzDataSetVersion read() throws IOException, TzDataSetException {
@@ -40,7 +42,8 @@ public final class TzDataSetVersion {
     }
 
     private TzDataSetVersion(com.android.i18n.timezone.TzDataSetVersion delegate) {
-        this.mDelegate = (com.android.i18n.timezone.TzDataSetVersion) Objects.requireNonNull(delegate);
+        this.mDelegate =
+                (com.android.i18n.timezone.TzDataSetVersion) Objects.requireNonNull(delegate);
     }
 
     public int getFormatMajorVersion() {

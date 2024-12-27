@@ -6,26 +6,30 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Trace;
+
 import com.android.internal.content.ReferrerIntent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class NewIntentItem extends ActivityTransactionItem {
-    public static final Parcelable.Creator<NewIntentItem> CREATOR = new Parcelable.Creator<NewIntentItem>() { // from class: android.app.servertransaction.NewIntentItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NewIntentItem createFromParcel(Parcel in) {
-            return new NewIntentItem(in);
-        }
+    public static final Parcelable.Creator<NewIntentItem> CREATOR =
+            new Parcelable.Creator<
+                    NewIntentItem>() { // from class: android.app.servertransaction.NewIntentItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NewIntentItem createFromParcel(Parcel in) {
+                    return new NewIntentItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NewIntentItem[] newArray(int size) {
-            return new NewIntentItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NewIntentItem[] newArray(int size) {
+                    return new NewIntentItem[size];
+                }
+            };
     private List<ReferrerIntent> mIntents;
     private boolean mResume;
 
@@ -35,16 +39,19 @@ public class NewIntentItem extends ActivityTransactionItem {
     }
 
     @Override // android.app.servertransaction.ActivityTransactionItem
-    public void execute(ClientTransactionHandler client, ActivityThread.ActivityClientRecord r, PendingTransactionActions pendingActions) {
+    public void execute(
+            ClientTransactionHandler client,
+            ActivityThread.ActivityClientRecord r,
+            PendingTransactionActions pendingActions) {
         Trace.traceBegin(64L, "activityNewIntent");
         client.handleNewIntent(r, this.mIntents);
         Trace.traceEnd(64L);
     }
 
-    private NewIntentItem() {
-    }
+    private NewIntentItem() {}
 
-    public static NewIntentItem obtain(IBinder activityToken, List<ReferrerIntent> intents, boolean resume) {
+    public static NewIntentItem obtain(
+            IBinder activityToken, List<ReferrerIntent> intents, boolean resume) {
         NewIntentItem instance = (NewIntentItem) ObjectPool.obtain(NewIntentItem.class);
         if (instance == null) {
             instance = new NewIntentItem();
@@ -55,7 +62,8 @@ public class NewIntentItem extends ActivityTransactionItem {
         return instance;
     }
 
-    @Override // android.app.servertransaction.ActivityTransactionItem, android.app.servertransaction.ObjectPoolItem
+    @Override // android.app.servertransaction.ActivityTransactionItem,
+    // android.app.servertransaction.ObjectPoolItem
     public void recycle() {
         super.recycle();
         this.mIntents = null;
@@ -90,11 +98,18 @@ public class NewIntentItem extends ActivityTransactionItem {
 
     @Override // android.app.servertransaction.ActivityTransactionItem
     public int hashCode() {
-        return (((((17 * 31) + super.hashCode()) * 31) + (this.mResume ? 1 : 0)) * 31) + this.mIntents.hashCode();
+        return (((((17 * 31) + super.hashCode()) * 31) + (this.mResume ? 1 : 0)) * 31)
+                + this.mIntents.hashCode();
     }
 
     @Override // android.app.servertransaction.ActivityTransactionItem
     public String toString() {
-        return "NewIntentItem{" + super.toString() + ",intents=" + this.mIntents + ",resume=" + this.mResume + "}";
+        return "NewIntentItem{"
+                + super.toString()
+                + ",intents="
+                + this.mIntents
+                + ",resume="
+                + this.mResume
+                + "}";
     }
 }

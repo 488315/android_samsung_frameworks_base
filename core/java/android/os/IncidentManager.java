@@ -4,15 +4,8 @@ import android.annotation.SystemApi;
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.os.IBinder;
-import android.os.IIncidentAuthListener;
-import android.os.IIncidentCompanion;
-import android.os.IIncidentDumpCallback;
-import android.os.IIncidentManager;
-import android.os.IncidentManager;
-import android.os.ParcelFileDescriptor;
-import android.os.Parcelable;
 import android.util.Slog;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,12 +41,10 @@ public class IncidentManager {
     private Object mLock = new Object();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PendingReportFlags {
-    }
+    public @interface PendingReportFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PrivacyPolicy {
-    }
+    public @interface PrivacyPolicy {}
 
     @SystemApi
     public static class PendingReport {
@@ -111,23 +102,28 @@ public class IncidentManager {
                 return false;
             }
             PendingReport that = (PendingReport) obj;
-            return this.mUri.equals(that.mUri) && this.mFlags == that.mFlags && this.mRequestingPackage.equals(that.mRequestingPackage) && this.mTimestamp == that.mTimestamp;
+            return this.mUri.equals(that.mUri)
+                    && this.mFlags == that.mFlags
+                    && this.mRequestingPackage.equals(that.mRequestingPackage)
+                    && this.mTimestamp == that.mTimestamp;
         }
     }
 
     @SystemApi
     public static class IncidentReport implements Parcelable, Closeable {
-        public static final Parcelable.Creator<IncidentReport> CREATOR = new Parcelable.Creator() { // from class: android.os.IncidentManager.IncidentReport.1
-            @Override // android.os.Parcelable.Creator
-            public IncidentReport[] newArray(int size) {
-                return new IncidentReport[size];
-            }
+        public static final Parcelable.Creator<IncidentReport> CREATOR =
+                new Parcelable
+                        .Creator() { // from class: android.os.IncidentManager.IncidentReport.1
+                    @Override // android.os.Parcelable.Creator
+                    public IncidentReport[] newArray(int size) {
+                        return new IncidentReport[size];
+                    }
 
-            @Override // android.os.Parcelable.Creator
-            public IncidentReport createFromParcel(Parcel in) {
-                return new IncidentReport(in);
-            }
-        };
+                    @Override // android.os.Parcelable.Creator
+                    public IncidentReport createFromParcel(Parcel in) {
+                        return new IncidentReport(in);
+                    }
+                };
         private ParcelFileDescriptor mFileDescriptor;
         private final int mPrivacyPolicy;
         private final long mTimestampNs;
@@ -192,18 +188,20 @@ public class IncidentManager {
 
         /* renamed from: android.os.IncidentManager$AuthListener$1, reason: invalid class name */
         class AnonymousClass1 extends IIncidentAuthListener.Stub {
-            AnonymousClass1() {
-            }
+            AnonymousClass1() {}
 
             @Override // android.os.IIncidentAuthListener
             public void onReportApproved() {
                 if (AuthListener.this.mExecutor != null) {
-                    AuthListener.this.mExecutor.execute(new Runnable() { // from class: android.os.IncidentManager$AuthListener$1$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            IncidentManager.AuthListener.AnonymousClass1.this.lambda$onReportApproved$0();
-                        }
-                    });
+                    AuthListener.this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.os.IncidentManager$AuthListener$1$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    IncidentManager.AuthListener.AnonymousClass1.this
+                                            .lambda$onReportApproved$0();
+                                }
+                            });
                 } else {
                     AuthListener.this.onReportApproved();
                 }
@@ -217,12 +215,15 @@ public class IncidentManager {
             @Override // android.os.IIncidentAuthListener
             public void onReportDenied() {
                 if (AuthListener.this.mExecutor != null) {
-                    AuthListener.this.mExecutor.execute(new Runnable() { // from class: android.os.IncidentManager$AuthListener$1$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            IncidentManager.AuthListener.AnonymousClass1.this.lambda$onReportDenied$1();
-                        }
-                    });
+                    AuthListener.this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.os.IncidentManager$AuthListener$1$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    IncidentManager.AuthListener.AnonymousClass1.this
+                                            .lambda$onReportDenied$1();
+                                }
+                            });
                 } else {
                     AuthListener.this.onReportDenied();
                 }
@@ -234,11 +235,9 @@ public class IncidentManager {
             }
         }
 
-        public void onReportApproved() {
-        }
+        public void onReportApproved() {}
 
-        public void onReportDenied() {
-        }
+        public void onReportDenied() {}
     }
 
     public static class DumpCallback {
@@ -248,31 +247,35 @@ public class IncidentManager {
 
         /* renamed from: android.os.IncidentManager$DumpCallback$1, reason: invalid class name */
         class AnonymousClass1 extends IIncidentDumpCallback.Stub {
-            AnonymousClass1() {
-            }
+            AnonymousClass1() {}
 
             @Override // android.os.IIncidentDumpCallback
             public void onDumpSection(final ParcelFileDescriptor pfd) {
                 if (DumpCallback.this.mExecutor != null) {
-                    DumpCallback.this.mExecutor.execute(new Runnable() { // from class: android.os.IncidentManager$DumpCallback$1$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            IncidentManager.DumpCallback.AnonymousClass1.this.lambda$onDumpSection$0(pfd);
-                        }
-                    });
+                    DumpCallback.this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.os.IncidentManager$DumpCallback$1$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    IncidentManager.DumpCallback.AnonymousClass1.this
+                                            .lambda$onDumpSection$0(pfd);
+                                }
+                            });
                 } else {
-                    DumpCallback.this.onDumpSection(DumpCallback.this.mId, new ParcelFileDescriptor.AutoCloseOutputStream(pfd));
+                    DumpCallback.this.onDumpSection(
+                            DumpCallback.this.mId,
+                            new ParcelFileDescriptor.AutoCloseOutputStream(pfd));
                 }
             }
 
             /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onDumpSection$0(ParcelFileDescriptor pfd) {
-                DumpCallback.this.onDumpSection(DumpCallback.this.mId, new ParcelFileDescriptor.AutoCloseOutputStream(pfd));
+                DumpCallback.this.onDumpSection(
+                        DumpCallback.this.mId, new ParcelFileDescriptor.AutoCloseOutputStream(pfd));
             }
         }
 
-        public void onDumpSection(int id, OutputStream out) {
-        }
+        public void onDumpSection(int id, OutputStream out) {}
     }
 
     public IncidentManager(Context context) {
@@ -283,17 +286,27 @@ public class IncidentManager {
         reportIncidentInternal(args);
     }
 
-    public void requestAuthorization(int callingUid, String callingPackage, int flags, AuthListener listener) {
-        requestAuthorization(callingUid, callingPackage, flags, this.mContext.getMainExecutor(), listener);
+    public void requestAuthorization(
+            int callingUid, String callingPackage, int flags, AuthListener listener) {
+        requestAuthorization(
+                callingUid, callingPackage, flags, this.mContext.getMainExecutor(), listener);
     }
 
-    public void requestAuthorization(int callingUid, String callingPackage, int flags, Executor executor, AuthListener listener) {
+    public void requestAuthorization(
+            int callingUid,
+            String callingPackage,
+            int flags,
+            Executor executor,
+            AuthListener listener) {
         try {
             if (listener.mExecutor != null) {
-                throw new RuntimeException("Do not reuse AuthListener objects when calling requestAuthorization");
+                throw new RuntimeException(
+                        "Do not reuse AuthListener objects when calling requestAuthorization");
             }
             listener.mExecutor = executor;
-            getCompanionServiceLocked().authorizeReport(callingUid, callingPackage, null, null, flags, listener.mBinder);
+            getCompanionServiceLocked()
+                    .authorizeReport(
+                            callingUid, callingPackage, null, null, flags, listener.mBinder);
         } catch (RemoteException ex) {
             throw new RuntimeException(ex);
         }
@@ -342,7 +355,8 @@ public class IncidentManager {
         Objects.requireNonNull(callback, "callback cannot be null");
         try {
             if (callback.mExecutor != null) {
-                throw new RuntimeException("Do not reuse DumpCallback objects when calling registerSection");
+                throw new RuntimeException(
+                        "Do not reuse DumpCallback objects when calling registerSection");
             }
             callback.mExecutor = executor;
             callback.mId = id;
@@ -372,7 +386,9 @@ public class IncidentManager {
 
     public List<Uri> getIncidentReportList(String receiverClass) {
         try {
-            List<String> strings = getCompanionServiceLocked().getIncidentReportList(this.mContext.getPackageName(), receiverClass);
+            List<String> strings =
+                    getCompanionServiceLocked()
+                            .getIncidentReportList(this.mContext.getPackageName(), receiverClass);
             int size = strings.size();
             ArrayList<Uri> result = new ArrayList<>(size);
             for (int i = 0; i < size; i++) {
@@ -407,7 +423,8 @@ public class IncidentManager {
     public void deleteIncidentReports(Uri uri) {
         if (uri == null) {
             try {
-                getCompanionServiceLocked().deleteAllIncidentReports(this.mContext.getPackageName());
+                getCompanionServiceLocked()
+                        .deleteAllIncidentReports(this.mContext.getPackageName());
                 return;
             } catch (RemoteException ex) {
                 throw new RuntimeException("System server or incidentd going down", ex);
@@ -453,14 +470,22 @@ public class IncidentManager {
             if (this.mIncidentService != null) {
                 return this.mIncidentService;
             }
-            this.mIncidentService = IIncidentManager.Stub.asInterface(ServiceManager.getService(Context.INCIDENT_SERVICE));
+            this.mIncidentService =
+                    IIncidentManager.Stub.asInterface(
+                            ServiceManager.getService(Context.INCIDENT_SERVICE));
             if (this.mIncidentService != null) {
-                this.mIncidentService.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: android.os.IncidentManager$$ExternalSyntheticLambda1
-                    @Override // android.os.IBinder.DeathRecipient
-                    public final void binderDied() {
-                        IncidentManager.this.lambda$getIIncidentManagerLocked$0();
-                    }
-                }, 0);
+                this.mIncidentService
+                        .asBinder()
+                        .linkToDeath(
+                                new IBinder
+                                        .DeathRecipient() { // from class:
+                                                            // android.os.IncidentManager$$ExternalSyntheticLambda1
+                                    @Override // android.os.IBinder.DeathRecipient
+                                    public final void binderDied() {
+                                        IncidentManager.this.lambda$getIIncidentManagerLocked$0();
+                                    }
+                                },
+                                0);
             }
             return this.mIncidentService;
         }
@@ -481,14 +506,22 @@ public class IncidentManager {
             if (this.mCompanionService != null) {
                 return this.mCompanionService;
             }
-            this.mCompanionService = IIncidentCompanion.Stub.asInterface(ServiceManager.getService(Context.INCIDENT_COMPANION_SERVICE));
+            this.mCompanionService =
+                    IIncidentCompanion.Stub.asInterface(
+                            ServiceManager.getService(Context.INCIDENT_COMPANION_SERVICE));
             if (this.mCompanionService != null) {
-                this.mCompanionService.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: android.os.IncidentManager$$ExternalSyntheticLambda0
-                    @Override // android.os.IBinder.DeathRecipient
-                    public final void binderDied() {
-                        IncidentManager.this.lambda$getCompanionServiceLocked$1();
-                    }
-                }, 0);
+                this.mCompanionService
+                        .asBinder()
+                        .linkToDeath(
+                                new IBinder
+                                        .DeathRecipient() { // from class:
+                                                            // android.os.IncidentManager$$ExternalSyntheticLambda0
+                                    @Override // android.os.IBinder.DeathRecipient
+                                    public final void binderDied() {
+                                        IncidentManager.this.lambda$getCompanionServiceLocked$1();
+                                    }
+                                },
+                                0);
             }
             return this.mCompanionService;
         }

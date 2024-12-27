@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -17,12 +18,11 @@ public interface ICellInfoCallback extends IInterface {
 
     public static class Default implements ICellInfoCallback {
         @Override // android.telephony.ICellInfoCallback
-        public void onCellInfo(List<CellInfo> state) throws RemoteException {
-        }
+        public void onCellInfo(List<CellInfo> state) throws RemoteException {}
 
         @Override // android.telephony.ICellInfoCallback
-        public void onError(int errorCode, String exceptionName, String message) throws RemoteException {
-        }
+        public void onError(int errorCode, String exceptionName, String message)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface ICellInfoCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICellInfoCallback {
+    public abstract static class Stub extends Binder implements ICellInfoCallback {
         static final int TRANSACTION_onCellInfo = 1;
         static final int TRANSACTION_onError = 2;
 
@@ -71,7 +71,8 @@ public interface ICellInfoCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICellInfoCallback.DESCRIPTOR);
             }
@@ -126,7 +127,8 @@ public interface ICellInfoCallback extends IInterface {
             }
 
             @Override // android.telephony.ICellInfoCallback
-            public void onError(int errorCode, String exceptionName, String message) throws RemoteException {
+            public void onError(int errorCode, String exceptionName, String message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICellInfoCallback.DESCRIPTOR);

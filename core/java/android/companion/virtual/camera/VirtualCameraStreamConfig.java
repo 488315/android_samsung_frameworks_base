@@ -3,24 +3,27 @@ package android.companion.virtual.camera;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class VirtualCameraStreamConfig implements Parcelable {
-    public static final Parcelable.Creator<VirtualCameraStreamConfig> CREATOR = new Parcelable.Creator<VirtualCameraStreamConfig>() { // from class: android.companion.virtual.camera.VirtualCameraStreamConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualCameraStreamConfig createFromParcel(Parcel in) {
-            return new VirtualCameraStreamConfig(in);
-        }
+    public static final Parcelable.Creator<VirtualCameraStreamConfig> CREATOR =
+            new Parcelable.Creator<VirtualCameraStreamConfig>() { // from class:
+                // android.companion.virtual.camera.VirtualCameraStreamConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualCameraStreamConfig createFromParcel(Parcel in) {
+                    return new VirtualCameraStreamConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualCameraStreamConfig[] newArray(int size) {
-            return new VirtualCameraStreamConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualCameraStreamConfig[] newArray(int size) {
+                    return new VirtualCameraStreamConfig[size];
+                }
+            };
     static final int MAX_FPS_UPPER_LIMIT = 60;
     private final int mFormat;
     private final int mHeight;
@@ -70,14 +73,21 @@ public final class VirtualCameraStreamConfig implements Parcelable {
             return false;
         }
         VirtualCameraStreamConfig that = (VirtualCameraStreamConfig) o;
-        if (this.mWidth == that.mWidth && this.mHeight == that.mHeight && this.mFormat == that.mFormat && this.mMaxFps == that.mMaxFps) {
+        if (this.mWidth == that.mWidth
+                && this.mHeight == that.mHeight
+                && this.mFormat == that.mFormat
+                && this.mMaxFps == that.mMaxFps) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mWidth), Integer.valueOf(this.mHeight), Integer.valueOf(this.mFormat), Integer.valueOf(this.mMaxFps));
+        return Objects.hash(
+                Integer.valueOf(this.mWidth),
+                Integer.valueOf(this.mHeight),
+                Integer.valueOf(this.mFormat),
+                Integer.valueOf(this.mMaxFps));
     }
 
     public int getFormat() {

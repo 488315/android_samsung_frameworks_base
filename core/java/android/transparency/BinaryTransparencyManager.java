@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.os.IBinaryTransparencyService;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -34,7 +36,8 @@ public class BinaryTransparencyManager {
         }
     }
 
-    public List<IBinaryTransparencyService.AppInfo> collectAllUpdatedPreloadInfo(Bundle packagesToSkip) {
+    public List<IBinaryTransparencyService.AppInfo> collectAllUpdatedPreloadInfo(
+            Bundle packagesToSkip) {
         try {
             Slog.d(TAG, "Calling backend's collectAllUpdatedPreloadInfo()");
             return this.mService.collectAllUpdatedPreloadInfo(packagesToSkip);
@@ -43,7 +46,8 @@ public class BinaryTransparencyManager {
         }
     }
 
-    public List<IBinaryTransparencyService.AppInfo> collectAllSilentInstalledMbaInfo(Bundle packagesToSkip) {
+    public List<IBinaryTransparencyService.AppInfo> collectAllSilentInstalledMbaInfo(
+            Bundle packagesToSkip) {
         try {
             Slog.d(TAG, "Calling backend's collectAllSilentInstalledMbaInfo()");
             return this.mService.collectAllSilentInstalledMbaInfo(packagesToSkip);

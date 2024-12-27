@@ -12,14 +12,18 @@ public final /* synthetic */ class AppOpsService$$ExternalSyntheticLambda5 imple
         Integer num = (Integer) obj2;
         switch (this.$r8$classId) {
             case 0:
-                appOpsService.updateStartedOpModeForUserForDefaultDevice(num.intValue(), ((Integer) obj4).intValue(), ((Boolean) obj3).booleanValue());
+                appOpsService.updateStartedOpModeForUserForDefaultDevice(
+                        num.intValue(),
+                        ((Integer) obj4).intValue(),
+                        ((Boolean) obj3).booleanValue());
                 break;
             default:
                 int intValue = num.intValue();
                 boolean booleanValue = ((Boolean) obj3).booleanValue();
                 int intValue2 = ((Integer) obj4).intValue();
                 boolean z = AppOpsService.DEBUG;
-                appOpsService.updateStartedOpModeForUserForDefaultDevice(intValue, intValue2, booleanValue);
+                appOpsService.updateStartedOpModeForUserForDefaultDevice(
+                        intValue, intValue2, booleanValue);
                 break;
         }
     }

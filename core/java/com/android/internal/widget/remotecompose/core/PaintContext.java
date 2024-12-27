@@ -16,7 +16,8 @@ public abstract class PaintContext {
 
     public abstract void drawBitmap(int i, float f, float f2, float f3, float f4);
 
-    public abstract void drawBitmap(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10);
+    public abstract void drawBitmap(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10);
 
     public abstract void drawCircle(float f, float f2, float f3);
 
@@ -32,7 +33,8 @@ public abstract class PaintContext {
 
     public abstract void drawTextOnPath(int i, int i2, float f, float f2);
 
-    public abstract void drawTextRun(int i, int i2, int i3, int i4, int i5, float f, float f2, boolean z);
+    public abstract void drawTextRun(
+            int i, int i2, int i3, int i4, int i5, float f, float f2, boolean z);
 
     public abstract void drawTweenPath(int i, int i2, float f, float f2, float f3);
 

@@ -27,7 +27,10 @@ public class SamsungGlobalActionsAnimatorFSM {
         SAFE_MODE
     }
 
-    public SamsungGlobalActionsAnimatorFSM(GlobalActionsAnimator animator, LogWrapper logWrapper, ViewStateController stateController) {
+    public SamsungGlobalActionsAnimatorFSM(
+            GlobalActionsAnimator animator,
+            LogWrapper logWrapper,
+            ViewStateController stateController) {
         this.mAnimator = animator;
         this.mViewStateController = stateController;
         this.mLogWrapper = logWrapper;
@@ -40,7 +43,8 @@ public class SamsungGlobalActionsAnimatorFSM {
     }
 
     public void handleAnimationEvent(Event event) {
-        if (this.mViewStateController.getState() != ViewAnimationState.IDLE && (event != Event.CONFIGURATION_CHANGED || this.mState != State.MAIN)) {
+        if (this.mViewStateController.getState() != ViewAnimationState.IDLE
+                && (event != Event.CONFIGURATION_CHANGED || this.mState != State.MAIN)) {
             return;
         }
         switch (this.mState) {

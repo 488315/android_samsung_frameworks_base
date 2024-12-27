@@ -6,16 +6,26 @@ public interface IZtdListener extends IInterface {
 
     void onSysDataTraced(int i, int i2, String[] strArr) throws RemoteException;
 
-    void onUnauthorizedAccessDetected(int i, int i2, int i3, long j, int i4, int i5, String str, String str2) throws RemoteException;
+    void onUnauthorizedAccessDetected(
+            int i, int i2, int i3, long j, int i4, int i5, String str, String str2)
+            throws RemoteException;
 
     public static class Default implements IZtdListener {
         @Override // android.os.IZtdListener
-        public void onSysDataTraced(int traceType, int resultCode, String[] dataList) throws RemoteException {
-        }
+        public void onSysDataTraced(int traceType, int resultCode, String[] dataList)
+                throws RemoteException {}
 
         @Override // android.os.IZtdListener
-        public void onUnauthorizedAccessDetected(int traceClass, int traceSystem, int traceEvent, long accessTime, int accessorUid, int accessorPid, String accessorName, String objectName) throws RemoteException {
-        }
+        public void onUnauthorizedAccessDetected(
+                int traceClass,
+                int traceSystem,
+                int traceEvent,
+                long accessTime,
+                int accessorUid,
+                int accessorPid,
+                String accessorName,
+                String objectName)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +33,7 @@ public interface IZtdListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IZtdListener {
+    public abstract static class Stub extends Binder implements IZtdListener {
         static final int TRANSACTION_onSysDataTraced = 1;
         static final int TRANSACTION_onUnauthorizedAccessDetected = 2;
 
@@ -64,7 +74,8 @@ public interface IZtdListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IZtdListener.DESCRIPTOR);
             }
@@ -91,7 +102,8 @@ public interface IZtdListener extends IInterface {
                     String _arg6 = data.readString();
                     String _arg7 = data.readString();
                     data.enforceNoDataAvail();
-                    onUnauthorizedAccessDetected(_arg02, _arg12, _arg22, _arg3, _arg4, _arg5, _arg6, _arg7);
+                    onUnauthorizedAccessDetected(
+                            _arg02, _arg12, _arg22, _arg3, _arg4, _arg5, _arg6, _arg7);
                     return true;
                 default:
                     return super.onTransact(code, data, reply, flags);
@@ -115,7 +127,8 @@ public interface IZtdListener extends IInterface {
             }
 
             @Override // android.os.IZtdListener
-            public void onSysDataTraced(int traceType, int resultCode, String[] dataList) throws RemoteException {
+            public void onSysDataTraced(int traceType, int resultCode, String[] dataList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -132,7 +145,16 @@ public interface IZtdListener extends IInterface {
             }
 
             @Override // android.os.IZtdListener
-            public void onUnauthorizedAccessDetected(int traceClass, int traceSystem, int traceEvent, long accessTime, int accessorUid, int accessorPid, String accessorName, String objectName) throws RemoteException {
+            public void onUnauthorizedAccessDetected(
+                    int traceClass,
+                    int traceSystem,
+                    int traceEvent,
+                    long accessTime,
+                    int accessorUid,
+                    int accessorPid,
+                    String accessorName,
+                    String objectName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IZtdListener.DESCRIPTOR);

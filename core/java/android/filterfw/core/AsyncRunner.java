@@ -1,6 +1,5 @@
 package android.filterfw.core;
 
-import android.filterfw.core.GraphRunner;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -27,8 +26,7 @@ public class AsyncRunner extends GraphRunner {
     private class AsyncRunnerTask extends AsyncTask<SyncRunner, Void, RunnerResult> {
         private static final String TAG = "AsyncRunnerTask";
 
-        private AsyncRunnerTask() {
-        }
+        private AsyncRunnerTask() {}
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask

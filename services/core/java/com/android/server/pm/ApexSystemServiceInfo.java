@@ -18,6 +18,8 @@ public final class ApexSystemServiceInfo implements Comparable {
         ApexSystemServiceInfo apexSystemServiceInfo = (ApexSystemServiceInfo) obj;
         int i = this.mInitOrder;
         int i2 = apexSystemServiceInfo.mInitOrder;
-        return i == i2 ? this.mName.compareTo(apexSystemServiceInfo.mName) : -Integer.compare(i, i2);
+        return i == i2
+                ? this.mName.compareTo(apexSystemServiceInfo.mName)
+                : -Integer.compare(i, i2);
     }
 }

@@ -4,6 +4,7 @@ import android.app.blob.XmlTags;
 import android.content.Context;
 import android.hardware.gnss.GnssSignalType;
 import android.provider.Telephony;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1GeneralizedTime;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
@@ -15,6 +16,7 @@ import com.android.internal.org.bouncycastle.asn1.x500.RDN;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.asn1.x500.X500NameStyle;
 import com.android.internal.org.bouncycastle.asn1.x509.X509ObjectIdentifiers;
+
 import java.util.Hashtable;
 
 /* loaded from: classes5.dex */
@@ -27,37 +29,62 @@ public class BCStyle extends AbstractX500NameStyle {
     public static final ASN1ObjectIdentifier CN = new ASN1ObjectIdentifier("2.5.4.3").intern();
     public static final ASN1ObjectIdentifier SN = new ASN1ObjectIdentifier("2.5.4.5").intern();
     public static final ASN1ObjectIdentifier STREET = new ASN1ObjectIdentifier("2.5.4.9").intern();
-    public static final ASN1ObjectIdentifier SERIALNUMBER = new ASN1ObjectIdentifier("2.5.4.5").intern();
+    public static final ASN1ObjectIdentifier SERIALNUMBER =
+            new ASN1ObjectIdentifier("2.5.4.5").intern();
     public static final ASN1ObjectIdentifier L = new ASN1ObjectIdentifier("2.5.4.7").intern();
     public static final ASN1ObjectIdentifier ST = new ASN1ObjectIdentifier("2.5.4.8").intern();
     public static final ASN1ObjectIdentifier SURNAME = new ASN1ObjectIdentifier("2.5.4.4").intern();
-    public static final ASN1ObjectIdentifier GIVENNAME = new ASN1ObjectIdentifier("2.5.4.42").intern();
-    public static final ASN1ObjectIdentifier INITIALS = new ASN1ObjectIdentifier("2.5.4.43").intern();
-    public static final ASN1ObjectIdentifier GENERATION = new ASN1ObjectIdentifier("2.5.4.44").intern();
-    public static final ASN1ObjectIdentifier UNIQUE_IDENTIFIER = new ASN1ObjectIdentifier("2.5.4.45").intern();
-    public static final ASN1ObjectIdentifier DESCRIPTION = new ASN1ObjectIdentifier("2.5.4.13").intern();
-    public static final ASN1ObjectIdentifier BUSINESS_CATEGORY = new ASN1ObjectIdentifier("2.5.4.15").intern();
-    public static final ASN1ObjectIdentifier POSTAL_CODE = new ASN1ObjectIdentifier("2.5.4.17").intern();
-    public static final ASN1ObjectIdentifier DN_QUALIFIER = new ASN1ObjectIdentifier("2.5.4.46").intern();
-    public static final ASN1ObjectIdentifier PSEUDONYM = new ASN1ObjectIdentifier("2.5.4.65").intern();
+    public static final ASN1ObjectIdentifier GIVENNAME =
+            new ASN1ObjectIdentifier("2.5.4.42").intern();
+    public static final ASN1ObjectIdentifier INITIALS =
+            new ASN1ObjectIdentifier("2.5.4.43").intern();
+    public static final ASN1ObjectIdentifier GENERATION =
+            new ASN1ObjectIdentifier("2.5.4.44").intern();
+    public static final ASN1ObjectIdentifier UNIQUE_IDENTIFIER =
+            new ASN1ObjectIdentifier("2.5.4.45").intern();
+    public static final ASN1ObjectIdentifier DESCRIPTION =
+            new ASN1ObjectIdentifier("2.5.4.13").intern();
+    public static final ASN1ObjectIdentifier BUSINESS_CATEGORY =
+            new ASN1ObjectIdentifier("2.5.4.15").intern();
+    public static final ASN1ObjectIdentifier POSTAL_CODE =
+            new ASN1ObjectIdentifier("2.5.4.17").intern();
+    public static final ASN1ObjectIdentifier DN_QUALIFIER =
+            new ASN1ObjectIdentifier("2.5.4.46").intern();
+    public static final ASN1ObjectIdentifier PSEUDONYM =
+            new ASN1ObjectIdentifier("2.5.4.65").intern();
     public static final ASN1ObjectIdentifier ROLE = new ASN1ObjectIdentifier("2.5.4.72").intern();
-    public static final ASN1ObjectIdentifier DATE_OF_BIRTH = new ASN1ObjectIdentifier("1.3.6.1.5.5.7.9.1").intern();
-    public static final ASN1ObjectIdentifier PLACE_OF_BIRTH = new ASN1ObjectIdentifier("1.3.6.1.5.5.7.9.2").intern();
-    public static final ASN1ObjectIdentifier GENDER = new ASN1ObjectIdentifier("1.3.6.1.5.5.7.9.3").intern();
-    public static final ASN1ObjectIdentifier COUNTRY_OF_CITIZENSHIP = new ASN1ObjectIdentifier("1.3.6.1.5.5.7.9.4").intern();
-    public static final ASN1ObjectIdentifier COUNTRY_OF_RESIDENCE = new ASN1ObjectIdentifier("1.3.6.1.5.5.7.9.5").intern();
-    public static final ASN1ObjectIdentifier NAME_AT_BIRTH = new ASN1ObjectIdentifier("1.3.36.8.3.14").intern();
-    public static final ASN1ObjectIdentifier POSTAL_ADDRESS = new ASN1ObjectIdentifier("2.5.4.16").intern();
-    public static final ASN1ObjectIdentifier DMD_NAME = new ASN1ObjectIdentifier("2.5.4.54").intern();
-    public static final ASN1ObjectIdentifier TELEPHONE_NUMBER = X509ObjectIdentifiers.id_at_telephoneNumber;
+    public static final ASN1ObjectIdentifier DATE_OF_BIRTH =
+            new ASN1ObjectIdentifier("1.3.6.1.5.5.7.9.1").intern();
+    public static final ASN1ObjectIdentifier PLACE_OF_BIRTH =
+            new ASN1ObjectIdentifier("1.3.6.1.5.5.7.9.2").intern();
+    public static final ASN1ObjectIdentifier GENDER =
+            new ASN1ObjectIdentifier("1.3.6.1.5.5.7.9.3").intern();
+    public static final ASN1ObjectIdentifier COUNTRY_OF_CITIZENSHIP =
+            new ASN1ObjectIdentifier("1.3.6.1.5.5.7.9.4").intern();
+    public static final ASN1ObjectIdentifier COUNTRY_OF_RESIDENCE =
+            new ASN1ObjectIdentifier("1.3.6.1.5.5.7.9.5").intern();
+    public static final ASN1ObjectIdentifier NAME_AT_BIRTH =
+            new ASN1ObjectIdentifier("1.3.36.8.3.14").intern();
+    public static final ASN1ObjectIdentifier POSTAL_ADDRESS =
+            new ASN1ObjectIdentifier("2.5.4.16").intern();
+    public static final ASN1ObjectIdentifier DMD_NAME =
+            new ASN1ObjectIdentifier("2.5.4.54").intern();
+    public static final ASN1ObjectIdentifier TELEPHONE_NUMBER =
+            X509ObjectIdentifiers.id_at_telephoneNumber;
     public static final ASN1ObjectIdentifier NAME = X509ObjectIdentifiers.id_at_name;
-    public static final ASN1ObjectIdentifier ORGANIZATION_IDENTIFIER = X509ObjectIdentifiers.id_at_organizationIdentifier;
-    public static final ASN1ObjectIdentifier EmailAddress = PKCSObjectIdentifiers.pkcs_9_at_emailAddress;
-    public static final ASN1ObjectIdentifier UnstructuredName = PKCSObjectIdentifiers.pkcs_9_at_unstructuredName;
-    public static final ASN1ObjectIdentifier UnstructuredAddress = PKCSObjectIdentifiers.pkcs_9_at_unstructuredAddress;
+    public static final ASN1ObjectIdentifier ORGANIZATION_IDENTIFIER =
+            X509ObjectIdentifiers.id_at_organizationIdentifier;
+    public static final ASN1ObjectIdentifier EmailAddress =
+            PKCSObjectIdentifiers.pkcs_9_at_emailAddress;
+    public static final ASN1ObjectIdentifier UnstructuredName =
+            PKCSObjectIdentifiers.pkcs_9_at_unstructuredName;
+    public static final ASN1ObjectIdentifier UnstructuredAddress =
+            PKCSObjectIdentifiers.pkcs_9_at_unstructuredAddress;
     public static final ASN1ObjectIdentifier E = EmailAddress;
-    public static final ASN1ObjectIdentifier DC = new ASN1ObjectIdentifier("0.9.2342.19200300.100.1.25");
-    public static final ASN1ObjectIdentifier UID = new ASN1ObjectIdentifier("0.9.2342.19200300.100.1.1");
+    public static final ASN1ObjectIdentifier DC =
+            new ASN1ObjectIdentifier("0.9.2342.19200300.100.1.25");
+    public static final ASN1ObjectIdentifier UID =
+            new ASN1ObjectIdentifier("0.9.2342.19200300.100.1.1");
     private static final Hashtable DefaultSymbols = new Hashtable();
     private static final Hashtable DefaultLookUp = new Hashtable();
     protected final Hashtable defaultSymbols = copyHashTable(DefaultSymbols);
@@ -139,8 +166,7 @@ public class BCStyle extends AbstractX500NameStyle {
         INSTANCE = new BCStyle();
     }
 
-    protected BCStyle() {
-    }
+    protected BCStyle() {}
 
     @Override // com.android.internal.org.bouncycastle.asn1.x500.style.AbstractX500NameStyle
     protected ASN1Encodable encodeStringValue(ASN1ObjectIdentifier oid, String value) {
@@ -150,7 +176,10 @@ public class BCStyle extends AbstractX500NameStyle {
         if (oid.equals((ASN1Primitive) DATE_OF_BIRTH)) {
             return new ASN1GeneralizedTime(value);
         }
-        if (oid.equals((ASN1Primitive) C) || oid.equals((ASN1Primitive) SN) || oid.equals((ASN1Primitive) DN_QUALIFIER) || oid.equals((ASN1Primitive) TELEPHONE_NUMBER)) {
+        if (oid.equals((ASN1Primitive) C)
+                || oid.equals((ASN1Primitive) SN)
+                || oid.equals((ASN1Primitive) DN_QUALIFIER)
+                || oid.equals((ASN1Primitive) TELEPHONE_NUMBER)) {
             return new DERPrintableString(value);
         }
         return super.encodeStringValue(oid, value);

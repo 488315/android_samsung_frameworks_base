@@ -22,6 +22,7 @@ import android.util.ArrayMap;
 import android.util.EventLog;
 import android.util.IntArray;
 import android.util.Slog;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.internal.util.function.pooled.PooledLambda;
@@ -30,11 +31,11 @@ import com.android.server.ProfileService$1$$ExternalSyntheticOutline0;
 import com.android.server.am.ProcessRecord;
 import com.android.server.location.gnss.hal.GnssNative;
 import com.android.server.notification.NotificationManagerService;
-import com.android.server.wm.ActivityRecord;
-import com.android.server.wm.VisibleActivityProcessTracker;
 import com.android.server.wm.VisibleActivityProcessTracker.CpuTimeRecord;
 import com.android.window.flags.Flags;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -44,7 +45,8 @@ import java.util.function.IntPredicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class WindowProcessController extends ConfigurationContainer implements ConfigurationContainerListener {
+public final class WindowProcessController extends ConfigurationContainer
+        implements ConfigurationContainerListener {
     public boolean mAdjustBindAppToDexConfig;
     public int mAnimatingReasons;
     public final ActivityTaskManagerService mAtm;
@@ -108,7 +110,14 @@ public final class WindowProcessController extends ConfigurationContainer implem
     public String mReason = null;
 
     /* JADX WARN: Type inference failed for: r10v1, types: [com.android.server.wm.WindowProcessController$$ExternalSyntheticLambda4] */
-    public WindowProcessController(final ActivityTaskManagerService activityTaskManagerService, ApplicationInfo applicationInfo, String str, int i, int i2, Object obj, ProcessRecord processRecord) {
+    public WindowProcessController(
+            final ActivityTaskManagerService activityTaskManagerService,
+            ApplicationInfo applicationInfo,
+            String str,
+            int i,
+            int i2,
+            Object obj,
+            ProcessRecord processRecord) {
         boolean z = true;
         this.mIsActivityConfigOverrideAllowed = true;
         this.mInfo = applicationInfo;
@@ -119,31 +128,41 @@ public final class WindowProcessController extends ConfigurationContainer implem
         this.mListener = processRecord;
         this.mAtm = activityTaskManagerService;
         Objects.requireNonNull(activityTaskManagerService);
-        this.mBgLaunchController = new BackgroundLaunchProcessController(new IntPredicate() { // from class: com.android.server.wm.WindowProcessController$$ExternalSyntheticLambda4
-            @Override // java.util.function.IntPredicate
-            public final boolean test(int i3) {
-                return ActivityTaskManagerService.this.hasActiveVisibleWindow(i3);
-            }
-        }, activityTaskManagerService.mBackgroundActivityStartCallback);
-        boolean equals = applicationInfo.packageName.equals(activityTaskManagerService.getSysUiServiceComponentLocked().getPackageName());
+        this.mBgLaunchController =
+                new BackgroundLaunchProcessController(
+                        new IntPredicate() { // from class:
+                                             // com.android.server.wm.WindowProcessController$$ExternalSyntheticLambda4
+                            @Override // java.util.function.IntPredicate
+                            public final boolean test(int i3) {
+                                return ActivityTaskManagerService.this.hasActiveVisibleWindow(i3);
+                            }
+                        },
+                        activityTaskManagerService.mBackgroundActivityStartCallback);
+        boolean equals =
+                applicationInfo.packageName.equals(
+                        activityTaskManagerService
+                                .getSysUiServiceComponentLocked()
+                                .getPackageName());
         if (equals || UserHandle.getAppId(i) == 1000) {
             this.mIsActivityConfigOverrideAllowed = false;
             if (applicationInfo.packageName.equals("com.sec.android.app.desktoplauncher")) {
                 this.mIsActivityConfigOverrideAllowed = true;
             }
         }
-        if (!Flags.fifoPriorityForMajorUiProcesses() || (!equals && !activityTaskManagerService.mRecentTasks.isCallerRecents(i))) {
+        if (!Flags.fifoPriorityForMajorUiProcesses()
+                || (!equals && !activityTaskManagerService.mRecentTasks.isCallerRecents(i))) {
             z = false;
         }
         this.mUseFifoUiScheduling = z;
         onConfigurationChanged(activityTaskManagerService.getGlobalConfiguration());
-        activityTaskManagerService.mPackageConfigPersister.updateConfigIfNeeded(this, i2, applicationInfo.packageName);
+        activityTaskManagerService.mPackageConfigPersister.updateConfigIfNeeded(
+                this, i2, applicationInfo.packageName);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:8:0x0023, code lost:
-    
-        if (com.android.server.grammaticalinflection.GrammaticalInflectionUtils.checkSystemGrammaticalGenderPermission(r2.mPermissionManager, r7) != false) goto L11;
-     */
+
+       if (com.android.server.grammaticalinflection.GrammaticalInflectionUtils.checkSystemGrammaticalGenderPermission(r2.mPermissionManager, r7) != false) goto L11;
+    */
     /* JADX WARN: Removed duplicated region for block: B:11:0x002b  */
     /* JADX WARN: Removed duplicated region for block: B:18:0x0040 A[RETURN] */
     /* JADX WARN: Removed duplicated region for block: B:20:0x0041  */
@@ -151,7 +170,13 @@ public final class WindowProcessController extends ConfigurationContainer implem
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean applyConfigGenderOverride(android.content.res.Configuration r4, int r5, com.android.server.grammaticalinflection.GrammaticalInflectionService.GrammaticalInflectionManagerInternalImpl r6, int r7) {
+    public static boolean applyConfigGenderOverride(
+            android.content.res.Configuration r4,
+            int r5,
+            com.android.server.grammaticalinflection.GrammaticalInflectionService
+                            .GrammaticalInflectionManagerInternalImpl
+                    r6,
+            int r7) {
         /*
             r0 = 0
             r1 = 1
@@ -197,13 +222,20 @@ public final class WindowProcessController extends ConfigurationContainer implem
             r4.setGrammaticalGender(r5)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowProcessController.applyConfigGenderOverride(android.content.res.Configuration, int, com.android.server.grammaticalinflection.GrammaticalInflectionService$GrammaticalInflectionManagerInternalImpl, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.WindowProcessController.applyConfigGenderOverride(android.content.res.Configuration,"
+                    + " int,"
+                    + " com.android.server.grammaticalinflection.GrammaticalInflectionService$GrammaticalInflectionManagerInternalImpl,"
+                    + " int):boolean");
     }
 
     public final void addBoundClientUid(int i, String str, long j) {
-        BackgroundLaunchProcessController backgroundLaunchProcessController = this.mBgLaunchController;
+        BackgroundLaunchProcessController backgroundLaunchProcessController =
+                this.mBgLaunchController;
         backgroundLaunchProcessController.getClass();
-        if (CompatChanges.isChangeEnabled(261072174L, str, UserHandle.getUserHandleForUid(i)) && (j & 512) == 0) {
+        if (CompatChanges.isChangeEnabled(261072174L, str, UserHandle.getUserHandleForUid(i))
+                && (j & 512) == 0) {
             return;
         }
         if (backgroundLaunchProcessController.mBalOptInBoundClientUids == null) {
@@ -219,14 +251,16 @@ public final class WindowProcessController extends ConfigurationContainer implem
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:15:0x0024, code lost:
-    
-        if (r5.mPid != com.android.server.wm.WindowManagerService.MY_PID) goto L18;
-     */
+
+       if (r5.mPid != com.android.server.wm.WindowManagerService.MY_PID) goto L18;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void appEarlyNotResponding(java.lang.String r6, com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda0 r7) {
+    public final void appEarlyNotResponding(
+            java.lang.String r6,
+            com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda0 r7) {
         /*
             r5 = this;
             com.android.server.wm.ActivityTaskManagerService r0 = r5.mAtm
@@ -274,18 +308,24 @@ public final class WindowProcessController extends ConfigurationContainer implem
             com.android.server.wm.WindowManagerService.resetPriorityAfterLockedSection()
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowProcessController.appEarlyNotResponding(java.lang.String, com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda0):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.WindowProcessController.appEarlyNotResponding(java.lang.String,"
+                    + " com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda0):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:16:0x0027, code lost:
-    
-        if (r6.mPid != com.android.server.wm.WindowManagerService.MY_PID) goto L20;
-     */
+
+       if (r6.mPid != com.android.server.wm.WindowManagerService.MY_PID) goto L20;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean appNotResponding(java.lang.String r7, com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda4 r8, com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda4 r9) {
+    public final boolean appNotResponding(
+            java.lang.String r7,
+            com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda4 r8,
+            com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda4 r9) {
         /*
             r6 = this;
             com.android.server.wm.ActivityTaskManagerService r0 = r6.mAtm
@@ -340,38 +380,53 @@ public final class WindowProcessController extends ConfigurationContainer implem
             com.android.server.wm.WindowManagerService.resetPriorityAfterLockedSection()
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowProcessController.appNotResponding(java.lang.String, com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda4, com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda4):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.WindowProcessController.appNotResponding(java.lang.String,"
+                    + " com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda4,"
+                    + " com.android.server.am.ProcessErrorStateRecord$$ExternalSyntheticLambda4):boolean");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:22:0x004d, code lost:
-    
-        r15 = true;
-     */
+
+       r15 = true;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.wm.BackgroundActivityStartController.BalVerdict areBackgroundActivityStartsAllowed(int r14, boolean r15) {
+    public final com.android.server.wm.BackgroundActivityStartController.BalVerdict
+            areBackgroundActivityStartsAllowed(int r14, boolean r15) {
         /*
             Method dump skipped, instructions count: 237
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowProcessController.areBackgroundActivityStartsAllowed(int, boolean):com.android.server.wm.BackgroundActivityStartController$BalVerdict");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.WindowProcessController.areBackgroundActivityStartsAllowed(int,"
+                    + " boolean):com.android.server.wm.BackgroundActivityStartController$BalVerdict");
     }
 
     public final boolean canCloseSystemDialogsByToken() {
-        BackgroundLaunchProcessController backgroundLaunchProcessController = this.mBgLaunchController;
+        BackgroundLaunchProcessController backgroundLaunchProcessController =
+                this.mBgLaunchController;
         int i = this.mUid;
         boolean z = false;
         if (backgroundLaunchProcessController.mBackgroundActivityStartCallback != null) {
             synchronized (backgroundLaunchProcessController) {
                 try {
-                    ArrayMap arrayMap = backgroundLaunchProcessController.mBackgroundStartPrivileges;
+                    ArrayMap arrayMap =
+                            backgroundLaunchProcessController.mBackgroundStartPrivileges;
                     if (arrayMap != null && !arrayMap.isEmpty()) {
-                        NotificationManagerService.AnonymousClass2 anonymousClass2 = backgroundLaunchProcessController.mBackgroundActivityStartCallback;
-                        List originatingTokensThatAllowBal = backgroundLaunchProcessController.getOriginatingTokensThatAllowBal();
+                        NotificationManagerService.AnonymousClass2 anonymousClass2 =
+                                backgroundLaunchProcessController.mBackgroundActivityStartCallback;
+                        List originatingTokensThatAllowBal =
+                                backgroundLaunchProcessController
+                                        .getOriginatingTokensThatAllowBal();
                         anonymousClass2.getClass();
-                        if (((ArrayList) originatingTokensThatAllowBal).contains(NotificationManagerService.ALLOWLIST_TOKEN) && !CompatChanges.isChangeEnabled(167676448L, i)) {
+                        if (((ArrayList) originatingTokensThatAllowBal)
+                                        .contains(NotificationManagerService.ALLOWLIST_TOKEN)
+                                && !CompatChanges.isChangeEnabled(167676448L, i)) {
                             z = true;
                         }
                     }
@@ -425,7 +480,9 @@ public final class WindowProcessController extends ConfigurationContainer implem
         ArrayMap arrayMap = this.mRemoteActivities;
         if (arrayMap != null) {
             for (int size2 = arrayMap.size() - 1; size2 >= 0; size2--) {
-                if ((((int[]) this.mRemoteActivities.valueAt(size2))[0] & 2) != 0 && ((ActivityRecord) this.mRemoteActivities.keyAt(size2)).isVisibleRequested()) {
+                if ((((int[]) this.mRemoteActivities.valueAt(size2))[0] & 2) != 0
+                        && ((ActivityRecord) this.mRemoteActivities.keyAt(size2))
+                                .isVisibleRequested()) {
                     i4 |= EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT;
                 }
             }
@@ -449,9 +506,11 @@ public final class WindowProcessController extends ConfigurationContainer implem
         this.mActivityStateFlags = i5;
         boolean z4 = (i5 & 1114112) != 0;
         if (!z && z4) {
-            VisibleActivityProcessTracker visibleActivityProcessTracker = this.mAtm.mVisibleActivityProcessTracker;
+            VisibleActivityProcessTracker visibleActivityProcessTracker =
+                    this.mAtm.mVisibleActivityProcessTracker;
             visibleActivityProcessTracker.getClass();
-            VisibleActivityProcessTracker.CpuTimeRecord cpuTimeRecord3 = visibleActivityProcessTracker.new CpuTimeRecord(this);
+            VisibleActivityProcessTracker.CpuTimeRecord cpuTimeRecord3 =
+                    visibleActivityProcessTracker.new CpuTimeRecord(this);
             synchronized (visibleActivityProcessTracker.mProcMap) {
                 visibleActivityProcessTracker.mProcMap.put(this, cpuTimeRecord3);
             }
@@ -463,9 +522,12 @@ public final class WindowProcessController extends ConfigurationContainer implem
             return;
         }
         if (z && !z4) {
-            VisibleActivityProcessTracker visibleActivityProcessTracker2 = this.mAtm.mVisibleActivityProcessTracker;
+            VisibleActivityProcessTracker visibleActivityProcessTracker2 =
+                    this.mAtm.mVisibleActivityProcessTracker;
             synchronized (visibleActivityProcessTracker2.mProcMap) {
-                cpuTimeRecord2 = (VisibleActivityProcessTracker.CpuTimeRecord) visibleActivityProcessTracker2.mProcMap.remove(this);
+                cpuTimeRecord2 =
+                        (VisibleActivityProcessTracker.CpuTimeRecord)
+                                visibleActivityProcessTracker2.mProcMap.remove(this);
             }
             if (cpuTimeRecord2 != null && cpuTimeRecord2.mShouldGetCpuTime) {
                 visibleActivityProcessTracker2.mBgExecutor.execute(cpuTimeRecord2);
@@ -474,9 +536,12 @@ public final class WindowProcessController extends ConfigurationContainer implem
             return;
         }
         if (z && !hasResumedActivity && hasResumedActivity()) {
-            VisibleActivityProcessTracker visibleActivityProcessTracker3 = this.mAtm.mVisibleActivityProcessTracker;
+            VisibleActivityProcessTracker visibleActivityProcessTracker3 =
+                    this.mAtm.mVisibleActivityProcessTracker;
             synchronized (visibleActivityProcessTracker3.mProcMap) {
-                cpuTimeRecord = (VisibleActivityProcessTracker.CpuTimeRecord) visibleActivityProcessTracker3.mProcMap.get(this);
+                cpuTimeRecord =
+                        (VisibleActivityProcessTracker.CpuTimeRecord)
+                                visibleActivityProcessTracker3.mProcMap.get(this);
             }
             if (cpuTimeRecord == null || cpuTimeRecord.mShouldGetCpuTime) {
                 return;
@@ -519,7 +584,10 @@ public final class WindowProcessController extends ConfigurationContainer implem
         String str;
         ActivityTaskManagerService activityTaskManagerService = this.mAtm;
         ProfilerInfo profilerInfo = activityTaskManagerService.mProfilerInfo;
-        if (profilerInfo == null || profilerInfo.profileFile == null || (str = activityTaskManagerService.mProfileApp) == null || !str.equals(this.mName)) {
+        if (profilerInfo == null
+                || profilerInfo.profileFile == null
+                || (str = activityTaskManagerService.mProfileApp) == null
+                || !str.equals(this.mName)) {
             return null;
         }
         WindowProcessController windowProcessController = activityTaskManagerService.mProfileProc;
@@ -542,7 +610,11 @@ public final class WindowProcessController extends ConfigurationContainer implem
         IApplicationThread iApplicationThread = this.mThread;
         if (iApplicationThread == null) {
             if (Build.IS_DEBUGGABLE && this.mHasImeService) {
-                ProfileService$1$$ExternalSyntheticOutline0.m(new StringBuilder("Unable to send config for IME proc "), this.mName, ": no app thread", "ActivityTaskManager");
+                ProfileService$1$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Unable to send config for IME proc "),
+                        this.mName,
+                        ": no app thread",
+                        "ActivityTaskManager");
                 return;
             }
             return;
@@ -561,7 +633,9 @@ public final class WindowProcessController extends ConfigurationContainer implem
             }
         }
         onConfigurationChangePreScheduled(configuration);
-        scheduleClientTransactionItem(iApplicationThread, ConfigurationChangeItem.obtain(configuration, this.mLastTopActivityDeviceId));
+        scheduleClientTransactionItem(
+                iApplicationThread,
+                ConfigurationChangeItem.obtain(configuration, this.mLastTopActivityDeviceId));
     }
 
     public final void dump(PrintWriter printWriter, String str) {
@@ -618,7 +692,10 @@ public final class WindowProcessController extends ConfigurationContainer implem
         printWriter.println("     Configuration=" + getConfiguration());
         printWriter.println("     OverrideConfiguration=" + getRequestedOverrideConfiguration());
         StringBuilder sb = new StringBuilder("     mLastReportedConfiguration=");
-        sb.append(this.mHasCachedConfiguration ? "(cached) " + this.mLastReportedConfiguration : this.mLastReportedConfiguration);
+        sb.append(
+                this.mHasCachedConfiguration
+                        ? "(cached) " + this.mLastReportedConfiguration
+                        : this.mLastReportedConfiguration);
         printWriter.println(sb.toString());
         int i4 = this.mAnimatingReasons;
         if (i4 != 0) {
@@ -689,15 +766,23 @@ public final class WindowProcessController extends ConfigurationContainer implem
                 RootWindowContainer rootWindowContainer = this.mAtm.mWindowManager.mRoot;
                 int i = this.mPid;
                 for (int size = rootWindowContainer.mChildren.size() - 1; size >= 0; size--) {
-                    DisplayContent displayContent = (DisplayContent) rootWindowContainer.mChildren.get(size);
-                    if (displayContent.getWindow(new RootWindowContainer$$ExternalSyntheticLambda13(i, 0)) != null) {
+                    DisplayContent displayContent =
+                            (DisplayContent) rootWindowContainer.mChildren.get(size);
+                    if (displayContent.getWindow(
+                                    new RootWindowContainer$$ExternalSyntheticLambda13(i, 0))
+                            != null) {
                         ((ArrayList) list).add(displayContent.mDisplayPolicy.mUiContext);
                     }
                 }
                 for (int size2 = this.mActivities.size() - 1; size2 >= 0; size2--) {
                     ActivityRecord activityRecord = (ActivityRecord) this.mActivities.get(size2);
                     int displayId = activityRecord.getDisplayId();
-                    Context context = rootWindowContainer.getDisplayContent(displayId) != null ? rootWindowContainer.getDisplayContent(displayId).mDisplayPolicy.mUiContext : null;
+                    Context context =
+                            rootWindowContainer.getDisplayContent(displayId) != null
+                                    ? rootWindowContainer.getDisplayContent(displayId)
+                                            .mDisplayPolicy
+                                            .mUiContext
+                                    : null;
                     if (context != null && activityRecord.isVisibleRequested()) {
                         ArrayList arrayList = (ArrayList) list;
                         if (!arrayList.contains(context)) {
@@ -719,7 +804,10 @@ public final class WindowProcessController extends ConfigurationContainer implem
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                j = (this.mInstrumenting || this.mUsingWrapper) ? 60000L : InputConstants.DEFAULT_DISPATCHING_TIMEOUT_MILLIS;
+                j =
+                        (this.mInstrumenting || this.mUsingWrapper)
+                                ? 60000L
+                                : InputConstants.DEFAULT_DISPATCHING_TIMEOUT_MILLIS;
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
                 throw th;
@@ -765,7 +853,8 @@ public final class WindowProcessController extends ConfigurationContainer implem
         for (int i = size - 2; i >= 0; i--) {
             ActivityRecord activityRecord2 = (ActivityRecord) this.mActivities.get(i);
             TaskDisplayArea displayArea2 = activityRecord2.getDisplayArea();
-            if (activityRecord2.compareTo((WindowContainer) activityRecord) > 0 && displayArea2 != null) {
+            if (activityRecord2.compareTo((WindowContainer) activityRecord) > 0
+                    && displayArea2 != null) {
                 activityRecord = activityRecord2;
                 displayArea = displayArea2;
             }
@@ -777,11 +866,15 @@ public final class WindowProcessController extends ConfigurationContainer implem
         ArrayList arrayList = new ArrayList(this.mActivities);
         for (int size = arrayList.size() - 1; size >= 0; size--) {
             ActivityRecord activityRecord = (ActivityRecord) arrayList.get(size);
-            Slog.w("ActivityTaskManager", "  Force finishing activity " + activityRecord.mActivityComponent.flattenToShortString());
+            Slog.w(
+                    "ActivityTaskManager",
+                    "  Force finishing activity "
+                            + activityRecord.mActivityComponent.flattenToShortString());
             activityRecord.detachFromProcess();
             DisplayContent displayContent = activityRecord.mDisplayContent;
             displayContent.prepareAppTransition(2, 16);
-            displayContent.mTransitionController.requestTransitionIfNeeded(2, 16, null, displayContent);
+            displayContent.mTransitionController.requestTransitionIfNeeded(
+                    2, 16, null, displayContent);
             activityRecord.destroyIfPossible("handleAppCrashed");
         }
     }
@@ -794,9 +887,12 @@ public final class WindowProcessController extends ConfigurationContainer implem
         WindowProcessController windowProcessController;
         boolean z;
         ActivityTaskSupervisor activityTaskSupervisor = this.mAtm.mTaskSupervisor;
-        ActivityTaskSupervisor.removeHistoryRecords(activityTaskSupervisor.mStoppingActivities, this);
-        ActivityTaskSupervisor.removeHistoryRecords(activityTaskSupervisor.mFinishingActivities, this);
-        ActivityTaskSupervisor.removeHistoryRecords(activityTaskSupervisor.mNoHistoryActivities, this);
+        ActivityTaskSupervisor.removeHistoryRecords(
+                activityTaskSupervisor.mStoppingActivities, this);
+        ActivityTaskSupervisor.removeHistoryRecords(
+                activityTaskSupervisor.mFinishingActivities, this);
+        ActivityTaskSupervisor.removeHistoryRecords(
+                activityTaskSupervisor.mNoHistoryActivities, this);
         ArrayList arrayList = this.mInactiveActivities;
         boolean z2 = (arrayList == null || arrayList.isEmpty()) ? false : true;
         ArrayList arrayList2 = (this.mHasActivities || z2) ? new ArrayList() : this.mActivities;
@@ -824,7 +920,12 @@ public final class WindowProcessController extends ConfigurationContainer implem
                     z = false;
                 } else {
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_STATES_enabled[1]) {
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_STATES, 646076184396185067L, 0, null, String.valueOf(activityRecord3));
+                        ProtoLogImpl_54989576.v(
+                                ProtoLogGroup.WM_DEBUG_STATES,
+                                646076184396185067L,
+                                0,
+                                null,
+                                String.valueOf(activityRecord3));
                     }
                     taskFragment.mPausingActivity = null;
                     z = true;
@@ -835,17 +936,51 @@ public final class WindowProcessController extends ConfigurationContainer implem
                 }
                 z3 |= z;
             }
-            boolean z4 = Process.isSdkSandboxUid(activityRecord2.getUid()) || ((!((i = activityRecord2.mRelaunchReason) == 1 || i == 2) || activityRecord2.launchCount >= 3 || activityRecord2.finishing) && (!(activityRecord2.mHaveState || activityRecord2.stateNotNeeded || activityRecord2.isState(ActivityRecord.State.RESTARTING_PROCESS)) || activityRecord2.finishing || (!activityRecord2.mVisibleRequested && activityRecord2.launchCount > 2 && activityRecord2.lastLaunchTime > SystemClock.uptimeMillis() - 60000)));
+            boolean z4 =
+                    Process.isSdkSandboxUid(activityRecord2.getUid())
+                            || ((!((i = activityRecord2.mRelaunchReason) == 1 || i == 2)
+                                            || activityRecord2.launchCount >= 3
+                                            || activityRecord2.finishing)
+                                    && (!(activityRecord2.mHaveState
+                                                    || activityRecord2.stateNotNeeded
+                                                    || activityRecord2.isState(
+                                                            ActivityRecord.State
+                                                                    .RESTARTING_PROCESS))
+                                            || activityRecord2.finishing
+                                            || (!activityRecord2.mVisibleRequested
+                                                    && activityRecord2.launchCount > 2
+                                                    && activityRecord2.lastLaunchTime
+                                                            > SystemClock.uptimeMillis() - 60000)));
             if (z4) {
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ADD_REMOVE_enabled[2]) {
-                    ProtoLogImpl_54989576.i(ProtoLogGroup.WM_DEBUG_ADD_REMOVE, 587363723665813898L, 204, null, String.valueOf(activityRecord2), Boolean.valueOf(activityRecord2.mHaveState), String.valueOf(activityRecord2.stateNotNeeded), Boolean.valueOf(activityRecord2.finishing), String.valueOf(activityRecord2.mState), String.valueOf(Debug.getCallers(5)));
+                    ProtoLogImpl_54989576.i(
+                            ProtoLogGroup.WM_DEBUG_ADD_REMOVE,
+                            587363723665813898L,
+                            204,
+                            null,
+                            String.valueOf(activityRecord2),
+                            Boolean.valueOf(activityRecord2.mHaveState),
+                            String.valueOf(activityRecord2.stateNotNeeded),
+                            Boolean.valueOf(activityRecord2.finishing),
+                            String.valueOf(activityRecord2.mState),
+                            String.valueOf(Debug.getCallers(5)));
                 }
-                if (!activityRecord2.finishing || ((windowProcessController = activityRecord2.app) != null && windowProcessController.mListener.mRemoved)) {
-                    Slog.w("ActivityTaskManager", "Force removing " + activityRecord2 + ": app died, no saved state");
+                if (!activityRecord2.finishing
+                        || ((windowProcessController = activityRecord2.app) != null
+                                && windowProcessController.mListener.mRemoved)) {
+                    Slog.w(
+                            "ActivityTaskManager",
+                            "Force removing " + activityRecord2 + ": app died, no saved state");
                     int i2 = activityRecord2.mUserId;
                     int identityHashCode = System.identityHashCode(activityRecord2);
                     Task task3 = activityRecord2.task;
-                    EventLog.writeEvent(30001, Integer.valueOf(i2), Integer.valueOf(identityHashCode), Integer.valueOf(task3 != null ? task3.mTaskId : -1), activityRecord2.shortComponentName, "proc died without state saved");
+                    EventLog.writeEvent(
+                            30001,
+                            Integer.valueOf(i2),
+                            Integer.valueOf(identityHashCode),
+                            Integer.valueOf(task3 != null ? task3.mTaskId : -1),
+                            activityRecord2.shortComponentName,
+                            "proc died without state saved");
                 }
             }
             Task task4 = activityRecord2.task;
@@ -857,16 +992,27 @@ public final class WindowProcessController extends ConfigurationContainer implem
                     activityTaskSupervisor2.mHandler.removeMessages(206, task4);
                 }
             }
-            WindowContainer windowContainer = (z4 && (task2 = activityRecord2.task) != null && task2.getChildCount() == 1) ? activityRecord2.task : activityRecord2;
-            Transition requestCloseTransitionIfNeeded = activityRecord2.mTransitionController.requestCloseTransitionIfNeeded(windowContainer);
+            WindowContainer windowContainer =
+                    (z4 && (task2 = activityRecord2.task) != null && task2.getChildCount() == 1)
+                            ? activityRecord2.task
+                            : activityRecord2;
+            Transition requestCloseTransitionIfNeeded =
+                    activityRecord2.mTransitionController.requestCloseTransitionIfNeeded(
+                            windowContainer);
             if (requestCloseTransitionIfNeeded != null) {
                 requestCloseTransitionIfNeeded.collectClose(windowContainer);
             } else if (activityRecord2.mTransitionController.isCollecting()) {
-                activityRecord2.mTransitionController.mCollectingTransition.collectClose(windowContainer);
+                activityRecord2.mTransitionController.mCollectingTransition.collectClose(
+                        windowContainer);
             }
             activityRecord2.cleanUp(true, true);
             if (z4) {
-                if (activityRecord2.mStartingData != null && activityRecord2.mVisible && (task = activityRecord2.task) != null && (activityRecord = task.topRunningActivity(false)) != null && !activityRecord.mVisible && activityRecord.shouldBeVisible(false)) {
+                if (activityRecord2.mStartingData != null
+                        && activityRecord2.mVisible
+                        && (task = activityRecord2.task) != null
+                        && (activityRecord = task.topRunningActivity(false)) != null
+                        && !activityRecord.mVisible
+                        && activityRecord.shouldBeVisible(false)) {
                     activityRecord.transferStartingWindow(activityRecord2);
                 }
                 activityRecord2.removeFromHistory("appDied");
@@ -908,10 +1054,18 @@ public final class WindowProcessController extends ConfigurationContainer implem
 
     public final void onConfigurationChangePreScheduled(Configuration configuration) {
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_CONFIGURATION_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_CONFIGURATION, -4629255026637000251L, 0, null, String.valueOf(this.mName), String.valueOf(configuration));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_CONFIGURATION,
+                    -4629255026637000251L,
+                    0,
+                    null,
+                    String.valueOf(this.mName),
+                    String.valueOf(configuration));
         }
         if (Build.IS_DEBUGGABLE && this.mHasImeService) {
-            Slog.v("ActivityTaskManager", "Sending to IME proc " + this.mName + " new config " + configuration);
+            Slog.v(
+                    "ActivityTaskManager",
+                    "Sending to IME proc " + this.mName + " new config " + configuration);
         }
         this.mHasCachedConfiguration = false;
     }
@@ -935,7 +1089,12 @@ public final class WindowProcessController extends ConfigurationContainer implem
             }
         }
         boolean z = false;
-        int deviceIdForDisplayId = (activityRecord == null || (displayContent = activityRecord.mDisplayContent) == null) ? 0 : this.mAtm.mTaskSupervisor.getDeviceIdForDisplayId(displayContent.mDisplayId);
+        int deviceIdForDisplayId =
+                (activityRecord == null
+                                || (displayContent = activityRecord.mDisplayContent) == null)
+                        ? 0
+                        : this.mAtm.mTaskSupervisor.getDeviceIdForDisplayId(
+                                displayContent.mDisplayId);
         if (deviceIdForDisplayId != this.mLastTopActivityDeviceId) {
             this.mLastTopActivityDeviceId = deviceIdForDisplayId;
             z = true;
@@ -957,41 +1116,51 @@ public final class WindowProcessController extends ConfigurationContainer implem
             StringBuilder sb = new StringBuilder("Current config: ");
             sb.append(configuration2);
             sb.append(" unchanged for IME proc ");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, this.mName, "ActivityTaskManager");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    sb, this.mName, "ActivityTaskManager");
         }
     }
 
     public final void onTopProcChanged() {
         if ((this.mAtm.mVrController.mVrState & 3) != 0) {
-            this.mAtm.mH.post(new Runnable() { // from class: com.android.server.wm.WindowProcessController$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    WindowProcessController windowProcessController = WindowProcessController.this;
-                    WindowManagerGlobalLock windowManagerGlobalLock = windowProcessController.mAtm.mGlobalLock;
-                    WindowManagerService.boostPriorityForLockedSection();
-                    synchronized (windowManagerGlobalLock) {
-                        try {
-                            VrController vrController = windowProcessController.mAtm.mVrController;
-                            vrController.getClass();
-                            int i = windowProcessController.mCurSchedGroup;
-                            if (i == 3) {
-                                vrController.setVrRenderThreadLocked(windowProcessController.mVrThreadTid, i, true);
-                            } else if (windowProcessController.mVrThreadTid == vrController.mVrRenderThreadTid) {
-                                vrController.updateVrRenderThreadLocked(0, true);
+            this.mAtm.mH.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.wm.WindowProcessController$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            WindowProcessController windowProcessController =
+                                    WindowProcessController.this;
+                            WindowManagerGlobalLock windowManagerGlobalLock =
+                                    windowProcessController.mAtm.mGlobalLock;
+                            WindowManagerService.boostPriorityForLockedSection();
+                            synchronized (windowManagerGlobalLock) {
+                                try {
+                                    VrController vrController =
+                                            windowProcessController.mAtm.mVrController;
+                                    vrController.getClass();
+                                    int i = windowProcessController.mCurSchedGroup;
+                                    if (i == 3) {
+                                        vrController.setVrRenderThreadLocked(
+                                                windowProcessController.mVrThreadTid, i, true);
+                                    } else if (windowProcessController.mVrThreadTid
+                                            == vrController.mVrRenderThreadTid) {
+                                        vrController.updateVrRenderThreadLocked(0, true);
+                                    }
+                                } catch (Throwable th) {
+                                    WindowManagerService.resetPriorityAfterLockedSection();
+                                    throw th;
+                                }
                             }
-                        } catch (Throwable th) {
                             WindowManagerService.resetPriorityAfterLockedSection();
-                            throw th;
                         }
-                    }
-                    WindowManagerService.resetPriorityAfterLockedSection();
-                }
-            });
+                    });
         }
     }
 
     public final void registerActivityConfigurationListener(ActivityRecord activityRecord) {
-        if (activityRecord == null || activityRecord.containsListener(this) || !this.mIsActivityConfigOverrideAllowed) {
+        if (activityRecord == null
+                || activityRecord.containsListener(this)
+                || !this.mIsActivityConfigOverrideAllowed) {
             return;
         }
         unregisterConfigurationListeners();
@@ -1008,10 +1177,21 @@ public final class WindowProcessController extends ConfigurationContainer implem
         ArrayList arrayList = null;
         for (int i = 0; i < this.mActivities.size(); i++) {
             ActivityRecord activityRecord = (ActivityRecord) this.mActivities.get(i);
-            if (activityRecord.finishing || activityRecord.isState(ActivityRecord.State.DESTROYING, ActivityRecord.State.DESTROYED)) {
+            if (activityRecord.finishing
+                    || activityRecord.isState(
+                            ActivityRecord.State.DESTROYING, ActivityRecord.State.DESTROYED)) {
                 return;
             }
-            if (!activityRecord.isVisibleRequested() && activityRecord.mAppStopped && activityRecord.mHaveState && activityRecord.isDestroyable() && !activityRecord.isState$1(ActivityRecord.State.RESUMED, ActivityRecord.State.PAUSING, ActivityRecord.State.PAUSED, ActivityRecord.State.STOPPING) && activityRecord.getParent() != null) {
+            if (!activityRecord.isVisibleRequested()
+                    && activityRecord.mAppStopped
+                    && activityRecord.mHaveState
+                    && activityRecord.isDestroyable()
+                    && !activityRecord.isState$1(
+                            ActivityRecord.State.RESUMED,
+                            ActivityRecord.State.PAUSING,
+                            ActivityRecord.State.PAUSED,
+                            ActivityRecord.State.STOPPING)
+                    && activityRecord.getParent() != null) {
                 if (arrayList == null) {
                     arrayList = new ArrayList();
                 }
@@ -1090,7 +1270,17 @@ public final class WindowProcessController extends ConfigurationContainer implem
             return;
         }
         WindowManagerService windowManagerService = this.mAtm.mWindowManager;
-        ConfigurationContainer.applySizeOverrideIfNeeded(windowManagerService != null ? windowManagerService.getDefaultDisplayContentLocked() : null, this.mInfo, configuration, resolvedOverrideConfiguration, false, false, false, null);
+        ConfigurationContainer.applySizeOverrideIfNeeded(
+                windowManagerService != null
+                        ? windowManagerService.getDefaultDisplayContentLocked()
+                        : null,
+                this.mInfo,
+                configuration,
+                resolvedOverrideConfiguration,
+                false,
+                false,
+                false,
+                null);
     }
 
     public final boolean resumeConfigurationDispatch() {
@@ -1102,7 +1292,8 @@ public final class WindowProcessController extends ConfigurationContainer implem
         return this.mHasPendingConfigurationChange;
     }
 
-    public final void scheduleClientTransactionItem(IApplicationThread iApplicationThread, ClientTransactionItem clientTransactionItem) {
+    public final void scheduleClientTransactionItem(
+            IApplicationThread iApplicationThread, ClientTransactionItem clientTransactionItem) {
         Object obj = this.mOwner;
         try {
             Session session = this.mWindowSession;
@@ -1113,12 +1304,24 @@ public final class WindowProcessController extends ConfigurationContainer implem
                 obtain.addTransactionItem(clientTransactionItem);
                 ClientLifecycleManager.scheduleTransaction(obtain);
             } else {
-                activityTaskManagerService.mLifecycleManager.scheduleTransactionItem(iApplicationThread, clientTransactionItem);
+                activityTaskManagerService.mLifecycleManager.scheduleTransactionItem(
+                        iApplicationThread, clientTransactionItem);
             }
         } catch (DeadObjectException unused) {
-            Slog.w("ActivityTaskManager", "Failed for dead process. ClientTransactionItem=" + clientTransactionItem + " owner=" + obj);
+            Slog.w(
+                    "ActivityTaskManager",
+                    "Failed for dead process. ClientTransactionItem="
+                            + clientTransactionItem
+                            + " owner="
+                            + obj);
         } catch (Exception e) {
-            Slog.e("ActivityTaskManager", "Failed to schedule ClientTransactionItem=" + clientTransactionItem + " owner=" + obj, e);
+            Slog.e(
+                    "ActivityTaskManager",
+                    "Failed to schedule ClientTransactionItem="
+                            + clientTransactionItem
+                            + " owner="
+                            + obj,
+                    e);
         }
     }
 
@@ -1127,7 +1330,11 @@ public final class WindowProcessController extends ConfigurationContainer implem
         if (iApplicationThread != null) {
             scheduleClientTransactionItem(iApplicationThread, clientTransactionItem);
         } else if (Build.IS_DEBUGGABLE) {
-            ProfileService$1$$ExternalSyntheticOutline0.m(new StringBuilder("Unable to send transaction to client proc "), this.mName, ": no app thread", "ActivityTaskManager");
+            ProfileService$1$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Unable to send transaction to client proc "),
+                    this.mName,
+                    ": no app thread",
+                    "ActivityTaskManager");
         }
     }
 
@@ -1139,7 +1346,8 @@ public final class WindowProcessController extends ConfigurationContainer implem
 
     @Override // com.android.server.wm.ConfigurationContainer
     public final boolean setOverrideGender(Configuration configuration, int i) {
-        return applyConfigGenderOverride(configuration, i, this.mAtm.mGrammaticalManagerInternal, this.mUid);
+        return applyConfigGenderOverride(
+                configuration, i, this.mAtm.mGrammaticalManagerInternal, this.mUid);
     }
 
     public final void setThread(IApplicationThread iApplicationThread) {
@@ -1149,7 +1357,8 @@ public final class WindowProcessController extends ConfigurationContainer implem
                 if (iApplicationThread != null) {
                     setLastReportedConfiguration(getConfiguration());
                 } else {
-                    VisibleActivityProcessTracker visibleActivityProcessTracker = this.mAtm.mVisibleActivityProcessTracker;
+                    VisibleActivityProcessTracker visibleActivityProcessTracker =
+                            this.mAtm.mVisibleActivityProcessTracker;
                     synchronized (visibleActivityProcessTracker.mProcMap) {
                     }
                 }
@@ -1207,8 +1416,7 @@ public final class WindowProcessController extends ConfigurationContainer implem
         unregisterDisplayAreaConfigurationListener();
     }
 
-    public void unregisterDisplayAreaConfigurationListener() {
-    }
+    public void unregisterDisplayAreaConfigurationListener() {}
 
     public final void updateActivityConfigurationListener(ActivityRecord activityRecord) {
         if (this.mIsActivityConfigOverrideAllowed) {
@@ -1265,7 +1473,8 @@ public final class WindowProcessController extends ConfigurationContainer implem
         }
         for (int size = this.mActivities.size() - 1; size >= 0; size--) {
             ActivityRecord activityRecord = (ActivityRecord) this.mActivities.get(size);
-            Configuration configuration2 = new Configuration(activityRecord.getRequestedOverrideConfiguration());
+            Configuration configuration2 =
+                    new Configuration(activityRecord.getRequestedOverrideConfiguration());
             configuration2.assetsSeq = i;
             activityRecord.onRequestedOverrideConfigurationChanged(configuration2);
             if (activityRecord.isVisibleRequested()) {
@@ -1283,6 +1492,12 @@ public final class WindowProcessController extends ConfigurationContainer implem
             activityTaskManagerService.mRootWindowContainer.rankTaskLayers();
             activityTaskManagerService.mTaskSupervisor.computeProcessActivityStateBatch();
         }
-        activityTaskManagerService.mH.sendMessage(PooledLambda.obtainMessage(new WindowProcessController$$ExternalSyntheticLambda2(), this.mListener, Boolean.valueOf(z), Boolean.valueOf(z2), Boolean.valueOf(z3)));
+        activityTaskManagerService.mH.sendMessage(
+                PooledLambda.obtainMessage(
+                        new WindowProcessController$$ExternalSyntheticLambda2(),
+                        this.mListener,
+                        Boolean.valueOf(z),
+                        Boolean.valueOf(z2),
+                        Boolean.valueOf(z3)));
     }
 }

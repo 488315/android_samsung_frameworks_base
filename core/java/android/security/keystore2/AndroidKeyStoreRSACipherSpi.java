@@ -3,6 +3,7 @@ package android.security.keystore2;
 import android.hardware.security.keymint.KeyParameter;
 import android.security.keystore.KeyProperties;
 import android.system.keystore2.Authorization;
+
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -14,6 +15,7 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
 import java.security.spec.MGF1ParameterSpec;
 import java.util.List;
+
 import javax.crypto.spec.OAEPParameterSpec;
 import javax.crypto.spec.PSource;
 
@@ -40,20 +42,23 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected void initAlgorithmSpecificParameters() throws InvalidKeyException {
-        }
+        protected void initAlgorithmSpecificParameters() throws InvalidKeyException {}
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected void initAlgorithmSpecificParameters(AlgorithmParameterSpec params) throws InvalidAlgorithmParameterException {
+        protected void initAlgorithmSpecificParameters(AlgorithmParameterSpec params)
+                throws InvalidAlgorithmParameterException {
             if (params != null) {
-                throw new InvalidAlgorithmParameterException("Unexpected parameters: " + params + ". No parameters supported");
+                throw new InvalidAlgorithmParameterException(
+                        "Unexpected parameters: " + params + ". No parameters supported");
             }
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected void initAlgorithmSpecificParameters(AlgorithmParameters params) throws InvalidAlgorithmParameterException {
+        protected void initAlgorithmSpecificParameters(AlgorithmParameters params)
+                throws InvalidAlgorithmParameterException {
             if (params != null) {
-                throw new InvalidAlgorithmParameterException("Unexpected parameters: " + params + ". No parameters supported");
+                throw new InvalidAlgorithmParameterException(
+                        "Unexpected parameters: " + params + ". No parameters supported");
             }
         }
 
@@ -91,20 +96,23 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected void initAlgorithmSpecificParameters() throws InvalidKeyException {
-        }
+        protected void initAlgorithmSpecificParameters() throws InvalidKeyException {}
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected void initAlgorithmSpecificParameters(AlgorithmParameterSpec params) throws InvalidAlgorithmParameterException {
+        protected void initAlgorithmSpecificParameters(AlgorithmParameterSpec params)
+                throws InvalidAlgorithmParameterException {
             if (params != null) {
-                throw new InvalidAlgorithmParameterException("Unexpected parameters: " + params + ". No parameters supported");
+                throw new InvalidAlgorithmParameterException(
+                        "Unexpected parameters: " + params + ". No parameters supported");
             }
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected void initAlgorithmSpecificParameters(AlgorithmParameters params) throws InvalidAlgorithmParameterException {
+        protected void initAlgorithmSpecificParameters(AlgorithmParameters params)
+                throws InvalidAlgorithmParameterException {
             if (params != null) {
-                throw new InvalidAlgorithmParameterException("Unexpected parameters: " + params + ". No parameters supported");
+                throw new InvalidAlgorithmParameterException(
+                        "Unexpected parameters: " + params + ". No parameters supported");
             }
         }
 
@@ -127,7 +135,7 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
         }
     }
 
-    static abstract class OAEPWithMGF1Padding extends AndroidKeyStoreRSACipherSpi {
+    abstract static class OAEPWithMGF1Padding extends AndroidKeyStoreRSACipherSpi {
         private static final String MGF_ALGORITHM_MGF1 = "MGF1";
         private int mDigestOutputSizeBytes;
         private int mKeymasterDigest;
@@ -138,24 +146,33 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
             this.mKeymasterDigest = -1;
             this.mKeymasterMgf1Digest = 2;
             this.mKeymasterDigest = keymasterDigest;
-            this.mDigestOutputSizeBytes = (KeymasterUtils.getDigestOutputSizeBits(keymasterDigest) + 7) / 8;
+            this.mDigestOutputSizeBytes =
+                    (KeymasterUtils.getDigestOutputSizeBits(keymasterDigest) + 7) / 8;
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected final void initAlgorithmSpecificParameters() throws InvalidKeyException {
-        }
+        protected final void initAlgorithmSpecificParameters() throws InvalidKeyException {}
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected final void initAlgorithmSpecificParameters(AlgorithmParameterSpec params) throws InvalidAlgorithmParameterException {
+        protected final void initAlgorithmSpecificParameters(AlgorithmParameterSpec params)
+                throws InvalidAlgorithmParameterException {
             if (params == null) {
                 return;
             }
             if (!(params instanceof OAEPParameterSpec)) {
-                throw new InvalidAlgorithmParameterException("Unsupported parameter spec: " + params + ". Only OAEPParameterSpec supported");
+                throw new InvalidAlgorithmParameterException(
+                        "Unsupported parameter spec: "
+                                + params
+                                + ". Only OAEPParameterSpec supported");
             }
             OAEPParameterSpec spec = (OAEPParameterSpec) params;
             if (!MGF_ALGORITHM_MGF1.equalsIgnoreCase(spec.getMGFAlgorithm())) {
-                throw new InvalidAlgorithmParameterException("Unsupported MGF: " + spec.getMGFAlgorithm() + ". Only " + MGF_ALGORITHM_MGF1 + " supported");
+                throw new InvalidAlgorithmParameterException(
+                        "Unsupported MGF: "
+                                + spec.getMGFAlgorithm()
+                                + ". Only "
+                                + MGF_ALGORITHM_MGF1
+                                + " supported");
             }
             String jcaDigest = spec.getDigestAlgorithm();
             try {
@@ -168,28 +185,42 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
                     case 6:
                         AlgorithmParameterSpec mgfParams = spec.getMGFParameters();
                         if (mgfParams == null) {
-                            throw new InvalidAlgorithmParameterException("MGF parameters must be provided");
+                            throw new InvalidAlgorithmParameterException(
+                                    "MGF parameters must be provided");
                         }
                         if (!(mgfParams instanceof MGF1ParameterSpec)) {
-                            throw new InvalidAlgorithmParameterException("Unsupported MGF parameters: " + mgfParams + ". Only MGF1ParameterSpec supported");
+                            throw new InvalidAlgorithmParameterException(
+                                    "Unsupported MGF parameters: "
+                                            + mgfParams
+                                            + ". Only MGF1ParameterSpec supported");
                         }
                         MGF1ParameterSpec mgfSpec = (MGF1ParameterSpec) mgfParams;
                         String mgf1JcaDigest = mgfSpec.getDigestAlgorithm();
                         PSource pSource = spec.getPSource();
                         if (!(pSource instanceof PSource.PSpecified)) {
-                            throw new InvalidAlgorithmParameterException("Unsupported source of encoding input P: " + pSource + ". Only pSpecifiedEmpty (PSource.PSpecified.DEFAULT) supported");
+                            throw new InvalidAlgorithmParameterException(
+                                    "Unsupported source of encoding input P: "
+                                            + pSource
+                                            + ". Only pSpecifiedEmpty (PSource.PSpecified.DEFAULT)"
+                                            + " supported");
                         }
                         PSource.PSpecified pSourceSpecified = (PSource.PSpecified) pSource;
                         byte[] pSourceValue = pSourceSpecified.getValue();
                         if (pSourceValue != null && pSourceValue.length > 0) {
-                            throw new InvalidAlgorithmParameterException("Unsupported source of encoding input P: " + pSource + ". Only pSpecifiedEmpty (PSource.PSpecified.DEFAULT) supported");
+                            throw new InvalidAlgorithmParameterException(
+                                    "Unsupported source of encoding input P: "
+                                            + pSource
+                                            + ". Only pSpecifiedEmpty (PSource.PSpecified.DEFAULT)"
+                                            + " supported");
                         }
                         this.mKeymasterDigest = keymasterDigest;
                         this.mKeymasterMgf1Digest = KeyProperties.Digest.toKeymaster(mgf1JcaDigest);
-                        this.mDigestOutputSizeBytes = (KeymasterUtils.getDigestOutputSizeBits(keymasterDigest) + 7) / 8;
+                        this.mDigestOutputSizeBytes =
+                                (KeymasterUtils.getDigestOutputSizeBits(keymasterDigest) + 7) / 8;
                         return;
                     default:
-                        throw new InvalidAlgorithmParameterException("Unsupported digest: " + jcaDigest);
+                        throw new InvalidAlgorithmParameterException(
+                                "Unsupported digest: " + jcaDigest);
                 }
             } catch (IllegalArgumentException e) {
                 throw new InvalidAlgorithmParameterException("Unsupported digest: " + jcaDigest, e);
@@ -197,24 +228,34 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected final void initAlgorithmSpecificParameters(AlgorithmParameters params) throws InvalidAlgorithmParameterException {
+        protected final void initAlgorithmSpecificParameters(AlgorithmParameters params)
+                throws InvalidAlgorithmParameterException {
             if (params == null) {
                 return;
             }
             try {
-                OAEPParameterSpec spec = (OAEPParameterSpec) params.getParameterSpec(OAEPParameterSpec.class);
+                OAEPParameterSpec spec =
+                        (OAEPParameterSpec) params.getParameterSpec(OAEPParameterSpec.class);
                 if (spec == null) {
-                    throw new InvalidAlgorithmParameterException("OAEP parameters required, but not provided in parameters: " + params);
+                    throw new InvalidAlgorithmParameterException(
+                            "OAEP parameters required, but not provided in parameters: " + params);
                 }
                 initAlgorithmSpecificParameters(spec);
             } catch (InvalidParameterSpecException e) {
-                throw new InvalidAlgorithmParameterException("OAEP parameters required, but not found in parameters: " + params, e);
+                throw new InvalidAlgorithmParameterException(
+                        "OAEP parameters required, but not found in parameters: " + params, e);
             }
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase, javax.crypto.CipherSpi
         protected final AlgorithmParameters engineGetParameters() {
-            OAEPParameterSpec spec = new OAEPParameterSpec(KeyProperties.Digest.fromKeymaster(this.mKeymasterDigest), MGF_ALGORITHM_MGF1, KeyProperties.Digest.fromKeymasterToMGF1ParameterSpec(this.mKeymasterMgf1Digest), PSource.PSpecified.DEFAULT);
+            OAEPParameterSpec spec =
+                    new OAEPParameterSpec(
+                            KeyProperties.Digest.fromKeymaster(this.mKeymasterDigest),
+                            MGF_ALGORITHM_MGF1,
+                            KeyProperties.Digest.fromKeymasterToMGF1ParameterSpec(
+                                    this.mKeymasterMgf1Digest),
+                            PSource.PSpecified.DEFAULT);
             try {
                 AlgorithmParameters params = AlgorithmParameters.getInstance("OAEP");
                 params.init(spec);
@@ -222,11 +263,13 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
             } catch (NoSuchAlgorithmException e) {
                 throw new ProviderException("Failed to obtain OAEP AlgorithmParameters", e);
             } catch (InvalidParameterSpecException e2) {
-                throw new ProviderException("Failed to initialize OAEP AlgorithmParameters with an IV", e2);
+                throw new ProviderException(
+                        "Failed to initialize OAEP AlgorithmParameters with an IV", e2);
             }
         }
 
-        private static boolean isMgfDigestTagPresentInKeyProperties(Authorization[] keyCharacteristics) {
+        private static boolean isMgfDigestTagPresentInKeyProperties(
+                Authorization[] keyCharacteristics) {
             for (Authorization authorization : keyCharacteristics) {
                 if (authorization.keyParameter.tag == 536871115) {
                     return true;
@@ -236,16 +279,20 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected final void addAlgorithmSpecificParametersToBegin(List<KeyParameter> parameters, Authorization[] keyCharacteristics) {
+        protected final void addAlgorithmSpecificParametersToBegin(
+                List<KeyParameter> parameters, Authorization[] keyCharacteristics) {
             super.addAlgorithmSpecificParametersToBegin(parameters, keyCharacteristics);
             parameters.add(KeyStore2ParameterUtils.makeEnum(536870917, this.mKeymasterDigest));
             if (isMgfDigestTagPresentInKeyProperties(keyCharacteristics)) {
-                parameters.add(KeyStore2ParameterUtils.makeEnum(536871115, this.mKeymasterMgf1Digest));
+                parameters.add(
+                        KeyStore2ParameterUtils.makeEnum(536871115, this.mKeymasterMgf1Digest));
             }
         }
 
-        @Override // android.security.keystore2.AndroidKeyStoreRSACipherSpi, android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected final void loadAlgorithmSpecificParametersFromBeginResult(KeyParameter[] parameters) {
+        @Override // android.security.keystore2.AndroidKeyStoreRSACipherSpi,
+                  // android.security.keystore2.AndroidKeyStoreCipherSpiBase
+        protected final void loadAlgorithmSpecificParametersFromBeginResult(
+                KeyParameter[] parameters) {
             super.loadAlgorithmSpecificParametersFromBeginResult(parameters);
         }
 
@@ -262,7 +309,8 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
             return 0;
         }
 
-        @Override // android.security.keystore2.AndroidKeyStoreRSACipherSpi, android.security.keystore2.AndroidKeyStoreCipherSpiBase
+        @Override // android.security.keystore2.AndroidKeyStoreRSACipherSpi,
+                  // android.security.keystore2.AndroidKeyStoreCipherSpiBase
         protected final String getTransform() {
             switch (this.mKeymasterDigest) {
                 case 2:
@@ -352,7 +400,8 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
             throw new InvalidKeyException("Unsupported key: null");
         }
         if (!"RSA".equalsIgnoreCase(key.getAlgorithm())) {
-            throw new InvalidKeyException("Unsupported key algorithm: " + key.getAlgorithm() + ". Only RSA supported");
+            throw new InvalidKeyException(
+                    "Unsupported key algorithm: " + key.getAlgorithm() + ". Only RSA supported");
         }
         if (key instanceof AndroidKeyStorePrivateKey) {
             keystoreKey = (AndroidKeyStoreKey) key;
@@ -366,14 +415,21 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
                 case 1:
                 case 3:
                     if (!adjustConfigForEncryptingWithPrivateKey()) {
-                        throw new InvalidKeyException("RSA private keys cannot be used with " + opmodeToString(opmode) + " and padding " + KeyProperties.EncryptionPadding.fromKeymaster(this.mKeymasterPadding) + ". Only RSA public keys supported for this mode");
+                        throw new InvalidKeyException(
+                                "RSA private keys cannot be used with "
+                                        + opmodeToString(opmode)
+                                        + " and padding "
+                                        + KeyProperties.EncryptionPadding.fromKeymaster(
+                                                this.mKeymasterPadding)
+                                        + ". Only RSA public keys supported for this mode");
                     }
                     break;
                 case 2:
                 case 4:
                     break;
                 default:
-                    throw new InvalidKeyException("RSA private keys cannot be used with opmode: " + opmode);
+                    throw new InvalidKeyException(
+                            "RSA private keys cannot be used with opmode: " + opmode);
             }
         } else {
             switch (opmode) {
@@ -382,9 +438,16 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
                     break;
                 case 2:
                 case 4:
-                    throw new InvalidKeyException("RSA public keys cannot be used with " + opmodeToString(opmode) + " and padding " + KeyProperties.EncryptionPadding.fromKeymaster(this.mKeymasterPadding) + ". Only RSA private keys supported for this opmode.");
+                    throw new InvalidKeyException(
+                            "RSA public keys cannot be used with "
+                                    + opmodeToString(opmode)
+                                    + " and padding "
+                                    + KeyProperties.EncryptionPadding.fromKeymaster(
+                                            this.mKeymasterPadding)
+                                    + ". Only RSA private keys supported for this opmode.");
                 default:
-                    throw new InvalidKeyException("RSA public keys cannot be used with " + opmodeToString(opmode));
+                    throw new InvalidKeyException(
+                            "RSA public keys cannot be used with " + opmodeToString(opmode));
             }
         }
         long keySizeBits = -1;
@@ -436,8 +499,7 @@ abstract class AndroidKeyStoreRSACipherSpi extends AndroidKeyStoreCipherSpiBase 
     }
 
     @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-    protected void loadAlgorithmSpecificParametersFromBeginResult(KeyParameter[] parameters) {
-    }
+    protected void loadAlgorithmSpecificParametersFromBeginResult(KeyParameter[] parameters) {}
 
     @Override // javax.crypto.CipherSpi
     protected final int engineGetBlockSize() {

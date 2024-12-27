@@ -6,24 +6,44 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.service.wallpapereffectsgeneration.IWallpaperEffectsGenerationService;
 import android.util.Slog;
+
 import com.android.internal.infra.AbstractMultiplePendingRequestsRemoteService;
 import com.android.internal.infra.AbstractRemoteService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class RemoteWallpaperEffectsGenerationService extends AbstractMultiplePendingRequestsRemoteService {
+public final class RemoteWallpaperEffectsGenerationService
+        extends AbstractMultiplePendingRequestsRemoteService {
     public final RemoteWallpaperEffectsGenerationServiceCallback mCallback;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface RemoteWallpaperEffectsGenerationServiceCallback extends AbstractRemoteService.VultureCallback {
-    }
+    public interface RemoteWallpaperEffectsGenerationServiceCallback
+            extends AbstractRemoteService.VultureCallback {}
 
-    public RemoteWallpaperEffectsGenerationService(Context context, ComponentName componentName, int i, RemoteWallpaperEffectsGenerationServiceCallback remoteWallpaperEffectsGenerationServiceCallback, boolean z, boolean z2) {
-        super(context, "android.service.wallpapereffectsgeneration.WallpaperEffectsGenerationService", componentName, i, remoteWallpaperEffectsGenerationServiceCallback, context.getMainThreadHandler(), z ? 4194304 : 0, z2, 1);
+    public RemoteWallpaperEffectsGenerationService(
+            Context context,
+            ComponentName componentName,
+            int i,
+            RemoteWallpaperEffectsGenerationServiceCallback
+                    remoteWallpaperEffectsGenerationServiceCallback,
+            boolean z,
+            boolean z2) {
+        super(
+                context,
+                "android.service.wallpapereffectsgeneration.WallpaperEffectsGenerationService",
+                componentName,
+                i,
+                remoteWallpaperEffectsGenerationServiceCallback,
+                context.getMainThreadHandler(),
+                z ? 4194304 : 0,
+                z2,
+                1);
         this.mCallback = remoteWallpaperEffectsGenerationServiceCallback;
     }
 
-    public final void executeOnResolvedService(WallpaperEffectsGenerationPerUserService$$ExternalSyntheticLambda0 wallpaperEffectsGenerationPerUserService$$ExternalSyntheticLambda0) {
+    public final void executeOnResolvedService(
+            WallpaperEffectsGenerationPerUserService$$ExternalSyntheticLambda0
+                    wallpaperEffectsGenerationPerUserService$$ExternalSyntheticLambda0) {
         executeAsyncRequest(wallpaperEffectsGenerationPerUserService$$ExternalSyntheticLambda0);
     }
 
@@ -40,14 +60,19 @@ public final class RemoteWallpaperEffectsGenerationService extends AbstractMulti
     }
 
     public final void handleOnConnectedStateChanged(boolean z) {
-        RemoteWallpaperEffectsGenerationServiceCallback remoteWallpaperEffectsGenerationServiceCallback = this.mCallback;
+        RemoteWallpaperEffectsGenerationServiceCallback
+                remoteWallpaperEffectsGenerationServiceCallback = this.mCallback;
         if (remoteWallpaperEffectsGenerationServiceCallback != null) {
-            WallpaperEffectsGenerationPerUserService wallpaperEffectsGenerationPerUserService = (WallpaperEffectsGenerationPerUserService) remoteWallpaperEffectsGenerationServiceCallback;
+            WallpaperEffectsGenerationPerUserService wallpaperEffectsGenerationPerUserService =
+                    (WallpaperEffectsGenerationPerUserService)
+                            remoteWallpaperEffectsGenerationServiceCallback;
             wallpaperEffectsGenerationPerUserService.getClass();
             if (z) {
                 return;
             }
-            Slog.w("WallpaperEffectsGenerationPerUserService", "remote wallpaper effects generation service disconnected");
+            Slog.w(
+                    "WallpaperEffectsGenerationPerUserService",
+                    "remote wallpaper effects generation service disconnected");
             wallpaperEffectsGenerationPerUserService.updateRemoteServiceLocked();
         }
     }

@@ -112,8 +112,7 @@ public class Cuj {
     public static final int SEC_CUJ_UNKNOWN = 10000;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CujType {
-    }
+    public @interface CujType {}
 
     static {
         Arrays.fill(CUJ_TO_STATSD_INTERACTION_TYPE, -1);
@@ -217,8 +216,7 @@ public class Cuj {
         SEC_CUJ_TO_STATSD_INTERACTION_TYPE[2] = 10002;
     }
 
-    private Cuj() {
-    }
+    private Cuj() {}
 
     public static String getNameOfCuj(int cujType) {
         switch (cujType) {

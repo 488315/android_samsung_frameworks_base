@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,8 +24,7 @@ public interface Parcelling<T> {
     public static class Cache {
         private static ArrayMap<Class, Parcelling> sCache = new ArrayMap<>();
 
-        private Cache() {
-        }
+        private Cache() {}
 
         public static <P extends Parcelling<?>> P get(Class<P> clazz) {
             return (P) sCache.get(clazz);
@@ -224,7 +224,8 @@ public interface Parcelling<T> {
                     case 1:
                         return null;
                     default:
-                        throw new IllegalStateException("Malformed Parcel reading Boolean: " + source);
+                        throw new IllegalStateException(
+                                "Malformed Parcel reading Boolean: " + source);
                 }
             }
         }

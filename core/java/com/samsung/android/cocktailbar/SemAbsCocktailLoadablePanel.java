@@ -59,20 +59,15 @@ public abstract class SemAbsCocktailLoadablePanel {
         this.mOnCocktailClickHandler = onCocktailClickHandler;
     }
 
-    public void onPause() {
-    }
+    public void onPause() {}
 
-    public void onResume() {
-    }
+    public void onResume() {}
 
-    public void onPostResume() {
-    }
+    public void onPostResume() {}
 
-    public void onReceiveContentInfo(Bundle bundle) {
-    }
+    public void onReceiveContentInfo(Bundle bundle) {}
 
-    public void onConfigurationChanged(Configuration config, Bundle extraConfiguration) {
-    }
+    public void onConfigurationChanged(Configuration config, Bundle extraConfiguration) {}
 
     public boolean performOnClickInCocktailBar(View view, PendingIntent pendingIntent) {
         if (this.mOnCocktailClickHandler != null) {

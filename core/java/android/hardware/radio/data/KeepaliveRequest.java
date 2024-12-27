@@ -3,26 +3,29 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class KeepaliveRequest implements Parcelable {
-    public static final Parcelable.Creator<KeepaliveRequest> CREATOR = new Parcelable.Creator<KeepaliveRequest>() { // from class: android.hardware.radio.data.KeepaliveRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeepaliveRequest createFromParcel(Parcel _aidl_source) {
-            KeepaliveRequest _aidl_out = new KeepaliveRequest();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<KeepaliveRequest> CREATOR =
+            new Parcelable.Creator<KeepaliveRequest>() { // from class:
+                // android.hardware.radio.data.KeepaliveRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeepaliveRequest createFromParcel(Parcel _aidl_source) {
+                    KeepaliveRequest _aidl_out = new KeepaliveRequest();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeepaliveRequest[] newArray(int _aidl_size) {
-            return new KeepaliveRequest[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeepaliveRequest[] newArray(int _aidl_size) {
+                    return new KeepaliveRequest[_aidl_size];
+                }
+            };
     public static final int TYPE_NATT_IPV4 = 0;
     public static final int TYPE_NATT_IPV6 = 1;
     public byte[] destinationAddress;

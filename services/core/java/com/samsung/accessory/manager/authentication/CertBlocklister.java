@@ -7,7 +7,9 @@ import android.os.Binder;
 import android.os.Debug;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.samsung.accessory.manager.authentication.cover.CoverAuthenticator;
+
 import java.io.File;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -35,10 +37,12 @@ public final class CertBlocklister extends Binder {
             String string = Settings.Secure.getString(this.mContentResolver, this.mKey);
             if ("true".equals(string)) {
                 CertBlocklister.mIsBlocked = true;
-                ((CoverAuthenticator) CertBlocklister.mCertBlocklistListener).mCoverAuthHandler.sendEmptyMessage(6);
+                ((CoverAuthenticator) CertBlocklister.mCertBlocklistListener)
+                        .mCoverAuthHandler.sendEmptyMessage(6);
             } else if ("false".equals(string)) {
                 CertBlocklister.mIsBlocked = false;
-                ((CoverAuthenticator) CertBlocklister.mCertBlocklistListener).startAuthentication(0L, true);
+                ((CoverAuthenticator) CertBlocklister.mCertBlocklistListener)
+                        .startAuthentication(0L, true);
             }
         }
     }
@@ -84,7 +88,9 @@ public final class CertBlocklister extends Binder {
                     Method dump skipped, instructions count: 262
                     To view this dump change 'Code comments level' option to 'DEBUG'
                 */
-                throw new UnsupportedOperationException("Method not decompiled: com.samsung.accessory.manager.authentication.CertBlocklister.BlocklistObserver.AnonymousClass1.run():void");
+                throw new UnsupportedOperationException(
+                        "Method not decompiled:"
+                            + " com.samsung.accessory.manager.authentication.CertBlocklister.BlocklistObserver.AnonymousClass1.run():void");
             }
         }
 
@@ -106,12 +112,14 @@ public final class CertBlocklister extends Binder {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface CertBlocklistListener {
-    }
+    public interface CertBlocklistListener {}
 
     static {
         Debug.semIsProductDev();
-        PUBKEY_PATH = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(System.getenv("ANDROID_DATA") + "/misc/saccessory_manager/keychain/", "cover_pubkey_blocklist.txt");
+        PUBKEY_PATH =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                        System.getenv("ANDROID_DATA") + "/misc/saccessory_manager/keychain/",
+                        "cover_pubkey_blocklist.txt");
         mIsBlocked = false;
     }
 

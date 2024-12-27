@@ -5,7 +5,9 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.SparseArray;
+
 import com.android.internal.util.dump.DualDumpOutputStream;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -42,7 +44,8 @@ public final class UsbSettingsManager {
             try {
                 int size2 = this.mSettingsByProfileGroup.size();
                 for (i = 0; i < size2; i++) {
-                    ((UsbProfileGroupSettingsManager) this.mSettingsByProfileGroup.valueAt(i)).dump(dualDumpOutputStream);
+                    ((UsbProfileGroupSettingsManager) this.mSettingsByProfileGroup.valueAt(i))
+                            .dump(dualDumpOutputStream);
                 }
             } finally {
             }
@@ -58,10 +61,15 @@ public final class UsbSettingsManager {
         }
         synchronized (this.mSettingsByProfileGroup) {
             try {
-                usbProfileGroupSettingsManager = (UsbProfileGroupSettingsManager) this.mSettingsByProfileGroup.get(userHandle.getIdentifier());
+                usbProfileGroupSettingsManager =
+                        (UsbProfileGroupSettingsManager)
+                                this.mSettingsByProfileGroup.get(userHandle.getIdentifier());
                 if (usbProfileGroupSettingsManager == null) {
-                    usbProfileGroupSettingsManager = new UsbProfileGroupSettingsManager(this.mContext, userHandle, this, this.mUsbHandlerManager);
-                    this.mSettingsByProfileGroup.put(userHandle.getIdentifier(), usbProfileGroupSettingsManager);
+                    usbProfileGroupSettingsManager =
+                            new UsbProfileGroupSettingsManager(
+                                    this.mContext, userHandle, this, this.mUsbHandlerManager);
+                    this.mSettingsByProfileGroup.put(
+                            userHandle.getIdentifier(), usbProfileGroupSettingsManager);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -76,7 +84,8 @@ public final class UsbSettingsManager {
             try {
                 usbUserSettingsManager = (UsbUserSettingsManager) this.mSettingsByUser.get(i);
                 if (usbUserSettingsManager == null) {
-                    usbUserSettingsManager = new UsbUserSettingsManager(this.mContext, UserHandle.of(i));
+                    usbUserSettingsManager =
+                            new UsbUserSettingsManager(this.mContext, UserHandle.of(i));
                     this.mSettingsByUser.put(i, usbUserSettingsManager);
                 }
             } catch (Throwable th) {

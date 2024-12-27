@@ -14,13 +14,15 @@ import android.provider.Settings;
 import android.util.MathUtils;
 import android.util.Slog;
 import android.view.SurfaceControlHdrLayerInfoListener;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0;
-import com.android.server.display.DisplayDeviceConfig;
 import com.android.server.display.utils.DebugUtils;
+
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.hardware.display.IRefreshRateToken;
+
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
@@ -28,8 +30,11 @@ import java.util.Iterator;
 /* loaded from: classes.dex */
 public final class HighBrightnessModeController {
     public static final boolean DEBUG = DebugUtils.isDebuggable("HighBrightnessModeController");
-    public static final boolean FEATURE_SUPPORT_HDR_SOLUTION = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_MMFW_SUPPORT_HW_HDR");
-    public static final boolean FEATURE_SUPPORT_PHOTOHDR = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_MMFW_SUPPORT_PHOTOHDR");
+    public static final boolean FEATURE_SUPPORT_HDR_SOLUTION =
+            SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_MMFW_SUPPORT_HW_HDR");
+    public static final boolean FEATURE_SUPPORT_PHOTOHDR =
+            SemFloatingFeature.getInstance()
+                    .getBoolean("SEC_FLOATING_FEATURE_MMFW_SUPPORT_PHOTOHDR");
     static final float HBM_TRANSITION_POINT_INVALID = Float.POSITIVE_INFINITY;
     public float mAmbientLux;
     public float mBrightness;
@@ -81,83 +86,91 @@ public final class HighBrightnessModeController {
         public static final /* synthetic */ int $r8$clinit = 0;
         public boolean mIsBrightnessScaledUp = false;
         public boolean mIsBrightnessScaledUpPrev = false;
-        public final IDisplayManager mDisplayManager = IDisplayManager.Stub.asInterface(ServiceManager.getService("display"));
+        public final IDisplayManager mDisplayManager =
+                IDisplayManager.Stub.asInterface(ServiceManager.getService("display"));
         public IRefreshRateToken mRefreshRateToken = null;
         public final IBinder mToken = new Binder();
 
-        public HdrListener() {
-        }
+        public HdrListener() {}
 
         /* JADX WARN: Code restructure failed: missing block: B:17:0x0083, code lost:
-        
-            if (r4 >= r10.mThresRatio) goto L22;
-         */
+
+           if (r4 >= r10.mThresRatio) goto L22;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:18:0x0085, code lost:
-        
-            r1 = true;
-         */
+
+           r1 = true;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:19:0x0092, code lost:
-        
-            r19.mIsBrightnessScaledUp = r1;
-         */
+
+           r19.mIsBrightnessScaledUp = r1;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:20:0x0096, code lost:
-        
-            if (r10.mLogLevel > 0) goto L34;
-         */
+
+           if (r10.mLogLevel > 0) goto L34;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:22:0x009a, code lost:
-        
-            if (r1 == r19.mIsBrightnessScaledUpPrev) goto L33;
-         */
+
+           if (r1 == r19.mIsBrightnessScaledUpPrev) goto L33;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:23:0x009d, code lost:
-        
-            r7 = "HighBrightnessModeController";
-         */
+
+           r7 = "HighBrightnessModeController";
+        */
         /* JADX WARN: Code restructure failed: missing block: B:53:0x00a0, code lost:
-        
-            r1 = new java.lang.StringBuilder("brt scaled up: ");
-            r1.append(r19.mIsBrightnessScaledUp);
-            r1.append(", SDR Dimming: ");
-            com.android.server.ServiceKeeper$$ExternalSyntheticOutline0.m(r19.this$0.mSDRDimming, r22, ", HdrLayerSize: ", "x", r1);
-            com.android.server.ServiceKeeper$$ExternalSyntheticOutline0.m(r23, r0, "(", "), DisplaySize: ", r1);
-            r1.append(r19.this$0.mWidth);
-            r1.append("x");
-            com.android.server.ServiceKeeper$$ExternalSyntheticOutline0.m(r19.this$0.mHeight, r7, "(", "), deviceRatio: ", r1);
-            r1.append(r5);
-            r1.append(" maxAvailSize: ");
-            r1.append(r2);
-            r1.append("x");
-            com.android.server.ServiceKeeper$$ExternalSyntheticOutline0.m(r18, r3, "(", "), availRatio: ", r1);
-            r1.append(r4);
-            r1.append("(");
-            r1.append(r19.this$0.mThresRatio);
-            r1.append(")");
-            r7 = "HighBrightnessModeController";
-            android.util.Slog.d(r7, r1.toString());
-         */
+
+           r1 = new java.lang.StringBuilder("brt scaled up: ");
+           r1.append(r19.mIsBrightnessScaledUp);
+           r1.append(", SDR Dimming: ");
+           com.android.server.ServiceKeeper$$ExternalSyntheticOutline0.m(r19.this$0.mSDRDimming, r22, ", HdrLayerSize: ", "x", r1);
+           com.android.server.ServiceKeeper$$ExternalSyntheticOutline0.m(r23, r0, "(", "), DisplaySize: ", r1);
+           r1.append(r19.this$0.mWidth);
+           r1.append("x");
+           com.android.server.ServiceKeeper$$ExternalSyntheticOutline0.m(r19.this$0.mHeight, r7, "(", "), deviceRatio: ", r1);
+           r1.append(r5);
+           r1.append(" maxAvailSize: ");
+           r1.append(r2);
+           r1.append("x");
+           com.android.server.ServiceKeeper$$ExternalSyntheticOutline0.m(r18, r3, "(", "), availRatio: ", r1);
+           r1.append(r4);
+           r1.append("(");
+           r1.append(r19.this$0.mThresRatio);
+           r1.append(")");
+           r7 = "HighBrightnessModeController";
+           android.util.Slog.d(r7, r1.toString());
+        */
         /* JADX WARN: Code restructure failed: missing block: B:54:0x0087, code lost:
-        
-            r1 = false;
-         */
+
+           r1 = false;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:56:0x008f, code lost:
-        
-            if (r5 >= r10.mThresRatio) goto L22;
-         */
+
+           if (r5 >= r10.mThresRatio) goto L22;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void onHdrInfoChanged(android.os.IBinder r20, final int r21, final int r22, final int r23, int r24, final float r25) {
+        public final void onHdrInfoChanged(
+                android.os.IBinder r20,
+                final int r21,
+                final int r22,
+                final int r23,
+                int r24,
+                final float r25) {
             /*
                 Method dump skipped, instructions count: 558
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.HighBrightnessModeController.HdrListener.onHdrInfoChanged(android.os.IBinder, int, int, int, int, float):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.display.HighBrightnessModeController.HdrListener.onHdrInfoChanged(android.os.IBinder,"
+                        + " int, int, int, int, float):void");
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class Injector {
-    }
+    public final class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
@@ -175,14 +188,23 @@ public final class HighBrightnessModeController {
         }
 
         public final void updateLowPower() {
-            boolean z = Settings.Global.getInt(HighBrightnessModeController.this.mContext.getContentResolver(), "low_power", 0) != 0;
+            boolean z =
+                    Settings.Global.getInt(
+                                    HighBrightnessModeController.this.mContext.getContentResolver(),
+                                    "low_power",
+                                    0)
+                            != 0;
             if (z == HighBrightnessModeController.this.mIsBlockedByLowPowerMode) {
                 return;
             }
             if (HighBrightnessModeController.DEBUG) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m("Settings.Global.LOW_POWER_MODE enabled: ", "HighBrightnessModeController", z);
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        "Settings.Global.LOW_POWER_MODE enabled: ",
+                        "HighBrightnessModeController",
+                        z);
             }
-            HighBrightnessModeController highBrightnessModeController = HighBrightnessModeController.this;
+            HighBrightnessModeController highBrightnessModeController =
+                    HighBrightnessModeController.this;
             highBrightnessModeController.mIsBlockedByLowPowerMode = z;
             highBrightnessModeController.updateHbmMode();
         }
@@ -199,12 +221,33 @@ public final class HighBrightnessModeController {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public HighBrightnessModeController(com.android.server.display.HighBrightnessModeController.Injector r12, android.os.Handler r13, int r14, int r15, android.os.IBinder r16, java.lang.String r17, float r18, float r19, com.android.server.display.DisplayDeviceConfig.HighBrightnessModeData r20, com.android.server.display.HighBrightnessModeController.HdrBrightnessDeviceConfig r21, java.lang.Runnable r22, com.android.server.display.HighBrightnessModeMetadata r23, android.content.Context r24) {
+    public HighBrightnessModeController(
+            com.android.server.display.HighBrightnessModeController.Injector r12,
+            android.os.Handler r13,
+            int r14,
+            int r15,
+            android.os.IBinder r16,
+            java.lang.String r17,
+            float r18,
+            float r19,
+            com.android.server.display.DisplayDeviceConfig.HighBrightnessModeData r20,
+            com.android.server.display.HighBrightnessModeController.HdrBrightnessDeviceConfig r21,
+            java.lang.Runnable r22,
+            com.android.server.display.HighBrightnessModeMetadata r23,
+            android.content.Context r24) {
         /*
             Method dump skipped, instructions count: 338
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.HighBrightnessModeController.<init>(com.android.server.display.HighBrightnessModeController$Injector, android.os.Handler, int, int, android.os.IBinder, java.lang.String, float, float, com.android.server.display.DisplayDeviceConfig$HighBrightnessModeData, com.android.server.display.HighBrightnessModeController$HdrBrightnessDeviceConfig, java.lang.Runnable, com.android.server.display.HighBrightnessModeMetadata, android.content.Context):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.HighBrightnessModeController.<init>(com.android.server.display.HighBrightnessModeController$Injector,"
+                    + " android.os.Handler, int, int, android.os.IBinder, java.lang.String, float,"
+                    + " float,"
+                    + " com.android.server.display.DisplayDeviceConfig$HighBrightnessModeData,"
+                    + " com.android.server.display.HighBrightnessModeController$HdrBrightnessDeviceConfig,"
+                    + " java.lang.Runnable, com.android.server.display.HighBrightnessModeMetadata,"
+                    + " android.content.Context):void");
     }
 
     public final long calculateRemainingTime(long j) {
@@ -215,7 +258,9 @@ public final class HighBrightnessModeController {
         long j3 = this.mHighBrightnessModeMetadata.mRunningStartTimeMillis;
         if (j3 > 0) {
             if (j3 > j) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("Start time set to the future. curr: ", j, ", start: ");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                "Start time set to the future. curr: ", j, ", start: ");
                 m.append(j3);
                 Slog.e("HighBrightnessModeController", m.toString());
                 this.mHighBrightnessModeMetadata.mRunningStartTimeMillis = j;
@@ -227,7 +272,9 @@ public final class HighBrightnessModeController {
         }
         boolean z = DEBUG;
         if (z) {
-            Slog.d("HighBrightnessModeController", "Time already used after current session: " + j2);
+            Slog.d(
+                    "HighBrightnessModeController",
+                    "Time already used after current session: " + j2);
         }
         long j4 = j - this.mHbmData.timeWindowMillis;
         Iterator it = this.mHighBrightnessModeMetadata.mEvents.iterator();
@@ -250,13 +297,17 @@ public final class HighBrightnessModeController {
     }
 
     public final float getCurrentBrightnessMax() {
-        return (!deviceSupportsHbm() || isHbmCurrentlyAllowed()) ? this.mBrightnessMax : this.mHbmData.transitionPoint;
+        return (!deviceSupportsHbm() || isHbmCurrentlyAllowed())
+                ? this.mBrightnessMax
+                : this.mHbmData.transitionPoint;
     }
 
     public final float getHdrBrightnessValue() {
         HdrBrightnessDeviceConfig hdrBrightnessDeviceConfig = this.mHdrBrightnessCfg;
         if (hdrBrightnessDeviceConfig != null) {
-            float hdrBrightnessFromSdr = hdrBrightnessDeviceConfig.getHdrBrightnessFromSdr(this.mBrightness, this.mMaxDesiredHdrSdrRatio);
+            float hdrBrightnessFromSdr =
+                    hdrBrightnessDeviceConfig.getHdrBrightnessFromSdr(
+                            this.mBrightness, this.mMaxDesiredHdrSdrRatio);
             if (hdrBrightnessFromSdr != -1.0f) {
                 return hdrBrightnessFromSdr;
             }
@@ -273,7 +324,10 @@ public final class HighBrightnessModeController {
     }
 
     public final boolean isHbmCurrentlyAllowed() {
-        return this.mIsAutoBrightnessEnabled && this.mIsTimeAvailable && this.mIsInAllowedAmbientRange && !this.mIsBlockedByLowPowerMode;
+        return this.mIsAutoBrightnessEnabled
+                && this.mIsTimeAvailable
+                && this.mIsInAllowedAmbientRange
+                && !this.mIsBlockedByLowPowerMode;
     }
 
     public boolean isThermalThrottlingActive() {
@@ -299,10 +353,14 @@ public final class HighBrightnessModeController {
                 if (z) {
                     this.mHighBrightnessModeMetadata.mRunningStartTimeMillis = uptimeMillis;
                 } else {
-                    this.mHighBrightnessModeMetadata.mEvents.addFirst(new HbmEvent(j, uptimeMillis));
+                    this.mHighBrightnessModeMetadata.mEvents.addFirst(
+                            new HbmEvent(j, uptimeMillis));
                     this.mHighBrightnessModeMetadata.mRunningStartTimeMillis = -1L;
                     if (DEBUG) {
-                        Slog.d("HighBrightnessModeController", "New HBM event: " + this.mHighBrightnessModeMetadata.mEvents.peekFirst());
+                        Slog.d(
+                                "HighBrightnessModeController",
+                                "New HBM event: "
+                                        + this.mHighBrightnessModeMetadata.mEvents.peekFirst());
                     }
                 }
             }
@@ -318,7 +376,10 @@ public final class HighBrightnessModeController {
             long calculateRemainingTime = calculateRemainingTime(uptimeMillis);
             DisplayDeviceConfig.HighBrightnessModeData highBrightnessModeData = this.mHbmData;
             boolean z = calculateRemainingTime >= highBrightnessModeData.timeMinMillis;
-            boolean z2 = !z && calculateRemainingTime > 0 && this.mBrightness > highBrightnessModeData.transitionPoint;
+            boolean z2 =
+                    !z
+                            && calculateRemainingTime > 0
+                            && this.mBrightness > highBrightnessModeData.transitionPoint;
             boolean z3 = z || z2;
             this.mIsTimeAvailable = z3;
             ArrayDeque arrayDeque = this.mHighBrightnessModeMetadata.mEvents;
@@ -328,10 +389,21 @@ public final class HighBrightnessModeController {
                 j = -1;
             } else {
                 long j2 = uptimeMillis - this.mHbmData.timeWindowMillis;
-                j = (((Math.max(j2, ((HbmEvent) arrayDeque.peekLast()).mStartTimeMillis) + this.mHbmData.timeMinMillis) - j2) + uptimeMillis) - calculateRemainingTime;
+                j =
+                        (((Math.max(j2, ((HbmEvent) arrayDeque.peekLast()).mStartTimeMillis)
+                                                        + this.mHbmData.timeMinMillis)
+                                                - j2)
+                                        + uptimeMillis)
+                                - calculateRemainingTime;
             }
             if (DEBUG) {
-                StringBuilder m = FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("HBM recalculated.  IsAllowedWithoutRestrictions: ", z, ", isOnlyAllowedToStayOn: ", z2, ", remainingAllowedTime: ");
+                StringBuilder m =
+                        FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                                "HBM recalculated.  IsAllowedWithoutRestrictions: ",
+                                z,
+                                ", isOnlyAllowedToStayOn: ",
+                                z2,
+                                ", remainingAllowedTime: ");
                 m.append(calculateRemainingTime);
                 m.append(", isLuxHigh: ");
                 m.append(this.mIsInAllowedAmbientRange);
@@ -365,7 +437,9 @@ public final class HighBrightnessModeController {
             }
             if (j != -1) {
                 Handler handler = this.mHandler;
-                HighBrightnessModeController$$ExternalSyntheticLambda0 highBrightnessModeController$$ExternalSyntheticLambda0 = this.mRecalcRunnable;
+                HighBrightnessModeController$$ExternalSyntheticLambda0
+                        highBrightnessModeController$$ExternalSyntheticLambda0 =
+                                this.mRecalcRunnable;
                 handler.removeCallbacks(highBrightnessModeController$$ExternalSyntheticLambda0);
                 handler.postAtTime(highBrightnessModeController$$ExternalSyntheticLambda0, j + 1);
             }
@@ -373,7 +447,13 @@ public final class HighBrightnessModeController {
         updateHbmMode();
     }
 
-    public final void resetHbmData(int i, int i2, IBinder iBinder, String str, DisplayDeviceConfig.HighBrightnessModeData highBrightnessModeData, HdrBrightnessDeviceConfig hdrBrightnessDeviceConfig) {
+    public final void resetHbmData(
+            int i,
+            int i2,
+            IBinder iBinder,
+            String str,
+            DisplayDeviceConfig.HighBrightnessModeData highBrightnessModeData,
+            HdrBrightnessDeviceConfig hdrBrightnessDeviceConfig) {
         this.mWidth = i;
         this.mHeight = i2;
         this.mHbmData = highBrightnessModeData;
@@ -385,10 +465,14 @@ public final class HighBrightnessModeController {
             this.mIsHdrLayerPresent = false;
         }
         SettingsObserver settingsObserver = this.mSettingsObserver;
-        HighBrightnessModeController highBrightnessModeController = HighBrightnessModeController.this;
+        HighBrightnessModeController highBrightnessModeController =
+                HighBrightnessModeController.this;
         highBrightnessModeController.mIsBlockedByLowPowerMode = false;
         if (settingsObserver.mStarted) {
-            highBrightnessModeController.mContext.getContentResolver().unregisterContentObserver(settingsObserver);
+            highBrightnessModeController
+                    .mContext
+                    .getContentResolver()
+                    .unregisterContentObserver(settingsObserver);
             settingsObserver.mStarted = false;
         }
         if (deviceSupportsHbm()) {
@@ -404,7 +488,9 @@ public final class HighBrightnessModeController {
                 }
             }
             DisplayDeviceConfig.HighBrightnessModeData highBrightnessModeData2 = this.mHbmData;
-            if (highBrightnessModeData2.timeWindowMillis == 0 && highBrightnessModeData2.timeMaxMillis == 0 && highBrightnessModeData2.timeMinMillis == 0) {
+            if (highBrightnessModeData2.timeWindowMillis == 0
+                    && highBrightnessModeData2.timeMaxMillis == 0
+                    && highBrightnessModeData2.timeMinMillis == 0) {
                 this.mUseTimeAllowance = false;
                 this.mIsTimeAvailable = true;
             } else {
@@ -418,7 +504,11 @@ public final class HighBrightnessModeController {
             if (settingsObserver.mStarted) {
                 return;
             }
-            HighBrightnessModeController.this.mContext.getContentResolver().registerContentObserver(settingsObserver.mLowPowerModeSetting, false, settingsObserver, -1);
+            HighBrightnessModeController.this
+                    .mContext
+                    .getContentResolver()
+                    .registerContentObserver(
+                            settingsObserver.mLowPowerModeSetting, false, settingsObserver, -1);
             settingsObserver.mStarted = true;
             settingsObserver.updateLowPower();
         }
@@ -553,6 +643,8 @@ public final class HighBrightnessModeController {
         La6:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.HighBrightnessModeController.updateHbmMode():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.HighBrightnessModeController.updateHbmMode():void");
     }
 }

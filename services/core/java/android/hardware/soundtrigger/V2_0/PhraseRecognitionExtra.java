@@ -4,6 +4,7 @@ import android.hardware.audio.common.V2_0.AudioConfig$$ExternalSyntheticOutline0
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -23,11 +24,18 @@ public final class PhraseRecognitionExtra {
             return false;
         }
         PhraseRecognitionExtra phraseRecognitionExtra = (PhraseRecognitionExtra) obj;
-        return this.id == phraseRecognitionExtra.id && this.recognitionModes == phraseRecognitionExtra.recognitionModes && this.confidenceLevel == phraseRecognitionExtra.confidenceLevel && HidlSupport.deepEquals(this.levels, phraseRecognitionExtra.levels);
+        return this.id == phraseRecognitionExtra.id
+                && this.recognitionModes == phraseRecognitionExtra.recognitionModes
+                && this.confidenceLevel == phraseRecognitionExtra.confidenceLevel
+                && HidlSupport.deepEquals(this.levels, phraseRecognitionExtra.levels);
     }
 
     public final int hashCode() {
-        return Objects.hash(AudioConfig$$ExternalSyntheticOutline0.m(this.id), AudioConfig$$ExternalSyntheticOutline0.m(this.recognitionModes), AudioConfig$$ExternalSyntheticOutline0.m(this.confidenceLevel), Integer.valueOf(HidlSupport.deepHashCode(this.levels)));
+        return Objects.hash(
+                AudioConfig$$ExternalSyntheticOutline0.m(this.id),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.recognitionModes),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.confidenceLevel),
+                Integer.valueOf(HidlSupport.deepHashCode(this.levels)));
     }
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
@@ -35,7 +43,8 @@ public final class PhraseRecognitionExtra {
         this.recognitionModes = hwBlob.getInt32(j + 4);
         this.confidenceLevel = hwBlob.getInt32(j + 8);
         int int32 = hwBlob.getInt32(j + 24);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 8, hwBlob.handle(), j + 16, true);
+        HwBlob readEmbeddedBuffer =
+                hwParcel.readEmbeddedBuffer(int32 * 8, hwBlob.handle(), j + 16, true);
         this.levels.clear();
         for (int i = 0; i < int32; i++) {
             ConfidenceLevel confidenceLevel = new ConfidenceLevel();
@@ -47,6 +56,14 @@ public final class PhraseRecognitionExtra {
     }
 
     public final String toString() {
-        return "{.id = " + this.id + ", .recognitionModes = " + this.recognitionModes + ", .confidenceLevel = " + this.confidenceLevel + ", .levels = " + this.levels + "}";
+        return "{.id = "
+                + this.id
+                + ", .recognitionModes = "
+                + this.recognitionModes
+                + ", .confidenceLevel = "
+                + this.confidenceLevel
+                + ", .levels = "
+                + this.levels
+                + "}";
     }
 }

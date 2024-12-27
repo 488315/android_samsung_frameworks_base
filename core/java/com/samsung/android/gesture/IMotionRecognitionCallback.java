@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IMotionRecognitionCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.gesture.IMotionRecognitionCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.gesture.IMotionRecognitionCallback";
 
     String getListenerInfo() throws RemoteException;
 
@@ -18,8 +19,7 @@ public interface IMotionRecognitionCallback extends IInterface {
 
     public static class Default implements IMotionRecognitionCallback {
         @Override // com.samsung.android.gesture.IMotionRecognitionCallback
-        public void motionCallback(SemMotionRecognitionEvent motionEvent) throws RemoteException {
-        }
+        public void motionCallback(SemMotionRecognitionEvent motionEvent) throws RemoteException {}
 
         @Override // com.samsung.android.gesture.IMotionRecognitionCallback
         public String getListenerInfo() throws RemoteException {
@@ -37,7 +37,7 @@ public interface IMotionRecognitionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMotionRecognitionCallback {
+    public abstract static class Stub extends Binder implements IMotionRecognitionCallback {
         static final int TRANSACTION_getListenerInfo = 2;
         static final int TRANSACTION_getListenerPackageName = 3;
         static final int TRANSACTION_motionCallback = 1;
@@ -81,7 +81,8 @@ public interface IMotionRecognitionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMotionRecognitionCallback.DESCRIPTOR);
             }
@@ -91,7 +92,9 @@ public interface IMotionRecognitionCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SemMotionRecognitionEvent _arg0 = (SemMotionRecognitionEvent) data.readTypedObject(SemMotionRecognitionEvent.CREATOR);
+                    SemMotionRecognitionEvent _arg0 =
+                            (SemMotionRecognitionEvent)
+                                    data.readTypedObject(SemMotionRecognitionEvent.CREATOR);
                     data.enforceNoDataAvail();
                     motionCallback(_arg0);
                     reply.writeNoException();
@@ -128,7 +131,8 @@ public interface IMotionRecognitionCallback extends IInterface {
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionCallback
-            public void motionCallback(SemMotionRecognitionEvent motionEvent) throws RemoteException {
+            public void motionCallback(SemMotionRecognitionEvent motionEvent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

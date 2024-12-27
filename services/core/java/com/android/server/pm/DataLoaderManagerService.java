@@ -17,9 +17,10 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.KnoxCaptureInputFilter$$ExternalSyntheticOutline0;
 import com.android.server.SystemService;
-import com.android.server.pm.DataLoaderManagerService;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -32,56 +33,98 @@ public final class DataLoaderManagerService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DataLoaderManagerBinderService extends IDataLoaderManager.Stub {
-        public DataLoaderManagerBinderService() {
-        }
+        public DataLoaderManagerBinderService() {}
 
-        public final boolean bindToDataLoader(final int i, DataLoaderParamsParcel dataLoaderParamsParcel, long j, IDataLoaderStatusListener iDataLoaderStatusListener) {
+        public final boolean bindToDataLoader(
+                final int i,
+                DataLoaderParamsParcel dataLoaderParamsParcel,
+                long j,
+                IDataLoaderStatusListener iDataLoaderStatusListener) {
             synchronized (DataLoaderManagerService.this.mServiceConnections) {
                 try {
                     if (DataLoaderManagerService.this.mServiceConnections.get(i) != null) {
                         return true;
                     }
-                    ComponentName componentName = new ComponentName(dataLoaderParamsParcel.packageName, dataLoaderParamsParcel.className);
-                    PackageManager packageManager = DataLoaderManagerService.this.mContext.getPackageManager();
+                    ComponentName componentName =
+                            new ComponentName(
+                                    dataLoaderParamsParcel.packageName,
+                                    dataLoaderParamsParcel.className);
+                    PackageManager packageManager =
+                            DataLoaderManagerService.this.mContext.getPackageManager();
                     ComponentName componentName2 = null;
                     if (packageManager == null) {
                         Slog.e("DataLoaderManager", "PackageManager is not available.");
                     } else {
                         Intent intent = new Intent("android.intent.action.LOAD_DATA");
                         intent.setComponent(componentName);
-                        List queryIntentServicesAsUser = packageManager.queryIntentServicesAsUser(intent, 0, UserHandle.getCallingUserId());
-                        if (queryIntentServicesAsUser == null || queryIntentServicesAsUser.isEmpty()) {
-                            Slog.e("DataLoaderManager", "Failed to find data loader service provider in " + componentName);
+                        List queryIntentServicesAsUser =
+                                packageManager.queryIntentServicesAsUser(
+                                        intent, 0, UserHandle.getCallingUserId());
+                        if (queryIntentServicesAsUser == null
+                                || queryIntentServicesAsUser.isEmpty()) {
+                            Slog.e(
+                                    "DataLoaderManager",
+                                    "Failed to find data loader service provider in "
+                                            + componentName);
                         } else if (queryIntentServicesAsUser.size() > 0) {
-                            ServiceInfo serviceInfo = ((ResolveInfo) queryIntentServicesAsUser.get(0)).serviceInfo;
-                            componentName2 = new ComponentName(serviceInfo.packageName, serviceInfo.name);
+                            ServiceInfo serviceInfo =
+                                    ((ResolveInfo) queryIntentServicesAsUser.get(0)).serviceInfo;
+                            componentName2 =
+                                    new ComponentName(serviceInfo.packageName, serviceInfo.name);
                         } else {
-                            Slog.e("DataLoaderManager", "Didn't find any matching data loader service provider.");
+                            Slog.e(
+                                    "DataLoaderManager",
+                                    "Didn't find any matching data loader service provider.");
                         }
                     }
                     final ComponentName componentName3 = componentName2;
                     if (componentName3 != null) {
-                        final DataLoaderServiceConnection dataLoaderServiceConnection = DataLoaderManagerService.this.new DataLoaderServiceConnection(i, iDataLoaderStatusListener);
+                        final DataLoaderServiceConnection dataLoaderServiceConnection =
+                                DataLoaderManagerService.this
+                                .new DataLoaderServiceConnection(i, iDataLoaderStatusListener);
                         final Intent intent2 = new Intent();
                         intent2.setComponent(componentName3);
-                        return DataLoaderManagerService.this.mHandler.postDelayed(new Runnable() { // from class: com.android.server.pm.DataLoaderManagerService$DataLoaderManagerBinderService$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                DataLoaderManagerService.DataLoaderManagerBinderService dataLoaderManagerBinderService = DataLoaderManagerService.DataLoaderManagerBinderService.this;
-                                Intent intent3 = intent2;
-                                DataLoaderManagerService.DataLoaderServiceConnection dataLoaderServiceConnection2 = dataLoaderServiceConnection;
-                                ComponentName componentName4 = componentName3;
-                                int i2 = i;
-                                DataLoaderManagerService dataLoaderManagerService = DataLoaderManagerService.this;
-                                if (dataLoaderManagerService.mContext.bindServiceAsUser(intent3, dataLoaderServiceConnection2, 1, dataLoaderManagerService.mHandler, UserHandle.of(UserHandle.getCallingUserId()))) {
-                                    return;
-                                }
-                                Slog.e("DataLoaderManager", "Failed to bind to: " + componentName4 + " for ID=" + i2);
-                                DataLoaderManagerService.this.mContext.unbindService(dataLoaderServiceConnection2);
-                            }
-                        }, j);
+                        return DataLoaderManagerService.this.mHandler.postDelayed(
+                                new Runnable() { // from class:
+                                                 // com.android.server.pm.DataLoaderManagerService$DataLoaderManagerBinderService$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        DataLoaderManagerService.DataLoaderManagerBinderService
+                                                dataLoaderManagerBinderService =
+                                                        DataLoaderManagerService
+                                                                .DataLoaderManagerBinderService
+                                                                .this;
+                                        Intent intent3 = intent2;
+                                        DataLoaderManagerService.DataLoaderServiceConnection
+                                                dataLoaderServiceConnection2 =
+                                                        dataLoaderServiceConnection;
+                                        ComponentName componentName4 = componentName3;
+                                        int i2 = i;
+                                        DataLoaderManagerService dataLoaderManagerService =
+                                                DataLoaderManagerService.this;
+                                        if (dataLoaderManagerService.mContext.bindServiceAsUser(
+                                                intent3,
+                                                dataLoaderServiceConnection2,
+                                                1,
+                                                dataLoaderManagerService.mHandler,
+                                                UserHandle.of(UserHandle.getCallingUserId()))) {
+                                            return;
+                                        }
+                                        Slog.e(
+                                                "DataLoaderManager",
+                                                "Failed to bind to: "
+                                                        + componentName4
+                                                        + " for ID="
+                                                        + i2);
+                                        DataLoaderManagerService.this.mContext.unbindService(
+                                                dataLoaderServiceConnection2);
+                                    }
+                                },
+                                j);
                     }
-                    Slog.e("DataLoaderManager", "Invalid component: " + componentName + " for ID=" + i);
+                    Slog.e(
+                            "DataLoaderManager",
+                            "Invalid component: " + componentName + " for ID=" + i);
                     return false;
                 } catch (Throwable th) {
                     throw th;
@@ -92,7 +135,9 @@ public final class DataLoaderManagerService extends SystemService {
         public final IDataLoader getDataLoader(int i) {
             synchronized (DataLoaderManagerService.this.mServiceConnections) {
                 try {
-                    DataLoaderServiceConnection dataLoaderServiceConnection = (DataLoaderServiceConnection) DataLoaderManagerService.this.mServiceConnections.get(i, null);
+                    DataLoaderServiceConnection dataLoaderServiceConnection =
+                            (DataLoaderServiceConnection)
+                                    DataLoaderManagerService.this.mServiceConnections.get(i, null);
                     if (dataLoaderServiceConnection == null) {
                         return null;
                     }
@@ -106,7 +151,9 @@ public final class DataLoaderManagerService extends SystemService {
         public final void unbindFromDataLoader(int i) {
             synchronized (DataLoaderManagerService.this.mServiceConnections) {
                 try {
-                    DataLoaderServiceConnection dataLoaderServiceConnection = (DataLoaderServiceConnection) DataLoaderManagerService.this.mServiceConnections.get(i, null);
+                    DataLoaderServiceConnection dataLoaderServiceConnection =
+                            (DataLoaderServiceConnection)
+                                    DataLoaderManagerService.this.mServiceConnections.get(i, null);
                     if (dataLoaderServiceConnection == null) {
                         return;
                     }
@@ -127,12 +174,14 @@ public final class DataLoaderManagerService extends SystemService {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class DataLoaderServiceConnection implements ServiceConnection, IBinder.DeathRecipient {
+    public final class DataLoaderServiceConnection
+            implements ServiceConnection, IBinder.DeathRecipient {
         public IDataLoader mDataLoader = null;
         public final int mId;
         public final IDataLoaderStatusListener mListener;
 
-        public DataLoaderServiceConnection(int i, IDataLoaderStatusListener iDataLoaderStatusListener) {
+        public DataLoaderServiceConnection(
+                int i, IDataLoaderStatusListener iDataLoaderStatusListener) {
             this.mId = i;
             this.mListener = iDataLoaderStatusListener;
             if (iDataLoaderStatusListener != null) {
@@ -192,7 +241,9 @@ public final class DataLoaderManagerService extends SystemService {
             }
             synchronized (DataLoaderManagerService.this.mServiceConnections) {
                 try {
-                    DataLoaderServiceConnection dataLoaderServiceConnection = (DataLoaderServiceConnection) DataLoaderManagerService.this.mServiceConnections.get(this.mId);
+                    DataLoaderServiceConnection dataLoaderServiceConnection =
+                            (DataLoaderServiceConnection)
+                                    DataLoaderManagerService.this.mServiceConnections.get(this.mId);
                     if (dataLoaderServiceConnection != this) {
                         if (dataLoaderServiceConnection != null) {
                             DataLoaderManagerService.this.mContext.unbindService(this);
@@ -210,7 +261,10 @@ public final class DataLoaderManagerService extends SystemService {
                             }
                         }
                     } catch (RemoteException e) {
-                        Slog.e("DataLoaderManager", "Failed to link to DataLoader's death: " + this.mId, e);
+                        Slog.e(
+                                "DataLoaderManager",
+                                "Failed to link to DataLoader's death: " + this.mId,
+                                e);
                         onBindingDied(componentName);
                     }
                 } finally {
@@ -221,7 +275,9 @@ public final class DataLoaderManagerService extends SystemService {
         @Override // android.content.ServiceConnection
         public final void onServiceDisconnected(ComponentName componentName) {
             IDataLoaderStatusListener iDataLoaderStatusListener;
-            Slog.i("DataLoaderManager", "DataLoader " + this.mId + " disconnected, but will try to recover");
+            Slog.i(
+                    "DataLoaderManager",
+                    "DataLoader " + this.mId + " disconnected, but will try to recover");
             if (!unbind() || (iDataLoaderStatusListener = this.mListener) == null) {
                 return;
             }
@@ -253,7 +309,10 @@ public final class DataLoaderManagerService extends SystemService {
         super(context);
         this.mServiceConnections = new SparseArray();
         this.mContext = context;
-        this.mHandler = new Handler(KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("DataLoaderManager").getLooper());
+        this.mHandler =
+                new Handler(
+                        KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("DataLoaderManager")
+                                .getLooper());
         this.mBinderService = new DataLoaderManagerBinderService();
     }
 

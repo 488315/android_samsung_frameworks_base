@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.spec;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.security.spec.AlgorithmParameterSpec;
 
 /* loaded from: classes5.dex */

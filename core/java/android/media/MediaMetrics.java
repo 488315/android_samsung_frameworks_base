@@ -2,8 +2,11 @@ package android.media;
 
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+
 import com.android.internal.vibrator.persistence.XmlConstants;
+
 import com.samsung.android.share.SemShareConstants;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
@@ -45,54 +48,87 @@ public class MediaMetrics {
 
     public static class Property {
         public static final Key<String> ADDRESS = MediaMetrics.createKey("address", String.class);
-        public static final Key<String> ATTRIBUTES = MediaMetrics.createKey("attributes", String.class);
-        public static final Key<String> CALLING_PACKAGE = MediaMetrics.createKey("callingPackage", String.class);
-        public static final Key<String> CLIENT_NAME = MediaMetrics.createKey("clientName", String.class);
-        public static final Key<Integer> CLOSED_COUNT = MediaMetrics.createKey("closedCount", Integer.class);
-        public static final Key<Integer> DELAY_MS = MediaMetrics.createKey(XmlConstants.ATTRIBUTE_DELAY_MS, Integer.class);
+        public static final Key<String> ATTRIBUTES =
+                MediaMetrics.createKey("attributes", String.class);
+        public static final Key<String> CALLING_PACKAGE =
+                MediaMetrics.createKey("callingPackage", String.class);
+        public static final Key<String> CLIENT_NAME =
+                MediaMetrics.createKey("clientName", String.class);
+        public static final Key<Integer> CLOSED_COUNT =
+                MediaMetrics.createKey("closedCount", Integer.class);
+        public static final Key<Integer> DELAY_MS =
+                MediaMetrics.createKey(XmlConstants.ATTRIBUTE_DELAY_MS, Integer.class);
         public static final Key<String> DEVICE = MediaMetrics.createKey("device", String.class);
-        public static final Key<String> DEVICE_DISCONNECTED = MediaMetrics.createKey("deviceDisconnected", String.class);
-        public static final Key<Integer> DEVICE_ID = MediaMetrics.createKey(SemShareConstants.INTENT_EXTRA_CHOOSER_SHARE_DEVICE_ID, Integer.class);
-        public static final Key<String> DIRECTION = MediaMetrics.createKey("direction", String.class);
-        public static final Key<Long> DURATION_NS = MediaMetrics.createKey("durationNs", Long.class);
-        public static final Key<String> EARLY_RETURN = MediaMetrics.createKey("earlyReturn", String.class);
+        public static final Key<String> DEVICE_DISCONNECTED =
+                MediaMetrics.createKey("deviceDisconnected", String.class);
+        public static final Key<Integer> DEVICE_ID =
+                MediaMetrics.createKey(
+                        SemShareConstants.INTENT_EXTRA_CHOOSER_SHARE_DEVICE_ID, Integer.class);
+        public static final Key<String> DIRECTION =
+                MediaMetrics.createKey("direction", String.class);
+        public static final Key<Long> DURATION_NS =
+                MediaMetrics.createKey("durationNs", Long.class);
+        public static final Key<String> EARLY_RETURN =
+                MediaMetrics.createKey("earlyReturn", String.class);
         public static final Key<String> ENCODING = MediaMetrics.createKey("encoding", String.class);
         public static final Key<String> EVENT = MediaMetrics.createKey("event#", String.class);
         public static final Key<String> ENABLED = MediaMetrics.createKey("enabled", String.class);
         public static final Key<String> EXTERNAL = MediaMetrics.createKey("external", String.class);
         public static final Key<Integer> FLAGS = MediaMetrics.createKey("flags", Integer.class);
-        public static final Key<String> FOCUS_CHANGE_HINT = MediaMetrics.createKey("focusChangeHint", String.class);
-        public static final Key<String> FORCE_USE_DUE_TO = MediaMetrics.createKey("forceUseDueTo", String.class);
-        public static final Key<String> FORCE_USE_MODE = MediaMetrics.createKey("forceUseMode", String.class);
+        public static final Key<String> FOCUS_CHANGE_HINT =
+                MediaMetrics.createKey("focusChangeHint", String.class);
+        public static final Key<String> FORCE_USE_DUE_TO =
+                MediaMetrics.createKey("forceUseDueTo", String.class);
+        public static final Key<String> FORCE_USE_MODE =
+                MediaMetrics.createKey("forceUseMode", String.class);
         public static final Key<Double> GAIN_DB = MediaMetrics.createKey("gainDb", Double.class);
         public static final Key<String> GROUP = MediaMetrics.createKey("group", String.class);
-        public static final Key<String> HAS_HEAD_TRACKER = MediaMetrics.createKey("hasHeadTracker", String.class);
-        public static final Key<Integer> HARDWARE_TYPE = MediaMetrics.createKey("hardwareType", Integer.class);
-        public static final Key<String> HEAD_TRACKER_ENABLED = MediaMetrics.createKey("headTrackerEnabled", String.class);
+        public static final Key<String> HAS_HEAD_TRACKER =
+                MediaMetrics.createKey("hasHeadTracker", String.class);
+        public static final Key<Integer> HARDWARE_TYPE =
+                MediaMetrics.createKey("hardwareType", Integer.class);
+        public static final Key<String> HEAD_TRACKER_ENABLED =
+                MediaMetrics.createKey("headTrackerEnabled", String.class);
         public static final Key<Integer> INDEX = MediaMetrics.createKey("index", Integer.class);
-        public static final Key<Integer> OLD_INDEX = MediaMetrics.createKey("oldIndex", Integer.class);
-        public static final Key<Integer> INPUT_PORT_COUNT = MediaMetrics.createKey("inputPortCount", Integer.class);
-        public static final Key<String> IS_SHARED = MediaMetrics.createKey("isShared", String.class);
-        public static final Key<String> LOG_SESSION_ID = MediaMetrics.createKey("logSessionId", String.class);
-        public static final Key<Integer> MAX_INDEX = MediaMetrics.createKey("maxIndex", Integer.class);
-        public static final Key<Integer> MIN_INDEX = MediaMetrics.createKey("minIndex", Integer.class);
+        public static final Key<Integer> OLD_INDEX =
+                MediaMetrics.createKey("oldIndex", Integer.class);
+        public static final Key<Integer> INPUT_PORT_COUNT =
+                MediaMetrics.createKey("inputPortCount", Integer.class);
+        public static final Key<String> IS_SHARED =
+                MediaMetrics.createKey("isShared", String.class);
+        public static final Key<String> LOG_SESSION_ID =
+                MediaMetrics.createKey("logSessionId", String.class);
+        public static final Key<Integer> MAX_INDEX =
+                MediaMetrics.createKey("maxIndex", Integer.class);
+        public static final Key<Integer> MIN_INDEX =
+                MediaMetrics.createKey("minIndex", Integer.class);
         public static final Key<String> MODE = MediaMetrics.createKey("mode", String.class);
         public static final Key<String> MUTE = MediaMetrics.createKey("mute", String.class);
         public static final Key<String> NAME = MediaMetrics.createKey("name", String.class);
-        public static final Key<Integer> OBSERVERS = MediaMetrics.createKey("observers", Integer.class);
-        public static final Key<Integer> OPENED_COUNT = MediaMetrics.createKey("openedCount", Integer.class);
-        public static final Key<Integer> OUTPUT_PORT_COUNT = MediaMetrics.createKey("outputPortCount", Integer.class);
+        public static final Key<Integer> OBSERVERS =
+                MediaMetrics.createKey("observers", Integer.class);
+        public static final Key<Integer> OPENED_COUNT =
+                MediaMetrics.createKey("openedCount", Integer.class);
+        public static final Key<Integer> OUTPUT_PORT_COUNT =
+                MediaMetrics.createKey("outputPortCount", Integer.class);
         public static final Key<String> REQUEST = MediaMetrics.createKey("request", String.class);
-        public static final Key<String> REQUESTED_MODE = MediaMetrics.createKey("requestedMode", String.class);
-        public static final Key<String> SCO_AUDIO_MODE = MediaMetrics.createKey("scoAudioMode", String.class);
+        public static final Key<String> REQUESTED_MODE =
+                MediaMetrics.createKey("requestedMode", String.class);
+        public static final Key<String> SCO_AUDIO_MODE =
+                MediaMetrics.createKey("scoAudioMode", String.class);
         public static final Key<Integer> SDK = MediaMetrics.createKey("sdk", Integer.class);
         public static final Key<String> STATE = MediaMetrics.createKey("state", String.class);
         public static final Key<Integer> STATUS = MediaMetrics.createKey("status", Integer.class);
-        public static final Key<String> STREAM_TYPE = MediaMetrics.createKey(TextToSpeech.Engine.KEY_PARAM_STREAM, String.class);
-        public static final Key<String> SUPPORTS_MIDI_UMP = MediaMetrics.createKey("supportsMidiUmp", String.class);
-        public static final Key<Integer> TOTAL_INPUT_BYTES = MediaMetrics.createKey("totalInputBytes", Integer.class);
-        public static final Key<Integer> TOTAL_OUTPUT_BYTES = MediaMetrics.createKey("totalOutputBytes", Integer.class);
-        public static final Key<String> USING_ALSA = MediaMetrics.createKey("usingAlsa", String.class);
+        public static final Key<String> STREAM_TYPE =
+                MediaMetrics.createKey(TextToSpeech.Engine.KEY_PARAM_STREAM, String.class);
+        public static final Key<String> SUPPORTS_MIDI_UMP =
+                MediaMetrics.createKey("supportsMidiUmp", String.class);
+        public static final Key<Integer> TOTAL_INPUT_BYTES =
+                MediaMetrics.createKey("totalInputBytes", Integer.class);
+        public static final Key<Integer> TOTAL_OUTPUT_BYTES =
+                MediaMetrics.createKey("totalOutputBytes", Integer.class);
+        public static final Key<String> USING_ALSA =
+                MediaMetrics.createKey("usingAlsa", String.class);
     }
 
     public static class Value {
@@ -141,7 +177,8 @@ public class MediaMetrics {
                     return false;
                 }
                 Key<?> other = (Key) obj;
-                return this.mName.equals(other.getName()) && this.mType.equals(other.getValueClass());
+                return this.mName.equals(other.getName())
+                        && this.mType.equals(other.getValueClass());
             }
 
             public int hashCode() {
@@ -193,7 +230,17 @@ public class MediaMetrics {
             this.mPropertyStartOffset = this.mHeaderSize + 4;
             this.mKey = key;
             this.mBuffer = ByteBuffer.allocateDirect(Math.max(capacity, this.mHeaderSize + 4));
-            this.mBuffer.order(ByteOrder.nativeOrder()).putInt(0).putInt(this.mHeaderSize).putChar((char) 0).putChar((char) (keyLength + 1)).put(keyBytes).put((byte) 0).putInt(pid).putInt(uid).putLong(timeNs);
+            this.mBuffer
+                    .order(ByteOrder.nativeOrder())
+                    .putInt(0)
+                    .putInt(this.mHeaderSize)
+                    .putChar((char) 0)
+                    .putChar((char) (keyLength + 1))
+                    .put(keyBytes)
+                    .put((byte) 0)
+                    .putInt(pid)
+                    .putInt(uid)
+                    .putLong(timeNs);
             if (this.mHeaderSize != this.mBuffer.position()) {
                 throw new IllegalStateException("Mismatched sizing");
             }
@@ -221,7 +268,11 @@ public class MediaMetrics {
             this.mBuffer.putChar(propSize).put((byte) 1).put(keyBytes).put((byte) 0).putInt(value);
             this.mPropertyCount++;
             if (this.mBuffer.position() != estimatedFinalPosition) {
-                throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + estimatedFinalPosition);
+                throw new IllegalStateException(
+                        "Final position "
+                                + this.mBuffer.position()
+                                + " != estimatedFinalPosition "
+                                + estimatedFinalPosition);
             }
             return this;
         }
@@ -233,7 +284,11 @@ public class MediaMetrics {
             this.mBuffer.putChar(propSize).put((byte) 2).put(keyBytes).put((byte) 0).putLong(value);
             this.mPropertyCount++;
             if (this.mBuffer.position() != estimatedFinalPosition) {
-                throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + estimatedFinalPosition);
+                throw new IllegalStateException(
+                        "Final position "
+                                + this.mBuffer.position()
+                                + " != estimatedFinalPosition "
+                                + estimatedFinalPosition);
             }
             return this;
         }
@@ -242,10 +297,19 @@ public class MediaMetrics {
             byte[] keyBytes = key.getBytes(MediaMetrics.MEDIAMETRICS_CHARSET);
             char propSize = (char) reserveProperty(keyBytes, 8);
             int estimatedFinalPosition = this.mBuffer.position() + propSize;
-            this.mBuffer.putChar(propSize).put((byte) 3).put(keyBytes).put((byte) 0).putDouble(value);
+            this.mBuffer
+                    .putChar(propSize)
+                    .put((byte) 3)
+                    .put(keyBytes)
+                    .put((byte) 0)
+                    .putDouble(value);
             this.mPropertyCount++;
             if (this.mBuffer.position() != estimatedFinalPosition) {
-                throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + estimatedFinalPosition);
+                throw new IllegalStateException(
+                        "Final position "
+                                + this.mBuffer.position()
+                                + " != estimatedFinalPosition "
+                                + estimatedFinalPosition);
             }
             return this;
         }
@@ -255,10 +319,20 @@ public class MediaMetrics {
             byte[] valueBytes = value.getBytes(MediaMetrics.MEDIAMETRICS_CHARSET);
             char propSize = (char) reserveProperty(keyBytes, valueBytes.length + 1);
             int estimatedFinalPosition = this.mBuffer.position() + propSize;
-            this.mBuffer.putChar(propSize).put((byte) 4).put(keyBytes).put((byte) 0).put(valueBytes).put((byte) 0);
+            this.mBuffer
+                    .putChar(propSize)
+                    .put((byte) 4)
+                    .put(keyBytes)
+                    .put((byte) 0)
+                    .put(valueBytes)
+                    .put((byte) 0);
             this.mPropertyCount++;
             if (this.mBuffer.position() != estimatedFinalPosition) {
-                throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + estimatedFinalPosition);
+                throw new IllegalStateException(
+                        "Final position "
+                                + this.mBuffer.position()
+                                + " != estimatedFinalPosition "
+                                + estimatedFinalPosition);
             }
             return this;
         }
@@ -319,11 +393,23 @@ public class MediaMetrics {
             int headerRead = buffer.position();
             if (version == 0) {
                 if (headerRead != headerSize) {
-                    throw new IllegalArgumentException("Item key:" + key + " headerRead:" + headerRead + " != headerSize:" + headerSize);
+                    throw new IllegalArgumentException(
+                            "Item key:"
+                                    + key
+                                    + " headerRead:"
+                                    + headerRead
+                                    + " != headerSize:"
+                                    + headerSize);
                 }
             } else {
                 if (headerRead > headerSize) {
-                    throw new IllegalArgumentException("Item key:" + key + " headerRead:" + headerRead + " > headerSize:" + headerSize);
+                    throw new IllegalArgumentException(
+                            "Item key:"
+                                    + key
+                                    + " headerRead:"
+                                    + headerRead
+                                    + " > headerSize:"
+                                    + headerSize);
                 }
                 if (headerRead < headerSize) {
                     buffer.position(headerSize);
@@ -388,7 +474,11 @@ public class MediaMetrics {
                             buffer.position(initialBufferPosition + propSize);
                             break;
                         } else {
-                            throw new IllegalArgumentException("Property " + propKey + " has unsupported type " + ((int) type));
+                            throw new IllegalArgumentException(
+                                    "Property "
+                                            + propKey
+                                            + " has unsupported type "
+                                            + ((int) type));
                         }
                 }
                 int deltaPosition = buffer.position() - initialBufferPosition;
@@ -399,12 +489,14 @@ public class MediaMetrics {
                     uid2 = uid;
                     timestamp2 = timestamp;
                 } else {
-                    throw new IllegalArgumentException("propSize:" + propSize + " != deltaPosition:" + deltaPosition);
+                    throw new IllegalArgumentException(
+                            "propSize:" + propSize + " != deltaPosition:" + deltaPosition);
                 }
             }
             int finalPosition = buffer.position();
             if (finalPosition != totalSize) {
-                throw new IllegalArgumentException("totalSize:" + totalSize + " != finalPosition:" + finalPosition);
+                throw new IllegalArgumentException(
+                        "totalSize:" + totalSize + " != finalPosition:" + finalPosition);
             }
             return bundle;
         }
@@ -412,19 +504,25 @@ public class MediaMetrics {
         private int reserveProperty(byte[] keyBytes, int payloadSize) {
             int keyLength = keyBytes.length;
             if (keyLength > 65535) {
-                throw new IllegalStateException("property key too long " + new String(keyBytes, MediaMetrics.MEDIAMETRICS_CHARSET));
+                throw new IllegalStateException(
+                        "property key too long "
+                                + new String(keyBytes, MediaMetrics.MEDIAMETRICS_CHARSET));
             }
             if (payloadSize > 65535) {
                 throw new IllegalStateException("payload too large " + payloadSize);
             }
             int size = keyLength + 3 + 1 + payloadSize;
             if (size > 65535) {
-                throw new IllegalStateException("Item property " + new String(keyBytes, MediaMetrics.MEDIAMETRICS_CHARSET) + " is too large to send");
+                throw new IllegalStateException(
+                        "Item property "
+                                + new String(keyBytes, MediaMetrics.MEDIAMETRICS_CHARSET)
+                                + " is too large to send");
             }
             if (this.mBuffer.remaining() < size) {
                 int newCapacity = this.mBuffer.position() + size;
                 if (newCapacity > 1073741823) {
-                    throw new IllegalStateException("Item memory requirements too large: " + newCapacity);
+                    throw new IllegalStateException(
+                            "Item memory requirements too large: " + newCapacity);
                 }
                 ByteBuffer buffer = ByteBuffer.allocateDirect(newCapacity << 1);
                 buffer.order(ByteOrder.nativeOrder());
@@ -451,10 +549,21 @@ public class MediaMetrics {
                 } else {
                     int newPosition = i + 1;
                     if (size != Integer.MAX_VALUE && newPosition - buffer.position() != size) {
-                        throw new IllegalArgumentException("chars consumed at " + i + ": " + (newPosition - buffer.position()) + " != size: " + size);
+                        throw new IllegalArgumentException(
+                                "chars consumed at "
+                                        + i
+                                        + ": "
+                                        + (newPosition - buffer.position())
+                                        + " != size: "
+                                        + size);
                     }
                     if (buffer.hasArray()) {
-                        String found = new String(buffer.array(), buffer.position() + buffer.arrayOffset(), i - buffer.position(), MediaMetrics.MEDIAMETRICS_CHARSET);
+                        String found =
+                                new String(
+                                        buffer.array(),
+                                        buffer.position() + buffer.arrayOffset(),
+                                        i - buffer.position(),
+                                        MediaMetrics.MEDIAMETRICS_CHARSET);
                         buffer.position(newPosition);
                         return found;
                     }
@@ -465,11 +574,17 @@ public class MediaMetrics {
                     return found2;
                 }
             }
-            throw new IllegalArgumentException("No zero termination found in string position: " + buffer.position() + " end: " + i);
+            throw new IllegalArgumentException(
+                    "No zero termination found in string position: "
+                            + buffer.position()
+                            + " end: "
+                            + i);
         }
 
         private void updateHeader() {
-            this.mBuffer.putInt(0, this.mBuffer.position()).putInt(this.mPropertyCountOffset, (char) this.mPropertyCount);
+            this.mBuffer
+                    .putInt(0, this.mBuffer.position())
+                    .putInt(this.mPropertyCountOffset, (char) this.mPropertyCount);
         }
     }
 }

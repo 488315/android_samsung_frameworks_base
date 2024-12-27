@@ -6,10 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.util.Slog;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
 import com.samsung.android.server.dynamicfeature.DynamicFeatureService;
-import java.util.List;
+
 import org.json.JSONObject;
+
+import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -19,17 +23,24 @@ public final class Tracker extends BroadcastReceiver {
     @Override // android.content.BroadcastReceiver
     public final void onReceive(Context context, Intent intent) {
         String stringExtra;
-        if (!intent.getAction().equals("android.intent.action.DROPBOX_ENTRY_ADDED") || (stringExtra = intent.getStringExtra("tag")) == null) {
+        if (!intent.getAction().equals("android.intent.action.DROPBOX_ENTRY_ADDED")
+                || (stringExtra = intent.getStringExtra("tag")) == null) {
             return;
         }
         if (stringExtra.endsWith("crash") || stringExtra.endsWith("anr")) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m("DropBoxManager report this: \"", stringExtra, "\" event", "dynamicfeature_Tracker");
-            ActivityManager activityManager = (ActivityManager) context.getSystemService("activity");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    "DropBoxManager report this: \"",
+                    stringExtra,
+                    "\" event",
+                    "dynamicfeature_Tracker");
+            ActivityManager activityManager =
+                    (ActivityManager) context.getSystemService("activity");
             if (activityManager == null) {
                 Slog.d("dynamicfeature_Tracker", "AMS is null");
                 return;
             }
-            List<ActivityManager.ProcessErrorStateInfo> processesInErrorState = activityManager.getProcessesInErrorState();
+            List<ActivityManager.ProcessErrorStateInfo> processesInErrorState =
+                    activityManager.getProcessesInErrorState();
             if (processesInErrorState == null) {
                 Slog.d("dynamicfeature_Tracker", "ProcessErrorStateInfo list is null");
                 return;
@@ -39,14 +50,18 @@ public final class Tracker extends BroadcastReceiver {
             String str2 = "none";
             String str3 = str2;
             String str4 = str3;
-            for (ActivityManager.ProcessErrorStateInfo processErrorStateInfo : processesInErrorState) {
+            for (ActivityManager.ProcessErrorStateInfo processErrorStateInfo :
+                    processesInErrorState) {
                 String str5 = processErrorStateInfo.processName;
                 if (str5 != null) {
                     str = str5;
                 }
                 if (packageManager != null) {
                     try {
-                        str2 = packageManager.getPackageInfo(str.contains(":") ? str.split(":")[0] : str, 0).versionName;
+                        str2 =
+                                packageManager.getPackageInfo(
+                                                str.contains(":") ? str.split(":")[0] : str, 0)
+                                        .versionName;
                     } catch (Exception unused) {
                         Slog.d("dynamicfeature_Tracker", "app version is invalid");
                     }

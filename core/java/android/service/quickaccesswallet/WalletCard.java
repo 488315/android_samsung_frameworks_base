@@ -6,7 +6,9 @@ import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -17,19 +19,21 @@ public final class WalletCard implements Parcelable {
     public static final int CARD_TYPE_NON_PAYMENT = 2;
     public static final int CARD_TYPE_PAYMENT = 1;
     public static final int CARD_TYPE_UNKNOWN = 0;
-    public static final Parcelable.Creator<WalletCard> CREATOR = new Parcelable.Creator<WalletCard>() { // from class: android.service.quickaccesswallet.WalletCard.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WalletCard createFromParcel(Parcel source) {
-            return WalletCard.readFromParcel(source);
-        }
+    public static final Parcelable.Creator<WalletCard> CREATOR =
+            new Parcelable.Creator<
+                    WalletCard>() { // from class: android.service.quickaccesswallet.WalletCard.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WalletCard createFromParcel(Parcel source) {
+                    return WalletCard.readFromParcel(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WalletCard[] newArray(int size) {
-            return new WalletCard[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WalletCard[] newArray(int size) {
+                    return new WalletCard[size];
+                }
+            };
     private final Icon mCardIcon;
     private final String mCardId;
     private final Icon mCardImage;
@@ -41,8 +45,7 @@ public final class WalletCard implements Parcelable {
     private final PendingIntent mPendingIntent;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CardType {
-    }
+    public @interface CardType {}
 
     private WalletCard(Builder builder) {
         this.mCardId = builder.mCardId;
@@ -92,8 +95,12 @@ public final class WalletCard implements Parcelable {
         PendingIntent pendingIntent = PendingIntent.readPendingIntentOrNullFromParcel(source);
         Icon cardIcon = source.readByte() == 0 ? null : Icon.CREATOR.createFromParcel(source);
         CharSequence cardLabel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
-        Icon nonPaymentCardSecondaryImage = source.readByte() != 0 ? Icon.CREATOR.createFromParcel(source) : null;
-        Builder builder = new Builder(cardId, cardType, cardImage, contentDesc, pendingIntent).setCardIcon(cardIcon).setCardLabel(cardLabel);
+        Icon nonPaymentCardSecondaryImage =
+                source.readByte() != 0 ? Icon.CREATOR.createFromParcel(source) : null;
+        Builder builder =
+                new Builder(cardId, cardType, cardImage, contentDesc, pendingIntent)
+                        .setCardIcon(cardIcon)
+                        .setCardLabel(cardLabel);
         if (cardType == 2) {
             builder.setNonPaymentCardSecondaryImage(nonPaymentCardSecondaryImage);
         }
@@ -154,7 +161,12 @@ public final class WalletCard implements Parcelable {
         private Icon mNonPaymentCardSecondaryImage;
         private PendingIntent mPendingIntent;
 
-        public Builder(String cardId, int cardType, Icon cardImage, CharSequence contentDescription, PendingIntent pendingIntent) {
+        public Builder(
+                String cardId,
+                int cardType,
+                Icon cardImage,
+                CharSequence contentDescription,
+                PendingIntent pendingIntent) {
             this.mCardLocations = new ArrayList();
             this.mCardId = cardId;
             this.mCardType = cardType;
@@ -163,7 +175,11 @@ public final class WalletCard implements Parcelable {
             this.mPendingIntent = pendingIntent;
         }
 
-        public Builder(String cardId, Icon cardImage, CharSequence contentDescription, PendingIntent pendingIntent) {
+        public Builder(
+                String cardId,
+                Icon cardImage,
+                CharSequence contentDescription,
+                PendingIntent pendingIntent) {
             this(cardId, 0, cardImage, contentDescription, pendingIntent);
         }
 
@@ -178,7 +194,8 @@ public final class WalletCard implements Parcelable {
         }
 
         public Builder setNonPaymentCardSecondaryImage(Icon nonPaymentCardSecondaryImage) {
-            Preconditions.checkState(this.mCardType == 2, "This field can only be set on non-payment cards");
+            Preconditions.checkState(
+                    this.mCardType == 2, "This field can only be set on non-payment cards");
             this.mNonPaymentCardSecondaryImage = nonPaymentCardSecondaryImage;
             return this;
         }

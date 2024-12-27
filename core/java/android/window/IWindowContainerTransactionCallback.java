@@ -15,8 +15,8 @@ public interface IWindowContainerTransactionCallback extends IInterface {
 
     public static class Default implements IWindowContainerTransactionCallback {
         @Override // android.window.IWindowContainerTransactionCallback
-        public void onTransactionReady(int id, SurfaceControl.Transaction t) throws RemoteException {
-        }
+        public void onTransactionReady(int id, SurfaceControl.Transaction t)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,8 @@ public interface IWindowContainerTransactionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWindowContainerTransactionCallback {
+    public abstract static class Stub extends Binder
+            implements IWindowContainerTransactionCallback {
         static final int TRANSACTION_onTransactionReady = 1;
 
         public Stub() {
@@ -35,7 +36,8 @@ public interface IWindowContainerTransactionCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IWindowContainerTransactionCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IWindowContainerTransactionCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof IWindowContainerTransactionCallback)) {
                 return (IWindowContainerTransactionCallback) iin;
             }
@@ -62,7 +64,8 @@ public interface IWindowContainerTransactionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWindowContainerTransactionCallback.DESCRIPTOR);
             }
@@ -73,7 +76,9 @@ public interface IWindowContainerTransactionCallback extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    SurfaceControl.Transaction _arg1 = (SurfaceControl.Transaction) data.readTypedObject(SurfaceControl.Transaction.CREATOR);
+                    SurfaceControl.Transaction _arg1 =
+                            (SurfaceControl.Transaction)
+                                    data.readTypedObject(SurfaceControl.Transaction.CREATOR);
                     data.enforceNoDataAvail();
                     onTransactionReady(_arg0, _arg1);
                     return true;
@@ -99,7 +104,8 @@ public interface IWindowContainerTransactionCallback extends IInterface {
             }
 
             @Override // android.window.IWindowContainerTransactionCallback
-            public void onTransactionReady(int id, SurfaceControl.Transaction t) throws RemoteException {
+            public void onTransactionReady(int id, SurfaceControl.Transaction t)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWindowContainerTransactionCallback.DESCRIPTOR);

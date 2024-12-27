@@ -66,7 +66,8 @@ public class PathMeasure {
         if (startD >= stopD) {
             return false;
         }
-        return native_getSegment(this.native_instance, startD, stopD, dst.mutateNI(), startWithMoveTo);
+        return native_getSegment(
+                this.native_instance, startD, stopD, dst.mutateNI(), startWithMoveTo);
     }
 
     public boolean isClosed() {

@@ -8,8 +8,8 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
-import android.speech.tts.ITextToSpeechCallback;
 import android.text.TextUtils;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -32,36 +32,65 @@ public interface ITextToSpeechService extends IInterface {
 
     int loadVoice(IBinder iBinder, String str) throws RemoteException;
 
-    int playAudio(IBinder iBinder, Uri uri, int i, Bundle bundle, String str) throws RemoteException;
+    int playAudio(IBinder iBinder, Uri uri, int i, Bundle bundle, String str)
+            throws RemoteException;
 
     int playSilence(IBinder iBinder, long j, int i, String str) throws RemoteException;
 
-    void setCallback(IBinder iBinder, ITextToSpeechCallback iTextToSpeechCallback) throws RemoteException;
+    void setCallback(IBinder iBinder, ITextToSpeechCallback iTextToSpeechCallback)
+            throws RemoteException;
 
-    int speak(IBinder iBinder, CharSequence charSequence, int i, Bundle bundle, String str) throws RemoteException;
+    int speak(IBinder iBinder, CharSequence charSequence, int i, Bundle bundle, String str)
+            throws RemoteException;
 
     int stop(IBinder iBinder) throws RemoteException;
 
-    int synthesizeToFileDescriptor(IBinder iBinder, CharSequence charSequence, ParcelFileDescriptor parcelFileDescriptor, Bundle bundle, String str) throws RemoteException;
+    int synthesizeToFileDescriptor(
+            IBinder iBinder,
+            CharSequence charSequence,
+            ParcelFileDescriptor parcelFileDescriptor,
+            Bundle bundle,
+            String str)
+            throws RemoteException;
 
     public static class Default implements ITextToSpeechService {
         @Override // android.speech.tts.ITextToSpeechService
-        public int speak(IBinder callingInstance, CharSequence text, int queueMode, Bundle params, String utteranceId) throws RemoteException {
+        public int speak(
+                IBinder callingInstance,
+                CharSequence text,
+                int queueMode,
+                Bundle params,
+                String utteranceId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.speech.tts.ITextToSpeechService
-        public int synthesizeToFileDescriptor(IBinder callingInstance, CharSequence text, ParcelFileDescriptor fileDescriptor, Bundle params, String utteranceId) throws RemoteException {
+        public int synthesizeToFileDescriptor(
+                IBinder callingInstance,
+                CharSequence text,
+                ParcelFileDescriptor fileDescriptor,
+                Bundle params,
+                String utteranceId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.speech.tts.ITextToSpeechService
-        public int playAudio(IBinder callingInstance, Uri audioUri, int queueMode, Bundle params, String utteranceId) throws RemoteException {
+        public int playAudio(
+                IBinder callingInstance,
+                Uri audioUri,
+                int queueMode,
+                Bundle params,
+                String utteranceId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.speech.tts.ITextToSpeechService
-        public int playSilence(IBinder callingInstance, long duration, int queueMode, String utteranceId) throws RemoteException {
+        public int playSilence(
+                IBinder callingInstance, long duration, int queueMode, String utteranceId)
+                throws RemoteException {
             return 0;
         }
 
@@ -86,23 +115,25 @@ public interface ITextToSpeechService extends IInterface {
         }
 
         @Override // android.speech.tts.ITextToSpeechService
-        public int isLanguageAvailable(String lang, String country, String variant) throws RemoteException {
+        public int isLanguageAvailable(String lang, String country, String variant)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.speech.tts.ITextToSpeechService
-        public String[] getFeaturesForLanguage(String lang, String country, String variant) throws RemoteException {
+        public String[] getFeaturesForLanguage(String lang, String country, String variant)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.speech.tts.ITextToSpeechService
-        public int loadLanguage(IBinder caller, String lang, String country, String variant) throws RemoteException {
+        public int loadLanguage(IBinder caller, String lang, String country, String variant)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.speech.tts.ITextToSpeechService
-        public void setCallback(IBinder caller, ITextToSpeechCallback cb) throws RemoteException {
-        }
+        public void setCallback(IBinder caller, ITextToSpeechCallback cb) throws RemoteException {}
 
         @Override // android.speech.tts.ITextToSpeechService
         public List<Voice> getVoices() throws RemoteException {
@@ -115,7 +146,8 @@ public interface ITextToSpeechService extends IInterface {
         }
 
         @Override // android.speech.tts.ITextToSpeechService
-        public String getDefaultVoiceNameFor(String lang, String country, String variant) throws RemoteException {
+        public String getDefaultVoiceNameFor(String lang, String country, String variant)
+                throws RemoteException {
             return null;
         }
 
@@ -125,7 +157,7 @@ public interface ITextToSpeechService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITextToSpeechService {
+    public abstract static class Stub extends Binder implements ITextToSpeechService {
         public static final String DESCRIPTOR = "android.speech.tts.ITextToSpeechService";
         static final int TRANSACTION_getClientDefaultLanguage = 8;
         static final int TRANSACTION_getDefaultVoiceNameFor = 15;
@@ -206,7 +238,8 @@ public interface ITextToSpeechService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -217,7 +250,8 @@ public interface ITextToSpeechService extends IInterface {
             switch (code) {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
-                    CharSequence _arg1 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg1 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     int _arg2 = data.readInt();
                     Bundle _arg3 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     String _arg4 = data.readString();
@@ -228,12 +262,16 @@ public interface ITextToSpeechService extends IInterface {
                     return true;
                 case 2:
                     IBinder _arg02 = data.readStrongBinder();
-                    CharSequence _arg12 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
-                    ParcelFileDescriptor _arg22 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    CharSequence _arg12 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    ParcelFileDescriptor _arg22 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     Bundle _arg32 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     String _arg42 = data.readString();
                     data.enforceNoDataAvail();
-                    int _result2 = synthesizeToFileDescriptor(_arg02, _arg12, _arg22, _arg32, _arg42);
+                    int _result2 =
+                            synthesizeToFileDescriptor(_arg02, _arg12, _arg22, _arg32, _arg42);
                     reply.writeNoException();
                     reply.writeInt(_result2);
                     return true;
@@ -310,7 +348,8 @@ public interface ITextToSpeechService extends IInterface {
                     return true;
                 case 12:
                     IBinder _arg09 = data.readStrongBinder();
-                    ITextToSpeechCallback _arg18 = ITextToSpeechCallback.Stub.asInterface(data.readStrongBinder());
+                    ITextToSpeechCallback _arg18 =
+                            ITextToSpeechCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg09, _arg18);
                     reply.writeNoException();
@@ -359,7 +398,13 @@ public interface ITextToSpeechService extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechService
-            public int speak(IBinder callingInstance, CharSequence text, int queueMode, Bundle params, String utteranceId) throws RemoteException {
+            public int speak(
+                    IBinder callingInstance,
+                    CharSequence text,
+                    int queueMode,
+                    Bundle params,
+                    String utteranceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -385,7 +430,13 @@ public interface ITextToSpeechService extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechService
-            public int synthesizeToFileDescriptor(IBinder callingInstance, CharSequence text, ParcelFileDescriptor fileDescriptor, Bundle params, String utteranceId) throws RemoteException {
+            public int synthesizeToFileDescriptor(
+                    IBinder callingInstance,
+                    CharSequence text,
+                    ParcelFileDescriptor fileDescriptor,
+                    Bundle params,
+                    String utteranceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -411,7 +462,13 @@ public interface ITextToSpeechService extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechService
-            public int playAudio(IBinder callingInstance, Uri audioUri, int queueMode, Bundle params, String utteranceId) throws RemoteException {
+            public int playAudio(
+                    IBinder callingInstance,
+                    Uri audioUri,
+                    int queueMode,
+                    Bundle params,
+                    String utteranceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -432,7 +489,9 @@ public interface ITextToSpeechService extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechService
-            public int playSilence(IBinder callingInstance, long duration, int queueMode, String utteranceId) throws RemoteException {
+            public int playSilence(
+                    IBinder callingInstance, long duration, int queueMode, String utteranceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -517,7 +576,8 @@ public interface ITextToSpeechService extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechService
-            public int isLanguageAvailable(String lang, String country, String variant) throws RemoteException {
+            public int isLanguageAvailable(String lang, String country, String variant)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -536,7 +596,8 @@ public interface ITextToSpeechService extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechService
-            public String[] getFeaturesForLanguage(String lang, String country, String variant) throws RemoteException {
+            public String[] getFeaturesForLanguage(String lang, String country, String variant)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -555,7 +616,8 @@ public interface ITextToSpeechService extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechService
-            public int loadLanguage(IBinder caller, String lang, String country, String variant) throws RemoteException {
+            public int loadLanguage(IBinder caller, String lang, String country, String variant)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -575,7 +637,8 @@ public interface ITextToSpeechService extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechService
-            public void setCallback(IBinder caller, ITextToSpeechCallback cb) throws RemoteException {
+            public void setCallback(IBinder caller, ITextToSpeechCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -625,7 +688,8 @@ public interface ITextToSpeechService extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechService
-            public String getDefaultVoiceNameFor(String lang, String country, String variant) throws RemoteException {
+            public String getDefaultVoiceNameFor(String lang, String country, String variant)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

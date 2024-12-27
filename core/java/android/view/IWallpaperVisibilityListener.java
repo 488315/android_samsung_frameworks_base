@@ -12,8 +12,8 @@ public interface IWallpaperVisibilityListener extends IInterface {
 
     public static class Default implements IWallpaperVisibilityListener {
         @Override // android.view.IWallpaperVisibilityListener
-        public void onWallpaperVisibilityChanged(boolean visible, int displayId) throws RemoteException {
-        }
+        public void onWallpaperVisibilityChanged(boolean visible, int displayId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +21,7 @@ public interface IWallpaperVisibilityListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWallpaperVisibilityListener {
+    public abstract static class Stub extends Binder implements IWallpaperVisibilityListener {
         public static final String DESCRIPTOR = "android.view.IWallpaperVisibilityListener";
         static final int TRANSACTION_onWallpaperVisibilityChanged = 1;
 
@@ -60,7 +60,8 @@ public interface IWallpaperVisibilityListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -97,7 +98,8 @@ public interface IWallpaperVisibilityListener extends IInterface {
             }
 
             @Override // android.view.IWallpaperVisibilityListener
-            public void onWallpaperVisibilityChanged(boolean visible, int displayId) throws RemoteException {
+            public void onWallpaperVisibilityChanged(boolean visible, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

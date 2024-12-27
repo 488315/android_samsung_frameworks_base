@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.nsri;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
+
 import com.samsung.android.media.AudioParameter;
 
 /* loaded from: classes5.dex */
@@ -22,7 +23,8 @@ public interface NSRIObjectIdentifiers {
     public static final ASN1ObjectIdentifier id_aria192_ofb = id_sea.branch("9");
     public static final ASN1ObjectIdentifier id_aria192_ctr = id_sea.branch("10");
     public static final ASN1ObjectIdentifier id_aria256_ecb = id_sea.branch("11");
-    public static final ASN1ObjectIdentifier id_aria256_cbc = id_sea.branch(AudioParameter.VALUE_VM_CSD_500_WARNING);
+    public static final ASN1ObjectIdentifier id_aria256_cbc =
+            id_sea.branch(AudioParameter.VALUE_VM_CSD_500_WARNING);
     public static final ASN1ObjectIdentifier id_aria256_cfb = id_sea.branch("13");
     public static final ASN1ObjectIdentifier id_aria256_ofb = id_sea.branch("14");
     public static final ASN1ObjectIdentifier id_aria256_ctr = id_sea.branch("15");

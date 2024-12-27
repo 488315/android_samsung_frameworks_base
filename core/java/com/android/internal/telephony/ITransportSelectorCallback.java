@@ -5,12 +5,11 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.telephony.IDomainSelector;
-import com.android.internal.telephony.ITransportSelectorResultCallback;
 
 /* loaded from: classes5.dex */
 public interface ITransportSelectorCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.ITransportSelectorCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.ITransportSelectorCallback";
 
     void onCreated(IDomainSelector iDomainSelector) throws RemoteException;
 
@@ -18,24 +17,22 @@ public interface ITransportSelectorCallback extends IInterface {
 
     void onWlanSelected(boolean z) throws RemoteException;
 
-    void onWwanSelectedAsync(ITransportSelectorResultCallback iTransportSelectorResultCallback) throws RemoteException;
+    void onWwanSelectedAsync(ITransportSelectorResultCallback iTransportSelectorResultCallback)
+            throws RemoteException;
 
     public static class Default implements ITransportSelectorCallback {
         @Override // com.android.internal.telephony.ITransportSelectorCallback
-        public void onCreated(IDomainSelector selector) throws RemoteException {
-        }
+        public void onCreated(IDomainSelector selector) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITransportSelectorCallback
-        public void onWlanSelected(boolean useEmergencyPdn) throws RemoteException {
-        }
+        public void onWlanSelected(boolean useEmergencyPdn) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITransportSelectorCallback
-        public void onWwanSelectedAsync(ITransportSelectorResultCallback cb) throws RemoteException {
-        }
+        public void onWwanSelectedAsync(ITransportSelectorResultCallback cb)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITransportSelectorCallback
-        public void onSelectionTerminated(int cause) throws RemoteException {
-        }
+        public void onSelectionTerminated(int cause) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -43,7 +40,7 @@ public interface ITransportSelectorCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITransportSelectorCallback {
+    public abstract static class Stub extends Binder implements ITransportSelectorCallback {
         static final int TRANSACTION_onCreated = 1;
         static final int TRANSACTION_onSelectionTerminated = 4;
         static final int TRANSACTION_onWlanSelected = 2;
@@ -90,7 +87,8 @@ public interface ITransportSelectorCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITransportSelectorCallback.DESCRIPTOR);
             }
@@ -100,7 +98,8 @@ public interface ITransportSelectorCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IDomainSelector _arg0 = IDomainSelector.Stub.asInterface(data.readStrongBinder());
+                    IDomainSelector _arg0 =
+                            IDomainSelector.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCreated(_arg0);
                     return true;
@@ -110,7 +109,9 @@ public interface ITransportSelectorCallback extends IInterface {
                     onWlanSelected(_arg02);
                     return true;
                 case 3:
-                    ITransportSelectorResultCallback _arg03 = ITransportSelectorResultCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransportSelectorResultCallback _arg03 =
+                            ITransportSelectorResultCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onWwanSelectedAsync(_arg03);
                     return true;
@@ -165,7 +166,8 @@ public interface ITransportSelectorCallback extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITransportSelectorCallback
-            public void onWwanSelectedAsync(ITransportSelectorResultCallback cb) throws RemoteException {
+            public void onWwanSelectedAsync(ITransportSelectorResultCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITransportSelectorCallback.DESCRIPTOR);

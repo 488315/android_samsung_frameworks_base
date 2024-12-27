@@ -1,7 +1,9 @@
 package com.android.server.pm.utils;
 
 import android.os.Handler;
+
 import com.android.server.pm.PackageInstallerService$$ExternalSyntheticLambda7;
+
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 
@@ -16,15 +18,20 @@ public final class RequestThrottle {
     public final int mMaxAttempts = 5;
     public final int mFirstDelay = 1000;
     public final int mBackoffBase = 2;
-    public final RequestThrottle$$ExternalSyntheticLambda0 mRunnable = new Runnable() { // from class: com.android.server.pm.utils.RequestThrottle$$ExternalSyntheticLambda0
-        @Override // java.lang.Runnable
-        public final void run() {
-            RequestThrottle.this.runInternal();
-        }
-    };
+    public final RequestThrottle$$ExternalSyntheticLambda0 mRunnable =
+            new Runnable() { // from class:
+                             // com.android.server.pm.utils.RequestThrottle$$ExternalSyntheticLambda0
+                @Override // java.lang.Runnable
+                public final void run() {
+                    RequestThrottle.this.runInternal();
+                }
+            };
 
     /* JADX WARN: Type inference failed for: r4v4, types: [com.android.server.pm.utils.RequestThrottle$$ExternalSyntheticLambda0] */
-    public RequestThrottle(Handler handler, PackageInstallerService$$ExternalSyntheticLambda7 packageInstallerService$$ExternalSyntheticLambda7) {
+    public RequestThrottle(
+            Handler handler,
+            PackageInstallerService$$ExternalSyntheticLambda7
+                    packageInstallerService$$ExternalSyntheticLambda7) {
         this.mHandler = handler;
         this.mBlock = packageInstallerService$$ExternalSyntheticLambda7;
     }
@@ -41,7 +48,9 @@ public final class RequestThrottle {
         }
         int andIncrement = this.mCurrentRetry.getAndIncrement();
         if (andIncrement < this.mMaxAttempts) {
-            this.mHandler.postDelayed(this.mRunnable, (long) (Math.pow(this.mBackoffBase, andIncrement) * this.mFirstDelay));
+            this.mHandler.postDelayed(
+                    this.mRunnable,
+                    (long) (Math.pow(this.mBackoffBase, andIncrement) * this.mFirstDelay));
         } else {
             this.mCurrentRetry.set(0);
         }

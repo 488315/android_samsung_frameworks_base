@@ -14,12 +14,10 @@ public interface ISelectBackupTransportCallback extends IInterface {
 
     public static class Default implements ISelectBackupTransportCallback {
         @Override // android.app.backup.ISelectBackupTransportCallback
-        public void onSuccess(String transportName) throws RemoteException {
-        }
+        public void onSuccess(String transportName) throws RemoteException {}
 
         @Override // android.app.backup.ISelectBackupTransportCallback
-        public void onFailure(int reason) throws RemoteException {
-        }
+        public void onFailure(int reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +25,7 @@ public interface ISelectBackupTransportCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISelectBackupTransportCallback {
+    public abstract static class Stub extends Binder implements ISelectBackupTransportCallback {
         public static final String DESCRIPTOR = "android.app.backup.ISelectBackupTransportCallback";
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
@@ -69,7 +67,8 @@ public interface ISelectBackupTransportCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

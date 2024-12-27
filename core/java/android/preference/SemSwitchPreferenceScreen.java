@@ -8,20 +8,28 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 /* loaded from: classes3.dex */
 public class SemSwitchPreferenceScreen extends SwitchPreference {
     @Deprecated
-    public SemSwitchPreferenceScreen(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public SemSwitchPreferenceScreen(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Preference, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.Preference, defStyleAttr, defStyleRes);
         Configuration configuration = context.getResources().getConfiguration();
         String fragment = a.getString(13);
         if ("".equals(fragment)) {
-            Log.w("SemSwitchPreferenceScreen", "SwitchPreferenceScreen should get fragment property. Fragment property does not exist in SwitchPreferenceScreen");
+            Log.w(
+                    "SemSwitchPreferenceScreen",
+                    "SwitchPreferenceScreen should get fragment property. Fragment property does"
+                        + " not exist in SwitchPreferenceScreen");
         }
-        if ((configuration.screenWidthDp <= 320 && configuration.fontScale >= 1.1f) || (configuration.screenWidthDp < 411 && configuration.fontScale >= 1.3f)) {
+        if ((configuration.screenWidthDp <= 320 && configuration.fontScale >= 1.1f)
+                || (configuration.screenWidthDp < 411 && configuration.fontScale >= 1.3f)) {
             setLayoutResource(R.layout.tw_switch_preference_screen_large);
         } else {
             setLayoutResource(R.layout.tw_switch_preference_screen_material);
@@ -52,8 +60,7 @@ public class SemSwitchPreferenceScreen extends SwitchPreference {
 
     @Override // android.preference.TwoStatePreference, android.preference.Preference
     @Deprecated
-    protected void onClick() {
-    }
+    protected void onClick() {}
 
     public void performClick() {
         super.onClick();

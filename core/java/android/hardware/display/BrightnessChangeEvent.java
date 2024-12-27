@@ -3,25 +3,28 @@ package android.hardware.display;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public final class BrightnessChangeEvent implements Parcelable {
-    public static final Parcelable.Creator<BrightnessChangeEvent> CREATOR = new Parcelable.Creator<BrightnessChangeEvent>() { // from class: android.hardware.display.BrightnessChangeEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BrightnessChangeEvent createFromParcel(Parcel source) {
-            return new BrightnessChangeEvent(source);
-        }
+    public static final Parcelable.Creator<BrightnessChangeEvent> CREATOR =
+            new Parcelable.Creator<BrightnessChangeEvent>() { // from class:
+                // android.hardware.display.BrightnessChangeEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BrightnessChangeEvent createFromParcel(Parcel source) {
+                    return new BrightnessChangeEvent(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BrightnessChangeEvent[] newArray(int size) {
-            return new BrightnessChangeEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BrightnessChangeEvent[] newArray(int size) {
+                    return new BrightnessChangeEvent[size];
+                }
+            };
     public final float batteryLevel;
     public final float brightness;
     public final long colorSampleDuration;
@@ -42,7 +45,26 @@ public final class BrightnessChangeEvent implements Parcelable {
     public final String uniqueDisplayId;
     public final int userId;
 
-    private BrightnessChangeEvent(float brightness, long timeStamp, String packageName, int userId, String uniqueDisplayId, float[] luxValues, long[] luxTimestamps, float batteryLevel, float powerBrightnessFactor, boolean nightMode, int colorTemperature, boolean reduceBrightColors, int reduceBrightColorsStrength, float reduceBrightColorsOffset, float lastBrightness, boolean isDefaultBrightnessConfig, boolean isUserSetBrightness, long[] colorValueBuckets, long colorSampleDuration) {
+    private BrightnessChangeEvent(
+            float brightness,
+            long timeStamp,
+            String packageName,
+            int userId,
+            String uniqueDisplayId,
+            float[] luxValues,
+            long[] luxTimestamps,
+            float batteryLevel,
+            float powerBrightnessFactor,
+            boolean nightMode,
+            int colorTemperature,
+            boolean reduceBrightColors,
+            int reduceBrightColorsStrength,
+            float reduceBrightColorsOffset,
+            float lastBrightness,
+            boolean isDefaultBrightnessConfig,
+            boolean isUserSetBrightness,
+            long[] colorValueBuckets,
+            long colorSampleDuration) {
         this.brightness = brightness;
         this.timeStamp = timeStamp;
         this.packageName = packageName;
@@ -137,7 +159,45 @@ public final class BrightnessChangeEvent implements Parcelable {
     }
 
     public String toString() {
-        return "BrightnessChangeEvent{brightness: " + this.brightness + ", timeStamp: " + this.timeStamp + ", packageName: " + this.packageName + ", userId: " + this.userId + ", uniqueDisplayId: " + this.uniqueDisplayId + ", luxValues: " + Arrays.toString(this.luxValues) + ", luxTimestamps: " + Arrays.toString(this.luxTimestamps) + ", batteryLevel: " + this.batteryLevel + ", powerBrightnessFactor: " + this.powerBrightnessFactor + ", nightMode: " + this.nightMode + ", colorTemperature: " + this.colorTemperature + ", reduceBrightColors: " + this.reduceBrightColors + ", reduceBrightColorsStrength: " + this.reduceBrightColorsStrength + ", reduceBrightColorsOffset: " + this.reduceBrightColorsOffset + ", lastBrightness: " + this.lastBrightness + ", isDefaultBrightnessConfig: " + this.isDefaultBrightnessConfig + ", isUserSetBrightness: " + this.isUserSetBrightness + ", colorValueBuckets: " + Arrays.toString(this.colorValueBuckets) + ", colorSampleDuration: " + this.colorSampleDuration + "}";
+        return "BrightnessChangeEvent{brightness: "
+                + this.brightness
+                + ", timeStamp: "
+                + this.timeStamp
+                + ", packageName: "
+                + this.packageName
+                + ", userId: "
+                + this.userId
+                + ", uniqueDisplayId: "
+                + this.uniqueDisplayId
+                + ", luxValues: "
+                + Arrays.toString(this.luxValues)
+                + ", luxTimestamps: "
+                + Arrays.toString(this.luxTimestamps)
+                + ", batteryLevel: "
+                + this.batteryLevel
+                + ", powerBrightnessFactor: "
+                + this.powerBrightnessFactor
+                + ", nightMode: "
+                + this.nightMode
+                + ", colorTemperature: "
+                + this.colorTemperature
+                + ", reduceBrightColors: "
+                + this.reduceBrightColors
+                + ", reduceBrightColorsStrength: "
+                + this.reduceBrightColorsStrength
+                + ", reduceBrightColorsOffset: "
+                + this.reduceBrightColorsOffset
+                + ", lastBrightness: "
+                + this.lastBrightness
+                + ", isDefaultBrightnessConfig: "
+                + this.isDefaultBrightnessConfig
+                + ", isUserSetBrightness: "
+                + this.isUserSetBrightness
+                + ", colorValueBuckets: "
+                + Arrays.toString(this.colorValueBuckets)
+                + ", colorSampleDuration: "
+                + this.colorSampleDuration
+                + "}";
     }
 
     public static class Builder {
@@ -254,7 +314,26 @@ public final class BrightnessChangeEvent implements Parcelable {
         }
 
         public BrightnessChangeEvent build() {
-            return new BrightnessChangeEvent(this.mBrightness, this.mTimeStamp, this.mPackageName, this.mUserId, this.mUniqueDisplayId, this.mLuxValues, this.mLuxTimestamps, this.mBatteryLevel, this.mPowerBrightnessFactor, this.mNightMode, this.mColorTemperature, this.mReduceBrightColors, this.mReduceBrightColorsStrength, this.mReduceBrightColorsOffset, this.mLastBrightness, this.mIsDefaultBrightnessConfig, this.mIsUserSetBrightness, this.mColorValueBuckets, this.mColorSampleDuration);
+            return new BrightnessChangeEvent(
+                    this.mBrightness,
+                    this.mTimeStamp,
+                    this.mPackageName,
+                    this.mUserId,
+                    this.mUniqueDisplayId,
+                    this.mLuxValues,
+                    this.mLuxTimestamps,
+                    this.mBatteryLevel,
+                    this.mPowerBrightnessFactor,
+                    this.mNightMode,
+                    this.mColorTemperature,
+                    this.mReduceBrightColors,
+                    this.mReduceBrightColorsStrength,
+                    this.mReduceBrightColorsOffset,
+                    this.mLastBrightness,
+                    this.mIsDefaultBrightnessConfig,
+                    this.mIsUserSetBrightness,
+                    this.mColorValueBuckets,
+                    this.mColorSampleDuration);
         }
     }
 }

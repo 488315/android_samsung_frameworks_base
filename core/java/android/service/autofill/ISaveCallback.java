@@ -16,12 +16,10 @@ public interface ISaveCallback extends IInterface {
 
     public static class Default implements ISaveCallback {
         @Override // android.service.autofill.ISaveCallback
-        public void onSuccess(IntentSender intentSender) throws RemoteException {
-        }
+        public void onSuccess(IntentSender intentSender) throws RemoteException {}
 
         @Override // android.service.autofill.ISaveCallback
-        public void onFailure(CharSequence message) throws RemoteException {
-        }
+        public void onFailure(CharSequence message) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ISaveCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISaveCallback {
+    public abstract static class Stub extends Binder implements ISaveCallback {
         public static final String DESCRIPTOR = "android.service.autofill.ISaveCallback";
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
@@ -71,7 +69,8 @@ public interface ISaveCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -87,7 +86,8 @@ public interface ISaveCallback extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 2:
-                    CharSequence _arg02 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg02 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg02);
                     reply.writeNoException();

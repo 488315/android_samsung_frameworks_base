@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.util.MathUtils;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.AdapterView;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -49,7 +49,8 @@ public class TextInputTimePickerView extends RelativeLayout {
         this(context, attrs, defStyle, 0);
     }
 
-    public TextInputTimePickerView(final Context context, AttributeSet attrs, int defStyle, int defStyleRes) {
+    public TextInputTimePickerView(
+            final Context context, AttributeSet attrs, int defStyle, int defStyleRes) {
         super(context, attrs, defStyle, defStyleRes);
         inflate(context, R.layout.time_picker_text_input_material, this);
         this.mHourEditText = (EditText) findViewById(R.id.input_hour);
@@ -58,59 +59,66 @@ public class TextInputTimePickerView extends RelativeLayout {
         this.mErrorLabel = (TextView) findViewById(R.id.label_error);
         this.mHourLabel = (TextView) findViewById(R.id.label_hour);
         this.mMinuteLabel = (TextView) findViewById(R.id.label_minute);
-        this.mHourEditText.addTextChangedListener(new TextWatcher() { // from class: android.widget.TextInputTimePickerView.1
-            @Override // android.text.TextWatcher
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+        this.mHourEditText.addTextChangedListener(
+                new TextWatcher() { // from class: android.widget.TextInputTimePickerView.1
+                    @Override // android.text.TextWatcher
+                    public void beforeTextChanged(
+                            CharSequence charSequence, int i, int i1, int i2) {}
 
-            @Override // android.text.TextWatcher
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+                    @Override // android.text.TextWatcher
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-            @Override // android.text.TextWatcher
-            public void afterTextChanged(Editable editable) {
-                if (TextInputTimePickerView.this.parseAndSetHourInternal(editable.toString()) && editable.length() > 1) {
-                    AccessibilityManager am = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
-                    if (!am.isEnabled()) {
-                        TextInputTimePickerView.this.mMinuteEditText.requestFocus();
+                    @Override // android.text.TextWatcher
+                    public void afterTextChanged(Editable editable) {
+                        if (TextInputTimePickerView.this.parseAndSetHourInternal(
+                                        editable.toString())
+                                && editable.length() > 1) {
+                            AccessibilityManager am =
+                                    (AccessibilityManager)
+                                            context.getSystemService(Context.ACCESSIBILITY_SERVICE);
+                            if (!am.isEnabled()) {
+                                TextInputTimePickerView.this.mMinuteEditText.requestFocus();
+                            }
+                        }
                     }
-                }
-            }
-        });
-        this.mMinuteEditText.addTextChangedListener(new TextWatcher() { // from class: android.widget.TextInputTimePickerView.2
-            @Override // android.text.TextWatcher
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+                });
+        this.mMinuteEditText.addTextChangedListener(
+                new TextWatcher() { // from class: android.widget.TextInputTimePickerView.2
+                    @Override // android.text.TextWatcher
+                    public void beforeTextChanged(
+                            CharSequence charSequence, int i, int i1, int i2) {}
 
-            @Override // android.text.TextWatcher
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+                    @Override // android.text.TextWatcher
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-            @Override // android.text.TextWatcher
-            public void afterTextChanged(Editable editable) {
-                TextInputTimePickerView.this.parseAndSetMinuteInternal(editable.toString());
-            }
-        });
+                    @Override // android.text.TextWatcher
+                    public void afterTextChanged(Editable editable) {
+                        TextInputTimePickerView.this.parseAndSetMinuteInternal(editable.toString());
+                    }
+                });
         this.mAmPmSpinner = (Spinner) findViewById(R.id.am_pm_spinner);
         String[] amPmStrings = TimePicker.getAmPmStrings(context);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(context, 17367049);
         adapter.add(TimePickerClockDelegate.obtainVerbatim(amPmStrings[0]));
         adapter.add(TimePickerClockDelegate.obtainVerbatim(amPmStrings[1]));
         this.mAmPmSpinner.setAdapter((SpinnerAdapter) adapter);
-        this.mAmPmSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { // from class: android.widget.TextInputTimePickerView.3
-            @Override // android.widget.AdapterView.OnItemSelectedListener
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                if (position == 0) {
-                    TextInputTimePickerView.this.mListener.onValueChanged(2, 0);
-                } else {
-                    TextInputTimePickerView.this.mListener.onValueChanged(2, 1);
-                }
-            }
+        this.mAmPmSpinner.setOnItemSelectedListener(
+                new AdapterView
+                        .OnItemSelectedListener() { // from class:
+                                                    // android.widget.TextInputTimePickerView.3
+                    @Override // android.widget.AdapterView.OnItemSelectedListener
+                    public void onItemSelected(
+                            AdapterView<?> adapterView, View view, int position, long id) {
+                        if (position == 0) {
+                            TextInputTimePickerView.this.mListener.onValueChanged(2, 0);
+                        } else {
+                            TextInputTimePickerView.this.mListener.onValueChanged(2, 1);
+                        }
+                    }
 
-            @Override // android.widget.AdapterView.OnItemSelectedListener
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
+                    @Override // android.widget.AdapterView.OnItemSelectedListener
+                    public void onNothingSelected(AdapterView<?> adapterView) {}
+                });
     }
 
     void setListener(OnValueTypedListener listener) {
@@ -118,8 +126,10 @@ public class TextInputTimePickerView extends RelativeLayout {
     }
 
     void setHourFormat(int maxCharLength) {
-        this.mHourEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxCharLength)});
-        this.mMinuteEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxCharLength)});
+        this.mHourEditText.setFilters(
+                new InputFilter[] {new InputFilter.LengthFilter(maxCharLength)});
+        this.mMinuteEditText.setFilters(
+                new InputFilter[] {new InputFilter.LengthFilter(maxCharLength)});
         LocaleList locales = this.mContext.getResources().getConfiguration().getLocales();
         this.mHourEditText.setImeHintLocales(locales);
         this.mMinuteEditText.setImeHintLocales(locales);
@@ -138,7 +148,8 @@ public class TextInputTimePickerView extends RelativeLayout {
         } else {
             minuteText = this.mMinuteEditText.getText().toString();
         }
-        boolean inputValid = parseAndSetHourInternal(hourText) && parseAndSetMinuteInternal(minuteText);
+        boolean inputValid =
+                parseAndSetHourInternal(hourText) && parseAndSetMinuteInternal(minuteText);
         setError(inputValid ? false : true);
         return inputValid;
     }
@@ -162,7 +173,12 @@ public class TextInputTimePickerView extends RelativeLayout {
         return this.mTimeSet;
     }
 
-    void updateTextInputValues(int localizedHour, int minute, int amOrPm, boolean is24Hour, boolean hourFormatStartsAtZero) {
+    void updateTextInputValues(
+            int localizedHour,
+            int minute,
+            int amOrPm,
+            boolean is24Hour,
+            boolean hourFormatStartsAtZero) {
         this.mIs24Hour = is24Hour;
         this.mHourFormatStartsAtZero = hourFormatStartsAtZero;
         this.mAmPmSpinner.setVisibility(is24Hour ? 4 : 0);
@@ -172,8 +188,10 @@ public class TextInputTimePickerView extends RelativeLayout {
             this.mAmPmSpinner.setSelection(1);
         }
         if (isTimeSet()) {
-            this.mHourEditText.lambda$setTextAsync$0(String.format("%d", Integer.valueOf(localizedHour)));
-            this.mMinuteEditText.lambda$setTextAsync$0(String.format("%02d", Integer.valueOf(minute)));
+            this.mHourEditText.lambda$setTextAsync$0(
+                    String.format("%d", Integer.valueOf(localizedHour)));
+            this.mMinuteEditText.lambda$setTextAsync$0(
+                    String.format("%02d", Integer.valueOf(minute)));
         } else {
             this.mHourEditText.setHint(String.format("%d", Integer.valueOf(localizedHour)));
             this.mMinuteEditText.setHint(String.format("%02d", Integer.valueOf(minute)));
@@ -194,7 +212,8 @@ public class TextInputTimePickerView extends RelativeLayout {
             }
             int minHour = this.mHourFormatStartsAtZero ? 0 : 1;
             int maxHour = this.mIs24Hour ? 23 : minHour + 11;
-            this.mListener.onValueChanged(0, getHourOfDayFromLocalizedHour(MathUtils.constrain(hour, minHour, maxHour)));
+            this.mListener.onValueChanged(
+                    0, getHourOfDayFromLocalizedHour(MathUtils.constrain(hour, minHour, maxHour)));
             return false;
         } catch (NumberFormatException e) {
             return false;

@@ -9,14 +9,9 @@ import android.os.ServiceManager;
 import android.service.textclassifier.ITextClassifierCallback;
 import android.service.textclassifier.ITextClassifierService;
 import android.service.textclassifier.TextClassifierService;
-import android.view.textclassifier.ConversationActions;
-import android.view.textclassifier.TextClassification;
-import android.view.textclassifier.TextClassificationContext;
-import android.view.textclassifier.TextClassifier;
-import android.view.textclassifier.TextLanguage;
-import android.view.textclassifier.TextLinks;
-import android.view.textclassifier.TextSelection;
+
 import com.android.internal.util.IndentingPrintWriter;
+
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -27,12 +22,20 @@ public final class SystemTextClassifier implements TextClassifier {
     private TextClassificationSessionId mSessionId;
     private final TextClassificationConstants mSettings;
     private final SystemTextClassifierMetadata mSystemTcMetadata;
-    private final ITextClassifierService mManagerService = ITextClassifierService.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.TEXT_CLASSIFICATION_SERVICE));
+    private final ITextClassifierService mManagerService =
+            ITextClassifierService.Stub.asInterface(
+                    ServiceManager.getServiceOrThrow(Context.TEXT_CLASSIFICATION_SERVICE));
     private final TextClassifier mFallback = TextClassifier.NO_OP;
 
-    public SystemTextClassifier(Context context, TextClassificationConstants settings, boolean useDefault) throws ServiceManager.ServiceNotFoundException {
+    public SystemTextClassifier(
+            Context context, TextClassificationConstants settings, boolean useDefault)
+            throws ServiceManager.ServiceNotFoundException {
         this.mSettings = (TextClassificationConstants) Objects.requireNonNull(settings);
-        this.mSystemTcMetadata = new SystemTextClassifierMetadata((String) Objects.requireNonNull(context.getOpPackageName()), context.getUserId(), useDefault);
+        this.mSystemTcMetadata =
+                new SystemTextClassifierMetadata(
+                        (String) Objects.requireNonNull(context.getOpPackageName()),
+                        context.getUserId(),
+                        useDefault);
     }
 
     @Override // android.view.textclassifier.TextClassifier
@@ -41,7 +44,8 @@ public final class SystemTextClassifier implements TextClassifier {
         TextClassifier.Utils.checkMainThread();
         try {
             request.setSystemTextClassifierMetadata(this.mSystemTcMetadata);
-            BlockingCallback<TextSelection> callback = new BlockingCallback<>("textselection", this.mSettings);
+            BlockingCallback<TextSelection> callback =
+                    new BlockingCallback<>("textselection", this.mSettings);
             this.mManagerService.onSuggestSelection(this.mSessionId, request, callback);
             TextSelection selection = callback.get();
             if (selection != null) {
@@ -59,7 +63,8 @@ public final class SystemTextClassifier implements TextClassifier {
         TextClassifier.Utils.checkMainThread();
         try {
             request.setSystemTextClassifierMetadata(this.mSystemTcMetadata);
-            BlockingCallback<TextClassification> callback = new BlockingCallback<>(Context.TEXT_CLASSIFICATION_SERVICE, this.mSettings);
+            BlockingCallback<TextClassification> callback =
+                    new BlockingCallback<>(Context.TEXT_CLASSIFICATION_SERVICE, this.mSettings);
             this.mManagerService.onClassifyText(this.mSessionId, request, callback);
             TextClassification classification = callback.get();
             if (classification != null) {
@@ -75,7 +80,8 @@ public final class SystemTextClassifier implements TextClassifier {
     public TextLinks generateLinks(TextLinks.Request request) {
         Objects.requireNonNull(request);
         TextClassifier.Utils.checkMainThread();
-        if (!TextClassifier.Utils.checkTextLength(request.getText(), getMaxGenerateLinksTextLength())) {
+        if (!TextClassifier.Utils.checkTextLength(
+                request.getText(), getMaxGenerateLinksTextLength())) {
             return this.mFallback.generateLinks(request);
         }
         if (!this.mSettings.isSmartLinkifyEnabled() && request.isLegacyFallback()) {
@@ -83,7 +89,8 @@ public final class SystemTextClassifier implements TextClassifier {
         }
         try {
             request.setSystemTextClassifierMetadata(this.mSystemTcMetadata);
-            BlockingCallback<TextLinks> callback = new BlockingCallback<>("textlinks", this.mSettings);
+            BlockingCallback<TextLinks> callback =
+                    new BlockingCallback<>("textlinks", this.mSettings);
             this.mManagerService.onGenerateLinks(this.mSessionId, request, callback);
             TextLinks links = callback.get();
             if (links != null) {
@@ -114,7 +121,10 @@ public final class SystemTextClassifier implements TextClassifier {
         TextClassifier.Utils.checkMainThread();
         try {
             if (event.getEventContext() == null) {
-                tcContext = new TextClassificationContext.Builder(this.mSystemTcMetadata.getCallingPackageName(), "unknown").build();
+                tcContext =
+                        new TextClassificationContext.Builder(
+                                        this.mSystemTcMetadata.getCallingPackageName(), "unknown")
+                                .build();
             } else {
                 tcContext = event.getEventContext();
             }
@@ -132,7 +142,8 @@ public final class SystemTextClassifier implements TextClassifier {
         TextClassifier.Utils.checkMainThread();
         try {
             request.setSystemTextClassifierMetadata(this.mSystemTcMetadata);
-            BlockingCallback<TextLanguage> callback = new BlockingCallback<>("textlanguage", this.mSettings);
+            BlockingCallback<TextLanguage> callback =
+                    new BlockingCallback<>("textlanguage", this.mSettings);
             this.mManagerService.onDetectLanguage(this.mSessionId, request, callback);
             TextLanguage textLanguage = callback.get();
             if (textLanguage != null) {
@@ -150,7 +161,8 @@ public final class SystemTextClassifier implements TextClassifier {
         TextClassifier.Utils.checkMainThread();
         try {
             request.setSystemTextClassifierMetadata(this.mSystemTcMetadata);
-            BlockingCallback<ConversationActions> callback = new BlockingCallback<>("conversation-actions", this.mSettings);
+            BlockingCallback<ConversationActions> callback =
+                    new BlockingCallback<>("conversation-actions", this.mSettings);
             this.mManagerService.onSuggestConversationActions(this.mSessionId, request, callback);
             ConversationActions conversationActions = callback.get();
             if (conversationActions != null) {
@@ -189,17 +201,21 @@ public final class SystemTextClassifier implements TextClassifier {
         printWriter.println();
     }
 
-    void initializeRemoteSession(TextClassificationContext classificationContext, TextClassificationSessionId sessionId) {
+    void initializeRemoteSession(
+            TextClassificationContext classificationContext,
+            TextClassificationSessionId sessionId) {
         this.mSessionId = (TextClassificationSessionId) Objects.requireNonNull(sessionId);
         try {
             classificationContext.setSystemTextClassifierMetadata(this.mSystemTcMetadata);
-            this.mManagerService.onCreateTextClassificationSession(classificationContext, this.mSessionId);
+            this.mManagerService.onCreateTextClassificationSession(
+                    classificationContext, this.mSessionId);
         } catch (RemoteException e) {
             Log.e("androidtc", "Error starting a new classification session.", e);
         }
     }
 
-    private static final class BlockingCallback<T extends Parcelable> extends ITextClassifierCallback.Stub {
+    private static final class BlockingCallback<T extends Parcelable>
+            extends ITextClassifierCallback.Stub {
         private final ResponseReceiver<T> mReceiver;
 
         BlockingCallback(String name, TextClassificationConstants settings) {
@@ -246,13 +262,19 @@ public final class SystemTextClassifier implements TextClassifier {
         public T get() {
             if (Looper.myLooper() != Looper.getMainLooper()) {
                 try {
-                    boolean success = this.mLatch.await(this.mSettings.getSystemTextClassifierApiTimeoutInSecond(), TimeUnit.SECONDS);
+                    boolean success =
+                            this.mLatch.await(
+                                    this.mSettings.getSystemTextClassifierApiTimeoutInSecond(),
+                                    TimeUnit.SECONDS);
                     if (!success) {
                         Log.w("androidtc", "Timeout in ResponseReceiver.get(): " + this.mName);
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    Log.e("androidtc", "Interrupted during ResponseReceiver.get(): " + this.mName, e);
+                    Log.e(
+                            "androidtc",
+                            "Interrupted during ResponseReceiver.get(): " + this.mName,
+                            e);
                 }
             }
             return this.mResponse;

@@ -5,34 +5,40 @@ import android.app.admin.flags.Flags;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class PackagePermissionPolicyKey extends PolicyKey {
     private static final String ATTR_PACKAGE_NAME = "package-name";
     private static final String ATTR_PERMISSION_NAME = "permission-name";
-    public static final Parcelable.Creator<PackagePermissionPolicyKey> CREATOR = new Parcelable.Creator<PackagePermissionPolicyKey>() { // from class: android.app.admin.PackagePermissionPolicyKey.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackagePermissionPolicyKey createFromParcel(Parcel source) {
-            return new PackagePermissionPolicyKey(source);
-        }
+    public static final Parcelable.Creator<PackagePermissionPolicyKey> CREATOR =
+            new Parcelable.Creator<PackagePermissionPolicyKey>() { // from class:
+                // android.app.admin.PackagePermissionPolicyKey.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackagePermissionPolicyKey createFromParcel(Parcel source) {
+                    return new PackagePermissionPolicyKey(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackagePermissionPolicyKey[] newArray(int size) {
-            return new PackagePermissionPolicyKey[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackagePermissionPolicyKey[] newArray(int size) {
+                    return new PackagePermissionPolicyKey[size];
+                }
+            };
     private final String mPackageName;
     private final String mPermissionName;
 
-    public PackagePermissionPolicyKey(String identifier, String packageName, String permissionName) {
+    public PackagePermissionPolicyKey(
+            String identifier, String packageName, String permissionName) {
         super(identifier);
         if (Flags.devicePolicySizeTrackingInternalBugFixEnabled()) {
             PolicySizeVerifier.enforceMaxPackageNameLength(packageName);
@@ -70,7 +76,8 @@ public final class PackagePermissionPolicyKey extends PolicyKey {
     }
 
     @Override // android.app.admin.PolicyKey
-    public PackagePermissionPolicyKey readFromXml(TypedXmlPullParser parser) throws XmlPullParserException, IOException {
+    public PackagePermissionPolicyKey readFromXml(TypedXmlPullParser parser)
+            throws XmlPullParserException, IOException {
         String identifier = parser.getAttributeValue(null, "policy-identifier");
         String packageName = parser.getAttributeValue(null, ATTR_PACKAGE_NAME);
         String permissionName = parser.getAttributeValue(null, ATTR_PERMISSION_NAME);
@@ -82,7 +89,8 @@ public final class PackagePermissionPolicyKey extends PolicyKey {
         bundle.putString(PolicyUpdateReceiver.EXTRA_POLICY_KEY, getIdentifier());
         Bundle extraPolicyParams = new Bundle();
         extraPolicyParams.putString(PolicyUpdateReceiver.EXTRA_PACKAGE_NAME, this.mPackageName);
-        extraPolicyParams.putString(PolicyUpdateReceiver.EXTRA_PERMISSION_NAME, this.mPermissionName);
+        extraPolicyParams.putString(
+                PolicyUpdateReceiver.EXTRA_PERMISSION_NAME, this.mPermissionName);
         bundle.putBundle(PolicyUpdateReceiver.EXTRA_POLICY_BUNDLE_KEY, extraPolicyParams);
     }
 
@@ -95,7 +103,9 @@ public final class PackagePermissionPolicyKey extends PolicyKey {
             return false;
         }
         PackagePermissionPolicyKey other = (PackagePermissionPolicyKey) o;
-        if (Objects.equals(getIdentifier(), other.getIdentifier()) && Objects.equals(this.mPackageName, other.mPackageName) && Objects.equals(this.mPermissionName, other.mPermissionName)) {
+        if (Objects.equals(getIdentifier(), other.getIdentifier())
+                && Objects.equals(this.mPackageName, other.mPackageName)
+                && Objects.equals(this.mPermissionName, other.mPermissionName)) {
             return true;
         }
         return false;
@@ -107,7 +117,13 @@ public final class PackagePermissionPolicyKey extends PolicyKey {
     }
 
     public String toString() {
-        return "PackagePermissionPolicyKey{mIdentifier= " + getIdentifier() + "; mPackageName= " + this.mPackageName + "; mPermissionName= " + this.mPermissionName + "}";
+        return "PackagePermissionPolicyKey{mIdentifier= "
+                + getIdentifier()
+                + "; mPackageName= "
+                + this.mPackageName
+                + "; mPermissionName= "
+                + this.mPermissionName
+                + "}";
     }
 
     @Override // android.os.Parcelable

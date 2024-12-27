@@ -1,6 +1,7 @@
 package android.app.time;
 
 import android.text.TextUtils;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -19,16 +20,13 @@ public final class DetectorStatusTypes {
 
     @Target({ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DetectionAlgorithmStatus {
-    }
+    public @interface DetectionAlgorithmStatus {}
 
     @Target({ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DetectorStatus {
-    }
+    public @interface DetectorStatus {}
 
-    private DetectorStatusTypes() {
-    }
+    private DetectorStatusTypes() {}
 
     public static int requireValidDetectorStatus(int detectorStatus) {
         if (detectorStatus < 0 || detectorStatus > 3) {
@@ -107,7 +105,8 @@ public final class DetectorStatusTypes {
 
     public static int requireValidDetectionAlgorithmStatus(int detectionAlgorithmStatus) {
         if (detectionAlgorithmStatus < 0 || detectionAlgorithmStatus > 3) {
-            throw new IllegalArgumentException("Invalid detection algorithm: " + detectionAlgorithmStatus);
+            throw new IllegalArgumentException(
+                    "Invalid detection algorithm: " + detectionAlgorithmStatus);
         }
         return detectionAlgorithmStatus;
     }
@@ -176,7 +175,8 @@ public final class DetectorStatusTypes {
             case 3:
                 return 3;
             default:
-                throw new IllegalArgumentException("Unknown status: " + detectorAlgorithmStatusString);
+                throw new IllegalArgumentException(
+                        "Unknown status: " + detectorAlgorithmStatusString);
         }
     }
 }

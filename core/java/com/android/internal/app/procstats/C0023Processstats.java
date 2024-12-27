@@ -11,7 +11,6 @@ public final class C0023Processstats {
         public static final int MEM_FACTOR_MODERATE = 1;
         public static final int MEM_FACTOR_NORMAL = 0;
 
-        public ProcessStatsProto() {
-        }
+        public ProcessStatsProto() {}
     }
 }

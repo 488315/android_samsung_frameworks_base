@@ -1,6 +1,7 @@
 package com.android.server.enterprise.plm.context;
 
 import android.util.Log;
+
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.plm.IStateDelegate;
 import com.android.server.enterprise.plm.ProcessStateTracker;
@@ -29,9 +30,12 @@ public final class PeripheralContext extends ProcessContext {
         boolean isKlmActivated = processStateTracker.isKlmActivated();
         boolean z = processStateTracker.mSystemStateTracker.mEdmServiceReady;
         Log.d("SystemStateTracker", "isEdmServiceReady : " + z);
-        Log.d("PeripheralContext", "klm activated : " + isKlmActivated + ", edm service ready : " + z);
+        Log.d(
+                "PeripheralContext",
+                "klm activated : " + isKlmActivated + ", edm service ready : " + z);
         boolean z2 = isKlmActivated || z;
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("keep alive ", "PeripheralContext", z2);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "keep alive ", "PeripheralContext", z2);
         return z2;
     }
 }

@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -54,7 +55,16 @@ public interface IKnoxGuardManager extends IInterface {
 
     boolean isVpnExceptionRequired() throws RemoteException;
 
-    int lockScreen(String str, String str2, String str3, String str4, String str5, boolean z, boolean z2, Bundle bundle) throws RemoteException;
+    int lockScreen(
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            boolean z,
+            boolean z2,
+            Bundle bundle)
+            throws RemoteException;
 
     int provisionCert(String str, String str2, String str3, String str4) throws RemoteException;
 
@@ -68,9 +78,36 @@ public interface IKnoxGuardManager extends IInterface {
 
     int setClientData(String str) throws RemoteException;
 
-    void setRemoteLockToLockscreen(int i, boolean z, String str, String str2, String str3, boolean z2, String str4, int i2, long j, int i3, boolean z3, Bundle bundle) throws RemoteException;
+    void setRemoteLockToLockscreen(
+            int i,
+            boolean z,
+            String str,
+            String str2,
+            String str3,
+            boolean z2,
+            String str4,
+            int i2,
+            long j,
+            int i3,
+            boolean z3,
+            Bundle bundle)
+            throws RemoteException;
 
-    void setRemoteLockToLockscreenWithSkipSupport(int i, boolean z, String str, String str2, String str3, boolean z2, String str4, int i2, long j, int i3, boolean z3, Bundle bundle, boolean z4) throws RemoteException;
+    void setRemoteLockToLockscreenWithSkipSupport(
+            int i,
+            boolean z,
+            String str,
+            String str2,
+            String str3,
+            boolean z2,
+            String str4,
+            int i2,
+            long j,
+            int i3,
+            boolean z3,
+            Bundle bundle,
+            boolean z4)
+            throws RemoteException;
 
     boolean shouldBlockCustomRom() throws RemoteException;
 
@@ -96,20 +133,43 @@ public interface IKnoxGuardManager extends IInterface {
 
     public static class Default implements IKnoxGuardManager {
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-        public void registerIntent(String preFix, List<String> actionList) throws RemoteException {
-        }
+        public void registerIntent(String preFix, List<String> actionList) throws RemoteException {}
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-        public void setAirplaneMode(boolean enabled) throws RemoteException {
-        }
+        public void setAirplaneMode(boolean enabled) throws RemoteException {}
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-        public void setRemoteLockToLockscreen(int type, boolean state, String msg, String number, String email, boolean emergencycallbutton, String name, int failcount, long timeout, int blockcount, boolean skippin, Bundle bundle) throws RemoteException {
-        }
+        public void setRemoteLockToLockscreen(
+                int type,
+                boolean state,
+                String msg,
+                String number,
+                String email,
+                boolean emergencycallbutton,
+                String name,
+                int failcount,
+                long timeout,
+                int blockcount,
+                boolean skippin,
+                Bundle bundle)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-        public void setRemoteLockToLockscreenWithSkipSupport(int type, boolean state, String msg, String number, String email, boolean emergencycallbutton, String name, int failcount, long timeout, int blockcount, boolean skippin, Bundle bundle, boolean skipSupportContainer) throws RemoteException {
-        }
+        public void setRemoteLockToLockscreenWithSkipSupport(
+                int type,
+                boolean state,
+                String msg,
+                String number,
+                String email,
+                boolean emergencycallbutton,
+                String name,
+                int failcount,
+                long timeout,
+                int blockcount,
+                boolean skippin,
+                Bundle bundle,
+                boolean skipSupportContainer)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
         public boolean isSkipSupportContainerSupported() throws RemoteException {
@@ -132,8 +192,7 @@ public interface IKnoxGuardManager extends IInterface {
         }
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-        public void bindToLockScreen() throws RemoteException {
-        }
+        public void bindToLockScreen() throws RemoteException {}
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
         public int getKGServiceVersion() throws RemoteException {
@@ -141,8 +200,7 @@ public interface IKnoxGuardManager extends IInterface {
         }
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-        public void unRegisterIntent() throws RemoteException {
-        }
+        public void unRegisterIntent() throws RemoteException {}
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
         public int verifyHOTPPin(String pin) throws RemoteException {
@@ -165,7 +223,8 @@ public interface IKnoxGuardManager extends IInterface {
         }
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-        public int verifyHOTPDHChallenge(String hub, String sign, String challenge) throws RemoteException {
+        public int verifyHOTPDHChallenge(String hub, String sign, String challenge)
+                throws RemoteException {
             return 0;
         }
 
@@ -185,7 +244,8 @@ public interface IKnoxGuardManager extends IInterface {
         }
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-        public String verifyRegistrationInfo(String regInfo, String regInfoSig) throws RemoteException {
+        public String verifyRegistrationInfo(String regInfo, String regInfoSig)
+                throws RemoteException {
             return null;
         }
 
@@ -200,7 +260,16 @@ public interface IKnoxGuardManager extends IInterface {
         }
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-        public int lockScreen(String actionName, String clientName, String phoneNumber, String emailAddress, String message, boolean skipPin, boolean skipSupport, Bundle bundle) throws RemoteException {
+        public int lockScreen(
+                String actionName,
+                String clientName,
+                String phoneNumber,
+                String emailAddress,
+                String message,
+                boolean skipPin,
+                boolean skipSupport,
+                Bundle bundle)
+                throws RemoteException {
             return 0;
         }
 
@@ -260,7 +329,9 @@ public interface IKnoxGuardManager extends IInterface {
         }
 
         @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-        public int provisionCert(String enrollCert, String hotpCert, String policyCert, String blCert) throws RemoteException {
+        public int provisionCert(
+                String enrollCert, String hotpCert, String policyCert, String blCert)
+                throws RemoteException {
             return 0;
         }
 
@@ -300,7 +371,7 @@ public interface IKnoxGuardManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKnoxGuardManager {
+    public abstract static class Stub extends Binder implements IKnoxGuardManager {
         static final int TRANSACTION_bindToLockScreen = 9;
         static final int TRANSACTION_generateHotpDHRequest = 18;
         static final int TRANSACTION_getClientData = 25;
@@ -458,7 +529,8 @@ public interface IKnoxGuardManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKnoxGuardManager.DESCRIPTOR);
             }
@@ -494,7 +566,9 @@ public interface IKnoxGuardManager extends IInterface {
                     boolean _arg10 = data.readBoolean();
                     Bundle _arg11 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    setRemoteLockToLockscreen(_arg03, _arg12, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10, _arg11);
+                    setRemoteLockToLockscreen(
+                            _arg03, _arg12, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10, _arg11);
                     reply.writeNoException();
                     return true;
                 case 4:
@@ -512,7 +586,9 @@ public interface IKnoxGuardManager extends IInterface {
                     Bundle _arg112 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     boolean _arg122 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    setRemoteLockToLockscreenWithSkipSupport(_arg04, _arg13, _arg22, _arg32, _arg42, _arg52, _arg62, _arg72, _arg82, _arg92, _arg102, _arg112, _arg122);
+                    setRemoteLockToLockscreenWithSkipSupport(
+                            _arg04, _arg13, _arg22, _arg32, _arg42, _arg52, _arg62, _arg72, _arg82,
+                            _arg92, _arg102, _arg112, _arg122);
                     reply.writeNoException();
                     return true;
                 case 5:
@@ -629,7 +705,10 @@ public interface IKnoxGuardManager extends IInterface {
                     boolean _arg63 = data.readBoolean();
                     Bundle _arg73 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    int _result17 = lockScreen(_arg011, _arg17, _arg24, _arg33, _arg43, _arg53, _arg63, _arg73);
+                    int _result17 =
+                            lockScreen(
+                                    _arg011, _arg17, _arg24, _arg33, _arg43, _arg53, _arg63,
+                                    _arg73);
                     reply.writeNoException();
                     reply.writeInt(_result17);
                     return true;
@@ -763,7 +842,8 @@ public interface IKnoxGuardManager extends IInterface {
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-            public void registerIntent(String preFix, List<String> actionList) throws RemoteException {
+            public void registerIntent(String preFix, List<String> actionList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -794,7 +874,20 @@ public interface IKnoxGuardManager extends IInterface {
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-            public void setRemoteLockToLockscreen(int type, boolean state, String msg, String number, String email, boolean emergencycallbutton, String name, int failcount, long timeout, int blockcount, boolean skippin, Bundle bundle) throws RemoteException {
+            public void setRemoteLockToLockscreen(
+                    int type,
+                    boolean state,
+                    String msg,
+                    String number,
+                    String email,
+                    boolean emergencycallbutton,
+                    String name,
+                    int failcount,
+                    long timeout,
+                    int blockcount,
+                    boolean skippin,
+                    Bundle bundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -891,7 +984,21 @@ public interface IKnoxGuardManager extends IInterface {
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-            public void setRemoteLockToLockscreenWithSkipSupport(int type, boolean state, String msg, String number, String email, boolean emergencycallbutton, String name, int failcount, long timeout, int blockcount, boolean skippin, Bundle bundle, boolean skipSupportContainer) throws RemoteException {
+            public void setRemoteLockToLockscreenWithSkipSupport(
+                    int type,
+                    boolean state,
+                    String msg,
+                    String number,
+                    String email,
+                    boolean emergencycallbutton,
+                    String name,
+                    int failcount,
+                    long timeout,
+                    int blockcount,
+                    boolean skippin,
+                    Bundle bundle,
+                    boolean skipSupportContainer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1163,7 +1270,8 @@ public interface IKnoxGuardManager extends IInterface {
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-            public int verifyHOTPDHChallenge(String hub, String sign, String challenge) throws RemoteException {
+            public int verifyHOTPDHChallenge(String hub, String sign, String challenge)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1231,7 +1339,8 @@ public interface IKnoxGuardManager extends IInterface {
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-            public String verifyRegistrationInfo(String regInfo, String regInfoSig) throws RemoteException {
+            public String verifyRegistrationInfo(String regInfo, String regInfoSig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1283,7 +1392,16 @@ public interface IKnoxGuardManager extends IInterface {
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-            public int lockScreen(String actionName, String clientName, String phoneNumber, String emailAddress, String message, boolean skipPin, boolean skipSupport, Bundle bundle) throws RemoteException {
+            public int lockScreen(
+                    String actionName,
+                    String clientName,
+                    String phoneNumber,
+                    String emailAddress,
+                    String message,
+                    boolean skipPin,
+                    boolean skipSupport,
+                    Bundle bundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1489,7 +1607,9 @@ public interface IKnoxGuardManager extends IInterface {
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
-            public int provisionCert(String enrollCert, String hotpCert, String policyCert, String blCert) throws RemoteException {
+            public int provisionCert(
+                    String enrollCert, String hotpCert, String policyCert, String blCert)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

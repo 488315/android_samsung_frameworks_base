@@ -2,6 +2,7 @@ package com.android.net.module.util;
 
 import android.os.Parcel;
 import android.util.Log;
+
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -50,7 +51,12 @@ public class InetAddressUtils {
         try {
             return Inet6Address.getByAddress((String) null, addr.getAddress(), scopeid);
         } catch (UnknownHostException impossible) {
-            Log.wtf(TAG, "Cannot construct scoped Inet6Address with Inet6Address.getAddress(" + addr.getHostAddress() + "): ", impossible);
+            Log.wtf(
+                    TAG,
+                    "Cannot construct scoped Inet6Address with Inet6Address.getAddress("
+                            + addr.getHostAddress()
+                            + "): ",
+                    impossible);
             return null;
         }
     }
@@ -68,6 +74,5 @@ public class InetAddressUtils {
         }
     }
 
-    private InetAddressUtils() {
-    }
+    private InetAddressUtils() {}
 }

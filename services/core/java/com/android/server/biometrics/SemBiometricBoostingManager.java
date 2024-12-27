@@ -6,7 +6,9 @@ import android.os.CustomFrequencyManager;
 import android.os.UserHandle;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.accessibility.magnification.MagnificationConnectionManager$$ExternalSyntheticOutline0;
+
 import com.samsung.android.os.SemDvfsManager;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -53,7 +55,8 @@ public final class SemBiometricBoostingManager {
             context.sendBroadcastAsUser(new Intent(str), UserHandle.ALL);
             Slog.i("BiometricsBoosting", str);
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("sendBroadcastForBoosting: "), "BiometricsBoosting");
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("sendBroadcastForBoosting: "), "BiometricsBoosting");
         }
     }
 
@@ -82,7 +85,8 @@ public final class SemBiometricBoostingManager {
             context.getMainThreadHandler().removeCallbacks(releaser);
         }
         context.getMainThreadHandler().postDelayed(releaser, i3);
-        CustomFrequencyManager customFrequencyManager = (CustomFrequencyManager) context.getSystemService("CustomFrequencyManagerService");
+        CustomFrequencyManager customFrequencyManager =
+                (CustomFrequencyManager) context.getSystemService("CustomFrequencyManagerService");
         if (customFrequencyManager != null) {
             try {
                 customFrequencyManager.disableGpisHint();
@@ -91,11 +95,19 @@ public final class SemBiometricBoostingManager {
             }
         }
         if (!this.mIsEnabledSsrm) {
-            sendBroadcastForBoosting(context, "com.samsung.android.intent.action.BIOMETRIC_AUTHENTICATION_START");
+            sendBroadcastForBoosting(
+                    context, "com.samsung.android.intent.action.BIOMETRIC_AUTHENTICATION_START");
             this.mIsEnabledSsrm = true;
         }
         if (Utils.DEBUG) {
-            Slog.i("BiometricsBoosting", "acquireDvfs: " + this.mDvfsMgrs.size() + ", " + this.mReleasers.size() + ", " + this.mIsEnabledSsrm);
+            Slog.i(
+                    "BiometricsBoosting",
+                    "acquireDvfs: "
+                            + this.mDvfsMgrs.size()
+                            + ", "
+                            + this.mReleasers.size()
+                            + ", "
+                            + this.mIsEnabledSsrm);
         }
     }
 
@@ -107,7 +119,8 @@ public final class SemBiometricBoostingManager {
                 this.mDvfsMgrs.delete(i);
             }
             if (this.mIsEnabledSsrm && this.mDvfsMgrs.size() == 0) {
-                sendBroadcastForBoosting(context, "com.samsung.android.intent.action.BIOMETRIC_AUTHENTICATION_STOP");
+                sendBroadcastForBoosting(
+                        context, "com.samsung.android.intent.action.BIOMETRIC_AUTHENTICATION_STOP");
                 this.mIsEnabledSsrm = false;
             }
             Releaser releaser = (Releaser) this.mReleasers.get(i);
@@ -116,7 +129,14 @@ public final class SemBiometricBoostingManager {
             }
             this.mReleasers.delete(i);
             if (Utils.DEBUG) {
-                Slog.i("BiometricsBoosting", "release: " + i + ", " + this.mDvfsMgrs.size() + ", " + this.mReleasers.size());
+                Slog.i(
+                        "BiometricsBoosting",
+                        "release: "
+                                + i
+                                + ", "
+                                + this.mDvfsMgrs.size()
+                                + ", "
+                                + this.mReleasers.size());
             }
         } catch (Throwable th) {
             throw th;

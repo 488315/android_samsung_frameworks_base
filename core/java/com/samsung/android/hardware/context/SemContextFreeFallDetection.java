@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextFreeFallDetection extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextFreeFallDetection> CREATOR = new Parcelable.Creator<SemContextFreeFallDetection>() { // from class: com.samsung.android.hardware.context.SemContextFreeFallDetection.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextFreeFallDetection createFromParcel(Parcel in) {
-            return new SemContextFreeFallDetection(in);
-        }
+    public static final Parcelable.Creator<SemContextFreeFallDetection> CREATOR =
+            new Parcelable.Creator<
+                    SemContextFreeFallDetection>() { // from class:
+                                                     // com.samsung.android.hardware.context.SemContextFreeFallDetection.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextFreeFallDetection createFromParcel(Parcel in) {
+                    return new SemContextFreeFallDetection(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextFreeFallDetection[] newArray(int size) {
-            return new SemContextFreeFallDetection[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextFreeFallDetection[] newArray(int size) {
+                    return new SemContextFreeFallDetection[size];
+                }
+            };
     public static final int END = 2;
     public static final int START = 1;
     public static final int UNKNOWN = 0;

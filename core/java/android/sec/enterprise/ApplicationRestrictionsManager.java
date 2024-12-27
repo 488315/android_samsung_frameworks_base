@@ -2,7 +2,6 @@ package android.sec.enterprise;
 
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.sec.enterprise.EnterpriseDeviceManager;
 
 /* loaded from: classes3.dex */
 public class ApplicationRestrictionsManager {

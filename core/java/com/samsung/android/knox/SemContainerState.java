@@ -11,7 +11,8 @@ public class SemContainerState {
     private static final int CONTAINER_MODE_PERSONAL = 0;
     private static String TAG = "SemContainerState";
     private static boolean DEBUG = false;
-    public static String ACTION_CONTAINER_STATE_RECEIVER = "com.samsung.android.knox.ACTION_CONTAINER_STATE_RECEIVER";
+    public static String ACTION_CONTAINER_STATE_RECEIVER =
+            "com.samsung.android.knox.ACTION_CONTAINER_STATE_RECEIVER";
     private StateReceiver mReceiver = null;
     private StateListener mStateListener = null;
     private LockListener mLockListener = null;
@@ -50,8 +51,7 @@ public class SemContainerState {
     }
 
     private class StateReceiver extends ContainerStateReceiver {
-        private StateReceiver() {
-        }
+        private StateReceiver() {}
 
         @Override // android.os.ContainerStateReceiver
         public void onContainerCreated(Context context, int userHandle, Bundle b) {
@@ -131,16 +131,19 @@ public class SemContainerState {
         }
 
         @Override // android.os.ContainerStateReceiver
-        public void onLockScreenStateChanged(Context context, int userHandle, boolean visible, Bundle b) {
+        public void onLockScreenStateChanged(
+                Context context, int userHandle, boolean visible, Bundle b) {
             if (SemContainerState.this.mEventListener != null) {
-                SemContainerState.this.mEventListener.onLockScreenVisivilityChanged(context, userHandle, visible);
+                SemContainerState.this.mEventListener.onLockScreenVisivilityChanged(
+                        context, userHandle, visible);
             }
         }
 
         @Override // android.os.ContainerStateReceiver
         public void onContainerSwitch(Context context, int userHandle, Bundle b) {
             if (SemContainerState.this.mEventListener != null) {
-                SemContainerState.this.mEventListener.onContainerModeChanged(context, 1, userHandle);
+                SemContainerState.this.mEventListener.onContainerModeChanged(
+                        context, 1, userHandle);
             }
         }
 
@@ -152,19 +155,20 @@ public class SemContainerState {
         }
 
         @Override // android.os.ContainerStateReceiver
-        public void onContainerReset(Context context, int userHandle, Bundle b) {
-        }
+        public void onContainerReset(Context context, int userHandle, Bundle b) {}
 
         @Override // android.os.ContainerStateReceiver
-        public void onDeviceOwnerActivated(Context context, Bundle b) {
-        }
+        public void onDeviceOwnerActivated(Context context, Bundle b) {}
 
         @Override // android.os.ContainerStateReceiver
-        public void onDeviceOwnerLicenseActivated(Context context, Bundle b) {
-        }
+        public void onDeviceOwnerLicenseActivated(Context context, Bundle b) {}
     }
 
-    public void register(Context context, StateListener stateListener, LockListener lockListener, EventListener eventListener) {
+    public void register(
+            Context context,
+            StateListener stateListener,
+            LockListener lockListener,
+            EventListener eventListener) {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ACTION_CONTAINER_STATE_RECEIVER);
         this.mLockListener = lockListener;

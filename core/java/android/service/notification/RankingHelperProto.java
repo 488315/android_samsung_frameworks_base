@@ -16,7 +16,6 @@ public final class RankingHelperProto {
         public static final long UID = 1120986464258L;
         public static final long VISIBILITY = 1172526071813L;
 
-        public RecordProto() {
-        }
+        public RecordProto() {}
     }
 }

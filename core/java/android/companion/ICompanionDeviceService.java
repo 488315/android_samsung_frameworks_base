@@ -18,16 +18,13 @@ public interface ICompanionDeviceService extends IInterface {
 
     public static class Default implements ICompanionDeviceService {
         @Override // android.companion.ICompanionDeviceService
-        public void onDeviceAppeared(AssociationInfo associationInfo) throws RemoteException {
-        }
+        public void onDeviceAppeared(AssociationInfo associationInfo) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceService
-        public void onDeviceDisappeared(AssociationInfo associationInfo) throws RemoteException {
-        }
+        public void onDeviceDisappeared(AssociationInfo associationInfo) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceService
-        public void onDevicePresenceEvent(DevicePresenceEvent event) throws RemoteException {
-        }
+        public void onDevicePresenceEvent(DevicePresenceEvent event) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +32,7 @@ public interface ICompanionDeviceService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICompanionDeviceService {
+    public abstract static class Stub extends Binder implements ICompanionDeviceService {
         static final int TRANSACTION_onDeviceAppeared = 1;
         static final int TRANSACTION_onDeviceDisappeared = 2;
         static final int TRANSACTION_onDevicePresenceEvent = 3;
@@ -79,7 +76,8 @@ public interface ICompanionDeviceService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICompanionDeviceService.DESCRIPTOR);
             }
@@ -89,17 +87,20 @@ public interface ICompanionDeviceService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AssociationInfo _arg0 = (AssociationInfo) data.readTypedObject(AssociationInfo.CREATOR);
+                    AssociationInfo _arg0 =
+                            (AssociationInfo) data.readTypedObject(AssociationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onDeviceAppeared(_arg0);
                     return true;
                 case 2:
-                    AssociationInfo _arg02 = (AssociationInfo) data.readTypedObject(AssociationInfo.CREATOR);
+                    AssociationInfo _arg02 =
+                            (AssociationInfo) data.readTypedObject(AssociationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onDeviceDisappeared(_arg02);
                     return true;
                 case 3:
-                    DevicePresenceEvent _arg03 = (DevicePresenceEvent) data.readTypedObject(DevicePresenceEvent.CREATOR);
+                    DevicePresenceEvent _arg03 =
+                            (DevicePresenceEvent) data.readTypedObject(DevicePresenceEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onDevicePresenceEvent(_arg03);
                     return true;
@@ -137,7 +138,8 @@ public interface ICompanionDeviceService extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceService
-            public void onDeviceDisappeared(AssociationInfo associationInfo) throws RemoteException {
+            public void onDeviceDisappeared(AssociationInfo associationInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICompanionDeviceService.DESCRIPTOR);

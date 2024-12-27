@@ -6,12 +6,18 @@ import android.security.attestationverification.AttestationProfile;
 import android.security.attestationverification.AttestationVerificationManager;
 import android.security.keystore.KeyGenParameterSpec;
 import android.util.Slog;
+
 import com.android.server.SystemServerInitThreadPool$$ExternalSyntheticLambda0;
 import com.android.server.companion.transport.SecureTransport;
+
+import libcore.io.IoUtils;
+import libcore.io.Streams;
+
 import com.google.security.cryptauth.lib.securegcm.ukey2.BadHandleException;
 import com.google.security.cryptauth.lib.securegcm.ukey2.D2DConnectionContextV1;
 import com.google.security.cryptauth.lib.securegcm.ukey2.D2DHandshakeContext;
 import com.google.security.cryptauth.lib.securegcm.ukey2.HandshakeException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,8 +35,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
-import libcore.io.IoUtils;
-import libcore.io.Streams;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -52,8 +56,7 @@ public final class SecureChannel {
     public final AttestationVerifier mVerifier;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Callback {
-    }
+    public interface Callback {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum MessageType {
@@ -81,7 +84,12 @@ public final class SecureChannel {
         }
     }
 
-    public SecureChannel(InputStream inputStream, OutputStream outputStream, Callback callback, byte[] bArr, AttestationVerifier attestationVerifier) {
+    public SecureChannel(
+            InputStream inputStream,
+            OutputStream outputStream,
+            Callback callback,
+            byte[] bArr,
+            AttestationVerifier attestationVerifier) {
         this.mInput = inputStream;
         this.mOutput = outputStream;
         this.mCallback = callback;
@@ -91,8 +99,11 @@ public final class SecureChannel {
 
     public static byte[] constructToken(D2DHandshakeContext.Role role, byte[] bArr) {
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-        byte[] bytes = (role == D2DHandshakeContext.Role.INITIATOR ? "Initiator" : "Responder").getBytes(StandardCharsets.UTF_8);
-        return messageDigest.digest(ByteBuffer.allocate(bytes.length + bArr.length).put(bytes).put(bArr).array());
+        byte[] bytes =
+                (role == D2DHandshakeContext.Role.INITIATOR ? "Initiator" : "Responder")
+                        .getBytes(StandardCharsets.UTF_8);
+        return messageDigest.digest(
+                ByteBuffer.allocate(bytes.length + bArr.length).put(bytes).put(bArr).array());
     }
 
     public final void close() {
@@ -130,7 +141,10 @@ public final class SecureChannel {
             }
             MessageType messageType = MessageType.PRE_SHARED_KEY;
             sendMessage(messageType, constructToken(this.mRole, bArr));
-            boolean equals = Arrays.equals(readMessage(messageType), constructToken(this.mRole == role2 ? role : role2, bArr));
+            boolean equals =
+                    Arrays.equals(
+                            readMessage(messageType),
+                            constructToken(this.mRole == role2 ? role : role2, bArr));
             this.mPskVerified = equals;
             if (!equals) {
                 throw new SecureChannelException("Failed to verify the hash of pre-shared key.");
@@ -159,11 +173,19 @@ public final class SecureChannel {
                 } while (z);
                 this.mAlias = str;
             }
-            KeyGenParameterSpec build = new KeyGenParameterSpec.Builder(this.mAlias, 12).setAttestationChallenge(constructToken(this.mRole, this.mConnectionContext.getSessionUnique())).setDigests("SHA-256").build();
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("EC", "AndroidKeyStore");
+            KeyGenParameterSpec build =
+                    new KeyGenParameterSpec.Builder(this.mAlias, 12)
+                            .setAttestationChallenge(
+                                    constructToken(
+                                            this.mRole, this.mConnectionContext.getSessionUnique()))
+                            .setDigests("SHA-256")
+                            .build();
+            KeyPairGenerator keyPairGenerator =
+                    KeyPairGenerator.getInstance("EC", "AndroidKeyStore");
             keyPairGenerator.initialize(build);
             keyPairGenerator.generateKeyPair();
-            Certificate[] certificateChain = KeyStoreUtils.loadKeyStore().getCertificateChain(this.mAlias);
+            Certificate[] certificateChain =
+                    KeyStoreUtils.loadKeyStore().getCertificateChain(this.mAlias);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             for (Certificate certificate : certificateChain) {
                 byteArrayOutputStream.writeBytes(certificate.getEncoded());
@@ -175,21 +197,32 @@ public final class SecureChannel {
             if (this.mRole != role2) {
                 role = role2;
             }
-            byte[] constructToken = constructToken(role, this.mConnectionContext.getSessionUnique());
+            byte[] constructToken =
+                    constructToken(role, this.mConnectionContext.getSessionUnique());
             Bundle bundle = new Bundle();
             bundle.putByteArray("localbinding.challenge", constructToken);
             bundle.putBoolean("android.key_owned_by_system", true);
             final AtomicInteger atomicInteger = new AtomicInteger(0);
             final CountDownLatch countDownLatch = new CountDownLatch(1);
-            ((AttestationVerificationManager) attestationVerifier.mContext.getSystemService(AttestationVerificationManager.class)).verifyAttestation(new AttestationProfile(3), 3, bundle, readMessage, new SystemServerInitThreadPool$$ExternalSyntheticLambda0(), new BiConsumer() { // from class: com.android.server.companion.securechannel.AttestationVerifier$$ExternalSyntheticLambda0
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    AtomicInteger atomicInteger2 = atomicInteger;
-                    CountDownLatch countDownLatch2 = countDownLatch;
-                    atomicInteger2.set(((Integer) obj).intValue());
-                    countDownLatch2.countDown();
-                }
-            });
+            ((AttestationVerificationManager)
+                            attestationVerifier.mContext.getSystemService(
+                                    AttestationVerificationManager.class))
+                    .verifyAttestation(
+                            new AttestationProfile(3),
+                            3,
+                            bundle,
+                            readMessage,
+                            new SystemServerInitThreadPool$$ExternalSyntheticLambda0(),
+                            new BiConsumer() { // from class:
+                                               // com.android.server.companion.securechannel.AttestationVerifier$$ExternalSyntheticLambda0
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    AtomicInteger atomicInteger2 = atomicInteger;
+                                    CountDownLatch countDownLatch2 = countDownLatch;
+                                    atomicInteger2.set(((Integer) obj).intValue());
+                                    countDownLatch2.countDown();
+                                }
+                            });
             try {
                 if (!countDownLatch.await(10L, TimeUnit.SECONDS)) {
                     throw new SecureChannelException("Attestation verification timed out.");
@@ -199,7 +232,8 @@ public final class SecureChannel {
                 MessageType messageType3 = MessageType.AVF_RESULT;
                 sendMessage(messageType3, array);
                 if (ByteBuffer.wrap(readMessage(messageType3)).getInt() != 1) {
-                    throw new SecureChannelException("Remote device failed to verify local attestation.");
+                    throw new SecureChannelException(
+                            "Remote device failed to verify local attestation.");
                 }
                 if (this.mVerificationResult != 1) {
                     throw new SecureChannelException("Failed to verify remote attestation.");
@@ -228,7 +262,9 @@ public final class SecureChannel {
         byte[] bArr = new byte[remaining];
         wrap.get(bArr);
         if (this.mHandshakeContext != null && b != false) {
-            Slog.w("CDM_SecureChannel", "Detected a Ukey2 handshake role collision. Negotiating a role.");
+            Slog.w(
+                    "CDM_SecureChannel",
+                    "Detected a Ukey2 handshake role collision. Negotiating a role.");
             byte[] bArr2 = this.mClientInit;
             if (bArr2 != bArr) {
                 if (bArr2.length != remaining) {
@@ -256,7 +292,8 @@ public final class SecureChannel {
                 Slog.d("CDM_SecureChannel", "Assigned: Initiator; Discarding received Client Init");
                 ByteBuffer wrap2 = ByteBuffer.wrap(readMessage(MessageType.HANDSHAKE_INIT));
                 if (wrap2.get() == 0) {
-                    throw new HandshakeException("Failed to resolve Ukey2 handshake role collision.");
+                    throw new HandshakeException(
+                            "Failed to resolve Ukey2 handshake role collision.");
                 }
                 bArr = new byte[wrap2.remaining()];
                 wrap2.get(bArr);
@@ -276,7 +313,18 @@ public final class SecureChannel {
             }
             MessageType messageType = MessageType.HANDSHAKE_INIT;
             byte[] nextHandshakeMessage = this.mHandshakeContext.getNextHandshakeMessage();
-            sendMessage(messageType, ByteBuffer.allocate(nextHandshakeMessage.length + 1).put((byte) (1 ^ (D2DHandshakeContext.Role.INITIATOR.equals(this.mRole) ? 1 : 0))).put(nextHandshakeMessage).array());
+            sendMessage(
+                    messageType,
+                    ByteBuffer.allocate(nextHandshakeMessage.length + 1)
+                            .put(
+                                    (byte)
+                                            (1
+                                                    ^ (D2DHandshakeContext.Role.INITIATOR.equals(
+                                                                    this.mRole)
+                                                            ? 1
+                                                            : 0)))
+                            .put(nextHandshakeMessage)
+                            .array());
             if (z) {
                 Slog.d("CDM_SecureChannel", "Receiving Ukey2 Client Finish message");
             }
@@ -290,7 +338,8 @@ public final class SecureChannel {
             if (z2) {
                 Slog.d("CDM_SecureChannel", "Sending Ukey2 Client Finish message");
             }
-            sendMessage(MessageType.HANDSHAKE_FINISH, this.mHandshakeContext.getNextHandshakeMessage());
+            sendMessage(
+                    MessageType.HANDSHAKE_FINISH, this.mHandshakeContext.getNextHandshakeMessage());
         }
         if (!this.mHandshakeContext.isHandshakeComplete()) {
             Slog.e("CDM_SecureChannel", "Failed to complete Ukey2 Handshake");
@@ -317,7 +366,12 @@ public final class SecureChannel {
         }
         MessageType messageType = MessageType.HANDSHAKE_INIT;
         byte[] bArr = this.mClientInit;
-        sendMessage(messageType, ByteBuffer.allocate(bArr.length + 1).put((byte) (!role.equals(this.mRole) ? 1 : 0)).put(bArr).array());
+        sendMessage(
+                messageType,
+                ByteBuffer.allocate(bArr.length + 1)
+                        .put((byte) (!role.equals(this.mRole) ? 1 : 0))
+                        .put(bArr)
+                        .array());
     }
 
     public final boolean isSecured() {
@@ -344,18 +398,26 @@ public final class SecureChannel {
                 short s = wrap.getShort();
                 if (i != 1) {
                     Streams.skipByReading(this.mInput, Long.MAX_VALUE);
-                    throw new SecureChannelException("Secure channel version mismatch. Currently on version 1. Skipping rest of data.");
+                    throw new SecureChannelException(
+                            "Secure channel version mismatch. Currently on version 1. Skipping rest"
+                                + " of data.");
                 }
                 if (s != messageType.mValue) {
                     Streams.skipByReading(this.mInput, Long.MAX_VALUE);
-                    throw new SecureChannelException("Unexpected message type. Expected " + messageType.name() + "; Found " + MessageType.from(s).name() + ". Skipping rest of data.");
+                    throw new SecureChannelException(
+                            "Unexpected message type. Expected "
+                                    + messageType.name()
+                                    + "; Found "
+                                    + MessageType.from(s).name()
+                                    + ". Skipping rest of data.");
                 }
                 byte[] bArr2 = new byte[4];
                 Streams.readFully(this.mInput, bArr2);
                 try {
                     byte[] bArr3 = new byte[ByteBuffer.wrap(bArr2).getInt()];
                     Streams.readFully(this.mInput, bArr3);
-                    if (messageType == MessageType.HANDSHAKE_INIT || messageType == MessageType.HANDSHAKE_FINISH) {
+                    if (messageType == MessageType.HANDSHAKE_INIT
+                            || messageType == MessageType.HANDSHAKE_FINISH) {
                         return bArr3;
                     }
                     return this.mConnectionContext.decodeMessageFromPeer(bArr3, bArr);
@@ -373,11 +435,17 @@ public final class SecureChannel {
         boolean isSecured = isSecured();
         Callback callback = this.mCallback;
         if (!isSecured) {
-            Slog.d("CDM_SecureChannel", "Received a message without a secure connection. Message will be ignored.");
-            IllegalStateException illegalStateException = new IllegalStateException("Connection is not secure.");
+            Slog.d(
+                    "CDM_SecureChannel",
+                    "Received a message without a secure connection. Message will be ignored.");
+            IllegalStateException illegalStateException =
+                    new IllegalStateException("Connection is not secure.");
             SecureTransport secureTransport = (SecureTransport) callback;
             secureTransport.getClass();
-            Slog.e("CDM_CompanionTransport", "Secure transport encountered an error.", illegalStateException);
+            Slog.e(
+                    "CDM_CompanionTransport",
+                    "Secure transport encountered an error.",
+                    illegalStateException);
             if (secureTransport.mSecureChannel.mStopped) {
                 secureTransport.close();
                 return;
@@ -405,8 +473,10 @@ public final class SecureChannel {
     public final void sendMessage(MessageType messageType, byte[] bArr) {
         synchronized (this.mOutput) {
             try {
-                byte[] array = ByteBuffer.allocate(6).putInt(1).putShort(messageType.mValue).array();
-                if (messageType != MessageType.HANDSHAKE_INIT && messageType != MessageType.HANDSHAKE_FINISH) {
+                byte[] array =
+                        ByteBuffer.allocate(6).putInt(1).putShort(messageType.mValue).array();
+                if (messageType != MessageType.HANDSHAKE_INIT
+                        && messageType != MessageType.HANDSHAKE_FINISH) {
                     bArr = this.mConnectionContext.encodeMessageToPeer(bArr, array);
                 }
                 this.mOutput.write(array);

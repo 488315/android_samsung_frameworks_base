@@ -17,12 +17,10 @@ public interface IImsTrafficSessionCallback extends IInterface {
 
     public static class Default implements IImsTrafficSessionCallback {
         @Override // android.telephony.ims.aidl.IImsTrafficSessionCallback
-        public void onReady() throws RemoteException {
-        }
+        public void onReady() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsTrafficSessionCallback
-        public void onError(ConnectionFailureInfo info) throws RemoteException {
-        }
+        public void onError(ConnectionFailureInfo info) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +28,7 @@ public interface IImsTrafficSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsTrafficSessionCallback {
+    public abstract static class Stub extends Binder implements IImsTrafficSessionCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onReady = 1;
 
@@ -71,7 +69,8 @@ public interface IImsTrafficSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsTrafficSessionCallback.DESCRIPTOR);
             }
@@ -84,7 +83,9 @@ public interface IImsTrafficSessionCallback extends IInterface {
                     onReady();
                     return true;
                 case 2:
-                    ConnectionFailureInfo _arg0 = (ConnectionFailureInfo) data.readTypedObject(ConnectionFailureInfo.CREATOR);
+                    ConnectionFailureInfo _arg0 =
+                            (ConnectionFailureInfo)
+                                    data.readTypedObject(ConnectionFailureInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onError(_arg0);
                     return true;

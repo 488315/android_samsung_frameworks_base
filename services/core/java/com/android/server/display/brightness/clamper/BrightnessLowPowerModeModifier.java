@@ -3,7 +3,9 @@ package com.android.server.display.brightness.clamper;
 import android.hardware.display.DisplayManagerInternal;
 import android.util.IndentingPrintWriter;
 import android.view.Display;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -18,8 +20,11 @@ public final class BrightnessLowPowerModeModifier extends BrightnessModifier {
     }
 
     @Override // com.android.server.display.brightness.clamper.BrightnessModifier
-    public final float getBrightnessAdjusted(float f, DisplayManagerInternal.DisplayPowerRequest displayPowerRequest) {
-        return Math.max(Math.min(displayPowerRequest.screenLowPowerBrightnessFactor, 1.0f) * f, FullScreenMagnificationGestureHandler.MAX_SCALE);
+    public final float getBrightnessAdjusted(
+            float f, DisplayManagerInternal.DisplayPowerRequest displayPowerRequest) {
+        return Math.max(
+                Math.min(displayPowerRequest.screenLowPowerBrightnessFactor, 1.0f) * f,
+                FullScreenMagnificationGestureHandler.MAX_SCALE);
     }
 
     @Override // com.android.server.display.brightness.clamper.BrightnessModifier
@@ -28,17 +33,23 @@ public final class BrightnessLowPowerModeModifier extends BrightnessModifier {
     }
 
     @Override // com.android.server.display.brightness.clamper.BrightnessModifier
-    public final void setAmbientLux(float f) {
-    }
+    public final void setAmbientLux(float f) {}
 
     @Override // com.android.server.display.brightness.clamper.BrightnessModifier
-    public final boolean shouldApply(DisplayManagerInternal.DisplayPowerRequest displayPowerRequest) {
+    public final boolean shouldApply(
+            DisplayManagerInternal.DisplayPowerRequest displayPowerRequest) {
         return displayPowerRequest.lowPowerMode;
     }
 
     @Override // com.android.server.display.brightness.clamper.BrightnessModifier
-    public final boolean shouldApply(DisplayManagerInternal.DisplayPowerRequest displayPowerRequest, BrightnessModifierRequest brightnessModifierRequest) {
-        return (!displayPowerRequest.lowPowerMode || brightnessModifierRequest.mAwakenFromDozingInAutoBrightness || Display.isDozeState(brightnessModifierRequest.mDisplayState)) ? false : true;
+    public final boolean shouldApply(
+            DisplayManagerInternal.DisplayPowerRequest displayPowerRequest,
+            BrightnessModifierRequest brightnessModifierRequest) {
+        return (!displayPowerRequest.lowPowerMode
+                        || brightnessModifierRequest.mAwakenFromDozingInAutoBrightness
+                        || Display.isDozeState(brightnessModifierRequest.mDisplayState))
+                ? false
+                : true;
     }
 
     @Override // com.android.server.display.brightness.clamper.BrightnessModifier

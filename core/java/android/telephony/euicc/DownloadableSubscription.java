@@ -4,32 +4,36 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.telephony.UiccAccessRule;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public final class DownloadableSubscription implements Parcelable {
-    public static final Parcelable.Creator<DownloadableSubscription> CREATOR = new Parcelable.Creator<DownloadableSubscription>() { // from class: android.telephony.euicc.DownloadableSubscription.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DownloadableSubscription createFromParcel(Parcel in) {
-            return new DownloadableSubscription(in);
-        }
+    public static final Parcelable.Creator<DownloadableSubscription> CREATOR =
+            new Parcelable.Creator<
+                    DownloadableSubscription>() { // from class:
+                                                  // android.telephony.euicc.DownloadableSubscription.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DownloadableSubscription createFromParcel(Parcel in) {
+                    return new DownloadableSubscription(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DownloadableSubscription[] newArray(int size) {
-            return new DownloadableSubscription[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DownloadableSubscription[] newArray(int size) {
+                    return new DownloadableSubscription[size];
+                }
+            };
     private List<UiccAccessRule> accessRules;
     private String carrierName;
     private String confirmationCode;
 
-    @Deprecated
-    public final String encodedActivationCode;
+    @Deprecated public final String encodedActivationCode;
 
     public String getEncodedActivationCode() {
         return this.encodedActivationCode;
@@ -47,7 +51,11 @@ public final class DownloadableSubscription implements Parcelable {
         in.readTypedList(this.accessRules, UiccAccessRule.CREATOR);
     }
 
-    private DownloadableSubscription(String encodedActivationCode, String confirmationCode, String carrierName, List<UiccAccessRule> accessRules) {
+    private DownloadableSubscription(
+            String encodedActivationCode,
+            String confirmationCode,
+            String carrierName,
+            List<UiccAccessRule> accessRules) {
         this.encodedActivationCode = encodedActivationCode;
         this.confirmationCode = confirmationCode;
         this.carrierName = carrierName;
@@ -61,8 +69,7 @@ public final class DownloadableSubscription implements Parcelable {
         private String encodedActivationCode;
 
         @SystemApi
-        public Builder() {
-        }
+        public Builder() {}
 
         public Builder(DownloadableSubscription baseSubscription) {
             this.encodedActivationCode = baseSubscription.getEncodedActivationCode();
@@ -76,7 +83,11 @@ public final class DownloadableSubscription implements Parcelable {
         }
 
         public DownloadableSubscription build() {
-            return new DownloadableSubscription(this.encodedActivationCode, this.confirmationCode, this.carrierName, this.accessRules);
+            return new DownloadableSubscription(
+                    this.encodedActivationCode,
+                    this.confirmationCode,
+                    this.carrierName,
+                    this.accessRules);
         }
 
         public Builder setEncodedActivationCode(String value) {

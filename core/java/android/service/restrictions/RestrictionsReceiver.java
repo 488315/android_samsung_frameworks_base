@@ -10,7 +10,12 @@ import android.os.PersistableBundle;
 public abstract class RestrictionsReceiver extends BroadcastReceiver {
     private static final String TAG = "RestrictionsReceiver";
 
-    public abstract void onRequestPermission(Context context, String str, String str2, String str3, PersistableBundle persistableBundle);
+    public abstract void onRequestPermission(
+            Context context,
+            String str,
+            String str2,
+            String str3,
+            PersistableBundle persistableBundle);
 
     @Override // android.content.BroadcastReceiver
     public void onReceive(Context context, Intent intent) {
@@ -19,7 +24,11 @@ public abstract class RestrictionsReceiver extends BroadcastReceiver {
             String packageName = intent.getStringExtra(RestrictionsManager.EXTRA_PACKAGE_NAME);
             String requestType = intent.getStringExtra(RestrictionsManager.EXTRA_REQUEST_TYPE);
             String requestId = intent.getStringExtra(RestrictionsManager.EXTRA_REQUEST_ID);
-            PersistableBundle request = (PersistableBundle) intent.getParcelableExtra(RestrictionsManager.EXTRA_REQUEST_BUNDLE, PersistableBundle.class);
+            PersistableBundle request =
+                    (PersistableBundle)
+                            intent.getParcelableExtra(
+                                    RestrictionsManager.EXTRA_REQUEST_BUNDLE,
+                                    PersistableBundle.class);
             onRequestPermission(context, packageName, requestType, requestId, request);
         }
     }

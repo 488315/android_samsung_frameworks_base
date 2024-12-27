@@ -10,9 +10,11 @@ import android.os.ServiceManager;
 import android.view.InputEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
+
 import com.android.internal.inputmethod.IRemoteInputConnection;
-import com.samsung.android.content.smartclip.ISpenGestureService;
+
 import com.samsung.android.util.SemLog;
+
 import java.io.FileDescriptor;
 import java.util.ArrayList;
 
@@ -26,7 +28,9 @@ public class SpenGestureManager {
     }
 
     public synchronized boolean isServiceAvailable() {
-        ISpenGestureService service = ISpenGestureService.Stub.asInterface(ServiceManager.getService(Context.SEM_SPEN_GESTURE_SERVICE));
+        ISpenGestureService service =
+                ISpenGestureService.Stub.asInterface(
+                        ServiceManager.getService(Context.SEM_SPEN_GESTURE_SERVICE));
         if (service != null) {
             return true;
         }
@@ -36,7 +40,9 @@ public class SpenGestureManager {
 
     private synchronized ISpenGestureService getService() {
         if (this.mService == null) {
-            this.mService = ISpenGestureService.Stub.asInterface(ServiceManager.getService(Context.SEM_SPEN_GESTURE_SERVICE));
+            this.mService =
+                    ISpenGestureService.Stub.asInterface(
+                            ServiceManager.getService(Context.SEM_SPEN_GESTURE_SERVICE));
             if (this.mService == null) {
                 SemLog.w("SpenGestureManager", "warning: no SpenGestureManager");
             }
@@ -55,17 +61,20 @@ public class SpenGestureManager {
         }
     }
 
-    public SemSmartClipDataRepository getSmartClipDataByScreenRect(Rect rect, IBinder skipWindowToken, int extractionMode) {
+    public SemSmartClipDataRepository getSmartClipDataByScreenRect(
+            Rect rect, IBinder skipWindowToken, int extractionMode) {
         return getSmartClipDataByScreenRect(rect, skipWindowToken, extractionMode, 0);
     }
 
-    public SemSmartClipDataRepository getSmartClipDataByScreenRect(Rect rect, IBinder skipWindowToken, int extractionMode, int windowTargetingType) {
+    public SemSmartClipDataRepository getSmartClipDataByScreenRect(
+            Rect rect, IBinder skipWindowToken, int extractionMode, int windowTargetingType) {
         try {
             ISpenGestureService svc = getService();
             if (svc == null) {
                 return null;
             }
-            return svc.getSmartClipDataByScreenRect(rect, skipWindowToken, extractionMode, windowTargetingType);
+            return svc.getSmartClipDataByScreenRect(
+                    rect, skipWindowToken, extractionMode, windowTargetingType);
         } catch (RemoteException e) {
             return null;
         } catch (RuntimeException e2) {
@@ -97,12 +106,22 @@ public class SpenGestureManager {
         }
     }
 
-    public void injectInputEvent(int targetX, int targetY, ArrayList<InputEvent> inputEvents, boolean waitUntilConsume, IBinder skipWindowToken) {
+    public void injectInputEvent(
+            int targetX,
+            int targetY,
+            ArrayList<InputEvent> inputEvents,
+            boolean waitUntilConsume,
+            IBinder skipWindowToken) {
         try {
             ISpenGestureService svc = getService();
             if (svc != null) {
                 InputEvent[] array = new InputEvent[inputEvents.size()];
-                svc.injectInputEvent(targetX, targetY, (InputEvent[]) inputEvents.toArray(array), waitUntilConsume, skipWindowToken);
+                svc.injectInputEvent(
+                        targetX,
+                        targetY,
+                        (InputEvent[]) inputEvents.toArray(array),
+                        waitUntilConsume,
+                        skipWindowToken);
             }
         } catch (RemoteException ex) {
             throw new RuntimeException(ex);
@@ -335,7 +354,8 @@ public class SpenGestureManager {
         }
     }
 
-    public void registerBleSpenChargeLockStateChangedListener(IBleSpenChargeLockStateChangedListener listener) {
+    public void registerBleSpenChargeLockStateChangedListener(
+            IBleSpenChargeLockStateChangedListener listener) {
         try {
             ISpenGestureService svc = getService();
             if (svc != null) {
@@ -346,7 +366,8 @@ public class SpenGestureManager {
         }
     }
 
-    public void unregisterBleSpenChargeLockStateChangedListener(IBleSpenChargeLockStateChangedListener listener) {
+    public void unregisterBleSpenChargeLockStateChangedListener(
+            IBleSpenChargeLockStateChangedListener listener) {
         try {
             ISpenGestureService svc = getService();
             if (svc != null) {
@@ -380,7 +401,8 @@ public class SpenGestureManager {
         }
     }
 
-    public void setCurrentInputInfo(IRemoteInputConnection inputConnection, EditorInfo editorInfo, int missingMethodFlags) {
+    public void setCurrentInputInfo(
+            IRemoteInputConnection inputConnection, EditorInfo editorInfo, int missingMethodFlags) {
         try {
             ISpenGestureService svc = getService();
             if (svc != null) {
@@ -474,11 +496,25 @@ public class SpenGestureManager {
         }
     }
 
-    public Bitmap screenshot(int displayId, int targetWindowType, boolean containsTargetSystemWindow, Rect sourceCrop, int width, int height, boolean useIdentityTransform) {
+    public Bitmap screenshot(
+            int displayId,
+            int targetWindowType,
+            boolean containsTargetSystemWindow,
+            Rect sourceCrop,
+            int width,
+            int height,
+            boolean useIdentityTransform) {
         try {
             ISpenGestureService svc = getService();
             if (svc != null) {
-                return svc.screenshot(displayId, targetWindowType, containsTargetSystemWindow, sourceCrop, width, height, useIdentityTransform);
+                return svc.screenshot(
+                        displayId,
+                        targetWindowType,
+                        containsTargetSystemWindow,
+                        sourceCrop,
+                        width,
+                        height,
+                        useIdentityTransform);
             }
             return null;
         } catch (RemoteException ex) {
@@ -486,7 +522,8 @@ public class SpenGestureManager {
         }
     }
 
-    public void setPenHoverIcon(Context context, FileDescriptor fd, float hotspotX, float hotspotY) {
+    public void setPenHoverIcon(
+            Context context, FileDescriptor fd, float hotspotX, float hotspotY) {
         if (context == null || fd == null) {
             return;
         }

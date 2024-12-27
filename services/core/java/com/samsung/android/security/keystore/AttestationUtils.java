@@ -21,6 +21,7 @@ import android.security.samsungattestation.ISamsungAttestation;
 import android.system.keystore2.KeyDescriptor;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -41,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Iterator;
+
 import javax.security.auth.x500.X500Principal;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -49,7 +51,8 @@ public final class AttestationUtils {
     public ISamsungAttestation mSamsungAttestationBinder = null;
     public final KeyStore2 mKeyStore = KeyStore2.getInstance();
 
-    public static KeyParameter[] constructAttestationArguments(AttestParameterSpec attestParameterSpec) {
+    public static KeyParameter[] constructAttestationArguments(
+            AttestParameterSpec attestParameterSpec) {
         String keystoreAlias = attestParameterSpec.mSpec.getKeystoreAlias();
         X500Principal x500Principal = attestParameterSpec.mCertificateSubject;
         if (TextUtils.isEmpty(keystoreAlias)) {
@@ -57,17 +60,22 @@ public final class AttestationUtils {
         }
         byte[] bArr = attestParameterSpec.mChallenge;
         if (bArr == null) {
-            throw new IllegalArgumentException("constructAttestationArguments : The challenge cannot be null");
+            throw new IllegalArgumentException(
+                    "constructAttestationArguments : The challenge cannot be null");
         }
         ArrayList arrayList = new ArrayList();
         arrayList.add(makeBytes(-1879047484, bArr));
         if (attestParameterSpec.mDeviceAttestation) {
-            arrayList.add(makeBytes(-1879046090, "samsungDeviceIds".getBytes(StandardCharsets.UTF_8)));
+            arrayList.add(
+                    makeBytes(-1879046090, "samsungDeviceIds".getBytes(StandardCharsets.UTF_8)));
         } else {
             arrayList.add(makeBytes(-1879046090, "samsung".getBytes(StandardCharsets.UTF_8)));
         }
         if (x500Principal != null && !TextUtils.isEmpty(x500Principal.getName("RFC1779"))) {
-            arrayList.add(makeBytes(-1879046089, x500Principal.getName("RFC1779").getBytes(StandardCharsets.UTF_8)));
+            arrayList.add(
+                    makeBytes(
+                            -1879046089,
+                            x500Principal.getName("RFC1779").getBytes(StandardCharsets.UTF_8)));
         }
         if (attestParameterSpec.mVerifiableIntegrity) {
             arrayList.add(makeBool(1879050494));
@@ -85,11 +93,15 @@ public final class AttestationUtils {
                     Log.w("AttestationUtils", "packageName is null");
                 } else {
                     try {
-                        PackageInfo packageInfo = currentApplication.getPackageManager().getPackageInfo(str, 134217728);
+                        PackageInfo packageInfo =
+                                currentApplication
+                                        .getPackageManager()
+                                        .getPackageInfo(str, 134217728);
                         if (packageInfo == null) {
                             Log.w("AttestationUtils", "pkgInfo is null");
                         } else {
-                            Signature[] apkContentsSigners = packageInfo.signingInfo.getApkContentsSigners();
+                            Signature[] apkContentsSigners =
+                                    packageInfo.signingInfo.getApkContentsSigners();
                             PublicKey[] publicKeyArr2 = new PublicKey[apkContentsSigners.length];
                             int i = 0;
                             for (Signature signature : apkContentsSigners) {
@@ -127,7 +139,8 @@ public final class AttestationUtils {
                                 byte[] encode = encoder.encode(messageDigest.digest());
                                 byteArrayOutputStream.write(encode, 0, encode.length);
                             } catch (NoSuchAlgorithmException e3) {
-                                throw new ProviderException("NoSuchAlgorithmException : " + e3.getMessage());
+                                throw new ProviderException(
+                                        "NoSuchAlgorithmException : " + e3.getMessage());
                             }
                         }
                         byteArray = byteArrayOutputStream.toByteArray();
@@ -136,10 +149,14 @@ public final class AttestationUtils {
                 if (byteArray != null) {
                     arrayList.add(makeBytes(-1879045889, byteArray));
                 } else {
-                    Log.w("AttestationUtils", "constructAttestationArguments : Auth package byte is null");
+                    Log.w(
+                            "AttestationUtils",
+                            "constructAttestationArguments : Auth package byte is null");
                 }
             } else {
-                Log.w("AttestationUtils", "constructAttestationArguments : could not found application");
+                Log.w(
+                        "AttestationUtils",
+                        "constructAttestationArguments : could not found application");
             }
         }
         if (attestParameterSpec.mDevicePropertiesAttestationIncluded) {
@@ -157,7 +174,9 @@ public final class AttestationUtils {
         }
         String str3 = attestParameterSpec.mExtendedKeyUsage;
         if (str3 != null) {
-            Log.w("AttestationUtils", "constructAttestationArguments : EKU is setted with ".concat(str3));
+            Log.w(
+                    "AttestationUtils",
+                    "constructAttestationArguments : EKU is setted with ".concat(str3));
             arrayList.add(makeBytes(-1879046087, str3.getBytes(StandardCharsets.UTF_8)));
         }
         return (KeyParameter[]) arrayList.toArray(new KeyParameter[arrayList.size()]);
@@ -168,7 +187,10 @@ public final class AttestationUtils {
             KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
             keyStore.deleteEntry("KnoxTestKey");
-        } catch (IOException | KeyStoreException | NoSuchAlgorithmException | CertificateException e) {
+        } catch (IOException
+                | KeyStoreException
+                | NoSuchAlgorithmException
+                | CertificateException e) {
             e.printStackTrace();
             throw new KeyStoreException(e.getMessage());
         }
@@ -179,19 +201,55 @@ public final class AttestationUtils {
             KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
             return keyStore.getCertificateChain(str);
-        } catch (IOException | KeyStoreException | NoSuchAlgorithmException | CertificateException e) {
+        } catch (IOException
+                | KeyStoreException
+                | NoSuchAlgorithmException
+                | CertificateException e) {
             e.printStackTrace();
             return null;
         }
     }
 
     public static android.security.KeyStoreException getKeyStoreException(int i) {
-        return i > 0 ? i != 2 ? i != 3 ? i != 4 ? i != 6 ? i != 7 ? i != 8 ? i != 17 ? new android.security.KeyStoreException(i, String.valueOf(i)) : new android.security.KeyStoreException(i, "Key permanently invalidated") : new android.security.KeyStoreException(i, "Key blob corrupted") : new android.security.KeyStoreException(i, "Key not found") : new android.security.KeyStoreException(i, "Permission denied") : new android.security.KeyStoreException(i, "System error") : new android.security.KeyStoreException(i, "Keystore not initialized") : new android.security.KeyStoreException(i, "User authentication required") : i != -16 ? new android.security.KeyStoreException(i, KeymasterDefs.getErrorMessage(i)) : new android.security.KeyStoreException(i, "Invalid user authentication validity duration");
+        return i > 0
+                ? i != 2
+                        ? i != 3
+                                ? i != 4
+                                        ? i != 6
+                                                ? i != 7
+                                                        ? i != 8
+                                                                ? i != 17
+                                                                        ? new android.security
+                                                                                .KeyStoreException(
+                                                                                i,
+                                                                                String.valueOf(i))
+                                                                        : new android.security
+                                                                                .KeyStoreException(
+                                                                                i,
+                                                                                "Key permanently"
+                                                                                    + " invalidated")
+                                                                : new android.security
+                                                                        .KeyStoreException(
+                                                                        i, "Key blob corrupted")
+                                                        : new android.security.KeyStoreException(
+                                                                i, "Key not found")
+                                                : new android.security.KeyStoreException(
+                                                        i, "Permission denied")
+                                        : new android.security.KeyStoreException(i, "System error")
+                                : new android.security.KeyStoreException(
+                                        i, "Keystore not initialized")
+                        : new android.security.KeyStoreException(i, "User authentication required")
+                : i != -16
+                        ? new android.security.KeyStoreException(
+                                i, KeymasterDefs.getErrorMessage(i))
+                        : new android.security.KeyStoreException(
+                                i, "Invalid user authentication validity duration");
     }
 
     public static KeyParameter makeBool(int i) {
         if (KeymasterDefs.getTagType(i) != 1879048192) {
-            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Not a boolean tag: "));
+            throw new IllegalArgumentException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Not a boolean tag: "));
         }
         KeyParameter keyParameter = new KeyParameter();
         keyParameter.tag = i;
@@ -201,7 +259,8 @@ public final class AttestationUtils {
 
     public static KeyParameter makeBytes(int i, byte[] bArr) {
         if (KeymasterDefs.getTagType(i) != -1879048192) {
-            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Not a bytes tag: "));
+            throw new IllegalArgumentException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Not a bytes tag: "));
         }
         KeyParameter keyParameter = new KeyParameter();
         keyParameter.tag = i;
@@ -210,12 +269,17 @@ public final class AttestationUtils {
     }
 
     public final Iterable attestKey(AttestParameterSpec attestParameterSpec) {
-        KeyParameter[] constructAttestationArguments = constructAttestationArguments(attestParameterSpec);
+        KeyParameter[] constructAttestationArguments =
+                constructAttestationArguments(attestParameterSpec);
         try {
             if (!attestParameterSpec.mDeviceAttestation) {
-                return tryAttestation(attestParameterSpec.mSpec.getKeystoreAlias(), constructAttestationArguments);
+                return tryAttestation(
+                        attestParameterSpec.mSpec.getKeystoreAlias(),
+                        constructAttestationArguments);
             }
-            return tryAttestation(attestParameterSpec.mSpec.getKeystoreAlias(), constructAttestationArguments(attestParameterSpec));
+            return tryAttestation(
+                    attestParameterSpec.mSpec.getKeystoreAlias(),
+                    constructAttestationArguments(attestParameterSpec));
         } catch (DeviceIdAttestationException e) {
             throw new IllegalArgumentException("Incompatible argument detected: " + e.getMessage());
         }
@@ -226,20 +290,30 @@ public final class AttestationUtils {
         KeyGenParameterSpec keyGenParameterSpec = attestParameterSpec.mSpec;
         String keystoreAlias = keyGenParameterSpec.getKeystoreAlias();
         if (TextUtils.isEmpty(keystoreAlias) || keyGenParameterSpec.getUid() != -1) {
-            throw new ProviderException("Cannot generate key pair with empty alias or specified uid.");
+            throw new ProviderException(
+                    "Cannot generate key pair with empty alias or specified uid.");
         }
         try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(attestParameterSpec.mAlgorithm, "AndroidKeyStore");
+            KeyPairGenerator keyPairGenerator =
+                    KeyPairGenerator.getInstance(attestParameterSpec.mAlgorithm, "AndroidKeyStore");
             keyPairGenerator.initialize(keyGenParameterSpec);
             KeyPair generateKeyPair = keyPairGenerator.generateKeyPair();
             if (attestParameterSpec.mDeviceAttestation) {
-                attestKey = tryAttestation(attestParameterSpec.mSpec.getKeystoreAlias(), constructAttestationArguments(attestParameterSpec));
+                attestKey =
+                        tryAttestation(
+                                attestParameterSpec.mSpec.getKeystoreAlias(),
+                                constructAttestationArguments(attestParameterSpec));
             } else {
                 attestKey = attestKey(attestParameterSpec);
             }
             storeCertificateChain(keystoreAlias, attestKey);
             return generateKeyPair;
-        } catch (DeviceIdAttestationException | IllegalStateException | InvalidAlgorithmParameterException | KeyStoreException | NoSuchAlgorithmException | NoSuchProviderException e) {
+        } catch (DeviceIdAttestationException
+                | IllegalStateException
+                | InvalidAlgorithmParameterException
+                | KeyStoreException
+                | NoSuchAlgorithmException
+                | NoSuchProviderException e) {
             e.printStackTrace();
             throw new ProviderException(e.getMessage());
         }
@@ -250,25 +324,40 @@ public final class AttestationUtils {
             throw new IllegalArgumentException("alias must not be empty");
         }
         if (bArr != null) {
-            return generateKeyPair(new AttestParameterSpec(bArr, false, false, new KeyGenParameterSpec.Builder(str, 4).setDigests("NONE", "SHA-1", "SHA-224", "SHA-256", "SHA-384", "SHA-512").build()));
+            return generateKeyPair(
+                    new AttestParameterSpec(
+                            bArr,
+                            false,
+                            false,
+                            new KeyGenParameterSpec.Builder(str, 4)
+                                    .setDigests(
+                                            "NONE", "SHA-1", "SHA-224", "SHA-256", "SHA-384",
+                                            "SHA-512")
+                                    .build()));
         }
         throw new NullPointerException("challenge == null");
     }
 
-    public final Object handleRemoteExceptionSamsungAttestation(AttestationUtils$$ExternalSyntheticLambda0 attestationUtils$$ExternalSyntheticLambda0) {
+    public final Object handleRemoteExceptionSamsungAttestation(
+            AttestationUtils$$ExternalSyntheticLambda0 attestationUtils$$ExternalSyntheticLambda0) {
         ISamsungAttestation iSamsungAttestation;
         ISamsungAttestation iSamsungAttestation2;
         synchronized (this) {
             try {
                 if (this.mSamsungAttestationBinder == null) {
-                    IBinder checkService = ServiceManager.checkService("android.security.samsungattestation");
+                    IBinder checkService =
+                            ServiceManager.checkService("android.security.samsungattestation");
                     int i = ISamsungAttestation.Stub.$r8$clinit;
                     if (checkService == null) {
                         iSamsungAttestation2 = null;
                     } else {
-                        IInterface queryLocalInterface = checkService.queryLocalInterface("android.security.samsungattestation.ISamsungAttestation");
-                        if (queryLocalInterface == null || !(queryLocalInterface instanceof ISamsungAttestation)) {
-                            ISamsungAttestation.Stub.Proxy proxy = new ISamsungAttestation.Stub.Proxy();
+                        IInterface queryLocalInterface =
+                                checkService.queryLocalInterface(
+                                        "android.security.samsungattestation.ISamsungAttestation");
+                        if (queryLocalInterface == null
+                                || !(queryLocalInterface instanceof ISamsungAttestation)) {
+                            ISamsungAttestation.Stub.Proxy proxy =
+                                    new ISamsungAttestation.Stub.Proxy();
                             proxy.mRemote = checkService;
                             iSamsungAttestation2 = proxy;
                         } else {
@@ -321,13 +410,17 @@ public final class AttestationUtils {
                     keyDescriptor.nspace = -1L;
                     keyDescriptor.alias = str;
                     keyDescriptor.blob = null;
-                    this.mKeyStore.updateSubcomponents(keyDescriptor, bArr, byteArrayOutputStream.toByteArray());
+                    this.mKeyStore.updateSubcomponents(
+                            keyDescriptor, bArr, byteArrayOutputStream.toByteArray());
                 } catch (android.security.KeyStoreException e) {
                     e.printStackTrace();
                     throw new KeyStoreException(e.getMessage());
                 }
             }
-        } catch (IOException | KeyStoreException | NoSuchAlgorithmException | CertificateException e2) {
+        } catch (IOException
+                | KeyStoreException
+                | NoSuchAlgorithmException
+                | CertificateException e2) {
             e2.printStackTrace();
             throw new KeyStoreException(e2.getMessage());
         }
@@ -341,7 +434,11 @@ public final class AttestationUtils {
             keyDescriptor.nspace = -1L;
             keyDescriptor.alias = str;
             keyDescriptor.blob = null;
-            android.hardware.security.keymint.Certificate[] certificateArr = (android.hardware.security.keymint.Certificate[]) handleRemoteExceptionSamsungAttestation(new AttestationUtils$$ExternalSyntheticLambda0(keyDescriptor, keyParameterArr));
+            android.hardware.security.keymint.Certificate[] certificateArr =
+                    (android.hardware.security.keymint.Certificate[])
+                            handleRemoteExceptionSamsungAttestation(
+                                    new AttestationUtils$$ExternalSyntheticLambda0(
+                                            keyDescriptor, keyParameterArr));
             if (certificateArr == null) {
                 throw new NullPointerException("chain == null");
             }
@@ -351,12 +448,19 @@ public final class AttestationUtils {
             if (arrayList.size() >= 3) {
                 return arrayList;
             }
-            throw new ProviderException("Attestation certificate chain contained " + arrayList.size() + " entries. At least three are required.");
+            throw new ProviderException(
+                    "Attestation certificate chain contained "
+                            + arrayList.size()
+                            + " entries. At least three are required.");
         } catch (android.security.KeyStoreException e) {
             if (e.getErrorCode() == -66) {
-                throw new DeviceIdAttestationException("Failed to generate attestation certificate chain with deviceId", getKeyStoreException(e.getErrorCode()));
+                throw new DeviceIdAttestationException(
+                        "Failed to generate attestation certificate chain with deviceId",
+                        getKeyStoreException(e.getErrorCode()));
             }
-            throw new ProviderException("Failed to generate attestation certificate chain", getKeyStoreException(e.getErrorCode()));
+            throw new ProviderException(
+                    "Failed to generate attestation certificate chain",
+                    getKeyStoreException(e.getErrorCode()));
         }
     }
 }

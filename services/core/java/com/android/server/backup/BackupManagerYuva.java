@@ -31,7 +31,8 @@ public final class BackupManagerYuva {
         if (this.mMemorySaverObserver != null) {
             try {
                 Slog.d("BackupManagerYuva", "full backup Completed " + this.mBackupPackageName);
-                this.mMemorySaverObserver.onBackupCompleted(this.mBackupPackageName, this.isMemorySaverBackupFail ^ true);
+                this.mMemorySaverObserver.onBackupCompleted(
+                        this.mBackupPackageName, this.isMemorySaverBackupFail ^ true);
                 this.mBackupPackageName = null;
             } catch (RemoteException unused) {
                 Slog.w("BackupManagerYuva", "full backup observer went away: EndBackup");
@@ -44,7 +45,8 @@ public final class BackupManagerYuva {
         if (this.mMemorySaverObserver != null) {
             try {
                 Slog.d("BackupManagerYuva", "restore completed " + this.mRestorePackageName);
-                this.mMemorySaverObserver.onRestoreCompleted(this.mRestorePackageName, this.isMemorySaverRestoreFail ^ true);
+                this.mMemorySaverObserver.onRestoreCompleted(
+                        this.mRestorePackageName, this.isMemorySaverRestoreFail ^ true);
                 this.mRestorePackageName = null;
             } catch (RemoteException unused) {
                 Slog.w("BackupManagerYuva", "full restore observer went away: endRestore");

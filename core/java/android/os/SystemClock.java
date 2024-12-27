@@ -6,7 +6,9 @@ import android.app.timedetector.ITimeDetectorService;
 import android.location.ILocationManager;
 import android.location.LocationTime;
 import android.util.Slog;
+
 import dalvik.annotation.optimization.CriticalNative;
+
 import java.time.Clock;
 import java.time.DateTimeException;
 import java.time.ZoneOffset;
@@ -38,8 +40,7 @@ public final class SystemClock {
     @CriticalNative
     public static native long uptimeNanos();
 
-    private SystemClock() {
-    }
+    private SystemClock() {}
 
     public static void sleep(long ms) {
         long start = uptimeMillis();
@@ -121,7 +122,8 @@ public final class SystemClock {
     }
 
     public static long currentNetworkTimeMillis() {
-        ITimeDetectorService timeDetectorService = ITimeDetectorService.Stub.asInterface(ServiceManager.getService("time_detector"));
+        ITimeDetectorService timeDetectorService =
+                ITimeDetectorService.Stub.asInterface(ServiceManager.getService("time_detector"));
         if (timeDetectorService != null) {
             try {
                 UnixEpochTime time = timeDetectorService.latestNetworkTime();
@@ -152,7 +154,8 @@ public final class SystemClock {
 
     public static Clock currentGnssTimeClock() {
         return new SimpleClock(ZoneOffset.UTC) { // from class: android.os.SystemClock.4
-            private final ILocationManager mMgr = ILocationManager.Stub.asInterface(ServiceManager.getService("location"));
+            private final ILocationManager mMgr =
+                    ILocationManager.Stub.asInterface(ServiceManager.getService("location"));
 
             @Override // android.os.SimpleClock, java.time.Clock, java.time.InstantSource
             public long millis() {

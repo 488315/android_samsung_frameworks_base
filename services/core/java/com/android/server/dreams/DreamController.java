@@ -19,10 +19,10 @@ import android.os.Trace;
 import android.os.UserHandle;
 import android.service.dreams.IDreamService;
 import android.util.Slog;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.FrameworkStatsLog;
-import com.android.server.dreams.DreamController;
-import com.android.server.dreams.DreamManagerService;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -44,8 +44,10 @@ public final class DreamController {
     public boolean mSentStartBroadcast;
     public static final String DREAMING_DELIVERY_GROUP_NAMESPACE = UUID.randomUUID().toString();
     public static final String DREAMING_DELIVERY_GROUP_KEY = UUID.randomUUID().toString();
-    public final Intent mDreamingStartedIntent = new Intent("android.intent.action.DREAMING_STARTED").addFlags(1342177280);
-    public final Intent mDreamingStoppedIntent = new Intent("android.intent.action.DREAMING_STOPPED").addFlags(1342177280);
+    public final Intent mDreamingStartedIntent =
+            new Intent("android.intent.action.DREAMING_STARTED").addFlags(1342177280);
+    public final Intent mDreamingStoppedIntent =
+            new Intent("android.intent.action.DREAMING_STOPPED").addFlags(1342177280);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DreamRecord implements IBinder.DeathRecipient, ServiceConnection {
@@ -60,29 +62,48 @@ public final class DreamController {
         public final ComponentName mName;
         public final DreamController$DreamRecord$$ExternalSyntheticLambda1 mReleaseWakeLockIfNeeded;
         public IDreamService mService;
-        public final DreamController$DreamRecord$$ExternalSyntheticLambda1 mStopPreviousDreamsIfNeeded = new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 0);
+        public final DreamController$DreamRecord$$ExternalSyntheticLambda1
+                mStopPreviousDreamsIfNeeded =
+                        new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 0);
         public String mStopReason;
-        public final DreamController$DreamRecord$$ExternalSyntheticLambda1 mStopStubbornDreamRunnable;
-        public final DreamController$DreamRecord$$ExternalSyntheticLambda1 mStopUnconnectedDreamRunnable;
+        public final DreamController$DreamRecord$$ExternalSyntheticLambda1
+                mStopStubbornDreamRunnable;
+        public final DreamController$DreamRecord$$ExternalSyntheticLambda1
+                mStopUnconnectedDreamRunnable;
         public final Binder mToken;
         public final int mUserId;
         public PowerManager.WakeLock mWakeLock;
         public boolean mWakingGently;
 
         /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.dreams.DreamController$DreamRecord$1] */
-        public DreamRecord(Binder binder, ComponentName componentName, boolean z, boolean z2, int i, PowerManager.WakeLock wakeLock) {
-            DreamController$DreamRecord$$ExternalSyntheticLambda1 dreamController$DreamRecord$$ExternalSyntheticLambda1 = new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 1);
+        public DreamRecord(
+                Binder binder,
+                ComponentName componentName,
+                boolean z,
+                boolean z2,
+                int i,
+                PowerManager.WakeLock wakeLock) {
+            DreamController$DreamRecord$$ExternalSyntheticLambda1
+                    dreamController$DreamRecord$$ExternalSyntheticLambda1 =
+                            new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 1);
             this.mReleaseWakeLockIfNeeded = dreamController$DreamRecord$$ExternalSyntheticLambda1;
-            this.mStopUnconnectedDreamRunnable = new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 2);
-            this.mStopStubbornDreamRunnable = new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 3);
-            this.mDreamingStartedCallback = new IRemoteCallback.Stub() { // from class: com.android.server.dreams.DreamController.DreamRecord.1
-                public final void sendResult(Bundle bundle) {
-                    DreamRecord dreamRecord = DreamRecord.this;
-                    DreamController.this.mHandler.post(dreamRecord.mStopPreviousDreamsIfNeeded);
-                    DreamRecord dreamRecord2 = DreamRecord.this;
-                    DreamController.this.mHandler.post(dreamRecord2.mReleaseWakeLockIfNeeded);
-                }
-            };
+            this.mStopUnconnectedDreamRunnable =
+                    new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 2);
+            this.mStopStubbornDreamRunnable =
+                    new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 3);
+            this.mDreamingStartedCallback =
+                    new IRemoteCallback
+                            .Stub() { // from class:
+                                      // com.android.server.dreams.DreamController.DreamRecord.1
+                        public final void sendResult(Bundle bundle) {
+                            DreamRecord dreamRecord = DreamRecord.this;
+                            DreamController.this.mHandler.post(
+                                    dreamRecord.mStopPreviousDreamsIfNeeded);
+                            DreamRecord dreamRecord2 = DreamRecord.this;
+                            DreamController.this.mHandler.post(
+                                    dreamRecord2.mReleaseWakeLockIfNeeded);
+                        }
+                    };
             this.mToken = binder;
             this.mName = componentName;
             this.mIsPreviewMode = z;
@@ -92,54 +113,81 @@ public final class DreamController {
             if (wakeLock != null) {
                 wakeLock.acquire();
             }
-            DreamController.this.mHandler.postDelayed(dreamController$DreamRecord$$ExternalSyntheticLambda1, 10000L);
+            DreamController.this.mHandler.postDelayed(
+                    dreamController$DreamRecord$$ExternalSyntheticLambda1, 10000L);
         }
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
-            DreamController.this.mHandler.post(new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 5));
+            DreamController.this.mHandler.post(
+                    new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 5));
         }
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, final IBinder iBinder) {
-            DreamController.this.mHandler.post(new Runnable() { // from class: com.android.server.dreams.DreamController$DreamRecord$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    DreamController.DreamRecord dreamRecord = DreamController.DreamRecord.this;
-                    IBinder iBinder2 = iBinder;
-                    dreamRecord.mConnected = true;
-                    DreamController dreamController = DreamController.this;
-                    if (dreamController.mCurrentDream != dreamRecord || dreamRecord.mService != null) {
-                        dreamRecord.releaseWakeLockIfNeeded();
-                        return;
-                    }
-                    IDreamService asInterface = IDreamService.Stub.asInterface(iBinder2);
-                    try {
-                        asInterface.asBinder().linkToDeath(dreamController.mCurrentDream, 0);
-                        DreamController.DreamRecord dreamRecord2 = dreamController.mCurrentDream;
-                        asInterface.attach(dreamRecord2.mToken, dreamRecord2.mCanDoze, dreamRecord2.mIsPreviewMode, dreamRecord2.mDreamingStartedCallback);
-                        DreamController.DreamRecord dreamRecord3 = dreamController.mCurrentDream;
-                        dreamRecord3.mService = asInterface;
-                        if (dreamRecord3.mIsPreviewMode || dreamController.mSentStartBroadcast) {
-                            return;
+            DreamController.this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.dreams.DreamController$DreamRecord$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            DreamController.DreamRecord dreamRecord =
+                                    DreamController.DreamRecord.this;
+                            IBinder iBinder2 = iBinder;
+                            dreamRecord.mConnected = true;
+                            DreamController dreamController = DreamController.this;
+                            if (dreamController.mCurrentDream != dreamRecord
+                                    || dreamRecord.mService != null) {
+                                dreamRecord.releaseWakeLockIfNeeded();
+                                return;
+                            }
+                            IDreamService asInterface = IDreamService.Stub.asInterface(iBinder2);
+                            try {
+                                asInterface
+                                        .asBinder()
+                                        .linkToDeath(dreamController.mCurrentDream, 0);
+                                DreamController.DreamRecord dreamRecord2 =
+                                        dreamController.mCurrentDream;
+                                asInterface.attach(
+                                        dreamRecord2.mToken,
+                                        dreamRecord2.mCanDoze,
+                                        dreamRecord2.mIsPreviewMode,
+                                        dreamRecord2.mDreamingStartedCallback);
+                                DreamController.DreamRecord dreamRecord3 =
+                                        dreamController.mCurrentDream;
+                                dreamRecord3.mService = asInterface;
+                                if (dreamRecord3.mIsPreviewMode
+                                        || dreamController.mSentStartBroadcast) {
+                                    return;
+                                }
+                                dreamController.mContext.sendBroadcastAsUser(
+                                        dreamController.mDreamingStartedIntent,
+                                        UserHandle.ALL,
+                                        null,
+                                        dreamController.mDreamingStartedStoppedOptions);
+                                Binder binder = dreamController.mCurrentDream.mToken;
+                                DreamManagerService dreamManagerService = DreamManagerService.this;
+                                dreamManagerService.getClass();
+                                dreamManagerService.mHandler.post(
+                                        new DreamManagerService$$ExternalSyntheticLambda7(
+                                                dreamManagerService,
+                                                new DreamManagerService$$ExternalSyntheticLambda0(
+                                                        0)));
+                                dreamController.mSentStartBroadcast = true;
+                            } catch (RemoteException e) {
+                                Slog.e(
+                                        "DreamController",
+                                        "The dream service died unexpectedly.",
+                                        e);
+                                dreamController.stopDream(true, "attach failed");
+                            }
                         }
-                        dreamController.mContext.sendBroadcastAsUser(dreamController.mDreamingStartedIntent, UserHandle.ALL, null, dreamController.mDreamingStartedStoppedOptions);
-                        Binder binder = dreamController.mCurrentDream.mToken;
-                        DreamManagerService dreamManagerService = DreamManagerService.this;
-                        dreamManagerService.getClass();
-                        dreamManagerService.mHandler.post(new DreamManagerService$$ExternalSyntheticLambda7(dreamManagerService, new DreamManagerService$$ExternalSyntheticLambda0(0)));
-                        dreamController.mSentStartBroadcast = true;
-                    } catch (RemoteException e) {
-                        Slog.e("DreamController", "The dream service died unexpectedly.", e);
-                        dreamController.stopDream(true, "attach failed");
-                    }
-                }
-            });
+                    });
         }
 
         @Override // android.content.ServiceConnection
         public final void onServiceDisconnected(ComponentName componentName) {
-            DreamController.this.mHandler.post(new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 4));
+            DreamController.this.mHandler.post(
+                    new DreamController$DreamRecord$$ExternalSyntheticLambda1(this, 4));
         }
 
         public final void releaseWakeLockIfNeeded() {
@@ -152,10 +200,12 @@ public final class DreamController {
         }
     }
 
-    public DreamController(Context context, Handler handler, DreamManagerService.AnonymousClass4 anonymousClass4) {
+    public DreamController(
+            Context context, Handler handler, DreamManagerService.AnonymousClass4 anonymousClass4) {
         BroadcastOptions makeBasic = BroadcastOptions.makeBasic();
         makeBasic.setDeliveryGroupPolicy(1);
-        makeBasic.setDeliveryGroupMatchingKey(DREAMING_DELIVERY_GROUP_NAMESPACE, DREAMING_DELIVERY_GROUP_KEY);
+        makeBasic.setDeliveryGroupMatchingKey(
+                DREAMING_DELIVERY_GROUP_NAMESPACE, DREAMING_DELIVERY_GROUP_KEY);
         makeBasic.setDeferralPolicy(2);
         this.mDreamingStartedStoppedOptions = makeBasic.toBundle();
         this.mSentStartBroadcast = false;
@@ -168,8 +218,15 @@ public final class DreamController {
         this.mCloseNotificationShadeIntent = intent;
         intent.putExtra("reason", "dream");
         intent.addFlags(268435456);
-        this.mCloseNotificationShadeOptions = BroadcastOptions.makeBasic().setDeliveryGroupPolicy(1).setDeliveryGroupMatchingKey("android.intent.action.CLOSE_SYSTEM_DIALOGS", "dream").setDeferralPolicy(2).toBundle();
-        this.mResetScreenTimeoutOnUnexpectedDreamExit = context.getResources().getBoolean(R.bool.config_sf_limitedAlpha);
+        this.mCloseNotificationShadeOptions =
+                BroadcastOptions.makeBasic()
+                        .setDeliveryGroupPolicy(1)
+                        .setDeliveryGroupMatchingKey(
+                                "android.intent.action.CLOSE_SYSTEM_DIALOGS", "dream")
+                        .setDeferralPolicy(2)
+                        .toBundle();
+        this.mResetScreenTimeoutOnUnexpectedDreamExit =
+                context.getResources().getBoolean(R.bool.config_sf_limitedAlpha);
     }
 
     public final void stopDream(boolean z, String str) {
@@ -223,8 +280,13 @@ public final class DreamController {
         }
         sb.append(str2);
         Slog.i("DreamController", sb.toString());
-        MetricsLogger.hidden(this.mContext, dreamRecord.mCanDoze ? FrameworkStatsLog.EXCLUSION_RECT_STATE_CHANGED : 222);
-        MetricsLogger.histogram(this.mContext, dreamRecord.mCanDoze ? "dozing_minutes" : "dreaming_minutes", (int) ((SystemClock.elapsedRealtime() - dreamRecord.mDreamStartTime) / 60000));
+        MetricsLogger.hidden(
+                this.mContext,
+                dreamRecord.mCanDoze ? FrameworkStatsLog.EXCLUSION_RECT_STATE_CHANGED : 222);
+        MetricsLogger.histogram(
+                this.mContext,
+                dreamRecord.mCanDoze ? "dozing_minutes" : "dreaming_minutes",
+                (int) ((SystemClock.elapsedRealtime() - dreamRecord.mDreamStartTime) / 60000));
         handler.removeCallbacks(dreamRecord.mStopUnconnectedDreamRunnable);
         handler.removeCallbacks(dreamRecord.mStopStubbornDreamRunnable);
         IDreamService iDreamService2 = dreamRecord.mService;
@@ -246,7 +308,11 @@ public final class DreamController {
         if (dreamRecord == this.mCurrentDream) {
             this.mCurrentDream = null;
             if (this.mSentStartBroadcast) {
-                this.mContext.sendBroadcastAsUser(this.mDreamingStoppedIntent, UserHandle.ALL, null, this.mDreamingStartedStoppedOptions);
+                this.mContext.sendBroadcastAsUser(
+                        this.mDreamingStoppedIntent,
+                        UserHandle.ALL,
+                        null,
+                        this.mDreamingStartedStoppedOptions);
                 this.mSentStartBroadcast = false;
             }
             DreamRecord dreamRecord2 = this.mCurrentDream;

@@ -15,14 +15,15 @@ import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.util.RingBuffer;
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.alarm.AlarmManagerService;
-import com.android.server.am.PendingIntentRecord;
 import com.android.server.wm.ActivityTaskManagerInternal;
 import com.android.server.wm.SafeActivityOptions;
+
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -40,15 +41,21 @@ public final class PendingIntentController {
     public final HashMap mIntentSenderRecords = new HashMap();
     public final SparseIntArray mIntentsPerUid = new SparseIntArray();
     public final SparseArray mRecentIntentsPerUid = new SparseArray();
-    public final ActivityTaskManagerInternal mAtmInternal = (ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class);
+    public final ActivityTaskManagerInternal mAtmInternal =
+            (ActivityTaskManagerInternal)
+                    LocalServices.getService(ActivityTaskManagerInternal.class);
 
-    public PendingIntentController(Looper looper, UserController userController, ActivityManagerConstants activityManagerConstants) {
+    public PendingIntentController(
+            Looper looper,
+            UserController userController,
+            ActivityManagerConstants activityManagerConstants) {
         this.mH = new Handler(looper);
         this.mUserController = userController;
         this.mConstants = activityManagerConstants;
     }
 
-    public final void cancelIntentSender(PendingIntentRecord pendingIntentRecord, boolean z, int i) {
+    public final void cancelIntentSender(
+            PendingIntentRecord pendingIntentRecord, boolean z, int i) {
         IBinder iBinder;
         synchronized (this.mLock) {
             try {
@@ -56,7 +63,12 @@ public final class PendingIntentController {
                 this.mIntentSenderRecords.remove(pendingIntentRecord.key);
                 decrementUidStatLocked(pendingIntentRecord);
                 if (z && (iBinder = pendingIntentRecord.key.activity) != null) {
-                    this.mH.sendMessage(PooledLambda.obtainMessage(new PendingIntentController$$ExternalSyntheticLambda1(), this, iBinder, pendingIntentRecord.ref));
+                    this.mH.sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new PendingIntentController$$ExternalSyntheticLambda1(),
+                                    this,
+                                    iBinder,
+                                    pendingIntentRecord.ref));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -89,11 +101,15 @@ public final class PendingIntentController {
                     ArrayMap arrayMap = new ArrayMap();
                     ArrayList arrayList = new ArrayList();
                     for (WeakReference weakReference : this.mIntentSenderRecords.values()) {
-                        PendingIntentRecord pendingIntentRecord = weakReference != null ? (PendingIntentRecord) weakReference.get() : null;
+                        PendingIntentRecord pendingIntentRecord =
+                                weakReference != null
+                                        ? (PendingIntentRecord) weakReference.get()
+                                        : null;
                         if (pendingIntentRecord == null) {
                             arrayList.add(weakReference);
                         } else if (str == null || str.equals(pendingIntentRecord.key.packageName)) {
-                            ArrayList arrayList2 = (ArrayList) arrayMap.get(pendingIntentRecord.key.packageName);
+                            ArrayList arrayList2 =
+                                    (ArrayList) arrayMap.get(pendingIntentRecord.key.packageName);
                             if (arrayList2 == null) {
                                 arrayList2 = new ArrayList();
                                 arrayMap.put(pendingIntentRecord.key.packageName, arrayList2);
@@ -116,7 +132,8 @@ public final class PendingIntentController {
                             printWriter.print(": ");
                             printWriter.println(arrayList3.get(i2));
                             if (z) {
-                                ((PendingIntentRecord) arrayList3.get(i2)).dump(printWriter, "      ");
+                                ((PendingIntentRecord) arrayList3.get(i2))
+                                        .dump(printWriter, "      ");
                             }
                         }
                         i++;
@@ -153,7 +170,19 @@ public final class PendingIntentController {
         }
     }
 
-    public final PendingIntentRecord getIntentSender(int i, int i2, int i3, int i4, int i5, Bundle bundle, IBinder iBinder, String str, String str2, String str3, Intent[] intentArr, String[] strArr) {
+    public final PendingIntentRecord getIntentSender(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            Bundle bundle,
+            IBinder iBinder,
+            String str,
+            String str2,
+            String str3,
+            Intent[] intentArr,
+            String[] strArr) {
         synchronized (this.mLock) {
             if (intentArr != null) {
                 for (Intent intent : intentArr) {
@@ -166,32 +195,64 @@ public final class PendingIntentController {
             }
             Bundle.setDefusable(bundle, true);
             ActivityOptions fromBundle = ActivityOptions.fromBundle(bundle);
-            if (fromBundle != null && fromBundle.getPendingIntentBackgroundActivityStartMode() != 0) {
-                Slog.wtf("ActivityManager", "Resetting option setPendingIntentBackgroundActivityStartMode(" + fromBundle.getPendingIntentBackgroundActivityStartMode() + ") to SYSTEM_DEFINED from the options provided by the pending intent creator (" + str + ") because this option is meant for the pending intent sender");
+            if (fromBundle != null
+                    && fromBundle.getPendingIntentBackgroundActivityStartMode() != 0) {
+                Slog.wtf(
+                        "ActivityManager",
+                        "Resetting option setPendingIntentBackgroundActivityStartMode("
+                                + fromBundle.getPendingIntentBackgroundActivityStartMode()
+                                + ") to SYSTEM_DEFINED from the options provided by the pending"
+                                + " intent creator ("
+                                + str
+                                + ") because this option is meant for the pending intent sender");
                 if (CompatChanges.isChangeEnabled(320664730L, i2)) {
-                    throw new IllegalArgumentException("pendingIntentBackgroundActivityStartMode must not be set when creating a PendingIntent");
+                    throw new IllegalArgumentException(
+                            "pendingIntentBackgroundActivityStartMode must not be set when creating"
+                                + " a PendingIntent");
                 }
                 fromBundle.setPendingIntentBackgroundActivityStartMode(0);
             }
-            if (fromBundle != null && fromBundle.isPendingIntentBackgroundActivityLaunchAllowedByPermission()) {
-                Slog.wtf("ActivityManager", "Resetting option pendingIntentBackgroundActivityLaunchAllowedByPermission which is set by the pending intent creator (" + str + ") because this option is meant for the pending intent sender");
+            if (fromBundle != null
+                    && fromBundle.isPendingIntentBackgroundActivityLaunchAllowedByPermission()) {
+                Slog.wtf(
+                        "ActivityManager",
+                        "Resetting option pendingIntentBackgroundActivityLaunchAllowedByPermission"
+                            + " which is set by the pending intent creator ("
+                                + str
+                                + ") because this option is meant for the pending intent sender");
                 if (CompatChanges.isChangeEnabled(320664730L, i2)) {
-                    throw new IllegalArgumentException("pendingIntentBackgroundActivityLaunchAllowedByPermission can not be set by creator of a PendingIntent");
+                    throw new IllegalArgumentException(
+                            "pendingIntentBackgroundActivityLaunchAllowedByPermission can not be"
+                                + " set by creator of a PendingIntent");
                 }
                 fromBundle.setPendingIntentBackgroundActivityLaunchAllowedByPermission(false);
             }
             boolean z = (i5 & 536870912) != 0;
             boolean z2 = (i5 & 268435456) != 0;
             boolean z3 = (i5 & 134217728) != 0;
-            PendingIntentRecord.Key key = new PendingIntentRecord.Key(i, str, str2, iBinder, str3, i4, intentArr, strArr, i5 & (-939524097), new SafeActivityOptions(fromBundle), i3);
+            PendingIntentRecord.Key key =
+                    new PendingIntentRecord.Key(
+                            i,
+                            str,
+                            str2,
+                            iBinder,
+                            str3,
+                            i4,
+                            intentArr,
+                            strArr,
+                            i5 & (-939524097),
+                            new SafeActivityOptions(fromBundle),
+                            i3);
             WeakReference weakReference = (WeakReference) this.mIntentSenderRecords.get(key);
-            PendingIntentRecord pendingIntentRecord = weakReference != null ? (PendingIntentRecord) weakReference.get() : null;
+            PendingIntentRecord pendingIntentRecord =
+                    weakReference != null ? (PendingIntentRecord) weakReference.get() : null;
             if (pendingIntentRecord != null) {
                 if (!z2) {
                     if (z3) {
                         Intent intent2 = pendingIntentRecord.key.requestIntent;
                         if (intent2 != null) {
-                            intent2.replaceExtras(intentArr != null ? intentArr[intentArr.length - 1] : null);
+                            intent2.replaceExtras(
+                                    intentArr != null ? intentArr[intentArr.length - 1] : null);
                         }
                         if (intentArr != null) {
                             int length = intentArr.length - 1;
@@ -233,7 +294,8 @@ public final class PendingIntentController {
             this.mIntentsPerUid.put(i, 1);
         }
         if (i2 > 200 && i2 % 100 == 0) {
-            PendingIntentController$$ExternalSyntheticOutline0.m(i, i2, "Too many PendingIntent created for uid ", "->", "ActivityManager");
+            PendingIntentController$$ExternalSyntheticOutline0.m(
+                    i, i2, "Too many PendingIntent created for uid ", "->", "ActivityManager");
         }
         ActivityManagerConstants activityManagerConstants = this.mConstants;
         int i3 = activityManagerConstants.PENDINGINTENT_WARNING_THRESHOLD;
@@ -242,14 +304,17 @@ public final class PendingIntentController {
             ringBuffer = new RingBuffer(String.class, 10);
             this.mRecentIntentsPerUid.put(i, ringBuffer);
         } else {
-            ringBuffer = (i2 <= i4 || i2 > i3) ? null : (RingBuffer) this.mRecentIntentsPerUid.get(i);
+            ringBuffer =
+                    (i2 <= i4 || i2 > i3) ? null : (RingBuffer) this.mRecentIntentsPerUid.get(i);
         }
         if (ringBuffer == null) {
             return;
         }
         ringBuffer.append(pendingIntentRecord.key.toSecureString(false));
         if (i2 == activityManagerConstants.PENDINGINTENT_WARNING_THRESHOLD) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Too many PendingIntent created for uid ", ", recent 10: ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "Too many PendingIntent created for uid ", ", recent 10: ");
             m.append(Arrays.toString(ringBuffer.toArray()));
             Slog.wtf("ActivityManager", m.toString());
             this.mRecentIntentsPerUid.remove(i);
@@ -264,9 +329,18 @@ public final class PendingIntentController {
         RemoteCallbackList remoteCallbackList = pendingIntentRecord.mCancelCallbacks;
         pendingIntentRecord.mCancelCallbacks = null;
         if (remoteCallbackList != null) {
-            this.mH.sendMessage(PooledLambda.obtainMessage(new PendingIntentController$$ExternalSyntheticLambda2(), this, remoteCallbackList));
+            this.mH.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new PendingIntentController$$ExternalSyntheticLambda2(),
+                            this,
+                            remoteCallbackList));
         }
-        AlarmManagerService.LocalService localService = (AlarmManagerService.LocalService) LocalServices.getService(AlarmManagerService.LocalService.class);
-        AlarmManagerService.this.mHandler.obtainMessage(7, new PendingIntent(pendingIntentRecord)).sendToTarget();
+        AlarmManagerService.LocalService localService =
+                (AlarmManagerService.LocalService)
+                        LocalServices.getService(AlarmManagerService.LocalService.class);
+        AlarmManagerService.this
+                .mHandler
+                .obtainMessage(7, new PendingIntent(pendingIntentRecord))
+                .sendToTarget();
     }
 }

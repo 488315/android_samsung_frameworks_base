@@ -1,6 +1,7 @@
 package android.opengl;
 
 import java.io.Writer;
+
 import javax.microedition.khronos.egl.EGL;
 import javax.microedition.khronos.opengles.GL;
 

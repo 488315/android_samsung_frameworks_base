@@ -8,9 +8,11 @@ public interface IIdmap2 extends IInterface {
 
     int acquireFabricatedOverlayIterator() throws RemoteException;
 
-    FabricatedOverlayInfo createFabricatedOverlay(FabricatedOverlayInternal fabricatedOverlayInternal) throws RemoteException;
+    FabricatedOverlayInfo createFabricatedOverlay(
+            FabricatedOverlayInternal fabricatedOverlayInternal) throws RemoteException;
 
-    String createIdmap(String str, String str2, String str3, int i, boolean z, int i2) throws RemoteException;
+    String createIdmap(String str, String str2, String str3, int i, boolean z, int i2)
+            throws RemoteException;
 
     boolean deleteFabricatedOverlay(String str) throws RemoteException;
 
@@ -26,7 +28,8 @@ public interface IIdmap2 extends IInterface {
 
     boolean removeIdmap(String str, int i) throws RemoteException;
 
-    boolean verifyIdmap(String str, String str2, String str3, int i, boolean z, int i2) throws RemoteException;
+    boolean verifyIdmap(String str, String str2, String str3, int i, boolean z, int i2)
+            throws RemoteException;
 
     public static class Default implements IIdmap2 {
         @Override // android.os.IIdmap2
@@ -40,12 +43,26 @@ public interface IIdmap2 extends IInterface {
         }
 
         @Override // android.os.IIdmap2
-        public boolean verifyIdmap(String targetApkPath, String overlayApkPath, String overlayName, int fulfilledPolicies, boolean enforceOverlayable, int userId) throws RemoteException {
+        public boolean verifyIdmap(
+                String targetApkPath,
+                String overlayApkPath,
+                String overlayName,
+                int fulfilledPolicies,
+                boolean enforceOverlayable,
+                int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IIdmap2
-        public String createIdmap(String targetApkPath, String overlayApkPath, String overlayName, int fulfilledPolicies, boolean enforceOverlayable, int userId) throws RemoteException {
+        public String createIdmap(
+                String targetApkPath,
+                String overlayApkPath,
+                String overlayName,
+                int fulfilledPolicies,
+                boolean enforceOverlayable,
+                int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -55,7 +72,8 @@ public interface IIdmap2 extends IInterface {
         }
 
         @Override // android.os.IIdmap2
-        public FabricatedOverlayInfo createFabricatedOverlay(FabricatedOverlayInternal overlay) throws RemoteException {
+        public FabricatedOverlayInfo createFabricatedOverlay(FabricatedOverlayInternal overlay)
+                throws RemoteException {
             return null;
         }
 
@@ -70,11 +88,11 @@ public interface IIdmap2 extends IInterface {
         }
 
         @Override // android.os.IIdmap2
-        public void releaseFabricatedOverlayIterator(int iteratorId) throws RemoteException {
-        }
+        public void releaseFabricatedOverlayIterator(int iteratorId) throws RemoteException {}
 
         @Override // android.os.IIdmap2
-        public List<FabricatedOverlayInfo> nextFabricatedOverlayInfos(int iteratorId) throws RemoteException {
+        public List<FabricatedOverlayInfo> nextFabricatedOverlayInfos(int iteratorId)
+                throws RemoteException {
             return null;
         }
 
@@ -89,7 +107,7 @@ public interface IIdmap2 extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIdmap2 {
+    public abstract static class Stub extends Binder implements IIdmap2 {
         static final int TRANSACTION_acquireFabricatedOverlayIterator = 8;
         static final int TRANSACTION_createFabricatedOverlay = 6;
         static final int TRANSACTION_createIdmap = 4;
@@ -157,7 +175,8 @@ public interface IIdmap2 extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIdmap2.DESCRIPTOR);
             }
@@ -214,7 +233,9 @@ public interface IIdmap2 extends IInterface {
                     reply.writeString(_result5);
                     return true;
                 case 6:
-                    FabricatedOverlayInternal _arg06 = (FabricatedOverlayInternal) data.readTypedObject(FabricatedOverlayInternal.CREATOR);
+                    FabricatedOverlayInternal _arg06 =
+                            (FabricatedOverlayInternal)
+                                    data.readTypedObject(FabricatedOverlayInternal.CREATOR);
                     data.enforceNoDataAvail();
                     FabricatedOverlayInfo _result6 = createFabricatedOverlay(_arg06);
                     reply.writeNoException();
@@ -310,7 +331,14 @@ public interface IIdmap2 extends IInterface {
             }
 
             @Override // android.os.IIdmap2
-            public boolean verifyIdmap(String targetApkPath, String overlayApkPath, String overlayName, int fulfilledPolicies, boolean enforceOverlayable, int userId) throws RemoteException {
+            public boolean verifyIdmap(
+                    String targetApkPath,
+                    String overlayApkPath,
+                    String overlayName,
+                    int fulfilledPolicies,
+                    boolean enforceOverlayable,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -332,7 +360,14 @@ public interface IIdmap2 extends IInterface {
             }
 
             @Override // android.os.IIdmap2
-            public String createIdmap(String targetApkPath, String overlayApkPath, String overlayName, int fulfilledPolicies, boolean enforceOverlayable, int userId) throws RemoteException {
+            public String createIdmap(
+                    String targetApkPath,
+                    String overlayApkPath,
+                    String overlayName,
+                    int fulfilledPolicies,
+                    boolean enforceOverlayable,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -371,7 +406,8 @@ public interface IIdmap2 extends IInterface {
             }
 
             @Override // android.os.IIdmap2
-            public FabricatedOverlayInfo createFabricatedOverlay(FabricatedOverlayInternal overlay) throws RemoteException {
+            public FabricatedOverlayInfo createFabricatedOverlay(FabricatedOverlayInternal overlay)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -379,7 +415,9 @@ public interface IIdmap2 extends IInterface {
                     _data.writeTypedObject(overlay, 0);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    FabricatedOverlayInfo _result = (FabricatedOverlayInfo) _reply.readTypedObject(FabricatedOverlayInfo.CREATOR);
+                    FabricatedOverlayInfo _result =
+                            (FabricatedOverlayInfo)
+                                    _reply.readTypedObject(FabricatedOverlayInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -436,7 +474,8 @@ public interface IIdmap2 extends IInterface {
             }
 
             @Override // android.os.IIdmap2
-            public List<FabricatedOverlayInfo> nextFabricatedOverlayInfos(int iteratorId) throws RemoteException {
+            public List<FabricatedOverlayInfo> nextFabricatedOverlayInfos(int iteratorId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -444,7 +483,8 @@ public interface IIdmap2 extends IInterface {
                     _data.writeInt(iteratorId);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    List<FabricatedOverlayInfo> _result = _reply.createTypedArrayList(FabricatedOverlayInfo.CREATOR);
+                    List<FabricatedOverlayInfo> _result =
+                            _reply.createTypedArrayList(FabricatedOverlayInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

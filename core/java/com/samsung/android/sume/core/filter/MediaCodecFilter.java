@@ -4,6 +4,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaCodec;
 import android.os.ConditionVariable;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.channel.BufferChannel;
 import com.samsung.android.sume.core.descriptor.CodecDescriptor;
@@ -11,6 +12,7 @@ import com.samsung.android.sume.core.descriptor.MFDescriptor;
 import com.samsung.android.sume.core.message.Message;
 import com.samsung.android.sume.core.message.MessageProducer;
 import com.samsung.android.sume.core.types.MediaType;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -90,7 +92,7 @@ public abstract class MediaCodecFilter implements MediaInputStreamFilter, MediaO
 
     @Override // com.samsung.android.sume.core.message.MessageConsumer
     public int[] getConsumeMessage() {
-        return new int[]{1, 2, 5};
+        return new int[] {1, 2, 5};
     }
 
     @Override // com.samsung.android.sume.core.message.MessageConsumer
@@ -102,22 +104,30 @@ public abstract class MediaCodecFilter implements MediaInputStreamFilter, MediaO
             case 1:
                 synchronized (message) {
                     if (message.contains(Message.KEY_CONTENTS_ID)) {
-                        this.contentId = ((Integer) message.get(Message.KEY_CONTENTS_ID)).intValue();
+                        this.contentId =
+                                ((Integer) message.get(Message.KEY_CONTENTS_ID)).intValue();
                     }
                     CodecDescriptor descriptor = (CodecDescriptor) getDescriptor();
                     MediaType mediaType = (MediaType) message.get(Message.KEY_MEDIA_TYPE);
-                    if ((mediaType.isAudio() && descriptor.getMediaType().isAudio()) || (mediaType.isVideo() && descriptor.getMediaType().isVideo())) {
+                    if ((mediaType.isAudio() && descriptor.getMediaType().isAudio())
+                            || (mediaType.isVideo() && descriptor.getMediaType().isVideo())) {
                         configCodec(message);
                         break;
                     }
-                    Log.d(TAG, "config-data of " + mediaType + " is not match this codec type " + descriptor.getMediaType());
+                    Log.d(
+                            TAG,
+                            "config-data of "
+                                    + mediaType
+                                    + " is not match this codec type "
+                                    + descriptor.getMediaType());
                     return false;
                 }
             case 2:
                 int numFrames = ((Integer) message.get(Message.KEY_WHOLE_FRAMES)).intValue();
                 this.numWholeFrames.set(numFrames);
                 if (message.contains(Message.KEY_START_TIME_US)) {
-                    this.startTimeUs.set(((Long) message.get(Message.KEY_START_TIME_US)).longValue());
+                    this.startTimeUs.set(
+                            ((Long) message.get(Message.KEY_START_TIME_US)).longValue());
                 }
                 if (message.contains(Message.KEY_END_TIME_US)) {
                     this.endTimeUs.set(((Long) message.get(Message.KEY_END_TIME_US)).longValue());
@@ -190,7 +200,8 @@ public abstract class MediaCodecFilter implements MediaInputStreamFilter, MediaO
     }
 
     @Override // com.samsung.android.sume.core.filter.MediaInputStreamFilter
-    public void setReceiveChannelQuery(Function<Enum<?>, BufferChannel> receiveChannelQuery, int numChannels) {
+    public void setReceiveChannelQuery(
+            Function<Enum<?>, BufferChannel> receiveChannelQuery, int numChannels) {
         this.receiveChannelQuery = receiveChannelQuery;
         this.receiveChannelCount = numChannels;
     }
@@ -206,7 +217,8 @@ public abstract class MediaCodecFilter implements MediaInputStreamFilter, MediaO
     }
 
     @Override // com.samsung.android.sume.core.filter.MediaOutputStreamFilter
-    public void setSendChannelQuery(Function<Enum<?>, BufferChannel> sendChannelQuery, int numChannels) {
+    public void setSendChannelQuery(
+            Function<Enum<?>, BufferChannel> sendChannelQuery, int numChannels) {
         this.sendChannelQuery = sendChannelQuery;
         this.sendChannelCount = numChannels;
     }
@@ -222,6 +234,11 @@ public abstract class MediaCodecFilter implements MediaInputStreamFilter, MediaO
     }
 
     protected String tagged(String fmt, Object... args) {
-        return String.format(NavigationBarInflaterView.SIZE_MOD_START + this.codecTag + NavigationBarInflaterView.SIZE_MOD_END + fmt, args);
+        return String.format(
+                NavigationBarInflaterView.SIZE_MOD_START
+                        + this.codecTag
+                        + NavigationBarInflaterView.SIZE_MOD_END
+                        + fmt,
+                args);
     }
 }

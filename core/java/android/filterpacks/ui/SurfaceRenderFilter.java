@@ -28,6 +28,7 @@ public class SurfaceRenderFilter extends Filter implements SurfaceHolder.Callbac
 
     @GenerateFieldPort(hasDefault = true, name = "renderMode")
     private String mRenderModeString;
+
     private GLFrame mScreen;
     private int mScreenHeight;
     private int mScreenWidth;
@@ -76,7 +77,9 @@ public class SurfaceRenderFilter extends Filter implements SurfaceHolder.Callbac
         this.mProgram.setClearsOutput(true);
         this.mProgram.setClearColor(0.0f, 0.0f, 0.0f);
         updateRenderMode();
-        MutableFrameFormat screenFormat = ImageFormat.create(this.mSurfaceView.getWidth(), this.mSurfaceView.getHeight(), 3, 3);
+        MutableFrameFormat screenFormat =
+                ImageFormat.create(
+                        this.mSurfaceView.getWidth(), this.mSurfaceView.getHeight(), 3, 3);
         this.mScreen = (GLFrame) context.getFrameManager().newBoundFrame(screenFormat, 101, 0L);
     }
 
@@ -105,7 +108,12 @@ public class SurfaceRenderFilter extends Filter implements SurfaceHolder.Callbac
         float currentAspectRatio = input.getFormat().getWidth() / input.getFormat().getHeight();
         if (currentAspectRatio != this.mAspectRatio) {
             if (this.mLogVerbose) {
-                Log.v(TAG, "New aspect ratio: " + currentAspectRatio + ", previously: " + this.mAspectRatio);
+                Log.v(
+                        TAG,
+                        "New aspect ratio: "
+                                + currentAspectRatio
+                                + ", previously: "
+                                + this.mAspectRatio);
             }
             this.mAspectRatio = currentAspectRatio;
             updateTargetRect();
@@ -151,7 +159,8 @@ public class SurfaceRenderFilter extends Filter implements SurfaceHolder.Callbac
     }
 
     @Override // android.view.SurfaceHolder.Callback
-    public synchronized void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    public synchronized void surfaceChanged(
+            SurfaceHolder holder, int format, int width, int height) {
         if (this.mScreen != null) {
             this.mScreenWidth = width;
             this.mScreenHeight = height;
@@ -175,18 +184,34 @@ public class SurfaceRenderFilter extends Filter implements SurfaceHolder.Callbac
                     break;
                 case 1:
                     if (relativeAspectRatio > 1.0f) {
-                        this.mProgram.setTargetRect(0.5f - (0.5f / relativeAspectRatio), 0.0f, 1.0f / relativeAspectRatio, 1.0f);
+                        this.mProgram.setTargetRect(
+                                0.5f - (0.5f / relativeAspectRatio),
+                                0.0f,
+                                1.0f / relativeAspectRatio,
+                                1.0f);
                         break;
                     } else {
-                        this.mProgram.setTargetRect(0.0f, 0.5f - (relativeAspectRatio * 0.5f), 1.0f, relativeAspectRatio);
+                        this.mProgram.setTargetRect(
+                                0.0f,
+                                0.5f - (relativeAspectRatio * 0.5f),
+                                1.0f,
+                                relativeAspectRatio);
                         break;
                     }
                 case 2:
                     if (relativeAspectRatio > 1.0f) {
-                        this.mProgram.setTargetRect(0.0f, 0.5f - (relativeAspectRatio * 0.5f), 1.0f, relativeAspectRatio);
+                        this.mProgram.setTargetRect(
+                                0.0f,
+                                0.5f - (relativeAspectRatio * 0.5f),
+                                1.0f,
+                                relativeAspectRatio);
                         break;
                     } else {
-                        this.mProgram.setTargetRect(0.5f - (0.5f / relativeAspectRatio), 0.0f, 1.0f / relativeAspectRatio, 1.0f);
+                        this.mProgram.setTargetRect(
+                                0.5f - (0.5f / relativeAspectRatio),
+                                0.0f,
+                                1.0f / relativeAspectRatio,
+                                1.0f);
                         break;
                     }
             }

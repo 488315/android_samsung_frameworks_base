@@ -8,44 +8,60 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.app.ISoundTriggerSession;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface ISoundTriggerService extends IInterface {
-    ISoundTriggerSession attachAsMiddleman(Identity identity, Identity identity2, SoundTrigger.ModuleProperties moduleProperties, IBinder iBinder) throws RemoteException;
+    ISoundTriggerSession attachAsMiddleman(
+            Identity identity,
+            Identity identity2,
+            SoundTrigger.ModuleProperties moduleProperties,
+            IBinder iBinder)
+            throws RemoteException;
 
-    ISoundTriggerSession attachAsOriginator(Identity identity, SoundTrigger.ModuleProperties moduleProperties, IBinder iBinder) throws RemoteException;
+    ISoundTriggerSession attachAsOriginator(
+            Identity identity, SoundTrigger.ModuleProperties moduleProperties, IBinder iBinder)
+            throws RemoteException;
 
     void attachInjection(ISoundTriggerInjection iSoundTriggerInjection) throws RemoteException;
 
-    List<SoundTrigger.ModuleProperties> listModuleProperties(Identity identity) throws RemoteException;
+    List<SoundTrigger.ModuleProperties> listModuleProperties(Identity identity)
+            throws RemoteException;
 
     void setInPhoneCallState(boolean z) throws RemoteException;
 
     public static class Default implements ISoundTriggerService {
         @Override // com.android.internal.app.ISoundTriggerService
-        public ISoundTriggerSession attachAsOriginator(Identity originatorIdentity, SoundTrigger.ModuleProperties moduleProperties, IBinder client) throws RemoteException {
+        public ISoundTriggerSession attachAsOriginator(
+                Identity originatorIdentity,
+                SoundTrigger.ModuleProperties moduleProperties,
+                IBinder client)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.ISoundTriggerService
-        public ISoundTriggerSession attachAsMiddleman(Identity middlemanIdentity, Identity originatorIdentity, SoundTrigger.ModuleProperties moduleProperties, IBinder client) throws RemoteException {
+        public ISoundTriggerSession attachAsMiddleman(
+                Identity middlemanIdentity,
+                Identity originatorIdentity,
+                SoundTrigger.ModuleProperties moduleProperties,
+                IBinder client)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.ISoundTriggerService
-        public List<SoundTrigger.ModuleProperties> listModuleProperties(Identity originatorIdentity) throws RemoteException {
+        public List<SoundTrigger.ModuleProperties> listModuleProperties(Identity originatorIdentity)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.ISoundTriggerService
-        public void attachInjection(ISoundTriggerInjection injection) throws RemoteException {
-        }
+        public void attachInjection(ISoundTriggerInjection injection) throws RemoteException {}
 
         @Override // com.android.internal.app.ISoundTriggerService
-        public void setInPhoneCallState(boolean isInPhoneCall) throws RemoteException {
-        }
+        public void setInPhoneCallState(boolean isInPhoneCall) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -53,7 +69,7 @@ public interface ISoundTriggerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISoundTriggerService {
+    public abstract static class Stub extends Binder implements ISoundTriggerService {
         public static final String DESCRIPTOR = "com.android.internal.app.ISoundTriggerService";
         static final int TRANSACTION_attachAsMiddleman = 2;
         static final int TRANSACTION_attachAsOriginator = 1;
@@ -104,7 +120,8 @@ public interface ISoundTriggerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -115,7 +132,9 @@ public interface ISoundTriggerService extends IInterface {
             switch (code) {
                 case 1:
                     Identity _arg0 = (Identity) data.readTypedObject(Identity.CREATOR);
-                    SoundTrigger.ModuleProperties _arg1 = (SoundTrigger.ModuleProperties) data.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
+                    SoundTrigger.ModuleProperties _arg1 =
+                            (SoundTrigger.ModuleProperties)
+                                    data.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
                     IBinder _arg2 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     ISoundTriggerSession _result = attachAsOriginator(_arg0, _arg1, _arg2);
@@ -125,10 +144,13 @@ public interface ISoundTriggerService extends IInterface {
                 case 2:
                     Identity _arg02 = (Identity) data.readTypedObject(Identity.CREATOR);
                     Identity _arg12 = (Identity) data.readTypedObject(Identity.CREATOR);
-                    SoundTrigger.ModuleProperties _arg22 = (SoundTrigger.ModuleProperties) data.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
+                    SoundTrigger.ModuleProperties _arg22 =
+                            (SoundTrigger.ModuleProperties)
+                                    data.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
                     IBinder _arg3 = data.readStrongBinder();
                     data.enforceNoDataAvail();
-                    ISoundTriggerSession _result2 = attachAsMiddleman(_arg02, _arg12, _arg22, _arg3);
+                    ISoundTriggerSession _result2 =
+                            attachAsMiddleman(_arg02, _arg12, _arg22, _arg3);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result2);
                     return true;
@@ -140,7 +162,8 @@ public interface ISoundTriggerService extends IInterface {
                     reply.writeTypedList(_result3, 1);
                     return true;
                 case 4:
-                    ISoundTriggerInjection _arg04 = ISoundTriggerInjection.Stub.asInterface(data.readStrongBinder());
+                    ISoundTriggerInjection _arg04 =
+                            ISoundTriggerInjection.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     attachInjection(_arg04);
                     reply.writeNoException();
@@ -173,7 +196,11 @@ public interface ISoundTriggerService extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerService
-            public ISoundTriggerSession attachAsOriginator(Identity originatorIdentity, SoundTrigger.ModuleProperties moduleProperties, IBinder client) throws RemoteException {
+            public ISoundTriggerSession attachAsOriginator(
+                    Identity originatorIdentity,
+                    SoundTrigger.ModuleProperties moduleProperties,
+                    IBinder client)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -183,7 +210,8 @@ public interface ISoundTriggerService extends IInterface {
                     _data.writeStrongBinder(client);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ISoundTriggerSession _result = ISoundTriggerSession.Stub.asInterface(_reply.readStrongBinder());
+                    ISoundTriggerSession _result =
+                            ISoundTriggerSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -192,7 +220,12 @@ public interface ISoundTriggerService extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerService
-            public ISoundTriggerSession attachAsMiddleman(Identity middlemanIdentity, Identity originatorIdentity, SoundTrigger.ModuleProperties moduleProperties, IBinder client) throws RemoteException {
+            public ISoundTriggerSession attachAsMiddleman(
+                    Identity middlemanIdentity,
+                    Identity originatorIdentity,
+                    SoundTrigger.ModuleProperties moduleProperties,
+                    IBinder client)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -203,7 +236,8 @@ public interface ISoundTriggerService extends IInterface {
                     _data.writeStrongBinder(client);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ISoundTriggerSession _result = ISoundTriggerSession.Stub.asInterface(_reply.readStrongBinder());
+                    ISoundTriggerSession _result =
+                            ISoundTriggerSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -212,7 +246,8 @@ public interface ISoundTriggerService extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerService
-            public List<SoundTrigger.ModuleProperties> listModuleProperties(Identity originatorIdentity) throws RemoteException {
+            public List<SoundTrigger.ModuleProperties> listModuleProperties(
+                    Identity originatorIdentity) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -220,7 +255,8 @@ public interface ISoundTriggerService extends IInterface {
                     _data.writeTypedObject(originatorIdentity, 0);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    List<SoundTrigger.ModuleProperties> _result = _reply.createTypedArrayList(SoundTrigger.ModuleProperties.CREATOR);
+                    List<SoundTrigger.ModuleProperties> _result =
+                            _reply.createTypedArrayList(SoundTrigger.ModuleProperties.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

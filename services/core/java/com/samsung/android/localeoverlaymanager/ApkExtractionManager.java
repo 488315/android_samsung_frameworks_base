@@ -2,7 +2,9 @@ package com.samsung.android.localeoverlaymanager;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticOutline0;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -43,13 +45,22 @@ public final class ApkExtractionManager {
 
     public final void extractLocaleApks(Set set, Set set2, Context context, boolean z) {
         Set set3;
-        Log.i("ApkExtractionManager", "extractLocaleApks() called with: targetPackages = [" + set + "], context = [" + context + "]");
+        Log.i(
+                "ApkExtractionManager",
+                "extractLocaleApks() called with: targetPackages = ["
+                        + set
+                        + "], context = ["
+                        + context
+                        + "]");
         if (!((ArrayList) this.mTargetPackages).isEmpty()) {
-            LogWriter.logDebugInfoAndLogcat("ApkExtractionManager", "Cancelling extraction for packages: " + this.mTargetPackages);
+            LogWriter.logDebugInfoAndLogcat(
+                    "ApkExtractionManager",
+                    "Cancelling extraction for packages: " + this.mTargetPackages);
             ApkExtractionManager apkExtractionManager = sInstance;
             int size = ((LinkedBlockingQueue) apkExtractionManager.mTasksWorkQueue).size();
             ApkExtractorRunnable[] apkExtractorRunnableArr = new ApkExtractorRunnable[size];
-            ((LinkedBlockingQueue) apkExtractionManager.mTasksWorkQueue).toArray(apkExtractorRunnableArr);
+            ((LinkedBlockingQueue) apkExtractionManager.mTasksWorkQueue)
+                    .toArray(apkExtractorRunnableArr);
             synchronized (apkExtractionManager) {
                 for (int i = 0; i < size; i++) {
                     try {
@@ -72,18 +83,29 @@ public final class ApkExtractionManager {
         Iterator it = set.iterator();
         while (it.hasNext()) {
             String str = (String) it.next();
-            AudioDeviceInventory$$ExternalSyntheticOutline0.m("startExtraction() called with: targetPackage = [", str, "]", "ApkExtractionManager");
+            AudioDeviceInventory$$ExternalSyntheticOutline0.m(
+                    "startExtraction() called with: targetPackage = [",
+                    str,
+                    "]",
+                    "ApkExtractionManager");
             ApkExtractionManager apkExtractionManager2 = sInstance;
-            ApkExtractionTask apkExtractionTask = (ApkExtractionTask) ((LinkedBlockingQueue) apkExtractionManager2.mTasks).poll();
+            ApkExtractionTask apkExtractionTask =
+                    (ApkExtractionTask) ((LinkedBlockingQueue) apkExtractionManager2.mTasks).poll();
             if (apkExtractionTask == null) {
                 apkExtractionTask = new ApkExtractionTask();
                 apkExtractionTask.mExtractedLocaleApks = new HashSet();
-                apkExtractionTask.mExtractorRunnable = new ApkExtractorRunnable(apkExtractionTask, new SevenZFileCopier());
+                apkExtractionTask.mExtractorRunnable =
+                        new ApkExtractorRunnable(apkExtractionTask, new SevenZFileCopier());
             }
             WeakReference weakReference = this.mContextRef;
             Context context2 = weakReference != null ? (Context) weakReference.get() : null;
             if (context2 == null || (set3 = this.mLocalesToAdd) == null) {
-                Log.e("ApkExtractionManager", "startExtraction: Context is " + context2 + ", localesToAdd is " + this.mLocalesToAdd);
+                Log.e(
+                        "ApkExtractionManager",
+                        "startExtraction: Context is "
+                                + context2
+                                + ", localesToAdd is "
+                                + this.mLocalesToAdd);
             } else {
                 boolean z2 = this.mShouldReplace;
                 apkExtractionTask.mTargetPackage = str;
@@ -98,7 +120,13 @@ public final class ApkExtractionManager {
 
     public final synchronized void handleState(ApkExtractionTask apkExtractionTask, int i) {
         try {
-            Log.i("ApkExtractionManager", "handleState() called with: extractionTask = [" + apkExtractionTask + "], state = [" + i + "]");
+            Log.i(
+                    "ApkExtractionManager",
+                    "handleState() called with: extractionTask = ["
+                            + apkExtractionTask
+                            + "], state = ["
+                            + i
+                            + "]");
             if (i == 1) {
                 this.mExtractedLocales.addAll(apkExtractionTask.mExtractedLocaleApks);
             }
@@ -112,8 +140,10 @@ public final class ApkExtractionManager {
         ExtractionCompleteCallback extractionCompleteCallback;
         try {
             ((ArrayList) this.mTargetPackages).remove(apkExtractionTask.mTargetPackage);
-            if (((ArrayList) this.mTargetPackages).isEmpty() && (extractionCompleteCallback = this.mCallback) != null) {
-                ((LocaleOverlayManager) extractionCompleteCallback).onExtractionComplete(this.mExtractedLocales, this.mForceEnable);
+            if (((ArrayList) this.mTargetPackages).isEmpty()
+                    && (extractionCompleteCallback = this.mCallback) != null) {
+                ((LocaleOverlayManager) extractionCompleteCallback)
+                        .onExtractionComplete(this.mExtractedLocales, this.mForceEnable);
             }
             ((LinkedBlockingQueue) this.mTasks).offer(apkExtractionTask);
         } catch (Throwable th) {

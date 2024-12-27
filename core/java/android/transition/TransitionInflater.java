@@ -9,12 +9,15 @@ import android.util.AttributeSet;
 import android.util.Xml;
 import android.view.InflateException;
 import android.view.ViewGroup;
+
 import com.android.internal.R;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes4.dex */
 public class TransitionInflater {
@@ -36,7 +39,9 @@ public class TransitionInflater {
             try {
                 return createTransitionFromXml(parser, Xml.asAttributeSet(parser), null);
             } catch (IOException e) {
-                InflateException ex = new InflateException(parser.getPositionDescription() + ": " + e.getMessage());
+                InflateException ex =
+                        new InflateException(
+                                parser.getPositionDescription() + ": " + e.getMessage());
                 ex.initCause(e);
                 throw ex;
             } catch (XmlPullParserException e2) {
@@ -53,9 +58,12 @@ public class TransitionInflater {
         XmlResourceParser parser = this.mContext.getResources().getXml(resource);
         try {
             try {
-                return createTransitionManagerFromXml(parser, Xml.asAttributeSet(parser), sceneRoot);
+                return createTransitionManagerFromXml(
+                        parser, Xml.asAttributeSet(parser), sceneRoot);
             } catch (IOException e) {
-                InflateException ex = new InflateException(parser.getPositionDescription() + ": " + e.getMessage());
+                InflateException ex =
+                        new InflateException(
+                                parser.getPositionDescription() + ": " + e.getMessage());
                 ex.initCause(e);
                 throw ex;
             } catch (XmlPullParserException e2) {
@@ -69,19 +77,27 @@ public class TransitionInflater {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0185, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.transition.Transition createTransitionFromXml(org.xmlpull.v1.XmlPullParser r9, android.util.AttributeSet r10, android.transition.Transition r11) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    private android.transition.Transition createTransitionFromXml(
+            org.xmlpull.v1.XmlPullParser r9,
+            android.util.AttributeSet r10,
+            android.transition.Transition r11)
+            throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             Method dump skipped, instructions count: 390
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.transition.TransitionInflater.createTransitionFromXml(org.xmlpull.v1.XmlPullParser, android.util.AttributeSet, android.transition.Transition):android.transition.Transition");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.transition.TransitionInflater.createTransitionFromXml(org.xmlpull.v1.XmlPullParser,"
+                    + " android.util.AttributeSet,"
+                    + " android.transition.Transition):android.transition.Transition");
     }
 
     private Object createCustom(AttributeSet attrs, Class expectedType, String tag) {
@@ -94,7 +110,13 @@ public class TransitionInflater {
         try {
             synchronized (sConstructors) {
                 Constructor constructor = sConstructors.get(className);
-                if (constructor == null && (c = this.mContext.getClassLoader().loadClass(className).asSubclass(expectedType)) != null) {
+                if (constructor == null
+                        && (c =
+                                        this.mContext
+                                                .getClassLoader()
+                                                .loadClass(className)
+                                                .asSubclass(expectedType))
+                                != null) {
                     constructor = c.getConstructor(sConstructorSignature);
                     constructor.setAccessible(true);
                     sConstructors.put(className, constructor);
@@ -103,19 +125,25 @@ public class TransitionInflater {
             }
             return newInstance;
         } catch (ClassNotFoundException e) {
-            throw new InflateException("Could not instantiate " + expectedType + " class " + className, e);
+            throw new InflateException(
+                    "Could not instantiate " + expectedType + " class " + className, e);
         } catch (IllegalAccessException e2) {
-            throw new InflateException("Could not instantiate " + expectedType + " class " + className, e2);
+            throw new InflateException(
+                    "Could not instantiate " + expectedType + " class " + className, e2);
         } catch (InstantiationException e3) {
-            throw new InflateException("Could not instantiate " + expectedType + " class " + className, e3);
+            throw new InflateException(
+                    "Could not instantiate " + expectedType + " class " + className, e3);
         } catch (NoSuchMethodException e4) {
-            throw new InflateException("Could not instantiate " + expectedType + " class " + className, e4);
+            throw new InflateException(
+                    "Could not instantiate " + expectedType + " class " + className, e4);
         } catch (InvocationTargetException e5) {
-            throw new InflateException("Could not instantiate " + expectedType + " class " + className, e5);
+            throw new InflateException(
+                    "Could not instantiate " + expectedType + " class " + className, e5);
         }
     }
 
-    private void getTargetIds(XmlPullParser parser, AttributeSet attrs, Transition transition) throws XmlPullParserException, IOException {
+    private void getTargetIds(XmlPullParser parser, AttributeSet attrs, Transition transition)
+            throws XmlPullParserException, IOException {
         int depth = parser.getDepth();
         while (true) {
             int type = parser.next();
@@ -123,7 +151,9 @@ public class TransitionInflater {
                 if (type == 2) {
                     String name = parser.getName();
                     if (name.equals("target")) {
-                        TypedArray a = this.mContext.obtainStyledAttributes(attrs, R.styleable.TransitionTarget);
+                        TypedArray a =
+                                this.mContext.obtainStyledAttributes(
+                                        attrs, R.styleable.TransitionTarget);
                         int id = a.getResourceId(1, 0);
                         if (id != 0) {
                             transition.addTarget(id);
@@ -147,7 +177,8 @@ public class TransitionInflater {
                                                 transition.excludeTarget(clazz, true);
                                             } catch (ClassNotFoundException e) {
                                                 a.recycle();
-                                                throw new RuntimeException("Could not create " + className, e);
+                                                throw new RuntimeException(
+                                                        "Could not create " + className, e);
                                             }
                                         } else {
                                             String className2 = a.getString(0);
@@ -172,14 +203,18 @@ public class TransitionInflater {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:7:0x005a, code lost:
-    
-        return r1;
-     */
+
+       return r1;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.transition.TransitionManager createTransitionManagerFromXml(org.xmlpull.v1.XmlPullParser r8, android.util.AttributeSet r9, android.view.ViewGroup r10) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    private android.transition.TransitionManager createTransitionManagerFromXml(
+            org.xmlpull.v1.XmlPullParser r8,
+            android.util.AttributeSet r9,
+            android.view.ViewGroup r10)
+            throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             r7 = this;
             int r0 = r8.getDepth()
@@ -228,15 +263,22 @@ public class TransitionInflater {
         L5a:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.transition.TransitionInflater.createTransitionManagerFromXml(org.xmlpull.v1.XmlPullParser, android.util.AttributeSet, android.view.ViewGroup):android.transition.TransitionManager");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.transition.TransitionInflater.createTransitionManagerFromXml(org.xmlpull.v1.XmlPullParser,"
+                    + " android.util.AttributeSet,"
+                    + " android.view.ViewGroup):android.transition.TransitionManager");
     }
 
-    private void loadTransition(AttributeSet attrs, ViewGroup sceneRoot, TransitionManager transitionManager) throws Resources.NotFoundException {
+    private void loadTransition(
+            AttributeSet attrs, ViewGroup sceneRoot, TransitionManager transitionManager)
+            throws Resources.NotFoundException {
         Transition transition;
         TypedArray a = this.mContext.obtainStyledAttributes(attrs, R.styleable.TransitionManager);
         int transitionId = a.getResourceId(2, -1);
         int fromId = a.getResourceId(0, -1);
-        Scene fromScene = fromId < 0 ? null : Scene.getSceneForLayout(sceneRoot, fromId, this.mContext);
+        Scene fromScene =
+                fromId < 0 ? null : Scene.getSceneForLayout(sceneRoot, fromId, this.mContext);
         int toId = a.getResourceId(1, -1);
         Scene toScene = toId >= 0 ? Scene.getSceneForLayout(sceneRoot, toId, this.mContext) : null;
         if (transitionId >= 0 && (transition = inflateTransition(transitionId)) != null) {

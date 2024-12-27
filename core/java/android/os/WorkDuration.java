@@ -16,7 +16,11 @@ public final class WorkDuration {
         this.mActualGpuDurationNanos = 0L;
     }
 
-    public WorkDuration(long workPeriodStartTimestampNanos, long actualTotalDurationNanos, long actualCpuDurationNanos, long actualGpuDurationNanos) {
+    public WorkDuration(
+            long workPeriodStartTimestampNanos,
+            long actualTotalDurationNanos,
+            long actualCpuDurationNanos,
+            long actualGpuDurationNanos) {
         this.mActualTotalDurationNanos = 0L;
         this.mWorkPeriodStartTimestampNanos = 0L;
         this.mActualCpuDurationNanos = 0L;
@@ -29,28 +33,32 @@ public final class WorkDuration {
 
     public void setActualTotalDurationNanos(long actualTotalDurationNanos) {
         if (actualTotalDurationNanos <= 0) {
-            throw new IllegalArgumentException("the actual total duration should be greater than zero.");
+            throw new IllegalArgumentException(
+                    "the actual total duration should be greater than zero.");
         }
         this.mActualTotalDurationNanos = actualTotalDurationNanos;
     }
 
     public void setWorkPeriodStartTimestampNanos(long workPeriodStartTimestampNanos) {
         if (workPeriodStartTimestampNanos <= 0) {
-            throw new IllegalArgumentException("the work period start timestamp should be greater than zero.");
+            throw new IllegalArgumentException(
+                    "the work period start timestamp should be greater than zero.");
         }
         this.mWorkPeriodStartTimestampNanos = workPeriodStartTimestampNanos;
     }
 
     public void setActualCpuDurationNanos(long actualCpuDurationNanos) {
         if (actualCpuDurationNanos < 0) {
-            throw new IllegalArgumentException("the actual CPU duration should be greater than or equal to zero.");
+            throw new IllegalArgumentException(
+                    "the actual CPU duration should be greater than or equal to zero.");
         }
         this.mActualCpuDurationNanos = actualCpuDurationNanos;
     }
 
     public void setActualGpuDurationNanos(long actualGpuDurationNanos) {
         if (actualGpuDurationNanos < 0) {
-            throw new IllegalArgumentException("the actual GPU duration should be greater than or equal to zero.");
+            throw new IllegalArgumentException(
+                    "the actual GPU duration should be greater than or equal to zero.");
         }
         this.mActualGpuDurationNanos = actualGpuDurationNanos;
     }
@@ -79,10 +87,18 @@ public final class WorkDuration {
             return false;
         }
         WorkDuration workDuration = (WorkDuration) obj;
-        return workDuration.mActualTotalDurationNanos == this.mActualTotalDurationNanos && workDuration.mWorkPeriodStartTimestampNanos == this.mWorkPeriodStartTimestampNanos && workDuration.mActualCpuDurationNanos == this.mActualCpuDurationNanos && workDuration.mActualGpuDurationNanos == this.mActualGpuDurationNanos;
+        return workDuration.mActualTotalDurationNanos == this.mActualTotalDurationNanos
+                && workDuration.mWorkPeriodStartTimestampNanos
+                        == this.mWorkPeriodStartTimestampNanos
+                && workDuration.mActualCpuDurationNanos == this.mActualCpuDurationNanos
+                && workDuration.mActualGpuDurationNanos == this.mActualGpuDurationNanos;
     }
 
     public int hashCode() {
-        return Objects.hash(Long.valueOf(this.mWorkPeriodStartTimestampNanos), Long.valueOf(this.mActualTotalDurationNanos), Long.valueOf(this.mActualCpuDurationNanos), Long.valueOf(this.mActualGpuDurationNanos));
+        return Objects.hash(
+                Long.valueOf(this.mWorkPeriodStartTimestampNanos),
+                Long.valueOf(this.mActualTotalDurationNanos),
+                Long.valueOf(this.mActualCpuDurationNanos),
+                Long.valueOf(this.mActualGpuDurationNanos));
     }
 }

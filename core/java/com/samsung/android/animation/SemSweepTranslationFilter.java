@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.ListView;
-import com.samsung.android.animation.SemSweepListAnimator;
 
 /* loaded from: classes5.dex */
 public class SemSweepTranslationFilter extends SemAbsSweepAnimationFilter {
@@ -95,7 +94,10 @@ public class SemSweepTranslationFilter extends SemAbsSweepAnimationFilter {
     }
 
     public BitmapDrawable getSweepBitmapDrawable() {
-        Log.d(TAG, "getSweepBitmapDrawable : mDrawSweepBitmapDrawable = " + this.mDrawSweepBitmapDrawable);
+        Log.d(
+                TAG,
+                "getSweepBitmapDrawable : mDrawSweepBitmapDrawable = "
+                        + this.mDrawSweepBitmapDrawable);
         return this.mDrawSweepBitmapDrawable;
     }
 
@@ -107,7 +109,12 @@ public class SemSweepTranslationFilter extends SemAbsSweepAnimationFilter {
     }
 
     @Override // com.samsung.android.animation.SemAbsSweepAnimationFilter
-    public void initAnimationFilter(View viewForeground, float deltaX, int position, SemSweepListAnimator.OnSweepListener listener, SemSweepListAnimator.SweepConfiguration sweepConfig) {
+    public void initAnimationFilter(
+            View viewForeground,
+            float deltaX,
+            int position,
+            SemSweepListAnimator.OnSweepListener listener,
+            SemSweepListAnimator.SweepConfiguration sweepConfig) {
         this.mSweepListener = listener;
         this.mViewForeground = viewForeground;
         this.mSweepConfiguration = sweepConfig;
@@ -185,14 +192,35 @@ public class SemSweepTranslationFilter extends SemAbsSweepAnimationFilter {
             int width = drawableBound.width();
             int height = drawableBound.height();
             Rect clipLeftRect = new Rect(0, 0, (int) deltaX, viewHeight);
-            Rect iconDrawableRect = new Rect(this.mSweepConfiguration.drawablePadding, 0, width + this.mSweepConfiguration.drawablePadding, height);
+            Rect iconDrawableRect =
+                    new Rect(
+                            this.mSweepConfiguration.drawablePadding,
+                            0,
+                            width + this.mSweepConfiguration.drawablePadding,
+                            height);
             iconDrawableRect.offset(0, (viewHeight - height) / 2);
             if (this.mSweepConfiguration.backgroundColorLeftToRight != 0) {
                 this.mBgLeftToRight.setColor(this.mSweepConfiguration.backgroundColorLeftToRight);
             }
-            drawRectInto(canvas, clipLeftRect, this.mBgLeftToRight, 255, iconDrawableRect, this.mSweepConfiguration.textLeftToRight, this.mSweepConfiguration.textSize, this.mSweepConfiguration.drawableLeftToRight);
+            drawRectInto(
+                    canvas,
+                    clipLeftRect,
+                    this.mBgLeftToRight,
+                    255,
+                    iconDrawableRect,
+                    this.mSweepConfiguration.textLeftToRight,
+                    this.mSweepConfiguration.textSize,
+                    this.mSweepConfiguration.drawableLeftToRight);
             Rect clipRightRect = new Rect((int) deltaX, 0, viewWidth, viewHeight);
-            drawRectInto(canvas, clipRightRect, this.mBgLeftToRight, (int) rectAlpha, iconDrawableRect, this.mSweepConfiguration.textLeftToRight, this.mSweepConfiguration.textSize, null);
+            drawRectInto(
+                    canvas,
+                    clipRightRect,
+                    this.mBgLeftToRight,
+                    (int) rectAlpha,
+                    iconDrawableRect,
+                    this.mSweepConfiguration.textLeftToRight,
+                    this.mSweepConfiguration.textSize,
+                    null);
             return canvas;
         }
         if (sweepProgress >= 0.0f) {
@@ -208,18 +236,48 @@ public class SemSweepTranslationFilter extends SemAbsSweepAnimationFilter {
         int width2 = drawableBound2.width();
         int height2 = drawableBound2.height();
         Rect clipRightRect2 = new Rect(viewWidth - ((int) deltaXAbs), 0, viewWidth, viewHeight);
-        Rect iconDrawableRect2 = new Rect((viewWidth - width2) - this.mSweepConfiguration.drawablePadding, 0, viewWidth - this.mSweepConfiguration.drawablePadding, height2);
+        Rect iconDrawableRect2 =
+                new Rect(
+                        (viewWidth - width2) - this.mSweepConfiguration.drawablePadding,
+                        0,
+                        viewWidth - this.mSweepConfiguration.drawablePadding,
+                        height2);
         iconDrawableRect2.offset(0, (viewHeight - height2) / 2);
-        if (this.mSweepConfiguration != null && this.mSweepConfiguration.backgroundColorRightToLeft != 0) {
+        if (this.mSweepConfiguration != null
+                && this.mSweepConfiguration.backgroundColorRightToLeft != 0) {
             this.mBgRightToLeft.setColor(this.mSweepConfiguration.backgroundColorRightToLeft);
         }
-        drawRectInto(canvas, clipRightRect2, this.mBgRightToLeft, 255, iconDrawableRect2, this.mSweepConfiguration.textRightToLeft, this.mSweepConfiguration.textSize, this.mSweepConfiguration.drawableRightToLeft);
+        drawRectInto(
+                canvas,
+                clipRightRect2,
+                this.mBgRightToLeft,
+                255,
+                iconDrawableRect2,
+                this.mSweepConfiguration.textRightToLeft,
+                this.mSweepConfiguration.textSize,
+                this.mSweepConfiguration.drawableRightToLeft);
         Rect clipLeftRect2 = new Rect(0, 0, viewWidth - ((int) deltaXAbs), viewHeight);
-        drawRectInto(canvas, clipLeftRect2, this.mBgRightToLeft, (int) rectAlpha, iconDrawableRect2, this.mSweepConfiguration.textRightToLeft, this.mSweepConfiguration.textSize, null);
+        drawRectInto(
+                canvas,
+                clipLeftRect2,
+                this.mBgRightToLeft,
+                (int) rectAlpha,
+                iconDrawableRect2,
+                this.mSweepConfiguration.textRightToLeft,
+                this.mSweepConfiguration.textSize,
+                null);
         return canvas;
     }
 
-    private void drawRectInto(Canvas canvas, Rect clipRect, Paint rectPaint, int rectAlpha, Rect iconDrawableRect, String text, float textSize, Drawable iconDrawable) {
+    private void drawRectInto(
+            Canvas canvas,
+            Rect clipRect,
+            Paint rectPaint,
+            int rectAlpha,
+            Rect iconDrawableRect,
+            String text,
+            float textSize,
+            Drawable iconDrawable) {
         canvas.save();
         rectPaint.setAlpha(rectAlpha);
         this.mTextPaint.setAlpha(rectAlpha);
@@ -268,7 +326,12 @@ public class SemSweepTranslationFilter extends SemAbsSweepAnimationFilter {
     }
 
     @Override // com.samsung.android.animation.SemAbsSweepAnimationFilter
-    public ValueAnimator createActionUpAnimator(View viewForeground, float adjustedVelocityX, int scaledTouchSlop, float deltaX, boolean isSweepPattern) {
+    public ValueAnimator createActionUpAnimator(
+            View viewForeground,
+            float adjustedVelocityX,
+            int scaledTouchSlop,
+            float deltaX,
+            boolean isSweepPattern) {
         long duration;
         float endX;
         int remainingDistance;
@@ -278,10 +341,20 @@ public class SemSweepTranslationFilter extends SemAbsSweepAnimationFilter {
         if (translationX > width) {
             translationX = width;
         }
-        Log.d(TAG, "SemSweepTranslationFilter : createActionUpAnimator() : Math.abs(adjustedVelocityX) = " + Math.abs(adjustedVelocityX));
-        Log.d(TAG, "SemSweepTranslationFilter : createActionUpAnimator() : scaledTouchSlop * 23 = " + (scaledTouchSlop * 23));
+        Log.d(
+                TAG,
+                "SemSweepTranslationFilter : createActionUpAnimator() : Math.abs(adjustedVelocityX)"
+                    + " = "
+                        + Math.abs(adjustedVelocityX));
+        Log.d(
+                TAG,
+                "SemSweepTranslationFilter : createActionUpAnimator() : scaledTouchSlop * 23 = "
+                        + (scaledTouchSlop * 23));
         if (Math.abs(adjustedVelocityX) > scaledTouchSlop * 23 && isSweepPattern) {
-            Log.d(TAG, "SemSweepTranslationFilter : createActionUpAnimator() : kick in animation with given velocity, point #1");
+            Log.d(
+                    TAG,
+                    "SemSweepTranslationFilter : createActionUpAnimator() : kick in animation with"
+                        + " given velocity, point #1");
             int abs = width - ((int) Math.abs(translationX));
             duration = (int) ((1.0f - (Math.abs(translationX) / width)) * 600.0f);
             if (duration > 600) {
@@ -292,12 +365,18 @@ public class SemSweepTranslationFilter extends SemAbsSweepAnimationFilter {
         } else {
             float endAlpha = width;
             if (deltaXAbs > endAlpha / 2.0f) {
-                Log.d(TAG, "SemSweepTranslationFilter : createActionUpAnimator() : Greater than a half of the width, point #2");
+                Log.d(
+                        TAG,
+                        "SemSweepTranslationFilter : createActionUpAnimator() : Greater than a half"
+                            + " of the width, point #2");
                 duration = (int) ((1.0f - (Math.abs(translationX) / width)) * 600.0f);
                 endX = width * Math.signum(deltaX);
                 remainingDistance = 0;
             } else {
-                Log.d(TAG, "SemSweepTranslationFilter : createActionUpAnimator() : Not far enough - animate it back, point #3");
+                Log.d(
+                        TAG,
+                        "SemSweepTranslationFilter : createActionUpAnimator() : Not far enough -"
+                            + " animate it back, point #3");
                 duration = (int) ((Math.abs(translationX) * 600.0f) / width);
                 endX = 0.0f;
                 remainingDistance = 1065353216;
@@ -309,8 +388,10 @@ public class SemSweepTranslationFilter extends SemAbsSweepAnimationFilter {
         }
         this.mEndXOfActionUpAnimator = endX;
         PropertyValuesHolder pvhAlpha = PropertyValuesHolder.ofFloat(View.ALPHA, remainingDistance);
-        PropertyValuesHolder pvhTranslationX = PropertyValuesHolder.ofFloat(View.TRANSLATION_X, endX);
-        ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(viewForeground, pvhAlpha, pvhTranslationX);
+        PropertyValuesHolder pvhTranslationX =
+                PropertyValuesHolder.ofFloat(View.TRANSLATION_X, endX);
+        ObjectAnimator animator =
+                ObjectAnimator.ofPropertyValuesHolder(viewForeground, pvhAlpha, pvhTranslationX);
         animator.setDuration(duration);
         animator.setInterpolator(sDecel);
         return animator;

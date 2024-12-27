@@ -3,6 +3,7 @@ package android.view.autofill;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.View;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -17,28 +18,29 @@ public final class AutofillId implements Parcelable {
     private final int mVirtualIntId;
     private final long mVirtualLongId;
     public static final AutofillId NO_AUTOFILL_ID = new AutofillId(0);
-    public static final Parcelable.Creator<AutofillId> CREATOR = new Parcelable.Creator<AutofillId>() { // from class: android.view.autofill.AutofillId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AutofillId createFromParcel(Parcel source) {
-            int viewId = source.readInt();
-            int flags = source.readInt();
-            int sessionId = (flags & 4) != 0 ? source.readInt() : 0;
-            if ((flags & 1) != 0) {
-                return new AutofillId(flags, viewId, source.readInt(), sessionId);
-            }
-            if ((flags & 2) != 0) {
-                return new AutofillId(flags, viewId, source.readLong(), sessionId);
-            }
-            return new AutofillId(flags, viewId, -1L, sessionId);
-        }
+    public static final Parcelable.Creator<AutofillId> CREATOR =
+            new Parcelable.Creator<AutofillId>() { // from class: android.view.autofill.AutofillId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AutofillId createFromParcel(Parcel source) {
+                    int viewId = source.readInt();
+                    int flags = source.readInt();
+                    int sessionId = (flags & 4) != 0 ? source.readInt() : 0;
+                    if ((flags & 1) != 0) {
+                        return new AutofillId(flags, viewId, source.readInt(), sessionId);
+                    }
+                    if ((flags & 2) != 0) {
+                        return new AutofillId(flags, viewId, source.readLong(), sessionId);
+                    }
+                    return new AutofillId(flags, viewId, -1L, sessionId);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AutofillId[] newArray(int size) {
-            return new AutofillId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AutofillId[] newArray(int size) {
+                    return new AutofillId[size];
+                }
+            };
 
     public AutofillId(int id) {
         this(0, id, -1L, 0);
@@ -123,7 +125,10 @@ public final class AutofillId implements Parcelable {
 
     public int hashCode() {
         int result = (1 * 31) + this.mViewId;
-        return (((((result * 31) + this.mVirtualIntId) * 31) + ((int) (this.mVirtualLongId ^ (this.mVirtualLongId >>> 32)))) * 31) + this.mSessionId;
+        return (((((result * 31) + this.mVirtualIntId) * 31)
+                                + ((int) (this.mVirtualLongId ^ (this.mVirtualLongId >>> 32))))
+                        * 31)
+                + this.mSessionId;
     }
 
     public boolean equals(Object obj) {
@@ -134,7 +139,10 @@ public final class AutofillId implements Parcelable {
             return false;
         }
         AutofillId other = (AutofillId) obj;
-        if (this.mViewId == other.mViewId && this.mVirtualIntId == other.mVirtualIntId && this.mVirtualLongId == other.mVirtualLongId && this.mSessionId == other.mSessionId) {
+        if (this.mViewId == other.mViewId
+                && this.mVirtualIntId == other.mVirtualIntId
+                && this.mVirtualLongId == other.mVirtualLongId
+                && this.mSessionId == other.mSessionId) {
             return true;
         }
         return false;
@@ -144,7 +152,10 @@ public final class AutofillId implements Parcelable {
         if (this == other) {
             return true;
         }
-        if (other != null && this.mViewId == other.mViewId && this.mVirtualIntId == other.mVirtualIntId && this.mVirtualLongId == other.mVirtualLongId) {
+        if (other != null
+                && this.mViewId == other.mViewId
+                && this.mVirtualIntId == other.mVirtualIntId
+                && this.mVirtualLongId == other.mVirtualLongId) {
             return true;
         }
         return false;

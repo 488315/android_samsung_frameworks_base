@@ -12,7 +12,9 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.SparseArray;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -29,10 +31,27 @@ public final class PackageMonitorCallbackHelper {
     }
 
     public static boolean isAllowedCallbackAction(String str) {
-        return TextUtils.equals(str, "android.intent.action.PACKAGE_ADDED") || TextUtils.equals(str, "android.intent.action.PACKAGE_REMOVED") || TextUtils.equals(str, "android.intent.action.PACKAGE_CHANGED") || TextUtils.equals(str, "android.intent.action.UID_REMOVED") || TextUtils.equals(str, "android.intent.action.PACKAGES_SUSPENDED") || TextUtils.equals(str, "android.intent.action.PACKAGES_UNSUSPENDED") || TextUtils.equals(str, "android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE") || TextUtils.equals(str, "android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE") || TextUtils.equals(str, "android.intent.action.PACKAGE_DATA_CLEARED") || TextUtils.equals(str, "android.intent.action.PACKAGE_RESTARTED") || TextUtils.equals(str, "android.intent.action.PACKAGE_UNSTOPPED");
+        return TextUtils.equals(str, "android.intent.action.PACKAGE_ADDED")
+                || TextUtils.equals(str, "android.intent.action.PACKAGE_REMOVED")
+                || TextUtils.equals(str, "android.intent.action.PACKAGE_CHANGED")
+                || TextUtils.equals(str, "android.intent.action.UID_REMOVED")
+                || TextUtils.equals(str, "android.intent.action.PACKAGES_SUSPENDED")
+                || TextUtils.equals(str, "android.intent.action.PACKAGES_UNSUSPENDED")
+                || TextUtils.equals(str, "android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE")
+                || TextUtils.equals(str, "android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE")
+                || TextUtils.equals(str, "android.intent.action.PACKAGE_DATA_CLEARED")
+                || TextUtils.equals(str, "android.intent.action.PACKAGE_RESTARTED")
+                || TextUtils.equals(str, "android.intent.action.PACKAGE_UNSTOPPED");
     }
 
-    public final void doNotifyCallbacksByAction(String str, String str2, Bundle bundle, int[] iArr, SparseArray sparseArray, Handler handler, BroadcastHelper$$ExternalSyntheticLambda6 broadcastHelper$$ExternalSyntheticLambda6) {
+    public final void doNotifyCallbacksByAction(
+            String str,
+            String str2,
+            Bundle bundle,
+            int[] iArr,
+            SparseArray sparseArray,
+            Handler handler,
+            BroadcastHelper$$ExternalSyntheticLambda6 broadcastHelper$$ExternalSyntheticLambda6) {
         RemoteCallbackList remoteCallbackList;
         String str3;
         Uri uri;
@@ -54,17 +73,34 @@ public final class PackageMonitorCallbackHelper {
             }
             int intExtra = intent.getIntExtra("android.intent.extra.UID", -1);
             if (intExtra >= 0 && UserHandle.getUserId(intExtra) != i) {
-                intent.putExtra("android.intent.extra.UID", UserHandle.getUid(i, UserHandle.getAppId(intExtra)));
+                intent.putExtra(
+                        "android.intent.extra.UID",
+                        UserHandle.getUid(i, UserHandle.getAppId(intExtra)));
             }
             intent.putExtra("android.intent.extra.user_handle", i);
             if (sparseArray != null) {
                 iArr2 = (int[]) sparseArray.get(i);
             }
-            handler.post(new PackageMonitorCallbackHelper$$ExternalSyntheticLambda0(this, remoteCallbackList, i, iArr2, intent, broadcastHelper$$ExternalSyntheticLambda6));
+            handler.post(
+                    new PackageMonitorCallbackHelper$$ExternalSyntheticLambda0(
+                            this,
+                            remoteCallbackList,
+                            i,
+                            iArr2,
+                            intent,
+                            broadcastHelper$$ExternalSyntheticLambda6));
         }
     }
 
-    public final void notifyPackageMonitor(String str, String str2, Bundle bundle, int[] iArr, int[] iArr2, SparseArray sparseArray, Handler handler, BroadcastHelper$$ExternalSyntheticLambda6 broadcastHelper$$ExternalSyntheticLambda6) {
+    public final void notifyPackageMonitor(
+            String str,
+            String str2,
+            Bundle bundle,
+            int[] iArr,
+            int[] iArr2,
+            SparseArray sparseArray,
+            Handler handler,
+            BroadcastHelper$$ExternalSyntheticLambda6 broadcastHelper$$ExternalSyntheticLambda6) {
         int[] runningUserIds;
         if (isAllowedCallbackAction(str)) {
             if (iArr == null) {
@@ -85,9 +121,23 @@ public final class PackageMonitorCallbackHelper {
                 runningUserIds = iArr;
             }
             if (ArrayUtils.isEmpty(iArr2)) {
-                doNotifyCallbacksByAction(str, str2, bundle, runningUserIds, sparseArray, handler, broadcastHelper$$ExternalSyntheticLambda6);
+                doNotifyCallbacksByAction(
+                        str,
+                        str2,
+                        bundle,
+                        runningUserIds,
+                        sparseArray,
+                        handler,
+                        broadcastHelper$$ExternalSyntheticLambda6);
             } else {
-                doNotifyCallbacksByAction(str, str2, bundle, iArr2, sparseArray, handler, broadcastHelper$$ExternalSyntheticLambda6);
+                doNotifyCallbacksByAction(
+                        str,
+                        str2,
+                        bundle,
+                        iArr2,
+                        sparseArray,
+                        handler,
+                        broadcastHelper$$ExternalSyntheticLambda6);
             }
         }
     }
@@ -100,8 +150,10 @@ public final class PackageMonitorCallbackHelper {
                 int registeredCallbackCount = this.mCallbacks.getRegisteredCallbackCount();
                 arrayList = null;
                 for (int i3 = 0; i3 < registeredCallbackCount; i3++) {
-                    if (((RegisterUser) this.mCallbacks.getRegisteredCallbackCookie(i3)).mUserId == i) {
-                        IRemoteCallback registeredCallbackItem = this.mCallbacks.getRegisteredCallbackItem(i3);
+                    if (((RegisterUser) this.mCallbacks.getRegisteredCallbackCookie(i3)).mUserId
+                            == i) {
+                        IRemoteCallback registeredCallbackItem =
+                                this.mCallbacks.getRegisteredCallbackItem(i3);
                         if (arrayList == null) {
                             arrayList = new ArrayList();
                         }

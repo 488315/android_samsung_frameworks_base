@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class TrackInternalMuteInfo implements Parcelable {
-    public static final Parcelable.Creator<TrackInternalMuteInfo> CREATOR = new Parcelable.Creator<TrackInternalMuteInfo>() { // from class: android.media.TrackInternalMuteInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TrackInternalMuteInfo createFromParcel(Parcel _aidl_source) {
-            TrackInternalMuteInfo _aidl_out = new TrackInternalMuteInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<TrackInternalMuteInfo> CREATOR =
+            new Parcelable.Creator<
+                    TrackInternalMuteInfo>() { // from class: android.media.TrackInternalMuteInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TrackInternalMuteInfo createFromParcel(Parcel _aidl_source) {
+                    TrackInternalMuteInfo _aidl_out = new TrackInternalMuteInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TrackInternalMuteInfo[] newArray(int _aidl_size) {
-            return new TrackInternalMuteInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TrackInternalMuteInfo[] newArray(int _aidl_size) {
+                    return new TrackInternalMuteInfo[_aidl_size];
+                }
+            };
     public int portId = 0;
     public boolean muted = false;
 

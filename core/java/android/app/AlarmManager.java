@@ -1,7 +1,6 @@
 package android.app;
 
 import android.annotation.SystemApi;
-import android.app.IAlarmListener;
 import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerExecutor;
@@ -14,7 +13,9 @@ import android.os.WorkSource;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.i18n.timezone.ZoneInfoDb;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -25,9 +26,12 @@ import java.util.concurrent.Executor;
 
 /* loaded from: classes.dex */
 public class AlarmManager {
-    public static final String ACTION_ALARM_CLOCK_CHANGED = "com.samsung.android.action.ALARM_CLOCK_CHANGED";
-    public static final String ACTION_NEXT_ALARM_CLOCK_CHANGED = "android.app.action.NEXT_ALARM_CLOCK_CHANGED";
-    public static final String ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED = "android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED";
+    public static final String ACTION_ALARM_CLOCK_CHANGED =
+            "com.samsung.android.action.ALARM_CLOCK_CHANGED";
+    public static final String ACTION_NEXT_ALARM_CLOCK_CHANGED =
+            "android.app.action.NEXT_ALARM_CLOCK_CHANGED";
+    public static final String ACTION_SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED =
+            "android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED";
     public static final int ELAPSED_REALTIME = 3;
     public static final int ELAPSED_REALTIME_WAKEUP = 2;
     public static final long ENABLE_USE_EXACT_ALARM = 218533173;
@@ -63,8 +67,7 @@ public class AlarmManager {
     private final int mTargetSdkVersion;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AlarmType {
-    }
+    public @interface AlarmType {}
 
     public interface OnAlarmListener {
         void onAlarm();
@@ -138,70 +141,281 @@ public class AlarmManager {
     }
 
     public void set(int type, long triggerAtMillis, PendingIntent operation) {
-        setImpl(type, triggerAtMillis, legacyExactLength(), 0L, 0, operation, (OnAlarmListener) null, (String) null, (Handler) null, (WorkSource) null, (AlarmClockInfo) null);
+        setImpl(
+                type,
+                triggerAtMillis,
+                legacyExactLength(),
+                0L,
+                0,
+                operation,
+                (OnAlarmListener) null,
+                (String) null,
+                (Handler) null,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
-    public void set(int type, long triggerAtMillis, String tag, OnAlarmListener listener, Handler targetHandler) {
-        setImpl(type, triggerAtMillis, legacyExactLength(), 0L, 0, (PendingIntent) null, listener, tag, targetHandler, (WorkSource) null, (AlarmClockInfo) null);
+    public void set(
+            int type,
+            long triggerAtMillis,
+            String tag,
+            OnAlarmListener listener,
+            Handler targetHandler) {
+        setImpl(
+                type,
+                triggerAtMillis,
+                legacyExactLength(),
+                0L,
+                0,
+                (PendingIntent) null,
+                listener,
+                tag,
+                targetHandler,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
-    public void setRepeating(int type, long triggerAtMillis, long intervalMillis, PendingIntent operation) {
-        setImpl(type, triggerAtMillis, legacyExactLength(), intervalMillis, 0, operation, (OnAlarmListener) null, (String) null, (Handler) null, (WorkSource) null, (AlarmClockInfo) null);
+    public void setRepeating(
+            int type, long triggerAtMillis, long intervalMillis, PendingIntent operation) {
+        setImpl(
+                type,
+                triggerAtMillis,
+                legacyExactLength(),
+                intervalMillis,
+                0,
+                operation,
+                (OnAlarmListener) null,
+                (String) null,
+                (Handler) null,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
-    public void setWindow(int type, long windowStartMillis, long windowLengthMillis, PendingIntent operation) {
-        setImpl(type, windowStartMillis, windowLengthMillis, 0L, 0, operation, (OnAlarmListener) null, (String) null, (Handler) null, (WorkSource) null, (AlarmClockInfo) null);
+    public void setWindow(
+            int type, long windowStartMillis, long windowLengthMillis, PendingIntent operation) {
+        setImpl(
+                type,
+                windowStartMillis,
+                windowLengthMillis,
+                0L,
+                0,
+                operation,
+                (OnAlarmListener) null,
+                (String) null,
+                (Handler) null,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
-    public void setWindow(int type, long windowStartMillis, long windowLengthMillis, String tag, OnAlarmListener listener, Handler targetHandler) {
-        setImpl(type, windowStartMillis, windowLengthMillis, 0L, 0, (PendingIntent) null, listener, tag, targetHandler, (WorkSource) null, (AlarmClockInfo) null);
+    public void setWindow(
+            int type,
+            long windowStartMillis,
+            long windowLengthMillis,
+            String tag,
+            OnAlarmListener listener,
+            Handler targetHandler) {
+        setImpl(
+                type,
+                windowStartMillis,
+                windowLengthMillis,
+                0L,
+                0,
+                (PendingIntent) null,
+                listener,
+                tag,
+                targetHandler,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
-    public void setWindow(int type, long windowStartMillis, long windowLengthMillis, String tag, Executor executor, OnAlarmListener listener) {
-        setImpl(type, windowStartMillis, windowLengthMillis, 0L, 0, (PendingIntent) null, listener, tag, executor, (WorkSource) null, (AlarmClockInfo) null);
+    public void setWindow(
+            int type,
+            long windowStartMillis,
+            long windowLengthMillis,
+            String tag,
+            Executor executor,
+            OnAlarmListener listener) {
+        setImpl(
+                type,
+                windowStartMillis,
+                windowLengthMillis,
+                0L,
+                0,
+                (PendingIntent) null,
+                listener,
+                tag,
+                executor,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
     @SystemApi
-    public void setWindow(int type, long windowStartMillis, long windowLengthMillis, String tag, Executor executor, WorkSource workSource, OnAlarmListener listener) {
-        setImpl(type, windowStartMillis, windowLengthMillis, 0L, 0, (PendingIntent) null, listener, tag, executor, workSource, (AlarmClockInfo) null);
+    public void setWindow(
+            int type,
+            long windowStartMillis,
+            long windowLengthMillis,
+            String tag,
+            Executor executor,
+            WorkSource workSource,
+            OnAlarmListener listener) {
+        setImpl(
+                type,
+                windowStartMillis,
+                windowLengthMillis,
+                0L,
+                0,
+                (PendingIntent) null,
+                listener,
+                tag,
+                executor,
+                workSource,
+                (AlarmClockInfo) null);
     }
 
     @SystemApi
-    public void setPrioritized(int type, long windowStartMillis, long windowLengthMillis, String tag, Executor executor, OnAlarmListener listener) {
+    public void setPrioritized(
+            int type,
+            long windowStartMillis,
+            long windowLengthMillis,
+            String tag,
+            Executor executor,
+            OnAlarmListener listener) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(listener);
-        setImpl(type, windowStartMillis, windowLengthMillis, 0L, 64, (PendingIntent) null, listener, tag, executor, (WorkSource) null, (AlarmClockInfo) null);
+        setImpl(
+                type,
+                windowStartMillis,
+                windowLengthMillis,
+                0L,
+                64,
+                (PendingIntent) null,
+                listener,
+                tag,
+                executor,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
     public void setExact(int type, long triggerAtMillis, PendingIntent operation) {
-        setImpl(type, triggerAtMillis, 0L, 0L, 0, operation, (OnAlarmListener) null, (String) null, (Handler) null, (WorkSource) null, (AlarmClockInfo) null);
+        setImpl(
+                type,
+                triggerAtMillis,
+                0L,
+                0L,
+                0,
+                operation,
+                (OnAlarmListener) null,
+                (String) null,
+                (Handler) null,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
-    public void setExact(int type, long triggerAtMillis, String tag, OnAlarmListener listener, Handler targetHandler) {
-        setImpl(type, triggerAtMillis, 0L, 0L, 0, (PendingIntent) null, listener, tag, targetHandler, (WorkSource) null, (AlarmClockInfo) null);
+    public void setExact(
+            int type,
+            long triggerAtMillis,
+            String tag,
+            OnAlarmListener listener,
+            Handler targetHandler) {
+        setImpl(
+                type,
+                triggerAtMillis,
+                0L,
+                0L,
+                0,
+                (PendingIntent) null,
+                listener,
+                tag,
+                targetHandler,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
-    public void setIdleUntil(int type, long triggerAtMillis, String tag, OnAlarmListener listener, Handler targetHandler) {
-        setImpl(type, triggerAtMillis, 0L, 0L, 16, (PendingIntent) null, listener, tag, targetHandler, (WorkSource) null, (AlarmClockInfo) null);
+    public void setIdleUntil(
+            int type,
+            long triggerAtMillis,
+            String tag,
+            OnAlarmListener listener,
+            Handler targetHandler) {
+        setImpl(
+                type,
+                triggerAtMillis,
+                0L,
+                0L,
+                16,
+                (PendingIntent) null,
+                listener,
+                tag,
+                targetHandler,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
     public void setAlarmClock(AlarmClockInfo info, PendingIntent operation) {
-        setImpl(0, info.getTriggerTime(), 0L, 0L, 0, operation, (OnAlarmListener) null, (String) null, (Handler) null, (WorkSource) null, info);
+        setImpl(
+                0,
+                info.getTriggerTime(),
+                0L,
+                0L,
+                0,
+                operation,
+                (OnAlarmListener) null,
+                (String) null,
+                (Handler) null,
+                (WorkSource) null,
+                info);
     }
 
     @SystemApi
-    public void set(int type, long triggerAtMillis, long windowMillis, long intervalMillis, PendingIntent operation, WorkSource workSource) {
-        setImpl(type, triggerAtMillis, windowMillis, intervalMillis, 0, operation, (OnAlarmListener) null, (String) null, (Handler) null, workSource, (AlarmClockInfo) null);
+    public void set(
+            int type,
+            long triggerAtMillis,
+            long windowMillis,
+            long intervalMillis,
+            PendingIntent operation,
+            WorkSource workSource) {
+        setImpl(
+                type,
+                triggerAtMillis,
+                windowMillis,
+                intervalMillis,
+                0,
+                operation,
+                (OnAlarmListener) null,
+                (String) null,
+                (Handler) null,
+                workSource,
+                (AlarmClockInfo) null);
     }
 
-    public void set(int type, long triggerAtMillis, long windowMillis, long intervalMillis, String tag, OnAlarmListener listener, Handler targetHandler, WorkSource workSource) {
-        setImpl(type, triggerAtMillis, windowMillis, intervalMillis, 0, (PendingIntent) null, listener, tag, targetHandler, workSource, (AlarmClockInfo) null);
+    public void set(
+            int type,
+            long triggerAtMillis,
+            long windowMillis,
+            long intervalMillis,
+            String tag,
+            OnAlarmListener listener,
+            Handler targetHandler,
+            WorkSource workSource) {
+        setImpl(
+                type,
+                triggerAtMillis,
+                windowMillis,
+                intervalMillis,
+                0,
+                (PendingIntent) null,
+                listener,
+                tag,
+                targetHandler,
+                workSource,
+                (AlarmClockInfo) null);
     }
 
     private static String makeTag(long triggerMillis, WorkSource ws) {
         StringBuilder tagBuilder = new StringBuilder(GENERATED_TAG_PREFIX);
         tagBuilder.append(":");
-        int attributionUid = (ws == null || ws.isEmpty()) ? Process.myUid() : ws.getAttributionUid();
+        int attributionUid =
+                (ws == null || ws.isEmpty()) ? Process.myUid() : ws.getAttributionUid();
         tagBuilder.append(UserHandle.formatUid(attributionUid));
         tagBuilder.append(":");
         tagBuilder.append(triggerMillis);
@@ -210,24 +424,92 @@ public class AlarmManager {
 
     @SystemApi
     @Deprecated
-    public void set(int type, long triggerAtMillis, long windowMillis, long intervalMillis, OnAlarmListener listener, Handler targetHandler, WorkSource workSource) {
-        setImpl(type, triggerAtMillis, windowMillis, intervalMillis, 0, (PendingIntent) null, listener, makeTag(triggerAtMillis, workSource), targetHandler, workSource, (AlarmClockInfo) null);
+    public void set(
+            int type,
+            long triggerAtMillis,
+            long windowMillis,
+            long intervalMillis,
+            OnAlarmListener listener,
+            Handler targetHandler,
+            WorkSource workSource) {
+        setImpl(
+                type,
+                triggerAtMillis,
+                windowMillis,
+                intervalMillis,
+                0,
+                (PendingIntent) null,
+                listener,
+                makeTag(triggerAtMillis, workSource),
+                targetHandler,
+                workSource,
+                (AlarmClockInfo) null);
     }
 
     @SystemApi
-    public void setExact(int type, long triggerAtMillis, String tag, Executor executor, WorkSource workSource, OnAlarmListener listener) {
+    public void setExact(
+            int type,
+            long triggerAtMillis,
+            String tag,
+            Executor executor,
+            WorkSource workSource,
+            OnAlarmListener listener) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(workSource);
         Objects.requireNonNull(listener);
-        setImpl(type, triggerAtMillis, 0L, 0L, 0, (PendingIntent) null, listener, tag, executor, workSource, (AlarmClockInfo) null);
+        setImpl(
+                type,
+                triggerAtMillis,
+                0L,
+                0L,
+                0,
+                (PendingIntent) null,
+                listener,
+                tag,
+                executor,
+                workSource,
+                (AlarmClockInfo) null);
     }
 
-    private void setImpl(int type, long triggerAtMillis, long windowMillis, long intervalMillis, int flags, PendingIntent operation, OnAlarmListener listener, String listenerTag, Handler targetHandler, WorkSource workSource, AlarmClockInfo alarmClock) {
+    private void setImpl(
+            int type,
+            long triggerAtMillis,
+            long windowMillis,
+            long intervalMillis,
+            int flags,
+            PendingIntent operation,
+            OnAlarmListener listener,
+            String listenerTag,
+            Handler targetHandler,
+            WorkSource workSource,
+            AlarmClockInfo alarmClock) {
         Handler handlerToUse = targetHandler != null ? targetHandler : this.mMainThreadHandler;
-        setImpl(type, triggerAtMillis, windowMillis, intervalMillis, flags, operation, listener, listenerTag, new HandlerExecutor(handlerToUse), workSource, alarmClock);
+        setImpl(
+                type,
+                triggerAtMillis,
+                windowMillis,
+                intervalMillis,
+                flags,
+                operation,
+                listener,
+                listenerTag,
+                new HandlerExecutor(handlerToUse),
+                workSource,
+                alarmClock);
     }
 
-    private void setImpl(int type, long triggerAtMillis, long windowMillis, long intervalMillis, int flags, PendingIntent operation, OnAlarmListener listener, String listenerTag, Executor targetExecutor, WorkSource workSource, AlarmClockInfo alarmClock) {
+    private void setImpl(
+            int type,
+            long triggerAtMillis,
+            long windowMillis,
+            long intervalMillis,
+            int flags,
+            PendingIntent operation,
+            OnAlarmListener listener,
+            String listenerTag,
+            Executor targetExecutor,
+            WorkSource workSource,
+            AlarmClockInfo alarmClock) {
         long triggerAtMillis2;
         ListenerWrapper recipientWrapper;
         if (triggerAtMillis >= 0) {
@@ -267,29 +549,91 @@ public class AlarmManager {
             recipientWrapper = recipientWrapper2;
         }
         try {
-            this.mService.set(this.mPackageName, type, triggerAtMillis2, windowMillis, intervalMillis, flags, operation, recipientWrapper, listenerTag, workSource, alarmClock);
+            this.mService.set(
+                    this.mPackageName,
+                    type,
+                    triggerAtMillis2,
+                    windowMillis,
+                    intervalMillis,
+                    flags,
+                    operation,
+                    recipientWrapper,
+                    listenerTag,
+                    workSource,
+                    alarmClock);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
     }
 
-    public void setInexactRepeating(int type, long triggerAtMillis, long intervalMillis, PendingIntent operation) {
-        setImpl(type, triggerAtMillis, -1L, intervalMillis, 0, operation, (OnAlarmListener) null, (String) null, (Handler) null, (WorkSource) null, (AlarmClockInfo) null);
+    public void setInexactRepeating(
+            int type, long triggerAtMillis, long intervalMillis, PendingIntent operation) {
+        setImpl(
+                type,
+                triggerAtMillis,
+                -1L,
+                intervalMillis,
+                0,
+                operation,
+                (OnAlarmListener) null,
+                (String) null,
+                (Handler) null,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
     public void setAndAllowWhileIdle(int type, long triggerAtMillis, PendingIntent operation) {
-        setImpl(type, triggerAtMillis, -1L, 0L, 4, operation, (OnAlarmListener) null, (String) null, (Handler) null, (WorkSource) null, (AlarmClockInfo) null);
+        setImpl(
+                type,
+                triggerAtMillis,
+                -1L,
+                0L,
+                4,
+                operation,
+                (OnAlarmListener) null,
+                (String) null,
+                (Handler) null,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
     public void setExactAndAllowWhileIdle(int type, long triggerAtMillis, PendingIntent operation) {
-        setImpl(type, triggerAtMillis, 0L, 0L, 4, operation, (OnAlarmListener) null, (String) null, (Handler) null, (WorkSource) null, (AlarmClockInfo) null);
+        setImpl(
+                type,
+                triggerAtMillis,
+                0L,
+                0L,
+                4,
+                operation,
+                (OnAlarmListener) null,
+                (String) null,
+                (Handler) null,
+                (WorkSource) null,
+                (AlarmClockInfo) null);
     }
 
     @SystemApi
-    public void setExactAndAllowWhileIdle(int type, long triggerAtMillis, String tag, Executor executor, WorkSource workSource, OnAlarmListener listener) {
+    public void setExactAndAllowWhileIdle(
+            int type,
+            long triggerAtMillis,
+            String tag,
+            Executor executor,
+            WorkSource workSource,
+            OnAlarmListener listener) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(listener);
-        setImpl(type, triggerAtMillis, 0L, 0L, 4, (PendingIntent) null, listener, tag, executor, workSource, (AlarmClockInfo) null);
+        setImpl(
+                type,
+                triggerAtMillis,
+                0L,
+                0L,
+                4,
+                (PendingIntent) null,
+                listener,
+                tag,
+                executor,
+                workSource,
+                (AlarmClockInfo) null);
     }
 
     public void cancel(PendingIntent operation) {
@@ -403,19 +747,21 @@ public class AlarmManager {
     }
 
     public static final class AlarmClockInfo implements Parcelable {
-        public static final Parcelable.Creator<AlarmClockInfo> CREATOR = new Parcelable.Creator<AlarmClockInfo>() { // from class: android.app.AlarmManager.AlarmClockInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AlarmClockInfo createFromParcel(Parcel in) {
-                return new AlarmClockInfo(in);
-            }
+        public static final Parcelable.Creator<AlarmClockInfo> CREATOR =
+                new Parcelable.Creator<
+                        AlarmClockInfo>() { // from class: android.app.AlarmManager.AlarmClockInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AlarmClockInfo createFromParcel(Parcel in) {
+                        return new AlarmClockInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AlarmClockInfo[] newArray(int size) {
-                return new AlarmClockInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AlarmClockInfo[] newArray(int size) {
+                        return new AlarmClockInfo[size];
+                    }
+                };
         private final PendingIntent mShowIntent;
         private final long mTriggerTime;
 
@@ -426,7 +772,8 @@ public class AlarmManager {
 
         AlarmClockInfo(Parcel in) {
             this.mTriggerTime = in.readLong();
-            this.mShowIntent = (PendingIntent) in.readParcelable(PendingIntent.class.getClassLoader());
+            this.mShowIntent =
+                    (PendingIntent) in.readParcelable(PendingIntent.class.getClassLoader());
         }
 
         public long getTriggerTime() {

@@ -24,7 +24,26 @@ public class ProtoStream {
     public static final long FIELD_TYPE_INT64 = 12884901888L;
     public static final long FIELD_TYPE_MASK = 1095216660480L;
     public static final long FIELD_TYPE_MESSAGE = 47244640256L;
-    private static final String[] FIELD_TYPE_NAMES = {"Double", "Float", "Int64", "UInt64", "Int32", "Fixed64", "Fixed32", "Bool", "String", "Group", "Message", "Bytes", "UInt32", "Enum", "SFixed32", "SFixed64", "SInt32", "SInt64"};
+    private static final String[] FIELD_TYPE_NAMES = {
+        "Double",
+        "Float",
+        "Int64",
+        "UInt64",
+        "Int32",
+        "Fixed64",
+        "Fixed32",
+        "Bool",
+        "String",
+        "Group",
+        "Message",
+        "Bytes",
+        "UInt32",
+        "Enum",
+        "SFixed32",
+        "SFixed64",
+        "SInt32",
+        "SInt64"
+    };
     public static final long FIELD_TYPE_SFIXED32 = 64424509440L;
     public static final long FIELD_TYPE_SFIXED64 = 68719476736L;
     public static final int FIELD_TYPE_SHIFT = 32;
@@ -43,16 +62,13 @@ public class ProtoStream {
     public static final int WIRE_TYPE_VARINT = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FieldCount {
-    }
+    public @interface FieldCount {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FieldType {
-    }
+    public @interface FieldType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WireType {
-    }
+    public @interface WireType {}
 
     public static String getFieldTypeString(long fieldType) {
         int index = ((int) ((FIELD_TYPE_MASK & fieldType) >>> 32)) - 1;
@@ -108,15 +124,25 @@ public class ProtoStream {
         if (typeString == null) {
             typeString = "fieldType=" + fieldType;
         }
-        return countString + typeString + " tag=" + ((int) fieldId) + " fieldId=0x" + Long.toHexString(fieldId);
+        return countString
+                + typeString
+                + " tag="
+                + ((int) fieldId)
+                + " fieldId=0x"
+                + Long.toHexString(fieldId);
     }
 
     public static long makeFieldId(int id, long fieldFlags) {
         return (id & 4294967295L) | fieldFlags;
     }
 
-    public static long makeToken(int tagSize, boolean repeated, int depth, int objectId, int offset) {
-        return ((7 & tagSize) << 61) | (repeated ? 1152921504606846976L : 0L) | ((511 & depth) << 51) | ((524287 & objectId) << 32) | (4294967295L & offset);
+    public static long makeToken(
+            int tagSize, boolean repeated, int depth, int objectId, int offset) {
+        return ((7 & tagSize) << 61)
+                | (repeated ? 1152921504606846976L : 0L)
+                | ((511 & depth) << 51)
+                | ((524287 & objectId) << 32)
+                | (4294967295L & offset);
     }
 
     public static int getTagSizeFromToken(long token) {
@@ -147,9 +173,18 @@ public class ProtoStream {
         if (token == 0) {
             return "Token(0)";
         }
-        return "Token(val=0x" + Long.toHexString(token) + " depth=" + getDepthFromToken(token) + " object=" + convertObjectIdToOrdinal(getObjectIdFromToken(token)) + " tagSize=" + getTagSizeFromToken(token) + " offset=" + getOffsetFromToken(token) + ')';
+        return "Token(val=0x"
+                + Long.toHexString(token)
+                + " depth="
+                + getDepthFromToken(token)
+                + " object="
+                + convertObjectIdToOrdinal(getObjectIdFromToken(token))
+                + " tagSize="
+                + getTagSizeFromToken(token)
+                + " offset="
+                + getOffsetFromToken(token)
+                + ')';
     }
 
-    protected ProtoStream() {
-    }
+    protected ProtoStream() {}
 }

@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ISemBiometricSysUiDisplayBrightnessCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.biometrics.ISemBiometricSysUiDisplayBrightnessCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.biometrics.ISemBiometricSysUiDisplayBrightnessCallback";
 
     void onBrightnessChanged(float f) throws RemoteException;
 
     public static class Default implements ISemBiometricSysUiDisplayBrightnessCallback {
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiDisplayBrightnessCallback
-        public void onBrightnessChanged(float v) throws RemoteException {
-        }
+        public void onBrightnessChanged(float v) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,8 @@ public interface ISemBiometricSysUiDisplayBrightnessCallback extends IInterface 
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemBiometricSysUiDisplayBrightnessCallback {
+    public abstract static class Stub extends Binder
+            implements ISemBiometricSysUiDisplayBrightnessCallback {
         static final int TRANSACTION_onBrightnessChanged = 1;
 
         public Stub() {
@@ -34,7 +35,8 @@ public interface ISemBiometricSysUiDisplayBrightnessCallback extends IInterface 
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(ISemBiometricSysUiDisplayBrightnessCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(ISemBiometricSysUiDisplayBrightnessCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof ISemBiometricSysUiDisplayBrightnessCallback)) {
                 return (ISemBiometricSysUiDisplayBrightnessCallback) iin;
             }
@@ -61,7 +63,8 @@ public interface ISemBiometricSysUiDisplayBrightnessCallback extends IInterface 
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemBiometricSysUiDisplayBrightnessCallback.DESCRIPTOR);
             }
@@ -100,7 +103,8 @@ public interface ISemBiometricSysUiDisplayBrightnessCallback extends IInterface 
             public void onBrightnessChanged(float v) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(ISemBiometricSysUiDisplayBrightnessCallback.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            ISemBiometricSysUiDisplayBrightnessCallback.DESCRIPTOR);
                     _data.writeFloat(v);
                     this.mRemote.transact(1, _data, null, 1);
                 } finally {

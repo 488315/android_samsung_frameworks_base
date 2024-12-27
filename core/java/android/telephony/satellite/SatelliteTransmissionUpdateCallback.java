@@ -13,6 +13,5 @@ public interface SatelliteTransmissionUpdateCallback {
 
     void onSendDatagramStateChanged(int i, int i2, int i3, int i4);
 
-    default void onSendDatagramRequested(int datagramType) {
-    }
+    default void onSendDatagramRequested(int datagramType) {}
 }

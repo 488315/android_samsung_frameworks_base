@@ -5,29 +5,38 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.autofill.Helper;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 
 /* loaded from: classes3.dex */
 final class OptionalValidators extends InternalValidator {
-    public static final Parcelable.Creator<OptionalValidators> CREATOR = new Parcelable.Creator<OptionalValidators>() { // from class: android.service.autofill.OptionalValidators.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OptionalValidators createFromParcel(Parcel parcel) {
-            return new OptionalValidators((InternalValidator[]) parcel.readParcelableArray(null, InternalValidator.class));
-        }
+    public static final Parcelable.Creator<OptionalValidators> CREATOR =
+            new Parcelable.Creator<
+                    OptionalValidators>() { // from class:
+                                            // android.service.autofill.OptionalValidators.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OptionalValidators createFromParcel(Parcel parcel) {
+                    return new OptionalValidators(
+                            (InternalValidator[])
+                                    parcel.readParcelableArray(null, InternalValidator.class));
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OptionalValidators[] newArray(int size) {
-            return new OptionalValidators[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OptionalValidators[] newArray(int size) {
+                    return new OptionalValidators[size];
+                }
+            };
     private static final String TAG = "OptionalValidators";
     private final InternalValidator[] mValidators;
 
     OptionalValidators(InternalValidator[] validators) {
-        this.mValidators = (InternalValidator[]) Preconditions.checkArrayElementsNotNull(validators, "validators");
+        this.mValidators =
+                (InternalValidator[])
+                        Preconditions.checkArrayElementsNotNull(validators, "validators");
     }
 
     @Override // android.service.autofill.InternalValidator
@@ -45,7 +54,11 @@ final class OptionalValidators extends InternalValidator {
     }
 
     public String toString() {
-        return !Helper.sDebug ? super.toString() : "OptionalValidators: [validators=" + Arrays.toString(this.mValidators) + NavigationBarInflaterView.SIZE_MOD_END;
+        return !Helper.sDebug
+                ? super.toString()
+                : "OptionalValidators: [validators="
+                        + Arrays.toString(this.mValidators)
+                        + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     @Override // android.os.Parcelable

@@ -3,7 +3,6 @@ package android.database.sqlite;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDatabase;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Build;
 import android.os.CancellationSignal;
@@ -11,7 +10,11 @@ import android.provider.BaseColumns;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.internal.util.ArrayUtils;
+
+import libcore.util.EmptyArray;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -22,7 +25,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import libcore.util.EmptyArray;
 
 /* loaded from: classes.dex */
 public class SQLiteQueryBuilder {
@@ -30,7 +32,8 @@ public class SQLiteQueryBuilder {
     private static final int STRICT_GRAMMAR = 4;
     private static final int STRICT_PARENTHESES = 1;
     private static final String TAG = "SQLiteQueryBuilder";
-    private static final Pattern sAggregationPattern = Pattern.compile("(?i)(AVG|COUNT|MAX|MIN|SUM|TOTAL|GROUP_CONCAT)\\((.+)\\)");
+    private static final Pattern sAggregationPattern =
+            Pattern.compile("(?i)(AVG|COUNT|MAX|MIN|SUM|TOTAL|GROUP_CONCAT)\\((.+)\\)");
     private int mStrictFlags;
     private Map<String, String> mProjectionMap = null;
     private Collection<Pattern> mProjectionGreylist = null;
@@ -96,8 +99,7 @@ public class SQLiteQueryBuilder {
     }
 
     @Deprecated
-    public void setProjectionAggregationAllowed(boolean projectionAggregationAllowed) {
-    }
+    public void setProjectionAggregationAllowed(boolean projectionAggregationAllowed) {}
 
     @Deprecated
     public boolean isProjectionAggregationAllowed() {
@@ -148,9 +150,18 @@ public class SQLiteQueryBuilder {
         return (this.mStrictFlags & 4) != 0;
     }
 
-    public static String buildQueryString(boolean distinct, String tables, String[] columns, String where, String groupBy, String having, String orderBy, String limit) {
+    public static String buildQueryString(
+            boolean distinct,
+            String tables,
+            String[] columns,
+            String where,
+            String groupBy,
+            String having,
+            String orderBy,
+            String limit) {
         if (TextUtils.isEmpty(groupBy) && !TextUtils.isEmpty(having)) {
-            throw new IllegalArgumentException("HAVING clauses are only permitted when using a groupBy clause");
+            throw new IllegalArgumentException(
+                    "HAVING clauses are only permitted when using a groupBy clause");
         }
         StringBuilder query = new StringBuilder(120);
         query.append("SELECT ");
@@ -193,20 +204,55 @@ public class SQLiteQueryBuilder {
         s.append(' ');
     }
 
-    public Cursor query(SQLiteDatabase db, String[] projectionIn, String selection, String[] selectionArgs, String groupBy, String having, String sortOrder) {
-        return query(db, projectionIn, selection, selectionArgs, groupBy, having, sortOrder, null, null);
+    public Cursor query(
+            SQLiteDatabase db,
+            String[] projectionIn,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having,
+            String sortOrder) {
+        return query(
+                db, projectionIn, selection, selectionArgs, groupBy, having, sortOrder, null, null);
     }
 
-    public Cursor query(SQLiteDatabase db, String[] projectionIn, String selection, String[] selectionArgs, String groupBy, String having, String sortOrder, String limit) {
-        return query(db, projectionIn, selection, selectionArgs, groupBy, having, sortOrder, limit, null);
+    public Cursor query(
+            SQLiteDatabase db,
+            String[] projectionIn,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having,
+            String sortOrder,
+            String limit) {
+        return query(
+                db,
+                projectionIn,
+                selection,
+                selectionArgs,
+                groupBy,
+                having,
+                sortOrder,
+                limit,
+                null);
     }
 
-    public Cursor query(SQLiteDatabase db, String[] projectionIn, String selection, String[] selectionArgs, String groupBy, String having, String sortOrder, String limit, CancellationSignal cancellationSignal) {
+    public Cursor query(
+            SQLiteDatabase db,
+            String[] projectionIn,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having,
+            String sortOrder,
+            String limit,
+            CancellationSignal cancellationSignal) {
         String sql;
         if (this.mTables == null) {
             return null;
         }
-        String unwrappedSql = buildQuery(projectionIn, selection, groupBy, having, sortOrder, limit);
+        String unwrappedSql =
+                buildQuery(projectionIn, selection, groupBy, having, sortOrder, limit);
         if (isStrictColumns()) {
             enforceStrictColumns(projectionIn);
         }
@@ -215,7 +261,9 @@ public class SQLiteQueryBuilder {
         }
         if (isStrict()) {
             db.validateSql(unwrappedSql, cancellationSignal);
-            sql = buildQuery(projectionIn, wrap(selection), groupBy, wrap(having), sortOrder, limit);
+            sql =
+                    buildQuery(
+                            projectionIn, wrap(selection), groupBy, wrap(having), sortOrder, limit);
         } else {
             sql = unwrappedSql;
         }
@@ -226,7 +274,12 @@ public class SQLiteQueryBuilder {
                 Log.d(TAG, sql);
             }
         }
-        return db.rawQueryWithFactory(this.mFactory, sql, selectionArgs, SQLiteDatabase.findEditTable(this.mTables), cancellationSignal);
+        return db.rawQueryWithFactory(
+                this.mFactory,
+                sql,
+                selectionArgs,
+                SQLiteDatabase.findEditTable(this.mTables),
+                cancellationSignal);
     }
 
     public long insert(SQLiteDatabase db, ContentValues values) {
@@ -253,7 +306,8 @@ public class SQLiteQueryBuilder {
         return DatabaseUtils.executeInsert(db, sql, sqlArgs);
     }
 
-    public int update(SQLiteDatabase db, ContentValues values, String selection, String[] selectionArgs) {
+    public int update(
+            SQLiteDatabase db, ContentValues values, String selection, String[] selectionArgs) {
         String sql;
         Objects.requireNonNull(this.mTables, "No tables defined");
         Objects.requireNonNull(db, "No database defined");
@@ -334,44 +388,68 @@ public class SQLiteQueryBuilder {
         }
     }
 
-    private void enforceStrictGrammar(String selection, String groupBy, String having, String sortOrder, String limit) {
-        SQLiteTokenizer.tokenize(selection, 0, new Consumer() { // from class: android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
-            }
-        });
-        SQLiteTokenizer.tokenize(groupBy, 0, new Consumer() { // from class: android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
-            }
-        });
-        SQLiteTokenizer.tokenize(having, 0, new Consumer() { // from class: android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
-            }
-        });
-        SQLiteTokenizer.tokenize(sortOrder, 0, new Consumer() { // from class: android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
-            }
-        });
-        SQLiteTokenizer.tokenize(limit, 0, new Consumer() { // from class: android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
-            }
-        });
+    private void enforceStrictGrammar(
+            String selection, String groupBy, String having, String sortOrder, String limit) {
+        SQLiteTokenizer.tokenize(
+                selection,
+                0,
+                new Consumer() { // from class:
+                    // android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
+                    }
+                });
+        SQLiteTokenizer.tokenize(
+                groupBy,
+                0,
+                new Consumer() { // from class:
+                    // android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
+                    }
+                });
+        SQLiteTokenizer.tokenize(
+                having,
+                0,
+                new Consumer() { // from class:
+                    // android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
+                    }
+                });
+        SQLiteTokenizer.tokenize(
+                sortOrder,
+                0,
+                new Consumer() { // from class:
+                    // android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
+                    }
+                });
+        SQLiteTokenizer.tokenize(
+                limit,
+                0,
+                new Consumer() { // from class:
+                    // android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public void enforceStrictToken(String token) {
         char c;
-        if (TextUtils.isEmpty(token) || isTableOrColumn(token) || SQLiteTokenizer.isFunction(token) || SQLiteTokenizer.isType(token)) {
+        if (TextUtils.isEmpty(token)
+                || isTableOrColumn(token)
+                || SQLiteTokenizer.isFunction(token)
+                || SQLiteTokenizer.isType(token)) {
             return;
         }
         boolean isAllowedKeyword = SQLiteTokenizer.isKeyword(token);
@@ -462,14 +540,28 @@ public class SQLiteQueryBuilder {
         }
     }
 
-    public String buildQuery(String[] projectionIn, String selection, String groupBy, String having, String sortOrder, String limit) {
+    public String buildQuery(
+            String[] projectionIn,
+            String selection,
+            String groupBy,
+            String having,
+            String sortOrder,
+            String limit) {
         String[] projection = computeProjection(projectionIn);
         String where = computeWhere(selection);
-        return buildQueryString(this.mDistinct, this.mTables, projection, where, groupBy, having, sortOrder, limit);
+        return buildQueryString(
+                this.mDistinct, this.mTables, projection, where, groupBy, having, sortOrder, limit);
     }
 
     @Deprecated
-    public String buildQuery(String[] projectionIn, String selection, String[] selectionArgs, String groupBy, String having, String sortOrder, String limit) {
+    public String buildQuery(
+            String[] projectionIn,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having,
+            String sortOrder,
+            String limit) {
         return buildQuery(projectionIn, selection, groupBy, having, sortOrder, limit);
     }
 
@@ -529,7 +621,15 @@ public class SQLiteQueryBuilder {
         return sql.toString();
     }
 
-    public String buildUnionSubQuery(String typeDiscriminatorColumn, String[] unionColumns, Set<String> columnsPresentInTable, int computedColumnsOffset, String typeDiscriminatorValue, String selection, String groupBy, String having) {
+    public String buildUnionSubQuery(
+            String typeDiscriminatorColumn,
+            String[] unionColumns,
+            Set<String> columnsPresentInTable,
+            int computedColumnsOffset,
+            String typeDiscriminatorValue,
+            String selection,
+            String groupBy,
+            String having) {
         int unionColumnsCount = unionColumns.length;
         String[] projectionIn = new String[unionColumnsCount];
         for (int i = 0; i < unionColumnsCount; i++) {
@@ -547,8 +647,25 @@ public class SQLiteQueryBuilder {
     }
 
     @Deprecated
-    public String buildUnionSubQuery(String typeDiscriminatorColumn, String[] unionColumns, Set<String> columnsPresentInTable, int computedColumnsOffset, String typeDiscriminatorValue, String selection, String[] selectionArgs, String groupBy, String having) {
-        return buildUnionSubQuery(typeDiscriminatorColumn, unionColumns, columnsPresentInTable, computedColumnsOffset, typeDiscriminatorValue, selection, groupBy, having);
+    public String buildUnionSubQuery(
+            String typeDiscriminatorColumn,
+            String[] unionColumns,
+            Set<String> columnsPresentInTable,
+            int computedColumnsOffset,
+            String typeDiscriminatorValue,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having) {
+        return buildUnionSubQuery(
+                typeDiscriminatorColumn,
+                unionColumns,
+                columnsPresentInTable,
+                computedColumnsOffset,
+                typeDiscriminatorValue,
+                selection,
+                groupBy,
+                having);
     }
 
     public String buildUnionQuery(String[] subQueries, String sortOrder, String limit) {
@@ -568,7 +685,10 @@ public class SQLiteQueryBuilder {
 
     private static String maybeWithOperator(String operator, String column) {
         if (operator != null) {
-            return operator + NavigationBarInflaterView.KEY_CODE_START + column + NavigationBarInflaterView.KEY_CODE_END;
+            return operator
+                    + NavigationBarInflaterView.KEY_CODE_START
+                    + column
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
         return column;
     }
@@ -621,7 +741,8 @@ public class SQLiteQueryBuilder {
         if (column != null) {
             return maybeWithOperator(operator, column);
         }
-        if (this.mStrictFlags == 0 && (userColumn.contains(" AS ") || userColumn.contains(" as "))) {
+        if (this.mStrictFlags == 0
+                && (userColumn.contains(" AS ") || userColumn.contains(" as "))) {
             return maybeWithOperator(operator, userColumn);
         }
         if (this.mProjectionGreylist != null) {
@@ -673,6 +794,8 @@ public class SQLiteQueryBuilder {
         if (TextUtils.isEmpty(arg)) {
             return arg;
         }
-        return NavigationBarInflaterView.KEY_CODE_START + arg + NavigationBarInflaterView.KEY_CODE_END;
+        return NavigationBarInflaterView.KEY_CODE_START
+                + arg
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

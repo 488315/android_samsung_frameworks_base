@@ -8,6 +8,7 @@ import android.net.StaticIpConfiguration;
 import android.net.apf.ApfCapabilities;
 import android.net.networkstack.aidl.dhcp.DhcpOption;
 import android.util.Log;
+
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -51,10 +52,12 @@ public class ProvisioningConfiguration {
 
         public ProvisioningConfiguration build() {
             ProvisioningConfiguration provisioningConfiguration = this.mConfig;
-            if (provisioningConfiguration.mIPv6ProvisioningMode != 2 || provisioningConfiguration.mIPv4ProvisioningMode == 0) {
+            if (provisioningConfiguration.mIPv6ProvisioningMode != 2
+                    || provisioningConfiguration.mIPv4ProvisioningMode == 0) {
                 return new ProvisioningConfiguration(provisioningConfiguration);
             }
-            throw new IllegalArgumentException("IPv4 must be disabled in IPv6 link-localonly mode.");
+            throw new IllegalArgumentException(
+                    "IPv4 must be disabled in IPv6 link-localonly mode.");
         }
 
         public Builder withApfCapabilities(ApfCapabilities apfCapabilities) {
@@ -186,11 +189,15 @@ public class ProvisioningConfiguration {
                 this.mPayload = ScanResultInfo.convertToByteArray(byteBuffer.asReadOnlyBuffer());
             }
 
-            public static InformationElement fromStableParcelable(InformationElementParcelable informationElementParcelable) {
+            public static InformationElement fromStableParcelable(
+                    InformationElementParcelable informationElementParcelable) {
                 if (informationElementParcelable == null) {
                     return null;
                 }
-                return new InformationElement(informationElementParcelable.id, ByteBuffer.wrap((byte[]) informationElementParcelable.payload.clone()).asReadOnlyBuffer());
+                return new InformationElement(
+                        informationElementParcelable.id,
+                        ByteBuffer.wrap((byte[]) informationElementParcelable.payload.clone())
+                                .asReadOnlyBuffer());
             }
 
             public boolean equals(Object obj) {
@@ -201,7 +208,8 @@ public class ProvisioningConfiguration {
                     return false;
                 }
                 InformationElement informationElement = (InformationElement) obj;
-                return this.mId == informationElement.mId && Arrays.equals(this.mPayload, informationElement.mPayload);
+                return this.mId == informationElement.mId
+                        && Arrays.equals(this.mPayload, informationElement.mPayload);
             }
 
             public int getId() {
@@ -213,11 +221,13 @@ public class ProvisioningConfiguration {
             }
 
             public int hashCode() {
-                return Objects.hash(Integer.valueOf(this.mId), Integer.valueOf(Arrays.hashCode(this.mPayload)));
+                return Objects.hash(
+                        Integer.valueOf(this.mId), Integer.valueOf(Arrays.hashCode(this.mPayload)));
             }
 
             public InformationElementParcelable toStableParcelable() {
-                InformationElementParcelable informationElementParcelable = new InformationElementParcelable();
+                InformationElementParcelable informationElementParcelable =
+                        new InformationElementParcelable();
                 informationElementParcelable.id = this.mId;
                 byte[] bArr = this.mPayload;
                 informationElementParcelable.payload = bArr != null ? (byte[]) bArr.clone() : null;
@@ -247,7 +257,9 @@ public class ProvisioningConfiguration {
                     asReadOnlyBuffer.get(bArr);
                     return bArr;
                 } catch (BufferUnderflowException unused) {
-                    Log.wtf(ProvisioningConfiguration.TAG, "Buffer under flow exception should never happen.");
+                    Log.wtf(
+                            ProvisioningConfiguration.TAG,
+                            "Buffer under flow exception should never happen.");
                     return bArr;
                 }
             } catch (Throwable unused2) {
@@ -255,13 +267,19 @@ public class ProvisioningConfiguration {
             }
         }
 
-        public static ScanResultInfo fromStableParcelable(ScanResultInfoParcelable scanResultInfoParcelable) {
+        public static ScanResultInfo fromStableParcelable(
+                ScanResultInfoParcelable scanResultInfoParcelable) {
             if (scanResultInfoParcelable == null) {
                 return null;
             }
             ArrayList arrayList = new ArrayList();
-            arrayList.addAll(ParcelableUtil.fromParcelableArray(scanResultInfoParcelable.informationElements, new ProvisioningConfiguration$ScanResultInfo$$ExternalSyntheticLambda0(0)));
-            return new ScanResultInfo(scanResultInfoParcelable.ssid, scanResultInfoParcelable.bssid, arrayList);
+            arrayList.addAll(
+                    ParcelableUtil.fromParcelableArray(
+                            scanResultInfoParcelable.informationElements,
+                            new ProvisioningConfiguration$ScanResultInfo$$ExternalSyntheticLambda0(
+                                    0)));
+            return new ScanResultInfo(
+                    scanResultInfoParcelable.ssid, scanResultInfoParcelable.bssid, arrayList);
         }
 
         public boolean equals(Object obj) {
@@ -272,7 +290,9 @@ public class ProvisioningConfiguration {
                 return false;
             }
             ScanResultInfo scanResultInfo = (ScanResultInfo) obj;
-            return Objects.equals(this.mSsid, scanResultInfo.mSsid) && Objects.equals(this.mBssid, scanResultInfo.mBssid) && this.mInformationElements.equals(scanResultInfo.mInformationElements);
+            return Objects.equals(this.mSsid, scanResultInfo.mSsid)
+                    && Objects.equals(this.mBssid, scanResultInfo.mBssid)
+                    && this.mInformationElements.equals(scanResultInfo.mInformationElements);
         }
 
         public String getBssid() {
@@ -295,7 +315,13 @@ public class ProvisioningConfiguration {
             ScanResultInfoParcelable scanResultInfoParcelable = new ScanResultInfoParcelable();
             scanResultInfoParcelable.ssid = this.mSsid;
             scanResultInfoParcelable.bssid = this.mBssid;
-            scanResultInfoParcelable.informationElements = (InformationElementParcelable[]) ParcelableUtil.toParcelableArray(this.mInformationElements, new ProvisioningConfiguration$ScanResultInfo$$ExternalSyntheticLambda0(1), InformationElementParcelable.class);
+            scanResultInfoParcelable.informationElements =
+                    (InformationElementParcelable[])
+                            ParcelableUtil.toParcelableArray(
+                                    this.mInformationElements,
+                                    new ProvisioningConfiguration$ScanResultInfo$$ExternalSyntheticLambda0(
+                                            1),
+                                    InformationElementParcelable.class);
             return scanResultInfoParcelable;
         }
 
@@ -343,11 +369,15 @@ public class ProvisioningConfiguration {
         this.mHostnameSetting = 0;
         this.mUniqueEui64AddressesOnly = provisioningConfiguration.mUniqueEui64AddressesOnly;
         this.mEnablePreconnection = provisioningConfiguration.mEnablePreconnection;
-        this.mUsingMultinetworkPolicyTracker = provisioningConfiguration.mUsingMultinetworkPolicyTracker;
+        this.mUsingMultinetworkPolicyTracker =
+                provisioningConfiguration.mUsingMultinetworkPolicyTracker;
         this.mUsingIpReachabilityMonitor = provisioningConfiguration.mUsingIpReachabilityMonitor;
         this.mRequestedPreDhcpActionMs = provisioningConfiguration.mRequestedPreDhcpActionMs;
         this.mInitialConfig = InitialConfiguration.copy(provisioningConfiguration.mInitialConfig);
-        this.mStaticIpConfig = provisioningConfiguration.mStaticIpConfig != null ? new StaticIpConfiguration(provisioningConfiguration.mStaticIpConfig) : null;
+        this.mStaticIpConfig =
+                provisioningConfiguration.mStaticIpConfig != null
+                        ? new StaticIpConfiguration(provisioningConfiguration.mStaticIpConfig)
+                        : null;
         this.mApfCapabilities = provisioningConfiguration.mApfCapabilities;
         this.mProvisioningTimeoutMs = provisioningConfiguration.mProvisioningTimeoutMs;
         this.mIPv6AddrGenMode = provisioningConfiguration.mIPv6AddrGenMode;
@@ -369,7 +399,8 @@ public class ProvisioningConfiguration {
         if (dhcpOption == null || dhcpOption2 == null) {
             return false;
         }
-        return dhcpOption.type == dhcpOption2.type && Arrays.equals(dhcpOption.value, dhcpOption2.value);
+        return dhcpOption.type == dhcpOption2.type
+                && Arrays.equals(dhcpOption.value, dhcpOption2.value);
     }
 
     private static boolean dhcpOptionListEquals(List list, List list2) {
@@ -387,35 +418,62 @@ public class ProvisioningConfiguration {
         return true;
     }
 
-    public static ProvisioningConfiguration fromStableParcelable(ProvisioningConfigurationParcelable provisioningConfigurationParcelable, int i) {
+    public static ProvisioningConfiguration fromStableParcelable(
+            ProvisioningConfigurationParcelable provisioningConfigurationParcelable, int i) {
         if (provisioningConfigurationParcelable == null) {
             return null;
         }
         ProvisioningConfiguration provisioningConfiguration = new ProvisioningConfiguration();
-        provisioningConfiguration.mUniqueEui64AddressesOnly = provisioningConfigurationParcelable.uniqueEui64AddressesOnly;
-        provisioningConfiguration.mEnablePreconnection = provisioningConfigurationParcelable.enablePreconnection;
-        provisioningConfiguration.mUsingMultinetworkPolicyTracker = provisioningConfigurationParcelable.usingMultinetworkPolicyTracker;
-        provisioningConfiguration.mUsingIpReachabilityMonitor = provisioningConfigurationParcelable.usingIpReachabilityMonitor;
-        provisioningConfiguration.mRequestedPreDhcpActionMs = provisioningConfigurationParcelable.requestedPreDhcpActionMs;
-        provisioningConfiguration.mInitialConfig = InitialConfiguration.fromStableParcelable(provisioningConfigurationParcelable.initialConfig);
-        provisioningConfiguration.mStaticIpConfig = provisioningConfigurationParcelable.staticIpConfig == null ? null : new StaticIpConfiguration(provisioningConfigurationParcelable.staticIpConfig);
-        provisioningConfiguration.mApfCapabilities = provisioningConfigurationParcelable.apfCapabilities;
-        provisioningConfiguration.mProvisioningTimeoutMs = provisioningConfigurationParcelable.provisioningTimeoutMs;
-        provisioningConfiguration.mIPv6AddrGenMode = provisioningConfigurationParcelable.ipv6AddrGenMode;
+        provisioningConfiguration.mUniqueEui64AddressesOnly =
+                provisioningConfigurationParcelable.uniqueEui64AddressesOnly;
+        provisioningConfiguration.mEnablePreconnection =
+                provisioningConfigurationParcelable.enablePreconnection;
+        provisioningConfiguration.mUsingMultinetworkPolicyTracker =
+                provisioningConfigurationParcelable.usingMultinetworkPolicyTracker;
+        provisioningConfiguration.mUsingIpReachabilityMonitor =
+                provisioningConfigurationParcelable.usingIpReachabilityMonitor;
+        provisioningConfiguration.mRequestedPreDhcpActionMs =
+                provisioningConfigurationParcelable.requestedPreDhcpActionMs;
+        provisioningConfiguration.mInitialConfig =
+                InitialConfiguration.fromStableParcelable(
+                        provisioningConfigurationParcelable.initialConfig);
+        provisioningConfiguration.mStaticIpConfig =
+                provisioningConfigurationParcelable.staticIpConfig == null
+                        ? null
+                        : new StaticIpConfiguration(
+                                provisioningConfigurationParcelable.staticIpConfig);
+        provisioningConfiguration.mApfCapabilities =
+                provisioningConfigurationParcelable.apfCapabilities;
+        provisioningConfiguration.mProvisioningTimeoutMs =
+                provisioningConfigurationParcelable.provisioningTimeoutMs;
+        provisioningConfiguration.mIPv6AddrGenMode =
+                provisioningConfigurationParcelable.ipv6AddrGenMode;
         provisioningConfiguration.mNetwork = provisioningConfigurationParcelable.network;
         provisioningConfiguration.mDisplayName = provisioningConfigurationParcelable.displayName;
         provisioningConfiguration.mCreatorUid = provisioningConfigurationParcelable.creatorUid;
-        provisioningConfiguration.mScanResultInfo = ScanResultInfo.fromStableParcelable(provisioningConfigurationParcelable.scanResultInfo);
-        provisioningConfiguration.mLayer2Info = Layer2Information.fromStableParcelable(provisioningConfigurationParcelable.layer2Info);
-        provisioningConfiguration.mDhcpOptions = provisioningConfigurationParcelable.options != null ? new ArrayList(provisioningConfigurationParcelable.options) : null;
+        provisioningConfiguration.mScanResultInfo =
+                ScanResultInfo.fromStableParcelable(
+                        provisioningConfigurationParcelable.scanResultInfo);
+        provisioningConfiguration.mLayer2Info =
+                Layer2Information.fromStableParcelable(
+                        provisioningConfigurationParcelable.layer2Info);
+        provisioningConfiguration.mDhcpOptions =
+                provisioningConfigurationParcelable.options != null
+                        ? new ArrayList(provisioningConfigurationParcelable.options)
+                        : null;
         if (i < 12) {
-            provisioningConfiguration.mIPv4ProvisioningMode = provisioningConfigurationParcelable.enableIPv4 ? 2 : 0;
-            provisioningConfiguration.mIPv6ProvisioningMode = provisioningConfigurationParcelable.enableIPv6 ? 1 : 0;
+            provisioningConfiguration.mIPv4ProvisioningMode =
+                    provisioningConfigurationParcelable.enableIPv4 ? 2 : 0;
+            provisioningConfiguration.mIPv6ProvisioningMode =
+                    provisioningConfigurationParcelable.enableIPv6 ? 1 : 0;
         } else {
-            provisioningConfiguration.mIPv4ProvisioningMode = provisioningConfigurationParcelable.ipv4ProvisioningMode;
-            provisioningConfiguration.mIPv6ProvisioningMode = provisioningConfigurationParcelable.ipv6ProvisioningMode;
+            provisioningConfiguration.mIPv4ProvisioningMode =
+                    provisioningConfigurationParcelable.ipv4ProvisioningMode;
+            provisioningConfiguration.mIPv6ProvisioningMode =
+                    provisioningConfigurationParcelable.ipv6ProvisioningMode;
         }
-        provisioningConfiguration.mHostnameSetting = provisioningConfigurationParcelable.hostnameSetting;
+        provisioningConfiguration.mHostnameSetting =
+                provisioningConfigurationParcelable.hostnameSetting;
         return provisioningConfiguration;
     }
 
@@ -432,7 +490,28 @@ public class ProvisioningConfiguration {
             return false;
         }
         ProvisioningConfiguration provisioningConfiguration = (ProvisioningConfiguration) obj;
-        return this.mUniqueEui64AddressesOnly == provisioningConfiguration.mUniqueEui64AddressesOnly && this.mEnablePreconnection == provisioningConfiguration.mEnablePreconnection && this.mUsingMultinetworkPolicyTracker == provisioningConfiguration.mUsingMultinetworkPolicyTracker && this.mUsingIpReachabilityMonitor == provisioningConfiguration.mUsingIpReachabilityMonitor && this.mRequestedPreDhcpActionMs == provisioningConfiguration.mRequestedPreDhcpActionMs && Objects.equals(this.mInitialConfig, provisioningConfiguration.mInitialConfig) && Objects.equals(this.mStaticIpConfig, provisioningConfiguration.mStaticIpConfig) && Objects.equals(this.mApfCapabilities, provisioningConfiguration.mApfCapabilities) && this.mProvisioningTimeoutMs == provisioningConfiguration.mProvisioningTimeoutMs && this.mIPv6AddrGenMode == provisioningConfiguration.mIPv6AddrGenMode && Objects.equals(this.mNetwork, provisioningConfiguration.mNetwork) && Objects.equals(this.mDisplayName, provisioningConfiguration.mDisplayName) && Objects.equals(this.mScanResultInfo, provisioningConfiguration.mScanResultInfo) && Objects.equals(this.mLayer2Info, provisioningConfiguration.mLayer2Info) && dhcpOptionListEquals(this.mDhcpOptions, provisioningConfiguration.mDhcpOptions) && this.mIPv4ProvisioningMode == provisioningConfiguration.mIPv4ProvisioningMode && this.mIPv6ProvisioningMode == provisioningConfiguration.mIPv6ProvisioningMode && this.mCreatorUid == provisioningConfiguration.mCreatorUid && this.mHostnameSetting == provisioningConfiguration.mHostnameSetting;
+        return this.mUniqueEui64AddressesOnly == provisioningConfiguration.mUniqueEui64AddressesOnly
+                && this.mEnablePreconnection == provisioningConfiguration.mEnablePreconnection
+                && this.mUsingMultinetworkPolicyTracker
+                        == provisioningConfiguration.mUsingMultinetworkPolicyTracker
+                && this.mUsingIpReachabilityMonitor
+                        == provisioningConfiguration.mUsingIpReachabilityMonitor
+                && this.mRequestedPreDhcpActionMs
+                        == provisioningConfiguration.mRequestedPreDhcpActionMs
+                && Objects.equals(this.mInitialConfig, provisioningConfiguration.mInitialConfig)
+                && Objects.equals(this.mStaticIpConfig, provisioningConfiguration.mStaticIpConfig)
+                && Objects.equals(this.mApfCapabilities, provisioningConfiguration.mApfCapabilities)
+                && this.mProvisioningTimeoutMs == provisioningConfiguration.mProvisioningTimeoutMs
+                && this.mIPv6AddrGenMode == provisioningConfiguration.mIPv6AddrGenMode
+                && Objects.equals(this.mNetwork, provisioningConfiguration.mNetwork)
+                && Objects.equals(this.mDisplayName, provisioningConfiguration.mDisplayName)
+                && Objects.equals(this.mScanResultInfo, provisioningConfiguration.mScanResultInfo)
+                && Objects.equals(this.mLayer2Info, provisioningConfiguration.mLayer2Info)
+                && dhcpOptionListEquals(this.mDhcpOptions, provisioningConfiguration.mDhcpOptions)
+                && this.mIPv4ProvisioningMode == provisioningConfiguration.mIPv4ProvisioningMode
+                && this.mIPv6ProvisioningMode == provisioningConfiguration.mIPv6ProvisioningMode
+                && this.mCreatorUid == provisioningConfiguration.mCreatorUid
+                && this.mHostnameSetting == provisioningConfiguration.mHostnameSetting;
     }
 
     public boolean isValid() {
@@ -441,21 +520,30 @@ public class ProvisioningConfiguration {
     }
 
     public ProvisioningConfigurationParcelable toStableParcelable() {
-        ProvisioningConfigurationParcelable provisioningConfigurationParcelable = new ProvisioningConfigurationParcelable();
+        ProvisioningConfigurationParcelable provisioningConfigurationParcelable =
+                new ProvisioningConfigurationParcelable();
         int i = this.mIPv4ProvisioningMode;
         provisioningConfigurationParcelable.enableIPv4 = i != 0;
         provisioningConfigurationParcelable.ipv4ProvisioningMode = i;
         int i2 = this.mIPv6ProvisioningMode;
         provisioningConfigurationParcelable.enableIPv6 = i2 != 0;
         provisioningConfigurationParcelable.ipv6ProvisioningMode = i2;
-        provisioningConfigurationParcelable.uniqueEui64AddressesOnly = this.mUniqueEui64AddressesOnly;
+        provisioningConfigurationParcelable.uniqueEui64AddressesOnly =
+                this.mUniqueEui64AddressesOnly;
         provisioningConfigurationParcelable.enablePreconnection = this.mEnablePreconnection;
-        provisioningConfigurationParcelable.usingMultinetworkPolicyTracker = this.mUsingMultinetworkPolicyTracker;
-        provisioningConfigurationParcelable.usingIpReachabilityMonitor = this.mUsingIpReachabilityMonitor;
-        provisioningConfigurationParcelable.requestedPreDhcpActionMs = this.mRequestedPreDhcpActionMs;
+        provisioningConfigurationParcelable.usingMultinetworkPolicyTracker =
+                this.mUsingMultinetworkPolicyTracker;
+        provisioningConfigurationParcelable.usingIpReachabilityMonitor =
+                this.mUsingIpReachabilityMonitor;
+        provisioningConfigurationParcelable.requestedPreDhcpActionMs =
+                this.mRequestedPreDhcpActionMs;
         InitialConfiguration initialConfiguration = this.mInitialConfig;
-        provisioningConfigurationParcelable.initialConfig = initialConfiguration == null ? null : initialConfiguration.toStableParcelable();
-        provisioningConfigurationParcelable.staticIpConfig = this.mStaticIpConfig == null ? null : new StaticIpConfiguration(this.mStaticIpConfig);
+        provisioningConfigurationParcelable.initialConfig =
+                initialConfiguration == null ? null : initialConfiguration.toStableParcelable();
+        provisioningConfigurationParcelable.staticIpConfig =
+                this.mStaticIpConfig == null
+                        ? null
+                        : new StaticIpConfiguration(this.mStaticIpConfig);
         provisioningConfigurationParcelable.apfCapabilities = this.mApfCapabilities;
         provisioningConfigurationParcelable.provisioningTimeoutMs = this.mProvisioningTimeoutMs;
         provisioningConfigurationParcelable.ipv6AddrGenMode = this.mIPv6AddrGenMode;
@@ -463,17 +551,42 @@ public class ProvisioningConfiguration {
         provisioningConfigurationParcelable.displayName = this.mDisplayName;
         provisioningConfigurationParcelable.creatorUid = this.mCreatorUid;
         ScanResultInfo scanResultInfo = this.mScanResultInfo;
-        provisioningConfigurationParcelable.scanResultInfo = scanResultInfo == null ? null : scanResultInfo.toStableParcelable();
+        provisioningConfigurationParcelable.scanResultInfo =
+                scanResultInfo == null ? null : scanResultInfo.toStableParcelable();
         Layer2Information layer2Information = this.mLayer2Info;
-        provisioningConfigurationParcelable.layer2Info = layer2Information == null ? null : layer2Information.toStableParcelable();
-        provisioningConfigurationParcelable.options = this.mDhcpOptions != null ? new ArrayList(this.mDhcpOptions) : null;
+        provisioningConfigurationParcelable.layer2Info =
+                layer2Information == null ? null : layer2Information.toStableParcelable();
+        provisioningConfigurationParcelable.options =
+                this.mDhcpOptions != null ? new ArrayList(this.mDhcpOptions) : null;
         provisioningConfigurationParcelable.hostnameSetting = this.mHostnameSetting;
         return provisioningConfigurationParcelable;
     }
 
     public String toString() {
-        String ipv4ProvisioningModeToString = ipv4ProvisioningModeToString(this.mIPv4ProvisioningMode);
-        String ipv6ProvisioningModeToString = ipv6ProvisioningModeToString(this.mIPv6ProvisioningMode);
-        return new StringJoiner(", ", getClass().getSimpleName().concat("{"), "}").add("mUniqueEui64AddressesOnly: " + this.mUniqueEui64AddressesOnly).add("mEnablePreconnection: " + this.mEnablePreconnection).add("mUsingMultinetworkPolicyTracker: " + this.mUsingMultinetworkPolicyTracker).add("mUsingIpReachabilityMonitor: " + this.mUsingIpReachabilityMonitor).add("mRequestedPreDhcpActionMs: " + this.mRequestedPreDhcpActionMs).add("mInitialConfig: " + this.mInitialConfig).add("mStaticIpConfig: " + this.mStaticIpConfig).add("mApfCapabilities: " + this.mApfCapabilities).add("mProvisioningTimeoutMs: " + this.mProvisioningTimeoutMs).add("mIPv6AddrGenMode: " + this.mIPv6AddrGenMode).add("mNetwork: " + this.mNetwork).add("mDisplayName: " + this.mDisplayName).add("mCreatorUid:" + this.mCreatorUid).add("mScanResultInfo: " + this.mScanResultInfo).add("mLayer2Info: " + this.mLayer2Info).add("mDhcpOptions: " + this.mDhcpOptions).add("mIPv4ProvisioningMode: " + ipv4ProvisioningModeToString).add("mIPv6ProvisioningMode: " + ipv6ProvisioningModeToString).add("mHostnameSetting: " + this.mHostnameSetting).toString();
+        String ipv4ProvisioningModeToString =
+                ipv4ProvisioningModeToString(this.mIPv4ProvisioningMode);
+        String ipv6ProvisioningModeToString =
+                ipv6ProvisioningModeToString(this.mIPv6ProvisioningMode);
+        return new StringJoiner(", ", getClass().getSimpleName().concat("{"), "}")
+                .add("mUniqueEui64AddressesOnly: " + this.mUniqueEui64AddressesOnly)
+                .add("mEnablePreconnection: " + this.mEnablePreconnection)
+                .add("mUsingMultinetworkPolicyTracker: " + this.mUsingMultinetworkPolicyTracker)
+                .add("mUsingIpReachabilityMonitor: " + this.mUsingIpReachabilityMonitor)
+                .add("mRequestedPreDhcpActionMs: " + this.mRequestedPreDhcpActionMs)
+                .add("mInitialConfig: " + this.mInitialConfig)
+                .add("mStaticIpConfig: " + this.mStaticIpConfig)
+                .add("mApfCapabilities: " + this.mApfCapabilities)
+                .add("mProvisioningTimeoutMs: " + this.mProvisioningTimeoutMs)
+                .add("mIPv6AddrGenMode: " + this.mIPv6AddrGenMode)
+                .add("mNetwork: " + this.mNetwork)
+                .add("mDisplayName: " + this.mDisplayName)
+                .add("mCreatorUid:" + this.mCreatorUid)
+                .add("mScanResultInfo: " + this.mScanResultInfo)
+                .add("mLayer2Info: " + this.mLayer2Info)
+                .add("mDhcpOptions: " + this.mDhcpOptions)
+                .add("mIPv4ProvisioningMode: " + ipv4ProvisioningModeToString)
+                .add("mIPv6ProvisioningMode: " + ipv6ProvisioningModeToString)
+                .add("mHostnameSetting: " + this.mHostnameSetting)
+                .toString();
     }
 }

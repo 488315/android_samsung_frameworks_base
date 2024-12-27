@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -41,7 +42,8 @@ public class NotificationExpandButton extends FrameLayout {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public NotificationExpandButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public NotificationExpandButton(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -103,7 +105,12 @@ public class NotificationExpandButton extends FrameLayout {
     }
 
     private void updateColors() {
-        int color = Color.argb(102, Color.red(this.mDefaultTextColor), Color.green(this.mDefaultTextColor), Color.blue(this.mDefaultTextColor));
+        int color =
+                Color.argb(
+                        102,
+                        Color.red(this.mDefaultTextColor),
+                        Color.green(this.mDefaultTextColor),
+                        Color.blue(this.mDefaultTextColor));
         this.mIconView.setColorFilter(color, PorterDuff.Mode.SRC_IN);
         if (this.mDefaultTextColor != 0) {
             this.mNumberView.setTextColor(this.mDefaultTextColor);

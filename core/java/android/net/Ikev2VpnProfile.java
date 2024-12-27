@@ -11,8 +11,10 @@ import android.net.ipsec.ike.IkeRfc822AddrIdentification;
 import android.net.ipsec.ike.IkeSessionParams;
 import android.net.ipsec.ike.IkeTunnelConnectionParams;
 import android.util.Log;
+
 import com.android.internal.net.VpnProfile;
 import com.android.internal.util.Preconditions;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
@@ -80,12 +82,33 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         }
     }
 
-    private Ikev2VpnProfile(int type, String serverAddr, String userIdentity, byte[] presharedKey, X509Certificate serverRootCaCert, String username, String password, PrivateKey rsaPrivateKey, X509Certificate userCert, ProxyInfo proxyInfo, List<String> allowedAlgorithms, boolean isBypassable, boolean isMetered, int maxMtu, boolean restrictToTestNetworks, boolean excludeLocalRoutes, boolean requiresInternetValidation, IkeTunnelConnectionParams ikeTunConnParams, boolean automaticNattKeepaliveTimerEnabled, boolean automaticIpVersionSelectionEnabled) {
+    private Ikev2VpnProfile(
+            int type,
+            String serverAddr,
+            String userIdentity,
+            byte[] presharedKey,
+            X509Certificate serverRootCaCert,
+            String username,
+            String password,
+            PrivateKey rsaPrivateKey,
+            X509Certificate userCert,
+            ProxyInfo proxyInfo,
+            List<String> allowedAlgorithms,
+            boolean isBypassable,
+            boolean isMetered,
+            int maxMtu,
+            boolean restrictToTestNetworks,
+            boolean excludeLocalRoutes,
+            boolean requiresInternetValidation,
+            IkeTunnelConnectionParams ikeTunConnParams,
+            boolean automaticNattKeepaliveTimerEnabled,
+            boolean automaticIpVersionSelectionEnabled) {
         super(type, excludeLocalRoutes, requiresInternetValidation);
         checkNotNull(allowedAlgorithms, MISSING_PARAM_MSG_TMPL, "Allowed Algorithms");
         this.mServerAddr = serverAddr;
         this.mUserIdentity = userIdentity;
-        this.mPresharedKey = presharedKey == null ? null : Arrays.copyOf(presharedKey, presharedKey.length);
+        this.mPresharedKey =
+                presharedKey == null ? null : Arrays.copyOf(presharedKey, presharedKey.length);
         this.mServerRootCaCert = serverRootCaCert;
         this.mUsername = username;
         this.mPassword = password;
@@ -94,7 +117,8 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         this.mProxyInfo = proxyInfo != null ? new ProxyInfo(proxyInfo) : null;
         this.mAllowedAlgorithms = Collections.unmodifiableList(new ArrayList(allowedAlgorithms));
         if (excludeLocalRoutes && !isBypassable) {
-            throw new IllegalArgumentException("Vpn must be bypassable if excludeLocalRoutes is set");
+            throw new IllegalArgumentException(
+                    "Vpn must be bypassable if excludeLocalRoutes is set");
         }
         this.mIsBypassable = isBypassable;
         this.mIsMetered = isMetered;
@@ -113,8 +137,10 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         if (this.mIkeTunConnParams != null) {
             return;
         }
-        Preconditions.checkStringNotEmpty(this.mServerAddr, MISSING_PARAM_MSG_TMPL, "Server Address");
-        Preconditions.checkStringNotEmpty(this.mUserIdentity, MISSING_PARAM_MSG_TMPL, "User Identity");
+        Preconditions.checkStringNotEmpty(
+                this.mServerAddr, MISSING_PARAM_MSG_TMPL, "Server Address");
+        Preconditions.checkStringNotEmpty(
+                this.mUserIdentity, MISSING_PARAM_MSG_TMPL, "User Identity");
         switch (this.mType) {
             case 6:
                 checkNotNull(this.mUsername, MISSING_PARAM_MSG_TMPL, "Username");
@@ -149,7 +175,8 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         }
         if (hasAeadAlgorithms(algorithmNames) || hasNormalModeAlgorithms(algorithmNames)) {
         } else {
-            throw new IllegalArgumentException("Algorithm set missing support for Auth, Crypt or both");
+            throw new IllegalArgumentException(
+                    "Algorithm set missing support for Auth, Crypt or both");
         }
     }
 
@@ -159,7 +186,10 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
 
     public static boolean hasNormalModeAlgorithms(List<String> algorithmNames) {
         boolean hasCrypt = algorithmNames.contains("cbc(aes)");
-        boolean hasAuth = algorithmNames.contains("hmac(sha256)") || algorithmNames.contains("hmac(sha384)") || algorithmNames.contains("hmac(sha512)");
+        boolean hasAuth =
+                algorithmNames.contains("hmac(sha256)")
+                        || algorithmNames.contains("hmac(sha384)")
+                        || algorithmNames.contains("hmac(sha512)");
         return hasCrypt && hasAuth;
     }
 
@@ -258,7 +288,27 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mType), this.mServerAddr, this.mUserIdentity, Integer.valueOf(Arrays.hashCode(this.mPresharedKey)), this.mServerRootCaCert, this.mUsername, this.mPassword, this.mRsaPrivateKey, this.mUserCert, this.mProxyInfo, this.mAllowedAlgorithms, Boolean.valueOf(this.mIsBypassable), Boolean.valueOf(this.mIsMetered), Integer.valueOf(this.mMaxMtu), Boolean.valueOf(this.mIsRestrictedToTestNetworks), Boolean.valueOf(this.mExcludeLocalRoutes), Boolean.valueOf(this.mRequiresInternetValidation), this.mIkeTunConnParams, Boolean.valueOf(this.mAutomaticNattKeepaliveTimerEnabled), Boolean.valueOf(this.mAutomaticIpVersionSelectionEnabled));
+        return Objects.hash(
+                Integer.valueOf(this.mType),
+                this.mServerAddr,
+                this.mUserIdentity,
+                Integer.valueOf(Arrays.hashCode(this.mPresharedKey)),
+                this.mServerRootCaCert,
+                this.mUsername,
+                this.mPassword,
+                this.mRsaPrivateKey,
+                this.mUserCert,
+                this.mProxyInfo,
+                this.mAllowedAlgorithms,
+                Boolean.valueOf(this.mIsBypassable),
+                Boolean.valueOf(this.mIsMetered),
+                Integer.valueOf(this.mMaxMtu),
+                Boolean.valueOf(this.mIsRestrictedToTestNetworks),
+                Boolean.valueOf(this.mExcludeLocalRoutes),
+                Boolean.valueOf(this.mRequiresInternetValidation),
+                this.mIkeTunConnParams,
+                Boolean.valueOf(this.mAutomaticNattKeepaliveTimerEnabled),
+                Boolean.valueOf(this.mAutomaticIpVersionSelectionEnabled));
     }
 
     public boolean equals(Object obj) {
@@ -266,12 +316,41 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
             return false;
         }
         Ikev2VpnProfile other = (Ikev2VpnProfile) obj;
-        return this.mType == other.mType && Objects.equals(this.mServerAddr, other.mServerAddr) && Objects.equals(this.mUserIdentity, other.mUserIdentity) && Arrays.equals(this.mPresharedKey, other.mPresharedKey) && Objects.equals(this.mServerRootCaCert, other.mServerRootCaCert) && Objects.equals(this.mUsername, other.mUsername) && Objects.equals(this.mPassword, other.mPassword) && Objects.equals(this.mRsaPrivateKey, other.mRsaPrivateKey) && Objects.equals(this.mUserCert, other.mUserCert) && Objects.equals(this.mProxyInfo, other.mProxyInfo) && Objects.equals(this.mAllowedAlgorithms, other.mAllowedAlgorithms) && this.mIsBypassable == other.mIsBypassable && this.mIsMetered == other.mIsMetered && this.mMaxMtu == other.mMaxMtu && this.mIsRestrictedToTestNetworks == other.mIsRestrictedToTestNetworks && this.mExcludeLocalRoutes == other.mExcludeLocalRoutes && this.mRequiresInternetValidation == other.mRequiresInternetValidation && Objects.equals(this.mIkeTunConnParams, other.mIkeTunConnParams) && this.mAutomaticNattKeepaliveTimerEnabled == other.mAutomaticNattKeepaliveTimerEnabled && this.mAutomaticIpVersionSelectionEnabled == other.mAutomaticIpVersionSelectionEnabled;
+        return this.mType == other.mType
+                && Objects.equals(this.mServerAddr, other.mServerAddr)
+                && Objects.equals(this.mUserIdentity, other.mUserIdentity)
+                && Arrays.equals(this.mPresharedKey, other.mPresharedKey)
+                && Objects.equals(this.mServerRootCaCert, other.mServerRootCaCert)
+                && Objects.equals(this.mUsername, other.mUsername)
+                && Objects.equals(this.mPassword, other.mPassword)
+                && Objects.equals(this.mRsaPrivateKey, other.mRsaPrivateKey)
+                && Objects.equals(this.mUserCert, other.mUserCert)
+                && Objects.equals(this.mProxyInfo, other.mProxyInfo)
+                && Objects.equals(this.mAllowedAlgorithms, other.mAllowedAlgorithms)
+                && this.mIsBypassable == other.mIsBypassable
+                && this.mIsMetered == other.mIsMetered
+                && this.mMaxMtu == other.mMaxMtu
+                && this.mIsRestrictedToTestNetworks == other.mIsRestrictedToTestNetworks
+                && this.mExcludeLocalRoutes == other.mExcludeLocalRoutes
+                && this.mRequiresInternetValidation == other.mRequiresInternetValidation
+                && Objects.equals(this.mIkeTunConnParams, other.mIkeTunConnParams)
+                && this.mAutomaticNattKeepaliveTimerEnabled
+                        == other.mAutomaticNattKeepaliveTimerEnabled
+                && this.mAutomaticIpVersionSelectionEnabled
+                        == other.mAutomaticIpVersionSelectionEnabled;
     }
 
     @Override // android.net.PlatformVpnProfile
     public VpnProfile toVpnProfile() throws IOException, GeneralSecurityException {
-        VpnProfile profile = new VpnProfile("", this.mIsRestrictedToTestNetworks, this.mExcludeLocalRoutes, this.mRequiresInternetValidation, this.mIkeTunConnParams, this.mAutomaticNattKeepaliveTimerEnabled, this.mAutomaticIpVersionSelectionEnabled);
+        VpnProfile profile =
+                new VpnProfile(
+                        "",
+                        this.mIsRestrictedToTestNetworks,
+                        this.mExcludeLocalRoutes,
+                        this.mRequiresInternetValidation,
+                        this.mIkeTunConnParams,
+                        this.mAutomaticNattKeepaliveTimerEnabled,
+                        this.mAutomaticIpVersionSelectionEnabled);
         profile.proxy = this.mProxyInfo;
         profile.isBypassable = this.mIsBypassable;
         profile.isMetered = this.mIsMetered;
@@ -290,15 +369,22 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
             case 6:
                 profile.username = this.mUsername;
                 profile.password = this.mPassword;
-                profile.ipsecCaCert = this.mServerRootCaCert != null ? certificateToPemString(this.mServerRootCaCert) : "";
+                profile.ipsecCaCert =
+                        this.mServerRootCaCert != null
+                                ? certificateToPemString(this.mServerRootCaCert)
+                                : "";
                 return profile;
             case 7:
                 profile.ipsecSecret = encodeForIpsecSecret(this.mPresharedKey);
                 return profile;
             case 8:
                 profile.ipsecUserCert = certificateToPemString(this.mUserCert);
-                profile.ipsecSecret = PREFIX_INLINE + encodeForIpsecSecret(this.mRsaPrivateKey.getEncoded());
-                profile.ipsecCaCert = this.mServerRootCaCert != null ? certificateToPemString(this.mServerRootCaCert) : "";
+                profile.ipsecSecret =
+                        PREFIX_INLINE + encodeForIpsecSecret(this.mRsaPrivateKey.getEncoded());
+                profile.ipsecCaCert =
+                        this.mServerRootCaCert != null
+                                ? certificateToPemString(this.mServerRootCaCert)
+                                : "";
                 return profile;
             default:
                 throw new IllegalArgumentException("Invalid auth method set");
@@ -311,7 +397,8 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
             keystore.load(null);
             Key key = keystore.getKey(alias, null);
             if (!(key instanceof PrivateKey)) {
-                throw new IllegalStateException("Unexpected key type returned from android keystore.");
+                throw new IllegalStateException(
+                        "Unexpected key type returned from android keystore.");
             }
             return (PrivateKey) key;
         } catch (Exception e) {
@@ -319,7 +406,8 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         }
     }
 
-    public static Ikev2VpnProfile fromVpnProfile(VpnProfile profile) throws GeneralSecurityException {
+    public static Ikev2VpnProfile fromVpnProfile(VpnProfile profile)
+            throws GeneralSecurityException {
         Builder builder;
         PrivateKey key;
         if (profile.ikeTunConnParams == null) {
@@ -327,14 +415,18 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
             builder.setAllowedAlgorithms(profile.getAllowedAlgorithms());
             switch (profile.type) {
                 case 6:
-                    builder.setAuthUsernamePassword(profile.username, profile.password, certificateFromPemString(profile.ipsecCaCert));
+                    builder.setAuthUsernamePassword(
+                            profile.username,
+                            profile.password,
+                            certificateFromPemString(profile.ipsecCaCert));
                     break;
                 case 7:
                     builder.setAuthPsk(decodeFromIpsecSecret(profile.ipsecSecret));
                     break;
                 case 8:
                     if (profile.ipsecSecret.startsWith(PREFIX_KEYSTORE_ALIAS)) {
-                        String alias = profile.ipsecSecret.substring(PREFIX_KEYSTORE_ALIAS.length());
+                        String alias =
+                                profile.ipsecSecret.substring(PREFIX_KEYSTORE_ALIAS.length());
                         key = getPrivateKeyFromAndroidKeystore(alias);
                     } else if (profile.ipsecSecret.startsWith(PREFIX_INLINE)) {
                         key = getPrivateKey(profile.ipsecSecret.substring(PREFIX_INLINE.length()));
@@ -374,35 +466,37 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         }
         switch (profile.type) {
             case 6:
-                if (profile.username.isEmpty() || profile.password.isEmpty()) {
-                }
+                if (profile.username.isEmpty() || profile.password.isEmpty()) {}
                 break;
             case 7:
-                if (profile.ipsecSecret.isEmpty()) {
-                }
+                if (profile.ipsecSecret.isEmpty()) {}
                 break;
             case 8:
             case 9:
-                if (profile.ipsecSecret.isEmpty() || profile.ipsecUserCert.isEmpty()) {
-                }
+                if (profile.ipsecSecret.isEmpty() || profile.ipsecUserCert.isEmpty()) {}
                 break;
         }
         return false;
     }
 
-    public static String certificateToPemString(X509Certificate cert) throws IOException, CertificateEncodingException {
+    public static String certificateToPemString(X509Certificate cert)
+            throws IOException, CertificateEncodingException {
         if (cert == null) {
             return "";
         }
-        return new String(android.security.Credentials.convertToPem(cert), StandardCharsets.US_ASCII);
+        return new String(
+                android.security.Credentials.convertToPem(cert), StandardCharsets.US_ASCII);
     }
 
-    private static X509Certificate certificateFromPemString(String certStr) throws CertificateException {
+    private static X509Certificate certificateFromPemString(String certStr)
+            throws CertificateException {
         if (certStr == null || "".equals(certStr)) {
             return null;
         }
         try {
-            List<X509Certificate> certs = android.security.Credentials.convertFromPem(certStr.getBytes(StandardCharsets.US_ASCII));
+            List<X509Certificate> certs =
+                    android.security.Credentials.convertFromPem(
+                            certStr.getBytes(StandardCharsets.US_ASCII));
             return certs.isEmpty() ? null : certs.get(0);
         } catch (IOException e) {
             throw new CertificateException(e);
@@ -419,7 +513,8 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         return Base64.getDecoder().decode(encoded);
     }
 
-    private static PrivateKey getPrivateKey(String keyStr) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    private static PrivateKey getPrivateKey(String keyStr)
+            throws InvalidKeySpecException, NoSuchAlgorithmException {
         PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(decodeFromIpsecSecret(keyStr));
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         return keyFactory.generatePrivate(privateKeySpec);
@@ -442,7 +537,8 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
     /* JADX INFO: Access modifiers changed from: private */
     public static void checkBuilderSetter(boolean constructedFromIkeTunConParams, String field) {
         if (constructedFromIkeTunConParams) {
-            throw new IllegalArgumentException(field + " can't be set with IkeTunnelConnectionParams builder");
+            throw new IllegalArgumentException(
+                    field + " can't be set with IkeTunnelConnectionParams builder");
         }
     }
 
@@ -514,15 +610,18 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         private boolean mAutomaticIpVersionSelectionEnabled = false;
 
         public Builder(String serverAddr, String identity) {
-            Ikev2VpnProfile.checkNotNull(serverAddr, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "serverAddr");
-            Ikev2VpnProfile.checkNotNull(identity, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "identity");
+            Ikev2VpnProfile.checkNotNull(
+                    serverAddr, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "serverAddr");
+            Ikev2VpnProfile.checkNotNull(
+                    identity, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "identity");
             this.mServerAddr = serverAddr;
             this.mUserIdentity = identity;
             this.mIkeTunConnParams = null;
         }
 
         public Builder(IkeTunnelConnectionParams ikeTunConnParams) {
-            Ikev2VpnProfile.checkNotNull(ikeTunConnParams, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "ikeTunConnParams");
+            Ikev2VpnProfile.checkNotNull(
+                    ikeTunConnParams, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "ikeTunConnParams");
             this.mIkeTunConnParams = ikeTunConnParams;
             this.mServerAddr = null;
             this.mUserIdentity = null;
@@ -537,10 +636,12 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
             this.mUserCert = null;
         }
 
-        public Builder setAuthUsernamePassword(String user, String pass, X509Certificate serverRootCa) {
+        public Builder setAuthUsernamePassword(
+                String user, String pass, X509Certificate serverRootCa) {
             Ikev2VpnProfile.checkNotNull(user, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "user");
             Ikev2VpnProfile.checkNotNull(pass, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "pass");
-            Ikev2VpnProfile.checkBuilderSetter(this.mIkeTunConnParams != null, "authUsernamePassword");
+            Ikev2VpnProfile.checkBuilderSetter(
+                    this.mIkeTunConnParams != null, "authUsernamePassword");
             if (serverRootCa != null) {
                 Ikev2VpnProfile.checkCert(serverRootCa);
             }
@@ -552,10 +653,13 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
             return this;
         }
 
-        public Builder setAuthDigitalSignature(X509Certificate userCert, PrivateKey key, X509Certificate serverRootCa) {
-            Ikev2VpnProfile.checkNotNull(userCert, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "userCert");
+        public Builder setAuthDigitalSignature(
+                X509Certificate userCert, PrivateKey key, X509Certificate serverRootCa) {
+            Ikev2VpnProfile.checkNotNull(
+                    userCert, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "userCert");
             Ikev2VpnProfile.checkNotNull(key, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "key");
-            Ikev2VpnProfile.checkBuilderSetter(this.mIkeTunConnParams != null, "authDigitalSignature");
+            Ikev2VpnProfile.checkBuilderSetter(
+                    this.mIkeTunConnParams != null, "authDigitalSignature");
             Ikev2VpnProfile.checkCert(userCert);
             if (serverRootCa != null) {
                 Ikev2VpnProfile.checkCert(serverRootCa);
@@ -606,7 +710,8 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         }
 
         public Builder setAllowedAlgorithms(List<String> algorithmNames) {
-            Ikev2VpnProfile.checkNotNull(algorithmNames, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "algorithmNames");
+            Ikev2VpnProfile.checkNotNull(
+                    algorithmNames, Ikev2VpnProfile.MISSING_PARAM_MSG_TMPL, "algorithmNames");
             Ikev2VpnProfile.checkBuilderSetter(this.mIkeTunConnParams != null, "algorithmNames");
             Ikev2VpnProfile.validateAllowedAlgorithms(algorithmNames);
             this.mAllowedAlgorithms = algorithmNames;
@@ -634,7 +739,27 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         }
 
         public Ikev2VpnProfile build() {
-            return new Ikev2VpnProfile(this.mType, this.mServerAddr, this.mUserIdentity, this.mPresharedKey, this.mServerRootCaCert, this.mUsername, this.mPassword, this.mRsaPrivateKey, this.mUserCert, this.mProxyInfo, this.mAllowedAlgorithms, this.mIsBypassable, this.mIsMetered, this.mMaxMtu, this.mIsRestrictedToTestNetworks, this.mExcludeLocalRoutes, this.mRequiresInternetValidation, this.mIkeTunConnParams, this.mAutomaticNattKeepaliveTimerEnabled, this.mAutomaticIpVersionSelectionEnabled);
+            return new Ikev2VpnProfile(
+                    this.mType,
+                    this.mServerAddr,
+                    this.mUserIdentity,
+                    this.mPresharedKey,
+                    this.mServerRootCaCert,
+                    this.mUsername,
+                    this.mPassword,
+                    this.mRsaPrivateKey,
+                    this.mUserCert,
+                    this.mProxyInfo,
+                    this.mAllowedAlgorithms,
+                    this.mIsBypassable,
+                    this.mIsMetered,
+                    this.mMaxMtu,
+                    this.mIsRestrictedToTestNetworks,
+                    this.mExcludeLocalRoutes,
+                    this.mRequiresInternetValidation,
+                    this.mIkeTunConnParams,
+                    this.mAutomaticNattKeepaliveTimerEnabled,
+                    this.mAutomaticIpVersionSelectionEnabled);
         }
     }
 }

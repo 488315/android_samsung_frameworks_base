@@ -5,25 +5,30 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Size;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.widget.InlinePresentationStyleUtils;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class InlinePresentationSpec implements Parcelable {
-    public static final Parcelable.Creator<InlinePresentationSpec> CREATOR = new Parcelable.Creator<InlinePresentationSpec>() { // from class: android.widget.inline.InlinePresentationSpec.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InlinePresentationSpec[] newArray(int size) {
-            return new InlinePresentationSpec[size];
-        }
+    public static final Parcelable.Creator<InlinePresentationSpec> CREATOR =
+            new Parcelable.Creator<
+                    InlinePresentationSpec>() { // from class:
+                                                // android.widget.inline.InlinePresentationSpec.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InlinePresentationSpec[] newArray(int size) {
+                    return new InlinePresentationSpec[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InlinePresentationSpec createFromParcel(Parcel in) {
-            return new InlinePresentationSpec(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InlinePresentationSpec createFromParcel(Parcel in) {
+                    return new InlinePresentationSpec(in);
+                }
+            };
     private final Size mMaxSize;
     private final Size mMinSize;
     private final Bundle mStyle;
@@ -41,18 +46,20 @@ public final class InlinePresentationSpec implements Parcelable {
         InlinePresentationStyleUtils.filterContentTypes(this.mStyle);
     }
 
-    static abstract class BaseBuilder {
-        BaseBuilder() {
-        }
+    abstract static class BaseBuilder {
+        BaseBuilder() {}
     }
 
     InlinePresentationSpec(Size minSize, Size maxSize, Bundle style) {
         this.mMinSize = minSize;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMinSize);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMinSize);
         this.mMaxSize = maxSize;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMaxSize);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMaxSize);
         this.mStyle = style;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStyle);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStyle);
     }
 
     public Size getMinSize() {
@@ -68,7 +75,13 @@ public final class InlinePresentationSpec implements Parcelable {
     }
 
     public String toString() {
-        return "InlinePresentationSpec { minSize = " + this.mMinSize + ", maxSize = " + this.mMaxSize + ", style = " + this.mStyle + " }";
+        return "InlinePresentationSpec { minSize = "
+                + this.mMinSize
+                + ", maxSize = "
+                + this.mMaxSize
+                + ", style = "
+                + this.mStyle
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -79,7 +92,9 @@ public final class InlinePresentationSpec implements Parcelable {
             return false;
         }
         InlinePresentationSpec that = (InlinePresentationSpec) o;
-        if (Objects.equals(this.mMinSize, that.mMinSize) && Objects.equals(this.mMaxSize, that.mMaxSize) && styleEquals(that.mStyle)) {
+        if (Objects.equals(this.mMinSize, that.mMinSize)
+                && Objects.equals(this.mMaxSize, that.mMaxSize)
+                && styleEquals(that.mStyle)) {
             return true;
         }
         return false;
@@ -87,7 +102,8 @@ public final class InlinePresentationSpec implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + Objects.hashCode(this.mMinSize);
-        return (((_hash * 31) + Objects.hashCode(this.mMaxSize)) * 31) + Objects.hashCode(this.mStyle);
+        return (((_hash * 31) + Objects.hashCode(this.mMaxSize)) * 31)
+                + Objects.hashCode(this.mStyle);
     }
 
     @Override // android.os.Parcelable
@@ -107,11 +123,14 @@ public final class InlinePresentationSpec implements Parcelable {
         Size maxSize = in.readSize();
         Bundle style = in.readBundle();
         this.mMinSize = minSize;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMinSize);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMinSize);
         this.mMaxSize = maxSize;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMaxSize);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMaxSize);
         this.mStyle = style;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStyle);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStyle);
     }
 
     public static final class Builder extends BaseBuilder {
@@ -122,9 +141,11 @@ public final class InlinePresentationSpec implements Parcelable {
 
         public Builder(Size minSize, Size maxSize) {
             this.mMinSize = minSize;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMinSize);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMinSize);
             this.mMaxSize = maxSize;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMaxSize);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMaxSize);
         }
 
         public Builder setStyle(Bundle value) {
@@ -140,18 +161,19 @@ public final class InlinePresentationSpec implements Parcelable {
             if ((this.mBuilderFieldsSet & 4) == 0) {
                 this.mStyle = InlinePresentationSpec.defaultStyle();
             }
-            InlinePresentationSpec o = new InlinePresentationSpec(this.mMinSize, this.mMaxSize, this.mStyle);
+            InlinePresentationSpec o =
+                    new InlinePresentationSpec(this.mMinSize, this.mMaxSize, this.mStyle);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 8) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

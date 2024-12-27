@@ -1,12 +1,15 @@
 package android.audio.policy.configuration.V7_0;
 
 import com.android.ims.ImsConfig;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class AttachedDevices {
@@ -19,7 +22,8 @@ public class AttachedDevices {
         return this.item;
     }
 
-    static AttachedDevices read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static AttachedDevices read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         AttachedDevices _instance = new AttachedDevices();
         _parser.getDepth();

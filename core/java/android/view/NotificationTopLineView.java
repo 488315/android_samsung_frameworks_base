@@ -6,10 +6,10 @@ import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.os.Trace;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RemoteViews;
+
 import com.android.internal.R;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,14 +46,17 @@ public class NotificationTopLineView extends ViewGroup {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public NotificationTopLineView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public NotificationTopLineView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mOverflowAdjuster = new OverflowAdjuster();
         this.mTouchListener = new HeaderTouchListener();
         this.mViewsToDisappear = new HashSet();
         Resources res = getResources();
-        this.mChildMinWidth = res.getDimensionPixelSize(R.dimen.notification_header_shrink_min_width);
-        this.mChildHideWidth = res.getDimensionPixelSize(R.dimen.notification_header_shrink_hide_width);
+        this.mChildMinWidth =
+                res.getDimensionPixelSize(R.dimen.notification_header_shrink_min_width);
+        this.mChildHideWidth =
+                res.getDimensionPixelSize(R.dimen.notification_header_shrink_hide_width);
         int[] attrIds = {16842927};
         TypedArray ta = context.obtainStyledAttributes(attrs, attrIds, defStyleAttr, defStyleRes);
         int gravity = ta.getInt(0, 0);
@@ -99,9 +102,13 @@ public class NotificationTopLineView extends ViewGroup {
             if (child.getVisibility() == 8) {
                 givenHeight = givenHeight2;
             } else {
-                ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
-                int childWidthSpec = getChildMeasureSpec(wrapContentWidthSpec, lp.leftMargin + lp.rightMargin, lp.width);
-                int childHeightSpec = getChildMeasureSpec(heightSpec, lp.topMargin + lp.bottomMargin, lp.height);
+                ViewGroup.MarginLayoutParams lp =
+                        (ViewGroup.MarginLayoutParams) child.getLayoutParams();
+                int childWidthSpec =
+                        getChildMeasureSpec(
+                                wrapContentWidthSpec, lp.leftMargin + lp.rightMargin, lp.width);
+                int childHeightSpec =
+                        getChildMeasureSpec(heightSpec, lp.topMargin + lp.bottomMargin, lp.height);
                 child.measure(childWidthSpec, childHeightSpec);
                 totalWidth += lp.leftMargin + lp.rightMargin + child.getMeasuredWidth();
                 int childBaseline = child.getBaseline();
@@ -124,7 +131,15 @@ public class NotificationTopLineView extends ViewGroup {
         int endMargin = Math.max(this.mHeaderTextMarginEnd, getPaddingEnd());
         if (totalWidth > givenWidth - endMargin) {
             int overFlow = (totalWidth - givenWidth) + endMargin;
-            this.mOverflowAdjuster.resetForOverflow(overFlow, heightSpec).adjust(this.mAppName, null, this.mChildMinWidth).adjust(this.mHeaderText, this.mHeaderTextDivider, this.mChildMinWidth).adjust(this.mSecondaryHeaderText, this.mSecondaryHeaderTextDivider, 0).adjust(this.mTitle, null, this.mChildMinWidth).adjust(this.mHeaderText, this.mHeaderTextDivider, 0).adjust(this.mTitle, null, 0).finish();
+            this.mOverflowAdjuster
+                    .resetForOverflow(overFlow, heightSpec)
+                    .adjust(this.mAppName, null, this.mChildMinWidth)
+                    .adjust(this.mHeaderText, this.mHeaderTextDivider, this.mChildMinWidth)
+                    .adjust(this.mSecondaryHeaderText, this.mSecondaryHeaderTextDivider, 0)
+                    .adjust(this.mTitle, null, this.mChildMinWidth)
+                    .adjust(this.mHeaderText, this.mHeaderTextDivider, 0)
+                    .adjust(this.mTitle, null, 0)
+                    .finish();
         }
         setMeasuredDimension(givenWidth, wrapHeight ? maxChildHeight : givenHeight3);
         Trace.endSection();
@@ -139,7 +154,10 @@ public class NotificationTopLineView extends ViewGroup {
         int start = getPaddingStart();
         int ownHeight = b - t;
         int childSpace = (ownHeight - this.mPaddingTop) - this.mPaddingBottom;
-        int baselineY = this.mPaddingTop + ((childSpace - (this.mMaxAscent + this.mMaxDescent)) / 2) + this.mMaxAscent;
+        int baselineY =
+                this.mPaddingTop
+                        + ((childSpace - (this.mMaxAscent + this.mMaxDescent)) / 2)
+                        + this.mMaxAscent;
         int i = 0;
         for (int childCount2 = getChildCount(); i < childCount2; childCount2 = childCount) {
             View child = getChildAt(i);
@@ -147,7 +165,8 @@ public class NotificationTopLineView extends ViewGroup {
                 childCount = childCount2;
             } else {
                 int childHeight = child.getMeasuredHeight();
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
+                ViewGroup.MarginLayoutParams params =
+                        (ViewGroup.MarginLayoutParams) child.getLayoutParams();
                 int childBaseline = child.getBaseline();
                 switch (this.mGravityY) {
                     case 16:
@@ -161,7 +180,10 @@ public class NotificationTopLineView extends ViewGroup {
                                 break;
                             }
                         } else {
-                            childTop = ((this.mPaddingTop + ((childSpace - childHeight) / 2)) + params.topMargin) - params.bottomMargin;
+                            childTop =
+                                    ((this.mPaddingTop + ((childSpace - childHeight) / 2))
+                                                    + params.topMargin)
+                                            - params.bottomMargin;
                             break;
                         }
                     case 48:
@@ -251,16 +273,18 @@ public class NotificationTopLineView extends ViewGroup {
         private int mTouchSlop;
         private boolean mTrackGesture;
 
-        HeaderTouchListener() {
-        }
+        HeaderTouchListener() {}
 
         public void bindTouchRects() {
             this.mFeedbackRect = getRectAroundView(NotificationTopLineView.this.mFeedbackIcon);
-            this.mTouchSlop = ViewConfiguration.get(NotificationTopLineView.this.getContext()).getScaledTouchSlop();
+            this.mTouchSlop =
+                    ViewConfiguration.get(NotificationTopLineView.this.getContext())
+                            .getScaledTouchSlop();
         }
 
         private Rect getRectAroundView(View view) {
-            float size = NotificationTopLineView.this.getResources().getDisplayMetrics().density * 48.0f;
+            float size =
+                    NotificationTopLineView.this.getResources().getDisplayMetrics().density * 48.0f;
             float width = Math.max(size, view.getWidth());
             float height = Math.max(size, view.getHeight());
             Rect r = new Rect();
@@ -296,7 +320,9 @@ public class NotificationTopLineView extends ViewGroup {
                     }
                     break;
                 case 2:
-                    if (this.mTrackGesture && (Math.abs(this.mDownX - x) > this.mTouchSlop || Math.abs(this.mDownY - y) > this.mTouchSlop)) {
+                    if (this.mTrackGesture
+                            && (Math.abs(this.mDownX - x) > this.mTouchSlop
+                                    || Math.abs(this.mDownY - y) > this.mTouchSlop)) {
                         this.mTrackGesture = false;
                         break;
                     }
@@ -308,7 +334,8 @@ public class NotificationTopLineView extends ViewGroup {
         /* JADX INFO: Access modifiers changed from: private */
         public boolean onTouchUp(float upX, float upY, float downX, float downY) {
             if (NotificationTopLineView.this.mFeedbackIcon.isVisibleToUser()) {
-                if (this.mFeedbackRect.contains((int) upX, (int) upY) || this.mFeedbackRect.contains((int) downX, (int) downY)) {
+                if (this.mFeedbackRect.contains((int) upX, (int) upY)
+                        || this.mFeedbackRect.contains((int) downX, (int) downY)) {
                     NotificationTopLineView.this.mFeedbackIcon.performClick();
                     return true;
                 }
@@ -358,8 +385,7 @@ public class NotificationTopLineView extends ViewGroup {
         private int mOverflow;
         private View mRegrowView;
 
-        private OverflowAdjuster() {
-        }
+        private OverflowAdjuster() {}
 
         OverflowAdjuster resetForOverflow(int overflow, int heightSpec) {
             this.mOverflow = overflow;
@@ -377,7 +403,10 @@ public class NotificationTopLineView extends ViewGroup {
                 return this;
             }
             int newSize = Math.max(minimumWidth, oldWidth - this.mOverflow);
-            if (minimumWidth == 0 && newSize < NotificationTopLineView.this.mChildHideWidth && this.mRegrowView != null && this.mRegrowView != targetView) {
+            if (minimumWidth == 0
+                    && newSize < NotificationTopLineView.this.mChildHideWidth
+                    && this.mRegrowView != null
+                    && this.mRegrowView != targetView) {
                 newSize = 0;
             }
             int childWidthSpec = View.MeasureSpec.makeMeasureSpec(newSize, Integer.MIN_VALUE);
@@ -414,7 +443,8 @@ public class NotificationTopLineView extends ViewGroup {
         }
 
         private int getHorizontalMargins(View view) {
-            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            ViewGroup.MarginLayoutParams params =
+                    (ViewGroup.MarginLayoutParams) view.getLayoutParams();
             return params.getMarginStart() + params.getMarginEnd();
         }
     }

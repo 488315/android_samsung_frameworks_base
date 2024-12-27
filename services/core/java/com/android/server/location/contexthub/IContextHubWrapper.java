@@ -29,11 +29,11 @@ import android.os.ServiceManager;
 import android.os.ServiceSpecificException;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
-import com.android.server.location.contexthub.ContextHubService;
-import com.android.server.location.contexthub.IContextHubWrapper;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,18 +49,23 @@ import java.util.function.Consumer;
 public abstract class IContextHubWrapper {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class ContextHubWrapperAidl extends IContextHubWrapper implements IBinder.DeathRecipient {
+    public final class ContextHubWrapperAidl extends IContextHubWrapper
+            implements IBinder.DeathRecipient {
         public final Map mAidlCallbackMap = new HashMap();
-        public IContextHubWrapper$ContextHubWrapperAidl$$ExternalSyntheticLambda0 mHandleServiceRestartCallback = null;
+        public IContextHubWrapper$ContextHubWrapperAidl$$ExternalSyntheticLambda0
+                mHandleServiceRestartCallback = null;
         public final Handler mHandler;
         public IContextHub mHub;
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class ContextHubAidlCallback extends IContextHubCallback.Stub {
-            public static final byte[] UUID = {-102, 23, 0, -115, 107, -15, 68, 90, -112, 17, 109, 33, -67, -104, 91, 108};
+            public static final byte[] UUID = {
+                -102, 23, 0, -115, 107, -15, 68, 90, -112, 17, 109, 33, -67, -104, 91, 108
+            };
             public final ContextHubService.ContextHubServiceCallback mCallback;
 
-            public ContextHubAidlCallback(ContextHubService.ContextHubServiceCallback contextHubServiceCallback) {
+            public ContextHubAidlCallback(
+                    ContextHubService.ContextHubServiceCallback contextHubServiceCallback) {
                 this.mCallback = contextHubServiceCallback;
             }
 
@@ -81,49 +86,85 @@ public abstract class IContextHubWrapper {
             }
 
             public final void handleContextHubAsyncEvent(final int i) {
-                ContextHubWrapperAidl.this.mHandler.post(new Runnable() { // from class: com.android.server.location.contexthub.IContextHubWrapper$ContextHubWrapperAidl$ContextHubAidlCallback$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        IContextHubWrapper.ContextHubWrapperAidl.ContextHubAidlCallback contextHubAidlCallback = IContextHubWrapper.ContextHubWrapperAidl.ContextHubAidlCallback.this;
-                        int i2 = i;
-                        ContextHubService.ContextHubServiceCallback contextHubServiceCallback = contextHubAidlCallback.mCallback;
-                        DateTimeFormatter dateTimeFormatter = ContextHubServiceUtil.DATE_FORMATTER;
-                        int i3 = 1;
-                        if (i2 != 1) {
-                            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i2, "toContextHubEventFromAidl: Unknown event type: ", "ContextHubServiceUtil");
-                            i3 = 0;
-                        }
-                        contextHubServiceCallback.handleContextHubEvent(i3);
-                    }
-                });
+                ContextHubWrapperAidl.this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // com.android.server.location.contexthub.IContextHubWrapper$ContextHubWrapperAidl$ContextHubAidlCallback$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                IContextHubWrapper.ContextHubWrapperAidl.ContextHubAidlCallback
+                                        contextHubAidlCallback =
+                                                IContextHubWrapper.ContextHubWrapperAidl
+                                                        .ContextHubAidlCallback.this;
+                                int i2 = i;
+                                ContextHubService.ContextHubServiceCallback
+                                        contextHubServiceCallback =
+                                                contextHubAidlCallback.mCallback;
+                                DateTimeFormatter dateTimeFormatter =
+                                        ContextHubServiceUtil.DATE_FORMATTER;
+                                int i3 = 1;
+                                if (i2 != 1) {
+                                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                                            i2,
+                                            "toContextHubEventFromAidl: Unknown event type: ",
+                                            "ContextHubServiceUtil");
+                                    i3 = 0;
+                                }
+                                contextHubServiceCallback.handleContextHubEvent(i3);
+                            }
+                        });
             }
 
-            public final void handleContextHubMessage(final ContextHubMessage contextHubMessage, final String[] strArr) {
-                ContextHubWrapperAidl.this.mHandler.post(new Runnable() { // from class: com.android.server.location.contexthub.IContextHubWrapper$ContextHubWrapperAidl$ContextHubAidlCallback$$ExternalSyntheticLambda3
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        IContextHubWrapper.ContextHubWrapperAidl.ContextHubAidlCallback contextHubAidlCallback = IContextHubWrapper.ContextHubWrapperAidl.ContextHubAidlCallback.this;
-                        ContextHubMessage contextHubMessage2 = contextHubMessage;
-                        String[] strArr2 = strArr;
-                        ContextHubService.ContextHubServiceCallback contextHubServiceCallback = contextHubAidlCallback.mCallback;
-                        char c = contextHubMessage2.hostEndPoint;
-                        short s = (short) c;
-                        DateTimeFormatter dateTimeFormatter = ContextHubServiceUtil.DATE_FORMATTER;
-                        contextHubServiceCallback.handleNanoappMessage(s, NanoAppMessage.createMessageFromNanoApp(contextHubMessage2.nanoappId, contextHubMessage2.messageType, contextHubMessage2.messageBody, c == 65535, contextHubMessage2.isReliable, contextHubMessage2.messageSequenceNumber), new ArrayList(Arrays.asList(contextHubMessage2.permissions)), new ArrayList(Arrays.asList(strArr2)));
-                    }
-                });
+            public final void handleContextHubMessage(
+                    final ContextHubMessage contextHubMessage, final String[] strArr) {
+                ContextHubWrapperAidl.this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // com.android.server.location.contexthub.IContextHubWrapper$ContextHubWrapperAidl$ContextHubAidlCallback$$ExternalSyntheticLambda3
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                IContextHubWrapper.ContextHubWrapperAidl.ContextHubAidlCallback
+                                        contextHubAidlCallback =
+                                                IContextHubWrapper.ContextHubWrapperAidl
+                                                        .ContextHubAidlCallback.this;
+                                ContextHubMessage contextHubMessage2 = contextHubMessage;
+                                String[] strArr2 = strArr;
+                                ContextHubService.ContextHubServiceCallback
+                                        contextHubServiceCallback =
+                                                contextHubAidlCallback.mCallback;
+                                char c = contextHubMessage2.hostEndPoint;
+                                short s = (short) c;
+                                DateTimeFormatter dateTimeFormatter =
+                                        ContextHubServiceUtil.DATE_FORMATTER;
+                                contextHubServiceCallback.handleNanoappMessage(
+                                        s,
+                                        NanoAppMessage.createMessageFromNanoApp(
+                                                contextHubMessage2.nanoappId,
+                                                contextHubMessage2.messageType,
+                                                contextHubMessage2.messageBody,
+                                                c == 65535,
+                                                contextHubMessage2.isReliable,
+                                                contextHubMessage2.messageSequenceNumber),
+                                        new ArrayList(
+                                                Arrays.asList(contextHubMessage2.permissions)),
+                                        new ArrayList(Arrays.asList(strArr2)));
+                            }
+                        });
             }
 
-            public final void handleMessageDeliveryStatus(char c, MessageDeliveryStatus messageDeliveryStatus) {
+            public final void handleMessageDeliveryStatus(
+                    char c, MessageDeliveryStatus messageDeliveryStatus) {
                 if (Flags.reliableMessageImplementation()) {
-                    ContextHubWrapperAidl.this.mHandler.post(new IContextHubWrapper$ContextHubWrapperAidl$ContextHubAidlCallback$$ExternalSyntheticLambda0(this, messageDeliveryStatus, 1));
+                    ContextHubWrapperAidl.this.mHandler.post(
+                            new IContextHubWrapper$ContextHubWrapperAidl$ContextHubAidlCallback$$ExternalSyntheticLambda0(
+                                    this, messageDeliveryStatus, 1));
                 } else {
-                    Log.w("IContextHubWrapper", "handleMessageDeliveryStatus called when the reliableMessageImplementation flag is disabled");
+                    Log.w(
+                            "IContextHubWrapper",
+                            "handleMessageDeliveryStatus called when the"
+                                + " reliableMessageImplementation flag is disabled");
                 }
             }
 
-            public final void handleNanSessionRequest(NanSessionRequest nanSessionRequest) {
-            }
+            public final void handleNanSessionRequest(NanSessionRequest nanSessionRequest) {}
 
             public final void handleNanoappInfo(NanoappInfo[] nanoappInfoArr) {
                 int i = 0;
@@ -132,21 +173,36 @@ public abstract class IContextHubWrapper {
                 for (NanoappInfo nanoappInfo : nanoappInfoArr) {
                     ArrayList arrayList2 = new ArrayList();
                     for (NanoappRpcService nanoappRpcService : nanoappInfo.rpcServices) {
-                        arrayList2.add(new NanoAppRpcService(nanoappRpcService.id, nanoappRpcService.version));
+                        arrayList2.add(
+                                new NanoAppRpcService(
+                                        nanoappRpcService.id, nanoappRpcService.version));
                     }
-                    arrayList.add(new NanoAppState(nanoappInfo.nanoappId, nanoappInfo.nanoappVersion, nanoappInfo.enabled, new ArrayList(Arrays.asList(nanoappInfo.permissions)), arrayList2));
+                    arrayList.add(
+                            new NanoAppState(
+                                    nanoappInfo.nanoappId,
+                                    nanoappInfo.nanoappVersion,
+                                    nanoappInfo.enabled,
+                                    new ArrayList(Arrays.asList(nanoappInfo.permissions)),
+                                    arrayList2));
                 }
-                ContextHubWrapperAidl.this.mHandler.post(new IContextHubWrapper$ContextHubWrapperAidl$ContextHubAidlCallback$$ExternalSyntheticLambda0(this, arrayList, i));
+                ContextHubWrapperAidl.this.mHandler.post(
+                        new IContextHubWrapper$ContextHubWrapperAidl$ContextHubAidlCallback$$ExternalSyntheticLambda0(
+                                this, arrayList, i));
             }
 
             public final void handleTransactionResult(final int i, final boolean z) {
-                ContextHubWrapperAidl.this.mHandler.post(new Runnable() { // from class: com.android.server.location.contexthub.IContextHubWrapper$ContextHubWrapperAidl$ContextHubAidlCallback$$ExternalSyntheticLambda2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        IContextHubWrapper.ContextHubWrapperAidl.ContextHubAidlCallback contextHubAidlCallback = IContextHubWrapper.ContextHubWrapperAidl.ContextHubAidlCallback.this;
-                        contextHubAidlCallback.mCallback.handleTransactionResult(i, z);
-                    }
-                });
+                ContextHubWrapperAidl.this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // com.android.server.location.contexthub.IContextHubWrapper$ContextHubWrapperAidl$ContextHubAidlCallback$$ExternalSyntheticLambda2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                IContextHubWrapper.ContextHubWrapperAidl.ContextHubAidlCallback
+                                        contextHubAidlCallback =
+                                                IContextHubWrapper.ContextHubWrapperAidl
+                                                        .ContextHubAidlCallback.this;
+                                contextHubAidlCallback.mCallback.handleTransactionResult(i, z);
+                            }
+                        });
             }
         }
 
@@ -164,14 +220,17 @@ public abstract class IContextHubWrapper {
             try {
                 hub.asBinder().linkToDeath(this, 0);
             } catch (RemoteException unused) {
-                Log.e("IContextHubWrapper", "Context Hub AIDL service death receipt could not be linked");
+                Log.e(
+                        "IContextHubWrapper",
+                        "Context Hub AIDL service death receipt could not be linked");
             }
         }
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             Log.i("IContextHubWrapper", "Context Hub AIDL HAL died");
-            IContextHub maybeConnectToAidlGetProxy = IContextHubWrapper.maybeConnectToAidlGetProxy();
+            IContextHub maybeConnectToAidlGetProxy =
+                    IContextHubWrapper.maybeConnectToAidlGetProxy();
             synchronized (this) {
                 this.mHub = maybeConnectToAidlGetProxy;
             }
@@ -184,10 +243,14 @@ public abstract class IContextHubWrapper {
                 try {
                     hub.asBinder().linkToDeath(this, 0);
                 } catch (RemoteException unused) {
-                    Log.e("IContextHubWrapper", "Context Hub AIDL service death receipt could not be linked");
+                    Log.e(
+                            "IContextHubWrapper",
+                            "Context Hub AIDL service death receipt could not be linked");
                 }
             }
-            IContextHubWrapper$ContextHubWrapperAidl$$ExternalSyntheticLambda0 iContextHubWrapper$ContextHubWrapperAidl$$ExternalSyntheticLambda0 = this.mHandleServiceRestartCallback;
+            IContextHubWrapper$ContextHubWrapperAidl$$ExternalSyntheticLambda0
+                    iContextHubWrapper$ContextHubWrapperAidl$$ExternalSyntheticLambda0 =
+                            this.mHandleServiceRestartCallback;
             if (iContextHubWrapper$ContextHubWrapperAidl$$ExternalSyntheticLambda0 != null) {
                 iContextHubWrapper$ContextHubWrapperAidl$$ExternalSyntheticLambda0.run();
             } else {
@@ -204,7 +267,9 @@ public abstract class IContextHubWrapper {
             try {
                 hub.disableNanoapp(i, j, i2);
                 return 0;
-            } catch (RemoteException | ServiceSpecificException | UnsupportedOperationException unused) {
+            } catch (RemoteException
+                    | ServiceSpecificException
+                    | UnsupportedOperationException unused) {
                 return 1;
             } catch (IllegalArgumentException unused2) {
                 return 2;
@@ -220,7 +285,9 @@ public abstract class IContextHubWrapper {
             try {
                 hub.enableNanoapp(i, j, i2);
                 return 0;
-            } catch (RemoteException | ServiceSpecificException | UnsupportedOperationException unused) {
+            } catch (RemoteException
+                    | ServiceSpecificException
+                    | UnsupportedOperationException unused) {
                 return 1;
             } catch (IllegalArgumentException unused2) {
                 return 2;
@@ -257,7 +324,10 @@ public abstract class IContextHubWrapper {
             try {
                 return hub.getPreloadedNanoappIds(i);
             } catch (RemoteException e) {
-                ActivityManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception while getting preloaded nanoapp IDs: "), "IContextHubWrapper");
+                ActivityManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("Exception while getting preloaded nanoapp IDs: "),
+                        "IContextHubWrapper");
                 return null;
             }
         }
@@ -286,7 +356,9 @@ public abstract class IContextHubWrapper {
             try {
                 hub.loadNanoapp(i, nanoappBinary, i2);
                 return 0;
-            } catch (RemoteException | ServiceSpecificException | UnsupportedOperationException unused2) {
+            } catch (RemoteException
+                    | ServiceSpecificException
+                    | UnsupportedOperationException unused2) {
                 return 1;
             } catch (IllegalArgumentException unused3) {
                 return 2;
@@ -317,7 +389,10 @@ public abstract class IContextHubWrapper {
             try {
                 hub.onHostEndpointConnected(hostEndpointInfo);
             } catch (RemoteException | ServiceSpecificException e) {
-                RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception in onHostEndpointConnected"), "IContextHubWrapper");
+                RCPManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("Exception in onHostEndpointConnected"),
+                        "IContextHubWrapper");
             }
         }
 
@@ -330,7 +405,10 @@ public abstract class IContextHubWrapper {
             try {
                 hub.onHostEndpointDisconnected((char) s);
             } catch (RemoteException | ServiceSpecificException e) {
-                RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception in onHostEndpointDisconnected"), "IContextHubWrapper");
+                RCPManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("Exception in onHostEndpointDisconnected"),
+                        "IContextHubWrapper");
             }
         }
 
@@ -352,7 +430,10 @@ public abstract class IContextHubWrapper {
             try {
                 hub.onSettingChanged(b, z);
             } catch (RemoteException | ServiceSpecificException e) {
-                RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception while sending setting update: "), "IContextHubWrapper");
+                RCPManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("Exception while sending setting update: "),
+                        "IContextHubWrapper");
             }
         }
 
@@ -367,8 +448,7 @@ public abstract class IContextHubWrapper {
         }
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
-        public final void onWifiSettingChanged(boolean z) {
-        }
+        public final void onWifiSettingChanged(boolean z) {}
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
         public final int queryNanoapps(int i) {
@@ -379,7 +459,9 @@ public abstract class IContextHubWrapper {
             try {
                 hub.queryNanoapps(i);
                 return 0;
-            } catch (RemoteException | ServiceSpecificException | UnsupportedOperationException unused) {
+            } catch (RemoteException
+                    | ServiceSpecificException
+                    | UnsupportedOperationException unused) {
                 return 1;
             } catch (IllegalArgumentException unused2) {
                 return 2;
@@ -387,12 +469,16 @@ public abstract class IContextHubWrapper {
         }
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
-        public final void registerCallback(int i, ContextHubService.ContextHubServiceCallback contextHubServiceCallback) {
+        public final void registerCallback(
+                int i, ContextHubService.ContextHubServiceCallback contextHubServiceCallback) {
             if (getHub() == null) {
                 return;
             }
-            this.mHandleServiceRestartCallback = new IContextHubWrapper$ContextHubWrapperAidl$$ExternalSyntheticLambda0(contextHubServiceCallback);
-            ((HashMap) this.mAidlCallbackMap).put(Integer.valueOf(i), new ContextHubAidlCallback(contextHubServiceCallback));
+            this.mHandleServiceRestartCallback =
+                    new IContextHubWrapper$ContextHubWrapperAidl$$ExternalSyntheticLambda0(
+                            contextHubServiceCallback);
+            ((HashMap) this.mAidlCallbackMap)
+                    .put(Integer.valueOf(i), new ContextHubAidlCallback(contextHubServiceCallback));
             registerExistingCallback(i);
         }
 
@@ -402,20 +488,29 @@ public abstract class IContextHubWrapper {
             if (hub == null) {
                 return;
             }
-            ContextHubAidlCallback contextHubAidlCallback = (ContextHubAidlCallback) ((HashMap) this.mAidlCallbackMap).get(Integer.valueOf(i));
+            ContextHubAidlCallback contextHubAidlCallback =
+                    (ContextHubAidlCallback)
+                            ((HashMap) this.mAidlCallbackMap).get(Integer.valueOf(i));
             if (contextHubAidlCallback == null) {
-                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "Could not find existing callback to register for context hub ID = ", "IContextHubWrapper");
+                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                        i,
+                        "Could not find existing callback to register for context hub ID = ",
+                        "IContextHubWrapper");
                 return;
             }
             try {
                 hub.registerCallback(i, contextHubAidlCallback);
             } catch (RemoteException | ServiceSpecificException | IllegalArgumentException e) {
-                RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception while registering callback: "), "IContextHubWrapper");
+                RCPManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("Exception while registering callback: "),
+                        "IContextHubWrapper");
             }
         }
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
-        public final int sendMessageDeliveryStatusToContextHub(int i, MessageDeliveryStatus messageDeliveryStatus) {
+        public final int sendMessageDeliveryStatusToContextHub(
+                int i, MessageDeliveryStatus messageDeliveryStatus) {
             IContextHub hub = getHub();
             if (hub == null) {
                 return 2;
@@ -437,7 +532,8 @@ public abstract class IContextHubWrapper {
                 return 2;
             }
             try {
-                hub.sendMessageToHub(i, ContextHubServiceUtil.createAidlContextHubMessage(s, nanoAppMessage));
+                hub.sendMessageToHub(
+                        i, ContextHubServiceUtil.createAidlContextHubMessage(s, nanoAppMessage));
                 return 0;
             } catch (RemoteException | ServiceSpecificException unused) {
                 return 1;
@@ -499,7 +595,9 @@ public abstract class IContextHubWrapper {
             try {
                 hub.unloadNanoapp(i, j, i2);
                 return 0;
-            } catch (RemoteException | ServiceSpecificException | UnsupportedOperationException unused) {
+            } catch (RemoteException
+                    | ServiceSpecificException
+                    | UnsupportedOperationException unused) {
                 return 1;
             } catch (IllegalArgumentException unused2) {
                 return 2;
@@ -516,28 +614,43 @@ public abstract class IContextHubWrapper {
         public final class ContextHubWrapperHidlCallback extends IContexthubCallback.Stub {
             public final ContextHubService.ContextHubServiceCallback mCallback;
 
-            public ContextHubWrapperHidlCallback(ContextHubService.ContextHubServiceCallback contextHubServiceCallback) {
+            public ContextHubWrapperHidlCallback(
+                    ContextHubService.ContextHubServiceCallback contextHubServiceCallback) {
                 this.mCallback = contextHubServiceCallback;
             }
 
             public final void handleAppAbort(final long j, final int i) {
-                ContextHubService.ContextHubServiceCallback contextHubServiceCallback = this.mCallback;
-                ContextHubClientManager contextHubClientManager = ContextHubService.this.mClientManager;
+                ContextHubService.ContextHubServiceCallback contextHubServiceCallback =
+                        this.mCallback;
+                ContextHubClientManager contextHubClientManager =
+                        ContextHubService.this.mClientManager;
                 contextHubClientManager.getClass();
-                contextHubClientManager.forEachClientOfHub(contextHubServiceCallback.mContextHubId, new Consumer() { // from class: com.android.server.location.contexthub.ContextHubClientManager$$ExternalSyntheticLambda1
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        long j2 = j;
-                        int i2 = i;
-                        ContextHubClientBroker contextHubClientBroker = (ContextHubClientBroker) obj;
-                        contextHubClientBroker.getClass();
-                        contextHubClientBroker.invokeCallback(new ContextHubClientBroker$$ExternalSyntheticLambda2(i2, 1, j2));
-                        ContextHubClientBroker$$ExternalSyntheticLambda3 contextHubClientBroker$$ExternalSyntheticLambda3 = new ContextHubClientBroker$$ExternalSyntheticLambda3(contextHubClientBroker, j2, i2, 1);
-                        synchronized (contextHubClientBroker) {
-                            contextHubClientBroker.sendPendingIntent(contextHubClientBroker$$ExternalSyntheticLambda3, j2, null);
-                        }
-                    }
-                });
+                contextHubClientManager.forEachClientOfHub(
+                        contextHubServiceCallback.mContextHubId,
+                        new Consumer() { // from class:
+                                         // com.android.server.location.contexthub.ContextHubClientManager$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                long j2 = j;
+                                int i2 = i;
+                                ContextHubClientBroker contextHubClientBroker =
+                                        (ContextHubClientBroker) obj;
+                                contextHubClientBroker.getClass();
+                                contextHubClientBroker.invokeCallback(
+                                        new ContextHubClientBroker$$ExternalSyntheticLambda2(
+                                                i2, 1, j2));
+                                ContextHubClientBroker$$ExternalSyntheticLambda3
+                                        contextHubClientBroker$$ExternalSyntheticLambda3 =
+                                                new ContextHubClientBroker$$ExternalSyntheticLambda3(
+                                                        contextHubClientBroker, j2, i2, 1);
+                                synchronized (contextHubClientBroker) {
+                                    contextHubClientBroker.sendPendingIntent(
+                                            contextHubClientBroker$$ExternalSyntheticLambda3,
+                                            j2,
+                                            null);
+                                }
+                            }
+                        });
             }
 
             public final void handleAppsInfo(ArrayList arrayList) {
@@ -546,7 +659,8 @@ public abstract class IContextHubWrapper {
                 Iterator it = arrayList.iterator();
                 while (it.hasNext()) {
                     HubAppInfo hubAppInfo = (HubAppInfo) it.next();
-                    android.hardware.contexthub.V1_2.HubAppInfo hubAppInfo2 = new android.hardware.contexthub.V1_2.HubAppInfo();
+                    android.hardware.contexthub.V1_2.HubAppInfo hubAppInfo2 =
+                            new android.hardware.contexthub.V1_2.HubAppInfo();
                     HubAppInfo hubAppInfo3 = hubAppInfo2.info_1_0;
                     hubAppInfo3.appId = hubAppInfo.appId;
                     hubAppInfo3.version = hubAppInfo.version;
@@ -563,29 +677,48 @@ public abstract class IContextHubWrapper {
                 ArrayList arrayList2 = new ArrayList();
                 Iterator it = arrayList.iterator();
                 while (it.hasNext()) {
-                    android.hardware.contexthub.V1_2.HubAppInfo hubAppInfo = (android.hardware.contexthub.V1_2.HubAppInfo) it.next();
+                    android.hardware.contexthub.V1_2.HubAppInfo hubAppInfo =
+                            (android.hardware.contexthub.V1_2.HubAppInfo) it.next();
                     HubAppInfo hubAppInfo2 = hubAppInfo.info_1_0;
-                    arrayList2.add(new NanoAppState(hubAppInfo2.appId, hubAppInfo2.version, hubAppInfo2.enabled, hubAppInfo.permissions));
+                    arrayList2.add(
+                            new NanoAppState(
+                                    hubAppInfo2.appId,
+                                    hubAppInfo2.version,
+                                    hubAppInfo2.enabled,
+                                    hubAppInfo.permissions));
                 }
                 this.mCallback.handleNanoappInfo(arrayList2);
             }
 
             public final void handleClientMsg(ContextHubMsg contextHubMsg) {
-                this.mCallback.handleNanoappMessage(contextHubMsg.hostEndPoint, ContextHubServiceUtil.createNanoAppMessage(contextHubMsg), Collections.emptyList(), Collections.emptyList());
+                this.mCallback.handleNanoappMessage(
+                        contextHubMsg.hostEndPoint,
+                        ContextHubServiceUtil.createNanoAppMessage(contextHubMsg),
+                        Collections.emptyList(),
+                        Collections.emptyList());
             }
 
-            public final void handleClientMsg_1_2(android.hardware.contexthub.V1_2.ContextHubMsg contextHubMsg, ArrayList arrayList) {
-                ContextHubService.ContextHubServiceCallback contextHubServiceCallback = this.mCallback;
+            public final void handleClientMsg_1_2(
+                    android.hardware.contexthub.V1_2.ContextHubMsg contextHubMsg,
+                    ArrayList arrayList) {
+                ContextHubService.ContextHubServiceCallback contextHubServiceCallback =
+                        this.mCallback;
                 ContextHubMsg contextHubMsg2 = contextHubMsg.msg_1_0;
-                contextHubServiceCallback.handleNanoappMessage(contextHubMsg2.hostEndPoint, ContextHubServiceUtil.createNanoAppMessage(contextHubMsg2), contextHubMsg.permissions, arrayList);
+                contextHubServiceCallback.handleNanoappMessage(
+                        contextHubMsg2.hostEndPoint,
+                        ContextHubServiceUtil.createNanoAppMessage(contextHubMsg2),
+                        contextHubMsg.permissions,
+                        arrayList);
             }
 
             public final void handleHubEvent(int i) {
-                ContextHubService.ContextHubServiceCallback contextHubServiceCallback = this.mCallback;
+                ContextHubService.ContextHubServiceCallback contextHubServiceCallback =
+                        this.mCallback;
                 DateTimeFormatter dateTimeFormatter = ContextHubServiceUtil.DATE_FORMATTER;
                 int i2 = 1;
                 if (i != 1) {
-                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "toContextHubEvent: Unknown event type: ", "ContextHubServiceUtil");
+                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                            i, "toContextHubEvent: Unknown event type: ", "ContextHubServiceUtil");
                     i2 = 0;
                 }
                 contextHubServiceCallback.handleContextHubEvent(i2);
@@ -618,7 +751,8 @@ public abstract class IContextHubWrapper {
         @Override // com.android.server.location.contexthub.IContextHubWrapper
         public final int loadNanoapp(int i, NanoAppBinary nanoAppBinary, int i2) {
             DateTimeFormatter dateTimeFormatter = ContextHubServiceUtil.DATE_FORMATTER;
-            android.hardware.contexthub.V1_0.NanoAppBinary nanoAppBinary2 = new android.hardware.contexthub.V1_0.NanoAppBinary();
+            android.hardware.contexthub.V1_0.NanoAppBinary nanoAppBinary2 =
+                    new android.hardware.contexthub.V1_0.NanoAppBinary();
             nanoAppBinary2.appId = nanoAppBinary.getNanoAppId();
             nanoAppBinary2.appVersion = nanoAppBinary.getNanoAppVersion();
             nanoAppBinary2.flags = nanoAppBinary.getFlags();
@@ -637,24 +771,21 @@ public abstract class IContextHubWrapper {
             } catch (NullPointerException unused) {
                 Log.w("ContextHubServiceUtil", "NanoApp binary was null");
             }
-            return ContextHubServiceUtil.toTransactionResult(this.mHub.loadNanoApp(i, nanoAppBinary2, i2));
+            return ContextHubServiceUtil.toTransactionResult(
+                    this.mHub.loadNanoApp(i, nanoAppBinary2, i2));
         }
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
-        public final void onBtMainSettingChanged(boolean z) {
-        }
+        public final void onBtMainSettingChanged(boolean z) {}
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
-        public final void onBtScanningSettingChanged(boolean z) {
-        }
+        public final void onBtScanningSettingChanged(boolean z) {}
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
-        public final void onWifiMainSettingChanged(boolean z) {
-        }
+        public final void onWifiMainSettingChanged(boolean z) {}
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
-        public final void onWifiScanningSettingChanged(boolean z) {
-        }
+        public final void onWifiScanningSettingChanged(boolean z) {}
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
         public final int queryNanoapps(int i) {
@@ -662,30 +793,45 @@ public abstract class IContextHubWrapper {
         }
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
-        public void registerCallback(int i, ContextHubService.ContextHubServiceCallback contextHubServiceCallback) {
-            ((HashMap) this.mHidlCallbackMap).put(Integer.valueOf(i), new ContextHubWrapperHidlCallback(contextHubServiceCallback));
-            this.mHub.registerCallback(i, (android.hardware.contexthub.V1_0.IContexthubCallback) ((HashMap) this.mHidlCallbackMap).get(Integer.valueOf(i)));
+        public void registerCallback(
+                int i, ContextHubService.ContextHubServiceCallback contextHubServiceCallback) {
+            ((HashMap) this.mHidlCallbackMap)
+                    .put(
+                            Integer.valueOf(i),
+                            new ContextHubWrapperHidlCallback(contextHubServiceCallback));
+            this.mHub.registerCallback(
+                    i,
+                    (android.hardware.contexthub.V1_0.IContexthubCallback)
+                            ((HashMap) this.mHidlCallbackMap).get(Integer.valueOf(i)));
         }
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
         public final void registerExistingCallback(int i) {
-            ContextHubWrapperHidlCallback contextHubWrapperHidlCallback = (ContextHubWrapperHidlCallback) ((HashMap) this.mHidlCallbackMap).get(Integer.valueOf(i));
+            ContextHubWrapperHidlCallback contextHubWrapperHidlCallback =
+                    (ContextHubWrapperHidlCallback)
+                            ((HashMap) this.mHidlCallbackMap).get(Integer.valueOf(i));
             if (contextHubWrapperHidlCallback == null) {
-                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "Could not find existing callback for context hub with ID = ", "IContextHubWrapper");
+                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                        i,
+                        "Could not find existing callback for context hub with ID = ",
+                        "IContextHubWrapper");
             } else {
                 this.mHub.registerCallback(i, contextHubWrapperHidlCallback);
             }
         }
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
-        public final int sendMessageDeliveryStatusToContextHub(int i, MessageDeliveryStatus messageDeliveryStatus) {
+        public final int sendMessageDeliveryStatusToContextHub(
+                int i, MessageDeliveryStatus messageDeliveryStatus) {
             return 9;
         }
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
         public final int sendMessageToContextHub(short s, int i, NanoAppMessage nanoAppMessage) {
             if (nanoAppMessage.isReliable()) {
-                Log.e("IContextHubWrapper", "Reliable messages are only supported with the AIDL HAL");
+                Log.e(
+                        "IContextHubWrapper",
+                        "Reliable messages are only supported with the AIDL HAL");
                 return 2;
             }
             DateTimeFormatter dateTimeFormatter = ContextHubServiceUtil.DATE_FORMATTER;
@@ -700,7 +846,8 @@ public abstract class IContextHubWrapper {
             for (byte b : messageBody) {
                 arrayList.add(Byte.valueOf(b));
             }
-            return ContextHubServiceUtil.toTransactionResult(this.mHub.sendMessageToHub(i, contextHubMsg));
+            return ContextHubServiceUtil.toTransactionResult(
+                    this.mHub.sendMessageToHub(i, contextHubMsg));
         }
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
@@ -730,26 +877,33 @@ public abstract class IContextHubWrapper {
             this.$r8$classId = i;
         }
 
-        private final void onAirplaneModeSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_0(boolean z) {
-        }
+        private final void
+                onAirplaneModeSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_0(
+                        boolean z) {}
 
-        private final void onAirplaneModeSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_1(boolean z) {
-        }
+        private final void
+                onAirplaneModeSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_1(
+                        boolean z) {}
 
-        private final void onLocationSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_0(boolean z) {
-        }
+        private final void
+                onLocationSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_0(
+                        boolean z) {}
 
-        private final void onMicrophoneSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_0(boolean z) {
-        }
+        private final void
+                onMicrophoneSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_0(
+                        boolean z) {}
 
-        private final void onMicrophoneSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_1(boolean z) {
-        }
+        private final void
+                onMicrophoneSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_1(
+                        boolean z) {}
 
-        private final void onWifiSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_0(boolean z) {
-        }
+        private final void
+                onWifiSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_0(
+                        boolean z) {}
 
-        private final void onWifiSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_1(boolean z) {
-        }
+        private final void
+                onWifiSettingChanged$com$android$server$location$contexthub$IContextHubWrapper$ContextHubWrapperV1_1(
+                        boolean z) {}
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper
         public final Pair getHubs() {
@@ -758,14 +912,21 @@ public abstract class IContextHubWrapper {
                     ArrayList arrayList = new ArrayList();
                     Iterator it = ((IContexthub) this.mHub).getHubs().iterator();
                     while (it.hasNext()) {
-                        arrayList.add(new android.hardware.location.ContextHubInfo((ContextHub) it.next()));
+                        arrayList.add(
+                                new android.hardware.location.ContextHubInfo(
+                                        (ContextHub) it.next()));
                     }
                     return new Pair(arrayList, new ArrayList());
                 default:
                     ArrayList arrayList2 = new ArrayList();
-                    Iterator it2 = ((android.hardware.contexthub.V1_1.IContexthub) this.mHub).getHubs().iterator();
+                    Iterator it2 =
+                            ((android.hardware.contexthub.V1_1.IContexthub) this.mHub)
+                                    .getHubs()
+                                    .iterator();
                     while (it2.hasNext()) {
-                        arrayList2.add(new android.hardware.location.ContextHubInfo((ContextHub) it2.next()));
+                        arrayList2.add(
+                                new android.hardware.location.ContextHubInfo(
+                                        (ContextHub) it2.next()));
                     }
                     return new Pair(arrayList2, new ArrayList());
             }
@@ -783,10 +944,14 @@ public abstract class IContextHubWrapper {
                     break;
                 default:
                     try {
-                        ((android.hardware.contexthub.V1_1.IContexthub) this.mHub).onSettingChanged((byte) 0, z ? (byte) 1 : (byte) 0);
+                        ((android.hardware.contexthub.V1_1.IContexthub) this.mHub)
+                                .onSettingChanged((byte) 0, z ? (byte) 1 : (byte) 0);
                         break;
                     } catch (RemoteException e) {
-                        Log.e("IContextHubWrapper", "Failed to send setting change to Contexthub", e);
+                        Log.e(
+                                "IContextHubWrapper",
+                                "Failed to send setting change to Contexthub",
+                                e);
                     }
             }
         }
@@ -834,7 +999,8 @@ public abstract class IContextHubWrapper {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class ContextHubWrapperV1_2 extends ContextHubWrapperHidl implements IContexthub.getHubs_1_2Callback {
+    public final class ContextHubWrapperV1_2 extends ContextHubWrapperHidl
+            implements IContexthub.getHubs_1_2Callback {
         public final android.hardware.contexthub.V1_2.IContexthub mHub;
         public Pair mHubInfo;
 
@@ -869,7 +1035,8 @@ public abstract class IContextHubWrapper {
             ArrayList arrayList3 = new ArrayList();
             Iterator it = arrayList.iterator();
             while (it.hasNext()) {
-                arrayList3.add(new android.hardware.location.ContextHubInfo((ContextHub) it.next()));
+                arrayList3.add(
+                        new android.hardware.location.ContextHubInfo((ContextHub) it.next()));
             }
             this.mHubInfo = new Pair(arrayList3, arrayList2);
         }
@@ -880,9 +1047,17 @@ public abstract class IContextHubWrapper {
         }
 
         @Override // com.android.server.location.contexthub.IContextHubWrapper.ContextHubWrapperHidl, com.android.server.location.contexthub.IContextHubWrapper
-        public final void registerCallback(int i, ContextHubService.ContextHubServiceCallback contextHubServiceCallback) {
-            ((HashMap) this.mHidlCallbackMap).put(Integer.valueOf(i), new ContextHubWrapperHidl.ContextHubWrapperHidlCallback(contextHubServiceCallback));
-            this.mHub.registerCallback_1_2(i, (IContexthubCallback) ((HashMap) this.mHidlCallbackMap).get(Integer.valueOf(i)));
+        public final void registerCallback(
+                int i, ContextHubService.ContextHubServiceCallback contextHubServiceCallback) {
+            ((HashMap) this.mHidlCallbackMap)
+                    .put(
+                            Integer.valueOf(i),
+                            new ContextHubWrapperHidl.ContextHubWrapperHidlCallback(
+                                    contextHubServiceCallback));
+            this.mHub.registerCallback_1_2(
+                    i,
+                    (IContexthubCallback)
+                            ((HashMap) this.mHidlCallbackMap).get(Integer.valueOf(i)));
         }
 
         public final void sendSettingChanged(byte b, byte b2) {
@@ -944,11 +1119,9 @@ public abstract class IContextHubWrapper {
 
     public abstract void onBtScanningSettingChanged(boolean z);
 
-    public void onHostEndpointConnected(HostEndpointInfo hostEndpointInfo) {
-    }
+    public void onHostEndpointConnected(HostEndpointInfo hostEndpointInfo) {}
 
-    public void onHostEndpointDisconnected(short s) {
-    }
+    public void onHostEndpointDisconnected(short s) {}
 
     public abstract void onLocationSettingChanged(boolean z);
 
@@ -962,11 +1135,13 @@ public abstract class IContextHubWrapper {
 
     public abstract int queryNanoapps(int i);
 
-    public abstract void registerCallback(int i, ContextHubService.ContextHubServiceCallback contextHubServiceCallback);
+    public abstract void registerCallback(
+            int i, ContextHubService.ContextHubServiceCallback contextHubServiceCallback);
 
     public abstract void registerExistingCallback(int i);
 
-    public abstract int sendMessageDeliveryStatusToContextHub(int i, MessageDeliveryStatus messageDeliveryStatus);
+    public abstract int sendMessageDeliveryStatusToContextHub(
+            int i, MessageDeliveryStatus messageDeliveryStatus);
 
     public abstract int sendMessageToContextHub(short s, int i, NanoAppMessage nanoAppMessage);
 

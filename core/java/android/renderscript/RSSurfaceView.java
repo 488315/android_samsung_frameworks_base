@@ -1,7 +1,6 @@
 package android.renderscript;
 
 import android.content.Context;
-import android.renderscript.RenderScriptGL;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;

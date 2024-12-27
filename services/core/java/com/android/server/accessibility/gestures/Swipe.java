@@ -9,8 +9,9 @@ import android.util.Slog;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
-import com.android.server.accessibility.gestures.GestureMatcher;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,20 +29,34 @@ public final class Swipe extends GestureMatcher {
     public final ArrayList mStrokeBuffer;
     public final int mTouchSlop;
 
-    public Swipe(Context context, int i, int i2, int i3, GestureMatcher.StateChangeListener stateChangeListener) {
-        this(context, new int[]{i, i2}, i3, stateChangeListener);
+    public Swipe(
+            Context context,
+            int i,
+            int i2,
+            int i3,
+            GestureMatcher.StateChangeListener stateChangeListener) {
+        this(context, new int[] {i, i2}, i3, stateChangeListener);
     }
 
-    public Swipe(Context context, int i, int i2, GestureMatcher.StateChangeListener stateChangeListener) {
-        this(context, new int[]{i}, i2, stateChangeListener);
+    public Swipe(
+            Context context,
+            int i,
+            int i2,
+            GestureMatcher.StateChangeListener stateChangeListener) {
+        this(context, new int[] {i}, i2, stateChangeListener);
     }
 
-    public Swipe(Context context, int[] iArr, int i, GestureMatcher.StateChangeListener stateChangeListener) {
+    public Swipe(
+            Context context,
+            int[] iArr,
+            int i,
+            GestureMatcher.StateChangeListener stateChangeListener) {
         super(i, new Handler(context.getMainLooper()), stateChangeListener);
         this.mStrokeBuffer = new ArrayList(100);
         this.mDirections = iArr;
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        this.mGestureDetectionThresholdPixels = TypedValue.applyDimension(5, 10, displayMetrics) * 1.0f;
+        this.mGestureDetectionThresholdPixels =
+                TypedValue.applyDimension(5, 10, displayMetrics) * 1.0f;
         float f = displayMetrics.xdpi / 2.54f;
         float f2 = displayMetrics.ydpi / 2.54f;
         this.mMinPixelsBetweenSamplesX = f * 0.25f;
@@ -51,11 +66,19 @@ public final class Swipe extends GestureMatcher {
     }
 
     public static String directionToString(int i) {
-        return i != 0 ? i != 1 ? i != 2 ? i != 3 ? "Unknown Direction" : INetd.IF_STATE_DOWN : INetd.IF_STATE_UP : "right" : "left";
+        return i != 0
+                ? i != 1
+                        ? i != 2
+                                ? i != 3 ? "Unknown Direction" : INetd.IF_STATE_DOWN
+                                : INetd.IF_STATE_UP
+                        : "right"
+                : "left";
     }
 
     public static int toDirection(float f, float f2) {
-        return Math.abs(f) > Math.abs(f2) ? f < FullScreenMagnificationGestureHandler.MAX_SCALE ? 0 : 1 : f2 < FullScreenMagnificationGestureHandler.MAX_SCALE ? 2 : 3;
+        return Math.abs(f) > Math.abs(f2)
+                ? f < FullScreenMagnificationGestureHandler.MAX_SCALE ? 0 : 1
+                : f2 < FullScreenMagnificationGestureHandler.MAX_SCALE ? 2 : 3;
     }
 
     @Override // com.android.server.accessibility.gestures.GestureMatcher
@@ -109,7 +132,12 @@ public final class Swipe extends GestureMatcher {
         if (z) {
             f2 = abs2;
             f = abs;
-            Slog.d(getGestureName(), "moveDelta:" + Double.toString(hypot) + " mGestureDetectionThreshold: " + Float.toString(f3));
+            Slog.d(
+                    getGestureName(),
+                    "moveDelta:"
+                            + Double.toString(hypot)
+                            + " mGestureDetectionThreshold: "
+                            + Float.toString(f3));
         } else {
             f = abs;
             f2 = abs2;
@@ -205,7 +233,8 @@ public final class Swipe extends GestureMatcher {
                 i2 = i5;
                 f = f3;
                 float sqrt = (float) Math.sqrt((f10 * f10) + (f9 * f9));
-                if ((f8 * (f10 / sqrt)) + (f7 * (f9 / sqrt)) < FullScreenMagnificationGestureHandler.MAX_SCALE) {
+                if ((f8 * (f10 / sqrt)) + (f7 * (f9 / sqrt))
+                        < FullScreenMagnificationGestureHandler.MAX_SCALE) {
                     arrayList.add(pointF3);
                     f2 = 0.0f;
                     f4 = 0.0f;
@@ -254,7 +283,12 @@ public final class Swipe extends GestureMatcher {
             int direction = toDirection(pointF5.x - pointF4.x, pointF5.y - pointF4.y);
             if (direction != iArr[i6]) {
                 if (TouchExplorer.DEBUG) {
-                    Slog.d(getGestureName(), "Found direction " + directionToString(direction) + " when expecting " + directionToString(iArr[i6]));
+                    Slog.d(
+                            getGestureName(),
+                            "Found direction "
+                                    + directionToString(direction)
+                                    + " when expecting "
+                                    + directionToString(iArr[i6]));
                 }
                 setState(3, motionEvent, motionEvent2, i);
                 return;

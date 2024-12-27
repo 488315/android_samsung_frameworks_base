@@ -18,6 +18,7 @@ import android.util.LongSparseArray;
 import android.util.Slog;
 import android.util.TimeUtils;
 import android.util.Xml;
+
 import com.android.internal.os.AtomicDirectory;
 import com.android.internal.util.XmlUtils;
 import com.android.internal.util.function.pooled.PooledLambda;
@@ -26,9 +27,10 @@ import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.FgThread;
 import com.android.server.IoThread;
 import com.android.server.PinnerService$$ExternalSyntheticOutline0;
-import com.android.server.appop.DiscreteRegistry;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import com.samsung.android.knox.analytics.service.KnoxAnalyticsSystemService;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -66,7 +68,11 @@ public final class HistoricalRegistry {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Persistence {
-        public static final AtomicDirectory sHistoricalAppOpsDir = new AtomicDirectory(new File(new File(Environment.getDataSystemDirectory(), "appops"), "history"));
+        public static final AtomicDirectory sHistoricalAppOpsDir =
+                new AtomicDirectory(
+                        new File(
+                                new File(Environment.getDataSystemDirectory(), "appops"),
+                                "history"));
         public final long mBaseSnapshotInterval;
         public final long mIntervalCompressionMultiplier;
 
@@ -104,7 +110,8 @@ public final class HistoricalRegistry {
                     listFiles = file.listFiles();
                 } catch (Throwable th2) {
                     th = th2;
-                    HistoricalRegistry.m245$$Nest$smwtf("Error reading historical app ops. Deleting history.", th, file);
+                    HistoricalRegistry.m245$$Nest$smwtf(
+                            "Error reading historical app ops. Deleting history.", th, file);
                     sHistoricalAppOpsDir.delete();
                     return 0L;
                 }
@@ -119,8 +126,7 @@ public final class HistoricalRegistry {
             for (File file3 : listFiles) {
                 String name = file3.getName();
                 if (name.endsWith(".xml")) {
-                    if (file2 != null && name.length() >= file2.getName().length()) {
-                    }
+                    if (file2 != null && name.length() >= file2.getName().length()) {}
                     file2 = file3;
                 }
             }
@@ -140,15 +146,30 @@ public final class HistoricalRegistry {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static android.app.AppOpsManager.HistoricalOps readeHistoricalOpsDLocked(com.android.modules.utils.TypedXmlPullParser r35, int r36, java.lang.String r37, java.lang.String r38, java.lang.String[] r39, int r40, long r41, long r43, int r45, long[] r46) {
+        public static android.app.AppOpsManager.HistoricalOps readeHistoricalOpsDLocked(
+                com.android.modules.utils.TypedXmlPullParser r35,
+                int r36,
+                java.lang.String r37,
+                java.lang.String r38,
+                java.lang.String[] r39,
+                int r40,
+                long r41,
+                long r43,
+                int r45,
+                long[] r46) {
             /*
                 Method dump skipped, instructions count: 791
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.appop.HistoricalRegistry.Persistence.readeHistoricalOpsDLocked(com.android.modules.utils.TypedXmlPullParser, int, java.lang.String, java.lang.String, java.lang.String[], int, long, long, int, long[]):android.app.AppOpsManager$HistoricalOps");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.appop.HistoricalRegistry.Persistence.readeHistoricalOpsDLocked(com.android.modules.utils.TypedXmlPullParser,"
+                        + " int, java.lang.String, java.lang.String, java.lang.String[], int, long,"
+                        + " long, int, long[]):android.app.AppOpsManager$HistoricalOps");
         }
 
-        public static void writeHistoricalOpDLocked(AppOpsManager.HistoricalOps historicalOps, TypedXmlSerializer typedXmlSerializer) {
+        public static void writeHistoricalOpDLocked(
+                AppOpsManager.HistoricalOps historicalOps, TypedXmlSerializer typedXmlSerializer) {
             String str;
             String str2;
             int i;
@@ -165,8 +186,10 @@ public final class HistoricalRegistry {
             String str5 = null;
             String str6 = "ops";
             typedXmlSerializer.startTag((String) null, "ops");
-            typedXmlSerializer.attributeLong((String) null, "beg", historicalOps.getBeginTimeMillis());
-            typedXmlSerializer.attributeLong((String) null, "end", historicalOps.getEndTimeMillis());
+            typedXmlSerializer.attributeLong(
+                    (String) null, "beg", historicalOps.getBeginTimeMillis());
+            typedXmlSerializer.attributeLong(
+                    (String) null, "end", historicalOps.getEndTimeMillis());
             int uidCount = historicalOps.getUidCount();
             int i7 = 0;
             while (i7 < uidCount) {
@@ -184,17 +207,20 @@ public final class HistoricalRegistry {
                     int attributedOpsCount = packageOpsAt.getAttributedOpsCount();
                     int i9 = 0;
                     while (i9 < attributedOpsCount) {
-                        AppOpsManager.AttributedHistoricalOps attributedOpsAt = packageOpsAt.getAttributedOpsAt(i9);
+                        AppOpsManager.AttributedHistoricalOps attributedOpsAt =
+                                packageOpsAt.getAttributedOpsAt(i9);
                         int i10 = uidCount;
                         String str9 = "ftr";
                         typedXmlSerializer.startTag(str5, "ftr");
-                        XmlUtils.writeStringAttribute(typedXmlSerializer, "na", attributedOpsAt.getTag());
+                        XmlUtils.writeStringAttribute(
+                                typedXmlSerializer, "na", attributedOpsAt.getTag());
                         int opCount = attributedOpsAt.getOpCount();
                         int i11 = 0;
                         while (i11 < opCount) {
                             int i12 = opCount;
                             AppOpsManager.HistoricalOp opAt = attributedOpsAt.getOpAt(i11);
-                            AppOpsManager.AttributedHistoricalOps attributedHistoricalOps = attributedOpsAt;
+                            AppOpsManager.AttributedHistoricalOps attributedHistoricalOps =
+                                    attributedOpsAt;
                             LongSparseArray collectKeys = opAt.collectKeys();
                             if (collectKeys == null || collectKeys.size() <= 0) {
                                 str = str6;
@@ -213,7 +239,8 @@ public final class HistoricalRegistry {
                                 i3 = packageCount;
                                 typedXmlSerializer.startTag((String) null, "op");
                                 historicalPackageOps = packageOpsAt;
-                                typedXmlSerializer.attributeInt((String) null, "na", opAt.getOpCode());
+                                typedXmlSerializer.attributeInt(
+                                        (String) null, "na", opAt.getOpCode());
                                 int size = collectKeys.size();
                                 int i13 = 0;
                                 while (i13 < size) {
@@ -221,32 +248,54 @@ public final class HistoricalRegistry {
                                     int i14 = size;
                                     long keyAt = collectKeys.keyAt(i13);
                                     LongSparseArray longSparseArray = collectKeys;
-                                    int extractUidStateFromKey = AppOpsManager.extractUidStateFromKey(keyAt);
+                                    int extractUidStateFromKey =
+                                            AppOpsManager.extractUidStateFromKey(keyAt);
                                     int i15 = attributedOpsCount;
-                                    int extractFlagsFromKey = AppOpsManager.extractFlagsFromKey(keyAt);
+                                    int extractFlagsFromKey =
+                                            AppOpsManager.extractFlagsFromKey(keyAt);
                                     String str11 = str6;
                                     String str12 = str9;
-                                    long accessCount = opAt.getAccessCount(extractUidStateFromKey, extractUidStateFromKey, extractFlagsFromKey);
+                                    long accessCount =
+                                            opAt.getAccessCount(
+                                                    extractUidStateFromKey,
+                                                    extractUidStateFromKey,
+                                                    extractFlagsFromKey);
                                     int i16 = i7;
                                     int i17 = i11;
-                                    long rejectCount = opAt.getRejectCount(extractUidStateFromKey, extractUidStateFromKey, extractFlagsFromKey);
+                                    long rejectCount =
+                                            opAt.getRejectCount(
+                                                    extractUidStateFromKey,
+                                                    extractUidStateFromKey,
+                                                    extractFlagsFromKey);
                                     String str13 = str8;
-                                    long accessDuration = opAt.getAccessDuration(extractUidStateFromKey, extractUidStateFromKey, extractFlagsFromKey);
+                                    long accessDuration =
+                                            opAt.getAccessDuration(
+                                                    extractUidStateFromKey,
+                                                    extractUidStateFromKey,
+                                                    extractFlagsFromKey);
                                     if (accessCount > 0 || rejectCount > 0 || accessDuration > 0) {
                                         historicalOp = opAt;
                                         i6 = i8;
-                                        typedXmlSerializer.startTag((String) null, KnoxAnalyticsSystemService.STATUS_PARAMETER_NAME);
-                                        typedXmlSerializer.attributeLong((String) null, "na", keyAt);
+                                        typedXmlSerializer.startTag(
+                                                (String) null,
+                                                KnoxAnalyticsSystemService.STATUS_PARAMETER_NAME);
+                                        typedXmlSerializer.attributeLong(
+                                                (String) null, "na", keyAt);
                                         if (accessCount > 0) {
-                                            typedXmlSerializer.attributeLong((String) null, "ac", accessCount);
+                                            typedXmlSerializer.attributeLong(
+                                                    (String) null, "ac", accessCount);
                                         }
                                         if (rejectCount > 0) {
-                                            typedXmlSerializer.attributeLong((String) null, "rc", rejectCount);
+                                            typedXmlSerializer.attributeLong(
+                                                    (String) null, "rc", rejectCount);
                                         }
                                         if (accessDuration > 0) {
-                                            typedXmlSerializer.attributeLong((String) null, "du", accessDuration);
+                                            typedXmlSerializer.attributeLong(
+                                                    (String) null, "du", accessDuration);
                                         }
-                                        typedXmlSerializer.endTag((String) null, KnoxAnalyticsSystemService.STATUS_PARAMETER_NAME);
+                                        typedXmlSerializer.endTag(
+                                                (String) null,
+                                                KnoxAnalyticsSystemService.STATUS_PARAMETER_NAME);
                                     } else {
                                         historicalOp = opAt;
                                         i6 = i8;
@@ -324,7 +373,8 @@ public final class HistoricalRegistry {
             typedXmlSerializer.endTag(str5, str6);
         }
 
-        public final LinkedList collectHistoricalOpsBaseDLocked(int i, String str, String str2, String[] strArr, int i2, long j, long j2, int i3) {
+        public final LinkedList collectHistoricalOpsBaseDLocked(
+                int i, String str, String str2, String[] strArr, int i2, long j, long j2, int i3) {
             File file;
             AtomicDirectory atomicDirectory;
             File startRead;
@@ -336,19 +386,45 @@ public final class HistoricalRegistry {
                 file = null;
             }
             try {
-                LinkedList collectHistoricalOpsRecursiveDLocked = collectHistoricalOpsRecursiveDLocked(startRead, i, str, str2, strArr, i2, j, j2, i3, new long[]{0}, 0, getHistoricalFileNames(startRead));
+                LinkedList collectHistoricalOpsRecursiveDLocked =
+                        collectHistoricalOpsRecursiveDLocked(
+                                startRead,
+                                i,
+                                str,
+                                str2,
+                                strArr,
+                                i2,
+                                j,
+                                j2,
+                                i3,
+                                new long[] {0},
+                                0,
+                                getHistoricalFileNames(startRead));
                 atomicDirectory.finishRead();
                 return collectHistoricalOpsRecursiveDLocked;
             } catch (Throwable th2) {
                 th = th2;
                 file = startRead;
-                HistoricalRegistry.m245$$Nest$smwtf("Error reading historical app ops. Deleting history.", th, file);
+                HistoricalRegistry.m245$$Nest$smwtf(
+                        "Error reading historical app ops. Deleting history.", th, file);
                 sHistoricalAppOpsDir.delete();
                 return null;
             }
         }
 
-        public final LinkedList collectHistoricalOpsRecursiveDLocked(File file, int i, String str, String str2, String[] strArr, int i2, long j, long j2, int i3, long[] jArr, int i4, Set set) {
+        public final LinkedList collectHistoricalOpsRecursiveDLocked(
+                File file,
+                int i,
+                String str,
+                String str2,
+                String[] strArr,
+                int i2,
+                long j,
+                long j2,
+                int i3,
+                long[] jArr,
+                int i4,
+                Set set) {
             double d = this.mIntervalCompressionMultiplier;
             long pow = (long) Math.pow(d, i4);
             long j3 = this.mBaseSnapshotInterval;
@@ -357,15 +433,20 @@ public final class HistoricalRegistry {
             long pow2 = j3 * ((long) Math.pow(d, i5));
             long max = Math.max(j - j4, 0L);
             long j5 = j2 - j4;
-            List readHistoricalOpsLocked = readHistoricalOpsLocked(file, j4, pow2, i, str, str2, strArr, i2, max, j5, i3, jArr, i4, set);
+            List readHistoricalOpsLocked =
+                    readHistoricalOpsLocked(
+                            file, j4, pow2, i, str, str2, strArr, i2, max, j5, i3, jArr, i4, set);
             if (readHistoricalOpsLocked != null && readHistoricalOpsLocked.isEmpty()) {
                 return null;
             }
-            LinkedList collectHistoricalOpsRecursiveDLocked = collectHistoricalOpsRecursiveDLocked(file, i, str, str2, strArr, i2, max, j5, i3, jArr, i5, set);
+            LinkedList collectHistoricalOpsRecursiveDLocked =
+                    collectHistoricalOpsRecursiveDLocked(
+                            file, i, str, str2, strArr, i2, max, j5, i3, jArr, i5, set);
             if (collectHistoricalOpsRecursiveDLocked != null) {
                 int size = collectHistoricalOpsRecursiveDLocked.size();
                 for (int i6 = 0; i6 < size; i6++) {
-                    ((AppOpsManager.HistoricalOps) collectHistoricalOpsRecursiveDLocked.get(i6)).offsetBeginAndEndTime(pow2);
+                    ((AppOpsManager.HistoricalOps) collectHistoricalOpsRecursiveDLocked.get(i6))
+                            .offsetBeginAndEndTime(pow2);
                 }
             }
             if (readHistoricalOpsLocked != null) {
@@ -373,7 +454,8 @@ public final class HistoricalRegistry {
                     collectHistoricalOpsRecursiveDLocked = new LinkedList();
                 }
                 for (int size2 = readHistoricalOpsLocked.size() - 1; size2 >= 0; size2--) {
-                    collectHistoricalOpsRecursiveDLocked.offerFirst((AppOpsManager.HistoricalOps) readHistoricalOpsLocked.get(size2));
+                    collectHistoricalOpsRecursiveDLocked.offerFirst(
+                            (AppOpsManager.HistoricalOps) readHistoricalOpsLocked.get(size2));
                 }
             }
             return collectHistoricalOpsRecursiveDLocked;
@@ -394,12 +476,20 @@ public final class HistoricalRegistry {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void handlePersistHistoricalOpsRecursiveDLocked(java.io.File r29, java.io.File r30, java.util.List r31, java.util.Set r32, int r33) {
+        public final void handlePersistHistoricalOpsRecursiveDLocked(
+                java.io.File r29,
+                java.io.File r30,
+                java.util.List r31,
+                java.util.Set r32,
+                int r33) {
             /*
                 Method dump skipped, instructions count: 559
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.appop.HistoricalRegistry.Persistence.handlePersistHistoricalOpsRecursiveDLocked(java.io.File, java.io.File, java.util.List, java.util.Set, int):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.appop.HistoricalRegistry.Persistence.handlePersistHistoricalOpsRecursiveDLocked(java.io.File,"
+                        + " java.io.File, java.util.List, java.util.Set, int):void");
         }
 
         public final void persistHistoricalOpsDLocked(List list) {
@@ -407,15 +497,35 @@ public final class HistoricalRegistry {
                 AtomicDirectory atomicDirectory = sHistoricalAppOpsDir;
                 File startWrite = atomicDirectory.startWrite();
                 File backupDirectory = atomicDirectory.getBackupDirectory();
-                handlePersistHistoricalOpsRecursiveDLocked(startWrite, backupDirectory, list, getHistoricalFileNames(backupDirectory), 0);
+                handlePersistHistoricalOpsRecursiveDLocked(
+                        startWrite,
+                        backupDirectory,
+                        list,
+                        getHistoricalFileNames(backupDirectory),
+                        0);
                 atomicDirectory.finishWrite();
             } catch (Throwable th) {
-                HistoricalRegistry.m245$$Nest$smwtf("Failed to write historical app ops, restoring backup", th, null);
+                HistoricalRegistry.m245$$Nest$smwtf(
+                        "Failed to write historical app ops, restoring backup", th, null);
                 sHistoricalAppOpsDir.failWrite();
             }
         }
 
-        public final List readHistoricalOpsLocked(File file, long j, long j2, int i, String str, String str2, String[] strArr, int i2, long j3, long j4, int i3, long[] jArr, int i4, Set set) {
+        public final List readHistoricalOpsLocked(
+                File file,
+                long j,
+                long j2,
+                int i,
+                String str,
+                String str2,
+                String[] strArr,
+                int i2,
+                long j3,
+                long j4,
+                int i3,
+                long[] jArr,
+                int i4,
+                Set set) {
             int i5;
             File generateFile = generateFile(file, i4);
             if (set != null) {
@@ -424,7 +534,11 @@ public final class HistoricalRegistry {
             if (j3 >= j4 || j4 < j) {
                 return Collections.emptyList();
             }
-            if (j3 >= ((j2 - j) / this.mIntervalCompressionMultiplier) + j2 + (jArr != null ? jArr[0] : 0L) || !generateFile.exists()) {
+            if (j3
+                            >= ((j2 - j) / this.mIntervalCompressionMultiplier)
+                                    + j2
+                                    + (jArr != null ? jArr[0] : 0L)
+                    || !generateFile.exists()) {
                 if (set == null || set.isEmpty()) {
                     return Collections.emptyList();
                 }
@@ -436,20 +550,34 @@ public final class HistoricalRegistry {
                     TypedXmlPullParser resolvePullParser = Xml.resolvePullParser(fileInputStream);
                     XmlUtils.beginDocument(resolvePullParser, "history");
                     if (resolvePullParser.getAttributeInt((String) null, "ver") < 2) {
-                        throw new IllegalStateException("Dropping unsupported history version 1 for file:" + generateFile);
+                        throw new IllegalStateException(
+                                "Dropping unsupported history version 1 for file:" + generateFile);
                     }
-                    long attributeLong = resolvePullParser.getAttributeLong((String) null, "ov", 0L);
+                    long attributeLong =
+                            resolvePullParser.getAttributeLong((String) null, "ov", 0L);
                     int depth = resolvePullParser.getDepth();
                     ArrayList arrayList = null;
                     while (XmlUtils.nextElementWithin(resolvePullParser, depth)) {
                         if ("ops".equals(resolvePullParser.getName())) {
                             i5 = depth;
-                            AppOpsManager.HistoricalOps readeHistoricalOpsDLocked = readeHistoricalOpsDLocked(resolvePullParser, i, str, str2, strArr, i2, j3, j4, i3, jArr);
+                            AppOpsManager.HistoricalOps readeHistoricalOpsDLocked =
+                                    readeHistoricalOpsDLocked(
+                                            resolvePullParser,
+                                            i,
+                                            str,
+                                            str2,
+                                            strArr,
+                                            i2,
+                                            j3,
+                                            j4,
+                                            i3,
+                                            jArr);
                             if (readeHistoricalOpsDLocked != null) {
                                 if (readeHistoricalOpsDLocked.isEmpty()) {
                                     XmlUtils.skipCurrentTag(resolvePullParser);
                                 } else {
-                                    ArrayList arrayList2 = arrayList == null ? new ArrayList() : arrayList;
+                                    ArrayList arrayList2 =
+                                            arrayList == null ? new ArrayList() : arrayList;
                                     arrayList2.add(readeHistoricalOpsDLocked);
                                     arrayList = arrayList2;
                                 }
@@ -467,17 +595,22 @@ public final class HistoricalRegistry {
                 } finally {
                 }
             } catch (FileNotFoundException unused) {
-                Slog.i("HistoricalRegistry$Persistence", "No history file: " + generateFile.getName());
+                Slog.i(
+                        "HistoricalRegistry$Persistence",
+                        "No history file: " + generateFile.getName());
                 return Collections.emptyList();
             }
         }
 
         public final List readHistoryDLocked() {
-            LinkedList collectHistoricalOpsBaseDLocked = collectHistoricalOpsBaseDLocked(-1, null, null, null, 0, 0L, Long.MAX_VALUE, 31);
+            LinkedList collectHistoricalOpsBaseDLocked =
+                    collectHistoricalOpsBaseDLocked(
+                            -1, null, null, null, 0, 0L, Long.MAX_VALUE, 31);
             if (collectHistoricalOpsBaseDLocked != null) {
                 int size = collectHistoricalOpsBaseDLocked.size();
                 for (int i = 0; i < size; i++) {
-                    ((AppOpsManager.HistoricalOps) collectHistoricalOpsBaseDLocked.get(i)).offsetBeginAndEndTime(this.mBaseSnapshotInterval);
+                    ((AppOpsManager.HistoricalOps) collectHistoricalOpsBaseDLocked.get(i))
+                            .offsetBeginAndEndTime(this.mBaseSnapshotInterval);
                 }
             }
             return collectHistoricalOpsBaseDLocked;
@@ -498,10 +631,12 @@ public final class HistoricalRegistry {
         public final String mUidStatePrefix;
         public final PrintWriter mWriter;
         public final long mNow = System.currentTimeMillis();
-        public final SimpleDateFormat mDateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        public final SimpleDateFormat mDateFormatter =
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         public final Date mDate = new Date();
 
-        public StringDumpVisitor(int i, int i2, int i3, PrintWriter printWriter, String str, String str2) {
+        public StringDumpVisitor(
+                int i, int i2, int i3, PrintWriter printWriter, String str, String str2) {
             String m$1 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, "  ");
             this.mOpsPrefix = m$1;
             String m$12 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m$1, "  ");
@@ -512,7 +647,8 @@ public final class HistoricalRegistry {
             this.mAttributionPrefix = m$14;
             String m$15 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m$14, "  ");
             this.mEntryPrefix = m$15;
-            this.mUidStatePrefix = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m$15, "  ");
+            this.mUidStatePrefix =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m$15, "  ");
             this.mWriter = printWriter;
             this.mFilterUid = i;
             this.mFilterPackage = str2;
@@ -520,8 +656,10 @@ public final class HistoricalRegistry {
             this.mFilter = i3;
         }
 
-        public final void visitHistoricalAttributionOps(AppOpsManager.AttributedHistoricalOps attributedHistoricalOps) {
-            if ((this.mFilter & 4) == 0 || Objects.equals(this.mFilterPackage, attributedHistoricalOps.getTag())) {
+        public final void visitHistoricalAttributionOps(
+                AppOpsManager.AttributedHistoricalOps attributedHistoricalOps) {
+            if ((this.mFilter & 4) == 0
+                    || Objects.equals(this.mFilterPackage, attributedHistoricalOps.getTag())) {
                 this.mWriter.print(this.mAttributionPrefix);
                 this.mWriter.print("Attribution ");
                 this.mWriter.print(attributedHistoricalOps.getTag());
@@ -541,7 +679,11 @@ public final class HistoricalRegistry {
                     long keyAt = collectKeys.keyAt(i);
                     int extractUidStateFromKey = AppOpsManager.extractUidStateFromKey(keyAt);
                     int extractFlagsFromKey = AppOpsManager.extractFlagsFromKey(keyAt);
-                    long accessCount = historicalOp.getAccessCount(extractUidStateFromKey, extractUidStateFromKey, extractFlagsFromKey);
+                    long accessCount =
+                            historicalOp.getAccessCount(
+                                    extractUidStateFromKey,
+                                    extractUidStateFromKey,
+                                    extractFlagsFromKey);
                     boolean z2 = true;
                     if (accessCount > 0) {
                         this.mWriter.print(this.mUidStatePrefix);
@@ -553,7 +695,11 @@ public final class HistoricalRegistry {
                     } else {
                         z = false;
                     }
-                    long rejectCount = historicalOp.getRejectCount(extractUidStateFromKey, extractUidStateFromKey, extractFlagsFromKey);
+                    long rejectCount =
+                            historicalOp.getRejectCount(
+                                    extractUidStateFromKey,
+                                    extractUidStateFromKey,
+                                    extractFlagsFromKey);
                     if (rejectCount > 0) {
                         if (z) {
                             this.mWriter.print(", ");
@@ -566,7 +712,11 @@ public final class HistoricalRegistry {
                         this.mWriter.print("reject=");
                         this.mWriter.print(rejectCount);
                     }
-                    long accessDuration = historicalOp.getAccessDuration(extractUidStateFromKey, extractUidStateFromKey, extractFlagsFromKey);
+                    long accessDuration =
+                            historicalOp.getAccessDuration(
+                                    extractUidStateFromKey,
+                                    extractUidStateFromKey,
+                                    extractFlagsFromKey);
                     if (accessDuration > 0) {
                         if (z) {
                             this.mWriter.print(", ");
@@ -607,8 +757,10 @@ public final class HistoricalRegistry {
             this.mWriter.println(")");
         }
 
-        public final void visitHistoricalPackageOps(AppOpsManager.HistoricalPackageOps historicalPackageOps) {
-            if ((this.mFilter & 2) == 0 || this.mFilterPackage.equals(historicalPackageOps.getPackageName())) {
+        public final void visitHistoricalPackageOps(
+                AppOpsManager.HistoricalPackageOps historicalPackageOps) {
+            if ((this.mFilter & 2) == 0
+                    || this.mFilterPackage.equals(historicalPackageOps.getPackageName())) {
                 this.mWriter.print(this.mPackagePrefix);
                 this.mWriter.print("Package ");
                 this.mWriter.print(historicalPackageOps.getPackageName());
@@ -632,14 +784,19 @@ public final class HistoricalRegistry {
         Slog.wtf(LOG_TAG, str, th);
         if (KEEP_WTF_LOG) {
             try {
-                File file2 = new File(new File(Environment.getDataSystemDirectory(), "appops"), "wtf" + TimeUtils.formatForLogging(System.currentTimeMillis()));
+                File file2 =
+                        new File(
+                                new File(Environment.getDataSystemDirectory(), "appops"),
+                                "wtf" + TimeUtils.formatForLogging(System.currentTimeMillis()));
                 if (file2.createNewFile()) {
                     PrintWriter printWriter = new PrintWriter(file2);
                     try {
                         printWriter.append('\n').append((CharSequence) th.toString());
                         printWriter.append('\n').append((CharSequence) Debug.getCallers(10));
                         if (file != null) {
-                            printWriter.append((CharSequence) ("\nfiles: " + Arrays.toString(file.listFiles())));
+                            printWriter.append(
+                                    (CharSequence)
+                                            ("\nfiles: " + Arrays.toString(file.listFiles())));
                         } else {
                             printWriter.append((CharSequence) "\nfiles: none");
                         }
@@ -690,10 +847,15 @@ public final class HistoricalRegistry {
                 printWriter.print("History:");
                 printWriter.print("  mode=");
                 printWriter.println(AppOpsManager.historicalModeToString(this.mMode));
-                StringDumpVisitor stringDumpVisitor = new StringDumpVisitor(i, i2, i3, printWriter, "    ", str);
+                StringDumpVisitor stringDumpVisitor =
+                        new StringDumpVisitor(i, i2, i3, printWriter, "    ", str);
                 long currentTimeMillis = System.currentTimeMillis();
-                AppOpsManager.HistoricalOps updatedPendingHistoricalOpsMLocked = getUpdatedPendingHistoricalOpsMLocked(currentTimeMillis);
-                updatedPendingHistoricalOpsMLocked.setBeginAndEndTime(currentTimeMillis - updatedPendingHistoricalOpsMLocked.getEndTimeMillis(), currentTimeMillis - updatedPendingHistoricalOpsMLocked.getBeginTimeMillis());
+                AppOpsManager.HistoricalOps updatedPendingHistoricalOpsMLocked =
+                        getUpdatedPendingHistoricalOpsMLocked(currentTimeMillis);
+                updatedPendingHistoricalOpsMLocked.setBeginAndEndTime(
+                        currentTimeMillis - updatedPendingHistoricalOpsMLocked.getEndTimeMillis(),
+                        currentTimeMillis
+                                - updatedPendingHistoricalOpsMLocked.getBeginTimeMillis());
                 updatedPendingHistoricalOpsMLocked.accept(stringDumpVisitor);
                 if (!isPersistenceInitializedMLocked()) {
                     Slog.e(LOG_TAG, "Interaction before persistence initialized");
@@ -701,12 +863,17 @@ public final class HistoricalRegistry {
                 }
                 List readHistoryDLocked = this.mPersistence.readHistoryDLocked();
                 if (readHistoryDLocked != null) {
-                    long j = (this.mNextPersistDueTimeMillis - currentTimeMillis) - this.mBaseSnapshotInterval;
+                    long j =
+                            (this.mNextPersistDueTimeMillis - currentTimeMillis)
+                                    - this.mBaseSnapshotInterval;
                     int size = readHistoryDLocked.size();
                     for (int i4 = 0; i4 < size; i4++) {
-                        AppOpsManager.HistoricalOps historicalOps = (AppOpsManager.HistoricalOps) readHistoryDLocked.get(i4);
+                        AppOpsManager.HistoricalOps historicalOps =
+                                (AppOpsManager.HistoricalOps) readHistoryDLocked.get(i4);
                         historicalOps.offsetBeginAndEndTime(j);
-                        historicalOps.setBeginAndEndTime(currentTimeMillis - historicalOps.getEndTimeMillis(), currentTimeMillis - historicalOps.getBeginTimeMillis());
+                        historicalOps.setBeginAndEndTime(
+                                currentTimeMillis - historicalOps.getEndTimeMillis(),
+                                currentTimeMillis - historicalOps.getBeginTimeMillis());
                         historicalOps.accept(stringDumpVisitor);
                     }
                 } else {
@@ -716,11 +883,30 @@ public final class HistoricalRegistry {
         }
     }
 
-    public final void dumpDiscreteData(PrintWriter printWriter, int i, String str, String str2, int i2, int i3, SimpleDateFormat simpleDateFormat, Date date, int i4) {
+    public final void dumpDiscreteData(
+            PrintWriter printWriter,
+            int i,
+            String str,
+            String str2,
+            int i2,
+            int i3,
+            SimpleDateFormat simpleDateFormat,
+            Date date,
+            int i4) {
         int i5 = i4;
         DiscreteRegistry discreteRegistry = this.mDiscreteRegistry;
         DiscreteRegistry.DiscreteOps allDiscreteOps = discreteRegistry.getAllDiscreteOps();
-        DiscreteRegistry.DiscreteOps.m241$$Nest$mfilter(allDiscreteOps, 0L, Instant.now().toEpochMilli(), i2, i, str, i3 == -1 ? null : new String[]{AppOpsManager.opToPublicName(i3)}, str2, 31, new ArrayMap());
+        DiscreteRegistry.DiscreteOps.m241$$Nest$mfilter(
+                allDiscreteOps,
+                0L,
+                Instant.now().toEpochMilli(),
+                i2,
+                i,
+                str,
+                i3 == -1 ? null : new String[] {AppOpsManager.opToPublicName(i3)},
+                str2,
+                31,
+                new ArrayMap());
         String str3 = "  ";
         printWriter.print("  ");
         printWriter.print("Largest chain id: ");
@@ -733,7 +919,8 @@ public final class HistoricalRegistry {
             printWriter.print("Uid: ");
             printWriter.print(allDiscreteOps.mUids.keyAt(i6));
             printWriter.println();
-            DiscreteRegistry.DiscreteUidOps discreteUidOps = (DiscreteRegistry.DiscreteUidOps) allDiscreteOps.mUids.valueAt(i6);
+            DiscreteRegistry.DiscreteUidOps discreteUidOps =
+                    (DiscreteRegistry.DiscreteUidOps) allDiscreteOps.mUids.valueAt(i6);
             int size2 = discreteUidOps.mPackages.size();
             int i7 = 0;
             while (i7 < size2) {
@@ -741,14 +928,20 @@ public final class HistoricalRegistry {
                 printWriter.print("Package: ");
                 printWriter.print((String) discreteUidOps.mPackages.keyAt(i7));
                 printWriter.println();
-                DiscreteRegistry.DiscretePackageOps discretePackageOps = (DiscreteRegistry.DiscretePackageOps) discreteUidOps.mPackages.valueAt(i7);
+                DiscreteRegistry.DiscretePackageOps discretePackageOps =
+                        (DiscreteRegistry.DiscretePackageOps) discreteUidOps.mPackages.valueAt(i7);
                 int size3 = discretePackageOps.mPackageOps.size();
                 int i8 = 0;
                 while (i8 < size3) {
                     printWriter.print("      ");
-                    printWriter.print(AppOpsManager.opToName(((Integer) discretePackageOps.mPackageOps.keyAt(i8)).intValue()));
+                    printWriter.print(
+                            AppOpsManager.opToName(
+                                    ((Integer) discretePackageOps.mPackageOps.keyAt(i8))
+                                            .intValue()));
                     printWriter.println();
-                    DiscreteRegistry.DiscreteOp discreteOp = (DiscreteRegistry.DiscreteOp) discretePackageOps.mPackageOps.valueAt(i8);
+                    DiscreteRegistry.DiscreteOp discreteOp =
+                            (DiscreteRegistry.DiscreteOp)
+                                    discretePackageOps.mPackageOps.valueAt(i8);
                     int size4 = discreteOp.mAttributedOps.size();
                     int i9 = 0;
                     while (i9 < size4) {
@@ -763,12 +956,14 @@ public final class HistoricalRegistry {
                         int i11 = size2;
                         int max = i5 < 1 ? 0 : Math.max(0, size5 - i5);
                         while (max < size5) {
-                            DiscreteRegistry.DiscreteOpEvent discreteOpEvent = (DiscreteRegistry.DiscreteOpEvent) list.get(max);
+                            DiscreteRegistry.DiscreteOpEvent discreteOpEvent =
+                                    (DiscreteRegistry.DiscreteOpEvent) list.get(max);
                             List list2 = list;
                             discreteOpEvent.getClass();
                             printWriter.print("        " + str3);
                             printWriter.print("Access [");
-                            printWriter.print(AppOpsManager.getUidStateName(discreteOpEvent.mUidState));
+                            printWriter.print(
+                                    AppOpsManager.getUidStateName(discreteOpEvent.mUidState));
                             printWriter.print(PackageManagerShellCommandDataLoader.STDIN_PATH);
                             printWriter.print(AppOpsManager.flagsToString(discreteOpEvent.mOpFlag));
                             printWriter.print("] at ");
@@ -781,7 +976,8 @@ public final class HistoricalRegistry {
                             long j3 = discreteOpEvent.mNoteDuration;
                             if (j3 != -1) {
                                 printWriter.print(" for ");
-                                printWriter.print(DiscreteRegistry.m239$$Nest$smdiscretizeDuration(j3));
+                                printWriter.print(
+                                        DiscreteRegistry.m239$$Nest$smdiscretizeDuration(j3));
                                 printWriter.print(" milliseconds ");
                             }
                             int i13 = discreteOpEvent.mAttributionFlags;
@@ -833,10 +1029,13 @@ public final class HistoricalRegistry {
             }
             this.mCurrentHistoricalOps.offsetBeginAndEndTime(this.mBaseSnapshotInterval);
             AppOpsManager.HistoricalOps historicalOps2 = this.mCurrentHistoricalOps;
-            historicalOps2.setBeginTime(historicalOps2.getEndTimeMillis() - this.mBaseSnapshotInterval);
+            historicalOps2.setBeginTime(
+                    historicalOps2.getEndTimeMillis() - this.mBaseSnapshotInterval);
             this.mCurrentHistoricalOps.offsetBeginAndEndTime(Math.abs(j2));
             AppOpsManager.HistoricalOps historicalOps3 = this.mCurrentHistoricalOps;
-            Message obtainMessage = PooledLambda.obtainMessage(new HistoricalRegistry$$ExternalSyntheticLambda0(), this);
+            Message obtainMessage =
+                    PooledLambda.obtainMessage(
+                            new HistoricalRegistry$$ExternalSyntheticLambda0(), this);
             obtainMessage.what = 1;
             IoThread.getHandler().sendMessage(obtainMessage);
             this.mPendingWrites.offerFirst(historicalOps3);
@@ -847,15 +1046,18 @@ public final class HistoricalRegistry {
         return historicalOps4;
     }
 
-    public final void incrementOpAccessedCount(int i, int i2, String str, String str2, int i3, int i4, long j, int i5, int i6) {
+    public final void incrementOpAccessedCount(
+            int i, int i2, String str, String str2, int i3, int i4, long j, int i5, int i6) {
         synchronized (this.mInMemoryLock) {
             try {
                 if (this.mMode == 1) {
                     if (!isPersistenceInitializedMLocked()) {
                         Slog.v(LOG_TAG, "Interaction before persistence initialized");
                     } else {
-                        getUpdatedPendingHistoricalOpsMLocked(System.currentTimeMillis()).increaseAccessCount(i, i2, str, str2, i3, i4, 1L);
-                        this.mDiscreteRegistry.recordDiscreteAccess(i2, i, i4, i3, i5, i6, j, -1L, str, str2);
+                        getUpdatedPendingHistoricalOpsMLocked(System.currentTimeMillis())
+                                .increaseAccessCount(i, i2, str, str2, i3, i4, 1L);
+                        this.mDiscreteRegistry.recordDiscreteAccess(
+                                i2, i, i4, i3, i5, i6, j, -1L, str, str2);
                     }
                 }
             } catch (Throwable th) {
@@ -880,16 +1082,22 @@ public final class HistoricalRegistry {
                 if (readHistoryDLocked != null) {
                     int size = readHistoryDLocked.size();
                     for (int i = 0; i < size; i++) {
-                        ((AppOpsManager.HistoricalOps) readHistoryDLocked.get(i)).offsetBeginAndEndTime(j);
+                        ((AppOpsManager.HistoricalOps) readHistoryDLocked.get(i))
+                                .offsetBeginAndEndTime(j);
                     }
                     if (j < 0) {
                         for (int size2 = readHistoryDLocked.size() - 1; size2 >= 0; size2--) {
-                            AppOpsManager.HistoricalOps historicalOps = (AppOpsManager.HistoricalOps) readHistoryDLocked.get(size2);
+                            AppOpsManager.HistoricalOps historicalOps =
+                                    (AppOpsManager.HistoricalOps) readHistoryDLocked.get(size2);
                             if (historicalOps.getEndTimeMillis() <= this.mBaseSnapshotInterval) {
                                 readHistoryDLocked.remove(size2);
-                            } else if (historicalOps.getBeginTimeMillis() < this.mBaseSnapshotInterval) {
+                            } else if (historicalOps.getBeginTimeMillis()
+                                    < this.mBaseSnapshotInterval) {
                                 AtomicDirectory atomicDirectory = Persistence.sHistoricalAppOpsDir;
-                                historicalOps.spliceFromBeginning((historicalOps.getEndTimeMillis() - this.mBaseSnapshotInterval) / historicalOps.getDurationMillis());
+                                historicalOps.spliceFromBeginning(
+                                        (historicalOps.getEndTimeMillis()
+                                                        - this.mBaseSnapshotInterval)
+                                                / historicalOps.getDurationMillis());
                             }
                         }
                     }
@@ -908,7 +1116,10 @@ public final class HistoricalRegistry {
                     this.mPendingWrites.clear();
                     long j = this.mPendingHistoryOffsetMillis;
                     if (j != 0) {
-                        this.mPersistence = new Persistence(this.mBaseSnapshotInterval, this.mIntervalCompressionMultiplier);
+                        this.mPersistence =
+                                new Persistence(
+                                        this.mBaseSnapshotInterval,
+                                        this.mIntervalCompressionMultiplier);
                         offsetHistory(j);
                         this.mPendingHistoryOffsetMillis = 0L;
                     }
@@ -931,9 +1142,12 @@ public final class HistoricalRegistry {
                 }
                 int size = arrayList.size();
                 for (int i = 0; i < size; i++) {
-                    AppOpsManager.HistoricalOps historicalOps = (AppOpsManager.HistoricalOps) arrayList.get(i);
+                    AppOpsManager.HistoricalOps historicalOps =
+                            (AppOpsManager.HistoricalOps) arrayList.get(i);
                     if (i > 0) {
-                        historicalOps.offsetBeginAndEndTime(((AppOpsManager.HistoricalOps) arrayList.get(i - 1)).getBeginTimeMillis());
+                        historicalOps.offsetBeginAndEndTime(
+                                ((AppOpsManager.HistoricalOps) arrayList.get(i - 1))
+                                        .getBeginTimeMillis());
                     }
                 }
                 this.mPersistence.persistHistoricalOpsDLocked(list);
@@ -948,7 +1162,14 @@ public final class HistoricalRegistry {
         synchronized (this.mOnDiskLock) {
             synchronized (this.mInMemoryLock) {
                 try {
-                    Slog.i(LOG_TAG, "New history parameters: mode:" + AppOpsManager.historicalModeToString(i) + " baseSnapshotInterval:" + j + " intervalCompressionMultiplier:" + j2);
+                    Slog.i(
+                            LOG_TAG,
+                            "New history parameters: mode:"
+                                    + AppOpsManager.historicalModeToString(i)
+                                    + " baseSnapshotInterval:"
+                                    + j
+                                    + " intervalCompressionMultiplier:"
+                                    + j2);
                     boolean z2 = true;
                     if (this.mMode != i) {
                         this.mMode = i;
@@ -971,7 +1192,10 @@ public final class HistoricalRegistry {
                         z2 = z;
                     }
                     if (z2) {
-                        this.mPersistence = new Persistence(this.mBaseSnapshotInterval, this.mIntervalCompressionMultiplier);
+                        this.mPersistence =
+                                new Persistence(
+                                        this.mBaseSnapshotInterval,
+                                        this.mIntervalCompressionMultiplier);
                         offsetHistory(0L);
                     }
                 } catch (Throwable th) {
@@ -984,30 +1208,47 @@ public final class HistoricalRegistry {
     public final void systemReady(final ContentResolver contentResolver) {
         final DiscreteRegistry discreteRegistry = this.mDiscreteRegistry;
         discreteRegistry.getClass();
-        DeviceConfig.addOnPropertiesChangedListener("privacy", AsyncTask.THREAD_POOL_EXECUTOR, new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.server.appop.DiscreteRegistry$$ExternalSyntheticLambda0
-            public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                DiscreteRegistry.this.setDiscreteHistoryParameters(properties);
-            }
-        });
-        discreteRegistry.setDiscreteHistoryParameters(DeviceConfig.getProperties("privacy", new String[0]));
-        contentResolver.registerContentObserver(Settings.Global.getUriFor("appop_history_parameters"), false, new ContentObserver(FgThread.getHandler()) { // from class: com.android.server.appop.HistoricalRegistry.1
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z) {
-                HistoricalRegistry.this.updateParametersFromSetting(contentResolver);
-            }
-        });
+        DeviceConfig.addOnPropertiesChangedListener(
+                "privacy",
+                AsyncTask.THREAD_POOL_EXECUTOR,
+                new DeviceConfig
+                        .OnPropertiesChangedListener() { // from class:
+                                                         // com.android.server.appop.DiscreteRegistry$$ExternalSyntheticLambda0
+                    public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                        DiscreteRegistry.this.setDiscreteHistoryParameters(properties);
+                    }
+                });
+        discreteRegistry.setDiscreteHistoryParameters(
+                DeviceConfig.getProperties("privacy", new String[0]));
+        contentResolver.registerContentObserver(
+                Settings.Global.getUriFor("appop_history_parameters"),
+                false,
+                new ContentObserver(
+                        FgThread
+                                .getHandler()) { // from class:
+                                                 // com.android.server.appop.HistoricalRegistry.1
+                    @Override // android.database.ContentObserver
+                    public final void onChange(boolean z) {
+                        HistoricalRegistry.this.updateParametersFromSetting(contentResolver);
+                    }
+                });
         updateParametersFromSetting(contentResolver);
         synchronized (this.mOnDiskLock) {
             synchronized (this.mInMemoryLock) {
                 try {
                     if (this.mMode != 0) {
                         if (!isPersistenceInitializedMLocked()) {
-                            this.mPersistence = new Persistence(this.mBaseSnapshotInterval, this.mIntervalCompressionMultiplier);
+                            this.mPersistence =
+                                    new Persistence(
+                                            this.mBaseSnapshotInterval,
+                                            this.mIntervalCompressionMultiplier);
                         }
                         this.mPersistence.getClass();
-                        long lastPersistTimeMillisDLocked = Persistence.getLastPersistTimeMillisDLocked();
+                        long lastPersistTimeMillisDLocked =
+                                Persistence.getLastPersistTimeMillisDLocked();
                         if (lastPersistTimeMillisDLocked > 0) {
-                            this.mPendingHistoryOffsetMillis = System.currentTimeMillis() - lastPersistTimeMillisDLocked;
+                            this.mPendingHistoryOffsetMillis =
+                                    System.currentTimeMillis() - lastPersistTimeMillisDLocked;
                         }
                     }
                 } catch (Throwable th) {
@@ -1033,12 +1274,16 @@ public final class HistoricalRegistry {
             if (i >= length) {
                 if (str != null && str2 != null && str3 != null) {
                     try {
-                        setHistoryParameters(AppOpsManager.parseHistoricalMode(str), Long.parseLong(str2), Integer.parseInt(str3));
+                        setHistoryParameters(
+                                AppOpsManager.parseHistoricalMode(str),
+                                Long.parseLong(str2),
+                                Integer.parseInt(str3));
                         return;
                     } catch (NumberFormatException unused) {
                     }
                 }
-                PinnerService$$ExternalSyntheticOutline0.m("Bad value forappop_history_parameters=", string, " resetting!", str4);
+                PinnerService$$ExternalSyntheticOutline0.m(
+                        "Bad value forappop_history_parameters=", string, " resetting!", str4);
                 return;
             }
             String str5 = split[i];

@@ -1,6 +1,7 @@
 package com.android.internal.widget.remotecompose.core.operations;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.widget.remotecompose.core.CompanionOperation;
 import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
@@ -8,6 +9,7 @@ import com.android.internal.widget.remotecompose.core.VariableSupport;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
 import com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression;
 import com.android.internal.widget.remotecompose.core.operations.utilities.easing.FloatAnimation;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,7 +56,10 @@ public class FloatExpression implements Operation, VariableSupport {
             }
         }
         if (value_changed && this.mFloatAnimation != null) {
-            float v2 = this.mExp.eval(Arrays.copyOf(this.mPreCalcValue, this.mPreCalcValue.length), new float[0]);
+            float v2 =
+                    this.mExp.eval(
+                            Arrays.copyOf(this.mPreCalcValue, this.mPreCalcValue.length),
+                            new float[0]);
             if (Float.isNaN(this.mFloatAnimation.getTargetValue())) {
                 this.mFloatAnimation.setInitialValue(v2);
             } else {
@@ -85,7 +90,11 @@ public class FloatExpression implements Operation, VariableSupport {
             float f = this.mFloatAnimation.get(t - this.mLastChange);
             context.loadFloat(this.mId, f);
         } else {
-            context.loadFloat(this.mId, this.mExp.eval(Arrays.copyOf(this.mPreCalcValue, this.mPreCalcValue.length), new float[0]));
+            context.loadFloat(
+                    this.mId,
+                    this.mExp.eval(
+                            Arrays.copyOf(this.mPreCalcValue, this.mPreCalcValue.length),
+                            new float[0]));
         }
     }
 
@@ -98,15 +107,21 @@ public class FloatExpression implements Operation, VariableSupport {
         String[] labels = new String[this.mSrcValue.length];
         for (int i = 0; i < this.mSrcValue.length; i++) {
             if (Float.isNaN(this.mSrcValue[i])) {
-                labels[i] = NavigationBarInflaterView.SIZE_MOD_START + Utils.idFromNan(this.mSrcValue[i]) + NavigationBarInflaterView.SIZE_MOD_END;
+                labels[i] =
+                        NavigationBarInflaterView.SIZE_MOD_START
+                                + Utils.idFromNan(this.mSrcValue[i])
+                                + NavigationBarInflaterView.SIZE_MOD_END;
             }
         }
-        return "FloatExpression[" + this.mId + "] = (" + AnimatedFloatExpression.toString(this.mPreCalcValue, labels) + NavigationBarInflaterView.KEY_CODE_END;
+        return "FloatExpression["
+                + this.mId
+                + "] = ("
+                + AnimatedFloatExpression.toString(this.mPreCalcValue, labels)
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public String name() {

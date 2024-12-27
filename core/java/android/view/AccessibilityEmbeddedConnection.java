@@ -4,6 +4,7 @@ import android.graphics.Matrix;
 import android.os.IBinder;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.IAccessibilityEmbeddedConnection;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes4.dex */
@@ -19,7 +20,8 @@ final class AccessibilityEmbeddedConnection extends IAccessibilityEmbeddedConnec
     public IBinder associateEmbeddedHierarchy(IBinder host, int hostViewId) {
         ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
         if (viewRootImpl != null) {
-            AccessibilityManager accessibilityManager = AccessibilityManager.getInstance(viewRootImpl.mContext);
+            AccessibilityManager accessibilityManager =
+                    AccessibilityManager.getInstance(viewRootImpl.mContext);
             viewRootImpl.mAttachInfo.mLeashedParentToken = host;
             viewRootImpl.mAttachInfo.mLeashedParentAccessibilityViewId = hostViewId;
             if (accessibilityManager.isEnabled()) {
@@ -34,7 +36,8 @@ final class AccessibilityEmbeddedConnection extends IAccessibilityEmbeddedConnec
     public void disassociateEmbeddedHierarchy() {
         ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
         if (viewRootImpl != null) {
-            AccessibilityManager accessibilityManager = AccessibilityManager.getInstance(viewRootImpl.mContext);
+            AccessibilityManager accessibilityManager =
+                    AccessibilityManager.getInstance(viewRootImpl.mContext);
             viewRootImpl.mAttachInfo.mLeashedParentToken = null;
             viewRootImpl.mAttachInfo.mLeashedParentAccessibilityViewId = -1;
             if (accessibilityManager.isEnabled()) {

@@ -1,6 +1,7 @@
 package com.samsung.android.service.ProtectedATCommand;
 
 import android.util.Slog;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
@@ -64,7 +65,8 @@ public class Packet {
     }
 
     public byte[] getItem(int itemType) {
-        ByteBuffer byteBuffer = ByteBuffer.allocate(512).order(ByteOrder.LITTLE_ENDIAN).put(this.mBuffer);
+        ByteBuffer byteBuffer =
+                ByteBuffer.allocate(512).order(ByteOrder.LITTLE_ENDIAN).put(this.mBuffer);
         byteBuffer.position(3);
         int itemCount = byteBuffer.get(byteBuffer.position());
         byteBuffer.position(byteBuffer.position() + 1);
@@ -98,7 +100,8 @@ public class Packet {
     }
 
     private <T> byte[] putItem(T item, int itemType) {
-        ByteBuffer byteBuffer = ByteBuffer.allocate(512).order(ByteOrder.LITTLE_ENDIAN).put(this.mBuffer);
+        ByteBuffer byteBuffer =
+                ByteBuffer.allocate(512).order(ByteOrder.LITTLE_ENDIAN).put(this.mBuffer);
         byteBuffer.position(this.mSize);
         switch (itemType) {
             case 3:

@@ -1,11 +1,13 @@
 package com.android.server.am;
 
 import android.util.Slog;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.LocalManagerRegistry;
 import com.android.server.pm.DexOptHelper;
 import com.android.server.pm.PackageManagerLocal;
 import com.android.server.pm.dex.DexoptOptions;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,10 +42,20 @@ public final class CrashDetectionAndOptimization {
             }
             arrayList.add(str);
             try {
-                PackageManagerLocal.FilteredSnapshot withFilteredSnapshot = ((PackageManagerLocal) LocalManagerRegistry.getManager(PackageManagerLocal.class)).withFilteredSnapshot();
+                PackageManagerLocal.FilteredSnapshot withFilteredSnapshot =
+                        ((PackageManagerLocal)
+                                        LocalManagerRegistry.getManager(PackageManagerLocal.class))
+                                .withFilteredSnapshot();
                 try {
                     Slog.i("CRASH_DEXOPT", "Try to re-compile: " + str2);
-                    if (DexOptHelper.getArtManagerLocal().dexoptPackage(withFilteredSnapshot, str2, new DexoptOptions(24, 1031, str2, "speed-profile", null).convertToDexoptParams(0)).getFinalStatus() == 30) {
+                    if (DexOptHelper.getArtManagerLocal()
+                                    .dexoptPackage(
+                                            withFilteredSnapshot,
+                                            str2,
+                                            new DexoptOptions(24, 1031, str2, "speed-profile", null)
+                                                    .convertToDexoptParams(0))
+                                    .getFinalStatus()
+                            == 30) {
                         Slog.i("CRASH_DEXOPT", "dexopt fail: " + str2);
                     }
                     if (withFilteredSnapshot != null) {
@@ -52,7 +64,11 @@ public final class CrashDetectionAndOptimization {
                 } finally {
                 }
             } catch (Exception e) {
-                StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Assume processing was successful and ignore the package: ", str2, " (");
+                StringBuilder m =
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "Assume processing was successful and ignore the package: ",
+                                str2,
+                                " (");
                 m.append(e.getMessage());
                 m.append(")");
                 Slog.i("CRASH_DEXOPT", m.toString());
@@ -67,7 +83,8 @@ public final class CrashDetectionAndOptimization {
                 return;
             }
             String str2 = this.processRecord.info.packageName;
-            Iterator it = ((ArrayList) CrashDetectionAndOptimization.dexOptimizedPackages).iterator();
+            Iterator it =
+                    ((ArrayList) CrashDetectionAndOptimization.dexOptimizedPackages).iterator();
             while (it.hasNext()) {
                 if (((String) it.next()).contains(str2)) {
                     return;
@@ -82,9 +99,12 @@ public final class CrashDetectionAndOptimization {
                     while (true) {
                         if (it2.hasNext()) {
                             CrashPackage crashPackage = (CrashPackage) it2.next();
-                            if (crashPackage != null && (str = crashPackage.packageName) != null && str.equals(str2)) {
+                            if (crashPackage != null
+                                    && (str = crashPackage.packageName) != null
+                                    && str.equals(str2)) {
                                 if ((currentTimeMillis - crashPackage.mTimeStamp) / 1000 >= 240) {
-                                    ((ArrayList) CrashDetectionAndOptimization.crashPackages).remove(crashPackage);
+                                    ((ArrayList) CrashDetectionAndOptimization.crashPackages)
+                                            .remove(crashPackage);
                                 } else {
                                     int i = crashPackage.crashCount + 1;
                                     crashPackage.crashCount = i;

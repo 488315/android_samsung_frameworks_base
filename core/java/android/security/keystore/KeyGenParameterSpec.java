@@ -2,12 +2,14 @@ package android.security.keystore;
 
 import android.annotation.SystemApi;
 import android.text.TextUtils;
+
 import java.math.BigInteger;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes3.dex */
@@ -47,13 +49,50 @@ public final class KeyGenParameterSpec implements AlgorithmParameterSpec, UserAu
     private final int mUserAuthenticationValidityDurationSeconds;
     private final boolean mUserConfirmationRequired;
     private final boolean mUserPresenceRequired;
-    private static final X500Principal DEFAULT_ATTESTATION_CERT_SUBJECT = new X500Principal("CN=Android Keystore Key");
-    private static final X500Principal DEFAULT_SELF_SIGNED_CERT_SUBJECT = new X500Principal("CN=Fake");
+    private static final X500Principal DEFAULT_ATTESTATION_CERT_SUBJECT =
+            new X500Principal("CN=Android Keystore Key");
+    private static final X500Principal DEFAULT_SELF_SIGNED_CERT_SUBJECT =
+            new X500Principal("CN=Fake");
     private static final BigInteger DEFAULT_CERT_SERIAL_NUMBER = new BigInteger("1");
     private static final Date DEFAULT_CERT_NOT_BEFORE = new Date(0);
     private static final Date DEFAULT_CERT_NOT_AFTER = new Date(2461449600000L);
 
-    public KeyGenParameterSpec(String keyStoreAlias, int namespace, int keySize, AlgorithmParameterSpec spec, X500Principal certificateSubject, BigInteger certificateSerialNumber, Date certificateNotBefore, Date certificateNotAfter, Date keyValidityStart, Date keyValidityForOriginationEnd, Date keyValidityForConsumptionEnd, int purposes, String[] digests, Set<String> mgf1Digests, String[] encryptionPaddings, String[] signaturePaddings, String[] blockModes, boolean randomizedEncryptionRequired, boolean userAuthenticationRequired, int userAuthenticationValidityDurationSeconds, int userAuthenticationType, boolean userPresenceRequired, byte[] attestationChallenge, boolean devicePropertiesAttestationIncluded, int[] attestationIds, boolean uniqueIdIncluded, boolean userAuthenticationValidWhileOnBody, boolean invalidatedByBiometricEnrollment, boolean isStrongBoxBacked, boolean userConfirmationRequired, boolean unlockedDeviceRequired, boolean criticalToDeviceEncryption, int maxUsageCount, String attestKeyAlias, long boundToSecureUserId) {
+    public KeyGenParameterSpec(
+            String keyStoreAlias,
+            int namespace,
+            int keySize,
+            AlgorithmParameterSpec spec,
+            X500Principal certificateSubject,
+            BigInteger certificateSerialNumber,
+            Date certificateNotBefore,
+            Date certificateNotAfter,
+            Date keyValidityStart,
+            Date keyValidityForOriginationEnd,
+            Date keyValidityForConsumptionEnd,
+            int purposes,
+            String[] digests,
+            Set<String> mgf1Digests,
+            String[] encryptionPaddings,
+            String[] signaturePaddings,
+            String[] blockModes,
+            boolean randomizedEncryptionRequired,
+            boolean userAuthenticationRequired,
+            int userAuthenticationValidityDurationSeconds,
+            int userAuthenticationType,
+            boolean userPresenceRequired,
+            byte[] attestationChallenge,
+            boolean devicePropertiesAttestationIncluded,
+            int[] attestationIds,
+            boolean uniqueIdIncluded,
+            boolean userAuthenticationValidWhileOnBody,
+            boolean invalidatedByBiometricEnrollment,
+            boolean isStrongBoxBacked,
+            boolean userConfirmationRequired,
+            boolean unlockedDeviceRequired,
+            boolean criticalToDeviceEncryption,
+            int maxUsageCount,
+            String attestKeyAlias,
+            long boundToSecureUserId) {
         X500Principal certificateSubject2;
         Date certificateNotBefore2;
         Date certificateNotAfter2;
@@ -100,8 +139,10 @@ public final class KeyGenParameterSpec implements AlgorithmParameterSpec, UserAu
         this.mPurposes = purposes;
         this.mDigests = ArrayUtils.cloneIfNotEmpty(digests);
         this.mMgf1Digests = mgf1Digests != null ? mgf1Digests : Collections.emptySet();
-        this.mEncryptionPaddings = ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(encryptionPaddings));
-        this.mSignaturePaddings = ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(signaturePaddings));
+        this.mEncryptionPaddings =
+                ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(encryptionPaddings));
+        this.mSignaturePaddings =
+                ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(signaturePaddings));
         this.mBlockModes = ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(blockModes));
         this.mRandomizedEncryptionRequired = randomizedEncryptionRequired;
         this.mUserAuthenticationRequired = userAuthenticationRequired;
@@ -132,7 +173,8 @@ public final class KeyGenParameterSpec implements AlgorithmParameterSpec, UserAu
         try {
             return KeyProperties.namespaceToLegacyUid(this.mNamespace);
         } catch (IllegalArgumentException e) {
-            throw new IllegalStateException("getUid called on KeyGenParameterSpec with non legacy keystore namespace.", e);
+            throw new IllegalStateException(
+                    "getUid called on KeyGenParameterSpec with non legacy keystore namespace.", e);
         }
     }
 
@@ -387,15 +429,19 @@ public final class KeyGenParameterSpec implements AlgorithmParameterSpec, UserAu
             this.mBlockModes = sourceSpec.getBlockModes();
             this.mRandomizedEncryptionRequired = sourceSpec.isRandomizedEncryptionRequired();
             this.mUserAuthenticationRequired = sourceSpec.isUserAuthenticationRequired();
-            this.mUserAuthenticationValidityDurationSeconds = sourceSpec.getUserAuthenticationValidityDurationSeconds();
+            this.mUserAuthenticationValidityDurationSeconds =
+                    sourceSpec.getUserAuthenticationValidityDurationSeconds();
             this.mUserAuthenticationType = sourceSpec.getUserAuthenticationType();
             this.mUserPresenceRequired = sourceSpec.isUserPresenceRequired();
             this.mAttestationChallenge = sourceSpec.getAttestationChallenge();
-            this.mDevicePropertiesAttestationIncluded = sourceSpec.isDevicePropertiesAttestationIncluded();
+            this.mDevicePropertiesAttestationIncluded =
+                    sourceSpec.isDevicePropertiesAttestationIncluded();
             this.mAttestationIds = sourceSpec.getAttestationIds();
             this.mUniqueIdIncluded = sourceSpec.isUniqueIdIncluded();
-            this.mUserAuthenticationValidWhileOnBody = sourceSpec.isUserAuthenticationValidWhileOnBody();
-            this.mInvalidatedByBiometricEnrollment = sourceSpec.isInvalidatedByBiometricEnrollment();
+            this.mUserAuthenticationValidWhileOnBody =
+                    sourceSpec.isUserAuthenticationValidWhileOnBody();
+            this.mInvalidatedByBiometricEnrollment =
+                    sourceSpec.isInvalidatedByBiometricEnrollment();
             this.mIsStrongBoxBacked = sourceSpec.isStrongBoxBacked();
             this.mUserConfirmationRequired = sourceSpec.isUserConfirmationRequired();
             this.mUnlockedDeviceRequired = sourceSpec.isUnlockedDeviceRequired();
@@ -557,7 +603,8 @@ public final class KeyGenParameterSpec implements AlgorithmParameterSpec, UserAu
             return this;
         }
 
-        public Builder setDevicePropertiesAttestationIncluded(boolean devicePropertiesAttestationIncluded) {
+        public Builder setDevicePropertiesAttestationIncluded(
+                boolean devicePropertiesAttestationIncluded) {
             this.mDevicePropertiesAttestationIncluded = devicePropertiesAttestationIncluded;
             return this;
         }
@@ -617,7 +664,42 @@ public final class KeyGenParameterSpec implements AlgorithmParameterSpec, UserAu
         }
 
         public KeyGenParameterSpec build() {
-            return new KeyGenParameterSpec(this.mKeystoreAlias, this.mNamespace, this.mKeySize, this.mSpec, this.mCertificateSubject, this.mCertificateSerialNumber, this.mCertificateNotBefore, this.mCertificateNotAfter, this.mKeyValidityStart, this.mKeyValidityForOriginationEnd, this.mKeyValidityForConsumptionEnd, this.mPurposes, this.mDigests, this.mMgf1Digests, this.mEncryptionPaddings, this.mSignaturePaddings, this.mBlockModes, this.mRandomizedEncryptionRequired, this.mUserAuthenticationRequired, this.mUserAuthenticationValidityDurationSeconds, this.mUserAuthenticationType, this.mUserPresenceRequired, this.mAttestationChallenge, this.mDevicePropertiesAttestationIncluded, this.mAttestationIds, this.mUniqueIdIncluded, this.mUserAuthenticationValidWhileOnBody, this.mInvalidatedByBiometricEnrollment, this.mIsStrongBoxBacked, this.mUserConfirmationRequired, this.mUnlockedDeviceRequired, this.mCriticalToDeviceEncryption, this.mMaxUsageCount, this.mAttestKeyAlias, this.mBoundToSecureUserId);
+            return new KeyGenParameterSpec(
+                    this.mKeystoreAlias,
+                    this.mNamespace,
+                    this.mKeySize,
+                    this.mSpec,
+                    this.mCertificateSubject,
+                    this.mCertificateSerialNumber,
+                    this.mCertificateNotBefore,
+                    this.mCertificateNotAfter,
+                    this.mKeyValidityStart,
+                    this.mKeyValidityForOriginationEnd,
+                    this.mKeyValidityForConsumptionEnd,
+                    this.mPurposes,
+                    this.mDigests,
+                    this.mMgf1Digests,
+                    this.mEncryptionPaddings,
+                    this.mSignaturePaddings,
+                    this.mBlockModes,
+                    this.mRandomizedEncryptionRequired,
+                    this.mUserAuthenticationRequired,
+                    this.mUserAuthenticationValidityDurationSeconds,
+                    this.mUserAuthenticationType,
+                    this.mUserPresenceRequired,
+                    this.mAttestationChallenge,
+                    this.mDevicePropertiesAttestationIncluded,
+                    this.mAttestationIds,
+                    this.mUniqueIdIncluded,
+                    this.mUserAuthenticationValidWhileOnBody,
+                    this.mInvalidatedByBiometricEnrollment,
+                    this.mIsStrongBoxBacked,
+                    this.mUserConfirmationRequired,
+                    this.mUnlockedDeviceRequired,
+                    this.mCriticalToDeviceEncryption,
+                    this.mMaxUsageCount,
+                    this.mAttestKeyAlias,
+                    this.mBoundToSecureUserId);
         }
     }
 }

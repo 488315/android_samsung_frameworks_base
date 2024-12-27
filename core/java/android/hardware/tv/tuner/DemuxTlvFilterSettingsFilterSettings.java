@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class DemuxTlvFilterSettingsFilterSettings implements Parcelable {
-    public static final Parcelable.Creator<DemuxTlvFilterSettingsFilterSettings> CREATOR = new Parcelable.Creator<DemuxTlvFilterSettingsFilterSettings>() { // from class: android.hardware.tv.tuner.DemuxTlvFilterSettingsFilterSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxTlvFilterSettingsFilterSettings createFromParcel(Parcel _aidl_source) {
-            return new DemuxTlvFilterSettingsFilterSettings(_aidl_source);
-        }
+    public static final Parcelable.Creator<DemuxTlvFilterSettingsFilterSettings> CREATOR =
+            new Parcelable.Creator<DemuxTlvFilterSettingsFilterSettings>() { // from class:
+                // android.hardware.tv.tuner.DemuxTlvFilterSettingsFilterSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxTlvFilterSettingsFilterSettings createFromParcel(Parcel _aidl_source) {
+                    return new DemuxTlvFilterSettingsFilterSettings(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxTlvFilterSettingsFilterSettings[] newArray(int _aidl_size) {
-            return new DemuxTlvFilterSettingsFilterSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxTlvFilterSettingsFilterSettings[] newArray(int _aidl_size) {
+                    return new DemuxTlvFilterSettingsFilterSettings[_aidl_size];
+                }
+            };
     public static final int bPassthrough = 2;
     public static final int noinit = 0;
     public static final int section = 1;
@@ -116,7 +118,9 @@ public final class DemuxTlvFilterSettingsFilterSettings implements Parcelable {
                 _set(_aidl_tag, Boolean.valueOf(_aidl_value));
                 return;
             case 1:
-                DemuxFilterSectionSettings _aidl_value2 = (DemuxFilterSectionSettings) _aidl_parcel.readTypedObject(DemuxFilterSectionSettings.CREATOR);
+                DemuxFilterSectionSettings _aidl_value2 =
+                        (DemuxFilterSectionSettings)
+                                _aidl_parcel.readTypedObject(DemuxFilterSectionSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
@@ -148,7 +152,12 @@ public final class DemuxTlvFilterSettingsFilterSettings implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

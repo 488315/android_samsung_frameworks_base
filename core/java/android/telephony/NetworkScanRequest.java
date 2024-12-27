@@ -2,6 +2,7 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -10,19 +11,21 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class NetworkScanRequest implements Parcelable {
-    public static final Parcelable.Creator<NetworkScanRequest> CREATOR = new Parcelable.Creator<NetworkScanRequest>() { // from class: android.telephony.NetworkScanRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkScanRequest createFromParcel(Parcel in) {
-            return new NetworkScanRequest(in);
-        }
+    public static final Parcelable.Creator<NetworkScanRequest> CREATOR =
+            new Parcelable.Creator<
+                    NetworkScanRequest>() { // from class: android.telephony.NetworkScanRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkScanRequest createFromParcel(Parcel in) {
+                    return new NetworkScanRequest(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkScanRequest[] newArray(int size) {
-            return new NetworkScanRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkScanRequest[] newArray(int size) {
+                    return new NetworkScanRequest[size];
+                }
+            };
     public static final int MAX_BANDS = 8;
     public static final int MAX_CHANNELS = 32;
     public static final int MAX_INCREMENTAL_PERIODICITY_SEC = 10;
@@ -44,10 +47,16 @@ public final class NetworkScanRequest implements Parcelable {
     private RadioAccessSpecifier[] mSpecifiers;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScanType {
-    }
+    public @interface ScanType {}
 
-    public NetworkScanRequest(int scanType, RadioAccessSpecifier[] specifiers, int searchPeriodicity, int maxSearchTime, boolean incrementalResults, int incrementalResultsPeriodicity, ArrayList<String> mccMncs) {
+    public NetworkScanRequest(
+            int scanType,
+            RadioAccessSpecifier[] specifiers,
+            int searchPeriodicity,
+            int maxSearchTime,
+            boolean incrementalResults,
+            int incrementalResultsPeriodicity,
+            ArrayList<String> mccMncs) {
         this.mScanType = scanType;
         if (specifiers != null) {
             this.mSpecifiers = (RadioAccessSpecifier[]) specifiers.clone();
@@ -114,7 +123,10 @@ public final class NetworkScanRequest implements Parcelable {
 
     private NetworkScanRequest(Parcel in) {
         this.mScanType = in.readInt();
-        Parcelable[] tempSpecifiers = (Parcelable[]) in.readParcelableArray(Object.class.getClassLoader(), RadioAccessSpecifier.class);
+        Parcelable[] tempSpecifiers =
+                (Parcelable[])
+                        in.readParcelableArray(
+                                Object.class.getClassLoader(), RadioAccessSpecifier.class);
         if (tempSpecifiers != null) {
             this.mSpecifiers = new RadioAccessSpecifier[tempSpecifiers.length];
             for (int i = 0; i < tempSpecifiers.length; i++) {
@@ -139,10 +151,22 @@ public final class NetworkScanRequest implements Parcelable {
             return false;
         }
         NetworkScanRequest nsr = (NetworkScanRequest) other;
-        return this.mScanType == nsr.mScanType && Arrays.equals(this.mSpecifiers, nsr.mSpecifiers) && this.mSearchPeriodicity == nsr.mSearchPeriodicity && this.mMaxSearchTime == nsr.mMaxSearchTime && this.mIncrementalResults == nsr.mIncrementalResults && this.mIncrementalResultsPeriodicity == nsr.mIncrementalResultsPeriodicity && Objects.equals(this.mMccMncs, nsr.mMccMncs);
+        return this.mScanType == nsr.mScanType
+                && Arrays.equals(this.mSpecifiers, nsr.mSpecifiers)
+                && this.mSearchPeriodicity == nsr.mSearchPeriodicity
+                && this.mMaxSearchTime == nsr.mMaxSearchTime
+                && this.mIncrementalResults == nsr.mIncrementalResults
+                && this.mIncrementalResultsPeriodicity == nsr.mIncrementalResultsPeriodicity
+                && Objects.equals(this.mMccMncs, nsr.mMccMncs);
     }
 
     public int hashCode() {
-        return (this.mScanType * 31) + (Arrays.hashCode(this.mSpecifiers) * 37) + (this.mSearchPeriodicity * 41) + (this.mMaxSearchTime * 43) + ((!this.mIncrementalResults ? 0 : 1) * 47) + (this.mIncrementalResultsPeriodicity * 53) + (this.mMccMncs.hashCode() * 59);
+        return (this.mScanType * 31)
+                + (Arrays.hashCode(this.mSpecifiers) * 37)
+                + (this.mSearchPeriodicity * 41)
+                + (this.mMaxSearchTime * 43)
+                + ((!this.mIncrementalResults ? 0 : 1) * 47)
+                + (this.mIncrementalResultsPeriodicity * 53)
+                + (this.mMccMncs.hashCode() * 59);
     }
 }

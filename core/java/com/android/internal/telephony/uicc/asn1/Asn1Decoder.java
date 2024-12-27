@@ -1,6 +1,7 @@
 package com.android.internal.telephony.uicc.asn1;
 
 import com.android.internal.telephony.uicc.IccUtils;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 
 /* loaded from: classes5.dex */
@@ -19,7 +20,13 @@ public final class Asn1Decoder {
 
     public Asn1Decoder(byte[] bytes, int offset, int length) {
         if (offset < 0 || length < 0 || offset + length > bytes.length) {
-            throw new IndexOutOfBoundsException("Out of the bounds: bytes=[" + bytes.length + "], offset=" + offset + ", length=" + length);
+            throw new IndexOutOfBoundsException(
+                    "Out of the bounds: bytes=["
+                            + bytes.length
+                            + "], offset="
+                            + offset
+                            + ", length="
+                            + length);
         }
         this.mSrc = bytes;
         this.mPosition = offset;
@@ -60,24 +67,34 @@ public final class Asn1Decoder {
                 } else {
                     int dataLen = b & 127;
                     if (offset3 + dataLen > this.mEnd) {
-                        throw new InvalidAsn1DataException(tag, "Cannot parse length at position: " + offset3);
+                        throw new InvalidAsn1DataException(
+                                tag, "Cannot parse length at position: " + offset3);
                     }
                     try {
                         int dataLen2 = IccUtils.bytesToInt(this.mSrc, offset3, dataLen);
                         offset3 += dataLen;
                         lenLen = dataLen2;
                     } catch (IllegalArgumentException e) {
-                        throw new InvalidAsn1DataException(tag, "Cannot parse length at position: " + offset3, e);
+                        throw new InvalidAsn1DataException(
+                                tag, "Cannot parse length at position: " + offset3, e);
                     }
                 }
                 if (offset3 + lenLen > this.mEnd) {
-                    throw new InvalidAsn1DataException(tag, "Incomplete data at position: " + offset3 + ", expected bytes: " + lenLen + ", actual bytes: " + (this.mEnd - offset3));
+                    throw new InvalidAsn1DataException(
+                            tag,
+                            "Incomplete data at position: "
+                                    + offset3
+                                    + ", expected bytes: "
+                                    + lenLen
+                                    + ", actual bytes: "
+                                    + (this.mEnd - offset3));
                 }
                 Asn1Node root = new Asn1Node(tag, this.mSrc, offset3, lenLen);
                 this.mPosition = offset3 + lenLen;
                 return root;
             } catch (IllegalArgumentException e2) {
-                throw new InvalidAsn1DataException(0, "Cannot parse tag at position: " + offset, e2);
+                throw new InvalidAsn1DataException(
+                        0, "Cannot parse tag at position: " + offset, e2);
             }
         }
         throw new InvalidAsn1DataException(0, "Invalid length at position: " + offset2);

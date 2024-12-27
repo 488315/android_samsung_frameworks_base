@@ -14,19 +14,24 @@ public class RingBuffer<T> {
 
     @Deprecated
     public RingBuffer(final Class<T> c, int capacity) {
-        this(new Supplier() { // from class: com.android.internal.util.RingBuffer$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                Object createNewItem;
-                createNewItem = RingBuffer.createNewItem(c);
-                return createNewItem;
-            }
-        }, new IntFunction() { // from class: com.android.internal.util.RingBuffer$$ExternalSyntheticLambda1
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i) {
-                return RingBuffer.lambda$new$1(c, i);
-            }
-        }, capacity);
+        this(
+                new Supplier() { // from class:
+                                 // com.android.internal.util.RingBuffer$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        Object createNewItem;
+                        createNewItem = RingBuffer.createNewItem(c);
+                        return createNewItem;
+                    }
+                },
+                new IntFunction() { // from class:
+                                    // com.android.internal.util.RingBuffer$$ExternalSyntheticLambda1
+                    @Override // java.util.function.IntFunction
+                    public final Object apply(int i) {
+                        return RingBuffer.lambda$new$1(c, i);
+                    }
+                },
+                capacity);
     }
 
     static /* synthetic */ Object[] lambda$new$1(Class c, int cap) {
@@ -37,7 +42,10 @@ public class RingBuffer<T> {
     public static Object createNewItem(Class c) {
         try {
             return c.getDeclaredConstructor(new Class[0]).newInstance(new Object[0]);
-        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (IllegalAccessException
+                | InstantiationException
+                | NoSuchMethodException
+                | InvocationTargetException e) {
             return null;
         }
     }

@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.FileUtils;
 import android.os.SystemProperties;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Retention;
@@ -24,15 +25,47 @@ public class PackagePartitions {
     private static final ArrayList<SystemPartition> SYSTEM_PARTITIONS;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PartitionType {
-    }
+    public @interface PartitionType {}
 
     static {
         boolean z = true;
         boolean z2 = true;
         boolean z3 = false;
         int i = 0;
-        SYSTEM_PARTITIONS = new ArrayList<>(Arrays.asList(new SystemPartition(Environment.getRootDirectory(), 0, "system", true, false), new SystemPartition(Environment.getVendorDirectory(), 1, "vendor", true, true), new SystemPartition(Environment.getOdmDirectory(), 2, Build.Partition.PARTITION_NAME_ODM, true, z), new SystemPartition(Environment.getOemDirectory(), 3, Build.Partition.PARTITION_NAME_OEM, false, z), new SystemPartition(Environment.getProductDirectory(), 4, "product", z2, z), new SystemPartition(Environment.getSystemExtDirectory(), 5, Build.Partition.PARTITION_NAME_SYSTEM_EXT, z2, z), new SystemPartition(new File("/prism"), i, "prism", z2, z3), new SystemPartition(new File(Environment.getRootDirectory(), "carrier"), i, "carrier", z2, z3)));
+        SYSTEM_PARTITIONS =
+                new ArrayList<>(
+                        Arrays.asList(
+                                new SystemPartition(
+                                        Environment.getRootDirectory(), 0, "system", true, false),
+                                new SystemPartition(
+                                        Environment.getVendorDirectory(), 1, "vendor", true, true),
+                                new SystemPartition(
+                                        Environment.getOdmDirectory(),
+                                        2,
+                                        Build.Partition.PARTITION_NAME_ODM,
+                                        true,
+                                        z),
+                                new SystemPartition(
+                                        Environment.getOemDirectory(),
+                                        3,
+                                        Build.Partition.PARTITION_NAME_OEM,
+                                        false,
+                                        z),
+                                new SystemPartition(
+                                        Environment.getProductDirectory(), 4, "product", z2, z),
+                                new SystemPartition(
+                                        Environment.getSystemExtDirectory(),
+                                        5,
+                                        Build.Partition.PARTITION_NAME_SYSTEM_EXT,
+                                        z2,
+                                        z),
+                                new SystemPartition(new File("/prism"), i, "prism", z2, z3),
+                                new SystemPartition(
+                                        new File(Environment.getRootDirectory(), "carrier"),
+                                        i,
+                                        "carrier",
+                                        z2,
+                                        z3)));
     }
 
     public static <T> ArrayList<T> getOrderedPartitions(Function<SystemPartition, T> producer) {
@@ -104,7 +137,12 @@ public class PackagePartitions {
         }
 
         public SystemPartition(File rootFolder, SystemPartition partition) {
-            this(rootFolder, partition.type, partition.mName, partition.mPrivAppFolder != null, partition.mOverlayFolder != null);
+            this(
+                    rootFolder,
+                    partition.type,
+                    partition.mName,
+                    partition.mPrivAppFolder != null,
+                    partition.mOverlayFolder != null);
         }
 
         public String getName() {
@@ -149,15 +187,23 @@ public class PackagePartitions {
         }
 
         public boolean containsPrivApp(File scanFile) {
-            return this.mPrivAppFolder != null && FileUtils.contains(this.mPrivAppFolder.getFile(), PackagePartitions.canonicalize(scanFile));
+            return this.mPrivAppFolder != null
+                    && FileUtils.contains(
+                            this.mPrivAppFolder.getFile(),
+                            PackagePartitions.canonicalize(scanFile));
         }
 
         public boolean containsApp(File scanFile) {
-            return this.mAppFolder != null && FileUtils.contains(this.mAppFolder.getFile(), PackagePartitions.canonicalize(scanFile));
+            return this.mAppFolder != null
+                    && FileUtils.contains(
+                            this.mAppFolder.getFile(), PackagePartitions.canonicalize(scanFile));
         }
 
         public boolean containsOverlay(File scanFile) {
-            return this.mOverlayFolder != null && FileUtils.contains(this.mOverlayFolder.getFile(), PackagePartitions.canonicalize(scanFile));
+            return this.mOverlayFolder != null
+                    && FileUtils.contains(
+                            this.mOverlayFolder.getFile(),
+                            PackagePartitions.canonicalize(scanFile));
         }
     }
 

@@ -7,8 +7,7 @@ public class BargeInEngineWrapper {
     private static final String TAG = BargeInEngineWrapper.class.getSimpleName();
     private static BargeInEngine uniqueInstance;
 
-    private BargeInEngineWrapper() {
-    }
+    private BargeInEngineWrapper() {}
 
     public static synchronized BargeInEngine getInstance() {
         synchronized (BargeInEngineWrapper.class) {

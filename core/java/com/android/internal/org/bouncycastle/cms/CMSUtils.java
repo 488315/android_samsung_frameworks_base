@@ -23,6 +23,7 @@ import com.android.internal.org.bouncycastle.util.Strings;
 import com.android.internal.org.bouncycastle.util.io.Streams;
 import com.android.internal.org.bouncycastle.util.io.TeeInputStream;
 import com.android.internal.org.bouncycastle.util.io.TeeOutputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -40,8 +41,7 @@ class CMSUtils {
     private static final Set ecAlgs = new HashSet();
     private static final Set gostAlgs = new HashSet();
 
-    CMSUtils() {
-    }
+    CMSUtils() {}
 
     static {
         des.add("DES");
@@ -66,13 +66,16 @@ class CMSUtils {
     }
 
     static boolean isEquivalent(AlgorithmIdentifier algId1, AlgorithmIdentifier algId2) {
-        if (algId1 == null || algId2 == null || !algId1.getAlgorithm().equals((ASN1Primitive) algId2.getAlgorithm())) {
+        if (algId1 == null
+                || algId2 == null
+                || !algId1.getAlgorithm().equals((ASN1Primitive) algId2.getAlgorithm())) {
             return false;
         }
         ASN1Encodable params1 = algId1.getParameters();
         ASN1Encodable params2 = algId2.getParameters();
         if (params1 != null) {
-            if (!params1.equals(params2) && (!params1.equals(DERNull.INSTANCE) || params2 != null)) {
+            if (!params1.equals(params2)
+                    && (!params1.equals(DERNull.INSTANCE) || params2 != null)) {
                 return false;
             }
             return true;
@@ -150,7 +153,8 @@ class CMSUtils {
         return new DERSet(v);
     }
 
-    static OutputStream createBEROctetOutputStream(OutputStream s, int tagNo, boolean isExplicit, int bufferSize) throws IOException {
+    static OutputStream createBEROctetOutputStream(
+            OutputStream s, int tagNo, boolean isExplicit, int bufferSize) throws IOException {
         BEROctetStringGenerator octGen = new BEROctetStringGenerator(s, tagNo, isExplicit);
         if (bufferSize != 0) {
             return octGen.getOctetOutputStream(new byte[bufferSize]);
@@ -207,6 +211,8 @@ class CMSUtils {
     }
 
     static OutputStream getSafeTeeOutputStream(OutputStream s1, OutputStream s2) {
-        return s1 == null ? getSafeOutputStream(s2) : s2 == null ? getSafeOutputStream(s1) : new TeeOutputStream(s1, s2);
+        return s1 == null
+                ? getSafeOutputStream(s2)
+                : s2 == null ? getSafeOutputStream(s1) : new TeeOutputStream(s1, s2);
     }
 }

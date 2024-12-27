@@ -6,12 +6,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
-import java.io.BufferedReader;
-import java.io.FileReader;
+
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -65,7 +69,9 @@ public final class IntelligentBatterySaverScpmManager {
                             JSONObject jSONObject = new JSONObject(new JSONTokener(sb.toString()));
                             boolean z = jSONObject.getBoolean("fast_drain_policy");
                             boolean z2 = jSONObject.getBoolean("google_app_policy");
-                            Log.d("IntelligentBatterySaverScpmManager", "mFastDrainPolicy = " + z + ", mGoogleAppPolicy = " + z2);
+                            Log.d(
+                                    "IntelligentBatterySaverScpmManager",
+                                    "mFastDrainPolicy = " + z + ", mGoogleAppPolicy = " + z2);
                             if (z) {
                                 saveScpmFeatures(1, "fast_drain_policy");
                             } else {
@@ -85,7 +91,9 @@ public final class IntelligentBatterySaverScpmManager {
                         } catch (Exception e2) {
                             e = e2;
                             bufferedReader = bufferedReader2;
-                            Log.e("IntelligentBatterySaverScpmManager", "Unknown exception : " + e.getMessage());
+                            Log.e(
+                                    "IntelligentBatterySaverScpmManager",
+                                    "Unknown exception : " + e.getMessage());
                             if (bufferedReader != null) {
                                 try {
                                     bufferedReader.close();
@@ -137,31 +145,44 @@ public final class IntelligentBatterySaverScpmManager {
 
     public final void registerScpm() {
         Log.d("IntelligentBatterySaverScpmManager", "registerScpm");
-        if (this.mContext.getPackageManager().resolveContentProvider(KnoxCustomManagerService.SPCM_PROVIDER_AUTHORITY, 0) != null) {
+        if (this.mContext
+                        .getPackageManager()
+                        .resolveContentProvider(KnoxCustomManagerService.SPCM_PROVIDER_AUTHORITY, 0)
+                != null) {
             try {
                 Bundle bundle = new Bundle();
                 bundle.putString("packageName", "android");
                 bundle.putString("appId", "r8namobmbc");
                 bundle.putString("version", "1.0.0");
                 bundle.putString("receiverPackageName", "android");
-                Bundle call = this.mContext.getContentResolver().call(this.SCPM_URI_V2, "register", "android", bundle);
+                Bundle call =
+                        this.mContext
+                                .getContentResolver()
+                                .call(this.SCPM_URI_V2, "register", "android", bundle);
                 if (call != null) {
                     int i = call.getInt(KnoxCustomManagerService.SPCM_KEY_RESULT, 1);
                     String string = call.getString(KnoxCustomManagerService.SPCM_KEY_TOKEN, null);
                     int i2 = call.getInt(KnoxCustomManagerService.SPCM_KEY_RESULT_CODE, -1);
-                    String string2 = call.getString(KnoxCustomManagerService.SPCM_KEY_RESULT_MESSAGE, "");
+                    String string2 =
+                            call.getString(KnoxCustomManagerService.SPCM_KEY_RESULT_MESSAGE, "");
                     if (i == 1) {
-                        SharedPreferences sharedPreferences = this.mContext.getSharedPreferences("ibs_prefs", 0);
+                        SharedPreferences sharedPreferences =
+                                this.mContext.getSharedPreferences("ibs_prefs", 0);
                         this.mPref = sharedPreferences;
                         SharedPreferences.Editor edit = sharedPreferences.edit();
                         edit.putString("SCPMToken", string);
                         edit.apply();
                     } else {
-                        Log.e("IntelligentBatterySaverScpmManager", "failed to register: rcode = " + i2 + ", rmsg = " + string2);
+                        Log.e(
+                                "IntelligentBatterySaverScpmManager",
+                                "failed to register: rcode = " + i2 + ", rmsg = " + string2);
                     }
                 }
             } catch (Exception e) {
-                RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("cannot register package : "), "IntelligentBatterySaverScpmManager");
+                RCPManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("cannot register package : "),
+                        "IntelligentBatterySaverScpmManager");
             }
         }
     }

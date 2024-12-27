@@ -3,27 +3,30 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CdmaDisplayInfoRecord implements Parcelable {
     public static final int CDMA_ALPHA_INFO_BUFFER_LENGTH = 64;
-    public static final Parcelable.Creator<CdmaDisplayInfoRecord> CREATOR = new Parcelable.Creator<CdmaDisplayInfoRecord>() { // from class: android.hardware.radio.voice.CdmaDisplayInfoRecord.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaDisplayInfoRecord createFromParcel(Parcel _aidl_source) {
-            CdmaDisplayInfoRecord _aidl_out = new CdmaDisplayInfoRecord();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CdmaDisplayInfoRecord> CREATOR =
+            new Parcelable.Creator<CdmaDisplayInfoRecord>() { // from class:
+                // android.hardware.radio.voice.CdmaDisplayInfoRecord.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaDisplayInfoRecord createFromParcel(Parcel _aidl_source) {
+                    CdmaDisplayInfoRecord _aidl_out = new CdmaDisplayInfoRecord();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaDisplayInfoRecord[] newArray(int _aidl_size) {
-            return new CdmaDisplayInfoRecord[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaDisplayInfoRecord[] newArray(int _aidl_size) {
+                    return new CdmaDisplayInfoRecord[_aidl_size];
+                }
+            };
     public String alphaBuf;
 
     @Override // android.os.Parcelable

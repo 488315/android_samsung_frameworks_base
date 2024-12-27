@@ -1,6 +1,5 @@
 package android.app.blob;
 
-import android.app.blob.IBlobCommitCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -38,7 +37,8 @@ public interface IBlobStoreSession extends IInterface {
 
     public static class Default implements IBlobStoreSession {
         @Override // android.app.blob.IBlobStoreSession
-        public ParcelFileDescriptor openWrite(long offsetBytes, long lengthBytes) throws RemoteException {
+        public ParcelFileDescriptor openWrite(long offsetBytes, long lengthBytes)
+                throws RemoteException {
             return null;
         }
 
@@ -48,19 +48,18 @@ public interface IBlobStoreSession extends IInterface {
         }
 
         @Override // android.app.blob.IBlobStoreSession
-        public void allowPackageAccess(String packageName, byte[] certificate) throws RemoteException {
-        }
+        public void allowPackageAccess(String packageName, byte[] certificate)
+                throws RemoteException {}
 
         @Override // android.app.blob.IBlobStoreSession
-        public void allowSameSignatureAccess() throws RemoteException {
-        }
+        public void allowSameSignatureAccess() throws RemoteException {}
 
         @Override // android.app.blob.IBlobStoreSession
-        public void allowPublicAccess() throws RemoteException {
-        }
+        public void allowPublicAccess() throws RemoteException {}
 
         @Override // android.app.blob.IBlobStoreSession
-        public boolean isPackageAccessAllowed(String packageName, byte[] certificate) throws RemoteException {
+        public boolean isPackageAccessAllowed(String packageName, byte[] certificate)
+                throws RemoteException {
             return false;
         }
 
@@ -80,16 +79,13 @@ public interface IBlobStoreSession extends IInterface {
         }
 
         @Override // android.app.blob.IBlobStoreSession
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.app.blob.IBlobStoreSession
-        public void abandon() throws RemoteException {
-        }
+        public void abandon() throws RemoteException {}
 
         @Override // android.app.blob.IBlobStoreSession
-        public void commit(IBlobCommitCallback callback) throws RemoteException {
-        }
+        public void commit(IBlobCommitCallback callback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -97,7 +93,7 @@ public interface IBlobStoreSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBlobStoreSession {
+    public abstract static class Stub extends Binder implements IBlobStoreSession {
         static final int TRANSACTION_abandon = 11;
         static final int TRANSACTION_allowPackageAccess = 3;
         static final int TRANSACTION_allowPublicAccess = 5;
@@ -168,7 +164,8 @@ public interface IBlobStoreSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBlobStoreSession.DESCRIPTOR);
             }
@@ -237,7 +234,8 @@ public interface IBlobStoreSession extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 12:
-                    IBlobCommitCallback _arg04 = IBlobCommitCallback.Stub.asInterface(data.readStrongBinder());
+                    IBlobCommitCallback _arg04 =
+                            IBlobCommitCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     commit(_arg04);
                     reply.writeNoException();
@@ -264,7 +262,8 @@ public interface IBlobStoreSession extends IInterface {
             }
 
             @Override // android.app.blob.IBlobStoreSession
-            public ParcelFileDescriptor openWrite(long offsetBytes, long lengthBytes) throws RemoteException {
+            public ParcelFileDescriptor openWrite(long offsetBytes, long lengthBytes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -273,7 +272,9 @@ public interface IBlobStoreSession extends IInterface {
                     _data.writeLong(lengthBytes);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -289,7 +290,9 @@ public interface IBlobStoreSession extends IInterface {
                     _data.writeInterfaceToken(IBlobStoreSession.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -298,7 +301,8 @@ public interface IBlobStoreSession extends IInterface {
             }
 
             @Override // android.app.blob.IBlobStoreSession
-            public void allowPackageAccess(String packageName, byte[] certificate) throws RemoteException {
+            public void allowPackageAccess(String packageName, byte[] certificate)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -342,7 +346,8 @@ public interface IBlobStoreSession extends IInterface {
             }
 
             @Override // android.app.blob.IBlobStoreSession
-            public boolean isPackageAccessAllowed(String packageName, byte[] certificate) throws RemoteException {
+            public boolean isPackageAccessAllowed(String packageName, byte[] certificate)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

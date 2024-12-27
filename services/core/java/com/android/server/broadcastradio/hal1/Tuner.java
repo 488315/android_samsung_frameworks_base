@@ -9,8 +9,10 @@ import android.hardware.radio.ProgramSelector;
 import android.hardware.radio.RadioManager;
 import android.os.IBinder;
 import android.os.RemoteException;
+
 import com.android.server.broadcastradio.RadioServiceUserController;
 import com.android.server.utils.Slogf;
+
 import java.util.List;
 import java.util.Map;
 
@@ -34,12 +36,15 @@ class Tuner extends ITuner.Stub {
         this.mRegion = i2;
         this.mWithAudio = z;
         this.mNativeContext = nativeInit(i, z, i3);
-        IBinder.DeathRecipient deathRecipient = new IBinder.DeathRecipient() { // from class: com.android.server.broadcastradio.hal1.Tuner$$ExternalSyntheticLambda0
-            @Override // android.os.IBinder.DeathRecipient
-            public final void binderDied() {
-                Tuner.this.close();
-            }
-        };
+        IBinder.DeathRecipient deathRecipient =
+                new IBinder
+                        .DeathRecipient() { // from class:
+                                            // com.android.server.broadcastradio.hal1.Tuner$$ExternalSyntheticLambda0
+                    @Override // android.os.IBinder.DeathRecipient
+                    public final void binderDied() {
+                        Tuner.this.close();
+                    }
+                };
         this.mDeathRecipient = deathRecipient;
         try {
             iTunerCallback.asBinder().linkToDeath(deathRecipient, 0);
@@ -132,7 +137,7 @@ class Tuner extends ITuner.Stub {
 
     public final void finalize() throws Throwable {
         nativeFinalize(this.mNativeContext);
-        super/*java.lang.Object*/.finalize();
+        super /*java.lang.Object*/.finalize();
     }
 
     public final RadioManager.BandConfig getConfiguration() {
@@ -296,7 +301,9 @@ class Tuner extends ITuner.Stub {
         if (RadioServiceUserController.isCurrentOrSystemUser()) {
             this.mTunerCallback.startProgramListUpdates(filter);
         } else {
-            Slogf.w(TAG, "Cannot start program list updates on HAL 1.x client from non-current user");
+            Slogf.w(
+                    TAG,
+                    "Cannot start program list updates on HAL 1.x client from non-current user");
         }
     }
 
@@ -321,7 +328,9 @@ class Tuner extends ITuner.Stub {
         if (RadioServiceUserController.isCurrentOrSystemUser()) {
             this.mTunerCallback.stopProgramListUpdates();
         } else {
-            Slogf.w(TAG, "Cannot stop program list updates on HAL 1.x client from non-current user");
+            Slogf.w(
+                    TAG,
+                    "Cannot stop program list updates on HAL 1.x client from non-current user");
         }
     }
 

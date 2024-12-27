@@ -2,6 +2,7 @@ package com.android.server.wm;
 
 import android.util.ArraySet;
 import android.util.SparseArray;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,13 +17,16 @@ public final class WindowProcessControllerMap {
     }
 
     public final void put(int i, WindowProcessController windowProcessController) {
-        WindowProcessController windowProcessController2 = (WindowProcessController) this.mPidMap.get(i);
+        WindowProcessController windowProcessController2 =
+                (WindowProcessController) this.mPidMap.get(i);
         if (windowProcessController2 != null) {
             removeProcessFromUidMap(windowProcessController2);
         }
         this.mPidMap.put(i, windowProcessController);
         int i2 = windowProcessController.mUid;
-        ArraySet arraySet = (ArraySet) ((HashMap) this.mUidMap).getOrDefault(Integer.valueOf(i2), new ArraySet());
+        ArraySet arraySet =
+                (ArraySet)
+                        ((HashMap) this.mUidMap).getOrDefault(Integer.valueOf(i2), new ArraySet());
         arraySet.add(windowProcessController);
         ((HashMap) this.mUidMap).put(Integer.valueOf(i2), arraySet);
     }

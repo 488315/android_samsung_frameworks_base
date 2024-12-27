@@ -3,6 +3,7 @@ package android.hardware.broadcastradio;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -41,18 +42,25 @@ public final class Properties implements Parcelable {
                                 if (parcel.dataPosition() - dataPosition < readInt) {
                                     properties.supportedIdentifierTypes = parcel.createIntArray();
                                     if (parcel.dataPosition() - dataPosition < readInt) {
-                                        properties.vendorInfo = (VendorKeyValue[]) parcel.createTypedArray(VendorKeyValue.CREATOR);
+                                        properties.vendorInfo =
+                                                (VendorKeyValue[])
+                                                        parcel.createTypedArray(
+                                                                VendorKeyValue.CREATOR);
                                         if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -110,7 +118,13 @@ public final class Properties implements Parcelable {
             return false;
         }
         Properties properties = (Properties) obj;
-        return Objects.deepEquals(this.maker, properties.maker) && Objects.deepEquals(this.product, properties.product) && Objects.deepEquals(this.version, properties.version) && Objects.deepEquals(this.serial, properties.serial) && Objects.deepEquals(this.supportedIdentifierTypes, properties.supportedIdentifierTypes) && Objects.deepEquals(this.vendorInfo, properties.vendorInfo);
+        return Objects.deepEquals(this.maker, properties.maker)
+                && Objects.deepEquals(this.product, properties.product)
+                && Objects.deepEquals(this.version, properties.version)
+                && Objects.deepEquals(this.serial, properties.serial)
+                && Objects.deepEquals(
+                        this.supportedIdentifierTypes, properties.supportedIdentifierTypes)
+                && Objects.deepEquals(this.vendorInfo, properties.vendorInfo);
     }
 
     public final int getStability() {
@@ -119,15 +133,46 @@ public final class Properties implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public final int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.maker, this.product, this.version, this.serial, this.supportedIdentifierTypes, this.vendorInfo).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.maker,
+                                this.product,
+                                this.version,
+                                this.serial,
+                                this.supportedIdentifierTypes,
+                                this.vendorInfo)
+                        .toArray());
     }
 
     public final String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        StringBuilder m = DabTableEntry$$ExternalSyntheticOutline0.m(this.serial, "supportedIdentifierTypes: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.version, "serial: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.product, "version: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.maker, "product: ", new StringBuilder("maker: "), stringJoiner), stringJoiner), stringJoiner), stringJoiner);
+        StringBuilder m =
+                DabTableEntry$$ExternalSyntheticOutline0.m(
+                        this.serial,
+                        "supportedIdentifierTypes: ",
+                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                this.version,
+                                "serial: ",
+                                DabTableEntry$$ExternalSyntheticOutline0.m(
+                                        this.product,
+                                        "version: ",
+                                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                                this.maker,
+                                                "product: ",
+                                                new StringBuilder("maker: "),
+                                                stringJoiner),
+                                        stringJoiner),
+                                stringJoiner),
+                        stringJoiner);
         m.append(IdentifierType$$.arrayToString(this.supportedIdentifierTypes));
         stringJoiner.add(m.toString());
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.vendorInfo), "Properties", new StringBuilder("vendorInfo: "), stringJoiner));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                        Arrays.toString(this.vendorInfo),
+                        "Properties",
+                        new StringBuilder("vendorInfo: "),
+                        stringJoiner));
     }
 
     @Override // android.os.Parcelable

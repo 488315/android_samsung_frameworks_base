@@ -3,6 +3,7 @@ package android.content.om.wallpapertheme;
 import android.graphics.Color;
 import android.os.Binder;
 import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -42,22 +43,25 @@ public class ThemeUtil {
         private static final String TAG = "LogWrapper";
         private static FileHandler fileHandler;
         private static Logger logger;
-        private static final SimpleDateFormat formatter = new SimpleDateFormat("MM-dd HH:mm:ss.SSS: ", Locale.getDefault());
+        private static final SimpleDateFormat formatter =
+                new SimpleDateFormat("MM-dd HH:mm:ss.SSS: ", Locale.getDefault());
         private static final Date date = new Date();
 
-        private LogWrapper() {
-        }
+        private LogWrapper() {}
 
         static {
             try {
                 fileHandler = new FileHandler(LOG_FILE_NAME, 10240, 2, true);
-                fileHandler.setFormatter(new Formatter() { // from class: android.content.om.wallpapertheme.ThemeUtil.LogWrapper.1
-                    @Override // java.util.logging.Formatter
-                    public String format(LogRecord r) {
-                        LogWrapper.date.setTime(System.currentTimeMillis());
-                        return LogWrapper.formatter.format(LogWrapper.date) + r.getMessage();
-                    }
-                });
+                fileHandler.setFormatter(
+                        new Formatter() { // from class:
+                            // android.content.om.wallpapertheme.ThemeUtil.LogWrapper.1
+                            @Override // java.util.logging.Formatter
+                            public String format(LogRecord r) {
+                                LogWrapper.date.setTime(System.currentTimeMillis());
+                                return LogWrapper.formatter.format(LogWrapper.date)
+                                        + r.getMessage();
+                            }
+                        });
                 logger = Logger.getLogger(LogWrapper.class.getName());
                 logger.addHandler(fileHandler);
                 logger.setLevel(Level.ALL);
@@ -69,18 +73,27 @@ public class ThemeUtil {
 
         public static void save(String tag, String msg) {
             if (logger != null) {
-                logger.log(Level.INFO, String.format("V %s(%d): %s%n", tag, Integer.valueOf(Binder.getCallingPid()), msg));
+                logger.log(
+                        Level.INFO,
+                        String.format(
+                                "V %s(%d): %s%n",
+                                tag, Integer.valueOf(Binder.getCallingPid()), msg));
             }
             Log.i(tag, msg);
         }
 
         public static StringBuilder getLogText() {
-            File[] files = {new File("/data/log/color_palette_log0.txt"), new File("/data/log/color_palette_log1.txt")};
+            File[] files = {
+                new File("/data/log/color_palette_log0.txt"),
+                new File("/data/log/color_palette_log1.txt")
+            };
             StringBuilder text = new StringBuilder();
             for (File openFile : files) {
                 if (openFile.exists()) {
                     try {
-                        BufferedReader br = new BufferedReader(new FileReader(openFile, StandardCharsets.UTF_8));
+                        BufferedReader br =
+                                new BufferedReader(
+                                        new FileReader(openFile, StandardCharsets.UTF_8));
                         while (true) {
                             try {
                                 String line = br.readLine();

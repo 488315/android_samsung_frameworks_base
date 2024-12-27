@@ -1,7 +1,9 @@
 package com.samsung.android.service.ProtectedATCommand;
 
 import android.util.Slog;
+
 import com.samsung.android.service.ProtectedATCommand.list.ATCommands;
+
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -19,7 +21,11 @@ public abstract class ATCommandChecker {
 
     protected abstract int checkUnregisteredCommand(Device device, ATCommands aTCommands);
 
-    public int checkATCommand(Device device, LinkedHashMap<String, LinkedHashSet<ATCommands>> mAtMap, String strCmd, Packet packet) {
+    public int checkATCommand(
+            Device device,
+            LinkedHashMap<String, LinkedHashSet<ATCommands>> mAtMap,
+            String strCmd,
+            Packet packet) {
         ATCommands atCommand = PACMClassifier.getCommand(mAtMap, strCmd);
         int cmdType = atCommand.getType();
         switch (cmdType) {
@@ -68,7 +74,10 @@ public abstract class ATCommandChecker {
             Slog.i(TAG, "This command is not allowed by CC mode");
             return 193;
         }
-        if (!device.isSecureLockOn() || !device.isShipBin() || device.isMaintenanceModeOn() || atCommand.isSecureLockOpenCommand()) {
+        if (!device.isSecureLockOn()
+                || !device.isShipBin()
+                || device.isMaintenanceModeOn()
+                || atCommand.isSecureLockOpenCommand()) {
             return 1;
         }
         Slog.i(TAG, "This command is not allowed by secure lock");
@@ -94,7 +103,8 @@ public abstract class ATCommandChecker {
         }
     }
 
-    private int checkUserOpenCommand(Device device, ATCommands atCommand, Packet packet, String strCmd) {
+    private int checkUserOpenCommand(
+            Device device, ATCommands atCommand, Packet packet, String strCmd) {
         int result = checkAllCondition(device, atCommand, strCmd);
         if (result != 1) {
             return result;
@@ -135,29 +145,54 @@ public abstract class ATCommandChecker {
         if (!atCommand.getHasAttribute()) {
             return atCommand.getType();
         }
-        if (atCommand.isCarrierOpenCommand() && !atCommand.getCarrierOpenList().contains(device.salesCode())) {
-            Slog.i(TAG, cmd + " is opened in only (" + atCommand.getCarrierOpenList() + ") device, so this cmd is block in " + device.salesCode() + " device");
+        if (atCommand.isCarrierOpenCommand()
+                && !atCommand.getCarrierOpenList().contains(device.salesCode())) {
+            Slog.i(
+                    TAG,
+                    cmd
+                            + " is opened in only ("
+                            + atCommand.getCarrierOpenList()
+                            + ") device, so this cmd is block in "
+                            + device.salesCode()
+                            + " device");
             return 196;
         }
-        if (atCommand.isCarrierBlockCommand() && atCommand.getCarrierBlockList().contains(device.salesCode())) {
+        if (atCommand.isCarrierBlockCommand()
+                && atCommand.getCarrierBlockList().contains(device.salesCode())) {
             Slog.i(TAG, cmd + " is blocked in " + device.salesCode() + " device");
             return 197;
         }
         if (atCommand.isShipBlockCommand() && device.isShipBin() && atdddexe == 2) {
-            Slog.i(TAG, cmd + " must be used in only no ship binary. So this is blocked because this binary is ship binary.");
+            Slog.i(
+                    TAG,
+                    cmd
+                            + " must be used in only no ship binary. So this is blocked because"
+                            + " this binary is ship binary.");
             return 194;
         }
         if (!device.isFacBin()) {
             if (atCommand.isFacBinOpenATDDDEXECommand()) {
-                Slog.i(TAG, cmd + " must be used in only factory binary. So this is blocked because this binary is not factory binary.");
+                Slog.i(
+                        TAG,
+                        cmd
+                                + " must be used in only factory binary. So this is blocked because"
+                                + " this binary is not factory binary.");
                 return 198;
             }
             if (atCommand.isFacBinOpenATDCommand() && atdddexe == 1) {
-                Slog.i(TAG, cmd + " from ATD must be used in only factory binary. So this is blocked because this binary is not factory binary.");
+                Slog.i(
+                        TAG,
+                        cmd
+                                + " from ATD must be used in only factory binary. So this is"
+                                + " blocked because this binary is not factory binary.");
                 return 198;
             }
             if (atCommand.isFacBinOpenDDEXECommand() && atdddexe == 2) {
-                Slog.i(TAG, cmd + " from DDEXE must be used in only factory binary. So this is blocked because this binary is not factory binary.");
+                Slog.i(
+                        TAG,
+                        cmd
+                                + " from DDEXE must be used in only factory binary. So this is"
+                                + " blocked because this binary is not factory binary.");
                 return 198;
             }
         }

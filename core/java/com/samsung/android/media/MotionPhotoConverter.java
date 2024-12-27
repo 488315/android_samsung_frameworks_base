@@ -1,6 +1,5 @@
 package com.samsung.android.media;
 
-import com.samsung.android.media.SemExtendedFormat;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,8 +9,7 @@ public class MotionPhotoConverter {
     private static final String TAG = "MotionPhotoConverter";
     private static MotionPhotoConverter sInstance;
 
-    private MotionPhotoConverter() {
-    }
+    private MotionPhotoConverter() {}
 
     public static synchronized MotionPhotoConverter getInstance() {
         MotionPhotoConverter motionPhotoConverter;
@@ -28,7 +26,9 @@ public class MotionPhotoConverter {
         try {
             FileOutputStream outputStream = new FileOutputStream(targetPath);
             try {
-                byte[] buf = SemExtendedFormat.getData(new File(srcPath), SemExtendedFormat.KeyName.MOTION_PHOTO_DATA);
+                byte[] buf =
+                        SemExtendedFormat.getData(
+                                new File(srcPath), SemExtendedFormat.KeyName.MOTION_PHOTO_DATA);
                 outputStream.write(buf);
                 outputStream.close();
             } catch (Throwable th) {

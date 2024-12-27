@@ -1,6 +1,5 @@
 package android.app.usage;
 
-import android.app.usage.UsageEvents;
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */

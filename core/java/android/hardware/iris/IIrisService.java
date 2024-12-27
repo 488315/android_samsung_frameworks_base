@@ -9,6 +9,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
@@ -19,8 +20,8 @@ public interface IIrisService extends IInterface {
 
     public static class Default implements IIrisService {
         @Override // android.hardware.iris.IIrisService
-        public void registerAuthenticators(List<SensorPropertiesInternal> hidlSensors) throws RemoteException {
-        }
+        public void registerAuthenticators(List<SensorPropertiesInternal> hidlSensors)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +29,7 @@ public interface IIrisService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIrisService {
+    public abstract static class Stub extends Binder implements IIrisService {
         static final int TRANSACTION_registerAuthenticators = 1;
         private final PermissionEnforcer mEnforcer;
 
@@ -42,7 +43,9 @@ public interface IIrisService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IIrisService asInterface(IBinder obj) {
@@ -76,7 +79,8 @@ public interface IIrisService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIrisService.DESCRIPTOR);
             }
@@ -86,7 +90,8 @@ public interface IIrisService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<SensorPropertiesInternal> _arg0 = data.createTypedArrayList(SensorPropertiesInternal.CREATOR);
+                    List<SensorPropertiesInternal> _arg0 =
+                            data.createTypedArrayList(SensorPropertiesInternal.CREATOR);
                     data.enforceNoDataAvail();
                     registerAuthenticators(_arg0);
                     reply.writeNoException();
@@ -113,7 +118,8 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // android.hardware.iris.IIrisService
-            public void registerAuthenticators(List<SensorPropertiesInternal> hidlSensors) throws RemoteException {
+            public void registerAuthenticators(List<SensorPropertiesInternal> hidlSensors)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -129,7 +135,8 @@ public interface IIrisService extends IInterface {
         }
 
         protected void registerAuthenticators_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

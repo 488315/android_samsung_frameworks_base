@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AudioExtraMetaData implements Parcelable {
-    public static final Parcelable.Creator<AudioExtraMetaData> CREATOR = new Parcelable.Creator<AudioExtraMetaData>() { // from class: android.hardware.tv.tuner.AudioExtraMetaData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioExtraMetaData createFromParcel(Parcel _aidl_source) {
-            AudioExtraMetaData _aidl_out = new AudioExtraMetaData();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioExtraMetaData> CREATOR =
+            new Parcelable.Creator<AudioExtraMetaData>() { // from class:
+                // android.hardware.tv.tuner.AudioExtraMetaData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioExtraMetaData createFromParcel(Parcel _aidl_source) {
+                    AudioExtraMetaData _aidl_out = new AudioExtraMetaData();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioExtraMetaData[] newArray(int _aidl_size) {
-            return new AudioExtraMetaData[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioExtraMetaData[] newArray(int _aidl_size) {
+                    return new AudioExtraMetaData[_aidl_size];
+                }
+            };
     public byte adFade = 0;
     public byte adPan = 0;
     public char versionTextTag = 0;

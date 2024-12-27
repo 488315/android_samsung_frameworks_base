@@ -9,33 +9,36 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public class MountServiceIdler extends JobService {
-    public final AnonymousClass1 mFinishCallback = new Runnable() { // from class: com.android.server.MountServiceIdler.1
-        @Override // java.lang.Runnable
-        public final void run() {
-            Slog.i("MountServiceIdler", "Got mount service completion callback");
-            synchronized (MountServiceIdler.this.mFinishCallback) {
-                try {
-                    MountServiceIdler mountServiceIdler = MountServiceIdler.this;
-                    if (mountServiceIdler.mStarted) {
-                        mountServiceIdler.jobFinished(mountServiceIdler.mJobParams, false);
-                        MountServiceIdler.this.mStarted = false;
+    public final AnonymousClass1 mFinishCallback =
+            new Runnable() { // from class: com.android.server.MountServiceIdler.1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    Slog.i("MountServiceIdler", "Got mount service completion callback");
+                    synchronized (MountServiceIdler.this.mFinishCallback) {
+                        try {
+                            MountServiceIdler mountServiceIdler = MountServiceIdler.this;
+                            if (mountServiceIdler.mStarted) {
+                                mountServiceIdler.jobFinished(mountServiceIdler.mJobParams, false);
+                                MountServiceIdler.this.mStarted = false;
+                            }
+                        } catch (Throwable th) {
+                            throw th;
+                        }
                     }
-                } catch (Throwable th) {
-                    throw th;
+                    MountServiceIdler.scheduleIdlePass(MountServiceIdler.this);
                 }
-            }
-            MountServiceIdler.scheduleIdlePass(MountServiceIdler.this);
-        }
-    };
+            };
     public JobParameters mJobParams;
     public boolean mStarted;
-    public static final ComponentName sIdleService = new ComponentName("android", MountServiceIdler.class.getName());
+    public static final ComponentName sIdleService =
+            new ComponentName("android", MountServiceIdler.class.getName());
     public static final int MOUNT_JOB_ID = 808;
 
     public static Calendar offsetFromTodayMidnight(int i, int i2) {
@@ -51,7 +54,13 @@ public class MountServiceIdler extends JobService {
 
     public static void scheduleIdlePass(Context context) {
         JobScheduler jobScheduler = (JobScheduler) context.getSystemService("jobscheduler");
-        long timeInMillis = (System.currentTimeMillis() <= offsetFromTodayMidnight(0, 3).getTimeInMillis() || System.currentTimeMillis() >= offsetFromTodayMidnight(0, 4).getTimeInMillis()) ? offsetFromTodayMidnight(1, 3).getTimeInMillis() - System.currentTimeMillis() : TimeUnit.SECONDS.toMillis(10L);
+        long timeInMillis =
+                (System.currentTimeMillis() <= offsetFromTodayMidnight(0, 3).getTimeInMillis()
+                                || System.currentTimeMillis()
+                                        >= offsetFromTodayMidnight(0, 4).getTimeInMillis())
+                        ? offsetFromTodayMidnight(1, 3).getTimeInMillis()
+                                - System.currentTimeMillis()
+                        : TimeUnit.SECONDS.toMillis(10L);
         JobInfo.Builder builder = new JobInfo.Builder(MOUNT_JOB_ID, sIdleService);
         builder.setRequiresDeviceIdle(true);
         builder.setRequiresCharging(true);

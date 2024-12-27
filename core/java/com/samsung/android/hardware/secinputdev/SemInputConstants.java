@@ -60,19 +60,22 @@ public class SemInputConstants {
         AOD_NOTI_RECT(47, true, false),
         FAST_RESPONSE(48, false, true);
 
-        public static final Parcelable.Creator<Command> CREATOR = new Parcelable.Creator<Command>() { // from class: com.samsung.android.hardware.secinputdev.SemInputConstants.Command.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Command createFromParcel(Parcel in) {
-                return Command.getFromInt(in.readInt());
-            }
+        public static final Parcelable.Creator<Command> CREATOR =
+                new Parcelable.Creator<
+                        Command>() { // from class:
+                                     // com.samsung.android.hardware.secinputdev.SemInputConstants.Command.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Command createFromParcel(Parcel in) {
+                        return Command.getFromInt(in.readInt());
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Command[] newArray(int size) {
-                return new Command[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Command[] newArray(int size) {
+                        return new Command[size];
+                    }
+                };
         private boolean isExternal;
         private boolean needUpdate;
         private int value;
@@ -125,19 +128,22 @@ public class SemInputConstants {
         TAAS(41, "TAAS"),
         NOT_SPECIFIED(100, "");
 
-        public static final Parcelable.Creator<Device> CREATOR = new Parcelable.Creator<Device>() { // from class: com.samsung.android.hardware.secinputdev.SemInputConstants.Device.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Device createFromParcel(Parcel in) {
-                return Device.getFromInt(in.readInt());
-            }
+        public static final Parcelable.Creator<Device> CREATOR =
+                new Parcelable.Creator<
+                        Device>() { // from class:
+                                    // com.samsung.android.hardware.secinputdev.SemInputConstants.Device.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Device createFromParcel(Parcel in) {
+                        return Device.getFromInt(in.readInt());
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Device[] newArray(int size) {
-                return new Device[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Device[] newArray(int size) {
+                        return new Device[size];
+                    }
+                };
         private String name;
         private int value;
 
@@ -165,7 +171,10 @@ public class SemInputConstants {
 
         @Override // java.lang.Enum
         public String toString() {
-            return this.name + NavigationBarInflaterView.KEY_CODE_START + this.value + NavigationBarInflaterView.KEY_CODE_END;
+            return this.name
+                    + NavigationBarInflaterView.KEY_CODE_START
+                    + this.value
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
 
         @Override // android.os.Parcelable
@@ -189,19 +198,22 @@ public class SemInputConstants {
         FORCE_OFF(21, true),
         FORCE_ON(22, true);
 
-        public static final Parcelable.Creator<DisplayState> CREATOR = new Parcelable.Creator<DisplayState>() { // from class: com.samsung.android.hardware.secinputdev.SemInputConstants.DisplayState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public DisplayState createFromParcel(Parcel in) {
-                return DisplayState.getFromInt(in.readInt());
-            }
+        public static final Parcelable.Creator<DisplayState> CREATOR =
+                new Parcelable.Creator<
+                        DisplayState>() { // from class:
+                                          // com.samsung.android.hardware.secinputdev.SemInputConstants.DisplayState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public DisplayState createFromParcel(Parcel in) {
+                        return DisplayState.getFromInt(in.readInt());
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public DisplayState[] newArray(int size) {
-                return new DisplayState[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public DisplayState[] newArray(int size) {
+                        return new DisplayState[size];
+                    }
+                };
         private boolean isExternal;
         private int value;
 
@@ -229,7 +241,10 @@ public class SemInputConstants {
 
         @Override // java.lang.Enum
         public String toString() {
-            return super.toString() + NavigationBarInflaterView.KEY_CODE_START + this.value + NavigationBarInflaterView.KEY_CODE_END;
+            return super.toString()
+                    + NavigationBarInflaterView.KEY_CODE_START
+                    + this.value
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
 
         @Override // android.os.Parcelable
@@ -264,19 +279,22 @@ public class SemInputConstants {
         ENABLED(17, "enabled", false, false),
         CMD(18, "cmd", false, false);
 
-        public static final Parcelable.Creator<Property> CREATOR = new Parcelable.Creator<Property>() { // from class: com.samsung.android.hardware.secinputdev.SemInputConstants.Property.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Property createFromParcel(Parcel in) {
-                return Property.getFromInt(in.readInt());
-            }
+        public static final Parcelable.Creator<Property> CREATOR =
+                new Parcelable.Creator<
+                        Property>() { // from class:
+                                      // com.samsung.android.hardware.secinputdev.SemInputConstants.Property.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Property createFromParcel(Parcel in) {
+                        return Property.getFromInt(in.readInt());
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Property[] newArray(int size) {
-                return new Property[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Property[] newArray(int size) {
+                        return new Property[size];
+                    }
+                };
         private boolean isExternalRead;
         private boolean isExternalWrite;
         private String nodeName;
@@ -337,19 +355,22 @@ public class SemInputConstants {
         STREAM(8, "STREAM", -1),
         APD(9, SemInputDeviceManager.MOTION_ENABLE_TYPE_POCKET_DETECT, 524288);
 
-        public static final Parcelable.Creator<MotionType> CREATOR = new Parcelable.Creator<MotionType>() { // from class: com.samsung.android.hardware.secinputdev.SemInputConstants.MotionType.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public MotionType createFromParcel(Parcel in) {
-                return MotionType.getFromInt(in.readInt());
-            }
+        public static final Parcelable.Creator<MotionType> CREATOR =
+                new Parcelable.Creator<
+                        MotionType>() { // from class:
+                                        // com.samsung.android.hardware.secinputdev.SemInputConstants.MotionType.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public MotionType createFromParcel(Parcel in) {
+                        return MotionType.getFromInt(in.readInt());
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public MotionType[] newArray(int size) {
-                return new MotionType[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public MotionType[] newArray(int size) {
+                        return new MotionType[size];
+                    }
+                };
         private int feature;
         private String name;
         private int value;

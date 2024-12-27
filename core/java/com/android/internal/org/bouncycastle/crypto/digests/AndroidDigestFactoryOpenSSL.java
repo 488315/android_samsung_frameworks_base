@@ -1,7 +1,6 @@
 package com.android.internal.org.bouncycastle.crypto.digests;
 
 import com.android.internal.org.bouncycastle.crypto.Digest;
-import com.android.internal.org.bouncycastle.crypto.digests.OpenSSLDigest;
 
 /* loaded from: classes5.dex */
 public class AndroidDigestFactoryOpenSSL implements AndroidDigestFactoryInterface {

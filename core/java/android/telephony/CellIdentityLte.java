@@ -5,7 +5,9 @@ import android.os.Parcelable;
 import android.telephony.gsm.GsmCellLocation;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
 import com.android.internal.telephony.SemTelephonyUtils;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,20 +31,22 @@ public final class CellIdentityLte extends CellIdentity {
     private final int mPci;
     private final int mTac;
     private static final String TAG = CellIdentityLte.class.getSimpleName();
-    public static final Parcelable.Creator<CellIdentityLte> CREATOR = new Parcelable.Creator<CellIdentityLte>() { // from class: android.telephony.CellIdentityLte.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentityLte createFromParcel(Parcel in) {
-            in.readInt();
-            return CellIdentityLte.createFromParcelBody(in);
-        }
+    public static final Parcelable.Creator<CellIdentityLte> CREATOR =
+            new Parcelable.Creator<
+                    CellIdentityLte>() { // from class: android.telephony.CellIdentityLte.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentityLte createFromParcel(Parcel in) {
+                    in.readInt();
+                    return CellIdentityLte.createFromParcelBody(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentityLte[] newArray(int size) {
-            return new CellIdentityLte[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentityLte[] newArray(int size) {
+                    return new CellIdentityLte[size];
+                }
+            };
 
     public CellIdentityLte() {
         super(TAG, 3, null, null, null, null);
@@ -58,10 +62,34 @@ public final class CellIdentityLte extends CellIdentity {
     }
 
     public CellIdentityLte(int mcc, int mnc, int ci, int pci, int tac) {
-        this(ci, pci, tac, Integer.MAX_VALUE, new int[0], Integer.MAX_VALUE, String.valueOf(mcc), String.valueOf(mnc), null, null, new ArraySet(), null);
+        this(
+                ci,
+                pci,
+                tac,
+                Integer.MAX_VALUE,
+                new int[0],
+                Integer.MAX_VALUE,
+                String.valueOf(mcc),
+                String.valueOf(mnc),
+                null,
+                null,
+                new ArraySet(),
+                null);
     }
 
-    public CellIdentityLte(int ci, int pci, int tac, int earfcn, int[] bands, int bandwidth, String mccStr, String mncStr, String alphal, String alphas, Collection<String> additionalPlmns, ClosedSubscriberGroupInfo csgInfo) {
+    public CellIdentityLte(
+            int ci,
+            int pci,
+            int tac,
+            int earfcn,
+            int[] bands,
+            int bandwidth,
+            String mccStr,
+            String mncStr,
+            String alphal,
+            String alphas,
+            Collection<String> additionalPlmns,
+            ClosedSubscriberGroupInfo csgInfo) {
         super(TAG, 3, mccStr, mncStr, alphal, alphas);
         this.mCi = inRangeOrUnavailable(ci, 0, 268435455);
         this.mPci = inRangeOrUnavailable(pci, 0, 503);
@@ -80,12 +108,36 @@ public final class CellIdentityLte extends CellIdentity {
     }
 
     private CellIdentityLte(CellIdentityLte cid) {
-        this(cid.mCi, cid.mPci, cid.mTac, cid.mEarfcn, cid.mBands, cid.mBandwidth, cid.mMccStr, cid.mMncStr, cid.mAlphaLong, cid.mAlphaShort, cid.mAdditionalPlmns, cid.mCsgInfo);
+        this(
+                cid.mCi,
+                cid.mPci,
+                cid.mTac,
+                cid.mEarfcn,
+                cid.mBands,
+                cid.mBandwidth,
+                cid.mMccStr,
+                cid.mMncStr,
+                cid.mAlphaLong,
+                cid.mAlphaShort,
+                cid.mAdditionalPlmns,
+                cid.mCsgInfo);
     }
 
     @Override // android.telephony.CellIdentity
     public CellIdentityLte sanitizeLocationInfo() {
-        return new CellIdentityLte(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, this.mBands, Integer.MAX_VALUE, this.mMccStr, this.mMncStr, this.mAlphaLong, this.mAlphaShort, this.mAdditionalPlmns, null);
+        return new CellIdentityLte(
+                Integer.MAX_VALUE,
+                Integer.MAX_VALUE,
+                Integer.MAX_VALUE,
+                Integer.MAX_VALUE,
+                this.mBands,
+                Integer.MAX_VALUE,
+                this.mMccStr,
+                this.mMncStr,
+                this.mAlphaLong,
+                this.mAlphaShort,
+                this.mAdditionalPlmns,
+                null);
     }
 
     CellIdentityLte copy() {
@@ -184,7 +236,16 @@ public final class CellIdentityLte extends CellIdentity {
 
     @Override // android.telephony.CellIdentity
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mCi), Integer.valueOf(this.mPci), Integer.valueOf(this.mTac), Integer.valueOf(this.mEarfcn), Integer.valueOf(Arrays.hashCode(this.mBands)), Integer.valueOf(this.mBandwidth), Integer.valueOf(this.mAdditionalPlmns.hashCode()), this.mCsgInfo, Integer.valueOf(super.hashCode()));
+        return Objects.hash(
+                Integer.valueOf(this.mCi),
+                Integer.valueOf(this.mPci),
+                Integer.valueOf(this.mTac),
+                Integer.valueOf(this.mEarfcn),
+                Integer.valueOf(Arrays.hashCode(this.mBands)),
+                Integer.valueOf(this.mBandwidth),
+                Integer.valueOf(this.mAdditionalPlmns.hashCode()),
+                this.mCsgInfo,
+                Integer.valueOf(super.hashCode()));
     }
 
     @Override // android.telephony.CellIdentity
@@ -196,11 +257,46 @@ public final class CellIdentityLte extends CellIdentity {
             return false;
         }
         CellIdentityLte o = (CellIdentityLte) other;
-        return this.mCi == o.mCi && this.mPci == o.mPci && this.mTac == o.mTac && this.mEarfcn == o.mEarfcn && Arrays.equals(this.mBands, o.mBands) && this.mBandwidth == o.mBandwidth && TextUtils.equals(this.mMccStr, o.mMccStr) && TextUtils.equals(this.mMncStr, o.mMncStr) && this.mAdditionalPlmns.equals(o.mAdditionalPlmns) && Objects.equals(this.mCsgInfo, o.mCsgInfo) && super.equals(other);
+        return this.mCi == o.mCi
+                && this.mPci == o.mPci
+                && this.mTac == o.mTac
+                && this.mEarfcn == o.mEarfcn
+                && Arrays.equals(this.mBands, o.mBands)
+                && this.mBandwidth == o.mBandwidth
+                && TextUtils.equals(this.mMccStr, o.mMccStr)
+                && TextUtils.equals(this.mMncStr, o.mMncStr)
+                && this.mAdditionalPlmns.equals(o.mAdditionalPlmns)
+                && Objects.equals(this.mCsgInfo, o.mCsgInfo)
+                && super.equals(other);
     }
 
     public String toString() {
-        return TAG + ":{ mCi=" + SemTelephonyUtils.maskPiiFromCellIdentity(this.mCi) + " mPci=" + this.mPci + " mTac=" + SemTelephonyUtils.maskPiiFromCellIdentity(this.mTac) + " mEarfcn=" + this.mEarfcn + " mBands=" + Arrays.toString(this.mBands) + " mBandwidth=" + this.mBandwidth + " mMcc=" + this.mMccStr + " mMnc=" + this.mMncStr + " mAlphaLong=" + this.mAlphaLong + " mAlphaShort=" + this.mAlphaShort + " mAdditionalPlmns=" + this.mAdditionalPlmns + " mCsgInfo=" + this.mCsgInfo + "}";
+        return TAG
+                + ":{ mCi="
+                + SemTelephonyUtils.maskPiiFromCellIdentity(this.mCi)
+                + " mPci="
+                + this.mPci
+                + " mTac="
+                + SemTelephonyUtils.maskPiiFromCellIdentity(this.mTac)
+                + " mEarfcn="
+                + this.mEarfcn
+                + " mBands="
+                + Arrays.toString(this.mBands)
+                + " mBandwidth="
+                + this.mBandwidth
+                + " mMcc="
+                + this.mMccStr
+                + " mMnc="
+                + this.mMncStr
+                + " mAlphaLong="
+                + this.mAlphaLong
+                + " mAlphaShort="
+                + this.mAlphaShort
+                + " mAdditionalPlmns="
+                + this.mAdditionalPlmns
+                + " mCsgInfo="
+                + this.mCsgInfo
+                + "}";
     }
 
     @Override // android.telephony.CellIdentity, android.os.Parcelable
@@ -225,7 +321,9 @@ public final class CellIdentityLte extends CellIdentity {
         this.mBands = in.createIntArray();
         this.mBandwidth = in.readInt();
         this.mAdditionalPlmns = in.readArraySet(null);
-        this.mCsgInfo = (ClosedSubscriberGroupInfo) in.readParcelable(null, ClosedSubscriberGroupInfo.class);
+        this.mCsgInfo =
+                (ClosedSubscriberGroupInfo)
+                        in.readParcelable(null, ClosedSubscriberGroupInfo.class);
         updateGlobalCellId();
     }
 
@@ -236,7 +334,9 @@ public final class CellIdentityLte extends CellIdentity {
     @Override // android.telephony.CellIdentity
     public boolean isSameCell(CellIdentity ci) {
         boolean result = super.isSameCell(ci);
-        if (result && (ci instanceof CellIdentityLte) && this.mTac != ((CellIdentityLte) ci).getTac()) {
+        if (result
+                && (ci instanceof CellIdentityLte)
+                && this.mTac != ((CellIdentityLte) ci).getTac()) {
             return false;
         }
         return result;

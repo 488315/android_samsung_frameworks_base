@@ -2,6 +2,7 @@ package android.media;
 
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes2.dex */
@@ -10,7 +11,8 @@ public class MediaRouter2Utils {
     static final String TAG = "MR2Utils";
 
     public static String toUniqueId(String providerId, String id) {
-        Preconditions.checkArgument((TextUtils.isEmpty(providerId) || TextUtils.isEmpty(id)) ? false : true);
+        Preconditions.checkArgument(
+                (TextUtils.isEmpty(providerId) || TextUtils.isEmpty(id)) ? false : true);
         return providerId + ":" + id;
     }
 

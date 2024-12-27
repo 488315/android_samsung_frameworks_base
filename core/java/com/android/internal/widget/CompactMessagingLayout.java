@@ -16,8 +16,9 @@ import android.view.ViewStub;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
+
 import com.android.internal.R;
-import com.android.internal.widget.PeopleHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,8 @@ public class CompactMessagingLayout extends FrameLayout {
         this.mPeopleHelper = new PeopleHelper();
     }
 
-    public CompactMessagingLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CompactMessagingLayout(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mPeopleHelper = new PeopleHelper();
     }
@@ -56,15 +58,21 @@ public class CompactMessagingLayout extends FrameLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         this.mPeopleHelper.init(getContext());
-        this.mConversationFacePileViewStub = (ViewStub) requireViewById(R.id.conversation_face_pile);
-        this.mFacePileSize = getResources().getDimensionPixelSize(R.dimen.conversation_compact_face_pile_size);
-        this.mFacePileAvatarSize = getResources().getDimensionPixelSize(R.dimen.conversation_compact_face_pile_avatar_size);
-        this.mFacePileProtectionWidth = getResources().getDimensionPixelSize(R.dimen.conversation_compact_face_pile_protection_width);
+        this.mConversationFacePileViewStub =
+                (ViewStub) requireViewById(R.id.conversation_face_pile);
+        this.mFacePileSize =
+                getResources().getDimensionPixelSize(R.dimen.conversation_compact_face_pile_size);
+        this.mFacePileAvatarSize =
+                getResources()
+                        .getDimensionPixelSize(R.dimen.conversation_compact_face_pile_avatar_size);
+        this.mFacePileProtectionWidth =
+                getResources()
+                        .getDimensionPixelSize(
+                                R.dimen.conversation_compact_face_pile_protection_width);
     }
 
     @RemotableViewMethod(asyncImpl = "setGroupFacePileAsync")
-    public void setGroupFacePile(Bundle extras) {
-    }
+    public void setGroupFacePile(Bundle extras) {}
 
     @RemotableViewMethod
     public Runnable setLayoutColorAsync(int color) {
@@ -85,12 +93,17 @@ public class CompactMessagingLayout extends FrameLayout {
     public Runnable setGroupFacePileAsync(Bundle extras) {
         Parcelable[] messages;
         Parcelable[] messages2 = extras.getParcelableArray(Notification.EXTRA_MESSAGES);
-        List<Notification.MessagingStyle.Message> newMessages = Notification.MessagingStyle.Message.getMessagesFromBundleArray(messages2);
+        List<Notification.MessagingStyle.Message> newMessages =
+                Notification.MessagingStyle.Message.getMessagesFromBundleArray(messages2);
         Parcelable[] histMessages = extras.getParcelableArray(Notification.EXTRA_HISTORIC_MESSAGES);
-        List<Notification.MessagingStyle.Message> newHistoricMessages = Notification.MessagingStyle.Message.getMessagesFromBundleArray(histMessages);
-        Person user = (Person) extras.getParcelable(Notification.EXTRA_MESSAGING_PERSON, Person.class);
-        List<List<Notification.MessagingStyle.Message>> groups = groupMessages(newMessages, newHistoricMessages);
-        PeopleHelper.NameToPrefixMap nameToPrefixMap = this.mPeopleHelper.mapUniqueNamesToPrefixWithGroupList(groups);
+        List<Notification.MessagingStyle.Message> newHistoricMessages =
+                Notification.MessagingStyle.Message.getMessagesFromBundleArray(histMessages);
+        Person user =
+                (Person) extras.getParcelable(Notification.EXTRA_MESSAGING_PERSON, Person.class);
+        List<List<Notification.MessagingStyle.Message>> groups =
+                groupMessages(newMessages, newHistoricMessages);
+        PeopleHelper.NameToPrefixMap nameToPrefixMap =
+                this.mPeopleHelper.mapUniqueNamesToPrefixWithGroupList(groups);
         int layoutColor = this.mLayoutColor;
         Icon secondLastIcon = null;
         Icon lastIcon = null;
@@ -130,31 +143,42 @@ public class CompactMessagingLayout extends FrameLayout {
         }
         final Drawable secondLastIconDrawable = secondLastIcon.loadDrawable(getContext());
         final Drawable lastIconDrawable = lastIcon.loadDrawable(getContext());
-        return new Runnable() { // from class: com.android.internal.widget.CompactMessagingLayout$$ExternalSyntheticLambda0
+        return new Runnable() { // from class:
+                                // com.android.internal.widget.CompactMessagingLayout$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                CompactMessagingLayout.this.lambda$setGroupFacePileAsync$0(secondLastIconDrawable, lastIconDrawable);
+                CompactMessagingLayout.this.lambda$setGroupFacePileAsync$0(
+                        secondLastIconDrawable, lastIconDrawable);
             }
         };
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$setGroupFacePileAsync$0(Drawable secondLastIconDrawable, Drawable lastIconDrawable) {
+    public /* synthetic */ void lambda$setGroupFacePileAsync$0(
+            Drawable secondLastIconDrawable, Drawable lastIconDrawable) {
         View conversationFacePile = this.mConversationFacePileViewStub.inflate();
         conversationFacePile.setVisibility(0);
-        ImageView facePileBottomBg = (ImageView) conversationFacePile.requireViewById(R.id.conversation_face_pile_bottom_background);
-        ImageView facePileTop = (ImageView) conversationFacePile.requireViewById(R.id.conversation_face_pile_top);
-        ImageView facePileBottom = (ImageView) conversationFacePile.requireViewById(R.id.conversation_face_pile_bottom);
+        ImageView facePileBottomBg =
+                (ImageView)
+                        conversationFacePile.requireViewById(
+                                R.id.conversation_face_pile_bottom_background);
+        ImageView facePileTop =
+                (ImageView) conversationFacePile.requireViewById(R.id.conversation_face_pile_top);
+        ImageView facePileBottom =
+                (ImageView)
+                        conversationFacePile.requireViewById(R.id.conversation_face_pile_bottom);
         facePileTop.lambda$setImageURIAsync$0(secondLastIconDrawable);
         facePileBottom.lambda$setImageURIAsync$0(lastIconDrawable);
-        facePileBottomBg.setImageTintList(ColorStateList.valueOf(this.mNotificationBackgroundColor));
+        facePileBottomBg.setImageTintList(
+                ColorStateList.valueOf(this.mNotificationBackgroundColor));
         setSize(conversationFacePile, this.mFacePileSize);
         setSize(facePileBottom, this.mFacePileAvatarSize);
         setSize(facePileTop, this.mFacePileAvatarSize);
         setSize(facePileBottomBg, this.mFacePileAvatarSize + (this.mFacePileProtectionWidth * 2));
     }
 
-    private Icon getSenderIcon(Person sender, PeopleHelper.NameToPrefixMap uniqueNames, int layoutColor) {
+    private Icon getSenderIcon(
+            Person sender, PeopleHelper.NameToPrefixMap uniqueNames, int layoutColor) {
         if (sender == null) {
             return this.mPeopleHelper.createAvatarSymbol("", "", layoutColor);
         }
@@ -169,7 +193,9 @@ public class CompactMessagingLayout extends FrameLayout {
         return this.mPeopleHelper.createAvatarSymbol("", "", layoutColor);
     }
 
-    private static List<List<Notification.MessagingStyle.Message>> groupMessages(List<Notification.MessagingStyle.Message> messages, List<Notification.MessagingStyle.Message> historicMessages) {
+    private static List<List<Notification.MessagingStyle.Message>> groupMessages(
+            List<Notification.MessagingStyle.Message> messages,
+            List<Notification.MessagingStyle.Message> historicMessages) {
         if (messages.isEmpty() && historicMessages.isEmpty()) {
             return List.of();
         }
@@ -179,7 +205,8 @@ public class CompactMessagingLayout extends FrameLayout {
         int histSize = historicMessages.size();
         int i = 0;
         while (i < messages.size() + histSize) {
-            Notification.MessagingStyle.Message message = i < histSize ? historicMessages.get(i) : messages.get(i - histSize);
+            Notification.MessagingStyle.Message message =
+                    i < histSize ? historicMessages.get(i) : messages.get(i - histSize);
             if (message != null) {
                 CharSequence senderKey = getPersonKey(message.getSenderPerson());
                 boolean isNewGroup = currentGroup == null || senderKey != currentSenderKey;

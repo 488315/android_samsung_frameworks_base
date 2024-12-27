@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class SContextMainScreenDetection extends SContextEventContext {
-    public static final Parcelable.Creator<SContextMainScreenDetection> CREATOR = new Parcelable.Creator<SContextMainScreenDetection>() { // from class: android.hardware.scontext.SContextMainScreenDetection.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextMainScreenDetection createFromParcel(Parcel in) {
-            return new SContextMainScreenDetection(in);
-        }
+    public static final Parcelable.Creator<SContextMainScreenDetection> CREATOR =
+            new Parcelable.Creator<SContextMainScreenDetection>() { // from class:
+                // android.hardware.scontext.SContextMainScreenDetection.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextMainScreenDetection createFromParcel(Parcel in) {
+                    return new SContextMainScreenDetection(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextMainScreenDetection[] newArray(int size) {
-            return new SContextMainScreenDetection[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextMainScreenDetection[] newArray(int size) {
+                    return new SContextMainScreenDetection[size];
+                }
+            };
     private Bundle mContext;
 
     SContextMainScreenDetection() {
@@ -33,7 +35,8 @@ public class SContextMainScreenDetection extends SContextEventContext {
         return this.mContext.getInt("Action");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

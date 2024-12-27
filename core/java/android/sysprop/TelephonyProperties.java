@@ -1,6 +1,7 @@
 package android.sysprop;
 
 import android.os.SystemProperties;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,8 +12,7 @@ import java.util.function.Function;
 
 /* loaded from: classes3.dex */
 public final class TelephonyProperties {
-    private TelephonyProperties() {
-    }
+    private TelephonyProperties() {}
 
     /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -188,7 +188,8 @@ public final class TelephonyProperties {
         return joiner.toString();
     }
 
-    private static <T extends Enum<T>> String formatEnumList(List<T> list, Function<T, String> elementFormatter) {
+    private static <T extends Enum<T>> String formatEnumList(
+            List<T> list, Function<T, String> elementFormatter) {
         StringJoiner joiner = new StringJoiner(",");
         Iterator<T> it = list.iterator();
         while (it.hasNext()) {
@@ -204,319 +205,475 @@ public final class TelephonyProperties {
     }
 
     public static void airplane_mode_on(Boolean value) {
-        SystemProperties.set("persist.radio.airplane_mode_on", value == null ? "" : value.booleanValue() ? "1" : "0");
+        SystemProperties.set(
+                "persist.radio.airplane_mode_on",
+                value == null ? "" : value.booleanValue() ? "1" : "0");
     }
 
     public static List<String> baseband_version() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_BASEBAND_VERSION);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda5
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_BASEBAND_VERSION);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda5
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        String tryParseString;
+                        tryParseString = TelephonyProperties.tryParseString((String) obj);
+                        return tryParseString;
+                    }
+                },
+                value);
     }
 
     public static void baseband_version(List<String> value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_BASEBAND_VERSION, value == null ? "" : formatList(value));
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_BASEBAND_VERSION,
+                value == null ? "" : formatList(value));
     }
 
     public static Optional<String> ril_impl() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_RIL_IMPL);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.PROPERTY_RIL_IMPL);
         return Optional.ofNullable(tryParseString(value));
     }
 
     public static List<String> operator_alpha() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ALPHA);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda6
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ALPHA);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda6
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        String tryParseString;
+                        tryParseString = TelephonyProperties.tryParseString((String) obj);
+                        return tryParseString;
+                    }
+                },
+                value);
     }
 
     public static void operator_alpha(List<String> value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ALPHA, value == null ? "" : formatList(value));
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ALPHA,
+                value == null ? "" : formatList(value));
     }
 
     public static List<String> operator_numeric() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_NUMERIC);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_OPERATOR_NUMERIC);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        String tryParseString;
+                        tryParseString = TelephonyProperties.tryParseString((String) obj);
+                        return tryParseString;
+                    }
+                },
+                value);
     }
 
     public static void operator_numeric(List<String> value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_NUMERIC, value == null ? "" : formatList(value));
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_NUMERIC,
+                value == null ? "" : formatList(value));
     }
 
     public static Optional<Boolean> operator_is_manual() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ISMANUAL);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_OPERATOR_ISMANUAL);
         return Optional.ofNullable(tryParseBoolean(value));
     }
 
     public static List<Boolean> operator_is_roaming() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ISROAMING);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda7
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Boolean tryParseBoolean;
-                tryParseBoolean = TelephonyProperties.tryParseBoolean((String) obj);
-                return tryParseBoolean;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_OPERATOR_ISROAMING);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda7
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        Boolean tryParseBoolean;
+                        tryParseBoolean = TelephonyProperties.tryParseBoolean((String) obj);
+                        return tryParseBoolean;
+                    }
+                },
+                value);
     }
 
     public static void operator_is_roaming(List<Boolean> value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ISROAMING, value == null ? "" : formatList(value));
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ISROAMING,
+                value == null ? "" : formatList(value));
     }
 
     public static List<String> operator_iso_country() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ISO_COUNTRY);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda12
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_OPERATOR_ISO_COUNTRY);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda12
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        String tryParseString;
+                        tryParseString = TelephonyProperties.tryParseString((String) obj);
+                        return tryParseString;
+                    }
+                },
+                value);
     }
 
     public static void operator_iso_country(List<String> value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ISO_COUNTRY, value == null ? "" : formatList(value));
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ISO_COUNTRY,
+                value == null ? "" : formatList(value));
     }
 
     public static Optional<String> lte_on_cdma_product_type() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_LTE_ON_CDMA_PRODUCT_TYPE);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_LTE_ON_CDMA_PRODUCT_TYPE);
         return Optional.ofNullable(tryParseString(value));
     }
 
     public static Optional<Integer> lte_on_cdma_device() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_LTE_ON_CDMA_DEVICE);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_LTE_ON_CDMA_DEVICE);
         return Optional.ofNullable(tryParseInteger(value));
     }
 
     public static List<Integer> current_active_phone() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.CURRENT_ACTIVE_PHONE);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda14
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Integer tryParseInteger;
-                tryParseInteger = TelephonyProperties.tryParseInteger((String) obj);
-                return tryParseInteger;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.CURRENT_ACTIVE_PHONE);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda14
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        Integer tryParseInteger;
+                        tryParseInteger = TelephonyProperties.tryParseInteger((String) obj);
+                        return tryParseInteger;
+                    }
+                },
+                value);
     }
 
     public static void current_active_phone(List<Integer> value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.CURRENT_ACTIVE_PHONE, value == null ? "" : formatList(value));
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.CURRENT_ACTIVE_PHONE,
+                value == null ? "" : formatList(value));
     }
 
     public static List<String> sim_state() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_SIM_STATE);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda4
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.PROPERTY_SIM_STATE);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda4
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        String tryParseString;
+                        tryParseString = TelephonyProperties.tryParseString((String) obj);
+                        return tryParseString;
+                    }
+                },
+                value);
     }
 
     public static void sim_state(List<String> value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_SIM_STATE, value == null ? "" : formatList(value));
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_SIM_STATE,
+                value == null ? "" : formatList(value));
     }
 
     public static List<String> icc_operator_numeric() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_ICC_OPERATOR_NUMERIC);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda2
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_ICC_OPERATOR_NUMERIC);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda2
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        String tryParseString;
+                        tryParseString = TelephonyProperties.tryParseString((String) obj);
+                        return tryParseString;
+                    }
+                },
+                value);
     }
 
     public static void icc_operator_numeric(List<String> value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_ICC_OPERATOR_NUMERIC, value == null ? "" : formatList(value));
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_ICC_OPERATOR_NUMERIC,
+                value == null ? "" : formatList(value));
     }
 
     public static List<String> icc_operator_alpha() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_ICC_OPERATOR_ALPHA);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda8
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_ICC_OPERATOR_ALPHA);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda8
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        String tryParseString;
+                        tryParseString = TelephonyProperties.tryParseString((String) obj);
+                        return tryParseString;
+                    }
+                },
+                value);
     }
 
     public static void icc_operator_alpha(List<String> value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_ICC_OPERATOR_ALPHA, value == null ? "" : formatList(value));
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_ICC_OPERATOR_ALPHA,
+                value == null ? "" : formatList(value));
     }
 
     public static List<String> icc_operator_iso_country() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_ICC_OPERATOR_ISO_COUNTRY);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda11
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_ICC_OPERATOR_ISO_COUNTRY);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda11
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        String tryParseString;
+                        tryParseString = TelephonyProperties.tryParseString((String) obj);
+                        return tryParseString;
+                    }
+                },
+                value);
     }
 
     public static void icc_operator_iso_country(List<String> value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_ICC_OPERATOR_ISO_COUNTRY, value == null ? "" : formatList(value));
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties
+                        .PROPERTY_ICC_OPERATOR_ISO_COUNTRY,
+                value == null ? "" : formatList(value));
     }
 
     public static List<String> data_network_type() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_DATA_NETWORK_TYPE);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_DATA_NETWORK_TYPE);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        String tryParseString;
+                        tryParseString = TelephonyProperties.tryParseString((String) obj);
+                        return tryParseString;
+                    }
+                },
+                value);
     }
 
     public static void data_network_type(List<String> value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_DATA_NETWORK_TYPE, value == null ? "" : formatList(value));
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_DATA_NETWORK_TYPE,
+                value == null ? "" : formatList(value));
     }
 
     public static Optional<Boolean> in_ecm_mode() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_INECM_MODE);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.PROPERTY_INECM_MODE);
         return Optional.ofNullable(tryParseBoolean(value));
     }
 
     public static void in_ecm_mode(Boolean value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_INECM_MODE, value == null ? "" : value.toString());
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_INECM_MODE,
+                value == null ? "" : value.toString());
     }
 
     public static Optional<Long> ecm_exit_timer() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_ECM_EXIT_TIMER);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.PROPERTY_ECM_EXIT_TIMER);
         return Optional.ofNullable(tryParseLong(value));
     }
 
     public static Optional<String> operator_idp_string() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_IDP_STRING);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_OPERATOR_IDP_STRING);
         return Optional.ofNullable(tryParseString(value));
     }
 
     public static void operator_idp_string(String value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_IDP_STRING, value == null ? "" : value.toString());
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_IDP_STRING,
+                value == null ? "" : value.toString());
     }
 
     public static List<String> otasp_num_schema() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OTASP_NUM_SCHEMA);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda3
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_OTASP_NUM_SCHEMA);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda3
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        String tryParseString;
+                        tryParseString = TelephonyProperties.tryParseString((String) obj);
+                        return tryParseString;
+                    }
+                },
+                value);
     }
 
     public static Optional<Boolean> disable_call() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_DISABLE_CALL);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.PROPERTY_DISABLE_CALL);
         return Optional.ofNullable(tryParseBoolean(value));
     }
 
     public static Optional<Boolean> ril_sends_multiple_call_ring() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_RIL_SENDS_MULTIPLE_CALL_RING);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_RIL_SENDS_MULTIPLE_CALL_RING);
         return Optional.ofNullable(tryParseBoolean(value));
     }
 
     public static Optional<Integer> call_ring_delay() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_CALL_RING_DELAY);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_CALL_RING_DELAY);
         return Optional.ofNullable(tryParseInteger(value));
     }
 
     public static Optional<Integer> cdma_msg_id() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_CDMA_MSG_ID);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.PROPERTY_CDMA_MSG_ID);
         return Optional.ofNullable(tryParseInteger(value));
     }
 
     public static void cdma_msg_id(Integer value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_CDMA_MSG_ID, value == null ? "" : value.toString());
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_CDMA_MSG_ID,
+                value == null ? "" : value.toString());
     }
 
     public static Optional<Integer> wake_lock_timeout() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_WAKE_LOCK_TIMEOUT);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_WAKE_LOCK_TIMEOUT);
         return Optional.ofNullable(tryParseInteger(value));
     }
 
     public static Optional<Boolean> reset_on_radio_tech_change() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_RESET_ON_RADIO_TECH_CHANGE);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_RESET_ON_RADIO_TECH_CHANGE);
         return Optional.ofNullable(tryParseBoolean(value));
     }
 
     public static List<Boolean> sms_receive() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_SMS_RECEIVE);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda9
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Boolean tryParseBoolean;
-                tryParseBoolean = TelephonyProperties.tryParseBoolean((String) obj);
-                return tryParseBoolean;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.PROPERTY_SMS_RECEIVE);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda9
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        Boolean tryParseBoolean;
+                        tryParseBoolean = TelephonyProperties.tryParseBoolean((String) obj);
+                        return tryParseBoolean;
+                    }
+                },
+                value);
     }
 
     public static List<Boolean> sms_send() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_SMS_SEND);
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda10
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Boolean tryParseBoolean;
-                tryParseBoolean = TelephonyProperties.tryParseBoolean((String) obj);
-                return tryParseBoolean;
-            }
-        }, value);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.PROPERTY_SMS_SEND);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda10
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        Boolean tryParseBoolean;
+                        tryParseBoolean = TelephonyProperties.tryParseBoolean((String) obj);
+                        return tryParseBoolean;
+                    }
+                },
+                value);
     }
 
     public static Optional<Boolean> test_csim() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_TEST_CSIM);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.PROPERTY_TEST_CSIM);
         return Optional.ofNullable(tryParseBoolean(value));
     }
 
     public static Optional<Boolean> ignore_nitz() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_IGNORE_NITZ);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties.PROPERTY_IGNORE_NITZ);
         return Optional.ofNullable(tryParseBoolean(value));
     }
 
     public static Optional<String> multi_sim_config() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_MULTI_SIM_CONFIG);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_MULTI_SIM_CONFIG);
         return Optional.ofNullable(tryParseString(value));
     }
 
     public static void multi_sim_config(String value) {
-        SystemProperties.set(com.android.internal.telephony.TelephonyProperties.PROPERTY_MULTI_SIM_CONFIG, value == null ? "" : value.toString());
+        SystemProperties.set(
+                com.android.internal.telephony.TelephonyProperties.PROPERTY_MULTI_SIM_CONFIG,
+                value == null ? "" : value.toString());
     }
 
     public static Optional<Boolean> reboot_on_modem_change() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_REBOOT_REQUIRED_ON_MODEM_CHANGE);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_REBOOT_REQUIRED_ON_MODEM_CHANGE);
         return Optional.ofNullable(tryParseBoolean(value));
     }
 
@@ -532,14 +689,17 @@ public final class TelephonyProperties {
 
     public static List<Integer> default_network() {
         String value = SystemProperties.get("ro.telephony.default_network");
-        return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda13
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Integer tryParseInteger;
-                tryParseInteger = TelephonyProperties.tryParseInteger((String) obj);
-                return tryParseInteger;
-            }
-        }, value);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.TelephonyProperties$$ExternalSyntheticLambda13
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        Integer tryParseInteger;
+                        tryParseInteger = TelephonyProperties.tryParseInteger((String) obj);
+                        return tryParseInteger;
+                    }
+                },
+                value);
     }
 
     public static Optional<Boolean> data_roaming() {
@@ -558,7 +718,10 @@ public final class TelephonyProperties {
     }
 
     public static Optional<Integer> max_active_modems() {
-        String value = SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_MAX_ACTIVE_MODEMS);
+        String value =
+                SystemProperties.get(
+                        com.android.internal.telephony.TelephonyProperties
+                                .PROPERTY_MAX_ACTIVE_MODEMS);
         return Optional.ofNullable(tryParseInteger(value));
     }
 
@@ -573,7 +736,8 @@ public final class TelephonyProperties {
     }
 
     public static void multi_sim_voice_capability(Integer value) {
-        SystemProperties.set("ril.multisim.voice_capability", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "ril.multisim.voice_capability", value == null ? "" : value.toString());
     }
 
     public static Optional<Boolean> in_scbm() {
@@ -591,6 +755,7 @@ public final class TelephonyProperties {
     }
 
     public static void dsds_transition_supported(Boolean value) {
-        SystemProperties.set("ril.multisim.dsds_transition_supported", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "ril.multisim.dsds_transition_supported", value == null ? "" : value.toString());
     }
 }

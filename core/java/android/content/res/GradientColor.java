@@ -1,6 +1,5 @@
 package android.content.res;
 
-import android.content.res.Resources;
 import android.graphics.LinearGradient;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
@@ -8,13 +7,16 @@ import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.internal.R;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class GradientColor extends ComplexColor {
@@ -46,8 +48,7 @@ public class GradientColor extends ComplexColor {
     private int mTileMode;
 
     @Retention(RetentionPolicy.SOURCE)
-    private @interface GradientTileMode {
-    }
+    private @interface GradientTileMode {}
 
     private GradientColor() {
         this.mShader = null;
@@ -145,7 +146,8 @@ public class GradientColor extends ComplexColor {
 
     private void validateXmlContent() throws XmlPullParserException {
         if (this.mGradientRadius <= 0.0f && this.mGradientType == 1) {
-            throw new XmlPullParserException("<gradient> tag requires 'gradientRadius' attribute with radial type");
+            throw new XmlPullParserException(
+                    "<gradient> tag requires 'gradientRadius' attribute with radial type");
         }
     }
 
@@ -153,7 +155,9 @@ public class GradientColor extends ComplexColor {
         return this.mShader;
     }
 
-    public static GradientColor createFromXml(Resources r, XmlResourceParser parser, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public static GradientColor createFromXml(
+            Resources r, XmlResourceParser parser, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         int type;
         AttributeSet attrs = Xml.asAttributeSet(parser);
         do {
@@ -168,17 +172,22 @@ public class GradientColor extends ComplexColor {
         return createFromXmlInner(r, parser, attrs, theme);
     }
 
-    static GradientColor createFromXmlInner(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    static GradientColor createFromXmlInner(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         String name = parser.getName();
         if (!name.equals("gradient")) {
-            throw new XmlPullParserException(parser.getPositionDescription() + ": invalid gradient color tag " + name);
+            throw new XmlPullParserException(
+                    parser.getPositionDescription() + ": invalid gradient color tag " + name);
         }
         GradientColor gradientColor = new GradientColor();
         gradientColor.inflate(r, parser, attrs, theme);
         return gradientColor;
     }
 
-    private void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    private void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         TypedArray a = Resources.obtainAttributes(r, theme, attrs, R.styleable.GradientColor);
         updateRootElementState(a);
         this.mChangingConfigurations |= a.getChangingConfigurations();
@@ -189,47 +198,56 @@ public class GradientColor extends ComplexColor {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x00e4, code lost:
-    
-        if (r6 <= 0) goto L47;
-     */
+
+       if (r6 <= 0) goto L47;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:11:0x00e6, code lost:
-    
-        if (r7 == false) goto L33;
-     */
+
+       if (r7 == false) goto L33;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:12:0x00e8, code lost:
-    
-        r20.mItemsThemeAttrs = new int[r6][];
-        java.lang.System.arraycopy(r5, 0, r20.mItemsThemeAttrs, 0, r6);
-     */
+
+       r20.mItemsThemeAttrs = new int[r6][];
+       java.lang.System.arraycopy(r5, 0, r20.mItemsThemeAttrs, 0, r6);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:13:0x00f5, code lost:
-    
-        r20.mItemColors = new int[r6];
-        r20.mItemOffsets = new float[r6];
-        java.lang.System.arraycopy(r4, 0, r20.mItemColors, 0, r6);
-        java.lang.System.arraycopy(r3, 0, r20.mItemOffsets, 0, r6);
-     */
+
+       r20.mItemColors = new int[r6];
+       r20.mItemOffsets = new float[r6];
+       java.lang.System.arraycopy(r4, 0, r20.mItemColors, 0, r6);
+       java.lang.System.arraycopy(r3, 0, r20.mItemOffsets, 0, r6);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0107, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:16:0x00f2, code lost:
-    
-        r20.mItemsThemeAttrs = null;
-     */
+
+       r20.mItemsThemeAttrs = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:17:?, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void inflateChildElements(android.content.res.Resources r21, org.xmlpull.v1.XmlPullParser r22, android.util.AttributeSet r23, android.content.res.Resources.Theme r24) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    private void inflateChildElements(
+            android.content.res.Resources r21,
+            org.xmlpull.v1.XmlPullParser r22,
+            android.util.AttributeSet r23,
+            android.content.res.Resources.Theme r24)
+            throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             Method dump skipped, instructions count: 264
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.res.GradientColor.inflateChildElements(android.content.res.Resources, org.xmlpull.v1.XmlPullParser, android.util.AttributeSet, android.content.res.Resources$Theme):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.content.res.GradientColor.inflateChildElements(android.content.res.Resources,"
+                    + " org.xmlpull.v1.XmlPullParser, android.util.AttributeSet,"
+                    + " android.content.res.Resources$Theme):void");
     }
 
     private void applyItemsAttrsTheme(Resources.Theme t) {
@@ -241,7 +259,8 @@ public class GradientColor extends ComplexColor {
         int N = themeAttrsList.length;
         for (int i = 0; i < N; i++) {
             if (themeAttrsList[i] != null) {
-                TypedArray a = t.resolveAttributes(themeAttrsList[i], R.styleable.GradientColorItem);
+                TypedArray a =
+                        t.resolveAttributes(themeAttrsList[i], R.styleable.GradientColorItem);
                 themeAttrsList[i] = a.extractThemeAttrs(themeAttrsList[i]);
                 if (themeAttrsList[i] != null) {
                     hasUnresolvedAttrs = true;
@@ -269,18 +288,38 @@ public class GradientColor extends ComplexColor {
                 tempOffsets[i] = this.mItemOffsets[i];
             }
         } else if (this.mHasCenterColor) {
-            tempColors = new int[]{this.mStartColor, this.mCenterColor, this.mEndColor};
-            tempOffsets = new float[]{0.0f, 0.5f, 1.0f};
+            tempColors = new int[] {this.mStartColor, this.mCenterColor, this.mEndColor};
+            tempOffsets = new float[] {0.0f, 0.5f, 1.0f};
         } else {
-            tempColors = new int[]{this.mStartColor, this.mEndColor};
+            tempColors = new int[] {this.mStartColor, this.mEndColor};
         }
         if (tempColors.length < 2) {
-            Log.w(TAG, "<gradient> tag requires 2 color values specified!" + tempColors.length + " " + Arrays.toString(tempColors));
+            Log.w(
+                    TAG,
+                    "<gradient> tag requires 2 color values specified!"
+                            + tempColors.length
+                            + " "
+                            + Arrays.toString(tempColors));
         }
         if (this.mGradientType == 0) {
-            this.mShader = new LinearGradient(this.mStartX, this.mStartY, this.mEndX, this.mEndY, tempColors, tempOffsets, parseTileMode(this.mTileMode));
+            this.mShader =
+                    new LinearGradient(
+                            this.mStartX,
+                            this.mStartY,
+                            this.mEndX,
+                            this.mEndY,
+                            tempColors,
+                            tempOffsets,
+                            parseTileMode(this.mTileMode));
         } else if (this.mGradientType == 1) {
-            this.mShader = new RadialGradient(this.mCenterX, this.mCenterY, this.mGradientRadius, tempColors, tempOffsets, parseTileMode(this.mTileMode));
+            this.mShader =
+                    new RadialGradient(
+                            this.mCenterX,
+                            this.mCenterY,
+                            this.mGradientRadius,
+                            tempColors,
+                            tempOffsets,
+                            parseTileMode(this.mTileMode));
         } else {
             this.mShader = new SweepGradient(this.mCenterX, this.mCenterY, tempColors, tempOffsets);
         }

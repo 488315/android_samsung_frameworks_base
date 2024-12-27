@@ -56,6 +56,7 @@ import android.util.IntArray;
 import android.util.LocalLog;
 import android.util.Pair;
 import android.util.SparseArray;
+
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.telephony.ICarrierConfigChangeListener;
 import com.android.internal.telephony.ICarrierPrivilegesCallback;
@@ -74,8 +75,11 @@ import com.android.internal.util.IndentingPrintWriter;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.am.BatteryStatsService;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
-import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import dalvik.annotation.optimization.NeverCompile;
+
+import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -96,7 +100,8 @@ import java.util.stream.Collectors;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public class TelephonyRegistry extends ITelephonyRegistry.Stub {
-    public static final List INVALID_LCE_LIST = new ArrayList(Arrays.asList(new LinkCapacityEstimate(2, -1, -1)));
+    public static final List INVALID_LCE_LIST =
+            new ArrayList(Arrays.asList(new LinkCapacityEstimate(2, -1, -1)));
     public static final Set REQUIRE_PRECISE_PHONE_STATE_PERMISSION;
     public int[] mAllowedNetworkTypeReason;
     public long[] mAllowedNetworkTypeValue;
@@ -165,93 +170,114 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
     public final LocalLog mLocalLog = new LocalLog(256);
     public final LocalLog mListenLog = new LocalLog(256);
     public int[] mSimultaneousCellularCallingSubIds = new int[0];
-    public final AnonymousClass1 mHandler = new Handler() { // from class: com.android.server.TelephonyRegistry.1
-        @Override // android.os.Handler
-        public final void handleMessage(Message message) {
-            int i = message.what;
-            if (i == 1) {
-                TelephonyRegistry telephonyRegistry = TelephonyRegistry.this;
-                List list = TelephonyRegistry.INVALID_LCE_LIST;
-                int activeModemCount = ((TelephonyManager) telephonyRegistry.mContext.getSystemService("phone")).getActiveModemCount();
-                for (int i2 = 0; i2 < activeModemCount; i2++) {
-                    int subscriptionId = SubscriptionManager.getSubscriptionId(i2);
-                    if (!SubscriptionManager.isValidSubscriptionId(subscriptionId)) {
-                        subscriptionId = Integer.MAX_VALUE;
+    public final AnonymousClass1 mHandler =
+            new Handler() { // from class: com.android.server.TelephonyRegistry.1
+                @Override // android.os.Handler
+                public final void handleMessage(Message message) {
+                    int i = message.what;
+                    if (i == 1) {
+                        TelephonyRegistry telephonyRegistry = TelephonyRegistry.this;
+                        List list = TelephonyRegistry.INVALID_LCE_LIST;
+                        int activeModemCount =
+                                ((TelephonyManager)
+                                                telephonyRegistry.mContext.getSystemService(
+                                                        "phone"))
+                                        .getActiveModemCount();
+                        for (int i2 = 0; i2 < activeModemCount; i2++) {
+                            int subscriptionId = SubscriptionManager.getSubscriptionId(i2);
+                            if (!SubscriptionManager.isValidSubscriptionId(subscriptionId)) {
+                                subscriptionId = Integer.MAX_VALUE;
+                            }
+                            TelephonyRegistry telephonyRegistry2 = TelephonyRegistry.this;
+                            telephonyRegistry2.notifyCellLocationForSubscriber(
+                                    subscriptionId, telephonyRegistry2.mCellIdentity[i2], true);
+                        }
+                        return;
                     }
-                    TelephonyRegistry telephonyRegistry2 = TelephonyRegistry.this;
-                    telephonyRegistry2.notifyCellLocationForSubscriber(subscriptionId, telephonyRegistry2.mCellIdentity[i2], true);
-                }
-                return;
-            }
-            if (i != 2) {
-                return;
-            }
-            int i3 = message.arg1;
-            int i4 = message.arg2;
-            synchronized (TelephonyRegistry.this.mRecords) {
-                try {
-                    Iterator it = TelephonyRegistry.this.mRecords.iterator();
-                    while (it.hasNext()) {
-                        Record record = (Record) it.next();
-                        if (record.subId == Integer.MAX_VALUE) {
-                            TelephonyRegistry.m96$$Nest$mcheckPossibleMissNotify(TelephonyRegistry.this, record, i3);
+                    if (i != 2) {
+                        return;
+                    }
+                    int i3 = message.arg1;
+                    int i4 = message.arg2;
+                    synchronized (TelephonyRegistry.this.mRecords) {
+                        try {
+                            Iterator it = TelephonyRegistry.this.mRecords.iterator();
+                            while (it.hasNext()) {
+                                Record record = (Record) it.next();
+                                if (record.subId == Integer.MAX_VALUE) {
+                                    TelephonyRegistry.m96$$Nest$mcheckPossibleMissNotify(
+                                            TelephonyRegistry.this, record, i3);
+                                }
+                            }
+                            TelephonyRegistry.this.handleRemoveListLocked();
+                        } catch (Throwable th) {
+                            throw th;
                         }
                     }
-                    TelephonyRegistry.this.handleRemoveListLocked();
-                } catch (Throwable th) {
-                    throw th;
+                    TelephonyRegistry telephonyRegistry3 = TelephonyRegistry.this;
+                    telephonyRegistry3.mDefaultSubId = i4;
+                    telephonyRegistry3.mDefaultPhoneId = i3;
+                    telephonyRegistry3.mLocalLog.log(
+                            "Default subscription updated: mDefaultPhoneId="
+                                    + TelephonyRegistry.this.mDefaultPhoneId
+                                    + ", mDefaultSubId="
+                                    + TelephonyRegistry.this.mDefaultSubId);
                 }
-            }
-            TelephonyRegistry telephonyRegistry3 = TelephonyRegistry.this;
-            telephonyRegistry3.mDefaultSubId = i4;
-            telephonyRegistry3.mDefaultPhoneId = i3;
-            telephonyRegistry3.mLocalLog.log("Default subscription updated: mDefaultPhoneId=" + TelephonyRegistry.this.mDefaultPhoneId + ", mDefaultSubId=" + TelephonyRegistry.this.mDefaultSubId);
-        }
-    };
-    public final AnonymousClass2 mBroadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.TelephonyRegistry.2
-        @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if ("android.intent.action.USER_SWITCHED".equals(action)) {
-                int intExtra = intent.getIntExtra("android.intent.extra.user_handle", 0);
-                AnonymousClass1 anonymousClass1 = TelephonyRegistry.this.mHandler;
-                anonymousClass1.sendMessage(anonymousClass1.obtainMessage(1, intExtra, 0));
-                return;
-            }
-            if (!action.equals("android.telephony.action.DEFAULT_SUBSCRIPTION_CHANGED")) {
-                if (action.equals("android.telephony.action.MULTI_SIM_CONFIG_CHANGED")) {
-                    TelephonyRegistry telephonyRegistry = TelephonyRegistry.this;
-                    List list = TelephonyRegistry.INVALID_LCE_LIST;
-                    telephonyRegistry.onMultiSimConfigChanged();
-                    return;
+            };
+    public final AnonymousClass2 mBroadcastReceiver =
+            new BroadcastReceiver() { // from class: com.android.server.TelephonyRegistry.2
+                @Override // android.content.BroadcastReceiver
+                public final void onReceive(Context context, Intent intent) {
+                    String action = intent.getAction();
+                    if ("android.intent.action.USER_SWITCHED".equals(action)) {
+                        int intExtra = intent.getIntExtra("android.intent.extra.user_handle", 0);
+                        AnonymousClass1 anonymousClass1 = TelephonyRegistry.this.mHandler;
+                        anonymousClass1.sendMessage(anonymousClass1.obtainMessage(1, intExtra, 0));
+                        return;
+                    }
+                    if (!action.equals("android.telephony.action.DEFAULT_SUBSCRIPTION_CHANGED")) {
+                        if (action.equals("android.telephony.action.MULTI_SIM_CONFIG_CHANGED")) {
+                            TelephonyRegistry telephonyRegistry = TelephonyRegistry.this;
+                            List list = TelephonyRegistry.INVALID_LCE_LIST;
+                            telephonyRegistry.onMultiSimConfigChanged();
+                            return;
+                        }
+                        return;
+                    }
+                    int intExtra2 =
+                            intent.getIntExtra(
+                                    "android.telephony.extra.SUBSCRIPTION_INDEX",
+                                    SubscriptionManager.getDefaultSubscriptionId());
+                    TelephonyRegistry telephonyRegistry2 = TelephonyRegistry.this;
+                    List list2 = TelephonyRegistry.INVALID_LCE_LIST;
+                    int intExtra3 =
+                            intent.getIntExtra(
+                                    "android.telephony.extra.SLOT_INDEX",
+                                    telephonyRegistry2.getPhoneIdFromSubId(intExtra2));
+                    if (TelephonyRegistry.this.validatePhoneId(intExtra3)) {
+                        TelephonyRegistry telephonyRegistry3 = TelephonyRegistry.this;
+                        if (intExtra2 != telephonyRegistry3.mDefaultSubId
+                                || intExtra3 != telephonyRegistry3.mDefaultPhoneId) {
+                            AnonymousClass1 anonymousClass12 = telephonyRegistry3.mHandler;
+                            anonymousClass12.sendMessage(
+                                    anonymousClass12.obtainMessage(2, intExtra3, intExtra2));
+                            return;
+                        }
+                    }
+                    if (TelephonyRegistry.this.getPhoneIdFromSubId(intExtra2) == -1) {
+                        TelephonyRegistry telephonyRegistry4 = TelephonyRegistry.this;
+                        telephonyRegistry4.mDefaultSubId = -1;
+                        telephonyRegistry4.mDefaultPhoneId = -1;
+                    }
                 }
-                return;
-            }
-            int intExtra2 = intent.getIntExtra("android.telephony.extra.SUBSCRIPTION_INDEX", SubscriptionManager.getDefaultSubscriptionId());
-            TelephonyRegistry telephonyRegistry2 = TelephonyRegistry.this;
-            List list2 = TelephonyRegistry.INVALID_LCE_LIST;
-            int intExtra3 = intent.getIntExtra("android.telephony.extra.SLOT_INDEX", telephonyRegistry2.getPhoneIdFromSubId(intExtra2));
-            if (TelephonyRegistry.this.validatePhoneId(intExtra3)) {
-                TelephonyRegistry telephonyRegistry3 = TelephonyRegistry.this;
-                if (intExtra2 != telephonyRegistry3.mDefaultSubId || intExtra3 != telephonyRegistry3.mDefaultPhoneId) {
-                    AnonymousClass1 anonymousClass12 = telephonyRegistry3.mHandler;
-                    anonymousClass12.sendMessage(anonymousClass12.obtainMessage(2, intExtra3, intExtra2));
-                    return;
-                }
-            }
-            if (TelephonyRegistry.this.getPhoneIdFromSubId(intExtra2) == -1) {
-                TelephonyRegistry telephonyRegistry4 = TelephonyRegistry.this;
-                telephonyRegistry4.mDefaultSubId = -1;
-                telephonyRegistry4.mDefaultPhoneId = -1;
-            }
-        }
-    };
+            };
     public final IBatteryStats mBatteryStats = BatteryStatsService.getService();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.TelephonyRegistry$3, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass3 {
-        public static final /* synthetic */ int[] $SwitchMap$android$telephony$LocationAccessPolicy$LocationPermissionResult;
+        public static final /* synthetic */ int[]
+                $SwitchMap$android$telephony$LocationAccessPolicy$LocationPermissionResult;
 
         static {
             int[] iArr = new int[LocationAccessPolicy.LocationPermissionResult.values().length];
@@ -261,15 +287,17 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             } catch (NoSuchFieldError unused) {
             }
             try {
-                $SwitchMap$android$telephony$LocationAccessPolicy$LocationPermissionResult[LocationAccessPolicy.LocationPermissionResult.DENIED_SOFT.ordinal()] = 2;
+                $SwitchMap$android$telephony$LocationAccessPolicy$LocationPermissionResult[
+                                LocationAccessPolicy.LocationPermissionResult.DENIED_SOFT
+                                        .ordinal()] =
+                        2;
             } catch (NoSuchFieldError unused2) {
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class ConfigurationProvider {
-    }
+    public final class ConfigurationProvider {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Record {
@@ -293,7 +321,13 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
 
         public final boolean canReadCallLog() {
             try {
-                return TelephonyPermissions.checkReadCallLog(this.context, this.subId, this.callerPid, this.callerUid, this.callingPackage, this.callingFeatureId);
+                return TelephonyPermissions.checkReadCallLog(
+                        this.context,
+                        this.subId,
+                        this.callerPid,
+                        this.callerUid,
+                        this.callingPackage,
+                        this.callingFeatureId);
             } catch (SecurityException unused) {
                 return false;
             }
@@ -354,7 +388,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
     }
 
     /* renamed from: -$$Nest$mcheckPossibleMissNotify, reason: not valid java name */
-    public static void m96$$Nest$mcheckPossibleMissNotify(TelephonyRegistry telephonyRegistry, Record record, int i) {
+    public static void m96$$Nest$mcheckPossibleMissNotify(
+            TelephonyRegistry telephonyRegistry, Record record, int i) {
         telephonyRegistry.getClass();
         Set set = record.eventList;
         if (set == null || set.isEmpty()) {
@@ -367,9 +402,11 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                 if (telephonyRegistry.checkFineLocationAccess(record, 29)) {
                     record.callback.onServiceStateChanged(serviceState);
                 } else if (telephonyRegistry.checkCoarseLocationAccess(record, 29)) {
-                    record.callback.onServiceStateChanged(serviceState.createLocationInfoSanitizedCopy(false));
+                    record.callback.onServiceStateChanged(
+                            serviceState.createLocationInfoSanitizedCopy(false));
                 } else {
-                    record.callback.onServiceStateChanged(serviceState.createLocationInfoSanitizedCopy(true));
+                    record.callback.onServiceStateChanged(
+                            serviceState.createLocationInfoSanitizedCopy(true));
                 }
             } catch (RemoteException unused) {
                 telephonyRegistry.mRemoveList.add(record.binder);
@@ -402,7 +439,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
         if (validateEventAndUserLocked(record, 11)) {
             try {
-                if (telephonyRegistry.checkCoarseLocationAccess(record, 1) && telephonyRegistry.checkFineLocationAccess(record, 29)) {
+                if (telephonyRegistry.checkCoarseLocationAccess(record, 1)
+                        && telephonyRegistry.checkFineLocationAccess(record, 29)) {
                     record.callback.onCellInfoChanged((List) telephonyRegistry.mCellInfo.get(i));
                 }
             } catch (RemoteException unused4) {
@@ -411,14 +449,16 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
         if (set.contains(20)) {
             try {
-                record.callback.onUserMobileDataStateChanged(telephonyRegistry.mUserMobileDataState[i]);
+                record.callback.onUserMobileDataStateChanged(
+                        telephonyRegistry.mUserMobileDataState[i]);
             } catch (RemoteException unused5) {
                 telephonyRegistry.mRemoveList.add(record.binder);
             }
         }
         if (set.contains(21)) {
             try {
-                TelephonyDisplayInfo telephonyDisplayInfo = telephonyRegistry.mTelephonyDisplayInfos[i];
+                TelephonyDisplayInfo telephonyDisplayInfo =
+                        telephonyRegistry.mTelephonyDisplayInfos[i];
                 if (telephonyDisplayInfo != null) {
                     record.callback.onDisplayInfoChanged(telephonyDisplayInfo);
                 }
@@ -428,21 +468,24 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
         if (set.contains(3)) {
             try {
-                record.callback.onMessageWaitingIndicatorChanged(telephonyRegistry.mMessageWaiting[i]);
+                record.callback.onMessageWaitingIndicatorChanged(
+                        telephonyRegistry.mMessageWaiting[i]);
             } catch (RemoteException unused7) {
                 telephonyRegistry.mRemoveList.add(record.binder);
             }
         }
         if (set.contains(4)) {
             try {
-                record.callback.onCallForwardingIndicatorChanged(telephonyRegistry.mCallForwarding[i]);
+                record.callback.onCallForwardingIndicatorChanged(
+                        telephonyRegistry.mCallForwarding[i]);
             } catch (RemoteException unused8) {
                 telephonyRegistry.mRemoveList.add(record.binder);
             }
         }
         if (validateEventAndUserLocked(record, 5)) {
             try {
-                if (telephonyRegistry.checkCoarseLocationAccess(record, 1) && telephonyRegistry.checkFineLocationAccess(record, 29)) {
+                if (telephonyRegistry.checkCoarseLocationAccess(record, 1)
+                        && telephonyRegistry.checkFineLocationAccess(record, 29)) {
                     record.callback.onCellLocationChanged(telephonyRegistry.mCellIdentity[i]);
                 }
             } catch (RemoteException unused9) {
@@ -451,7 +494,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
         if (set.contains(7)) {
             try {
-                record.callback.onDataConnectionStateChanged(telephonyRegistry.mDataConnectionState[i], telephonyRegistry.mDataConnectionNetworkType[i]);
+                record.callback.onDataConnectionStateChanged(
+                        telephonyRegistry.mDataConnectionState[i],
+                        telephonyRegistry.mDataConnectionNetworkType[i]);
             } catch (RemoteException unused10) {
                 telephonyRegistry.mRemoveList.add(record.binder);
             }
@@ -487,7 +532,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         this.mSatSignalStrength = null;
         this.mContext = context;
         this.mConfigurationProvider = configurationProvider;
-        int activeModemCount = ((TelephonyManager) context.getSystemService("phone")).getActiveModemCount();
+        int activeModemCount =
+                ((TelephonyManager) context.getSystemService("phone")).getActiveModemCount();
         this.mNumPhones = activeModemCount;
         this.mCallState = new int[activeModemCount];
         this.mDataActivity = new int[activeModemCount];
@@ -576,7 +622,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             this.mAllowedNetworkTypeReason[i] = -1;
             this.mAllowedNetworkTypeValue[i] = -1;
             ((ArrayList) this.mLinkCapacityEstimateLists).add(i, INVALID_LCE_LIST);
-            ((ArrayList) this.mCarrierPrivilegeStates).add(i, new Pair(Collections.emptyList(), new int[0]));
+            ((ArrayList) this.mCarrierPrivilegeStates)
+                    .add(i, new Pair(Collections.emptyList(), new int[0]));
             ((ArrayList) this.mCarrierServiceStates).add(i, new Pair(null, -1));
             this.mECBMReason[i] = 0;
             this.mECBMStarted[i] = false;
@@ -595,11 +642,23 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
     }
 
     public static BroadcastOptions createServiceStateBroadcastOptions(int i, int i2, String str) {
-        return new BroadcastOptions().setDeliveryGroupPolicy(1).setDeliveryGroupMatchingKey("android.intent.action.SERVICE_STATE", i + PackageManagerShellCommandDataLoader.STDIN_PATH + i2 + PackageManagerShellCommandDataLoader.STDIN_PATH + str).setDeferralPolicy(2);
+        return new BroadcastOptions()
+                .setDeliveryGroupPolicy(1)
+                .setDeliveryGroupMatchingKey(
+                        "android.intent.action.SERVICE_STATE",
+                        i
+                                + PackageManagerShellCommandDataLoader.STDIN_PATH
+                                + i2
+                                + PackageManagerShellCommandDataLoader.STDIN_PATH
+                                + str)
+                .setDeferralPolicy(2);
     }
 
-    public static Intent createServiceStateIntent(ServiceState serviceState, int i, int i2, boolean z) {
-        Intent m = BatteryService$$ExternalSyntheticOutline0.m(16777216, "android.intent.action.SERVICE_STATE");
+    public static Intent createServiceStateIntent(
+            ServiceState serviceState, int i, int i2, boolean z) {
+        Intent m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        16777216, "android.intent.action.SERVICE_STATE");
         Bundle bundle = new Bundle();
         if (z) {
             serviceState.createLocationInfoSanitizedCopy(true).fillInNotifierBundle(bundle);
@@ -700,26 +759,48 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                     }
                 }
                 this.mConfigurationProvider.getClass();
-                int intValue = ((Integer) Binder.withCleanCallingIdentity(new TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda6())).intValue();
+                int intValue =
+                        ((Integer)
+                                        Binder.withCleanCallingIdentity(
+                                                new TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda6()))
+                                .intValue();
                 if (z && intValue >= 1 && i3 >= intValue) {
-                    String str = "Pid " + i2 + " has exceeded the number of permissible registered listeners. Ignoring request to add.";
+                    String str =
+                            "Pid "
+                                    + i2
+                                    + " has exceeded the number of permissible registered"
+                                    + " listeners. Ignoring request to add.";
                     loge(str);
                     this.mConfigurationProvider.getClass();
-                    if (((Boolean) Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingSupplier() { // from class: com.android.server.TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda1
-                        public final Object getOrThrow() {
-                            return Boolean.valueOf(CompatChanges.isChangeEnabled(150880553L, i));
-                        }
-                    })).booleanValue()) {
+                    if (((Boolean)
+                                    Binder.withCleanCallingIdentity(
+                                            new FunctionalUtils
+                                                    .ThrowingSupplier() { // from class:
+                                                                          // com.android.server.TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda1
+                                                public final Object getOrThrow() {
+                                                    return Boolean.valueOf(
+                                                            CompatChanges.isChangeEnabled(
+                                                                    150880553L, i));
+                                                }
+                                            }))
+                            .booleanValue()) {
                         throw new IllegalStateException(str);
                     }
                 } else if (i3 >= 25) {
-                    Rlog.w("TelephonyRegistry", "Pid " + i2 + " has exceeded half the number of permissible registered listeners. Now at " + i3);
+                    Rlog.w(
+                            "TelephonyRegistry",
+                            "Pid "
+                                    + i2
+                                    + " has exceeded half the number of permissible registered"
+                                    + " listeners. Now at "
+                                    + i3);
                 }
                 Record record2 = new Record();
                 record2.subId = -1;
                 record2.phoneId = -1;
                 record2.binder = iBinder;
-                TelephonyRegistryDeathRecipient telephonyRegistryDeathRecipient = new TelephonyRegistryDeathRecipient(iBinder);
+                TelephonyRegistryDeathRecipient telephonyRegistryDeathRecipient =
+                        new TelephonyRegistryDeathRecipient(iBinder);
                 record2.deathRecipient = telephonyRegistryDeathRecipient;
                 try {
                     iBinder.linkToDeath(telephonyRegistryDeathRecipient, 0);
@@ -734,12 +815,19 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void addCarrierConfigChangeListener(ICarrierConfigChangeListener iCarrierConfigChangeListener, String str, String str2) {
+    public final void addCarrierConfigChangeListener(
+            ICarrierConfigChangeListener iCarrierConfigChangeListener, String str, String str2) {
         UserHandle.getCallingUserId();
         this.mAppOps.checkPackage(Binder.getCallingUid(), str);
         synchronized (this.mRecords) {
             try {
-                Record add = add(Binder.getCallingUid(), Binder.getCallingPid(), iCarrierConfigChangeListener.asBinder(), doesLimitApplyForListeners(Binder.getCallingUid(), Process.myUid()));
+                Record add =
+                        add(
+                                Binder.getCallingUid(),
+                                Binder.getCallingPid(),
+                                iCarrierConfigChangeListener.asBinder(),
+                                doesLimitApplyForListeners(
+                                        Binder.getCallingUid(), Process.myUid()));
                 if (add == null) {
                     loge("Can not create Record instance!");
                     return;
@@ -757,17 +845,24 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void addCarrierPrivilegesCallback(int i, ICarrierPrivilegesCallback iCarrierPrivilegesCallback, String str, String str2) {
+    public final void addCarrierPrivilegesCallback(
+            int i, ICarrierPrivilegesCallback iCarrierPrivilegesCallback, String str, String str2) {
         UserHandle.getCallingUserId();
         this.mAppOps.checkPackage(Binder.getCallingUid(), str);
-        this.mContext.enforceCallingOrSelfPermission("android.permission.READ_PRIVILEGED_PHONE_STATE", "addCarrierPrivilegesCallback");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.READ_PRIVILEGED_PHONE_STATE", "addCarrierPrivilegesCallback");
         onMultiSimConfigChanged();
         synchronized (this.mRecords) {
             try {
                 if (!validatePhoneId(i)) {
                     throw new IllegalArgumentException("Invalid slot index: " + i);
                 }
-                Record add = add(Binder.getCallingUid(), Binder.getCallingPid(), iCarrierPrivilegesCallback.asBinder(), false);
+                Record add =
+                        add(
+                                Binder.getCallingUid(),
+                                Binder.getCallingPid(),
+                                iCarrierPrivilegesCallback.asBinder(),
+                                false);
                 if (add == null) {
                     return;
                 }
@@ -782,12 +877,15 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                 Pair pair = (Pair) ((ArrayList) this.mCarrierPrivilegeStates).get(i);
                 Pair pair2 = (Pair) ((ArrayList) this.mCarrierServiceStates).get(i);
                 try {
-                    ICarrierPrivilegesCallback iCarrierPrivilegesCallback2 = add.carrierPrivilegesCallback;
+                    ICarrierPrivilegesCallback iCarrierPrivilegesCallback2 =
+                            add.carrierPrivilegesCallback;
                     if (iCarrierPrivilegesCallback2 != null) {
                         List unmodifiableList = Collections.unmodifiableList((List) pair.first);
                         Object obj = pair.second;
-                        iCarrierPrivilegesCallback2.onCarrierPrivilegesChanged(unmodifiableList, Arrays.copyOf((int[]) obj, ((int[]) obj).length));
-                        add.carrierPrivilegesCallback.onCarrierServiceChanged((String) pair2.first, ((Integer) pair2.second).intValue());
+                        iCarrierPrivilegesCallback2.onCarrierPrivilegesChanged(
+                                unmodifiableList, Arrays.copyOf((int[]) obj, ((int[]) obj).length));
+                        add.carrierPrivilegesCallback.onCarrierServiceChanged(
+                                (String) pair2.first, ((Integer) pair2.second).intValue());
                     }
                 } catch (RemoteException unused) {
                     remove(add.binder);
@@ -798,17 +896,27 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void addOnOpportunisticSubscriptionsChangedListener(String str, String str2, IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) {
+    public final void addOnOpportunisticSubscriptionsChangedListener(
+            String str,
+            String str2,
+            IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) {
         UserHandle.getCallingUserId();
         this.mAppOps.checkPackage(Binder.getCallingUid(), str);
         synchronized (this.mRecords) {
             try {
-                Record add = add(Binder.getCallingUid(), Binder.getCallingPid(), iOnSubscriptionsChangedListener.asBinder(), doesLimitApplyForListeners(Binder.getCallingUid(), Process.myUid()));
+                Record add =
+                        add(
+                                Binder.getCallingUid(),
+                                Binder.getCallingPid(),
+                                iOnSubscriptionsChangedListener.asBinder(),
+                                doesLimitApplyForListeners(
+                                        Binder.getCallingUid(), Process.myUid()));
                 if (add == null) {
                     return;
                 }
                 add.context = this.mContext;
-                add.onOpportunisticSubscriptionsChangedListenerCallback = iOnSubscriptionsChangedListener;
+                add.onOpportunisticSubscriptionsChangedListenerCallback =
+                        iOnSubscriptionsChangedListener;
                 add.callingPackage = str;
                 add.callingFeatureId = str2;
                 add.callerUid = Binder.getCallingUid();
@@ -816,7 +924,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                 add.eventList = new ArraySet();
                 if (this.mHasNotifyOpportunisticSubscriptionInfoChangedOccurred) {
                     try {
-                        add.onOpportunisticSubscriptionsChangedListenerCallback.onSubscriptionsChanged();
+                        add.onOpportunisticSubscriptionsChangedListenerCallback
+                                .onSubscriptionsChanged();
                     } catch (RemoteException unused) {
                         remove(add.binder);
                     }
@@ -829,12 +938,21 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void addOnSubscriptionsChangedListener(String str, String str2, IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) {
+    public final void addOnSubscriptionsChangedListener(
+            String str,
+            String str2,
+            IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) {
         UserHandle.getCallingUserId();
         this.mAppOps.checkPackage(Binder.getCallingUid(), str);
         synchronized (this.mRecords) {
             try {
-                Record add = add(Binder.getCallingUid(), Binder.getCallingPid(), iOnSubscriptionsChangedListener.asBinder(), doesLimitApplyForListeners(Binder.getCallingUid(), Process.myUid()));
+                Record add =
+                        add(
+                                Binder.getCallingUid(),
+                                Binder.getCallingPid(),
+                                iOnSubscriptionsChangedListener.asBinder(),
+                                doesLimitApplyForListeners(
+                                        Binder.getCallingUid(), Process.myUid()));
                 if (add == null) {
                     return;
                 }
@@ -852,7 +970,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         remove(add.binder);
                     }
                 } else {
-                    log("listen oscl: mHasNotifySubscriptionInfoChangedOccurred==false no callback");
+                    log(
+                            "listen oscl: mHasNotifySubscriptionInfoChangedOccurred==false no"
+                                + " callback");
                 }
             } catch (Throwable th) {
                 throw th;
@@ -877,7 +997,13 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
         Binder.restoreCallingIdentity(clearCallingIdentity);
         Intent intent = new Intent("android.intent.action.PHONE_STATE");
-        intent.putExtra(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, i != 1 ? i != 2 ? TelephonyManager.EXTRA_STATE_IDLE : TelephonyManager.EXTRA_STATE_OFFHOOK : TelephonyManager.EXTRA_STATE_RINGING);
+        intent.putExtra(
+                LauncherConfigurationInternal.KEY_STATE_BOOLEAN,
+                i != 1
+                        ? i != 2
+                                ? TelephonyManager.EXTRA_STATE_IDLE
+                                : TelephonyManager.EXTRA_STATE_OFFHOOK
+                        : TelephonyManager.EXTRA_STATE_RINGING);
         if (i3 != -1) {
             intent.setAction("android.intent.action.SUBSCRIPTION_PHONE_STATE");
             intent.putExtra("subscription", i3);
@@ -892,22 +1018,40 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         intent2.putExtra("incoming_number", str);
         Context context = this.mContext;
         UserHandle userHandle = UserHandle.ALL;
-        context.sendBroadcastAsUser(intent2, userHandle, "android.permission.READ_PRIVILEGED_PHONE_STATE");
-        this.mContext.sendBroadcastAsUser(intent, userHandle, "android.permission.READ_PHONE_STATE", 51);
-        this.mContext.sendBroadcastAsUserMultiplePermissions(intent2, userHandle, new String[]{"android.permission.READ_PHONE_STATE", "android.permission.READ_CALL_LOG"});
+        context.sendBroadcastAsUser(
+                intent2, userHandle, "android.permission.READ_PRIVILEGED_PHONE_STATE");
+        this.mContext.sendBroadcastAsUser(
+                intent, userHandle, "android.permission.READ_PHONE_STATE", 51);
+        this.mContext.sendBroadcastAsUserMultiplePermissions(
+                intent2,
+                userHandle,
+                new String[] {
+                    "android.permission.READ_PHONE_STATE", "android.permission.READ_CALL_LOG"
+                });
     }
 
-    public final void broadcastDataConnectionStateChanged(int i, int i2, PreciseDataConnectionState preciseDataConnectionState) {
+    public final void broadcastDataConnectionStateChanged(
+            int i, int i2, PreciseDataConnectionState preciseDataConnectionState) {
         Intent intent = new Intent("android.intent.action.ANY_DATA_STATE");
-        intent.putExtra(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, TelephonyUtils.dataStateToString(preciseDataConnectionState.getState()));
+        intent.putExtra(
+                LauncherConfigurationInternal.KEY_STATE_BOOLEAN,
+                TelephonyUtils.dataStateToString(preciseDataConnectionState.getState()));
         intent.putExtra("apn", preciseDataConnectionState.getApnSetting().getApnName());
-        intent.putExtra("apnType", getApnTypesStringFromBitmask(preciseDataConnectionState.getApnSetting().getApnTypeBitmask()));
+        intent.putExtra(
+                "apnType",
+                getApnTypesStringFromBitmask(
+                        preciseDataConnectionState.getApnSetting().getApnTypeBitmask()));
         intent.putExtra("slot", i);
         intent.putExtra("subscription", i2);
         Context context = this.mContext;
         UserHandle userHandle = UserHandle.ALL;
         context.sendBroadcastAsUser(intent, userHandle, "android.permission.READ_PHONE_STATE");
-        this.mContext.createContextAsUser(userHandle, 0).sendBroadcastMultiplePermissions(intent, new String[]{"android.permission.READ_PRIVILEGED_PHONE_STATE"}, new String[]{"android.permission.READ_PHONE_STATE"});
+        this.mContext
+                .createContextAsUser(userHandle, 0)
+                .sendBroadcastMultiplePermissions(
+                        intent,
+                        new String[] {"android.permission.READ_PRIVILEGED_PHONE_STATE"},
+                        new String[] {"android.permission.READ_PHONE_STATE"});
     }
 
     public final void broadcastServiceStateChanged(int i, int i2, ServiceState serviceState) {
@@ -920,81 +1064,182 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             Intent createServiceStateIntent = createServiceStateIntent(serviceState, i2, i, false);
             Context context2 = this.mContext;
             UserHandle userHandle = UserHandle.ALL;
-            context2.createContextAsUser(userHandle, 0).sendBroadcastMultiplePermissions(createServiceStateIntent, new String[]{"android.permission.READ_PHONE_STATE", "android.permission.ACCESS_FINE_LOCATION"}, createServiceStateBroadcastOptions(i2, i, "I:RA"));
-            this.mContext.createContextAsUser(userHandle, 0).sendBroadcastMultiplePermissions(createServiceStateIntent, new String[]{"android.permission.READ_PRIVILEGED_PHONE_STATE", "android.permission.ACCESS_FINE_LOCATION"}, new String[]{"android.permission.READ_PHONE_STATE"}, null, createServiceStateBroadcastOptions(i2, i, "I:RPA,E:R"));
+            context2.createContextAsUser(userHandle, 0)
+                    .sendBroadcastMultiplePermissions(
+                            createServiceStateIntent,
+                            new String[] {
+                                "android.permission.READ_PHONE_STATE",
+                                "android.permission.ACCESS_FINE_LOCATION"
+                            },
+                            createServiceStateBroadcastOptions(i2, i, "I:RA"));
+            this.mContext
+                    .createContextAsUser(userHandle, 0)
+                    .sendBroadcastMultiplePermissions(
+                            createServiceStateIntent,
+                            new String[] {
+                                "android.permission.READ_PRIVILEGED_PHONE_STATE",
+                                "android.permission.ACCESS_FINE_LOCATION"
+                            },
+                            new String[] {"android.permission.READ_PHONE_STATE"},
+                            null,
+                            createServiceStateBroadcastOptions(i2, i, "I:RPA,E:R"));
             Intent createServiceStateIntent2 = createServiceStateIntent(serviceState, i2, i, true);
-            this.mContext.createContextAsUser(userHandle, 0).sendBroadcastMultiplePermissions(createServiceStateIntent2, new String[]{"android.permission.READ_PHONE_STATE"}, new String[]{"android.permission.ACCESS_FINE_LOCATION"}, null, createServiceStateBroadcastOptions(i2, i, "I:R,E:A"));
-            this.mContext.createContextAsUser(userHandle, 0).sendBroadcastMultiplePermissions(createServiceStateIntent2, new String[]{"android.permission.READ_PRIVILEGED_PHONE_STATE"}, new String[]{"android.permission.READ_PHONE_STATE", "android.permission.ACCESS_FINE_LOCATION"}, null, createServiceStateBroadcastOptions(i2, i, "I:RP,E:RA"));
+            this.mContext
+                    .createContextAsUser(userHandle, 0)
+                    .sendBroadcastMultiplePermissions(
+                            createServiceStateIntent2,
+                            new String[] {"android.permission.READ_PHONE_STATE"},
+                            new String[] {"android.permission.ACCESS_FINE_LOCATION"},
+                            null,
+                            createServiceStateBroadcastOptions(i2, i, "I:R,E:A"));
+            this.mContext
+                    .createContextAsUser(userHandle, 0)
+                    .sendBroadcastMultiplePermissions(
+                            createServiceStateIntent2,
+                            new String[] {"android.permission.READ_PRIVILEGED_PHONE_STATE"},
+                            new String[] {
+                                "android.permission.READ_PHONE_STATE",
+                                "android.permission.ACCESS_FINE_LOCATION"
+                            },
+                            null,
+                            createServiceStateBroadcastOptions(i2, i, "I:RP,E:RA"));
             return;
         }
-        String[] strArr = (String[]) Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingSupplier() { // from class: com.android.server.TelephonyRegistry$$ExternalSyntheticLambda0
-            public final Object getOrThrow() {
-                return LocationAccessPolicy.getLocationBypassPackages(TelephonyRegistry.this.mContext);
-            }
-        });
+        String[] strArr =
+                (String[])
+                        Binder.withCleanCallingIdentity(
+                                new FunctionalUtils
+                                        .ThrowingSupplier() { // from class:
+                                                              // com.android.server.TelephonyRegistry$$ExternalSyntheticLambda0
+                                    public final Object getOrThrow() {
+                                        return LocationAccessPolicy.getLocationBypassPackages(
+                                                TelephonyRegistry.this.mContext);
+                                    }
+                                });
         for (String str : strArr) {
             Intent createServiceStateIntent3 = createServiceStateIntent(serviceState, i2, i, false);
             createServiceStateIntent3.setPackage(str);
             Context context3 = this.mContext;
             UserHandle userHandle2 = UserHandle.ALL;
-            context3.createContextAsUser(userHandle2, 0).sendBroadcastMultiplePermissions(createServiceStateIntent3, new String[]{"android.permission.READ_PHONE_STATE"}, createServiceStateBroadcastOptions(i2, i, "I:R"));
-            this.mContext.createContextAsUser(userHandle2, 0).sendBroadcastMultiplePermissions(createServiceStateIntent3, new String[]{"android.permission.READ_PRIVILEGED_PHONE_STATE"}, new String[]{"android.permission.READ_PHONE_STATE"}, null, createServiceStateBroadcastOptions(i2, i, "I:RP,E:R"));
+            context3.createContextAsUser(userHandle2, 0)
+                    .sendBroadcastMultiplePermissions(
+                            createServiceStateIntent3,
+                            new String[] {"android.permission.READ_PHONE_STATE"},
+                            createServiceStateBroadcastOptions(i2, i, "I:R"));
+            this.mContext
+                    .createContextAsUser(userHandle2, 0)
+                    .sendBroadcastMultiplePermissions(
+                            createServiceStateIntent3,
+                            new String[] {"android.permission.READ_PRIVILEGED_PHONE_STATE"},
+                            new String[] {"android.permission.READ_PHONE_STATE"},
+                            null,
+                            createServiceStateBroadcastOptions(i2, i, "I:RP,E:R"));
         }
         Intent createServiceStateIntent4 = createServiceStateIntent(serviceState, i2, i, true);
         Context context4 = this.mContext;
         UserHandle userHandle3 = UserHandle.ALL;
-        context4.createContextAsUser(userHandle3, 0).sendBroadcastMultiplePermissions(createServiceStateIntent4, new String[]{"android.permission.READ_PHONE_STATE"}, new String[0], strArr, createServiceStateBroadcastOptions(i2, i, "I:R,lbp"));
-        this.mContext.createContextAsUser(userHandle3, 0).sendBroadcastMultiplePermissions(createServiceStateIntent4, new String[]{"android.permission.READ_PRIVILEGED_PHONE_STATE"}, new String[]{"android.permission.READ_PHONE_STATE"}, strArr, createServiceStateBroadcastOptions(i2, i, "I:RP,E:R,lbp"));
+        context4.createContextAsUser(userHandle3, 0)
+                .sendBroadcastMultiplePermissions(
+                        createServiceStateIntent4,
+                        new String[] {"android.permission.READ_PHONE_STATE"},
+                        new String[0],
+                        strArr,
+                        createServiceStateBroadcastOptions(i2, i, "I:R,lbp"));
+        this.mContext
+                .createContextAsUser(userHandle3, 0)
+                .sendBroadcastMultiplePermissions(
+                        createServiceStateIntent4,
+                        new String[] {"android.permission.READ_PRIVILEGED_PHONE_STATE"},
+                        new String[] {"android.permission.READ_PHONE_STATE"},
+                        strArr,
+                        createServiceStateBroadcastOptions(i2, i, "I:RP,E:R,lbp"));
     }
 
     public final boolean checkCoarseLocationAccess(Record record, int i) {
         if (record.renounceCoarseLocationAccess) {
             return false;
         }
-        return ((Boolean) Binder.withCleanCallingIdentity(new TelephonyRegistry$$ExternalSyntheticLambda2(this, new LocationAccessPolicy.LocationPermissionQuery.Builder().setCallingPackage(record.callingPackage).setCallingFeatureId(record.callingFeatureId).setCallingPid(record.callerPid).setCallingUid(record.callerUid).setMethod("TelephonyRegistry push").setLogAsInfo(true).setMinSdkVersionForCoarse(i).setMinSdkVersionForFine(Integer.MAX_VALUE).setMinSdkVersionForEnforcement(i).build(), 1))).booleanValue();
+        return ((Boolean)
+                        Binder.withCleanCallingIdentity(
+                                new TelephonyRegistry$$ExternalSyntheticLambda2(
+                                        this,
+                                        new LocationAccessPolicy.LocationPermissionQuery.Builder()
+                                                .setCallingPackage(record.callingPackage)
+                                                .setCallingFeatureId(record.callingFeatureId)
+                                                .setCallingPid(record.callerPid)
+                                                .setCallingUid(record.callerUid)
+                                                .setMethod("TelephonyRegistry push")
+                                                .setLogAsInfo(true)
+                                                .setMinSdkVersionForCoarse(i)
+                                                .setMinSdkVersionForFine(Integer.MAX_VALUE)
+                                                .setMinSdkVersionForEnforcement(i)
+                                                .build(),
+                                        1)))
+                .booleanValue();
     }
 
     public final boolean checkFineLocationAccess(Record record, int i) {
         if (record.renounceFineLocationAccess) {
             return false;
         }
-        return ((Boolean) Binder.withCleanCallingIdentity(new TelephonyRegistry$$ExternalSyntheticLambda2(this, new LocationAccessPolicy.LocationPermissionQuery.Builder().setCallingPackage(record.callingPackage).setCallingFeatureId(record.callingFeatureId).setCallingPid(record.callerPid).setCallingUid(record.callerUid).setMethod("TelephonyRegistry push").setLogAsInfo(true).setMinSdkVersionForFine(i).setMinSdkVersionForCoarse(i).setMinSdkVersionForEnforcement(i).build(), 0))).booleanValue();
+        return ((Boolean)
+                        Binder.withCleanCallingIdentity(
+                                new TelephonyRegistry$$ExternalSyntheticLambda2(
+                                        this,
+                                        new LocationAccessPolicy.LocationPermissionQuery.Builder()
+                                                .setCallingPackage(record.callingPackage)
+                                                .setCallingFeatureId(record.callingFeatureId)
+                                                .setCallingPid(record.callerPid)
+                                                .setCallingUid(record.callerUid)
+                                                .setMethod("TelephonyRegistry push")
+                                                .setLogAsInfo(true)
+                                                .setMinSdkVersionForFine(i)
+                                                .setMinSdkVersionForCoarse(i)
+                                                .setMinSdkVersionForEnforcement(i)
+                                                .build(),
+                                        0)))
+                .booleanValue();
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:18:0x00e8, code lost:
-    
-        if (((java.lang.Boolean) android.os.Binder.withCleanCallingIdentity(new com.android.server.TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda0(0, r0, r11))).booleanValue() != false) goto L40;
-     */
+
+       if (((java.lang.Boolean) android.os.Binder.withCleanCallingIdentity(new com.android.server.TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda0(0, r0, r11))).booleanValue() != false) goto L40;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x010a, code lost:
-    
-        if (((java.lang.Boolean) android.os.Binder.withCleanCallingIdentity(new com.android.server.TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda0(3, r0, r11))).booleanValue() != false) goto L40;
-     */
+
+       if (((java.lang.Boolean) android.os.Binder.withCleanCallingIdentity(new com.android.server.TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda0(3, r0, r11))).booleanValue() != false) goto L40;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x012e, code lost:
-    
-        if (((java.lang.Boolean) android.os.Binder.withCleanCallingIdentity(new com.android.server.TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda0(4, r0, r11))).booleanValue() == false) goto L40;
-     */
+
+       if (((java.lang.Boolean) android.os.Binder.withCleanCallingIdentity(new com.android.server.TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda0(4, r0, r11))).booleanValue() == false) goto L40;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:60:0x00c4, code lost:
-    
-        if (((java.lang.Boolean) android.os.Binder.withCleanCallingIdentity(new com.android.server.TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda0(2, r0, r11))).booleanValue() != false) goto L40;
-     */
+
+       if (((java.lang.Boolean) android.os.Binder.withCleanCallingIdentity(new com.android.server.TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda0(2, r0, r11))).booleanValue() != false) goto L40;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:62:0x0136, code lost:
-    
-        if (com.android.internal.telephony.TelephonyPermissions.checkCallingOrSelfReadPhoneState(r8.mContext, r10, r11, r12, "listen") == false) goto L44;
-     */
+
+       if (com.android.internal.telephony.TelephonyPermissions.checkCallingOrSelfReadPhoneState(r8.mContext, r10, r11, r12, "listen") == false) goto L44;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean checkListenerPermission(java.util.Set r9, int r10, java.lang.String r11, java.lang.String r12) {
+    public final boolean checkListenerPermission(
+            java.util.Set r9, int r10, java.lang.String r11, java.lang.String r12) {
         /*
             Method dump skipped, instructions count: 488
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.TelephonyRegistry.checkListenerPermission(java.util.Set, int, java.lang.String, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.TelephonyRegistry.checkListenerPermission(java.util.Set,"
+                    + " int, java.lang.String, java.lang.String):boolean");
     }
 
     public final boolean checkNotifyPermission() {
-        if (this.mContext.checkCallingOrSelfPermission("android.permission.MODIFY_PHONE_STATE") == 0) {
+        if (this.mContext.checkCallingOrSelfPermission("android.permission.MODIFY_PHONE_STATE")
+                == 0) {
             return true;
         }
         Binder.getCallingPid();
@@ -1009,62 +1254,111 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
     }
 
     @NeverCompile
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, "  ");
-        if (DumpUtils.checkDumpPermission(this.mContext, "TelephonyRegistry", indentingPrintWriter)) {
+        if (DumpUtils.checkDumpPermission(
+                this.mContext, "TelephonyRegistry", indentingPrintWriter)) {
             synchronized (this.mRecords) {
                 try {
                     int size = this.mRecords.size();
                     indentingPrintWriter.println("last known state:");
                     indentingPrintWriter.increaseIndent();
-                    for (int i = 0; i < ((TelephonyManager) this.mContext.getSystemService("phone")).getActiveModemCount(); i++) {
+                    for (int i = 0;
+                            i
+                                    < ((TelephonyManager) this.mContext.getSystemService("phone"))
+                                            .getActiveModemCount();
+                            i++) {
                         indentingPrintWriter.println("Phone Id=" + i);
                         indentingPrintWriter.increaseIndent();
                         indentingPrintWriter.println("mCallState=" + this.mCallState[i]);
-                        indentingPrintWriter.println("mRingingCallState=" + this.mRingingCallState[i]);
-                        indentingPrintWriter.println("mForegroundCallState=" + this.mForegroundCallState[i]);
-                        indentingPrintWriter.println("mBackgroundCallState=" + this.mBackgroundCallState[i]);
-                        indentingPrintWriter.println("mPreciseCallState=" + this.mPreciseCallState[i]);
-                        indentingPrintWriter.println("mCallDisconnectCause=" + this.mCallDisconnectCause[i]);
-                        indentingPrintWriter.println("mCallIncomingNumber=" + this.mCallIncomingNumber[i]);
-                        indentingPrintWriter.println("mCallStateLists=" + SemTelephonyUtils.callStateListToString((List) this.mCallStateLists.get(i)));
+                        indentingPrintWriter.println(
+                                "mRingingCallState=" + this.mRingingCallState[i]);
+                        indentingPrintWriter.println(
+                                "mForegroundCallState=" + this.mForegroundCallState[i]);
+                        indentingPrintWriter.println(
+                                "mBackgroundCallState=" + this.mBackgroundCallState[i]);
+                        indentingPrintWriter.println(
+                                "mPreciseCallState=" + this.mPreciseCallState[i]);
+                        indentingPrintWriter.println(
+                                "mCallDisconnectCause=" + this.mCallDisconnectCause[i]);
+                        indentingPrintWriter.println(
+                                "mCallIncomingNumber=" + this.mCallIncomingNumber[i]);
+                        indentingPrintWriter.println(
+                                "mCallStateLists="
+                                        + SemTelephonyUtils.callStateListToString(
+                                                (List) this.mCallStateLists.get(i)));
                         indentingPrintWriter.println("mServiceState=" + this.mServiceState[i]);
-                        indentingPrintWriter.println("mVoiceActivationState= " + this.mVoiceActivationState[i]);
-                        indentingPrintWriter.println("mDataActivationState= " + this.mDataActivationState[i]);
-                        indentingPrintWriter.println("mUserMobileDataState= " + this.mUserMobileDataState[i]);
+                        indentingPrintWriter.println(
+                                "mVoiceActivationState= " + this.mVoiceActivationState[i]);
+                        indentingPrintWriter.println(
+                                "mDataActivationState= " + this.mDataActivationState[i]);
+                        indentingPrintWriter.println(
+                                "mUserMobileDataState= " + this.mUserMobileDataState[i]);
                         indentingPrintWriter.println("mSignalStrength=" + this.mSignalStrength[i]);
                         indentingPrintWriter.println("mMessageWaiting=" + this.mMessageWaiting[i]);
                         indentingPrintWriter.println("mCallForwarding=" + this.mCallForwarding[i]);
                         indentingPrintWriter.println("mDataActivity=" + this.mDataActivity[i]);
-                        indentingPrintWriter.println("mDataConnectionState=" + this.mDataConnectionState[i]);
+                        indentingPrintWriter.println(
+                                "mDataConnectionState=" + this.mDataConnectionState[i]);
                         indentingPrintWriter.println("mCellIdentity=" + this.mCellIdentity[i]);
                         indentingPrintWriter.println("mCellInfo=" + this.mCellInfo.get(i));
-                        indentingPrintWriter.println("mImsCallDisconnectCause=" + ((ArrayList) this.mImsReasonInfo).get(i));
+                        indentingPrintWriter.println(
+                                "mImsCallDisconnectCause="
+                                        + ((ArrayList) this.mImsReasonInfo).get(i));
                         indentingPrintWriter.println("mSrvccState=" + this.mSrvccState[i]);
-                        indentingPrintWriter.println("mCallPreciseDisconnectCause=" + this.mCallPreciseDisconnectCause[i]);
+                        indentingPrintWriter.println(
+                                "mCallPreciseDisconnectCause="
+                                        + this.mCallPreciseDisconnectCause[i]);
                         indentingPrintWriter.println("mCallQuality=" + this.mCallQuality[i]);
-                        indentingPrintWriter.println("mCallNetworkType=" + this.mCallNetworkType[i]);
-                        indentingPrintWriter.println("mPreciseDataConnectionStates=" + ((ArrayList) this.mPreciseDataConnectionStates).get(i));
-                        indentingPrintWriter.println("mOutgoingCallEmergencyNumber=" + this.mOutgoingCallEmergencyNumber[i]);
-                        indentingPrintWriter.println("mOutgoingSmsEmergencyNumber=" + this.mOutgoingSmsEmergencyNumber[i]);
-                        indentingPrintWriter.println("mBarringInfo=" + ((ArrayList) this.mBarringInfo).get(i));
-                        indentingPrintWriter.println("mCarrierNetworkChangeState=" + this.mCarrierNetworkChangeState[i]);
-                        indentingPrintWriter.println("mTelephonyDisplayInfo=" + this.mTelephonyDisplayInfos[i]);
+                        indentingPrintWriter.println(
+                                "mCallNetworkType=" + this.mCallNetworkType[i]);
+                        indentingPrintWriter.println(
+                                "mPreciseDataConnectionStates="
+                                        + ((ArrayList) this.mPreciseDataConnectionStates).get(i));
+                        indentingPrintWriter.println(
+                                "mOutgoingCallEmergencyNumber="
+                                        + this.mOutgoingCallEmergencyNumber[i]);
+                        indentingPrintWriter.println(
+                                "mOutgoingSmsEmergencyNumber="
+                                        + this.mOutgoingSmsEmergencyNumber[i]);
+                        indentingPrintWriter.println(
+                                "mBarringInfo=" + ((ArrayList) this.mBarringInfo).get(i));
+                        indentingPrintWriter.println(
+                                "mCarrierNetworkChangeState=" + this.mCarrierNetworkChangeState[i]);
+                        indentingPrintWriter.println(
+                                "mTelephonyDisplayInfo=" + this.mTelephonyDisplayInfos[i]);
                         indentingPrintWriter.println("mIsDataEnabled=" + this.mIsDataEnabled[i]);
-                        indentingPrintWriter.println("mDataEnabledReason=" + this.mDataEnabledReason[i]);
-                        indentingPrintWriter.println("mAllowedNetworkTypeReason=" + this.mAllowedNetworkTypeReason[i]);
-                        indentingPrintWriter.println("mAllowedNetworkTypeValue=" + this.mAllowedNetworkTypeValue[i]);
-                        indentingPrintWriter.println("mPhysicalChannelConfigs=" + ((ArrayList) this.mPhysicalChannelConfigs).get(i));
-                        indentingPrintWriter.println("mLinkCapacityEstimateList=" + ((ArrayList) this.mLinkCapacityEstimateLists).get(i));
+                        indentingPrintWriter.println(
+                                "mDataEnabledReason=" + this.mDataEnabledReason[i]);
+                        indentingPrintWriter.println(
+                                "mAllowedNetworkTypeReason=" + this.mAllowedNetworkTypeReason[i]);
+                        indentingPrintWriter.println(
+                                "mAllowedNetworkTypeValue=" + this.mAllowedNetworkTypeValue[i]);
+                        indentingPrintWriter.println(
+                                "mPhysicalChannelConfigs="
+                                        + ((ArrayList) this.mPhysicalChannelConfigs).get(i));
+                        indentingPrintWriter.println(
+                                "mLinkCapacityEstimateList="
+                                        + ((ArrayList) this.mLinkCapacityEstimateLists).get(i));
                         indentingPrintWriter.println("mECBMReason=" + this.mECBMReason[i]);
                         indentingPrintWriter.println("mECBMStarted=" + this.mECBMStarted[i]);
                         indentingPrintWriter.println("mSCBMReason=" + this.mSCBMReason[i]);
                         indentingPrintWriter.println("mSCBMStarted=" + this.mSCBMStarted[i]);
-                        indentingPrintWriter.println("mCarrierRoamingNtnMode=" + this.mCarrierRoamingNtnMode[i]);
-                        indentingPrintWriter.println("mCarrierRoamingNtnEligible=" + this.mCarrierRoamingNtnEligible[i]);
-                        indentingPrintWriter.println("mCarrierRoamingNtnSignalStrength=" + this.mCarrierRoamingNtnSignalStrength[i]);
+                        indentingPrintWriter.println(
+                                "mCarrierRoamingNtnMode=" + this.mCarrierRoamingNtnMode[i]);
+                        indentingPrintWriter.println(
+                                "mCarrierRoamingNtnEligible=" + this.mCarrierRoamingNtnEligible[i]);
+                        indentingPrintWriter.println(
+                                "mCarrierRoamingNtnSignalStrength="
+                                        + this.mCarrierRoamingNtnSignalStrength[i]);
                         Pair pair = (Pair) ((ArrayList) this.mCarrierPrivilegeStates).get(i);
-                        indentingPrintWriter.println("mCarrierPrivilegeState=<packages=" + pii((List) pair.first) + ", uids=" + Arrays.toString((int[]) pair.second) + ">");
+                        indentingPrintWriter.println(
+                                "mCarrierPrivilegeState=<packages="
+                                        + pii((List) pair.first)
+                                        + ", uids="
+                                        + Arrays.toString((int[]) pair.second)
+                                        + ">");
                         Pair pair2 = (Pair) ((ArrayList) this.mCarrierServiceStates).get(i);
                         StringBuilder sb = new StringBuilder();
                         sb.append("mCarrierServiceState=<package=");
@@ -1082,7 +1376,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                     indentingPrintWriter.println("mPhoneCapability=" + this.mPhoneCapability);
                     indentingPrintWriter.println("mActiveDataSubId=" + this.mActiveDataSubId);
                     indentingPrintWriter.println("mRadioPowerState=" + this.mRadioPowerState);
-                    indentingPrintWriter.println("mEmergencyNumberList=" + this.mEmergencyNumberList);
+                    indentingPrintWriter.println(
+                            "mEmergencyNumberList=" + this.mEmergencyNumberList);
                     indentingPrintWriter.println("mDefaultPhoneId=" + this.mDefaultPhoneId);
                     indentingPrintWriter.println("mDefaultSubId=" + this.mDefaultSubId);
                     indentingPrintWriter.decreaseIndent();
@@ -1109,7 +1404,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
     }
 
     public final int getPhoneIdFromSubId(int i) {
-        SubscriptionManager subscriptionManager = (SubscriptionManager) this.mContext.getSystemService("telephony_subscription_service");
+        SubscriptionManager subscriptionManager =
+                (SubscriptionManager)
+                        this.mContext.getSystemService("telephony_subscription_service");
         if (subscriptionManager == null) {
             return -1;
         }
@@ -1141,7 +1438,15 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         return i3 == Integer.MAX_VALUE ? i == this.mDefaultSubId : i3 == i;
     }
 
-    public final void listen(boolean z, boolean z2, String str, String str2, IPhoneStateListener iPhoneStateListener, Set set, boolean z3, int i) {
+    public final void listen(
+            boolean z,
+            boolean z2,
+            String str,
+            String str2,
+            IPhoneStateListener iPhoneStateListener,
+            Set set,
+            boolean z3,
+            int i) {
         SemSatelliteSignalStrength semSatelliteSignalStrength;
         SemSatelliteServiceState semSatelliteServiceState;
         CallState callState;
@@ -1174,7 +1479,13 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             int phoneIdFromSubId = getPhoneIdFromSubId(i);
             synchronized (this.mRecords) {
                 try {
-                    Record add = add(Binder.getCallingUid(), Binder.getCallingPid(), iPhoneStateListener.asBinder(), doesLimitApplyForListeners(Binder.getCallingUid(), Process.myUid()));
+                    Record add =
+                            add(
+                                    Binder.getCallingUid(),
+                                    Binder.getCallingPid(),
+                                    iPhoneStateListener.asBinder(),
+                                    doesLimitApplyForListeners(
+                                            Binder.getCallingUid(), Process.myUid()));
                     if (add == null) {
                         return;
                     }
@@ -1192,13 +1503,16 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                     if (z3 && validatePhoneId(phoneIdFromSubId)) {
                         if (set.contains(1)) {
                             try {
-                                ServiceState serviceState = new ServiceState(this.mServiceState[add.phoneId]);
+                                ServiceState serviceState =
+                                        new ServiceState(this.mServiceState[add.phoneId]);
                                 if (checkFineLocationAccess(add, 29)) {
                                     add.callback.onServiceStateChanged(serviceState);
                                 } else if (checkCoarseLocationAccess(add, 29)) {
-                                    add.callback.onServiceStateChanged(serviceState.createLocationInfoSanitizedCopy(false));
+                                    add.callback.onServiceStateChanged(
+                                            serviceState.createLocationInfoSanitizedCopy(false));
                                 } else {
-                                    add.callback.onServiceStateChanged(serviceState.createLocationInfoSanitizedCopy(true));
+                                    add.callback.onServiceStateChanged(
+                                            serviceState.createLocationInfoSanitizedCopy(true));
                                 }
                             } catch (RemoteException unused) {
                                 remove(add.binder);
@@ -1221,22 +1535,26 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         }
                         if (set.contains(3)) {
                             try {
-                                add.callback.onMessageWaitingIndicatorChanged(this.mMessageWaiting[add.phoneId]);
+                                add.callback.onMessageWaitingIndicatorChanged(
+                                        this.mMessageWaiting[add.phoneId]);
                             } catch (RemoteException unused3) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(4)) {
                             try {
-                                add.callback.onCallForwardingIndicatorChanged(this.mCallForwarding[add.phoneId]);
+                                add.callback.onCallForwardingIndicatorChanged(
+                                        this.mCallForwarding[add.phoneId]);
                             } catch (RemoteException unused4) {
                                 remove(add.binder);
                             }
                         }
                         if (validateEventAndUserLocked(add, 5)) {
                             try {
-                                if (checkCoarseLocationAccess(add, 1) && checkFineLocationAccess(add, 29)) {
-                                    add.callback.onCellLocationChanged(this.mCellIdentity[add.phoneId]);
+                                if (checkCoarseLocationAccess(add, 1)
+                                        && checkFineLocationAccess(add, 29)) {
+                                    add.callback.onCellLocationChanged(
+                                            this.mCellIdentity[add.phoneId]);
                                 }
                             } catch (RemoteException unused5) {
                                 remove(add.binder);
@@ -1247,7 +1565,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                                 IPhoneStateListener iPhoneStateListener3 = add.callback;
                                 int[] iArr = this.mCallState;
                                 int i2 = add.phoneId;
-                                iPhoneStateListener3.onLegacyCallStateChanged(iArr[i2], add.canReadCallLog() ? this.mCallIncomingNumber[i2] : "");
+                                iPhoneStateListener3.onLegacyCallStateChanged(
+                                        iArr[i2],
+                                        add.canReadCallLog() ? this.mCallIncomingNumber[i2] : "");
                             } catch (RemoteException unused6) {
                                 remove(add.binder);
                             }
@@ -1264,7 +1584,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                                 IPhoneStateListener iPhoneStateListener4 = add.callback;
                                 int[] iArr2 = this.mDataConnectionState;
                                 int i3 = add.phoneId;
-                                iPhoneStateListener4.onDataConnectionStateChanged(iArr2[i3], this.mDataConnectionNetworkType[i3]);
+                                iPhoneStateListener4.onDataConnectionStateChanged(
+                                        iArr2[i3], this.mDataConnectionNetworkType[i3]);
                             } catch (RemoteException unused8) {
                                 remove(add.binder);
                             }
@@ -1288,8 +1609,10 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         }
                         if (validateEventAndUserLocked(add, 11)) {
                             try {
-                                if (checkCoarseLocationAccess(add, 1) && checkFineLocationAccess(add, 29)) {
-                                    add.callback.onCellInfoChanged((List) this.mCellInfo.get(add.phoneId));
+                                if (checkCoarseLocationAccess(add, 1)
+                                        && checkFineLocationAccess(add, 29)) {
+                                    add.callback.onCellInfoChanged(
+                                            (List) this.mCellInfo.get(add.phoneId));
                                 }
                             } catch (RemoteException unused11) {
                                 remove(add.binder);
@@ -1297,7 +1620,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         }
                         if (set.contains(12)) {
                             try {
-                                add.callback.onPreciseCallStateChanged(this.mPreciseCallState[add.phoneId]);
+                                add.callback.onPreciseCallStateChanged(
+                                        this.mPreciseCallState[add.phoneId]);
                             } catch (RemoteException unused12) {
                                 remove(add.binder);
                             }
@@ -1307,13 +1631,16 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                                 IPhoneStateListener iPhoneStateListener5 = add.callback;
                                 int[] iArr3 = this.mCallDisconnectCause;
                                 int i4 = add.phoneId;
-                                iPhoneStateListener5.onCallDisconnectCauseChanged(iArr3[i4], this.mCallPreciseDisconnectCause[i4]);
+                                iPhoneStateListener5.onCallDisconnectCauseChanged(
+                                        iArr3[i4], this.mCallPreciseDisconnectCause[i4]);
                             } catch (RemoteException unused13) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(28)) {
-                            ImsReasonInfo imsReasonInfo = (ImsReasonInfo) ((ArrayList) this.mImsReasonInfo).get(add.phoneId);
+                            ImsReasonInfo imsReasonInfo =
+                                    (ImsReasonInfo)
+                                            ((ArrayList) this.mImsReasonInfo).get(add.phoneId);
                             if (imsReasonInfo != null) {
                                 try {
                                     add.callback.onImsCallDisconnectCauseChanged(imsReasonInfo);
@@ -1324,9 +1651,17 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         }
                         if (set.contains(13)) {
                             try {
-                                Iterator it = ((Map) ((ArrayList) this.mPreciseDataConnectionStates).get(add.phoneId)).values().iterator();
+                                Iterator it =
+                                        ((Map)
+                                                        ((ArrayList)
+                                                                        this
+                                                                                .mPreciseDataConnectionStates)
+                                                                .get(add.phoneId))
+                                                .values()
+                                                .iterator();
                                 while (it.hasNext()) {
-                                    add.callback.onPreciseDataConnectionStateChanged((PreciseDataConnectionState) it.next());
+                                    add.callback.onPreciseDataConnectionStateChanged(
+                                            (PreciseDataConnectionState) it.next());
                                 }
                             } catch (RemoteException unused15) {
                                 remove(add.binder);
@@ -1334,35 +1669,40 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         }
                         if (set.contains(17)) {
                             try {
-                                add.callback.onCarrierNetworkChange(this.mCarrierNetworkChangeState[add.phoneId]);
+                                add.callback.onCarrierNetworkChange(
+                                        this.mCarrierNetworkChangeState[add.phoneId]);
                             } catch (RemoteException unused16) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(18)) {
                             try {
-                                add.callback.onVoiceActivationStateChanged(this.mVoiceActivationState[add.phoneId]);
+                                add.callback.onVoiceActivationStateChanged(
+                                        this.mVoiceActivationState[add.phoneId]);
                             } catch (RemoteException unused17) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(19)) {
                             try {
-                                add.callback.onDataActivationStateChanged(this.mDataActivationState[add.phoneId]);
+                                add.callback.onDataActivationStateChanged(
+                                        this.mDataActivationState[add.phoneId]);
                             } catch (RemoteException unused18) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(20)) {
                             try {
-                                add.callback.onUserMobileDataStateChanged(this.mUserMobileDataState[add.phoneId]);
+                                add.callback.onUserMobileDataStateChanged(
+                                        this.mUserMobileDataState[add.phoneId]);
                             } catch (RemoteException unused19) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(21)) {
                             try {
-                                TelephonyDisplayInfo telephonyDisplayInfo = this.mTelephonyDisplayInfos[add.phoneId];
+                                TelephonyDisplayInfo telephonyDisplayInfo =
+                                        this.mTelephonyDisplayInfos[add.phoneId];
                                 if (telephonyDisplayInfo != null) {
                                     add.callback.onDisplayInfoChanged(telephonyDisplayInfo);
                                 }
@@ -1372,7 +1712,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         }
                         if (set.contains(25)) {
                             try {
-                                add.callback.onEmergencyNumberListChanged(this.mEmergencyNumberList);
+                                add.callback.onEmergencyNumberListChanged(
+                                        this.mEmergencyNumberList);
                             } catch (RemoteException unused21) {
                                 remove(add.binder);
                             }
@@ -1407,15 +1748,18 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         }
                         if (set.contains(27)) {
                             try {
-                                add.callback.onCallStatesChanged((List) this.mCallStateLists.get(add.phoneId));
+                                add.callback.onCallStatesChanged(
+                                        (List) this.mCallStateLists.get(add.phoneId));
                             } catch (RemoteException unused26) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(32)) {
-                            BarringInfo barringInfo = (BarringInfo) ((ArrayList) this.mBarringInfo).get(add.phoneId);
+                            BarringInfo barringInfo =
+                                    (BarringInfo) ((ArrayList) this.mBarringInfo).get(add.phoneId);
                             if (barringInfo != null) {
-                                BarringInfo createLocationInfoSanitizedCopy = barringInfo.createLocationInfoSanitizedCopy();
+                                BarringInfo createLocationInfoSanitizedCopy =
+                                        barringInfo.createLocationInfoSanitizedCopy();
                                 try {
                                     IPhoneStateListener iPhoneStateListener6 = add.callback;
                                     if (!checkFineLocationAccess(add, 1)) {
@@ -1431,7 +1775,17 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                             try {
                                 IPhoneStateListener iPhoneStateListener7 = add.callback;
                                 int i5 = add.callerUid;
-                                iPhoneStateListener7.onPhysicalChannelConfigChanged((i5 == 1001 || i5 == 1000) ? (List) ((ArrayList) this.mPhysicalChannelConfigs).get(add.phoneId) : getLocationSanitizedConfigs((List) ((ArrayList) this.mPhysicalChannelConfigs).get(add.phoneId)));
+                                iPhoneStateListener7.onPhysicalChannelConfigChanged(
+                                        (i5 == 1001 || i5 == 1000)
+                                                ? (List)
+                                                        ((ArrayList) this.mPhysicalChannelConfigs)
+                                                                .get(add.phoneId)
+                                                : getLocationSanitizedConfigs(
+                                                        (List)
+                                                                ((ArrayList)
+                                                                                this
+                                                                                        .mPhysicalChannelConfigs)
+                                                                        .get(add.phoneId)));
                             } catch (RemoteException unused28) {
                                 remove(add.binder);
                             }
@@ -1441,29 +1795,36 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                                 IPhoneStateListener iPhoneStateListener8 = add.callback;
                                 boolean[] zArr = this.mIsDataEnabled;
                                 int i6 = add.phoneId;
-                                iPhoneStateListener8.onDataEnabledChanged(zArr[i6], this.mDataEnabledReason[i6]);
+                                iPhoneStateListener8.onDataEnabledChanged(
+                                        zArr[i6], this.mDataEnabledReason[i6]);
                             } catch (RemoteException unused29) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(41)) {
                             try {
-                                add.callback.onSimultaneousCallingStateChanged(this.mSimultaneousCellularCallingSubIds);
+                                add.callback.onSimultaneousCallingStateChanged(
+                                        this.mSimultaneousCellularCallingSubIds);
                             } catch (RemoteException unused30) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(37)) {
                             try {
-                                if (((ArrayList) this.mLinkCapacityEstimateLists).get(add.phoneId) != null) {
-                                    add.callback.onLinkCapacityEstimateChanged((List) ((ArrayList) this.mLinkCapacityEstimateLists).get(add.phoneId));
+                                if (((ArrayList) this.mLinkCapacityEstimateLists).get(add.phoneId)
+                                        != null) {
+                                    add.callback.onLinkCapacityEstimateChanged(
+                                            (List)
+                                                    ((ArrayList) this.mLinkCapacityEstimateLists)
+                                                            .get(add.phoneId));
                                 }
                             } catch (RemoteException unused31) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(39)) {
-                            Iterator it2 = ((List) this.mCallStateLists.get(add.phoneId)).iterator();
+                            Iterator it2 =
+                                    ((List) this.mCallStateLists.get(add.phoneId)).iterator();
                             while (true) {
                                 if (!it2.hasNext()) {
                                     callState = null;
@@ -1478,13 +1839,35 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                             if (callState != null) {
                                 String imsCallSessionId = callState.getImsCallSessionId();
                                 try {
-                                    MediaQualityStatus mediaQualityStatus = (MediaQualityStatus) ((SparseArray) ((ArrayList) this.mMediaQualityStatus).get(add.phoneId)).get(1);
-                                    if (mediaQualityStatus != null && mediaQualityStatus.getCallSessionId().equals(imsCallSessionId)) {
-                                        add.callback.onMediaQualityStatusChanged(mediaQualityStatus);
+                                    MediaQualityStatus mediaQualityStatus =
+                                            (MediaQualityStatus)
+                                                    ((SparseArray)
+                                                                    ((ArrayList)
+                                                                                    this
+                                                                                            .mMediaQualityStatus)
+                                                                            .get(add.phoneId))
+                                                            .get(1);
+                                    if (mediaQualityStatus != null
+                                            && mediaQualityStatus
+                                                    .getCallSessionId()
+                                                    .equals(imsCallSessionId)) {
+                                        add.callback.onMediaQualityStatusChanged(
+                                                mediaQualityStatus);
                                     }
-                                    MediaQualityStatus mediaQualityStatus2 = (MediaQualityStatus) ((SparseArray) ((ArrayList) this.mMediaQualityStatus).get(add.phoneId)).get(2);
-                                    if (mediaQualityStatus2 != null && mediaQualityStatus2.getCallSessionId().equals(imsCallSessionId)) {
-                                        add.callback.onMediaQualityStatusChanged(mediaQualityStatus2);
+                                    MediaQualityStatus mediaQualityStatus2 =
+                                            (MediaQualityStatus)
+                                                    ((SparseArray)
+                                                                    ((ArrayList)
+                                                                                    this
+                                                                                            .mMediaQualityStatus)
+                                                                            .get(add.phoneId))
+                                                            .get(2);
+                                    if (mediaQualityStatus2 != null
+                                            && mediaQualityStatus2
+                                                    .getCallSessionId()
+                                                    .equals(imsCallSessionId)) {
+                                        add.callback.onMediaQualityStatusChanged(
+                                                mediaQualityStatus2);
                                     }
                                 } catch (RemoteException unused32) {
                                     remove(add.binder);
@@ -1513,42 +1896,55 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         }
                         if (set.contains(42)) {
                             try {
-                                add.callback.onCarrierRoamingNtnModeChanged(this.mCarrierRoamingNtnMode[add.phoneId]);
+                                add.callback.onCarrierRoamingNtnModeChanged(
+                                        this.mCarrierRoamingNtnMode[add.phoneId]);
                             } catch (RemoteException unused34) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(43)) {
                             try {
-                                add.callback.onCarrierRoamingNtnEligibleStateChanged(this.mCarrierRoamingNtnEligible[add.phoneId]);
+                                add.callback.onCarrierRoamingNtnEligibleStateChanged(
+                                        this.mCarrierRoamingNtnEligible[add.phoneId]);
                             } catch (RemoteException unused35) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(44)) {
                             try {
-                                add.callback.onCarrierRoamingNtnAvailableServicesChanged(((IntArray) ((ArrayList) this.mCarrierRoamingNtnAvailableServices).get(add.phoneId)).toArray());
+                                add.callback.onCarrierRoamingNtnAvailableServicesChanged(
+                                        ((IntArray)
+                                                        ((ArrayList)
+                                                                        this
+                                                                                .mCarrierRoamingNtnAvailableServices)
+                                                                .get(add.phoneId))
+                                                .toArray());
                             } catch (RemoteException unused36) {
                                 remove(add.binder);
                             }
                         }
                         if (set.contains(45)) {
                             try {
-                                add.callback.onCarrierRoamingNtnSignalStrengthChanged(this.mCarrierRoamingNtnSignalStrength[add.phoneId]);
+                                add.callback.onCarrierRoamingNtnSignalStrengthChanged(
+                                        this.mCarrierRoamingNtnSignalStrength[add.phoneId]);
                             } catch (RemoteException unused37) {
                                 remove(add.binder);
                             }
                         }
-                        if (set.contains(10000) && (semSatelliteServiceState = this.mSatServiceState) != null) {
+                        if (set.contains(10000)
+                                && (semSatelliteServiceState = this.mSatServiceState) != null) {
                             try {
-                                add.callback.onSemSatelliteServiceStateChanged(semSatelliteServiceState);
+                                add.callback.onSemSatelliteServiceStateChanged(
+                                        semSatelliteServiceState);
                             } catch (RemoteException unused38) {
                                 remove(add.binder);
                             }
                         }
-                        if (set.contains(10001) && (semSatelliteSignalStrength = this.mSatSignalStrength) != null) {
+                        if (set.contains(10001)
+                                && (semSatelliteSignalStrength = this.mSatSignalStrength) != null) {
                             try {
-                                add.callback.onSemSatelliteSignalStrengthChanged(semSatelliteSignalStrength);
+                                add.callback.onSemSatelliteSignalStrengthChanged(
+                                        semSatelliteSignalStrength);
                             } catch (RemoteException unused39) {
                                 remove(add.binder);
                             }
@@ -1561,8 +1957,24 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void listenWithEventList(boolean z, boolean z2, int i, String str, String str2, IPhoneStateListener iPhoneStateListener, int[] iArr, boolean z3) {
-        listen(z, z2, str, str2, iPhoneStateListener, (Set) Arrays.stream(iArr).boxed().collect(Collectors.toSet()), z3, i);
+    public final void listenWithEventList(
+            boolean z,
+            boolean z2,
+            int i,
+            String str,
+            String str2,
+            IPhoneStateListener iPhoneStateListener,
+            int[] iArr,
+            boolean z3) {
+        listen(
+                z,
+                z2,
+                str,
+                str2,
+                iPhoneStateListener,
+                (Set) Arrays.stream(iArr).boxed().collect(Collectors.toSet()),
+                z3,
+                i);
     }
 
     public final void notifyActiveDataSubIdChanged(int i) {
@@ -1627,13 +2039,17 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         return;
                     }
                     ((ArrayList) this.mBarringInfo).set(i, barringInfo);
-                    BarringInfo createLocationInfoSanitizedCopy = barringInfo.createLocationInfoSanitizedCopy();
+                    BarringInfo createLocationInfoSanitizedCopy =
+                            barringInfo.createLocationInfoSanitizedCopy();
                     Iterator it = this.mRecords.iterator();
                     while (it.hasNext()) {
                         Record record = (Record) it.next();
                         if (record.matchTelephonyCallbackEvent(32) && idMatch(record, i2, i)) {
                             try {
-                                record.callback.onBarringInfoChanged(checkFineLocationAccess(record, 1) ? barringInfo : createLocationInfoSanitizedCopy);
+                                record.callback.onBarringInfoChanged(
+                                        checkFineLocationAccess(record, 1)
+                                                ? barringInfo
+                                                : createLocationInfoSanitizedCopy);
                             } catch (RemoteException unused) {
                                 this.mRemoveList.add(record.binder);
                             }
@@ -1660,7 +2076,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                     Iterator it = this.mRecords.iterator();
                     while (it.hasNext()) {
                         Record record = (Record) it.next();
-                        if (record.matchTelephonyCallbackEvent(4) && idMatch(record, i, phoneIdFromSubId)) {
+                        if (record.matchTelephonyCallbackEvent(4)
+                                && idMatch(record, i, phoneIdFromSubId)) {
                             try {
                                 record.callback.onCallForwardingIndicatorChanged(z);
                             } catch (RemoteException unused) {
@@ -1687,8 +2104,12 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                             log("There is no call to report CallQuality");
                             return;
                         }
-                        if (((CallState) ((List) this.mCallStateLists.get(i)).get(0)).getCallState() != 1 && !z) {
-                            log("There is no active call to report CallQuality and call network type is not changed");
+                        if (((CallState) ((List) this.mCallStateLists.get(i)).get(0)).getCallState()
+                                        != 1
+                                && !z) {
+                            log(
+                                    "There is no active call to report CallQuality and call network"
+                                        + " type is not changed");
                             return;
                         }
                         ArrayList arrayList = new ArrayList();
@@ -1697,15 +2118,40 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         Iterator it = arrayList.iterator();
                         while (it.hasNext()) {
                             CallState callState = (CallState) it.next();
-                            ((List) this.mCallStateLists.get(i)).add(new CallState.Builder(callState.getCallState()).setNetworkType(i3).setCallQuality(callState.getCallState() == 1 ? callQuality : createCallQuality()).setCallClassification(callState.getCallClassification()).setImsCallSessionId(callState.getImsCallSessionId()).setImsCallServiceType(callState.getImsCallServiceType()).setImsCallType(callState.getImsCallType()).build());
+                            ((List) this.mCallStateLists.get(i))
+                                    .add(
+                                            new CallState.Builder(callState.getCallState())
+                                                    .setNetworkType(i3)
+                                                    .setCallQuality(
+                                                            callState.getCallState() == 1
+                                                                    ? callQuality
+                                                                    : createCallQuality())
+                                                    .setCallClassification(
+                                                            callState.getCallClassification())
+                                                    .setImsCallSessionId(
+                                                            callState.getImsCallSessionId())
+                                                    .setImsCallServiceType(
+                                                            callState.getImsCallServiceType())
+                                                    .setImsCallType(callState.getImsCallType())
+                                                    .build());
                         }
-                        log("notifyCallQualityChanged - phoneId: " + i + ", subId: " + i2 + ", callNetworkType: " + i3 + ", callState: " + SemTelephonyUtils.callStateListToString((List) this.mCallStateLists.get(i)));
+                        log(
+                                "notifyCallQualityChanged - phoneId: "
+                                        + i
+                                        + ", subId: "
+                                        + i2
+                                        + ", callNetworkType: "
+                                        + i3
+                                        + ", callState: "
+                                        + SemTelephonyUtils.callStateListToString(
+                                                (List) this.mCallStateLists.get(i)));
                         Iterator it2 = this.mRecords.iterator();
                         while (it2.hasNext()) {
                             Record record = (Record) it2.next();
                             if (record.matchTelephonyCallbackEvent(27) && idMatch(record, i2, i)) {
                                 try {
-                                    record.callback.onCallStatesChanged((List) this.mCallStateLists.get(i));
+                                    record.callback.onCallStatesChanged(
+                                            (List) this.mCallStateLists.get(i));
                                 } catch (RemoteException unused) {
                                     this.mRemoveList.add(record.binder);
                                 }
@@ -1735,14 +2181,19 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                 Iterator it = this.mRecords.iterator();
                 while (it.hasNext()) {
                     Record record = (Record) it.next();
-                    if (record.matchTelephonyCallbackEvent(36) && (i5 = record.subId) == i2 && i5 != Integer.MAX_VALUE) {
+                    if (record.matchTelephonyCallbackEvent(36)
+                            && (i5 = record.subId) == i2
+                            && i5 != Integer.MAX_VALUE) {
                         try {
-                            record.callback.onLegacyCallStateChanged(i3, record.canReadCallLog() ? this.mCallIncomingNumber[i] : "");
+                            record.callback.onLegacyCallStateChanged(
+                                    i3, record.canReadCallLog() ? this.mCallIncomingNumber[i] : "");
                         } catch (RemoteException unused) {
                             this.mRemoveList.add(record.binder);
                         }
                     }
-                    if (record.matchTelephonyCallbackEvent(6) && (i4 = record.subId) == i2 && i4 != Integer.MAX_VALUE) {
+                    if (record.matchTelephonyCallbackEvent(6)
+                            && (i4 = record.subId) == i2
+                            && i4 != Integer.MAX_VALUE) {
                         try {
                             record.callback.onCallStateChanged(i3);
                         } catch (RemoteException unused2) {
@@ -1763,14 +2214,17 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                 Iterator it = this.mRecords.iterator();
                 while (it.hasNext()) {
                     Record record = (Record) it.next();
-                    if (record.matchTelephonyCallbackEvent(36) && record.subId == Integer.MAX_VALUE) {
+                    if (record.matchTelephonyCallbackEvent(36)
+                            && record.subId == Integer.MAX_VALUE) {
                         try {
-                            record.callback.onLegacyCallStateChanged(i, record.canReadCallLog() ? str : "");
+                            record.callback.onLegacyCallStateChanged(
+                                    i, record.canReadCallLog() ? str : "");
                         } catch (RemoteException unused) {
                             this.mRemoveList.add(record.binder);
                         }
                     }
-                    if (record.matchTelephonyCallbackEvent(6) && record.subId == Integer.MAX_VALUE) {
+                    if (record.matchTelephonyCallbackEvent(6)
+                            && record.subId == Integer.MAX_VALUE) {
                         try {
                             record.callback.onCallStateChanged(i);
                         } catch (RemoteException unused2) {
@@ -1848,7 +2302,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
 
     public final void notifyCarrierConfigChanged(int i, int i2, int i3, int i4) {
         if (!validatePhoneId(i)) {
-            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid phoneId: "));
+            throw new IllegalArgumentException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid phoneId: "));
         }
         if (!checkNotifyPermission()) {
             loge("Caller has no notify permission!");
@@ -1859,7 +2314,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             Iterator it = this.mRecords.iterator();
             while (it.hasNext()) {
                 Record record = (Record) it.next();
-                ICarrierConfigChangeListener iCarrierConfigChangeListener = record.carrierConfigChangeListener;
+                ICarrierConfigChangeListener iCarrierConfigChangeListener =
+                        record.carrierConfigChangeListener;
                 if (iCarrierConfigChangeListener != null) {
                     try {
                         iCarrierConfigChangeListener.onCarrierConfigChanged(i, i2, i3, i4);
@@ -1873,12 +2329,20 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
     }
 
     public final void notifyCarrierNetworkChange(boolean z) {
-        int[] array = Arrays.stream(SubscriptionManager.from(this.mContext).getCompleteActiveSubscriptionIdList()).filter(new IntPredicate() { // from class: com.android.server.TelephonyRegistry$$ExternalSyntheticLambda1
-            @Override // java.util.function.IntPredicate
-            public final boolean test(int i) {
-                return TelephonyPermissions.checkCarrierPrivilegeForSubId(TelephonyRegistry.this.mContext, i);
-            }
-        }).toArray();
+        int[] array =
+                Arrays.stream(
+                                SubscriptionManager.from(this.mContext)
+                                        .getCompleteActiveSubscriptionIdList())
+                        .filter(
+                                new IntPredicate() { // from class:
+                                                     // com.android.server.TelephonyRegistry$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.IntPredicate
+                                    public final boolean test(int i) {
+                                        return TelephonyPermissions.checkCarrierPrivilegeForSubId(
+                                                TelephonyRegistry.this.mContext, i);
+                                    }
+                                })
+                        .toArray();
         if (ArrayUtils.isEmpty(array)) {
             loge("notifyCarrierNetworkChange without carrier privilege");
             throw new SecurityException("notifyCarrierNetworkChange without carrier privilege");
@@ -1895,7 +2359,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             Iterator it = this.mRecords.iterator();
             while (it.hasNext()) {
                 Record record = (Record) it.next();
-                if (record.matchTelephonyCallbackEvent(17) && idMatch(record, i, phoneIdFromSubId)) {
+                if (record.matchTelephonyCallbackEvent(17)
+                        && idMatch(record, i, phoneIdFromSubId)) {
                     try {
                         record.callback.onCarrierNetworkChange(z);
                     } catch (RemoteException unused) {
@@ -1909,7 +2374,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
 
     public final void notifyCarrierNetworkChangeWithSubId(int i, boolean z) {
         if (!TelephonyPermissions.checkCarrierPrivilegeForSubId(this.mContext, i)) {
-            throw new SecurityException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "notifyCarrierNetworkChange without carrier privilege on subId "));
+            throw new SecurityException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(
+                            i, "notifyCarrierNetworkChange without carrier privilege on subId "));
         }
         notifyCarrierNetworkChangeWithPermission(i, z);
     }
@@ -1927,7 +2394,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                     Record record = (Record) it.next();
                     if (record.carrierPrivilegesCallback != null && idMatch(record, -1, i)) {
                         try {
-                            record.carrierPrivilegesCallback.onCarrierPrivilegesChanged(Collections.unmodifiableList(list), Arrays.copyOf(iArr, iArr.length));
+                            record.carrierPrivilegesCallback.onCarrierPrivilegesChanged(
+                                    Collections.unmodifiableList(list),
+                                    Arrays.copyOf(iArr, iArr.length));
                         } catch (RemoteException unused) {
                             this.mRemoveList.add(record.binder);
                         }
@@ -1940,7 +2409,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
 
     public final void notifyCarrierRoamingNtnAvailableServicesChanged(int i, int[] iArr) {
         if (!checkNotifyPermission()) {
-            log("notifyCarrierRoamingNtnAvailableServicesChanged: caller does not have required permissions.");
+            log(
+                    "notifyCarrierRoamingNtnAvailableServicesChanged: caller does not have required"
+                        + " permissions.");
             return;
         }
         synchronized (this.mRecords) {
@@ -1952,11 +2423,13 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                 }
                 IntArray intArray = new IntArray(iArr.length);
                 intArray.addAll(iArr);
-                ((ArrayList) this.mCarrierRoamingNtnAvailableServices).set(phoneIdFromSubId, intArray);
+                ((ArrayList) this.mCarrierRoamingNtnAvailableServices)
+                        .set(phoneIdFromSubId, intArray);
                 Iterator it = this.mRecords.iterator();
                 while (it.hasNext()) {
                     Record record = (Record) it.next();
-                    if (record.matchTelephonyCallbackEvent(44) && idMatch(record, i, phoneIdFromSubId)) {
+                    if (record.matchTelephonyCallbackEvent(44)
+                            && idMatch(record, i, phoneIdFromSubId)) {
                         try {
                             record.callback.onCarrierRoamingNtnAvailableServicesChanged(iArr);
                         } catch (RemoteException unused) {
@@ -1973,7 +2446,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
 
     public final void notifyCarrierRoamingNtnEligibleStateChanged(int i, boolean z) {
         if (!checkNotifyPermission()) {
-            log("notifyCarrierRoamingNtnEligibleStateChanged: caller does not have required permissions.");
+            log(
+                    "notifyCarrierRoamingNtnEligibleStateChanged: caller does not have required"
+                        + " permissions.");
             return;
         }
         synchronized (this.mRecords) {
@@ -1982,7 +2457,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             Iterator it = this.mRecords.iterator();
             while (it.hasNext()) {
                 Record record = (Record) it.next();
-                if (record.matchTelephonyCallbackEvent(43) && idMatch(record, i, phoneIdFromSubId)) {
+                if (record.matchTelephonyCallbackEvent(43)
+                        && idMatch(record, i, phoneIdFromSubId)) {
                     try {
                         record.callback.onCarrierRoamingNtnEligibleStateChanged(z);
                     } catch (RemoteException unused) {
@@ -2002,7 +2478,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                 Iterator it = this.mRecords.iterator();
                 while (it.hasNext()) {
                     Record record = (Record) it.next();
-                    if (record.matchTelephonyCallbackEvent(42) && idMatch(record, i, phoneIdFromSubId)) {
+                    if (record.matchTelephonyCallbackEvent(42)
+                            && idMatch(record, i, phoneIdFromSubId)) {
                         try {
                             record.callback.onCarrierRoamingNtnModeChanged(z);
                         } catch (RemoteException unused) {
@@ -2015,9 +2492,12 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void notifyCarrierRoamingNtnSignalStrengthChanged(int i, NtnSignalStrength ntnSignalStrength) {
+    public final void notifyCarrierRoamingNtnSignalStrengthChanged(
+            int i, NtnSignalStrength ntnSignalStrength) {
         if (!checkNotifyPermission()) {
-            log("nnotifyCarrierRoamingNtnSignalStrengthChanged: caller does not have required permissions.");
+            log(
+                    "nnotifyCarrierRoamingNtnSignalStrengthChanged: caller does not have required"
+                        + " permissions.");
             return;
         }
         synchronized (this.mRecords) {
@@ -2026,7 +2506,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             Iterator it = this.mRecords.iterator();
             while (it.hasNext()) {
                 Record record = (Record) it.next();
-                if (record.matchTelephonyCallbackEvent(45) && idMatch(record, i, phoneIdFromSubId)) {
+                if (record.matchTelephonyCallbackEvent(45)
+                        && idMatch(record, i, phoneIdFromSubId)) {
                     try {
                         record.callback.onCarrierRoamingNtnSignalStrengthChanged(ntnSignalStrength);
                     } catch (RemoteException unused) {
@@ -2076,7 +2557,10 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                     Iterator it = this.mRecords.iterator();
                     while (it.hasNext()) {
                         Record record = (Record) it.next();
-                        if (validateEventAndUserLocked(record, 11) && idMatch(record, i, phoneIdFromSubId) && checkCoarseLocationAccess(record, 1) && checkFineLocationAccess(record, 29)) {
+                        if (validateEventAndUserLocked(record, 11)
+                                && idMatch(record, i, phoneIdFromSubId)
+                                && checkCoarseLocationAccess(record, 1)
+                                && checkFineLocationAccess(record, 29)) {
                             try {
                                 record.callback.onCellInfoChanged(list);
                             } catch (RemoteException unused) {
@@ -2095,7 +2579,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
     }
 
     public final void notifyCellLocationForSubscriber(int i, CellIdentity cellIdentity, boolean z) {
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "notifyCellLocationForSubscriber: subId=", " cellIdentity=");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        i, "notifyCellLocationForSubscriber: subId=", " cellIdentity=");
         m.append(Rlog.pii(false, cellIdentity));
         log(m.toString());
         if (checkNotifyPermission()) {
@@ -2104,14 +2590,17 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                 try {
                     if (validatePhoneId(phoneIdFromSubId)) {
                         if (!z) {
-                            if (!Objects.equals(cellIdentity, this.mCellIdentity[phoneIdFromSubId])) {
-                            }
+                            if (!Objects.equals(
+                                    cellIdentity, this.mCellIdentity[phoneIdFromSubId])) {}
                         }
                         this.mCellIdentity[phoneIdFromSubId] = cellIdentity;
                         Iterator it = this.mRecords.iterator();
                         while (it.hasNext()) {
                             Record record = (Record) it.next();
-                            if (validateEventAndUserLocked(record, 5) && idMatch(record, i, phoneIdFromSubId) && checkCoarseLocationAccess(record, 1) && checkFineLocationAccess(record, 29)) {
+                            if (validateEventAndUserLocked(record, 5)
+                                    && idMatch(record, i, phoneIdFromSubId)
+                                    && checkCoarseLocationAccess(record, 1)
+                                    && checkFineLocationAccess(record, 29)) {
                                 try {
                                     record.callback.onCellLocationChanged(cellIdentity);
                                 } catch (RemoteException unused) {
@@ -2137,7 +2626,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                     Iterator it = this.mRecords.iterator();
                     while (it.hasNext()) {
                         Record record = (Record) it.next();
-                        if (record.matchTelephonyCallbackEvent(8) && idMatch(record, i, phoneIdFromSubId)) {
+                        if (record.matchTelephonyCallbackEvent(8)
+                                && idMatch(record, i, phoneIdFromSubId)) {
                             try {
                                 record.callback.onDataActivity(i2);
                             } catch (RemoteException unused) {
@@ -2173,19 +2663,28 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void notifyDataConnectionForSubscriber(int i, int i2, PreciseDataConnectionState preciseDataConnectionState) {
+    public final void notifyDataConnectionForSubscriber(
+            int i, int i2, PreciseDataConnectionState preciseDataConnectionState) {
         int i3;
         if (checkNotifyPermission()) {
             synchronized (this.mRecords) {
                 if (validatePhoneId(i) && preciseDataConnectionState.getApnSetting() != null) {
-                    Pair create = Pair.create(Integer.valueOf(preciseDataConnectionState.getTransportType()), preciseDataConnectionState.getApnSetting());
-                    if (!Objects.equals((PreciseDataConnectionState) ((Map) ((ArrayList) this.mPreciseDataConnectionStates).get(i)).remove(create), preciseDataConnectionState)) {
+                    Pair create =
+                            Pair.create(
+                                    Integer.valueOf(preciseDataConnectionState.getTransportType()),
+                                    preciseDataConnectionState.getApnSetting());
+                    if (!Objects.equals(
+                            (PreciseDataConnectionState)
+                                    ((Map) ((ArrayList) this.mPreciseDataConnectionStates).get(i))
+                                            .remove(create),
+                            preciseDataConnectionState)) {
                         Iterator it = this.mRecords.iterator();
                         while (it.hasNext()) {
                             Record record = (Record) it.next();
                             if (record.matchTelephonyCallbackEvent(13) && idMatch(record, i2, i)) {
                                 try {
-                                    record.callback.onPreciseDataConnectionStateChanged(preciseDataConnectionState);
+                                    record.callback.onPreciseDataConnectionStateChanged(
+                                            preciseDataConnectionState);
                                 } catch (RemoteException unused) {
                                     this.mRemoveList.add(record.binder);
                                 }
@@ -2193,21 +2692,41 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         }
                         handleRemoveListLocked();
                         broadcastDataConnectionStateChanged(i, i2, preciseDataConnectionState);
-                        String str = "notifyDataConnectionForSubscriber: phoneId=" + i + " subId=" + i2 + " " + preciseDataConnectionState;
+                        String str =
+                                "notifyDataConnectionForSubscriber: phoneId="
+                                        + i
+                                        + " subId="
+                                        + i2
+                                        + " "
+                                        + preciseDataConnectionState;
                         log(str);
                         this.mLocalLog.log(str);
                     }
                     if (preciseDataConnectionState.getState() != 0) {
-                        ((Map) ((ArrayList) this.mPreciseDataConnectionStates).get(i)).put(create, preciseDataConnectionState);
+                        ((Map) ((ArrayList) this.mPreciseDataConnectionStates).get(i))
+                                .put(create, preciseDataConnectionState);
                     }
                     ArrayMap arrayMap = new ArrayMap();
                     int i4 = 0;
-                    if (preciseDataConnectionState.getState() == 0 && preciseDataConnectionState.getApnSetting().getApnTypes().contains(17)) {
+                    if (preciseDataConnectionState.getState() == 0
+                            && preciseDataConnectionState
+                                    .getApnSetting()
+                                    .getApnTypes()
+                                    .contains(17)) {
                         arrayMap.put(0, preciseDataConnectionState);
                     }
-                    for (Map.Entry entry : ((Map) ((ArrayList) this.mPreciseDataConnectionStates).get(i)).entrySet()) {
-                        if (((Integer) ((Pair) entry.getKey()).first).intValue() == 1 && ((ApnSetting) ((Pair) entry.getKey()).second).getApnTypes().contains(17)) {
-                            arrayMap.put(Integer.valueOf(((PreciseDataConnectionState) entry.getValue()).getState()), (PreciseDataConnectionState) entry.getValue());
+                    for (Map.Entry entry :
+                            ((Map) ((ArrayList) this.mPreciseDataConnectionStates).get(i))
+                                    .entrySet()) {
+                        if (((Integer) ((Pair) entry.getKey()).first).intValue() == 1
+                                && ((ApnSetting) ((Pair) entry.getKey()).second)
+                                        .getApnTypes()
+                                        .contains(17)) {
+                            arrayMap.put(
+                                    Integer.valueOf(
+                                            ((PreciseDataConnectionState) entry.getValue())
+                                                    .getState()),
+                                    (PreciseDataConnectionState) entry.getValue());
                         }
                     }
                     int[] iArr = {2, 3, 1, 4, 0};
@@ -2219,14 +2738,25 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         }
                         int i6 = iArr[i5];
                         if (arrayMap.containsKey(Integer.valueOf(i6))) {
-                            i3 = ((PreciseDataConnectionState) arrayMap.get(Integer.valueOf(i6))).getNetworkType();
+                            i3 =
+                                    ((PreciseDataConnectionState) arrayMap.get(Integer.valueOf(i6)))
+                                            .getNetworkType();
                             i4 = i6;
                             break;
                         }
                         i5++;
                     }
-                    if (this.mDataConnectionState[i] != i4 || this.mDataConnectionNetworkType[i] != i3) {
-                        String str2 = "onDataConnectionStateChanged(" + TelephonyUtils.dataStateToString(i4) + ", " + TelephonyManager.getNetworkTypeName(i3) + ") subId=" + i2 + ", phoneId=" + i;
+                    if (this.mDataConnectionState[i] != i4
+                            || this.mDataConnectionNetworkType[i] != i3) {
+                        String str2 =
+                                "onDataConnectionStateChanged("
+                                        + TelephonyUtils.dataStateToString(i4)
+                                        + ", "
+                                        + TelephonyManager.getNetworkTypeName(i3)
+                                        + ") subId="
+                                        + i2
+                                        + ", phoneId="
+                                        + i;
                         log(str2);
                         this.mLocalLog.log(str2);
                         Iterator it2 = this.mRecords.iterator();
@@ -2283,7 +2813,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         Record record = (Record) it.next();
                         if (record.matchTelephonyCallbackEvent(26) && idMatch(record, i2, i)) {
                             try {
-                                record.callback.onCallDisconnectCauseChanged(this.mCallDisconnectCause[i], this.mCallPreciseDisconnectCause[i]);
+                                record.callback.onCallDisconnectCauseChanged(
+                                        this.mCallDisconnectCause[i],
+                                        this.mCallPreciseDisconnectCause[i]);
                             } catch (RemoteException unused) {
                                 this.mRemoveList.add(record.binder);
                             }
@@ -2295,9 +2827,16 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void notifyDisplayInfoChanged(int i, int i2, TelephonyDisplayInfo telephonyDisplayInfo) {
+    public final void notifyDisplayInfoChanged(
+            int i, int i2, TelephonyDisplayInfo telephonyDisplayInfo) {
         if (checkNotifyPermission()) {
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "notifyDisplayInfoChanged: PhoneId=", " subId=", " telephonyDisplayInfo=");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i,
+                            i2,
+                            "notifyDisplayInfoChanged: PhoneId=",
+                            " subId=",
+                            " telephonyDisplayInfo=");
             m.append(telephonyDisplayInfo);
             this.mLocalLog.log(m.toString());
             synchronized (this.mRecords) {
@@ -2309,22 +2848,32 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                             Record record = (Record) it.next();
                             if (record.matchTelephonyCallbackEvent(21) && idMatch(record, i2, i)) {
                                 try {
-                                    ConfigurationProvider configurationProvider = this.mConfigurationProvider;
+                                    ConfigurationProvider configurationProvider =
+                                            this.mConfigurationProvider;
                                     String str = record.callingPackage;
                                     UserHandle callingUserHandle = Binder.getCallingUserHandle();
                                     configurationProvider.getClass();
-                                    if (((Boolean) Binder.withCleanCallingIdentity(new TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda0(1, callingUserHandle, str))).booleanValue()) {
+                                    if (((Boolean)
+                                                    Binder.withCleanCallingIdentity(
+                                                            new TelephonyRegistry$ConfigurationProvider$$ExternalSyntheticLambda0(
+                                                                    1, callingUserHandle, str)))
+                                            .booleanValue()) {
                                         record.callback.onDisplayInfoChanged(telephonyDisplayInfo);
                                     } else {
                                         IPhoneStateListener iPhoneStateListener = record.callback;
                                         int networkType = telephonyDisplayInfo.getNetworkType();
-                                        int overrideNetworkType = telephonyDisplayInfo.getOverrideNetworkType();
+                                        int overrideNetworkType =
+                                                telephonyDisplayInfo.getOverrideNetworkType();
                                         if (networkType == 20) {
                                             overrideNetworkType = 0;
                                         } else if (networkType == 13 && overrideNetworkType == 5) {
                                             overrideNetworkType = 4;
                                         }
-                                        iPhoneStateListener.onDisplayInfoChanged(new TelephonyDisplayInfo(networkType, overrideNetworkType, telephonyDisplayInfo.isRoaming()));
+                                        iPhoneStateListener.onDisplayInfoChanged(
+                                                new TelephonyDisplayInfo(
+                                                        networkType,
+                                                        overrideNetworkType,
+                                                        telephonyDisplayInfo.isRoaming()));
                                     }
                                 } catch (RemoteException unused) {
                                     this.mRemoveList.add(record.binder);
@@ -2342,16 +2891,22 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
 
     public final void notifyEmergencyNumberList(int i, int i2) {
         if (checkNotifyPermission()) {
-            if (!Flags.enforceTelephonyFeatureMappingForPublicApis() || this.mContext.getPackageManager().hasSystemFeature("android.hardware.telephony.calling")) {
+            if (!Flags.enforceTelephonyFeatureMappingForPublicApis()
+                    || this.mContext
+                            .getPackageManager()
+                            .hasSystemFeature("android.hardware.telephony.calling")) {
                 synchronized (this.mRecords) {
                     if (validatePhoneId(i)) {
-                        this.mEmergencyNumberList = ((TelephonyManager) this.mContext.getSystemService("phone")).getEmergencyNumberList();
+                        this.mEmergencyNumberList =
+                                ((TelephonyManager) this.mContext.getSystemService("phone"))
+                                        .getEmergencyNumberList();
                         Iterator it = this.mRecords.iterator();
                         while (it.hasNext()) {
                             Record record = (Record) it.next();
                             if (record.matchTelephonyCallbackEvent(25) && idMatch(record, i2, i)) {
                                 try {
-                                    record.callback.onEmergencyNumberListChanged(this.mEmergencyNumberList);
+                                    record.callback.onEmergencyNumberListChanged(
+                                            this.mEmergencyNumberList);
                                 } catch (RemoteException unused) {
                                     this.mRemoveList.add(record.binder);
                                 }
@@ -2371,17 +2926,26 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                 try {
                     if (validatePhoneId(phoneIdFromSubId)) {
                         if (imsReasonInfo == null) {
-                            loge("ImsReasonInfo is null, subId=" + i + ", phoneId=" + phoneIdFromSubId);
-                            ((ArrayList) this.mImsReasonInfo).set(phoneIdFromSubId, new ImsReasonInfo());
+                            loge(
+                                    "ImsReasonInfo is null, subId="
+                                            + i
+                                            + ", phoneId="
+                                            + phoneIdFromSubId);
+                            ((ArrayList) this.mImsReasonInfo)
+                                    .set(phoneIdFromSubId, new ImsReasonInfo());
                             return;
                         }
                         ((ArrayList) this.mImsReasonInfo).set(phoneIdFromSubId, imsReasonInfo);
                         Iterator it = this.mRecords.iterator();
                         while (it.hasNext()) {
                             Record record = (Record) it.next();
-                            if (record.matchTelephonyCallbackEvent(28) && idMatch(record, i, phoneIdFromSubId)) {
+                            if (record.matchTelephonyCallbackEvent(28)
+                                    && idMatch(record, i, phoneIdFromSubId)) {
                                 try {
-                                    record.callback.onImsCallDisconnectCauseChanged((ImsReasonInfo) ((ArrayList) this.mImsReasonInfo).get(phoneIdFromSubId));
+                                    record.callback.onImsCallDisconnectCauseChanged(
+                                            (ImsReasonInfo)
+                                                    ((ArrayList) this.mImsReasonInfo)
+                                                            .get(phoneIdFromSubId));
                                 } catch (RemoteException unused) {
                                     this.mRemoveList.add(record.binder);
                                 }
@@ -2418,7 +2982,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void notifyMediaQualityStatusChanged(int i, int i2, MediaQualityStatus mediaQualityStatus) {
+    public final void notifyMediaQualityStatusChanged(
+            int i, int i2, MediaQualityStatus mediaQualityStatus) {
         CallState callState;
         if (checkNotifyPermission()) {
             synchronized (this.mRecords) {
@@ -2442,11 +3007,20 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                                 return;
                             }
                             String imsCallSessionId = callState.getImsCallSessionId();
-                            if (imsCallSessionId == null || !imsCallSessionId.equals(mediaQualityStatus.getCallSessionId())) {
-                                log("SessionId mismatch active call:" + imsCallSessionId + " media quality:" + mediaQualityStatus.getCallSessionId());
+                            if (imsCallSessionId == null
+                                    || !imsCallSessionId.equals(
+                                            mediaQualityStatus.getCallSessionId())) {
+                                log(
+                                        "SessionId mismatch active call:"
+                                                + imsCallSessionId
+                                                + " media quality:"
+                                                + mediaQualityStatus.getCallSessionId());
                                 return;
                             }
-                            ((SparseArray) ((ArrayList) this.mMediaQualityStatus).get(i)).put(mediaQualityStatus.getMediaSessionType(), mediaQualityStatus);
+                            ((SparseArray) ((ArrayList) this.mMediaQualityStatus).get(i))
+                                    .put(
+                                            mediaQualityStatus.getMediaSessionType(),
+                                            mediaQualityStatus);
                         }
                         Iterator it2 = this.mRecords.iterator();
                         while (it2.hasNext()) {
@@ -2516,14 +3090,17 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             synchronized (this.mRecords) {
                 try {
                     if (!this.mHasNotifyOpportunisticSubscriptionInfoChangedOccurred) {
-                        log("notifyOpptSubscriptionInfoChanged: first invocation mRecords.size=" + this.mRecords.size());
+                        log(
+                                "notifyOpptSubscriptionInfoChanged: first invocation mRecords.size="
+                                        + this.mRecords.size());
                     }
                     this.mHasNotifyOpportunisticSubscriptionInfoChangedOccurred = true;
                     this.mRemoveList.clear();
                     Iterator it = this.mRecords.iterator();
                     while (it.hasNext()) {
                         Record record = (Record) it.next();
-                        IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener = record.onOpportunisticSubscriptionsChangedListenerCallback;
+                        IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener =
+                                record.onOpportunisticSubscriptionsChangedListenerCallback;
                         if (iOnSubscriptionsChangedListener != null) {
                             try {
                                 iOnSubscriptionsChangedListener.onSubscriptionsChanged();
@@ -2621,7 +3198,10 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                             try {
                                 IPhoneStateListener iPhoneStateListener = record.callback;
                                 int i3 = record.callerUid;
-                                iPhoneStateListener.onPhysicalChannelConfigChanged((i3 == 1001 || i3 == 1000) ? list : locationSanitizedConfigs);
+                                iPhoneStateListener.onPhysicalChannelConfigChanged(
+                                        (i3 == 1001 || i3 == 1000)
+                                                ? list
+                                                : locationSanitizedConfigs);
                             } catch (RemoteException unused) {
                                 this.mRemoveList.add(record.binder);
                             }
@@ -2633,7 +3213,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void notifyPreciseCallState(int i, int i2, int[] iArr, String[] strArr, int[] iArr2, int[] iArr3) {
+    public final void notifyPreciseCallState(
+            int i, int i2, int[] iArr, String[] strArr, int[] iArr2, int[] iArr3) {
         boolean z;
         if (checkNotifyPermission()) {
             boolean z2 = false;
@@ -2646,7 +3227,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         this.mRingingCallState[i] = i3;
                         this.mForegroundCallState[i] = i4;
                         this.mBackgroundCallState[i] = i5;
-                        PreciseCallState preciseCallState = new PreciseCallState(i3, i4, i5, -1, -1);
+                        PreciseCallState preciseCallState =
+                                new PreciseCallState(i3, i4, i5, -1, -1);
                         if (preciseCallState.equals(this.mPreciseCallState[i])) {
                             z = false;
                         } else {
@@ -2657,7 +3239,10 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                             if (this.mPreciseCallState[i].getForegroundCallState() != 1) {
                                 this.mCallQuality[i] = createCallQuality();
                             }
-                            if (this.mCallNetworkType[i] != 0 && this.mPreciseCallState[i].getRingingCallState() <= 0 && this.mPreciseCallState[i].getForegroundCallState() <= 0 && this.mPreciseCallState[i].getBackgroundCallState() <= 0) {
+                            if (this.mCallNetworkType[i] != 0
+                                    && this.mPreciseCallState[i].getRingingCallState() <= 0
+                                    && this.mPreciseCallState[i].getForegroundCallState() <= 0
+                                    && this.mPreciseCallState[i].getBackgroundCallState() <= 0) {
                                 log("notifyPreciseCallState - Reset call network type");
                                 this.mCallNetworkType[i] = 0;
                             }
@@ -2665,38 +3250,68 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                             arrayList.addAll((Collection) this.mCallStateLists.get(i));
                             ((List) this.mCallStateLists.get(i)).clear();
                             if (i4 != -1 && i4 != 0) {
-                                CallState.Builder callClassification = new CallState.Builder(iArr[1]).setNetworkType(this.mCallNetworkType[i]).setCallQuality(this.mCallQuality[i]).setCallClassification(1);
+                                CallState.Builder callClassification =
+                                        new CallState.Builder(iArr[1])
+                                                .setNetworkType(this.mCallNetworkType[i])
+                                                .setCallQuality(this.mCallQuality[i])
+                                                .setCallClassification(1);
                                 if (strArr != null && iArr2 != null && iArr3 != null) {
-                                    callClassification = callClassification.setImsCallSessionId(strArr[1]).setImsCallServiceType(iArr2[1]).setImsCallType(iArr3[1]);
+                                    callClassification =
+                                            callClassification
+                                                    .setImsCallSessionId(strArr[1])
+                                                    .setImsCallServiceType(iArr2[1])
+                                                    .setImsCallType(iArr3[1]);
                                 }
-                                ((List) this.mCallStateLists.get(i)).add(callClassification.build());
+                                ((List) this.mCallStateLists.get(i))
+                                        .add(callClassification.build());
                             }
                             if (i5 != -1 && i5 != 0) {
-                                CallState.Builder callClassification2 = new CallState.Builder(iArr[2]).setNetworkType(this.mCallNetworkType[i]).setCallQuality(createCallQuality()).setCallClassification(2);
+                                CallState.Builder callClassification2 =
+                                        new CallState.Builder(iArr[2])
+                                                .setNetworkType(this.mCallNetworkType[i])
+                                                .setCallQuality(createCallQuality())
+                                                .setCallClassification(2);
                                 if (strArr != null && iArr2 != null && iArr3 != null) {
-                                    callClassification2 = callClassification2.setImsCallSessionId(strArr[2]).setImsCallServiceType(iArr2[2]).setImsCallType(iArr3[2]);
+                                    callClassification2 =
+                                            callClassification2
+                                                    .setImsCallSessionId(strArr[2])
+                                                    .setImsCallServiceType(iArr2[2])
+                                                    .setImsCallType(iArr3[2]);
                                 }
-                                ((List) this.mCallStateLists.get(i)).add(callClassification2.build());
+                                ((List) this.mCallStateLists.get(i))
+                                        .add(callClassification2.build());
                             }
                             if (i3 != -1 && i3 != 0) {
-                                CallState.Builder callClassification3 = new CallState.Builder(iArr[0]).setNetworkType(this.mCallNetworkType[i]).setCallQuality(createCallQuality()).setCallClassification(0);
+                                CallState.Builder callClassification3 =
+                                        new CallState.Builder(iArr[0])
+                                                .setNetworkType(this.mCallNetworkType[i])
+                                                .setCallQuality(createCallQuality())
+                                                .setCallClassification(0);
                                 if (strArr != null && iArr2 != null && iArr3 != null) {
-                                    callClassification3 = callClassification3.setImsCallSessionId(strArr[0]).setImsCallServiceType(iArr2[0]).setImsCallType(iArr3[0]);
+                                    callClassification3 =
+                                            callClassification3
+                                                    .setImsCallSessionId(strArr[0])
+                                                    .setImsCallServiceType(iArr2[0])
+                                                    .setImsCallType(iArr3[0]);
                                 }
-                                ((List) this.mCallStateLists.get(i)).add(callClassification3.build());
+                                ((List) this.mCallStateLists.get(i))
+                                        .add(callClassification3.build());
                             }
                             z2 = !arrayList.equals(this.mCallStateLists.get(i));
                             Iterator it = ((List) this.mCallStateLists.get(i)).iterator();
                             while (true) {
                                 if (!it.hasNext()) {
-                                    ((SparseArray) ((ArrayList) this.mMediaQualityStatus).get(i)).clear();
+                                    ((SparseArray) ((ArrayList) this.mMediaQualityStatus).get(i))
+                                            .clear();
                                     break;
                                 } else if (((CallState) it.next()).getCallState() != 7) {
                                     break;
                                 }
                             }
                         } else {
-                            log("notifyPreciseCallState: mCallQuality is null, skipping call attributes");
+                            log(
+                                    "notifyPreciseCallState: mCallQuality is null, skipping call"
+                                        + " attributes");
                         }
                         StringBuilder sb = new StringBuilder();
                         sb.append("notifyPreciseCallState - phoneId: ");
@@ -2704,17 +3319,27 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         sb.append(", subId: ");
                         sb.append(i2);
                         sb.append(", preciseCallStateChanged: ");
-                        sb.append(z ? SemTelephonyUtils.preciseCallStateToString(this.mPreciseCallState[i]) : "false");
+                        sb.append(
+                                z
+                                        ? SemTelephonyUtils.preciseCallStateToString(
+                                                this.mPreciseCallState[i])
+                                        : "false");
                         sb.append(", notifyCallState: ");
-                        sb.append(z2 ? SemTelephonyUtils.callStateListToString((List) this.mCallStateLists.get(i)) : "false");
+                        sb.append(
+                                z2
+                                        ? SemTelephonyUtils.callStateListToString(
+                                                (List) this.mCallStateLists.get(i))
+                                        : "false");
                         log(sb.toString());
                         if (z) {
                             Iterator it2 = this.mRecords.iterator();
                             while (it2.hasNext()) {
                                 Record record = (Record) it2.next();
-                                if (record.matchTelephonyCallbackEvent(12) && idMatch(record, i2, i)) {
+                                if (record.matchTelephonyCallbackEvent(12)
+                                        && idMatch(record, i2, i)) {
                                     try {
-                                        record.callback.onPreciseCallStateChanged(this.mPreciseCallState[i]);
+                                        record.callback.onPreciseCallStateChanged(
+                                                this.mPreciseCallState[i]);
                                     } catch (RemoteException unused) {
                                         this.mRemoveList.add(record.binder);
                                     }
@@ -2725,9 +3350,11 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                             Iterator it3 = this.mRecords.iterator();
                             while (it3.hasNext()) {
                                 Record record2 = (Record) it3.next();
-                                if (record2.matchTelephonyCallbackEvent(27) && idMatch(record2, i2, i)) {
+                                if (record2.matchTelephonyCallbackEvent(27)
+                                        && idMatch(record2, i2, i)) {
                                     try {
-                                        record2.callback.onCallStatesChanged((List) this.mCallStateLists.get(i));
+                                        record2.callback.onCallStatesChanged(
+                                                (List) this.mCallStateLists.get(i));
                                     } catch (RemoteException unused2) {
                                         this.mRemoveList.add(record2.binder);
                                     }
@@ -2744,17 +3371,17 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:32:0x0040, code lost:
-    
-        if (r9 == 0) goto L22;
-     */
+
+       if (r9 == 0) goto L22;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x0059, code lost:
-    
-        if (r10 == r8.mDefaultSubId) goto L22;
-     */
+
+       if (r10 == r8.mDefaultSubId) goto L22;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:45:0x005c, code lost:
-    
-        if (r6 == r10) goto L22;
-     */
+
+       if (r6 == r10) goto L22;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2838,18 +3465,26 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L67
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.TelephonyRegistry.notifyRadioPowerStateChanged(int, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.TelephonyRegistry.notifyRadioPowerStateChanged(int, int,"
+                    + " int):void");
     }
 
-    public final void notifyRegistrationFailed(int i, int i2, CellIdentity cellIdentity, String str, int i3, int i4, int i5) {
+    public final void notifyRegistrationFailed(
+            int i, int i2, CellIdentity cellIdentity, String str, int i3, int i4, int i5) {
         Record record;
         int i6 = i;
         if (checkNotifyPermission()) {
             CellIdentity sanitizeLocationInfo = cellIdentity.sanitizeLocationInfo();
             String plmn = cellIdentity.getPlmn();
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i6, i2, "Registration Failed for phoneId=", " subId=", "primaryPlmn=");
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, plmn, " chosenPlmn=", str, " domain=");
-            ServiceKeeper$$ExternalSyntheticOutline0.m(i3, i4, " causeCode=", " additionalCauseCode=", m);
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i6, i2, "Registration Failed for phoneId=", " subId=", "primaryPlmn=");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    m, plmn, " chosenPlmn=", str, " domain=");
+            ServiceKeeper$$ExternalSyntheticOutline0.m(
+                    i3, i4, " causeCode=", " additionalCauseCode=", m);
             m.append(i5);
             this.mLocalLog.log(m.toString());
             synchronized (this.mRecords) {
@@ -2864,7 +3499,14 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                                 record = record2;
                             }
                             try {
-                                record2.callback.onRegistrationFailed(checkFineLocationAccess(record2, 1) ? cellIdentity : sanitizeLocationInfo, str, i3, i4, i5);
+                                record2.callback.onRegistrationFailed(
+                                        checkFineLocationAccess(record2, 1)
+                                                ? cellIdentity
+                                                : sanitizeLocationInfo,
+                                        str,
+                                        i3,
+                                        i4,
+                                        i5);
                             } catch (RemoteException unused2) {
                                 this.mRemoveList.add(record.binder);
                                 i6 = i;
@@ -2878,8 +3520,10 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void notifySemSatelliteServiceStateChanged(int i, int i2, SemSatelliteServiceState semSatelliteServiceState) {
-        if (this.mContext.checkCallingOrSelfPermission("android.permission.SATELLITE_COMMUNICATION") != 0) {
+    public final void notifySemSatelliteServiceStateChanged(
+            int i, int i2, SemSatelliteServiceState semSatelliteServiceState) {
+        if (this.mContext.checkCallingOrSelfPermission("android.permission.SATELLITE_COMMUNICATION")
+                != 0) {
             Binder.getCallingPid();
             Binder.getCallingUid();
             return;
@@ -2901,8 +3545,10 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void notifySemSatelliteSignalStrengthChanged(int i, int i2, SemSatelliteSignalStrength semSatelliteSignalStrength) {
-        if (this.mContext.checkCallingOrSelfPermission("android.permission.SATELLITE_COMMUNICATION") != 0) {
+    public final void notifySemSatelliteSignalStrengthChanged(
+            int i, int i2, SemSatelliteSignalStrength semSatelliteSignalStrength) {
+        if (this.mContext.checkCallingOrSelfPermission("android.permission.SATELLITE_COMMUNICATION")
+                != 0) {
             Binder.getCallingPid();
             Binder.getCallingUid();
             return;
@@ -2914,7 +3560,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                 Record record = (Record) it.next();
                 if (record.matchTelephonyCallbackEvent(10001) && idMatch(record, i2, i)) {
                     try {
-                        record.callback.onSemSatelliteSignalStrengthChanged(semSatelliteSignalStrength);
+                        record.callback.onSemSatelliteSignalStrengthChanged(
+                                semSatelliteSignalStrength);
                     } catch (RemoteException unused) {
                         this.mRemoveList.add(record.binder);
                     }
@@ -2930,22 +3577,42 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             try {
                 synchronized (this.mRecords) {
                     try {
-                        this.mLocalLog.log("notifyServiceStateForSubscriber: subId=" + i2 + " phoneId=" + i + " state=" + serviceState);
+                        this.mLocalLog.log(
+                                "notifyServiceStateForSubscriber: subId="
+                                        + i2
+                                        + " phoneId="
+                                        + i
+                                        + " state="
+                                        + serviceState);
                         if (validatePhoneId(i) && SubscriptionManager.isValidSubscriptionId(i2)) {
                             this.mServiceState[i] = serviceState;
                             Iterator it = this.mRecords.iterator();
                             while (it.hasNext()) {
                                 Record record = (Record) it.next();
-                                if (record.matchTelephonyCallbackEvent(1) && idMatch(record, i2, i)) {
+                                if (record.matchTelephonyCallbackEvent(1)
+                                        && idMatch(record, i2, i)) {
                                     try {
-                                        record.callback.onServiceStateChanged(checkFineLocationAccess(record, 29) ? new ServiceState(serviceState) : checkCoarseLocationAccess(record, 29) ? serviceState.createLocationInfoSanitizedCopy(false) : serviceState.createLocationInfoSanitizedCopy(true));
+                                        record.callback.onServiceStateChanged(
+                                                checkFineLocationAccess(record, 29)
+                                                        ? new ServiceState(serviceState)
+                                                        : checkCoarseLocationAccess(record, 29)
+                                                                ? serviceState
+                                                                        .createLocationInfoSanitizedCopy(
+                                                                                false)
+                                                                : serviceState
+                                                                        .createLocationInfoSanitizedCopy(
+                                                                                true));
                                     } catch (RemoteException unused) {
                                         this.mRemoveList.add(record.binder);
                                     }
                                 }
                             }
                         } else {
-                            log("notifyServiceStateForSubscriber: INVALID phoneId=" + i + " or subId=" + i2);
+                            log(
+                                    "notifyServiceStateForSubscriber: INVALID phoneId="
+                                            + i
+                                            + " or subId="
+                                            + i2);
                         }
                         handleRemoveListLocked();
                     } catch (Throwable th) {
@@ -2969,7 +3636,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                         Record record = (Record) it.next();
                         if (record.matchTelephonyCallbackEvent(9) && idMatch(record, i2, i)) {
                             try {
-                                record.callback.onSignalStrengthsChanged(new SignalStrength(signalStrength));
+                                record.callback.onSignalStrengthsChanged(
+                                        new SignalStrength(signalStrength));
                             } catch (RemoteException unused) {
                                 this.mRemoveList.add(record.binder);
                             }
@@ -3042,14 +3710,17 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                             Record record = (Record) it.next();
                             if (i3 == 0) {
                                 try {
-                                    if (record.matchTelephonyCallbackEvent(18) && idMatch(record, i2, i)) {
+                                    if (record.matchTelephonyCallbackEvent(18)
+                                            && idMatch(record, i2, i)) {
                                         record.callback.onVoiceActivationStateChanged(i4);
                                     }
                                 } catch (RemoteException unused) {
                                     this.mRemoveList.add(record.binder);
                                 }
                             }
-                            if (i3 == 1 && record.matchTelephonyCallbackEvent(19) && idMatch(record, i2, i)) {
+                            if (i3 == 1
+                                    && record.matchTelephonyCallbackEvent(19)
+                                    && idMatch(record, i2, i)) {
                                 record.callback.onDataActivationStateChanged(i4);
                             }
                         }
@@ -3093,7 +3764,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                     Iterator it = this.mRecords.iterator();
                     while (it.hasNext()) {
                         Record record = (Record) it.next();
-                        if (record.matchTelephonyCallbackEvent(16) && idMatch(record, i, phoneIdFromSubId)) {
+                        if (record.matchTelephonyCallbackEvent(16)
+                                && idMatch(record, i, phoneIdFromSubId)) {
                             try {
                                 record.callback.onSrvccStateChanged(i2);
                             } catch (RemoteException unused) {
@@ -3125,14 +3797,17 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             synchronized (this.mRecords) {
                 try {
                     if (!this.mHasNotifySubscriptionInfoChangedOccurred) {
-                        log("notifySubscriptionInfoChanged: first invocation mRecords.size=" + this.mRecords.size());
+                        log(
+                                "notifySubscriptionInfoChanged: first invocation mRecords.size="
+                                        + this.mRecords.size());
                     }
                     this.mHasNotifySubscriptionInfoChangedOccurred = true;
                     this.mRemoveList.clear();
                     Iterator it = this.mRecords.iterator();
                     while (it.hasNext()) {
                         Record record = (Record) it.next();
-                        IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener = record.onSubscriptionsChangedListenerCallback;
+                        IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener =
+                                record.onSubscriptionsChangedListenerCallback;
                         if (iOnSubscriptionsChangedListener != null) {
                             try {
                                 iOnSubscriptionsChangedListener.onSubscriptionsChanged();
@@ -3175,7 +3850,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         synchronized (this.mRecords) {
             try {
                 int i = this.mNumPhones;
-                int activeModemCount = ((TelephonyManager) this.mContext.getSystemService("phone")).getActiveModemCount();
+                int activeModemCount =
+                        ((TelephonyManager) this.mContext.getSystemService("phone"))
+                                .getActiveModemCount();
                 this.mNumPhones = activeModemCount;
                 if (i == activeModemCount) {
                     return;
@@ -3185,46 +3862,72 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                 this.mDataActivity = Arrays.copyOf(copyOf, this.mNumPhones);
                 this.mDataConnectionState = Arrays.copyOf(this.mCallState, this.mNumPhones);
                 this.mDataConnectionNetworkType = Arrays.copyOf(this.mCallState, this.mNumPhones);
-                this.mCallIncomingNumber = (String[]) Arrays.copyOf(this.mCallIncomingNumber, this.mNumPhones);
-                this.mServiceState = (ServiceState[]) Arrays.copyOf(this.mServiceState, this.mNumPhones);
-                this.mVoiceActivationState = Arrays.copyOf(this.mVoiceActivationState, this.mNumPhones);
-                this.mDataActivationState = Arrays.copyOf(this.mDataActivationState, this.mNumPhones);
-                this.mUserMobileDataState = Arrays.copyOf(this.mUserMobileDataState, this.mNumPhones);
+                this.mCallIncomingNumber =
+                        (String[]) Arrays.copyOf(this.mCallIncomingNumber, this.mNumPhones);
+                this.mServiceState =
+                        (ServiceState[]) Arrays.copyOf(this.mServiceState, this.mNumPhones);
+                this.mVoiceActivationState =
+                        Arrays.copyOf(this.mVoiceActivationState, this.mNumPhones);
+                this.mDataActivationState =
+                        Arrays.copyOf(this.mDataActivationState, this.mNumPhones);
+                this.mUserMobileDataState =
+                        Arrays.copyOf(this.mUserMobileDataState, this.mNumPhones);
                 SignalStrength[] signalStrengthArr = this.mSignalStrength;
                 if (signalStrengthArr != null) {
-                    this.mSignalStrength = (SignalStrength[]) Arrays.copyOf(signalStrengthArr, this.mNumPhones);
+                    this.mSignalStrength =
+                            (SignalStrength[]) Arrays.copyOf(signalStrengthArr, this.mNumPhones);
                 } else {
                     this.mSignalStrength = new SignalStrength[this.mNumPhones];
                 }
                 this.mMessageWaiting = Arrays.copyOf(this.mMessageWaiting, this.mNumPhones);
                 this.mCallForwarding = Arrays.copyOf(this.mCallForwarding, this.mNumPhones);
-                this.mCellIdentity = (CellIdentity[]) Arrays.copyOf(this.mCellIdentity, this.mNumPhones);
+                this.mCellIdentity =
+                        (CellIdentity[]) Arrays.copyOf(this.mCellIdentity, this.mNumPhones);
                 this.mSrvccState = Arrays.copyOf(this.mSrvccState, this.mNumPhones);
-                this.mPreciseCallState = (PreciseCallState[]) Arrays.copyOf(this.mPreciseCallState, this.mNumPhones);
-                this.mForegroundCallState = Arrays.copyOf(this.mForegroundCallState, this.mNumPhones);
-                this.mBackgroundCallState = Arrays.copyOf(this.mBackgroundCallState, this.mNumPhones);
+                this.mPreciseCallState =
+                        (PreciseCallState[]) Arrays.copyOf(this.mPreciseCallState, this.mNumPhones);
+                this.mForegroundCallState =
+                        Arrays.copyOf(this.mForegroundCallState, this.mNumPhones);
+                this.mBackgroundCallState =
+                        Arrays.copyOf(this.mBackgroundCallState, this.mNumPhones);
                 this.mRingingCallState = Arrays.copyOf(this.mRingingCallState, this.mNumPhones);
-                this.mCallDisconnectCause = Arrays.copyOf(this.mCallDisconnectCause, this.mNumPhones);
-                this.mCallPreciseDisconnectCause = Arrays.copyOf(this.mCallPreciseDisconnectCause, this.mNumPhones);
-                this.mCallQuality = (CallQuality[]) Arrays.copyOf(this.mCallQuality, this.mNumPhones);
+                this.mCallDisconnectCause =
+                        Arrays.copyOf(this.mCallDisconnectCause, this.mNumPhones);
+                this.mCallPreciseDisconnectCause =
+                        Arrays.copyOf(this.mCallPreciseDisconnectCause, this.mNumPhones);
+                this.mCallQuality =
+                        (CallQuality[]) Arrays.copyOf(this.mCallQuality, this.mNumPhones);
                 this.mCallNetworkType = Arrays.copyOf(this.mCallNetworkType, this.mNumPhones);
-                this.mOutgoingCallEmergencyNumber = (EmergencyNumber[]) Arrays.copyOf(this.mOutgoingCallEmergencyNumber, this.mNumPhones);
-                this.mOutgoingSmsEmergencyNumber = (EmergencyNumber[]) Arrays.copyOf(this.mOutgoingSmsEmergencyNumber, this.mNumPhones);
-                this.mTelephonyDisplayInfos = (TelephonyDisplayInfo[]) Arrays.copyOf(this.mTelephonyDisplayInfos, this.mNumPhones);
-                this.mCarrierNetworkChangeState = Arrays.copyOf(this.mCarrierNetworkChangeState, this.mNumPhones);
+                this.mOutgoingCallEmergencyNumber =
+                        (EmergencyNumber[])
+                                Arrays.copyOf(this.mOutgoingCallEmergencyNumber, this.mNumPhones);
+                this.mOutgoingSmsEmergencyNumber =
+                        (EmergencyNumber[])
+                                Arrays.copyOf(this.mOutgoingSmsEmergencyNumber, this.mNumPhones);
+                this.mTelephonyDisplayInfos =
+                        (TelephonyDisplayInfo[])
+                                Arrays.copyOf(this.mTelephonyDisplayInfos, this.mNumPhones);
+                this.mCarrierNetworkChangeState =
+                        Arrays.copyOf(this.mCarrierNetworkChangeState, this.mNumPhones);
                 this.mIsDataEnabled = Arrays.copyOf(this.mIsDataEnabled, this.mNumPhones);
                 this.mDataEnabledReason = Arrays.copyOf(this.mDataEnabledReason, this.mNumPhones);
-                this.mAllowedNetworkTypeReason = Arrays.copyOf(this.mAllowedNetworkTypeReason, this.mNumPhones);
-                this.mAllowedNetworkTypeValue = Arrays.copyOf(this.mAllowedNetworkTypeValue, this.mNumPhones);
+                this.mAllowedNetworkTypeReason =
+                        Arrays.copyOf(this.mAllowedNetworkTypeReason, this.mNumPhones);
+                this.mAllowedNetworkTypeValue =
+                        Arrays.copyOf(this.mAllowedNetworkTypeValue, this.mNumPhones);
                 this.mECBMReason = Arrays.copyOf(this.mECBMReason, this.mNumPhones);
                 this.mECBMStarted = Arrays.copyOf(this.mECBMStarted, this.mNumPhones);
                 this.mSCBMReason = Arrays.copyOf(this.mSCBMReason, this.mNumPhones);
                 this.mSCBMStarted = Arrays.copyOf(this.mSCBMStarted, this.mNumPhones);
-                this.mCarrierRoamingNtnMode = Arrays.copyOf(this.mCarrierRoamingNtnMode, this.mNumPhones);
-                this.mCarrierRoamingNtnEligible = Arrays.copyOf(this.mCarrierRoamingNtnEligible, this.mNumPhones);
+                this.mCarrierRoamingNtnMode =
+                        Arrays.copyOf(this.mCarrierRoamingNtnMode, this.mNumPhones);
+                this.mCarrierRoamingNtnEligible =
+                        Arrays.copyOf(this.mCarrierRoamingNtnEligible, this.mNumPhones);
                 NtnSignalStrength[] ntnSignalStrengthArr = this.mCarrierRoamingNtnSignalStrength;
                 if (ntnSignalStrengthArr != null) {
-                    this.mCarrierRoamingNtnSignalStrength = (NtnSignalStrength[]) Arrays.copyOf(ntnSignalStrengthArr, this.mNumPhones);
+                    this.mCarrierRoamingNtnSignalStrength =
+                            (NtnSignalStrength[])
+                                    Arrays.copyOf(ntnSignalStrengthArr, this.mNumPhones);
                 } else {
                     this.mCarrierRoamingNtnSignalStrength = new NtnSignalStrength[this.mNumPhones];
                 }
@@ -3279,7 +3982,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
                     this.mAllowedNetworkTypeReason[i] = -1;
                     this.mAllowedNetworkTypeValue[i] = -1;
                     ((ArrayList) this.mLinkCapacityEstimateLists).add(i, INVALID_LCE_LIST);
-                    ((ArrayList) this.mCarrierPrivilegeStates).add(i, new Pair(Collections.emptyList(), new int[0]));
+                    ((ArrayList) this.mCarrierPrivilegeStates)
+                            .add(i, new Pair(Collections.emptyList(), new int[0]));
                     ((ArrayList) this.mCarrierServiceStates).add(i, new Pair(null, -1));
                     this.mECBMReason[i] = 0;
                     this.mECBMStarted[i] = false;
@@ -3303,7 +4007,8 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
             for (int i = 0; i < size; i++) {
                 Record record = (Record) this.mRecords.get(i);
                 if (record.binder == iBinder) {
-                    TelephonyRegistryDeathRecipient telephonyRegistryDeathRecipient = record.deathRecipient;
+                    TelephonyRegistryDeathRecipient telephonyRegistryDeathRecipient =
+                            record.deathRecipient;
                     if (telephonyRegistryDeathRecipient != null) {
                         try {
                             iBinder.unlinkToDeath(telephonyRegistryDeathRecipient, 0);
@@ -3317,18 +4022,23 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         }
     }
 
-    public final void removeCarrierConfigChangeListener(ICarrierConfigChangeListener iCarrierConfigChangeListener, String str) {
+    public final void removeCarrierConfigChangeListener(
+            ICarrierConfigChangeListener iCarrierConfigChangeListener, String str) {
         this.mAppOps.checkPackage(Binder.getCallingUid(), str);
         remove(iCarrierConfigChangeListener.asBinder());
     }
 
-    public final void removeCarrierPrivilegesCallback(ICarrierPrivilegesCallback iCarrierPrivilegesCallback, String str) {
+    public final void removeCarrierPrivilegesCallback(
+            ICarrierPrivilegesCallback iCarrierPrivilegesCallback, String str) {
         this.mAppOps.checkPackage(Binder.getCallingUid(), str);
-        this.mContext.enforceCallingOrSelfPermission("android.permission.READ_PRIVILEGED_PHONE_STATE", "removeCarrierPrivilegesCallback");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.READ_PRIVILEGED_PHONE_STATE",
+                "removeCarrierPrivilegesCallback");
         remove(iCarrierPrivilegesCallback.asBinder());
     }
 
-    public final void removeOnSubscriptionsChangedListener(String str, IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) {
+    public final void removeOnSubscriptionsChangedListener(
+            String str, IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) {
         remove(iOnSubscriptionsChangedListener.asBinder());
     }
 
@@ -3346,6 +4056,9 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
     }
 
     public final boolean validatePhoneId(int i) {
-        return i >= 0 && i < ((TelephonyManager) this.mContext.getSystemService("phone")).getActiveModemCount();
+        return i >= 0
+                && i
+                        < ((TelephonyManager) this.mContext.getSystemService("phone"))
+                                .getActiveModemCount();
     }
 }

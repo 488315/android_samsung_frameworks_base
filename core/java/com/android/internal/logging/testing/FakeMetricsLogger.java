@@ -1,7 +1,9 @@
 package com.android.internal.logging.testing;
 
 import android.metrics.LogMaker;
+
 import com.android.internal.logging.MetricsLogger;
+
 import java.util.LinkedList;
 import java.util.Queue;
 

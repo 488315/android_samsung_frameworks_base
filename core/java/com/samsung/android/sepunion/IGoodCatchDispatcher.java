@@ -16,12 +16,10 @@ public interface IGoodCatchDispatcher extends IInterface {
 
     public static class Default implements IGoodCatchDispatcher {
         @Override // com.samsung.android.sepunion.IGoodCatchDispatcher
-        public void onStart(String function) throws RemoteException {
-        }
+        public void onStart(String function) throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IGoodCatchDispatcher
-        public void onStop(String function) throws RemoteException {
-        }
+        public void onStop(String function) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IGoodCatchDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGoodCatchDispatcher {
+    public abstract static class Stub extends Binder implements IGoodCatchDispatcher {
         static final int TRANSACTION_onStart = 1;
         static final int TRANSACTION_onStop = 2;
 
@@ -70,7 +68,8 @@ public interface IGoodCatchDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGoodCatchDispatcher.DESCRIPTOR);
             }

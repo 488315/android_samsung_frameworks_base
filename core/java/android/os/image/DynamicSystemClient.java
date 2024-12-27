@@ -15,6 +15,7 @@ import android.os.Messenger;
 import android.os.ParcelableException;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -23,9 +24,11 @@ import java.util.concurrent.Executor;
 @SystemApi
 /* loaded from: classes3.dex */
 public class DynamicSystemClient {
-    public static final String ACTION_HIDE_NOTIFICATION = "android.os.image.action.HIDE_NOTIFICATION";
+    public static final String ACTION_HIDE_NOTIFICATION =
+            "android.os.image.action.HIDE_NOTIFICATION";
     public static final String ACTION_NOTIFY_IF_IN_USE = "android.os.image.action.NOTIFY_IF_IN_USE";
-    public static final String ACTION_NOTIFY_KEYGUARD_DISMISSED = "android.os.image.action.NOTIFY_KEYGUARD_DISMISSED";
+    public static final String ACTION_NOTIFY_KEYGUARD_DISMISSED =
+            "android.os.image.action.NOTIFY_KEYGUARD_DISMISSED";
     public static final String ACTION_START_INSTALL = "android.os.image.action.START_INSTALL";
     public static final int CAUSE_ERROR_EXCEPTION = 6;
     public static final int CAUSE_ERROR_INVALID_URL = 4;
@@ -37,7 +40,8 @@ public class DynamicSystemClient {
     public static final String KEY_ENABLE_WHEN_COMPLETED = "KEY_ENABLE_WHEN_COMPLETED";
     public static final String KEY_EXCEPTION_DETAIL = "KEY_EXCEPTION_DETAIL";
     public static final String KEY_INSTALLED_SIZE = "KEY_INSTALLED_SIZE";
-    public static final String KEY_KEYGUARD_USE_DEFAULT_STRINGS = "KEY_KEYGUARD_USE_DEFAULT_STRINGS";
+    public static final String KEY_KEYGUARD_USE_DEFAULT_STRINGS =
+            "KEY_KEYGUARD_USE_DEFAULT_STRINGS";
     public static final String KEY_ONE_SHOT = "KEY_ONE_SHOT";
     public static final String KEY_SYSTEM_SIZE = "KEY_SYSTEM_SIZE";
     public static final String KEY_USERDATA_SIZE = "KEY_USERDATA_SIZE";
@@ -59,16 +63,14 @@ public class DynamicSystemClient {
     private final Messenger mMessenger = new Messenger(new IncomingHandler(this));
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InstallationStatus {
-    }
+    public @interface InstallationStatus {}
 
     public interface OnStatusChangedListener {
         void onStatusChanged(int i, int i2, long j, Throwable th);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StatusChangedCause {
-    }
+    public @interface StatusChangedCause {}
 
     private static class IncomingHandler extends Handler {
         private final WeakReference<DynamicSystemClient> mWeakClient;
@@ -88,8 +90,7 @@ public class DynamicSystemClient {
     }
 
     private class DynSystemServiceConnection implements ServiceConnection {
-        private DynSystemServiceConnection() {
-        }
+        private DynSystemServiceConnection() {}
 
         @Override // android.content.ServiceConnection
         public void onServiceConnected(ComponentName className, IBinder service) {
@@ -128,15 +129,19 @@ public class DynamicSystemClient {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void notifyOnStatusChangedListener(final int status, final int cause, final long progress, final Throwable detail) {
+    public void notifyOnStatusChangedListener(
+            final int status, final int cause, final long progress, final Throwable detail) {
         if (this.mListener != null) {
             if (this.mExecutor != null) {
-                this.mExecutor.execute(new Runnable() { // from class: android.os.image.DynamicSystemClient$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        DynamicSystemClient.this.lambda$notifyOnStatusChangedListener$0(status, cause, progress, detail);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.os.image.DynamicSystemClient$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                DynamicSystemClient.this.lambda$notifyOnStatusChangedListener$0(
+                                        status, cause, progress, detail);
+                            }
+                        });
             } else {
                 this.mListener.onStatusChanged(status, cause, progress, detail);
             }
@@ -144,14 +149,16 @@ public class DynamicSystemClient {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$notifyOnStatusChangedListener$0(int status, int cause, long progress, Throwable detail) {
+    public /* synthetic */ void lambda$notifyOnStatusChangedListener$0(
+            int status, int cause, long progress, Throwable detail) {
         this.mListener.onStatusChanged(status, cause, progress, detail);
     }
 
     @SystemApi
     public void bind() {
         Intent intent = new Intent();
-        intent.setClassName("com.android.dynsystem", "com.android.dynsystem.DynamicSystemInstallationService");
+        intent.setClassName(
+                "com.android.dynsystem", "com.android.dynsystem.DynamicSystemInstallationService");
         this.mContext.bindService(intent, this.mConnection, 1);
         this.mBound = true;
     }
@@ -198,7 +205,10 @@ public class DynamicSystemClient {
                 int cause = msg.arg2;
                 Bundle bundle = (Bundle) msg.obj;
                 long progress = bundle.getLong(KEY_INSTALLED_SIZE);
-                ParcelableException t = (ParcelableException) bundle.getSerializable(KEY_EXCEPTION_DETAIL, ParcelableException.class);
+                ParcelableException t =
+                        (ParcelableException)
+                                bundle.getSerializable(
+                                        KEY_EXCEPTION_DETAIL, ParcelableException.class);
                 Throwable detail = t == null ? null : t.getCause();
                 notifyOnStatusChangedListener(status, cause, progress, detail);
                 break;

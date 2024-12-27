@@ -12,8 +12,7 @@ public interface IHdmiInputChangeListener extends IInterface {
 
     public static class Default implements IHdmiInputChangeListener {
         @Override // android.hardware.hdmi.IHdmiInputChangeListener
-        public void onChanged(HdmiDeviceInfo device) throws RemoteException {
-        }
+        public void onChanged(HdmiDeviceInfo device) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IHdmiInputChangeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHdmiInputChangeListener {
+    public abstract static class Stub extends Binder implements IHdmiInputChangeListener {
         public static final String DESCRIPTOR = "android.hardware.hdmi.IHdmiInputChangeListener";
         static final int TRANSACTION_onChanged = 1;
 
@@ -60,7 +59,8 @@ public interface IHdmiInputChangeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +70,8 @@ public interface IHdmiInputChangeListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    HdmiDeviceInfo _arg0 = (HdmiDeviceInfo) data.readTypedObject(HdmiDeviceInfo.CREATOR);
+                    HdmiDeviceInfo _arg0 =
+                            (HdmiDeviceInfo) data.readTypedObject(HdmiDeviceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onChanged(_arg0);
                     return true;

@@ -16,46 +16,35 @@ public final class BaseNetdUnsolicitedEventListener extends INetdUnsolicitedEven
     }
 
     @Override // android.net.INetdUnsolicitedEventListener
-    public final void onInterfaceAdded(String str) {
-    }
+    public final void onInterfaceAdded(String str) {}
 
     @Override // android.net.INetdUnsolicitedEventListener
-    public final void onInterfaceAddressRemoved(String str, String str2, int i, int i2) {
-    }
+    public final void onInterfaceAddressRemoved(String str, String str2, int i, int i2) {}
 
     @Override // android.net.INetdUnsolicitedEventListener
-    public final void onInterfaceAddressUpdated(String str, String str2, int i, int i2) {
-    }
+    public final void onInterfaceAddressUpdated(String str, String str2, int i, int i2) {}
 
     @Override // android.net.INetdUnsolicitedEventListener
-    public final void onInterfaceChanged(String str, boolean z) {
-    }
+    public final void onInterfaceChanged(String str, boolean z) {}
 
     @Override // android.net.INetdUnsolicitedEventListener
-    public final void onInterfaceClassActivityChanged(boolean z, int i, long j, int i2) {
-    }
+    public final void onInterfaceClassActivityChanged(boolean z, int i, long j, int i2) {}
 
     @Override // android.net.INetdUnsolicitedEventListener
-    public final void onInterfaceDnsServerInfo(String str, long j, String[] strArr) {
-    }
+    public final void onInterfaceDnsServerInfo(String str, long j, String[] strArr) {}
 
     @Override // android.net.INetdUnsolicitedEventListener
-    public final void onInterfaceLinkStateChanged(String str, boolean z) {
-    }
+    public final void onInterfaceLinkStateChanged(String str, boolean z) {}
 
     @Override // android.net.INetdUnsolicitedEventListener
-    public final void onInterfaceRemoved(String str) {
-    }
+    public final void onInterfaceRemoved(String str) {}
 
     @Override // android.net.INetdUnsolicitedEventListener
-    public final void onQuotaLimitReached(String str, String str2) {
-    }
+    public final void onQuotaLimitReached(String str, String str2) {}
 
     @Override // android.net.INetdUnsolicitedEventListener
-    public final void onRouteChanged(boolean z, String str, String str2, String str3) {
-    }
+    public final void onRouteChanged(boolean z, String str, String str2, String str3) {}
 
     @Override // android.net.INetdUnsolicitedEventListener
-    public final void onStrictCleartextDetected(int i, String str) {
-    }
+    public final void onStrictCleartextDetected(int i, String str) {}
 }

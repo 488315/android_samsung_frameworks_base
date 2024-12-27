@@ -1,24 +1,25 @@
 package com.android.server.biometrics;
 
-import com.android.server.biometrics.BiometricService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BiometricService$2$$ExternalSyntheticLambda6 implements Runnable {
+public final /* synthetic */ class BiometricService$2$$ExternalSyntheticLambda6
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BiometricService.AnonymousClass2 f$0;
     public final /* synthetic */ long f$1;
 
-    public /* synthetic */ BiometricService$2$$ExternalSyntheticLambda6(BiometricService.AnonymousClass2 anonymousClass2, long j, int i) {
+    public /* synthetic */ BiometricService$2$$ExternalSyntheticLambda6(
+            BiometricService.AnonymousClass2 anonymousClass2, long j, int i) {
         this.$r8$classId = i;
         this.f$0 = anonymousClass2;
         this.f$1 = j;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:56:0x00e7, code lost:
-    
-        if ((r5.mPromptInfo.semGetPrivilegedFlag() & 64) != 0) goto L49;
-     */
+
+       if ((r5.mPromptInfo.semGetPrivilegedFlag() & 64) != 0) goto L49;
+    */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -29,6 +30,8 @@ public final /* synthetic */ class BiometricService$2$$ExternalSyntheticLambda6 
             Method dump skipped, instructions count: 292
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.BiometricService$2$$ExternalSyntheticLambda6.run():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.biometrics.BiometricService$2$$ExternalSyntheticLambda6.run():void");
     }
 }

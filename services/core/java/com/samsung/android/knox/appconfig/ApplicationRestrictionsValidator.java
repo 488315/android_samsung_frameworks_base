@@ -9,8 +9,10 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.Settings;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.gesture.SemMotionRecognitionManager;
 import com.samsung.android.knox.EnterpriseDeviceManager;
@@ -18,13 +20,28 @@ import com.samsung.android.knox.appconfig.info.KeyInfo;
 import com.samsung.android.knox.appconfig.info.ResultInfo;
 import com.samsung.android.knox.custom.utils.KnoxsdkFileLog;
 import com.samsung.android.vibrator.VibRune;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class ApplicationRestrictionsValidator {
     public static final String TAG = "ApplicationRestrictionsValidator";
-    public static final String[] unusedBundleKeys = {"wificonfiguration", "skip_welcome_screen", "flow_pointer_is_on_dex", "flow_pointer_from_where_dex", "app_config_skip_overscan", "app_config_hidden", "app_config_disable_ctx_menu", "app_config_disable_dex_labs_button", "app_config_disable_exit_dex_button", "dex_disable_file_copy_from_pc", "dex_disable_file_copy_from_mobile", "startActivity", "sendBroadcast"};
+    public static final String[] unusedBundleKeys = {
+        "wificonfiguration",
+        "skip_welcome_screen",
+        "flow_pointer_is_on_dex",
+        "flow_pointer_from_where_dex",
+        "app_config_skip_overscan",
+        "app_config_hidden",
+        "app_config_disable_ctx_menu",
+        "app_config_disable_dex_labs_button",
+        "app_config_disable_exit_dex_button",
+        "dex_disable_file_copy_from_pc",
+        "dex_disable_file_copy_from_mobile",
+        "startActivity",
+        "sendBroadcast"
+    };
 
     public static boolean checkKeyType(String str) {
         for (String str2 : unusedBundleKeys) {
@@ -37,7 +54,11 @@ public final class ApplicationRestrictionsValidator {
 
     public static int checkPermission(Context context, String str, KeyInfo.KEY key) {
         try {
-            return AppGlobals.getPackageManager().checkPermission(key.getPermission(), str, context.getUserId()) != 0 ? ResultInfo.ERROR_PERMISSION_DENIED : ResultInfo.ERROR_NONE;
+            return AppGlobals.getPackageManager()
+                                    .checkPermission(key.getPermission(), str, context.getUserId())
+                            != 0
+                    ? ResultInfo.ERROR_PERMISSION_DENIED
+                    : ResultInfo.ERROR_NONE;
         } catch (Exception e) {
             KnoxsdkFileLog.e(TAG, "fail to checkPermission  " + e);
             return ResultInfo.ERROR_UNKNOWN;
@@ -46,7 +67,9 @@ public final class ApplicationRestrictionsValidator {
 
     public static int checkVersion(KeyInfo.KEY key) {
         try {
-            return key.getVersion() > EnterpriseDeviceManager.getAPILevelForInternal() ? ResultInfo.ERROR_NOT_SUPPORTED : ResultInfo.ERROR_NONE;
+            return key.getVersion() > EnterpriseDeviceManager.getAPILevelForInternal()
+                    ? ResultInfo.ERROR_NOT_SUPPORTED
+                    : ResultInfo.ERROR_NONE;
         } catch (Exception e) {
             KnoxsdkFileLog.e(TAG, "fail to checkVersion " + e);
             return ResultInfo.ERROR_UNKNOWN;
@@ -54,7 +77,8 @@ public final class ApplicationRestrictionsValidator {
     }
 
     public static boolean checkWPCODMode(Context context) {
-        return ((DevicePolicyManager) context.getSystemService("device_policy")).isOrganizationOwnedDeviceWithManagedProfile();
+        return ((DevicePolicyManager) context.getSystemService("device_policy"))
+                .isOrganizationOwnedDeviceWithManagedProfile();
     }
 
     public static String getCallerPackage(Context context) {
@@ -79,7 +103,9 @@ public final class ApplicationRestrictionsValidator {
     }
 
     public static boolean isSupportDcHaptic(Context context) {
-        return VibRune.SUPPORT_HAPTIC_FEEDBACK_ON_DC_MOTOR && hasVibrator(context) && !isEnableIntensity(context);
+        return VibRune.SUPPORT_HAPTIC_FEEDBACK_ON_DC_MOTOR
+                && hasVibrator(context)
+                && !isEnableIntensity(context);
     }
 
     public static boolean supportAutoBrightness(Context context) {
@@ -88,7 +114,11 @@ public final class ApplicationRestrictionsValidator {
 
     public static boolean supportCameraSensor(Context context) {
         SensorManager sensorManager = (SensorManager) context.getSystemService("sensor");
-        return (sensorManager == null || sensorManager.getDefaultSensor(5) != null || sensorManager.getDefaultSensor(65604) == null) ? false : true;
+        return (sensorManager == null
+                        || sensorManager.getDefaultSensor(5) != null
+                        || sensorManager.getDefaultSensor(65604) == null)
+                ? false
+                : true;
     }
 
     public static boolean supportLightSensor(Context context) {
@@ -107,7 +137,8 @@ public final class ApplicationRestrictionsValidator {
     }
 
     public static boolean supportPocketMode(Context context) {
-        SemMotionRecognitionManager semMotionRecognitionManager = (SemMotionRecognitionManager) context.getSystemService("motion_recognition");
+        SemMotionRecognitionManager semMotionRecognitionManager =
+                (SemMotionRecognitionManager) context.getSystemService("motion_recognition");
         if (semMotionRecognitionManager == null) {
             return false;
         }
@@ -115,7 +146,10 @@ public final class ApplicationRestrictionsValidator {
     }
 
     public static boolean supportTaskBar(Context context) {
-        return SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_LAUNCHER_SUPPORT_TASKBAR") && Settings.System.getInt(context.getContentResolver(), "minimal_battery_use", 0) != 1;
+        return SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_LAUNCHER_SUPPORT_TASKBAR")
+                && Settings.System.getInt(context.getContentResolver(), "minimal_battery_use", 0)
+                        != 1;
     }
 
     public static Bundle validate(Context context, Bundle bundle) {
@@ -137,7 +171,13 @@ public final class ApplicationRestrictionsValidator {
                     int checkPermission = checkPermission(context, callerPackage, key2);
                     if (ResultInfo.ERROR_NONE != checkPermission) {
                         bundle3.putInt(str, checkPermission);
-                    } else if (checkWPCODMode(context) && ("location_settings".equals(str) || "top_level_location".equals(str) || "bluetooth_always_scanning".equals(str) || "wifi_always_scanning".equals(str) || "location_services_bluetooth_scanning".equals(str) || "location_services_wifi_scanning".equals(str))) {
+                    } else if (checkWPCODMode(context)
+                            && ("location_settings".equals(str)
+                                    || "top_level_location".equals(str)
+                                    || "bluetooth_always_scanning".equals(str)
+                                    || "wifi_always_scanning".equals(str)
+                                    || "location_services_bluetooth_scanning".equals(str)
+                                    || "location_services_wifi_scanning".equals(str))) {
                         bundle3.putInt(str, ResultInfo.ERROR_NOT_SUPPORTED);
                     } else if (!checkKeyType(str)) {
                         Bundle bundle4 = bundle2.getBundle(str);
@@ -184,7 +224,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -1885290769:
-                                                    if (str.equals("accessibility_advanced_settings")) {
+                                                    if (str.equals(
+                                                            "accessibility_advanced_settings")) {
                                                         c = 168;
                                                         break;
                                                     }
@@ -219,7 +260,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -1772640019:
-                                                    if (str.equals("telephonyui_access_point_names_menu")) {
+                                                    if (str.equals(
+                                                            "telephonyui_access_point_names_menu")) {
                                                         c = 182;
                                                         break;
                                                     }
@@ -282,7 +324,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -1489956946:
-                                                    if (str.equals("telephonyui_domestic_roaming_voice_text")) {
+                                                    if (str.equals(
+                                                            "telephonyui_domestic_roaming_voice_text")) {
                                                         c = 179;
                                                         break;
                                                     }
@@ -296,21 +339,24 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -1464780595:
-                                                    if (str.equals("key_notification_icons_on_status_bar")) {
+                                                    if (str.equals(
+                                                            "key_notification_icons_on_status_bar")) {
                                                         c = 'h';
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case -1459426583:
-                                                    if (str.equals("top_level_airplane_mode_upsm")) {
+                                                    if (str.equals(
+                                                            "top_level_airplane_mode_upsm")) {
                                                         c = 'M';
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case -1437550723:
-                                                    if (str.equals("dashboard_tile_pref_com.android.settings.Settings$DevelopmentSettingsDashboardActivity")) {
+                                                    if (str.equals(
+                                                            "dashboard_tile_pref_com.android.settings.Settings$DevelopmentSettingsDashboardActivity")) {
                                                         c = '|';
                                                         break;
                                                     }
@@ -345,7 +391,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -1346146434:
-                                                    if (str.equals("active_key_on_lockscreen_key")) {
+                                                    if (str.equals(
+                                                            "active_key_on_lockscreen_key")) {
                                                         c = 'V';
                                                         break;
                                                     }
@@ -380,7 +427,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -1288522450:
-                                                    if (str.equals("blue_light_filter_auto_schedule")) {
+                                                    if (str.equals(
+                                                            "blue_light_filter_auto_schedule")) {
                                                         c = '?';
                                                         break;
                                                     }
@@ -394,7 +442,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -1266806294:
-                                                    if (str.equals("telephonyui_simcard_manager_more_settings_preference")) {
+                                                    if (str.equals(
+                                                            "telephonyui_simcard_manager_more_settings_preference")) {
                                                         c = 192;
                                                         break;
                                                     }
@@ -429,7 +478,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -1213951486:
-                                                    if (str.equals("dex_disable_file_copy_from_pc")) {
+                                                    if (str.equals(
+                                                            "dex_disable_file_copy_from_pc")) {
                                                         c = 206;
                                                         break;
                                                     }
@@ -555,7 +605,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -782541527:
-                                                    if (str.equals("swipe_to_call_or_send_messages")) {
+                                                    if (str.equals(
+                                                            "swipe_to_call_or_send_messages")) {
                                                         c = 5;
                                                         break;
                                                     }
@@ -583,21 +634,24 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -728312859:
-                                                    if (str.equals("telephonyui_verizon_data_on_off")) {
+                                                    if (str.equals(
+                                                            "telephonyui_verizon_data_on_off")) {
                                                         c = 178;
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case -722468721:
-                                                    if (str.equals("notification_vibration_pattern")) {
+                                                    if (str.equals(
+                                                            "notification_vibration_pattern")) {
                                                         c = 'q';
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case -716777878:
-                                                    if (str.equals("sync_vibration_with_ringtone")) {
+                                                    if (str.equals(
+                                                            "sync_vibration_with_ringtone")) {
                                                         c = 136;
                                                         break;
                                                     }
@@ -618,7 +672,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -680098698:
-                                                    if (str.equals("telephonyui_network_operator_menu")) {
+                                                    if (str.equals(
+                                                            "telephonyui_network_operator_menu")) {
                                                         c = 183;
                                                         break;
                                                     }
@@ -632,7 +687,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -612881513:
-                                                    if (str.equals("blue_light_filter_turn_on_as_scheduled")) {
+                                                    if (str.equals(
+                                                            "blue_light_filter_turn_on_as_scheduled")) {
                                                         c = '>';
                                                         break;
                                                     }
@@ -646,7 +702,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -561099790:
-                                                    if (str.equals("accessibility_flash_notificaitons")) {
+                                                    if (str.equals(
+                                                            "accessibility_flash_notificaitons")) {
                                                         c = 170;
                                                         break;
                                                     }
@@ -660,7 +717,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -500279786:
-                                                    if (str.equals("show_virtual_keyboard_switch")) {
+                                                    if (str.equals(
+                                                            "show_virtual_keyboard_switch")) {
                                                         c = 128;
                                                         break;
                                                     }
@@ -681,14 +739,16 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -462237043:
-                                                    if (str.equals("xcover_top_key_on_lockscreen_key")) {
+                                                    if (str.equals(
+                                                            "xcover_top_key_on_lockscreen_key")) {
                                                         c = 'Y';
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case -450351423:
-                                                    if (str.equals("wifi_switch_for_individual_apps")) {
+                                                    if (str.equals(
+                                                            "wifi_switch_for_individual_apps")) {
                                                         c = 11;
                                                         break;
                                                     }
@@ -702,7 +762,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -412627900:
-                                                    if (str.equals("location_services_wifi_scanning")) {
+                                                    if (str.equals(
+                                                            "location_services_wifi_scanning")) {
                                                         c = 135;
                                                         break;
                                                     }
@@ -744,7 +805,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -362486819:
-                                                    if (str.equals("function_key_double_press_type")) {
+                                                    if (str.equals(
+                                                            "function_key_double_press_type")) {
                                                         c = '[';
                                                         break;
                                                     }
@@ -772,21 +834,24 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case -310192179:
-                                                    if (str.equals("telephonyui_simcard_manager_add_esim_preference")) {
+                                                    if (str.equals(
+                                                            "telephonyui_simcard_manager_add_esim_preference")) {
                                                         c = 190;
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case -304857296:
-                                                    if (str.equals("telephonyui_simcard_manager_text_preference")) {
+                                                    if (str.equals(
+                                                            "telephonyui_simcard_manager_text_preference")) {
                                                         c = 187;
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case -290284924:
-                                                    if (str.equals("telephonyui_international_roaming_voice_text")) {
+                                                    if (str.equals(
+                                                            "telephonyui_international_roaming_voice_text")) {
                                                         c = 181;
                                                         break;
                                                     }
@@ -884,7 +949,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 6952340:
-                                                    if (str.equals("telephonyui_international_roaming_data")) {
+                                                    if (str.equals(
+                                                            "telephonyui_international_roaming_data")) {
                                                         c = 177;
                                                         break;
                                                     }
@@ -912,14 +978,16 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 52007263:
-                                                    if (str.equals("telephonyui_simcard_manager_call_preference")) {
+                                                    if (str.equals(
+                                                            "telephonyui_simcard_manager_call_preference")) {
                                                         c = 186;
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case 94082127:
-                                                    if (str.equals("SETTINGS_PHYSICAL_KEYBOARD_TOOLBAR")) {
+                                                    if (str.equals(
+                                                            "SETTINGS_PHYSICAL_KEYBOARD_TOOLBAR")) {
                                                         c = 151;
                                                         break;
                                                     }
@@ -975,7 +1043,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 245912486:
-                                                    if (str.equals("accessibility_power_and_volume_up_keys")) {
+                                                    if (str.equals(
+                                                            "accessibility_power_and_volume_up_keys")) {
                                                         c = 169;
                                                         break;
                                                     }
@@ -989,7 +1058,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 277464755:
-                                                    if (str.equals("eye_comfort_seekbar_color_temperature")) {
+                                                    if (str.equals(
+                                                            "eye_comfort_seekbar_color_temperature")) {
                                                         c = 'o';
                                                         break;
                                                     }
@@ -1024,7 +1094,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 352248151:
-                                                    if (str.equals("screenshots_and_screen_recorder")) {
+                                                    if (str.equals(
+                                                            "screenshots_and_screen_recorder")) {
                                                         c = 4;
                                                         break;
                                                     }
@@ -1052,7 +1123,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 418800293:
-                                                    if (str.equals("app_config_disable_exit_dex_button")) {
+                                                    if (str.equals(
+                                                            "app_config_disable_exit_dex_button")) {
                                                         c = 203;
                                                         break;
                                                     }
@@ -1094,7 +1166,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 702451240:
-                                                    if (str.equals("dashboard_tile_pref_com.samsung.android.app.telephonyui.netsettings.ui.NetSettingsActivity")) {
+                                                    if (str.equals(
+                                                            "dashboard_tile_pref_com.samsung.android.app.telephonyui.netsettings.ui.NetSettingsActivity")) {
                                                         c = 'R';
                                                         break;
                                                     }
@@ -1108,7 +1181,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 763955732:
-                                                    if (str.equals("accessibility_installed_services")) {
+                                                    if (str.equals(
+                                                            "accessibility_installed_services")) {
                                                         c = 171;
                                                         break;
                                                     }
@@ -1143,7 +1217,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 841519540:
-                                                    if (str.equals("private_dns_settings_specifier")) {
+                                                    if (str.equals(
+                                                            "private_dns_settings_specifier")) {
                                                         c = 149;
                                                         break;
                                                     }
@@ -1220,7 +1295,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 1112368493:
-                                                    if (str.equals("app_config_disable_dex_labs_button")) {
+                                                    if (str.equals(
+                                                            "app_config_disable_dex_labs_button")) {
                                                         c = 202;
                                                         break;
                                                     }
@@ -1269,14 +1345,16 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 1241904703:
-                                                    if (str.equals("blue_light_filter_turn_on_now")) {
+                                                    if (str.equals(
+                                                            "blue_light_filter_turn_on_now")) {
                                                         c = '=';
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case 1256224049:
-                                                    if (str.equals("dex_disable_file_copy_from_mobile")) {
+                                                    if (str.equals(
+                                                            "dex_disable_file_copy_from_mobile")) {
                                                         c = 205;
                                                         break;
                                                     }
@@ -1311,7 +1389,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 1390950212:
-                                                    if (str.equals("telephonyui_simcard_manager_data_switching_preference")) {
+                                                    if (str.equals(
+                                                            "telephonyui_simcard_manager_data_switching_preference")) {
                                                         c = 191;
                                                         break;
                                                     }
@@ -1367,35 +1446,40 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 1541216154:
-                                                    if (str.equals("telephonyui_simcard_manager_general_settings_esim")) {
+                                                    if (str.equals(
+                                                            "telephonyui_simcard_manager_general_settings_esim")) {
                                                         c = 189;
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case 1541623682:
-                                                    if (str.equals("telephonyui_simcard_manager_general_settings_sim1")) {
+                                                    if (str.equals(
+                                                            "telephonyui_simcard_manager_general_settings_sim1")) {
                                                         c = 188;
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case 1541623683:
-                                                    if (str.equals("telephonyui_simcard_manager_general_settings_sim2")) {
+                                                    if (str.equals(
+                                                            "telephonyui_simcard_manager_general_settings_sim2")) {
                                                         c = 184;
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case 1566068391:
-                                                    if (str.equals("lock_screen_menu_notifications")) {
+                                                    if (str.equals(
+                                                            "lock_screen_menu_notifications")) {
                                                         c = '\"';
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case 1590945141:
-                                                    if (str.equals("double_press_quick_launch_camera")) {
+                                                    if (str.equals(
+                                                            "double_press_quick_launch_camera")) {
                                                         c = 'a';
                                                         break;
                                                     }
@@ -1444,14 +1528,16 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 1695484378:
-                                                    if (str.equals("location_time_zone_detection")) {
+                                                    if (str.equals(
+                                                            "location_time_zone_detection")) {
                                                         c = 145;
                                                         break;
                                                     }
                                                     c = 65535;
                                                     break;
                                                 case 1701364505:
-                                                    if (str.equals("location_services_bluetooth_scanning")) {
+                                                    if (str.equals(
+                                                            "location_services_bluetooth_scanning")) {
                                                         c = 134;
                                                         break;
                                                     }
@@ -1466,7 +1552,9 @@ public final class ApplicationRestrictionsValidator {
                                                     break;
                                                 case 1714349619:
                                                     if (str.equals("homescreen_noti_preview")) {
-                                                        c = PackageManagerShellCommandDataLoader.ARGS_DELIM;
+                                                        c =
+                                                                PackageManagerShellCommandDataLoader
+                                                                        .ARGS_DELIM;
                                                         break;
                                                     }
                                                     c = 65535;
@@ -1486,7 +1574,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 1770112658:
-                                                    if (str.equals("blue_light_filter_user_schedule")) {
+                                                    if (str.equals(
+                                                            "blue_light_filter_user_schedule")) {
                                                         c = '@';
                                                         break;
                                                     }
@@ -1507,7 +1596,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 1818930513:
-                                                    if (str.equals("international_roaming_voice_text")) {
+                                                    if (str.equals(
+                                                            "international_roaming_voice_text")) {
                                                         c = 175;
                                                         break;
                                                     }
@@ -1563,7 +1653,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 2026255662:
-                                                    if (str.equals("telephonyui_doemstic_roaming_data")) {
+                                                    if (str.equals(
+                                                            "telephonyui_doemstic_roaming_data")) {
                                                         c = 180;
                                                         break;
                                                     }
@@ -1584,7 +1675,8 @@ public final class ApplicationRestrictionsValidator {
                                                     c = 65535;
                                                     break;
                                                 case 2087392403:
-                                                    if (str.equals("telephonyui_simcard_manager_data_preference")) {
+                                                    if (str.equals(
+                                                            "telephonyui_simcard_manager_data_preference")) {
                                                         c = 185;
                                                         break;
                                                     }
@@ -1621,526 +1713,1365 @@ public final class ApplicationRestrictionsValidator {
                                                         if (c != 3) {
                                                             if (c != 4) {
                                                                 if (c == 5) {
-                                                                    bundle3.putInt(str, ResultInfo.ERROR_NOT_SUPPORTED);
+                                                                    bundle3.putInt(
+                                                                            str,
+                                                                            ResultInfo
+                                                                                    .ERROR_NOT_SUPPORTED);
                                                                 } else if (c != 6) {
                                                                     if (c != 7) {
                                                                         if (c != '6') {
                                                                             if (c != '7') {
                                                                                 if (c != '9') {
                                                                                     if (c != ':') {
-                                                                                        if (c != 'I') {
-                                                                                            if (c != 'J') {
-                                                                                                if (c != 'h') {
-                                                                                                    if (c != 'i') {
-                                                                                                        if (c != 'r') {
-                                                                                                            if (c != 's') {
+                                                                                        if (c
+                                                                                                != 'I') {
+                                                                                            if (c
+                                                                                                    != 'J') {
+                                                                                                if (c
+                                                                                                        != 'h') {
+                                                                                                    if (c
+                                                                                                            != 'i') {
+                                                                                                        if (c
+                                                                                                                != 'r') {
+                                                                                                            if (c
+                                                                                                                    != 's') {
                                                                                                                 switch (c) {
                                                                                                                     case 7:
                                                                                                                         break;
                                                                                                                     case '\b':
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case '\t':
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case '\n':
-                                                                                                                        if (!"3".equals(string) && !"2".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"3"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"2"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 11:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case '\f':
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case '\r':
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 14:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 15:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 16:
-                                                                                                                        if (!supportAutoBrightness(context)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_NOT_SUPPORTED);
+                                                                                                                        if (!supportAutoBrightness(
+                                                                                                                                context)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_NOT_SUPPORTED);
                                                                                                                         }
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                         }
-                                                                                                                        if (bundle4.containsKey("level")) {
-                                                                                                                            long clearCallingIdentity = Binder.clearCallingIdentity();
+                                                                                                                        if (bundle4
+                                                                                                                                .containsKey(
+                                                                                                                                        "level")) {
+                                                                                                                            long
+                                                                                                                                    clearCallingIdentity =
+                                                                                                                                            Binder
+                                                                                                                                                    .clearCallingIdentity();
                                                                                                                             try {
                                                                                                                                 try {
-                                                                                                                                    Settings.System.putInt(context.getContentResolver(), "screen_brightness", Integer.parseInt(bundle4.getString("level")));
-                                                                                                                                } catch (Throwable th) {
-                                                                                                                                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                                                                                                                                    Settings
+                                                                                                                                            .System
+                                                                                                                                            .putInt(
+                                                                                                                                                    context
+                                                                                                                                                            .getContentResolver(),
+                                                                                                                                                    "screen_brightness",
+                                                                                                                                                    Integer
+                                                                                                                                                            .parseInt(
+                                                                                                                                                                    bundle4
+                                                                                                                                                                            .getString(
+                                                                                                                                                                                    "level")));
+                                                                                                                                } catch (
+                                                                                                                                        Throwable
+                                                                                                                                                th) {
+                                                                                                                                    Binder
+                                                                                                                                            .restoreCallingIdentity(
+                                                                                                                                                    clearCallingIdentity);
                                                                                                                                     throw th;
                                                                                                                                 }
-                                                                                                                            } catch (Exception e) {
-                                                                                                                                KnoxsdkFileLog.e(TAG, "auto brightness level fail :  " + e);
+                                                                                                                            } catch (
+                                                                                                                                    Exception
+                                                                                                                                            e) {
+                                                                                                                                KnoxsdkFileLog
+                                                                                                                                        .e(
+                                                                                                                                                TAG,
+                                                                                                                                                "auto brightness"
+                                                                                                                                                    + " level"
+                                                                                                                                                    + " fail"
+                                                                                                                                                    + " :  "
+                                                                                                                                                        + e);
                                                                                                                             }
-                                                                                                                            Binder.restoreCallingIdentity(clearCallingIdentity);
+                                                                                                                            Binder
+                                                                                                                                    .restoreCallingIdentity(
+                                                                                                                                            clearCallingIdentity);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 17:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 18:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 19:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 20:
-                                                                                                                        if (!supportPocketMode(context)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_NOT_SUPPORTED);
+                                                                                                                        if (!supportPocketMode(
+                                                                                                                                context)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_NOT_SUPPORTED);
                                                                                                                         }
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 21:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 29:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 'S':
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 'V':
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case ']':
-                                                                                                                        if (!"2".equals(string) && !"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"2"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 'f':
-                                                                                                                        if (!"7".equals(string) && !"6".equals(string) && !"5".equals(string) && !"4".equals(string) && !"3".equals(string) && !"2".equals(string) && !"1".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"7"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"6"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"5"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"4"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"3"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"2"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 'u':
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 'v':
-                                                                                                                        if (!"true".equals(string) && !"false".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"true"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"false"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 128:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 134:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 135:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 136:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 139:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 140:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 141:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string) && !"2".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"2"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 143:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 144:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 145:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 146:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 147:
-                                                                                                                        if (!supportTaskBar(context)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_NOT_SUPPORTED);
+                                                                                                                        if (!supportTaskBar(
+                                                                                                                                context)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_NOT_SUPPORTED);
                                                                                                                         }
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 148:
-                                                                                                                        if (!"off".equals(string) && !"hostname".equals(string) && !"opportunistic".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"off"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"hostname"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"opportunistic"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 150:
-                                                                                                                        if (!"true".equals(string) && !"false".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"true"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"false"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
-                                                                                                                    case FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__BIND_CROSS_PROFILE_SERVICE /* 151 */:
-                                                                                                                        if (!"true".equals(string) && !"false".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                    case FrameworkStatsLog
+                                                                                                                            .DEVICE_POLICY_EVENT__EVENT_ID__BIND_CROSS_PROFILE_SERVICE /* 151 */:
+                                                                                                                        if (!"true"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"false"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
-                                                                                                                    case FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_PERMISSION_REVOKED /* 172 */:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                    case FrameworkStatsLog
+                                                                                                                            .DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_PERMISSION_REVOKED /* 172 */:
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 173:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
-                                                                                                                    case FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__DOCSUI_EMPTY_STATE_QUIET_MODE /* 174 */:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                    case FrameworkStatsLog
+                                                                                                                            .DEVICE_POLICY_EVENT__EVENT_ID__DOCSUI_EMPTY_STATE_QUIET_MODE /* 174 */:
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
-                                                                                                                    case FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__DOCSUI_LAUNCH_OTHER_APP /* 175 */:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                    case FrameworkStatsLog
+                                                                                                                            .DEVICE_POLICY_EVENT__EVENT_ID__DOCSUI_LAUNCH_OTHER_APP /* 175 */:
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
-                                                                                                                    case FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__DOCSUI_PICK_RESULT /* 176 */:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                    case FrameworkStatsLog
+                                                                                                                            .DEVICE_POLICY_EVENT__EVENT_ID__DOCSUI_PICK_RESULT /* 176 */:
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 177:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 178:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
-                                                                                                                    case FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CREDENTIAL_MANAGEMENT_APP_REQUEST_POLICY /* 179 */:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                    case FrameworkStatsLog
+                                                                                                                            .DEVICE_POLICY_EVENT__EVENT_ID__CREDENTIAL_MANAGEMENT_APP_REQUEST_POLICY /* 179 */:
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 180:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 181:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 189:
-                                                                                                                        if (!"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"0"
+                                                                                                                                .equals(
+                                                                                                                                        string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 191:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                         }
-                                                                                                                        long clearCallingIdentity2 = Binder.clearCallingIdentity();
+                                                                                                                        long
+                                                                                                                                clearCallingIdentity2 =
+                                                                                                                                        Binder
+                                                                                                                                                .clearCallingIdentity();
                                                                                                                         try {
                                                                                                                             try {
-                                                                                                                                Settings.Secure.putInt(context.getContentResolver(), "data_preferred_mode_during_calling", Integer.parseInt(string));
-                                                                                                                            } catch (Exception e2) {
-                                                                                                                                KnoxsdkFileLog.e(TAG, "auto brightness level fail :  " + e2);
+                                                                                                                                Settings
+                                                                                                                                        .Secure
+                                                                                                                                        .putInt(
+                                                                                                                                                context
+                                                                                                                                                        .getContentResolver(),
+                                                                                                                                                "data_preferred_mode_during_calling",
+                                                                                                                                                Integer
+                                                                                                                                                        .parseInt(
+                                                                                                                                                                string));
+                                                                                                                            } catch (
+                                                                                                                                    Exception
+                                                                                                                                            e2) {
+                                                                                                                                KnoxsdkFileLog
+                                                                                                                                        .e(
+                                                                                                                                                TAG,
+                                                                                                                                                "auto brightness"
+                                                                                                                                                    + " level"
+                                                                                                                                                    + " fail"
+                                                                                                                                                    + " :  "
+                                                                                                                                                        + e2);
                                                                                                                             }
-                                                                                                                            Binder.restoreCallingIdentity(clearCallingIdentity2);
+                                                                                                                            Binder
+                                                                                                                                    .restoreCallingIdentity(
+                                                                                                                                            clearCallingIdentity2);
                                                                                                                             break;
-                                                                                                                        } catch (Throwable th2) {
-                                                                                                                            Binder.restoreCallingIdentity(clearCallingIdentity2);
+                                                                                                                        } catch (
+                                                                                                                                Throwable
+                                                                                                                                        th2) {
+                                                                                                                            Binder
+                                                                                                                                    .restoreCallingIdentity(
+                                                                                                                                            clearCallingIdentity2);
                                                                                                                             throw th2;
                                                                                                                         }
                                                                                                                     case 193:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 195:
-                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"1"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"0"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     case 204:
-                                                                                                                        if (!"UWQHD".equals(string) && !"WQXGA".equals(string) && !"WQHD".equals(string) && !"UWFHD".equals(string) && !"WUXGA".equals(string) && !"FHD".equals(string) && !"HD".equals(string) && !"null".equals(string)) {
-                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                        if (!"UWQHD"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"WQXGA"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"WQHD"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"UWFHD"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"WUXGA"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"FHD"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"HD"
+                                                                                                                                        .equals(
+                                                                                                                                                string)
+                                                                                                                                && !"null"
+                                                                                                                                        .equals(
+                                                                                                                                                string)) {
+                                                                                                                            bundle3
+                                                                                                                                    .putInt(
+                                                                                                                                            str,
+                                                                                                                                            ResultInfo
+                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                             break;
                                                                                                                         }
                                                                                                                         break;
                                                                                                                     default:
                                                                                                                         switch (c) {
                                                                                                                             case 25:
-                                                                                                                                if (Integer.parseInt(string) < 0 || Integer.parseInt(string) > 4) {
-                                                                                                                                    bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                if (Integer
+                                                                                                                                                        .parseInt(
+                                                                                                                                                                string)
+                                                                                                                                                < 0
+                                                                                                                                        || Integer
+                                                                                                                                                        .parseInt(
+                                                                                                                                                                string)
+                                                                                                                                                > 4) {
+                                                                                                                                    bundle3
+                                                                                                                                            .putInt(
+                                                                                                                                                    str,
+                                                                                                                                                    ResultInfo
+                                                                                                                                                            .ERROR_INVALID_VALUE);
                                                                                                                                     break;
                                                                                                                                 }
                                                                                                                                 break;
                                                                                                                             case 26:
-                                                                                                                                if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                    bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                if (!"1"
+                                                                                                                                                .equals(
+                                                                                                                                                        string)
+                                                                                                                                        && !"0"
+                                                                                                                                                .equals(
+                                                                                                                                                        string)) {
+                                                                                                                                    bundle3
+                                                                                                                                            .putInt(
+                                                                                                                                                    str,
+                                                                                                                                                    ResultInfo
+                                                                                                                                                            .ERROR_INVALID_VALUE);
                                                                                                                                     break;
                                                                                                                                 }
                                                                                                                                 break;
                                                                                                                             case 27:
-                                                                                                                                if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                    bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                if (!"1"
+                                                                                                                                                .equals(
+                                                                                                                                                        string)
+                                                                                                                                        && !"0"
+                                                                                                                                                .equals(
+                                                                                                                                                        string)) {
+                                                                                                                                    bundle3
+                                                                                                                                            .putInt(
+                                                                                                                                                    str,
+                                                                                                                                                    ResultInfo
+                                                                                                                                                            .ERROR_INVALID_VALUE);
                                                                                                                                     break;
                                                                                                                                 }
                                                                                                                                 break;
                                                                                                                             default:
                                                                                                                                 switch (c) {
                                                                                                                                     case 31:
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case ' ':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '!':
-                                                                                                                                        if (!"2".equals(string) && !"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"2"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '\"':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '#':
-                                                                                                                                        if (Integer.parseInt(string) < 0 || Integer.parseInt(string) > 75) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (Integer
+                                                                                                                                                                .parseInt(
+                                                                                                                                                                        string)
+                                                                                                                                                        < 0
+                                                                                                                                                || Integer
+                                                                                                                                                                .parseInt(
+                                                                                                                                                                        string)
+                                                                                                                                                        > 75) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '$':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '%':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '&':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '\'':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '(':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case ')':
-                                                                                                                                        if (!"3".equals(string) && !"2".equals(string) && !"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"3"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"2"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '*':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '+':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case ',':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '-':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     case '.':
-                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                        if (!"1"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)
+                                                                                                                                                && !"0"
+                                                                                                                                                        .equals(
+                                                                                                                                                                string)) {
+                                                                                                                                            bundle3
+                                                                                                                                                    .putInt(
+                                                                                                                                                            str,
+                                                                                                                                                            ResultInfo
+                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                             break;
                                                                                                                                         }
                                                                                                                                         break;
                                                                                                                                     default:
                                                                                                                                         switch (c) {
                                                                                                                                             case '1':
-                                                                                                                                                if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                                    bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                                if (!"1"
+                                                                                                                                                                .equals(
+                                                                                                                                                                        string)
+                                                                                                                                                        && !"0"
+                                                                                                                                                                .equals(
+                                                                                                                                                                        string)) {
+                                                                                                                                                    bundle3
+                                                                                                                                                            .putInt(
+                                                                                                                                                                    str,
+                                                                                                                                                                    ResultInfo
+                                                                                                                                                                            .ERROR_INVALID_VALUE);
                                                                                                                                                     break;
                                                                                                                                                 }
                                                                                                                                                 break;
                                                                                                                                             case '2':
-                                                                                                                                                if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                                    bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                                if (!"1"
+                                                                                                                                                                .equals(
+                                                                                                                                                                        string)
+                                                                                                                                                        && !"0"
+                                                                                                                                                                .equals(
+                                                                                                                                                                        string)) {
+                                                                                                                                                    bundle3
+                                                                                                                                                            .putInt(
+                                                                                                                                                                    str,
+                                                                                                                                                                    ResultInfo
+                                                                                                                                                                            .ERROR_INVALID_VALUE);
                                                                                                                                                     break;
                                                                                                                                                 }
                                                                                                                                                 break;
                                                                                                                                             case '3':
-                                                                                                                                                if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                                    bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                                if (!"1"
+                                                                                                                                                                .equals(
+                                                                                                                                                                        string)
+                                                                                                                                                        && !"0"
+                                                                                                                                                                .equals(
+                                                                                                                                                                        string)) {
+                                                                                                                                                    bundle3
+                                                                                                                                                            .putInt(
+                                                                                                                                                                    str,
+                                                                                                                                                                    ResultInfo
+                                                                                                                                                                            .ERROR_INVALID_VALUE);
                                                                                                                                                     break;
                                                                                                                                                 }
                                                                                                                                                 break;
                                                                                                                                             case '4':
-                                                                                                                                                if (!hasSystemVibrationMenu(context)) {
-                                                                                                                                                    bundle3.putInt(str, ResultInfo.ERROR_NOT_SUPPORTED);
+                                                                                                                                                if (!hasSystemVibrationMenu(
+                                                                                                                                                        context)) {
+                                                                                                                                                    bundle3
+                                                                                                                                                            .putInt(
+                                                                                                                                                                    str,
+                                                                                                                                                                    ResultInfo
+                                                                                                                                                                            .ERROR_NOT_SUPPORTED);
                                                                                                                                                 }
-                                                                                                                                                if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                                    bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                                if (!"1"
+                                                                                                                                                                .equals(
+                                                                                                                                                                        string)
+                                                                                                                                                        && !"0"
+                                                                                                                                                                .equals(
+                                                                                                                                                                        string)) {
+                                                                                                                                                    bundle3
+                                                                                                                                                            .putInt(
+                                                                                                                                                                    str,
+                                                                                                                                                                    ResultInfo
+                                                                                                                                                                            .ERROR_INVALID_VALUE);
                                                                                                                                                     break;
                                                                                                                                                 }
                                                                                                                                                 break;
                                                                                                                                             default:
                                                                                                                                                 switch (c) {
                                                                                                                                                     case 'Y':
-                                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                                        if (!"1"
+                                                                                                                                                                        .equals(
+                                                                                                                                                                                string)
+                                                                                                                                                                && !"0"
+                                                                                                                                                                        .equals(
+                                                                                                                                                                                string)) {
+                                                                                                                                                            bundle3
+                                                                                                                                                                    .putInt(
+                                                                                                                                                                            str,
+                                                                                                                                                                            ResultInfo
+                                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                                             break;
                                                                                                                                                         }
                                                                                                                                                         break;
                                                                                                                                                     case 'Z':
-                                                                                                                                                        if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                                        if (!"1"
+                                                                                                                                                                        .equals(
+                                                                                                                                                                                string)
+                                                                                                                                                                && !"0"
+                                                                                                                                                                        .equals(
+                                                                                                                                                                                string)) {
+                                                                                                                                                            bundle3
+                                                                                                                                                                    .putInt(
+                                                                                                                                                                            str,
+                                                                                                                                                                            ResultInfo
+                                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                                             break;
                                                                                                                                                         }
                                                                                                                                                         break;
                                                                                                                                                     case '[':
-                                                                                                                                                        if (!"2".equals(string) && !"1".equals(string) && !"0".equals(string)) {
-                                                                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                                                                        if (!"2"
+                                                                                                                                                                        .equals(
+                                                                                                                                                                                string)
+                                                                                                                                                                && !"1"
+                                                                                                                                                                        .equals(
+                                                                                                                                                                                string)
+                                                                                                                                                                && !"0"
+                                                                                                                                                                        .equals(
+                                                                                                                                                                                string)) {
+                                                                                                                                                            bundle3
+                                                                                                                                                                    .putInt(
+                                                                                                                                                                            str,
+                                                                                                                                                                            ResultInfo
+                                                                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                                                                             break;
                                                                                                                                                         }
                                                                                                                                                         break;
@@ -2149,54 +3080,184 @@ public final class ApplicationRestrictionsValidator {
                                                                                                                                 }
                                                                                                                         }
                                                                                                                 }
-                                                                                                            } else if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                                bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                            } else if (!"1"
+                                                                                                                            .equals(
+                                                                                                                                    string)
+                                                                                                                    && !"0"
+                                                                                                                            .equals(
+                                                                                                                                    string)) {
+                                                                                                                bundle3
+                                                                                                                        .putInt(
+                                                                                                                                str,
+                                                                                                                                ResultInfo
+                                                                                                                                        .ERROR_INVALID_VALUE);
                                                                                                             }
-                                                                                                        } else if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                        } else if (!"1"
+                                                                                                                        .equals(
+                                                                                                                                string)
+                                                                                                                && !"0"
+                                                                                                                        .equals(
+                                                                                                                                string)) {
+                                                                                                            bundle3
+                                                                                                                    .putInt(
+                                                                                                                            str,
+                                                                                                                            ResultInfo
+                                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                                         }
-                                                                                                    } else if (!"0".equals(string) && !"1".equals(string) && !"2".equals(string)) {
-                                                                                                        bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                    } else if (!"0"
+                                                                                                                    .equals(
+                                                                                                                            string)
+                                                                                                            && !"1"
+                                                                                                                    .equals(
+                                                                                                                            string)
+                                                                                                            && !"2"
+                                                                                                                    .equals(
+                                                                                                                            string)) {
+                                                                                                        bundle3
+                                                                                                                .putInt(
+                                                                                                                        str,
+                                                                                                                        ResultInfo
+                                                                                                                                .ERROR_INVALID_VALUE);
                                                                                                     }
-                                                                                                } else if (!"3".equals(string) && !"2".equals(string) && !"1".equals(string) && !"0".equals(string)) {
-                                                                                                    bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                                } else if (!"3"
+                                                                                                                .equals(
+                                                                                                                        string)
+                                                                                                        && !"2"
+                                                                                                                .equals(
+                                                                                                                        string)
+                                                                                                        && !"1"
+                                                                                                                .equals(
+                                                                                                                        string)
+                                                                                                        && !"0"
+                                                                                                                .equals(
+                                                                                                                        string)) {
+                                                                                                    bundle3
+                                                                                                            .putInt(
+                                                                                                                    str,
+                                                                                                                    ResultInfo
+                                                                                                                            .ERROR_INVALID_VALUE);
                                                                                                 }
-                                                                                            } else if (!"3".equals(string) && !"2".equals(string) && !"1".equals(string) && !"0".equals(string)) {
-                                                                                                bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                            } else if (!"3"
+                                                                                                            .equals(
+                                                                                                                    string)
+                                                                                                    && !"2"
+                                                                                                            .equals(
+                                                                                                                    string)
+                                                                                                    && !"1"
+                                                                                                            .equals(
+                                                                                                                    string)
+                                                                                                    && !"0"
+                                                                                                            .equals(
+                                                                                                                    string)) {
+                                                                                                bundle3
+                                                                                                        .putInt(
+                                                                                                                str,
+                                                                                                                ResultInfo
+                                                                                                                        .ERROR_INVALID_VALUE);
                                                                                             }
-                                                                                        } else if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                        } else if (!"1"
+                                                                                                        .equals(
+                                                                                                                string)
+                                                                                                && !"0"
+                                                                                                        .equals(
+                                                                                                                string)) {
+                                                                                            bundle3
+                                                                                                    .putInt(
+                                                                                                            str,
+                                                                                                            ResultInfo
+                                                                                                                    .ERROR_INVALID_VALUE);
                                                                                         }
-                                                                                    } else if (Integer.parseInt(string) < 10 || Integer.parseInt(string) > 600) {
-                                                                                        bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                    } else if (Integer
+                                                                                                            .parseInt(
+                                                                                                                    string)
+                                                                                                    < 10
+                                                                                            || Integer
+                                                                                                            .parseInt(
+                                                                                                                    string)
+                                                                                                    > 600) {
+                                                                                        bundle3
+                                                                                                .putInt(
+                                                                                                        str,
+                                                                                                        ResultInfo
+                                                                                                                .ERROR_INVALID_VALUE);
                                                                                     }
-                                                                                } else if (Integer.parseInt(string) < 25 || Integer.parseInt(string) > 400) {
-                                                                                    bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                                } else if (Integer
+                                                                                                        .parseInt(
+                                                                                                                string)
+                                                                                                < 25
+                                                                                        || Integer
+                                                                                                        .parseInt(
+                                                                                                                string)
+                                                                                                > 400) {
+                                                                                    bundle3.putInt(
+                                                                                            str,
+                                                                                            ResultInfo
+                                                                                                    .ERROR_INVALID_VALUE);
                                                                                 }
-                                                                            } else if (!"1".equals(string) && !"0".equals(string)) {
-                                                                                bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                            } else if (!"1"
+                                                                                            .equals(
+                                                                                                    string)
+                                                                                    && !"0"
+                                                                                            .equals(
+                                                                                                    string)) {
+                                                                                bundle3.putInt(
+                                                                                        str,
+                                                                                        ResultInfo
+                                                                                                .ERROR_INVALID_VALUE);
                                                                             }
-                                                                        } else if (!"1".equals(string) && !"0".equals(string)) {
-                                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                        } else if (!"1"
+                                                                                        .equals(
+                                                                                                string)
+                                                                                && !"0"
+                                                                                        .equals(
+                                                                                                string)) {
+                                                                            bundle3.putInt(
+                                                                                    str,
+                                                                                    ResultInfo
+                                                                                            .ERROR_INVALID_VALUE);
                                                                         }
                                                                     }
-                                                                    if (!"1".equals(string) && !"0".equals(string)) {
-                                                                        bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                    if (!"1".equals(string)
+                                                                            && !"0"
+                                                                                    .equals(
+                                                                                            string)) {
+                                                                        bundle3.putInt(
+                                                                                str,
+                                                                                ResultInfo
+                                                                                        .ERROR_INVALID_VALUE);
                                                                     }
-                                                                } else if (!"3".equals(string) && !"2".equals(string) && !"1".equals(string) && !"0".equals(string)) {
-                                                                    bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                                } else if (!"3".equals(string)
+                                                                        && !"2".equals(string)
+                                                                        && !"1".equals(string)
+                                                                        && !"0".equals(string)) {
+                                                                    bundle3.putInt(
+                                                                            str,
+                                                                            ResultInfo
+                                                                                    .ERROR_INVALID_VALUE);
                                                                 }
-                                                            } else if (!"1".equals(string) && !"0".equals(string)) {
-                                                                bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                            } else if (!"1".equals(string)
+                                                                    && !"0".equals(string)) {
+                                                                bundle3.putInt(
+                                                                        str,
+                                                                        ResultInfo
+                                                                                .ERROR_INVALID_VALUE);
                                                             }
-                                                        } else if (!"1".equals(string) && !"0".equals(string)) {
-                                                            bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                        } else if (!"1".equals(string)
+                                                                && !"0".equals(string)) {
+                                                            bundle3.putInt(
+                                                                    str,
+                                                                    ResultInfo.ERROR_INVALID_VALUE);
                                                         }
-                                                    } else if (!"1".equals(string) && !"0".equals(string)) {
-                                                        bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                    } else if (!"1".equals(string)
+                                                            && !"0".equals(string)) {
+                                                        bundle3.putInt(
+                                                                str,
+                                                                ResultInfo.ERROR_INVALID_VALUE);
                                                     }
-                                                } else if (!"1".equals(string) && !"0".equals(string)) {
-                                                    bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);
+                                                } else if (!"1".equals(string)
+                                                        && !"0".equals(string)) {
+                                                    bundle3.putInt(
+                                                            str, ResultInfo.ERROR_INVALID_VALUE);
                                                 }
                                             } else if (!"1".equals(string) && !"0".equals(string)) {
                                                 bundle3.putInt(str, ResultInfo.ERROR_INVALID_VALUE);

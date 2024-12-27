@@ -2,12 +2,13 @@ package android.net;
 
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.net.IVpnManager;
 import android.os.Debug;
 import android.os.Process;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.google.android.collect.Lists;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -24,7 +25,8 @@ public class KnoxVpnProxySelector extends ProxySelector {
     private static final String TAG = "KnoxVpnProxySelector";
 
     private IVpnManager getVpnManagerService() {
-        return IVpnManager.Stub.asInterface(ServiceManager.getService(Context.VPN_MANAGEMENT_SERVICE));
+        return IVpnManager.Stub.asInterface(
+                ServiceManager.getService(Context.VPN_MANAGEMENT_SERVICE));
     }
 
     @Override // java.net.ProxySelector
@@ -34,7 +36,12 @@ public class KnoxVpnProxySelector extends ProxySelector {
         try {
             String urlString = uri.toURL().toString();
             if (DBG) {
-                Log.d(TAG, "pac url being recieved is " + urlString + "for the caller " + Process.myUid());
+                Log.d(
+                        TAG,
+                        "pac url being recieved is "
+                                + urlString
+                                + "for the caller "
+                                + Process.myUid());
             }
             String[] proxyInfo = getVpnManagerService().getProxyInfoForUid(Process.myUid());
             String host = proxyInfo[0];
@@ -47,7 +54,9 @@ public class KnoxVpnProxySelector extends ProxySelector {
             }
             if (host != null && port != null) {
                 int intPort = Integer.parseInt(port);
-                java.net.Proxy proxy = new java.net.Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved(host, intPort));
+                java.net.Proxy proxy =
+                        new java.net.Proxy(
+                                Proxy.Type.HTTP, InetSocketAddress.createUnresolved(host, intPort));
                 Log.d(TAG, "valid knox vpn proxy is added for caller" + Process.myUid());
                 ret.add(proxy);
             }
@@ -59,13 +68,19 @@ public class KnoxVpnProxySelector extends ProxySelector {
         } catch (RuntimeException e) {
             Log.e(TAG, "RuntimeException occured for the caller " + Process.myUid());
             if (ret.size() == 0) {
-                Log.d(TAG, "in-valid knox vpn proxy is added for caller during exception " + Process.myUid());
+                Log.d(
+                        TAG,
+                        "in-valid knox vpn proxy is added for caller during exception "
+                                + Process.myUid());
                 ret.add(java.net.Proxy.NO_PROXY);
             }
         } catch (Exception e2) {
             Log.e(TAG, "Exception occured for the caller " + Process.myUid());
             if (ret.size() == 0) {
-                Log.d(TAG, "in-valid knox vpn proxy is added for caller during exception " + Process.myUid());
+                Log.d(
+                        TAG,
+                        "in-valid knox vpn proxy is added for caller during exception "
+                                + Process.myUid());
                 ret.add(java.net.Proxy.NO_PROXY);
             }
         }
@@ -82,11 +97,16 @@ public class KnoxVpnProxySelector extends ProxySelector {
             if (trimmed.equals("DIRECT")) {
                 ret.add(java.net.Proxy.NO_PROXY);
             } else if (trimmed.startsWith(PROXY)) {
-                java.net.Proxy proxy2 = proxyFromHostPort(Proxy.Type.HTTP, trimmed.substring(PROXY.length()));
+                java.net.Proxy proxy2 =
+                        proxyFromHostPort(Proxy.Type.HTTP, trimmed.substring(PROXY.length()));
                 if (proxy2 != null) {
                     ret.add(proxy2);
                 }
-            } else if (trimmed.startsWith(SOCKS) && (proxy = proxyFromHostPort(Proxy.Type.SOCKS, trimmed.substring(SOCKS.length()))) != null) {
+            } else if (trimmed.startsWith(SOCKS)
+                    && (proxy =
+                                    proxyFromHostPort(
+                                            Proxy.Type.SOCKS, trimmed.substring(SOCKS.length())))
+                            != null) {
                 ret.add(proxy);
             }
         }
@@ -112,6 +132,5 @@ public class KnoxVpnProxySelector extends ProxySelector {
     }
 
     @Override // java.net.ProxySelector
-    public void connectFailed(URI uri, SocketAddress address, IOException failure) {
-    }
+    public void connectFailed(URI uri, SocketAddress address, IOException failure) {}
 }

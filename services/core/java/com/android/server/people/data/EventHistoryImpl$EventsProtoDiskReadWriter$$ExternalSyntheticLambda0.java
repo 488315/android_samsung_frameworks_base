@@ -4,16 +4,21 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.CollectionUtils;
-import com.android.server.people.data.AbstractProtoDiskReadWriter;
+
 import com.google.android.collect.Lists;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class EventHistoryImpl$EventsProtoDiskReadWriter$$ExternalSyntheticLambda0 implements AbstractProtoDiskReadWriter.ProtoStreamWriter, AbstractProtoDiskReadWriter.ProtoStreamReader {
+public final /* synthetic */
+class EventHistoryImpl$EventsProtoDiskReadWriter$$ExternalSyntheticLambda0
+        implements AbstractProtoDiskReadWriter.ProtoStreamWriter,
+                AbstractProtoDiskReadWriter.ProtoStreamReader {
     public final /* synthetic */ int $r8$classId;
 
     @Override // com.android.server.people.data.AbstractProtoDiskReadWriter.ProtoStreamReader
@@ -32,7 +37,10 @@ public final /* synthetic */ class EventHistoryImpl$EventsProtoDiskReadWriter$$E
                                 if (fieldNumber == 1) {
                                     i = protoInputStream.readInt(1120986464257L);
                                 } else if (fieldNumber != 2) {
-                                    Slog.w("EventHistoryImpl$EventIndexesProtoDiskReadWriter", "Could not read undefined field: " + protoInputStream.getFieldNumber());
+                                    Slog.w(
+                                            "EventHistoryImpl$EventIndexesProtoDiskReadWriter",
+                                            "Could not read undefined field: "
+                                                    + protoInputStream.getFieldNumber());
                                 } else {
                                     long start2 = protoInputStream.start(1146756268034L);
                                     eventIndex = EventIndex.readFromProto(protoInputStream);
@@ -43,7 +51,10 @@ public final /* synthetic */ class EventHistoryImpl$EventsProtoDiskReadWriter$$E
                             protoInputStream.end(start);
                         }
                     } catch (IOException e) {
-                        Slog.e("EventHistoryImpl$EventIndexesProtoDiskReadWriter", "Failed to read protobuf input stream.", e);
+                        Slog.e(
+                                "EventHistoryImpl$EventIndexesProtoDiskReadWriter",
+                                "Failed to read protobuf input stream.",
+                                e);
                     }
                 }
                 return sparseArray;
@@ -58,7 +69,10 @@ public final /* synthetic */ class EventHistoryImpl$EventsProtoDiskReadWriter$$E
                             newArrayList.add(readFromProto);
                         }
                     } catch (IOException e2) {
-                        Slog.e("EventHistoryImpl$EventsProtoDiskReadWriter", "Failed to read protobuf input stream.", e2);
+                        Slog.e(
+                                "EventHistoryImpl$EventsProtoDiskReadWriter",
+                                "Failed to read protobuf input stream.",
+                                e2);
                     }
                 }
                 EventList eventList = new EventList();

@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class SessionConfig implements Parcelable {
-    public static final Parcelable.Creator<SessionConfig> CREATOR = new Parcelable.Creator<SessionConfig>() { // from class: android.hardware.power.SessionConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SessionConfig createFromParcel(Parcel _aidl_source) {
-            SessionConfig _aidl_out = new SessionConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SessionConfig> CREATOR =
+            new Parcelable.Creator<
+                    SessionConfig>() { // from class: android.hardware.power.SessionConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SessionConfig createFromParcel(Parcel _aidl_source) {
+                    SessionConfig _aidl_out = new SessionConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SessionConfig[] newArray(int _aidl_size) {
-            return new SessionConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SessionConfig[] newArray(int _aidl_size) {
+                    return new SessionConfig[_aidl_size];
+                }
+            };
     public long id = 0;
 
     @Override // android.os.Parcelable

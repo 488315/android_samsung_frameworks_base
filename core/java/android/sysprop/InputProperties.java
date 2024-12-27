@@ -1,6 +1,7 @@
 package android.sysprop;
 
 import android.os.SystemProperties;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,8 +12,7 @@ import java.util.function.Function;
 
 /* loaded from: classes3.dex */
 public final class InputProperties {
-    private InputProperties() {
-    }
+    private InputProperties() {}
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Boolean tryParseBoolean(String str) {
@@ -185,7 +185,8 @@ public final class InputProperties {
         return joiner.toString();
     }
 
-    private static <T extends Enum<T>> String formatEnumList(List<T> list, Function<T, String> elementFormatter) {
+    private static <T extends Enum<T>> String formatEnumList(
+            List<T> list, Function<T, String> elementFormatter) {
         StringJoiner joiner = new StringJoiner(",");
         Iterator<T> it = list.iterator();
         while (it.hasNext()) {
@@ -221,17 +222,20 @@ public final class InputProperties {
     }
 
     public static Optional<Boolean> enable_input_device_usage_metrics() {
-        String value = SystemProperties.get("persist.debug.input.enable_input_device_usage_metrics");
+        String value =
+                SystemProperties.get("persist.debug.input.enable_input_device_usage_metrics");
         return Optional.ofNullable(tryParseBoolean(value));
     }
 
     public static Optional<Boolean> enable_keyboard_backlight_custom_levels() {
-        String value = SystemProperties.get("persist.input.keyboard.backlight_custom_levels.enabled");
+        String value =
+                SystemProperties.get("persist.input.keyboard.backlight_custom_levels.enabled");
         return Optional.ofNullable(tryParseBoolean(value));
     }
 
     public static Optional<Boolean> enable_ambient_keyboard_backlight_control() {
-        String value = SystemProperties.get("persist.input.keyboard.ambient_backlight_control.enabled");
+        String value =
+                SystemProperties.get("persist.input.keyboard.ambient_backlight_control.enabled");
         return Optional.ofNullable(tryParseBoolean(value));
     }
 }

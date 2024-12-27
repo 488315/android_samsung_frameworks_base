@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class CompressedApexInfo implements Parcelable {
-    public static final Parcelable.Creator<CompressedApexInfo> CREATOR = new Parcelable.Creator<CompressedApexInfo>() { // from class: android.apex.CompressedApexInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompressedApexInfo createFromParcel(Parcel _aidl_source) {
-            CompressedApexInfo _aidl_out = new CompressedApexInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CompressedApexInfo> CREATOR =
+            new Parcelable.Creator<
+                    CompressedApexInfo>() { // from class: android.apex.CompressedApexInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompressedApexInfo createFromParcel(Parcel _aidl_source) {
+                    CompressedApexInfo _aidl_out = new CompressedApexInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompressedApexInfo[] newArray(int _aidl_size) {
-            return new CompressedApexInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompressedApexInfo[] newArray(int _aidl_size) {
+                    return new CompressedApexInfo[_aidl_size];
+                }
+            };
     public String moduleName;
     public long versionCode = 0;
     public long decompressedSize = 0;

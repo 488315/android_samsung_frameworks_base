@@ -3,9 +3,11 @@ package com.android.server.wm;
 import android.app.ActivityManagerInternal;
 import android.content.pm.ApplicationInfo;
 import android.util.ArrayMap;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.server.am.AppProfiler;
 import com.android.server.am.ProcessRecord;
+
 import java.util.concurrent.Executor;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -40,11 +42,15 @@ public final class VisibleActivityProcessTracker {
             }
             ProcessRecord processRecord2 = this.mProc.mListener;
             AppProfiler appProfiler2 = processRecord2.mService.mAppProfiler;
-            long cpuTimeForPid = appProfiler2.mProcessCpuTracker.getCpuTimeForPid(processRecord2.mPid) - this.mCpuTime;
+            long cpuTimeForPid =
+                    appProfiler2.mProcessCpuTracker.getCpuTimeForPid(processRecord2.mPid)
+                            - this.mCpuTime;
             if (cpuTimeForPid > 0) {
-                ActivityManagerInternal activityManagerInternal = VisibleActivityProcessTracker.this.mAtms.mAmInternal;
+                ActivityManagerInternal activityManagerInternal =
+                        VisibleActivityProcessTracker.this.mAtms.mAmInternal;
                 ApplicationInfo applicationInfo = this.mProc.mInfo;
-                activityManagerInternal.updateForegroundTimeIfOnBattery(applicationInfo.packageName, applicationInfo.uid, cpuTimeForPid);
+                activityManagerInternal.updateForegroundTimeIfOnBattery(
+                        applicationInfo.packageName, applicationInfo.uid, cpuTimeForPid);
             }
         }
     }

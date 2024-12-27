@@ -1,6 +1,7 @@
 package android.graphics.rendererpolicy;
 
 import android.util.Log;
+
 import java.io.InputStream;
 
 /* loaded from: classes.dex */
@@ -25,7 +26,12 @@ public class BlocklistChecker {
     }
 
     public boolean isValidQueryInfo(QueryInfo queryInfo) {
-        return (isNullOrEmpty(queryInfo.getPackageName()) || isNullOrEmpty(queryInfo.getModelName()) || isNullOrEmpty(queryInfo.getChipsetName()) || queryInfo.getOsVersion() <= 0) ? false : true;
+        return (isNullOrEmpty(queryInfo.getPackageName())
+                        || isNullOrEmpty(queryInfo.getModelName())
+                        || isNullOrEmpty(queryInfo.getChipsetName())
+                        || queryInfo.getOsVersion() <= 0)
+                ? false
+                : true;
     }
 
     public boolean checkSkiaGlBlocklist(QueryInfo queryInfo) {

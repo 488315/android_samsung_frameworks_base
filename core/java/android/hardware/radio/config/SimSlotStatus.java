@@ -3,27 +3,30 @@ package android.hardware.radio.config;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SimSlotStatus implements Parcelable {
-    public static final Parcelable.Creator<SimSlotStatus> CREATOR = new Parcelable.Creator<SimSlotStatus>() { // from class: android.hardware.radio.config.SimSlotStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SimSlotStatus createFromParcel(Parcel _aidl_source) {
-            SimSlotStatus _aidl_out = new SimSlotStatus();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SimSlotStatus> CREATOR =
+            new Parcelable.Creator<
+                    SimSlotStatus>() { // from class: android.hardware.radio.config.SimSlotStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SimSlotStatus createFromParcel(Parcel _aidl_source) {
+                    SimSlotStatus _aidl_out = new SimSlotStatus();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SimSlotStatus[] newArray(int _aidl_size) {
-            return new SimSlotStatus[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SimSlotStatus[] newArray(int _aidl_size) {
+                    return new SimSlotStatus[_aidl_size];
+                }
+            };
     public String atr;
     public String eid;
     public SimPortInfo[] portInfo;
@@ -116,7 +119,9 @@ public class SimSlotStatus implements Parcelable {
         _aidl_sj.add("atr: " + Objects.toString(this.atr));
         _aidl_sj.add("eid: " + Objects.toString(this.eid));
         _aidl_sj.add("portInfo: " + Arrays.toString(this.portInfo));
-        _aidl_sj.add("supportedMepMode: " + MultipleEnabledProfilesMode$$.toString(this.supportedMepMode));
+        _aidl_sj.add(
+                "supportedMepMode: "
+                        + MultipleEnabledProfilesMode$$.toString(this.supportedMepMode));
         return "SimSlotStatus" + _aidl_sj.toString();
     }
 

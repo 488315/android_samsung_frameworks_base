@@ -11,12 +11,13 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import android.telephony.data.IDataService;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.telephony.IIntegerConsumer;
 import com.android.internal.util.FunctionalUtils;
 import com.android.telephony.Rlog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -61,12 +62,10 @@ public abstract class DataService extends Service {
     private final HandlerThread mHandlerThread = new HandlerThread(TAG);
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeactivateDataReason {
-    }
+    public @interface DeactivateDataReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SetupDataReason {
-    }
+    public @interface SetupDataReason {}
 
     public abstract DataServiceProvider onCreateDataServiceProvider(int i);
 
@@ -86,14 +85,39 @@ public abstract class DataService extends Service {
             return this.mSlotIndex;
         }
 
-        public void setupDataCall(int accessNetworkType, DataProfile dataProfile, boolean isRoaming, boolean allowRoaming, int reason, LinkProperties linkProperties, DataServiceCallback callback) {
+        public void setupDataCall(
+                int accessNetworkType,
+                DataProfile dataProfile,
+                boolean isRoaming,
+                boolean allowRoaming,
+                int reason,
+                LinkProperties linkProperties,
+                DataServiceCallback callback) {
             if (callback != null) {
                 callback.onSetupDataCallComplete(1, null);
             }
         }
 
-        public void setupDataCall(int accessNetworkType, DataProfile dataProfile, boolean isRoaming, boolean allowRoaming, int reason, LinkProperties linkProperties, int pduSessionId, NetworkSliceInfo sliceInfo, TrafficDescriptor trafficDescriptor, boolean matchAllRuleAllowed, DataServiceCallback callback) {
-            setupDataCall(accessNetworkType, dataProfile, isRoaming, allowRoaming, reason, linkProperties, callback);
+        public void setupDataCall(
+                int accessNetworkType,
+                DataProfile dataProfile,
+                boolean isRoaming,
+                boolean allowRoaming,
+                int reason,
+                LinkProperties linkProperties,
+                int pduSessionId,
+                NetworkSliceInfo sliceInfo,
+                TrafficDescriptor trafficDescriptor,
+                boolean matchAllRuleAllowed,
+                DataServiceCallback callback) {
+            setupDataCall(
+                    accessNetworkType,
+                    dataProfile,
+                    isRoaming,
+                    allowRoaming,
+                    reason,
+                    linkProperties,
+                    callback);
         }
 
         public void deactivateDataCall(int cid, int reason, DataServiceCallback callback) {
@@ -102,13 +126,15 @@ public abstract class DataService extends Service {
             }
         }
 
-        public void setInitialAttachApn(DataProfile dataProfile, boolean isRoaming, DataServiceCallback callback) {
+        public void setInitialAttachApn(
+                DataProfile dataProfile, boolean isRoaming, DataServiceCallback callback) {
             if (callback != null) {
                 callback.onSetInitialAttachApnComplete(1);
             }
         }
 
-        public void setDataProfile(List<DataProfile> dps, boolean isRoaming, DataServiceCallback callback) {
+        public void setDataProfile(
+                List<DataProfile> dps, boolean isRoaming, DataServiceCallback callback) {
             if (callback != null) {
                 callback.onSetDataProfileComplete(1);
             }
@@ -158,22 +184,32 @@ public abstract class DataService extends Service {
             }
         }
 
-        public void requestNetworkValidation(int cid, Executor executor, final Consumer<Integer> resultCodeCallback) {
+        public void requestNetworkValidation(
+                int cid, Executor executor, final Consumer<Integer> resultCodeCallback) {
             Objects.requireNonNull(executor, "executor cannot be null");
             Objects.requireNonNull(resultCodeCallback, "resultCodeCallback cannot be null");
             Log.d(DataService.TAG, "requestNetworkValidation: " + cid);
-            executor.execute(new Runnable() { // from class: android.telephony.data.DataService$DataServiceProvider$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    resultCodeCallback.accept(1);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.data.DataService$DataServiceProvider$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            resultCodeCallback.accept(1);
+                        }
+                    });
         }
 
         public final void notifyDataCallListChanged(List<DataCallResponse> dataCallList) {
             synchronized (this.mDataCallListChangedCallbacks) {
                 for (IDataServiceCallback callback : this.mDataCallListChangedCallbacks) {
-                    DataService.this.mHandler.obtainMessage(11, this.mSlotIndex, 0, new DataCallListChangedIndication(dataCallList, callback)).sendToTarget();
+                    DataService.this
+                            .mHandler
+                            .obtainMessage(
+                                    11,
+                                    this.mSlotIndex,
+                                    0,
+                                    new DataCallListChangedIndication(dataCallList, callback))
+                            .sendToTarget();
                 }
             }
         }
@@ -181,7 +217,14 @@ public abstract class DataService extends Service {
         public final void notifyApnUnthrottled(String apn) {
             synchronized (this.mApnUnthrottledCallbacks) {
                 for (IDataServiceCallback callback : this.mApnUnthrottledCallbacks) {
-                    DataService.this.mHandler.obtainMessage(16, this.mSlotIndex, 0, new ApnUnthrottledIndication(apn, callback)).sendToTarget();
+                    DataService.this
+                            .mHandler
+                            .obtainMessage(
+                                    16,
+                                    this.mSlotIndex,
+                                    0,
+                                    new ApnUnthrottledIndication(apn, callback))
+                            .sendToTarget();
                 }
             }
         }
@@ -189,7 +232,14 @@ public abstract class DataService extends Service {
         public final void notifyDataProfileUnthrottled(DataProfile dataProfile) {
             synchronized (this.mApnUnthrottledCallbacks) {
                 for (IDataServiceCallback callback : this.mApnUnthrottledCallbacks) {
-                    DataService.this.mHandler.obtainMessage(16, this.mSlotIndex, 0, new ApnUnthrottledIndication(dataProfile, callback)).sendToTarget();
+                    DataService.this
+                            .mHandler
+                            .obtainMessage(
+                                    16,
+                                    this.mSlotIndex,
+                                    0,
+                                    new ApnUnthrottledIndication(dataProfile, callback))
+                            .sendToTarget();
                 }
             }
         }
@@ -208,7 +258,18 @@ public abstract class DataService extends Service {
         public final NetworkSliceInfo sliceInfo;
         public final TrafficDescriptor trafficDescriptor;
 
-        SetupDataCallRequest(int accessNetworkType, DataProfile dataProfile, boolean isRoaming, boolean allowRoaming, int reason, LinkProperties linkProperties, int pduSessionId, NetworkSliceInfo sliceInfo, TrafficDescriptor trafficDescriptor, boolean matchAllRuleAllowed, IDataServiceCallback callback) {
+        SetupDataCallRequest(
+                int accessNetworkType,
+                DataProfile dataProfile,
+                boolean isRoaming,
+                boolean allowRoaming,
+                int reason,
+                LinkProperties linkProperties,
+                int pduSessionId,
+                NetworkSliceInfo sliceInfo,
+                TrafficDescriptor trafficDescriptor,
+                boolean matchAllRuleAllowed,
+                IDataServiceCallback callback) {
             this.accessNetworkType = accessNetworkType;
             this.dataProfile = dataProfile;
             this.isRoaming = isRoaming;
@@ -240,7 +301,8 @@ public abstract class DataService extends Service {
         public final DataProfile dataProfile;
         public final boolean isRoaming;
 
-        SetInitialAttachApnRequest(DataProfile dataProfile, boolean isRoaming, IDataServiceCallback callback) {
+        SetInitialAttachApnRequest(
+                DataProfile dataProfile, boolean isRoaming, IDataServiceCallback callback) {
             this.dataProfile = dataProfile;
             this.isRoaming = isRoaming;
             this.callback = callback;
@@ -252,7 +314,8 @@ public abstract class DataService extends Service {
         public final List<DataProfile> dps;
         public final boolean isRoaming;
 
-        SetDataProfileRequest(List<DataProfile> dps, boolean isRoaming, IDataServiceCallback callback) {
+        SetDataProfileRequest(
+                List<DataProfile> dps, boolean isRoaming, IDataServiceCallback callback) {
             this.dps = dps;
             this.isRoaming = isRoaming;
             this.callback = callback;
@@ -273,7 +336,8 @@ public abstract class DataService extends Service {
         public final IDataServiceCallback callback;
         public final List<DataCallResponse> dataCallList;
 
-        DataCallListChangedIndication(List<DataCallResponse> dataCallList, IDataServiceCallback callback) {
+        DataCallListChangedIndication(
+                List<DataCallResponse> dataCallList, IDataServiceCallback callback) {
             this.dataCallList = dataCallList;
             this.callback = callback;
         }
@@ -322,10 +386,12 @@ public abstract class DataService extends Service {
             DataServiceCallback dataServiceCallback3;
             DataServiceCallback dataServiceCallback4;
             int slotIndex = message.arg1;
-            DataServiceProvider serviceProvider2 = (DataServiceProvider) DataService.this.mServiceMap.get(slotIndex);
+            DataServiceProvider serviceProvider2 =
+                    (DataServiceProvider) DataService.this.mServiceMap.get(slotIndex);
             switch (message.what) {
                 case 1:
-                    DataServiceProvider serviceProvider3 = DataService.this.onCreateDataServiceProvider(message.arg1);
+                    DataServiceProvider serviceProvider3 =
+                            DataService.this.onCreateDataServiceProvider(message.arg1);
                     if (serviceProvider3 != null) {
                         DataService.this.mServiceMap.put(slotIndex, serviceProvider3);
                         return;
@@ -342,7 +408,8 @@ public abstract class DataService extends Service {
                     }
                 case 3:
                     for (int i = 0; i < DataService.this.mServiceMap.size(); i++) {
-                        DataServiceProvider serviceProvider4 = (DataServiceProvider) DataService.this.mServiceMap.get(i);
+                        DataServiceProvider serviceProvider4 =
+                                (DataServiceProvider) DataService.this.mServiceMap.get(i);
                         if (serviceProvider4 != null) {
                             serviceProvider4.close();
                         }
@@ -354,7 +421,8 @@ public abstract class DataService extends Service {
                         serviceProvider = serviceProvider2;
                         break;
                     } else {
-                        SetupDataCallRequest setupDataCallRequest = (SetupDataCallRequest) message.obj;
+                        SetupDataCallRequest setupDataCallRequest =
+                                (SetupDataCallRequest) message.obj;
                         int i2 = setupDataCallRequest.accessNetworkType;
                         DataProfile dataProfile = setupDataCallRequest.dataProfile;
                         boolean z = setupDataCallRequest.isRoaming;
@@ -363,15 +431,28 @@ public abstract class DataService extends Service {
                         LinkProperties linkProperties = setupDataCallRequest.linkProperties;
                         int i4 = setupDataCallRequest.pduSessionId;
                         NetworkSliceInfo networkSliceInfo = setupDataCallRequest.sliceInfo;
-                        TrafficDescriptor trafficDescriptor = setupDataCallRequest.trafficDescriptor;
+                        TrafficDescriptor trafficDescriptor =
+                                setupDataCallRequest.trafficDescriptor;
                         boolean z3 = setupDataCallRequest.matchAllRuleAllowed;
                         if (setupDataCallRequest.callback != null) {
-                            dataServiceCallback = new DataServiceCallback(setupDataCallRequest.callback);
+                            dataServiceCallback =
+                                    new DataServiceCallback(setupDataCallRequest.callback);
                         } else {
                             dataServiceCallback = null;
                         }
                         serviceProvider = serviceProvider2;
-                        serviceProvider2.setupDataCall(i2, dataProfile, z, z2, i3, linkProperties, i4, networkSliceInfo, trafficDescriptor, z3, dataServiceCallback);
+                        serviceProvider2.setupDataCall(
+                                i2,
+                                dataProfile,
+                                z,
+                                z2,
+                                i3,
+                                linkProperties,
+                                i4,
+                                networkSliceInfo,
+                                trafficDescriptor,
+                                z3,
+                                dataServiceCallback);
                         break;
                     }
                 case 5:
@@ -379,11 +460,13 @@ public abstract class DataService extends Service {
                         serviceProvider = serviceProvider2;
                         break;
                     } else {
-                        DeactivateDataCallRequest deactivateDataCallRequest = (DeactivateDataCallRequest) message.obj;
+                        DeactivateDataCallRequest deactivateDataCallRequest =
+                                (DeactivateDataCallRequest) message.obj;
                         int i5 = deactivateDataCallRequest.cid;
                         int i6 = deactivateDataCallRequest.reason;
                         if (deactivateDataCallRequest.callback != null) {
-                            dataServiceCallback2 = new DataServiceCallback(deactivateDataCallRequest.callback);
+                            dataServiceCallback2 =
+                                    new DataServiceCallback(deactivateDataCallRequest.callback);
                         } else {
                             dataServiceCallback2 = null;
                         }
@@ -396,15 +479,18 @@ public abstract class DataService extends Service {
                         serviceProvider = serviceProvider2;
                         break;
                     } else {
-                        SetInitialAttachApnRequest setInitialAttachApnRequest = (SetInitialAttachApnRequest) message.obj;
+                        SetInitialAttachApnRequest setInitialAttachApnRequest =
+                                (SetInitialAttachApnRequest) message.obj;
                         DataProfile dataProfile2 = setInitialAttachApnRequest.dataProfile;
                         boolean z4 = setInitialAttachApnRequest.isRoaming;
                         if (setInitialAttachApnRequest.callback != null) {
-                            dataServiceCallback3 = new DataServiceCallback(setInitialAttachApnRequest.callback);
+                            dataServiceCallback3 =
+                                    new DataServiceCallback(setInitialAttachApnRequest.callback);
                         } else {
                             dataServiceCallback3 = null;
                         }
-                        serviceProvider2.setInitialAttachApn(dataProfile2, z4, dataServiceCallback3);
+                        serviceProvider2.setInitialAttachApn(
+                                dataProfile2, z4, dataServiceCallback3);
                         serviceProvider = serviceProvider2;
                         break;
                     }
@@ -413,11 +499,13 @@ public abstract class DataService extends Service {
                         serviceProvider = serviceProvider2;
                         break;
                     } else {
-                        SetDataProfileRequest setDataProfileRequest = (SetDataProfileRequest) message.obj;
+                        SetDataProfileRequest setDataProfileRequest =
+                                (SetDataProfileRequest) message.obj;
                         List<DataProfile> list = setDataProfileRequest.dps;
                         boolean z5 = setDataProfileRequest.isRoaming;
                         if (setDataProfileRequest.callback != null) {
-                            dataServiceCallback4 = new DataServiceCallback(setDataProfileRequest.callback);
+                            dataServiceCallback4 =
+                                    new DataServiceCallback(setDataProfileRequest.callback);
                         } else {
                             dataServiceCallback4 = null;
                         }
@@ -430,7 +518,8 @@ public abstract class DataService extends Service {
                         serviceProvider = serviceProvider2;
                         break;
                     } else {
-                        serviceProvider2.requestDataCallList(new DataServiceCallback((IDataServiceCallback) message.obj));
+                        serviceProvider2.requestDataCallList(
+                                new DataServiceCallback((IDataServiceCallback) message.obj));
                         serviceProvider = serviceProvider2;
                         break;
                     }
@@ -439,7 +528,8 @@ public abstract class DataService extends Service {
                         serviceProvider = serviceProvider2;
                         break;
                     } else {
-                        serviceProvider2.registerForDataCallListChanged((IDataServiceCallback) message.obj);
+                        serviceProvider2.registerForDataCallListChanged(
+                                (IDataServiceCallback) message.obj);
                         serviceProvider = serviceProvider2;
                         break;
                     }
@@ -458,7 +548,8 @@ public abstract class DataService extends Service {
                         serviceProvider = serviceProvider2;
                         break;
                     } else {
-                        DataCallListChangedIndication indication = (DataCallListChangedIndication) message.obj;
+                        DataCallListChangedIndication indication =
+                                (DataCallListChangedIndication) message.obj;
                         try {
                             indication.callback.onDataCallListChanged(indication.dataCallList);
                             serviceProvider = serviceProvider2;
@@ -475,7 +566,11 @@ public abstract class DataService extends Service {
                         break;
                     } else {
                         BeginCancelHandoverRequest bReq = (BeginCancelHandoverRequest) message.obj;
-                        serviceProvider2.startHandover(bReq.cid, bReq.callback != null ? new DataServiceCallback(bReq.callback) : null);
+                        serviceProvider2.startHandover(
+                                bReq.cid,
+                                bReq.callback != null
+                                        ? new DataServiceCallback(bReq.callback)
+                                        : null);
                         serviceProvider = serviceProvider2;
                         break;
                     }
@@ -485,7 +580,11 @@ public abstract class DataService extends Service {
                         break;
                     } else {
                         BeginCancelHandoverRequest cReq = (BeginCancelHandoverRequest) message.obj;
-                        serviceProvider2.cancelHandover(cReq.cid, cReq.callback != null ? new DataServiceCallback(cReq.callback) : null);
+                        serviceProvider2.cancelHandover(
+                                cReq.cid,
+                                cReq.callback != null
+                                        ? new DataServiceCallback(cReq.callback)
+                                        : null);
                         serviceProvider = serviceProvider2;
                         break;
                     }
@@ -494,7 +593,8 @@ public abstract class DataService extends Service {
                         serviceProvider = serviceProvider2;
                         break;
                     } else {
-                        serviceProvider2.registerForApnUnthrottled((IDataServiceCallback) message.obj);
+                        serviceProvider2.registerForApnUnthrottled(
+                                (IDataServiceCallback) message.obj);
                         serviceProvider = serviceProvider2;
                         break;
                     }
@@ -513,12 +613,15 @@ public abstract class DataService extends Service {
                         serviceProvider = serviceProvider2;
                         break;
                     } else {
-                        ApnUnthrottledIndication apnUnthrottledIndication = (ApnUnthrottledIndication) message.obj;
+                        ApnUnthrottledIndication apnUnthrottledIndication =
+                                (ApnUnthrottledIndication) message.obj;
                         try {
                             if (apnUnthrottledIndication.dataProfile != null) {
-                                apnUnthrottledIndication.callback.onDataProfileUnthrottled(apnUnthrottledIndication.dataProfile);
+                                apnUnthrottledIndication.callback.onDataProfileUnthrottled(
+                                        apnUnthrottledIndication.dataProfile);
                             } else {
-                                apnUnthrottledIndication.callback.onApnUnthrottled(apnUnthrottledIndication.apn);
+                                apnUnthrottledIndication.callback.onApnUnthrottled(
+                                        apnUnthrottledIndication.apn);
                             }
                             serviceProvider = serviceProvider2;
                             break;
@@ -538,7 +641,12 @@ public abstract class DataService extends Service {
                         Executor executor = validationRequest.executor;
                         IIntegerConsumer iIntegerConsumer = validationRequest.callback;
                         Objects.requireNonNull(iIntegerConsumer);
-                        serviceProvider2.requestNetworkValidation(i7, executor, FunctionalUtils.ignoreRemoteException(new DataService$DataServiceHandler$$ExternalSyntheticLambda0(iIntegerConsumer)));
+                        serviceProvider2.requestNetworkValidation(
+                                i7,
+                                executor,
+                                FunctionalUtils.ignoreRemoteException(
+                                        new DataService$DataServiceHandler$$ExternalSyntheticLambda0(
+                                                iIntegerConsumer)));
                         serviceProvider = serviceProvider2;
                         break;
                     }
@@ -578,8 +686,7 @@ public abstract class DataService extends Service {
     }
 
     private class IDataServiceWrapper extends IDataService.Stub {
-        private IDataServiceWrapper() {
-        }
+        private IDataServiceWrapper() {}
 
         @Override // android.telephony.data.IDataService
         public void createDataServiceProvider(int slotIndex) {
@@ -592,23 +699,77 @@ public abstract class DataService extends Service {
         }
 
         @Override // android.telephony.data.IDataService
-        public void setupDataCall(int slotIndex, int accessNetworkType, DataProfile dataProfile, boolean isRoaming, boolean allowRoaming, int reason, LinkProperties linkProperties, int pduSessionId, NetworkSliceInfo sliceInfo, TrafficDescriptor trafficDescriptor, boolean matchAllRuleAllowed, IDataServiceCallback callback) {
-            DataService.this.mHandler.obtainMessage(4, slotIndex, 0, new SetupDataCallRequest(accessNetworkType, dataProfile, isRoaming, allowRoaming, reason, linkProperties, pduSessionId, sliceInfo, trafficDescriptor, matchAllRuleAllowed, callback)).sendToTarget();
+        public void setupDataCall(
+                int slotIndex,
+                int accessNetworkType,
+                DataProfile dataProfile,
+                boolean isRoaming,
+                boolean allowRoaming,
+                int reason,
+                LinkProperties linkProperties,
+                int pduSessionId,
+                NetworkSliceInfo sliceInfo,
+                TrafficDescriptor trafficDescriptor,
+                boolean matchAllRuleAllowed,
+                IDataServiceCallback callback) {
+            DataService.this
+                    .mHandler
+                    .obtainMessage(
+                            4,
+                            slotIndex,
+                            0,
+                            new SetupDataCallRequest(
+                                    accessNetworkType,
+                                    dataProfile,
+                                    isRoaming,
+                                    allowRoaming,
+                                    reason,
+                                    linkProperties,
+                                    pduSessionId,
+                                    sliceInfo,
+                                    trafficDescriptor,
+                                    matchAllRuleAllowed,
+                                    callback))
+                    .sendToTarget();
         }
 
         @Override // android.telephony.data.IDataService
-        public void deactivateDataCall(int slotIndex, int cid, int reason, IDataServiceCallback callback) {
-            DataService.this.mHandler.obtainMessage(5, slotIndex, 0, new DeactivateDataCallRequest(cid, reason, callback)).sendToTarget();
+        public void deactivateDataCall(
+                int slotIndex, int cid, int reason, IDataServiceCallback callback) {
+            DataService.this
+                    .mHandler
+                    .obtainMessage(
+                            5, slotIndex, 0, new DeactivateDataCallRequest(cid, reason, callback))
+                    .sendToTarget();
         }
 
         @Override // android.telephony.data.IDataService
-        public void setInitialAttachApn(int slotIndex, DataProfile dataProfile, boolean isRoaming, IDataServiceCallback callback) {
-            DataService.this.mHandler.obtainMessage(6, slotIndex, 0, new SetInitialAttachApnRequest(dataProfile, isRoaming, callback)).sendToTarget();
+        public void setInitialAttachApn(
+                int slotIndex,
+                DataProfile dataProfile,
+                boolean isRoaming,
+                IDataServiceCallback callback) {
+            DataService.this
+                    .mHandler
+                    .obtainMessage(
+                            6,
+                            slotIndex,
+                            0,
+                            new SetInitialAttachApnRequest(dataProfile, isRoaming, callback))
+                    .sendToTarget();
         }
 
         @Override // android.telephony.data.IDataService
-        public void setDataProfile(int slotIndex, List<DataProfile> dps, boolean isRoaming, IDataServiceCallback callback) {
-            DataService.this.mHandler.obtainMessage(7, slotIndex, 0, new SetDataProfileRequest(dps, isRoaming, callback)).sendToTarget();
+        public void setDataProfile(
+                int slotIndex,
+                List<DataProfile> dps,
+                boolean isRoaming,
+                IDataServiceCallback callback) {
+            DataService.this
+                    .mHandler
+                    .obtainMessage(
+                            7, slotIndex, 0, new SetDataProfileRequest(dps, isRoaming, callback))
+                    .sendToTarget();
         }
 
         @Override // android.telephony.data.IDataService
@@ -677,12 +838,18 @@ public abstract class DataService extends Service {
         }
 
         @Override // android.telephony.data.IDataService
-        public void requestNetworkValidation(int slotIndex, int cid, IIntegerConsumer resultCodeCallback) {
+        public void requestNetworkValidation(
+                int slotIndex, int cid, IIntegerConsumer resultCodeCallback) {
             if (resultCodeCallback == null) {
                 DataService.this.loge("requestNetworkValidation: resultCodeCallback is null");
             } else {
-                ValidationRequest validationRequest = new ValidationRequest(cid, DataService.this.mHandlerExecutor, resultCodeCallback);
-                DataService.this.mHandler.obtainMessage(17, slotIndex, 0, validationRequest).sendToTarget();
+                ValidationRequest validationRequest =
+                        new ValidationRequest(
+                                cid, DataService.this.mHandlerExecutor, resultCodeCallback);
+                DataService.this
+                        .mHandler
+                        .obtainMessage(17, slotIndex, 0, validationRequest)
+                        .sendToTarget();
             }
         }
     }

@@ -2,6 +2,7 @@ package com.android.server.stats.pull;
 
 import android.util.Slog;
 import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,8 +13,10 @@ import java.util.regex.Pattern;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class IonMemoryUtil {
-    public static final Pattern ION_HEAP_SIZE_IN_BYTES = Pattern.compile("\n\\s*total\\s*(\\d+)\\s*\n");
-    public static final Pattern PROCESS_ION_HEAP_SIZE_IN_BYTES = Pattern.compile("\n\\s+\\S+\\s+(\\d+)\\s+(\\d+)");
+    public static final Pattern ION_HEAP_SIZE_IN_BYTES =
+            Pattern.compile("\n\\s*total\\s*(\\d+)\\s*\n");
+    public static final Pattern PROCESS_ION_HEAP_SIZE_IN_BYTES =
+            Pattern.compile("\n\\s+\\S+\\s+(\\d+)\\s+(\\d+)");
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IonAllocations {
@@ -30,15 +33,30 @@ public abstract class IonMemoryUtil {
                 return false;
             }
             IonAllocations ionAllocations = (IonAllocations) obj;
-            return this.pid == ionAllocations.pid && this.totalSizeInBytes == ionAllocations.totalSizeInBytes && this.count == ionAllocations.count && this.maxSizeInBytes == ionAllocations.maxSizeInBytes;
+            return this.pid == ionAllocations.pid
+                    && this.totalSizeInBytes == ionAllocations.totalSizeInBytes
+                    && this.count == ionAllocations.count
+                    && this.maxSizeInBytes == ionAllocations.maxSizeInBytes;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(this.pid), Long.valueOf(this.totalSizeInBytes), Integer.valueOf(this.count), Long.valueOf(this.maxSizeInBytes));
+            return Objects.hash(
+                    Integer.valueOf(this.pid),
+                    Long.valueOf(this.totalSizeInBytes),
+                    Integer.valueOf(this.count),
+                    Long.valueOf(this.maxSizeInBytes));
         }
 
         public final String toString() {
-            return "IonAllocations{pid=" + this.pid + ", totalSizeInBytes=" + this.totalSizeInBytes + ", count=" + this.count + ", maxSizeInBytes=" + this.maxSizeInBytes + '}';
+            return "IonAllocations{pid="
+                    + this.pid
+                    + ", totalSizeInBytes="
+                    + this.totalSizeInBytes
+                    + ", count="
+                    + this.count
+                    + ", maxSizeInBytes="
+                    + this.maxSizeInBytes
+                    + '}';
         }
     }
 

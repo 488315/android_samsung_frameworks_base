@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.Parcelable;
 import java.util.Arrays;
 
 /* loaded from: classes3.dex */
@@ -12,19 +11,21 @@ public final class SpeakerOutEnergyInfo implements Parcelable {
     private long[] mSpeakerMediaTimeMs;
     private long mTimestamp;
     private static final String TAG = SpeakerOutEnergyInfo.class.getSimpleName();
-    public static final Parcelable.Creator<SpeakerOutEnergyInfo> CREATOR = new Parcelable.Creator<SpeakerOutEnergyInfo>() { // from class: android.os.SpeakerOutEnergyInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SpeakerOutEnergyInfo createFromParcel(Parcel in) {
-            return new SpeakerOutEnergyInfo(in);
-        }
+    public static final Parcelable.Creator<SpeakerOutEnergyInfo> CREATOR =
+            new Parcelable.Creator<
+                    SpeakerOutEnergyInfo>() { // from class: android.os.SpeakerOutEnergyInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SpeakerOutEnergyInfo createFromParcel(Parcel in) {
+                    return new SpeakerOutEnergyInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SpeakerOutEnergyInfo[] newArray(int size) {
-            return new SpeakerOutEnergyInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SpeakerOutEnergyInfo[] newArray(int size) {
+                    return new SpeakerOutEnergyInfo[size];
+                }
+            };
 
     public SpeakerOutEnergyInfo(Parcel in) {
         this.mSpeakerMediaTimeMs = new long[16];
@@ -32,15 +33,22 @@ public final class SpeakerOutEnergyInfo implements Parcelable {
         readFromParcel(in);
     }
 
-    public SpeakerOutEnergyInfo(long timestamp, long[] speakerTimeMs, long[] callTimeMs, int energyUsed) {
+    public SpeakerOutEnergyInfo(
+            long timestamp, long[] speakerTimeMs, long[] callTimeMs, int energyUsed) {
         this.mSpeakerMediaTimeMs = new long[16];
         this.mSpeakerCallTimeMs = new long[16];
         this.mTimestamp = timestamp;
         if (speakerTimeMs != null) {
-            System.arraycopy(speakerTimeMs, 0, this.mSpeakerMediaTimeMs, 0, Math.min(speakerTimeMs.length, 16));
+            System.arraycopy(
+                    speakerTimeMs,
+                    0,
+                    this.mSpeakerMediaTimeMs,
+                    0,
+                    Math.min(speakerTimeMs.length, 16));
         }
         if (callTimeMs != null) {
-            System.arraycopy(callTimeMs, 0, this.mSpeakerCallTimeMs, 0, Math.min(callTimeMs.length, 16));
+            System.arraycopy(
+                    callTimeMs, 0, this.mSpeakerCallTimeMs, 0, Math.min(callTimeMs.length, 16));
         }
         this.mEnergyUsed = energyUsed;
     }
@@ -87,7 +95,13 @@ public final class SpeakerOutEnergyInfo implements Parcelable {
     }
 
     public String toString() {
-        return "SpeakerOutEnergyInfo{mTimestamp=" + this.mTimestamp + ", mSpeakerMediaTimeMs=" + Arrays.toString(this.mSpeakerMediaTimeMs) + ", mSpeakerCallTimeMs=" + Arrays.toString(this.mSpeakerCallTimeMs) + '}';
+        return "SpeakerOutEnergyInfo{mTimestamp="
+                + this.mTimestamp
+                + ", mSpeakerMediaTimeMs="
+                + Arrays.toString(this.mSpeakerMediaTimeMs)
+                + ", mSpeakerCallTimeMs="
+                + Arrays.toString(this.mSpeakerCallTimeMs)
+                + '}';
     }
 
     @Override // android.os.Parcelable

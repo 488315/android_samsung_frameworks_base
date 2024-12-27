@@ -1,11 +1,11 @@
 package com.android.server.input;
 
-import com.android.server.input.BatteryController;
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryController$$ExternalSyntheticLambda1 implements Predicate {
+public final /* synthetic */ class BatteryController$$ExternalSyntheticLambda1
+        implements Predicate {
     public final /* synthetic */ int $r8$classId;
 
     @Override // java.util.function.Predicate

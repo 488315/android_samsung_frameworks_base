@@ -6,6 +6,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
+
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -151,7 +152,8 @@ public abstract class BaseSurfaceHolder implements SurfaceHolder {
 
     private final Canvas internalLockCanvas(Rect dirty, boolean hardware) {
         if (this.mType == 3) {
-            throw new SurfaceHolder.BadSurfaceTypeException("Surface type is SURFACE_TYPE_PUSH_BUFFERS");
+            throw new SurfaceHolder.BadSurfaceTypeException(
+                    "Surface type is SURFACE_TYPE_PUSH_BUFFERS");
         }
         this.mSurfaceLock.lock();
         Canvas c = null;

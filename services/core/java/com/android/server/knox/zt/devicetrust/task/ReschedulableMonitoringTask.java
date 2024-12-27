@@ -1,7 +1,9 @@
 package com.android.server.knox.zt.devicetrust.task;
 
 import com.android.server.knox.zt.devicetrust.EndpointMonitorImpl;
+
 import com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
@@ -13,7 +15,15 @@ public abstract class ReschedulableMonitoringTask extends SchedulableMonitoringT
     public volatile boolean mIsStandby;
     public final TaskRescheduler mTaskRescheduler;
 
-    public ReschedulableMonitoringTask(int i, int i2, int i3, int i4, int i5, IEndpointMonitorListener iEndpointMonitorListener, Predicate predicate, EndpointMonitorImpl.Injector injector) {
+    public ReschedulableMonitoringTask(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            IEndpointMonitorListener iEndpointMonitorListener,
+            Predicate predicate,
+            EndpointMonitorImpl.Injector injector) {
         super(i, i2, i3, i4, i5, iEndpointMonitorListener, predicate, injector);
         this.mTaskRescheduler = injector.mTaskRescheduler;
         this.mFingerprint = TaskRescheduler.generateFingerprint(i, i2, i3, i4, i5);

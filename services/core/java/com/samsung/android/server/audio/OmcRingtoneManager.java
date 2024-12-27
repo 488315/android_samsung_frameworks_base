@@ -5,7 +5,9 @@ import android.os.SemSystemProperties;
 import android.os.Trace;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -35,19 +37,24 @@ public final class OmcRingtoneManager {
     public final void getExcludedRingtonesFromCsc(int i, String str) {
         String m$1;
         if (i == 1) {
-            m$1 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, "/media/audio/ringtones/exclude_ringtones");
+            m$1 =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                            str, "/media/audio/ringtones/exclude_ringtones");
             if (((ArrayList) this.mExcludeRingtones).size() != 0) {
                 ((ArrayList) this.mExcludeRingtones).clear();
             }
         } else {
-            m$1 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, "/media/audio/notifications/exclude_notifications");
+            m$1 =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                            str, "/media/audio/notifications/exclude_notifications");
             if (((ArrayList) this.mExcludeNotifications).size() != 0) {
                 ((ArrayList) this.mExcludeNotifications).clear();
             }
         }
         File file = new File(m$1);
         if (!file.exists()) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "There is no sounds(type:", ") list to remove", "AS.OmcRingtoneManager");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i, "There is no sounds(type:", ") list to remove", "AS.OmcRingtoneManager");
             return;
         }
         try {

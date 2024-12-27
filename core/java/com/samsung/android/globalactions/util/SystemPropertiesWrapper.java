@@ -5,8 +5,11 @@ import android.os.Build;
 import android.os.SemSystemProperties;
 import android.os.SystemProperties;
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.R;
+
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -42,11 +45,19 @@ public class SystemPropertiesWrapper {
     }
 
     public boolean isDataModeSupportedSalesCode() {
-        return List.of("GLB", "XTC", "SMA", "XTE").contains(SystemProperties.get("ro.csc.sales_code", KeyProperties.DIGEST_NONE).trim().toUpperCase());
+        return List.of("GLB", "XTC", "SMA", "XTE")
+                .contains(
+                        SystemProperties.get("ro.csc.sales_code", KeyProperties.DIGEST_NONE)
+                                .trim()
+                                .toUpperCase());
     }
 
     public boolean isForceRestartMessageSupportedSalesCode() {
-        return List.of("CHC", "CHM", "CHN", "CBK", "CTC", "CHU", "BNZ").contains(SystemProperties.get("ro.csc.sales_code", KeyProperties.DIGEST_NONE).trim().toUpperCase());
+        return List.of("CHC", "CHM", "CHN", "CBK", "CTC", "CHU", "BNZ")
+                .contains(
+                        SystemProperties.get("ro.csc.sales_code", KeyProperties.DIGEST_NONE)
+                                .trim()
+                                .toUpperCase());
     }
 
     public boolean isBrazilianCountryISO() {

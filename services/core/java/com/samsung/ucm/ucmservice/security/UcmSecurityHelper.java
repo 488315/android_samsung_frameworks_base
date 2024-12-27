@@ -7,10 +7,13 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Binder;
 import android.util.Log;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.ServiceKeeper;
 import com.android.server.enterprise.RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.ucm.core.UniversalCredentialUtil;
+
 import java.util.HashSet;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -51,14 +54,30 @@ public final class UcmSecurityHelper {
     }
 
     public final void checkCallerPermissionFor(String str) {
-        Log.i("UcmService.SecurityHelper", "checkCallerPermissionFor is called for method [" + str + "]");
+        Log.i(
+                "UcmService.SecurityHelper",
+                "checkCallerPermissionFor is called for method [" + str + "]");
         if (Binder.getCallingUid() == 0) {
             return;
         }
-        if (ServiceKeeper.isAuthorized(Binder.getCallingPid(), Binder.getCallingUid(), this.mContext, "CredentialManagerService", str) == 0) {
+        if (ServiceKeeper.isAuthorized(
+                        Binder.getCallingPid(),
+                        Binder.getCallingUid(),
+                        this.mContext,
+                        "CredentialManagerService",
+                        str)
+                == 0) {
             return;
         }
-        SecurityException securityException = new SecurityException("Security Exception Occurred while pid[" + Binder.getCallingPid() + "] with uid[" + Binder.getCallingUid() + "] trying to access methodName [" + str + "] in [CredentialManagerService] service");
+        SecurityException securityException =
+                new SecurityException(
+                        "Security Exception Occurred while pid["
+                                + Binder.getCallingPid()
+                                + "] with uid["
+                                + Binder.getCallingUid()
+                                + "] trying to access methodName ["
+                                + str
+                                + "] in [CredentialManagerService] service");
         StringBuilder sb = new StringBuilder("The exception occurs ");
         sb.append(securityException.getMessage());
         Log.e("UcmService.SecurityHelper", sb.toString());
@@ -68,7 +87,8 @@ public final class UcmSecurityHelper {
     public final boolean isCallerSystemUI() {
         try {
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), "UcmService.SecurityHelper");
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), "UcmService.SecurityHelper");
         }
         if (this.mContext.getPackageManager().checkSignatures(1000, Binder.getCallingUid()) != 0) {
             Log.e("UcmService.SecurityHelper", "The caller is not qualified.");
@@ -87,7 +107,8 @@ public final class UcmSecurityHelper {
         Signature[] signatureArr;
         try {
             PackageInfo packageInfo = this.mPm.getPackageInfo(str, 64L, 0);
-            PackageInfo packageInfo2 = this.mContext.getPackageManager().getPackageInfo("android", 64);
+            PackageInfo packageInfo2 =
+                    this.mContext.getPackageManager().getPackageInfo("android", 64);
             if (packageInfo == null || (signatureArr = packageInfo.signatures) == null) {
                 return false;
             }
@@ -96,7 +117,8 @@ public final class UcmSecurityHelper {
             Log.e("UcmService.SecurityHelper", "isSystemApp exception e -" + e);
             return false;
         } catch (Exception e2) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e2, "isSystemApp exception e -", "UcmService.SecurityHelper");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e2, "isSystemApp exception e -", "UcmService.SecurityHelper");
             return false;
         }
     }

@@ -3,10 +3,10 @@ package android.content.pm.parsing.result;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.parsing.result.ParseInput;
 import android.os.ServiceManager;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.internal.compat.IPlatformCompat;
 import com.android.internal.util.CollectionUtils;
 
@@ -27,30 +27,42 @@ public class ParseTypeImpl implements ParseInput, ParseResult<Object> {
     private int mTargetSdkVersion = -1;
 
     public static ParseTypeImpl forParsingWithoutPlatformCompat() {
-        return new ParseTypeImpl(new ParseInput.Callback() { // from class: android.content.pm.parsing.result.ParseTypeImpl$$ExternalSyntheticLambda1
-            @Override // android.content.pm.parsing.result.ParseInput.Callback
-            public final boolean isChangeEnabled(long j, String str, int i) {
-                return ParseTypeImpl.lambda$forParsingWithoutPlatformCompat$0(j, str, i);
-            }
-        });
+        return new ParseTypeImpl(
+                new ParseInput.Callback() { // from class:
+                    // android.content.pm.parsing.result.ParseTypeImpl$$ExternalSyntheticLambda1
+                    @Override // android.content.pm.parsing.result.ParseInput.Callback
+                    public final boolean isChangeEnabled(long j, String str, int i) {
+                        return ParseTypeImpl.lambda$forParsingWithoutPlatformCompat$0(j, str, i);
+                    }
+                });
     }
 
-    static /* synthetic */ boolean lambda$forParsingWithoutPlatformCompat$0(long changeId, String packageName, int targetSdkVersion) {
+    static /* synthetic */ boolean lambda$forParsingWithoutPlatformCompat$0(
+            long changeId, String packageName, int targetSdkVersion) {
         int gateSdkVersion = ParseInput.DeferredError.getTargetSdkForChange(changeId);
         return gateSdkVersion != -1 && targetSdkVersion > gateSdkVersion;
     }
 
     public static ParseTypeImpl forDefaultParsing() {
-        final IPlatformCompat platformCompat = IPlatformCompat.Stub.asInterface(ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
-        return new ParseTypeImpl(new ParseInput.Callback() { // from class: android.content.pm.parsing.result.ParseTypeImpl$$ExternalSyntheticLambda0
-            @Override // android.content.pm.parsing.result.ParseInput.Callback
-            public final boolean isChangeEnabled(long j, String str, int i) {
-                return ParseTypeImpl.lambda$forDefaultParsing$1(IPlatformCompat.this, j, str, i);
-            }
-        });
+        final IPlatformCompat platformCompat =
+                IPlatformCompat.Stub.asInterface(
+                        ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
+        return new ParseTypeImpl(
+                new ParseInput.Callback() { // from class:
+                    // android.content.pm.parsing.result.ParseTypeImpl$$ExternalSyntheticLambda0
+                    @Override // android.content.pm.parsing.result.ParseInput.Callback
+                    public final boolean isChangeEnabled(long j, String str, int i) {
+                        return ParseTypeImpl.lambda$forDefaultParsing$1(
+                                IPlatformCompat.this, j, str, i);
+                    }
+                });
     }
 
-    static /* synthetic */ boolean lambda$forDefaultParsing$1(IPlatformCompat platformCompat, long changeId, String packageName, int targetSdkVersion) {
+    static /* synthetic */ boolean lambda$forDefaultParsing$1(
+            IPlatformCompat platformCompat,
+            long changeId,
+            String packageName,
+            int targetSdkVersion) {
         ApplicationInfo appInfo = new ApplicationInfo();
         appInfo.packageName = packageName;
         appInfo.targetSdkVersion = targetSdkVersion;
@@ -82,7 +94,10 @@ public class ParseTypeImpl implements ParseInput, ParseResult<Object> {
     @Override // android.content.pm.parsing.result.ParseInput
     public <ResultType> ParseResult<ResultType> success(ResultType result) {
         if (this.mErrorCode != 1) {
-            Slog.wtf(TAG, "Cannot set to success after set to error, was " + this.mErrorMessage, this.mException);
+            Slog.wtf(
+                    TAG,
+                    "Cannot set to success after set to error, was " + this.mErrorMessage,
+                    this.mException);
         }
         this.mResult = result;
         return this;
@@ -91,10 +106,12 @@ public class ParseTypeImpl implements ParseInput, ParseResult<Object> {
     @Override // android.content.pm.parsing.result.ParseInput
     public ParseResult<?> deferError(String parseError, long deferredError) {
         if (this.mTargetSdkVersion != -1) {
-            if (this.mDeferredErrors != null && this.mDeferredErrors.containsKey(Long.valueOf(deferredError))) {
+            if (this.mDeferredErrors != null
+                    && this.mDeferredErrors.containsKey(Long.valueOf(deferredError))) {
                 return success(null);
             }
-            if (this.mCallback.isChangeEnabled(deferredError, this.mPackageName, this.mTargetSdkVersion)) {
+            if (this.mCallback.isChangeEnabled(
+                    deferredError, this.mPackageName, this.mTargetSdkVersion)) {
                 return error(parseError);
             }
             if (this.mDeferredErrors == null) {
@@ -118,7 +135,8 @@ public class ParseTypeImpl implements ParseInput, ParseResult<Object> {
         for (int index = size - 1; index >= 0; index--) {
             long changeId = this.mDeferredErrors.keyAt(index).longValue();
             String errorMessage = this.mDeferredErrors.valueAt(index);
-            if (this.mCallback.isChangeEnabled(changeId, this.mPackageName, this.mTargetSdkVersion)) {
+            if (this.mCallback.isChangeEnabled(
+                    changeId, this.mPackageName, this.mTargetSdkVersion)) {
                 return error(errorMessage);
             }
             this.mDeferredErrors.setValueAt(index, null);
@@ -148,11 +166,15 @@ public class ParseTypeImpl implements ParseInput, ParseResult<Object> {
 
     @Override // android.content.pm.parsing.result.ParseInput
     public <ResultType> ParseResult<ResultType> error(ParseResult<?> intentResult) {
-        return error(intentResult.getErrorCode(), intentResult.getErrorMessage(), intentResult.getException());
+        return error(
+                intentResult.getErrorCode(),
+                intentResult.getErrorMessage(),
+                intentResult.getException());
     }
 
     @Override // android.content.pm.parsing.result.ParseInput
-    public <ResultType> ParseResult<ResultType> error(int errorCode, String errorMessage, Exception exception) {
+    public <ResultType> ParseResult<ResultType> error(
+            int errorCode, String errorMessage, Exception exception) {
         this.mErrorCode = errorCode;
         this.mErrorMessage = errorMessage;
         this.mException = exception;
@@ -194,7 +216,8 @@ public class ParseTypeImpl implements ParseInput, ParseResult<Object> {
         return this.mPackageNameForAudit;
     }
 
-    @Override // android.content.pm.parsing.result.ParseInput, android.content.pm.parsing.result.ParseResult
+    @Override // android.content.pm.parsing.result.ParseInput,
+    // android.content.pm.parsing.result.ParseResult
     public void setPackageNameForAudit(String packageName) {
         this.mPackageNameForAudit = packageName;
     }

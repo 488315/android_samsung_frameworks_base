@@ -25,22 +25,23 @@ public final class FontWriter {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:19:0x0064, code lost:
-    
-        if (r11 != null) goto L22;
-     */
+
+       if (r11 != null) goto L22;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0066, code lost:
-    
-        r11.close();
-     */
+
+       r11.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:48:0x0097, code lost:
-    
-        if (r11 == null) goto L41;
-     */
+
+       if (r11 == null) goto L41;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void copyFontFile(java.io.File r12, java.io.InputStream r13, java.lang.String r14) {
+    public final void copyFontFile(
+            java.io.File r12, java.io.InputStream r13, java.lang.String r14) {
         /*
             r11 = this;
             java.lang.String r0 = "copyFontFile : bos.close() error"
@@ -160,21 +161,24 @@ public final class FontWriter {
         Lcd:
             throw r12
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.general.font.FontWriter.copyFontFile(java.io.File, java.io.InputStream, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.general.font.FontWriter.copyFontFile(java.io.File,"
+                    + " java.io.InputStream, java.lang.String):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:14:0x006a, code lost:
-    
-        if (r7 != null) goto L12;
-     */
+
+       if (r7 != null) goto L12;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:15:0x006c, code lost:
-    
-        r7.close();
-     */
+
+       r7.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x008a, code lost:
-    
-        if (r7 == null) goto L30;
-     */
+
+       if (r7 == null) goto L30;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r7v5, types: [java.io.FileOutputStream] */
     /* JADX WARN: Type inference failed for: r7v7 */
@@ -278,6 +282,8 @@ public final class FontWriter {
         Lad:
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.general.font.FontWriter.writeLoc(java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.general.font.FontWriter.writeLoc(java.lang.String):void");
     }
 }

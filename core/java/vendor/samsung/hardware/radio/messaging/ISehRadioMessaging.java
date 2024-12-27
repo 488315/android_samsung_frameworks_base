@@ -5,12 +5,11 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import vendor.samsung.hardware.radio.messaging.ISehRadioMessagingIndication;
-import vendor.samsung.hardware.radio.messaging.ISehRadioMessagingResponse;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioMessaging extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$messaging$ISehRadioMessaging".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$messaging$ISehRadioMessaging".replace('$', '.');
     public static final String HASH = "c1a8596db57e3bcc8e4e86f1eb7b2df7839ca140";
     public static final int VERSION = 1;
 
@@ -34,50 +33,48 @@ public interface ISehRadioMessaging extends IInterface {
 
     void sendSms(int i, SehGsmSmsMessage sehGsmSmsMessage) throws RemoteException;
 
-    void setResponseFunctions(ISehRadioMessagingResponse iSehRadioMessagingResponse, ISehRadioMessagingIndication iSehRadioMessagingIndication) throws RemoteException;
+    void setResponseFunctions(
+            ISehRadioMessagingResponse iSehRadioMessagingResponse,
+            ISehRadioMessagingIndication iSehRadioMessagingIndication)
+            throws RemoteException;
 
     void writeSmsToSim(int i, SehSimMsgArgs sehSimMsgArgs) throws RemoteException;
 
     public static class Default implements ISehRadioMessaging {
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-        public void getCellBroadcastConfig(int serial) throws RemoteException {
-        }
+        public void getCellBroadcastConfig(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-        public void getImsRegistrationState(int serial) throws RemoteException {
-        }
+        public void getImsRegistrationState(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-        public void getStoredMsgCountFromSim(int serial) throws RemoteException {
-        }
+        public void getStoredMsgCountFromSim(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-        public void readSmsFromSim(int serial, int index) throws RemoteException {
-        }
+        public void readSmsFromSim(int serial, int index) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-        public void sendCdmaSms(int serial, SehCdmaSmsMessage sms) throws RemoteException {
-        }
+        public void sendCdmaSms(int serial, SehCdmaSmsMessage sms) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-        public void sendCdmaSmsExpectMore(int serial, SehCdmaSmsMessage sms) throws RemoteException {
-        }
+        public void sendCdmaSmsExpectMore(int serial, SehCdmaSmsMessage sms)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-        public void sendSMSExpectMore(int serial, SehGsmSmsMessage message) throws RemoteException {
-        }
+        public void sendSMSExpectMore(int serial, SehGsmSmsMessage message)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-        public void sendSms(int serial, SehGsmSmsMessage message) throws RemoteException {
-        }
+        public void sendSms(int serial, SehGsmSmsMessage message) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-        public void setResponseFunctions(ISehRadioMessagingResponse radioMessagingResponse, ISehRadioMessagingIndication radioMessagingIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                ISehRadioMessagingResponse radioMessagingResponse,
+                ISehRadioMessagingIndication radioMessagingIndication)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-        public void writeSmsToSim(int serial, SehSimMsgArgs arg) throws RemoteException {
-        }
+        public void writeSmsToSim(int serial, SehSimMsgArgs arg) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
         public int getInterfaceVersion() {
@@ -95,7 +92,7 @@ public interface ISehRadioMessaging extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioMessaging {
+    public abstract static class Stub extends Binder implements ISehRadioMessaging {
         static final int TRANSACTION_getCellBroadcastConfig = 1;
         static final int TRANSACTION_getImsRegistrationState = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -131,7 +128,8 @@ public interface ISehRadioMessaging extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -174,38 +172,45 @@ public interface ISehRadioMessaging extends IInterface {
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    SehCdmaSmsMessage _arg12 = (SehCdmaSmsMessage) data.readTypedObject(SehCdmaSmsMessage.CREATOR);
+                    SehCdmaSmsMessage _arg12 =
+                            (SehCdmaSmsMessage) data.readTypedObject(SehCdmaSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendCdmaSms(_arg05, _arg12);
                     return true;
                 case 6:
                     int _arg06 = data.readInt();
-                    SehCdmaSmsMessage _arg13 = (SehCdmaSmsMessage) data.readTypedObject(SehCdmaSmsMessage.CREATOR);
+                    SehCdmaSmsMessage _arg13 =
+                            (SehCdmaSmsMessage) data.readTypedObject(SehCdmaSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendCdmaSmsExpectMore(_arg06, _arg13);
                     return true;
                 case 7:
                     int _arg07 = data.readInt();
-                    SehGsmSmsMessage _arg14 = (SehGsmSmsMessage) data.readTypedObject(SehGsmSmsMessage.CREATOR);
+                    SehGsmSmsMessage _arg14 =
+                            (SehGsmSmsMessage) data.readTypedObject(SehGsmSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendSMSExpectMore(_arg07, _arg14);
                     return true;
                 case 8:
                     int _arg08 = data.readInt();
-                    SehGsmSmsMessage _arg15 = (SehGsmSmsMessage) data.readTypedObject(SehGsmSmsMessage.CREATOR);
+                    SehGsmSmsMessage _arg15 =
+                            (SehGsmSmsMessage) data.readTypedObject(SehGsmSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendSms(_arg08, _arg15);
                     return true;
                 case 9:
-                    ISehRadioMessagingResponse _arg09 = ISehRadioMessagingResponse.Stub.asInterface(data.readStrongBinder());
-                    ISehRadioMessagingIndication _arg16 = ISehRadioMessagingIndication.Stub.asInterface(data.readStrongBinder());
+                    ISehRadioMessagingResponse _arg09 =
+                            ISehRadioMessagingResponse.Stub.asInterface(data.readStrongBinder());
+                    ISehRadioMessagingIndication _arg16 =
+                            ISehRadioMessagingIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg09, _arg16);
                     reply.writeNoException();
                     return true;
                 case 10:
                     int _arg010 = data.readInt();
-                    SehSimMsgArgs _arg17 = (SehSimMsgArgs) data.readTypedObject(SehSimMsgArgs.CREATOR);
+                    SehSimMsgArgs _arg17 =
+                            (SehSimMsgArgs) data.readTypedObject(SehSimMsgArgs.CREATOR);
                     data.enforceNoDataAvail();
                     writeSmsToSim(_arg010, _arg17);
                     return true;
@@ -240,7 +245,8 @@ public interface ISehRadioMessaging extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getCellBroadcastConfig is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCellBroadcastConfig is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -255,7 +261,8 @@ public interface ISehRadioMessaging extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getImsRegistrationState is unimplemented.");
+                        throw new RemoteException(
+                                "Method getImsRegistrationState is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -270,7 +277,8 @@ public interface ISehRadioMessaging extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getStoredMsgCountFromSim is unimplemented.");
+                        throw new RemoteException(
+                                "Method getStoredMsgCountFromSim is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -310,7 +318,8 @@ public interface ISehRadioMessaging extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-            public void sendCdmaSmsExpectMore(int serial, SehCdmaSmsMessage sms) throws RemoteException {
+            public void sendCdmaSmsExpectMore(int serial, SehCdmaSmsMessage sms)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -326,7 +335,8 @@ public interface ISehRadioMessaging extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-            public void sendSMSExpectMore(int serial, SehGsmSmsMessage message) throws RemoteException {
+            public void sendSMSExpectMore(int serial, SehGsmSmsMessage message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -358,7 +368,10 @@ public interface ISehRadioMessaging extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
-            public void setResponseFunctions(ISehRadioMessagingResponse radioMessagingResponse, ISehRadioMessagingIndication radioMessagingIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    ISehRadioMessagingResponse radioMessagingResponse,
+                    ISehRadioMessagingIndication radioMessagingIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

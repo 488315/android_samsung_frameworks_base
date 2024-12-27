@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextAutoBrightnessAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextAutoBrightnessAttribute> CREATOR = new Parcelable.Creator<SemContextAutoBrightnessAttribute>() { // from class: com.samsung.android.hardware.context.SemContextAutoBrightnessAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextAutoBrightnessAttribute createFromParcel(Parcel in) {
-            return new SemContextAutoBrightnessAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextAutoBrightnessAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextAutoBrightnessAttribute>() { // from class:
+                                                           // com.samsung.android.hardware.context.SemContextAutoBrightnessAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextAutoBrightnessAttribute createFromParcel(Parcel in) {
+                    return new SemContextAutoBrightnessAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextAutoBrightnessAttribute[] newArray(int size) {
-            return new SemContextAutoBrightnessAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextAutoBrightnessAttribute[] newArray(int size) {
+                    return new SemContextAutoBrightnessAttribute[size];
+                }
+            };
     private static final int MODE_CONFIGURATION = 1;
     private static final int MODE_DEVICE_MODE = 0;
     private static final String TAG = "SemContextAutoBrightnessAttribute";

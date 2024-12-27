@@ -2,6 +2,7 @@ package android.net;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -13,28 +14,30 @@ public class InterfaceConfiguration implements Parcelable {
     private HashSet<String> mFlags = new HashSet<>();
     private String mHwAddr;
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
-    public static final Parcelable.Creator<InterfaceConfiguration> CREATOR = new Parcelable.Creator<InterfaceConfiguration>() { // from class: android.net.InterfaceConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InterfaceConfiguration createFromParcel(Parcel in) {
-            InterfaceConfiguration info = new InterfaceConfiguration();
-            info.mHwAddr = in.readString();
-            if (in.readByte() == 1) {
-                info.mAddr = (LinkAddress) in.readParcelable(null);
-            }
-            int size = in.readInt();
-            for (int i = 0; i < size; i++) {
-                info.mFlags.add(in.readString());
-            }
-            return info;
-        }
+    public static final Parcelable.Creator<InterfaceConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    InterfaceConfiguration>() { // from class: android.net.InterfaceConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InterfaceConfiguration createFromParcel(Parcel in) {
+                    InterfaceConfiguration info = new InterfaceConfiguration();
+                    info.mHwAddr = in.readString();
+                    if (in.readByte() == 1) {
+                        info.mAddr = (LinkAddress) in.readParcelable(null);
+                    }
+                    int size = in.readInt();
+                    for (int i = 0; i < size; i++) {
+                        info.mFlags.add(in.readString());
+                    }
+                    return info;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InterfaceConfiguration[] newArray(int size) {
-            return new InterfaceConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InterfaceConfiguration[] newArray(int size) {
+                    return new InterfaceConfiguration[size];
+                }
+            };
 
     public String toString() {
         StringBuilder builder = new StringBuilder();

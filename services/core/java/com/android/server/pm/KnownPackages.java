@@ -1,6 +1,7 @@
 package com.android.server.pm;
 
 import android.text.TextUtils;
+
 import com.android.internal.util.ArrayUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -23,7 +24,23 @@ public final class KnownPackages {
     public final String mSystemTextClassifierPackageName;
     public final String mWearableSensingPackage;
 
-    public KnownPackages(DefaultAppProvider defaultAppProvider, String str, String str2, String str3, String[] strArr, String str4, String str5, String str6, String str7, String str8, String str9, String str10, String str11, String str12, String str13, String str14) {
+    public KnownPackages(
+            DefaultAppProvider defaultAppProvider,
+            String str,
+            String str2,
+            String str3,
+            String[] strArr,
+            String str4,
+            String str5,
+            String str6,
+            String str7,
+            String str8,
+            String str9,
+            String str10,
+            String str11,
+            String str12,
+            String str13,
+            String str14) {
         this.mDefaultAppProvider = defaultAppProvider;
         this.mRequiredInstallerPackage = str;
         this.mRequiredUninstallerPackage = str2;
@@ -45,7 +62,7 @@ public final class KnownPackages {
     public final String[] getKnownPackageNames(Computer computer, int i, int i2) {
         switch (i) {
             case 0:
-                return new String[]{"android"};
+                return new String[] {"android"};
             case 1:
                 return computer.filterOnlySystemPackages(this.mSetupWizardPackage);
             case 2:
@@ -55,9 +72,12 @@ public final class KnownPackages {
             case 4:
                 return computer.filterOnlySystemPackages(this.mRequiredVerifierPackages);
             case 5:
-                return new String[]{this.mDefaultAppProvider.getRoleHolder(i2, "android.app.role.BROWSER")};
+                return new String[] {
+                    this.mDefaultAppProvider.getRoleHolder(i2, "android.app.role.BROWSER")
+                };
             case 6:
-                return computer.filterOnlySystemPackages(this.mDefaultTextClassifierPackage, this.mSystemTextClassifierPackageName);
+                return computer.filterOnlySystemPackages(
+                        this.mDefaultTextClassifierPackage, this.mSystemTextClassifierPackageName);
             case 7:
                 return computer.filterOnlySystemPackages(this.mRequiredPermissionControllerPackage);
             case 8:
@@ -77,7 +97,9 @@ public final class KnownPackages {
                 return computer.filterOnlySystemPackages("com.android.companiondevicemanager");
             case 16:
                 String str = this.mRetailDemoPackage;
-                return TextUtils.isEmpty(str) ? (String[]) ArrayUtils.emptyArray(String.class) : new String[]{str};
+                return TextUtils.isEmpty(str)
+                        ? (String[]) ArrayUtils.emptyArray(String.class)
+                        : new String[] {str};
             case 17:
                 return computer.filterOnlySystemPackages(this.mRecentsPackage);
             case 18:

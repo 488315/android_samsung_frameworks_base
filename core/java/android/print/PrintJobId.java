@@ -2,24 +2,27 @@ package android.print;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.UUID;
 
 /* loaded from: classes3.dex */
 public final class PrintJobId implements Parcelable {
-    public static final Parcelable.Creator<PrintJobId> CREATOR = new Parcelable.Creator<PrintJobId>() { // from class: android.print.PrintJobId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrintJobId createFromParcel(Parcel parcel) {
-            return new PrintJobId((String) Preconditions.checkNotNull(parcel.readString()));
-        }
+    public static final Parcelable.Creator<PrintJobId> CREATOR =
+            new Parcelable.Creator<PrintJobId>() { // from class: android.print.PrintJobId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrintJobId createFromParcel(Parcel parcel) {
+                    return new PrintJobId((String) Preconditions.checkNotNull(parcel.readString()));
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrintJobId[] newArray(int size) {
-            return new PrintJobId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrintJobId[] newArray(int size) {
+                    return new PrintJobId[size];
+                }
+            };
     private final String mValue;
 
     public PrintJobId() {

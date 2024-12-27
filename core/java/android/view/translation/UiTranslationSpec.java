@@ -7,19 +7,22 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class UiTranslationSpec implements Parcelable {
-    public static final Parcelable.Creator<UiTranslationSpec> CREATOR = new Parcelable.Creator<UiTranslationSpec>() { // from class: android.view.translation.UiTranslationSpec.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiTranslationSpec[] newArray(int size) {
-            return new UiTranslationSpec[size];
-        }
+    public static final Parcelable.Creator<UiTranslationSpec> CREATOR =
+            new Parcelable.Creator<
+                    UiTranslationSpec>() { // from class:
+                                           // android.view.translation.UiTranslationSpec.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiTranslationSpec[] newArray(int size) {
+                    return new UiTranslationSpec[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiTranslationSpec createFromParcel(Parcel in) {
-            return new UiTranslationSpec(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiTranslationSpec createFromParcel(Parcel in) {
+                    return new UiTranslationSpec(in);
+                }
+            };
     private boolean mShouldPadContentForCompat;
 
     public boolean shouldPadContentForCompat() {
@@ -32,7 +35,9 @@ public final class UiTranslationSpec implements Parcelable {
     }
 
     public String toString() {
-        return "UiTranslationSpec { shouldPadContentForCompat = " + this.mShouldPadContentForCompat + " }";
+        return "UiTranslationSpec { shouldPadContentForCompat = "
+                + this.mShouldPadContentForCompat
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -95,12 +100,12 @@ public final class UiTranslationSpec implements Parcelable {
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 2) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

@@ -11,7 +11,11 @@ public final class SourceStampVerificationResult {
     private final boolean mPresent;
     private final boolean mVerified;
 
-    private SourceStampVerificationResult(boolean present, boolean verified, Certificate certificate, List<? extends Certificate> certificateLineage) {
+    private SourceStampVerificationResult(
+            boolean present,
+            boolean verified,
+            Certificate certificate,
+            List<? extends Certificate> certificateLineage) {
         this.mPresent = present;
         this.mVerified = verified;
         this.mCertificate = certificate;
@@ -38,7 +42,8 @@ public final class SourceStampVerificationResult {
         return new SourceStampVerificationResult(false, false, null, Collections.emptyList());
     }
 
-    public static SourceStampVerificationResult verified(Certificate certificate, List<? extends Certificate> certificateLineage) {
+    public static SourceStampVerificationResult verified(
+            Certificate certificate, List<? extends Certificate> certificateLineage) {
         return new SourceStampVerificationResult(true, true, certificate, certificateLineage);
     }
 

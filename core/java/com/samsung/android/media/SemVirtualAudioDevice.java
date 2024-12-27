@@ -23,8 +23,10 @@ public class SemVirtualAudioDevice {
         this.mAudioManager = (AudioManager) context.getSystemService("audio");
     }
 
-    public synchronized AudioRecord connectVirtualAudioOutputDevice(AudioFormat audioFormat, int[] appUids, int[] targetUsages, boolean allowRender) {
-        AudioMixingRule.Builder mixingRuleBuilder = new AudioMixingRule.Builder().setTargetMixRole(0);
+    public synchronized AudioRecord connectVirtualAudioOutputDevice(
+            AudioFormat audioFormat, int[] appUids, int[] targetUsages, boolean allowRender) {
+        AudioMixingRule.Builder mixingRuleBuilder =
+                new AudioMixingRule.Builder().setTargetMixRole(0);
         int routeFlags = allowRender ? 3 : 2;
         if (appUids.length == 0) {
             throw new IllegalArgumentException("Invalid app uid array size");
@@ -34,12 +36,17 @@ public class SemVirtualAudioDevice {
         }
         if (targetUsages != null) {
             for (int usage : targetUsages) {
-                AudioAttributes ruleAttribute = new AudioAttributes.Builder().setUsage(usage).build();
+                AudioAttributes ruleAttribute =
+                        new AudioAttributes.Builder().setUsage(usage).build();
                 mixingRuleBuilder.addMixRule(1, ruleAttribute);
             }
         }
         mixingRuleBuilder.voiceCommunicationCaptureAllowed(true);
-        AudioMix audioRecordMix = new AudioMix.Builder(mixingRuleBuilder.build()).setFormat(audioFormat).setRouteFlags(routeFlags).build();
+        AudioMix audioRecordMix =
+                new AudioMix.Builder(mixingRuleBuilder.build())
+                        .setFormat(audioFormat)
+                        .setRouteFlags(routeFlags)
+                        .build();
         resetAudioPolicy();
         this.mAudioPolicy = new AudioPolicy.Builder(this.mContext).addMix(audioRecordMix).build();
         if (this.mAudioManager.registerAudioPolicy(this.mAudioPolicy) == -1) {
@@ -48,8 +55,10 @@ public class SemVirtualAudioDevice {
         return this.mAudioPolicy.createAudioRecordSink(audioRecordMix);
     }
 
-    public synchronized AudioTrack connectVirtualAudioInputDevice(AudioFormat audioFormat, int[] appUids, int[] targetSources) {
-        AudioMixingRule.Builder mixingRuleBuilder = new AudioMixingRule.Builder().setTargetMixRole(1);
+    public synchronized AudioTrack connectVirtualAudioInputDevice(
+            AudioFormat audioFormat, int[] appUids, int[] targetSources) {
+        AudioMixingRule.Builder mixingRuleBuilder =
+                new AudioMixingRule.Builder().setTargetMixRole(1);
         if (appUids.length == 0) {
             throw new IllegalArgumentException("Invalid app uid array size");
         }
@@ -58,11 +67,16 @@ public class SemVirtualAudioDevice {
         }
         if (targetSources != null) {
             for (int source : targetSources) {
-                AudioAttributes ruleAttribute = new AudioAttributes.Builder().setCapturePreset(source).build();
+                AudioAttributes ruleAttribute =
+                        new AudioAttributes.Builder().setCapturePreset(source).build();
                 mixingRuleBuilder.addMixRule(2, ruleAttribute);
             }
         }
-        AudioMix audioTrackMix = new AudioMix.Builder(mixingRuleBuilder.build()).setFormat(audioFormat).setRouteFlags(2).build();
+        AudioMix audioTrackMix =
+                new AudioMix.Builder(mixingRuleBuilder.build())
+                        .setFormat(audioFormat)
+                        .setRouteFlags(2)
+                        .build();
         resetAudioPolicy();
         this.mAudioPolicy = new AudioPolicy.Builder(this.mContext).addMix(audioTrackMix).build();
         if (this.mAudioManager.registerAudioPolicy(this.mAudioPolicy) == -1) {

@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.Debug;
 import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
@@ -57,8 +56,7 @@ public class PerformanceCollector {
         void writeStopTiming(Bundle bundle);
     }
 
-    public PerformanceCollector() {
-    }
+    public PerformanceCollector() {}
 
     public PerformanceCollector(PerformanceResultsWriter writer) {
         setPerformanceResultsWriter(writer);

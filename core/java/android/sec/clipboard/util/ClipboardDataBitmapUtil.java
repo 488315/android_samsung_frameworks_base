@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -29,7 +30,8 @@ public class ClipboardDataBitmapUtil {
         bitmapOption.inPurgeable = true;
         try {
             Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, bitmapOption);
-            while (bitmapOption.outWidth / sampleSize >= reqWidth && bitmapOption.outHeight / sampleSize >= reqHeight) {
+            while (bitmapOption.outWidth / sampleSize >= reqWidth
+                    && bitmapOption.outHeight / sampleSize >= reqHeight) {
                 sampleSize++;
             }
             bitmapOption.inSampleSize = sampleSize - 1;
@@ -60,14 +62,20 @@ public class ClipboardDataBitmapUtil {
                     BitmapFactory.Options bitmapOption = new BitmapFactory.Options();
                     bitmapOption.inJustDecodeBounds = true;
                     bitmapOption.inPurgeable = true;
-                    Bitmap result = inputStream != null ? BitmapFactory.decodeStream(inputStream, null, bitmapOption) : null;
+                    Bitmap result =
+                            inputStream != null
+                                    ? BitmapFactory.decodeStream(inputStream, null, bitmapOption)
+                                    : null;
                     if (bitmapOption.outWidth > -1 && bitmapOption.outHeight > -1) {
-                        bitmapOption.inSampleSize = calculateInSampleSize(bitmapOption, reqWidth, reqHeight);
+                        bitmapOption.inSampleSize =
+                                calculateInSampleSize(bitmapOption, reqWidth, reqHeight);
                         bitmapOption.inJustDecodeBounds = false;
                         InputStream inputStream2 = url.openStream();
                         if (inputStream2 != null) {
                             try {
-                                result = BitmapFactory.decodeStream(inputStream2, null, bitmapOption);
+                                result =
+                                        BitmapFactory.decodeStream(
+                                                inputStream2, null, bitmapOption);
                             } finally {
                             }
                         }
@@ -79,7 +87,13 @@ public class ClipboardDataBitmapUtil {
                         }
                         return result;
                     }
-                    android.util.Log.d(TAG, "Return null because received bitmap size is invalid. bitmapOption.outWidth :" + bitmapOption.outWidth + ", bitmapOption.outHeight :" + bitmapOption.outHeight);
+                    android.util.Log.d(
+                            TAG,
+                            "Return null because received bitmap size is invalid."
+                                + " bitmapOption.outWidth :"
+                                    + bitmapOption.outWidth
+                                    + ", bitmapOption.outHeight :"
+                                    + bitmapOption.outHeight);
                     if (inputStream != null) {
                         inputStream.close();
                     }
@@ -111,7 +125,8 @@ public class ClipboardDataBitmapUtil {
         try {
             Bitmap result = BitmapFactory.decodeFile(fileName, bitmapOption);
             if (bitmapOption.outWidth > -1 && bitmapOption.outHeight > -1) {
-                bitmapOption.inSampleSize = calculateInSampleSize(bitmapOption, reqWidth, reqHeight);
+                bitmapOption.inSampleSize =
+                        calculateInSampleSize(bitmapOption, reqWidth, reqHeight);
                 bitmapOption.inJustDecodeBounds = false;
                 Bitmap result2 = BitmapFactory.decodeFile(fileName, bitmapOption);
                 int degree = getExifOrientation(fileName);
@@ -120,7 +135,12 @@ public class ClipboardDataBitmapUtil {
                 }
                 return result2;
             }
-            android.util.Log.i(TAG, "Return null because received bitmap size is invalid. bitmapOption.outWidth :" + bitmapOption.outWidth + ", bitmapOption.outHeight :" + bitmapOption.outHeight);
+            android.util.Log.i(
+                    TAG,
+                    "Return null because received bitmap size is invalid. bitmapOption.outWidth :"
+                            + bitmapOption.outWidth
+                            + ", bitmapOption.outHeight :"
+                            + bitmapOption.outHeight);
             return result;
         } catch (Exception e) {
             android.util.Log.e(TAG, "getFilePathBitmap error :" + e.getMessage());
@@ -134,7 +154,8 @@ public class ClipboardDataBitmapUtil {
             return null;
         }
         String uriString = uri.toString();
-        if (uriString.length() <= LENGTH_CONTENT_URI || uriString.substring(0, LENGTH_CONTENT_URI).compareTo("content://") != 0) {
+        if (uriString.length() <= LENGTH_CONTENT_URI
+                || uriString.substring(0, LENGTH_CONTENT_URI).compareTo("content://") != 0) {
             return null;
         }
         try {
@@ -170,7 +191,8 @@ public class ClipboardDataBitmapUtil {
                 is.close();
             }
             if (bitmapOption.outWidth > -1 && bitmapOption.outHeight > -1) {
-                bitmapOption.inSampleSize = calculateInSampleSize(bitmapOption, reqWidth, reqHeight);
+                bitmapOption.inSampleSize =
+                        calculateInSampleSize(bitmapOption, reqWidth, reqHeight);
                 bitmapOption.inJustDecodeBounds = false;
                 InputStream is2 = contentResolver.openInputStream(uri);
                 if (is2 != null) {
@@ -179,7 +201,12 @@ public class ClipboardDataBitmapUtil {
                 }
                 return result;
             }
-            android.util.Log.i(TAG, "Return null because received bitmap size is invalid. bitmapOption.outWidth :" + bitmapOption.outWidth + ", bitmapOption.outHeight :" + bitmapOption.outHeight);
+            android.util.Log.i(
+                    TAG,
+                    "Return null because received bitmap size is invalid. bitmapOption.outWidth :"
+                            + bitmapOption.outWidth
+                            + ", bitmapOption.outHeight :"
+                            + bitmapOption.outHeight);
             return null;
         } catch (Exception e) {
             android.util.Log.e(TAG, "getUriPathBitmap error :" + e.getMessage());
@@ -188,17 +215,17 @@ public class ClipboardDataBitmapUtil {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:22:0x0048, code lost:
-    
-        if (r2 == null) goto L34;
-     */
+
+       if (r2 == null) goto L34;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x004a, code lost:
-    
-        r2.close();
-     */
+
+       r2.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x0054, code lost:
-    
-        if (r2 == null) goto L34;
-     */
+
+       if (r2 == null) goto L34;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -283,7 +310,10 @@ public class ClipboardDataBitmapUtil {
         L80:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.sec.clipboard.util.ClipboardDataBitmapUtil.findImageDegree(android.content.ContentResolver, android.net.Uri):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.sec.clipboard.util.ClipboardDataBitmapUtil.findImageDegree(android.content.ContentResolver,"
+                    + " android.net.Uri):int");
     }
 
     private static int getExifOrientation(String filepath) {
@@ -294,7 +324,8 @@ public class ClipboardDataBitmapUtil {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        if (exif == null || (orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1)) == -1) {
+        if (exif == null
+                || (orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1)) == -1) {
             return 0;
         }
         switch (orientation) {
@@ -313,7 +344,9 @@ public class ClipboardDataBitmapUtil {
             Matrix m = new Matrix();
             m.setRotate(degrees, bitmap.getWidth() / 2.0f, bitmap.getHeight() / 2.0f);
             try {
-                Bitmap converted = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
+                Bitmap converted =
+                        Bitmap.createBitmap(
+                                bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
                 if (!bitmap.sameAs(converted)) {
                     bitmap.recycle();
                     return converted;
@@ -327,7 +360,8 @@ public class ClipboardDataBitmapUtil {
         return bitmap;
     }
 
-    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
         int height = options.outHeight;
         int width = options.outWidth;
         if (height <= reqHeight && width <= reqWidth) {

@@ -2,7 +2,9 @@ package android.os;
 
 import android.telecom.Logging.Session;
 import android.util.Log;
+
 import com.android.internal.util.FastPrintWriter;
+
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -82,11 +84,27 @@ public class TransactionTracker {
                         Iterator<String> it = arr.iterator();
                         while (it.hasNext()) {
                             String timestamp = it.next();
-                            pw.println(this.processName + " T:" + timeIndex + "/" + stackTotal + Session.SUBSESSION_SEPARATION_CHAR + timestamp);
+                            pw.println(
+                                    this.processName
+                                            + " T:"
+                                            + timeIndex
+                                            + "/"
+                                            + stackTotal
+                                            + Session.SUBSESSION_SEPARATION_CHAR
+                                            + timestamp);
                             timeIndex++;
                         }
                     }
-                    trace = this.processName + "," + this.packageName + "," + this.pid + "," + this.uid + "\n" + trace;
+                    trace =
+                            this.processName
+                                    + ","
+                                    + this.packageName
+                                    + ","
+                                    + this.pid
+                                    + ","
+                                    + this.uid
+                                    + "\n"
+                                    + trace;
                 } else {
                     pw.println("Count: " + this.mTraces.get(trace));
                 }

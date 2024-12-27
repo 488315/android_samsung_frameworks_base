@@ -1,21 +1,22 @@
 package android.hardware.camera2.extension;
 
-import android.hardware.camera2.extension.IImageProcessorImpl;
-import android.hardware.camera2.extension.IRequestCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IRequestProcessorImpl extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.camera2.extension.IRequestProcessorImpl";
+    public static final String DESCRIPTOR =
+            "android.hardware.camera2.extension.IRequestProcessorImpl";
 
     void abortCaptures() throws RemoteException;
 
-    void setImageProcessor(OutputConfigId outputConfigId, IImageProcessorImpl iImageProcessorImpl) throws RemoteException;
+    void setImageProcessor(OutputConfigId outputConfigId, IImageProcessorImpl iImageProcessorImpl)
+            throws RemoteException;
 
     int setRepeating(Request request, IRequestCallback iRequestCallback) throws RemoteException;
 
@@ -27,8 +28,9 @@ public interface IRequestProcessorImpl extends IInterface {
 
     public static class Default implements IRequestProcessorImpl {
         @Override // android.hardware.camera2.extension.IRequestProcessorImpl
-        public void setImageProcessor(OutputConfigId outputConfigId, IImageProcessorImpl imageProcessor) throws RemoteException {
-        }
+        public void setImageProcessor(
+                OutputConfigId outputConfigId, IImageProcessorImpl imageProcessor)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IRequestProcessorImpl
         public int submit(Request request, IRequestCallback callback) throws RemoteException {
@@ -36,7 +38,8 @@ public interface IRequestProcessorImpl extends IInterface {
         }
 
         @Override // android.hardware.camera2.extension.IRequestProcessorImpl
-        public int submitBurst(List<Request> requests, IRequestCallback callback) throws RemoteException {
+        public int submitBurst(List<Request> requests, IRequestCallback callback)
+                throws RemoteException {
             return 0;
         }
 
@@ -46,12 +49,10 @@ public interface IRequestProcessorImpl extends IInterface {
         }
 
         @Override // android.hardware.camera2.extension.IRequestProcessorImpl
-        public void abortCaptures() throws RemoteException {
-        }
+        public void abortCaptures() throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IRequestProcessorImpl
-        public void stopRepeating() throws RemoteException {
-        }
+        public void stopRepeating() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -59,7 +60,7 @@ public interface IRequestProcessorImpl extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRequestProcessorImpl {
+    public abstract static class Stub extends Binder implements IRequestProcessorImpl {
         static final int TRANSACTION_abortCaptures = 5;
         static final int TRANSACTION_setImageProcessor = 1;
         static final int TRANSACTION_setRepeating = 4;
@@ -112,7 +113,8 @@ public interface IRequestProcessorImpl extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRequestProcessorImpl.DESCRIPTOR);
             }
@@ -122,15 +124,18 @@ public interface IRequestProcessorImpl extends IInterface {
             }
             switch (code) {
                 case 1:
-                    OutputConfigId _arg0 = (OutputConfigId) data.readTypedObject(OutputConfigId.CREATOR);
-                    IImageProcessorImpl _arg1 = IImageProcessorImpl.Stub.asInterface(data.readStrongBinder());
+                    OutputConfigId _arg0 =
+                            (OutputConfigId) data.readTypedObject(OutputConfigId.CREATOR);
+                    IImageProcessorImpl _arg1 =
+                            IImageProcessorImpl.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setImageProcessor(_arg0, _arg1);
                     reply.writeNoException();
                     return true;
                 case 2:
                     Request _arg02 = (Request) data.readTypedObject(Request.CREATOR);
-                    IRequestCallback _arg12 = IRequestCallback.Stub.asInterface(data.readStrongBinder());
+                    IRequestCallback _arg12 =
+                            IRequestCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result = submit(_arg02, _arg12);
                     reply.writeNoException();
@@ -138,7 +143,8 @@ public interface IRequestProcessorImpl extends IInterface {
                     return true;
                 case 3:
                     List<Request> _arg03 = data.createTypedArrayList(Request.CREATOR);
-                    IRequestCallback _arg13 = IRequestCallback.Stub.asInterface(data.readStrongBinder());
+                    IRequestCallback _arg13 =
+                            IRequestCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result2 = submitBurst(_arg03, _arg13);
                     reply.writeNoException();
@@ -146,7 +152,8 @@ public interface IRequestProcessorImpl extends IInterface {
                     return true;
                 case 4:
                     Request _arg04 = (Request) data.readTypedObject(Request.CREATOR);
-                    IRequestCallback _arg14 = IRequestCallback.Stub.asInterface(data.readStrongBinder());
+                    IRequestCallback _arg14 =
+                            IRequestCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result3 = setRepeating(_arg04, _arg14);
                     reply.writeNoException();
@@ -182,7 +189,9 @@ public interface IRequestProcessorImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IRequestProcessorImpl
-            public void setImageProcessor(OutputConfigId outputConfigId, IImageProcessorImpl imageProcessor) throws RemoteException {
+            public void setImageProcessor(
+                    OutputConfigId outputConfigId, IImageProcessorImpl imageProcessor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -216,7 +225,8 @@ public interface IRequestProcessorImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IRequestProcessorImpl
-            public int submitBurst(List<Request> requests, IRequestCallback callback) throws RemoteException {
+            public int submitBurst(List<Request> requests, IRequestCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -234,7 +244,8 @@ public interface IRequestProcessorImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IRequestProcessorImpl
-            public int setRepeating(Request request, IRequestCallback callback) throws RemoteException {
+            public int setRepeating(Request request, IRequestCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

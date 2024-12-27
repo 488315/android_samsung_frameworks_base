@@ -1,14 +1,12 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.hardware.hdmi.HdmiClient;
-import android.hardware.hdmi.HdmiControlManager;
-import android.hardware.hdmi.IHdmiControlCallback;
-import android.hardware.hdmi.IHdmiVendorCommandListener;
 import android.os.Binder;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.util.FunctionalUtils;
+
 import java.util.concurrent.Executor;
 
 @SystemApi
@@ -29,7 +27,8 @@ public abstract class HdmiClient {
         this.mService = service;
     }
 
-    public void selectDevice(int logicalAddress, Executor executor, OnDeviceSelectedListener listener) {
+    public void selectDevice(
+            int logicalAddress, Executor executor, OnDeviceSelectedListener listener) {
         if (listener == null) {
             throw new IllegalArgumentException("listener must not be null.");
         }
@@ -37,7 +36,8 @@ public abstract class HdmiClient {
             throw new IllegalArgumentException("executor must not be null.");
         }
         try {
-            this.mService.deviceSelect(logicalAddress, getCallbackWrapper(logicalAddress, executor, listener));
+            this.mService.deviceSelect(
+                    logicalAddress, getCallbackWrapper(logicalAddress, executor, listener));
         } catch (RemoteException e) {
             Log.e(TAG, "failed to select device: ", e);
         }
@@ -49,7 +49,8 @@ public abstract class HdmiClient {
         final /* synthetic */ OnDeviceSelectedListener val$listener;
         final /* synthetic */ int val$logicalAddress;
 
-        AnonymousClass1(Executor executor, OnDeviceSelectedListener onDeviceSelectedListener, int i) {
+        AnonymousClass1(
+                Executor executor, OnDeviceSelectedListener onDeviceSelectedListener, int i) {
             this.val$executor = executor;
             this.val$listener = onDeviceSelectedListener;
             this.val$logicalAddress = i;
@@ -60,21 +61,27 @@ public abstract class HdmiClient {
             final Executor executor = this.val$executor;
             final OnDeviceSelectedListener onDeviceSelectedListener = this.val$listener;
             final int i = this.val$logicalAddress;
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.hardware.hdmi.HdmiClient$1$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiClient$1$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            HdmiClient.OnDeviceSelectedListener.this.onDeviceSelected(r2, r3);
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils.ThrowingRunnable() { // from class:
+                        // android.hardware.hdmi.HdmiClient$1$$ExternalSyntheticLambda0
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            executor.execute(
+                                    new Runnable() { // from class:
+                                        // android.hardware.hdmi.HdmiClient$1$$ExternalSyntheticLambda1
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            HdmiClient.OnDeviceSelectedListener.this
+                                                    .onDeviceSelected(r2, r3);
+                                        }
+                                    });
                         }
                     });
-                }
-            });
         }
     }
 
-    private static IHdmiControlCallback getCallbackWrapper(int logicalAddress, Executor executor, OnDeviceSelectedListener listener) {
+    private static IHdmiControlCallback getCallbackWrapper(
+            int logicalAddress, Executor executor, OnDeviceSelectedListener listener) {
         return new AnonymousClass1(executor, listener, logicalAddress);
     }
 
@@ -116,7 +123,8 @@ public abstract class HdmiClient {
         setVendorCommandListener(listener, 16777215);
     }
 
-    public void setVendorCommandListener(HdmiControlManager.VendorCommandListener listener, int vendorId) {
+    public void setVendorCommandListener(
+            HdmiControlManager.VendorCommandListener listener, int vendorId) {
         if (listener == null) {
             throw new IllegalArgumentException("listener cannot be null");
         }
@@ -132,16 +140,21 @@ public abstract class HdmiClient {
         }
     }
 
-    private static IHdmiVendorCommandListener getListenerWrapper(final HdmiControlManager.VendorCommandListener listener) {
-        return new IHdmiVendorCommandListener.Stub() { // from class: android.hardware.hdmi.HdmiClient.2
+    private static IHdmiVendorCommandListener getListenerWrapper(
+            final HdmiControlManager.VendorCommandListener listener) {
+        return new IHdmiVendorCommandListener
+                .Stub() { // from class: android.hardware.hdmi.HdmiClient.2
             @Override // android.hardware.hdmi.IHdmiVendorCommandListener
-            public void onReceived(int srcAddress, int destAddress, byte[] params, boolean hasVendorId) {
-                HdmiControlManager.VendorCommandListener.this.onReceived(srcAddress, destAddress, params, hasVendorId);
+            public void onReceived(
+                    int srcAddress, int destAddress, byte[] params, boolean hasVendorId) {
+                HdmiControlManager.VendorCommandListener.this.onReceived(
+                        srcAddress, destAddress, params, hasVendorId);
             }
 
             @Override // android.hardware.hdmi.IHdmiVendorCommandListener
             public void onControlStateChanged(boolean enabled, int reason) {
-                HdmiControlManager.VendorCommandListener.this.onControlStateChanged(enabled, reason);
+                HdmiControlManager.VendorCommandListener.this.onControlStateChanged(
+                        enabled, reason);
             }
         };
     }

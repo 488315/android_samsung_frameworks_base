@@ -15,10 +15,11 @@ import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.proto.ProtoInputStream;
+
 import com.android.internal.app.ProcessMap;
 import com.android.server.IoThread;
-import com.android.server.am.AppStartInfoTracker;
 import com.android.server.wm.WindowProcessController;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -67,13 +68,23 @@ public final class AppStartInfoTracker {
         }
 
         public static long calculateAverage(List list) {
-            return (long) list.stream().mapToDouble(new AppStartInfoTracker$AppStartInfoContainer$$ExternalSyntheticLambda2()).average().orElse(0.0d);
+            return (long)
+                    list.stream()
+                            .mapToDouble(
+                                    new AppStartInfoTracker$AppStartInfoContainer$$ExternalSyntheticLambda2())
+                            .average()
+                            .orElse(0.0d);
         }
 
         public final void addTimestampToStartLocked(int i, long j) {
             ApplicationStartInfo applicationStartInfo;
             int startupState;
-            if (this.mInfos.isEmpty() || (startupState = (applicationStartInfo = (ApplicationStartInfo) this.mInfos.get(0)).getStartupState()) == 1) {
+            if (this.mInfos.isEmpty()
+                    || (startupState =
+                                    (applicationStartInfo =
+                                                    (ApplicationStartInfo) this.mInfos.get(0))
+                                            .getStartupState())
+                            == 1) {
                 return;
             }
             Map startupTimestamps = applicationStartInfo.getStartupTimestamps();
@@ -103,7 +114,9 @@ public final class AppStartInfoTracker {
         public final IApplicationStartInfoCompleteListener mCallback;
         public final int mUid;
 
-        public ApplicationStartInfoCompleteCallback(IApplicationStartInfoCompleteListener iApplicationStartInfoCompleteListener, int i) {
+        public ApplicationStartInfoCompleteCallback(
+                IApplicationStartInfoCompleteListener iApplicationStartInfoCompleteListener,
+                int i) {
             this.mCallback = iApplicationStartInfoCompleteListener;
             this.mUid = i;
             try {
@@ -114,16 +127,21 @@ public final class AppStartInfoTracker {
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
-            AppStartInfoTracker.this.removeStartInfoCompleteListener(this.mCallback, this.mUid, false);
+            AppStartInfoTracker.this.removeStartInfoCompleteListener(
+                    this.mCallback, this.mUid, false);
         }
     }
 
-    public static void addBaseFieldsFromProcessRecord(ApplicationStartInfo applicationStartInfo, ProcessRecord processRecord) {
+    public static void addBaseFieldsFromProcessRecord(
+            ApplicationStartInfo applicationStartInfo, ProcessRecord processRecord) {
         if (processRecord == null) {
             return;
         }
         boolean z = false;
-        int i = processRecord.mHostingRecord != null ? processRecord.mHostingRecord.mDefiningUid : 0;
+        int i =
+                processRecord.mHostingRecord != null
+                        ? processRecord.mHostingRecord.mDefiningUid
+                        : 0;
         applicationStartInfo.setPid(processRecord.mPid);
         applicationStartInfo.setRealUid(processRecord.uid);
         applicationStartInfo.setPackageUid(processRecord.info.uid);
@@ -134,29 +152,40 @@ public final class AppStartInfoTracker {
         applicationStartInfo.setProcessName(processRecord.processName);
         applicationStartInfo.setPackageName(processRecord.info.packageName);
         if (com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags.stayStopped()) {
-            WindowProcessController windowProcessController = processRecord.mWindowProcessController;
-            if (processRecord.mWasForceStopped || (windowProcessController != null && windowProcessController.mStoppedState == 2)) {
+            WindowProcessController windowProcessController =
+                    processRecord.mWindowProcessController;
+            if (processRecord.mWasForceStopped
+                    || (windowProcessController != null
+                            && windowProcessController.mStoppedState == 2)) {
                 z = true;
             }
             applicationStartInfo.setForceStopped(z);
         }
     }
 
-    public static void dumpHistoryProcessStartInfoLocked(PrintWriter printWriter, String str, SparseArray sparseArray, SimpleDateFormat simpleDateFormat) {
+    public static void dumpHistoryProcessStartInfoLocked(
+            PrintWriter printWriter,
+            String str,
+            SparseArray sparseArray,
+            SimpleDateFormat simpleDateFormat) {
         printWriter.println("  package: " + str);
         int size = sparseArray.size();
         for (int i = 0; i < size; i++) {
             printWriter.println("    Historical Process Start for userId=" + sparseArray.keyAt(i));
-            AppStartInfoContainer appStartInfoContainer = (AppStartInfoContainer) sparseArray.valueAt(i);
+            AppStartInfoContainer appStartInfoContainer =
+                    (AppStartInfoContainer) sparseArray.valueAt(i);
             if (appStartInfoContainer.mMonitoringModeEnabled) {
                 ArrayList arrayList = new ArrayList();
                 ArrayList arrayList2 = new ArrayList();
                 ArrayList arrayList3 = new ArrayList();
                 for (int i2 = 0; i2 < appStartInfoContainer.mInfos.size(); i2++) {
-                    ApplicationStartInfo applicationStartInfo = (ApplicationStartInfo) appStartInfoContainer.mInfos.get(i2);
+                    ApplicationStartInfo applicationStartInfo =
+                            (ApplicationStartInfo) appStartInfoContainer.mInfos.get(i2);
                     Map startupTimestamps = applicationStartInfo.getStartupTimestamps();
                     if (startupTimestamps.containsKey(0) && startupTimestamps.containsKey(4)) {
-                        long longValue = ((Long) startupTimestamps.get(4)).longValue() - ((Long) startupTimestamps.get(0)).longValue();
+                        long longValue =
+                                ((Long) startupTimestamps.get(4)).longValue()
+                                        - ((Long) startupTimestamps.get(0)).longValue();
                         int startType = applicationStartInfo.getStartType();
                         if (startType == 1) {
                             arrayList.add(Long.valueOf(longValue));
@@ -167,48 +196,80 @@ public final class AppStartInfoTracker {
                         }
                     }
                 }
-                StringBuilder sb = new StringBuilder("        Average Start Time in ns for Cold Starts: ");
-                sb.append(arrayList.isEmpty() ? "No records" : Long.valueOf(AppStartInfoContainer.calculateAverage(arrayList)));
+                StringBuilder sb =
+                        new StringBuilder("        Average Start Time in ns for Cold Starts: ");
+                sb.append(
+                        arrayList.isEmpty()
+                                ? "No records"
+                                : Long.valueOf(AppStartInfoContainer.calculateAverage(arrayList)));
                 printWriter.println(sb.toString());
-                StringBuilder sb2 = new StringBuilder("        Average Start Time in ns for Warm Starts: ");
-                sb2.append(arrayList2.isEmpty() ? "No records" : Long.valueOf(AppStartInfoContainer.calculateAverage(arrayList2)));
+                StringBuilder sb2 =
+                        new StringBuilder("        Average Start Time in ns for Warm Starts: ");
+                sb2.append(
+                        arrayList2.isEmpty()
+                                ? "No records"
+                                : Long.valueOf(AppStartInfoContainer.calculateAverage(arrayList2)));
                 printWriter.println(sb2.toString());
-                StringBuilder sb3 = new StringBuilder("        Average Start Time in ns for Hot Starts: ");
-                sb3.append(arrayList3.isEmpty() ? "No records" : Long.valueOf(AppStartInfoContainer.calculateAverage(arrayList3)));
+                StringBuilder sb3 =
+                        new StringBuilder("        Average Start Time in ns for Hot Starts: ");
+                sb3.append(
+                        arrayList3.isEmpty()
+                                ? "No records"
+                                : Long.valueOf(AppStartInfoContainer.calculateAverage(arrayList3)));
                 printWriter.println(sb3.toString());
             }
             int size2 = appStartInfoContainer.mInfos.size();
             for (int i3 = 0; i3 < size2; i3++) {
-                ((ApplicationStartInfo) appStartInfoContainer.mInfos.get(i3)).dump(printWriter, "        ", VibrationParam$1$$ExternalSyntheticOutline0.m(i3, "#"), simpleDateFormat);
+                ((ApplicationStartInfo) appStartInfoContainer.mInfos.get(i3))
+                        .dump(
+                                printWriter,
+                                "        ",
+                                VibrationParam$1$$ExternalSyntheticOutline0.m(i3, "#"),
+                                simpleDateFormat);
             }
         }
     }
 
     public static long getStartTimestamp(ApplicationStartInfo applicationStartInfo) {
-        if (applicationStartInfo.getStartupTimestamps() == null || !applicationStartInfo.getStartupTimestamps().containsKey(0)) {
+        if (applicationStartInfo.getStartupTimestamps() == null
+                || !applicationStartInfo.getStartupTimestamps().containsKey(0)) {
             return -1L;
         }
         return ((Long) applicationStartInfo.getStartupTimestamps().get(0)).longValue();
     }
 
-    public final ApplicationStartInfo addStartInfoLocked(ApplicationStartInfo applicationStartInfo) {
+    public final ApplicationStartInfo addStartInfoLocked(
+            ApplicationStartInfo applicationStartInfo) {
         if (!this.mAppStartInfoLoaded.get()) {
-            Slog.w("ActivityManager", "Skipping saving the start info due to ongoing loading from storage");
+            Slog.w(
+                    "ActivityManager",
+                    "Skipping saving the start info due to ongoing loading from storage");
             return null;
         }
         ApplicationStartInfo applicationStartInfo2 = new ApplicationStartInfo(applicationStartInfo);
-        AppStartInfoContainer appStartInfoContainer = (AppStartInfoContainer) this.mData.get(applicationStartInfo.getPackageName(), applicationStartInfo.getRealUid());
+        AppStartInfoContainer appStartInfoContainer =
+                (AppStartInfoContainer)
+                        this.mData.get(
+                                applicationStartInfo.getPackageName(),
+                                applicationStartInfo.getRealUid());
         if (appStartInfoContainer == null) {
             appStartInfoContainer = new AppStartInfoContainer(this.mAppStartInfoHistoryListSize);
             appStartInfoContainer.mUid = applicationStartInfo2.getRealUid();
-            this.mData.put(applicationStartInfo.getPackageName(), applicationStartInfo.getRealUid(), appStartInfoContainer);
+            this.mData.put(
+                    applicationStartInfo.getPackageName(),
+                    applicationStartInfo.getRealUid(),
+                    appStartInfoContainer);
         }
         int size = appStartInfoContainer.mInfos.size();
-        if (size >= (appStartInfoContainer.mMonitoringModeEnabled ? 100 : appStartInfoContainer.mMaxCapacity)) {
+        if (size
+                >= (appStartInfoContainer.mMonitoringModeEnabled
+                        ? 100
+                        : appStartInfoContainer.mMaxCapacity)) {
             int i = -1;
             long j = Long.MAX_VALUE;
             for (int i2 = 0; i2 < size; i2++) {
-                ApplicationStartInfo applicationStartInfo3 = (ApplicationStartInfo) appStartInfoContainer.mInfos.get(i2);
+                ApplicationStartInfo applicationStartInfo3 =
+                        (ApplicationStartInfo) appStartInfoContainer.mInfos.get(i2);
                 if (getStartTimestamp(applicationStartInfo3) < j) {
                     j = getStartTimestamp(applicationStartInfo3);
                     i = i2;
@@ -219,7 +280,8 @@ public final class AppStartInfoTracker {
             }
         }
         appStartInfoContainer.mInfos.add(applicationStartInfo2);
-        Collections.sort(appStartInfoContainer.mInfos, new AppStartInfoTracker$$ExternalSyntheticLambda1(2));
+        Collections.sort(
+                appStartInfoContainer.mInfos, new AppStartInfoTracker$$ExternalSyntheticLambda1(2));
         schedulePersistProcessStartInfo(false);
         return applicationStartInfo2;
     }
@@ -228,7 +290,8 @@ public final class AppStartInfoTracker {
         if (this.mEnabled) {
             synchronized (this.mLock) {
                 try {
-                    AppStartInfoContainer appStartInfoContainer = (AppStartInfoContainer) this.mData.get(str, i);
+                    AppStartInfoContainer appStartInfoContainer =
+                            (AppStartInfoContainer) this.mData.get(str, i);
                     if (appStartInfoContainer == null) {
                         return;
                     }
@@ -251,10 +314,13 @@ public final class AppStartInfoTracker {
                     int size = list.size();
                     for (int i = 0; i < size; i++) {
                         if (list.get(i) != null) {
-                            ApplicationStartInfoCompleteCallback applicationStartInfoCompleteCallback = (ApplicationStartInfoCompleteCallback) list.get(i);
+                            ApplicationStartInfoCompleteCallback
+                                    applicationStartInfoCompleteCallback =
+                                            (ApplicationStartInfoCompleteCallback) list.get(i);
                             applicationStartInfoCompleteCallback.getClass();
                             try {
-                                applicationStartInfoCompleteCallback.mCallback.onApplicationStartInfoComplete(applicationStartInfo);
+                                applicationStartInfoCompleteCallback.mCallback
+                                        .onApplicationStartInfoComplete(applicationStartInfo);
                             } catch (RemoteException unused) {
                             }
                         }
@@ -294,23 +360,34 @@ public final class AppStartInfoTracker {
             final SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
             synchronized (this.mLock) {
                 try {
-                    printWriter.println("Last Timestamp of Persistence Into Persistent Storage: " + simpleDateFormat.format(new Date(this.mLastAppStartInfoPersistTimestamp)));
+                    printWriter.println(
+                            "Last Timestamp of Persistence Into Persistent Storage: "
+                                    + simpleDateFormat.format(
+                                            new Date(this.mLastAppStartInfoPersistTimestamp)));
                     if (TextUtils.isEmpty(str)) {
-                        forEachPackageLocked(new BiFunction() { // from class: com.android.server.am.AppStartInfoTracker$$ExternalSyntheticLambda6
-                            @Override // java.util.function.BiFunction
-                            public final Object apply(Object obj, Object obj2) {
-                                AppStartInfoTracker appStartInfoTracker = AppStartInfoTracker.this;
-                                PrintWriter printWriter2 = printWriter;
-                                SimpleDateFormat simpleDateFormat2 = simpleDateFormat;
-                                appStartInfoTracker.getClass();
-                                AppStartInfoTracker.dumpHistoryProcessStartInfoLocked(printWriter2, (String) obj, (SparseArray) obj2, simpleDateFormat2);
-                                return 0;
-                            }
-                        });
+                        forEachPackageLocked(
+                                new BiFunction() { // from class:
+                                                   // com.android.server.am.AppStartInfoTracker$$ExternalSyntheticLambda6
+                                    @Override // java.util.function.BiFunction
+                                    public final Object apply(Object obj, Object obj2) {
+                                        AppStartInfoTracker appStartInfoTracker =
+                                                AppStartInfoTracker.this;
+                                        PrintWriter printWriter2 = printWriter;
+                                        SimpleDateFormat simpleDateFormat2 = simpleDateFormat;
+                                        appStartInfoTracker.getClass();
+                                        AppStartInfoTracker.dumpHistoryProcessStartInfoLocked(
+                                                printWriter2,
+                                                (String) obj,
+                                                (SparseArray) obj2,
+                                                simpleDateFormat2);
+                                        return 0;
+                                    }
+                                });
                     } else {
                         SparseArray sparseArray = (SparseArray) this.mData.getMap().get(str);
                         if (sparseArray != null) {
-                            dumpHistoryProcessStartInfoLocked(printWriter, str, sparseArray, simpleDateFormat);
+                            dumpHistoryProcessStartInfoLocked(
+                                    printWriter, str, sparseArray, simpleDateFormat);
                         }
                     }
                 } catch (Throwable th) {
@@ -323,7 +400,12 @@ public final class AppStartInfoTracker {
     public final boolean forEachPackageLocked(BiFunction biFunction) {
         ArrayMap map = this.mData.getMap();
         for (int size = map.size() - 1; size >= 0; size--) {
-            int intValue = ((Integer) biFunction.apply((String) map.keyAt(size), (SparseArray) map.valueAt(size))).intValue();
+            int intValue =
+                    ((Integer)
+                                    biFunction.apply(
+                                            (String) map.keyAt(size),
+                                            (SparseArray) map.valueAt(size)))
+                            .intValue();
             if (intValue != 1) {
                 if (intValue != 2) {
                     if (intValue == 3) {
@@ -350,19 +432,27 @@ public final class AppStartInfoTracker {
                         if (TextUtils.isEmpty(str)) {
                             final ArrayList arrayList2 = this.mTmpStartInfoList;
                             arrayList2.clear();
-                            forEachPackageLocked(new BiFunction() { // from class: com.android.server.am.AppStartInfoTracker$$ExternalSyntheticLambda0
-                                @Override // java.util.function.BiFunction
-                                public final Object apply(Object obj, Object obj2) {
-                                    int i4 = i;
-                                    ArrayList arrayList3 = arrayList2;
-                                    AppStartInfoTracker.AppStartInfoContainer appStartInfoContainer = (AppStartInfoTracker.AppStartInfoContainer) ((SparseArray) obj2).get(i4);
-                                    if (appStartInfoContainer != null) {
-                                        arrayList3.addAll(appStartInfoContainer.mInfos);
-                                    }
-                                    return 0;
-                                }
-                            });
-                            Collections.sort(arrayList2, new AppStartInfoTracker$$ExternalSyntheticLambda1(0));
+                            forEachPackageLocked(
+                                    new BiFunction() { // from class:
+                                                       // com.android.server.am.AppStartInfoTracker$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.BiFunction
+                                        public final Object apply(Object obj, Object obj2) {
+                                            int i4 = i;
+                                            ArrayList arrayList3 = arrayList2;
+                                            AppStartInfoTracker.AppStartInfoContainer
+                                                    appStartInfoContainer =
+                                                            (AppStartInfoTracker
+                                                                            .AppStartInfoContainer)
+                                                                    ((SparseArray) obj2).get(i4);
+                                            if (appStartInfoContainer != null) {
+                                                arrayList3.addAll(appStartInfoContainer.mInfos);
+                                            }
+                                            return 0;
+                                        }
+                                    });
+                            Collections.sort(
+                                    arrayList2,
+                                    new AppStartInfoTracker$$ExternalSyntheticLambda1(0));
                             int size = arrayList2.size();
                             if (i2 > 0) {
                                 size = Math.min(size, i2);
@@ -373,7 +463,8 @@ public final class AppStartInfoTracker {
                             }
                             arrayList2.clear();
                         } else {
-                            AppStartInfoContainer appStartInfoContainer = (AppStartInfoContainer) this.mData.get(str, i);
+                            AppStartInfoContainer appStartInfoContainer =
+                                    (AppStartInfoContainer) this.mData.get(str, i);
                             if (appStartInfoContainer != null) {
                                 if (appStartInfoContainer.mInfos.size() > i2) {
                                     i3 = appStartInfoContainer.mInfos.size() - i2;
@@ -428,17 +519,17 @@ public final class AppStartInfoTracker {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:36:0x0052, code lost:
-    
-        if (r0 != null) goto L48;
-     */
+
+       if (r0 != null) goto L48;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0054, code lost:
-    
-        r0.close();
-     */
+
+       r0.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x006e, code lost:
-    
-        if (r0 == null) goto L38;
-     */
+
+       if (r0 == null) goto L38;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -523,7 +614,9 @@ public final class AppStartInfoTracker {
         L7c:
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppStartInfoTracker.loadExistingProcessStartInfo():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppStartInfoTracker.loadExistingProcessStartInfo():void");
     }
 
     public final void loadPackagesFromProto(ProtoInputStream protoInputStream, long j) {
@@ -536,7 +629,8 @@ public final class AppStartInfoTracker {
             } else if (nextField != 2) {
                 continue;
             } else {
-                AppStartInfoContainer appStartInfoContainer = new AppStartInfoContainer(this.mAppStartInfoHistoryListSize);
+                AppStartInfoContainer appStartInfoContainer =
+                        new AppStartInfoContainer(this.mAppStartInfoHistoryListSize);
                 long start2 = protoInputStream.start(2246267895810L);
                 int nextField2 = protoInputStream.nextField();
                 while (nextField2 != -1) {
@@ -547,7 +641,8 @@ public final class AppStartInfoTracker {
                         applicationStartInfo.readFromProto(protoInputStream, 2246267895810L);
                         appStartInfoContainer.mInfos.add(applicationStartInfo);
                     } else if (nextField2 == 3) {
-                        appStartInfoContainer.mMonitoringModeEnabled = protoInputStream.readBoolean(1133871366147L);
+                        appStartInfoContainer.mMonitoringModeEnabled =
+                                protoInputStream.readBoolean(1133871366147L);
                     }
                     nextField2 = protoInputStream.nextField();
                 }
@@ -570,21 +665,36 @@ public final class AppStartInfoTracker {
         for (int i = 0; i < this.mInProgressRecords.size(); i++) {
             this.mTemporaryInProgressIndexes.add(i, Integer.valueOf(i));
         }
-        Collections.sort(this.mTemporaryInProgressIndexes, new Comparator() { // from class: com.android.server.am.AppStartInfoTracker$$ExternalSyntheticLambda8
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                AppStartInfoTracker appStartInfoTracker = AppStartInfoTracker.this;
-                return Long.compare(((Long) appStartInfoTracker.mInProgressRecords.keyAt(((Integer) obj).intValue())).longValue(), ((Long) appStartInfoTracker.mInProgressRecords.keyAt(((Integer) obj2).intValue())).longValue());
-            }
-        });
+        Collections.sort(
+                this.mTemporaryInProgressIndexes,
+                new Comparator() { // from class:
+                                   // com.android.server.am.AppStartInfoTracker$$ExternalSyntheticLambda8
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        AppStartInfoTracker appStartInfoTracker = AppStartInfoTracker.this;
+                        return Long.compare(
+                                ((Long)
+                                                appStartInfoTracker.mInProgressRecords.keyAt(
+                                                        ((Integer) obj).intValue()))
+                                        .longValue(),
+                                ((Long)
+                                                appStartInfoTracker.mInProgressRecords.keyAt(
+                                                        ((Integer) obj2).intValue()))
+                                        .longValue());
+                    }
+                });
         if (this.mTemporaryInProgressIndexes.size() == 6) {
-            this.mInProgressRecords.removeAt(((Integer) this.mTemporaryInProgressIndexes.get(0)).intValue());
+            this.mInProgressRecords.removeAt(
+                    ((Integer) this.mTemporaryInProgressIndexes.get(0)).intValue());
         } else {
             ArrayList arrayList = this.mTemporaryInProgressIndexes;
-            arrayList.subList(arrayList.size() - 5, this.mTemporaryInProgressIndexes.size()).clear();
+            arrayList
+                    .subList(arrayList.size() - 5, this.mTemporaryInProgressIndexes.size())
+                    .clear();
             Collections.sort(this.mTemporaryInProgressIndexes);
             for (int size = this.mTemporaryInProgressIndexes.size() - 1; size >= 0; size--) {
-                this.mInProgressRecords.removeAt(((Integer) this.mTemporaryInProgressIndexes.get(size)).intValue());
+                this.mInProgressRecords.removeAt(
+                        ((Integer) this.mTemporaryInProgressIndexes.get(size)).intValue());
             }
         }
         this.mTemporaryInProgressIndexes.clear();
@@ -598,11 +708,13 @@ public final class AppStartInfoTracker {
                     if (indexOfKey < 0) {
                         return;
                     }
-                    ApplicationStartInfo applicationStartInfo = (ApplicationStartInfo) this.mInProgressRecords.valueAt(indexOfKey);
+                    ApplicationStartInfo applicationStartInfo =
+                            (ApplicationStartInfo) this.mInProgressRecords.valueAt(indexOfKey);
                     if (applicationStartInfo != null && processRecord != null) {
                         applicationStartInfo.setStartType((int) j2);
                         addBaseFieldsFromProcessRecord(applicationStartInfo, processRecord);
-                        ApplicationStartInfo addStartInfoLocked = addStartInfoLocked(applicationStartInfo);
+                        ApplicationStartInfo addStartInfoLocked =
+                                addStartInfoLocked(applicationStartInfo);
                         if (addStartInfoLocked == null) {
                             this.mInProgressRecords.removeAt(indexOfKey);
                         } else {
@@ -627,7 +739,10 @@ public final class AppStartInfoTracker {
                     applicationStartInfo.setIntent(intent);
                     applicationStartInfo.setStartType(0);
                     applicationStartInfo.addStartupTimestamp(0, j);
-                    if (intent == null || intent.getCategories() == null || !intent.getCategories().contains("android.intent.category.LAUNCHER")) {
+                    if (intent == null
+                            || intent.getCategories() == null
+                            || !intent.getCategories()
+                                    .contains("android.intent.category.LAUNCHER")) {
                         applicationStartInfo.setReason(11);
                     } else {
                         applicationStartInfo.setReason(6);
@@ -739,7 +854,9 @@ public final class AppStartInfoTracker {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L66
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppStartInfoTracker.persistProcessStartInfo():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppStartInfoTracker.persistProcessStartInfo():void");
     }
 
     public final void removePackageLocked(int i, String str) {
@@ -768,7 +885,10 @@ public final class AppStartInfoTracker {
         }
     }
 
-    public final void removeStartInfoCompleteListener(IApplicationStartInfoCompleteListener iApplicationStartInfoCompleteListener, int i, boolean z) {
+    public final void removeStartInfoCompleteListener(
+            IApplicationStartInfoCompleteListener iApplicationStartInfoCompleteListener,
+            int i,
+            boolean z) {
         synchronized (this.mLock) {
             try {
                 if (this.mEnabled) {
@@ -782,12 +902,18 @@ public final class AppStartInfoTracker {
                         if (i2 >= size) {
                             break;
                         }
-                        ApplicationStartInfoCompleteCallback applicationStartInfoCompleteCallback = (ApplicationStartInfoCompleteCallback) arrayList.get(i2);
-                        IApplicationStartInfoCompleteListener iApplicationStartInfoCompleteListener2 = applicationStartInfoCompleteCallback.mCallback;
-                        if (iApplicationStartInfoCompleteListener2 != iApplicationStartInfoCompleteListener) {
+                        ApplicationStartInfoCompleteCallback applicationStartInfoCompleteCallback =
+                                (ApplicationStartInfoCompleteCallback) arrayList.get(i2);
+                        IApplicationStartInfoCompleteListener
+                                iApplicationStartInfoCompleteListener2 =
+                                        applicationStartInfoCompleteCallback.mCallback;
+                        if (iApplicationStartInfoCompleteListener2
+                                != iApplicationStartInfoCompleteListener) {
                             i2++;
                         } else if (z) {
-                            iApplicationStartInfoCompleteListener2.asBinder().unlinkToDeath(applicationStartInfoCompleteCallback, 0);
+                            iApplicationStartInfoCompleteListener2
+                                    .asBinder()
+                                    .unlinkToDeath(applicationStartInfoCompleteCallback, 0);
                         }
                     }
                     if (i2 < size) {
@@ -807,13 +933,19 @@ public final class AppStartInfoTracker {
         synchronized (this.mLock) {
             try {
                 if (this.mEnabled) {
-                    AppStartInfoTracker$$ExternalSyntheticLambda4 appStartInfoTracker$$ExternalSyntheticLambda4 = this.mAppStartInfoPersistTask;
+                    AppStartInfoTracker$$ExternalSyntheticLambda4
+                            appStartInfoTracker$$ExternalSyntheticLambda4 =
+                                    this.mAppStartInfoPersistTask;
                     if (appStartInfoTracker$$ExternalSyntheticLambda4 == null || z) {
                         if (appStartInfoTracker$$ExternalSyntheticLambda4 != null) {
                             IoThread.getHandler().removeCallbacks(this.mAppStartInfoPersistTask);
                         }
-                        this.mAppStartInfoPersistTask = new AppStartInfoTracker$$ExternalSyntheticLambda4(this, 0);
-                        IoThread.getHandler().postDelayed(this.mAppStartInfoPersistTask, z ? 0L : APP_START_INFO_PERSIST_INTERVAL);
+                        this.mAppStartInfoPersistTask =
+                                new AppStartInfoTracker$$ExternalSyntheticLambda4(this, 0);
+                        IoThread.getHandler()
+                                .postDelayed(
+                                        this.mAppStartInfoPersistTask,
+                                        z ? 0L : APP_START_INFO_PERSIST_INTERVAL);
                     }
                 }
             } catch (Throwable th) {

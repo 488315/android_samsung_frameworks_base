@@ -13,15 +13,26 @@ public abstract class PermissionUtils {
         int callingUid = Binder.getCallingUid();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            int packageUidAsUser = context.getPackageManager().getPackageUidAsUser(str, UserHandle.getUserId(callingUid));
+            int packageUidAsUser =
+                    context.getPackageManager()
+                            .getPackageUidAsUser(str, UserHandle.getUserId(callingUid));
             if (packageUidAsUser == callingUid) {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return true;
             }
-            Slog.e("VDM.PermissionUtils", "validatePackageName: App with package name " + str + " is UID " + packageUidAsUser + " but caller is " + callingUid);
+            Slog.e(
+                    "VDM.PermissionUtils",
+                    "validatePackageName: App with package name "
+                            + str
+                            + " is UID "
+                            + packageUidAsUser
+                            + " but caller is "
+                            + callingUid);
             return false;
         } catch (PackageManager.NameNotFoundException unused) {
-            Slog.e("VDM.PermissionUtils", "validatePackageName: App with package name " + str + " does not exist");
+            Slog.e(
+                    "VDM.PermissionUtils",
+                    "validatePackageName: App with package name " + str + " does not exist");
             return false;
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);

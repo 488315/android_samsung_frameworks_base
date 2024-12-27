@@ -14,10 +14,13 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.power.LibQmg;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.view.SemWindowManager;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -38,7 +41,15 @@ public final class ShutdownDialog extends Dialog {
         SemWindowManager.FoldStateListener webpPlayer = new WebpPlayer(context, ".webp");
         Locale locale = Locale.ENGLISH;
         ResourceManager resourceManager = webpPlayer.resourceManager;
-        Slog.v("Shutdown-WebpPlayer", String.format(locale, "isAvailable %s, %s, [%s,%s]", resourceManager.mainImages, resourceManager.subImages, resourceManager.mainLoopImage, resourceManager.subLoopImage));
+        Slog.v(
+                "Shutdown-WebpPlayer",
+                String.format(
+                        locale,
+                        "isAvailable %s, %s, [%s,%s]",
+                        resourceManager.mainImages,
+                        resourceManager.subImages,
+                        resourceManager.mainLoopImage,
+                        resourceManager.subLoopImage));
         if (!(!((ArrayList) resourceManager.mainImages).isEmpty())) {
             webpPlayer = new QmgPlayer(context);
             if (LibQmg.qmgCheckSupportQmg() != 1 || webpPlayer.mainImages.isEmpty()) {
@@ -46,9 +57,22 @@ public final class ShutdownDialog extends Dialog {
                 webpPlayer.mainBitmap = null;
                 webpPlayer.subBitmap = null;
                 ResourceManager resourceManager2 = webpPlayer.resourceManager;
-                Slog.v("Shutdown-PngPlayer", String.format(locale, "isAvailable %s, %s, [%s,%s]", resourceManager2.mainImages, resourceManager2.subImages, resourceManager2.mainLoopImage, resourceManager2.subLoopImage));
-                if (((ArrayList) resourceManager2.mainImages).isEmpty() && ((ArrayList) resourceManager2.subImages).isEmpty() && resourceManager2.mainLoopImage == null && resourceManager2.subLoopImage == null) {
-                    Slog.w("Shutdown-AnimationPlayer", "createPlayer can not make available player");
+                Slog.v(
+                        "Shutdown-PngPlayer",
+                        String.format(
+                                locale,
+                                "isAvailable %s, %s, [%s,%s]",
+                                resourceManager2.mainImages,
+                                resourceManager2.subImages,
+                                resourceManager2.mainLoopImage,
+                                resourceManager2.subLoopImage));
+                if (((ArrayList) resourceManager2.mainImages).isEmpty()
+                        && ((ArrayList) resourceManager2.subImages).isEmpty()
+                        && resourceManager2.mainLoopImage == null
+                        && resourceManager2.subLoopImage == null) {
+                    Slog.w(
+                            "Shutdown-AnimationPlayer",
+                            "createPlayer can not make available player");
                     webpPlayer = null;
                 }
             }
@@ -86,7 +110,8 @@ public final class ShutdownDialog extends Dialog {
         FrameLayout frameLayout = new FrameLayout(this.mContext);
         frameLayout.setLayoutParams(new FrameLayout.LayoutParams(-1, -1, 17));
         frameLayout.setBackgroundColor(-16777216);
-        ShutdownAnimatedImageView shutdownAnimatedImageView = new ShutdownAnimatedImageView(this.mContext);
+        ShutdownAnimatedImageView shutdownAnimatedImageView =
+                new ShutdownAnimatedImageView(this.mContext);
         shutdownAnimatedImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         shutdownAnimatedImageView.setAdjustViewBounds(true);
         this.mImageView = shutdownAnimatedImageView;
@@ -121,7 +146,10 @@ public final class ShutdownDialog extends Dialog {
                 Integer num2 = (Integer) mainAnimationWidthHeight.second;
                 int intValue2 = num2.intValue();
                 if (intValue == intValue2) {
-                    AnyMotionDetector$$ExternalSyntheticOutline0.m(intValue, "disableWindowRotation width and height are same as ", "Shutdown-ShutdownDialog");
+                    AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                            intValue,
+                            "disableWindowRotation width and height are same as ",
+                            "Shutdown-ShutdownDialog");
                 } else {
                     WindowManager.LayoutParams attributes = window.getAttributes();
                     WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
@@ -139,7 +167,12 @@ public final class ShutdownDialog extends Dialog {
                     sb.append("] height[");
                     sb.append(num2);
                     sb.append("] orientation[");
-                    Slog.d("Shutdown-ShutdownDialog", String.format(locale, AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, str, "]"), new Object[0]));
+                    Slog.d(
+                            "Shutdown-ShutdownDialog",
+                            String.format(
+                                    locale,
+                                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, str, "]"),
+                                    new Object[0]));
                 }
             }
         }

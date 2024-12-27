@@ -6,7 +6,9 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.provider.Telephony;
 import android.text.format.Time;
 import android.util.Log;
+
 import com.android.internal.content.NativeLibraryHelper;
+
 import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +23,7 @@ public class SemEntityParser {
 
     @Deprecated(forRemoval = true, since = "15.0")
     public static final int PARSE_LEVEL_WEAK = 0;
+
     private static final String TAG = "SemEntityParser";
     private static int dayOfToday;
     private static Context mContext;
@@ -56,7 +59,9 @@ public class SemEntityParser {
     }
 
     private static void parsingDateMillisInfo() {
-        Pattern p1 = Pattern.compile("((((19|20)(([02468][048])|([13579][26]))[\\-|\\/|\\.]0?2[\\-|\\/|\\.]29)|((((20[0-9][0-9])|(19[0-9][0-9]))[\\-|\\/|\\.])?(((0?[13578]|10|12)[\\-|\\/|\\.]31)|((0?[1,3-9]|1[0-2])[\\-|\\/|\\.](29|30))|((0?[1-9]|1[0-2])[\\-|\\/|\\.](1[0-9]|2[0-8]|0?[1-9])))[[:space:]])))");
+        Pattern p1 =
+                Pattern.compile(
+                        "((((19|20)(([02468][048])|([13579][26]))[\\-|\\/|\\.]0?2[\\-|\\/|\\.]29)|((((20[0-9][0-9])|(19[0-9][0-9]))[\\-|\\/|\\.])?(((0?[13578]|10|12)[\\-|\\/|\\.]31)|((0?[1,3-9]|1[0-2])[\\-|\\/|\\.](29|30))|((0?[1-9]|1[0-2])[\\-|\\/|\\.](1[0-9]|2[0-8]|0?[1-9])))[[:space:]])))");
         Matcher m1 = p1.matcher(mWorkStrForMillis);
         mWorkStrForMillis = p1.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
         while (m1.find()) {
@@ -64,7 +69,9 @@ public class SemEntityParser {
             mInfo.setInfo(convertDateToMillis(matchString, 1), 2);
             Log.d(TAG, "add date for millis(type1): " + matchString);
         }
-        Pattern p2 = Pattern.compile("((((Jan|January|Mar|March|May|Jul|July|Aug|August|Oct|October|Dec|December)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])|((Apr|April|Jun|June|Sep|September|Nov|November)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])|((Feb|February)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])))");
+        Pattern p2 =
+                Pattern.compile(
+                        "((((Jan|January|Mar|March|May|Jul|July|Aug|August|Oct|October|Dec|December)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])|((Apr|April|Jun|June|Sep|September|Nov|November)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])|((Feb|February)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])))");
         Matcher m2 = p2.matcher(mWorkStrForMillis);
         mWorkStrForMillis = p2.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
         while (m2.find()) {
@@ -76,7 +83,11 @@ public class SemEntityParser {
         if (countryDateString.length() > 0 && countryDateString.charAt(0) == '|') {
             StringBuilder sb = new StringBuilder(countryDateString);
             sb.deleteCharAt(0);
-            Pattern p3 = Pattern.compile(NavigationBarInflaterView.KEY_CODE_START + sb.toString() + NavigationBarInflaterView.KEY_CODE_END);
+            Pattern p3 =
+                    Pattern.compile(
+                            NavigationBarInflaterView.KEY_CODE_START
+                                    + sb.toString()
+                                    + NavigationBarInflaterView.KEY_CODE_END);
             Matcher m3 = p3.matcher(mWorkStrForMillis);
             mWorkStrForMillis = p3.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
             while (m3.find()) {
@@ -88,7 +99,11 @@ public class SemEntityParser {
     }
 
     private static void parsingTimeMillisInfo() {
-        Pattern p = Pattern.compile("(((((0[1-9]|1[1-2])[[:space:]]?\\:[[:space:]]?[0-5][0-9][[:space:]]?(am|pm|AM|PM))|(([0-1][0-9]|2[0-3])[[:space:]]?\\:[[:space:]]?[0-5][0-9]))" + SemEntityPatterns.getCountryTimeString(mContext) + "))");
+        Pattern p =
+                Pattern.compile(
+                        "(((((0[1-9]|1[1-2])[[:space:]]?\\:[[:space:]]?[0-5][0-9][[:space:]]?(am|pm|AM|PM))|(([0-1][0-9]|2[0-3])[[:space:]]?\\:[[:space:]]?[0-5][0-9]))"
+                                + SemEntityPatterns.getCountryTimeString(mContext)
+                                + "))");
         Matcher m = p.matcher(mWorkStrForMillis);
         mWorkStrForMillis = p.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
         while (m.find()) {
@@ -131,7 +146,10 @@ public class SemEntityParser {
     }
 
     private static void parsingTimeInfo() {
-        Pattern p = Pattern.compile(SemEntityPatterns.DEFAULT_TIME_STRING + SemEntityPatterns.getCountryTimeString(mContext));
+        Pattern p =
+                Pattern.compile(
+                        SemEntityPatterns.DEFAULT_TIME_STRING
+                                + SemEntityPatterns.getCountryTimeString(mContext));
         Matcher m = p.matcher(mWorkStr);
         mWorkStr = p.matcher(mWorkStr).replaceAll(DELIMITER);
         while (m.find()) {
@@ -158,7 +176,8 @@ public class SemEntityParser {
             } else {
                 matchString = removeUnnecessary(m.group(0));
             }
-            String matchString2 = hyphen.matcher(matchString).replaceAll(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+            String matchString2 =
+                    hyphen.matcher(matchString).replaceAll(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
             if (matchString2.length() >= 7) {
                 mInfo.setInfo(matchString2, 5);
                 Log.d(TAG, "add tel number : " + matchString2);
@@ -186,7 +205,8 @@ public class SemEntityParser {
             } else {
                 matchString = removeUnnecessary(m.group(0));
             }
-            String matchString2 = hyphen.matcher(matchString).replaceAll(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+            String matchString2 =
+                    hyphen.matcher(matchString).replaceAll(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
             mInfo.setInfo(matchString2, 6);
             Log.d(TAG, "add email address : " + matchString2);
         }
@@ -288,7 +308,20 @@ public class SemEntityParser {
             t.minute = 0;
             t.second = 0;
             Log.d(TAG, "convertDateToMillis() completed successfully");
-            Log.d(TAG, "year:" + t.year + ", month:" + t.month + ", day:" + t.monthDay + ", hour:" + t.hour + ", minute:" + t.minute + ", second:" + t.second);
+            Log.d(
+                    TAG,
+                    "year:"
+                            + t.year
+                            + ", month:"
+                            + t.month
+                            + ", day:"
+                            + t.monthDay
+                            + ", hour:"
+                            + t.hour
+                            + ", minute:"
+                            + t.minute
+                            + ", second:"
+                            + t.second);
             long result = t.toMillis(true);
             return Long.toString(result);
         } catch (Exception e) {
@@ -300,7 +333,10 @@ public class SemEntityParser {
     private static String convertDayToInteger(String dayStr) {
         if (dayStr.length() >= 3) {
             StringBuilder builder = new StringBuilder(dayStr);
-            if (dayStr.endsWith(Telephony.BaseMmsColumns.STATUS) || dayStr.endsWith("nd") || dayStr.endsWith("rd") || dayStr.endsWith("th")) {
+            if (dayStr.endsWith(Telephony.BaseMmsColumns.STATUS)
+                    || dayStr.endsWith("nd")
+                    || dayStr.endsWith("rd")
+                    || dayStr.endsWith("th")) {
                 builder.deleteCharAt(builder.length() - 1);
                 builder.deleteCharAt(builder.length() - 1);
             }
@@ -328,12 +364,27 @@ public class SemEntityParser {
             t.monthDay = dayOfToday;
             t.hour = Integer.parseInt(separated[0]);
             if (!timeStr2.contains("pm") && !timeStr2.contains("PM") && !timeStr2.contains("오후")) {
-                if (!timeStr2.contains(XmlTags.TAG_ACCESS_MODE) && !timeStr2.contains("AM") && !timeStr2.contains("오전")) {
+                if (!timeStr2.contains(XmlTags.TAG_ACCESS_MODE)
+                        && !timeStr2.contains("AM")
+                        && !timeStr2.contains("오전")) {
                     t.hour = Integer.parseInt(separated[0]);
                     t.minute = Integer.parseInt(separated[1]);
                     t.second = 0;
                     Log.d(TAG, "convertTimeToMillis() completed successfully");
-                    Log.d(TAG, "year:" + t.year + ", month:" + t.month + ", day:" + t.monthDay + ", hour:" + t.hour + ", minute:" + t.minute + ", second:" + t.second);
+                    Log.d(
+                            TAG,
+                            "year:"
+                                    + t.year
+                                    + ", month:"
+                                    + t.month
+                                    + ", day:"
+                                    + t.monthDay
+                                    + ", hour:"
+                                    + t.hour
+                                    + ", minute:"
+                                    + t.minute
+                                    + ", second:"
+                                    + t.second);
                     long result = t.toMillis(true);
                     return Long.toString(result);
                 }
@@ -343,7 +394,20 @@ public class SemEntityParser {
                 t.minute = Integer.parseInt(separated[1]);
                 t.second = 0;
                 Log.d(TAG, "convertTimeToMillis() completed successfully");
-                Log.d(TAG, "year:" + t.year + ", month:" + t.month + ", day:" + t.monthDay + ", hour:" + t.hour + ", minute:" + t.minute + ", second:" + t.second);
+                Log.d(
+                        TAG,
+                        "year:"
+                                + t.year
+                                + ", month:"
+                                + t.month
+                                + ", day:"
+                                + t.monthDay
+                                + ", hour:"
+                                + t.hour
+                                + ", minute:"
+                                + t.minute
+                                + ", second:"
+                                + t.second);
                 long result2 = t.toMillis(true);
                 return Long.toString(result2);
             }
@@ -353,7 +417,20 @@ public class SemEntityParser {
             t.minute = Integer.parseInt(separated[1]);
             t.second = 0;
             Log.d(TAG, "convertTimeToMillis() completed successfully");
-            Log.d(TAG, "year:" + t.year + ", month:" + t.month + ", day:" + t.monthDay + ", hour:" + t.hour + ", minute:" + t.minute + ", second:" + t.second);
+            Log.d(
+                    TAG,
+                    "year:"
+                            + t.year
+                            + ", month:"
+                            + t.month
+                            + ", day:"
+                            + t.monthDay
+                            + ", hour:"
+                            + t.hour
+                            + ", minute:"
+                            + t.minute
+                            + ", second:"
+                            + t.second);
             long result22 = t.toMillis(true);
             return Long.toString(result22);
         } catch (Exception e) {
@@ -369,6 +446,5 @@ public class SemEntityParser {
         }
     }
 
-    private SemEntityParser() {
-    }
+    private SemEntityParser() {}
 }

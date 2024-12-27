@@ -6,8 +6,8 @@ import com.samsung.android.sume.core.functional.OperatorChain;
 import com.samsung.android.sume.core.functional.OperatorMap$$ExternalSyntheticLambda4;
 import com.samsung.android.sume.core.functional.OperatorWrapper;
 import com.samsung.android.sume.core.functional.OperatorWrapper$$ExternalSyntheticLambda3;
-import com.samsung.android.sume.core.plugin.ImgpPlugin;
 import com.samsung.android.sume.core.types.ImgpType;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,19 +48,28 @@ public class ImgpPlugin extends PluginFixture<ImgpPlugin> {
     }
 
     public Operator getImgProcessor(final String typeName) {
-        return (Operator) this.processorMap.keySet().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.plugin.ImgpPlugin$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((Enum) obj).name().equals(typeName);
-                return equals;
-            }
-        }).findFirst().map(new Function() { // from class: com.samsung.android.sume.core.plugin.ImgpPlugin$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ImgpPlugin.this.m9197x24c2933((Enum) obj);
-            }
-        }).orElse(null);
+        return (Operator)
+                this.processorMap.keySet().stream()
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.plugin.ImgpPlugin$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        boolean equals;
+                                        equals = ((Enum) obj).name().equals(typeName);
+                                        return equals;
+                                    }
+                                })
+                        .findFirst()
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.plugin.ImgpPlugin$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return ImgpPlugin.this.m9197x24c2933((Enum) obj);
+                                    }
+                                })
+                        .orElse(null);
     }
 
     /* renamed from: lambda$getImgProcessor$1$com-samsung-android-sume-core-plugin-ImgpPlugin, reason: not valid java name */
@@ -90,19 +99,39 @@ public class ImgpPlugin extends PluginFixture<ImgpPlugin> {
         private final Map<Enum<?>, Operator> processorMap;
 
         ImgpPluginGroup(ImgpPlugin... plugins) {
-            this.processorMap = (Map) Arrays.stream(plugins).flatMap(new Function() { // from class: com.samsung.android.sume.core.plugin.ImgpPlugin$ImgpPluginGroup$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    Stream stream;
-                    stream = ((ImgpPlugin) obj).processorMap.entrySet().stream();
-                    return stream;
-                }
-            }).collect(Collectors.toMap(new OperatorWrapper$$ExternalSyntheticLambda3(), new OperatorMap$$ExternalSyntheticLambda4(), new BinaryOperator() { // from class: com.samsung.android.sume.core.plugin.ImgpPlugin$ImgpPluginGroup$$ExternalSyntheticLambda1
-                @Override // java.util.function.BiFunction
-                public final Object apply(Object obj, Object obj2) {
-                    return ImgpPlugin.ImgpPluginGroup.lambda$new$1((Operator) obj, (Operator) obj2);
-                }
-            }, new MediaBufferBase$$ExternalSyntheticLambda8()));
+            this.processorMap =
+                    (Map)
+                            Arrays.stream(plugins)
+                                    .flatMap(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.sume.core.plugin.ImgpPlugin$ImgpPluginGroup$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    Stream stream;
+                                                    stream =
+                                                            ((ImgpPlugin) obj)
+                                                                            .processorMap
+                                                                            .entrySet()
+                                                                            .stream();
+                                                    return stream;
+                                                }
+                                            })
+                                    .collect(
+                                            Collectors.toMap(
+                                                    new OperatorWrapper$$ExternalSyntheticLambda3(),
+                                                    new OperatorMap$$ExternalSyntheticLambda4(),
+                                                    new BinaryOperator() { // from class:
+                                                                           // com.samsung.android.sume.core.plugin.ImgpPlugin$ImgpPluginGroup$$ExternalSyntheticLambda1
+                                                        @Override // java.util.function.BiFunction
+                                                        public final Object apply(
+                                                                Object obj, Object obj2) {
+                                                            return ImgpPlugin.ImgpPluginGroup
+                                                                    .lambda$new$1(
+                                                                            (Operator) obj,
+                                                                            (Operator) obj2);
+                                                        }
+                                                    },
+                                                    new MediaBufferBase$$ExternalSyntheticLambda8()));
         }
 
         static /* synthetic */ Operator lambda$new$1(Operator xva$0, Operator xva$1) {

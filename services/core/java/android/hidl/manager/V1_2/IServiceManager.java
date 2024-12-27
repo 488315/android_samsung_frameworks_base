@@ -13,7 +13,9 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.att.iqi.lib.metrics.mm.MM05;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -51,7 +53,8 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
         }
 
         @Override // android.hidl.manager.V1_2.IServiceManager
-        public boolean addWithChain(String str, IBase iBase, ArrayList arrayList) throws RemoteException {
+        public boolean addWithChain(String str, IBase iBase, ArrayList arrayList)
+                throws RemoteException {
             HwParcel hwParcel = new HwParcel();
             hwParcel.writeInterfaceToken(IServiceManager.kInterfaceName);
             hwParcel.writeString(str);
@@ -68,14 +71,20 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             }
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public IHwBinder asBinder() {
             return this.mRemote;
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public void debug(NativeHandle nativeHandle, ArrayList arrayList) throws RemoteException {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -88,7 +97,9 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
 
         @Override // android.hidl.manager.V1_0.IServiceManager
         public ArrayList debugDump() throws RemoteException {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(7, m, hwParcel, 0);
@@ -121,7 +132,9 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             }
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName);
             HwParcel hwParcel = new HwParcel();
@@ -137,7 +150,9 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             }
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public ArrayList getHashChain() throws RemoteException {
             HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName);
             HwParcel hwParcel = new HwParcel();
@@ -148,7 +163,8 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -182,7 +198,9 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             return asBinder().hashCode();
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public ArrayList interfaceChain() throws RemoteException {
             HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName);
             HwParcel hwParcel = new HwParcel();
@@ -196,7 +214,9 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             }
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName);
             HwParcel hwParcel = new HwParcel();
@@ -210,14 +230,19 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             }
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j) throws RemoteException {
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j)
+                throws RemoteException {
             return this.mRemote.linkToDeath(deathRecipient, j);
         }
 
         @Override // android.hidl.manager.V1_0.IServiceManager
         public ArrayList list() throws RemoteException {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(4, m, hwParcel, 0);
@@ -261,7 +286,9 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             }
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName);
             HwParcel hwParcel = new HwParcel();
@@ -273,7 +300,9 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             }
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName);
             HwParcel hwParcel = new HwParcel();
@@ -287,7 +316,9 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
         }
 
         @Override // android.hidl.manager.V1_2.IServiceManager
-        public boolean registerClientCallback(String str, String str2, IBase iBase, IClientCallback iClientCallback) throws RemoteException {
+        public boolean registerClientCallback(
+                String str, String str2, IBase iBase, IClientCallback iClientCallback)
+                throws RemoteException {
             HwParcel hwParcel = new HwParcel();
             hwParcel.writeInterfaceToken(IServiceManager.kInterfaceName);
             hwParcel.writeString(str);
@@ -306,12 +337,15 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
         }
 
         @Override // android.hidl.manager.V1_0.IServiceManager
-        public boolean registerForNotifications(String str, String str2, IServiceNotification iServiceNotification) throws RemoteException {
+        public boolean registerForNotifications(
+                String str, String str2, IServiceNotification iServiceNotification)
+                throws RemoteException {
             HwParcel hwParcel = new HwParcel();
             hwParcel.writeInterfaceToken(android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
             hwParcel.writeString(str);
             hwParcel.writeString(str2);
-            hwParcel.writeStrongBinder(iServiceNotification == null ? null : iServiceNotification.asBinder());
+            hwParcel.writeStrongBinder(
+                    iServiceNotification == null ? null : iServiceNotification.asBinder());
             HwParcel hwParcel2 = new HwParcel();
             try {
                 this.mRemote.transact(6, hwParcel, hwParcel2, 0);
@@ -339,7 +373,9 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             }
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName);
             HwParcel hwParcel = new HwParcel();
@@ -377,14 +413,19 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             }
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
-        public boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient) throws RemoteException {
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        public boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient)
+                throws RemoteException {
             return this.mRemote.unlinkToDeath(deathRecipient);
         }
 
         @Override // android.hidl.manager.V1_2.IServiceManager
-        public boolean unregisterClientCallback(IBase iBase, IClientCallback iClientCallback) throws RemoteException {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IServiceManager.kInterfaceName);
+        public boolean unregisterClientCallback(IBase iBase, IClientCallback iClientCallback)
+                throws RemoteException {
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IServiceManager.kInterfaceName);
             m.writeStrongBinder(iBase == null ? null : iBase.asBinder());
             m.writeStrongBinder(iClientCallback != null ? iClientCallback.asBinder() : null);
             HwParcel hwParcel = new HwParcel();
@@ -399,12 +440,15 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
         }
 
         @Override // android.hidl.manager.V1_1.IServiceManager
-        public boolean unregisterForNotifications(String str, String str2, IServiceNotification iServiceNotification) throws RemoteException {
+        public boolean unregisterForNotifications(
+                String str, String str2, IServiceNotification iServiceNotification)
+                throws RemoteException {
             HwParcel hwParcel = new HwParcel();
             hwParcel.writeInterfaceToken(android.hidl.manager.V1_1.IServiceManager.kInterfaceName);
             hwParcel.writeString(str);
             hwParcel.writeString(str2);
-            hwParcel.writeStrongBinder(iServiceNotification == null ? null : iServiceNotification.asBinder());
+            hwParcel.writeStrongBinder(
+                    iServiceNotification == null ? null : iServiceNotification.asBinder());
             HwParcel hwParcel2 = new HwParcel();
             try {
                 this.mRemote.transact(9, hwParcel, hwParcel2, 0);
@@ -419,16 +463,21 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends HwBinder implements IServiceManager {
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
-        public void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-        }
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        public void debug(NativeHandle nativeHandle, ArrayList arrayList) {}
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo debugInfo = new DebugInfo();
             debugInfo.pid = HidlSupport.getPidIfSharable();
@@ -437,126 +486,258 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             return debugInfo;
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public final ArrayList getHashChain() {
-            return new ArrayList(Arrays.asList(new byte[]{111, 58, -118, 63, -44, -65, -67, 2, -28, -26, 28, 115, 45, 45, -10, 22, -1, 105, 67, 74, 30, -40, 60, -38, 51, 115, 3, -83, -58, -41, 20, -33}, new byte[]{MM05.IQ_SIP_CALL_STATE_DISCONNECTING, -108, -36, -121, 111, 116, -98, -46, 74, -104, -10, 28, 65, -44, 106, -41, 90, 39, 81, 17, 99, -15, -106, -118, 8, 66, 19, -93, 60, 104, 78, -10}, new byte[]{-123, 57, 79, -118, 13, 21, -25, -5, 46, -28, 92, 82, -47, -5, -117, -113, -45, -63, 60, 51, 62, 99, -57, -116, 74, -95, -1, -122, -124, 12, -10, -36}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, -48, 45, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, 36, -13, -51, 105, 87, 19, -109, 36, -72, 59, 24, -54, 76}));
+            return new ArrayList(
+                    Arrays.asList(
+                            new byte[] {
+                                111, 58, -118, 63, -44, -65, -67, 2, -28, -26, 28, 115, 45, 45, -10,
+                                22, -1, 105, 67, 74, 30, -40, 60, -38, 51, 115, 3, -83, -58, -41,
+                                20, -33
+                            },
+                            new byte[] {
+                                MM05.IQ_SIP_CALL_STATE_DISCONNECTING,
+                                -108,
+                                -36,
+                                -121,
+                                111,
+                                116,
+                                -98,
+                                -46,
+                                74,
+                                -104,
+                                -10,
+                                28,
+                                65,
+                                -44,
+                                106,
+                                -41,
+                                90,
+                                39,
+                                81,
+                                17,
+                                99,
+                                -15,
+                                -106,
+                                -118,
+                                8,
+                                66,
+                                19,
+                                -93,
+                                60,
+                                104,
+                                78,
+                                -10
+                            },
+                            new byte[] {
+                                -123, 57, 79, -118, 13, 21, -25, -5, 46, -28, 92, 82, -47, -5, -117,
+                                -113, -45, -63, 60, 51, 62, 99, -57, -116, 74, -95, -1, -122, -124,
+                                12, -10, -36
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                -48,
+                                45,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                36,
+                                -13,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                36,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public final ArrayList interfaceChain() {
-            return new ArrayList(Arrays.asList(IServiceManager.kInterfaceName, android.hidl.manager.V1_1.IServiceManager.kInterfaceName, android.hidl.manager.V1_0.IServiceManager.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList(
+                    Arrays.asList(
+                            IServiceManager.kInterfaceName,
+                            android.hidl.manager.V1_1.IServiceManager.kInterfaceName,
+                            android.hidl.manager.V1_0.IServiceManager.kInterfaceName,
+                            IBase.kInterfaceName));
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return IServiceManager.kInterfaceName;
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j) {
             return true;
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        public void onTransact(int i, HwParcel hwParcel, HwParcel hwParcel2, int i2) throws RemoteException {
+        public void onTransact(int i, HwParcel hwParcel, HwParcel hwParcel2, int i2)
+                throws RemoteException {
             switch (i) {
                 case 1:
-                    hwParcel.enforceInterface(android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
+                    hwParcel.enforceInterface(
+                            android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
                     IBase iBase = get(hwParcel.readString(), hwParcel.readString());
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeStrongBinder(iBase == null ? null : iBase.asBinder());
                     hwParcel2.send();
                     return;
                 case 2:
-                    hwParcel.enforceInterface(android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
-                    boolean add = add(hwParcel.readString(), IBase.asInterface(hwParcel.readStrongBinder()));
+                    hwParcel.enforceInterface(
+                            android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
+                    boolean add =
+                            add(
+                                    hwParcel.readString(),
+                                    IBase.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeBool(add);
                     hwParcel2.send();
                     return;
                 case 3:
-                    hwParcel.enforceInterface(android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
+                    hwParcel.enforceInterface(
+                            android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
                     byte transport = getTransport(hwParcel.readString(), hwParcel.readString());
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeInt8(transport);
                     hwParcel2.send();
                     return;
                 case 4:
-                    hwParcel.enforceInterface(android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
+                    hwParcel.enforceInterface(
+                            android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
                     ArrayList list = list();
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeStringVector(list);
                     hwParcel2.send();
                     return;
                 case 5:
-                    hwParcel.enforceInterface(android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
+                    hwParcel.enforceInterface(
+                            android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
                     ArrayList listByInterface = listByInterface(hwParcel.readString());
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeStringVector(listByInterface);
                     hwParcel2.send();
                     return;
                 case 6:
-                    hwParcel.enforceInterface(android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
-                    boolean registerForNotifications = registerForNotifications(hwParcel.readString(), hwParcel.readString(), IServiceNotification.asInterface(hwParcel.readStrongBinder()));
+                    hwParcel.enforceInterface(
+                            android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
+                    boolean registerForNotifications =
+                            registerForNotifications(
+                                    hwParcel.readString(),
+                                    hwParcel.readString(),
+                                    IServiceNotification.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeBool(registerForNotifications);
                     hwParcel2.send();
                     return;
                 case 7:
-                    hwParcel.enforceInterface(android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
+                    hwParcel.enforceInterface(
+                            android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
                     ArrayList debugDump = debugDump();
                     hwParcel2.writeStatus(0);
                     IServiceManager.InstanceDebugInfo.writeVectorToParcel(hwParcel2, debugDump);
                     hwParcel2.send();
                     return;
                 case 8:
-                    hwParcel.enforceInterface(android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
+                    hwParcel.enforceInterface(
+                            android.hidl.manager.V1_0.IServiceManager.kInterfaceName);
                     registerPassthroughClient(hwParcel.readString(), hwParcel.readString());
                     hwParcel2.writeStatus(0);
                     hwParcel2.send();
                     return;
                 case 9:
-                    hwParcel.enforceInterface(android.hidl.manager.V1_1.IServiceManager.kInterfaceName);
-                    boolean unregisterForNotifications = unregisterForNotifications(hwParcel.readString(), hwParcel.readString(), IServiceNotification.asInterface(hwParcel.readStrongBinder()));
+                    hwParcel.enforceInterface(
+                            android.hidl.manager.V1_1.IServiceManager.kInterfaceName);
+                    boolean unregisterForNotifications =
+                            unregisterForNotifications(
+                                    hwParcel.readString(),
+                                    hwParcel.readString(),
+                                    IServiceNotification.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeBool(unregisterForNotifications);
                     hwParcel2.send();
                     return;
                 case 10:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    boolean registerClientCallback = registerClientCallback(hwParcel.readString(), hwParcel.readString(), IBase.asInterface(hwParcel.readStrongBinder()), IClientCallback.asInterface(hwParcel.readStrongBinder()));
+                    boolean registerClientCallback =
+                            registerClientCallback(
+                                    hwParcel.readString(),
+                                    hwParcel.readString(),
+                                    IBase.asInterface(hwParcel.readStrongBinder()),
+                                    IClientCallback.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeBool(registerClientCallback);
                     hwParcel2.send();
                     return;
                 case 11:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    boolean unregisterClientCallback = unregisterClientCallback(IBase.asInterface(hwParcel.readStrongBinder()), IClientCallback.asInterface(hwParcel.readStrongBinder()));
+                    boolean unregisterClientCallback =
+                            unregisterClientCallback(
+                                    IBase.asInterface(hwParcel.readStrongBinder()),
+                                    IClientCallback.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeBool(unregisterClientCallback);
                     hwParcel2.send();
                     return;
                 case 12:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    boolean addWithChain = addWithChain(hwParcel.readString(), IBase.asInterface(hwParcel.readStrongBinder()), hwParcel.readStringVector());
+                    boolean addWithChain =
+                            addWithChain(
+                                    hwParcel.readString(),
+                                    IBase.asInterface(hwParcel.readStrongBinder()),
+                                    hwParcel.readStringVector());
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeBool(addWithChain);
                     hwParcel2.send();
                     return;
                 case 13:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    ArrayList listManifestByInterface = listManifestByInterface(hwParcel.readString());
+                    ArrayList listManifestByInterface =
+                            listManifestByInterface(hwParcel.readString());
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeStringVector(listManifestByInterface);
                     hwParcel2.send();
                     return;
                 case 14:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    boolean tryUnregister = tryUnregister(hwParcel.readString(), hwParcel.readString(), IBase.asInterface(hwParcel.readStrongBinder()));
+                    boolean tryUnregister =
+                            tryUnregister(
+                                    hwParcel.readString(),
+                                    hwParcel.readString(),
+                                    IBase.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeBool(tryUnregister);
                     hwParcel2.send();
@@ -596,7 +777,8 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
                                 long j = i3 * 32;
                                 byte[] bArr = (byte[]) hashChain.get(i3);
                                 if (bArr == null || bArr.length != 32) {
-                                    throw new IllegalArgumentException("Array element is not of the expected length");
+                                    throw new IllegalArgumentException(
+                                            "Array element is not of the expected length");
                                 }
                                 hwBlob2.putInt8Array(j, bArr);
                             }
@@ -631,9 +813,10 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             }
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        public final void ping() {}
 
         public IHwInterface queryLocalInterface(String str) {
             if (IServiceManager.kInterfaceName.equals(str)) {
@@ -646,15 +829,18 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
             registerService(str);
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
         public String toString() {
             return interfaceDescriptor() + "@Stub";
         }
 
-        @Override // android.hidl.manager.V1_2.IServiceManager, android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+        @Override // android.hidl.manager.V1_2.IServiceManager,
+                  // android.hidl.manager.V1_1.IServiceManager,
+                  // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient) {
             return true;
         }
@@ -708,44 +894,58 @@ public interface IServiceManager extends android.hidl.manager.V1_1.IServiceManag
 
     boolean addWithChain(String str, IBase iBase, ArrayList arrayList) throws RemoteException;
 
-    @Override // android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+    @Override // android.hidl.manager.V1_1.IServiceManager,
+              // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
     IHwBinder asBinder();
 
-    @Override // android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+    @Override // android.hidl.manager.V1_1.IServiceManager,
+              // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
     void debug(NativeHandle nativeHandle, ArrayList arrayList) throws RemoteException;
 
-    @Override // android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+    @Override // android.hidl.manager.V1_1.IServiceManager,
+              // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
     DebugInfo getDebugInfo() throws RemoteException;
 
-    @Override // android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+    @Override // android.hidl.manager.V1_1.IServiceManager,
+              // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
     ArrayList getHashChain() throws RemoteException;
 
-    @Override // android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+    @Override // android.hidl.manager.V1_1.IServiceManager,
+              // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
     ArrayList interfaceChain() throws RemoteException;
 
-    @Override // android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+    @Override // android.hidl.manager.V1_1.IServiceManager,
+              // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
     String interfaceDescriptor() throws RemoteException;
 
-    @Override // android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+    @Override // android.hidl.manager.V1_1.IServiceManager,
+              // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
     boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j) throws RemoteException;
 
     ArrayList listManifestByInterface(String str) throws RemoteException;
 
-    @Override // android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+    @Override // android.hidl.manager.V1_1.IServiceManager,
+              // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
     void notifySyspropsChanged() throws RemoteException;
 
-    @Override // android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+    @Override // android.hidl.manager.V1_1.IServiceManager,
+              // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
     void ping() throws RemoteException;
 
-    boolean registerClientCallback(String str, String str2, IBase iBase, IClientCallback iClientCallback) throws RemoteException;
+    boolean registerClientCallback(
+            String str, String str2, IBase iBase, IClientCallback iClientCallback)
+            throws RemoteException;
 
-    @Override // android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+    @Override // android.hidl.manager.V1_1.IServiceManager,
+              // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
     void setHALInstrumentation() throws RemoteException;
 
     boolean tryUnregister(String str, String str2, IBase iBase) throws RemoteException;
 
-    @Override // android.hidl.manager.V1_1.IServiceManager, android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
+    @Override // android.hidl.manager.V1_1.IServiceManager,
+              // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
     boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient) throws RemoteException;
 
-    boolean unregisterClientCallback(IBase iBase, IClientCallback iClientCallback) throws RemoteException;
+    boolean unregisterClientCallback(IBase iBase, IClientCallback iClientCallback)
+            throws RemoteException;
 }

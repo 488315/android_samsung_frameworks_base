@@ -64,7 +64,8 @@ public class OFBBlockCipher extends StreamBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BlockCipher
-    public int processBlock(byte[] in, int inOff, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int processBlock(byte[] in, int inOff, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         processBytes(in, inOff, this.blockSize, out, outOff);
         return this.blockSize;
     }
@@ -87,8 +88,10 @@ public class OFBBlockCipher extends StreamBlockCipher {
         byte rv = (byte) (bArr[i] ^ in);
         if (this.byteCount == this.blockSize) {
             this.byteCount = 0;
-            System.arraycopy(this.ofbV, this.blockSize, this.ofbV, 0, this.ofbV.length - this.blockSize);
-            System.arraycopy(this.ofbOutV, 0, this.ofbV, this.ofbV.length - this.blockSize, this.blockSize);
+            System.arraycopy(
+                    this.ofbV, this.blockSize, this.ofbV, 0, this.ofbV.length - this.blockSize);
+            System.arraycopy(
+                    this.ofbOutV, 0, this.ofbV, this.ofbV.length - this.blockSize, this.blockSize);
         }
         return rv;
     }

@@ -2,7 +2,9 @@ package com.att.iqi.lib.metrics.sp;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.att.iqi.lib.Metric;
+
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -14,17 +16,18 @@ public class SPTX extends Metric {
     private int m_dwTransId;
     private String m_strMessage;
     public static final Metric.ID ID = new Metric.ID("SPTX");
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.sp.SPTX.1
-        @Override // android.os.Parcelable.Creator
-        public SPTX createFromParcel(Parcel parcel) {
-            return new SPTX(parcel);
-        }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.sp.SPTX.1
+                @Override // android.os.Parcelable.Creator
+                public SPTX createFromParcel(Parcel parcel) {
+                    return new SPTX(parcel);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SPTX[] newArray(int i) {
-            return new SPTX[i];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SPTX[] newArray(int i) {
+                    return new SPTX[i];
+                }
+            };
 
     public SPTX() {
         reset();

@@ -7,7 +7,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.method.QwertyKeyListener;
 import android.util.AttributeSet;
-import android.widget.AutoCompleteTextView;
 
 /* loaded from: classes4.dex */
 public class MultiAutoCompleteTextView extends AutoCompleteTextView {
@@ -33,12 +32,12 @@ public class MultiAutoCompleteTextView extends AutoCompleteTextView {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public MultiAutoCompleteTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public MultiAutoCompleteTextView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    void finishInit() {
-    }
+    void finishInit() {}
 
     public void setTokenizer(Tokenizer t) {
         this.mTokenizer = t;
@@ -109,7 +108,8 @@ public class MultiAutoCompleteTextView extends AutoCompleteTextView {
         editable.replace(start, end, this.mTokenizer.terminateToken(text));
     }
 
-    @Override // android.widget.AutoCompleteTextView, android.widget.EditText, android.widget.TextView, android.view.View
+    @Override // android.widget.AutoCompleteTextView, android.widget.EditText,
+              // android.widget.TextView, android.view.View
     public CharSequence getAccessibilityClassName() {
         return MultiAutoCompleteTextView.class.getName();
     }

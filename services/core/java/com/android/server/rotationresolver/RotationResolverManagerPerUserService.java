@@ -10,12 +10,13 @@ import android.rotationresolver.RotationResolverInternal;
 import android.service.rotationresolver.RotationResolutionRequest;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.LatencyTracker;
 import com.android.server.ambientcontext.AmbientContextManagerPerUserService$$ExternalSyntheticOutline0;
 import com.android.server.desktopmode.DesktopModeService$$ExternalSyntheticOutline0;
 import com.android.server.infra.AbstractPerUserSystemService;
-import com.android.server.rotationresolver.RemoteRotationResolverService;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -36,11 +37,17 @@ public final class RotationResolverManagerPerUserService extends AbstractPerUser
                 if (remoteRotationResolverService != null) {
                     remoteRotationResolverService.dump("", indentingPrintWriter);
                 }
-                RemoteRotationResolverService.RotationRequest rotationRequest = this.mCurrentRequest;
+                RemoteRotationResolverService.RotationRequest rotationRequest =
+                        this.mCurrentRequest;
                 if (rotationRequest != null) {
                     rotationRequest.getClass();
                     indentingPrintWriter.increaseIndent();
-                    StringBuilder m = DesktopModeService$$ExternalSyntheticOutline0.m(new StringBuilder("is dispatched="), rotationRequest.mIsDispatched, indentingPrintWriter, "is fulfilled:=");
+                    StringBuilder m =
+                            DesktopModeService$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("is dispatched="),
+                                    rotationRequest.mIsDispatched,
+                                    indentingPrintWriter,
+                                    "is fulfilled:=");
                     m.append(rotationRequest.mIsFulfilled);
                     indentingPrintWriter.println(m.toString());
                     indentingPrintWriter.decreaseIndent();
@@ -65,26 +72,52 @@ public final class RotationResolverManagerPerUserService extends AbstractPerUser
     @Override // com.android.server.infra.AbstractPerUserSystemService
     public final ServiceInfo newServiceInfoLocked(ComponentName componentName) {
         try {
-            ServiceInfo serviceInfo = AppGlobals.getPackageManager().getServiceInfo(componentName, 128L, this.mUserId);
-            if (serviceInfo != null && !"android.permission.BIND_ROTATION_RESOLVER_SERVICE".equals(serviceInfo.permission)) {
-                throw new SecurityException("Service " + serviceInfo.getComponentName() + " requires android.permission.BIND_ROTATION_RESOLVER_SERVICE permission. Found " + serviceInfo.permission + " permission");
+            ServiceInfo serviceInfo =
+                    AppGlobals.getPackageManager()
+                            .getServiceInfo(componentName, 128L, this.mUserId);
+            if (serviceInfo != null
+                    && !"android.permission.BIND_ROTATION_RESOLVER_SERVICE"
+                            .equals(serviceInfo.permission)) {
+                throw new SecurityException(
+                        "Service "
+                                + serviceInfo.getComponentName()
+                                + " requires android.permission.BIND_ROTATION_RESOLVER_SERVICE"
+                                + " permission. Found "
+                                + serviceInfo.permission
+                                + " permission");
             }
             return serviceInfo;
         } catch (RemoteException unused) {
-            throw new PackageManager.NameNotFoundException(AmbientContextManagerPerUserService$$ExternalSyntheticOutline0.m(componentName, "Could not get service for "));
+            throw new PackageManager.NameNotFoundException(
+                    AmbientContextManagerPerUserService$$ExternalSyntheticOutline0.m(
+                            componentName, "Could not get service for "));
         }
     }
 
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.rotationresolver.RotationResolverManagerPerUserService$1] */
-    public void resolveRotationLocked(final RotationResolverInternal.RotationResolverCallbackInternal rotationResolverCallbackInternal, RotationResolutionRequest rotationResolutionRequest, CancellationSignal cancellationSignal) {
+    public void resolveRotationLocked(
+            final RotationResolverInternal.RotationResolverCallbackInternal
+                    rotationResolverCallbackInternal,
+            RotationResolutionRequest rotationResolutionRequest,
+            CancellationSignal cancellationSignal) {
         if (!isServiceAvailableLocked()) {
-            Slog.w("RotationResolverManagerPerUserService", "Service is not available at this moment.");
+            Slog.w(
+                    "RotationResolverManagerPerUserService",
+                    "Service is not available at this moment.");
             rotationResolverCallbackInternal.onFailure(0);
-            FrameworkStatsLog.write(328, RotationResolverManagerService.surfaceRotationToProto(rotationResolutionRequest.getCurrentRotation()), RotationResolverManagerService.surfaceRotationToProto(rotationResolutionRequest.getProposedRotation()), 7);
+            FrameworkStatsLog.write(
+                    328,
+                    RotationResolverManagerService.surfaceRotationToProto(
+                            rotationResolutionRequest.getCurrentRotation()),
+                    RotationResolverManagerService.surfaceRotationToProto(
+                            rotationResolutionRequest.getProposedRotation()),
+                    7);
             return;
         }
         if (this.mRemoteService == null) {
-            this.mRemoteService = new RemoteRotationResolverService(this.mMaster.getContext(), this.mComponentName, this.mUserId);
+            this.mRemoteService =
+                    new RemoteRotationResolverService(
+                            this.mMaster.getContext(), this.mComponentName, this.mUserId);
         }
         RemoteRotationResolverService.RotationRequest rotationRequest = this.mCurrentRequest;
         if (rotationRequest != null && !rotationRequest.mIsFulfilled && rotationRequest != null) {
@@ -94,38 +127,56 @@ public final class RotationResolverManagerPerUserService extends AbstractPerUser
         synchronized (this.mLock) {
             this.mLatencyTracker.onActionStart(9);
         }
-        this.mCurrentRequest = new RemoteRotationResolverService.RotationRequest(new RotationResolverInternal.RotationResolverCallbackInternal() { // from class: com.android.server.rotationresolver.RotationResolverManagerPerUserService.1
-            public final void onFailure(int i) {
-                synchronized (RotationResolverManagerPerUserService.this.mLock) {
-                    RotationResolverManagerPerUserService.this.mLatencyTracker.onActionEnd(9);
-                }
-                rotationResolverCallbackInternal.onFailure(i);
-            }
+        this.mCurrentRequest =
+                new RemoteRotationResolverService.RotationRequest(
+                        new RotationResolverInternal
+                                .RotationResolverCallbackInternal() { // from class:
+                                                                      // com.android.server.rotationresolver.RotationResolverManagerPerUserService.1
+                            public final void onFailure(int i) {
+                                synchronized (RotationResolverManagerPerUserService.this.mLock) {
+                                    RotationResolverManagerPerUserService.this.mLatencyTracker
+                                            .onActionEnd(9);
+                                }
+                                rotationResolverCallbackInternal.onFailure(i);
+                            }
 
-            public final void onSuccess(int i) {
-                synchronized (RotationResolverManagerPerUserService.this.mLock) {
-                    RotationResolverManagerPerUserService.this.mLatencyTracker.onActionEnd(9);
-                }
-                rotationResolverCallbackInternal.onSuccess(i);
-            }
-        }, rotationResolutionRequest, cancellationSignal, this.mLock);
-        cancellationSignal.setOnCancelListener(new CancellationSignal.OnCancelListener() { // from class: com.android.server.rotationresolver.RotationResolverManagerPerUserService$$ExternalSyntheticLambda0
-            @Override // android.os.CancellationSignal.OnCancelListener
-            public final void onCancel() {
-                RotationResolverManagerPerUserService rotationResolverManagerPerUserService = RotationResolverManagerPerUserService.this;
-                synchronized (rotationResolverManagerPerUserService.mLock) {
-                    try {
-                        RemoteRotationResolverService.RotationRequest rotationRequest2 = rotationResolverManagerPerUserService.mCurrentRequest;
-                        if (rotationRequest2 != null && !rotationRequest2.mIsFulfilled) {
-                            Slog.d("RotationResolverManagerPerUserService", "Trying to cancel the remote request. Reason: Client cancelled.");
-                            rotationResolverManagerPerUserService.mCurrentRequest.cancelInternal();
+                            public final void onSuccess(int i) {
+                                synchronized (RotationResolverManagerPerUserService.this.mLock) {
+                                    RotationResolverManagerPerUserService.this.mLatencyTracker
+                                            .onActionEnd(9);
+                                }
+                                rotationResolverCallbackInternal.onSuccess(i);
+                            }
+                        },
+                        rotationResolutionRequest,
+                        cancellationSignal,
+                        this.mLock);
+        cancellationSignal.setOnCancelListener(
+                new CancellationSignal.OnCancelListener() { // from class:
+                    // com.android.server.rotationresolver.RotationResolverManagerPerUserService$$ExternalSyntheticLambda0
+                    @Override // android.os.CancellationSignal.OnCancelListener
+                    public final void onCancel() {
+                        RotationResolverManagerPerUserService
+                                rotationResolverManagerPerUserService =
+                                        RotationResolverManagerPerUserService.this;
+                        synchronized (rotationResolverManagerPerUserService.mLock) {
+                            try {
+                                RemoteRotationResolverService.RotationRequest rotationRequest2 =
+                                        rotationResolverManagerPerUserService.mCurrentRequest;
+                                if (rotationRequest2 != null && !rotationRequest2.mIsFulfilled) {
+                                    Slog.d(
+                                            "RotationResolverManagerPerUserService",
+                                            "Trying to cancel the remote request. Reason: Client"
+                                                + " cancelled.");
+                                    rotationResolverManagerPerUserService.mCurrentRequest
+                                            .cancelInternal();
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
-        });
+                });
         this.mRemoteService.resolveRotation(this.mCurrentRequest);
         this.mCurrentRequest.mIsDispatched = true;
     }

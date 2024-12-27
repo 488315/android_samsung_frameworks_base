@@ -3,31 +3,39 @@ package android.service.credentials;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class CreateCredentialRequest implements Parcelable {
-    public static final Parcelable.Creator<CreateCredentialRequest> CREATOR = new Parcelable.Creator<CreateCredentialRequest>() { // from class: android.service.credentials.CreateCredentialRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateCredentialRequest createFromParcel(Parcel in) {
-            return new CreateCredentialRequest(in);
-        }
+    public static final Parcelable.Creator<CreateCredentialRequest> CREATOR =
+            new Parcelable.Creator<
+                    CreateCredentialRequest>() { // from class:
+                                                 // android.service.credentials.CreateCredentialRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateCredentialRequest createFromParcel(Parcel in) {
+                    return new CreateCredentialRequest(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateCredentialRequest[] newArray(int size) {
-            return new CreateCredentialRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateCredentialRequest[] newArray(int size) {
+                    return new CreateCredentialRequest[size];
+                }
+            };
     private final CallingAppInfo mCallingAppInfo;
     private final Bundle mData;
     private final String mType;
 
     public CreateCredentialRequest(CallingAppInfo callingAppInfo, String type, Bundle data) {
-        this.mCallingAppInfo = (CallingAppInfo) Objects.requireNonNull(callingAppInfo, "callingAppInfo must not be null");
-        this.mType = (String) Preconditions.checkStringNotEmpty(type, "type must not be null or empty");
+        this.mCallingAppInfo =
+                (CallingAppInfo)
+                        Objects.requireNonNull(callingAppInfo, "callingAppInfo must not be null");
+        this.mType =
+                (String) Preconditions.checkStringNotEmpty(type, "type must not be null or empty");
         this.mData = (Bundle) Objects.requireNonNull(data, "data must not be null");
     }
 

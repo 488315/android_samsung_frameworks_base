@@ -2,6 +2,7 @@ package android.security.keystore.recovery;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.io.ByteArrayInputStream;
 import java.security.cert.CertPath;
 import java.security.cert.CertificateEncodingException;
@@ -12,22 +13,26 @@ import java.util.Objects;
 /* loaded from: classes3.dex */
 public final class RecoveryCertPath implements Parcelable {
     private static final String CERT_PATH_ENCODING = "PkiPath";
-    public static final Parcelable.Creator<RecoveryCertPath> CREATOR = new Parcelable.Creator<RecoveryCertPath>() { // from class: android.security.keystore.recovery.RecoveryCertPath.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecoveryCertPath createFromParcel(Parcel in) {
-            return new RecoveryCertPath(in);
-        }
+    public static final Parcelable.Creator<RecoveryCertPath> CREATOR =
+            new Parcelable.Creator<
+                    RecoveryCertPath>() { // from class:
+                                          // android.security.keystore.recovery.RecoveryCertPath.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecoveryCertPath createFromParcel(Parcel in) {
+                    return new RecoveryCertPath(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecoveryCertPath[] newArray(int length) {
-            return new RecoveryCertPath[length];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecoveryCertPath[] newArray(int length) {
+                    return new RecoveryCertPath[length];
+                }
+            };
     private final byte[] mEncodedCertPath;
 
-    public static RecoveryCertPath createRecoveryCertPath(CertPath certPath) throws CertificateException {
+    public static RecoveryCertPath createRecoveryCertPath(CertPath certPath)
+            throws CertificateException {
         try {
             return new RecoveryCertPath(encodeCertPath(certPath));
         } catch (CertificateEncodingException e) {
@@ -66,7 +71,8 @@ public final class RecoveryCertPath implements Parcelable {
         Objects.requireNonNull(bytes);
         try {
             CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
-            return certFactory.generateCertPath(new ByteArrayInputStream(bytes), CERT_PATH_ENCODING);
+            return certFactory.generateCertPath(
+                    new ByteArrayInputStream(bytes), CERT_PATH_ENCODING);
         } catch (CertificateException e) {
             throw new RuntimeException(e);
         }

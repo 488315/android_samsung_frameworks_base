@@ -3,12 +3,12 @@ package com.android.internal.org.bouncycastle.cert.selector;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encoding;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.internal.org.bouncycastle.util.Pack;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
 class MSOutlookKeyIdCalculator {
-    MSOutlookKeyIdCalculator() {
-    }
+    MSOutlookKeyIdCalculator() {}
 
     static byte[] calculateKeyId(SubjectPublicKeyInfo info) {
         SHA1Digest dig = new SHA1Digest();
@@ -24,7 +24,7 @@ class MSOutlookKeyIdCalculator {
         }
     }
 
-    private static abstract class GeneralDigest {
+    private abstract static class GeneralDigest {
         private static final int BYTE_LENGTH = 64;
         private long byteCount;
         private byte[] xBuf;

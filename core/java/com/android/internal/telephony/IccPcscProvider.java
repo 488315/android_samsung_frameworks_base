@@ -4,7 +4,7 @@ import android.media.MediaMetrics;
 import android.os.ServiceManager;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
-import com.android.internal.telephony.ISemTelephony;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -47,7 +47,8 @@ public class IccPcscProvider {
 
     public IccPcscProvider() {
         this.isInitiated = false;
-        this.mPhoneId = SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultSubscriptionId());
+        this.mPhoneId =
+                SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultSubscriptionId());
         pscsPowerup();
     }
 
@@ -121,7 +122,9 @@ public class IccPcscProvider {
             dos.writeByte(1);
             try {
                 byte[] response = new byte[1];
-                int val = getTelephonyService().sendRequestToRIL(bos.toByteArray(), response, 4, this.mPhoneId);
+                int val =
+                        getTelephonyService()
+                                .sendRequestToRIL(bos.toByteArray(), response, 4, this.mPhoneId);
                 dos.close();
                 bos.close();
                 return val;
@@ -163,7 +166,9 @@ public class IccPcscProvider {
                 dos.writeByte(b);
             }
             try {
-                int val = getTelephonyService().sendRequestToRIL(bos.toByteArray(), response, 6, this.mPhoneId);
+                int val =
+                        getTelephonyService()
+                                .sendRequestToRIL(bos.toByteArray(), response, 6, this.mPhoneId);
                 dos.close();
                 bos.close();
                 return val;
@@ -201,7 +206,9 @@ public class IccPcscProvider {
             dos.writeByte(channel);
             try {
                 byte[] response = new byte[1];
-                int val = getTelephonyService().sendRequestToRIL(bos.toByteArray(), response, 5, this.mPhoneId);
+                int val =
+                        getTelephonyService()
+                                .sendRequestToRIL(bos.toByteArray(), response, 5, this.mPhoneId);
                 dos.close();
                 bos.close();
                 return val;
@@ -231,7 +238,8 @@ public class IccPcscProvider {
     }
 
     private ISemTelephony getTelephonyService() {
-        ISemTelephony semTelephony = ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
+        ISemTelephony semTelephony =
+                ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"));
         if (semTelephony == null) {
             Log.w(mLogTag, "Unable to find ISemTelephony interface.");
         }

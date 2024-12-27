@@ -26,8 +26,7 @@ public final class NativeInterpolatorFactory {
 
     public static native long createPathInterpolator(float[] fArr, float[] fArr2);
 
-    private NativeInterpolatorFactory() {
-    }
+    private NativeInterpolatorFactory() {}
 
     public static long createNativeInterpolator(TimeInterpolator interpolator, long duration) {
         if (interpolator == null) {

@@ -7,6 +7,7 @@ import android.media.AudioRecordingConfiguration;
 import android.os.RemoteException;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -32,19 +33,25 @@ public final class AudioRecordingDetector extends AudioManager.AudioRecordingCal
                 arrayList = new ArrayList();
                 Iterator it = list.iterator();
                 while (it.hasNext()) {
-                    AudioRecordingConfiguration audioRecordingConfiguration = (AudioRecordingConfiguration) it.next();
-                    if (arraySet.contains(Integer.valueOf(audioRecordingConfiguration.getClientUid()))) {
+                    AudioRecordingConfiguration audioRecordingConfiguration =
+                            (AudioRecordingConfiguration) it.next();
+                    if (arraySet.contains(
+                            Integer.valueOf(audioRecordingConfiguration.getClientUid()))) {
                         arrayList.add(audioRecordingConfiguration);
                     }
                 }
             }
             synchronized (virtualAudioController.mCallbackLock) {
-                IAudioConfigChangedCallback iAudioConfigChangedCallback = virtualAudioController.mConfigChangedCallback;
+                IAudioConfigChangedCallback iAudioConfigChangedCallback =
+                        virtualAudioController.mConfigChangedCallback;
                 if (iAudioConfigChangedCallback != null) {
                     try {
                         iAudioConfigChangedCallback.onRecordingConfigChanged(arrayList);
                     } catch (RemoteException e) {
-                        Slog.e("VirtualAudioController", "RemoteException when calling onRecordingConfigChanged", e);
+                        Slog.e(
+                                "VirtualAudioController",
+                                "RemoteException when calling onRecordingConfigChanged",
+                                e);
                     }
                 }
             }

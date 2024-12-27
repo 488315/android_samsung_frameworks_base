@@ -9,6 +9,7 @@ import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
@@ -29,14 +30,19 @@ public abstract class FragmentHostCallback<E> extends FragmentContainer {
     public abstract E onGetHost();
 
     public FragmentHostCallback(Context context, Handler handler, int windowAnimations) {
-        this(context instanceof Activity ? (Activity) context : null, context, chooseHandler(context, handler), windowAnimations);
+        this(
+                context instanceof Activity ? (Activity) context : null,
+                context,
+                chooseHandler(context, handler),
+                windowAnimations);
     }
 
     FragmentHostCallback(Activity activity) {
         this(activity, activity, activity.mHandler, 0);
     }
 
-    FragmentHostCallback(Activity activity, Context context, Handler handler, int windowAnimations) {
+    FragmentHostCallback(
+            Activity activity, Context context, Handler handler, int windowAnimations) {
         this.mFragmentManager = new FragmentManagerImpl();
         this.mActivity = activity;
         this.mContext = context;
@@ -52,8 +58,7 @@ public abstract class FragmentHostCallback<E> extends FragmentContainer {
         return handler;
     }
 
-    public void onDump(String prefix, FileDescriptor fd, PrintWriter writer, String[] args) {
-    }
+    public void onDump(String prefix, FileDescriptor fd, PrintWriter writer, String[] args) {}
 
     public boolean onShouldSaveFragmentState(Fragment fragment) {
         return true;
@@ -67,32 +72,50 @@ public abstract class FragmentHostCallback<E> extends FragmentContainer {
         return false;
     }
 
-    public void onInvalidateOptionsMenu() {
-    }
+    public void onInvalidateOptionsMenu() {}
 
-    public void onStartActivityFromFragment(Fragment fragment, Intent intent, int requestCode, Bundle options) {
+    public void onStartActivityFromFragment(
+            Fragment fragment, Intent intent, int requestCode, Bundle options) {
         if (requestCode != -1) {
-            throw new IllegalStateException("Starting activity with a requestCode requires a FragmentActivity host");
+            throw new IllegalStateException(
+                    "Starting activity with a requestCode requires a FragmentActivity host");
         }
         this.mContext.startActivity(intent);
     }
 
-    public void onStartActivityAsUserFromFragment(Fragment fragment, Intent intent, int requestCode, Bundle options, UserHandle userHandle) {
+    public void onStartActivityAsUserFromFragment(
+            Fragment fragment,
+            Intent intent,
+            int requestCode,
+            Bundle options,
+            UserHandle userHandle) {
         if (requestCode != -1) {
-            throw new IllegalStateException("Starting activity with a requestCode requires a FragmentActivity host");
+            throw new IllegalStateException(
+                    "Starting activity with a requestCode requires a FragmentActivity host");
         }
         this.mContext.startActivityAsUser(intent, userHandle);
     }
 
-    public void onStartIntentSenderFromFragment(Fragment fragment, IntentSender intent, int requestCode, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) throws IntentSender.SendIntentException {
+    public void onStartIntentSenderFromFragment(
+            Fragment fragment,
+            IntentSender intent,
+            int requestCode,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            int extraFlags,
+            Bundle options)
+            throws IntentSender.SendIntentException {
         if (requestCode != -1) {
-            throw new IllegalStateException("Starting intent sender with a requestCode requires a FragmentActivity host");
+            throw new IllegalStateException(
+                    "Starting intent sender with a requestCode requires a FragmentActivity host");
         }
-        this.mContext.startIntentSender(intent, fillInIntent, flagsMask, flagsValues, extraFlags, options);
+        this.mContext.startIntentSender(
+                intent, fillInIntent, flagsMask, flagsValues, extraFlags, options);
     }
 
-    public void onRequestPermissionsFromFragment(Fragment fragment, String[] permissions, int requestCode) {
-    }
+    public void onRequestPermissionsFromFragment(
+            Fragment fragment, String[] permissions, int requestCode) {}
 
     public boolean onHasWindowAnimations() {
         return true;
@@ -102,8 +125,7 @@ public abstract class FragmentHostCallback<E> extends FragmentContainer {
         return this.mWindowAnimations;
     }
 
-    public void onAttachFragment(Fragment fragment) {
-    }
+    public void onAttachFragment(Fragment fragment) {}
 
     @Override // android.app.FragmentContainer
     public <T extends View> T onFindViewById(int id) {
@@ -146,7 +168,9 @@ public abstract class FragmentHostCallback<E> extends FragmentContainer {
 
     void inactivateFragment(String who) {
         LoaderManagerImpl lm;
-        if (this.mAllLoaderManagers != null && (lm = (LoaderManagerImpl) this.mAllLoaderManagers.get(who)) != null && !lm.mRetaining) {
+        if (this.mAllLoaderManagers != null
+                && (lm = (LoaderManagerImpl) this.mAllLoaderManagers.get(who)) != null
+                && !lm.mRetaining) {
             lm.doDestroy();
             this.mAllLoaderManagers.remove(who);
         }

@@ -4,12 +4,13 @@ import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.location.ILocationManager;
 import android.media.MediaMetrics;
-import android.os.Binder;
-import android.os.BinderProxy;
-import android.os.IBinder;
 import android.util.Log;
 import android.util.SparseIntArray;
+
 import com.android.internal.os.BinderInternal;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.io.FileDescriptor;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -23,7 +24,6 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes3.dex */
 public final class BinderProxy implements IBinder {
@@ -34,12 +34,14 @@ public final class BinderProxy implements IBinder {
     private static final ProxyMap sProxyMap = new ProxyMap();
     volatile boolean mWarnOnBlocking = Binder.sWarnOnBlocking;
     private int msgForGoogleLocation = 0;
-    private List<IBinder.DeathRecipient> mDeathRecipients = Collections.synchronizedList(new ArrayList());
+    private List<IBinder.DeathRecipient> mDeathRecipients =
+            Collections.synchronizedList(new ArrayList());
 
     /* JADX INFO: Access modifiers changed from: private */
     public static native long getNativeFinalizer();
 
-    private native void linkToDeathNative(IBinder.DeathRecipient deathRecipient, int i) throws RemoteException;
+    private native void linkToDeathNative(IBinder.DeathRecipient deathRecipient, int i)
+            throws RemoteException;
 
     private native boolean unlinkToDeathNative(IBinder.DeathRecipient deathRecipient, int i);
 
@@ -55,7 +57,8 @@ public final class BinderProxy implements IBinder {
     @Override // android.os.IBinder
     public native boolean pingBinder();
 
-    public native boolean transactNative(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException;
+    public native boolean transactNative(int i, Parcel parcel, Parcel parcel2, int i2)
+            throws RemoteException;
 
     private static class BinderProxyMapSizeException extends AssertionError {
         BinderProxyMapSizeException(String s) {
@@ -192,7 +195,9 @@ public final class BinderProxy implements IBinder {
             }
             if (size >= this.mWarnBucketSize) {
                 int totalSize = size();
-                Log.v("Binder", "BinderProxy map growth! bucket size = " + size + " total = " + totalSize);
+                Log.v(
+                        "Binder",
+                        "BinderProxy map growth! bucket size = " + size + " total = " + totalSize);
                 this.mWarnBucketSize += 10;
                 if (totalSize >= 25000) {
                     int totalUnclearedSize = unclearedSize();
@@ -200,10 +205,23 @@ public final class BinderProxy implements IBinder {
                         dumpProxyInterfaceCounts();
                         dumpPerUidProxyCounts();
                         Runtime.getRuntime().gc();
-                        throw new BinderProxyMapSizeException("Binder ProxyMap has too many entries: " + totalSize + " (total), " + totalUnclearedSize + " (uncleared), " + unclearedSize() + " (uncleared after GC). BinderProxy leak?");
+                        throw new BinderProxyMapSizeException(
+                                "Binder ProxyMap has too many entries: "
+                                        + totalSize
+                                        + " (total), "
+                                        + totalUnclearedSize
+                                        + " (uncleared), "
+                                        + unclearedSize()
+                                        + " (uncleared after GC). BinderProxy leak?");
                     }
                     if (totalSize > (totalUnclearedSize * 3) / 2) {
-                        Log.v("Binder", "BinderProxy map has many cleared entries: " + (totalSize - totalUnclearedSize) + " of " + totalSize + " are cleared");
+                        Log.v(
+                                "Binder",
+                                "BinderProxy map has many cleared entries: "
+                                        + (totalSize - totalUnclearedSize)
+                                        + " of "
+                                        + totalSize
+                                        + " are cleared");
                     }
                 }
             }
@@ -229,17 +247,22 @@ public final class BinderProxy implements IBinder {
                 Log.e("Binder", "RemoteException while disabling app freezer");
             }
             ExecutorService executorService = Executors.newSingleThreadExecutor();
-            executorService.submit(new Runnable() { // from class: android.os.BinderProxy$ProxyMap$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    BinderProxy.ProxyMap.lambda$getSortedInterfaceCounts$0(proxiesToQuery, counts);
-                }
-            });
+            executorService.submit(
+                    new Runnable() { // from class:
+                                     // android.os.BinderProxy$ProxyMap$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            BinderProxy.ProxyMap.lambda$getSortedInterfaceCounts$0(
+                                    proxiesToQuery, counts);
+                        }
+                    });
             try {
                 executorService.shutdown();
                 boolean dumpDone = executorService.awaitTermination(20L, TimeUnit.SECONDS);
                 if (!dumpDone) {
-                    Log.e("Binder", "Failed to complete binder proxy dump, dumping what we have so far.");
+                    Log.e(
+                            "Binder",
+                            "Failed to complete binder proxy dump, dumping what we have so far.");
                 }
             } catch (InterruptedException e2) {
             }
@@ -248,24 +271,32 @@ public final class BinderProxy implements IBinder {
             } catch (RemoteException e3) {
                 Log.e("Binder", "RemoteException while re-enabling app freezer");
             }
-            Map.Entry<String, Integer>[] sorted = (Map.Entry[]) counts.entrySet().toArray(new Map.Entry[counts.size()]);
-            Arrays.sort(sorted, new Comparator() { // from class: android.os.BinderProxy$ProxyMap$$ExternalSyntheticLambda1
-                @Override // java.util.Comparator
-                public final int compare(Object obj, Object obj2) {
-                    int compareTo;
-                    compareTo = ((Integer) ((Map.Entry) obj2).getValue()).compareTo((Integer) ((Map.Entry) obj).getValue());
-                    return compareTo;
-                }
-            });
+            Map.Entry<String, Integer>[] sorted =
+                    (Map.Entry[]) counts.entrySet().toArray(new Map.Entry[counts.size()]);
+            Arrays.sort(
+                    sorted,
+                    new Comparator() { // from class:
+                                       // android.os.BinderProxy$ProxyMap$$ExternalSyntheticLambda1
+                        @Override // java.util.Comparator
+                        public final int compare(Object obj, Object obj2) {
+                            int compareTo;
+                            compareTo =
+                                    ((Integer) ((Map.Entry) obj2).getValue())
+                                            .compareTo((Integer) ((Map.Entry) obj).getValue());
+                            return compareTo;
+                        }
+                    });
             int returnCount = Math.min(maxToReturn, sorted.length);
             InterfaceCount[] ifaceCounts = new InterfaceCount[returnCount];
             for (int i = 0; i < returnCount; i++) {
-                ifaceCounts[i] = new InterfaceCount(sorted[i].getKey(), sorted[i].getValue().intValue());
+                ifaceCounts[i] =
+                        new InterfaceCount(sorted[i].getKey(), sorted[i].getValue().intValue());
             }
             return ifaceCounts;
         }
 
-        static /* synthetic */ void lambda$getSortedInterfaceCounts$0(ArrayList proxiesToQuery, Map counts) {
+        static /* synthetic */ void lambda$getSortedInterfaceCounts$0(
+                ArrayList proxiesToQuery, Map counts) {
             String key;
             Iterator it = proxiesToQuery.iterator();
             while (it.hasNext()) {
@@ -361,7 +392,8 @@ public final class BinderProxy implements IBinder {
                 sProxyMap.set(iBinder, result2);
                 return result2;
             } catch (Throwable e) {
-                NativeAllocationRegistry.applyFreeFunction(NoImagePreloadHolder.sNativeFinalizer, nativeData);
+                NativeAllocationRegistry.applyFreeFunction(
+                        NoImagePreloadHolder.sNativeFinalizer, nativeData);
                 throw e;
             }
         }
@@ -373,10 +405,11 @@ public final class BinderProxy implements IBinder {
 
     private static class NoImagePreloadHolder {
         public static final long sNativeFinalizer = BinderProxy.getNativeFinalizer();
-        public static final NativeAllocationRegistry sRegistry = new NativeAllocationRegistry(BinderProxy.class.getClassLoader(), sNativeFinalizer, 1000);
+        public static final NativeAllocationRegistry sRegistry =
+                new NativeAllocationRegistry(
+                        BinderProxy.class.getClassLoader(), sNativeFinalizer, 1000);
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     @Override // android.os.IBinder
@@ -390,13 +423,21 @@ public final class BinderProxy implements IBinder {
         long time;
         Binder.checkParcel(this, code, data, "Unreasonably large binder buffer");
         boolean warnOnBlocking = this.mWarnOnBlocking;
-        if (warnOnBlocking && (flags & 1) == 0 && Binder.sWarnOnBlockingOnCurrentThread.get().booleanValue()) {
+        if (warnOnBlocking
+                && (flags & 1) == 0
+                && Binder.sWarnOnBlockingOnCurrentThread.get().booleanValue()) {
             this.mWarnOnBlocking = false;
             warnOnBlocking = false;
             if (Build.IS_USERDEBUG || Build.IS_ENG) {
-                Log.wtf("Binder", "Outgoing transactions from this process must be FLAG_ONEWAY", new Throwable());
+                Log.wtf(
+                        "Binder",
+                        "Outgoing transactions from this process must be FLAG_ONEWAY",
+                        new Throwable());
             } else {
-                Log.w("Binder", "Outgoing transactions from this process must be FLAG_ONEWAY", new Throwable());
+                Log.w(
+                        "Binder",
+                        "Outgoing transactions from this process must be FLAG_ONEWAY",
+                        new Throwable());
             }
         }
         boolean tracingEnabled = Binder.isStackTrackingEnabled();
@@ -407,7 +448,11 @@ public final class BinderProxy implements IBinder {
                 Binder.getTransactionTracker().addTrace(tr);
             }
             StackTraceElement stackTraceElement = tr.getStackTrace()[1];
-            Trace.traceBegin(1L, stackTraceElement.getClassName() + MediaMetrics.SEPARATOR + stackTraceElement.getMethodName());
+            Trace.traceBegin(
+                    1L,
+                    stackTraceElement.getClassName()
+                            + MediaMetrics.SEPARATOR
+                            + stackTraceElement.getMethodName());
         }
         if (isMsgForGoogleLocation(data)) {
             sendInfoToNSFLP(code, data);
@@ -422,7 +467,8 @@ public final class BinderProxy implements IBinder {
                 data.replaceCallingWorkSourceUid(updatedWorkSourceUid);
             }
         }
-        AppOpsManager.PausedNotedAppOpsCollection prevCollection = AppOpsManager.pauseNotedAppOpsCollection();
+        AppOpsManager.PausedNotedAppOpsCollection prevCollection =
+                AppOpsManager.pauseNotedAppOpsCollection();
         if ((flags & 1) == 0 && AppOpsManager.isListeningForOpNoted()) {
             flags2 = flags | 2;
         } else {
@@ -441,7 +487,9 @@ public final class BinderProxy implements IBinder {
                 }
                 boolean extratrstatus = false;
                 try {
-                    extratrstatus = transactNative(IBinder.ISSYSTEMSERVER_TRANSACTION, tempdata, tempreply, 0);
+                    extratrstatus =
+                            transactNative(
+                                    IBinder.ISSYSTEMSERVER_TRANSACTION, tempdata, tempreply, 0);
                 } catch (SecurityException e) {
                 }
                 if (extratrstatus) {
@@ -468,7 +516,12 @@ public final class BinderProxy implements IBinder {
                         tr = new Throwable();
                     }
                     if (issystemserver) {
-                        Binder.getTransactionTracker().addTimeStamp(tr, time, SystemClock.elapsedRealtimeNanos() - duration, (flags2 & 1) != 0);
+                        Binder.getTransactionTracker()
+                                .addTimeStamp(
+                                        tr,
+                                        time,
+                                        SystemClock.elapsedRealtimeNanos() - duration,
+                                        (flags2 & 1) != 0);
                     }
                     Trace.traceEnd(1L);
                 }
@@ -486,7 +539,12 @@ public final class BinderProxy implements IBinder {
                         tr = new Throwable();
                     }
                     if (issystemserver) {
-                        Binder.getTransactionTracker().addTimeStamp(tr, time2, SystemClock.elapsedRealtimeNanos() - duration, (flags2 & 1) != 0);
+                        Binder.getTransactionTracker()
+                                .addTimeStamp(
+                                        tr,
+                                        time2,
+                                        SystemClock.elapsedRealtimeNanos() - duration,
+                                        (flags2 & 1) != 0);
                     }
                     Trace.traceEnd(1L);
                 }
@@ -552,7 +610,14 @@ public final class BinderProxy implements IBinder {
     }
 
     @Override // android.os.IBinder
-    public void shellCommand(FileDescriptor in, FileDescriptor out, FileDescriptor err, String[] args, ShellCallback callback, ResultReceiver resultReceiver) throws RemoteException {
+    public void shellCommand(
+            FileDescriptor in,
+            FileDescriptor out,
+            FileDescriptor err,
+            String[] args,
+            ShellCallback callback,
+            ResultReceiver resultReceiver)
+            throws RemoteException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         data.writeFileDescriptor(in);
@@ -609,7 +674,8 @@ public final class BinderProxy implements IBinder {
         Parcel parcel = Parcel.obtain();
         try {
             try {
-                ILocationManager locationManager = ILocationManager.Stub.asInterface(ServiceManager.getService("location"));
+                ILocationManager locationManager =
+                        ILocationManager.Stub.asInterface(ServiceManager.getService("location"));
                 if (locationManager != null) {
                     parcel.writeInt(data.dataSize());
                     parcel.appendFrom(data, 0, data.dataSize());

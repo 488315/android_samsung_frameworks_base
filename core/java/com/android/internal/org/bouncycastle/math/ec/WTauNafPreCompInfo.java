@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.math.ec;
 
-import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 
 /* loaded from: classes5.dex */
 public class WTauNafPreCompInfo implements PreCompInfo {

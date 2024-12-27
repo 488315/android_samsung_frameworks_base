@@ -89,14 +89,18 @@ public class SlidingDrawer extends ViewGroup {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mFrame = new Rect();
         this.mInvalidate = new Rect();
-        this.mSlidingRunnable = new Runnable() { // from class: android.widget.SlidingDrawer.1
-            @Override // java.lang.Runnable
-            public void run() {
-                SlidingDrawer.this.doAnimation();
-            }
-        };
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SlidingDrawer, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.SlidingDrawer, attrs, a, defStyleAttr, defStyleRes);
+        this.mSlidingRunnable =
+                new Runnable() { // from class: android.widget.SlidingDrawer.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        SlidingDrawer.this.doAnimation();
+                    }
+                };
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.SlidingDrawer, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.SlidingDrawer, attrs, a, defStyleAttr, defStyleRes);
         int orientation = a.getInt(0, 1);
         this.mVertical = orientation == 1;
         this.mBottomOffset = (int) a.getDimension(1, 0.0f);
@@ -107,10 +111,12 @@ public class SlidingDrawer extends ViewGroup {
         if (handleId != 0) {
             int contentId = a.getResourceId(5, 0);
             if (contentId == 0) {
-                throw new IllegalArgumentException("The content attribute is required and must refer to a valid child.");
+                throw new IllegalArgumentException(
+                        "The content attribute is required and must refer to a valid child.");
             }
             if (handleId == contentId) {
-                throw new IllegalArgumentException("The content and handle attributes must refer to different children.");
+                throw new IllegalArgumentException(
+                        "The content and handle attributes must refer to different children.");
             }
             this.mHandleId = handleId;
             this.mContentId = contentId;
@@ -125,19 +131,22 @@ public class SlidingDrawer extends ViewGroup {
             setAlwaysDrawnWithCacheEnabled(false);
             return;
         }
-        throw new IllegalArgumentException("The handle attribute is required and must refer to a valid child.");
+        throw new IllegalArgumentException(
+                "The handle attribute is required and must refer to a valid child.");
     }
 
     @Override // android.view.View
     protected void onFinishInflate() {
         this.mHandle = findViewById(this.mHandleId);
         if (this.mHandle == null) {
-            throw new IllegalArgumentException("The handle attribute is must refer to an existing child.");
+            throw new IllegalArgumentException(
+                    "The handle attribute is must refer to an existing child.");
         }
         this.mHandle.setOnClickListener(new DrawerToggler());
         this.mContent = findViewById(this.mContentId);
         if (this.mContent == null) {
-            throw new IllegalArgumentException("The content attribute is must refer to an existing child.");
+            throw new IllegalArgumentException(
+                    "The content attribute is must refer to an existing child.");
         }
         this.mContent.setVisibility(8);
     }
@@ -155,10 +164,14 @@ public class SlidingDrawer extends ViewGroup {
         measureChild(handle, widthMeasureSpec, heightMeasureSpec);
         if (this.mVertical) {
             int height = (heightSpecSize - handle.getMeasuredHeight()) - this.mTopOffset;
-            this.mContent.measure(View.MeasureSpec.makeMeasureSpec(widthSpecSize, 1073741824), View.MeasureSpec.makeMeasureSpec(height, 1073741824));
+            this.mContent.measure(
+                    View.MeasureSpec.makeMeasureSpec(widthSpecSize, 1073741824),
+                    View.MeasureSpec.makeMeasureSpec(height, 1073741824));
         } else {
             int width = (widthSpecSize - handle.getMeasuredWidth()) - this.mTopOffset;
-            this.mContent.measure(View.MeasureSpec.makeMeasureSpec(width, 1073741824), View.MeasureSpec.makeMeasureSpec(heightSpecSize, 1073741824));
+            this.mContent.measure(
+                    View.MeasureSpec.makeMeasureSpec(width, 1073741824),
+                    View.MeasureSpec.makeMeasureSpec(heightSpecSize, 1073741824));
         }
         setMeasuredDimension(widthSpecSize, heightSpecSize);
     }
@@ -181,7 +194,9 @@ public class SlidingDrawer extends ViewGroup {
                 }
             }
             canvas.save();
-            canvas.translate(isVertical ? 0.0f : handle.getLeft() - this.mTopOffset, isVertical ? handle.getTop() - this.mTopOffset : 0.0f);
+            canvas.translate(
+                    isVertical ? 0.0f : handle.getLeft() - this.mTopOffset,
+                    isVertical ? handle.getTop() - this.mTopOffset : 0.0f);
             drawChild(canvas, this.mContent, drawingTime);
             canvas.restore();
             return;
@@ -206,12 +221,22 @@ public class SlidingDrawer extends ViewGroup {
         View content = this.mContent;
         if (this.mVertical) {
             childLeft = (width - childWidth) / 2;
-            childTop = this.mExpanded ? this.mTopOffset : (height - childHeight) + this.mBottomOffset;
-            content.layout(0, this.mTopOffset + childHeight, content.getMeasuredWidth(), this.mTopOffset + childHeight + content.getMeasuredHeight());
+            childTop =
+                    this.mExpanded ? this.mTopOffset : (height - childHeight) + this.mBottomOffset;
+            content.layout(
+                    0,
+                    this.mTopOffset + childHeight,
+                    content.getMeasuredWidth(),
+                    this.mTopOffset + childHeight + content.getMeasuredHeight());
         } else {
-            childLeft = this.mExpanded ? this.mTopOffset : (width - childWidth) + this.mBottomOffset;
+            childLeft =
+                    this.mExpanded ? this.mTopOffset : (width - childWidth) + this.mBottomOffset;
             childTop = (height - childHeight) / 2;
-            content.layout(this.mTopOffset + childWidth, 0, this.mTopOffset + childWidth + content.getMeasuredWidth(), content.getMeasuredHeight());
+            content.layout(
+                    this.mTopOffset + childWidth,
+                    0,
+                    this.mTopOffset + childWidth + content.getMeasuredWidth(),
+                    content.getMeasuredHeight());
         }
         handle.layout(childLeft, childTop, childLeft + childWidth, childTop + childHeight);
         this.mHandleHeight = handle.getHeight();
@@ -295,7 +320,21 @@ public class SlidingDrawer extends ViewGroup {
                     int left = this.mHandle.getLeft();
                     if (Math.abs(velocity) < this.mMaximumTapVelocity) {
                         boolean z = this.mExpanded;
-                        if (!vertical ? !((!z || left >= this.mTapThreshold + this.mTopOffset) && (this.mExpanded || left <= (((this.mBottomOffset + this.mRight) - this.mLeft) - this.mHandleWidth) - this.mTapThreshold)) : !((!z || top >= this.mTapThreshold + this.mTopOffset) && (this.mExpanded || top <= (((this.mBottomOffset + this.mBottom) - this.mTop) - this.mHandleHeight) - this.mTapThreshold))) {
+                        if (!vertical
+                                ? !((!z || left >= this.mTapThreshold + this.mTopOffset)
+                                        && (this.mExpanded
+                                                || left
+                                                        <= (((this.mBottomOffset + this.mRight)
+                                                                                - this.mLeft)
+                                                                        - this.mHandleWidth)
+                                                                - this.mTapThreshold))
+                                : !((!z || top >= this.mTapThreshold + this.mTopOffset)
+                                        && (this.mExpanded
+                                                || top
+                                                        <= (((this.mBottomOffset + this.mBottom)
+                                                                                - this.mTop)
+                                                                        - this.mHandleHeight)
+                                                                - this.mTapThreshold))) {
                             if (this.mAllowSingleTap) {
                                 playSoundEffect(0);
                                 if (this.mExpanded) {
@@ -318,7 +357,9 @@ public class SlidingDrawer extends ViewGroup {
                         break;
                     }
                 case 2:
-                    moveHandle(((int) (this.mVertical ? event.getY() : event.getX())) - this.mTouchDelta);
+                    moveHandle(
+                            ((int) (this.mVertical ? event.getY() : event.getX()))
+                                    - this.mTouchDelta);
                     break;
             }
         }
@@ -336,9 +377,9 @@ public class SlidingDrawer extends ViewGroup {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:32:0x0063, code lost:
-    
-        if (r8 > (-r6.mMaximumMajorVelocity)) goto L33;
-     */
+
+       if (r8 > (-r6.mMaximumMajorVelocity)) goto L33;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -441,7 +482,9 @@ public class SlidingDrawer extends ViewGroup {
             r6.stopTracking(r10)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SlidingDrawer.performFling(int, float, boolean, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.widget.SlidingDrawer.performFling(int, float,"
+                    + " boolean, boolean):void");
     }
 
     private void prepareTracking(int position) {
@@ -487,7 +530,9 @@ public class SlidingDrawer extends ViewGroup {
                 return;
             }
             if (position == -10002) {
-                handle.offsetTopAndBottom((((this.mBottomOffset + this.mBottom) - this.mTop) - this.mHandleHeight) - handle.getTop());
+                handle.offsetTopAndBottom(
+                        (((this.mBottomOffset + this.mBottom) - this.mTop) - this.mHandleHeight)
+                                - handle.getTop());
                 invalidate();
                 return;
             }
@@ -495,8 +540,12 @@ public class SlidingDrawer extends ViewGroup {
             int deltaY = position - top;
             if (position < this.mTopOffset) {
                 deltaY = this.mTopOffset - top;
-            } else if (deltaY > (((this.mBottomOffset + this.mBottom) - this.mTop) - this.mHandleHeight) - top) {
-                deltaY = (((this.mBottomOffset + this.mBottom) - this.mTop) - this.mHandleHeight) - top;
+            } else if (deltaY
+                    > (((this.mBottomOffset + this.mBottom) - this.mTop) - this.mHandleHeight)
+                            - top) {
+                deltaY =
+                        (((this.mBottomOffset + this.mBottom) - this.mTop) - this.mHandleHeight)
+                                - top;
             }
             handle.offsetTopAndBottom(deltaY);
             Rect frame = this.mFrame;
@@ -504,7 +553,11 @@ public class SlidingDrawer extends ViewGroup {
             handle.getHitRect(frame);
             region.set(frame);
             region.union(frame.left, frame.top - deltaY, frame.right, frame.bottom - deltaY);
-            region.union(0, frame.bottom - deltaY, getWidth(), (frame.bottom - deltaY) + this.mContent.getHeight());
+            region.union(
+                    0,
+                    frame.bottom - deltaY,
+                    getWidth(),
+                    (frame.bottom - deltaY) + this.mContent.getHeight());
             invalidate(region);
             return;
         }
@@ -514,7 +567,9 @@ public class SlidingDrawer extends ViewGroup {
             return;
         }
         if (position == -10002) {
-            handle.offsetLeftAndRight((((this.mBottomOffset + this.mRight) - this.mLeft) - this.mHandleWidth) - handle.getLeft());
+            handle.offsetLeftAndRight(
+                    (((this.mBottomOffset + this.mRight) - this.mLeft) - this.mHandleWidth)
+                            - handle.getLeft());
             invalidate();
             return;
         }
@@ -522,7 +577,8 @@ public class SlidingDrawer extends ViewGroup {
         int deltaX = position - left;
         if (position < this.mTopOffset) {
             deltaX = this.mTopOffset - left;
-        } else if (deltaX > (((this.mBottomOffset + this.mRight) - this.mLeft) - this.mHandleWidth) - left) {
+        } else if (deltaX
+                > (((this.mBottomOffset + this.mRight) - this.mLeft) - this.mHandleWidth) - left) {
             deltaX = (((this.mBottomOffset + this.mRight) - this.mLeft) - this.mHandleWidth) - left;
         }
         handle.offsetLeftAndRight(deltaX);
@@ -531,7 +587,11 @@ public class SlidingDrawer extends ViewGroup {
         handle.getHitRect(frame2);
         region2.set(frame2);
         region2.union(frame2.left - deltaX, frame2.top, frame2.right - deltaX, frame2.bottom);
-        region2.union(frame2.right - deltaX, 0, (frame2.right - deltaX) + this.mContent.getWidth(), getHeight());
+        region2.union(
+                frame2.right - deltaX,
+                0,
+                (frame2.right - deltaX) + this.mContent.getWidth(),
+                getHeight());
         invalidate(region2);
     }
 
@@ -544,13 +604,25 @@ public class SlidingDrawer extends ViewGroup {
             if (this.mVertical) {
                 int childHeight = this.mHandleHeight;
                 int height = ((this.mBottom - this.mTop) - childHeight) - this.mTopOffset;
-                content.measure(View.MeasureSpec.makeMeasureSpec(this.mRight - this.mLeft, 1073741824), View.MeasureSpec.makeMeasureSpec(height, 1073741824));
-                content.layout(0, this.mTopOffset + childHeight, content.getMeasuredWidth(), this.mTopOffset + childHeight + content.getMeasuredHeight());
+                content.measure(
+                        View.MeasureSpec.makeMeasureSpec(this.mRight - this.mLeft, 1073741824),
+                        View.MeasureSpec.makeMeasureSpec(height, 1073741824));
+                content.layout(
+                        0,
+                        this.mTopOffset + childHeight,
+                        content.getMeasuredWidth(),
+                        this.mTopOffset + childHeight + content.getMeasuredHeight());
             } else {
                 int childWidth = this.mHandle.getWidth();
                 int width = ((this.mRight - this.mLeft) - childWidth) - this.mTopOffset;
-                content.measure(View.MeasureSpec.makeMeasureSpec(width, 1073741824), View.MeasureSpec.makeMeasureSpec(this.mBottom - this.mTop, 1073741824));
-                content.layout(this.mTopOffset + childWidth, 0, this.mTopOffset + childWidth + content.getMeasuredWidth(), content.getMeasuredHeight());
+                content.measure(
+                        View.MeasureSpec.makeMeasureSpec(width, 1073741824),
+                        View.MeasureSpec.makeMeasureSpec(this.mBottom - this.mTop, 1073741824));
+                content.layout(
+                        this.mTopOffset + childWidth,
+                        0,
+                        this.mTopOffset + childWidth + content.getMeasuredWidth(),
+                        content.getMeasuredHeight());
             }
         }
         content.getViewTreeObserver().dispatchOnPreDraw();
@@ -576,7 +648,8 @@ public class SlidingDrawer extends ViewGroup {
     public void doAnimation() {
         if (this.mAnimating) {
             incrementAnimation();
-            if (this.mAnimationPosition >= (this.mBottomOffset + (this.mVertical ? getHeight() : getWidth())) - 1) {
+            if (this.mAnimationPosition
+                    >= (this.mBottomOffset + (this.mVertical ? getHeight() : getWidth())) - 1) {
                 this.mAnimating = false;
                 closeDrawer();
             } else if (this.mAnimationPosition < this.mTopOffset) {
@@ -724,8 +797,7 @@ public class SlidingDrawer extends ViewGroup {
     }
 
     private class DrawerToggler implements View.OnClickListener {
-        private DrawerToggler() {
-        }
+        private DrawerToggler() {}
 
         @Override // android.view.View.OnClickListener
         public void onClick(View v) {

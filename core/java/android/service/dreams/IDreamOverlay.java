@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.dreams.IDreamOverlayClientCallback;
 
 /* loaded from: classes3.dex */
 public interface IDreamOverlay extends IInterface {
@@ -15,8 +14,7 @@ public interface IDreamOverlay extends IInterface {
 
     public static class Default implements IDreamOverlay {
         @Override // android.service.dreams.IDreamOverlay
-        public void getClient(IDreamOverlayClientCallback callback) throws RemoteException {
-        }
+        public void getClient(IDreamOverlayClientCallback callback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +22,7 @@ public interface IDreamOverlay extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDreamOverlay {
+    public abstract static class Stub extends Binder implements IDreamOverlay {
         static final int TRANSACTION_getClient = 1;
 
         public Stub() {
@@ -62,7 +60,8 @@ public interface IDreamOverlay extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDreamOverlay.DESCRIPTOR);
             }
@@ -72,7 +71,8 @@ public interface IDreamOverlay extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IDreamOverlayClientCallback _arg0 = IDreamOverlayClientCallback.Stub.asInterface(data.readStrongBinder());
+                    IDreamOverlayClientCallback _arg0 =
+                            IDreamOverlayClientCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getClient(_arg0);
                     reply.writeNoException();

@@ -7,24 +7,26 @@ import android.app.slice.Slice;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class Entry implements Parcelable {
-    public static final Parcelable.Creator<Entry> CREATOR = new Parcelable.Creator<Entry>() { // from class: android.credentials.selection.Entry.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Entry createFromParcel(Parcel in) {
-            return new Entry(in);
-        }
+    public static final Parcelable.Creator<Entry> CREATOR =
+            new Parcelable.Creator<Entry>() { // from class: android.credentials.selection.Entry.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Entry createFromParcel(Parcel in) {
+                    return new Entry(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Entry[] newArray(int size) {
-            return new Entry[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Entry[] newArray(int size) {
+                    return new Entry[size];
+                }
+            };
     private Intent mFrameworkExtrasIntent;
     private final String mKey;
     private PendingIntent mPendingIntent;
@@ -36,11 +38,14 @@ public final class Entry implements Parcelable {
         String subkey = in.readString8();
         Slice slice = (Slice) in.readTypedObject(Slice.CREATOR);
         this.mKey = key;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mKey);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mKey);
         this.mSubkey = subkey;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSubkey);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSubkey);
         this.mSlice = slice;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSlice);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSlice);
         this.mPendingIntent = (PendingIntent) in.readTypedObject(PendingIntent.CREATOR);
         this.mFrameworkExtrasIntent = (Intent) in.readTypedObject(Intent.CREATOR);
     }

@@ -8,9 +8,6 @@ import android.media.soundtrigger.SoundModel;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Slog;
-import com.android.server.soundtrigger_middleware.ISoundTriggerHal;
-import com.android.server.soundtrigger_middleware.SoundTriggerHalWatchdog;
-import com.android.server.soundtrigger_middleware.UptimeTimer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -25,14 +22,20 @@ public final class SoundTriggerHalWatchdog implements ISoundTriggerHal {
 
         public Watchdog() {
             UptimeTimer uptimeTimer = SoundTriggerHalWatchdog.this.mTimer;
-            Runnable runnable = new Runnable() { // from class: com.android.server.soundtrigger_middleware.SoundTriggerHalWatchdog$Watchdog$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SoundTriggerHalWatchdog.Watchdog watchdog = SoundTriggerHalWatchdog.Watchdog.this;
-                    Slog.e("SoundTriggerHalWatchdog", "HAL deadline expired. Rebooting.", watchdog.mException);
-                    SoundTriggerHalWatchdog.this.reboot();
-                }
-            };
+            Runnable runnable =
+                    new Runnable() { // from class:
+                                     // com.android.server.soundtrigger_middleware.SoundTriggerHalWatchdog$Watchdog$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SoundTriggerHalWatchdog.Watchdog watchdog =
+                                    SoundTriggerHalWatchdog.Watchdog.this;
+                            Slog.e(
+                                    "SoundTriggerHalWatchdog",
+                                    "HAL deadline expired. Rebooting.",
+                                    watchdog.mException);
+                            SoundTriggerHalWatchdog.this.reboot();
+                        }
+                    };
             Object obj = new Object();
             Handler handler = uptimeTimer.mHandler;
             UptimeTimer.TaskImpl taskImpl = new UptimeTimer.TaskImpl(handler, obj);
@@ -47,7 +50,8 @@ public final class SoundTriggerHalWatchdog implements ISoundTriggerHal {
         }
     }
 
-    public SoundTriggerHalWatchdog(SoundTriggerDuplicateModelHandler soundTriggerDuplicateModelHandler) {
+    public SoundTriggerHalWatchdog(
+            SoundTriggerDuplicateModelHandler soundTriggerDuplicateModelHandler) {
         this.mUnderlying = soundTriggerDuplicateModelHandler;
     }
 
@@ -123,10 +127,12 @@ public final class SoundTriggerHalWatchdog implements ISoundTriggerHal {
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadPhraseSoundModel(PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+    public final int loadPhraseSoundModel(
+            PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
         Watchdog watchdog = new Watchdog();
         try {
-            int loadPhraseSoundModel = this.mUnderlying.loadPhraseSoundModel(phraseSoundModel, modelCallback);
+            int loadPhraseSoundModel =
+                    this.mUnderlying.loadPhraseSoundModel(phraseSoundModel, modelCallback);
             watchdog.close();
             return loadPhraseSoundModel;
         } catch (Throwable th) {
@@ -140,7 +146,8 @@ public final class SoundTriggerHalWatchdog implements ISoundTriggerHal {
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadSoundModel(SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+    public final int loadSoundModel(
+            SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
         Watchdog watchdog = new Watchdog();
         try {
             int loadSoundModel = this.mUnderlying.loadSoundModel(soundModel, modelCallback);

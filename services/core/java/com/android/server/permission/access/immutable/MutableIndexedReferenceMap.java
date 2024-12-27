@@ -23,11 +23,9 @@ public final class MutableIndexedReferenceMap implements Immutable {
         return null;
     }
 
-    public final void put(Object obj, MutableIndexedMap mutableIndexedMap) {
-    }
+    public final void put(Object obj, MutableIndexedMap mutableIndexedMap) {}
 
-    public final void remove$1(Object obj) {
-    }
+    public final void remove$1(Object obj) {}
 
     @Override // com.android.server.permission.access.immutable.Immutable
     public final Object toMutable() {

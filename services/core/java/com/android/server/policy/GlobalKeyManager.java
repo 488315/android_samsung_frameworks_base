@@ -8,9 +8,12 @@ import android.content.res.XmlResourceParser;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.KeyEvent;
+
 import com.android.internal.util.XmlUtils;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -44,16 +47,24 @@ public final class GlobalKeyManager {
                         if ("key".equals(name)) {
                             String attributeValue = xml.getAttributeValue(null, "keyCode");
                             String attributeValue2 = xml.getAttributeValue(null, "component");
-                            String attributeValue3 = xml.getAttributeValue(null, "dispatchWhenNonInteractive");
+                            String attributeValue3 =
+                                    xml.getAttributeValue(null, "dispatchWhenNonInteractive");
                             if (attributeValue != null && attributeValue2 != null) {
                                 int keyCodeFromString = KeyEvent.keyCodeFromString(attributeValue);
                                 if (keyCodeFromString != 0) {
-                                    this.mKeyMapping.put(keyCodeFromString, new GlobalKeyAction(attributeValue2, attributeValue3));
+                                    this.mKeyMapping.put(
+                                            keyCodeFromString,
+                                            new GlobalKeyAction(attributeValue2, attributeValue3));
                                 } else {
-                                    Log.wtf("GlobalKeyManager", "Global keys entry does not map to a valid key code: " + attributeValue);
+                                    Log.wtf(
+                                            "GlobalKeyManager",
+                                            "Global keys entry does not map to a valid key code: "
+                                                    + attributeValue);
                                 }
                             }
-                            Log.wtf("GlobalKeyManager", "Failed to parse global keys entry: " + xml.getText());
+                            Log.wtf(
+                                    "GlobalKeyManager",
+                                    "Failed to parse global keys entry: " + xml.getText());
                         }
                     }
                 }

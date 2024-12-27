@@ -6,9 +6,10 @@ import android.os.SystemClock;
 import android.util.proto.ProtoOutputStream;
 import android.view.RemoteAnimationTarget;
 import android.view.SurfaceControl;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
-import com.android.server.wm.SurfaceAnimator;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,15 +29,37 @@ public final class NonAppWindowAnimationAdapter implements AnimationAdapter {
         this.mStatusBarTransitionDelay = j2;
     }
 
-    public static boolean shouldAttachNavBarToApp(WindowManagerService windowManagerService, DisplayContent displayContent, int i) {
-        return (i == 8 || i == 10 || i == 12) && displayContent.mDisplayPolicy.shouldAttachNavBarToAppDuringTransition() && windowManagerService.mRecentsAnimationController == null && displayContent.getAsyncRotationController() == null;
+    public static boolean shouldAttachNavBarToApp(
+            WindowManagerService windowManagerService, DisplayContent displayContent, int i) {
+        return (i == 8 || i == 10 || i == 12)
+                && displayContent.mDisplayPolicy.shouldAttachNavBarToAppDuringTransition()
+                && windowManagerService.mRecentsAnimationController == null
+                && displayContent.getAsyncRotationController() == null;
     }
 
     public final RemoteAnimationTarget createRemoteAnimationTarget() {
         SurfaceControl surfaceControl = this.mCapturedLeash;
         Rect rect = new Rect();
         WindowContainer windowContainer = this.mWindowContainer;
-        RemoteAnimationTarget remoteAnimationTarget = new RemoteAnimationTarget(-1, -1, surfaceControl, false, rect, (Rect) null, windowContainer.getPrefixOrderIndex(), windowContainer.getLastSurfacePosition(), windowContainer.getBounds(), (Rect) null, windowContainer.getWindowConfiguration(), true, (SurfaceControl) null, (Rect) null, (ActivityManager.RunningTaskInfo) null, false, windowContainer.getWindowType());
+        RemoteAnimationTarget remoteAnimationTarget =
+                new RemoteAnimationTarget(
+                        -1,
+                        -1,
+                        surfaceControl,
+                        false,
+                        rect,
+                        (Rect) null,
+                        windowContainer.getPrefixOrderIndex(),
+                        windowContainer.getLastSurfacePosition(),
+                        windowContainer.getBounds(),
+                        (Rect) null,
+                        windowContainer.getWindowConfiguration(),
+                        true,
+                        (SurfaceControl) null,
+                        (Rect) null,
+                        (ActivityManager.RunningTaskInfo) null,
+                        false,
+                        windowContainer.getWindowType());
         this.mTarget = remoteAnimationTarget;
         return remoteAnimationTarget;
     }
@@ -84,14 +107,20 @@ public final class NonAppWindowAnimationAdapter implements AnimationAdapter {
     @Override // com.android.server.wm.AnimationAdapter
     public final void onAnimationCancelled(SurfaceControl surfaceControl) {
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_REMOTE_ANIMATIONS_enabled[0]) {
-            ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_REMOTE_ANIMATIONS, 705955074330737483L, 0, null, null);
+            ProtoLogImpl_54989576.d(
+                    ProtoLogGroup.WM_DEBUG_REMOTE_ANIMATIONS, 705955074330737483L, 0, null, null);
         }
     }
 
     @Override // com.android.server.wm.AnimationAdapter
-    public final void startAnimation(SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, int i, SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback) {
+    public final void startAnimation(
+            SurfaceControl surfaceControl,
+            SurfaceControl.Transaction transaction,
+            int i,
+            SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback) {
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_REMOTE_ANIMATIONS_enabled[0]) {
-            ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_REMOTE_ANIMATIONS, 3788905348567806832L, 0, null, null);
+            ProtoLogImpl_54989576.d(
+                    ProtoLogGroup.WM_DEBUG_REMOTE_ANIMATIONS, 3788905348567806832L, 0, null, null);
         }
         this.mCapturedLeash = surfaceControl;
         this.mCapturedLeashFinishCallback = onAnimationFinishedCallback;

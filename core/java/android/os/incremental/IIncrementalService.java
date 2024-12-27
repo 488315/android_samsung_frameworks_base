@@ -8,8 +8,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
-import android.os.incremental.IStorageHealthListener;
-import android.os.incremental.IStorageLoadingProgressListener;
 
 /* loaded from: classes3.dex */
 public interface IIncrementalService extends IInterface {
@@ -24,20 +22,24 @@ public interface IIncrementalService extends IInterface {
     public static final String METRICS_DATA_LOADER_STATUS_CODE = "dataLoaderStatusCode";
     public static final String METRICS_LAST_READ_ERROR_NUMBER = "lastReadErrorNo";
     public static final String METRICS_LAST_READ_ERROR_UID = "lastReadErrorUid";
-    public static final String METRICS_MILLIS_SINCE_LAST_DATA_LOADER_BIND = "millisSinceLastDataLoaderBind";
+    public static final String METRICS_MILLIS_SINCE_LAST_DATA_LOADER_BIND =
+            "millisSinceLastDataLoaderBind";
     public static final String METRICS_MILLIS_SINCE_LAST_READ_ERROR = "millisSinceLastReadError";
-    public static final String METRICS_MILLIS_SINCE_OLDEST_PENDING_READ = "millisSinceOldestPendingRead";
+    public static final String METRICS_MILLIS_SINCE_OLDEST_PENDING_READ =
+            "millisSinceOldestPendingRead";
     public static final String METRICS_READ_LOGS_ENABLED = "readLogsEnabled";
     public static final String METRICS_STORAGE_HEALTH_STATUS_CODE = "storageHealthStatusCode";
     public static final String METRICS_TOTAL_DELAYED_READS = "totalDelayedReads";
     public static final String METRICS_TOTAL_DELAYED_READS_MILLIS = "totalDelayedReadsMillis";
     public static final String METRICS_TOTAL_FAILED_READS = "totalFailedReads";
 
-    boolean configureNativeBinaries(int i, String str, String str2, String str3, boolean z) throws RemoteException;
+    boolean configureNativeBinaries(int i, String str, String str2, String str3, boolean z)
+            throws RemoteException;
 
     int createLinkedStorage(String str, int i, int i2) throws RemoteException;
 
-    int createStorage(String str, DataLoaderParamsParcel dataLoaderParamsParcel, int i) throws RemoteException;
+    int createStorage(String str, DataLoaderParamsParcel dataLoaderParamsParcel, int i)
+            throws RemoteException;
 
     int deleteBindMount(int i, String str) throws RemoteException;
 
@@ -63,7 +65,13 @@ public interface IIncrementalService extends IInterface {
 
     int makeDirectory(int i, String str) throws RemoteException;
 
-    int makeFile(int i, String str, int i2, IncrementalNewFileParams incrementalNewFileParams, byte[] bArr) throws RemoteException;
+    int makeFile(
+            int i,
+            String str,
+            int i2,
+            IncrementalNewFileParams incrementalNewFileParams,
+            byte[] bArr)
+            throws RemoteException;
 
     int makeFileFromRange(int i, String str, String str2, long j, long j2) throws RemoteException;
 
@@ -73,9 +81,18 @@ public interface IIncrementalService extends IInterface {
 
     int openStorage(String str) throws RemoteException;
 
-    boolean registerLoadingProgressListener(int i, IStorageLoadingProgressListener iStorageLoadingProgressListener) throws RemoteException;
+    boolean registerLoadingProgressListener(
+            int i, IStorageLoadingProgressListener iStorageLoadingProgressListener)
+            throws RemoteException;
 
-    boolean startLoading(int i, DataLoaderParamsParcel dataLoaderParamsParcel, IDataLoaderStatusListener iDataLoaderStatusListener, StorageHealthCheckParams storageHealthCheckParams, IStorageHealthListener iStorageHealthListener, PerUidReadTimeouts[] perUidReadTimeoutsArr) throws RemoteException;
+    boolean startLoading(
+            int i,
+            DataLoaderParamsParcel dataLoaderParamsParcel,
+            IDataLoaderStatusListener iDataLoaderStatusListener,
+            StorageHealthCheckParams storageHealthCheckParams,
+            IStorageHealthListener iStorageHealthListener,
+            PerUidReadTimeouts[] perUidReadTimeoutsArr)
+            throws RemoteException;
 
     int unlink(int i, String str) throws RemoteException;
 
@@ -90,26 +107,36 @@ public interface IIncrementalService extends IInterface {
         }
 
         @Override // android.os.incremental.IIncrementalService
-        public int createStorage(String path, DataLoaderParamsParcel params, int createMode) throws RemoteException {
+        public int createStorage(String path, DataLoaderParamsParcel params, int createMode)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.incremental.IIncrementalService
-        public int createLinkedStorage(String path, int otherStorageId, int createMode) throws RemoteException {
+        public int createLinkedStorage(String path, int otherStorageId, int createMode)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.incremental.IIncrementalService
-        public boolean startLoading(int storageId, DataLoaderParamsParcel params, IDataLoaderStatusListener statusListener, StorageHealthCheckParams healthCheckParams, IStorageHealthListener healthListener, PerUidReadTimeouts[] perUidReadTimeouts) throws RemoteException {
+        public boolean startLoading(
+                int storageId,
+                DataLoaderParamsParcel params,
+                IDataLoaderStatusListener statusListener,
+                StorageHealthCheckParams healthCheckParams,
+                IStorageHealthListener healthListener,
+                PerUidReadTimeouts[] perUidReadTimeouts)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.incremental.IIncrementalService
-        public void onInstallationComplete(int storageId) throws RemoteException {
-        }
+        public void onInstallationComplete(int storageId) throws RemoteException {}
 
         @Override // android.os.incremental.IIncrementalService
-        public int makeBindMount(int storageId, String sourcePath, String targetFullPath, int bindType) throws RemoteException {
+        public int makeBindMount(
+                int storageId, String sourcePath, String targetFullPath, int bindType)
+                throws RemoteException {
             return 0;
         }
 
@@ -129,17 +156,27 @@ public interface IIncrementalService extends IInterface {
         }
 
         @Override // android.os.incremental.IIncrementalService
-        public int makeFile(int storageId, String path, int mode, IncrementalNewFileParams params, byte[] content) throws RemoteException {
+        public int makeFile(
+                int storageId,
+                String path,
+                int mode,
+                IncrementalNewFileParams params,
+                byte[] content)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.incremental.IIncrementalService
-        public int makeFileFromRange(int storageId, String targetPath, String sourcePath, long start, long end) throws RemoteException {
+        public int makeFileFromRange(
+                int storageId, String targetPath, String sourcePath, long start, long end)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.incremental.IIncrementalService
-        public int makeLink(int sourceStorageId, String sourcePath, int destStorageId, String destPath) throws RemoteException {
+        public int makeLink(
+                int sourceStorageId, String sourcePath, int destStorageId, String destPath)
+                throws RemoteException {
             return 0;
         }
 
@@ -174,15 +211,19 @@ public interface IIncrementalService extends IInterface {
         }
 
         @Override // android.os.incremental.IIncrementalService
-        public void deleteStorage(int storageId) throws RemoteException {
-        }
+        public void deleteStorage(int storageId) throws RemoteException {}
 
         @Override // android.os.incremental.IIncrementalService
-        public void disallowReadLogs(int storageId) throws RemoteException {
-        }
+        public void disallowReadLogs(int storageId) throws RemoteException {}
 
         @Override // android.os.incremental.IIncrementalService
-        public boolean configureNativeBinaries(int storageId, String apkFullPath, String libDirRelativePath, String abi, boolean extractNativeLibs) throws RemoteException {
+        public boolean configureNativeBinaries(
+                int storageId,
+                String apkFullPath,
+                String libDirRelativePath,
+                String abi,
+                boolean extractNativeLibs)
+                throws RemoteException {
             return false;
         }
 
@@ -192,7 +233,8 @@ public interface IIncrementalService extends IInterface {
         }
 
         @Override // android.os.incremental.IIncrementalService
-        public boolean registerLoadingProgressListener(int storageId, IStorageLoadingProgressListener listener) throws RemoteException {
+        public boolean registerLoadingProgressListener(
+                int storageId, IStorageLoadingProgressListener listener) throws RemoteException {
             return false;
         }
 
@@ -212,7 +254,7 @@ public interface IIncrementalService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIncrementalService {
+    public abstract static class Stub extends Binder implements IIncrementalService {
         static final int TRANSACTION_configureNativeBinaries = 21;
         static final int TRANSACTION_createLinkedStorage = 3;
         static final int TRANSACTION_createStorage = 2;
@@ -322,7 +364,8 @@ public interface IIncrementalService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIncrementalService.DESCRIPTOR);
             }
@@ -340,7 +383,9 @@ public interface IIncrementalService extends IInterface {
                     return true;
                 case 2:
                     String _arg02 = data.readString();
-                    DataLoaderParamsParcel _arg1 = (DataLoaderParamsParcel) data.readTypedObject(DataLoaderParamsParcel.CREATOR);
+                    DataLoaderParamsParcel _arg1 =
+                            (DataLoaderParamsParcel)
+                                    data.readTypedObject(DataLoaderParamsParcel.CREATOR);
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result2 = createStorage(_arg02, _arg1, _arg2);
@@ -358,11 +403,19 @@ public interface IIncrementalService extends IInterface {
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    DataLoaderParamsParcel _arg13 = (DataLoaderParamsParcel) data.readTypedObject(DataLoaderParamsParcel.CREATOR);
-                    IDataLoaderStatusListener _arg23 = IDataLoaderStatusListener.Stub.asInterface(data.readStrongBinder());
-                    StorageHealthCheckParams _arg3 = (StorageHealthCheckParams) data.readTypedObject(StorageHealthCheckParams.CREATOR);
-                    IStorageHealthListener _arg4 = IStorageHealthListener.Stub.asInterface(data.readStrongBinder());
-                    PerUidReadTimeouts[] _arg5 = (PerUidReadTimeouts[]) data.createTypedArray(PerUidReadTimeouts.CREATOR);
+                    DataLoaderParamsParcel _arg13 =
+                            (DataLoaderParamsParcel)
+                                    data.readTypedObject(DataLoaderParamsParcel.CREATOR);
+                    IDataLoaderStatusListener _arg23 =
+                            IDataLoaderStatusListener.Stub.asInterface(data.readStrongBinder());
+                    StorageHealthCheckParams _arg3 =
+                            (StorageHealthCheckParams)
+                                    data.readTypedObject(StorageHealthCheckParams.CREATOR);
+                    IStorageHealthListener _arg4 =
+                            IStorageHealthListener.Stub.asInterface(data.readStrongBinder());
+                    PerUidReadTimeouts[] _arg5 =
+                            (PerUidReadTimeouts[])
+                                    data.createTypedArray(PerUidReadTimeouts.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result4 = startLoading(_arg04, _arg13, _arg23, _arg3, _arg4, _arg5);
                     reply.writeNoException();
@@ -412,7 +465,9 @@ public interface IIncrementalService extends IInterface {
                     int _arg010 = data.readInt();
                     String _arg18 = data.readString();
                     int _arg25 = data.readInt();
-                    IncrementalNewFileParams _arg33 = (IncrementalNewFileParams) data.readTypedObject(IncrementalNewFileParams.CREATOR);
+                    IncrementalNewFileParams _arg33 =
+                            (IncrementalNewFileParams)
+                                    data.readTypedObject(IncrementalNewFileParams.CREATOR);
                     byte[] _arg42 = data.createByteArray();
                     data.enforceNoDataAvail();
                     int _result9 = makeFile(_arg010, _arg18, _arg25, _arg33, _arg42);
@@ -505,7 +560,8 @@ public interface IIncrementalService extends IInterface {
                     String _arg36 = data.readString();
                     boolean _arg44 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    boolean _result18 = configureNativeBinaries(_arg021, _arg115, _arg28, _arg36, _arg44);
+                    boolean _result18 =
+                            configureNativeBinaries(_arg021, _arg115, _arg28, _arg36, _arg44);
                     reply.writeNoException();
                     reply.writeBoolean(_result18);
                     return true;
@@ -518,7 +574,9 @@ public interface IIncrementalService extends IInterface {
                     return true;
                 case 23:
                     int _arg023 = data.readInt();
-                    IStorageLoadingProgressListener _arg116 = IStorageLoadingProgressListener.Stub.asInterface(data.readStrongBinder());
+                    IStorageLoadingProgressListener _arg116 =
+                            IStorageLoadingProgressListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result20 = registerLoadingProgressListener(_arg023, _arg116);
                     reply.writeNoException();
@@ -577,7 +635,8 @@ public interface IIncrementalService extends IInterface {
             }
 
             @Override // android.os.incremental.IIncrementalService
-            public int createStorage(String path, DataLoaderParamsParcel params, int createMode) throws RemoteException {
+            public int createStorage(String path, DataLoaderParamsParcel params, int createMode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -596,7 +655,8 @@ public interface IIncrementalService extends IInterface {
             }
 
             @Override // android.os.incremental.IIncrementalService
-            public int createLinkedStorage(String path, int otherStorageId, int createMode) throws RemoteException {
+            public int createLinkedStorage(String path, int otherStorageId, int createMode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -615,7 +675,14 @@ public interface IIncrementalService extends IInterface {
             }
 
             @Override // android.os.incremental.IIncrementalService
-            public boolean startLoading(int storageId, DataLoaderParamsParcel params, IDataLoaderStatusListener statusListener, StorageHealthCheckParams healthCheckParams, IStorageHealthListener healthListener, PerUidReadTimeouts[] perUidReadTimeouts) throws RemoteException {
+            public boolean startLoading(
+                    int storageId,
+                    DataLoaderParamsParcel params,
+                    IDataLoaderStatusListener statusListener,
+                    StorageHealthCheckParams healthCheckParams,
+                    IStorageHealthListener healthListener,
+                    PerUidReadTimeouts[] perUidReadTimeouts)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -652,7 +719,9 @@ public interface IIncrementalService extends IInterface {
             }
 
             @Override // android.os.incremental.IIncrementalService
-            public int makeBindMount(int storageId, String sourcePath, String targetFullPath, int bindType) throws RemoteException {
+            public int makeBindMount(
+                    int storageId, String sourcePath, String targetFullPath, int bindType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -672,7 +741,8 @@ public interface IIncrementalService extends IInterface {
             }
 
             @Override // android.os.incremental.IIncrementalService
-            public int deleteBindMount(int storageId, String targetFullPath) throws RemoteException {
+            public int deleteBindMount(int storageId, String targetFullPath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -726,7 +796,13 @@ public interface IIncrementalService extends IInterface {
             }
 
             @Override // android.os.incremental.IIncrementalService
-            public int makeFile(int storageId, String path, int mode, IncrementalNewFileParams params, byte[] content) throws RemoteException {
+            public int makeFile(
+                    int storageId,
+                    String path,
+                    int mode,
+                    IncrementalNewFileParams params,
+                    byte[] content)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -747,7 +823,9 @@ public interface IIncrementalService extends IInterface {
             }
 
             @Override // android.os.incremental.IIncrementalService
-            public int makeFileFromRange(int storageId, String targetPath, String sourcePath, long start, long end) throws RemoteException {
+            public int makeFileFromRange(
+                    int storageId, String targetPath, String sourcePath, long start, long end)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -768,7 +846,9 @@ public interface IIncrementalService extends IInterface {
             }
 
             @Override // android.os.incremental.IIncrementalService
-            public int makeLink(int sourceStorageId, String sourcePath, int destStorageId, String destPath) throws RemoteException {
+            public int makeLink(
+                    int sourceStorageId, String sourcePath, int destStorageId, String destPath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -924,7 +1004,13 @@ public interface IIncrementalService extends IInterface {
             }
 
             @Override // android.os.incremental.IIncrementalService
-            public boolean configureNativeBinaries(int storageId, String apkFullPath, String libDirRelativePath, String abi, boolean extractNativeLibs) throws RemoteException {
+            public boolean configureNativeBinaries(
+                    int storageId,
+                    String apkFullPath,
+                    String libDirRelativePath,
+                    String abi,
+                    boolean extractNativeLibs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -962,7 +1048,9 @@ public interface IIncrementalService extends IInterface {
             }
 
             @Override // android.os.incremental.IIncrementalService
-            public boolean registerLoadingProgressListener(int storageId, IStorageLoadingProgressListener listener) throws RemoteException {
+            public boolean registerLoadingProgressListener(
+                    int storageId, IStorageLoadingProgressListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1005,7 +1093,8 @@ public interface IIncrementalService extends IInterface {
                     _data.writeInt(storageId);
                     this.mRemote.transact(25, _data, _reply, 0);
                     _reply.readException();
-                    PersistableBundle _result = (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _result =
+                            (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

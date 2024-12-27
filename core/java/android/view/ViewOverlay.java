@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -76,7 +77,8 @@ public class ViewOverlay {
 
         @Override // android.view.View
         protected boolean verifyDrawable(Drawable who) {
-            return super.verifyDrawable(who) || (this.mDrawables != null && this.mDrawables.contains(who));
+            return super.verifyDrawable(who)
+                    || (this.mDrawables != null && this.mDrawables.contains(who));
         }
 
         public void add(View child) {
@@ -85,7 +87,9 @@ public class ViewOverlay {
             }
             if (child.getParent() instanceof ViewGroup) {
                 ViewGroup parent = (ViewGroup) child.getParent();
-                if (parent != this.mHostView && parent.getParent() != null && parent.mAttachInfo != null) {
+                if (parent != this.mHostView
+                        && parent.getParent() != null
+                        && parent.mAttachInfo != null) {
                     int[] parentLocation = new int[2];
                     int[] hostViewLocation = new int[2];
                     parent.getLocationOnScreen(parentLocation);
@@ -150,8 +154,7 @@ public class ViewOverlay {
         }
 
         @Override // android.view.ViewGroup, android.view.View
-        protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        }
+        protected void onLayout(boolean changed, int l, int t, int r, int b) {}
 
         @Override // android.view.View
         public void invalidate(Rect dirty) {

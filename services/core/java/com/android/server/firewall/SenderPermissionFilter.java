@@ -2,7 +2,9 @@ package com.android.server.firewall;
 
 import android.content.ComponentName;
 import android.content.Intent;
+
 import com.android.server.am.ActivityManagerService;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -21,7 +23,8 @@ public final class SenderPermissionFilter implements Filter {
             if (attributeValue != null) {
                 return new SenderPermissionFilter(attributeValue);
             }
-            throw new XmlPullParserException("Permission name must be specified.", xmlPullParser, null);
+            throw new XmlPullParserException(
+                    "Permission name must be specified.", xmlPullParser, null);
         }
     }
 
@@ -30,8 +33,16 @@ public final class SenderPermissionFilter implements Filter {
     }
 
     @Override // com.android.server.firewall.Filter
-    public final boolean matches(IntentFirewall intentFirewall, ComponentName componentName, Intent intent, int i, int i2, String str, int i3) {
+    public final boolean matches(
+            IntentFirewall intentFirewall,
+            ComponentName componentName,
+            Intent intent,
+            int i,
+            int i2,
+            String str,
+            int i3) {
         intentFirewall.mAms.getClass();
-        return ActivityManagerService.checkComponentPermission(i2, i, this.mPermission, 0, i3, true) == 0;
+        return ActivityManagerService.checkComponentPermission(i2, i, this.mPermission, 0, i3, true)
+                == 0;
     }
 }

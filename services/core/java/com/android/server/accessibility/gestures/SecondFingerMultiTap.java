@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
-import com.android.server.accessibility.gestures.GestureMatcher;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -18,7 +18,8 @@ public final class SecondFingerMultiTap extends GestureMatcher {
     public final int mTargetTaps;
     public final int mTouchSlop;
 
-    public SecondFingerMultiTap(Context context, GestureMatcher.StateChangeListener stateChangeListener) {
+    public SecondFingerMultiTap(
+            Context context, GestureMatcher.StateChangeListener stateChangeListener) {
         super(17, new Handler(context.getMainLooper()), stateChangeListener);
         this.mTargetTaps = 2;
         this.mDoubleTapSlop = ViewConfiguration.get(context).getScaledDoubleTapSlop();
@@ -56,7 +57,9 @@ public final class SecondFingerMultiTap extends GestureMatcher {
         }
         float x = this.mBaseX - motionEvent.getX(findPointerIndex);
         float y = this.mBaseY - motionEvent.getY(findPointerIndex);
-        return (x == FullScreenMagnificationGestureHandler.MAX_SCALE && y == FullScreenMagnificationGestureHandler.MAX_SCALE) || Math.hypot((double) x, (double) y) <= ((double) i);
+        return (x == FullScreenMagnificationGestureHandler.MAX_SCALE
+                        && y == FullScreenMagnificationGestureHandler.MAX_SCALE)
+                || Math.hypot((double) x, (double) y) <= ((double) i);
     }
 
     @Override // com.android.server.accessibility.gestures.GestureMatcher
@@ -80,7 +83,8 @@ public final class SecondFingerMultiTap extends GestureMatcher {
             setState(3, motionEvent, motionEvent2, i);
             return;
         }
-        this.mSecondFingerPointerId = motionEvent.getPointerId(GestureUtils.getActionIndex(motionEvent));
+        this.mSecondFingerPointerId =
+                motionEvent.getPointerId(GestureUtils.getActionIndex(motionEvent));
         long tapTimeout = ViewConfiguration.getTapTimeout();
         this.mDelayedTransition.cancel();
         this.mDelayedTransition.post(3, tapTimeout, motionEvent, motionEvent2, i);
@@ -126,6 +130,12 @@ public final class SecondFingerMultiTap extends GestureMatcher {
 
     @Override // com.android.server.accessibility.gestures.GestureMatcher
     public final String toString() {
-        return super.toString() + ", Taps:" + this.mCurrentTaps + ", mBaseX: " + Float.toString(this.mBaseX) + ", mBaseY: " + Float.toString(this.mBaseY);
+        return super.toString()
+                + ", Taps:"
+                + this.mCurrentTaps
+                + ", mBaseX: "
+                + Float.toString(this.mBaseX)
+                + ", mBaseY: "
+                + Float.toString(this.mBaseY);
     }
 }

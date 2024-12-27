@@ -16,10 +16,11 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
+
 import com.android.internal.util.Preconditions;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
-import com.android.server.timedetector.ConfigurationInternal;
 import com.android.server.timezonedetector.StateChangeListener;
+
 import java.time.DateTimeException;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -35,7 +36,10 @@ import java.util.function.Supplier;
 /* loaded from: classes2.dex */
 public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
     public static final int[] DEFAULT_AUTOMATIC_TIME_ORIGIN_PRIORITIES = {1, 3};
-    public static final Set SERVER_FLAGS_KEYS_TO_WATCH = Set.of("time_detector_lower_bound_millis_override", "time_detector_origin_priorities_override");
+    public static final Set SERVER_FLAGS_KEYS_TO_WATCH =
+            Set.of(
+                    "time_detector_lower_bound_millis_override",
+                    "time_detector_origin_priorities_override");
     public static final Object SLOCK = new Object();
     public static ServiceConfigAccessorImpl sInstance;
     public final ConfigOriginPrioritiesSupplier mConfigOriginPrioritiesSupplier;
@@ -56,13 +60,19 @@ public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
             this.val$mainThreadHandler = handler;
         }
 
-        public final void onUserRestrictionsChanged(final int i, final Bundle bundle, final Bundle bundle2) {
-            this.val$mainThreadHandler.post(new Runnable(i, bundle, bundle2) { // from class: com.android.server.timedetector.ServiceConfigAccessorImpl$3$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ServiceConfigAccessorImpl.this.handleConfigurationInternalChangeOnMainThread();
-                }
-            });
+        public final void onUserRestrictionsChanged(
+                final int i, final Bundle bundle, final Bundle bundle2) {
+            this.val$mainThreadHandler.post(
+                    new Runnable(
+                            i, bundle,
+                            bundle2) { // from class:
+                                       // com.android.server.timedetector.ServiceConfigAccessorImpl$3$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ServiceConfigAccessorImpl.this
+                                    .handleConfigurationInternalChangeOnMainThread();
+                        }
+                    });
         }
     }
 
@@ -92,14 +102,25 @@ public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
             int[] iArr = null;
             switch (this.$r8$classId) {
                 case 0:
-                    stringArray = ((Context) this.mContext).getResources().getStringArray(R.array.config_notificationMsgPkgsAllowedAsConvos);
+                    stringArray =
+                            ((Context) this.mContext)
+                                    .getResources()
+                                    .getStringArray(
+                                            R.array.config_notificationMsgPkgsAllowedAsConvos);
                     break;
                 default:
                     ((ServerFlags) this.mContext).getClass();
-                    Optional ofNullable = Optional.ofNullable(DeviceConfig.getProperty("system_time", "time_detector_origin_priorities_override"));
+                    Optional ofNullable =
+                            Optional.ofNullable(
+                                    DeviceConfig.getProperty(
+                                            "system_time",
+                                            "time_detector_origin_priorities_override"));
                     if (ofNullable.isPresent()) {
                         String str = (String) ofNullable.get();
-                        of = "_[]_".equals(str) ? Optional.of(new String[0]) : Optional.of(str.split(","));
+                        of =
+                                "_[]_".equals(str)
+                                        ? Optional.of(new String[0])
+                                        : Optional.of(str.split(","));
                     } else {
                         of = Optional.empty();
                     }
@@ -138,7 +159,8 @@ public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
                                         i = 3;
                                         iArr2[i2] = i;
                                     default:
-                                        throw new IllegalArgumentException("originString=".concat(trim));
+                                        throw new IllegalArgumentException(
+                                                "originString=".concat(trim));
                                 }
                             } catch (IllegalArgumentException unused) {
                             }
@@ -165,26 +187,44 @@ public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
         this.mServerFlags = serverFlags;
         this.mConfigOriginPrioritiesSupplier = new ConfigOriginPrioritiesSupplier(context);
         this.mServerFlagsOriginPrioritiesSupplier = new ConfigOriginPrioritiesSupplier(serverFlags);
-        this.mSystemClockUpdateThresholdMillis = context.getResources().getInteger(R.integer.device_idle_max_idle_pending_to_ms);
-        context.registerReceiverForAllUsers(new BroadcastReceiver() { // from class: com.android.server.timedetector.ServiceConfigAccessorImpl.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                ServiceConfigAccessorImpl.this.handleConfigurationInternalChangeOnMainThread();
-            }
-        }, BatteryService$$ExternalSyntheticOutline0.m("android.intent.action.USER_SWITCHED"), null, null);
+        this.mSystemClockUpdateThresholdMillis =
+                context.getResources().getInteger(R.integer.device_idle_max_idle_pending_to_ms);
+        context.registerReceiverForAllUsers(
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.timedetector.ServiceConfigAccessorImpl.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        ServiceConfigAccessorImpl.this
+                                .handleConfigurationInternalChangeOnMainThread();
+                    }
+                },
+                BatteryService$$ExternalSyntheticOutline0.m("android.intent.action.USER_SWITCHED"),
+                null,
+                null);
         Handler mainThreadHandler = context.getMainThreadHandler();
-        context.getContentResolver().registerContentObserver(Settings.Global.getUriFor("auto_time"), true, new ContentObserver(mainThreadHandler) { // from class: com.android.server.timedetector.ServiceConfigAccessorImpl.2
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z) {
-                ServiceConfigAccessorImpl.this.handleConfigurationInternalChangeOnMainThread();
-            }
-        });
-        serverFlags.addListener(new StateChangeListener() { // from class: com.android.server.timedetector.ServiceConfigAccessorImpl$$ExternalSyntheticLambda0
-            @Override // com.android.server.timezonedetector.StateChangeListener
-            public final void onChange() {
-                ServiceConfigAccessorImpl.this.handleConfigurationInternalChangeOnMainThread();
-            }
-        }, SERVER_FLAGS_KEYS_TO_WATCH);
+        context.getContentResolver()
+                .registerContentObserver(
+                        Settings.Global.getUriFor("auto_time"),
+                        true,
+                        new ContentObserver(
+                                mainThreadHandler) { // from class:
+                                                     // com.android.server.timedetector.ServiceConfigAccessorImpl.2
+                            @Override // android.database.ContentObserver
+                            public final void onChange(boolean z) {
+                                ServiceConfigAccessorImpl.this
+                                        .handleConfigurationInternalChangeOnMainThread();
+                            }
+                        });
+        serverFlags.addListener(
+                new StateChangeListener() { // from class:
+                                            // com.android.server.timedetector.ServiceConfigAccessorImpl$$ExternalSyntheticLambda0
+                    @Override // com.android.server.timezonedetector.StateChangeListener
+                    public final void onChange() {
+                        ServiceConfigAccessorImpl.this
+                                .handleConfigurationInternalChangeOnMainThread();
+                    }
+                },
+                SERVER_FLAGS_KEYS_TO_WATCH);
         userManager.addUserRestrictionsListener(new AnonymousClass3(mainThreadHandler));
     }
 
@@ -194,7 +234,8 @@ public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
         TimeDetectorHelper timeDetectorHelper = TimeDetectorHelper.INSTANCE;
         builder = new ConfigurationInternal.Builder(i);
         boolean z = true;
-        builder.mUserConfigAllowed = !this.mUserManager.hasUserRestriction("no_config_date_time", UserHandle.of(i));
+        builder.mUserConfigAllowed =
+                !this.mUserManager.hasUserRestriction("no_config_date_time", UserHandle.of(i));
         builder.mAutoDetectionSupported = isAutoDetectionSupported();
         if (Settings.Global.getInt(this.mCr, "auto_time", 1) <= 0) {
             z = false;
@@ -203,7 +244,9 @@ public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
         builder.mSystemClockUpdateThresholdMillis = this.mSystemClockUpdateThresholdMillis;
         builder.mSystemClockConfidenceThresholdMillis = 1000;
         this.mServerFlags.getClass();
-        String property = DeviceConfig.getProperty("system_time", "time_detector_lower_bound_millis_override");
+        String property =
+                DeviceConfig.getProperty(
+                        "system_time", "time_detector_lower_bound_millis_override");
         if (property == null) {
             empty = Optional.empty();
         } else {
@@ -213,7 +256,10 @@ public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
                 empty = Optional.empty();
             }
         }
-        Instant instant = (Instant) empty.orElse(TimeDetectorHelper.INSTANCE.getAutoSuggestionLowerBoundDefault());
+        Instant instant =
+                (Instant)
+                        empty.orElse(
+                                TimeDetectorHelper.INSTANCE.getAutoSuggestionLowerBoundDefault());
         Objects.requireNonNull(instant);
         builder.mAutoSuggestionLowerBound = instant;
         Instant manualSuggestionLowerBound = timeDetectorHelper.getManualSuggestionLowerBound();
@@ -250,17 +296,26 @@ public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
             if (i == 3 || i == 5 || i == 4) {
                 return true;
             }
-            if (i == 1 && this.mContext.getPackageManager().hasSystemFeature("android.hardware.telephony")) {
+            if (i == 1
+                    && this.mContext
+                            .getPackageManager()
+                            .hasSystemFeature("android.hardware.telephony")) {
                 return true;
             }
         }
         return false;
     }
 
-    public final synchronized boolean updateConfiguration(int i, TimeConfiguration timeConfiguration) {
+    public final synchronized boolean updateConfiguration(
+            int i, TimeConfiguration timeConfiguration) {
         Objects.requireNonNull(timeConfiguration);
-        TimeCapabilitiesAndConfig createCapabilitiesAndConfig = getConfigurationInternal(i).createCapabilitiesAndConfig();
-        TimeConfiguration tryApplyConfigChanges = createCapabilitiesAndConfig.getCapabilities().tryApplyConfigChanges(createCapabilitiesAndConfig.getConfiguration(), timeConfiguration);
+        TimeCapabilitiesAndConfig createCapabilitiesAndConfig =
+                getConfigurationInternal(i).createCapabilitiesAndConfig();
+        TimeConfiguration tryApplyConfigChanges =
+                createCapabilitiesAndConfig
+                        .getCapabilities()
+                        .tryApplyConfigChanges(
+                                createCapabilitiesAndConfig.getConfiguration(), timeConfiguration);
         if (tryApplyConfigChanges == null) {
             return false;
         }

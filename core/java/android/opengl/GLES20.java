@@ -228,8 +228,7 @@ public class GLES20 {
     public static final int GL_STENCIL_FAIL = 2964;
     public static final int GL_STENCIL_FUNC = 2962;
 
-    @Deprecated
-    public static final int GL_STENCIL_INDEX = 6401;
+    @Deprecated public static final int GL_STENCIL_INDEX = 6401;
     public static final int GL_STENCIL_INDEX8 = 36168;
     public static final int GL_STENCIL_PASS_DEPTH_FAIL = 2965;
     public static final int GL_STENCIL_PASS_DEPTH_PASS = 2966;
@@ -355,13 +354,17 @@ public class GLES20 {
 
     public static native void glCompileShader(int i);
 
-    public static native void glCompressedTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, Buffer buffer);
+    public static native void glCompressedTexImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, Buffer buffer);
 
-    public static native void glCompressedTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
+    public static native void glCompressedTexSubImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
 
-    public static native void glCopyTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
+    public static native void glCopyTexImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
 
-    public static native void glCopyTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
+    public static native void glCopyTexSubImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
 
     public static native int glCreateProgram();
 
@@ -439,25 +442,67 @@ public class GLES20 {
 
     public static native void glGenerateMipmap(int i);
 
-    public static native String glGetActiveAttrib(int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
+    public static native String glGetActiveAttrib(
+            int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
 
-    public static native String glGetActiveAttrib(int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
+    public static native String glGetActiveAttrib(
+            int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
 
-    public static native void glGetActiveAttrib(int i, int i2, int i3, IntBuffer intBuffer, IntBuffer intBuffer2, IntBuffer intBuffer3, byte b);
+    public static native void glGetActiveAttrib(
+            int i,
+            int i2,
+            int i3,
+            IntBuffer intBuffer,
+            IntBuffer intBuffer2,
+            IntBuffer intBuffer3,
+            byte b);
 
-    public static native void glGetActiveAttrib(int i, int i2, int i3, int[] iArr, int i4, int[] iArr2, int i5, int[] iArr3, int i6, byte[] bArr, int i7);
+    public static native void glGetActiveAttrib(
+            int i,
+            int i2,
+            int i3,
+            int[] iArr,
+            int i4,
+            int[] iArr2,
+            int i5,
+            int[] iArr3,
+            int i6,
+            byte[] bArr,
+            int i7);
 
-    public static native String glGetActiveUniform(int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
+    public static native String glGetActiveUniform(
+            int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
 
-    public static native String glGetActiveUniform(int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
+    public static native String glGetActiveUniform(
+            int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
 
-    public static native void glGetActiveUniform(int i, int i2, int i3, IntBuffer intBuffer, IntBuffer intBuffer2, IntBuffer intBuffer3, byte b);
+    public static native void glGetActiveUniform(
+            int i,
+            int i2,
+            int i3,
+            IntBuffer intBuffer,
+            IntBuffer intBuffer2,
+            IntBuffer intBuffer3,
+            byte b);
 
-    public static native void glGetActiveUniform(int i, int i2, int i3, int[] iArr, int i4, int[] iArr2, int i5, int[] iArr3, int i6, byte[] bArr, int i7);
+    public static native void glGetActiveUniform(
+            int i,
+            int i2,
+            int i3,
+            int[] iArr,
+            int i4,
+            int[] iArr2,
+            int i5,
+            int[] iArr3,
+            int i6,
+            byte[] bArr,
+            int i7);
 
-    public static native void glGetAttachedShaders(int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
+    public static native void glGetAttachedShaders(
+            int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
 
-    public static native void glGetAttachedShaders(int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
+    public static native void glGetAttachedShaders(
+            int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
 
     public static native int glGetAttribLocation(int i, String str);
 
@@ -475,9 +520,11 @@ public class GLES20 {
 
     public static native void glGetFloatv(int i, float[] fArr, int i2);
 
-    public static native void glGetFramebufferAttachmentParameteriv(int i, int i2, int i3, IntBuffer intBuffer);
+    public static native void glGetFramebufferAttachmentParameteriv(
+            int i, int i2, int i3, IntBuffer intBuffer);
 
-    public static native void glGetFramebufferAttachmentParameteriv(int i, int i2, int i3, int[] iArr, int i4);
+    public static native void glGetFramebufferAttachmentParameteriv(
+            int i, int i2, int i3, int[] iArr, int i4);
 
     public static native void glGetIntegerv(int i, IntBuffer intBuffer);
 
@@ -495,15 +542,18 @@ public class GLES20 {
 
     public static native String glGetShaderInfoLog(int i);
 
-    public static native void glGetShaderPrecisionFormat(int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
+    public static native void glGetShaderPrecisionFormat(
+            int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
 
-    public static native void glGetShaderPrecisionFormat(int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
+    public static native void glGetShaderPrecisionFormat(
+            int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
 
     public static native String glGetShaderSource(int i);
 
     public static native void glGetShaderSource(int i, int i2, IntBuffer intBuffer, byte b);
 
-    public static native void glGetShaderSource(int i, int i2, int[] iArr, int i3, byte[] bArr, int i4);
+    public static native void glGetShaderSource(
+            int i, int i2, int[] iArr, int i3, byte[] bArr, int i4);
 
     public static native void glGetShaderiv(int i, int i2, IntBuffer intBuffer);
 
@@ -561,7 +611,8 @@ public class GLES20 {
 
     public static native void glPolygonOffset(float f, float f2);
 
-    public static native void glReadPixels(int i, int i2, int i3, int i4, int i5, int i6, Buffer buffer);
+    public static native void glReadPixels(
+            int i, int i2, int i3, int i4, int i5, int i6, Buffer buffer);
 
     public static native void glReleaseShaderCompiler();
 
@@ -571,9 +622,11 @@ public class GLES20 {
 
     public static native void glScissor(int i, int i2, int i3, int i4);
 
-    public static native void glShaderBinary(int i, IntBuffer intBuffer, int i2, Buffer buffer, int i3);
+    public static native void glShaderBinary(
+            int i, IntBuffer intBuffer, int i2, Buffer buffer, int i3);
 
-    public static native void glShaderBinary(int i, int[] iArr, int i2, int i3, Buffer buffer, int i4);
+    public static native void glShaderBinary(
+            int i, int[] iArr, int i2, int i3, Buffer buffer, int i4);
 
     public static native void glShaderSource(int i, String str);
 
@@ -589,7 +642,8 @@ public class GLES20 {
 
     public static native void glStencilOpSeparate(int i, int i2, int i3, int i4);
 
-    public static native void glTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
+    public static native void glTexImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
 
     public static native void glTexParameterf(int i, int i2, float f);
 
@@ -603,7 +657,8 @@ public class GLES20 {
 
     public static native void glTexParameteriv(int i, int i2, int[] iArr, int i3);
 
-    public static native void glTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
+    public static native void glTexSubImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
 
     public static native void glUniform1f(int i, float f);
 
@@ -693,9 +748,11 @@ public class GLES20 {
 
     public static native void glVertexAttrib4fv(int i, float[] fArr, int i2);
 
-    public static native void glVertexAttribPointer(int i, int i2, int i3, boolean z, int i4, int i5);
+    public static native void glVertexAttribPointer(
+            int i, int i2, int i3, boolean z, int i4, int i5);
 
-    private static native void glVertexAttribPointerBounds(int i, int i2, int i3, boolean z, int i4, Buffer buffer, int i5);
+    private static native void glVertexAttribPointerBounds(
+            int i, int i2, int i3, boolean z, int i4, Buffer buffer, int i5);
 
     public static native void glViewport(int i, int i2, int i3, int i4);
 
@@ -703,7 +760,8 @@ public class GLES20 {
         _nativeClassInit();
     }
 
-    public static void glVertexAttribPointer(int indx, int size, int type, boolean normalized, int stride, Buffer ptr) {
+    public static void glVertexAttribPointer(
+            int indx, int size, int type, boolean normalized, int stride, Buffer ptr) {
         glVertexAttribPointerBounds(indx, size, type, normalized, stride, ptr, ptr.remaining());
     }
 }

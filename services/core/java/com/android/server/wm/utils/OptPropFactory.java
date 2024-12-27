@@ -1,7 +1,9 @@
 package com.android.server.wm.utils;
 
 import android.content.pm.PackageManager;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.util.function.BooleanSupplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,7 +19,10 @@ public final class OptPropFactory {
         public int mValue = -1;
         public final OptPropFactory$$ExternalSyntheticLambda0 mValueSupplier;
 
-        public OptProp(OptPropFactory$$ExternalSyntheticLambda0 optPropFactory$$ExternalSyntheticLambda0, String str, BooleanSupplier booleanSupplier) {
+        public OptProp(
+                OptPropFactory$$ExternalSyntheticLambda0 optPropFactory$$ExternalSyntheticLambda0,
+                String str,
+                BooleanSupplier booleanSupplier) {
             this.mValueSupplier = optPropFactory$$ExternalSyntheticLambda0;
             this.mPropertyName = str;
             this.mCondition = booleanSupplier;
@@ -27,15 +32,30 @@ public final class OptPropFactory {
             boolean z;
             if (this.mValue == -1) {
                 try {
-                    OptPropFactory$$ExternalSyntheticLambda0 optPropFactory$$ExternalSyntheticLambda0 = this.mValueSupplier;
+                    OptPropFactory$$ExternalSyntheticLambda0
+                            optPropFactory$$ExternalSyntheticLambda0 = this.mValueSupplier;
                     switch (optPropFactory$$ExternalSyntheticLambda0.$r8$classId) {
                         case 0:
-                            OptPropFactory optPropFactory = optPropFactory$$ExternalSyntheticLambda0.f$0;
-                            z = optPropFactory.mPackageManager.getProperty(optPropFactory$$ExternalSyntheticLambda0.f$1, optPropFactory.mPackageName).getBoolean();
+                            OptPropFactory optPropFactory =
+                                    optPropFactory$$ExternalSyntheticLambda0.f$0;
+                            z =
+                                    optPropFactory
+                                            .mPackageManager
+                                            .getProperty(
+                                                    optPropFactory$$ExternalSyntheticLambda0.f$1,
+                                                    optPropFactory.mPackageName)
+                                            .getBoolean();
                             break;
                         default:
-                            OptPropFactory optPropFactory2 = optPropFactory$$ExternalSyntheticLambda0.f$0;
-                            z = optPropFactory2.mPackageManager.getProperty(optPropFactory$$ExternalSyntheticLambda0.f$1, optPropFactory2.mPackageName).getBoolean();
+                            OptPropFactory optPropFactory2 =
+                                    optPropFactory$$ExternalSyntheticLambda0.f$0;
+                            z =
+                                    optPropFactory2
+                                            .mPackageManager
+                                            .getProperty(
+                                                    optPropFactory$$ExternalSyntheticLambda0.f$1,
+                                                    optPropFactory2.mPackageName)
+                                            .getBoolean();
                             break;
                     }
                     Boolean valueOf = Boolean.valueOf(z);
@@ -47,7 +67,10 @@ public final class OptPropFactory {
                         this.mValue = -2;
                     }
                 } catch (Exception unused) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Cannot read opt property "), this.mPropertyName, "OptProp");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("Cannot read opt property "),
+                            this.mPropertyName,
+                            "OptProp");
                     this.mValue = -2;
                 }
             }
@@ -76,10 +99,14 @@ public final class OptPropFactory {
     }
 
     public final OptProp create(String str) {
-        return new OptProp(new OptPropFactory$$ExternalSyntheticLambda0(this, str, 0), str, new OptPropFactory$OptProp$$ExternalSyntheticLambda0());
+        return new OptProp(
+                new OptPropFactory$$ExternalSyntheticLambda0(this, str, 0),
+                str,
+                new OptPropFactory$OptProp$$ExternalSyntheticLambda0());
     }
 
     public final OptProp create(String str, BooleanSupplier booleanSupplier) {
-        return new OptProp(new OptPropFactory$$ExternalSyntheticLambda0(this, str, 1), str, booleanSupplier);
+        return new OptProp(
+                new OptPropFactory$$ExternalSyntheticLambda0(this, str, 1), str, booleanSupplier);
     }
 }

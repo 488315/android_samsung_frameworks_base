@@ -18,7 +18,10 @@ public final class GameTaskInfoProvider {
     public final Object mLock = new Object();
     public final LruCache mGameTaskInfoCache = new LruCache(50);
 
-    public GameTaskInfoProvider(UserHandle userHandle, IActivityTaskManager iActivityTaskManager, GameClassifierImpl gameClassifierImpl) {
+    public GameTaskInfoProvider(
+            UserHandle userHandle,
+            IActivityTaskManager iActivityTaskManager,
+            GameClassifierImpl gameClassifierImpl) {
         this.mUserHandle = userHandle;
         this.mActivityTaskManager = iActivityTaskManager;
         this.mGameClassifier = gameClassifierImpl;
@@ -31,7 +34,10 @@ public final class GameTaskInfoProvider {
         gameClassifierImpl.getClass();
         boolean z = false;
         try {
-            if (gameClassifierImpl.mPackageManager.getApplicationInfoAsUser(packageName, 0, userHandle.getIdentifier()).category == 0) {
+            if (gameClassifierImpl.mPackageManager.getApplicationInfoAsUser(
+                                    packageName, 0, userHandle.getIdentifier())
+                            .category
+                    == 0) {
                 z = true;
             }
         } catch (PackageManager.NameNotFoundException unused) {
@@ -45,7 +51,8 @@ public final class GameTaskInfoProvider {
 
     public final ActivityManager.RunningTaskInfo getRunningTaskInfo(int i) {
         try {
-            for (ActivityManager.RunningTaskInfo runningTaskInfo : this.mActivityTaskManager.getTasks(Integer.MAX_VALUE, false, false, -1)) {
+            for (ActivityManager.RunningTaskInfo runningTaskInfo :
+                    this.mActivityTaskManager.getTasks(Integer.MAX_VALUE, false, false, -1)) {
                 if (runningTaskInfo.taskId == i) {
                     return runningTaskInfo;
                 }

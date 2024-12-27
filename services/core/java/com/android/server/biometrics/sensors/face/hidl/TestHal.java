@@ -6,14 +6,17 @@ import android.hardware.biometrics.face.V1_0.OptionalBool;
 import android.hardware.biometrics.face.V1_0.OptionalUint64;
 import android.hardware.face.Face;
 import android.util.Slog;
+
 import com.android.server.biometrics.sensors.face.FaceUtils;
+
+import vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace;
+import vendor.samsung.hardware.biometrics.face.V3_0.ISehBiometricsFace;
+import vendor.samsung.hardware.biometrics.face.V3_0.ISehBiometricsFaceClientCallback;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace;
-import vendor.samsung.hardware.biometrics.face.V3_0.ISehBiometricsFace;
-import vendor.samsung.hardware.biometrics.face.V3_0.ISehBiometricsFaceClientCallback;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -93,10 +96,13 @@ public final class TestHal extends ISehBiometricsFace.Stub {
             return 0;
         }
         if (i != 0) {
-            iSehBiometricsFaceClientCallback.onRemoved(this.mUserId, 0L, new ArrayList(Collections.singletonList(Integer.valueOf(i))));
+            iSehBiometricsFaceClientCallback.onRemoved(
+                    this.mUserId, 0L, new ArrayList(Collections.singletonList(Integer.valueOf(i))));
             return 0;
         }
-        List biometricsForUser = FaceUtils.getInstance(this.mSensorId, null).getBiometricsForUser(this.mContext, this.mUserId);
+        List biometricsForUser =
+                FaceUtils.getInstance(this.mSensorId, null)
+                        .getBiometricsForUser(this.mContext, this.mUserId);
         ArrayList arrayList = new ArrayList();
         Iterator it = ((ArrayList) biometricsForUser).iterator();
         while (it.hasNext()) {
@@ -123,7 +129,8 @@ public final class TestHal extends ISehBiometricsFace.Stub {
     }
 
     @Override // vendor.samsung.hardware.biometrics.face.V3_0.ISehBiometricsFace
-    public final int sehAuthenticateForIssuance(int i, long j, ArrayList arrayList, boolean z, boolean z2) {
+    public final int sehAuthenticateForIssuance(
+            int i, long j, ArrayList arrayList, boolean z, boolean z2) {
         return 0;
     }
 
@@ -138,7 +145,8 @@ public final class TestHal extends ISehBiometricsFace.Stub {
     }
 
     @Override // vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace
-    public final void sehGetSecurityLevel(ISehBiometricsFace.sehGetSecurityLevelCallback sehgetsecuritylevelcallback) {
+    public final void sehGetSecurityLevel(
+            ISehBiometricsFace.sehGetSecurityLevelCallback sehgetsecuritylevelcallback) {
         sehgetsecuritylevelcallback.onValues(0, 2);
     }
 
@@ -174,7 +182,8 @@ public final class TestHal extends ISehBiometricsFace.Stub {
     }
 
     @Override // android.hardware.biometrics.face.V1_0.IBiometricsFace
-    public final OptionalUint64 setCallback(IBiometricsFaceClientCallback iBiometricsFaceClientCallback) {
+    public final OptionalUint64 setCallback(
+            IBiometricsFaceClientCallback iBiometricsFaceClientCallback) {
         this.mCallback = (ISehBiometricsFaceClientCallback) iBiometricsFaceClientCallback;
         return new OptionalUint64();
     }
@@ -185,6 +194,5 @@ public final class TestHal extends ISehBiometricsFace.Stub {
     }
 
     @Override // android.hardware.biometrics.face.V1_0.IBiometricsFace
-    public final void userActivity() {
-    }
+    public final void userActivity() {}
 }

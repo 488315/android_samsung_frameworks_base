@@ -8,8 +8,8 @@ import android.hardware.display.DisplayManager;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.SystemProperties;
-import android.os.epic.IEpicManager;
 import android.util.Log;
+
 import com.android.server.SystemService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -49,8 +49,7 @@ public final class EpicManagerService extends SystemService {
     }
 
     @Override // com.android.server.SystemService
-    public void onBootPhase(int i) {
-    }
+    public void onBootPhase(int i) {}
 
     @Override // com.android.server.SystemService
     public void onStart() {
@@ -65,15 +64,24 @@ public final class EpicManagerService extends SystemService {
                 this.mPackageManager = this.mContext.getPackageManager();
                 if ((j & FEATURE_WEB) == FEATURE_WEB) {
                     this.mChromeDetector = new EpicChromeDetector();
-                    this.mDisplayManager = (DisplayManager) this.mContext.getSystemService("display");
+                    this.mDisplayManager =
+                            (DisplayManager) this.mContext.getSystemService("display");
                     HandlerThread handlerThread = new HandlerThread("DisplayChange");
                     this.mDisplayHandlerThread = handlerThread;
                     handlerThread.start();
-                    EpicDisplayListener epicDisplayListener = new EpicDisplayListener(this.mDisplayManager);
+                    EpicDisplayListener epicDisplayListener =
+                            new EpicDisplayListener(this.mDisplayManager);
                     this.mDisplayListener = epicDisplayListener;
-                    this.mDisplayManager.registerDisplayListener(epicDisplayListener, new Handler(this.mDisplayHandlerThread.getLooper()));
+                    this.mDisplayManager.registerDisplayListener(
+                            epicDisplayListener,
+                            new Handler(this.mDisplayHandlerThread.getLooper()));
                 }
-                EpicUidObserver epicUidObserver = new EpicUidObserver(this.mContext, this.mPackageManager, this.mActivityManager, this.mChromeDetector);
+                EpicUidObserver epicUidObserver =
+                        new EpicUidObserver(
+                                this.mContext,
+                                this.mPackageManager,
+                                this.mActivityManager,
+                                this.mChromeDetector);
                 this.mUidObserver = epicUidObserver;
                 this.mActivityManager.registerUidObserver(epicUidObserver, 3, 3, (String) null);
             }

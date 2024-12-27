@@ -20,8 +20,7 @@ class SemExpandableListPosition {
         this.type = 0;
     }
 
-    private SemExpandableListPosition() {
-    }
+    private SemExpandableListPosition() {}
 
     long getPackedPosition() {
         if (this.type == 1) {

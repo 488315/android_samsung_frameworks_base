@@ -39,28 +39,22 @@ public interface IQSTileService extends IInterface {
 
     public static class Default implements IQSTileService {
         @Override // android.service.quicksettings.IQSTileService
-        public void onTileAdded() throws RemoteException {
-        }
+        public void onTileAdded() throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSTileService
-        public void onTileRemoved() throws RemoteException {
-        }
+        public void onTileRemoved() throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSTileService
-        public void onStartListening() throws RemoteException {
-        }
+        public void onStartListening() throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSTileService
-        public void onStopListening() throws RemoteException {
-        }
+        public void onStopListening() throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSTileService
-        public void onClick(IBinder wtoken) throws RemoteException {
-        }
+        public void onClick(IBinder wtoken) throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSTileService
-        public void onUnlockComplete() throws RemoteException {
-        }
+        public void onUnlockComplete() throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSTileService
         public CharSequence semGetDetailViewTitle() throws RemoteException {
@@ -93,8 +87,7 @@ public interface IQSTileService extends IInterface {
         }
 
         @Override // android.service.quicksettings.IQSTileService
-        public void semSetToggleButtonChecked(boolean checked) throws RemoteException {
-        }
+        public void semSetToggleButtonChecked(boolean checked) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -102,7 +95,7 @@ public interface IQSTileService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IQSTileService {
+    public abstract static class Stub extends Binder implements IQSTileService {
         public static final String DESCRIPTOR = "android.service.quicksettings.IQSTileService";
         static final int TRANSACTION_onClick = 5;
         static final int TRANSACTION_onStartListening = 3;
@@ -177,7 +170,8 @@ public interface IQSTileService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -372,7 +366,8 @@ public interface IQSTileService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -388,7 +383,8 @@ public interface IQSTileService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

@@ -5,14 +5,16 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.os.ShellCommand;
 import android.util.IndentingPrintWriter;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.dump.DualDumpOutputStream;
 import com.android.server.timezonedetector.GeolocationTimeZoneSuggestion;
 import com.android.server.timezonedetector.LocationAlgorithmEvent;
 import com.android.server.timezonedetector.ServiceConfigAccessorImpl;
 import com.android.server.timezonedetector.ServiceConfigAccessorImpl$$ExternalSyntheticLambda1;
-import com.android.server.timezonedetector.location.LocationTimeZoneProvider;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,15 +27,18 @@ import java.util.concurrent.Callable;
 public final class LocationTimeZoneManagerShellCommand extends ShellCommand {
     public final LocationTimeZoneManagerService mService;
 
-    public LocationTimeZoneManagerShellCommand(LocationTimeZoneManagerService locationTimeZoneManagerService) {
+    public LocationTimeZoneManagerShellCommand(
+            LocationTimeZoneManagerService locationTimeZoneManagerService) {
         this.mService = locationTimeZoneManagerService;
     }
 
-    public static void writeProviderStates(DualDumpOutputStream dualDumpOutputStream, List list, String str, long j) {
+    public static void writeProviderStates(
+            DualDumpOutputStream dualDumpOutputStream, List list, String str, long j) {
         int i;
         Iterator it = list.iterator();
         while (it.hasNext()) {
-            LocationTimeZoneProvider.ProviderState providerState = (LocationTimeZoneProvider.ProviderState) it.next();
+            LocationTimeZoneProvider.ProviderState providerState =
+                    (LocationTimeZoneProvider.ProviderState) it.next();
             long start = dualDumpOutputStream.start(str, j);
             int i2 = providerState.stateEnum;
             switch (i2) {
@@ -59,9 +64,12 @@ public final class LocationTimeZoneManagerShellCommand extends ShellCommand {
                     i = 6;
                     break;
                 default:
-                    throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "Unknown stateEnum="));
+                    throw new IllegalArgumentException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                    i2, "Unknown stateEnum="));
             }
-            dualDumpOutputStream.write(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, 1159641169921L, i);
+            dualDumpOutputStream.write(
+                    LauncherConfigurationInternal.KEY_STATE_BOOLEAN, 1159641169921L, i);
             dualDumpOutputStream.end(start);
         }
     }
@@ -126,50 +134,87 @@ public final class LocationTimeZoneManagerShellCommand extends ShellCommand {
                 final String str2 = nextArgRequired2.equals("@null") ? null : nextArgRequired2;
                 final boolean parseBoolean = Boolean.parseBoolean(getNextArgRequired());
                 try {
-                    final LocationTimeZoneManagerService locationTimeZoneManagerService = this.mService;
-                    locationTimeZoneManagerService.mContext.enforceCallingPermission("android.permission.MANAGE_TIME_AND_ZONE_DETECTION", "manage time and time zone detection");
+                    final LocationTimeZoneManagerService locationTimeZoneManagerService =
+                            this.mService;
+                    locationTimeZoneManagerService.mContext.enforceCallingPermission(
+                            "android.permission.MANAGE_TIME_AND_ZONE_DETECTION",
+                            "manage time and time zone detection");
                     if (nextArgRequired == null && str2 == null) {
-                        throw new IllegalArgumentException("One or both test package names must be provided.");
+                        throw new IllegalArgumentException(
+                                "One or both test package names must be provided.");
                     }
-                    locationTimeZoneManagerService.mThreadingDomain.postAndWait(new Runnable() { // from class: com.android.server.timezonedetector.location.LocationTimeZoneManagerService$$ExternalSyntheticLambda4
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            LocationTimeZoneManagerService locationTimeZoneManagerService2 = LocationTimeZoneManagerService.this;
-                            String str3 = nextArgRequired;
-                            String str4 = str2;
-                            boolean z = parseBoolean;
-                            synchronized (locationTimeZoneManagerService2.mSharedLock) {
-                                try {
-                                    locationTimeZoneManagerService2.stopOnDomainThread();
-                                    ServiceConfigAccessorImpl serviceConfigAccessorImpl = (ServiceConfigAccessorImpl) locationTimeZoneManagerService2.mServiceConfigAccessor;
-                                    synchronized (serviceConfigAccessorImpl) {
+                    locationTimeZoneManagerService.mThreadingDomain.postAndWait(
+                            new Runnable() { // from class:
+                                             // com.android.server.timezonedetector.location.LocationTimeZoneManagerService$$ExternalSyntheticLambda4
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    LocationTimeZoneManagerService locationTimeZoneManagerService2 =
+                                            LocationTimeZoneManagerService.this;
+                                    String str3 = nextArgRequired;
+                                    String str4 = str2;
+                                    boolean z = parseBoolean;
+                                    synchronized (locationTimeZoneManagerService2.mSharedLock) {
                                         try {
-                                            serviceConfigAccessorImpl.mTestPrimaryLocationTimeZoneProviderPackageName = str3;
-                                            serviceConfigAccessorImpl.mTestPrimaryLocationTimeZoneProviderMode = str3 == null ? "disabled" : "enabled";
-                                            serviceConfigAccessorImpl.mContext.getMainThreadHandler().post(new ServiceConfigAccessorImpl$$ExternalSyntheticLambda1(serviceConfigAccessorImpl));
-                                        } finally {
+                                            locationTimeZoneManagerService2.stopOnDomainThread();
+                                            ServiceConfigAccessorImpl serviceConfigAccessorImpl =
+                                                    (ServiceConfigAccessorImpl)
+                                                            locationTimeZoneManagerService2
+                                                                    .mServiceConfigAccessor;
+                                            synchronized (serviceConfigAccessorImpl) {
+                                                try {
+                                                    serviceConfigAccessorImpl
+                                                                    .mTestPrimaryLocationTimeZoneProviderPackageName =
+                                                            str3;
+                                                    serviceConfigAccessorImpl
+                                                                    .mTestPrimaryLocationTimeZoneProviderMode =
+                                                            str3 == null ? "disabled" : "enabled";
+                                                    serviceConfigAccessorImpl
+                                                            .mContext
+                                                            .getMainThreadHandler()
+                                                            .post(
+                                                                    new ServiceConfigAccessorImpl$$ExternalSyntheticLambda1(
+                                                                            serviceConfigAccessorImpl));
+                                                } finally {
+                                                }
+                                            }
+                                            ServiceConfigAccessorImpl serviceConfigAccessorImpl2 =
+                                                    (ServiceConfigAccessorImpl)
+                                                            locationTimeZoneManagerService2
+                                                                    .mServiceConfigAccessor;
+                                            synchronized (serviceConfigAccessorImpl2) {
+                                                try {
+                                                    serviceConfigAccessorImpl2
+                                                                    .mTestSecondaryLocationTimeZoneProviderPackageName =
+                                                            str4;
+                                                    serviceConfigAccessorImpl2
+                                                                    .mTestSecondaryLocationTimeZoneProviderMode =
+                                                            str4 == null ? "disabled" : "enabled";
+                                                    serviceConfigAccessorImpl2
+                                                            .mContext
+                                                            .getMainThreadHandler()
+                                                            .post(
+                                                                    new ServiceConfigAccessorImpl$$ExternalSyntheticLambda1(
+                                                                            serviceConfigAccessorImpl2));
+                                                } finally {
+                                                }
+                                            }
+                                            ServiceConfigAccessorImpl serviceConfigAccessorImpl3 =
+                                                    (ServiceConfigAccessorImpl)
+                                                            locationTimeZoneManagerService2
+                                                                    .mServiceConfigAccessor;
+                                            synchronized (serviceConfigAccessorImpl3) {
+                                                serviceConfigAccessorImpl3
+                                                                .mRecordStateChangesForTests =
+                                                        z;
+                                            }
+                                            locationTimeZoneManagerService2.startOnDomainThread();
+                                        } catch (Throwable th) {
+                                            throw th;
                                         }
                                     }
-                                    ServiceConfigAccessorImpl serviceConfigAccessorImpl2 = (ServiceConfigAccessorImpl) locationTimeZoneManagerService2.mServiceConfigAccessor;
-                                    synchronized (serviceConfigAccessorImpl2) {
-                                        try {
-                                            serviceConfigAccessorImpl2.mTestSecondaryLocationTimeZoneProviderPackageName = str4;
-                                            serviceConfigAccessorImpl2.mTestSecondaryLocationTimeZoneProviderMode = str4 == null ? "disabled" : "enabled";
-                                            serviceConfigAccessorImpl2.mContext.getMainThreadHandler().post(new ServiceConfigAccessorImpl$$ExternalSyntheticLambda1(serviceConfigAccessorImpl2));
-                                        } finally {
-                                        }
-                                    }
-                                    ServiceConfigAccessorImpl serviceConfigAccessorImpl3 = (ServiceConfigAccessorImpl) locationTimeZoneManagerService2.mServiceConfigAccessor;
-                                    synchronized (serviceConfigAccessorImpl3) {
-                                        serviceConfigAccessorImpl3.mRecordStateChangesForTests = z;
-                                    }
-                                    locationTimeZoneManagerService2.startOnDomainThread();
-                                } catch (Throwable th) {
-                                    throw th;
                                 }
-                            }
-                        }
-                    }, LocationTimeZoneManagerService.BLOCKING_OP_WAIT_DURATION_MILLIS);
+                            },
+                            LocationTimeZoneManagerService.BLOCKING_OP_WAIT_DURATION_MILLIS);
                     getOutPrintWriter().println("Service started (test mode)");
                     return 0;
                 } catch (RuntimeException e) {
@@ -179,8 +224,13 @@ public final class LocationTimeZoneManagerShellCommand extends ShellCommand {
             case 1:
                 try {
                     LocationTimeZoneManagerService locationTimeZoneManagerService2 = this.mService;
-                    locationTimeZoneManagerService2.mContext.enforceCallingPermission("android.permission.MANAGE_TIME_AND_ZONE_DETECTION", "manage time and time zone detection");
-                    locationTimeZoneManagerService2.mThreadingDomain.postAndWait(new LocationTimeZoneManagerService$$ExternalSyntheticLambda1(locationTimeZoneManagerService2, 0), LocationTimeZoneManagerService.BLOCKING_OP_WAIT_DURATION_MILLIS);
+                    locationTimeZoneManagerService2.mContext.enforceCallingPermission(
+                            "android.permission.MANAGE_TIME_AND_ZONE_DETECTION",
+                            "manage time and time zone detection");
+                    locationTimeZoneManagerService2.mThreadingDomain.postAndWait(
+                            new LocationTimeZoneManagerService$$ExternalSyntheticLambda1(
+                                    locationTimeZoneManagerService2, 0),
+                            LocationTimeZoneManagerService.BLOCKING_OP_WAIT_DURATION_MILLIS);
                     getOutPrintWriter().println("Service stopped");
                     return 0;
                 } catch (RuntimeException e2) {
@@ -190,8 +240,13 @@ public final class LocationTimeZoneManagerShellCommand extends ShellCommand {
             case 2:
                 try {
                     LocationTimeZoneManagerService locationTimeZoneManagerService3 = this.mService;
-                    locationTimeZoneManagerService3.mContext.enforceCallingPermission("android.permission.MANAGE_TIME_AND_ZONE_DETECTION", "manage time and time zone detection");
-                    locationTimeZoneManagerService3.mThreadingDomain.postAndWait(new LocationTimeZoneManagerService$$ExternalSyntheticLambda1(locationTimeZoneManagerService3, i2), LocationTimeZoneManagerService.BLOCKING_OP_WAIT_DURATION_MILLIS);
+                    locationTimeZoneManagerService3.mContext.enforceCallingPermission(
+                            "android.permission.MANAGE_TIME_AND_ZONE_DETECTION",
+                            "manage time and time zone detection");
+                    locationTimeZoneManagerService3.mThreadingDomain.postAndWait(
+                            new LocationTimeZoneManagerService$$ExternalSyntheticLambda1(
+                                    locationTimeZoneManagerService3, i2),
+                            LocationTimeZoneManagerService.BLOCKING_OP_WAIT_DURATION_MILLIS);
                     getOutPrintWriter().println("Service started");
                     return 0;
                 } catch (RuntimeException e3) {
@@ -201,8 +256,13 @@ public final class LocationTimeZoneManagerShellCommand extends ShellCommand {
             case 3:
                 try {
                     LocationTimeZoneManagerService locationTimeZoneManagerService4 = this.mService;
-                    locationTimeZoneManagerService4.mContext.enforceCallingPermission("android.permission.MANAGE_TIME_AND_ZONE_DETECTION", "manage time and time zone detection");
-                    locationTimeZoneManagerService4.mThreadingDomain.postAndWait(new LocationTimeZoneManagerService$$ExternalSyntheticLambda1(locationTimeZoneManagerService4, i3), LocationTimeZoneManagerService.BLOCKING_OP_WAIT_DURATION_MILLIS);
+                    locationTimeZoneManagerService4.mContext.enforceCallingPermission(
+                            "android.permission.MANAGE_TIME_AND_ZONE_DETECTION",
+                            "manage time and time zone detection");
+                    locationTimeZoneManagerService4.mThreadingDomain.postAndWait(
+                            new LocationTimeZoneManagerService$$ExternalSyntheticLambda1(
+                                    locationTimeZoneManagerService4, i3),
+                            LocationTimeZoneManagerService.BLOCKING_OP_WAIT_DURATION_MILLIS);
                     return 0;
                 } catch (IllegalStateException e4) {
                     reportError(e4);
@@ -210,32 +270,63 @@ public final class LocationTimeZoneManagerShellCommand extends ShellCommand {
                 }
             case 4:
                 try {
-                    final LocationTimeZoneManagerService locationTimeZoneManagerService5 = this.mService;
-                    locationTimeZoneManagerService5.mContext.enforceCallingPermission("android.permission.MANAGE_TIME_AND_ZONE_DETECTION", "manage time and time zone detection");
+                    final LocationTimeZoneManagerService locationTimeZoneManagerService5 =
+                            this.mService;
+                    locationTimeZoneManagerService5.mContext.enforceCallingPermission(
+                            "android.permission.MANAGE_TIME_AND_ZONE_DETECTION",
+                            "manage time and time zone detection");
                     try {
-                        LocationTimeZoneManagerServiceState locationTimeZoneManagerServiceState = (LocationTimeZoneManagerServiceState) locationTimeZoneManagerService5.mThreadingDomain.postAndWait(new Callable() { // from class: com.android.server.timezonedetector.location.LocationTimeZoneManagerService$$ExternalSyntheticLambda0
-                            @Override // java.util.concurrent.Callable
-                            public final Object call() {
-                                LocationTimeZoneManagerService locationTimeZoneManagerService6 = LocationTimeZoneManagerService.this;
-                                synchronized (locationTimeZoneManagerService6.mSharedLock) {
-                                    try {
-                                        LocationTimeZoneProviderController locationTimeZoneProviderController = locationTimeZoneManagerService6.mLocationTimeZoneProviderController;
-                                        if (locationTimeZoneProviderController == null) {
-                                            return null;
-                                        }
-                                        return locationTimeZoneProviderController.getStateForTests();
-                                    } finally {
-                                    }
-                                }
-                            }
-                        }, LocationTimeZoneManagerService.BLOCKING_OP_WAIT_DURATION_MILLIS);
+                        LocationTimeZoneManagerServiceState locationTimeZoneManagerServiceState =
+                                (LocationTimeZoneManagerServiceState)
+                                        locationTimeZoneManagerService5.mThreadingDomain
+                                                .postAndWait(
+                                                        new Callable() { // from class:
+                                                                         // com.android.server.timezonedetector.location.LocationTimeZoneManagerService$$ExternalSyntheticLambda0
+                                                            @Override // java.util.concurrent.Callable
+                                                            public final Object call() {
+                                                                LocationTimeZoneManagerService
+                                                                        locationTimeZoneManagerService6 =
+                                                                                LocationTimeZoneManagerService
+                                                                                        .this;
+                                                                synchronized (
+                                                                        locationTimeZoneManagerService6
+                                                                                .mSharedLock) {
+                                                                    try {
+                                                                        LocationTimeZoneProviderController
+                                                                                locationTimeZoneProviderController =
+                                                                                        locationTimeZoneManagerService6
+                                                                                                .mLocationTimeZoneProviderController;
+                                                                        if (locationTimeZoneProviderController
+                                                                                == null) {
+                                                                            return null;
+                                                                        }
+                                                                        return locationTimeZoneProviderController
+                                                                                .getStateForTests();
+                                                                    } finally {
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        LocationTimeZoneManagerService
+                                                                .BLOCKING_OP_WAIT_DURATION_MILLIS);
                         if (locationTimeZoneManagerServiceState != null) {
-                            DualDumpOutputStream dualDumpOutputStream = "--proto".equals(getNextOption()) ? new DualDumpOutputStream(new ProtoOutputStream(getOutFileDescriptor())) : new DualDumpOutputStream(new IndentingPrintWriter(getOutPrintWriter(), "  "));
-                            LocationAlgorithmEvent locationAlgorithmEvent = locationTimeZoneManagerServiceState.mLastEvent;
+                            DualDumpOutputStream dualDumpOutputStream =
+                                    "--proto".equals(getNextOption())
+                                            ? new DualDumpOutputStream(
+                                                    new ProtoOutputStream(getOutFileDescriptor()))
+                                            : new DualDumpOutputStream(
+                                                    new IndentingPrintWriter(
+                                                            getOutPrintWriter(), "  "));
+                            LocationAlgorithmEvent locationAlgorithmEvent =
+                                    locationTimeZoneManagerServiceState.mLastEvent;
                             if (locationAlgorithmEvent != null) {
-                                long start = dualDumpOutputStream.start("last_event", 1146756268033L);
-                                LocationTimeZoneAlgorithmStatus locationTimeZoneAlgorithmStatus = locationAlgorithmEvent.mAlgorithmStatus;
-                                long start2 = dualDumpOutputStream.start("algorithm_status", 1146756268035L);
+                                long start =
+                                        dualDumpOutputStream.start("last_event", 1146756268033L);
+                                LocationTimeZoneAlgorithmStatus locationTimeZoneAlgorithmStatus =
+                                        locationAlgorithmEvent.mAlgorithmStatus;
+                                long start2 =
+                                        dualDumpOutputStream.start(
+                                                "algorithm_status", 1146756268035L);
                                 int status = locationTimeZoneAlgorithmStatus.getStatus();
                                 if (status == 0) {
                                     i = 0;
@@ -245,29 +336,42 @@ public final class LocationTimeZoneManagerShellCommand extends ShellCommand {
                                     i = 2;
                                 } else {
                                     if (status != 3) {
-                                        throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(status, "Unknown statusEnum="));
+                                        throw new IllegalArgumentException(
+                                                VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                                        status, "Unknown statusEnum="));
                                     }
                                     i = 3;
                                 }
-                                dualDumpOutputStream.write(Constants.JSON_CLIENT_DATA_STATUS, 1159641169921L, i);
+                                dualDumpOutputStream.write(
+                                        Constants.JSON_CLIENT_DATA_STATUS, 1159641169921L, i);
                                 dualDumpOutputStream.end(start2);
-                                GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion = locationAlgorithmEvent.mSuggestion;
+                                GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion =
+                                        locationAlgorithmEvent.mSuggestion;
                                 if (geolocationTimeZoneSuggestion != null) {
-                                    long start3 = dualDumpOutputStream.start("suggestion", 1146756268033L);
+                                    long start3 =
+                                            dualDumpOutputStream.start(
+                                                    "suggestion", 1146756268033L);
                                     Iterator it = geolocationTimeZoneSuggestion.mZoneIds.iterator();
                                     while (it.hasNext()) {
-                                        dualDumpOutputStream.write("zone_ids", 2237677961217L, (String) it.next());
+                                        dualDumpOutputStream.write(
+                                                "zone_ids", 2237677961217L, (String) it.next());
                                     }
                                     dualDumpOutputStream.end(start3);
                                 }
                                 ArrayList arrayList = locationAlgorithmEvent.mDebugInfo;
-                                Iterator it2 = (arrayList == null ? Collections.emptyList() : Collections.unmodifiableList(arrayList)).iterator();
+                                Iterator it2 =
+                                        (arrayList == null
+                                                        ? Collections.emptyList()
+                                                        : Collections.unmodifiableList(arrayList))
+                                                .iterator();
                                 while (it2.hasNext()) {
-                                    dualDumpOutputStream.write("debug_info", 2237677961218L, (String) it2.next());
+                                    dualDumpOutputStream.write(
+                                            "debug_info", 2237677961218L, (String) it2.next());
                                 }
                                 dualDumpOutputStream.end(start);
                             }
-                            for (String str3 : locationTimeZoneManagerServiceState.mControllerStates) {
+                            for (String str3 :
+                                    locationTimeZoneManagerServiceState.mControllerStates) {
                                 int i4 = 7;
                                 switch (str3.hashCode()) {
                                     case -1166336595:
@@ -357,8 +461,20 @@ public final class LocationTimeZoneManagerShellCommand extends ShellCommand {
                                 }
                                 dualDumpOutputStream.write("controller_states", 2259152797700L, i4);
                             }
-                            writeProviderStates(dualDumpOutputStream, Collections.unmodifiableList(locationTimeZoneManagerServiceState.mPrimaryProviderStates), "primary_provider_states", 2246267895810L);
-                            writeProviderStates(dualDumpOutputStream, Collections.unmodifiableList(locationTimeZoneManagerServiceState.mSecondaryProviderStates), "secondary_provider_states", 2246267895811L);
+                            writeProviderStates(
+                                    dualDumpOutputStream,
+                                    Collections.unmodifiableList(
+                                            locationTimeZoneManagerServiceState
+                                                    .mPrimaryProviderStates),
+                                    "primary_provider_states",
+                                    2246267895810L);
+                            writeProviderStates(
+                                    dualDumpOutputStream,
+                                    Collections.unmodifiableList(
+                                            locationTimeZoneManagerServiceState
+                                                    .mSecondaryProviderStates),
+                                    "secondary_provider_states",
+                                    2246267895811L);
                             dualDumpOutputStream.flush();
                         }
                         return 0;
@@ -376,43 +492,86 @@ public final class LocationTimeZoneManagerShellCommand extends ShellCommand {
 
     public final void onHelp() {
         PrintWriter outPrintWriter = getOutPrintWriter();
-        outPrintWriter.printf("Location Time Zone Manager (%s) commands for tests:\n", "location_time_zone_manager");
+        outPrintWriter.printf(
+                "Location Time Zone Manager (%s) commands for tests:\n",
+                "location_time_zone_manager");
         outPrintWriter.printf("  help\n", new Object[0]);
         outPrintWriter.printf("    Print this help text.\n", new Object[0]);
         outPrintWriter.printf("  %s\n", "start");
-        outPrintWriter.printf("    Starts the service, creating location time zone providers.\n", new Object[0]);
-        outPrintWriter.printf("  %s <primary package name|%2$s> <secondary package name|%2$s> <record states>\n", "start_with_test_providers", "@null");
-        outPrintWriter.printf("    Starts the service with test provider packages configured / provider permission checks disabled.\n", new Object[0]);
-        outPrintWriter.printf("    <record states> - true|false, determines whether state recording is enabled.\n", new Object[0]);
-        outPrintWriter.printf("    See %s and %s.\n", "dump_state", "clear_recorded_provider_states");
+        outPrintWriter.printf(
+                "    Starts the service, creating location time zone providers.\n", new Object[0]);
+        outPrintWriter.printf(
+                "  %s <primary package name|%2$s> <secondary package name|%2$s> <record states>\n",
+                "start_with_test_providers", "@null");
+        outPrintWriter.printf(
+                "    Starts the service with test provider packages configured / provider"
+                    + " permission checks disabled.\n",
+                new Object[0]);
+        outPrintWriter.printf(
+                "    <record states> - true|false, determines whether state recording is"
+                    + " enabled.\n",
+                new Object[0]);
+        outPrintWriter.printf(
+                "    See %s and %s.\n", "dump_state", "clear_recorded_provider_states");
         outPrintWriter.printf("  %s\n", "stop");
-        outPrintWriter.printf("    Stops the service, destroying location time zone providers.\n", new Object[0]);
+        outPrintWriter.printf(
+                "    Stops the service, destroying location time zone providers.\n", new Object[0]);
         outPrintWriter.printf("  %s\n", "clear_recorded_provider_states");
-        outPrintWriter.printf("    Clears recorded provider state. See also %s and %s.\n", "start_with_test_providers", "dump_state");
-        outPrintWriter.printf("    Note: This is only intended for use during testing.\n", new Object[0]);
+        outPrintWriter.printf(
+                "    Clears recorded provider state. See also %s and %s.\n",
+                "start_with_test_providers", "dump_state");
+        outPrintWriter.printf(
+                "    Note: This is only intended for use during testing.\n", new Object[0]);
         outPrintWriter.printf("  %s [%s]\n", "dump_state", "--proto");
-        outPrintWriter.printf("    Dumps service state for tests as text or binary proto form.\n", new Object[0]);
-        outPrintWriter.printf("    See the LocationTimeZoneManagerServiceStateProto definition for details.\n", new Object[0]);
+        outPrintWriter.printf(
+                "    Dumps service state for tests as text or binary proto form.\n", new Object[0]);
+        outPrintWriter.printf(
+                "    See the LocationTimeZoneManagerServiceStateProto definition for details.\n",
+                new Object[0]);
         outPrintWriter.println();
-        outPrintWriter.printf("This service is also affected by the following device_config flags in the %s namespace:\n", "system_time");
+        outPrintWriter.printf(
+                "This service is also affected by the following device_config flags in the %s"
+                    + " namespace:\n",
+                "system_time");
         outPrintWriter.printf("  %s\n", "primary_location_time_zone_provider_mode_override");
-        outPrintWriter.printf("    Overrides the mode of the primary provider. Values=%s|%s\n", "disabled", "enabled");
+        outPrintWriter.printf(
+                "    Overrides the mode of the primary provider. Values=%s|%s\n",
+                "disabled", "enabled");
         outPrintWriter.printf("  %s\n", "secondary_location_time_zone_provider_mode_override");
-        outPrintWriter.printf("    Overrides the mode of the secondary provider. Values=%s|%s\n", "disabled", "enabled");
+        outPrintWriter.printf(
+                "    Overrides the mode of the secondary provider. Values=%s|%s\n",
+                "disabled", "enabled");
         outPrintWriter.printf("  %s\n", "location_time_zone_detection_uncertainty_delay_millis");
-        outPrintWriter.printf("    Sets the amount of time the service waits when uncertain before making an 'uncertain' suggestion to the time zone detector.\n", new Object[0]);
+        outPrintWriter.printf(
+                "    Sets the amount of time the service waits when uncertain before making an"
+                    + " 'uncertain' suggestion to the time zone detector.\n",
+                new Object[0]);
         outPrintWriter.printf("  %s\n", "ltzp_init_timeout_millis");
-        outPrintWriter.printf("    Sets the initialization time passed to the providers.\n", new Object[0]);
+        outPrintWriter.printf(
+                "    Sets the initialization time passed to the providers.\n", new Object[0]);
         outPrintWriter.printf("  %s\n", "ltzp_init_timeout_fuzz_millis");
-        outPrintWriter.printf("    Sets the amount of extra time added to the providers' initialization time.\n", new Object[0]);
+        outPrintWriter.printf(
+                "    Sets the amount of extra time added to the providers' initialization time.\n",
+                new Object[0]);
         outPrintWriter.printf("  %s\n", "ltzp_event_filtering_age_threshold_millis");
-        outPrintWriter.printf("    Sets the amount of time that must pass between equivalent LTZP events before they will be reported to the system server.\n", new Object[0]);
+        outPrintWriter.printf(
+                "    Sets the amount of time that must pass between equivalent LTZP events before"
+                    + " they will be reported to the system server.\n",
+                new Object[0]);
         outPrintWriter.println();
-        outPrintWriter.printf("Typically, use '%s' to stop the service before setting individual flags and '%s' after to restart it.\n", "stop", "start");
+        outPrintWriter.printf(
+                "Typically, use '%s' to stop the service before setting individual flags and '%s'"
+                    + " after to restart it.\n",
+                "stop", "start");
         outPrintWriter.println();
-        outPrintWriter.printf("See \"adb shell cmd device_config\" for more information on setting flags.\n", new Object[0]);
+        outPrintWriter.printf(
+                "See \"adb shell cmd device_config\" for more information on setting flags.\n",
+                new Object[0]);
         outPrintWriter.println();
-        outPrintWriter.printf("Also see \"adb shell cmd %s help\" for higher-level location time zone commands / settings.\n", "time_zone_detector");
+        outPrintWriter.printf(
+                "Also see \"adb shell cmd %s help\" for higher-level location time zone commands /"
+                    + " settings.\n",
+                "time_zone_detector");
         outPrintWriter.println();
     }
 

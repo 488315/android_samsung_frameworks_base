@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.service.gatekeeper.GateKeeperResponse;
 import android.util.Slog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -23,27 +24,30 @@ public final class VerifyCredentialResponse implements Parcelable {
     public static final VerifyCredentialResponse OK = new Builder().build();
     public static final VerifyCredentialResponse ERROR = fromError();
     public static final VerifyCredentialResponse SKIP = fromTimeout(0);
-    public static final Parcelable.Creator<VerifyCredentialResponse> CREATOR = new Parcelable.Creator<VerifyCredentialResponse>() { // from class: com.android.internal.widget.VerifyCredentialResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerifyCredentialResponse createFromParcel(Parcel source) {
-            int responseCode = source.readInt();
-            int timeout = source.readInt();
-            byte[] gatekeeperHAT = source.createByteArray();
-            long gatekeeperPasswordHandle = source.readLong();
-            return new VerifyCredentialResponse(responseCode, timeout, gatekeeperHAT, gatekeeperPasswordHandle);
-        }
+    public static final Parcelable.Creator<VerifyCredentialResponse> CREATOR =
+            new Parcelable.Creator<
+                    VerifyCredentialResponse>() { // from class:
+                                                  // com.android.internal.widget.VerifyCredentialResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerifyCredentialResponse createFromParcel(Parcel source) {
+                    int responseCode = source.readInt();
+                    int timeout = source.readInt();
+                    byte[] gatekeeperHAT = source.createByteArray();
+                    long gatekeeperPasswordHandle = source.readLong();
+                    return new VerifyCredentialResponse(
+                            responseCode, timeout, gatekeeperHAT, gatekeeperPasswordHandle);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerifyCredentialResponse[] newArray(int size) {
-            return new VerifyCredentialResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerifyCredentialResponse[] newArray(int size) {
+                    return new VerifyCredentialResponse[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ResponseCode {
-    }
+    @interface ResponseCode {}
 
     public static class Builder {
         private byte[] mGatekeeperHAT;
@@ -60,7 +64,8 @@ public final class VerifyCredentialResponse implements Parcelable {
         }
 
         public VerifyCredentialResponse build() {
-            return new VerifyCredentialResponse(0, 0, this.mGatekeeperHAT, this.mGatekeeperPasswordHandle);
+            return new VerifyCredentialResponse(
+                    0, 0, this.mGatekeeperHAT, this.mGatekeeperPasswordHandle);
         }
     }
 
@@ -72,14 +77,20 @@ public final class VerifyCredentialResponse implements Parcelable {
         return new VerifyCredentialResponse(-1, 0, null, 0L);
     }
 
-    private VerifyCredentialResponse(int responseCode, int timeout, byte[] gatekeeperHAT, long gatekeeperPasswordHandle) {
+    private VerifyCredentialResponse(
+            int responseCode, int timeout, byte[] gatekeeperHAT, long gatekeeperPasswordHandle) {
         this.mResponseCode = responseCode;
         this.mTimeout = timeout;
         this.mGatekeeperHAT = gatekeeperHAT;
         this.mGatekeeperPasswordHandle = gatekeeperPasswordHandle;
     }
 
-    private VerifyCredentialResponse(int responseCode, int timeout, byte[] gatekeeperHAT, long gatekeeperPasswordHandle, byte[] secret) {
+    private VerifyCredentialResponse(
+            int responseCode,
+            int timeout,
+            byte[] gatekeeperHAT,
+            long gatekeeperPasswordHandle,
+            byte[] secret) {
         this.mResponseCode = responseCode;
         this.mTimeout = timeout;
         this.mGatekeeperHAT = gatekeeperHAT;
@@ -129,10 +140,16 @@ public final class VerifyCredentialResponse implements Parcelable {
     }
 
     public String toString() {
-        return "Response: " + this.mResponseCode + ", GK HAT: " + (this.mGatekeeperHAT != null) + ", GK PW: " + (this.mGatekeeperPasswordHandle != 0);
+        return "Response: "
+                + this.mResponseCode
+                + ", GK HAT: "
+                + (this.mGatekeeperHAT != null)
+                + ", GK PW: "
+                + (this.mGatekeeperPasswordHandle != 0);
     }
 
-    public static VerifyCredentialResponse fromGateKeeperResponse(GateKeeperResponse gateKeeperResponse) {
+    public static VerifyCredentialResponse fromGateKeeperResponse(
+            GateKeeperResponse gateKeeperResponse) {
         int responseCode = gateKeeperResponse.getResponseCode();
         if (responseCode == 1) {
             return fromTimeout(gateKeeperResponse.getTimeout());

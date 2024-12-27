@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextFlatMotion extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextFlatMotion> CREATOR = new Parcelable.Creator<SemContextFlatMotion>() { // from class: com.samsung.android.hardware.context.SemContextFlatMotion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextFlatMotion createFromParcel(Parcel in) {
-            return new SemContextFlatMotion(in);
-        }
+    public static final Parcelable.Creator<SemContextFlatMotion> CREATOR =
+            new Parcelable.Creator<
+                    SemContextFlatMotion>() { // from class:
+                                              // com.samsung.android.hardware.context.SemContextFlatMotion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextFlatMotion createFromParcel(Parcel in) {
+                    return new SemContextFlatMotion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextFlatMotion[] newArray(int size) {
-            return new SemContextFlatMotion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextFlatMotion[] newArray(int size) {
+                    return new SemContextFlatMotion[size];
+                }
+            };
     public static final int FALSE = 2;
     public static final int TRUE = 1;
     public static final int UNKNOWN = 0;

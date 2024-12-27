@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.ArraySet;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.pm.parsing.pkg.ParsedPackage;
 import com.android.internal.pm.pkg.component.ParsedActivity;
 import com.android.internal.pm.pkg.component.ParsedApexSystemService;
@@ -22,6 +23,7 @@ import com.android.internal.pm.pkg.component.ParsedProcess;
 import com.android.internal.pm.pkg.component.ParsedProvider;
 import com.android.internal.pm.pkg.component.ParsedService;
 import com.android.internal.pm.pkg.component.ParsedUsesPermission;
+
 import java.security.PublicKey;
 import java.util.List;
 import java.util.Map;
@@ -91,7 +93,8 @@ public interface ParsingPackage {
 
     ParsingPackage addUsesStaticLibrary(String str, long j, String[] strArr);
 
-    ParsingPackage asSplit(String[] strArr, String[] strArr2, int[] iArr, SparseArray<int[]> sparseArray);
+    ParsingPackage asSplit(
+            String[] strArr, String[] strArr2, int[] iArr, SparseArray<int[]> sparseArray);
 
     List<ParsedActivity> getActivities();
 

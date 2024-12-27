@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateFormat;
 import android.util.ArraySet;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -37,18 +38,15 @@ public final class DeviceState {
 
     @Target({ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeviceStateProperties {
-    }
+    public @interface DeviceStateProperties {}
 
     @Target({ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PhysicalDeviceStateProperties {
-    }
+    public @interface PhysicalDeviceStateProperties {}
 
     @Target({ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SystemDeviceStateProperties {
-    }
+    public @interface SystemDeviceStateProperties {}
 
     public DeviceState(Configuration deviceStateConfiguration) {
         Objects.requireNonNull(deviceStateConfiguration, "Device StateConfiguration is null");
@@ -64,7 +62,16 @@ public final class DeviceState {
     }
 
     public String toString() {
-        return "DeviceState{identifier=" + this.mDeviceStateConfiguration.getIdentifier() + ", name='" + this.mDeviceStateConfiguration.getName() + DateFormat.QUOTE + ", app_accessible=" + (!this.mDeviceStateConfiguration.getSystemProperties().contains(9)) + ", cancel_when_requester_not_on_top=" + this.mDeviceStateConfiguration.getSystemProperties().contains(5) + "}";
+        return "DeviceState{identifier="
+                + this.mDeviceStateConfiguration.getIdentifier()
+                + ", name='"
+                + this.mDeviceStateConfiguration.getName()
+                + DateFormat.QUOTE
+                + ", app_accessible="
+                + (!this.mDeviceStateConfiguration.getSystemProperties().contains(9))
+                + ", cancel_when_requester_not_on_top="
+                + this.mDeviceStateConfiguration.getSystemProperties().contains(5)
+                + "}";
     }
 
     public boolean equals(Object o) {
@@ -83,7 +90,10 @@ public final class DeviceState {
     }
 
     public boolean hasProperty(int propertyToCheckFor) {
-        return this.mDeviceStateConfiguration.mSystemProperties.contains(Integer.valueOf(propertyToCheckFor)) || this.mDeviceStateConfiguration.mPhysicalProperties.contains(Integer.valueOf(propertyToCheckFor));
+        return this.mDeviceStateConfiguration.mSystemProperties.contains(
+                        Integer.valueOf(propertyToCheckFor))
+                || this.mDeviceStateConfiguration.mPhysicalProperties.contains(
+                        Integer.valueOf(propertyToCheckFor));
     }
 
     public boolean hasProperties(int... properties) {
@@ -100,27 +110,37 @@ public final class DeviceState {
     }
 
     public static final class Configuration implements Parcelable {
-        public static final Parcelable.Creator<Configuration> CREATOR = new Parcelable.Creator<Configuration>() { // from class: android.hardware.devicestate.DeviceState.Configuration.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Configuration createFromParcel(Parcel source) {
-                int identifier = source.readInt();
-                String name = source.readString8();
-                return new Configuration(identifier, name, source.readArraySet(null), source.readArraySet(null));
-            }
+        public static final Parcelable.Creator<Configuration> CREATOR =
+                new Parcelable.Creator<Configuration>() { // from class:
+                    // android.hardware.devicestate.DeviceState.Configuration.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Configuration createFromParcel(Parcel source) {
+                        int identifier = source.readInt();
+                        String name = source.readString8();
+                        return new Configuration(
+                                identifier,
+                                name,
+                                source.readArraySet(null),
+                                source.readArraySet(null));
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Configuration[] newArray(int size) {
-                return new Configuration[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Configuration[] newArray(int size) {
+                        return new Configuration[size];
+                    }
+                };
         private final int mIdentifier;
         private final String mName;
         private final ArraySet<Integer> mPhysicalProperties;
         private final ArraySet<Integer> mSystemProperties;
 
-        private Configuration(int identifier, String name, ArraySet<Integer> systemProperties, ArraySet<Integer> physicalProperties) {
+        private Configuration(
+                int identifier,
+                String name,
+                ArraySet<Integer> systemProperties,
+                ArraySet<Integer> physicalProperties) {
             this.mIdentifier = identifier;
             this.mName = name;
             this.mSystemProperties = systemProperties;
@@ -144,7 +164,16 @@ public final class DeviceState {
         }
 
         public String toString() {
-            return "DeviceState{identifier=" + this.mIdentifier + ", name='" + this.mName + DateFormat.QUOTE + ", app_accessible=" + this.mSystemProperties.contains(9) + ", cancel_when_requester_not_on_top=" + this.mSystemProperties.contains(5) + "}";
+            return "DeviceState{identifier="
+                    + this.mIdentifier
+                    + ", name='"
+                    + this.mName
+                    + DateFormat.QUOTE
+                    + ", app_accessible="
+                    + this.mSystemProperties.contains(9)
+                    + ", cancel_when_requester_not_on_top="
+                    + this.mSystemProperties.contains(5)
+                    + "}";
         }
 
         public boolean equals(Object o) {
@@ -155,14 +184,21 @@ public final class DeviceState {
                 return false;
             }
             Configuration that = (Configuration) o;
-            if (this.mIdentifier == that.mIdentifier && Objects.equals(this.mName, that.mName) && Objects.equals(this.mSystemProperties, that.mSystemProperties) && Objects.equals(this.mPhysicalProperties, that.mPhysicalProperties)) {
+            if (this.mIdentifier == that.mIdentifier
+                    && Objects.equals(this.mName, that.mName)
+                    && Objects.equals(this.mSystemProperties, that.mSystemProperties)
+                    && Objects.equals(this.mPhysicalProperties, that.mPhysicalProperties)) {
                 return true;
             }
             return false;
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.mIdentifier), this.mName, this.mSystemProperties, this.mPhysicalProperties);
+            return Objects.hash(
+                    Integer.valueOf(this.mIdentifier),
+                    this.mName,
+                    this.mSystemProperties,
+                    this.mPhysicalProperties);
         }
 
         @Override // android.os.Parcelable
@@ -200,7 +236,11 @@ public final class DeviceState {
             }
 
             public Configuration build() {
-                return new Configuration(this.mIdentifier, this.mName, new ArraySet(this.mSystemProperties), new ArraySet(this.mPhysicalProperties));
+                return new Configuration(
+                        this.mIdentifier,
+                        this.mName,
+                        new ArraySet(this.mSystemProperties),
+                        new ArraySet(this.mPhysicalProperties));
             }
         }
     }

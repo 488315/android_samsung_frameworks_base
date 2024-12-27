@@ -4,6 +4,7 @@ import android.hardware.radio.V1_0.AppStatus;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,18 +25,42 @@ public final class SehAppStatus {
             return false;
         }
         SehAppStatus other = (SehAppStatus) otherObject;
-        if (HidlSupport.deepEquals(this.base, other.base) && this.pin1NumRetries == other.pin1NumRetries && this.puk1NumRetries == other.puk1NumRetries && this.pin2NumRetries == other.pin2NumRetries && this.puk2NumRetries == other.puk2NumRetries && this.persoUnblockRetries == other.persoUnblockRetries) {
+        if (HidlSupport.deepEquals(this.base, other.base)
+                && this.pin1NumRetries == other.pin1NumRetries
+                && this.puk1NumRetries == other.puk1NumRetries
+                && this.pin2NumRetries == other.pin2NumRetries
+                && this.puk2NumRetries == other.puk2NumRetries
+                && this.persoUnblockRetries == other.persoUnblockRetries) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.base)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.pin1NumRetries))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.puk1NumRetries))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.pin2NumRetries))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.puk2NumRetries))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.persoUnblockRetries))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.base)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.pin1NumRetries))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.puk1NumRetries))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.pin2NumRetries))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.puk2NumRetries))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.persoUnblockRetries))));
     }
 
     public final String toString() {
-        return "{.base = " + this.base + ", .pin1NumRetries = " + this.pin1NumRetries + ", .puk1NumRetries = " + this.puk1NumRetries + ", .pin2NumRetries = " + this.pin2NumRetries + ", .puk2NumRetries = " + this.puk2NumRetries + ", .persoUnblockRetries = " + this.persoUnblockRetries + "}";
+        return "{.base = "
+                + this.base
+                + ", .pin1NumRetries = "
+                + this.pin1NumRetries
+                + ", .puk1NumRetries = "
+                + this.puk1NumRetries
+                + ", .pin2NumRetries = "
+                + this.pin2NumRetries
+                + ", .puk2NumRetries = "
+                + this.puk2NumRetries
+                + ", .persoUnblockRetries = "
+                + this.persoUnblockRetries
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -47,7 +72,8 @@ public final class SehAppStatus {
         ArrayList<SehAppStatus> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 88, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 88, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SehAppStatus _hidl_vec_element = new SehAppStatus();
@@ -57,7 +83,8 @@ public final class SehAppStatus {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.base.readEmbeddedFromParcel(parcel, _hidl_blob, 0 + _hidl_offset);
         this.pin1NumRetries = _hidl_blob.getInt32(64 + _hidl_offset);
         this.puk1NumRetries = _hidl_blob.getInt32(68 + _hidl_offset);
@@ -72,7 +99,8 @@ public final class SehAppStatus {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<SehAppStatus> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<SehAppStatus> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

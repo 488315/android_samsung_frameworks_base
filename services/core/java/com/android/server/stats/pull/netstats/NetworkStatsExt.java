@@ -1,6 +1,7 @@
 package com.android.server.stats.pull.netstats;
 
 import android.net.NetworkStats;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,7 +21,16 @@ public final class NetworkStatsExt {
         this(networkStats, iArr, z, false, false, 0, null, -1, false);
     }
 
-    public NetworkStatsExt(NetworkStats networkStats, int[] iArr, boolean z, boolean z2, boolean z3, int i, SubInfo subInfo, int i2, boolean z4) {
+    public NetworkStatsExt(
+            NetworkStats networkStats,
+            int[] iArr,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            int i,
+            SubInfo subInfo,
+            int i2,
+            boolean z4) {
         this.stats = networkStats;
         int[] copyOf = Arrays.copyOf(iArr, iArr.length);
         this.transports = copyOf;

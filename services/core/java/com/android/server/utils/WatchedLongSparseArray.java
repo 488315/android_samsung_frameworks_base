@@ -12,24 +12,26 @@ public final class WatchedLongSparseArray extends WatchableImpl implements Snapp
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedLongSparseArray$1] */
     public WatchedLongSparseArray() {
         this.mWatching = false;
-        this.mObserver = new Watcher() { // from class: com.android.server.utils.WatchedLongSparseArray.1
-            @Override // com.android.server.utils.Watcher
-            public final void onChange(Watchable watchable) {
-                WatchedLongSparseArray.this.dispatchChange(watchable);
-            }
-        };
+        this.mObserver =
+                new Watcher() { // from class: com.android.server.utils.WatchedLongSparseArray.1
+                    @Override // com.android.server.utils.Watcher
+                    public final void onChange(Watchable watchable) {
+                        WatchedLongSparseArray.this.dispatchChange(watchable);
+                    }
+                };
         this.mStorage = new LongSparseArray();
     }
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedLongSparseArray$1] */
     public WatchedLongSparseArray(int i) {
         this.mWatching = false;
-        this.mObserver = new Watcher() { // from class: com.android.server.utils.WatchedLongSparseArray.1
-            @Override // com.android.server.utils.Watcher
-            public final void onChange(Watchable watchable) {
-                WatchedLongSparseArray.this.dispatchChange(watchable);
-            }
-        };
+        this.mObserver =
+                new Watcher() { // from class: com.android.server.utils.WatchedLongSparseArray.1
+                    @Override // com.android.server.utils.Watcher
+                    public final void onChange(Watchable watchable) {
+                        WatchedLongSparseArray.this.dispatchChange(watchable);
+                    }
+                };
         this.mStorage = new LongSparseArray(i);
     }
 
@@ -50,7 +52,8 @@ public final class WatchedLongSparseArray extends WatchableImpl implements Snapp
 
     @Override // com.android.server.utils.Snappable
     public final Object snapshot() {
-        WatchedLongSparseArray watchedLongSparseArray = new WatchedLongSparseArray(this.mStorage.size());
+        WatchedLongSparseArray watchedLongSparseArray =
+                new WatchedLongSparseArray(this.mStorage.size());
         if (watchedLongSparseArray.mStorage.size() != 0) {
             throw new IllegalArgumentException("snapshot destination is not empty");
         }

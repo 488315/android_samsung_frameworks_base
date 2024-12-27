@@ -4,29 +4,46 @@ import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorPropertiesInternal;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public class FaceSensorPropertiesInternal extends SensorPropertiesInternal {
-    public static final Parcelable.Creator<FaceSensorPropertiesInternal> CREATOR = new Parcelable.Creator<FaceSensorPropertiesInternal>() { // from class: android.hardware.face.FaceSensorPropertiesInternal.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceSensorPropertiesInternal createFromParcel(Parcel in) {
-            return new FaceSensorPropertiesInternal(in);
-        }
+    public static final Parcelable.Creator<FaceSensorPropertiesInternal> CREATOR =
+            new Parcelable.Creator<FaceSensorPropertiesInternal>() { // from class:
+                // android.hardware.face.FaceSensorPropertiesInternal.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceSensorPropertiesInternal createFromParcel(Parcel in) {
+                    return new FaceSensorPropertiesInternal(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceSensorPropertiesInternal[] newArray(int size) {
-            return new FaceSensorPropertiesInternal[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceSensorPropertiesInternal[] newArray(int size) {
+                    return new FaceSensorPropertiesInternal[size];
+                }
+            };
     public final int sensorType;
     public final boolean supportsFaceDetection;
     public final boolean supportsSelfIllumination;
 
-    public FaceSensorPropertiesInternal(int sensorId, int strength, int maxEnrollmentsPerUser, List<ComponentInfoInternal> componentInfo, int sensorType, boolean supportsFaceDetection, boolean supportsSelfIllumination, boolean resetLockoutRequiresChallenge) {
-        super(sensorId, strength, maxEnrollmentsPerUser, componentInfo, false, resetLockoutRequiresChallenge);
+    public FaceSensorPropertiesInternal(
+            int sensorId,
+            int strength,
+            int maxEnrollmentsPerUser,
+            List<ComponentInfoInternal> componentInfo,
+            int sensorType,
+            boolean supportsFaceDetection,
+            boolean supportsSelfIllumination,
+            boolean resetLockoutRequiresChallenge) {
+        super(
+                sensorId,
+                strength,
+                maxEnrollmentsPerUser,
+                componentInfo,
+                false,
+                resetLockoutRequiresChallenge);
         this.sensorType = sensorType;
         this.supportsFaceDetection = supportsFaceDetection;
         this.supportsSelfIllumination = supportsSelfIllumination;
@@ -54,6 +71,13 @@ public class FaceSensorPropertiesInternal extends SensorPropertiesInternal {
 
     @Override // android.hardware.biometrics.SensorPropertiesInternal
     public String toString() {
-        return "ID: " + this.sensorId + ", Strength: " + this.sensorStrength + ", Type: " + this.sensorType + ", SupportsFaceDetection: " + this.supportsFaceDetection;
+        return "ID: "
+                + this.sensorId
+                + ", Strength: "
+                + this.sensorStrength
+                + ", Type: "
+                + this.sensorType
+                + ", SupportsFaceDetection: "
+                + this.supportsFaceDetection;
     }
 }

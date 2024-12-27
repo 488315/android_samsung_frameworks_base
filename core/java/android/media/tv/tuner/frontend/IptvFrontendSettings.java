@@ -1,6 +1,7 @@
 package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -25,14 +26,21 @@ public final class IptvFrontendSettings extends FrontendSettings {
     private final int mSrcPort;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Igmp {
-    }
+    public @interface Igmp {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Protocol {
-    }
+    public @interface Protocol {}
 
-    private IptvFrontendSettings(byte[] srcIpAddress, byte[] dstIpAddress, int srcPort, int dstPort, IptvFrontendSettingsFec fec, int protocol, int igmp, long bitrate, String contentUrl) {
+    private IptvFrontendSettings(
+            byte[] srcIpAddress,
+            byte[] dstIpAddress,
+            int srcPort,
+            int dstPort,
+            IptvFrontendSettingsFec fec,
+            int protocol,
+            int igmp,
+            long bitrate,
+            String contentUrl) {
         super(0L);
         this.mSrcIpAddress = srcIpAddress;
         this.mDstIpAddress = dstIpAddress;
@@ -138,7 +146,16 @@ public final class IptvFrontendSettings extends FrontendSettings {
         }
 
         public IptvFrontendSettings build() {
-            return new IptvFrontendSettings(this.mSrcIpAddress, this.mDstIpAddress, this.mSrcPort, this.mDstPort, this.mFec, this.mProtocol, this.mIgmp, this.mBitrate, this.mContentUrl);
+            return new IptvFrontendSettings(
+                    this.mSrcIpAddress,
+                    this.mDstIpAddress,
+                    this.mSrcPort,
+                    this.mDstPort,
+                    this.mFec,
+                    this.mProtocol,
+                    this.mIgmp,
+                    this.mBitrate,
+                    this.mContentUrl);
         }
     }
 

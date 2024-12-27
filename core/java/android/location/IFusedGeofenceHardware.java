@@ -9,11 +9,13 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IFusedGeofenceHardware extends IInterface {
-    void addGeofences(GeofenceHardwareRequestParcelable[] geofenceHardwareRequestParcelableArr) throws RemoteException;
+    void addGeofences(GeofenceHardwareRequestParcelable[] geofenceHardwareRequestParcelableArr)
+            throws RemoteException;
 
     boolean isSupported() throws RemoteException;
 
-    void modifyGeofenceOptions(int i, int i2, int i3, int i4, int i5, int i6) throws RemoteException;
+    void modifyGeofenceOptions(int i, int i2, int i3, int i4, int i5, int i6)
+            throws RemoteException;
 
     void pauseMonitoringGeofence(int i) throws RemoteException;
 
@@ -28,24 +30,28 @@ public interface IFusedGeofenceHardware extends IInterface {
         }
 
         @Override // android.location.IFusedGeofenceHardware
-        public void addGeofences(GeofenceHardwareRequestParcelable[] geofenceRequestsArray) throws RemoteException {
-        }
+        public void addGeofences(GeofenceHardwareRequestParcelable[] geofenceRequestsArray)
+                throws RemoteException {}
 
         @Override // android.location.IFusedGeofenceHardware
-        public void removeGeofences(int[] geofenceIds) throws RemoteException {
-        }
+        public void removeGeofences(int[] geofenceIds) throws RemoteException {}
 
         @Override // android.location.IFusedGeofenceHardware
-        public void pauseMonitoringGeofence(int geofenceId) throws RemoteException {
-        }
+        public void pauseMonitoringGeofence(int geofenceId) throws RemoteException {}
 
         @Override // android.location.IFusedGeofenceHardware
-        public void resumeMonitoringGeofence(int geofenceId, int monitorTransitions) throws RemoteException {
-        }
+        public void resumeMonitoringGeofence(int geofenceId, int monitorTransitions)
+                throws RemoteException {}
 
         @Override // android.location.IFusedGeofenceHardware
-        public void modifyGeofenceOptions(int geofenceId, int lastTransition, int monitorTransitions, int notificationResponsiveness, int unknownTimer, int sourcesToUse) throws RemoteException {
-        }
+        public void modifyGeofenceOptions(
+                int geofenceId,
+                int lastTransition,
+                int monitorTransitions,
+                int notificationResponsiveness,
+                int unknownTimer,
+                int sourcesToUse)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -53,7 +59,7 @@ public interface IFusedGeofenceHardware extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFusedGeofenceHardware {
+    public abstract static class Stub extends Binder implements IFusedGeofenceHardware {
         public static final String DESCRIPTOR = "android.location.IFusedGeofenceHardware";
         static final int TRANSACTION_addGeofences = 2;
         static final int TRANSACTION_isSupported = 1;
@@ -107,7 +113,8 @@ public interface IFusedGeofenceHardware extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -122,7 +129,10 @@ public interface IFusedGeofenceHardware extends IInterface {
                     reply.writeBoolean(_result);
                     return true;
                 case 2:
-                    GeofenceHardwareRequestParcelable[] _arg0 = (GeofenceHardwareRequestParcelable[]) data.createTypedArray(GeofenceHardwareRequestParcelable.CREATOR);
+                    GeofenceHardwareRequestParcelable[] _arg0 =
+                            (GeofenceHardwareRequestParcelable[])
+                                    data.createTypedArray(
+                                            GeofenceHardwareRequestParcelable.CREATOR);
                     data.enforceNoDataAvail();
                     addGeofences(_arg0);
                     reply.writeNoException();
@@ -195,7 +205,8 @@ public interface IFusedGeofenceHardware extends IInterface {
             }
 
             @Override // android.location.IFusedGeofenceHardware
-            public void addGeofences(GeofenceHardwareRequestParcelable[] geofenceRequestsArray) throws RemoteException {
+            public void addGeofences(GeofenceHardwareRequestParcelable[] geofenceRequestsArray)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -240,7 +251,8 @@ public interface IFusedGeofenceHardware extends IInterface {
             }
 
             @Override // android.location.IFusedGeofenceHardware
-            public void resumeMonitoringGeofence(int geofenceId, int monitorTransitions) throws RemoteException {
+            public void resumeMonitoringGeofence(int geofenceId, int monitorTransitions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -256,7 +268,14 @@ public interface IFusedGeofenceHardware extends IInterface {
             }
 
             @Override // android.location.IFusedGeofenceHardware
-            public void modifyGeofenceOptions(int geofenceId, int lastTransition, int monitorTransitions, int notificationResponsiveness, int unknownTimer, int sourcesToUse) throws RemoteException {
+            public void modifyGeofenceOptions(
+                    int geofenceId,
+                    int lastTransition,
+                    int monitorTransitions,
+                    int notificationResponsiveness,
+                    int unknownTimer,
+                    int sourcesToUse)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

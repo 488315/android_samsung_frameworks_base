@@ -17,17 +17,19 @@ import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.util.Pair;
 import android.util.sysfwutil.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
-import com.android.server.usb.UsbDeviceManager;
 import com.android.server.wm.ActivityTaskManagerInternal;
+
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knox.restriction.RestrictionPolicy;
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.android.service.EngineeringMode.EngineeringModeManager;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -66,15 +68,15 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LockTimer implements Runnable {
-        public LockTimer() {
-        }
+        public LockTimer() {}
 
         @Override // java.lang.Runnable
         public final void run() {
             while (true) {
                 synchronized (UsbHostRestrictor.this.mUsbRestrictLock) {
                     try {
-                        if (UsbHostRestrictor.mLockStatus != 2 && UsbHostRestrictor.misRunScreenLockTimer) {
+                        if (UsbHostRestrictor.mLockStatus != 2
+                                && UsbHostRestrictor.misRunScreenLockTimer) {
                             Slog.d("UsbHostRestrictor", "LockTimer run FinishLockTimer");
                             UsbHostRestrictor.this.isFinishLockTimer();
                         }
@@ -95,18 +97,23 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
     public static void m1020$$Nest$mshowAlertDialog(UsbHostRestrictor usbHostRestrictor) {
         usbHostRestrictor.getClass();
         Intent intent = new Intent();
-        intent.setClassName(KnoxCustomManagerService.SETTING_PKG_NAME, "com.samsung.android.settings.SettingsReceiverActivity");
+        intent.setClassName(
+                KnoxCustomManagerService.SETTING_PKG_NAME,
+                "com.samsung.android.settings.SettingsReceiverActivity");
         intent.putExtra("cmcc_block_usb", true);
         intent.addFlags(268435456);
         try {
             usbHostRestrictor.mContext.startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            Slog.d("UsbHostRestrictor", "Unable to start activity to show the USB BLOCK Dialog : " + e);
+            Slog.d(
+                    "UsbHostRestrictor",
+                    "Unable to start activity to show the USB BLOCK Dialog : " + e);
         }
     }
 
     /* renamed from: -$$Nest$mupdateVidPidList, reason: not valid java name */
-    public static void m1021$$Nest$mupdateVidPidList(UsbHostRestrictor usbHostRestrictor, String str, String str2) {
+    public static void m1021$$Nest$mupdateVidPidList(
+            UsbHostRestrictor usbHostRestrictor, String str, String str2) {
         usbHostRestrictor.getClass();
         if (str.matches("-?[0-9a-fA-F]+") && str2.matches("-?[0-9a-fA-F]+")) {
             str = String.format("%04x", Long.valueOf(Long.parseLong(str, 16)));
@@ -139,7 +146,8 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
                         break;
                     }
                     Pair pair = (Pair) it.next();
-                    if (((String) pair.first).equals(split[i]) && ((String) pair.second).equals(split[i + 1])) {
+                    if (((String) pair.first).equals(split[i])
+                            && ((String) pair.second).equals(split[i + 1])) {
                         z2 = true;
                         break;
                     }
@@ -183,14 +191,18 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
     }
 
     /* renamed from: -$$Nest$mwriteVpidHistorytoFile, reason: not valid java name */
-    public static void m1022$$Nest$mwriteVpidHistorytoFile(UsbHostRestrictor usbHostRestrictor, String str) {
+    public static void m1022$$Nest$mwriteVpidHistorytoFile(
+            UsbHostRestrictor usbHostRestrictor, String str) {
         usbHostRestrictor.getClass();
         Slog.d("UsbHostRestrictor", "writeVpidHistorytoFile");
         FileWriter fileWriter = null;
         try {
             try {
                 try {
-                    FileWriter fileWriter2 = new FileWriter(new File("/sys/class/usb_notify/usb_control/whitelist_for_mdm"), true);
+                    FileWriter fileWriter2 =
+                            new FileWriter(
+                                    new File("/sys/class/usb_notify/usb_control/whitelist_for_mdm"),
+                                    true);
                     try {
                         fileWriter2.write(str);
                         fileWriter2.close();
@@ -224,396 +236,656 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
 
     public UsbHostRestrictor(Context context, UsbDeviceManager usbDeviceManager) {
         final int i = 0;
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(this) { // from class: com.android.server.usb.UsbHostRestrictor.2
-            public final /* synthetic */ UsbHostRestrictor this$0;
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.usb.UsbHostRestrictor.2
+                    public final /* synthetic */ UsbHostRestrictor this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                RestrictionPolicy restrictionPolicy;
-                switch (i) {
-                    case 0:
-                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver Receiver onReceive");
-                        if (intent.getAction().equals("com.samsung.android.knox.intent.action.UPDATE_ALLOW_USB_HOST_STORAGE_STATE_INTERNAL")) {
-                            int intExtra = intent.getIntExtra("reason", 0);
-                            if (intExtra != 0) {
-                                if (intExtra != 1) {
-                                    if (intExtra != 2) {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver reason is unknown.");
-                                        break;
-                                    } else {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver : reason - INIT");
-                                        EnterpriseDeviceManager enterpriseDeviceManager = EnterpriseDeviceManager.getInstance(this.this$0.mContext);
-                                        if (enterpriseDeviceManager != null && (restrictionPolicy = enterpriseDeviceManager.getRestrictionPolicy()) != null) {
-                                            if (!restrictionPolicy.isUsbHostStorageAllowed(false) || !UsbHostRestrictor.isMDMBlock) {
-                                                Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver : reason - INIT - Ignore bacuese of Multi admin policy or same value as previos");
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        RestrictionPolicy restrictionPolicy;
+                        switch (i) {
+                            case 0:
+                                Slog.d(
+                                        "UsbHostRestrictor",
+                                        "UsbHostRestrictionReceiver Receiver onReceive");
+                                if (intent.getAction()
+                                        .equals(
+                                                "com.samsung.android.knox.intent.action.UPDATE_ALLOW_USB_HOST_STORAGE_STATE_INTERNAL")) {
+                                    int intExtra = intent.getIntExtra("reason", 0);
+                                    if (intExtra != 0) {
+                                        if (intExtra != 1) {
+                                            if (intExtra != 2) {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver reason is"
+                                                            + " unknown.");
                                                 break;
                                             } else {
-                                                Slog.d("UsbHostRestrictor", "mUsbHostRestrictionReceiver : reason - INIT - UNBLOCK USB HOST");
-                                                UsbHostRestrictor.isMDMBlock = false;
-                                                this.this$0.getClass();
-                                                String checkWriteValue = UsbHostRestrictor.checkWriteValue();
-                                                this.this$0.getClass();
-                                                if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                                    Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver Cannot write for USB HOST ENABLE");
-                                                    break;
-                                                } else if (!this.this$0.readDisableSysNodefromFile().contains("ON_ALL")) {
-                                                    if (checkWriteValue.equals("OFF")) {
-                                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver UNBLOCK USB HOST");
-                                                        this.this$0.writeDisableSysNodetoFile(checkWriteValue);
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver : reason -"
+                                                            + " INIT");
+                                                EnterpriseDeviceManager enterpriseDeviceManager =
+                                                        EnterpriseDeviceManager.getInstance(
+                                                                this.this$0.mContext);
+                                                if (enterpriseDeviceManager != null
+                                                        && (restrictionPolicy =
+                                                                        enterpriseDeviceManager
+                                                                                .getRestrictionPolicy())
+                                                                != null) {
+                                                    if (!restrictionPolicy.isUsbHostStorageAllowed(
+                                                                    false)
+                                                            || !UsbHostRestrictor.isMDMBlock) {
+                                                        Slog.d(
+                                                                "UsbHostRestrictor",
+                                                                "UsbHostRestrictionReceiver :"
+                                                                    + " reason - INIT - Ignore"
+                                                                    + " bacuese of Multi admin"
+                                                                    + " policy or same value as"
+                                                                    + " previos");
                                                         break;
+                                                    } else {
+                                                        Slog.d(
+                                                                "UsbHostRestrictor",
+                                                                "mUsbHostRestrictionReceiver :"
+                                                                    + " reason - INIT - UNBLOCK USB"
+                                                                    + " HOST");
+                                                        UsbHostRestrictor.isMDMBlock = false;
+                                                        this.this$0.getClass();
+                                                        String checkWriteValue =
+                                                                UsbHostRestrictor.checkWriteValue();
+                                                        this.this$0.getClass();
+                                                        if (!UsbHostRestrictor
+                                                                .getUsbHostDisableSysNodeWritable()) {
+                                                            Slog.d(
+                                                                    "UsbHostRestrictor",
+                                                                    "UsbHostRestrictionReceiver"
+                                                                        + " Cannot write for USB"
+                                                                        + " HOST ENABLE");
+                                                            break;
+                                                        } else if (!this.this$0
+                                                                .readDisableSysNodefromFile()
+                                                                .contains("ON_ALL")) {
+                                                            if (checkWriteValue.equals("OFF")) {
+                                                                Slog.d(
+                                                                        "UsbHostRestrictor",
+                                                                        "UsbHostRestrictionReceiver"
+                                                                            + " UNBLOCK USB HOST");
+                                                                this.this$0
+                                                                        .writeDisableSysNodetoFile(
+                                                                                checkWriteValue);
+                                                                break;
+                                                            }
+                                                        } else {
+                                                            Slog.d(
+                                                                    "UsbHostRestrictor",
+                                                                    "UsbHostRestrictionReceiver USB"
+                                                                        + " ALL is already"
+                                                                        + " BLOCKED");
+                                                            break;
+                                                        }
                                                     }
-                                                } else {
-                                                    Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver USB ALL is already BLOCKED");
+                                                }
+                                            }
+                                        } else {
+                                            Slog.d(
+                                                    "UsbHostRestrictor",
+                                                    "UsbHostRestrictionReceiver : reason -"
+                                                        + " DISALLOW");
+                                            UsbHostRestrictor.isMDMBlock = true;
+                                            this.this$0.getClass();
+                                            String checkWriteValue2 =
+                                                    UsbHostRestrictor.checkWriteValue();
+                                            this.this$0.getClass();
+                                            if (!UsbHostRestrictor
+                                                    .getUsbHostDisableSysNodeWritable()) {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver Cannot write"
+                                                            + " for USB HOST DISABLE");
+                                                break;
+                                            } else if (!this.this$0
+                                                    .readDisableSysNodefromFile()
+                                                    .contains("ON_ALL")) {
+                                                if (checkWriteValue2.equals("ON_HOST_MDM")) {
+                                                    Slog.d(
+                                                            "UsbHostRestrictor",
+                                                            "UsbHostRestrictionReceiver BLOCK USB"
+                                                                + " HOST");
+                                                    this.this$0.writeDisableSysNodetoFile(
+                                                            checkWriteValue2);
                                                     break;
                                                 }
+                                            } else {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver USB ALL is"
+                                                            + " already BLOCKED");
+                                                break;
+                                            }
+                                        }
+                                    } else {
+                                        Slog.d(
+                                                "UsbHostRestrictor",
+                                                "UsbHostRestrictionReceiver : reason - ALLOW");
+                                        UsbHostRestrictor.isMDMBlock = false;
+                                        this.this$0.getClass();
+                                        String checkWriteValue3 =
+                                                UsbHostRestrictor.checkWriteValue();
+                                        this.this$0.getClass();
+                                        if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
+                                            this.this$0.getClass();
+                                            if (!UsbHostRestrictor
+                                                    .getUsbHostDisableSysNodeWritable()) {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver Cannot write"
+                                                            + " for USB HOST ENABLE");
+                                                break;
+                                            }
+                                        } else if (!this.this$0
+                                                .readDisableSysNodefromFile()
+                                                .equals("OFF")) {
+                                            if (!this.this$0
+                                                    .readDisableSysNodefromFile()
+                                                    .contains("ON_ALL")) {
+                                                if (checkWriteValue3.equals("OFF")) {
+                                                    Slog.d(
+                                                            "UsbHostRestrictor",
+                                                            "UsbHostRestrictionReceiver UNBLOCK USB"
+                                                                + " HOST");
+                                                    this.this$0.writeDisableSysNodetoFile(
+                                                            checkWriteValue3);
+                                                    break;
+                                                }
+                                            } else {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver USB ALL is"
+                                                            + " already BLOCKED");
+                                                break;
+                                            }
+                                        } else {
+                                            Slog.d(
+                                                    "UsbHostRestrictor",
+                                                    "UsbHostRestrictionReceiver USB is already"
+                                                        + " UNBLOCKED");
+                                            break;
+                                        }
+                                    }
+                                }
+                                break;
+                            default:
+                                Slog.d("UsbHostRestrictor", "Subscription Receiver onReceive");
+                                if (intent.getAction().equals(Constants.SIM_STATE_CHANGED)) {
+                                    String stringExtra = intent.getStringExtra("ss");
+                                    if (!stringExtra.equals("LOADED")) {
+                                        Slog.d(
+                                                "UsbHostRestrictor",
+                                                "Subscription Receiver SIM is not recognized"
+                                                    + " properly : SIM_STATE_LOADED ["
+                                                        + stringExtra
+                                                        + "]");
+                                        break;
+                                    } else {
+                                        int activeSubscriptionInfoCount =
+                                                SubscriptionManager.from(this.this$0.mContext)
+                                                        .getActiveSubscriptionInfoCount();
+                                        Slog.d(
+                                                "UsbHostRestrictor",
+                                                "Subscription Receiver Card Count is ["
+                                                        + activeSubscriptionInfoCount
+                                                        + "]");
+                                        if (activeSubscriptionInfoCount <= 0) {
+                                            Slog.d(
+                                                    "UsbHostRestrictor",
+                                                    "Subscription Receiver SIM is not recognized"
+                                                        + " properly : card count is 0");
+                                            break;
+                                        } else {
+                                            UsbHostRestrictor.isSIMBlock = false;
+                                            this.this$0.getClass();
+                                            String checkWriteValue4 =
+                                                    UsbHostRestrictor.checkWriteValue();
+                                            this.this$0.getClass();
+                                            if (!UsbHostRestrictor
+                                                    .getUsbHostDisableSysNodeWritable()) {
+                                                this.this$0.getClass();
+                                                if (!UsbHostRestrictor
+                                                        .getUsbHostDisableSysNodeWritable()) {
+                                                    Slog.d(
+                                                            "UsbHostRestrictor",
+                                                            "Subscription Receiver Cannot write for"
+                                                                + " USB DISABLE");
+                                                    break;
+                                                }
+                                            } else if (!this.this$0
+                                                    .readDisableSysNodefromFile()
+                                                    .equals("OFF")) {
+                                                if (checkWriteValue4.equals("OFF")
+                                                        || checkWriteValue4.equals("ON_HOST_MDM")) {
+                                                    this.this$0.writeDisableSysNodetoFile(
+                                                            checkWriteValue4);
+                                                    UsbDeviceManager.UsbHandler usbHandler =
+                                                            this.this$0.mDeviceManager.mHandler;
+                                                    usbHandler.removeMessages(101);
+                                                    Message obtain =
+                                                            Message.obtain(usbHandler, 101);
+                                                    obtain.arg1 = 1;
+                                                    usbHandler.sendMessage(obtain);
+                                                    break;
+                                                }
+                                            } else {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "Subscription Receiver USB is already"
+                                                            + " UNBLOCKED");
+                                                break;
                                             }
                                         }
                                     }
-                                } else {
-                                    Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver : reason - DISALLOW");
-                                    UsbHostRestrictor.isMDMBlock = true;
-                                    this.this$0.getClass();
-                                    String checkWriteValue2 = UsbHostRestrictor.checkWriteValue();
-                                    this.this$0.getClass();
-                                    if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver Cannot write for USB HOST DISABLE");
-                                        break;
-                                    } else if (!this.this$0.readDisableSysNodefromFile().contains("ON_ALL")) {
-                                        if (checkWriteValue2.equals("ON_HOST_MDM")) {
-                                            Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver BLOCK USB HOST");
-                                            this.this$0.writeDisableSysNodetoFile(checkWriteValue2);
-                                            break;
-                                        }
-                                    } else {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver USB ALL is already BLOCKED");
-                                        break;
-                                    }
                                 }
-                            } else {
-                                Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver : reason - ALLOW");
-                                UsbHostRestrictor.isMDMBlock = false;
-                                this.this$0.getClass();
-                                String checkWriteValue3 = UsbHostRestrictor.checkWriteValue();
-                                this.this$0.getClass();
-                                if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                    this.this$0.getClass();
-                                    if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver Cannot write for USB HOST ENABLE");
-                                        break;
-                                    }
-                                } else if (!this.this$0.readDisableSysNodefromFile().equals("OFF")) {
-                                    if (!this.this$0.readDisableSysNodefromFile().contains("ON_ALL")) {
-                                        if (checkWriteValue3.equals("OFF")) {
-                                            Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver UNBLOCK USB HOST");
-                                            this.this$0.writeDisableSysNodetoFile(checkWriteValue3);
-                                            break;
-                                        }
-                                    } else {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver USB ALL is already BLOCKED");
-                                        break;
-                                    }
-                                } else {
-                                    Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver USB is already UNBLOCKED");
-                                    break;
-                                }
-                            }
-                        }
-                        break;
-                    default:
-                        Slog.d("UsbHostRestrictor", "Subscription Receiver onReceive");
-                        if (intent.getAction().equals(Constants.SIM_STATE_CHANGED)) {
-                            String stringExtra = intent.getStringExtra("ss");
-                            if (!stringExtra.equals("LOADED")) {
-                                Slog.d("UsbHostRestrictor", "Subscription Receiver SIM is not recognized properly : SIM_STATE_LOADED [" + stringExtra + "]");
                                 break;
-                            } else {
-                                int activeSubscriptionInfoCount = SubscriptionManager.from(this.this$0.mContext).getActiveSubscriptionInfoCount();
-                                Slog.d("UsbHostRestrictor", "Subscription Receiver Card Count is [" + activeSubscriptionInfoCount + "]");
-                                if (activeSubscriptionInfoCount <= 0) {
-                                    Slog.d("UsbHostRestrictor", "Subscription Receiver SIM is not recognized properly : card count is 0");
-                                    break;
-                                } else {
-                                    UsbHostRestrictor.isSIMBlock = false;
-                                    this.this$0.getClass();
-                                    String checkWriteValue4 = UsbHostRestrictor.checkWriteValue();
-                                    this.this$0.getClass();
-                                    if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                        this.this$0.getClass();
-                                        if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                            Slog.d("UsbHostRestrictor", "Subscription Receiver Cannot write for USB DISABLE");
-                                            break;
-                                        }
-                                    } else if (!this.this$0.readDisableSysNodefromFile().equals("OFF")) {
-                                        if (checkWriteValue4.equals("OFF") || checkWriteValue4.equals("ON_HOST_MDM")) {
-                                            this.this$0.writeDisableSysNodetoFile(checkWriteValue4);
-                                            UsbDeviceManager.UsbHandler usbHandler = this.this$0.mDeviceManager.mHandler;
-                                            usbHandler.removeMessages(101);
-                                            Message obtain = Message.obtain(usbHandler, 101);
-                                            obtain.arg1 = 1;
-                                            usbHandler.sendMessage(obtain);
-                                            break;
-                                        }
-                                    } else {
-                                        Slog.d("UsbHostRestrictor", "Subscription Receiver USB is already UNBLOCKED");
-                                        break;
-                                    }
-                                }
-                            }
                         }
-                        break;
-                }
-            }
-        };
+                    }
+                };
         final int i2 = 1;
-        BroadcastReceiver broadcastReceiver2 = new BroadcastReceiver(this) { // from class: com.android.server.usb.UsbHostRestrictor.2
-            public final /* synthetic */ UsbHostRestrictor this$0;
+        BroadcastReceiver broadcastReceiver2 =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.usb.UsbHostRestrictor.2
+                    public final /* synthetic */ UsbHostRestrictor this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                RestrictionPolicy restrictionPolicy;
-                switch (i2) {
-                    case 0:
-                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver Receiver onReceive");
-                        if (intent.getAction().equals("com.samsung.android.knox.intent.action.UPDATE_ALLOW_USB_HOST_STORAGE_STATE_INTERNAL")) {
-                            int intExtra = intent.getIntExtra("reason", 0);
-                            if (intExtra != 0) {
-                                if (intExtra != 1) {
-                                    if (intExtra != 2) {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver reason is unknown.");
-                                        break;
-                                    } else {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver : reason - INIT");
-                                        EnterpriseDeviceManager enterpriseDeviceManager = EnterpriseDeviceManager.getInstance(this.this$0.mContext);
-                                        if (enterpriseDeviceManager != null && (restrictionPolicy = enterpriseDeviceManager.getRestrictionPolicy()) != null) {
-                                            if (!restrictionPolicy.isUsbHostStorageAllowed(false) || !UsbHostRestrictor.isMDMBlock) {
-                                                Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver : reason - INIT - Ignore bacuese of Multi admin policy or same value as previos");
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        RestrictionPolicy restrictionPolicy;
+                        switch (i2) {
+                            case 0:
+                                Slog.d(
+                                        "UsbHostRestrictor",
+                                        "UsbHostRestrictionReceiver Receiver onReceive");
+                                if (intent.getAction()
+                                        .equals(
+                                                "com.samsung.android.knox.intent.action.UPDATE_ALLOW_USB_HOST_STORAGE_STATE_INTERNAL")) {
+                                    int intExtra = intent.getIntExtra("reason", 0);
+                                    if (intExtra != 0) {
+                                        if (intExtra != 1) {
+                                            if (intExtra != 2) {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver reason is"
+                                                            + " unknown.");
                                                 break;
                                             } else {
-                                                Slog.d("UsbHostRestrictor", "mUsbHostRestrictionReceiver : reason - INIT - UNBLOCK USB HOST");
-                                                UsbHostRestrictor.isMDMBlock = false;
-                                                this.this$0.getClass();
-                                                String checkWriteValue = UsbHostRestrictor.checkWriteValue();
-                                                this.this$0.getClass();
-                                                if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                                    Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver Cannot write for USB HOST ENABLE");
-                                                    break;
-                                                } else if (!this.this$0.readDisableSysNodefromFile().contains("ON_ALL")) {
-                                                    if (checkWriteValue.equals("OFF")) {
-                                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver UNBLOCK USB HOST");
-                                                        this.this$0.writeDisableSysNodetoFile(checkWriteValue);
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver : reason -"
+                                                            + " INIT");
+                                                EnterpriseDeviceManager enterpriseDeviceManager =
+                                                        EnterpriseDeviceManager.getInstance(
+                                                                this.this$0.mContext);
+                                                if (enterpriseDeviceManager != null
+                                                        && (restrictionPolicy =
+                                                                        enterpriseDeviceManager
+                                                                                .getRestrictionPolicy())
+                                                                != null) {
+                                                    if (!restrictionPolicy.isUsbHostStorageAllowed(
+                                                                    false)
+                                                            || !UsbHostRestrictor.isMDMBlock) {
+                                                        Slog.d(
+                                                                "UsbHostRestrictor",
+                                                                "UsbHostRestrictionReceiver :"
+                                                                    + " reason - INIT - Ignore"
+                                                                    + " bacuese of Multi admin"
+                                                                    + " policy or same value as"
+                                                                    + " previos");
                                                         break;
+                                                    } else {
+                                                        Slog.d(
+                                                                "UsbHostRestrictor",
+                                                                "mUsbHostRestrictionReceiver :"
+                                                                    + " reason - INIT - UNBLOCK USB"
+                                                                    + " HOST");
+                                                        UsbHostRestrictor.isMDMBlock = false;
+                                                        this.this$0.getClass();
+                                                        String checkWriteValue =
+                                                                UsbHostRestrictor.checkWriteValue();
+                                                        this.this$0.getClass();
+                                                        if (!UsbHostRestrictor
+                                                                .getUsbHostDisableSysNodeWritable()) {
+                                                            Slog.d(
+                                                                    "UsbHostRestrictor",
+                                                                    "UsbHostRestrictionReceiver"
+                                                                        + " Cannot write for USB"
+                                                                        + " HOST ENABLE");
+                                                            break;
+                                                        } else if (!this.this$0
+                                                                .readDisableSysNodefromFile()
+                                                                .contains("ON_ALL")) {
+                                                            if (checkWriteValue.equals("OFF")) {
+                                                                Slog.d(
+                                                                        "UsbHostRestrictor",
+                                                                        "UsbHostRestrictionReceiver"
+                                                                            + " UNBLOCK USB HOST");
+                                                                this.this$0
+                                                                        .writeDisableSysNodetoFile(
+                                                                                checkWriteValue);
+                                                                break;
+                                                            }
+                                                        } else {
+                                                            Slog.d(
+                                                                    "UsbHostRestrictor",
+                                                                    "UsbHostRestrictionReceiver USB"
+                                                                        + " ALL is already"
+                                                                        + " BLOCKED");
+                                                            break;
+                                                        }
                                                     }
-                                                } else {
-                                                    Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver USB ALL is already BLOCKED");
+                                                }
+                                            }
+                                        } else {
+                                            Slog.d(
+                                                    "UsbHostRestrictor",
+                                                    "UsbHostRestrictionReceiver : reason -"
+                                                        + " DISALLOW");
+                                            UsbHostRestrictor.isMDMBlock = true;
+                                            this.this$0.getClass();
+                                            String checkWriteValue2 =
+                                                    UsbHostRestrictor.checkWriteValue();
+                                            this.this$0.getClass();
+                                            if (!UsbHostRestrictor
+                                                    .getUsbHostDisableSysNodeWritable()) {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver Cannot write"
+                                                            + " for USB HOST DISABLE");
+                                                break;
+                                            } else if (!this.this$0
+                                                    .readDisableSysNodefromFile()
+                                                    .contains("ON_ALL")) {
+                                                if (checkWriteValue2.equals("ON_HOST_MDM")) {
+                                                    Slog.d(
+                                                            "UsbHostRestrictor",
+                                                            "UsbHostRestrictionReceiver BLOCK USB"
+                                                                + " HOST");
+                                                    this.this$0.writeDisableSysNodetoFile(
+                                                            checkWriteValue2);
                                                     break;
                                                 }
+                                            } else {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver USB ALL is"
+                                                            + " already BLOCKED");
+                                                break;
+                                            }
+                                        }
+                                    } else {
+                                        Slog.d(
+                                                "UsbHostRestrictor",
+                                                "UsbHostRestrictionReceiver : reason - ALLOW");
+                                        UsbHostRestrictor.isMDMBlock = false;
+                                        this.this$0.getClass();
+                                        String checkWriteValue3 =
+                                                UsbHostRestrictor.checkWriteValue();
+                                        this.this$0.getClass();
+                                        if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
+                                            this.this$0.getClass();
+                                            if (!UsbHostRestrictor
+                                                    .getUsbHostDisableSysNodeWritable()) {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver Cannot write"
+                                                            + " for USB HOST ENABLE");
+                                                break;
+                                            }
+                                        } else if (!this.this$0
+                                                .readDisableSysNodefromFile()
+                                                .equals("OFF")) {
+                                            if (!this.this$0
+                                                    .readDisableSysNodefromFile()
+                                                    .contains("ON_ALL")) {
+                                                if (checkWriteValue3.equals("OFF")) {
+                                                    Slog.d(
+                                                            "UsbHostRestrictor",
+                                                            "UsbHostRestrictionReceiver UNBLOCK USB"
+                                                                + " HOST");
+                                                    this.this$0.writeDisableSysNodetoFile(
+                                                            checkWriteValue3);
+                                                    break;
+                                                }
+                                            } else {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "UsbHostRestrictionReceiver USB ALL is"
+                                                            + " already BLOCKED");
+                                                break;
+                                            }
+                                        } else {
+                                            Slog.d(
+                                                    "UsbHostRestrictor",
+                                                    "UsbHostRestrictionReceiver USB is already"
+                                                        + " UNBLOCKED");
+                                            break;
+                                        }
+                                    }
+                                }
+                                break;
+                            default:
+                                Slog.d("UsbHostRestrictor", "Subscription Receiver onReceive");
+                                if (intent.getAction().equals(Constants.SIM_STATE_CHANGED)) {
+                                    String stringExtra = intent.getStringExtra("ss");
+                                    if (!stringExtra.equals("LOADED")) {
+                                        Slog.d(
+                                                "UsbHostRestrictor",
+                                                "Subscription Receiver SIM is not recognized"
+                                                    + " properly : SIM_STATE_LOADED ["
+                                                        + stringExtra
+                                                        + "]");
+                                        break;
+                                    } else {
+                                        int activeSubscriptionInfoCount =
+                                                SubscriptionManager.from(this.this$0.mContext)
+                                                        .getActiveSubscriptionInfoCount();
+                                        Slog.d(
+                                                "UsbHostRestrictor",
+                                                "Subscription Receiver Card Count is ["
+                                                        + activeSubscriptionInfoCount
+                                                        + "]");
+                                        if (activeSubscriptionInfoCount <= 0) {
+                                            Slog.d(
+                                                    "UsbHostRestrictor",
+                                                    "Subscription Receiver SIM is not recognized"
+                                                        + " properly : card count is 0");
+                                            break;
+                                        } else {
+                                            UsbHostRestrictor.isSIMBlock = false;
+                                            this.this$0.getClass();
+                                            String checkWriteValue4 =
+                                                    UsbHostRestrictor.checkWriteValue();
+                                            this.this$0.getClass();
+                                            if (!UsbHostRestrictor
+                                                    .getUsbHostDisableSysNodeWritable()) {
+                                                this.this$0.getClass();
+                                                if (!UsbHostRestrictor
+                                                        .getUsbHostDisableSysNodeWritable()) {
+                                                    Slog.d(
+                                                            "UsbHostRestrictor",
+                                                            "Subscription Receiver Cannot write for"
+                                                                + " USB DISABLE");
+                                                    break;
+                                                }
+                                            } else if (!this.this$0
+                                                    .readDisableSysNodefromFile()
+                                                    .equals("OFF")) {
+                                                if (checkWriteValue4.equals("OFF")
+                                                        || checkWriteValue4.equals("ON_HOST_MDM")) {
+                                                    this.this$0.writeDisableSysNodetoFile(
+                                                            checkWriteValue4);
+                                                    UsbDeviceManager.UsbHandler usbHandler =
+                                                            this.this$0.mDeviceManager.mHandler;
+                                                    usbHandler.removeMessages(101);
+                                                    Message obtain =
+                                                            Message.obtain(usbHandler, 101);
+                                                    obtain.arg1 = 1;
+                                                    usbHandler.sendMessage(obtain);
+                                                    break;
+                                                }
+                                            } else {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "Subscription Receiver USB is already"
+                                                            + " UNBLOCKED");
+                                                break;
                                             }
                                         }
                                     }
-                                } else {
-                                    Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver : reason - DISALLOW");
-                                    UsbHostRestrictor.isMDMBlock = true;
-                                    this.this$0.getClass();
-                                    String checkWriteValue2 = UsbHostRestrictor.checkWriteValue();
-                                    this.this$0.getClass();
-                                    if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver Cannot write for USB HOST DISABLE");
-                                        break;
-                                    } else if (!this.this$0.readDisableSysNodefromFile().contains("ON_ALL")) {
-                                        if (checkWriteValue2.equals("ON_HOST_MDM")) {
-                                            Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver BLOCK USB HOST");
-                                            this.this$0.writeDisableSysNodetoFile(checkWriteValue2);
-                                            break;
-                                        }
-                                    } else {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver USB ALL is already BLOCKED");
-                                        break;
-                                    }
                                 }
-                            } else {
-                                Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver : reason - ALLOW");
-                                UsbHostRestrictor.isMDMBlock = false;
-                                this.this$0.getClass();
-                                String checkWriteValue3 = UsbHostRestrictor.checkWriteValue();
-                                this.this$0.getClass();
-                                if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                    this.this$0.getClass();
-                                    if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver Cannot write for USB HOST ENABLE");
-                                        break;
-                                    }
-                                } else if (!this.this$0.readDisableSysNodefromFile().equals("OFF")) {
-                                    if (!this.this$0.readDisableSysNodefromFile().contains("ON_ALL")) {
-                                        if (checkWriteValue3.equals("OFF")) {
-                                            Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver UNBLOCK USB HOST");
-                                            this.this$0.writeDisableSysNodetoFile(checkWriteValue3);
-                                            break;
-                                        }
-                                    } else {
-                                        Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver USB ALL is already BLOCKED");
-                                        break;
-                                    }
-                                } else {
-                                    Slog.d("UsbHostRestrictor", "UsbHostRestrictionReceiver USB is already UNBLOCKED");
-                                    break;
-                                }
-                            }
-                        }
-                        break;
-                    default:
-                        Slog.d("UsbHostRestrictor", "Subscription Receiver onReceive");
-                        if (intent.getAction().equals(Constants.SIM_STATE_CHANGED)) {
-                            String stringExtra = intent.getStringExtra("ss");
-                            if (!stringExtra.equals("LOADED")) {
-                                Slog.d("UsbHostRestrictor", "Subscription Receiver SIM is not recognized properly : SIM_STATE_LOADED [" + stringExtra + "]");
                                 break;
-                            } else {
-                                int activeSubscriptionInfoCount = SubscriptionManager.from(this.this$0.mContext).getActiveSubscriptionInfoCount();
-                                Slog.d("UsbHostRestrictor", "Subscription Receiver Card Count is [" + activeSubscriptionInfoCount + "]");
-                                if (activeSubscriptionInfoCount <= 0) {
-                                    Slog.d("UsbHostRestrictor", "Subscription Receiver SIM is not recognized properly : card count is 0");
-                                    break;
-                                } else {
-                                    UsbHostRestrictor.isSIMBlock = false;
-                                    this.this$0.getClass();
-                                    String checkWriteValue4 = UsbHostRestrictor.checkWriteValue();
-                                    this.this$0.getClass();
-                                    if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                        this.this$0.getClass();
-                                        if (!UsbHostRestrictor.getUsbHostDisableSysNodeWritable()) {
-                                            Slog.d("UsbHostRestrictor", "Subscription Receiver Cannot write for USB DISABLE");
-                                            break;
-                                        }
-                                    } else if (!this.this$0.readDisableSysNodefromFile().equals("OFF")) {
-                                        if (checkWriteValue4.equals("OFF") || checkWriteValue4.equals("ON_HOST_MDM")) {
-                                            this.this$0.writeDisableSysNodetoFile(checkWriteValue4);
-                                            UsbDeviceManager.UsbHandler usbHandler = this.this$0.mDeviceManager.mHandler;
-                                            usbHandler.removeMessages(101);
-                                            Message obtain = Message.obtain(usbHandler, 101);
-                                            obtain.arg1 = 1;
-                                            usbHandler.sendMessage(obtain);
-                                            break;
-                                        }
-                                    } else {
-                                        Slog.d("UsbHostRestrictor", "Subscription Receiver USB is already UNBLOCKED");
-                                        break;
-                                    }
-                                }
-                            }
                         }
-                        break;
-                }
-            }
-        };
+                    }
+                };
         final int i3 = 0;
-        UEventObserver uEventObserver = new UEventObserver(this) { // from class: com.android.server.usb.UsbHostRestrictor.4
-            public final /* synthetic */ UsbHostRestrictor this$0;
+        UEventObserver uEventObserver =
+                new UEventObserver(this) { // from class: com.android.server.usb.UsbHostRestrictor.4
+                    public final /* synthetic */ UsbHostRestrictor this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            /* JADX WARN: Code restructure failed: missing block: B:24:0x0058, code lost:
-            
-                if (r7.contains("/") == false) goto L29;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:25:0x005a, code lost:
-            
-                r7 = r7.split("/");
-                com.android.server.usb.UsbHostRestrictor.m1021$$Nest$mupdateVidPidList(r6.this$0, r7[0], r7[1]);
-                com.android.server.usb.UsbHostRestrictor.m1022$$Nest$mwriteVpidHistorytoFile(r6.this$0, com.android.server.usb.UsbHostRestrictor.mUsbConHist);
-             */
-            /*
-                Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
-            */
-            public final void onUEvent(android.os.UEventObserver.UEvent r7) {
-                /*
-                    Method dump skipped, instructions count: 488
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.usb.UsbHostRestrictor.AnonymousClass4.onUEvent(android.os.UEventObserver$UEvent):void");
-            }
-        };
+                    /* JADX WARN: Code restructure failed: missing block: B:24:0x0058, code lost:
+
+                       if (r7.contains("/") == false) goto L29;
+                    */
+                    /* JADX WARN: Code restructure failed: missing block: B:25:0x005a, code lost:
+
+                       r7 = r7.split("/");
+                       com.android.server.usb.UsbHostRestrictor.m1021$$Nest$mupdateVidPidList(r6.this$0, r7[0], r7[1]);
+                       com.android.server.usb.UsbHostRestrictor.m1022$$Nest$mwriteVpidHistorytoFile(r6.this$0, com.android.server.usb.UsbHostRestrictor.mUsbConHist);
+                    */
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                        To view partially-correct code enable 'Show inconsistent code' option in preferences
+                    */
+                    public final void onUEvent(android.os.UEventObserver.UEvent r7) {
+                        /*
+                            Method dump skipped, instructions count: 488
+                            To view this dump change 'Code comments level' option to 'DEBUG'
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.android.server.usb.UsbHostRestrictor.AnonymousClass4.onUEvent(android.os.UEventObserver$UEvent):void");
+                    }
+                };
         final int i4 = 1;
-        UEventObserver uEventObserver2 = new UEventObserver(this) { // from class: com.android.server.usb.UsbHostRestrictor.4
-            public final /* synthetic */ UsbHostRestrictor this$0;
+        UEventObserver uEventObserver2 =
+                new UEventObserver(this) { // from class: com.android.server.usb.UsbHostRestrictor.4
+                    public final /* synthetic */ UsbHostRestrictor this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            public final void onUEvent(UEventObserver.UEvent uEvent) {
-                /*
-                    Method dump skipped, instructions count: 488
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.usb.UsbHostRestrictor.AnonymousClass4.onUEvent(android.os.UEventObserver$UEvent):void");
-            }
-        };
+                    public final void onUEvent(UEventObserver.UEvent uEvent) {
+                        /*
+                            Method dump skipped, instructions count: 488
+                            To view this dump change 'Code comments level' option to 'DEBUG'
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.android.server.usb.UsbHostRestrictor.AnonymousClass4.onUEvent(android.os.UEventObserver$UEvent):void");
+                    }
+                };
         final int i5 = 2;
-        UEventObserver uEventObserver3 = new UEventObserver(this) { // from class: com.android.server.usb.UsbHostRestrictor.4
-            public final /* synthetic */ UsbHostRestrictor this$0;
+        UEventObserver uEventObserver3 =
+                new UEventObserver(this) { // from class: com.android.server.usb.UsbHostRestrictor.4
+                    public final /* synthetic */ UsbHostRestrictor this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            public final void onUEvent(UEventObserver.UEvent uEvent) {
-                /*
-                    Method dump skipped, instructions count: 488
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.usb.UsbHostRestrictor.AnonymousClass4.onUEvent(android.os.UEventObserver$UEvent):void");
-            }
-        };
+                    public final void onUEvent(UEventObserver.UEvent uEvent) {
+                        /*
+                            Method dump skipped, instructions count: 488
+                            To view this dump change 'Code comments level' option to 'DEBUG'
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.android.server.usb.UsbHostRestrictor.AnonymousClass4.onUEvent(android.os.UEventObserver$UEvent):void");
+                    }
+                };
         this.mContext = context;
         this.mDeviceManager = usbDeviceManager;
         uEventObserver.startObserving("DEVPATH=/devices/virtual/host_notify");
-        context.registerReceiver(broadcastReceiver, new IntentFilter("com.samsung.android.knox.intent.action.UPDATE_ALLOW_USB_HOST_STORAGE_STATE_INTERNAL"));
+        context.registerReceiver(
+                broadcastReceiver,
+                new IntentFilter(
+                        "com.samsung.android.knox.intent.action.UPDATE_ALLOW_USB_HOST_STORAGE_STATE_INTERNAL"));
         context.registerReceiver(broadcastReceiver2, new IntentFilter(Constants.SIM_STATE_CHANGED));
         this.emm = new EngineeringModeManager(context);
         uEventObserver2.startObserving("DEVPATH=/devices/virtual/android_usb/android0");
         uEventObserver3.startObserving("DEVTYPE=usb_interface");
         misRunScreenLockTimer = false;
         new Thread(new LockTimer()).start();
-        context.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("block_usb_lock"), false, new ContentObserver() { // from class: com.android.server.usb.UsbHostRestrictor.1
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z) {
-                synchronized (UsbHostRestrictor.this.mUsbRestrictLock) {
-                    try {
-                        int i6 = Settings.Secure.getInt(UsbHostRestrictor.this.mContext.getContentResolver(), "block_usb_lock", 1);
-                        UsbHostRestrictor.mSettingBlockUsbLock = i6;
-                        if (UsbHostRestrictor.mSecureKeyguardShowing && i6 == 1) {
-                            UsbHostRestrictor.this.getClass();
-                            if (!UsbHostRestrictor.isAdbOnlyMode()) {
-                                Slog.d("UsbHostRestrictor", "changed setting LOCK_SCREEN_BLOCK : OFF -> ON");
-                                UsbHostRestrictor.mLockStatus = 0;
+        context.getContentResolver()
+                .registerContentObserver(
+                        Settings.Secure.getUriFor("block_usb_lock"),
+                        false,
+                        new ContentObserver() { // from class:
+                            // com.android.server.usb.UsbHostRestrictor.1
+                            @Override // android.database.ContentObserver
+                            public final void onChange(boolean z) {
+                                synchronized (UsbHostRestrictor.this.mUsbRestrictLock) {
+                                    try {
+                                        int i6 =
+                                                Settings.Secure.getInt(
+                                                        UsbHostRestrictor.this.mContext
+                                                                .getContentResolver(),
+                                                        "block_usb_lock",
+                                                        1);
+                                        UsbHostRestrictor.mSettingBlockUsbLock = i6;
+                                        if (UsbHostRestrictor.mSecureKeyguardShowing && i6 == 1) {
+                                            UsbHostRestrictor.this.getClass();
+                                            if (!UsbHostRestrictor.isAdbOnlyMode()) {
+                                                Slog.d(
+                                                        "UsbHostRestrictor",
+                                                        "changed setting LOCK_SCREEN_BLOCK : OFF ->"
+                                                            + " ON");
+                                                UsbHostRestrictor.mLockStatus = 0;
+                                            }
+                                        }
+                                        if (UsbHostRestrictor.mSecureKeyguardShowing
+                                                && UsbHostRestrictor.mSettingBlockUsbLock == 0) {
+                                            Slog.d(
+                                                    "UsbHostRestrictor",
+                                                    "changed setting LOCK_SCREEN_BLOCK : ON ->"
+                                                        + " OFF");
+                                            UsbHostRestrictor.this.writeScrLckBlkSysNodetoFile("1");
+                                            UsbHostRestrictor.mLockStatus = 3;
+                                            UsbHostRestrictor.this.getClass();
+                                            UsbHostRestrictor.stopLockTimer();
+                                        } else {
+                                            Slog.d(
+                                                    "UsbHostRestrictor",
+                                                    "can't change block status (none-lock or"
+                                                        + " adb-only or unknown setting value)");
+                                        }
+                                    } catch (Throwable th) {
+                                        throw th;
+                                    }
+                                }
                             }
-                        }
-                        if (UsbHostRestrictor.mSecureKeyguardShowing && UsbHostRestrictor.mSettingBlockUsbLock == 0) {
-                            Slog.d("UsbHostRestrictor", "changed setting LOCK_SCREEN_BLOCK : ON -> OFF");
-                            UsbHostRestrictor.this.writeScrLckBlkSysNodetoFile("1");
-                            UsbHostRestrictor.mLockStatus = 3;
-                            UsbHostRestrictor.this.getClass();
-                            UsbHostRestrictor.stopLockTimer();
-                        } else {
-                            Slog.d("UsbHostRestrictor", "can't change block status (none-lock or adb-only or unknown setting value)");
-                        }
-                    } catch (Throwable th) {
-                        throw th;
-                    }
-                }
-            }
-        });
+                        });
     }
 
     public static boolean checkUsbBlockingCondition(String str) {
@@ -634,8 +906,13 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
             Slog.d("UsbHostRestrictor", "NOT DISABLE USB 3");
             return false;
         }
-        if (str.equals("ON_ALL_SIM") || str.equals("ON_HOST_MDM") || str.equals("ON_ALL_SCREEN") || str.equals("ON_ALL_BOTH")) {
-            Slog.d("UsbHostRestrictor", "DISABLE USB for USER BINARY and CMCC MODEL or MDM block or ON_ALL_SCREEN");
+        if (str.equals("ON_ALL_SIM")
+                || str.equals("ON_HOST_MDM")
+                || str.equals("ON_ALL_SCREEN")
+                || str.equals("ON_ALL_BOTH")) {
+            Slog.d(
+                    "UsbHostRestrictor",
+                    "DISABLE USB for USER BINARY and CMCC MODEL or MDM block or ON_ALL_SCREEN");
             return true;
         }
         if ("OFF".equals(str)) {
@@ -647,7 +924,14 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
     }
 
     public static String checkWriteValue() {
-        Slog.d("UsbHostRestrictor", "checkWriteValue : isLckScrBlock= " + isLckScrBlock + ", isSIMBlock=" + isSIMBlock + ", isMDMBlock=" + isMDMBlock);
+        Slog.d(
+                "UsbHostRestrictor",
+                "checkWriteValue : isLckScrBlock= "
+                        + isLckScrBlock
+                        + ", isSIMBlock="
+                        + isSIMBlock
+                        + ", isMDMBlock="
+                        + isMDMBlock);
         boolean z = isLckScrBlock;
         if (z && isSIMBlock) {
             return "ON_ALL_BOTH";
@@ -716,11 +1000,14 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
             Method dump skipped, instructions count: 370
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usb.UsbHostRestrictor.getSalesCode():java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usb.UsbHostRestrictor.getSalesCode():java.lang.String");
     }
 
     public static boolean getUsbHostDisableSysNodeWritable() {
-        return BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/usb_notify/usb_control/disable");
+        return BatteryService$$ExternalSyntheticOutline0.m45m(
+                "/sys/class/usb_notify/usb_control/disable");
     }
 
     public static boolean isAdbOnlyMode() {
@@ -729,7 +1016,15 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
 
     public static boolean isSupportDexRestrict() {
         File file = new File("/sys/class/usb_notify/usb_control/whitelist_for_mdm");
-        Slog.d("UsbHostRestrictor", "isSupportDexRestrict [" + file.exists() + ", " + file.isFile() + ", " + file.canWrite() + "]");
+        Slog.d(
+                "UsbHostRestrictor",
+                "isSupportDexRestrict ["
+                        + file.exists()
+                        + ", "
+                        + file.isFile()
+                        + ", "
+                        + file.canWrite()
+                        + "]");
         return file.exists() && file.isFile() && file.canWrite();
     }
 
@@ -746,12 +1041,84 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
     }
 
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "USB Host Restrictor State:", "  All SIM Count:");
+        StringBuilder m$1 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                        printWriter, "USB Host Restrictor State:", "  All SIM Count:");
         m$1.append(SubscriptionManager.from(this.mContext).getAllSubscriptionInfoList().size());
         printWriter.println(m$1.toString());
         printWriter.println("  Disable Sys Node Value :" + readDisableSysNodefromFile());
-        printWriter.println("  Disable Sys Node Writable :" + String.valueOf(getUsbHostDisableSysNodeWritable()));
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, mCurrentScrLckNodeValue, "  ScreenLockStateValue :", BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, mCurrentSysNodeValue, "  SIM BLOCK ON/OFF :", new StringBuilder("  mCurrentSysNodeValue :")), isSIMBlock, printWriter, "  MDM BLOCK ON/OFF :"), isMDMBlock, printWriter, "  LckScr BLOCK ON/OFF :"), isLckScrBlock, printWriter, "  CurrentScrLckStateValue :")), mLockStatus, printWriter, "  IsHostConnected :"), mIsHostConnected, printWriter, "  IsDeviceConnected :"), mIsDeviceConnected, printWriter, "  SettingBlockUsbLock :"), mSettingBlockUsbLock, printWriter, "  IsTKInstalled :"), isEMTokenEnabled, printWriter, "  MDM bRestrictHostAPI :"), bRestrictHostAPI, printWriter, "  MDM mStrAllowList :"), mStrAllowList, printWriter);
+        printWriter.println(
+                "  Disable Sys Node Writable :"
+                        + String.valueOf(getUsbHostDisableSysNodeWritable()));
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                        .m(
+                                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                        .m(
+                                                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                                        .m(
+                                                                                                printWriter,
+                                                                                                mCurrentScrLckNodeValue,
+                                                                                                "  ScreenLockStateValue"
+                                                                                                    + " :",
+                                                                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                                                        .m(
+                                                                                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                                                                        .m(
+                                                                                                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                                                                                        .m(
+                                                                                                                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                                                                                                        .m(
+                                                                                                                                                                printWriter,
+                                                                                                                                                                mCurrentSysNodeValue,
+                                                                                                                                                                "  SIM"
+                                                                                                                                                                    + " BLOCK"
+                                                                                                                                                                    + " ON/OFF"
+                                                                                                                                                                    + " :",
+                                                                                                                                                                new StringBuilder(
+                                                                                                                                                                        "  mCurrentSysNodeValue"
+                                                                                                                                                                            + " :")),
+                                                                                                                                                isSIMBlock,
+                                                                                                                                                printWriter,
+                                                                                                                                                "  MDM"
+                                                                                                                                                    + " BLOCK"
+                                                                                                                                                    + " ON/OFF"
+                                                                                                                                                    + " :"),
+                                                                                                                                isMDMBlock,
+                                                                                                                                printWriter,
+                                                                                                                                "  LckScr"
+                                                                                                                                    + " BLOCK"
+                                                                                                                                    + " ON/OFF"
+                                                                                                                                    + " :"),
+                                                                                                                isLckScrBlock,
+                                                                                                                printWriter,
+                                                                                                                "  CurrentScrLckStateValue"
+                                                                                                                    + " :")),
+                                                                                mLockStatus,
+                                                                                printWriter,
+                                                                                "  IsHostConnected"
+                                                                                    + " :"),
+                                                                mIsHostConnected,
+                                                                printWriter,
+                                                                "  IsDeviceConnected :"),
+                                                mIsDeviceConnected,
+                                                printWriter,
+                                                "  SettingBlockUsbLock :"),
+                                        mSettingBlockUsbLock,
+                                        printWriter,
+                                        "  IsTKInstalled :"),
+                                isEMTokenEnabled,
+                                printWriter,
+                                "  MDM bRestrictHostAPI :"),
+                        bRestrictHostAPI,
+                        printWriter,
+                        "  MDM mStrAllowList :"),
+                mStrAllowList,
+                printWriter);
     }
 
     public final boolean isFinishLockTimer() {
@@ -767,7 +1134,10 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
                     isEMTokenEnabled = false;
                 }
             }
-            if (currentTimeMillis >= 15000 && mLockStatus == 1 && !"1".equals(SystemProperties.get("persist.sys.auto_confirm", "0")) && !isEMTokenEnabled) {
+            if (currentTimeMillis >= 15000
+                    && mLockStatus == 1
+                    && !"1".equals(SystemProperties.get("persist.sys.auto_confirm", "0"))
+                    && !isEMTokenEnabled) {
                 Slog.d("UsbHostRestrictor", "finishLockTimer--");
                 isLckScrBlock = true;
                 mLockStatus = 2;
@@ -776,10 +1146,16 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
                 if (getUsbHostDisableSysNodeWritable()) {
                     String readDisableSysNodefromFile = readDisableSysNodefromFile();
                     if (readDisableSysNodefromFile.contains("ON_ALL")) {
-                        if (readDisableSysNodefromFile.contains("ON_ALL_BOTH") || readDisableSysNodefromFile.contains("ON_ALL_SCREEN")) {
-                            Slog.d("UsbHostRestrictor", "UsbHostRestrictor USB ALL is already BLOCKED by SCR LCK BLCK");
+                        if (readDisableSysNodefromFile.contains("ON_ALL_BOTH")
+                                || readDisableSysNodefromFile.contains("ON_ALL_SCREEN")) {
+                            Slog.d(
+                                    "UsbHostRestrictor",
+                                    "UsbHostRestrictor USB ALL is already BLOCKED by SCR LCK BLCK");
                         } else if (!readDisableSysNodefromFile.contains("ON_ALL_SIM")) {
-                            Slog.d("UsbHostRestrictor", "UsbHostRestrictor USB ALL is already BLOCKED by ".concat(readDisableSysNodefromFile));
+                            Slog.d(
+                                    "UsbHostRestrictor",
+                                    "UsbHostRestrictor USB ALL is already BLOCKED by "
+                                            .concat(readDisableSysNodefromFile));
                         } else if (checkWriteValue.equals("ON_ALL_BOTH")) {
                             Slog.d("UsbHostRestrictor", "UsbHostRestrictor set SCR LCK BLCK");
                             writeDisableSysNodetoFile(checkWriteValue);
@@ -796,20 +1172,25 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
     }
 
     @Override // com.android.server.wm.ActivityTaskManagerInternal.ScreenObserver
-    public final void onAwakeStateChanged(boolean z) {
-    }
+    public final void onAwakeStateChanged(boolean z) {}
 
     @Override // com.android.server.wm.ActivityTaskManagerInternal.ScreenObserver
     public final void onKeyguardStateChanged(boolean z) {
         synchronized (this.mUsbRestrictLock) {
             int currentUser = ActivityManager.getCurrentUser();
             int i = 0;
-            boolean z2 = z && ((KeyguardManager) this.mContext.getSystemService(KeyguardManager.class)).isDeviceSecure(currentUser);
+            boolean z2 =
+                    z
+                            && ((KeyguardManager)
+                                            this.mContext.getSystemService(KeyguardManager.class))
+                                    .isDeviceSecure(currentUser);
             if (mSecureKeyguardShowing != z2) {
                 mSecureKeyguardShowing = z2;
             }
             try {
-                FileUtils.readTextFile(new File("/sys/class/usb_notify/usb_control/usb_sl"), 0, null).getClass();
+                FileUtils.readTextFile(
+                                new File("/sys/class/usb_notify/usb_control/usb_sl"), 0, null)
+                        .getClass();
             } catch (IOException unused) {
                 Slog.e("UsbHostRestrictor", "Failed to read from ScrLck Block FILE");
             }
@@ -818,12 +1199,16 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
                     writeScrLckBlkSysNodetoFile("1");
                     mLockStatus = 3;
                     stopLockTimer();
-                    Slog.d("UsbHostRestrictor", "onKeyguardStateChanged: LOCK_SCREEN_BLOCK : ON -> OFF");
+                    Slog.d(
+                            "UsbHostRestrictor",
+                            "onKeyguardStateChanged: LOCK_SCREEN_BLOCK : ON -> OFF");
                     return;
                 }
                 if (!isAdbOnlyMode() && mSettingBlockUsbLock == 1 && mLockStatus == 3) {
                     mLockStatus = 0;
-                    Slog.d("UsbHostRestrictor", "onKeyguardStateChanged: LOCK_SCREEN_BLOCK : OFF -> ON");
+                    Slog.d(
+                            "UsbHostRestrictor",
+                            "onKeyguardStateChanged: LOCK_SCREEN_BLOCK : OFF -> ON");
                 } else if (mLockStatus == 3) {
                     Slog.d("UsbHostRestrictor", "onKeyguardStateChanged: LOCK_SCREEN_BLOCK : OFF");
                     return;
@@ -831,13 +1216,16 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
             }
             if (z2 && mLockStatus == 0) {
                 while (true) {
-                    if (((KeyguardManager) this.mContext.getSystemService(KeyguardManager.class)).isDeviceLocked(currentUser)) {
+                    if (((KeyguardManager) this.mContext.getSystemService(KeyguardManager.class))
+                            .isDeviceLocked(currentUser)) {
                         Slog.d("UsbHostRestrictor", "onKeyguardStateChanged: Screen Lock On");
                         writeScrLckBlkSysNodetoFile("2");
                         mLockStatus = 1;
                         if (!mIsDeviceConnected && !mIsHostConnected) {
                             startLockTimer();
-                            Slog.d("UsbHostRestrictor", "onKeyguardStateChanged: Block immediately");
+                            Slog.d(
+                                    "UsbHostRestrictor",
+                                    "onKeyguardStateChanged: Block immediately");
                             isLckScrBlock = true;
                             mLockStatus = 2;
                             writeScrLckBlkSysNodetoFile("2");
@@ -845,17 +1233,30 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
                             if (getUsbHostDisableSysNodeWritable()) {
                                 String readDisableSysNodefromFile = readDisableSysNodefromFile();
                                 if (readDisableSysNodefromFile.contains("ON_ALL")) {
-                                    if (!readDisableSysNodefromFile.contains("ON_ALL_BOTH") && !readDisableSysNodefromFile.contains("ON_ALL_SCREEN")) {
+                                    if (!readDisableSysNodefromFile.contains("ON_ALL_BOTH")
+                                            && !readDisableSysNodefromFile.contains(
+                                                    "ON_ALL_SCREEN")) {
                                         if (!readDisableSysNodefromFile.contains("ON_ALL_SIM")) {
-                                            Slog.d("UsbHostRestrictor", "onKeyguardStateChanged USB ALL is already BLOCKED by " + readDisableSysNodefromFile);
+                                            Slog.d(
+                                                    "UsbHostRestrictor",
+                                                    "onKeyguardStateChanged USB ALL is already"
+                                                        + " BLOCKED by "
+                                                            + readDisableSysNodefromFile);
                                         } else if (checkWriteValue.equals("ON_ALL_BOTH")) {
-                                            Slog.d("UsbHostRestrictor", "onKeyguardStateChanged set SCR LCK BLCK");
+                                            Slog.d(
+                                                    "UsbHostRestrictor",
+                                                    "onKeyguardStateChanged set SCR LCK BLCK");
                                             writeDisableSysNodetoFile(checkWriteValue);
                                         }
                                     }
-                                    Slog.d("UsbHostRestrictor", "onKeyguardStateChanged USB ALL is already BLOCKED by SCR LCK BLCK");
+                                    Slog.d(
+                                            "UsbHostRestrictor",
+                                            "onKeyguardStateChanged USB ALL is already BLOCKED by"
+                                                + " SCR LCK BLCK");
                                 } else if (checkWriteValue.equals("ON_ALL_SCREEN")) {
-                                    Slog.d("UsbHostRestrictor", "onKeyguardStateChanged set SCR LCK BLCK");
+                                    Slog.d(
+                                            "UsbHostRestrictor",
+                                            "onKeyguardStateChanged set SCR LCK BLCK");
                                     writeDisableSysNodetoFile(checkWriteValue);
                                 }
                             }
@@ -877,7 +1278,9 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
                 if (mLockStatus == 2) {
                     isLckScrBlock = false;
                     String checkWriteValue2 = checkWriteValue();
-                    if (getUsbHostDisableSysNodeWritable() && (readDisableSysNodefromFile().contains("ON_ALL_SCREEN") || readDisableSysNodefromFile().contains("ON_ALL_BOTH"))) {
+                    if (getUsbHostDisableSysNodeWritable()
+                            && (readDisableSysNodefromFile().contains("ON_ALL_SCREEN")
+                                    || readDisableSysNodefromFile().contains("ON_ALL_BOTH"))) {
                         writeDisableSysNodetoFile(checkWriteValue2);
                     }
                 }
@@ -891,7 +1294,10 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
     public final String readDisableSysNodefromFile() {
         String str;
         try {
-            str = FileUtils.readTextFile(new File("/sys/class/usb_notify/usb_control/disable"), 0, null).trim();
+            str =
+                    FileUtils.readTextFile(
+                                    new File("/sys/class/usb_notify/usb_control/disable"), 0, null)
+                            .trim();
         } catch (IOException unused) {
             Slog.e("UsbHostRestrictor", "Failed to read from DISABLE FILE");
             str = "";
@@ -949,11 +1355,14 @@ public final class UsbHostRestrictor implements ActivityTaskManagerInternal.Scre
                 isEMTokenEnabled = false;
             }
         }
-        if (("1".equals(SystemProperties.get("persist.sys.auto_confirm", "0")) || isEMTokenEnabled) && "2".equals(str)) {
+        if (("1".equals(SystemProperties.get("persist.sys.auto_confirm", "0")) || isEMTokenEnabled)
+                && "2".equals(str)) {
             Slog.d("UsbHostRestrictor", "usb debug mode on");
             isLckScrBlock = false;
             String checkWriteValue = checkWriteValue();
-            if (getUsbHostDisableSysNodeWritable() && (readDisableSysNodefromFile().contains("ON_ALL_SCREEN") || readDisableSysNodefromFile().contains("ON_ALL_BOTH"))) {
+            if (getUsbHostDisableSysNodeWritable()
+                    && (readDisableSysNodefromFile().contains("ON_ALL_SCREEN")
+                            || readDisableSysNodefromFile().contains("ON_ALL_BOTH"))) {
                 writeDisableSysNodetoFile(checkWriteValue);
             }
             str = "1";

@@ -3,6 +3,7 @@ package android.telephony.satellite;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -25,19 +26,27 @@ public final class SemSatelliteSignalStrength implements Parcelable {
     private int mTxPdet;
     private int mTxTarget;
     private int mVdet;
-    private static final int[] sRssiThresholds = {-126, PackageManager.INSTALL_PARSE_FAILED_SKIPPED, -123, PackageManager.INSTALL_FAILED_WRONG_INSTALLED_VERSION};
-    private static final int[] sSnrThresholds = {0, 30, 50, 70};
-    public static final Parcelable.Creator<SemSatelliteSignalStrength> CREATOR = new Parcelable.Creator() { // from class: android.telephony.satellite.SemSatelliteSignalStrength.1
-        @Override // android.os.Parcelable.Creator
-        public SemSatelliteSignalStrength createFromParcel(Parcel in) {
-            return new SemSatelliteSignalStrength(in);
-        }
-
-        @Override // android.os.Parcelable.Creator
-        public SemSatelliteSignalStrength[] newArray(int size) {
-            return new SemSatelliteSignalStrength[size];
-        }
+    private static final int[] sRssiThresholds = {
+        -126,
+        PackageManager.INSTALL_PARSE_FAILED_SKIPPED,
+        -123,
+        PackageManager.INSTALL_FAILED_WRONG_INSTALLED_VERSION
     };
+    private static final int[] sSnrThresholds = {0, 30, 50, 70};
+    public static final Parcelable.Creator<SemSatelliteSignalStrength> CREATOR =
+            new Parcelable
+                    .Creator() { // from class:
+                                 // android.telephony.satellite.SemSatelliteSignalStrength.1
+                @Override // android.os.Parcelable.Creator
+                public SemSatelliteSignalStrength createFromParcel(Parcel in) {
+                    return new SemSatelliteSignalStrength(in);
+                }
+
+                @Override // android.os.Parcelable.Creator
+                public SemSatelliteSignalStrength[] newArray(int size) {
+                    return new SemSatelliteSignalStrength[size];
+                }
+            };
 
     public SemSatelliteSignalStrength() {
         this.mRssi = Integer.MAX_VALUE;
@@ -52,7 +61,16 @@ public final class SemSatelliteSignalStrength implements Parcelable {
         this.mLevel = 0;
     }
 
-    public SemSatelliteSignalStrength(int rssi, int snr, int rscp, int ecno, int rsrq, int rsrp, int ssRsrq, int ssRsrp, int ssSinr) {
+    public SemSatelliteSignalStrength(
+            int rssi,
+            int snr,
+            int rscp,
+            int ecno,
+            int rsrq,
+            int rsrp,
+            int ssRsrq,
+            int ssRsrp,
+            int ssSinr) {
         this.mRssi = rssi;
         this.mSnr = snr;
         this.mTxTarget = rscp;
@@ -181,7 +199,16 @@ public final class SemSatelliteSignalStrength implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mRssi), Integer.valueOf(this.mSnr), Integer.valueOf(this.mTxTarget), Integer.valueOf(this.mTxPdet), Integer.valueOf(this.mVdet), Integer.valueOf(this.mSatId), Integer.valueOf(this.mSsRsrq), Integer.valueOf(this.mSsRsrp), Integer.valueOf(this.mSsSinr));
+        return Objects.hash(
+                Integer.valueOf(this.mRssi),
+                Integer.valueOf(this.mSnr),
+                Integer.valueOf(this.mTxTarget),
+                Integer.valueOf(this.mTxPdet),
+                Integer.valueOf(this.mVdet),
+                Integer.valueOf(this.mSatId),
+                Integer.valueOf(this.mSsRsrq),
+                Integer.valueOf(this.mSsRsrp),
+                Integer.valueOf(this.mSsSinr));
     }
 
     public boolean equals(Object o) {
@@ -192,7 +219,15 @@ public final class SemSatelliteSignalStrength implements Parcelable {
             return true;
         }
         SemSatelliteSignalStrength s = (SemSatelliteSignalStrength) o;
-        if (this.mRssi != s.mRssi || this.mSnr != s.mSnr || this.mTxTarget != s.mTxTarget || this.mTxPdet != s.mTxPdet || this.mVdet != s.mVdet || this.mSatId != s.mSatId || this.mSsRsrq != s.mSsRsrq || this.mSsRsrp != s.mSsRsrp || this.mSsSinr != s.mSsSinr) {
+        if (this.mRssi != s.mRssi
+                || this.mSnr != s.mSnr
+                || this.mTxTarget != s.mTxTarget
+                || this.mTxPdet != s.mTxPdet
+                || this.mVdet != s.mVdet
+                || this.mSatId != s.mSatId
+                || this.mSsRsrq != s.mSsRsrq
+                || this.mSsRsrp != s.mSsRsrp
+                || this.mSsSinr != s.mSsSinr) {
             return false;
         }
         return true;
@@ -217,7 +252,26 @@ public final class SemSatelliteSignalStrength implements Parcelable {
     }
 
     public String toString() {
-        return "Satellite Signal Strength -  level: " + this.mLevel + " rssi: " + this.mRssi + " snr: " + this.mSnr + " tx_target: " + this.mTxTarget + " tx_pdet: " + this.mTxPdet + " vdet: " + this.mVdet + " satId: " + this.mSatId + " ssRsrq: " + this.mSsRsrq + " ssRsrp: " + this.mSsRsrp + " ssSinr: " + this.mSsSinr;
+        return "Satellite Signal Strength -  level: "
+                + this.mLevel
+                + " rssi: "
+                + this.mRssi
+                + " snr: "
+                + this.mSnr
+                + " tx_target: "
+                + this.mTxTarget
+                + " tx_pdet: "
+                + this.mTxPdet
+                + " vdet: "
+                + this.mVdet
+                + " satId: "
+                + this.mSatId
+                + " ssRsrq: "
+                + this.mSsRsrq
+                + " ssRsrp: "
+                + this.mSsRsrp
+                + " ssSinr: "
+                + this.mSsSinr;
     }
 
     public static final class Builder {
@@ -277,7 +331,16 @@ public final class SemSatelliteSignalStrength implements Parcelable {
         }
 
         public SemSatelliteSignalStrength build() {
-            return new SemSatelliteSignalStrength(this.mRssi, this.mSnr, this.mTxTarget, this.mTxPdet, this.mVdet, this.mSatId, this.mSsRsrq, this.mSsRsrp, this.mSsSinr);
+            return new SemSatelliteSignalStrength(
+                    this.mRssi,
+                    this.mSnr,
+                    this.mTxTarget,
+                    this.mTxPdet,
+                    this.mVdet,
+                    this.mSatId,
+                    this.mSsRsrq,
+                    this.mSsRsrp,
+                    this.mSsSinr);
         }
     }
 }

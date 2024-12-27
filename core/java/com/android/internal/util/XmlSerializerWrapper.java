@@ -1,10 +1,11 @@
 package com.android.internal.util;
 
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.util.Objects;
-import org.xmlpull.v1.XmlSerializer;
 
 /* loaded from: classes5.dex */
 public class XmlSerializerWrapper implements XmlSerializer {
@@ -40,7 +41,8 @@ public class XmlSerializerWrapper implements XmlSerializer {
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void setOutput(Writer writer) throws IOException, IllegalArgumentException, IllegalStateException {
+    public void setOutput(Writer writer)
+            throws IOException, IllegalArgumentException, IllegalStateException {
         this.mWrapped.setOutput(writer);
     }
 
@@ -105,7 +107,8 @@ public class XmlSerializerWrapper implements XmlSerializer {
     }
 
     @Override // org.xmlpull.v1.XmlSerializer
-    public void cdsect(String text) throws IOException, IllegalArgumentException, IllegalStateException {
+    public void cdsect(String text)
+            throws IOException, IllegalArgumentException, IllegalStateException {
         this.mWrapped.cdsect(text);
     }
 

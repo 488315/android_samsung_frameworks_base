@@ -11,11 +11,12 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.service.voice.IVoiceInteractionSessionService;
 import android.util.Log;
+
 import com.android.internal.app.IVoiceInteractionManagerService;
 import com.android.internal.os.HandlerCaller;
 import com.android.internal.os.SomeArgs;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
@@ -26,31 +27,42 @@ public abstract class VoiceInteractionSessionService extends Service {
     HandlerCaller mHandlerCaller;
     VoiceInteractionSession mSession;
     IVoiceInteractionManagerService mSystemService;
-    IVoiceInteractionSessionService mInterface = new IVoiceInteractionSessionService.Stub() { // from class: android.service.voice.VoiceInteractionSessionService.1
-        @Override // android.service.voice.IVoiceInteractionSessionService
-        public void newSession(IBinder token, Bundle args, int startFlags) {
-            VoiceInteractionSessionService.this.mHandlerCaller.sendMessage(VoiceInteractionSessionService.this.mHandlerCaller.obtainMessageIOO(1, startFlags, token, args));
-        }
-    };
-    final HandlerCaller.Callback mHandlerCallerCallback = new HandlerCaller.Callback() { // from class: android.service.voice.VoiceInteractionSessionService.2
-        @Override // com.android.internal.os.HandlerCaller.Callback
-        public void executeMessage(Message msg) {
-            SomeArgs args = (SomeArgs) msg.obj;
-            switch (msg.what) {
-                case 1:
-                    VoiceInteractionSessionService.this.doNewSession((IBinder) args.arg1, (Bundle) args.arg2, args.argi1);
-                    break;
-            }
-        }
-    };
+    IVoiceInteractionSessionService mInterface =
+            new IVoiceInteractionSessionService
+                    .Stub() { // from class: android.service.voice.VoiceInteractionSessionService.1
+                @Override // android.service.voice.IVoiceInteractionSessionService
+                public void newSession(IBinder token, Bundle args, int startFlags) {
+                    VoiceInteractionSessionService.this.mHandlerCaller.sendMessage(
+                            VoiceInteractionSessionService.this.mHandlerCaller.obtainMessageIOO(
+                                    1, startFlags, token, args));
+                }
+            };
+    final HandlerCaller.Callback mHandlerCallerCallback =
+            new HandlerCaller
+                    .Callback() { // from class:
+                                  // android.service.voice.VoiceInteractionSessionService.2
+                @Override // com.android.internal.os.HandlerCaller.Callback
+                public void executeMessage(Message msg) {
+                    SomeArgs args = (SomeArgs) msg.obj;
+                    switch (msg.what) {
+                        case 1:
+                            VoiceInteractionSessionService.this.doNewSession(
+                                    (IBinder) args.arg1, (Bundle) args.arg2, args.argi1);
+                            break;
+                    }
+                }
+            };
 
     public abstract VoiceInteractionSession onNewSession(Bundle bundle);
 
     @Override // android.app.Service
     public void onCreate() {
         super.onCreate();
-        this.mSystemService = IVoiceInteractionManagerService.Stub.asInterface(ServiceManager.getService(Context.VOICE_INTERACTION_MANAGER_SERVICE));
-        this.mHandlerCaller = new HandlerCaller(this, Looper.myLooper(), this.mHandlerCallerCallback, true);
+        this.mSystemService =
+                IVoiceInteractionManagerService.Stub.asInterface(
+                        ServiceManager.getService(Context.VOICE_INTERACTION_MANAGER_SERVICE));
+        this.mHandlerCaller =
+                new HandlerCaller(this, Looper.myLooper(), this.mHandlerCallerCallback, true);
     }
 
     @Override // android.app.Service
@@ -109,7 +121,8 @@ public abstract class VoiceInteractionSessionService extends Service {
 
     private boolean deliverSession(IBinder token) {
         try {
-            return this.mSystemService.deliverNewSession(token, this.mSession.mSession, this.mSession.mInteractor);
+            return this.mSystemService.deliverNewSession(
+                    token, this.mSession.mSession, this.mSession.mInteractor);
         } catch (DeadObjectException e) {
             return false;
         } catch (RemoteException e2) {

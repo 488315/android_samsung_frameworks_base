@@ -11,6 +11,10 @@ public final class DisplayRotationCoordinator {
 
     public static boolean isSecondaryInternalDisplay(DisplayContent displayContent) {
         Display display;
-        return (displayContent.isDefaultDisplay || (display = displayContent.mDisplay) == null || display.getType() != 1) ? false : true;
+        return (displayContent.isDefaultDisplay
+                        || (display = displayContent.mDisplay) == null
+                        || display.getType() != 1)
+                ? false
+                : true;
     }
 }

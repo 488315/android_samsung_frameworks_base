@@ -220,7 +220,8 @@ public enum FieldType {
                                 }
                             }
                             if (!foundReplacement) {
-                                throw new RuntimeException("Unable to find replacement for " + superArg);
+                                throw new RuntimeException(
+                                        "Unable to find replacement for " + superArg);
                             }
                         }
                     }

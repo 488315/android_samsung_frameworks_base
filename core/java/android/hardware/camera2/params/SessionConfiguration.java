@@ -7,7 +7,9 @@ import android.hardware.camera2.impl.CameraMetadataNative;
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.camera.flags.Flags;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -17,19 +19,21 @@ import java.util.concurrent.Executor;
 
 /* loaded from: classes2.dex */
 public final class SessionConfiguration implements Parcelable {
-    public static final Parcelable.Creator<SessionConfiguration> CREATOR = new Parcelable.Creator<SessionConfiguration>() { // from class: android.hardware.camera2.params.SessionConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SessionConfiguration createFromParcel(Parcel source) {
-            return new SessionConfiguration(source);
-        }
+    public static final Parcelable.Creator<SessionConfiguration> CREATOR =
+            new Parcelable.Creator<SessionConfiguration>() { // from class:
+                // android.hardware.camera2.params.SessionConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SessionConfiguration createFromParcel(Parcel source) {
+                    return new SessionConfiguration(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SessionConfiguration[] newArray(int size) {
-            return new SessionConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SessionConfiguration[] newArray(int size) {
+                    return new SessionConfiguration[size];
+                }
+            };
     public static final int SESSION_HIGH_SPEED = 1;
     public static final int SESSION_REGULAR = 0;
     public static final int SESSION_VENDOR_START = 32768;
@@ -43,10 +47,13 @@ public final class SessionConfiguration implements Parcelable {
     private CameraCaptureSession.StateCallback mStateCallback;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SessionMode {
-    }
+    public @interface SessionMode {}
 
-    public SessionConfiguration(int sessionType, List<OutputConfiguration> outputs, Executor executor, CameraCaptureSession.StateCallback cb) {
+    public SessionConfiguration(
+            int sessionType,
+            List<OutputConfiguration> outputs,
+            Executor executor,
+            CameraCaptureSession.StateCallback cb) {
         this.mExecutor = null;
         this.mInputConfig = null;
         this.mSessionParameters = null;
@@ -83,7 +90,9 @@ public final class SessionConfiguration implements Parcelable {
             }
         }
         if (inputWidth > 0 && inputHeight > 0 && inputFormat != -1) {
-            this.mInputConfig = new InputConfiguration(inputWidth, inputHeight, inputFormat, isInputMultiResolution);
+            this.mInputConfig =
+                    new InputConfiguration(
+                            inputWidth, inputHeight, inputFormat, isInputMultiResolution);
         }
         this.mSessionType = sessionType;
         this.mOutputConfigurations = outConfigs;
@@ -134,7 +143,9 @@ public final class SessionConfiguration implements Parcelable {
             return false;
         }
         SessionConfiguration other = (SessionConfiguration) obj;
-        if (this.mInputConfig != other.mInputConfig || this.mSessionType != other.mSessionType || this.mOutputConfigurations.size() != other.mOutputConfigurations.size()) {
+        if (this.mInputConfig != other.mInputConfig
+                || this.mSessionType != other.mSessionType
+                || this.mOutputConfigurations.size() != other.mOutputConfigurations.size()) {
             return false;
         }
         for (int i = 0; i < this.mOutputConfigurations.size(); i++) {
@@ -146,7 +157,10 @@ public final class SessionConfiguration implements Parcelable {
     }
 
     public int hashCode() {
-        return HashCodeHelpers.hashCode(this.mOutputConfigurations.hashCode(), this.mInputConfig.hashCode(), this.mSessionType);
+        return HashCodeHelpers.hashCode(
+                this.mOutputConfigurations.hashCode(),
+                this.mInputConfig.hashCode(),
+                this.mSessionType);
     }
 
     public int getSessionType() {
@@ -170,7 +184,8 @@ public final class SessionConfiguration implements Parcelable {
             this.mInputConfig = input;
             return;
         }
-        throw new UnsupportedOperationException("Method not supported for high speed session types");
+        throw new UnsupportedOperationException(
+                "Method not supported for high speed session types");
     }
 
     public InputConfiguration getInputConfiguration() {

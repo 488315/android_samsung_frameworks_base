@@ -3,28 +3,32 @@ package android.security.attestationverification;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.security.attestationverification.AttestationVerificationManager;
 import android.service.timezone.TimeZoneProviderService;
 import android.util.Log;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class AttestationProfile implements Parcelable {
-    public static final Parcelable.Creator<AttestationProfile> CREATOR = new Parcelable.Creator<AttestationProfile>() { // from class: android.security.attestationverification.AttestationProfile.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AttestationProfile[] newArray(int size) {
-            return new AttestationProfile[size];
-        }
+    public static final Parcelable.Creator<AttestationProfile> CREATOR =
+            new Parcelable.Creator<
+                    AttestationProfile>() { // from class:
+                                            // android.security.attestationverification.AttestationProfile.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AttestationProfile[] newArray(int size) {
+                    return new AttestationProfile[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AttestationProfile createFromParcel(Parcel in) {
-            return new AttestationProfile(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AttestationProfile createFromParcel(Parcel in) {
+                    return new AttestationProfile(in);
+                }
+            };
     private static final String TAG = "AVF";
     private final int mAttestationProfileId;
     private final String mPackageName;
@@ -39,7 +43,9 @@ public final class AttestationProfile implements Parcelable {
     public AttestationProfile(int attestationProfileId) {
         this(attestationProfileId, null, null);
         if (attestationProfileId == 1) {
-            throw new IllegalArgumentException("App-defined profiles must be specified with the constructor AttestationProfile#constructor(String, String)");
+            throw new IllegalArgumentException(
+                    "App-defined profiles must be specified with the constructor"
+                        + " AttestationProfile#constructor(String, String)");
         }
     }
 
@@ -53,7 +59,11 @@ public final class AttestationProfile implements Parcelable {
     public String toString() {
         String humanReadableProfileId;
         if (this.mAttestationProfileId == 1) {
-            return "AttestationProfile(package=" + this.mPackageName + ", name=" + this.mProfileName + NavigationBarInflaterView.KEY_CODE_END;
+            return "AttestationProfile(package="
+                    + this.mPackageName
+                    + ", name="
+                    + this.mProfileName
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
         switch (this.mAttestationProfileId) {
             case 0:
@@ -64,7 +74,11 @@ public final class AttestationProfile implements Parcelable {
                 humanReadableProfileId = TimeZoneProviderService.TEST_COMMAND_RESULT_ERROR_KEY;
                 break;
         }
-        return "AttestationProfile(" + humanReadableProfileId + "/" + this.mAttestationProfileId + NavigationBarInflaterView.KEY_CODE_END;
+        return "AttestationProfile("
+                + humanReadableProfileId
+                + "/"
+                + this.mAttestationProfileId
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public int getAttestationProfileId() {
@@ -87,7 +101,9 @@ public final class AttestationProfile implements Parcelable {
             return false;
         }
         AttestationProfile that = (AttestationProfile) o;
-        if (this.mAttestationProfileId == that.mAttestationProfileId && Objects.equals(this.mPackageName, that.mPackageName) && Objects.equals(this.mProfileName, that.mProfileName)) {
+        if (this.mAttestationProfileId == that.mAttestationProfileId
+                && Objects.equals(this.mPackageName, that.mPackageName)
+                && Objects.equals(this.mProfileName, that.mProfileName)) {
             return true;
         }
         return false;
@@ -95,7 +111,8 @@ public final class AttestationProfile implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + this.mAttestationProfileId;
-        return (((_hash * 31) + Objects.hashCode(this.mPackageName)) * 31) + Objects.hashCode(this.mProfileName);
+        return (((_hash * 31) + Objects.hashCode(this.mPackageName)) * 31)
+                + Objects.hashCode(this.mProfileName);
     }
 
     @Override // android.os.Parcelable
@@ -125,12 +142,15 @@ public final class AttestationProfile implements Parcelable {
         String packageName = (flg & 2) == 0 ? null : in.readString();
         String profileName = (flg & 4) == 0 ? null : in.readString();
         this.mAttestationProfileId = attestationProfileId;
-        AnnotationValidations.validate((Class<? extends Annotation>) AttestationVerificationManager.AttestationProfileId.class, (Annotation) null, this.mAttestationProfileId);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>)
+                        AttestationVerificationManager.AttestationProfileId.class,
+                (Annotation) null,
+                this.mAttestationProfileId);
         this.mPackageName = packageName;
         this.mProfileName = profileName;
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

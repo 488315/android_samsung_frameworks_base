@@ -1,6 +1,7 @@
 package com.android.internal.telephony.uicc.asn1;
 
 import com.android.internal.telephony.uicc.IccUtils;
+
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +27,8 @@ public final class Asn1Node {
 
         private Builder(int tag) {
             if (!Asn1Node.isConstructedTag(tag)) {
-                throw new IllegalArgumentException("Builder should be created for a constructed tag: " + tag);
+                throw new IllegalArgumentException(
+                        "Builder should be created for a constructed tag: " + tag);
             }
             this.mTag = tag;
             this.mChildren = new ArrayList();
@@ -137,7 +139,10 @@ public final class Asn1Node {
         this.mDataOffset = offset;
         this.mDataLength = length;
         this.mChildren = this.mConstructed ? new ArrayList<>() : EMPTY_NODE_LIST;
-        this.mEncodedLength = IccUtils.byteNumForUnsignedInt(this.mTag) + calculateEncodedBytesNumForLength(this.mDataLength) + this.mDataLength;
+        this.mEncodedLength =
+                IccUtils.byteNumForUnsignedInt(this.mTag)
+                        + calculateEncodedBytesNumForLength(this.mDataLength)
+                        + this.mDataLength;
     }
 
     private Asn1Node(int tag, List<Asn1Node> children) {
@@ -150,7 +155,10 @@ public final class Asn1Node {
             this.mDataLength += children.get(i).mEncodedLength;
         }
         int i2 = this.mTag;
-        this.mEncodedLength = IccUtils.byteNumForUnsignedInt(i2) + calculateEncodedBytesNumForLength(this.mDataLength) + this.mDataLength;
+        this.mEncodedLength =
+                IccUtils.byteNumForUnsignedInt(i2)
+                        + calculateEncodedBytesNumForLength(this.mDataLength)
+                        + this.mDataLength;
     }
 
     public int getTag() {
@@ -170,7 +178,8 @@ public final class Asn1Node {
         }
     }
 
-    public Asn1Node getChild(int tag, int... tags) throws TagNotFoundException, InvalidAsn1DataException {
+    public Asn1Node getChild(int tag, int... tags)
+            throws TagNotFoundException, InvalidAsn1DataException {
         if (!this.mConstructed) {
             throw new TagNotFoundException(tag);
         }
@@ -206,7 +215,8 @@ public final class Asn1Node {
         return node;
     }
 
-    public List<Asn1Node> getChildren(int tag) throws TagNotFoundException, InvalidAsn1DataException {
+    public List<Asn1Node> getChildren(int tag)
+            throws TagNotFoundException, InvalidAsn1DataException {
         if (!this.mConstructed) {
             return EMPTY_NODE_LIST;
         }
@@ -230,7 +240,8 @@ public final class Asn1Node {
             return EMPTY_NODE_LIST;
         }
         if (this.mDataBytes != null) {
-            Asn1Decoder subDecoder = new Asn1Decoder(this.mDataBytes, this.mDataOffset, this.mDataLength);
+            Asn1Decoder subDecoder =
+                    new Asn1Decoder(this.mDataBytes, this.mDataOffset, this.mDataLength);
             while (subDecoder.hasNextNode()) {
                 this.mChildren.add(subDecoder.nextNode());
             }
@@ -280,7 +291,8 @@ public final class Asn1Node {
             throw new InvalidAsn1DataException(this.mTag, "Data bytes cannot be null.");
         }
         try {
-            return new String(this.mDataBytes, this.mDataOffset, this.mDataLength, StandardCharsets.UTF_8);
+            return new String(
+                    this.mDataBytes, this.mDataOffset, this.mDataLength, StandardCharsets.UTF_8);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidAsn1DataException(this.mTag, "Cannot parse data bytes.", e);
         }
@@ -310,7 +322,9 @@ public final class Asn1Node {
             throw new InvalidAsn1DataException(this.mTag, "Data bytes cannot be null.");
         }
         try {
-            int bits = IccUtils.bytesToInt(this.mDataBytes, this.mDataOffset + 1, this.mDataLength - 1);
+            int bits =
+                    IccUtils.bytesToInt(
+                            this.mDataBytes, this.mDataOffset + 1, this.mDataLength - 1);
             for (int i = this.mDataLength - 1; i < 4; i++) {
                 bits <<= 8;
             }
@@ -329,10 +343,14 @@ public final class Asn1Node {
             throw new InvalidAsn1DataException(this.mTag, "Data bytes cannot be null.");
         }
         if (this.mDataLength != 1) {
-            throw new InvalidAsn1DataException(this.mTag, "Cannot parse data bytes as boolean: length=" + this.mDataLength);
+            throw new InvalidAsn1DataException(
+                    this.mTag, "Cannot parse data bytes as boolean: length=" + this.mDataLength);
         }
         if (this.mDataOffset < 0 || this.mDataOffset >= this.mDataBytes.length) {
-            throw new InvalidAsn1DataException(this.mTag, "Cannot parse data bytes.", new ArrayIndexOutOfBoundsException(this.mDataOffset));
+            throw new InvalidAsn1DataException(
+                    this.mTag,
+                    "Cannot parse data bytes.",
+                    new ArrayIndexOutOfBoundsException(this.mDataOffset));
         }
         if (this.mDataBytes[this.mDataOffset] == -1) {
             return Boolean.TRUE.booleanValue();
@@ -340,7 +358,9 @@ public final class Asn1Node {
         if (this.mDataBytes[this.mDataOffset] == 0) {
             return Boolean.FALSE.booleanValue();
         }
-        throw new InvalidAsn1DataException(this.mTag, "Cannot parse data bytes as boolean: " + ((int) this.mDataBytes[this.mDataOffset]));
+        throw new InvalidAsn1DataException(
+                this.mTag,
+                "Cannot parse data bytes as boolean: " + ((int) this.mDataBytes[this.mDataOffset]));
     }
 
     public int getEncodedLength() {
@@ -353,7 +373,8 @@ public final class Asn1Node {
 
     public void writeToBytes(byte[] dest, int offset) {
         if (offset < 0 || this.mEncodedLength + offset > dest.length) {
-            throw new IndexOutOfBoundsException("Not enough space to write. Required bytes: " + this.mEncodedLength);
+            throw new IndexOutOfBoundsException(
+                    "Not enough space to write. Required bytes: " + this.mEncodedLength);
         }
         write(dest, offset);
     }
@@ -374,7 +395,8 @@ public final class Asn1Node {
             return headHex + IccUtils.byteToHex((byte) this.mDataLength);
         }
         byte[] lenBytes = IccUtils.unsignedIntToBytes(this.mDataLength);
-        return (headHex + IccUtils.byteToHex((byte) (lenBytes.length | 128))) + IccUtils.bytesToHexString(lenBytes);
+        return (headHex + IccUtils.byteToHex((byte) (lenBytes.length | 128)))
+                + IccUtils.bytesToHexString(lenBytes);
     }
 
     private int write(byte[] dest, int offset) {

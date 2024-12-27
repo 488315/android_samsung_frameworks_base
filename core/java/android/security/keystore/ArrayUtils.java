@@ -1,12 +1,12 @@
 package android.security.keystore;
 
-import java.util.function.Consumer;
 import libcore.util.EmptyArray;
+
+import java.util.function.Consumer;
 
 /* loaded from: classes3.dex */
 public abstract class ArrayUtils {
-    private ArrayUtils() {
-    }
+    private ArrayUtils() {}
 
     public static String[] nullToEmpty(String[] array) {
         return array != null ? array : EmptyArray.STRING;
@@ -25,10 +25,12 @@ public abstract class ArrayUtils {
     }
 
     public static byte[] concat(byte[] arr1, byte[] arr2) {
-        return concat(arr1, 0, arr1 != null ? arr1.length : 0, arr2, 0, arr2 != null ? arr2.length : 0);
+        return concat(
+                arr1, 0, arr1 != null ? arr1.length : 0, arr2, 0, arr2 != null ? arr2.length : 0);
     }
 
-    public static byte[] concat(byte[] arr1, int offset1, int len1, byte[] arr2, int offset2, int len2) {
+    public static byte[] concat(
+            byte[] arr1, int offset1, int len1, byte[] arr2, int offset2, int len2) {
         if (len1 == 0) {
             return subarray(arr2, offset2, len2);
         }

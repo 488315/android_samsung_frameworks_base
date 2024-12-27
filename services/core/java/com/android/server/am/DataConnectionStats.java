@@ -10,8 +10,11 @@ import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.util.Log;
+
 import com.android.internal.app.IBatteryStats;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 
@@ -80,7 +83,8 @@ public final class DataConnectionStats extends BroadcastReceiver {
     public DataConnectionStats(Context context, Handler handler) {
         this.mContext = context;
         this.mListenerHandler = handler;
-        this.mPhoneStateListener = new PhoneStateListenerImpl(new PhoneStateListenerExecutor(handler));
+        this.mPhoneStateListener =
+                new PhoneStateListenerImpl(new PhoneStateListenerExecutor(handler));
     }
 
     public final void notePhoneDataConnectionState() {
@@ -90,10 +94,28 @@ public final class DataConnectionStats extends BroadcastReceiver {
             return;
         }
         int i = this.mSimState;
-        boolean z = ((i != 5 && i != 0 && ((signalStrength = this.mSignalStrength) == null || signalStrength.isGsm())) || (serviceState = this.mServiceState) == null || serviceState.getState() == 1 || this.mServiceState.getState() == 3 || this.mDataState != 2) ? false : true;
-        NetworkRegistrationInfo networkRegistrationInfo = this.mServiceState.getNetworkRegistrationInfo(2, 1);
+        boolean z =
+                ((i != 5
+                                        && i != 0
+                                        && ((signalStrength = this.mSignalStrength) == null
+                                                || signalStrength.isGsm()))
+                                || (serviceState = this.mServiceState) == null
+                                || serviceState.getState() == 1
+                                || this.mServiceState.getState() == 3
+                                || this.mDataState != 2)
+                        ? false
+                        : true;
+        NetworkRegistrationInfo networkRegistrationInfo =
+                this.mServiceState.getNetworkRegistrationInfo(2, 1);
         try {
-            this.mBatteryStats.notePhoneDataConnectionState(networkRegistrationInfo != null ? networkRegistrationInfo.getAccessNetworkTechnology() : 0, z, this.mServiceState.getState(), this.mNrState, this.mServiceState.getNrFrequencyRange());
+            this.mBatteryStats.notePhoneDataConnectionState(
+                    networkRegistrationInfo != null
+                            ? networkRegistrationInfo.getAccessNetworkTechnology()
+                            : 0,
+                    z,
+                    this.mServiceState.getState(),
+                    this.mNrState,
+                    this.mServiceState.getNrFrequencyRange());
         } catch (RemoteException e) {
             Log.w("DataConnectionStats", "Error noting data connection state", e);
         }

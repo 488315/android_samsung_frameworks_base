@@ -7,9 +7,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.Log;
-import com.samsung.android.desktopmode.IDesktopModeBlocker;
-import com.samsung.android.desktopmode.IDesktopModeLauncher;
-import com.samsung.android.desktopmode.IDesktopModeListener;
+
 import java.util.Map;
 
 /* loaded from: classes6.dex */
@@ -51,7 +49,9 @@ public final class SemDesktopModeManager {
                 listener = this.mListener;
             }
             if (listener != null) {
-                Log.d(SemDesktopModeManager.TAG, "onDesktopModeStateChanged() state=" + state + ", listener=" + listener);
+                Log.d(
+                        SemDesktopModeManager.TAG,
+                        "onDesktopModeStateChanged() state=" + state + ", listener=" + listener);
                 listener.onDesktopModeStateChanged(state);
             }
         }
@@ -107,7 +107,10 @@ public final class SemDesktopModeManager {
 
     @Deprecated
     public static void registerListener(EventListener listener) {
-        Log.w(TAG, "registerListener(EventListener) is removed.  Please use registerListener(DesktopModeListener) instead.");
+        Log.w(
+                TAG,
+                "registerListener(EventListener) is removed.  Please use"
+                    + " registerListener(DesktopModeListener) instead.");
     }
 
     public void registerListener(DesktopModeListener listener) {
@@ -136,7 +139,10 @@ public final class SemDesktopModeManager {
 
     @Deprecated
     public static void unregisterListener(EventListener listener) {
-        Log.w(TAG, "unregisterListener(EventListener) is removed.  Please use unregisterListener(DesktopModeListener) instead.");
+        Log.w(
+                TAG,
+                "unregisterListener(EventListener) is removed.  Please use"
+                    + " unregisterListener(DesktopModeListener) instead.");
     }
 
     public void unregisterListener(DesktopModeListener listener) {
@@ -168,13 +174,19 @@ public final class SemDesktopModeManager {
 
     @Deprecated
     public static boolean isDesktopDockConnected() {
-        Log.w(TAG, "isDesktopDockConnected() is removed. Please use Intent.ACTION_DOCK_EVENT sticky broadcast instead");
+        Log.w(
+                TAG,
+                "isDesktopDockConnected() is removed. Please use Intent.ACTION_DOCK_EVENT sticky"
+                    + " broadcast instead");
         return false;
     }
 
     @Deprecated
     public static boolean isDesktopMode() {
-        Log.w(TAG, "isDesktopMode() is removed. Please check Configuration.semDesktopModeEnabled instead, or consider using getDesktopModeState() instead.");
+        Log.w(
+                TAG,
+                "isDesktopMode() is removed. Please check Configuration.semDesktopModeEnabled"
+                    + " instead, or consider using getDesktopModeState() instead.");
         return false;
     }
 

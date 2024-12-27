@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.asn1;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Strings;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,9 +26,10 @@ public abstract class ASN1OctetString extends ASN1Primitive implements ASN1Octet
         if (taggedObject.isExplicit()) {
             ASN1OctetString singleSegment = getInstance(o);
             if (taggedObject instanceof BERTaggedObject) {
-                return new BEROctetString(new ASN1OctetString[]{singleSegment});
+                return new BEROctetString(new ASN1OctetString[] {singleSegment});
             }
-            return (ASN1OctetString) new BEROctetString(new ASN1OctetString[]{singleSegment}).toDLObject();
+            return (ASN1OctetString)
+                    new BEROctetString(new ASN1OctetString[] {singleSegment}).toDLObject();
         }
         if (o instanceof ASN1OctetString) {
             ASN1OctetString s = (ASN1OctetString) o;
@@ -43,7 +45,8 @@ public abstract class ASN1OctetString extends ASN1Primitive implements ASN1Octet
             }
             return (ASN1OctetString) BEROctetString.fromSequence(s2).toDLObject();
         }
-        throw new IllegalArgumentException("unknown object in getInstance: " + taggedObject.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in getInstance: " + taggedObject.getClass().getName());
     }
 
     public static ASN1OctetString getInstance(Object obj) {
@@ -54,7 +57,8 @@ public abstract class ASN1OctetString extends ASN1Primitive implements ASN1Octet
             try {
                 return getInstance(fromByteArray((byte[]) obj));
             } catch (IOException e) {
-                throw new IllegalArgumentException("failed to construct OCTET STRING from byte[]: " + e.getMessage());
+                throw new IllegalArgumentException(
+                        "failed to construct OCTET STRING from byte[]: " + e.getMessage());
             }
         }
         if (obj instanceof ASN1Encodable) {
@@ -63,7 +67,8 @@ public abstract class ASN1OctetString extends ASN1Primitive implements ASN1Octet
                 return (ASN1OctetString) primitive;
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public ASN1OctetString(byte[] string) {
@@ -86,7 +91,8 @@ public abstract class ASN1OctetString extends ASN1Primitive implements ASN1Octet
         return this.string;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         return Arrays.hashCode(getOctets());
     }

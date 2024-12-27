@@ -2,23 +2,26 @@ package android.app.job;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class UserVisibleJobSummary implements Parcelable {
-    public static final Parcelable.Creator<UserVisibleJobSummary> CREATOR = new Parcelable.Creator<UserVisibleJobSummary>() { // from class: android.app.job.UserVisibleJobSummary.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UserVisibleJobSummary createFromParcel(Parcel in) {
-            return new UserVisibleJobSummary(in);
-        }
+    public static final Parcelable.Creator<UserVisibleJobSummary> CREATOR =
+            new Parcelable.Creator<UserVisibleJobSummary>() { // from class:
+                // android.app.job.UserVisibleJobSummary.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UserVisibleJobSummary createFromParcel(Parcel in) {
+                    return new UserVisibleJobSummary(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UserVisibleJobSummary[] newArray(int size) {
-            return new UserVisibleJobSummary[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UserVisibleJobSummary[] newArray(int size) {
+                    return new UserVisibleJobSummary[size];
+                }
+            };
     private final String mCallingPackageName;
     private final int mCallingUid;
     private final int mJobId;
@@ -26,7 +29,13 @@ public class UserVisibleJobSummary implements Parcelable {
     private final String mSourcePackageName;
     private final int mSourceUserId;
 
-    public UserVisibleJobSummary(int callingUid, String callingPackageName, int sourceUserId, String sourcePackageName, String namespace, int jobId) {
+    public UserVisibleJobSummary(
+            int callingUid,
+            String callingPackageName,
+            int sourceUserId,
+            String sourcePackageName,
+            String namespace,
+            int jobId) {
         this.mCallingUid = callingUid;
         this.mCallingPackageName = callingPackageName;
         this.mSourceUserId = sourceUserId;
@@ -76,11 +85,21 @@ public class UserVisibleJobSummary implements Parcelable {
             return false;
         }
         UserVisibleJobSummary that = (UserVisibleJobSummary) o;
-        return this.mCallingUid == that.mCallingUid && this.mCallingPackageName.equals(that.mCallingPackageName) && this.mSourceUserId == that.mSourceUserId && this.mSourcePackageName.equals(that.mSourcePackageName) && Objects.equals(this.mNamespace, that.mNamespace) && this.mJobId == that.mJobId;
+        return this.mCallingUid == that.mCallingUid
+                && this.mCallingPackageName.equals(that.mCallingPackageName)
+                && this.mSourceUserId == that.mSourceUserId
+                && this.mSourcePackageName.equals(that.mSourcePackageName)
+                && Objects.equals(this.mNamespace, that.mNamespace)
+                && this.mJobId == that.mJobId;
     }
 
     public int hashCode() {
-        int result = (((((((0 * 31) + this.mCallingUid) * 31) + this.mCallingPackageName.hashCode()) * 31) + this.mSourceUserId) * 31) + this.mSourcePackageName.hashCode();
+        int result =
+                (((((((0 * 31) + this.mCallingUid) * 31) + this.mCallingPackageName.hashCode())
+                                                * 31)
+                                        + this.mSourceUserId)
+                                * 31)
+                        + this.mSourcePackageName.hashCode();
         if (this.mNamespace != null) {
             result = (result * 31) + this.mNamespace.hashCode();
         }
@@ -88,7 +107,19 @@ public class UserVisibleJobSummary implements Parcelable {
     }
 
     public String toString() {
-        return "UserVisibleJobSummary{callingUid=" + this.mCallingUid + ", callingPackageName='" + this.mCallingPackageName + "', sourceUserId=" + this.mSourceUserId + ", sourcePackageName='" + this.mSourcePackageName + "', namespace=" + this.mNamespace + ", jobId=" + this.mJobId + "}";
+        return "UserVisibleJobSummary{callingUid="
+                + this.mCallingUid
+                + ", callingPackageName='"
+                + this.mCallingPackageName
+                + "', sourceUserId="
+                + this.mSourceUserId
+                + ", sourcePackageName='"
+                + this.mSourcePackageName
+                + "', namespace="
+                + this.mNamespace
+                + ", jobId="
+                + this.mJobId
+                + "}";
     }
 
     @Override // android.os.Parcelable

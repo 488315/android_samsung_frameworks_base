@@ -2,9 +2,11 @@ package com.samsung.android.transcode.surfaces;
 
 import android.graphics.SurfaceTexture;
 import android.view.Surface;
+
 import com.samsung.android.transcode.renderer.RenderTexture_GL_OES;
 import com.samsung.android.transcode.util.LogS;
 import com.samsung.android.transcode.util.OpenGlHelper;
+
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLContext;
@@ -30,7 +32,15 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
         setup(rotationAngle);
     }
 
-    public OutputSurface(int rotationAngle, int x, int y, int width, int height, int original_width, int original_height, boolean mmsMode) {
+    public OutputSurface(
+            int rotationAngle,
+            int x,
+            int y,
+            int width,
+            int height,
+            int original_width,
+            int original_height,
+            boolean mmsMode) {
         setup(rotationAngle, x, y, width, height, original_width, original_height, mmsMode);
     }
 
@@ -43,7 +53,15 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
         this.mSurface = new Surface(this.mSurfaceTexture);
     }
 
-    private void setup(int rotationAngle, int x, int y, int width, int height, int original_width, int original_height, boolean mmsMode) {
+    private void setup(
+            int rotationAngle,
+            int x,
+            int y,
+            int width,
+            int height,
+            int original_width,
+            int original_height,
+            boolean mmsMode) {
         int pbuffer_width;
         int pbuffer_height;
         this.mTextureRenderer = new RenderTexture_GL_OES();
@@ -71,7 +89,17 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
             pbuffer_width = 0;
             pbuffer_height = 0;
         }
-        this.mTextureRenderer.prepare(rotationAngle, x, y, width, height, original_width, original_height, mmsMode, pbuffer_width, pbuffer_height);
+        this.mTextureRenderer.prepare(
+                rotationAngle,
+                x,
+                y,
+                width,
+                height,
+                original_width,
+                original_height,
+                mmsMode,
+                pbuffer_width,
+                pbuffer_height);
         LogS.d("TranscodeLib", "textureID=" + this.mTextureRenderer.getTextureId());
         this.mSurfaceTexture = new SurfaceTexture(this.mTextureRenderer.getTextureId());
         this.mSurfaceTexture.setOnFrameAvailableListener(this);
@@ -94,13 +122,16 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
             throw new RuntimeException("unable to find RGB888+pbuffer EGL config");
         }
         int[] attrib_list = {12440, 2, 12344};
-        this.mEGLContext = this.mEGL.eglCreateContext(this.mEGLDisplay, configs[0], EGL10.EGL_NO_CONTEXT, attrib_list);
+        this.mEGLContext =
+                this.mEGL.eglCreateContext(
+                        this.mEGLDisplay, configs[0], EGL10.EGL_NO_CONTEXT, attrib_list);
         checkEglError("eglCreateContext");
         if (this.mEGLContext == null) {
             throw new RuntimeException("null context");
         }
         int[] surfaceAttribs = {12375, width, 12374, height, 12344};
-        this.mEGLSurface = this.mEGL.eglCreatePbufferSurface(this.mEGLDisplay, configs[0], surfaceAttribs);
+        this.mEGLSurface =
+                this.mEGL.eglCreatePbufferSurface(this.mEGLDisplay, configs[0], surfaceAttribs);
         checkEglError("eglCreatePbufferSurface");
         if (this.mEGLSurface == null) {
             throw new RuntimeException("surface was null");
@@ -110,7 +141,11 @@ public class OutputSurface implements SurfaceTexture.OnFrameAvailableListener {
     public void release() {
         if (this.mEGL != null) {
             if (this.mEGL.eglGetCurrentContext().equals(this.mEGLContext)) {
-                this.mEGL.eglMakeCurrent(this.mEGLDisplay, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
+                this.mEGL.eglMakeCurrent(
+                        this.mEGLDisplay,
+                        EGL10.EGL_NO_SURFACE,
+                        EGL10.EGL_NO_SURFACE,
+                        EGL10.EGL_NO_CONTEXT);
             }
             this.mEGL.eglDestroySurface(this.mEGLDisplay, this.mEGLSurface);
             this.mEGL.eglDestroyContext(this.mEGLDisplay, this.mEGLContext);

@@ -5,6 +5,7 @@ import android.hardware.SensorPrivacyManager;
 import android.hardware.face.FaceAuthenticateOptions;
 import android.os.Bundle;
 import android.os.IBinder;
+
 import com.android.server.biometrics.Utils;
 import com.android.server.biometrics.sensors.ClientMonitorCallbackConverter;
 import com.android.server.biometrics.sensors.LockoutTracker;
@@ -25,7 +26,17 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda10 imple
     public final /* synthetic */ int f$8;
     public final /* synthetic */ int f$9;
 
-    public /* synthetic */ FaceProvider$$ExternalSyntheticLambda10(FaceProvider faceProvider, FaceAuthenticateOptions faceAuthenticateOptions, boolean z, IBinder iBinder, long j, ClientMonitorCallbackConverter clientMonitorCallbackConverter, long j2, boolean z2, int i, int i2) {
+    public /* synthetic */ FaceProvider$$ExternalSyntheticLambda10(
+            FaceProvider faceProvider,
+            FaceAuthenticateOptions faceAuthenticateOptions,
+            boolean z,
+            IBinder iBinder,
+            long j,
+            ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+            long j2,
+            boolean z2,
+            int i,
+            int i2) {
         this.f$0 = faceProvider;
         this.f$1 = faceAuthenticateOptions;
         this.f$2 = z;
@@ -65,10 +76,36 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda10 imple
         }
         boolean z3 = z | ((i & 4) != 0);
         boolean isStrongBiometric = Utils.isStrongBiometric(sensorId);
-        ((Sensor) faceProvider.mFaceSensors.mSensors.get(sensorId)).scheduleFaceUpdateActiveUserClient(userId);
-        LockoutTracker lockoutTracker = ((Sensor) faceProvider.mFaceSensors.mSensors.get(sensorId)).getLockoutTracker(true);
+        ((Sensor) faceProvider.mFaceSensors.mSensors.get(sensorId))
+                .scheduleFaceUpdateActiveUserClient(userId);
+        LockoutTracker lockoutTracker =
+                ((Sensor) faceProvider.mFaceSensors.mSensors.get(sensorId)).getLockoutTracker(true);
         Context context = faceProvider.mContext;
-        FaceAuthenticationClient faceAuthenticationClient = new FaceAuthenticationClient(context, ((Sensor) faceProvider.mFaceSensors.mSensors.get(sensorId)).mLazySession, iBinder, j2, clientMonitorCallbackConverter, j, z2, faceAuthenticateOptions, i2, false, faceProvider.createLogger(2, i3, faceProvider.mAuthenticationStatsCollector), faceProvider.mBiometricContext, isStrongBiometric, faceProvider.mUsageStats, lockoutTracker, z3, (SensorPrivacyManager) context.getSystemService(SensorPrivacyManager.class), Utils.getCurrentStrength(sensorId), faceProvider.mAuthenticationStateListeners);
-        faceProvider.scheduleForSensor(sensorId, faceAuthenticationClient, faceProvider.new AnonymousClass3(userId, sensorId, j2, faceAuthenticationClient));
+        FaceAuthenticationClient faceAuthenticationClient =
+                new FaceAuthenticationClient(
+                        context,
+                        ((Sensor) faceProvider.mFaceSensors.mSensors.get(sensorId)).mLazySession,
+                        iBinder,
+                        j2,
+                        clientMonitorCallbackConverter,
+                        j,
+                        z2,
+                        faceAuthenticateOptions,
+                        i2,
+                        false,
+                        faceProvider.createLogger(
+                                2, i3, faceProvider.mAuthenticationStatsCollector),
+                        faceProvider.mBiometricContext,
+                        isStrongBiometric,
+                        faceProvider.mUsageStats,
+                        lockoutTracker,
+                        z3,
+                        (SensorPrivacyManager) context.getSystemService(SensorPrivacyManager.class),
+                        Utils.getCurrentStrength(sensorId),
+                        faceProvider.mAuthenticationStateListeners);
+        faceProvider.scheduleForSensor(
+                sensorId,
+                faceAuthenticationClient,
+                faceProvider.new AnonymousClass3(userId, sensorId, j2, faceAuthenticationClient));
     }
 }

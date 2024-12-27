@@ -3,6 +3,7 @@ package com.android.server.wm;
 import android.content.Context;
 import android.view.Choreographer;
 import android.view.SurfaceControl;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -27,36 +28,45 @@ public final class WindowAnimator {
     public WindowAnimator(WindowManagerService windowManagerService) {
         this.mService = windowManagerService;
         Context context = windowManagerService.mContext;
-        this.mTransaction = (SurfaceControl.Transaction) windowManagerService.mTransactionFactory.get();
-        windowManagerService.mAnimationHandler.runWithScissors(new Runnable() { // from class: com.android.server.wm.WindowAnimator$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                WindowAnimator windowAnimator = WindowAnimator.this;
-                windowAnimator.getClass();
-                windowAnimator.mChoreographer = Choreographer.getSfInstance();
-            }
-        }, 0L);
-        this.mAnimationFrameCallback = new Choreographer.FrameCallback() { // from class: com.android.server.wm.WindowAnimator$$ExternalSyntheticLambda1
-            @Override // android.view.Choreographer.FrameCallback
-            public final void doFrame(long j) {
-                WindowAnimator windowAnimator = WindowAnimator.this;
-                WindowManagerGlobalLock windowManagerGlobalLock = windowAnimator.mService.mGlobalLock;
-                WindowManagerService.boostPriorityForLockedSection();
-                synchronized (windowManagerGlobalLock) {
-                    try {
-                        windowAnimator.mAnimationFrameCallbackScheduled = false;
-                        windowAnimator.animate(j);
-                        if (windowAnimator.mNotifyWhenNoAnimation && !windowAnimator.mLastRootAnimating) {
-                            windowAnimator.mService.mGlobalLock.notifyAll();
-                        }
-                    } catch (Throwable th) {
-                        WindowManagerService.resetPriorityAfterLockedSection();
-                        throw th;
+        this.mTransaction =
+                (SurfaceControl.Transaction) windowManagerService.mTransactionFactory.get();
+        windowManagerService.mAnimationHandler.runWithScissors(
+                new Runnable() { // from class:
+                                 // com.android.server.wm.WindowAnimator$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        WindowAnimator windowAnimator = WindowAnimator.this;
+                        windowAnimator.getClass();
+                        windowAnimator.mChoreographer = Choreographer.getSfInstance();
                     }
-                }
-                WindowManagerService.resetPriorityAfterLockedSection();
-            }
-        };
+                },
+                0L);
+        this.mAnimationFrameCallback =
+                new Choreographer
+                        .FrameCallback() { // from class:
+                                           // com.android.server.wm.WindowAnimator$$ExternalSyntheticLambda1
+                    @Override // android.view.Choreographer.FrameCallback
+                    public final void doFrame(long j) {
+                        WindowAnimator windowAnimator = WindowAnimator.this;
+                        WindowManagerGlobalLock windowManagerGlobalLock =
+                                windowAnimator.mService.mGlobalLock;
+                        WindowManagerService.boostPriorityForLockedSection();
+                        synchronized (windowManagerGlobalLock) {
+                            try {
+                                windowAnimator.mAnimationFrameCallbackScheduled = false;
+                                windowAnimator.animate(j);
+                                if (windowAnimator.mNotifyWhenNoAnimation
+                                        && !windowAnimator.mLastRootAnimating) {
+                                    windowAnimator.mService.mGlobalLock.notifyAll();
+                                }
+                            } catch (Throwable th) {
+                                WindowManagerService.resetPriorityAfterLockedSection();
+                                throw th;
+                            }
+                        }
+                        WindowManagerService.resetPriorityAfterLockedSection();
+                    }
+                };
     }
 
     public final void addAfterPrepareSurfacesRunnable(Runnable runnable) {
@@ -95,6 +105,7 @@ public final class WindowAnimator {
             Method dump skipped, instructions count: 482
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowAnimator.animate(long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.wm.WindowAnimator.animate(long):void");
     }
 }

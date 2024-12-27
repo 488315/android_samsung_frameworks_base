@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextDevicePosition extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextDevicePosition> CREATOR = new Parcelable.Creator<SemContextDevicePosition>() { // from class: com.samsung.android.hardware.context.SemContextDevicePosition.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextDevicePosition createFromParcel(Parcel in) {
-            return new SemContextDevicePosition(in);
-        }
+    public static final Parcelable.Creator<SemContextDevicePosition> CREATOR =
+            new Parcelable.Creator<
+                    SemContextDevicePosition>() { // from class:
+                                                  // com.samsung.android.hardware.context.SemContextDevicePosition.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextDevicePosition createFromParcel(Parcel in) {
+                    return new SemContextDevicePosition(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextDevicePosition[] newArray(int size) {
-            return new SemContextDevicePosition[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextDevicePosition[] newArray(int size) {
+                    return new SemContextDevicePosition[size];
+                }
+            };
     public static final int MOVING = 3;
     public static final int SCREEN_DOWN = 2;
     public static final int SCREEN_PERFECT_DOWN = 6;

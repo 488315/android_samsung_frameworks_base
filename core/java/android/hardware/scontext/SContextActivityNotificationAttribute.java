@@ -2,6 +2,7 @@ package android.hardware.scontext;
 
 import android.os.Bundle;
 import android.util.Log;
+
 import java.util.ArrayList;
 
 @Deprecated
@@ -12,17 +13,18 @@ public class SContextActivityNotificationAttribute extends SContextAttribute {
     private int[] mActivityFilter;
 
     SContextActivityNotificationAttribute() {
-        this.mActivityFilter = new int[]{4};
+        this.mActivityFilter = new int[] {4};
         setAttribute();
     }
 
     public SContextActivityNotificationAttribute(int[] activityFilter) {
-        this.mActivityFilter = new int[]{4};
+        this.mActivityFilter = new int[] {4};
         this.mActivityFilter = activityFilter;
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mActivityFilter == null) {
             return false;

@@ -1,9 +1,11 @@
 package android.audio.policy.configuration.V7_0;
 
-import java.io.IOException;
-import javax.xml.datatype.DatatypeConfigurationException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+
+import javax.xml.datatype.DatatypeConfigurationException;
 
 /* loaded from: classes.dex */
 public class GlobalConfiguration {
@@ -62,7 +64,8 @@ public class GlobalConfiguration {
         this.engine_library = engine_library;
     }
 
-    static GlobalConfiguration read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static GlobalConfiguration read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         GlobalConfiguration _instance = new GlobalConfiguration();
         String _raw = _parser.getAttributeValue(null, "speaker_drc_enabled");
         if (_raw != null) {

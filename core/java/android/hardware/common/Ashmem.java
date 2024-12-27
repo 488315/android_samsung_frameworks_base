@@ -7,21 +7,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class Ashmem implements Parcelable {
-    public static final Parcelable.Creator<Ashmem> CREATOR = new Parcelable.Creator<Ashmem>() { // from class: android.hardware.common.Ashmem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Ashmem createFromParcel(Parcel _aidl_source) {
-            Ashmem _aidl_out = new Ashmem();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Ashmem> CREATOR =
+            new Parcelable.Creator<Ashmem>() { // from class: android.hardware.common.Ashmem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Ashmem createFromParcel(Parcel _aidl_source) {
+                    Ashmem _aidl_out = new Ashmem();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Ashmem[] newArray(int _aidl_size) {
-            return new Ashmem[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Ashmem[] newArray(int _aidl_size) {
+                    return new Ashmem[_aidl_size];
+                }
+            };
     public ParcelFileDescriptor fd;
     public long size = 0;
 
@@ -56,7 +57,9 @@ public class Ashmem implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.fd = (ParcelFileDescriptor) _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+            this.fd =
+                    (ParcelFileDescriptor)
+                            _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

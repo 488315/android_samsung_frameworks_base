@@ -14,6 +14,7 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -36,7 +37,8 @@ public interface IServiceManager extends IBase {
             ArrayList arrayList = new ArrayList();
             HwBlob readBuffer = hwParcel.readBuffer(16L);
             int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 64, readBuffer.handle(), 0L, true);
+            HwBlob readEmbeddedBuffer =
+                    hwParcel.readEmbeddedBuffer(int32 * 64, readBuffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 InstanceDebugInfo instanceDebugInfo = new InstanceDebugInfo();
@@ -67,11 +69,20 @@ public interface IServiceManager extends IBase {
                 return false;
             }
             InstanceDebugInfo instanceDebugInfo = (InstanceDebugInfo) obj;
-            return HidlSupport.deepEquals(this.interfaceName, instanceDebugInfo.interfaceName) && HidlSupport.deepEquals(this.instanceName, instanceDebugInfo.instanceName) && this.pid == instanceDebugInfo.pid && HidlSupport.deepEquals(this.clientPids, instanceDebugInfo.clientPids) && this.arch == instanceDebugInfo.arch;
+            return HidlSupport.deepEquals(this.interfaceName, instanceDebugInfo.interfaceName)
+                    && HidlSupport.deepEquals(this.instanceName, instanceDebugInfo.instanceName)
+                    && this.pid == instanceDebugInfo.pid
+                    && HidlSupport.deepEquals(this.clientPids, instanceDebugInfo.clientPids)
+                    && this.arch == instanceDebugInfo.arch;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.interfaceName)), Integer.valueOf(HidlSupport.deepHashCode(this.instanceName)), AudioConfig$$ExternalSyntheticOutline0.m(this.pid), Integer.valueOf(HidlSupport.deepHashCode(this.clientPids)), AudioConfig$$ExternalSyntheticOutline0.m(this.arch));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.interfaceName)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.instanceName)),
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.pid),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.clientPids)),
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.arch));
         }
 
         public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
@@ -82,7 +93,8 @@ public interface IServiceManager extends IBase {
             hwParcel.readEmbeddedBuffer(r0.getBytes().length + 1, hwBlob.handle(), j2, false);
             this.pid = hwBlob.getInt32(32 + j);
             int int32 = hwBlob.getInt32(48 + j);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j + 40, true);
+            HwBlob readEmbeddedBuffer =
+                    hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j + 40, true);
             this.clientPids.clear();
             for (int i = 0; i < int32; i++) {
                 this.clientPids.add(Integer.valueOf(readEmbeddedBuffer.getInt32(i * 4)));
@@ -95,7 +107,17 @@ public interface IServiceManager extends IBase {
         }
 
         public final String toString() {
-            return "{.interfaceName = " + this.interfaceName + ", .instanceName = " + this.instanceName + ", .pid = " + this.pid + ", .clientPids = " + this.clientPids + ", .arch = " + DebugInfo.Architecture.toString(this.arch) + "}";
+            return "{.interfaceName = "
+                    + this.interfaceName
+                    + ", .instanceName = "
+                    + this.instanceName
+                    + ", .pid = "
+                    + this.pid
+                    + ", .clientPids = "
+                    + this.clientPids
+                    + ", .arch = "
+                    + DebugInfo.Architecture.toString(this.arch)
+                    + "}";
         }
 
         public final void writeEmbeddedToBlob(HwBlob hwBlob, long j) {
@@ -140,7 +162,9 @@ public interface IServiceManager extends IBase {
         }
 
         public static final String toString(int i) {
-            return i == -1 ? "NO_PID" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i);
+            return i == -1
+                    ? "NO_PID"
+                    : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i);
         }
     }
 
@@ -177,7 +201,9 @@ public interface IServiceManager extends IBase {
 
         @Override // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public void debug(NativeHandle nativeHandle, ArrayList arrayList) throws RemoteException {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -190,7 +216,8 @@ public interface IServiceManager extends IBase {
 
         @Override // android.hidl.manager.V1_0.IServiceManager
         public ArrayList debugDump() throws RemoteException {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IServiceManager.kInterfaceName);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IServiceManager.kInterfaceName);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(7, m, hwParcel, 0);
@@ -250,7 +277,8 @@ public interface IServiceManager extends IBase {
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -313,13 +341,15 @@ public interface IServiceManager extends IBase {
         }
 
         @Override // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j) throws RemoteException {
+        public boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j)
+                throws RemoteException {
             return this.mRemote.linkToDeath(deathRecipient, j);
         }
 
         @Override // android.hidl.manager.V1_0.IServiceManager
         public ArrayList list() throws RemoteException {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IServiceManager.kInterfaceName);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IServiceManager.kInterfaceName);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(4, m, hwParcel, 0);
@@ -373,12 +403,15 @@ public interface IServiceManager extends IBase {
         }
 
         @Override // android.hidl.manager.V1_0.IServiceManager
-        public boolean registerForNotifications(String str, String str2, IServiceNotification iServiceNotification) throws RemoteException {
+        public boolean registerForNotifications(
+                String str, String str2, IServiceNotification iServiceNotification)
+                throws RemoteException {
             HwParcel hwParcel = new HwParcel();
             hwParcel.writeInterfaceToken(IServiceManager.kInterfaceName);
             hwParcel.writeString(str);
             hwParcel.writeString(str2);
-            hwParcel.writeStrongBinder(iServiceNotification == null ? null : iServiceNotification.asBinder());
+            hwParcel.writeStrongBinder(
+                    iServiceNotification == null ? null : iServiceNotification.asBinder());
             HwParcel hwParcel2 = new HwParcel();
             try {
                 this.mRemote.transact(6, hwParcel, hwParcel2, 0);
@@ -427,7 +460,8 @@ public interface IServiceManager extends IBase {
         }
 
         @Override // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
-        public boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient) throws RemoteException {
+        public boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient)
+                throws RemoteException {
             return this.mRemote.unlinkToDeath(deathRecipient);
         }
     }
@@ -440,8 +474,7 @@ public interface IServiceManager extends IBase {
         }
 
         @Override // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
-        public void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-        }
+        public void debug(NativeHandle nativeHandle, ArrayList arrayList) {}
 
         @Override // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
@@ -454,12 +487,53 @@ public interface IServiceManager extends IBase {
 
         @Override // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public final ArrayList getHashChain() {
-            return new ArrayList(Arrays.asList(new byte[]{-123, 57, 79, -118, 13, 21, -25, -5, 46, -28, 92, 82, -47, -5, -117, -113, -45, -63, 60, 51, 62, 99, -57, -116, 74, -95, -1, -122, -124, 12, -10, -36}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, -48, 45, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, 36, -13, -51, 105, 87, 19, -109, 36, -72, 59, 24, -54, 76}));
+            return new ArrayList(
+                    Arrays.asList(
+                            new byte[] {
+                                -123, 57, 79, -118, 13, 21, -25, -5, 46, -28, 92, 82, -47, -5, -117,
+                                -113, -45, -63, 60, 51, 62, 99, -57, -116, 74, -95, -1, -122, -124,
+                                12, -10, -36
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                -48,
+                                45,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                36,
+                                -13,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                36,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
         @Override // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
         public final ArrayList interfaceChain() {
-            return new ArrayList(Arrays.asList(IServiceManager.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList(
+                    Arrays.asList(IServiceManager.kInterfaceName, IBase.kInterfaceName));
         }
 
         @Override // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
@@ -477,7 +551,8 @@ public interface IServiceManager extends IBase {
             HwBinder.enableInstrumentation();
         }
 
-        public void onTransact(int i, HwParcel hwParcel, HwParcel hwParcel2, int i2) throws RemoteException {
+        public void onTransact(int i, HwParcel hwParcel, HwParcel hwParcel2, int i2)
+                throws RemoteException {
             switch (i) {
                 case 1:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
@@ -488,7 +563,10 @@ public interface IServiceManager extends IBase {
                     return;
                 case 2:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    boolean add = add(hwParcel.readString(), IBase.asInterface(hwParcel.readStrongBinder()));
+                    boolean add =
+                            add(
+                                    hwParcel.readString(),
+                                    IBase.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeBool(add);
                     hwParcel2.send();
@@ -516,7 +594,11 @@ public interface IServiceManager extends IBase {
                     return;
                 case 6:
                     hwParcel.enforceInterface(IServiceManager.kInterfaceName);
-                    boolean registerForNotifications = registerForNotifications(hwParcel.readString(), hwParcel.readString(), IServiceNotification.asInterface(hwParcel.readStrongBinder()));
+                    boolean registerForNotifications =
+                            registerForNotifications(
+                                    hwParcel.readString(),
+                                    hwParcel.readString(),
+                                    IServiceNotification.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
                     hwParcel2.writeBool(registerForNotifications);
                     hwParcel2.send();
@@ -569,7 +651,8 @@ public interface IServiceManager extends IBase {
                                 long j = i3 * 32;
                                 byte[] bArr = (byte[]) hashChain.get(i3);
                                 if (bArr == null || bArr.length != 32) {
-                                    throw new IllegalArgumentException("Array element is not of the expected length");
+                                    throw new IllegalArgumentException(
+                                            "Array element is not of the expected length");
                                 }
                                 hwBlob2.putInt8Array(j, bArr);
                             }
@@ -605,8 +688,7 @@ public interface IServiceManager extends IBase {
         }
 
         @Override // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        public final void ping() {}
 
         public IHwInterface queryLocalInterface(String str) {
             if (IServiceManager.kInterfaceName.equals(str)) {
@@ -620,8 +702,7 @@ public interface IServiceManager extends IBase {
         }
 
         @Override // android.hidl.manager.V1_0.IServiceManager, android.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        public final void setHALInstrumentation() {}
 
         public String toString() {
             return interfaceDescriptor() + "@Stub";
@@ -757,7 +838,9 @@ public interface IServiceManager extends IBase {
     @Override // android.hidl.base.V1_0.IBase
     void ping() throws RemoteException;
 
-    boolean registerForNotifications(String str, String str2, IServiceNotification iServiceNotification) throws RemoteException;
+    boolean registerForNotifications(
+            String str, String str2, IServiceNotification iServiceNotification)
+            throws RemoteException;
 
     void registerPassthroughClient(String str, String str2) throws RemoteException;
 

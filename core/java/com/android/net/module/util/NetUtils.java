@@ -1,6 +1,7 @@
 package com.android.net.module.util;
 
 import android.net.RouteInfo;
+
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -10,7 +11,8 @@ import java.util.Collection;
 /* loaded from: classes5.dex */
 public final class NetUtils {
     public static boolean addressTypeMatches(InetAddress left, InetAddress right) {
-        return ((left instanceof Inet4Address) && (right instanceof Inet4Address)) || ((left instanceof Inet6Address) && (right instanceof Inet6Address));
+        return ((left instanceof Inet4Address) && (right instanceof Inet4Address))
+                || ((left instanceof Inet6Address) && (right instanceof Inet6Address));
     }
 
     public static RouteInfo selectBestRoute(Collection<RouteInfo> routes, InetAddress dest) {
@@ -19,7 +21,10 @@ public final class NetUtils {
         }
         RouteInfo bestRoute = null;
         for (RouteInfo route : routes) {
-            if (addressTypeMatches(route.getDestination().getAddress(), dest) && (bestRoute == null || bestRoute.getDestination().getPrefixLength() < route.getDestination().getPrefixLength())) {
+            if (addressTypeMatches(route.getDestination().getAddress(), dest)
+                    && (bestRoute == null
+                            || bestRoute.getDestination().getPrefixLength()
+                                    < route.getDestination().getPrefixLength())) {
                 if (route.matches(dest)) {
                     bestRoute = route;
                 }
@@ -44,7 +49,11 @@ public final class NetUtils {
 
     public static void maskRawAddress(byte[] array, int prefixLength) {
         if (prefixLength < 0 || prefixLength > array.length * 8) {
-            throw new RuntimeException("IP address with " + array.length + " bytes has invalid prefix length " + prefixLength);
+            throw new RuntimeException(
+                    "IP address with "
+                            + array.length
+                            + " bytes has invalid prefix length "
+                            + prefixLength);
         }
         int offset = prefixLength / 8;
         int remainder = prefixLength % 8;

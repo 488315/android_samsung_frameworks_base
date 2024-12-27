@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.util;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1ApplicationSpecific;
 import com.android.internal.org.bouncycastle.asn1.ASN1Boolean;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
@@ -37,6 +38,7 @@ import com.android.internal.org.bouncycastle.asn1.DERVisibleString;
 import com.android.internal.org.bouncycastle.asn1.DLApplicationSpecific;
 import com.android.internal.org.bouncycastle.util.Strings;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -120,7 +122,8 @@ public class ASN1Dump {
         if (obj instanceof ASN1OctetString) {
             ASN1OctetString oct = (ASN1OctetString) obj;
             if (obj instanceof BEROctetString) {
-                buf.append(indent + "BER Constructed Octet String[" + oct.getOctets().length + "] ");
+                buf.append(
+                        indent + "BER Constructed Octet String[" + oct.getOctets().length + "] ");
             } else {
                 buf.append(indent + "DER Octet String[" + oct.getOctets().length + "] ");
             }
@@ -133,20 +136,41 @@ public class ASN1Dump {
             }
         }
         if (obj instanceof ASN1ObjectIdentifier) {
-            buf.append(indent + "ObjectIdentifier(" + ((ASN1ObjectIdentifier) obj).getId() + NavigationBarInflaterView.KEY_CODE_END + nl);
+            buf.append(
+                    indent
+                            + "ObjectIdentifier("
+                            + ((ASN1ObjectIdentifier) obj).getId()
+                            + NavigationBarInflaterView.KEY_CODE_END
+                            + nl);
             return;
         }
         if (obj instanceof ASN1Boolean) {
-            buf.append(indent + "Boolean(" + ((ASN1Boolean) obj).isTrue() + NavigationBarInflaterView.KEY_CODE_END + nl);
+            buf.append(
+                    indent
+                            + "Boolean("
+                            + ((ASN1Boolean) obj).isTrue()
+                            + NavigationBarInflaterView.KEY_CODE_END
+                            + nl);
             return;
         }
         if (obj instanceof ASN1Integer) {
-            buf.append(indent + "Integer(" + ((ASN1Integer) obj).getValue() + NavigationBarInflaterView.KEY_CODE_END + nl);
+            buf.append(
+                    indent
+                            + "Integer("
+                            + ((ASN1Integer) obj).getValue()
+                            + NavigationBarInflaterView.KEY_CODE_END
+                            + nl);
             return;
         }
         if (obj instanceof DERBitString) {
             DERBitString bt = (DERBitString) obj;
-            buf.append(indent + "DER Bit String[" + bt.getBytes().length + ", " + bt.getPadBits() + "] ");
+            buf.append(
+                    indent
+                            + "DER Bit String["
+                            + bt.getBytes().length
+                            + ", "
+                            + bt.getPadBits()
+                            + "] ");
             if (verbose) {
                 buf.append(dumpBinaryDataAsString(indent, bt.getBytes()));
                 return;
@@ -164,11 +188,17 @@ public class ASN1Dump {
             return;
         }
         if (obj instanceof DERPrintableString) {
-            buf.append(indent + "PrintableString(" + ((DERPrintableString) obj).getString() + ") " + nl);
+            buf.append(
+                    indent
+                            + "PrintableString("
+                            + ((DERPrintableString) obj).getString()
+                            + ") "
+                            + nl);
             return;
         }
         if (obj instanceof DERVisibleString) {
-            buf.append(indent + "VisibleString(" + ((DERVisibleString) obj).getString() + ") " + nl);
+            buf.append(
+                    indent + "VisibleString(" + ((DERVisibleString) obj).getString() + ") " + nl);
             return;
         }
         if (obj instanceof DERBMPString) {
@@ -180,11 +210,13 @@ public class ASN1Dump {
             return;
         }
         if (obj instanceof DERGraphicString) {
-            buf.append(indent + "GraphicString(" + ((DERGraphicString) obj).getString() + ") " + nl);
+            buf.append(
+                    indent + "GraphicString(" + ((DERGraphicString) obj).getString() + ") " + nl);
             return;
         }
         if (obj instanceof DERVideotexString) {
-            buf.append(indent + "VideotexString(" + ((DERVideotexString) obj).getString() + ") " + nl);
+            buf.append(
+                    indent + "VideotexString(" + ((DERVideotexString) obj).getString() + ") " + nl);
             return;
         }
         if (obj instanceof ASN1UTCTime) {
@@ -192,7 +224,12 @@ public class ASN1Dump {
             return;
         }
         if (obj instanceof ASN1GeneralizedTime) {
-            buf.append(indent + "GeneralizedTime(" + ((ASN1GeneralizedTime) obj).getTime() + ") " + nl);
+            buf.append(
+                    indent
+                            + "GeneralizedTime("
+                            + ((ASN1GeneralizedTime) obj).getTime()
+                            + ") "
+                            + nl);
             return;
         }
         if (obj instanceof BERApplicationSpecific) {
@@ -209,7 +246,12 @@ public class ASN1Dump {
         }
         if (obj instanceof ASN1Enumerated) {
             ASN1Enumerated en = (ASN1Enumerated) obj;
-            buf.append(indent + "DER Enumerated(" + en.getValue() + NavigationBarInflaterView.KEY_CODE_END + nl);
+            buf.append(
+                    indent
+                            + "DER Enumerated("
+                            + en.getValue()
+                            + NavigationBarInflaterView.KEY_CODE_END
+                            + nl);
             return;
         }
         if (obj instanceof ASN1External) {
@@ -220,7 +262,8 @@ public class ASN1Dump {
                 buf.append(tab4 + "Direct Reference: " + ext.getDirectReference().getId() + nl);
             }
             if (ext.getIndirectReference() != null) {
-                buf.append(tab4 + "Indirect Reference: " + ext.getIndirectReference().toString() + nl);
+                buf.append(
+                        tab4 + "Indirect Reference: " + ext.getIndirectReference().toString() + nl);
             }
             if (ext.getDataValueDescriptor() != null) {
                 _dumpAsString(tab4, verbose, ext.getDataValueDescriptor(), buf);
@@ -232,13 +275,20 @@ public class ASN1Dump {
         buf.append(indent + obj.toString() + nl);
     }
 
-    private static String outputApplicationSpecific(String type, String indent, boolean verbose, ASN1Primitive obj, String nl) {
+    private static String outputApplicationSpecific(
+            String type, String indent, boolean verbose, ASN1Primitive obj, String nl) {
         ASN1ApplicationSpecific app = ASN1ApplicationSpecific.getInstance(obj);
         StringBuffer buf = new StringBuffer();
         if (app.isConstructed()) {
             try {
                 ASN1Sequence s = ASN1Sequence.getInstance(app.getObject(16));
-                buf.append(indent + type + " ApplicationSpecific[" + app.getApplicationTag() + NavigationBarInflaterView.SIZE_MOD_END + nl);
+                buf.append(
+                        indent
+                                + type
+                                + " ApplicationSpecific["
+                                + app.getApplicationTag()
+                                + NavigationBarInflaterView.SIZE_MOD_END
+                                + nl);
                 Enumeration e = s.getObjects();
                 while (e.hasMoreElements()) {
                     _dumpAsString(indent + TAB, verbose, (ASN1Primitive) e.nextElement(), buf);
@@ -248,7 +298,14 @@ public class ASN1Dump {
             }
             return buf.toString();
         }
-        return indent + type + " ApplicationSpecific[" + app.getApplicationTag() + "] (" + Strings.fromByteArray(Hex.encode(app.getContents())) + NavigationBarInflaterView.KEY_CODE_END + nl;
+        return indent
+                + type
+                + " ApplicationSpecific["
+                + app.getApplicationTag()
+                + "] ("
+                + Strings.fromByteArray(Hex.encode(app.getContents()))
+                + NavigationBarInflaterView.KEY_CODE_END
+                + nl;
     }
 
     public static String dumpAsString(Object obj) {

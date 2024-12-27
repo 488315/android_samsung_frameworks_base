@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class PresServiceInfo implements Parcelable {
-    public static final Parcelable.Creator<PresServiceInfo> CREATOR = new Parcelable.Creator<PresServiceInfo>() { // from class: com.android.ims.internal.uce.presence.PresServiceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresServiceInfo createFromParcel(Parcel source) {
-            return new PresServiceInfo(source);
-        }
+    public static final Parcelable.Creator<PresServiceInfo> CREATOR =
+            new Parcelable.Creator<
+                    PresServiceInfo>() { // from class:
+                                         // com.android.ims.internal.uce.presence.PresServiceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresServiceInfo createFromParcel(Parcel source) {
+                    return new PresServiceInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresServiceInfo[] newArray(int size) {
-            return new PresServiceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresServiceInfo[] newArray(int size) {
+                    return new PresServiceInfo[size];
+                }
+            };
     public static final int UCE_PRES_MEDIA_CAP_FULL_AUDIO_AND_VIDEO = 2;
     public static final int UCE_PRES_MEDIA_CAP_FULL_AUDIO_ONLY = 1;
     public static final int UCE_PRES_MEDIA_CAP_NONE = 0;

@@ -1,6 +1,7 @@
 package android.util;
 
 import android.app.backup.FullBackup;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -57,13 +58,16 @@ public class TypedValue {
     public int sourceResourceId;
     public CharSequence string;
     public int type;
-    private static final float[] RADIX_MULTS = {0.00390625f, 3.0517578E-5f, 1.1920929E-7f, 4.656613E-10f};
-    private static final String[] DIMENSION_UNIT_STRS = {"px", "dip", FullBackup.SHAREDPREFS_TREE_TOKEN, "pt", "in", "mm"};
+    private static final float[] RADIX_MULTS = {
+        0.00390625f, 3.0517578E-5f, 1.1920929E-7f, 4.656613E-10f
+    };
+    private static final String[] DIMENSION_UNIT_STRS = {
+        "px", "dip", FullBackup.SHAREDPREFS_TREE_TOKEN, "pt", "in", "mm"
+    };
     private static final String[] FRACTION_UNIT_STRS = {"%", "%p"};
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ComplexDimensionUnit {
-    }
+    public @interface ComplexDimensionUnit {}
 
     public final float getFloat() {
         return Float.intBitsToFloat(this.data);
@@ -119,7 +123,8 @@ public class TypedValue {
                 return metrics.density * value;
             case 2:
                 if (metrics.fontScaleConverter != null) {
-                    return applyDimension(1, metrics.fontScaleConverter.convertSpToDp(value), metrics);
+                    return applyDimension(
+                            1, metrics.fontScaleConverter.convertSpToDp(value), metrics);
                 }
                 return metrics.scaledDensity * value;
             case 3:
@@ -133,7 +138,8 @@ public class TypedValue {
         }
     }
 
-    public static float deriveDimension(int unitToConvertTo, float pixelValue, DisplayMetrics metrics) {
+    public static float deriveDimension(
+            int unitToConvertTo, float pixelValue, DisplayMetrics metrics) {
         switch (unitToConvertTo) {
             case 0:
                 return pixelValue;
@@ -171,11 +177,13 @@ public class TypedValue {
         }
     }
 
-    public static float convertPixelsToDimension(int unitToConvertTo, float pixelValue, DisplayMetrics metrics) {
+    public static float convertPixelsToDimension(
+            int unitToConvertTo, float pixelValue, DisplayMetrics metrics) {
         return deriveDimension(unitToConvertTo, pixelValue, metrics);
     }
 
-    public static float convertDimensionToPixels(int unitToConvertFrom, float value, DisplayMetrics metrics) {
+    public static float convertDimensionToPixels(
+            int unitToConvertFrom, float value, DisplayMetrics metrics) {
         return applyDimension(unitToConvertFrom, value, metrics);
     }
 
@@ -274,7 +282,8 @@ public class TypedValue {
             case 5:
                 return Float.toString(complexToFloat(data)) + DIMENSION_UNIT_STRS[(data >> 0) & 15];
             case 6:
-                return Float.toString(complexToFloat(data) * 100.0f) + FRACTION_UNIT_STRS[(data >> 0) & 15];
+                return Float.toString(complexToFloat(data) * 100.0f)
+                        + FRACTION_UNIT_STRS[(data >> 0) & 15];
             case 17:
                 return "0x" + Integer.toHexString(data);
             case 18:

@@ -3,6 +3,7 @@ package android.hardware.broadcastradio;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -30,7 +31,8 @@ public final class ProgramSelector implements Parcelable {
                     Parcelable.Creator creator = ProgramIdentifier.CREATOR;
                     programSelector.primaryId = (ProgramIdentifier) parcel.readTypedObject(creator);
                     if (parcel.dataPosition() - dataPosition < readInt) {
-                        programSelector.secondaryIds = (ProgramIdentifier[]) parcel.createTypedArray(creator);
+                        programSelector.secondaryIds =
+                                (ProgramIdentifier[]) parcel.createTypedArray(creator);
                         if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
@@ -87,7 +89,8 @@ public final class ProgramSelector implements Parcelable {
             return false;
         }
         ProgramSelector programSelector = (ProgramSelector) obj;
-        return Objects.deepEquals(this.primaryId, programSelector.primaryId) && Objects.deepEquals(this.secondaryIds, programSelector.secondaryIds);
+        return Objects.deepEquals(this.primaryId, programSelector.primaryId)
+                && Objects.deepEquals(this.secondaryIds, programSelector.secondaryIds);
     }
 
     public final int getStability() {
@@ -101,7 +104,13 @@ public final class ProgramSelector implements Parcelable {
     public final String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         stringJoiner.add("primaryId: " + Objects.toString(this.primaryId));
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.secondaryIds), "ProgramSelector", new StringBuilder("secondaryIds: "), stringJoiner));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                        Arrays.toString(this.secondaryIds),
+                        "ProgramSelector",
+                        new StringBuilder("secondaryIds: "),
+                        stringJoiner));
     }
 
     @Override // android.os.Parcelable

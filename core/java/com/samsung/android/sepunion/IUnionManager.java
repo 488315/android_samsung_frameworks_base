@@ -22,8 +22,7 @@ public interface IUnionManager extends IInterface {
         }
 
         @Override // com.samsung.android.sepunion.IUnionManager
-        public void setDumpEnabled(String label, String path) throws RemoteException {
-        }
+        public void setDumpEnabled(String label, String path) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -31,7 +30,7 @@ public interface IUnionManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUnionManager {
+    public abstract static class Stub extends Binder implements IUnionManager {
         static final int TRANSACTION_getSemSystemService = 1;
         static final int TRANSACTION_setDumpEnabled = 2;
 
@@ -72,7 +71,8 @@ public interface IUnionManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUnionManager.DESCRIPTOR);
             }

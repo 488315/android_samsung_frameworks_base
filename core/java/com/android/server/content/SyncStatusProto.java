@@ -25,8 +25,7 @@ public final class SyncStatusProto {
         public static final long TOTAL_STATS = 1146756268046L;
         public static final long YESTERDAY_STATS = 1146756268048L;
 
-        public StatusInfo() {
-        }
+        public StatusInfo() {}
 
         public final class Stats {
             public static final long NUM_CANCELS = 1120986464260L;
@@ -40,16 +39,14 @@ public final class SyncStatusProto {
             public static final long NUM_SYNCS = 1120986464258L;
             public static final long TOTAL_ELAPSED_TIME = 1112396529665L;
 
-            public Stats() {
-            }
+            public Stats() {}
         }
 
         public final class LastEventInfo {
             public static final long LAST_EVENT = 1138166333442L;
             public static final long LAST_EVENT_TIME = 1112396529665L;
 
-            public LastEventInfo() {
-            }
+            public LastEventInfo() {}
         }
     }
 }

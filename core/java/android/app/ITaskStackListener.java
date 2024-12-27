@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.os.Binder;
 import android.os.IBinder;
@@ -22,21 +21,26 @@ public interface ITaskStackListener extends IInterface {
 
     void onActivityForcedResizable(String str, int i, int i2) throws RemoteException;
 
-    void onActivityLaunchOnSecondaryDisplayFailed(ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws RemoteException;
+    void onActivityLaunchOnSecondaryDisplayFailed(
+            ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws RemoteException;
 
-    void onActivityLaunchOnSecondaryDisplayRerouted(ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws RemoteException;
+    void onActivityLaunchOnSecondaryDisplayRerouted(
+            ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws RemoteException;
 
     void onActivityPinned(String str, int i, int i2, int i3) throws RemoteException;
 
     void onActivityRequestedOrientationChanged(int i, int i2) throws RemoteException;
 
-    void onActivityRestartAttempt(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, boolean z2, boolean z3) throws RemoteException;
+    void onActivityRestartAttempt(
+            ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, boolean z2, boolean z3)
+            throws RemoteException;
 
     void onActivityRotation(int i) throws RemoteException;
 
     void onActivityUnpinned() throws RemoteException;
 
-    void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException;
+    void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo runningTaskInfo)
+            throws RemoteException;
 
     void onLockTaskModeChanged(int i) throws RemoteException;
 
@@ -46,7 +50,8 @@ public interface ITaskStackListener extends IInterface {
 
     void onTaskCreated(int i, ComponentName componentName) throws RemoteException;
 
-    void onTaskDescriptionChanged(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException;
+    void onTaskDescriptionChanged(ActivityManager.RunningTaskInfo runningTaskInfo)
+            throws RemoteException;
 
     void onTaskDisplayChanged(int i, int i2) throws RemoteException;
 
@@ -56,9 +61,11 @@ public interface ITaskStackListener extends IInterface {
 
     void onTaskMovedToFront(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException;
 
-    void onTaskProfileLocked(ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws RemoteException;
+    void onTaskProfileLocked(ActivityManager.RunningTaskInfo runningTaskInfo, int i)
+            throws RemoteException;
 
-    void onTaskRemovalStarted(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException;
+    void onTaskRemovalStarted(ActivityManager.RunningTaskInfo runningTaskInfo)
+            throws RemoteException;
 
     void onTaskRemoved(int i) throws RemoteException;
 
@@ -72,124 +79,117 @@ public interface ITaskStackListener extends IInterface {
 
     void onTaskWindowingModeChanged(int i) throws RemoteException;
 
-    void onTaskbarIconVisibleChangeRequest(ComponentName componentName, boolean z) throws RemoteException;
+    void onTaskbarIconVisibleChangeRequest(ComponentName componentName, boolean z)
+            throws RemoteException;
 
     public static class Default implements ITaskStackListener {
         @Override // android.app.ITaskStackListener
-        public void onTaskStackChanged() throws RemoteException {
-        }
+        public void onTaskStackChanged() throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onActivityPinned(String packageName, int userId, int taskId, int stackId) throws RemoteException {
-        }
+        public void onActivityPinned(String packageName, int userId, int taskId, int stackId)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onActivityUnpinned() throws RemoteException {
-        }
+        public void onActivityUnpinned() throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onActivityRestartAttempt(ActivityManager.RunningTaskInfo task, boolean homeTaskVisible, boolean clearedTask, boolean wasVisible) throws RemoteException {
-        }
+        public void onActivityRestartAttempt(
+                ActivityManager.RunningTaskInfo task,
+                boolean homeTaskVisible,
+                boolean clearedTask,
+                boolean wasVisible)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onActivityForcedResizable(String packageName, int taskId, int reason) throws RemoteException {
-        }
+        public void onActivityForcedResizable(String packageName, int taskId, int reason)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onActivityDismissingDockedTask() throws RemoteException {
-        }
+        public void onActivityDismissingDockedTask() throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onActivityLaunchOnSecondaryDisplayFailed(ActivityManager.RunningTaskInfo taskInfo, int requestedDisplayId) throws RemoteException {
-        }
+        public void onActivityLaunchOnSecondaryDisplayFailed(
+                ActivityManager.RunningTaskInfo taskInfo, int requestedDisplayId)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onActivityLaunchOnSecondaryDisplayRerouted(ActivityManager.RunningTaskInfo taskInfo, int requestedDisplayId) throws RemoteException {
-        }
+        public void onActivityLaunchOnSecondaryDisplayRerouted(
+                ActivityManager.RunningTaskInfo taskInfo, int requestedDisplayId)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskCreated(int taskId, ComponentName componentName) throws RemoteException {
-        }
+        public void onTaskCreated(int taskId, ComponentName componentName) throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskRemoved(int taskId) throws RemoteException {
-        }
+        public void onTaskRemoved(int taskId) throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskMovedToFront(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
-        }
+        public void onTaskMovedToFront(ActivityManager.RunningTaskInfo taskInfo)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskDescriptionChanged(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
-        }
+        public void onTaskDescriptionChanged(ActivityManager.RunningTaskInfo taskInfo)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onActivityRequestedOrientationChanged(int taskId, int requestedOrientation) throws RemoteException {
-        }
+        public void onActivityRequestedOrientationChanged(int taskId, int requestedOrientation)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskRemovalStarted(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
-        }
+        public void onTaskRemovalStarted(ActivityManager.RunningTaskInfo taskInfo)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskProfileLocked(ActivityManager.RunningTaskInfo taskInfo, int userId) throws RemoteException {
-        }
+        public void onTaskProfileLocked(ActivityManager.RunningTaskInfo taskInfo, int userId)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskSnapshotChanged(int taskId, TaskSnapshot snapshot) throws RemoteException {
-        }
+        public void onTaskSnapshotChanged(int taskId, TaskSnapshot snapshot)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskSnapshotInvalidated(int taskId) throws RemoteException {
-        }
+        public void onTaskSnapshotInvalidated(int taskId) throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
-        }
+        public void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo taskInfo)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskDisplayChanged(int taskId, int newDisplayId) throws RemoteException {
-        }
+        public void onTaskDisplayChanged(int taskId, int newDisplayId) throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onRecentTaskListUpdated() throws RemoteException {
-        }
+        public void onRecentTaskListUpdated() throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onRecentTaskListFrozenChanged(boolean frozen) throws RemoteException {
-        }
+        public void onRecentTaskListFrozenChanged(boolean frozen) throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskFocusChanged(int taskId, boolean focused) throws RemoteException {
-        }
+        public void onTaskFocusChanged(int taskId, boolean focused) throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskRequestedOrientationChanged(int taskId, int requestedOrientation) throws RemoteException {
-        }
+        public void onTaskRequestedOrientationChanged(int taskId, int requestedOrientation)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onActivityRotation(int displayId) throws RemoteException {
-        }
+        public void onActivityRotation(int displayId) throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskMovedToBack(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
-        }
+        public void onTaskMovedToBack(ActivityManager.RunningTaskInfo taskInfo)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onLockTaskModeChanged(int mode) throws RemoteException {
-        }
+        public void onLockTaskModeChanged(int mode) throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskbarIconVisibleChangeRequest(ComponentName cn, boolean visible) throws RemoteException {
-        }
+        public void onTaskbarIconVisibleChangeRequest(ComponentName cn, boolean visible)
+                throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onTaskWindowingModeChanged(int taskId) throws RemoteException {
-        }
+        public void onTaskWindowingModeChanged(int taskId) throws RemoteException {}
 
         @Override // android.app.ITaskStackListener
-        public void onActivityDismissingSplitTask(String packageName) throws RemoteException {
-        }
+        public void onActivityDismissingSplitTask(String packageName) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -197,7 +197,7 @@ public interface ITaskStackListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITaskStackListener {
+    public abstract static class Stub extends Binder implements ITaskStackListener {
         public static final String DESCRIPTOR = "android.app.ITaskStackListener";
         static final int TRANSACTION_onActivityDismissingDockedTask = 6;
         static final int TRANSACTION_onActivityDismissingSplitTask = 29;
@@ -320,7 +320,8 @@ public interface ITaskStackListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -344,7 +345,9 @@ public interface ITaskStackListener extends IInterface {
                     onActivityUnpinned();
                     return true;
                 case 4:
-                    ActivityManager.RunningTaskInfo _arg02 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg02 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     boolean _arg12 = data.readBoolean();
                     boolean _arg22 = data.readBoolean();
                     boolean _arg32 = data.readBoolean();
@@ -362,20 +365,25 @@ public interface ITaskStackListener extends IInterface {
                     onActivityDismissingDockedTask();
                     return true;
                 case 7:
-                    ActivityManager.RunningTaskInfo _arg04 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg04 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     int _arg14 = data.readInt();
                     data.enforceNoDataAvail();
                     onActivityLaunchOnSecondaryDisplayFailed(_arg04, _arg14);
                     return true;
                 case 8:
-                    ActivityManager.RunningTaskInfo _arg05 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg05 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     int _arg15 = data.readInt();
                     data.enforceNoDataAvail();
                     onActivityLaunchOnSecondaryDisplayRerouted(_arg05, _arg15);
                     return true;
                 case 9:
                     int _arg06 = data.readInt();
-                    ComponentName _arg16 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg16 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     onTaskCreated(_arg06, _arg16);
                     return true;
@@ -385,12 +393,16 @@ public interface ITaskStackListener extends IInterface {
                     onTaskRemoved(_arg07);
                     return true;
                 case 11:
-                    ActivityManager.RunningTaskInfo _arg08 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg08 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onTaskMovedToFront(_arg08);
                     return true;
                 case 12:
-                    ActivityManager.RunningTaskInfo _arg09 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg09 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onTaskDescriptionChanged(_arg09);
                     return true;
@@ -401,12 +413,16 @@ public interface ITaskStackListener extends IInterface {
                     onActivityRequestedOrientationChanged(_arg010, _arg17);
                     return true;
                 case 14:
-                    ActivityManager.RunningTaskInfo _arg011 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg011 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onTaskRemovalStarted(_arg011);
                     return true;
                 case 15:
-                    ActivityManager.RunningTaskInfo _arg012 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg012 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     int _arg18 = data.readInt();
                     data.enforceNoDataAvail();
                     onTaskProfileLocked(_arg012, _arg18);
@@ -423,7 +439,9 @@ public interface ITaskStackListener extends IInterface {
                     onTaskSnapshotInvalidated(_arg014);
                     return true;
                 case 18:
-                    ActivityManager.RunningTaskInfo _arg015 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg015 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onBackPressedOnTaskRoot(_arg015);
                     return true;
@@ -459,7 +477,9 @@ public interface ITaskStackListener extends IInterface {
                     onActivityRotation(_arg020);
                     return true;
                 case 25:
-                    ActivityManager.RunningTaskInfo _arg021 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg021 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onTaskMovedToBack(_arg021);
                     return true;
@@ -469,7 +489,8 @@ public interface ITaskStackListener extends IInterface {
                     onLockTaskModeChanged(_arg022);
                     return true;
                 case 27:
-                    ComponentName _arg023 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg023 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg113 = data.readBoolean();
                     data.enforceNoDataAvail();
                     onTaskbarIconVisibleChangeRequest(_arg023, _arg113);
@@ -517,7 +538,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onActivityPinned(String packageName, int userId, int taskId, int stackId) throws RemoteException {
+            public void onActivityPinned(String packageName, int userId, int taskId, int stackId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -543,7 +565,12 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onActivityRestartAttempt(ActivityManager.RunningTaskInfo task, boolean homeTaskVisible, boolean clearedTask, boolean wasVisible) throws RemoteException {
+            public void onActivityRestartAttempt(
+                    ActivityManager.RunningTaskInfo task,
+                    boolean homeTaskVisible,
+                    boolean clearedTask,
+                    boolean wasVisible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -558,7 +585,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onActivityForcedResizable(String packageName, int taskId, int reason) throws RemoteException {
+            public void onActivityForcedResizable(String packageName, int taskId, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -583,7 +611,9 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onActivityLaunchOnSecondaryDisplayFailed(ActivityManager.RunningTaskInfo taskInfo, int requestedDisplayId) throws RemoteException {
+            public void onActivityLaunchOnSecondaryDisplayFailed(
+                    ActivityManager.RunningTaskInfo taskInfo, int requestedDisplayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -596,7 +626,9 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onActivityLaunchOnSecondaryDisplayRerouted(ActivityManager.RunningTaskInfo taskInfo, int requestedDisplayId) throws RemoteException {
+            public void onActivityLaunchOnSecondaryDisplayRerouted(
+                    ActivityManager.RunningTaskInfo taskInfo, int requestedDisplayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -609,7 +641,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onTaskCreated(int taskId, ComponentName componentName) throws RemoteException {
+            public void onTaskCreated(int taskId, ComponentName componentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -634,7 +667,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onTaskMovedToFront(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
+            public void onTaskMovedToFront(ActivityManager.RunningTaskInfo taskInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -646,7 +680,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onTaskDescriptionChanged(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
+            public void onTaskDescriptionChanged(ActivityManager.RunningTaskInfo taskInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -658,7 +693,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onActivityRequestedOrientationChanged(int taskId, int requestedOrientation) throws RemoteException {
+            public void onActivityRequestedOrientationChanged(int taskId, int requestedOrientation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -671,7 +707,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onTaskRemovalStarted(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
+            public void onTaskRemovalStarted(ActivityManager.RunningTaskInfo taskInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -683,7 +720,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onTaskProfileLocked(ActivityManager.RunningTaskInfo taskInfo, int userId) throws RemoteException {
+            public void onTaskProfileLocked(ActivityManager.RunningTaskInfo taskInfo, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -696,7 +734,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onTaskSnapshotChanged(int taskId, TaskSnapshot snapshot) throws RemoteException {
+            public void onTaskSnapshotChanged(int taskId, TaskSnapshot snapshot)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -721,7 +760,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
+            public void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo taskInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -782,7 +822,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onTaskRequestedOrientationChanged(int taskId, int requestedOrientation) throws RemoteException {
+            public void onTaskRequestedOrientationChanged(int taskId, int requestedOrientation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -807,7 +848,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onTaskMovedToBack(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
+            public void onTaskMovedToBack(ActivityManager.RunningTaskInfo taskInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -831,7 +873,8 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onTaskbarIconVisibleChangeRequest(ComponentName cn, boolean visible) throws RemoteException {
+            public void onTaskbarIconVisibleChangeRequest(ComponentName cn, boolean visible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

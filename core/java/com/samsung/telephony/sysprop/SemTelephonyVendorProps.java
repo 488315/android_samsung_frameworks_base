@@ -1,6 +1,7 @@
 package com.samsung.telephony.sysprop;
 
 import android.os.SystemProperties;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,8 +12,7 @@ import java.util.function.Function;
 
 /* loaded from: classes6.dex */
 public final class SemTelephonyVendorProps {
-    private SemTelephonyVendorProps() {
-    }
+    private SemTelephonyVendorProps() {}
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Boolean tryParseBoolean(String str) {
@@ -185,7 +185,8 @@ public final class SemTelephonyVendorProps {
         return joiner.toString();
     }
 
-    private static <T extends Enum<T>> String formatEnumList(List<T> list, Function<T, String> elementFormatter) {
+    private static <T extends Enum<T>> String formatEnumList(
+            List<T> list, Function<T, String> elementFormatter) {
         StringJoiner joiner = new StringJoiner(",");
         Iterator<T> it = list.iterator();
         while (it.hasNext()) {
@@ -221,7 +222,8 @@ public final class SemTelephonyVendorProps {
     }
 
     public static void radio_default_network(Integer value) {
-        SystemProperties.set("ro.vendor.radio.default_network", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "ro.vendor.radio.default_network", value == null ? "" : value.toString());
     }
 
     public static Optional<String> radio_default_network_by() {
@@ -230,7 +232,8 @@ public final class SemTelephonyVendorProps {
     }
 
     public static void radio_default_network_by(String value) {
-        SystemProperties.set("ro.vendor.radio.default_network_by", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "ro.vendor.radio.default_network_by", value == null ? "" : value.toString());
     }
 
     public static Optional<String> sec_radio_def_network() {
@@ -239,7 +242,8 @@ public final class SemTelephonyVendorProps {
     }
 
     public static void sec_radio_def_network(String value) {
-        SystemProperties.set("ro.vendor.sec.radio.def_network", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "ro.vendor.sec.radio.def_network", value == null ? "" : value.toString());
     }
 
     public static Optional<Integer> vendor_api_level() {

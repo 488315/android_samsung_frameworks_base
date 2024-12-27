@@ -12,12 +12,14 @@ import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.DebugUtils;
 import android.util.Log;
+
 import com.android.internal.app.IVoiceInteractor;
 import com.android.internal.app.IVoiceInteractorCallback;
 import com.android.internal.app.IVoiceInteractorRequest;
 import com.android.internal.os.HandlerCaller;
 import com.android.internal.os.SomeArgs;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
@@ -42,117 +44,166 @@ public final class VoiceInteractor {
     final HandlerCaller mHandlerCaller;
     IVoiceInteractor mInteractor;
     boolean mRetaining;
-    final HandlerCaller.Callback mHandlerCallerCallback = new HandlerCaller.Callback() { // from class: android.app.VoiceInteractor.1
-        @Override // com.android.internal.os.HandlerCaller.Callback
-        public void executeMessage(Message msg) {
-            SomeArgs args = (SomeArgs) msg.obj;
-            switch (msg.what) {
-                case 1:
-                    Request request = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) args.arg1, true);
-                    if (request != null) {
-                        ((ConfirmationRequest) request).onConfirmationResult(msg.arg1 != 0, (Bundle) args.arg2);
-                        request.clear();
-                        break;
-                    }
-                    break;
-                case 2:
-                    boolean complete = msg.arg1 != 0;
-                    Request request2 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) args.arg1, complete);
-                    if (request2 != null) {
-                        ((PickOptionRequest) request2).onPickOptionResult(complete, (PickOptionRequest.Option[]) args.arg2, (Bundle) args.arg3);
-                        if (complete) {
-                            request2.clear();
+    final HandlerCaller.Callback mHandlerCallerCallback =
+            new HandlerCaller.Callback() { // from class: android.app.VoiceInteractor.1
+                @Override // com.android.internal.os.HandlerCaller.Callback
+                public void executeMessage(Message msg) {
+                    SomeArgs args = (SomeArgs) msg.obj;
+                    switch (msg.what) {
+                        case 1:
+                            Request request =
+                                    VoiceInteractor.this.pullRequest(
+                                            (IVoiceInteractorRequest) args.arg1, true);
+                            if (request != null) {
+                                ((ConfirmationRequest) request)
+                                        .onConfirmationResult(msg.arg1 != 0, (Bundle) args.arg2);
+                                request.clear();
+                                break;
+                            }
                             break;
-                        }
-                    }
-                    break;
-                case 3:
-                    Request request3 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) args.arg1, true);
-                    if (request3 != null) {
-                        ((CompleteVoiceRequest) request3).onCompleteResult((Bundle) args.arg2);
-                        request3.clear();
-                        break;
-                    }
-                    break;
-                case 4:
-                    Request request4 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) args.arg1, true);
-                    if (request4 != null) {
-                        ((AbortVoiceRequest) request4).onAbortResult((Bundle) args.arg2);
-                        request4.clear();
-                        break;
-                    }
-                    break;
-                case 5:
-                    boolean complete2 = msg.arg1 != 0;
-                    Request request5 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) args.arg1, complete2);
-                    if (request5 != null) {
-                        ((CommandRequest) request5).onCommandResult(msg.arg1 != 0, (Bundle) args.arg2);
-                        if (complete2) {
-                            request5.clear();
+                        case 2:
+                            boolean complete = msg.arg1 != 0;
+                            Request request2 =
+                                    VoiceInteractor.this.pullRequest(
+                                            (IVoiceInteractorRequest) args.arg1, complete);
+                            if (request2 != null) {
+                                ((PickOptionRequest) request2)
+                                        .onPickOptionResult(
+                                                complete,
+                                                (PickOptionRequest.Option[]) args.arg2,
+                                                (Bundle) args.arg3);
+                                if (complete) {
+                                    request2.clear();
+                                    break;
+                                }
+                            }
                             break;
-                        }
+                        case 3:
+                            Request request3 =
+                                    VoiceInteractor.this.pullRequest(
+                                            (IVoiceInteractorRequest) args.arg1, true);
+                            if (request3 != null) {
+                                ((CompleteVoiceRequest) request3)
+                                        .onCompleteResult((Bundle) args.arg2);
+                                request3.clear();
+                                break;
+                            }
+                            break;
+                        case 4:
+                            Request request4 =
+                                    VoiceInteractor.this.pullRequest(
+                                            (IVoiceInteractorRequest) args.arg1, true);
+                            if (request4 != null) {
+                                ((AbortVoiceRequest) request4).onAbortResult((Bundle) args.arg2);
+                                request4.clear();
+                                break;
+                            }
+                            break;
+                        case 5:
+                            boolean complete2 = msg.arg1 != 0;
+                            Request request5 =
+                                    VoiceInteractor.this.pullRequest(
+                                            (IVoiceInteractorRequest) args.arg1, complete2);
+                            if (request5 != null) {
+                                ((CommandRequest) request5)
+                                        .onCommandResult(msg.arg1 != 0, (Bundle) args.arg2);
+                                if (complete2) {
+                                    request5.clear();
+                                    break;
+                                }
+                            }
+                            break;
+                        case 6:
+                            Request request6 =
+                                    VoiceInteractor.this.pullRequest(
+                                            (IVoiceInteractorRequest) args.arg1, true);
+                            if (request6 != null) {
+                                request6.onCancel();
+                                request6.clear();
+                                break;
+                            }
+                            break;
                     }
-                    break;
-                case 6:
-                    Request request6 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) args.arg1, true);
-                    if (request6 != null) {
-                        request6.onCancel();
-                        request6.clear();
-                        break;
-                    }
-                    break;
-            }
-        }
-    };
-    final IVoiceInteractorCallback.Stub mCallback = new IVoiceInteractorCallback.Stub() { // from class: android.app.VoiceInteractor.2
-        @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverConfirmationResult(IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, Bundle bundle) {
-            VoiceInteractor.this.mHandlerCaller.sendMessage(VoiceInteractor.this.mHandlerCaller.obtainMessageIOO(1, z ? 1 : 0, iVoiceInteractorRequest, bundle));
-        }
+                }
+            };
+    final IVoiceInteractorCallback.Stub mCallback =
+            new IVoiceInteractorCallback.Stub() { // from class: android.app.VoiceInteractor.2
+                @Override // com.android.internal.app.IVoiceInteractorCallback
+                public void deliverConfirmationResult(
+                        IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, Bundle bundle) {
+                    VoiceInteractor.this.mHandlerCaller.sendMessage(
+                            VoiceInteractor.this.mHandlerCaller.obtainMessageIOO(
+                                    1, z ? 1 : 0, iVoiceInteractorRequest, bundle));
+                }
 
-        @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverPickOptionResult(IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, PickOptionRequest.Option[] optionArr, Bundle bundle) {
-            VoiceInteractor.this.mHandlerCaller.sendMessage(VoiceInteractor.this.mHandlerCaller.obtainMessageIOOO(2, z ? 1 : 0, iVoiceInteractorRequest, optionArr, bundle));
-        }
+                @Override // com.android.internal.app.IVoiceInteractorCallback
+                public void deliverPickOptionResult(
+                        IVoiceInteractorRequest iVoiceInteractorRequest,
+                        boolean z,
+                        PickOptionRequest.Option[] optionArr,
+                        Bundle bundle) {
+                    VoiceInteractor.this.mHandlerCaller.sendMessage(
+                            VoiceInteractor.this.mHandlerCaller.obtainMessageIOOO(
+                                    2, z ? 1 : 0, iVoiceInteractorRequest, optionArr, bundle));
+                }
 
-        @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverCompleteVoiceResult(IVoiceInteractorRequest request, Bundle result) {
-            VoiceInteractor.this.mHandlerCaller.sendMessage(VoiceInteractor.this.mHandlerCaller.obtainMessageOO(3, request, result));
-        }
+                @Override // com.android.internal.app.IVoiceInteractorCallback
+                public void deliverCompleteVoiceResult(
+                        IVoiceInteractorRequest request, Bundle result) {
+                    VoiceInteractor.this.mHandlerCaller.sendMessage(
+                            VoiceInteractor.this.mHandlerCaller.obtainMessageOO(
+                                    3, request, result));
+                }
 
-        @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverAbortVoiceResult(IVoiceInteractorRequest request, Bundle result) {
-            VoiceInteractor.this.mHandlerCaller.sendMessage(VoiceInteractor.this.mHandlerCaller.obtainMessageOO(4, request, result));
-        }
+                @Override // com.android.internal.app.IVoiceInteractorCallback
+                public void deliverAbortVoiceResult(
+                        IVoiceInteractorRequest request, Bundle result) {
+                    VoiceInteractor.this.mHandlerCaller.sendMessage(
+                            VoiceInteractor.this.mHandlerCaller.obtainMessageOO(
+                                    4, request, result));
+                }
 
-        @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverCommandResult(IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, Bundle bundle) {
-            VoiceInteractor.this.mHandlerCaller.sendMessage(VoiceInteractor.this.mHandlerCaller.obtainMessageIOO(5, z ? 1 : 0, iVoiceInteractorRequest, bundle));
-        }
+                @Override // com.android.internal.app.IVoiceInteractorCallback
+                public void deliverCommandResult(
+                        IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, Bundle bundle) {
+                    VoiceInteractor.this.mHandlerCaller.sendMessage(
+                            VoiceInteractor.this.mHandlerCaller.obtainMessageIOO(
+                                    5, z ? 1 : 0, iVoiceInteractorRequest, bundle));
+                }
 
-        @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverCancel(IVoiceInteractorRequest request) {
-            VoiceInteractor.this.mHandlerCaller.sendMessage(VoiceInteractor.this.mHandlerCaller.obtainMessageOO(6, request, null));
-        }
+                @Override // com.android.internal.app.IVoiceInteractorCallback
+                public void deliverCancel(IVoiceInteractorRequest request) {
+                    VoiceInteractor.this.mHandlerCaller.sendMessage(
+                            VoiceInteractor.this.mHandlerCaller.obtainMessageOO(6, request, null));
+                }
 
-        @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void destroy() {
-            VoiceInteractor.this.mHandlerCaller.getHandler().sendMessage(PooledLambda.obtainMessage(new VoiceInteractor$2$$ExternalSyntheticLambda0(), VoiceInteractor.this));
-        }
-    };
+                @Override // com.android.internal.app.IVoiceInteractorCallback
+                public void destroy() {
+                    VoiceInteractor.this
+                            .mHandlerCaller
+                            .getHandler()
+                            .sendMessage(
+                                    PooledLambda.obtainMessage(
+                                            new VoiceInteractor$2$$ExternalSyntheticLambda0(),
+                                            VoiceInteractor.this));
+                }
+            };
     final ArrayMap<IBinder, Request> mActiveRequests = new ArrayMap<>();
     final ArrayMap<Runnable, Executor> mOnDestroyCallbacks = new ArrayMap<>();
 
-    public static abstract class Request {
+    public abstract static class Request {
         Activity mActivity;
         Context mContext;
         String mName;
         IVoiceInteractorRequest mRequestInterface;
 
-        abstract IVoiceInteractorRequest submit(IVoiceInteractor iVoiceInteractor, String str, IVoiceInteractorCallback iVoiceInteractorCallback) throws RemoteException;
+        abstract IVoiceInteractorRequest submit(
+                IVoiceInteractor iVoiceInteractor,
+                String str,
+                IVoiceInteractorCallback iVoiceInteractorCallback)
+                throws RemoteException;
 
-        Request() {
-        }
+        Request() {}
 
         public String getName() {
             return this.mName;
@@ -177,14 +228,11 @@ public final class VoiceInteractor {
             return this.mActivity;
         }
 
-        public void onCancel() {
-        }
+        public void onCancel() {}
 
-        public void onAttached(Activity activity) {
-        }
+        public void onAttached(Activity activity) {}
 
-        public void onDetached() {
-        }
+        public void onDetached() {}
 
         public String toString() {
             StringBuilder sb = new StringBuilder(128);
@@ -235,8 +283,7 @@ public final class VoiceInteractor {
             this.mExtras = extras;
         }
 
-        public void onConfirmationResult(boolean confirmed, Bundle result) {
-        }
+        public void onConfirmationResult(boolean confirmed, Bundle result) {}
 
         @Override // android.app.VoiceInteractor.Request
         void dump(String prefix, FileDescriptor fd, PrintWriter writer, String[] args) {
@@ -257,7 +304,9 @@ public final class VoiceInteractor {
         }
 
         @Override // android.app.VoiceInteractor.Request
-        IVoiceInteractorRequest submit(IVoiceInteractor interactor, String packageName, IVoiceInteractorCallback callback) throws RemoteException {
+        IVoiceInteractorRequest submit(
+                IVoiceInteractor interactor, String packageName, IVoiceInteractorCallback callback)
+                throws RemoteException {
             return interactor.startConfirmation(packageName, callback, this.mPrompt, this.mExtras);
         }
     }
@@ -268,19 +317,21 @@ public final class VoiceInteractor {
         final Prompt mPrompt;
 
         public static final class Option implements Parcelable {
-            public static final Parcelable.Creator<Option> CREATOR = new Parcelable.Creator<Option>() { // from class: android.app.VoiceInteractor.PickOptionRequest.Option.1
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public Option createFromParcel(Parcel in) {
-                    return new Option(in);
-                }
+            public static final Parcelable.Creator<Option> CREATOR =
+                    new Parcelable.Creator<Option>() { // from class:
+                        // android.app.VoiceInteractor.PickOptionRequest.Option.1
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public Option createFromParcel(Parcel in) {
+                            return new Option(in);
+                        }
 
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public Option[] newArray(int size) {
-                    return new Option[size];
-                }
-            };
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public Option[] newArray(int size) {
+                            return new Option[size];
+                        }
+                    };
             Bundle mExtras;
             final int mIndex;
             final CharSequence mLabel;
@@ -367,8 +418,7 @@ public final class VoiceInteractor {
             this.mExtras = extras;
         }
 
-        public void onPickOptionResult(boolean finished, Option[] selections, Bundle result) {
-        }
+        public void onPickOptionResult(boolean finished, Option[] selections, Bundle result) {}
 
         @Override // android.app.VoiceInteractor.Request
         void dump(String prefix, FileDescriptor fd, PrintWriter writer, String[] args) {
@@ -422,8 +472,11 @@ public final class VoiceInteractor {
         }
 
         @Override // android.app.VoiceInteractor.Request
-        IVoiceInteractorRequest submit(IVoiceInteractor interactor, String packageName, IVoiceInteractorCallback callback) throws RemoteException {
-            return interactor.startPickOption(packageName, callback, this.mPrompt, this.mOptions, this.mExtras);
+        IVoiceInteractorRequest submit(
+                IVoiceInteractor interactor, String packageName, IVoiceInteractorCallback callback)
+                throws RemoteException {
+            return interactor.startPickOption(
+                    packageName, callback, this.mPrompt, this.mOptions, this.mExtras);
         }
     }
 
@@ -441,8 +494,7 @@ public final class VoiceInteractor {
             this.mExtras = extras;
         }
 
-        public void onCompleteResult(Bundle result) {
-        }
+        public void onCompleteResult(Bundle result) {}
 
         @Override // android.app.VoiceInteractor.Request
         void dump(String prefix, FileDescriptor fd, PrintWriter writer, String[] args) {
@@ -463,7 +515,9 @@ public final class VoiceInteractor {
         }
 
         @Override // android.app.VoiceInteractor.Request
-        IVoiceInteractorRequest submit(IVoiceInteractor interactor, String packageName, IVoiceInteractorCallback callback) throws RemoteException {
+        IVoiceInteractorRequest submit(
+                IVoiceInteractor interactor, String packageName, IVoiceInteractorCallback callback)
+                throws RemoteException {
             return interactor.startCompleteVoice(packageName, callback, this.mPrompt, this.mExtras);
         }
     }
@@ -482,8 +536,7 @@ public final class VoiceInteractor {
             this.mExtras = extras;
         }
 
-        public void onAbortResult(Bundle result) {
-        }
+        public void onAbortResult(Bundle result) {}
 
         @Override // android.app.VoiceInteractor.Request
         void dump(String prefix, FileDescriptor fd, PrintWriter writer, String[] args) {
@@ -504,7 +557,9 @@ public final class VoiceInteractor {
         }
 
         @Override // android.app.VoiceInteractor.Request
-        IVoiceInteractorRequest submit(IVoiceInteractor interactor, String packageName, IVoiceInteractorCallback callback) throws RemoteException {
+        IVoiceInteractorRequest submit(
+                IVoiceInteractor interactor, String packageName, IVoiceInteractorCallback callback)
+                throws RemoteException {
             return interactor.startAbortVoice(packageName, callback, this.mPrompt, this.mExtras);
         }
     }
@@ -518,8 +573,7 @@ public final class VoiceInteractor {
             this.mArgs = args;
         }
 
-        public void onCommandResult(boolean isCompleted, Bundle result) {
-        }
+        public void onCommandResult(boolean isCompleted, Bundle result) {}
 
         @Override // android.app.VoiceInteractor.Request
         void dump(String prefix, FileDescriptor fd, PrintWriter writer, String[] args) {
@@ -540,25 +594,29 @@ public final class VoiceInteractor {
         }
 
         @Override // android.app.VoiceInteractor.Request
-        IVoiceInteractorRequest submit(IVoiceInteractor interactor, String packageName, IVoiceInteractorCallback callback) throws RemoteException {
+        IVoiceInteractorRequest submit(
+                IVoiceInteractor interactor, String packageName, IVoiceInteractorCallback callback)
+                throws RemoteException {
             return interactor.startCommand(packageName, callback, this.mCommand, this.mArgs);
         }
     }
 
     public static class Prompt implements Parcelable {
-        public static final Parcelable.Creator<Prompt> CREATOR = new Parcelable.Creator<Prompt>() { // from class: android.app.VoiceInteractor.Prompt.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Prompt createFromParcel(Parcel in) {
-                return new Prompt(in);
-            }
+        public static final Parcelable.Creator<Prompt> CREATOR =
+                new Parcelable.Creator<
+                        Prompt>() { // from class: android.app.VoiceInteractor.Prompt.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Prompt createFromParcel(Parcel in) {
+                        return new Prompt(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Prompt[] newArray(int size) {
-                return new Prompt[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Prompt[] newArray(int size) {
+                        return new Prompt[size];
+                    }
+                };
         private final CharSequence mVisualPrompt;
         private final CharSequence[] mVoicePrompts;
 
@@ -577,7 +635,7 @@ public final class VoiceInteractor {
         }
 
         public Prompt(CharSequence prompt) {
-            this.mVoicePrompts = new CharSequence[]{prompt};
+            this.mVoicePrompts = new CharSequence[] {prompt};
             this.mVisualPrompt = prompt;
         }
 
@@ -596,7 +654,10 @@ public final class VoiceInteractor {
         public String toString() {
             StringBuilder sb = new StringBuilder(128);
             DebugUtils.buildShortClassTag(this, sb);
-            if (this.mVisualPrompt != null && this.mVoicePrompts != null && this.mVoicePrompts.length == 1 && this.mVisualPrompt.equals(this.mVoicePrompts[0])) {
+            if (this.mVisualPrompt != null
+                    && this.mVoicePrompts != null
+                    && this.mVoicePrompts.length == 1
+                    && this.mVisualPrompt.equals(this.mVoicePrompts[0])) {
                 sb.append(" ");
                 sb.append(this.mVisualPrompt);
             } else {
@@ -635,7 +696,8 @@ public final class VoiceInteractor {
         }
     }
 
-    VoiceInteractor(IVoiceInteractor interactor, Context context, Activity activity, Looper looper) {
+    VoiceInteractor(
+            IVoiceInteractor interactor, Context context, Activity activity, Looper looper) {
         this.mInteractor = interactor;
         this.mContext = context;
         this.mActivity = activity;
@@ -747,7 +809,9 @@ public final class VoiceInteractor {
             if (request.mRequestInterface != null) {
                 throw new IllegalStateException("Given " + request + " is already active");
             }
-            IVoiceInteractorRequest ireq = request.submit(this.mInteractor, this.mContext.getOpPackageName(), this.mCallback);
+            IVoiceInteractorRequest ireq =
+                    request.submit(
+                            this.mInteractor, this.mContext.getOpPackageName(), this.mCallback);
             request.mRequestInterface = ireq;
             request.mContext = this.mContext;
             request.mActivity = this.mActivity;
@@ -790,7 +854,10 @@ public final class VoiceInteractor {
             int N = this.mActiveRequests.size();
             while (i < N) {
                 Request req = this.mActiveRequests.valueAt(i);
-                i = (name != req.getName() && (name == null || !name.equals(req.getName()))) ? i + 1 : 0;
+                i =
+                        (name != req.getName() && (name == null || !name.equals(req.getName())))
+                                ? i + 1
+                                : 0;
                 return req;
             }
             return null;
@@ -803,7 +870,8 @@ public final class VoiceInteractor {
             return new boolean[commands.length];
         }
         try {
-            boolean[] res = this.mInteractor.supportsCommands(this.mContext.getOpPackageName(), commands);
+            boolean[] res =
+                    this.mInteractor.supportsCommands(this.mContext.getOpPackageName(), commands);
             return res;
         } catch (RemoteException e) {
             throw new RuntimeException("Voice interactor has died", e);
@@ -840,7 +908,8 @@ public final class VoiceInteractor {
             return;
         }
         try {
-            this.mInteractor.notifyDirectActionsChanged(this.mActivity.getTaskId(), this.mActivity.getAssistToken());
+            this.mInteractor.notifyDirectActionsChanged(
+                    this.mActivity.getTaskId(), this.mActivity.getAssistToken());
         } catch (RemoteException e) {
             Log.w(TAG, "Voice interactor has died", e);
         }
@@ -850,7 +919,9 @@ public final class VoiceInteractor {
         String packageName = null;
         if (this.mActivity != null && this.mInteractor != null) {
             try {
-                packageName = ActivityTaskManager.getService().getVoiceInteractorPackageName(this.mInteractor.asBinder());
+                packageName =
+                        ActivityTaskManager.getService()
+                                .getVoiceInteractorPackageName(this.mInteractor.asBinder());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -894,7 +965,13 @@ public final class VoiceInteractor {
         public void cancel() {
             VoiceInteractor voiceInteractor = this.mInteractor.get();
             if (voiceInteractor != null) {
-                voiceInteractor.mHandlerCaller.getHandler().sendMessage(PooledLambda.obtainMessage(new VoiceInteractor$2$$ExternalSyntheticLambda0(), voiceInteractor));
+                voiceInteractor
+                        .mHandlerCaller
+                        .getHandler()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new VoiceInteractor$2$$ExternalSyntheticLambda0(),
+                                        voiceInteractor));
             }
         }
     }

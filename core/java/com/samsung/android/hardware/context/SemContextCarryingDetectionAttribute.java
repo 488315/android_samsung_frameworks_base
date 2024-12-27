@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextCarryingDetectionAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextCarryingDetectionAttribute> CREATOR = new Parcelable.Creator<SemContextCarryingDetectionAttribute>() { // from class: com.samsung.android.hardware.context.SemContextCarryingDetectionAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextCarryingDetectionAttribute createFromParcel(Parcel in) {
-            return new SemContextCarryingDetectionAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextCarryingDetectionAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextCarryingDetectionAttribute>() { // from class:
+                                                              // com.samsung.android.hardware.context.SemContextCarryingDetectionAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextCarryingDetectionAttribute createFromParcel(Parcel in) {
+                    return new SemContextCarryingDetectionAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextCarryingDetectionAttribute[] newArray(int size) {
-            return new SemContextCarryingDetectionAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextCarryingDetectionAttribute[] newArray(int size) {
+                    return new SemContextCarryingDetectionAttribute[size];
+                }
+            };
     private static final int DATA = 1;
     private static final int MODE = 2;
     private static final String TAG = "SemContextCarryingDetection";
@@ -77,7 +80,10 @@ public class SemContextCarryingDetectionAttribute extends SemContextAttribute {
     @Override // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mMode == 9) {
-            if (this.mDpcmLowData < -2 || this.mDpcmLowData > 1000000 || this.mDpcmHighData < -2 || this.mDpcmHighData > 1000000) {
+            if (this.mDpcmLowData < -2
+                    || this.mDpcmLowData > 1000000
+                    || this.mDpcmHighData < -2
+                    || this.mDpcmHighData > 1000000) {
                 Log.d(TAG, "DPCM Data value is wrong");
                 return false;
             }

@@ -5,6 +5,7 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -35,7 +36,8 @@ public final class AccessibilityButtonController {
         registerAccessibilityButtonCallback(callback, new Handler(Looper.getMainLooper()));
     }
 
-    public void registerAccessibilityButtonCallback(AccessibilityButtonCallback callback, Handler handler) {
+    public void registerAccessibilityButtonCallback(
+            AccessibilityButtonCallback callback, Handler handler) {
         Objects.requireNonNull(callback);
         Objects.requireNonNull(handler);
         synchronized (this.mLock) {
@@ -63,17 +65,21 @@ public final class AccessibilityButtonController {
     void dispatchAccessibilityButtonClicked() {
         synchronized (this.mLock) {
             if (this.mCallbacks != null && !this.mCallbacks.isEmpty()) {
-                ArrayMap<AccessibilityButtonCallback, Handler> entries = new ArrayMap<>(this.mCallbacks);
+                ArrayMap<AccessibilityButtonCallback, Handler> entries =
+                        new ArrayMap<>(this.mCallbacks);
                 int count = entries.size();
                 for (int i = 0; i < count; i++) {
                     final AccessibilityButtonCallback callback = entries.keyAt(i);
                     Handler handler = entries.valueAt(i);
-                    handler.post(new Runnable() { // from class: android.accessibilityservice.AccessibilityButtonController$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            AccessibilityButtonController.this.lambda$dispatchAccessibilityButtonClicked$0(callback);
-                        }
-                    });
+                    handler.post(
+                            new Runnable() { // from class:
+                                // android.accessibilityservice.AccessibilityButtonController$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    AccessibilityButtonController.this
+                                            .lambda$dispatchAccessibilityButtonClicked$0(callback);
+                                }
+                            });
                 }
                 return;
             }
@@ -82,24 +88,30 @@ public final class AccessibilityButtonController {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$dispatchAccessibilityButtonClicked$0(AccessibilityButtonCallback callback) {
+    public /* synthetic */ void lambda$dispatchAccessibilityButtonClicked$0(
+            AccessibilityButtonCallback callback) {
         callback.onClicked(this);
     }
 
     void dispatchAccessibilityButtonAvailabilityChanged(final boolean available) {
         synchronized (this.mLock) {
             if (this.mCallbacks != null && !this.mCallbacks.isEmpty()) {
-                ArrayMap<AccessibilityButtonCallback, Handler> entries = new ArrayMap<>(this.mCallbacks);
+                ArrayMap<AccessibilityButtonCallback, Handler> entries =
+                        new ArrayMap<>(this.mCallbacks);
                 int count = entries.size();
                 for (int i = 0; i < count; i++) {
                     final AccessibilityButtonCallback callback = entries.keyAt(i);
                     Handler handler = entries.valueAt(i);
-                    handler.post(new Runnable() { // from class: android.accessibilityservice.AccessibilityButtonController$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            AccessibilityButtonController.this.lambda$dispatchAccessibilityButtonAvailabilityChanged$1(callback, available);
-                        }
-                    });
+                    handler.post(
+                            new Runnable() { // from class:
+                                // android.accessibilityservice.AccessibilityButtonController$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    AccessibilityButtonController.this
+                                            .lambda$dispatchAccessibilityButtonAvailabilityChanged$1(
+                                                    callback, available);
+                                }
+                            });
                 }
                 return;
             }
@@ -108,15 +120,15 @@ public final class AccessibilityButtonController {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$dispatchAccessibilityButtonAvailabilityChanged$1(AccessibilityButtonCallback callback, boolean available) {
+    public /* synthetic */ void lambda$dispatchAccessibilityButtonAvailabilityChanged$1(
+            AccessibilityButtonCallback callback, boolean available) {
         callback.onAvailabilityChanged(this, available);
     }
 
-    public static abstract class AccessibilityButtonCallback {
-        public void onClicked(AccessibilityButtonController controller) {
-        }
+    public abstract static class AccessibilityButtonCallback {
+        public void onClicked(AccessibilityButtonController controller) {}
 
-        public void onAvailabilityChanged(AccessibilityButtonController controller, boolean available) {
-        }
+        public void onAvailabilityChanged(
+                AccessibilityButtonController controller, boolean available) {}
     }
 }

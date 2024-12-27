@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.IDumpstateListener;
 import java.io.FileDescriptor;
 
 /* loaded from: classes3.dex */
@@ -36,26 +35,60 @@ public interface IDumpstate extends IInterface {
 
     void preDumpUiData(String str) throws RemoteException;
 
-    void retrieveBugreport(int i, String str, int i2, FileDescriptor fileDescriptor, String str2, boolean z, boolean z2, IDumpstateListener iDumpstateListener) throws RemoteException;
+    void retrieveBugreport(
+            int i,
+            String str,
+            int i2,
+            FileDescriptor fileDescriptor,
+            String str2,
+            boolean z,
+            boolean z2,
+            IDumpstateListener iDumpstateListener)
+            throws RemoteException;
 
-    void startBugreport(int i, String str, FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, int i2, int i3, IDumpstateListener iDumpstateListener, boolean z, boolean z2) throws RemoteException;
+    void startBugreport(
+            int i,
+            String str,
+            FileDescriptor fileDescriptor,
+            FileDescriptor fileDescriptor2,
+            int i2,
+            int i3,
+            IDumpstateListener iDumpstateListener,
+            boolean z,
+            boolean z2)
+            throws RemoteException;
 
     public static class Default implements IDumpstate {
         @Override // android.os.IDumpstate
-        public void preDumpUiData(String callingPackage) throws RemoteException {
-        }
+        public void preDumpUiData(String callingPackage) throws RemoteException {}
 
         @Override // android.os.IDumpstate
-        public void startBugreport(int callingUid, String callingPackage, FileDescriptor bugreportFd, FileDescriptor screenshotFd, int bugreportMode, int bugreportFlags, IDumpstateListener listener, boolean isScreenshotRequested, boolean skipUserConsent) throws RemoteException {
-        }
+        public void startBugreport(
+                int callingUid,
+                String callingPackage,
+                FileDescriptor bugreportFd,
+                FileDescriptor screenshotFd,
+                int bugreportMode,
+                int bugreportFlags,
+                IDumpstateListener listener,
+                boolean isScreenshotRequested,
+                boolean skipUserConsent)
+                throws RemoteException {}
 
         @Override // android.os.IDumpstate
-        public void cancelBugreport(int callingUid, String callingPackage) throws RemoteException {
-        }
+        public void cancelBugreport(int callingUid, String callingPackage) throws RemoteException {}
 
         @Override // android.os.IDumpstate
-        public void retrieveBugreport(int callingUid, String callingPackage, int userId, FileDescriptor bugreportFd, String bugreportFile, boolean keepBugreportOnRetrieval, boolean skipUserConsent, IDumpstateListener listener) throws RemoteException {
-        }
+        public void retrieveBugreport(
+                int callingUid,
+                String callingPackage,
+                int userId,
+                FileDescriptor bugreportFd,
+                String bugreportFile,
+                boolean keepBugreportOnRetrieval,
+                boolean skipUserConsent,
+                IDumpstateListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -63,7 +96,7 @@ public interface IDumpstate extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDumpstate {
+    public abstract static class Stub extends Binder implements IDumpstate {
         static final int TRANSACTION_cancelBugreport = 3;
         static final int TRANSACTION_preDumpUiData = 1;
         static final int TRANSACTION_retrieveBugreport = 4;
@@ -110,7 +143,8 @@ public interface IDumpstate extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDumpstate.DESCRIPTOR);
             }
@@ -132,7 +166,8 @@ public interface IDumpstate extends IInterface {
                     FileDescriptor _arg3 = data.readRawFileDescriptor();
                     int _arg4 = data.readInt();
                     int _arg5 = data.readInt();
-                    IDumpstateListener _arg6 = IDumpstateListener.Stub.asInterface(data.readStrongBinder());
+                    IDumpstateListener _arg6 =
+                            IDumpstateListener.Stub.asInterface(data.readStrongBinder());
                     boolean _arg7 = data.readBoolean();
                     boolean _arg8 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -154,9 +189,11 @@ public interface IDumpstate extends IInterface {
                     String _arg42 = data.readString();
                     boolean _arg52 = data.readBoolean();
                     boolean _arg62 = data.readBoolean();
-                    IDumpstateListener _arg72 = IDumpstateListener.Stub.asInterface(data.readStrongBinder());
+                    IDumpstateListener _arg72 =
+                            IDumpstateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    retrieveBugreport(_arg04, _arg13, _arg22, _arg32, _arg42, _arg52, _arg62, _arg72);
+                    retrieveBugreport(
+                            _arg04, _arg13, _arg22, _arg32, _arg42, _arg52, _arg62, _arg72);
                     reply.writeNoException();
                     return true;
                 default:
@@ -196,7 +233,17 @@ public interface IDumpstate extends IInterface {
             }
 
             @Override // android.os.IDumpstate
-            public void startBugreport(int callingUid, String callingPackage, FileDescriptor bugreportFd, FileDescriptor screenshotFd, int bugreportMode, int bugreportFlags, IDumpstateListener listener, boolean isScreenshotRequested, boolean skipUserConsent) throws RemoteException {
+            public void startBugreport(
+                    int callingUid,
+                    String callingPackage,
+                    FileDescriptor bugreportFd,
+                    FileDescriptor screenshotFd,
+                    int bugreportMode,
+                    int bugreportFlags,
+                    IDumpstateListener listener,
+                    boolean isScreenshotRequested,
+                    boolean skipUserConsent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -219,7 +266,8 @@ public interface IDumpstate extends IInterface {
             }
 
             @Override // android.os.IDumpstate
-            public void cancelBugreport(int callingUid, String callingPackage) throws RemoteException {
+            public void cancelBugreport(int callingUid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -235,7 +283,16 @@ public interface IDumpstate extends IInterface {
             }
 
             @Override // android.os.IDumpstate
-            public void retrieveBugreport(int callingUid, String callingPackage, int userId, FileDescriptor bugreportFd, String bugreportFile, boolean keepBugreportOnRetrieval, boolean skipUserConsent, IDumpstateListener listener) throws RemoteException {
+            public void retrieveBugreport(
+                    int callingUid,
+                    String callingPackage,
+                    int userId,
+                    FileDescriptor bugreportFd,
+                    String bugreportFile,
+                    boolean keepBugreportOnRetrieval,
+                    boolean skipUserConsent,
+                    IDumpstateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

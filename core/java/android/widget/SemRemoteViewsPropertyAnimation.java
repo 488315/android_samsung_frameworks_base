@@ -11,19 +11,22 @@ import android.view.View;
 
 /* loaded from: classes4.dex */
 public class SemRemoteViewsPropertyAnimation extends SemRemoteViewsAnimation {
-    public static final Parcelable.Creator<SemRemoteViewsPropertyAnimation> CREATOR = new Parcelable.Creator<SemRemoteViewsPropertyAnimation>() { // from class: android.widget.SemRemoteViewsPropertyAnimation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemRemoteViewsPropertyAnimation createFromParcel(Parcel in) {
-            return new SemRemoteViewsPropertyAnimation(in);
-        }
+    public static final Parcelable.Creator<SemRemoteViewsPropertyAnimation> CREATOR =
+            new Parcelable.Creator<
+                    SemRemoteViewsPropertyAnimation>() { // from class:
+                                                         // android.widget.SemRemoteViewsPropertyAnimation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemRemoteViewsPropertyAnimation createFromParcel(Parcel in) {
+                    return new SemRemoteViewsPropertyAnimation(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemRemoteViewsPropertyAnimation[] newArray(int size) {
-            return new SemRemoteViewsPropertyAnimation[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemRemoteViewsPropertyAnimation[] newArray(int size) {
+                    return new SemRemoteViewsPropertyAnimation[size];
+                }
+            };
     private static final String LOG_TAG = "SemRemoteViewsPropertyAnimation";
     private final int mAnimResId;
 
@@ -59,21 +62,27 @@ public class SemRemoteViewsPropertyAnimation extends SemRemoteViewsAnimation {
     @Override // android.widget.SemRemoteViewsAnimation
     protected void startAnimation(View root) {
         View target;
-        if (root == null || this.mAnimResId <= 0 || (target = root.findViewById(this.mViewId)) == null) {
+        if (root == null
+                || this.mAnimResId <= 0
+                || (target = root.findViewById(this.mViewId)) == null) {
             return;
         }
         Context context = root.getContext();
-        AnimatorSet animatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(context, this.mAnimResId);
+        AnimatorSet animatorSet =
+                (AnimatorSet) AnimatorInflater.loadAnimator(context, this.mAnimResId);
         if (animatorSet == null) {
             return;
         }
         animatorSet.setTarget(target);
-        animatorSet.addListener(new AnimatorListenerAdapter() { // from class: android.widget.SemRemoteViewsPropertyAnimation.2
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                SemRemoteViewsPropertyAnimation.this.mIsExpired = true;
-            }
-        });
+        animatorSet.addListener(
+                new AnimatorListenerAdapter() { // from class:
+                                                // android.widget.SemRemoteViewsPropertyAnimation.2
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        SemRemoteViewsPropertyAnimation.this.mIsExpired = true;
+                    }
+                });
         if (this.mIsExpired) {
             animatorSet.setDuration(0L);
         }
@@ -83,6 +92,5 @@ public class SemRemoteViewsPropertyAnimation extends SemRemoteViewsAnimation {
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.SemRemoteViewsAnimation
     /* renamed from: endAnimation */
-    public void lambda$play$0(View root) {
-    }
+    public void lambda$play$0(View root) {}
 }

@@ -3,8 +3,13 @@ package com.android.server.net.watchlist;
 import android.util.Log;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.util.HexDump;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,13 +17,12 @@ import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class WatchlistConfig {
-    public static final WatchlistConfig sInstance = new WatchlistConfig(new File("/data/misc/network_watchlist/network_watchlist.xml"));
+    public static final WatchlistConfig sInstance =
+            new WatchlistConfig(new File("/data/misc/network_watchlist/network_watchlist.xml"));
     public volatile CrcShaDigests mDomainDigests;
     public volatile CrcShaDigests mIpDigests;
     public boolean mIsSecureConfig = true;
@@ -126,8 +130,12 @@ public final class WatchlistConfig {
                         }
                     }
                     newPullParser.require(3, null, "watchlist-config");
-                    this.mDomainDigests = new CrcShaDigests(new HarmfulCrcs(arrayList), new HarmfulDigests(arrayList2));
-                    this.mIpDigests = new CrcShaDigests(new HarmfulCrcs(arrayList3), new HarmfulDigests(arrayList4));
+                    this.mDomainDigests =
+                            new CrcShaDigests(
+                                    new HarmfulCrcs(arrayList), new HarmfulDigests(arrayList2));
+                    this.mIpDigests =
+                            new CrcShaDigests(
+                                    new HarmfulCrcs(arrayList3), new HarmfulDigests(arrayList4));
                     Log.i("WatchlistConfig", "Reload watchlist done");
                     fileInputStream.close();
                 } catch (Throwable th) {
@@ -138,7 +146,12 @@ public final class WatchlistConfig {
                     }
                     throw th;
                 }
-            } catch (IOException | IllegalStateException | IndexOutOfBoundsException | NullPointerException | NumberFormatException | XmlPullParserException e) {
+            } catch (IOException
+                    | IllegalStateException
+                    | IndexOutOfBoundsException
+                    | NullPointerException
+                    | NumberFormatException
+                    | XmlPullParserException e) {
                 Slog.e("WatchlistConfig", "Failed parsing xml", e);
             }
         }

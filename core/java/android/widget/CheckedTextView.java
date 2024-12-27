@@ -22,6 +22,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -43,7 +44,8 @@ public class CheckedTextView extends TextView implements Checkable {
     private boolean mIsSetCheckMark;
     private boolean mNeedRequestlayout;
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<CheckedTextView> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<CheckedTextView> {
         private int mCheckMarkId;
         private int mCheckMarkTintBlendModeId;
         private int mCheckMarkTintId;
@@ -68,7 +70,8 @@ public class CheckedTextView extends TextView implements Checkable {
             }
             propertyReader.readObject(this.mCheckMarkId, node.getCheckMarkDrawable());
             propertyReader.readObject(this.mCheckMarkTintId, node.getCheckMarkTintList());
-            propertyReader.readObject(this.mCheckMarkTintBlendModeId, node.getCheckMarkTintBlendMode());
+            propertyReader.readObject(
+                    this.mCheckMarkTintBlendModeId, node.getCheckMarkTintBlendMode());
             propertyReader.readObject(this.mCheckMarkTintModeId, node.getCheckMarkTintMode());
             propertyReader.readBoolean(this.mCheckedId, node.isChecked());
         }
@@ -95,20 +98,27 @@ public class CheckedTextView extends TextView implements Checkable {
         this.mCheckMarkGravity = Gravity.END;
         this.mIsSetCheckMark = false;
         this.mIsDeviceDefault = false;
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CheckedTextView, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.CheckedTextView, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.CheckedTextView, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.CheckedTextView, attrs, a, defStyleAttr, defStyleRes);
         Drawable d = a.getDrawable(1);
         TypedValue outValue = new TypedValue();
         getContext().getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, outValue, true);
         if (outValue.data != 0) {
             this.mIsDeviceDefault = true;
         }
-        this.mDrawablePadding = getContext().getResources().getDimensionPixelSize(R.dimen.tw_checkedtextview_padding);
+        this.mDrawablePadding =
+                getContext()
+                        .getResources()
+                        .getDimensionPixelSize(R.dimen.tw_checkedtextview_padding);
         if (d != null) {
             setCheckMarkDrawable(d);
         }
         if (a.hasValue(3)) {
-            this.mCheckMarkBlendMode = Drawable.parseBlendMode(a.getInt(3, -1), this.mCheckMarkBlendMode);
+            this.mCheckMarkBlendMode =
+                    Drawable.parseBlendMode(a.getInt(3, -1), this.mCheckMarkBlendMode);
             this.mHasCheckMarkTintMode = true;
         }
         if (a.hasValue(2)) {
@@ -195,7 +205,8 @@ public class CheckedTextView extends TextView implements Checkable {
     }
 
     public void setCheckMarkTintMode(PorterDuff.Mode tintMode) {
-        setCheckMarkTintBlendMode(tintMode != null ? BlendMode.fromValue(tintMode.nativeInt) : null);
+        setCheckMarkTintBlendMode(
+                tintMode != null ? BlendMode.fromValue(tintMode.nativeInt) : null);
     }
 
     public void setCheckMarkTintBlendMode(BlendMode tintMode) {
@@ -274,9 +285,15 @@ public class CheckedTextView extends TextView implements Checkable {
         int newPadding;
         resetPaddingToInitialValues();
         if (this.mIsSetCheckMark) {
-            newPadding = this.mCheckMarkDrawable != null ? this.mCheckMarkWidth + this.mBasePadding + this.mDrawablePadding : this.mBasePadding;
+            newPadding =
+                    this.mCheckMarkDrawable != null
+                            ? this.mCheckMarkWidth + this.mBasePadding + this.mDrawablePadding
+                            : this.mBasePadding;
         } else {
-            newPadding = this.mCheckMarkDrawable != null ? this.mCheckMarkWidth + this.mBasePadding : this.mBasePadding;
+            newPadding =
+                    this.mCheckMarkDrawable != null
+                            ? this.mCheckMarkWidth + this.mBasePadding
+                            : this.mBasePadding;
         }
         if (isCheckMarkAtStart()) {
             this.mNeedRequestlayout |= this.mPaddingLeft != newPadding;
@@ -341,14 +358,16 @@ public class CheckedTextView extends TextView implements Checkable {
                 left = right - this.mCheckMarkWidth;
             }
             if (isLayoutRtl()) {
-                checkMarkDrawable.setBounds(this.mScrollX + left, top, this.mScrollX + right, bottom);
+                checkMarkDrawable.setBounds(
+                        this.mScrollX + left, top, this.mScrollX + right, bottom);
             } else {
                 checkMarkDrawable.setBounds(left, top, right, bottom);
             }
             checkMarkDrawable.draw(canvas);
             Drawable background = getBackground();
             if (background != null) {
-                background.setHotspotBounds(this.mScrollX + left, top, this.mScrollX + right, bottom);
+                background.setHotspotBounds(
+                        this.mScrollX + left, top, this.mScrollX + right, bottom);
             }
         }
     }
@@ -366,7 +385,9 @@ public class CheckedTextView extends TextView implements Checkable {
     protected void drawableStateChanged() {
         super.drawableStateChanged();
         Drawable checkMarkDrawable = this.mCheckMarkDrawable;
-        if (checkMarkDrawable != null && checkMarkDrawable.isStateful() && checkMarkDrawable.setState(getDrawableState())) {
+        if (checkMarkDrawable != null
+                && checkMarkDrawable.isStateful()
+                && checkMarkDrawable.setState(getDrawableState())) {
             invalidateDrawable(checkMarkDrawable);
         }
     }
@@ -385,19 +406,21 @@ public class CheckedTextView extends TextView implements Checkable {
     }
 
     static class SavedState extends View.BaseSavedState {
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: android.widget.CheckedTextView.SavedState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<
+                        SavedState>() { // from class: android.widget.CheckedTextView.SavedState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
         boolean checked;
 
         SavedState(Parcelable superState) {
@@ -409,14 +432,19 @@ public class CheckedTextView extends TextView implements Checkable {
             this.checked = ((Boolean) in.readValue(null)).booleanValue();
         }
 
-        @Override // android.view.View.BaseSavedState, android.view.AbsSavedState, android.os.Parcelable
+        @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
+                  // android.os.Parcelable
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeValue(Boolean.valueOf(this.checked));
         }
 
         public String toString() {
-            return "CheckedTextView.SavedState{" + Integer.toHexString(System.identityHashCode(this)) + " checked=" + this.checked + "}";
+            return "CheckedTextView.SavedState{"
+                    + Integer.toHexString(System.identityHashCode(this))
+                    + " checked="
+                    + this.checked
+                    + "}";
         }
     }
 
@@ -455,7 +483,8 @@ public class CheckedTextView extends TextView implements Checkable {
         stream.addProperty("text:checked", isChecked());
     }
 
-    @Override // android.widget.TextView, android.view.View, android.graphics.drawable.Drawable.Callback
+    @Override // android.widget.TextView, android.view.View,
+              // android.graphics.drawable.Drawable.Callback
     public void invalidateDrawable(Drawable drawable) {
         super.invalidateDrawable(drawable);
         if (verifyDrawable(drawable)) {

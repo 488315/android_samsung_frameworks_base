@@ -1,10 +1,12 @@
 package com.android.internal.widget.remotecompose.core.operations;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.widget.remotecompose.core.CompanionOperation;
 import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -27,12 +29,17 @@ public class TextMerge implements Operation {
     }
 
     public String toString() {
-        return "TextMerge[" + this.mTextId + "] = [" + this.mSrcId1 + " ] + [ " + this.mSrcId2 + NavigationBarInflaterView.SIZE_MOD_END;
+        return "TextMerge["
+                + this.mTextId
+                + "] = ["
+                + this.mSrcId1
+                + " ] + [ "
+                + this.mSrcId2
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public String name() {

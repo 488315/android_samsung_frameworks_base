@@ -2,7 +2,9 @@ package android.view;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,19 +12,21 @@ import java.util.List;
 
 /* loaded from: classes4.dex */
 public final class KeyboardShortcutGroup implements Parcelable {
-    public static final Parcelable.Creator<KeyboardShortcutGroup> CREATOR = new Parcelable.Creator<KeyboardShortcutGroup>() { // from class: android.view.KeyboardShortcutGroup.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyboardShortcutGroup createFromParcel(Parcel source) {
-            return new KeyboardShortcutGroup(source);
-        }
+    public static final Parcelable.Creator<KeyboardShortcutGroup> CREATOR =
+            new Parcelable.Creator<
+                    KeyboardShortcutGroup>() { // from class: android.view.KeyboardShortcutGroup.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyboardShortcutGroup createFromParcel(Parcel source) {
+                    return new KeyboardShortcutGroup(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyboardShortcutGroup[] newArray(int size) {
-            return new KeyboardShortcutGroup[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyboardShortcutGroup[] newArray(int size) {
+                    return new KeyboardShortcutGroup[size];
+                }
+            };
     private final List<KeyboardShortcutInfo> mItems;
     private final CharSequence mLabel;
     private CharSequence mPackageName;
@@ -37,7 +41,8 @@ public final class KeyboardShortcutGroup implements Parcelable {
         this(label, (List<KeyboardShortcutInfo>) Collections.emptyList());
     }
 
-    public KeyboardShortcutGroup(CharSequence label, List<KeyboardShortcutInfo> items, boolean isSystemGroup) {
+    public KeyboardShortcutGroup(
+            CharSequence label, List<KeyboardShortcutInfo> items, boolean isSystemGroup) {
         this.mLabel = label;
         this.mItems = new ArrayList((Collection) Preconditions.checkNotNull(items));
         this.mSystemGroup = isSystemGroup;

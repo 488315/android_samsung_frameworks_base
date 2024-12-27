@@ -7,13 +7,17 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda7 impl
     public final /* synthetic */ UserController f$0;
     public final /* synthetic */ Runnable f$1;
 
-    public /* synthetic */ UserController$$ExternalSyntheticLambda7(UserController userController, UserController$$ExternalSyntheticLambda6 userController$$ExternalSyntheticLambda6, int i) {
+    public /* synthetic */ UserController$$ExternalSyntheticLambda7(
+            UserController userController,
+            UserController$$ExternalSyntheticLambda6 userController$$ExternalSyntheticLambda6,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = userController;
         this.f$1 = userController$$ExternalSyntheticLambda6;
     }
 
-    public /* synthetic */ UserController$$ExternalSyntheticLambda7(UserController userController, Runnable runnable) {
+    public /* synthetic */ UserController$$ExternalSyntheticLambda7(
+            UserController userController, Runnable runnable) {
         this.$r8$classId = 1;
         this.f$0 = userController;
         this.f$1 = runnable;
@@ -24,7 +28,8 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda7 impl
         switch (this.$r8$classId) {
             case 0:
                 UserController userController = this.f$0;
-                userController.mUiHandler.post(new UserController$$ExternalSyntheticLambda7(userController, this.f$1));
+                userController.mUiHandler.post(
+                        new UserController$$ExternalSyntheticLambda7(userController, this.f$1));
                 break;
             case 1:
                 UserController userController2 = this.f$0;
@@ -32,7 +37,8 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda7 impl
                 break;
             default:
                 UserController userController3 = this.f$0;
-                userController3.mUiHandler.post(new UserController$$ExternalSyntheticLambda7(userController3, this.f$1));
+                userController3.mUiHandler.post(
+                        new UserController$$ExternalSyntheticLambda7(userController3, this.f$1));
                 break;
         }
     }

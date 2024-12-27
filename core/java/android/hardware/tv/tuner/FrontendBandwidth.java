@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class FrontendBandwidth implements Parcelable {
-    public static final Parcelable.Creator<FrontendBandwidth> CREATOR = new Parcelable.Creator<FrontendBandwidth>() { // from class: android.hardware.tv.tuner.FrontendBandwidth.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendBandwidth createFromParcel(Parcel _aidl_source) {
-            return new FrontendBandwidth(_aidl_source);
-        }
+    public static final Parcelable.Creator<FrontendBandwidth> CREATOR =
+            new Parcelable.Creator<FrontendBandwidth>() { // from class:
+                // android.hardware.tv.tuner.FrontendBandwidth.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendBandwidth createFromParcel(Parcel _aidl_source) {
+                    return new FrontendBandwidth(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendBandwidth[] newArray(int _aidl_size) {
-            return new FrontendBandwidth[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendBandwidth[] newArray(int _aidl_size) {
+                    return new FrontendBandwidth[_aidl_size];
+                }
+            };
     public static final int atsc3 = 0;
     public static final int dtmb = 4;
     public static final int dvbc = 1;
@@ -180,7 +182,12 @@ public final class FrontendBandwidth implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

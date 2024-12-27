@@ -2,6 +2,7 @@ package com.android.server.credentials.metrics.shared;
 
 import com.android.server.audio.AudioService$$ExternalSyntheticLambda1;
 import com.android.server.credentials.metrics.EntryEnum;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,7 +19,12 @@ public final class ResponseCollective {
 
     public static void combineTypeCountMaps(Map map, Map map2) {
         for (Object obj : map2.keySet()) {
-            map.put(obj, Integer.valueOf(((Integer) map2.get(obj)).intValue() + ((Integer) ((LinkedHashMap) map).getOrDefault(obj, 0)).intValue()));
+            map.put(
+                    obj,
+                    Integer.valueOf(
+                            ((Integer) map2.get(obj)).intValue()
+                                    + ((Integer) ((LinkedHashMap) map).getOrDefault(obj, 0))
+                                            .intValue()));
         }
     }
 
@@ -27,15 +33,21 @@ public final class ResponseCollective {
     }
 
     public final int[] getUniqueEntries() {
-        return this.mEntryCounts.keySet().stream().mapToInt(new ResponseCollective$$ExternalSyntheticLambda0()).toArray();
+        return this.mEntryCounts.keySet().stream()
+                .mapToInt(new ResponseCollective$$ExternalSyntheticLambda0())
+                .toArray();
     }
 
     public final int[] getUniqueEntryCounts() {
-        return this.mEntryCounts.values().stream().mapToInt(new AudioService$$ExternalSyntheticLambda1(2)).toArray();
+        return this.mEntryCounts.values().stream()
+                .mapToInt(new AudioService$$ExternalSyntheticLambda1(2))
+                .toArray();
     }
 
     public final int[] getUniqueResponseCounts() {
-        return this.mResponseCounts.values().stream().mapToInt(new AudioService$$ExternalSyntheticLambda1(2)).toArray();
+        return this.mResponseCounts.values().stream()
+                .mapToInt(new AudioService$$ExternalSyntheticLambda1(2))
+                .toArray();
     }
 
     public final String[] getUniqueResponseStrings() {

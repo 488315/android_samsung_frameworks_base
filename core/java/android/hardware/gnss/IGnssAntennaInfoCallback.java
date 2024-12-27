@@ -11,7 +11,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IGnssAntennaInfoCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$gnss$IGnssAntennaInfoCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$IGnssAntennaInfoCallback".replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";
     public static final int VERSION = 2;
 
@@ -23,8 +24,7 @@ public interface IGnssAntennaInfoCallback extends IInterface {
 
     public static class Default implements IGnssAntennaInfoCallback {
         @Override // android.hardware.gnss.IGnssAntennaInfoCallback
-        public void gnssAntennaInfoCb(GnssAntennaInfo[] gnssAntennaInfos) throws RemoteException {
-        }
+        public void gnssAntennaInfoCb(GnssAntennaInfo[] gnssAntennaInfos) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssAntennaInfoCallback
         public int getInterfaceVersion() {
@@ -42,7 +42,7 @@ public interface IGnssAntennaInfoCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssAntennaInfoCallback {
+    public abstract static class Stub extends Binder implements IGnssAntennaInfoCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_gnssAntennaInfoCb = 1;
@@ -87,7 +87,8 @@ public interface IGnssAntennaInfoCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -108,7 +109,8 @@ public interface IGnssAntennaInfoCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    GnssAntennaInfo[] _arg0 = (GnssAntennaInfo[]) data.createTypedArray(GnssAntennaInfo.CREATOR);
+                    GnssAntennaInfo[] _arg0 =
+                            (GnssAntennaInfo[]) data.createTypedArray(GnssAntennaInfo.CREATOR);
                     data.enforceNoDataAvail();
                     gnssAntennaInfoCb(_arg0);
                     reply.writeNoException();
@@ -136,7 +138,8 @@ public interface IGnssAntennaInfoCallback extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnssAntennaInfoCallback
-            public void gnssAntennaInfoCb(GnssAntennaInfo[] gnssAntennaInfos) throws RemoteException {
+            public void gnssAntennaInfoCb(GnssAntennaInfo[] gnssAntennaInfos)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -200,21 +203,23 @@ public interface IGnssAntennaInfoCallback extends IInterface {
     }
 
     public static class Row implements Parcelable {
-        public static final Parcelable.Creator<Row> CREATOR = new Parcelable.Creator<Row>() { // from class: android.hardware.gnss.IGnssAntennaInfoCallback.Row.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Row createFromParcel(Parcel _aidl_source) {
-                Row _aidl_out = new Row();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<Row> CREATOR =
+                new Parcelable.Creator<
+                        Row>() { // from class: android.hardware.gnss.IGnssAntennaInfoCallback.Row.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Row createFromParcel(Parcel _aidl_source) {
+                        Row _aidl_out = new Row();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Row[] newArray(int _aidl_size) {
-                return new Row[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Row[] newArray(int _aidl_size) {
+                        return new Row[_aidl_size];
+                    }
+                };
         public double[] row;
 
         @Override // android.os.Parcelable
@@ -268,21 +273,23 @@ public interface IGnssAntennaInfoCallback extends IInterface {
     }
 
     public static class Coord implements Parcelable {
-        public static final Parcelable.Creator<Coord> CREATOR = new Parcelable.Creator<Coord>() { // from class: android.hardware.gnss.IGnssAntennaInfoCallback.Coord.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Coord createFromParcel(Parcel _aidl_source) {
-                Coord _aidl_out = new Coord();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<Coord> CREATOR =
+                new Parcelable.Creator<Coord>() { // from class:
+                    // android.hardware.gnss.IGnssAntennaInfoCallback.Coord.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Coord createFromParcel(Parcel _aidl_source) {
+                        Coord _aidl_out = new Coord();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Coord[] newArray(int _aidl_size) {
-                return new Coord[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Coord[] newArray(int _aidl_size) {
+                        return new Coord[_aidl_size];
+                    }
+                };
         public double x = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         public double xUncertainty = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         public double y = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
@@ -386,21 +393,23 @@ public interface IGnssAntennaInfoCallback extends IInterface {
     }
 
     public static class GnssAntennaInfo implements Parcelable {
-        public static final Parcelable.Creator<GnssAntennaInfo> CREATOR = new Parcelable.Creator<GnssAntennaInfo>() { // from class: android.hardware.gnss.IGnssAntennaInfoCallback.GnssAntennaInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GnssAntennaInfo createFromParcel(Parcel _aidl_source) {
-                GnssAntennaInfo _aidl_out = new GnssAntennaInfo();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<GnssAntennaInfo> CREATOR =
+                new Parcelable.Creator<GnssAntennaInfo>() { // from class:
+                    // android.hardware.gnss.IGnssAntennaInfoCallback.GnssAntennaInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GnssAntennaInfo createFromParcel(Parcel _aidl_source) {
+                        GnssAntennaInfo _aidl_out = new GnssAntennaInfo();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GnssAntennaInfo[] newArray(int _aidl_size) {
-                return new GnssAntennaInfo[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GnssAntennaInfo[] newArray(int _aidl_size) {
+                        return new GnssAntennaInfo[_aidl_size];
+                    }
+                };
         public long carrierFrequencyHz = 0;
         public Coord phaseCenterOffsetCoordinateMillimeters;
         public Row[] phaseCenterVariationCorrectionMillimeters;
@@ -419,8 +428,10 @@ public interface IGnssAntennaInfoCallback extends IInterface {
             _aidl_parcel.writeInt(0);
             _aidl_parcel.writeLong(this.carrierFrequencyHz);
             _aidl_parcel.writeTypedObject(this.phaseCenterOffsetCoordinateMillimeters, _aidl_flag);
-            _aidl_parcel.writeTypedArray(this.phaseCenterVariationCorrectionMillimeters, _aidl_flag);
-            _aidl_parcel.writeTypedArray(this.phaseCenterVariationCorrectionUncertaintyMillimeters, _aidl_flag);
+            _aidl_parcel.writeTypedArray(
+                    this.phaseCenterVariationCorrectionMillimeters, _aidl_flag);
+            _aidl_parcel.writeTypedArray(
+                    this.phaseCenterVariationCorrectionUncertaintyMillimeters, _aidl_flag);
             _aidl_parcel.writeTypedArray(this.signalGainCorrectionDbi, _aidl_flag);
             _aidl_parcel.writeTypedArray(this.signalGainCorrectionUncertaintyDbi, _aidl_flag);
             int _aidl_end_pos = _aidl_parcel.dataPosition();
@@ -451,7 +462,8 @@ public interface IGnssAntennaInfoCallback extends IInterface {
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                     return;
                 }
-                this.phaseCenterOffsetCoordinateMillimeters = (Coord) _aidl_parcel.readTypedObject(Coord.CREATOR);
+                this.phaseCenterOffsetCoordinateMillimeters =
+                        (Coord) _aidl_parcel.readTypedObject(Coord.CREATOR);
                 if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
@@ -459,7 +471,8 @@ public interface IGnssAntennaInfoCallback extends IInterface {
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                     return;
                 }
-                this.phaseCenterVariationCorrectionMillimeters = (Row[]) _aidl_parcel.createTypedArray(Row.CREATOR);
+                this.phaseCenterVariationCorrectionMillimeters =
+                        (Row[]) _aidl_parcel.createTypedArray(Row.CREATOR);
                 if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
@@ -467,7 +480,8 @@ public interface IGnssAntennaInfoCallback extends IInterface {
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                     return;
                 }
-                this.phaseCenterVariationCorrectionUncertaintyMillimeters = (Row[]) _aidl_parcel.createTypedArray(Row.CREATOR);
+                this.phaseCenterVariationCorrectionUncertaintyMillimeters =
+                        (Row[]) _aidl_parcel.createTypedArray(Row.CREATOR);
                 if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
@@ -482,7 +496,8 @@ public interface IGnssAntennaInfoCallback extends IInterface {
                     }
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 } else {
-                    this.signalGainCorrectionUncertaintyDbi = (Row[]) _aidl_parcel.createTypedArray(Row.CREATOR);
+                    this.signalGainCorrectionUncertaintyDbi =
+                            (Row[]) _aidl_parcel.createTypedArray(Row.CREATOR);
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
@@ -500,7 +515,11 @@ public interface IGnssAntennaInfoCallback extends IInterface {
         @Override // android.os.Parcelable
         public int describeContents() {
             int _mask = 0 | describeContents(this.phaseCenterOffsetCoordinateMillimeters);
-            return _mask | describeContents(this.phaseCenterVariationCorrectionMillimeters) | describeContents(this.phaseCenterVariationCorrectionUncertaintyMillimeters) | describeContents(this.signalGainCorrectionDbi) | describeContents(this.signalGainCorrectionUncertaintyDbi);
+            return _mask
+                    | describeContents(this.phaseCenterVariationCorrectionMillimeters)
+                    | describeContents(this.phaseCenterVariationCorrectionUncertaintyMillimeters)
+                    | describeContents(this.signalGainCorrectionDbi)
+                    | describeContents(this.signalGainCorrectionUncertaintyDbi);
         }
 
         private int describeContents(Object _v) {

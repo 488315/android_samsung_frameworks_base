@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class AppLaunchEstimateInfo implements Parcelable {
-    public static final Parcelable.Creator<AppLaunchEstimateInfo> CREATOR = new Parcelable.Creator<AppLaunchEstimateInfo>() { // from class: android.app.usage.AppLaunchEstimateInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppLaunchEstimateInfo createFromParcel(Parcel source) {
-            return new AppLaunchEstimateInfo(source);
-        }
+    public static final Parcelable.Creator<AppLaunchEstimateInfo> CREATOR =
+            new Parcelable.Creator<AppLaunchEstimateInfo>() { // from class:
+                // android.app.usage.AppLaunchEstimateInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppLaunchEstimateInfo createFromParcel(Parcel source) {
+                    return new AppLaunchEstimateInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppLaunchEstimateInfo[] newArray(int size) {
-            return new AppLaunchEstimateInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppLaunchEstimateInfo[] newArray(int size) {
+                    return new AppLaunchEstimateInfo[size];
+                }
+            };
     public final long estimatedLaunchTime;
     public final String packageName;
 

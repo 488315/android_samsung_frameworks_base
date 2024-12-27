@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.Pair;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,7 +26,22 @@ public class SipMessageParsingUtils {
     private static final String HEADER_KEY_VALUE_SEPARATOR = ":";
     private static final String PARAM_KEY_VALUE_SEPARATOR = "=";
     private static final String PARAM_SEPARATOR = ";";
-    private static final String[] SIP_REQUEST_METHODS = {"INVITE", "ACK", "OPTIONS", "BYE", "CANCEL", "REGISTER", "PRACK", "SUBSCRIBE", "NOTIFY", "PUBLISH", "INFO", "REFER", "MESSAGE", "UPDATE"};
+    private static final String[] SIP_REQUEST_METHODS = {
+        "INVITE",
+        "ACK",
+        "OPTIONS",
+        "BYE",
+        "CANCEL",
+        "REGISTER",
+        "PRACK",
+        "SUBSCRIBE",
+        "NOTIFY",
+        "PUBLISH",
+        "INFO",
+        "REFER",
+        "MESSAGE",
+        "UPDATE"
+    };
     private static final String SIP_VERSION_2 = "SIP/2.0";
     private static final String SUBHEADER_VALUE_SEPARATOR = ",";
     private static final String TAG = "SipMessageParsingUtils";
@@ -52,7 +68,8 @@ public class SipMessageParsingUtils {
     }
 
     public static String getTransactionId(String headerString) {
-        List<Pair<String, String>> headers = parseHeaders(headerString, true, VIA_SIP_HEADER_KEY, "v");
+        List<Pair<String, String>> headers =
+                parseHeaders(headerString, true, VIA_SIP_HEADER_KEY, "v");
         for (Pair<String, String> header : headers) {
             String[] subHeaders = header.second.split(",");
             for (String subHeader : subHeaders) {
@@ -87,7 +104,9 @@ public class SipMessageParsingUtils {
     }
 
     public static String getCallId(String headerString) {
-        List<Pair<String, String>> headers = parseHeaders(headerString, true, CALL_ID_SIP_HEADER_KEY, CALL_ID_SIP_HEADER_KEY_COMPACT);
+        List<Pair<String, String>> headers =
+                parseHeaders(
+                        headerString, true, CALL_ID_SIP_HEADER_KEY, CALL_ID_SIP_HEADER_KEY_COMPACT);
         if (headers.isEmpty()) {
             return null;
         }
@@ -119,7 +138,8 @@ public class SipMessageParsingUtils {
     }
 
     public static Set<String> getAcceptContactFeatureTags(String headerString) {
-        List<Pair<String, String>> headers = parseHeaders(headerString, false, ACCEPT_CONTACT_HEADER_KEY, "a");
+        List<Pair<String, String>> headers =
+                parseHeaders(headerString, false, ACCEPT_CONTACT_HEADER_KEY, "a");
         if (headerString.isEmpty()) {
             return Collections.emptySet();
         }
@@ -129,19 +149,28 @@ public class SipMessageParsingUtils {
             int i = 2;
             if (splitParams.length >= 2) {
                 char c = 1;
-                Set<String> fts = (Set) Arrays.asList(splitParams).subList(1, splitParams.length).stream().map(new Function() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda3
-                    @Override // java.util.function.Function
-                    public final Object apply(Object obj) {
-                        return ((String) obj).trim();
-                    }
-                }).filter(new Predicate() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda4
-                    @Override // java.util.function.Predicate
-                    public final boolean test(Object obj) {
-                        boolean startsWith;
-                        startsWith = ((String) obj).startsWith("+");
-                        return startsWith;
-                    }
-                }).collect(Collectors.toSet());
+                Set<String> fts =
+                        (Set)
+                                Arrays.asList(splitParams).subList(1, splitParams.length).stream()
+                                        .map(
+                                                new Function() { // from class:
+                                                                 // com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda3
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        return ((String) obj).trim();
+                                                    }
+                                                })
+                                        .filter(
+                                                new Predicate() { // from class:
+                                                                  // com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda4
+                                                    @Override // java.util.function.Predicate
+                                                    public final boolean test(Object obj) {
+                                                        boolean startsWith;
+                                                        startsWith = ((String) obj).startsWith("+");
+                                                        return startsWith;
+                                                    }
+                                                })
+                                        .collect(Collectors.toSet());
                 for (String ft : fts) {
                     String[] paramKeyValue = ft.split(PARAM_KEY_VALUE_SEPARATOR, i);
                     if (paramKeyValue.length < i) {
@@ -167,7 +196,7 @@ public class SipMessageParsingUtils {
 
     private static String[] splitParamValue(String paramValue) {
         if (!paramValue.startsWith("\"") && !paramValue.endsWith("\"")) {
-            return new String[]{paramValue};
+            return new String[] {paramValue};
         }
         String[] splitValues = paramValue.substring(1, paramValue.length() - 1).split(",");
         for (int i = 0; i < splitValues.length; i++) {
@@ -186,14 +215,18 @@ public class SipMessageParsingUtils {
         }
         try {
             boolean verified = Uri.parse(request[1]).getScheme() != null;
-            return verified & Arrays.stream(SIP_REQUEST_METHODS).anyMatch(new Predicate() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    boolean contains;
-                    contains = request[0].contains((String) obj);
-                    return contains;
-                }
-            });
+            return verified
+                    & Arrays.stream(SIP_REQUEST_METHODS)
+                            .anyMatch(
+                                    new Predicate() { // from class:
+                                                      // com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            boolean contains;
+                                            contains = request[0].contains((String) obj);
+                                            return contains;
+                                        }
+                                    });
         } catch (NumberFormatException e) {
             return false;
         }
@@ -214,7 +247,8 @@ public class SipMessageParsingUtils {
         }
     }
 
-    public static List<Pair<String, String>> parseHeaders(String headerString, boolean stopAtFirstMatch, String... matchingHeaderKeys) {
+    public static List<Pair<String, String>> parseHeaders(
+            String headerString, boolean stopAtFirstMatch, String... matchingHeaderKeys) {
         String headerString2 = removeLeadingWhitespace(headerString);
         List<Pair<String, String>> result = new ArrayList<>();
         String[] headerLines = headerString2.split("\\r?\\n");
@@ -229,14 +263,20 @@ public class SipMessageParsingUtils {
             } else {
                 if (headerKey != null) {
                     final String key = headerKey;
-                    if (matchingHeaderKeys == null || matchingHeaderKeys.length == 0 || Arrays.stream(matchingHeaderKeys).anyMatch(new Predicate() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda1
-                        @Override // java.util.function.Predicate
-                        public final boolean test(Object obj) {
-                            boolean equalsIgnoreCase;
-                            equalsIgnoreCase = ((String) obj).equalsIgnoreCase(key);
-                            return equalsIgnoreCase;
-                        }
-                    })) {
+                    if (matchingHeaderKeys == null
+                            || matchingHeaderKeys.length == 0
+                            || Arrays.stream(matchingHeaderKeys)
+                                    .anyMatch(
+                                            new Predicate() { // from class:
+                                                              // com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.Predicate
+                                                public final boolean test(Object obj) {
+                                                    boolean equalsIgnoreCase;
+                                                    equalsIgnoreCase =
+                                                            ((String) obj).equalsIgnoreCase(key);
+                                                    return equalsIgnoreCase;
+                                                }
+                                            })) {
                         result.add(new Pair<>(key, headerValueSegment.toString()));
                         if (stopAtFirstMatch) {
                             return result;
@@ -258,14 +298,20 @@ public class SipMessageParsingUtils {
         }
         if (headerKey != null) {
             final String key2 = headerKey;
-            if (matchingHeaderKeys == null || matchingHeaderKeys.length == 0 || Arrays.stream(matchingHeaderKeys).anyMatch(new Predicate() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda2
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    boolean equalsIgnoreCase;
-                    equalsIgnoreCase = ((String) obj).equalsIgnoreCase(key2);
-                    return equalsIgnoreCase;
-                }
-            })) {
+            if (matchingHeaderKeys == null
+                    || matchingHeaderKeys.length == 0
+                    || Arrays.stream(matchingHeaderKeys)
+                            .anyMatch(
+                                    new Predicate() { // from class:
+                                                      // com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            boolean equalsIgnoreCase;
+                                            equalsIgnoreCase =
+                                                    ((String) obj).equalsIgnoreCase(key2);
+                                            return equalsIgnoreCase;
+                                        }
+                                    })) {
                 result.add(new Pair<>(key2, headerValueSegment.toString()));
             }
         }

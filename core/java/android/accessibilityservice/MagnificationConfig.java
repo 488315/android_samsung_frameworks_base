@@ -2,24 +2,27 @@ package android.accessibilityservice;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes.dex */
 public final class MagnificationConfig implements Parcelable {
-    public static final Parcelable.Creator<MagnificationConfig> CREATOR = new Parcelable.Creator<MagnificationConfig>() { // from class: android.accessibilityservice.MagnificationConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MagnificationConfig createFromParcel(Parcel parcel) {
-            return new MagnificationConfig(parcel);
-        }
+    public static final Parcelable.Creator<MagnificationConfig> CREATOR =
+            new Parcelable.Creator<MagnificationConfig>() { // from class:
+                // android.accessibilityservice.MagnificationConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MagnificationConfig createFromParcel(Parcel parcel) {
+                    return new MagnificationConfig(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MagnificationConfig[] newArray(int size) {
-            return new MagnificationConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MagnificationConfig[] newArray(int size) {
+                    return new MagnificationConfig[size];
+                }
+            };
     public static final int MAGNIFICATION_MODE_DEFAULT = 0;
     public static final int MAGNIFICATION_MODE_FULLSCREEN = 1;
     public static final int MAGNIFICATION_MODE_WINDOW = 2;
@@ -30,8 +33,7 @@ public final class MagnificationConfig implements Parcelable {
     private float mScale;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface MagnificationMode {
-    }
+    @interface MagnificationMode {}
 
     private MagnificationConfig() {
         this.mMode = 0;

@@ -7,8 +7,10 @@ import android.graphics.Paint;
 import android.hardware.gnss.GnssSignalType;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Build;
+
 import com.samsung.android.graphics.spr.document.SprDocument;
 import com.samsung.android.graphics.spr.document.shape.SprObjectBase;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -51,7 +53,10 @@ public class SprDebug {
         try {
             File dir = new File("/sdcard/spr_debug");
             if (dir.mkdir() || dir.isDirectory()) {
-                OutputStream out = new FileOutputStream(new File(dir, String.valueOf(document.hashCode() % 10000) + ".png"));
+                OutputStream out =
+                        new FileOutputStream(
+                                new File(
+                                        dir, String.valueOf(document.hashCode() % 10000) + ".png"));
                 bm.compress(Bitmap.CompressFormat.PNG, 90, out);
                 out.close();
             }
@@ -62,13 +67,19 @@ public class SprDebug {
         }
     }
 
-    public static void drawRect(Canvas canvas, SprDocument document, int displayWidth, int displayHeight) {
+    public static void drawRect(
+            Canvas canvas, SprDocument document, int displayWidth, int displayHeight) {
         Paint debugPaint = new Paint();
         debugPaint.setAntiAlias(true);
         debugPaint.setStyle(Paint.Style.STROKE);
         debugPaint.setStrokeWidth(5.0f);
         debugPaint.setColor(-65536);
-        canvas.drawRect(document.mLeft, document.mTop, displayWidth + document.mLeft, displayHeight + document.mTop, debugPaint);
+        canvas.drawRect(
+                document.mLeft,
+                document.mTop,
+                displayWidth + document.mLeft,
+                displayHeight + document.mTop,
+                debugPaint);
     }
 
     public static void preDraw(SprObjectBase object) {
@@ -81,13 +92,36 @@ public class SprDebug {
         }
     }
 
-    public static void drawDebugInfo(Canvas canvas, SprDocument document, int displayWidth, int displayHeight, int dpi) {
+    public static void drawDebugInfo(
+            Canvas canvas, SprDocument document, int displayWidth, int displayHeight, int dpi) {
         if (mDebugLevel.intValue() >= 2) {
-            drawText(canvas, (document.isNinePatch() ? GnssSignalType.CODE_TYPE_N : document.isIntrinsic() ? "" : GnssSignalType.CODE_TYPE_C) + String.valueOf(document.hashCode() % 10000), 20);
+            drawText(
+                    canvas,
+                    (document.isNinePatch()
+                                    ? GnssSignalType.CODE_TYPE_N
+                                    : document.isIntrinsic() ? "" : GnssSignalType.CODE_TYPE_C)
+                            + String.valueOf(document.hashCode() % 10000),
+                    20);
             drawText(canvas, document.mName, 40);
-            drawText(canvas, dpi + NavigationBarInflaterView.KEY_CODE_END + displayWidth + "x" + displayHeight, 60);
+            drawText(
+                    canvas,
+                    dpi
+                            + NavigationBarInflaterView.KEY_CODE_END
+                            + displayWidth
+                            + "x"
+                            + displayHeight,
+                    60);
             if (mDebugLevel.intValue() >= 3) {
-                drawText(canvas, document.getLoadingTime() + "ms E:" + document.getTotalElementCount() + " S:" + document.getTotalSegmentCount() + " A:" + document.getTotalAttributeCount(), 80);
+                drawText(
+                        canvas,
+                        document.getLoadingTime()
+                                + "ms E:"
+                                + document.getTotalElementCount()
+                                + " S:"
+                                + document.getTotalSegmentCount()
+                                + " A:"
+                                + document.getTotalAttributeCount(),
+                        80);
             }
         }
     }

@@ -1,7 +1,7 @@
 package com.android.internal.midi;
 
 import android.media.midi.MidiReceiver;
-import com.android.internal.midi.EventScheduler;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -11,12 +11,12 @@ public class MidiEventScheduler extends EventScheduler {
     private MidiReceiver mReceiver = new SchedulingReceiver();
 
     private class SchedulingReceiver extends MidiReceiver {
-        private SchedulingReceiver() {
-        }
+        private SchedulingReceiver() {}
 
         @Override // android.media.midi.MidiReceiver
         public void onSend(byte[] msg, int offset, int count, long timestamp) throws IOException {
-            MidiEvent event = MidiEventScheduler.this.createScheduledEvent(msg, offset, count, timestamp);
+            MidiEvent event =
+                    MidiEventScheduler.this.createScheduledEvent(msg, offset, count, timestamp);
             if (event != null) {
                 MidiEventScheduler.this.add(event);
             }

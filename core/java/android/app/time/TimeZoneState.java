@@ -4,25 +4,28 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ShellCommand;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class TimeZoneState implements Parcelable {
-    public static final Parcelable.Creator<TimeZoneState> CREATOR = new Parcelable.Creator<TimeZoneState>() { // from class: android.app.time.TimeZoneState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneState createFromParcel(Parcel in) {
-            return TimeZoneState.createFromParcel(in);
-        }
+    public static final Parcelable.Creator<TimeZoneState> CREATOR =
+            new Parcelable.Creator<
+                    TimeZoneState>() { // from class: android.app.time.TimeZoneState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneState createFromParcel(Parcel in) {
+                    return TimeZoneState.createFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneState[] newArray(int size) {
-            return new TimeZoneState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneState[] newArray(int size) {
+                    return new TimeZoneState[size];
+                }
+            };
     private final String mId;
     private final boolean mUserShouldConfirmId;
 
@@ -76,7 +79,8 @@ public final class TimeZoneState implements Parcelable {
                         zoneIdString = cmd.getNextArgRequired();
                         break;
                     case 1:
-                        userShouldConfirmId = Boolean.valueOf(Boolean.parseBoolean(cmd.getNextArgRequired()));
+                        userShouldConfirmId =
+                                Boolean.valueOf(Boolean.parseBoolean(cmd.getNextArgRequired()));
                         break;
                     default:
                         throw new IllegalArgumentException("Unknown option: " + opt);
@@ -122,7 +126,8 @@ public final class TimeZoneState implements Parcelable {
             return false;
         }
         TimeZoneState that = (TimeZoneState) o;
-        if (Objects.equals(this.mId, that.mId) && this.mUserShouldConfirmId == that.mUserShouldConfirmId) {
+        if (Objects.equals(this.mId, that.mId)
+                && this.mUserShouldConfirmId == that.mUserShouldConfirmId) {
             return true;
         }
         return false;
@@ -133,6 +138,10 @@ public final class TimeZoneState implements Parcelable {
     }
 
     public String toString() {
-        return "TimeZoneState{mZoneId=" + this.mId + ", mUserShouldConfirmId=" + this.mUserShouldConfirmId + '}';
+        return "TimeZoneState{mZoneId="
+                + this.mId
+                + ", mUserShouldConfirmId="
+                + this.mUserShouldConfirmId
+                + '}';
     }
 }

@@ -21,16 +21,15 @@ public interface IResponseCallback extends IInterface {
 
     public static class Default implements IResponseCallback {
         @Override // android.app.ondeviceintelligence.IResponseCallback
-        public void onSuccess(Bundle resultBundle) throws RemoteException {
-        }
+        public void onSuccess(Bundle resultBundle) throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IResponseCallback
-        public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams) throws RemoteException {
-        }
+        public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams)
+                throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IResponseCallback
-        public void onDataAugmentRequest(Bundle processedContent, RemoteCallback responseCallback) throws RemoteException {
-        }
+        public void onDataAugmentRequest(Bundle processedContent, RemoteCallback responseCallback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -38,7 +37,7 @@ public interface IResponseCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IResponseCallback {
+    public abstract static class Stub extends Binder implements IResponseCallback {
         static final int TRANSACTION_onDataAugmentRequest = 4;
         static final int TRANSACTION_onFailure = 3;
         static final int TRANSACTION_onSuccess = 2;
@@ -82,7 +81,8 @@ public interface IResponseCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IResponseCallback.DESCRIPTOR);
             }
@@ -99,13 +99,15 @@ public interface IResponseCallback extends IInterface {
                 case 3:
                     int _arg02 = data.readInt();
                     String _arg1 = data.readString();
-                    PersistableBundle _arg2 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg2 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg02, _arg1, _arg2);
                     return true;
                 case 4:
                     Bundle _arg03 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    RemoteCallback _arg12 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg12 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     onDataAugmentRequest(_arg03, _arg12);
                     return true;
@@ -143,7 +145,8 @@ public interface IResponseCallback extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IResponseCallback
-            public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams) throws RemoteException {
+            public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IResponseCallback.DESCRIPTOR);
@@ -157,7 +160,9 @@ public interface IResponseCallback extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IResponseCallback
-            public void onDataAugmentRequest(Bundle processedContent, RemoteCallback responseCallback) throws RemoteException {
+            public void onDataAugmentRequest(
+                    Bundle processedContent, RemoteCallback responseCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IResponseCallback.DESCRIPTOR);

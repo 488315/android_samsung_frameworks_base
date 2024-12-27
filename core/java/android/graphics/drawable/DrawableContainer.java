@@ -8,7 +8,6 @@ import android.graphics.ColorFilter;
 import android.graphics.Insets;
 import android.graphics.Outline;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.util.SparseArray;
 
@@ -43,7 +42,8 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
 
     @Override // android.graphics.drawable.Drawable
     public int getChangingConfigurations() {
-        return super.getChangingConfigurations() | this.mDrawableContainerState.getChangingConfigurations();
+        return super.getChangingConfigurations()
+                | this.mDrawableContainerState.getChangingConfigurations();
     }
 
     private boolean needsMirroring() {
@@ -414,13 +414,15 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
         }
         if (this.mEnterAnimationEnd != 0 || this.mExitAnimationEnd != 0) {
             if (this.mAnimationRunnable == null) {
-                this.mAnimationRunnable = new Runnable() { // from class: android.graphics.drawable.DrawableContainer.1
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        DrawableContainer.this.animate(true);
-                        DrawableContainer.this.invalidateSelf();
-                    }
-                };
+                this.mAnimationRunnable =
+                        new Runnable() { // from class:
+                            // android.graphics.drawable.DrawableContainer.1
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                DrawableContainer.this.animate(true);
+                                DrawableContainer.this.invalidateSelf();
+                            }
+                        };
             } else {
                 unscheduleSelf(this.mAnimationRunnable);
             }
@@ -458,7 +460,11 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
             d.setAutoMirrored(this.mDrawableContainerState.mAutoMirrored);
             Rect hotspotBounds = this.mHotspotBounds;
             if (hotspotBounds != null) {
-                d.setHotspotBounds(hotspotBounds.left, hotspotBounds.top, hotspotBounds.right, hotspotBounds.bottom);
+                d.setHotspotBounds(
+                        hotspotBounds.left,
+                        hotspotBounds.top,
+                        hotspotBounds.right,
+                        hotspotBounds.bottom);
             }
         } finally {
             d.setCallback(this.mBlockInvalidateCallback.unwrap());
@@ -476,7 +482,9 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
                 this.mCurrDrawable.setAlpha(this.mAlpha);
                 this.mEnterAnimationEnd = 0L;
             } else {
-                int animAlpha = ((int) ((this.mEnterAnimationEnd - now) * 255)) / this.mDrawableContainerState.mEnterFadeDuration;
+                int animAlpha =
+                        ((int) ((this.mEnterAnimationEnd - now) * 255))
+                                / this.mDrawableContainerState.mEnterFadeDuration;
                 this.mCurrDrawable.setAlpha(((255 - animAlpha) * this.mAlpha) / 255);
                 animating = true;
             }
@@ -490,7 +498,9 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
                 this.mLastIndex = -1;
                 this.mExitAnimationEnd = 0L;
             } else {
-                int animAlpha2 = ((int) ((this.mExitAnimationEnd - now) * 255)) / this.mDrawableContainerState.mExitFadeDuration;
+                int animAlpha2 =
+                        ((int) ((this.mExitAnimationEnd - now) * 255))
+                                / this.mDrawableContainerState.mExitFadeDuration;
                 this.mLastDrawable.setAlpha((this.mAlpha * animAlpha2) / 255);
                 animating = true;
             }
@@ -550,7 +560,7 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
         this.mMutated = false;
     }
 
-    public static abstract class DrawableContainerState extends Drawable.ConstantState {
+    public abstract static class DrawableContainerState extends Drawable.ConstantState {
         boolean mAutoMirrored;
         BlendMode mBlendMode;
         boolean mCanConstantState;
@@ -587,7 +597,8 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
         ColorStateList mTintList;
         boolean mVariablePadding;
 
-        protected DrawableContainerState(DrawableContainerState orig, DrawableContainer owner, Resources res) {
+        protected DrawableContainerState(
+                DrawableContainerState orig, DrawableContainer owner, Resources res) {
             this.mDensity = 160;
             this.mVariablePadding = false;
             this.mConstantSize = false;
@@ -730,7 +741,8 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
             if (result != null) {
                 return result;
             }
-            if (this.mDrawableFutures == null || (keyIndex = this.mDrawableFutures.indexOfKey(index)) < 0) {
+            if (this.mDrawableFutures == null
+                    || (keyIndex = this.mDrawableFutures.indexOfKey(index)) < 0) {
                 return null;
             }
             Drawable.ConstantState cs = this.mDrawableFutures.valueAt(keyIndex);
@@ -780,7 +792,8 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
                 for (int i = 0; i < N; i++) {
                     if (drawables[i] != null && drawables[i].canApplyTheme()) {
                         drawables[i].applyTheme(theme);
-                        this.mChildrenChangingConfigurations |= drawables[i].getChangingConfigurations();
+                        this.mChildrenChangingConfigurations |=
+                                drawables[i].getChangingConfigurations();
                     }
                 }
                 updateDensity(theme.getResources());
@@ -1034,8 +1047,7 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
     private static class BlockInvalidateCallback implements Drawable.Callback {
         private Drawable.Callback mCallback;
 
-        private BlockInvalidateCallback() {
-        }
+        private BlockInvalidateCallback() {}
 
         public BlockInvalidateCallback wrap(Drawable.Callback callback) {
             this.mCallback = callback;
@@ -1049,8 +1061,7 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
         }
 
         @Override // android.graphics.drawable.Drawable.Callback
-        public void invalidateDrawable(Drawable who) {
-        }
+        public void invalidateDrawable(Drawable who) {}
 
         @Override // android.graphics.drawable.Drawable.Callback
         public void scheduleDrawable(Drawable who, Runnable what, long when) {

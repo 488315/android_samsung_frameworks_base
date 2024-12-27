@@ -23,14 +23,11 @@ public class NavigationHandle extends View implements ButtonInterface {
     }
 
     @Override // android.inputmethodservice.navigationbar.ButtonInterface
-    public void setImageDrawable(Drawable drawable) {
-    }
+    public void setImageDrawable(Drawable drawable) {}
 
     @Override // android.inputmethodservice.navigationbar.ButtonInterface
-    public void setDarkIntensity(float intensity) {
-    }
+    public void setDarkIntensity(float intensity) {}
 
     @Override // android.inputmethodservice.navigationbar.ButtonInterface
-    public void setDelayTouchFeedback(boolean shouldDelay) {
-    }
+    public void setDelayTouchFeedback(boolean shouldDelay) {}
 }

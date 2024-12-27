@@ -12,6 +12,5 @@ public final class EmptyArray {
     public static final Object[] OBJECT = new Object[0];
     public static final String[] STRING = new String[0];
 
-    private EmptyArray() {
-    }
+    private EmptyArray() {}
 }

@@ -1,8 +1,8 @@
 package android.graphics;
 
-import android.graphics.Bitmap;
 import android.os.SystemProperties;
 import android.util.Pools;
+
 import dalvik.annotation.optimization.CriticalNative;
 
 /* loaded from: classes.dex */
@@ -12,7 +12,8 @@ public final class RecordingCanvas extends BaseRecordingCanvas {
     public RenderNode mNode;
     private int mWidth;
     public static final int MAX_BITMAP_SIZE = getPanelFrameSize();
-    private static final Pools.SynchronizedPool<RecordingCanvas> sPool = new Pools.SynchronizedPool<>(25);
+    private static final Pools.SynchronizedPool<RecordingCanvas> sPool =
+            new Pools.SynchronizedPool<>(25);
 
     @CriticalNative
     private static native long nCreateDisplayListCanvas(long j, int i, int i2);
@@ -24,10 +25,12 @@ public final class RecordingCanvas extends BaseRecordingCanvas {
     private static native void nDrawRenderNode(long j, long j2);
 
     @CriticalNative
-    private static native void nDrawRipple(long j, long j2, long j3, long j4, long j5, long j6, long j7, int i, long j8);
+    private static native void nDrawRipple(
+            long j, long j2, long j3, long j4, long j5, long j6, long j7, int i, long j8);
 
     @CriticalNative
-    private static native void nDrawRoundRect(long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8);
+    private static native void nDrawRoundRect(
+            long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8);
 
     @CriticalNative
     private static native void nDrawTextureLayer(long j, long j2);
@@ -49,7 +52,9 @@ public final class RecordingCanvas extends BaseRecordingCanvas {
     private static native void nResetDisplayListCanvas(long j, long j2, int i, int i2);
 
     private static int getPanelFrameSize() {
-        return Math.max(SystemProperties.getInt("ro.hwui.max_texture_allocation_size", 157286400), 157286400);
+        return Math.max(
+                SystemProperties.getInt("ro.hwui.max_texture_allocation_size", 157286400),
+                157286400);
     }
 
     static RecordingCanvas obtain(RenderNode node, int width, int height) {
@@ -60,7 +65,8 @@ public final class RecordingCanvas extends BaseRecordingCanvas {
         if (canvas == null) {
             canvas = new RecordingCanvas(node, width, height);
         } else {
-            nResetDisplayListCanvas(canvas.mNativeCanvasWrapper, node.mNativeRenderNode, width, height);
+            nResetDisplayListCanvas(
+                    canvas.mNativeCanvasWrapper, node.mNativeRenderNode, width, height);
         }
         canvas.mNode = node;
         canvas.mWidth = width;
@@ -83,8 +89,7 @@ public final class RecordingCanvas extends BaseRecordingCanvas {
     }
 
     @Override // android.graphics.Canvas
-    public void setDensity(int density) {
-    }
+    public void setDensity(int density) {}
 
     @Override // android.graphics.Canvas, android.graphics.BaseCanvas
     public boolean isHardwareAccelerated() {
@@ -144,16 +149,57 @@ public final class RecordingCanvas extends BaseRecordingCanvas {
         nDrawTextureLayer(this.mNativeCanvasWrapper, layer.getLayerHandle());
     }
 
-    public void drawCircle(CanvasProperty<Float> cx, CanvasProperty<Float> cy, CanvasProperty<Float> radius, CanvasProperty<Paint> paint) {
-        nDrawCircle(this.mNativeCanvasWrapper, cx.getNativeContainer(), cy.getNativeContainer(), radius.getNativeContainer(), paint.getNativeContainer());
+    public void drawCircle(
+            CanvasProperty<Float> cx,
+            CanvasProperty<Float> cy,
+            CanvasProperty<Float> radius,
+            CanvasProperty<Paint> paint) {
+        nDrawCircle(
+                this.mNativeCanvasWrapper,
+                cx.getNativeContainer(),
+                cy.getNativeContainer(),
+                radius.getNativeContainer(),
+                paint.getNativeContainer());
     }
 
-    public void drawRipple(CanvasProperty<Float> cx, CanvasProperty<Float> cy, CanvasProperty<Float> radius, CanvasProperty<Paint> paint, CanvasProperty<Float> progress, CanvasProperty<Float> turbulencePhase, int color, RuntimeShader shader) {
-        nDrawRipple(this.mNativeCanvasWrapper, cx.getNativeContainer(), cy.getNativeContainer(), radius.getNativeContainer(), paint.getNativeContainer(), progress.getNativeContainer(), turbulencePhase.getNativeContainer(), color, shader.getNativeShaderBuilder());
+    public void drawRipple(
+            CanvasProperty<Float> cx,
+            CanvasProperty<Float> cy,
+            CanvasProperty<Float> radius,
+            CanvasProperty<Paint> paint,
+            CanvasProperty<Float> progress,
+            CanvasProperty<Float> turbulencePhase,
+            int color,
+            RuntimeShader shader) {
+        nDrawRipple(
+                this.mNativeCanvasWrapper,
+                cx.getNativeContainer(),
+                cy.getNativeContainer(),
+                radius.getNativeContainer(),
+                paint.getNativeContainer(),
+                progress.getNativeContainer(),
+                turbulencePhase.getNativeContainer(),
+                color,
+                shader.getNativeShaderBuilder());
     }
 
-    public void drawRoundRect(CanvasProperty<Float> left, CanvasProperty<Float> top, CanvasProperty<Float> right, CanvasProperty<Float> bottom, CanvasProperty<Float> rx, CanvasProperty<Float> ry, CanvasProperty<Paint> paint) {
-        nDrawRoundRect(this.mNativeCanvasWrapper, left.getNativeContainer(), top.getNativeContainer(), right.getNativeContainer(), bottom.getNativeContainer(), rx.getNativeContainer(), ry.getNativeContainer(), paint.getNativeContainer());
+    public void drawRoundRect(
+            CanvasProperty<Float> left,
+            CanvasProperty<Float> top,
+            CanvasProperty<Float> right,
+            CanvasProperty<Float> bottom,
+            CanvasProperty<Float> rx,
+            CanvasProperty<Float> ry,
+            CanvasProperty<Paint> paint) {
+        nDrawRoundRect(
+                this.mNativeCanvasWrapper,
+                left.getNativeContainer(),
+                top.getNativeContainer(),
+                right.getNativeContainer(),
+                bottom.getNativeContainer(),
+                rx.getNativeContainer(),
+                ry.getNativeContainer(),
+                paint.getNativeContainer());
     }
 
     @Override // android.graphics.BaseCanvas
@@ -161,7 +207,8 @@ public final class RecordingCanvas extends BaseRecordingCanvas {
         super.throwIfCannotDraw(bitmap);
         int bitmapSize = bitmap.getByteCount();
         if (bitmap.getConfig() != Bitmap.Config.HARDWARE && bitmapSize > MAX_BITMAP_SIZE) {
-            throw new RuntimeException("Canvas: trying to draw too large(" + bitmapSize + "bytes) bitmap.");
+            throw new RuntimeException(
+                    "Canvas: trying to draw too large(" + bitmapSize + "bytes) bitmap.");
         }
     }
 }

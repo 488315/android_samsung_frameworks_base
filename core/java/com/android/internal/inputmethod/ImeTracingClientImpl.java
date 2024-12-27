@@ -3,7 +3,7 @@ package com.android.internal.inputmethod;
 import android.util.proto.ProtoOutputStream;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodManagerGlobal;
-import com.android.internal.inputmethod.ImeTracing;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes5.dex */
@@ -13,8 +13,7 @@ class ImeTracingClientImpl extends ImeTracing {
     }
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void addToBuffer(ProtoOutputStream proto, int source) {
-    }
+    public void addToBuffer(ProtoOutputStream proto, int source) {}
 
     @Override // com.android.internal.inputmethod.ImeTracing
     public void triggerClientDump(String where, InputMethodManager immInstance, byte[] icProto) {
@@ -57,14 +56,11 @@ class ImeTracingClientImpl extends ImeTracing {
     }
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void triggerManagerServiceDump(String where, ImeTracing.ServiceDumper dumper) {
-    }
+    public void triggerManagerServiceDump(String where, ImeTracing.ServiceDumper dumper) {}
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void startTrace(PrintWriter pw) {
-    }
+    public void startTrace(PrintWriter pw) {}
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void stopTrace(PrintWriter pw) {
-    }
+    public void stopTrace(PrintWriter pw) {}
 }

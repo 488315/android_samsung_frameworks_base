@@ -16,12 +16,10 @@ public interface IClearCredentialStateCallback extends IInterface {
 
     public static class Default implements IClearCredentialStateCallback {
         @Override // android.credentials.IClearCredentialStateCallback
-        public void onSuccess() throws RemoteException {
-        }
+        public void onSuccess() throws RemoteException {}
 
         @Override // android.credentials.IClearCredentialStateCallback
-        public void onError(String errorType, String message) throws RemoteException {
-        }
+        public void onError(String errorType, String message) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IClearCredentialStateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IClearCredentialStateCallback {
+    public abstract static class Stub extends Binder implements IClearCredentialStateCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -70,7 +68,8 @@ public interface IClearCredentialStateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IClearCredentialStateCallback.DESCRIPTOR);
             }

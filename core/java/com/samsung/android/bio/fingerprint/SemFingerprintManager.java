@@ -18,17 +18,20 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.security.Signature;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 
 /* loaded from: classes5.dex */
 public class SemFingerprintManager {
-    public static final String EXTRA_KEY_ALLOW_AUTH_EVEN_IF_ENCRYPTED_OR_LOCKDOWN = "EXTRA_KEY_ALLOW_EVEN_IF_ENCRYPTED_OR_LOCKDOWN";
+    public static final String EXTRA_KEY_ALLOW_AUTH_EVEN_IF_ENCRYPTED_OR_LOCKDOWN =
+            "EXTRA_KEY_ALLOW_EVEN_IF_ENCRYPTED_OR_LOCKDOWN";
     public static final String EXTRA_KEY_AUTH_FLAG = "EXTRA_KEY_AUTH_FLAG";
     public static final String EXTRA_KEY_DISPLAY_ID = "EXTRA_KEY_DISPLAY_ID";
     public static final String EXTRA_KEY_ICON_COLOR = "EXTRA_KEY_ICON_COLOR";
@@ -69,83 +72,93 @@ public class SemFingerprintManager {
     private Handler mHandler;
     private final IFingerprintService mService;
     private final IBinder mToken = new Binder();
-    private final IFingerprintServiceReceiver mServiceReceiver = new IFingerprintServiceReceiver.Stub() { // from class: com.samsung.android.bio.fingerprint.SemFingerprintManager.1
-        @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onAcquired(int acquireInfo, int vendorCode) {
-            SemFingerprintManager.this.mHandler.obtainMessage(100, acquireInfo, vendorCode).sendToTarget();
-        }
+    private final IFingerprintServiceReceiver mServiceReceiver =
+            new IFingerprintServiceReceiver
+                    .Stub() { // from class:
+                              // com.samsung.android.bio.fingerprint.SemFingerprintManager.1
+                @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
+                public void onAcquired(int acquireInfo, int vendorCode) {
+                    SemFingerprintManager.this
+                            .mHandler
+                            .obtainMessage(100, acquireInfo, vendorCode)
+                            .sendToTarget();
+                }
 
-        @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onAuthenticationSucceeded(Fingerprint fp, int userId, boolean isStrongBiometric) {
-            SemFingerprintManager.this.mHandler.obtainMessage(101, userId, 0, fp).sendToTarget();
-        }
+                @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
+                public void onAuthenticationSucceeded(
+                        Fingerprint fp, int userId, boolean isStrongBiometric) {
+                    SemFingerprintManager.this
+                            .mHandler
+                            .obtainMessage(101, userId, 0, fp)
+                            .sendToTarget();
+                }
 
-        @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onAuthenticationFailed() {
-            SemFingerprintManager.this.mHandler.obtainMessage(102).sendToTarget();
-        }
+                @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
+                public void onAuthenticationFailed() {
+                    SemFingerprintManager.this.mHandler.obtainMessage(102).sendToTarget();
+                }
 
-        @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onFingerprintDetected(int sensorId, int userId, boolean isStrongBiometric) {
-        }
+                @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
+                public void onFingerprintDetected(
+                        int sensorId, int userId, boolean isStrongBiometric) {}
 
-        @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onError(int fpErrorCode, int vendor2) {
-            int errorCode = fpErrorCode;
-            switch (fpErrorCode) {
-                case 7:
-                    errorCode = 7;
-                    break;
-                case 9:
-                    errorCode = 9;
-                    break;
-                case 10:
-                    errorCode = 10;
-                    break;
-            }
-            SemFingerprintManager.this.mHandler.obtainMessage(103, errorCode, 0, FingerprintManager.getErrorString(SemFingerprintManager.this.mContext, fpErrorCode, vendor2)).sendToTarget();
-        }
+                @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
+                public void onError(int fpErrorCode, int vendor2) {
+                    int errorCode = fpErrorCode;
+                    switch (fpErrorCode) {
+                        case 7:
+                            errorCode = 7;
+                            break;
+                        case 9:
+                            errorCode = 9;
+                            break;
+                        case 10:
+                            errorCode = 10;
+                            break;
+                    }
+                    SemFingerprintManager.this
+                            .mHandler
+                            .obtainMessage(
+                                    103,
+                                    errorCode,
+                                    0,
+                                    FingerprintManager.getErrorString(
+                                            SemFingerprintManager.this.mContext,
+                                            fpErrorCode,
+                                            vendor2))
+                            .sendToTarget();
+                }
 
-        @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onEnrollResult(Fingerprint fp, int remaining) {
-        }
+                @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
+                public void onEnrollResult(Fingerprint fp, int remaining) {}
 
-        @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onRemoved(Fingerprint fp, int remaining) {
-        }
+                @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
+                public void onRemoved(Fingerprint fp, int remaining) {}
 
-        @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onChallengeGenerated(int sensorId, int userId, long challenge) {
-        }
+                @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
+                public void onChallengeGenerated(int sensorId, int userId, long challenge) {}
 
-        @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onUdfpsPointerDown(int sensorId) {
-        }
+                @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
+                public void onUdfpsPointerDown(int sensorId) {}
 
-        @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onUdfpsPointerUp(int sensorId) {
-        }
+                @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
+                public void onUdfpsPointerUp(int sensorId) {}
 
-        @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
-        public void onUdfpsOverlayShown() {
-        }
-    };
+                @Override // android.hardware.fingerprint.IFingerprintServiceReceiver
+                public void onUdfpsOverlayShown() {}
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ExtraKey {
-    }
+    public @interface ExtraKey {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FingerprintAcquired {
-    }
+    public @interface FingerprintAcquired {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FingerprintError {
-    }
+    public @interface FingerprintError {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PrivilegedFlag {
-    }
+    public @interface PrivilegedFlag {}
 
     private class MyHandler extends Handler {
         private MyHandler(Context context) {
@@ -158,13 +171,16 @@ public class SemFingerprintManager {
 
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
-            Slog.i(SemFingerprintManager.TAG, "handleMessage = " + msg.what + ", " + msg.arg1 + ", " + msg.arg2);
+            Slog.i(
+                    SemFingerprintManager.TAG,
+                    "handleMessage = " + msg.what + ", " + msg.arg1 + ", " + msg.arg2);
             switch (msg.what) {
                 case 100:
                     SemFingerprintManager.this.sendAcquiredResult(msg.arg1, msg.arg2);
                     break;
                 case 101:
-                    SemFingerprintManager.this.sendAuthenticatedSucceeded((Fingerprint) msg.obj, msg.arg1, null);
+                    SemFingerprintManager.this.sendAuthenticatedSucceeded(
+                            (Fingerprint) msg.obj, msg.arg1, null);
                     break;
                 case 102:
                     SemFingerprintManager.this.sendAuthenticatedFailed();
@@ -244,21 +260,16 @@ public class SemFingerprintManager {
         }
     }
 
-    public static abstract class AuthenticationCallback {
-        public void onAuthenticationError(int errorCode, CharSequence errString) {
-        }
+    public abstract static class AuthenticationCallback {
+        public void onAuthenticationError(int errorCode, CharSequence errString) {}
 
-        public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
-        }
+        public void onAuthenticationHelp(int helpCode, CharSequence helpString) {}
 
-        public void onAuthenticationSucceeded(AuthenticationResult result) {
-        }
+        public void onAuthenticationSucceeded(AuthenticationResult result) {}
 
-        public void onAuthenticationFailed() {
-        }
+        public void onAuthenticationFailed() {}
 
-        public void onAuthenticationAcquired(int event) {
-        }
+        public void onAuthenticationAcquired(int event) {}
     }
 
     public static class Characteristics {
@@ -300,7 +311,8 @@ public class SemFingerprintManager {
     }
 
     public static SemFingerprintManager createInstance(Context context) {
-        FingerprintManager fpMgr = (FingerprintManager) context.getSystemService(FingerprintManager.class);
+        FingerprintManager fpMgr =
+                (FingerprintManager) context.getSystemService(FingerprintManager.class);
         if (fpMgr != null) {
             return new SemFingerprintManager(context, fpMgr);
         }
@@ -314,7 +326,13 @@ public class SemFingerprintManager {
         this.mService = this.mFingerprintManager.semGetService();
     }
 
-    public void authenticate(CryptoObject crypto, CancellationSignal cancel, AuthenticationCallback callback, Handler handler, int userId, Bundle attr) {
+    public void authenticate(
+            CryptoObject crypto,
+            CancellationSignal cancel,
+            AuthenticationCallback callback,
+            Handler handler,
+            int userId,
+            Bundle attr) {
         Bundle attr2;
         final long authId;
         if (callback == null) {
@@ -339,21 +357,42 @@ public class SemFingerprintManager {
                 try {
                     setExtraInfo(this.mContext, attr2);
                     try {
-                        FingerprintAuthenticateOptions options = new FingerprintAuthenticateOptions.Builder().setSensorId(-1).setUserId(userId).setOpPackageName(this.mContext.getOpPackageName()).setAttributionTag(this.mContext.getAttributionTag()).build();
-                        authId = this.mService.semAuthenticate(this.mToken, operationId, this.mServiceReceiver, options, attr2);
+                        FingerprintAuthenticateOptions options =
+                                new FingerprintAuthenticateOptions.Builder()
+                                        .setSensorId(-1)
+                                        .setUserId(userId)
+                                        .setOpPackageName(this.mContext.getOpPackageName())
+                                        .setAttributionTag(this.mContext.getAttributionTag())
+                                        .build();
+                        authId =
+                                this.mService.semAuthenticate(
+                                        this.mToken,
+                                        operationId,
+                                        this.mServiceReceiver,
+                                        options,
+                                        attr2);
                         if (authId < 0) {
-                            this.mHandler.obtainMessage(103, 5, 0, FingerprintManager.getErrorString(this.mContext, 5, 0)).sendToTarget();
+                            this.mHandler
+                                    .obtainMessage(
+                                            103,
+                                            5,
+                                            0,
+                                            FingerprintManager.getErrorString(this.mContext, 5, 0))
+                                    .sendToTarget();
                         }
                     } catch (RemoteException e) {
                         e = e;
                     }
                     try {
-                        cancel.setOnCancelListener(new CancellationSignal.OnCancelListener() { // from class: com.samsung.android.bio.fingerprint.SemFingerprintManager$$ExternalSyntheticLambda1
-                            @Override // android.os.CancellationSignal.OnCancelListener
-                            public final void onCancel() {
-                                SemFingerprintManager.this.lambda$authenticate$0(authId);
-                            }
-                        });
+                        cancel.setOnCancelListener(
+                                new CancellationSignal
+                                        .OnCancelListener() { // from class:
+                                                              // com.samsung.android.bio.fingerprint.SemFingerprintManager$$ExternalSyntheticLambda1
+                                    @Override // android.os.CancellationSignal.OnCancelListener
+                                    public final void onCancel() {
+                                        SemFingerprintManager.this.lambda$authenticate$0(authId);
+                                    }
+                                });
                     } catch (RemoteException e2) {
                         e = e2;
                         Slog.w(TAG, "Remote exception while authenticating: ", e);
@@ -423,7 +462,8 @@ public class SemFingerprintManager {
 
     public static String getProductFeatureValue(Context context) {
         if (context.checkSelfPermission(Manifest.permission.BIOMETRICS_PRIVILEGED) == -1) {
-            throw new SecurityException("Must have com.samsung.android.permission.BIOMETRICS_PRIVILEGED permission.");
+            throw new SecurityException(
+                    "Must have com.samsung.android.permission.BIOMETRICS_PRIVILEGED permission.");
         }
         return "google_touch_display_ultrasonic";
     }
@@ -463,7 +503,11 @@ public class SemFingerprintManager {
     public void lambda$authenticate$0(long requestId) {
         if (this.mService != null) {
             try {
-                this.mService.cancelAuthentication(this.mToken, this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), requestId);
+                this.mService.cancelAuthentication(
+                        this.mToken,
+                        this.mContext.getOpPackageName(),
+                        this.mContext.getAttributionTag(),
+                        requestId);
             } catch (RemoteException e) {
                 Slog.w(TAG, "Remote exception while canceling authentication : " + e.getMessage());
             }
@@ -471,12 +515,14 @@ public class SemFingerprintManager {
     }
 
     private void handleDefaultError(final AuthenticationCallback callback) {
-        this.mHandler.post(new Runnable() { // from class: com.samsung.android.bio.fingerprint.SemFingerprintManager$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                SemFingerprintManager.this.lambda$handleDefaultError$1(callback);
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // com.samsung.android.bio.fingerprint.SemFingerprintManager$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SemFingerprintManager.this.lambda$handleDefaultError$1(callback);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -521,7 +567,8 @@ public class SemFingerprintManager {
     /* JADX INFO: Access modifiers changed from: private */
     public void sendAcquiredResult(int acquireInfo, int vendor2) {
         if (this.mAuthenticationCallback != null) {
-            String helpMsg = FingerprintManager.getAcquiredString(this.mContext, acquireInfo, vendor2);
+            String helpMsg =
+                    FingerprintManager.getAcquiredString(this.mContext, acquireInfo, vendor2);
             int clientInfo = convertAcquiredCode(acquireInfo);
             if (acquireInfo == 6) {
                 clientInfo = helpMsg == null ? vendor2 : acquireInfo;

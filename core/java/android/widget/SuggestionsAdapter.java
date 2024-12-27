@@ -20,8 +20,9 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
+
 import com.android.internal.R;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,7 +54,11 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
     private int mText2UrlCol;
     private ColorStateList mUrlColor;
 
-    public SuggestionsAdapter(Context context, SearchView searchView, SearchableInfo searchable, WeakHashMap<String, Drawable.ConstantState> outsideDrawablesCache) {
+    public SuggestionsAdapter(
+            Context context,
+            SearchView searchView,
+            SearchableInfo searchable,
+            WeakHashMap<String, Drawable.ConstantState> outsideDrawablesCache) {
         super(context, searchView.getSuggestionRowLayout(), (Cursor) null, true);
         this.mClosed = false;
         this.mQueryRefinement = 1;
@@ -70,19 +75,24 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
         Context activityContext = this.mSearchable.getActivityContext(this.mContext);
         this.mProviderContext = this.mSearchable.getProviderContext(this.mContext, activityContext);
         this.mOutsideDrawablesCache = outsideDrawablesCache;
-        getFilter().setDelayer(new Filter.Delayer() { // from class: android.widget.SuggestionsAdapter.1
-            private int mPreviousLength = 0;
+        getFilter()
+                .setDelayer(
+                        new Filter.Delayer() { // from class: android.widget.SuggestionsAdapter.1
+                            private int mPreviousLength = 0;
 
-            @Override // android.widget.Filter.Delayer
-            public long getPostingDelay(CharSequence constraint) {
-                if (constraint == null) {
-                    return 0L;
-                }
-                long delay = constraint.length() < this.mPreviousLength ? SuggestionsAdapter.DELETE_KEY_POST_DELAY : 0L;
-                this.mPreviousLength = constraint.length();
-                return delay;
-            }
-        });
+                            @Override // android.widget.Filter.Delayer
+                            public long getPostingDelay(CharSequence constraint) {
+                                if (constraint == null) {
+                                    return 0L;
+                                }
+                                long delay =
+                                        constraint.length() < this.mPreviousLength
+                                                ? SuggestionsAdapter.DELETE_KEY_POST_DELAY
+                                                : 0L;
+                                this.mPreviousLength = constraint.length();
+                                return delay;
+                            }
+                        });
     }
 
     public void setQueryRefinement(int refineWhat) {
@@ -305,10 +315,13 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
         if (query != null) {
             return query;
         }
-        if (this.mSearchable.shouldRewriteQueryFromData() && (data = getColumnString(cursor, SearchManager.SUGGEST_COLUMN_INTENT_DATA)) != null) {
+        if (this.mSearchable.shouldRewriteQueryFromData()
+                && (data = getColumnString(cursor, SearchManager.SUGGEST_COLUMN_INTENT_DATA))
+                        != null) {
             return data;
         }
-        if (!this.mSearchable.shouldRewriteQueryFromText() || (text1 = getColumnString(cursor, SearchManager.SUGGEST_COLUMN_TEXT_1)) == null) {
+        if (!this.mSearchable.shouldRewriteQueryFromText()
+                || (text1 = getColumnString(cursor, SearchManager.SUGGEST_COLUMN_TEXT_1)) == null) {
             return null;
         }
         return text1;
@@ -330,7 +343,8 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
         }
     }
 
-    @Override // android.widget.CursorAdapter, android.widget.BaseAdapter, android.widget.SpinnerAdapter
+    @Override // android.widget.CursorAdapter, android.widget.BaseAdapter,
+              // android.widget.SpinnerAdapter
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         try {
             return super.getDropDownView(position, convertView, parent);
@@ -353,7 +367,11 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
         }
         try {
             int resourceId = Integer.parseInt(drawableId);
-            String drawableUri = "android.resource://" + this.mProviderContext.getPackageName() + "/" + resourceId;
+            String drawableUri =
+                    "android.resource://"
+                            + this.mProviderContext.getPackageName()
+                            + "/"
+                            + resourceId;
             Drawable drawable = checkIconCache(drawableUri);
             if (drawable != null) {
                 return drawable;
@@ -380,7 +398,8 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
         try {
             String scheme = uri.getScheme();
             if (ContentResolver.SCHEME_ANDROID_RESOURCE.equals(scheme)) {
-                ContentResolver.OpenResourceIdResult r = this.mProviderContext.getContentResolver().getResourceId(uri);
+                ContentResolver.OpenResourceIdResult r =
+                        this.mProviderContext.getContentResolver().getResourceId(uri);
                 try {
                     return r.r.getDrawable(r.id, this.mProviderContext.getTheme());
                 } catch (Resources.NotFoundException e) {
@@ -456,7 +475,12 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
             String pkg = component.getPackageName();
             Drawable drawable = pm.getDrawable(pkg, iconId, activityInfo.applicationInfo);
             if (drawable == null) {
-                Log.w(LOG_TAG, "Invalid icon resource " + iconId + " for " + component.flattenToShortString());
+                Log.w(
+                        LOG_TAG,
+                        "Invalid icon resource "
+                                + iconId
+                                + " for "
+                                + component.flattenToShortString());
                 return null;
             }
             return drawable;
@@ -478,7 +502,11 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
         try {
             return cursor.getString(col);
         } catch (Exception e) {
-            Log.e(LOG_TAG, "unexpected error retrieving valid column from cursor, did the remote process die?", e);
+            Log.e(
+                    LOG_TAG,
+                    "unexpected error retrieving valid column from cursor, did the remote process"
+                        + " die?",
+                    e);
             return null;
         }
     }

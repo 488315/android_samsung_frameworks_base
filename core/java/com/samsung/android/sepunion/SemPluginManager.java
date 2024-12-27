@@ -3,8 +3,8 @@ package com.samsung.android.sepunion;
 import android.content.Context;
 import android.os.IBinder;
 import android.os.RemoteException;
+
 import com.samsung.android.cover.CoverState;
-import com.samsung.android.sepunion.IPluginManager;
 
 /* loaded from: classes6.dex */
 public class SemPluginManager {
@@ -18,7 +18,8 @@ public class SemPluginManager {
 
     private IPluginManager getService() {
         if (this.mService == null) {
-            SemUnionManager um = (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
+            SemUnionManager um =
+                    (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
             IBinder b = um.getSemSystemService(UnionConstants.SERVICE_PLUGIN);
             this.mService = IPluginManager.Stub.asInterface(b);
         }

@@ -20,7 +20,12 @@ public final class GrantUri {
     }
 
     public static GrantUri resolve(int i, int i2, Uri uri) {
-        return "content".equals(uri.getScheme()) ? new GrantUri(ContentProvider.getUserIdFromUri(uri, i), i2, ContentProvider.getUriWithoutUserId(uri)) : new GrantUri(i, i2, uri);
+        return "content".equals(uri.getScheme())
+                ? new GrantUri(
+                        ContentProvider.getUserIdFromUri(uri, i),
+                        i2,
+                        ContentProvider.getUriWithoutUserId(uri))
+                : new GrantUri(i, i2, uri);
     }
 
     public final void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
@@ -35,11 +40,14 @@ public final class GrantUri {
             return false;
         }
         GrantUri grantUri = (GrantUri) obj;
-        return this.uri.equals(grantUri.uri) && this.sourceUserId == grantUri.sourceUserId && this.prefix == grantUri.prefix;
+        return this.uri.equals(grantUri.uri)
+                && this.sourceUserId == grantUri.sourceUserId
+                && this.prefix == grantUri.prefix;
     }
 
     public final int hashCode() {
-        return ((this.uri.hashCode() + ((this.sourceUserId + 31) * 31)) * 31) + (this.prefix ? 1231 : 1237);
+        return ((this.uri.hashCode() + ((this.sourceUserId + 31) * 31)) * 31)
+                + (this.prefix ? 1231 : 1237);
     }
 
     public final String toSafeString() {
@@ -47,7 +55,9 @@ public final class GrantUri {
         sb.append(this.uri.toSafeString());
         sb.append(" [user ");
         String m = AmFmBandRange$$ExternalSyntheticOutline0.m(this.sourceUserId, sb, "]");
-        return this.prefix ? ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m, " [prefix]") : m;
+        return this.prefix
+                ? ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m, " [prefix]")
+                : m;
     }
 
     public final String toString() {
@@ -55,6 +65,8 @@ public final class GrantUri {
         sb.append(this.uri.toString());
         sb.append(" [user ");
         String m = AmFmBandRange$$ExternalSyntheticOutline0.m(this.sourceUserId, sb, "]");
-        return this.prefix ? ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m, " [prefix]") : m;
+        return this.prefix
+                ? ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m, " [prefix]")
+                : m;
     }
 }

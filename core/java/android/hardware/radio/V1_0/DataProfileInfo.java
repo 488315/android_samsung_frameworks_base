@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -34,18 +35,89 @@ public final class DataProfileInfo {
             return false;
         }
         DataProfileInfo other = (DataProfileInfo) otherObject;
-        if (this.profileId == other.profileId && HidlSupport.deepEquals(this.apn, other.apn) && HidlSupport.deepEquals(this.protocol, other.protocol) && HidlSupport.deepEquals(this.roamingProtocol, other.roamingProtocol) && this.authType == other.authType && HidlSupport.deepEquals(this.user, other.user) && HidlSupport.deepEquals(this.password, other.password) && this.type == other.type && this.maxConnsTime == other.maxConnsTime && this.maxConns == other.maxConns && this.waitTime == other.waitTime && this.enabled == other.enabled && HidlSupport.deepEquals(Integer.valueOf(this.supportedApnTypesBitmap), Integer.valueOf(other.supportedApnTypesBitmap)) && HidlSupport.deepEquals(Integer.valueOf(this.bearerBitmap), Integer.valueOf(other.bearerBitmap)) && this.mtu == other.mtu && this.mvnoType == other.mvnoType && HidlSupport.deepEquals(this.mvnoMatchData, other.mvnoMatchData)) {
+        if (this.profileId == other.profileId
+                && HidlSupport.deepEquals(this.apn, other.apn)
+                && HidlSupport.deepEquals(this.protocol, other.protocol)
+                && HidlSupport.deepEquals(this.roamingProtocol, other.roamingProtocol)
+                && this.authType == other.authType
+                && HidlSupport.deepEquals(this.user, other.user)
+                && HidlSupport.deepEquals(this.password, other.password)
+                && this.type == other.type
+                && this.maxConnsTime == other.maxConnsTime
+                && this.maxConns == other.maxConns
+                && this.waitTime == other.waitTime
+                && this.enabled == other.enabled
+                && HidlSupport.deepEquals(
+                        Integer.valueOf(this.supportedApnTypesBitmap),
+                        Integer.valueOf(other.supportedApnTypesBitmap))
+                && HidlSupport.deepEquals(
+                        Integer.valueOf(this.bearerBitmap), Integer.valueOf(other.bearerBitmap))
+                && this.mtu == other.mtu
+                && this.mvnoType == other.mvnoType
+                && HidlSupport.deepEquals(this.mvnoMatchData, other.mvnoMatchData)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.profileId))), Integer.valueOf(HidlSupport.deepHashCode(this.apn)), Integer.valueOf(HidlSupport.deepHashCode(this.protocol)), Integer.valueOf(HidlSupport.deepHashCode(this.roamingProtocol)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.authType))), Integer.valueOf(HidlSupport.deepHashCode(this.user)), Integer.valueOf(HidlSupport.deepHashCode(this.password)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxConnsTime))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxConns))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.waitTime))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.enabled))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.supportedApnTypesBitmap))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.bearerBitmap))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mtu))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mvnoType))), Integer.valueOf(HidlSupport.deepHashCode(this.mvnoMatchData)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.profileId))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.apn)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.protocol)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.roamingProtocol)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.authType))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.user)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.password)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxConnsTime))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxConns))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.waitTime))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.enabled))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.supportedApnTypesBitmap))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.bearerBitmap))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mtu))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mvnoType))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.mvnoMatchData)));
     }
 
     public final String toString() {
-        return "{.profileId = " + DataProfileId.toString(this.profileId) + ", .apn = " + this.apn + ", .protocol = " + this.protocol + ", .roamingProtocol = " + this.roamingProtocol + ", .authType = " + ApnAuthType.toString(this.authType) + ", .user = " + this.user + ", .password = " + this.password + ", .type = " + DataProfileInfoType.toString(this.type) + ", .maxConnsTime = " + this.maxConnsTime + ", .maxConns = " + this.maxConns + ", .waitTime = " + this.waitTime + ", .enabled = " + this.enabled + ", .supportedApnTypesBitmap = " + ApnTypes.dumpBitfield(this.supportedApnTypesBitmap) + ", .bearerBitmap = " + RadioAccessFamily.dumpBitfield(this.bearerBitmap) + ", .mtu = " + this.mtu + ", .mvnoType = " + MvnoType.toString(this.mvnoType) + ", .mvnoMatchData = " + this.mvnoMatchData + "}";
+        return "{.profileId = "
+                + DataProfileId.toString(this.profileId)
+                + ", .apn = "
+                + this.apn
+                + ", .protocol = "
+                + this.protocol
+                + ", .roamingProtocol = "
+                + this.roamingProtocol
+                + ", .authType = "
+                + ApnAuthType.toString(this.authType)
+                + ", .user = "
+                + this.user
+                + ", .password = "
+                + this.password
+                + ", .type = "
+                + DataProfileInfoType.toString(this.type)
+                + ", .maxConnsTime = "
+                + this.maxConnsTime
+                + ", .maxConns = "
+                + this.maxConns
+                + ", .waitTime = "
+                + this.waitTime
+                + ", .enabled = "
+                + this.enabled
+                + ", .supportedApnTypesBitmap = "
+                + ApnTypes.dumpBitfield(this.supportedApnTypesBitmap)
+                + ", .bearerBitmap = "
+                + RadioAccessFamily.dumpBitfield(this.bearerBitmap)
+                + ", .mtu = "
+                + this.mtu
+                + ", .mvnoType = "
+                + MvnoType.toString(this.mvnoType)
+                + ", .mvnoMatchData = "
+                + this.mvnoMatchData
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -57,7 +129,8 @@ public final class DataProfileInfo {
         ArrayList<DataProfileInfo> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 152, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 152, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             DataProfileInfo _hidl_vec_element = new DataProfileInfo();
@@ -67,19 +140,34 @@ public final class DataProfileInfo {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.profileId = _hidl_blob.getInt32(_hidl_offset + 0);
         this.apn = _hidl_blob.getString(_hidl_offset + 8);
-        parcel.readEmbeddedBuffer(this.apn.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.apn.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
         this.protocol = _hidl_blob.getString(_hidl_offset + 24);
-        parcel.readEmbeddedBuffer(this.protocol.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 24 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.protocol.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 24 + 0,
+                false);
         this.roamingProtocol = _hidl_blob.getString(_hidl_offset + 40);
-        parcel.readEmbeddedBuffer(this.roamingProtocol.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 40 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.roamingProtocol.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 40 + 0,
+                false);
         this.authType = _hidl_blob.getInt32(_hidl_offset + 56);
         this.user = _hidl_blob.getString(_hidl_offset + 64);
-        parcel.readEmbeddedBuffer(this.user.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 64 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.user.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 64 + 0, false);
         this.password = _hidl_blob.getString(_hidl_offset + 80);
-        parcel.readEmbeddedBuffer(this.password.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 80 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.password.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 80 + 0,
+                false);
         this.type = _hidl_blob.getInt32(_hidl_offset + 96);
         this.maxConnsTime = _hidl_blob.getInt32(_hidl_offset + 100);
         this.maxConns = _hidl_blob.getInt32(_hidl_offset + 104);
@@ -90,7 +178,11 @@ public final class DataProfileInfo {
         this.mtu = _hidl_blob.getInt32(_hidl_offset + 124);
         this.mvnoType = _hidl_blob.getInt32(_hidl_offset + 128);
         this.mvnoMatchData = _hidl_blob.getString(_hidl_offset + 136);
-        parcel.readEmbeddedBuffer(this.mvnoMatchData.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 136 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.mvnoMatchData.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 136 + 0,
+                false);
     }
 
     public final void writeToParcel(HwParcel parcel) {
@@ -99,7 +191,8 @@ public final class DataProfileInfo {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<DataProfileInfo> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<DataProfileInfo> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

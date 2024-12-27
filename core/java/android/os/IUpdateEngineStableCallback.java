@@ -2,7 +2,8 @@ package android.os;
 
 /* loaded from: classes3.dex */
 public interface IUpdateEngineStableCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$os$IUpdateEngineStableCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$os$IUpdateEngineStableCallback".replace('$', '.');
     public static final String HASH = "ee2e6f0bd51391955f79f4d5eeeafc37c668cd40";
     public static final int VERSION = 2;
 
@@ -16,12 +17,10 @@ public interface IUpdateEngineStableCallback extends IInterface {
 
     public static class Default implements IUpdateEngineStableCallback {
         @Override // android.os.IUpdateEngineStableCallback
-        public void onStatusUpdate(int status_code, float percentage) throws RemoteException {
-        }
+        public void onStatusUpdate(int status_code, float percentage) throws RemoteException {}
 
         @Override // android.os.IUpdateEngineStableCallback
-        public void onPayloadApplicationComplete(int error_code) throws RemoteException {
-        }
+        public void onPayloadApplicationComplete(int error_code) throws RemoteException {}
 
         @Override // android.os.IUpdateEngineStableCallback
         public int getInterfaceVersion() {
@@ -39,7 +38,7 @@ public interface IUpdateEngineStableCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUpdateEngineStableCallback {
+    public abstract static class Stub extends Binder implements IUpdateEngineStableCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_onPayloadApplicationComplete = 2;
@@ -66,7 +65,8 @@ public interface IUpdateEngineStableCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -144,7 +144,8 @@ public interface IUpdateEngineStableCallback extends IInterface {
                     _data.writeInt(error_code);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method onPayloadApplicationComplete is unimplemented.");
+                        throw new RemoteException(
+                                "Method onPayloadApplicationComplete is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

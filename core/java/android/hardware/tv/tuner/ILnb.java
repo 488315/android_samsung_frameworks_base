@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-import android.hardware.tv.tuner.ILnbCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -31,28 +30,22 @@ public interface ILnb extends IInterface {
 
     public static class Default implements ILnb {
         @Override // android.hardware.tv.tuner.ILnb
-        public void setCallback(ILnbCallback callback) throws RemoteException {
-        }
+        public void setCallback(ILnbCallback callback) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ILnb
-        public void setVoltage(int voltage) throws RemoteException {
-        }
+        public void setVoltage(int voltage) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ILnb
-        public void setTone(int tone) throws RemoteException {
-        }
+        public void setTone(int tone) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ILnb
-        public void setSatellitePosition(int position) throws RemoteException {
-        }
+        public void setSatellitePosition(int position) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ILnb
-        public void sendDiseqcMessage(byte[] diseqcMessage) throws RemoteException {
-        }
+        public void sendDiseqcMessage(byte[] diseqcMessage) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ILnb
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ILnb
         public int getInterfaceVersion() {
@@ -70,7 +63,7 @@ public interface ILnb extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILnb {
+    public abstract static class Stub extends Binder implements ILnb {
         static final int TRANSACTION_close = 6;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -102,7 +95,8 @@ public interface ILnb extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);

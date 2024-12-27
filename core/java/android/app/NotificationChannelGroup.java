@@ -8,14 +8,17 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Patterns;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* loaded from: classes.dex */
 public final class NotificationChannelGroup implements Parcelable {
@@ -24,19 +27,21 @@ public final class NotificationChannelGroup implements Parcelable {
     private static final String ATT_ID = "id";
     private static final String ATT_NAME = "name";
     private static final String ATT_USER_LOCKED = "locked";
-    public static final Parcelable.Creator<NotificationChannelGroup> CREATOR = new Parcelable.Creator<NotificationChannelGroup>() { // from class: android.app.NotificationChannelGroup.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationChannelGroup createFromParcel(Parcel in) {
-            return new NotificationChannelGroup(in);
-        }
+    public static final Parcelable.Creator<NotificationChannelGroup> CREATOR =
+            new Parcelable.Creator<NotificationChannelGroup>() { // from class:
+                // android.app.NotificationChannelGroup.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationChannelGroup createFromParcel(Parcel in) {
+                    return new NotificationChannelGroup(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationChannelGroup[] newArray(int size) {
-            return new NotificationChannelGroup[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationChannelGroup[] newArray(int size) {
+                    return new NotificationChannelGroup[size];
+                }
+            };
     public static final int MAX_TEXT_LENGTH = 1000;
     private static final String TAG_GROUP = "channelGroup";
     public static final int USER_LOCKED_BLOCKED_STATE = 1;
@@ -71,7 +76,12 @@ public final class NotificationChannelGroup implements Parcelable {
             this.mDescription = null;
         }
         if (in.readByte() != 0) {
-            this.mChannels = ((ParceledListSlice) in.readParcelable(NotificationChannelGroup.class.getClassLoader(), ParceledListSlice.class)).getList();
+            this.mChannels =
+                    ((ParceledListSlice)
+                                    in.readParcelable(
+                                            NotificationChannelGroup.class.getClassLoader(),
+                                            ParceledListSlice.class))
+                            .getList();
         } else {
             this.mChannels = new ArrayList();
         }
@@ -207,14 +217,25 @@ public final class NotificationChannelGroup implements Parcelable {
             return false;
         }
         NotificationChannelGroup that = (NotificationChannelGroup) o;
-        if (isBlocked() == that.isBlocked() && this.mUserLockedFields == that.mUserLockedFields && Objects.equals(getId(), that.getId()) && Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getChannels(), that.getChannels())) {
+        if (isBlocked() == that.isBlocked()
+                && this.mUserLockedFields == that.mUserLockedFields
+                && Objects.equals(getId(), that.getId())
+                && Objects.equals(getName(), that.getName())
+                && Objects.equals(getDescription(), that.getDescription())
+                && Objects.equals(getChannels(), that.getChannels())) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDescription(), Boolean.valueOf(isBlocked()), getChannels(), Integer.valueOf(this.mUserLockedFields));
+        return Objects.hash(
+                getId(),
+                getName(),
+                getDescription(),
+                Boolean.valueOf(isBlocked()),
+                getChannels(),
+                Integer.valueOf(this.mUserLockedFields));
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
@@ -230,7 +251,20 @@ public final class NotificationChannelGroup implements Parcelable {
     public String toString() {
         String fixedId = getRedatedString(this.mId);
         String fixedName = getRedatedString(this.mName.toString());
-        return "NotificationChannelGroup{mId='" + fixedId + DateFormat.QUOTE + ", mName=" + fixedName + ", mDescription=" + (!TextUtils.isEmpty(this.mDescription) ? "hasDescription " : "") + ", mBlocked=" + this.mBlocked + ", mChannels=" + this.mChannels + ", mUserLockedFields=" + this.mUserLockedFields + '}';
+        return "NotificationChannelGroup{mId='"
+                + fixedId
+                + DateFormat.QUOTE
+                + ", mName="
+                + fixedName
+                + ", mDescription="
+                + (!TextUtils.isEmpty(this.mDescription) ? "hasDescription " : "")
+                + ", mBlocked="
+                + this.mBlocked
+                + ", mChannels="
+                + this.mChannels
+                + ", mUserLockedFields="
+                + this.mUserLockedFields
+                + '}';
     }
 
     private String getRedatedString(String str) {
@@ -244,7 +278,8 @@ public final class NotificationChannelGroup implements Parcelable {
         if (pattern == null) {
             return false;
         }
-        if (Patterns.PHONE.matcher(pattern).matches() || Patterns.WEB_URL.matcher(pattern).matches()) {
+        if (Patterns.PHONE.matcher(pattern).matches()
+                || Patterns.WEB_URL.matcher(pattern).matches()) {
             return true;
         }
         boolean atFound = false;

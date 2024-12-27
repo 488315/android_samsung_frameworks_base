@@ -14,12 +14,10 @@ public interface ISearchManagerCallback extends IInterface {
 
     public static class Default implements ISearchManagerCallback {
         @Override // android.app.ISearchManagerCallback
-        public void onDismiss() throws RemoteException {
-        }
+        public void onDismiss() throws RemoteException {}
 
         @Override // android.app.ISearchManagerCallback
-        public void onCancel() throws RemoteException {
-        }
+        public void onCancel() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +25,7 @@ public interface ISearchManagerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISearchManagerCallback {
+    public abstract static class Stub extends Binder implements ISearchManagerCallback {
         public static final String DESCRIPTOR = "android.app.ISearchManagerCallback";
         static final int TRANSACTION_onCancel = 2;
         static final int TRANSACTION_onDismiss = 1;
@@ -69,7 +67,8 @@ public interface ISearchManagerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

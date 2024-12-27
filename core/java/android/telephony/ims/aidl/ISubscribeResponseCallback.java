@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.ims.RcsContactTerminatedReason;
 import android.telephony.ims.SipDetails;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -25,24 +26,21 @@ public interface ISubscribeResponseCallback extends IInterface {
 
     public static class Default implements ISubscribeResponseCallback {
         @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
-        public void onCommandError(int code) throws RemoteException {
-        }
+        public void onCommandError(int code) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
-        public void onNetworkResponse(SipDetails detail) throws RemoteException {
-        }
+        public void onNetworkResponse(SipDetails detail) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
-        public void onNotifyCapabilitiesUpdate(List<String> pidfXmls) throws RemoteException {
-        }
+        public void onNotifyCapabilitiesUpdate(List<String> pidfXmls) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
-        public void onResourceTerminated(List<RcsContactTerminatedReason> uriTerminatedReason) throws RemoteException {
-        }
+        public void onResourceTerminated(List<RcsContactTerminatedReason> uriTerminatedReason)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
-        public void onTerminated(String reason, long retryAfterMilliseconds) throws RemoteException {
-        }
+        public void onTerminated(String reason, long retryAfterMilliseconds)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -50,7 +48,7 @@ public interface ISubscribeResponseCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISubscribeResponseCallback {
+    public abstract static class Stub extends Binder implements ISubscribeResponseCallback {
         static final int TRANSACTION_onCommandError = 1;
         static final int TRANSACTION_onNetworkResponse = 2;
         static final int TRANSACTION_onNotifyCapabilitiesUpdate = 3;
@@ -100,7 +98,8 @@ public interface ISubscribeResponseCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISubscribeResponseCallback.DESCRIPTOR);
             }
@@ -125,7 +124,8 @@ public interface ISubscribeResponseCallback extends IInterface {
                     onNotifyCapabilitiesUpdate(_arg03);
                     return true;
                 case 4:
-                    List<RcsContactTerminatedReason> _arg04 = data.createTypedArrayList(RcsContactTerminatedReason.CREATOR);
+                    List<RcsContactTerminatedReason> _arg04 =
+                            data.createTypedArrayList(RcsContactTerminatedReason.CREATOR);
                     data.enforceNoDataAvail();
                     onResourceTerminated(_arg04);
                     return true;
@@ -193,7 +193,8 @@ public interface ISubscribeResponseCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
-            public void onResourceTerminated(List<RcsContactTerminatedReason> uriTerminatedReason) throws RemoteException {
+            public void onResourceTerminated(List<RcsContactTerminatedReason> uriTerminatedReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);
@@ -205,7 +206,8 @@ public interface ISubscribeResponseCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ISubscribeResponseCallback
-            public void onTerminated(String reason, long retryAfterMilliseconds) throws RemoteException {
+            public void onTerminated(String reason, long retryAfterMilliseconds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISubscribeResponseCallback.DESCRIPTOR);

@@ -93,13 +93,22 @@ public abstract class FilterPort {
     }
 
     protected void checkFrameType(Frame frame, boolean forceCheck) {
-        if ((this.mChecksType || forceCheck) && this.mPortFormat != null && !frame.getFormat().isCompatibleWith(this.mPortFormat)) {
-            throw new RuntimeException("Frame passed to " + this + " is of incorrect type! Expected " + this.mPortFormat + " but got " + frame.getFormat());
+        if ((this.mChecksType || forceCheck)
+                && this.mPortFormat != null
+                && !frame.getFormat().isCompatibleWith(this.mPortFormat)) {
+            throw new RuntimeException(
+                    "Frame passed to "
+                            + this
+                            + " is of incorrect type! Expected "
+                            + this.mPortFormat
+                            + " but got "
+                            + frame.getFormat());
         }
     }
 
     protected void checkFrameManager(Frame frame, FilterContext context) {
-        if (frame.getFrameManager() != null && frame.getFrameManager() != context.getFrameManager()) {
+        if (frame.getFrameManager() != null
+                && frame.getFrameManager() != context.getFrameManager()) {
             throw new RuntimeException("Frame " + frame + " is managed by foreign FrameManager! ");
         }
     }

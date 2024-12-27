@@ -3,24 +3,27 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class PreciseCallState implements Parcelable {
-    public static final Parcelable.Creator<PreciseCallState> CREATOR = new Parcelable.Creator<PreciseCallState>() { // from class: android.telephony.PreciseCallState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PreciseCallState createFromParcel(Parcel in) {
-            return new PreciseCallState(in);
-        }
+    public static final Parcelable.Creator<PreciseCallState> CREATOR =
+            new Parcelable.Creator<
+                    PreciseCallState>() { // from class: android.telephony.PreciseCallState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PreciseCallState createFromParcel(Parcel in) {
+                    return new PreciseCallState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PreciseCallState[] newArray(int size) {
-            return new PreciseCallState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PreciseCallState[] newArray(int size) {
+                    return new PreciseCallState[size];
+                }
+            };
     public static final int PRECISE_CALL_STATE_ACTIVE = 1;
     public static final int PRECISE_CALL_STATE_ALERTING = 4;
     public static final int PRECISE_CALL_STATE_DIALING = 3;
@@ -39,7 +42,12 @@ public final class PreciseCallState implements Parcelable {
     private int mRingingCallState;
 
     @SystemApi
-    public PreciseCallState(int ringingCall, int foregroundCall, int backgroundCall, int disconnectCause, int preciseDisconnectCause) {
+    public PreciseCallState(
+            int ringingCall,
+            int foregroundCall,
+            int backgroundCall,
+            int disconnectCause,
+            int preciseDisconnectCause) {
         this.mRingingCallState = -1;
         this.mForegroundCallState = -1;
         this.mBackgroundCallState = -1;
@@ -108,7 +116,12 @@ public final class PreciseCallState implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mRingingCallState), Integer.valueOf(this.mForegroundCallState), Integer.valueOf(this.mForegroundCallState), Integer.valueOf(this.mDisconnectCause), Integer.valueOf(this.mPreciseDisconnectCause));
+        return Objects.hash(
+                Integer.valueOf(this.mRingingCallState),
+                Integer.valueOf(this.mForegroundCallState),
+                Integer.valueOf(this.mForegroundCallState),
+                Integer.valueOf(this.mDisconnectCause),
+                Integer.valueOf(this.mPreciseDisconnectCause));
     }
 
     public boolean equals(Object obj) {
@@ -119,7 +132,11 @@ public final class PreciseCallState implements Parcelable {
             return false;
         }
         PreciseCallState other = (PreciseCallState) obj;
-        if (this.mRingingCallState == other.mRingingCallState && this.mForegroundCallState == other.mForegroundCallState && this.mBackgroundCallState == other.mBackgroundCallState && this.mDisconnectCause == other.mDisconnectCause && this.mPreciseDisconnectCause == other.mPreciseDisconnectCause) {
+        if (this.mRingingCallState == other.mRingingCallState
+                && this.mForegroundCallState == other.mForegroundCallState
+                && this.mBackgroundCallState == other.mBackgroundCallState
+                && this.mDisconnectCause == other.mDisconnectCause
+                && this.mPreciseDisconnectCause == other.mPreciseDisconnectCause) {
             return true;
         }
         return false;

@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,8 +73,11 @@ public class ConversationHeaderLinearLayout extends LinearLayout {
     private void remeasureChangedChildren(List<ViewInfo> childrenInfo) {
         for (ViewInfo info : childrenInfo) {
             if (info.mWidth != info.mStartWidth) {
-                int childWidthMeasureSpec = View.MeasureSpec.makeMeasureSpec(Math.max(0, info.mWidth), 1073741824);
-                int childHeightMeasureSpec = View.MeasureSpec.makeMeasureSpec(info.mView.getMeasuredHeight(), 1073741824);
+                int childWidthMeasureSpec =
+                        View.MeasureSpec.makeMeasureSpec(Math.max(0, info.mWidth), 1073741824);
+                int childHeightMeasureSpec =
+                        View.MeasureSpec.makeMeasureSpec(
+                                info.mView.getMeasuredHeight(), 1073741824);
                 info.mView.measure(childWidthMeasureSpec, childHeightMeasureSpec);
             }
         }
@@ -87,7 +91,8 @@ public class ConversationHeaderLinearLayout extends LinearLayout {
             performAnotherPass = false;
             for (ViewInfo info : viewInfos) {
                 if (info.mWeight > 0.0f && info.mWidth > 0) {
-                    int newWidth = (int) (info.mWidth - (excessContents * (info.mWeight / weightSum)));
+                    int newWidth =
+                            (int) (info.mWidth - (excessContents * (info.mWeight / weightSum)));
                     if (newWidth < 0) {
                         newWidth = 0;
                         performAnotherPass = true;

@@ -3,25 +3,28 @@ package android.app.admin;
 import android.app.admin.flags.Flags;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 /* loaded from: classes.dex */
 public final class PackageSetPolicyValue extends PolicyValue<Set<String>> {
-    public static final Parcelable.Creator<PackageSetPolicyValue> CREATOR = new Parcelable.Creator<PackageSetPolicyValue>() { // from class: android.app.admin.PackageSetPolicyValue.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageSetPolicyValue createFromParcel(Parcel source) {
-            return new PackageSetPolicyValue(source);
-        }
+    public static final Parcelable.Creator<PackageSetPolicyValue> CREATOR =
+            new Parcelable.Creator<PackageSetPolicyValue>() { // from class:
+                // android.app.admin.PackageSetPolicyValue.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageSetPolicyValue createFromParcel(Parcel source) {
+                    return new PackageSetPolicyValue(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageSetPolicyValue[] newArray(int size) {
-            return new PackageSetPolicyValue[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageSetPolicyValue[] newArray(int size) {
+                    return new PackageSetPolicyValue[size];
+                }
+            };
 
     public PackageSetPolicyValue(Set<String> value) {
         super(value);

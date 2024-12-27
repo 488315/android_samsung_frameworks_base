@@ -43,7 +43,8 @@ public interface IEpicObject extends IInterface {
         }
 
         @Override // android.os.epic.IEpicObject
-        public boolean acquire_lock_option_multi(int[] value_list, int[] usec_list) throws RemoteException {
+        public boolean acquire_lock_option_multi(int[] value_list, int[] usec_list)
+                throws RemoteException {
             return false;
         }
 
@@ -73,7 +74,7 @@ public interface IEpicObject extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEpicObject {
+    public abstract static class Stub extends Binder implements IEpicObject {
         static final int TRANSACTION_acquire_lock = 1;
         static final int TRANSACTION_acquire_lock_conditional = 5;
         static final int TRANSACTION_acquire_lock_option = 3;
@@ -132,7 +133,8 @@ public interface IEpicObject extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IEpicObject.DESCRIPTOR);
             }
@@ -267,7 +269,8 @@ public interface IEpicObject extends IInterface {
             }
 
             @Override // android.os.epic.IEpicObject
-            public boolean acquire_lock_option_multi(int[] value_list, int[] usec_list) throws RemoteException {
+            public boolean acquire_lock_option_multi(int[] value_list, int[] usec_list)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -1,7 +1,9 @@
 package com.android.internal.os;
 
 import android.util.Slog;
+
 import com.android.modules.expresslog.Counter;
+
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -27,13 +29,17 @@ public class KernelSingleProcessCpuThreadReader {
 
     private native int getCpuFrequencyCount(CpuTimeInStateReader cpuTimeInStateReader);
 
-    private native boolean readProcessCpuUsage(int i, long[] jArr, long[] jArr2, CpuTimeInStateReader cpuTimeInStateReader);
+    private native boolean readProcessCpuUsage(
+            int i, long[] jArr, long[] jArr2, CpuTimeInStateReader cpuTimeInStateReader);
 
-    private native boolean startAggregatingThreadCpuTimes(int[] iArr, CpuTimeInStateReader cpuTimeInStateReader);
+    private native boolean startAggregatingThreadCpuTimes(
+            int[] iArr, CpuTimeInStateReader cpuTimeInStateReader);
 
-    private native boolean startTrackingProcessCpuTimes(int i, CpuTimeInStateReader cpuTimeInStateReader);
+    private native boolean startTrackingProcessCpuTimes(
+            int i, CpuTimeInStateReader cpuTimeInStateReader);
 
-    public KernelSingleProcessCpuThreadReader(int pid, CpuTimeInStateReader cpuTimeInStateReader) throws IOException {
+    public KernelSingleProcessCpuThreadReader(int pid, CpuTimeInStateReader cpuTimeInStateReader)
+            throws IOException {
         this.mPid = pid;
         this.mCpuTimeInStateReader = cpuTimeInStateReader;
     }
@@ -53,8 +59,13 @@ public class KernelSingleProcessCpuThreadReader {
                 Slog.wtf(TAG, "Failed to start tracking process CPU times for " + this.mPid);
                 Counter.logIncrement("cpu.value_process_tracking_start_failure_count");
             }
-            if (this.mSelectedThreadNativeTids.length > 0 && !startAggregatingThreadCpuTimes(this.mSelectedThreadNativeTids, this.mCpuTimeInStateReader)) {
-                Slog.wtf(TAG, "Failed to start tracking aggregated thread CPU times for " + Arrays.toString(this.mSelectedThreadNativeTids));
+            if (this.mSelectedThreadNativeTids.length > 0
+                    && !startAggregatingThreadCpuTimes(
+                            this.mSelectedThreadNativeTids, this.mCpuTimeInStateReader)) {
+                Slog.wtf(
+                        TAG,
+                        "Failed to start tracking aggregated thread CPU times for "
+                                + Arrays.toString(this.mSelectedThreadNativeTids));
                 Counter.logIncrement("cpu.value_aggregated_thread_tracking_start_failure_count");
             }
             this.mIsTracking = true;
@@ -64,7 +75,8 @@ public class KernelSingleProcessCpuThreadReader {
     public void setSelectedThreadIds(int[] nativeTids) {
         this.mSelectedThreadNativeTids = (int[]) nativeTids.clone();
         if (this.mIsTracking) {
-            startAggregatingThreadCpuTimes(this.mSelectedThreadNativeTids, this.mCpuTimeInStateReader);
+            startAggregatingThreadCpuTimes(
+                    this.mSelectedThreadNativeTids, this.mCpuTimeInStateReader);
         }
     }
 
@@ -77,7 +89,12 @@ public class KernelSingleProcessCpuThreadReader {
 
     public ProcessCpuUsage getProcessCpuUsage() {
         ProcessCpuUsage processCpuUsage = new ProcessCpuUsage(getCpuFrequencyCount());
-        boolean result = readProcessCpuUsage(this.mPid, processCpuUsage.threadCpuTimesMillis, processCpuUsage.selectedThreadCpuTimesMillis, this.mCpuTimeInStateReader);
+        boolean result =
+                readProcessCpuUsage(
+                        this.mPid,
+                        processCpuUsage.threadCpuTimesMillis,
+                        processCpuUsage.selectedThreadCpuTimesMillis,
+                        this.mCpuTimeInStateReader);
         if (!result) {
             return null;
         }

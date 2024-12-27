@@ -6,9 +6,9 @@ import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.Preference;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -23,11 +23,15 @@ public class ListPreference extends DialogPreference {
 
     public ListPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ListPreference, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.ListPreference, defStyleAttr, defStyleRes);
         this.mEntries = a.getTextArray(0);
         this.mEntryValues = a.getTextArray(1);
         a.recycle();
-        TypedArray a2 = context.obtainStyledAttributes(attrs, R.styleable.Preference, defStyleAttr, defStyleRes);
+        TypedArray a2 =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.Preference, defStyleAttr, defStyleRes);
         this.mSummary = a2.getString(7);
         a2.recycle();
     }
@@ -137,17 +141,22 @@ public class ListPreference extends DialogPreference {
     protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
         super.onPrepareDialogBuilder(builder);
         if (this.mEntries == null || this.mEntryValues == null) {
-            throw new IllegalStateException("ListPreference requires an entries array and an entryValues array.");
+            throw new IllegalStateException(
+                    "ListPreference requires an entries array and an entryValues array.");
         }
         this.mClickedDialogEntryIndex = getValueIndex();
-        builder.setSingleChoiceItems(this.mEntries, this.mClickedDialogEntryIndex, new DialogInterface.OnClickListener() { // from class: android.preference.ListPreference.1
-            @Override // android.content.DialogInterface.OnClickListener
-            public void onClick(DialogInterface dialog, int which) {
-                ListPreference.this.mClickedDialogEntryIndex = which;
-                ListPreference.this.onClick(dialog, -1);
-                ListPreference.this.postDismiss();
-            }
-        });
+        builder.setSingleChoiceItems(
+                this.mEntries,
+                this.mClickedDialogEntryIndex,
+                new DialogInterface
+                        .OnClickListener() { // from class: android.preference.ListPreference.1
+                    @Override // android.content.DialogInterface.OnClickListener
+                    public void onClick(DialogInterface dialog, int which) {
+                        ListPreference.this.mClickedDialogEntryIndex = which;
+                        ListPreference.this.onClick(dialog, -1);
+                        ListPreference.this.postDismiss();
+                    }
+                });
         builder.setPositiveButton((CharSequence) null, (DialogInterface.OnClickListener) null);
     }
 
@@ -195,19 +204,22 @@ public class ListPreference extends DialogPreference {
     }
 
     private static class SavedState extends Preference.BaseSavedState {
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: android.preference.ListPreference.SavedState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<
+                        SavedState>() { // from class:
+                                        // android.preference.ListPreference.SavedState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
         String value;
 
         public SavedState(Parcel source) {

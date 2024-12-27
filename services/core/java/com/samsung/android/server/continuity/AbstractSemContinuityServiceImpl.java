@@ -8,13 +8,16 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.continuity.ISemContinuityManager;
 import com.samsung.android.mcfds.lib.AbstractDeviceSyncManager$1;
 import com.samsung.android.mcfds.lib.DeviceSyncManager;
 import com.samsung.android.server.continuity.common.ExecutorUtil;
 import com.samsung.android.server.continuity.common.ExecutorUtil$$ExternalSyntheticLambda0;
 import com.samsung.android.server.continuity.sem.SemWrapper;
+
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -26,8 +29,16 @@ public abstract class AbstractSemContinuityServiceImpl extends ISemContinuityMan
     public final McfDeviceSyncManager mMcfDsManager;
     public final UserManager mUserManager;
 
-    public AbstractSemContinuityServiceImpl(Context context, McfDeviceSyncManager mcfDeviceSyncManager) {
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(64, 64, 60L, TimeUnit.SECONDS, new LinkedBlockingQueue(), new ExecutorUtil$$ExternalSyntheticLambda0());
+    public AbstractSemContinuityServiceImpl(
+            Context context, McfDeviceSyncManager mcfDeviceSyncManager) {
+        ThreadPoolExecutor threadPoolExecutor =
+                new ThreadPoolExecutor(
+                        64,
+                        64,
+                        60L,
+                        TimeUnit.SECONDS,
+                        new LinkedBlockingQueue(),
+                        new ExecutorUtil$$ExternalSyntheticLambda0());
         ExecutorUtil.sExecutorIO = threadPoolExecutor;
         threadPoolExecutor.allowCoreThreadTimeOut(true);
         ExecutorUtil.sHandler = new Handler(Looper.getMainLooper());
@@ -45,7 +56,10 @@ public abstract class AbstractSemContinuityServiceImpl extends ISemContinuityMan
             semGetIdentifier = userHandle.semGetIdentifier();
         }
         if (semGetIdentifier != i2) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i2, "getNearbyDeviceCount - invalid user ", "[MCF_DS_SYS]_SemContinuityServiceImpl");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i2,
+                    "getNearbyDeviceCount - invalid user ",
+                    "[MCF_DS_SYS]_SemContinuityServiceImpl");
             return 0;
         }
         McfDeviceSyncManager mcfDeviceSyncManager = this.mMcfDsManager;

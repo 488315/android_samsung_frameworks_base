@@ -7,9 +7,10 @@ import android.media.RouteDiscoveryPreference;
 import android.media.RoutingSessionInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
+
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
-import com.android.server.media.MediaRouter2ServiceImpl;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,8 +30,7 @@ public abstract class MediaRoute2Provider {
     public final List mSessionInfos = new ArrayList();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Callback {
-    }
+    public interface Callback {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SessionCreationOrTransferRequest {
@@ -40,7 +40,8 @@ public abstract class MediaRoute2Provider {
         public final UserHandle mTransferInitiatorUserHandle;
         public final int mTransferReason;
 
-        public SessionCreationOrTransferRequest(long j, String str, int i, UserHandle userHandle, String str2) {
+        public SessionCreationOrTransferRequest(
+                long j, String str, int i, UserHandle userHandle, String str2) {
             this.mRequestId = j;
             this.mTargetOriginalRouteId = str;
             this.mTransferReason = i;
@@ -68,7 +69,8 @@ public abstract class MediaRoute2Provider {
             printWriter.println(str2 + "<provider info has no routes>");
         } else {
             for (MediaRoute2Info mediaRoute2Info : this.mProviderInfo.getRoutes()) {
-                printWriter.printf("%s%s | %s\n", str2, mediaRoute2Info.getId(), mediaRoute2Info.getName());
+                printWriter.printf(
+                        "%s%s | %s\n", str2, mediaRoute2Info.getId(), mediaRoute2Info.getName());
             }
         }
         printWriter.println(str2 + "Active routing sessions:");
@@ -101,9 +103,14 @@ public abstract class MediaRoute2Provider {
     public final void notifyProviderState() {
         Callback callback = this.mCallback;
         if (callback != null) {
-            MediaRouter2ServiceImpl.UserHandler userHandler = (MediaRouter2ServiceImpl.UserHandler) callback;
+            MediaRouter2ServiceImpl.UserHandler userHandler =
+                    (MediaRouter2ServiceImpl.UserHandler) callback;
             userHandler.getClass();
-            userHandler.sendMessage(PooledLambda.obtainMessage(new MediaRouter2ServiceImpl$$ExternalSyntheticLambda7(2), userHandler, this));
+            userHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new MediaRouter2ServiceImpl$$ExternalSyntheticLambda7(2),
+                            userHandler,
+                            this));
         }
     }
 
@@ -111,7 +118,14 @@ public abstract class MediaRoute2Provider {
 
     public abstract void releaseSession(long j, String str);
 
-    public abstract void requestCreateSession(long j, String str, String str2, Bundle bundle, int i, UserHandle userHandle, String str3);
+    public abstract void requestCreateSession(
+            long j,
+            String str,
+            String str2,
+            Bundle bundle,
+            int i,
+            UserHandle userHandle,
+            String str3);
 
     public abstract void selectRoute(String str, long j, String str2);
 
@@ -119,7 +133,11 @@ public abstract class MediaRoute2Provider {
         if (mediaRoute2ProviderInfo == null) {
             this.mProviderInfo = null;
         } else {
-            this.mProviderInfo = new MediaRoute2ProviderInfo.Builder(mediaRoute2ProviderInfo).setUniqueId(this.mComponentName.getPackageName(), this.mUniqueId).setSystemRouteProvider(this.mIsSystemRouteProvider).build();
+            this.mProviderInfo =
+                    new MediaRoute2ProviderInfo.Builder(mediaRoute2ProviderInfo)
+                            .setUniqueId(this.mComponentName.getPackageName(), this.mUniqueId)
+                            .setSystemRouteProvider(this.mIsSystemRouteProvider)
+                            .build();
         }
     }
 
@@ -131,7 +149,9 @@ public abstract class MediaRoute2Provider {
         return getDebugString();
     }
 
-    public abstract void transferToRoute(long j, UserHandle userHandle, String str, String str2, String str3, int i);
+    public abstract void transferToRoute(
+            long j, UserHandle userHandle, String str, String str2, String str3, int i);
 
-    public abstract void updateDiscoveryPreference(Set set, RouteDiscoveryPreference routeDiscoveryPreference);
+    public abstract void updateDiscoveryPreference(
+            Set set, RouteDiscoveryPreference routeDiscoveryPreference);
 }

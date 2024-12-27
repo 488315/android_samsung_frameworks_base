@@ -1,14 +1,15 @@
 package com.android.server.broadcastradio.hal1;
 
-import com.android.server.broadcastradio.hal1.TunerCallback;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class TunerCallback$$ExternalSyntheticLambda2 implements TunerCallback.RunnableThrowingRemoteException {
+public final /* synthetic */ class TunerCallback$$ExternalSyntheticLambda2
+        implements TunerCallback.RunnableThrowingRemoteException {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ TunerCallback f$0;
 
-    public /* synthetic */ TunerCallback$$ExternalSyntheticLambda2(TunerCallback tunerCallback, int i) {
+    public /* synthetic */ TunerCallback$$ExternalSyntheticLambda2(
+            TunerCallback tunerCallback, int i) {
         this.$r8$classId = i;
         this.f$0 = tunerCallback;
     }

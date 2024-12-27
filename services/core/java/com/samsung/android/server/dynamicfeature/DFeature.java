@@ -5,16 +5,20 @@ import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
+
 import com.samsung.android.provider.Feature;
 import com.samsung.android.provider.SemDynamicFeature;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -61,14 +65,15 @@ public final class DFeature {
             }
             this.abInfo = jSONObject.getJSONArray("abTestTypes");
         } catch (Exception e) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Feature creation failed."), "dynamicfeature_Feature");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Feature creation failed."), "dynamicfeature_Feature");
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:19:0x0043, code lost:
-    
-        if (r3.version == r1.version) goto L27;
-     */
+
+       if (r3.version == r1.version) goto L27;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -113,12 +118,31 @@ public final class DFeature {
         L48:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.dynamicfeature.DFeature.isSame(java.util.ArrayList, java.util.ArrayList):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.dynamicfeature.DFeature.isSame(java.util.ArrayList,"
+                    + " java.util.ArrayList):boolean");
     }
 
     public final String dump() {
         StringBuilder sb = new StringBuilder("dump feature item ");
-        sb.append(" namespace:" + this.namespace + " name:" + this.name + " version:" + this.version + " reboot:" + this.reboot + " value:" + this.value + " abType: " + this.abType + " abInfo:" + this.abInfo + " property:" + this.property);
+        sb.append(
+                " namespace:"
+                        + this.namespace
+                        + " name:"
+                        + this.name
+                        + " version:"
+                        + this.version
+                        + " reboot:"
+                        + this.reboot
+                        + " value:"
+                        + this.value
+                        + " abType: "
+                        + this.abType
+                        + " abInfo:"
+                        + this.abInfo
+                        + " property:"
+                        + this.property);
         if (this.packagenames != null) {
             sb.append(" packages :");
             Iterator it = this.packagenames.iterator();
@@ -172,7 +196,8 @@ public final class DFeature {
     }
 
     public final String getIntentAction() {
-        return BootReceiver$$ExternalSyntheticOutline0.m("com.sec.df.changed.", this.namespace, ".", this.name);
+        return BootReceiver$$ExternalSyntheticOutline0.m(
+                "com.sec.df.changed.", this.namespace, ".", this.name);
     }
 
     public final String getPersistPropertyKey() {
@@ -188,13 +213,16 @@ public final class DFeature {
         if (!z) {
             arrayList.add(new Feature(this.name, this.value, this.abType != null));
         }
-        intent.putExtra("PROPERTY_CARGO", (Parcelable) new SemDynamicFeature.Properties(this.namespace, arrayList));
+        intent.putExtra(
+                "PROPERTY_CARGO",
+                (Parcelable) new SemDynamicFeature.Properties(this.namespace, arrayList));
     }
 
     public final void setAbTypeAndValue(String str, String str2, String str3) {
         JSONArray jSONArray = this.abInfo;
         if (jSONArray == null || jSONArray.length() == 0 || str.length() == 0) {
-            BootReceiver$$ExternalSyntheticOutline0.m("ABInfo is NULL ! type : ", str, "dynamicfeature_Feature");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    "ABInfo is NULL ! type : ", str, "dynamicfeature_Feature");
             return;
         }
         this.abType = str;
@@ -211,7 +239,8 @@ public final class DFeature {
                     return;
                 }
             } catch (Exception e) {
-                NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("setAbType : "), "dynamicfeature_Feature");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("setAbType : "), "dynamicfeature_Feature");
             }
         }
         Slog.e("dynamicfeature_Feature", "Fail to find item for ".concat(str));

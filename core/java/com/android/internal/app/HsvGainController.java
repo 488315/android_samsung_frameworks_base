@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.internal.logging.MetricsLogger;
 
 /* loaded from: classes5.dex */
@@ -28,20 +29,30 @@ public final class HsvGainController {
     public HsvGainController(Context context, int userId) {
         this.mContext = context.getApplicationContext();
         this.mUserId = userId;
-        this.mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) { // from class: com.android.internal.app.HsvGainController.1
-            @Override // android.database.ContentObserver
-            public void onChange(boolean selfChange, Uri uri) {
-                super.onChange(selfChange, uri);
-                String setting = uri == null ? null : uri.getLastPathSegment();
-                if (setting != null) {
-                    HsvGainController.this.onSettingChanged(setting);
-                }
-            }
-        };
+        this.mContentObserver =
+                new ContentObserver(
+                        new Handler(
+                                Looper
+                                        .getMainLooper())) { // from class:
+                                                             // com.android.internal.app.HsvGainController.1
+                    @Override // android.database.ContentObserver
+                    public void onChange(boolean selfChange, Uri uri) {
+                        super.onChange(selfChange, uri);
+                        String setting = uri == null ? null : uri.getLastPathSegment();
+                        if (setting != null) {
+                            HsvGainController.this.onSettingChanged(setting);
+                        }
+                    }
+                };
     }
 
     public boolean isActivated() {
-        return Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.HSV_GAIN_DISPLAY_ACTIVATED, 0, this.mUserId) == 1;
+        return Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.HSV_GAIN_DISPLAY_ACTIVATED,
+                        0,
+                        this.mUserId)
+                == 1;
     }
 
     public boolean setActivated(boolean z) {
@@ -50,11 +61,20 @@ public final class HsvGainController {
             setHsvGainSatLevel(getDefaultHsvGainLevel());
             setHsvGainValLevel(getDefaultHsvGainLevel());
         }
-        return Settings.Secure.putIntForUser(this.mContext.getContentResolver(), Settings.Secure.HSV_GAIN_DISPLAY_ACTIVATED, z ? 1 : 0, this.mUserId);
+        return Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.HSV_GAIN_DISPLAY_ACTIVATED,
+                z ? 1 : 0,
+                this.mUserId);
     }
 
     public int getHsvGainHueLevel() {
-        int level = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.HSV_GAIN_DISPLAY_HUE_LEVEL, -1, this.mUserId);
+        int level =
+                Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.HSV_GAIN_DISPLAY_HUE_LEVEL,
+                        -1,
+                        this.mUserId);
         if (level == -1) {
             Slog.d(TAG, "Using default value for setting: hsv_gain_display_hue_level");
             return getDefaultHsvGainLevel();
@@ -63,7 +83,12 @@ public final class HsvGainController {
     }
 
     public int getHsvGainSatLevel() {
-        int level = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.HSV_GAIN_DISPLAY_SAT_LEVEL, -1, this.mUserId);
+        int level =
+                Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.HSV_GAIN_DISPLAY_SAT_LEVEL,
+                        -1,
+                        this.mUserId);
         if (level == -1) {
             Slog.d(TAG, "Using default value for setting: hsv_gain_display_sat_level");
             return getDefaultHsvGainLevel();
@@ -72,7 +97,12 @@ public final class HsvGainController {
     }
 
     public int getHsvGainValLevel() {
-        int level = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.HSV_GAIN_DISPLAY_VAL_LEVEL, -1, this.mUserId);
+        int level =
+                Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.HSV_GAIN_DISPLAY_VAL_LEVEL,
+                        -1,
+                        this.mUserId);
         if (level == -1) {
             Slog.d(TAG, "Using default value for setting: hsv_gain_display_val_level");
             return getDefaultHsvGainLevel();
@@ -81,15 +111,27 @@ public final class HsvGainController {
     }
 
     public boolean setHsvGainHueLevel(int level) {
-        return Settings.Secure.putIntForUser(this.mContext.getContentResolver(), Settings.Secure.HSV_GAIN_DISPLAY_HUE_LEVEL, level, this.mUserId);
+        return Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.HSV_GAIN_DISPLAY_HUE_LEVEL,
+                level,
+                this.mUserId);
     }
 
     public boolean setHsvGainSatLevel(int level) {
-        return Settings.Secure.putIntForUser(this.mContext.getContentResolver(), Settings.Secure.HSV_GAIN_DISPLAY_SAT_LEVEL, level, this.mUserId);
+        return Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.HSV_GAIN_DISPLAY_SAT_LEVEL,
+                level,
+                this.mUserId);
     }
 
     public boolean setHsvGainValLevel(int level) {
-        return Settings.Secure.putIntForUser(this.mContext.getContentResolver(), Settings.Secure.HSV_GAIN_DISPLAY_VAL_LEVEL, level, this.mUserId);
+        return Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.HSV_GAIN_DISPLAY_VAL_LEVEL,
+                level,
+                this.mUserId);
     }
 
     public int getMinimumHsvGainLevel() {
@@ -170,10 +212,26 @@ public final class HsvGainController {
             }
             if (oldCallback == null) {
                 ContentResolver cr = this.mContext.getContentResolver();
-                cr.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.HSV_GAIN_DISPLAY_ACTIVATED), false, this.mContentObserver, this.mUserId);
-                cr.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.HSV_GAIN_DISPLAY_HUE_LEVEL), false, this.mContentObserver, this.mUserId);
-                cr.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.HSV_GAIN_DISPLAY_SAT_LEVEL), false, this.mContentObserver, this.mUserId);
-                cr.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.HSV_GAIN_DISPLAY_VAL_LEVEL), false, this.mContentObserver, this.mUserId);
+                cr.registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.HSV_GAIN_DISPLAY_ACTIVATED),
+                        false,
+                        this.mContentObserver,
+                        this.mUserId);
+                cr.registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.HSV_GAIN_DISPLAY_HUE_LEVEL),
+                        false,
+                        this.mContentObserver,
+                        this.mUserId);
+                cr.registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.HSV_GAIN_DISPLAY_SAT_LEVEL),
+                        false,
+                        this.mContentObserver,
+                        this.mUserId);
+                cr.registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.HSV_GAIN_DISPLAY_VAL_LEVEL),
+                        false,
+                        this.mContentObserver,
+                        this.mUserId);
             }
         }
     }
@@ -190,16 +248,12 @@ public final class HsvGainController {
     }
 
     public interface Callback {
-        default void onActivated(boolean activated) {
-        }
+        default void onActivated(boolean activated) {}
 
-        default void onHsvGainHueLevelChanged(int level) {
-        }
+        default void onHsvGainHueLevelChanged(int level) {}
 
-        default void onHsvGainSatLevelChanged(int level) {
-        }
+        default void onHsvGainSatLevelChanged(int level) {}
 
-        default void onHsvGainValLevelChanged(int level) {
-        }
+        default void onHsvGainValLevelChanged(int level) {}
     }
 }

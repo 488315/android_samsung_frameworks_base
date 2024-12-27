@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.policy.IKeyguardService;
 import com.android.internal.policy.IKeyguardStateCallback;
 import com.android.internal.widget.LockPatternUtils;
@@ -20,7 +21,10 @@ public final class KeyguardStateMonitor extends IKeyguardStateCallback.Stub {
     public volatile boolean mTrusted = false;
     public int mCurrentUserId = ActivityManager.getCurrentUser();
 
-    public KeyguardStateMonitor(Context context, IKeyguardService iKeyguardService, PhoneWindowManager.AnonymousClass1 anonymousClass1) {
+    public KeyguardStateMonitor(
+            Context context,
+            IKeyguardService iKeyguardService,
+            PhoneWindowManager.AnonymousClass1 anonymousClass1) {
         this.mLockPatternUtils = new LockPatternUtils(context);
         this.mCallback = anonymousClass1;
         try {

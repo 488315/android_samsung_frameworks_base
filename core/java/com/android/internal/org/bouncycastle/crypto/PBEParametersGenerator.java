@@ -14,8 +14,7 @@ public abstract class PBEParametersGenerator {
 
     public abstract CipherParameters generateDerivedParameters(int i, int i2);
 
-    protected PBEParametersGenerator() {
-    }
+    protected PBEParametersGenerator() {}
 
     public void init(byte[] password, byte[] salt, int iterationCount) {
         this.password = password;

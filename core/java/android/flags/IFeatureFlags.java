@@ -1,11 +1,11 @@
 package android.flags;
 
-import android.flags.IFeatureFlagsCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -31,12 +31,10 @@ public interface IFeatureFlags extends IInterface {
         }
 
         @Override // android.flags.IFeatureFlags
-        public void registerCallback(IFeatureFlagsCallback callback) throws RemoteException {
-        }
+        public void registerCallback(IFeatureFlagsCallback callback) throws RemoteException {}
 
         @Override // android.flags.IFeatureFlags
-        public void unregisterCallback(IFeatureFlagsCallback callback) throws RemoteException {
-        }
+        public void unregisterCallback(IFeatureFlagsCallback callback) throws RemoteException {}
 
         @Override // android.flags.IFeatureFlags
         public List<SyncableFlag> queryFlags(List<SyncableFlag> flagList) throws RemoteException {
@@ -44,12 +42,10 @@ public interface IFeatureFlags extends IInterface {
         }
 
         @Override // android.flags.IFeatureFlags
-        public void overrideFlag(SyncableFlag flag) throws RemoteException {
-        }
+        public void overrideFlag(SyncableFlag flag) throws RemoteException {}
 
         @Override // android.flags.IFeatureFlags
-        public void resetFlag(SyncableFlag flag) throws RemoteException {
-        }
+        public void resetFlag(SyncableFlag flag) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -57,7 +53,7 @@ public interface IFeatureFlags extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFeatureFlags {
+    public abstract static class Stub extends Binder implements IFeatureFlags {
         static final int TRANSACTION_overrideFlag = 5;
         static final int TRANSACTION_queryFlags = 4;
         static final int TRANSACTION_registerCallback = 2;
@@ -110,7 +106,8 @@ public interface IFeatureFlags extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFeatureFlags.DESCRIPTOR);
             }
@@ -127,13 +124,15 @@ public interface IFeatureFlags extends IInterface {
                     reply.writeTypedList(_result, 1);
                     return true;
                 case 2:
-                    IFeatureFlagsCallback _arg02 = IFeatureFlagsCallback.Stub.asInterface(data.readStrongBinder());
+                    IFeatureFlagsCallback _arg02 =
+                            IFeatureFlagsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallback(_arg02);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    IFeatureFlagsCallback _arg03 = IFeatureFlagsCallback.Stub.asInterface(data.readStrongBinder());
+                    IFeatureFlagsCallback _arg03 =
+                            IFeatureFlagsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCallback(_arg03);
                     reply.writeNoException();
@@ -179,7 +178,8 @@ public interface IFeatureFlags extends IInterface {
             }
 
             @Override // android.flags.IFeatureFlags
-            public List<SyncableFlag> syncFlags(List<SyncableFlag> flagList) throws RemoteException {
+            public List<SyncableFlag> syncFlags(List<SyncableFlag> flagList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -226,7 +226,8 @@ public interface IFeatureFlags extends IInterface {
             }
 
             @Override // android.flags.IFeatureFlags
-            public List<SyncableFlag> queryFlags(List<SyncableFlag> flagList) throws RemoteException {
+            public List<SyncableFlag> queryFlags(List<SyncableFlag> flagList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

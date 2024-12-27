@@ -14,13 +14,16 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Singleton;
 import android.util.Slog;
+
 import com.android.internal.pm.pkg.component.ParsedApexSystemService;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.modules.utils.build.UnboundedSdkLevel;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.utils.TimingsTraceAndSlog;
+
 import com.google.android.collect.Lists;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -55,7 +58,8 @@ public abstract class ApexManager {
 
         public ActiveApexInfo(ApexInfo apexInfo) {
             String str = apexInfo.moduleName;
-            File file = new File(Environment.getApexDirectory() + File.separator + apexInfo.moduleName);
+            File file =
+                    new File(Environment.getApexDirectory() + File.separator + apexInfo.moduleName);
             File file2 = new File(apexInfo.preinstalledModulePath);
             boolean z = apexInfo.isFactory;
             File file3 = new File(apexInfo.modulePath);
@@ -81,7 +85,8 @@ public abstract class ApexManager {
 
         @Override // com.android.server.pm.ApexManager
         public final List getActiveApexInfos() {
-            TimingsTraceAndSlog timingsTraceAndSlog = new TimingsTraceAndSlog(262144L, "ApexManagerTiming");
+            TimingsTraceAndSlog timingsTraceAndSlog =
+                    new TimingsTraceAndSlog(262144L, "ApexManagerTiming");
             synchronized (this.mLock) {
                 if (this.mActiveApexInfosCache == null) {
                     timingsTraceAndSlog.traceBegin("getActiveApexInfos_noCache");
@@ -107,14 +112,17 @@ public abstract class ApexManager {
             Objects.requireNonNull(str);
             synchronized (this.mLock) {
                 try {
-                    Preconditions.checkState(this.mPackageNameToApexModuleName != null, "APEX packages have not been scanned");
+                    Preconditions.checkState(
+                            this.mPackageNameToApexModuleName != null,
+                            "APEX packages have not been scanned");
                     int size = this.mApksInApex.size();
                     for (int i = 0; i < size; i++) {
                         if (((List) this.mApksInApex.valueAt(i)).contains(str)) {
                             String str2 = (String) this.mApksInApex.keyAt(i);
                             int size2 = this.mPackageNameToApexModuleName.size();
                             for (int i2 = 0; i2 < size2; i2++) {
-                                if (((String) this.mPackageNameToApexModuleName.valueAt(i2)).equals(str2)) {
+                                if (((String) this.mPackageNameToApexModuleName.valueAt(i2))
+                                        .equals(str2)) {
                                     return (String) this.mPackageNameToApexModuleName.keyAt(i2);
                                 }
                             }
@@ -131,7 +139,9 @@ public abstract class ApexManager {
         public final String getActivePackageNameForApexModuleName(String str) {
             String str2;
             synchronized (this.mLock) {
-                Preconditions.checkState(this.mApexModuleNameToActivePackageName != null, "APEX packages have not been scanned");
+                Preconditions.checkState(
+                        this.mApexModuleNameToActivePackageName != null,
+                        "APEX packages have not been scanned");
                 str2 = (String) this.mApexModuleNameToActivePackageName.get(str);
             }
             return str2;
@@ -141,7 +151,9 @@ public abstract class ApexManager {
         public final String getApexModuleNameForPackageName(String str) {
             String str2;
             synchronized (this.mLock) {
-                Preconditions.checkState(this.mPackageNameToApexModuleName != null, "APEX packages have not been scanned");
+                Preconditions.checkState(
+                        this.mPackageNameToApexModuleName != null,
+                        "APEX packages have not been scanned");
                 str2 = (String) this.mPackageNameToApexModuleName.get(str);
             }
             return str2;
@@ -151,7 +163,9 @@ public abstract class ApexManager {
         public List getApksInApex(String str) {
             synchronized (this.mLock) {
                 try {
-                    Preconditions.checkState(this.mPackageNameToApexModuleName != null, "APEX packages have not been scanned");
+                    Preconditions.checkState(
+                            this.mPackageNameToApexModuleName != null,
+                            "APEX packages have not been scanned");
                     String str2 = (String) this.mPackageNameToApexModuleName.get(str);
                     if (str2 == null) {
                         return Collections.emptyList();
@@ -166,7 +180,8 @@ public abstract class ApexManager {
         @Override // com.android.server.pm.ApexManager
         public final File getBackingApexFile(File file) {
             Path path = file.toPath();
-            if (!path.startsWith(Environment.getApexDirectory().toPath()) || path.getNameCount() < 2) {
+            if (!path.startsWith(Environment.getApexDirectory().toPath())
+                    || path.getNameCount() < 2) {
                 return null;
             }
             String path2 = file.toPath().getName(1).toString();
@@ -212,26 +227,57 @@ public abstract class ApexManager {
             while (it.hasNext()) {
                 ScanResult scanResult = (ScanResult) it.next();
                 ApexInfo apexInfo = scanResult.apexInfo;
-                for (ParsedApexSystemService parsedApexSystemService : scanResult.pkg.getApexSystemServices()) {
+                for (ParsedApexSystemService parsedApexSystemService :
+                        scanResult.pkg.getApexSystemServices()) {
                     String minSdkVersion = parsedApexSystemService.getMinSdkVersion();
                     if (minSdkVersion == null || UnboundedSdkLevel.isAtLeast(minSdkVersion)) {
                         String maxSdkVersion = parsedApexSystemService.getMaxSdkVersion();
                         if (maxSdkVersion != null && !UnboundedSdkLevel.isAtMost(maxSdkVersion)) {
-                            Slog.d("ApexManager", XmlUtils$$ExternalSyntheticOutline0.m("ApexSystemService ", parsedApexSystemService.getName(), " with max_sdk_version=", parsedApexSystemService.getMaxSdkVersion(), " is skipped"));
+                            Slog.d(
+                                    "ApexManager",
+                                    XmlUtils$$ExternalSyntheticOutline0.m(
+                                            "ApexSystemService ",
+                                            parsedApexSystemService.getName(),
+                                            " with max_sdk_version=",
+                                            parsedApexSystemService.getMaxSdkVersion(),
+                                            " is skipped"));
                         } else if (apexInfo.isActive) {
                             String name = parsedApexSystemService.getName();
-                            for (int i = 0; i < ((ArrayList) this.mApexSystemServices).size(); i++) {
-                                ApexSystemServiceInfo apexSystemServiceInfo = (ApexSystemServiceInfo) ((ArrayList) this.mApexSystemServices).get(i);
+                            for (int i = 0;
+                                    i < ((ArrayList) this.mApexSystemServices).size();
+                                    i++) {
+                                ApexSystemServiceInfo apexSystemServiceInfo =
+                                        (ApexSystemServiceInfo)
+                                                ((ArrayList) this.mApexSystemServices).get(i);
                                 if (apexSystemServiceInfo.mName.equals(name)) {
-                                    throw new IllegalStateException(TextUtils.formatSimple("Duplicate apex-system-service %s from %s, %s", new Object[]{name, apexSystemServiceInfo.mJarPath, parsedApexSystemService.getJarPath()}));
+                                    throw new IllegalStateException(
+                                            TextUtils.formatSimple(
+                                                    "Duplicate apex-system-service %s from %s, %s",
+                                                    new Object[] {
+                                                        name,
+                                                        apexSystemServiceInfo.mJarPath,
+                                                        parsedApexSystemService.getJarPath()
+                                                    }));
                                 }
                             }
-                            ((ArrayList) this.mApexSystemServices).add(new ApexSystemServiceInfo(parsedApexSystemService.getInitOrder(), parsedApexSystemService.getName(), parsedApexSystemService.getJarPath()));
+                            ((ArrayList) this.mApexSystemServices)
+                                    .add(
+                                            new ApexSystemServiceInfo(
+                                                    parsedApexSystemService.getInitOrder(),
+                                                    parsedApexSystemService.getName(),
+                                                    parsedApexSystemService.getJarPath()));
                         } else {
                             continue;
                         }
                     } else {
-                        Slog.d("ApexManager", XmlUtils$$ExternalSyntheticOutline0.m("ApexSystemService ", parsedApexSystemService.getName(), " with min_sdk_version=", parsedApexSystemService.getMinSdkVersion(), " is skipped"));
+                        Slog.d(
+                                "ApexManager",
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        "ApexSystemService ",
+                                        parsedApexSystemService.getName(),
+                                        " with min_sdk_version=",
+                                        parsedApexSystemService.getMinSdkVersion(),
+                                        " is skipped"));
                     }
                 }
                 Collections.sort(this.mApexSystemServices);
@@ -241,7 +287,9 @@ public abstract class ApexManager {
                 arrayMap.put(str2, str);
                 if (apexInfo.isActive) {
                     if (this.mApexModuleNameToActivePackageName.containsKey(apexInfo.moduleName)) {
-                        throw new IllegalStateException("Two active packages have the same APEX module name: " + apexInfo.moduleName);
+                        throw new IllegalStateException(
+                                "Two active packages have the same APEX module name: "
+                                        + apexInfo.moduleName);
                     }
                     this.mApexModuleNameToActivePackageName.put(apexInfo.moduleName, str2);
                 }
@@ -255,13 +303,22 @@ public abstract class ApexManager {
                     Iterator it = ((ArraySet) this.mActiveApexInfosCache).iterator();
                     while (it.hasNext()) {
                         ActiveApexInfo activeApexInfo = (ActiveApexInfo) it.next();
-                        if (androidPackage.getBaseApkPath().startsWith(activeApexInfo.apexDirectory.getAbsolutePath() + File.separator)) {
+                        if (androidPackage
+                                .getBaseApkPath()
+                                .startsWith(
+                                        activeApexInfo.apexDirectory.getAbsolutePath()
+                                                + File.separator)) {
                             List list = (List) this.mApksInApex.get(activeApexInfo.apexModuleName);
                             if (list == null) {
                                 list = Lists.newArrayList();
                                 this.mApksInApex.put(activeApexInfo.apexModuleName, list);
                             }
-                            Slog.i("ApexManager", "Registering " + androidPackage.getPackageName() + " as apk-in-apex of " + activeApexInfo.apexModuleName);
+                            Slog.i(
+                                    "ApexManager",
+                                    "Registering "
+                                            + androidPackage.getPackageName()
+                                            + " as apk-in-apex of "
+                                            + activeApexInfo.apexModuleName);
                             list.add(androidPackage.getPackageName());
                         }
                     }
@@ -295,12 +352,14 @@ public abstract class ApexManager {
                 Slog.e("ApexManager", "Unable to contact apexservice", e);
                 throw new RuntimeException(e);
             } catch (Exception e2) {
-                throw new PackageManagerException(-22, "apexd verification failed : " + e2.getMessage());
+                throw new PackageManagerException(
+                        -22, "apexd verification failed : " + e2.getMessage());
             }
         }
 
         public IApexService waitForApexService() {
-            return IApexService.Stub.asInterface(Binder.allowBlocking(ServiceManager.waitForService("apexservice")));
+            return IApexService.Stub.asInterface(
+                    Binder.allowBlocking(ServiceManager.waitForService("apexservice")));
         }
     }
 

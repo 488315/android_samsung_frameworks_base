@@ -11,8 +11,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.NtpTrustedTime;
+
 import com.android.internal.R;
 import com.android.internal.content.NativeLibraryHelper;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,9 +32,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* loaded from: classes.dex */
 public class TemplateManager {
@@ -72,7 +75,12 @@ public class TemplateManager {
         } catch (IOException e) {
             Log.e(this.TAG, "loading UID template, error = " + e);
         }
-        Log.i(this.TAG, "static templates loaded, uidsize:" + this.mUidTemplate.size() + ", colorsize:" + this.mColorTemplate.size());
+        Log.i(
+                this.TAG,
+                "static templates loaded, uidsize:"
+                        + this.mUidTemplate.size()
+                        + ", colorsize:"
+                        + this.mColorTemplate.size());
     }
 
     public void loadTemplateFromUri(Context context, Uri path) {
@@ -90,7 +98,12 @@ public class TemplateManager {
         } catch (Exception e) {
             Log.e(this.TAG, "Failed at loadTemplate, e = ", e);
         }
-        Log.i(this.TAG, "loadTemplateFromUri uidsize:" + this.mUidTemplate.size() + ", colorsize:" + this.mColorTemplate.size());
+        Log.i(
+                this.TAG,
+                "loadTemplateFromUri uidsize:"
+                        + this.mUidTemplate.size()
+                        + ", colorsize:"
+                        + this.mColorTemplate.size());
     }
 
     private void writeThemeParkTemplate(String jsonString) {
@@ -114,7 +127,9 @@ public class TemplateManager {
                 return;
             }
         }
-        Log.e(this.TAG, "Failed to write ThemePark's template, couldn't find a ThemePark state file");
+        Log.e(
+                this.TAG,
+                "Failed to write ThemePark's template, couldn't find a ThemePark state file");
     }
 
     public void initTemplate(String jsonString) {
@@ -153,7 +168,8 @@ public class TemplateManager {
         }
     }
 
-    private void initColorTemplate(JSONArray jArray, HashMap<String, ColorItem> template) throws JSONException {
+    private void initColorTemplate(JSONArray jArray, HashMap<String, ColorItem> template)
+            throws JSONException {
         template.clear();
         for (int i = 0; i < jArray.length(); i++) {
             JSONObject obj = jArray.getJSONObject(i);
@@ -161,9 +177,16 @@ public class TemplateManager {
                 ColorItem item = new ColorItem();
                 item.name = obj.getString("name");
                 item.colorLight = obj.getString("colorLight");
-                item.colorDark = obj.isNull("colorDark") ? item.colorLight : obj.getString("colorDark");
-                item.colorLightGray = obj.isNull("colorLightGray") ? item.colorLight : obj.getString("colorLightGray");
-                item.colorDarkGray = obj.isNull("colorDarkGray") ? item.colorDark : obj.getString("colorDarkGray");
+                item.colorDark =
+                        obj.isNull("colorDark") ? item.colorLight : obj.getString("colorDark");
+                item.colorLightGray =
+                        obj.isNull("colorLightGray")
+                                ? item.colorLight
+                                : obj.getString("colorLightGray");
+                item.colorDarkGray =
+                        obj.isNull("colorDarkGray")
+                                ? item.colorDark
+                                : obj.getString("colorDarkGray");
                 checkValidTemplate(item.colorLight);
                 checkValidTemplate(item.colorDark);
                 checkValidTemplate(item.colorLightGray);
@@ -257,16 +280,19 @@ public class TemplateManager {
                 JSONArray jArray = jsonObject.getJSONArray("template");
                 updateUidTemplate(jArray, pkgName);
             } catch (JSONException jsonException) {
-                ThemeUtil.saveSWTLog(this.TAG, "loading uid template for update, ex = " + jsonException);
+                ThemeUtil.saveSWTLog(
+                        this.TAG, "loading uid template for update, ex = " + jsonException);
             }
             try {
                 JSONArray jArray2 = jsonObject.getJSONArray("color-template");
                 updateColorTemplate(jArray2, pkgName);
             } catch (JSONException jsonException2) {
-                ThemeUtil.saveSWTLog(this.TAG, "loading color template for update, ex = " + jsonException2);
+                ThemeUtil.saveSWTLog(
+                        this.TAG, "loading color template for update, ex = " + jsonException2);
             }
         } catch (JSONException jsonException3) {
-            ThemeUtil.saveSWTLog(this.TAG, "loading template file for update, ex = " + jsonException3);
+            ThemeUtil.saveSWTLog(
+                    this.TAG, "loading template file for update, ex = " + jsonException3);
         }
     }
 
@@ -277,7 +303,8 @@ public class TemplateManager {
         ThemeUtil.saveSWTLog(this.TAG, "template rpUID [" + pkgUidNum + "] replaced by " + pkgName);
         List<UidItem> existedPkgUid = new ArrayList<>();
         for (UidItem item : this.mUidTemplate) {
-            if (item.uid != null && item.uid.startsWith(pkgUidNum + NativeLibraryHelper.CLEAR_ABI_OVERRIDE)) {
+            if (item.uid != null
+                    && item.uid.startsWith(pkgUidNum + NativeLibraryHelper.CLEAR_ABI_OVERRIDE)) {
                 existedPkgUid.add(item);
             }
         }
@@ -304,9 +331,16 @@ public class TemplateManager {
                 ColorItem item = new ColorItem();
                 item.name = obj.getString("name");
                 item.colorLight = obj.getString("colorLight");
-                item.colorDark = obj.isNull("colorDark") ? item.colorLight : obj.getString("colorDark");
-                item.colorLightGray = obj.isNull("colorLightGray") ? item.colorLight : obj.getString("colorLightGray");
-                item.colorDarkGray = obj.isNull("colorDarkGray") ? item.colorDark : obj.getString("colorDarkGray");
+                item.colorDark =
+                        obj.isNull("colorDark") ? item.colorLight : obj.getString("colorDark");
+                item.colorLightGray =
+                        obj.isNull("colorLightGray")
+                                ? item.colorLight
+                                : obj.getString("colorLightGray");
+                item.colorDarkGray =
+                        obj.isNull("colorDarkGray")
+                                ? item.colorDark
+                                : obj.getString("colorDarkGray");
                 Iterator<ColorItem> it = this.mColorTemplate.values().iterator();
                 while (true) {
                     if (!it.hasNext()) {
@@ -314,7 +348,9 @@ public class TemplateManager {
                     }
                     ColorItem colorItem = it.next();
                     if (colorItem.name.equals(item.name)) {
-                        ThemeUtil.saveSWTLog(this.TAG, "template COLOR [" + item.name + "] replaced by " + pkgName);
+                        ThemeUtil.saveSWTLog(
+                                this.TAG,
+                                "template COLOR [" + item.name + "] replaced by " + pkgName);
                         this.mColorTemplate.remove(colorItem.name);
                         break;
                     }
@@ -354,51 +390,75 @@ public class TemplateManager {
     }
 
     public List<Integer> getColors(String uid) {
-        return (List) search(uid, new Function<UidItem, List<Integer>>() { // from class: android.content.om.wallpapertheme.TemplateManager.1
-            @Override // java.util.function.Function
-            public List<Integer> apply(UidItem item) {
-                Integer calculatedLight;
-                Integer calculatedDark;
-                String[] themes = item.themes != null ? item.themes : new String[]{item.theme, item.theme};
-                if (themes[0].startsWith("#")) {
-                    calculatedLight = Integer.valueOf(Color.parseColor(themes[0]));
-                } else {
-                    ColorItem colorItem = TemplateManager.this.mColorTemplate.get(themes[0]);
-                    if (colorItem == null) {
-                        return null;
-                    }
-                    calculatedLight = TemplateManager.this.getColorFromName(TemplateManager.this.mThemePalette.mIsGray ? colorItem.colorLightGray : colorItem.colorLight);
-                }
-                if (calculatedLight == null) {
-                    return null;
-                }
-                if (themes[1].startsWith("#")) {
-                    calculatedDark = Integer.valueOf(Color.parseColor(themes[1]));
-                } else {
-                    ColorItem colorItem2 = TemplateManager.this.mColorTemplate.get(themes[1]);
-                    if (colorItem2 == null) {
-                        return null;
-                    }
-                    calculatedDark = TemplateManager.this.getColorFromName(TemplateManager.this.mThemePalette.mIsGray ? colorItem2.colorDarkGray : colorItem2.colorDark);
-                }
-                if (calculatedDark == null) {
-                    return null;
-                }
-                if (item.opacity.intValue() != 100) {
-                    calculatedLight = ThemeUtil.adjustAlpha(item.opacity.intValue() / 100.0f, calculatedLight.intValue());
-                    calculatedDark = ThemeUtil.adjustAlpha(item.opacity.intValue() / 100.0f, calculatedDark.intValue());
-                }
-                return new ArrayList(Arrays.asList(calculatedLight, calculatedDark));
-            }
-        });
+        return (List)
+                search(
+                        uid,
+                        new Function<UidItem, List<Integer>>() { // from class:
+                            // android.content.om.wallpapertheme.TemplateManager.1
+                            @Override // java.util.function.Function
+                            public List<Integer> apply(UidItem item) {
+                                Integer calculatedLight;
+                                Integer calculatedDark;
+                                String[] themes =
+                                        item.themes != null
+                                                ? item.themes
+                                                : new String[] {item.theme, item.theme};
+                                if (themes[0].startsWith("#")) {
+                                    calculatedLight = Integer.valueOf(Color.parseColor(themes[0]));
+                                } else {
+                                    ColorItem colorItem =
+                                            TemplateManager.this.mColorTemplate.get(themes[0]);
+                                    if (colorItem == null) {
+                                        return null;
+                                    }
+                                    calculatedLight =
+                                            TemplateManager.this.getColorFromName(
+                                                    TemplateManager.this.mThemePalette.mIsGray
+                                                            ? colorItem.colorLightGray
+                                                            : colorItem.colorLight);
+                                }
+                                if (calculatedLight == null) {
+                                    return null;
+                                }
+                                if (themes[1].startsWith("#")) {
+                                    calculatedDark = Integer.valueOf(Color.parseColor(themes[1]));
+                                } else {
+                                    ColorItem colorItem2 =
+                                            TemplateManager.this.mColorTemplate.get(themes[1]);
+                                    if (colorItem2 == null) {
+                                        return null;
+                                    }
+                                    calculatedDark =
+                                            TemplateManager.this.getColorFromName(
+                                                    TemplateManager.this.mThemePalette.mIsGray
+                                                            ? colorItem2.colorDarkGray
+                                                            : colorItem2.colorDark);
+                                }
+                                if (calculatedDark == null) {
+                                    return null;
+                                }
+                                if (item.opacity.intValue() != 100) {
+                                    calculatedLight =
+                                            ThemeUtil.adjustAlpha(
+                                                    item.opacity.intValue() / 100.0f,
+                                                    calculatedLight.intValue());
+                                    calculatedDark =
+                                            ThemeUtil.adjustAlpha(
+                                                    item.opacity.intValue() / 100.0f,
+                                                    calculatedDark.intValue());
+                                }
+                                return new ArrayList(
+                                        Arrays.asList(calculatedLight, calculatedDark));
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:67:0x00ed, code lost:
-    
-        if (r5.equals("50") != false) goto L78;
-     */
+
+       if (r5.equals("50") != false) goto L78;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -408,69 +468,102 @@ public class TemplateManager {
             Method dump skipped, instructions count: 428
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.om.wallpapertheme.TemplateManager.getColorFromName(java.lang.String):java.lang.Integer");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.content.om.wallpapertheme.TemplateManager.getColorFromName(java.lang.String):java.lang.Integer");
     }
 
     public List<Boolean> getBooleans(String uid) {
-        return (List) search(uid, new Function<UidItem, List<Boolean>>() { // from class: android.content.om.wallpapertheme.TemplateManager.2
-            @Override // java.util.function.Function
-            public List<Boolean> apply(UidItem item) {
-                Boolean boolLight = null;
-                Boolean boolDark = null;
-                String[] themes = item.themes != null ? item.themes : new String[]{item.theme, item.theme};
-                if ("true".equalsIgnoreCase(themes[0])) {
-                    boolLight = Boolean.TRUE;
-                } else if ("false".equalsIgnoreCase(themes[0])) {
-                    boolLight = Boolean.FALSE;
-                }
-                if ("true".equalsIgnoreCase(themes[1])) {
-                    boolDark = Boolean.TRUE;
-                } else if ("false".equalsIgnoreCase(themes[1])) {
-                    boolDark = Boolean.FALSE;
-                }
-                if (boolLight == null || boolDark == null) {
-                    return null;
-                }
-                return new ArrayList(Arrays.asList(boolLight, boolDark));
-            }
-        });
+        return (List)
+                search(
+                        uid,
+                        new Function<UidItem, List<Boolean>>() { // from class:
+                            // android.content.om.wallpapertheme.TemplateManager.2
+                            @Override // java.util.function.Function
+                            public List<Boolean> apply(UidItem item) {
+                                Boolean boolLight = null;
+                                Boolean boolDark = null;
+                                String[] themes =
+                                        item.themes != null
+                                                ? item.themes
+                                                : new String[] {item.theme, item.theme};
+                                if ("true".equalsIgnoreCase(themes[0])) {
+                                    boolLight = Boolean.TRUE;
+                                } else if ("false".equalsIgnoreCase(themes[0])) {
+                                    boolLight = Boolean.FALSE;
+                                }
+                                if ("true".equalsIgnoreCase(themes[1])) {
+                                    boolDark = Boolean.TRUE;
+                                } else if ("false".equalsIgnoreCase(themes[1])) {
+                                    boolDark = Boolean.FALSE;
+                                }
+                                if (boolLight == null || boolDark == null) {
+                                    return null;
+                                }
+                                return new ArrayList(Arrays.asList(boolLight, boolDark));
+                            }
+                        });
     }
 
     public Integer getInteger(String uid) {
-        return (Integer) search(uid, new Function<UidItem, Integer>() { // from class: android.content.om.wallpapertheme.TemplateManager.3
-            @Override // java.util.function.Function
-            public Integer apply(UidItem item) {
-                try {
-                    return Integer.valueOf(Integer.parseInt(item.theme));
-                } catch (Exception e) {
-                    Log.e(TemplateManager.this.TAG, "error = " + e);
-                    return null;
-                }
-            }
-        });
+        return (Integer)
+                search(
+                        uid,
+                        new Function<UidItem, Integer>() { // from class:
+                            // android.content.om.wallpapertheme.TemplateManager.3
+                            @Override // java.util.function.Function
+                            public Integer apply(UidItem item) {
+                                try {
+                                    return Integer.valueOf(Integer.parseInt(item.theme));
+                                } catch (Exception e) {
+                                    Log.e(TemplateManager.this.TAG, "error = " + e);
+                                    return null;
+                                }
+                            }
+                        });
     }
 
     public String getString(String uid) {
-        return (String) search(uid, new Function<UidItem, String>() { // from class: android.content.om.wallpapertheme.TemplateManager.4
-            @Override // java.util.function.Function
-            public String apply(UidItem item) {
-                if (item.theme != null && item.theme.startsWith("@")) {
-                    return item.theme.substring(1);
-                }
-                return null;
-            }
-        });
+        return (String)
+                search(
+                        uid,
+                        new Function<UidItem, String>() { // from class:
+                            // android.content.om.wallpapertheme.TemplateManager.4
+                            @Override // java.util.function.Function
+                            public String apply(UidItem item) {
+                                if (item.theme != null && item.theme.startsWith("@")) {
+                                    return item.theme.substring(1);
+                                }
+                                return null;
+                            }
+                        });
     }
 
     public void dump(PrintWriter pw) {
         pw.println("- TEMPLATE -");
         pw.println(" [UID ITEMS]");
         for (UidItem uidItem : this.mUidTemplate) {
-            pw.println("   - UID:" + uidItem.uid + ", THEME:" + uidItem.theme + ", OPA:" + uidItem.opacity);
+            pw.println(
+                    "   - UID:"
+                            + uidItem.uid
+                            + ", THEME:"
+                            + uidItem.theme
+                            + ", OPA:"
+                            + uidItem.opacity);
         }
         pw.println(" [COLOR ITEMS]");
         for (ColorItem c : this.mColorTemplate.values()) {
-            pw.println("   - NAME:" + c.name + ", COLOR:" + c.colorLight + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + c.colorDark + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + c.colorLightGray + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + c.colorDarkGray);
+            pw.println(
+                    "   - NAME:"
+                            + c.name
+                            + ", COLOR:"
+                            + c.colorLight
+                            + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                            + c.colorDark
+                            + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                            + c.colorLightGray
+                            + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                            + c.colorDarkGray);
         }
     }
 }

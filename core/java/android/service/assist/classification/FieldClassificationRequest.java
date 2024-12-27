@@ -5,29 +5,34 @@ import android.annotation.SystemApi;
 import android.app.assist.AssistStructure;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class FieldClassificationRequest implements Parcelable {
-    public static final Parcelable.Creator<FieldClassificationRequest> CREATOR = new Parcelable.Creator<FieldClassificationRequest>() { // from class: android.service.assist.classification.FieldClassificationRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FieldClassificationRequest[] newArray(int size) {
-            return new FieldClassificationRequest[size];
-        }
+    public static final Parcelable.Creator<FieldClassificationRequest> CREATOR =
+            new Parcelable.Creator<
+                    FieldClassificationRequest>() { // from class:
+                                                    // android.service.assist.classification.FieldClassificationRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FieldClassificationRequest[] newArray(int size) {
+                    return new FieldClassificationRequest[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FieldClassificationRequest createFromParcel(Parcel in) {
-            return new FieldClassificationRequest(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FieldClassificationRequest createFromParcel(Parcel in) {
+                    return new FieldClassificationRequest(in);
+                }
+            };
     private final AssistStructure mAssistStructure;
 
     public FieldClassificationRequest(AssistStructure assistStructure) {
         this.mAssistStructure = assistStructure;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAssistStructure);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAssistStructure);
     }
 
     public AssistStructure getAssistStructure() {
@@ -49,12 +54,13 @@ public final class FieldClassificationRequest implements Parcelable {
     }
 
     FieldClassificationRequest(Parcel in) {
-        AssistStructure assistStructure = (AssistStructure) in.readTypedObject(AssistStructure.CREATOR);
+        AssistStructure assistStructure =
+                (AssistStructure) in.readTypedObject(AssistStructure.CREATOR);
         this.mAssistStructure = assistStructure;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAssistStructure);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAssistStructure);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

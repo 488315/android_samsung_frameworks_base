@@ -2,8 +2,11 @@ package com.android.server.enterprise.accessControl;
 
 import android.hardware.broadcastradio.V2_0.AmFmBandRange$$ExternalSyntheticOutline0;
 import android.os.Binder;
+
 import com.android.server.enterprise.utils.Utils;
+
 import com.samsung.android.knox.ContextInfo;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,7 +33,8 @@ public final class AccessControl {
         this(z, z2, z3, z4, z5, List.of(str), 0);
     }
 
-    public AccessControl(boolean z, boolean z2, boolean z3, boolean z4, boolean z5, List list, int i) {
+    public AccessControl(
+            boolean z, boolean z2, boolean z3, boolean z4, boolean z5, List list, int i) {
         this.mUid = -1;
         this.mPid = -1;
         this.mContextUid = -1;

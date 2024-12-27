@@ -36,37 +36,52 @@ public final class PhoneStateHelper {
             int[] subId = SubscriptionManager.getSubId(i);
             if (subId != null && subId.length > 0) {
                 int i2 = subId[0];
-                Log.i("AS.PhoneStateHelper", "registerPhoneStateListener mSimCount: " + this.mSimCount + " , subId: " + i2);
-                this.mPhoneStateListener[i] = new PhoneStateListener() { // from class: com.samsung.android.server.audio.PhoneStateHelper.1
-                    @Override // android.telephony.PhoneStateListener
-                    public final void onCallStateChanged(int i3, String str) {
-                    }
+                Log.i(
+                        "AS.PhoneStateHelper",
+                        "registerPhoneStateListener mSimCount: "
+                                + this.mSimCount
+                                + " , subId: "
+                                + i2);
+                this.mPhoneStateListener[i] =
+                        new PhoneStateListener() { // from class:
+                                                   // com.samsung.android.server.audio.PhoneStateHelper.1
+                            @Override // android.telephony.PhoneStateListener
+                            public final void onCallStateChanged(int i3, String str) {}
 
-                    @Override // android.telephony.PhoneStateListener
-                    public final void onServiceStateChanged(ServiceState serviceState) {
-                        if (serviceState != null) {
-                            int state = serviceState.getState();
-                            boolean z = true;
-                            if (state != PhoneStateHelper.this.mRilState) {
-                                Log.w("AS.PhoneStateHelper", "RIL State is changed: " + PhoneStateHelper.this.mRilState + " -> " + state);
-                                if (state != 1) {
-                                    AudioSystem.setParameters("l_call_ril_state_connected=true");
+                            @Override // android.telephony.PhoneStateListener
+                            public final void onServiceStateChanged(ServiceState serviceState) {
+                                if (serviceState != null) {
+                                    int state = serviceState.getState();
+                                    boolean z = true;
+                                    if (state != PhoneStateHelper.this.mRilState) {
+                                        Log.w(
+                                                "AS.PhoneStateHelper",
+                                                "RIL State is changed: "
+                                                        + PhoneStateHelper.this.mRilState
+                                                        + " -> "
+                                                        + state);
+                                        if (state != 1) {
+                                            AudioSystem.setParameters(
+                                                    "l_call_ril_state_connected=true");
+                                        }
+                                        PhoneStateHelper.this.mRilState = state;
+                                    }
+                                    PhoneStateHelper phoneStateHelper = PhoneStateHelper.this;
+                                    int voiceNetworkType = serviceState.getVoiceNetworkType();
+                                    phoneStateHelper.getClass();
+                                    if (voiceNetworkType != 1
+                                            && voiceNetworkType != 16
+                                            && voiceNetworkType != 2) {
+                                        z = false;
+                                    }
+                                    if (PhoneStateHelper.this.mIs2GTDMANetwork != z) {
+                                        AudioSystem.setParameters(
+                                                "l_call_2g_tdma=".concat(z ? "true" : "false"));
+                                        PhoneStateHelper.this.mIs2GTDMANetwork = z;
+                                    }
                                 }
-                                PhoneStateHelper.this.mRilState = state;
                             }
-                            PhoneStateHelper phoneStateHelper = PhoneStateHelper.this;
-                            int voiceNetworkType = serviceState.getVoiceNetworkType();
-                            phoneStateHelper.getClass();
-                            if (voiceNetworkType != 1 && voiceNetworkType != 16 && voiceNetworkType != 2) {
-                                z = false;
-                            }
-                            if (PhoneStateHelper.this.mIs2GTDMANetwork != z) {
-                                AudioSystem.setParameters("l_call_2g_tdma=".concat(z ? "true" : "false"));
-                                PhoneStateHelper.this.mIs2GTDMANetwork = z;
-                            }
-                        }
-                    }
-                };
+                        };
                 this.mSpecifiedTm[i] = this.mTelephonyManager.createForSubscriptionId(i2);
                 this.mSpecifiedTm[i].listen(this.mPhoneStateListener[i], 33);
             }

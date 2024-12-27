@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -17,12 +18,11 @@ public interface IOptionsResponseCallback extends IInterface {
 
     public static class Default implements IOptionsResponseCallback {
         @Override // android.telephony.ims.aidl.IOptionsResponseCallback
-        public void onCommandError(int code) throws RemoteException {
-        }
+        public void onCommandError(int code) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IOptionsResponseCallback
-        public void onNetworkResponse(int code, String reason, List<String> theirCaps) throws RemoteException {
-        }
+        public void onNetworkResponse(int code, String reason, List<String> theirCaps)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface IOptionsResponseCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOptionsResponseCallback {
+    public abstract static class Stub extends Binder implements IOptionsResponseCallback {
         static final int TRANSACTION_onCommandError = 1;
         static final int TRANSACTION_onNetworkResponse = 2;
 
@@ -71,7 +71,8 @@ public interface IOptionsResponseCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOptionsResponseCallback.DESCRIPTOR);
             }
@@ -126,7 +127,8 @@ public interface IOptionsResponseCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IOptionsResponseCallback
-            public void onNetworkResponse(int code, String reason, List<String> theirCaps) throws RemoteException {
+            public void onNetworkResponse(int code, String reason, List<String> theirCaps)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOptionsResponseCallback.DESCRIPTOR);

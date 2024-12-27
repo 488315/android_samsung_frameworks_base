@@ -13,8 +13,7 @@ public final /* synthetic */ class RotationHelper$$ExternalSyntheticLambda0 impl
             try {
                 Boolean bool2 = RotationHelper.sFoldState;
                 if (bool2 != null) {
-                    if (bool2.booleanValue() != booleanValue) {
-                    }
+                    if (bool2.booleanValue() != booleanValue) {}
                 }
                 RotationHelper.sFoldState = bool;
                 RotationHelper.sFoldStateCallback.accept(bool);

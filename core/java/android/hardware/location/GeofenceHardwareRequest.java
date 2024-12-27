@@ -23,7 +23,8 @@ public final class GeofenceHardwareRequest {
         this.mType = 0;
     }
 
-    public static GeofenceHardwareRequest createCircularGeofence(double latitude, double longitude, double radius) {
+    public static GeofenceHardwareRequest createCircularGeofence(
+            double latitude, double longitude, double radius) {
         GeofenceHardwareRequest geofenceRequest = new GeofenceHardwareRequest();
         geofenceRequest.setCircularGeofence(latitude, longitude, radius);
         return geofenceRequest;

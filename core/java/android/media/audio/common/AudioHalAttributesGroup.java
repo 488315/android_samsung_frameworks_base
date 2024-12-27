@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioHalAttributesGroup implements Parcelable {
-    public static final Parcelable.Creator<AudioHalAttributesGroup> CREATOR = new Parcelable.Creator<AudioHalAttributesGroup>() { // from class: android.media.audio.common.AudioHalAttributesGroup.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalAttributesGroup createFromParcel(Parcel _aidl_source) {
-            AudioHalAttributesGroup _aidl_out = new AudioHalAttributesGroup();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioHalAttributesGroup> CREATOR =
+            new Parcelable.Creator<AudioHalAttributesGroup>() { // from class:
+                // android.media.audio.common.AudioHalAttributesGroup.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalAttributesGroup createFromParcel(Parcel _aidl_source) {
+                    AudioHalAttributesGroup _aidl_out = new AudioHalAttributesGroup();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalAttributesGroup[] newArray(int _aidl_size) {
-            return new AudioHalAttributesGroup[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalAttributesGroup[] newArray(int _aidl_size) {
+                    return new AudioHalAttributesGroup[_aidl_size];
+                }
+            };
     public AudioAttributes[] attributes;
     public int streamType = -2;
     public String volumeGroupName;
@@ -75,7 +78,8 @@ public class AudioHalAttributesGroup implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.attributes = (AudioAttributes[]) _aidl_parcel.createTypedArray(AudioAttributes.CREATOR);
+                this.attributes =
+                        (AudioAttributes[]) _aidl_parcel.createTypedArray(AudioAttributes.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -106,7 +110,9 @@ public class AudioHalAttributesGroup implements Parcelable {
             return false;
         }
         AudioHalAttributesGroup that = (AudioHalAttributesGroup) other;
-        if (Objects.deepEquals(Integer.valueOf(this.streamType), Integer.valueOf(that.streamType)) && Objects.deepEquals(this.volumeGroupName, that.volumeGroupName) && Objects.deepEquals(this.attributes, that.attributes)) {
+        if (Objects.deepEquals(Integer.valueOf(this.streamType), Integer.valueOf(that.streamType))
+                && Objects.deepEquals(this.volumeGroupName, that.volumeGroupName)
+                && Objects.deepEquals(this.attributes, that.attributes)) {
             return true;
         }
         return false;
@@ -114,7 +120,12 @@ public class AudioHalAttributesGroup implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.streamType), this.volumeGroupName, this.attributes).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.streamType),
+                                this.volumeGroupName,
+                                this.attributes)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

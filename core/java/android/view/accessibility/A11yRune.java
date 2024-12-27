@@ -4,6 +4,7 @@ import android.content.ContentProviderClient;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.SemSystemProperties;
+
 import com.samsung.android.feature.SemFloatingFeature;
 
 /* loaded from: classes4.dex */
@@ -75,44 +76,54 @@ public class A11yRune {
     private static Cursor cursor;
     private static ContentProviderClient mClient;
     private static String value;
-    private static final int FIRST_API_LEVEL = SemSystemProperties.getInt("ro.product.first_api_level", 20);
-    public static final boolean A11Y_COLOR_BOOL_SUPPORT_DMC_COLORWEAKNESS = String.valueOf("3").equals("0");
+    private static final int FIRST_API_LEVEL =
+            SemSystemProperties.getInt("ro.product.first_api_level", 20);
+    public static final boolean A11Y_COLOR_BOOL_SUPPORT_DMC_COLORWEAKNESS =
+            String.valueOf("3").equals("0");
 
     static {
         A11Y_COLOR_BOOL_SUPPORT_COLOR_FILTER_MDNIE_HW = FIRST_API_LEVEL < 35;
-        A11Y_COMMON_BOOL_SUPPORT_LARGE_COVER_SCREEN_FLIP = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_FOLDABLE_TYPE_FLIP") && SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY").contains("LARGESCREEN");
+        A11Y_COMMON_BOOL_SUPPORT_LARGE_COVER_SCREEN_FLIP =
+                SemFloatingFeature.getInstance()
+                                .getBoolean(
+                                        "SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_FOLDABLE_TYPE_FLIP")
+                        && SemFloatingFeature.getInstance()
+                                .getString(
+                                        "SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY")
+                                .contains("LARGESCREEN");
         CONTENT_URI = Uri.parse("content://com.samsung.accessibility.provider/a11ysettings");
-        SELECT_PROJECTION = new String[]{"_id", "name", "value"};
+        SELECT_PROJECTION = new String[] {"_id", "name", "value"};
         value = null;
         cursor = null;
         mClient = null;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0041, code lost:
-    
-        if (android.view.accessibility.A11yRune.mClient != null) goto L30;
-     */
+
+       if (android.view.accessibility.A11yRune.mClient != null) goto L30;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0070, code lost:
-    
-        return android.view.accessibility.A11yRune.value;
-     */
+
+       return android.view.accessibility.A11yRune.value;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:16:0x0069, code lost:
-    
-        android.view.accessibility.A11yRune.mClient.close();
-     */
+
+       android.view.accessibility.A11yRune.mClient.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x0055, code lost:
-    
-        if (android.view.accessibility.A11yRune.mClient == null) goto L31;
-     */
+
+       if (android.view.accessibility.A11yRune.mClient == null) goto L31;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0067, code lost:
-    
-        if (android.view.accessibility.A11yRune.mClient == null) goto L31;
-     */
+
+       if (android.view.accessibility.A11yRune.mClient == null) goto L31;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String readDataFromAccessibilityProvider(android.content.Context r8, java.lang.String r9) {
+    public static java.lang.String readDataFromAccessibilityProvider(
+            android.content.Context r8, java.lang.String r9) {
         /*
             android.content.ContentResolver r0 = r8.getContentResolver()     // Catch: java.lang.Throwable -> L44 android.database.CursorIndexOutOfBoundsException -> L46 android.os.RemoteException -> L58
             android.net.Uri r1 = android.view.accessibility.A11yRune.CONTENT_URI     // Catch: java.lang.Throwable -> L44 android.database.CursorIndexOutOfBoundsException -> L46 android.os.RemoteException -> L58
@@ -188,7 +199,10 @@ public class A11yRune {
         L83:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.accessibility.A11yRune.readDataFromAccessibilityProvider(android.content.Context, java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.accessibility.A11yRune.readDataFromAccessibilityProvider(android.content.Context,"
+                    + " java.lang.String):java.lang.String");
     }
 
     public static Uri getUriFor(Uri uri, String name) {

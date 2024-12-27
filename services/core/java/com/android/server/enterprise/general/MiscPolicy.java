@@ -40,6 +40,7 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Patterns;
 import android.webkit.URLUtil;
+
 import com.android.internal.telephony.IccCardConstants;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.widget.ILockSettings;
@@ -66,6 +67,7 @@ import com.android.server.enterprise.storage.EdmStorageProviderBase;
 import com.android.server.enterprise.storage.SettingNotFoundException;
 import com.android.server.enterprise.utils.Utils;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.EnterpriseDeviceManager;
@@ -77,6 +79,7 @@ import com.samsung.android.knox.deviceinfo.SimInfo;
 import com.samsung.android.knox.net.AuthConfig;
 import com.samsung.android.knox.net.ProxyProperties;
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -119,162 +122,333 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         public static void m517$$Nest$msaveSimState(SIMCardUpdateMonitor sIMCardUpdateMonitor) {
             sIMCardUpdateMonitor.getClass();
             String readPropertyValue = Utils.readPropertyValue("CurrentSimSerialNumber");
-            if (readPropertyValue == null || sIMCardUpdateMonitor.mTelephonyManager.getSimSerialNumber() == null || !sIMCardUpdateMonitor.mTelephonyManager.getSimSerialNumber().equalsIgnoreCase(readPropertyValue)) {
-                Utils.writePropertyValue("PreviousSimCountryIso", Utils.readPropertyValue("CurrentSimCountryIso"), "/data/system/SimCard.dat");
-                Utils.writePropertyValue("PreviousSimOperator", Utils.readPropertyValue("CurrentSimOperator"), "/data/system/SimCard.dat");
-                Utils.writePropertyValue("PreviousSimOperatorName", Utils.readPropertyValue("CurrentSimOperatorName"), "/data/system/SimCard.dat");
-                Utils.writePropertyValue("PreviousSimSerialNumber", Utils.readPropertyValue("CurrentSimSerialNumber"), "/data/system/SimCard.dat");
-                Utils.writePropertyValue("PreviousSimPhoneNumber", Utils.readPropertyValue("CurrentSimPhoneNumber"), "/data/system/SimCard.dat");
-                Utils.writePropertyValue("CurrentSimCountryIso", sIMCardUpdateMonitor.mTelephonyManager.getSimCountryIso(), "/data/system/SimCard.dat");
-                Utils.writePropertyValue("CurrentSimOperator", sIMCardUpdateMonitor.mTelephonyManager.getSimOperator(), "/data/system/SimCard.dat");
-                Utils.writePropertyValue("CurrentSimOperatorName", sIMCardUpdateMonitor.mTelephonyManager.getSimOperatorName(), "/data/system/SimCard.dat");
-                Utils.writePropertyValue("CurrentSimSerialNumber", sIMCardUpdateMonitor.mTelephonyManager.getSimSerialNumber(), "/data/system/SimCard.dat");
-                Utils.writePropertyValue("CurrentSimPhoneNumber", sIMCardUpdateMonitor.mTelephonyManager.getLine1Number(), "/data/system/SimCard.dat");
-                FileUtils.setPermissions(new File("/data/system/SimCard.dat").getAbsolutePath(), FrameworkStatsLog.DISPLAY_HBM_STATE_CHANGED, -1, -1);
+            if (readPropertyValue == null
+                    || sIMCardUpdateMonitor.mTelephonyManager.getSimSerialNumber() == null
+                    || !sIMCardUpdateMonitor
+                            .mTelephonyManager
+                            .getSimSerialNumber()
+                            .equalsIgnoreCase(readPropertyValue)) {
+                Utils.writePropertyValue(
+                        "PreviousSimCountryIso",
+                        Utils.readPropertyValue("CurrentSimCountryIso"),
+                        "/data/system/SimCard.dat");
+                Utils.writePropertyValue(
+                        "PreviousSimOperator",
+                        Utils.readPropertyValue("CurrentSimOperator"),
+                        "/data/system/SimCard.dat");
+                Utils.writePropertyValue(
+                        "PreviousSimOperatorName",
+                        Utils.readPropertyValue("CurrentSimOperatorName"),
+                        "/data/system/SimCard.dat");
+                Utils.writePropertyValue(
+                        "PreviousSimSerialNumber",
+                        Utils.readPropertyValue("CurrentSimSerialNumber"),
+                        "/data/system/SimCard.dat");
+                Utils.writePropertyValue(
+                        "PreviousSimPhoneNumber",
+                        Utils.readPropertyValue("CurrentSimPhoneNumber"),
+                        "/data/system/SimCard.dat");
+                Utils.writePropertyValue(
+                        "CurrentSimCountryIso",
+                        sIMCardUpdateMonitor.mTelephonyManager.getSimCountryIso(),
+                        "/data/system/SimCard.dat");
+                Utils.writePropertyValue(
+                        "CurrentSimOperator",
+                        sIMCardUpdateMonitor.mTelephonyManager.getSimOperator(),
+                        "/data/system/SimCard.dat");
+                Utils.writePropertyValue(
+                        "CurrentSimOperatorName",
+                        sIMCardUpdateMonitor.mTelephonyManager.getSimOperatorName(),
+                        "/data/system/SimCard.dat");
+                Utils.writePropertyValue(
+                        "CurrentSimSerialNumber",
+                        sIMCardUpdateMonitor.mTelephonyManager.getSimSerialNumber(),
+                        "/data/system/SimCard.dat");
+                Utils.writePropertyValue(
+                        "CurrentSimPhoneNumber",
+                        sIMCardUpdateMonitor.mTelephonyManager.getLine1Number(),
+                        "/data/system/SimCard.dat");
+                FileUtils.setPermissions(
+                        new File("/data/system/SimCard.dat").getAbsolutePath(),
+                        FrameworkStatsLog.DISPLAY_HBM_STATE_CHANGED,
+                        -1,
+                        -1);
             }
         }
 
         public SIMCardUpdateMonitor(Context context) {
             final int i = 1;
-            BroadcastReceiver broadcastReceiver = new BroadcastReceiver(this) { // from class: com.android.server.enterprise.general.MiscPolicy.SIMCardUpdateMonitor.1
-                public final /* synthetic */ SIMCardUpdateMonitor this$1;
+            BroadcastReceiver broadcastReceiver = new BroadcastReceiver(this) { // from class:
+                        // com.android.server.enterprise.general.MiscPolicy.SIMCardUpdateMonitor.1
+                        public final /* synthetic */ SIMCardUpdateMonitor this$1;
 
-                {
-                    this.this$1 = this;
-                }
+                        {
+                            this.this$1 = this;
+                        }
 
-                @Override // android.content.BroadcastReceiver
-                public final void onReceive(Context context2, Intent intent) {
-                    switch (i) {
-                        case 0:
-                            if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL".equals(intent.getAction())) {
-                                int intExtra = intent.getIntExtra("com.samsung.android.knox.intent.extra.USER_ID_INTERNAL", 0);
-                                MiscPolicy miscPolicy = MiscPolicy.this;
-                                PackageManager packageManager = MiscPolicy.mPackageManager;
-                                miscPolicy.updateSystemUIMonitor$2(intExtra);
-                                break;
-                            }
-                            break;
-                        default:
-                            try {
-                                String action = intent.getAction();
-                                this.this$1.getClass();
-                                Log.d("SIMCardUpdateMonitor ", " action is : " + action);
-                                if (Constants.SIM_STATE_CHANGED.equals(action)) {
-                                    String stringExtra = intent.getStringExtra("ss");
-                                    this.this$1.getClass();
-                                    Log.d("SIMCardUpdateMonitor ", " state Extra is : " + stringExtra);
-                                    if (!"ABSENT".equals(stringExtra)) {
-                                        if ("LOADED".equals(stringExtra)) {
-                                            this.this$1.getClass();
-                                            Log.d("SIMCardUpdateMonitor ", " SIM Card State : LOADED");
-                                            SIMCardUpdateMonitor.m517$$Nest$msaveSimState(this.this$1);
-                                            Utils.writePropertyValue("SimChangeTime", System.currentTimeMillis() + "", "/data/system/SimCard.dat");
-                                            String readPropertyValue = Utils.readPropertyValue("PreviousSimSerialNumber");
-                                            String readPropertyValue2 = Utils.readPropertyValue("CurrentSimSerialNumber");
-                                            if (readPropertyValue == null || readPropertyValue.equalsIgnoreCase(readPropertyValue2)) {
-                                                Utils.writePropertyValue("SimChangeOperation", "3", "/data/system/SimCard.dat");
-                                            } else {
-                                                Utils.writePropertyValue("SimChangeOperation", "2", "/data/system/SimCard.dat");
-                                            }
-                                            Intent intent2 = new Intent("com.samsung.android.knox.intent.action.SIM_CARD_CHANGED");
-                                            intent2.putExtra("com.samsung.android.knox.intent.extra.SIM_CHANGE_INFO", (Parcelable) MiscPolicy.this.getLastSimChangeInfo(new ContextInfo(Binder.getCallingUid())));
-                                            this.this$1.mCtxt.sendBroadcast(intent2, "com.samsung.android.knox.permission.KNOX_INVENTORY");
-                                            break;
-                                        }
-                                    } else {
-                                        this.this$1.getClass();
-                                        Log.d("SIMCardUpdateMonitor ", " SIM Card State :" + IccCardConstants.State.ABSENT.name());
-                                        Utils.writePropertyValue("SimChangeTime", System.currentTimeMillis() + "", "/data/system/SimCard.dat");
-                                        Utils.writePropertyValue("SimChangeOperation", "1", "/data/system/SimCard.dat");
-                                        FileUtils.setPermissions(new File("/data/system/SimCard.dat").getAbsolutePath(), FrameworkStatsLog.DISPLAY_HBM_STATE_CHANGED, -1, -1);
-                                        Intent intent3 = new Intent("com.samsung.android.knox.intent.action.SIM_CARD_CHANGED");
-                                        intent3.putExtra("com.samsung.android.knox.intent.extra.SIM_CHANGE_INFO", (Parcelable) MiscPolicy.this.getLastSimChangeInfo(new ContextInfo(Binder.getCallingUid())));
-                                        this.this$1.mCtxt.sendBroadcast(intent3, "com.samsung.android.knox.permission.KNOX_INVENTORY");
+                        @Override // android.content.BroadcastReceiver
+                        public final void onReceive(Context context2, Intent intent) {
+                            switch (i) {
+                                case 0:
+                                    if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"
+                                            .equals(intent.getAction())) {
+                                        int intExtra =
+                                                intent.getIntExtra(
+                                                        "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL",
+                                                        0);
+                                        MiscPolicy miscPolicy = MiscPolicy.this;
+                                        PackageManager packageManager = MiscPolicy.mPackageManager;
+                                        miscPolicy.updateSystemUIMonitor$2(intExtra);
                                         break;
                                     }
-                                }
-                            } catch (Exception e) {
-                                this.this$1.getClass();
-                                Log.w("SIMCardUpdateMonitor ", "SIMCardBroadcastReceiver Ex:" + e);
+                                    break;
+                                default:
+                                    try {
+                                        String action = intent.getAction();
+                                        this.this$1.getClass();
+                                        Log.d("SIMCardUpdateMonitor ", " action is : " + action);
+                                        if (Constants.SIM_STATE_CHANGED.equals(action)) {
+                                            String stringExtra = intent.getStringExtra("ss");
+                                            this.this$1.getClass();
+                                            Log.d(
+                                                    "SIMCardUpdateMonitor ",
+                                                    " state Extra is : " + stringExtra);
+                                            if (!"ABSENT".equals(stringExtra)) {
+                                                if ("LOADED".equals(stringExtra)) {
+                                                    this.this$1.getClass();
+                                                    Log.d(
+                                                            "SIMCardUpdateMonitor ",
+                                                            " SIM Card State : LOADED");
+                                                    SIMCardUpdateMonitor.m517$$Nest$msaveSimState(
+                                                            this.this$1);
+                                                    Utils.writePropertyValue(
+                                                            "SimChangeTime",
+                                                            System.currentTimeMillis() + "",
+                                                            "/data/system/SimCard.dat");
+                                                    String readPropertyValue =
+                                                            Utils.readPropertyValue(
+                                                                    "PreviousSimSerialNumber");
+                                                    String readPropertyValue2 =
+                                                            Utils.readPropertyValue(
+                                                                    "CurrentSimSerialNumber");
+                                                    if (readPropertyValue == null
+                                                            || readPropertyValue.equalsIgnoreCase(
+                                                                    readPropertyValue2)) {
+                                                        Utils.writePropertyValue(
+                                                                "SimChangeOperation",
+                                                                "3",
+                                                                "/data/system/SimCard.dat");
+                                                    } else {
+                                                        Utils.writePropertyValue(
+                                                                "SimChangeOperation",
+                                                                "2",
+                                                                "/data/system/SimCard.dat");
+                                                    }
+                                                    Intent intent2 =
+                                                            new Intent(
+                                                                    "com.samsung.android.knox.intent.action.SIM_CARD_CHANGED");
+                                                    intent2.putExtra(
+                                                            "com.samsung.android.knox.intent.extra.SIM_CHANGE_INFO",
+                                                            (Parcelable)
+                                                                    MiscPolicy.this
+                                                                            .getLastSimChangeInfo(
+                                                                                    new ContextInfo(
+                                                                                            Binder
+                                                                                                    .getCallingUid())));
+                                                    this.this$1.mCtxt.sendBroadcast(
+                                                            intent2,
+                                                            "com.samsung.android.knox.permission.KNOX_INVENTORY");
+                                                    break;
+                                                }
+                                            } else {
+                                                this.this$1.getClass();
+                                                Log.d(
+                                                        "SIMCardUpdateMonitor ",
+                                                        " SIM Card State :"
+                                                                + IccCardConstants.State.ABSENT
+                                                                        .name());
+                                                Utils.writePropertyValue(
+                                                        "SimChangeTime",
+                                                        System.currentTimeMillis() + "",
+                                                        "/data/system/SimCard.dat");
+                                                Utils.writePropertyValue(
+                                                        "SimChangeOperation",
+                                                        "1",
+                                                        "/data/system/SimCard.dat");
+                                                FileUtils.setPermissions(
+                                                        new File("/data/system/SimCard.dat")
+                                                                .getAbsolutePath(),
+                                                        FrameworkStatsLog.DISPLAY_HBM_STATE_CHANGED,
+                                                        -1,
+                                                        -1);
+                                                Intent intent3 =
+                                                        new Intent(
+                                                                "com.samsung.android.knox.intent.action.SIM_CARD_CHANGED");
+                                                intent3.putExtra(
+                                                        "com.samsung.android.knox.intent.extra.SIM_CHANGE_INFO",
+                                                        (Parcelable)
+                                                                MiscPolicy.this
+                                                                        .getLastSimChangeInfo(
+                                                                                new ContextInfo(
+                                                                                        Binder
+                                                                                                .getCallingUid())));
+                                                this.this$1.mCtxt.sendBroadcast(
+                                                        intent3,
+                                                        "com.samsung.android.knox.permission.KNOX_INVENTORY");
+                                                break;
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        this.this$1.getClass();
+                                        Log.w(
+                                                "SIMCardUpdateMonitor ",
+                                                "SIMCardBroadcastReceiver Ex:" + e);
+                                    }
+                                    break;
                             }
-                            break;
-                    }
-                }
-            };
+                        }
+                    };
             final int i2 = 0;
-            BroadcastReceiver broadcastReceiver2 = new BroadcastReceiver(this) { // from class: com.android.server.enterprise.general.MiscPolicy.SIMCardUpdateMonitor.1
-                public final /* synthetic */ SIMCardUpdateMonitor this$1;
+            BroadcastReceiver broadcastReceiver2 = new BroadcastReceiver(this) { // from class:
+                        // com.android.server.enterprise.general.MiscPolicy.SIMCardUpdateMonitor.1
+                        public final /* synthetic */ SIMCardUpdateMonitor this$1;
 
-                {
-                    this.this$1 = this;
-                }
+                        {
+                            this.this$1 = this;
+                        }
 
-                @Override // android.content.BroadcastReceiver
-                public final void onReceive(Context context2, Intent intent) {
-                    switch (i2) {
-                        case 0:
-                            if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL".equals(intent.getAction())) {
-                                int intExtra = intent.getIntExtra("com.samsung.android.knox.intent.extra.USER_ID_INTERNAL", 0);
-                                MiscPolicy miscPolicy = MiscPolicy.this;
-                                PackageManager packageManager = MiscPolicy.mPackageManager;
-                                miscPolicy.updateSystemUIMonitor$2(intExtra);
-                                break;
-                            }
-                            break;
-                        default:
-                            try {
-                                String action = intent.getAction();
-                                this.this$1.getClass();
-                                Log.d("SIMCardUpdateMonitor ", " action is : " + action);
-                                if (Constants.SIM_STATE_CHANGED.equals(action)) {
-                                    String stringExtra = intent.getStringExtra("ss");
-                                    this.this$1.getClass();
-                                    Log.d("SIMCardUpdateMonitor ", " state Extra is : " + stringExtra);
-                                    if (!"ABSENT".equals(stringExtra)) {
-                                        if ("LOADED".equals(stringExtra)) {
-                                            this.this$1.getClass();
-                                            Log.d("SIMCardUpdateMonitor ", " SIM Card State : LOADED");
-                                            SIMCardUpdateMonitor.m517$$Nest$msaveSimState(this.this$1);
-                                            Utils.writePropertyValue("SimChangeTime", System.currentTimeMillis() + "", "/data/system/SimCard.dat");
-                                            String readPropertyValue = Utils.readPropertyValue("PreviousSimSerialNumber");
-                                            String readPropertyValue2 = Utils.readPropertyValue("CurrentSimSerialNumber");
-                                            if (readPropertyValue == null || readPropertyValue.equalsIgnoreCase(readPropertyValue2)) {
-                                                Utils.writePropertyValue("SimChangeOperation", "3", "/data/system/SimCard.dat");
-                                            } else {
-                                                Utils.writePropertyValue("SimChangeOperation", "2", "/data/system/SimCard.dat");
-                                            }
-                                            Intent intent2 = new Intent("com.samsung.android.knox.intent.action.SIM_CARD_CHANGED");
-                                            intent2.putExtra("com.samsung.android.knox.intent.extra.SIM_CHANGE_INFO", (Parcelable) MiscPolicy.this.getLastSimChangeInfo(new ContextInfo(Binder.getCallingUid())));
-                                            this.this$1.mCtxt.sendBroadcast(intent2, "com.samsung.android.knox.permission.KNOX_INVENTORY");
-                                            break;
-                                        }
-                                    } else {
-                                        this.this$1.getClass();
-                                        Log.d("SIMCardUpdateMonitor ", " SIM Card State :" + IccCardConstants.State.ABSENT.name());
-                                        Utils.writePropertyValue("SimChangeTime", System.currentTimeMillis() + "", "/data/system/SimCard.dat");
-                                        Utils.writePropertyValue("SimChangeOperation", "1", "/data/system/SimCard.dat");
-                                        FileUtils.setPermissions(new File("/data/system/SimCard.dat").getAbsolutePath(), FrameworkStatsLog.DISPLAY_HBM_STATE_CHANGED, -1, -1);
-                                        Intent intent3 = new Intent("com.samsung.android.knox.intent.action.SIM_CARD_CHANGED");
-                                        intent3.putExtra("com.samsung.android.knox.intent.extra.SIM_CHANGE_INFO", (Parcelable) MiscPolicy.this.getLastSimChangeInfo(new ContextInfo(Binder.getCallingUid())));
-                                        this.this$1.mCtxt.sendBroadcast(intent3, "com.samsung.android.knox.permission.KNOX_INVENTORY");
+                        @Override // android.content.BroadcastReceiver
+                        public final void onReceive(Context context2, Intent intent) {
+                            switch (i2) {
+                                case 0:
+                                    if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"
+                                            .equals(intent.getAction())) {
+                                        int intExtra =
+                                                intent.getIntExtra(
+                                                        "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL",
+                                                        0);
+                                        MiscPolicy miscPolicy = MiscPolicy.this;
+                                        PackageManager packageManager = MiscPolicy.mPackageManager;
+                                        miscPolicy.updateSystemUIMonitor$2(intExtra);
                                         break;
                                     }
-                                }
-                            } catch (Exception e) {
-                                this.this$1.getClass();
-                                Log.w("SIMCardUpdateMonitor ", "SIMCardBroadcastReceiver Ex:" + e);
+                                    break;
+                                default:
+                                    try {
+                                        String action = intent.getAction();
+                                        this.this$1.getClass();
+                                        Log.d("SIMCardUpdateMonitor ", " action is : " + action);
+                                        if (Constants.SIM_STATE_CHANGED.equals(action)) {
+                                            String stringExtra = intent.getStringExtra("ss");
+                                            this.this$1.getClass();
+                                            Log.d(
+                                                    "SIMCardUpdateMonitor ",
+                                                    " state Extra is : " + stringExtra);
+                                            if (!"ABSENT".equals(stringExtra)) {
+                                                if ("LOADED".equals(stringExtra)) {
+                                                    this.this$1.getClass();
+                                                    Log.d(
+                                                            "SIMCardUpdateMonitor ",
+                                                            " SIM Card State : LOADED");
+                                                    SIMCardUpdateMonitor.m517$$Nest$msaveSimState(
+                                                            this.this$1);
+                                                    Utils.writePropertyValue(
+                                                            "SimChangeTime",
+                                                            System.currentTimeMillis() + "",
+                                                            "/data/system/SimCard.dat");
+                                                    String readPropertyValue =
+                                                            Utils.readPropertyValue(
+                                                                    "PreviousSimSerialNumber");
+                                                    String readPropertyValue2 =
+                                                            Utils.readPropertyValue(
+                                                                    "CurrentSimSerialNumber");
+                                                    if (readPropertyValue == null
+                                                            || readPropertyValue.equalsIgnoreCase(
+                                                                    readPropertyValue2)) {
+                                                        Utils.writePropertyValue(
+                                                                "SimChangeOperation",
+                                                                "3",
+                                                                "/data/system/SimCard.dat");
+                                                    } else {
+                                                        Utils.writePropertyValue(
+                                                                "SimChangeOperation",
+                                                                "2",
+                                                                "/data/system/SimCard.dat");
+                                                    }
+                                                    Intent intent2 =
+                                                            new Intent(
+                                                                    "com.samsung.android.knox.intent.action.SIM_CARD_CHANGED");
+                                                    intent2.putExtra(
+                                                            "com.samsung.android.knox.intent.extra.SIM_CHANGE_INFO",
+                                                            (Parcelable)
+                                                                    MiscPolicy.this
+                                                                            .getLastSimChangeInfo(
+                                                                                    new ContextInfo(
+                                                                                            Binder
+                                                                                                    .getCallingUid())));
+                                                    this.this$1.mCtxt.sendBroadcast(
+                                                            intent2,
+                                                            "com.samsung.android.knox.permission.KNOX_INVENTORY");
+                                                    break;
+                                                }
+                                            } else {
+                                                this.this$1.getClass();
+                                                Log.d(
+                                                        "SIMCardUpdateMonitor ",
+                                                        " SIM Card State :"
+                                                                + IccCardConstants.State.ABSENT
+                                                                        .name());
+                                                Utils.writePropertyValue(
+                                                        "SimChangeTime",
+                                                        System.currentTimeMillis() + "",
+                                                        "/data/system/SimCard.dat");
+                                                Utils.writePropertyValue(
+                                                        "SimChangeOperation",
+                                                        "1",
+                                                        "/data/system/SimCard.dat");
+                                                FileUtils.setPermissions(
+                                                        new File("/data/system/SimCard.dat")
+                                                                .getAbsolutePath(),
+                                                        FrameworkStatsLog.DISPLAY_HBM_STATE_CHANGED,
+                                                        -1,
+                                                        -1);
+                                                Intent intent3 =
+                                                        new Intent(
+                                                                "com.samsung.android.knox.intent.action.SIM_CARD_CHANGED");
+                                                intent3.putExtra(
+                                                        "com.samsung.android.knox.intent.extra.SIM_CHANGE_INFO",
+                                                        (Parcelable)
+                                                                MiscPolicy.this
+                                                                        .getLastSimChangeInfo(
+                                                                                new ContextInfo(
+                                                                                        Binder
+                                                                                                .getCallingUid())));
+                                                this.this$1.mCtxt.sendBroadcast(
+                                                        intent3,
+                                                        "com.samsung.android.knox.permission.KNOX_INVENTORY");
+                                                break;
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        this.this$1.getClass();
+                                        Log.w(
+                                                "SIMCardUpdateMonitor ",
+                                                "SIMCardBroadcastReceiver Ex:" + e);
+                                    }
+                                    break;
                             }
-                            break;
-                    }
-                }
-            };
+                        }
+                    };
             this.mCtxt = context;
             this.mTelephonyManager = (TelephonyManager) context.getSystemService("phone");
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(Constants.SIM_STATE_CHANGED);
             context.registerReceiver(broadcastReceiver, intentFilter);
-            context.registerReceiver(broadcastReceiver2, new IntentFilter("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"), 2);
+            context.registerReceiver(
+                    broadcastReceiver2,
+                    new IntentFilter(
+                            "com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"),
+                    2);
         }
     }
 
@@ -282,8 +456,7 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     public final class SystemFontChanger {
         public TypefaceFinder mTypefaceFinder = null;
 
-        public SystemFontChanger() {
-        }
+        public SystemFontChanger() {}
 
         public final String[] getFontString() {
             this.mTypefaceFinder = null;
@@ -295,13 +468,20 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
-                    List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(128);
+                    List<ApplicationInfo> installedApplications =
+                            packageManager.getInstalledApplications(128);
                     for (int i = 0; i < installedApplications.size(); i++) {
                         String str = installedApplications.get(i).packageName;
-                        if (!str.startsWith("com.monotype.android.font.droidserifitalic") && str.startsWith("com.monotype.android.font.")) {
-                            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(str, 128);
+                        if (!str.startsWith("com.monotype.android.font.droidserifitalic")
+                                && str.startsWith("com.monotype.android.font.")) {
+                            ApplicationInfo applicationInfo =
+                                    packageManager.getApplicationInfo(str, 128);
                             applicationInfo.publicSourceDir = applicationInfo.sourceDir;
-                            this.mTypefaceFinder.findTypefaces(packageManager.getResourcesForApplication(applicationInfo).getAssets(), str);
+                            this.mTypefaceFinder.findTypefaces(
+                                    packageManager
+                                            .getResourcesForApplication(applicationInfo)
+                                            .getAssets(),
+                                    str);
                         }
                     }
                     this.mTypefaceFinder.getSansEntries(packageManager, vector2, vector3, vector);
@@ -330,7 +510,9 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             MiscPolicy miscPolicy = MiscPolicy.this;
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                context = miscPolicy.mContext.createPackageContext(KnoxCustomManagerService.SETTING_PKG_NAME, 2);
+                context =
+                        miscPolicy.mContext.createPackageContext(
+                                KnoxCustomManagerService.SETTING_PKG_NAME, 2);
             } catch (Exception e) {
                 e.printStackTrace();
                 context = null;
@@ -345,7 +527,9 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             edit.commit();
             Settings.Global.putInt(miscPolicy.mContext.getContentResolver(), "flip_font_style", i);
             Binder.restoreCallingIdentity(clearCallingIdentity);
-            SharedPreferences.Editor edit2 = context.getSharedPreferences(context.getPackageName() + "_preferences", 0).edit();
+            SharedPreferences.Editor edit2 =
+                    context.getSharedPreferences(context.getPackageName() + "_preferences", 0)
+                            .edit();
             edit2.putString("MONOTYPE", str);
             edit2.commit();
         }
@@ -363,7 +547,9 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     }
 
     public static boolean supportBigFont(Context context) {
-        return context.getPackageManager().hasSystemFeature("com.sec.feature.folder_type") && "CN".equalsIgnoreCase(SemCscFeature.getInstance().getString("CountryISO")) && !Build.PRODUCT.contains("elite");
+        return context.getPackageManager().hasSystemFeature("com.sec.feature.folder_type")
+                && "CN".equalsIgnoreCase(SemCscFeature.getInstance().getString("CountryISO"))
+                && !Build.PRODUCT.contains("elite");
     }
 
     public static boolean validateProxyProperties(ProxyProperties proxyProperties) {
@@ -382,7 +568,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                                 String[] split = hostname.split("\\.");
                                 for (int i = 0; i < split[0].length(); i++) {
                                     char charAt = split[0].charAt(i);
-                                    if ((charAt >= 'a' && charAt <= 'z') || (charAt >= 'A' && charAt <= 'Z')) {
+                                    if ((charAt >= 'a' && charAt <= 'z')
+                                            || (charAt >= 'A' && charAt <= 'Z')) {
                                         int i2 = 0;
                                         for (int i3 = 0; i3 < hostname.length(); i3++) {
                                             if (hostname.charAt(i3) == '.') {
@@ -395,8 +582,10 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                                             while (true) {
                                                 if (i4 >= length) {
                                                     for (String str : split) {
-                                                        if (str.matches("^[A-Za-z0-9-]+$") && str.charAt(0) != '-' && str.charAt(str.length() - 1) != '-') {
-                                                        }
+                                                        if (str.matches("^[A-Za-z0-9-]+$")
+                                                                && str.charAt(0) != '-'
+                                                                && str.charAt(str.length() - 1)
+                                                                        != '-') {}
                                                     }
                                                 } else {
                                                     if (split[i4].length() > 63) {
@@ -411,30 +600,47 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                             }
                         }
                         z = true;
-                        if (z) {
-                        }
+                        if (z) {}
                     }
                     z = false;
-                    if (z) {
-                    }
+                    if (z) {}
                 }
             }
             return false;
         }
-        if (TextUtils.isEmpty(proxyProperties.getPacFileUrl()) || !URLUtil.isNetworkUrl(proxyProperties.getPacFileUrl())) {
+        if (TextUtils.isEmpty(proxyProperties.getPacFileUrl())
+                || !URLUtil.isNetworkUrl(proxyProperties.getPacFileUrl())) {
             return false;
         }
         return true;
     }
 
     public final boolean allowNFCStateChange(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndActiveAdminPermission = getEDM$16().enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_HW_CONTROL")));
-        boolean putBoolean = this.mEdmStorageProvider.putBoolean("MISC", enforceOwnerOnlyAndActiveAdminPermission.mCallerUid, z, 0, "nfcStateChangeAllowed");
+        ContextInfo enforceOwnerOnlyAndActiveAdminPermission =
+                getEDM$16()
+                        .enforceOwnerOnlyAndActiveAdminPermission(
+                                contextInfo,
+                                new ArrayList(
+                                        Arrays.asList(
+                                                "com.samsung.android.knox.permission.KNOX_HW_CONTROL")));
+        boolean putBoolean =
+                this.mEdmStorageProvider.putBoolean(
+                        "MISC",
+                        enforceOwnerOnlyAndActiveAdminPermission.mCallerUid,
+                        z,
+                        0,
+                        "nfcStateChangeAllowed");
         updateAdminsBlockingNfcStateChange();
         if (putBoolean) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndActiveAdminPermission.mCallerUid), 71, new Object[]{Integer.valueOf(enforceOwnerOnlyAndActiveAdminPermission.mCallerUid), Boolean.valueOf(z)});
+                AuditLog.logEventAsUser(
+                        UserHandle.getUserId(enforceOwnerOnlyAndActiveAdminPermission.mCallerUid),
+                        71,
+                        new Object[] {
+                            Integer.valueOf(enforceOwnerOnlyAndActiveAdminPermission.mCallerUid),
+                            Boolean.valueOf(z)
+                        });
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -447,9 +653,16 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         boolean z;
         boolean putInt;
         String str3;
-        ContextInfo enforceOwnerOnlyAndSecurityPermission = enforceOwnerOnlyAndSecurityPermission(contextInfo);
-        int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndSecurityPermission);
-        Context createContextAsUser = Utils.createContextAsUser(this.mContext, "android", 0, enforceOwnerOnlyAndSecurityPermission.mCallerUid);
+        ContextInfo enforceOwnerOnlyAndSecurityPermission =
+                enforceOwnerOnlyAndSecurityPermission(contextInfo);
+        int callingOrCurrentUserId =
+                Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndSecurityPermission);
+        Context createContextAsUser =
+                Utils.createContextAsUser(
+                        this.mContext,
+                        "android",
+                        0,
+                        enforceOwnerOnlyAndSecurityPermission.mCallerUid);
         if (createContextAsUser == null) {
             Log.e("MiscPolicy", "Could not create context for current user!");
             return false;
@@ -457,7 +670,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         long clearCallingIdentity = Binder.clearCallingIdentity();
         ContentResolver contentResolver = createContextAsUser.getContentResolver();
         int isAdminLockScreenStringSet = isAdminLockScreenStringSet(callingOrCurrentUserId);
-        if (isAdminLockScreenStringSet != -1 && isAdminLockScreenStringSet != enforceOwnerOnlyAndSecurityPermission.mCallerUid) {
+        if (isAdminLockScreenStringSet != -1
+                && isAdminLockScreenStringSet != enforceOwnerOnlyAndSecurityPermission.mCallerUid) {
             Log.d("MiscPolicy", "changeLockScreenString():get AdminId failed!! ");
             Binder.restoreCallingIdentity(clearCallingIdentity);
             return false;
@@ -476,30 +690,62 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         String str4 = str2;
         if (z) {
             Log.d("MiscPolicy", "changeLockScreenString(): revoke restriction");
-            putInt = this.mEdmStorageProvider.putInt(enforceOwnerOnlyAndSecurityPermission.mCallerUid, 0, 0, "MISC", "lockscreenstring");
+            putInt =
+                    this.mEdmStorageProvider.putInt(
+                            enforceOwnerOnlyAndSecurityPermission.mCallerUid,
+                            0,
+                            0,
+                            "MISC",
+                            "lockscreenstring");
             try {
-                getLockSettings$1().setString("lock_screen_owner_info", str4, callingOrCurrentUserId);
-                AuditLog.logAsUser(5, 1, true, Process.myPid(), "MiscPolicy", String.format("Admin %d has cleared the lock screen string.", Integer.valueOf(enforceOwnerOnlyAndSecurityPermission.mCallerUid)), callingOrCurrentUserId);
+                getLockSettings$1()
+                        .setString("lock_screen_owner_info", str4, callingOrCurrentUserId);
+                AuditLog.logAsUser(
+                        5,
+                        1,
+                        true,
+                        Process.myPid(),
+                        "MiscPolicy",
+                        String.format(
+                                "Admin %d has cleared the lock screen string.",
+                                Integer.valueOf(enforceOwnerOnlyAndSecurityPermission.mCallerUid)),
+                        callingOrCurrentUserId);
             } catch (RemoteException e) {
                 Log.e("MiscPolicy", "Couldn't write string " + str4 + e);
             }
         } else {
             Log.d("MiscPolicy", "changeLockScreenString(): apply restriction");
-            putInt = this.mEdmStorageProvider.putInt(enforceOwnerOnlyAndSecurityPermission.mCallerUid, 0, 1, "MISC", "lockscreenstring");
+            putInt =
+                    this.mEdmStorageProvider.putInt(
+                            enforceOwnerOnlyAndSecurityPermission.mCallerUid,
+                            0,
+                            1,
+                            "MISC",
+                            "lockscreenstring");
             if (putInt) {
                 Log.d("MiscPolicy", "changeLockScreenString(): ret is true set value");
                 try {
-                    getLockSettings$1().setBoolean("lock_screen_owner_info_enabled", true, callingOrCurrentUserId);
-                    getLockSettings$1().setString("lock_screen_owner_info", str4, callingOrCurrentUserId);
+                    getLockSettings$1()
+                            .setBoolean(
+                                    "lock_screen_owner_info_enabled", true, callingOrCurrentUserId);
+                    getLockSettings$1()
+                            .setString("lock_screen_owner_info", str4, callingOrCurrentUserId);
                     int myPid = Process.myPid();
-                    String format = String.format("Admin %d has changed lock screen string to %s", Integer.valueOf(enforceOwnerOnlyAndSecurityPermission.mCallerUid), str4);
+                    String format =
+                            String.format(
+                                    "Admin %d has changed lock screen string to %s",
+                                    Integer.valueOf(
+                                            enforceOwnerOnlyAndSecurityPermission.mCallerUid),
+                                    str4);
                     str3 = "Couldn't write string ";
                     try {
-                        AuditLog.logAsUser(5, 1, true, myPid, "MiscPolicy", format, callingOrCurrentUserId);
+                        AuditLog.logAsUser(
+                                5, 1, true, myPid, "MiscPolicy", format, callingOrCurrentUserId);
                     } catch (RemoteException e2) {
                         e = e2;
                         Log.e("MiscPolicy", str3 + str4 + e);
-                        Settings.System.putIntForUser(contentResolver, "my_profile_enabled", 0, callingOrCurrentUserId);
+                        Settings.System.putIntForUser(
+                                contentResolver, "my_profile_enabled", 0, callingOrCurrentUserId);
                         boolean z2 = putInt;
                         Log.d("MiscPolicy", "changeLockScreenString():ret:" + z2 + " " + str4);
                         Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -509,7 +755,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                     e = e3;
                     str3 = "Couldn't write string ";
                 }
-                Settings.System.putIntForUser(contentResolver, "my_profile_enabled", 0, callingOrCurrentUserId);
+                Settings.System.putIntForUser(
+                        contentResolver, "my_profile_enabled", 0, callingOrCurrentUserId);
             }
         }
         boolean z22 = putInt;
@@ -529,7 +776,11 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
 
     public final synchronized int clearGlobalProxyEnable(ContextInfo contextInfo) {
         try {
-            if (!this.mEdmStorageProvider.getBoolean(contextInfo.mCallerUid, contextInfo.mContainerId, "RESTRICTION", "globalProxy")) {
+            if (!this.mEdmStorageProvider.getBoolean(
+                    contextInfo.mCallerUid,
+                    contextInfo.mContainerId,
+                    "RESTRICTION",
+                    "globalProxy")) {
                 return 0;
             }
             if (this.mCon == null) {
@@ -538,7 +789,12 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             if (this.mCon == null) {
                 return 0;
             }
-            this.mEdmStorageProvider.putBoolean("RESTRICTION", contextInfo.mCallerUid, false, contextInfo.mContainerId, "globalProxy");
+            this.mEdmStorageProvider.putBoolean(
+                    "RESTRICTION",
+                    contextInfo.mCallerUid,
+                    false,
+                    contextInfo.mContainerId,
+                    "globalProxy");
             this.mEdmStorageProvider.delete("GlobalProxyAuthTable", null);
             this.mEdmStorageProvider.delete("GlobalProxyTable", null);
             this.mLocalProxyManager.updateGlobalProxy(null);
@@ -562,7 +818,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     }
 
     public final int clearGlobalProxyEnableEnforcingSecurityPermission(ContextInfo contextInfo) {
-        return clearGlobalProxyEnable(enforceOwnerOnlyAndOldSecurityOrNewGlobalProxyPermission(contextInfo));
+        return clearGlobalProxyEnable(
+                enforceOwnerOnlyAndOldSecurityOrNewGlobalProxyPermission(contextInfo));
     }
 
     public final void clearNotificationDialog() {
@@ -574,7 +831,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                 localProxyManager.getClass();
                 Log.d("LocalProxyManager", "Clear notification dialog");
                 if (localProxyManager.mNotificationManager != null) {
-                    Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda2(localProxyManager, 7));
+                    Binder.withCleanCallingIdentity(
+                            new LocalProxyManager$$ExternalSyntheticLambda2(localProxyManager, 7));
                 } else {
                     Log.d("LocalProxyManager", "NotificationManager is null");
                 }
@@ -584,7 +842,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         }
     }
 
-    public final void dump(FileDescriptor fileDescriptor, final PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, final PrintWriter printWriter, String[] strArr) {
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
             printWriter.println("Permission Denial: can't dump KioskModeService");
             return;
@@ -594,7 +853,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                 int size = this.mStartNFCHistoryList.size();
                 printWriter.println("  mStartNFCHistoryList.size=" + size);
                 for (int i = 0; i < size; i++) {
-                    printWriter.println("    [" + i + "] " + ((String) this.mStartNFCHistoryList.get(i)));
+                    printWriter.println(
+                            "    [" + i + "] " + ((String) this.mStartNFCHistoryList.get(i)));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -603,7 +863,9 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         this.mLocalProxyManager.getClass();
         ProxyProperties globalProxy = LocalProxyManager.getGlobalProxy();
         if (globalProxy != null) {
-            StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "\nEnforced GlobalProxy:", "Host: ");
+            StringBuilder m$1 =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                            printWriter, "\nEnforced GlobalProxy:", "Host: ");
             m$1.append(globalProxy.getHostname());
             printWriter.println(m$1.toString());
             printWriter.println("Port: " + globalProxy.getPortNumber());
@@ -612,54 +874,82 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         }
         ProxyProperties defaultProxy = LocalProxyManager.getDefaultProxy();
         if (defaultProxy != null) {
-            StringBuilder m$12 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "Enforced WifiProxy:", "Host: ");
+            StringBuilder m$12 =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                            printWriter, "Enforced WifiProxy:", "Host: ");
             m$12.append(defaultProxy.getHostname());
             printWriter.println(m$12.toString());
             printWriter.println("Port: " + defaultProxy.getPortNumber());
             printWriter.println("PAC file url: " + defaultProxy.getPacFileUrl());
             printWriter.println("\n\n");
         }
-        if (LocalProxyManager.sWifiProxyInfoMapCache != null && !((ArrayMap) LocalProxyManager.sWifiProxyInfoMapCache).isEmpty()) {
-            ((ArrayMap) LocalProxyManager.sWifiProxyInfoMapCache).forEach(new BiConsumer() { // from class: com.android.server.enterprise.proxy.LocalProxyManager$$ExternalSyntheticLambda10
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    PrintWriter printWriter2 = printWriter;
-                    String str = (String) obj;
-                    ProxyProperties proxyProperties = (ProxyProperties) obj2;
-                    if (str == null || proxyProperties == null) {
-                        return;
-                    }
-                    printWriter2.println("WifiProxy for ssid=".concat(str));
-                    printWriter2.println("Host: " + proxyProperties.getHostname());
-                    printWriter2.println("Port: " + proxyProperties.getPortNumber());
-                    printWriter2.println("PAC file url: " + proxyProperties.getPacFileUrl());
-                    printWriter2.println("\n");
-                }
-            });
+        if (LocalProxyManager.sWifiProxyInfoMapCache != null
+                && !((ArrayMap) LocalProxyManager.sWifiProxyInfoMapCache).isEmpty()) {
+            ((ArrayMap) LocalProxyManager.sWifiProxyInfoMapCache)
+                    .forEach(
+                            new BiConsumer() { // from class:
+                                               // com.android.server.enterprise.proxy.LocalProxyManager$$ExternalSyntheticLambda10
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    PrintWriter printWriter2 = printWriter;
+                                    String str = (String) obj;
+                                    ProxyProperties proxyProperties = (ProxyProperties) obj2;
+                                    if (str == null || proxyProperties == null) {
+                                        return;
+                                    }
+                                    printWriter2.println("WifiProxy for ssid=".concat(str));
+                                    printWriter2.println("Host: " + proxyProperties.getHostname());
+                                    printWriter2.println(
+                                            "Port: " + proxyProperties.getPortNumber());
+                                    printWriter2.println(
+                                            "PAC file url: " + proxyProperties.getPacFileUrl());
+                                    printWriter2.println("\n");
+                                }
+                            });
         }
         if (this.mAdminsBlockingNfcStateChange.isEmpty()) {
             printWriter.println("  No admin blocking NFC State change");
             return;
         }
-        printWriter.println("  NFC State change blocked by admin UID : " + this.mAdminsBlockingNfcStateChange);
+        printWriter.println(
+                "  NFC State change blocked by admin UID : " + this.mAdminsBlockingNfcStateChange);
     }
 
     public final void enforceMDMAppCaller() {
-        if (this.mContext.checkCallingPermission("com.samsung.android.knox.permission.KNOX_SET_PROXY_CREDENTIAL_INTERNAL") != 0) {
+        if (this.mContext.checkCallingPermission(
+                        "com.samsung.android.knox.permission.KNOX_SET_PROXY_CREDENTIAL_INTERNAL")
+                != 0) {
             throw new SecurityException("Caller does not have required permission.");
         }
     }
 
     public final ContextInfo enforceOwnerOnlyAndFirewallPermission(ContextInfo contextInfo) {
-        return getEDM$16().enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_FIREWALL")));
+        return getEDM$16()
+                .enforceOwnerOnlyAndActiveAdminPermission(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.samsung.android.knox.permission.KNOX_FIREWALL")));
     }
 
-    public final ContextInfo enforceOwnerOnlyAndOldSecurityOrNewGlobalProxyPermission(ContextInfo contextInfo) {
-        return getEDM$16().enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_GLOBALPROXY", "android.permission.NETWORK_STACK")));
+    public final ContextInfo enforceOwnerOnlyAndOldSecurityOrNewGlobalProxyPermission(
+            ContextInfo contextInfo) {
+        return getEDM$16()
+                .enforceOwnerOnlyAndActiveAdminPermission(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.samsung.android.knox.permission.KNOX_GLOBALPROXY",
+                                        "android.permission.NETWORK_STACK")));
     }
 
     public final ContextInfo enforceOwnerOnlyAndSecurityPermission(ContextInfo contextInfo) {
-        return getEDM$16().enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_SECURITY")));
+        return getEDM$16()
+                .enforceOwnerOnlyAndActiveAdminPermission(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.samsung.android.knox.permission.KNOX_SECURITY")));
     }
 
     public final int floatToIndex(float f) {
@@ -669,7 +959,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             float[] fArr = this.mFontSizes;
             if (i >= fArr.length) {
                 int length = fArr.length - 1;
-                NetworkScoreService$$ExternalSyntheticOutline0.m(length, "floatToIndex(): ", "MiscPolicy");
+                NetworkScoreService$$ExternalSyntheticOutline0.m(
+                        length, "floatToIndex(): ", "MiscPolicy");
                 return length;
             }
             float f3 = fArr[i];
@@ -691,7 +982,9 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             LocalProxyManager localProxyManager = this.mLocalProxyManager;
             localProxyManager.getClass();
             ArrayList arrayList = new ArrayList();
-            Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda0(localProxyManager, arrayList, 1));
+            Binder.withCleanCallingIdentity(
+                    new LocalProxyManager$$ExternalSyntheticLambda0(
+                            localProxyManager, arrayList, 1));
             return arrayList;
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -718,19 +1011,32 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
 
     public final List getAuthConfigFromDb() {
         ArrayList arrayList = new ArrayList();
-        Iterator it = ((ArrayList) this.mEdmStorageProvider.getValues("GlobalProxyAuthTable", new String[]{"host", "port", "username", "password"}, null)).iterator();
+        Iterator it =
+                ((ArrayList)
+                                this.mEdmStorageProvider.getValues(
+                                        "GlobalProxyAuthTable",
+                                        new String[] {"host", "port", "username", "password"},
+                                        null))
+                        .iterator();
         while (it.hasNext()) {
             ContentValues contentValues = (ContentValues) it.next();
             String asString = contentValues.getAsString("host");
             Integer asInteger = contentValues.getAsInteger("port");
-            arrayList.add(new AuthConfig(asString, asInteger.intValue(), contentValues.getAsString("username"), contentValues.getAsString("password")));
+            arrayList.add(
+                    new AuthConfig(
+                            asString,
+                            asInteger.intValue(),
+                            contentValues.getAsString("username"),
+                            contentValues.getAsString("password")));
         }
         return arrayList;
     }
 
     public final int getCredentialsFails(String str) {
         enforceMDMAppCaller();
-        return "credentials_fails_count".equals(str) ? this.credentialsFailsCount : this.credentialsFailsState;
+        return "credentials_fails_count".equals(str)
+                ? this.credentialsFailsCount
+                : this.credentialsFailsState;
     }
 
     public final String getCurrentLockScreenString(ContextInfo contextInfo) {
@@ -739,13 +1045,21 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         }
         int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(contextInfo);
         int isAdminLockScreenStringSet = isAdminLockScreenStringSet(callingOrCurrentUserId);
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(isAdminLockScreenStringSet, "getCurrentLockScreenString : currentSetAdminId=", "MiscPolicy");
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                isAdminLockScreenStringSet,
+                "getCurrentLockScreenString : currentSetAdminId=",
+                "MiscPolicy");
         String str = null;
         if (isAdminLockScreenStringSet != -1) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
-                    str = getLockSettings$1().getString("lock_screen_owner_info", (String) null, callingOrCurrentUserId);
+                    str =
+                            getLockSettings$1()
+                                    .getString(
+                                            "lock_screen_owner_info",
+                                            (String) null,
+                                            callingOrCurrentUserId);
                 } catch (RemoteException e) {
                     Log.e("MiscPolicy", "Couldn't get string lock_screen_owner_info" + e);
                 }
@@ -772,7 +1086,13 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                 return globalProxy;
             }
             List authConfigFromDb = getAuthConfigFromDb();
-            Iterator it = ((ArrayList) this.mEdmStorageProvider.getValues("GlobalProxyTable", new String[]{"host", "port", "pacfile", "exclusion"}, null)).iterator();
+            Iterator it =
+                    ((ArrayList)
+                                    this.mEdmStorageProvider.getValues(
+                                            "GlobalProxyTable",
+                                            new String[] {"host", "port", "pacfile", "exclusion"},
+                                            null))
+                            .iterator();
             while (it.hasNext()) {
                 ContentValues contentValues = (ContentValues) it.next();
                 String asString = contentValues.getAsString("host");
@@ -780,8 +1100,7 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                 int intValue = asInteger == null ? -1 : asInteger.intValue();
                 String asString2 = contentValues.getAsString("exclusion");
                 String asString3 = contentValues.getAsString("pacfile");
-                if (TextUtils.isEmpty(asString) && TextUtils.isEmpty(asString3)) {
-                }
+                if (TextUtils.isEmpty(asString) && TextUtils.isEmpty(asString3)) {}
                 if (TextUtils.isEmpty(asString3)) {
                     List arrayList = new ArrayList();
                     if (!TextUtils.isEmpty(asString2)) {
@@ -798,10 +1117,13 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                     if (!((ArrayList) authConfigFromDb).isEmpty()) {
                         globalProxy.setAuthConfigList(authConfigFromDb);
                     }
-                    globalProxy.setExclusionList(Arrays.asList(buildDirectProxy.getExclusionList()));
+                    globalProxy.setExclusionList(
+                            Arrays.asList(buildDirectProxy.getExclusionList()));
                     globalProxy.setPacFileUrl(asString3);
                 } else {
-                    Log.d("MiscPolicy", "Invalid proxy properties, ignoring: " + buildDirectProxy.toString());
+                    Log.d(
+                            "MiscPolicy",
+                            "Invalid proxy properties, ignoring: " + buildDirectProxy.toString());
                 }
             }
             return globalProxy;
@@ -813,11 +1135,16 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     public final List getGlobalProxyEnforcingFirewallPermission(ContextInfo contextInfo) {
         enforceOwnerOnlyAndFirewallPermission(contextInfo);
         ProxyProperties globalProxy = getGlobalProxy();
-        if (globalProxy == null || globalProxy.getHostname() == null || globalProxy.getHostname().toString().equals("")) {
+        if (globalProxy == null
+                || globalProxy.getHostname() == null
+                || globalProxy.getHostname().toString().equals("")) {
             return new ArrayList();
         }
         ArrayList arrayList = new ArrayList();
-        arrayList.add(globalProxy.getHostname().toString().trim() + ":" + Integer.valueOf(globalProxy.getPortNumber()).toString().trim());
+        arrayList.add(
+                globalProxy.getHostname().toString().trim()
+                        + ":"
+                        + Integer.valueOf(globalProxy.getPortNumber()).toString().trim());
         if (globalProxy.getExclusionList() != null) {
             Iterator it = globalProxy.getExclusionList().iterator();
             while (it.hasNext()) {
@@ -827,13 +1154,19 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         return arrayList;
     }
 
-    public final ProxyProperties getGlobalProxyEnforcingSecurityPermission(ContextInfo contextInfo) {
+    public final ProxyProperties getGlobalProxyEnforcingSecurityPermission(
+            ContextInfo contextInfo) {
         enforceOwnerOnlyAndOldSecurityOrNewGlobalProxyPermission(contextInfo);
         return getGlobalProxy();
     }
 
     public final SimChangeInfo getLastSimChangeInfo(ContextInfo contextInfo) {
-        getEDM$16().enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_INVENTORY")));
+        getEDM$16()
+                .enforceOwnerOnlyAndActiveAdminPermission(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.samsung.android.knox.permission.KNOX_INVENTORY")));
         try {
             SimChangeInfo simChangeInfo = new SimChangeInfo();
             String readPropertyValue = Utils.readPropertyValue("SimChangeTime");
@@ -845,10 +1178,13 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             SimInfo simInfo = new SimInfo();
             simChangeInfo.previousSimInfo = simInfo;
             simInfo.countryIso = Utils.readPropertyValue("PreviousSimCountryIso");
-            simChangeInfo.previousSimInfo.operatorName = Utils.readPropertyValue("PreviousSimOperatorName");
+            simChangeInfo.previousSimInfo.operatorName =
+                    Utils.readPropertyValue("PreviousSimOperatorName");
             simChangeInfo.previousSimInfo.operator = Utils.readPropertyValue("PreviousSimOperator");
-            simChangeInfo.previousSimInfo.phoneNumber = Utils.readPropertyValue("PreviousSimPhoneNumber");
-            simChangeInfo.previousSimInfo.serialNumber = Utils.readPropertyValue("PreviousSimSerialNumber");
+            simChangeInfo.previousSimInfo.phoneNumber =
+                    Utils.readPropertyValue("PreviousSimPhoneNumber");
+            simChangeInfo.previousSimInfo.serialNumber =
+                    Utils.readPropertyValue("PreviousSimSerialNumber");
             String readPropertyValue2 = Utils.readPropertyValue("SimChangeOperation");
             if (readPropertyValue2 != null) {
                 str = readPropertyValue2;
@@ -857,10 +1193,13 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             SimInfo simInfo2 = new SimInfo();
             simChangeInfo.currentSimInfo = simInfo2;
             simInfo2.countryIso = Utils.readPropertyValue("CurrentSimCountryIso");
-            simChangeInfo.currentSimInfo.operatorName = Utils.readPropertyValue("CurrentSimOperatorName");
+            simChangeInfo.currentSimInfo.operatorName =
+                    Utils.readPropertyValue("CurrentSimOperatorName");
             simChangeInfo.currentSimInfo.operator = Utils.readPropertyValue("CurrentSimOperator");
-            simChangeInfo.currentSimInfo.phoneNumber = Utils.readPropertyValue("CurrentSimPhoneNumber");
-            simChangeInfo.currentSimInfo.serialNumber = Utils.readPropertyValue("CurrentSimSerialNumber");
+            simChangeInfo.currentSimInfo.phoneNumber =
+                    Utils.readPropertyValue("CurrentSimPhoneNumber");
+            simChangeInfo.currentSimInfo.serialNumber =
+                    Utils.readPropertyValue("CurrentSimSerialNumber");
             return simChangeInfo;
         } catch (Exception e) {
             e.printStackTrace();
@@ -870,7 +1209,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
 
     public final ILockSettings getLockSettings$1() {
         if (this.mLockSettingsService == null) {
-            this.mLockSettingsService = ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
+            this.mLockSettingsService =
+                    ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
         }
         return this.mLockSettingsService;
     }
@@ -989,7 +1329,9 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         La2:
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.general.MiscPolicy.getSystemActiveFont(com.samsung.android.knox.ContextInfo):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.general.MiscPolicy.getSystemActiveFont(com.samsung.android.knox.ContextInfo):java.lang.String");
     }
 
     public final float getSystemActiveFontSize(ContextInfo contextInfo) {
@@ -1002,7 +1344,9 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                 floatToIndex(configuration.fontScale);
                 int i = Settings.Global.getInt(this.mContext.getContentResolver(), "font_size", 0);
                 if (i >= this.mFontSizes.length) {
-                    StringBuilder sb = new StringBuilder("getSystemActiveFontSize() : resized font index value. ");
+                    StringBuilder sb =
+                            new StringBuilder(
+                                    "getSystemActiveFontSize() : resized font index value. ");
                     sb.append(i);
                     sb.append(" -> ");
                     sb.append(this.mFontSizes.length - 1);
@@ -1034,7 +1378,14 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
 
     public final int isAdminLockScreenStringSet(int i) {
         try {
-            Iterator it = ((ArrayList) this.mEdmStorageProvider.getValuesListAsUser(0, i, "MISC", new String[]{"adminUid", "lockscreenstring"})).iterator();
+            Iterator it =
+                    ((ArrayList)
+                                    this.mEdmStorageProvider.getValuesListAsUser(
+                                            0,
+                                            i,
+                                            "MISC",
+                                            new String[] {"adminUid", "lockscreenstring"}))
+                            .iterator();
             while (it.hasNext()) {
                 ContentValues contentValues = (ContentValues) it.next();
                 Integer asInteger = contentValues.getAsInteger("lockscreenstring");
@@ -1052,7 +1403,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         for (String str : mPackageManager.getPackagesForUid(i)) {
             if (str.equals("com.android.proxyhandler")) {
                 try {
-                    if ((this.mContext.getPackageManager().getApplicationInfo(str, 0).flags & 1) != 0) {
+                    if ((this.mContext.getPackageManager().getApplicationInfo(str, 0).flags & 1)
+                            != 0) {
                         Log.d("MiscPolicy", "Allowing Proxy Handler access");
                         return true;
                     }
@@ -1065,7 +1417,9 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean isGlobalProxyAllowed() {
-        return !this.mEdmStorageProvider.getBooleanListAsUser(0, "RESTRICTION", "globalProxy").contains(Boolean.TRUE);
+        return !this.mEdmStorageProvider
+                .getBooleanListAsUser(0, "RESTRICTION", "globalProxy")
+                .contains(Boolean.TRUE);
     }
 
     public final boolean isNFCStarted() {
@@ -1086,7 +1440,10 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean isNFCStateChangeAllowed() {
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "MISC", "nfcStateChangeAllowed").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "MISC", "nfcStateChangeAllowed")
+                        .iterator();
         while (it.hasNext()) {
             boolean booleanValue = ((Boolean) it.next()).booleanValue();
             if (!booleanValue) {
@@ -1097,17 +1454,17 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0069, code lost:
-    
-        android.util.Log.d("MiscPolicy", "isRingToneEntryExist : return " + r5);
-     */
+
+       android.util.Log.d("MiscPolicy", "isRingToneEntryExist : return " + r5);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:13:0x007b, code lost:
-    
-        return r5;
-     */
+
+       return r5;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x0066, code lost:
-    
-        if (r7 == null) goto L15;
-     */
+
+       if (r7 == null) goto L15;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1181,16 +1538,17 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             android.os.Binder.restoreCallingIdentity(r3)
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.general.MiscPolicy.isRingToneEntryExist(android.net.Uri, java.lang.String):long");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.general.MiscPolicy.isRingToneEntryExist(android.net.Uri,"
+                    + " java.lang.String):long");
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     public final void onAdminRemoved(int i) {
@@ -1205,7 +1563,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     public final void onPreAdminRemoval(int i) {
         if (isAdminLockScreenStringSet(UserHandle.getUserId(i)) == i) {
             try {
-                getLockSettings$1().setString("lock_screen_owner_info", "", UserHandle.getUserId(i));
+                getLockSettings$1()
+                        .setString("lock_screen_owner_info", "", UserHandle.getUserId(i));
             } catch (RemoteException e) {
                 NetdService$$ExternalSyntheticOutline0.m("Couldn't write string ", e, "MiscPolicy");
             }
@@ -1225,7 +1584,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             localProxyManager.getClass();
             Log.d("LocalProxyManager", "Refresh proxy credentials dialog");
             if (localProxyManager.mContext != null) {
-                Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda2(localProxyManager, 5));
+                Binder.withCleanCallingIdentity(
+                        new LocalProxyManager$$ExternalSyntheticLambda2(localProxyManager, 5));
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1278,16 +1638,29 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                createPackageContext = this.mContext.createPackageContext(KnoxCustomManagerService.SETTING_PKG_NAME, 2);
+                createPackageContext =
+                        this.mContext.createPackageContext(
+                                KnoxCustomManagerService.SETTING_PKG_NAME, 2);
             } catch (Exception e) {
                 Log.e("MiscPolicy", "retrieveSystemFontSizes() failed: unexpected exception. ", e);
             }
             if (createPackageContext == null) {
-                Log.i("MiscPolicy", "retrieveSystemFontSizes(): failed because Setting Context is null");
+                Log.i(
+                        "MiscPolicy",
+                        "retrieveSystemFontSizes(): failed because Setting Context is null");
                 return;
             }
             Resources resources = createPackageContext.getResources();
-            int identifier = supportBigFont(createPackageContext) ? resources.getIdentifier("sec_entryvalues_big_font_size", "array", KnoxCustomManagerService.SETTING_PKG_NAME) : resources.getIdentifier("sec_entryvalues_8_step_font_size", "array", KnoxCustomManagerService.SETTING_PKG_NAME);
+            int identifier =
+                    supportBigFont(createPackageContext)
+                            ? resources.getIdentifier(
+                                    "sec_entryvalues_big_font_size",
+                                    "array",
+                                    KnoxCustomManagerService.SETTING_PKG_NAME)
+                            : resources.getIdentifier(
+                                    "sec_entryvalues_8_step_font_size",
+                                    "array",
+                                    KnoxCustomManagerService.SETTING_PKG_NAME);
             if (identifier == 0) {
                 Log.i("MiscPolicy", "retrieveSystemFontSizes() : failed to get resource ID. ");
                 return;
@@ -1334,10 +1707,13 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         String str = "";
         String host = !TextUtils.isEmpty(proxyInfo.getHost()) ? proxyInfo.getHost() : "";
         String uri = proxyInfo.getPacFileUrl() != null ? proxyInfo.getPacFileUrl().toString() : "";
-        if (proxyInfo.getExclusionList() != null && (exclusionList = proxyInfo.getExclusionList()) != null && exclusionList.length > 0) {
+        if (proxyInfo.getExclusionList() != null
+                && (exclusionList = proxyInfo.getExclusionList()) != null
+                && exclusionList.length > 0) {
             str = String.join(",", exclusionList);
         }
-        KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(i, contentValues, "adminUid", "host", host);
+        KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(
+                i, contentValues, "adminUid", "host", host);
         contentValues.put("port", Integer.valueOf(proxyInfo.getPort()));
         contentValues.put("pacfile", uri);
         contentValues.put("exclusion", str);
@@ -1354,23 +1730,30 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0047, code lost:
-    
-        if (r13.mEdmStorageProvider.getBoolean(r14.mCallerUid, r14.mContainerId, "RESTRICTION", "globalProxy") != false) goto L19;
-     */
+
+       if (r13.mEdmStorageProvider.getBoolean(r14.mCallerUid, r14.mContainerId, "RESTRICTION", "globalProxy") != false) goto L19;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized int setGlobalProxy(com.samsung.android.knox.ContextInfo r14, com.samsung.android.knox.net.ProxyProperties r15) {
+    public final synchronized int setGlobalProxy(
+            com.samsung.android.knox.ContextInfo r14,
+            com.samsung.android.knox.net.ProxyProperties r15) {
         /*
             Method dump skipped, instructions count: 243
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.general.MiscPolicy.setGlobalProxy(com.samsung.android.knox.ContextInfo, com.samsung.android.knox.net.ProxyProperties):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.general.MiscPolicy.setGlobalProxy(com.samsung.android.knox.ContextInfo,"
+                    + " com.samsung.android.knox.net.ProxyProperties):int");
     }
 
-    public final int setGlobalProxyEnforcingFirewallPermission(ContextInfo contextInfo, String str, int i, List list) {
-        ContextInfo enforceOwnerOnlyAndFirewallPermission = enforceOwnerOnlyAndFirewallPermission(contextInfo);
+    public final int setGlobalProxyEnforcingFirewallPermission(
+            ContextInfo contextInfo, String str, int i, List list) {
+        ContextInfo enforceOwnerOnlyAndFirewallPermission =
+                enforceOwnerOnlyAndFirewallPermission(contextInfo);
         ProxyProperties proxyProperties = new ProxyProperties();
         proxyProperties.setHostname(str);
         proxyProperties.setPortNumber(i);
@@ -1378,11 +1761,15 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         return setGlobalProxy(enforceOwnerOnlyAndFirewallPermission, proxyProperties);
     }
 
-    public final int setGlobalProxyEnforcingSecurityPermission(ContextInfo contextInfo, ProxyProperties proxyProperties) {
-        return setGlobalProxy(enforceOwnerOnlyAndOldSecurityOrNewGlobalProxyPermission(contextInfo), proxyProperties);
+    public final int setGlobalProxyEnforcingSecurityPermission(
+            ContextInfo contextInfo, ProxyProperties proxyProperties) {
+        return setGlobalProxy(
+                enforceOwnerOnlyAndOldSecurityOrNewGlobalProxyPermission(contextInfo),
+                proxyProperties);
     }
 
-    public final void setProxyCredentials(Bundle bundle, IProxyCredentialsCallback iProxyCredentialsCallback) {
+    public final void setProxyCredentials(
+            Bundle bundle, IProxyCredentialsCallback iProxyCredentialsCallback) {
         if (Binder.getCallingUid() != 1000) {
             try {
                 enforceMDMAppCaller();
@@ -1395,20 +1782,32 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             LocalProxyManager localProxyManager = this.mLocalProxyManager;
             localProxyManager.getClass();
             Log.d("LocalProxyManager", "Set proxy credentials callback to proxy server");
-            Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda7(localProxyManager, iProxyCredentialsCallback, bundle));
+            Binder.withCleanCallingIdentity(
+                    new LocalProxyManager$$ExternalSyntheticLambda7(
+                            localProxyManager, iProxyCredentialsCallback, bundle));
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final void setRingerBytes(ContextInfo contextInfo, Uri uri, String str, long j, String str2) {
+    public final void setRingerBytes(
+            ContextInfo contextInfo, Uri uri, String str, long j, String str2) {
         int callingUid = Binder.getCallingUid();
-        if (Utils.isPlatformSignedApp(this.mContext, this.mEdmStorageProvider.getPackageNameForUid(callingUid), UserHandle.getUserId(callingUid))) {
+        if (Utils.isPlatformSignedApp(
+                this.mContext,
+                this.mEdmStorageProvider.getPackageNameForUid(callingUid),
+                UserHandle.getUserId(callingUid))) {
             try {
                 enforceOwnerOnlyAndSecurityPermission(contextInfo);
             } catch (SecurityException e) {
-                Log.d("MiscPolicy", "MDM_SECURITY Permission is not granted - Check for WRITE_SETTINGS permission " + e.getMessage());
-                getEDM$16().enforceOwnerOnlyAndActiveAdminPermission(contextInfo, "android.permission.WRITE_SETTINGS");
+                Log.d(
+                        "MiscPolicy",
+                        "MDM_SECURITY Permission is not granted - Check for WRITE_SETTINGS"
+                            + " permission "
+                                + e.getMessage());
+                getEDM$16()
+                        .enforceOwnerOnlyAndActiveAdminPermission(
+                                contextInfo, "android.permission.WRITE_SETTINGS");
             }
         } else {
             enforceOwnerOnlyAndSecurityPermission(contextInfo);
@@ -1418,8 +1817,15 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             try {
                 long isRingToneEntryExist = isRingToneEntryExist(uri, str);
                 if (-1 != isRingToneEntryExist) {
-                    Log.d("MiscPolicy", "Ringtone entry exist deleting it :" + isRingToneEntryExist);
-                    this.mContext.getContentResolver().delete(ContentUris.withAppendedId(uri, isRingToneEntryExist), null, null);
+                    Log.d(
+                            "MiscPolicy",
+                            "Ringtone entry exist deleting it :" + isRingToneEntryExist);
+                    this.mContext
+                            .getContentResolver()
+                            .delete(
+                                    ContentUris.withAppendedId(uri, isRingToneEntryExist),
+                                    null,
+                                    null);
                 }
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("_data", str);
@@ -1487,7 +1893,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                     break;
                 }
                 if (fontString[i].equalsIgnoreCase(str)) {
-                    DirEncryptService$$ExternalSyntheticOutline0.m(i, LauncherConfigurationInternal.KEY_INDEX_INT, "MiscPolicy");
+                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                            i, LauncherConfigurationInternal.KEY_INDEX_INT, "MiscPolicy");
                     break;
                 }
                 i++;
@@ -1508,7 +1915,10 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                         break;
                     }
                     typeface = (Typeface) ((ArrayList) typefaceFinder.mTypefaces).get(i2);
-                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(new StringBuilder("findMatchingTypeface:"), typeface.mName, "TypefaceFinder");
+                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("findMatchingTypeface:"),
+                            typeface.mName,
+                            "TypefaceFinder");
                     if (typeface.mName.equalsIgnoreCase(str)) {
                         break;
                     }
@@ -1519,9 +1929,16 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                 } else {
                     String str3 = typeface.mFontPackageName;
                     if (str3 == null || str3.startsWith("com.monotype.android.font.")) {
-                        String replaceAll = typeface.mTypefaceFilename.replaceAll(".xml", "").replaceAll(" ", PackageManagerShellCommandDataLoader.STDIN_PATH);
+                        String replaceAll =
+                                typeface.mTypefaceFilename
+                                        .replaceAll(".xml", "")
+                                        .replaceAll(
+                                                " ",
+                                                PackageManagerShellCommandDataLoader.STDIN_PATH);
                         Log.i("FontWriter", "createFontDirectory : Start");
-                        File file3 = new File("/data/app_fonts/" + String.valueOf(UserHandle.myUserId()));
+                        File file3 =
+                                new File(
+                                        "/data/app_fonts/" + String.valueOf(UserHandle.myUserId()));
                         file3.mkdir();
                         file3.setReadable(true, false);
                         file3.setWritable(true, false);
@@ -1557,7 +1974,9 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                                 Log.i("FontWriter", "Font directory  : Not Created");
                             }
                             try {
-                                exec = Runtime.getRuntime().exec("chmod 711 " + file4.getAbsolutePath());
+                                exec =
+                                        Runtime.getRuntime()
+                                                .exec("chmod 711 " + file4.getAbsolutePath());
                                 exec.waitFor();
                             } catch (IOException unused) {
                                 Log.i("FontWriter", "IOException : ");
@@ -1574,9 +1993,16 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                         } else {
                             clearCallingIdentity = Binder.clearCallingIdentity();
                             for (int i5 = 0; i5 < ((ArrayList) typeface.mSansFonts).size(); i5++) {
-                                TypefaceFile typefaceFile = (TypefaceFile) ((ArrayList) typeface.mSansFonts).get(i5);
+                                TypefaceFile typefaceFile =
+                                        (TypefaceFile) ((ArrayList) typeface.mSansFonts).get(i5);
                                 try {
-                                    fontWriter.copyFontFile(file2, packageManager.getResourcesForApplication(str3).getAssets().open("fonts/" + typefaceFile.fileName), typefaceFile.droidName);
+                                    fontWriter.copyFontFile(
+                                            file2,
+                                            packageManager
+                                                    .getResourcesForApplication(str3)
+                                                    .getAssets()
+                                                    .open("fonts/" + typefaceFile.fileName),
+                                            typefaceFile.droidName);
                                 } catch (Exception e) {
                                     Log.i("MiscPolicy", "changeFont():Exception");
                                     Log.i("MiscPolicy", "Exception" + e);
@@ -1603,8 +2029,10 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                 iActivityManager.updateConfiguration(configuration);
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 clearCallingIdentity = Binder.clearCallingIdentity();
-                ActivityManager activityManager = (ActivityManager) miscPolicy.mContext.getSystemService("activity");
-                List<ActivityManager.RunningTaskInfo> runningTasks = activityManager.getRunningTasks(50);
+                ActivityManager activityManager =
+                        (ActivityManager) miscPolicy.mContext.getSystemService("activity");
+                List<ActivityManager.RunningTaskInfo> runningTasks =
+                        activityManager.getRunningTasks(50);
                 if (runningTasks != null) {
                     Iterator<ActivityManager.RunningTaskInfo> it = runningTasks.iterator();
                     while (it.hasNext()) {
@@ -1655,9 +2083,11 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
             clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 ActivityManagerNative.getDefault().updatePersistentConfiguration(configuration);
-                Settings.Global.putInt(this.mContext.getContentResolver(), "font_size", floatToIndex);
+                Settings.Global.putInt(
+                        this.mContext.getContentResolver(), "font_size", floatToIndex);
                 if (floatToIndex >= 7) {
-                    Settings.Global.putInt(this.mContext.getContentResolver(), "accessiblity_font_switch", 1);
+                    Settings.Global.putInt(
+                            this.mContext.getContentResolver(), "accessiblity_font_switch", 1);
                 }
                 return true;
             } catch (Exception e) {
@@ -1681,7 +2111,9 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
                 Log.d("LocalProxyManager", "Show credentials dialog notification");
                 if (localProxyManager.mContext != null) {
                     if (localProxyManager.mNotificationManager != null) {
-                        Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda5(localProxyManager, str, 1));
+                        Binder.withCleanCallingIdentity(
+                                new LocalProxyManager$$ExternalSyntheticLambda5(
+                                        localProxyManager, str, 1));
                     } else {
                         Log.d("LocalProxyManager", "NotificationManager is null");
                     }
@@ -1693,8 +2125,19 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean startNFC(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndActiveAdminPermission = getEDM$16().enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_HW_CONTROL")));
-        this.mStartNFCHistoryList.add(FORMAT.format(new Date(System.currentTimeMillis())) + " callerUid=" + enforceOwnerOnlyAndActiveAdminPermission.mCallerUid + " value=" + z);
+        ContextInfo enforceOwnerOnlyAndActiveAdminPermission =
+                getEDM$16()
+                        .enforceOwnerOnlyAndActiveAdminPermission(
+                                contextInfo,
+                                new ArrayList(
+                                        Arrays.asList(
+                                                "com.samsung.android.knox.permission.KNOX_HW_CONTROL")));
+        this.mStartNFCHistoryList.add(
+                FORMAT.format(new Date(System.currentTimeMillis()))
+                        + " callerUid="
+                        + enforceOwnerOnlyAndActiveAdminPermission.mCallerUid
+                        + " value="
+                        + z);
         boolean z2 = false;
         if (this.mStartNFCHistoryList.size() > 10) {
             this.mStartNFCHistoryList.remove(0);
@@ -1721,10 +2164,20 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
     public final void updateAdminsBlockingNfcStateChange() {
         Integer asInteger;
         this.mAdminsBlockingNfcStateChange = new ArrayList();
-        Iterator it = ((ArrayList) this.mEdmStorageProvider.getValuesListAsUser(0, 0, "MISC", new String[]{"nfcStateChangeAllowed", "adminUid"})).iterator();
+        Iterator it =
+                ((ArrayList)
+                                this.mEdmStorageProvider.getValuesListAsUser(
+                                        0,
+                                        0,
+                                        "MISC",
+                                        new String[] {"nfcStateChangeAllowed", "adminUid"}))
+                        .iterator();
         while (it.hasNext()) {
             ContentValues contentValues = (ContentValues) it.next();
-            if (!(contentValues.getAsBoolean("nfcStateChangeAllowed") == null ? true : contentValues.getAsBoolean("nfcStateChangeAllowed").booleanValue()) && (asInteger = contentValues.getAsInteger("adminUid")) != null) {
+            if (!(contentValues.getAsBoolean("nfcStateChangeAllowed") == null
+                            ? true
+                            : contentValues.getAsBoolean("nfcStateChangeAllowed").booleanValue())
+                    && (asInteger = contentValues.getAsInteger("adminUid")) != null) {
                 this.mAdminsBlockingNfcStateChange.add(asInteger);
             }
         }
@@ -1735,7 +2188,8 @@ public final class MiscPolicy extends IMiscPolicy.Stub implements EnterpriseServ
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                SystemUIAdapter.getInstance(this.mContext).setNFCStateChangeAllowedAsUser(i, isNFCStateChangeAllowed);
+                SystemUIAdapter.getInstance(this.mContext)
+                        .setNFCStateChangeAllowedAsUser(i, isNFCStateChangeAllowed);
             } catch (Exception e) {
                 Log.e("MiscPolicy", "setNFCStateChangeAllowedSystemUI() failed. ", e);
             }

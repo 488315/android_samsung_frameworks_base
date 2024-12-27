@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.crypto.signers;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -23,7 +24,10 @@ public class PlainDSAEncoding implements DSAEncoding {
         if (encoding.length != valueLength * 2) {
             throw new IllegalArgumentException("Encoding has incorrect length");
         }
-        return new BigInteger[]{decodeValue(n, encoding, 0, valueLength), decodeValue(n, encoding, valueLength, valueLength)};
+        return new BigInteger[] {
+            decodeValue(n, encoding, 0, valueLength),
+            decodeValue(n, encoding, valueLength, valueLength)
+        };
     }
 
     protected BigInteger checkValue(BigInteger n, BigInteger x) {

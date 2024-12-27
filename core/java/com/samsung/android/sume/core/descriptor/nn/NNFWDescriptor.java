@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.descriptor.nn;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.descriptor.MFDescriptorBase;
 import com.samsung.android.sume.core.filter.MediaFilter;
@@ -10,6 +11,7 @@ import com.samsung.android.sume.core.types.LoadType;
 import com.samsung.android.sume.core.types.nn.Model;
 import com.samsung.android.sume.core.types.nn.NNFW;
 import com.samsung.android.sume.core.types.nn.NNFileDescriptor;
+
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 import java.util.Optional;
@@ -41,24 +43,28 @@ public class NNFWDescriptor extends MFDescriptorBase implements Cloneable {
 
     public NNFWDescriptor(NNFW fw, HwUnit hw, final LoadType loadType, NNDescriptor nnDescriptor) {
         this(fw, hw, nnDescriptor);
-        this.loadTypeSupplier = new Supplier() { // from class: com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor$$ExternalSyntheticLambda3
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return NNFWDescriptor.lambda$new$0(LoadType.this);
-            }
-        };
+        this.loadTypeSupplier =
+                new Supplier() { // from class:
+                                 // com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor$$ExternalSyntheticLambda3
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        return NNFWDescriptor.lambda$new$0(LoadType.this);
+                    }
+                };
     }
 
     static /* synthetic */ LoadType lambda$new$0(LoadType loadType) {
         return loadType;
     }
 
-    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase, com.samsung.android.sume.core.descriptor.MFDescriptor
+    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase,
+              // com.samsung.android.sume.core.descriptor.MFDescriptor
     public String getFilterId() {
         return this.fw.name();
     }
 
-    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase, com.samsung.android.sume.core.descriptor.MFDescriptor
+    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase,
+              // com.samsung.android.sume.core.descriptor.MFDescriptor
     public Class<?> getFilterType() {
         return NNFW.class;
     }
@@ -86,12 +92,14 @@ public class NNFWDescriptor extends MFDescriptorBase implements Cloneable {
         this.outputFormat = nnDescriptor.getOutputFormat();
         this.targetFormat = nnDescriptor.getTargetFormat();
         Objects.requireNonNull(nnDescriptor);
-        this.loadTypeSupplier = new Supplier() { // from class: com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor$$ExternalSyntheticLambda2
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return NNDescriptor.this.getLoadingType();
-            }
-        };
+        this.loadTypeSupplier =
+                new Supplier() { // from class:
+                                 // com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor$$ExternalSyntheticLambda2
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        return NNDescriptor.this.getLoadingType();
+                    }
+                };
     }
 
     public NNFW getFw() {
@@ -126,14 +134,20 @@ public class NNFWDescriptor extends MFDescriptorBase implements Cloneable {
         return this.targetFormat;
     }
 
-    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase, com.samsung.android.sume.core.descriptor.MFDescriptor
+    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase,
+              // com.samsung.android.sume.core.descriptor.MFDescriptor
     public MediaFilter.Option getOption() {
-        return (MediaFilter.Option) Optional.ofNullable(this.nnDescriptor.get()).map(new Function() { // from class: com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((NNDescriptor) obj).getOption();
-            }
-        }).orElse(null);
+        return (MediaFilter.Option)
+                Optional.ofNullable(this.nnDescriptor.get())
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return ((NNDescriptor) obj).getOption();
+                                    }
+                                })
+                        .orElse(null);
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
@@ -148,6 +162,19 @@ public class NNFWDescriptor extends MFDescriptorBase implements Cloneable {
 
     @Override // com.samsung.android.sume.core.types.OptionBase
     public String toString() {
-        return Def.tagOf(this) + Def.contentToString("model=" + ((String) Optional.ofNullable(this.nnFileDescriptor).map(new NNFWDescriptor$$ExternalSyntheticLambda1()).orElse("n/a")), NavigationBarInflaterView.SIZE_MOD_START + this.model.name() + NavigationBarInflaterView.SIZE_MOD_END, "fw=" + this.fw.name(), "hw=" + this.hw.name(), "input=" + this.inputFormat, "output=" + this.outputFormat);
+        return Def.tagOf(this)
+                + Def.contentToString(
+                        "model="
+                                + ((String)
+                                        Optional.ofNullable(this.nnFileDescriptor)
+                                                .map(new NNFWDescriptor$$ExternalSyntheticLambda1())
+                                                .orElse("n/a")),
+                        NavigationBarInflaterView.SIZE_MOD_START
+                                + this.model.name()
+                                + NavigationBarInflaterView.SIZE_MOD_END,
+                        "fw=" + this.fw.name(),
+                        "hw=" + this.hw.name(),
+                        "input=" + this.inputFormat,
+                        "output=" + this.outputFormat);
     }
 }

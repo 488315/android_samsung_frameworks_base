@@ -5,7 +5,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AndroidRuntimeException;
 import android.util.SparseIntArray;
+
 import com.android.internal.logging.nano.MetricsProto;
+
 import java.text.Normalizer;
 
 /* loaded from: classes4.dex */
@@ -41,8 +43,7 @@ public class KeyCharacterMap implements Parcelable {
     private static final int ACCENT_VERTICAL_LINE_BELOW = 716;
     public static final int ALPHA = 3;
 
-    @Deprecated
-    public static final int BUILT_IN_KEYBOARD = 0;
+    @Deprecated public static final int BUILT_IN_KEYBOARD = 0;
     private static final int CHAR_SPACE = 32;
     public static final int COMBINING_ACCENT = Integer.MIN_VALUE;
     public static final int COMBINING_ACCENT_MASK = Integer.MAX_VALUE;
@@ -82,7 +83,8 @@ public class KeyCharacterMap implements Parcelable {
 
     private static native KeyEvent[] nativeGetEvents(long j, char[] cArr);
 
-    private static native boolean nativeGetFallbackAction(long j, int i, int i2, FallbackAction fallbackAction);
+    private static native boolean nativeGetFallbackAction(
+            long j, int i, int i2, FallbackAction fallbackAction);
 
     private static native int nativeGetKeyboardType(long j);
 
@@ -148,19 +150,21 @@ public class KeyCharacterMap implements Parcelable {
         addDeadKey(45, 108, 322);
         addDeadKey(45, 111, 248);
         addDeadKey(45, 116, 359);
-        CREATOR = new Parcelable.Creator<KeyCharacterMap>() { // from class: android.view.KeyCharacterMap.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public KeyCharacterMap createFromParcel(Parcel in) {
-                return new KeyCharacterMap(in);
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        KeyCharacterMap>() { // from class: android.view.KeyCharacterMap.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public KeyCharacterMap createFromParcel(Parcel in) {
+                        return new KeyCharacterMap(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public KeyCharacterMap[] newArray(int size) {
-                return new KeyCharacterMap[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public KeyCharacterMap[] newArray(int size) {
+                        return new KeyCharacterMap[size];
+                    }
+                };
     }
 
     private static void addCombining(int combining, int accent) {
@@ -206,7 +210,8 @@ public class KeyCharacterMap implements Parcelable {
         InputManagerGlobal im = InputManagerGlobal.getInstance();
         InputDevice inputDevice = im.getInputDevice(deviceId);
         if (inputDevice == null && (inputDevice = im.getInputDevice(-1)) == null) {
-            throw new UnavailableException("Could not load key character map for device " + deviceId);
+            throw new UnavailableException(
+                    "Could not load key character map for device " + deviceId);
         }
         return inputDevice.getKeyCharacterMap();
     }
@@ -237,7 +242,8 @@ public class KeyCharacterMap implements Parcelable {
 
     public FallbackAction getFallbackAction(int keyCode, int metaState) {
         FallbackAction action = FallbackAction.obtain();
-        if (nativeGetFallbackAction(this.mPtr, keyCode, KeyEvent.normalizeMetaState(metaState), action)) {
+        if (nativeGetFallbackAction(
+                this.mPtr, keyCode, KeyEvent.normalizeMetaState(metaState), action)) {
             action.metaState = KeyEvent.normalizeMetaState(action.metaState);
             return action;
         }
@@ -350,7 +356,7 @@ public class KeyCharacterMap implements Parcelable {
     }
 
     public static boolean deviceHasKey(int keyCode) {
-        return InputManagerGlobal.getInstance().deviceHasKeys(new int[]{keyCode})[0];
+        return InputManagerGlobal.getInstance().deviceHasKeys(new int[] {keyCode})[0];
     }
 
     public static boolean[] deviceHasKeys(int[] keyCodes) {
@@ -396,8 +402,7 @@ public class KeyCharacterMap implements Parcelable {
         public int metaState;
         private FallbackAction next;
 
-        private FallbackAction() {
-        }
+        private FallbackAction() {}
 
         public static FallbackAction obtain() {
             FallbackAction target;

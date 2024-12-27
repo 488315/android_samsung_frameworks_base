@@ -3,6 +3,7 @@ package android.telephony;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -20,19 +21,22 @@ public final class CellSignalStrengthTdscdma extends CellSignalStrength implemen
     private int mRscp;
     private int mRssi;
     private static final CellSignalStrengthTdscdma sInvalid = new CellSignalStrengthTdscdma();
-    public static final Parcelable.Creator<CellSignalStrengthTdscdma> CREATOR = new Parcelable.Creator<CellSignalStrengthTdscdma>() { // from class: android.telephony.CellSignalStrengthTdscdma.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellSignalStrengthTdscdma createFromParcel(Parcel in) {
-            return new CellSignalStrengthTdscdma(in);
-        }
+    public static final Parcelable.Creator<CellSignalStrengthTdscdma> CREATOR =
+            new Parcelable.Creator<
+                    CellSignalStrengthTdscdma>() { // from class:
+                                                   // android.telephony.CellSignalStrengthTdscdma.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellSignalStrengthTdscdma createFromParcel(Parcel in) {
+                    return new CellSignalStrengthTdscdma(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellSignalStrengthTdscdma[] newArray(int size) {
-            return new CellSignalStrengthTdscdma[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellSignalStrengthTdscdma[] newArray(int size) {
+                    return new CellSignalStrengthTdscdma[size];
+                }
+            };
 
     public CellSignalStrengthTdscdma() {
         setDefaultValues();
@@ -119,12 +123,20 @@ public final class CellSignalStrengthTdscdma extends CellSignalStrength implemen
 
     @Override // android.telephony.CellSignalStrength
     public int getAsuLevel() {
-        return this.mRscp != Integer.MAX_VALUE ? getAsuFromRscpDbm(this.mRscp) : this.mRssi != Integer.MAX_VALUE ? getAsuFromRssiDbm(this.mRssi) : getAsuFromRscpDbm(Integer.MAX_VALUE);
+        return this.mRscp != Integer.MAX_VALUE
+                ? getAsuFromRscpDbm(this.mRscp)
+                : this.mRssi != Integer.MAX_VALUE
+                        ? getAsuFromRssiDbm(this.mRssi)
+                        : getAsuFromRscpDbm(Integer.MAX_VALUE);
     }
 
     @Override // android.telephony.CellSignalStrength
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mRssi), Integer.valueOf(this.mBitErrorRate), Integer.valueOf(this.mRscp), Integer.valueOf(this.mLevel));
+        return Objects.hash(
+                Integer.valueOf(this.mRssi),
+                Integer.valueOf(this.mBitErrorRate),
+                Integer.valueOf(this.mRscp),
+                Integer.valueOf(this.mLevel));
     }
 
     @Override // android.telephony.CellSignalStrength
@@ -138,11 +150,21 @@ public final class CellSignalStrengthTdscdma extends CellSignalStrength implemen
             return false;
         }
         CellSignalStrengthTdscdma s = (CellSignalStrengthTdscdma) o;
-        return this.mRssi == s.mRssi && this.mBitErrorRate == s.mBitErrorRate && this.mRscp == s.mRscp && this.mLevel == s.mLevel;
+        return this.mRssi == s.mRssi
+                && this.mBitErrorRate == s.mBitErrorRate
+                && this.mRscp == s.mRscp
+                && this.mLevel == s.mLevel;
     }
 
     public String toString() {
-        return "CellSignalStrengthTdscdma: rssi=" + this.mRssi + " ber=" + this.mBitErrorRate + " rscp=" + this.mRscp + " level=" + this.mLevel;
+        return "CellSignalStrengthTdscdma: rssi="
+                + this.mRssi
+                + " ber="
+                + this.mBitErrorRate
+                + " rscp="
+                + this.mRscp
+                + " level="
+                + this.mLevel;
     }
 
     @Override // android.os.Parcelable

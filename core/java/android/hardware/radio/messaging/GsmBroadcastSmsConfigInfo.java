@@ -3,25 +3,28 @@ package android.hardware.radio.messaging;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class GsmBroadcastSmsConfigInfo implements Parcelable {
-    public static final Parcelable.Creator<GsmBroadcastSmsConfigInfo> CREATOR = new Parcelable.Creator<GsmBroadcastSmsConfigInfo>() { // from class: android.hardware.radio.messaging.GsmBroadcastSmsConfigInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GsmBroadcastSmsConfigInfo createFromParcel(Parcel _aidl_source) {
-            GsmBroadcastSmsConfigInfo _aidl_out = new GsmBroadcastSmsConfigInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GsmBroadcastSmsConfigInfo> CREATOR =
+            new Parcelable.Creator<GsmBroadcastSmsConfigInfo>() { // from class:
+                // android.hardware.radio.messaging.GsmBroadcastSmsConfigInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GsmBroadcastSmsConfigInfo createFromParcel(Parcel _aidl_source) {
+                    GsmBroadcastSmsConfigInfo _aidl_out = new GsmBroadcastSmsConfigInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GsmBroadcastSmsConfigInfo[] newArray(int _aidl_size) {
-            return new GsmBroadcastSmsConfigInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GsmBroadcastSmsConfigInfo[] newArray(int _aidl_size) {
+                    return new GsmBroadcastSmsConfigInfo[_aidl_size];
+                }
+            };
     public int fromServiceId = 0;
     public int toServiceId = 0;
     public int fromCodeScheme = 0;

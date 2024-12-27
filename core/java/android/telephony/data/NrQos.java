@@ -2,29 +2,35 @@ package android.telephony.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.telephony.data.Qos;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class NrQos extends Qos implements Parcelable {
-    public static final Parcelable.Creator<NrQos> CREATOR = new Parcelable.Creator<NrQos>() { // from class: android.telephony.data.NrQos.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrQos createFromParcel(Parcel source) {
-            return new NrQos(source);
-        }
+    public static final Parcelable.Creator<NrQos> CREATOR =
+            new Parcelable.Creator<NrQos>() { // from class: android.telephony.data.NrQos.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrQos createFromParcel(Parcel source) {
+                    return new NrQos(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrQos[] newArray(int size) {
-            return new NrQos[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrQos[] newArray(int size) {
+                    return new NrQos[size];
+                }
+            };
     int averagingWindowMs;
     int fiveQi;
     int qosFlowId;
 
-    public NrQos(Qos.QosBandwidth downlink, Qos.QosBandwidth uplink, int qosFlowId, int fiveQi, int averagingWindowMs) {
+    public NrQos(
+            Qos.QosBandwidth downlink,
+            Qos.QosBandwidth uplink,
+            int qosFlowId,
+            int fiveQi,
+            int averagingWindowMs) {
         super(2, downlink, uplink);
         this.qosFlowId = qosFlowId;
         this.fiveQi = fiveQi;
@@ -69,7 +75,11 @@ public final class NrQos extends Qos implements Parcelable {
 
     @Override // android.telephony.data.Qos
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(super.hashCode()), Integer.valueOf(this.qosFlowId), Integer.valueOf(this.fiveQi), Integer.valueOf(this.averagingWindowMs));
+        return Objects.hash(
+                Integer.valueOf(super.hashCode()),
+                Integer.valueOf(this.qosFlowId),
+                Integer.valueOf(this.fiveQi),
+                Integer.valueOf(this.averagingWindowMs));
     }
 
     @Override // android.telephony.data.Qos
@@ -84,13 +94,25 @@ public final class NrQos extends Qos implements Parcelable {
         if (!super.equals(other)) {
             return false;
         }
-        if (this.qosFlowId == other.qosFlowId && this.fiveQi == other.fiveQi && this.averagingWindowMs == other.averagingWindowMs) {
+        if (this.qosFlowId == other.qosFlowId
+                && this.fiveQi == other.fiveQi
+                && this.averagingWindowMs == other.averagingWindowMs) {
             return true;
         }
         return false;
     }
 
     public String toString() {
-        return "NrQos { fiveQi=" + this.fiveQi + " downlink=" + this.downlink + " uplink=" + this.uplink + " qosFlowId=" + this.qosFlowId + " averagingWindowMs=" + this.averagingWindowMs + "}";
+        return "NrQos { fiveQi="
+                + this.fiveQi
+                + " downlink="
+                + this.downlink
+                + " uplink="
+                + this.uplink
+                + " qosFlowId="
+                + this.qosFlowId
+                + " averagingWindowMs="
+                + this.averagingWindowMs
+                + "}";
     }
 }

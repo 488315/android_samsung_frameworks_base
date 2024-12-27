@@ -1,6 +1,5 @@
 package android.view;
 
-import android.view.ViewGroup;
 
 /* loaded from: classes4.dex */
 public interface ViewManager {

@@ -16,9 +16,11 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
 import com.android.internal.R;
-import com.samsung.android.multiwindow.FreeformResizeGuide;
+
 import com.samsung.android.util.InterpolatorUtils;
+
 import java.util.ArrayList;
 
 /* loaded from: classes6.dex */
@@ -55,9 +57,15 @@ public class FreeformResizeGuideView extends FrameLayout {
         super.onFinishInflate();
         this.mDimView = (ImageView) findViewById(R.id.freeform_resize_guide_dim);
         this.mAppIconView = (ImageView) findViewById(R.id.freeform_resize_guide_app_icon);
-        this.mDimViewMargin = getResources().getDimensionPixelSize(R.dimen.freeform_resize_guide_view_dim_margin);
-        this.mFullscreenDimViewMargin = getResources().getDimensionPixelSize(R.dimen.freeform_resize_guide_view_fullscreen_dim_margin);
-        this.mAppIconSize = getResources().getDimensionPixelSize(R.dimen.freeform_resize_guide_view_app_icon_size);
+        this.mDimViewMargin =
+                getResources().getDimensionPixelSize(R.dimen.freeform_resize_guide_view_dim_margin);
+        this.mFullscreenDimViewMargin =
+                getResources()
+                        .getDimensionPixelSize(
+                                R.dimen.freeform_resize_guide_view_fullscreen_dim_margin);
+        this.mAppIconSize =
+                getResources()
+                        .getDimensionPixelSize(R.dimen.freeform_resize_guide_view_app_icon_size);
     }
 
     void update(int dexDockingState, ComponentName componentName) {
@@ -65,9 +73,15 @@ public class FreeformResizeGuideView extends FrameLayout {
             this.mDimViewMargin = 0;
             this.mFullscreenDimViewMargin = 0;
         }
-        this.mDimView.lambda$setImageURIAsync$0(getResources().getDrawable(getGuideResourceId(dexDockingState)));
+        this.mDimView.lambda$setImageURIAsync$0(
+                getResources().getDrawable(getGuideResourceId(dexDockingState)));
         if (componentName != null) {
-            this.mAppIconView.lambda$setImageURIAsync$0(MultiWindowUtils.getAppIcon(this.mContext, componentName, UserHandle.myUserId(), componentName.getPackageName()));
+            this.mAppIconView.lambda$setImageURIAsync$0(
+                    MultiWindowUtils.getAppIcon(
+                            this.mContext,
+                            componentName,
+                            UserHandle.myUserId(),
+                            componentName.getPackageName()));
         }
     }
 
@@ -86,7 +100,12 @@ public class FreeformResizeGuideView extends FrameLayout {
         show(lastBounds, bounds, toFullScreen, toFullScreen, null);
     }
 
-    void show(Rect lastBounds, Rect bounds, boolean isTransition, boolean toFullScreen, FreeformResizeGuide.TransitionInfo transitionInfo) {
+    void show(
+            Rect lastBounds,
+            Rect bounds,
+            boolean isTransition,
+            boolean toFullScreen,
+            FreeformResizeGuide.TransitionInfo transitionInfo) {
         boolean isTransitionAnimation;
         TimeInterpolator interpolator;
         if (this.mIsTransition != isTransition || this.mToFullScreen != toFullScreen) {
@@ -106,8 +125,10 @@ public class FreeformResizeGuideView extends FrameLayout {
         int toTopMargin = bounds.top - endMargin;
         int toWidth = bounds.width() + (endMargin * 2);
         int toHeight = bounds.height() + (endMargin * 2);
-        final FrameLayout.LayoutParams dimLp = (FrameLayout.LayoutParams) this.mDimView.getLayoutParams();
-        FrameLayout.LayoutParams minimizeLp = (FrameLayout.LayoutParams) this.mAppIconView.getLayoutParams();
+        final FrameLayout.LayoutParams dimLp =
+                (FrameLayout.LayoutParams) this.mDimView.getLayoutParams();
+        FrameLayout.LayoutParams minimizeLp =
+                (FrameLayout.LayoutParams) this.mAppIconView.getLayoutParams();
         if (!isTransitionAnimation) {
             if (!this.mIsTransition) {
                 this.mAnimatorSet.cancel();
@@ -119,53 +140,96 @@ public class FreeformResizeGuideView extends FrameLayout {
                     this.mDimView.setLayoutParams(dimLp);
                 }
                 if (minimizeLp != null) {
-                    minimizeLp.leftMargin = (bounds.left + (bounds.width() / 2)) - (this.mAppIconSize / 2);
-                    minimizeLp.topMargin = (bounds.top + (bounds.height() / 2)) - (this.mAppIconSize / 2);
+                    minimizeLp.leftMargin =
+                            (bounds.left + (bounds.width() / 2)) - (this.mAppIconSize / 2);
+                    minimizeLp.topMargin =
+                            (bounds.top + (bounds.height() / 2)) - (this.mAppIconSize / 2);
                     this.mAppIconView.setLayoutParams(minimizeLp);
                 }
             }
         } else {
             this.mAnimList.clear();
             if (dimLp != null) {
-                removeAllUpdateListenersIfNeeded(this.mLeftMarginAnimator, this.mTopMarginAnimator, this.mWidthAnimator, this.mHeightAnimator, this.mAlphaAnimator);
+                removeAllUpdateListenersIfNeeded(
+                        this.mLeftMarginAnimator,
+                        this.mTopMarginAnimator,
+                        this.mWidthAnimator,
+                        this.mHeightAnimator,
+                        this.mAlphaAnimator);
                 boolean equalLeftMargin = fromLeftMargin == toLeftMargin;
                 if (!equalLeftMargin) {
-                    this.mLeftMarginAnimator = getOrCreateValueAnimator(this.mLeftMarginAnimator, fromLeftMargin, toLeftMargin, new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.multiwindow.FreeformResizeGuideView$$ExternalSyntheticLambda0
-                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                        public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                            FreeformResizeGuideView.this.lambda$show$0(dimLp, valueAnimator);
-                        }
-                    });
+                    this.mLeftMarginAnimator =
+                            getOrCreateValueAnimator(
+                                    this.mLeftMarginAnimator,
+                                    fromLeftMargin,
+                                    toLeftMargin,
+                                    new ValueAnimator
+                                            .AnimatorUpdateListener() { // from class:
+                                                                        // com.samsung.android.multiwindow.FreeformResizeGuideView$$ExternalSyntheticLambda0
+                                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                                        public final void onAnimationUpdate(
+                                                ValueAnimator valueAnimator) {
+                                            FreeformResizeGuideView.this.lambda$show$0(
+                                                    dimLp, valueAnimator);
+                                        }
+                                    });
                     this.mAnimList.add(this.mLeftMarginAnimator);
                 }
                 boolean equalTopMargin = fromTopMargin == toTopMargin;
                 if (!equalTopMargin) {
-                    this.mTopMarginAnimator = getOrCreateValueAnimator(this.mTopMarginAnimator, fromTopMargin, toTopMargin, new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.multiwindow.FreeformResizeGuideView$$ExternalSyntheticLambda1
-                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                        public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                            FreeformResizeGuideView.this.lambda$show$1(dimLp, valueAnimator);
-                        }
-                    });
+                    this.mTopMarginAnimator =
+                            getOrCreateValueAnimator(
+                                    this.mTopMarginAnimator,
+                                    fromTopMargin,
+                                    toTopMargin,
+                                    new ValueAnimator
+                                            .AnimatorUpdateListener() { // from class:
+                                                                        // com.samsung.android.multiwindow.FreeformResizeGuideView$$ExternalSyntheticLambda1
+                                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                                        public final void onAnimationUpdate(
+                                                ValueAnimator valueAnimator) {
+                                            FreeformResizeGuideView.this.lambda$show$1(
+                                                    dimLp, valueAnimator);
+                                        }
+                                    });
                     this.mAnimList.add(this.mTopMarginAnimator);
                 }
                 boolean equalWidth = fromWidth == toWidth;
                 if (!equalWidth) {
-                    this.mWidthAnimator = getOrCreateValueAnimator(this.mWidthAnimator, fromWidth, toWidth, new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.multiwindow.FreeformResizeGuideView$$ExternalSyntheticLambda2
-                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                        public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                            FreeformResizeGuideView.this.lambda$show$2(dimLp, valueAnimator);
-                        }
-                    });
+                    this.mWidthAnimator =
+                            getOrCreateValueAnimator(
+                                    this.mWidthAnimator,
+                                    fromWidth,
+                                    toWidth,
+                                    new ValueAnimator
+                                            .AnimatorUpdateListener() { // from class:
+                                                                        // com.samsung.android.multiwindow.FreeformResizeGuideView$$ExternalSyntheticLambda2
+                                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                                        public final void onAnimationUpdate(
+                                                ValueAnimator valueAnimator) {
+                                            FreeformResizeGuideView.this.lambda$show$2(
+                                                    dimLp, valueAnimator);
+                                        }
+                                    });
                     this.mAnimList.add(this.mWidthAnimator);
                 }
                 boolean equalHeight = fromHeight == toHeight;
                 if (!equalHeight) {
-                    this.mHeightAnimator = getOrCreateValueAnimator(this.mHeightAnimator, fromHeight, toHeight, new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.multiwindow.FreeformResizeGuideView$$ExternalSyntheticLambda3
-                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                        public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                            FreeformResizeGuideView.this.lambda$show$3(dimLp, valueAnimator);
-                        }
-                    });
+                    this.mHeightAnimator =
+                            getOrCreateValueAnimator(
+                                    this.mHeightAnimator,
+                                    fromHeight,
+                                    toHeight,
+                                    new ValueAnimator
+                                            .AnimatorUpdateListener() { // from class:
+                                                                        // com.samsung.android.multiwindow.FreeformResizeGuideView$$ExternalSyntheticLambda3
+                                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                                        public final void onAnimationUpdate(
+                                                ValueAnimator valueAnimator) {
+                                            FreeformResizeGuideView.this.lambda$show$3(
+                                                    dimLp, valueAnimator);
+                                        }
+                                    });
                     this.mAnimList.add(this.mHeightAnimator);
                 }
                 long duration = 300;
@@ -179,12 +243,21 @@ public class FreeformResizeGuideView extends FrameLayout {
                         interpolator = interpolator3;
                     } else {
                         interpolator = interpolator3;
-                        this.mAlphaAnimator = getOrCreateValueAnimator(this.mAlphaAnimator, fromAlpha, toAlpha, new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.multiwindow.FreeformResizeGuideView$$ExternalSyntheticLambda4
-                            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                FreeformResizeGuideView.this.lambda$show$4(valueAnimator);
-                            }
-                        });
+                        this.mAlphaAnimator =
+                                getOrCreateValueAnimator(
+                                        this.mAlphaAnimator,
+                                        fromAlpha,
+                                        toAlpha,
+                                        new ValueAnimator
+                                                .AnimatorUpdateListener() { // from class:
+                                                                            // com.samsung.android.multiwindow.FreeformResizeGuideView$$ExternalSyntheticLambda4
+                                            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                                            public final void onAnimationUpdate(
+                                                    ValueAnimator valueAnimator) {
+                                                FreeformResizeGuideView.this.lambda$show$4(
+                                                        valueAnimator);
+                                            }
+                                        });
                         this.mAnimList.add(this.mAlphaAnimator);
                     }
                     transitionInfo.addDismissListener(this.mAnimatorSet);
@@ -201,25 +274,29 @@ public class FreeformResizeGuideView extends FrameLayout {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$show$0(FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
+    public /* synthetic */ void lambda$show$0(
+            FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
         dimLp.leftMargin = ((Integer) animation.getAnimatedValue()).intValue();
         this.mDimView.setLayoutParams(dimLp);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$show$1(FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
+    public /* synthetic */ void lambda$show$1(
+            FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
         dimLp.topMargin = ((Integer) animation.getAnimatedValue()).intValue();
         this.mDimView.setLayoutParams(dimLp);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$show$2(FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
+    public /* synthetic */ void lambda$show$2(
+            FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
         dimLp.width = ((Integer) animation.getAnimatedValue()).intValue();
         this.mDimView.setLayoutParams(dimLp);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$show$3(FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
+    public /* synthetic */ void lambda$show$3(
+            FrameLayout.LayoutParams dimLp, ValueAnimator animation) {
         dimLp.height = ((Integer) animation.getAnimatedValue()).intValue();
         this.mDimView.setLayoutParams(dimLp);
     }
@@ -253,18 +330,22 @@ public class FreeformResizeGuideView extends FrameLayout {
         animatorSet.setInterpolator(InterpolatorUtils.SINE_IN_OUT_60);
         animatorSet.setDuration(300L);
         animatorSet.playTogether(scaleX, scaleY);
-        animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.multiwindow.FreeformResizeGuideView.1
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationStart(Animator animation) {
-                FreeformResizeGuideView.this.mAppIconView.setVisibility(0);
-                FreeformResizeGuideView.this.mAppIconView.setAlpha(1.0f);
-            }
-        });
+        animatorSet.addListener(
+                new AnimatorListenerAdapter() { // from class:
+                                                // com.samsung.android.multiwindow.FreeformResizeGuideView.1
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationStart(Animator animation) {
+                        FreeformResizeGuideView.this.mAppIconView.setVisibility(0);
+                        FreeformResizeGuideView.this.mAppIconView.setAlpha(1.0f);
+                    }
+                });
         animatorSet.start();
         ObjectAnimator scaleX2 = ObjectAnimator.ofFloat(this.mAppIconView, "scaleX", 0.95f, 0.9f);
         ObjectAnimator scaleY2 = ObjectAnimator.ofFloat(this.mAppIconView, "scaleY", 0.95f, 0.9f);
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.setInterpolator(AnimationUtils.loadInterpolator(this.mContext, R.interpolator.sine_in_out_33));
+        animatorSet2.setInterpolator(
+                AnimationUtils.loadInterpolator(this.mContext, R.interpolator.sine_in_out_33));
         animatorSet2.setDuration(300L);
         animatorSet2.setStartDelay(300L);
         animatorSet2.playTogether(scaleX2, scaleY2);
@@ -279,12 +360,15 @@ public class FreeformResizeGuideView extends FrameLayout {
         animatorSet.setInterpolator(new LinearInterpolator());
         animatorSet.setDuration(100L);
         animatorSet.playTogether(scaleX, scaleY, alpha);
-        animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.multiwindow.FreeformResizeGuideView.2
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                FreeformResizeGuideView.this.mAppIconView.setVisibility(4);
-            }
-        });
+        animatorSet.addListener(
+                new AnimatorListenerAdapter() { // from class:
+                                                // com.samsung.android.multiwindow.FreeformResizeGuideView.2
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        FreeformResizeGuideView.this.mAppIconView.setVisibility(4);
+                    }
+                });
         animatorSet.start();
     }
 
@@ -303,7 +387,11 @@ public class FreeformResizeGuideView extends FrameLayout {
         }
     }
 
-    private ValueAnimator getOrCreateValueAnimator(ValueAnimator valueAnimator, int from, int to, ValueAnimator.AnimatorUpdateListener listener) {
+    private ValueAnimator getOrCreateValueAnimator(
+            ValueAnimator valueAnimator,
+            int from,
+            int to,
+            ValueAnimator.AnimatorUpdateListener listener) {
         if (valueAnimator == null) {
             valueAnimator = new ValueAnimator();
         }

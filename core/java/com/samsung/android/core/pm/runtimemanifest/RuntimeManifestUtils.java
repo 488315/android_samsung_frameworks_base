@@ -8,15 +8,17 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.TypedValue;
+
 import com.android.internal.R;
 import com.android.internal.util.XmlUtils;
-import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestPolicies;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes6.dex */
 public class RuntimeManifestUtils {
@@ -77,7 +79,8 @@ public class RuntimeManifestUtils {
         sIsTest = enable;
     }
 
-    static List<RuntimeManifestPolicies.PolicyInfo> parseOverlayPolicies(XmlResourceParser parser, Resources res) throws IOException, XmlPullParserException {
+    static List<RuntimeManifestPolicies.PolicyInfo> parseOverlayPolicies(
+            XmlResourceParser parser, Resources res) throws IOException, XmlPullParserException {
         int outerDepth;
         List<RuntimeManifestPolicies.PolicyInfo> policies = new ArrayList<>();
         int outerDepth2 = parser.getDepth();
@@ -89,7 +92,8 @@ public class RuntimeManifestUtils {
                 } else if (parserType == 4) {
                     outerDepth = outerDepth2;
                 } else {
-                    RuntimeManifestPolicies.PolicyInfo policy = new RuntimeManifestPolicies.PolicyInfo();
+                    RuntimeManifestPolicies.PolicyInfo policy =
+                            new RuntimeManifestPolicies.PolicyInfo();
                     String elementName = parser.getName();
                     if (elementName.equals(TAG_POLICY)) {
                         String type = parser.getAttributeValue(null, "type");
@@ -116,7 +120,8 @@ public class RuntimeManifestUtils {
                         if (!TextUtils.isEmpty(propertyValue)) {
                             policy.setPropertyValue(propertyValue);
                         }
-                        TypedArray ta = res.obtainAttributes(parser, R.styleable.AndroidManifestActivity);
+                        TypedArray ta =
+                                res.obtainAttributes(parser, R.styleable.AndroidManifestActivity);
                         try {
                             TypedValue v = ta.peekValue(1);
                             if (v == null) {
@@ -146,7 +151,9 @@ public class RuntimeManifestUtils {
                                 policy.setEnabled(enabled);
                             }
                             ta.recycle();
-                            ta = res.obtainAttributes(parser, R.styleable.AndroidManifestIntentFilter);
+                            ta =
+                                    res.obtainAttributes(
+                                            parser, R.styleable.AndroidManifestIntentFilter);
                             try {
                                 int priority = ta.getInt(2, 0);
                                 policy.setPriority(priority);
@@ -161,7 +168,9 @@ public class RuntimeManifestUtils {
                         }
                     } else {
                         outerDepth = outerDepth2;
-                        Slog.d("RuntimeManifestUtils", "Unknown element under <runtime-manifest>: " + elementName);
+                        Slog.d(
+                                "RuntimeManifestUtils",
+                                "Unknown element under <runtime-manifest>: " + elementName);
                         XmlUtils.skipCurrentTag(parser);
                     }
                 }
@@ -171,7 +180,8 @@ public class RuntimeManifestUtils {
         return policies;
     }
 
-    public static RuntimeManifestPolicies parseRuntimeManifestPolicies(XmlResourceParser parser, Resources res) throws IOException, XmlPullParserException {
+    public static RuntimeManifestPolicies parseRuntimeManifestPolicies(
+            XmlResourceParser parser, Resources res) throws IOException, XmlPullParserException {
         RuntimeManifestPolicies overlay = new RuntimeManifestPolicies();
         List<RuntimeManifestPolicies.PolicyInfo> application = new ArrayList<>();
         Map<String, List<RuntimeManifestPolicies.PolicyInfo>> activities = new HashMap<>();
@@ -186,33 +196,39 @@ public class RuntimeManifestUtils {
                 if (elementName.equals("application")) {
                     application.addAll(parseOverlayPolicies(parser, res));
                 } else {
-                    TypedArray ta = res.obtainAttributes(parser, R.styleable.AndroidManifestActivity);
+                    TypedArray ta =
+                            res.obtainAttributes(parser, R.styleable.AndroidManifestActivity);
                     try {
                         String name = ta.getString(3);
                         if (name == null) {
                             continue;
                         } else if (elementName.equals("activity")) {
-                            List<RuntimeManifestPolicies.PolicyInfo> policies = parseOverlayPolicies(parser, res);
+                            List<RuntimeManifestPolicies.PolicyInfo> policies =
+                                    parseOverlayPolicies(parser, res);
                             if (!activities.containsKey(name) && policies.size() > 0) {
                                 activities.put(name, policies);
                             }
                         } else if (elementName.equals("receiver")) {
-                            List<RuntimeManifestPolicies.PolicyInfo> policies2 = parseOverlayPolicies(parser, res);
+                            List<RuntimeManifestPolicies.PolicyInfo> policies2 =
+                                    parseOverlayPolicies(parser, res);
                             if (!receivers.containsKey(name) && policies2.size() > 0) {
                                 receivers.put(name, policies2);
                             }
                         } else if (elementName.equals("service")) {
-                            List<RuntimeManifestPolicies.PolicyInfo> policies3 = parseOverlayPolicies(parser, res);
+                            List<RuntimeManifestPolicies.PolicyInfo> policies3 =
+                                    parseOverlayPolicies(parser, res);
                             if (!services.containsKey(name) && policies3.size() > 0) {
                                 services.put(name, policies3);
                             }
                         } else if (elementName.equals(TAG_PROVIDER)) {
-                            List<RuntimeManifestPolicies.PolicyInfo> policies4 = parseOverlayPolicies(parser, res);
+                            List<RuntimeManifestPolicies.PolicyInfo> policies4 =
+                                    parseOverlayPolicies(parser, res);
                             if (!providers.containsKey(name) && policies4.size() > 0) {
                                 providers.put(name, policies4);
                             }
                         } else {
-                            throw new XmlPullParserException("Unknown element under <runtime-manifest>: " + elementName);
+                            throw new XmlPullParserException(
+                                    "Unknown element under <runtime-manifest>: " + elementName);
                         }
                     } finally {
                         ta.recycle();
@@ -229,7 +245,8 @@ public class RuntimeManifestUtils {
         }
     }
 
-    public static RuntimeManifestPolicies.PolicyInfo getMatchingPolicy(List<RuntimeManifestPolicies.PolicyInfo> policies) {
+    public static RuntimeManifestPolicies.PolicyInfo getMatchingPolicy(
+            List<RuntimeManifestPolicies.PolicyInfo> policies) {
         for (RuntimeManifestPolicies.PolicyInfo policy : policies) {
             String type = policy.getType();
             if (!TextUtils.isEmpty(type)) {
@@ -245,7 +262,9 @@ public class RuntimeManifestUtils {
                         Slog.d("RuntimeManifestUtils", "Matched policy(countrycode): " + policy);
                         return policy;
                     }
-                } else if (type.equalsIgnoreCase("ONEUI") && matchOneUiPolicy(policy.getMinValue(), policy.getMaxValue(), getOneUiVersion())) {
+                } else if (type.equalsIgnoreCase("ONEUI")
+                        && matchOneUiPolicy(
+                                policy.getMinValue(), policy.getMaxValue(), getOneUiVersion())) {
                     Slog.d("RuntimeManifestUtils", "Matched policy(oneui): " + policy);
                     return policy;
                 }
@@ -260,7 +279,9 @@ public class RuntimeManifestUtils {
             return false;
         }
         if (minValue < 0 && maxValue < 0) {
-            Slog.w("RuntimeManifestUtils", "Invalid value set, min: " + minValue + ", max: " + maxValue);
+            Slog.w(
+                    "RuntimeManifestUtils",
+                    "Invalid value set, min: " + minValue + ", max: " + maxValue);
             return false;
         }
         if (minValue >= 0 && curVersion < minValue) {

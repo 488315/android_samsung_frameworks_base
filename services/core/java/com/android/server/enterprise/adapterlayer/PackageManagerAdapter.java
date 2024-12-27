@@ -15,8 +15,10 @@ import android.os.ServiceManager;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.util.Log;
+
 import com.android.internal.appwidget.IAppWidgetService;
 import com.android.server.enterprise.adapter.IPackageManagerAdapter;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -80,8 +82,11 @@ public final class PackageManagerAdapter implements IPackageManagerAdapter {
         }
         ClearUserDataObserver clearUserDataObserver = new ClearUserDataObserver();
         try {
-            if (!ActivityManagerNative.getDefault().clearApplicationUserData(str2, false, clearUserDataObserver, i)) {
-                Log.d("PackageManagerAdapter", "Couldn't clear application user data for package: ".concat(str2));
+            if (!ActivityManagerNative.getDefault()
+                    .clearApplicationUserData(str2, false, clearUserDataObserver, i)) {
+                Log.d(
+                        "PackageManagerAdapter",
+                        "Couldn't clear application user data for package: ".concat(str2));
                 return false;
             }
             synchronized (clearUserDataObserver) {
@@ -92,7 +97,8 @@ public final class PackageManagerAdapter implements IPackageManagerAdapter {
                     }
                 }
                 z = true;
-                if (true != clearUserDataObserver.success || !clearUserDataObserver.packageName.equalsIgnoreCase(str2)) {
+                if (true != clearUserDataObserver.success
+                        || !clearUserDataObserver.packageName.equalsIgnoreCase(str2)) {
                     z = false;
                 }
             }
@@ -150,7 +156,8 @@ public final class PackageManagerAdapter implements IPackageManagerAdapter {
         UserManager userManager;
         List<UserInfo> enabledProfiles;
         ArrayList arrayList = new ArrayList();
-        IAppWidgetService asInterface = IAppWidgetService.Stub.asInterface(ServiceManager.getService("appwidget"));
+        IAppWidgetService asInterface =
+                IAppWidgetService.Stub.asInterface(ServiceManager.getService("appwidget"));
         if (asInterface == null) {
             return null;
         }
@@ -160,17 +167,26 @@ public final class PackageManagerAdapter implements IPackageManagerAdapter {
         if (allProvidersForProfile != null) {
             hashSet.addAll(allProvidersForProfile);
         }
-        if (i == 0 && (userManager = (UserManager) mContext.getSystemService("user")) != null && (enabledProfiles = userManager.getEnabledProfiles(i)) != null && !enabledProfiles.isEmpty()) {
+        if (i == 0
+                && (userManager = (UserManager) mContext.getSystemService("user")) != null
+                && (enabledProfiles = userManager.getEnabledProfiles(i)) != null
+                && !enabledProfiles.isEmpty()) {
             for (UserInfo userInfo : enabledProfiles) {
                 int i2 = userInfo.id;
                 if (i2 != i) {
-                    if (((UserManager) mContext.getSystemService("user")).isUserRunning(i2) && StorageManager.isCeStorageUnlocked(i2)) {
-                        List allProvidersForProfile2 = asInterface.getAllProvidersForProfile(769, userInfo.id, true);
+                    if (((UserManager) mContext.getSystemService("user")).isUserRunning(i2)
+                            && StorageManager.isCeStorageUnlocked(i2)) {
+                        List allProvidersForProfile2 =
+                                asInterface.getAllProvidersForProfile(769, userInfo.id, true);
                         if (allProvidersForProfile2 != null) {
                             hashSet.addAll(allProvidersForProfile2);
                         }
                     } else {
-                        Log.v("PackageManagerAdapter", "cannot getAllProvidersForProfile for user " + userInfo.id + " because it is in locked state");
+                        Log.v(
+                                "PackageManagerAdapter",
+                                "cannot getAllProvidersForProfile for user "
+                                        + userInfo.id
+                                        + " because it is in locked state");
                     }
                 }
             }
@@ -189,7 +205,8 @@ public final class PackageManagerAdapter implements IPackageManagerAdapter {
                 if (mInstance == null) {
                     mContext = context;
                     mInstance = new PackageManagerAdapter();
-                    mIPackageManager = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
+                    mIPackageManager =
+                            IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
                 }
                 packageManagerAdapter = mInstance;
             } catch (Throwable th) {
@@ -249,7 +266,8 @@ public final class PackageManagerAdapter implements IPackageManagerAdapter {
         }
     }
 
-    public static void setComponentEnabledSetting(ComponentName componentName, String str, int i, int i2) {
+    public static void setComponentEnabledSetting(
+            ComponentName componentName, String str, int i, int i2) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             mIPackageManager.setComponentEnabledSetting(componentName, i, 1, i2, str);

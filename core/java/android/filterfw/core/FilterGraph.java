@@ -5,6 +5,7 @@ import android.filterpacks.base.NullFilter;
 import android.media.MediaMetrics;
 import android.telecom.Logging.Session;
 import android.util.Log;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -58,10 +59,12 @@ public class FilterGraph {
         OutputPort outPort = source.getOutputPort(outputName);
         InputPort inPort = target.getInputPort(inputName);
         if (outPort == null) {
-            throw new RuntimeException("Unknown output port '" + outputName + "' on Filter " + source + "!");
+            throw new RuntimeException(
+                    "Unknown output port '" + outputName + "' on Filter " + source + "!");
         }
         if (inPort == null) {
-            throw new RuntimeException("Unknown input port '" + inputName + "' on Filter " + target + "!");
+            throw new RuntimeException(
+                    "Unknown input port '" + inputName + "' on Filter " + target + "!");
         }
         preconnect(outPort, inPort);
     }
@@ -70,10 +73,12 @@ public class FilterGraph {
         Filter source = getFilter(sourceName);
         Filter target = getFilter(targetName);
         if (source == null) {
-            throw new RuntimeException("Attempting to connect unknown source filter '" + sourceName + "'!");
+            throw new RuntimeException(
+                    "Attempting to connect unknown source filter '" + sourceName + "'!");
         }
         if (target == null) {
-            throw new RuntimeException("Attempting to connect unknown target filter '" + targetName + "'!");
+            throw new RuntimeException(
+                    "Attempting to connect unknown target filter '" + targetName + "'!");
         }
         connect(source, outputName, target, inputName);
     }
@@ -186,9 +191,11 @@ public class FilterGraph {
             InputPort inputPort = outputPort.getBasePort();
             if (inputPort != null) {
                 FrameFormat inputFormat = inputPort.getSourceFormat();
-                FrameFormat outputFormat = filter.getOutputFormat(outputPort.getName(), inputFormat);
+                FrameFormat outputFormat =
+                        filter.getOutputFormat(outputPort.getName(), inputFormat);
                 if (outputFormat == null) {
-                    throw new RuntimeException("Filter did not return an output format for " + outputPort + "!");
+                    throw new RuntimeException(
+                            "Filter did not return an output format for " + outputPort + "!");
                 }
                 outputPort.setPortFormat(outputFormat);
             }
@@ -204,7 +211,13 @@ public class FilterGraph {
             FrameFormat targetFormat = inputPort.getPortFormat();
             if (sourceFormat != null && targetFormat != null) {
                 if (this.mLogVerbose) {
-                    Log.v(this.TAG, "Checking " + sourceFormat + " against " + targetFormat + MediaMetrics.SEPARATOR);
+                    Log.v(
+                            this.TAG,
+                            "Checking "
+                                    + sourceFormat
+                                    + " against "
+                                    + targetFormat
+                                    + MediaMetrics.SEPARATOR);
                 }
                 boolean compatible = true;
                 switch (this.mTypeCheckMode) {
@@ -221,14 +234,20 @@ public class FilterGraph {
                         break;
                 }
                 if (!compatible) {
-                    throw new RuntimeException("Type mismatch: Filter " + filter + " expects a format of type " + targetFormat + " but got a format of type " + sourceFormat + "!");
+                    throw new RuntimeException(
+                            "Type mismatch: Filter "
+                                    + filter
+                                    + " expects a format of type "
+                                    + targetFormat
+                                    + " but got a format of type "
+                                    + sourceFormat
+                                    + "!");
                 }
             }
         }
     }
 
-    private void checkConnections() {
-    }
+    private void checkConnections() {}
 
     private void discardUnconnectedOutputs() {
         LinkedList<Filter> addedFilters = new LinkedList<>();
@@ -271,14 +290,19 @@ public class FilterGraph {
 
     private void connectPorts() {
         int branchId = 1;
-        for (Map.Entry<OutputPort, LinkedList<InputPort>> connection : this.mPreconnections.entrySet()) {
+        for (Map.Entry<OutputPort, LinkedList<InputPort>> connection :
+                this.mPreconnections.entrySet()) {
             OutputPort outputPort = connection.getKey();
             LinkedList<InputPort> inputPorts = connection.getValue();
             if (inputPorts.size() == 1) {
                 outputPort.connectTo(inputPorts.get(0));
             } else {
                 if (this.mAutoBranchMode == 0) {
-                    throw new RuntimeException("Attempting to connect " + outputPort + " to multiple filter ports! Enable auto-branching to allow this.");
+                    throw new RuntimeException(
+                            "Attempting to connect "
+                                    + outputPort
+                                    + " to multiple filter ports! Enable auto-branching to allow"
+                                    + " this.");
                 }
                 if (this.mLogVerbose) {
                     Log.v(this.TAG, "Creating branch for " + outputPort + "!");

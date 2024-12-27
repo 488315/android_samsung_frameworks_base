@@ -7,11 +7,11 @@ import com.android.internal.org.bouncycastle.crypto.Wrapper;
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
-import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.PBE;
 import com.android.internal.org.bouncycastle.jcajce.util.DefaultJcaJceHelper;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.ByteArrayOutputStream;
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
@@ -27,6 +27,7 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.CipherSpi;
 import javax.crypto.IllegalBlockSizeException;
@@ -52,7 +53,7 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
     private ErasableOutputStream wrapStream;
 
     protected BaseWrapCipher() {
-        this.availableSpecs = new Class[]{PBEParameterSpec.class, IvParameterSpec.class};
+        this.availableSpecs = new Class[] {PBEParameterSpec.class, IvParameterSpec.class};
         this.pbeType = 2;
         this.pbeHash = 1;
         this.engineParams = null;
@@ -66,7 +67,7 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
     }
 
     protected BaseWrapCipher(Wrapper wrapEngine, int ivSize) {
-        this.availableSpecs = new Class[]{PBEParameterSpec.class, IvParameterSpec.class};
+        this.availableSpecs = new Class[] {PBEParameterSpec.class, IvParameterSpec.class};
         this.pbeType = 2;
         this.pbeHash = 1;
         this.engineParams = null;
@@ -114,7 +115,8 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
         return this.engineParams;
     }
 
-    protected final AlgorithmParameters createParametersInstance(String algorithm) throws NoSuchAlgorithmException, NoSuchProviderException {
+    protected final AlgorithmParameters createParametersInstance(String algorithm)
+            throws NoSuchAlgorithmException, NoSuchProviderException {
         return this.helper.createAlgorithmParameters(algorithm);
     }
 
@@ -129,7 +131,9 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected void engineInit(int opmode, Key key, AlgorithmParameterSpec params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected void engineInit(
+            int opmode, Key key, AlgorithmParameterSpec params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         CipherParameters param;
         if (key instanceof BCPBEKey) {
             BCPBEKey k = (BCPBEKey) key;
@@ -140,7 +144,8 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
                 if (param2 != null) {
                     param = k.getParam();
                 } else {
-                    throw new InvalidAlgorithmParameterException("PBE requires PBE parameters to be set.");
+                    throw new InvalidAlgorithmParameterException(
+                            "PBE requires PBE parameters to be set.");
                 }
             }
         } else {
@@ -190,10 +195,13 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected void engineInit(int opmode, Key key, AlgorithmParameters params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected void engineInit(int opmode, Key key, AlgorithmParameters params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         AlgorithmParameterSpec paramSpec = null;
-        if (params != null && (paramSpec = SpecUtil.extractSpec(params, this.availableSpecs)) == null) {
-            throw new InvalidAlgorithmParameterException("can't handle parameter " + params.toString());
+        if (params != null
+                && (paramSpec = SpecUtil.extractSpec(params, this.availableSpecs)) == null) {
+            throw new InvalidAlgorithmParameterException(
+                    "can't handle parameter " + params.toString());
         }
         this.engineParams = params;
         engineInit(opmode, key, paramSpec, random);
@@ -218,7 +226,9 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected int engineUpdate(byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset) throws ShortBufferException {
+    protected int engineUpdate(
+            byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset)
+            throws ShortBufferException {
         if (this.wrapStream == null) {
             throw new IllegalStateException("not supported in a wrapping mode");
         }
@@ -227,7 +237,8 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected byte[] engineDoFinal(byte[] input, int inputOffset, int inputLen) throws IllegalBlockSizeException, BadPaddingException {
+    protected byte[] engineDoFinal(byte[] input, int inputOffset, int inputLen)
+            throws IllegalBlockSizeException, BadPaddingException {
         if (this.wrapStream == null) {
             throw new IllegalStateException("not supported in a wrapping mode");
         }
@@ -237,7 +248,8 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
         try {
             if (this.forWrapping) {
                 try {
-                    return this.wrapEngine.wrap(this.wrapStream.getBuf(), 0, this.wrapStream.size());
+                    return this.wrapEngine.wrap(
+                            this.wrapStream.getBuf(), 0, this.wrapStream.size());
                 } catch (Exception e) {
                     throw new IllegalBlockSizeException(e.getMessage());
                 }
@@ -260,7 +272,10 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected int engineDoFinal(byte[] r5, int r6, int r7, byte[] r8, int r9) throws javax.crypto.IllegalBlockSizeException, javax.crypto.BadPaddingException, javax.crypto.ShortBufferException {
+    protected int engineDoFinal(byte[] r5, int r6, int r7, byte[] r8, int r9)
+            throws javax.crypto.IllegalBlockSizeException,
+                    javax.crypto.BadPaddingException,
+                    javax.crypto.ShortBufferException {
         /*
             r4 = this;
             com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher$ErasableOutputStream r0 = r4.wrapStream
@@ -323,7 +338,10 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
             r0.<init>(r1)
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher.engineDoFinal(byte[], int, int, byte[], int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher.engineDoFinal(byte[],"
+                    + " int, int, byte[], int):int");
     }
 
     @Override // javax.crypto.CipherSpi
@@ -343,7 +361,8 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected Key engineUnwrap(byte[] wrappedKey, String wrappedKeyAlgorithm, int wrappedKeyType) throws InvalidKeyException, NoSuchAlgorithmException {
+    protected Key engineUnwrap(byte[] wrappedKey, String wrappedKeyAlgorithm, int wrappedKeyType)
+            throws InvalidKeyException, NoSuchAlgorithmException {
         byte[] encoded;
         try {
             if (this.wrapEngine == null) {
@@ -361,7 +380,10 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
                     if (privKey != null) {
                         return privKey;
                     }
-                    throw new InvalidKeyException("algorithm " + in.getPrivateKeyAlgorithm().getAlgorithm() + " not supported");
+                    throw new InvalidKeyException(
+                            "algorithm "
+                                    + in.getPrivateKeyAlgorithm().getAlgorithm()
+                                    + " not supported");
                 } catch (Exception e) {
                     throw new InvalidKeyException("Invalid key encoding.");
                 }

@@ -3,7 +3,9 @@ package android.service.voice;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -16,28 +18,29 @@ public final class HotwordRejectedResult implements Parcelable {
     public static final int CONFIDENCE_LEVEL_MEDIUM = 2;
     public static final int CONFIDENCE_LEVEL_NONE = 0;
     public static final int CONFIDENCE_LEVEL_VERY_HIGH = 4;
-    public static final Parcelable.Creator<HotwordRejectedResult> CREATOR = new Parcelable.Creator<HotwordRejectedResult>() { // from class: android.service.voice.HotwordRejectedResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HotwordRejectedResult[] newArray(int size) {
-            return new HotwordRejectedResult[size];
-        }
+    public static final Parcelable.Creator<HotwordRejectedResult> CREATOR =
+            new Parcelable.Creator<
+                    HotwordRejectedResult>() { // from class:
+                                               // android.service.voice.HotwordRejectedResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HotwordRejectedResult[] newArray(int size) {
+                    return new HotwordRejectedResult[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HotwordRejectedResult createFromParcel(Parcel in) {
-            return new HotwordRejectedResult(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HotwordRejectedResult createFromParcel(Parcel in) {
+                    return new HotwordRejectedResult(in);
+                }
+            };
     private final int mConfidenceLevel;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConfidenceLevel {
-    }
+    public @interface ConfidenceLevel {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface HotwordConfidenceLevelValue {
-    }
+    @interface HotwordConfidenceLevelValue {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int defaultConfidenceLevel() {
@@ -63,7 +66,10 @@ public final class HotwordRejectedResult implements Parcelable {
 
     HotwordRejectedResult(int confidenceLevel) {
         this.mConfidenceLevel = confidenceLevel;
-        AnnotationValidations.validate((Class<? extends Annotation>) HotwordConfidenceLevelValue.class, (Annotation) null, this.mConfidenceLevel);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) HotwordConfidenceLevelValue.class,
+                (Annotation) null,
+                this.mConfidenceLevel);
     }
 
     public int getConfidenceLevel() {
@@ -106,7 +112,10 @@ public final class HotwordRejectedResult implements Parcelable {
     HotwordRejectedResult(Parcel in) {
         int confidenceLevel = in.readInt();
         this.mConfidenceLevel = confidenceLevel;
-        AnnotationValidations.validate((Class<? extends Annotation>) HotwordConfidenceLevelValue.class, (Annotation) null, this.mConfidenceLevel);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) HotwordConfidenceLevelValue.class,
+                (Annotation) null,
+                this.mConfidenceLevel);
     }
 
     public static final class Builder {
@@ -132,12 +141,12 @@ public final class HotwordRejectedResult implements Parcelable {
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 2) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

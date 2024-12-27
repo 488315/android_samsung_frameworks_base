@@ -1,6 +1,7 @@
 package com.android.server.pm;
 
 import android.content.IntentFilter;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +18,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
     public static final DefaultCrossProfileIntentFilter CALL_MANAGED_PROFILE;
     public static final DefaultCrossProfileIntentFilter CALL_PRIVATE_PROFILE;
     public static final DefaultCrossProfileIntentFilter CLONE_TO_PARENT_ACTION_PICK_IMAGES;
-    public static final DefaultCrossProfileIntentFilter CLONE_TO_PARENT_ACTION_PICK_IMAGES_WITH_DATA_TYPES;
+    public static final DefaultCrossProfileIntentFilter
+            CLONE_TO_PARENT_ACTION_PICK_IMAGES_WITH_DATA_TYPES;
     public static final DefaultCrossProfileIntentFilter CLONE_TO_PARENT_DIAL_DATA;
     public static final DefaultCrossProfileIntentFilter CLONE_TO_PARENT_MEDIA_CAPTURE;
     public static final DefaultCrossProfileIntentFilter CLONE_TO_PARENT_PHOTOPICKER_SELECTION;
@@ -91,7 +93,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         watchedIntentFilter2.addDataScheme("tel");
         watchedIntentFilter2.addDataScheme("sip");
         watchedIntentFilter2.addDataScheme("voicemail");
-        EMERGENCY_CALL_DATA = new DefaultCrossProfileIntentFilter(watchedIntentFilter2, 2, 0, false);
+        EMERGENCY_CALL_DATA =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter2, 2, 0, false);
         WatchedIntentFilter watchedIntentFilter3 = new WatchedIntentFilter();
         watchedIntentFilter3.addAction("android.intent.action.DIAL");
         watchedIntentFilter3.addAction("android.intent.action.VIEW");
@@ -143,7 +146,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
             watchedIntentFilter4.addDataType("vnd.android.cursor.item/calls");
         } catch (IntentFilter.MalformedMimeTypeException unused15) {
         }
-        DIAL_MIME_MANAGED_PROFILE = new DefaultCrossProfileIntentFilter(watchedIntentFilter4, 2, 1, false);
+        DIAL_MIME_MANAGED_PROFILE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter4, 2, 1, false);
         WatchedIntentFilter watchedIntentFilter5 = new WatchedIntentFilter();
         watchedIntentFilter5.addAction("android.intent.action.DIAL");
         watchedIntentFilter5.addAction("android.intent.action.VIEW");
@@ -161,7 +165,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         watchedIntentFilter6.addDataScheme("tel");
         watchedIntentFilter6.addDataScheme("sip");
         watchedIntentFilter6.addDataScheme("voicemail");
-        DIAL_DATA_MANAGED_PROFILE = new DefaultCrossProfileIntentFilter(watchedIntentFilter6, 2, 1, false);
+        DIAL_DATA_MANAGED_PROFILE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter6, 2, 1, false);
         WatchedIntentFilter watchedIntentFilter7 = new WatchedIntentFilter();
         watchedIntentFilter7.addAction("android.intent.action.DIAL");
         watchedIntentFilter7.addCategory("android.intent.category.DEFAULT");
@@ -171,7 +176,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         watchedIntentFilter8.addAction("android.intent.action.DIAL");
         watchedIntentFilter8.addCategory("android.intent.category.DEFAULT");
         watchedIntentFilter8.addCategory("android.intent.category.BROWSABLE");
-        DIAL_RAW_MANAGED_PROFILE = new DefaultCrossProfileIntentFilter(watchedIntentFilter8, 2, 1, false);
+        DIAL_RAW_MANAGED_PROFILE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter8, 2, 1, false);
         WatchedIntentFilter watchedIntentFilter9 = new WatchedIntentFilter();
         watchedIntentFilter9.addAction("android.intent.action.CALL_BUTTON");
         watchedIntentFilter9.addCategory("android.intent.category.DEFAULT");
@@ -195,12 +201,14 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         watchedIntentFilter11.addDataScheme("smsto");
         watchedIntentFilter11.addDataScheme("mms");
         watchedIntentFilter11.addDataScheme("mmsto");
-        SMS_MMS_MANAGED_PROFILE = new DefaultCrossProfileIntentFilter(watchedIntentFilter11, 2, 1, false);
+        SMS_MMS_MANAGED_PROFILE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter11, 2, 1, false);
         WatchedIntentFilter watchedIntentFilter12 = new WatchedIntentFilter();
         watchedIntentFilter12.addAction("android.settings.DATA_ROAMING_SETTINGS");
         watchedIntentFilter12.addAction("android.settings.NETWORK_OPERATOR_SETTINGS");
         watchedIntentFilter12.addCategory("android.intent.category.DEFAULT");
-        MOBILE_NETWORK_SETTINGS = new DefaultCrossProfileIntentFilter(watchedIntentFilter12, 2, 0, false);
+        MOBILE_NETWORK_SETTINGS =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter12, 2, 0, false);
         WatchedIntentFilter watchedIntentFilter13 = new WatchedIntentFilter();
         watchedIntentFilter13.addAction("android.intent.action.MAIN");
         watchedIntentFilter13.addCategory("android.intent.category.DEFAULT");
@@ -230,7 +238,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
             watchedIntentFilter16.addDataType("video/*");
         } catch (IntentFilter.MalformedMimeTypeException unused18) {
         }
-        ACTION_PICK_IMAGES_WITH_DATA_TYPES = new DefaultCrossProfileIntentFilter(watchedIntentFilter16, 0, 0, true);
+        ACTION_PICK_IMAGES_WITH_DATA_TYPES =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter16, 0, 0, true);
         WatchedIntentFilter watchedIntentFilter17 = new WatchedIntentFilter();
         watchedIntentFilter17.addAction("android.intent.action.OPEN_DOCUMENT");
         watchedIntentFilter17.addCategory("android.intent.category.DEFAULT");
@@ -285,12 +294,14 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         watchedIntentFilter24.addAction("android.hardware.usb.action.USB_DEVICE_ATTACHED");
         watchedIntentFilter24.addAction("android.hardware.usb.action.USB_ACCESSORY_ATTACHED");
         watchedIntentFilter24.addCategory("android.intent.category.DEFAULT");
-        USB_DEVICE_ATTACHED = new DefaultCrossProfileIntentFilter(watchedIntentFilter24, 0, 1, false);
+        USB_DEVICE_ATTACHED =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter24, 0, 1, false);
         WatchedIntentFilter watchedIntentFilter25 = new WatchedIntentFilter();
         watchedIntentFilter25.addAction("android.intent.action.CALL");
         watchedIntentFilter25.addCategory("android.intent.category.DEFAULT");
         watchedIntentFilter25.addDataScheme("tel");
-        CALL_MANAGED_PROFILE = new DefaultCrossProfileIntentFilter(watchedIntentFilter25, 2, 1, false);
+        CALL_MANAGED_PROFILE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter25, 2, 1, false);
         WatchedIntentFilter watchedIntentFilter26 = new WatchedIntentFilter();
         watchedIntentFilter26.addAction("android.media.action.IMAGE_CAPTURE");
         watchedIntentFilter26.addAction("android.media.action.IMAGE_CAPTURE_SECURE");
@@ -300,11 +311,13 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         watchedIntentFilter26.addAction("android.media.action.STILL_IMAGE_CAMERA_SECURE");
         watchedIntentFilter26.addAction("android.media.action.VIDEO_CAMERA");
         watchedIntentFilter26.addCategory("android.intent.category.DEFAULT");
-        CLONE_TO_PARENT_MEDIA_CAPTURE = new DefaultCrossProfileIntentFilter(watchedIntentFilter26, 24, 0, false);
+        CLONE_TO_PARENT_MEDIA_CAPTURE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter26, 24, 0, false);
         WatchedIntentFilter watchedIntentFilter27 = new WatchedIntentFilter();
         watchedIntentFilter27.addAction("android.provider.action.USER_SELECT_IMAGES_FOR_APP");
         watchedIntentFilter27.addCategory("android.intent.category.DEFAULT");
-        CLONE_TO_PARENT_PHOTOPICKER_SELECTION = new DefaultCrossProfileIntentFilter(watchedIntentFilter27, 24, 0, false);
+        CLONE_TO_PARENT_PHOTOPICKER_SELECTION =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter27, 24, 0, false);
         WatchedIntentFilter watchedIntentFilter28 = new WatchedIntentFilter();
         watchedIntentFilter28.addAction("android.intent.action.SEND");
         watchedIntentFilter28.addAction("android.intent.action.SEND_MULTIPLE");
@@ -313,7 +326,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
             watchedIntentFilter28.addDataType("*/*");
         } catch (IntentFilter.MalformedMimeTypeException unused22) {
         }
-        CLONE_TO_PARENT_SEND_ACTION = new DefaultCrossProfileIntentFilter(watchedIntentFilter28, 24, 0, false);
+        CLONE_TO_PARENT_SEND_ACTION =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter28, 24, 0, false);
         WatchedIntentFilter watchedIntentFilter29 = new WatchedIntentFilter();
         watchedIntentFilter29.addAction("android.intent.action.SEND");
         watchedIntentFilter29.addAction("android.intent.action.SEND_MULTIPLE");
@@ -322,24 +336,28 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
             watchedIntentFilter29.addDataType("*/*");
         } catch (IntentFilter.MalformedMimeTypeException unused23) {
         }
-        PARENT_TO_CLONE_SEND_ACTION = new DefaultCrossProfileIntentFilter(watchedIntentFilter29, 24, 1, false);
+        PARENT_TO_CLONE_SEND_ACTION =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter29, 24, 1, false);
         WatchedIntentFilter watchedIntentFilter30 = new WatchedIntentFilter();
         watchedIntentFilter30.addAction("android.intent.action.VIEW");
         watchedIntentFilter30.addDataScheme("https");
         watchedIntentFilter30.addDataScheme("http");
-        CLONE_TO_PARENT_WEB_VIEW_ACTION = new DefaultCrossProfileIntentFilter(watchedIntentFilter30, 24, 0, false);
+        CLONE_TO_PARENT_WEB_VIEW_ACTION =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter30, 24, 0, false);
         WatchedIntentFilter watchedIntentFilter31 = new WatchedIntentFilter();
         watchedIntentFilter31.addAction("android.intent.action.VIEW");
         watchedIntentFilter31.addDataScheme("https");
         watchedIntentFilter31.addDataScheme("http");
-        PARENT_TO_CLONE_WEB_VIEW_ACTION = new DefaultCrossProfileIntentFilter(watchedIntentFilter31, 24, 1, false);
+        PARENT_TO_CLONE_WEB_VIEW_ACTION =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter31, 24, 1, false);
         WatchedIntentFilter watchedIntentFilter32 = new WatchedIntentFilter();
         watchedIntentFilter32.addAction("android.intent.action.VIEW");
         try {
             watchedIntentFilter32.addDataType("*/*");
         } catch (IntentFilter.MalformedMimeTypeException unused24) {
         }
-        CLONE_TO_PARENT_VIEW_ACTION = new DefaultCrossProfileIntentFilter(watchedIntentFilter32, 24, 0, false);
+        CLONE_TO_PARENT_VIEW_ACTION =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter32, 24, 0, false);
         WatchedIntentFilter watchedIntentFilter33 = new WatchedIntentFilter();
         watchedIntentFilter33.addAction("android.intent.action.PICK");
         watchedIntentFilter33.addAction("android.intent.action.GET_CONTENT");
@@ -353,7 +371,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         }
         watchedIntentFilter33.addCategory("android.intent.category.DEFAULT");
         watchedIntentFilter33.addCategory("android.intent.category.OPENABLE");
-        CLONE_TO_PARENT_PICK_INSERT_ACTION = new DefaultCrossProfileIntentFilter(watchedIntentFilter33, 24, 0, false);
+        CLONE_TO_PARENT_PICK_INSERT_ACTION =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter33, 24, 0, false);
         WatchedIntentFilter watchedIntentFilter34 = new WatchedIntentFilter();
         watchedIntentFilter34.addAction("android.intent.action.PICK");
         watchedIntentFilter34.addAction("android.intent.action.GET_CONTENT");
@@ -367,7 +386,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         }
         watchedIntentFilter34.addCategory("android.intent.category.DEFAULT");
         watchedIntentFilter34.addCategory("android.intent.category.OPENABLE");
-        PARENT_TO_CLONE_PICK_INSERT_ACTION = new DefaultCrossProfileIntentFilter(watchedIntentFilter34, 24, 1, false);
+        PARENT_TO_CLONE_PICK_INSERT_ACTION =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter34, 24, 1, false);
         WatchedIntentFilter watchedIntentFilter35 = new WatchedIntentFilter();
         watchedIntentFilter35.addAction("android.intent.action.DIAL");
         watchedIntentFilter35.addAction("android.intent.action.VIEW");
@@ -376,7 +396,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         watchedIntentFilter35.addDataScheme("tel");
         watchedIntentFilter35.addDataScheme("sip");
         watchedIntentFilter35.addDataScheme("voicemail");
-        PARENT_TO_CLONE_DIAL_DATA = new DefaultCrossProfileIntentFilter(watchedIntentFilter35, 24, 1, false);
+        PARENT_TO_CLONE_DIAL_DATA =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter35, 24, 1, false);
         WatchedIntentFilter watchedIntentFilter36 = new WatchedIntentFilter();
         watchedIntentFilter36.addAction("android.intent.action.DIAL");
         watchedIntentFilter36.addAction("android.intent.action.VIEW");
@@ -385,7 +406,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         watchedIntentFilter36.addDataScheme("tel");
         watchedIntentFilter36.addDataScheme("sip");
         watchedIntentFilter36.addDataScheme("voicemail");
-        CLONE_TO_PARENT_DIAL_DATA = new DefaultCrossProfileIntentFilter(watchedIntentFilter36, 24, 0, false);
+        CLONE_TO_PARENT_DIAL_DATA =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter36, 24, 0, false);
         WatchedIntentFilter watchedIntentFilter37 = new WatchedIntentFilter();
         watchedIntentFilter37.addAction("android.intent.action.VIEW");
         watchedIntentFilter37.addAction("android.intent.action.SENDTO");
@@ -395,11 +417,13 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         watchedIntentFilter37.addDataScheme("smsto");
         watchedIntentFilter37.addDataScheme("mms");
         watchedIntentFilter37.addDataScheme("mmsto");
-        CLONE_TO_PARENT_SMS_MMS = new DefaultCrossProfileIntentFilter(watchedIntentFilter37, 24, 0, false);
+        CLONE_TO_PARENT_SMS_MMS =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter37, 24, 0, false);
         WatchedIntentFilter watchedIntentFilter38 = new WatchedIntentFilter();
         watchedIntentFilter38.addAction("android.provider.action.PICK_IMAGES");
         watchedIntentFilter38.addCategory("android.intent.category.DEFAULT");
-        CLONE_TO_PARENT_ACTION_PICK_IMAGES = new DefaultCrossProfileIntentFilter(watchedIntentFilter38, 24, 0, false);
+        CLONE_TO_PARENT_ACTION_PICK_IMAGES =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter38, 24, 0, false);
         WatchedIntentFilter watchedIntentFilter39 = new WatchedIntentFilter();
         watchedIntentFilter39.addAction("android.provider.action.PICK_IMAGES");
         watchedIntentFilter39.addCategory("android.intent.category.DEFAULT");
@@ -411,27 +435,33 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
             watchedIntentFilter39.addDataType("video/*");
         } catch (IntentFilter.MalformedMimeTypeException unused28) {
         }
-        CLONE_TO_PARENT_ACTION_PICK_IMAGES_WITH_DATA_TYPES = new DefaultCrossProfileIntentFilter(watchedIntentFilter39, 24, 0, false);
+        CLONE_TO_PARENT_ACTION_PICK_IMAGES_WITH_DATA_TYPES =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter39, 24, 0, false);
         WatchedIntentFilter watchedIntentFilter40 = new WatchedIntentFilter();
         watchedIntentFilter40.addAction("android.nfc.action.TAG_DISCOVERED");
-        PARENT_TO_CLONE_NFC_TAG_DISCOVERED = new DefaultCrossProfileIntentFilter(watchedIntentFilter40, 0, 1, false);
+        PARENT_TO_CLONE_NFC_TAG_DISCOVERED =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter40, 0, 1, false);
         WatchedIntentFilter watchedIntentFilter41 = new WatchedIntentFilter();
         watchedIntentFilter41.addAction("android.nfc.action.TECH_DISCOVERED");
-        PARENT_TO_CLONE_NFC_TECH_DISCOVERED = new DefaultCrossProfileIntentFilter(watchedIntentFilter41, 0, 1, false);
+        PARENT_TO_CLONE_NFC_TECH_DISCOVERED =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter41, 0, 1, false);
         WatchedIntentFilter watchedIntentFilter42 = new WatchedIntentFilter();
         watchedIntentFilter42.addAction("android.nfc.action.NDEF_DISCOVERED");
-        PARENT_TO_CLONE_NFC_NDEF_DISCOVERED = new DefaultCrossProfileIntentFilter(watchedIntentFilter42, 0, 1, false);
+        PARENT_TO_CLONE_NFC_NDEF_DISCOVERED =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter42, 0, 1, false);
         WatchedIntentFilter watchedIntentFilter43 = new WatchedIntentFilter();
         watchedIntentFilter43.addAction("android.intent.action.CALL");
         watchedIntentFilter43.addCategory("android.intent.category.DEFAULT");
         watchedIntentFilter43.addDataScheme("tel");
         watchedIntentFilter43.addDataScheme("sip");
         watchedIntentFilter43.addDataScheme("voicemail");
-        CALL_PRIVATE_PROFILE = new DefaultCrossProfileIntentFilter(watchedIntentFilter43, 2, 0, false);
+        CALL_PRIVATE_PROFILE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter43, 2, 0, false);
         WatchedIntentFilter watchedIntentFilter44 = new WatchedIntentFilter();
         watchedIntentFilter44.addAction("android.intent.action.CALL_BUTTON");
         watchedIntentFilter44.addCategory("android.intent.category.DEFAULT");
-        CALL_BUTTON_PRIVATE_PROFILE = new DefaultCrossProfileIntentFilter(watchedIntentFilter44, 4, 0, false);
+        CALL_BUTTON_PRIVATE_PROFILE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter44, 4, 0, false);
         WatchedIntentFilter watchedIntentFilter45 = new WatchedIntentFilter();
         watchedIntentFilter45.addAction("android.intent.action.DIAL");
         watchedIntentFilter45.addAction("android.intent.action.VIEW");
@@ -457,7 +487,8 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
             watchedIntentFilter45.addDataType("vnd.android.cursor.item/calls");
         } catch (IntentFilter.MalformedMimeTypeException unused33) {
         }
-        DIAL_MIME_PRIVATE_PROFILE = new DefaultCrossProfileIntentFilter(watchedIntentFilter45, 4, 0, false);
+        DIAL_MIME_PRIVATE_PROFILE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter45, 4, 0, false);
         WatchedIntentFilter watchedIntentFilter46 = new WatchedIntentFilter();
         watchedIntentFilter46.addAction("android.intent.action.DIAL");
         watchedIntentFilter46.addAction("android.intent.action.VIEW");
@@ -466,12 +497,14 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         watchedIntentFilter46.addDataScheme("tel");
         watchedIntentFilter46.addDataScheme("sip");
         watchedIntentFilter46.addDataScheme("voicemail");
-        DIAL_DATA_PRIVATE_PROFILE = new DefaultCrossProfileIntentFilter(watchedIntentFilter46, 4, 0, false);
+        DIAL_DATA_PRIVATE_PROFILE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter46, 4, 0, false);
         WatchedIntentFilter watchedIntentFilter47 = new WatchedIntentFilter();
         watchedIntentFilter47.addAction("android.intent.action.DIAL");
         watchedIntentFilter47.addCategory("android.intent.category.DEFAULT");
         watchedIntentFilter47.addCategory("android.intent.category.BROWSABLE");
-        DIAL_RAW_PRIVATE_PROFILE = new DefaultCrossProfileIntentFilter(watchedIntentFilter47, 4, 0, false);
+        DIAL_RAW_PRIVATE_PROFILE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter47, 4, 0, false);
         WatchedIntentFilter watchedIntentFilter48 = new WatchedIntentFilter();
         watchedIntentFilter48.addAction("android.intent.action.VIEW");
         watchedIntentFilter48.addAction("android.intent.action.SENDTO");
@@ -481,12 +514,18 @@ public abstract class DefaultCrossProfileIntentFiltersUtils {
         watchedIntentFilter48.addDataScheme("smsto");
         watchedIntentFilter48.addDataScheme("mms");
         watchedIntentFilter48.addDataScheme("mmsto");
-        SMS_MMS_PRIVATE_PROFILE = new DefaultCrossProfileIntentFilter(watchedIntentFilter48, 2, 0, false);
+        SMS_MMS_PRIVATE_PROFILE =
+                new DefaultCrossProfileIntentFilter(watchedIntentFilter48, 2, 0, false);
     }
 
     public static List getDefaultCrossProfileTelephonyIntentFilters(boolean z) {
         if (z) {
-            return Arrays.asList(DIAL_DATA_MANAGED_PROFILE, DIAL_MIME_MANAGED_PROFILE, DIAL_RAW_MANAGED_PROFILE, CALL_MANAGED_PROFILE, SMS_MMS_MANAGED_PROFILE);
+            return Arrays.asList(
+                    DIAL_DATA_MANAGED_PROFILE,
+                    DIAL_MIME_MANAGED_PROFILE,
+                    DIAL_RAW_MANAGED_PROFILE,
+                    CALL_MANAGED_PROFILE,
+                    SMS_MMS_MANAGED_PROFILE);
         }
         return Arrays.asList(DIAL_DATA, DIAL_MIME, DIAL_RAW, SMS_MMS);
     }

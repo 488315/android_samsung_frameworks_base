@@ -10,12 +10,14 @@ import android.os.RemoteException;
 public interface IKeyboardBacklightListener extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.input.IKeyboardBacklightListener";
 
-    void onBrightnessChanged(int i, IKeyboardBacklightState iKeyboardBacklightState, boolean z) throws RemoteException;
+    void onBrightnessChanged(int i, IKeyboardBacklightState iKeyboardBacklightState, boolean z)
+            throws RemoteException;
 
     public static class Default implements IKeyboardBacklightListener {
         @Override // android.hardware.input.IKeyboardBacklightListener
-        public void onBrightnessChanged(int deviceId, IKeyboardBacklightState state, boolean isTriggeredByKeyPress) throws RemoteException {
-        }
+        public void onBrightnessChanged(
+                int deviceId, IKeyboardBacklightState state, boolean isTriggeredByKeyPress)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,7 @@ public interface IKeyboardBacklightListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyboardBacklightListener {
+    public abstract static class Stub extends Binder implements IKeyboardBacklightListener {
         static final int TRANSACTION_onBrightnessChanged = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface IKeyboardBacklightListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKeyboardBacklightListener.DESCRIPTOR);
             }
@@ -72,7 +75,9 @@ public interface IKeyboardBacklightListener extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    IKeyboardBacklightState _arg1 = (IKeyboardBacklightState) data.readTypedObject(IKeyboardBacklightState.CREATOR);
+                    IKeyboardBacklightState _arg1 =
+                            (IKeyboardBacklightState)
+                                    data.readTypedObject(IKeyboardBacklightState.CREATOR);
                     boolean _arg2 = data.readBoolean();
                     data.enforceNoDataAvail();
                     onBrightnessChanged(_arg0, _arg1, _arg2);
@@ -99,7 +104,9 @@ public interface IKeyboardBacklightListener extends IInterface {
             }
 
             @Override // android.hardware.input.IKeyboardBacklightListener
-            public void onBrightnessChanged(int deviceId, IKeyboardBacklightState state, boolean isTriggeredByKeyPress) throws RemoteException {
+            public void onBrightnessChanged(
+                    int deviceId, IKeyboardBacklightState state, boolean isTriggeredByKeyPress)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IKeyboardBacklightListener.DESCRIPTOR);

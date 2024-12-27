@@ -5,8 +5,10 @@ public class EnterpriseEmailContentProviderURI {
     public static final String ACTION_UNLOCK_CREDENTIAL_INTERNAL = "com.android.credentials.UNLOCK";
     public static final String EMAILACCOUNTPOLICY_GET_ACCOUNT = "getEmailAccount";
     public static final String EMAILACCOUNTPOLICY_GET_EAS_ACCOUNT = "getEASAccount";
-    public static final String EMAILPOLICY_ACTION_INTERNAL_MDM_ACCOUNT_DELETE_RESULT = "com.samsung.android.knox.intent.action.MDM_ACCOUNT_DELETE_RESULT_INTERNAL";
-    public static final String EMAILPOLICY_ACTION_INTERNAL_MDM_ACCOUNT_SETUP_RESULT = "com.samsung.android.knox.intent.action.MDM_ACCOUNT_SETUP_RESULT_INTERNAL";
+    public static final String EMAILPOLICY_ACTION_INTERNAL_MDM_ACCOUNT_DELETE_RESULT =
+            "com.samsung.android.knox.intent.action.MDM_ACCOUNT_DELETE_RESULT_INTERNAL";
+    public static final String EMAILPOLICY_ACTION_INTERNAL_MDM_ACCOUNT_SETUP_RESULT =
+            "com.samsung.android.knox.intent.action.MDM_ACCOUNT_SETUP_RESULT_INTERNAL";
     public static final int EMAILPOLICY_EMAIL_FAIL_BIND_PASSWORD_INTERNAL = 1001;
     public static final String EMAILPOLICY_GET_ACCOUNT_INFO = "getAccountInfo";
     public static final String EMAILPOLICY_UPDATE_ACCOUNT = "updateEmailAccount";
@@ -21,6 +23,5 @@ public class EnterpriseEmailContentProviderURI {
     public static final String LDAPACCOUNTPOLICY_GET_ALL_LDAP_ACCOUNT = "getAllLDAPAccounts";
     public static final String LDAPACCOUNTPOLICY_GET_LDAP_ACCOUNT = "getLDAPAccount";
 
-    private EnterpriseEmailContentProviderURI() {
-    }
+    private EnterpriseEmailContentProviderURI() {}
 }

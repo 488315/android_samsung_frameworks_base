@@ -14,6 +14,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.Extensions;
 import com.android.internal.org.bouncycastle.operator.ContentVerifier;
 import com.android.internal.org.bouncycastle.operator.ContentVerifierProvider;
 import com.android.internal.org.bouncycastle.util.Encodable;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -69,7 +70,8 @@ public class X509AttributeCertificateHolder implements Encodable, Serializable {
     }
 
     public AttributeCertificateHolder getHolder() {
-        return new AttributeCertificateHolder((ASN1Sequence) this.attrCert.getAcinfo().getHolder().toASN1Primitive());
+        return new AttributeCertificateHolder(
+                (ASN1Sequence) this.attrCert.getAcinfo().getHolder().toASN1Primitive());
     }
 
     public AttributeCertificateIssuer getIssuer() {
@@ -77,11 +79,13 @@ public class X509AttributeCertificateHolder implements Encodable, Serializable {
     }
 
     public Date getNotBefore() {
-        return CertUtils.recoverDate(this.attrCert.getAcinfo().getAttrCertValidityPeriod().getNotBeforeTime());
+        return CertUtils.recoverDate(
+                this.attrCert.getAcinfo().getAttrCertValidityPeriod().getNotBeforeTime());
     }
 
     public Date getNotAfter() {
-        return CertUtils.recoverDate(this.attrCert.getAcinfo().getAttrCertValidityPeriod().getNotAfterTime());
+        return CertUtils.recoverDate(
+                this.attrCert.getAcinfo().getAttrCertValidityPeriod().getNotAfterTime());
     }
 
     public Attribute[] getAttributes() {
@@ -153,8 +157,12 @@ public class X509AttributeCertificateHolder implements Encodable, Serializable {
     }
 
     public boolean isValidOn(Date date) {
-        AttCertValidityPeriod certValidityPeriod = this.attrCert.getAcinfo().getAttrCertValidityPeriod();
-        return (date.before(CertUtils.recoverDate(certValidityPeriod.getNotBeforeTime())) || date.after(CertUtils.recoverDate(certValidityPeriod.getNotAfterTime()))) ? false : true;
+        AttCertValidityPeriod certValidityPeriod =
+                this.attrCert.getAcinfo().getAttrCertValidityPeriod();
+        return (date.before(CertUtils.recoverDate(certValidityPeriod.getNotBeforeTime()))
+                        || date.after(CertUtils.recoverDate(certValidityPeriod.getNotAfterTime())))
+                ? false
+                : true;
     }
 
     public boolean isSignatureValid(ContentVerifierProvider verifierProvider) throws CertException {

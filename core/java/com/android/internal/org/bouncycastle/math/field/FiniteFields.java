@@ -9,11 +9,13 @@ public abstract class FiniteFields {
 
     public static PolynomialExtensionField getBinaryExtensionField(int[] exponents) {
         if (exponents[0] != 0) {
-            throw new IllegalArgumentException("Irreducible polynomials in GF(2) must have constant term");
+            throw new IllegalArgumentException(
+                    "Irreducible polynomials in GF(2) must have constant term");
         }
         for (int i = 1; i < exponents.length; i++) {
             if (exponents[i] <= exponents[i - 1]) {
-                throw new IllegalArgumentException("Polynomial exponents must be monotonically increasing");
+                throw new IllegalArgumentException(
+                        "Polynomial exponents must be monotonically increasing");
             }
         }
         return new GenericPolynomialExtensionField(GF_2, new GF2Polynomial(exponents));

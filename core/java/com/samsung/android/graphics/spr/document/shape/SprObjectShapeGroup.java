@@ -3,17 +3,20 @@ package com.samsung.android.graphics.spr.document.shape;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
+
 import com.samsung.android.graphics.spr.document.SprDocument;
 import com.samsung.android.graphics.spr.document.SprInputStream;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeShadow;
 import com.samsung.android.wallpaperbackup.GenerateXML;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes6.dex */
 public class SprObjectShapeGroup extends SprObjectBase {
@@ -41,7 +44,8 @@ public class SprObjectShapeGroup extends SprObjectBase {
         fromSPR(in);
     }
 
-    public SprObjectShapeGroup(boolean root, XmlPullParser parser) throws IOException, XmlPullParserException {
+    public SprObjectShapeGroup(boolean root, XmlPullParser parser)
+            throws IOException, XmlPullParserException {
         super((byte) 16);
         this.mIsInitialized = false;
         this.mObjectList = null;
@@ -140,7 +144,14 @@ public class SprObjectShapeGroup extends SprObjectBase {
         int n = parser.getAttributeCount();
         for (int i = 0; i < n; i++) {
             String name = parser.getAttributeName(i);
-            if (!"name".equals(name) && !GenerateXML.ROTATION.equals(name) && !"pivotX".equals(name) && !"pivotY".equals(name) && !"translateX".equals(name) && !"translateX".equals(name) && !"scaleX".equals(name) && !"scaleX".equals(name)) {
+            if (!"name".equals(name)
+                    && !GenerateXML.ROTATION.equals(name)
+                    && !"pivotX".equals(name)
+                    && !"pivotY".equals(name)
+                    && !"translateX".equals(name)
+                    && !"translateX".equals(name)
+                    && !"scaleX".equals(name)
+                    && !"scaleX".equals(name)) {
                 "alpha".equals(name);
             }
         }
@@ -281,13 +292,25 @@ public class SprObjectShapeGroup extends SprObjectBase {
     }
 
     @Override // com.samsung.android.graphics.spr.document.shape.SprObjectBase
-    public void preDraw(SprDocument document, Paint strokePaint, Paint fillPaint, boolean isVisibleStroke, boolean isVisibleFill, SprAttributeShadow shadow) {
+    public void preDraw(
+            SprDocument document,
+            Paint strokePaint,
+            Paint fillPaint,
+            boolean isVisibleStroke,
+            boolean isVisibleFill,
+            SprAttributeShadow shadow) {
         super.preDraw(document, strokePaint, fillPaint, isVisibleStroke, isVisibleFill, shadow);
         int n = getObjectCount();
         for (int i = 0; i < n; i++) {
             SprObjectBase object = getObject(i);
             if (object != null) {
-                object.preDraw(document, this.strokePaint, this.fillPaint, this.isVisibleStroke, this.isVisibleFill, this.shadow);
+                object.preDraw(
+                        document,
+                        this.strokePaint,
+                        this.fillPaint,
+                        this.isVisibleStroke,
+                        this.isVisibleFill,
+                        this.shadow);
             }
         }
     }

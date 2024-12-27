@@ -3,23 +3,26 @@ package android.hardware.radio.network;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class CellInfoRatSpecificInfo implements Parcelable {
-    public static final Parcelable.Creator<CellInfoRatSpecificInfo> CREATOR = new Parcelable.Creator<CellInfoRatSpecificInfo>() { // from class: android.hardware.radio.network.CellInfoRatSpecificInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoRatSpecificInfo createFromParcel(Parcel _aidl_source) {
-            return new CellInfoRatSpecificInfo(_aidl_source);
-        }
+    public static final Parcelable.Creator<CellInfoRatSpecificInfo> CREATOR =
+            new Parcelable.Creator<CellInfoRatSpecificInfo>() { // from class:
+                // android.hardware.radio.network.CellInfoRatSpecificInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoRatSpecificInfo createFromParcel(Parcel _aidl_source) {
+                    return new CellInfoRatSpecificInfo(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoRatSpecificInfo[] newArray(int _aidl_size) {
-            return new CellInfoRatSpecificInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoRatSpecificInfo[] newArray(int _aidl_size) {
+                    return new CellInfoRatSpecificInfo[_aidl_size];
+                }
+            };
     public static final int cdma = 5;
     public static final int gsm = 0;
     public static final int lte = 3;
@@ -168,27 +171,33 @@ public final class CellInfoRatSpecificInfo implements Parcelable {
         int _aidl_tag = _aidl_parcel.readInt();
         switch (_aidl_tag) {
             case 0:
-                CellInfoGsm _aidl_value = (CellInfoGsm) _aidl_parcel.readTypedObject(CellInfoGsm.CREATOR);
+                CellInfoGsm _aidl_value =
+                        (CellInfoGsm) _aidl_parcel.readTypedObject(CellInfoGsm.CREATOR);
                 _set(_aidl_tag, _aidl_value);
                 return;
             case 1:
-                CellInfoWcdma _aidl_value2 = (CellInfoWcdma) _aidl_parcel.readTypedObject(CellInfoWcdma.CREATOR);
+                CellInfoWcdma _aidl_value2 =
+                        (CellInfoWcdma) _aidl_parcel.readTypedObject(CellInfoWcdma.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
-                CellInfoTdscdma _aidl_value3 = (CellInfoTdscdma) _aidl_parcel.readTypedObject(CellInfoTdscdma.CREATOR);
+                CellInfoTdscdma _aidl_value3 =
+                        (CellInfoTdscdma) _aidl_parcel.readTypedObject(CellInfoTdscdma.CREATOR);
                 _set(_aidl_tag, _aidl_value3);
                 return;
             case 3:
-                CellInfoLte _aidl_value4 = (CellInfoLte) _aidl_parcel.readTypedObject(CellInfoLte.CREATOR);
+                CellInfoLte _aidl_value4 =
+                        (CellInfoLte) _aidl_parcel.readTypedObject(CellInfoLte.CREATOR);
                 _set(_aidl_tag, _aidl_value4);
                 return;
             case 4:
-                CellInfoNr _aidl_value5 = (CellInfoNr) _aidl_parcel.readTypedObject(CellInfoNr.CREATOR);
+                CellInfoNr _aidl_value5 =
+                        (CellInfoNr) _aidl_parcel.readTypedObject(CellInfoNr.CREATOR);
                 _set(_aidl_tag, _aidl_value5);
                 return;
             case 5:
-                CellInfoCdma _aidl_value6 = (CellInfoCdma) _aidl_parcel.readTypedObject(CellInfoCdma.CREATOR);
+                CellInfoCdma _aidl_value6 =
+                        (CellInfoCdma) _aidl_parcel.readTypedObject(CellInfoCdma.CREATOR);
                 _set(_aidl_tag, _aidl_value6);
                 return;
             default:
@@ -232,17 +241,29 @@ public final class CellInfoRatSpecificInfo implements Parcelable {
     public String toString() {
         switch (this._tag) {
             case 0:
-                return "CellInfoRatSpecificInfo.gsm(" + Objects.toString(getGsm()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellInfoRatSpecificInfo.gsm("
+                        + Objects.toString(getGsm())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "CellInfoRatSpecificInfo.wcdma(" + Objects.toString(getWcdma()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellInfoRatSpecificInfo.wcdma("
+                        + Objects.toString(getWcdma())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 2:
-                return "CellInfoRatSpecificInfo.tdscdma(" + Objects.toString(getTdscdma()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellInfoRatSpecificInfo.tdscdma("
+                        + Objects.toString(getTdscdma())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 3:
-                return "CellInfoRatSpecificInfo.lte(" + Objects.toString(getLte()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellInfoRatSpecificInfo.lte("
+                        + Objects.toString(getLte())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 4:
-                return "CellInfoRatSpecificInfo.nr(" + Objects.toString(getNr()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellInfoRatSpecificInfo.nr("
+                        + Objects.toString(getNr())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 5:
-                return "CellInfoRatSpecificInfo.cdma(" + Objects.toString(getCdma()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellInfoRatSpecificInfo.cdma("
+                        + Objects.toString(getCdma())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -250,7 +271,12 @@ public final class CellInfoRatSpecificInfo implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

@@ -14,20 +14,23 @@ public final class SemWifiDisplay implements Parcelable {
     public static final String VIEW_MODE_NONE = "none";
     private WifiDisplay mWfd;
     public static final SemWifiDisplay[] EMPTY_ARRAY = new SemWifiDisplay[0];
-    public static final Parcelable.Creator<SemWifiDisplay> CREATOR = new Parcelable.Creator<SemWifiDisplay>() { // from class: android.hardware.display.SemWifiDisplay.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiDisplay createFromParcel(Parcel in) {
-            WifiDisplay display = (WifiDisplay) in.readParcelable(WifiDisplay.class.getClassLoader());
-            return new SemWifiDisplay(display);
-        }
+    public static final Parcelable.Creator<SemWifiDisplay> CREATOR =
+            new Parcelable.Creator<
+                    SemWifiDisplay>() { // from class: android.hardware.display.SemWifiDisplay.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiDisplay createFromParcel(Parcel in) {
+                    WifiDisplay display =
+                            (WifiDisplay) in.readParcelable(WifiDisplay.class.getClassLoader());
+                    return new SemWifiDisplay(display);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiDisplay[] newArray(int size) {
-            return size == 0 ? SemWifiDisplay.EMPTY_ARRAY : new SemWifiDisplay[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiDisplay[] newArray(int size) {
+                    return size == 0 ? SemWifiDisplay.EMPTY_ARRAY : new SemWifiDisplay[size];
+                }
+            };
 
     public SemWifiDisplay(WifiDisplay wfd) {
         this.mWfd = wfd;
@@ -115,7 +118,9 @@ public final class SemWifiDisplay implements Parcelable {
     }
 
     public boolean equals(SemWifiDisplay other) {
-        return other != null && getDeviceAddress().equals(other.getDeviceAddress()) && getDeviceName().equals(other.getDeviceName());
+        return other != null
+                && getDeviceAddress().equals(other.getDeviceAddress())
+                && getDeviceName().equals(other.getDeviceName());
     }
 
     public int hashCode() {

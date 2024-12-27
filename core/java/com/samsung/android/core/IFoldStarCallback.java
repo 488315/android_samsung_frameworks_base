@@ -16,8 +16,8 @@ public interface IFoldStarCallback extends IInterface {
 
     public static class Default implements IFoldStarCallback {
         @Override // com.samsung.android.core.IFoldStarCallback
-        public void onBoundsCompatPackageAppeared(int mode, String packageName) throws RemoteException {
-        }
+        public void onBoundsCompatPackageAppeared(int mode, String packageName)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +25,7 @@ public interface IFoldStarCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFoldStarCallback {
+    public abstract static class Stub extends Binder implements IFoldStarCallback {
         static final int TRANSACTION_onBoundsCompatPackageAppeared = 1;
 
         public Stub() {
@@ -63,7 +63,8 @@ public interface IFoldStarCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFoldStarCallback.DESCRIPTOR);
             }
@@ -100,7 +101,8 @@ public interface IFoldStarCallback extends IInterface {
             }
 
             @Override // com.samsung.android.core.IFoldStarCallback
-            public void onBoundsCompatPackageAppeared(int mode, String packageName) throws RemoteException {
+            public void onBoundsCompatPackageAppeared(int mode, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFoldStarCallback.DESCRIPTOR);

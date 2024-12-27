@@ -13,29 +13,45 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface ISemExecuteManager extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.app.ISemExecuteManager";
 
-    ApplicationInfo getApplicationInfo(String str, String str2, int i, UserHandle userHandle) throws RemoteException;
+    ApplicationInfo getApplicationInfo(String str, String str2, int i, UserHandle userHandle)
+            throws RemoteException;
 
     SemExecutableInfo getExecutableInfo(String str) throws RemoteException;
 
     List<SemExecutableInfo> getExecutableInfos() throws RemoteException;
 
-    ParcelFileDescriptor getShortcutIconFd(String str, String str2, String str3, String str4, int i) throws RemoteException;
+    ParcelFileDescriptor getShortcutIconFd(String str, String str2, String str3, String str4, int i)
+            throws RemoteException;
 
-    ParceledListSlice getShortcuts(String str, String str2, long j, String str3, List list, ComponentName componentName, int i, UserHandle userHandle) throws RemoteException;
+    ParceledListSlice getShortcuts(
+            String str,
+            String str2,
+            long j,
+            String str3,
+            List list,
+            ComponentName componentName,
+            int i,
+            UserHandle userHandle)
+            throws RemoteException;
 
     boolean hasShortcutHostPermission(String str) throws RemoteException;
 
-    void registerChangedCallback(String str, PendingIntent pendingIntent, UserHandle userHandle) throws RemoteException;
+    void registerChangedCallback(String str, PendingIntent pendingIntent, UserHandle userHandle)
+            throws RemoteException;
 
-    boolean startShortcut(String str, String str2, String str3, String str4, Rect rect, Bundle bundle, int i) throws RemoteException;
+    boolean startShortcut(
+            String str, String str2, String str3, String str4, Rect rect, Bundle bundle, int i)
+            throws RemoteException;
 
-    void unRegisterChangedCallback(String str, PendingIntent pendingIntent, UserHandle userHandle) throws RemoteException;
+    void unRegisterChangedCallback(String str, PendingIntent pendingIntent, UserHandle userHandle)
+            throws RemoteException;
 
     public static class Default implements ISemExecuteManager {
         @Override // com.samsung.android.app.ISemExecuteManager
@@ -49,7 +65,13 @@ public interface ISemExecuteManager extends IInterface {
         }
 
         @Override // com.samsung.android.app.ISemExecuteManager
-        public ParcelFileDescriptor getShortcutIconFd(String callingPackage, String targetLauncherPackage, String packageName, String id, int userId) throws RemoteException {
+        public ParcelFileDescriptor getShortcutIconFd(
+                String callingPackage,
+                String targetLauncherPackage,
+                String packageName,
+                String id,
+                int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -59,27 +81,48 @@ public interface ISemExecuteManager extends IInterface {
         }
 
         @Override // com.samsung.android.app.ISemExecuteManager
-        public ParceledListSlice getShortcuts(String callingPackage, String targetLauncherPackage, long changedSince, String packageName, List shortcutIds, ComponentName componentName, int flags, UserHandle user) throws RemoteException {
+        public ParceledListSlice getShortcuts(
+                String callingPackage,
+                String targetLauncherPackage,
+                long changedSince,
+                String packageName,
+                List shortcutIds,
+                ComponentName componentName,
+                int flags,
+                UserHandle user)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.app.ISemExecuteManager
-        public boolean startShortcut(String callingPackage, String targetLauncherPackage, String packageName, String id, Rect sourceBounds, Bundle startActivityOptions, int userId) throws RemoteException {
+        public boolean startShortcut(
+                String callingPackage,
+                String targetLauncherPackage,
+                String packageName,
+                String id,
+                Rect sourceBounds,
+                Bundle startActivityOptions,
+                int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.app.ISemExecuteManager
-        public ApplicationInfo getApplicationInfo(String callingPackage, String packageName, int flags, UserHandle user) throws RemoteException {
+        public ApplicationInfo getApplicationInfo(
+                String callingPackage, String packageName, int flags, UserHandle user)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.app.ISemExecuteManager
-        public void registerChangedCallback(String packageName, PendingIntent pIntent, UserHandle user) throws RemoteException {
-        }
+        public void registerChangedCallback(
+                String packageName, PendingIntent pIntent, UserHandle user)
+                throws RemoteException {}
 
         @Override // com.samsung.android.app.ISemExecuteManager
-        public void unRegisterChangedCallback(String packageName, PendingIntent pIntent, UserHandle user) throws RemoteException {
-        }
+        public void unRegisterChangedCallback(
+                String packageName, PendingIntent pIntent, UserHandle user)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -87,7 +130,7 @@ public interface ISemExecuteManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemExecuteManager {
+    public abstract static class Stub extends Binder implements ISemExecuteManager {
         static final int TRANSACTION_getApplicationInfo = 7;
         static final int TRANSACTION_getExecutableInfo = 2;
         static final int TRANSACTION_getExecutableInfos = 1;
@@ -149,7 +192,8 @@ public interface ISemExecuteManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemExecuteManager.DESCRIPTOR);
             }
@@ -177,7 +221,8 @@ public interface ISemExecuteManager extends IInterface {
                     String _arg3 = data.readString();
                     int _arg4 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result3 = getShortcutIconFd(_arg02, _arg1, _arg2, _arg3, _arg4);
+                    ParcelFileDescriptor _result3 =
+                            getShortcutIconFd(_arg02, _arg1, _arg2, _arg3, _arg4);
                     reply.writeNoException();
                     reply.writeTypedObject(_result3, 1);
                     return true;
@@ -195,11 +240,14 @@ public interface ISemExecuteManager extends IInterface {
                     String _arg32 = data.readString();
                     ClassLoader cl = getClass().getClassLoader();
                     List _arg42 = data.readArrayList(cl);
-                    ComponentName _arg5 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg5 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg6 = data.readInt();
                     UserHandle _arg7 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result5 = getShortcuts(_arg04, _arg12, _arg22, _arg32, _arg42, _arg5, _arg6, _arg7);
+                    ParceledListSlice _result5 =
+                            getShortcuts(
+                                    _arg04, _arg12, _arg22, _arg32, _arg42, _arg5, _arg6, _arg7);
                     reply.writeNoException();
                     reply.writeTypedObject(_result5, 1);
                     return true;
@@ -212,7 +260,8 @@ public interface ISemExecuteManager extends IInterface {
                     Bundle _arg52 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg62 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result6 = startShortcut(_arg05, _arg13, _arg23, _arg33, _arg43, _arg52, _arg62);
+                    boolean _result6 =
+                            startShortcut(_arg05, _arg13, _arg23, _arg33, _arg43, _arg52, _arg62);
                     reply.writeNoException();
                     reply.writeBoolean(_result6);
                     return true;
@@ -228,7 +277,8 @@ public interface ISemExecuteManager extends IInterface {
                     return true;
                 case 8:
                     String _arg07 = data.readString();
-                    PendingIntent _arg15 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg15 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     UserHandle _arg25 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
                     registerChangedCallback(_arg07, _arg15, _arg25);
@@ -236,7 +286,8 @@ public interface ISemExecuteManager extends IInterface {
                     return true;
                 case 9:
                     String _arg08 = data.readString();
-                    PendingIntent _arg16 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg16 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     UserHandle _arg26 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
                     unRegisterChangedCallback(_arg08, _arg16, _arg26);
@@ -271,7 +322,8 @@ public interface ISemExecuteManager extends IInterface {
                     _data.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    List<SemExecutableInfo> _result = _reply.createTypedArrayList(SemExecutableInfo.CREATOR);
+                    List<SemExecutableInfo> _result =
+                            _reply.createTypedArrayList(SemExecutableInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -288,7 +340,8 @@ public interface ISemExecuteManager extends IInterface {
                     _data.writeString(id);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    SemExecutableInfo _result = (SemExecutableInfo) _reply.readTypedObject(SemExecutableInfo.CREATOR);
+                    SemExecutableInfo _result =
+                            (SemExecutableInfo) _reply.readTypedObject(SemExecutableInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -297,7 +350,13 @@ public interface ISemExecuteManager extends IInterface {
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
-            public ParcelFileDescriptor getShortcutIconFd(String callingPackage, String targetLauncherPackage, String packageName, String id, int userId) throws RemoteException {
+            public ParcelFileDescriptor getShortcutIconFd(
+                    String callingPackage,
+                    String targetLauncherPackage,
+                    String packageName,
+                    String id,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -309,7 +368,9 @@ public interface ISemExecuteManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -335,7 +396,16 @@ public interface ISemExecuteManager extends IInterface {
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
-            public ParceledListSlice getShortcuts(String callingPackage, String targetLauncherPackage, long changedSince, String packageName, List shortcutIds, ComponentName componentName, int flags, UserHandle user) throws RemoteException {
+            public ParceledListSlice getShortcuts(
+                    String callingPackage,
+                    String targetLauncherPackage,
+                    long changedSince,
+                    String packageName,
+                    List shortcutIds,
+                    ComponentName componentName,
+                    int flags,
+                    UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -350,7 +420,8 @@ public interface ISemExecuteManager extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -359,7 +430,15 @@ public interface ISemExecuteManager extends IInterface {
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
-            public boolean startShortcut(String callingPackage, String targetLauncherPackage, String packageName, String id, Rect sourceBounds, Bundle startActivityOptions, int userId) throws RemoteException {
+            public boolean startShortcut(
+                    String callingPackage,
+                    String targetLauncherPackage,
+                    String packageName,
+                    String id,
+                    Rect sourceBounds,
+                    Bundle startActivityOptions,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -382,7 +461,9 @@ public interface ISemExecuteManager extends IInterface {
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
-            public ApplicationInfo getApplicationInfo(String callingPackage, String packageName, int flags, UserHandle user) throws RemoteException {
+            public ApplicationInfo getApplicationInfo(
+                    String callingPackage, String packageName, int flags, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -393,7 +474,8 @@ public interface ISemExecuteManager extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    ApplicationInfo _result = (ApplicationInfo) _reply.readTypedObject(ApplicationInfo.CREATOR);
+                    ApplicationInfo _result =
+                            (ApplicationInfo) _reply.readTypedObject(ApplicationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -402,7 +484,9 @@ public interface ISemExecuteManager extends IInterface {
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
-            public void registerChangedCallback(String packageName, PendingIntent pIntent, UserHandle user) throws RemoteException {
+            public void registerChangedCallback(
+                    String packageName, PendingIntent pIntent, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -419,7 +503,9 @@ public interface ISemExecuteManager extends IInterface {
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
-            public void unRegisterChangedCallback(String packageName, PendingIntent pIntent, UserHandle user) throws RemoteException {
+            public void unRegisterChangedCallback(
+                    String packageName, PendingIntent pIntent, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

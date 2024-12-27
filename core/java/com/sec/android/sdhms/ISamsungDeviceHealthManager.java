@@ -13,11 +13,13 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.os.Temperature;
+
 import com.samsung.android.sdhms.SemBatteryEventHistory;
 import com.samsung.android.sdhms.SemBatteryStats;
 import com.samsung.android.sdhms.SemNetworkUsageStats;
 import com.samsung.android.sdhms.SemProcessUsageStats;
 import com.samsung.android.sdhms.SemThermalStats;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -38,7 +40,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
 
     int[] getAllTemperatures(int i) throws RemoteException;
 
-    List<SemBatteryEventHistory> getBatteryEventHistory(long j, long j2, int i) throws RemoteException;
+    List<SemBatteryEventHistory> getBatteryEventHistory(long j, long j2, int i)
+            throws RemoteException;
 
     List<SemBatteryStats> getBatteryStats(int i, long j, long j2, boolean z) throws RemoteException;
 
@@ -130,24 +133,23 @@ public interface ISamsungDeviceHealthManager extends IInterface {
 
     public static class Default implements ISamsungDeviceHealthManager {
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void logAction(String pkgNameForContext, int category, List<Bundle> taggedData) throws RemoteException {
-        }
+        public void logAction(String pkgNameForContext, int category, List<Bundle> taggedData)
+                throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void logActionWithPkg(String pkgNameForContext, int category, String pkg, List<Bundle> taggedData) throws RemoteException {
-        }
+        public void logActionWithPkg(
+                String pkgNameForContext, int category, String pkg, List<Bundle> taggedData)
+                throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void logActionWithSource(String pkgNameForContext, int source, int category) throws RemoteException {
-        }
+        public void logActionWithSource(String pkgNameForContext, int source, int category)
+                throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void logAnomaly(Bundle bundle) throws RemoteException {
-        }
+        public void logAnomaly(Bundle bundle) throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void sendCommand(String type, String value) throws RemoteException {
-        }
+        public void sendCommand(String type, String value) throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
         public int getRemainingUsageTime(int mode) throws RemoteException {
@@ -160,7 +162,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public float[] supportVRTemperaturesInformation(String callingPackage, int type, int source) throws RemoteException {
+        public float[] supportVRTemperaturesInformation(String callingPackage, int type, int source)
+                throws RemoteException {
             return null;
         }
 
@@ -170,20 +173,17 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void initGameSdkMaxlock(IBinder token, IBinder callbackBinder) throws RemoteException {
-        }
+        public void initGameSdkMaxlock(IBinder token, IBinder callbackBinder)
+                throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void acquireGameSdkMaxlock(int cpuPerc, int gpuPerc) throws RemoteException {
-        }
+        public void acquireGameSdkMaxlock(int cpuPerc, int gpuPerc) throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void releaseGameSdkMaxlock() throws RemoteException {
-        }
+        public void releaseGameSdkMaxlock() throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void destroyGameSdkMaxlock() throws RemoteException {
-        }
+        public void destroyGameSdkMaxlock() throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
         public int getLRTemperature() throws RemoteException {
@@ -191,7 +191,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public List<SemBatteryStats> getBatteryStats(int intervalType, long from, long to, boolean includeApp) throws RemoteException {
+        public List<SemBatteryStats> getBatteryStats(
+                int intervalType, long from, long to, boolean includeApp) throws RemoteException {
             return null;
         }
 
@@ -221,8 +222,7 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void registerCallback(IThermalEventListener cb) throws RemoteException {
-        }
+        public void registerCallback(IThermalEventListener cb) throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
         public int getTemperature(int type) throws RemoteException {
@@ -230,7 +230,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public List<SemBatteryEventHistory> getBatteryEventHistory(long from, long to, int historyTypes) throws RemoteException {
+        public List<SemBatteryEventHistory> getBatteryEventHistory(
+                long from, long to, int historyTypes) throws RemoteException {
             return null;
         }
 
@@ -245,12 +246,14 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public List<SemProcessUsageStats> getProcessUsageStats(long from, long to) throws RemoteException {
+        public List<SemProcessUsageStats> getProcessUsageStats(long from, long to)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public List<SemNetworkUsageStats> getNetworkUsageStats(long from, long to) throws RemoteException {
+        public List<SemNetworkUsageStats> getNetworkUsageStats(long from, long to)
+                throws RemoteException {
             return null;
         }
 
@@ -260,7 +263,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public boolean setThermalThrottlingDeltaWithPackageName(String pkgName, int value) throws RemoteException {
+        public boolean setThermalThrottlingDeltaWithPackageName(String pkgName, int value)
+                throws RemoteException {
             return false;
         }
 
@@ -275,12 +279,10 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void updateSpaOperation(boolean on, IBinder token) throws RemoteException {
-        }
+        public void updateSpaOperation(boolean on, IBinder token) throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void updateGameSdkOperation(boolean on, IBinder token) throws RemoteException {
-        }
+        public void updateGameSdkOperation(boolean on, IBinder token) throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
         public Bundle getGameSiopInfo() throws RemoteException {
@@ -293,7 +295,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public List<OverheatReasonInternal> getOverheatReason(long from, long to) throws RemoteException {
+        public List<OverheatReasonInternal> getOverheatReason(long from, long to)
+                throws RemoteException {
             return null;
         }
 
@@ -353,18 +356,19 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public boolean updateConfigPart(String configName, String configPartName, String configData) throws RemoteException {
+        public boolean updateConfigPart(String configName, String configPartName, String configData)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public boolean removeConfigPart(String configName, String configPartName) throws RemoteException {
+        public boolean removeConfigPart(String configName, String configPartName)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-        public void setHighBrightnessMode(boolean on) throws RemoteException {
-        }
+        public void setHighBrightnessMode(boolean on) throws RemoteException {}
 
         @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
         public boolean getHighBrightnessMode() throws RemoteException {
@@ -382,7 +386,7 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISamsungDeviceHealthManager {
+    public abstract static class Stub extends Binder implements ISamsungDeviceHealthManager {
         static final int TRANSACTION_acquireGameSdkMaxlock = 11;
         static final int TRANSACTION_addHeavyLoadApps = 40;
         static final int TRANSACTION_addLowModeApps = 42;
@@ -447,7 +451,9 @@ public interface ISamsungDeviceHealthManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static ISamsungDeviceHealthManager asInterface(IBinder obj) {
@@ -583,7 +589,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISamsungDeviceHealthManager.DESCRIPTOR);
             }
@@ -693,7 +700,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     long _arg25 = data.readLong();
                     boolean _arg32 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    List<SemBatteryStats> _result6 = getBatteryStats(_arg012, _arg19, _arg25, _arg32);
+                    List<SemBatteryStats> _result6 =
+                            getBatteryStats(_arg012, _arg19, _arg25, _arg32);
                     reply.writeNoException();
                     reply.writeTypedList(_result6, 1);
                     return true;
@@ -728,7 +736,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     reply.writeTypedList(_result11, 1);
                     return true;
                 case 21:
-                    IThermalEventListener _arg015 = IThermalEventListener.Stub.asInterface(data.readStrongBinder());
+                    IThermalEventListener _arg015 =
+                            IThermalEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallback(_arg015);
                     reply.writeNoException();
@@ -745,7 +754,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     long _arg111 = data.readLong();
                     int _arg26 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<SemBatteryEventHistory> _result13 = getBatteryEventHistory(_arg017, _arg111, _arg26);
+                    List<SemBatteryEventHistory> _result13 =
+                            getBatteryEventHistory(_arg017, _arg111, _arg26);
                     reply.writeNoException();
                     reply.writeTypedList(_result13, 1);
                     return true;
@@ -823,7 +833,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     reply.writeTypedObject(_result22, 1);
                     return true;
                 case 35:
-                    PendingIntent _arg025 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg025 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result23 = setAnomalyConfig(_arg025);
                     reply.writeNoException();
@@ -961,7 +972,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public void logAction(String pkgNameForContext, int category, List<Bundle> taggedData) throws RemoteException {
+            public void logAction(String pkgNameForContext, int category, List<Bundle> taggedData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -978,7 +990,9 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public void logActionWithPkg(String pkgNameForContext, int category, String pkg, List<Bundle> taggedData) throws RemoteException {
+            public void logActionWithPkg(
+                    String pkgNameForContext, int category, String pkg, List<Bundle> taggedData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -996,7 +1010,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public void logActionWithSource(String pkgNameForContext, int source, int category) throws RemoteException {
+            public void logActionWithSource(String pkgNameForContext, int source, int category)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1058,7 +1073,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public int getRemainingUsageTimeWithSettings(int mode, int flags) throws RemoteException {
+            public int getRemainingUsageTimeWithSettings(int mode, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1076,7 +1092,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public float[] supportVRTemperaturesInformation(String callingPackage, int type, int source) throws RemoteException {
+            public float[] supportVRTemperaturesInformation(
+                    String callingPackage, int type, int source) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1112,7 +1129,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public void initGameSdkMaxlock(IBinder token, IBinder callbackBinder) throws RemoteException {
+            public void initGameSdkMaxlock(IBinder token, IBinder callbackBinder)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1188,7 +1206,9 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public List<SemBatteryStats> getBatteryStats(int intervalType, long from, long to, boolean includeApp) throws RemoteException {
+            public List<SemBatteryStats> getBatteryStats(
+                    int intervalType, long from, long to, boolean includeApp)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1199,7 +1219,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     _data.writeBoolean(includeApp);
                     this.mRemote.transact(15, _data, _reply, 0);
                     _reply.readException();
-                    List<SemBatteryStats> _result = _reply.createTypedArrayList(SemBatteryStats.CREATOR);
+                    List<SemBatteryStats> _result =
+                            _reply.createTypedArrayList(SemBatteryStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1266,7 +1287,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     _data.writeInterfaceToken(ISamsungDeviceHealthManager.DESCRIPTOR);
                     this.mRemote.transact(19, _data, _reply, 0);
                     _reply.readException();
-                    List<CoolingDevice> _result = _reply.createTypedArrayList(CoolingDevice.CREATOR);
+                    List<CoolingDevice> _result =
+                            _reply.createTypedArrayList(CoolingDevice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1323,7 +1345,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public List<SemBatteryEventHistory> getBatteryEventHistory(long from, long to, int historyTypes) throws RemoteException {
+            public List<SemBatteryEventHistory> getBatteryEventHistory(
+                    long from, long to, int historyTypes) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1333,7 +1356,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     _data.writeInt(historyTypes);
                     this.mRemote.transact(23, _data, _reply, 0);
                     _reply.readException();
-                    List<SemBatteryEventHistory> _result = _reply.createTypedArrayList(SemBatteryEventHistory.CREATOR);
+                    List<SemBatteryEventHistory> _result =
+                            _reply.createTypedArrayList(SemBatteryEventHistory.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1358,7 +1382,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public List<SemThermalStats> getThermalStats(long from, long to) throws RemoteException {
+            public List<SemThermalStats> getThermalStats(long from, long to)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1367,7 +1392,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     _data.writeLong(to);
                     this.mRemote.transact(25, _data, _reply, 0);
                     _reply.readException();
-                    List<SemThermalStats> _result = _reply.createTypedArrayList(SemThermalStats.CREATOR);
+                    List<SemThermalStats> _result =
+                            _reply.createTypedArrayList(SemThermalStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1376,7 +1402,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public List<SemProcessUsageStats> getProcessUsageStats(long from, long to) throws RemoteException {
+            public List<SemProcessUsageStats> getProcessUsageStats(long from, long to)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1385,7 +1412,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     _data.writeLong(to);
                     this.mRemote.transact(26, _data, _reply, 0);
                     _reply.readException();
-                    List<SemProcessUsageStats> _result = _reply.createTypedArrayList(SemProcessUsageStats.CREATOR);
+                    List<SemProcessUsageStats> _result =
+                            _reply.createTypedArrayList(SemProcessUsageStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1394,7 +1422,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public List<SemNetworkUsageStats> getNetworkUsageStats(long from, long to) throws RemoteException {
+            public List<SemNetworkUsageStats> getNetworkUsageStats(long from, long to)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1403,7 +1432,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     _data.writeLong(to);
                     this.mRemote.transact(27, _data, _reply, 0);
                     _reply.readException();
-                    List<SemNetworkUsageStats> _result = _reply.createTypedArrayList(SemNetworkUsageStats.CREATOR);
+                    List<SemNetworkUsageStats> _result =
+                            _reply.createTypedArrayList(SemNetworkUsageStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1429,7 +1459,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public boolean setThermalThrottlingDeltaWithPackageName(String pkgName, int value) throws RemoteException {
+            public boolean setThermalThrottlingDeltaWithPackageName(String pkgName, int value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1544,7 +1575,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public List<OverheatReasonInternal> getOverheatReason(long from, long to) throws RemoteException {
+            public List<OverheatReasonInternal> getOverheatReason(long from, long to)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1553,7 +1585,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
                     _data.writeLong(to);
                     this.mRemote.transact(36, _data, _reply, 0);
                     _reply.readException();
-                    List<OverheatReasonInternal> _result = _reply.createTypedArrayList(OverheatReasonInternal.CREATOR);
+                    List<OverheatReasonInternal> _result =
+                            _reply.createTypedArrayList(OverheatReasonInternal.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1744,7 +1777,9 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public boolean updateConfigPart(String configName, String configPartName, String configData) throws RemoteException {
+            public boolean updateConfigPart(
+                    String configName, String configPartName, String configData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1763,7 +1798,8 @@ public interface ISamsungDeviceHealthManager extends IInterface {
             }
 
             @Override // com.sec.android.sdhms.ISamsungDeviceHealthManager
-            public boolean removeConfigPart(String configName, String configPartName) throws RemoteException {
+            public boolean removeConfigPart(String configName, String configPartName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1830,27 +1866,33 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         }
 
         protected void getBatteryStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getBatteryEventHistory_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getSupportedHistoryTypes_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void updateBatteryStatsInfo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BATTERY_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void updateConfigPart_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DUMP, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DUMP, getCallingPid(), getCallingUid());
         }
 
         protected void removeConfigPart_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DUMP, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DUMP, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

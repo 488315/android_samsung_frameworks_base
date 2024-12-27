@@ -3,14 +3,20 @@ package com.android.server.permission.access.permission;
 import com.android.server.permission.access.util.IntExtensionsKt;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
 import com.android.server.permission.jarjar.kotlin.ranges.IntRange;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.util.Locale;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class PermissionFlags {
     public static boolean isAppOpGranted(int i) {
-        return (!isPermissionGranted(i) || IntExtensionsKt.hasAnyBit(i, 786432) || IntExtensionsKt.hasBits(i, 1048576)) ? false : true;
+        return (!isPermissionGranted(i)
+                        || IntExtensionsKt.hasAnyBit(i, 786432)
+                        || IntExtensionsKt.hasBits(i, 1048576))
+                ? false
+                : true;
     }
 
     public static boolean isPermissionGranted(int i) {
@@ -20,7 +26,9 @@ public abstract class PermissionFlags {
         if (IntExtensionsKt.hasBits(i, 2)) {
             return false;
         }
-        if (IntExtensionsKt.hasBits(i, 4) || IntExtensionsKt.hasBits(i, 1024) || IntExtensionsKt.hasBits(i, 2048)) {
+        if (IntExtensionsKt.hasBits(i, 4)
+                || IntExtensionsKt.hasBits(i, 1024)
+                || IntExtensionsKt.hasBits(i, 2048)) {
             return true;
         }
         if (IntExtensionsKt.hasBits(i, 262144)) {
@@ -30,9 +38,9 @@ public abstract class PermissionFlags {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:41:0x008a, code lost:
-    
-        if (com.android.server.permission.access.util.IntExtensionsKt.hasBits(r7, 524288) != false) goto L43;
-     */
+
+       if (com.android.server.permission.access.util.IntExtensionsKt.hasBits(r7, 524288) != false) goto L43;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r0v12 */
     /* JADX WARN: Type inference failed for: r0v17, types: [int] */
@@ -157,7 +165,9 @@ public abstract class PermissionFlags {
         Lba:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.permission.access.permission.PermissionFlags.toApiFlags(int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.permission.access.permission.PermissionFlags.toApiFlags(int):int");
     }
 
     public static String toString(int i) {
@@ -206,7 +216,8 @@ public abstract class PermissionFlags {
                     case 8192:
                         str = "USER_SENSITIVE_WHEN_GRANTED";
                         break;
-                    case EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION /* 16384 */:
+                    case EndpointMonitorConst
+                            .FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION /* 16384 */:
                         str = "USER_SENSITIVE_WHEN_REVOKED";
                         break;
                     case 32768:
@@ -239,7 +250,8 @@ public abstract class PermissionFlags {
                     default:
                         long j = numberOfTrailingZeros & 4294967295L;
                         if (16 > new IntRange(2, 36).last) {
-                            throw new IllegalArgumentException("radix 16 was not in valid range " + new IntRange(2, 36));
+                            throw new IllegalArgumentException(
+                                    "radix 16 was not in valid range " + new IntRange(2, 36));
                         }
                         String l = Long.toString(j, 16);
                         Intrinsics.checkNotNullExpressionValue("toString(...)", l);
@@ -303,7 +315,8 @@ public abstract class PermissionFlags {
         if (IntExtensionsKt.hasBits(apiFlags, 8192)) {
             i6 |= 131072;
         }
-        if (IntExtensionsKt.hasBits(apiFlags, EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION)) {
+        if (IntExtensionsKt.hasBits(
+                apiFlags, EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION)) {
             if (IntExtensionsKt.hasBits(permission.permissionInfo.flags, 4)) {
                 i6 |= 262144;
             }
@@ -314,7 +327,8 @@ public abstract class PermissionFlags {
         if (IntExtensionsKt.hasBits(apiFlags, 8)) {
             i6 |= 1048576;
         }
-        if (IntExtensionsKt.hasBits(apiFlags, EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT)) {
+        if (IntExtensionsKt.hasBits(
+                apiFlags, EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT)) {
             i6 |= 2097152;
         }
         if (IntExtensionsKt.hasBits(apiFlags, 131072)) {

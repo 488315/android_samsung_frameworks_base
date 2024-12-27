@@ -10,6 +10,7 @@ import android.util.SparseArray;
 import android.util.SparseLongArray;
 import android.util.TimeUtils;
 import android.util.Xml;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
@@ -18,7 +19,11 @@ import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.HermesService$3$$ExternalSyntheticOutline0;
 import com.android.server.am.ActiveServices$$ExternalSyntheticOutline0;
 import com.android.server.chimera.AggressivePolicyHandler$$ExternalSyntheticOutline0;
-import com.android.server.display.PersistentDataStore;
+
+import libcore.io.IoUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,8 +39,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -64,8 +67,13 @@ public final class PersistentDataStore {
         public final SparseArray mSetPackageNames = new SparseArray();
 
         /* renamed from: -$$Nest$msetBrightnessConfigurationForUser, reason: not valid java name */
-        public static boolean m463$$Nest$msetBrightnessConfigurationForUser(BrightnessConfigurations brightnessConfigurations, BrightnessConfiguration brightnessConfiguration, int i, String str) {
-            BrightnessConfiguration brightnessConfiguration2 = (BrightnessConfiguration) brightnessConfigurations.mConfigurations.get(i);
+        public static boolean m463$$Nest$msetBrightnessConfigurationForUser(
+                BrightnessConfigurations brightnessConfigurations,
+                BrightnessConfiguration brightnessConfiguration,
+                int i,
+                String str) {
+            BrightnessConfiguration brightnessConfiguration2 =
+                    (BrightnessConfiguration) brightnessConfigurations.mConfigurations.get(i);
             if (brightnessConfiguration != null) {
                 if (str == null) {
                     brightnessConfigurations.mSetPackageNames.remove(i);
@@ -73,13 +81,16 @@ public final class PersistentDataStore {
                     brightnessConfigurations.mSetPackageNames.put(i, str);
                 }
                 brightnessConfigurations.mSetTimeStamps.put(i, System.currentTimeMillis());
-                if (brightnessConfiguration2 == null || !brightnessConfiguration2.equals(brightnessConfiguration)) {
+                if (brightnessConfiguration2 == null
+                        || !brightnessConfiguration2.equals(brightnessConfiguration)) {
                     brightnessConfigurations.mSetConfigurations.put(i, brightnessConfiguration);
                 } else {
                     brightnessConfigurations.mSetConfigurations.put(i, null);
                 }
             }
-            if (brightnessConfiguration2 == brightnessConfiguration || (brightnessConfiguration2 != null && brightnessConfiguration2.equals(brightnessConfiguration))) {
+            if (brightnessConfiguration2 == brightnessConfiguration
+                    || (brightnessConfiguration2 != null
+                            && brightnessConfiguration2.equals(brightnessConfiguration))) {
                 return false;
             }
             if (brightnessConfiguration != null) {
@@ -100,7 +111,10 @@ public final class PersistentDataStore {
 
         public static void fileWriteInt(int i) {
             FileOutputStream fileOutputStream;
-            HermesService$3$$ExternalSyntheticOutline0.m(i, "fileWriteInt : /data/log/BC_Position  value : ", "DisplayManager.PersistentDataStore");
+            HermesService$3$$ExternalSyntheticOutline0.m(
+                    i,
+                    "fileWriteInt : /data/log/BC_Position  value : ",
+                    "DisplayManager.PersistentDataStore");
             FileOutputStream fileOutputStream2 = null;
             try {
                 fileOutputStream = new FileOutputStream(new File("/data/log/BC_Position"));
@@ -174,13 +188,19 @@ public final class PersistentDataStore {
                     try {
                         i = typedXmlPullParser.getAttributeInt((String) null, "user-serial");
                     } catch (NumberFormatException e) {
-                        Slog.e("DisplayManager.PersistentDataStore", "Failed to read in brightness configuration", e);
+                        Slog.e(
+                                "DisplayManager.PersistentDataStore",
+                                "Failed to read in brightness configuration",
+                                e);
                         i = -1;
                     }
-                    String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "package-name");
-                    long attributeLong = typedXmlPullParser.getAttributeLong((String) null, "timestamp", -1L);
+                    String attributeValue =
+                            typedXmlPullParser.getAttributeValue((String) null, "package-name");
+                    long attributeLong =
+                            typedXmlPullParser.getAttributeLong((String) null, "timestamp", -1L);
                     try {
-                        BrightnessConfiguration loadFromXml = BrightnessConfiguration.loadFromXml(typedXmlPullParser);
+                        BrightnessConfiguration loadFromXml =
+                                BrightnessConfiguration.loadFromXml(typedXmlPullParser);
                         if (i >= 0 && loadFromXml != null) {
                             this.mConfigurations.put(i, loadFromXml);
                             if (attributeLong != -1) {
@@ -191,7 +211,10 @@ public final class PersistentDataStore {
                             }
                         }
                     } catch (IllegalArgumentException e2) {
-                        Slog.e("DisplayManager.PersistentDataStore", "Failed to load brightness configuration!", e2);
+                        Slog.e(
+                                "DisplayManager.PersistentDataStore",
+                                "Failed to load brightness configuration!",
+                                e2);
                     }
                 }
             }
@@ -199,19 +222,19 @@ public final class PersistentDataStore {
 
         /* JADX WARN: Can't wrap try/catch for region: R(11:0|1|(13:107|108|110|111|113|114|(1:116)(2:117|118)|5|6|(2:8|(1:(2:11|12)(5:14|15|16|(1:18)(3:81|82|83)|19))(5:90|91|92|(1:94)(3:96|97|98)|95))(1:104)|(2:(8:23|24|25|(1:27)(5:31|32|(4:36|(2:39|37)|40|41)|(4:45|(2:48|46)|49|50)|(4:54|(2:57|55)|58|59))|28|29|30|21)|65)|(2:76|77)|(3:68|69|71)(1:75))(1:3)|4|5|6|(0)(0)|(0)|(0)|(0)(0)|(1:(0))) */
         /* JADX WARN: Code restructure failed: missing block: B:105:0x008e, code lost:
-        
-            r0 = e;
-         */
+
+           r0 = e;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:106:0x008f, code lost:
-        
-            r3 = null;
-         */
+
+           r3 = null;
+        */
         /* JADX WARN: Multi-variable type inference failed */
         /* JADX WARN: Removed duplicated region for block: B:104:0x00e8 A[Catch: IOException -> 0x008e, TRY_ENTER, TRY_LEAVE, TryCatch #11 {IOException -> 0x008e, blocks: (B:11:0x0088, B:14:0x0092, B:90:0x00bd, B:104:0x00e8), top: B:6:0x007c }] */
         /* JADX WARN: Removed duplicated region for block: B:116:0x004d  */
         /* JADX WARN: Removed duplicated region for block: B:117:0x0054 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /* JADX WARN: Removed duplicated region for block: B:21:0x00fb A[LOOP:0: B:21:0x00fb->B:30:0x029b, LOOP_START, PHI: r6
-          0x00fb: PHI (r6v1 int) = (r6v0 int), (r6v2 int) binds: [B:20:0x00f9, B:30:0x029b] A[DONT_GENERATE, DONT_INLINE]] */
+        0x00fb: PHI (r6v1 int) = (r6v0 int), (r6v2 int) binds: [B:20:0x00f9, B:30:0x029b] A[DONT_GENERATE, DONT_INLINE]] */
         /* JADX WARN: Removed duplicated region for block: B:68:0x02ac A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /* JADX WARN: Removed duplicated region for block: B:75:? A[RETURN, SYNTHETIC] */
         /* JADX WARN: Removed duplicated region for block: B:76:0x02a1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -232,13 +255,17 @@ public final class PersistentDataStore {
                 Method dump skipped, instructions count: 694
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.PersistentDataStore.BrightnessConfigurations.saveHistory(java.util.List, java.util.List, java.util.List):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.display.PersistentDataStore.BrightnessConfigurations.saveHistory(java.util.List,"
+                        + " java.util.List, java.util.List):void");
         }
 
         public final void saveToXml(TypedXmlSerializer typedXmlSerializer) {
             for (int i = 0; i < this.mConfigurations.size(); i++) {
                 int keyAt = this.mConfigurations.keyAt(i);
-                BrightnessConfiguration brightnessConfiguration = (BrightnessConfiguration) this.mConfigurations.valueAt(i);
+                BrightnessConfiguration brightnessConfiguration =
+                        (BrightnessConfiguration) this.mConfigurations.valueAt(i);
                 typedXmlSerializer.startTag((String) null, "brightness-configuration");
                 typedXmlSerializer.attributeInt((String) null, "user-serial", keyAt);
                 String str = (String) this.mPackageNames.get(keyAt);
@@ -262,19 +289,23 @@ public final class PersistentDataStore {
         public float mRefreshRate;
         public int mWidth;
         public final SparseArray mPerUserBrightness = new SparseArray();
-        public final BrightnessConfigurations mDisplayBrightnessConfigurations = new BrightnessConfigurations();
+        public final BrightnessConfigurations mDisplayBrightnessConfigurations =
+                new BrightnessConfigurations();
 
         public final float getBrightness(int i) {
             SparseArray sparseArray = this.mPerUserBrightness;
             Float valueOf = Float.valueOf(Float.NaN);
             float floatValue = ((Float) sparseArray.get(i, valueOf)).floatValue();
-            return Float.isNaN(floatValue) ? ((Float) this.mPerUserBrightness.get(-1, valueOf)).floatValue() : floatValue;
+            return Float.isNaN(floatValue)
+                    ? ((Float) this.mPerUserBrightness.get(-1, valueOf)).floatValue()
+                    : floatValue;
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
-        public final AtomicFile mAtomicFile = new AtomicFile(new File("/data/system/display-manager-state.xml"), "display-state");
+        public final AtomicFile mAtomicFile =
+                new AtomicFile(new File("/data/system/display-manager-state.xml"), "display-state");
 
         public final void finishWrite(OutputStream outputStream) {
             this.mAtomicFile.finishWrite((FileOutputStream) outputStream);
@@ -307,10 +338,24 @@ public final class PersistentDataStore {
     public final WifiDisplay applyWifiDisplayAlias(WifiDisplay wifiDisplay) {
         if (wifiDisplay != null) {
             loadIfNeeded();
-            int findRememberedWifiDisplay = findRememberedWifiDisplay(wifiDisplay.getDeviceAddress());
-            String deviceAlias = findRememberedWifiDisplay >= 0 ? ((WifiDisplay) this.mRememberedWifiDisplays.get(findRememberedWifiDisplay)).getDeviceAlias() : null;
+            int findRememberedWifiDisplay =
+                    findRememberedWifiDisplay(wifiDisplay.getDeviceAddress());
+            String deviceAlias =
+                    findRememberedWifiDisplay >= 0
+                            ? ((WifiDisplay)
+                                            this.mRememberedWifiDisplays.get(
+                                                    findRememberedWifiDisplay))
+                                    .getDeviceAlias()
+                            : null;
             if (!Objects.equals(wifiDisplay.getDeviceAlias(), deviceAlias)) {
-                return new WifiDisplay(wifiDisplay.getDeviceAddress(), wifiDisplay.getDeviceName(), deviceAlias, wifiDisplay.isAvailable(), wifiDisplay.canConnect(), wifiDisplay.isRemembered(), wifiDisplay.getPrimaryDeviceType());
+                return new WifiDisplay(
+                        wifiDisplay.getDeviceAddress(),
+                        wifiDisplay.getDeviceName(),
+                        deviceAlias,
+                        wifiDisplay.isAvailable(),
+                        wifiDisplay.canConnect(),
+                        wifiDisplay.isRemembered(),
+                        wifiDisplay.getPrimaryDeviceType());
             }
         }
         return wifiDisplay;
@@ -336,7 +381,13 @@ public final class PersistentDataStore {
     }
 
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "PersistentDataStore", "  mLoaded="), this.mLoaded, printWriter, "  mDirty=");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                                printWriter, "PersistentDataStore", "  mLoaded="),
+                        this.mLoaded,
+                        printWriter,
+                        "  mDirty=");
         m.append(this.mDirty);
         printWriter.println(m.toString());
         printWriter.println("  RememberedWifiDisplays:");
@@ -360,31 +411,49 @@ public final class PersistentDataStore {
             printWriter.println("      ColorMode=" + displayState.mColorMode);
             printWriter.println("      BrightnessValues: ");
             for (int i4 = 0; i4 < displayState.mPerUserBrightness.size(); i4++) {
-                printWriter.println("User: " + displayState.mPerUserBrightness.keyAt(i4) + " Value: " + displayState.mPerUserBrightness.valueAt(i4));
+                printWriter.println(
+                        "User: "
+                                + displayState.mPerUserBrightness.keyAt(i4)
+                                + " Value: "
+                                + displayState.mPerUserBrightness.valueAt(i4));
             }
             printWriter.println("      DisplayBrightnessConfigurations: ");
             displayState.mDisplayBrightnessConfigurations.dump(printWriter);
             StringBuilder sb2 = new StringBuilder("      Resolution=");
             sb2.append(displayState.mWidth);
             sb2.append(" ");
-            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb2, displayState.mHeight, printWriter, "      RefreshRate="), displayState.mRefreshRate, printWriter);
+            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            sb2, displayState.mHeight, printWriter, "      RefreshRate="),
+                    displayState.mRefreshRate,
+                    printWriter);
             i2 = i3;
         }
         printWriter.println("  StableDeviceValues:");
         StableDeviceValues stableDeviceValues = this.mStableDeviceValues;
         stableDeviceValues.getClass();
-        StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("      StableDisplayWidth="), stableDeviceValues.mWidth, printWriter, "      StableDisplayHeight=");
+        StringBuilder m2 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("      StableDisplayWidth="),
+                        stableDeviceValues.mWidth,
+                        printWriter,
+                        "      StableDisplayHeight=");
         m2.append(stableDeviceValues.mHeight);
         printWriter.println(m2.toString());
         printWriter.println("  GlobalBrightnessConfigurations:");
         this.mGlobalBrightnessConfigurations.dump(printWriter);
-        AggressivePolicyHandler$$ExternalSyntheticOutline0.m(new StringBuilder("  mBrightnessNitsForDefaultDisplay="), this.mBrightnessNitsForDefaultDisplay, printWriter);
+        AggressivePolicyHandler$$ExternalSyntheticOutline0.m(
+                new StringBuilder("  mBrightnessNitsForDefaultDisplay="),
+                this.mBrightnessNitsForDefaultDisplay,
+                printWriter);
     }
 
     public final int findRememberedWifiDisplay(String str) {
         int size = this.mRememberedWifiDisplays.size();
         for (int i = 0; i < size; i++) {
-            if (((WifiDisplay) this.mRememberedWifiDisplays.get(i)).getDeviceAddress().equals(str)) {
+            if (((WifiDisplay) this.mRememberedWifiDisplays.get(i))
+                    .getDeviceAddress()
+                    .equals(str)) {
                 return i;
             }
         }
@@ -416,17 +485,33 @@ public final class PersistentDataStore {
                 int depth2 = typedXmlPullParser.getDepth();
                 while (XmlUtils.nextElementWithin(typedXmlPullParser, depth2)) {
                     if (typedXmlPullParser.getName().equals("wifi-display")) {
-                        String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "deviceAddress");
-                        String attributeValue2 = typedXmlPullParser.getAttributeValue((String) null, "deviceName");
-                        String attributeValue3 = typedXmlPullParser.getAttributeValue((String) null, "deviceAlias");
-                        String attributeValue4 = typedXmlPullParser.getAttributeValue((String) null, "deviceType");
+                        String attributeValue =
+                                typedXmlPullParser.getAttributeValue(
+                                        (String) null, "deviceAddress");
+                        String attributeValue2 =
+                                typedXmlPullParser.getAttributeValue((String) null, "deviceName");
+                        String attributeValue3 =
+                                typedXmlPullParser.getAttributeValue((String) null, "deviceAlias");
+                        String attributeValue4 =
+                                typedXmlPullParser.getAttributeValue((String) null, "deviceType");
                         if (attributeValue == null || attributeValue2 == null) {
-                            throw new XmlPullParserException("Missing deviceAddress or deviceName attribute on wifi-display.");
+                            throw new XmlPullParserException(
+                                    "Missing deviceAddress or deviceName attribute on"
+                                        + " wifi-display.");
                         }
                         if (findRememberedWifiDisplay(attributeValue) >= 0) {
-                            throw new XmlPullParserException("Found duplicate wifi display device address.");
+                            throw new XmlPullParserException(
+                                    "Found duplicate wifi display device address.");
                         }
-                        this.mRememberedWifiDisplays.add(new WifiDisplay(attributeValue, attributeValue2, attributeValue3, false, false, false, attributeValue4));
+                        this.mRememberedWifiDisplays.add(
+                                new WifiDisplay(
+                                        attributeValue,
+                                        attributeValue2,
+                                        attributeValue3,
+                                        false,
+                                        false,
+                                        false,
+                                        attributeValue4));
                     }
                 }
             }
@@ -434,9 +519,11 @@ public final class PersistentDataStore {
                 int depth3 = typedXmlPullParser.getDepth();
                 while (XmlUtils.nextElementWithin(typedXmlPullParser, depth3)) {
                     if (typedXmlPullParser.getName().equals("display")) {
-                        String attributeValue5 = typedXmlPullParser.getAttributeValue((String) null, "unique-id");
+                        String attributeValue5 =
+                                typedXmlPullParser.getAttributeValue((String) null, "unique-id");
                         if (attributeValue5 == null) {
-                            throw new XmlPullParserException("Missing unique-id attribute on display.");
+                            throw new XmlPullParserException(
+                                    "Missing unique-id attribute on display.");
                         }
                         if (this.mDisplayStates.containsKey(attributeValue5)) {
                             throw new XmlPullParserException("Found duplicate display.");
@@ -495,33 +582,50 @@ public final class PersistentDataStore {
                             }
                             switch (c) {
                                 case 0:
-                                    displayState.mWidth = Integer.parseInt(typedXmlPullParser.nextText());
+                                    displayState.mWidth =
+                                            Integer.parseInt(typedXmlPullParser.nextText());
                                     break;
                                 case 1:
-                                    displayState.mDisplayBrightnessConfigurations.loadFromXml(typedXmlPullParser);
+                                    displayState.mDisplayBrightnessConfigurations.loadFromXml(
+                                            typedXmlPullParser);
                                     break;
                                 case 2:
                                     try {
-                                        i3 = typedXmlPullParser.getAttributeInt((String) null, "user-serial");
+                                        i3 =
+                                                typedXmlPullParser.getAttributeInt(
+                                                        (String) null, "user-serial");
                                     } catch (NumberFormatException | XmlPullParserException e) {
-                                        Slog.e("DisplayManager.PersistentDataStore", "Failed to read user serial", e);
+                                        Slog.e(
+                                                "DisplayManager.PersistentDataStore",
+                                                "Failed to read user serial",
+                                                e);
                                         i3 = -1;
                                     }
                                     try {
-                                        displayState.mPerUserBrightness.set(i3, Float.valueOf(Float.parseFloat(typedXmlPullParser.nextText())));
+                                        displayState.mPerUserBrightness.set(
+                                                i3,
+                                                Float.valueOf(
+                                                        Float.parseFloat(
+                                                                typedXmlPullParser.nextText())));
                                         break;
                                     } catch (NumberFormatException e2) {
-                                        Slog.e("DisplayManager.PersistentDataStore", "Failed to read brightness", e2);
+                                        Slog.e(
+                                                "DisplayManager.PersistentDataStore",
+                                                "Failed to read brightness",
+                                                e2);
                                         break;
                                     }
                                 case 3:
-                                    displayState.mHeight = Integer.parseInt(typedXmlPullParser.nextText());
+                                    displayState.mHeight =
+                                            Integer.parseInt(typedXmlPullParser.nextText());
                                     break;
                                 case 4:
-                                    displayState.mRefreshRate = Float.parseFloat(typedXmlPullParser.nextText());
+                                    displayState.mRefreshRate =
+                                            Float.parseFloat(typedXmlPullParser.nextText());
                                     break;
                                 case 5:
-                                    displayState.mColorMode = Integer.parseInt(typedXmlPullParser.nextText());
+                                    displayState.mColorMode =
+                                            Integer.parseInt(typedXmlPullParser.nextText());
                                     break;
                             }
                         }
@@ -557,20 +661,28 @@ public final class PersistentDataStore {
                 this.mGlobalBrightnessConfigurations.loadFromXml(typedXmlPullParser);
             }
             if (typedXmlPullParser.getName().equals("brightness-nits-for-default-display")) {
-                this.mBrightnessNitsForDefaultDisplay = Float.parseFloat(typedXmlPullParser.nextText());
+                this.mBrightnessNitsForDefaultDisplay =
+                        Float.parseFloat(typedXmlPullParser.nextText());
             }
             if (typedXmlPullParser.getName().equals("remembered-active-display-fit-status")) {
-                String attributeValue6 = typedXmlPullParser.getAttributeValue((String) null, "activeDisplayFitStatus");
-                Slog.d("DisplayManager.PersistentDataStore", "loadRememberedActiveDisplayFitStatusFromXml activeDisplayFitStatus : " + attributeValue6);
+                String attributeValue6 =
+                        typedXmlPullParser.getAttributeValue(
+                                (String) null, "activeDisplayFitStatus");
+                Slog.d(
+                        "DisplayManager.PersistentDataStore",
+                        "loadRememberedActiveDisplayFitStatusFromXml activeDisplayFitStatus : "
+                                + attributeValue6);
                 this.mIsFitToActiveDisplay = attributeValue6.equals("true");
             }
             if (typedXmlPullParser.getName().equals("remembered-initiated-device")) {
                 int depth6 = typedXmlPullParser.getDepth();
                 while (XmlUtils.nextElementWithin(typedXmlPullParser, depth6)) {
                     if (typedXmlPullParser.getName().equals("initiated-device")) {
-                        String attributeValue7 = typedXmlPullParser.getAttributeValue((String) null, "macAddress");
+                        String attributeValue7 =
+                                typedXmlPullParser.getAttributeValue((String) null, "macAddress");
                         if (attributeValue7 == null) {
-                            throw new XmlPullParserException("Missing macAddress attribute on initiated-device.");
+                            throw new XmlPullParserException(
+                                    "Missing macAddress attribute on initiated-device.");
                         }
                         this.mRememberedInitiatedDevices.remove(attributeValue7);
                         if (BluetoothAdapter.checkBluetoothAddress(attributeValue7)) {
@@ -579,13 +691,16 @@ public final class PersistentDataStore {
                                 this.mRememberedInitiatedDevices.remove(0);
                             }
                         } else {
-                            Slog.w("DisplayManager.PersistentDataStore", "remove invalid device  = ".concat(attributeValue7));
+                            Slog.w(
+                                    "DisplayManager.PersistentDataStore",
+                                    "remove invalid device  = ".concat(attributeValue7));
                         }
                     }
                 }
             }
             if (typedXmlPullParser.getName().equals("initiated-mirroring-uuid")) {
-                this.mInitiatedMirroringUuid = typedXmlPullParser.getAttributeValue((String) null, "uuid");
+                this.mInitiatedMirroringUuid =
+                        typedXmlPullParser.getAttributeValue((String) null, "uuid");
             }
         }
     }
@@ -604,15 +719,24 @@ public final class PersistentDataStore {
                             try {
                                 loadFromXml(Xml.resolvePullParser(openRead));
                             } catch (Exception e) {
-                                Slog.w("DisplayManager.PersistentDataStore", "Failed to load display manager persistent store data!", e);
+                                Slog.w(
+                                        "DisplayManager.PersistentDataStore",
+                                        "Failed to load display manager persistent store data!",
+                                        e);
                                 this.mRememberedWifiDisplays.clear();
                             }
                         } catch (XmlPullParserException e2) {
-                            Slog.w("DisplayManager.PersistentDataStore", "Failed to load display manager persistent store data.", e2);
+                            Slog.w(
+                                    "DisplayManager.PersistentDataStore",
+                                    "Failed to load display manager persistent store data.",
+                                    e2);
                             this.mRememberedWifiDisplays.clear();
                         }
                     } catch (IOException e3) {
-                        Slog.w("DisplayManager.PersistentDataStore", "Failed to load display manager persistent store data.", e3);
+                        Slog.w(
+                                "DisplayManager.PersistentDataStore",
+                                "Failed to load display manager persistent store data.",
+                                e3);
                         this.mRememberedWifiDisplays.clear();
                     }
                 } finally {
@@ -630,7 +754,8 @@ public final class PersistentDataStore {
         if (findRememberedWifiDisplay < 0) {
             this.mRememberedWifiDisplays.add(wifiDisplay);
         } else {
-            if (((WifiDisplay) this.mRememberedWifiDisplays.get(findRememberedWifiDisplay)).equals(wifiDisplay)) {
+            if (((WifiDisplay) this.mRememberedWifiDisplays.get(findRememberedWifiDisplay))
+                    .equals(wifiDisplay)) {
                 return false;
             }
             this.mRememberedWifiDisplays.set(findRememberedWifiDisplay, wifiDisplay);
@@ -648,38 +773,51 @@ public final class PersistentDataStore {
                 saveToXml(resolveSerializer);
                 resolveSerializer.flush();
                 handler.removeCallbacksAndMessages(null);
-                handler.post(new Runnable() { // from class: com.android.server.display.PersistentDataStore$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        PersistentDataStore.Injector injector;
-                        PersistentDataStore persistentDataStore = PersistentDataStore.this;
-                        ByteArrayOutputStream byteArrayOutputStream2 = byteArrayOutputStream;
-                        synchronized (persistentDataStore.mFileAccessLock) {
-                            FileOutputStream fileOutputStream = null;
-                            try {
-                                try {
-                                    fileOutputStream = persistentDataStore.mInjector.mAtomicFile.startWrite();
-                                    byteArrayOutputStream2.writeTo(fileOutputStream);
-                                    fileOutputStream.flush();
-                                    injector = persistentDataStore.mInjector;
-                                } catch (Throwable th) {
-                                    if (fileOutputStream != null) {
-                                        persistentDataStore.mInjector.finishWrite(fileOutputStream);
+                handler.post(
+                        new Runnable() { // from class:
+                            // com.android.server.display.PersistentDataStore$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                PersistentDataStore.Injector injector;
+                                PersistentDataStore persistentDataStore = PersistentDataStore.this;
+                                ByteArrayOutputStream byteArrayOutputStream2 =
+                                        byteArrayOutputStream;
+                                synchronized (persistentDataStore.mFileAccessLock) {
+                                    FileOutputStream fileOutputStream = null;
+                                    try {
+                                        try {
+                                            fileOutputStream =
+                                                    persistentDataStore.mInjector.mAtomicFile
+                                                            .startWrite();
+                                            byteArrayOutputStream2.writeTo(fileOutputStream);
+                                            fileOutputStream.flush();
+                                            injector = persistentDataStore.mInjector;
+                                        } catch (Throwable th) {
+                                            if (fileOutputStream != null) {
+                                                persistentDataStore.mInjector.finishWrite(
+                                                        fileOutputStream);
+                                            }
+                                            throw th;
+                                        }
+                                    } catch (IOException e) {
+                                        Slog.w(
+                                                "DisplayManager.PersistentDataStore",
+                                                "Failed to save display manager persistent store"
+                                                    + " data.",
+                                                e);
+                                        if (fileOutputStream != null) {
+                                            injector = persistentDataStore.mInjector;
+                                        }
                                     }
-                                    throw th;
-                                }
-                            } catch (IOException e) {
-                                Slog.w("DisplayManager.PersistentDataStore", "Failed to save display manager persistent store data.", e);
-                                if (fileOutputStream != null) {
-                                    injector = persistentDataStore.mInjector;
+                                    injector.finishWrite(fileOutputStream);
                                 }
                             }
-                            injector.finishWrite(fileOutputStream);
-                        }
-                    }
-                });
+                        });
             } catch (IOException e) {
-                Slog.w("DisplayManager.PersistentDataStore", "Failed to process the XML serializer.", e);
+                Slog.w(
+                        "DisplayManager.PersistentDataStore",
+                        "Failed to process the XML serializer.",
+                        e);
             }
             this.mDirty = false;
         }
@@ -687,20 +825,24 @@ public final class PersistentDataStore {
 
     public final void saveToXml(TypedXmlSerializer typedXmlSerializer) {
         typedXmlSerializer.startDocument((String) null, Boolean.TRUE);
-        typedXmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+        typedXmlSerializer.setFeature(
+                "http://xmlpull.org/v1/doc/features.html#indent-output", true);
         typedXmlSerializer.startTag((String) null, "display-manager-state");
         typedXmlSerializer.startTag((String) null, "remembered-wifi-displays");
         Iterator it = this.mRememberedWifiDisplays.iterator();
         while (it.hasNext()) {
             WifiDisplay wifiDisplay = (WifiDisplay) it.next();
             typedXmlSerializer.startTag((String) null, "wifi-display");
-            typedXmlSerializer.attribute((String) null, "deviceAddress", wifiDisplay.getDeviceAddress());
+            typedXmlSerializer.attribute(
+                    (String) null, "deviceAddress", wifiDisplay.getDeviceAddress());
             typedXmlSerializer.attribute((String) null, "deviceName", wifiDisplay.getDeviceName());
             if (wifiDisplay.getDeviceAlias() != null) {
-                typedXmlSerializer.attribute((String) null, "deviceAlias", wifiDisplay.getDeviceAlias());
+                typedXmlSerializer.attribute(
+                        (String) null, "deviceAlias", wifiDisplay.getDeviceAlias());
             }
             if (wifiDisplay.getPrimaryDeviceType() != null) {
-                typedXmlSerializer.attribute((String) null, "deviceType", wifiDisplay.getPrimaryDeviceType());
+                typedXmlSerializer.attribute(
+                        (String) null, "deviceType", wifiDisplay.getPrimaryDeviceType());
             }
             typedXmlSerializer.endTag((String) null, "wifi-display");
         }
@@ -717,8 +859,11 @@ public final class PersistentDataStore {
             typedXmlSerializer.endTag((String) null, "color-mode");
             for (int i = 0; i < displayState.mPerUserBrightness.size(); i++) {
                 typedXmlSerializer.startTag((String) null, "brightness-value");
-                typedXmlSerializer.attributeInt((String) null, "user-serial", displayState.mPerUserBrightness.keyAt(i));
-                typedXmlSerializer.text(Float.toString(((Float) displayState.mPerUserBrightness.valueAt(i)).floatValue()));
+                typedXmlSerializer.attributeInt(
+                        (String) null, "user-serial", displayState.mPerUserBrightness.keyAt(i));
+                typedXmlSerializer.text(
+                        Float.toString(
+                                ((Float) displayState.mPerUserBrightness.valueAt(i)).floatValue()));
                 typedXmlSerializer.endTag((String) null, "brightness-value");
             }
             typedXmlSerializer.startTag((String) null, "brightness-configurations");
@@ -754,9 +899,15 @@ public final class PersistentDataStore {
         typedXmlSerializer.text(Float.toString(this.mBrightnessNitsForDefaultDisplay));
         typedXmlSerializer.endTag((String) null, "brightness-nits-for-default-display");
         typedXmlSerializer.startTag((String) null, "remembered-active-display-fit-status");
-        typedXmlSerializer.attribute((String) null, "activeDisplayFitStatus", String.valueOf(this.mIsFitToActiveDisplay));
+        typedXmlSerializer.attribute(
+                (String) null,
+                "activeDisplayFitStatus",
+                String.valueOf(this.mIsFitToActiveDisplay));
         typedXmlSerializer.endTag((String) null, "remembered-active-display-fit-status");
-        Slog.d("DisplayManager.PersistentDataStore", "saveToXml remembered active display fit status value:" + String.valueOf(this.mIsFitToActiveDisplay));
+        Slog.d(
+                "DisplayManager.PersistentDataStore",
+                "saveToXml remembered active display fit status value:"
+                        + String.valueOf(this.mIsFitToActiveDisplay));
         typedXmlSerializer.startTag((String) null, "remembered-changed-view-mode");
         typedXmlSerializer.endTag((String) null, "remembered-changed-view-mode");
         typedXmlSerializer.startTag((String) null, "remembered-initiated-device");
@@ -780,7 +931,9 @@ public final class PersistentDataStore {
 
     public final void setBrightness(DisplayDevice displayDevice, float f, int i) {
         String str;
-        if (displayDevice == null || !displayDevice.hasStableUniqueId() || (str = displayDevice.mUniqueId) == null) {
+        if (displayDevice == null
+                || !displayDevice.hasStableUniqueId()
+                || (str = displayDevice.mUniqueId) == null) {
             return;
         }
         DisplayState displayState = getDisplayState(str, true);

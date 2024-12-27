@@ -37,8 +37,7 @@ public abstract class FrameManager {
         return null;
     }
 
-    public void tearDown() {
-    }
+    public void tearDown() {}
 
     void setContext(FilterContext context) {
         this.mContext = context;

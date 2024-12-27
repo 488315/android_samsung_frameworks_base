@@ -17,8 +17,7 @@ public abstract class UndoOperation<DATA> implements Parcelable {
         this.mOwner = owner;
     }
 
-    protected UndoOperation(Parcel src, ClassLoader loader) {
-    }
+    protected UndoOperation(Parcel src, ClassLoader loader) {}
 
     public UndoOwner getOwner() {
         return this.mOwner;

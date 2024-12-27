@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.crypto.params.DSAValidationParamete
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -47,7 +48,8 @@ public class DSAParametersGenerator {
         int L = params.getL();
         int N = params.getN();
         if (L < 1024 || L > 3072 || L % 1024 != 0) {
-            throw new IllegalArgumentException("L values must be between 1024 and 3072 and a multiple of 1024");
+            throw new IllegalArgumentException(
+                    "L values must be between 1024 and 3072 and a multiple of 1024");
         }
         if (L == 1024 && N != 160) {
             throw new IllegalArgumentException("N must be 160 for L = 1024");
@@ -86,7 +88,8 @@ public class DSAParametersGenerator {
         int n = (this.L - 1) / 160;
         byte[] w = new byte[this.L / 8];
         if (!this.digest.getAlgorithmName().equals("SHA-1")) {
-            throw new IllegalStateException("can only use SHA-1 for generating FIPS 186-2 parameters");
+            throw new IllegalStateException(
+                    "can only use SHA-1 for generating FIPS 186-2 parameters");
         }
         while (true) {
             this.random.nextBytes(seed);
@@ -124,7 +127,8 @@ public class DSAParametersGenerator {
                         b = 1;
                     } else {
                         BigInteger g = calculateGenerator_FIPS186_2(p, q, this.random);
-                        return new DSAParameters(p, q, g, new DSAValidationParameters(seed, counter));
+                        return new DSAParameters(
+                                p, q, g, new DSAValidationParameters(seed, counter));
                     }
                 }
                 b = 1;
@@ -132,7 +136,8 @@ public class DSAParametersGenerator {
         }
     }
 
-    private static BigInteger calculateGenerator_FIPS186_2(BigInteger p, BigInteger q, SecureRandom r) {
+    private static BigInteger calculateGenerator_FIPS186_2(
+            BigInteger p, BigInteger q, SecureRandom r) {
         BigInteger g;
         BigInteger e = p.subtract(ONE).divide(q);
         BigInteger pSub2 = p.subtract(TWO);
@@ -157,7 +162,8 @@ public class DSAParametersGenerator {
         int i2 = (this.L - 1) % outlen;
         byte[] w = new byte[this.L / 8];
         byte[] output = new byte[d.getDigestSize()];
-        loop0: while (true) {
+        loop0:
+        while (true) {
             this.random.nextBytes(seed);
             hash(d, seed, output, 0);
             BigInteger U = new BigInteger(i, output).mod(ONE.shiftLeft(this.N - i));
@@ -196,22 +202,30 @@ public class DSAParametersGenerator {
                 i = 1;
             }
         }
-        if (this.usageIndex >= 0 && (g = calculateGenerator_FIPS186_3_Verifiable(d, p, q, seed, this.usageIndex)) != null) {
+        if (this.usageIndex >= 0
+                && (g = calculateGenerator_FIPS186_3_Verifiable(d, p, q, seed, this.usageIndex))
+                        != null) {
             int n2 = this.usageIndex;
             return new DSAParameters(p, q, g, new DSAValidationParameters(seed, counter, n2));
         }
-        return new DSAParameters(p, q, calculateGenerator_FIPS186_3_Unverifiable(p, q, this.random), new DSAValidationParameters(seed, counter));
+        return new DSAParameters(
+                p,
+                q,
+                calculateGenerator_FIPS186_3_Unverifiable(p, q, this.random),
+                new DSAValidationParameters(seed, counter));
     }
 
     private boolean isProbablePrime(BigInteger x) {
         return x.isProbablePrime(this.certainty);
     }
 
-    private static BigInteger calculateGenerator_FIPS186_3_Unverifiable(BigInteger p, BigInteger q, SecureRandom r) {
+    private static BigInteger calculateGenerator_FIPS186_3_Unverifiable(
+            BigInteger p, BigInteger q, SecureRandom r) {
         return calculateGenerator_FIPS186_2(p, q, r);
     }
 
-    private static BigInteger calculateGenerator_FIPS186_3_Verifiable(Digest d, BigInteger p, BigInteger q, byte[] seed, int index) {
+    private static BigInteger calculateGenerator_FIPS186_3_Verifiable(
+            Digest d, BigInteger p, BigInteger q, byte[] seed, int index) {
         BigInteger e = p.subtract(ONE).divide(q);
         byte[] ggen = Hex.decodeStrict("6767656E");
         byte[] U = new byte[seed.length + ggen.length + 1 + 2];

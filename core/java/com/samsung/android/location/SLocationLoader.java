@@ -3,13 +3,14 @@ package com.samsung.android.location;
 import android.content.Context;
 import android.os.IBinder;
 import android.util.Log;
-import com.samsung.android.location.ISLocationManager;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 /* loaded from: classes6.dex */
 public class SLocationLoader {
-    private static final String CLASS_SLocationService = "com.samsung.android.location.SLocationService";
+    private static final String CLASS_SLocationService =
+            "com.samsung.android.location.SLocationService";
     private static final String METHOD_systemReady = "systemReady";
     private static final String TAG = "SLocationLoader";
 

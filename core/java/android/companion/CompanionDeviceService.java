@@ -1,13 +1,13 @@
 package android.companion;
 
 import android.app.Service;
-import android.companion.CompanionDeviceService;
-import android.companion.ICompanionDeviceService;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+
 import com.android.internal.hidden_from_bootclasspath.android.companion.Flags;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
@@ -19,12 +19,10 @@ public abstract class CompanionDeviceService extends Service {
     private final Stub mRemote = new Stub();
 
     @Deprecated
-    public void onDeviceAppeared(String address) {
-    }
+    public void onDeviceAppeared(String address) {}
 
     @Deprecated
-    public void onDeviceDisappeared(String address) {
-    }
+    public void onDeviceDisappeared(String address) {}
 
     @Deprecated
     public void onMessageDispatchedFromSystem(int messageId, int associationId, byte[] message) {
@@ -32,16 +30,24 @@ public abstract class CompanionDeviceService extends Service {
     }
 
     @Deprecated
-    public final void dispatchMessageToSystem(int messageId, int associationId, byte[] message) throws DeviceNotAssociatedException {
+    public final void dispatchMessageToSystem(int messageId, int associationId, byte[] message)
+            throws DeviceNotAssociatedException {
         Log.w(LOG_TAG, "Replaced by attachSystemDataTransport");
     }
 
-    public final void attachSystemDataTransport(int associationId, InputStream in, OutputStream out) throws DeviceNotAssociatedException {
-        ((CompanionDeviceManager) getSystemService(CompanionDeviceManager.class)).attachSystemDataTransport(associationId, (InputStream) Objects.requireNonNull(in), (OutputStream) Objects.requireNonNull(out));
+    public final void attachSystemDataTransport(int associationId, InputStream in, OutputStream out)
+            throws DeviceNotAssociatedException {
+        ((CompanionDeviceManager) getSystemService(CompanionDeviceManager.class))
+                .attachSystemDataTransport(
+                        associationId,
+                        (InputStream) Objects.requireNonNull(in),
+                        (OutputStream) Objects.requireNonNull(out));
     }
 
-    public final void detachSystemDataTransport(int associationId) throws DeviceNotAssociatedException {
-        ((CompanionDeviceManager) getSystemService(CompanionDeviceManager.class)).detachSystemDataTransport(associationId);
+    public final void detachSystemDataTransport(int associationId)
+            throws DeviceNotAssociatedException {
+        ((CompanionDeviceManager) getSystemService(CompanionDeviceManager.class))
+                .detachSystemDataTransport(associationId);
     }
 
     public void onDeviceAppeared(AssociationInfo associationInfo) {
@@ -56,8 +62,7 @@ public abstract class CompanionDeviceService extends Service {
         }
     }
 
-    public void onDevicePresenceEvent(DevicePresenceEvent event) {
-    }
+    public void onDevicePresenceEvent(DevicePresenceEvent event) {}
 
     @Override // android.app.Service
     public final IBinder onBind(Intent intent) {
@@ -65,12 +70,15 @@ public abstract class CompanionDeviceService extends Service {
             onBindCompanionDeviceService(intent);
             return this.mRemote;
         }
-        Log.w(LOG_TAG, "Tried to bind to wrong intent (should be android.companion.CompanionDeviceService): " + intent);
+        Log.w(
+                LOG_TAG,
+                "Tried to bind to wrong intent (should be"
+                        + " android.companion.CompanionDeviceService): "
+                        + intent);
         return null;
     }
 
-    public void onBindCompanionDeviceService(Intent intent) {
-    }
+    public void onBindCompanionDeviceService(Intent intent) {}
 
     /* JADX INFO: Access modifiers changed from: private */
     class Stub extends ICompanionDeviceService.Stub {
@@ -89,12 +97,15 @@ public abstract class CompanionDeviceService extends Service {
 
         @Override // android.companion.ICompanionDeviceService
         public void onDeviceAppeared(final AssociationInfo associationInfo) {
-            this.mMainHandler.postAtFrontOfQueue(new Runnable() { // from class: android.companion.CompanionDeviceService$Stub$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    CompanionDeviceService.Stub.this.lambda$onDeviceAppeared$0(associationInfo);
-                }
-            });
+            this.mMainHandler.postAtFrontOfQueue(
+                    new Runnable() { // from class:
+                        // android.companion.CompanionDeviceService$Stub$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            CompanionDeviceService.Stub.this.lambda$onDeviceAppeared$0(
+                                    associationInfo);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -104,23 +115,29 @@ public abstract class CompanionDeviceService extends Service {
 
         @Override // android.companion.ICompanionDeviceService
         public void onDeviceDisappeared(final AssociationInfo associationInfo) {
-            this.mMainHandler.postAtFrontOfQueue(new Runnable() { // from class: android.companion.CompanionDeviceService$Stub$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    CompanionDeviceService.Stub.this.lambda$onDeviceDisappeared$1(associationInfo);
-                }
-            });
+            this.mMainHandler.postAtFrontOfQueue(
+                    new Runnable() { // from class:
+                        // android.companion.CompanionDeviceService$Stub$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            CompanionDeviceService.Stub.this.lambda$onDeviceDisappeared$1(
+                                    associationInfo);
+                        }
+                    });
         }
 
         @Override // android.companion.ICompanionDeviceService
         public void onDevicePresenceEvent(final DevicePresenceEvent event) {
             if (Flags.devicePresence()) {
-                this.mMainHandler.postAtFrontOfQueue(new Runnable() { // from class: android.companion.CompanionDeviceService$Stub$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        CompanionDeviceService.Stub.this.lambda$onDevicePresenceEvent$2(event);
-                    }
-                });
+                this.mMainHandler.postAtFrontOfQueue(
+                        new Runnable() { // from class:
+                            // android.companion.CompanionDeviceService$Stub$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                CompanionDeviceService.Stub.this.lambda$onDevicePresenceEvent$2(
+                                        event);
+                            }
+                        });
             }
         }
 

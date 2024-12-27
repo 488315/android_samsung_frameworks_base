@@ -103,6 +103,11 @@ public class TypefaceSpan extends MetricAffectingSpan implements ParcelableSpan 
     }
 
     public String toString() {
-        return "TypefaceSpan{family='" + getFamily() + DateFormat.QUOTE + ", typeface=" + getTypeface() + '}';
+        return "TypefaceSpan{family='"
+                + getFamily()
+                + DateFormat.QUOTE
+                + ", typeface="
+                + getTypeface()
+                + '}';
     }
 }

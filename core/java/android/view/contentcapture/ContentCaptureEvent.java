@@ -12,6 +12,7 @@ import android.text.SpannableString;
 import android.util.Log;
 import android.view.autofill.AutofillId;
 import android.view.inputmethod.BaseInputConnection;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -52,58 +53,62 @@ public final class ContentCaptureEvent implements Parcelable {
     private boolean mTextHasComposingSpan;
     private final int mType;
     private static final String TAG = ContentCaptureEvent.class.getSimpleName();
-    public static final Parcelable.Creator<ContentCaptureEvent> CREATOR = new Parcelable.Creator<ContentCaptureEvent>() { // from class: android.view.contentcapture.ContentCaptureEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentCaptureEvent createFromParcel(Parcel parcel) {
-            int sessionId = parcel.readInt();
-            int type = parcel.readInt();
-            long eventTime = parcel.readLong();
-            ContentCaptureEvent event = new ContentCaptureEvent(sessionId, type, eventTime);
-            AutofillId id = (AutofillId) parcel.readParcelable(null, AutofillId.class);
-            if (id != null) {
-                event.setAutofillId(id);
-            }
-            ArrayList<AutofillId> ids = parcel.createTypedArrayList(AutofillId.CREATOR);
-            if (ids != null) {
-                event.setAutofillIds(ids);
-            }
-            ViewNode node = ViewNode.readFromParcel(parcel);
-            if (node != null) {
-                event.setViewNode(node);
-            }
-            event.setText(parcel.readCharSequence());
-            if (type == -1 || type == -2) {
-                event.setParentSessionId(parcel.readInt());
-            }
-            if (type == -1 || type == 6) {
-                event.setClientContext((ContentCaptureContext) parcel.readParcelable(null, ContentCaptureContext.class));
-            }
-            if (type == 9) {
-                event.setInsets((Insets) parcel.readParcelable(null, Insets.class));
-            }
-            if (type == 10) {
-                event.setBounds((Rect) parcel.readParcelable(null, Rect.class));
-            }
-            if (type == 3) {
-                event.setComposingIndex(parcel.readInt(), parcel.readInt());
-                event.restoreComposingSpan();
-                event.setSelectionIndex(parcel.readInt(), parcel.readInt());
-                event.restoreSelectionSpans();
-            }
-            return event;
-        }
+    public static final Parcelable.Creator<ContentCaptureEvent> CREATOR =
+            new Parcelable.Creator<
+                    ContentCaptureEvent>() { // from class:
+                                             // android.view.contentcapture.ContentCaptureEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentCaptureEvent createFromParcel(Parcel parcel) {
+                    int sessionId = parcel.readInt();
+                    int type = parcel.readInt();
+                    long eventTime = parcel.readLong();
+                    ContentCaptureEvent event = new ContentCaptureEvent(sessionId, type, eventTime);
+                    AutofillId id = (AutofillId) parcel.readParcelable(null, AutofillId.class);
+                    if (id != null) {
+                        event.setAutofillId(id);
+                    }
+                    ArrayList<AutofillId> ids = parcel.createTypedArrayList(AutofillId.CREATOR);
+                    if (ids != null) {
+                        event.setAutofillIds(ids);
+                    }
+                    ViewNode node = ViewNode.readFromParcel(parcel);
+                    if (node != null) {
+                        event.setViewNode(node);
+                    }
+                    event.setText(parcel.readCharSequence());
+                    if (type == -1 || type == -2) {
+                        event.setParentSessionId(parcel.readInt());
+                    }
+                    if (type == -1 || type == 6) {
+                        event.setClientContext(
+                                (ContentCaptureContext)
+                                        parcel.readParcelable(null, ContentCaptureContext.class));
+                    }
+                    if (type == 9) {
+                        event.setInsets((Insets) parcel.readParcelable(null, Insets.class));
+                    }
+                    if (type == 10) {
+                        event.setBounds((Rect) parcel.readParcelable(null, Rect.class));
+                    }
+                    if (type == 3) {
+                        event.setComposingIndex(parcel.readInt(), parcel.readInt());
+                        event.restoreComposingSpan();
+                        event.setSelectionIndex(parcel.readInt(), parcel.readInt());
+                        event.restoreSelectionSpans();
+                    }
+                    return event;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentCaptureEvent[] newArray(int size) {
-            return new ContentCaptureEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentCaptureEvent[] newArray(int size) {
+                    return new ContentCaptureEvent[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EventType {
-    }
+    public @interface EventType {}
 
     public ContentCaptureEvent(int sessionId, int type, long eventTime) {
         this.mParentSessionId = 0;
@@ -194,11 +199,13 @@ public final class ContentCaptureEvent implements Parcelable {
     }
 
     boolean hasSameComposingSpan(ContentCaptureEvent other) {
-        return this.mComposingStart == other.mComposingStart && this.mComposingEnd == other.mComposingEnd;
+        return this.mComposingStart == other.mComposingStart
+                && this.mComposingEnd == other.mComposingEnd;
     }
 
     boolean hasSameSelectionSpan(ContentCaptureEvent other) {
-        return this.mSelectionStartIndex == other.mSelectionStartIndex && this.mSelectionEndIndex == other.mSelectionEndIndex;
+        return this.mSelectionStartIndex == other.mSelectionStartIndex
+                && this.mSelectionEndIndex == other.mSelectionEndIndex;
     }
 
     private int getComposingStart() {
@@ -223,7 +230,8 @@ public final class ContentCaptureEvent implements Parcelable {
             return;
         }
         if (this.mText instanceof Spannable) {
-            BaseInputConnection.setComposingSpans((Spannable) this.mText, this.mComposingStart, this.mComposingEnd);
+            BaseInputConnection.setComposingSpans(
+                    (Spannable) this.mText, this.mComposingStart, this.mComposingEnd);
         } else {
             Log.w(TAG, "Text is not a Spannable.");
         }
@@ -236,8 +244,13 @@ public final class ContentCaptureEvent implements Parcelable {
         }
         if (this.mText instanceof SpannableString) {
             SpannableString ss = (SpannableString) this.mText;
-            ss.setSpan(Selection.SELECTION_START, this.mSelectionStartIndex, this.mSelectionStartIndex, 0);
-            ss.setSpan(Selection.SELECTION_END, this.mSelectionEndIndex, this.mSelectionEndIndex, 0);
+            ss.setSpan(
+                    Selection.SELECTION_START,
+                    this.mSelectionStartIndex,
+                    this.mSelectionStartIndex,
+                    0);
+            ss.setSpan(
+                    Selection.SELECTION_END, this.mSelectionEndIndex, this.mSelectionEndIndex, 0);
             return;
         }
         Log.w(TAG, "Text is not a SpannableString.");
@@ -289,7 +302,12 @@ public final class ContentCaptureEvent implements Parcelable {
         Objects.requireNonNull(event);
         int eventType = event.getType();
         if (this.mType != eventType) {
-            Log.e(TAG, "mergeEvent(" + getTypeAsString(eventType) + ") cannot be merged with different eventType=" + getTypeAsString(this.mType));
+            Log.e(
+                    TAG,
+                    "mergeEvent("
+                            + getTypeAsString(eventType)
+                            + ") cannot be merged with different eventType="
+                            + getTypeAsString(this.mType));
             return;
         }
         if (eventType == 2) {
@@ -308,7 +326,9 @@ public final class ContentCaptureEvent implements Parcelable {
                 addAutofillId(id);
                 return;
             }
-            throw new IllegalArgumentException("mergeEvent(): got TYPE_VIEW_DISAPPEARED event with neither id or ids: " + event);
+            throw new IllegalArgumentException(
+                    "mergeEvent(): got TYPE_VIEW_DISAPPEARED event with neither id or ids: "
+                            + event);
         }
         if (eventType == 3) {
             setText(event.getText());
@@ -316,7 +336,9 @@ public final class ContentCaptureEvent implements Parcelable {
             setSelectionIndex(event.getSelectionStart(), event.getSelectionEnd());
             return;
         }
-        Log.e(TAG, "mergeEvent(" + getTypeAsString(eventType) + ") does not support this event type.");
+        Log.e(
+                TAG,
+                "mergeEvent(" + getTypeAsString(eventType) + ") does not support this event type.");
     }
 
     public void dump(PrintWriter pw) {
@@ -378,7 +400,8 @@ public final class ContentCaptureEvent implements Parcelable {
     }
 
     public String toString() {
-        StringBuilder string = new StringBuilder("ContentCaptureEvent[type=").append(getTypeAsString(this.mType));
+        StringBuilder string =
+                new StringBuilder("ContentCaptureEvent[type=").append(getTypeAsString(this.mType));
         string.append(", session=").append(this.mSessionId);
         if (this.mType == -1 && this.mParentSessionId != 0) {
             string.append(", parent=").append(this.mParentSessionId);
@@ -394,11 +417,16 @@ public final class ContentCaptureEvent implements Parcelable {
             string.append(", class=").append(className);
             string.append(", id=").append(this.mNode.getAutofillId());
             if (this.mNode.getText() != null) {
-                string.append(", text=").append((CharSequence) ContentCaptureHelper.getSanitizedString(this.mNode.getText()));
+                string.append(", text=")
+                        .append(
+                                (CharSequence)
+                                        ContentCaptureHelper.getSanitizedString(
+                                                this.mNode.getText()));
             }
         }
         if (this.mText != null) {
-            string.append(", text=").append((CharSequence) ContentCaptureHelper.getSanitizedString(this.mText));
+            string.append(", text=")
+                    .append((CharSequence) ContentCaptureHelper.getSanitizedString(this.mText));
         }
         if (this.mClientContext != null) {
             string.append(", context=").append(this.mClientContext);
@@ -410,10 +438,18 @@ public final class ContentCaptureEvent implements Parcelable {
             string.append(", bounds=").append(this.mBounds);
         }
         if (this.mComposingStart > -1) {
-            string.append(", composing=[").append(this.mComposingStart).append(",").append(this.mComposingEnd).append(NavigationBarInflaterView.SIZE_MOD_END);
+            string.append(", composing=[")
+                    .append(this.mComposingStart)
+                    .append(",")
+                    .append(this.mComposingEnd)
+                    .append(NavigationBarInflaterView.SIZE_MOD_END);
         }
         if (this.mSelectionStartIndex > -1) {
-            string.append(", selection=[").append(this.mSelectionStartIndex).append(",").append(this.mSelectionEndIndex).append(NavigationBarInflaterView.SIZE_MOD_END);
+            string.append(", selection=[")
+                    .append(this.mSelectionStartIndex)
+                    .append(",")
+                    .append(this.mSelectionEndIndex)
+                    .append(NavigationBarInflaterView.SIZE_MOD_END);
         }
         return string.append(']').toString();
     }

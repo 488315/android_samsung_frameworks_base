@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class FrontendCapabilities implements Parcelable {
-    public static final Parcelable.Creator<FrontendCapabilities> CREATOR = new Parcelable.Creator<FrontendCapabilities>() { // from class: android.hardware.tv.tuner.FrontendCapabilities.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendCapabilities createFromParcel(Parcel _aidl_source) {
-            return new FrontendCapabilities(_aidl_source);
-        }
+    public static final Parcelable.Creator<FrontendCapabilities> CREATOR =
+            new Parcelable.Creator<FrontendCapabilities>() { // from class:
+                // android.hardware.tv.tuner.FrontendCapabilities.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendCapabilities createFromParcel(Parcel _aidl_source) {
+                    return new FrontendCapabilities(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendCapabilities[] newArray(int _aidl_size) {
-            return new FrontendCapabilities[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendCapabilities[] newArray(int _aidl_size) {
+                    return new FrontendCapabilities[_aidl_size];
+                }
+            };
     public static final int analogCaps = 0;
     public static final int atsc3Caps = 2;
     public static final int atscCaps = 1;
@@ -256,47 +258,69 @@ public final class FrontendCapabilities implements Parcelable {
         int _aidl_tag = _aidl_parcel.readInt();
         switch (_aidl_tag) {
             case 0:
-                FrontendAnalogCapabilities _aidl_value = (FrontendAnalogCapabilities) _aidl_parcel.readTypedObject(FrontendAnalogCapabilities.CREATOR);
+                FrontendAnalogCapabilities _aidl_value =
+                        (FrontendAnalogCapabilities)
+                                _aidl_parcel.readTypedObject(FrontendAnalogCapabilities.CREATOR);
                 _set(_aidl_tag, _aidl_value);
                 return;
             case 1:
-                FrontendAtscCapabilities _aidl_value2 = (FrontendAtscCapabilities) _aidl_parcel.readTypedObject(FrontendAtscCapabilities.CREATOR);
+                FrontendAtscCapabilities _aidl_value2 =
+                        (FrontendAtscCapabilities)
+                                _aidl_parcel.readTypedObject(FrontendAtscCapabilities.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
-                FrontendAtsc3Capabilities _aidl_value3 = (FrontendAtsc3Capabilities) _aidl_parcel.readTypedObject(FrontendAtsc3Capabilities.CREATOR);
+                FrontendAtsc3Capabilities _aidl_value3 =
+                        (FrontendAtsc3Capabilities)
+                                _aidl_parcel.readTypedObject(FrontendAtsc3Capabilities.CREATOR);
                 _set(_aidl_tag, _aidl_value3);
                 return;
             case 3:
-                FrontendDtmbCapabilities _aidl_value4 = (FrontendDtmbCapabilities) _aidl_parcel.readTypedObject(FrontendDtmbCapabilities.CREATOR);
+                FrontendDtmbCapabilities _aidl_value4 =
+                        (FrontendDtmbCapabilities)
+                                _aidl_parcel.readTypedObject(FrontendDtmbCapabilities.CREATOR);
                 _set(_aidl_tag, _aidl_value4);
                 return;
             case 4:
-                FrontendDvbsCapabilities _aidl_value5 = (FrontendDvbsCapabilities) _aidl_parcel.readTypedObject(FrontendDvbsCapabilities.CREATOR);
+                FrontendDvbsCapabilities _aidl_value5 =
+                        (FrontendDvbsCapabilities)
+                                _aidl_parcel.readTypedObject(FrontendDvbsCapabilities.CREATOR);
                 _set(_aidl_tag, _aidl_value5);
                 return;
             case 5:
-                FrontendDvbcCapabilities _aidl_value6 = (FrontendDvbcCapabilities) _aidl_parcel.readTypedObject(FrontendDvbcCapabilities.CREATOR);
+                FrontendDvbcCapabilities _aidl_value6 =
+                        (FrontendDvbcCapabilities)
+                                _aidl_parcel.readTypedObject(FrontendDvbcCapabilities.CREATOR);
                 _set(_aidl_tag, _aidl_value6);
                 return;
             case 6:
-                FrontendDvbtCapabilities _aidl_value7 = (FrontendDvbtCapabilities) _aidl_parcel.readTypedObject(FrontendDvbtCapabilities.CREATOR);
+                FrontendDvbtCapabilities _aidl_value7 =
+                        (FrontendDvbtCapabilities)
+                                _aidl_parcel.readTypedObject(FrontendDvbtCapabilities.CREATOR);
                 _set(_aidl_tag, _aidl_value7);
                 return;
             case 7:
-                FrontendIsdbsCapabilities _aidl_value8 = (FrontendIsdbsCapabilities) _aidl_parcel.readTypedObject(FrontendIsdbsCapabilities.CREATOR);
+                FrontendIsdbsCapabilities _aidl_value8 =
+                        (FrontendIsdbsCapabilities)
+                                _aidl_parcel.readTypedObject(FrontendIsdbsCapabilities.CREATOR);
                 _set(_aidl_tag, _aidl_value8);
                 return;
             case 8:
-                FrontendIsdbs3Capabilities _aidl_value9 = (FrontendIsdbs3Capabilities) _aidl_parcel.readTypedObject(FrontendIsdbs3Capabilities.CREATOR);
+                FrontendIsdbs3Capabilities _aidl_value9 =
+                        (FrontendIsdbs3Capabilities)
+                                _aidl_parcel.readTypedObject(FrontendIsdbs3Capabilities.CREATOR);
                 _set(_aidl_tag, _aidl_value9);
                 return;
             case 9:
-                FrontendIsdbtCapabilities _aidl_value10 = (FrontendIsdbtCapabilities) _aidl_parcel.readTypedObject(FrontendIsdbtCapabilities.CREATOR);
+                FrontendIsdbtCapabilities _aidl_value10 =
+                        (FrontendIsdbtCapabilities)
+                                _aidl_parcel.readTypedObject(FrontendIsdbtCapabilities.CREATOR);
                 _set(_aidl_tag, _aidl_value10);
                 return;
             case 10:
-                FrontendIptvCapabilities _aidl_value11 = (FrontendIptvCapabilities) _aidl_parcel.readTypedObject(FrontendIptvCapabilities.CREATOR);
+                FrontendIptvCapabilities _aidl_value11 =
+                        (FrontendIptvCapabilities)
+                                _aidl_parcel.readTypedObject(FrontendIptvCapabilities.CREATOR);
                 _set(_aidl_tag, _aidl_value11);
                 return;
             default:
@@ -354,7 +378,12 @@ public final class FrontendCapabilities implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

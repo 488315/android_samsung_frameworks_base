@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Binder;
 import android.text.TextUtils;
+
 import com.android.internal.R;
 import com.android.internal.telephony.GsmAlphabet;
 import com.android.internal.telephony.Sms7BitEncodingTranslator;
@@ -12,6 +13,7 @@ import com.android.internal.telephony.SmsConstants;
 import com.android.internal.telephony.SmsHeader;
 import com.android.internal.telephony.SmsMessageBase;
 import com.android.internal.telephony.cdma.sms.UserData;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -37,7 +39,8 @@ public class SmsMessage {
     public static final int MAX_USER_DATA_SEPTETS = 160;
     public static final int MAX_USER_DATA_SEPTETS_WITH_HEADER = 153;
     private static final int MAX_USER_DATA_SEPTETS_WITH_HEADER_NATIONAL_LANGUAGE = 149;
-    private static final int MAX_USER_DATA_SEPTETS_WITH_HEADER_NATIONAL_LOCKING_SHIFT_LANGUAGE = 147;
+    private static final int MAX_USER_DATA_SEPTETS_WITH_HEADER_NATIONAL_LOCKING_SHIFT_LANGUAGE =
+            147;
     private static final int PHONE_TYPE_CDMA = 2;
     private static final int PHONE_TYPE_GSM = 1;
     public static final int VALIDITY_PERIOD_FORMAT_ABSOLUTE_FORMAT = 3;
@@ -50,12 +53,10 @@ public class SmsMessage {
     private static boolean mIsNoEmsSupportConfigListLoaded = false;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EncodingSize {
-    }
+    public @interface EncodingSize {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Format {
-    }
+    public @interface Format {}
 
     public enum MessageClass {
         UNKNOWN,
@@ -78,7 +79,10 @@ public class SmsMessage {
         public byte[] encodedScAddress;
 
         public String toString() {
-            return "SubmitPdu: encodedScAddress = " + Arrays.toString(this.encodedScAddress) + ", encodedMessage = " + Arrays.toString(this.encodedMessage);
+            return "SubmitPdu: encodedScAddress = "
+                    + Arrays.toString(this.encodedScAddress)
+                    + ", encodedMessage = "
+                    + Arrays.toString(this.encodedMessage);
         }
 
         protected SubmitPdu(SmsMessageBase.SubmitPduBase spb) {
@@ -93,15 +97,25 @@ public class SmsMessage {
 
     @Deprecated
     public static SmsMessage createFromPdu(byte[] pdu) {
-        return semCreateFromPdu(SubscriptionManager.getPhoneId(SmsManager.getDefaultSmsSubscriptionId()), pdu);
+        return semCreateFromPdu(
+                SubscriptionManager.getPhoneId(SmsManager.getDefaultSmsSubscriptionId()), pdu);
     }
 
     public static SmsMessage createFromPdu(byte[] pdu, String format) {
-        return semCreateFromPdu(SubscriptionManager.getPhoneId(SmsManager.getDefaultSmsSubscriptionId()), pdu, format, true);
+        return semCreateFromPdu(
+                SubscriptionManager.getPhoneId(SmsManager.getDefaultSmsSubscriptionId()),
+                pdu,
+                format,
+                true);
     }
 
-    private static SmsMessage createFromPdu(byte[] pdu, String format, boolean fallbackToOtherFormat) {
-        return semCreateFromPdu(SubscriptionManager.getPhoneId(SmsManager.getDefaultSmsSubscriptionId()), pdu, format, fallbackToOtherFormat);
+    private static SmsMessage createFromPdu(
+            byte[] pdu, String format, boolean fallbackToOtherFormat) {
+        return semCreateFromPdu(
+                SubscriptionManager.getPhoneId(SmsManager.getDefaultSmsSubscriptionId()),
+                pdu,
+                format,
+                fallbackToOtherFormat);
     }
 
     public static SmsMessage createFromEfRecord(int index, byte[] data) {
@@ -110,19 +124,29 @@ public class SmsMessage {
 
     public static SmsMessage createFromEfRecord(int index, byte[] data, int subId) {
         SmsMessageBase wrappedMessage;
-        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId).getSmsSetting(SmsConstants.SMS_3GPP2_LGT_NETWORK)) {
-            wrappedMessage = com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(index, data);
+        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId)
+                .getSmsSetting(SmsConstants.SMS_3GPP2_LGT_NETWORK)) {
+            wrappedMessage =
+                    com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(index, data);
         } else if (isCdmaVoice(subId)) {
-            wrappedMessage = com.android.internal.telephony.cdma.SmsMessage.createFromEfRecord(index, data);
+            wrappedMessage =
+                    com.android.internal.telephony.cdma.SmsMessage.createFromEfRecord(index, data);
             if (wrappedMessage == null) {
-                com.android.telephony.Rlog.e(LOG_TAG, "createfromeEFrecord is failed >> retry to use gsm-decode ");
-                wrappedMessage = com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(index, data);
+                com.android.telephony.Rlog.e(
+                        LOG_TAG, "createfromeEFrecord is failed >> retry to use gsm-decode ");
+                wrappedMessage =
+                        com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(
+                                index, data);
             }
         } else {
-            wrappedMessage = com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(index, data);
+            wrappedMessage =
+                    com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(index, data);
             if (wrappedMessage == null) {
-                com.android.telephony.Rlog.e(LOG_TAG, "createfromeEFrecord is failed >> retry to use cdma-decode ");
-                wrappedMessage = com.android.internal.telephony.cdma.SmsMessage.createFromEfRecord(index, data);
+                com.android.telephony.Rlog.e(
+                        LOG_TAG, "createfromeEFrecord is failed >> retry to use cdma-decode ");
+                wrappedMessage =
+                        com.android.internal.telephony.cdma.SmsMessage.createFromEfRecord(
+                                index, data);
             }
         }
         if (wrappedMessage != null) {
@@ -135,9 +159,11 @@ public class SmsMessage {
     public static SmsMessage createFromNativeSmsSubmitPdu(byte[] data, boolean isCdma) {
         SmsMessageBase wrappedMessage;
         if (isCdma) {
-            wrappedMessage = com.android.internal.telephony.cdma.SmsMessage.createFromEfRecord(0, data);
+            wrappedMessage =
+                    com.android.internal.telephony.cdma.SmsMessage.createFromEfRecord(0, data);
         } else {
-            wrappedMessage = com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(0, data);
+            wrappedMessage =
+                    com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(0, data);
         }
         if (wrappedMessage != null) {
             return new SmsMessage(wrappedMessage);
@@ -159,11 +185,22 @@ public class SmsMessage {
     public static int[] calculateLength(CharSequence msgBody, boolean use7bitOnly, int subId) {
         GsmAlphabet.TextEncodingDetails ted;
         if (useCdmaFormatForMoSms(subId)) {
-            ted = com.android.internal.telephony.cdma.SmsMessage.calculateLength(msgBody, use7bitOnly, true);
+            ted =
+                    com.android.internal.telephony.cdma.SmsMessage.calculateLength(
+                            msgBody, use7bitOnly, true);
         } else {
-            ted = com.android.internal.telephony.gsm.SmsMessage.calculateLength(msgBody, use7bitOnly);
+            ted =
+                    com.android.internal.telephony.gsm.SmsMessage.calculateLength(
+                            msgBody, use7bitOnly);
         }
-        int[] ret = {ted.msgCount, ted.codeUnitCount, ted.codeUnitsRemaining, ted.codeUnitSize, ted.languageTable, ted.languageShiftTable};
+        int[] ret = {
+            ted.msgCount,
+            ted.codeUnitCount,
+            ted.codeUnitsRemaining,
+            ted.codeUnitSize,
+            ted.languageTable,
+            ted.languageShiftTable
+        };
         return ret;
     }
 
@@ -232,13 +269,25 @@ public class SmsMessage {
                     nextPos = Math.min(udhLength, textLen - pos) + pos;
                 } else {
                     int nextPos2 = ted.languageTable;
-                    nextPos = GsmAlphabet.findGsmSeptetLimitIndex(newMsgBody, pos, udhLength, nextPos2, ted.languageShiftTable);
+                    nextPos =
+                            GsmAlphabet.findGsmSeptetLimitIndex(
+                                    newMsgBody, pos, udhLength, nextPos2, ted.languageShiftTable);
                 }
             } else {
                 nextPos = SmsMessageBase.findNextUnicodePosition(pos, udhLength, newMsgBody);
             }
             if (nextPos <= pos || nextPos > textLen) {
-                com.android.telephony.Rlog.e(LOG_TAG, "fragmentText failed (" + pos + " >= " + nextPos + " or " + nextPos + " >= " + textLen + NavigationBarInflaterView.KEY_CODE_END);
+                com.android.telephony.Rlog.e(
+                        LOG_TAG,
+                        "fragmentText failed ("
+                                + pos
+                                + " >= "
+                                + nextPos
+                                + " or "
+                                + nextPos
+                                + " >= "
+                                + textLen
+                                + NavigationBarInflaterView.KEY_CODE_END);
                 break;
             }
             result.add(newMsgBody.substring(pos, nextPos));
@@ -255,16 +304,38 @@ public class SmsMessage {
         return calculateLength((CharSequence) messageBody, use7bitOnly, subId);
     }
 
-    public static SubmitPdu getSubmitPdu(String scAddress, String destinationAddress, String message, boolean statusReportRequested) {
-        return getSubmitPdu(scAddress, destinationAddress, message, statusReportRequested, SmsManager.getDefaultSmsSubscriptionId());
+    public static SubmitPdu getSubmitPdu(
+            String scAddress,
+            String destinationAddress,
+            String message,
+            boolean statusReportRequested) {
+        return getSubmitPdu(
+                scAddress,
+                destinationAddress,
+                message,
+                statusReportRequested,
+                SmsManager.getDefaultSmsSubscriptionId());
     }
 
-    public static SubmitPdu getSubmitPdu(String scAddress, String destinationAddress, String message, boolean statusReportRequested, int subId) {
+    public static SubmitPdu getSubmitPdu(
+            String scAddress,
+            String destinationAddress,
+            String message,
+            boolean statusReportRequested,
+            int subId) {
         SmsMessageBase.SubmitPduBase spb;
         if (useCdmaFormatForMoSms(subId)) {
-            spb = com.android.internal.telephony.cdma.SmsMessage.getSubmitPdu(scAddress, destinationAddress, message, statusReportRequested, (SmsHeader) null);
+            spb =
+                    com.android.internal.telephony.cdma.SmsMessage.getSubmitPdu(
+                            scAddress,
+                            destinationAddress,
+                            message,
+                            statusReportRequested,
+                            (SmsHeader) null);
         } else {
-            spb = com.android.internal.telephony.gsm.SmsMessage.getSubmitPdu(scAddress, destinationAddress, message, statusReportRequested);
+            spb =
+                    com.android.internal.telephony.gsm.SmsMessage.getSubmitPdu(
+                            scAddress, destinationAddress, message, statusReportRequested);
         }
         if (spb != null) {
             return new SubmitPdu(spb);
@@ -272,12 +343,29 @@ public class SmsMessage {
         return null;
     }
 
-    public static SubmitPdu getSubmitPdu(String scAddress, String destinationAddress, short destinationPort, byte[] data, boolean statusReportRequested) {
+    public static SubmitPdu getSubmitPdu(
+            String scAddress,
+            String destinationAddress,
+            short destinationPort,
+            byte[] data,
+            boolean statusReportRequested) {
         SmsMessageBase.SubmitPduBase spb;
         if (useCdmaFormatForMoSms()) {
-            spb = com.android.internal.telephony.cdma.SmsMessage.getSubmitPdu(scAddress, destinationAddress, destinationPort, data, statusReportRequested);
+            spb =
+                    com.android.internal.telephony.cdma.SmsMessage.getSubmitPdu(
+                            scAddress,
+                            destinationAddress,
+                            destinationPort,
+                            data,
+                            statusReportRequested);
         } else {
-            spb = com.android.internal.telephony.gsm.SmsMessage.getSubmitPdu(scAddress, destinationAddress, destinationPort, data, statusReportRequested);
+            spb =
+                    com.android.internal.telephony.gsm.SmsMessage.getSubmitPdu(
+                            scAddress,
+                            destinationAddress,
+                            destinationPort,
+                            data,
+                            statusReportRequested);
         }
         if (spb != null) {
             return new SubmitPdu(spb);
@@ -286,18 +374,27 @@ public class SmsMessage {
     }
 
     @SystemApi
-    public static SubmitPdu getSmsPdu(int subId, int status, String scAddress, String address, String message, long date) {
+    public static SubmitPdu getSmsPdu(
+            int subId, int status, String scAddress, String address, String message, long date) {
         SmsMessageBase.SubmitPduBase spb;
         if (isCdmaVoice(subId)) {
             if (status == 1 || status == 3) {
-                spb = com.android.internal.telephony.cdma.SmsMessage.getDeliverPdu(address, message, date);
+                spb =
+                        com.android.internal.telephony.cdma.SmsMessage.getDeliverPdu(
+                                address, message, date);
             } else {
-                spb = com.android.internal.telephony.cdma.SmsMessage.getSubmitPdu(scAddress, address, message, false, (SmsHeader) null);
+                spb =
+                        com.android.internal.telephony.cdma.SmsMessage.getSubmitPdu(
+                                scAddress, address, message, false, (SmsHeader) null);
             }
         } else if (status == 1 || status == 3) {
-            spb = com.android.internal.telephony.gsm.SmsMessage.getDeliverPdu(scAddress, address, message, date);
+            spb =
+                    com.android.internal.telephony.gsm.SmsMessage.getDeliverPdu(
+                            scAddress, address, message, date);
         } else {
-            spb = com.android.internal.telephony.gsm.SmsMessage.getSubmitPdu(scAddress, address, message, false, (byte[]) null);
+            spb =
+                    com.android.internal.telephony.gsm.SmsMessage.getSubmitPdu(
+                            scAddress, address, message, false, (byte[]) null);
         }
         if (spb != null) {
             return new SubmitPdu(spb);
@@ -306,7 +403,16 @@ public class SmsMessage {
     }
 
     @SystemApi
-    public static byte[] getSubmitPduEncodedMessage(boolean isTypeGsm, String destinationAddress, String message, int encoding, int languageTable, int languageShiftTable, int refNumber, int seqNumber, int msgCount) {
+    public static byte[] getSubmitPduEncodedMessage(
+            boolean isTypeGsm,
+            String destinationAddress,
+            String message,
+            int encoding,
+            int languageTable,
+            int languageShiftTable,
+            int refNumber,
+            int seqNumber,
+            int msgCount) {
         int i;
         byte[] data;
         SmsHeader.ConcatRef concatRef = new SmsHeader.ConcatRef();
@@ -322,7 +428,17 @@ public class SmsMessage {
         }
         if (isTypeGsm) {
             i = 0;
-            data = com.android.internal.telephony.gsm.SmsMessage.getSubmitPdu(null, destinationAddress, message, false, SmsHeader.toByteArray(smsHeader), encoding, languageTable, languageShiftTable).encodedMessage;
+            data =
+                    com.android.internal.telephony.gsm.SmsMessage.getSubmitPdu(
+                                    null,
+                                    destinationAddress,
+                                    message,
+                                    false,
+                                    SmsHeader.toByteArray(smsHeader),
+                                    encoding,
+                                    languageTable,
+                                    languageShiftTable)
+                            .encodedMessage;
         } else {
             i = 0;
             UserData uData = new UserData();
@@ -334,7 +450,10 @@ public class SmsMessage {
                 uData.msgEncoding = 4;
             }
             uData.msgEncodingSet = true;
-            data = com.android.internal.telephony.cdma.SmsMessage.getSubmitPdu(destinationAddress, uData, false).encodedMessage;
+            data =
+                    com.android.internal.telephony.cdma.SmsMessage.getSubmitPdu(
+                                    destinationAddress, uData, false)
+                            .encodedMessage;
         }
         if (data == null) {
             return new byte[i];
@@ -484,7 +603,8 @@ public class SmsMessage {
     }
 
     private static boolean isCdmaVoice(int subId) {
-        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId).getSmsSetting(SmsConstants.SMS_3GPP2_LGT_NETWORK)) {
+        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId)
+                .getSmsSetting(SmsConstants.SMS_3GPP2_LGT_NETWORK)) {
             return false;
         }
         int activePhone = TelephonyManager.getDefault().getCurrentPhoneType(subId);
@@ -503,8 +623,12 @@ public class SmsMessage {
             if (!TextUtils.isEmpty(simOperator)) {
                 for (NoEmsSupportConfig currentConfig : mNoEmsSupportConfigList) {
                     if (currentConfig == null) {
-                        com.android.telephony.Rlog.w(LOG_TAG, "hasEmsSupport currentConfig is null");
-                    } else if (simOperator.startsWith(currentConfig.mOperatorNumber) && (TextUtils.isEmpty(currentConfig.mGid1) || (!TextUtils.isEmpty(currentConfig.mGid1) && currentConfig.mGid1.equalsIgnoreCase(gid)))) {
+                        com.android.telephony.Rlog.w(
+                                LOG_TAG, "hasEmsSupport currentConfig is null");
+                    } else if (simOperator.startsWith(currentConfig.mOperatorNumber)
+                            && (TextUtils.isEmpty(currentConfig.mGid1)
+                                    || (!TextUtils.isEmpty(currentConfig.mGid1)
+                                            && currentConfig.mGid1.equalsIgnoreCase(gid)))) {
                         return false;
                     }
                 }
@@ -526,7 +650,10 @@ public class SmsMessage {
             String gid = TelephonyManager.getDefault().getGroupIdLevel1();
             Binder.restoreCallingIdentity(identity);
             for (NoEmsSupportConfig currentConfig : mNoEmsSupportConfigList) {
-                if (simOperator.startsWith(currentConfig.mOperatorNumber) && (TextUtils.isEmpty(currentConfig.mGid1) || (!TextUtils.isEmpty(currentConfig.mGid1) && currentConfig.mGid1.equalsIgnoreCase(gid)))) {
+                if (simOperator.startsWith(currentConfig.mOperatorNumber)
+                        && (TextUtils.isEmpty(currentConfig.mGid1)
+                                || (!TextUtils.isEmpty(currentConfig.mGid1)
+                                        && currentConfig.mGid1.equalsIgnoreCase(gid)))) {
                     return currentConfig.mIsPrefix;
                 }
             }
@@ -549,7 +676,13 @@ public class SmsMessage {
         }
 
         public String toString() {
-            return "NoEmsSupportConfig { mOperatorNumber = " + this.mOperatorNumber + ", mIsPrefix = " + this.mIsPrefix + ", mGid1 = " + this.mGid1 + " }";
+            return "NoEmsSupportConfig { mOperatorNumber = "
+                    + this.mOperatorNumber
+                    + ", mIsPrefix = "
+                    + this.mIsPrefix
+                    + ", mGid1 = "
+                    + this.mGid1
+                    + " }";
         }
     }
 
@@ -561,36 +694,62 @@ public class SmsMessage {
                 if (listArray != null && listArray.length > 0) {
                     mNoEmsSupportConfigList = new NoEmsSupportConfig[listArray.length];
                     for (int i = 0; i < listArray.length; i++) {
-                        mNoEmsSupportConfigList[i] = new NoEmsSupportConfig(listArray[i].split(NavigationBarInflaterView.GRAVITY_SEPARATOR));
+                        mNoEmsSupportConfigList[i] =
+                                new NoEmsSupportConfig(
+                                        listArray[i].split(
+                                                NavigationBarInflaterView.GRAVITY_SEPARATOR));
                     }
                 }
                 mIsNoEmsSupportConfigListLoaded = true;
             }
         }
-        return (mNoEmsSupportConfigList == null || mNoEmsSupportConfigList.length == 0) ? false : true;
+        return (mNoEmsSupportConfigList == null || mNoEmsSupportConfigList.length == 0)
+                ? false
+                : true;
     }
 
     public String getRecipientAddress() {
         return this.mWrappedSmsMessage.getRecipientAddress();
     }
 
-    public static int[] calculateLength(CharSequence msgBody, boolean use7bitOnly, int encodingType, int maxEmailLen, int phoneType) {
+    public static int[] calculateLength(
+            CharSequence msgBody,
+            boolean use7bitOnly,
+            int encodingType,
+            int maxEmailLen,
+            int phoneType) {
         GsmAlphabet.TextEncodingDetails ted;
         if (phoneType == 2) {
-            ted = com.android.internal.telephony.cdma.SmsMessage.calculateLengthWithEmail(msgBody, use7bitOnly, maxEmailLen);
+            ted =
+                    com.android.internal.telephony.cdma.SmsMessage.calculateLengthWithEmail(
+                            msgBody, use7bitOnly, maxEmailLen);
         } else {
-            ted = com.android.internal.telephony.gsm.SmsMessage.calculateLengthWithEmail(msgBody, use7bitOnly, encodingType, maxEmailLen);
+            ted =
+                    com.android.internal.telephony.gsm.SmsMessage.calculateLengthWithEmail(
+                            msgBody, use7bitOnly, encodingType, maxEmailLen);
         }
-        int[] ret = {ted.msgCount, ted.codeUnitCount, ted.codeUnitsRemaining, ted.codeUnitSize, ted.languageTable, ted.languageShiftTable};
+        int[] ret = {
+            ted.msgCount,
+            ted.codeUnitCount,
+            ted.codeUnitsRemaining,
+            ted.codeUnitSize,
+            ted.languageTable,
+            ted.languageShiftTable
+        };
         return ret;
     }
 
-    public static int[] calculateLengthWithEncodingType(CharSequence msgBody, boolean use7bitOnly, int encodingType) {
+    public static int[] calculateLengthWithEncodingType(
+            CharSequence msgBody, boolean use7bitOnly, int encodingType) {
         GsmAlphabet.TextEncodingDetails ted;
         if (useCdmaFormatForMoSms()) {
-            ted = com.android.internal.telephony.cdma.SmsMessage.calculateLength(msgBody, use7bitOnly, true);
+            ted =
+                    com.android.internal.telephony.cdma.SmsMessage.calculateLength(
+                            msgBody, use7bitOnly, true);
         } else {
-            ted = com.android.internal.telephony.gsm.SmsMessage.calculateLengthWithEncodingType(msgBody, use7bitOnly, encodingType);
+            ted =
+                    com.android.internal.telephony.gsm.SmsMessage.calculateLengthWithEncodingType(
+                            msgBody, use7bitOnly, encodingType);
         }
         int[] ret = {ted.msgCount, ted.codeUnitCount, ted.codeUnitsRemaining, ted.codeUnitSize};
         return ret;
@@ -610,15 +769,22 @@ public class SmsMessage {
         com.android.telephony.Rlog.i(LOG_TAG, "semCreateFromPdu() : phoneId = " + phoneId);
         int subId = getSubId(phoneId);
         int activePhone = TelephonyManager.getDefault().getCurrentPhoneType();
-        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId).getMnoName().toUpperCase().contains("KDDI")) {
+        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId)
+                .getMnoName()
+                .toUpperCase()
+                .contains("KDDI")) {
             format = useCdmaFormatForMoSms() ? "3gpp2" : "3gpp";
         } else {
             format = 2 == activePhone ? "3gpp2" : "3gpp";
         }
         SmsMessage message = semCreateFromPdu(phoneId, pdu, format);
         if (message == null || message.mWrappedSmsMessage == null) {
-            com.android.telephony.Rlog.e(LOG_TAG, "semCreateFromPdu(): decoding is failed because of wrong format");
-            if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId).getMnoName().toUpperCase().contains("KDDI")) {
+            com.android.telephony.Rlog.e(
+                    LOG_TAG, "semCreateFromPdu(): decoding is failed because of wrong format");
+            if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId)
+                    .getMnoName()
+                    .toUpperCase()
+                    .contains("KDDI")) {
                 format2 = useCdmaFormatForMoSms() ? "3gpp" : "3gpp2";
             } else {
                 format2 = 2 == activePhone ? "3gpp" : "3gpp2";
@@ -629,7 +795,8 @@ public class SmsMessage {
     }
 
     public static SmsMessage semCreateFromPdu(int phoneId, byte[] pdu, String format) {
-        if (phoneId != Integer.MAX_VALUE && (phoneId < 0 || phoneId >= TelephonyManager.getDefault().getPhoneCount())) {
+        if (phoneId != Integer.MAX_VALUE
+                && (phoneId < 0 || phoneId >= TelephonyManager.getDefault().getPhoneCount())) {
             com.android.telephony.Rlog.e(LOG_TAG, "invalid phoneId = " + phoneId);
             return null;
         }
@@ -637,7 +804,8 @@ public class SmsMessage {
         return semCreateFromPdu(phoneId, pdu, format, true);
     }
 
-    private static SmsMessage semCreateFromPdu(int phoneId, byte[] pdu, String format, boolean fallbackToOtherFormat) {
+    private static SmsMessage semCreateFromPdu(
+            int phoneId, byte[] pdu, String format, boolean fallbackToOtherFormat) {
         SmsMessageBase wrappedMessage;
         if (pdu == null || format == null) {
             com.android.telephony.Rlog.i(LOG_TAG, "semCreateFromPdu(): pdu or format are null");
@@ -645,19 +813,28 @@ public class SmsMessage {
         }
         String otherFormat = "3gpp2".equals(format) ? "3gpp" : "3gpp2";
         if ("3gpp2".equals(format)) {
-            wrappedMessage = com.android.internal.telephony.cdma.SmsMessage.semCreateFromPdu(phoneId, pdu);
+            wrappedMessage =
+                    com.android.internal.telephony.cdma.SmsMessage.semCreateFromPdu(phoneId, pdu);
             if (wrappedMessage == null) {
-                com.android.telephony.Rlog.e(LOG_TAG, "semCreateFromPdu is failed >> retry to use gsm-decode ");
-                wrappedMessage = com.android.internal.telephony.gsm.SmsMessage.semCreateFromPdu(phoneId, pdu);
+                com.android.telephony.Rlog.e(
+                        LOG_TAG, "semCreateFromPdu is failed >> retry to use gsm-decode ");
+                wrappedMessage =
+                        com.android.internal.telephony.gsm.SmsMessage.semCreateFromPdu(
+                                phoneId, pdu);
             }
         } else if ("3gpp".equals(format)) {
-            wrappedMessage = com.android.internal.telephony.gsm.SmsMessage.semCreateFromPdu(phoneId, pdu);
+            wrappedMessage =
+                    com.android.internal.telephony.gsm.SmsMessage.semCreateFromPdu(phoneId, pdu);
             if (wrappedMessage == null) {
-                com.android.telephony.Rlog.e(LOG_TAG, "semCreateFromPdu is failed >> retry to use CDMA-decode ");
-                wrappedMessage = com.android.internal.telephony.cdma.SmsMessage.semCreateFromPdu(phoneId, pdu);
+                com.android.telephony.Rlog.e(
+                        LOG_TAG, "semCreateFromPdu is failed >> retry to use CDMA-decode ");
+                wrappedMessage =
+                        com.android.internal.telephony.cdma.SmsMessage.semCreateFromPdu(
+                                phoneId, pdu);
             }
         } else {
-            com.android.telephony.Rlog.e(LOG_TAG, "semCreateFromPdu(): unsupported message format " + format);
+            com.android.telephony.Rlog.e(
+                    LOG_TAG, "semCreateFromPdu(): unsupported message format " + format);
             return null;
         }
         if (wrappedMessage != null) {
@@ -673,9 +850,11 @@ public class SmsMessage {
     public static SmsMessage semCreateFromPdu(int phoneId, byte[] pdu, int encoding) {
         SmsMessageBase wrappedMessage;
         if (2 == encoding) {
-            wrappedMessage = com.android.internal.telephony.cdma.SmsMessage.semCreateFromPdu(phoneId, pdu);
+            wrappedMessage =
+                    com.android.internal.telephony.cdma.SmsMessage.semCreateFromPdu(phoneId, pdu);
         } else {
-            wrappedMessage = com.android.internal.telephony.gsm.SmsMessage.semCreateFromPdu(phoneId, pdu);
+            wrappedMessage =
+                    com.android.internal.telephony.gsm.SmsMessage.semCreateFromPdu(phoneId, pdu);
         }
         if (wrappedMessage != null) {
             return new SmsMessage(wrappedMessage);
@@ -687,16 +866,24 @@ public class SmsMessage {
     public static SmsMessage createFromEfRecord(int index, byte[] data, String format) {
         SmsMessageBase wrappedMessage;
         if ("3gpp2".equals(format)) {
-            wrappedMessage = com.android.internal.telephony.cdma.SmsMessage.createFromEfRecord(index, data);
+            wrappedMessage =
+                    com.android.internal.telephony.cdma.SmsMessage.createFromEfRecord(index, data);
             if (wrappedMessage == null) {
-                com.android.telephony.Rlog.e(LOG_TAG, "createfromeEFrecord is failed >> retry to use gsm-decode ");
-                wrappedMessage = com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(index, data);
+                com.android.telephony.Rlog.e(
+                        LOG_TAG, "createfromeEFrecord is failed >> retry to use gsm-decode ");
+                wrappedMessage =
+                        com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(
+                                index, data);
             }
         } else {
-            wrappedMessage = com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(index, data);
+            wrappedMessage =
+                    com.android.internal.telephony.gsm.SmsMessage.createFromEfRecord(index, data);
             if (wrappedMessage == null) {
-                com.android.telephony.Rlog.e(LOG_TAG, "createfromeEFrecord is failed >> retry to use cdma-decode ");
-                wrappedMessage = com.android.internal.telephony.cdma.SmsMessage.createFromEfRecord(index, data);
+                com.android.telephony.Rlog.e(
+                        LOG_TAG, "createfromeEFrecord is failed >> retry to use cdma-decode ");
+                wrappedMessage =
+                        com.android.internal.telephony.cdma.SmsMessage.createFromEfRecord(
+                                index, data);
             }
         }
         if (wrappedMessage != null) {
@@ -706,7 +893,8 @@ public class SmsMessage {
         return null;
     }
 
-    public static ArrayList<String> fragmentText(String text, int encodingType, SmsManager smsManager) {
+    public static ArrayList<String> fragmentText(
+            String text, int encodingType, SmsManager smsManager) {
         GsmAlphabet.TextEncodingDetails ted;
         int limit;
         int nextPos;
@@ -715,14 +903,18 @@ public class SmsMessage {
         if (isCdma) {
             ted = com.android.internal.telephony.cdma.SmsMessage.calculateLength(text, false, true);
         } else if (encodingType == 1) {
-            ted = com.android.internal.telephony.gsm.SmsMessage.calculateLengthWithEncodingType(text, false, encodingType);
+            ted =
+                    com.android.internal.telephony.gsm.SmsMessage.calculateLengthWithEncodingType(
+                            text, false, encodingType);
         } else {
             ted = com.android.internal.telephony.gsm.SmsMessage.calculateLength(text, false);
         }
         if (ted.msgCount > 1) {
-            if (GsmAlphabet.getEnabledSingleShiftTables().length >= 1 && GsmAlphabet.getEnabledLockingShiftTables().length >= 1) {
+            if (GsmAlphabet.getEnabledSingleShiftTables().length >= 1
+                    && GsmAlphabet.getEnabledLockingShiftTables().length >= 1) {
                 limit = ted.codeUnitSize == 1 ? 147 : 128;
-            } else if (GsmAlphabet.getEnabledSingleShiftTables().length >= 1 || GsmAlphabet.getEnabledLockingShiftTables().length >= 1) {
+            } else if (GsmAlphabet.getEnabledSingleShiftTables().length >= 1
+                    || GsmAlphabet.getEnabledLockingShiftTables().length >= 1) {
                 int limit2 = ted.codeUnitSize;
                 limit = limit2 == 1 ? 149 : 131;
             } else {
@@ -748,17 +940,43 @@ public class SmsMessage {
                 if (useCdmaFormatForMoSms(smsManager) && ted.msgCount == i) {
                     nextPos = Math.min(limit, textLen - pos) + pos;
                 } else {
-                    nextPos = GsmAlphabet.findGsmSeptetLimitIndex(newMsgBody, pos, limit, ted.languageTable, ted.languageShiftTable);
+                    nextPos =
+                            GsmAlphabet.findGsmSeptetLimitIndex(
+                                    newMsgBody,
+                                    pos,
+                                    limit,
+                                    ted.languageTable,
+                                    ted.languageShiftTable);
                 }
             } else {
                 nextPos = SmsMessageBase.findNextUnicodePosition(pos, limit, newMsgBody);
                 if (nextPos <= pos || nextPos > textLen) {
-                    com.android.telephony.Rlog.e(LOG_TAG, "findNextUnicodePosition() isn`t working.(" + pos + " >= " + nextPos + " or " + nextPos + " >= " + textLen + NavigationBarInflaterView.KEY_CODE_END);
+                    com.android.telephony.Rlog.e(
+                            LOG_TAG,
+                            "findNextUnicodePosition() isn`t working.("
+                                    + pos
+                                    + " >= "
+                                    + nextPos
+                                    + " or "
+                                    + nextPos
+                                    + " >= "
+                                    + textLen
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                     nextPos = pos + Math.min(limit / 2, textLen - pos);
                 }
             }
             if (nextPos <= pos || nextPos > textLen) {
-                com.android.telephony.Rlog.d(LOG_TAG, "fragmentText failed (" + pos + " >= " + nextPos + " or " + nextPos + " >= " + textLen + NavigationBarInflaterView.KEY_CODE_END);
+                com.android.telephony.Rlog.d(
+                        LOG_TAG,
+                        "fragmentText failed ("
+                                + pos
+                                + " >= "
+                                + nextPos
+                                + " or "
+                                + nextPos
+                                + " >= "
+                                + textLen
+                                + NavigationBarInflaterView.KEY_CODE_END);
                 break;
             }
             result.add(newMsgBody.substring(pos, nextPos));
@@ -862,12 +1080,31 @@ public class SmsMessage {
         }
     }
 
-    public static SubmitPdu getSubmitPdu(int subId, String scAddress, String destinationAddress, String message, boolean statusReportRequested, byte[] header, String callbackNumber, int priority) {
+    public static SubmitPdu getSubmitPdu(
+            int subId,
+            String scAddress,
+            String destinationAddress,
+            String message,
+            boolean statusReportRequested,
+            byte[] header,
+            String callbackNumber,
+            int priority) {
         SmsMessageBase.SubmitPduBase spb;
         if (useCdmaFormatForMoSms()) {
-            spb = com.android.internal.telephony.cdma.SmsMessage.getSubmitPdu(subId, scAddress, destinationAddress, message, statusReportRequested, SmsHeader.fromByteArray(header), callbackNumber, priority);
+            spb =
+                    com.android.internal.telephony.cdma.SmsMessage.getSubmitPdu(
+                            subId,
+                            scAddress,
+                            destinationAddress,
+                            message,
+                            statusReportRequested,
+                            SmsHeader.fromByteArray(header),
+                            callbackNumber,
+                            priority);
         } else {
-            spb = com.android.internal.telephony.gsm.SmsMessage.getSubmitPdu(scAddress, destinationAddress, message, statusReportRequested, header);
+            spb =
+                    com.android.internal.telephony.gsm.SmsMessage.getSubmitPdu(
+                            scAddress, destinationAddress, message, statusReportRequested, header);
         }
         return new SubmitPdu(spb);
     }
@@ -882,12 +1119,17 @@ public class SmsMessage {
         return "3gpp2".equals(smsManager.getImsSmsFormat());
     }
 
-    public static int[] calculateLengthForEms(CharSequence msgBody, boolean use7bitOnly, boolean isEms) {
+    public static int[] calculateLengthForEms(
+            CharSequence msgBody, boolean use7bitOnly, boolean isEms) {
         GsmAlphabet.TextEncodingDetails ted;
         if (useCdmaFormatForMoSms()) {
-            ted = com.android.internal.telephony.cdma.SmsMessage.calculateLengthForEms(msgBody, use7bitOnly, isEms);
+            ted =
+                    com.android.internal.telephony.cdma.SmsMessage.calculateLengthForEms(
+                            msgBody, use7bitOnly, isEms);
         } else {
-            ted = com.android.internal.telephony.gsm.SmsMessage.calculateLength(msgBody, use7bitOnly);
+            ted =
+                    com.android.internal.telephony.gsm.SmsMessage.calculateLength(
+                            msgBody, use7bitOnly);
         }
         int[] ret = {ted.msgCount, ted.codeUnitCount, ted.codeUnitsRemaining, ted.codeUnitSize};
         return ret;
@@ -950,17 +1192,43 @@ public class SmsMessage {
                 if (isCdma && ted.msgCount == i) {
                     nextPos = Math.min(udhLength, textLen - pos) + pos;
                 } else {
-                    nextPos = GsmAlphabet.findGsmSeptetLimitIndex(newMsgBody, pos, udhLength, ted.languageTable, ted.languageShiftTable);
+                    nextPos =
+                            GsmAlphabet.findGsmSeptetLimitIndex(
+                                    newMsgBody,
+                                    pos,
+                                    udhLength,
+                                    ted.languageTable,
+                                    ted.languageShiftTable);
                 }
             } else {
                 nextPos = SmsMessageBase.findNextUnicodePosition(pos, udhLength, newMsgBody);
                 if (nextPos <= pos || nextPos > textLen) {
-                    com.android.telephony.Rlog.e(LOG_TAG, "findNextUnicodePosition() isn't working.(" + pos + " >= " + nextPos + " or " + nextPos + " >= " + textLen + NavigationBarInflaterView.KEY_CODE_END);
+                    com.android.telephony.Rlog.e(
+                            LOG_TAG,
+                            "findNextUnicodePosition() isn't working.("
+                                    + pos
+                                    + " >= "
+                                    + nextPos
+                                    + " or "
+                                    + nextPos
+                                    + " >= "
+                                    + textLen
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                     nextPos = pos + Math.min(udhLength / 2, textLen - pos);
                 }
             }
             if (nextPos <= pos || nextPos > textLen) {
-                com.android.telephony.Rlog.e(LOG_TAG, "fragmentText failed (" + pos + " >= " + nextPos + " or " + nextPos + " >= " + textLen + NavigationBarInflaterView.KEY_CODE_END);
+                com.android.telephony.Rlog.e(
+                        LOG_TAG,
+                        "fragmentText failed ("
+                                + pos
+                                + " >= "
+                                + nextPos
+                                + " or "
+                                + nextPos
+                                + " >= "
+                                + textLen
+                                + NavigationBarInflaterView.KEY_CODE_END);
                 break;
             }
             result.add(newMsgBody.substring(pos, nextPos));

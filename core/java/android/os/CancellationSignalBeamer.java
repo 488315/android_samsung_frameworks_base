@@ -1,12 +1,10 @@
 package android.os;
 
-import android.os.CancellationSignal;
-import android.os.CancellationSignalBeamer;
-import android.os.IBinder;
 import android.system.SystemCleaner;
 import android.util.Pair;
 import android.view.inputmethod.CancellableHandwritingGesture;
 import android.view.inputmethod.HandwritingGesture;
+
 import java.lang.ref.Cleaner;
 import java.lang.ref.Reference;
 import java.util.ArrayList;
@@ -16,11 +14,13 @@ import java.util.HashMap;
 public class CancellationSignalBeamer {
     static final Cleaner sCleaner = SystemCleaner.cleaner();
 
-    public static abstract class Sender {
-        private static final ThreadLocal<Pair<Sender, ArrayList<CloseableToken>>> sScope = new ThreadLocal<>();
+    public abstract static class Sender {
+        private static final ThreadLocal<Pair<Sender, ArrayList<CloseableToken>>> sScope =
+                new ThreadLocal<>();
 
         public interface CloseableToken extends IBinder, MustClose {
-            @Override // android.os.CancellationSignalBeamer.Sender.MustClose, java.lang.AutoCloseable
+            @Override // android.os.CancellationSignalBeamer.Sender.MustClose,
+                      // java.lang.AutoCloseable
             void close();
         }
 
@@ -45,8 +45,10 @@ public class CancellationSignalBeamer {
                 return null;
             }
             sScope.set(Pair.create(this, new ArrayList()));
-            return new MustClose() { // from class: android.os.CancellationSignalBeamer$Sender$$ExternalSyntheticLambda0
-                @Override // android.os.CancellationSignalBeamer.Sender.MustClose, java.lang.AutoCloseable
+            return new MustClose() { // from class:
+                                     // android.os.CancellationSignalBeamer$Sender$$ExternalSyntheticLambda0
+                @Override // android.os.CancellationSignalBeamer.Sender.MustClose,
+                          // java.lang.AutoCloseable
                 public final void close() {
                     CancellationSignalBeamer.Sender.lambda$beamScopeIfNeeded$0();
                 }
@@ -82,7 +84,9 @@ public class CancellationSignalBeamer {
                 this.mPreparer = new Preparer(sender, signal, this);
             }
 
-            @Override // android.os.CancellationSignalBeamer.Sender.CloseableToken, android.os.CancellationSignalBeamer.Sender.MustClose, java.lang.AutoCloseable
+            @Override // android.os.CancellationSignalBeamer.Sender.CloseableToken,
+                      // android.os.CancellationSignalBeamer.Sender.MustClose,
+                      // java.lang.AutoCloseable
             public void close() {
                 Preparer preparer = this.mPreparer;
                 this.mPreparer = null;

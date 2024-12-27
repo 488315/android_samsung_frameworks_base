@@ -4,6 +4,7 @@ import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+
 import com.android.internal.widget.RecyclerView;
 import com.android.internal.widget.RecyclerViewAccessibilityDelegate;
 
@@ -19,7 +20,8 @@ class ChooserRecyclerViewAccessibilityDelegate extends RecyclerViewAccessibility
     }
 
     @Override // android.view.View.AccessibilityDelegate
-    public boolean onRequestSendAccessibilityEvent(ViewGroup host, View view, AccessibilityEvent event) {
+    public boolean onRequestSendAccessibilityEvent(
+            ViewGroup host, View view, AccessibilityEvent event) {
         boolean result = super.onRequestSendAccessibilityEvent(host, view, event);
         if (result && event.getEventType() == 32768) {
             ensureViewOnScreenVisibility((RecyclerView) host, view);

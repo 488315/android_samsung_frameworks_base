@@ -4,7 +4,9 @@ import android.os.RemoteException;
 import android.os.ShellCommand;
 import android.text.TextUtils;
 import android.webkit.IWebViewUpdateService;
+
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -27,7 +29,8 @@ public final class WebViewUpdateServiceShellCommand2 extends ShellCommand {
             }
             return handleDefaultCommands(str);
         } catch (RemoteException e) {
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote exception: ", e, outPrintWriter);
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    "Remote exception: ", e, outPrintWriter);
             return -1;
         }
     }
@@ -60,7 +63,10 @@ public final class WebViewUpdateServiceShellCommand2 extends ShellCommand {
             outPrintWriter.println("Success");
             return 0;
         }
-        outPrintWriter.println(TextUtils.formatSimple("Failed to switch to %s, the WebView implementation is now provided by %s.", new Object[]{nextArg, changeProviderAndSetting}));
+        outPrintWriter.println(
+                TextUtils.formatSimple(
+                        "Failed to switch to %s, the WebView implementation is now provided by %s.",
+                        new Object[] {nextArg, changeProviderAndSetting}));
         return 1;
     }
 }

@@ -5,9 +5,12 @@ import android.hardware.devicestate.DeviceStateManager;
 import android.hardware.devicestate.DeviceStateRequest;
 import android.os.Binder;
 import android.os.ShellCommand;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,11 @@ public final class DeviceStateManagerShellCommand extends ShellCommand {
 
     public DeviceStateManagerShellCommand(DeviceStateManagerService deviceStateManagerService) {
         this.mService = deviceStateManagerService;
-        this.mClient = (DeviceStateManager) deviceStateManagerService.getContext().getSystemService(DeviceStateManager.class);
+        this.mClient =
+                (DeviceStateManager)
+                        deviceStateManagerService
+                                .getContext()
+                                .getSystemService(DeviceStateManager.class);
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -92,15 +99,19 @@ public final class DeviceStateManagerShellCommand extends ShellCommand {
                     try {
                         try {
                             if (!"reset".equals(nextArg)) {
-                                DeviceStateRequest build = DeviceStateRequest.newBuilder(Integer.parseInt(nextArg)).build();
-                                this.mClient.requestBaseStateOverride(build, (Executor) null, (DeviceStateRequest.Callback) null);
+                                DeviceStateRequest build =
+                                        DeviceStateRequest.newBuilder(Integer.parseInt(nextArg))
+                                                .build();
+                                this.mClient.requestBaseStateOverride(
+                                        build, (Executor) null, (DeviceStateRequest.Callback) null);
                                 sLastBaseStateRequest = build;
                             } else if (sLastBaseStateRequest != null) {
                                 this.mClient.cancelBaseStateOverride();
                                 sLastBaseStateRequest = null;
                             }
                         } catch (NumberFormatException unused) {
-                            getErrPrintWriter().println("Error: requested state should be an integer");
+                            getErrPrintWriter()
+                                    .println("Error: requested state should be an integer");
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                             return -1;
                         } catch (IllegalArgumentException e) {
@@ -110,7 +121,9 @@ public final class DeviceStateManagerShellCommand extends ShellCommand {
                             getErrPrintWriter().println("");
                             getErrPrintWriter().println("    print-states");
                             getErrPrintWriter().println("");
-                            getErrPrintWriter().println("to get the list of currently supported device states");
+                            getErrPrintWriter()
+                                    .println(
+                                            "to get the list of currently supported device states");
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                             return -1;
                         }
@@ -151,27 +164,40 @@ public final class DeviceStateManagerShellCommand extends ShellCommand {
                 synchronized (deviceStateManagerService3.mLock) {
                     supportedStatesLocked2 = deviceStateManagerService3.getSupportedStatesLocked();
                 }
-                outPrintWriter.print((String) supportedStatesLocked2.stream().map(new Function() { // from class: com.android.server.devicestate.DeviceStateManagerShellCommand$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Function
-                    public final Object apply(Object obj) {
-                        switch (i) {
-                            case 0:
-                                return Integer.valueOf(((DeviceState) obj).getIdentifier());
-                            default:
-                                return ((Integer) obj).toString();
-                        }
-                    }
-                }).map(new Function() { // from class: com.android.server.devicestate.DeviceStateManagerShellCommand$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Function
-                    public final Object apply(Object obj) {
-                        switch (i2) {
-                            case 0:
-                                return Integer.valueOf(((DeviceState) obj).getIdentifier());
-                            default:
-                                return ((Integer) obj).toString();
-                        }
-                    }
-                }).collect(Collectors.joining(",")));
+                outPrintWriter.print(
+                        (String)
+                                supportedStatesLocked2.stream()
+                                        .map(
+                                                new Function() { // from class:
+                                                                 // com.android.server.devicestate.DeviceStateManagerShellCommand$$ExternalSyntheticLambda0
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        switch (i) {
+                                                            case 0:
+                                                                return Integer.valueOf(
+                                                                        ((DeviceState) obj)
+                                                                                .getIdentifier());
+                                                            default:
+                                                                return ((Integer) obj).toString();
+                                                        }
+                                                    }
+                                                })
+                                        .map(
+                                                new Function() { // from class:
+                                                                 // com.android.server.devicestate.DeviceStateManagerShellCommand$$ExternalSyntheticLambda0
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        switch (i2) {
+                                                            case 0:
+                                                                return Integer.valueOf(
+                                                                        ((DeviceState) obj)
+                                                                                .getIdentifier());
+                                                            default:
+                                                                return ((Integer) obj).toString();
+                                                        }
+                                                    }
+                                                })
+                                        .collect(Collectors.joining(",")));
                 return 0;
             case 4:
                 String nextArg2 = getNextArg();
@@ -182,15 +208,21 @@ public final class DeviceStateManagerShellCommand extends ShellCommand {
                     try {
                         try {
                             if (!"reset".equals(nextArg2)) {
-                                DeviceStateRequest build2 = DeviceStateRequest.newBuilder(Integer.parseInt(nextArg2)).build();
-                                this.mClient.requestState(build2, (Executor) null, (DeviceStateRequest.Callback) null);
+                                DeviceStateRequest build2 =
+                                        DeviceStateRequest.newBuilder(Integer.parseInt(nextArg2))
+                                                .build();
+                                this.mClient.requestState(
+                                        build2,
+                                        (Executor) null,
+                                        (DeviceStateRequest.Callback) null);
                                 sLastRequest = build2;
                             } else if (sLastRequest != null) {
                                 this.mClient.cancelStateRequest();
                                 sLastRequest = null;
                             }
                         } catch (NumberFormatException unused2) {
-                            getErrPrintWriter().println("Error: requested state should be an integer");
+                            getErrPrintWriter()
+                                    .println("Error: requested state should be an integer");
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                             return -1;
                         } catch (IllegalArgumentException e2) {
@@ -200,7 +232,9 @@ public final class DeviceStateManagerShellCommand extends ShellCommand {
                             getErrPrintWriter().println("");
                             getErrPrintWriter().println("    print-states");
                             getErrPrintWriter().println("");
-                            getErrPrintWriter().println("to get the list of currently supported device states");
+                            getErrPrintWriter()
+                                    .println(
+                                            "to get the list of currently supported device states");
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                             return -1;
                         }
@@ -220,8 +254,17 @@ public final class DeviceStateManagerShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println("  state [reset|OVERRIDE_DEVICE_STATE]");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Return or override device state.", "  print-state", "    Return the current device state.", "  print-states");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Return list of currently supported device states.", "  print-states-simple", "    Return the currently supported device states in comma separated format.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Return or override device state.",
+                "  print-state",
+                "    Return the current device state.",
+                "  print-states");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Return list of currently supported device states.",
+                "  print-states-simple",
+                "    Return the currently supported device states in comma separated format.");
     }
 
     public final void printAllStates(PrintWriter printWriter) {
@@ -240,7 +283,15 @@ public final class DeviceStateManagerShellCommand extends ShellCommand {
         sb.append(optional.isPresent() ? ((DeviceState) optional.get()).toString() : "(none)");
         printWriter.println(sb.toString());
         if (overrideState.isPresent()) {
-            StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, optional2.isPresent() ? ((DeviceState) optional2.get()).toString() : "(none)", "Override state: ", BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "----------------------", "Base state: "));
+            StringBuilder m =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter,
+                            optional2.isPresent()
+                                    ? ((DeviceState) optional2.get()).toString()
+                                    : "(none)",
+                            "Override state: ",
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                                    printWriter, "----------------------", "Base state: "));
             m.append(overrideState.get());
             printWriter.println(m.toString());
         }

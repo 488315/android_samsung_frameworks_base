@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.hardware.soundtrigger.SoundTrigger;
 import android.util.Slog;
+
 import java.util.UUID;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,7 +21,10 @@ public final class SoundTriggerDbHelper extends SQLiteOpenHelper {
                 }
                 SQLiteDatabase writableDatabase = getWritableDatabase();
                 try {
-                    writableDatabase.delete("st_sound_model", "model_uuid='" + genericSoundModel.getUuid().toString() + "'", null);
+                    writableDatabase.delete(
+                            "st_sound_model",
+                            "model_uuid='" + genericSoundModel.getUuid().toString() + "'",
+                            null);
                 } finally {
                     writableDatabase.close();
                 }
@@ -34,14 +38,24 @@ public final class SoundTriggerDbHelper extends SQLiteOpenHelper {
         synchronized (this) {
             try {
                 SQLiteDatabase readableDatabase = getReadableDatabase();
-                Cursor rawQuery = readableDatabase.rawQuery("SELECT  * FROM st_sound_model WHERE model_uuid= '" + uuid + "'", null);
+                Cursor rawQuery =
+                        readableDatabase.rawQuery(
+                                "SELECT  * FROM st_sound_model WHERE model_uuid= '" + uuid + "'",
+                                null);
                 try {
                     if (!rawQuery.moveToFirst()) {
                         rawQuery.close();
                         readableDatabase.close();
                         return null;
                     }
-                    SoundTrigger.GenericSoundModel genericSoundModel = new SoundTrigger.GenericSoundModel(uuid, UUID.fromString(rawQuery.getString(rawQuery.getColumnIndex("vendor_uuid"))), rawQuery.getBlob(rawQuery.getColumnIndex("data")), rawQuery.getInt(rawQuery.getColumnIndex("model_version")));
+                    SoundTrigger.GenericSoundModel genericSoundModel =
+                            new SoundTrigger.GenericSoundModel(
+                                    uuid,
+                                    UUID.fromString(
+                                            rawQuery.getString(
+                                                    rawQuery.getColumnIndex("vendor_uuid"))),
+                                    rawQuery.getBlob(rawQuery.getColumnIndex("data")),
+                                    rawQuery.getInt(rawQuery.getColumnIndex("model_version")));
                     rawQuery.close();
                     readableDatabase.close();
                     return genericSoundModel;
@@ -58,14 +72,17 @@ public final class SoundTriggerDbHelper extends SQLiteOpenHelper {
 
     @Override // android.database.sqlite.SQLiteOpenHelper
     public final void onCreate(SQLiteDatabase sQLiteDatabase) {
-        sQLiteDatabase.execSQL("CREATE TABLE st_sound_model(model_uuid TEXT PRIMARY KEY,vendor_uuid TEXT,data BLOB,model_version INTEGER )");
+        sQLiteDatabase.execSQL(
+                "CREATE TABLE st_sound_model(model_uuid TEXT PRIMARY KEY,vendor_uuid TEXT,data"
+                    + " BLOB,model_version INTEGER )");
     }
 
     @Override // android.database.sqlite.SQLiteOpenHelper
     public final void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
         if (i == 1) {
             Slog.d("SoundTriggerDbHelper", "Adding model version column");
-            sQLiteDatabase.execSQL("ALTER TABLE st_sound_model ADD COLUMN model_version INTEGER DEFAULT -1");
+            sQLiteDatabase.execSQL(
+                    "ALTER TABLE st_sound_model ADD COLUMN model_version INTEGER DEFAULT -1");
         }
     }
 

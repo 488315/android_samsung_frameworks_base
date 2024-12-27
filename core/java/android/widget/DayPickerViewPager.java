@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
+
 import com.android.internal.widget.ViewPager;
+
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -24,7 +26,8 @@ class DayPickerViewPager extends ViewPager {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public DayPickerViewPager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public DayPickerViewPager(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mMatchParentChildren = new ArrayList<>(1);
     }
@@ -36,7 +39,11 @@ class DayPickerViewPager extends ViewPager {
         populate();
         int count = getChildCount();
         int i = 1073741824;
-        boolean measureMatchParentChildren = (View.MeasureSpec.getMode(widthMeasureSpec) == 1073741824 && View.MeasureSpec.getMode(heightMeasureSpec) == 1073741824) ? false : true;
+        boolean measureMatchParentChildren =
+                (View.MeasureSpec.getMode(widthMeasureSpec) == 1073741824
+                                && View.MeasureSpec.getMode(heightMeasureSpec) == 1073741824)
+                        ? false
+                        : true;
         int maxHeight = 0;
         int maxWidth = 0;
         int childState = 0;
@@ -55,14 +62,19 @@ class DayPickerViewPager extends ViewPager {
         }
         int i3 = getPaddingLeft();
         int maxWidth2 = maxWidth + i3 + getPaddingRight();
-        int maxHeight2 = Math.max(maxHeight + getPaddingTop() + getPaddingBottom(), getSuggestedMinimumHeight());
+        int maxHeight2 =
+                Math.max(
+                        maxHeight + getPaddingTop() + getPaddingBottom(),
+                        getSuggestedMinimumHeight());
         int maxWidth3 = Math.max(maxWidth2, getSuggestedMinimumWidth());
         Drawable drawable = getForeground();
         if (drawable != null) {
             maxHeight2 = Math.max(maxHeight2, drawable.getMinimumHeight());
             maxWidth3 = Math.max(maxWidth3, drawable.getMinimumWidth());
         }
-        setMeasuredDimension(resolveSizeAndState(maxWidth3, widthMeasureSpec, childState), resolveSizeAndState(maxHeight2, heightMeasureSpec, childState << 16));
+        setMeasuredDimension(
+                resolveSizeAndState(maxWidth3, widthMeasureSpec, childState),
+                resolveSizeAndState(maxHeight2, heightMeasureSpec, childState << 16));
         int count2 = this.mMatchParentChildren.size();
         if (count2 > 1) {
             int i4 = 0;
@@ -70,14 +82,27 @@ class DayPickerViewPager extends ViewPager {
                 View child2 = this.mMatchParentChildren.get(i4);
                 ViewPager.LayoutParams lp2 = (ViewPager.LayoutParams) child2.getLayoutParams();
                 if (lp2.width == -1) {
-                    childWidthMeasureSpec = View.MeasureSpec.makeMeasureSpec((getMeasuredWidth() - getPaddingLeft()) - getPaddingRight(), i);
+                    childWidthMeasureSpec =
+                            View.MeasureSpec.makeMeasureSpec(
+                                    (getMeasuredWidth() - getPaddingLeft()) - getPaddingRight(), i);
                 } else {
-                    childWidthMeasureSpec = getChildMeasureSpec(widthMeasureSpec, getPaddingLeft() + getPaddingRight(), lp2.width);
+                    childWidthMeasureSpec =
+                            getChildMeasureSpec(
+                                    widthMeasureSpec,
+                                    getPaddingLeft() + getPaddingRight(),
+                                    lp2.width);
                 }
                 if (lp2.height == -1) {
-                    childHeightMeasureSpec = View.MeasureSpec.makeMeasureSpec((getMeasuredHeight() - getPaddingTop()) - getPaddingBottom(), i);
+                    childHeightMeasureSpec =
+                            View.MeasureSpec.makeMeasureSpec(
+                                    (getMeasuredHeight() - getPaddingTop()) - getPaddingBottom(),
+                                    i);
                 } else {
-                    childHeightMeasureSpec = getChildMeasureSpec(heightMeasureSpec, getPaddingTop() + getPaddingBottom(), lp2.height);
+                    childHeightMeasureSpec =
+                            getChildMeasureSpec(
+                                    heightMeasureSpec,
+                                    getPaddingTop() + getPaddingBottom(),
+                                    lp2.height);
                 }
                 child2.measure(childWidthMeasureSpec, childHeightMeasureSpec);
                 i4++;
@@ -88,20 +113,25 @@ class DayPickerViewPager extends ViewPager {
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    protected <T extends View> T findViewByPredicateTraversal(Predicate<View> predicate, View view) {
+    protected <T extends View> T findViewByPredicateTraversal(
+            Predicate<View> predicate, View view) {
         T t;
         T t2;
         if (predicate.test(this)) {
             return this;
         }
         SimpleMonthView view2 = ((DayPickerPagerAdapter) getAdapter()).getView(getCurrent());
-        if (view2 != view && view2 != null && (t2 = (T) view2.findViewByPredicate(predicate)) != null) {
+        if (view2 != view
+                && view2 != null
+                && (t2 = (T) view2.findViewByPredicate(predicate)) != null) {
             return t2;
         }
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
             View childAt = getChildAt(i);
-            if (childAt != view && childAt != view2 && (t = (T) childAt.findViewByPredicate(predicate)) != null) {
+            if (childAt != view
+                    && childAt != view2
+                    && (t = (T) childAt.findViewByPredicate(predicate)) != null) {
                 return t;
             }
         }

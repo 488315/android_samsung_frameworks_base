@@ -1,8 +1,6 @@
 package com.android.server.hdmi;
 
 import android.util.Slog;
-import com.android.server.hdmi.HdmiCecFeatureAction;
-import com.android.server.hdmi.HdmiControlService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -82,15 +80,21 @@ public final class SendKeyAction extends HdmiCecFeatureAction {
         if (i2 != 5 || this.mSource.getDeviceInfo().getLogicalAddress() == 0) {
             sendCommand(HdmiCecMessage.build(getSourceAddress(), i2, 68, androidKeyToCecKey));
         } else {
-            sendCommand(HdmiCecMessage.build(getSourceAddress(), i2, 68, androidKeyToCecKey), new HdmiControlService.SendMessageCallback() { // from class: com.android.server.hdmi.SendKeyAction.1
-                @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
-                public final void onSendCompleted(int i3) {
-                    if (i3 == 1) {
-                        HdmiLogger.debug("AVR did not acknowledge <User Control Pressed>", new Object[0]);
-                        SendKeyAction.this.mSource.mService.setSystemAudioActivated(false);
-                    }
-                }
-            });
+            sendCommand(
+                    HdmiCecMessage.build(getSourceAddress(), i2, 68, androidKeyToCecKey),
+                    new HdmiControlService
+                            .SendMessageCallback() { // from class:
+                                                     // com.android.server.hdmi.SendKeyAction.1
+                        @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
+                        public final void onSendCompleted(int i3) {
+                            if (i3 == 1) {
+                                HdmiLogger.debug(
+                                        "AVR did not acknowledge <User Control Pressed>",
+                                        new Object[0]);
+                                SendKeyAction.this.mSource.mService.setSystemAudioActivated(false);
+                            }
+                        }
+                    });
         }
     }
 
@@ -98,13 +102,21 @@ public final class SendKeyAction extends HdmiCecFeatureAction {
         boolean isVolumeKeycode = HdmiCecKeycode.isVolumeKeycode(this.mLastKeycode);
         int i = this.mTargetAddress;
         if (isVolumeKeycode && this.mSource.mService.isAbsoluteVolumeBehaviorEnabled()) {
-            sendCommand(HdmiCecMessage.build(getSourceAddress(), i, 69), new HdmiControlService.SendMessageCallback() { // from class: com.android.server.hdmi.SendKeyAction$$ExternalSyntheticLambda0
-                @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
-                public final void onSendCompleted(int i2) {
-                    SendKeyAction sendKeyAction = SendKeyAction.this;
-                    sendKeyAction.sendCommand(HdmiCecMessage.build(sendKeyAction.getSourceAddress(), sendKeyAction.mSource.findAudioReceiverAddress(), 113));
-                }
-            });
+            sendCommand(
+                    HdmiCecMessage.build(getSourceAddress(), i, 69),
+                    new HdmiControlService
+                            .SendMessageCallback() { // from class:
+                                                     // com.android.server.hdmi.SendKeyAction$$ExternalSyntheticLambda0
+                        @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
+                        public final void onSendCompleted(int i2) {
+                            SendKeyAction sendKeyAction = SendKeyAction.this;
+                            sendKeyAction.sendCommand(
+                                    HdmiCecMessage.build(
+                                            sendKeyAction.getSourceAddress(),
+                                            sendKeyAction.mSource.findAudioReceiverAddress(),
+                                            113));
+                        }
+                    });
         } else {
             sendCommand(HdmiCecMessage.build(getSourceAddress(), i, 69));
         }

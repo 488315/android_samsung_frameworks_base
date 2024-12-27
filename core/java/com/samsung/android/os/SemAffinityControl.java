@@ -4,6 +4,7 @@ import android.hardware.gnss.GnssSignalType;
 import android.os.Build;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,8 +31,14 @@ public class SemAffinityControl {
         logOnEng(TAG, "[Java Side], SemAffinityControl Class Initialized");
         if (HMP_PROPERTY != null && HMP_PROPERTY.length() > 0) {
             initializeHmpCore();
-            this.core_num = (Integer.parseInt(strHmpCore[littleIndex]) + Integer.parseInt(strHmpCore[bigIndex])) - 1;
-            logOnEng(TAG, "[Java Side], SemAffinityControl Class Initialized core_num : " + this.core_num);
+            this.core_num =
+                    (Integer.parseInt(strHmpCore[littleIndex])
+                                    + Integer.parseInt(strHmpCore[bigIndex]))
+                            - 1;
+            logOnEng(
+                    TAG,
+                    "[Java Side], SemAffinityControl Class Initialized core_num : "
+                            + this.core_num);
             int offsetLittle = 0;
             int offsetBig = nLittle.length;
             if (littleIndex == 1) {
@@ -102,7 +109,12 @@ public class SemAffinityControl {
             }
             if (numCore >= 0) {
                 this.core_num = numCore;
-                logOnEng(TAG, "[Java Side], clearAffinity numCore : " + numCore + ", core_num : " + this.core_num);
+                logOnEng(
+                        TAG,
+                        "[Java Side], clearAffinity numCore : "
+                                + numCore
+                                + ", core_num : "
+                                + this.core_num);
             } else {
                 logOnEng(TAG, "clear_affinity_failed. It can't read the num of core");
                 return -1;

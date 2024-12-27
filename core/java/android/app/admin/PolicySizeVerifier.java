@@ -4,7 +4,9 @@ import android.content.ComponentName;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -79,7 +81,8 @@ public class PolicySizeVerifier {
                         while (i < length2) {
                             Parcelable parcelable = parcelableArray[i];
                             if (!(parcelable instanceof Bundle)) {
-                                throw new IllegalArgumentException("bundle-array can only hold Bundles");
+                                throw new IllegalArgumentException(
+                                        "bundle-array can only hold Bundles");
                             }
                             queue.add((Bundle) parcelable);
                             i++;

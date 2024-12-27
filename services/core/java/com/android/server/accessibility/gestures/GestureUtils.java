@@ -7,7 +7,8 @@ import android.view.MotionEvent;
 /* loaded from: classes.dex */
 public abstract class GestureUtils {
     public static double distance(MotionEvent motionEvent, MotionEvent motionEvent2) {
-        return MathUtils.dist(motionEvent.getX(), motionEvent.getY(), motionEvent2.getX(), motionEvent2.getY());
+        return MathUtils.dist(
+                motionEvent.getX(), motionEvent.getY(), motionEvent2.getX(), motionEvent2.getY());
     }
 
     public static int getActionIndex(MotionEvent motionEvent) {

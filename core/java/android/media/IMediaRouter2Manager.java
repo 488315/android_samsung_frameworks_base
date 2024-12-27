@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
@@ -13,11 +14,13 @@ public interface IMediaRouter2Manager extends IInterface {
 
     void invalidateInstance() throws RemoteException;
 
-    void notifyDiscoveryPreferenceChanged(String str, RouteDiscoveryPreference routeDiscoveryPreference) throws RemoteException;
+    void notifyDiscoveryPreferenceChanged(
+            String str, RouteDiscoveryPreference routeDiscoveryPreference) throws RemoteException;
 
     void notifyRequestFailed(int i, int i2) throws RemoteException;
 
-    void notifyRouteListingPreferenceChange(String str, RouteListingPreference routeListingPreference) throws RemoteException;
+    void notifyRouteListingPreferenceChange(
+            String str, RouteListingPreference routeListingPreference) throws RemoteException;
 
     void notifyRoutesUpdated(List<MediaRoute2Info> list) throws RemoteException;
 
@@ -29,36 +32,33 @@ public interface IMediaRouter2Manager extends IInterface {
 
     public static class Default implements IMediaRouter2Manager {
         @Override // android.media.IMediaRouter2Manager
-        public void notifySessionCreated(int requestId, RoutingSessionInfo session) throws RemoteException {
-        }
+        public void notifySessionCreated(int requestId, RoutingSessionInfo session)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRouter2Manager
-        public void notifySessionUpdated(RoutingSessionInfo session) throws RemoteException {
-        }
+        public void notifySessionUpdated(RoutingSessionInfo session) throws RemoteException {}
 
         @Override // android.media.IMediaRouter2Manager
-        public void notifySessionReleased(RoutingSessionInfo session) throws RemoteException {
-        }
+        public void notifySessionReleased(RoutingSessionInfo session) throws RemoteException {}
 
         @Override // android.media.IMediaRouter2Manager
-        public void notifyDiscoveryPreferenceChanged(String packageName, RouteDiscoveryPreference discoveryPreference) throws RemoteException {
-        }
+        public void notifyDiscoveryPreferenceChanged(
+                String packageName, RouteDiscoveryPreference discoveryPreference)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRouter2Manager
-        public void notifyRouteListingPreferenceChange(String packageName, RouteListingPreference routeListingPreference) throws RemoteException {
-        }
+        public void notifyRouteListingPreferenceChange(
+                String packageName, RouteListingPreference routeListingPreference)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRouter2Manager
-        public void notifyRoutesUpdated(List<MediaRoute2Info> routes) throws RemoteException {
-        }
+        public void notifyRoutesUpdated(List<MediaRoute2Info> routes) throws RemoteException {}
 
         @Override // android.media.IMediaRouter2Manager
-        public void notifyRequestFailed(int requestId, int reason) throws RemoteException {
-        }
+        public void notifyRequestFailed(int requestId, int reason) throws RemoteException {}
 
         @Override // android.media.IMediaRouter2Manager
-        public void invalidateInstance() throws RemoteException {
-        }
+        public void invalidateInstance() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -66,7 +66,7 @@ public interface IMediaRouter2Manager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaRouter2Manager {
+    public abstract static class Stub extends Binder implements IMediaRouter2Manager {
         static final int TRANSACTION_invalidateInstance = 8;
         static final int TRANSACTION_notifyDiscoveryPreferenceChanged = 4;
         static final int TRANSACTION_notifyRequestFailed = 7;
@@ -125,7 +125,8 @@ public interface IMediaRouter2Manager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMediaRouter2Manager.DESCRIPTOR);
             }
@@ -136,34 +137,42 @@ public interface IMediaRouter2Manager extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    RoutingSessionInfo _arg1 = (RoutingSessionInfo) data.readTypedObject(RoutingSessionInfo.CREATOR);
+                    RoutingSessionInfo _arg1 =
+                            (RoutingSessionInfo) data.readTypedObject(RoutingSessionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifySessionCreated(_arg0, _arg1);
                     return true;
                 case 2:
-                    RoutingSessionInfo _arg02 = (RoutingSessionInfo) data.readTypedObject(RoutingSessionInfo.CREATOR);
+                    RoutingSessionInfo _arg02 =
+                            (RoutingSessionInfo) data.readTypedObject(RoutingSessionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifySessionUpdated(_arg02);
                     return true;
                 case 3:
-                    RoutingSessionInfo _arg03 = (RoutingSessionInfo) data.readTypedObject(RoutingSessionInfo.CREATOR);
+                    RoutingSessionInfo _arg03 =
+                            (RoutingSessionInfo) data.readTypedObject(RoutingSessionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifySessionReleased(_arg03);
                     return true;
                 case 4:
                     String _arg04 = data.readString();
-                    RouteDiscoveryPreference _arg12 = (RouteDiscoveryPreference) data.readTypedObject(RouteDiscoveryPreference.CREATOR);
+                    RouteDiscoveryPreference _arg12 =
+                            (RouteDiscoveryPreference)
+                                    data.readTypedObject(RouteDiscoveryPreference.CREATOR);
                     data.enforceNoDataAvail();
                     notifyDiscoveryPreferenceChanged(_arg04, _arg12);
                     return true;
                 case 5:
                     String _arg05 = data.readString();
-                    RouteListingPreference _arg13 = (RouteListingPreference) data.readTypedObject(RouteListingPreference.CREATOR);
+                    RouteListingPreference _arg13 =
+                            (RouteListingPreference)
+                                    data.readTypedObject(RouteListingPreference.CREATOR);
                     data.enforceNoDataAvail();
                     notifyRouteListingPreferenceChange(_arg05, _arg13);
                     return true;
                 case 6:
-                    List<MediaRoute2Info> _arg06 = data.createTypedArrayList(MediaRoute2Info.CREATOR);
+                    List<MediaRoute2Info> _arg06 =
+                            data.createTypedArrayList(MediaRoute2Info.CREATOR);
                     data.enforceNoDataAvail();
                     notifyRoutesUpdated(_arg06);
                     return true;
@@ -198,7 +207,8 @@ public interface IMediaRouter2Manager extends IInterface {
             }
 
             @Override // android.media.IMediaRouter2Manager
-            public void notifySessionCreated(int requestId, RoutingSessionInfo session) throws RemoteException {
+            public void notifySessionCreated(int requestId, RoutingSessionInfo session)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRouter2Manager.DESCRIPTOR);
@@ -235,7 +245,9 @@ public interface IMediaRouter2Manager extends IInterface {
             }
 
             @Override // android.media.IMediaRouter2Manager
-            public void notifyDiscoveryPreferenceChanged(String packageName, RouteDiscoveryPreference discoveryPreference) throws RemoteException {
+            public void notifyDiscoveryPreferenceChanged(
+                    String packageName, RouteDiscoveryPreference discoveryPreference)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRouter2Manager.DESCRIPTOR);
@@ -248,7 +260,9 @@ public interface IMediaRouter2Manager extends IInterface {
             }
 
             @Override // android.media.IMediaRouter2Manager
-            public void notifyRouteListingPreferenceChange(String packageName, RouteListingPreference routeListingPreference) throws RemoteException {
+            public void notifyRouteListingPreferenceChange(
+                    String packageName, RouteListingPreference routeListingPreference)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRouter2Manager.DESCRIPTOR);

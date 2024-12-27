@@ -5,12 +5,12 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
-import com.samsung.android.media.codec.IVideoTranscodingService;
-import com.samsung.android.media.codec.IVideoTranscodingServiceCallback;
+
 import com.samsung.android.media.codec.client.ClientImpl;
 import com.samsung.android.media.codec.client.ImgCsConverterClient;
 import com.samsung.android.media.codec.client.SemMediaCaptureClient;
 import com.samsung.android.media.codec.client.SemVideoTranscoderClient;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,35 +70,42 @@ public class SemVideoTranscodingService {
         }
 
         @Override // com.samsung.android.media.codec.IVideoTranscodingServiceCallback
-        public void onStarted() throws RemoteException {
-        }
+        public void onStarted() throws RemoteException {}
 
         @Override // com.samsung.android.media.codec.IVideoTranscodingServiceCallback
-        public void onProgressChanged(int i) throws RemoteException {
-        }
+        public void onProgressChanged(int i) throws RemoteException {}
 
         @Override // com.samsung.android.media.codec.IVideoTranscodingServiceCallback
-        public void onCompleted() throws RemoteException {
-        }
+        public void onCompleted() throws RemoteException {}
 
         @Override // com.samsung.android.media.codec.IVideoTranscodingServiceCallback
-        public void onError() throws RemoteException {
-        }
+        public void onError() throws RemoteException {}
     }
 
     public static class Client {
         private final ClientImpl mImpl;
 
-        public Client(IVideoTranscodingService transcodingService, String id, int mode, Map args, ProgressCallback progressCallback) {
+        public Client(
+                IVideoTranscodingService transcodingService,
+                String id,
+                int mode,
+                Map args,
+                ProgressCallback progressCallback) {
             progressCallback.setClient(this);
             if (mode == 0 || mode == 1 || mode == 2) {
-                this.mImpl = new SemVideoTranscoderClient(transcodingService, id, mode, args, progressCallback);
+                this.mImpl =
+                        new SemVideoTranscoderClient(
+                                transcodingService, id, mode, args, progressCallback);
                 return;
             }
             if (mode == 100) {
-                this.mImpl = new ImgCsConverterClient(transcodingService, id, mode, args, progressCallback);
+                this.mImpl =
+                        new ImgCsConverterClient(
+                                transcodingService, id, mode, args, progressCallback);
             } else if (mode == 200 || mode == 201 || mode == 202) {
-                this.mImpl = new SemMediaCaptureClient(transcodingService, id, mode, args, progressCallback);
+                this.mImpl =
+                        new SemMediaCaptureClient(
+                                transcodingService, id, mode, args, progressCallback);
             } else {
                 this.mImpl = null;
             }
@@ -126,8 +133,17 @@ public class SemVideoTranscodingService {
         this.mService = IVideoTranscodingService.Stub.asInterface(b);
     }
 
-    public Client createClient(int mode, String inputPath, String outputPath, ProgressCallback progressCallback) {
-        Log.d("SemVideoTranscodingService", "mode(" + mode + ") in(" + inputPath + ") out(" + outputPath + NavigationBarInflaterView.KEY_CODE_END);
+    public Client createClient(
+            int mode, String inputPath, String outputPath, ProgressCallback progressCallback) {
+        Log.d(
+                "SemVideoTranscodingService",
+                "mode("
+                        + mode
+                        + ") in("
+                        + inputPath
+                        + ") out("
+                        + outputPath
+                        + NavigationBarInflaterView.KEY_CODE_END);
         Map args = new HashMap();
         args.put(KEY_INPUT_PATH, inputPath);
         args.put(KEY_OUTPUT_PATH, outputPath);
@@ -135,7 +151,9 @@ public class SemVideoTranscodingService {
     }
 
     public Client createClient(int mode, Map args, ProgressCallback progressCallback) {
-        Log.d("SemVideoTranscodingService", "mode(" + mode + NavigationBarInflaterView.KEY_CODE_END);
+        Log.d(
+                "SemVideoTranscodingService",
+                "mode(" + mode + NavigationBarInflaterView.KEY_CODE_END);
         if (this.mService == null) {
             Log.w("SemVideoTranscodingService", "IVideoTranscodingService is null");
             return null;
@@ -148,7 +166,9 @@ public class SemVideoTranscodingService {
             }
             Client client = new Client(this.mService, id, mode, args, progressCallback);
             if (!client.isValid()) {
-                Log.w("SemVideoTranscodingService", "Unsupported mode (" + mode + NavigationBarInflaterView.KEY_CODE_END);
+                Log.w(
+                        "SemVideoTranscodingService",
+                        "Unsupported mode (" + mode + NavigationBarInflaterView.KEY_CODE_END);
                 return null;
             }
             return client;

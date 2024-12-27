@@ -15,8 +15,8 @@ public interface ITranslationCallback extends IInterface {
 
     public static class Default implements ITranslationCallback {
         @Override // android.service.translation.ITranslationCallback
-        public void onTranslationResponse(TranslationResponse translationResponse) throws RemoteException {
-        }
+        public void onTranslationResponse(TranslationResponse translationResponse)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface ITranslationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITranslationCallback {
+    public abstract static class Stub extends Binder implements ITranslationCallback {
         static final int TRANSACTION_onTranslationResponse = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface ITranslationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITranslationCallback.DESCRIPTOR);
             }
@@ -72,7 +73,8 @@ public interface ITranslationCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    TranslationResponse _arg0 = (TranslationResponse) data.readTypedObject(TranslationResponse.CREATOR);
+                    TranslationResponse _arg0 =
+                            (TranslationResponse) data.readTypedObject(TranslationResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onTranslationResponse(_arg0);
                     return true;
@@ -98,7 +100,8 @@ public interface ITranslationCallback extends IInterface {
             }
 
             @Override // android.service.translation.ITranslationCallback
-            public void onTranslationResponse(TranslationResponse translationResponse) throws RemoteException {
+            public void onTranslationResponse(TranslationResponse translationResponse)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITranslationCallback.DESCRIPTOR);

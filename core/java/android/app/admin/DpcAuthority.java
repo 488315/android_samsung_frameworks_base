@@ -8,19 +8,20 @@ import android.os.Parcelable;
 /* loaded from: classes.dex */
 public final class DpcAuthority extends Authority {
     public static final DpcAuthority DPC_AUTHORITY = new DpcAuthority();
-    public static final Parcelable.Creator<DpcAuthority> CREATOR = new Parcelable.Creator<DpcAuthority>() { // from class: android.app.admin.DpcAuthority.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DpcAuthority createFromParcel(Parcel source) {
-            return DpcAuthority.DPC_AUTHORITY;
-        }
+    public static final Parcelable.Creator<DpcAuthority> CREATOR =
+            new Parcelable.Creator<DpcAuthority>() { // from class: android.app.admin.DpcAuthority.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DpcAuthority createFromParcel(Parcel source) {
+                    return DpcAuthority.DPC_AUTHORITY;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DpcAuthority[] newArray(int size) {
-            return new DpcAuthority[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DpcAuthority[] newArray(int size) {
+                    return new DpcAuthority[size];
+                }
+            };
 
     public String toString() {
         return "DpcAuthority {}";
@@ -45,6 +46,5 @@ public final class DpcAuthority extends Authority {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-    }
+    public void writeToParcel(Parcel dest, int flags) {}
 }

@@ -15,7 +15,9 @@ import android.util.ArrayMap;
 import android.util.PrintWriterPrinter;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import dalvik.annotation.optimization.NeverCompile;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -101,7 +103,36 @@ public final class BroadcastRecord extends Binder {
     public final boolean urgent;
     public final int userId;
 
-    public BroadcastRecord(BroadcastQueue broadcastQueue, Intent intent, ProcessRecord processRecord, String str, String str2, int i, int i2, boolean z, String str3, String[] strArr, String[] strArr2, String[] strArr3, int i3, BroadcastOptions broadcastOptions, List list, ProcessRecord processRecord2, IIntentReceiver iIntentReceiver, int i4, String str4, Bundle bundle, boolean z2, boolean z3, boolean z4, int i5, int i6, BackgroundStartPrivileges backgroundStartPrivileges, boolean z5, BiFunction biFunction, int i7) {
+    public BroadcastRecord(
+            BroadcastQueue broadcastQueue,
+            Intent intent,
+            ProcessRecord processRecord,
+            String str,
+            String str2,
+            int i,
+            int i2,
+            boolean z,
+            String str3,
+            String[] strArr,
+            String[] strArr2,
+            String[] strArr3,
+            int i3,
+            BroadcastOptions broadcastOptions,
+            List list,
+            ProcessRecord processRecord2,
+            IIntentReceiver iIntentReceiver,
+            int i4,
+            String str4,
+            Bundle bundle,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            int i5,
+            int i6,
+            BackgroundStartPrivileges backgroundStartPrivileges,
+            boolean z5,
+            BiFunction biFunction,
+            int i7) {
         if (intent == null) {
             throw new NullPointerException("Can't construct with a null intent");
         }
@@ -116,7 +147,10 @@ public final class BroadcastRecord extends Binder {
         this.callerProcState = i7;
         this.callerInstantApp = z;
         int appId = UserHandle.getAppId(i2);
-        this.callerInstrumented = appId == 0 || appId == 2000 || !(processRecord == null || processRecord.mInstr == null);
+        this.callerInstrumented =
+                appId == 0
+                        || appId == 2000
+                        || !(processRecord == null || processRecord.mInstr == null);
         this.resolvedType = str3;
         this.requiredPermissions = strArr;
         this.excludedPermissions = strArr2;
@@ -131,7 +165,9 @@ public final class BroadcastRecord extends Binder {
         this.deliveryReasons = new String[size];
         boolean calculateUrgent = calculateUrgent(intent, broadcastOptions);
         this.urgent = calculateUrgent;
-        this.deferUntilActive = calculateDeferUntilActive(i2, broadcastOptions, iIntentReceiver, z2, calculateUrgent);
+        this.deferUntilActive =
+                calculateDeferUntilActive(
+                        i2, broadcastOptions, iIntentReceiver, z2, calculateUrgent);
         int[] calculateBlockedUntilBeyondCount = calculateBlockedUntilBeyondCount(list2, z2);
         this.blockedUntilBeyondCount = calculateBlockedUntilBeyondCount;
         this.scheduledTime = new long[size];
@@ -152,7 +188,8 @@ public final class BroadcastRecord extends Binder {
         this.timeoutExempt = z5;
         this.alarm = broadcastOptions != null && broadcastOptions.isAlarmBroadcast();
         this.pushMessage = broadcastOptions != null && broadcastOptions.isPushMessagingBroadcast();
-        this.pushMessageOverQuota = broadcastOptions != null && broadcastOptions.isPushMessagingOverQuotaBroadcast();
+        this.pushMessageOverQuota =
+                broadcastOptions != null && broadcastOptions.isPushMessagingOverQuotaBroadcast();
         this.interactive = broadcastOptions != null && broadcastOptions.isInteractive();
         this.shareIdentity = broadcastOptions != null && broadcastOptions.isShareIdentityEnabled();
         this.filterExtrasForReceiver = biFunction;
@@ -237,7 +274,10 @@ public final class BroadcastRecord extends Binder {
                 iArr[i3] = i3;
             } else {
                 Object obj = list.get(i3);
-                int priority = obj instanceof BroadcastFilter ? ((BroadcastFilter) obj).getPriority() : ((ResolveInfo) obj).priority;
+                int priority =
+                        obj instanceof BroadcastFilter
+                                ? ((BroadcastFilter) obj).getPriority()
+                                : ((ResolveInfo) obj).priority;
                 if (i3 == 0 || priority != i) {
                     iArr[i3] = i3;
                     i2 = i3;
@@ -253,7 +293,12 @@ public final class BroadcastRecord extends Binder {
         return iArr;
     }
 
-    public static boolean calculateDeferUntilActive(int i, BroadcastOptions broadcastOptions, IIntentReceiver iIntentReceiver, boolean z, boolean z2) {
+    public static boolean calculateDeferUntilActive(
+            int i,
+            BroadcastOptions broadcastOptions,
+            IIntentReceiver iIntentReceiver,
+            boolean z,
+            boolean z2) {
         if (z) {
             return false;
         }
@@ -304,11 +349,15 @@ public final class BroadcastRecord extends Binder {
     }
 
     public static String getReceiverPackageName(Object obj) {
-        return obj instanceof BroadcastFilter ? ((BroadcastFilter) obj).receiverList.app.info.packageName : ((ResolveInfo) obj).activityInfo.packageName;
+        return obj instanceof BroadcastFilter
+                ? ((BroadcastFilter) obj).receiverList.app.info.packageName
+                : ((ResolveInfo) obj).activityInfo.packageName;
     }
 
     public static int getReceiverUid(Object obj) {
-        return obj instanceof BroadcastFilter ? ((BroadcastFilter) obj).owningUid : ((ResolveInfo) obj).activityInfo.applicationInfo.uid;
+        return obj instanceof BroadcastFilter
+                ? ((BroadcastFilter) obj).owningUid
+                : ((ResolveInfo) obj).activityInfo.applicationInfo.uid;
     }
 
     public static boolean isDeliveryStateTerminal(int i) {
@@ -328,7 +377,9 @@ public final class BroadcastRecord extends Binder {
         }
         ResolveInfo resolveInfo = (ResolveInfo) obj;
         ResolveInfo resolveInfo2 = (ResolveInfo) obj2;
-        return Objects.equals(resolveInfo.activityInfo.packageName, resolveInfo2.activityInfo.packageName) && Objects.equals(resolveInfo.activityInfo.name, resolveInfo2.activityInfo.name);
+        return Objects.equals(
+                        resolveInfo.activityInfo.packageName, resolveInfo2.activityInfo.packageName)
+                && Objects.equals(resolveInfo.activityInfo.name, resolveInfo2.activityInfo.name);
     }
 
     public boolean cleanupDisabledPackageReceiversLocked(String str, Set set, int i, boolean z) {
@@ -347,7 +398,10 @@ public final class BroadcastRecord extends Binder {
             Object obj = this.receivers.get(size);
             if (obj instanceof ResolveInfo) {
                 ActivityInfo activityInfo = ((ResolveInfo) obj).activityInfo;
-                if ((str == null || (activityInfo.applicationInfo.packageName.equals(str) && (set == null || set.contains(activityInfo.name)))) && (z3 || UserHandle.getUserId(activityInfo.applicationInfo.uid) == i)) {
+                if ((str == null
+                                || (activityInfo.applicationInfo.packageName.equals(str)
+                                        && (set == null || set.contains(activityInfo.name))))
+                        && (z3 || UserHandle.getUserId(activityInfo.applicationInfo.uid) == i)) {
                     if (!z) {
                         return true;
                     }
@@ -457,7 +511,10 @@ public final class BroadcastRecord extends Binder {
             printWriter.print("anrCount=");
             printWriter.println(this.anrCount);
         }
-        if (this.resultTo != null || this.resultCode != -1 || this.resultData != null || this.hadResultTo) {
+        if (this.resultTo != null
+                || this.resultCode != -1
+                || this.resultData != null
+                || this.hadResultTo) {
             printWriter.print("    ");
             printWriter.print("resultTo=");
             printWriter.print(this.resultTo);
@@ -496,7 +553,14 @@ public final class BroadcastRecord extends Binder {
         }
         int i = this.state;
         if (i != 0) {
-            String str = i != 1 ? i != 2 ? i != 3 ? i != 4 ? " (?)" : " (WAITING_SERVICES)" : " (CALL_DONE_RECEIVE)" : " (CALL_IN_RECEIVE)" : " (APP_RECEIVE)";
+            String str =
+                    i != 1
+                            ? i != 2
+                                    ? i != 3
+                                            ? i != 4 ? " (?)" : " (WAITING_SERVICES)"
+                                            : " (CALL_DONE_RECEIVE)"
+                                    : " (CALL_IN_RECEIVE)"
+                            : " (APP_RECEIVE)";
             printWriter.print("    ");
             printWriter.print("state=");
             printWriter.print(this.state);
@@ -521,7 +585,8 @@ public final class BroadcastRecord extends Binder {
             }
             if (this.terminalTime[i2] != j) {
                 printWriter.print("terminal ");
-                TimeUtils.formatDuration(this.terminalTime[i2] - this.scheduledTime[i2], printWriter);
+                TimeUtils.formatDuration(
+                        this.terminalTime[i2] - this.scheduledTime[i2], printWriter);
                 printWriter.print(' ');
             }
             printWriter.print("(");
@@ -532,9 +597,11 @@ public final class BroadcastRecord extends Binder {
             printWriter.print(": ");
             if (obj instanceof BroadcastFilter) {
                 printWriter.print("/ s:");
-                printWriter.print(simpleDateFormat.format(Long.valueOf(this.receiversDispatchTime[i2])));
+                printWriter.print(
+                        simpleDateFormat.format(Long.valueOf(this.receiversDispatchTime[i2])));
                 printWriter.print("/ e:");
-                printWriter.print(simpleDateFormat.format(Long.valueOf(this.receiversFinishTime[i2])));
+                printWriter.print(
+                        simpleDateFormat.format(Long.valueOf(this.receiversFinishTime[i2])));
                 printWriter.print("/ o:");
                 printWriter.print(this.receiversExtraTime[i2]);
                 printWriter.print("/ ");
@@ -547,9 +614,11 @@ public final class BroadcastRecord extends Binder {
                 }
             } else if (obj instanceof ResolveInfo) {
                 printWriter.print("/ s:");
-                printWriter.print(simpleDateFormat.format(Long.valueOf(this.receiversDispatchTime[i2])));
+                printWriter.print(
+                        simpleDateFormat.format(Long.valueOf(this.receiversDispatchTime[i2])));
                 printWriter.print("/ e:");
-                printWriter.print(simpleDateFormat.format(Long.valueOf(this.receiversFinishTime[i2])));
+                printWriter.print(
+                        simpleDateFormat.format(Long.valueOf(this.receiversFinishTime[i2])));
                 printWriter.print("/ o:");
                 printWriter.print(this.receiversExtraTime[i2]);
                 printWriter.print("/ ");
@@ -580,7 +649,10 @@ public final class BroadcastRecord extends Binder {
         Bundle extras;
         Intent intent = null;
         if (this.filterExtrasForReceiver != null && (extras = this.intent.getExtras()) != null) {
-            Bundle bundle = (Bundle) this.filterExtrasForReceiver.apply(Integer.valueOf(getReceiverUid(obj)), extras);
+            Bundle bundle =
+                    (Bundle)
+                            this.filterExtrasForReceiver.apply(
+                                    Integer.valueOf(getReceiverUid(obj)), extras);
             if (bundle == null) {
                 return null;
             }
@@ -606,7 +678,12 @@ public final class BroadcastRecord extends Binder {
             if (action == null) {
                 action = this.intent.toString();
             }
-            this.mCachedToShortString = Integer.toHexString(System.identityHashCode(this)) + " " + action + "/u" + this.userId;
+            this.mCachedToShortString =
+                    Integer.toHexString(System.identityHashCode(this))
+                            + " "
+                            + action
+                            + "/u"
+                            + this.userId;
         }
         return this.mCachedToShortString;
     }

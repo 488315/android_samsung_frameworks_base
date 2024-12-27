@@ -3,6 +3,7 @@ package android.security;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.security.keymaster.KeymasterDefs;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
@@ -42,21 +43,26 @@ public class KeyStoreException extends Exception {
     private static final String TAG = "KeyStoreException";
     private final int mErrorCode;
     private final int mRkpStatus;
-    private static final PublicErrorInformation GENERAL_KEYMINT_ERROR = new PublicErrorInformation(0, 10);
-    private static final PublicErrorInformation GENERAL_KEYSTORE_ERROR = new PublicErrorInformation(0, 11);
-    private static final PublicErrorInformation KEYMINT_UNIMPLEMENTED_ERROR = new PublicErrorInformation(2, 12);
-    private static final PublicErrorInformation KEYMINT_RETRYABLE_ERROR = new PublicErrorInformation(6, 10);
-    private static final PublicErrorInformation KEYMINT_INCORRECT_USAGE_ERROR = new PublicErrorInformation(0, 13);
-    private static final PublicErrorInformation KEYMINT_TEMPORAL_VALIDITY_ERROR = new PublicErrorInformation(0, 14);
-    private static final Map<Integer, PublicErrorInformation> sErrorCodeToFailureInfo = new HashMap();
+    private static final PublicErrorInformation GENERAL_KEYMINT_ERROR =
+            new PublicErrorInformation(0, 10);
+    private static final PublicErrorInformation GENERAL_KEYSTORE_ERROR =
+            new PublicErrorInformation(0, 11);
+    private static final PublicErrorInformation KEYMINT_UNIMPLEMENTED_ERROR =
+            new PublicErrorInformation(2, 12);
+    private static final PublicErrorInformation KEYMINT_RETRYABLE_ERROR =
+            new PublicErrorInformation(6, 10);
+    private static final PublicErrorInformation KEYMINT_INCORRECT_USAGE_ERROR =
+            new PublicErrorInformation(0, 13);
+    private static final PublicErrorInformation KEYMINT_TEMPORAL_VALIDITY_ERROR =
+            new PublicErrorInformation(0, 14);
+    private static final Map<Integer, PublicErrorInformation> sErrorCodeToFailureInfo =
+            new HashMap();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PublicErrorCode {
-    }
+    public @interface PublicErrorCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RetryPolicy {
-    }
+    public @interface RetryPolicy {}
 
     private static int initializeRkpStatusForRegularErrors(int errorCode) {
         if (errorCode == 22) {
@@ -73,7 +79,13 @@ public class KeyStoreException extends Exception {
     }
 
     public KeyStoreException(int errorCode, String message, String keystoreErrorMessage) {
-        super(message + " (internal Keystore code: " + errorCode + " message: " + keystoreErrorMessage + NavigationBarInflaterView.KEY_CODE_END);
+        super(
+                message
+                        + " (internal Keystore code: "
+                        + errorCode
+                        + " message: "
+                        + keystoreErrorMessage
+                        + NavigationBarInflaterView.KEY_CODE_END);
         this.mErrorCode = errorCode;
         this.mRkpStatus = initializeRkpStatusForRegularErrors(errorCode);
     }
@@ -150,12 +162,16 @@ public class KeyStoreException extends Exception {
 
     @Override // java.lang.Throwable
     public String toString() {
-        String errorCodes = String.format(" (public error code: %d internal Keystore code: %d)", Integer.valueOf(getNumericErrorCode()), Integer.valueOf(this.mErrorCode));
+        String errorCodes =
+                String.format(
+                        " (public error code: %d internal Keystore code: %d)",
+                        Integer.valueOf(getNumericErrorCode()), Integer.valueOf(this.mErrorCode));
         return super.toString() + errorCodes;
     }
 
     private static PublicErrorInformation getErrorInformation(int internalErrorCode) {
-        PublicErrorInformation errorInfo = sErrorCodeToFailureInfo.get(Integer.valueOf(internalErrorCode));
+        PublicErrorInformation errorInfo =
+                sErrorCodeToFailureInfo.get(Integer.valueOf(internalErrorCode));
         if (errorInfo != null) {
             return errorInfo;
         }
@@ -262,8 +278,10 @@ public class KeyStoreException extends Exception {
         sErrorCodeToFailureInfo.put(-100, KEYMINT_UNIMPLEMENTED_ERROR);
         sErrorCodeToFailureInfo.put(-1000, new PublicErrorInformation(2, 10));
         sErrorCodeToFailureInfo.put(-101, GENERAL_KEYMINT_ERROR);
-        sErrorCodeToFailureInfo.put(Integer.valueOf(KeymasterDefs.KM_ERROR_SAK_NOT_EXIST), KEYMINT_UNIMPLEMENTED_ERROR);
-        sErrorCodeToFailureInfo.put(Integer.valueOf(KeymasterDefs.KM_ERROR_GAK_NOT_EXIST), KEYMINT_UNIMPLEMENTED_ERROR);
+        sErrorCodeToFailureInfo.put(
+                Integer.valueOf(KeymasterDefs.KM_ERROR_SAK_NOT_EXIST), KEYMINT_UNIMPLEMENTED_ERROR);
+        sErrorCodeToFailureInfo.put(
+                Integer.valueOf(KeymasterDefs.KM_ERROR_GAK_NOT_EXIST), KEYMINT_UNIMPLEMENTED_ERROR);
         sErrorCodeToFailureInfo.put(2, new PublicErrorInformation(8, 2));
         sErrorCodeToFailureInfo.put(3, new PublicErrorInformation(2, 3));
         sErrorCodeToFailureInfo.put(4, new PublicErrorInformation(2, 4));

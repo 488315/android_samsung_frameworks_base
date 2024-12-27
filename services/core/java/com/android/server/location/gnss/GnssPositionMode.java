@@ -21,10 +21,22 @@ public final class GnssPositionMode {
             return false;
         }
         GnssPositionMode gnssPositionMode = (GnssPositionMode) obj;
-        return this.mMode == gnssPositionMode.mMode && this.mRecurrence == gnssPositionMode.mRecurrence && this.mMinInterval == gnssPositionMode.mMinInterval && this.mLowPowerMode == gnssPositionMode.mLowPowerMode;
+        return this.mMode == gnssPositionMode.mMode
+                && this.mRecurrence == gnssPositionMode.mRecurrence
+                && this.mMinInterval == gnssPositionMode.mMinInterval
+                && this.mLowPowerMode == gnssPositionMode.mLowPowerMode;
     }
 
     public final int hashCode() {
-        return Arrays.hashCode(new Object[]{Integer.valueOf(this.mMode), Integer.valueOf(this.mRecurrence), Integer.valueOf(this.mMinInterval), 0, 0, Boolean.valueOf(this.mLowPowerMode), GnssPositionMode.class});
+        return Arrays.hashCode(
+                new Object[] {
+                    Integer.valueOf(this.mMode),
+                    Integer.valueOf(this.mRecurrence),
+                    Integer.valueOf(this.mMinInterval),
+                    0,
+                    0,
+                    Boolean.valueOf(this.mLowPowerMode),
+                    GnssPositionMode.class
+                });
     }
 }

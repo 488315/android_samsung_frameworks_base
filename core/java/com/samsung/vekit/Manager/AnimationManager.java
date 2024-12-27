@@ -1,6 +1,7 @@
 package com.samsung.vekit.Manager;
 
 import android.util.Log;
+
 import com.samsung.vekit.Animation.AlphaAnimation;
 import com.samsung.vekit.Animation.Animation;
 import com.samsung.vekit.Animation.ClipAnimation;
@@ -20,6 +21,7 @@ import com.samsung.vekit.Common.Type.AnimationType;
 import com.samsung.vekit.Common.Type.ManagerType;
 import com.samsung.vekit.Common.Type.TransitionType;
 import com.samsung.vekit.Common.VEContext;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -53,7 +55,8 @@ public class AnimationManager extends Manager<Animation<?>> {
                     animation = new ToneAnimation(this.context, uniqueId, name);
                     break;
                 case TRANSITION:
-                    Animation<?> animation2 = createTransitionAnimation(transitionType, uniqueId, name);
+                    Animation<?> animation2 =
+                            createTransitionAnimation(transitionType, uniqueId, name);
                     return animation2;
                 case ALPHA:
                     animation = new AlphaAnimation(this.context, uniqueId, name);
@@ -84,7 +87,8 @@ public class AnimationManager extends Manager<Animation<?>> {
         }
     }
 
-    private TransitionAnimation createTransitionAnimation(TransitionType type, int uniqueId, String name) {
+    private TransitionAnimation createTransitionAnimation(
+            TransitionType type, int uniqueId, String name) {
         TransitionAnimation animation;
         switch (type) {
             case FADE:
@@ -138,7 +142,9 @@ public class AnimationManager extends Manager<Animation<?>> {
     public void checkValidAnimation(Animation animation) throws Exception {
         boolean valid = animation.getAnimationType() != AnimationType.TRANSITION;
         if (!valid) {
-            throw new Exception("isInvalidElement : please attach correct uiAnimation(not TransitionAnimation) to AnimationManager.");
+            throw new Exception(
+                    "isInvalidElement : please attach correct uiAnimation(not TransitionAnimation)"
+                        + " to AnimationManager.");
         }
     }
 

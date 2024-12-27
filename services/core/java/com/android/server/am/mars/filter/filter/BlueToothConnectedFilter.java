@@ -2,8 +2,10 @@ package com.android.server.am.mars.filter.filter;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.filter.IFilter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +30,7 @@ public final class BlueToothConnectedFilter implements IFilter {
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void deInit() {
-    }
+    public final void deInit() {}
 
     @Override // com.android.server.am.mars.filter.IFilter
     public final int filter(int i, int i2, int i3, String str) {
@@ -42,8 +43,7 @@ public final class BlueToothConnectedFilter implements IFilter {
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void init(Context context) {
-    }
+    public final void init(Context context) {}
 
     public final void updateBTUsingPackages() {
         Map hWUsingApps;

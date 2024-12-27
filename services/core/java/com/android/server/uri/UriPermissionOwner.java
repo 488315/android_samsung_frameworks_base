@@ -2,7 +2,7 @@ package com.android.server.uri;
 
 import android.os.Binder;
 import android.util.ArraySet;
-import com.android.server.uri.UriGrantsManagerService;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,8 +18,7 @@ public final class UriPermissionOwner {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExternalToken extends Binder {
-        public ExternalToken() {
-        }
+        public ExternalToken() {}
     }
 
     public UriPermissionOwner(UriGrantsManagerInternal uriGrantsManagerInternal, Object obj) {
@@ -97,7 +96,8 @@ public final class UriPermissionOwner {
         for (int i3 = 0; i3 < size; i3++) {
             UriGrantsManagerInternal uriGrantsManagerInternal = this.mService;
             UriPermission uriPermission3 = (UriPermission) arrayList.get(i3);
-            UriGrantsManagerService.LocalService localService = (UriGrantsManagerService.LocalService) uriGrantsManagerInternal;
+            UriGrantsManagerService.LocalService localService =
+                    (UriGrantsManagerService.LocalService) uriGrantsManagerInternal;
             synchronized (UriGrantsManagerService.this.mLock) {
                 UriGrantsManagerService.this.removeUriPermissionIfNeededLocked(uriPermission3);
             }

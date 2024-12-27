@@ -6,11 +6,9 @@ import android.view.animation.Interpolator;
 
 /* loaded from: classes6.dex */
 public class QuintEaseIn implements Interpolator {
-    public QuintEaseIn() {
-    }
+    public QuintEaseIn() {}
 
-    public QuintEaseIn(Context context, AttributeSet attrs) {
-    }
+    public QuintEaseIn(Context context, AttributeSet attrs) {}
 
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float t) {

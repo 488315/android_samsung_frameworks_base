@@ -66,22 +66,18 @@ import android.util.SparseIntArray;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
+
 import com.android.modules.expresslog.Counter;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
-import com.android.server.companion.virtual.CameraAccessController;
-import com.android.server.companion.virtual.GenericWindowPolicyController;
-import com.android.server.companion.virtual.InputController;
-import com.android.server.companion.virtual.SensorController;
-import com.android.server.companion.virtual.VirtualDeviceImpl;
-import com.android.server.companion.virtual.VirtualDeviceLog;
-import com.android.server.companion.virtual.VirtualDeviceManagerService;
 import com.android.server.companion.virtual.audio.VirtualAudioController;
 import com.android.server.companion.virtual.camera.VirtualCameraController;
 import com.android.server.companion.virtual.camera.VirtualCameraController.CameraDescriptor;
 import com.android.server.input.InputManagerService;
 import com.android.server.inputmethod.InputMethodManagerInternal;
+
 import dalvik.annotation.optimization.FastNative;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -96,7 +92,9 @@ import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.DeathRecipient, GenericWindowPolicyController.RunningAppsChangedListener {
+final class VirtualDeviceImpl extends IVirtualDevice.Stub
+        implements IBinder.DeathRecipient,
+                GenericWindowPolicyController.RunningAppsChangedListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final IVirtualDeviceActivityListener mActivityListener;
     public final Set mActivityPolicyExemptions;
@@ -137,7 +135,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         public final PendingIntent mPendingIntent;
         public final ResultReceiver mResultReceiver;
 
-        public PendingTrampoline(int i, PendingIntent pendingIntent, ResultReceiver resultReceiver) {
+        public PendingTrampoline(
+                int i, PendingIntent pendingIntent, ResultReceiver resultReceiver) {
             this.mPendingIntent = pendingIntent;
             this.mResultReceiver = resultReceiver;
             this.mDisplayId = i;
@@ -154,8 +153,7 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface PendingTrampolineCallback {
-    }
+    public interface PendingTrampolineCallback {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VirtualDisplayWrapper {
@@ -163,7 +161,10 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         public final PowerManager.WakeLock mWakeLock;
         public final GenericWindowPolicyController mWindowPolicyController;
 
-        public VirtualDisplayWrapper(IVirtualDisplayCallback iVirtualDisplayCallback, GenericWindowPolicyController genericWindowPolicyController, PowerManager.WakeLock wakeLock) {
+        public VirtualDisplayWrapper(
+                IVirtualDisplayCallback iVirtualDisplayCallback,
+                GenericWindowPolicyController genericWindowPolicyController,
+                PowerManager.WakeLock wakeLock) {
             Objects.requireNonNull(iVirtualDisplayCallback);
             this.mToken = iVirtualDisplayCallback;
             this.mWindowPolicyController = genericWindowPolicyController;
@@ -171,11 +172,63 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public VirtualDeviceImpl(Context context, AssociationInfo associationInfo, VirtualDeviceManagerService virtualDeviceManagerService, VirtualDeviceLog virtualDeviceLog, IBinder iBinder, AttributionSource attributionSource, int i, CameraAccessController cameraAccessController, VirtualDeviceManagerService.VirtualDeviceManagerImpl.AnonymousClass1 anonymousClass1, IVirtualDeviceActivityListener iVirtualDeviceActivityListener, IVirtualDeviceSoundEffectListener iVirtualDeviceSoundEffectListener, VirtualDeviceManagerService$VirtualDeviceManagerImpl$$ExternalSyntheticLambda0 virtualDeviceManagerService$VirtualDeviceManagerImpl$$ExternalSyntheticLambda0, VirtualDeviceParams virtualDeviceParams) {
-        this(context, associationInfo, virtualDeviceManagerService, virtualDeviceLog, iBinder, attributionSource, i, null, cameraAccessController, anonymousClass1, iVirtualDeviceActivityListener, iVirtualDeviceSoundEffectListener, virtualDeviceManagerService$VirtualDeviceManagerImpl$$ExternalSyntheticLambda0, virtualDeviceParams, DisplayManagerGlobal.getInstance(), (android.companion.virtual.flags.Flags.virtualCamera() && android.companion.virtualdevice.flags.Flags.virtualCameraServiceDiscovery() && nativeVirtualCameraServiceBuildFlagEnabled()) ? new VirtualCameraController(null, virtualDeviceParams.getDevicePolicy(5), i) : null);
+    public VirtualDeviceImpl(
+            Context context,
+            AssociationInfo associationInfo,
+            VirtualDeviceManagerService virtualDeviceManagerService,
+            VirtualDeviceLog virtualDeviceLog,
+            IBinder iBinder,
+            AttributionSource attributionSource,
+            int i,
+            CameraAccessController cameraAccessController,
+            VirtualDeviceManagerService.VirtualDeviceManagerImpl.AnonymousClass1 anonymousClass1,
+            IVirtualDeviceActivityListener iVirtualDeviceActivityListener,
+            IVirtualDeviceSoundEffectListener iVirtualDeviceSoundEffectListener,
+            VirtualDeviceManagerService$VirtualDeviceManagerImpl$$ExternalSyntheticLambda0
+                    virtualDeviceManagerService$VirtualDeviceManagerImpl$$ExternalSyntheticLambda0,
+            VirtualDeviceParams virtualDeviceParams) {
+        this(
+                context,
+                associationInfo,
+                virtualDeviceManagerService,
+                virtualDeviceLog,
+                iBinder,
+                attributionSource,
+                i,
+                null,
+                cameraAccessController,
+                anonymousClass1,
+                iVirtualDeviceActivityListener,
+                iVirtualDeviceSoundEffectListener,
+                virtualDeviceManagerService$VirtualDeviceManagerImpl$$ExternalSyntheticLambda0,
+                virtualDeviceParams,
+                DisplayManagerGlobal.getInstance(),
+                (android.companion.virtual.flags.Flags.virtualCamera()
+                                && android.companion.virtualdevice.flags.Flags
+                                        .virtualCameraServiceDiscovery()
+                                && nativeVirtualCameraServiceBuildFlagEnabled())
+                        ? new VirtualCameraController(
+                                null, virtualDeviceParams.getDevicePolicy(5), i)
+                        : null);
     }
 
-    public VirtualDeviceImpl(Context context, AssociationInfo associationInfo, VirtualDeviceManagerService virtualDeviceManagerService, VirtualDeviceLog virtualDeviceLog, IBinder iBinder, AttributionSource attributionSource, int i, InputController inputController, CameraAccessController cameraAccessController, PendingTrampolineCallback pendingTrampolineCallback, IVirtualDeviceActivityListener iVirtualDeviceActivityListener, IVirtualDeviceSoundEffectListener iVirtualDeviceSoundEffectListener, Consumer consumer, VirtualDeviceParams virtualDeviceParams, DisplayManagerGlobal displayManagerGlobal, VirtualCameraController virtualCameraController) {
+    public VirtualDeviceImpl(
+            Context context,
+            AssociationInfo associationInfo,
+            VirtualDeviceManagerService virtualDeviceManagerService,
+            VirtualDeviceLog virtualDeviceLog,
+            IBinder iBinder,
+            AttributionSource attributionSource,
+            int i,
+            InputController inputController,
+            CameraAccessController cameraAccessController,
+            PendingTrampolineCallback pendingTrampolineCallback,
+            IVirtualDeviceActivityListener iVirtualDeviceActivityListener,
+            IVirtualDeviceSoundEffectListener iVirtualDeviceSoundEffectListener,
+            Consumer consumer,
+            VirtualDeviceParams virtualDeviceParams,
+            DisplayManagerGlobal displayManagerGlobal,
+            VirtualCameraController virtualCameraController) {
         super(PermissionEnforcer.fromContext(context));
         int i2;
         String str;
@@ -187,10 +240,14 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         this.mVirtualDeviceLog = virtualDeviceLog;
         this.mOwnerPackageName = attributionSource.getPackageName();
         this.mAttributionSource = attributionSource;
-        Context createContextAsUser = context.createContextAsUser(UserHandle.getUserHandleForUid(attributionSource.getUid()), 0);
+        Context createContextAsUser =
+                context.createContextAsUser(
+                        UserHandle.getUserHandleForUid(attributionSource.getUid()), 0);
         this.mContext = createContextAsUser;
         this.mAssociationInfo = associationInfo;
-        String m = VibrationParam$1$$ExternalSyntheticOutline0.m(associationInfo.getId(), "companion:");
+        String m =
+                VibrationParam$1$$ExternalSyntheticOutline0.m(
+                        associationInfo.getId(), "companion:");
         this.mPersistentDeviceId = m;
         this.mService = virtualDeviceManagerService;
         this.mPendingTrampolineCallback = pendingTrampolineCallback;
@@ -204,30 +261,47 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         this.mParams = virtualDeviceParams;
         this.mDevicePolicies = virtualDeviceParams.getDevicePolicies();
         this.mDisplayManager = displayManagerGlobal;
-        this.mDisplayManagerInternal = (DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class);
+        this.mDisplayManagerInternal =
+                (DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class);
         if (inputController == null) {
             final Handler mainThreadHandler = context.getMainThreadHandler();
             i2 = uid;
             str = m;
-            this.mInputController = new InputController(new InputController.NativeWrapper(), mainThreadHandler, (WindowManager) context.getSystemService(WindowManager.class), attributionSource, new InputController.DeviceCreationThreadVerifier() { // from class: com.android.server.companion.virtual.InputController$$ExternalSyntheticLambda2
-                @Override // com.android.server.companion.virtual.InputController.DeviceCreationThreadVerifier
-                public final boolean isValidThread() {
-                    AtomicLong atomicLong = InputController.sNextPhysId;
-                    return !mainThreadHandler.getLooper().isCurrentThread();
-                }
-            });
+            this.mInputController =
+                    new InputController(
+                            new InputController.NativeWrapper(),
+                            mainThreadHandler,
+                            (WindowManager) context.getSystemService(WindowManager.class),
+                            attributionSource,
+                            new InputController
+                                    .DeviceCreationThreadVerifier() { // from class:
+                                                                      // com.android.server.companion.virtual.InputController$$ExternalSyntheticLambda2
+                                @Override // com.android.server.companion.virtual.InputController.DeviceCreationThreadVerifier
+                                public final boolean isValidThread() {
+                                    AtomicLong atomicLong = InputController.sNextPhysId;
+                                    return !mainThreadHandler.getLooper().isCurrentThread();
+                                }
+                            });
         } else {
             i2 = uid;
             str = m;
             this.mInputController = inputController;
         }
-        this.mSensorController = new SensorController(this, i, attributionSource, virtualDeviceParams.getVirtualSensorCallback(), virtualDeviceParams.getVirtualSensorConfigs());
+        this.mSensorController =
+                new SensorController(
+                        this,
+                        i,
+                        attributionSource,
+                        virtualDeviceParams.getVirtualSensorCallback(),
+                        virtualDeviceParams.getVirtualSensorConfigs());
         this.mCameraAccessController = cameraAccessController;
         if (cameraAccessController != null) {
             synchronized (cameraAccessController.mObserverLock) {
                 try {
                     if (cameraAccessController.mObserverCount == 0) {
-                        cameraAccessController.mCameraManager.registerAvailabilityCallback(cameraAccessController.mContext.getMainExecutor(), cameraAccessController);
+                        cameraAccessController.mCameraManager.registerAvailabilityCallback(
+                                cameraAccessController.mContext.getMainExecutor(),
+                                cameraAccessController);
                     }
                     cameraAccessController.mObserverCount++;
                 } finally {
@@ -249,29 +323,56 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Flags.dumpHistory();
-                virtualDeviceLog.mLogEntries.push(new VirtualDeviceLog.LogEntry(0, i, i2, System.currentTimeMillis()));
+                virtualDeviceLog.mLogEntries.push(
+                        new VirtualDeviceLog.LogEntry(0, i, i2, System.currentTimeMillis()));
                 if (virtualDeviceLog.mLogEntries.size() > 16) {
                     virtualDeviceLog.mLogEntries.removeLast();
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 if (android.companion.virtual.flags.Flags.vdmPublicApis()) {
-                    this.mPublicVirtualDeviceObject = new VirtualDevice(this, i, str, virtualDeviceParams.getName(), associationInfo.getDisplayName());
+                    this.mPublicVirtualDeviceObject =
+                            new VirtualDevice(
+                                    this,
+                                    i,
+                                    str,
+                                    virtualDeviceParams.getName(),
+                                    associationInfo.getDisplayName());
                 } else {
-                    this.mPublicVirtualDeviceObject = new VirtualDevice(this, i, str, virtualDeviceParams.getName());
+                    this.mPublicVirtualDeviceObject =
+                            new VirtualDevice(this, i, str, virtualDeviceParams.getName());
                 }
                 if (android.companion.virtual.flags.Flags.dynamicPolicy()) {
-                    this.mActivityPolicyExemptions = new ArraySet(virtualDeviceParams.getDevicePolicy(3) == 0 ? virtualDeviceParams.getBlockedActivities() : virtualDeviceParams.getAllowedActivities());
+                    this.mActivityPolicyExemptions =
+                            new ArraySet(
+                                    virtualDeviceParams.getDevicePolicy(3) == 0
+                                            ? virtualDeviceParams.getBlockedActivities()
+                                            : virtualDeviceParams.getAllowedActivities());
                 } else {
-                    this.mActivityPolicyExemptions = virtualDeviceParams.getDefaultActivityPolicy() == 0 ? virtualDeviceParams.getBlockedActivities() : virtualDeviceParams.getAllowedActivities();
+                    this.mActivityPolicyExemptions =
+                            virtualDeviceParams.getDefaultActivityPolicy() == 0
+                                    ? virtualDeviceParams.getBlockedActivities()
+                                    : virtualDeviceParams.getAllowedActivities();
                 }
-                int i3 = !android.companion.virtual.flags.Flags.consistentDisplayFlags() ? 25033 : 24896;
-                this.mBaseVirtualDisplayFlags = virtualDeviceParams.getLockState() == 1 ? i3 | 4096 : i3;
-                if (!android.companion.virtual.flags.Flags.vdmCustomIme() || virtualDeviceParams.getInputMethodComponent() == null) {
+                int i3 =
+                        !android.companion.virtual.flags.Flags.consistentDisplayFlags()
+                                ? 25033
+                                : 24896;
+                this.mBaseVirtualDisplayFlags =
+                        virtualDeviceParams.getLockState() == 1 ? i3 | 4096 : i3;
+                if (!android.companion.virtual.flags.Flags.vdmCustomIme()
+                        || virtualDeviceParams.getInputMethodComponent() == null) {
                     return;
                 }
-                String flattenToShortString = virtualDeviceParams.getInputMethodComponent().flattenToShortString();
-                Slog.d("VirtualDeviceImpl", "Setting custom input method " + flattenToShortString + " as default for virtual device " + i);
-                InputMethodManagerInternal.get().setVirtualDeviceInputMethodForAllUsers(i, flattenToShortString);
+                String flattenToShortString =
+                        virtualDeviceParams.getInputMethodComponent().flattenToShortString();
+                Slog.d(
+                        "VirtualDeviceImpl",
+                        "Setting custom input method "
+                                + flattenToShortString
+                                + " as default for virtual device "
+                                + i);
+                InputMethodManagerInternal.get()
+                        .setVirtualDeviceInputMethodForAllUsers(i, flattenToShortString);
             } catch (Throwable th) {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 throw th;
@@ -283,7 +384,15 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
 
     public static int getTargetDisplayIdForInput(int i) {
         int displayIdToMirror;
-        return (android.companion.virtual.flags.Flags.interactiveScreenMirror() && (displayIdToMirror = ((DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class)).getDisplayIdToMirror(i)) != -1) ? displayIdToMirror : i;
+        return (android.companion.virtual.flags.Flags.interactiveScreenMirror()
+                        && (displayIdToMirror =
+                                        ((DisplayManagerInternal)
+                                                        LocalServices.getService(
+                                                                DisplayManagerInternal.class))
+                                                .getDisplayIdToMirror(i))
+                                != -1)
+                ? displayIdToMirror
+                : i;
     }
 
     @FastNative
@@ -295,9 +404,13 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
             try {
                 if (this.mActivityPolicyExemptions.add(componentName)) {
                     for (int i = 0; i < this.mVirtualDisplays.size(); i++) {
-                        GenericWindowPolicyController genericWindowPolicyController = ((VirtualDisplayWrapper) this.mVirtualDisplays.valueAt(i)).mWindowPolicyController;
-                        synchronized (genericWindowPolicyController.mGenericWindowPolicyControllerLock) {
-                            genericWindowPolicyController.mActivityPolicyExemptions.add(componentName);
+                        GenericWindowPolicyController genericWindowPolicyController =
+                                ((VirtualDisplayWrapper) this.mVirtualDisplays.valueAt(i))
+                                        .mWindowPolicyController;
+                        synchronized (
+                                genericWindowPolicyController.mGenericWindowPolicyControllerLock) {
+                            genericWindowPolicyController.mActivityPolicyExemptions.add(
+                                    componentName);
                         }
                     }
                 }
@@ -319,7 +432,10 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         synchronized (this.mVirtualDeviceLock) {
             try {
                 if (!this.mVirtualDisplays.contains(i)) {
-                    throw new SecurityException("Cannot create a virtual input device for display " + i + " which not associated with this virtual device");
+                    throw new SecurityException(
+                            "Cannot create a virtual input device for display "
+                                    + i
+                                    + " which not associated with this virtual device");
                 }
             } catch (Throwable th) {
                 throw th;
@@ -340,18 +456,29 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                     virtualDeviceManagerService.mAppsOnVirtualDevices.remove(i);
                     virtualDeviceManagerService.mVirtualDevices.remove(i);
                     if (android.companion.virtual.flags.Flags.vdmPublicApis()) {
-                        virtualDeviceManagerService.mVirtualDeviceListeners.broadcast(new VirtualDeviceManagerService$$ExternalSyntheticLambda1(i, 0));
+                        virtualDeviceManagerService.mVirtualDeviceListeners.broadcast(
+                                new VirtualDeviceManagerService$$ExternalSyntheticLambda1(i, 0));
                     }
-                    Intent intent = new Intent("android.companion.virtual.action.VIRTUAL_DEVICE_REMOVED");
+                    Intent intent =
+                            new Intent("android.companion.virtual.action.VIRTUAL_DEVICE_REMOVED");
                     intent.putExtra("android.companion.virtual.extra.VIRTUAL_DEVICE_ID", i);
                     intent.setFlags(1073741824);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        virtualDeviceManagerService.getContext().sendBroadcastAsUser(intent, UserHandle.ALL);
+                        virtualDeviceManagerService
+                                .getContext()
+                                .sendBroadcastAsUser(intent, UserHandle.ALL);
                         if (!android.companion.virtual.flags.Flags.persistentDeviceIdApi()) {
                             synchronized (virtualDeviceManagerService.mVirtualDeviceManagerLock) {
                                 if (virtualDeviceManagerService.mVirtualDevices.size() == 0) {
-                                    ((CompanionDeviceManager) virtualDeviceManagerService.getContext().getSystemService(CompanionDeviceManager.class)).removeOnAssociationsChangedListener(virtualDeviceManagerService.mCdmAssociationListener);
+                                    ((CompanionDeviceManager)
+                                                    virtualDeviceManagerService
+                                                            .getContext()
+                                                            .getSystemService(
+                                                                    CompanionDeviceManager.class))
+                                            .removeOnAssociationsChangedListener(
+                                                    virtualDeviceManagerService
+                                                            .mCdmAssociationListener);
                                 }
                             }
                         }
@@ -363,7 +490,9 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                         clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
                             Flags.dumpHistory();
-                            virtualDeviceLog.mLogEntries.push(new VirtualDeviceLog.LogEntry(1, i2, i3, System.currentTimeMillis()));
+                            virtualDeviceLog.mLogEntries.push(
+                                    new VirtualDeviceLog.LogEntry(
+                                            1, i2, i3, System.currentTimeMillis()));
                             if (virtualDeviceLog.mLogEntries.size() > 16) {
                                 virtualDeviceLog.mLogEntries.removeLast();
                             }
@@ -372,7 +501,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                             try {
                                 synchronized (this.mVirtualDeviceLock) {
                                     try {
-                                        VirtualAudioController virtualAudioController = this.mVirtualAudioController;
+                                        VirtualAudioController virtualAudioController =
+                                                this.mVirtualAudioController;
                                         if (virtualAudioController != null) {
                                             virtualAudioController.stopListening();
                                             this.mVirtualAudioController = null;
@@ -381,20 +511,26 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                                         size = this.mVirtualDisplays.size();
                                         virtualDisplayWrapperArr = new VirtualDisplayWrapper[size];
                                         for (int i4 = 0; i4 < this.mVirtualDisplays.size(); i4++) {
-                                            virtualDisplayWrapperArr[i4] = (VirtualDisplayWrapper) this.mVirtualDisplays.valueAt(i4);
+                                            virtualDisplayWrapperArr[i4] =
+                                                    (VirtualDisplayWrapper)
+                                                            this.mVirtualDisplays.valueAt(i4);
                                         }
                                         this.mVirtualDisplays.clear();
                                     } finally {
                                     }
                                 }
                                 for (int i5 = 0; i5 < size; i5++) {
-                                    VirtualDisplayWrapper virtualDisplayWrapper = virtualDisplayWrapperArr[i5];
-                                    this.mDisplayManager.releaseVirtualDisplay(virtualDisplayWrapper.mToken);
+                                    VirtualDisplayWrapper virtualDisplayWrapper =
+                                            virtualDisplayWrapperArr[i5];
+                                    this.mDisplayManager.releaseVirtualDisplay(
+                                            virtualDisplayWrapper.mToken);
                                     virtualDisplayWrapper.mWakeLock.release();
-                                    virtualDisplayWrapper.mWindowPolicyController.unregisterRunningAppsChangedListener(this);
+                                    virtualDisplayWrapper.mWindowPolicyController
+                                            .unregisterRunningAppsChangedListener(this);
                                 }
                                 this.mAppToken.unlinkToDeath(this, 0);
-                                CameraAccessController cameraAccessController = this.mCameraAccessController;
+                                CameraAccessController cameraAccessController =
+                                        this.mCameraAccessController;
                                 if (cameraAccessController != null) {
                                     synchronized (cameraAccessController.mObserverLock) {
                                         try {
@@ -407,13 +543,17 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                                         }
                                     }
                                 }
-                                if (android.companion.virtual.flags.Flags.vdmCustomIme() && this.mParams.getInputMethodComponent() != null) {
-                                    InputMethodManagerInternal.get().setVirtualDeviceInputMethodForAllUsers(this.mDeviceId, null);
+                                if (android.companion.virtual.flags.Flags.vdmCustomIme()
+                                        && this.mParams.getInputMethodComponent() != null) {
+                                    InputMethodManagerInternal.get()
+                                            .setVirtualDeviceInputMethodForAllUsers(
+                                                    this.mDeviceId, null);
                                 }
                                 this.mInputController.close();
                                 this.mSensorController.close();
                                 Binder.restoreCallingIdentity(clearCallingIdentity);
-                                VirtualCameraController virtualCameraController = this.mVirtualCameraController;
+                                VirtualCameraController virtualCameraController =
+                                        this.mVirtualCameraController;
                                 if (virtualCameraController != null) {
                                     virtualCameraController.close();
                                 }
@@ -433,7 +573,9 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
     public final PowerManager.WakeLock createAndAcquireWakeLockForDisplay(int i) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            PowerManager.WakeLock newWakeLock = ((PowerManager) this.mContext.getSystemService(PowerManager.class)).newWakeLock(10, "VirtualDeviceImpl:" + i, i);
+            PowerManager.WakeLock newWakeLock =
+                    ((PowerManager) this.mContext.getSystemService(PowerManager.class))
+                            .newWakeLock(10, "VirtualDeviceImpl:" + i, i);
             newWakeLock.acquire();
             return newWakeLock;
         } finally {
@@ -452,10 +594,25 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                 String inputDeviceName = virtualDpadConfig.getInputDeviceName();
                 int vendorId = virtualDpadConfig.getVendorId();
                 int productId = virtualDpadConfig.getProductId();
-                int targetDisplayIdForInput = getTargetDisplayIdForInput(virtualDpadConfig.getAssociatedDisplayId());
+                int targetDisplayIdForInput =
+                        getTargetDisplayIdForInput(virtualDpadConfig.getAssociatedDisplayId());
                 inputController.getClass();
                 String createPhys = InputController.createPhys("Dpad");
-                inputController.createDeviceInternal(4, inputDeviceName, vendorId, productId, iBinder, targetDisplayIdForInput, createPhys, new InputController$$ExternalSyntheticLambda1(inputController, inputDeviceName, vendorId, productId, createPhys, 2));
+                inputController.createDeviceInternal(
+                        4,
+                        inputDeviceName,
+                        vendorId,
+                        productId,
+                        iBinder,
+                        targetDisplayIdForInput,
+                        createPhys,
+                        new InputController$$ExternalSyntheticLambda1(
+                                inputController,
+                                inputDeviceName,
+                                vendorId,
+                                productId,
+                                createPhys,
+                                2));
             } catch (InputController.DeviceCreationException e) {
                 throw new IllegalArgumentException(e);
             }
@@ -464,16 +621,25 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final void createVirtualKeyboard(VirtualKeyboardConfig virtualKeyboardConfig, IBinder iBinder) {
+    public final void createVirtualKeyboard(
+            VirtualKeyboardConfig virtualKeyboardConfig, IBinder iBinder) {
         createVirtualKeyboard_enforcePermission();
         Objects.requireNonNull(virtualKeyboardConfig);
         checkVirtualInputDeviceDisplayIdAssociation(virtualKeyboardConfig.getAssociatedDisplayId());
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                this.mInputController.createKeyboard(virtualKeyboardConfig.getInputDeviceName(), virtualKeyboardConfig.getVendorId(), virtualKeyboardConfig.getProductId(), iBinder, getTargetDisplayIdForInput(virtualKeyboardConfig.getAssociatedDisplayId()), virtualKeyboardConfig.getLanguageTag(), virtualKeyboardConfig.getLayoutType());
+                this.mInputController.createKeyboard(
+                        virtualKeyboardConfig.getInputDeviceName(),
+                        virtualKeyboardConfig.getVendorId(),
+                        virtualKeyboardConfig.getProductId(),
+                        iBinder,
+                        getTargetDisplayIdForInput(virtualKeyboardConfig.getAssociatedDisplayId()),
+                        virtualKeyboardConfig.getLanguageTag(),
+                        virtualKeyboardConfig.getLayoutType());
                 synchronized (this.mVirtualDeviceLock) {
-                    this.mLocaleList = LocaleList.forLanguageTags(virtualKeyboardConfig.getLanguageTag());
+                    this.mLocaleList =
+                            LocaleList.forLanguageTags(virtualKeyboardConfig.getLanguageTag());
                 }
             } catch (InputController.DeviceCreationException e) {
                 throw new IllegalArgumentException(e);
@@ -497,7 +663,21 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                 int associatedDisplayId = virtualMouseConfig.getAssociatedDisplayId();
                 inputController.getClass();
                 String createPhys = InputController.createPhys("Mouse");
-                inputController.createDeviceInternal(2, inputDeviceName, vendorId, productId, iBinder, associatedDisplayId, createPhys, new InputController$$ExternalSyntheticLambda1(inputController, inputDeviceName, vendorId, productId, createPhys, 1));
+                inputController.createDeviceInternal(
+                        2,
+                        inputDeviceName,
+                        vendorId,
+                        productId,
+                        iBinder,
+                        associatedDisplayId,
+                        createPhys,
+                        new InputController$$ExternalSyntheticLambda1(
+                                inputController,
+                                inputDeviceName,
+                                vendorId,
+                                productId,
+                                createPhys,
+                                1));
             } catch (InputController.DeviceCreationException e) {
                 throw new IllegalArgumentException(e);
             }
@@ -506,14 +686,24 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final void createVirtualNavigationTouchpad(VirtualNavigationTouchpadConfig virtualNavigationTouchpadConfig, IBinder iBinder) {
+    public final void createVirtualNavigationTouchpad(
+            VirtualNavigationTouchpadConfig virtualNavigationTouchpadConfig, IBinder iBinder) {
         createVirtualNavigationTouchpad_enforcePermission();
         Objects.requireNonNull(virtualNavigationTouchpadConfig);
-        checkVirtualInputDeviceDisplayIdAssociation(virtualNavigationTouchpadConfig.getAssociatedDisplayId());
+        checkVirtualInputDeviceDisplayIdAssociation(
+                virtualNavigationTouchpadConfig.getAssociatedDisplayId());
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                this.mInputController.createNavigationTouchpad(virtualNavigationTouchpadConfig.getVendorId(), virtualNavigationTouchpadConfig.getProductId(), getTargetDisplayIdForInput(virtualNavigationTouchpadConfig.getAssociatedDisplayId()), virtualNavigationTouchpadConfig.getHeight(), virtualNavigationTouchpadConfig.getWidth(), iBinder, virtualNavigationTouchpadConfig.getInputDeviceName());
+                this.mInputController.createNavigationTouchpad(
+                        virtualNavigationTouchpadConfig.getVendorId(),
+                        virtualNavigationTouchpadConfig.getProductId(),
+                        getTargetDisplayIdForInput(
+                                virtualNavigationTouchpadConfig.getAssociatedDisplayId()),
+                        virtualNavigationTouchpadConfig.getHeight(),
+                        virtualNavigationTouchpadConfig.getWidth(),
+                        iBinder,
+                        virtualNavigationTouchpadConfig.getInputDeviceName());
             } catch (InputController.DeviceCreationException e) {
                 throw new IllegalArgumentException(e);
             }
@@ -522,7 +712,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final void createVirtualStylus(VirtualStylusConfig virtualStylusConfig, IBinder iBinder) {
+    public final void createVirtualStylus(
+            VirtualStylusConfig virtualStylusConfig, IBinder iBinder) {
         createVirtualStylus_enforcePermission();
         Objects.requireNonNull(virtualStylusConfig);
         Objects.requireNonNull(iBinder);
@@ -539,7 +730,23 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                 int width = virtualStylusConfig.getWidth();
                 inputController.getClass();
                 String createPhys = InputController.createPhys("Stylus");
-                inputController.createDeviceInternal(6, inputDeviceName, vendorId, productId, iBinder, associatedDisplayId, createPhys, new InputController$$ExternalSyntheticLambda5(inputController, inputDeviceName, vendorId, productId, createPhys, height, width, 2));
+                inputController.createDeviceInternal(
+                        6,
+                        inputDeviceName,
+                        vendorId,
+                        productId,
+                        iBinder,
+                        associatedDisplayId,
+                        createPhys,
+                        new InputController$$ExternalSyntheticLambda5(
+                                inputController,
+                                inputDeviceName,
+                                vendorId,
+                                productId,
+                                createPhys,
+                                height,
+                                width,
+                                2));
             } catch (InputController.DeviceCreationException e) {
                 throw new IllegalArgumentException(e);
             }
@@ -548,10 +755,12 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final void createVirtualTouchscreen(VirtualTouchscreenConfig virtualTouchscreenConfig, IBinder iBinder) {
+    public final void createVirtualTouchscreen(
+            VirtualTouchscreenConfig virtualTouchscreenConfig, IBinder iBinder) {
         createVirtualTouchscreen_enforcePermission();
         Objects.requireNonNull(virtualTouchscreenConfig);
-        checkVirtualInputDeviceDisplayIdAssociation(virtualTouchscreenConfig.getAssociatedDisplayId());
+        checkVirtualInputDeviceDisplayIdAssociation(
+                virtualTouchscreenConfig.getAssociatedDisplayId());
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
@@ -564,7 +773,23 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                 int width = virtualTouchscreenConfig.getWidth();
                 inputController.getClass();
                 String createPhys = InputController.createPhys("Touchscreen");
-                inputController.createDeviceInternal(3, inputDeviceName, vendorId, productId, iBinder, associatedDisplayId, createPhys, new InputController$$ExternalSyntheticLambda5(inputController, inputDeviceName, vendorId, productId, createPhys, height, width, 0));
+                inputController.createDeviceInternal(
+                        3,
+                        inputDeviceName,
+                        vendorId,
+                        productId,
+                        iBinder,
+                        associatedDisplayId,
+                        createPhys,
+                        new InputController$$ExternalSyntheticLambda5(
+                                inputController,
+                                inputDeviceName,
+                                vendorId,
+                                productId,
+                                createPhys,
+                                height,
+                                width,
+                                0));
             } catch (InputController.DeviceCreationException e) {
                 throw new IllegalArgumentException(e);
             }
@@ -575,50 +800,97 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
 
     /* JADX WARN: Type inference failed for: r13v0, types: [com.android.server.companion.virtual.VirtualDeviceImpl$1] */
     public final GenericWindowPolicyController createWindowPolicyControllerLocked(Set set) {
-        boolean z = !android.companion.virtual.flags.Flags.dynamicPolicy() ? this.mParams.getDefaultActivityPolicy() != 0 : getDevicePolicy(3) != 0;
+        boolean z =
+                !android.companion.virtual.flags.Flags.dynamicPolicy()
+                        ? this.mParams.getDefaultActivityPolicy() != 0
+                        : getDevicePolicy(3) != 0;
         boolean z2 = this.mParams.getDefaultNavigationPolicy() == 0;
         boolean z3 = getDevicePolicy(2) == 0;
-        ComponentName homeComponent = android.companion.virtual.flags.Flags.vdmCustomHome() ? this.mParams.getHomeComponent() : null;
+        ComponentName homeComponent =
+                android.companion.virtual.flags.Flags.vdmCustomHome()
+                        ? this.mParams.getHomeComponent()
+                        : null;
         AttributionSource attributionSource = this.mAttributionSource;
         ArraySet arraySet = new ArraySet();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            DevicePolicyManager devicePolicyManager = (DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class);
-            for (UserHandle userHandle : ((UserManager) this.mContext.getSystemService(UserManager.class)).getAllProfiles()) {
-                int nearbyAppStreamingPolicy = devicePolicyManager.getNearbyAppStreamingPolicy(userHandle.getIdentifier());
+            DevicePolicyManager devicePolicyManager =
+                    (DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class);
+            for (UserHandle userHandle :
+                    ((UserManager) this.mContext.getSystemService(UserManager.class))
+                            .getAllProfiles()) {
+                int nearbyAppStreamingPolicy =
+                        devicePolicyManager.getNearbyAppStreamingPolicy(userHandle.getIdentifier());
                 if (nearbyAppStreamingPolicy != 2 && nearbyAppStreamingPolicy != 0) {
-                    if (nearbyAppStreamingPolicy == 3 && this.mParams.getUsersWithMatchingAccounts().contains(userHandle)) {
+                    if (nearbyAppStreamingPolicy == 3
+                            && this.mParams.getUsersWithMatchingAccounts().contains(userHandle)) {
                         arraySet.add(userHandle);
                     }
                 }
                 arraySet.add(userHandle);
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
-            GenericWindowPolicyController genericWindowPolicyController = new GenericWindowPolicyController(attributionSource, arraySet, z, this.mActivityPolicyExemptions, z2, z2 ? this.mParams.getBlockedCrossTaskNavigations() : this.mParams.getAllowedCrossTaskNavigations(), this.mPermissionDialogComponent, new VirtualDeviceManager.ActivityListener() { // from class: com.android.server.companion.virtual.VirtualDeviceImpl.1
-                public final void onDisplayEmpty(int i) {
-                    try {
-                        VirtualDeviceImpl.this.mActivityListener.onDisplayEmpty(i);
-                    } catch (RemoteException e) {
-                        Slog.w("VirtualDeviceImpl", "Unable to call mActivityListener for display: " + i, e);
-                    }
-                }
+            GenericWindowPolicyController genericWindowPolicyController =
+                    new GenericWindowPolicyController(
+                            attributionSource,
+                            arraySet,
+                            z,
+                            this.mActivityPolicyExemptions,
+                            z2,
+                            z2
+                                    ? this.mParams.getBlockedCrossTaskNavigations()
+                                    : this.mParams.getAllowedCrossTaskNavigations(),
+                            this.mPermissionDialogComponent,
+                            new VirtualDeviceManager
+                                    .ActivityListener() { // from class:
+                                                          // com.android.server.companion.virtual.VirtualDeviceImpl.1
+                                public final void onDisplayEmpty(int i) {
+                                    try {
+                                        VirtualDeviceImpl.this.mActivityListener.onDisplayEmpty(i);
+                                    } catch (RemoteException e) {
+                                        Slog.w(
+                                                "VirtualDeviceImpl",
+                                                "Unable to call mActivityListener for display: "
+                                                        + i,
+                                                e);
+                                    }
+                                }
 
-                public final void onTopActivityChanged(int i, ComponentName componentName) {
-                    try {
-                        VirtualDeviceImpl.this.mActivityListener.onTopActivityChanged(i, componentName, -10000);
-                    } catch (RemoteException e) {
-                        Slog.w("VirtualDeviceImpl", "Unable to call mActivityListener for display: " + i, e);
-                    }
-                }
+                                public final void onTopActivityChanged(
+                                        int i, ComponentName componentName) {
+                                    try {
+                                        VirtualDeviceImpl.this.mActivityListener
+                                                .onTopActivityChanged(i, componentName, -10000);
+                                    } catch (RemoteException e) {
+                                        Slog.w(
+                                                "VirtualDeviceImpl",
+                                                "Unable to call mActivityListener for display: "
+                                                        + i,
+                                                e);
+                                    }
+                                }
 
-                public final void onTopActivityChanged(int i, ComponentName componentName, int i2) {
-                    try {
-                        VirtualDeviceImpl.this.mActivityListener.onTopActivityChanged(i, componentName, i2);
-                    } catch (RemoteException e) {
-                        Slog.w("VirtualDeviceImpl", "Unable to call mActivityListener for display: " + i, e);
-                    }
-                }
-            }, new VirtualDeviceImpl$$ExternalSyntheticLambda2(this), new VirtualDeviceImpl$$ExternalSyntheticLambda2(this), new VirtualDeviceImpl$$ExternalSyntheticLambda2(this), new VirtualDeviceImpl$$ExternalSyntheticLambda2(this), set, z3, homeComponent);
+                                public final void onTopActivityChanged(
+                                        int i, ComponentName componentName, int i2) {
+                                    try {
+                                        VirtualDeviceImpl.this.mActivityListener
+                                                .onTopActivityChanged(i, componentName, i2);
+                                    } catch (RemoteException e) {
+                                        Slog.w(
+                                                "VirtualDeviceImpl",
+                                                "Unable to call mActivityListener for display: "
+                                                        + i,
+                                                e);
+                                    }
+                                }
+                            },
+                            new VirtualDeviceImpl$$ExternalSyntheticLambda2(this),
+                            new VirtualDeviceImpl$$ExternalSyntheticLambda2(this),
+                            new VirtualDeviceImpl$$ExternalSyntheticLambda2(this),
+                            new VirtualDeviceImpl$$ExternalSyntheticLambda2(this),
+                            set,
+                            z3,
+                            homeComponent);
             synchronized (genericWindowPolicyController.mGenericWindowPolicyControllerLock) {
                 genericWindowPolicyController.mRunningAppsChangedListeners.add(this);
             }
@@ -629,9 +901,16 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         int i;
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "  VirtualDevice: ", "    mDeviceId: "), this.mDeviceId, printWriter, "    mAssociationId: ");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                                printWriter, "  VirtualDevice: ", "    mDeviceId: "),
+                        this.mDeviceId,
+                        printWriter,
+                        "    mAssociationId: ");
         m.append(this.mAssociationInfo.getId());
         printWriter.println(m.toString());
         printWriter.println("    mOwnerPackageName: " + this.mOwnerPackageName);
@@ -655,13 +934,18 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
             try {
                 printWriter.println("      Active descriptors: ");
                 for (i = 0; i < inputController.mInputDeviceDescriptors.size(); i++) {
-                    InputController.InputDeviceDescriptor inputDeviceDescriptor = (InputController.InputDeviceDescriptor) inputController.mInputDeviceDescriptors.valueAt(i);
+                    InputController.InputDeviceDescriptor inputDeviceDescriptor =
+                            (InputController.InputDeviceDescriptor)
+                                    inputController.mInputDeviceDescriptors.valueAt(i);
                     printWriter.println("        ptr: " + inputDeviceDescriptor.mPtr);
                     printWriter.println("          displayId: " + inputDeviceDescriptor.mDisplayId);
-                    printWriter.println("          creationOrder: " + inputDeviceDescriptor.mCreationOrderNumber);
+                    printWriter.println(
+                            "          creationOrder: "
+                                    + inputDeviceDescriptor.mCreationOrderNumber);
                     printWriter.println("          type: " + inputDeviceDescriptor.mType);
                     printWriter.println("          phys: " + inputDeviceDescriptor.mPhys);
-                    printWriter.println("          inputDeviceId: " + inputDeviceDescriptor.mInputDeviceId);
+                    printWriter.println(
+                            "          inputDeviceId: " + inputDeviceDescriptor.mInputDeviceId);
                 }
             } finally {
             }
@@ -672,7 +956,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         synchronized (sensorController.mLock) {
             try {
                 printWriter.println("      Active descriptors: ");
-                for (SensorController.SensorDescriptor sensorDescriptor : sensorController.mSensorDescriptors.values()) {
+                for (SensorController.SensorDescriptor sensorDescriptor :
+                        sensorController.mSensorDescriptors.values()) {
                     printWriter.println("        handle: " + sensorDescriptor.mHandle);
                     printWriter.println("          type: " + sensorDescriptor.mType);
                     printWriter.println("          name: " + sensorDescriptor.mName);
@@ -686,16 +971,24 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
             printWriter.println("    VirtualCameraController:");
             synchronized (virtualCameraController.mCameras) {
                 try {
-                    printWriter.println("        Registered cameras: " + ((ArrayMap) virtualCameraController.mCameras).size());
+                    printWriter.println(
+                            "        Registered cameras: "
+                                    + ((ArrayMap) virtualCameraController.mCameras).size());
                     Iterator it = ((ArrayMap) virtualCameraController.mCameras).values().iterator();
                     while (it.hasNext()) {
-                        printWriter.println("         token: " + ((VirtualCameraController.CameraDescriptor) it.next()).mConfig);
+                        printWriter.println(
+                                "         token: "
+                                        + ((VirtualCameraController.CameraDescriptor) it.next())
+                                                .mConfig);
                     }
                 } finally {
                 }
             }
         }
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("    hasCustomAudioInputSupport: "), hasCustomAudioInputSupportInternal(), printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("    hasCustomAudioInputSupport: "),
+                hasCustomAudioInputSupportInternal(),
+                printWriter);
     }
 
     public final int getAssociationId() {
@@ -759,7 +1052,9 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         try {
             InputController inputController = this.mInputController;
             synchronized (inputController.mLock) {
-                InputController.InputDeviceDescriptor inputDeviceDescriptor = (InputController.InputDeviceDescriptor) inputController.mInputDeviceDescriptors.get(iBinder);
+                InputController.InputDeviceDescriptor inputDeviceDescriptor =
+                        (InputController.InputDeviceDescriptor)
+                                inputController.mInputDeviceDescriptors.get(iBinder);
                 if (inputDeviceDescriptor == null) {
                     throw new IllegalArgumentException("Could not get device id for given token");
                 }
@@ -794,7 +1089,10 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         virtualCameraController.connectVirtualCameraServiceIfNeeded();
         try {
             synchronized (virtualCameraController.mServiceLock) {
-                cameraId = ((IVirtualCameraService.Stub.Proxy) virtualCameraController.mVirtualCameraService).getCameraId(virtualCameraConfig.getCallback().asBinder());
+                cameraId =
+                        ((IVirtualCameraService.Stub.Proxy)
+                                        virtualCameraController.mVirtualCameraService)
+                                .getCameraId(virtualCameraConfig.getCallback().asBinder());
             }
             return cameraId;
         } catch (RemoteException e) {
@@ -809,11 +1107,14 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         synchronized (sensorController.mLock) {
             try {
                 if (sensorController.mVirtualSensorList == null) {
-                    sensorController.mVirtualSensorList = new ArrayList(sensorController.mVirtualSensors.size());
+                    sensorController.mVirtualSensorList =
+                            new ArrayList(sensorController.mVirtualSensors.size());
                     for (int i = 0; i < sensorController.mVirtualSensors.size(); i++) {
-                        sensorController.mVirtualSensorList.add((VirtualSensor) sensorController.mVirtualSensors.valueAt(i));
+                        sensorController.mVirtualSensorList.add(
+                                (VirtualSensor) sensorController.mVirtualSensors.valueAt(i));
                     }
-                    sensorController.mVirtualSensorList = Collections.unmodifiableList(sensorController.mVirtualSensorList);
+                    sensorController.mVirtualSensorList =
+                            Collections.unmodifiableList(sensorController.mVirtualSensorList);
                 }
                 list = sensorController.mVirtualSensorList;
             } catch (Throwable th) {
@@ -828,7 +1129,9 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
     }
 
     public final boolean hasCustomAudioInputSupportInternal() {
-        if (!android.companion.virtual.flags.Flags.vdmPublicApis() || !android.media.audiopolicy.Flags.audioMixTestApi() || !android.media.audiopolicy.Flags.recordAudioDeviceAwarePermission()) {
+        if (!android.companion.virtual.flags.Flags.vdmPublicApis()
+                || !android.media.audiopolicy.Flags.audioMixTestApi()
+                || !android.media.audiopolicy.Flags.recordAudioDeviceAwarePermission()) {
             return false;
         }
         if (getDevicePolicy(1) == 1) {
@@ -836,7 +1139,9 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            for (AudioMix audioMix : ((AudioManager) this.mContext.getSystemService(AudioManager.class)).getRegisteredPolicyMixes()) {
+            for (AudioMix audioMix :
+                    ((AudioManager) this.mContext.getSystemService(AudioManager.class))
+                            .getRegisteredPolicyMixes()) {
                 if (audioMix.matchesVirtualDeviceId(this.mDeviceId) && audioMix.getMixType() == 1) {
                     return true;
                 }
@@ -851,9 +1156,12 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         boolean contains;
         synchronized (this.mVirtualDeviceLock) {
             for (int i2 = 0; i2 < this.mVirtualDisplays.size(); i2++) {
-                GenericWindowPolicyController genericWindowPolicyController = ((VirtualDisplayWrapper) this.mVirtualDisplays.valueAt(i2)).mWindowPolicyController;
+                GenericWindowPolicyController genericWindowPolicyController =
+                        ((VirtualDisplayWrapper) this.mVirtualDisplays.valueAt(i2))
+                                .mWindowPolicyController;
                 synchronized (genericWindowPolicyController.mGenericWindowPolicyControllerLock) {
-                    contains = genericWindowPolicyController.mRunningUids.contains(Integer.valueOf(i));
+                    contains =
+                            genericWindowPolicyController.mRunningUids.contains(Integer.valueOf(i));
                 }
                 if (contains) {
                     return true;
@@ -863,11 +1171,13 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final void launchPendingIntent(int i, PendingIntent pendingIntent, ResultReceiver resultReceiver) {
+    public final void launchPendingIntent(
+            int i, PendingIntent pendingIntent, ResultReceiver resultReceiver) {
         Objects.requireNonNull(pendingIntent);
         synchronized (this.mVirtualDeviceLock) {
             if (!this.mVirtualDisplays.contains(i)) {
-                throw new SecurityException("Display ID " + i + " not found for this virtual device");
+                throw new SecurityException(
+                        "Display ID " + i + " not found for this virtual device");
             }
         }
         if (pendingIntent.isActivity()) {
@@ -875,7 +1185,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                 ActivityOptions launchDisplayId = ActivityOptions.makeBasic().setLaunchDisplayId(i);
                 launchDisplayId.setPendingIntentBackgroundActivityLaunchAllowed(true);
                 launchDisplayId.setPendingIntentBackgroundActivityLaunchAllowedByPermission(true);
-                pendingIntent.send(this.mContext, 0, null, null, null, null, launchDisplayId.toBundle());
+                pendingIntent.send(
+                        this.mContext, 0, null, null, null, null, launchDisplayId.toBundle());
                 resultReceiver.send(0, null);
                 return;
             } catch (PendingIntent.CanceledException e) {
@@ -884,37 +1195,64 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                 return;
             }
         }
-        final PendingTrampoline pendingTrampoline = new PendingTrampoline(i, pendingIntent, resultReceiver);
-        VirtualDeviceManagerService.PendingTrampolineMap pendingTrampolineMap = VirtualDeviceManagerService.this.mPendingTrampolines;
-        PendingTrampoline pendingTrampoline2 = (PendingTrampoline) pendingTrampolineMap.mMap.put(pendingIntent.getCreatorPackage(), pendingTrampoline);
+        final PendingTrampoline pendingTrampoline =
+                new PendingTrampoline(i, pendingIntent, resultReceiver);
+        VirtualDeviceManagerService.PendingTrampolineMap pendingTrampolineMap =
+                VirtualDeviceManagerService.this.mPendingTrampolines;
+        PendingTrampoline pendingTrampoline2 =
+                (PendingTrampoline)
+                        pendingTrampolineMap.mMap.put(
+                                pendingIntent.getCreatorPackage(), pendingTrampoline);
         Handler handler = pendingTrampolineMap.mHandler;
         handler.removeCallbacksAndMessages(pendingTrampoline2);
-        handler.postDelayed(new VirtualDeviceManagerService$LocalService$$ExternalSyntheticLambda0(2, pendingTrampolineMap, pendingTrampoline), pendingTrampoline, 5000L);
+        handler.postDelayed(
+                new VirtualDeviceManagerService$LocalService$$ExternalSyntheticLambda0(
+                        2, pendingTrampolineMap, pendingTrampoline),
+                pendingTrampoline,
+                5000L);
         if (pendingTrampoline2 != null) {
             pendingTrampoline2.mResultReceiver.send(2, null);
         }
-        this.mContext.getMainThreadHandler().postDelayed(new Runnable() { // from class: com.android.server.companion.virtual.VirtualDeviceImpl$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                VirtualDeviceImpl virtualDeviceImpl = VirtualDeviceImpl.this;
-                VirtualDeviceImpl.PendingTrampoline pendingTrampoline3 = pendingTrampoline;
-                int i2 = VirtualDeviceImpl.$r8$clinit;
-                virtualDeviceImpl.getClass();
-                pendingTrampoline3.mResultReceiver.send(2, null);
-                VirtualDeviceManagerService.PendingTrampolineMap pendingTrampolineMap2 = VirtualDeviceManagerService.this.mPendingTrampolines;
-                pendingTrampolineMap2.mHandler.removeCallbacksAndMessages((VirtualDeviceImpl.PendingTrampoline) pendingTrampolineMap2.mMap.remove(pendingTrampoline3.mPendingIntent.getCreatorPackage()));
-            }
-        }, 5000L);
+        this.mContext
+                .getMainThreadHandler()
+                .postDelayed(
+                        new Runnable() { // from class:
+                                         // com.android.server.companion.virtual.VirtualDeviceImpl$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                VirtualDeviceImpl virtualDeviceImpl = VirtualDeviceImpl.this;
+                                VirtualDeviceImpl.PendingTrampoline pendingTrampoline3 =
+                                        pendingTrampoline;
+                                int i2 = VirtualDeviceImpl.$r8$clinit;
+                                virtualDeviceImpl.getClass();
+                                pendingTrampoline3.mResultReceiver.send(2, null);
+                                VirtualDeviceManagerService.PendingTrampolineMap
+                                        pendingTrampolineMap2 =
+                                                VirtualDeviceManagerService.this
+                                                        .mPendingTrampolines;
+                                pendingTrampolineMap2.mHandler.removeCallbacksAndMessages(
+                                        (VirtualDeviceImpl.PendingTrampoline)
+                                                pendingTrampolineMap2.mMap.remove(
+                                                        pendingTrampoline3.mPendingIntent
+                                                                .getCreatorPackage()));
+                            }
+                        },
+                        5000L);
         try {
             ActivityOptions launchDisplayId2 = ActivityOptions.makeBasic().setLaunchDisplayId(i);
             launchDisplayId2.setPendingIntentBackgroundActivityLaunchAllowed(true);
             launchDisplayId2.setPendingIntentBackgroundActivityLaunchAllowedByPermission(true);
-            pendingIntent.send(this.mContext, 0, null, null, null, null, launchDisplayId2.toBundle());
+            pendingIntent.send(
+                    this.mContext, 0, null, null, null, null, launchDisplayId2.toBundle());
         } catch (PendingIntent.CanceledException e2) {
             Slog.w("VirtualDeviceImpl", "Pending intent canceled", e2);
             resultReceiver.send(1, null);
-            VirtualDeviceManagerService.PendingTrampolineMap pendingTrampolineMap2 = VirtualDeviceManagerService.this.mPendingTrampolines;
-            pendingTrampolineMap2.mHandler.removeCallbacksAndMessages((PendingTrampoline) pendingTrampolineMap2.mMap.remove(pendingTrampoline.mPendingIntent.getCreatorPackage()));
+            VirtualDeviceManagerService.PendingTrampolineMap pendingTrampolineMap2 =
+                    VirtualDeviceManagerService.this.mPendingTrampolines;
+            pendingTrampolineMap2.mHandler.removeCallbacksAndMessages(
+                    (PendingTrampoline)
+                            pendingTrampolineMap2.mMap.remove(
+                                    pendingTrampoline.mPendingIntent.getCreatorPackage()));
         }
     }
 
@@ -933,16 +1271,26 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final void onAudioSessionStarting(int i, IAudioRoutingCallback iAudioRoutingCallback, IAudioConfigChangedCallback iAudioConfigChangedCallback) {
+    public final void onAudioSessionStarting(
+            int i,
+            IAudioRoutingCallback iAudioRoutingCallback,
+            IAudioConfigChangedCallback iAudioConfigChangedCallback) {
         onAudioSessionStarting_enforcePermission();
         synchronized (this.mVirtualDeviceLock) {
             try {
                 if (!this.mVirtualDisplays.contains(i)) {
-                    throw new SecurityException("Cannot start audio session for a display not associated with this virtual device");
+                    throw new SecurityException(
+                            "Cannot start audio session for a display not associated with this"
+                                + " virtual device");
                 }
                 if (this.mVirtualAudioController == null) {
-                    this.mVirtualAudioController = new VirtualAudioController(this.mContext, this.mAttributionSource);
-                    this.mVirtualAudioController.startListening(((VirtualDisplayWrapper) this.mVirtualDisplays.get(i)).mWindowPolicyController, iAudioRoutingCallback, iAudioConfigChangedCallback);
+                    this.mVirtualAudioController =
+                            new VirtualAudioController(this.mContext, this.mAttributionSource);
+                    this.mVirtualAudioController.startListening(
+                            ((VirtualDisplayWrapper) this.mVirtualDisplays.get(i))
+                                    .mWindowPolicyController,
+                            iAudioRoutingCallback,
+                            iAudioConfigChangedCallback);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -955,10 +1303,16 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         CameraAccessController cameraAccessController = this.mCameraAccessController;
         if (cameraAccessController != null) {
             synchronized (cameraAccessController.mLock) {
-                for (int i = 0; i < cameraAccessController.mAppsToBlockOnVirtualDevice.size(); i++) {
+                for (int i = 0;
+                        i < cameraAccessController.mAppsToBlockOnVirtualDevice.size();
+                        i++) {
                     try {
-                        String str = (String) cameraAccessController.mAppsToBlockOnVirtualDevice.keyAt(i);
-                        CameraAccessController.OpenCameraInfo openCameraInfo = (CameraAccessController.OpenCameraInfo) cameraAccessController.mAppsToBlockOnVirtualDevice.get(str);
+                        String str =
+                                (String)
+                                        cameraAccessController.mAppsToBlockOnVirtualDevice.keyAt(i);
+                        CameraAccessController.OpenCameraInfo openCameraInfo =
+                                (CameraAccessController.OpenCameraInfo)
+                                        cameraAccessController.mAppsToBlockOnVirtualDevice.get(str);
                         String str2 = openCameraInfo.packageName;
                         Iterator it = ((ArraySet) openCameraInfo.packageUids).iterator();
                         while (true) {
@@ -966,10 +1320,17 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                                 Integer num = (Integer) it.next();
                                 int intValue = num.intValue();
                                 if (arraySet.contains(num)) {
-                                    if (((CameraAccessController.InjectionSessionData) cameraAccessController.mPackageToSessionData.get(str2)) == null) {
-                                        CameraAccessController.InjectionSessionData injectionSessionData = new CameraAccessController.InjectionSessionData();
+                                    if (((CameraAccessController.InjectionSessionData)
+                                                    cameraAccessController.mPackageToSessionData
+                                                            .get(str2))
+                                            == null) {
+                                        CameraAccessController.InjectionSessionData
+                                                injectionSessionData =
+                                                        new CameraAccessController
+                                                                .InjectionSessionData();
                                         injectionSessionData.appUid = intValue;
-                                        cameraAccessController.mPackageToSessionData.put(str2, injectionSessionData);
+                                        cameraAccessController.mPackageToSessionData.put(
+                                                str2, injectionSessionData);
                                     }
                                     cameraAccessController.startBlocking(str2, str);
                                 }
@@ -983,12 +1344,15 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         this.mRunningAppsChangedCallback.accept(arraySet);
     }
 
-    public final void registerIntentInterceptor(IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptor, IntentFilter intentFilter) {
+    public final void registerIntentInterceptor(
+            IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptor,
+            IntentFilter intentFilter) {
         registerIntentInterceptor_enforcePermission();
         Objects.requireNonNull(iVirtualDeviceIntentInterceptor);
         Objects.requireNonNull(intentFilter);
         synchronized (this.mVirtualDeviceLock) {
-            ((ArrayMap) this.mIntentInterceptors).put(iVirtualDeviceIntentInterceptor.asBinder(), intentFilter);
+            ((ArrayMap) this.mIntentInterceptors)
+                    .put(iVirtualDeviceIntentInterceptor.asBinder(), intentFilter);
         }
     }
 
@@ -1001,14 +1365,19 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
         AttributionSource attributionSource = this.mAttributionSource;
         if (virtualCameraController.mCameraPolicy == 0) {
-            throw new IllegalArgumentException("Cannot create virtual camera with DEVICE_POLICY_DEFAULT for POLICY_TYPE_CAMERA");
+            throw new IllegalArgumentException(
+                    "Cannot create virtual camera with DEVICE_POLICY_DEFAULT for"
+                        + " POLICY_TYPE_CAMERA");
         }
         int lensFacing = virtualCameraConfig.getLensFacing();
         synchronized (virtualCameraController.mCameras) {
             Iterator it = ((ArrayMap) virtualCameraController.mCameras).values().iterator();
             while (it.hasNext()) {
-                if (((VirtualCameraController.CameraDescriptor) it.next()).mConfig.getLensFacing() == lensFacing) {
-                    throw new IllegalArgumentException("Only a single virtual camera can be created with lens facing " + virtualCameraConfig.getLensFacing());
+                if (((VirtualCameraController.CameraDescriptor) it.next()).mConfig.getLensFacing()
+                        == lensFacing) {
+                    throw new IllegalArgumentException(
+                            "Only a single virtual camera can be created with lens facing "
+                                    + virtualCameraConfig.getLensFacing());
                 }
             }
             virtualCameraController.connectVirtualCameraServiceIfNeeded();
@@ -1019,14 +1388,17 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
             if (!virtualCameraController.registerCameraWithService(virtualCameraConfig)) {
                 throw new RuntimeException("Failed to register virtual camera.");
             }
-            VirtualCameraController.CameraDescriptor cameraDescriptor = virtualCameraController.new CameraDescriptor(virtualCameraConfig);
+            VirtualCameraController.CameraDescriptor cameraDescriptor =
+                    virtualCameraController.new CameraDescriptor(virtualCameraConfig);
             IBinder asBinder = virtualCameraConfig.getCallback().asBinder();
             asBinder.linkToDeath(cameraDescriptor, 0);
             synchronized (virtualCameraController.mCameras) {
                 ((ArrayMap) virtualCameraController.mCameras).put(asBinder, cameraDescriptor);
             }
             if (android.companion.virtualdevice.flags.Flags.metricsCollection()) {
-                Counter.logIncrementWithUid("virtual_devices.value_virtual_camera_created_count", attributionSource.getUid());
+                Counter.logIncrementWithUid(
+                        "virtual_devices.value_virtual_camera_created_count",
+                        attributionSource.getUid());
             }
         }
     }
@@ -1037,9 +1409,13 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
             try {
                 if (this.mActivityPolicyExemptions.remove(componentName)) {
                     for (int i = 0; i < this.mVirtualDisplays.size(); i++) {
-                        GenericWindowPolicyController genericWindowPolicyController = ((VirtualDisplayWrapper) this.mVirtualDisplays.valueAt(i)).mWindowPolicyController;
-                        synchronized (genericWindowPolicyController.mGenericWindowPolicyControllerLock) {
-                            genericWindowPolicyController.mActivityPolicyExemptions.remove(componentName);
+                        GenericWindowPolicyController genericWindowPolicyController =
+                                ((VirtualDisplayWrapper) this.mVirtualDisplays.valueAt(i))
+                                        .mWindowPolicyController;
+                        synchronized (
+                                genericWindowPolicyController.mGenericWindowPolicyControllerLock) {
+                            genericWindowPolicyController.mActivityPolicyExemptions.remove(
+                                    componentName);
                         }
                     }
                 }
@@ -1049,7 +1425,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final boolean sendButtonEvent(IBinder iBinder, VirtualMouseButtonEvent virtualMouseButtonEvent) {
+    public final boolean sendButtonEvent(
+            IBinder iBinder, VirtualMouseButtonEvent virtualMouseButtonEvent) {
         sendButtonEvent_enforcePermission();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -1079,7 +1456,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final boolean sendRelativeEvent(IBinder iBinder, VirtualMouseRelativeEvent virtualMouseRelativeEvent) {
+    public final boolean sendRelativeEvent(
+            IBinder iBinder, VirtualMouseRelativeEvent virtualMouseRelativeEvent) {
         sendRelativeEvent_enforcePermission();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -1089,7 +1467,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final boolean sendScrollEvent(IBinder iBinder, VirtualMouseScrollEvent virtualMouseScrollEvent) {
+    public final boolean sendScrollEvent(
+            IBinder iBinder, VirtualMouseScrollEvent virtualMouseScrollEvent) {
         sendScrollEvent_enforcePermission();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -1109,7 +1488,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final boolean sendStylusButtonEvent(IBinder iBinder, VirtualStylusButtonEvent virtualStylusButtonEvent) {
+    public final boolean sendStylusButtonEvent(
+            IBinder iBinder, VirtualStylusButtonEvent virtualStylusButtonEvent) {
         sendStylusButtonEvent_enforcePermission();
         Objects.requireNonNull(iBinder);
         Objects.requireNonNull(virtualStylusButtonEvent);
@@ -1121,7 +1501,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final boolean sendStylusMotionEvent(IBinder iBinder, VirtualStylusMotionEvent virtualStylusMotionEvent) {
+    public final boolean sendStylusMotionEvent(
+            IBinder iBinder, VirtualStylusMotionEvent virtualStylusMotionEvent) {
         sendStylusMotionEvent_enforcePermission();
         Objects.requireNonNull(iBinder);
         Objects.requireNonNull(virtualStylusMotionEvent);
@@ -1144,13 +1525,13 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:55:0x006e, code lost:
-    
-        r7 = move-exception;
-     */
+
+       r7 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x0073, code lost:
-    
-        throw r7;
-     */
+
+       throw r7;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1271,14 +1652,18 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L9a
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.companion.virtual.VirtualDeviceImpl.setDevicePolicy(int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.companion.virtual.VirtualDeviceImpl.setDevicePolicy(int,"
+                    + " int):void");
     }
 
     public final void setDisplayImePolicy(int i, int i2) {
         setDisplayImePolicy_enforcePermission();
         synchronized (this.mVirtualDeviceLock) {
             if (!this.mVirtualDisplays.contains(i)) {
-                throw new SecurityException("Display ID " + i + " not found for this virtual device");
+                throw new SecurityException(
+                        "Display ID " + i + " not found for this virtual device");
             }
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -1297,7 +1682,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
                 this.mDefaultShowPointerIcon = z;
             }
             for (int i : getDisplayIds()) {
-                InputManagerService.LocalService localService = this.mInputController.mInputManagerInternal;
+                InputManagerService.LocalService localService =
+                        this.mInputController.mInputManagerInternal;
                 localService.getClass();
                 boolean z2 = InputManagerService.DEBUG;
                 InputManagerService.this.setPointerIconVisible(z, i);
@@ -1313,9 +1699,12 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         IntArray intArray = new IntArray();
         synchronized (this.mVirtualDeviceLock) {
             for (int i3 = 0; i3 < this.mVirtualDisplays.size(); i3++) {
-                GenericWindowPolicyController genericWindowPolicyController = ((VirtualDisplayWrapper) this.mVirtualDisplays.valueAt(i3)).mWindowPolicyController;
+                GenericWindowPolicyController genericWindowPolicyController =
+                        ((VirtualDisplayWrapper) this.mVirtualDisplays.valueAt(i3))
+                                .mWindowPolicyController;
                 synchronized (genericWindowPolicyController.mGenericWindowPolicyControllerLock) {
-                    contains = genericWindowPolicyController.mRunningUids.contains(Integer.valueOf(i));
+                    contains =
+                            genericWindowPolicyController.mRunningUids.contains(Integer.valueOf(i));
                 }
                 if (contains) {
                     intArray.add(this.mVirtualDisplays.keyAt(i3));
@@ -1325,7 +1714,8 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         if (intArray.size() == 0) {
             return;
         }
-        DisplayManager displayManager = (DisplayManager) this.mContext.getSystemService(DisplayManager.class);
+        DisplayManager displayManager =
+                (DisplayManager) this.mContext.getSystemService(DisplayManager.class);
         for (i2 = 0; i2 < intArray.size(); i2++) {
             Display display = displayManager.getDisplay(intArray.get(i2));
             if (display != null && display.isValid()) {
@@ -1344,11 +1734,13 @@ final class VirtualDeviceImpl extends IVirtualDevice.Stub implements IBinder.Dea
         }
     }
 
-    public final void unregisterIntentInterceptor(IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptor) {
+    public final void unregisterIntentInterceptor(
+            IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptor) {
         unregisterIntentInterceptor_enforcePermission();
         Objects.requireNonNull(iVirtualDeviceIntentInterceptor);
         synchronized (this.mVirtualDeviceLock) {
-            ((ArrayMap) this.mIntentInterceptors).remove(iVirtualDeviceIntentInterceptor.asBinder());
+            ((ArrayMap) this.mIntentInterceptors)
+                    .remove(iVirtualDeviceIntentInterceptor.asBinder());
         }
     }
 

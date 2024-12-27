@@ -2,6 +2,7 @@ package com.android.server.pm;
 
 import android.content.pm.UserProperties;
 import android.os.Bundle;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -50,7 +51,26 @@ public final class UserTypeDetails {
         public UserProperties mDefaultUserProperties = null;
     }
 
-    public UserTypeDetails(String str, boolean z, int i, int i2, int i3, int[] iArr, int i4, int i5, int i6, int i7, int i8, int[] iArr2, int[] iArr3, int[] iArr4, Bundle bundle, Bundle bundle2, List list, int i9, UserProperties userProperties) {
+    public UserTypeDetails(
+            String str,
+            boolean z,
+            int i,
+            int i2,
+            int i3,
+            int[] iArr,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int[] iArr2,
+            int[] iArr3,
+            int[] iArr4,
+            Bundle bundle,
+            Bundle bundle2,
+            List list,
+            int i9,
+            UserProperties userProperties) {
         this.mName = str;
         this.mEnabled = z;
         this.mMaxAllowed = i;

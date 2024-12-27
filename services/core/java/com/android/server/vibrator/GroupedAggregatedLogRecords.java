@@ -3,6 +3,7 @@ package com.android.server.vibrator;
 import android.util.IndentingPrintWriter;
 import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
+
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
@@ -32,7 +33,8 @@ public abstract class GroupedAggregatedLogRecords {
                     return;
                 }
                 if (i > 2) {
-                    indentingPrintWriter.println("-> Skipping " + (this.mCount - 2) + " aggregated entries, latest:");
+                    indentingPrintWriter.println(
+                            "-> Skipping " + (this.mCount - 2) + " aggregated entries, latest:");
                 }
                 this.mLatest.dump(indentingPrintWriter);
             } catch (Throwable th) {
@@ -68,10 +70,16 @@ public abstract class GroupedAggregatedLogRecords {
             }
             ArrayDeque arrayDeque = (ArrayDeque) this.mGroupedRecords.get(groupKey);
             if (this.mAggregationTimeLimitMs > 0 && !arrayDeque.isEmpty()) {
-                AggregatedLogRecord aggregatedLogRecord = (AggregatedLogRecord) arrayDeque.getLast();
+                AggregatedLogRecord aggregatedLogRecord =
+                        (AggregatedLogRecord) arrayDeque.getLast();
                 long j = this.mAggregationTimeLimitMs;
                 synchronized (aggregatedLogRecord) {
-                    z = aggregatedLogRecord.mLatest.mayAggregate(singleLogRecord) && Math.abs(aggregatedLogRecord.mLatest.getCreateUptimeMs() - singleLogRecord.getCreateUptimeMs()) < j;
+                    z =
+                            aggregatedLogRecord.mLatest.mayAggregate(singleLogRecord)
+                                    && Math.abs(
+                                                    aggregatedLogRecord.mLatest.getCreateUptimeMs()
+                                                            - singleLogRecord.getCreateUptimeMs())
+                                            < j;
                 }
                 if (z) {
                     synchronized (aggregatedLogRecord) {
@@ -81,7 +89,10 @@ public abstract class GroupedAggregatedLogRecords {
                     return null;
                 }
             }
-            AggregatedLogRecord aggregatedLogRecord2 = arrayDeque.size() >= this.mSizeLimit ? (AggregatedLogRecord) arrayDeque.removeFirst() : null;
+            AggregatedLogRecord aggregatedLogRecord2 =
+                    arrayDeque.size() >= this.mSizeLimit
+                            ? (AggregatedLogRecord) arrayDeque.removeFirst()
+                            : null;
             arrayDeque.addLast(new AggregatedLogRecord(singleLogRecord));
             return aggregatedLogRecord2;
         } catch (Throwable th) {
@@ -115,7 +126,8 @@ public abstract class GroupedAggregatedLogRecords {
                 synchronized (aggregatedLogRecord) {
                     aggregatedLogRecord.mFirst.dump(protoOutputStream, findGroupKeyProtoFieldId);
                     if (aggregatedLogRecord.mCount > 1) {
-                        aggregatedLogRecord.mLatest.dump(protoOutputStream, findGroupKeyProtoFieldId);
+                        aggregatedLogRecord.mLatest.dump(
+                                protoOutputStream, findGroupKeyProtoFieldId);
                     }
                 }
             }

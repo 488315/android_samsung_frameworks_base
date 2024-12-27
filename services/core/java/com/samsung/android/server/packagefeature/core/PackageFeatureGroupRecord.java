@@ -3,14 +3,17 @@ package com.samsung.android.server.packagefeature.core;
 import android.content.Context;
 import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOutline0;
 import android.os.Handler;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.server.packagefeature.PackageFeature;
 import com.samsung.android.server.packagefeature.PackageFeatureCallback;
 import com.samsung.android.server.packagefeature.PackageFeatureData;
 import com.samsung.android.server.packagefeature.PackageFeatureGroup;
 import com.samsung.android.server.util.CoreLogger;
+
 import java.io.FileDescriptor;
 import java.io.FileReader;
 import java.util.List;
@@ -60,7 +63,16 @@ public class PackageFeatureGroupRecord {
             POLICY_DISABLED = groupDataSource6;
             GroupDataSource groupDataSource7 = new GroupDataSource("DEBUG_MODE", 6);
             DEBUG_MODE = groupDataSource7;
-            $VALUES = new GroupDataSource[]{groupDataSource, groupDataSource2, groupDataSource3, groupDataSource4, groupDataSource5, groupDataSource6, groupDataSource7};
+            $VALUES =
+                    new GroupDataSource[] {
+                        groupDataSource,
+                        groupDataSource2,
+                        groupDataSource3,
+                        groupDataSource4,
+                        groupDataSource5,
+                        groupDataSource6,
+                        groupDataSource7
+                    };
         }
 
         public static GroupDataSource valueOf(String str) {
@@ -72,11 +84,18 @@ public class PackageFeatureGroupRecord {
         }
     }
 
-    public PackageFeatureGroupRecord(Context context, Handler handler, CoreLogger coreLogger, PackageFeatureGroup packageFeatureGroup, Supplier supplier) {
+    public PackageFeatureGroupRecord(
+            Context context,
+            Handler handler,
+            CoreLogger coreLogger,
+            PackageFeatureGroup packageFeatureGroup,
+            Supplier supplier) {
         this.mHandler = handler;
         this.mLogger = coreLogger;
         this.mGroup = packageFeatureGroup;
-        this.mGroupDataUtil = new PackageFeatureGroupDataUtilWithEncryption(context, coreLogger, packageFeatureGroup);
+        this.mGroupDataUtil =
+                new PackageFeatureGroupDataUtilWithEncryption(
+                        context, coreLogger, packageFeatureGroup);
         this.mIsAllFeaturesDisabled = supplier;
     }
 
@@ -216,75 +235,139 @@ public class PackageFeatureGroupRecord {
             r7.propagateToCallbacks()
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.packagefeature.core.PackageFeatureGroupRecord.initialize$1():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.packagefeature.core.PackageFeatureGroupRecord.initialize$1():void");
     }
 
-    public void propagateToCallback(final String str, final PackageFeatureCallback packageFeatureCallback, final PackageFeatureData packageFeatureData, final int i, final int i2, final String str2) {
-        this.mHandler.post(new PackageFeatureGroupRecord$$ExternalSyntheticLambda3(this, new Supplier() { // from class: com.samsung.android.server.packagefeature.core.PackageFeatureGroupRecord$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                PackageFeatureGroupRecord packageFeatureGroupRecord = PackageFeatureGroupRecord.this;
-                String str3 = str;
-                int i3 = i2;
-                int i4 = i;
-                String str4 = str2;
-                PackageFeatureData packageFeatureData2 = packageFeatureData;
-                packageFeatureGroupRecord.getClass();
-                StringBuilder sb = new StringBuilder("to propagate to ");
-                sb.append(str3);
-                sb.append(" callback");
-                sb.append(i3 > 1 ? DualAppManagerService$$ExternalSyntheticOutline0.m(i4, i3, "(", "/", ")") : "");
-                sb.append(" for ");
-                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, packageFeatureGroupRecord.mGroup.mName, ", reason=", str4, ", size=");
-                sb.append(packageFeatureData2.size());
-                return sb.toString();
-            }
-        }, new Consumer() { // from class: com.samsung.android.server.packagefeature.core.PackageFeatureGroupRecord$$ExternalSyntheticLambda1
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                PackageFeatureCallback.this.onPackageFeatureDataChanged(packageFeatureData);
-            }
-        }));
+    public void propagateToCallback(
+            final String str,
+            final PackageFeatureCallback packageFeatureCallback,
+            final PackageFeatureData packageFeatureData,
+            final int i,
+            final int i2,
+            final String str2) {
+        this.mHandler.post(
+                new PackageFeatureGroupRecord$$ExternalSyntheticLambda3(
+                        this,
+                        new Supplier() { // from class:
+                                         // com.samsung.android.server.packagefeature.core.PackageFeatureGroupRecord$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                PackageFeatureGroupRecord packageFeatureGroupRecord =
+                                        PackageFeatureGroupRecord.this;
+                                String str3 = str;
+                                int i3 = i2;
+                                int i4 = i;
+                                String str4 = str2;
+                                PackageFeatureData packageFeatureData2 = packageFeatureData;
+                                packageFeatureGroupRecord.getClass();
+                                StringBuilder sb = new StringBuilder("to propagate to ");
+                                sb.append(str3);
+                                sb.append(" callback");
+                                sb.append(
+                                        i3 > 1
+                                                ? DualAppManagerService$$ExternalSyntheticOutline0
+                                                        .m(i4, i3, "(", "/", ")")
+                                                : "");
+                                sb.append(" for ");
+                                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                        sb,
+                                        packageFeatureGroupRecord.mGroup.mName,
+                                        ", reason=",
+                                        str4,
+                                        ", size=");
+                                sb.append(packageFeatureData2.size());
+                                return sb.toString();
+                            }
+                        },
+                        new Consumer() { // from class:
+                                         // com.samsung.android.server.packagefeature.core.PackageFeatureGroupRecord$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                PackageFeatureCallback.this.onPackageFeatureDataChanged(
+                                        packageFeatureData);
+                            }
+                        }));
     }
 
     public void propagateToCallbacks() {
         if (this.mGroupData == null || ((ConcurrentHashMap) this.mCallbacks).isEmpty()) {
             return;
         }
-        String name = (((Boolean) this.mIsAllFeaturesDisabled.get()).booleanValue() ? GroupDataSource.POLICY_DISABLED : this.mGroupDataSource).name();
+        String name =
+                (((Boolean) this.mIsAllFeaturesDisabled.get()).booleanValue()
+                                ? GroupDataSource.POLICY_DISABLED
+                                : this.mGroupDataSource)
+                        .name();
         StringBuilder sb = new StringBuilder("Start to propagate to callbacks(");
         sb.append(((ConcurrentHashMap) this.mCallbacks).size());
         sb.append(") for ");
-        this.mLogger.log(3, BootReceiver$$ExternalSyntheticOutline0.m(sb, this.mGroup.mName, ", reason=", name), null);
+        this.mLogger.log(
+                3,
+                BootReceiver$$ExternalSyntheticOutline0.m(sb, this.mGroup.mName, ", reason=", name),
+                null);
         for (Map.Entry entry : ((ConcurrentHashMap) this.mCallbacks).entrySet()) {
             String str = (String) entry.getKey();
-            PackageFeatureData packageFeatureData = (this.mGroupData == null || ((Boolean) this.mIsAllFeaturesDisabled.get()).booleanValue()) ? new PackageFeatureData() : this.mGroupData.getCopiedPackageFeature(str);
+            PackageFeatureData packageFeatureData =
+                    (this.mGroupData == null
+                                    || ((Boolean) this.mIsAllFeaturesDisabled.get()).booleanValue())
+                            ? new PackageFeatureData()
+                            : this.mGroupData.getCopiedPackageFeature(str);
             List list = (List) entry.getValue();
             int size = list.size();
             int i = 0;
             while (i < size) {
                 int i2 = i + 1;
-                propagateToCallback(str, (PackageFeatureCallback) list.get(i), packageFeatureData, i2, size, name);
+                propagateToCallback(
+                        str,
+                        (PackageFeatureCallback) list.get(i),
+                        packageFeatureData,
+                        i2,
+                        size,
+                        name);
                 i = i2;
             }
         }
     }
 
-    public final void registerCallback(PackageFeature packageFeature, PackageFeatureCallback packageFeatureCallback) {
+    public final void registerCallback(
+            PackageFeature packageFeature, PackageFeatureCallback packageFeatureCallback) {
         if (!packageFeature.mEnabled) {
-            this.mLogger.log(5, AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder("PackageFeature("), packageFeature.mName, ") is not enabled."), null);
+            this.mLogger.log(
+                    5,
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("PackageFeature("),
+                            packageFeature.mName,
+                            ") is not enabled."),
+                    null);
             return;
         }
         String str = packageFeature.mName;
-        ((List) ((ConcurrentHashMap) this.mCallbacks).computeIfAbsent(str, new PackageFeatureGroupRecord$$ExternalSyntheticLambda2())).add(packageFeatureCallback);
+        ((List)
+                        ((ConcurrentHashMap) this.mCallbacks)
+                                .computeIfAbsent(
+                                        str,
+                                        new PackageFeatureGroupRecord$$ExternalSyntheticLambda2()))
+                .add(packageFeatureCallback);
         PackageFeatureGroupData packageFeatureGroupData = this.mGroupData;
         if (packageFeatureGroupData == null) {
             return;
         }
-        propagateToCallback(str, packageFeatureCallback, (packageFeatureGroupData == null || ((Boolean) this.mIsAllFeaturesDisabled.get()).booleanValue()) ? new PackageFeatureData() : this.mGroupData.getCopiedPackageFeature(str), 1, 1, "registerCallback");
+        propagateToCallback(
+                str,
+                packageFeatureCallback,
+                (packageFeatureGroupData == null
+                                || ((Boolean) this.mIsAllFeaturesDisabled.get()).booleanValue())
+                        ? new PackageFeatureData()
+                        : this.mGroupData.getCopiedPackageFeature(str),
+                1,
+                1,
+                "registerCallback");
     }
 
-    public final boolean updateGroupData(PackageFeatureGroupData packageFeatureGroupData, GroupDataSource groupDataSource) {
+    public final boolean updateGroupData(
+            PackageFeatureGroupData packageFeatureGroupData, GroupDataSource groupDataSource) {
         if (packageFeatureGroupData == null) {
             return false;
         }
@@ -293,10 +376,16 @@ public class PackageFeatureGroupRecord {
         return true;
     }
 
-    public void updateGroupDataFromScpm(PackageFeatureManagerService$$ExternalSyntheticLambda1 packageFeatureManagerService$$ExternalSyntheticLambda1) {
+    public void updateGroupDataFromScpm(
+            PackageFeatureManagerService$$ExternalSyntheticLambda1
+                    packageFeatureManagerService$$ExternalSyntheticLambda1) {
         FileReader fileReader;
-        PackageFeatureGroupDataUtilWithEncryption packageFeatureGroupDataUtilWithEncryption = this.mGroupDataUtil;
-        FileDescriptor fileDescriptor = (FileDescriptor) packageFeatureManagerService$$ExternalSyntheticLambda1.apply(this.mGroup.mName);
+        PackageFeatureGroupDataUtilWithEncryption packageFeatureGroupDataUtilWithEncryption =
+                this.mGroupDataUtil;
+        FileDescriptor fileDescriptor =
+                (FileDescriptor)
+                        packageFeatureManagerService$$ExternalSyntheticLambda1.apply(
+                                this.mGroup.mName);
         if (fileDescriptor != null) {
             try {
                 fileReader = new FileReader(fileDescriptor);
@@ -313,7 +402,9 @@ public class PackageFeatureGroupRecord {
             }
         } else {
             try {
-                PackageFeatureGroupData loadFromReader = packageFeatureGroupDataUtilWithEncryption.loadFromReader(getCurrentVersion(), fileReader, "loadFromScpm", false);
+                PackageFeatureGroupData loadFromReader =
+                        packageFeatureGroupDataUtilWithEncryption.loadFromReader(
+                                getCurrentVersion(), fileReader, "loadFromScpm", false);
                 if (updateGroupData(loadFromReader, GroupDataSource.SCPM)) {
                     propagateToCallbacks();
                     packageFeatureGroupDataUtilWithEncryption.saveToCacheFile(loadFromReader);

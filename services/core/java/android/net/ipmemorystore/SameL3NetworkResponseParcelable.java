@@ -6,7 +6,9 @@ import android.hardware.broadcastradio.DabTableEntry$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.StringJoiner;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,7 +24,8 @@ public class SameL3NetworkResponseParcelable implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            SameL3NetworkResponseParcelable sameL3NetworkResponseParcelable = new SameL3NetworkResponseParcelable();
+            SameL3NetworkResponseParcelable sameL3NetworkResponseParcelable =
+                    new SameL3NetworkResponseParcelable();
             sameL3NetworkResponseParcelable.readFromParcel(parcel);
             return sameL3NetworkResponseParcelable;
         }
@@ -78,10 +81,20 @@ public class SameL3NetworkResponseParcelable implements Parcelable {
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        StringBuilder m = DabTableEntry$$ExternalSyntheticOutline0.m(this.l2Key2, "confidence: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.l2Key1, "l2Key2: ", new StringBuilder("l2Key1: "), stringJoiner), stringJoiner);
+        StringBuilder m =
+                DabTableEntry$$ExternalSyntheticOutline0.m(
+                        this.l2Key2,
+                        "confidence: ",
+                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                this.l2Key1,
+                                "l2Key2: ",
+                                new StringBuilder("l2Key1: "),
+                                stringJoiner),
+                        stringJoiner);
         m.append(this.confidence);
         stringJoiner.add(m.toString());
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, new StringBuilder("SameL3NetworkResponseParcelable"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner, new StringBuilder("SameL3NetworkResponseParcelable"));
     }
 
     @Override // android.os.Parcelable
@@ -93,6 +106,7 @@ public class SameL3NetworkResponseParcelable implements Parcelable {
         parcel.writeFloat(this.confidence);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

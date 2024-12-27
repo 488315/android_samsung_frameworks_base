@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.policy.IKeyguardDismissCallback;
 import com.android.internal.policy.IKeyguardDrawnCallback;
 import com.android.internal.policy.IKeyguardExitCallback;
@@ -30,7 +31,8 @@ public final class KeyguardServiceWrapper implements IKeyguardService {
         return this.mService.asBinder();
     }
 
-    public final void dismiss(IKeyguardDismissCallback iKeyguardDismissCallback, CharSequence charSequence) {
+    public final void dismiss(
+            IKeyguardDismissCallback iKeyguardDismissCallback, CharSequence charSequence) {
         try {
             this.mService.dismiss(iKeyguardDismissCallback, charSequence);
         } catch (RemoteException e) {

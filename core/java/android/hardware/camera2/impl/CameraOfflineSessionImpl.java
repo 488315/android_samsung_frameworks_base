@@ -22,7 +22,9 @@ import android.util.Range;
 import android.util.Size;
 import android.util.SparseArray;
 import android.view.Surface;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,7 +34,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /* loaded from: classes2.dex */
-public class CameraOfflineSessionImpl extends CameraOfflineSession implements IBinder.DeathRecipient {
+public class CameraOfflineSessionImpl extends CameraOfflineSession
+        implements IBinder.DeathRecipient {
     private static final long NANO_PER_SECOND = 1000000000;
     private static final int REQUEST_ID_NONE = -1;
     private static final String TAG = "CameraOfflineSessionImpl";
@@ -51,9 +54,20 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
     private final AtomicBoolean mClosing = new AtomicBoolean();
     final Object mInterfaceLock = new Object();
     private final CameraDeviceCallbacks mCallbacks = new CameraDeviceCallbacks();
-    private List<RequestLastFrameNumbersHolder> mOfflineRequestLastFrameNumbersList = new ArrayList();
+    private List<RequestLastFrameNumbersHolder> mOfflineRequestLastFrameNumbersList =
+            new ArrayList();
 
-    public CameraOfflineSessionImpl(String cameraId, CameraCharacteristics characteristics, Executor offlineExecutor, CameraOfflineSession.CameraOfflineSessionCallback offlineCallback, SparseArray<OutputConfiguration> offlineOutputs, AbstractMap.SimpleEntry<Integer, InputConfiguration> offlineInput, SparseArray<OutputConfiguration> configuredOutputs, FrameNumberTracker frameNumberTracker, SparseArray<CaptureCallbackHolder> callbackMap, List<RequestLastFrameNumbersHolder> frameNumberList) {
+    public CameraOfflineSessionImpl(
+            String cameraId,
+            CameraCharacteristics characteristics,
+            Executor offlineExecutor,
+            CameraOfflineSession.CameraOfflineSessionCallback offlineCallback,
+            SparseArray<OutputConfiguration> offlineOutputs,
+            AbstractMap.SimpleEntry<Integer, InputConfiguration> offlineInput,
+            SparseArray<OutputConfiguration> configuredOutputs,
+            FrameNumberTracker frameNumberTracker,
+            SparseArray<CaptureCallbackHolder> callbackMap,
+            List<RequestLastFrameNumbersHolder> frameNumberList) {
         this.mOfflineInput = new AbstractMap.SimpleEntry<>(-1, null);
         this.mOfflineOutputs = new SparseArray<>();
         this.mConfiguredOutputs = new SparseArray<>();
@@ -64,7 +78,10 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
         }
         this.mCameraId = cameraId;
         this.mCharacteristics = characteristics;
-        Integer partialCount = (Integer) this.mCharacteristics.get(CameraCharacteristics.REQUEST_PARTIAL_RESULT_COUNT);
+        Integer partialCount =
+                (Integer)
+                        this.mCharacteristics.get(
+                                CameraCharacteristics.REQUEST_PARTIAL_RESULT_COUNT);
         if (partialCount == null) {
             this.mTotalPartialCount = 1;
         } else {
@@ -76,8 +93,14 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
         this.mConfiguredOutputs = configuredOutputs;
         this.mOfflineOutputs = offlineOutputs;
         this.mOfflineInput = offlineInput;
-        this.mOfflineExecutor = (Executor) Preconditions.checkNotNull(offlineExecutor, "offline executor must not be null");
-        this.mOfflineCallback = (CameraOfflineSession.CameraOfflineSessionCallback) Preconditions.checkNotNull(offlineCallback, "offline callback must not be null");
+        this.mOfflineExecutor =
+                (Executor)
+                        Preconditions.checkNotNull(
+                                offlineExecutor, "offline executor must not be null");
+        this.mOfflineCallback =
+                (CameraOfflineSession.CameraOfflineSessionCallback)
+                        Preconditions.checkNotNull(
+                                offlineCallback, "offline callback must not be null");
     }
 
     public CameraDeviceCallbacks getCallbacks() {
@@ -85,8 +108,7 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
     }
 
     public class CameraDeviceCallbacks extends ICameraDeviceCallbacks.Stub {
-        public CameraDeviceCallbacks() {
-        }
+        public CameraDeviceCallbacks() {}
 
         @Override // android.hardware.camera2.ICameraDeviceCallbacks.Stub, android.os.IInterface
         public IBinder asBinder() {
@@ -104,17 +126,20 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                             onCaptureErrorLocked(errorCode, resultExtras);
                             break;
                         default:
-                            Runnable errorDispatch = new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.1
-                                @Override // java.lang.Runnable
-                                public void run() {
-                                    if (!CameraOfflineSessionImpl.this.isClosed()) {
-                                        CameraOfflineSessionImpl.this.mOfflineCallback.onError(CameraOfflineSessionImpl.this, 0);
-                                    }
-                                }
-                            };
+                            Runnable errorDispatch = new Runnable() { // from class:
+                                        // android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.1
+                                        @Override // java.lang.Runnable
+                                        public void run() {
+                                            if (!CameraOfflineSessionImpl.this.isClosed()) {
+                                                CameraOfflineSessionImpl.this.mOfflineCallback
+                                                        .onError(CameraOfflineSessionImpl.this, 0);
+                                            }
+                                        }
+                                    };
                             long ident = Binder.clearCallingIdentity();
                             try {
-                                CameraOfflineSessionImpl.this.mOfflineExecutor.execute(errorDispatch);
+                                CameraOfflineSessionImpl.this.mOfflineExecutor.execute(
+                                        errorDispatch);
                                 break;
                             } finally {
                                 Binder.restoreCallingIdentity(ident);
@@ -129,25 +154,33 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
 
         @Override // android.hardware.camera2.ICameraDeviceCallbacks
         public void onRepeatingRequestError(long lastFrameNumber, int repeatingRequestId) {
-            Log.e(CameraOfflineSessionImpl.TAG, "Unexpected repeating request error received. Last frame number is " + lastFrameNumber);
+            Log.e(
+                    CameraOfflineSessionImpl.TAG,
+                    "Unexpected repeating request error received. Last frame number is "
+                            + lastFrameNumber);
         }
 
         @Override // android.hardware.camera2.ICameraDeviceCallbacks
         public void onDeviceIdle() {
             synchronized (CameraOfflineSessionImpl.this.mInterfaceLock) {
                 if (CameraOfflineSessionImpl.this.mRemoteSession == null) {
-                    Log.v(CameraOfflineSessionImpl.TAG, "Ignoring idle state notifications during offline switches");
+                    Log.v(
+                            CameraOfflineSessionImpl.TAG,
+                            "Ignoring idle state notifications during offline switches");
                     return;
                 }
-                CameraOfflineSessionImpl.this.removeCompletedCallbackHolderLocked(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE);
-                Runnable idleDispatch = new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.2
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        if (!CameraOfflineSessionImpl.this.isClosed()) {
-                            CameraOfflineSessionImpl.this.mOfflineCallback.onIdle(CameraOfflineSessionImpl.this);
-                        }
-                    }
-                };
+                CameraOfflineSessionImpl.this.removeCompletedCallbackHolderLocked(
+                        Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE);
+                Runnable idleDispatch = new Runnable() { // from class:
+                            // android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.2
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                if (!CameraOfflineSessionImpl.this.isClosed()) {
+                                    CameraOfflineSessionImpl.this.mOfflineCallback.onIdle(
+                                            CameraOfflineSessionImpl.this);
+                                }
+                            }
+                        };
                 long ident = Binder.clearCallingIdentity();
                 try {
                     CameraOfflineSessionImpl.this.mOfflineExecutor.execute(idleDispatch);
@@ -162,8 +195,10 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
             Object obj;
             int requestId = resultExtras.getRequestId();
             final long frameNumber = resultExtras.getFrameNumber();
-            long lastCompletedRegularFrameNumber = resultExtras.getLastCompletedRegularFrameNumber();
-            long lastCompletedReprocessFrameNumber = resultExtras.getLastCompletedReprocessFrameNumber();
+            long lastCompletedRegularFrameNumber =
+                    resultExtras.getLastCompletedRegularFrameNumber();
+            long lastCompletedReprocessFrameNumber =
+                    resultExtras.getLastCompletedReprocessFrameNumber();
             long lastCompletedZslFrameNumber = resultExtras.getLastCompletedZslFrameNumber();
             Object obj2 = CameraOfflineSessionImpl.this.mInterfaceLock;
             synchronized (obj2) {
@@ -172,8 +207,14 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                     th = th;
                 }
                 try {
-                    CameraOfflineSessionImpl.this.removeCompletedCallbackHolderLocked(lastCompletedRegularFrameNumber, lastCompletedReprocessFrameNumber, lastCompletedZslFrameNumber);
-                    final CaptureCallbackHolder holder = (CaptureCallbackHolder) CameraOfflineSessionImpl.this.mCaptureCallbackMap.get(requestId);
+                    CameraOfflineSessionImpl.this.removeCompletedCallbackHolderLocked(
+                            lastCompletedRegularFrameNumber,
+                            lastCompletedReprocessFrameNumber,
+                            lastCompletedZslFrameNumber);
+                    final CaptureCallbackHolder holder =
+                            (CaptureCallbackHolder)
+                                    CameraOfflineSessionImpl.this.mCaptureCallbackMap.get(
+                                            requestId);
                     if (holder == null) {
                         return;
                     }
@@ -188,27 +229,57 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                                 th = th2;
                             }
                             try {
-                                executor.execute(new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.3
-                                    @Override // java.lang.Runnable
-                                    public void run() {
-                                        CameraCaptureSession.CaptureCallback callback = holder.getCallback().getSessionCallback();
-                                        if (!CameraOfflineSessionImpl.this.isClosed() && callback != null) {
-                                            int subsequenceId = resultExtras.getSubsequenceId();
-                                            CaptureRequest request = holder.getRequest(subsequenceId);
-                                            if (holder.hasBatchedOutputs()) {
-                                                Range<Integer> fpsRange = (Range) request.get(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE);
-                                                for (int i = 0; i < holder.getRequestCount(); i++) {
-                                                    CaptureRequest cbRequest = holder.getRequest(i);
-                                                    long cbTimestamp = timestamp - (((subsequenceId - i) * 1000000000) / fpsRange.getUpper().intValue());
-                                                    long cbFrameNumber = frameNumber - (subsequenceId - i);
-                                                    callback.onCaptureStarted(CameraOfflineSessionImpl.this, cbRequest, cbTimestamp, cbFrameNumber);
+                                executor.execute(
+                                        new Runnable() { // from class:
+                                            // android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.3
+                                            @Override // java.lang.Runnable
+                                            public void run() {
+                                                CameraCaptureSession.CaptureCallback callback =
+                                                        holder.getCallback().getSessionCallback();
+                                                if (!CameraOfflineSessionImpl.this.isClosed()
+                                                        && callback != null) {
+                                                    int subsequenceId =
+                                                            resultExtras.getSubsequenceId();
+                                                    CaptureRequest request =
+                                                            holder.getRequest(subsequenceId);
+                                                    if (holder.hasBatchedOutputs()) {
+                                                        Range<Integer> fpsRange =
+                                                                (Range)
+                                                                        request.get(
+                                                                                CaptureRequest
+                                                                                        .CONTROL_AE_TARGET_FPS_RANGE);
+                                                        for (int i = 0;
+                                                                i < holder.getRequestCount();
+                                                                i++) {
+                                                            CaptureRequest cbRequest =
+                                                                    holder.getRequest(i);
+                                                            long cbTimestamp =
+                                                                    timestamp
+                                                                            - (((subsequenceId - i)
+                                                                                            * 1000000000)
+                                                                                    / fpsRange.getUpper()
+                                                                                            .intValue());
+                                                            long cbFrameNumber =
+                                                                    frameNumber
+                                                                            - (subsequenceId - i);
+                                                            callback.onCaptureStarted(
+                                                                    CameraOfflineSessionImpl.this,
+                                                                    cbRequest,
+                                                                    cbTimestamp,
+                                                                    cbFrameNumber);
+                                                        }
+                                                        return;
+                                                    }
+                                                    callback.onCaptureStarted(
+                                                            CameraOfflineSessionImpl.this,
+                                                            holder.getRequest(
+                                                                    resultExtras
+                                                                            .getSubsequenceId()),
+                                                            timestamp,
+                                                            frameNumber);
                                                 }
-                                                return;
                                             }
-                                            callback.onCaptureStarted(CameraOfflineSessionImpl.this, holder.getRequest(resultExtras.getSubsequenceId()), timestamp, frameNumber);
-                                        }
-                                    }
-                                });
+                                        });
                                 Binder.restoreCallingIdentity(ident);
                                 return;
                             } catch (Throwable th3) {
@@ -227,7 +298,11 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
         }
 
         @Override // android.hardware.camera2.ICameraDeviceCallbacks
-        public void onResultReceived(CameraMetadataNative result, final CaptureResultExtras resultExtras, PhysicalCaptureResultInfo[] physicalResults) throws RemoteException {
+        public void onResultReceived(
+                CameraMetadataNative result,
+                final CaptureResultExtras resultExtras,
+                PhysicalCaptureResultInfo[] physicalResults)
+                throws RemoteException {
             Object obj;
             CameraMetadataNative resultCopy;
             Executor executor;
@@ -240,18 +315,31 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
             synchronized (obj2) {
                 try {
                     try {
-                        result.set((CameraCharacteristics.Key<CameraCharacteristics.Key<Size>>) CameraCharacteristics.LENS_INFO_SHADING_MAP_SIZE, (CameraCharacteristics.Key<Size>) CameraOfflineSessionImpl.this.mCharacteristics.get(CameraCharacteristics.LENS_INFO_SHADING_MAP_SIZE));
-                        final CaptureCallbackHolder holder = (CaptureCallbackHolder) CameraOfflineSessionImpl.this.mCaptureCallbackMap.get(requestId);
-                        final CaptureRequest request = holder.getRequest(resultExtras.getSubsequenceId());
-                        boolean isPartialResult = resultExtras.getPartialResultCount() < CameraOfflineSessionImpl.this.mTotalPartialCount;
+                        result.set(
+                                (CameraCharacteristics.Key<CameraCharacteristics.Key<Size>>)
+                                        CameraCharacteristics.LENS_INFO_SHADING_MAP_SIZE,
+                                (CameraCharacteristics.Key<Size>)
+                                        CameraOfflineSessionImpl.this.mCharacteristics.get(
+                                                CameraCharacteristics.LENS_INFO_SHADING_MAP_SIZE));
+                        final CaptureCallbackHolder holder =
+                                (CaptureCallbackHolder)
+                                        CameraOfflineSessionImpl.this.mCaptureCallbackMap.get(
+                                                requestId);
+                        final CaptureRequest request =
+                                holder.getRequest(resultExtras.getSubsequenceId());
+                        boolean isPartialResult =
+                                resultExtras.getPartialResultCount()
+                                        < CameraOfflineSessionImpl.this.mTotalPartialCount;
                         int requestType = request.getRequestType();
                         try {
                             if (holder == null) {
-                                CameraOfflineSessionImpl.this.mFrameNumberTracker.updateTracker(frameNumber2, null, isPartialResult, requestType);
+                                CameraOfflineSessionImpl.this.mFrameNumberTracker.updateTracker(
+                                        frameNumber2, null, isPartialResult, requestType);
                                 return;
                             }
                             if (CameraOfflineSessionImpl.this.isClosed()) {
-                                CameraOfflineSessionImpl.this.mFrameNumberTracker.updateTracker(frameNumber2, null, isPartialResult, requestType);
+                                CameraOfflineSessionImpl.this.mFrameNumberTracker.updateTracker(
+                                        frameNumber2, null, isPartialResult, requestType);
                                 return;
                             }
                             if (holder.hasBatchedOutputs()) {
@@ -261,61 +349,147 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                             }
                             Executor executor2 = holder.getCallback().getExecutor();
                             if (isPartialResult) {
-                                final CaptureResult resultAsCapture = new CaptureResult(CameraOfflineSessionImpl.this.mCameraId, result, request, resultExtras);
+                                final CaptureResult resultAsCapture =
+                                        new CaptureResult(
+                                                CameraOfflineSessionImpl.this.mCameraId,
+                                                result,
+                                                request,
+                                                resultExtras);
                                 final CameraMetadataNative cameraMetadataNative = resultCopy;
                                 executor = executor2;
-                                Runnable resultDispatch2 = new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.4
-                                    @Override // java.lang.Runnable
-                                    public void run() {
-                                        CameraCaptureSession.CaptureCallback callback = holder.getCallback().getSessionCallback();
-                                        if (!CameraOfflineSessionImpl.this.isClosed() && callback != null) {
-                                            if (holder.hasBatchedOutputs()) {
-                                                for (int i = 0; i < holder.getRequestCount(); i++) {
-                                                    CameraMetadataNative resultLocal = new CameraMetadataNative(cameraMetadataNative);
-                                                    CaptureResult resultInBatch = new CaptureResult(CameraOfflineSessionImpl.this.mCameraId, resultLocal, holder.getRequest(i), resultExtras);
-                                                    CaptureRequest cbRequest = holder.getRequest(i);
-                                                    callback.onCaptureProgressed(CameraOfflineSessionImpl.this, cbRequest, resultInBatch);
+                                Runnable resultDispatch2 = new Runnable() { // from class:
+                                            // android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.4
+                                            @Override // java.lang.Runnable
+                                            public void run() {
+                                                CameraCaptureSession.CaptureCallback callback =
+                                                        holder.getCallback().getSessionCallback();
+                                                if (!CameraOfflineSessionImpl.this.isClosed()
+                                                        && callback != null) {
+                                                    if (holder.hasBatchedOutputs()) {
+                                                        for (int i = 0;
+                                                                i < holder.getRequestCount();
+                                                                i++) {
+                                                            CameraMetadataNative resultLocal =
+                                                                    new CameraMetadataNative(
+                                                                            cameraMetadataNative);
+                                                            CaptureResult resultInBatch =
+                                                                    new CaptureResult(
+                                                                            CameraOfflineSessionImpl
+                                                                                    .this
+                                                                                    .mCameraId,
+                                                                            resultLocal,
+                                                                            holder.getRequest(i),
+                                                                            resultExtras);
+                                                            CaptureRequest cbRequest =
+                                                                    holder.getRequest(i);
+                                                            callback.onCaptureProgressed(
+                                                                    CameraOfflineSessionImpl.this,
+                                                                    cbRequest,
+                                                                    resultInBatch);
+                                                        }
+                                                        return;
+                                                    }
+                                                    callback.onCaptureProgressed(
+                                                            CameraOfflineSessionImpl.this,
+                                                            request,
+                                                            resultAsCapture);
                                                 }
-                                                return;
                                             }
-                                            callback.onCaptureProgressed(CameraOfflineSessionImpl.this, request, resultAsCapture);
-                                        }
-                                    }
-                                };
+                                        };
                                 resultDispatch = resultDispatch2;
                                 obj = obj2;
                                 frameNumber = frameNumber2;
                                 finalResult = resultAsCapture;
                             } else {
                                 executor = executor2;
-                                final List<CaptureResult> partialResults = CameraOfflineSessionImpl.this.mFrameNumberTracker.popPartialResults(frameNumber2);
-                                final long sensorTimestamp = ((Long) result.get(CaptureResult.SENSOR_TIMESTAMP)).longValue();
-                                final Range<Integer> fpsRange = (Range) request.get(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE);
+                                final List<CaptureResult> partialResults =
+                                        CameraOfflineSessionImpl.this.mFrameNumberTracker
+                                                .popPartialResults(frameNumber2);
+                                final long sensorTimestamp =
+                                        ((Long) result.get(CaptureResult.SENSOR_TIMESTAMP))
+                                                .longValue();
+                                final Range<Integer> fpsRange =
+                                        (Range)
+                                                request.get(
+                                                        CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE);
                                 final int subsequenceId = resultExtras.getSubsequenceId();
                                 frameNumber = frameNumber2;
                                 try {
-                                    final TotalCaptureResult resultAsCapture2 = new TotalCaptureResult(CameraOfflineSessionImpl.this.mCameraId, result, request, resultExtras, partialResults, holder.getSessionId(), physicalResults);
+                                    final TotalCaptureResult resultAsCapture2 =
+                                            new TotalCaptureResult(
+                                                    CameraOfflineSessionImpl.this.mCameraId,
+                                                    result,
+                                                    request,
+                                                    resultExtras,
+                                                    partialResults,
+                                                    holder.getSessionId(),
+                                                    physicalResults);
                                     final CameraMetadataNative cameraMetadataNative2 = resultCopy;
                                     obj = obj2;
-                                    Runnable resultDispatch3 = new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.5
-                                        @Override // java.lang.Runnable
-                                        public void run() {
-                                            CameraCaptureSession.CaptureCallback callback = holder.getCallback().getSessionCallback();
-                                            if (!CameraOfflineSessionImpl.this.isClosed() && callback != null) {
-                                                if (holder.hasBatchedOutputs()) {
-                                                    for (int i = 0; i < holder.getRequestCount(); i++) {
-                                                        cameraMetadataNative2.set((CaptureResult.Key<CaptureResult.Key<Long>>) CaptureResult.SENSOR_TIMESTAMP, (CaptureResult.Key<Long>) Long.valueOf(sensorTimestamp - (((subsequenceId - i) * 1000000000) / ((Integer) fpsRange.getUpper()).intValue())));
-                                                        CameraMetadataNative resultLocal = new CameraMetadataNative(cameraMetadataNative2);
-                                                        TotalCaptureResult resultInBatch = new TotalCaptureResult(CameraOfflineSessionImpl.this.mCameraId, resultLocal, holder.getRequest(i), resultExtras, partialResults, holder.getSessionId(), new PhysicalCaptureResultInfo[0]);
-                                                        CaptureRequest cbRequest = holder.getRequest(i);
-                                                        callback.onCaptureCompleted(CameraOfflineSessionImpl.this, cbRequest, resultInBatch);
+                                    Runnable resultDispatch3 = new Runnable() { // from class:
+                                                // android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.5
+                                                @Override // java.lang.Runnable
+                                                public void run() {
+                                                    CameraCaptureSession.CaptureCallback callback =
+                                                            holder.getCallback()
+                                                                    .getSessionCallback();
+                                                    if (!CameraOfflineSessionImpl.this.isClosed()
+                                                            && callback != null) {
+                                                        if (holder.hasBatchedOutputs()) {
+                                                            for (int i = 0;
+                                                                    i < holder.getRequestCount();
+                                                                    i++) {
+                                                                cameraMetadataNative2.set(
+                                                                        (CaptureResult.Key<
+                                                                                        CaptureResult
+                                                                                                        .Key<
+                                                                                                Long>>)
+                                                                                CaptureResult
+                                                                                        .SENSOR_TIMESTAMP,
+                                                                        (CaptureResult.Key<Long>)
+                                                                                Long.valueOf(
+                                                                                        sensorTimestamp
+                                                                                                - (((subsequenceId
+                                                                                                                        - i)
+                                                                                                                * 1000000000)
+                                                                                                        / ((Integer)
+                                                                                                                        fpsRange
+                                                                                                                                .getUpper())
+                                                                                                                .intValue())));
+                                                                CameraMetadataNative resultLocal =
+                                                                        new CameraMetadataNative(
+                                                                                cameraMetadataNative2);
+                                                                TotalCaptureResult resultInBatch =
+                                                                        new TotalCaptureResult(
+                                                                                CameraOfflineSessionImpl
+                                                                                        .this
+                                                                                        .mCameraId,
+                                                                                resultLocal,
+                                                                                holder.getRequest(
+                                                                                        i),
+                                                                                resultExtras,
+                                                                                partialResults,
+                                                                                holder
+                                                                                        .getSessionId(),
+                                                                                new PhysicalCaptureResultInfo
+                                                                                        [0]);
+                                                                CaptureRequest cbRequest =
+                                                                        holder.getRequest(i);
+                                                                callback.onCaptureCompleted(
+                                                                        CameraOfflineSessionImpl
+                                                                                .this,
+                                                                        cbRequest,
+                                                                        resultInBatch);
+                                                            }
+                                                            return;
+                                                        }
+                                                        callback.onCaptureCompleted(
+                                                                CameraOfflineSessionImpl.this,
+                                                                request,
+                                                                resultAsCapture2);
                                                     }
-                                                    return;
                                                 }
-                                                callback.onCaptureCompleted(CameraOfflineSessionImpl.this, request, resultAsCapture2);
-                                            }
-                                        }
-                                    };
+                                            };
                                     resultDispatch = resultDispatch3;
                                     finalResult = resultAsCapture2;
                                 } catch (Throwable th) {
@@ -335,7 +509,8 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                                     throw th2;
                                 }
                             }
-                            CameraOfflineSessionImpl.this.mFrameNumberTracker.updateTracker(frameNumber, finalResult, isPartialResult, requestType);
+                            CameraOfflineSessionImpl.this.mFrameNumberTracker.updateTracker(
+                                    frameNumber, finalResult, isPartialResult, requestType);
                             if (!isPartialResult) {
                                 CameraOfflineSessionImpl.this.checkAndFireSequenceComplete();
                             }
@@ -370,20 +545,37 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
             int subsequenceId = resultExtras.getSubsequenceId();
             final long frameNumber = resultExtras.getFrameNumber();
             String errorPhysicalCameraId = resultExtras.getErrorPhysicalCameraId();
-            final CaptureCallbackHolder holder = (CaptureCallbackHolder) CameraOfflineSessionImpl.this.mCaptureCallbackMap.get(requestId);
+            final CaptureCallbackHolder holder =
+                    (CaptureCallbackHolder)
+                            CameraOfflineSessionImpl.this.mCaptureCallbackMap.get(requestId);
             if (holder == null) {
-                Log.e(CameraOfflineSessionImpl.TAG, String.format("Receive capture error on unknown request ID %d", Integer.valueOf(requestId)));
+                Log.e(
+                        CameraOfflineSessionImpl.TAG,
+                        String.format(
+                                "Receive capture error on unknown request ID %d",
+                                Integer.valueOf(requestId)));
                 return;
             }
             final CaptureRequest request = holder.getRequest(subsequenceId);
             if (errorCode == 5) {
-                if (CameraOfflineSessionImpl.this.mRemoteSession == null && !CameraOfflineSessionImpl.this.isClosed()) {
-                    config = (OutputConfiguration) CameraOfflineSessionImpl.this.mConfiguredOutputs.get(resultExtras.getErrorStreamId());
+                if (CameraOfflineSessionImpl.this.mRemoteSession == null
+                        && !CameraOfflineSessionImpl.this.isClosed()) {
+                    config =
+                            (OutputConfiguration)
+                                    CameraOfflineSessionImpl.this.mConfiguredOutputs.get(
+                                            resultExtras.getErrorStreamId());
                 } else {
-                    config = (OutputConfiguration) CameraOfflineSessionImpl.this.mOfflineOutputs.get(resultExtras.getErrorStreamId());
+                    config =
+                            (OutputConfiguration)
+                                    CameraOfflineSessionImpl.this.mOfflineOutputs.get(
+                                            resultExtras.getErrorStreamId());
                 }
                 if (config == null) {
-                    Log.v(CameraOfflineSessionImpl.TAG, String.format("Stream %d has been removed. Skipping buffer lost callback", Integer.valueOf(resultExtras.getErrorStreamId())));
+                    Log.v(
+                            CameraOfflineSessionImpl.TAG,
+                            String.format(
+                                    "Stream %d has been removed. Skipping buffer lost callback",
+                                    Integer.valueOf(resultExtras.getErrorStreamId())));
                     return;
                 }
                 for (final Surface surface : config.getSurfaces()) {
@@ -391,15 +583,24 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                         Executor executor = holder.getCallback().getExecutor();
                         final CaptureCallbackHolder captureCallbackHolder = holder;
                         CaptureCallbackHolder holder2 = holder;
-                        Runnable failureDispatch = new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.6
-                            @Override // java.lang.Runnable
-                            public void run() {
-                                CameraCaptureSession.CaptureCallback callback = captureCallbackHolder.getCallback().getSessionCallback();
-                                if (!CameraOfflineSessionImpl.this.isClosed() && callback != null) {
-                                    callback.onCaptureBufferLost(CameraOfflineSessionImpl.this, request, surface, frameNumber);
-                                }
-                            }
-                        };
+                        Runnable failureDispatch = new Runnable() { // from class:
+                                    // android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.6
+                                    @Override // java.lang.Runnable
+                                    public void run() {
+                                        CameraCaptureSession.CaptureCallback callback =
+                                                captureCallbackHolder
+                                                        .getCallback()
+                                                        .getSessionCallback();
+                                        if (!CameraOfflineSessionImpl.this.isClosed()
+                                                && callback != null) {
+                                            callback.onCaptureBufferLost(
+                                                    CameraOfflineSessionImpl.this,
+                                                    request,
+                                                    surface,
+                                                    frameNumber);
+                                        }
+                                    }
+                                };
                         if (executor != null) {
                             ident = Binder.clearCallingIdentity();
                             try {
@@ -413,18 +614,29 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                 return;
             }
             boolean mayHaveBuffers = errorCode == 4;
-            final CaptureFailure failure = new CaptureFailure(request, 0, mayHaveBuffers, requestId, frameNumber, errorPhysicalCameraId);
+            final CaptureFailure failure =
+                    new CaptureFailure(
+                            request,
+                            0,
+                            mayHaveBuffers,
+                            requestId,
+                            frameNumber,
+                            errorPhysicalCameraId);
             Executor executor2 = holder.getCallback().getExecutor();
-            Runnable failureDispatch2 = new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.7
-                @Override // java.lang.Runnable
-                public void run() {
-                    CameraCaptureSession.CaptureCallback callback = holder.getCallback().getSessionCallback();
-                    if (!CameraOfflineSessionImpl.this.isClosed() && callback != null) {
-                        callback.onCaptureFailed(CameraOfflineSessionImpl.this, request, failure);
-                    }
-                }
-            };
-            CameraOfflineSessionImpl.this.mFrameNumberTracker.updateTracker(frameNumber, true, request.getRequestType());
+            Runnable failureDispatch2 = new Runnable() { // from class:
+                        // android.hardware.camera2.impl.CameraOfflineSessionImpl.CameraDeviceCallbacks.7
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            CameraCaptureSession.CaptureCallback callback =
+                                    holder.getCallback().getSessionCallback();
+                            if (!CameraOfflineSessionImpl.this.isClosed() && callback != null) {
+                                callback.onCaptureFailed(
+                                        CameraOfflineSessionImpl.this, request, failure);
+                            }
+                        }
+                    };
+            CameraOfflineSessionImpl.this.mFrameNumberTracker.updateTracker(
+                    frameNumber, true, request.getRequestType());
             CameraOfflineSessionImpl.this.checkAndFireSequenceComplete();
             if (executor2 != null) {
                 ident = Binder.clearCallingIdentity();
@@ -444,9 +656,12 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
         Executor executor;
         final CameraCaptureSession.CaptureCallback callback;
         long completedFrameNumber2 = this.mFrameNumberTracker.getCompletedFrameNumber();
-        long completedReprocessFrameNumber = this.mFrameNumberTracker.getCompletedReprocessFrameNumber();
-        long completedZslStillFrameNumber = this.mFrameNumberTracker.getCompletedZslStillFrameNumber();
-        Iterator<RequestLastFrameNumbersHolder> iter = this.mOfflineRequestLastFrameNumbersList.iterator();
+        long completedReprocessFrameNumber =
+                this.mFrameNumberTracker.getCompletedReprocessFrameNumber();
+        long completedZslStillFrameNumber =
+                this.mFrameNumberTracker.getCompletedZslStillFrameNumber();
+        Iterator<RequestLastFrameNumbersHolder> iter =
+                this.mOfflineRequestLastFrameNumbersList.iterator();
         while (iter.hasNext()) {
             final RequestLastFrameNumbersHolder requestLastFrameNumbers = iter.next();
             boolean sequenceCompleted = false;
@@ -465,12 +680,18 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                         holder = null;
                     }
                     if (holder != null) {
-                        long lastRegularFrameNumber = requestLastFrameNumbers.getLastRegularFrameNumber();
-                        long lastReprocessFrameNumber = requestLastFrameNumbers.getLastReprocessFrameNumber();
-                        long lastZslStillFrameNumber = requestLastFrameNumbers.getLastZslStillFrameNumber();
+                        long lastRegularFrameNumber =
+                                requestLastFrameNumbers.getLastRegularFrameNumber();
+                        long lastReprocessFrameNumber =
+                                requestLastFrameNumbers.getLastReprocessFrameNumber();
+                        long lastZslStillFrameNumber =
+                                requestLastFrameNumbers.getLastZslStillFrameNumber();
                         Executor executor2 = holder.getCallback().getExecutor();
-                        CameraCaptureSession.CaptureCallback callback2 = holder.getCallback().getSessionCallback();
-                        if (lastRegularFrameNumber > completedFrameNumber2 || lastReprocessFrameNumber > completedReprocessFrameNumber || lastZslStillFrameNumber > completedZslStillFrameNumber) {
+                        CameraCaptureSession.CaptureCallback callback2 =
+                                holder.getCallback().getSessionCallback();
+                        if (lastRegularFrameNumber > completedFrameNumber2
+                                || lastReprocessFrameNumber > completedReprocessFrameNumber
+                                || lastZslStillFrameNumber > completedZslStillFrameNumber) {
                             completedFrameNumber = completedFrameNumber2;
                         } else {
                             sequenceCompleted = true;
@@ -497,14 +718,18 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                 iter.remove();
             }
             if (sequenceCompleted && callback != null && executor != null) {
-                Runnable resultDispatch = new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.1
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        if (!CameraOfflineSessionImpl.this.isClosed()) {
-                            callback.onCaptureSequenceCompleted(CameraOfflineSessionImpl.this, requestId, requestLastFrameNumbers.getLastFrameNumber());
-                        }
-                    }
-                };
+                Runnable resultDispatch = new Runnable() { // from class:
+                            // android.hardware.camera2.impl.CameraOfflineSessionImpl.1
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                if (!CameraOfflineSessionImpl.this.isClosed()) {
+                                    callback.onCaptureSequenceCompleted(
+                                            CameraOfflineSessionImpl.this,
+                                            requestId,
+                                            requestLastFrameNumbers.getLastFrameNumber());
+                                }
+                            }
+                        };
                 long ident = Binder.clearCallingIdentity();
                 try {
                     executor.execute(resultDispatch);
@@ -522,18 +747,26 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void removeCompletedCallbackHolderLocked(long lastCompletedRegularFrameNumber, long lastCompletedReprocessFrameNumber, long lastCompletedZslStillFrameNumber) {
-        Iterator<RequestLastFrameNumbersHolder> iter = this.mOfflineRequestLastFrameNumbersList.iterator();
+    public void removeCompletedCallbackHolderLocked(
+            long lastCompletedRegularFrameNumber,
+            long lastCompletedReprocessFrameNumber,
+            long lastCompletedZslStillFrameNumber) {
+        Iterator<RequestLastFrameNumbersHolder> iter =
+                this.mOfflineRequestLastFrameNumbersList.iterator();
         while (iter.hasNext()) {
             RequestLastFrameNumbersHolder requestLastFrameNumbers = iter.next();
             int requestId = requestLastFrameNumbers.getRequestId();
             int index = this.mCaptureCallbackMap.indexOfKey(requestId);
-            CaptureCallbackHolder holder = index >= 0 ? this.mCaptureCallbackMap.valueAt(index) : null;
+            CaptureCallbackHolder holder =
+                    index >= 0 ? this.mCaptureCallbackMap.valueAt(index) : null;
             if (holder != null) {
                 long lastRegularFrameNumber = requestLastFrameNumbers.getLastRegularFrameNumber();
-                long lastReprocessFrameNumber = requestLastFrameNumbers.getLastReprocessFrameNumber();
+                long lastReprocessFrameNumber =
+                        requestLastFrameNumbers.getLastReprocessFrameNumber();
                 long lastZslStillFrameNumber = requestLastFrameNumbers.getLastZslStillFrameNumber();
-                if (lastRegularFrameNumber <= lastCompletedRegularFrameNumber && lastReprocessFrameNumber <= lastCompletedReprocessFrameNumber && lastZslStillFrameNumber <= lastCompletedZslStillFrameNumber) {
+                if (lastRegularFrameNumber <= lastCompletedRegularFrameNumber
+                        && lastReprocessFrameNumber <= lastCompletedReprocessFrameNumber
+                        && lastZslStillFrameNumber <= lastCompletedZslStillFrameNumber) {
                     if (requestLastFrameNumbers.isSequenceCompleted()) {
                         this.mCaptureCallbackMap.removeAt(index);
                         iter.remove();
@@ -547,12 +780,14 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
 
     public void notifyFailedSwitch() {
         synchronized (this.mInterfaceLock) {
-            Runnable switchFailDispatch = new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    CameraOfflineSessionImpl.this.mOfflineCallback.onSwitchFailed(CameraOfflineSessionImpl.this);
-                }
-            };
+            Runnable switchFailDispatch = new Runnable() { // from class:
+                        // android.hardware.camera2.impl.CameraOfflineSessionImpl.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            CameraOfflineSessionImpl.this.mOfflineCallback.onSwitchFailed(
+                                    CameraOfflineSessionImpl.this);
+                        }
+                    };
             long ident = Binder.clearCallingIdentity();
             try {
                 this.mOfflineExecutor.execute(switchFailDispatch);
@@ -571,18 +806,21 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
             this.mRemoteSession = remoteSession;
             IBinder remoteSessionBinder = remoteSession.asBinder();
             if (remoteSessionBinder == null) {
-                throw new CameraAccessException(2, "The camera offline session has encountered a serious error");
+                throw new CameraAccessException(
+                        2, "The camera offline session has encountered a serious error");
             }
             try {
                 remoteSessionBinder.linkToDeath(this, 0);
-                Runnable readyDispatch = new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.3
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        if (!CameraOfflineSessionImpl.this.isClosed()) {
-                            CameraOfflineSessionImpl.this.mOfflineCallback.onReady(CameraOfflineSessionImpl.this);
-                        }
-                    }
-                };
+                Runnable readyDispatch = new Runnable() { // from class:
+                            // android.hardware.camera2.impl.CameraOfflineSessionImpl.3
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                if (!CameraOfflineSessionImpl.this.isClosed()) {
+                                    CameraOfflineSessionImpl.this.mOfflineCallback.onReady(
+                                            CameraOfflineSessionImpl.this);
+                                }
+                            }
+                        };
                 long ident = Binder.clearCallingIdentity();
                 try {
                     this.mOfflineExecutor.execute(readyDispatch);
@@ -590,7 +828,8 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                     Binder.restoreCallingIdentity(ident);
                 }
             } catch (RemoteException e) {
-                throw new CameraAccessException(2, "The camera offline session has encountered a serious error");
+                throw new CameraAccessException(
+                        2, "The camera offline session has encountered a serious error");
             }
         }
     }
@@ -613,12 +852,14 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
                     Log.e(TAG, "Exception while disconnecting from offline session: ", e);
                 }
                 this.mRemoteSession = null;
-                Runnable closeDispatch = new Runnable() { // from class: android.hardware.camera2.impl.CameraOfflineSessionImpl.4
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        CameraOfflineSessionImpl.this.mOfflineCallback.onClosed(CameraOfflineSessionImpl.this);
-                    }
-                };
+                Runnable closeDispatch = new Runnable() { // from class:
+                            // android.hardware.camera2.impl.CameraOfflineSessionImpl.4
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                CameraOfflineSessionImpl.this.mOfflineCallback.onClosed(
+                                        CameraOfflineSessionImpl.this);
+                            }
+                        };
                 long ident = Binder.clearCallingIdentity();
                 try {
                     this.mOfflineExecutor.execute(closeDispatch);
@@ -666,47 +907,76 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public void finalizeOutputConfigurations(List<OutputConfiguration> outputConfigs) throws CameraAccessException {
+    public void finalizeOutputConfigurations(List<OutputConfiguration> outputConfigs)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Operation not supported in offline mode");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int capture(CaptureRequest request, CameraCaptureSession.CaptureCallback callback, Handler handler) throws CameraAccessException {
+    public int capture(
+            CaptureRequest request, CameraCaptureSession.CaptureCallback callback, Handler handler)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Operation not supported in offline mode");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int captureSingleRequest(CaptureRequest request, Executor executor, CameraCaptureSession.CaptureCallback callback) throws CameraAccessException {
+    public int captureSingleRequest(
+            CaptureRequest request,
+            Executor executor,
+            CameraCaptureSession.CaptureCallback callback)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Operation not supported in offline mode");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int captureBurst(List<CaptureRequest> requests, CameraCaptureSession.CaptureCallback callback, Handler handler) throws CameraAccessException {
+    public int captureBurst(
+            List<CaptureRequest> requests,
+            CameraCaptureSession.CaptureCallback callback,
+            Handler handler)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Operation not supported in offline mode");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int captureBurstRequests(List<CaptureRequest> requests, Executor executor, CameraCaptureSession.CaptureCallback callback) throws CameraAccessException {
+    public int captureBurstRequests(
+            List<CaptureRequest> requests,
+            Executor executor,
+            CameraCaptureSession.CaptureCallback callback)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Operation not supported in offline mode");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int setRepeatingRequest(CaptureRequest request, CameraCaptureSession.CaptureCallback callback, Handler handler) throws CameraAccessException {
+    public int setRepeatingRequest(
+            CaptureRequest request, CameraCaptureSession.CaptureCallback callback, Handler handler)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Operation not supported in offline mode");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int setSingleRepeatingRequest(CaptureRequest request, Executor executor, CameraCaptureSession.CaptureCallback callback) throws CameraAccessException {
+    public int setSingleRepeatingRequest(
+            CaptureRequest request,
+            Executor executor,
+            CameraCaptureSession.CaptureCallback callback)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Operation not supported in offline mode");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int setRepeatingBurst(List<CaptureRequest> requests, CameraCaptureSession.CaptureCallback callback, Handler handler) throws CameraAccessException {
+    public int setRepeatingBurst(
+            List<CaptureRequest> requests,
+            CameraCaptureSession.CaptureCallback callback,
+            Handler handler)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Operation not supported in offline mode");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int setRepeatingBurstRequests(List<CaptureRequest> requests, Executor executor, CameraCaptureSession.CaptureCallback callback) throws CameraAccessException {
+    public int setRepeatingBurstRequests(
+            List<CaptureRequest> requests,
+            Executor executor,
+            CameraCaptureSession.CaptureCallback callback)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Operation not supported in offline mode");
     }
 
@@ -736,7 +1006,11 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public CameraOfflineSession switchToOffline(Collection<Surface> offlineOutputs, Executor executor, CameraOfflineSession.CameraOfflineSessionCallback listener) throws CameraAccessException {
+    public CameraOfflineSession switchToOffline(
+            Collection<Surface> offlineOutputs,
+            Executor executor,
+            CameraOfflineSession.CameraOfflineSessionCallback listener)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Operation not supported in offline mode");
     }
 
@@ -745,7 +1019,8 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession implements IB
         throw new UnsupportedOperationException("Operation not supported in offline mode");
     }
 
-    @Override // android.hardware.camera2.CameraOfflineSession, android.hardware.camera2.CameraCaptureSession, java.lang.AutoCloseable
+    @Override // android.hardware.camera2.CameraOfflineSession,
+    // android.hardware.camera2.CameraCaptureSession, java.lang.AutoCloseable
     public void close() {
         disconnect();
     }

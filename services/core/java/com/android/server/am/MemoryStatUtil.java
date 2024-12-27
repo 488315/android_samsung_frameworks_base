@@ -5,8 +5,10 @@ import android.os.SystemProperties;
 import android.system.Os;
 import android.system.OsConstants;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
@@ -17,7 +19,8 @@ import java.util.regex.Pattern;
 /* loaded from: classes.dex */
 public abstract class MemoryStatUtil {
     public static final int PAGE_SIZE = (int) Os.sysconf(OsConstants._SC_PAGESIZE);
-    public static final boolean DEVICE_HAS_PER_APP_MEMCG = SystemProperties.getBoolean("ro.config.per_app_memcg", false);
+    public static final boolean DEVICE_HAS_PER_APP_MEMCG =
+            SystemProperties.getBoolean("ro.config.per_app_memcg", false);
     public static final Pattern PGFAULT = Pattern.compile("total_pgfault (\\d+)");
     public static final Pattern PGMAJFAULT = Pattern.compile("total_pgmajfault (\\d+)");
     public static final Pattern RSS_IN_BYTES = Pattern.compile("total_rss (\\d+)");
@@ -69,7 +72,10 @@ public abstract class MemoryStatUtil {
         String str = null;
         if (DEVICE_HAS_PER_APP_MEMCG) {
             Locale locale = Locale.US;
-            File file = new File(DualAppManagerService$$ExternalSyntheticOutline0.m(i, i2, "/dev/memcg/apps/uid_", "/pid_", "/memory.stat"));
+            File file =
+                    new File(
+                            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                    i, i2, "/dev/memcg/apps/uid_", "/pid_", "/memory.stat"));
             if (file.exists()) {
                 try {
                     str = FileUtils.readTextFile(file, 0, null);
@@ -80,7 +86,10 @@ public abstract class MemoryStatUtil {
             return parseMemoryStatFromMemcg(str);
         }
         Locale locale2 = Locale.US;
-        File file2 = new File(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i2, "/proc/", "/stat"));
+        File file2 =
+                new File(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i2, "/proc/", "/stat"));
         if (file2.exists()) {
             try {
                 str = FileUtils.readTextFile(file2, 0, null);

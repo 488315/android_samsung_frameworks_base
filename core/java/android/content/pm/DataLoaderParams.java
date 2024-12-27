@@ -8,12 +8,14 @@ import android.content.ComponentName;
 public class DataLoaderParams {
     private final DataLoaderParamsParcel mData;
 
-    public static final DataLoaderParams forStreaming(ComponentName componentName, String arguments) {
+    public static final DataLoaderParams forStreaming(
+            ComponentName componentName, String arguments) {
         return new DataLoaderParams(1, componentName, arguments);
     }
 
     @SystemApi
-    public static final DataLoaderParams forIncremental(ComponentName componentName, String arguments) {
+    public static final DataLoaderParams forIncremental(
+            ComponentName componentName, String arguments) {
         return new DataLoaderParams(2, componentName, arguments);
     }
 

@@ -16,7 +16,6 @@ import android.text.style.AccessibilityClickableSpan;
 import android.text.style.ClickableSpan;
 import android.util.LongSparseArray;
 import android.util.Slog;
-import android.view.SurfaceControl;
 import android.view.accessibility.AccessibilityInteractionClient;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeIdManager;
@@ -26,9 +25,11 @@ import android.view.accessibility.AccessibilityRequestPreparer;
 import android.view.accessibility.Flags;
 import android.view.accessibility.IAccessibilityInteractionConnectionCallback;
 import android.window.ScreenCapture;
+
 import com.android.internal.os.SomeArgs;
 import com.android.internal.util.function.QuadConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -58,7 +59,8 @@ public final class AccessibilityInteractionController {
     private ArrayList<Message> mPendingFindNodeByIdMessages;
     private final AccessibilityNodePrefetcher mPrefetcher;
     private final ViewRootImpl mViewRootImpl;
-    private final ArrayList<AccessibilityNodeInfo> mTempAccessibilityNodeInfoList = new ArrayList<>();
+    private final ArrayList<AccessibilityNodeInfo> mTempAccessibilityNodeInfoList =
+            new ArrayList<>();
     private final Object mLock = new Object();
     private final ArrayList<View> mTempArrayList = new ArrayList<>();
     private final Rect mTempRect = new Rect();
@@ -77,15 +79,26 @@ public final class AccessibilityInteractionController {
         this.mHandler = new PrivateHandler(looper);
         this.mViewRootImpl = viewRootImpl;
         this.mPrefetcher = new AccessibilityNodePrefetcher();
-        this.mA11yManager = (AccessibilityManager) this.mViewRootImpl.mContext.getSystemService(AccessibilityManager.class);
+        this.mA11yManager =
+                (AccessibilityManager)
+                        this.mViewRootImpl.mContext.getSystemService(AccessibilityManager.class);
         this.mPendingFindNodeByIdMessages = new ArrayList<>();
     }
 
-    private void scheduleMessage(Message message, int interrogatingPid, long interrogatingTid, boolean ignoreRequestPreparers) {
-        if (ignoreRequestPreparers || !holdOffMessageIfNeeded(message, interrogatingPid, interrogatingTid)) {
-            if (interrogatingPid == this.mMyProcessId && interrogatingTid == this.mMyLooperThreadId && this.mHandler.hasAccessibilityCallback(message)) {
-                AccessibilityInteractionClient.getInstanceForThread(interrogatingTid).setSameThreadMessage(message);
-            } else if (!this.mHandler.hasAccessibilityCallback(message) && Thread.currentThread().getId() == this.mMyLooperThreadId) {
+    private void scheduleMessage(
+            Message message,
+            int interrogatingPid,
+            long interrogatingTid,
+            boolean ignoreRequestPreparers) {
+        if (ignoreRequestPreparers
+                || !holdOffMessageIfNeeded(message, interrogatingPid, interrogatingTid)) {
+            if (interrogatingPid == this.mMyProcessId
+                    && interrogatingTid == this.mMyLooperThreadId
+                    && this.mHandler.hasAccessibilityCallback(message)) {
+                AccessibilityInteractionClient.getInstanceForThread(interrogatingTid)
+                        .setSameThreadMessage(message);
+            } else if (!this.mHandler.hasAccessibilityCallback(message)
+                    && Thread.currentThread().getId() == this.mMyLooperThreadId) {
                 this.mHandler.handleMessage(message);
             } else {
                 this.mHandler.sendMessage(message);
@@ -100,10 +113,22 @@ public final class AccessibilityInteractionController {
 
     /* JADX INFO: Access modifiers changed from: private */
     public boolean isVisibleToAccessibilityService(View view) {
-        return view != null && (this.mA11yManager.isRequestFromAccessibilityTool() || !view.isAccessibilityDataSensitive());
+        return view != null
+                && (this.mA11yManager.isRequestFromAccessibilityTool()
+                        || !view.isAccessibilityDataSensitive());
     }
 
-    public void findAccessibilityNodeInfoByAccessibilityIdClientThread(long accessibilityNodeId, Region interactiveRegion, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues, Bundle arguments) {
+    public void findAccessibilityNodeInfoByAccessibilityIdClientThread(
+            long accessibilityNodeId,
+            Region interactiveRegion,
+            int interactionId,
+            IAccessibilityInteractionConnectionCallback callback,
+            int flags,
+            int interrogatingPid,
+            long interrogatingTid,
+            MagnificationSpec spec,
+            float[] matrixValues,
+            Bundle arguments) {
         Message message = this.mHandler.obtainMessage();
         message.what = 2;
         message.arg1 = flags;
@@ -132,7 +157,8 @@ public final class AccessibilityInteractionController {
         }
     }
 
-    private boolean holdOffMessageIfNeeded(Message originalMessage, int callingPid, long callingTid) {
+    private boolean holdOffMessageIfNeeded(
+            Message originalMessage, int callingPid, long callingTid) {
         synchronized (this.mLock) {
             if (this.mNumActiveRequestPreparers != 0) {
                 queueMessageToHandleOncePrepared(originalMessage, callingPid, callingTid);
@@ -147,11 +173,13 @@ public final class AccessibilityInteractionController {
                 return false;
             }
             int accessibilityViewId = originalMessageArgs.argi1;
-            List<AccessibilityRequestPreparer> preparers = this.mA11yManager.getRequestPreparersForAccessibilityId(accessibilityViewId);
+            List<AccessibilityRequestPreparer> preparers =
+                    this.mA11yManager.getRequestPreparersForAccessibilityId(accessibilityViewId);
             if (preparers == null) {
                 return false;
             }
-            String extraDataKey = requestArguments.getString(AccessibilityNodeInfo.EXTRA_DATA_REQUESTED_KEY);
+            String extraDataKey =
+                    requestArguments.getString(AccessibilityNodeInfo.EXTRA_DATA_REQUESTED_KEY);
             if (extraDataKey == null) {
                 return false;
             }
@@ -159,7 +187,10 @@ public final class AccessibilityInteractionController {
             for (int i = 0; i < preparers.size(); i++) {
                 Message requestPreparerMessage = this.mHandler.obtainMessage(7);
                 SomeArgs requestPreparerArgs = SomeArgs.obtain();
-                requestPreparerArgs.argi1 = originalMessageArgs.argi2 == Integer.MAX_VALUE ? -1 : originalMessageArgs.argi2;
+                requestPreparerArgs.argi1 =
+                        originalMessageArgs.argi2 == Integer.MAX_VALUE
+                                ? -1
+                                : originalMessageArgs.argi2;
                 requestPreparerArgs.arg1 = preparers.get(i);
                 requestPreparerArgs.arg2 = extraDataKey;
                 requestPreparerArgs.arg3 = requestArguments;
@@ -186,14 +217,17 @@ public final class AccessibilityInteractionController {
         String extraDataKey = (String) args.arg2;
         Bundle requestArguments = (Bundle) args.arg3;
         Message preparationFinishedMessage = (Message) args.arg4;
-        preparer.onPrepareExtraData(virtualDescendantId, extraDataKey, requestArguments, preparationFinishedMessage);
+        preparer.onPrepareExtraData(
+                virtualDescendantId, extraDataKey, requestArguments, preparationFinishedMessage);
     }
 
-    private void queueMessageToHandleOncePrepared(Message message, int interrogatingPid, long interrogatingTid) {
+    private void queueMessageToHandleOncePrepared(
+            Message message, int interrogatingPid, long interrogatingTid) {
         if (this.mMessagesWaitingForRequestPreparer == null) {
             this.mMessagesWaitingForRequestPreparer = new ArrayList(1);
         }
-        MessageHolder messageHolder = new MessageHolder(message, interrogatingPid, interrogatingTid);
+        MessageHolder messageHolder =
+                new MessageHolder(message, interrogatingPid, interrogatingTid);
         this.mMessagesWaitingForRequestPreparer.add(messageHolder);
     }
 
@@ -256,13 +290,19 @@ public final class AccessibilityInteractionController {
             Method dump skipped, instructions count: 459
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.AccessibilityInteractionController.findAccessibilityNodeInfoByAccessibilityIdUiThread(android.os.Message):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.AccessibilityInteractionController.findAccessibilityNodeInfoByAccessibilityIdUiThread(android.os.Message):void");
     }
 
-    private AccessibilityNodeInfo populateAccessibilityNodeInfoForView(View view, Bundle arguments, int virtualViewId) {
+    private AccessibilityNodeInfo populateAccessibilityNodeInfoForView(
+            View view, Bundle arguments, int virtualViewId) {
         AccessibilityNodeInfo root;
         AccessibilityNodeProvider provider = view.getAccessibilityNodeProvider();
-        String extraDataRequested = arguments == null ? null : arguments.getString(AccessibilityNodeInfo.EXTRA_DATA_REQUESTED_KEY);
+        String extraDataRequested =
+                arguments == null
+                        ? null
+                        : arguments.getString(AccessibilityNodeInfo.EXTRA_DATA_REQUESTED_KEY);
         if (provider == null) {
             root = view.createAccessibilityNodeInfo();
             if (root != null && extraDataRequested != null) {
@@ -271,13 +311,24 @@ public final class AccessibilityInteractionController {
         } else {
             root = provider.createAccessibilityNodeInfo(virtualViewId);
             if (root != null && extraDataRequested != null) {
-                provider.addExtraDataToAccessibilityNodeInfo(virtualViewId, root, extraDataRequested, arguments);
+                provider.addExtraDataToAccessibilityNodeInfo(
+                        virtualViewId, root, extraDataRequested, arguments);
             }
         }
         return root;
     }
 
-    public void findAccessibilityNodeInfosByViewIdClientThread(long accessibilityNodeId, String viewId, Region interactiveRegion, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues) {
+    public void findAccessibilityNodeInfosByViewIdClientThread(
+            long accessibilityNodeId,
+            String viewId,
+            Region interactiveRegion,
+            int interactionId,
+            IAccessibilityInteractionConnectionCallback callback,
+            int flags,
+            int interrogatingPid,
+            long interrogatingTid,
+            MagnificationSpec spec,
+            float[] matrixValues) {
         Message message = this.mHandler.obtainMessage();
         message.what = 3;
         message.arg1 = flags;
@@ -303,7 +354,8 @@ public final class AccessibilityInteractionController {
         int accessibilityViewId = message.arg2;
         SomeArgs args = (SomeArgs) message.obj;
         int interactionId = args.argi1;
-        IAccessibilityInteractionConnectionCallback callback = (IAccessibilityInteractionConnectionCallback) args.arg1;
+        IAccessibilityInteractionConnectionCallback callback =
+                (IAccessibilityInteractionConnectionCallback) args.arg1;
         MagnificationSpec spec = (MagnificationSpec) args.arg2;
         String viewId = (String) args.arg3;
         Region interactiveRegion = (Region) args.arg4;
@@ -315,10 +367,12 @@ public final class AccessibilityInteractionController {
             setAccessibilityFetchFlags(flags);
             View root = findViewByAccessibilityId(accessibilityViewId);
             if (root != null) {
-                int resolvedViewId = root.getContext().getResources().getIdentifier(viewId, null, null);
+                int resolvedViewId =
+                        root.getContext().getResources().getIdentifier(viewId, null, null);
                 if (resolvedViewId <= 0) {
                     resetAccessibilityFetchFlags();
-                    updateInfosForViewportAndReturnFindNodeResult(infos2, callback, interactionId, spec, matrixValues, interactiveRegion);
+                    updateInfosForViewportAndReturnFindNodeResult(
+                            infos2, callback, interactionId, spec, matrixValues, interactiveRegion);
                     return;
                 }
                 infos = infos2;
@@ -332,21 +386,33 @@ public final class AccessibilityInteractionController {
                 } catch (Throwable th) {
                     th = th;
                     resetAccessibilityFetchFlags();
-                    updateInfosForViewportAndReturnFindNodeResult(infos, callback, interactionId, spec, matrixValues, interactiveRegion);
+                    updateInfosForViewportAndReturnFindNodeResult(
+                            infos, callback, interactionId, spec, matrixValues, interactiveRegion);
                     throw th;
                 }
             } else {
                 infos = infos2;
             }
             resetAccessibilityFetchFlags();
-            updateInfosForViewportAndReturnFindNodeResult(infos, callback, interactionId, spec, matrixValues, interactiveRegion);
+            updateInfosForViewportAndReturnFindNodeResult(
+                    infos, callback, interactionId, spec, matrixValues, interactiveRegion);
         } catch (Throwable th2) {
             th = th2;
             infos = infos2;
         }
     }
 
-    public void findAccessibilityNodeInfosByTextClientThread(long accessibilityNodeId, String text, Region interactiveRegion, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues) {
+    public void findAccessibilityNodeInfosByTextClientThread(
+            long accessibilityNodeId,
+            String text,
+            Region interactiveRegion,
+            int interactionId,
+            IAccessibilityInteractionConnectionCallback callback,
+            int flags,
+            int interrogatingPid,
+            long interrogatingTid,
+            MagnificationSpec spec,
+            float[] matrixValues) {
         Message message = this.mHandler.obtainMessage();
         message.what = 4;
         message.arg1 = flags;
@@ -376,7 +442,8 @@ public final class AccessibilityInteractionController {
         int flags = message.arg1;
         SomeArgs args = (SomeArgs) message.obj;
         String text = (String) args.arg1;
-        IAccessibilityInteractionConnectionCallback callback = (IAccessibilityInteractionConnectionCallback) args.arg2;
+        IAccessibilityInteractionConnectionCallback callback =
+                (IAccessibilityInteractionConnectionCallback) args.arg2;
         MagnificationSpec spec = (MagnificationSpec) args.arg3;
         int accessibilityViewId = args.argi1;
         int virtualDescendantId = args.argi2;
@@ -392,7 +459,9 @@ public final class AccessibilityInteractionController {
                     if (isShown(root)) {
                         AccessibilityNodeProvider provider = root.getAccessibilityNodeProvider();
                         if (provider != null) {
-                            List<AccessibilityNodeInfo> infos3 = provider.findAccessibilityNodeInfosByText(text, virtualDescendantId);
+                            List<AccessibilityNodeInfo> infos3 =
+                                    provider.findAccessibilityNodeInfosByText(
+                                            text, virtualDescendantId);
                             infos2 = infos3;
                         } else {
                             if (virtualDescendantId == -1) {
@@ -400,20 +469,25 @@ public final class AccessibilityInteractionController {
                                 foundViews2.clear();
                                 root.findViewsWithText(foundViews2, text, 7);
                                 if (!foundViews2.isEmpty()) {
-                                    List<AccessibilityNodeInfo> infos4 = this.mTempAccessibilityNodeInfoList;
+                                    List<AccessibilityNodeInfo> infos4 =
+                                            this.mTempAccessibilityNodeInfoList;
                                     infos4.clear();
                                     int viewCount = foundViews2.size();
                                     int i = 0;
                                     while (i < viewCount) {
                                         View foundView = foundViews2.get(i);
                                         View root2 = root;
-                                        if (!isShown(foundView) || !isVisibleToAccessibilityService(foundView)) {
+                                        if (!isShown(foundView)
+                                                || !isVisibleToAccessibilityService(foundView)) {
                                             foundViews = foundViews2;
                                         } else {
-                                            AccessibilityNodeProvider provider2 = foundView.getAccessibilityNodeProvider();
+                                            AccessibilityNodeProvider provider2 =
+                                                    foundView.getAccessibilityNodeProvider();
                                             if (provider2 != null) {
                                                 foundViews = foundViews2;
-                                                List<AccessibilityNodeInfo> infosFromProvider = provider2.findAccessibilityNodeInfosByText(text, -1);
+                                                List<AccessibilityNodeInfo> infosFromProvider =
+                                                        provider2.findAccessibilityNodeInfosByText(
+                                                                text, -1);
                                                 if (infosFromProvider != null) {
                                                     infos4.addAll(infosFromProvider);
                                                 }
@@ -432,20 +506,28 @@ public final class AccessibilityInteractionController {
                             infos2 = null;
                         }
                         resetAccessibilityFetchFlags();
-                        updateInfosForViewportAndReturnFindNodeResult(infos2, callback, interactionId2, spec, matrixValues, interactiveRegion);
+                        updateInfosForViewportAndReturnFindNodeResult(
+                                infos2,
+                                callback,
+                                interactionId2,
+                                spec,
+                                matrixValues,
+                                interactiveRegion);
                     }
                 } catch (Throwable th2) {
                     th = th2;
                     infos = null;
                     interactionId = interactionId2;
                     resetAccessibilityFetchFlags();
-                    updateInfosForViewportAndReturnFindNodeResult(infos, callback, interactionId, spec, matrixValues, interactiveRegion);
+                    updateInfosForViewportAndReturnFindNodeResult(
+                            infos, callback, interactionId, spec, matrixValues, interactiveRegion);
                     throw th;
                 }
             }
             infos2 = null;
             resetAccessibilityFetchFlags();
-            updateInfosForViewportAndReturnFindNodeResult(infos2, callback, interactionId2, spec, matrixValues, interactiveRegion);
+            updateInfosForViewportAndReturnFindNodeResult(
+                    infos2, callback, interactionId2, spec, matrixValues, interactiveRegion);
         } catch (Throwable th3) {
             interactionId = interactionId2;
             th = th3;
@@ -453,24 +535,47 @@ public final class AccessibilityInteractionController {
         }
     }
 
-    public void takeScreenshotOfWindowClientThread(int interactionId, ScreenCapture.ScreenCaptureListener listener, IAccessibilityInteractionConnectionCallback callback) {
-        Message message = PooledLambda.obtainMessage(new QuadConsumer() { // from class: android.view.AccessibilityInteractionController$$ExternalSyntheticLambda1
-            @Override // com.android.internal.util.function.QuadConsumer
-            public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
-                ((AccessibilityInteractionController) obj).takeScreenshotOfWindowUiThread(((Integer) obj2).intValue(), (ScreenCapture.ScreenCaptureListener) obj3, (IAccessibilityInteractionConnectionCallback) obj4);
-            }
-        }, this, Integer.valueOf(interactionId), listener, callback);
+    public void takeScreenshotOfWindowClientThread(
+            int interactionId,
+            ScreenCapture.ScreenCaptureListener listener,
+            IAccessibilityInteractionConnectionCallback callback) {
+        Message message =
+                PooledLambda.obtainMessage(
+                        new QuadConsumer() { // from class:
+                                             // android.view.AccessibilityInteractionController$$ExternalSyntheticLambda1
+                            @Override // com.android.internal.util.function.QuadConsumer
+                            public final void accept(
+                                    Object obj, Object obj2, Object obj3, Object obj4) {
+                                ((AccessibilityInteractionController) obj)
+                                        .takeScreenshotOfWindowUiThread(
+                                                ((Integer) obj2).intValue(),
+                                                (ScreenCapture.ScreenCaptureListener) obj3,
+                                                (IAccessibilityInteractionConnectionCallback) obj4);
+                            }
+                        },
+                        this,
+                        Integer.valueOf(interactionId),
+                        listener,
+                        callback);
         this.mHandler.sendMessage(message);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void takeScreenshotOfWindowUiThread(int interactionId, ScreenCapture.ScreenCaptureListener listener, IAccessibilityInteractionConnectionCallback callback) {
+    public void takeScreenshotOfWindowUiThread(
+            int interactionId,
+            ScreenCapture.ScreenCaptureListener listener,
+            IAccessibilityInteractionConnectionCallback callback) {
         try {
             if ((this.mViewRootImpl.getWindowFlags() & 8192) != 0) {
                 callback.sendTakeScreenshotOfWindowError(6, interactionId);
                 return;
             }
-            ScreenCapture.LayerCaptureArgs captureArgs = new ScreenCapture.LayerCaptureArgs.Builder(this.mViewRootImpl.getSurfaceControl()).setChildrenOnly(false).setUid(Process.myUid()).build();
+            ScreenCapture.LayerCaptureArgs captureArgs =
+                    new ScreenCapture.LayerCaptureArgs.Builder(
+                                    this.mViewRootImpl.getSurfaceControl())
+                            .setChildrenOnly(false)
+                            .setUid(Process.myUid())
+                            .build();
             if (ScreenCapture.captureLayers(captureArgs, listener) != 0) {
                 callback.sendTakeScreenshotOfWindowError(1, interactionId);
             }
@@ -478,7 +583,17 @@ public final class AccessibilityInteractionController {
         }
     }
 
-    public void findFocusClientThread(long accessibilityNodeId, int focusType, Region interactiveRegion, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues) {
+    public void findFocusClientThread(
+            long accessibilityNodeId,
+            int focusType,
+            Region interactiveRegion,
+            int interactionId,
+            IAccessibilityInteractionConnectionCallback callback,
+            int flags,
+            int interrogatingPid,
+            long interrogatingTid,
+            MagnificationSpec spec,
+            float[] matrixValues) {
         Message message = this.mHandler.obtainMessage();
         message.what = 5;
         message.arg1 = flags;
@@ -507,7 +622,8 @@ public final class AccessibilityInteractionController {
         int interactionId = args.argi1;
         int accessibilityViewId = args.argi2;
         int virtualDescendantId = args.argi3;
-        IAccessibilityInteractionConnectionCallback callback = (IAccessibilityInteractionConnectionCallback) args.arg1;
+        IAccessibilityInteractionConnectionCallback callback =
+                (IAccessibilityInteractionConnectionCallback) args.arg1;
         MagnificationSpec spec = (MagnificationSpec) args.arg2;
         Region interactiveRegion = (Region) args.arg3;
         float[] matrixValues = (float[]) args.arg4;
@@ -521,7 +637,8 @@ public final class AccessibilityInteractionController {
                     case 1:
                         View target = root.findFocus();
                         if (isShown(target) && isVisibleToAccessibilityService(target)) {
-                            AccessibilityNodeProvider provider = target.getAccessibilityNodeProvider();
+                            AccessibilityNodeProvider provider =
+                                    target.getAccessibilityNodeProvider();
                             if (provider != null) {
                                 focused2 = provider.findFocus(focusType);
                             }
@@ -530,17 +647,30 @@ public final class AccessibilityInteractionController {
                             }
                             focused = focused2;
                             resetAccessibilityFetchFlags();
-                            updateInfoForViewportAndReturnFindNodeResult(focused, callback, interactionId, spec, matrixValues, interactiveRegion);
+                            updateInfoForViewportAndReturnFindNodeResult(
+                                    focused,
+                                    callback,
+                                    interactionId,
+                                    spec,
+                                    matrixValues,
+                                    interactiveRegion);
                         }
                         break;
                     case 2:
                         View host = this.mViewRootImpl.mAccessibilityFocusedHost;
-                        if (host != null && ViewRootImpl.isViewDescendantOf(host, root) && isShown(host) && isVisibleToAccessibilityService(host)) {
-                            AccessibilityNodeProvider provider2 = host.getAccessibilityNodeProvider();
+                        if (host != null
+                                && ViewRootImpl.isViewDescendantOf(host, root)
+                                && isShown(host)
+                                && isVisibleToAccessibilityService(host)) {
+                            AccessibilityNodeProvider provider2 =
+                                    host.getAccessibilityNodeProvider();
                             if (provider2 != null) {
-                                AccessibilityNodeInfo focusNode = this.mViewRootImpl.mAccessibilityFocusedVirtualView;
+                                AccessibilityNodeInfo focusNode =
+                                        this.mViewRootImpl.mAccessibilityFocusedVirtualView;
                                 if (focusNode != null) {
-                                    int virtualNodeId = AccessibilityNodeInfo.getVirtualDescendantId(focusNode.getSourceNodeId());
+                                    int virtualNodeId =
+                                            AccessibilityNodeInfo.getVirtualDescendantId(
+                                                    focusNode.getSourceNodeId());
                                     focused2 = provider2.createAccessibilityNodeInfo(virtualNodeId);
                                 }
                             } else if (virtualDescendantId == -1) {
@@ -548,7 +678,13 @@ public final class AccessibilityInteractionController {
                             }
                             focused = focused2;
                             resetAccessibilityFetchFlags();
-                            updateInfoForViewportAndReturnFindNodeResult(focused, callback, interactionId, spec, matrixValues, interactiveRegion);
+                            updateInfoForViewportAndReturnFindNodeResult(
+                                    focused,
+                                    callback,
+                                    interactionId,
+                                    spec,
+                                    matrixValues,
+                                    interactiveRegion);
                         }
                         break;
                     default:
@@ -557,15 +693,27 @@ public final class AccessibilityInteractionController {
             }
             focused = null;
             resetAccessibilityFetchFlags();
-            updateInfoForViewportAndReturnFindNodeResult(focused, callback, interactionId, spec, matrixValues, interactiveRegion);
+            updateInfoForViewportAndReturnFindNodeResult(
+                    focused, callback, interactionId, spec, matrixValues, interactiveRegion);
         } catch (Throwable th) {
             resetAccessibilityFetchFlags();
-            updateInfoForViewportAndReturnFindNodeResult(null, callback, interactionId, spec, matrixValues, interactiveRegion);
+            updateInfoForViewportAndReturnFindNodeResult(
+                    null, callback, interactionId, spec, matrixValues, interactiveRegion);
             throw th;
         }
     }
 
-    public void focusSearchClientThread(long accessibilityNodeId, int direction, Region interactiveRegion, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues) {
+    public void focusSearchClientThread(
+            long accessibilityNodeId,
+            int direction,
+            Region interactiveRegion,
+            int interactionId,
+            IAccessibilityInteractionConnectionCallback callback,
+            int flags,
+            int interrogatingPid,
+            long interrogatingTid,
+            MagnificationSpec spec,
+            float[] matrixValues) {
         Message message = this.mHandler.obtainMessage();
         message.what = 6;
         message.arg1 = flags;
@@ -592,7 +740,8 @@ public final class AccessibilityInteractionController {
         SomeArgs args = (SomeArgs) message.obj;
         int direction = args.argi2;
         int interactionId = args.argi3;
-        IAccessibilityInteractionConnectionCallback callback = (IAccessibilityInteractionConnectionCallback) args.arg1;
+        IAccessibilityInteractionConnectionCallback callback =
+                (IAccessibilityInteractionConnectionCallback) args.arg1;
         MagnificationSpec spec = (MagnificationSpec) args.arg2;
         Region interactiveRegion = (Region) args.arg3;
         float[] matrixValues = (float[]) args.arg4;
@@ -605,15 +754,25 @@ public final class AccessibilityInteractionController {
                 next = nextView.createAccessibilityNodeInfo();
             }
             resetAccessibilityFetchFlags();
-            updateInfoForViewportAndReturnFindNodeResult(next, callback, interactionId, spec, matrixValues, interactiveRegion);
+            updateInfoForViewportAndReturnFindNodeResult(
+                    next, callback, interactionId, spec, matrixValues, interactiveRegion);
         } catch (Throwable th) {
             resetAccessibilityFetchFlags();
-            updateInfoForViewportAndReturnFindNodeResult(null, callback, interactionId, spec, matrixValues, interactiveRegion);
+            updateInfoForViewportAndReturnFindNodeResult(
+                    null, callback, interactionId, spec, matrixValues, interactiveRegion);
             throw th;
         }
     }
 
-    public void performAccessibilityActionClientThread(long accessibilityNodeId, int action, Bundle arguments, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid) {
+    public void performAccessibilityActionClientThread(
+            long accessibilityNodeId,
+            int action,
+            Bundle arguments,
+            int interactionId,
+            IAccessibilityInteractionConnectionCallback callback,
+            int flags,
+            int interrogatingPid,
+            long interrogatingTid) {
         Message message = this.mHandler.obtainMessage();
         message.what = 1;
         message.arg1 = flags;
@@ -630,7 +789,10 @@ public final class AccessibilityInteractionController {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void performAccessibilityActionUiThread(Message message) {
-        if (this.mViewRootImpl.mView == null || this.mViewRootImpl.mAttachInfo == null || this.mViewRootImpl.mStopped || this.mViewRootImpl.mPausedForTransition) {
+        if (this.mViewRootImpl.mView == null
+                || this.mViewRootImpl.mAttachInfo == null
+                || this.mViewRootImpl.mStopped
+                || this.mViewRootImpl.mPausedForTransition) {
             return;
         }
         int flags = message.arg1;
@@ -639,7 +801,8 @@ public final class AccessibilityInteractionController {
         int virtualDescendantId = args.argi1;
         int action = args.argi2;
         int interactionId = args.argi3;
-        IAccessibilityInteractionConnectionCallback callback = (IAccessibilityInteractionConnectionCallback) args.arg1;
+        IAccessibilityInteractionConnectionCallback callback =
+                (IAccessibilityInteractionConnectionCallback) args.arg1;
         Bundle arguments = (Bundle) args.arg2;
         args.recycle();
         boolean succeeded = false;
@@ -649,7 +812,9 @@ public final class AccessibilityInteractionController {
             if (target != null && isShown(target) && isVisibleToAccessibilityService(target)) {
                 this.mA11yManager.notifyPerformingAction(action);
                 if (action == 16908697) {
-                    succeeded = handleClickableSpanActionUiThread(target, virtualDescendantId, arguments);
+                    succeeded =
+                            handleClickableSpanActionUiThread(
+                                    target, virtualDescendantId, arguments);
                 } else {
                     AccessibilityNodeProvider provider = target.getAccessibilityNodeProvider();
                     if (provider != null) {
@@ -695,12 +860,24 @@ public final class AccessibilityInteractionController {
                 View host = this.mViewRootImpl.mAccessibilityFocusedHost;
                 if (host != null && ViewRootImpl.isViewDescendantOf(host, root)) {
                     AccessibilityNodeProvider provider = host.getAccessibilityNodeProvider();
-                    AccessibilityNodeInfo focusNode = this.mViewRootImpl.mAccessibilityFocusedVirtualView;
+                    AccessibilityNodeInfo focusNode =
+                            this.mViewRootImpl.mAccessibilityFocusedVirtualView;
                     if (provider != null && focusNode != null) {
-                        int virtualNodeId = AccessibilityNodeInfo.getVirtualDescendantId(focusNode.getSourceNodeId());
-                        provider.performAction(virtualNodeId, AccessibilityNodeInfo.AccessibilityAction.ACTION_CLEAR_ACCESSIBILITY_FOCUS.getId(), null);
+                        int virtualNodeId =
+                                AccessibilityNodeInfo.getVirtualDescendantId(
+                                        focusNode.getSourceNodeId());
+                        provider.performAction(
+                                virtualNodeId,
+                                AccessibilityNodeInfo.AccessibilityAction
+                                        .ACTION_CLEAR_ACCESSIBILITY_FOCUS
+                                        .getId(),
+                                null);
                     } else {
-                        host.performAccessibilityAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLEAR_ACCESSIBILITY_FOCUS.getId(), null);
+                        host.performAccessibilityAction(
+                                AccessibilityNodeInfo.AccessibilityAction
+                                        .ACTION_CLEAR_ACCESSIBILITY_FOCUS
+                                        .getId(),
+                                null);
                     }
                 }
             }
@@ -718,7 +895,12 @@ public final class AccessibilityInteractionController {
     /* JADX INFO: Access modifiers changed from: private */
     public void notifyOutsideTouchUiThread() {
         View root;
-        if (this.mViewRootImpl.mView != null && this.mViewRootImpl.mAttachInfo != null && !this.mViewRootImpl.mStopped && !this.mViewRootImpl.mPausedForTransition && (root = getRootView()) != null && isShown(root)) {
+        if (this.mViewRootImpl.mView != null
+                && this.mViewRootImpl.mAttachInfo != null
+                && !this.mViewRootImpl.mStopped
+                && !this.mViewRootImpl.mPausedForTransition
+                && (root = getRootView()) != null
+                && isShown(root)) {
             long now = SystemClock.uptimeMillis();
             MotionEvent event = MotionEvent.obtain(now, now, 4, 0.0f, 0.0f, 0);
             event.setSource(4098);
@@ -750,7 +932,8 @@ public final class AccessibilityInteractionController {
         this.mA11yManager.setRequestFromAccessibilityTool(false);
     }
 
-    private void adjustIsVisibleToUserIfNeeded(AccessibilityNodeInfo info, Region interactiveRegion, MagnificationSpec spec) {
+    private void adjustIsVisibleToUserIfNeeded(
+            AccessibilityNodeInfo info, Region interactiveRegion, MagnificationSpec spec) {
         if (interactiveRegion == null || info == null) {
             return;
         }
@@ -783,7 +966,11 @@ public final class AccessibilityInteractionController {
         info.getBoundsInScreen(boundsInScreen);
         transformedBounds.set(boundsInScreen);
         windowMatrix.mapRect(transformedBounds);
-        boundsInScreen.set((int) transformedBounds.left, (int) transformedBounds.top, (int) transformedBounds.right, (int) transformedBounds.bottom);
+        boundsInScreen.set(
+                (int) transformedBounds.left,
+                (int) transformedBounds.top,
+                (int) transformedBounds.right,
+                (int) transformedBounds.bottom);
         info.setBoundsInScreen(boundsInScreen);
     }
 
@@ -793,27 +980,42 @@ public final class AccessibilityInteractionController {
     }
 
     private void associateLeashedParentIfNeeded(AccessibilityNodeInfo info) {
-        if (info == null || shouldBypassAssociateLeashedParent() || this.mViewRootImpl.mView.getAccessibilityViewId() != AccessibilityNodeInfo.getAccessibilityViewId(info.getSourceNodeId())) {
+        if (info == null
+                || shouldBypassAssociateLeashedParent()
+                || this.mViewRootImpl.mView.getAccessibilityViewId()
+                        != AccessibilityNodeInfo.getAccessibilityViewId(info.getSourceNodeId())) {
             return;
         }
-        info.setLeashedParent(this.mViewRootImpl.mAttachInfo.mLeashedParentToken, this.mViewRootImpl.mAttachInfo.mLeashedParentAccessibilityViewId);
+        info.setLeashedParent(
+                this.mViewRootImpl.mAttachInfo.mLeashedParentToken,
+                this.mViewRootImpl.mAttachInfo.mLeashedParentAccessibilityViewId);
     }
 
     private boolean shouldBypassAssociateLeashedParent() {
-        return this.mViewRootImpl.mAttachInfo.mLeashedParentToken == null && this.mViewRootImpl.mAttachInfo.mLeashedParentAccessibilityViewId == -1;
+        return this.mViewRootImpl.mAttachInfo.mLeashedParentToken == null
+                && this.mViewRootImpl.mAttachInfo.mLeashedParentAccessibilityViewId == -1;
     }
 
-    private boolean shouldApplyAppScaleAndMagnificationSpec(float appScale, MagnificationSpec spec) {
+    private boolean shouldApplyAppScaleAndMagnificationSpec(
+            float appScale, MagnificationSpec spec) {
         return (appScale == 1.0f && (spec == null || spec.isNop())) ? false : true;
     }
 
-    private void updateInfosForViewPort(List<AccessibilityNodeInfo> infos, MagnificationSpec spec, float[] matrixValues, Region interactiveRegion) {
+    private void updateInfosForViewPort(
+            List<AccessibilityNodeInfo> infos,
+            MagnificationSpec spec,
+            float[] matrixValues,
+            Region interactiveRegion) {
         for (int i = 0; i < infos.size(); i++) {
             updateInfoForViewPort(infos.get(i), spec, matrixValues, interactiveRegion);
         }
     }
 
-    private void updateInfoForViewPort(AccessibilityNodeInfo info, MagnificationSpec spec, float[] matrixValues, Region interactiveRegion) {
+    private void updateInfoForViewPort(
+            AccessibilityNodeInfo info,
+            MagnificationSpec spec,
+            float[] matrixValues,
+            Region interactiveRegion) {
         associateLeashedParentIfNeeded(info);
         applyHostWindowMatrixIfNeeded(info);
         transformBoundsWithScreenMatrix(info, matrixValues);
@@ -835,7 +1037,9 @@ public final class AccessibilityInteractionController {
             transformMatrix.preScale(applicationScale, applicationScale);
         }
         if (this.mViewRootImpl.mAttachInfo.mWindowMatrixInEmbeddedHierarchy == null) {
-            transformMatrix.preTranslate(-this.mViewRootImpl.mAttachInfo.mWindowLeft, -this.mViewRootImpl.mAttachInfo.mWindowTop);
+            transformMatrix.preTranslate(
+                    -this.mViewRootImpl.mAttachInfo.mWindowLeft,
+                    -this.mViewRootImpl.mAttachInfo.mWindowTop);
         }
         if (transformMatrix.isIdentity()) {
             return;
@@ -845,7 +1049,11 @@ public final class AccessibilityInteractionController {
         info.setBoundsInScreen(boundInScreen);
         if (info.hasExtras()) {
             Bundle extras = info.getExtras();
-            RectF[] textLocations = (RectF[]) extras.getParcelableArray(AccessibilityNodeInfo.EXTRA_DATA_TEXT_CHARACTER_LOCATION_KEY, RectF.class);
+            RectF[] textLocations =
+                    (RectF[])
+                            extras.getParcelableArray(
+                                    AccessibilityNodeInfo.EXTRA_DATA_TEXT_CHARACTER_LOCATION_KEY,
+                                    RectF.class);
             if (textLocations != null) {
                 for (RectF textLocation : textLocations) {
                     if (textLocation != null) {
@@ -857,7 +1065,8 @@ public final class AccessibilityInteractionController {
         applyTransformMatrixToBoundsInParentIfNeeded(info, transformMatrix);
     }
 
-    private void applyTransformMatrixToBoundsInParentIfNeeded(AccessibilityNodeInfo info, Matrix transformMatrix) {
+    private void applyTransformMatrixToBoundsInParentIfNeeded(
+            AccessibilityNodeInfo info, Matrix transformMatrix) {
         float[] screenMatrixValues = new float[9];
         transformMatrix.getValues(screenMatrixValues);
         Matrix scaleMatrix = new Matrix();
@@ -874,31 +1083,45 @@ public final class AccessibilityInteractionController {
         info.setBoundsInParent(boundsInParent);
     }
 
-    private void updateInfosForViewportAndReturnFindNodeResult(List<AccessibilityNodeInfo> infos, IAccessibilityInteractionConnectionCallback callback, int interactionId, MagnificationSpec spec, float[] matrixValues, Region interactiveRegion) {
+    private void updateInfosForViewportAndReturnFindNodeResult(
+            List<AccessibilityNodeInfo> infos,
+            IAccessibilityInteractionConnectionCallback callback,
+            int interactionId,
+            MagnificationSpec spec,
+            float[] matrixValues,
+            Region interactiveRegion) {
         if (infos != null) {
             updateInfosForViewPort(infos, spec, matrixValues, interactiveRegion);
         }
         returnFindNodesResult(infos, callback, interactionId);
     }
 
-    private void returnFindNodeResult(AccessibilityNodeInfo info, IAccessibilityInteractionConnectionCallback callback, int interactionId) {
+    private void returnFindNodeResult(
+            AccessibilityNodeInfo info,
+            IAccessibilityInteractionConnectionCallback callback,
+            int interactionId) {
         try {
             callback.setFindAccessibilityNodeInfoResult(info, interactionId);
         } catch (RemoteException e) {
         }
     }
 
-    private void returnFindNodeResult(SatisfiedFindAccessibilityNodeByAccessibilityIdRequest satisfiedRequest) {
+    private void returnFindNodeResult(
+            SatisfiedFindAccessibilityNodeByAccessibilityIdRequest satisfiedRequest) {
         try {
             AccessibilityNodeInfo info = satisfiedRequest.mSatisfiedRequestNode;
-            IAccessibilityInteractionConnectionCallback callback = satisfiedRequest.mSatisfiedRequestCallback;
+            IAccessibilityInteractionConnectionCallback callback =
+                    satisfiedRequest.mSatisfiedRequestCallback;
             int interactionId = satisfiedRequest.mSatisfiedRequestInteractionId;
             callback.setFindAccessibilityNodeInfoResult(info, interactionId);
         } catch (RemoteException e) {
         }
     }
 
-    private void returnFindNodesResult(List<AccessibilityNodeInfo> infos, IAccessibilityInteractionConnectionCallback callback, int interactionId) {
+    private void returnFindNodesResult(
+            List<AccessibilityNodeInfo> infos,
+            IAccessibilityInteractionConnectionCallback callback,
+            int interactionId) {
         try {
             callback.setFindAccessibilityNodeInfosResult(infos, interactionId);
             if (infos != null) {
@@ -909,7 +1132,8 @@ public final class AccessibilityInteractionController {
         }
     }
 
-    private SatisfiedFindAccessibilityNodeByAccessibilityIdRequest getSatisfiedRequestInPrefetch(AccessibilityNodeInfo requestedNode, List<AccessibilityNodeInfo> infos, int flags) {
+    private SatisfiedFindAccessibilityNodeByAccessibilityIdRequest getSatisfiedRequestInPrefetch(
+            AccessibilityNodeInfo requestedNode, List<AccessibilityNodeInfo> infos, int flags) {
         SatisfiedFindAccessibilityNodeByAccessibilityIdRequest satisfiedRequest = null;
         synchronized (this.mLock) {
             int i = 0;
@@ -923,12 +1147,22 @@ public final class AccessibilityInteractionController {
                     SomeArgs args = (SomeArgs) pendingMessage.obj;
                     int accessibilityViewId = args.argi1;
                     int virtualDescendantId = args.argi2;
-                    AccessibilityNodeInfo satisfiedRequestNode = nodeWithIdFromList(requestedNode, infos, AccessibilityNodeInfo.makeNodeId(accessibilityViewId, virtualDescendantId));
+                    AccessibilityNodeInfo satisfiedRequestNode =
+                            nodeWithIdFromList(
+                                    requestedNode,
+                                    infos,
+                                    AccessibilityNodeInfo.makeNodeId(
+                                            accessibilityViewId, virtualDescendantId));
                     if (satisfiedRequestNode != null) {
                         this.mHandler.removeMessages(2, pendingMessage.obj);
-                        IAccessibilityInteractionConnectionCallback satisfiedRequestCallback = (IAccessibilityInteractionConnectionCallback) args.arg1;
+                        IAccessibilityInteractionConnectionCallback satisfiedRequestCallback =
+                                (IAccessibilityInteractionConnectionCallback) args.arg1;
                         int satisfiedRequestInteractionId = args.argi3;
-                        satisfiedRequest = new SatisfiedFindAccessibilityNodeByAccessibilityIdRequest(satisfiedRequestNode, satisfiedRequestCallback, satisfiedRequestInteractionId);
+                        satisfiedRequest =
+                                new SatisfiedFindAccessibilityNodeByAccessibilityIdRequest(
+                                        satisfiedRequestNode,
+                                        satisfiedRequestCallback,
+                                        satisfiedRequestInteractionId);
                         args.recycle();
                         break;
                     }
@@ -936,14 +1170,16 @@ public final class AccessibilityInteractionController {
                 i++;
             }
             this.mPendingFindNodeByIdMessages.clear();
-            if (satisfiedRequest != null && satisfiedRequest.mSatisfiedRequestNode != requestedNode) {
+            if (satisfiedRequest != null
+                    && satisfiedRequest.mSatisfiedRequestNode != requestedNode) {
                 infos.remove(satisfiedRequest.mSatisfiedRequestNode);
             }
         }
         return satisfiedRequest;
     }
 
-    private AccessibilityNodeInfo nodeWithIdFromList(AccessibilityNodeInfo requestedNode, List<AccessibilityNodeInfo> infos, long nodeId) {
+    private AccessibilityNodeInfo nodeWithIdFromList(
+            AccessibilityNodeInfo requestedNode, List<AccessibilityNodeInfo> infos, long nodeId) {
         if (requestedNode != null && requestedNode.getSourceNodeId() == nodeId) {
             return requestedNode;
         }
@@ -956,7 +1192,10 @@ public final class AccessibilityInteractionController {
         return null;
     }
 
-    private void returnPrefetchResult(int interactionId, List<AccessibilityNodeInfo> infos, IAccessibilityInteractionConnectionCallback callback) {
+    private void returnPrefetchResult(
+            int interactionId,
+            List<AccessibilityNodeInfo> infos,
+            IAccessibilityInteractionConnectionCallback callback) {
         if (infos.size() > 0) {
             try {
                 callback.setPrefetchAccessibilityNodeInfoResult(infos, interactionId);
@@ -965,14 +1204,23 @@ public final class AccessibilityInteractionController {
         }
     }
 
-    private void updateInfoForViewportAndReturnFindNodeResult(AccessibilityNodeInfo info, IAccessibilityInteractionConnectionCallback callback, int interactionId, MagnificationSpec spec, float[] matrixValues, Region interactiveRegion) {
+    private void updateInfoForViewportAndReturnFindNodeResult(
+            AccessibilityNodeInfo info,
+            IAccessibilityInteractionConnectionCallback callback,
+            int interactionId,
+            MagnificationSpec spec,
+            float[] matrixValues,
+            Region interactiveRegion) {
         updateInfoForViewPort(info, spec, matrixValues, interactiveRegion);
         returnFindNodeResult(info, callback, interactionId);
     }
 
-    private boolean handleClickableSpanActionUiThread(View view, int virtualDescendantId, Bundle arguments) {
+    private boolean handleClickableSpanActionUiThread(
+            View view, int virtualDescendantId, Bundle arguments) {
         ClickableSpan clickableSpan;
-        Parcelable span = arguments.getParcelable(AccessibilityNodeInfo.ACTION_ARGUMENT_ACCESSIBLE_CLICKABLE_SPAN);
+        Parcelable span =
+                arguments.getParcelable(
+                        AccessibilityNodeInfo.ACTION_ARGUMENT_ACCESSIBLE_CLICKABLE_SPAN);
         if (!(span instanceof AccessibilityClickableSpan)) {
             return false;
         }
@@ -983,7 +1231,11 @@ public final class AccessibilityInteractionController {
         } else if (virtualDescendantId == -1) {
             infoWithSpan = view.createAccessibilityNodeInfo();
         }
-        if (infoWithSpan == null || (clickableSpan = ((AccessibilityClickableSpan) span).findClickableSpan(infoWithSpan.getOriginalText())) == null) {
+        if (infoWithSpan == null
+                || (clickableSpan =
+                                ((AccessibilityClickableSpan) span)
+                                        .findClickableSpan(infoWithSpan.getOriginalText()))
+                        == null) {
             return false;
         }
         clickableSpan.onClick(view);
@@ -991,7 +1243,11 @@ public final class AccessibilityInteractionController {
     }
 
     private static void roundRectFToRect(RectF sourceRectF, Rect outRect) {
-        outRect.set((int) (sourceRectF.left + 0.5d), (int) (sourceRectF.top + 0.5d), (int) (sourceRectF.right + 0.5d), (int) (sourceRectF.bottom + 0.5d));
+        outRect.set(
+                (int) (sourceRectF.left + 0.5d),
+                (int) (sourceRectF.top + 0.5d),
+                (int) (sourceRectF.right + 0.5d),
+                (int) (sourceRectF.bottom + 0.5d));
     }
 
     public void destroy() {
@@ -1009,7 +1265,8 @@ public final class AccessibilityInteractionController {
             this.mTempViewList = new ArrayList<>();
         }
 
-        public void prefetchAccessibilityNodeInfos(View view, AccessibilityNodeInfo root, List<AccessibilityNodeInfo> outInfos) {
+        public void prefetchAccessibilityNodeInfos(
+                View view, AccessibilityNodeInfo root, List<AccessibilityNodeInfo> outInfos) {
             if (root == null) {
                 return;
             }
@@ -1030,7 +1287,8 @@ public final class AccessibilityInteractionController {
                     prefetchPredecessorsOfVirtualNode(root, view, provider, outInfos);
                 }
                 if (isFlagSet(2)) {
-                    prefetchSiblingsOfVirtualNode(root, view, provider, outInfos, prefetchPredecessors);
+                    prefetchSiblingsOfVirtualNode(
+                            root, view, provider, outInfos, prefetchPredecessors);
                 }
                 if (isFlagSet(4)) {
                     prefetchDescendantsOfVirtualNode(root, provider, outInfos);
@@ -1039,17 +1297,24 @@ public final class AccessibilityInteractionController {
             if ((!isFlagSet(8) && !isFlagSet(16)) || shouldStopPrefetching(outInfos)) {
                 return;
             }
-            PrefetchDeque<DequeNode> deque = AccessibilityInteractionController.this.new PrefetchDeque<>(this.mFetchFlags & 28, outInfos);
+            PrefetchDeque<DequeNode> deque =
+                    AccessibilityInteractionController.this
+                    .new PrefetchDeque<>(this.mFetchFlags & 28, outInfos);
             addChildrenOfRoot(view, root, provider, deque);
             deque.performTraversalAndPrefetch();
         }
 
-        private void addChildrenOfRoot(View root, AccessibilityNodeInfo rootInfo, AccessibilityNodeProvider rootProvider, PrefetchDeque deque) {
+        private void addChildrenOfRoot(
+                View root,
+                AccessibilityNodeInfo rootInfo,
+                AccessibilityNodeProvider rootProvider,
+                PrefetchDeque deque) {
             DequeNode rootDequeNode;
             if (rootProvider == null) {
                 rootDequeNode = AccessibilityInteractionController.this.new ViewNode(root);
             } else {
-                rootDequeNode = AccessibilityInteractionController.this.new VirtualNode(-1L, rootProvider);
+                rootDequeNode =
+                        AccessibilityInteractionController.this.new VirtualNode(-1L, rootProvider);
             }
             rootDequeNode.addChildren(rootInfo, deque);
         }
@@ -1059,17 +1324,23 @@ public final class AccessibilityInteractionController {
         }
 
         public boolean shouldStopPrefetching(List prefetchedInfos) {
-            return (AccessibilityInteractionController.this.mHandler.hasUserInteractiveMessagesWaiting() && this.mInterruptPrefetch) || prefetchedInfos.size() >= 50;
+            return (AccessibilityInteractionController.this.mHandler
+                                    .hasUserInteractiveMessagesWaiting()
+                            && this.mInterruptPrefetch)
+                    || prefetchedInfos.size() >= 50;
         }
 
-        private void enforceNodeTreeConsistent(AccessibilityNodeInfo root, List<AccessibilityNodeInfo> nodes) {
+        private void enforceNodeTreeConsistent(
+                AccessibilityNodeInfo root, List<AccessibilityNodeInfo> nodes) {
             LongSparseArray<AccessibilityNodeInfo> nodeMap = new LongSparseArray<>();
             int nodeCount = nodes.size();
             for (int i = 0; i < nodeCount; i++) {
                 AccessibilityNodeInfo node = nodes.get(i);
                 nodeMap.put(node.getSourceNodeId(), node);
             }
-            for (AccessibilityNodeInfo parent = root; parent != null; parent = nodeMap.get(parent.getParentNodeId())) {
+            for (AccessibilityNodeInfo parent = root;
+                    parent != null;
+                    parent = nodeMap.get(parent.getParentNodeId())) {
                 root = parent;
             }
             AccessibilityNodeInfo accessFocus = null;
@@ -1080,17 +1351,38 @@ public final class AccessibilityInteractionController {
             while (!fringe.isEmpty()) {
                 AccessibilityNodeInfo current = fringe.poll();
                 if (!seen.add(current)) {
-                    throw new IllegalStateException("Duplicate node: " + current + " in window:" + AccessibilityInteractionController.this.mViewRootImpl.mAttachInfo.mAccessibilityWindowId);
+                    throw new IllegalStateException(
+                            "Duplicate node: "
+                                    + current
+                                    + " in window:"
+                                    + AccessibilityInteractionController.this
+                                            .mViewRootImpl
+                                            .mAttachInfo
+                                            .mAccessibilityWindowId);
                 }
                 if (current.isAccessibilityFocused()) {
                     if (accessFocus != null) {
-                        throw new IllegalStateException("Duplicate accessibility focus:" + current + " in window:" + AccessibilityInteractionController.this.mViewRootImpl.mAttachInfo.mAccessibilityWindowId);
+                        throw new IllegalStateException(
+                                "Duplicate accessibility focus:"
+                                        + current
+                                        + " in window:"
+                                        + AccessibilityInteractionController.this
+                                                .mViewRootImpl
+                                                .mAttachInfo
+                                                .mAccessibilityWindowId);
                     }
                     accessFocus = current;
                 }
                 if (current.isFocused()) {
                     if (inputFocus != null) {
-                        throw new IllegalStateException("Duplicate input focus: " + current + " in window:" + AccessibilityInteractionController.this.mViewRootImpl.mAttachInfo.mAccessibilityWindowId);
+                        throw new IllegalStateException(
+                                "Duplicate input focus: "
+                                        + current
+                                        + " in window:"
+                                        + AccessibilityInteractionController.this
+                                                .mViewRootImpl
+                                                .mAttachInfo
+                                                .mAccessibilityWindowId);
                     }
                     inputFocus = current;
                 }
@@ -1111,11 +1403,14 @@ public final class AccessibilityInteractionController {
             }
         }
 
-        private void prefetchPredecessorsOfRealNode(View view, List<AccessibilityNodeInfo> outInfos) {
+        private void prefetchPredecessorsOfRealNode(
+                View view, List<AccessibilityNodeInfo> outInfos) {
             if (shouldStopPrefetching(outInfos)) {
                 return;
             }
-            for (ViewParent parent = view.getParentForAccessibility(); (parent instanceof View) && !shouldStopPrefetching(outInfos); parent = parent.getParentForAccessibility()) {
+            for (ViewParent parent = view.getParentForAccessibility();
+                    (parent instanceof View) && !shouldStopPrefetching(outInfos);
+                    parent = parent.getParentForAccessibility()) {
                 View parentView = (View) parent;
                 AccessibilityNodeInfo info = parentView.createAccessibilityNodeInfo();
                 if (info != null) {
@@ -1124,7 +1419,10 @@ public final class AccessibilityInteractionController {
             }
         }
 
-        private void prefetchSiblingsOfRealNode(View current, List<AccessibilityNodeInfo> outInfos, boolean predecessorsPrefetched) {
+        private void prefetchSiblingsOfRealNode(
+                View current,
+                List<AccessibilityNodeInfo> outInfos,
+                boolean predecessorsPrefetched) {
             AccessibilityNodeInfo info;
             if (shouldStopPrefetching(outInfos)) {
                 return;
@@ -1136,7 +1434,8 @@ public final class AccessibilityInteractionController {
                 children.clear();
                 if (!predecessorsPrefetched) {
                     try {
-                        AccessibilityNodeInfo parentInfo = ((ViewGroup) parent).createAccessibilityNodeInfo();
+                        AccessibilityNodeInfo parentInfo =
+                                ((ViewGroup) parent).createAccessibilityNodeInfo();
                         if (parentInfo != null) {
                             outInfos.add(parentInfo);
                         }
@@ -1151,7 +1450,8 @@ public final class AccessibilityInteractionController {
                         return;
                     }
                     View child = children.get(i);
-                    if (child.getAccessibilityViewId() != current.getAccessibilityViewId() && AccessibilityInteractionController.this.isShown(child)) {
+                    if (child.getAccessibilityViewId() != current.getAccessibilityViewId()
+                            && AccessibilityInteractionController.this.isShown(child)) {
                         AccessibilityNodeProvider provider = child.getAccessibilityNodeProvider();
                         if (provider == null) {
                             info = child.createAccessibilityNodeInfo();
@@ -1166,7 +1466,8 @@ public final class AccessibilityInteractionController {
             }
         }
 
-        private void prefetchDescendantsOfRealNode(View root, List<AccessibilityNodeInfo> outInfos) {
+        private void prefetchDescendantsOfRealNode(
+                View root, List<AccessibilityNodeInfo> outInfos) {
             if (shouldStopPrefetching(outInfos) || !(root instanceof ViewGroup)) {
                 return;
             }
@@ -1206,7 +1507,10 @@ public final class AccessibilityInteractionController {
                         if (virtualRoot == null) {
                             prefetchDescendantsOfRealNode(addedChild, outInfos);
                         } else {
-                            prefetchDescendantsOfVirtualNode(virtualRoot, addedChild.getAccessibilityNodeProvider(), outInfos);
+                            prefetchDescendantsOfVirtualNode(
+                                    virtualRoot,
+                                    addedChild.getAccessibilityNodeProvider(),
+                                    outInfos);
                         }
                     }
                 }
@@ -1215,14 +1519,21 @@ public final class AccessibilityInteractionController {
             }
         }
 
-        private void prefetchPredecessorsOfVirtualNode(AccessibilityNodeInfo root, View providerHost, AccessibilityNodeProvider provider, List<AccessibilityNodeInfo> outInfos) {
+        private void prefetchPredecessorsOfVirtualNode(
+                AccessibilityNodeInfo root,
+                View providerHost,
+                AccessibilityNodeProvider provider,
+                List<AccessibilityNodeInfo> outInfos) {
             int initialResultSize = outInfos.size();
             long parentNodeId = root.getParentNodeId();
             int accessibilityViewId = AccessibilityNodeInfo.getAccessibilityViewId(parentNodeId);
             while (accessibilityViewId != Integer.MAX_VALUE && !shouldStopPrefetching(outInfos)) {
-                int virtualDescendantId = AccessibilityNodeInfo.getVirtualDescendantId(parentNodeId);
-                if (virtualDescendantId != -1 || accessibilityViewId == providerHost.getAccessibilityViewId()) {
-                    AccessibilityNodeInfo parent = provider.createAccessibilityNodeInfo(virtualDescendantId);
+                int virtualDescendantId =
+                        AccessibilityNodeInfo.getVirtualDescendantId(parentNodeId);
+                if (virtualDescendantId != -1
+                        || accessibilityViewId == providerHost.getAccessibilityViewId()) {
+                    AccessibilityNodeInfo parent =
+                            provider.createAccessibilityNodeInfo(virtualDescendantId);
                     if (parent == null) {
                         int currentResultSize = outInfos.size();
                         for (int i = currentResultSize - 1; i >= initialResultSize; i--) {
@@ -1232,7 +1543,8 @@ public final class AccessibilityInteractionController {
                     }
                     outInfos.add(parent);
                     parentNodeId = parent.getParentNodeId();
-                    accessibilityViewId = AccessibilityNodeInfo.getAccessibilityViewId(parentNodeId);
+                    accessibilityViewId =
+                            AccessibilityNodeInfo.getAccessibilityViewId(parentNodeId);
                 } else {
                     prefetchPredecessorsOfRealNode(providerHost, outInfos);
                     return;
@@ -1240,15 +1552,24 @@ public final class AccessibilityInteractionController {
             }
         }
 
-        private void prefetchSiblingsOfVirtualNode(AccessibilityNodeInfo current, View providerHost, AccessibilityNodeProvider provider, List<AccessibilityNodeInfo> outInfos, boolean predecessorsPrefetched) {
+        private void prefetchSiblingsOfVirtualNode(
+                AccessibilityNodeInfo current,
+                View providerHost,
+                AccessibilityNodeProvider provider,
+                List<AccessibilityNodeInfo> outInfos,
+                boolean predecessorsPrefetched) {
             long parentNodeId = current.getParentNodeId();
-            int parentAccessibilityViewId = AccessibilityNodeInfo.getAccessibilityViewId(parentNodeId);
-            int parentVirtualDescendantId = AccessibilityNodeInfo.getVirtualDescendantId(parentNodeId);
-            if (parentVirtualDescendantId == -1 && parentAccessibilityViewId != providerHost.getAccessibilityViewId()) {
+            int parentAccessibilityViewId =
+                    AccessibilityNodeInfo.getAccessibilityViewId(parentNodeId);
+            int parentVirtualDescendantId =
+                    AccessibilityNodeInfo.getVirtualDescendantId(parentNodeId);
+            if (parentVirtualDescendantId == -1
+                    && parentAccessibilityViewId != providerHost.getAccessibilityViewId()) {
                 prefetchSiblingsOfRealNode(providerHost, outInfos, predecessorsPrefetched);
                 return;
             }
-            AccessibilityNodeInfo parent = provider.createAccessibilityNodeInfo(parentVirtualDescendantId);
+            AccessibilityNodeInfo parent =
+                    provider.createAccessibilityNodeInfo(parentVirtualDescendantId);
             if (parent != null) {
                 if (!predecessorsPrefetched) {
                     outInfos.add(parent);
@@ -1257,8 +1578,10 @@ public final class AccessibilityInteractionController {
                 for (int i = 0; i < childCount && !shouldStopPrefetching(outInfos); i++) {
                     long childNodeId = parent.getChildId(i);
                     if (childNodeId != current.getSourceNodeId()) {
-                        int childVirtualDescendantId = AccessibilityNodeInfo.getVirtualDescendantId(childNodeId);
-                        AccessibilityNodeInfo child = provider.createAccessibilityNodeInfo(childVirtualDescendantId);
+                        int childVirtualDescendantId =
+                                AccessibilityNodeInfo.getVirtualDescendantId(childNodeId);
+                        AccessibilityNodeInfo child =
+                                provider.createAccessibilityNodeInfo(childVirtualDescendantId);
                         if (child != null) {
                             outInfos.add(child);
                         }
@@ -1267,7 +1590,10 @@ public final class AccessibilityInteractionController {
             }
         }
 
-        private void prefetchDescendantsOfVirtualNode(AccessibilityNodeInfo root, AccessibilityNodeProvider provider, List<AccessibilityNodeInfo> outInfos) {
+        private void prefetchDescendantsOfVirtualNode(
+                AccessibilityNodeInfo root,
+                AccessibilityNodeProvider provider,
+                List<AccessibilityNodeInfo> outInfos) {
             int initialOutInfosSize = outInfos.size();
             int childCount = root.getChildCount();
             for (int i = 0; i < childCount; i++) {
@@ -1275,7 +1601,9 @@ public final class AccessibilityInteractionController {
                     return;
                 }
                 long childNodeId = root.getChildId(i);
-                AccessibilityNodeInfo child = provider.createAccessibilityNodeInfo(AccessibilityNodeInfo.getVirtualDescendantId(childNodeId));
+                AccessibilityNodeInfo child =
+                        provider.createAccessibilityNodeInfo(
+                                AccessibilityNodeInfo.getVirtualDescendantId(childNodeId));
                 if (child != null) {
                     outInfos.add(child);
                 }
@@ -1283,7 +1611,8 @@ public final class AccessibilityInteractionController {
             if (!shouldStopPrefetching(outInfos)) {
                 int addedChildCount = outInfos.size() - initialOutInfosSize;
                 for (int i2 = 0; i2 < addedChildCount; i2++) {
-                    prefetchDescendantsOfVirtualNode(outInfos.get(initialOutInfosSize + i2), provider, outInfos);
+                    prefetchDescendantsOfVirtualNode(
+                            outInfos.get(initialOutInfosSize + i2), provider, outInfos);
                 }
             }
         }
@@ -1343,16 +1672,20 @@ public final class AccessibilityInteractionController {
             int type = message.what;
             switch (type) {
                 case 1:
-                    AccessibilityInteractionController.this.performAccessibilityActionUiThread(message);
+                    AccessibilityInteractionController.this.performAccessibilityActionUiThread(
+                            message);
                     return;
                 case 2:
-                    AccessibilityInteractionController.this.findAccessibilityNodeInfoByAccessibilityIdUiThread(message);
+                    AccessibilityInteractionController.this
+                            .findAccessibilityNodeInfoByAccessibilityIdUiThread(message);
                     return;
                 case 3:
-                    AccessibilityInteractionController.this.findAccessibilityNodeInfosByViewIdUiThread(message);
+                    AccessibilityInteractionController.this
+                            .findAccessibilityNodeInfosByViewIdUiThread(message);
                     return;
                 case 4:
-                    AccessibilityInteractionController.this.findAccessibilityNodeInfosByTextUiThread(message);
+                    AccessibilityInteractionController.this
+                            .findAccessibilityNodeInfosByTextUiThread(message);
                     return;
                 case 5:
                     AccessibilityInteractionController.this.findFocusUiThread(message);
@@ -1361,7 +1694,8 @@ public final class AccessibilityInteractionController {
                     AccessibilityInteractionController.this.focusSearchUiThread(message);
                     return;
                 case 7:
-                    AccessibilityInteractionController.this.prepareForExtraDataRequestUiThread(message);
+                    AccessibilityInteractionController.this.prepareForExtraDataRequestUiThread(
+                            message);
                     return;
                 case 8:
                     AccessibilityInteractionController.this.requestPreparerDoneUiThread(message);
@@ -1409,7 +1743,10 @@ public final class AccessibilityInteractionController {
 
         @Override // java.util.function.Predicate
         public boolean test(View view) {
-            if (view.getId() == this.mViewId && AccessibilityInteractionController.this.isShown(view) && AccessibilityInteractionController.this.isVisibleToAccessibilityService(view)) {
+            if (view.getId() == this.mViewId
+                    && AccessibilityInteractionController.this.isShown(view)
+                    && AccessibilityInteractionController.this.isVisibleToAccessibilityService(
+                            view)) {
                 this.mInfos.add(view.createAccessibilityNodeInfo());
                 return false;
             }
@@ -1434,7 +1771,10 @@ public final class AccessibilityInteractionController {
         final int mSatisfiedRequestInteractionId;
         final AccessibilityNodeInfo mSatisfiedRequestNode;
 
-        SatisfiedFindAccessibilityNodeByAccessibilityIdRequest(AccessibilityNodeInfo satisfiedRequestNode, IAccessibilityInteractionConnectionCallback satisfiedRequestCallback, int satisfiedRequestInteractionId) {
+        SatisfiedFindAccessibilityNodeByAccessibilityIdRequest(
+                AccessibilityNodeInfo satisfiedRequestNode,
+                IAccessibilityInteractionConnectionCallback satisfiedRequestCallback,
+                int satisfiedRequestInteractionId) {
             this.mSatisfiedRequestNode = satisfiedRequestNode;
             this.mSatisfiedRequestCallback = satisfiedRequestCallback;
             this.mSatisfiedRequestInteractionId = satisfiedRequestInteractionId;
@@ -1458,7 +1798,8 @@ public final class AccessibilityInteractionController {
                     if (childInfo != null) {
                         this.mPrefetchOutput.add(childInfo);
                     }
-                    if (AccessibilityInteractionController.this.mPrefetcher.shouldStopPrefetching(this.mPrefetchOutput)) {
+                    if (AccessibilityInteractionController.this.mPrefetcher.shouldStopPrefetching(
+                            this.mPrefetchOutput)) {
                         return;
                     } else {
                         child.addChildren(childInfo, this);
@@ -1527,7 +1868,8 @@ public final class AccessibilityInteractionController {
                 if (provider == null) {
                     deque.push(AccessibilityInteractionController.this.new ViewNode(child));
                 } else {
-                    deque.push(AccessibilityInteractionController.this.new VirtualNode(-1L, provider));
+                    deque.push(
+                            AccessibilityInteractionController.this.new VirtualNode(-1L, provider));
                 }
             }
         }
@@ -1547,7 +1889,8 @@ public final class AccessibilityInteractionController {
             if (this.mProvider == null) {
                 return null;
             }
-            return this.mProvider.createAccessibilityNodeInfo(AccessibilityNodeInfo.getVirtualDescendantId(this.mInfoId));
+            return this.mProvider.createAccessibilityNodeInfo(
+                    AccessibilityNodeInfo.getVirtualDescendantId(this.mInfoId));
         }
 
         @Override // android.view.AccessibilityInteractionController.DequeNode
@@ -1559,28 +1902,50 @@ public final class AccessibilityInteractionController {
             if (deque.isStack()) {
                 for (int i = childCount - 1; i >= 0; i--) {
                     long childNodeId = virtualRoot.getChildId(i);
-                    deque.push(AccessibilityInteractionController.this.new VirtualNode(childNodeId, this.mProvider));
+                    deque.push(
+                            AccessibilityInteractionController.this
+                            .new VirtualNode(childNodeId, this.mProvider));
                 }
                 return;
             }
             for (int i2 = 0; i2 < childCount; i2++) {
                 long childNodeId2 = virtualRoot.getChildId(i2);
-                deque.push(AccessibilityInteractionController.this.new VirtualNode(childNodeId2, this.mProvider));
+                deque.push(
+                        AccessibilityInteractionController.this
+                        .new VirtualNode(childNodeId2, this.mProvider));
             }
         }
     }
 
-    public void attachAccessibilityOverlayToWindowClientThread(SurfaceControl sc, int interactionId, IAccessibilityInteractionConnectionCallback callback) {
-        this.mHandler.sendMessage(PooledLambda.obtainMessage(new QuadConsumer() { // from class: android.view.AccessibilityInteractionController$$ExternalSyntheticLambda0
-            @Override // com.android.internal.util.function.QuadConsumer
-            public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
-                ((AccessibilityInteractionController) obj).attachAccessibilityOverlayToWindowUiThread((SurfaceControl) obj2, ((Integer) obj3).intValue(), (IAccessibilityInteractionConnectionCallback) obj4);
-            }
-        }, this, sc, Integer.valueOf(interactionId), callback));
+    public void attachAccessibilityOverlayToWindowClientThread(
+            SurfaceControl sc,
+            int interactionId,
+            IAccessibilityInteractionConnectionCallback callback) {
+        this.mHandler.sendMessage(
+                PooledLambda.obtainMessage(
+                        new QuadConsumer() { // from class:
+                                             // android.view.AccessibilityInteractionController$$ExternalSyntheticLambda0
+                            @Override // com.android.internal.util.function.QuadConsumer
+                            public final void accept(
+                                    Object obj, Object obj2, Object obj3, Object obj4) {
+                                ((AccessibilityInteractionController) obj)
+                                        .attachAccessibilityOverlayToWindowUiThread(
+                                                (SurfaceControl) obj2,
+                                                ((Integer) obj3).intValue(),
+                                                (IAccessibilityInteractionConnectionCallback) obj4);
+                            }
+                        },
+                        this,
+                        sc,
+                        Integer.valueOf(interactionId),
+                        callback));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void attachAccessibilityOverlayToWindowUiThread(SurfaceControl sc, int interactionId, IAccessibilityInteractionConnectionCallback callback) {
+    public void attachAccessibilityOverlayToWindowUiThread(
+            SurfaceControl sc,
+            int interactionId,
+            IAccessibilityInteractionConnectionCallback callback) {
         SurfaceControl parent = this.mViewRootImpl.getSurfaceControl();
         if (!parent.isValid()) {
             try {

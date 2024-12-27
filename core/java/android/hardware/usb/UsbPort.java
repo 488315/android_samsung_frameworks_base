@@ -5,8 +5,10 @@ import android.app.slice.Slice;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Binder;
 import android.util.Log;
+
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -53,38 +55,57 @@ public final class UsbPort {
     private final UsbManager mUsbManager;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AltModeType {
-    }
+    public @interface AltModeType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface EnableLimitPowerTransferStatus {
-    }
+    @interface EnableLimitPowerTransferStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface EnableUsbDataStatus {
-    }
+    @interface EnableUsbDataStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface EnableUsbDataWhileDockedStatus {
-    }
+    @interface EnableUsbDataWhileDockedStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ResetUsbPortStatus {
+    @interface ResetUsbPortStatus {}
+
+    public UsbPort(
+            UsbManager usbManager,
+            String id,
+            int supportedModes,
+            int supportedContaminantProtectionModes,
+            boolean supportsEnableContaminantPresenceProtection,
+            boolean supportsEnableContaminantPresenceDetection) {
+        this(
+                usbManager,
+                id,
+                supportedModes,
+                supportedContaminantProtectionModes,
+                supportsEnableContaminantPresenceProtection,
+                supportsEnableContaminantPresenceDetection,
+                false,
+                0);
     }
 
-    public UsbPort(UsbManager usbManager, String id, int supportedModes, int supportedContaminantProtectionModes, boolean supportsEnableContaminantPresenceProtection, boolean supportsEnableContaminantPresenceDetection) {
-        this(usbManager, id, supportedModes, supportedContaminantProtectionModes, supportsEnableContaminantPresenceProtection, supportsEnableContaminantPresenceDetection, false, 0);
-    }
-
-    public UsbPort(UsbManager usbManager, String id, int supportedModes, int supportedContaminantProtectionModes, boolean supportsEnableContaminantPresenceProtection, boolean supportsEnableContaminantPresenceDetection, boolean supportsComplianceWarnings, int supportedAltModes) {
+    public UsbPort(
+            UsbManager usbManager,
+            String id,
+            int supportedModes,
+            int supportedContaminantProtectionModes,
+            boolean supportsEnableContaminantPresenceProtection,
+            boolean supportsEnableContaminantPresenceDetection,
+            boolean supportsComplianceWarnings,
+            int supportedAltModes) {
         Objects.requireNonNull(id);
         Preconditions.checkFlagsArgument(supportedModes, 15);
         this.mUsbManager = usbManager;
         this.mId = id;
         this.mSupportedModes = supportedModes;
         this.mSupportedContaminantProtectionModes = supportedContaminantProtectionModes;
-        this.mSupportsEnableContaminantPresenceProtection = supportsEnableContaminantPresenceProtection;
-        this.mSupportsEnableContaminantPresenceDetection = supportsEnableContaminantPresenceDetection;
+        this.mSupportsEnableContaminantPresenceProtection =
+                supportsEnableContaminantPresenceProtection;
+        this.mSupportsEnableContaminantPresenceDetection =
+                supportsEnableContaminantPresenceDetection;
         this.mSupportsComplianceWarnings = supportsComplianceWarnings;
         this.mSupportedAltModes = supportedAltModes;
     }
@@ -137,7 +158,8 @@ public final class UsbPort {
     public void resetUsbPort(Executor executor, Consumer<Integer> consumer) {
         int operationId = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
         Log.i(TAG, "resetUsbPort opId:" + operationId);
-        UsbOperationInternal opCallback = new UsbOperationInternal(operationId, this.mId, executor, consumer);
+        UsbOperationInternal opCallback =
+                new UsbOperationInternal(operationId, this.mId, executor, consumer);
         this.mUsbManager.resetUsbPort(this, operationId, opCallback);
     }
 
@@ -190,7 +212,12 @@ public final class UsbPort {
 
     public int enableLimitPowerTransfer(boolean enable) {
         int operationId = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
-        Log.i(TAG, "enableLimitPowerTransfer opId:" + operationId + " callingUid:" + Binder.getCallingUid());
+        Log.i(
+                TAG,
+                "enableLimitPowerTransfer opId:"
+                        + operationId
+                        + " callingUid:"
+                        + Binder.getCallingUid());
         UsbOperationInternal opCallback = new UsbOperationInternal(operationId, this.mId);
         this.mUsbManager.enableLimitPowerTransfer(this, enable, operationId, opCallback);
         opCallback.waitForOperationComplete();
@@ -385,13 +412,16 @@ public final class UsbPort {
                         complianceWarningString.append("unreliable io, ");
                         break;
                     default:
-                        complianceWarningString.append(String.format("Unknown(%d), ", Integer.valueOf(warning)));
+                        complianceWarningString.append(
+                                String.format("Unknown(%d), ", Integer.valueOf(warning)));
                         break;
                 }
             }
         }
         complianceWarningString.append(NavigationBarInflaterView.SIZE_MOD_END);
-        return complianceWarningString.toString().replaceAll(", ]$", NavigationBarInflaterView.SIZE_MOD_END);
+        return complianceWarningString
+                .toString()
+                .replaceAll(", ]$", NavigationBarInflaterView.SIZE_MOD_END);
     }
 
     public static String dpAltModeStatusToString(int dpAltModeStatus) {
@@ -431,6 +461,17 @@ public final class UsbPort {
     }
 
     public String toString() {
-        return "UsbPort{id=" + this.mId + ", supportedModes=" + modeToString(this.mSupportedModes) + ", supportedContaminantProtectionModes=" + this.mSupportedContaminantProtectionModes + ", supportsEnableContaminantPresenceProtection=" + this.mSupportsEnableContaminantPresenceProtection + ", supportsEnableContaminantPresenceDetection=" + this.mSupportsEnableContaminantPresenceDetection + ", supportsComplianceWarnings=" + this.mSupportsComplianceWarnings;
+        return "UsbPort{id="
+                + this.mId
+                + ", supportedModes="
+                + modeToString(this.mSupportedModes)
+                + ", supportedContaminantProtectionModes="
+                + this.mSupportedContaminantProtectionModes
+                + ", supportsEnableContaminantPresenceProtection="
+                + this.mSupportsEnableContaminantPresenceProtection
+                + ", supportsEnableContaminantPresenceDetection="
+                + this.mSupportsEnableContaminantPresenceDetection
+                + ", supportsComplianceWarnings="
+                + this.mSupportsComplianceWarnings;
     }
 }

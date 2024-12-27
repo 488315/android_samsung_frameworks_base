@@ -4,31 +4,36 @@ import android.annotation.NonNull;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class DomainOwner implements Parcelable {
-    public static final Parcelable.Creator<DomainOwner> CREATOR = new Parcelable.Creator<DomainOwner>() { // from class: android.content.pm.verify.domain.DomainOwner.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DomainOwner[] newArray(int size) {
-            return new DomainOwner[size];
-        }
+    public static final Parcelable.Creator<DomainOwner> CREATOR =
+            new Parcelable.Creator<
+                    DomainOwner>() { // from class: android.content.pm.verify.domain.DomainOwner.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DomainOwner[] newArray(int size) {
+                    return new DomainOwner[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DomainOwner createFromParcel(Parcel in) {
-            return new DomainOwner(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DomainOwner createFromParcel(Parcel in) {
+                    return new DomainOwner(in);
+                }
+            };
     private final boolean mOverrideable;
     private final String mPackageName;
 
     public DomainOwner(String packageName, boolean overrideable) {
         this.mPackageName = packageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
         this.mOverrideable = overrideable;
     }
 
@@ -41,7 +46,11 @@ public final class DomainOwner implements Parcelable {
     }
 
     public String toString() {
-        return "DomainOwner { packageName = " + this.mPackageName + ", overrideable = " + this.mOverrideable + " }";
+        return "DomainOwner { packageName = "
+                + this.mPackageName
+                + ", overrideable = "
+                + this.mOverrideable
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -52,7 +61,8 @@ public final class DomainOwner implements Parcelable {
             return false;
         }
         DomainOwner that = (DomainOwner) o;
-        if (Objects.equals(this.mPackageName, that.mPackageName) && this.mOverrideable == that.mOverrideable) {
+        if (Objects.equals(this.mPackageName, that.mPackageName)
+                && this.mOverrideable == that.mOverrideable) {
             return true;
         }
         return false;
@@ -80,11 +90,11 @@ public final class DomainOwner implements Parcelable {
         boolean overrideable = (flg & 2) != 0;
         String packageName = in.readString();
         this.mPackageName = packageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
         this.mOverrideable = overrideable;
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

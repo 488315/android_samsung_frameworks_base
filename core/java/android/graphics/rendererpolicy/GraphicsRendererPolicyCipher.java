@@ -4,12 +4,14 @@ import android.content.Context;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.util.Slog;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.KeyStore;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -98,7 +100,8 @@ public class GraphicsRendererPolicyCipher {
             int ivLength = encryptedInputStream.read();
             byte[] iv = new byte[ivLength];
             encryptedInputStream.read(iv, 0, ivLength);
-            cipher.init(2, KeyStoreHolder.getKey(this.context, this.appId), new IvParameterSpec(iv));
+            cipher.init(
+                    2, KeyStoreHolder.getKey(this.context, this.appId), new IvParameterSpec(iv));
             while (true) {
                 int len = encryptedInputStream.read(buffer);
                 if (len != -1) {
@@ -124,12 +127,18 @@ public class GraphicsRendererPolicyCipher {
     }
 
     private static class KeyStoreHolder {
-        private KeyStoreHolder() {
-        }
+        private KeyStoreHolder() {}
 
         private static SecretKey generateKey(String alias) throws Exception {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES", "AndroidKeyStore");
-            KeyGenParameterSpec keyGenParameterSpec = new KeyGenParameterSpec.Builder(alias, 3).setBlockModes(KeyProperties.BLOCK_MODE_CBC).setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7).setDigests("SHA-256").setUserAuthenticationRequired(false).setKeySize(256).build();
+            KeyGenParameterSpec keyGenParameterSpec =
+                    new KeyGenParameterSpec.Builder(alias, 3)
+                            .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+                            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7)
+                            .setDigests("SHA-256")
+                            .setUserAuthenticationRequired(false)
+                            .setKeySize(256)
+                            .build();
             keyGenerator.init(keyGenParameterSpec);
             return keyGenerator.generateKey();
         }
@@ -138,7 +147,11 @@ public class GraphicsRendererPolicyCipher {
         public static SecretKey getKey(Context context, String appId) throws Exception {
             KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
-            String alias = String.format(GraphicsRendererPolicyCipher.SCSPCIPHER_FORMAT, context.getPackageName(), appId);
+            String alias =
+                    String.format(
+                            GraphicsRendererPolicyCipher.SCSPCIPHER_FORMAT,
+                            context.getPackageName(),
+                            appId);
             SecretKey key = (SecretKey) keyStore.getKey(alias, null);
             if (key == null) {
                 return generateKey(alias);
@@ -151,7 +164,11 @@ public class GraphicsRendererPolicyCipher {
             try {
                 KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
                 keyStore.load(null);
-                String alias = String.format(GraphicsRendererPolicyCipher.SCSPCIPHER_FORMAT, context.getPackageName(), appId);
+                String alias =
+                        String.format(
+                                GraphicsRendererPolicyCipher.SCSPCIPHER_FORMAT,
+                                context.getPackageName(),
+                                appId);
                 keyStore.deleteEntry(alias);
             } catch (Exception e) {
                 Slog.e(GraphicsRendererPolicyCipher.TAG, "clear", e);

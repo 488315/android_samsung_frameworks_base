@@ -6,6 +6,7 @@ import android.media.AudioFormat;
 import android.media.permission.Identity;
 import android.os.Binder;
 import android.os.Handler;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -38,22 +39,43 @@ public class SemSoundTrigger {
         void onServiceStateChange(int i);
     }
 
-    private SemSoundTrigger() {
-    }
+    private SemSoundTrigger() {}
 
     public static class ModuleProperties {
         public final int id;
         public final boolean supportsConcurrentCapture;
         public final UUID uuid;
 
-        ModuleProperties(int id, String implementor, String description, String uuid, int version, String supportedModelArch, int maxSoundModels, int maxKeyphrases, int maxUsers, int recognitionModes, boolean supportsCaptureTransition, int maxBufferMs, boolean supportsConcurrentCapture, int powerConsumptionMw, boolean returnsTriggerInEvent, int audioCapabilities) {
+        ModuleProperties(
+                int id,
+                String implementor,
+                String description,
+                String uuid,
+                int version,
+                String supportedModelArch,
+                int maxSoundModels,
+                int maxKeyphrases,
+                int maxUsers,
+                int recognitionModes,
+                boolean supportsCaptureTransition,
+                int maxBufferMs,
+                boolean supportsConcurrentCapture,
+                int powerConsumptionMw,
+                boolean returnsTriggerInEvent,
+                int audioCapabilities) {
             this.id = id;
             this.uuid = UUID.fromString(uuid);
             this.supportsConcurrentCapture = supportsConcurrentCapture;
         }
 
         public String toString() {
-            return "ModuleProperties [id=" + this.id + ", uuid=" + this.uuid + ", supportsConcurrentCapture=" + this.supportsConcurrentCapture + NavigationBarInflaterView.SIZE_MOD_END;
+            return "ModuleProperties [id="
+                    + this.id
+                    + ", uuid="
+                    + this.uuid
+                    + ", supportsConcurrentCapture="
+                    + this.supportsConcurrentCapture
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
     }
 
@@ -71,11 +93,23 @@ public class SemSoundTrigger {
             this.locale = new Locale(locale);
             this.text = text;
             this.users = users;
-            this.instance = new SoundTrigger.Keyphrase(this.id, this.recognitionModes, this.locale, this.text, this.users);
+            this.instance =
+                    new SoundTrigger.Keyphrase(
+                            this.id, this.recognitionModes, this.locale, this.text, this.users);
         }
 
         public String toString() {
-            return "Keyphrase [id=" + this.id + ", recognitionModes=" + this.recognitionModes + ", locale=" + this.locale + ", text=" + this.text + ", users=" + Arrays.toString(this.users) + NavigationBarInflaterView.SIZE_MOD_END;
+            return "Keyphrase [id="
+                    + this.id
+                    + ", recognitionModes="
+                    + this.recognitionModes
+                    + ", locale="
+                    + this.locale
+                    + ", text="
+                    + this.text
+                    + ", users="
+                    + Arrays.toString(this.users)
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
     }
 
@@ -84,12 +118,20 @@ public class SemSoundTrigger {
         public final Keyphrase[] keyphrases;
         public final UUID uuid;
 
-        public KeyphraseSoundModel(UUID uuid, UUID vendorUuid, byte[] data, Keyphrase[] keyphrases) {
+        public KeyphraseSoundModel(
+                UUID uuid, UUID vendorUuid, byte[] data, Keyphrase[] keyphrases) {
             SoundTrigger.Keyphrase[] stKeyphrases = new SoundTrigger.Keyphrase[keyphrases.length];
             for (int i = 0; i < keyphrases.length; i++) {
-                stKeyphrases[i] = new SoundTrigger.Keyphrase(keyphrases[i].id, keyphrases[i].recognitionModes, keyphrases[i].locale, keyphrases[i].text, keyphrases[i].users);
+                stKeyphrases[i] =
+                        new SoundTrigger.Keyphrase(
+                                keyphrases[i].id,
+                                keyphrases[i].recognitionModes,
+                                keyphrases[i].locale,
+                                keyphrases[i].text,
+                                keyphrases[i].users);
             }
-            this.instance = new SoundTrigger.KeyphraseSoundModel(uuid, vendorUuid, data, stKeyphrases);
+            this.instance =
+                    new SoundTrigger.KeyphraseSoundModel(uuid, vendorUuid, data, stKeyphrases);
             this.keyphrases = keyphrases;
             this.uuid = uuid;
         }
@@ -106,7 +148,16 @@ public class SemSoundTrigger {
         public final int status;
         public final boolean triggerInData;
 
-        RecognitionEvent(int status, int soundModelHandle, boolean captureAvailable, int captureSession, int captureDelayMs, int capturePreambleMs, boolean triggerInData, AudioFormat captureFormat, byte[] data) {
+        RecognitionEvent(
+                int status,
+                int soundModelHandle,
+                boolean captureAvailable,
+                int captureSession,
+                int captureDelayMs,
+                int capturePreambleMs,
+                boolean triggerInData,
+                AudioFormat captureFormat,
+                byte[] data) {
             this.status = status;
             this.soundModelHandle = soundModelHandle;
             this.captureAvailable = captureAvailable;
@@ -119,7 +170,32 @@ public class SemSoundTrigger {
         }
 
         public String toString() {
-            return "RecognitionEvent [status=" + this.status + ", soundModelHandle=" + this.soundModelHandle + ", captureAvailable=" + this.captureAvailable + ", captureSession=" + this.captureSession + ", captureDelayMs=" + this.captureDelayMs + ", capturePreambleMs=" + this.capturePreambleMs + ", triggerInData=" + this.triggerInData + (this.captureFormat == null ? "" : ", sampleRate=" + this.captureFormat.getSampleRate()) + (this.captureFormat == null ? "" : ", encoding=" + this.captureFormat.getEncoding()) + (this.captureFormat != null ? ", channelMask=" + this.captureFormat.getChannelMask() : "") + ", data=" + (this.data == null ? 0 : this.data.length) + NavigationBarInflaterView.SIZE_MOD_END;
+            return "RecognitionEvent [status="
+                    + this.status
+                    + ", soundModelHandle="
+                    + this.soundModelHandle
+                    + ", captureAvailable="
+                    + this.captureAvailable
+                    + ", captureSession="
+                    + this.captureSession
+                    + ", captureDelayMs="
+                    + this.captureDelayMs
+                    + ", capturePreambleMs="
+                    + this.capturePreambleMs
+                    + ", triggerInData="
+                    + this.triggerInData
+                    + (this.captureFormat == null
+                            ? ""
+                            : ", sampleRate=" + this.captureFormat.getSampleRate())
+                    + (this.captureFormat == null
+                            ? ""
+                            : ", encoding=" + this.captureFormat.getEncoding())
+                    + (this.captureFormat != null
+                            ? ", channelMask=" + this.captureFormat.getChannelMask()
+                            : "")
+                    + ", data="
+                    + (this.data == null ? 0 : this.data.length)
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
     }
 
@@ -130,16 +206,32 @@ public class SemSoundTrigger {
         SoundTrigger.RecognitionConfig instance;
         private final KeyphraseRecognitionExtra[] keyphrases;
 
-        public RecognitionConfig(boolean captureRequested, boolean allowMultipleTriggers, KeyphraseRecognitionExtra[] keyphrases, byte[] data) {
-            SoundTrigger.KeyphraseRecognitionExtra[] stKeyphrases = new SoundTrigger.KeyphraseRecognitionExtra[keyphrases.length];
+        public RecognitionConfig(
+                boolean captureRequested,
+                boolean allowMultipleTriggers,
+                KeyphraseRecognitionExtra[] keyphrases,
+                byte[] data) {
+            SoundTrigger.KeyphraseRecognitionExtra[] stKeyphrases =
+                    new SoundTrigger.KeyphraseRecognitionExtra[keyphrases.length];
             for (int i = 0; i < keyphrases.length; i++) {
-                SoundTrigger.ConfidenceLevel[] confidenceLevels = new SoundTrigger.ConfidenceLevel[keyphrases[i].confidenceLevels.length];
+                SoundTrigger.ConfidenceLevel[] confidenceLevels =
+                        new SoundTrigger.ConfidenceLevel[keyphrases[i].confidenceLevels.length];
                 for (int j = 0; j < keyphrases[i].confidenceLevels.length; j++) {
-                    confidenceLevels[j] = new SoundTrigger.ConfidenceLevel(keyphrases[i].confidenceLevels[j].userId, keyphrases[i].confidenceLevels[j].confidenceLevel);
+                    confidenceLevels[j] =
+                            new SoundTrigger.ConfidenceLevel(
+                                    keyphrases[i].confidenceLevels[j].userId,
+                                    keyphrases[i].confidenceLevels[j].confidenceLevel);
                 }
-                stKeyphrases[i] = new SoundTrigger.KeyphraseRecognitionExtra(keyphrases[i].id, keyphrases[i].recognitionModes, keyphrases[i].coarseConfidenceLevel, confidenceLevels);
+                stKeyphrases[i] =
+                        new SoundTrigger.KeyphraseRecognitionExtra(
+                                keyphrases[i].id,
+                                keyphrases[i].recognitionModes,
+                                keyphrases[i].coarseConfidenceLevel,
+                                confidenceLevels);
             }
-            this.instance = new SoundTrigger.RecognitionConfig(captureRequested, allowMultipleTriggers, stKeyphrases, data);
+            this.instance =
+                    new SoundTrigger.RecognitionConfig(
+                            captureRequested, allowMultipleTriggers, stKeyphrases, data);
             this.captureRequested = captureRequested;
             this.allowMultipleTriggers = allowMultipleTriggers;
             this.keyphrases = keyphrases;
@@ -166,12 +258,21 @@ public class SemSoundTrigger {
         SoundTrigger.KeyphraseRecognitionExtra instance;
         public final int recognitionModes;
 
-        public KeyphraseRecognitionExtra(int id, int recognitionModes, int coarseConfidenceLevel, ConfidenceLevel[] confidenceLevels) {
-            SoundTrigger.ConfidenceLevel[] stConfidenceLevels = new SoundTrigger.ConfidenceLevel[confidenceLevels.length];
+        public KeyphraseRecognitionExtra(
+                int id,
+                int recognitionModes,
+                int coarseConfidenceLevel,
+                ConfidenceLevel[] confidenceLevels) {
+            SoundTrigger.ConfidenceLevel[] stConfidenceLevels =
+                    new SoundTrigger.ConfidenceLevel[confidenceLevels.length];
             for (int i = 0; i < confidenceLevels.length; i++) {
-                stConfidenceLevels[i] = new SoundTrigger.ConfidenceLevel(confidenceLevels[i].userId, confidenceLevels[i].confidenceLevel);
+                stConfidenceLevels[i] =
+                        new SoundTrigger.ConfidenceLevel(
+                                confidenceLevels[i].userId, confidenceLevels[i].confidenceLevel);
             }
-            this.instance = new SoundTrigger.KeyphraseRecognitionExtra(id, recognitionModes, coarseConfidenceLevel, stConfidenceLevels);
+            this.instance =
+                    new SoundTrigger.KeyphraseRecognitionExtra(
+                            id, recognitionModes, coarseConfidenceLevel, stConfidenceLevels);
             this.id = id;
             this.recognitionModes = recognitionModes;
             this.coarseConfidenceLevel = coarseConfidenceLevel;
@@ -182,14 +283,60 @@ public class SemSoundTrigger {
     public static class KeyphraseRecognitionEvent extends RecognitionEvent {
         public final KeyphraseRecognitionExtra[] keyphraseExtras;
 
-        public KeyphraseRecognitionEvent(int status, int soundModelHandle, boolean captureAvailable, int captureSession, int captureDelayMs, int capturePreambleMs, boolean triggerInData, AudioFormat captureFormat, byte[] data, KeyphraseRecognitionExtra[] keyphraseExtras) {
-            super(status, soundModelHandle, captureAvailable, captureSession, captureDelayMs, capturePreambleMs, triggerInData, captureFormat, data);
+        public KeyphraseRecognitionEvent(
+                int status,
+                int soundModelHandle,
+                boolean captureAvailable,
+                int captureSession,
+                int captureDelayMs,
+                int capturePreambleMs,
+                boolean triggerInData,
+                AudioFormat captureFormat,
+                byte[] data,
+                KeyphraseRecognitionExtra[] keyphraseExtras) {
+            super(
+                    status,
+                    soundModelHandle,
+                    captureAvailable,
+                    captureSession,
+                    captureDelayMs,
+                    capturePreambleMs,
+                    triggerInData,
+                    captureFormat,
+                    data);
             this.keyphraseExtras = keyphraseExtras;
         }
 
         @Override // com.samsung.android.hardware.soundtrigger.SemSoundTrigger.RecognitionEvent
         public String toString() {
-            return "KeyphraseRecognitionEvent [keyphraseExtras=" + Arrays.toString(this.keyphraseExtras) + ", status=" + this.status + ", soundModelHandle=" + this.soundModelHandle + ", captureAvailable=" + this.captureAvailable + ", captureSession=" + this.captureSession + ", captureDelayMs=" + this.captureDelayMs + ", capturePreambleMs=" + this.capturePreambleMs + ", triggerInData=" + this.triggerInData + (this.captureFormat == null ? "" : ", sampleRate=" + this.captureFormat.getSampleRate()) + (this.captureFormat == null ? "" : ", encoding=" + this.captureFormat.getEncoding()) + (this.captureFormat != null ? ", channelMask=" + this.captureFormat.getChannelMask() : "") + ", data=" + (this.data == null ? 0 : this.data.length) + NavigationBarInflaterView.SIZE_MOD_END;
+            return "KeyphraseRecognitionEvent [keyphraseExtras="
+                    + Arrays.toString(this.keyphraseExtras)
+                    + ", status="
+                    + this.status
+                    + ", soundModelHandle="
+                    + this.soundModelHandle
+                    + ", captureAvailable="
+                    + this.captureAvailable
+                    + ", captureSession="
+                    + this.captureSession
+                    + ", captureDelayMs="
+                    + this.captureDelayMs
+                    + ", capturePreambleMs="
+                    + this.capturePreambleMs
+                    + ", triggerInData="
+                    + this.triggerInData
+                    + (this.captureFormat == null
+                            ? ""
+                            : ", sampleRate=" + this.captureFormat.getSampleRate())
+                    + (this.captureFormat == null
+                            ? ""
+                            : ", encoding=" + this.captureFormat.getEncoding())
+                    + (this.captureFormat != null
+                            ? ", channelMask=" + this.captureFormat.getChannelMask()
+                            : "")
+                    + ", data="
+                    + (this.data == null ? 0 : this.data.length)
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
     }
 
@@ -202,13 +349,31 @@ public class SemSoundTrigger {
         Iterator<SoundTrigger.ModuleProperties> it = soundTriggerModules.iterator();
         while (it.hasNext()) {
             SoundTrigger.ModuleProperties module = it.next();
-            ModuleProperties moduleProperties = new ModuleProperties(module.getId(), module.getImplementor(), module.getDescription(), module.getUuid().toString(), module.getVersion(), module.getSupportedModelArch(), module.getMaxSoundModels(), module.getMaxKeyphrases(), module.getMaxUsers(), module.getRecognitionModes(), module.isCaptureTransitionSupported(), module.getMaxBufferMillis(), module.isConcurrentCaptureSupported(), module.getPowerConsumptionMw(), module.isTriggerReturnedInEvent(), module.getAudioCapabilities());
+            ModuleProperties moduleProperties =
+                    new ModuleProperties(
+                            module.getId(),
+                            module.getImplementor(),
+                            module.getDescription(),
+                            module.getUuid().toString(),
+                            module.getVersion(),
+                            module.getSupportedModelArch(),
+                            module.getMaxSoundModels(),
+                            module.getMaxKeyphrases(),
+                            module.getMaxUsers(),
+                            module.getRecognitionModes(),
+                            module.isCaptureTransitionSupported(),
+                            module.getMaxBufferMillis(),
+                            module.isConcurrentCaptureSupported(),
+                            module.getPowerConsumptionMw(),
+                            module.isTriggerReturnedInEvent(),
+                            module.getAudioCapabilities());
             modules.add(moduleProperties);
         }
         return 0;
     }
 
-    public static SemSoundTriggerModule attachModule(int moduleId, StatusListener listener, Handler handler) {
+    public static SemSoundTriggerModule attachModule(
+            int moduleId, StatusListener listener, Handler handler) {
         return new SemSoundTriggerModule(moduleId, listener, handler);
     }
 }

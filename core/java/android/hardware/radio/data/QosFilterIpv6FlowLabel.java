@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class QosFilterIpv6FlowLabel implements Parcelable {
-    public static final Parcelable.Creator<QosFilterIpv6FlowLabel> CREATOR = new Parcelable.Creator<QosFilterIpv6FlowLabel>() { // from class: android.hardware.radio.data.QosFilterIpv6FlowLabel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public QosFilterIpv6FlowLabel createFromParcel(Parcel _aidl_source) {
-            return new QosFilterIpv6FlowLabel(_aidl_source);
-        }
+    public static final Parcelable.Creator<QosFilterIpv6FlowLabel> CREATOR =
+            new Parcelable.Creator<QosFilterIpv6FlowLabel>() { // from class:
+                // android.hardware.radio.data.QosFilterIpv6FlowLabel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public QosFilterIpv6FlowLabel createFromParcel(Parcel _aidl_source) {
+                    return new QosFilterIpv6FlowLabel(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public QosFilterIpv6FlowLabel[] newArray(int _aidl_size) {
-            return new QosFilterIpv6FlowLabel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public QosFilterIpv6FlowLabel[] newArray(int _aidl_size) {
+                    return new QosFilterIpv6FlowLabel[_aidl_size];
+                }
+            };
     public static final int noinit = 0;
     public static final int value = 1;
     private int _tag;
@@ -116,9 +118,13 @@ public final class QosFilterIpv6FlowLabel implements Parcelable {
     public String toString() {
         switch (this._tag) {
             case 0:
-                return "QosFilterIpv6FlowLabel.noinit(" + getNoinit() + NavigationBarInflaterView.KEY_CODE_END;
+                return "QosFilterIpv6FlowLabel.noinit("
+                        + getNoinit()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "QosFilterIpv6FlowLabel.value(" + getValue() + NavigationBarInflaterView.KEY_CODE_END;
+                return "QosFilterIpv6FlowLabel.value("
+                        + getValue()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -126,7 +132,12 @@ public final class QosFilterIpv6FlowLabel implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

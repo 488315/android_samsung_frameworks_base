@@ -17,10 +17,12 @@ public class DuotoneFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "first_color")
     private int mFirstColor;
+
     private Program mProgram;
 
     @GenerateFieldPort(hasDefault = true, name = "second_color")
     private int mSecondColor;
+
     private int mTarget;
 
     @GenerateFieldPort(hasDefault = true, name = "tile_size")
@@ -32,7 +34,18 @@ public class DuotoneFilter extends Filter {
         this.mSecondColor = -256;
         this.mTileSize = 640;
         this.mTarget = 0;
-        this.mDuotoneShader = "precision mediump float;\nuniform sampler2D tex_sampler_0;\nuniform vec3 first;\nuniform vec3 second;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  float energy = (color.r + color.g + color.b) * 0.3333;\n  vec3 new_color = (1.0 - energy) * first + energy * second;\n  gl_FragColor = vec4(new_color.rgb, color.a);\n}\n";
+        this.mDuotoneShader =
+                "precision mediump float;\n"
+                        + "uniform sampler2D tex_sampler_0;\n"
+                        + "uniform vec3 first;\n"
+                        + "uniform vec3 second;\n"
+                        + "varying vec2 v_texcoord;\n"
+                        + "void main() {\n"
+                        + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                        + "  float energy = (color.r + color.g + color.b) * 0.3333;\n"
+                        + "  vec3 new_color = (1.0 - energy) * first + energy * second;\n"
+                        + "  gl_FragColor = vec4(new_color.rgb, color.a);\n"
+                        + "}\n";
     }
 
     @Override // android.filterfw.core.Filter
@@ -49,13 +62,28 @@ public class DuotoneFilter extends Filter {
     public void initProgram(FilterContext context, int target) {
         switch (target) {
             case 3:
-                ShaderProgram shaderProgram = new ShaderProgram(context, "precision mediump float;\nuniform sampler2D tex_sampler_0;\nuniform vec3 first;\nuniform vec3 second;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  float energy = (color.r + color.g + color.b) * 0.3333;\n  vec3 new_color = (1.0 - energy) * first + energy * second;\n  gl_FragColor = vec4(new_color.rgb, color.a);\n}\n");
+                ShaderProgram shaderProgram =
+                        new ShaderProgram(
+                                context,
+                                "precision mediump float;\n"
+                                    + "uniform sampler2D tex_sampler_0;\n"
+                                    + "uniform vec3 first;\n"
+                                    + "uniform vec3 second;\n"
+                                    + "varying vec2 v_texcoord;\n"
+                                    + "void main() {\n"
+                                    + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                                    + "  float energy = (color.r + color.g + color.b) * 0.3333;\n"
+                                    + "  vec3 new_color = (1.0 - energy) * first + energy *"
+                                    + " second;\n"
+                                    + "  gl_FragColor = vec4(new_color.rgb, color.a);\n"
+                                    + "}\n");
                 shaderProgram.setMaximumTileSize(this.mTileSize);
                 this.mProgram = shaderProgram;
                 this.mTarget = target;
                 return;
             default:
-                throw new RuntimeException("Filter Duotone does not support frames of target " + target + "!");
+                throw new RuntimeException(
+                        "Filter Duotone does not support frames of target " + target + "!");
         }
     }
 
@@ -74,8 +102,16 @@ public class DuotoneFilter extends Filter {
     }
 
     private void updateParameters() {
-        float[] first = {Color.red(this.mFirstColor) / 255.0f, Color.green(this.mFirstColor) / 255.0f, Color.blue(this.mFirstColor) / 255.0f};
-        float[] second = {Color.red(this.mSecondColor) / 255.0f, Color.green(this.mSecondColor) / 255.0f, Color.blue(this.mSecondColor) / 255.0f};
+        float[] first = {
+            Color.red(this.mFirstColor) / 255.0f,
+            Color.green(this.mFirstColor) / 255.0f,
+            Color.blue(this.mFirstColor) / 255.0f
+        };
+        float[] second = {
+            Color.red(this.mSecondColor) / 255.0f,
+            Color.green(this.mSecondColor) / 255.0f,
+            Color.blue(this.mSecondColor) / 255.0f
+        };
         this.mProgram.setHostValue("first", first);
         this.mProgram.setHostValue(DrmInfoRequest.SEM_SECOND, second);
     }

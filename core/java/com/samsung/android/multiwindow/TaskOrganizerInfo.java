@@ -3,13 +3,16 @@ package com.samsung.android.multiwindow;
 import android.app.ActivityTaskManager;
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.samsung.android.rune.CoreRune;
 
 /* loaded from: classes6.dex */
 public class TaskOrganizerInfo {
     private static final String KEY_ASSISTANT_ACTIVITY_INTENT = "assistant_activity_intent";
-    private static final String KEY_CHANGE_SPLIT_LAYOUT_FOR_LAUNCH_ADJACENT = "change_split_layout_for_launch_adjacent";
-    private static final String KEY_CHANGE_TO_HORIZONTAL_SPLIT_LAYOUT = "change_to_horizontal_split_layout";
+    private static final String KEY_CHANGE_SPLIT_LAYOUT_FOR_LAUNCH_ADJACENT =
+            "change_split_layout_for_launch_adjacent";
+    private static final String KEY_CHANGE_TO_HORIZONTAL_SPLIT_LAYOUT =
+            "change_to_horizontal_split_layout";
     private static final String KEY_DEFER_SPLIT_ROTATION_IN_PORT = "defer_split_rotation_in_port";
     private static final String KEY_EXIT_SPLIT_SCREEN_STAGE_TYPE = "exit_split_screen_stage_type";
     private static final String KEY_EXIT_SPLIT_SCREEN_TOP_TASK_ID = "exit_split_screen_top_task_id";
@@ -54,9 +57,11 @@ public class TaskOrganizerInfo {
             return;
         }
         b.setDefusable(true);
-        this.mChangeToHorizontalSplitLayout = b.getBoolean(KEY_CHANGE_TO_HORIZONTAL_SPLIT_LAYOUT, false);
+        this.mChangeToHorizontalSplitLayout =
+                b.getBoolean(KEY_CHANGE_TO_HORIZONTAL_SPLIT_LAYOUT, false);
         this.mSplitScreenCreateMode = b.getInt(KEY_SPLIT_SCREEN_CREATE_MODE, -1);
-        this.mChangeSplitLayoutForLaunchAdjacent = b.getBoolean(KEY_CHANGE_SPLIT_LAYOUT_FOR_LAUNCH_ADJACENT, false);
+        this.mChangeSplitLayoutForLaunchAdjacent =
+                b.getBoolean(KEY_CHANGE_SPLIT_LAYOUT_FOR_LAUNCH_ADJACENT, false);
         this.mExitSplitScreenTopTaskId = b.getInt(KEY_EXIT_SPLIT_SCREEN_TOP_TASK_ID, -1);
         this.mSplitToFreeformTaskId = b.getInt(KEY_EXIT_SPLIT_TO_FREEFORM_TASK_ID, -1);
         this.mExitSplitScreenStageType = b.getInt(KEY_EXIT_SPLIT_SCREEN_STAGE_TYPE, 0);
@@ -75,7 +80,9 @@ public class TaskOrganizerInfo {
             b.putBoolean(KEY_CHANGE_TO_HORIZONTAL_SPLIT_LAYOUT, true);
         }
         b.putInt(KEY_SPLIT_SCREEN_CREATE_MODE, this.mSplitScreenCreateMode);
-        b.putBoolean(KEY_CHANGE_SPLIT_LAYOUT_FOR_LAUNCH_ADJACENT, this.mChangeSplitLayoutForLaunchAdjacent);
+        b.putBoolean(
+                KEY_CHANGE_SPLIT_LAYOUT_FOR_LAUNCH_ADJACENT,
+                this.mChangeSplitLayoutForLaunchAdjacent);
         b.putInt(KEY_EXIT_SPLIT_SCREEN_TOP_TASK_ID, this.mExitSplitScreenTopTaskId);
         b.putInt(KEY_EXIT_SPLIT_TO_FREEFORM_TASK_ID, this.mSplitToFreeformTaskId);
         b.putInt(KEY_EXIT_SPLIT_SCREEN_STAGE_TYPE, this.mExitSplitScreenStageType);
@@ -138,7 +145,8 @@ public class TaskOrganizerInfo {
         this.mSplitFeasibleMode = splitFeasibleMode;
     }
 
-    public void setAssistantActivityToSplit(Intent intent, float splitRatio, boolean deferSplitRotationInPort) {
+    public void setAssistantActivityToSplit(
+            Intent intent, float splitRatio, boolean deferSplitRotationInPort) {
         this.mAssistantActivityIntent = intent;
         this.mRequestedSplitRatio = splitRatio;
         this.mDeferSplitRotationInPort = deferSplitRotationInPort;

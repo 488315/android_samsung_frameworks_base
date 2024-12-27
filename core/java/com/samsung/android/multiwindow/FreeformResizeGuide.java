@@ -15,6 +15,7 @@ import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
 import com.android.internal.R;
 
 /* loaded from: classes6.dex */
@@ -54,8 +55,7 @@ public class FreeformResizeGuide {
     private final FreeformResizeGuideView mView;
     private final WindowManager mWindowManager;
 
-    public @interface FreeformGuideWindowType {
-    }
+    public @interface FreeformGuideWindowType {}
 
     public FreeformResizeGuide(Context context) {
         this(context, 0, null);
@@ -75,10 +75,17 @@ public class FreeformResizeGuide {
         this.mNotAdjustedBounds = new Rect();
         this.mNeedToFullscreenTransition = false;
         this.mReadyToMinimize = false;
-        this.mContext = context != null ? context : ActivityThread.currentActivityThread().getSystemUiContext();
-        this.mWindowManager = (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
+        this.mContext =
+                context != null
+                        ? context
+                        : ActivityThread.currentActivityThread().getSystemUiContext();
+        this.mWindowManager =
+                (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
         this.mH = new H();
-        this.mView = (FreeformResizeGuideView) LayoutInflater.from(this.mContext).inflate(R.layout.freeform_resize_guide, (ViewGroup) null);
+        this.mView =
+                (FreeformResizeGuideView)
+                        LayoutInflater.from(this.mContext)
+                                .inflate(R.layout.freeform_resize_guide, (ViewGroup) null);
         this.mView.update(dexDockingState, componentName);
         this.mWindowManager.addView(this.mView, generateLayoutParam());
     }
@@ -102,7 +109,12 @@ public class FreeformResizeGuide {
         this.mLastBounds.set(this.mBounds);
         this.mBounds.set(bounds);
         if (this.mTransitionInfo != null) {
-            this.mView.show(this.mLastBounds, this.mBounds, true, this.mNeedToFullscreenTransition, this.mTransitionInfo);
+            this.mView.show(
+                    this.mLastBounds,
+                    this.mBounds,
+                    true,
+                    this.mNeedToFullscreenTransition,
+                    this.mTransitionInfo);
             this.mTransitionInfo = null;
         } else {
             this.mView.show(this.mLastBounds, this.mBounds, this.mNeedToFullscreenTransition);
@@ -134,7 +146,10 @@ public class FreeformResizeGuide {
         return true;
     }
 
-    public void updateMinMaxSizeIfNeeded(ActivityManager.RunningTaskInfo taskInfo, Rect displaySize, boolean startOrientationWasLandscape) {
+    public void updateMinMaxSizeIfNeeded(
+            ActivityManager.RunningTaskInfo taskInfo,
+            Rect displaySize,
+            boolean startOrientationWasLandscape) {
         int i;
         int dockingMaxWidth;
         DisplayMetrics displayMetrics = this.mContext.getResources().getDisplayMetrics();
@@ -163,8 +178,16 @@ public class FreeformResizeGuide {
         }
         this.mMaxWidth = Math.max(this.mMaxWidth, this.mMinWidth);
         this.mMaxHeight = Math.max(this.mMaxHeight, this.mMinHeight);
-        int dexTaskDockingState = taskInfo.configuration.windowConfiguration.getDexTaskDockingState();
-        if (isDexTaskDocked(dexTaskDockingState) && (dockingMaxWidth = MultiWindowManager.getInstance().calculateMaxWidth(dexTaskDockingState, displaySize.width(), this.mMinWidth)) != -1) {
+        int dexTaskDockingState =
+                taskInfo.configuration.windowConfiguration.getDexTaskDockingState();
+        if (isDexTaskDocked(dexTaskDockingState)
+                && (dockingMaxWidth =
+                                MultiWindowManager.getInstance()
+                                        .calculateMaxWidth(
+                                                dexTaskDockingState,
+                                                displaySize.width(),
+                                                this.mMinWidth))
+                        != -1) {
             this.mMaxWidth = Math.min(this.mMaxWidth, dockingMaxWidth);
             this.mMinWidth = Math.max(this.mMinWidth, displaySize.width() - this.mMaxWidth);
         }
@@ -243,7 +266,13 @@ public class FreeformResizeGuide {
         snapToBounds(null, duration, null, -1, -1, false);
     }
 
-    public void snapToBounds(Rect toFullScreenBounds, long duration, TimeInterpolator interpolator, int fromAlpha, int toAlpha, boolean deferForTransition) {
+    public void snapToBounds(
+            Rect toFullScreenBounds,
+            long duration,
+            TimeInterpolator interpolator,
+            int fromAlpha,
+            int toAlpha,
+            boolean deferForTransition) {
         if (deferForTransition) {
             this.mDeferDismissingTimeout = duration;
         }
@@ -301,18 +330,27 @@ public class FreeformResizeGuide {
     private boolean snapToFullscreen(Rect bounds) {
         this.mNeedToFullscreenTransition = bounds != null;
         if (this.mNeedToFullscreenTransition) {
-            bounds.set(this.mStableBounds.left + this.mFreeformGuideViewFullscreenMargin, this.mStableBounds.top + this.mFreeformGuideViewFullscreenMargin, this.mStableBounds.right - this.mFreeformGuideViewFullscreenMargin, this.mStableBounds.bottom - this.mFreeformGuideViewFullscreenMargin);
+            bounds.set(
+                    this.mStableBounds.left + this.mFreeformGuideViewFullscreenMargin,
+                    this.mStableBounds.top + this.mFreeformGuideViewFullscreenMargin,
+                    this.mStableBounds.right - this.mFreeformGuideViewFullscreenMargin,
+                    this.mStableBounds.bottom - this.mFreeformGuideViewFullscreenMargin);
         }
         return this.mNeedToFullscreenTransition;
     }
 
     private void checkIfReadyToMinimize(Rect bounds, int posX, int posY) {
-        boolean adjustMinSize = bounds.width() <= this.mMinWidth && bounds.height() <= this.mMinHeight;
+        boolean adjustMinSize =
+                bounds.width() <= this.mMinWidth && bounds.height() <= this.mMinHeight;
         if (!adjustMinSize) {
             this.mReadyToMinimize = false;
             return;
         }
-        this.mMinimizeTriggerBounds.set(bounds.left + this.mMinimizeFreeformPadding, bounds.top + this.mMinimizeFreeformPadding, bounds.right - this.mMinimizeFreeformPadding, bounds.bottom - this.mMinimizeFreeformPadding);
+        this.mMinimizeTriggerBounds.set(
+                bounds.left + this.mMinimizeFreeformPadding,
+                bounds.top + this.mMinimizeFreeformPadding,
+                bounds.right - this.mMinimizeFreeformPadding,
+                bounds.bottom - this.mMinimizeFreeformPadding);
         if ((this.mCtrlType & 1) != 0) {
             this.mMinimizeTriggerBounds.right = bounds.right;
         }
@@ -374,8 +412,15 @@ public class FreeformResizeGuide {
     public void updateResizeGestureInfo(Rect displayFrame, Rect stableBounds) {
         this.mDisplayFrame.set(displayFrame);
         this.mStableBounds.set(stableBounds);
-        this.mFreeformGuideViewFullscreenMargin = this.mContext.getResources().getDimensionPixelSize(R.dimen.freeform_resize_guide_view_fullscreen_margin);
-        this.mMinimizeFreeformPadding = this.mContext.getResources().getDimensionPixelSize(R.dimen.minimize_freeform_padding);
+        this.mFreeformGuideViewFullscreenMargin =
+                this.mContext
+                        .getResources()
+                        .getDimensionPixelSize(
+                                R.dimen.freeform_resize_guide_view_fullscreen_margin);
+        this.mMinimizeFreeformPadding =
+                this.mContext
+                        .getResources()
+                        .getDimensionPixelSize(R.dimen.minimize_freeform_padding);
     }
 
     public void setNotAdjustedBounds(Rect bounds) {
@@ -402,8 +447,7 @@ public class FreeformResizeGuide {
     final class H extends Handler {
         static final int DISMISS_FREEFORM_RESIZE_GUIDE = 0;
 
-        H() {
-        }
+        H() {}
 
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
@@ -413,7 +457,8 @@ public class FreeformResizeGuide {
                     if (FreeformResizeGuide.this.mView != null) {
                         FreeformResizeGuide.this.mView.dismiss();
                         if (FreeformResizeGuide.this.mView.isAttachedToWindow()) {
-                            FreeformResizeGuide.this.mWindowManager.removeViewImmediate(FreeformResizeGuide.this.mView);
+                            FreeformResizeGuide.this.mWindowManager.removeViewImmediate(
+                                    FreeformResizeGuide.this.mView);
                         }
                     }
                     FreeformResizeGuide.this.mState = -1;
@@ -426,7 +471,8 @@ public class FreeformResizeGuide {
         return (dexTaskDockingState == -1 || dexTaskDockingState == 0) ? false : true;
     }
 
-    public void adjustDexDockingTaskBounds(int dexTaskDockingState, Rect taskbounds, int freeformThickness) {
+    public void adjustDexDockingTaskBounds(
+            int dexTaskDockingState, Rect taskbounds, int freeformThickness) {
         if (dexTaskDockingState == 1) {
             taskbounds.right -= freeformThickness;
         } else if (dexTaskDockingState == 2) {
@@ -444,31 +490,33 @@ public class FreeformResizeGuide {
 
     class TransitionInfo {
         private long mAnimationDuration;
-        private Animator.AnimatorListener mDismissListener = new Animator.AnimatorListener() { // from class: com.samsung.android.multiwindow.FreeformResizeGuide.TransitionInfo.1
-            @Override // android.animation.Animator.AnimatorListener
-            public void onAnimationStart(Animator animation) {
-            }
+        private Animator.AnimatorListener mDismissListener =
+                new Animator
+                        .AnimatorListener() { // from class:
+                                              // com.samsung.android.multiwindow.FreeformResizeGuide.TransitionInfo.1
+                    @Override // android.animation.Animator.AnimatorListener
+                    public void onAnimationStart(Animator animation) {}
 
-            @Override // android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                onAnimationEnd();
-            }
+                    @Override // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        onAnimationEnd();
+                    }
 
-            @Override // android.animation.Animator.AnimatorListener
-            public void onAnimationCancel(Animator animation) {
-                onAnimationEnd();
-            }
+                    @Override // android.animation.Animator.AnimatorListener
+                    public void onAnimationCancel(Animator animation) {
+                        onAnimationEnd();
+                    }
 
-            @Override // android.animation.Animator.AnimatorListener
-            public void onAnimationRepeat(Animator animation) {
-            }
+                    @Override // android.animation.Animator.AnimatorListener
+                    public void onAnimationRepeat(Animator animation) {}
 
-            private void onAnimationEnd() {
-                if (FreeformResizeGuide.this.mDismissRequested && !FreeformResizeGuide.this.mDismissed) {
-                    FreeformResizeGuide.this.dismiss();
-                }
-            }
-        };
+                    private void onAnimationEnd() {
+                        if (FreeformResizeGuide.this.mDismissRequested
+                                && !FreeformResizeGuide.this.mDismissed) {
+                            FreeformResizeGuide.this.dismiss();
+                        }
+                    }
+                };
         private int mFromAlpha;
         private TimeInterpolator mInterpolator;
         private int mToAlpha;

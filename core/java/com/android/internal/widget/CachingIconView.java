@@ -13,7 +13,9 @@ import android.util.AttributeSet;
 import android.view.RemotableViewMethod;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
+
 import com.android.internal.R;
+
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -56,7 +58,9 @@ public class CachingIconView extends ImageView {
         if (attrs == null) {
             return;
         }
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CachingIconView, defStyleAttr, defStyleRes);
+        TypedArray ta =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.CachingIconView, defStyleAttr, defStyleRes);
         this.mMaxDrawableWidth = ta.getDimensionPixelSize(0, -1);
         this.mMaxDrawableHeight = ta.getDimensionPixelSize(1, -1);
         ta.recycle();
@@ -78,7 +82,8 @@ public class CachingIconView extends ImageView {
     }
 
     Drawable loadSizeRestrictedIcon(Icon icon) {
-        return LocalImageResolver.resolveImage(icon, getContext(), this.mMaxDrawableWidth, this.mMaxDrawableHeight);
+        return LocalImageResolver.resolveImage(
+                icon, getContext(), this.mMaxDrawableWidth, this.mMaxDrawableHeight);
     }
 
     @Override // android.widget.ImageView
@@ -86,7 +91,8 @@ public class CachingIconView extends ImageView {
         resetCache();
         final Drawable drawable = loadSizeRestrictedIcon(icon);
         if (drawable != null) {
-            return new Runnable() { // from class: com.android.internal.widget.CachingIconView$$ExternalSyntheticLambda2
+            return new Runnable() { // from class:
+                                    // com.android.internal.widget.CachingIconView$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
                     CachingIconView.this.lambda$setImageIconAsync$0(drawable);
@@ -112,7 +118,8 @@ public class CachingIconView extends ImageView {
     }
 
     private Drawable loadSizeRestrictedDrawable(int resId) {
-        return LocalImageResolver.resolveImage(resId, getContext(), this.mMaxDrawableWidth, this.mMaxDrawableHeight);
+        return LocalImageResolver.resolveImage(
+                resId, getContext(), this.mMaxDrawableWidth, this.mMaxDrawableHeight);
     }
 
     @Override // android.widget.ImageView
@@ -120,7 +127,8 @@ public class CachingIconView extends ImageView {
         resetCache();
         final Drawable drawable = loadSizeRestrictedDrawable(resId);
         if (drawable != null) {
-            return new Runnable() { // from class: com.android.internal.widget.CachingIconView$$ExternalSyntheticLambda0
+            return new Runnable() { // from class:
+                                    // com.android.internal.widget.CachingIconView$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
                     CachingIconView.this.lambda$setImageResourceAsync$1(drawable);
@@ -145,7 +153,8 @@ public class CachingIconView extends ImageView {
     }
 
     private Drawable loadSizeRestrictedUri(Uri uri) {
-        return LocalImageResolver.resolveImage(uri, getContext(), this.mMaxDrawableWidth, this.mMaxDrawableHeight);
+        return LocalImageResolver.resolveImage(
+                uri, getContext(), this.mMaxDrawableWidth, this.mMaxDrawableHeight);
     }
 
     @Override // android.widget.ImageView
@@ -155,7 +164,8 @@ public class CachingIconView extends ImageView {
         if (drawable == null) {
             return super.setImageURIAsync(uri);
         }
-        return new Runnable() { // from class: com.android.internal.widget.CachingIconView$$ExternalSyntheticLambda1
+        return new Runnable() { // from class:
+                                // com.android.internal.widget.CachingIconView$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
                 CachingIconView.this.lambda$setImageURIAsync$2(drawable);
@@ -190,7 +200,9 @@ public class CachingIconView extends ImageView {
         if (icon != null) {
             if (icon.getType() == 2) {
                 String iconPackage = normalizeIconPackage(icon);
-                if (this.mLastResId != 0 && icon.getResId() == this.mLastResId && Objects.equals(iconPackage, this.mLastPackage)) {
+                if (this.mLastResId != 0
+                        && icon.getResId() == this.mLastResId
+                        && Objects.equals(iconPackage, this.mLastPackage)) {
                     isCached = true;
                 }
                 this.mLastPackage = iconPackage;
@@ -256,7 +268,8 @@ public class CachingIconView extends ImageView {
     }
 
     private void updateVisibility() {
-        int visibility = (this.mDesiredVisibility == 0 && this.mForceHidden) ? 4 : this.mDesiredVisibility;
+        int visibility =
+                (this.mDesiredVisibility == 0 && this.mForceHidden) ? 4 : this.mDesiredVisibility;
         if (this.mOnVisibilityChangedListener != null) {
             this.mOnVisibilityChangedListener.accept(Integer.valueOf(visibility));
         }

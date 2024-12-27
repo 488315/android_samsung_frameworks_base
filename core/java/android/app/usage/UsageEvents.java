@@ -6,6 +6,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -14,19 +15,20 @@ import java.util.List;
 
 /* loaded from: classes.dex */
 public final class UsageEvents implements Parcelable {
-    public static final Parcelable.Creator<UsageEvents> CREATOR = new Parcelable.Creator<UsageEvents>() { // from class: android.app.usage.UsageEvents.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsageEvents createFromParcel(Parcel source) {
-            return new UsageEvents(source);
-        }
+    public static final Parcelable.Creator<UsageEvents> CREATOR =
+            new Parcelable.Creator<UsageEvents>() { // from class: android.app.usage.UsageEvents.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsageEvents createFromParcel(Parcel source) {
+                    return new UsageEvents(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsageEvents[] newArray(int size) {
-            return new UsageEvents[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsageEvents[] newArray(int size) {
+                    return new UsageEvents[size];
+                }
+            };
     public static final int HIDE_LOCUS_EVENTS = 8;
     public static final int HIDE_SHORTCUT_EVENTS = 2;
     public static final String INSTANT_APP_CLASS_NAME = "android.instant_class";
@@ -66,32 +68,25 @@ public final class UsageEvents implements Parcelable {
         public static final int LOCUS_ID_SET = 30;
         public static final int MAX_EVENT_TYPE = 31;
 
-        @Deprecated
-        public static final int MOVE_TO_BACKGROUND = 2;
+        @Deprecated public static final int MOVE_TO_BACKGROUND = 2;
 
-        @Deprecated
-        public static final int MOVE_TO_FOREGROUND = 1;
+        @Deprecated public static final int MOVE_TO_FOREGROUND = 1;
         public static final int NONE = 0;
 
-        @SystemApi
-        public static final int NOTIFICATION_INTERRUPTION = 12;
+        @SystemApi public static final int NOTIFICATION_INTERRUPTION = 12;
 
-        @SystemApi
-        public static final int NOTIFICATION_SEEN = 10;
+        @SystemApi public static final int NOTIFICATION_SEEN = 10;
         public static final int ROLLOVER_FOREGROUND_SERVICE = 22;
         public static final int SCREEN_INTERACTIVE = 15;
         public static final int SCREEN_NON_INTERACTIVE = 16;
         public static final int SHORTCUT_INVOCATION = 8;
 
-        @SystemApi
-        public static final int SLICE_PINNED = 14;
+        @SystemApi public static final int SLICE_PINNED = 14;
 
-        @SystemApi
-        public static final int SLICE_PINNED_PRIV = 13;
+        @SystemApi public static final int SLICE_PINNED_PRIV = 13;
         public static final int STANDBY_BUCKET_CHANGED = 11;
 
-        @SystemApi
-        public static final int SYSTEM_INTERACTION = 6;
+        @SystemApi public static final int SYSTEM_INTERACTION = 6;
         private static final int UNASSIGNED_TOKEN = -1;
         public static final int USER_INTERACTION = 7;
         public static final int USER_STOPPED = 29;
@@ -125,20 +120,17 @@ public final class UsageEvents implements Parcelable {
         public UserInteractionEventExtrasToken mUserInteractionExtrasToken = null;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface EventFlags {
-        }
+        public @interface EventFlags {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface EventType {
-        }
+        public @interface EventType {}
 
         public static class UserInteractionEventExtrasToken {
             public int mCategoryToken = -1;
             public int mActionToken = -1;
         }
 
-        public Event() {
-        }
+        public Event() {}
 
         public Event(int type, long timeStamp) {
             this.mEventType = type;
@@ -268,14 +260,22 @@ public final class UsageEvents implements Parcelable {
     private void readUsageEventsFromParcelWithParceledList(Parcel in) {
         this.mEventCount = in.readInt();
         this.mIndex = in.readInt();
-        ParcelableUsageEventList slice = (ParcelableUsageEventList) in.readParcelable(getClass().getClassLoader(), ParcelableUsageEventList.class);
+        ParcelableUsageEventList slice =
+                (ParcelableUsageEventList)
+                        in.readParcelable(
+                                getClass().getClassLoader(), ParcelableUsageEventList.class);
         if (slice != null) {
             this.mEventsToWrite = slice.getList();
         } else {
             this.mEventsToWrite = new ArrayList();
         }
         if (this.mEventCount != this.mEventsToWrite.size()) {
-            Log.w(TAG, "Partial usage event list received: " + this.mEventCount + " != " + this.mEventsToWrite.size());
+            Log.w(
+                    TAG,
+                    "Partial usage event list received: "
+                            + this.mEventCount
+                            + " != "
+                            + this.mEventsToWrite.size());
             this.mEventCount = this.mEventsToWrite.size();
         }
     }
@@ -549,7 +549,8 @@ public final class UsageEvents implements Parcelable {
                 p.writeInt(this.mParcel.dataPosition());
                 p.appendFrom(this.mParcel, 0, this.mParcel.dataSize());
             } else {
-                throw new IllegalStateException("Either mParcel or mEventsToWrite must not be null");
+                throw new IllegalStateException(
+                        "Either mParcel or mEventsToWrite must not be null");
             }
         }
         dest.writeBlob(p.marshall());

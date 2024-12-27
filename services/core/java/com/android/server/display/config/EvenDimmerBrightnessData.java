@@ -2,6 +2,7 @@ package com.android.server.display.config;
 
 import android.util.Slog;
 import android.util.Spline;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -18,7 +19,16 @@ public final class EvenDimmerBrightnessData {
     public final Spline mNitsToBacklight;
     public final float mTransitionPoint;
 
-    public EvenDimmerBrightnessData(float f, float[] fArr, float[] fArr2, float[] fArr3, Spline spline, Spline spline2, Spline spline3, Spline spline4, Spline spline5) {
+    public EvenDimmerBrightnessData(
+            float f,
+            float[] fArr,
+            float[] fArr2,
+            float[] fArr3,
+            Spline spline,
+            Spline spline2,
+            Spline spline3,
+            Spline spline4,
+            Spline spline5) {
         this.mTransitionPoint = f;
         this.mNits = fArr;
         this.mBacklight = fArr2;
@@ -38,7 +48,8 @@ public final class EvenDimmerBrightnessData {
         }
         Boolean bool = evenDimmerMode.enabled;
         int i = 0;
-        if (!(bool == null ? false : bool.booleanValue()) || (comprehensiveBrightnessMap = evenDimmerMode.brightnessMapping) == null) {
+        if (!(bool == null ? false : bool.booleanValue())
+                || (comprehensiveBrightnessMap = evenDimmerMode.brightnessMapping) == null) {
             return null;
         }
         String str = comprehensiveBrightnessMap.interpolation;
@@ -77,18 +88,68 @@ public final class EvenDimmerBrightnessData {
             if (i > 0) {
                 int i3 = i - 1;
                 if (fArr4[i] < fArr4[i3]) {
-                    Slog.e("EvenDimmerBrightnessData", "minLuxToNitsSpline must be non-decreasing, ignoring rest  of configuration. Value: " + fArr4[i] + " < " + fArr4[i3]);
+                    Slog.e(
+                            "EvenDimmerBrightnessData",
+                            "minLuxToNitsSpline must be non-decreasing, ignoring rest  of"
+                                + " configuration. Value: "
+                                    + fArr4[i]
+                                    + " < "
+                                    + fArr4[i3]);
                 }
                 if (fArr5[i] < fArr5[i3]) {
-                    Slog.e("EvenDimmerBrightnessData", "minLuxToNitsSpline must be non-decreasing, ignoring rest  of configuration. Nits: " + fArr5[i] + " < " + fArr5[i3]);
+                    Slog.e(
+                            "EvenDimmerBrightnessData",
+                            "minLuxToNitsSpline must be non-decreasing, ignoring rest  of"
+                                + " configuration. Nits: "
+                                    + fArr5[i]
+                                    + " < "
+                                    + fArr5[i3]);
                 }
             }
             i++;
         }
-        return "linear".equals(str) ? new EvenDimmerBrightnessData(floatValue, fArr, fArr2, fArr3, new Spline.LinearSpline(fArr2, fArr), new Spline.LinearSpline(fArr, fArr2), new Spline.LinearSpline(fArr3, fArr2), new Spline.LinearSpline(fArr2, fArr3), new Spline.LinearSpline(fArr4, fArr5)) : new EvenDimmerBrightnessData(floatValue, fArr, fArr2, fArr3, Spline.createSpline(fArr2, fArr), Spline.createSpline(fArr, fArr2), Spline.createSpline(fArr3, fArr2), Spline.createSpline(fArr2, fArr3), Spline.createSpline(fArr4, fArr5));
+        return "linear".equals(str)
+                ? new EvenDimmerBrightnessData(
+                        floatValue,
+                        fArr,
+                        fArr2,
+                        fArr3,
+                        new Spline.LinearSpline(fArr2, fArr),
+                        new Spline.LinearSpline(fArr, fArr2),
+                        new Spline.LinearSpline(fArr3, fArr2),
+                        new Spline.LinearSpline(fArr2, fArr3),
+                        new Spline.LinearSpline(fArr4, fArr5))
+                : new EvenDimmerBrightnessData(
+                        floatValue,
+                        fArr,
+                        fArr2,
+                        fArr3,
+                        Spline.createSpline(fArr2, fArr),
+                        Spline.createSpline(fArr, fArr2),
+                        Spline.createSpline(fArr3, fArr2),
+                        Spline.createSpline(fArr2, fArr3),
+                        Spline.createSpline(fArr4, fArr5));
     }
 
     public final String toString() {
-        return "EvenDimmerBrightnessData {mTransitionPoint: " + this.mTransitionPoint + ", mNits: " + Arrays.toString(this.mNits) + ", mBacklight: " + Arrays.toString(this.mBacklight) + ", mBrightness: " + Arrays.toString(this.mBrightness) + ", mBacklightToNits: " + this.mBacklightToNits + ", mNitsToBacklight: " + this.mNitsToBacklight + ", mBrightnessToBacklight: " + this.mBrightnessToBacklight + ", mBacklightToBrightness: " + this.mBacklightToBrightness + ", mMinLuxToNits: " + this.mMinLuxToNits + "} ";
+        return "EvenDimmerBrightnessData {mTransitionPoint: "
+                + this.mTransitionPoint
+                + ", mNits: "
+                + Arrays.toString(this.mNits)
+                + ", mBacklight: "
+                + Arrays.toString(this.mBacklight)
+                + ", mBrightness: "
+                + Arrays.toString(this.mBrightness)
+                + ", mBacklightToNits: "
+                + this.mBacklightToNits
+                + ", mNitsToBacklight: "
+                + this.mNitsToBacklight
+                + ", mBrightnessToBacklight: "
+                + this.mBrightnessToBacklight
+                + ", mBacklightToBrightness: "
+                + this.mBacklightToBrightness
+                + ", mMinLuxToNits: "
+                + this.mMinLuxToNits
+                + "} ";
     }
 }

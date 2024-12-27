@@ -2,7 +2,6 @@ package android.renderscript;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;
-import android.renderscript.RenderScriptGL;
 import android.util.AttributeSet;
 import android.view.TextureView;
 

@@ -11,10 +11,17 @@ import android.util.SparseArray;
 import android.util.SparseLongArray;
 import android.util.TimeUtils;
 import android.util.Xml;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.jobs.CollectionUtils;
 import com.android.internal.util.jobs.FastXmlSerializer;
 import com.android.internal.util.jobs.XmlUtils;
+
+import libcore.io.IoUtils;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,9 +32,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -104,7 +108,8 @@ public final class AppIdleHistory {
         appUsageHistory.bucketExpiryTimesMs.put(i, j);
     }
 
-    public static void printLastActionElapsedTime(IndentingPrintWriter indentingPrintWriter, long j, long j2) {
+    public static void printLastActionElapsedTime(
+            IndentingPrintWriter indentingPrintWriter, long j, long j2) {
         if (j2 < 0) {
             indentingPrintWriter.print("<uninitialized>");
         } else {
@@ -112,7 +117,8 @@ public final class AppIdleHistory {
         }
     }
 
-    public static void readBucketExpiryTimes(XmlPullParser xmlPullParser, AppUsageHistory appUsageHistory) {
+    public static void readBucketExpiryTimes(
+            XmlPullParser xmlPullParser, AppUsageHistory appUsageHistory) {
         int depth = xmlPullParser.getDepth();
         while (XmlUtils.nextElementWithin(xmlPullParser, depth)) {
             if ("item".equals(xmlPullParser.getName())) {
@@ -122,7 +128,10 @@ public final class AppIdleHistory {
                     Slog.e("AppIdleHistory", "Error reading the buckets expiry times");
                 } else {
                     String attributeValue2 = xmlPullParser.getAttributeValue(null, "expiry");
-                    insertBucketExpiryTime(appUsageHistory, parseInt, attributeValue2 == null ? 0L : Long.parseLong(attributeValue2));
+                    insertBucketExpiryTime(
+                            appUsageHistory,
+                            parseInt,
+                            attributeValue2 == null ? 0L : Long.parseLong(attributeValue2));
                 }
             }
         }
@@ -174,17 +183,28 @@ public final class AppIdleHistory {
                     arrayMap = arrayMap2;
                     indentingPrintWriter.print("package=" + str2);
                     indentingPrintWriter.print(" u=" + i6);
-                    indentingPrintWriter.print(" bucket=" + appUsageHistory.currentBucket + " reason=" + UsageStatsManager.reasonToString(appUsageHistory.bucketingReason));
+                    indentingPrintWriter.print(
+                            " bucket="
+                                    + appUsageHistory.currentBucket
+                                    + " reason="
+                                    + UsageStatsManager.reasonToString(
+                                            appUsageHistory.bucketingReason));
                     indentingPrintWriter.print(" used=");
                     int i8 = size;
                     i3 = i7;
-                    printLastActionElapsedTime(indentingPrintWriter, elapsedTime, appUsageHistory.lastUsedElapsedTime);
+                    printLastActionElapsedTime(
+                            indentingPrintWriter, elapsedTime, appUsageHistory.lastUsedElapsedTime);
                     indentingPrintWriter.print(" usedByUser=");
-                    printLastActionElapsedTime(indentingPrintWriter, elapsedTime, appUsageHistory.lastUsedByUserElapsedTime);
+                    printLastActionElapsedTime(
+                            indentingPrintWriter,
+                            elapsedTime,
+                            appUsageHistory.lastUsedByUserElapsedTime);
                     indentingPrintWriter.print(" usedScr=");
-                    printLastActionElapsedTime(indentingPrintWriter, elapsedTime, appUsageHistory.lastUsedScreenTime);
+                    printLastActionElapsedTime(
+                            indentingPrintWriter, elapsedTime, appUsageHistory.lastUsedScreenTime);
                     indentingPrintWriter.print(" lastPred=");
-                    printLastActionElapsedTime(indentingPrintWriter, elapsedTime, appUsageHistory.lastPredictedTime);
+                    printLastActionElapsedTime(
+                            indentingPrintWriter, elapsedTime, appUsageHistory.lastPredictedTime);
                     indentingPrintWriter.print(" expiryTimes=");
                     SparseLongArray sparseLongArray = appUsageHistory.bucketExpiryTimesMs;
                     if (sparseLongArray == null || sparseLongArray.size() == 0) {
@@ -215,18 +235,28 @@ public final class AppIdleHistory {
                         indentingPrintWriter.print(")");
                     }
                     indentingPrintWriter.print(" lastJob=");
-                    TimeUtils.formatDuration(elapsedTime - appUsageHistory.lastJobRunTime, indentingPrintWriter);
-                    indentingPrintWriter.print(" lastInformedBucket=" + appUsageHistory.lastInformedBucket);
+                    TimeUtils.formatDuration(
+                            elapsedTime - appUsageHistory.lastJobRunTime, indentingPrintWriter);
+                    indentingPrintWriter.print(
+                            " lastInformedBucket=" + appUsageHistory.lastInformedBucket);
                     if (appUsageHistory.lastRestrictAttemptElapsedTime > 0) {
                         indentingPrintWriter.print(" lastRestrictAttempt=");
-                        TimeUtils.formatDuration(elapsedTime - appUsageHistory.lastRestrictAttemptElapsedTime, indentingPrintWriter);
-                        indentingPrintWriter.print(" lastRestrictReason=" + UsageStatsManager.reasonToString(appUsageHistory.lastRestrictReason));
+                        TimeUtils.formatDuration(
+                                elapsedTime - appUsageHistory.lastRestrictAttemptElapsedTime,
+                                indentingPrintWriter);
+                        indentingPrintWriter.print(
+                                " lastRestrictReason="
+                                        + UsageStatsManager.reasonToString(
+                                                appUsageHistory.lastRestrictReason));
                     }
                     if (appUsageHistory.nextEstimatedLaunchTime > 0) {
                         indentingPrintWriter.print(" nextEstimatedLaunchTime=");
-                        TimeUtils.formatDuration(appUsageHistory.nextEstimatedLaunchTime - currentTimeMillis, indentingPrintWriter);
+                        TimeUtils.formatDuration(
+                                appUsageHistory.nextEstimatedLaunchTime - currentTimeMillis,
+                                indentingPrintWriter);
                     }
-                    indentingPrintWriter.print(" idle=".concat(isIdle(i6, str, elapsedRealtime) ? "y" : "n"));
+                    indentingPrintWriter.print(
+                            " idle=".concat(isIdle(i6, str, elapsedRealtime) ? "y" : "n"));
                     indentingPrintWriter.println();
                     i7 = i3 + 1;
                     length = i2;
@@ -260,7 +290,8 @@ public final class AppIdleHistory {
     public long getBucketExpiryTimeMs(String str, int i, int i2, long j) {
         SparseLongArray sparseLongArray;
         AppUsageHistory packageHistory = getPackageHistory(getUserHistory(i), str, false);
-        if (packageHistory == null || (sparseLongArray = packageHistory.bucketExpiryTimesMs) == null) {
+        if (packageHistory == null
+                || (sparseLongArray = packageHistory.bucketExpiryTimesMs) == null) {
             return 0L;
         }
         return sparseLongArray.get(i2, 0L);
@@ -275,7 +306,9 @@ public final class AppIdleHistory {
     }
 
     public File getUserFile(int i) {
-        return new File(new File(new File(this.mStorageDir, "users"), Integer.toString(i)), APP_IDLE_FILENAME);
+        return new File(
+                new File(new File(this.mStorageDir, "users"), Integer.toString(i)),
+                APP_IDLE_FILENAME);
     }
 
     public final ArrayMap getUserHistory(int i) {
@@ -310,8 +343,10 @@ public final class AppIdleHistory {
                         if (next != 2) {
                             Slog.e("AppIdleHistory", "Unable to read app idle file for user " + i);
                         } else if (newPullParser.getName().equals("packages")) {
-                            String attributeValue = newPullParser.getAttributeValue(null, "version");
-                            int parseInt = attributeValue == null ? 0 : Integer.parseInt(attributeValue);
+                            String attributeValue =
+                                    newPullParser.getAttributeValue(null, "version");
+                            int parseInt =
+                                    attributeValue == null ? 0 : Integer.parseInt(attributeValue);
                             while (true) {
                                 int next2 = newPullParser.next();
                                 if (next2 == i2) {
@@ -319,61 +354,121 @@ public final class AppIdleHistory {
                                 }
                                 if (next2 == i3) {
                                     if (newPullParser.getName().equals("package")) {
-                                        String attributeValue2 = newPullParser.getAttributeValue(null, "name");
+                                        String attributeValue2 =
+                                                newPullParser.getAttributeValue(null, "name");
                                         AppUsageHistory appUsageHistory = new AppUsageHistory();
-                                        long parseLong = Long.parseLong(newPullParser.getAttributeValue(null, "elapsedIdleTime"));
+                                        long parseLong =
+                                                Long.parseLong(
+                                                        newPullParser.getAttributeValue(
+                                                                null, "elapsedIdleTime"));
                                         appUsageHistory.lastUsedElapsedTime = parseLong;
-                                        String attributeValue3 = newPullParser.getAttributeValue(null, "lastUsedByUserElapsedTime");
+                                        String attributeValue3 =
+                                                newPullParser.getAttributeValue(
+                                                        null, "lastUsedByUserElapsedTime");
                                         if (attributeValue3 != null) {
                                             parseLong = Long.parseLong(attributeValue3);
                                         }
                                         appUsageHistory.lastUsedByUserElapsedTime = parseLong;
-                                        appUsageHistory.lastUsedScreenTime = Long.parseLong(newPullParser.getAttributeValue(null, "screenIdleTime"));
-                                        String attributeValue4 = newPullParser.getAttributeValue(null, "lastPredictedTime");
-                                        appUsageHistory.lastPredictedTime = attributeValue4 == null ? 0L : Long.parseLong(attributeValue4);
-                                        String attributeValue5 = newPullParser.getAttributeValue(null, "appLimitBucket");
-                                        appUsageHistory.currentBucket = attributeValue5 == null ? 10 : Integer.parseInt(attributeValue5);
-                                        String attributeValue6 = newPullParser.getAttributeValue(null, "bucketReason");
-                                        String attributeValue7 = newPullParser.getAttributeValue(null, "lastJobRunTime");
-                                        appUsageHistory.lastJobRunTime = attributeValue7 == null ? Long.MIN_VALUE : Long.parseLong(attributeValue7);
+                                        appUsageHistory.lastUsedScreenTime =
+                                                Long.parseLong(
+                                                        newPullParser.getAttributeValue(
+                                                                null, "screenIdleTime"));
+                                        String attributeValue4 =
+                                                newPullParser.getAttributeValue(
+                                                        null, "lastPredictedTime");
+                                        appUsageHistory.lastPredictedTime =
+                                                attributeValue4 == null
+                                                        ? 0L
+                                                        : Long.parseLong(attributeValue4);
+                                        String attributeValue5 =
+                                                newPullParser.getAttributeValue(
+                                                        null, "appLimitBucket");
+                                        appUsageHistory.currentBucket =
+                                                attributeValue5 == null
+                                                        ? 10
+                                                        : Integer.parseInt(attributeValue5);
+                                        String attributeValue6 =
+                                                newPullParser.getAttributeValue(
+                                                        null, "bucketReason");
+                                        String attributeValue7 =
+                                                newPullParser.getAttributeValue(
+                                                        null, "lastJobRunTime");
+                                        appUsageHistory.lastJobRunTime =
+                                                attributeValue7 == null
+                                                        ? Long.MIN_VALUE
+                                                        : Long.parseLong(attributeValue7);
                                         appUsageHistory.bucketingReason = 256;
                                         if (attributeValue6 != null) {
                                             try {
-                                                appUsageHistory.bucketingReason = Integer.parseInt(attributeValue6, 16);
+                                                appUsageHistory.bucketingReason =
+                                                        Integer.parseInt(attributeValue6, 16);
                                             } catch (NumberFormatException e2) {
-                                                Slog.wtf("AppIdleHistory", "Unable to read bucketing reason", e2);
+                                                Slog.wtf(
+                                                        "AppIdleHistory",
+                                                        "Unable to read bucketing reason",
+                                                        e2);
                                             }
                                         }
-                                        String attributeValue8 = newPullParser.getAttributeValue(null, "lastRestrictionAttemptElapsedTime");
-                                        appUsageHistory.lastRestrictAttemptElapsedTime = attributeValue8 == null ? 0L : Long.parseLong(attributeValue8);
-                                        String attributeValue9 = newPullParser.getAttributeValue(null, "lastRestrictionAttemptReason");
+                                        String attributeValue8 =
+                                                newPullParser.getAttributeValue(
+                                                        null, "lastRestrictionAttemptElapsedTime");
+                                        appUsageHistory.lastRestrictAttemptElapsedTime =
+                                                attributeValue8 == null
+                                                        ? 0L
+                                                        : Long.parseLong(attributeValue8);
+                                        String attributeValue9 =
+                                                newPullParser.getAttributeValue(
+                                                        null, "lastRestrictionAttemptReason");
                                         if (attributeValue9 != null) {
                                             try {
-                                                appUsageHistory.lastRestrictReason = Integer.parseInt(attributeValue9, 16);
+                                                appUsageHistory.lastRestrictReason =
+                                                        Integer.parseInt(attributeValue9, 16);
                                             } catch (NumberFormatException e3) {
-                                                Slog.wtf("AppIdleHistory", "Unable to read last restrict reason", e3);
+                                                Slog.wtf(
+                                                        "AppIdleHistory",
+                                                        "Unable to read last restrict reason",
+                                                        e3);
                                             }
                                         }
-                                        String attributeValue10 = newPullParser.getAttributeValue(null, "nextEstimatedAppLaunchTime");
-                                        appUsageHistory.nextEstimatedLaunchTime = attributeValue10 == null ? 0L : Long.parseLong(attributeValue10);
+                                        String attributeValue10 =
+                                                newPullParser.getAttributeValue(
+                                                        null, "nextEstimatedAppLaunchTime");
+                                        appUsageHistory.nextEstimatedLaunchTime =
+                                                attributeValue10 == null
+                                                        ? 0L
+                                                        : Long.parseLong(attributeValue10);
                                         Flags.avoidIdleCheck();
                                         appUsageHistory.lastInformedBucket = -1;
                                         arrayMap.put(attributeValue2, appUsageHistory);
                                         if (parseInt >= 1) {
                                             int depth = newPullParser.getDepth();
-                                            while (XmlUtils.nextElementWithin(newPullParser, depth)) {
+                                            while (XmlUtils.nextElementWithin(
+                                                    newPullParser, depth)) {
                                                 if ("expiryTimes".equals(newPullParser.getName())) {
-                                                    readBucketExpiryTimes(newPullParser, appUsageHistory);
+                                                    readBucketExpiryTimes(
+                                                            newPullParser, appUsageHistory);
                                                 }
                                             }
                                         } else {
-                                            String attributeValue11 = newPullParser.getAttributeValue(null, "activeTimeoutTime");
-                                            long parseLong2 = attributeValue11 == null ? 0L : Long.parseLong(attributeValue11);
-                                            String attributeValue12 = newPullParser.getAttributeValue(null, "workingSetTimeoutTime");
-                                            long parseLong3 = attributeValue12 == null ? 0L : Long.parseLong(attributeValue12);
+                                            String attributeValue11 =
+                                                    newPullParser.getAttributeValue(
+                                                            null, "activeTimeoutTime");
+                                            long parseLong2 =
+                                                    attributeValue11 == null
+                                                            ? 0L
+                                                            : Long.parseLong(attributeValue11);
+                                            String attributeValue12 =
+                                                    newPullParser.getAttributeValue(
+                                                            null, "workingSetTimeoutTime");
+                                            long parseLong3 =
+                                                    attributeValue12 == null
+                                                            ? 0L
+                                                            : Long.parseLong(attributeValue12);
                                             if (parseLong2 != 0 || parseLong3 != 0) {
-                                                insertBucketExpiryTime(appUsageHistory, 10, parseLong2);
-                                                insertBucketExpiryTime(appUsageHistory, 20, parseLong3);
+                                                insertBucketExpiryTime(
+                                                        appUsageHistory, 10, parseLong2);
+                                                insertBucketExpiryTime(
+                                                        appUsageHistory, 20, parseLong3);
                                             }
                                         }
                                     }
@@ -419,7 +514,14 @@ public final class AppIdleHistory {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void reportUsage(com.android.server.usage.AppIdleHistory.AppUsageHistory r16, java.lang.String r17, int r18, int r19, int r20, long r21, long r23) {
+    public final void reportUsage(
+            com.android.server.usage.AppIdleHistory.AppUsageHistory r16,
+            java.lang.String r17,
+            int r18,
+            int r19,
+            int r20,
+            long r21,
+            long r23) {
         /*
             r15 = this;
             r0 = r15
@@ -528,7 +630,10 @@ public final class AppIdleHistory {
         Lb6:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usage.AppIdleHistory.reportUsage(com.android.server.usage.AppIdleHistory$AppUsageHistory, java.lang.String, int, int, int, long, long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usage.AppIdleHistory.reportUsage(com.android.server.usage.AppIdleHistory$AppUsageHistory,"
+                    + " java.lang.String, int, int, int, long, long):void");
     }
 
     public final void setAppStandbyBucket(int i, int i2, int i3, long j, String str, boolean z) {
@@ -547,7 +652,13 @@ public final class AppIdleHistory {
             sparseLongArray.clear();
         }
         if (z2) {
-            FrameworkStatsLog.write(258, str, i, i2, i4, i3 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+            FrameworkStatsLog.write(
+                    258,
+                    str,
+                    i,
+                    i2,
+                    i4,
+                    i3 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
         }
     }
 
@@ -583,7 +694,8 @@ public final class AppIdleHistory {
                 FastXmlSerializer fastXmlSerializer2 = new FastXmlSerializer();
                 fastXmlSerializer2.setOutput(bufferedOutputStream, StandardCharsets.UTF_8.name());
                 fastXmlSerializer2.startDocument(null, Boolean.TRUE);
-                fastXmlSerializer2.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                fastXmlSerializer2.setFeature(
+                        "http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 fastXmlSerializer2.startTag(null, "packages");
                 fastXmlSerializer2.attribute(null, "version", String.valueOf(1));
                 long elapsedTime = getElapsedTime(j);
@@ -595,7 +707,9 @@ public final class AppIdleHistory {
                         String str2 = (String) userHistory.keyAt(i3);
                         if (str2 == null) {
                             try {
-                                Slog.w("AppIdleHistory", "Skipping App Idle write for unexpected null package");
+                                Slog.w(
+                                        "AppIdleHistory",
+                                        "Skipping App Idle write for unexpected null package");
                                 fileOutputStream2 = startWrite;
                                 arrayMap = userHistory;
                                 fastXmlSerializer = fastXmlSerializer2;
@@ -606,32 +720,61 @@ public final class AppIdleHistory {
                                 atomicFile = atomicFile2;
                                 fileOutputStream3 = startWrite;
                                 atomicFile.failWrite(fileOutputStream3);
-                                Slog.e("AppIdleHistory", "Error writing app idle file for user " + i, e);
+                                Slog.e(
+                                        "AppIdleHistory",
+                                        "Error writing app idle file for user " + i,
+                                        e);
                             }
                         } else {
-                            AppUsageHistory appUsageHistory = (AppUsageHistory) userHistory.valueAt(i3);
+                            AppUsageHistory appUsageHistory =
+                                    (AppUsageHistory) userHistory.valueAt(i3);
                             fastXmlSerializer2.startTag(str, "package");
                             arrayMap = userHistory;
                             fastXmlSerializer2.attribute(str, "name", str2);
                             fileOutputStream2 = startWrite;
                             try {
-                                fastXmlSerializer2.attribute(null, "elapsedIdleTime", Long.toString(appUsageHistory.lastUsedElapsedTime));
-                                fastXmlSerializer2.attribute(null, "lastUsedByUserElapsedTime", Long.toString(appUsageHistory.lastUsedByUserElapsedTime));
+                                fastXmlSerializer2.attribute(
+                                        null,
+                                        "elapsedIdleTime",
+                                        Long.toString(appUsageHistory.lastUsedElapsedTime));
+                                fastXmlSerializer2.attribute(
+                                        null,
+                                        "lastUsedByUserElapsedTime",
+                                        Long.toString(appUsageHistory.lastUsedByUserElapsedTime));
                                 fastXmlSerializer = fastXmlSerializer2;
-                                fastXmlSerializer.attribute(null, "screenIdleTime", Long.toString(appUsageHistory.lastUsedScreenTime));
+                                fastXmlSerializer.attribute(
+                                        null,
+                                        "screenIdleTime",
+                                        Long.toString(appUsageHistory.lastUsedScreenTime));
                                 j2 = elapsedTime;
-                                fastXmlSerializer.attribute(null, "lastPredictedTime", Long.toString(appUsageHistory.lastPredictedTime));
-                                fastXmlSerializer.attribute(null, "appLimitBucket", Integer.toString(appUsageHistory.currentBucket));
-                                fastXmlSerializer.attribute(null, "bucketReason", Integer.toHexString(appUsageHistory.bucketingReason));
+                                fastXmlSerializer.attribute(
+                                        null,
+                                        "lastPredictedTime",
+                                        Long.toString(appUsageHistory.lastPredictedTime));
+                                fastXmlSerializer.attribute(
+                                        null,
+                                        "appLimitBucket",
+                                        Integer.toString(appUsageHistory.currentBucket));
+                                fastXmlSerializer.attribute(
+                                        null,
+                                        "bucketReason",
+                                        Integer.toHexString(appUsageHistory.bucketingReason));
                                 long j3 = appUsageHistory.lastJobRunTime;
                                 if (j3 != Long.MIN_VALUE) {
-                                    fastXmlSerializer.attribute(null, "lastJobRunTime", Long.toString(j3));
+                                    fastXmlSerializer.attribute(
+                                            null, "lastJobRunTime", Long.toString(j3));
                                 }
                                 long j4 = appUsageHistory.lastRestrictAttemptElapsedTime;
                                 if (j4 > 0) {
-                                    fastXmlSerializer.attribute(null, "lastRestrictionAttemptElapsedTime", Long.toString(j4));
+                                    fastXmlSerializer.attribute(
+                                            null,
+                                            "lastRestrictionAttemptElapsedTime",
+                                            Long.toString(j4));
                                 }
-                                fastXmlSerializer.attribute(null, "lastRestrictionAttemptReason", Integer.toHexString(appUsageHistory.lastRestrictReason));
+                                fastXmlSerializer.attribute(
+                                        null,
+                                        "lastRestrictionAttemptReason",
+                                        Integer.toHexString(appUsageHistory.lastRestrictReason));
                                 atomicFile = atomicFile2;
                             } catch (Exception e2) {
                                 e = e2;
@@ -640,22 +783,27 @@ public final class AppIdleHistory {
                             try {
                                 long j5 = appUsageHistory.nextEstimatedLaunchTime;
                                 if (j5 > 0) {
-                                    fastXmlSerializer.attribute(null, "nextEstimatedAppLaunchTime", Long.toString(j5));
+                                    fastXmlSerializer.attribute(
+                                            null, "nextEstimatedAppLaunchTime", Long.toString(j5));
                                 }
                                 if (appUsageHistory.bucketExpiryTimesMs != null) {
                                     fastXmlSerializer.startTag(null, "expiryTimes");
                                     int size2 = appUsageHistory.bucketExpiryTimesMs.size();
                                     int i4 = 0;
                                     while (i4 < size2) {
-                                        long valueAt = appUsageHistory.bucketExpiryTimesMs.valueAt(i4);
+                                        long valueAt =
+                                                appUsageHistory.bucketExpiryTimesMs.valueAt(i4);
                                         if (valueAt < j2) {
                                             i2 = size2;
                                         } else {
-                                            int keyAt = appUsageHistory.bucketExpiryTimesMs.keyAt(i4);
+                                            int keyAt =
+                                                    appUsageHistory.bucketExpiryTimesMs.keyAt(i4);
                                             fastXmlSerializer.startTag(null, "item");
                                             i2 = size2;
-                                            fastXmlSerializer.attribute(null, "bucket", String.valueOf(keyAt));
-                                            fastXmlSerializer.attribute(null, "expiry", String.valueOf(valueAt));
+                                            fastXmlSerializer.attribute(
+                                                    null, "bucket", String.valueOf(keyAt));
+                                            fastXmlSerializer.attribute(
+                                                    null, "expiry", String.valueOf(valueAt));
                                             fastXmlSerializer.endTag(null, "item");
                                         }
                                         i4++;
@@ -668,7 +816,10 @@ public final class AppIdleHistory {
                                 e = e3;
                                 fileOutputStream3 = fileOutputStream2;
                                 atomicFile.failWrite(fileOutputStream3);
-                                Slog.e("AppIdleHistory", "Error writing app idle file for user " + i, e);
+                                Slog.e(
+                                        "AppIdleHistory",
+                                        "Error writing app idle file for user " + i,
+                                        e);
                             }
                         }
                         i3++;
@@ -720,7 +871,12 @@ public final class AppIdleHistory {
         try {
             fileOutputStream = atomicFile.startWrite();
             try {
-                fileOutputStream.write((Long.toString(this.mScreenOnDuration) + "\n" + Long.toString(this.mElapsedDuration) + "\n").getBytes());
+                fileOutputStream.write(
+                        (Long.toString(this.mScreenOnDuration)
+                                        + "\n"
+                                        + Long.toString(this.mElapsedDuration)
+                                        + "\n")
+                                .getBytes());
                 atomicFile.finishWrite(fileOutputStream);
             } catch (IOException unused) {
                 atomicFile.failWrite(fileOutputStream);

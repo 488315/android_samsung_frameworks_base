@@ -25,12 +25,11 @@ import android.util.Slog;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
 import android.util.proto.ProtoUtils;
+
 import com.android.internal.app.procstats.ServiceState;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.accessibility.magnification.WindowMagnificationGestureHandler$$ExternalSyntheticOutline0;
-import com.android.server.am.ActiveServices;
-import com.android.server.am.ActivityManagerService;
 import com.android.server.notification.NotificationManagerInternal;
 import com.android.server.notification.NotificationManagerService;
 import com.android.server.uri.GrantUri;
@@ -38,6 +37,7 @@ import com.android.server.uri.NeededUriGrants;
 import com.android.server.uri.UriPermission;
 import com.android.server.uri.UriPermissionOwner;
 import com.android.server.wm.ActivityServiceConnectionsHolder;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -135,7 +135,8 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
     public final ArrayMap bindings = new ArrayMap();
     public final ArrayMap connections = new ArrayMap();
     public final ArrayList mBackgroundStartPrivilegesByStart = new ArrayList();
-    public BackgroundStartPrivileges mBackgroundStartPrivilegesByStartMerged = BackgroundStartPrivileges.NONE;
+    public BackgroundStartPrivileges mBackgroundStartPrivilegesByStartMerged =
+            BackgroundStartPrivileges.NONE;
     public int mAllowWiu_noBinding = -1;
     public long mFgsEnterTime = 0;
     public long mFgsExitTime = 0;
@@ -166,7 +167,20 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
         public final IBinder token;
         public final int userId;
 
-        public BindItem(IApplicationThread iApplicationThread, IBinder iBinder, Intent intent, String str, IServiceConnection iServiceConnection, long j, String str2, boolean z, int i, String str3, IApplicationThread iApplicationThread2, String str4, int i2) {
+        public BindItem(
+                IApplicationThread iApplicationThread,
+                IBinder iBinder,
+                Intent intent,
+                String str,
+                IServiceConnection iServiceConnection,
+                long j,
+                String str2,
+                boolean z,
+                int i,
+                String str3,
+                IApplicationThread iApplicationThread2,
+                String str4,
+                int i2) {
             this.caller = iApplicationThread;
             this.token = iBinder;
             this.service = intent;
@@ -196,11 +210,15 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
         }
 
         public final long getAnrTime() {
-            return this.mStartTime + ServiceRecord.this.ams.mConstants.mShortFgsTimeoutDuration + ServiceRecord.this.ams.mConstants.mShortFgsAnrExtraWaitDuration;
+            return this.mStartTime
+                    + ServiceRecord.this.ams.mConstants.mShortFgsTimeoutDuration
+                    + ServiceRecord.this.ams.mConstants.mShortFgsAnrExtraWaitDuration;
         }
 
         public final long getProcStateDemoteTime() {
-            return this.mStartTime + ServiceRecord.this.ams.mConstants.mShortFgsTimeoutDuration + ServiceRecord.this.ams.mConstants.mShortFgsProcStateExtraWaitDuration;
+            return this.mStartTime
+                    + ServiceRecord.this.ams.mConstants.mShortFgsTimeoutDuration
+                    + ServiceRecord.this.ams.mConstants.mShortFgsProcStateExtraWaitDuration;
         }
 
         public final long getTimeoutTime() {
@@ -225,7 +243,16 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
         public final boolean taskRemoved;
         public UriPermissionOwner uriPermissions;
 
-        public StartItem(ServiceRecord serviceRecord, boolean z, int i, Intent intent, NeededUriGrants neededUriGrants, int i2, String str, String str2, int i3) {
+        public StartItem(
+                ServiceRecord serviceRecord,
+                boolean z,
+                int i,
+                Intent intent,
+                NeededUriGrants neededUriGrants,
+                int i2,
+                String str,
+                String str2,
+                int i3) {
             this.sr = serviceRecord;
             this.taskRemoved = z;
             this.id = i;
@@ -255,7 +282,8 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
                 protoOutputStream.write(1120986464259L, neededUriGrants.flags);
                 int size = neededUriGrants.uris.size();
                 for (int i = 0; i < size; i++) {
-                    ((GrantUri) neededUriGrants.uris.valueAt(i)).dumpDebug(protoOutputStream, 2246267895812L);
+                    ((GrantUri) neededUriGrants.uris.valueAt(i))
+                            .dumpDebug(protoOutputStream, 2246267895812L);
                 }
                 protoOutputStream.end(start2);
             }
@@ -269,14 +297,16 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
                         if (arraySet != null) {
                             Iterator it = arraySet.iterator();
                             while (it.hasNext()) {
-                                ((UriPermission) it.next()).uri.dumpDebug(protoOutputStream, 2246267895810L);
+                                ((UriPermission) it.next())
+                                        .uri.dumpDebug(protoOutputStream, 2246267895810L);
                             }
                         }
                         ArraySet arraySet2 = uriPermissionOwner.mWritePerms;
                         if (arraySet2 != null) {
                             Iterator it2 = arraySet2.iterator();
                             while (it2.hasNext()) {
-                                ((UriPermission) it2.next()).uri.dumpDebug(protoOutputStream, 2246267895811L);
+                                ((UriPermission) it2.next())
+                                        .uri.dumpDebug(protoOutputStream, 2246267895811L);
                             }
                         }
                     } catch (Throwable th) {
@@ -301,7 +331,8 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
             m.append(" StartItem ");
             m.append(Integer.toHexString(System.identityHashCode(this)));
             m.append(" id=");
-            String m2 = WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(m, this.id, '}');
+            String m2 =
+                    WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(m, this.id, '}');
             this.stringName = m2;
             return m2;
         }
@@ -342,7 +373,11 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
         public final ActivityServiceConnectionsHolder skipAct;
         public final ProcessRecord skipApp;
 
-        public removeConnectionItem(ConnectionRecord connectionRecord, ProcessRecord processRecord, ActivityServiceConnectionsHolder activityServiceConnectionsHolder, boolean z) {
+        public removeConnectionItem(
+                ConnectionRecord connectionRecord,
+                ProcessRecord processRecord,
+                ActivityServiceConnectionsHolder activityServiceConnectionsHolder,
+                boolean z) {
             this.c = connectionRecord;
             this.skipApp = processRecord;
             this.skipAct = activityServiceConnectionsHolder;
@@ -351,13 +386,19 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
     }
 
     /* renamed from: -$$Nest$msignalForegroundServiceNotification, reason: not valid java name */
-    public static void m206$$Nest$msignalForegroundServiceNotification(int i, ServiceRecord serviceRecord, String str, boolean z) {
+    public static void m206$$Nest$msignalForegroundServiceNotification(
+            int i, ServiceRecord serviceRecord, String str, boolean z) {
         ActivityManagerService activityManagerService = serviceRecord.ams;
         ActivityManagerService.boostPriorityForLockedSection();
         synchronized (activityManagerService) {
             try {
-                for (int size = serviceRecord.ams.mForegroundServiceStateListeners.size() - 1; size >= 0; size--) {
-                    ((ActivityManagerInternal.ForegroundServiceStateListener) serviceRecord.ams.mForegroundServiceStateListeners.get(size)).onForegroundServiceNotificationUpdated(str, serviceRecord.appInfo.uid, i, z);
+                for (int size = serviceRecord.ams.mForegroundServiceStateListeners.size() - 1;
+                        size >= 0;
+                        size--) {
+                    ((ActivityManagerInternal.ForegroundServiceStateListener)
+                                    serviceRecord.ams.mForegroundServiceStateListeners.get(size))
+                            .onForegroundServiceNotificationUpdated(
+                                    str, serviceRecord.appInfo.uid, i, z);
                 }
             } catch (Throwable th) {
                 ActivityManagerService.resetPriorityAfterLockedSection();
@@ -367,7 +408,20 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
         ActivityManagerService.resetPriorityAfterLockedSection();
     }
 
-    public ServiceRecord(ActivityManagerService activityManagerService, ComponentName componentName, ComponentName componentName2, String str, int i, Intent.FilterComparison filterComparison, ServiceInfo serviceInfo, boolean z, ActiveServices.ServiceRestarter serviceRestarter, String str2, int i2, String str3, boolean z2) {
+    public ServiceRecord(
+            ActivityManagerService activityManagerService,
+            ComponentName componentName,
+            ComponentName componentName2,
+            String str,
+            int i,
+            Intent.FilterComparison filterComparison,
+            ServiceInfo serviceInfo,
+            boolean z,
+            ActiveServices.ServiceRestarter serviceRestarter,
+            String str2,
+            int i2,
+            String str3,
+            boolean z2) {
         this.ams = activityManagerService;
         this.name = componentName;
         this.instanceName = componentName2;
@@ -393,23 +447,30 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
         this.userId = UserHandle.getUserId(this.appInfo.uid);
         this.createdFromFg = z;
         updateKeepWarmLocked();
-        activityManagerService.mHandler.post(new Runnable(str4, this.appInfo.uid) { // from class: com.android.server.am.ServiceRecord.1
-            public final /* synthetic */ int val$appUid;
-            public final /* synthetic */ String val$localPackageName;
+        activityManagerService.mHandler.post(
+                new Runnable(
+                        str4,
+                        this.appInfo.uid) { // from class: com.android.server.am.ServiceRecord.1
+                    public final /* synthetic */ int val$appUid;
+                    public final /* synthetic */ String val$localPackageName;
 
-            {
-                this.val$appUid = r3;
-            }
+                    {
+                        this.val$appUid = r3;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                NotificationManagerInternal notificationManagerInternal = (NotificationManagerInternal) LocalServices.getService(NotificationManagerInternal.class);
-                if (notificationManagerInternal == null) {
-                    return;
-                }
-                ServiceRecord.this.mFgsHasNotificationPermission = NotificationManagerService.this.mPermissionHelper.hasPermission(this.val$appUid);
-            }
-        });
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        NotificationManagerInternal notificationManagerInternal =
+                                (NotificationManagerInternal)
+                                        LocalServices.getService(NotificationManagerInternal.class);
+                        if (notificationManagerInternal == null) {
+                            return;
+                        }
+                        ServiceRecord.this.mFgsHasNotificationPermission =
+                                NotificationManagerService.this.mPermissionHelper.hasPermission(
+                                        this.val$appUid);
+                    }
+                });
     }
 
     public static void dumpReasonCode(int i, PrintWriter printWriter, String str, String str2) {
@@ -473,7 +534,8 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
             ArraySet arraySet = processServiceRecord.mBoundClientUids;
             int i = connectionRecord.clientUid;
             arraySet.add(Integer.valueOf(i));
-            processServiceRecord.mApp.mWindowProcessController.addBoundClientUid(i, connectionRecord.clientPackageName, connectionRecord.flags);
+            processServiceRecord.mApp.mWindowProcessController.addBoundClientUid(
+                    i, connectionRecord.clientPackageName, connectionRecord.flags);
             this.app.mProfile.addHostingComponentType(512);
         }
     }
@@ -491,37 +553,54 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
         final int i2 = this.appInfo.uid;
         ProcessRecord processRecord = this.app;
         final int i3 = processRecord != null ? processRecord.mPid : 0;
-        this.ams.mHandler.post(new Runnable() { // from class: com.android.server.am.ServiceRecord.3
-            @Override // java.lang.Runnable
-            public final void run() {
-                NotificationManagerInternal notificationManagerInternal = (NotificationManagerInternal) LocalServices.getService(NotificationManagerInternal.class);
-                if (notificationManagerInternal == null) {
-                    return;
-                }
-                try {
-                    String str2 = str;
-                    int i4 = i2;
-                    int i5 = i3;
-                    int i6 = i;
-                    int i7 = ServiceRecord.this.userId;
-                    NotificationManagerService.AnonymousClass17 anonymousClass17 = (NotificationManagerService.AnonymousClass17) notificationManagerInternal;
-                    NotificationManagerService.this.getClass();
-                    NotificationManagerService.this.cancelNotificationInternal(i4, i5, i6, i7, NotificationManagerService.isCallingUidSystem() ? 0 : 33856, str2, str2, null);
-                } catch (RuntimeException e) {
-                    Slog.w("ActivityManager", "Error canceling notification for service", e);
-                }
-                ServiceRecord serviceRecord = ServiceRecord.this;
-                String str3 = serviceRecord.packageName;
-                int i8 = serviceRecord.appInfo.uid;
-                ServiceRecord.m206$$Nest$msignalForegroundServiceNotification(i, serviceRecord, str3, true);
-            }
-        });
+        this.ams.mHandler.post(
+                new Runnable() { // from class: com.android.server.am.ServiceRecord.3
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        NotificationManagerInternal notificationManagerInternal =
+                                (NotificationManagerInternal)
+                                        LocalServices.getService(NotificationManagerInternal.class);
+                        if (notificationManagerInternal == null) {
+                            return;
+                        }
+                        try {
+                            String str2 = str;
+                            int i4 = i2;
+                            int i5 = i3;
+                            int i6 = i;
+                            int i7 = ServiceRecord.this.userId;
+                            NotificationManagerService.AnonymousClass17 anonymousClass17 =
+                                    (NotificationManagerService.AnonymousClass17)
+                                            notificationManagerInternal;
+                            NotificationManagerService.this.getClass();
+                            NotificationManagerService.this.cancelNotificationInternal(
+                                    i4,
+                                    i5,
+                                    i6,
+                                    i7,
+                                    NotificationManagerService.isCallingUidSystem() ? 0 : 33856,
+                                    str2,
+                                    str2,
+                                    null);
+                        } catch (RuntimeException e) {
+                            Slog.w(
+                                    "ActivityManager",
+                                    "Error canceling notification for service",
+                                    e);
+                        }
+                        ServiceRecord serviceRecord = ServiceRecord.this;
+                        String str3 = serviceRecord.packageName;
+                        int i8 = serviceRecord.appInfo.uid;
+                        ServiceRecord.m206$$Nest$msignalForegroundServiceNotification(
+                                i, serviceRecord, str3, true);
+                    }
+                });
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:79:0x03fd, code lost:
-    
-        if (r12 == 0) goto L95;
-     */
+
+       if (r12 == 0) goto L95;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r13v14 */
     /* JADX WARN: Type inference failed for: r13v15, types: [int] */
@@ -536,13 +615,16 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
             Method dump skipped, instructions count: 1469
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.ServiceRecord.dump(java.io.PrintWriter, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.ServiceRecord.dump(java.io.PrintWriter,"
+                    + " java.lang.String):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:47:0x0219, code lost:
-    
-        if (r1 == 0) goto L56;
-     */
+
+       if (r1 == 0) goto L56;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -552,7 +634,9 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
             Method dump skipped, instructions count: 1232
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.ServiceRecord.dumpDebug(android.util.proto.ProtoOutputStream):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.ServiceRecord.dumpDebug(android.util.proto.ProtoOutputStream):void");
     }
 
     public final StartItem findDeliveredStart(int i, boolean z, boolean z2) {
@@ -570,7 +654,11 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
     }
 
     public final BackgroundStartPrivileges getBackgroundStartPrivilegesWithExclusiveToken() {
-        return this.mIsAllowedBgActivityStartsByBinding ? BackgroundStartPrivileges.ALLOW_BAL : this.mBackgroundStartPrivilegesByStart.isEmpty() ? BackgroundStartPrivileges.NONE : this.mBackgroundStartPrivilegesByStartMerged;
+        return this.mIsAllowedBgActivityStartsByBinding
+                ? BackgroundStartPrivileges.ALLOW_BAL
+                : this.mBackgroundStartPrivilegesByStart.isEmpty()
+                        ? BackgroundStartPrivileges.NONE
+                        : this.mBackgroundStartPrivilegesByStartMerged;
     }
 
     public final ComponentName getComponentName() {
@@ -621,7 +709,9 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
             String str2 = serviceInfo.processName;
             String str3 = serviceInfo.name;
             synchronized (processStatsService.mLock) {
-                serviceStateLocked = processStatsService.mProcessStats.getServiceStateLocked(str, i, j, str2, str3);
+                serviceStateLocked =
+                        processStatsService.mProcessStats.getServiceStateLocked(
+                                str, i, j, str2, str3);
             }
             this.tracker = serviceStateLocked;
             if (serviceStateLocked != null) {
@@ -683,7 +773,9 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
                 String str2 = serviceInfo.processName;
                 String str3 = serviceInfo.name;
                 synchronized (processStatsService.mLock) {
-                    serviceStateLocked = processStatsService.mProcessStats.getServiceStateLocked(str, i2, j2, str2, str3);
+                    serviceStateLocked =
+                            processStatsService.mProcessStats.getServiceStateLocked(
+                                    str, i2, j2, str2, str3);
                 }
                 this.restartTracker = serviceStateLocked;
             }
@@ -729,7 +821,11 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
             sb.append(PowerExemptionManager.reasonCodeToString(i5));
             sb.append(" New BFSL:");
             sb.append(PowerExemptionManager.reasonCodeToString(i4));
-            sb.append(" cmp: " + this.name.toShortString() + " sdk: " + this.appInfo.targetSdkVersion);
+            sb.append(
+                    " cmp: "
+                            + this.name.toShortString()
+                            + " sdk: "
+                            + this.appInfo.targetSdkVersion);
             Slog.wtf("ActivityManager", sb.toString());
         }
     }
@@ -737,100 +833,187 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
     public final void postNotification(final boolean z) {
         final Notification notification;
         ProcessRecord processRecord;
-        if (!this.isForeground || (notification = this.foregroundNoti) == null || (processRecord = this.app) == null) {
+        if (!this.isForeground
+                || (notification = this.foregroundNoti) == null
+                || (processRecord = this.app) == null) {
             return;
         }
         final int i = this.appInfo.uid;
         final int i2 = processRecord.mPid;
         final String str = this.packageName;
         final int i3 = this.foregroundId;
-        this.ams.mHandler.post(new Runnable() { // from class: com.android.server.am.ServiceRecord.2
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i4;
-                NotificationManagerInternal notificationManagerInternal = (NotificationManagerInternal) LocalServices.getService(NotificationManagerInternal.class);
-                if (notificationManagerInternal == null) {
-                    return;
-                }
-                NotificationManagerService.AnonymousClass17 anonymousClass17 = (NotificationManagerService.AnonymousClass17) notificationManagerInternal;
-                ServiceRecord.this.mFgsHasNotificationPermission = NotificationManagerService.this.mPermissionHelper.hasPermission(i);
-                Notification notification2 = notification;
-                try {
-                    if (notification2.getSmallIcon() == null) {
-                        Slog.v("ActivityManager", "Attempted to start a foreground service (" + ServiceRecord.this.shortInstanceName + ") with a broken notification (no icon: " + notification2 + ")");
-                        ServiceRecord serviceRecord = ServiceRecord.this;
-                        CharSequence loadLabel = serviceRecord.appInfo.loadLabel(serviceRecord.ams.mContext.getPackageManager());
-                        if (loadLabel == null) {
-                            loadLabel = ServiceRecord.this.appInfo.packageName;
+        this.ams.mHandler.post(
+                new Runnable() { // from class: com.android.server.am.ServiceRecord.2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i4;
+                        NotificationManagerInternal notificationManagerInternal =
+                                (NotificationManagerInternal)
+                                        LocalServices.getService(NotificationManagerInternal.class);
+                        if (notificationManagerInternal == null) {
+                            return;
                         }
+                        NotificationManagerService.AnonymousClass17 anonymousClass17 =
+                                (NotificationManagerService.AnonymousClass17)
+                                        notificationManagerInternal;
+                        ServiceRecord.this.mFgsHasNotificationPermission =
+                                NotificationManagerService.this.mPermissionHelper.hasPermission(i);
+                        Notification notification2 = notification;
                         try {
-                            ServiceRecord serviceRecord2 = ServiceRecord.this;
-                            Notification.Builder builder = new Notification.Builder(serviceRecord2.ams.mContext.createPackageContextAsUser(serviceRecord2.appInfo.packageName, 0, new UserHandle(ServiceRecord.this.userId)), notification2.getChannelId());
-                            builder.setSmallIcon(ServiceRecord.this.appInfo.icon);
-                            builder.setFlag(64, true);
-                            Intent intent = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
-                            intent.setData(Uri.fromParts("package", ServiceRecord.this.appInfo.packageName, null));
-                            ServiceRecord serviceRecord3 = ServiceRecord.this;
-                            PendingIntent activityAsUser = PendingIntent.getActivityAsUser(serviceRecord3.ams.mContext, 0, intent, 201326592, null, UserHandle.of(serviceRecord3.userId));
-                            builder.setColor(ServiceRecord.this.ams.mContext.getColor(R.color.system_notification_accent_color));
-                            builder.setContentTitle(ServiceRecord.this.ams.mContext.getString(R.string.conference_call, loadLabel));
-                            builder.setContentText(ServiceRecord.this.ams.mContext.getString(R.string.condition_provider_service_binding_label, loadLabel));
-                            builder.setContentIntent(activityAsUser);
-                            notification2 = builder.build();
-                        } catch (PackageManager.NameNotFoundException unused) {
-                        }
-                    }
-                    if (anonymousClass17.getNotificationChannel(i, str, notification2.getChannelId()) == null) {
-                        try {
-                            PackageManager packageManager = ServiceRecord.this.ams.mContext.getPackageManager();
-                            ServiceRecord serviceRecord4 = ServiceRecord.this;
-                            i4 = packageManager.getApplicationInfoAsUser(serviceRecord4.appInfo.packageName, 0, serviceRecord4.userId).targetSdkVersion;
-                        } catch (PackageManager.NameNotFoundException unused2) {
-                            i4 = 27;
-                        }
-                        if (i4 >= 27) {
-                            throw new RuntimeException("invalid channel for service notification: " + ServiceRecord.this.foregroundNoti);
-                        }
-                    }
-                    if (notification2.getSmallIcon() == null) {
-                        throw new RuntimeException("invalid service notification: " + ServiceRecord.this.foregroundNoti);
-                    }
-                    String str2 = str;
-                    NotificationManagerService.this.enqueueNotificationInternal(str2, str2, i, i2, null, i3, notification2, ServiceRecord.this.userId, false, z);
-                    ServiceRecord serviceRecord5 = ServiceRecord.this;
-                    serviceRecord5.foregroundNoti = notification2;
-                    String str3 = serviceRecord5.packageName;
-                    int i5 = serviceRecord5.appInfo.uid;
-                    ServiceRecord.m206$$Nest$msignalForegroundServiceNotification(i3, serviceRecord5, str3, false);
-                } catch (RuntimeException e) {
-                    Slog.w("ActivityManager", "Error showing notification for service", e);
-                    ActiveServices activeServices = ServiceRecord.this.ams.mServices;
-                    ServiceRecord serviceRecord6 = this;
-                    int i6 = i;
-                    int i7 = i2;
-                    String str4 = str;
-                    ActivityManagerService activityManagerService = activeServices.mAm;
-                    ActivityManagerService.boostPriorityForLockedSection();
-                    synchronized (activityManagerService) {
-                        try {
-                            if (serviceRecord6.destroying) {
-                                ServiceRecord serviceRecord7 = (ServiceRecord) activeServices.getServiceMapLocked(serviceRecord6.userId).mServicesByInstanceName.remove(serviceRecord6.instanceName);
-                                if (serviceRecord7 != null) {
-                                    activeServices.stopServiceLocked(serviceRecord7, false);
+                            if (notification2.getSmallIcon() == null) {
+                                Slog.v(
+                                        "ActivityManager",
+                                        "Attempted to start a foreground service ("
+                                                + ServiceRecord.this.shortInstanceName
+                                                + ") with a broken notification (no icon: "
+                                                + notification2
+                                                + ")");
+                                ServiceRecord serviceRecord = ServiceRecord.this;
+                                CharSequence loadLabel =
+                                        serviceRecord.appInfo.loadLabel(
+                                                serviceRecord.ams.mContext.getPackageManager());
+                                if (loadLabel == null) {
+                                    loadLabel = ServiceRecord.this.appInfo.packageName;
                                 }
-                            } else {
-                                activeServices.stopServiceLocked(serviceRecord6, false);
+                                try {
+                                    ServiceRecord serviceRecord2 = ServiceRecord.this;
+                                    Notification.Builder builder =
+                                            new Notification.Builder(
+                                                    serviceRecord2.ams.mContext
+                                                            .createPackageContextAsUser(
+                                                                    serviceRecord2
+                                                                            .appInfo
+                                                                            .packageName,
+                                                                    0,
+                                                                    new UserHandle(
+                                                                            ServiceRecord.this
+                                                                                    .userId)),
+                                                    notification2.getChannelId());
+                                    builder.setSmallIcon(ServiceRecord.this.appInfo.icon);
+                                    builder.setFlag(64, true);
+                                    Intent intent =
+                                            new Intent(
+                                                    "android.settings.APPLICATION_DETAILS_SETTINGS");
+                                    intent.setData(
+                                            Uri.fromParts(
+                                                    "package",
+                                                    ServiceRecord.this.appInfo.packageName,
+                                                    null));
+                                    ServiceRecord serviceRecord3 = ServiceRecord.this;
+                                    PendingIntent activityAsUser =
+                                            PendingIntent.getActivityAsUser(
+                                                    serviceRecord3.ams.mContext,
+                                                    0,
+                                                    intent,
+                                                    201326592,
+                                                    null,
+                                                    UserHandle.of(serviceRecord3.userId));
+                                    builder.setColor(
+                                            ServiceRecord.this.ams.mContext.getColor(
+                                                    R.color.system_notification_accent_color));
+                                    builder.setContentTitle(
+                                            ServiceRecord.this.ams.mContext.getString(
+                                                    R.string.conference_call, loadLabel));
+                                    builder.setContentText(
+                                            ServiceRecord.this.ams.mContext.getString(
+                                                    R.string
+                                                            .condition_provider_service_binding_label,
+                                                    loadLabel));
+                                    builder.setContentIntent(activityAsUser);
+                                    notification2 = builder.build();
+                                } catch (PackageManager.NameNotFoundException unused) {
+                                }
                             }
-                            activeServices.mAm.crashApplicationWithTypeWithExtras(i6, i7, str4, -1, "Bad notification for startForeground", true, 2, null);
-                            ActivityManagerService.resetPriorityAfterLockedSection();
-                        } catch (Throwable th) {
-                            ActivityManagerService.resetPriorityAfterLockedSection();
-                            throw th;
+                            if (anonymousClass17.getNotificationChannel(
+                                            i, str, notification2.getChannelId())
+                                    == null) {
+                                try {
+                                    PackageManager packageManager =
+                                            ServiceRecord.this.ams.mContext.getPackageManager();
+                                    ServiceRecord serviceRecord4 = ServiceRecord.this;
+                                    i4 =
+                                            packageManager.getApplicationInfoAsUser(
+                                                            serviceRecord4.appInfo.packageName,
+                                                            0,
+                                                            serviceRecord4.userId)
+                                                    .targetSdkVersion;
+                                } catch (PackageManager.NameNotFoundException unused2) {
+                                    i4 = 27;
+                                }
+                                if (i4 >= 27) {
+                                    throw new RuntimeException(
+                                            "invalid channel for service notification: "
+                                                    + ServiceRecord.this.foregroundNoti);
+                                }
+                            }
+                            if (notification2.getSmallIcon() == null) {
+                                throw new RuntimeException(
+                                        "invalid service notification: "
+                                                + ServiceRecord.this.foregroundNoti);
+                            }
+                            String str2 = str;
+                            NotificationManagerService.this.enqueueNotificationInternal(
+                                    str2,
+                                    str2,
+                                    i,
+                                    i2,
+                                    null,
+                                    i3,
+                                    notification2,
+                                    ServiceRecord.this.userId,
+                                    false,
+                                    z);
+                            ServiceRecord serviceRecord5 = ServiceRecord.this;
+                            serviceRecord5.foregroundNoti = notification2;
+                            String str3 = serviceRecord5.packageName;
+                            int i5 = serviceRecord5.appInfo.uid;
+                            ServiceRecord.m206$$Nest$msignalForegroundServiceNotification(
+                                    i3, serviceRecord5, str3, false);
+                        } catch (RuntimeException e) {
+                            Slog.w("ActivityManager", "Error showing notification for service", e);
+                            ActiveServices activeServices = ServiceRecord.this.ams.mServices;
+                            ServiceRecord serviceRecord6 = this;
+                            int i6 = i;
+                            int i7 = i2;
+                            String str4 = str;
+                            ActivityManagerService activityManagerService = activeServices.mAm;
+                            ActivityManagerService.boostPriorityForLockedSection();
+                            synchronized (activityManagerService) {
+                                try {
+                                    if (serviceRecord6.destroying) {
+                                        ServiceRecord serviceRecord7 =
+                                                (ServiceRecord)
+                                                        activeServices
+                                                                .getServiceMapLocked(
+                                                                        serviceRecord6.userId)
+                                                                .mServicesByInstanceName
+                                                                .remove(
+                                                                        serviceRecord6
+                                                                                .instanceName);
+                                        if (serviceRecord7 != null) {
+                                            activeServices.stopServiceLocked(serviceRecord7, false);
+                                        }
+                                    } else {
+                                        activeServices.stopServiceLocked(serviceRecord6, false);
+                                    }
+                                    activeServices.mAm.crashApplicationWithTypeWithExtras(
+                                            i6,
+                                            i7,
+                                            str4,
+                                            -1,
+                                            "Bad notification for startForeground",
+                                            true,
+                                            2,
+                                            null);
+                                    ActivityManagerService.resetPriorityAfterLockedSection();
+                                } catch (Throwable th) {
+                                    ActivityManagerService.resetPriorityAfterLockedSection();
+                                    throw th;
+                                }
+                            }
                         }
                     }
-                }
-            }
-        });
+                });
     }
 
     public final void setProcess(ProcessRecord processRecord) {
@@ -838,12 +1021,16 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
             ProcessRecord processRecord2 = this.mAppForAllowingBgActivityStartsByStart;
             if (processRecord2 != null && processRecord2 != processRecord) {
                 processRecord2.removeBackgroundStartPrivileges(this);
-                this.ams.mHandler.removeCallbacks(this.mCleanUpAllowBgActivityStartsByStartCallback);
+                this.ams.mHandler.removeCallbacks(
+                        this.mCleanUpAllowBgActivityStartsByStartCallback);
             }
-            this.mAppForAllowingBgActivityStartsByStart = this.mBackgroundStartPrivilegesByStartMerged.allowsAny() ? processRecord : null;
-            BackgroundStartPrivileges backgroundStartPrivilegesWithExclusiveToken = getBackgroundStartPrivilegesWithExclusiveToken();
+            this.mAppForAllowingBgActivityStartsByStart =
+                    this.mBackgroundStartPrivilegesByStartMerged.allowsAny() ? processRecord : null;
+            BackgroundStartPrivileges backgroundStartPrivilegesWithExclusiveToken =
+                    getBackgroundStartPrivilegesWithExclusiveToken();
             if (backgroundStartPrivilegesWithExclusiveToken.allowsAny()) {
-                processRecord.addOrUpdateBackgroundStartPrivileges(this, backgroundStartPrivilegesWithExclusiveToken);
+                processRecord.addOrUpdateBackgroundStartPrivileges(
+                        this, backgroundStartPrivilegesWithExclusiveToken);
             } else {
                 processRecord.removeBackgroundStartPrivileges(this);
             }
@@ -888,7 +1075,18 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
     public final boolean shouldTriggerShortFgsTimedEvent(long j, long j2) {
         ShortFgsInfo shortFgsInfo;
         ProcessRecord processRecord = this.app;
-        return (processRecord == null || processRecord.mThread == null || processRecord.mKilled || processRecord.mKilledByAm || !this.startRequested || !isShortFgs() || (shortFgsInfo = this.mShortFgsInfo) == null || shortFgsInfo.mStartForegroundCount != ServiceRecord.this.mStartForegroundCount || j > j2) ? false : true;
+        return (processRecord == null
+                        || processRecord.mThread == null
+                        || processRecord.mKilled
+                        || processRecord.mKilledByAm
+                        || !this.startRequested
+                        || !isShortFgs()
+                        || (shortFgsInfo = this.mShortFgsInfo) == null
+                        || shortFgsInfo.mStartForegroundCount
+                                != ServiceRecord.this.mStartForegroundCount
+                        || j > j2)
+                ? false
+                : true;
     }
 
     public final String toString() {
@@ -913,9 +1111,9 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0041, code lost:
-    
-        if (com.android.server.am.ActivityManagerService.isSingleton(r1, r2, r3, r4) != false) goto L17;
-     */
+
+       if (com.android.server.am.ActivityManagerService.isSingleton(r1, r2, r3, r4) != false) goto L17;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -966,7 +1164,9 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
             r5.mKeepWarming = r0
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.ServiceRecord.updateKeepWarmLocked():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.ServiceRecord.updateKeepWarmLocked():void");
     }
 
     public final void updateOomAdjSeq() {
@@ -978,7 +1178,10 @@ public final class ServiceRecord extends Binder implements ComponentName.WithCom
 
     public final void updateProcessStateOnRequest() {
         ProcessRecord processRecord = this.app;
-        this.mProcessStateOnRequest = (processRecord == null || processRecord.mThread == null || processRecord.mKilled) ? 20 : processRecord.mState.mCurProcState;
+        this.mProcessStateOnRequest =
+                (processRecord == null || processRecord.mThread == null || processRecord.mKilled)
+                        ? 20
+                        : processRecord.mState.mCurProcState;
     }
 
     public final boolean wasOomAdjUpdated() {

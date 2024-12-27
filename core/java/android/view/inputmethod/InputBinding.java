@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public final class InputBinding implements Parcelable {
-    public static final Parcelable.Creator<InputBinding> CREATOR = new Parcelable.Creator<InputBinding>() { // from class: android.view.inputmethod.InputBinding.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputBinding createFromParcel(Parcel source) {
-            return new InputBinding(source);
-        }
+    public static final Parcelable.Creator<InputBinding> CREATOR =
+            new Parcelable.Creator<
+                    InputBinding>() { // from class: android.view.inputmethod.InputBinding.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputBinding createFromParcel(Parcel source) {
+                    return new InputBinding(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputBinding[] newArray(int size) {
-            return new InputBinding[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputBinding[] newArray(int size) {
+                    return new InputBinding[size];
+                }
+            };
     static final String TAG = "InputBinding";
     final InputConnection mConnection;
     final IBinder mConnectionToken;
@@ -63,7 +65,13 @@ public final class InputBinding implements Parcelable {
     }
 
     public String toString() {
-        return "InputBinding{" + this.mConnectionToken + " / uid " + this.mUid + " / pid " + this.mPid + "}";
+        return "InputBinding{"
+                + this.mConnectionToken
+                + " / uid "
+                + this.mUid
+                + " / pid "
+                + this.mPid
+                + "}";
     }
 
     @Override // android.os.Parcelable

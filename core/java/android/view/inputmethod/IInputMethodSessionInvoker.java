@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.inputmethod.IInputMethodSession;
 import com.android.internal.inputmethod.IRemoteInputConnection;
 
@@ -18,7 +19,8 @@ final class IInputMethodSessionInvoker {
     private final Handler mCustomHandler;
     private final IInputMethodSession mSession;
 
-    private IInputMethodSessionInvoker(IInputMethodSession inputMethodSession, Handler customHandler) {
+    private IInputMethodSessionInvoker(
+            IInputMethodSession inputMethodSession, Handler customHandler) {
         this.mSession = inputMethodSession;
         this.mCustomHandler = customHandler;
     }
@@ -47,12 +49,14 @@ final class IInputMethodSessionInvoker {
         if (this.mCustomHandler == null) {
             finishInputInternal();
         } else {
-            this.mCustomHandler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IInputMethodSessionInvoker.this.finishInputInternal();
-                }
-            });
+            this.mCustomHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IInputMethodSessionInvoker.this.finishInputInternal();
+                        }
+                    });
         }
     }
 
@@ -69,12 +73,15 @@ final class IInputMethodSessionInvoker {
         if (this.mCustomHandler == null) {
             lambda$updateCursorAnchorInfo$0(cursorAnchorInfo);
         } else {
-            this.mCustomHandler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$updateCursorAnchorInfo$0(cursorAnchorInfo);
-                }
-            });
+            this.mCustomHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IInputMethodSessionInvoker.this.lambda$updateCursorAnchorInfo$0(
+                                    cursorAnchorInfo);
+                        }
+                    });
         }
     }
 
@@ -92,12 +99,15 @@ final class IInputMethodSessionInvoker {
         if (this.mCustomHandler == null) {
             lambda$displayCompletions$1(completions);
         } else {
-            this.mCustomHandler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda6
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$displayCompletions$1(completions);
-                }
-            });
+            this.mCustomHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda6
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IInputMethodSessionInvoker.this.lambda$displayCompletions$1(
+                                    completions);
+                        }
+                    });
         }
     }
 
@@ -119,12 +129,15 @@ final class IInputMethodSessionInvoker {
         if (this.mCustomHandler == null) {
             lambda$updateExtractedText$2(token, text);
         } else {
-            this.mCustomHandler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$updateExtractedText$2(token, text);
-                }
-            });
+            this.mCustomHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IInputMethodSessionInvoker.this.lambda$updateExtractedText$2(
+                                    token, text);
+                        }
+                    });
         }
     }
 
@@ -142,12 +155,15 @@ final class IInputMethodSessionInvoker {
         if (this.mCustomHandler == null) {
             lambda$appPrivateCommand$3(action, data);
         } else {
-            this.mCustomHandler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda7
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$appPrivateCommand$3(action, data);
-                }
-            });
+            this.mCustomHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda7
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IInputMethodSessionInvoker.this.lambda$appPrivateCommand$3(
+                                    action, data);
+                        }
+                    });
         }
     }
 
@@ -165,12 +181,14 @@ final class IInputMethodSessionInvoker {
         if (this.mCustomHandler == null) {
             lambda$viewClicked$4(focusChanged);
         } else {
-            this.mCustomHandler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$viewClicked$4(focusChanged);
-                }
-            });
+            this.mCustomHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IInputMethodSessionInvoker.this.lambda$viewClicked$4(focusChanged);
+                        }
+                    });
         }
     }
 
@@ -188,12 +206,14 @@ final class IInputMethodSessionInvoker {
         if (this.mCustomHandler == null) {
             lambda$updateCursor$5(newCursor);
         } else {
-            this.mCustomHandler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$updateCursor$5(newCursor);
-                }
-            });
+            this.mCustomHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IInputMethodSessionInvoker.this.lambda$updateCursor$5(newCursor);
+                        }
+                    });
         }
     }
 
@@ -207,45 +227,74 @@ final class IInputMethodSessionInvoker {
         }
     }
 
-    void updateSelection(final int oldSelStart, final int oldSelEnd, final int selStart, final int selEnd, final int candidatesStart, final int candidatesEnd) {
+    void updateSelection(
+            final int oldSelStart,
+            final int oldSelEnd,
+            final int selStart,
+            final int selEnd,
+            final int candidatesStart,
+            final int candidatesEnd) {
         if (this.mCustomHandler == null) {
-            lambda$updateSelection$6(oldSelStart, oldSelEnd, selStart, selEnd, candidatesStart, candidatesEnd);
+            lambda$updateSelection$6(
+                    oldSelStart, oldSelEnd, selStart, selEnd, candidatesStart, candidatesEnd);
         } else {
-            this.mCustomHandler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda8
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$updateSelection$6(oldSelStart, oldSelEnd, selStart, selEnd, candidatesStart, candidatesEnd);
-                }
-            });
+            this.mCustomHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda8
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IInputMethodSessionInvoker.this.lambda$updateSelection$6(
+                                    oldSelStart,
+                                    oldSelEnd,
+                                    selStart,
+                                    selEnd,
+                                    candidatesStart,
+                                    candidatesEnd);
+                        }
+                    });
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: updateSelectionInternal, reason: merged with bridge method [inline-methods] */
-    public void lambda$updateSelection$6(int oldSelStart, int oldSelEnd, int selStart, int selEnd, int candidatesStart, int candidatesEnd) {
+    public void lambda$updateSelection$6(
+            int oldSelStart,
+            int oldSelEnd,
+            int selStart,
+            int selEnd,
+            int candidatesStart,
+            int candidatesEnd) {
         try {
-            this.mSession.updateSelection(oldSelStart, oldSelEnd, selStart, selEnd, candidatesStart, candidatesEnd);
+            this.mSession.updateSelection(
+                    oldSelStart, oldSelEnd, selStart, selEnd, candidatesStart, candidatesEnd);
         } catch (RemoteException e) {
             Log.w(TAG, "IME died", e);
         }
     }
 
-    void invalidateInput(final EditorInfo editorInfo, final IRemoteInputConnection inputConnection, final int sessionId) {
+    void invalidateInput(
+            final EditorInfo editorInfo,
+            final IRemoteInputConnection inputConnection,
+            final int sessionId) {
         if (this.mCustomHandler == null) {
             lambda$invalidateInput$7(editorInfo, inputConnection, sessionId);
         } else {
-            this.mCustomHandler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$invalidateInput$7(editorInfo, inputConnection, sessionId);
-                }
-            });
+            this.mCustomHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IInputMethodSessionInvoker.this.lambda$invalidateInput$7(
+                                    editorInfo, inputConnection, sessionId);
+                        }
+                    });
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: invalidateInputInternal, reason: merged with bridge method [inline-methods] */
-    public void lambda$invalidateInput$7(EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId) {
+    public void lambda$invalidateInput$7(
+            EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId) {
         try {
             this.mSession.invalidateInput(editorInfo, inputConnection, sessionId);
         } catch (RemoteException e) {

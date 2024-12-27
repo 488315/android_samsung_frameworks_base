@@ -12,25 +12,28 @@ public class TouchCalibration implements Parcelable {
     private final float mYScale;
     private final float mYXMix;
     public static final TouchCalibration IDENTITY = new TouchCalibration();
-    public static final Parcelable.Creator<TouchCalibration> CREATOR = new Parcelable.Creator<TouchCalibration>() { // from class: android.hardware.input.TouchCalibration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TouchCalibration createFromParcel(Parcel in) {
-            return new TouchCalibration(in);
-        }
+    public static final Parcelable.Creator<TouchCalibration> CREATOR =
+            new Parcelable.Creator<
+                    TouchCalibration>() { // from class: android.hardware.input.TouchCalibration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TouchCalibration createFromParcel(Parcel in) {
+                    return new TouchCalibration(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TouchCalibration[] newArray(int size) {
-            return new TouchCalibration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TouchCalibration[] newArray(int size) {
+                    return new TouchCalibration[size];
+                }
+            };
 
     public TouchCalibration() {
         this(1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     }
 
-    public TouchCalibration(float xScale, float xyMix, float xOffset, float yxMix, float yScale, float yOffset) {
+    public TouchCalibration(
+            float xScale, float xyMix, float xOffset, float yxMix, float yScale, float yOffset) {
         this.mXScale = xScale;
         this.mXYMix = xyMix;
         this.mXOffset = xOffset;
@@ -64,7 +67,9 @@ public class TouchCalibration implements Parcelable {
     }
 
     public float[] getAffineTransform() {
-        return new float[]{this.mXScale, this.mXYMix, this.mXOffset, this.mYXMix, this.mYScale, this.mYOffset};
+        return new float[] {
+            this.mXScale, this.mXYMix, this.mXOffset, this.mYXMix, this.mYScale, this.mYOffset
+        };
     }
 
     public boolean equals(Object obj) {
@@ -75,10 +80,19 @@ public class TouchCalibration implements Parcelable {
             return false;
         }
         TouchCalibration cal = (TouchCalibration) obj;
-        return cal.mXScale == this.mXScale && cal.mXYMix == this.mXYMix && cal.mXOffset == this.mXOffset && cal.mYXMix == this.mYXMix && cal.mYScale == this.mYScale && cal.mYOffset == this.mYOffset;
+        return cal.mXScale == this.mXScale
+                && cal.mXYMix == this.mXYMix
+                && cal.mXOffset == this.mXOffset
+                && cal.mYXMix == this.mYXMix
+                && cal.mYScale == this.mYScale
+                && cal.mYOffset == this.mYOffset;
     }
 
     public int hashCode() {
-        return ((((Float.floatToIntBits(this.mXScale) ^ Float.floatToIntBits(this.mXYMix)) ^ Float.floatToIntBits(this.mXOffset)) ^ Float.floatToIntBits(this.mYXMix)) ^ Float.floatToIntBits(this.mYScale)) ^ Float.floatToIntBits(this.mYOffset);
+        return ((((Float.floatToIntBits(this.mXScale) ^ Float.floatToIntBits(this.mXYMix))
+                                        ^ Float.floatToIntBits(this.mXOffset))
+                                ^ Float.floatToIntBits(this.mYXMix))
+                        ^ Float.floatToIntBits(this.mYScale))
+                ^ Float.floatToIntBits(this.mYOffset);
     }
 }

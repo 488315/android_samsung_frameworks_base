@@ -11,6 +11,7 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
@@ -24,7 +25,9 @@ import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.uri.UriGrantsManagerInternal;
 import com.android.server.uri.UriGrantsManagerService;
 import com.android.server.wm.ActivityTaskManagerInternal;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +39,8 @@ import java.util.concurrent.TimeoutException;
 /* loaded from: classes2.dex */
 public final class SpegService extends ProfileService {
     public static final boolean FORCE_SPEG;
-    public static final boolean SPEG_DISABLE_LAUNCH = SystemProperties.getBoolean("com.samsung.speg.disable_launch", false);
+    public static final boolean SPEG_DISABLE_LAUNCH =
+            SystemProperties.getBoolean("com.samsung.speg.disable_launch", false);
     public boolean mBlockContinualSpeg;
     public boolean mBlockSpegInstallation;
     public final Context mContext;
@@ -98,7 +102,8 @@ public final class SpegService extends ProfileService {
             } catch (TimeoutException unused2) {
             }
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Timeout occurred during waitForProcessDeath ", "SPEG");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                i, "Timeout occurred during waitForProcessDeath ", "SPEG");
     }
 
     @Override // com.android.server.ProfileService
@@ -123,10 +128,13 @@ public final class SpegService extends ProfileService {
         for (File file2 : listFiles) {
             if (!file2.isDirectory() && file2.getName().startsWith("speg.")) {
                 String substring = file2.getName().substring(5);
-                HeimdAllFsService$$ExternalSyntheticOutline0.m("Old speg marker file exists for uid ", substring, str);
+                HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                        "Old speg marker file exists for uid ", substring, str);
                 try {
                     int parseInt = Integer.parseInt(substring);
-                    PackageManagerInternal packageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+                    PackageManagerInternal packageManagerInternal =
+                            (PackageManagerInternal)
+                                    LocalServices.getService(PackageManagerInternal.class);
                     if (packageManagerInternal == null) {
                         Slog.e(str, "Could not get package manager");
                         list = Collections.emptyList();
@@ -136,14 +144,19 @@ public final class SpegService extends ProfileService {
                             Slog.e(str, "Could not find app with uid " + parseInt);
                             list = Collections.emptyList();
                         } else {
-                            String[] sharedUserPackagesForPackage = packageManagerInternal.getSharedUserPackagesForPackage(UserHandle.getUserId(parseInt), androidPackage.getPackageName());
+                            String[] sharedUserPackagesForPackage =
+                                    packageManagerInternal.getSharedUserPackagesForPackage(
+                                            UserHandle.getUserId(parseInt),
+                                            androidPackage.getPackageName());
                             String str2 = File.separator + "base.speg" + parseInt;
                             if (ArrayUtils.isEmpty(sharedUserPackagesForPackage)) {
                                 list = List.of(androidPackage.getPath() + str2);
                             } else {
-                                ArrayList arrayList = new ArrayList(sharedUserPackagesForPackage.length);
+                                ArrayList arrayList =
+                                        new ArrayList(sharedUserPackagesForPackage.length);
                                 for (String str3 : sharedUserPackagesForPackage) {
-                                    AndroidPackage androidPackage2 = packageManagerInternal.getPackage(str3);
+                                    AndroidPackage androidPackage2 =
+                                            packageManagerInternal.getPackage(str3);
                                     if (androidPackage2 != null) {
                                         arrayList.add(androidPackage2.getPath() + str2);
                                     }
@@ -301,7 +314,9 @@ public final class SpegService extends ProfileService {
         Lc0:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.SpegService.getPidOf(int, java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.pm.SpegService.getPidOf(int,"
+                    + " java.lang.String):int");
     }
 
     public final void init(PackageManagerService packageManagerService) {
@@ -342,14 +357,20 @@ public final class SpegService extends ProfileService {
         SpegService spegService;
         boolean z = false;
         try {
-            ((ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class)).removeRecentTasksByPackageName(0, str);
+            ((ActivityTaskManagerInternal)
+                            LocalServices.getService(ActivityTaskManagerInternal.class))
+                    .removeRecentTasksByPackageName(0, str);
         } catch (Exception e) {
             Slog.e("SPEG", "Can't remove recent task for " + str + ", error: " + e);
         }
         PackageManagerService packageManagerService = this.mPm;
         packageManagerService.getClass();
-        if (CoreRune.SYSFW_APP_SPEG && (spegService = packageManagerService.mSpeg) != null && spegService.isSpegInOpeartion(str)) {
-            z = packageManagerService.clearApplicationUserDataLIF(packageManagerService.snapshotComputer(), str, 0);
+        if (CoreRune.SYSFW_APP_SPEG
+                && (spegService = packageManagerService.mSpeg) != null
+                && spegService.isSpegInOpeartion(str)) {
+            z =
+                    packageManagerService.clearApplicationUserDataLIF(
+                            packageManagerService.snapshotComputer(), str, 0);
         } else {
             Slog.e("SPEG", "Clear package " + str + " is not allowed");
         }
@@ -357,22 +378,29 @@ public final class SpegService extends ProfileService {
             BootReceiver$$ExternalSyntheticOutline0.m("Can't clear app data for ", str, "SPEG");
         }
         try {
-            ((UriGrantsManagerService.LocalService) ((UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class))).removeUriPermissionsForPackage(i, str, true);
+            ((UriGrantsManagerService.LocalService)
+                            ((UriGrantsManagerInternal)
+                                    LocalServices.getService(UriGrantsManagerInternal.class)))
+                    .removeUriPermissionsForPackage(i, str, true);
         } catch (Exception e2) {
             Slog.e("SPEG", "Can't restore default permissions for " + str + ", error: " + e2);
         }
         try {
-            ((JobSchedulerInternal) LocalServices.getService(JobSchedulerInternal.class)).cancelJobsForUid(i, true, 14, 8, "clear data");
+            ((JobSchedulerInternal) LocalServices.getService(JobSchedulerInternal.class))
+                    .cancelJobsForUid(i, true, 14, 8, "clear data");
         } catch (Exception e3) {
             Slog.e("SPEG", "Can't clear scheduled jobs for " + str + ", error: " + e3);
         }
-        AlarmManagerService.LocalService localService = (AlarmManagerService.LocalService) LocalServices.getService(AlarmManagerService.LocalService.class);
+        AlarmManagerService.LocalService localService =
+                (AlarmManagerService.LocalService)
+                        LocalServices.getService(AlarmManagerService.LocalService.class);
         try {
             synchronized (AlarmManagerService.this.mLock) {
                 AlarmManagerService alarmManagerService = AlarmManagerService.this;
                 alarmManagerService.getClass();
                 if (i != 1000) {
-                    alarmManagerService.removeAlarmsInternalLocked(3, new AlarmManagerService$$ExternalSyntheticLambda9(i, 0));
+                    alarmManagerService.removeAlarmsInternalLocked(
+                            3, new AlarmManagerService$$ExternalSyntheticLambda9(i, 0));
                 }
             }
         } catch (Exception e4) {

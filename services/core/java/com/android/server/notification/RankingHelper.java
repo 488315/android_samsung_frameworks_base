@@ -5,8 +5,9 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.internal.compat.IPlatformCompat;
-import com.android.server.notification.NotificationManagerService;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,7 +23,14 @@ public final class RankingHelper {
     public final GlobalSortKeyComparator mFinalComparator = new GlobalSortKeyComparator();
     public final ArrayMap mProxyByGroupTmp = new ArrayMap();
 
-    public RankingHelper(Context context, RankingHandler rankingHandler, RankingConfig rankingConfig, ZenModeHelper zenModeHelper, NotificationUsageStats notificationUsageStats, String[] strArr, IPlatformCompat iPlatformCompat) {
+    public RankingHelper(
+            Context context,
+            RankingHandler rankingHandler,
+            RankingConfig rankingConfig,
+            ZenModeHelper zenModeHelper,
+            NotificationUsageStats notificationUsageStats,
+            String[] strArr,
+            IPlatformCompat iPlatformCompat) {
         NotificationSignalExtractor notificationSignalExtractor;
         this.mContext = context;
         this.mRankingHandler = rankingHandler;
@@ -35,7 +43,9 @@ public final class RankingHelper {
         this.mSignalExtractors = new NotificationSignalExtractor[length];
         for (int i = 0; i < length; i++) {
             try {
-                notificationSignalExtractor = (NotificationSignalExtractor) this.mContext.getClassLoader().loadClass(strArr[i]).newInstance();
+                notificationSignalExtractor =
+                        (NotificationSignalExtractor)
+                                this.mContext.getClassLoader().loadClass(strArr[i]).newInstance();
                 notificationSignalExtractor.initialize(this.mContext, notificationUsageStats);
                 notificationSignalExtractor.setConfig(rankingConfig);
                 notificationSignalExtractor.setZenHelper(zenModeHelper);
@@ -48,8 +58,7 @@ public final class RankingHelper {
             }
             if (!android.app.Flags.restrictAudioAttributesAlarm()) {
                 if (!android.app.Flags.restrictAudioAttributesMedia()) {
-                    if (android.app.Flags.restrictAudioAttributesCall()) {
-                    }
+                    if (android.app.Flags.restrictAudioAttributesCall()) {}
                     this.mSignalExtractors[i] = notificationSignalExtractor;
                 }
             }
@@ -61,13 +70,16 @@ public final class RankingHelper {
     public final void extractSignals(NotificationRecord notificationRecord) {
         for (NotificationSignalExtractor notificationSignalExtractor : this.mSignalExtractors) {
             try {
-                RankingReconsideration process = notificationSignalExtractor.process(notificationRecord);
+                RankingReconsideration process =
+                        notificationSignalExtractor.process(notificationRecord);
                 if (process != null) {
-                    NotificationManagerService.RankingHandlerWorker rankingHandlerWorker = (NotificationManagerService.RankingHandlerWorker) this.mRankingHandler;
+                    NotificationManagerService.RankingHandlerWorker rankingHandlerWorker =
+                            (NotificationManagerService.RankingHandlerWorker) this.mRankingHandler;
                     rankingHandlerWorker.getClass();
                     Message obtain = Message.obtain(rankingHandlerWorker, 1000, process);
                     TimeUnit timeUnit = TimeUnit.MILLISECONDS;
-                    rankingHandlerWorker.sendMessageDelayed(obtain, timeUnit.convert(process.mDelay, timeUnit));
+                    rankingHandlerWorker.sendMessageDelayed(
+                            obtain, timeUnit.convert(process.mDelay, timeUnit));
                 }
             } catch (Throwable th) {
                 Slog.w("RankingHelper", "NotificationSignalExtractor failed.", th);
@@ -104,9 +116,10 @@ public final class RankingHelper {
                     notificationRecord.mAuthoritativeRank = i2;
                     if (android.app.Flags.sortSectionByTime()) {
                         String groupKey = notificationRecord.sbn.getGroupKey();
-                        NotificationRecord notificationRecord2 = (NotificationRecord) this.mProxyByGroupTmp.get(groupKey);
-                        if (notificationRecord2 != null && !notificationRecord2.sbn.getNotification().isGroupSummary()) {
-                        }
+                        NotificationRecord notificationRecord2 =
+                                (NotificationRecord) this.mProxyByGroupTmp.get(groupKey);
+                        if (notificationRecord2 != null
+                                && !notificationRecord2.sbn.getNotification().isGroupSummary()) {}
                         this.mProxyByGroupTmp.put(groupKey, notificationRecord);
                     } else {
                         String groupKey2 = notificationRecord.sbn.getGroupKey();
@@ -120,7 +133,9 @@ public final class RankingHelper {
             }
             for (int i3 = 0; i3 < size; i3++) {
                 NotificationRecord notificationRecord3 = (NotificationRecord) arrayList.get(i3);
-                NotificationRecord notificationRecord4 = (NotificationRecord) this.mProxyByGroupTmp.get(notificationRecord3.sbn.getGroupKey());
+                NotificationRecord notificationRecord4 =
+                        (NotificationRecord)
+                                this.mProxyByGroupTmp.get(notificationRecord3.sbn.getGroupKey());
                 String sortKey = notificationRecord3.sbn.getNotification().getSortKey();
                 if (sortKey == null) {
                     str = "nsk";
@@ -132,14 +147,30 @@ public final class RankingHelper {
                 String str2 = str;
                 boolean isGroupSummary = notificationRecord3.sbn.getNotification().isGroupSummary();
                 char c = '1';
-                char c2 = android.app.Flags.sortSectionByTime() ? '2' : (!notificationRecord3.mRecentlyIntrusive || notificationRecord3.mImportance <= 1) ? '1' : '0';
+                char c2 =
+                        android.app.Flags.sortSectionByTime()
+                                ? '2'
+                                : (!notificationRecord3.mRecentlyIntrusive
+                                                || notificationRecord3.mImportance <= 1)
+                                        ? '1'
+                                        : '0';
                 Integer valueOf = Integer.valueOf(notificationRecord3.mCriticality);
                 Character valueOf2 = Character.valueOf(c2);
                 Integer valueOf3 = Integer.valueOf(notificationRecord4.mAuthoritativeRank);
                 if (isGroupSummary) {
                     c = '0';
                 }
-                notificationRecord3.mGlobalSortKey = TextUtils.formatSimple("crtcl=0x%04x:intrsv=%c:grnk=0x%04x:gsmry=%c:%s:rnk=0x%04x", new Object[]{valueOf, valueOf2, valueOf3, Character.valueOf(c), str2, Integer.valueOf(notificationRecord3.mAuthoritativeRank)});
+                notificationRecord3.mGlobalSortKey =
+                        TextUtils.formatSimple(
+                                "crtcl=0x%04x:intrsv=%c:grnk=0x%04x:gsmry=%c:%s:rnk=0x%04x",
+                                new Object[] {
+                                    valueOf,
+                                    valueOf2,
+                                    valueOf3,
+                                    Character.valueOf(c),
+                                    str2,
+                                    Integer.valueOf(notificationRecord3.mAuthoritativeRank)
+                                });
             }
             this.mProxyByGroupTmp.clear();
         }

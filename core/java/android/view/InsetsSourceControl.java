@@ -5,7 +5,7 @@ import android.graphics.Point;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.proto.ProtoOutputStream;
-import android.view.WindowInsets;
+
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Objects;
@@ -13,19 +13,21 @@ import java.util.function.Consumer;
 
 /* loaded from: classes4.dex */
 public class InsetsSourceControl implements Parcelable {
-    public static final Parcelable.Creator<InsetsSourceControl> CREATOR = new Parcelable.Creator<InsetsSourceControl>() { // from class: android.view.InsetsSourceControl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InsetsSourceControl createFromParcel(Parcel in) {
-            return new InsetsSourceControl(in);
-        }
+    public static final Parcelable.Creator<InsetsSourceControl> CREATOR =
+            new Parcelable.Creator<
+                    InsetsSourceControl>() { // from class: android.view.InsetsSourceControl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InsetsSourceControl createFromParcel(Parcel in) {
+                    return new InsetsSourceControl(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InsetsSourceControl[] newArray(int size) {
-            return new InsetsSourceControl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InsetsSourceControl[] newArray(int size) {
+                    return new InsetsSourceControl[size];
+                }
+            };
     private boolean mControlledByPolicy;
     private final int mId;
     private final boolean mInitiallyVisible;
@@ -40,11 +42,24 @@ public class InsetsSourceControl implements Parcelable {
         return this.mControlledByPolicy;
     }
 
-    public InsetsSourceControl(int id, int type, SurfaceControl leash, boolean initiallyVisible, Point surfacePosition, Insets insetsHint) {
+    public InsetsSourceControl(
+            int id,
+            int type,
+            SurfaceControl leash,
+            boolean initiallyVisible,
+            Point surfacePosition,
+            Insets insetsHint) {
         this(id, type, leash, initiallyVisible, surfacePosition, insetsHint, false);
     }
 
-    public InsetsSourceControl(int id, int type, SurfaceControl leash, boolean initiallyVisible, Point surfacePosition, Insets insetsHint, boolean controlledByPolicy) {
+    public InsetsSourceControl(
+            int id,
+            int type,
+            SurfaceControl leash,
+            boolean initiallyVisible,
+            Point surfacePosition,
+            Insets insetsHint,
+            boolean controlledByPolicy) {
         this.mControlledByPolicy = controlledByPolicy;
         this.mId = id;
         this.mType = type;
@@ -166,18 +181,44 @@ public class InsetsSourceControl implements Parcelable {
         }
         InsetsSourceControl that = (InsetsSourceControl) o;
         SurfaceControl thatLeash = that.mLeash;
-        if (this.mId == that.mId && this.mType == that.mType && ((this.mLeash == thatLeash || (this.mLeash != null && thatLeash != null && this.mLeash.isSameSurface(thatLeash))) && this.mInitiallyVisible == that.mInitiallyVisible && this.mSurfacePosition.equals(that.mSurfacePosition) && this.mInsetsHint.equals(that.mInsetsHint) && this.mSkipAnimationOnce == that.mSkipAnimationOnce)) {
+        if (this.mId == that.mId
+                && this.mType == that.mType
+                && ((this.mLeash == thatLeash
+                                || (this.mLeash != null
+                                        && thatLeash != null
+                                        && this.mLeash.isSameSurface(thatLeash)))
+                        && this.mInitiallyVisible == that.mInitiallyVisible
+                        && this.mSurfacePosition.equals(that.mSurfacePosition)
+                        && this.mInsetsHint.equals(that.mInsetsHint)
+                        && this.mSkipAnimationOnce == that.mSkipAnimationOnce)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mId), Integer.valueOf(this.mType), this.mLeash, Boolean.valueOf(this.mInitiallyVisible), this.mSurfacePosition, this.mInsetsHint, Boolean.valueOf(this.mSkipAnimationOnce));
+        return Objects.hash(
+                Integer.valueOf(this.mId),
+                Integer.valueOf(this.mType),
+                this.mLeash,
+                Boolean.valueOf(this.mInitiallyVisible),
+                this.mSurfacePosition,
+                this.mInsetsHint,
+                Boolean.valueOf(this.mSkipAnimationOnce));
     }
 
     public String toString() {
-        return "InsetsSourceControl: {" + Integer.toHexString(this.mId) + " mType=" + WindowInsets.Type.toString(this.mType) + (this.mInitiallyVisible ? " initiallyVisible" : "") + " mSurfacePosition=" + this.mSurfacePosition + " mInsetsHint=" + this.mInsetsHint + (this.mSkipAnimationOnce ? " skipAnimationOnce" : "") + "}";
+        return "InsetsSourceControl: {"
+                + Integer.toHexString(this.mId)
+                + " mType="
+                + WindowInsets.Type.toString(this.mType)
+                + (this.mInitiallyVisible ? " initiallyVisible" : "")
+                + " mSurfacePosition="
+                + this.mSurfacePosition
+                + " mInsetsHint="
+                + this.mInsetsHint
+                + (this.mSkipAnimationOnce ? " skipAnimationOnce" : "")
+                + "}";
     }
 
     public void dump(String prefix, PrintWriter pw) {
@@ -215,23 +256,24 @@ public class InsetsSourceControl implements Parcelable {
     }
 
     public static class Array implements Parcelable {
-        public static final Parcelable.Creator<Array> CREATOR = new Parcelable.Creator<Array>() { // from class: android.view.InsetsSourceControl.Array.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Array createFromParcel(Parcel in) {
-                return new Array(in);
-            }
+        public static final Parcelable.Creator<Array> CREATOR =
+                new Parcelable.Creator<
+                        Array>() { // from class: android.view.InsetsSourceControl.Array.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Array createFromParcel(Parcel in) {
+                        return new Array(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Array[] newArray(int size) {
-                return new Array[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Array[] newArray(int size) {
+                        return new Array[size];
+                    }
+                };
         private InsetsSourceControl[] mControls;
 
-        public Array() {
-        }
+        public Array() {}
 
         public Array(Array other, boolean copyControls) {
             setTo(other, copyControls);
@@ -290,7 +332,8 @@ public class InsetsSourceControl implements Parcelable {
         }
 
         public void readFromParcel(Parcel in) {
-            this.mControls = (InsetsSourceControl[]) in.createTypedArray(InsetsSourceControl.CREATOR);
+            this.mControls =
+                    (InsetsSourceControl[]) in.createTypedArray(InsetsSourceControl.CREATOR);
         }
 
         @Override // android.os.Parcelable

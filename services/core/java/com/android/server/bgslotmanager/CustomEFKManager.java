@@ -5,6 +5,7 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.am.DynamicHiddenApp;
 
@@ -24,9 +25,14 @@ public final class CustomEFKManager {
     public int v_bonusEFKWhileBoot;
     public int v_watermark_scale;
     public static final long mTotalMemMb = Process.getTotalMemory() / 1048576;
-    public static final boolean APP_EFK_DECREASE_BOOST_ENABLE = BgAppPropManager.getSlmkPropertyBool("dec_EFK_enable", "false");
-    public static final boolean BOOTING_EFK_BOOST_ENABLE = BgAppPropManager.getSlmkPropertyBool("bEFKb_enable", "false");
-    public static final String[] DECEFK_EXCEPT_PROC_ARRAY = {DynamicHiddenApp.decodeToStr("Y29tLnNlYy5hbmRyb2lkLmFwcC5zYnJvd3Nlcg=="), DynamicHiddenApp.decodeToStr("Y29tLnNlYy5hbmRyb2lkLmFwcC5jYW1lcmE=")};
+    public static final boolean APP_EFK_DECREASE_BOOST_ENABLE =
+            BgAppPropManager.getSlmkPropertyBool("dec_EFK_enable", "false");
+    public static final boolean BOOTING_EFK_BOOST_ENABLE =
+            BgAppPropManager.getSlmkPropertyBool("bEFKb_enable", "false");
+    public static final String[] DECEFK_EXCEPT_PROC_ARRAY = {
+        DynamicHiddenApp.decodeToStr("Y29tLnNlYy5hbmRyb2lkLmFwcC5zYnJvd3Nlcg=="),
+        DynamicHiddenApp.decodeToStr("Y29tLnNlYy5hbmRyb2lkLmFwcC5jYW1lcmE=")
+    };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.bgslotmanager.CustomEFKManager$1, reason: invalid class name */
@@ -42,17 +48,16 @@ public final class CustomEFKManager {
         }
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public /* synthetic */ AnonymousClass1(CustomEFKManager customEFKManager, long j, long j2, int i) {
+        public /* synthetic */ AnonymousClass1(
+                CustomEFKManager customEFKManager, long j, long j2, int i) {
             super(j, j2);
             this.$r8$classId = i;
             this.this$0 = customEFKManager;
         }
 
-        private final void onTick$com$android$server$bgslotmanager$CustomEFKManager$2(long j) {
-        }
+        private final void onTick$com$android$server$bgslotmanager$CustomEFKManager$2(long j) {}
 
-        private final void onTick$com$android$server$bgslotmanager$CustomEFKManager$3(long j) {
-        }
+        private final void onTick$com$android$server$bgslotmanager$CustomEFKManager$3(long j) {}
 
         @Override // android.os.CountDownTimer
         public final void onFinish() {
@@ -81,10 +86,14 @@ public final class CustomEFKManager {
             switch (this.$r8$classId) {
                 case 0:
                     if (SystemClock.uptimeMillis() < 180000) {
-                        Slog.i("DynamicHiddenApp_CustomEFKManager", "setEFKBoostRestoreTimer onTick");
+                        Slog.i(
+                                "DynamicHiddenApp_CustomEFKManager",
+                                "setEFKBoostRestoreTimer onTick");
                         break;
                     } else {
-                        Slog.i("DynamicHiddenApp_CustomEFKManager", "setEFKBoostRestoreTimer onTick after 3minutes");
+                        Slog.i(
+                                "DynamicHiddenApp_CustomEFKManager",
+                                "setEFKBoostRestoreTimer onTick after 3minutes");
                         CustomEFKManager.m309$$Nest$mrestoreEFKAfterBoot(this.this$0);
                         cancel();
                         break;
@@ -118,11 +127,17 @@ public final class CustomEFKManager {
             this.count = i3;
             if (i3 > 2 && !customEFKManager.isStillDecEFK) {
                 long[] jArr = {0};
-                Process.readProcFile("/proc/sys/vm/watermark_scale_factor", new int[]{8224}, null, jArr, null);
+                Process.readProcFile(
+                        "/proc/sys/vm/watermark_scale_factor", new int[] {8224}, null, jArr, null);
                 int i4 = (int) jArr[0];
-                if (i2 == 0 || (i = CustomEFKManager.this.last_Watermark_EFK) == -1 || ((i2 > i4 && i > this.reserve) || (i2 < i4 && i < this.reserve))) {
+                if (i2 == 0
+                        || (i = CustomEFKManager.this.last_Watermark_EFK) == -1
+                        || ((i2 > i4 && i > this.reserve) || (i2 < i4 && i < this.reserve))) {
                     CustomEFKManager.this.v_watermark_scale = i4;
-                    SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("curWatermarkScale : "), CustomEFKManager.this.v_watermark_scale, "DynamicHiddenApp_CustomEFKManager");
+                    SystemServiceManager$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("curWatermarkScale : "),
+                            CustomEFKManager.this.v_watermark_scale,
+                            "DynamicHiddenApp_CustomEFKManager");
                     CustomEFKManager customEFKManager2 = CustomEFKManager.this;
                     customEFKManager2.last_Watermark_EFK = this.reserve;
                     customEFKManager2.isBlockDecEFK = false;

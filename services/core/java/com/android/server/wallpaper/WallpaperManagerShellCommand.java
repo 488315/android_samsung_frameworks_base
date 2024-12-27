@@ -1,6 +1,7 @@
 package com.android.server.wallpaper;
 
 import android.os.ShellCommand;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -14,9 +15,9 @@ public final class WallpaperManagerShellCommand extends ShellCommand {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x0039, code lost:
-    
-        if (r5.equals("dim-with-uid") == false) goto L8;
-     */
+
+       if (r5.equals("dim-with-uid") == false) goto L8;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -143,7 +144,9 @@ public final class WallpaperManagerShellCommand extends ShellCommand {
             r4.println(r5)
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wallpaper.WallpaperManagerShellCommand.onCommand(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wallpaper.WallpaperManagerShellCommand.onCommand(java.lang.String):int");
     }
 
     public final void onHelp() {
@@ -153,10 +156,13 @@ public final class WallpaperManagerShellCommand extends ShellCommand {
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println();
         outPrintWriter.println("  set-dim-amount DIMMING");
-        outPrintWriter.println("    Sets the current dimming value to DIMMING (a number between 0 and 1).");
+        outPrintWriter.println(
+                "    Sets the current dimming value to DIMMING (a number between 0 and 1).");
         outPrintWriter.println();
         outPrintWriter.println("  dim-with-uid UID DIMMING");
-        outPrintWriter.println("    Sets the wallpaper dim amount to DIMMING as if an app with uid, UID, called it.");
+        outPrintWriter.println(
+                "    Sets the wallpaper dim amount to DIMMING as if an app with uid, UID, called"
+                    + " it.");
         outPrintWriter.println();
         outPrintWriter.println("  get-dim-amount");
         outPrintWriter.println("    Get the current wallpaper dim amount.");

@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioPortMixExt implements Parcelable {
-    public static final Parcelable.Creator<AudioPortMixExt> CREATOR = new Parcelable.Creator<AudioPortMixExt>() { // from class: android.media.audio.common.AudioPortMixExt.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortMixExt createFromParcel(Parcel _aidl_source) {
-            AudioPortMixExt _aidl_out = new AudioPortMixExt();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioPortMixExt> CREATOR =
+            new Parcelable.Creator<
+                    AudioPortMixExt>() { // from class: android.media.audio.common.AudioPortMixExt.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortMixExt createFromParcel(Parcel _aidl_source) {
+                    AudioPortMixExt _aidl_out = new AudioPortMixExt();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortMixExt[] newArray(int _aidl_size) {
-            return new AudioPortMixExt[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortMixExt[] newArray(int _aidl_size) {
+                    return new AudioPortMixExt[_aidl_size];
+                }
+            };
     public AudioPortMixExtUseCase usecase;
     public int handle = 0;
     public int maxOpenStreamCount = 0;
@@ -72,7 +75,9 @@ public class AudioPortMixExt implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.usecase = (AudioPortMixExtUseCase) _aidl_parcel.readTypedObject(AudioPortMixExtUseCase.CREATOR);
+            this.usecase =
+                    (AudioPortMixExtUseCase)
+                            _aidl_parcel.readTypedObject(AudioPortMixExtUseCase.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -128,14 +133,31 @@ public class AudioPortMixExt implements Parcelable {
             return false;
         }
         AudioPortMixExt that = (AudioPortMixExt) other;
-        if (Objects.deepEquals(Integer.valueOf(this.handle), Integer.valueOf(that.handle)) && Objects.deepEquals(this.usecase, that.usecase) && Objects.deepEquals(Integer.valueOf(this.maxOpenStreamCount), Integer.valueOf(that.maxOpenStreamCount)) && Objects.deepEquals(Integer.valueOf(this.maxActiveStreamCount), Integer.valueOf(that.maxActiveStreamCount)) && Objects.deepEquals(Integer.valueOf(this.recommendedMuteDurationMs), Integer.valueOf(that.recommendedMuteDurationMs))) {
+        if (Objects.deepEquals(Integer.valueOf(this.handle), Integer.valueOf(that.handle))
+                && Objects.deepEquals(this.usecase, that.usecase)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.maxOpenStreamCount),
+                        Integer.valueOf(that.maxOpenStreamCount))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.maxActiveStreamCount),
+                        Integer.valueOf(that.maxActiveStreamCount))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.recommendedMuteDurationMs),
+                        Integer.valueOf(that.recommendedMuteDurationMs))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.handle), this.usecase, Integer.valueOf(this.maxOpenStreamCount), Integer.valueOf(this.maxActiveStreamCount), Integer.valueOf(this.recommendedMuteDurationMs)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.handle),
+                                this.usecase,
+                                Integer.valueOf(this.maxOpenStreamCount),
+                                Integer.valueOf(this.maxActiveStreamCount),
+                                Integer.valueOf(this.recommendedMuteDurationMs))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

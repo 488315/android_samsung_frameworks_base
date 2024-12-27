@@ -10,9 +10,9 @@ import android.os.ICancellationSignal;
 import android.os.RemoteException;
 import android.service.translation.ITranslationCallback;
 import android.util.Log;
-import android.view.translation.ITranslationDirectManager;
-import android.view.translation.Translator;
+
 import com.android.internal.os.IResultReceiver;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
@@ -98,7 +98,14 @@ public class Translator {
         }
     }
 
-    public Translator(Context context, TranslationContext translationContext, int sessionId, TranslationManager translationManager, Handler handler, ITranslationManager systemServerBinder, Consumer<Translator> callback) {
+    public Translator(
+            Context context,
+            TranslationContext translationContext,
+            int sessionId,
+            TranslationManager translationManager,
+            Handler handler,
+            ITranslationManager systemServerBinder,
+            Consumer<Translator> callback) {
         this.mLock = new Object();
         this.mContext = context;
         this.mTranslationContext = translationContext;
@@ -108,13 +115,23 @@ public class Translator {
         this.mSystemServerBinder = systemServerBinder;
         this.mServiceBinderReceiver = new ServiceBinderReceiver(this, callback);
         try {
-            this.mSystemServerBinder.onSessionCreated(this.mTranslationContext, this.mId, this.mServiceBinderReceiver, this.mContext.getUserId());
+            this.mSystemServerBinder.onSessionCreated(
+                    this.mTranslationContext,
+                    this.mId,
+                    this.mServiceBinderReceiver,
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             Log.w(TAG, "RemoteException calling startSession(): " + e);
         }
     }
 
-    public Translator(Context context, TranslationContext translationContext, int sessionId, TranslationManager translationManager, Handler handler, ITranslationManager systemServerBinder) {
+    public Translator(
+            Context context,
+            TranslationContext translationContext,
+            int sessionId,
+            TranslationManager translationManager,
+            Handler handler,
+            ITranslationManager systemServerBinder) {
         this.mLock = new Object();
         this.mContext = context;
         this.mTranslationContext = translationContext;
@@ -127,7 +144,11 @@ public class Translator {
 
     void start() {
         try {
-            this.mSystemServerBinder.onSessionCreated(this.mTranslationContext, this.mId, this.mServiceBinderReceiver, this.mContext.getUserId());
+            this.mSystemServerBinder.onSessionCreated(
+                    this.mTranslationContext,
+                    this.mId,
+                    this.mServiceBinderReceiver,
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             Log.w(TAG, "RemoteException calling startSession(): " + e);
         }
@@ -169,22 +190,29 @@ public class Translator {
     }
 
     @Deprecated
-    public void translate(TranslationRequest request, Executor executor, Consumer<TranslationResponse> callback) {
+    public void translate(
+            TranslationRequest request, Executor executor, Consumer<TranslationResponse> callback) {
         Objects.requireNonNull(request, "Translation request cannot be null");
         Objects.requireNonNull(executor, "Executor cannot be null");
         Objects.requireNonNull(callback, "Callback cannot be null");
         if (isDestroyed()) {
             throw new IllegalStateException("This translator has been destroyed");
         }
-        ITranslationCallback responseCallback = new TranslationResponseCallbackImpl(callback, executor);
+        ITranslationCallback responseCallback =
+                new TranslationResponseCallbackImpl(callback, executor);
         try {
-            this.mDirectServiceBinder.onTranslationRequest(request, this.mId, CancellationSignal.createTransport(), responseCallback);
+            this.mDirectServiceBinder.onTranslationRequest(
+                    request, this.mId, CancellationSignal.createTransport(), responseCallback);
         } catch (RemoteException e) {
             Log.w(TAG, "RemoteException calling requestTranslate(): " + e);
         }
     }
 
-    public void translate(TranslationRequest request, CancellationSignal cancellationSignal, Executor executor, Consumer<TranslationResponse> callback) {
+    public void translate(
+            TranslationRequest request,
+            CancellationSignal cancellationSignal,
+            Executor executor,
+            Consumer<TranslationResponse> callback) {
         Objects.requireNonNull(request, "Translation request cannot be null");
         Objects.requireNonNull(executor, "Executor cannot be null");
         Objects.requireNonNull(callback, "Callback cannot be null");
@@ -196,9 +224,11 @@ public class Translator {
             transport = CancellationSignal.createTransport();
             cancellationSignal.setRemote(transport);
         }
-        ITranslationCallback responseCallback = new TranslationResponseCallbackImpl(callback, executor);
+        ITranslationCallback responseCallback =
+                new TranslationResponseCallbackImpl(callback, executor);
         try {
-            this.mDirectServiceBinder.onTranslationRequest(request, this.mId, transport, responseCallback);
+            this.mDirectServiceBinder.onTranslationRequest(
+                    request, this.mId, transport, responseCallback);
         } catch (RemoteException e) {
             Log.w(TAG, "RemoteException calling requestTranslate(): " + e);
         }
@@ -228,14 +258,17 @@ public class Translator {
         return z;
     }
 
-    public void requestUiTranslate(TranslationRequest request, Executor executor, Consumer<TranslationResponse> callback) {
+    public void requestUiTranslate(
+            TranslationRequest request, Executor executor, Consumer<TranslationResponse> callback) {
         if (this.mDirectServiceBinder == null) {
             Log.wtf(TAG, "Translator created without proper initialization.");
             return;
         }
-        ITranslationCallback translationCallback = new TranslationResponseCallbackImpl(callback, executor);
+        ITranslationCallback translationCallback =
+                new TranslationResponseCallbackImpl(callback, executor);
         try {
-            this.mDirectServiceBinder.onTranslationRequest(request, this.mId, CancellationSignal.createTransport(), translationCallback);
+            this.mDirectServiceBinder.onTranslationRequest(
+                    request, this.mId, CancellationSignal.createTransport(), translationCallback);
         } catch (RemoteException e) {
             Log.w(TAG, "RemoteException calling flushRequest");
         }
@@ -252,16 +285,20 @@ public class Translator {
         }
 
         @Override // android.service.translation.ITranslationCallback
-        public void onTranslationResponse(final TranslationResponse response) throws RemoteException {
+        public void onTranslationResponse(final TranslationResponse response)
+                throws RemoteException {
             if (Log.isLoggable(UiTranslationManager.LOG_TAG, 3)) {
                 Log.i(Translator.TAG, "onTranslationResponse called.");
             }
-            Runnable runnable = new Runnable() { // from class: android.view.translation.Translator$TranslationResponseCallbackImpl$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    Translator.TranslationResponseCallbackImpl.this.lambda$onTranslationResponse$0(response);
-                }
-            };
+            Runnable runnable =
+                    new Runnable() { // from class:
+                                     // android.view.translation.Translator$TranslationResponseCallbackImpl$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            Translator.TranslationResponseCallbackImpl.this
+                                    .lambda$onTranslationResponse$0(response);
+                        }
+                    };
             long token = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(runnable);

@@ -1,7 +1,9 @@
 package com.samsung.android.globalactions.presentation.viewmodel;
 
 import android.hardware.usb.UsbManager;
+
 import com.android.internal.R;
+
 import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.presentation.SamsungGlobalActionsManager;
 import com.samsung.android.globalactions.util.ConditionChecker;
@@ -22,7 +24,14 @@ public class SafeModeActionViewModel implements ActionViewModel {
     private final ToastController mToastController;
     private final SamsungGlobalActionsManager mWindowManagerFuncs;
 
-    public SafeModeActionViewModel(SamsungGlobalActions samsungGlobalActions, SamsungGlobalActionsManager windowManagerFuncs, ConditionChecker conditionChecker, KeyGuardManagerWrapper keyGuardManagerWrapper, ResourcesWrapper resourcesWrapper, ToastController toastController, SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics) {
+    public SafeModeActionViewModel(
+            SamsungGlobalActions samsungGlobalActions,
+            SamsungGlobalActionsManager windowManagerFuncs,
+            ConditionChecker conditionChecker,
+            KeyGuardManagerWrapper keyGuardManagerWrapper,
+            ResourcesWrapper resourcesWrapper,
+            ToastController toastController,
+            SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics) {
         this.mGlobalActions = samsungGlobalActions;
         this.mWindowManagerFuncs = windowManagerFuncs;
         this.mConditionChecker = conditionChecker;
@@ -45,11 +54,14 @@ public class SafeModeActionViewModel implements ActionViewModel {
     @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
     public void onPress() {
         if (this.mConditionChecker.isEnabled(SystemConditions.IS_FMM_LOCKED)) {
-            this.mToastController.showToast(this.mResourcesWrapper.getString(R.string.globalactions_unable_restart_msg_fmm), 1);
+            this.mToastController.showToast(
+                    this.mResourcesWrapper.getString(R.string.globalactions_unable_restart_msg_fmm),
+                    1);
         } else {
             if (isNeedSecureConfirm()) {
                 this.mGlobalActions.registerSecureConfirmAction(this);
-                this.mKeyguardManagerWrapper.setPendingIntentAfterUnlock(UsbManager.USB_FUNCTION_SHUTDOWN);
+                this.mKeyguardManagerWrapper.setPendingIntentAfterUnlock(
+                        UsbManager.USB_FUNCTION_SHUTDOWN);
                 this.mGlobalActions.hideDialogOnSecureConfirm();
                 return;
             }
@@ -68,11 +80,17 @@ public class SafeModeActionViewModel implements ActionViewModel {
     }
 
     public void safeMode() {
-        this.mSAnalytics.sendEventLog(SamsungGlobalActionsAnalytics.SID_SAFE_MODE, SamsungGlobalActionsAnalytics.EID_SAFE_MODE);
+        this.mSAnalytics.sendEventLog(
+                SamsungGlobalActionsAnalytics.SID_SAFE_MODE,
+                SamsungGlobalActionsAnalytics.EID_SAFE_MODE);
         this.mWindowManagerFuncs.reboot(true);
     }
 
     private boolean isNeedSecureConfirm() {
-        return !this.mConditionChecker.isEnabled(SystemConditions.IS_RMM_LOCKED) && !this.mConditionChecker.isEnabled(SystemConditions.IS_SIM_LOCK) && this.mConditionChecker.isEnabled(SystemConditions.IS_SECURE_KEYGUARD) && this.mConditionChecker.isEnabled(SystemConditions.IS_LOCK_NETWORK_AND_SECURITY) && this.mConditionChecker.isEnabled(SystemConditions.IS_ENCRYPTION_STATUS_ACTIVE);
+        return !this.mConditionChecker.isEnabled(SystemConditions.IS_RMM_LOCKED)
+                && !this.mConditionChecker.isEnabled(SystemConditions.IS_SIM_LOCK)
+                && this.mConditionChecker.isEnabled(SystemConditions.IS_SECURE_KEYGUARD)
+                && this.mConditionChecker.isEnabled(SystemConditions.IS_LOCK_NETWORK_AND_SECURITY)
+                && this.mConditionChecker.isEnabled(SystemConditions.IS_ENCRYPTION_STATUS_ACTIVE);
     }
 }

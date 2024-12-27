@@ -18,13 +18,12 @@ public final class HdmiUtils {
     static final int TARGET_SAME_PHYSICAL_ADDRESS = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface HdmiAddressRelativePosition {
-    }
+    public @interface HdmiAddressRelativePosition {}
 
-    private HdmiUtils() {
-    }
+    private HdmiUtils() {}
 
-    public static int getLocalPortFromPhysicalAddress(int targetPhysicalAddress, int myPhysicalAddress) {
+    public static int getLocalPortFromPhysicalAddress(
+            int targetPhysicalAddress, int myPhysicalAddress) {
         if (myPhysicalAddress == targetPhysicalAddress) {
             return 0;
         }
@@ -96,7 +95,8 @@ public final class HdmiUtils {
         }
     }
 
-    private static int physicalAddressFirstDifferentDigitPos(int address1, int address2) throws IllegalArgumentException {
+    private static int physicalAddressFirstDifferentDigitPos(int address1, int address2)
+            throws IllegalArgumentException {
         if (!isValidPhysicalAddress(address1)) {
             throw new IllegalArgumentException(address1 + " is not a valid address.");
         }

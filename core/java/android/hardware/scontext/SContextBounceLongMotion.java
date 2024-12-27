@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextBounceLongMotion extends SContextEventContext {
-    public static final Parcelable.Creator<SContextBounceLongMotion> CREATOR = new Parcelable.Creator<SContextBounceLongMotion>() { // from class: android.hardware.scontext.SContextBounceLongMotion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextBounceLongMotion createFromParcel(Parcel in) {
-            return new SContextBounceLongMotion(in);
-        }
+    public static final Parcelable.Creator<SContextBounceLongMotion> CREATOR =
+            new Parcelable.Creator<SContextBounceLongMotion>() { // from class:
+                // android.hardware.scontext.SContextBounceLongMotion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextBounceLongMotion createFromParcel(Parcel in) {
+                    return new SContextBounceLongMotion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextBounceLongMotion[] newArray(int size) {
-            return new SContextBounceLongMotion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextBounceLongMotion[] newArray(int size) {
+                    return new SContextBounceLongMotion[size];
+                }
+            };
     private Bundle mContext;
 
     SContextBounceLongMotion() {
@@ -34,7 +36,8 @@ public class SContextBounceLongMotion extends SContextEventContext {
         return this.mContext.getInt("Action");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

@@ -2,6 +2,7 @@ package android.widget;
 
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -81,13 +82,21 @@ public class EditorTouchState {
             boolean isMouse = event.isFromSource(8194);
             long millisSinceLastUp = event.getEventTime() - this.mLastUpMillis;
             long millisBetweenLastDownAndLastUp = this.mLastUpMillis - this.mLastDownMillis;
-            if (millisSinceLastUp <= ViewConfiguration.getDoubleTapTimeout() && millisBetweenLastDownAndLastUp <= ViewConfiguration.getDoubleTapTimeout() && (this.mMultiTapStatus == 1 || (this.mMultiTapStatus == 2 && isMouse))) {
+            if (millisSinceLastUp <= ViewConfiguration.getDoubleTapTimeout()
+                    && millisBetweenLastDownAndLastUp <= ViewConfiguration.getDoubleTapTimeout()
+                    && (this.mMultiTapStatus == 1 || (this.mMultiTapStatus == 2 && isMouse))) {
                 if (this.mMultiTapStatus == 1) {
                     this.mMultiTapStatus = 2;
                 } else {
                     this.mMultiTapStatus = 3;
                 }
-                this.mMultiTapInSameArea = isDistanceWithin(this.mLastDownX, this.mLastDownY, event.getX(), event.getY(), config.getScaledDoubleTapSlop());
+                this.mMultiTapInSameArea =
+                        isDistanceWithin(
+                                this.mLastDownX,
+                                this.mLastDownY,
+                                event.getX(),
+                                event.getY(),
+                                config.getScaledDoubleTapSlop());
             } else {
                 this.mMultiTapStatus = 1;
                 this.mMultiTapInSameArea = false;
@@ -116,7 +125,8 @@ public class EditorTouchState {
                 int touchSlop = config.getScaledTouchSlop();
                 this.mMovedEnoughForDrag = distanceSquared > ((float) (touchSlop * touchSlop));
                 if (this.mMovedEnoughForDrag) {
-                    this.mInitialDragDirectionXYRatio = deltaY == 0.0f ? Float.MAX_VALUE : Math.abs(deltaX / deltaY);
+                    this.mInitialDragDirectionXYRatio =
+                            deltaY == 0.0f ? Float.MAX_VALUE : Math.abs(deltaX / deltaY);
                     return;
                 }
                 return;
@@ -133,7 +143,8 @@ public class EditorTouchState {
         }
     }
 
-    public static boolean isDistanceWithin(float x1, float y1, float x2, float y2, int maxDistance) {
+    public static boolean isDistanceWithin(
+            float x1, float y1, float x2, float y2, int maxDistance) {
         float deltaX = x2 - x1;
         float deltaY = y2 - y1;
         float distanceSquared = (deltaX * deltaX) + (deltaY * deltaY);

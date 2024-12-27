@@ -1,6 +1,7 @@
 package com.android.server.power.shutdown;
 
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.util.List;
 
@@ -20,21 +21,23 @@ public final class ResourceManager {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x005a, code lost:
-    
-        if (r0.equals("310120") == false) goto L15;
-     */
+
+       if (r0.equals("310120") == false) goto L15;
+    */
     static {
         /*
             Method dump skipped, instructions count: 280
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.shutdown.ResourceManager.<clinit>():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.shutdown.ResourceManager.<clinit>():void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:4:0x003a, code lost:
-    
-        if (addToPlaylistIfExists(r8.toString(), r0) != false) goto L90;
-     */
+
+       if (addToPlaylistIfExists(r8.toString(), r0) != false) goto L90;
+    */
     /* JADX WARN: Removed duplicated region for block: B:110:0x0211 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:28:? A[RETURN, SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:67:0x00f5  */
@@ -52,7 +55,9 @@ public final class ResourceManager {
             Method dump skipped, instructions count: 560
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.shutdown.ResourceManager.<init>(com.android.server.power.shutdown.AnimationPlayer):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.shutdown.ResourceManager.<init>(com.android.server.power.shutdown.AnimationPlayer):void");
     }
 
     public static boolean addToPlaylistIfExists(String str, List list) {
@@ -138,20 +143,27 @@ public final class ResourceManager {
         L80:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.shutdown.ResourceManager.search(java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.shutdown.ResourceManager.search(java.lang.String):java.lang.String");
     }
 
     public final boolean addMainAniIfExists(String str, String[] strArr) {
         boolean z = false;
         for (String str2 : strArr) {
-            z |= addToPlaylistIfExists(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, str2), this.mainImages);
+            z |=
+                    addToPlaylistIfExists(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, str2),
+                            this.mainImages);
         }
         return z;
     }
 
     public final void addSubAniIfExists(String str, String[] strArr) {
         for (String str2 : strArr) {
-            addToPlaylistIfExists(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, str2), this.subImages);
+            addToPlaylistIfExists(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, str2),
+                    this.subImages);
         }
     }
 }

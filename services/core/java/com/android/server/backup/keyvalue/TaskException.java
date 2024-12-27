@@ -19,7 +19,9 @@ class TaskException extends BackupException {
     }
 
     public static TaskException stateCompromised(Exception exc) {
-        return exc instanceof TaskException ? new TaskException(exc, true, ((TaskException) exc).mStatus) : new TaskException(exc, true, -1000);
+        return exc instanceof TaskException
+                ? new TaskException(exc, true, ((TaskException) exc).mStatus)
+                : new TaskException(exc, true, -1000);
     }
 
     public final int getStatus() {

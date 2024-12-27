@@ -19,12 +19,13 @@ import android.util.LongArray;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
-import com.android.internal.protolog.ProtoLogDataSource;
+
 import com.android.internal.protolog.common.ILogger;
 import com.android.internal.protolog.common.IProtoLog;
 import com.android.internal.protolog.common.IProtoLogGroup;
 import com.android.internal.protolog.common.LogDataType;
 import com.android.internal.protolog.common.LogLevel;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -53,13 +54,20 @@ public class PerfettoProtoLogImpl implements IProtoLog {
     private final ViewerConfigInputStreamProvider mViewerConfigInputStreamProvider;
     private final ProtoLogViewerConfigReader mViewerConfigReader;
 
-    public PerfettoProtoLogImpl(final String viewerConfigFilePath, TreeMap<String, IProtoLogGroup> logGroups, Runnable cacheUpdater) {
-        this(new ViewerConfigInputStreamProvider() { // from class: com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda8
-            @Override // com.android.internal.protolog.ViewerConfigInputStreamProvider
-            public final ProtoInputStream getInputStream() {
-                return PerfettoProtoLogImpl.lambda$new$0(viewerConfigFilePath);
-            }
-        }, logGroups, cacheUpdater);
+    public PerfettoProtoLogImpl(
+            final String viewerConfigFilePath,
+            TreeMap<String, IProtoLogGroup> logGroups,
+            Runnable cacheUpdater) {
+        this(
+                new ViewerConfigInputStreamProvider() { // from class:
+                                                        // com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda8
+                    @Override // com.android.internal.protolog.ViewerConfigInputStreamProvider
+                    public final ProtoInputStream getInputStream() {
+                        return PerfettoProtoLogImpl.lambda$new$0(viewerConfigFilePath);
+                    }
+                },
+                logGroups,
+                cacheUpdater);
     }
 
     static /* synthetic */ ProtoInputStream lambda$new$0(String viewerConfigFilePath) {
@@ -71,33 +79,54 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         }
     }
 
-    public PerfettoProtoLogImpl(ViewerConfigInputStreamProvider viewerConfigInputStreamProvider, TreeMap<String, IProtoLogGroup> logGroups, Runnable cacheUpdater) {
-        this(viewerConfigInputStreamProvider, new ProtoLogViewerConfigReader(viewerConfigInputStreamProvider), logGroups, cacheUpdater);
+    public PerfettoProtoLogImpl(
+            ViewerConfigInputStreamProvider viewerConfigInputStreamProvider,
+            TreeMap<String, IProtoLogGroup> logGroups,
+            Runnable cacheUpdater) {
+        this(
+                viewerConfigInputStreamProvider,
+                new ProtoLogViewerConfigReader(viewerConfigInputStreamProvider),
+                logGroups,
+                cacheUpdater);
     }
 
-    public PerfettoProtoLogImpl(ViewerConfigInputStreamProvider viewerConfigInputStreamProvider, ProtoLogViewerConfigReader viewerConfigReader, TreeMap<String, IProtoLogGroup> logGroups, Runnable cacheUpdater) {
+    public PerfettoProtoLogImpl(
+            ViewerConfigInputStreamProvider viewerConfigInputStreamProvider,
+            ProtoLogViewerConfigReader viewerConfigReader,
+            TreeMap<String, IProtoLogGroup> logGroups,
+            Runnable cacheUpdater) {
         this.mTracingInstances = new AtomicInteger();
-        this.mDataSource = new ProtoLogDataSource(new Consumer() { // from class: com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                PerfettoProtoLogImpl.this.onTracingInstanceStart((ProtoLogDataSource.ProtoLogConfig) obj);
-            }
-        }, new Runnable() { // from class: com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                PerfettoProtoLogImpl.this.dumpTransitionTraceConfig();
-            }
-        }, new Consumer() { // from class: com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda2
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                PerfettoProtoLogImpl.this.onTracingInstanceStop((ProtoLogDataSource.ProtoLogConfig) obj);
-            }
-        });
+        this.mDataSource =
+                new ProtoLogDataSource(
+                        new Consumer() { // from class:
+                                         // com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                PerfettoProtoLogImpl.this.onTracingInstanceStart(
+                                        (ProtoLogDataSource.ProtoLogConfig) obj);
+                            }
+                        },
+                        new Runnable() { // from class:
+                                         // com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                PerfettoProtoLogImpl.this.dumpTransitionTraceConfig();
+                            }
+                        },
+                        new Consumer() { // from class:
+                                         // com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                PerfettoProtoLogImpl.this.onTracingInstanceStop(
+                                        (ProtoLogDataSource.ProtoLogConfig) obj);
+                            }
+                        });
         this.mDefaultLogLevelCounts = new ArrayMap();
         this.mLogLevelCounts = new ArrayMap();
         this.mBackgroundLoggingService = Executors.newSingleThreadExecutor();
         Producer.init(InitArguments.DEFAULTS);
-        DataSourceParams params = new DataSourceParams.Builder().setBufferExhaustedPolicy(0).build();
+        DataSourceParams params =
+                new DataSourceParams.Builder().setBufferExhaustedPolicy(0).build();
         this.mDataSource.register(params);
         this.mViewerConfigInputStreamProvider = viewerConfigInputStreamProvider;
         this.mViewerConfigReader = viewerConfigReader;
@@ -106,16 +135,25 @@ public class PerfettoProtoLogImpl implements IProtoLog {
     }
 
     @Override // com.android.internal.protolog.common.IProtoLog
-    public void log(final LogLevel level, final IProtoLogGroup group, final long messageHash, final int paramsMask, String messageString, final Object[] args) {
+    public void log(
+            final LogLevel level,
+            final IProtoLogGroup group,
+            final long messageHash,
+            final int paramsMask,
+            String messageString,
+            final Object[] args) {
         Trace.traceBegin(32L, "log");
         final long tsNanos = SystemClock.elapsedRealtimeNanos();
         try {
-            this.mBackgroundLoggingService.submit(new Runnable() { // from class: com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda9
-                @Override // java.lang.Runnable
-                public final void run() {
-                    PerfettoProtoLogImpl.this.lambda$log$1(level, group, messageHash, paramsMask, args, tsNanos);
-                }
-            });
+            this.mBackgroundLoggingService.submit(
+                    new Runnable() { // from class:
+                                     // com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda9
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            PerfettoProtoLogImpl.this.lambda$log$1(
+                                    level, group, messageHash, paramsMask, args, tsNanos);
+                        }
+                    });
             if (group.isLogToLogcat()) {
                 logToLogcat(group.getTag(), level, messageHash, messageString, args);
             }
@@ -125,7 +163,13 @@ public class PerfettoProtoLogImpl implements IProtoLog {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$log$1(LogLevel level, IProtoLogGroup group, long messageHash, int paramsMask, Object[] args, long tsNanos) {
+    public /* synthetic */ void lambda$log$1(
+            LogLevel level,
+            IProtoLogGroup group,
+            long messageHash,
+            int paramsMask,
+            Object[] args,
+            long tsNanos) {
         logToProto(level, group.name(), messageHash, paramsMask, args, tsNanos);
     }
 
@@ -135,19 +179,25 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         if (pis == null) {
             Slog.w(LOG_TAG, "Failed to get viewer input stream.");
         } else {
-            this.mDataSource.trace(new TraceFunction() { // from class: com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda6
-                @Override // android.tracing.perfetto.TraceFunction
-                public final void trace(TracingContext tracingContext) {
-                    PerfettoProtoLogImpl.lambda$dumpTransitionTraceConfig$2(ProtoInputStream.this, tracingContext);
-                }
-            });
+            this.mDataSource.trace(
+                    new TraceFunction() { // from class:
+                                          // com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda6
+                        @Override // android.tracing.perfetto.TraceFunction
+                        public final void trace(TracingContext tracingContext) {
+                            PerfettoProtoLogImpl.lambda$dumpTransitionTraceConfig$2(
+                                    ProtoInputStream.this, tracingContext);
+                        }
+                    });
         }
     }
 
-    static /* synthetic */ void lambda$dumpTransitionTraceConfig$2(ProtoInputStream pis, TracingContext ctx) {
+    static /* synthetic */ void lambda$dumpTransitionTraceConfig$2(
+            ProtoInputStream pis, TracingContext ctx) {
         try {
             ProtoOutputStream os = ctx.newTracePacket();
-            os.write(TracePacketOuterClass.TracePacket.TIMESTAMP, SystemClock.elapsedRealtimeNanos());
+            os.write(
+                    TracePacketOuterClass.TracePacket.TIMESTAMP,
+                    SystemClock.elapsedRealtimeNanos());
             long outProtologViewerConfigToken = os.start(1146756268137L);
             while (pis.nextField() != -1) {
                 if (pis.getFieldNumber() == 1) {
@@ -163,7 +213,8 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         }
     }
 
-    private static void writeViewerConfigGroup(ProtoInputStream pis, ProtoOutputStream os) throws IOException {
+    private static void writeViewerConfigGroup(ProtoInputStream pis, ProtoOutputStream os)
+            throws IOException {
         long inGroupToken = pis.start(2246267895810L);
         long outGroupToken = os.start(2246267895810L);
         while (pis.nextField() != -1) {
@@ -188,7 +239,8 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         os.end(outGroupToken);
     }
 
-    private static void writeViewerConfigMessage(ProtoInputStream pis, ProtoOutputStream os) throws IOException {
+    private static void writeViewerConfigMessage(ProtoInputStream pis, ProtoOutputStream os)
+            throws IOException {
         long inMessageToken = pis.start(2246267895809L);
         long outMessagesToken = os.start(2246267895809L);
         while (pis.nextField() != -1) {
@@ -213,7 +265,8 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         os.end(outMessagesToken);
     }
 
-    private void logToLogcat(String tag, LogLevel level, long messageHash, String messageString, Object[] args) {
+    private void logToLogcat(
+            String tag, LogLevel level, long messageHash, String messageString, Object[] args) {
         Trace.traceBegin(32L, "logToLogcat");
         try {
             doLogToLogcat(tag, level, messageHash, messageString, args);
@@ -222,7 +275,8 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         }
     }
 
-    private void doLogToLogcat(String tag, LogLevel level, long messageHash, String messageString, Object[] args) {
+    private void doLogToLogcat(
+            String tag, LogLevel level, long messageHash, String messageString, Object[] args) {
         String message = null;
         if (messageString == null) {
             messageString = this.mViewerConfigReader.getViewerString(messageHash);
@@ -239,7 +293,11 @@ public class PerfettoProtoLogImpl implements IProtoLog {
             }
         }
         if (message == null) {
-            StringBuilder builder = new StringBuilder("UNKNOWN MESSAGE (" + messageHash + NavigationBarInflaterView.KEY_CODE_END);
+            StringBuilder builder =
+                    new StringBuilder(
+                            "UNKNOWN MESSAGE ("
+                                    + messageHash
+                                    + NavigationBarInflaterView.KEY_CODE_END);
             for (Object o : args) {
                 builder.append(" ").append(o);
             }
@@ -271,7 +329,13 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         }
     }
 
-    private void logToProto(LogLevel level, String groupName, long messageHash, int paramsMask, Object[] args, long tsNanos) {
+    private void logToProto(
+            LogLevel level,
+            String groupName,
+            long messageHash,
+            int paramsMask,
+            Object[] args,
+            long tsNanos) {
         if (!isProtoEnabled()) {
             return;
         }
@@ -283,17 +347,39 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         }
     }
 
-    private void doLogToProto(final LogLevel level, final String groupName, final long messageHash, final int paramsMask, final Object[] args, final long tsNanos) {
-        this.mDataSource.trace(new TraceFunction() { // from class: com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda7
-            @Override // android.tracing.perfetto.TraceFunction
-            public final void trace(TracingContext tracingContext) {
-                PerfettoProtoLogImpl.this.lambda$doLogToProto$5(groupName, level, args, paramsMask, tsNanos, messageHash, tracingContext);
-            }
-        });
+    private void doLogToProto(
+            final LogLevel level,
+            final String groupName,
+            final long messageHash,
+            final int paramsMask,
+            final Object[] args,
+            final long tsNanos) {
+        this.mDataSource.trace(
+                new TraceFunction() { // from class:
+                                      // com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda7
+                    @Override // android.tracing.perfetto.TraceFunction
+                    public final void trace(TracingContext tracingContext) {
+                        PerfettoProtoLogImpl.this.lambda$doLogToProto$5(
+                                groupName,
+                                level,
+                                args,
+                                paramsMask,
+                                tsNanos,
+                                messageHash,
+                                tracingContext);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$doLogToProto$5(String groupName, LogLevel level, Object[] args, int paramsMask, long tsNanos, long messageHash, TracingContext ctx) {
+    public /* synthetic */ void lambda$doLogToProto$5(
+            String groupName,
+            LogLevel level,
+            Object[] args,
+            int paramsMask,
+            long tsNanos,
+            long messageHash,
+            TracingContext ctx) {
         long token;
         ArrayList<Boolean> booleanParams;
         int i;
@@ -302,7 +388,8 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         long token2;
         Object[] objArr = args;
         int i2 = paramsMask;
-        ProtoLogDataSource.TlsState tlsState = (ProtoLogDataSource.TlsState) ctx.getCustomTlsState();
+        ProtoLogDataSource.TlsState tlsState =
+                (ProtoLogDataSource.TlsState) ctx.getCustomTlsState();
         LogLevel logFrom = tlsState.getLogFromLevel(groupName);
         if (level.ordinal() < logFrom.ordinal()) {
             return;
@@ -455,18 +542,26 @@ public class PerfettoProtoLogImpl implements IProtoLog {
             for (int i4 = 0; i4 < longParams3.size(); i4++) {
                 os.write(Protolog.ProtoLogMessage.SINT64_PARAMS, longParams3.get(i4));
             }
-            doubleParams3.forEach(new Consumer() { // from class: com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda3
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ProtoOutputStream.this.write(Protolog.ProtoLogMessage.DOUBLE_PARAMS, ((Double) obj).doubleValue());
-                }
-            });
-            booleanParams3.forEach(new Consumer() { // from class: com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda4
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ProtoOutputStream.this.write(Protolog.ProtoLogMessage.BOOLEAN_PARAMS, r4.booleanValue() ? 1 : 0);
-                }
-            });
+            doubleParams3.forEach(
+                    new Consumer() { // from class:
+                                     // com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda3
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ProtoOutputStream.this.write(
+                                    Protolog.ProtoLogMessage.DOUBLE_PARAMS,
+                                    ((Double) obj).doubleValue());
+                        }
+                    });
+            booleanParams3.forEach(
+                    new Consumer() { // from class:
+                                     // com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda4
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ProtoOutputStream.this.write(
+                                    Protolog.ProtoLogMessage.BOOLEAN_PARAMS,
+                                    r4.booleanValue() ? 1 : 0);
+                        }
+                    });
             needsIncrementalState = needsIncrementalState2;
         } else {
             token = token3;
@@ -500,17 +595,41 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         return sw.toString();
     }
 
-    private int internStacktraceString(TracingContext<ProtoLogDataSource.Instance, ProtoLogDataSource.TlsState, ProtoLogDataSource.IncrementalState> ctx, String stacktrace) {
+    private int internStacktraceString(
+            TracingContext<
+                            ProtoLogDataSource.Instance,
+                            ProtoLogDataSource.TlsState,
+                            ProtoLogDataSource.IncrementalState>
+                    ctx,
+            String stacktrace) {
         ProtoLogDataSource.IncrementalState incrementalState = ctx.getIncrementalState();
-        return internString(ctx, incrementalState.stacktraceInterningMap, InternedDataOuterClass.InternedData.PROTOLOG_STACKTRACE, stacktrace);
+        return internString(
+                ctx,
+                incrementalState.stacktraceInterningMap,
+                InternedDataOuterClass.InternedData.PROTOLOG_STACKTRACE,
+                stacktrace);
     }
 
-    private int internStringArg(TracingContext<ProtoLogDataSource.Instance, ProtoLogDataSource.TlsState, ProtoLogDataSource.IncrementalState> ctx, String string) {
+    private int internStringArg(
+            TracingContext<
+                            ProtoLogDataSource.Instance,
+                            ProtoLogDataSource.TlsState,
+                            ProtoLogDataSource.IncrementalState>
+                    ctx,
+            String string) {
         ProtoLogDataSource.IncrementalState incrementalState = ctx.getIncrementalState();
         return internString(ctx, incrementalState.argumentInterningMap, 2246267895844L, string);
     }
 
-    private int internString(TracingContext<ProtoLogDataSource.Instance, ProtoLogDataSource.TlsState, ProtoLogDataSource.IncrementalState> ctx, Map<String, Integer> internMap, long fieldId, String string) {
+    private int internString(
+            TracingContext<
+                            ProtoLogDataSource.Instance,
+                            ProtoLogDataSource.TlsState,
+                            ProtoLogDataSource.IncrementalState>
+                    ctx,
+            Map<String, Integer> internMap,
+            long fieldId,
+            String string) {
         ProtoLogDataSource.IncrementalState incrementalState = ctx.getIncrementalState();
         if (!incrementalState.clearReported) {
             ctx.newTracePacket().write(1155346202637L, 1);
@@ -618,12 +737,14 @@ public class PerfettoProtoLogImpl implements IProtoLog {
             }
             args.add(arg);
         }
-        ILogger logger = new ILogger() { // from class: com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda5
-            @Override // com.android.internal.protolog.common.ILogger
-            public final void log(String str) {
-                PerfettoProtoLogImpl.logAndPrintln(pw, str);
-            }
-        };
+        ILogger logger =
+                new ILogger() { // from class:
+                                // com.android.internal.protolog.PerfettoProtoLogImpl$$ExternalSyntheticLambda5
+                    @Override // com.android.internal.protolog.common.ILogger
+                    public final void log(String str) {
+                        PerfettoProtoLogImpl.logAndPrintln(pw, str);
+                    }
+                };
         String[] groups = (String[]) args.toArray(new String[0]);
         switch (cmd.hashCode()) {
             case -1475003593:
@@ -661,7 +782,9 @@ public class PerfettoProtoLogImpl implements IProtoLog {
         switch (c) {
             case 0:
             case 1:
-                pw.println("Command not supported. Please start and stop ProtoLog tracing with Perfetto.");
+                pw.println(
+                        "Command not supported. Please start and stop ProtoLog tracing with"
+                            + " Perfetto.");
                 break;
             case 2:
                 this.mViewerConfigReader.loadViewerConfig(logger);
@@ -682,14 +805,21 @@ public class PerfettoProtoLogImpl implements IProtoLog {
     public synchronized void onTracingInstanceStart(ProtoLogDataSource.ProtoLogConfig config) {
         this.mTracingInstances.incrementAndGet();
         LogLevel defaultLogFrom = config.getDefaultGroupConfig().logFrom;
-        this.mDefaultLogLevelCounts.put(defaultLogFrom, Integer.valueOf(this.mDefaultLogLevelCounts.getOrDefault(defaultLogFrom, 0).intValue() + 1));
+        this.mDefaultLogLevelCounts.put(
+                defaultLogFrom,
+                Integer.valueOf(
+                        this.mDefaultLogLevelCounts.getOrDefault(defaultLogFrom, 0).intValue()
+                                + 1));
         Set<String> overriddenGroupTags = config.getGroupTagsWithOverriddenConfigs();
         for (String overriddenGroupTag : overriddenGroupTags) {
             IProtoLogGroup group = this.mLogGroups.get(overriddenGroupTag);
             this.mLogLevelCounts.putIfAbsent(group, new ArrayMap());
             Map<LogLevel, Integer> logLevelsCountsForGroup = this.mLogLevelCounts.get(group);
             LogLevel logFromLevel = config.getConfigFor(overriddenGroupTag).logFrom;
-            logLevelsCountsForGroup.put(logFromLevel, Integer.valueOf(logLevelsCountsForGroup.getOrDefault(logFromLevel, 0).intValue() + 1));
+            logLevelsCountsForGroup.put(
+                    logFromLevel,
+                    Integer.valueOf(
+                            logLevelsCountsForGroup.getOrDefault(logFromLevel, 0).intValue() + 1));
         }
         this.mCacheUpdater.run();
     }
@@ -698,7 +828,9 @@ public class PerfettoProtoLogImpl implements IProtoLog {
     public synchronized void onTracingInstanceStop(ProtoLogDataSource.ProtoLogConfig config) {
         this.mTracingInstances.decrementAndGet();
         LogLevel defaultLogFrom = config.getDefaultGroupConfig().logFrom;
-        this.mDefaultLogLevelCounts.put(defaultLogFrom, Integer.valueOf(this.mDefaultLogLevelCounts.get(defaultLogFrom).intValue() - 1));
+        this.mDefaultLogLevelCounts.put(
+                defaultLogFrom,
+                Integer.valueOf(this.mDefaultLogLevelCounts.get(defaultLogFrom).intValue() - 1));
         if (this.mDefaultLogLevelCounts.get(defaultLogFrom).intValue() <= 0) {
             this.mDefaultLogLevelCounts.remove(defaultLogFrom);
         }
@@ -708,7 +840,9 @@ public class PerfettoProtoLogImpl implements IProtoLog {
             this.mLogLevelCounts.putIfAbsent(group, new ArrayMap());
             Map<LogLevel, Integer> logLevelsCountsForGroup = this.mLogLevelCounts.get(group);
             LogLevel logFromLevel = config.getConfigFor(overriddenGroupTag).logFrom;
-            logLevelsCountsForGroup.put(logFromLevel, Integer.valueOf(logLevelsCountsForGroup.get(logFromLevel).intValue() - 1));
+            logLevelsCountsForGroup.put(
+                    logFromLevel,
+                    Integer.valueOf(logLevelsCountsForGroup.get(logFromLevel).intValue() - 1));
             if (logLevelsCountsForGroup.get(logFromLevel).intValue() <= 0) {
                 logLevelsCountsForGroup.remove(logFromLevel);
             }

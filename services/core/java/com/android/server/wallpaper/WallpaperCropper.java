@@ -6,9 +6,11 @@ import android.graphics.Rect;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.samsung.android.wallpaper.Rune;
 import com.samsung.android.wallpaper.utils.WhichChecker;
 import com.samsung.server.wallpaper.SemWallpaperManagerService;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,14 +26,16 @@ public final class WallpaperCropper {
     public final WallpaperDisplayHelper mWallpaperDisplayHelper;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface WallpaperCropUtils {
-    }
+    public interface WallpaperCropUtils {}
 
-    public WallpaperCropper(WallpaperDisplayHelper wallpaperDisplayHelper, SemWallpaperManagerService semWallpaperManagerService) {
+    public WallpaperCropper(
+            WallpaperDisplayHelper wallpaperDisplayHelper,
+            SemWallpaperManagerService semWallpaperManagerService) {
         this.mWallpaperDisplayHelper = wallpaperDisplayHelper;
     }
 
-    public static Rect getAdjustedCrop(Rect rect, Point point, Point point2, boolean z, boolean z2, int i) {
+    public static Rect getAdjustedCrop(
+            Rect rect, Point point, Point point2, boolean z, boolean z2, int i) {
         int sqrt;
         Rect rect2 = new Rect(rect);
         float width = rect.width() / rect.height();
@@ -79,7 +83,8 @@ public final class WallpaperCropper {
                 int i9 = rect.left;
                 Rect rect3 = new Rect(i8, i9, height2, rect.width() + i9);
                 Point point3 = new Point(point.y, point.x);
-                Rect adjustedCrop = getAdjustedCrop(rect3, point3, new Point(point2.y, point2.x), false, z2, i);
+                Rect adjustedCrop =
+                        getAdjustedCrop(rect3, point3, new Point(point2.y, point2.x), false, z2, i);
                 int i10 = adjustedCrop.top;
                 int height3 = adjustedCrop.height() + i10;
                 int i11 = point3.x - adjustedCrop.right;
@@ -142,7 +147,12 @@ public final class WallpaperCropper {
             return rect;
         }
         Rect adjustedCrop = getAdjustedCrop(rect, point2, point, true, z, 1);
-        int width = (int) ((adjustedCrop.width() - (adjustedCrop.height() * ((point.x * MAX_PARALLAX) / point.y))) + 0.5f);
+        int width =
+                (int)
+                        ((adjustedCrop.width()
+                                        - (adjustedCrop.height()
+                                                * ((point.x * MAX_PARALLAX) / point.y)))
+                                + 0.5f);
         if (z) {
             adjustedCrop.left += width;
         } else {
@@ -154,49 +164,49 @@ public final class WallpaperCropper {
     /* JADX WARN: Can't wrap try/catch for region: R(42:(2:50|(16:54|55|(8:57|(4:60|(1:65)(2:62|63)|64|58)|66|67|(2:70|68)|71|72|(1:74)(1:75))|76|(2:80|(1:82))|83|(1:85)|86|(1:88)|89|(23:104|105|(2:106|(1:108)(1:109))|110|(1:112)(1:190)|113|(1:117)|118|(1:120)(1:189)|121|122|(1:124)(1:188)|125|126|127|(2:182|183)(1:129)|130|(1:132)|133|(1:135)(1:181)|136|(13:141|(1:143)(1:180)|144|(1:146)|147|148|149|150|151|(3:162|159|160)|158|159|160)(1:139)|140)(3:92|(1:94)|95)|(1:97)|98|(1:100)|101|102))|104|105|(3:106|(0)(0)|108)|110|(0)(0)|113|(2:115|117)|118|(0)(0)|121|122|(0)(0)|125|126|127|(0)(0)|130|(0)|133|(0)(0)|136|(0)|141|(0)(0)|144|(0)|147|148|149|150|151|(2:153|155)|162|159|160|140|(0)|98|(0)|101|102) */
     /* JADX WARN: Can't wrap try/catch for region: R(64:5|(3:7|(3:10|(1:16)(1:14)|8)|18)(0)|19|(1:22)|23|(2:213|(5:215|(1:217)|218|(1:220)|221)(1:222))(4:27|(4:30|(2:32|33)(1:35)|34|28)|36|37)|38|(2:197|(8:199|(1:201)(1:212)|202|(1:204)(1:211)|205|(1:207)|208|(1:210)))(1:42)|43|(1:196)(1:47)|48|(2:50|(16:54|55|(8:57|(4:60|(1:65)(2:62|63)|64|58)|66|67|(2:70|68)|71|72|(1:74)(1:75))|76|(2:80|(1:82))|83|(1:85)|86|(1:88)|89|(23:104|105|(2:106|(1:108)(1:109))|110|(1:112)(1:190)|113|(1:117)|118|(1:120)(1:189)|121|122|(1:124)(1:188)|125|126|127|(2:182|183)(1:129)|130|(1:132)|133|(1:135)(1:181)|136|(13:141|(1:143)(1:180)|144|(1:146)|147|148|149|150|151|(3:162|159|160)|158|159|160)(1:139)|140)(3:92|(1:94)|95)|(1:97)|98|(1:100)|101|102))|195|55|(0)|76|(3:78|80|(0))|83|(0)|86|(0)|89|(0)|104|105|(3:106|(0)(0)|108)|110|(0)(0)|113|(2:115|117)|118|(0)(0)|121|122|(0)(0)|125|126|127|(0)(0)|130|(0)|133|(0)(0)|136|(0)|141|(0)(0)|144|(0)|147|148|149|150|151|(2:153|155)|162|159|160|140|(0)|98|(0)|101|102) */
     /* JADX WARN: Code restructure failed: missing block: B:163:0x05b8, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:164:0x05b9, code lost:
-    
-        r18 = r4;
-        r13 = r5;
-     */
+
+       r18 = r4;
+       r13 = r5;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:173:0x05b3, code lost:
-    
-        r0 = th;
-     */
+
+       r0 = th;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:174:0x05b4, code lost:
-    
-        r18 = r4;
-        r13 = r5;
-     */
+
+       r18 = r4;
+       r13 = r5;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:176:0x05dc, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:177:0x05dd, code lost:
-    
-        r18 = r4;
-        r13 = null;
-     */
+
+       r18 = r4;
+       r13 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:178:0x05d7, code lost:
-    
-        r0 = th;
-     */
+
+       r0 = th;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:179:0x05d8, code lost:
-    
-        r18 = r4;
-        r13 = null;
-     */
+
+       r18 = r4;
+       r13 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:191:0x038c, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:192:0x038d, code lost:
-    
-        r17 = r2;
-     */
+
+       r17 = r2;
+    */
     /* JADX WARN: Removed duplicated region for block: B:100:0x0621  */
     /* JADX WARN: Removed duplicated region for block: B:108:0x0369 A[LOOP:4: B:106:0x0365->B:108:0x0369, LOOP_END] */
     /* JADX WARN: Removed duplicated region for block: B:109:0x036b A[EDGE_INSN: B:109:0x036b->B:110:0x036b BREAK  A[LOOP:4: B:106:0x0365->B:108:0x0369], SYNTHETIC] */
@@ -228,7 +238,9 @@ public final class WallpaperCropper {
             Method dump skipped, instructions count: 1584
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wallpaper.WallpaperCropper.generateCrop(com.android.server.wallpaper.WallpaperData):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wallpaper.WallpaperCropper.generateCrop(com.android.server.wallpaper.WallpaperData):void");
     }
 
     public final Rect getCrop(Point point, Point point2, SparseArray sparseArray, boolean z) {
@@ -238,7 +250,9 @@ public final class WallpaperCropper {
         WallpaperDisplayHelper wallpaperDisplayHelper = this.mWallpaperDisplayHelper;
         if (sparseArray == null || sparseArray.size() == 0) {
             Rect rect2 = new Rect(0, 0, point2.x, point2.y);
-            if (Rune.SUPPORT_SUB_DISPLAY_MODE && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && (orientation == 0 || orientation == 1)) {
+            if (Rune.SUPPORT_SUB_DISPLAY_MODE
+                    && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                    && (orientation == 0 || orientation == 1)) {
                 i = 1;
             }
             int unfoldedOrientation = wallpaperDisplayHelper.getUnfoldedOrientation(orientation);
@@ -250,14 +264,22 @@ public final class WallpaperCropper {
             if (i != 0) {
                 SparseArray sparseArray3 = new SparseArray();
                 sparseArray3.put(orientation, rect2);
-                Slog.w("WallpaperCropper", "getCrop: foldedOrientation, newSuggestedCrops = " + sparseArray3 + " , orientation = " + orientation);
+                Slog.w(
+                        "WallpaperCropper",
+                        "getCrop: foldedOrientation, newSuggestedCrops = "
+                                + sparseArray3
+                                + " , orientation = "
+                                + orientation);
                 return getCrop(point, point2, sparseArray3, z);
             }
-            if (!wallpaperDisplayHelper.mIsLargeScreen || wallpaperDisplayHelper.mIsFoldable || point.x >= point.y) {
+            if (!wallpaperDisplayHelper.mIsLargeScreen
+                    || wallpaperDisplayHelper.mIsFoldable
+                    || point.x >= point.y) {
                 rect = rect2;
             } else {
                 Point point3 = new Point(point.y, point.x);
-                Rect noParallax = noParallax(getCrop(point3, point2, sparseArray, z), point3, point2, z);
+                Rect noParallax =
+                        noParallax(getCrop(point3, point2, sparseArray, z), point3, point2, z);
                 rect = getAdjustedCrop(noParallax, point2, point, false, z, 1);
                 if (z) {
                     rect.left = noParallax.left;
@@ -269,8 +291,14 @@ public final class WallpaperCropper {
         }
         for (int i2 = 0; i2 < sparseArray.size(); i2++) {
             Rect rect3 = (Rect) sparseArray.valueAt(i2);
-            if (rect3 == null || rect3.left < 0 || rect3.top < 0 || rect3.right > point2.x || rect3.bottom > point2.y) {
-                Slog.w("WallpaperCropper", "invalid crop: " + rect3 + " for bitmap size: " + point2);
+            if (rect3 == null
+                    || rect3.left < 0
+                    || rect3.top < 0
+                    || rect3.right > point2.x
+                    || rect3.bottom > point2.y) {
+                Slog.w(
+                        "WallpaperCropper",
+                        "invalid crop: " + rect3 + " for bitmap size: " + point2);
                 return getCrop(point, point2, new SparseArray(), z);
             }
         }
@@ -283,7 +311,8 @@ public final class WallpaperCropper {
         Rect rect5 = (Rect) sparseArray.get(rotatedOrientation);
         Point point4 = (Point) sparseArray4.get(rotatedOrientation);
         if (rect5 != null) {
-            return getAdjustedCrop(noParallax(rect5, point4, point2, z), point2, point, false, z, 3);
+            return getAdjustedCrop(
+                    noParallax(rect5, point4, point2, z), point2, point, false, z, 3);
         }
         int unfoldedOrientation2 = wallpaperDisplayHelper.getUnfoldedOrientation(orientation);
         Rect rect6 = (Rect) sparseArray.get(unfoldedOrientation2);
@@ -306,12 +335,17 @@ public final class WallpaperCropper {
         Point point6 = (Point) sparseArray4.get(foldedOrientation);
         if (rect7 != null) {
             Rect noParallax3 = noParallax(rect7, point6, point2, z);
-            Slog.i("WallpaperCropper", "getCrop: suggestedCrop = " + rect7 + " , orientation = " + orientation);
+            Slog.i(
+                    "WallpaperCropper",
+                    "getCrop: suggestedCrop = " + rect7 + " , orientation = " + orientation);
             return getAdjustedCrop(noParallax3, point2, point, false, z, 1);
         }
         Point point7 = (Point) sparseArray4.get(rotatedOrientation);
         if (point7 != null) {
-            int[] iArr = {wallpaperDisplayHelper.getFoldedOrientation(rotatedOrientation), wallpaperDisplayHelper.getUnfoldedOrientation(rotatedOrientation)};
+            int[] iArr = {
+                wallpaperDisplayHelper.getFoldedOrientation(rotatedOrientation),
+                wallpaperDisplayHelper.getUnfoldedOrientation(rotatedOrientation)
+            };
             while (i < 2) {
                 if (((Rect) sparseArray.get(iArr[i])) != null) {
                     Rect crop = getCrop(point7, point2, sparseArray, z);
@@ -322,7 +356,20 @@ public final class WallpaperCropper {
                 i++;
             }
         }
-        Slog.w("WallpaperCropper", "Could not find a proper default crop for display: " + point + ", bitmap size: " + point2 + ", suggested crops: " + sparseArray + ", orientation: " + orientation + ", rtl: " + z + ", defaultDisplaySizes: " + sparseArray4);
+        Slog.w(
+                "WallpaperCropper",
+                "Could not find a proper default crop for display: "
+                        + point
+                        + ", bitmap size: "
+                        + point2
+                        + ", suggested crops: "
+                        + sparseArray
+                        + ", orientation: "
+                        + orientation
+                        + ", rtl: "
+                        + z
+                        + ", defaultDisplaySizes: "
+                        + sparseArray4);
         return getCrop(point, point2, new SparseArray(), z);
     }
 
@@ -333,14 +380,22 @@ public final class WallpaperCropper {
         if (rect != null) {
             Rect rect2 = new Rect(0, 0, point.x, point.y);
             if (sparseArray.size() == 1 && rect2.contains(rect)) {
-                SparseArray defaultCrops = getDefaultCrops(i, new SparseArray(), new Point(rect.width(), rect.height()));
+                SparseArray defaultCrops =
+                        getDefaultCrops(
+                                i, new SparseArray(), new Point(rect.width(), rect.height()));
                 while (i2 < defaultCrops.size()) {
                     ((Rect) defaultCrops.valueAt(i2)).offset(rect.left, rect.top);
                     i2++;
                 }
                 return defaultCrops;
             }
-            Slog.w("WallpaperCropper", "Couldn't get default crops from suggested crops " + sparseArray + " for bitmap of size " + point + "; ignoring suggested crops");
+            Slog.w(
+                    "WallpaperCropper",
+                    "Couldn't get default crops from suggested crops "
+                            + sparseArray
+                            + " for bitmap of size "
+                            + point
+                            + "; ignoring suggested crops");
             return getDefaultCrops(i, new SparseArray(), point);
         }
         boolean z = Rune.SUPPORT_SUB_DISPLAY_MODE;
@@ -358,7 +413,9 @@ public final class WallpaperCropper {
                 sparseArray3.put(2, (Point) wallpaperDisplayHelper.mDefaultDisplaySizes.get(2));
                 sparseArray3.put(3, (Point) wallpaperDisplayHelper.mDefaultDisplaySizes.get(3));
             }
-            Slog.w("WallpaperDisplayHelper", "getDefaultDisplaySizes which = " + i + " , sizes = " + sparseArray3);
+            Slog.w(
+                    "WallpaperDisplayHelper",
+                    "getDefaultDisplaySizes which = " + i + " , sizes = " + sparseArray3);
             sparseArray2 = sparseArray3;
         }
         boolean z2 = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == 1;
@@ -374,7 +431,8 @@ public final class WallpaperCropper {
         while (i2 < sparseArray2.size()) {
             int keyAt2 = sparseArray2.keyAt(i2);
             if (!clone.contains(keyAt2)) {
-                clone.put(keyAt2, getCrop((Point) sparseArray2.valueAt(i2), point, sparseArray4, z2));
+                clone.put(
+                        keyAt2, getCrop((Point) sparseArray2.valueAt(i2), point, sparseArray4, z2));
             }
             i2++;
         }

@@ -6,8 +6,7 @@ public class Double2 {
     public double x;
     public double y;
 
-    public Double2() {
-    }
+    public Double2() {}
 
     public Double2(Double2 data) {
         this.x = data.x;

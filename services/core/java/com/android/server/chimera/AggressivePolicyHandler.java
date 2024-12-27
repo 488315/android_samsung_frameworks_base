@@ -2,8 +2,10 @@ package com.android.server.chimera;
 
 import android.os.Handler;
 import android.os.Message;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 
@@ -33,7 +35,7 @@ public final class AggressivePolicyHandler extends PolicyHandler {
             NORMAL = protectLevel;
             ProtectLevel protectLevel2 = new ProtectLevel("HEAVY", 1);
             HEAVY = protectLevel2;
-            $VALUES = new ProtectLevel[]{protectLevel, protectLevel2};
+            $VALUES = new ProtectLevel[] {protectLevel, protectLevel2};
         }
 
         public static ProtectLevel valueOf(String str) {
@@ -57,7 +59,8 @@ public final class AggressivePolicyHandler extends PolicyHandler {
             if (this.mIsHeavyLaunchOn) {
                 HeavyLaunchCounter heavyLaunchCounter = this.mHeavyLaunchCounter;
                 if (heavyLaunchCounter.isHeavyLaunch()) {
-                    printWriter.println("HeavyLaunch mode from " + heavyLaunchCounter.getLastStartedUpTime());
+                    printWriter.println(
+                            "HeavyLaunch mode from " + heavyLaunchCounter.getLastStartedUpTime());
                 }
             }
             printWriter.println("************** adjinfo ****************");
@@ -102,7 +105,10 @@ public final class AggressivePolicyHandler extends PolicyHandler {
                 } catch (NumberFormatException e2) {
                     printWriter.println(e2.getMessage());
                 }
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("Normal kill interval : "), this.mPkgProtectedParameters[0][2], printWriter);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Normal kill interval : "),
+                        this.mPkgProtectedParameters[0][2],
+                        printWriter);
                 return;
             }
             if (str.equals("set_heavy_kill_interval") && strArr.length > 1) {
@@ -111,7 +117,10 @@ public final class AggressivePolicyHandler extends PolicyHandler {
                 } catch (NumberFormatException e3) {
                     printWriter.println(e3.getMessage());
                 }
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("Heavy kill interval : "), this.mPkgProtectedParameters[1][2], printWriter);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Heavy kill interval : "),
+                        this.mPkgProtectedParameters[1][2],
+                        printWriter);
                 return;
             }
             if (str.equals("info")) {
@@ -157,29 +166,34 @@ public final class AggressivePolicyHandler extends PolicyHandler {
         sb.append(this.mWeightStandbyBucket);
         sb.append(" mem=");
         AggressivePolicyHandler$$ExternalSyntheticOutline0.m(sb, this.mWeightMem, printWriter);
-        printWriter.println("Normal kill interval : ".concat(PolicyHandler.toHHmmss(this.mPkgProtectedParameters[0][2])));
-        printWriter.println("Heavy kill interval : ".concat(PolicyHandler.toHHmmss(this.mPkgProtectedParameters[1][2])));
+        printWriter.println(
+                "Normal kill interval : "
+                        .concat(PolicyHandler.toHHmmss(this.mPkgProtectedParameters[0][2])));
+        printWriter.println(
+                "Heavy kill interval : "
+                        .concat(PolicyHandler.toHHmmss(this.mPkgProtectedParameters[1][2])));
         if (!this.mIsKillBoostModeOnNormal && !this.mIsKillBoostModeOnHeavy) {
             printWriter.println("Kill boost mode: off");
             return;
         }
         StringBuilder sb2 = new StringBuilder("Kill boost mode:");
         sb2.append(this.mIsKillBoostModeOnNormal ? " Normal" : "");
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb2, this.mIsKillBoostModeOnHeavy ? " Heavy" : "", printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                sb2, this.mIsKillBoostModeOnHeavy ? " Heavy" : "", printWriter);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:318:0x0255, code lost:
-    
-        if (r6 == 0) goto L128;
-     */
+
+       if (r6 == 0) goto L128;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:319:0x027c, code lost:
-    
-        r2.logSkip(r9, "freeze binder failed.");
-     */
+
+       r2.logSkip(r9, "freeze binder failed.");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:324:0x0279, code lost:
-    
-        if (r6 != 0) goto L124;
-     */
+
+       if (r6 != 0) goto L124;
+    */
     /* JADX WARN: Removed duplicated region for block: B:107:0x0567  */
     /* JADX WARN: Removed duplicated region for block: B:109:0x056a  */
     /* JADX WARN: Removed duplicated region for block: B:133:0x05e6  */
@@ -197,19 +211,28 @@ public final class AggressivePolicyHandler extends PolicyHandler {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int executePolicy(com.android.server.chimera.ChimeraCommonUtil.TriggerSource r31, int r32) {
+    public final int executePolicy(
+            com.android.server.chimera.ChimeraCommonUtil.TriggerSource r31, int r32) {
         /*
             Method dump skipped, instructions count: 1929
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.AggressivePolicyHandler.executePolicy(com.android.server.chimera.ChimeraCommonUtil$TriggerSource, int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.chimera.AggressivePolicyHandler.executePolicy(com.android.server.chimera.ChimeraCommonUtil$TriggerSource,"
+                    + " int):int");
     }
 
-    @Override // com.android.server.chimera.PolicyHandler, com.android.server.chimera.SystemRepository.ChimeraProcessObserver
-    public final void onForegroundActivitiesChanged(int i, int i2, boolean z, int i3, String[] strArr, boolean z2) {
+    @Override // com.android.server.chimera.PolicyHandler,
+              // com.android.server.chimera.SystemRepository.ChimeraProcessObserver
+    public final void onForegroundActivitiesChanged(
+            int i, int i2, boolean z, int i3, String[] strArr, boolean z2) {
         HeavyLaunchCounter heavyLaunchCounter;
         super.onForegroundActivitiesChanged(i, i2, z, i3, strArr, z2);
-        if (!this.mIsHeavyLaunchOn || z2 || !z || (heavyLaunchCounter = this.mHeavyLaunchCounter) == null) {
+        if (!this.mIsHeavyLaunchOn
+                || z2
+                || !z
+                || (heavyLaunchCounter = this.mHeavyLaunchCounter) == null) {
             return;
         }
         heavyLaunchCounter.addLaunch(i2, System.currentTimeMillis());
@@ -218,6 +241,13 @@ public final class AggressivePolicyHandler extends PolicyHandler {
     public final void setWeight(float f, float f2) {
         this.mWeightLru = f;
         this.mWeightStandbyBucket = f2;
-        this.mWeightMem = new BigDecimal(Float.toString(1.0f)).subtract(new BigDecimal(Float.toString(this.mWeightLru)).add(new BigDecimal(Float.toString(this.mWeightStandbyBucket)))).floatValue();
+        this.mWeightMem =
+                new BigDecimal(Float.toString(1.0f))
+                        .subtract(
+                                new BigDecimal(Float.toString(this.mWeightLru))
+                                        .add(
+                                                new BigDecimal(
+                                                        Float.toString(this.mWeightStandbyBucket))))
+                        .floatValue();
     }
 }

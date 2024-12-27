@@ -3,23 +3,26 @@ package android.hardware.security.keymint;
 import android.media.TtmlUtils;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.org.bouncycastle.cms.CMSAttributeTableGenerator;
 
 /* loaded from: classes2.dex */
 public final class KeyParameterValue implements Parcelable {
-    public static final Parcelable.Creator<KeyParameterValue> CREATOR = new Parcelable.Creator<KeyParameterValue>() { // from class: android.hardware.security.keymint.KeyParameterValue.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyParameterValue createFromParcel(Parcel _aidl_source) {
-            return new KeyParameterValue(_aidl_source);
-        }
+    public static final Parcelable.Creator<KeyParameterValue> CREATOR =
+            new Parcelable.Creator<KeyParameterValue>() { // from class:
+                // android.hardware.security.keymint.KeyParameterValue.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyParameterValue createFromParcel(Parcel _aidl_source) {
+                    return new KeyParameterValue(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyParameterValue[] newArray(int _aidl_size) {
-            return new KeyParameterValue[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyParameterValue[] newArray(int _aidl_size) {
+                    return new KeyParameterValue[_aidl_size];
+                }
+            };
     public static final int algorithm = 1;
     public static final int blob = 14;
     public static final int blockMode = 2;
@@ -402,7 +405,12 @@ public final class KeyParameterValue implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

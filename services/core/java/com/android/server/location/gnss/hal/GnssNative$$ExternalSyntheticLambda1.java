@@ -4,12 +4,14 @@ import com.android.internal.util.FunctionalUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class GnssNative$$ExternalSyntheticLambda1 implements FunctionalUtils.ThrowingRunnable {
+public final /* synthetic */ class GnssNative$$ExternalSyntheticLambda1
+        implements FunctionalUtils.ThrowingRunnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ GnssNative f$0;
     public final /* synthetic */ int f$1;
 
-    public /* synthetic */ GnssNative$$ExternalSyntheticLambda1(GnssNative gnssNative, int i, int i2) {
+    public /* synthetic */ GnssNative$$ExternalSyntheticLambda1(
+            GnssNative gnssNative, int i, int i2) {
         this.$r8$classId = i2;
         this.f$0 = gnssNative;
         this.f$1 = i;

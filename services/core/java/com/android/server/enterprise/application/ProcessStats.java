@@ -4,6 +4,7 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
@@ -11,6 +12,7 @@ import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,8 +34,27 @@ public final class ProcessStats {
     public int mRelSystemTime;
     public int mRelUserTime;
     public boolean mWorkingProcsSorted;
-    public static final int[] PROCESS_STATS_FORMAT = {32, FrameworkStatsLog.PACKAGE_MANAGER_SNAPSHOT_REPORTED, 32, 32, 32, 32, 32, 32, 32, 8224, 32, 8224, 32, 8224, 8224};
-    public static final int[] PROCESS_FULL_STATS_FORMAT = {32, 4640, 32, 32, 32, 32, 32, 32, 32, 8224, 32, 8224, 32, 8224, 8224, 32, 32, 32, 32, 32, 32, 8224};
+    public static final int[] PROCESS_STATS_FORMAT = {
+        32,
+        FrameworkStatsLog.PACKAGE_MANAGER_SNAPSHOT_REPORTED,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        8224,
+        32,
+        8224,
+        32,
+        8224,
+        8224
+    };
+    public static final int[] PROCESS_FULL_STATS_FORMAT = {
+        32, 4640, 32, 32, 32, 32, 32, 32, 32, 8224, 32, 8224, 32, 8224, 8224, 32, 32, 32, 32, 32,
+        32, 8224
+    };
     public static final int[] SYSTEM_CPU_FORMAT = {288, 8224, 8224, 8224, 8224, 8224, 8224, 8224};
     public static final int[] LOAD_AVERAGE_FORMAT = {16416, 16416, 16416};
     public static final AnonymousClass1 sLoadComparator = new AnonymousClass1();
@@ -104,7 +125,15 @@ public final class ProcessStats {
         public Stats(int i, int i2) {
             this.pid = i;
             if (i2 >= 0) {
-                this.statFile = new File(new File(new File(new File("/proc", Integer.toString(i2)), "task"), Integer.toString(i)), "stat").toString();
+                this.statFile =
+                        new File(
+                                        new File(
+                                                new File(
+                                                        new File("/proc", Integer.toString(i2)),
+                                                        "task"),
+                                                Integer.toString(i)),
+                                        "stat")
+                                .toString();
                 this.cmdlineFile = null;
                 this.threadsDir = null;
                 this.threadStats = null;
@@ -169,7 +198,8 @@ public final class ProcessStats {
                     stats4.working = false;
                     int i16 = i13 + 1;
                     StringBuilder sb = new StringBuilder("Existing ");
-                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(i2, i12 < 0 ? "process" : "thread", " pid ", ": ", sb);
+                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                            i2, i12 < 0 ? "process" : "thread", " pid ", ": ", sb);
                     sb.append(stats4);
                     Log.v("ProcessStats", sb.toString());
                     if (stats4.interesting) {
@@ -210,19 +240,38 @@ public final class ProcessStats {
                                         str10 = " utime=";
                                         i7 = size;
                                         stats3 = stats4;
-                                        this.mCurThreadPids = collectStats(stats4.threadsDir, i2, false, this.mCurThreadPids, arrayList3);
+                                        this.mCurThreadPids =
+                                                collectStats(
+                                                        stats4.threadsDir,
+                                                        i2,
+                                                        false,
+                                                        this.mCurThreadPids,
+                                                        arrayList3);
                                         StringBuilder sb2 = new StringBuilder("Stats changed ");
-                                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(i11, stats3.name, str11, str10, sb2);
+                                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                                i11, stats3.name, str11, str10, sb2);
                                         sb2.append(j);
                                         sb2.append(PackageManagerShellCommandDataLoader.STDIN_PATH);
                                         sb2.append(stats3.base_utime);
                                         long j8 = j2;
-                                        BootReceiver$$ExternalSyntheticOutline0.m(sb2, str9, j8, PackageManagerShellCommandDataLoader.STDIN_PATH);
+                                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                                sb2,
+                                                str9,
+                                                j8,
+                                                PackageManagerShellCommandDataLoader.STDIN_PATH);
                                         sb2.append(stats3.base_stime);
-                                        BootReceiver$$ExternalSyntheticOutline0.m(sb2, " minfaults=", j4, PackageManagerShellCommandDataLoader.STDIN_PATH);
+                                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                                sb2,
+                                                " minfaults=",
+                                                j4,
+                                                PackageManagerShellCommandDataLoader.STDIN_PATH);
                                         sb2.append(stats3.base_minfaults);
                                         long j9 = j3;
-                                        BootReceiver$$ExternalSyntheticOutline0.m(sb2, str8, j9, PackageManagerShellCommandDataLoader.STDIN_PATH);
+                                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                                sb2,
+                                                str8,
+                                                j9,
+                                                PackageManagerShellCommandDataLoader.STDIN_PATH);
                                         sb2.append(stats3.base_majfaults);
                                         Log.v(str12, sb2.toString());
                                         stats3.rel_utime = (int) (j - stats3.base_utime);
@@ -259,17 +308,30 @@ public final class ProcessStats {
                                 i11 = i15;
                                 stats3 = stats4;
                                 StringBuilder sb22 = new StringBuilder("Stats changed ");
-                                AccessibilityManagerService$$ExternalSyntheticOutline0.m(i11, stats3.name, str11, str10, sb22);
+                                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                        i11, stats3.name, str11, str10, sb22);
                                 sb22.append(j);
                                 sb22.append(PackageManagerShellCommandDataLoader.STDIN_PATH);
                                 sb22.append(stats3.base_utime);
                                 long j82 = j2;
-                                BootReceiver$$ExternalSyntheticOutline0.m(sb22, str9, j82, PackageManagerShellCommandDataLoader.STDIN_PATH);
+                                BootReceiver$$ExternalSyntheticOutline0.m(
+                                        sb22,
+                                        str9,
+                                        j82,
+                                        PackageManagerShellCommandDataLoader.STDIN_PATH);
                                 sb22.append(stats3.base_stime);
-                                BootReceiver$$ExternalSyntheticOutline0.m(sb22, " minfaults=", j4, PackageManagerShellCommandDataLoader.STDIN_PATH);
+                                BootReceiver$$ExternalSyntheticOutline0.m(
+                                        sb22,
+                                        " minfaults=",
+                                        j4,
+                                        PackageManagerShellCommandDataLoader.STDIN_PATH);
                                 sb22.append(stats3.base_minfaults);
                                 long j92 = j3;
-                                BootReceiver$$ExternalSyntheticOutline0.m(sb22, str8, j92, PackageManagerShellCommandDataLoader.STDIN_PATH);
+                                BootReceiver$$ExternalSyntheticOutline0.m(
+                                        sb22,
+                                        str8,
+                                        j92,
+                                        PackageManagerShellCommandDataLoader.STDIN_PATH);
                                 sb22.append(stats3.base_majfaults);
                                 Log.v(str12, sb22.toString());
                                 stats3.rel_utime = (int) (j - stats3.base_utime);
@@ -339,7 +401,8 @@ public final class ProcessStats {
                 int i18 = i13 + 1;
                 i7 = i3 + 1;
                 StringBuilder sb3 = new StringBuilder("New ");
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(i2, i6 < 0 ? "process" : "thread", " pid ", ": ", sb3);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i2, i6 < 0 ? "process" : "thread", " pid ", ": ", sb3);
                 sb3.append(stats5);
                 Log.v("ProcessStats", sb3.toString());
                 SystemClock.uptimeMillis();
@@ -356,7 +419,8 @@ public final class ProcessStats {
                     stats5.base_utime = jArr2[3];
                     stats5.base_stime = jArr2[4];
                 } else {
-                    NetworkScoreService$$ExternalSyntheticOutline0.m(i2, "Skipping unknown process pid ", "ProcessStats");
+                    NetworkScoreService$$ExternalSyntheticOutline0.m(
+                            i2, "Skipping unknown process pid ", "ProcessStats");
                     stats5.baseName = "<unknown>";
                     stats5.base_stime = 0L;
                     stats5.base_utime = 0L;
@@ -368,7 +432,13 @@ public final class ProcessStats {
                     ArrayList arrayList4 = stats5.threadStats;
                     if (arrayList4 != null) {
                         str7 = str15;
-                        this.mCurThreadPids = collectStats(stats5.threadsDir, i2, true, this.mCurThreadPids, arrayList4);
+                        this.mCurThreadPids =
+                                collectStats(
+                                        stats5.threadsDir,
+                                        i2,
+                                        true,
+                                        this.mCurThreadPids,
+                                        arrayList4);
                         stats2 = stats5;
                     } else {
                         str7 = str15;
@@ -382,7 +452,8 @@ public final class ProcessStats {
                     }
                 }
                 StringBuilder sb4 = new StringBuilder("Stats added ");
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(i2, stats2.name, str4, str7, sb4);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i2, stats2.name, str4, str7, sb4);
                 sb4.append(stats2.base_utime);
                 sb4.append(str2);
                 sb4.append(stats2.base_stime);
@@ -414,7 +485,8 @@ public final class ProcessStats {
                 arrayList2.remove(i13);
                 int i19 = i3 - 1;
                 StringBuilder sb5 = new StringBuilder("Removed ");
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(i2, i < 0 ? "process" : "thread", " pid ", ": ", sb5);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i2, i < 0 ? "process" : "thread", " pid ", ": ", sb5);
                 sb5.append(stats);
                 Log.v("ProcessStats", sb5.toString());
                 i9 = i5 - 1;
@@ -480,19 +552,20 @@ public final class ProcessStats {
 
     /* JADX WARN: Can't wrap try/catch for region: R(11:15|16|17|18|19|(8:21|(1:25)|28|29|30|31|(2:35|(1:40)(1:39))|(1:42))|47|48|49|(4:33|35|(1:37)|40)|(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:53:0x0061, code lost:
-    
-        if (r3 == null) goto L24;
-     */
+
+       if (r3 == null) goto L24;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:55:0x005e, code lost:
-    
-        if (r3 == null) goto L24;
-     */
+
+       if (r3 == null) goto L24;
+    */
     /* JADX WARN: Removed duplicated region for block: B:42:0x0085  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void getName(com.android.server.enterprise.application.ProcessStats.Stats r8, java.lang.String r9) {
+    public final void getName(
+            com.android.server.enterprise.application.ProcessStats.Stats r8, java.lang.String r9) {
         /*
             r7 = this;
             java.lang.String r0 = r8.name
@@ -590,7 +663,10 @@ public final class ProcessStats {
         L93:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.application.ProcessStats.getName(com.android.server.enterprise.application.ProcessStats$Stats, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.application.ProcessStats.getName(com.android.server.enterprise.application.ProcessStats$Stats,"
+                    + " java.lang.String):void");
     }
 
     public final void update() {
@@ -611,7 +687,22 @@ public final class ProcessStats {
             this.mRelSystemTime = (int) (j2 - this.mBaseSystemTime);
             this.mRelIrqTime = (int) (j5 - this.mBaseIrqTime);
             this.mRelIdleTime = (int) (j3 - this.mBaseIdleTime);
-            Log.i("Load", "Total U:" + jArr[0] + " N:" + jArr[1] + " S:" + jArr[2] + " I:" + jArr[3] + " W:" + jArr[4] + " Q:" + jArr[5] + " O:" + jArr[6]);
+            Log.i(
+                    "Load",
+                    "Total U:"
+                            + jArr[0]
+                            + " N:"
+                            + jArr[1]
+                            + " S:"
+                            + jArr[2]
+                            + " I:"
+                            + jArr[3]
+                            + " W:"
+                            + jArr[4]
+                            + " Q:"
+                            + jArr[5]
+                            + " O:"
+                            + jArr[6]);
             StringBuilder sb = new StringBuilder("Rel U:");
             processStats = this;
             sb.append(processStats.mRelUserTime);
@@ -620,7 +711,8 @@ public final class ProcessStats {
             sb.append(" I:");
             sb.append(processStats.mRelIdleTime);
             sb.append(" Q:");
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m(sb, processStats.mRelIrqTime, "Load");
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    sb, processStats.mRelIrqTime, "Load");
             processStats.mBaseUserTime = j;
             processStats.mBaseSystemTime = j2;
             processStats.mBaseIrqTime = j5;
@@ -628,20 +720,31 @@ public final class ProcessStats {
         } else {
             processStats = this;
         }
-        processStats.mCurPids = collectStats("/proc", -1, processStats.mFirst, processStats.mCurPids, processStats.mProcStats);
+        processStats.mCurPids =
+                collectStats(
+                        "/proc",
+                        -1,
+                        processStats.mFirst,
+                        processStats.mCurPids,
+                        processStats.mProcStats);
         int[] iArr2 = LOAD_AVERAGE_FORMAT;
         float[] fArr = processStats.mLoadAverageData;
         if (Process.readProcFile("/proc/loadavg", iArr2, null, null, fArr)) {
             float f = fArr[0];
             float f2 = fArr[1];
             float f3 = fArr[2];
-            if (f != processStats.mLoad1 || f2 != processStats.mLoad5 || f3 != processStats.mLoad15) {
+            if (f != processStats.mLoad1
+                    || f2 != processStats.mLoad5
+                    || f3 != processStats.mLoad15) {
                 processStats.mLoad1 = f;
                 processStats.mLoad5 = f2;
                 processStats.mLoad15 = f3;
             }
         }
-        Log.i("ProcessStats", "*** TIME TO COLLECT STATS: " + (SystemClock.uptimeMillis() - processStats.mCurrentSampleTime));
+        Log.i(
+                "ProcessStats",
+                "*** TIME TO COLLECT STATS: "
+                        + (SystemClock.uptimeMillis() - processStats.mCurrentSampleTime));
         processStats.mWorkingProcsSorted = false;
         processStats.mFirst = false;
     }

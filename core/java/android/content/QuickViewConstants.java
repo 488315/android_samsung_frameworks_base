@@ -9,6 +9,5 @@ public class QuickViewConstants {
     public static final String FEATURE_SEND = "android:send";
     public static final String FEATURE_VIEW = "android:view";
 
-    private QuickViewConstants() {
-    }
+    private QuickViewConstants() {}
 }

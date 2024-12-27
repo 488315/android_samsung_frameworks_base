@@ -7,6 +7,7 @@ import android.service.timezone.TimeZoneProviderEvent;
 import android.service.timezone.TimeZoneProviderStatus;
 import android.service.timezone.TimeZoneProviderSuggestion;
 import android.util.IndentingPrintWriter;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.LocalServices;
 import com.android.server.timedetector.ServerFlags;
@@ -17,8 +18,7 @@ import com.android.server.timezonedetector.LocationAlgorithmEvent;
 import com.android.server.timezonedetector.ReferenceWithHistory;
 import com.android.server.timezonedetector.ServiceConfigAccessorImpl;
 import com.android.server.timezonedetector.TimeZoneDetectorInternalImpl;
-import com.android.server.timezonedetector.location.LocationTimeZoneManagerServiceState;
-import com.android.server.timezonedetector.location.LocationTimeZoneProvider;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -40,14 +40,20 @@ public final class LocationTimeZoneProviderController implements Dumpable {
     public final HandlerThreadingDomain mThreadingDomain;
     public final ThreadingDomain$SingleRunnableQueue mUncertaintyTimeoutQueue;
 
-    public LocationTimeZoneProviderController(HandlerThreadingDomain handlerThreadingDomain, RealControllerMetricsLogger realControllerMetricsLogger, LocationTimeZoneProvider locationTimeZoneProvider, LocationTimeZoneProvider locationTimeZoneProvider2, boolean z) {
+    public LocationTimeZoneProviderController(
+            HandlerThreadingDomain handlerThreadingDomain,
+            RealControllerMetricsLogger realControllerMetricsLogger,
+            LocationTimeZoneProvider locationTimeZoneProvider,
+            LocationTimeZoneProvider locationTimeZoneProvider2,
+            boolean z) {
         ReferenceWithHistory referenceWithHistory = new ReferenceWithHistory(10);
         this.mState = referenceWithHistory;
         Objects.requireNonNull(handlerThreadingDomain);
         this.mThreadingDomain = handlerThreadingDomain;
         Object obj = handlerThreadingDomain.mLockObject;
         this.mSharedLock = obj;
-        this.mUncertaintyTimeoutQueue = new ThreadingDomain$SingleRunnableQueue(handlerThreadingDomain);
+        this.mUncertaintyTimeoutQueue =
+                new ThreadingDomain$SingleRunnableQueue(handlerThreadingDomain);
         this.mMetricsLogger = realControllerMetricsLogger;
         this.mPrimaryProvider = locationTimeZoneProvider;
         this.mSecondaryProvider = locationTimeZoneProvider2;
@@ -67,11 +73,18 @@ public final class LocationTimeZoneProviderController implements Dumpable {
                     locationTimeZoneProvider.mThreadingDomain.assertCurrentThread();
                     synchronized (locationTimeZoneProvider.mSharedLock) {
                         try {
-                            LocationTimeZoneProvider.ProviderState providerState = (LocationTimeZoneProvider.ProviderState) locationTimeZoneProvider.mCurrentState.get();
+                            LocationTimeZoneProvider.ProviderState providerState =
+                                    (LocationTimeZoneProvider.ProviderState)
+                                            locationTimeZoneProvider.mCurrentState.get();
                             if (!providerState.isStarted()) {
-                                throw new IllegalStateException("Required a started state, but was " + providerState);
+                                throw new IllegalStateException(
+                                        "Required a started state, but was " + providerState);
                             }
-                            locationTimeZoneProvider.setCurrentState(((LocationTimeZoneProvider.ProviderState) locationTimeZoneProvider.mCurrentState.get()).newState(4, null, null, "stopUpdates"), false);
+                            locationTimeZoneProvider.setCurrentState(
+                                    ((LocationTimeZoneProvider.ProviderState)
+                                                    locationTimeZoneProvider.mCurrentState.get())
+                                            .newState(4, null, null, "stopUpdates"),
+                                    false);
                             locationTimeZoneProvider.cancelInitializationTimeoutIfSet();
                             locationTimeZoneProvider.onStopUpdates();
                         } finally {
@@ -79,22 +92,30 @@ public final class LocationTimeZoneProviderController implements Dumpable {
                     }
                     return;
                 case 4:
-                    LocationTimeZoneManagerService.debugLog("No need to stop " + locationTimeZoneProvider + ": already stopped");
+                    LocationTimeZoneManagerService.debugLog(
+                            "No need to stop " + locationTimeZoneProvider + ": already stopped");
                     return;
                 case 5:
                 case 6:
-                    LocationTimeZoneManagerService.debugLog("Unable to stop " + locationTimeZoneProvider + ": it is terminated.");
+                    LocationTimeZoneManagerService.debugLog(
+                            "Unable to stop " + locationTimeZoneProvider + ": it is terminated.");
                     return;
                 default:
-                    LocationTimeZoneManagerService.warnLog("Unknown provider state: " + locationTimeZoneProvider, null);
+                    LocationTimeZoneManagerService.warnLog(
+                            "Unknown provider state: " + locationTimeZoneProvider, null);
                     return;
             }
         }
     }
 
-    public final void alterProvidersStartedStateIfRequired(ConfigurationInternal configurationInternal, ConfigurationInternal configurationInternal2) {
-        boolean z = configurationInternal != null && configurationInternal.isGeoDetectionExecutionEnabled();
-        boolean isGeoDetectionExecutionEnabled = configurationInternal2.isGeoDetectionExecutionEnabled();
+    public final void alterProvidersStartedStateIfRequired(
+            ConfigurationInternal configurationInternal,
+            ConfigurationInternal configurationInternal2) {
+        boolean z =
+                configurationInternal != null
+                        && configurationInternal.isGeoDetectionExecutionEnabled();
+        boolean isGeoDetectionExecutionEnabled =
+                configurationInternal2.isGeoDetectionExecutionEnabled();
         if (z == isGeoDetectionExecutionEnabled) {
             return;
         }
@@ -113,7 +134,12 @@ public final class LocationTimeZoneProviderController implements Dumpable {
         if (locationTimeZoneProvider2.getCurrentState().isStarted()) {
             return;
         }
-        setStateAndReportStatusOnlyEvent("FAILED", "Providers are failed: primary=" + locationTimeZoneProvider.getCurrentState() + " secondary=" + locationTimeZoneProvider.getCurrentState());
+        setStateAndReportStatusOnlyEvent(
+                "FAILED",
+                "Providers are failed: primary="
+                        + locationTimeZoneProvider.getCurrentState()
+                        + " secondary="
+                        + locationTimeZoneProvider.getCurrentState());
     }
 
     public final void destroy() {
@@ -131,24 +157,31 @@ public final class LocationTimeZoneProviderController implements Dumpable {
         synchronized (this.mSharedLock) {
             indentingPrintWriter.println("LocationTimeZoneProviderController:");
             indentingPrintWriter.increaseIndent();
-            indentingPrintWriter.println("mCurrentUserConfiguration=" + this.mCurrentUserConfiguration);
+            indentingPrintWriter.println(
+                    "mCurrentUserConfiguration=" + this.mCurrentUserConfiguration);
             StringBuilder sb = new StringBuilder("providerInitializationTimeout=");
-            ServiceConfigAccessorImpl serviceConfigAccessorImpl = (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
+            ServiceConfigAccessorImpl serviceConfigAccessorImpl =
+                    (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
             Duration duration = ServiceConfigAccessorImpl.DEFAULT_LTZP_INITIALIZATION_TIMEOUT;
             serviceConfigAccessorImpl.mServerFlags.getClass();
             sb.append(ServerFlags.getDurationFromMillis("ltzp_init_timeout_millis", duration));
             indentingPrintWriter.println(sb.toString());
             StringBuilder sb2 = new StringBuilder("providerInitializationTimeoutFuzz=");
-            ServiceConfigAccessorImpl serviceConfigAccessorImpl2 = (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
+            ServiceConfigAccessorImpl serviceConfigAccessorImpl2 =
+                    (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
             Duration duration2 = ServiceConfigAccessorImpl.DEFAULT_LTZP_INITIALIZATION_TIMEOUT_FUZZ;
             serviceConfigAccessorImpl2.mServerFlags.getClass();
-            sb2.append(ServerFlags.getDurationFromMillis("ltzp_init_timeout_fuzz_millis", duration2));
+            sb2.append(
+                    ServerFlags.getDurationFromMillis("ltzp_init_timeout_fuzz_millis", duration2));
             indentingPrintWriter.println(sb2.toString());
             StringBuilder sb3 = new StringBuilder("uncertaintyDelay=");
-            ServiceConfigAccessorImpl serviceConfigAccessorImpl3 = (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
+            ServiceConfigAccessorImpl serviceConfigAccessorImpl3 =
+                    (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
             Duration duration3 = ServiceConfigAccessorImpl.DEFAULT_LTZP_UNCERTAINTY_DELAY;
             serviceConfigAccessorImpl3.mServerFlags.getClass();
-            sb3.append(ServerFlags.getDurationFromMillis("location_time_zone_detection_uncertainty_delay_millis", duration3));
+            sb3.append(
+                    ServerFlags.getDurationFromMillis(
+                            "location_time_zone_detection_uncertainty_delay_millis", duration3));
             indentingPrintWriter.println(sb3.toString());
             indentingPrintWriter.println("mState=" + ((String) this.mState.get()));
             indentingPrintWriter.println("mLastEvent=" + this.mLastEvent);
@@ -172,8 +205,10 @@ public final class LocationTimeZoneProviderController implements Dumpable {
     public final LocationTimeZoneAlgorithmStatus generateCurrentAlgorithmStatus() {
         char c;
         String str = (String) this.mState.get();
-        LocationTimeZoneProvider.ProviderState currentState = this.mPrimaryProvider.getCurrentState();
-        LocationTimeZoneProvider.ProviderState currentState2 = this.mSecondaryProvider.getCurrentState();
+        LocationTimeZoneProvider.ProviderState currentState =
+                this.mPrimaryProvider.getCurrentState();
+        LocationTimeZoneProvider.ProviderState currentState2 =
+                this.mSecondaryProvider.getCurrentState();
         switch (str.hashCode()) {
             case -1166336595:
                 if (str.equals("STOPPED")) {
@@ -239,16 +274,27 @@ public final class LocationTimeZoneProviderController implements Dumpable {
         int providerStatus = currentState.getProviderStatus();
         int providerStatus2 = currentState2.getProviderStatus();
         TimeZoneProviderEvent timeZoneProviderEvent = currentState.event;
-        TimeZoneProviderStatus timeZoneProviderStatus = timeZoneProviderEvent == null ? null : timeZoneProviderEvent.getTimeZoneProviderStatus();
+        TimeZoneProviderStatus timeZoneProviderStatus =
+                timeZoneProviderEvent == null
+                        ? null
+                        : timeZoneProviderEvent.getTimeZoneProviderStatus();
         TimeZoneProviderEvent timeZoneProviderEvent2 = currentState2.event;
-        return new LocationTimeZoneAlgorithmStatus(i, providerStatus, timeZoneProviderStatus, providerStatus2, timeZoneProviderEvent2 == null ? null : timeZoneProviderEvent2.getTimeZoneProviderStatus());
+        return new LocationTimeZoneAlgorithmStatus(
+                i,
+                providerStatus,
+                timeZoneProviderStatus,
+                providerStatus2,
+                timeZoneProviderEvent2 == null
+                        ? null
+                        : timeZoneProviderEvent2.getTimeZoneProviderStatus());
     }
 
     public final LocationTimeZoneManagerServiceState getStateForTests() {
         LocationTimeZoneManagerServiceState locationTimeZoneManagerServiceState;
         this.mThreadingDomain.assertCurrentThread();
         synchronized (this.mSharedLock) {
-            LocationTimeZoneManagerServiceState.Builder builder = new LocationTimeZoneManagerServiceState.Builder();
+            LocationTimeZoneManagerServiceState.Builder builder =
+                    new LocationTimeZoneManagerServiceState.Builder();
             LocationAlgorithmEvent locationAlgorithmEvent = this.mLastEvent;
             if (locationAlgorithmEvent != null) {
                 Objects.requireNonNull(locationAlgorithmEvent);
@@ -256,15 +302,18 @@ public final class LocationTimeZoneProviderController implements Dumpable {
             }
             builder.mControllerState = (String) this.mState.get();
             builder.mControllerStates = new ArrayList(this.mRecordedStates);
-            builder.mPrimaryProviderStates = new ArrayList(this.mPrimaryProvider.getRecordedStates());
-            builder.mSecondaryProviderStates = new ArrayList(this.mSecondaryProvider.getRecordedStates());
+            builder.mPrimaryProviderStates =
+                    new ArrayList(this.mPrimaryProvider.getRecordedStates());
+            builder.mSecondaryProviderStates =
+                    new ArrayList(this.mSecondaryProvider.getRecordedStates());
             locationTimeZoneManagerServiceState = new LocationTimeZoneManagerServiceState(builder);
         }
         return locationTimeZoneManagerServiceState;
     }
 
     public long getUncertaintyTimeoutDelayMillis() {
-        ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue = this.mUncertaintyTimeoutQueue;
+        ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue =
+                this.mUncertaintyTimeoutQueue;
         threadingDomain$SingleRunnableQueue.this$0.assertCurrentThread();
         if (threadingDomain$SingleRunnableQueue.mIsQueued) {
             return threadingDomain$SingleRunnableQueue.mDelayMillis;
@@ -272,18 +321,25 @@ public final class LocationTimeZoneProviderController implements Dumpable {
         throw new IllegalStateException("No item queued");
     }
 
-    public final void handleProviderFailedStateChange(LocationTimeZoneProvider.ProviderState providerState) {
+    public final void handleProviderFailedStateChange(
+            LocationTimeZoneProvider.ProviderState providerState) {
         LocationTimeZoneProvider locationTimeZoneProvider = this.mPrimaryProvider;
-        LocationTimeZoneProvider.ProviderState currentState = locationTimeZoneProvider.getCurrentState();
+        LocationTimeZoneProvider.ProviderState currentState =
+                locationTimeZoneProvider.getCurrentState();
         LocationTimeZoneProvider locationTimeZoneProvider2 = this.mSecondaryProvider;
-        LocationTimeZoneProvider.ProviderState currentState2 = locationTimeZoneProvider2.getCurrentState();
+        LocationTimeZoneProvider.ProviderState currentState2 =
+                locationTimeZoneProvider2.getCurrentState();
         LocationTimeZoneProvider locationTimeZoneProvider3 = providerState.provider;
         if (locationTimeZoneProvider3 == locationTimeZoneProvider) {
             if (!currentState2.isTerminated()) {
                 tryStartProvider(locationTimeZoneProvider2, this.mCurrentUserConfiguration);
             }
-        } else if (locationTimeZoneProvider3 == locationTimeZoneProvider2 && currentState.stateEnum != 3 && !currentState.isTerminated()) {
-            StringBuilder sb = new StringBuilder("Secondary provider unexpected reported a failure: failed provider=");
+        } else if (locationTimeZoneProvider3 == locationTimeZoneProvider2
+                && currentState.stateEnum != 3
+                && !currentState.isTerminated()) {
+            StringBuilder sb =
+                    new StringBuilder(
+                            "Secondary provider unexpected reported a failure: failed provider=");
             locationTimeZoneProvider3.mThreadingDomain.assertCurrentThread();
             sb.append(locationTimeZoneProvider3.mProviderName);
             sb.append(", primary provider=");
@@ -294,32 +350,58 @@ public final class LocationTimeZoneProviderController implements Dumpable {
         }
         if (currentState.isTerminated() && currentState2.isTerminated()) {
             this.mUncertaintyTimeoutQueue.cancel();
-            setStateAndReportStatusOnlyEvent("FAILED", "Both providers are terminated: primary=" + currentState.provider + ", secondary=" + currentState2.provider);
+            setStateAndReportStatusOnlyEvent(
+                    "FAILED",
+                    "Both providers are terminated: primary="
+                            + currentState.provider
+                            + ", secondary="
+                            + currentState2.provider);
         }
     }
 
-    public final void handleProviderStartedStateChange(LocationTimeZoneProvider.ProviderState providerState) {
+    public final void handleProviderStartedStateChange(
+            LocationTimeZoneProvider.ProviderState providerState) {
         TimeZoneProviderEvent timeZoneProviderEvent = providerState.event;
         LocationTimeZoneProvider locationTimeZoneProvider = providerState.provider;
         if (timeZoneProviderEvent == null) {
             this.mEnvironment.getClass();
-            handleProviderUncertainty(locationTimeZoneProvider, SystemClock.elapsedRealtime(), "provider=" + locationTimeZoneProvider + ", implicit uncertainty, event=null");
+            handleProviderUncertainty(
+                    locationTimeZoneProvider,
+                    SystemClock.elapsedRealtime(),
+                    "provider=" + locationTimeZoneProvider + ", implicit uncertainty, event=null");
             return;
         }
         if (!this.mCurrentUserConfiguration.isGeoDetectionExecutionEnabled()) {
-            LocationTimeZoneManagerService.warnLog("Provider=" + locationTimeZoneProvider + " is started, but currentUserConfiguration=" + this.mCurrentUserConfiguration + " suggests it shouldn't be.", null);
+            LocationTimeZoneManagerService.warnLog(
+                    "Provider="
+                            + locationTimeZoneProvider
+                            + " is started, but currentUserConfiguration="
+                            + this.mCurrentUserConfiguration
+                            + " suggests it shouldn't be.",
+                    null);
         }
         int type = timeZoneProviderEvent.getType();
         if (type == 1) {
-            LocationTimeZoneManagerService.warnLog("Provider=" + locationTimeZoneProvider + " is started, but event suggests it shouldn't be", null);
+            LocationTimeZoneManagerService.warnLog(
+                    "Provider="
+                            + locationTimeZoneProvider
+                            + " is started, but event suggests it shouldn't be",
+                    null);
             return;
         }
         if (type != 2) {
             if (type != 3) {
-                LocationTimeZoneManagerService.warnLog("Unknown eventType=" + timeZoneProviderEvent.getType(), null);
+                LocationTimeZoneManagerService.warnLog(
+                        "Unknown eventType=" + timeZoneProviderEvent.getType(), null);
                 return;
             } else {
-                handleProviderUncertainty(locationTimeZoneProvider, timeZoneProviderEvent.getCreationElapsedMillis(), "provider=" + locationTimeZoneProvider + ", explicit uncertainty. event=" + timeZoneProviderEvent);
+                handleProviderUncertainty(
+                        locationTimeZoneProvider,
+                        timeZoneProviderEvent.getCreationElapsedMillis(),
+                        "provider="
+                                + locationTimeZoneProvider
+                                + ", explicit uncertainty. event="
+                                + timeZoneProviderEvent);
                 return;
             }
         }
@@ -329,7 +411,9 @@ public final class LocationTimeZoneProviderController implements Dumpable {
         }
         TimeZoneProviderSuggestion suggestion = timeZoneProviderEvent.getSuggestion();
         setState("CERTAIN");
-        GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion = new GeolocationTimeZoneSuggestion(suggestion.getElapsedRealtimeMillis(), suggestion.getTimeZoneIds());
+        GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion =
+                new GeolocationTimeZoneSuggestion(
+                        suggestion.getElapsedRealtimeMillis(), suggestion.getTimeZoneIds());
         StringBuilder sb = new StringBuilder("Provider event received: provider=");
         sb.append(locationTimeZoneProvider);
         sb.append(", providerEvent=");
@@ -340,16 +424,19 @@ public final class LocationTimeZoneProviderController implements Dumpable {
         reportSuggestionEvent(geolocationTimeZoneSuggestion, sb.toString());
     }
 
-    public final void handleProviderUncertainty(final LocationTimeZoneProvider locationTimeZoneProvider, final long j, String str) {
+    public final void handleProviderUncertainty(
+            final LocationTimeZoneProvider locationTimeZoneProvider, final long j, String str) {
         Objects.requireNonNull(locationTimeZoneProvider);
-        ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue = this.mUncertaintyTimeoutQueue;
+        ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue =
+                this.mUncertaintyTimeoutQueue;
         threadingDomain$SingleRunnableQueue.this$0.assertCurrentThread();
         boolean z = threadingDomain$SingleRunnableQueue.mIsQueued;
         LocationTimeZoneProvider locationTimeZoneProvider2 = this.mSecondaryProvider;
         LocationTimeZoneProvider locationTimeZoneProvider3 = this.mPrimaryProvider;
         if (!z) {
             if ("UNCERTAIN".equals(this.mState.get())) {
-                GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion = new GeolocationTimeZoneSuggestion(j, null);
+                GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion =
+                        new GeolocationTimeZoneSuggestion(j, null);
                 StringBuilder sb = new StringBuilder("Uncertainty received from ");
                 locationTimeZoneProvider.mThreadingDomain.assertCurrentThread();
                 sb.append(locationTimeZoneProvider.mProviderName);
@@ -361,46 +448,65 @@ public final class LocationTimeZoneProviderController implements Dumpable {
                 sb.append(Duration.ofMillis(j));
                 reportSuggestionEvent(geolocationTimeZoneSuggestion, sb.toString());
             } else {
-                LocationTimeZoneManagerService.debugLog("Starting uncertainty timeout: reason=" + str);
-                ServiceConfigAccessorImpl serviceConfigAccessorImpl = (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
+                LocationTimeZoneManagerService.debugLog(
+                        "Starting uncertainty timeout: reason=" + str);
+                ServiceConfigAccessorImpl serviceConfigAccessorImpl =
+                        (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
                 Duration duration = ServiceConfigAccessorImpl.DEFAULT_LTZP_UNCERTAINTY_DELAY;
                 serviceConfigAccessorImpl.mServerFlags.getClass();
-                final Duration durationFromMillis = ServerFlags.getDurationFromMillis("location_time_zone_detection_uncertainty_delay_millis", duration);
-                Runnable runnable = new Runnable() { // from class: com.android.server.timezonedetector.location.LocationTimeZoneProviderController$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        LocationTimeZoneProviderController locationTimeZoneProviderController = LocationTimeZoneProviderController.this;
-                        LocationTimeZoneProvider locationTimeZoneProvider4 = locationTimeZoneProvider;
-                        long j2 = j;
-                        Duration duration2 = durationFromMillis;
-                        locationTimeZoneProviderController.mThreadingDomain.assertCurrentThread();
-                        synchronized (locationTimeZoneProviderController.mSharedLock) {
-                            locationTimeZoneProviderController.mEnvironment.getClass();
-                            long elapsedRealtime = SystemClock.elapsedRealtime();
-                            locationTimeZoneProviderController.setState("UNCERTAIN");
-                            GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion2 = new GeolocationTimeZoneSuggestion(j2, null);
-                            StringBuilder sb2 = new StringBuilder("Uncertainty timeout triggered for ");
-                            locationTimeZoneProvider4.mThreadingDomain.assertCurrentThread();
-                            sb2.append(locationTimeZoneProvider4.mProviderName);
-                            sb2.append(": primary=");
-                            sb2.append(locationTimeZoneProviderController.mPrimaryProvider);
-                            sb2.append(", secondary=");
-                            sb2.append(locationTimeZoneProviderController.mSecondaryProvider);
-                            sb2.append(", uncertaintyStarted=");
-                            sb2.append(Duration.ofMillis(j2));
-                            sb2.append(", afterUncertaintyTimeout=");
-                            sb2.append(Duration.ofMillis(elapsedRealtime));
-                            sb2.append(", uncertaintyDelay=");
-                            sb2.append(duration2);
-                            locationTimeZoneProviderController.reportSuggestionEvent(geolocationTimeZoneSuggestion2, sb2.toString());
-                        }
-                    }
-                };
+                final Duration durationFromMillis =
+                        ServerFlags.getDurationFromMillis(
+                                "location_time_zone_detection_uncertainty_delay_millis", duration);
+                Runnable runnable =
+                        new Runnable() { // from class:
+                                         // com.android.server.timezonedetector.location.LocationTimeZoneProviderController$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                LocationTimeZoneProviderController
+                                        locationTimeZoneProviderController =
+                                                LocationTimeZoneProviderController.this;
+                                LocationTimeZoneProvider locationTimeZoneProvider4 =
+                                        locationTimeZoneProvider;
+                                long j2 = j;
+                                Duration duration2 = durationFromMillis;
+                                locationTimeZoneProviderController.mThreadingDomain
+                                        .assertCurrentThread();
+                                synchronized (locationTimeZoneProviderController.mSharedLock) {
+                                    locationTimeZoneProviderController.mEnvironment.getClass();
+                                    long elapsedRealtime = SystemClock.elapsedRealtime();
+                                    locationTimeZoneProviderController.setState("UNCERTAIN");
+                                    GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion2 =
+                                            new GeolocationTimeZoneSuggestion(j2, null);
+                                    StringBuilder sb2 =
+                                            new StringBuilder("Uncertainty timeout triggered for ");
+                                    locationTimeZoneProvider4.mThreadingDomain
+                                            .assertCurrentThread();
+                                    sb2.append(locationTimeZoneProvider4.mProviderName);
+                                    sb2.append(": primary=");
+                                    sb2.append(locationTimeZoneProviderController.mPrimaryProvider);
+                                    sb2.append(", secondary=");
+                                    sb2.append(
+                                            locationTimeZoneProviderController.mSecondaryProvider);
+                                    sb2.append(", uncertaintyStarted=");
+                                    sb2.append(Duration.ofMillis(j2));
+                                    sb2.append(", afterUncertaintyTimeout=");
+                                    sb2.append(Duration.ofMillis(elapsedRealtime));
+                                    sb2.append(", uncertaintyDelay=");
+                                    sb2.append(duration2);
+                                    locationTimeZoneProviderController.reportSuggestionEvent(
+                                            geolocationTimeZoneSuggestion2, sb2.toString());
+                                }
+                            }
+                        };
                 long millis = durationFromMillis.toMillis();
                 threadingDomain$SingleRunnableQueue.cancel();
                 threadingDomain$SingleRunnableQueue.mIsQueued = true;
                 threadingDomain$SingleRunnableQueue.mDelayMillis = millis;
-                threadingDomain$SingleRunnableQueue.this$0.mHandler.postDelayed(new ThreadingDomain$SingleRunnableQueue$$ExternalSyntheticLambda0(threadingDomain$SingleRunnableQueue, runnable), threadingDomain$SingleRunnableQueue, millis);
+                threadingDomain$SingleRunnableQueue.this$0.mHandler.postDelayed(
+                        new ThreadingDomain$SingleRunnableQueue$$ExternalSyntheticLambda0(
+                                threadingDomain$SingleRunnableQueue, runnable),
+                        threadingDomain$SingleRunnableQueue,
+                        millis);
             }
         }
         if (locationTimeZoneProvider == locationTimeZoneProvider3) {
@@ -408,7 +514,11 @@ public final class LocationTimeZoneProviderController implements Dumpable {
         }
     }
 
-    public final void initialize(LocationTimeZoneProviderControllerEnvironmentImpl locationTimeZoneProviderControllerEnvironmentImpl, LocationTimeZoneProviderControllerCallbackImpl locationTimeZoneProviderControllerCallbackImpl) {
+    public final void initialize(
+            LocationTimeZoneProviderControllerEnvironmentImpl
+                    locationTimeZoneProviderControllerEnvironmentImpl,
+            LocationTimeZoneProviderControllerCallbackImpl
+                    locationTimeZoneProviderControllerCallbackImpl) {
         ConfigurationInternal configurationInternal;
         this.mThreadingDomain.assertCurrentThread();
         synchronized (this.mSharedLock) {
@@ -416,15 +526,28 @@ public final class LocationTimeZoneProviderController implements Dumpable {
                 LocationTimeZoneManagerService.debugLog("initialize()");
                 this.mEnvironment = locationTimeZoneProviderControllerEnvironmentImpl;
                 this.mCallback = locationTimeZoneProviderControllerCallbackImpl;
-                ServiceConfigAccessorImpl serviceConfigAccessorImpl = (ServiceConfigAccessorImpl) locationTimeZoneProviderControllerEnvironmentImpl.mServiceConfigAccessor;
+                ServiceConfigAccessorImpl serviceConfigAccessorImpl =
+                        (ServiceConfigAccessorImpl)
+                                locationTimeZoneProviderControllerEnvironmentImpl
+                                        .mServiceConfigAccessor;
                 synchronized (serviceConfigAccessorImpl) {
-                    configurationInternal = serviceConfigAccessorImpl.getConfigurationInternal(((ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class)).getCurrentUserId());
+                    configurationInternal =
+                            serviceConfigAccessorImpl.getConfigurationInternal(
+                                    ((ActivityManagerInternal)
+                                                    LocalServices.getService(
+                                                            ActivityManagerInternal.class))
+                                            .getCurrentUserId());
                 }
                 this.mCurrentUserConfiguration = configurationInternal;
-                LocationTimeZoneProviderController$$ExternalSyntheticLambda0 locationTimeZoneProviderController$$ExternalSyntheticLambda0 = new LocationTimeZoneProviderController$$ExternalSyntheticLambda0(this);
+                LocationTimeZoneProviderController$$ExternalSyntheticLambda0
+                        locationTimeZoneProviderController$$ExternalSyntheticLambda0 =
+                                new LocationTimeZoneProviderController$$ExternalSyntheticLambda0(
+                                        this);
                 setState("PROVIDERS_INITIALIZING");
-                this.mPrimaryProvider.initialize(locationTimeZoneProviderController$$ExternalSyntheticLambda0);
-                this.mSecondaryProvider.initialize(locationTimeZoneProviderController$$ExternalSyntheticLambda0);
+                this.mPrimaryProvider.initialize(
+                        locationTimeZoneProviderController$$ExternalSyntheticLambda0);
+                this.mSecondaryProvider.initialize(
+                        locationTimeZoneProviderController$$ExternalSyntheticLambda0);
                 setStateAndReportStatusOnlyEvent("STOPPED", "initialize()");
                 alterProvidersStartedStateIfRequired(null, this.mCurrentUserConfiguration);
             } catch (Throwable th) {
@@ -434,28 +557,40 @@ public final class LocationTimeZoneProviderController implements Dumpable {
     }
 
     public boolean isUncertaintyTimeoutSet() {
-        ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue = this.mUncertaintyTimeoutQueue;
+        ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue =
+                this.mUncertaintyTimeoutQueue;
         threadingDomain$SingleRunnableQueue.this$0.assertCurrentThread();
         return threadingDomain$SingleRunnableQueue.mIsQueued;
     }
 
     public final void reportEvent(final LocationAlgorithmEvent locationAlgorithmEvent) {
-        LocationTimeZoneManagerService.debugLog("makeSuggestion: suggestion=" + locationAlgorithmEvent);
+        LocationTimeZoneManagerService.debugLog(
+                "makeSuggestion: suggestion=" + locationAlgorithmEvent);
         this.mCallback.mThreadingDomain.assertCurrentThread();
-        final TimeZoneDetectorInternalImpl timeZoneDetectorInternalImpl = (TimeZoneDetectorInternalImpl) LocalServices.getService(TimeZoneDetectorInternalImpl.class);
+        final TimeZoneDetectorInternalImpl timeZoneDetectorInternalImpl =
+                (TimeZoneDetectorInternalImpl)
+                        LocalServices.getService(TimeZoneDetectorInternalImpl.class);
         timeZoneDetectorInternalImpl.getClass();
-        timeZoneDetectorInternalImpl.mHandler.post(new Runnable() { // from class: com.android.server.timezonedetector.TimeZoneDetectorInternalImpl$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                TimeZoneDetectorInternalImpl timeZoneDetectorInternalImpl2 = TimeZoneDetectorInternalImpl.this;
-                ((TimeZoneDetectorStrategyImpl) timeZoneDetectorInternalImpl2.mTimeZoneDetectorStrategy).handleLocationAlgorithmEvent(locationAlgorithmEvent);
-            }
-        });
+        timeZoneDetectorInternalImpl.mHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.timezonedetector.TimeZoneDetectorInternalImpl$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        TimeZoneDetectorInternalImpl timeZoneDetectorInternalImpl2 =
+                                TimeZoneDetectorInternalImpl.this;
+                        ((TimeZoneDetectorStrategyImpl)
+                                        timeZoneDetectorInternalImpl2.mTimeZoneDetectorStrategy)
+                                .handleLocationAlgorithmEvent(locationAlgorithmEvent);
+                    }
+                });
         this.mLastEvent = locationAlgorithmEvent;
     }
 
-    public final void reportSuggestionEvent(GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion, String str) {
-        LocationAlgorithmEvent locationAlgorithmEvent = new LocationAlgorithmEvent(generateCurrentAlgorithmStatus(), geolocationTimeZoneSuggestion);
+    public final void reportSuggestionEvent(
+            GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion, String str) {
+        LocationAlgorithmEvent locationAlgorithmEvent =
+                new LocationAlgorithmEvent(
+                        generateCurrentAlgorithmStatus(), geolocationTimeZoneSuggestion);
         locationAlgorithmEvent.addDebugInfo(str);
         reportEvent(locationAlgorithmEvent);
     }
@@ -559,12 +694,14 @@ public final class LocationTimeZoneProviderController implements Dumpable {
                 i = 0;
                 break;
         }
-        FrameworkStatsLog.write(FrameworkStatsLog.LOCATION_TIME_ZONE_PROVIDER_CONTROLLER_STATE_CHANGED, i);
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.LOCATION_TIME_ZONE_PROVIDER_CONTROLLER_STATE_CHANGED, i);
     }
 
     public final void setStateAndReportStatusOnlyEvent(String str, String str2) {
         setState(str);
-        LocationAlgorithmEvent locationAlgorithmEvent = new LocationAlgorithmEvent(generateCurrentAlgorithmStatus(), null);
+        LocationAlgorithmEvent locationAlgorithmEvent =
+                new LocationAlgorithmEvent(generateCurrentAlgorithmStatus(), null);
         locationAlgorithmEvent.addDebugInfo(str2);
         reportEvent(locationAlgorithmEvent);
     }
@@ -576,72 +713,122 @@ public final class LocationTimeZoneProviderController implements Dumpable {
         setStateAndReportStatusOnlyEvent("STOPPED", "Providers stopped: " + str);
     }
 
-    public final void tryStartProvider(final LocationTimeZoneProvider locationTimeZoneProvider, ConfigurationInternal configurationInternal) {
+    public final void tryStartProvider(
+            final LocationTimeZoneProvider locationTimeZoneProvider,
+            ConfigurationInternal configurationInternal) {
         switch (locationTimeZoneProvider.getCurrentState().stateEnum) {
             case 1:
             case 2:
             case 3:
-                LocationTimeZoneManagerService.debugLog("No need to start " + locationTimeZoneProvider + ": already started");
+                LocationTimeZoneManagerService.debugLog(
+                        "No need to start " + locationTimeZoneProvider + ": already started");
                 return;
             case 4:
                 LocationTimeZoneManagerService.debugLog("Enabling " + locationTimeZoneProvider);
-                ServiceConfigAccessorImpl serviceConfigAccessorImpl = (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
+                ServiceConfigAccessorImpl serviceConfigAccessorImpl =
+                        (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
                 Duration duration = ServiceConfigAccessorImpl.DEFAULT_LTZP_INITIALIZATION_TIMEOUT;
                 serviceConfigAccessorImpl.mServerFlags.getClass();
-                Duration durationFromMillis = ServerFlags.getDurationFromMillis("ltzp_init_timeout_millis", duration);
-                ServiceConfigAccessorImpl serviceConfigAccessorImpl2 = (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
-                Duration duration2 = ServiceConfigAccessorImpl.DEFAULT_LTZP_INITIALIZATION_TIMEOUT_FUZZ;
+                Duration durationFromMillis =
+                        ServerFlags.getDurationFromMillis("ltzp_init_timeout_millis", duration);
+                ServiceConfigAccessorImpl serviceConfigAccessorImpl2 =
+                        (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
+                Duration duration2 =
+                        ServiceConfigAccessorImpl.DEFAULT_LTZP_INITIALIZATION_TIMEOUT_FUZZ;
                 serviceConfigAccessorImpl2.mServerFlags.getClass();
-                Duration durationFromMillis2 = ServerFlags.getDurationFromMillis("ltzp_init_timeout_fuzz_millis", duration2);
-                ServiceConfigAccessorImpl serviceConfigAccessorImpl3 = (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
-                Duration duration3 = ServiceConfigAccessorImpl.DEFAULT_LTZP_EVENT_FILTER_AGE_THRESHOLD;
+                Duration durationFromMillis2 =
+                        ServerFlags.getDurationFromMillis(
+                                "ltzp_init_timeout_fuzz_millis", duration2);
+                ServiceConfigAccessorImpl serviceConfigAccessorImpl3 =
+                        (ServiceConfigAccessorImpl) this.mEnvironment.mServiceConfigAccessor;
+                Duration duration3 =
+                        ServiceConfigAccessorImpl.DEFAULT_LTZP_EVENT_FILTER_AGE_THRESHOLD;
                 serviceConfigAccessorImpl3.mServerFlags.getClass();
-                Duration durationFromMillis3 = ServerFlags.getDurationFromMillis("ltzp_event_filtering_age_threshold_millis", duration3);
+                Duration durationFromMillis3 =
+                        ServerFlags.getDurationFromMillis(
+                                "ltzp_event_filtering_age_threshold_millis", duration3);
                 locationTimeZoneProvider.mThreadingDomain.assertCurrentThread();
                 synchronized (locationTimeZoneProvider.mSharedLock) {
                     try {
-                        LocationTimeZoneProvider.ProviderState providerState = (LocationTimeZoneProvider.ProviderState) locationTimeZoneProvider.mCurrentState.get();
+                        LocationTimeZoneProvider.ProviderState providerState =
+                                (LocationTimeZoneProvider.ProviderState)
+                                        locationTimeZoneProvider.mCurrentState.get();
                         if (providerState.stateEnum != 4) {
-                            throw new IllegalStateException("Required stateEnum=4, but was " + providerState);
+                            throw new IllegalStateException(
+                                    "Required stateEnum=4, but was " + providerState);
                         }
-                        locationTimeZoneProvider.setCurrentState(((LocationTimeZoneProvider.ProviderState) locationTimeZoneProvider.mCurrentState.get()).newState(1, null, configurationInternal, "startUpdates"), false);
+                        locationTimeZoneProvider.setCurrentState(
+                                ((LocationTimeZoneProvider.ProviderState)
+                                                locationTimeZoneProvider.mCurrentState.get())
+                                        .newState(1, null, configurationInternal, "startUpdates"),
+                                false);
                         Duration plus = durationFromMillis.plus(durationFromMillis2);
-                        ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue = locationTimeZoneProvider.mInitializationTimeoutQueue;
-                        Runnable runnable = new Runnable() { // from class: com.android.server.timezonedetector.location.LocationTimeZoneProvider$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                LocationTimeZoneProvider locationTimeZoneProvider2 = LocationTimeZoneProvider.this;
-                                locationTimeZoneProvider2.mThreadingDomain.assertCurrentThread();
-                                synchronized (locationTimeZoneProvider2.mSharedLock) {
-                                    try {
-                                        LocationTimeZoneProvider.ProviderState providerState2 = (LocationTimeZoneProvider.ProviderState) locationTimeZoneProvider2.mCurrentState.get();
-                                        if (providerState2.stateEnum == 1) {
-                                            locationTimeZoneProvider2.setCurrentState(providerState2.newState(3, null, providerState2.currentUserConfiguration, "handleInitializationTimeout"), true);
-                                        } else {
-                                            LocationTimeZoneManagerService.warnLog("handleInitializationTimeout: Initialization timeout triggered when in an unexpected state=" + providerState2, null);
+                        ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue =
+                                locationTimeZoneProvider.mInitializationTimeoutQueue;
+                        Runnable runnable = new Runnable() { // from class:
+                                    // com.android.server.timezonedetector.location.LocationTimeZoneProvider$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        LocationTimeZoneProvider locationTimeZoneProvider2 =
+                                                LocationTimeZoneProvider.this;
+                                        locationTimeZoneProvider2.mThreadingDomain
+                                                .assertCurrentThread();
+                                        synchronized (locationTimeZoneProvider2.mSharedLock) {
+                                            try {
+                                                LocationTimeZoneProvider.ProviderState
+                                                        providerState2 =
+                                                                (LocationTimeZoneProvider
+                                                                                .ProviderState)
+                                                                        locationTimeZoneProvider2
+                                                                                .mCurrentState
+                                                                                .get();
+                                                if (providerState2.stateEnum == 1) {
+                                                    locationTimeZoneProvider2.setCurrentState(
+                                                            providerState2.newState(
+                                                                    3,
+                                                                    null,
+                                                                    providerState2
+                                                                            .currentUserConfiguration,
+                                                                    "handleInitializationTimeout"),
+                                                            true);
+                                                } else {
+                                                    LocationTimeZoneManagerService.warnLog(
+                                                            "handleInitializationTimeout:"
+                                                                + " Initialization timeout"
+                                                                + " triggered when in an unexpected"
+                                                                + " state="
+                                                                    + providerState2,
+                                                            null);
+                                                }
+                                            } catch (Throwable th) {
+                                                throw th;
+                                            }
                                         }
-                                    } catch (Throwable th) {
-                                        throw th;
                                     }
-                                }
-                            }
-                        };
+                                };
                         long millis = plus.toMillis();
                         threadingDomain$SingleRunnableQueue.cancel();
                         threadingDomain$SingleRunnableQueue.mIsQueued = true;
                         threadingDomain$SingleRunnableQueue.mDelayMillis = millis;
-                        threadingDomain$SingleRunnableQueue.this$0.mHandler.postDelayed(new ThreadingDomain$SingleRunnableQueue$$ExternalSyntheticLambda0(threadingDomain$SingleRunnableQueue, runnable), threadingDomain$SingleRunnableQueue, millis);
-                        locationTimeZoneProvider.onStartUpdates(durationFromMillis, durationFromMillis3);
+                        threadingDomain$SingleRunnableQueue.this$0.mHandler.postDelayed(
+                                new ThreadingDomain$SingleRunnableQueue$$ExternalSyntheticLambda0(
+                                        threadingDomain$SingleRunnableQueue, runnable),
+                                threadingDomain$SingleRunnableQueue,
+                                millis);
+                        locationTimeZoneProvider.onStartUpdates(
+                                durationFromMillis, durationFromMillis3);
                     } finally {
                     }
                 }
                 return;
             case 5:
             case 6:
-                LocationTimeZoneManagerService.debugLog("Unable to start " + locationTimeZoneProvider + ": it is terminated");
+                LocationTimeZoneManagerService.debugLog(
+                        "Unable to start " + locationTimeZoneProvider + ": it is terminated");
                 return;
             default:
-                throw new IllegalStateException("Unknown provider state: provider=" + locationTimeZoneProvider);
+                throw new IllegalStateException(
+                        "Unknown provider state: provider=" + locationTimeZoneProvider);
         }
     }
 }

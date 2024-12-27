@@ -63,7 +63,8 @@ class IterableByteBufferInputStream extends InputStream {
             return -1;
         }
         if (this.hasArray) {
-            int result = this.currentArray[this.currentByteBufferPos + this.currentArrayOffset] & 255;
+            int result =
+                    this.currentArray[this.currentByteBufferPos + this.currentArrayOffset] & 255;
             updateCurrentByteBufferPos(1);
             return result;
         }
@@ -83,7 +84,12 @@ class IterableByteBufferInputStream extends InputStream {
             length = remaining;
         }
         if (this.hasArray) {
-            System.arraycopy(this.currentArray, this.currentByteBufferPos + this.currentArrayOffset, output, offset, length);
+            System.arraycopy(
+                    this.currentArray,
+                    this.currentByteBufferPos + this.currentArrayOffset,
+                    output,
+                    offset,
+                    length);
             updateCurrentByteBufferPos(length);
         } else {
             int prevPos = this.currentByteBuffer.position();

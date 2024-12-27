@@ -2,6 +2,7 @@ package android.app.admin;
 
 import android.annotation.SystemApi;
 import android.util.AndroidException;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -19,8 +20,7 @@ public class ProvisioningException extends AndroidException {
     private final int mProvisioningError;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ProvisioningError {
-    }
+    public @interface ProvisioningError {}
 
     public ProvisioningException(Exception cause, int provisioningError) {
         this(cause, provisioningError, null);

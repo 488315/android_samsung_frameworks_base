@@ -5,7 +5,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.util.BitUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -35,8 +37,7 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
     public static final int INVALID_POSITION = -1;
     private static final String LOG_TAG = "AccessibilityEvent";
 
-    @Deprecated
-    public static final int MAX_TEXT_LENGTH = 500;
+    @Deprecated public static final int MAX_TEXT_LENGTH = 500;
     public static final int SPEECH_STATE_LISTENING_END = 8;
     public static final int SPEECH_STATE_LISTENING_START = 4;
     public static final int SPEECH_STATE_SPEAKING_END = 2;
@@ -92,42 +93,40 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
     public StackTraceElement[] originStackTrace = null;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ContentChangeTypes {
-    }
+    public @interface ContentChangeTypes {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EventType {
-    }
+    public @interface EventType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SpeechStateChangeTypes {
-    }
+    public @interface SpeechStateChangeTypes {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WindowsChangeTypes {
-    }
+    public @interface WindowsChangeTypes {}
 
     static {
         DEBUG = Log.isLoggable(LOG_TAG, 3) && Build.IS_DEBUGGABLE;
-        CREATOR = new Parcelable.Creator<AccessibilityEvent>() { // from class: android.view.accessibility.AccessibilityEvent.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AccessibilityEvent createFromParcel(Parcel parcel) {
-                AccessibilityEvent event = new AccessibilityEvent();
-                event.initFromParcel(parcel);
-                return event;
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        AccessibilityEvent>() { // from class:
+                                                // android.view.accessibility.AccessibilityEvent.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AccessibilityEvent createFromParcel(Parcel parcel) {
+                        AccessibilityEvent event = new AccessibilityEvent();
+                        event.initFromParcel(parcel);
+                        return event;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AccessibilityEvent[] newArray(int size) {
-                return new AccessibilityEvent[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AccessibilityEvent[] newArray(int size) {
+                        return new AccessibilityEvent[size];
+                    }
+                };
     }
 
-    public AccessibilityEvent() {
-    }
+    public AccessibilityEvent() {}
 
     public AccessibilityEvent(int eventType) {
         this.mEventType = eventType;
@@ -200,14 +199,18 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
     }
 
     private static String contentChangeTypesToString(int types) {
-        return BitUtils.flagsToString(types, new IntFunction() { // from class: android.view.accessibility.AccessibilityEvent$$ExternalSyntheticLambda2
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i) {
-                String singleContentChangeTypeToString;
-                singleContentChangeTypeToString = AccessibilityEvent.singleContentChangeTypeToString(i);
-                return singleContentChangeTypeToString;
-            }
-        });
+        return BitUtils.flagsToString(
+                types,
+                new IntFunction() { // from class:
+                                    // android.view.accessibility.AccessibilityEvent$$ExternalSyntheticLambda2
+                    @Override // java.util.function.IntFunction
+                    public final Object apply(int i) {
+                        String singleContentChangeTypeToString;
+                        singleContentChangeTypeToString =
+                                AccessibilityEvent.singleContentChangeTypeToString(i);
+                        return singleContentChangeTypeToString;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -266,14 +269,18 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
     }
 
     private static String speechStateChangeTypesToString(int types) {
-        return BitUtils.flagsToString(types, new IntFunction() { // from class: android.view.accessibility.AccessibilityEvent$$ExternalSyntheticLambda0
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i) {
-                String singleSpeechStateChangeTypeToString;
-                singleSpeechStateChangeTypeToString = AccessibilityEvent.singleSpeechStateChangeTypeToString(i);
-                return singleSpeechStateChangeTypeToString;
-            }
-        });
+        return BitUtils.flagsToString(
+                types,
+                new IntFunction() { // from class:
+                                    // android.view.accessibility.AccessibilityEvent$$ExternalSyntheticLambda0
+                    @Override // java.util.function.IntFunction
+                    public final Object apply(int i) {
+                        String singleSpeechStateChangeTypeToString;
+                        singleSpeechStateChangeTypeToString =
+                                AccessibilityEvent.singleSpeechStateChangeTypeToString(i);
+                        return singleSpeechStateChangeTypeToString;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -306,14 +313,18 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
     }
 
     private static String windowChangeTypesToString(int types) {
-        return BitUtils.flagsToString(types, new IntFunction() { // from class: android.view.accessibility.AccessibilityEvent$$ExternalSyntheticLambda1
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i) {
-                String singleWindowChangeTypeToString;
-                singleWindowChangeTypeToString = AccessibilityEvent.singleWindowChangeTypeToString(i);
-                return singleWindowChangeTypeToString;
-            }
-        });
+        return BitUtils.flagsToString(
+                types,
+                new IntFunction() { // from class:
+                                    // android.view.accessibility.AccessibilityEvent$$ExternalSyntheticLambda1
+                    @Override // java.util.function.IntFunction
+                    public final Object apply(int i) {
+                        String singleWindowChangeTypeToString;
+                        singleWindowChangeTypeToString =
+                                AccessibilityEvent.singleWindowChangeTypeToString(i);
+                        return singleWindowChangeTypeToString;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -387,7 +398,8 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
         return this.mAction;
     }
 
-    public static AccessibilityEvent obtainWindowsChangedEvent(int displayId, int windowId, int windowChangeTypes) {
+    public static AccessibilityEvent obtainWindowsChangedEvent(
+            int displayId, int windowId, int windowChangeTypes) {
         AccessibilityEvent event = new AccessibilityEvent(4194304);
         event.setDisplayId(displayId);
         event.setWindowId(windowId);
@@ -417,8 +429,7 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
 
     @Override // android.view.accessibility.AccessibilityRecord
     @Deprecated
-    public void recycle() {
-    }
+    public void recycle() {}
 
     @Override // android.view.accessibility.AccessibilityRecord
     protected void clear() {
@@ -507,7 +518,8 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
         }
     }
 
-    private void writeAccessibilityRecordToParcel(AccessibilityRecord accessibilityRecord, Parcel parcel, int i) {
+    private void writeAccessibilityRecordToParcel(
+            AccessibilityRecord accessibilityRecord, Parcel parcel, int i) {
         parcel.writeInt(accessibilityRecord.mBooleanProperties);
         parcel.writeInt(accessibilityRecord.mCurrentItemIndex);
         parcel.writeInt(accessibilityRecord.mItemCount);
@@ -545,13 +557,16 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
         builder.append("; PackageName: ").append(this.mPackageName);
         builder.append("; MovementGranularity: ").append(this.mMovementGranularity);
         builder.append("; Action: ").append(this.mAction);
-        builder.append("; ContentChangeTypes: ").append(contentChangeTypesToString(this.mContentChangeTypes));
-        builder.append("; WindowChangeTypes: ").append(windowChangeTypesToString(this.mWindowChangeTypes));
+        builder.append("; ContentChangeTypes: ")
+                .append(contentChangeTypesToString(this.mContentChangeTypes));
+        builder.append("; WindowChangeTypes: ")
+                .append(windowChangeTypesToString(this.mWindowChangeTypes));
         super.appendTo(builder);
         if (DEBUG) {
             builder.append("\n");
             if (DEBUG) {
-                builder.append("; SourceWindowId: 0x").append(Long.toHexString(this.mSourceWindowId));
+                builder.append("; SourceWindowId: 0x")
+                        .append(Long.toHexString(this.mSourceWindowId));
                 builder.append("; SourceNodeId: 0x").append(Long.toHexString(this.mSourceNodeId));
                 builder.append("; SourceDisplayId: ").append(this.mSourceDisplayId);
             }

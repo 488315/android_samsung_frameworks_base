@@ -15,17 +15,18 @@ import android.os.RemoteException;
 import android.service.search.ISearchUiService;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.internal.infra.AbstractRemoteService;
 import com.android.server.ambientcontext.AmbientContextManagerPerUserService$$ExternalSyntheticOutline0;
 import com.android.server.infra.AbstractMasterSystemService;
 import com.android.server.infra.AbstractPerUserSystemService;
-import com.android.server.searchui.RemoteSearchUiService;
-import com.android.server.searchui.SearchUiPerUserService;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class SearchUiPerUserService extends AbstractPerUserSystemService implements RemoteSearchUiService.RemoteSearchUiServiceCallbacks {
+public final class SearchUiPerUserService extends AbstractPerUserSystemService
+        implements RemoteSearchUiService.RemoteSearchUiServiceCallbacks {
     public static final /* synthetic */ int $r8$clinit = 0;
     public RemoteSearchUiService mRemoteService;
     public final ArrayMap mSessionInfos;
@@ -39,9 +40,16 @@ public final class SearchUiPerUserService extends AbstractPerUserSystemService i
         public final SearchSessionId mSessionId;
         public final IBinder mToken;
 
-        public SearchSessionInfo(SearchSessionId searchSessionId, SearchContext searchContext, IBinder iBinder, SearchUiPerUserService$$ExternalSyntheticLambda2 searchUiPerUserService$$ExternalSyntheticLambda2) {
+        public SearchSessionInfo(
+                SearchSessionId searchSessionId,
+                SearchContext searchContext,
+                IBinder iBinder,
+                SearchUiPerUserService$$ExternalSyntheticLambda2
+                        searchUiPerUserService$$ExternalSyntheticLambda2) {
             int i = SearchUiPerUserService.$r8$clinit;
-            Slog.d("SearchUiPerUserService", "Creating SearchSessionInfo for session Id=" + searchSessionId);
+            Slog.d(
+                    "SearchUiPerUserService",
+                    "Creating SearchSessionInfo for session Id=" + searchSessionId);
             this.mSessionId = searchSessionId;
             this.mSearchContext = searchContext;
             this.mToken = iBinder;
@@ -49,7 +57,8 @@ public final class SearchUiPerUserService extends AbstractPerUserSystemService i
         }
     }
 
-    public SearchUiPerUserService(SearchUiManagerService searchUiManagerService, Object obj, int i) {
+    public SearchUiPerUserService(
+            SearchUiManagerService searchUiManagerService, Object obj, int i) {
         super(searchUiManagerService, obj, i);
         this.mSessionInfos = new ArrayMap();
     }
@@ -87,10 +96,19 @@ public final class SearchUiPerUserService extends AbstractPerUserSystemService i
                 Slog.v("SearchUiPerUserService", "getRemoteServiceLocked(): not set");
                 return null;
             }
-            ComponentName unflattenFromString = ComponentName.unflattenFromString(componentNameLocked);
+            ComponentName unflattenFromString =
+                    ComponentName.unflattenFromString(componentNameLocked);
             Context context = abstractMasterSystemService.getContext();
-            SearchUiManagerService searchUiManagerService = (SearchUiManagerService) abstractMasterSystemService;
-            this.mRemoteService = new RemoteSearchUiService(context, unflattenFromString, this.mUserId, this, searchUiManagerService.isBindInstantServiceAllowed(), searchUiManagerService.verbose);
+            SearchUiManagerService searchUiManagerService =
+                    (SearchUiManagerService) abstractMasterSystemService;
+            this.mRemoteService =
+                    new RemoteSearchUiService(
+                            context,
+                            unflattenFromString,
+                            this.mUserId,
+                            this,
+                            searchUiManagerService.isBindInstantServiceAllowed(),
+                            searchUiManagerService.verbose);
         }
         return this.mRemoteService;
     }
@@ -100,30 +118,47 @@ public final class SearchUiPerUserService extends AbstractPerUserSystemService i
         try {
             return AppGlobals.getPackageManager().getServiceInfo(componentName, 128L, this.mUserId);
         } catch (RemoteException unused) {
-            throw new PackageManager.NameNotFoundException(AmbientContextManagerPerUserService$$ExternalSyntheticOutline0.m(componentName, "Could not get service for "));
+            throw new PackageManager.NameNotFoundException(
+                    AmbientContextManagerPerUserService$$ExternalSyntheticOutline0.m(
+                            componentName, "Could not get service for "));
         }
     }
 
     /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.searchui.SearchUiPerUserService$$ExternalSyntheticLambda2] */
-    public final void onCreateSearchSessionLocked(SearchContext searchContext, final SearchSessionId searchSessionId, IBinder iBinder) {
-        if (!resolveService(new SearchUiPerUserService$$ExternalSyntheticLambda3(searchContext, searchSessionId)) || this.mSessionInfos.containsKey(searchSessionId)) {
+    public final void onCreateSearchSessionLocked(
+            SearchContext searchContext, final SearchSessionId searchSessionId, IBinder iBinder) {
+        if (!resolveService(
+                        new SearchUiPerUserService$$ExternalSyntheticLambda3(
+                                searchContext, searchSessionId))
+                || this.mSessionInfos.containsKey(searchSessionId)) {
             return;
         }
-        SearchSessionInfo searchSessionInfo = new SearchSessionInfo(searchSessionId, searchContext, iBinder, new IBinder.DeathRecipient() { // from class: com.android.server.searchui.SearchUiPerUserService$$ExternalSyntheticLambda2
-            @Override // android.os.IBinder.DeathRecipient
-            public final void binderDied() {
-                SearchUiPerUserService searchUiPerUserService = SearchUiPerUserService.this;
-                SearchSessionId searchSessionId2 = searchSessionId;
-                synchronized (searchUiPerUserService.mLock) {
-                    searchUiPerUserService.onDestroyLocked(searchSessionId2);
-                }
-            }
-        });
+        SearchSessionInfo searchSessionInfo =
+                new SearchSessionInfo(
+                        searchSessionId,
+                        searchContext,
+                        iBinder,
+                        new IBinder
+                                .DeathRecipient() { // from class:
+                                                    // com.android.server.searchui.SearchUiPerUserService$$ExternalSyntheticLambda2
+                            @Override // android.os.IBinder.DeathRecipient
+                            public final void binderDied() {
+                                SearchUiPerUserService searchUiPerUserService =
+                                        SearchUiPerUserService.this;
+                                SearchSessionId searchSessionId2 = searchSessionId;
+                                synchronized (searchUiPerUserService.mLock) {
+                                    searchUiPerUserService.onDestroyLocked(searchSessionId2);
+                                }
+                            }
+                        });
         try {
             searchSessionInfo.mToken.linkToDeath(searchSessionInfo.mDeathRecipient, 0);
             this.mSessionInfos.put(searchSessionId, searchSessionInfo);
         } catch (RemoteException unused) {
-            Slog.w("SearchUiPerUserService", "Caller is dead before session can be started, sessionId: " + searchSessionInfo.mSessionId);
+            Slog.w(
+                    "SearchUiPerUserService",
+                    "Caller is dead before session can be started, sessionId: "
+                            + searchSessionInfo.mSessionId);
             onDestroyLocked(searchSessionId);
         }
     }
@@ -132,16 +167,26 @@ public final class SearchUiPerUserService extends AbstractPerUserSystemService i
         if (this.mMaster.debug) {
             Slog.d("SearchUiPerUserService", "onDestroyLocked(): sessionId=" + searchSessionId);
         }
-        SearchSessionInfo searchSessionInfo = (SearchSessionInfo) this.mSessionInfos.remove(searchSessionId);
+        SearchSessionInfo searchSessionInfo =
+                (SearchSessionInfo) this.mSessionInfos.remove(searchSessionId);
         if (searchSessionInfo == null) {
             return;
         }
-        resolveService(new AbstractRemoteService.AsyncRequest() { // from class: com.android.server.searchui.SearchUiPerUserService$$ExternalSyntheticLambda5
-            public final void run(IInterface iInterface) {
-                ((ISearchUiService) iInterface).onDestroy(searchSessionId);
-            }
-        });
-        Slog.d("SearchUiPerUserService", "Removing all callbacks for session Id=" + searchSessionInfo.mSessionId + " and " + searchSessionInfo.mCallbacks.getRegisteredCallbackCount() + " callbacks.");
+        resolveService(
+                new AbstractRemoteService
+                        .AsyncRequest() { // from class:
+                                          // com.android.server.searchui.SearchUiPerUserService$$ExternalSyntheticLambda5
+                    public final void run(IInterface iInterface) {
+                        ((ISearchUiService) iInterface).onDestroy(searchSessionId);
+                    }
+                });
+        Slog.d(
+                "SearchUiPerUserService",
+                "Removing all callbacks for session Id="
+                        + searchSessionInfo.mSessionId
+                        + " and "
+                        + searchSessionInfo.mCallbacks.getRegisteredCallbackCount()
+                        + " callbacks.");
         IBinder iBinder = searchSessionInfo.mToken;
         if (iBinder != null) {
             iBinder.unlinkToDeath(searchSessionInfo.mDeathRecipient, 0);
@@ -164,10 +209,20 @@ public final class SearchUiPerUserService extends AbstractPerUserSystemService i
         }
     }
 
-    public final void registerEmptyQueryResultUpdateCallbackLocked(SearchSessionId searchSessionId, ISearchCallback iSearchCallback) {
-        SearchSessionInfo searchSessionInfo = (SearchSessionInfo) this.mSessionInfos.get(searchSessionId);
-        if (searchSessionInfo != null && resolveService(new SearchUiPerUserService$$ExternalSyntheticLambda3(searchSessionId, iSearchCallback, 0))) {
-            Slog.d("SearchUiPerUserService", "Storing callback for session Id=" + searchSessionInfo.mSessionId + " and callback=" + iSearchCallback.asBinder());
+    public final void registerEmptyQueryResultUpdateCallbackLocked(
+            SearchSessionId searchSessionId, ISearchCallback iSearchCallback) {
+        SearchSessionInfo searchSessionInfo =
+                (SearchSessionInfo) this.mSessionInfos.get(searchSessionId);
+        if (searchSessionInfo != null
+                && resolveService(
+                        new SearchUiPerUserService$$ExternalSyntheticLambda3(
+                                searchSessionId, iSearchCallback, 0))) {
+            Slog.d(
+                    "SearchUiPerUserService",
+                    "Storing callback for session Id="
+                            + searchSessionInfo.mSessionId
+                            + " and callback="
+                            + iSearchCallback.asBinder());
             searchSessionInfo.mCallbacks.register(iSearchCallback);
         }
     }
@@ -183,18 +238,37 @@ public final class SearchUiPerUserService extends AbstractPerUserSystemService i
     public final void resurrectSessionsLocked$2() {
         int size = this.mSessionInfos.size();
         if (this.mMaster.debug) {
-            Slog.d("SearchUiPerUserService", "Resurrecting remote service (" + this.mRemoteService + ") on " + size + " sessions.");
+            Slog.d(
+                    "SearchUiPerUserService",
+                    "Resurrecting remote service ("
+                            + this.mRemoteService
+                            + ") on "
+                            + size
+                            + " sessions.");
         }
         for (final SearchSessionInfo searchSessionInfo : this.mSessionInfos.values()) {
             IBinder iBinder = searchSessionInfo.mToken;
-            Slog.d("SearchUiPerUserService", "Resurrecting remote service (" + getRemoteServiceLocked() + ") for session Id=" + searchSessionInfo.mSessionId + " and " + searchSessionInfo.mCallbacks.getRegisteredCallbackCount() + " callbacks.");
-            onCreateSearchSessionLocked(searchSessionInfo.mSearchContext, searchSessionInfo.mSessionId, iBinder);
-            searchSessionInfo.mCallbacks.broadcast(new Consumer() { // from class: com.android.server.searchui.SearchUiPerUserService$SearchSessionInfo$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    this.registerEmptyQueryResultUpdateCallbackLocked(SearchUiPerUserService.SearchSessionInfo.this.mSessionId, (ISearchCallback) obj);
-                }
-            });
+            Slog.d(
+                    "SearchUiPerUserService",
+                    "Resurrecting remote service ("
+                            + getRemoteServiceLocked()
+                            + ") for session Id="
+                            + searchSessionInfo.mSessionId
+                            + " and "
+                            + searchSessionInfo.mCallbacks.getRegisteredCallbackCount()
+                            + " callbacks.");
+            onCreateSearchSessionLocked(
+                    searchSessionInfo.mSearchContext, searchSessionInfo.mSessionId, iBinder);
+            searchSessionInfo.mCallbacks.broadcast(
+                    new Consumer() { // from class:
+                                     // com.android.server.searchui.SearchUiPerUserService$SearchSessionInfo$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            this.registerEmptyQueryResultUpdateCallbackLocked(
+                                    SearchUiPerUserService.SearchSessionInfo.this.mSessionId,
+                                    (ISearchCallback) obj);
+                        }
+                    });
         }
     }
 
@@ -202,7 +276,9 @@ public final class SearchUiPerUserService extends AbstractPerUserSystemService i
     public final boolean updateLocked(boolean z) {
         RemoteSearchUiService remoteSearchUiService;
         boolean updateLocked = super.updateLocked(z);
-        if (updateLocked && !isEnabledLocked() && (remoteSearchUiService = this.mRemoteService) != null) {
+        if (updateLocked
+                && !isEnabledLocked()
+                && (remoteSearchUiService = this.mRemoteService) != null) {
             remoteSearchUiService.destroy();
             this.mRemoteService = null;
         }

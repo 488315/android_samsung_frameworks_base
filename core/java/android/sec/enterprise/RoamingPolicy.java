@@ -1,6 +1,5 @@
 package android.sec.enterprise;
 
-import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.content.SecContentProviderURI;
 import android.util.Log;
 

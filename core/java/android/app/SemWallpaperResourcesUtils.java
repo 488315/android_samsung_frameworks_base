@@ -4,38 +4,45 @@ import android.content.Context;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
-import java.io.File;
-import java.io.FilenameFilter;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.File;
+import java.io.FilenameFilter;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 /* loaded from: classes.dex */
 public class SemWallpaperResourcesUtils {
-    private static final String CHAMELEON_WALLPAPER_PATH = "/carrier/data/app/WallpaperChooser/Customization_DefaultBackground.jpg";
+    private static final String CHAMELEON_WALLPAPER_PATH =
+            "/carrier/data/app/WallpaperChooser/Customization_DefaultBackground.jpg";
     private static final String CUSTOMER_FILE = "customer.xml";
     private static final String DEFAULT_DEVICE_COLOR_BLACK = "black";
     private static final String DEFAULT_THEME_VIDEO_RES_ID_SUFFIX = ".mp4";
     private static final String DEFAULT_WALLPAPER_NAME = "default_wallpaper";
-    private static final String HOME_CSC_WALLPAPER_DIR_PATH = "/system/wallpaper/default_wallpaper/";
+    private static final String HOME_CSC_WALLPAPER_DIR_PATH =
+            "/system/wallpaper/default_wallpaper/";
     private static final String HOME_OMC_WALLPAPER_DIR_PATH = "/wallpaper/drawable/";
-    private static final String KEYGUARD_CSC_DEFAULT_WALLPAPER_NAME = "lockscreen_default_wallpaper";
+    private static final String KEYGUARD_CSC_DEFAULT_WALLPAPER_NAME =
+            "lockscreen_default_wallpaper";
     private static final String LOCK_CSC_WALLPAPER_DIR_PATH = "/system/wallpaper/";
     private static final String LOCK_OMC_WALLPAPER_DIR_PATH = "/wallpaper/lockscreen/drawable/";
     private static final String MULTI_CSC_WALLPAPER_DIR_PATH = "/system/csc_contents/";
     private static final String PROPERTY_OMC_RESOURCE_PATH = "persist.sys.omc_respath";
     private static final String PROP_WALLPAPER = "ro.config.wallpaper";
     private static final String TAG = "WallpaperResourcesUtils";
-    private static FilenameFilter mImageFileNameFilter = new FilenameFilter() { // from class: android.app.SemWallpaperResourcesUtils.1
-        @Override // java.io.FilenameFilter
-        public boolean accept(File dir, String name) {
-            String fileName = name.toLowerCase();
-            return fileName.endsWith(".png") || fileName.endsWith(".jpg");
-        }
-    };
+    private static FilenameFilter mImageFileNameFilter =
+            new FilenameFilter() { // from class: android.app.SemWallpaperResourcesUtils.1
+                @Override // java.io.FilenameFilter
+                public boolean accept(File dir, String name) {
+                    String fileName = name.toLowerCase();
+                    return fileName.endsWith(".png") || fileName.endsWith(".jpg");
+                }
+            };
 
     public static File getOMCWallpaperFile(Context context, int flag) {
         return getOMCWallpaperFile(context, flag, null);
@@ -51,7 +58,8 @@ public class SemWallpaperResourcesUtils {
             } else {
                 omcWallpaperDirPath = omcResourcePath + LOCK_OMC_WALLPAPER_DIR_PATH;
             }
-            omcFile = getOperatorFile(omcWallpaperDirPath, getOperatorFileName(context, flag, color));
+            omcFile =
+                    getOperatorFile(omcWallpaperDirPath, getOperatorFileName(context, flag, color));
             if (omcFile != null) {
                 Log.d(TAG, "omc wallpaper return: " + omcFile.getAbsolutePath());
             }
@@ -66,7 +74,9 @@ public class SemWallpaperResourcesUtils {
         if (wallpapers != null && wallpapers.length > 0) {
             for (int i = 0; i < wallpapers.length; i++) {
                 String name = wallpapers[i].substring(0, wallpapers[i].length() - 4);
-                if (!TextUtils.isEmpty(name) && name.equals(filename) && (file = getFile(dirPath + wallpapers[i])) != null) {
+                if (!TextUtils.isEmpty(name)
+                        && name.equals(filename)
+                        && (file = getFile(dirPath + wallpapers[i])) != null) {
                     break;
                 }
             }
@@ -91,7 +101,8 @@ public class SemWallpaperResourcesUtils {
 
     public static String getOMCVideoWallpaperFilePath(String videoName) {
         String omcVideoWallpaperFileName;
-        String omcResourcePath = SystemProperties.get("persist.sys.omc_respath") + LOCK_OMC_WALLPAPER_DIR_PATH;
+        String omcResourcePath =
+                SystemProperties.get("persist.sys.omc_respath") + LOCK_OMC_WALLPAPER_DIR_PATH;
         if (!TextUtils.isEmpty(videoName)) {
             omcVideoWallpaperFileName = videoName;
         } else {
@@ -110,7 +121,10 @@ public class SemWallpaperResourcesUtils {
     }
 
     public static boolean isDefaultOperatorWallpaper(Context context, int which, String color) {
-        return (getCSCWallpaperFile(context, which, color) == null && getOMCWallpaperFile(context, which, color) == null) ? false : true;
+        return (getCSCWallpaperFile(context, which, color) == null
+                        && getOMCWallpaperFile(context, which, color) == null)
+                ? false
+                : true;
     }
 
     public static File getCSCWallpaperFile(Context context, int flag, String color) {
@@ -118,9 +132,15 @@ public class SemWallpaperResourcesUtils {
         if ((flag & 3) == 1) {
             cscFile = getCSCWallpaperFile(context, color);
         } else {
-            cscFile = getOperatorFile(MULTI_CSC_WALLPAPER_DIR_PATH, getOperatorFileName(context, flag, color));
+            cscFile =
+                    getOperatorFile(
+                            MULTI_CSC_WALLPAPER_DIR_PATH,
+                            getOperatorFileName(context, flag, color));
             if (cscFile == null) {
-                cscFile = getOperatorFile(LOCK_CSC_WALLPAPER_DIR_PATH, getOperatorFileName(context, flag, color));
+                cscFile =
+                        getOperatorFile(
+                                LOCK_CSC_WALLPAPER_DIR_PATH,
+                                getOperatorFileName(context, flag, color));
             }
         }
         if (cscFile != null) {
@@ -138,8 +158,15 @@ public class SemWallpaperResourcesUtils {
         if (cscFile == null) {
             cscFile = getFile(CHAMELEON_WALLPAPER_PATH);
         }
-        if (cscFile == null && (cscFile = getOperatorFile(MULTI_CSC_WALLPAPER_DIR_PATH, getOperatorFileName(context, 1, color))) == null) {
-            cscFile = getOperatorFile(HOME_CSC_WALLPAPER_DIR_PATH, getOperatorFileName(context, 1, color));
+        if (cscFile == null
+                && (cscFile =
+                                getOperatorFile(
+                                        MULTI_CSC_WALLPAPER_DIR_PATH,
+                                        getOperatorFileName(context, 1, color)))
+                        == null) {
+            cscFile =
+                    getOperatorFile(
+                            HOME_CSC_WALLPAPER_DIR_PATH, getOperatorFileName(context, 1, color));
         }
         if (cscFile != null) {
             Log.d(TAG, "csc wallpaper return: " + cscFile.getAbsolutePath());
@@ -169,7 +196,8 @@ public class SemWallpaperResourcesUtils {
                                 }
                                 String attrName = attrs.item(j).getNodeName().trim();
                                 String attrValue = attrs.item(j).getNodeValue().trim();
-                                if (!"usedWithLockScreen".equalsIgnoreCase(attrName) || !"true".equals(attrValue)) {
+                                if (!"usedWithLockScreen".equalsIgnoreCase(attrName)
+                                        || !"true".equals(attrValue)) {
                                     j++;
                                 } else {
                                     ret = true;

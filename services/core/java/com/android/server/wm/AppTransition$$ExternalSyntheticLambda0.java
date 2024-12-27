@@ -4,6 +4,7 @@ import android.os.Binder;
 import android.os.RemoteException;
 import android.view.AppTransitionAnimationSpec;
 import android.view.IAppTransitionAnimationSpecsFuture;
+
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -12,7 +13,9 @@ public final /* synthetic */ class AppTransition$$ExternalSyntheticLambda0 imple
     public final /* synthetic */ AppTransition f$0;
     public final /* synthetic */ IAppTransitionAnimationSpecsFuture f$1;
 
-    public /* synthetic */ AppTransition$$ExternalSyntheticLambda0(AppTransition appTransition, IAppTransitionAnimationSpecsFuture iAppTransitionAnimationSpecsFuture) {
+    public /* synthetic */ AppTransition$$ExternalSyntheticLambda0(
+            AppTransition appTransition,
+            IAppTransitionAnimationSpecsFuture iAppTransitionAnimationSpecsFuture) {
         this.f$0 = appTransition;
         this.f$1 = iAppTransitionAnimationSpecsFuture;
     }
@@ -27,7 +30,8 @@ public final /* synthetic */ class AppTransition$$ExternalSyntheticLambda0 imple
             Binder.allowBlocking(iAppTransitionAnimationSpecsFuture.asBinder());
             appTransitionAnimationSpecArr = iAppTransitionAnimationSpecsFuture.get();
         } catch (RemoteException e) {
-            AccountManagerService$$ExternalSyntheticOutline0.m("Failed to fetch app transition specs: ", e, "WindowManager");
+            AccountManagerService$$ExternalSyntheticOutline0.m(
+                    "Failed to fetch app transition specs: ", e, "WindowManager");
             appTransitionAnimationSpecArr = null;
         }
         WindowManagerGlobalLock windowManagerGlobalLock = appTransition.mService.mGlobalLock;
@@ -35,7 +39,11 @@ public final /* synthetic */ class AppTransition$$ExternalSyntheticLambda0 imple
         synchronized (windowManagerGlobalLock) {
             try {
                 appTransition.mNextAppTransitionAnimationsSpecsPending = false;
-                appTransition.overridePendingAppTransitionMultiThumb(appTransitionAnimationSpecArr, appTransition.mNextAppTransitionFutureCallback, null, appTransition.mNextAppTransitionScaleUp);
+                appTransition.overridePendingAppTransitionMultiThumb(
+                        appTransitionAnimationSpecArr,
+                        appTransition.mNextAppTransitionFutureCallback,
+                        null,
+                        appTransition.mNextAppTransitionScaleUp);
                 appTransition.mNextAppTransitionFutureCallback = null;
                 appTransition.mService.requestTraversal();
             } catch (Throwable th) {

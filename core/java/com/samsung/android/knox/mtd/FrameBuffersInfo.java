@@ -2,23 +2,27 @@ package com.samsung.android.knox.mtd;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public class FrameBuffersInfo implements Parcelable {
-    public static final Parcelable.Creator<FrameBuffersInfo> CREATOR = new Parcelable.Creator<FrameBuffersInfo>() { // from class: com.samsung.android.knox.mtd.FrameBuffersInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrameBuffersInfo createFromParcel(Parcel in) {
-            return new FrameBuffersInfo(in);
-        }
+    public static final Parcelable.Creator<FrameBuffersInfo> CREATOR =
+            new Parcelable.Creator<
+                    FrameBuffersInfo>() { // from class:
+                                          // com.samsung.android.knox.mtd.FrameBuffersInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrameBuffersInfo createFromParcel(Parcel in) {
+                    return new FrameBuffersInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrameBuffersInfo[] newArray(int size) {
-            return new FrameBuffersInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrameBuffersInfo[] newArray(int size) {
+                    return new FrameBuffersInfo[size];
+                }
+            };
     List<String> Content;
     List<String> URLs;
 

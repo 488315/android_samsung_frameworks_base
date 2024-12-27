@@ -5,27 +5,30 @@ import android.hardware.radio.config.SlotPortMapping;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CardStatus implements Parcelable {
-    public static final Parcelable.Creator<CardStatus> CREATOR = new Parcelable.Creator<CardStatus>() { // from class: android.hardware.radio.sim.CardStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CardStatus createFromParcel(Parcel _aidl_source) {
-            CardStatus _aidl_out = new CardStatus();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CardStatus> CREATOR =
+            new Parcelable.Creator<
+                    CardStatus>() { // from class: android.hardware.radio.sim.CardStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CardStatus createFromParcel(Parcel _aidl_source) {
+                    CardStatus _aidl_out = new CardStatus();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CardStatus[] newArray(int _aidl_size) {
-            return new CardStatus[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CardStatus[] newArray(int _aidl_size) {
+                    return new CardStatus[_aidl_size];
+                }
+            };
     public static final int STATE_ABSENT = 0;
     public static final int STATE_ERROR = 2;
     public static final int STATE_PRESENT = 1;
@@ -188,7 +191,9 @@ public class CardStatus implements Parcelable {
         _aidl_sj.add("iccid: " + Objects.toString(this.iccid));
         _aidl_sj.add("eid: " + Objects.toString(this.eid));
         _aidl_sj.add("slotMap: " + Objects.toString(this.slotMap));
-        _aidl_sj.add("supportedMepMode: " + MultipleEnabledProfilesMode$$.toString(this.supportedMepMode));
+        _aidl_sj.add(
+                "supportedMepMode: "
+                        + MultipleEnabledProfilesMode$$.toString(this.supportedMepMode));
         return "CardStatus" + _aidl_sj.toString();
     }
 

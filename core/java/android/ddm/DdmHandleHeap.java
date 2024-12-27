@@ -9,18 +9,15 @@ public class DdmHandleHeap extends DdmHandle {
     public static final int CHUNK_HPGC = ChunkHandler.type("HPGC");
     private static DdmHandleHeap mInstance = new DdmHandleHeap();
 
-    private DdmHandleHeap() {
-    }
+    private DdmHandleHeap() {}
 
     public static void register() {
         DdmServer.registerHandler(CHUNK_HPGC, mInstance);
     }
 
-    public void onConnected() {
-    }
+    public void onConnected() {}
 
-    public void onDisconnected() {
-    }
+    public void onDisconnected() {}
 
     public Chunk handleChunk(Chunk request) {
         int type = request.type;

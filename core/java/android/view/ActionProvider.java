@@ -20,8 +20,7 @@ public abstract class ActionProvider {
     @Deprecated
     public abstract View onCreateActionView();
 
-    public ActionProvider(Context context) {
-    }
+    public ActionProvider(Context context) {}
 
     public View onCreateActionView(MenuItem forItem) {
         return onCreateActionView();
@@ -49,8 +48,7 @@ public abstract class ActionProvider {
         return false;
     }
 
-    public void onPrepareSubMenu(SubMenu subMenu) {
-    }
+    public void onPrepareSubMenu(SubMenu subMenu) {}
 
     public void subUiVisibilityChanged(boolean isVisible) {
         if (this.mSubUiVisibilityListener != null) {
@@ -64,7 +62,12 @@ public abstract class ActionProvider {
 
     public void setVisibilityListener(VisibilityListener listener) {
         if (this.mVisibilityListener != null) {
-            Log.w(TAG, "setVisibilityListener: Setting a new ActionProvider.VisibilityListener when one is already set. Are you reusing this " + getClass().getSimpleName() + " instance while it is still in use somewhere else?");
+            Log.w(
+                    TAG,
+                    "setVisibilityListener: Setting a new ActionProvider.VisibilityListener when"
+                        + " one is already set. Are you reusing this "
+                            + getClass().getSimpleName()
+                            + " instance while it is still in use somewhere else?");
         }
         this.mVisibilityListener = listener;
     }

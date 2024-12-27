@@ -3,6 +3,7 @@ package com.samsung.vekit.Common;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.Surface;
+
 import com.samsung.vekit.Common.Object.AnalyzeInfo;
 import com.samsung.vekit.Common.Object.DoodlePoint;
 import com.samsung.vekit.Common.Object.DoodleStroke;
@@ -21,6 +22,7 @@ import com.samsung.vekit.Common.Type.SeekType;
 import com.samsung.vekit.Common.Type.ViewMode;
 import com.samsung.vekit.Control.VEController;
 import com.samsung.vekit.External.NativeInterface;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -34,10 +36,13 @@ public class NativeInterfaceWrapper {
         this.stateInterface = new WeakReference<>(stateInterface);
     }
 
-    public synchronized void createFramework(VEController controller) throws IllegalAccessException {
+    public synchronized void createFramework(VEController controller)
+            throws IllegalAccessException {
         VEStateInterface stateInterface = this.stateInterface.get();
         if (stateInterface.getState() == VEKitState.CREATE) {
-            Log.e(this.TAG, "createFramework invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "createFramework invalid state. currentState = " + stateInterface.getState());
             return;
         }
         if (this.nativeInterface == null) {
@@ -51,30 +56,52 @@ public class NativeInterfaceWrapper {
         stateInterface.setState(VEKitState.CREATE);
     }
 
-    public synchronized void initializeFramework(Surface surface, int graphicBufferWidth, int graphicBufferHeight, int viewportWidth, int viewportHeight, ViewMode viewMode, FrameworkType frameworkType) {
+    public synchronized void initializeFramework(
+            Surface surface,
+            int graphicBufferWidth,
+            int graphicBufferHeight,
+            int viewportWidth,
+            int viewportHeight,
+            ViewMode viewMode,
+            FrameworkType frameworkType) {
         VEStateInterface stateInterface = this.stateInterface.get();
-        if (stateInterface.getState() != VEKitState.DESTROY && stateInterface.getState() != VEKitState.INITIALIZE) {
-            this.nativeInterface.initializeFramework(surface, graphicBufferWidth, graphicBufferHeight, viewportWidth, viewportHeight, viewMode, frameworkType);
+        if (stateInterface.getState() != VEKitState.DESTROY
+                && stateInterface.getState() != VEKitState.INITIALIZE) {
+            this.nativeInterface.initializeFramework(
+                    surface,
+                    graphicBufferWidth,
+                    graphicBufferHeight,
+                    viewportWidth,
+                    viewportHeight,
+                    viewMode,
+                    frameworkType);
             stateInterface.setState(VEKitState.INITIALIZE);
             return;
         }
-        Log.e(this.TAG, "initializeFramework invalid state. currentState = " + stateInterface.getState());
+        Log.e(
+                this.TAG,
+                "initializeFramework invalid state. currentState = " + stateInterface.getState());
     }
 
     public synchronized void finalizeFramework() {
         VEStateInterface stateInterface = this.stateInterface.get();
-        if (stateInterface.getState() != VEKitState.DESTROY && stateInterface.getState() != VEKitState.FINALIZE) {
+        if (stateInterface.getState() != VEKitState.DESTROY
+                && stateInterface.getState() != VEKitState.FINALIZE) {
             this.nativeInterface.finalizeFramework();
             stateInterface.setState(VEKitState.FINALIZE);
             return;
         }
-        Log.e(this.TAG, "finalizeFramework invalid state. currentState = " + stateInterface.getState());
+        Log.e(
+                this.TAG,
+                "finalizeFramework invalid state. currentState = " + stateInterface.getState());
     }
 
     public synchronized void releaseFramework() {
         VEStateInterface stateInterface = this.stateInterface.get();
         if (stateInterface.getState() == VEKitState.DESTROY) {
-            Log.e(this.TAG, "releaseFramework invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "releaseFramework invalid state. currentState = " + stateInterface.getState());
             return;
         }
         if (this.nativeInterface != null) {
@@ -88,11 +115,14 @@ public class NativeInterfaceWrapper {
     public void updateViewport(int x, int y, int width, int height) {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.updateViewport(x, y, width, height);
                 return;
             }
-            Log.e(this.TAG, "updateViewport invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "updateViewport invalid state. currentState = " + stateInterface.getState());
         }
     }
 
@@ -100,7 +130,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "create invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "create invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.create(element);
             }
@@ -111,7 +143,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "update invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "update invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.update(element);
             }
@@ -122,7 +156,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "remove invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "remove invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.remove(type, id);
             }
@@ -133,7 +169,10 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "attachAnimation invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "attachAnimation invalid state. currentState = "
+                                + stateInterface.getState());
             } else {
                 this.nativeInterface.attachAnimation(element, animationId);
             }
@@ -144,7 +183,10 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "detachAnimation invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "detachAnimation invalid state. currentState = "
+                                + stateInterface.getState());
             } else {
                 this.nativeInterface.detachAnimation(element, animationId);
             }
@@ -155,7 +197,10 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "clearAnimations invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "clearAnimations invalid state. currentState = "
+                                + stateInterface.getState());
             } else {
                 this.nativeInterface.clearAnimations(element);
             }
@@ -165,18 +210,22 @@ public class NativeInterfaceWrapper {
     public void cancelAnimation() {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.cancelAnimation();
                 return;
             }
-            Log.e(this.TAG, "cancelAnimation  invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "cancelAnimation  invalid state. currentState = " + stateInterface.getState());
         }
     }
 
     public void animate() {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.animate();
                 return;
             }
@@ -188,7 +237,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "attach invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "attach invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.attach(element, childId);
             }
@@ -199,7 +250,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "attach invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "attach invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.attach(element, index, childId);
             }
@@ -210,7 +263,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "attach invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "attach invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.attach(element, list);
             }
@@ -221,7 +276,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "detach invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "detach invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.detach(element, childId);
             }
@@ -253,7 +310,8 @@ public class NativeInterfaceWrapper {
     public void show() {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.show();
                 return;
             }
@@ -264,7 +322,8 @@ public class NativeInterfaceWrapper {
     public void seekTo(long millisecond, SeekType seekType) {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.seekTo(millisecond, seekType);
                 return;
             }
@@ -275,7 +334,8 @@ public class NativeInterfaceWrapper {
     public void play() {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.play();
                 return;
             }
@@ -286,7 +346,8 @@ public class NativeInterfaceWrapper {
     public void pause() {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.pause();
                 return;
             }
@@ -297,7 +358,8 @@ public class NativeInterfaceWrapper {
     public void stop() {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.stop();
                 return;
             }
@@ -308,10 +370,14 @@ public class NativeInterfaceWrapper {
     public Bitmap captureAnimatedFrame(Element element, int width, int height) {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 return this.nativeInterface.captureAnimatedFrame(element, width, height);
             }
-            Log.e(this.TAG, "captureAnimatedFrame invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "captureAnimatedFrame invalid state. currentState = "
+                            + stateInterface.getState());
             return null;
         }
     }
@@ -319,21 +385,31 @@ public class NativeInterfaceWrapper {
     public Bitmap captureLatestFrame(int width, int height) {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 return this.nativeInterface.captureLatestFrame(width, height);
             }
-            Log.e(this.TAG, "captureLatestFrame invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "captureLatestFrame invalid state. currentState = "
+                            + stateInterface.getState());
             return null;
         }
     }
 
-    public Bitmap captureSuperHDRFrame(Element element, int width, int height, int centerX, int centerY) {
+    public Bitmap captureSuperHDRFrame(
+            Element element, int width, int height, int centerX, int centerY) {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
-                return this.nativeInterface.captureSuperHDRFrame(element, width, height, centerX, centerY);
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
+                return this.nativeInterface.captureSuperHDRFrame(
+                        element, width, height, centerX, centerY);
             }
-            Log.e(this.TAG, "captureSuperHDRFrame invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "captureSuperHDRFrame invalid state. currentState = "
+                            + stateInterface.getState());
             return null;
         }
     }
@@ -341,10 +417,14 @@ public class NativeInterfaceWrapper {
     public Bitmap captureStaticDoodle(Element element, int width, int height) {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 return this.nativeInterface.captureStaticDoodle(element, width, height);
             }
-            Log.e(this.TAG, "captureStaticDoodle invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "captureStaticDoodle invalid state. currentState = "
+                            + stateInterface.getState());
             return null;
         }
     }
@@ -352,10 +432,14 @@ public class NativeInterfaceWrapper {
     public long getCurrentMediaPosition() {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 return this.nativeInterface.getCurrentMediaPosition();
             }
-            Log.e(this.TAG, "getCurrentMediaPosition invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "getCurrentMediaPosition invalid state. currentState = "
+                            + stateInterface.getState());
             return 0L;
         }
     }
@@ -364,7 +448,10 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "setPreviewInfo invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "setPreviewInfo invalid state. currentState = "
+                                + stateInterface.getState());
             } else {
                 this.nativeInterface.setPreviewInfo(previewInfo);
             }
@@ -375,7 +462,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "setExportInfo invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "setExportInfo invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.setExportInfo(info);
             }
@@ -385,10 +474,13 @@ public class NativeInterfaceWrapper {
     public long pauseExport() {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 return this.nativeInterface.pauseExport();
             }
-            Log.e(this.TAG, "pauseExport invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "pauseExport invalid state. currentState = " + stateInterface.getState());
             return 0L;
         }
     }
@@ -396,21 +488,27 @@ public class NativeInterfaceWrapper {
     public void resumeExport(long renderTime) {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.resumeExport(renderTime);
                 return;
             }
-            Log.e(this.TAG, "resumeExport invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "resumeExport invalid state. currentState = " + stateInterface.getState());
         }
     }
 
     public long getExportPosition() {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 return this.nativeInterface.getExportPosition();
             }
-            Log.e(this.TAG, "getExportPosition invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "getExportPosition invalid state. currentState = " + stateInterface.getState());
             return 0L;
         }
     }
@@ -418,33 +516,42 @@ public class NativeInterfaceWrapper {
     public void startDoodle(Element element, DoodleStroke stroke) {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.startDoodle(element, stroke);
                 return;
             }
-            Log.e(this.TAG, "startDoodle invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "startDoodle invalid state. currentState = " + stateInterface.getState());
         }
     }
 
     public void drawDoodle(Element element, ArrayList<DoodlePoint> pointList) {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.drawDoodle(element, pointList);
                 return;
             }
-            Log.e(this.TAG, "drawDoodle invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "drawDoodle invalid state. currentState = " + stateInterface.getState());
         }
     }
 
     public void finishDoodle(Element element) {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
-            if (stateInterface.getState() != VEKitState.FINALIZE && stateInterface.getState() != VEKitState.DESTROY) {
+            if (stateInterface.getState() != VEKitState.FINALIZE
+                    && stateInterface.getState() != VEKitState.DESTROY) {
                 this.nativeInterface.finishDoodle(element);
                 return;
             }
-            Log.e(this.TAG, "finishDoodle invalid state. currentState = " + stateInterface.getState());
+            Log.e(
+                    this.TAG,
+                    "finishDoodle invalid state. currentState = " + stateInterface.getState());
         }
     }
 
@@ -452,7 +559,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "attachStroke invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "attachStroke invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.attachStroke(element, stroke);
             }
@@ -463,7 +572,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "detachStroke invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "detachStroke invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.detachStroke(element);
             }
@@ -474,7 +585,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "saveDoodle invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "saveDoodle invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.saveDoodle(element);
             }
@@ -485,7 +598,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "loadDoodle invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "loadDoodle invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.loadDoodle(element);
             }
@@ -496,7 +611,10 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "getFrcSupportInfo invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "getFrcSupportInfo invalid state. currentState = "
+                                + stateInterface.getState());
                 return null;
             }
             return this.nativeInterface.getFrcSupportInfo(viewMode);
@@ -507,7 +625,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.setAnalyzeInfo(info);
             }
@@ -518,7 +638,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.startAnalyze();
             }
@@ -529,7 +651,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.stopAnalyze();
             }
@@ -540,7 +664,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
                 return 0L;
             }
             return this.nativeInterface.pauseAnalyze();
@@ -551,7 +677,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.resumeAnalyze(analyzedTime);
             }
@@ -562,7 +690,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.loadAnalyzeSolution(type);
             }
@@ -573,7 +703,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.unloadAnalyzeSolution(type);
             }
@@ -584,7 +716,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
                 return 0L;
             }
             return this.nativeInterface.getCurrentAnalyzedPosition();
@@ -595,7 +729,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.changePortraitVideoFocus(element, detectionInfo);
             }
@@ -606,7 +742,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.changePortraitVideoFocus(element, focusX, focusY);
             }
@@ -617,18 +755,23 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.changePortraitVideoKeyFrame(element, keyFrame);
             }
         }
     }
 
-    public void changePortraitVideoKeyFrameList(Element element, ArrayList<PVKeyFrame> keyFrameList) {
+    public void changePortraitVideoKeyFrameList(
+            Element element, ArrayList<PVKeyFrame> keyFrameList) {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.changePortraitVideoKeyFrameList(element, keyFrameList);
             }
@@ -639,7 +782,9 @@ public class NativeInterfaceWrapper {
         synchronized (this) {
             VEStateInterface stateInterface = this.stateInterface.get();
             if (stateInterface.getState() == VEKitState.DESTROY) {
-                Log.e(this.TAG, "analyze invalid state. currentState = " + stateInterface.getState());
+                Log.e(
+                        this.TAG,
+                        "analyze invalid state. currentState = " + stateInterface.getState());
             } else {
                 this.nativeInterface.deletePortraitVideoKeyFrame(element, keyFrameId);
             }

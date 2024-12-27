@@ -7,10 +7,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.sec.enterprise.content.SecContentProviderURI;
-import com.samsung.android.ims.ISemEpdgListener;
-import com.samsung.android.ims.SemImsDmConfigListener;
-import com.samsung.android.ims.SemImsRegiListener;
-import com.samsung.android.ims.SemSimMobStatusListener;
+
 import com.samsung.android.ims.settings.SemImsProfile;
 
 /* loaded from: classes6.dex */
@@ -47,13 +44,16 @@ public interface SemImsService extends IInterface {
 
     boolean isVoLteAvailable(int i) throws RemoteException;
 
-    void registerDmValueListener(SemImsDmConfigListener semImsDmConfigListener) throws RemoteException;
+    void registerDmValueListener(SemImsDmConfigListener semImsDmConfigListener)
+            throws RemoteException;
 
     String registerEpdgListener(ISemEpdgListener iSemEpdgListener) throws RemoteException;
 
-    String registerImsRegistrationListenerForSlot(SemImsRegiListener semImsRegiListener, int i) throws RemoteException;
+    String registerImsRegistrationListenerForSlot(SemImsRegiListener semImsRegiListener, int i)
+            throws RemoteException;
 
-    String registerSimMobilityStatusListener(SemSimMobStatusListener semSimMobStatusListener, int i) throws RemoteException;
+    String registerSimMobilityStatusListener(SemSimMobStatusListener semSimMobStatusListener, int i)
+            throws RemoteException;
 
     void sendTryRegisterByPhoneId(int i) throws RemoteException;
 
@@ -61,7 +61,8 @@ public interface SemImsService extends IInterface {
 
     void unRegisterEpdgListener(String str) throws RemoteException;
 
-    void unregisterDmValueListener(SemImsDmConfigListener semImsDmConfigListener) throws RemoteException;
+    void unregisterDmValueListener(SemImsDmConfigListener semImsDmConfigListener)
+            throws RemoteException;
 
     void unregisterImsRegistrationListenerForSlot(String str, int i) throws RemoteException;
 
@@ -69,43 +70,48 @@ public interface SemImsService extends IInterface {
 
     public static class Default implements SemImsService {
         @Override // com.samsung.android.ims.SemImsService
-        public String registerImsRegistrationListenerForSlot(SemImsRegiListener listener, int phoneId) throws RemoteException {
+        public String registerImsRegistrationListenerForSlot(
+                SemImsRegiListener listener, int phoneId) throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.ims.SemImsService
-        public void unregisterImsRegistrationListenerForSlot(String token, int phoneId) throws RemoteException {
-        }
+        public void unregisterImsRegistrationListenerForSlot(String token, int phoneId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.ims.SemImsService
-        public String registerSimMobilityStatusListener(SemSimMobStatusListener listener, int phoneId) throws RemoteException {
+        public String registerSimMobilityStatusListener(
+                SemSimMobStatusListener listener, int phoneId) throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.ims.SemImsService
-        public void unregisterSimMobilityStatusListener(String token, int phoneId) throws RemoteException {
-        }
+        public void unregisterSimMobilityStatusListener(String token, int phoneId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.ims.SemImsService
-        public void registerDmValueListener(SemImsDmConfigListener listener) throws RemoteException {
-        }
+        public void registerDmValueListener(SemImsDmConfigListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.ims.SemImsService
-        public void unregisterDmValueListener(SemImsDmConfigListener listener) throws RemoteException {
-        }
+        public void unregisterDmValueListener(SemImsDmConfigListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.ims.SemImsService
-        public SemImsRegistration getRegistrationInfoByServiceType(String serviceType, int phoneId) throws RemoteException {
+        public SemImsRegistration getRegistrationInfoByServiceType(String serviceType, int phoneId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.ims.SemImsService
-        public SemImsRegistration[] getRegistrationInfoByPhoneId(int phoneId) throws RemoteException {
+        public SemImsRegistration[] getRegistrationInfoByPhoneId(int phoneId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.ims.SemImsService
-        public boolean isServiceAvailable(String service, int rat, int phoneId) throws RemoteException {
+        public boolean isServiceAvailable(String service, int rat, int phoneId)
+                throws RemoteException {
             return false;
         }
 
@@ -130,19 +136,17 @@ public interface SemImsService extends IInterface {
         }
 
         @Override // com.samsung.android.ims.SemImsService
-        public void setRttMode(int phoneId, int mode) throws RemoteException {
-        }
+        public void setRttMode(int phoneId, int mode) throws RemoteException {}
 
         @Override // com.samsung.android.ims.SemImsService
-        public void sendTryRegisterByPhoneId(int phoneId) throws RemoteException {
-        }
+        public void sendTryRegisterByPhoneId(int phoneId) throws RemoteException {}
 
         @Override // com.samsung.android.ims.SemImsService
-        public void enableRcsByPhoneId(boolean enable, int phoneId) throws RemoteException {
-        }
+        public void enableRcsByPhoneId(boolean enable, int phoneId) throws RemoteException {}
 
         @Override // com.samsung.android.ims.SemImsService
-        public boolean isRcsEnabled(boolean needAutoConfigCheck, int phoneId) throws RemoteException {
+        public boolean isRcsEnabled(boolean needAutoConfigCheck, int phoneId)
+                throws RemoteException {
             return false;
         }
 
@@ -172,8 +176,7 @@ public interface SemImsService extends IInterface {
         }
 
         @Override // com.samsung.android.ims.SemImsService
-        public void unRegisterEpdgListener(String token) throws RemoteException {
-        }
+        public void unRegisterEpdgListener(String token) throws RemoteException {}
 
         @Override // com.samsung.android.ims.SemImsService
         public boolean isCrossSimCallingRegistered(int phoneId) throws RemoteException {
@@ -191,7 +194,7 @@ public interface SemImsService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements SemImsService {
+    public abstract static class Stub extends Binder implements SemImsService {
         static final int TRANSACTION_enableRcsByPhoneId = 16;
         static final int TRANSACTION_getBooleanConfig = 21;
         static final int TRANSACTION_getConfigValues = 20;
@@ -301,7 +304,8 @@ public interface SemImsService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(SemImsService.DESCRIPTOR);
             }
@@ -311,7 +315,8 @@ public interface SemImsService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SemImsRegiListener _arg0 = SemImsRegiListener.Stub.asInterface(data.readStrongBinder());
+                    SemImsRegiListener _arg0 =
+                            SemImsRegiListener.Stub.asInterface(data.readStrongBinder());
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     String _result = registerImsRegistrationListenerForSlot(_arg0, _arg1);
@@ -326,7 +331,8 @@ public interface SemImsService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 3:
-                    SemSimMobStatusListener _arg03 = SemSimMobStatusListener.Stub.asInterface(data.readStrongBinder());
+                    SemSimMobStatusListener _arg03 =
+                            SemSimMobStatusListener.Stub.asInterface(data.readStrongBinder());
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     String _result2 = registerSimMobilityStatusListener(_arg03, _arg13);
@@ -341,13 +347,15 @@ public interface SemImsService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 5:
-                    SemImsDmConfigListener _arg05 = SemImsDmConfigListener.Stub.asInterface(data.readStrongBinder());
+                    SemImsDmConfigListener _arg05 =
+                            SemImsDmConfigListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerDmValueListener(_arg05);
                     reply.writeNoException();
                     return true;
                 case 6:
-                    SemImsDmConfigListener _arg06 = SemImsDmConfigListener.Stub.asInterface(data.readStrongBinder());
+                    SemImsDmConfigListener _arg06 =
+                            SemImsDmConfigListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterDmValueListener(_arg06);
                     reply.writeNoException();
@@ -463,7 +471,8 @@ public interface SemImsService extends IInterface {
                     reply.writeBoolean(_result14);
                     return true;
                 case 22:
-                    ISemEpdgListener _arg022 = ISemEpdgListener.Stub.asInterface(data.readStrongBinder());
+                    ISemEpdgListener _arg022 =
+                            ISemEpdgListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     String _result15 = registerEpdgListener(_arg022);
                     reply.writeNoException();
@@ -511,7 +520,8 @@ public interface SemImsService extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsService
-            public String registerImsRegistrationListenerForSlot(SemImsRegiListener listener, int phoneId) throws RemoteException {
+            public String registerImsRegistrationListenerForSlot(
+                    SemImsRegiListener listener, int phoneId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -529,7 +539,8 @@ public interface SemImsService extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsService
-            public void unregisterImsRegistrationListenerForSlot(String token, int phoneId) throws RemoteException {
+            public void unregisterImsRegistrationListenerForSlot(String token, int phoneId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -545,7 +556,8 @@ public interface SemImsService extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsService
-            public String registerSimMobilityStatusListener(SemSimMobStatusListener listener, int phoneId) throws RemoteException {
+            public String registerSimMobilityStatusListener(
+                    SemSimMobStatusListener listener, int phoneId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -563,7 +575,8 @@ public interface SemImsService extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsService
-            public void unregisterSimMobilityStatusListener(String token, int phoneId) throws RemoteException {
+            public void unregisterSimMobilityStatusListener(String token, int phoneId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -579,7 +592,8 @@ public interface SemImsService extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsService
-            public void registerDmValueListener(SemImsDmConfigListener listener) throws RemoteException {
+            public void registerDmValueListener(SemImsDmConfigListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -594,7 +608,8 @@ public interface SemImsService extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsService
-            public void unregisterDmValueListener(SemImsDmConfigListener listener) throws RemoteException {
+            public void unregisterDmValueListener(SemImsDmConfigListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -609,7 +624,8 @@ public interface SemImsService extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsService
-            public SemImsRegistration getRegistrationInfoByServiceType(String serviceType, int phoneId) throws RemoteException {
+            public SemImsRegistration getRegistrationInfoByServiceType(
+                    String serviceType, int phoneId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -618,7 +634,8 @@ public interface SemImsService extends IInterface {
                     _data.writeInt(phoneId);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    SemImsRegistration _result = (SemImsRegistration) _reply.readTypedObject(SemImsRegistration.CREATOR);
+                    SemImsRegistration _result =
+                            (SemImsRegistration) _reply.readTypedObject(SemImsRegistration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -627,7 +644,8 @@ public interface SemImsService extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsService
-            public SemImsRegistration[] getRegistrationInfoByPhoneId(int phoneId) throws RemoteException {
+            public SemImsRegistration[] getRegistrationInfoByPhoneId(int phoneId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -635,7 +653,9 @@ public interface SemImsService extends IInterface {
                     _data.writeInt(phoneId);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    SemImsRegistration[] _result = (SemImsRegistration[]) _reply.createTypedArray(SemImsRegistration.CREATOR);
+                    SemImsRegistration[] _result =
+                            (SemImsRegistration[])
+                                    _reply.createTypedArray(SemImsRegistration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -644,7 +664,8 @@ public interface SemImsService extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsService
-            public boolean isServiceAvailable(String service, int rat, int phoneId) throws RemoteException {
+            public boolean isServiceAvailable(String service, int rat, int phoneId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -778,7 +799,8 @@ public interface SemImsService extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsService
-            public boolean isRcsEnabled(boolean needAutoConfigCheck, int phoneId) throws RemoteException {
+            public boolean isRcsEnabled(boolean needAutoConfigCheck, int phoneId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -804,7 +826,8 @@ public interface SemImsService extends IInterface {
                     _data.writeInt(phoneId);
                     this.mRemote.transact(18, _data, _reply, 0);
                     _reply.readException();
-                    SemImsProfile[] _result = (SemImsProfile[]) _reply.createTypedArray(SemImsProfile.CREATOR);
+                    SemImsProfile[] _result =
+                            (SemImsProfile[]) _reply.createTypedArray(SemImsProfile.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -830,7 +853,8 @@ public interface SemImsService extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsService
-            public ContentValues getConfigValues(String[] fields, int phoneId) throws RemoteException {
+            public ContentValues getConfigValues(String[] fields, int phoneId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -839,7 +863,8 @@ public interface SemImsService extends IInterface {
                     _data.writeInt(phoneId);
                     this.mRemote.transact(20, _data, _reply, 0);
                     _reply.readException();
-                    ContentValues _result = (ContentValues) _reply.readTypedObject(ContentValues.CREATOR);
+                    ContentValues _result =
+                            (ContentValues) _reply.readTypedObject(ContentValues.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

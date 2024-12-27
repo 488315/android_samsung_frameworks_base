@@ -1,11 +1,13 @@
 package com.samsung.vekit.Animation;
 
 import android.util.Log;
+
 import com.samsung.vekit.Common.Object.KeyFrame;
 import com.samsung.vekit.Common.Type.SlideType;
 import com.samsung.vekit.Common.Type.TransitionType;
 import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Item.Item;
+
 import java.util.ArrayList;
 
 /* loaded from: classes6.dex */
@@ -42,12 +44,20 @@ public class SlideAnimation extends TransitionAnimation {
         return this.secondTarget;
     }
 
-    @Override // com.samsung.vekit.Animation.TransitionAnimation, com.samsung.vekit.Animation.Animation
-    public SlideAnimation setBezierControlPoint(float controlPointX1, float controlPointY1, float controlPointX2, float controlPointY2) {
-        return (SlideAnimation) super.setBezierControlPoint(controlPointX1, controlPointY1, controlPointX2, controlPointY2);
+    @Override // com.samsung.vekit.Animation.TransitionAnimation,
+              // com.samsung.vekit.Animation.Animation
+    public SlideAnimation setBezierControlPoint(
+            float controlPointX1,
+            float controlPointY1,
+            float controlPointX2,
+            float controlPointY2) {
+        return (SlideAnimation)
+                super.setBezierControlPoint(
+                        controlPointX1, controlPointY1, controlPointX2, controlPointY2);
     }
 
-    @Override // com.samsung.vekit.Animation.TransitionAnimation, com.samsung.vekit.Animation.Animation
+    @Override // com.samsung.vekit.Animation.TransitionAnimation,
+              // com.samsung.vekit.Animation.Animation
     public SlideAnimation setStartTime(long startTime) {
         return (SlideAnimation) super.setStartTime(startTime);
     }
@@ -58,8 +68,10 @@ public class SlideAnimation extends TransitionAnimation {
     }
 
     @Override // com.samsung.vekit.Animation.Animation
-    public SlideAnimation setKeyFrame(KeyFrame<Float> firstKeyFrame, KeyFrame<Float> secondKeyFrame) {
-        return (SlideAnimation) super.setKeyFrame((KeyFrame) firstKeyFrame, (KeyFrame) secondKeyFrame);
+    public SlideAnimation setKeyFrame(
+            KeyFrame<Float> firstKeyFrame, KeyFrame<Float> secondKeyFrame) {
+        return (SlideAnimation)
+                super.setKeyFrame((KeyFrame) firstKeyFrame, (KeyFrame) secondKeyFrame);
     }
 
     @Override // com.samsung.vekit.Animation.Animation
@@ -67,31 +79,40 @@ public class SlideAnimation extends TransitionAnimation {
         return (SlideAnimation) super.addKeyFrame((KeyFrame) keyFrame);
     }
 
-    @Override // com.samsung.vekit.Animation.TransitionAnimation, com.samsung.vekit.Animation.Animation, com.samsung.vekit.Listener.AnimationStatusListener
+    @Override // com.samsung.vekit.Animation.TransitionAnimation,
+              // com.samsung.vekit.Animation.Animation,
+              // com.samsung.vekit.Listener.AnimationStatusListener
     public void onAnimationStarted(Object interpolatedValue) {
         Log.i(this.TAG, "onAnimationStarted : " + this.id + ", " + this.name);
         super.onAnimationStarted(interpolatedValue);
     }
 
-    @Override // com.samsung.vekit.Animation.TransitionAnimation, com.samsung.vekit.Animation.Animation, com.samsung.vekit.Listener.AnimationStatusListener
+    @Override // com.samsung.vekit.Animation.TransitionAnimation,
+              // com.samsung.vekit.Animation.Animation,
+              // com.samsung.vekit.Listener.AnimationStatusListener
     public void onAnimationUpdated(Object interpolatedValue) {
         Log.i(this.TAG, "onAnimationUpdated : " + this.id + ", " + this.name);
         super.onAnimationUpdated(interpolatedValue);
     }
 
-    @Override // com.samsung.vekit.Animation.TransitionAnimation, com.samsung.vekit.Animation.Animation, com.samsung.vekit.Listener.AnimationStatusListener
+    @Override // com.samsung.vekit.Animation.TransitionAnimation,
+              // com.samsung.vekit.Animation.Animation,
+              // com.samsung.vekit.Listener.AnimationStatusListener
     public void onAnimationFinished(Object interpolatedValue) {
         Log.i(this.TAG, "onAnimationFinished : " + this.id + ", " + this.name);
         super.onAnimationFinished(interpolatedValue);
     }
 
-    @Override // com.samsung.vekit.Animation.TransitionAnimation, com.samsung.vekit.Animation.Animation, com.samsung.vekit.Listener.AnimationStatusListener
+    @Override // com.samsung.vekit.Animation.TransitionAnimation,
+              // com.samsung.vekit.Animation.Animation,
+              // com.samsung.vekit.Listener.AnimationStatusListener
     public void onAnimationCanceled(Object interpolatedValue) {
         Log.i(this.TAG, "onAnimationCanceled : " + this.id + ", " + this.name);
         super.onAnimationCanceled(interpolatedValue);
     }
 
-    @Override // com.samsung.vekit.Animation.TransitionAnimation, com.samsung.vekit.Animation.Animation
+    @Override // com.samsung.vekit.Animation.TransitionAnimation,
+              // com.samsung.vekit.Animation.Animation
     @Deprecated
     public SlideAnimation setDuration(long duration) {
         return (SlideAnimation) super.setDuration(duration);

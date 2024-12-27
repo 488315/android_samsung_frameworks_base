@@ -3,6 +3,7 @@ package com.android.server;
 import android.os.SystemProperties;
 import android.util.LocalLog;
 import android.util.Slog;
+
 import com.android.i18n.timezone.ZoneInfoDb;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -13,7 +14,10 @@ public abstract class SystemTimeZone {
     public static void initializeTimeZoneSettingsIfRequired() {
         String str = SystemProperties.get("persist.sys.timezone");
         if (str == null || str.isEmpty() || !ZoneInfoDb.getInstance().hasTimeZone(str)) {
-            String str2 = "initializeTimeZoneSettingsIfRequired():persist.sys.timezone is not valid (" + str + "); setting to GMT";
+            String str2 =
+                    "initializeTimeZoneSettingsIfRequired():persist.sys.timezone is not valid ("
+                            + str
+                            + "); setting to GMT";
             Slog.w("SystemTimeZone", str2);
             setTimeZoneId(0, "GMT", str2);
         }
@@ -103,6 +107,8 @@ public abstract class SystemTimeZone {
             r8.log(r7)
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SystemTimeZone.setTimeZoneId(int, java.lang.String, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.SystemTimeZone.setTimeZoneId(int,"
+                    + " java.lang.String, java.lang.String):boolean");
     }
 }

@@ -20,6 +20,5 @@ class NavItemSelectedListener implements AdapterView.OnItemSelectedListener {
     }
 
     @Override // android.widget.AdapterView.OnItemSelectedListener
-    public void onNothingSelected(AdapterView<?> parent) {
-    }
+    public void onNothingSelected(AdapterView<?> parent) {}
 }

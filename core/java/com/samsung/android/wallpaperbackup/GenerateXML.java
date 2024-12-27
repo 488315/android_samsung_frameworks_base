@@ -1,6 +1,7 @@
 package com.samsung.android.wallpaperbackup;
 
 import android.util.Log;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -40,7 +41,11 @@ public class GenerateXML {
         if (parent != null && !parent.exists()) {
             boolean created = parent.mkdir();
             if (!created) {
-                Log.d(TAG, "generateXML: parent directory(" + file.getParentFile() + ") isn't created.");
+                Log.d(
+                        TAG,
+                        "generateXML: parent directory("
+                                + file.getParentFile()
+                                + ") isn't created.");
                 return;
             }
         }
@@ -63,11 +68,15 @@ public class GenerateXML {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static void generate(java.io.File r26, com.samsung.android.wallpaperbackup.WallpaperUser r27) {
+    private static void generate(
+            java.io.File r26, com.samsung.android.wallpaperbackup.WallpaperUser r27) {
         /*
             Method dump skipped, instructions count: 608
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.wallpaperbackup.GenerateXML.generate(java.io.File, com.samsung.android.wallpaperbackup.WallpaperUser):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.wallpaperbackup.GenerateXML.generate(java.io.File,"
+                    + " com.samsung.android.wallpaperbackup.WallpaperUser):void");
     }
 }

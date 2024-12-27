@@ -11,7 +11,8 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda5 implem
     public final /* synthetic */ IBinder f$2;
     public final /* synthetic */ long f$3;
 
-    public /* synthetic */ FaceProvider$$ExternalSyntheticLambda5(FaceProvider faceProvider, int i, IBinder iBinder, long j, int i2) {
+    public /* synthetic */ FaceProvider$$ExternalSyntheticLambda5(
+            FaceProvider faceProvider, int i, IBinder iBinder, long j, int i2) {
         this.$r8$classId = i2;
         this.f$0 = faceProvider;
         this.f$1 = i;
@@ -25,17 +26,20 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda5 implem
             case 0:
                 FaceProvider faceProvider = this.f$0;
                 int i = this.f$1;
-                ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).mScheduler.cancelAuthenticationOrDetection(this.f$2, this.f$3);
+                ((Sensor) faceProvider.mFaceSensors.mSensors.get(i))
+                        .mScheduler.cancelAuthenticationOrDetection(this.f$2, this.f$3);
                 break;
             case 1:
                 FaceProvider faceProvider2 = this.f$0;
                 int i2 = this.f$1;
-                ((Sensor) faceProvider2.mFaceSensors.mSensors.get(i2)).mScheduler.cancelEnrollment(this.f$2, this.f$3);
+                ((Sensor) faceProvider2.mFaceSensors.mSensors.get(i2))
+                        .mScheduler.cancelEnrollment(this.f$2, this.f$3);
                 break;
             default:
                 FaceProvider faceProvider3 = this.f$0;
                 int i3 = this.f$1;
-                ((Sensor) faceProvider3.mFaceSensors.mSensors.get(i3)).mScheduler.cancelAuthenticationOrDetection(this.f$2, this.f$3);
+                ((Sensor) faceProvider3.mFaceSensors.mSensors.get(i3))
+                        .mScheduler.cancelAuthenticationOrDetection(this.f$2, this.f$3);
                 break;
         }
     }

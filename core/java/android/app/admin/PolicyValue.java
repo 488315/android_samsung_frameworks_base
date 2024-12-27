@@ -1,6 +1,7 @@
 package android.app.admin;
 
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -11,8 +12,7 @@ public abstract class PolicyValue<V> implements Parcelable {
         this.mValue = (V) Objects.requireNonNull(v);
     }
 
-    PolicyValue() {
-    }
+    PolicyValue() {}
 
     public V getValue() {
         return this.mValue;

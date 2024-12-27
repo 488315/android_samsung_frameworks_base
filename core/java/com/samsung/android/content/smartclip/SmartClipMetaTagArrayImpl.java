@@ -4,26 +4,32 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.util.Iterator;
 
 /* loaded from: classes5.dex */
 public class SmartClipMetaTagArrayImpl extends SemSmartClipMetaTagArray implements Parcelable {
-    public static final Parcelable.Creator<SmartClipMetaTagArrayImpl> CREATOR = new Parcelable.Creator<SmartClipMetaTagArrayImpl>() { // from class: com.samsung.android.content.smartclip.SmartClipMetaTagArrayImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartClipMetaTagArrayImpl createFromParcel(Parcel in) {
-            Log.d(SmartClipMetaTagArrayImpl.TAG, "SmartClipMetaTagArrayImpl.createFromParcel called");
-            SmartClipMetaTagArrayImpl data = new SmartClipMetaTagArrayImpl();
-            data.readFromParcel(in);
-            return data;
-        }
+    public static final Parcelable.Creator<SmartClipMetaTagArrayImpl> CREATOR =
+            new Parcelable.Creator<
+                    SmartClipMetaTagArrayImpl>() { // from class:
+                                                   // com.samsung.android.content.smartclip.SmartClipMetaTagArrayImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartClipMetaTagArrayImpl createFromParcel(Parcel in) {
+                    Log.d(
+                            SmartClipMetaTagArrayImpl.TAG,
+                            "SmartClipMetaTagArrayImpl.createFromParcel called");
+                    SmartClipMetaTagArrayImpl data = new SmartClipMetaTagArrayImpl();
+                    data.readFromParcel(in);
+                    return data;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartClipMetaTagArrayImpl[] newArray(int size) {
-            return new SmartClipMetaTagArrayImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartClipMetaTagArrayImpl[] newArray(int size) {
+                    return new SmartClipMetaTagArrayImpl[size];
+                }
+            };
     private static final String TAG = "SmartClipMetaTagArrayImpl";
 
     @Override // com.samsung.android.content.smartclip.SemSmartClipMetaTagArray
@@ -112,7 +118,13 @@ public class SmartClipMetaTagArrayImpl extends SemSmartClipMetaTagArray implemen
                     extra = ", Extra data size = " + tagImpl.getExtraData().length;
                 }
             }
-            Log.d(TAG, type + NavigationBarInflaterView.KEY_CODE_START + value + extra + NavigationBarInflaterView.KEY_CODE_END);
+            Log.d(
+                    TAG,
+                    type
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + value
+                            + extra
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
     }
 

@@ -32,7 +32,8 @@ public interface IUsb extends IInterface {
                     obtain.writeLong(j);
                     if (this.mRemote.transact(1, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method enableContaminantPresenceDetection is unimplemented.");
+                        throw new RemoteException(
+                                "Method enableContaminantPresenceDetection is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -63,7 +64,8 @@ public interface IUsb extends IInterface {
                     obtain.writeLong(j);
                     if (this.mRemote.transact(3, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method enableUsbDataWhileDocked is unimplemented.");
+                        throw new RemoteException(
+                                "Method enableUsbDataWhileDocked is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();

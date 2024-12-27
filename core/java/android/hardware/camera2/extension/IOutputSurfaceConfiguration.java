@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IOutputSurfaceConfiguration extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.camera2.extension.IOutputSurfaceConfiguration";
+    public static final String DESCRIPTOR =
+            "android.hardware.camera2.extension.IOutputSurfaceConfiguration";
 
     OutputSurface getImageAnalysisOutputSurface() throws RemoteException;
 
@@ -45,7 +46,7 @@ public interface IOutputSurfaceConfiguration extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOutputSurfaceConfiguration {
+    public abstract static class Stub extends Binder implements IOutputSurfaceConfiguration {
         static final int TRANSACTION_getImageAnalysisOutputSurface = 3;
         static final int TRANSACTION_getImageCaptureOutputSurface = 2;
         static final int TRANSACTION_getPostviewOutputSurface = 4;
@@ -92,7 +93,8 @@ public interface IOutputSurfaceConfiguration extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOutputSurfaceConfiguration.DESCRIPTOR);
             }
@@ -150,7 +152,8 @@ public interface IOutputSurfaceConfiguration extends IInterface {
                     _data.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    OutputSurface _result = (OutputSurface) _reply.readTypedObject(OutputSurface.CREATOR);
+                    OutputSurface _result =
+                            (OutputSurface) _reply.readTypedObject(OutputSurface.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -166,7 +169,8 @@ public interface IOutputSurfaceConfiguration extends IInterface {
                     _data.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    OutputSurface _result = (OutputSurface) _reply.readTypedObject(OutputSurface.CREATOR);
+                    OutputSurface _result =
+                            (OutputSurface) _reply.readTypedObject(OutputSurface.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -182,7 +186,8 @@ public interface IOutputSurfaceConfiguration extends IInterface {
                     _data.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    OutputSurface _result = (OutputSurface) _reply.readTypedObject(OutputSurface.CREATOR);
+                    OutputSurface _result =
+                            (OutputSurface) _reply.readTypedObject(OutputSurface.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -198,7 +203,8 @@ public interface IOutputSurfaceConfiguration extends IInterface {
                     _data.writeInterfaceToken(IOutputSurfaceConfiguration.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    OutputSurface _result = (OutputSurface) _reply.readTypedObject(OutputSurface.CREATOR);
+                    OutputSurface _result =
+                            (OutputSurface) _reply.readTypedObject(OutputSurface.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

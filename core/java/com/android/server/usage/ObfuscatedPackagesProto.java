@@ -9,7 +9,6 @@ public final class ObfuscatedPackagesProto {
         public static final long PACKAGE_TOKEN = 1120986464257L;
         public static final long STRINGS = 2237677961218L;
 
-        public PackagesMap() {
-        }
+        public PackagesMap() {}
     }
 }

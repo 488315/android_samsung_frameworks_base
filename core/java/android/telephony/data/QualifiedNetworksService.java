@@ -10,14 +10,15 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.telephony.AccessNetworkConstants;
-import android.telephony.data.IQualifiedNetworksService;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.telephony.IIntegerConsumer;
 import com.android.internal.telephony.flags.FeatureFlags;
 import com.android.internal.telephony.flags.FeatureFlagsImpl;
 import com.android.internal.util.FunctionalUtils;
 import com.android.telephony.Rlog;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
@@ -36,7 +37,8 @@ public abstract class QualifiedNetworksService extends Service {
     private static final int QNS_REQUEST_NETWORK_VALIDATION = 7;
     private static final int QNS_UPDATE_HANDOVER_ENABLED = 9;
     private static final int QNS_UPDATE_QUALIFIED_NETWORKS = 4;
-    public static final String QUALIFIED_NETWORKS_SERVICE_INTERFACE = "android.telephony.data.QualifiedNetworksService";
+    public static final String QUALIFIED_NETWORKS_SERVICE_INTERFACE =
+            "android.telephony.data.QualifiedNetworksService";
     private static final String TAG = QualifiedNetworksService.class.getSimpleName();
     private static final FeatureFlags sFeatureFlag = new FeatureFlagsImpl();
     private final QualifiedNetworksServiceHandler mHandler;
@@ -63,33 +65,50 @@ public abstract class QualifiedNetworksService extends Service {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public void registerForQualifiedNetworkTypesChanged(IQualifiedNetworksServiceCallback callback) {
+        public void registerForQualifiedNetworkTypesChanged(
+                IQualifiedNetworksServiceCallback callback) {
             this.mCallback = callback;
             if (this.mCallback != null) {
                 for (int i = 0; i < this.mQualifiedNetworkTypesList.size(); i++) {
                     try {
-                        this.mCallback.onQualifiedNetworkTypesChanged(this.mQualifiedNetworkTypesList.keyAt(i), this.mQualifiedNetworkTypesList.valueAt(i));
+                        this.mCallback.onQualifiedNetworkTypesChanged(
+                                this.mQualifiedNetworkTypesList.keyAt(i),
+                                this.mQualifiedNetworkTypesList.valueAt(i));
                     } catch (RemoteException e) {
-                        QualifiedNetworksService.this.loge("Failed to call onQualifiedNetworksChanged. " + e);
+                        QualifiedNetworksService.this.loge(
+                                "Failed to call onQualifiedNetworksChanged. " + e);
                     }
                 }
             }
         }
 
-        public final void updateQualifiedNetworkTypes(int apnTypes, List<Integer> qualifiedNetworkTypes) {
-            int[] qualifiedNetworkTypesArray = qualifiedNetworkTypes.stream().mapToInt(new ToIntFunction() { // from class: android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider$$ExternalSyntheticLambda0
-                @Override // java.util.function.ToIntFunction
-                public final int applyAsInt(Object obj) {
-                    int intValue;
-                    intValue = ((Integer) obj).intValue();
-                    return intValue;
-                }
-            }).toArray();
-            QualifiedNetworksService.this.mHandler.obtainMessage(4, this.mSlotIndex, apnTypes, qualifiedNetworkTypesArray).sendToTarget();
+        public final void updateQualifiedNetworkTypes(
+                int apnTypes, List<Integer> qualifiedNetworkTypes) {
+            int[] qualifiedNetworkTypesArray =
+                    qualifiedNetworkTypes.stream()
+                            .mapToInt(
+                                    new ToIntFunction() { // from class:
+                                                          // android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.ToIntFunction
+                                        public final int applyAsInt(Object obj) {
+                                            int intValue;
+                                            intValue = ((Integer) obj).intValue();
+                                            return intValue;
+                                        }
+                                    })
+                            .toArray();
+            QualifiedNetworksService.this
+                    .mHandler
+                    .obtainMessage(4, this.mSlotIndex, apnTypes, qualifiedNetworkTypesArray)
+                    .sendToTarget();
         }
 
         public final void reconnectQualifiedNetworkType(int apnTypes, int qualifiedNetworkType) {
-            QualifiedNetworksService.this.mHandler.obtainMessage(8, this.mSlotIndex, apnTypes, Integer.valueOf(qualifiedNetworkType)).sendToTarget();
+            QualifiedNetworksService.this
+                    .mHandler
+                    .obtainMessage(
+                            8, this.mSlotIndex, apnTypes, Integer.valueOf(qualifiedNetworkType))
+                    .sendToTarget();
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -99,7 +118,8 @@ public abstract class QualifiedNetworksService extends Service {
                 try {
                     this.mCallback.onQualifiedNetworkTypesChanged(apnTypes, qualifiedNetworkTypes);
                 } catch (RemoteException e) {
-                    QualifiedNetworksService.this.loge("Failed to call onQualifiedNetworksChanged. " + e);
+                    QualifiedNetworksService.this.loge(
+                            "Failed to call onQualifiedNetworksChanged. " + e);
                 }
             }
         }
@@ -110,33 +130,51 @@ public abstract class QualifiedNetworksService extends Service {
                 try {
                     this.mCallback.onReconnectQualifiedNetworkType(apnTypes, qualifiedNetworkType);
                 } catch (RemoteException e) {
-                    QualifiedNetworksService.this.loge("Failed to call onReconnectQualifiedNetworkType. " + e);
+                    QualifiedNetworksService.this.loge(
+                            "Failed to call onReconnectQualifiedNetworkType. " + e);
                 }
             }
         }
 
         public void reportThrottleStatusChanged(List<ThrottleStatus> statuses) {
-            Log.d(QualifiedNetworksService.TAG, "reportThrottleStatusChanged: statuses size=" + statuses.size());
+            Log.d(
+                    QualifiedNetworksService.TAG,
+                    "reportThrottleStatusChanged: statuses size=" + statuses.size());
         }
 
         public void reportEmergencyDataNetworkPreferredTransportChanged(int transportType) {
-            Log.d(QualifiedNetworksService.TAG, "reportEmergencyDataNetworkPreferredTransportChanged: " + AccessNetworkConstants.transportTypeToString(transportType));
+            Log.d(
+                    QualifiedNetworksService.TAG,
+                    "reportEmergencyDataNetworkPreferredTransportChanged: "
+                            + AccessNetworkConstants.transportTypeToString(transportType));
         }
 
-        public void requestNetworkValidation(int networkCapability, Executor executor, final Consumer<Integer> resultCodeCallback) {
+        public void requestNetworkValidation(
+                int networkCapability,
+                Executor executor,
+                final Consumer<Integer> resultCodeCallback) {
             Objects.requireNonNull(executor, "executor cannot be null");
             Objects.requireNonNull(resultCodeCallback, "resultCodeCallback cannot be null");
             if (!QualifiedNetworksService.sFeatureFlag.networkValidation()) {
                 QualifiedNetworksService.this.loge("networkValidation feature is disabled");
-                executor.execute(new Runnable() { // from class: android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        resultCodeCallback.accept(1);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                resultCodeCallback.accept(1);
+                            }
+                        });
             } else {
                 IIntegerConsumer callback = new AnonymousClass1(executor, resultCodeCallback);
-                QualifiedNetworksService.this.mHandler.obtainMessage(7, this.mSlotIndex, 0, new NetworkValidationRequestData(networkCapability, callback)).sendToTarget();
+                QualifiedNetworksService.this
+                        .mHandler
+                        .obtainMessage(
+                                7,
+                                this.mSlotIndex,
+                                0,
+                                new NetworkValidationRequestData(networkCapability, callback))
+                        .sendToTarget();
             }
         }
 
@@ -154,12 +192,14 @@ public abstract class QualifiedNetworksService extends Service {
             public void accept(final int result) {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$resultCodeCallback;
-                executor.execute(new Runnable() { // from class: android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        consumer.accept(Integer.valueOf(result));
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                consumer.accept(Integer.valueOf(result));
+                            }
+                        });
             }
         }
 
@@ -167,17 +207,25 @@ public abstract class QualifiedNetworksService extends Service {
         public void onRequestNetworkValidation(NetworkValidationRequestData data) {
             try {
                 QualifiedNetworksService.this.log("onRequestNetworkValidation");
-                this.mCallback.onNetworkValidationRequested(data.mNetworkCapability, data.mCallback);
+                this.mCallback.onNetworkValidationRequested(
+                        data.mNetworkCapability, data.mCallback);
             } catch (RemoteException | NullPointerException e) {
-                QualifiedNetworksService.this.loge("Failed to call onRequestNetworkValidation. " + e);
+                QualifiedNetworksService.this.loge(
+                        "Failed to call onRequestNetworkValidation. " + e);
                 IIntegerConsumer iIntegerConsumer = data.mCallback;
                 Objects.requireNonNull(iIntegerConsumer);
-                FunctionalUtils.ignoreRemoteException(new DataService$DataServiceHandler$$ExternalSyntheticLambda0(iIntegerConsumer)).accept(1);
+                FunctionalUtils.ignoreRemoteException(
+                                new DataService$DataServiceHandler$$ExternalSyntheticLambda0(
+                                        iIntegerConsumer))
+                        .accept(1);
             }
         }
 
         public final void updateHandoverEnabled(int supportedApnTypes) {
-            QualifiedNetworksService.this.mHandler.obtainMessage(9, this.mSlotIndex, supportedApnTypes).sendToTarget();
+            QualifiedNetworksService.this
+                    .mHandler
+                    .obtainMessage(9, this.mSlotIndex, supportedApnTypes)
+                    .sendToTarget();
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -186,7 +234,8 @@ public abstract class QualifiedNetworksService extends Service {
                 try {
                     this.mCallback.onHandoverEnabledChanged(supportedApnTypes);
                 } catch (RemoteException e) {
-                    QualifiedNetworksService.this.loge("Failed to call onHandoverEnabledChanged. " + e);
+                    QualifiedNetworksService.this.loge(
+                            "Failed to call onHandoverEnabledChanged. " + e);
                 }
             }
         }
@@ -200,21 +249,31 @@ public abstract class QualifiedNetworksService extends Service {
         @Override // android.os.Handler
         public void handleMessage(Message message) {
             int slotIndex = message.arg1;
-            NetworkAvailabilityProvider provider = (NetworkAvailabilityProvider) QualifiedNetworksService.this.mProviders.get(slotIndex);
+            NetworkAvailabilityProvider provider =
+                    (NetworkAvailabilityProvider)
+                            QualifiedNetworksService.this.mProviders.get(slotIndex);
             switch (message.what) {
                 case 1:
                     if (QualifiedNetworksService.this.mProviders.get(slotIndex) != null) {
-                        QualifiedNetworksService.this.loge("Network availability provider for slot " + slotIndex + " already existed.");
+                        QualifiedNetworksService.this.loge(
+                                "Network availability provider for slot "
+                                        + slotIndex
+                                        + " already existed.");
                         break;
                     } else {
-                        NetworkAvailabilityProvider provider2 = QualifiedNetworksService.this.onCreateNetworkAvailabilityProvider(slotIndex);
+                        NetworkAvailabilityProvider provider2 =
+                                QualifiedNetworksService.this.onCreateNetworkAvailabilityProvider(
+                                        slotIndex);
                         if (provider2 != null) {
                             QualifiedNetworksService.this.mProviders.put(slotIndex, provider2);
-                            IQualifiedNetworksServiceCallback callback = (IQualifiedNetworksServiceCallback) message.obj;
+                            IQualifiedNetworksServiceCallback callback =
+                                    (IQualifiedNetworksServiceCallback) message.obj;
                             provider2.registerForQualifiedNetworkTypesChanged(callback);
                             break;
                         } else {
-                            QualifiedNetworksService.this.loge("Failed to create network availability provider. slot index = " + slotIndex);
+                            QualifiedNetworksService.this.loge(
+                                    "Failed to create network availability provider. slot index = "
+                                            + slotIndex);
                             break;
                         }
                     }
@@ -227,7 +286,9 @@ public abstract class QualifiedNetworksService extends Service {
                     break;
                 case 3:
                     for (int i = 0; i < QualifiedNetworksService.this.mProviders.size(); i++) {
-                        NetworkAvailabilityProvider provider3 = (NetworkAvailabilityProvider) QualifiedNetworksService.this.mProviders.get(i);
+                        NetworkAvailabilityProvider provider3 =
+                                (NetworkAvailabilityProvider)
+                                        QualifiedNetworksService.this.mProviders.get(i);
                         if (provider3 != null) {
                             provider3.close();
                         }
@@ -256,13 +317,15 @@ public abstract class QualifiedNetworksService extends Service {
                     break;
                 case 7:
                     if (provider != null) {
-                        provider.onRequestNetworkValidation((NetworkValidationRequestData) message.obj);
+                        provider.onRequestNetworkValidation(
+                                (NetworkValidationRequestData) message.obj);
                         break;
                     }
                     break;
                 case 8:
                     if (provider != null) {
-                        provider.onReconnectQualifiedNetworkType(message.arg2, ((Integer) message.obj).intValue());
+                        provider.onReconnectQualifiedNetworkType(
+                                message.arg2, ((Integer) message.obj).intValue());
                         break;
                     }
                     break;
@@ -303,12 +366,15 @@ public abstract class QualifiedNetworksService extends Service {
     }
 
     private class IQualifiedNetworksServiceWrapper extends IQualifiedNetworksService.Stub {
-        private IQualifiedNetworksServiceWrapper() {
-        }
+        private IQualifiedNetworksServiceWrapper() {}
 
         @Override // android.telephony.data.IQualifiedNetworksService
-        public void createNetworkAvailabilityProvider(int slotIndex, IQualifiedNetworksServiceCallback callback) {
-            QualifiedNetworksService.this.mHandler.obtainMessage(1, slotIndex, 0, callback).sendToTarget();
+        public void createNetworkAvailabilityProvider(
+                int slotIndex, IQualifiedNetworksServiceCallback callback) {
+            QualifiedNetworksService.this
+                    .mHandler
+                    .obtainMessage(1, slotIndex, 0, callback)
+                    .sendToTarget();
         }
 
         @Override // android.telephony.data.IQualifiedNetworksService
@@ -318,12 +384,19 @@ public abstract class QualifiedNetworksService extends Service {
 
         @Override // android.telephony.data.IQualifiedNetworksService
         public void reportThrottleStatusChanged(int slotIndex, List<ThrottleStatus> statuses) {
-            QualifiedNetworksService.this.mHandler.obtainMessage(5, slotIndex, 0, statuses).sendToTarget();
+            QualifiedNetworksService.this
+                    .mHandler
+                    .obtainMessage(5, slotIndex, 0, statuses)
+                    .sendToTarget();
         }
 
         @Override // android.telephony.data.IQualifiedNetworksService
-        public void reportEmergencyDataNetworkPreferredTransportChanged(int slotIndex, int transportType) {
-            QualifiedNetworksService.this.mHandler.obtainMessage(6, slotIndex, transportType).sendToTarget();
+        public void reportEmergencyDataNetworkPreferredTransportChanged(
+                int slotIndex, int transportType) {
+            QualifiedNetworksService.this
+                    .mHandler
+                    .obtainMessage(6, slotIndex, transportType)
+                    .sendToTarget();
         }
     }
 

@@ -6,6 +6,7 @@ import android.hardware.broadcastradio.DabTableEntry$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,7 +23,8 @@ public class PrivateDnsValidationEventParcel implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            PrivateDnsValidationEventParcel privateDnsValidationEventParcel = new PrivateDnsValidationEventParcel();
+            PrivateDnsValidationEventParcel privateDnsValidationEventParcel =
+                    new PrivateDnsValidationEventParcel();
             privateDnsValidationEventParcel.readFromParcel(parcel);
             return privateDnsValidationEventParcel;
         }
@@ -54,7 +56,8 @@ public class PrivateDnsValidationEventParcel implements Parcelable {
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             this.validation = parcel.readInt();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                             parcel.setDataPosition(dataPosition + readInt);
                             return;
@@ -83,7 +86,25 @@ public class PrivateDnsValidationEventParcel implements Parcelable {
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmBandRange$$ExternalSyntheticOutline0.m(DabTableEntry$$ExternalSyntheticOutline0.m(this.hostname, "validation: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.ipAddress, "hostname: ", AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("netId: "), this.netId, stringJoiner, "ipAddress: "), stringJoiner), stringJoiner), this.validation, stringJoiner, "PrivateDnsValidationEventParcel"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                this.hostname,
+                                "validation: ",
+                                DabTableEntry$$ExternalSyntheticOutline0.m(
+                                        this.ipAddress,
+                                        "hostname: ",
+                                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                                new StringBuilder("netId: "),
+                                                this.netId,
+                                                stringJoiner,
+                                                "ipAddress: "),
+                                        stringJoiner),
+                                stringJoiner),
+                        this.validation,
+                        stringJoiner,
+                        "PrivateDnsValidationEventParcel"));
     }
 
     @Override // android.os.Parcelable
@@ -93,7 +114,9 @@ public class PrivateDnsValidationEventParcel implements Parcelable {
         parcel.writeInt(this.netId);
         parcel.writeString(this.ipAddress);
         parcel.writeString(this.hostname);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.validation, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.validation, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

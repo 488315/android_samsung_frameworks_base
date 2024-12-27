@@ -1,7 +1,9 @@
 package android.media;
 
 import android.security.keystore.KeyProperties;
+
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,7 +34,15 @@ public class AudioPort {
     protected final int mRole;
     private final int[] mSamplingRates;
 
-    AudioPort(AudioHandle handle, int role, String name, int[] samplingRates, int[] channelMasks, int[] channelIndexMasks, int[] formats, AudioGain[] gains) {
+    AudioPort(
+            AudioHandle handle,
+            int role,
+            String name,
+            int[] samplingRates,
+            int[] channelMasks,
+            int[] channelIndexMasks,
+            int[] formats,
+            AudioGain[] gains) {
         this.mHandle = handle;
         this.mRole = role;
         this.mName = name;
@@ -47,14 +57,22 @@ public class AudioPort {
             int i = 0;
             for (int length = iArr.length; i < length; length = length) {
                 int format = iArr[i];
-                this.mProfiles.add(new AudioProfile(format, samplingRates, channelMasks, channelIndexMasks, 0));
+                this.mProfiles.add(
+                        new AudioProfile(
+                                format, samplingRates, channelMasks, channelIndexMasks, 0));
                 i++;
             }
         }
         this.mDescriptors = new ArrayList();
     }
 
-    AudioPort(AudioHandle handle, int role, String name, List<AudioProfile> profiles, AudioGain[] gains, List<AudioDescriptor> descriptors) {
+    AudioPort(
+            AudioHandle handle,
+            int role,
+            String name,
+            List<AudioProfile> profiles,
+            AudioGain[] gains,
+            List<AudioDescriptor> descriptors) {
         this.mHandle = handle;
         this.mRole = role;
         this.mName = name;
@@ -67,14 +85,34 @@ public class AudioPort {
         Set<Integer> channelIndexMasks = new HashSet<>();
         for (AudioProfile profile : profiles) {
             formats.add(Integer.valueOf(profile.getFormat()));
-            samplingRates.addAll((Collection) Arrays.stream(profile.getSampleRates()).boxed().collect(Collectors.toList()));
-            channelMasks.addAll((Collection) Arrays.stream(profile.getChannelMasks()).boxed().collect(Collectors.toList()));
-            channelIndexMasks.addAll((Collection) Arrays.stream(profile.getChannelIndexMasks()).boxed().collect(Collectors.toList()));
+            samplingRates.addAll(
+                    (Collection)
+                            Arrays.stream(profile.getSampleRates())
+                                    .boxed()
+                                    .collect(Collectors.toList()));
+            channelMasks.addAll(
+                    (Collection)
+                            Arrays.stream(profile.getChannelMasks())
+                                    .boxed()
+                                    .collect(Collectors.toList()));
+            channelIndexMasks.addAll(
+                    (Collection)
+                            Arrays.stream(profile.getChannelIndexMasks())
+                                    .boxed()
+                                    .collect(Collectors.toList()));
         }
-        this.mSamplingRates = samplingRates.stream().mapToInt(new AudioPort$$ExternalSyntheticLambda0()).toArray();
-        this.mChannelMasks = channelMasks.stream().mapToInt(new AudioPort$$ExternalSyntheticLambda0()).toArray();
-        this.mChannelIndexMasks = channelIndexMasks.stream().mapToInt(new AudioPort$$ExternalSyntheticLambda0()).toArray();
-        this.mFormats = formats.stream().mapToInt(new AudioPort$$ExternalSyntheticLambda0()).toArray();
+        this.mSamplingRates =
+                samplingRates.stream()
+                        .mapToInt(new AudioPort$$ExternalSyntheticLambda0())
+                        .toArray();
+        this.mChannelMasks =
+                channelMasks.stream().mapToInt(new AudioPort$$ExternalSyntheticLambda0()).toArray();
+        this.mChannelIndexMasks =
+                channelIndexMasks.stream()
+                        .mapToInt(new AudioPort$$ExternalSyntheticLambda0())
+                        .toArray();
+        this.mFormats =
+                formats.stream().mapToInt(new AudioPort$$ExternalSyntheticLambda0()).toArray();
     }
 
     AudioHandle handle() {
@@ -128,7 +166,8 @@ public class AudioPort {
         return this.mGains[index];
     }
 
-    public AudioPortConfig buildConfig(int samplingRate, int channelMask, int format, AudioGainConfig gain) {
+    public AudioPortConfig buildConfig(
+            int samplingRate, int channelMask, int format, AudioGainConfig gain) {
         return new AudioPortConfig(this, samplingRate, channelMask, format, gain);
     }
 

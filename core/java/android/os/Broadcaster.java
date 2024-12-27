@@ -20,8 +20,7 @@ public class Broadcaster {
             } else {
                 Registration start = this.mReg;
                 Registration r2 = start;
-                while (r2.senderWhat < senderWhat && (r2 = r2.next) != start) {
-                }
+                while (r2.senderWhat < senderWhat && (r2 = r2.next) != start) {}
                 if (r2.senderWhat != senderWhat) {
                     Registration reg = new Registration();
                     reg.senderWhat = senderWhat;
@@ -64,8 +63,7 @@ public class Broadcaster {
             if (r == null) {
                 return;
             }
-            while (r.senderWhat < senderWhat && (r = r.next) != start) {
-            }
+            while (r.senderWhat < senderWhat && (r = r.next) != start) {}
             if (r.senderWhat == senderWhat) {
                 Handler[] targets = r.targets;
                 int[] whats = r.targetWhats;
@@ -122,8 +120,7 @@ public class Broadcaster {
             int senderWhat = msg.what;
             Registration start = this.mReg;
             Registration r = start;
-            while (r.senderWhat < senderWhat && (r = r.next) != start) {
-            }
+            while (r.senderWhat < senderWhat && (r = r.next) != start) {}
             if (r.senderWhat == senderWhat) {
                 Handler[] targets = r.targets;
                 int[] whats = r.targetWhats;
@@ -146,7 +143,6 @@ public class Broadcaster {
         int[] targetWhats;
         Handler[] targets;
 
-        private Registration() {
-        }
+        private Registration() {}
     }
 }

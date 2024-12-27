@@ -12,7 +12,8 @@ public interface IRequestCallback extends IInterface {
 
     void onCaptureBufferLost(int i, long j, int i2) throws RemoteException;
 
-    void onCaptureCompleted(int i, ParcelTotalCaptureResult parcelTotalCaptureResult) throws RemoteException;
+    void onCaptureCompleted(int i, ParcelTotalCaptureResult parcelTotalCaptureResult)
+            throws RemoteException;
 
     void onCaptureFailed(int i, CaptureFailure captureFailure) throws RemoteException;
 
@@ -26,32 +27,31 @@ public interface IRequestCallback extends IInterface {
 
     public static class Default implements IRequestCallback {
         @Override // android.hardware.camera2.extension.IRequestCallback
-        public void onCaptureStarted(int requestId, long frameNumber, long timestamp) throws RemoteException {
-        }
+        public void onCaptureStarted(int requestId, long frameNumber, long timestamp)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IRequestCallback
-        public void onCaptureProgressed(int requestId, ParcelCaptureResult partialResult) throws RemoteException {
-        }
+        public void onCaptureProgressed(int requestId, ParcelCaptureResult partialResult)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IRequestCallback
-        public void onCaptureCompleted(int requestId, ParcelTotalCaptureResult totalCaptureResult) throws RemoteException {
-        }
+        public void onCaptureCompleted(int requestId, ParcelTotalCaptureResult totalCaptureResult)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IRequestCallback
-        public void onCaptureFailed(int requestId, CaptureFailure captureFailure) throws RemoteException {
-        }
+        public void onCaptureFailed(int requestId, CaptureFailure captureFailure)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IRequestCallback
-        public void onCaptureBufferLost(int requestId, long frameNumber, int outputStreamId) throws RemoteException {
-        }
+        public void onCaptureBufferLost(int requestId, long frameNumber, int outputStreamId)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IRequestCallback
-        public void onCaptureSequenceCompleted(int sequenceId, long frameNumber) throws RemoteException {
-        }
+        public void onCaptureSequenceCompleted(int sequenceId, long frameNumber)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IRequestCallback
-        public void onCaptureSequenceAborted(int sequenceId) throws RemoteException {
-        }
+        public void onCaptureSequenceAborted(int sequenceId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -59,7 +59,7 @@ public interface IRequestCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRequestCallback {
+    public abstract static class Stub extends Binder implements IRequestCallback {
         static final int TRANSACTION_onCaptureBufferLost = 5;
         static final int TRANSACTION_onCaptureCompleted = 3;
         static final int TRANSACTION_onCaptureFailed = 4;
@@ -115,7 +115,8 @@ public interface IRequestCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRequestCallback.DESCRIPTOR);
             }
@@ -134,21 +135,25 @@ public interface IRequestCallback extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    ParcelCaptureResult _arg12 = (ParcelCaptureResult) data.readTypedObject(ParcelCaptureResult.CREATOR);
+                    ParcelCaptureResult _arg12 =
+                            (ParcelCaptureResult) data.readTypedObject(ParcelCaptureResult.CREATOR);
                     data.enforceNoDataAvail();
                     onCaptureProgressed(_arg02, _arg12);
                     reply.writeNoException();
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    ParcelTotalCaptureResult _arg13 = (ParcelTotalCaptureResult) data.readTypedObject(ParcelTotalCaptureResult.CREATOR);
+                    ParcelTotalCaptureResult _arg13 =
+                            (ParcelTotalCaptureResult)
+                                    data.readTypedObject(ParcelTotalCaptureResult.CREATOR);
                     data.enforceNoDataAvail();
                     onCaptureCompleted(_arg03, _arg13);
                     reply.writeNoException();
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    CaptureFailure _arg14 = (CaptureFailure) data.readTypedObject(CaptureFailure.CREATOR);
+                    CaptureFailure _arg14 =
+                            (CaptureFailure) data.readTypedObject(CaptureFailure.CREATOR);
                     data.enforceNoDataAvail();
                     onCaptureFailed(_arg04, _arg14);
                     reply.writeNoException();
@@ -196,7 +201,8 @@ public interface IRequestCallback extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IRequestCallback
-            public void onCaptureStarted(int requestId, long frameNumber, long timestamp) throws RemoteException {
+            public void onCaptureStarted(int requestId, long frameNumber, long timestamp)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -213,7 +219,8 @@ public interface IRequestCallback extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IRequestCallback
-            public void onCaptureProgressed(int requestId, ParcelCaptureResult partialResult) throws RemoteException {
+            public void onCaptureProgressed(int requestId, ParcelCaptureResult partialResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -229,7 +236,9 @@ public interface IRequestCallback extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IRequestCallback
-            public void onCaptureCompleted(int requestId, ParcelTotalCaptureResult totalCaptureResult) throws RemoteException {
+            public void onCaptureCompleted(
+                    int requestId, ParcelTotalCaptureResult totalCaptureResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -245,7 +254,8 @@ public interface IRequestCallback extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IRequestCallback
-            public void onCaptureFailed(int requestId, CaptureFailure captureFailure) throws RemoteException {
+            public void onCaptureFailed(int requestId, CaptureFailure captureFailure)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -261,7 +271,8 @@ public interface IRequestCallback extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IRequestCallback
-            public void onCaptureBufferLost(int requestId, long frameNumber, int outputStreamId) throws RemoteException {
+            public void onCaptureBufferLost(int requestId, long frameNumber, int outputStreamId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -278,7 +289,8 @@ public interface IRequestCallback extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IRequestCallback
-            public void onCaptureSequenceCompleted(int sequenceId, long frameNumber) throws RemoteException {
+            public void onCaptureSequenceCompleted(int sequenceId, long frameNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

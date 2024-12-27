@@ -9,7 +9,9 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.samsung.android.edge.IEdgeLightingCallback;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -31,42 +33,56 @@ public final class EdgeLightingListenerManager {
 
         /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.notification.edgelighting.EdgeLightingListenerManager$EdgeLightingListener$1] */
         public EdgeLightingListener(IBinder iBinder, ComponentName componentName, int i, int i2) {
-            this.mHandler = new Handler(EdgeLightingListenerManager.this.mLooper) { // from class: com.android.server.notification.edgelighting.EdgeLightingListenerManager.EdgeLightingListener.1
-                @Override // android.os.Handler
-                public final void handleMessage(Message message) {
-                    super.handleMessage(message);
-                    int i3 = message.what;
-                    EdgeLightingListener edgeLightingListener = EdgeLightingListener.this;
-                    if (i3 == 1) {
-                        edgeLightingListener.getClass();
-                        try {
-                            IEdgeLightingCallback asInterface = IEdgeLightingCallback.Stub.asInterface(edgeLightingListener.token);
-                            if (asInterface != null) {
-                                asInterface.onEdgeLightingStarted();
+            this.mHandler =
+                    new Handler(
+                            EdgeLightingListenerManager.this
+                                    .mLooper) { // from class:
+                                                // com.android.server.notification.edgelighting.EdgeLightingListenerManager.EdgeLightingListener.1
+                        @Override // android.os.Handler
+                        public final void handleMessage(Message message) {
+                            super.handleMessage(message);
+                            int i3 = message.what;
+                            EdgeLightingListener edgeLightingListener = EdgeLightingListener.this;
+                            if (i3 == 1) {
+                                edgeLightingListener.getClass();
+                                try {
+                                    IEdgeLightingCallback asInterface =
+                                            IEdgeLightingCallback.Stub.asInterface(
+                                                    edgeLightingListener.token);
+                                    if (asInterface != null) {
+                                        asInterface.onEdgeLightingStarted();
+                                        return;
+                                    }
+                                    return;
+                                } catch (RemoteException e) {
+                                    boolean z = EdgeLightingListenerManager.DEBUG;
+                                    Slog.e(
+                                            "EdgeLightingListenerManager",
+                                            "_onEdgeLightingStarted : RemoteException : ",
+                                            e);
+                                    return;
+                                }
+                            }
+                            if (i3 != 2) {
                                 return;
                             }
-                            return;
-                        } catch (RemoteException e) {
-                            boolean z = EdgeLightingListenerManager.DEBUG;
-                            Slog.e("EdgeLightingListenerManager", "_onEdgeLightingStarted : RemoteException : ", e);
-                            return;
+                            edgeLightingListener.getClass();
+                            try {
+                                IEdgeLightingCallback asInterface2 =
+                                        IEdgeLightingCallback.Stub.asInterface(
+                                                edgeLightingListener.token);
+                                if (asInterface2 != null) {
+                                    asInterface2.onEdgeLightingStopped();
+                                }
+                            } catch (RemoteException e2) {
+                                boolean z2 = EdgeLightingListenerManager.DEBUG;
+                                Slog.e(
+                                        "EdgeLightingListenerManager",
+                                        "_onEdgeLightingStopped : RemoteException : ",
+                                        e2);
+                            }
                         }
-                    }
-                    if (i3 != 2) {
-                        return;
-                    }
-                    edgeLightingListener.getClass();
-                    try {
-                        IEdgeLightingCallback asInterface2 = IEdgeLightingCallback.Stub.asInterface(edgeLightingListener.token);
-                        if (asInterface2 != null) {
-                            asInterface2.onEdgeLightingStopped();
-                        }
-                    } catch (RemoteException e2) {
-                        boolean z2 = EdgeLightingListenerManager.DEBUG;
-                        Slog.e("EdgeLightingListenerManager", "_onEdgeLightingStopped : RemoteException : ", e2);
-                    }
-                }
-            };
+                    };
             this.token = iBinder;
             this.component = componentName;
             this.pid = i;
@@ -76,7 +92,9 @@ public final class EdgeLightingListenerManager {
                     iBinder.linkToDeath(this, 0);
                 } catch (RemoteException unused) {
                     boolean z = EdgeLightingListenerManager.DEBUG;
-                    Slog.e("EdgeLightingListenerManager", "EdgeLightingListener : linkToDeath error");
+                    Slog.e(
+                            "EdgeLightingListenerManager",
+                            "EdgeLightingListener : linkToDeath error");
                 }
             }
         }
@@ -84,8 +102,11 @@ public final class EdgeLightingListenerManager {
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             boolean z = EdgeLightingListenerManager.DEBUG;
-            Slog.v("EdgeLightingListenerManager", "binderDied : binder = " + this.component.toShortString());
-            EdgeLightingHistory.getInstance().updateListenerHistory(this.component.getPackageName(), "binderDied.");
+            Slog.v(
+                    "EdgeLightingListenerManager",
+                    "binderDied : binder = " + this.component.toShortString());
+            EdgeLightingHistory.getInstance()
+                    .updateListenerHistory(this.component.getPackageName(), "binderDied.");
             removeCallbacksAndMessages(null);
             synchronized (EdgeLightingListenerManager.this.mListeners) {
                 EdgeLightingListenerManager.this.mListeners.remove(this);
@@ -118,7 +139,9 @@ public final class EdgeLightingListenerManager {
                             Slog.d("EdgeLightingListenerManager", "onEdgeLightingStarted");
                         }
                         if (edgeLightingListener.token == null) {
-                            Slog.w("EdgeLightingListenerManager", "onEdgeLightingStarted : token is null");
+                            Slog.w(
+                                    "EdgeLightingListenerManager",
+                                    "onEdgeLightingStarted : token is null");
                         } else {
                             edgeLightingListener.mHandler.sendEmptyMessage(1);
                         }
@@ -145,7 +168,9 @@ public final class EdgeLightingListenerManager {
                             Slog.d("EdgeLightingListenerManager", "onEdgeLightingStopped");
                         }
                         if (edgeLightingListener.token == null) {
-                            Slog.w("EdgeLightingListenerManager", "onEdgeLightingStopped : token is null");
+                            Slog.w(
+                                    "EdgeLightingListenerManager",
+                                    "onEdgeLightingStopped : token is null");
                         } else {
                             edgeLightingListener.mHandler.sendEmptyMessage(2);
                         }
@@ -230,6 +255,9 @@ public final class EdgeLightingListenerManager {
             monitor-exit(r1)     // Catch: java.lang.Throwable -> Lf
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.edgelighting.EdgeLightingListenerManager.unregister(android.os.IBinder, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.edgelighting.EdgeLightingListenerManager.unregister(android.os.IBinder,"
+                    + " java.lang.String):void");
     }
 }

@@ -1,7 +1,5 @@
 package android.hardware.radio.voice;
 
-import android.hardware.radio.voice.IRadioVoiceIndication;
-import android.hardware.radio.voice.IRadioVoiceResponse;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioVoice extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$voice$IRadioVoice".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$voice$IRadioVoice".replace('$', '.');
     public static final String HASH = "78fb79bcb32590a868b3eb7affb39ab90e4ca782";
     public static final int VERSION = 3;
 
@@ -22,7 +21,8 @@ public interface IRadioVoice extends IInterface {
 
     void dial(int i, Dial dial) throws RemoteException;
 
-    void emergencyDial(int i, Dial dial, int i2, String[] strArr, int i3, boolean z, boolean z2) throws RemoteException;
+    void emergencyDial(int i, Dial dial, int i2, String[] strArr, int i3, boolean z, boolean z2)
+            throws RemoteException;
 
     void exitEmergencyCallbackMode(int i) throws RemoteException;
 
@@ -84,7 +84,9 @@ public interface IRadioVoice extends IInterface {
 
     void setPreferredVoicePrivacy(int i, boolean z) throws RemoteException;
 
-    void setResponseFunctions(IRadioVoiceResponse iRadioVoiceResponse, IRadioVoiceIndication iRadioVoiceIndication) throws RemoteException;
+    void setResponseFunctions(
+            IRadioVoiceResponse iRadioVoiceResponse, IRadioVoiceIndication iRadioVoiceIndication)
+            throws RemoteException;
 
     void setTtyMode(int i, int i2) throws RemoteException;
 
@@ -98,160 +100,135 @@ public interface IRadioVoice extends IInterface {
 
     public static class Default implements IRadioVoice {
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void acceptCall(int serial) throws RemoteException {
-        }
+        public void acceptCall(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void cancelPendingUssd(int serial) throws RemoteException {
-        }
+        public void cancelPendingUssd(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void conference(int serial) throws RemoteException {
-        }
+        public void conference(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void dial(int serial, Dial dialInfo) throws RemoteException {
-        }
+        public void dial(int serial, Dial dialInfo) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void emergencyDial(int serial, Dial dialInfo, int categories, String[] urns, int routing, boolean hasKnownUserIntentEmergency, boolean isTesting) throws RemoteException {
-        }
+        public void emergencyDial(
+                int serial,
+                Dial dialInfo,
+                int categories,
+                String[] urns,
+                int routing,
+                boolean hasKnownUserIntentEmergency,
+                boolean isTesting)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void exitEmergencyCallbackMode(int serial) throws RemoteException {
-        }
+        public void exitEmergencyCallbackMode(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void explicitCallTransfer(int serial) throws RemoteException {
-        }
+        public void explicitCallTransfer(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void getCallForwardStatus(int serial, CallForwardInfo callInfo) throws RemoteException {
-        }
+        public void getCallForwardStatus(int serial, CallForwardInfo callInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void getCallWaiting(int serial, int serviceClass) throws RemoteException {
-        }
+        public void getCallWaiting(int serial, int serviceClass) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void getClip(int serial) throws RemoteException {
-        }
+        public void getClip(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void getClir(int serial) throws RemoteException {
-        }
+        public void getClir(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void getCurrentCalls(int serial) throws RemoteException {
-        }
+        public void getCurrentCalls(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void getLastCallFailCause(int serial) throws RemoteException {
-        }
+        public void getLastCallFailCause(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void getMute(int serial) throws RemoteException {
-        }
+        public void getMute(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void getPreferredVoicePrivacy(int serial) throws RemoteException {
-        }
+        public void getPreferredVoicePrivacy(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void getTtyMode(int serial) throws RemoteException {
-        }
+        public void getTtyMode(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void handleStkCallSetupRequestFromSim(int serial, boolean accept) throws RemoteException {
-        }
+        public void handleStkCallSetupRequestFromSim(int serial, boolean accept)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void hangup(int serial, int gsmIndex) throws RemoteException {
-        }
+        public void hangup(int serial, int gsmIndex) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void hangupForegroundResumeBackground(int serial) throws RemoteException {
-        }
+        public void hangupForegroundResumeBackground(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void hangupWaitingOrBackground(int serial) throws RemoteException {
-        }
+        public void hangupWaitingOrBackground(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void isVoNrEnabled(int serial) throws RemoteException {
-        }
+        public void isVoNrEnabled(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void rejectCall(int serial) throws RemoteException {
-        }
+        public void rejectCall(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void responseAcknowledgement() throws RemoteException {
-        }
+        public void responseAcknowledgement() throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void sendBurstDtmf(int serial, String dtmf, int on, int off) throws RemoteException {
-        }
+        public void sendBurstDtmf(int serial, String dtmf, int on, int off)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void sendCdmaFeatureCode(int serial, String featureCode) throws RemoteException {
-        }
+        public void sendCdmaFeatureCode(int serial, String featureCode) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void sendDtmf(int serial, String s) throws RemoteException {
-        }
+        public void sendDtmf(int serial, String s) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void sendUssd(int serial, String ussd) throws RemoteException {
-        }
+        public void sendUssd(int serial, String ussd) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void separateConnection(int serial, int gsmIndex) throws RemoteException {
-        }
+        public void separateConnection(int serial, int gsmIndex) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void setCallForward(int serial, CallForwardInfo callInfo) throws RemoteException {
-        }
+        public void setCallForward(int serial, CallForwardInfo callInfo) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void setCallWaiting(int serial, boolean enable, int serviceClass) throws RemoteException {
-        }
+        public void setCallWaiting(int serial, boolean enable, int serviceClass)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void setClir(int serial, int status) throws RemoteException {
-        }
+        public void setClir(int serial, int status) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void setMute(int serial, boolean enable) throws RemoteException {
-        }
+        public void setMute(int serial, boolean enable) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void setPreferredVoicePrivacy(int serial, boolean enable) throws RemoteException {
-        }
+        public void setPreferredVoicePrivacy(int serial, boolean enable) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void setResponseFunctions(IRadioVoiceResponse radioVoiceResponse, IRadioVoiceIndication radioVoiceIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                IRadioVoiceResponse radioVoiceResponse, IRadioVoiceIndication radioVoiceIndication)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void setTtyMode(int serial, int mode) throws RemoteException {
-        }
+        public void setTtyMode(int serial, int mode) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void setVoNrEnabled(int serial, boolean enable) throws RemoteException {
-        }
+        public void setVoNrEnabled(int serial, boolean enable) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void startDtmf(int serial, String s) throws RemoteException {
-        }
+        public void startDtmf(int serial, String s) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void stopDtmf(int serial) throws RemoteException {
-        }
+        public void stopDtmf(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
-        public void switchWaitingOrHoldingAndActive(int serial) throws RemoteException {
-        }
+        public void switchWaitingOrHoldingAndActive(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoice
         public int getInterfaceVersion() {
@@ -269,7 +246,7 @@ public interface IRadioVoice extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioVoice {
+    public abstract static class Stub extends Binder implements IRadioVoice {
         static final int TRANSACTION_acceptCall = 1;
         static final int TRANSACTION_cancelPendingUssd = 2;
         static final int TRANSACTION_conference = 3;
@@ -334,7 +311,8 @@ public interface IRadioVoice extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -398,7 +376,8 @@ public interface IRadioVoice extends IInterface {
                     return true;
                 case 8:
                     int _arg08 = data.readInt();
-                    CallForwardInfo _arg13 = (CallForwardInfo) data.readTypedObject(CallForwardInfo.CREATOR);
+                    CallForwardInfo _arg13 =
+                            (CallForwardInfo) data.readTypedObject(CallForwardInfo.CREATOR);
                     data.enforceNoDataAvail();
                     getCallForwardStatus(_arg08, _arg13);
                     return true;
@@ -512,7 +491,8 @@ public interface IRadioVoice extends IInterface {
                     return true;
                 case 29:
                     int _arg028 = data.readInt();
-                    CallForwardInfo _arg112 = (CallForwardInfo) data.readTypedObject(CallForwardInfo.CREATOR);
+                    CallForwardInfo _arg112 =
+                            (CallForwardInfo) data.readTypedObject(CallForwardInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setCallForward(_arg028, _arg112);
                     return true;
@@ -542,8 +522,10 @@ public interface IRadioVoice extends IInterface {
                     setPreferredVoicePrivacy(_arg032, _arg116);
                     return true;
                 case 34:
-                    IRadioVoiceResponse _arg033 = IRadioVoiceResponse.Stub.asInterface(data.readStrongBinder());
-                    IRadioVoiceIndication _arg117 = IRadioVoiceIndication.Stub.asInterface(data.readStrongBinder());
+                    IRadioVoiceResponse _arg033 =
+                            IRadioVoiceResponse.Stub.asInterface(data.readStrongBinder());
+                    IRadioVoiceIndication _arg117 =
+                            IRadioVoiceIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg033, _arg117);
                     return true;
@@ -660,7 +642,15 @@ public interface IRadioVoice extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
-            public void emergencyDial(int serial, Dial dialInfo, int categories, String[] urns, int routing, boolean hasKnownUserIntentEmergency, boolean isTesting) throws RemoteException {
+            public void emergencyDial(
+                    int serial,
+                    Dial dialInfo,
+                    int categories,
+                    String[] urns,
+                    int routing,
+                    boolean hasKnownUserIntentEmergency,
+                    boolean isTesting)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -688,7 +678,8 @@ public interface IRadioVoice extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(6, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method exitEmergencyCallbackMode is unimplemented.");
+                        throw new RemoteException(
+                                "Method exitEmergencyCallbackMode is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -711,7 +702,8 @@ public interface IRadioVoice extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
-            public void getCallForwardStatus(int serial, CallForwardInfo callInfo) throws RemoteException {
+            public void getCallForwardStatus(int serial, CallForwardInfo callInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -825,7 +817,8 @@ public interface IRadioVoice extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(15, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getPreferredVoicePrivacy is unimplemented.");
+                        throw new RemoteException(
+                                "Method getPreferredVoicePrivacy is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -848,7 +841,8 @@ public interface IRadioVoice extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
-            public void handleStkCallSetupRequestFromSim(int serial, boolean accept) throws RemoteException {
+            public void handleStkCallSetupRequestFromSim(int serial, boolean accept)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -856,7 +850,8 @@ public interface IRadioVoice extends IInterface {
                     _data.writeBoolean(accept);
                     boolean _status = this.mRemote.transact(17, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method handleStkCallSetupRequestFromSim is unimplemented.");
+                        throw new RemoteException(
+                                "Method handleStkCallSetupRequestFromSim is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -887,7 +882,8 @@ public interface IRadioVoice extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(19, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method hangupForegroundResumeBackground is unimplemented.");
+                        throw new RemoteException(
+                                "Method hangupForegroundResumeBackground is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -902,7 +898,8 @@ public interface IRadioVoice extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(20, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method hangupWaitingOrBackground is unimplemented.");
+                        throw new RemoteException(
+                                "Method hangupWaitingOrBackground is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -946,7 +943,8 @@ public interface IRadioVoice extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(23, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method responseAcknowledgement is unimplemented.");
+                        throw new RemoteException(
+                                "Method responseAcknowledgement is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -954,7 +952,8 @@ public interface IRadioVoice extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
-            public void sendBurstDtmf(int serial, String dtmf, int on, int off) throws RemoteException {
+            public void sendBurstDtmf(int serial, String dtmf, int on, int off)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1036,7 +1035,8 @@ public interface IRadioVoice extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
-            public void setCallForward(int serial, CallForwardInfo callInfo) throws RemoteException {
+            public void setCallForward(int serial, CallForwardInfo callInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1052,7 +1052,8 @@ public interface IRadioVoice extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
-            public void setCallWaiting(int serial, boolean enable, int serviceClass) throws RemoteException {
+            public void setCallWaiting(int serial, boolean enable, int serviceClass)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1101,7 +1102,8 @@ public interface IRadioVoice extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
-            public void setPreferredVoicePrivacy(int serial, boolean enable) throws RemoteException {
+            public void setPreferredVoicePrivacy(int serial, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1109,7 +1111,8 @@ public interface IRadioVoice extends IInterface {
                     _data.writeBoolean(enable);
                     boolean _status = this.mRemote.transact(33, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setPreferredVoicePrivacy is unimplemented.");
+                        throw new RemoteException(
+                                "Method setPreferredVoicePrivacy is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1117,7 +1120,10 @@ public interface IRadioVoice extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoice
-            public void setResponseFunctions(IRadioVoiceResponse radioVoiceResponse, IRadioVoiceIndication radioVoiceIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    IRadioVoiceResponse radioVoiceResponse,
+                    IRadioVoiceIndication radioVoiceIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1203,7 +1209,8 @@ public interface IRadioVoice extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(39, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method switchWaitingOrHoldingAndActive is unimplemented.");
+                        throw new RemoteException(
+                                "Method switchWaitingOrHoldingAndActive is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

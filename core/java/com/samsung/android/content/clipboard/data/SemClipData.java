@@ -12,6 +12,7 @@ import android.sec.clipboard.data.ClipboardConstants;
 import android.sec.clipboard.data.ClipboardDataFactory;
 import android.sec.clipboard.util.Log;
 import android.text.TextUtils;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,20 +22,23 @@ import java.util.Random;
 
 /* loaded from: classes5.dex */
 public abstract class SemClipData implements Parcelable, Serializable {
-    public static final Parcelable.Creator<SemClipData> CREATOR = new Parcelable.Creator<SemClipData>() { // from class: com.samsung.android.content.clipboard.data.SemClipData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemClipData createFromParcel(Parcel source) {
-            SemClipData concreteData = ClipboardDataFactory.createClipBoardData(source);
-            return concreteData;
-        }
+    public static final Parcelable.Creator<SemClipData> CREATOR =
+            new Parcelable.Creator<
+                    SemClipData>() { // from class:
+                                     // com.samsung.android.content.clipboard.data.SemClipData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemClipData createFromParcel(Parcel source) {
+                    SemClipData concreteData = ClipboardDataFactory.createClipBoardData(source);
+                    return concreteData;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemClipData[] newArray(int size) {
-            return new SemClipData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemClipData[] newArray(int size) {
+                    return new SemClipData[size];
+                }
+            };
     private static final String TAG = "SemClipData";
     private static final long serialVersionUID = 1;
     private transient HashSet<String> activePermissionOwners;
@@ -98,18 +102,23 @@ public abstract class SemClipData implements Parcelable, Serializable {
         this.activePermissionOwners = new HashSet<>();
         this.mType = source.readInt();
         this.mTimestamp = source.readLong();
-        this.mIsProtected = ((Boolean) source.readValue(Boolean.class.getClassLoader())).booleanValue();
+        this.mIsProtected =
+                ((Boolean) source.readValue(Boolean.class.getClassLoader())).booleanValue();
         this.mCallerUid = source.readLong();
         this.mClipData = (ClipData) source.readParcelable(ClipData.class.getClassLoader());
-        this.mParcelFd = (ParcelFileDescriptor) source.readParcelable(ParcelFileDescriptor.class.getClassLoader());
+        this.mParcelFd =
+                (ParcelFileDescriptor)
+                        source.readParcelable(ParcelFileDescriptor.class.getClassLoader());
         this.mClipId = source.readString();
         this.mMimeTypes = source.createStringArrayList();
         this.mLabel = source.readCharSequence();
         this.mKeyList = source.readArrayList(Object.class.getClassLoader());
         this.mObjList = source.readArrayList(Object.class.getClassLoader());
         this.mBundle = source.readPersistableBundle();
-        this.mIsPCClip = ((Boolean) source.readValue(Boolean.class.getClassLoader())).booleanValue();
-        this.mIsRemoteClip = ((Boolean) source.readValue(Boolean.class.getClassLoader())).booleanValue();
+        this.mIsPCClip =
+                ((Boolean) source.readValue(Boolean.class.getClassLoader())).booleanValue();
+        this.mIsRemoteClip =
+                ((Boolean) source.readValue(Boolean.class.getClassLoader())).booleanValue();
         this.mRemoteClipId = source.readString();
         this.mRemoteState = source.readInt();
     }
@@ -219,7 +228,12 @@ public abstract class SemClipData implements Parcelable, Serializable {
             if (this.mMimeTypes == null) {
                 data = new ClipData(label, mimeType, item);
             } else {
-                data = new ClipData(label, (String[]) this.mMimeTypes.toArray(new String[this.mMimeTypes.size()]), item);
+                data =
+                        new ClipData(
+                                label,
+                                (String[])
+                                        this.mMimeTypes.toArray(new String[this.mMimeTypes.size()]),
+                                item);
             }
         } else {
             data = new ClipData(ClipboardConstants.CLIPBOARD_DRAGNDROP, mimeType, item);
@@ -534,45 +548,45 @@ public abstract class SemClipData implements Parcelable, Serializable {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0070, code lost:
-    
-        if (r2 == null) goto L28;
-     */
+
+       if (r2 == null) goto L28;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0072, code lost:
-    
-        r4 = android.os.Binder.clearCallingIdentity();
-     */
+
+       r4 = android.os.Binder.clearCallingIdentity();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:15:0x0076, code lost:
-    
-        r11.getContentResolver().delete(r2, null, null);
-     */
+
+       r11.getContentResolver().delete(r2, null, null);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0083, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x00a2, code lost:
-    
-        android.os.Binder.restoreCallingIdentity(r4);
-     */
+
+       android.os.Binder.restoreCallingIdentity(r4);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x00a5, code lost:
-    
-        throw r0;
-     */
+
+       throw r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0085, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0086, code lost:
-    
-        android.sec.clipboard.util.Log.e(com.samsung.android.content.clipboard.data.SemClipData.TAG, "Exception occurs in deleteContentUri because " + r0.getMessage());
-     */
+
+       android.sec.clipboard.util.Log.e(com.samsung.android.content.clipboard.data.SemClipData.TAG, "Exception occurs in deleteContentUri because " + r0.getMessage());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x00a6, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x006d, code lost:
-    
-        if (r3 == null) goto L17;
-     */
+
+       if (r3 == null) goto L17;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -663,6 +677,9 @@ public abstract class SemClipData implements Parcelable, Serializable {
         Lad:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.content.clipboard.data.SemClipData.deleteContentUriInternal(android.content.Context, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.content.clipboard.data.SemClipData.deleteContentUriInternal(android.content.Context,"
+                    + " java.lang.String):void");
     }
 }

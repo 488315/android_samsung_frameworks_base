@@ -11,7 +11,6 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.ApplicationMediaCapabilities;
-import android.mtp.MtpStorageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,9 +29,12 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
 import android.view.WindowManager;
+
+import dalvik.system.CloseGuard;
+
 import com.google.android.collect.Sets;
 import com.samsung.android.wallpaperbackup.BnRConstants;
-import dalvik.system.CloseGuard;
+
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -102,26 +104,28 @@ public class MtpDatabase implements AutoCloseable {
     private final SparseArray<MtpPropertyGroup> mPropertyGroupsByFormat = new SparseArray<>();
     private boolean mSkipThumbForHost = false;
     private volatile boolean mHostIsWindows = false;
-    private BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() { // from class: android.mtp.MtpDatabase.1
-        @Override // android.content.BroadcastReceiver
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
-                MtpDatabase.this.mBatteryScale = intent.getIntExtra("scale", 0);
-                int newLevel = intent.getIntExtra("level", 0);
-                if (newLevel != MtpDatabase.this.mBatteryLevel) {
-                    MtpDatabase.this.mBatteryLevel = newLevel;
-                    try {
-                        if (MtpDatabase.this.mServer != null) {
-                            MtpDatabase.this.mServer.sendDevicePropertyChanged(MtpConstants.DEVICE_PROPERTY_BATTERY_LEVEL);
+    private BroadcastReceiver mBatteryReceiver =
+            new BroadcastReceiver() { // from class: android.mtp.MtpDatabase.1
+                @Override // android.content.BroadcastReceiver
+                public void onReceive(Context context, Intent intent) {
+                    String action = intent.getAction();
+                    if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
+                        MtpDatabase.this.mBatteryScale = intent.getIntExtra("scale", 0);
+                        int newLevel = intent.getIntExtra("level", 0);
+                        if (newLevel != MtpDatabase.this.mBatteryLevel) {
+                            MtpDatabase.this.mBatteryLevel = newLevel;
+                            try {
+                                if (MtpDatabase.this.mServer != null) {
+                                    MtpDatabase.this.mServer.sendDevicePropertyChanged(
+                                            MtpConstants.DEVICE_PROPERTY_BATTERY_LEVEL);
+                                }
+                            } catch (NullPointerException ex) {
+                                Log.e(MtpDatabase.TAG, ex.getMessage());
+                            }
                         }
-                    } catch (NullPointerException ex) {
-                        Log.e(MtpDatabase.TAG, ex.getMessage());
                     }
                 }
-            }
-        }
-    };
+            };
     boolean[] mIsBound = {false, false};
     boolean isStratCommand = true;
     private Messenger[] mService = new Messenger[2];
@@ -136,12 +140,85 @@ public class MtpDatabase implements AutoCloseable {
 
     static {
         System.loadLibrary("media_jni");
-        PLAYBACK_FORMATS = new int[]{12288, 12289, 12292, 12293, 12296, 12297, 12299, MtpConstants.FORMAT_EXIF_JPEG, MtpConstants.FORMAT_TIFF_EP, MtpConstants.FORMAT_BMP, MtpConstants.FORMAT_GIF, MtpConstants.FORMAT_JFIF, MtpConstants.FORMAT_PNG, MtpConstants.FORMAT_TIFF, MtpConstants.FORMAT_WMA, MtpConstants.FORMAT_OGG, MtpConstants.FORMAT_AAC, MtpConstants.FORMAT_MP4_CONTAINER, MtpConstants.FORMAT_MP2, MtpConstants.FORMAT_3GP_CONTAINER, MtpConstants.FORMAT_ABSTRACT_AV_PLAYLIST, MtpConstants.FORMAT_WPL_PLAYLIST, MtpConstants.FORMAT_M3U_PLAYLIST, MtpConstants.FORMAT_PLS_PLAYLIST, MtpConstants.FORMAT_XML_DOCUMENT, MtpConstants.FORMAT_FLAC, MtpConstants.FORMAT_DNG, MtpConstants.FORMAT_HEIF};
-        FILE_PROPERTIES = new int[]{MtpConstants.PROPERTY_STORAGE_ID, MtpConstants.PROPERTY_OBJECT_FORMAT, MtpConstants.PROPERTY_PROTECTION_STATUS, MtpConstants.PROPERTY_OBJECT_SIZE, MtpConstants.PROPERTY_OBJECT_FILE_NAME, MtpConstants.PROPERTY_DATE_MODIFIED, MtpConstants.PROPERTY_PERSISTENT_UID, MtpConstants.PROPERTY_PARENT_OBJECT, MtpConstants.PROPERTY_NAME, MtpConstants.PROPERTY_DISPLAY_NAME, MtpConstants.PROPERTY_DATE_ADDED, MtpConstants.PROPERTY_HIDDEN};
-        AUDIO_PROPERTIES = new int[]{MtpConstants.PROPERTY_ARTIST, MtpConstants.PROPERTY_ALBUM_NAME, MtpConstants.PROPERTY_ALBUM_ARTIST, MtpConstants.PROPERTY_TRACK, MtpConstants.PROPERTY_ORIGINAL_RELEASE_DATE, MtpConstants.PROPERTY_DURATION, MtpConstants.PROPERTY_GENRE, MtpConstants.PROPERTY_COMPOSER, MtpConstants.PROPERTY_AUDIO_WAVE_CODEC, MtpConstants.PROPERTY_BITRATE_TYPE, MtpConstants.PROPERTY_AUDIO_BITRATE, MtpConstants.PROPERTY_NUMBER_OF_CHANNELS, MtpConstants.PROPERTY_SAMPLE_RATE};
-        VIDEO_PROPERTIES = new int[]{MtpConstants.PROPERTY_ARTIST, MtpConstants.PROPERTY_ALBUM_NAME, MtpConstants.PROPERTY_DURATION, MtpConstants.PROPERTY_DESCRIPTION};
-        IMAGE_PROPERTIES = new int[]{MtpConstants.PROPERTY_DESCRIPTION};
-        DEVICE_PROPERTIES = new int[]{MtpConstants.DEVICE_PROPERTY_SYNCHRONIZATION_PARTNER, MtpConstants.DEVICE_PROPERTY_DEVICE_FRIENDLY_NAME, MtpConstants.DEVICE_PROPERTY_IMAGE_SIZE, MtpConstants.DEVICE_PROPERTY_BATTERY_LEVEL, MtpConstants.DEVICE_PROPERTY_PERCEIVED_DEVICE_TYPE, MtpConstants.DEVICE_PROPERTY_SESSION_INITIATOR_VERSION_INFO};
+        PLAYBACK_FORMATS =
+                new int[] {
+                    12288,
+                    12289,
+                    12292,
+                    12293,
+                    12296,
+                    12297,
+                    12299,
+                    MtpConstants.FORMAT_EXIF_JPEG,
+                    MtpConstants.FORMAT_TIFF_EP,
+                    MtpConstants.FORMAT_BMP,
+                    MtpConstants.FORMAT_GIF,
+                    MtpConstants.FORMAT_JFIF,
+                    MtpConstants.FORMAT_PNG,
+                    MtpConstants.FORMAT_TIFF,
+                    MtpConstants.FORMAT_WMA,
+                    MtpConstants.FORMAT_OGG,
+                    MtpConstants.FORMAT_AAC,
+                    MtpConstants.FORMAT_MP4_CONTAINER,
+                    MtpConstants.FORMAT_MP2,
+                    MtpConstants.FORMAT_3GP_CONTAINER,
+                    MtpConstants.FORMAT_ABSTRACT_AV_PLAYLIST,
+                    MtpConstants.FORMAT_WPL_PLAYLIST,
+                    MtpConstants.FORMAT_M3U_PLAYLIST,
+                    MtpConstants.FORMAT_PLS_PLAYLIST,
+                    MtpConstants.FORMAT_XML_DOCUMENT,
+                    MtpConstants.FORMAT_FLAC,
+                    MtpConstants.FORMAT_DNG,
+                    MtpConstants.FORMAT_HEIF
+                };
+        FILE_PROPERTIES =
+                new int[] {
+                    MtpConstants.PROPERTY_STORAGE_ID,
+                    MtpConstants.PROPERTY_OBJECT_FORMAT,
+                    MtpConstants.PROPERTY_PROTECTION_STATUS,
+                    MtpConstants.PROPERTY_OBJECT_SIZE,
+                    MtpConstants.PROPERTY_OBJECT_FILE_NAME,
+                    MtpConstants.PROPERTY_DATE_MODIFIED,
+                    MtpConstants.PROPERTY_PERSISTENT_UID,
+                    MtpConstants.PROPERTY_PARENT_OBJECT,
+                    MtpConstants.PROPERTY_NAME,
+                    MtpConstants.PROPERTY_DISPLAY_NAME,
+                    MtpConstants.PROPERTY_DATE_ADDED,
+                    MtpConstants.PROPERTY_HIDDEN
+                };
+        AUDIO_PROPERTIES =
+                new int[] {
+                    MtpConstants.PROPERTY_ARTIST,
+                    MtpConstants.PROPERTY_ALBUM_NAME,
+                    MtpConstants.PROPERTY_ALBUM_ARTIST,
+                    MtpConstants.PROPERTY_TRACK,
+                    MtpConstants.PROPERTY_ORIGINAL_RELEASE_DATE,
+                    MtpConstants.PROPERTY_DURATION,
+                    MtpConstants.PROPERTY_GENRE,
+                    MtpConstants.PROPERTY_COMPOSER,
+                    MtpConstants.PROPERTY_AUDIO_WAVE_CODEC,
+                    MtpConstants.PROPERTY_BITRATE_TYPE,
+                    MtpConstants.PROPERTY_AUDIO_BITRATE,
+                    MtpConstants.PROPERTY_NUMBER_OF_CHANNELS,
+                    MtpConstants.PROPERTY_SAMPLE_RATE
+                };
+        VIDEO_PROPERTIES =
+                new int[] {
+                    MtpConstants.PROPERTY_ARTIST,
+                    MtpConstants.PROPERTY_ALBUM_NAME,
+                    MtpConstants.PROPERTY_DURATION,
+                    MtpConstants.PROPERTY_DESCRIPTION
+                };
+        IMAGE_PROPERTIES = new int[] {MtpConstants.PROPERTY_DESCRIPTION};
+        DEVICE_PROPERTIES =
+                new int[] {
+                    MtpConstants.DEVICE_PROPERTY_SYNCHRONIZATION_PARTNER,
+                    MtpConstants.DEVICE_PROPERTY_DEVICE_FRIENDLY_NAME,
+                    MtpConstants.DEVICE_PROPERTY_IMAGE_SIZE,
+                    MtpConstants.DEVICE_PROPERTY_BATTERY_LEVEL,
+                    MtpConstants.DEVICE_PROPERTY_PERCEIVED_DEVICE_TYPE,
+                    MtpConstants.DEVICE_PROPERTY_SESSION_INITIATOR_VERSION_INFO
+                };
         jsonData = null;
     }
 
@@ -153,7 +230,9 @@ public class MtpDatabase implements AutoCloseable {
             case MtpConstants.FORMAT_WMA /* 47361 */:
             case MtpConstants.FORMAT_OGG /* 47362 */:
             case MtpConstants.FORMAT_AAC /* 47363 */:
-                return IntStream.concat(Arrays.stream(FILE_PROPERTIES), Arrays.stream(AUDIO_PROPERTIES)).toArray();
+                return IntStream.concat(
+                                Arrays.stream(FILE_PROPERTIES), Arrays.stream(AUDIO_PROPERTIES))
+                        .toArray();
             case 12298:
             case 12299:
             case 12300:
@@ -161,7 +240,9 @@ public class MtpDatabase implements AutoCloseable {
             case MtpConstants.FORMAT_WMV /* 47489 */:
             case MtpConstants.FORMAT_MP4_CONTAINER /* 47490 */:
             case MtpConstants.FORMAT_3GP_CONTAINER /* 47492 */:
-                return IntStream.concat(Arrays.stream(FILE_PROPERTIES), Arrays.stream(VIDEO_PROPERTIES)).toArray();
+                return IntStream.concat(
+                                Arrays.stream(FILE_PROPERTIES), Arrays.stream(VIDEO_PROPERTIES))
+                        .toArray();
             case 14336:
             case MtpConstants.FORMAT_EXIF_JPEG /* 14337 */:
             case MtpConstants.FORMAT_BMP /* 14340 */:
@@ -172,7 +253,9 @@ public class MtpDatabase implements AutoCloseable {
             case MtpConstants.FORMAT_JPX /* 14352 */:
             case MtpConstants.FORMAT_DNG /* 14353 */:
             case MtpConstants.FORMAT_HEIF /* 14354 */:
-                return IntStream.concat(Arrays.stream(FILE_PROPERTIES), Arrays.stream(IMAGE_PROPERTIES)).toArray();
+                return IntStream.concat(
+                                Arrays.stream(FILE_PROPERTIES), Arrays.stream(IMAGE_PROPERTIES))
+                        .toArray();
             default:
                 return FILE_PROPERTIES;
         }
@@ -229,31 +312,36 @@ public class MtpDatabase implements AutoCloseable {
         native_setup();
         this.mContext = (Context) Objects.requireNonNull(context);
         this.mMediaProvider = context.getContentResolver().acquireContentProviderClient("media");
-        this.mManager = new MtpStorageManager(new MtpStorageManager.MtpNotifier() { // from class: android.mtp.MtpDatabase.2
-            @Override // android.mtp.MtpStorageManager.MtpNotifier
-            public void sendObjectAdded(int id) {
-                if (MtpDatabase.this.mServer != null) {
-                    MtpDatabase.this.mServer.sendObjectAdded(id);
-                }
-            }
+        this.mManager =
+                new MtpStorageManager(
+                        new MtpStorageManager
+                                .MtpNotifier() { // from class: android.mtp.MtpDatabase.2
+                            @Override // android.mtp.MtpStorageManager.MtpNotifier
+                            public void sendObjectAdded(int id) {
+                                if (MtpDatabase.this.mServer != null) {
+                                    MtpDatabase.this.mServer.sendObjectAdded(id);
+                                }
+                            }
 
-            @Override // android.mtp.MtpStorageManager.MtpNotifier
-            public void sendObjectRemoved(int id) {
-                if (MtpDatabase.this.mServer != null) {
-                    MtpDatabase.this.mServer.sendObjectRemoved(id);
-                }
-            }
+                            @Override // android.mtp.MtpStorageManager.MtpNotifier
+                            public void sendObjectRemoved(int id) {
+                                if (MtpDatabase.this.mServer != null) {
+                                    MtpDatabase.this.mServer.sendObjectRemoved(id);
+                                }
+                            }
 
-            @Override // android.mtp.MtpStorageManager.MtpNotifier
-            public void sendObjectInfoChanged(int id) {
-                if (MtpDatabase.this.mServer != null) {
-                    MtpDatabase.this.mServer.sendObjectInfoChanged(id);
-                }
-            }
-        }, subDirectories == null ? null : Sets.newHashSet(subDirectories));
+                            @Override // android.mtp.MtpStorageManager.MtpNotifier
+                            public void sendObjectInfoChanged(int id) {
+                                if (MtpDatabase.this.mServer != null) {
+                                    MtpDatabase.this.mServer.sendObjectInfoChanged(id);
+                                }
+                            }
+                        },
+                        subDirectories == null ? null : Sets.newHashSet(subDirectories));
         initDeviceProperties(context);
         this.mDeviceType = SystemProperties.getInt("sys.usb.mtp.device_type", 3);
-        if (BnRConstants.DEVICETYPE_TABLET.equals(SystemProperties.get("ro.build.characteristics"))) {
+        if (BnRConstants.DEVICETYPE_TABLET.equals(
+                SystemProperties.get("ro.build.characteristics"))) {
             this.mDeviceType = 5;
         }
         this.mCloseGuard.open("close");
@@ -266,7 +354,8 @@ public class MtpDatabase implements AutoCloseable {
         } catch (IllegalArgumentException e) {
         }
         if (server != null) {
-            this.mContext.registerReceiver(this.mBatteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+            this.mContext.registerReceiver(
+                    this.mBatteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         }
     }
 
@@ -303,14 +392,18 @@ public class MtpDatabase implements AutoCloseable {
     }
 
     public void addStorage(StorageVolume storage) {
-        MtpStorage mtpStorage = this.mManager.addMtpStorage(storage, new Supplier() { // from class: android.mtp.MtpDatabase$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                Boolean lambda$addStorage$0;
-                lambda$addStorage$0 = MtpDatabase.this.lambda$addStorage$0();
-                return lambda$addStorage$0;
-            }
-        });
+        MtpStorage mtpStorage =
+                this.mManager.addMtpStorage(
+                        storage,
+                        new Supplier() { // from class:
+                                         // android.mtp.MtpDatabase$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                Boolean lambda$addStorage$0;
+                                lambda$addStorage$0 = MtpDatabase.this.lambda$addStorage$0();
+                                return lambda$addStorage$0;
+                            }
+                        });
         if (!this.mStorageMap.containsKey(storage.getPath())) {
             this.mStorageMap.put(storage.getPath(), mtpStorage);
             if (this.mServer != null) {
@@ -332,13 +425,13 @@ public class MtpDatabase implements AutoCloseable {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:20:0x007b, code lost:
-    
-        r18.deleteDatabase("device-properties");
-     */
+
+       r18.deleteDatabase("device-properties");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0078, code lost:
-    
-        if (r7 != null) goto L17;
-     */
+
+       if (r7 != null) goto L17;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -428,12 +521,17 @@ public class MtpDatabase implements AutoCloseable {
             r1.mHostIsWindows = r5
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.mtp.MtpDatabase.initDeviceProperties(android.content.Context):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.mtp.MtpDatabase.initDeviceProperties(android.content.Context):void");
     }
 
     public int beginSendObject(String path, int format, int parent, int storageId) {
         MtpStorageManager mtpStorageManager = this.mManager;
-        MtpStorageManager.MtpObject parentObj = parent == 0 ? mtpStorageManager.getStorageRoot(storageId) : mtpStorageManager.getObject(parent);
+        MtpStorageManager.MtpObject parentObj =
+                parent == 0
+                        ? mtpStorageManager.getStorageRoot(storageId)
+                        : mtpStorageManager.getObject(parent);
         if (parentObj == null) {
             return -1;
         }
@@ -455,7 +553,8 @@ public class MtpDatabase implements AutoCloseable {
     }
 
     private int[] getObjectList(int storageID, int format, int parent) {
-        List<MtpStorageManager.MtpObject> objs = this.mManager.getObjects(parent, format, storageID, true);
+        List<MtpStorageManager.MtpObject> objs =
+                this.mManager.getObjects(parent, format, storageID, true);
         if (objs == null) {
             return null;
         }
@@ -467,14 +566,16 @@ public class MtpDatabase implements AutoCloseable {
     }
 
     public int getNumObjects(int storageID, int format, int parent) {
-        List<MtpStorageManager.MtpObject> objs = this.mManager.getObjects(parent, format, storageID, false);
+        List<MtpStorageManager.MtpObject> objs =
+                this.mManager.getObjects(parent, format, storageID, false);
         if (objs == null) {
             return -1;
         }
         return objs.size();
     }
 
-    private MtpPropertyList getObjectPropertyList(int handle, int format, int property, int groupCode, int depth) {
+    private MtpPropertyList getObjectPropertyList(
+            int handle, int format, int property, int groupCode, int depth) {
         MtpPropertyGroup propertyGroup;
         if (property == 0) {
             if (groupCode == 0) {
@@ -540,7 +641,9 @@ public class MtpDatabase implements AutoCloseable {
                     this.mPropertyGroupsByProperty.put(property, propertyGroup);
                 }
             }
-            int err = propertyGroup.getPropertyList(this.mMediaProvider, obj2.getVolumeName(), obj2, ret);
+            int err =
+                    propertyGroup.getPropertyList(
+                            this.mMediaProvider, obj2.getVolumeName(), obj2, ret);
             if (err != 8193) {
                 return new MtpPropertyList(err);
             }
@@ -577,7 +680,10 @@ public class MtpDatabase implements AutoCloseable {
 
     private int beginMoveObject(int handle, int newParent, int newStorage) {
         MtpStorageManager.MtpObject obj = this.mManager.getObject(handle);
-        MtpStorageManager.MtpObject parent = newParent == 0 ? this.mManager.getStorageRoot(newStorage) : this.mManager.getObject(newParent);
+        MtpStorageManager.MtpObject parent =
+                newParent == 0
+                        ? this.mManager.getStorageRoot(newStorage)
+                        : this.mManager.getObject(newParent);
         if (obj == null || parent == null) {
             return 8201;
         }
@@ -585,12 +691,26 @@ public class MtpDatabase implements AutoCloseable {
         return allowed ? 8193 : 8194;
     }
 
-    private void endMoveObject(int oldParent, int newParent, int oldStorage, int newStorage, int objId, boolean success) {
-        MtpStorageManager.MtpObject oldParentObj = oldParent == 0 ? this.mManager.getStorageRoot(oldStorage) : this.mManager.getObject(oldParent);
-        MtpStorageManager.MtpObject newParentObj = newParent == 0 ? this.mManager.getStorageRoot(newStorage) : this.mManager.getObject(newParent);
+    private void endMoveObject(
+            int oldParent,
+            int newParent,
+            int oldStorage,
+            int newStorage,
+            int objId,
+            boolean success) {
+        MtpStorageManager.MtpObject oldParentObj =
+                oldParent == 0
+                        ? this.mManager.getStorageRoot(oldStorage)
+                        : this.mManager.getObject(oldParent);
+        MtpStorageManager.MtpObject newParentObj =
+                newParent == 0
+                        ? this.mManager.getStorageRoot(newStorage)
+                        : this.mManager.getObject(newParent);
         MtpStorageManager.MtpObject obj = this.mManager.getObject(objId);
         String name = obj.getName();
-        if (newParentObj == null || oldParentObj == null || !this.mManager.endMoveObject(oldParentObj, newParentObj, name, success)) {
+        if (newParentObj == null
+                || oldParentObj == null
+                || !this.mManager.endMoveObject(oldParentObj, newParentObj, name, success)) {
             Log.e(TAG, "Failed to end move object");
             return;
         }
@@ -606,7 +726,10 @@ public class MtpDatabase implements AutoCloseable {
 
     private int beginCopyObject(int handle, int newParent, int newStorage) {
         MtpStorageManager.MtpObject obj = this.mManager.getObject(handle);
-        MtpStorageManager.MtpObject parent = newParent == 0 ? this.mManager.getStorageRoot(newStorage) : this.mManager.getObject(newParent);
+        MtpStorageManager.MtpObject parent =
+                newParent == 0
+                        ? this.mManager.getStorageRoot(newStorage)
+                        : this.mManager.getObject(newParent);
         if (obj == null || parent == null) {
             return 8201;
         }
@@ -637,7 +760,11 @@ public class MtpDatabase implements AutoCloseable {
         @Override // java.lang.Runnable
         public void run() {
             Log.v(MtpDatabase.TAG, "start scan files");
-            if (!this.file.isDirectory() && this.file.getName().toLowerCase(Locale.ROOT).endsWith(MtpDatabase.NO_MEDIA)) {
+            if (!this.file.isDirectory()
+                    && this.file
+                            .getName()
+                            .toLowerCase(Locale.ROOT)
+                            .endsWith(MtpDatabase.NO_MEDIA)) {
                 File parentFile = this.file.getParentFile();
                 if (parentFile != null) {
                     MediaStore.scanFile(this.resolver, parentFile);
@@ -671,7 +798,9 @@ public class MtpDatabase implements AutoCloseable {
                 outIntValue[1] = this.mBatteryScale;
                 break;
             case MtpConstants.DEVICE_PROPERTY_IMAGE_SIZE /* 20483 */:
-                Display display = ((WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+                Display display =
+                        ((WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE))
+                                .getDefaultDisplay();
                 int width = display.getMaximumSizeDimension();
                 int height = display.getMaximumSizeDimension();
                 String imageSize = Integer.toString(width) + "x" + Integer.toString(height);
@@ -681,7 +810,9 @@ public class MtpDatabase implements AutoCloseable {
             case MtpConstants.DEVICE_PROPERTY_SYNCHRONIZATION_PARTNER /* 54273 */:
                 break;
             case MtpConstants.DEVICE_PROPERTY_DEVICE_FRIENDLY_NAME /* 54274 */:
-                String value = Settings.Global.getString(this.mContext.getContentResolver(), Settings.Global.DEVICE_NAME);
+                String value =
+                        Settings.Global.getString(
+                                this.mContext.getContentResolver(), Settings.Global.DEVICE_NAME);
                 int length = value.length();
                 if (length > 255) {
                     length = 255;
@@ -711,7 +842,10 @@ public class MtpDatabase implements AutoCloseable {
                 return 8193;
             case MtpConstants.DEVICE_PROPERTY_DEVICE_FRIENDLY_NAME /* 54274 */:
                 try {
-                    Settings.Global.putString(this.mContext.getContentResolver(), Settings.Global.DEVICE_NAME, stringValue);
+                    Settings.Global.putString(
+                            this.mContext.getContentResolver(),
+                            Settings.Global.DEVICE_NAME,
+                            stringValue);
                     SharedPreferences.Editor e = this.mDeviceProperties.edit();
                     e.putString(Integer.toString(property), stringValue);
                     if (e.commit()) {
@@ -724,7 +858,9 @@ public class MtpDatabase implements AutoCloseable {
                 }
             case MtpConstants.DEVICE_PROPERTY_SESSION_INITIATOR_VERSION_INFO /* 54278 */:
                 this.mHostType = stringValue;
-                Log.d(TAG, "setDeviceProperty." + Integer.toHexString(property) + "=" + stringValue);
+                Log.d(
+                        TAG,
+                        "setDeviceProperty." + Integer.toHexString(property) + "=" + stringValue);
                 if (stringValue.startsWith("Android/")) {
                     this.mSkipThumbForHost = true;
                 } else if (stringValue.startsWith("Windows/")) {
@@ -736,7 +872,8 @@ public class MtpDatabase implements AutoCloseable {
         }
     }
 
-    private boolean getObjectInfo(int handle, int[] outStorageFormatParent, char[] outName, long[] outCreatedModified) {
+    private boolean getObjectInfo(
+            int handle, int[] outStorageFormatParent, char[] outName, long[] outCreatedModified) {
         MtpStorageManager.MtpObject obj = this.mManager.getObject(handle);
         if (obj == null) {
             return false;
@@ -776,11 +913,22 @@ public class MtpDatabase implements AutoCloseable {
             Log.i(TAG, "openFile with transcode support: " + path);
             Bundle bundle = new Bundle();
             if (transcode) {
-                bundle.putParcelable("android.provider.extra.MEDIA_CAPABILITIES", new ApplicationMediaCapabilities.Builder().addUnsupportedVideoMimeType("video/hevc").build());
+                bundle.putParcelable(
+                        "android.provider.extra.MEDIA_CAPABILITIES",
+                        new ApplicationMediaCapabilities.Builder()
+                                .addUnsupportedVideoMimeType("video/hevc")
+                                .build());
             } else {
-                bundle.putParcelable("android.provider.extra.MEDIA_CAPABILITIES", new ApplicationMediaCapabilities.Builder().addSupportedVideoMimeType("video/hevc").build());
+                bundle.putParcelable(
+                        "android.provider.extra.MEDIA_CAPABILITIES",
+                        new ApplicationMediaCapabilities.Builder()
+                                .addSupportedVideoMimeType("video/hevc")
+                                .build());
             }
-            return this.mMediaProvider.openTypedAssetFileDescriptor(uri, "*/*", bundle).getParcelFileDescriptor().detachFd();
+            return this.mMediaProvider
+                    .openTypedAssetFileDescriptor(uri, "*/*", bundle)
+                    .getParcelFileDescriptor()
+                    .detachFd();
         } catch (RemoteException | FileNotFoundException e) {
             Log.w(TAG, "Failed to openFile with transcode support: " + path, e);
             return -1;
@@ -798,12 +946,17 @@ public class MtpDatabase implements AutoCloseable {
     private byte[] getThumbnailProcess(String path, Bitmap bitmap) {
         try {
             if (bitmap == null) {
-                Log.d(TAG, "getThumbnailProcess: Fail to generate thumbnail. Probably unsupported or corrupted image");
+                Log.d(
+                        TAG,
+                        "getThumbnailProcess: Fail to generate thumbnail. Probably unsupported or"
+                            + " corrupted image");
                 return null;
             }
             int streamLength = MAX_THUMB_SIZE;
             ByteArrayOutputStream byteStream = null;
-            for (int compressSize = 100; streamLength >= MAX_THUMB_SIZE && compressSize > 0; compressSize -= 10) {
+            for (int compressSize = 100;
+                    streamLength >= MAX_THUMB_SIZE && compressSize > 0;
+                    compressSize -= 10) {
                 byteStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, compressSize, byteStream);
                 streamLength = byteStream.size();
@@ -864,25 +1017,25 @@ public class MtpDatabase implements AutoCloseable {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0098, code lost:
-    
-        if (r4 != null) goto L23;
-     */
+
+       if (r4 != null) goto L23;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x009a, code lost:
-    
-        r4.close();
-     */
+
+       r4.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x00bf, code lost:
-    
-        return getThumbnailProcess(r3, android.media.ThumbnailUtils.createImageThumbnail(new java.io.File(r3), new android.util.Size(256, 256), r5));
-     */
+
+       return getThumbnailProcess(r3, android.media.ThumbnailUtils.createImageThumbnail(new java.io.File(r3), new android.util.Size(256, 256), r5));
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x00c1, code lost:
-    
-        android.util.Log.e(android.mtp.MtpDatabase.TAG, "cannot create thumbnail.");
-     */
+
+       android.util.Log.e(android.mtp.MtpDatabase.TAG, "cannot create thumbnail.");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:33:0x00a9, code lost:
-    
-        if (r4 == null) goto L50;
-     */
+
+       if (r4 == null) goto L50;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -892,7 +1045,8 @@ public class MtpDatabase implements AutoCloseable {
             Method dump skipped, instructions count: 354
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.mtp.MtpDatabase.getThumbnailData(int):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.mtp.MtpDatabase.getThumbnailData(int):byte[]");
     }
 
     private int beginDeleteObject(int handle) {
@@ -923,7 +1077,14 @@ public class MtpDatabase implements AutoCloseable {
         Uri objectsUri = MediaStore.Files.getContentUri(obj.getVolumeName());
         if (isDir) {
             try {
-                this.mMediaProvider.delete(objectsUri, "_data LIKE ?1 AND lower(substr(_data,1,?2))=lower(?3)", new String[]{path + "/%", Integer.toString(path.toString().length() + 1), path.toString() + "/"});
+                this.mMediaProvider.delete(
+                        objectsUri,
+                        "_data LIKE ?1 AND lower(substr(_data,1,?2))=lower(?3)",
+                        new String[] {
+                            path + "/%",
+                            Integer.toString(path.toString().length() + 1),
+                            path.toString() + "/"
+                        });
             } catch (Exception e) {
                 Log.d(TAG, "Failed to delete " + path + " from MediaProvider");
                 return;
@@ -974,7 +1135,10 @@ public class MtpDatabase implements AutoCloseable {
                     fos.close();
                     String newPath = plaPath.substring(0, plaPath.lastIndexOf(46)) + ".m3u";
                     try {
-                        Files.copy(Paths.get(plaPath, new String[0]), Paths.get(newPath, new String[0]), StandardCopyOption.REPLACE_EXISTING);
+                        Files.copy(
+                                Paths.get(plaPath, new String[0]),
+                                Paths.get(newPath, new String[0]),
+                                StandardCopyOption.REPLACE_EXISTING);
                         updateMediaStore(this.mContext, new File(newPath));
                         return 8193;
                     } catch (IOException ex4) {
@@ -993,52 +1157,56 @@ public class MtpDatabase implements AutoCloseable {
         this.isStratCommand = false;
         this.serviceComponent[0] = new ComponentName(AGENT_PACKAGE_NAME, AGENT_SERVICE_NAME);
         this.serviceComponent[1] = new ComponentName(SSM_PACKAGE_NAME, SSM_SERVICE_NAME);
-        this.conn[0] = new ServiceConnection() { // from class: android.mtp.MtpDatabase.3
-            @Override // android.content.ServiceConnection
-            public void onServiceDisconnected(ComponentName name) {
-                Log.d(MtpDatabase.TAG, "onServiceDisconnected()");
-                MtpDatabase.this.mService[0] = null;
-            }
+        this.conn[0] =
+                new ServiceConnection() { // from class: android.mtp.MtpDatabase.3
+                    @Override // android.content.ServiceConnection
+                    public void onServiceDisconnected(ComponentName name) {
+                        Log.d(MtpDatabase.TAG, "onServiceDisconnected()");
+                        MtpDatabase.this.mService[0] = null;
+                    }
 
-            @Override // android.content.ServiceConnection
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                MtpDatabase.this.mService[0] = new Messenger(service);
-                Log.d(MtpDatabase.TAG, "onServiceConnected()");
-                try {
-                    Message msg = Message.obtain((Handler) null, 1);
-                    msg.replyTo = MtpDatabase.this.mMessenger;
-                    MtpDatabase.this.mService[0].send(msg);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.d(MtpDatabase.TAG, "say hello exception");
-                }
-            }
-        };
-        this.conn[1] = new ServiceConnection() { // from class: android.mtp.MtpDatabase.4
-            @Override // android.content.ServiceConnection
-            public void onServiceDisconnected(ComponentName name) {
-                Log.d(MtpDatabase.TAG, "onServiceDisconnected()");
-                MtpDatabase.this.mService[1] = null;
-            }
+                    @Override // android.content.ServiceConnection
+                    public void onServiceConnected(ComponentName name, IBinder service) {
+                        MtpDatabase.this.mService[0] = new Messenger(service);
+                        Log.d(MtpDatabase.TAG, "onServiceConnected()");
+                        try {
+                            Message msg = Message.obtain((Handler) null, 1);
+                            msg.replyTo = MtpDatabase.this.mMessenger;
+                            MtpDatabase.this.mService[0].send(msg);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d(MtpDatabase.TAG, "say hello exception");
+                        }
+                    }
+                };
+        this.conn[1] =
+                new ServiceConnection() { // from class: android.mtp.MtpDatabase.4
+                    @Override // android.content.ServiceConnection
+                    public void onServiceDisconnected(ComponentName name) {
+                        Log.d(MtpDatabase.TAG, "onServiceDisconnected()");
+                        MtpDatabase.this.mService[1] = null;
+                    }
 
-            @Override // android.content.ServiceConnection
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                MtpDatabase.this.mService[1] = new Messenger(service);
-                Log.d(MtpDatabase.TAG, "onServiceConnected()");
-                try {
-                    Message msg = Message.obtain((Handler) null, 1);
-                    msg.replyTo = MtpDatabase.this.mMessenger;
-                    MtpDatabase.this.mService[1].send(msg);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.d(MtpDatabase.TAG, "say hello exception");
-                }
-            }
-        };
+                    @Override // android.content.ServiceConnection
+                    public void onServiceConnected(ComponentName name, IBinder service) {
+                        MtpDatabase.this.mService[1] = new Messenger(service);
+                        Log.d(MtpDatabase.TAG, "onServiceConnected()");
+                        try {
+                            Message msg = Message.obtain((Handler) null, 1);
+                            msg.replyTo = MtpDatabase.this.mMessenger;
+                            MtpDatabase.this.mService[1].send(msg);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d(MtpDatabase.TAG, "say hello exception");
+                        }
+                    }
+                };
     }
 
     public static final byte[] intToByteArray(int value) {
-        byte[] byteArray = {(byte) value, (byte) (value >> 8), (byte) (value >> 16), (byte) (value >> 24)};
+        byte[] byteArray = {
+            (byte) value, (byte) (value >> 8), (byte) (value >> 16), (byte) (value >> 24)
+        };
         return byteArray;
     }
 
@@ -1060,7 +1228,8 @@ public class MtpDatabase implements AutoCloseable {
                 try {
                     Intent i = new Intent();
                     i.setComponent(this.serviceComponent[this.currentServiceID]);
-                    boolean bSuccess = this.mContext.bindService(i, this.conn[this.currentServiceID], 1);
+                    boolean bSuccess =
+                            this.mContext.bindService(i, this.conn[this.currentServiceID], 1);
                     if (bSuccess) {
                         this.mIsBound[this.currentServiceID] = true;
                     }
@@ -1132,7 +1301,8 @@ public class MtpDatabase implements AutoCloseable {
                         byte[] tempData = jsonData.getBytes("UTF-8");
                         byte[] resultResponse15 = new byte[tempData.length + 8];
                         System.arraycopy(intToByteArray(1), 0, resultResponse15, 0, 4);
-                        System.arraycopy(intToByteArray(tempData.length), 0, resultResponse15, 4, 4);
+                        System.arraycopy(
+                                intToByteArray(tempData.length), 0, resultResponse15, 4, 4);
                         System.arraycopy(tempData, 0, resultResponse15, 8, tempData.length);
                         jsonData = null;
                         return resultResponse15;
@@ -1153,8 +1323,7 @@ public class MtpDatabase implements AutoCloseable {
     }
 
     static class IncomingHandler extends Handler {
-        IncomingHandler() {
-        }
+        IncomingHandler() {}
 
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
@@ -1174,7 +1343,9 @@ public class MtpDatabase implements AutoCloseable {
 
     private void setOpenSession(boolean value) {
         if (this.mContext != null) {
-            SharedPreferences pref = this.mContext.getSharedPreferences("com.samsung.android.mtp.SHARED_PREFERENCE", 0);
+            SharedPreferences pref =
+                    this.mContext.getSharedPreferences(
+                            "com.samsung.android.mtp.SHARED_PREFERENCE", 0);
             SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean("opensession", value);
             editor.apply();
@@ -1183,7 +1354,9 @@ public class MtpDatabase implements AutoCloseable {
 
     private int getLockStatus() {
         if (this.mContext != null) {
-            SharedPreferences pref = this.mContext.getSharedPreferences("com.samsung.android.mtp.SHARED_PREFERENCE", 0);
+            SharedPreferences pref =
+                    this.mContext.getSharedPreferences(
+                            "com.samsung.android.mtp.SHARED_PREFERENCE", 0);
             return pref.getInt("deviceLockStatus", 1);
         }
         return -1;
@@ -1191,11 +1364,15 @@ public class MtpDatabase implements AutoCloseable {
 
     private int getSayHelloError() {
         if (this.mContext != null) {
-            String emergency_mode = Settings.System.getString(this.mContext.getContentResolver(), Settings.System.SEM_EMERGENCY_MODE);
+            String emergency_mode =
+                    Settings.System.getString(
+                            this.mContext.getContentResolver(), Settings.System.SEM_EMERGENCY_MODE);
             if ("1".equals(emergency_mode)) {
                 return 43024;
             }
-            SharedPreferences pref = this.mContext.getSharedPreferences("com.samsung.android.mtp.SHARED_PREFERENCE", 0);
+            SharedPreferences pref =
+                    this.mContext.getSharedPreferences(
+                            "com.samsung.android.mtp.SHARED_PREFERENCE", 0);
             if (pref.getBoolean("knox", false)) {
                 return 43025;
             }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
+
 import com.samsung.android.knox.seams.ISEAMS;
 import com.samsung.android.knox.seams.SEAMSPolicy;
 
@@ -19,13 +20,13 @@ public final class SEAMService extends ISEAMS.Stub {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrHandler extends Handler {
         @Override // android.os.Handler
-        public final void handleMessage(Message message) {
-        }
+        public final void handleMessage(Message message) {}
     }
 
     public SEAMService(Context context) {
         this.mContext = context;
-        new BrHandler(KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("SEAMService").getLooper());
+        new BrHandler(
+                KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("SEAMService").getLooper());
         new Thread() { // from class: com.android.server.SEAMService.1
 
             /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -37,7 +38,9 @@ public final class SEAMService extends ISEAMS.Stub {
                     boolean authorizeLoadProcedure = ServiceKeeper.authorizeLoadProcedure();
                     if (SEAMSPolicy.DEBUG) {
                         SEAMService.mSKLog.getClass();
-                        SKLogger.logAll("SEAMService", "Service Keeper Initialized = " + authorizeLoadProcedure);
+                        SKLogger.logAll(
+                                "SEAMService",
+                                "Service Keeper Initialized = " + authorizeLoadProcedure);
                     }
                 }
             }

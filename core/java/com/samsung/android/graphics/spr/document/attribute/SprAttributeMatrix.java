@@ -1,8 +1,10 @@
 package com.samsung.android.graphics.spr.document.attribute;
 
 import android.graphics.Matrix;
+
 import com.samsung.android.graphics.spr.document.SprInputStream;
 import com.samsung.android.graphics.spr.document.attribute.impl.SprMatrix;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 

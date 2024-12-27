@@ -74,7 +74,8 @@ public final class Half extends Number implements Comparable<Half> {
     }
 
     public boolean equals(Object o) {
-        return (o instanceof Half) && halfToIntBits(((Half) o).mValue) == halfToIntBits(this.mValue);
+        return (o instanceof Half)
+                && halfToIntBits(((Half) o).mValue) == halfToIntBits(this.mValue);
     }
 
     public int hashCode() {

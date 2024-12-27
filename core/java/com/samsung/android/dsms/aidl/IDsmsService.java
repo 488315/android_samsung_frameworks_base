@@ -14,8 +14,8 @@ public interface IDsmsService extends IInterface {
 
     public static class Default implements IDsmsService {
         @Override // com.samsung.android.dsms.aidl.IDsmsService
-        public void sendMessage(String featureCode, String detail, long value) throws RemoteException {
-        }
+        public void sendMessage(String featureCode, String detail, long value)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IDsmsService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDsmsService {
+    public abstract static class Stub extends Binder implements IDsmsService {
         static final int TRANSACTION_sendMessage = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IDsmsService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDsmsService.DESCRIPTOR);
             }
@@ -99,7 +100,8 @@ public interface IDsmsService extends IInterface {
             }
 
             @Override // com.samsung.android.dsms.aidl.IDsmsService
-            public void sendMessage(String featureCode, String detail, long value) throws RemoteException {
+            public void sendMessage(String featureCode, String detail, long value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDsmsService.DESCRIPTOR);

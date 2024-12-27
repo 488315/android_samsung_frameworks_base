@@ -4,13 +4,19 @@ import com.android.internal.org.bouncycastle.math.ec.ECFieldElement;
 import com.android.internal.org.bouncycastle.math.raw.Nat224;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
 public class SecP224K1FieldElement extends ECFieldElement.AbstractFp {
     protected int[] x;
-    public static final BigInteger Q = new BigInteger(1, Hex.decodeStrict("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFE56D"));
-    private static final int[] PRECOMP_POW2 = {868209154, -587542221, 579297866, -1014948952, -1470801668, 514782679, -1897982644};
+    public static final BigInteger Q =
+            new BigInteger(
+                    1,
+                    Hex.decodeStrict("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFE56D"));
+    private static final int[] PRECOMP_POW2 = {
+        868209154, -587542221, 579297866, -1014948952, -1470801668, 514782679, -1897982644
+    };
 
     public SecP224K1FieldElement(BigInteger x) {
         if (x == null || x.signum() < 0 || x.compareTo(Q) >= 0) {

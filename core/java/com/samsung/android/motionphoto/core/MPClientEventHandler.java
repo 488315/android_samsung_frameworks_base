@@ -34,7 +34,13 @@ public class MPClientEventHandler extends Handler {
 
     @Override // android.os.Handler
     public void handleMessage(Message msg) {
-        Log.d(TAG, String.format("handleMessage: what=%d, arg1=%d, arg2=%d", Integer.valueOf(msg.what), Integer.valueOf(msg.arg1), Integer.valueOf(msg.arg2)));
+        Log.d(
+                TAG,
+                String.format(
+                        "handleMessage: what=%d, arg1=%d, arg2=%d",
+                        Integer.valueOf(msg.what),
+                        Integer.valueOf(msg.arg1),
+                        Integer.valueOf(msg.arg2)));
         Log.d(TAG, "infolistener: " + this.mOnInfoListener);
         Log.d(TAG, "errorlistener: " + this.mOnErrorListener);
         switch (msg.what) {

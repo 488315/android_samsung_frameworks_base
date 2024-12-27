@@ -3,6 +3,7 @@ package com.samsung.android.motionphoto.core;
 import android.hardware.HardwareBuffer;
 import android.media.tv.TvContract;
 import android.util.Log;
+
 import java.nio.ByteBuffer;
 import java.util.concurrent.locks.ReentrantLock;
 

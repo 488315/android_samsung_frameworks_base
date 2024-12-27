@@ -19,20 +19,17 @@ public interface IPrintSpoolerClient extends IInterface {
 
     public static class Default implements IPrintSpoolerClient {
         @Override // android.print.IPrintSpoolerClient
-        public void onPrintJobQueued(PrintJobInfo printJob) throws RemoteException {
-        }
+        public void onPrintJobQueued(PrintJobInfo printJob) throws RemoteException {}
 
         @Override // android.print.IPrintSpoolerClient
-        public void onAllPrintJobsForServiceHandled(ComponentName printService) throws RemoteException {
-        }
+        public void onAllPrintJobsForServiceHandled(ComponentName printService)
+                throws RemoteException {}
 
         @Override // android.print.IPrintSpoolerClient
-        public void onAllPrintJobsHandled() throws RemoteException {
-        }
+        public void onAllPrintJobsHandled() throws RemoteException {}
 
         @Override // android.print.IPrintSpoolerClient
-        public void onPrintJobStateChanged(PrintJobInfo printJob) throws RemoteException {
-        }
+        public void onPrintJobStateChanged(PrintJobInfo printJob) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -40,7 +37,7 @@ public interface IPrintSpoolerClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPrintSpoolerClient {
+    public abstract static class Stub extends Binder implements IPrintSpoolerClient {
         public static final String DESCRIPTOR = "android.print.IPrintSpoolerClient";
         static final int TRANSACTION_onAllPrintJobsForServiceHandled = 2;
         static final int TRANSACTION_onAllPrintJobsHandled = 3;
@@ -88,7 +85,8 @@ public interface IPrintSpoolerClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -103,7 +101,8 @@ public interface IPrintSpoolerClient extends IInterface {
                     onPrintJobQueued(_arg0);
                     return true;
                 case 2:
-                    ComponentName _arg02 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg02 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     onAllPrintJobsForServiceHandled(_arg02);
                     return true;
@@ -149,7 +148,8 @@ public interface IPrintSpoolerClient extends IInterface {
             }
 
             @Override // android.print.IPrintSpoolerClient
-            public void onAllPrintJobsForServiceHandled(ComponentName printService) throws RemoteException {
+            public void onAllPrintJobsForServiceHandled(ComponentName printService)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -10,12 +10,15 @@ import android.view.DisplayCutout;
 import android.view.DisplayEventReceiver;
 import android.view.DisplayInfo;
 import android.view.SurfaceControl;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.display.mode.DisplayModeDirector;
 import com.android.server.display.mode.SyntheticModeManager;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -99,35 +102,104 @@ public final class LogicalDisplay {
 
     public static Rect getMaskingInsets(DisplayDeviceInfo displayDeviceInfo) {
         DisplayCutout displayCutout;
-        return ((displayDeviceInfo.flags & 2048) == 0 || (displayCutout = displayDeviceInfo.displayCutout) == null) ? new Rect() : displayCutout.getSafeInsets();
+        return ((displayDeviceInfo.flags & 2048) == 0
+                        || (displayCutout = displayDeviceInfo.displayCutout) == null)
+                ? new Rect()
+                : displayCutout.getSafeInsets();
     }
 
     public final void dumpLocked(PrintWriter printWriter) {
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mDisplayId="), this.mDisplayId, printWriter, "mIsEnabled="), this.mIsEnabled, printWriter, "mIsInTransition="), this.mIsInTransition, printWriter, "mLayerStack="), this.mLayerStack, printWriter, "mPosition="), this.mDevicePosition, printWriter, "mHasContent="), this.mHasContent, printWriter, "mDesiredDisplayModeSpecs={");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                        .m(
+                                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                        .m(
+                                                                                new StringBuilder(
+                                                                                        "mDisplayId="),
+                                                                                this.mDisplayId,
+                                                                                printWriter,
+                                                                                "mIsEnabled="),
+                                                                this.mIsEnabled,
+                                                                printWriter,
+                                                                "mIsInTransition="),
+                                                this.mIsInTransition,
+                                                printWriter,
+                                                "mLayerStack="),
+                                        this.mLayerStack,
+                                        printWriter,
+                                        "mPosition="),
+                                this.mDevicePosition,
+                                printWriter,
+                                "mHasContent="),
+                        this.mHasContent,
+                        printWriter,
+                        "mDesiredDisplayModeSpecs={");
         m.append(this.mDesiredDisplayModeSpecs);
         m.append("}");
         printWriter.println(m.toString());
-        StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mRequestedColorMode="), this.mRequestedColorMode, printWriter, "mDisplayOffset=(");
+        StringBuilder m2 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("mRequestedColorMode="),
+                        this.mRequestedColorMode,
+                        printWriter,
+                        "mDisplayOffset=(");
         m2.append(this.mDisplayOffsetX);
         m2.append(", ");
         m2.append(this.mDisplayOffsetY);
         m2.append(")");
         printWriter.println(m2.toString());
-        StringBuilder m3 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mDisplayScalingDisabled="), this.mDisplayScalingDisabled, printWriter, "mPrimaryDisplayDevice=");
+        StringBuilder m3 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("mDisplayScalingDisabled="),
+                        this.mDisplayScalingDisabled,
+                        printWriter,
+                        "mPrimaryDisplayDevice=");
         DisplayDevice displayDevice = this.mPrimaryDisplayDevice;
-        StringBuilder m4 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, displayDevice != null ? displayDevice.getDisplayDeviceInfoLocked().name : "null", "mBaseDisplayInfo=", m3);
+        StringBuilder m4 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        printWriter,
+                        displayDevice != null
+                                ? displayDevice.getDisplayDeviceInfoLocked().name
+                                : "null",
+                        "mBaseDisplayInfo=",
+                        m3);
         m4.append(this.mBaseDisplayInfo);
         printWriter.println(m4.toString());
         printWriter.println("mOverrideDisplayInfo=" + this.mOverrideDisplayInfo);
-        StringBuilder m5 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mRequestedMinimalPostProcessing="), this.mRequestedMinimalPostProcessing, printWriter, "mFrameRateOverrides=");
+        StringBuilder m5 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("mRequestedMinimalPostProcessing="),
+                        this.mRequestedMinimalPostProcessing,
+                        printWriter,
+                        "mFrameRateOverrides=");
         m5.append(Arrays.toString(this.mFrameRateOverrides));
         printWriter.println(m5.toString());
         printWriter.println("mPendingFrameRateOverrideUids=" + this.mPendingFrameRateOverrideUids);
-        StringBuilder m6 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, this.mThermalBrightnessThrottlingDataId, "mLeadDisplayId=", BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, this.mDisplayGroupName, "mThermalBrightnessThrottlingDataId=", new StringBuilder("mDisplayGroupName="))), this.mLeadDisplayId, printWriter, "mLayoutLimitedRefreshRate=");
+        StringBuilder m6 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                printWriter,
+                                this.mThermalBrightnessThrottlingDataId,
+                                "mLeadDisplayId=",
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        printWriter,
+                                        this.mDisplayGroupName,
+                                        "mThermalBrightnessThrottlingDataId=",
+                                        new StringBuilder("mDisplayGroupName="))),
+                        this.mLeadDisplayId,
+                        printWriter,
+                        "mLayoutLimitedRefreshRate=");
         m6.append(this.mLayoutLimitedRefreshRate);
         printWriter.println(m6.toString());
         printWriter.println("mThermalRefreshRateThrottling=" + this.mThermalRefreshRateThrottling);
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mPowerThrottlingDataId="), this.mPowerThrottlingDataId, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("mPowerThrottlingDataId="),
+                this.mPowerThrottlingDataId,
+                printWriter);
     }
 
     public final DisplayInfo getDisplayInfoLocked() {
@@ -185,7 +257,9 @@ public final class LogicalDisplay {
         return stringWriter.toString();
     }
 
-    public final void updateLocked(DisplayDeviceRepository displayDeviceRepository, SyntheticModeManager syntheticModeManager) {
+    public final void updateLocked(
+            DisplayDeviceRepository displayDeviceRepository,
+            SyntheticModeManager syntheticModeManager) {
         DisplayDevice displayDevice = this.mPrimaryDisplayDevice;
         if (displayDevice == null) {
             return;
@@ -194,16 +268,21 @@ public final class LogicalDisplay {
             setPrimaryDisplayDeviceLocked(null);
             return;
         }
-        DisplayDeviceInfo displayDeviceInfoLocked = this.mPrimaryDisplayDevice.getDisplayDeviceInfoLocked();
-        DisplayDeviceConfig displayDeviceConfig = this.mPrimaryDisplayDevice.getDisplayDeviceConfig();
-        if (!Objects.equals(this.mPrimaryDisplayDeviceInfo, displayDeviceInfoLocked) || this.mDirty) {
+        DisplayDeviceInfo displayDeviceInfoLocked =
+                this.mPrimaryDisplayDevice.getDisplayDeviceInfoLocked();
+        DisplayDeviceConfig displayDeviceConfig =
+                this.mPrimaryDisplayDevice.getDisplayDeviceConfig();
+        if (!Objects.equals(this.mPrimaryDisplayDeviceInfo, displayDeviceInfoLocked)
+                || this.mDirty) {
             boolean z = CoreRune.MD_DEX_WIRELESS;
             int i = this.mDisplayId;
             if (z && i == 2) {
                 Iterator it = ((ArrayList) displayDeviceRepository.mDisplayDevices).iterator();
                 while (true) {
                     if (it.hasNext()) {
-                        if ((((DisplayDevice) it.next()).getDisplayDeviceInfoLocked().flags & 67108864) != 0) {
+                        if ((((DisplayDevice) it.next()).getDisplayDeviceInfoLocked().flags
+                                        & 67108864)
+                                != 0) {
                             displayDeviceInfoLocked.flags &= -536870913;
                             break;
                         }
@@ -257,7 +336,8 @@ public final class LogicalDisplay {
                 displayInfo.flags |= 512;
             }
             if ((i2 & 2) != 0) {
-                displayInfo.flags |= EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION;
+                displayInfo.flags |=
+                        EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION;
             }
             if ((65536 & i2) != 0) {
                 displayInfo.flags |= 1024;
@@ -304,7 +384,8 @@ public final class LogicalDisplay {
             DisplayInfo displayInfo3 = this.mBaseDisplayInfo;
             Display.Mode[] modeArr2 = displayInfo3.supportedModes;
             syntheticModeManager.getClass();
-            if ((displayDeviceConfig.mVrrSupportEnabled || CoreRune.FW_VRR_DISCRETE) && syntheticModeManager.mSynthetic60HzModesEnabled) {
+            if ((displayDeviceConfig.mVrrSupportEnabled || CoreRune.FW_VRR_DISCRETE)
+                    && syntheticModeManager.mSynthetic60HzModesEnabled) {
                 ArrayList arrayList = new ArrayList();
                 LinkedHashMap linkedHashMap = new LinkedHashMap();
                 int i5 = 0;
@@ -316,13 +397,24 @@ public final class LogicalDisplay {
                         i5 = mode.getModeId();
                     }
                     if (Math.abs((mode.getVsyncRate() / 60.0f) - Math.round(r15)) < 0.01f) {
-                        linkedHashMap.put(new Size(mode.getPhysicalWidth(), mode.getPhysicalHeight()), mode.getSupportedHdrTypes());
+                        linkedHashMap.put(
+                                new Size(mode.getPhysicalWidth(), mode.getPhysicalHeight()),
+                                mode.getSupportedHdrTypes());
                     }
                 }
                 for (Map.Entry entry : linkedHashMap.entrySet()) {
                     Size size = (Size) entry.getKey();
                     i5 += 2;
-                    arrayList.add(new Display.Mode(i5 + 1, size.getWidth(), size.getHeight(), 60.0f, 60.0f, true, new float[0], (int[]) entry.getValue()));
+                    arrayList.add(
+                            new Display.Mode(
+                                    i5 + 1,
+                                    size.getWidth(),
+                                    size.getHeight(),
+                                    60.0f,
+                                    60.0f,
+                                    true,
+                                    new float[0],
+                                    (int[]) entry.getValue()));
                 }
                 modeArr2 = (Display.Mode[]) arrayList.toArray(new Display.Mode[arrayList.size()]);
             }
@@ -334,12 +426,15 @@ public final class LogicalDisplay {
             DisplayInfo displayInfo5 = this.mBaseDisplayInfo;
             displayInfo5.hdrCapabilities = displayDeviceInfoLocked.hdrCapabilities;
             displayInfo5.userDisabledHdrTypes = this.mUserDisabledHdrTypes;
-            displayInfo5.minimalPostProcessingSupported = displayDeviceInfoLocked.allmSupported || displayDeviceInfoLocked.gameContentTypeSupported;
+            displayInfo5.minimalPostProcessingSupported =
+                    displayDeviceInfoLocked.allmSupported
+                            || displayDeviceInfoLocked.gameContentTypeSupported;
             displayInfo5.logicalDensityDpi = displayDeviceInfoLocked.densityDpi;
             displayInfo5.physicalXDpi = displayDeviceInfoLocked.xDpi;
             displayInfo5.physicalYDpi = displayDeviceInfoLocked.yDpi;
             displayInfo5.appVsyncOffsetNanos = displayDeviceInfoLocked.appVsyncOffsetNanos;
-            displayInfo5.presentationDeadlineNanos = displayDeviceInfoLocked.presentationDeadlineNanos;
+            displayInfo5.presentationDeadlineNanos =
+                    displayDeviceInfoLocked.presentationDeadlineNanos;
             displayInfo5.state = displayDeviceInfoLocked.state;
             displayInfo5.committedState = displayDeviceInfoLocked.committedState;
             displayInfo5.smallestNominalAppWidth = i3;
@@ -348,30 +443,49 @@ public final class LogicalDisplay {
             displayInfo5.largestNominalAppHeight = i4;
             displayInfo5.ownerUid = displayDeviceInfoLocked.ownerUid;
             displayInfo5.ownerPackageName = displayDeviceInfoLocked.ownerPackageName;
-            displayInfo5.displayCutout = (displayDeviceInfoLocked.flags & 2048) != 0 ? null : displayDeviceInfoLocked.displayCutout;
+            displayInfo5.displayCutout =
+                    (displayDeviceInfoLocked.flags & 2048) != 0
+                            ? null
+                            : displayDeviceInfoLocked.displayCutout;
             displayInfo5.displayId = i;
             displayInfo5.displayGroupId = this.mDisplayGroupId;
             this.mTempFrameRateOverride.clear();
-            DisplayEventReceiver.FrameRateOverride[] frameRateOverrideArr = this.mFrameRateOverrides;
+            DisplayEventReceiver.FrameRateOverride[] frameRateOverrideArr =
+                    this.mFrameRateOverrides;
             if (frameRateOverrideArr != null) {
-                for (DisplayEventReceiver.FrameRateOverride frameRateOverride : frameRateOverrideArr) {
-                    this.mTempFrameRateOverride.put(frameRateOverride.uid, Float.valueOf(frameRateOverride.frameRateHz));
+                for (DisplayEventReceiver.FrameRateOverride frameRateOverride :
+                        frameRateOverrideArr) {
+                    this.mTempFrameRateOverride.put(
+                            frameRateOverride.uid, Float.valueOf(frameRateOverride.frameRateHz));
                 }
             }
-            DisplayEventReceiver.FrameRateOverride[] frameRateOverrideArr2 = displayDeviceInfoLocked.frameRateOverrides;
+            DisplayEventReceiver.FrameRateOverride[] frameRateOverrideArr2 =
+                    displayDeviceInfoLocked.frameRateOverrides;
             this.mFrameRateOverrides = frameRateOverrideArr2;
             if (frameRateOverrideArr2 != null) {
-                for (DisplayEventReceiver.FrameRateOverride frameRateOverride2 : frameRateOverrideArr2) {
-                    float floatValue = ((Float) this.mTempFrameRateOverride.get(frameRateOverride2.uid, Float.valueOf(FullScreenMagnificationGestureHandler.MAX_SCALE))).floatValue();
-                    if (floatValue == FullScreenMagnificationGestureHandler.MAX_SCALE || frameRateOverride2.frameRateHz != floatValue) {
-                        this.mTempFrameRateOverride.put(frameRateOverride2.uid, Float.valueOf(frameRateOverride2.frameRateHz));
+                for (DisplayEventReceiver.FrameRateOverride frameRateOverride2 :
+                        frameRateOverrideArr2) {
+                    float floatValue =
+                            ((Float)
+                                            this.mTempFrameRateOverride.get(
+                                                    frameRateOverride2.uid,
+                                                    Float.valueOf(
+                                                            FullScreenMagnificationGestureHandler
+                                                                    .MAX_SCALE)))
+                                    .floatValue();
+                    if (floatValue == FullScreenMagnificationGestureHandler.MAX_SCALE
+                            || frameRateOverride2.frameRateHz != floatValue) {
+                        this.mTempFrameRateOverride.put(
+                                frameRateOverride2.uid,
+                                Float.valueOf(frameRateOverride2.frameRateHz));
                     } else {
                         this.mTempFrameRateOverride.delete(frameRateOverride2.uid);
                     }
                 }
             }
             for (int i6 = 0; i6 < this.mTempFrameRateOverride.size(); i6++) {
-                this.mPendingFrameRateOverrideUids.add(Integer.valueOf(this.mTempFrameRateOverride.keyAt(i6)));
+                this.mPendingFrameRateOverrideUids.add(
+                        Integer.valueOf(this.mTempFrameRateOverride.keyAt(i6)));
             }
             DisplayInfo displayInfo6 = this.mBaseDisplayInfo;
             displayInfo6.brightnessMinimum = FullScreenMagnificationGestureHandler.MAX_SCALE;
@@ -387,7 +501,8 @@ public final class LogicalDisplay {
             }
             displayInfo6.layoutLimitedRefreshRate = this.mLayoutLimitedRefreshRate;
             displayInfo6.thermalRefreshRateThrottling = this.mThermalRefreshRateThrottling;
-            displayInfo6.thermalBrightnessThrottlingDataId = this.mThermalBrightnessThrottlingDataId;
+            displayInfo6.thermalBrightnessThrottlingDataId =
+                    this.mThermalBrightnessThrottlingDataId;
             this.mPrimaryDisplayDeviceInfo = displayDeviceInfoLocked;
             this.mInfo.set(null);
             this.mDirty = false;

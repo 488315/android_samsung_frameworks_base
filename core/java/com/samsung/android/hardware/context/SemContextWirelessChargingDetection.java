@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextWirelessChargingDetection extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextWirelessChargingDetection> CREATOR = new Parcelable.Creator<SemContextWirelessChargingDetection>() { // from class: com.samsung.android.hardware.context.SemContextWirelessChargingDetection.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextWirelessChargingDetection createFromParcel(Parcel in) {
-            return new SemContextWirelessChargingDetection(in);
-        }
+    public static final Parcelable.Creator<SemContextWirelessChargingDetection> CREATOR =
+            new Parcelable.Creator<
+                    SemContextWirelessChargingDetection>() { // from class:
+                                                             // com.samsung.android.hardware.context.SemContextWirelessChargingDetection.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextWirelessChargingDetection createFromParcel(Parcel in) {
+                    return new SemContextWirelessChargingDetection(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextWirelessChargingDetection[] newArray(int size) {
-            return new SemContextWirelessChargingDetection[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextWirelessChargingDetection[] newArray(int size) {
+                    return new SemContextWirelessChargingDetection[size];
+                }
+            };
     public static final int MOVE = 1;
     public static final int NOMOVE = 0;
     private Bundle mContext;

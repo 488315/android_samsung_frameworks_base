@@ -14,6 +14,7 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.SignedData;
 import com.android.internal.org.bouncycastle.jcajce.util.BCJcaJceHelper;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -30,6 +31,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes5.dex */
@@ -131,15 +133,19 @@ public class PKIXCertPath extends CertPath {
                 ASN1InputStream derInStream = new ASN1InputStream(inStream);
                 ASN1Primitive derObject = derInStream.readObject();
                 if (!(derObject instanceof ASN1Sequence)) {
-                    throw new CertificateException("input stream does not contain a ASN1 SEQUENCE while reading PkiPath encoded data to load CertPath");
+                    throw new CertificateException(
+                            "input stream does not contain a ASN1 SEQUENCE while reading PkiPath"
+                                + " encoded data to load CertPath");
                 }
                 Enumeration e = ((ASN1Sequence) derObject).getObjects();
                 this.certificates = new ArrayList();
-                java.security.cert.CertificateFactory certFactory = this.helper.createCertificateFactory("X.509");
+                java.security.cert.CertificateFactory certFactory =
+                        this.helper.createCertificateFactory("X.509");
                 while (e.hasMoreElements()) {
                     ASN1Encodable element = (ASN1Encodable) e.nextElement();
                     byte[] encoded = element.toASN1Primitive().getEncoded(ASN1Encoding.DER);
-                    this.certificates.add(0, certFactory.generateCertificate(new ByteArrayInputStream(encoded)));
+                    this.certificates.add(
+                            0, certFactory.generateCertificate(new ByteArrayInputStream(encoded)));
                 }
             } else {
                 if (!encoding.equalsIgnoreCase("PKCS7") && !encoding.equalsIgnoreCase("PEM")) {
@@ -147,7 +153,8 @@ public class PKIXCertPath extends CertPath {
                 }
                 InputStream inStream2 = new BufferedInputStream(inStream);
                 this.certificates = new ArrayList();
-                java.security.cert.CertificateFactory certFactory2 = this.helper.createCertificateFactory("X.509");
+                java.security.cert.CertificateFactory certFactory2 =
+                        this.helper.createCertificateFactory("X.509");
                 while (true) {
                     Certificate cert = certFactory2.generateCertificate(inStream2);
                     if (cert == null) {
@@ -159,9 +166,12 @@ public class PKIXCertPath extends CertPath {
             }
             this.certificates = sortCerts(this.certificates);
         } catch (IOException ex) {
-            throw new CertificateException("IOException throw while decoding CertPath:\n" + ex.toString());
+            throw new CertificateException(
+                    "IOException throw while decoding CertPath:\n" + ex.toString());
         } catch (NoSuchProviderException ex2) {
-            throw new CertificateException("BouncyCastle provider not found while trying to get a CertificateFactory:\n" + ex2.toString());
+            throw new CertificateException(
+                    "BouncyCastle provider not found while trying to get a CertificateFactory:\n"
+                            + ex2.toString());
         }
     }
 
@@ -199,7 +209,14 @@ public class PKIXCertPath extends CertPath {
             for (int i = 0; i != this.certificates.size(); i++) {
                 v2.add(toASN1Object((X509Certificate) this.certificates.get(i)));
             }
-            SignedData sd = new SignedData(new ASN1Integer(1L), new DERSet(), encInfo, new DERSet(v2), null, new DERSet());
+            SignedData sd =
+                    new SignedData(
+                            new ASN1Integer(1L),
+                            new DERSet(),
+                            encInfo,
+                            new DERSet(v2),
+                            null,
+                            new DERSet());
             return toDEREncoded(new ContentInfo(PKCSObjectIdentifiers.signedData, sd));
         }
         throw new CertificateEncodingException("unsupported encoding: " + encoding);
@@ -214,7 +231,8 @@ public class PKIXCertPath extends CertPath {
         try {
             return new ASN1InputStream(cert.getEncoded()).readObject();
         } catch (Exception e) {
-            throw new CertificateEncodingException("Exception while encoding certificate: " + e.toString());
+            throw new CertificateEncodingException(
+                    "Exception while encoding certificate: " + e.toString());
         }
     }
 

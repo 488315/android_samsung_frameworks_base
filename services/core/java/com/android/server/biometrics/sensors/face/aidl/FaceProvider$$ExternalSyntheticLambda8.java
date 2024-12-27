@@ -2,6 +2,7 @@ package com.android.server.biometrics.sensors.face.aidl;
 
 import android.hardware.face.IFaceServiceReceiver;
 import android.os.IBinder;
+
 import com.android.server.biometrics.sensors.ClientMonitorCallbackConverter;
 import com.android.server.biometrics.sensors.face.FaceUtils;
 
@@ -16,7 +17,14 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda8 implem
     public final /* synthetic */ int[] f$5;
     public final /* synthetic */ String f$6;
 
-    public /* synthetic */ FaceProvider$$ExternalSyntheticLambda8(FaceProvider faceProvider, int i, int i2, IBinder iBinder, IFaceServiceReceiver iFaceServiceReceiver, int[] iArr, String str) {
+    public /* synthetic */ FaceProvider$$ExternalSyntheticLambda8(
+            FaceProvider faceProvider,
+            int i,
+            int i2,
+            IBinder iBinder,
+            IFaceServiceReceiver iFaceServiceReceiver,
+            int[] iArr,
+            String str) {
         this.f$0 = faceProvider;
         this.f$1 = i;
         this.f$2 = i2;
@@ -36,6 +44,21 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda8 implem
         int[] iArr = this.f$5;
         String str = this.f$6;
         ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).scheduleFaceUpdateActiveUserClient(i2);
-        faceProvider.scheduleForSensor(i, new FaceRemovalClient(faceProvider.mContext, ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).mLazySession, iBinder, new ClientMonitorCallbackConverter(iFaceServiceReceiver), iArr, i2, str, FaceUtils.getInstance(i, null), i, faceProvider.createLogger(4, 0, faceProvider.mAuthenticationStatsCollector), faceProvider.mBiometricContext, ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).mAuthenticatorIds), faceProvider.mBiometricStateCallback);
+        faceProvider.scheduleForSensor(
+                i,
+                new FaceRemovalClient(
+                        faceProvider.mContext,
+                        ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).mLazySession,
+                        iBinder,
+                        new ClientMonitorCallbackConverter(iFaceServiceReceiver),
+                        iArr,
+                        i2,
+                        str,
+                        FaceUtils.getInstance(i, null),
+                        i,
+                        faceProvider.createLogger(4, 0, faceProvider.mAuthenticationStatsCollector),
+                        faceProvider.mBiometricContext,
+                        ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).mAuthenticatorIds),
+                faceProvider.mBiometricStateCallback);
     }
 }

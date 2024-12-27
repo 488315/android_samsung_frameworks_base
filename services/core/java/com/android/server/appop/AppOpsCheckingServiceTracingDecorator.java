@@ -3,20 +3,23 @@ package com.android.server.appop;
 import android.os.Trace;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
-import com.android.server.appop.AppOpsService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class AppOpsCheckingServiceTracingDecorator implements AppOpsCheckingServiceInterface {
     public final AppOpsCheckingServiceInterface mService;
 
-    public AppOpsCheckingServiceTracingDecorator(AppOpsCheckingServiceInterface appOpsCheckingServiceInterface) {
+    public AppOpsCheckingServiceTracingDecorator(
+            AppOpsCheckingServiceInterface appOpsCheckingServiceInterface) {
         this.mService = appOpsCheckingServiceInterface;
     }
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
-    public final boolean addAppOpsModeChangedListener(AppOpsService.AnonymousClass2 anonymousClass2) {
-        Trace.traceBegin(64L, "TaggedTracingAppOpsCheckingServiceInterfaceImpl#addAppOpsModeChangedListener");
+    public final boolean addAppOpsModeChangedListener(
+            AppOpsService.AnonymousClass2 anonymousClass2) {
+        Trace.traceBegin(
+                64L,
+                "TaggedTracingAppOpsCheckingServiceInterfaceImpl#addAppOpsModeChangedListener");
         try {
             return this.mService.addAppOpsModeChangedListener(anonymousClass2);
         } finally {
@@ -56,7 +59,8 @@ public final class AppOpsCheckingServiceTracingDecorator implements AppOpsChecki
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
     public final SparseIntArray getNonDefaultPackageModes(int i, String str) {
-        Trace.traceBegin(64L, "TaggedTracingAppOpsCheckingServiceInterfaceImpl#getNonDefaultPackageModes");
+        Trace.traceBegin(
+                64L, "TaggedTracingAppOpsCheckingServiceInterfaceImpl#getNonDefaultPackageModes");
         try {
             return this.mService.getNonDefaultPackageModes(i, str);
         } finally {
@@ -66,7 +70,8 @@ public final class AppOpsCheckingServiceTracingDecorator implements AppOpsChecki
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
     public final SparseIntArray getNonDefaultUidModes(int i) {
-        Trace.traceBegin(64L, "TaggedTracingAppOpsCheckingServiceInterfaceImpl#getNonDefaultUidModes");
+        Trace.traceBegin(
+                64L, "TaggedTracingAppOpsCheckingServiceInterfaceImpl#getNonDefaultUidModes");
         try {
             return this.mService.getNonDefaultUidModes(i);
         } finally {

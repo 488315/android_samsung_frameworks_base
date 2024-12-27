@@ -3,7 +3,12 @@ package com.att.iqi.libs;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Xml;
-import com.att.iqi.libs.PreferenceStore;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,14 +19,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.IntFunction;
 import java.util.stream.IntStream;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xmlpull.v1.XmlSerializer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -37,7 +39,8 @@ public class PreferenceStore {
     private static PreferenceStore sInstance;
     private static final Map sPreferences;
     private final List mPreferenceChangeListeners = new ArrayList();
-    private final File mPreferenceFile = new File(new File(Environment.getDataDirectory(), "system"), IQI_PREF_FILE);
+    private final File mPreferenceFile =
+            new File(new File(Environment.getDataDirectory(), "system"), IQI_PREF_FILE);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface PreferenceChangeListener {
@@ -59,13 +62,18 @@ public class PreferenceStore {
     }
 
     private void broadcastPreferenceChange(final String str) {
-        for (final PreferenceChangeListener preferenceChangeListener : this.mPreferenceChangeListeners) {
-            WorkerThread.getHandler().post(new Runnable() { // from class: com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    PreferenceStore.PreferenceChangeListener.this.onPreferenceChanged(str);
-                }
-            });
+        for (final PreferenceChangeListener preferenceChangeListener :
+                this.mPreferenceChangeListeners) {
+            WorkerThread.getHandler()
+                    .post(
+                            new Runnable() { // from class:
+                                             // com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    PreferenceStore.PreferenceChangeListener.this
+                                            .onPreferenceChanged(str);
+                                }
+                            });
         }
     }
 
@@ -80,7 +88,8 @@ public class PreferenceStore {
                 XmlSerializer newSerializer = Xml.newSerializer();
                 newSerializer.setOutput(fileOutputStream, "UTF-8");
                 newSerializer.startDocument(null, Boolean.TRUE);
-                newSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                newSerializer.setFeature(
+                        "http://xmlpull.org/v1/doc/features.html#indent-output", true);
                 newSerializer.startTag(null, "map");
                 newSerializer.attribute(null, "name", "prefs");
                 newSerializer.startTag(null, "boolean");
@@ -142,7 +151,8 @@ public class PreferenceStore {
     }
 
     private static Iterable iterable(final NodeList nodeList) {
-        return new Iterable() { // from class: com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda3
+        return new Iterable() { // from class:
+                                // com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda3
             @Override // java.lang.Iterable
             public final Iterator iterator() {
                 Iterator lambda$iterable$4;
@@ -154,12 +164,16 @@ public class PreferenceStore {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static /* synthetic */ Iterator lambda$iterable$4(final NodeList nodeList) {
-        return IntStream.range(0, nodeList.getLength()).mapToObj(new IntFunction() { // from class: com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda5
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i) {
-                return nodeList.item(i);
-            }
-        }).iterator();
+        return IntStream.range(0, nodeList.getLength())
+                .mapToObj(
+                        new IntFunction() { // from class:
+                                            // com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda5
+                            @Override // java.util.function.IntFunction
+                            public final Object apply(int i) {
+                                return nodeList.item(i);
+                            }
+                        })
+                .iterator();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -193,7 +207,9 @@ public class PreferenceStore {
             Method dump skipped, instructions count: 370
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.att.iqi.libs.PreferenceStore.loadPrefsFromFileLocked():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.att.iqi.libs.PreferenceStore.loadPrefsFromFileLocked():void");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -212,7 +228,9 @@ public class PreferenceStore {
                         str3 = String.valueOf(obj);
                     } else {
                         if (!(obj instanceof String)) {
-                            LogUtil.loge("Tried to write an unsupported preference type " + obj.getClass());
+                            LogUtil.loge(
+                                    "Tried to write an unsupported preference type "
+                                            + obj.getClass());
                             return;
                         }
                         str2 = "string";
@@ -223,7 +241,10 @@ public class PreferenceStore {
                         broadcastPreferenceChange(str);
                         return;
                     }
-                    Document parse = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(this.mPreferenceFile);
+                    Document parse =
+                            DocumentBuilderFactory.newInstance()
+                                    .newDocumentBuilder()
+                                    .parse(this.mPreferenceFile);
                     Iterator it = iterable(parse.getElementsByTagName(str2)).iterator();
                     while (true) {
                         if (!it.hasNext()) {
@@ -231,7 +252,8 @@ public class PreferenceStore {
                             break;
                         }
                         Node node = (Node) it.next();
-                        if (TextUtils.equals(node.getAttributes().getNamedItem("name").getNodeValue(), str)) {
+                        if (TextUtils.equals(
+                                node.getAttributes().getNamedItem("name").getNodeValue(), str)) {
                             LogUtil.loge("Found pref " + str);
                             Node namedItem = node.getAttributes().getNamedItem("value");
                             if (namedItem != null) {
@@ -239,7 +261,11 @@ public class PreferenceStore {
                             } else {
                                 node.setTextContent(str3);
                             }
-                            TransformerFactory.newInstance().newTransformer().transform(new DOMSource(parse), new StreamResult(this.mPreferenceFile));
+                            TransformerFactory.newInstance()
+                                    .newTransformer()
+                                    .transform(
+                                            new DOMSource(parse),
+                                            new StreamResult(this.mPreferenceFile));
                             LogUtil.loge("Pref file updated [" + str + "] ==> " + obj);
                             broadcastPreferenceChange(str);
                         }
@@ -282,7 +308,8 @@ public class PreferenceStore {
         return str2;
     }
 
-    public void registerPreferenceChangeListener(PreferenceChangeListener preferenceChangeListener) {
+    public void registerPreferenceChangeListener(
+            PreferenceChangeListener preferenceChangeListener) {
         this.mPreferenceChangeListeners.add(preferenceChangeListener);
     }
 
@@ -292,12 +319,15 @@ public class PreferenceStore {
                 Map map = sPreferences;
                 if (map.containsKey(str) && z != getBoolean(str, false)) {
                     map.put(str, Boolean.valueOf(z));
-                    WorkerThread.getHandler().post(new Runnable() { // from class: com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            PreferenceStore.this.lambda$setBoolean$0(str, z);
-                        }
-                    });
+                    WorkerThread.getHandler()
+                            .post(
+                                    new Runnable() { // from class:
+                                                     // com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda0
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            PreferenceStore.this.lambda$setBoolean$0(str, z);
+                                        }
+                                    });
                 }
             } catch (Throwable th) {
                 throw th;
@@ -311,12 +341,15 @@ public class PreferenceStore {
                 Map map = sPreferences;
                 if (map.containsKey(str) && i != getInteger(str, -1)) {
                     map.put(str, Integer.valueOf(i));
-                    WorkerThread.getHandler().post(new Runnable() { // from class: com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda2
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            PreferenceStore.this.lambda$setInteger$1(str, i);
-                        }
-                    });
+                    WorkerThread.getHandler()
+                            .post(
+                                    new Runnable() { // from class:
+                                                     // com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda2
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            PreferenceStore.this.lambda$setInteger$1(str, i);
+                                        }
+                                    });
                 }
             } catch (Throwable th) {
                 throw th;
@@ -330,12 +363,15 @@ public class PreferenceStore {
                 Map map = sPreferences;
                 if (map.containsKey(str) && !TextUtils.equals(str2, getString(str, null))) {
                     map.put(str, str2);
-                    WorkerThread.getHandler().post(new Runnable() { // from class: com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda4
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            PreferenceStore.this.lambda$setString$2(str, str2);
-                        }
-                    });
+                    WorkerThread.getHandler()
+                            .post(
+                                    new Runnable() { // from class:
+                                                     // com.att.iqi.libs.PreferenceStore$$ExternalSyntheticLambda4
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            PreferenceStore.this.lambda$setString$2(str, str2);
+                                        }
+                                    });
                 }
             } catch (Throwable th) {
                 throw th;
@@ -343,7 +379,8 @@ public class PreferenceStore {
         }
     }
 
-    public void unregisterPreferenceChangeListener(PreferenceChangeListener preferenceChangeListener) {
+    public void unregisterPreferenceChangeListener(
+            PreferenceChangeListener preferenceChangeListener) {
         this.mPreferenceChangeListeners.remove(preferenceChangeListener);
     }
 }

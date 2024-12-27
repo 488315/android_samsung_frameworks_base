@@ -30,7 +30,8 @@ public final class CameraOutputSurface {
 
     public android.util.Size getSize() {
         if (this.mOutputSurface.size != null) {
-            return new android.util.Size(this.mOutputSurface.size.width, this.mOutputSurface.size.height);
+            return new android.util.Size(
+                    this.mOutputSurface.size.width, this.mOutputSurface.size.height);
         }
         return null;
     }

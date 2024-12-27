@@ -16,15 +16,17 @@ import android.os.RemoteException;
 import android.os.SemSystemProperties;
 import android.util.Base64;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.clipboard.ClipboardService;
+
 import com.samsung.android.camera.CameraServiceWorker;
-import com.samsung.android.camera.scpm.ScpmList;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -40,7 +42,8 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
     public final CameraServiceWorker mCameraServiceWorker;
     public final Context mContext;
     public final Handler mHandler;
-    public final boolean mIsUnihalSupport = SemSystemProperties.getBoolean("vendor.camera.unihal.enable", false);
+    public final boolean mIsUnihalSupport =
+            SemSystemProperties.getBoolean("vendor.camera.unihal.enable", false);
     public final AnonymousClass1 mScpmCallback;
     public ScpmHelper mScpmHelper;
     public final ScpmListManager mScpmListManager;
@@ -48,10 +51,10 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.camera.scpm.ScpmReceiver$1, reason: invalid class name */
     public final class AnonymousClass1 {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
-        public final void onListReceived(ScpmList.PolicyType policyType, ParcelFileDescriptor parcelFileDescriptor) {
+        public final void onListReceived(
+                ScpmList.PolicyType policyType, ParcelFileDescriptor parcelFileDescriptor) {
             Message message = new Message();
             message.what = 4;
             message.arg1 = policyType.ordinal();
@@ -82,7 +85,8 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
                 }
                 Slog.e("CameraService/ScpmReceiver", "MSG_REGISTER_FAILED - retry after 1 hour");
                 scpmReceiver.mHandler.removeMessages(2);
-                scpmReceiver.mHandler.sendEmptyMessageDelayed(2, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
+                scpmReceiver.mHandler.sendEmptyMessageDelayed(
+                        2, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
             }
         }
     }
@@ -101,7 +105,14 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
         this.mHandler = handler;
         this.mScpmListManager = new ScpmListManager();
         this.mScpmHelper = new ScpmHelper(context, anonymousClass1);
-        context.registerReceiver(this, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("com.samsung.android.scpm.policy.UPDATE.camera3rdpartylist-1857", KnoxCustomManagerService.ACTION_SCPM_POLICY_CLEAR_DATA), null, handler, 2);
+        context.registerReceiver(
+                this,
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        "com.samsung.android.scpm.policy.UPDATE.camera3rdpartylist-1857",
+                        KnoxCustomManagerService.ACTION_SCPM_POLICY_CLEAR_DATA),
+                null,
+                handler,
+                2);
     }
 
     public final synchronized void dump(PrintWriter printWriter) {
@@ -118,10 +129,22 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
                 }
                 sb.append(str);
                 printWriter.println(sb.toString());
-                Iterator it = ((CopyOnWriteArrayList) this.mScpmListManager.getCurrentPolicyList(policyType)).iterator();
+                Iterator it =
+                        ((CopyOnWriteArrayList)
+                                        this.mScpmListManager.getCurrentPolicyList(policyType))
+                                .iterator();
                 while (it.hasNext()) {
                     PolicyListVO policyListVO = (PolicyListVO) it.next();
-                    printWriter.println("\t\t" + Base64.encodeToString(policyListVO.packageName.getBytes(StandardCharsets.UTF_8), 2) + " arg1: " + policyListVO.value + " arg2: " + policyListVO.extra);
+                    printWriter.println(
+                            "\t\t"
+                                    + Base64.encodeToString(
+                                            policyListVO.packageName.getBytes(
+                                                    StandardCharsets.UTF_8),
+                                            2)
+                                    + " arg1: "
+                                    + policyListVO.value
+                                    + " arg2: "
+                                    + policyListVO.extra);
                 }
             }
         } catch (Throwable th) {
@@ -137,7 +160,15 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
                 ScpmHelper scpmHelper = this.mScpmHelper;
                 if (scpmHelper != null) {
                     Slog.i("CameraService/ScpmHelper", "registerScpm");
-                    boolean z = scpmHelper.mContext.getPackageManager().resolveContentProvider(KnoxCustomManagerService.SPCM_PROVIDER_AUTHORITY, PackageManager.ComponentInfoFlags.of(8L)) != null;
+                    boolean z =
+                            scpmHelper
+                                            .mContext
+                                            .getPackageManager()
+                                            .resolveContentProvider(
+                                                    KnoxCustomManagerService
+                                                            .SPCM_PROVIDER_AUTHORITY,
+                                                    PackageManager.ComponentInfoFlags.of(8L))
+                                    != null;
                     AnonymousClass1 anonymousClass1 = scpmHelper.mScpmCallback;
                     if (z) {
                         try {
@@ -146,22 +177,50 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
                             bundle.putString("appId", "k0fpqpbykt");
                             bundle.putString("version", ScpmHelper.APP_VERSION);
                             bundle.putString("receiverPackageName", "android");
-                            Bundle call = scpmHelper.mContext.getContentResolver().call(Uri.parse("content://com.samsung.android.scpm.policy/"), "register", "android", bundle);
+                            Bundle call =
+                                    scpmHelper
+                                            .mContext
+                                            .getContentResolver()
+                                            .call(
+                                                    Uri.parse(
+                                                            "content://com.samsung.android.scpm.policy/"),
+                                                    "register",
+                                                    "android",
+                                                    bundle);
                             if (call != null) {
                                 int i2 = call.getInt(KnoxCustomManagerService.SPCM_KEY_RESULT, -1);
-                                scpmHelper.mToken = call.getString(KnoxCustomManagerService.SPCM_KEY_TOKEN, null);
-                                int i3 = call.getInt(KnoxCustomManagerService.SPCM_KEY_RESULT_CODE, -1);
-                                String string = call.getString(KnoxCustomManagerService.SPCM_KEY_RESULT_MESSAGE, "");
+                                scpmHelper.mToken =
+                                        call.getString(
+                                                KnoxCustomManagerService.SPCM_KEY_TOKEN, null);
+                                int i3 =
+                                        call.getInt(
+                                                KnoxCustomManagerService.SPCM_KEY_RESULT_CODE, -1);
+                                String string =
+                                        call.getString(
+                                                KnoxCustomManagerService.SPCM_KEY_RESULT_MESSAGE,
+                                                "");
                                 if (i2 == 1) {
-                                    Slog.v("CameraService/ScpmHelper", "register success : rcode = " + i3 + ", rmsg = " + string);
+                                    Slog.v(
+                                            "CameraService/ScpmHelper",
+                                            "register success : rcode = "
+                                                    + i3
+                                                    + ", rmsg = "
+                                                    + string);
                                     anonymousClass1.onRegistered(1);
                                 } else {
-                                    Slog.e("CameraService/ScpmHelper", "failed to register: rcode = " + i3 + ", rmsg = " + string);
+                                    Slog.e(
+                                            "CameraService/ScpmHelper",
+                                            "failed to register: rcode = "
+                                                    + i3
+                                                    + ", rmsg = "
+                                                    + string);
                                     anonymousClass1.onRegistered(3);
                                 }
                             }
                         } catch (Exception e) {
-                            Slog.e("CameraService/ScpmHelper", "cannot register package : " + e.getMessage());
+                            Slog.e(
+                                    "CameraService/ScpmHelper",
+                                    "cannot register package : " + e.getMessage());
                             anonymousClass1.onRegistered(3);
                         }
                     } else {
@@ -171,18 +230,26 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
                 }
             } else if (i != 3) {
                 if (i != 4) {
-                    VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("SCPMReceiver error, invalid message: "), message.what, "CameraService/ScpmReceiver");
+                    VaultKeeperService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("SCPMReceiver error, invalid message: "),
+                            message.what,
+                            "CameraService/ScpmReceiver");
                 } else if (this.mScpmListManager != null) {
                     Object obj = message.obj;
                     if (obj instanceof ParcelFileDescriptor) {
                         ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) obj;
                         if (message.arg1 < ScpmList.PolicyType.values().length) {
                             ScpmListManager scpmListManager = this.mScpmListManager;
-                            ScpmList.PolicyType policyType = ScpmList.PolicyType.values()[message.arg1];
+                            ScpmList.PolicyType policyType =
+                                    ScpmList.PolicyType.values()[message.arg1];
                             synchronized (scpmListManager) {
-                                Slog.v("CameraService/ScpmListManager", "updatePolicy " + policyType);
+                                Slog.v(
+                                        "CameraService/ScpmListManager",
+                                        "updatePolicy " + policyType);
                                 try {
-                                    scpmListManager.parseAndUpdateData(ScpmListManager.getJsonObject(parcelFileDescriptor), scpmListManager.getCurrentPolicy(policyType));
+                                    scpmListManager.parseAndUpdateData(
+                                            ScpmListManager.getJsonObject(parcelFileDescriptor),
+                                            scpmListManager.getCurrentPolicy(policyType));
                                 } catch (Exception e2) {
                                     Slog.e("CameraService/ScpmListManager", "updatePolicy " + e2);
                                     scpmListManager.loadDefaultScpmList(policyType);
@@ -196,19 +263,53 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
                 while (it.hasNext()) {
                     ScpmList scpmList = (ScpmList) it.next();
                     ScpmHelper scpmHelper2 = this.mScpmHelper;
-                    if (scpmHelper2.mContext.getPackageManager().resolveContentProvider(KnoxCustomManagerService.SPCM_PROVIDER_AUTHORITY, PackageManager.ComponentInfoFlags.of(8L)) != null) {
-                        Uri parse = Uri.parse("content://com.samsung.android.scpm.policy/" + scpmHelper2.mToken + "/" + scpmList.mConfigurationName);
+                    if (scpmHelper2
+                                    .mContext
+                                    .getPackageManager()
+                                    .resolveContentProvider(
+                                            KnoxCustomManagerService.SPCM_PROVIDER_AUTHORITY,
+                                            PackageManager.ComponentInfoFlags.of(8L))
+                            != null) {
+                        Uri parse =
+                                Uri.parse(
+                                        "content://com.samsung.android.scpm.policy/"
+                                                + scpmHelper2.mToken
+                                                + "/"
+                                                + scpmList.mConfigurationName);
                         if (ScpmHelper.DEBUG) {
                             Slog.v("CameraService/ScpmHelper", "uri: " + parse);
                         }
                         try {
-                            ParcelFileDescriptor openFileDescriptor = scpmHelper2.mContext.getContentResolver().openFileDescriptor(parse, "r");
+                            ParcelFileDescriptor openFileDescriptor =
+                                    scpmHelper2
+                                            .mContext
+                                            .getContentResolver()
+                                            .openFileDescriptor(parse, "r");
                             if (openFileDescriptor == null) {
                                 try {
                                     Bundle bundle2 = new Bundle();
-                                    bundle2.putString(KnoxCustomManagerService.SPCM_KEY_TOKEN, scpmHelper2.mToken);
-                                    Bundle call2 = scpmHelper2.mContext.getContentResolver().call(parse, "getLastError", "android", bundle2);
-                                    Slog.d("CameraService/ScpmHelper", "cannot get new policy : " + call2.getInt(KnoxCustomManagerService.SPCM_KEY_RESULT_CODE) + ", " + call2.getString(KnoxCustomManagerService.SPCM_KEY_RESULT_MESSAGE));
+                                    bundle2.putString(
+                                            KnoxCustomManagerService.SPCM_KEY_TOKEN,
+                                            scpmHelper2.mToken);
+                                    Bundle call2 =
+                                            scpmHelper2
+                                                    .mContext
+                                                    .getContentResolver()
+                                                    .call(
+                                                            parse,
+                                                            "getLastError",
+                                                            "android",
+                                                            bundle2);
+                                    Slog.d(
+                                            "CameraService/ScpmHelper",
+                                            "cannot get new policy : "
+                                                    + call2.getInt(
+                                                            KnoxCustomManagerService
+                                                                    .SPCM_KEY_RESULT_CODE)
+                                                    + ", "
+                                                    + call2.getString(
+                                                            KnoxCustomManagerService
+                                                                    .SPCM_KEY_RESULT_MESSAGE));
                                 } catch (Throwable th) {
                                     if (openFileDescriptor != null) {
                                         try {
@@ -220,7 +321,8 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
                                     throw th;
                                 }
                             } else {
-                                scpmHelper2.mScpmCallback.onListReceived(scpmList.mType, openFileDescriptor.dup());
+                                scpmHelper2.mScpmCallback.onListReceived(
+                                        scpmList.mType, openFileDescriptor.dup());
                             }
                             if (openFileDescriptor != null) {
                                 openFileDescriptor.close();
@@ -229,7 +331,9 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
                             Slog.e("CameraService/ScpmHelper", "File not found!");
                             e3.printStackTrace();
                         } catch (Exception e4) {
-                            Slog.e("CameraService/ScpmHelper", "getSCPMPolicy fail because of exception! " + e4);
+                            Slog.e(
+                                    "CameraService/ScpmHelper",
+                                    "getSCPMPolicy fail because of exception! " + e4);
                             e4.printStackTrace();
                         }
                     } else {
@@ -255,7 +359,8 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
         StringBuilder sb = new StringBuilder("notifyParamChange : ");
         sb.append(policyType);
         sb.append(", mIsUnihalSupport = ");
-        HeimdAllFsService$$ExternalSyntheticOutline0.m("CameraService/ScpmReceiver", sb, this.mIsUnihalSupport);
+        HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                "CameraService/ScpmReceiver", sb, this.mIsUnihalSupport);
         List currentPolicyList = this.mScpmListManager.getCurrentPolicyList(policyType);
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
@@ -285,29 +390,41 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
                     Slog.i("CameraService/ScpmReceiver", "notifyParamChange : " + ((Object) sb2));
                 }
             }
-            cameraService.notifyPkgListParamChange(policyType.ordinal(), (String[]) arrayList.toArray(new String[0]), (String[]) arrayList2.toArray(new String[0]));
-            Slog.i("CameraService/ScpmReceiver", "notifyParamChange : size is " + copyOnWriteArrayList.size());
+            cameraService.notifyPkgListParamChange(
+                    policyType.ordinal(),
+                    (String[]) arrayList.toArray(new String[0]),
+                    (String[]) arrayList2.toArray(new String[0]));
+            Slog.i(
+                    "CameraService/ScpmReceiver",
+                    "notifyParamChange : size is " + copyOnWriteArrayList.size());
             return true;
         } catch (RemoteException e) {
-            AccountManagerService$$ExternalSyntheticOutline0.m("Could not notify vision param change, remote exception: ", e, "CameraService/ScpmReceiver");
+            AccountManagerService$$ExternalSyntheticOutline0.m(
+                    "Could not notify vision param change, remote exception: ",
+                    e,
+                    "CameraService/ScpmReceiver");
             return false;
         } catch (IllegalArgumentException e2) {
             Slog.e("CameraService/ScpmReceiver", "Could not parse package name " + e2);
             return false;
         } catch (Exception e3) {
-            BootReceiver$$ExternalSyntheticOutline0.m(e3, "Unknown exception occur ", "CameraService/ScpmReceiver");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    e3, "Unknown exception occur ", "CameraService/ScpmReceiver");
             return false;
         }
     }
 
-    public final synchronized void notifyParamChangeRetryLocked(int i, ScpmList.PolicyType policyType) {
+    public final synchronized void notifyParamChangeRetryLocked(
+            int i, ScpmList.PolicyType policyType) {
         if (notifyParamChange(policyType)) {
             i = 0;
         }
         if (i <= 0) {
             return;
         }
-        Slog.i("CameraService/ScpmReceiver", "Could not notify camera service of device state change, retrying...");
+        Slog.i(
+                "CameraService/ScpmReceiver",
+                "Could not notify camera service of device state change, retrying...");
         Handler handler = this.mHandler;
         handler.sendMessageDelayed(handler.obtainMessage(1, i - 1, 0, policyType), 20L);
     }
@@ -319,7 +436,9 @@ public final class ScpmReceiver extends BroadcastReceiver implements Handler.Cal
             Slog.d("CameraService/ScpmReceiver", "SCPM update broadcast received!");
             this.mHandler.sendEmptyMessage(3);
         } else if (KnoxCustomManagerService.ACTION_SCPM_POLICY_CLEAR_DATA.equals(action)) {
-            Slog.d("CameraService/ScpmReceiver", "SCPM clear broadcast received, policy updated 1 min later!");
+            Slog.d(
+                    "CameraService/ScpmReceiver",
+                    "SCPM clear broadcast received, policy updated 1 min later!");
             this.mScpmHelper = new ScpmHelper(this.mContext, this.mScpmCallback);
             this.mHandler.removeMessages(2);
             this.mHandler.sendEmptyMessageDelayed(2, 60000L);

@@ -2,6 +2,7 @@ package com.android.server.telecom;
 
 import android.os.Binder;
 import android.os.Process;
+
 import com.android.internal.telecom.IDeviceIdleControllerAdapter;
 import com.android.internal.telecom.IInternalServiceRetriever;
 import com.android.server.DeviceIdleInternal;
@@ -10,11 +11,16 @@ import com.android.server.DeviceIdleInternal;
 /* loaded from: classes2.dex */
 public final class InternalServiceRepository extends IInternalServiceRetriever.Stub {
     public final DeviceIdleInternal mDeviceIdleController;
-    public final AnonymousClass1 mDeviceIdleControllerAdapter = new IDeviceIdleControllerAdapter.Stub() { // from class: com.android.server.telecom.InternalServiceRepository.1
-        public final void exemptAppTemporarilyForEvent(String str, long j, int i, String str2) {
-            InternalServiceRepository.this.mDeviceIdleController.addPowerSaveTempWhitelistApp(Process.myUid(), str, j, i, true, 0, str2);
-        }
-    };
+    public final AnonymousClass1 mDeviceIdleControllerAdapter =
+            new IDeviceIdleControllerAdapter
+                    .Stub() { // from class: com.android.server.telecom.InternalServiceRepository.1
+                public final void exemptAppTemporarilyForEvent(
+                        String str, long j, int i, String str2) {
+                    InternalServiceRepository.this.mDeviceIdleController
+                            .addPowerSaveTempWhitelistApp(
+                                    Process.myUid(), str, j, i, true, 0, str2);
+                }
+            };
 
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.telecom.InternalServiceRepository$1] */
     public InternalServiceRepository(DeviceIdleInternal deviceIdleInternal) {

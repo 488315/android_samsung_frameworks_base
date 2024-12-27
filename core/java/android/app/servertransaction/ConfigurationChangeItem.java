@@ -5,23 +5,26 @@ import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class ConfigurationChangeItem extends ClientTransactionItem {
-    public static final Parcelable.Creator<ConfigurationChangeItem> CREATOR = new Parcelable.Creator<ConfigurationChangeItem>() { // from class: android.app.servertransaction.ConfigurationChangeItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConfigurationChangeItem createFromParcel(Parcel in) {
-            return new ConfigurationChangeItem(in);
-        }
+    public static final Parcelable.Creator<ConfigurationChangeItem> CREATOR =
+            new Parcelable.Creator<ConfigurationChangeItem>() { // from class:
+                // android.app.servertransaction.ConfigurationChangeItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConfigurationChangeItem createFromParcel(Parcel in) {
+                    return new ConfigurationChangeItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConfigurationChangeItem[] newArray(int size) {
-            return new ConfigurationChangeItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConfigurationChangeItem[] newArray(int size) {
+                    return new ConfigurationChangeItem[size];
+                }
+            };
     private Configuration mConfiguration;
     private int mDeviceId;
 
@@ -36,11 +39,11 @@ public class ConfigurationChangeItem extends ClientTransactionItem {
         client.handleConfigurationChanged(this.mConfiguration, this.mDeviceId);
     }
 
-    private ConfigurationChangeItem() {
-    }
+    private ConfigurationChangeItem() {}
 
     public static ConfigurationChangeItem obtain(Configuration config, int deviceId) {
-        ConfigurationChangeItem instance = (ConfigurationChangeItem) ObjectPool.obtain(ConfigurationChangeItem.class);
+        ConfigurationChangeItem instance =
+                (ConfigurationChangeItem) ObjectPool.obtain(ConfigurationChangeItem.class);
         if (instance == null) {
             instance = new ConfigurationChangeItem();
         }
@@ -75,7 +78,8 @@ public class ConfigurationChangeItem extends ClientTransactionItem {
             return false;
         }
         ConfigurationChangeItem other = (ConfigurationChangeItem) o;
-        if (Objects.equals(this.mConfiguration, other.mConfiguration) && this.mDeviceId == other.mDeviceId) {
+        if (Objects.equals(this.mConfiguration, other.mConfiguration)
+                && this.mDeviceId == other.mDeviceId) {
             return true;
         }
         return false;
@@ -87,6 +91,10 @@ public class ConfigurationChangeItem extends ClientTransactionItem {
     }
 
     public String toString() {
-        return "ConfigurationChangeItem{deviceId=" + this.mDeviceId + ", config" + this.mConfiguration + "}";
+        return "ConfigurationChangeItem{deviceId="
+                + this.mDeviceId
+                + ", config"
+                + this.mConfiguration
+                + "}";
     }
 }

@@ -24,13 +24,19 @@ public final class DataChangedJournal {
         return false;
     }
 
-    public final void forEach(UserBackupManagerService$$ExternalSyntheticLambda13 userBackupManagerService$$ExternalSyntheticLambda13) {
+    public final void forEach(
+            UserBackupManagerService$$ExternalSyntheticLambda13
+                    userBackupManagerService$$ExternalSyntheticLambda13) {
         try {
             try {
                 try {
                     while (true) {
                         try {
-                            userBackupManagerService$$ExternalSyntheticLambda13.accept(new DataInputStream(new BufferedInputStream(new FileInputStream(this.mFile), 8192)).readUTF());
+                            userBackupManagerService$$ExternalSyntheticLambda13.accept(
+                                    new DataInputStream(
+                                                    new BufferedInputStream(
+                                                            new FileInputStream(this.mFile), 8192))
+                                            .readUTF());
                         } finally {
                         }
                     }

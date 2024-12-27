@@ -11,7 +11,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IStreamingResponseCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.app.ondeviceintelligence.IStreamingResponseCallback";
+    public static final String DESCRIPTOR =
+            "android.app.ondeviceintelligence.IStreamingResponseCallback";
 
     void onDataAugmentRequest(Bundle bundle, RemoteCallback remoteCallback) throws RemoteException;
 
@@ -23,20 +24,18 @@ public interface IStreamingResponseCallback extends IInterface {
 
     public static class Default implements IStreamingResponseCallback {
         @Override // android.app.ondeviceintelligence.IStreamingResponseCallback
-        public void onNewContent(Bundle processedResult) throws RemoteException {
-        }
+        public void onNewContent(Bundle processedResult) throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IStreamingResponseCallback
-        public void onSuccess(Bundle result) throws RemoteException {
-        }
+        public void onSuccess(Bundle result) throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IStreamingResponseCallback
-        public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams) throws RemoteException {
-        }
+        public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams)
+                throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IStreamingResponseCallback
-        public void onDataAugmentRequest(Bundle processedContent, RemoteCallback responseCallback) throws RemoteException {
-        }
+        public void onDataAugmentRequest(Bundle processedContent, RemoteCallback responseCallback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -44,7 +43,7 @@ public interface IStreamingResponseCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStreamingResponseCallback {
+    public abstract static class Stub extends Binder implements IStreamingResponseCallback {
         static final int TRANSACTION_onDataAugmentRequest = 5;
         static final int TRANSACTION_onFailure = 4;
         static final int TRANSACTION_onNewContent = 2;
@@ -91,7 +90,8 @@ public interface IStreamingResponseCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IStreamingResponseCallback.DESCRIPTOR);
             }
@@ -113,13 +113,15 @@ public interface IStreamingResponseCallback extends IInterface {
                 case 4:
                     int _arg03 = data.readInt();
                     String _arg1 = data.readString();
-                    PersistableBundle _arg2 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg2 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg03, _arg1, _arg2);
                     return true;
                 case 5:
                     Bundle _arg04 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    RemoteCallback _arg12 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg12 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     onDataAugmentRequest(_arg04, _arg12);
                     return true;
@@ -169,7 +171,8 @@ public interface IStreamingResponseCallback extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IStreamingResponseCallback
-            public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams) throws RemoteException {
+            public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IStreamingResponseCallback.DESCRIPTOR);
@@ -183,7 +186,9 @@ public interface IStreamingResponseCallback extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IStreamingResponseCallback
-            public void onDataAugmentRequest(Bundle processedContent, RemoteCallback responseCallback) throws RemoteException {
+            public void onDataAugmentRequest(
+                    Bundle processedContent, RemoteCallback responseCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IStreamingResponseCallback.DESCRIPTOR);

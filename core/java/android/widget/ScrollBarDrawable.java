@@ -6,6 +6,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+
 import com.android.internal.R;
 import com.android.internal.widget.ScrollBarUtils;
 
@@ -31,8 +32,7 @@ public class ScrollBarDrawable extends Drawable implements Drawable.Callback {
     private int mAlpha = 255;
     private final Rect mClickableThumbRect = new Rect();
 
-    public ScrollBarDrawable() {
-    }
+    public ScrollBarDrawable() {}
 
     public ScrollBarDrawable(View parent) {
         this.mSemParent = parent;
@@ -80,7 +80,8 @@ public class ScrollBarDrawable extends Drawable implements Drawable.Callback {
             drawTrack = true;
             drawThumb = true;
         } else {
-            boolean drawTrack2 = vertical ? this.mAlwaysDrawVerticalTrack : this.mAlwaysDrawHorizontalTrack;
+            boolean drawTrack2 =
+                    vertical ? this.mAlwaysDrawVerticalTrack : this.mAlwaysDrawHorizontalTrack;
             drawTrack = drawTrack2;
             drawThumb = false;
         }
@@ -94,8 +95,11 @@ public class ScrollBarDrawable extends Drawable implements Drawable.Callback {
         if (drawThumb) {
             int scrollBarLength = vertical ? r.height() : r.width();
             int thickness = vertical ? r.width() : r.height();
-            int thumbLength = ScrollBarUtils.getThumbLength(scrollBarLength, thickness, extent, range);
-            int thumbOffset = ScrollBarUtils.getThumbOffset(scrollBarLength, thumbLength, extent, range, this.mOffset);
+            int thumbLength =
+                    ScrollBarUtils.getThumbLength(scrollBarLength, thickness, extent, range);
+            int thumbOffset =
+                    ScrollBarUtils.getThumbOffset(
+                            scrollBarLength, thumbLength, extent, range, this.mOffset);
             drawThumb(canvas, r, thumbOffset, thumbLength, vertical);
         }
     }
@@ -108,7 +112,11 @@ public class ScrollBarDrawable extends Drawable implements Drawable.Callback {
 
     @Override // android.graphics.drawable.Drawable
     public boolean isStateful() {
-        return (this.mVerticalTrack != null && this.mVerticalTrack.isStateful()) || (this.mVerticalThumb != null && this.mVerticalThumb.isStateful()) || ((this.mHorizontalTrack != null && this.mHorizontalTrack.isStateful()) || ((this.mHorizontalThumb != null && this.mHorizontalThumb.isStateful()) || super.isStateful()));
+        return (this.mVerticalTrack != null && this.mVerticalTrack.isStateful())
+                || (this.mVerticalThumb != null && this.mVerticalThumb.isStateful())
+                || ((this.mHorizontalTrack != null && this.mHorizontalTrack.isStateful())
+                        || ((this.mHorizontalThumb != null && this.mHorizontalThumb.isStateful())
+                                || super.isStateful()));
     }
 
     @Override // android.graphics.drawable.Drawable
@@ -151,7 +159,11 @@ public class ScrollBarDrawable extends Drawable implements Drawable.Callback {
             if (this.mVerticalThumb != null) {
                 Drawable thumb = this.mVerticalThumb;
                 if (changed) {
-                    thumb.setBounds(bounds.left, bounds.top + offset, bounds.right, bounds.top + offset + length);
+                    thumb.setBounds(
+                            bounds.left,
+                            bounds.top + offset,
+                            bounds.right,
+                            bounds.top + offset + length);
                     clickableThumbRect.set(thumb.getBounds());
                     if (this.mSemParent != null) {
                         this.mSemParent.mSemVerticalScrollbarRect.set(clickableThumbRect);
@@ -165,7 +177,11 @@ public class ScrollBarDrawable extends Drawable implements Drawable.Callback {
         if (this.mHorizontalThumb != null) {
             Drawable thumb2 = this.mHorizontalThumb;
             if (changed) {
-                thumb2.setBounds(bounds.left + offset, bounds.top, bounds.left + offset + length, bounds.bottom);
+                thumb2.setBounds(
+                        bounds.left + offset,
+                        bounds.top,
+                        bounds.left + offset + length,
+                        bounds.bottom);
                 clickableThumbRect.set(thumb2.getBounds());
                 if (this.mSemParent != null) {
                     this.mSemParent.mSemHorizontalScrollbarRect.set(clickableThumbRect);
@@ -345,6 +361,12 @@ public class ScrollBarDrawable extends Drawable implements Drawable.Callback {
     }
 
     public String toString() {
-        return "ScrollBarDrawable: range=" + this.mRange + " offset=" + this.mOffset + " extent=" + this.mExtent + (this.mVertical ? " V" : " H");
+        return "ScrollBarDrawable: range="
+                + this.mRange
+                + " offset="
+                + this.mOffset
+                + " extent="
+                + this.mExtent
+                + (this.mVertical ? " V" : " H");
     }
 }

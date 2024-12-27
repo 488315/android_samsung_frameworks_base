@@ -4,7 +4,6 @@ import android.app.ResourcesManager;
 import android.app.blob.XmlTags;
 import android.content.om.SamsungThemeConstants;
 import android.content.pm.ActivityInfo;
-import android.content.res.XmlBlock;
 import android.content.res.loader.ResourcesLoader;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemProperties;
@@ -13,8 +12,11 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
+
 import com.android.internal.content.om.OverlayConfig;
+
 import com.samsung.android.util.CustomizedTextParser;
+
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -63,7 +65,8 @@ public final class AssetManager implements AutoCloseable {
 
     public static native int getGlobalAssetManagerCount();
 
-    private static native void nativeApplyStyle(long j, long j2, int i, int i2, long j3, int[] iArr, long j4, long j5);
+    private static native void nativeApplyStyle(
+            long j, long j2, int i, int i2, long j3, int[] iArr, long j4, long j5);
 
     /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeAssetDestroy(long j);
@@ -83,7 +86,8 @@ public final class AssetManager implements AutoCloseable {
     /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeAssetSeek(long j, long j2, int i);
 
-    private static native int[] nativeAttributeResolutionStack(long j, long j2, int i, int i2, int i3);
+    private static native int[] nativeAttributeResolutionStack(
+            long j, long j2, int i, int i2, int i3);
 
     private static native boolean nativeContainsAllocatedTable(long j);
 
@@ -91,7 +95,8 @@ public final class AssetManager implements AutoCloseable {
 
     private static native void nativeDestroy(long j);
 
-    private static native SparseArray<String> nativeGetAssignedPackageIdentifiers(long j, boolean z, boolean z2);
+    private static native SparseArray<String> nativeGetAssignedPackageIdentifiers(
+            long j, boolean z, boolean z2);
 
     private static native String nativeGetLastResourceResolution(long j);
 
@@ -107,11 +112,13 @@ public final class AssetManager implements AutoCloseable {
 
     private static native int nativeGetResourceArraySize(long j, int i);
 
-    private static native int nativeGetResourceBagValue(long j, int i, int i2, TypedValue typedValue);
+    private static native int nativeGetResourceBagValue(
+            long j, int i, int i2, TypedValue typedValue);
 
     private static native String nativeGetResourceEntryName(long j, int i);
 
-    private static native int nativeGetResourceIdentifier(long j, String str, String str2, String str3);
+    private static native int nativeGetResourceIdentifier(
+            long j, String str, String str2, String str3);
 
     private static native int[] nativeGetResourceIntArray(long j, int i);
 
@@ -125,7 +132,8 @@ public final class AssetManager implements AutoCloseable {
 
     private static native String nativeGetResourceTypeName(long j, int i);
 
-    private static native int nativeGetResourceValue(long j, int i, short s, TypedValue typedValue, boolean z);
+    private static native int nativeGetResourceValue(
+            long j, int i, short s, TypedValue typedValue, boolean z);
 
     private static native Configuration[] nativeGetSizeAndUiModeConfigurations(long j);
 
@@ -139,24 +147,51 @@ public final class AssetManager implements AutoCloseable {
 
     private static native long nativeOpenAsset(long j, String str, int i);
 
-    private static native ParcelFileDescriptor nativeOpenAssetFd(long j, String str, long[] jArr) throws IOException;
+    private static native ParcelFileDescriptor nativeOpenAssetFd(long j, String str, long[] jArr)
+            throws IOException;
 
     private static native long nativeOpenNonAsset(long j, int i, String str, int i2);
 
-    private static native ParcelFileDescriptor nativeOpenNonAssetFd(long j, int i, String str, long[] jArr) throws IOException;
+    private static native ParcelFileDescriptor nativeOpenNonAssetFd(
+            long j, int i, String str, long[] jArr) throws IOException;
 
     private static native long nativeOpenXmlAsset(long j, int i, String str);
 
     private static native long nativeOpenXmlAssetFd(long j, int i, FileDescriptor fileDescriptor);
 
-    private static native boolean nativeResolveAttrs(long j, long j2, int i, int i2, int[] iArr, int[] iArr2, int[] iArr3, int[] iArr4);
+    private static native boolean nativeResolveAttrs(
+            long j, long j2, int i, int i2, int[] iArr, int[] iArr2, int[] iArr3, int[] iArr4);
 
-    private static native boolean nativeRetrieveAttributes(long j, long j2, int[] iArr, int[] iArr2, int[] iArr3);
+    private static native boolean nativeRetrieveAttributes(
+            long j, long j2, int[] iArr, int[] iArr2, int[] iArr3);
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static native void nativeSetApkAssets(long j, ApkAssets[] apkAssetsArr, boolean z, boolean z2);
+    public static native void nativeSetApkAssets(
+            long j, ApkAssets[] apkAssetsArr, boolean z, boolean z2);
 
-    private static native void nativeSetConfiguration(long j, int i, int i2, String str, String[] strArr, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16, int i17, int i18, boolean z);
+    private static native void nativeSetConfiguration(
+            long j,
+            int i,
+            int i2,
+            String str,
+            String[] strArr,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            int i11,
+            int i12,
+            int i13,
+            int i14,
+            int i15,
+            int i16,
+            int i17,
+            int i18,
+            boolean z);
 
     private static native void nativeSetResourceResolutionLoggingEnabled(long j, boolean z);
 
@@ -168,11 +203,13 @@ public final class AssetManager implements AutoCloseable {
 
     private static native void nativeThemeDump(long j, long j2, int i, String str, String str2);
 
-    private static native int nativeThemeGetAttributeValue(long j, long j2, int i, TypedValue typedValue, boolean z);
+    private static native int nativeThemeGetAttributeValue(
+            long j, long j2, int i, TypedValue typedValue, boolean z);
 
     static native int nativeThemeGetChangingConfigurations(long j);
 
-    private static native void nativeThemeRebase(long j, long j2, int[] iArr, boolean[] zArr, int i);
+    private static native void nativeThemeRebase(
+            long j, long j2, int[] iArr, boolean[] zArr, int i);
 
     public static class Builder {
         private ArrayList<ApkAssets> mUserApkAssets = new ArrayList<>();
@@ -214,7 +251,8 @@ public final class AssetManager implements AutoCloseable {
                     }
                 }
             }
-            ApkAssets[] apkAssetsArr = new ApkAssets[apkAssets.length + this.mUserApkAssets.size() + arrayList.size()];
+            ApkAssets[] apkAssetsArr =
+                    new ApkAssets[apkAssets.length + this.mUserApkAssets.size() + arrayList.size()];
             System.arraycopy(apkAssets, 0, apkAssetsArr, 0, apkAssets.length);
             int size3 = this.mUserApkAssets.size();
             for (int i = 0; i < size3; i++) {
@@ -222,12 +260,17 @@ public final class AssetManager implements AutoCloseable {
             }
             int size4 = arrayList.size();
             for (int i2 = 0; i2 < size4; i2++) {
-                apkAssetsArr[apkAssets.length + i2 + this.mUserApkAssets.size()] = (ApkAssets) arrayList.get(i2);
+                apkAssetsArr[apkAssets.length + i2 + this.mUserApkAssets.size()] =
+                        (ApkAssets) arrayList.get(i2);
             }
             AssetManager assetManager = new AssetManager(z);
             assetManager.mApkAssets = apkAssetsArr;
-            AssetManager.nativeSetApkAssets(assetManager.mObject, apkAssetsArr, false, this.mNoInit);
-            assetManager.mLoaders = this.mLoaders.isEmpty() ? null : (ResourcesLoader[]) this.mLoaders.toArray(new ResourcesLoader[0]);
+            AssetManager.nativeSetApkAssets(
+                    assetManager.mObject, apkAssetsArr, false, this.mNoInit);
+            assetManager.mLoaders =
+                    this.mLoaders.isEmpty()
+                            ? null
+                            : (ResourcesLoader[]) this.mLoaders.toArray(new ResourcesLoader[0]);
             assetManager.updateSamsungThemeOverlays();
             return assetManager;
         }
@@ -257,14 +300,16 @@ public final class AssetManager implements AutoCloseable {
         this.mObject = nativeCreate();
     }
 
-    public static void createSystemAssetsInZygoteLocked(boolean reinitialize, String frameworkPath) {
+    public static void createSystemAssetsInZygoteLocked(
+            boolean reinitialize, String frameworkPath) {
         if (sSystem != null && !reinitialize) {
             return;
         }
         try {
             ArrayList<ApkAssets> apkAssets = new ArrayList<>();
             apkAssets.add(ApkAssets.loadFromPath(frameworkPath, 1));
-            String[] systemIdmapPaths = OverlayConfig.getZygoteInstance().createImmutableFrameworkIdmapsInZygote();
+            String[] systemIdmapPaths =
+                    OverlayConfig.getZygoteInstance().createImmutableFrameworkIdmapsInZygote();
             for (String idmapPath : systemIdmapPaths) {
                 apkAssets.add(ApkAssets.loadOverlayFromPath(idmapPath, 1));
             }
@@ -334,7 +379,8 @@ public final class AssetManager implements AutoCloseable {
             }
             for (ApkAssets apkAsset : this.mApkAssets) {
                 String path = apkAsset.getAssetPath();
-                if (path.startsWith(SamsungThemeConstants.PATH_OVERLAY_CURRENT_STYLE) && !this.mSamsungThemeOverlays.contains(path)) {
+                if (path.startsWith(SamsungThemeConstants.PATH_OVERLAY_CURRENT_STYLE)
+                        && !this.mSamsungThemeOverlays.contains(path)) {
                     this.mSamsungThemeOverlays.add(path);
                 }
             }
@@ -366,8 +412,7 @@ public final class AssetManager implements AutoCloseable {
         setApkAssets((ApkAssets[]) apkAssets.toArray(new ApkAssets[0]), true);
     }
 
-    private void invalidateCachesLocked(int diff) {
-    }
+    private void invalidateCachesLocked(int diff) {}
 
     public ApkAssets[] getApkAssets() {
         synchronized (this) {
@@ -408,7 +453,8 @@ public final class AssetManager implements AutoCloseable {
 
     @Deprecated
     public int addAssetPath(String path) {
-        return addAssetPathInternal(List.of(new ResourcesManager.ApkKey(path, false, false)), false);
+        return addAssetPathInternal(
+                List.of(new ResourcesManager.ApkKey(path, false, false)), false);
     }
 
     @Deprecated
@@ -488,7 +534,12 @@ public final class AssetManager implements AutoCloseable {
             newAssetsArray[firstLoaderIndex + i2] = newNonLoaderAssets.get(i2);
         }
         if (originalAssetsCount > firstLoaderIndex) {
-            System.arraycopy(this.mApkAssets, firstLoaderIndex, newAssetsArray, firstLoaderIndex + newAssetsSize, originalAssetsCount - firstLoaderIndex);
+            System.arraycopy(
+                    this.mApkAssets,
+                    firstLoaderIndex,
+                    newAssetsArray,
+                    firstLoaderIndex + newAssetsSize,
+                    originalAssetsCount - firstLoaderIndex);
         }
         return newAssetsArray;
     }
@@ -539,13 +590,17 @@ public final class AssetManager implements AutoCloseable {
         Objects.requireNonNull(outValue, "outValue");
         synchronized (this) {
             ensureValidLocked();
-            int cookie = nativeGetResourceValue(this.mObject, resId, (short) densityDpi, outValue, resolveRefs);
+            int cookie =
+                    nativeGetResourceValue(
+                            this.mObject, resId, (short) densityDpi, outValue, resolveRefs);
             if (cookie <= 0) {
                 return false;
             }
-            outValue.changingConfigurations = ActivityInfo.activityInfoConfigNativeToJava(outValue.changingConfigurations);
+            outValue.changingConfigurations =
+                    ActivityInfo.activityInfoConfigNativeToJava(outValue.changingConfigurations);
             if (outValue.type == 3) {
-                CharSequence pooledStringForCookie = getPooledStringForCookie(cookie, outValue.data);
+                CharSequence pooledStringForCookie =
+                        getPooledStringForCookie(cookie, outValue.data);
                 outValue.string = pooledStringForCookie;
                 if (pooledStringForCookie == null) {
                     return false;
@@ -573,7 +628,8 @@ public final class AssetManager implements AutoCloseable {
             if (cookie <= 0) {
                 return null;
             }
-            outValue.changingConfigurations = ActivityInfo.activityInfoConfigNativeToJava(outValue.changingConfigurations);
+            outValue.changingConfigurations =
+                    ActivityInfo.activityInfoConfigNativeToJava(outValue.changingConfigurations);
             if (outValue.type == 3) {
                 return getPooledStringForCookie(cookie, outValue.data);
             }
@@ -660,13 +716,16 @@ public final class AssetManager implements AutoCloseable {
         Objects.requireNonNull(outValue, "outValue");
         synchronized (this) {
             ensureValidLocked();
-            int cookie = nativeThemeGetAttributeValue(this.mObject, theme, resId, outValue, resolveRefs);
+            int cookie =
+                    nativeThemeGetAttributeValue(this.mObject, theme, resId, outValue, resolveRefs);
             if (cookie <= 0) {
                 return false;
             }
-            outValue.changingConfigurations = ActivityInfo.activityInfoConfigNativeToJava(outValue.changingConfigurations);
+            outValue.changingConfigurations =
+                    ActivityInfo.activityInfoConfigNativeToJava(outValue.changingConfigurations);
             if (outValue.type == 3) {
-                CharSequence pooledStringForCookie = getPooledStringForCookie(cookie, outValue.data);
+                CharSequence pooledStringForCookie =
+                        getPooledStringForCookie(cookie, outValue.data);
                 outValue.string = pooledStringForCookie;
                 if (pooledStringForCookie == null) {
                     return false;
@@ -723,7 +782,8 @@ public final class AssetManager implements AutoCloseable {
         int nativeGetResourceIdentifier;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetResourceIdentifier = nativeGetResourceIdentifier(this.mObject, name, defType, defPackage);
+            nativeGetResourceIdentifier =
+                    nativeGetResourceIdentifier(this.mObject, name, defType, defPackage);
         }
         return nativeGetResourceIdentifier;
     }
@@ -825,7 +885,8 @@ public final class AssetManager implements AutoCloseable {
         return openNonAsset(cookie, fileName, 2);
     }
 
-    public InputStream openNonAsset(int cookie, String fileName, int accessMode) throws IOException {
+    public InputStream openNonAsset(int cookie, String fileName, int accessMode)
+            throws IOException {
         AssetInputStream assetInputStream;
         Objects.requireNonNull(fileName, "fileName");
         synchronized (this) {
@@ -849,7 +910,8 @@ public final class AssetManager implements AutoCloseable {
         Objects.requireNonNull(fileName, "fileName");
         synchronized (this) {
             ensureOpenLocked();
-            ParcelFileDescriptor pfd = nativeOpenNonAssetFd(this.mObject, cookie, fileName, this.mOffsets);
+            ParcelFileDescriptor pfd =
+                    nativeOpenNonAssetFd(this.mObject, cookie, fileName, this.mOffsets);
             if (pfd == null) {
                 throw new FileNotFoundException("Asset absolute file: " + fileName);
             }
@@ -910,36 +972,71 @@ public final class AssetManager implements AutoCloseable {
         }
     }
 
-    void applyStyle(long themePtr, int defStyleAttr, int defStyleRes, XmlBlock.Parser parser, int[] inAttrs, long outValuesAddress, long outIndicesAddress) {
+    void applyStyle(
+            long themePtr,
+            int defStyleAttr,
+            int defStyleRes,
+            XmlBlock.Parser parser,
+            int[] inAttrs,
+            long outValuesAddress,
+            long outIndicesAddress) {
         Objects.requireNonNull(inAttrs, "inAttrs");
         synchronized (this) {
             ensureValidLocked();
-            nativeApplyStyle(this.mObject, themePtr, defStyleAttr, defStyleRes, parser != null ? parser.mParseState : 0L, inAttrs, outValuesAddress, outIndicesAddress);
+            nativeApplyStyle(
+                    this.mObject,
+                    themePtr,
+                    defStyleAttr,
+                    defStyleRes,
+                    parser != null ? parser.mParseState : 0L,
+                    inAttrs,
+                    outValuesAddress,
+                    outIndicesAddress);
         }
     }
 
-    int[] getAttributeResolutionStack(long themePtr, int defStyleAttr, int defStyleRes, int xmlStyle) {
+    int[] getAttributeResolutionStack(
+            long themePtr, int defStyleAttr, int defStyleRes, int xmlStyle) {
         int[] nativeAttributeResolutionStack;
         synchronized (this) {
             ensureValidLocked();
-            nativeAttributeResolutionStack = nativeAttributeResolutionStack(this.mObject, themePtr, xmlStyle, defStyleAttr, defStyleRes);
+            nativeAttributeResolutionStack =
+                    nativeAttributeResolutionStack(
+                            this.mObject, themePtr, xmlStyle, defStyleAttr, defStyleRes);
         }
         return nativeAttributeResolutionStack;
     }
 
-    boolean resolveAttrs(long themePtr, int defStyleAttr, int defStyleRes, int[] inValues, int[] inAttrs, int[] outValues, int[] outIndices) {
+    boolean resolveAttrs(
+            long themePtr,
+            int defStyleAttr,
+            int defStyleRes,
+            int[] inValues,
+            int[] inAttrs,
+            int[] outValues,
+            int[] outIndices) {
         boolean nativeResolveAttrs;
         Objects.requireNonNull(inAttrs, "inAttrs");
         Objects.requireNonNull(outValues, "outValues");
         Objects.requireNonNull(outIndices, "outIndices");
         synchronized (this) {
             ensureValidLocked();
-            nativeResolveAttrs = nativeResolveAttrs(this.mObject, themePtr, defStyleAttr, defStyleRes, inValues, inAttrs, outValues, outIndices);
+            nativeResolveAttrs =
+                    nativeResolveAttrs(
+                            this.mObject,
+                            themePtr,
+                            defStyleAttr,
+                            defStyleRes,
+                            inValues,
+                            inAttrs,
+                            outValues,
+                            outIndices);
         }
         return nativeResolveAttrs;
     }
 
-    boolean retrieveAttributes(XmlBlock.Parser parser, int[] inAttrs, int[] outValues, int[] outIndices) {
+    boolean retrieveAttributes(
+            XmlBlock.Parser parser, int[] inAttrs, int[] outValues, int[] outIndices) {
         boolean nativeRetrieveAttributes;
         Objects.requireNonNull(parser, "parser");
         Objects.requireNonNull(inAttrs, "inAttrs");
@@ -947,7 +1044,9 @@ public final class AssetManager implements AutoCloseable {
         Objects.requireNonNull(outIndices, "outIndices");
         synchronized (this) {
             ensureValidLocked();
-            nativeRetrieveAttributes = nativeRetrieveAttributes(this.mObject, parser.mParseState, inAttrs, outValues, outIndices);
+            nativeRetrieveAttributes =
+                    nativeRetrieveAttributes(
+                            this.mObject, parser.mParseState, inAttrs, outValues, outIndices);
         }
         return nativeRetrieveAttributes;
     }
@@ -979,7 +1078,12 @@ public final class AssetManager implements AutoCloseable {
         }
     }
 
-    AssetManager rebaseTheme(long themePtr, AssetManager newAssetManager, int[] styleIds, boolean[] force, int count) {
+    AssetManager rebaseTheme(
+            long themePtr,
+            AssetManager newAssetManager,
+            int[] styleIds,
+            boolean[] force,
+            int count) {
         if (this != newAssetManager) {
             synchronized (this) {
                 ensureValidLocked();
@@ -1172,27 +1276,171 @@ public final class AssetManager implements AutoCloseable {
         Configuration[] nativeGetSizeAndUiModeConfigurations;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetSizeAndUiModeConfigurations = nativeGetSizeAndUiModeConfigurations(this.mObject);
+            nativeGetSizeAndUiModeConfigurations =
+                    nativeGetSizeAndUiModeConfigurations(this.mObject);
         }
         return nativeGetSizeAndUiModeConfigurations;
     }
 
-    public void setConfiguration(int mcc, int mnc, String locale, int orientation, int touchscreen, int density, int keyboard, int keyboardHidden, int navigation, int screenWidth, int screenHeight, int smallestScreenWidthDp, int screenWidthDp, int screenHeightDp, int screenLayout, int uiMode, int colorMode, int grammaticalGender, int majorVersion) {
+    public void setConfiguration(
+            int mcc,
+            int mnc,
+            String locale,
+            int orientation,
+            int touchscreen,
+            int density,
+            int keyboard,
+            int keyboardHidden,
+            int navigation,
+            int screenWidth,
+            int screenHeight,
+            int smallestScreenWidthDp,
+            int screenWidthDp,
+            int screenHeightDp,
+            int screenLayout,
+            int uiMode,
+            int colorMode,
+            int grammaticalGender,
+            int majorVersion) {
         if (locale != null) {
-            setConfiguration(mcc, mnc, null, new String[]{locale}, orientation, touchscreen, density, keyboard, keyboardHidden, navigation, screenWidth, screenHeight, smallestScreenWidthDp, screenWidthDp, screenHeightDp, screenLayout, uiMode, colorMode, grammaticalGender, majorVersion);
+            setConfiguration(
+                    mcc,
+                    mnc,
+                    null,
+                    new String[] {locale},
+                    orientation,
+                    touchscreen,
+                    density,
+                    keyboard,
+                    keyboardHidden,
+                    navigation,
+                    screenWidth,
+                    screenHeight,
+                    smallestScreenWidthDp,
+                    screenWidthDp,
+                    screenHeightDp,
+                    screenLayout,
+                    uiMode,
+                    colorMode,
+                    grammaticalGender,
+                    majorVersion);
         } else {
-            setConfiguration(mcc, mnc, null, null, orientation, touchscreen, density, keyboard, keyboardHidden, navigation, screenWidth, screenHeight, smallestScreenWidthDp, screenWidthDp, screenHeightDp, screenLayout, uiMode, colorMode, grammaticalGender, majorVersion);
+            setConfiguration(
+                    mcc,
+                    mnc,
+                    null,
+                    null,
+                    orientation,
+                    touchscreen,
+                    density,
+                    keyboard,
+                    keyboardHidden,
+                    navigation,
+                    screenWidth,
+                    screenHeight,
+                    smallestScreenWidthDp,
+                    screenWidthDp,
+                    screenHeightDp,
+                    screenLayout,
+                    uiMode,
+                    colorMode,
+                    grammaticalGender,
+                    majorVersion);
         }
     }
 
-    public void setConfiguration(int mcc, int mnc, String defaultLocale, String[] locales, int orientation, int touchscreen, int density, int keyboard, int keyboardHidden, int navigation, int screenWidth, int screenHeight, int smallestScreenWidthDp, int screenWidthDp, int screenHeightDp, int screenLayout, int uiMode, int colorMode, int grammaticalGender, int majorVersion) {
-        setConfigurationInternal(mcc, mnc, defaultLocale, locales, orientation, touchscreen, density, keyboard, keyboardHidden, navigation, screenWidth, screenHeight, smallestScreenWidthDp, screenWidthDp, screenHeightDp, screenLayout, uiMode, colorMode, grammaticalGender, majorVersion, false);
+    public void setConfiguration(
+            int mcc,
+            int mnc,
+            String defaultLocale,
+            String[] locales,
+            int orientation,
+            int touchscreen,
+            int density,
+            int keyboard,
+            int keyboardHidden,
+            int navigation,
+            int screenWidth,
+            int screenHeight,
+            int smallestScreenWidthDp,
+            int screenWidthDp,
+            int screenHeightDp,
+            int screenLayout,
+            int uiMode,
+            int colorMode,
+            int grammaticalGender,
+            int majorVersion) {
+        setConfigurationInternal(
+                mcc,
+                mnc,
+                defaultLocale,
+                locales,
+                orientation,
+                touchscreen,
+                density,
+                keyboard,
+                keyboardHidden,
+                navigation,
+                screenWidth,
+                screenHeight,
+                smallestScreenWidthDp,
+                screenWidthDp,
+                screenHeightDp,
+                screenLayout,
+                uiMode,
+                colorMode,
+                grammaticalGender,
+                majorVersion,
+                false);
     }
 
-    void setConfigurationInternal(int mcc, int mnc, String defaultLocale, String[] locales, int orientation, int touchscreen, int density, int keyboard, int keyboardHidden, int navigation, int screenWidth, int screenHeight, int smallestScreenWidthDp, int screenWidthDp, int screenHeightDp, int screenLayout, int uiMode, int colorMode, int grammaticalGender, int majorVersion, boolean forceRefresh) {
+    void setConfigurationInternal(
+            int mcc,
+            int mnc,
+            String defaultLocale,
+            String[] locales,
+            int orientation,
+            int touchscreen,
+            int density,
+            int keyboard,
+            int keyboardHidden,
+            int navigation,
+            int screenWidth,
+            int screenHeight,
+            int smallestScreenWidthDp,
+            int screenWidthDp,
+            int screenHeightDp,
+            int screenLayout,
+            int uiMode,
+            int colorMode,
+            int grammaticalGender,
+            int majorVersion,
+            boolean forceRefresh) {
         synchronized (this) {
             ensureValidLocked();
-            nativeSetConfiguration(this.mObject, mcc, mnc, defaultLocale, locales, orientation, touchscreen, density, keyboard, keyboardHidden, navigation, screenWidth, screenHeight, smallestScreenWidthDp, screenWidthDp, screenHeightDp, screenLayout, uiMode, colorMode, grammaticalGender, majorVersion, forceRefresh);
+            nativeSetConfiguration(
+                    this.mObject,
+                    mcc,
+                    mnc,
+                    defaultLocale,
+                    locales,
+                    orientation,
+                    touchscreen,
+                    density,
+                    keyboard,
+                    keyboardHidden,
+                    navigation,
+                    screenWidth,
+                    screenHeight,
+                    smallestScreenWidthDp,
+                    screenWidthDp,
+                    screenHeightDp,
+                    screenLayout,
+                    uiMode,
+                    colorMode,
+                    grammaticalGender,
+                    majorVersion,
+                    forceRefresh);
         }
     }
 
@@ -1200,11 +1448,14 @@ public final class AssetManager implements AutoCloseable {
         return getAssignedPackageIdentifiers(true, true);
     }
 
-    public SparseArray<String> getAssignedPackageIdentifiers(boolean includeOverlays, boolean includeLoaders) {
+    public SparseArray<String> getAssignedPackageIdentifiers(
+            boolean includeOverlays, boolean includeLoaders) {
         SparseArray<String> nativeGetAssignedPackageIdentifiers;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetAssignedPackageIdentifiers = nativeGetAssignedPackageIdentifiers(this.mObject, includeOverlays, includeLoaders);
+            nativeGetAssignedPackageIdentifiers =
+                    nativeGetAssignedPackageIdentifiers(
+                            this.mObject, includeOverlays, includeLoaders);
         }
         return nativeGetAssignedPackageIdentifiers;
     }
@@ -1222,7 +1473,8 @@ public final class AssetManager implements AutoCloseable {
         String nativeGetOverlayablesToString;
         synchronized (this) {
             ensureValidLocked();
-            nativeGetOverlayablesToString = nativeGetOverlayablesToString(this.mObject, packageName);
+            nativeGetOverlayablesToString =
+                    nativeGetOverlayablesToString(this.mObject, packageName);
         }
         return nativeGetOverlayablesToString;
     }

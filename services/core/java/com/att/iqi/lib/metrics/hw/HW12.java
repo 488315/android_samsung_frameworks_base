@@ -2,7 +2,9 @@ package com.att.iqi.lib.metrics.hw;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.att.iqi.lib.Metric;
+
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 
@@ -12,20 +14,20 @@ public class HW12 extends Metric {
     private byte ucCause;
     private byte ucProcessor;
     public static final Metric.ID ID = new Metric.ID("HW12");
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.hw.HW12.1
-        @Override // android.os.Parcelable.Creator
-        public HW12 createFromParcel(Parcel parcel) {
-            return new HW12(parcel);
-        }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.hw.HW12.1
+                @Override // android.os.Parcelable.Creator
+                public HW12 createFromParcel(Parcel parcel) {
+                    return new HW12(parcel);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public HW12[] newArray(int i) {
-            return new HW12[i];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public HW12[] newArray(int i) {
+                    return new HW12[i];
+                }
+            };
 
-    public HW12() {
-    }
+    public HW12() {}
 
     public HW12(Parcel parcel) {
         super(parcel);

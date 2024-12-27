@@ -6,14 +6,15 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.service.autofill.Presentations;
 import android.util.ArrayMap;
 import android.view.autofill.AutofillId;
 import android.view.autofill.AutofillManager;
 import android.view.autofill.AutofillValue;
 import android.view.autofill.Helper;
 import android.widget.RemoteViews;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -22,86 +23,115 @@ import java.util.regex.Pattern;
 
 /* loaded from: classes3.dex */
 public final class Dataset implements Parcelable {
-    public static final Parcelable.Creator<Dataset> CREATOR = new Parcelable.Creator<Dataset>() { // from class: android.service.autofill.Dataset.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Dataset createFromParcel(Parcel parcel) {
-            Presentations.Builder presentationsBuilder;
-            Builder builder;
-            RemoteViews presentation = (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
-            RemoteViews dialogPresentation = (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
-            InlinePresentation inlinePresentation = (InlinePresentation) parcel.readParcelable(null, InlinePresentation.class);
-            InlinePresentation inlineTooltipPresentation = (InlinePresentation) parcel.readParcelable(null, InlinePresentation.class);
-            ArrayList<AutofillId> ids = parcel.createTypedArrayList(AutofillId.CREATOR);
-            ArrayList<AutofillValue> values = parcel.createTypedArrayList(AutofillValue.CREATOR);
-            ArrayList<RemoteViews> presentations = parcel.createTypedArrayList(RemoteViews.CREATOR);
-            ArrayList<RemoteViews> dialogPresentations = parcel.createTypedArrayList(RemoteViews.CREATOR);
-            ArrayList<InlinePresentation> inlinePresentations = parcel.createTypedArrayList(InlinePresentation.CREATOR);
-            ArrayList<InlinePresentation> inlineTooltipPresentations = parcel.createTypedArrayList(InlinePresentation.CREATOR);
-            ArrayList<DatasetFieldFilter> filters = parcel.createTypedArrayList(DatasetFieldFilter.CREATOR);
-            ArrayList<String> autofillDatatypes = parcel.createStringArrayList();
-            ClipData fieldContent = (ClipData) parcel.readParcelable(null, ClipData.class);
-            IntentSender authentication = (IntentSender) parcel.readParcelable(null, IntentSender.class);
-            String datasetId = parcel.readString();
-            int eligibleReason = parcel.readInt();
-            Intent credentialFillInIntent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-            if (presentation != null || inlinePresentation != null || dialogPresentation != null) {
-                Presentations.Builder presentationsBuilder2 = new Presentations.Builder();
-                if (presentation == null) {
-                    presentationsBuilder = presentationsBuilder2;
-                } else {
-                    presentationsBuilder = presentationsBuilder2;
-                    presentationsBuilder.setMenuPresentation(presentation);
+    public static final Parcelable.Creator<Dataset> CREATOR =
+            new Parcelable.Creator<Dataset>() { // from class: android.service.autofill.Dataset.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Dataset createFromParcel(Parcel parcel) {
+                    Presentations.Builder presentationsBuilder;
+                    Builder builder;
+                    RemoteViews presentation =
+                            (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
+                    RemoteViews dialogPresentation =
+                            (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
+                    InlinePresentation inlinePresentation =
+                            (InlinePresentation)
+                                    parcel.readParcelable(null, InlinePresentation.class);
+                    InlinePresentation inlineTooltipPresentation =
+                            (InlinePresentation)
+                                    parcel.readParcelable(null, InlinePresentation.class);
+                    ArrayList<AutofillId> ids = parcel.createTypedArrayList(AutofillId.CREATOR);
+                    ArrayList<AutofillValue> values =
+                            parcel.createTypedArrayList(AutofillValue.CREATOR);
+                    ArrayList<RemoteViews> presentations =
+                            parcel.createTypedArrayList(RemoteViews.CREATOR);
+                    ArrayList<RemoteViews> dialogPresentations =
+                            parcel.createTypedArrayList(RemoteViews.CREATOR);
+                    ArrayList<InlinePresentation> inlinePresentations =
+                            parcel.createTypedArrayList(InlinePresentation.CREATOR);
+                    ArrayList<InlinePresentation> inlineTooltipPresentations =
+                            parcel.createTypedArrayList(InlinePresentation.CREATOR);
+                    ArrayList<DatasetFieldFilter> filters =
+                            parcel.createTypedArrayList(DatasetFieldFilter.CREATOR);
+                    ArrayList<String> autofillDatatypes = parcel.createStringArrayList();
+                    ClipData fieldContent = (ClipData) parcel.readParcelable(null, ClipData.class);
+                    IntentSender authentication =
+                            (IntentSender) parcel.readParcelable(null, IntentSender.class);
+                    String datasetId = parcel.readString();
+                    int eligibleReason = parcel.readInt();
+                    Intent credentialFillInIntent = (Intent) parcel.readTypedObject(Intent.CREATOR);
+                    if (presentation != null
+                            || inlinePresentation != null
+                            || dialogPresentation != null) {
+                        Presentations.Builder presentationsBuilder2 = new Presentations.Builder();
+                        if (presentation == null) {
+                            presentationsBuilder = presentationsBuilder2;
+                        } else {
+                            presentationsBuilder = presentationsBuilder2;
+                            presentationsBuilder.setMenuPresentation(presentation);
+                        }
+                        if (inlinePresentation != null) {
+                            presentationsBuilder.setInlinePresentation(inlinePresentation);
+                        }
+                        if (inlineTooltipPresentation != null) {
+                            presentationsBuilder.setInlineTooltipPresentation(
+                                    inlineTooltipPresentation);
+                        }
+                        if (dialogPresentation != null) {
+                            presentationsBuilder.setDialogPresentation(dialogPresentation);
+                        }
+                        builder = new Builder(presentationsBuilder.build());
+                    } else {
+                        builder = new Builder();
+                    }
+                    if (fieldContent != null) {
+                        builder.setContent(ids.get(0), fieldContent);
+                    }
+                    int inlinePresentationsSize = inlinePresentations.size();
+                    int i = 0;
+                    while (true) {
+                        InlinePresentation inlinePresentation2 = inlinePresentation;
+                        if (i < ids.size()) {
+                            AutofillId id = ids.get(i);
+                            String datatype = autofillDatatypes.get(i);
+                            AutofillValue value = values.get(i);
+                            RemoteViews fieldPresentation = presentations.get(i);
+                            RemoteViews fieldDialogPresentation = dialogPresentations.get(i);
+                            InlinePresentation fieldInlinePresentation =
+                                    i < inlinePresentationsSize ? inlinePresentations.get(i) : null;
+                            InlinePresentation fieldInlineTooltipPresentation =
+                                    i < inlinePresentationsSize
+                                            ? inlineTooltipPresentations.get(i)
+                                            : null;
+                            DatasetFieldFilter filter = filters.get(i);
+                            builder.createFromParcel(
+                                    id,
+                                    datatype,
+                                    value,
+                                    fieldPresentation,
+                                    fieldInlinePresentation,
+                                    fieldInlineTooltipPresentation,
+                                    filter,
+                                    fieldDialogPresentation);
+                            i++;
+                            inlinePresentation = inlinePresentation2;
+                        } else {
+                            builder.setAuthentication(authentication);
+                            builder.setCredentialFillInIntent(credentialFillInIntent);
+                            builder.setId(datasetId);
+                            Dataset dataset = builder.build();
+                            dataset.mEligibleReason = eligibleReason;
+                            return dataset;
+                        }
+                    }
                 }
-                if (inlinePresentation != null) {
-                    presentationsBuilder.setInlinePresentation(inlinePresentation);
-                }
-                if (inlineTooltipPresentation != null) {
-                    presentationsBuilder.setInlineTooltipPresentation(inlineTooltipPresentation);
-                }
-                if (dialogPresentation != null) {
-                    presentationsBuilder.setDialogPresentation(dialogPresentation);
-                }
-                builder = new Builder(presentationsBuilder.build());
-            } else {
-                builder = new Builder();
-            }
-            if (fieldContent != null) {
-                builder.setContent(ids.get(0), fieldContent);
-            }
-            int inlinePresentationsSize = inlinePresentations.size();
-            int i = 0;
-            while (true) {
-                InlinePresentation inlinePresentation2 = inlinePresentation;
-                if (i < ids.size()) {
-                    AutofillId id = ids.get(i);
-                    String datatype = autofillDatatypes.get(i);
-                    AutofillValue value = values.get(i);
-                    RemoteViews fieldPresentation = presentations.get(i);
-                    RemoteViews fieldDialogPresentation = dialogPresentations.get(i);
-                    InlinePresentation fieldInlinePresentation = i < inlinePresentationsSize ? inlinePresentations.get(i) : null;
-                    InlinePresentation fieldInlineTooltipPresentation = i < inlinePresentationsSize ? inlineTooltipPresentations.get(i) : null;
-                    DatasetFieldFilter filter = filters.get(i);
-                    builder.createFromParcel(id, datatype, value, fieldPresentation, fieldInlinePresentation, fieldInlineTooltipPresentation, filter, fieldDialogPresentation);
-                    i++;
-                    inlinePresentation = inlinePresentation2;
-                } else {
-                    builder.setAuthentication(authentication);
-                    builder.setCredentialFillInIntent(credentialFillInIntent);
-                    builder.setId(datasetId);
-                    Dataset dataset = builder.build();
-                    dataset.mEligibleReason = eligibleReason;
-                    return dataset;
-                }
-            }
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Dataset[] newArray(int size) {
-            return new Dataset[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Dataset[] newArray(int size) {
+                    return new Dataset[size];
+                }
+            };
     public static final int PICK_REASON_NO_PCC = 1;
     public static final int PICK_REASON_PCC_DETECTION_ONLY = 4;
     public static final int PICK_REASON_PCC_DETECTION_PREFERRED_WITH_PROVIDER = 5;
@@ -127,10 +157,24 @@ public final class Dataset implements Parcelable {
     private final RemoteViews mPresentation;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DatasetEligibleReason {
-    }
+    public @interface DatasetEligibleReason {}
 
-    public Dataset(ArrayList<AutofillId> fieldIds, ArrayList<AutofillValue> fieldValues, ArrayList<RemoteViews> fieldPresentations, ArrayList<RemoteViews> fieldDialogPresentations, ArrayList<InlinePresentation> fieldInlinePresentations, ArrayList<InlinePresentation> fieldInlineTooltipPresentations, ArrayList<DatasetFieldFilter> fieldFilters, ArrayList<String> autofillDatatypes, ClipData fieldContent, RemoteViews presentation, RemoteViews dialogPresentation, InlinePresentation inlinePresentation, InlinePresentation inlineTooltipPresentation, String id, IntentSender authentication) {
+    public Dataset(
+            ArrayList<AutofillId> fieldIds,
+            ArrayList<AutofillValue> fieldValues,
+            ArrayList<RemoteViews> fieldPresentations,
+            ArrayList<RemoteViews> fieldDialogPresentations,
+            ArrayList<InlinePresentation> fieldInlinePresentations,
+            ArrayList<InlinePresentation> fieldInlineTooltipPresentations,
+            ArrayList<DatasetFieldFilter> fieldFilters,
+            ArrayList<String> autofillDatatypes,
+            ClipData fieldContent,
+            RemoteViews presentation,
+            RemoteViews dialogPresentation,
+            InlinePresentation inlinePresentation,
+            InlinePresentation inlineTooltipPresentation,
+            String id,
+            IntentSender authentication) {
         this.mFieldIds = fieldIds;
         this.mFieldValues = fieldValues;
         this.mFieldPresentations = fieldPresentations;
@@ -215,8 +259,11 @@ public final class Dataset implements Parcelable {
     }
 
     public InlinePresentation getFieldInlineTooltipPresentation(int index) {
-        InlinePresentation inlineTooltipPresentation = this.mFieldInlineTooltipPresentations.get(index);
-        return inlineTooltipPresentation != null ? inlineTooltipPresentation : this.mInlineTooltipPresentation;
+        InlinePresentation inlineTooltipPresentation =
+                this.mFieldInlineTooltipPresentations.get(index);
+        return inlineTooltipPresentation != null
+                ? inlineTooltipPresentation
+                : this.mInlineTooltipPresentation;
     }
 
     public DatasetFieldFilter getFilter(int index) {
@@ -266,13 +313,16 @@ public final class Dataset implements Parcelable {
             builder.append(", fieldPresentations=").append(this.mFieldPresentations.size());
         }
         if (this.mFieldDialogPresentations != null) {
-            builder.append(", fieldDialogPresentations=").append(this.mFieldDialogPresentations.size());
+            builder.append(", fieldDialogPresentations=")
+                    .append(this.mFieldDialogPresentations.size());
         }
         if (this.mFieldInlinePresentations != null) {
-            builder.append(", fieldInlinePresentations=").append(this.mFieldInlinePresentations.size());
+            builder.append(", fieldInlinePresentations=")
+                    .append(this.mFieldInlinePresentations.size());
         }
         if (this.mFieldInlineTooltipPresentations != null) {
-            builder.append(", fieldInlineTooltipInlinePresentations=").append(this.mFieldInlineTooltipPresentations.size());
+            builder.append(", fieldInlineTooltipInlinePresentations=")
+                    .append(this.mFieldInlineTooltipPresentations.size());
         }
         if (this.mFieldFilters != null) {
             builder.append(", fieldFilters=").append(this.mFieldFilters.size());
@@ -354,8 +404,7 @@ public final class Dataset implements Parcelable {
             this.mDialogPresentation = presentations.getDialogPresentation();
         }
 
-        public Builder() {
-        }
+        public Builder() {}
 
         @Deprecated
         public Builder setInlinePresentation(InlinePresentation inlinePresentation) {
@@ -366,10 +415,13 @@ public final class Dataset implements Parcelable {
         }
 
         @Deprecated
-        public Builder setInlinePresentation(InlinePresentation inlinePresentation, InlinePresentation inlineTooltipPresentation) {
+        public Builder setInlinePresentation(
+                InlinePresentation inlinePresentation,
+                InlinePresentation inlineTooltipPresentation) {
             throwIfDestroyed();
             Objects.requireNonNull(inlinePresentation, "inlinePresentation must be non-null");
-            Objects.requireNonNull(inlineTooltipPresentation, "inlineTooltipPresentation must be non-null");
+            Objects.requireNonNull(
+                    inlineTooltipPresentation, "inlineTooltipPresentation must be non-null");
             this.mInlinePresentation = inlinePresentation;
             this.mInlineTooltipPresentation = inlineTooltipPresentation;
             return this;
@@ -398,10 +450,19 @@ public final class Dataset implements Parcelable {
             throwIfDestroyed();
             if (content != null) {
                 for (int i = 0; i < content.getItemCount(); i++) {
-                    Preconditions.checkArgument(content.getItemAt(i).getIntent() == null, "Content items cannot contain an Intent: content=" + content);
+                    Preconditions.checkArgument(
+                            content.getItemAt(i).getIntent() == null,
+                            "Content items cannot contain an Intent: content=" + content);
                 }
             }
-            setLifeTheUniverseAndEverything(id, (AutofillValue) null, (RemoteViews) null, (InlinePresentation) null, (InlinePresentation) null, (DatasetFieldFilter) null, (RemoteViews) null);
+            setLifeTheUniverseAndEverything(
+                    id,
+                    (AutofillValue) null,
+                    (RemoteViews) null,
+                    (InlinePresentation) null,
+                    (InlinePresentation) null,
+                    (DatasetFieldFilter) null,
+                    (RemoteViews) null);
             this.mFieldContent = content;
             return this;
         }
@@ -409,7 +470,14 @@ public final class Dataset implements Parcelable {
         @Deprecated
         public Builder setValue(AutofillId id, AutofillValue value) {
             throwIfDestroyed();
-            setLifeTheUniverseAndEverything(id, value, (RemoteViews) null, (InlinePresentation) null, (InlinePresentation) null, (DatasetFieldFilter) null, (RemoteViews) null);
+            setLifeTheUniverseAndEverything(
+                    id,
+                    value,
+                    (RemoteViews) null,
+                    (InlinePresentation) null,
+                    (InlinePresentation) null,
+                    (DatasetFieldFilter) null,
+                    (RemoteViews) null);
             return this;
         }
 
@@ -417,61 +485,134 @@ public final class Dataset implements Parcelable {
         public Builder setValue(AutofillId id, AutofillValue value, RemoteViews presentation) {
             throwIfDestroyed();
             Objects.requireNonNull(presentation, "presentation cannot be null");
-            setLifeTheUniverseAndEverything(id, value, presentation, (InlinePresentation) null, (InlinePresentation) null, (DatasetFieldFilter) null, (RemoteViews) null);
+            setLifeTheUniverseAndEverything(
+                    id,
+                    value,
+                    presentation,
+                    (InlinePresentation) null,
+                    (InlinePresentation) null,
+                    (DatasetFieldFilter) null,
+                    (RemoteViews) null);
             return this;
         }
 
         @Deprecated
         public Builder setValue(AutofillId id, AutofillValue value, Pattern filter) {
             throwIfDestroyed();
-            Preconditions.checkState(this.mPresentation != null, "Dataset presentation not set on constructor");
-            setLifeTheUniverseAndEverything(id, value, (RemoteViews) null, (InlinePresentation) null, (InlinePresentation) null, new DatasetFieldFilter(filter), (RemoteViews) null);
+            Preconditions.checkState(
+                    this.mPresentation != null, "Dataset presentation not set on constructor");
+            setLifeTheUniverseAndEverything(
+                    id,
+                    value,
+                    (RemoteViews) null,
+                    (InlinePresentation) null,
+                    (InlinePresentation) null,
+                    new DatasetFieldFilter(filter),
+                    (RemoteViews) null);
             return this;
         }
 
         @Deprecated
-        public Builder setValue(AutofillId id, AutofillValue value, Pattern filter, RemoteViews presentation) {
+        public Builder setValue(
+                AutofillId id, AutofillValue value, Pattern filter, RemoteViews presentation) {
             throwIfDestroyed();
             Objects.requireNonNull(presentation, "presentation cannot be null");
-            setLifeTheUniverseAndEverything(id, value, presentation, (InlinePresentation) null, (InlinePresentation) null, new DatasetFieldFilter(filter), (RemoteViews) null);
+            setLifeTheUniverseAndEverything(
+                    id,
+                    value,
+                    presentation,
+                    (InlinePresentation) null,
+                    (InlinePresentation) null,
+                    new DatasetFieldFilter(filter),
+                    (RemoteViews) null);
             return this;
         }
 
         @Deprecated
-        public Builder setValue(AutofillId id, AutofillValue value, RemoteViews presentation, InlinePresentation inlinePresentation) {
-            throwIfDestroyed();
-            Objects.requireNonNull(presentation, "presentation cannot be null");
-            Objects.requireNonNull(inlinePresentation, "inlinePresentation cannot be null");
-            setLifeTheUniverseAndEverything(id, value, presentation, inlinePresentation, (InlinePresentation) null, (DatasetFieldFilter) null, (RemoteViews) null);
-            return this;
-        }
-
-        @Deprecated
-        public Builder setValue(AutofillId id, AutofillValue value, RemoteViews presentation, InlinePresentation inlinePresentation, InlinePresentation inlineTooltipPresentation) {
-            throwIfDestroyed();
-            Objects.requireNonNull(presentation, "presentation cannot be null");
-            Objects.requireNonNull(inlinePresentation, "inlinePresentation cannot be null");
-            Objects.requireNonNull(inlineTooltipPresentation, "inlineTooltipPresentation cannot be null");
-            setLifeTheUniverseAndEverything(id, value, presentation, inlinePresentation, inlineTooltipPresentation, (DatasetFieldFilter) null, (RemoteViews) null);
-            return this;
-        }
-
-        @Deprecated
-        public Builder setValue(AutofillId id, AutofillValue value, Pattern filter, RemoteViews presentation, InlinePresentation inlinePresentation) {
-            throwIfDestroyed();
-            Objects.requireNonNull(presentation, "presentation cannot be null");
-            Objects.requireNonNull(inlinePresentation, "inlinePresentation cannot be null");
-            setLifeTheUniverseAndEverything(id, value, presentation, inlinePresentation, (InlinePresentation) null, new DatasetFieldFilter(filter), (RemoteViews) null);
-            return this;
-        }
-
-        @Deprecated
-        public Builder setValue(AutofillId id, AutofillValue value, Pattern filter, RemoteViews presentation, InlinePresentation inlinePresentation, InlinePresentation inlineTooltipPresentation) {
+        public Builder setValue(
+                AutofillId id,
+                AutofillValue value,
+                RemoteViews presentation,
+                InlinePresentation inlinePresentation) {
             throwIfDestroyed();
             Objects.requireNonNull(presentation, "presentation cannot be null");
             Objects.requireNonNull(inlinePresentation, "inlinePresentation cannot be null");
-            Objects.requireNonNull(inlineTooltipPresentation, "inlineTooltipPresentation cannot be null");
-            setLifeTheUniverseAndEverything(id, value, presentation, inlinePresentation, inlineTooltipPresentation, new DatasetFieldFilter(filter), (RemoteViews) null);
+            setLifeTheUniverseAndEverything(
+                    id,
+                    value,
+                    presentation,
+                    inlinePresentation,
+                    (InlinePresentation) null,
+                    (DatasetFieldFilter) null,
+                    (RemoteViews) null);
+            return this;
+        }
+
+        @Deprecated
+        public Builder setValue(
+                AutofillId id,
+                AutofillValue value,
+                RemoteViews presentation,
+                InlinePresentation inlinePresentation,
+                InlinePresentation inlineTooltipPresentation) {
+            throwIfDestroyed();
+            Objects.requireNonNull(presentation, "presentation cannot be null");
+            Objects.requireNonNull(inlinePresentation, "inlinePresentation cannot be null");
+            Objects.requireNonNull(
+                    inlineTooltipPresentation, "inlineTooltipPresentation cannot be null");
+            setLifeTheUniverseAndEverything(
+                    id,
+                    value,
+                    presentation,
+                    inlinePresentation,
+                    inlineTooltipPresentation,
+                    (DatasetFieldFilter) null,
+                    (RemoteViews) null);
+            return this;
+        }
+
+        @Deprecated
+        public Builder setValue(
+                AutofillId id,
+                AutofillValue value,
+                Pattern filter,
+                RemoteViews presentation,
+                InlinePresentation inlinePresentation) {
+            throwIfDestroyed();
+            Objects.requireNonNull(presentation, "presentation cannot be null");
+            Objects.requireNonNull(inlinePresentation, "inlinePresentation cannot be null");
+            setLifeTheUniverseAndEverything(
+                    id,
+                    value,
+                    presentation,
+                    inlinePresentation,
+                    (InlinePresentation) null,
+                    new DatasetFieldFilter(filter),
+                    (RemoteViews) null);
+            return this;
+        }
+
+        @Deprecated
+        public Builder setValue(
+                AutofillId id,
+                AutofillValue value,
+                Pattern filter,
+                RemoteViews presentation,
+                InlinePresentation inlinePresentation,
+                InlinePresentation inlineTooltipPresentation) {
+            throwIfDestroyed();
+            Objects.requireNonNull(presentation, "presentation cannot be null");
+            Objects.requireNonNull(inlinePresentation, "inlinePresentation cannot be null");
+            Objects.requireNonNull(
+                    inlineTooltipPresentation, "inlineTooltipPresentation cannot be null");
+            setLifeTheUniverseAndEverything(
+                    id,
+                    value,
+                    presentation,
+                    inlinePresentation,
+                    inlineTooltipPresentation,
+                    new DatasetFieldFilter(filter),
+                    (RemoteViews) null);
             return this;
         }
 
@@ -486,14 +627,38 @@ public final class Dataset implements Parcelable {
                 }
             }
             if (field == null) {
-                index = setLifeTheUniverseAndEverything(id, (AutofillValue) null, (RemoteViews) null, (InlinePresentation) null, (InlinePresentation) null, (DatasetFieldFilter) null, (RemoteViews) null);
+                index =
+                        setLifeTheUniverseAndEverything(
+                                id,
+                                (AutofillValue) null,
+                                (RemoteViews) null,
+                                (InlinePresentation) null,
+                                (InlinePresentation) null,
+                                (DatasetFieldFilter) null,
+                                (RemoteViews) null);
             } else {
                 DatasetFieldFilter filter = field.getDatasetFieldFilter();
                 Presentations presentations = field.getPresentations();
                 if (presentations == null) {
-                    index = setLifeTheUniverseAndEverything(id, field.getValue(), (RemoteViews) null, (InlinePresentation) null, (InlinePresentation) null, filter, (RemoteViews) null);
+                    index =
+                            setLifeTheUniverseAndEverything(
+                                    id,
+                                    field.getValue(),
+                                    (RemoteViews) null,
+                                    (InlinePresentation) null,
+                                    (InlinePresentation) null,
+                                    filter,
+                                    (RemoteViews) null);
                 } else {
-                    index = setLifeTheUniverseAndEverything(id, field.getValue(), presentations.getMenuPresentation(), presentations.getInlinePresentation(), presentations.getInlineTooltipPresentation(), filter, presentations.getDialogPresentation());
+                    index =
+                            setLifeTheUniverseAndEverything(
+                                    id,
+                                    field.getValue(),
+                                    presentations.getMenuPresentation(),
+                                    presentations.getInlinePresentation(),
+                                    presentations.getInlineTooltipPresentation(),
+                                    filter,
+                                    presentations.getDialogPresentation());
                 }
             }
             this.mFieldToIndexdMap.put(field, Integer.valueOf(index));
@@ -513,9 +678,25 @@ public final class Dataset implements Parcelable {
             DatasetFieldFilter filter = field.getDatasetFieldFilter();
             Presentations presentations = field.getPresentations();
             if (presentations == null) {
-                index = setLifeTheUniverseAndEverything(hint, field.getValue(), (RemoteViews) null, (InlinePresentation) null, (InlinePresentation) null, filter, (RemoteViews) null);
+                index =
+                        setLifeTheUniverseAndEverything(
+                                hint,
+                                field.getValue(),
+                                (RemoteViews) null,
+                                (InlinePresentation) null,
+                                (InlinePresentation) null,
+                                filter,
+                                (RemoteViews) null);
             } else {
-                index = setLifeTheUniverseAndEverything(hint, field.getValue(), presentations.getMenuPresentation(), presentations.getInlinePresentation(), presentations.getInlineTooltipPresentation(), filter, presentations.getDialogPresentation());
+                index =
+                        setLifeTheUniverseAndEverything(
+                                hint,
+                                field.getValue(),
+                                presentations.getMenuPresentation(),
+                                presentations.getInlinePresentation(),
+                                presentations.getInlineTooltipPresentation(),
+                                filter,
+                                presentations.getDialogPresentation());
             }
             this.mFieldToIndexdMap.put(field, Integer.valueOf(index));
             return this;
@@ -527,14 +708,32 @@ public final class Dataset implements Parcelable {
 
         @SystemApi
         @Deprecated
-        public Builder setFieldInlinePresentation(AutofillId id, AutofillValue value, Pattern filter, InlinePresentation inlinePresentation) {
+        public Builder setFieldInlinePresentation(
+                AutofillId id,
+                AutofillValue value,
+                Pattern filter,
+                InlinePresentation inlinePresentation) {
             throwIfDestroyed();
             Objects.requireNonNull(inlinePresentation, "inlinePresentation cannot be null");
-            setLifeTheUniverseAndEverything(id, value, (RemoteViews) null, inlinePresentation, (InlinePresentation) null, new DatasetFieldFilter(filter), (RemoteViews) null);
+            setLifeTheUniverseAndEverything(
+                    id,
+                    value,
+                    (RemoteViews) null,
+                    inlinePresentation,
+                    (InlinePresentation) null,
+                    new DatasetFieldFilter(filter),
+                    (RemoteViews) null);
             return this;
         }
 
-        private int setLifeTheUniverseAndEverything(String datatype, AutofillValue value, RemoteViews presentation, InlinePresentation inlinePresentation, InlinePresentation tooltip, DatasetFieldFilter filter, RemoteViews dialogPresentation) {
+        private int setLifeTheUniverseAndEverything(
+                String datatype,
+                AutofillValue value,
+                RemoteViews presentation,
+                InlinePresentation inlinePresentation,
+                InlinePresentation tooltip,
+                DatasetFieldFilter filter,
+                RemoteViews dialogPresentation) {
             Objects.requireNonNull(datatype, "datatype cannot be null");
             int existingIdx = this.mAutofillDatatypes.indexOf(datatype);
             if (existingIdx >= 0) {
@@ -558,7 +757,14 @@ public final class Dataset implements Parcelable {
             return this.mFieldIds.size() - 1;
         }
 
-        private int setLifeTheUniverseAndEverything(AutofillId id, AutofillValue value, RemoteViews presentation, InlinePresentation inlinePresentation, InlinePresentation tooltip, DatasetFieldFilter filter, RemoteViews dialogPresentation) {
+        private int setLifeTheUniverseAndEverything(
+                AutofillId id,
+                AutofillValue value,
+                RemoteViews presentation,
+                InlinePresentation inlinePresentation,
+                InlinePresentation tooltip,
+                DatasetFieldFilter filter,
+                RemoteViews dialogPresentation) {
             Objects.requireNonNull(id, "id cannot be null");
             int existingIdx = this.mFieldIds.indexOf(id);
             if (existingIdx >= 0) {
@@ -582,7 +788,15 @@ public final class Dataset implements Parcelable {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public void createFromParcel(AutofillId id, String datatype, AutofillValue value, RemoteViews presentation, InlinePresentation inlinePresentation, InlinePresentation tooltip, DatasetFieldFilter filter, RemoteViews dialogPresentation) {
+        public void createFromParcel(
+                AutofillId id,
+                String datatype,
+                AutofillValue value,
+                RemoteViews presentation,
+                InlinePresentation inlinePresentation,
+                InlinePresentation tooltip,
+                DatasetFieldFilter filter,
+                RemoteViews dialogPresentation) {
             int existingIdx;
             if (id != null && (existingIdx = this.mFieldIds.indexOf(id)) >= 0) {
                 this.mFieldValues.set(existingIdx, value);
@@ -609,12 +823,16 @@ public final class Dataset implements Parcelable {
             if (this.mFieldIds == null && this.mAutofillDatatypes == null) {
                 throw new IllegalStateException("at least one of field or datatype must be set");
             }
-            if (this.mFieldIds != null && this.mAutofillDatatypes != null && this.mFieldIds.size() == 0 && this.mAutofillDatatypes.size() == 0) {
+            if (this.mFieldIds != null
+                    && this.mAutofillDatatypes != null
+                    && this.mFieldIds.size() == 0
+                    && this.mAutofillDatatypes.size() == 0) {
                 throw new IllegalStateException("at least one of field or datatype must be set");
             }
             if (this.mFieldContent != null) {
                 if (this.mFieldIds.size() > 1) {
-                    throw new IllegalStateException("when filling content, only one field can be filled");
+                    throw new IllegalStateException(
+                            "when filling content, only one field can be filled");
                 }
                 if (this.mFieldValues.get(0) != null) {
                     throw new IllegalStateException("cannot fill both content and values");
@@ -657,19 +875,25 @@ public final class Dataset implements Parcelable {
     }
 
     public static final class DatasetFieldFilter implements Parcelable {
-        public static final Parcelable.Creator<DatasetFieldFilter> CREATOR = new Parcelable.Creator<DatasetFieldFilter>() { // from class: android.service.autofill.Dataset.DatasetFieldFilter.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public DatasetFieldFilter createFromParcel(Parcel parcel) {
-                return new DatasetFieldFilter((Pattern) parcel.readSerializable(Pattern.class.getClassLoader(), Pattern.class));
-            }
+        public static final Parcelable.Creator<DatasetFieldFilter> CREATOR =
+                new Parcelable.Creator<
+                        DatasetFieldFilter>() { // from class:
+                                                // android.service.autofill.Dataset.DatasetFieldFilter.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public DatasetFieldFilter createFromParcel(Parcel parcel) {
+                        return new DatasetFieldFilter(
+                                (Pattern)
+                                        parcel.readSerializable(
+                                                Pattern.class.getClassLoader(), Pattern.class));
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public DatasetFieldFilter[] newArray(int size) {
-                return new DatasetFieldFilter[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public DatasetFieldFilter[] newArray(int size) {
+                        return new DatasetFieldFilter[size];
+                    }
+                };
         public final Pattern pattern;
 
         DatasetFieldFilter(Pattern pattern) {
@@ -681,7 +905,9 @@ public final class Dataset implements Parcelable {
         }
 
         public String toString() {
-            return !Helper.sDebug ? super.toString() : this.pattern == null ? "null" : this.pattern.pattern().length() + "_chars";
+            return !Helper.sDebug
+                    ? super.toString()
+                    : this.pattern == null ? "null" : this.pattern.pattern().length() + "_chars";
         }
 
         @Override // android.os.Parcelable

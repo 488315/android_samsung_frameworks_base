@@ -10,6 +10,7 @@ import android.util.Pair;
 import android.util.Slog;
 import android.util.TypedValue;
 import android.view.WindowManager;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.MagnificationConnectionManager$$ExternalSyntheticOutline0;
@@ -18,6 +19,7 @@ import com.android.server.biometrics.SemBiometricFeature;
 import com.android.server.biometrics.Utils;
 import com.android.server.biometrics.sensors.SemBioSysFsProvider;
 import com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintProvider;
+
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -53,8 +55,14 @@ public final class SemUdfpsHelper {
 
         public BurnInHelper(Context context) {
             int i;
-            this.mMaxMovingSize = (int) TypedValue.applyDimension(1, 10.0f, context.getResources().getDisplayMetrics());
-            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("setMaxMovingSize() returned: "), this.mMaxMovingSize, "FingerprintService");
+            this.mMaxMovingSize =
+                    (int)
+                            TypedValue.applyDimension(
+                                    1, 10.0f, context.getResources().getDisplayMetrics());
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("setMaxMovingSize() returned: "),
+                    this.mMaxMovingSize,
+                    "FingerprintService");
             int i2 = this.mMaxMovingSize;
             this.mIconArray = new int[i2 * i2];
             int i3 = 0;
@@ -83,19 +91,24 @@ public final class SemUdfpsHelper {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class InstanceHolder {
-        public static final SemUdfpsHelper INSTANCE = new SemUdfpsHelper(new AnonymousClass1(), new SemUdfpsHelper$$ExternalSyntheticLambda0(1));
+        public static final SemUdfpsHelper INSTANCE =
+                new SemUdfpsHelper(
+                        new AnonymousClass1(), new SemUdfpsHelper$$ExternalSyntheticLambda0(1));
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.biometrics.sensors.fingerprint.SemUdfpsHelper$InstanceHolder$1, reason: invalid class name */
-        public final class AnonymousClass1 implements SemBioSysFsProvider {
-        }
+        public final class AnonymousClass1 implements SemBioSysFsProvider {}
     }
 
     public SemUdfpsHelper(SemBioSysFsProvider semBioSysFsProvider, Supplier supplier) {
         this.mSysFsProviderImpl = semBioSysFsProvider;
         this.mGetTspManager = supplier;
         if (IS_OPTICAL) {
-            this.mOpticalImpl = new SemUdfpsOpticalHelper(semBioSysFsProvider, new SemUdfpsHelper$$ExternalSyntheticLambda0(0), SemBiometricFeature.FP_FEATURE_HW_LIGHT_SOURCE);
+            this.mOpticalImpl =
+                    new SemUdfpsOpticalHelper(
+                            semBioSysFsProvider,
+                            new SemUdfpsHelper$$ExternalSyntheticLambda0(0),
+                            SemBiometricFeature.FP_FEATURE_HW_LIGHT_SOURCE);
         }
     }
 
@@ -117,15 +130,44 @@ public final class SemUdfpsHelper {
         sb2.append(", ");
         sb2.append(semUdfpsTspManager.mIsEnable);
         sb2.append(", ");
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb2, semUdfpsTspManager.mIsHalfMode, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                sb2, semUdfpsTspManager.mIsHalfMode, printWriter);
         SemUdfpsOpticalHelper semUdfpsOpticalHelper = this.mOpticalImpl;
         if (semUdfpsOpticalHelper != null) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, semUdfpsOpticalHelper.mDisplayPanelType, " Optical, LD : ", BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, semUdfpsOpticalHelper.mBrightnessColor, " Optical, DT : ", BinaryTransparencyService$$ExternalSyntheticOutline0.m(KillPolicyManager$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder(" Optical, HW_LS : "), semUdfpsOpticalHelper.mIsSupportHwLightSource, printWriter, " Optical, B : "), semUdfpsOpticalHelper.mMaxBrightness, printWriter, " Optical, N : "), semUdfpsOpticalHelper.mNits, printWriter, " Optical, C : "))), semUdfpsOpticalHelper.mIsLimitedDisplayOn, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter,
+                            semUdfpsOpticalHelper.mDisplayPanelType,
+                            " Optical, LD : ",
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    printWriter,
+                                    semUdfpsOpticalHelper.mBrightnessColor,
+                                    " Optical, DT : ",
+                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                            KillPolicyManager$$ExternalSyntheticOutline0.m(
+                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                            .m(
+                                                                    new StringBuilder(
+                                                                            " Optical, HW_LS : "),
+                                                                    semUdfpsOpticalHelper
+                                                                            .mIsSupportHwLightSource,
+                                                                    printWriter,
+                                                                    " Optical, B : "),
+                                                    semUdfpsOpticalHelper.mMaxBrightness,
+                                                    printWriter,
+                                                    " Optical, N : "),
+                                            semUdfpsOpticalHelper.mNits,
+                                            printWriter,
+                                            " Optical, C : "))),
+                    semUdfpsOpticalHelper.mIsLimitedDisplayOn,
+                    printWriter);
             synchronized (semUdfpsOpticalHelper.mMaskClientList) {
                 try {
-                    Iterator it = ((HashMap) semUdfpsOpticalHelper.mMaskClientList).values().iterator();
+                    Iterator it =
+                            ((HashMap) semUdfpsOpticalHelper.mMaskClientList).values().iterator();
                     while (it.hasNext()) {
-                        printWriter.println(" Optical, M : " + ((SemFpOpticalClient) it.next()).mPackageName);
+                        printWriter.println(
+                                " Optical, M : " + ((SemFpOpticalClient) it.next()).mPackageName);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -134,8 +176,17 @@ public final class SemUdfpsHelper {
             if (pair != null) {
                 StringBuilder sb3 = new StringBuilder(" Optical, Calibrated time : ");
                 byte[] bArr = new byte[256];
-                int semRequest = ((FingerprintProvider) ((ServiceProvider) pair.second)).semRequest(((Integer) pair.first).intValue(), 40, 0, null, bArr);
-                sb3.append(TextUtils.emptyIfNull(semRequest > 0 ? new String(Arrays.copyOf(bArr, semRequest), StandardCharsets.UTF_8).trim() : null));
+                int semRequest =
+                        ((FingerprintProvider) ((ServiceProvider) pair.second))
+                                .semRequest(((Integer) pair.first).intValue(), 40, 0, null, bArr);
+                sb3.append(
+                        TextUtils.emptyIfNull(
+                                semRequest > 0
+                                        ? new String(
+                                                        Arrays.copyOf(bArr, semRequest),
+                                                        StandardCharsets.UTF_8)
+                                                .trim()
+                                        : null));
                 printWriter.println(sb3.toString());
             }
         }
@@ -157,9 +208,15 @@ public final class SemUdfpsHelper {
             }
             DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
             float applyDimension = TypedValue.applyDimension(5, 14.5f, displayMetrics);
-            float applyDimension2 = TypedValue.applyDimension(5, Float.parseFloat(this.mSemSensorMarginBottom), displayMetrics);
-            float applyDimension3 = TypedValue.applyDimension(5, Float.parseFloat(this.mSemSensorMarginLeft), displayMetrics);
-            float applyDimension4 = TypedValue.applyDimension(5, Float.parseFloat(this.mSemSensorAreaHeight), displayMetrics);
+            float applyDimension2 =
+                    TypedValue.applyDimension(
+                            5, Float.parseFloat(this.mSemSensorMarginBottom), displayMetrics);
+            float applyDimension3 =
+                    TypedValue.applyDimension(
+                            5, Float.parseFloat(this.mSemSensorMarginLeft), displayMetrics);
+            float applyDimension4 =
+                    TypedValue.applyDimension(
+                            5, Float.parseFloat(this.mSemSensorAreaHeight), displayMetrics);
             int i2 = (int) applyDimension;
             int i3 = (i2 / 2) - ((int) applyDimension3);
             int i4 = ((int) applyDimension2) + (((int) applyDimension4) / 2) + (i2 / 2);
@@ -191,16 +248,29 @@ public final class SemUdfpsHelper {
                 rect.bottom = i10 + i2;
             }
             if (DEBUG) {
-                Slog.d("FingerprintService", "getFodSensorAreaRect: " + i + ", " + rect.toShortString());
+                Slog.d(
+                        "FingerprintService",
+                        "getFodSensorAreaRect: " + i + ", " + rect.toShortString());
             }
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder(""), "FingerprintService");
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder(""), "FingerprintService");
         }
         return rect;
     }
 
     public final void getInDisplaySensorArea(Bundle bundle) {
-        bundle.putStringArray("sem_area", new String[]{this.mSemSensorAreaWidth, this.mSemSensorAreaHeight, this.mSemSensorMarginBottom, this.mSemSensorMarginLeft, this.mSemSensorImageSize, this.mSemSensorActiveArea, this.mSemSensorDraggingArea});
+        bundle.putStringArray(
+                "sem_area",
+                new String[] {
+                    this.mSemSensorAreaWidth,
+                    this.mSemSensorAreaHeight,
+                    this.mSemSensorMarginBottom,
+                    this.mSemSensorMarginLeft,
+                    this.mSemSensorImageSize,
+                    this.mSemSensorActiveArea,
+                    this.mSemSensorDraggingArea
+                });
         if (IS_OPTICAL) {
             SemUdfpsOpticalHelper semUdfpsOpticalHelper = this.mOpticalImpl;
             bundle.putFloat("brightness", semUdfpsOpticalHelper.mMaxBrightness);

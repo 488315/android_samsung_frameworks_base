@@ -8,7 +8,8 @@ import com.android.internal.org.bouncycastle.asn1.x509.NameConstraintValidatorEx
 
 /* loaded from: classes5.dex */
 public class PKIXNameConstraintValidator {
-    com.android.internal.org.bouncycastle.asn1.x509.PKIXNameConstraintValidator validator = new com.android.internal.org.bouncycastle.asn1.x509.PKIXNameConstraintValidator();
+    com.android.internal.org.bouncycastle.asn1.x509.PKIXNameConstraintValidator validator =
+            new com.android.internal.org.bouncycastle.asn1.x509.PKIXNameConstraintValidator();
 
     public int hashCode() {
         return this.validator.hashCode();

@@ -2,7 +2,9 @@ package com.android.server.inputmethod;
 
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
+
 import com.android.internal.inputmethod.InputMethodSubtypeHandle;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,18 +21,26 @@ public final class HardwareKeyboardShortcutController {
 
     public final void reset(InputMethodMap inputMethodMap) {
         this.mSubtypeHandles.clear();
-        InputMethodSettings inputMethodSettings = new InputMethodSettings(inputMethodMap, this.mUserId);
-        ArrayList enabledInputMethodListWithFilter = inputMethodSettings.getEnabledInputMethodListWithFilter(null);
+        InputMethodSettings inputMethodSettings =
+                new InputMethodSettings(inputMethodMap, this.mUserId);
+        ArrayList enabledInputMethodListWithFilter =
+                inputMethodSettings.getEnabledInputMethodListWithFilter(null);
         for (int i = 0; i < enabledInputMethodListWithFilter.size(); i++) {
-            InputMethodInfo inputMethodInfo = (InputMethodInfo) enabledInputMethodListWithFilter.get(i);
+            InputMethodInfo inputMethodInfo =
+                    (InputMethodInfo) enabledInputMethodListWithFilter.get(i);
             if (inputMethodInfo.shouldShowInInputMethodPicker()) {
-                List<InputMethodSubtype> enabledInputMethodSubtypeList = inputMethodSettings.getEnabledInputMethodSubtypeList(inputMethodInfo, true);
+                List<InputMethodSubtype> enabledInputMethodSubtypeList =
+                        inputMethodSettings.getEnabledInputMethodSubtypeList(inputMethodInfo, true);
                 if (enabledInputMethodSubtypeList.isEmpty()) {
-                    this.mSubtypeHandles.add(InputMethodSubtypeHandle.of(inputMethodInfo, (InputMethodSubtype) null));
+                    this.mSubtypeHandles.add(
+                            InputMethodSubtypeHandle.of(
+                                    inputMethodInfo, (InputMethodSubtype) null));
                 } else {
                     for (InputMethodSubtype inputMethodSubtype : enabledInputMethodSubtypeList) {
                         if (inputMethodSubtype.isSuitableForPhysicalKeyboardLayoutMapping()) {
-                            this.mSubtypeHandles.add(InputMethodSubtypeHandle.of(inputMethodInfo, inputMethodSubtype));
+                            this.mSubtypeHandles.add(
+                                    InputMethodSubtypeHandle.of(
+                                            inputMethodInfo, inputMethodSubtype));
                         }
                     }
                 }

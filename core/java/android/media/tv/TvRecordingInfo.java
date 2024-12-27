@@ -3,6 +3,7 @@ package android.media.tv;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -11,19 +12,21 @@ import java.util.function.Consumer;
 
 /* loaded from: classes3.dex */
 public final class TvRecordingInfo implements Parcelable {
-    public static final Parcelable.Creator<TvRecordingInfo> CREATOR = new Parcelable.Creator<TvRecordingInfo>() { // from class: android.media.tv.TvRecordingInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvRecordingInfo createFromParcel(Parcel in) {
-            return new TvRecordingInfo(in);
-        }
+    public static final Parcelable.Creator<TvRecordingInfo> CREATOR =
+            new Parcelable.Creator<
+                    TvRecordingInfo>() { // from class: android.media.tv.TvRecordingInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvRecordingInfo createFromParcel(Parcel in) {
+                    return new TvRecordingInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvRecordingInfo[] newArray(int size) {
-            return new TvRecordingInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvRecordingInfo[] newArray(int size) {
+                    return new TvRecordingInfo[size];
+                }
+            };
     public static final int FRIDAY = 32;
     public static final int MONDAY = 2;
     public static final int RECORDING_ALL = 3;
@@ -50,14 +53,26 @@ public final class TvRecordingInfo implements Parcelable {
     private long mStartPaddingMillis;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DaysOfWeek {
-    }
+    public @interface DaysOfWeek {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TvRecordingListType {
-    }
+    public @interface TvRecordingListType {}
 
-    public TvRecordingInfo(String recordingId, long startPadding, long endPadding, int repeatDays, String name, String description, long scheduledStartTime, long scheduledDuration, Uri channelUri, Uri programUri, List<TvContentRating> contentRatings, Uri recordingUri, long recordingStartTime, long recordingDuration) {
+    public TvRecordingInfo(
+            String recordingId,
+            long startPadding,
+            long endPadding,
+            int repeatDays,
+            String name,
+            String description,
+            long scheduledStartTime,
+            long scheduledDuration,
+            Uri channelUri,
+            Uri programUri,
+            List<TvContentRating> contentRatings,
+            Uri recordingUri,
+            long recordingStartTime,
+            long recordingDuration) {
         this.mRecordingId = recordingId;
         this.mStartPaddingMillis = startPadding;
         this.mEndPaddingMillis = endPadding;
@@ -156,12 +171,14 @@ public final class TvRecordingInfo implements Parcelable {
         dest.writeString(this.mChannelUri == null ? null : this.mChannelUri.toString());
         dest.writeString(this.mProgramUri == null ? null : this.mProgramUri.toString());
         final List<String> flattenedContentRatings = new ArrayList<>();
-        this.mContentRatings.forEach(new Consumer() { // from class: android.media.tv.TvRecordingInfo$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                flattenedContentRatings.add(((TvContentRating) obj).flattenToString());
-            }
-        });
+        this.mContentRatings.forEach(
+                new Consumer() { // from class:
+                                 // android.media.tv.TvRecordingInfo$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        flattenedContentRatings.add(((TvContentRating) obj).flattenToString());
+                    }
+                });
         dest.writeList(this.mContentRatings);
         dest.writeString(this.mRecordingUri != null ? this.mProgramUri.toString() : null);
         dest.writeLong(this.mRecordingDurationMillis);
@@ -182,12 +199,14 @@ public final class TvRecordingInfo implements Parcelable {
         this.mContentRatings = new ArrayList();
         List<String> flattenedContentRatings = new ArrayList<>();
         in.readStringList(flattenedContentRatings);
-        flattenedContentRatings.forEach(new Consumer() { // from class: android.media.tv.TvRecordingInfo$$ExternalSyntheticLambda1
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                TvRecordingInfo.this.lambda$new$1((String) obj);
-            }
-        });
+        flattenedContentRatings.forEach(
+                new Consumer() { // from class:
+                                 // android.media.tv.TvRecordingInfo$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        TvRecordingInfo.this.lambda$new$1((String) obj);
+                    }
+                });
         this.mRecordingUri = Uri.parse(in.readString());
         this.mRecordingDurationMillis = in.readLong();
         this.mRecordingStartTimeMillis = in.readLong();

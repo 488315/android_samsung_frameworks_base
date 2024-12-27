@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -18,19 +19,22 @@ import java.util.Set;
 public final class RcsContactUceCapability implements Parcelable {
     public static final int CAPABILITY_MECHANISM_OPTIONS = 2;
     public static final int CAPABILITY_MECHANISM_PRESENCE = 1;
-    public static final Parcelable.Creator<RcsContactUceCapability> CREATOR = new Parcelable.Creator<RcsContactUceCapability>() { // from class: android.telephony.ims.RcsContactUceCapability.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RcsContactUceCapability createFromParcel(Parcel in) {
-            return new RcsContactUceCapability(in);
-        }
+    public static final Parcelable.Creator<RcsContactUceCapability> CREATOR =
+            new Parcelable.Creator<
+                    RcsContactUceCapability>() { // from class:
+                                                 // android.telephony.ims.RcsContactUceCapability.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RcsContactUceCapability createFromParcel(Parcel in) {
+                    return new RcsContactUceCapability(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RcsContactUceCapability[] newArray(int size) {
-            return new RcsContactUceCapability[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RcsContactUceCapability[] newArray(int size) {
+                    return new RcsContactUceCapability[size];
+                }
+            };
     public static final int REQUEST_RESULT_FOUND = 3;
     public static final int REQUEST_RESULT_NOT_FOUND = 2;
     public static final int REQUEST_RESULT_NOT_ONLINE = 1;
@@ -46,16 +50,13 @@ public final class RcsContactUceCapability implements Parcelable {
     private int mSourceType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CapabilityMechanism {
-    }
+    public @interface CapabilityMechanism {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RequestResult {
-    }
+    public @interface RequestResult {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SourceType {
-    }
+    public @interface SourceType {}
 
     public static final class OptionsBuilder {
         private final RcsContactUceCapability mCapabilities;
@@ -135,7 +136,10 @@ public final class RcsContactUceCapability implements Parcelable {
         List<String> featureTagList = new ArrayList<>();
         in.readStringList(featureTagList);
         this.mFeatureTags.addAll(featureTagList);
-        in.readParcelableList(this.mPresenceTuples, RcsContactPresenceTuple.class.getClassLoader(), RcsContactPresenceTuple.class);
+        in.readParcelableList(
+                this.mPresenceTuples,
+                RcsContactPresenceTuple.class.getClassLoader(),
+                RcsContactPresenceTuple.class);
     }
 
     @Override // android.os.Parcelable

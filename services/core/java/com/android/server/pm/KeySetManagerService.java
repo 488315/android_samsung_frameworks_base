@@ -5,10 +5,12 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.LongSparseArray;
 import android.util.Slog;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.utils.WatchedArrayMap;
+
 import java.security.PublicKey;
 import java.util.Iterator;
 import java.util.Objects;
@@ -37,7 +39,8 @@ public final class KeySetManagerService {
         }
     }
 
-    public KeySetManagerService(KeySetManagerService keySetManagerService, WatchedArrayMap watchedArrayMap) {
+    public KeySetManagerService(
+            KeySetManagerService keySetManagerService, WatchedArrayMap watchedArrayMap) {
         this.lastIssuedKeySetId = 0L;
         this.lastIssuedKeyId = 0L;
         this.mKeySets = keySetManagerService.mKeySets.clone();
@@ -73,7 +76,10 @@ public final class KeySetManagerService {
                     j2 = -1;
                     break;
                 }
-                if (str.equals(new String(((PublicKeyHandle) this.mPublicKeys.valueAt(i2)).mKey.getEncoded()))) {
+                if (str.equals(
+                        new String(
+                                ((PublicKeyHandle) this.mPublicKeys.valueAt(i2))
+                                        .mKey.getEncoded()))) {
                     j2 = this.mPublicKeys.keyAt(i2);
                     break;
                 }
@@ -127,13 +133,20 @@ public final class KeySetManagerService {
             Method dump skipped, instructions count: 282
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.KeySetManagerService.addScannedPackageLPw(com.android.server.pm.pkg.AndroidPackage):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.KeySetManagerService.addScannedPackageLPw(com.android.server.pm.pkg.AndroidPackage):void");
     }
 
-    public final boolean checkUpgradeKeySetLocked(PackageSetting packageSetting, AndroidPackage androidPackage) {
+    public final boolean checkUpgradeKeySetLocked(
+            PackageSetting packageSetting, AndroidPackage androidPackage) {
         for (long j : packageSetting.keySetData.mUpgradeKeySets) {
             ArraySet publicKeysFromKeySetLPr = getPublicKeysFromKeySetLPr(j);
-            if (publicKeysFromKeySetLPr != null && androidPackage.getSigningDetails().getPublicKeys().containsAll(publicKeysFromKeySetLPr)) {
+            if (publicKeysFromKeySetLPr != null
+                    && androidPackage
+                            .getSigningDetails()
+                            .getPublicKeys()
+                            .containsAll(publicKeysFromKeySetLPr)) {
                 return true;
             }
         }
@@ -187,7 +200,10 @@ public final class KeySetManagerService {
         ArraySet arraySet2 = new ArraySet();
         int size = arraySet.size();
         for (int i = 0; i < size; i++) {
-            arraySet2.add(((PublicKeyHandle) this.mPublicKeys.get(((Long) arraySet.valueAt(i)).longValue())).mKey);
+            arraySet2.add(
+                    ((PublicKeyHandle)
+                                    this.mPublicKeys.get(((Long) arraySet.valueAt(i)).longValue()))
+                            .mKey);
         }
         return arraySet2;
     }
@@ -222,11 +238,19 @@ public final class KeySetManagerService {
                     while (true) {
                         int next3 = typedXmlPullParser.next();
                         if (next3 != 1 && (next3 != 3 || typedXmlPullParser.getDepth() > depth2)) {
-                            if (next3 != 3 && next3 != 4 && typedXmlPullParser.getName().equals("public-key")) {
-                                long attributeLong = typedXmlPullParser.getAttributeLong((String) null, "identifier");
-                                PublicKey parsePublicKey = FrameworkParsingPackageUtils.parsePublicKey(typedXmlPullParser.getAttributeBytesBase64((String) null, "value", (byte[]) null));
+                            if (next3 != 3
+                                    && next3 != 4
+                                    && typedXmlPullParser.getName().equals("public-key")) {
+                                long attributeLong =
+                                        typedXmlPullParser.getAttributeLong(
+                                                (String) null, "identifier");
+                                PublicKey parsePublicKey =
+                                        FrameworkParsingPackageUtils.parsePublicKey(
+                                                typedXmlPullParser.getAttributeBytesBase64(
+                                                        (String) null, "value", (byte[]) null));
                                 if (parsePublicKey != null) {
-                                    this.mPublicKeys.put(attributeLong, new PublicKeyHandle(parsePublicKey, 0));
+                                    this.mPublicKeys.put(
+                                            attributeLong, new PublicKeyHandle(parsePublicKey, 0));
                                 }
                             }
                         }
@@ -240,27 +264,38 @@ public final class KeySetManagerService {
                             if (next4 != 3 && next4 != 4) {
                                 String name2 = typedXmlPullParser.getName();
                                 if (name2.equals("keyset")) {
-                                    j = typedXmlPullParser.getAttributeLong((String) null, "identifier");
+                                    j =
+                                            typedXmlPullParser.getAttributeLong(
+                                                    (String) null, "identifier");
                                     this.mKeySets.put(j, new KeySetHandle(j, 0));
                                     this.mKeySetMapping.put(j, new ArraySet());
                                 } else if (name2.equals("key-id")) {
-                                    ((ArraySet) this.mKeySetMapping.get(j)).add(Long.valueOf(typedXmlPullParser.getAttributeLong((String) null, "identifier")));
+                                    ((ArraySet) this.mKeySetMapping.get(j))
+                                            .add(
+                                                    Long.valueOf(
+                                                            typedXmlPullParser.getAttributeLong(
+                                                                    (String) null, "identifier")));
                                 }
                             }
                         }
                     }
                 } else if (name.equals("lastIssuedKeyId")) {
-                    this.lastIssuedKeyId = typedXmlPullParser.getAttributeLong((String) null, "value");
+                    this.lastIssuedKeyId =
+                            typedXmlPullParser.getAttributeLong((String) null, "value");
                 } else if (name.equals("lastIssuedKeySetId")) {
-                    this.lastIssuedKeySetId = typedXmlPullParser.getAttributeLong((String) null, "value");
+                    this.lastIssuedKeySetId =
+                            typedXmlPullParser.getAttributeLong((String) null, "value");
                 }
             }
         }
         int size = arrayMap.size();
         for (int i2 = 0; i2 < size; i2++) {
-            KeySetHandle keySetHandle = (KeySetHandle) this.mKeySets.get(((Long) arrayMap.keyAt(i2)).longValue());
+            KeySetHandle keySetHandle =
+                    (KeySetHandle) this.mKeySets.get(((Long) arrayMap.keyAt(i2)).longValue());
             if (keySetHandle == null) {
-                Slog.wtf("KeySetManagerService", "Encountered non-existent key-set reference when reading settings");
+                Slog.wtf(
+                        "KeySetManagerService",
+                        "Encountered non-existent key-set reference when reading settings");
             } else {
                 keySetHandle.mRefCount = ((Integer) arrayMap.valueAt(i2)).intValue();
             }
@@ -269,13 +304,16 @@ public final class KeySetManagerService {
         int size2 = this.mKeySets.size();
         for (int i3 = 0; i3 < size2; i3++) {
             if (((KeySetHandle) this.mKeySets.valueAt(i3)).mRefCount == 0) {
-                Slog.wtf("KeySetManagerService", "Encountered key-set w/out package references when reading settings");
+                Slog.wtf(
+                        "KeySetManagerService",
+                        "Encountered key-set w/out package references when reading settings");
                 arraySet.add(Long.valueOf(this.mKeySets.keyAt(i3)));
             }
             ArraySet arraySet2 = (ArraySet) this.mKeySetMapping.valueAt(i3);
             int size3 = arraySet2.size();
             for (int i4 = 0; i4 < size3; i4++) {
-                ((PublicKeyHandle) this.mPublicKeys.get(((Long) arraySet2.valueAt(i4)).longValue())).mRefCount++;
+                ((PublicKeyHandle) this.mPublicKeys.get(((Long) arraySet2.valueAt(i4)).longValue()))
+                        .mRefCount++;
             }
         }
         int size4 = arraySet.size();
@@ -286,7 +324,9 @@ public final class KeySetManagerService {
 
     public final void removeAppKeySetDataLPw(String str) {
         PackageSetting packageSetting = (PackageSetting) this.mPackages.mStorage.get(str);
-        Objects.requireNonNull(packageSetting, "pkg name: " + str + "does not have a corresponding entry in mPackages.");
+        Objects.requireNonNull(
+                packageSetting,
+                "pkg name: " + str + "does not have a corresponding entry in mPackages.");
         decrementKeySetLPw(packageSetting.keySetData.mProperSigningKeySet);
         ArrayMap arrayMap = packageSetting.keySetData.mKeySetAliases;
         for (int i = 0; i < arrayMap.size(); i++) {
@@ -298,9 +338,14 @@ public final class KeySetManagerService {
         packageSetting.keySetData.mUpgradeKeySets = null;
     }
 
-    public final boolean shouldCheckUpgradeKeySetLocked(PackageSetting packageSetting, SharedUserSetting sharedUserSetting, int i) {
+    public final boolean shouldCheckUpgradeKeySetLocked(
+            PackageSetting packageSetting, SharedUserSetting sharedUserSetting, int i) {
         long[] jArr;
-        if (packageSetting == null || (i & 512) != 0 || sharedUserSetting != null || (jArr = packageSetting.keySetData.mUpgradeKeySets) == null || jArr.length <= 0) {
+        if (packageSetting == null
+                || (i & 512) != 0
+                || sharedUserSetting != null
+                || (jArr = packageSetting.keySetData.mUpgradeKeySets) == null
+                || jArr.length <= 0) {
             return false;
         }
         for (int i2 = 0; i2 < jArr.length; i2++) {
@@ -330,7 +375,8 @@ public final class KeySetManagerService {
             PublicKeyHandle publicKeyHandle = (PublicKeyHandle) this.mPublicKeys.valueAt(i);
             typedXmlSerializer.startTag((String) null, "public-key");
             typedXmlSerializer.attributeLong((String) null, "identifier", keyAt);
-            typedXmlSerializer.attributeBytesBase64((String) null, "value", publicKeyHandle.mKey.getEncoded());
+            typedXmlSerializer.attributeBytesBase64(
+                    (String) null, "value", publicKeyHandle.mKey.getEncoded());
             typedXmlSerializer.endTag((String) null, "public-key");
         }
         typedXmlSerializer.endTag((String) null, "keys");

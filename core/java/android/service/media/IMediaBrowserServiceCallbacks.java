@@ -17,24 +17,23 @@ public interface IMediaBrowserServiceCallbacks extends IInterface {
 
     void onDisconnect() throws RemoteException;
 
-    void onLoadChildren(String str, ParceledListSlice parceledListSlice, Bundle bundle) throws RemoteException;
+    void onLoadChildren(String str, ParceledListSlice parceledListSlice, Bundle bundle)
+            throws RemoteException;
 
     public static class Default implements IMediaBrowserServiceCallbacks {
         @Override // android.service.media.IMediaBrowserServiceCallbacks
-        public void onConnect(String root, MediaSession.Token session, Bundle extras) throws RemoteException {
-        }
+        public void onConnect(String root, MediaSession.Token session, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.service.media.IMediaBrowserServiceCallbacks
-        public void onConnectFailed() throws RemoteException {
-        }
+        public void onConnectFailed() throws RemoteException {}
 
         @Override // android.service.media.IMediaBrowserServiceCallbacks
-        public void onLoadChildren(String mediaId, ParceledListSlice list, Bundle options) throws RemoteException {
-        }
+        public void onLoadChildren(String mediaId, ParceledListSlice list, Bundle options)
+                throws RemoteException {}
 
         @Override // android.service.media.IMediaBrowserServiceCallbacks
-        public void onDisconnect() throws RemoteException {
-        }
+        public void onDisconnect() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,8 +41,9 @@ public interface IMediaBrowserServiceCallbacks extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaBrowserServiceCallbacks {
-        public static final String DESCRIPTOR = "android.service.media.IMediaBrowserServiceCallbacks";
+    public abstract static class Stub extends Binder implements IMediaBrowserServiceCallbacks {
+        public static final String DESCRIPTOR =
+                "android.service.media.IMediaBrowserServiceCallbacks";
         static final int TRANSACTION_onConnect = 1;
         static final int TRANSACTION_onConnectFailed = 2;
         static final int TRANSACTION_onDisconnect = 4;
@@ -90,7 +90,8 @@ public interface IMediaBrowserServiceCallbacks extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -101,7 +102,8 @@ public interface IMediaBrowserServiceCallbacks extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    MediaSession.Token _arg1 = (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
+                    MediaSession.Token _arg1 =
+                            (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
                     Bundle _arg2 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     onConnect(_arg0, _arg1, _arg2);
@@ -111,7 +113,8 @@ public interface IMediaBrowserServiceCallbacks extends IInterface {
                     return true;
                 case 3:
                     String _arg02 = data.readString();
-                    ParceledListSlice _arg12 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg12 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     Bundle _arg22 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     onLoadChildren(_arg02, _arg12, _arg22);
@@ -141,7 +144,8 @@ public interface IMediaBrowserServiceCallbacks extends IInterface {
             }
 
             @Override // android.service.media.IMediaBrowserServiceCallbacks
-            public void onConnect(String root, MediaSession.Token session, Bundle extras) throws RemoteException {
+            public void onConnect(String root, MediaSession.Token session, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -166,7 +170,8 @@ public interface IMediaBrowserServiceCallbacks extends IInterface {
             }
 
             @Override // android.service.media.IMediaBrowserServiceCallbacks
-            public void onLoadChildren(String mediaId, ParceledListSlice list, Bundle options) throws RemoteException {
+            public void onLoadChildren(String mediaId, ParceledListSlice list, Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

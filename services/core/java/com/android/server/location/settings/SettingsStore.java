@@ -2,8 +2,10 @@ package com.android.server.location.settings;
 
 import android.util.AtomicFile;
 import android.util.Log;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.Preconditions;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInput;
 import java.io.DataInputStream;
@@ -24,13 +26,15 @@ public abstract class SettingsStore {
 
     public synchronized void deleteFile() throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(1);
-        BackgroundThread.getExecutor().execute(new SettingsStore$$ExternalSyntheticLambda1(this, countDownLatch, 0));
+        BackgroundThread.getExecutor()
+                .execute(new SettingsStore$$ExternalSyntheticLambda1(this, countDownLatch, 0));
         countDownLatch.await();
     }
 
     public synchronized void flushFile() throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(1);
-        BackgroundThread.getExecutor().execute(new SettingsStore$$ExternalSyntheticLambda0(countDownLatch));
+        BackgroundThread.getExecutor()
+                .execute(new SettingsStore$$ExternalSyntheticLambda0(countDownLatch));
         countDownLatch.await();
     }
 
@@ -52,12 +56,20 @@ public abstract class SettingsStore {
                         throw th;
                     }
                 } catch (IOException e) {
-                    Log.e("LocationManagerService", "error reading location settings (" + this.mFile + "), falling back to defaults", e);
+                    Log.e(
+                            "LocationManagerService",
+                            "error reading location settings ("
+                                    + this.mFile
+                                    + "), falling back to defaults",
+                            e);
                 }
             }
             if (this.mCache == null) {
                 try {
-                    this.mCache = read(Integer.MAX_VALUE, new DataInputStream(new ByteArrayInputStream(new byte[0])));
+                    this.mCache =
+                            read(
+                                    Integer.MAX_VALUE,
+                                    new DataInputStream(new ByteArrayInputStream(new byte[0])));
                     Preconditions.checkState(true);
                 } catch (IOException e2) {
                     throw new AssertionError(e2);

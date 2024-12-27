@@ -1,10 +1,11 @@
 package com.android.server.power.stats;
 
 import android.os.BatteryStats;
+
 import com.android.internal.os.PowerProfile;
 import com.android.internal.os.PowerStats;
 import com.android.internal.util.FrameworkStatsLog;
-import com.android.server.power.stats.PowerStatsProcessor;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -19,7 +20,8 @@ public final class GnssPowerStatsProcessor extends BinaryStatePowerStatsProcesso
     public long[] mTmpDeviceStatsArray;
     public final boolean mUseSignalLevelEstimators;
 
-    public GnssPowerStatsProcessor(PowerProfile powerProfile, PowerStatsUidResolver powerStatsUidResolver) {
+    public GnssPowerStatsProcessor(
+            PowerProfile powerProfile, PowerStatsUidResolver powerStatsUidResolver) {
         super(10, powerStatsUidResolver, powerProfile.getAveragePower("gps.on"), sStatsLayout);
         this.mGnssSignalLevel = -1;
         this.mGnssSignalDurations = new long[2];
@@ -36,18 +38,31 @@ public final class GnssPowerStatsProcessor extends BinaryStatePowerStatsProcesso
     }
 
     @Override // com.android.server.power.stats.BinaryStatePowerStatsProcessor
-    public final void computeDevicePowerEstimates(PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, PowerStatsProcessor.PowerEstimationPlan powerEstimationPlan, boolean z) {
+    public final void computeDevicePowerEstimates(
+            PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats,
+            PowerStatsProcessor.PowerEstimationPlan powerEstimationPlan,
+            boolean z) {
         GnssPowerStatsLayout gnssPowerStatsLayout;
         if (!this.mUseSignalLevelEstimators || z) {
-            super.computeDevicePowerEstimates(powerComponentAggregatedPowerStats, powerEstimationPlan, z);
+            super.computeDevicePowerEstimates(
+                    powerComponentAggregatedPowerStats, powerEstimationPlan, z);
             return;
         }
         if (this.mTmpDeviceStatsArray == null) {
-            this.mTmpDeviceStatsArray = new long[powerComponentAggregatedPowerStats.mPowerStatsDescriptor.statsArrayLength];
+            this.mTmpDeviceStatsArray =
+                    new long
+                            [powerComponentAggregatedPowerStats
+                                    .mPowerStatsDescriptor
+                                    .statsArrayLength];
         }
-        for (int size = ((ArrayList) powerEstimationPlan.deviceStateEstimations).size() - 1; size >= 0; size--) {
-            PowerStatsProcessor.DeviceStateEstimation deviceStateEstimation = (PowerStatsProcessor.DeviceStateEstimation) ((ArrayList) powerEstimationPlan.deviceStateEstimations).get(size);
-            if (powerComponentAggregatedPowerStats.getDeviceStats(deviceStateEstimation.stateValues, this.mTmpDeviceStatsArray)) {
+        for (int size = ((ArrayList) powerEstimationPlan.deviceStateEstimations).size() - 1;
+                size >= 0;
+                size--) {
+            PowerStatsProcessor.DeviceStateEstimation deviceStateEstimation =
+                    (PowerStatsProcessor.DeviceStateEstimation)
+                            ((ArrayList) powerEstimationPlan.deviceStateEstimations).get(size);
+            if (powerComponentAggregatedPowerStats.getDeviceStats(
+                    deviceStateEstimation.stateValues, this.mTmpDeviceStatsArray)) {
                 double d = 0.0d;
                 int i = 0;
                 while (true) {
@@ -55,11 +70,16 @@ public final class GnssPowerStatsProcessor extends BinaryStatePowerStatsProcesso
                     if (i >= 2) {
                         break;
                     }
-                    d += this.mSignalLevelEstimators[i].mAveragePowerMahPerMs * this.mTmpDeviceStatsArray[gnssPowerStatsLayout.mDeviceSignalLevelTimePosition + i];
+                    d +=
+                            this.mSignalLevelEstimators[i].mAveragePowerMahPerMs
+                                    * this.mTmpDeviceStatsArray[
+                                            gnssPowerStatsLayout.mDeviceSignalLevelTimePosition
+                                                    + i];
                     i++;
                 }
                 gnssPowerStatsLayout.setDevicePowerEstimate(this.mTmpDeviceStatsArray, d);
-                powerComponentAggregatedPowerStats.setDeviceStats(deviceStateEstimation.stateValues, this.mTmpDeviceStatsArray);
+                powerComponentAggregatedPowerStats.setDeviceStats(
+                        deviceStateEstimation.stateValues, this.mTmpDeviceStatsArray);
             }
         }
     }

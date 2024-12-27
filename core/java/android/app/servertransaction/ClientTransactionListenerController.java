@@ -10,7 +10,9 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.window.ActivityWindowInfo;
+
 import com.android.window.flags.Flags;
+
 import java.util.Objects;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.function.BiConsumer;
@@ -22,21 +24,24 @@ public class ClientTransactionListenerController {
     private final DisplayManagerGlobal mDisplayManager;
     private boolean mIsClientTransactionExecuting;
     private final Object mLock = new Object();
-    private final ArraySet<BiConsumer<IBinder, ActivityWindowInfo>> mActivityWindowInfoChangedListeners = new ArraySet<>();
+    private final ArraySet<BiConsumer<IBinder, ActivityWindowInfo>>
+            mActivityWindowInfoChangedListeners = new ArraySet<>();
     private final ArrayMap<Context, Configuration> mContextToPreChangedConfigMap = new ArrayMap<>();
 
     public static ClientTransactionListenerController getInstance() {
         ClientTransactionListenerController clientTransactionListenerController;
         synchronized (ClientTransactionListenerController.class) {
             if (sController == null) {
-                sController = new ClientTransactionListenerController(DisplayManagerGlobal.getInstance());
+                sController =
+                        new ClientTransactionListenerController(DisplayManagerGlobal.getInstance());
             }
             clientTransactionListenerController = sController;
         }
         return clientTransactionListenerController;
     }
 
-    public static ClientTransactionListenerController createInstanceForTesting(DisplayManagerGlobal displayManager) {
+    public static ClientTransactionListenerController createInstanceForTesting(
+            DisplayManagerGlobal displayManager) {
         return new ClientTransactionListenerController(displayManager);
     }
 
@@ -44,7 +49,8 @@ public class ClientTransactionListenerController {
         this.mDisplayManager = (DisplayManagerGlobal) Objects.requireNonNull(displayManager);
     }
 
-    public void registerActivityWindowInfoChangedListener(BiConsumer<IBinder, ActivityWindowInfo> listener) {
+    public void registerActivityWindowInfoChangedListener(
+            BiConsumer<IBinder, ActivityWindowInfo> listener) {
         if (!Flags.activityWindowInfoFlag()) {
             return;
         }
@@ -53,7 +59,8 @@ public class ClientTransactionListenerController {
         }
     }
 
-    public void unregisterActivityWindowInfoChangedListener(BiConsumer<IBinder, ActivityWindowInfo> listener) {
+    public void unregisterActivityWindowInfoChangedListener(
+            BiConsumer<IBinder, ActivityWindowInfo> listener) {
         if (!Flags.activityWindowInfoFlag()) {
             return;
         }
@@ -62,7 +69,8 @@ public class ClientTransactionListenerController {
         }
     }
 
-    public void onActivityWindowInfoChanged(IBinder activityToken, ActivityWindowInfo activityWindowInfo) {
+    public void onActivityWindowInfoChanged(
+            IBinder activityToken, ActivityWindowInfo activityWindowInfo) {
         if (!Flags.activityWindowInfoFlag()) {
             return;
         }
@@ -70,9 +78,11 @@ public class ClientTransactionListenerController {
             if (this.mActivityWindowInfoChangedListeners.isEmpty()) {
                 return;
             }
-            Object[] activityWindowInfoChangedListeners = this.mActivityWindowInfoChangedListeners.toArray();
+            Object[] activityWindowInfoChangedListeners =
+                    this.mActivityWindowInfoChangedListeners.toArray();
             for (Object activityWindowInfoChangedListener : activityWindowInfoChangedListeners) {
-                ((BiConsumer) activityWindowInfoChangedListener).accept(activityToken, new ActivityWindowInfo(activityWindowInfo));
+                ((BiConsumer) activityWindowInfoChangedListener)
+                        .accept(activityToken, new ActivityWindowInfo(activityWindowInfo));
             }
         }
     }
@@ -122,7 +132,8 @@ public class ClientTransactionListenerController {
             if (this.mContextToPreChangedConfigMap.containsKey(context)) {
                 return;
             }
-            this.mContextToPreChangedConfigMap.put(context, new Configuration(context.getResources().getConfiguration()));
+            this.mContextToPreChangedConfigMap.put(
+                    context, new Configuration(context.getResources().getConfiguration()));
         }
     }
 
@@ -143,7 +154,10 @@ public class ClientTransactionListenerController {
                 try {
                     onDisplayChanged(changedDisplayId);
                 } catch (RejectedExecutionException e) {
-                    Log.w(TAG, "Failed to notify DisplayListener because the Handler is shutting down");
+                    Log.w(
+                            TAG,
+                            "Failed to notify DisplayListener because the Handler is shutting"
+                                    + " down");
                 }
             }
         }
@@ -151,7 +165,8 @@ public class ClientTransactionListenerController {
 
     private boolean shouldReportDisplayChange(Context context, Configuration preChangedConfig) {
         Configuration postChangedConfig = context.getResources().getConfiguration();
-        return !WindowConfiguration.areConfigurationsEqualForDisplay(postChangedConfig, preChangedConfig);
+        return !WindowConfiguration.areConfigurationsEqualForDisplay(
+                postChangedConfig, preChangedConfig);
     }
 
     public void onDisplayChanged(int displayId) throws RejectedExecutionException {

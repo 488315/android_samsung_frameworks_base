@@ -4,11 +4,13 @@ import android.util.Log;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class LppeFusedLocationHelper$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class LppeFusedLocationHelper$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ LppeFusedLocationHelper f$0;
 
-    public /* synthetic */ LppeFusedLocationHelper$$ExternalSyntheticLambda0(LppeFusedLocationHelper lppeFusedLocationHelper, int i) {
+    public /* synthetic */ LppeFusedLocationHelper$$ExternalSyntheticLambda0(
+            LppeFusedLocationHelper lppeFusedLocationHelper, int i) {
         this.$r8$classId = i;
         this.f$0 = lppeFusedLocationHelper;
     }
@@ -31,7 +33,8 @@ public final /* synthetic */ class LppeFusedLocationHelper$$ExternalSyntheticLam
                     Log.d("LocationX", "UBP measurement is timeout");
                     Log.d("LocationX", "handleUpdateUBPError :  4");
                     lppeFusedLocationHelper.mGnssNative.injectUbpError(4);
-                    lppeFusedLocationHelper.mSensorManager.unregisterListener(lppeFusedLocationHelper.mSensorEventListener);
+                    lppeFusedLocationHelper.mSensorManager.unregisterListener(
+                            lppeFusedLocationHelper.mSensorEventListener);
                     lppeFusedLocationHelper.mIsUbpRequested = false;
                     break;
                 }

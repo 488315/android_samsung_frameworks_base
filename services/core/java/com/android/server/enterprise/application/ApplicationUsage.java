@@ -7,8 +7,11 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.server.enterprise.EnterpriseService;
+
 import com.samsung.android.knox.application.AppInfoLastUsage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +60,8 @@ public final class ApplicationUsage {
                             return;
                         }
                         if (((HashMap) map2).containsKey(str)) {
-                            AppForeGroundUsage appForeGroundUsage = (AppForeGroundUsage) ((HashMap) map2).get(str);
+                            AppForeGroundUsage appForeGroundUsage =
+                                    (AppForeGroundUsage) ((HashMap) map2).get(str);
                             appForeGroundUsage.appLaunchCount++;
                             appForeGroundUsage.appLastLaunchTime = System.currentTimeMillis();
                             appForeGroundUsage.appLastPausetime = 0L;
@@ -82,7 +86,8 @@ public final class ApplicationUsage {
                     try {
                         Map map3 = ApplicationUsage.appForeGroundStats;
                         if (((HashMap) map3).containsKey(str2)) {
-                            ((AppForeGroundUsage) ((HashMap) map3).get(str2)).appLastPausetime = System.currentTimeMillis();
+                            ((AppForeGroundUsage) ((HashMap) map3).get(str2)).appLastPausetime =
+                                    System.currentTimeMillis();
                         }
                     } finally {
                     }
@@ -108,7 +113,9 @@ public final class ApplicationUsage {
                             return;
                         }
                         if (((HashMap) map4).containsKey(str3)) {
-                            ((AppBackGroundUsage) ((HashMap) map4).get(str3)).appLastServiceStopTime = System.currentTimeMillis();
+                            ((AppBackGroundUsage) ((HashMap) map4).get(str3))
+                                            .appLastServiceStopTime =
+                                    System.currentTimeMillis();
                         }
                         return;
                     } finally {
@@ -116,26 +123,34 @@ public final class ApplicationUsage {
                 }
             }
             ApplicationUsage applicationUsage4 = ApplicationUsage.this;
-            ActivityManager.RunningServiceInfo runningServiceInfo = (ActivityManager.RunningServiceInfo) message.obj;
+            ActivityManager.RunningServiceInfo runningServiceInfo =
+                    (ActivityManager.RunningServiceInfo) message.obj;
             applicationUsage4.getClass();
             if (runningServiceInfo == null || (map = ApplicationUsage.appBackGroundStats) == null) {
                 return;
             }
-            if ((runningServiceInfo.started || runningServiceInfo.clientLabel != 0) && (runningServiceInfo.flags & 8) == 0) {
-                String str4 = runningServiceInfo.service.getPackageName() + ":" + UserHandle.getUserId(runningServiceInfo.uid);
+            if ((runningServiceInfo.started || runningServiceInfo.clientLabel != 0)
+                    && (runningServiceInfo.flags & 8) == 0) {
+                String str4 =
+                        runningServiceInfo.service.getPackageName()
+                                + ":"
+                                + UserHandle.getUserId(runningServiceInfo.uid);
                 synchronized (ApplicationUsage.mStatsLock) {
                     try {
                         if (((HashMap) map).containsKey(str4)) {
-                            AppBackGroundUsage appBackGroundUsage = (AppBackGroundUsage) ((HashMap) map).get(str4);
+                            AppBackGroundUsage appBackGroundUsage =
+                                    (AppBackGroundUsage) ((HashMap) map).get(str4);
                             if (appBackGroundUsage.appLastServiceStartTime == 0) {
-                                appBackGroundUsage.appLastServiceStartTime = System.currentTimeMillis();
+                                appBackGroundUsage.appLastServiceStartTime =
+                                        System.currentTimeMillis();
                             }
                             appBackGroundUsage.appLastServiceStopTime = 0L;
                         } else {
                             AppBackGroundUsage appBackGroundUsage2 = new AppBackGroundUsage();
                             appBackGroundUsage2.appLastServiceStartTime = 0L;
                             appBackGroundUsage2.appLastServiceStopTime = 0L;
-                            appBackGroundUsage2.appLastServiceStartTime = System.currentTimeMillis();
+                            appBackGroundUsage2.appLastServiceStartTime =
+                                    System.currentTimeMillis();
                             ((HashMap) map).put(str4, appBackGroundUsage2);
                         }
                     } finally {
@@ -145,13 +160,16 @@ public final class ApplicationUsage {
         }
     }
 
-    public static AppInfoLastUsage[] filterUnInstalledApps(AppInfoLastUsage[] appInfoLastUsageArr, int i, int i2) {
+    public static AppInfoLastUsage[] filterUnInstalledApps(
+            AppInfoLastUsage[] appInfoLastUsageArr, int i, int i2) {
         int i3;
-        ApplicationPolicy applicationPolicy = (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
+        ApplicationPolicy applicationPolicy =
+                (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
         if (appInfoLastUsageArr != null) {
             i3 = 0;
             for (int i4 = 0; i4 < i; i4++) {
-                if (applicationPolicy.isApplicationInstalled(i2, appInfoLastUsageArr[i4].packageName)) {
+                if (applicationPolicy.isApplicationInstalled(
+                        i2, appInfoLastUsageArr[i4].packageName)) {
                     i3++;
                 }
             }
@@ -173,17 +191,22 @@ public final class ApplicationUsage {
     }
 
     public final void _insertToAppControlDB() {
-        Log.i("ApplicationUsage", "Updating Usage Statistics in DB @ " + System.currentTimeMillis());
+        Log.i(
+                "ApplicationUsage",
+                "Updating Usage Statistics in DB @ " + System.currentTimeMillis());
         try {
             synchronized (mStatsLock) {
                 updateForeGroundUsageData();
                 updateBackGroundUsageDetails();
-                ((ApplicationPolicy) EnterpriseService.getPolicyService("application_policy")).updateDataUsageDb();
+                ((ApplicationPolicy) EnterpriseService.getPolicyService("application_policy"))
+                        .updateDataUsageDb();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.i("ApplicationUsage", "Done Updating Usage Statistics in DB @ " + System.currentTimeMillis());
+        Log.i(
+                "ApplicationUsage",
+                "Done Updating Usage Statistics in DB @ " + System.currentTimeMillis());
     }
 
     /* JADX WARN: Removed duplicated region for block: B:14:0x005c  */
@@ -204,7 +227,10 @@ public final class ApplicationUsage {
             Method dump skipped, instructions count: 269
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.application.ApplicationUsage.calculateAvgPerMonth(int, int, java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.application.ApplicationUsage.calculateAvgPerMonth(int,"
+                    + " int, java.lang.String):int");
     }
 
     public final void updateBackGroundUsageDetails() {
@@ -218,13 +244,18 @@ public final class ApplicationUsage {
             Set<String> keySet = hashMap.keySet();
             ArrayList arrayList = new ArrayList();
             for (String str : keySet) {
-                AppBackGroundUsage appBackGroundUsage = (AppBackGroundUsage) ((HashMap) appBackGroundStats).get(str);
+                AppBackGroundUsage appBackGroundUsage =
+                        (AppBackGroundUsage) ((HashMap) appBackGroundStats).get(str);
                 long j = appBackGroundUsage.appLastServiceStopTime;
                 if (j != 0) {
-                    applicationUsageDb.updateBackGroundUsageDetails(appBackGroundUsage.appLastServiceStartTime, j, str);
+                    applicationUsageDb.updateBackGroundUsageDetails(
+                            appBackGroundUsage.appLastServiceStartTime, j, str);
                     arrayList.add(str);
                 } else {
-                    applicationUsageDb.updateBackGroundUsageDetails(appBackGroundUsage.appLastServiceStartTime, System.currentTimeMillis(), str);
+                    applicationUsageDb.updateBackGroundUsageDetails(
+                            appBackGroundUsage.appLastServiceStartTime,
+                            System.currentTimeMillis(),
+                            str);
                 }
             }
             if (arrayList.size() != 0) {
@@ -246,13 +277,22 @@ public final class ApplicationUsage {
             Set<String> keySet = hashMap.keySet();
             ArrayList arrayList = new ArrayList();
             for (String str : keySet) {
-                AppForeGroundUsage appForeGroundUsage = (AppForeGroundUsage) ((HashMap) appForeGroundStats).get(str);
+                AppForeGroundUsage appForeGroundUsage =
+                        (AppForeGroundUsage) ((HashMap) appForeGroundStats).get(str);
                 long j = appForeGroundUsage.appLastPausetime;
                 if (j != 0) {
-                    applicationUsageDb.updateForeGroundUsageDetails(appForeGroundUsage.appLaunchCount, appForeGroundUsage.appLastLaunchTime, j, str);
+                    applicationUsageDb.updateForeGroundUsageDetails(
+                            appForeGroundUsage.appLaunchCount,
+                            appForeGroundUsage.appLastLaunchTime,
+                            j,
+                            str);
                     arrayList.add(str);
                 } else {
-                    applicationUsageDb.updateForeGroundUsageDetails(appForeGroundUsage.appLaunchCount, appForeGroundUsage.appLastLaunchTime, System.currentTimeMillis(), str);
+                    applicationUsageDb.updateForeGroundUsageDetails(
+                            appForeGroundUsage.appLaunchCount,
+                            appForeGroundUsage.appLastLaunchTime,
+                            System.currentTimeMillis(),
+                            str);
                 }
             }
             if (arrayList.size() != 0) {

@@ -3,27 +3,30 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CdmaInformationRecord implements Parcelable {
     public static final int CDMA_MAX_NUMBER_OF_INFO_RECS = 10;
-    public static final Parcelable.Creator<CdmaInformationRecord> CREATOR = new Parcelable.Creator<CdmaInformationRecord>() { // from class: android.hardware.radio.voice.CdmaInformationRecord.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaInformationRecord createFromParcel(Parcel _aidl_source) {
-            CdmaInformationRecord _aidl_out = new CdmaInformationRecord();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CdmaInformationRecord> CREATOR =
+            new Parcelable.Creator<CdmaInformationRecord>() { // from class:
+                // android.hardware.radio.voice.CdmaInformationRecord.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaInformationRecord createFromParcel(Parcel _aidl_source) {
+                    CdmaInformationRecord _aidl_out = new CdmaInformationRecord();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaInformationRecord[] newArray(int _aidl_size) {
-            return new CdmaInformationRecord[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaInformationRecord[] newArray(int _aidl_size) {
+                    return new CdmaInformationRecord[_aidl_size];
+                }
+            };
     public static final int NAME_CALLED_PARTY_NUMBER = 1;
     public static final int NAME_CALLING_PARTY_NUMBER = 2;
     public static final int NAME_CONNECTED_NUMBER = 3;
@@ -89,7 +92,9 @@ public class CdmaInformationRecord implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.display = (CdmaDisplayInfoRecord[]) _aidl_parcel.createTypedArray(CdmaDisplayInfoRecord.CREATOR);
+            this.display =
+                    (CdmaDisplayInfoRecord[])
+                            _aidl_parcel.createTypedArray(CdmaDisplayInfoRecord.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -97,7 +102,9 @@ public class CdmaInformationRecord implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.number = (CdmaNumberInfoRecord[]) _aidl_parcel.createTypedArray(CdmaNumberInfoRecord.CREATOR);
+            this.number =
+                    (CdmaNumberInfoRecord[])
+                            _aidl_parcel.createTypedArray(CdmaNumberInfoRecord.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -105,7 +112,9 @@ public class CdmaInformationRecord implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.signal = (CdmaSignalInfoRecord[]) _aidl_parcel.createTypedArray(CdmaSignalInfoRecord.CREATOR);
+            this.signal =
+                    (CdmaSignalInfoRecord[])
+                            _aidl_parcel.createTypedArray(CdmaSignalInfoRecord.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -113,7 +122,9 @@ public class CdmaInformationRecord implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.redir = (CdmaRedirectingNumberInfoRecord[]) _aidl_parcel.createTypedArray(CdmaRedirectingNumberInfoRecord.CREATOR);
+            this.redir =
+                    (CdmaRedirectingNumberInfoRecord[])
+                            _aidl_parcel.createTypedArray(CdmaRedirectingNumberInfoRecord.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -121,7 +132,9 @@ public class CdmaInformationRecord implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.lineCtrl = (CdmaLineControlInfoRecord[]) _aidl_parcel.createTypedArray(CdmaLineControlInfoRecord.CREATOR);
+            this.lineCtrl =
+                    (CdmaLineControlInfoRecord[])
+                            _aidl_parcel.createTypedArray(CdmaLineControlInfoRecord.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -129,14 +142,19 @@ public class CdmaInformationRecord implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.clir = (CdmaT53ClirInfoRecord[]) _aidl_parcel.createTypedArray(CdmaT53ClirInfoRecord.CREATOR);
+            this.clir =
+                    (CdmaT53ClirInfoRecord[])
+                            _aidl_parcel.createTypedArray(CdmaT53ClirInfoRecord.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.audioCtrl = (CdmaT53AudioControlInfoRecord[]) _aidl_parcel.createTypedArray(CdmaT53AudioControlInfoRecord.CREATOR);
+                this.audioCtrl =
+                        (CdmaT53AudioControlInfoRecord[])
+                                _aidl_parcel.createTypedArray(
+                                        CdmaT53AudioControlInfoRecord.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -167,7 +185,13 @@ public class CdmaInformationRecord implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.display);
-        return _mask | describeContents(this.number) | describeContents(this.signal) | describeContents(this.redir) | describeContents(this.lineCtrl) | describeContents(this.clir) | describeContents(this.audioCtrl);
+        return _mask
+                | describeContents(this.number)
+                | describeContents(this.signal)
+                | describeContents(this.redir)
+                | describeContents(this.lineCtrl)
+                | describeContents(this.clir)
+                | describeContents(this.audioCtrl);
     }
 
     private int describeContents(Object _v) {

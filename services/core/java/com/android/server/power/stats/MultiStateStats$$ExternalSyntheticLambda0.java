@@ -2,7 +2,7 @@ package com.android.server.power.stats;
 
 import com.android.internal.os.LongArrayMultiStateCounter;
 import com.android.modules.utils.TypedXmlSerializer;
-import com.android.server.power.stats.MultiStateStats;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -15,13 +15,15 @@ public final /* synthetic */ class MultiStateStats$$ExternalSyntheticLambda0 imp
     public final /* synthetic */ long[] f$1;
     public final /* synthetic */ Object f$2;
 
-    public /* synthetic */ MultiStateStats$$ExternalSyntheticLambda0(MultiStateStats multiStateStats, TypedXmlSerializer typedXmlSerializer, long[] jArr) {
+    public /* synthetic */ MultiStateStats$$ExternalSyntheticLambda0(
+            MultiStateStats multiStateStats, TypedXmlSerializer typedXmlSerializer, long[] jArr) {
         this.f$0 = multiStateStats;
         this.f$2 = typedXmlSerializer;
         this.f$1 = jArr;
     }
 
-    public /* synthetic */ MultiStateStats$$ExternalSyntheticLambda0(MultiStateStats multiStateStats, long[] jArr, StringBuilder sb) {
+    public /* synthetic */ MultiStateStats$$ExternalSyntheticLambda0(
+            MultiStateStats multiStateStats, long[] jArr, StringBuilder sb) {
         this.f$0 = multiStateStats;
         this.f$1 = jArr;
         this.f$2 = sb;

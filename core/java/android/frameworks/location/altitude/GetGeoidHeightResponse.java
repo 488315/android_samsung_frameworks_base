@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class GetGeoidHeightResponse implements Parcelable {
-    public static final Parcelable.Creator<GetGeoidHeightResponse> CREATOR = new Parcelable.Creator<GetGeoidHeightResponse>() { // from class: android.frameworks.location.altitude.GetGeoidHeightResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetGeoidHeightResponse createFromParcel(Parcel _aidl_source) {
-            GetGeoidHeightResponse _aidl_out = new GetGeoidHeightResponse();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GetGeoidHeightResponse> CREATOR =
+            new Parcelable.Creator<GetGeoidHeightResponse>() { // from class:
+                // android.frameworks.location.altitude.GetGeoidHeightResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetGeoidHeightResponse createFromParcel(Parcel _aidl_source) {
+                    GetGeoidHeightResponse _aidl_out = new GetGeoidHeightResponse();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetGeoidHeightResponse[] newArray(int _aidl_size) {
-            return new GetGeoidHeightResponse[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetGeoidHeightResponse[] newArray(int _aidl_size) {
+                    return new GetGeoidHeightResponse[_aidl_size];
+                }
+            };
     public double geoidHeightMeters = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     public float geoidHeightErrorMeters = 0.0f;
     public double expirationDistanceMeters = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;

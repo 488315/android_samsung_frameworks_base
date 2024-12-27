@@ -14,8 +14,7 @@ public interface IStreamAliasingDispatcher extends IInterface {
 
     public static class Default implements IStreamAliasingDispatcher {
         @Override // android.media.IStreamAliasingDispatcher
-        public void dispatchStreamAliasingChanged() throws RemoteException {
-        }
+        public void dispatchStreamAliasingChanged() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IStreamAliasingDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStreamAliasingDispatcher {
+    public abstract static class Stub extends Binder implements IStreamAliasingDispatcher {
         static final int TRANSACTION_dispatchStreamAliasingChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IStreamAliasingDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IStreamAliasingDispatcher.DESCRIPTOR);
             }

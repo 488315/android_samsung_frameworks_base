@@ -14,6 +14,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.GeneralName;
 import com.android.internal.org.bouncycastle.asn1.x509.GeneralNames;
 import com.android.internal.org.bouncycastle.asn1.x509.TBSCertList;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.cert.CRLException;
@@ -22,6 +23,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes5.dex */
@@ -36,7 +38,8 @@ class X509CRLEntryObject extends X509CRLEntry {
         this.certificateIssuer = null;
     }
 
-    protected X509CRLEntryObject(TBSCertList.CRLEntry c, boolean isIndirect, X500Name previousCertificateIssuer) {
+    protected X509CRLEntryObject(
+            TBSCertList.CRLEntry c, boolean isIndirect, X500Name previousCertificateIssuer) {
         this.c = c;
         this.certificateIssuer = loadCertificateIssuer(isIndirect, previousCertificateIssuer);
     }
@@ -194,15 +197,25 @@ class X509CRLEntryObject extends X509CRLEntry {
                     if (ext.getExtnValue() != null) {
                         byte[] octs = ext.getExtnValue().getOctets();
                         ASN1InputStream dIn = new ASN1InputStream(octs);
-                        buf.append("                       critical(").append(ext.isCritical()).append(") ");
+                        buf.append("                       critical(")
+                                .append(ext.isCritical())
+                                .append(") ");
                         try {
                             if (oid.equals((ASN1Primitive) Extension.reasonCode)) {
-                                buf.append(CRLReason.getInstance(ASN1Enumerated.getInstance(dIn.readObject()))).append(nl);
+                                buf.append(
+                                                CRLReason.getInstance(
+                                                        ASN1Enumerated.getInstance(
+                                                                dIn.readObject())))
+                                        .append(nl);
                             } else if (oid.equals((ASN1Primitive) Extension.certificateIssuer)) {
-                                buf.append("Certificate issuer: ").append(GeneralNames.getInstance(dIn.readObject())).append(nl);
+                                buf.append("Certificate issuer: ")
+                                        .append(GeneralNames.getInstance(dIn.readObject()))
+                                        .append(nl);
                             } else {
                                 buf.append(oid.getId());
-                                buf.append(" value = ").append(ASN1Dump.dumpAsString(dIn.readObject())).append(nl);
+                                buf.append(" value = ")
+                                        .append(ASN1Dump.dumpAsString(dIn.readObject()))
+                                        .append(nl);
                             }
                         } catch (Exception e2) {
                             buf.append(oid.getId());

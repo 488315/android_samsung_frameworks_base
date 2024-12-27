@@ -16,13 +16,15 @@ import android.provider.DeviceConfig;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.Slog;
+
 import java.io.File;
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public class ConnectivityModuleConnector {
-    private static final String CONFIG_ALWAYS_RATELIMIT_NETWORKSTACK_CRASH = "always_ratelimit_networkstack_crash";
+    private static final String CONFIG_ALWAYS_RATELIMIT_NETWORKSTACK_CRASH =
+            "always_ratelimit_networkstack_crash";
     private static final String CONFIG_MIN_CRASH_INTERVAL_MS = "min_crash_interval";
     private static final String CONFIG_MIN_UPTIME_BEFORE_CRASH_MS = "min_uptime_before_crash";
     private static final long DEFAULT_MIN_CRASH_INTERVAL_MS = 21600000;
@@ -43,15 +45,19 @@ public class ConnectivityModuleConnector {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Dependencies {
-        Intent getModuleServiceIntent(PackageManager packageManager, String str, String str2, boolean z);
+        Intent getModuleServiceIntent(
+                PackageManager packageManager, String str, String str2, boolean z);
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DependenciesImpl implements Dependencies {
         @Override // android.net.ConnectivityModuleConnector.Dependencies
-        public final Intent getModuleServiceIntent(PackageManager packageManager, String str, String str2, boolean z) {
+        public final Intent getModuleServiceIntent(
+                PackageManager packageManager, String str, String str2, boolean z) {
             if (z) {
-                str = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, ConnectivityModuleConnector.IN_PROCESS_SUFFIX);
+                str =
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                                str, ConnectivityModuleConnector.IN_PROCESS_SUFFIX);
             }
             Intent intent = new Intent(str);
             ComponentName resolveSystemService = intent.resolveSystemService(packageManager, 0);
@@ -60,16 +66,22 @@ public class ConnectivityModuleConnector {
             }
             intent.setComponent(resolveSystemService);
             try {
-                int packageUidAsUser = packageManager.getPackageUidAsUser(resolveSystemService.getPackageName(), 0);
+                int packageUidAsUser =
+                        packageManager.getPackageUidAsUser(
+                                resolveSystemService.getPackageName(), 0);
                 if (packageUidAsUser != (z ? 1000 : 1073)) {
-                    throw new SecurityException(VibrationParam$1$$ExternalSyntheticOutline0.m(packageUidAsUser, "Invalid network stack UID: "));
+                    throw new SecurityException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                    packageUidAsUser, "Invalid network stack UID: "));
                 }
                 if (!z) {
-                    ConnectivityModuleConnector.checkModuleServicePermission(packageManager, resolveSystemService, str2);
+                    ConnectivityModuleConnector.checkModuleServicePermission(
+                            packageManager, resolveSystemService, str2);
                 }
                 return intent;
             } catch (PackageManager.NameNotFoundException e) {
-                throw new SecurityException("Could not check network stack UID; package not found.", e);
+                throw new SecurityException(
+                        "Could not check network stack UID; package not found.", e);
             }
         }
     }
@@ -97,7 +109,11 @@ public class ConnectivityModuleConnector {
 
         @Override // android.content.ServiceConnection
         public final void onServiceDisconnected(ComponentName componentName) {
-            ConnectivityModuleConnector.this.maybeCrashWithTerribleFailure("Lost network stack. This is not the root cause of any issue, it is a side effect of a crash that happened earlier. Earlier logs should point to the actual issue.", this.mPackageName);
+            ConnectivityModuleConnector.this.maybeCrashWithTerribleFailure(
+                    "Lost network stack. This is not the root cause of any issue, it is a side"
+                        + " effect of a crash that happened earlier. Earlier logs should point to"
+                        + " the actual issue.",
+                    this.mPackageName);
         }
     }
 
@@ -111,9 +127,12 @@ public class ConnectivityModuleConnector {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static void checkModuleServicePermission(PackageManager packageManager, ComponentName componentName, String str) {
+    public static void checkModuleServicePermission(
+            PackageManager packageManager, ComponentName componentName, String str) {
         if (packageManager.checkPermission(str, componentName.getPackageName()) != 0) {
-            throw new SecurityException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Networking module does not have permission ", str));
+            throw new SecurityException(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            "Networking module does not have permission ", str));
         }
     }
 
@@ -134,7 +153,10 @@ public class ConnectivityModuleConnector {
 
     private SharedPreferences getSharedPreferences() {
         try {
-            return this.mContext.createDeviceProtectedStorageContext().getSharedPreferences(new File(Environment.getDataSystemDeDirectory(0), PREFS_FILE), 0);
+            return this.mContext
+                    .createDeviceProtectedStorageContext()
+                    .getSharedPreferences(
+                            new File(Environment.getDataSystemDeDirectory(0), PREFS_FILE), 0);
         } catch (Throwable th) {
             this.logWtf("Error loading shared preferences", th);
             return null;
@@ -166,15 +188,23 @@ public class ConnectivityModuleConnector {
         logWtf(str, null);
         long elapsedRealtime = SystemClock.elapsedRealtime();
         long currentTimeMillis = System.currentTimeMillis();
-        long j = DeviceConfig.getLong("connectivity", CONFIG_MIN_CRASH_INTERVAL_MS, DEFAULT_MIN_CRASH_INTERVAL_MS);
+        long j =
+                DeviceConfig.getLong(
+                        "connectivity",
+                        CONFIG_MIN_CRASH_INTERVAL_MS,
+                        DEFAULT_MIN_CRASH_INTERVAL_MS);
         long j2 = DeviceConfig.getLong("connectivity", CONFIG_MIN_UPTIME_BEFORE_CRASH_MS, 1800000L);
         boolean z = false;
-        boolean z2 = DeviceConfig.getBoolean("connectivity", CONFIG_ALWAYS_RATELIMIT_NETWORKSTACK_CRASH, false);
+        boolean z2 =
+                DeviceConfig.getBoolean(
+                        "connectivity", CONFIG_ALWAYS_RATELIMIT_NETWORKSTACK_CRASH, false);
         SharedPreferences sharedPreferences = getSharedPreferences();
         long tryGetLastCrashTime = tryGetLastCrashTime(sharedPreferences);
         boolean z3 = Build.IS_DEBUGGABLE && !z2;
         boolean z4 = elapsedRealtime < j2;
-        if (tryGetLastCrashTime != 0 && tryGetLastCrashTime < currentTimeMillis && currentTimeMillis < tryGetLastCrashTime + j) {
+        if (tryGetLastCrashTime != 0
+                && tryGetLastCrashTime < currentTimeMillis
+                && currentTimeMillis < tryGetLastCrashTime + j) {
             z = true;
         }
         if (z3 || !(z4 || z)) {
@@ -220,18 +250,24 @@ public class ConnectivityModuleConnector {
         this.mContext = context;
     }
 
-    public void registerHealthListener(ConnectivityModuleHealthListener connectivityModuleHealthListener) {
+    public void registerHealthListener(
+            ConnectivityModuleHealthListener connectivityModuleHealthListener) {
         synchronized (this.mHealthListeners) {
             this.mHealthListeners.add(connectivityModuleHealthListener);
         }
     }
 
-    public void startModuleService(String str, String str2, ModuleServiceCallback moduleServiceCallback) {
-        logi(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Starting networking module ", str));
+    public void startModuleService(
+            String str, String str2, ModuleServiceCallback moduleServiceCallback) {
+        logi(
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                        "Starting networking module ", str));
         PackageManager packageManager = this.mContext.getPackageManager();
-        Intent moduleServiceIntent = this.mDeps.getModuleServiceIntent(packageManager, str, str2, true);
+        Intent moduleServiceIntent =
+                this.mDeps.getModuleServiceIntent(packageManager, str, str2, true);
         if (moduleServiceIntent == null) {
-            moduleServiceIntent = this.mDeps.getModuleServiceIntent(packageManager, str, str2, false);
+            moduleServiceIntent =
+                    this.mDeps.getModuleServiceIntent(packageManager, str, str2, false);
             logi("Starting networking module in network_stack process");
         } else {
             logi("Starting networking module in system_server process");
@@ -241,10 +277,17 @@ public class ConnectivityModuleConnector {
             return;
         }
         String packageName = moduleServiceIntent.getComponent().getPackageName();
-        if (this.mContext.bindServiceAsUser(moduleServiceIntent, new ModuleServiceConnection(packageName, moduleServiceCallback), 65, UserHandle.SYSTEM)) {
+        if (this.mContext.bindServiceAsUser(
+                moduleServiceIntent,
+                new ModuleServiceConnection(packageName, moduleServiceCallback),
+                65,
+                UserHandle.SYSTEM)) {
             log("Networking module service start requested");
             return;
         }
-        maybeCrashWithTerribleFailure("Could not bind to networking module in-process, or in app with " + moduleServiceIntent, packageName);
+        maybeCrashWithTerribleFailure(
+                "Could not bind to networking module in-process, or in app with "
+                        + moduleServiceIntent,
+                packageName);
     }
 }

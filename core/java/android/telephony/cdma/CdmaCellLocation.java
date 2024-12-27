@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.telephony.CellLocation;
+
 import com.android.internal.telephony.SemTelephonyUtils;
 import com.android.internal.telephony.util.TelephonyUtils;
 import com.android.telephony.Rlog;
@@ -39,7 +40,8 @@ public class CdmaCellLocation extends CellLocation {
         this.mNetworkId = -1;
         this.mBaseStationId = bundle.getInt("baseStationId", this.mBaseStationId);
         this.mBaseStationLatitude = bundle.getInt("baseStationLatitude", this.mBaseStationLatitude);
-        this.mBaseStationLongitude = bundle.getInt("baseStationLongitude", this.mBaseStationLongitude);
+        this.mBaseStationLongitude =
+                bundle.getInt("baseStationLongitude", this.mBaseStationLongitude);
         this.mSystemId = bundle.getInt(Intent.EXTRA_SYSTEM_ID, this.mSystemId);
         this.mNetworkId = bundle.getInt("networkId", this.mNetworkId);
     }
@@ -73,13 +75,19 @@ public class CdmaCellLocation extends CellLocation {
         this.mNetworkId = -1;
     }
 
-    public void setCellLocationData(int baseStationId, int baseStationLatitude, int baseStationLongitude) {
+    public void setCellLocationData(
+            int baseStationId, int baseStationLatitude, int baseStationLongitude) {
         this.mBaseStationId = baseStationId;
         this.mBaseStationLatitude = baseStationLatitude;
         this.mBaseStationLongitude = baseStationLongitude;
     }
 
-    public void setCellLocationData(int baseStationId, int baseStationLatitude, int baseStationLongitude, int systemId, int networkId) {
+    public void setCellLocationData(
+            int baseStationId,
+            int baseStationLatitude,
+            int baseStationLongitude,
+            int systemId,
+            int networkId) {
         this.mBaseStationId = baseStationId;
         this.mBaseStationLatitude = baseStationLatitude;
         this.mBaseStationLongitude = baseStationLongitude;
@@ -88,13 +96,27 @@ public class CdmaCellLocation extends CellLocation {
     }
 
     public int hashCode() {
-        return (((this.mBaseStationId ^ this.mBaseStationLatitude) ^ this.mBaseStationLongitude) ^ this.mSystemId) ^ this.mNetworkId;
+        return (((this.mBaseStationId ^ this.mBaseStationLatitude) ^ this.mBaseStationLongitude)
+                        ^ this.mSystemId)
+                ^ this.mNetworkId;
     }
 
     public boolean equals(Object o) {
         try {
             CdmaCellLocation s = (CdmaCellLocation) o;
-            return o != null && equalsHandlesNulls(Integer.valueOf(this.mBaseStationId), Integer.valueOf(s.mBaseStationId)) && equalsHandlesNulls(Integer.valueOf(this.mBaseStationLatitude), Integer.valueOf(s.mBaseStationLatitude)) && equalsHandlesNulls(Integer.valueOf(this.mBaseStationLongitude), Integer.valueOf(s.mBaseStationLongitude)) && equalsHandlesNulls(Integer.valueOf(this.mSystemId), Integer.valueOf(s.mSystemId)) && equalsHandlesNulls(Integer.valueOf(this.mNetworkId), Integer.valueOf(s.mNetworkId));
+            return o != null
+                    && equalsHandlesNulls(
+                            Integer.valueOf(this.mBaseStationId), Integer.valueOf(s.mBaseStationId))
+                    && equalsHandlesNulls(
+                            Integer.valueOf(this.mBaseStationLatitude),
+                            Integer.valueOf(s.mBaseStationLatitude))
+                    && equalsHandlesNulls(
+                            Integer.valueOf(this.mBaseStationLongitude),
+                            Integer.valueOf(s.mBaseStationLongitude))
+                    && equalsHandlesNulls(
+                            Integer.valueOf(this.mSystemId), Integer.valueOf(s.mSystemId))
+                    && equalsHandlesNulls(
+                            Integer.valueOf(this.mNetworkId), Integer.valueOf(s.mNetworkId));
         } catch (ClassCastException e) {
             return false;
         }
@@ -104,7 +126,18 @@ public class CdmaCellLocation extends CellLocation {
         if (SemTelephonyUtils.SHIP_BUILD) {
             return "[<MASKED>]";
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + this.mBaseStationId + "," + Rlog.pii(TelephonyUtils.IS_DEBUGGABLE, Integer.valueOf(this.mBaseStationLatitude)) + "," + Rlog.pii(TelephonyUtils.IS_DEBUGGABLE, Integer.valueOf(this.mBaseStationLongitude)) + "," + this.mSystemId + "," + this.mNetworkId + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START
+                + this.mBaseStationId
+                + ","
+                + Rlog.pii(TelephonyUtils.IS_DEBUGGABLE, Integer.valueOf(this.mBaseStationLatitude))
+                + ","
+                + Rlog.pii(
+                        TelephonyUtils.IS_DEBUGGABLE, Integer.valueOf(this.mBaseStationLongitude))
+                + ","
+                + this.mSystemId
+                + ","
+                + this.mNetworkId
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     private static boolean equalsHandlesNulls(Object a, Object b) {
@@ -122,7 +155,11 @@ public class CdmaCellLocation extends CellLocation {
 
     @Override // android.telephony.CellLocation
     public boolean isEmpty() {
-        return this.mBaseStationId == -1 && this.mBaseStationLatitude == Integer.MAX_VALUE && this.mBaseStationLongitude == Integer.MAX_VALUE && this.mSystemId == -1 && this.mNetworkId == -1;
+        return this.mBaseStationId == -1
+                && this.mBaseStationLatitude == Integer.MAX_VALUE
+                && this.mBaseStationLongitude == Integer.MAX_VALUE
+                && this.mSystemId == -1
+                && this.mNetworkId == -1;
     }
 
     public static double convertQuartSecToDecDegrees(int quartSec) {

@@ -9,10 +9,19 @@ import android.filterfw.format.ImageFormat;
 
 /* loaded from: classes.dex */
 public class ToGrayFilter extends SimpleImageFilter {
-    private static final String mColorToGray4Shader = "precision mediump float;\nuniform sampler2D tex_sampler_0;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  float y = dot(color, vec4(0.299, 0.587, 0.114, 0));\n  gl_FragColor = vec4(y, y, y, color.a);\n}\n";
+    private static final String mColorToGray4Shader =
+            "precision mediump float;\n"
+                    + "uniform sampler2D tex_sampler_0;\n"
+                    + "varying vec2 v_texcoord;\n"
+                    + "void main() {\n"
+                    + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                    + "  float y = dot(color, vec4(0.299, 0.587, 0.114, 0));\n"
+                    + "  gl_FragColor = vec4(y, y, y, color.a);\n"
+                    + "}\n";
 
     @GenerateFieldPort(hasDefault = true, name = "invertSource")
     private boolean mInvertSource;
+
     private MutableFrameFormat mOutputFormat;
 
     @GenerateFieldPort(hasDefault = true, name = "tile_size")
@@ -39,7 +48,8 @@ public class ToGrayFilter extends SimpleImageFilter {
     protected Program getShaderProgram(FilterContext context) {
         int inputChannels = getInputFormat("image").getBytesPerSample();
         if (inputChannels != 4) {
-            throw new RuntimeException("Unsupported GL input channels: " + inputChannels + "! Channels must be 4!");
+            throw new RuntimeException(
+                    "Unsupported GL input channels: " + inputChannels + "! Channels must be 4!");
         }
         ShaderProgram program = new ShaderProgram(context, mColorToGray4Shader);
         program.setMaximumTileSize(this.mTileSize);

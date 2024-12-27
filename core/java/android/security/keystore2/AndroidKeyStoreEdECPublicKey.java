@@ -3,8 +3,10 @@ package android.security.keystore2;
 import android.security.KeyStoreSecurityLevel;
 import android.system.keystore2.KeyDescriptor;
 import android.system.keystore2.KeyMetadata;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.math.BigInteger;
 import java.security.interfaces.EdECPublicKey;
 import java.security.spec.EdECPoint;
@@ -13,25 +15,51 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
-public class AndroidKeyStoreEdECPublicKey extends AndroidKeyStorePublicKey implements EdECPublicKey {
-    private static final byte[] DER_KEY_PREFIX = {SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, 5, 6, 3, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, 101, SprAttributeBase.TYPE_SHADOW, 3, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT, 0};
+public class AndroidKeyStoreEdECPublicKey extends AndroidKeyStorePublicKey
+        implements EdECPublicKey {
+    private static final byte[] DER_KEY_PREFIX = {
+        SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90,
+        SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33,
+        SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90,
+        5,
+        6,
+        3,
+        SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33,
+        101,
+        SprAttributeBase.TYPE_SHADOW,
+        3,
+        SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT,
+        0
+    };
     private static final int ED25519_KEY_SIZE_BYTES = 32;
     private byte[] mEncodedKey;
     private EdECPoint mPoint;
 
-    public AndroidKeyStoreEdECPublicKey(KeyDescriptor descriptor, KeyMetadata metadata, String algorithm, KeyStoreSecurityLevel iSecurityLevel, byte[] encodedKey) {
+    public AndroidKeyStoreEdECPublicKey(
+            KeyDescriptor descriptor,
+            KeyMetadata metadata,
+            String algorithm,
+            KeyStoreSecurityLevel iSecurityLevel,
+            byte[] encodedKey) {
         super(descriptor, metadata, encodedKey, algorithm, iSecurityLevel);
         this.mEncodedKey = encodedKey;
         int preambleLength = matchesPreamble(DER_KEY_PREFIX, encodedKey);
         if (preambleLength == 0) {
             throw new IllegalArgumentException("Key size is not correct size");
         }
-        this.mPoint = pointFromKeyByteArray(Arrays.copyOfRange(encodedKey, preambleLength, encodedKey.length));
+        this.mPoint =
+                pointFromKeyByteArray(
+                        Arrays.copyOfRange(encodedKey, preambleLength, encodedKey.length));
     }
 
     @Override // android.security.keystore2.AndroidKeyStorePublicKey
     AndroidKeyStorePrivateKey getPrivateKey() {
-        return new AndroidKeyStoreEdECPrivateKey(getUserKeyDescriptor(), getKeyIdDescriptor().nspace, getAuthorizations(), "EdDSA", getSecurityLevel());
+        return new AndroidKeyStoreEdECPrivateKey(
+                getUserKeyDescriptor(),
+                getKeyIdDescriptor().nspace,
+                getAuthorizations(),
+                "EdDSA",
+                getSecurityLevel());
     }
 
     @Override // java.security.interfaces.EdECKey
@@ -45,7 +73,8 @@ public class AndroidKeyStoreEdECPublicKey extends AndroidKeyStorePublicKey imple
     }
 
     private static int matchesPreamble(byte[] preamble, byte[] encoded) {
-        if (encoded.length == preamble.length + 32 && Arrays.compare(preamble, Arrays.copyOf(encoded, preamble.length)) == 0) {
+        if (encoded.length == preamble.length + 32
+                && Arrays.compare(preamble, Arrays.copyOf(encoded, preamble.length)) == 0) {
             return preamble.length;
         }
         return 0;
@@ -71,7 +100,8 @@ public class AndroidKeyStoreEdECPublicKey extends AndroidKeyStorePublicKey imple
         }
     }
 
-    @Override // android.security.keystore2.AndroidKeyStorePublicKey, android.security.keystore2.AndroidKeyStoreKey, java.security.Key
+    @Override // android.security.keystore2.AndroidKeyStorePublicKey,
+              // android.security.keystore2.AndroidKeyStoreKey, java.security.Key
     public byte[] getEncoded() {
         return (byte[]) this.mEncodedKey.clone();
     }

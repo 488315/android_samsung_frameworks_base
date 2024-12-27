@@ -6,6 +6,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.ims.SrvccCall;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -16,8 +17,7 @@ public interface ISrvccStartedCallback extends IInterface {
 
     public static class Default implements ISrvccStartedCallback {
         @Override // android.telephony.ims.aidl.ISrvccStartedCallback
-        public void onSrvccCallNotified(List<SrvccCall> profiles) throws RemoteException {
-        }
+        public void onSrvccCallNotified(List<SrvccCall> profiles) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +25,7 @@ public interface ISrvccStartedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISrvccStartedCallback {
+    public abstract static class Stub extends Binder implements ISrvccStartedCallback {
         static final int TRANSACTION_onSrvccCallNotified = 1;
 
         public Stub() {
@@ -63,7 +63,8 @@ public interface ISrvccStartedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISrvccStartedCallback.DESCRIPTOR);
             }

@@ -9,7 +9,9 @@ public final class FrameMetrics {
     public static final int COMMAND_ISSUE_DURATION = 6;
     public static final int DEADLINE = 13;
     public static final int DRAW_DURATION = 4;
-    private static final int[] DURATIONS = {2, 5, 5, 6, 6, 7, 7, 8, 8, 12, 13, 14, 14, 15, 15, 20, 2, 16, 0, 0, 0, 0, 0, 0, 22, 19, 2, 9};
+    private static final int[] DURATIONS = {
+        2, 5, 5, 6, 6, 7, 7, 8, 8, 12, 13, 14, 14, 15, 15, 20, 2, 16, 0, 0, 0, 0, 0, 0, 22, 19, 2, 9
+    };
     public static final int FIRST_DRAW_FRAME = 9;
     public static final int GPU_DURATION = 12;
     public static final int INPUT_HANDLING_DURATION = 1;
@@ -51,8 +53,7 @@ public final class FrameMetrics {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Metric {
-    }
+    public @interface Metric {}
 
     public FrameMetrics(FrameMetrics other) {
         this.mTimingData = new long[23];
@@ -77,6 +78,7 @@ public final class FrameMetrics {
             return this.mTimingData[3];
         }
         int durationsIdx = id * 2;
-        return this.mTimingData[DURATIONS[durationsIdx + 1]] - this.mTimingData[DURATIONS[durationsIdx]];
+        return this.mTimingData[DURATIONS[durationsIdx + 1]]
+                - this.mTimingData[DURATIONS[durationsIdx]];
     }
 }

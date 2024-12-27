@@ -7,9 +7,11 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.AtomicFile;
 import android.util.Slog;
+
 import com.android.internal.security.VerityUtils;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.IndentingPrintWriter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,7 +39,13 @@ public final class SPBnRManager {
     private static Queue<BnRData> sRemoveFiles = new LinkedList();
 
     public static void init(boolean isWeaver) {
-        BNR_LIST = new String[]{SP_BLOB_NAME, PASSWORD_DATA_NAME, PASSWORD_METRICS_NAME, isWeaver ? WEAVER_SLOT_NAME : SECDISCARDABLE_NAME};
+        BNR_LIST =
+                new String[] {
+                    SP_BLOB_NAME,
+                    PASSWORD_DATA_NAME,
+                    PASSWORD_METRICS_NAME,
+                    isWeaver ? WEAVER_SLOT_NAME : SECDISCARDABLE_NAME
+                };
     }
 
     public static void setProtectorIdForBackup(int userId, long curPid, long bakPid) {
@@ -58,8 +66,7 @@ public final class SPBnRManager {
         long mProtectorId;
         int mUserId;
 
-        BnRData() {
-        }
+        BnRData() {}
 
         public int getUserId() {
             return this.mUserId;
@@ -74,7 +81,9 @@ public final class SPBnRManager {
             result.mProtectorId = protectorId;
             result.mUserId = userId;
             result.mName = name;
-            result.mFileName = TextUtils.formatSimple("%016x.%s", Long.valueOf(result.mProtectorId), result.mName);
+            result.mFileName =
+                    TextUtils.formatSimple(
+                            "%016x.%s", Long.valueOf(result.mProtectorId), result.mName);
             return result;
         }
     }
@@ -166,22 +175,29 @@ public final class SPBnRManager {
                 Slog.w(TAG, "data is null!");
             } else {
                 String filename = data.getFileName();
-                File orgFile = new File(getSyntheticPasswordDirectoryForUser(data.getUserId()), filename);
+                File orgFile =
+                        new File(getSyntheticPasswordDirectoryForUser(data.getUserId()), filename);
                 File bakFile = new File(getBackupDirectoryForUser(data.getUserId()), filename);
                 if (checkValidState(orgFile)) {
                     if (checkValidState(bakFile)) {
                         if (DEBUG) {
-                            Slog.d(TAG, TextUtils.formatSimple("[%s] exists on both sides.", filename));
+                            Slog.d(
+                                    TAG,
+                                    TextUtils.formatSimple("[%s] exists on both sides.", filename));
                         }
                     } else {
                         backupList.add(data);
-                        Slog.e(TAG, TextUtils.formatSimple("[%s] does not exist in bak!", filename));
+                        Slog.e(
+                                TAG,
+                                TextUtils.formatSimple("[%s] does not exist in bak!", filename));
                     }
                 } else if (checkValidState(bakFile)) {
                     restoreList.add(data);
                     Slog.e(TAG, TextUtils.formatSimple("[%s] does not exist in org!", filename));
                 } else if (DEBUG) {
-                    Slog.d(TAG, TextUtils.formatSimple("[%s] does not exist on both sides.", filename));
+                    Slog.d(
+                            TAG,
+                            TextUtils.formatSimple("[%s] does not exist on both sides.", filename));
                 }
             }
         }
@@ -244,13 +260,20 @@ public final class SPBnRManager {
             if (data == null || TextUtils.isEmpty(data.getFileName())) {
                 Slog.w(TAG, "data is null!");
             } else {
-                File srcFile = new File(getSyntheticPasswordDirectoryForUser(data.getUserId()), data.getFileName());
-                File destFile = new File(getBackupDirectoryForUser(data.getUserId()), data.getFileName());
+                File srcFile =
+                        new File(
+                                getSyntheticPasswordDirectoryForUser(data.getUserId()),
+                                data.getFileName());
+                File destFile =
+                        new File(getBackupDirectoryForUser(data.getUserId()), data.getFileName());
                 if (!srcFile.exists()) {
                     Slog.w(TAG, TextUtils.formatSimple("[%s] is not exist!", srcFile));
                 } else {
                     if (destFile.exists()) {
-                        Slog.w(TAG, TextUtils.formatSimple("[%s] is alread exist! try to overwrite!", srcFile));
+                        Slog.w(
+                                TAG,
+                                TextUtils.formatSimple(
+                                        "[%s] is alread exist! try to overwrite!", srcFile));
                     }
                     if (!FileUtils.copyFile(srcFile, destFile)) {
                         Slog.w(TAG, TextUtils.formatSimple("[%s] copy failed!", srcFile));
@@ -270,7 +293,10 @@ public final class SPBnRManager {
         if (count <= 0) {
             return false;
         }
-        LsLog.restore(TextUtils.formatSimple("SPblobBNR, %d/%d files Backuped!", Integer.valueOf(count), Integer.valueOf(size)));
+        LsLog.restore(
+                TextUtils.formatSimple(
+                        "SPblobBNR, %d/%d files Backuped!",
+                        Integer.valueOf(count), Integer.valueOf(size)));
         return true;
     }
 
@@ -300,13 +326,20 @@ public final class SPBnRManager {
             if (data == null || TextUtils.isEmpty(data.getFileName())) {
                 Slog.w(TAG, "data is null!");
             } else {
-                File srcFile = new File(getBackupDirectoryForUser(data.getUserId()), data.getFileName());
-                File destFile = new File(getSyntheticPasswordDirectoryForUser(data.getUserId()), data.getFileName());
+                File srcFile =
+                        new File(getBackupDirectoryForUser(data.getUserId()), data.getFileName());
+                File destFile =
+                        new File(
+                                getSyntheticPasswordDirectoryForUser(data.getUserId()),
+                                data.getFileName());
                 if (!srcFile.exists()) {
                     Slog.w(TAG, TextUtils.formatSimple("[%s] is not exist!", srcFile));
                 } else {
                     if (destFile.exists()) {
-                        Slog.w(TAG, TextUtils.formatSimple("[%s] is alread exist! try to overwrite!", srcFile));
+                        Slog.w(
+                                TAG,
+                                TextUtils.formatSimple(
+                                        "[%s] is alread exist! try to overwrite!", srcFile));
                     }
                     if (!FileUtils.copyFile(srcFile, destFile)) {
                         Slog.w(TAG, TextUtils.formatSimple("[%s] copy failed!", srcFile));
@@ -324,7 +357,10 @@ public final class SPBnRManager {
         if (count <= 0) {
             return false;
         }
-        LsLog.restore(TextUtils.formatSimple("SPblobBNR, %d/%d files Restored!", Integer.valueOf(count), Integer.valueOf(size)));
+        LsLog.restore(
+                TextUtils.formatSimple(
+                        "SPblobBNR, %d/%d files Restored!",
+                        Integer.valueOf(count), Integer.valueOf(size)));
         return true;
     }
 
@@ -412,7 +448,8 @@ public final class SPBnRManager {
             if (data == null || TextUtils.isEmpty(data.getFileName())) {
                 Slog.w(TAG, "data is null!");
             } else {
-                File srcFile = new File(getBackupDirectoryForUser(data.getUserId()), data.getFileName());
+                File srcFile =
+                        new File(getBackupDirectoryForUser(data.getUserId()), data.getFileName());
                 if (deleteFile(srcFile)) {
                     count++;
                 }
@@ -438,7 +475,10 @@ public final class SPBnRManager {
                 File tempBackup = new File(path.getPath() + ".bnr");
                 if (tempBackup.exists()) {
                     if (DEBUG) {
-                        Slog.d(TAG, TextUtils.formatSimple("TemporaryBackup [%s] is deleted", tempBackup.getPath()));
+                        Slog.d(
+                                TAG,
+                                TextUtils.formatSimple(
+                                        "TemporaryBackup [%s] is deleted", tempBackup.getPath()));
                     }
                     tempBackup.delete();
                 }
@@ -506,7 +546,10 @@ public final class SPBnRManager {
     }
 
     private static File getBackupDirectoryForUser(int userId) {
-        return Environment.buildPath(new File(SPBLOB_BACKUP_DIRECTORY), String.valueOf(userId), SYNTHETIC_PASSWORD_DIRECTORY);
+        return Environment.buildPath(
+                new File(SPBLOB_BACKUP_DIRECTORY),
+                String.valueOf(userId),
+                SYNTHETIC_PASSWORD_DIRECTORY);
     }
 
     private static void ensureSPBnRDirectoryForUser(int userId) {
@@ -524,7 +567,12 @@ public final class SPBnRManager {
         if (files != null) {
             Arrays.sort(files);
             for (File file : files) {
-                pw.println(TextUtils.formatSimple("%6d %s %s", Long.valueOf(file.length()), LsUtil.timestampToString(file.lastModified()), file.getName()));
+                pw.println(
+                        TextUtils.formatSimple(
+                                "%6d %s %s",
+                                Long.valueOf(file.length()),
+                                LsUtil.timestampToString(file.lastModified()),
+                                file.getName()));
             }
         } else {
             pw.println("[Not found]");
@@ -542,7 +590,12 @@ public final class SPBnRManager {
         StringBuilder sb = new StringBuilder();
         sb.append(TextUtils.formatSimple("  User %d [%s]:\n", Integer.valueOf(userId), userPath));
         for (File file : files) {
-            sb.append(TextUtils.formatSimple("  %6d %s %s\n", Long.valueOf(file.length()), LsUtil.timestampToString(file.lastModified()), file.getName()));
+            sb.append(
+                    TextUtils.formatSimple(
+                            "  %6d %s %s\n",
+                            Long.valueOf(file.length()),
+                            LsUtil.timestampToString(file.lastModified()),
+                            file.getName()));
         }
         return sb.toString();
     }
@@ -551,13 +604,19 @@ public final class SPBnRManager {
         File userPath = getBackupDirectoryForUser(userId);
         File[] files = userPath.listFiles();
         if (files == null) {
-            return TextUtils.formatSimple("  User %d Backup [Not found]\n", Integer.valueOf(userId));
+            return TextUtils.formatSimple(
+                    "  User %d Backup [Not found]\n", Integer.valueOf(userId));
         }
         Arrays.sort(files);
         StringBuilder sb = new StringBuilder();
         sb.append(TextUtils.formatSimple("  Backup [%s]:\n", userPath));
         for (File file : files) {
-            sb.append(TextUtils.formatSimple("  %6d %s %s\n", Long.valueOf(file.length()), LsUtil.timestampToString(file.lastModified()), file.getName()));
+            sb.append(
+                    TextUtils.formatSimple(
+                            "  %6d %s %s\n",
+                            Long.valueOf(file.length()),
+                            LsUtil.timestampToString(file.lastModified()),
+                            file.getName()));
         }
         return sb.toString();
     }

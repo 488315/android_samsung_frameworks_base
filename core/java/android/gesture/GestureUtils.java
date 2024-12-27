@@ -2,6 +2,7 @@ package android.gesture;
 
 import android.graphics.RectF;
 import android.util.Log;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -13,8 +14,7 @@ public final class GestureUtils {
     private static final float NONUNIFORM_SCALE = (float) Math.sqrt(2.0d);
     private static final float SCALING_THRESHOLD = 0.26f;
 
-    private GestureUtils() {
-    }
+    private GestureUtils() {}
 
     static void closeStream(Closeable stream) {
         if (stream != null) {
@@ -30,7 +30,8 @@ public final class GestureUtils {
         return spatialSampling(gesture, bitmapSize, false);
     }
 
-    public static float[] spatialSampling(Gesture gesture, int bitmapSize, boolean keepAspectRatio) {
+    public static float[] spatialSampling(
+            Gesture gesture, int bitmapSize, boolean keepAspectRatio) {
         int size;
         float segmentStartX;
         float targetPatchSize;
@@ -115,7 +116,8 @@ public final class GestureUtils {
                         preDx = preDx2;
                         preDy = preDy2;
                         float xpos = (float) Math.ceil(segmentStartX);
-                        float slope = (segmentEndY - targetPatchSize2) / (segmentEndX - segmentStartX);
+                        float slope =
+                                (segmentEndY - targetPatchSize2) / (segmentEndX - segmentStartX);
                         while (xpos < segmentEndX) {
                             float[] pts3 = pts2;
                             float ypos = ((xpos - segmentStartX) * slope) + targetPatchSize2;
@@ -129,23 +131,35 @@ public final class GestureUtils {
                         preDx = preDx2;
                         preDy = preDy2;
                         if (segmentEndX < segmentStartX) {
-                            float slope2 = (segmentEndY - targetPatchSize2) / (segmentEndX - segmentStartX);
-                            for (float xpos2 = (float) Math.ceil(segmentEndX); xpos2 < segmentStartX; xpos2 += 1.0f) {
+                            float slope2 =
+                                    (segmentEndY - targetPatchSize2)
+                                            / (segmentEndX - segmentStartX);
+                            for (float xpos2 = (float) Math.ceil(segmentEndX);
+                                    xpos2 < segmentStartX;
+                                    xpos2 += 1.0f) {
                                 float ypos2 = ((xpos2 - segmentStartX) * slope2) + targetPatchSize2;
                                 plot(xpos2, ypos2, sample, bitmapSize);
                             }
                         }
                     }
                     if (segmentEndY > targetPatchSize2) {
-                        float invertSlope = (segmentEndX - segmentStartX) / (segmentEndY - targetPatchSize2);
-                        for (float ypos3 = (float) Math.ceil(targetPatchSize2); ypos3 < segmentEndY; ypos3 += 1.0f) {
-                            float xpos3 = ((ypos3 - targetPatchSize2) * invertSlope) + segmentStartX;
+                        float invertSlope =
+                                (segmentEndX - segmentStartX) / (segmentEndY - targetPatchSize2);
+                        for (float ypos3 = (float) Math.ceil(targetPatchSize2);
+                                ypos3 < segmentEndY;
+                                ypos3 += 1.0f) {
+                            float xpos3 =
+                                    ((ypos3 - targetPatchSize2) * invertSlope) + segmentStartX;
                             plot(xpos3, ypos3, sample, bitmapSize);
                         }
                     } else if (segmentEndY < targetPatchSize2) {
-                        float invertSlope2 = (segmentEndX - segmentStartX) / (segmentEndY - targetPatchSize2);
-                        for (float ypos4 = (float) Math.ceil(segmentEndY); ypos4 < targetPatchSize2; ypos4 += 1.0f) {
-                            float xpos4 = ((ypos4 - targetPatchSize2) * invertSlope2) + segmentStartX;
+                        float invertSlope2 =
+                                (segmentEndX - segmentStartX) / (segmentEndY - targetPatchSize2);
+                        for (float ypos4 = (float) Math.ceil(segmentEndY);
+                                ypos4 < targetPatchSize2;
+                                ypos4 += 1.0f) {
+                            float xpos4 =
+                                    ((ypos4 - targetPatchSize2) * invertSlope2) + segmentStartX;
                             plot(xpos4, ypos4, sample, bitmapSize);
                         }
                     }
@@ -398,7 +412,8 @@ public final class GestureUtils {
         return 1.5707964f;
     }
 
-    public static OrientedBoundingBox computeOrientedBoundingBox(ArrayList<GesturePoint> originalPoints) {
+    public static OrientedBoundingBox computeOrientedBoundingBox(
+            ArrayList<GesturePoint> originalPoints) {
         int count = originalPoints.size();
         float[] points = new float[count * 2];
         for (int i = 0; i < count; i++) {
@@ -421,7 +436,8 @@ public final class GestureUtils {
         return computeOrientedBoundingBox(points, meanVector);
     }
 
-    private static OrientedBoundingBox computeOrientedBoundingBox(float[] points, float[] centroid) {
+    private static OrientedBoundingBox computeOrientedBoundingBox(
+            float[] points, float[] centroid) {
         float angle;
         translate(points, -centroid[0], -centroid[1]);
         float[][] array = computeCoVariance(points);
@@ -454,7 +470,12 @@ public final class GestureUtils {
             }
             i = i2 + 1;
         }
-        return new OrientedBoundingBox((float) ((180.0f * angle) / 3.141592653589793d), centroid[0], centroid[1], maxx - minx, maxy - miny);
+        return new OrientedBoundingBox(
+                (float) ((180.0f * angle) / 3.141592653589793d),
+                centroid[0],
+                centroid[1],
+                maxx - minx,
+                maxy - miny);
     }
 
     private static float[] computeOrientation(float[][] covarianceMatrix) {
@@ -464,7 +485,9 @@ public final class GestureUtils {
             targetVector[1] = 0.0f;
         }
         float a = (-covarianceMatrix[0][0]) - covarianceMatrix[1][1];
-        float b = (covarianceMatrix[0][0] * covarianceMatrix[1][1]) - (covarianceMatrix[0][1] * covarianceMatrix[1][0]);
+        float b =
+                (covarianceMatrix[0][0] * covarianceMatrix[1][1])
+                        - (covarianceMatrix[0][1] * covarianceMatrix[1][0]);
         float value = a / 2.0f;
         float rightside = (float) Math.sqrt(Math.pow(value, 2.0d) - b);
         float lambda1 = (-value) + rightside;

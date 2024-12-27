@@ -2,9 +2,10 @@ package android.telephony.ims;
 
 import android.annotation.SystemApi;
 import android.os.Binder;
-import android.telephony.ims.SipDialogStateCallback;
+
 import com.android.internal.telephony.ISipDialogStateCallback;
 import com.android.internal.util.FunctionalUtils;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -46,33 +47,44 @@ public abstract class SipDialogStateCallback {
             if (callback == null || dialogs == null) {
                 return;
             }
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.ims.SipDialogStateCallback$CallbackBinder$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    SipDialogStateCallback.CallbackBinder.this.lambda$onActiveSipDialogsChanged$1(callback, dialogs);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.telephony.ims.SipDialogStateCallback$CallbackBinder$$ExternalSyntheticLambda0
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            SipDialogStateCallback.CallbackBinder.this
+                                    .lambda$onActiveSipDialogsChanged$1(callback, dialogs);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onActiveSipDialogsChanged$1(final SipDialogStateCallback callback, final List dialogs) throws Exception {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.SipDialogStateCallback$CallbackBinder$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SipDialogStateCallback.this.onActiveSipDialogsChanged(dialogs);
-                }
-            });
+        public /* synthetic */ void lambda$onActiveSipDialogsChanged$1(
+                final SipDialogStateCallback callback, final List dialogs) throws Exception {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.SipDialogStateCallback$CallbackBinder$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SipDialogStateCallback.this.onActiveSipDialogsChanged(dialogs);
+                        }
+                    });
         }
     }
 
     public final void binderDied() {
         if (this.mCallback != null) {
-            this.mCallback.getExecutor().execute(new Runnable() { // from class: android.telephony.ims.SipDialogStateCallback$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SipDialogStateCallback.this.lambda$binderDied$0();
-                }
-            });
+            this.mCallback
+                    .getExecutor()
+                    .execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.SipDialogStateCallback$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    SipDialogStateCallback.this.lambda$binderDied$0();
+                                }
+                            });
         }
     }
 

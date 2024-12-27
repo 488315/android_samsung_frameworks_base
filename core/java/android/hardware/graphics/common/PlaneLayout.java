@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class PlaneLayout implements Parcelable {
-    public static final Parcelable.Creator<PlaneLayout> CREATOR = new Parcelable.Creator<PlaneLayout>() { // from class: android.hardware.graphics.common.PlaneLayout.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaneLayout createFromParcel(Parcel _aidl_source) {
-            PlaneLayout _aidl_out = new PlaneLayout();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<PlaneLayout> CREATOR =
+            new Parcelable.Creator<
+                    PlaneLayout>() { // from class: android.hardware.graphics.common.PlaneLayout.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaneLayout createFromParcel(Parcel _aidl_source) {
+                    PlaneLayout _aidl_out = new PlaneLayout();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaneLayout[] newArray(int _aidl_size) {
-            return new PlaneLayout[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaneLayout[] newArray(int _aidl_size) {
+                    return new PlaneLayout[_aidl_size];
+                }
+            };
     public PlaneLayoutComponent[] components;
     public long offsetInBytes = 0;
     public long sampleIncrementInBits = 0;
@@ -69,7 +71,9 @@ public class PlaneLayout implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.components = (PlaneLayoutComponent[]) _aidl_parcel.createTypedArray(PlaneLayoutComponent.CREATOR);
+            this.components =
+                    (PlaneLayoutComponent[])
+                            _aidl_parcel.createTypedArray(PlaneLayoutComponent.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

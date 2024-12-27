@@ -1,8 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.MapEntryLite;
-import com.android.framework.protobuf.WireFormat;
-import com.android.framework.protobuf.Writer;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -158,7 +155,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeInt32List(int fieldNumber, List<Integer> value, boolean packed) throws IOException {
+    public void writeInt32List(int fieldNumber, List<Integer> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -177,7 +175,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeFixed32List(int fieldNumber, List<Integer> value, boolean packed) throws IOException {
+    public void writeFixed32List(int fieldNumber, List<Integer> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -196,7 +195,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeInt64List(int fieldNumber, List<Long> value, boolean packed) throws IOException {
+    public void writeInt64List(int fieldNumber, List<Long> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -215,7 +215,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeUInt64List(int fieldNumber, List<Long> value, boolean packed) throws IOException {
+    public void writeUInt64List(int fieldNumber, List<Long> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -234,7 +235,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeFixed64List(int fieldNumber, List<Long> value, boolean packed) throws IOException {
+    public void writeFixed64List(int fieldNumber, List<Long> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -253,7 +255,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeFloatList(int fieldNumber, List<Float> value, boolean packed) throws IOException {
+    public void writeFloatList(int fieldNumber, List<Float> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -272,7 +275,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeDoubleList(int fieldNumber, List<Double> value, boolean packed) throws IOException {
+    public void writeDoubleList(int fieldNumber, List<Double> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -291,7 +295,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeEnumList(int fieldNumber, List<Integer> value, boolean packed) throws IOException {
+    public void writeEnumList(int fieldNumber, List<Integer> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -310,7 +315,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeBoolList(int fieldNumber, List<Boolean> value, boolean packed) throws IOException {
+    public void writeBoolList(int fieldNumber, List<Boolean> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -358,7 +364,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeUInt32List(int fieldNumber, List<Integer> value, boolean packed) throws IOException {
+    public void writeUInt32List(int fieldNumber, List<Integer> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -377,7 +384,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeSFixed32List(int fieldNumber, List<Integer> value, boolean packed) throws IOException {
+    public void writeSFixed32List(int fieldNumber, List<Integer> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -396,7 +404,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeSFixed64List(int fieldNumber, List<Long> value, boolean packed) throws IOException {
+    public void writeSFixed64List(int fieldNumber, List<Long> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -415,7 +424,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeSInt32List(int fieldNumber, List<Integer> value, boolean packed) throws IOException {
+    public void writeSInt32List(int fieldNumber, List<Integer> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -434,7 +444,8 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public void writeSInt64List(int fieldNumber, List<Long> value, boolean packed) throws IOException {
+    public void writeSInt64List(int fieldNumber, List<Long> value, boolean packed)
+            throws IOException {
         if (packed) {
             this.output.writeTag(fieldNumber, 2);
             int dataSize = 0;
@@ -482,76 +493,107 @@ final class CodedOutputStreamWriter implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public <K, V> void writeMap(int fieldNumber, MapEntryLite.Metadata<K, V> metadata, Map<K, V> map) throws IOException {
+    public <K, V> void writeMap(
+            int fieldNumber, MapEntryLite.Metadata<K, V> metadata, Map<K, V> map)
+            throws IOException {
         if (this.output.isSerializationDeterministic()) {
             writeDeterministicMap(fieldNumber, metadata, map);
             return;
         }
         for (Map.Entry<K, V> entry : map.entrySet()) {
             this.output.writeTag(fieldNumber, 2);
-            this.output.writeUInt32NoTag(MapEntryLite.computeSerializedSize(metadata, entry.getKey(), entry.getValue()));
+            this.output.writeUInt32NoTag(
+                    MapEntryLite.computeSerializedSize(metadata, entry.getKey(), entry.getValue()));
             MapEntryLite.writeTo(this.output, metadata, entry.getKey(), entry.getValue());
         }
     }
 
     /* renamed from: com.android.framework.protobuf.CodedOutputStreamWriter$1, reason: invalid class name */
     static /* synthetic */ class AnonymousClass1 {
-        static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType = new int[WireFormat.FieldType.values().length];
+        static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType =
+                new int[WireFormat.FieldType.values().length];
 
         static {
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.BOOL.ordinal()] = 1;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.BOOL.ordinal()] =
+                        1;
             } catch (NoSuchFieldError e) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.FIXED32.ordinal()] = 2;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.FIXED32.ordinal()] =
+                        2;
             } catch (NoSuchFieldError e2) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.INT32.ordinal()] = 3;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.INT32.ordinal()] =
+                        3;
             } catch (NoSuchFieldError e3) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SFIXED32.ordinal()] = 4;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SFIXED32.ordinal()] =
+                        4;
             } catch (NoSuchFieldError e4) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SINT32.ordinal()] = 5;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SINT32.ordinal()] =
+                        5;
             } catch (NoSuchFieldError e5) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.UINT32.ordinal()] = 6;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.UINT32.ordinal()] =
+                        6;
             } catch (NoSuchFieldError e6) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.FIXED64.ordinal()] = 7;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.FIXED64.ordinal()] =
+                        7;
             } catch (NoSuchFieldError e7) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.INT64.ordinal()] = 8;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.INT64.ordinal()] =
+                        8;
             } catch (NoSuchFieldError e8) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SFIXED64.ordinal()] = 9;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SFIXED64.ordinal()] =
+                        9;
             } catch (NoSuchFieldError e9) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SINT64.ordinal()] = 10;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SINT64.ordinal()] =
+                        10;
             } catch (NoSuchFieldError e10) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.UINT64.ordinal()] = 11;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.UINT64.ordinal()] =
+                        11;
             } catch (NoSuchFieldError e11) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.STRING.ordinal()] = 12;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.STRING.ordinal()] =
+                        12;
             } catch (NoSuchFieldError e12) {
             }
         }
     }
 
-    private <K, V> void writeDeterministicMap(int fieldNumber, MapEntryLite.Metadata<K, V> metadata, Map<K, V> map) throws IOException {
-        switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[metadata.keyType.ordinal()]) {
+    private <K, V> void writeDeterministicMap(
+            int fieldNumber, MapEntryLite.Metadata<K, V> metadata, Map<K, V> map)
+            throws IOException {
+        switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                metadata.keyType.ordinal()]) {
             case 1:
                 V value = map.get(Boolean.FALSE);
                 if (value != null) {
@@ -581,17 +623,23 @@ final class CodedOutputStreamWriter implements Writer {
                 writeDeterministicStringMap(fieldNumber, metadata, map);
                 return;
             default:
-                throw new IllegalArgumentException("does not support key type: " + metadata.keyType);
+                throw new IllegalArgumentException(
+                        "does not support key type: " + metadata.keyType);
         }
     }
 
-    private <V> void writeDeterministicBooleanMapEntry(int fieldNumber, boolean key, V value, MapEntryLite.Metadata<Boolean, V> metadata) throws IOException {
+    private <V> void writeDeterministicBooleanMapEntry(
+            int fieldNumber, boolean key, V value, MapEntryLite.Metadata<Boolean, V> metadata)
+            throws IOException {
         this.output.writeTag(fieldNumber, 2);
-        this.output.writeUInt32NoTag(MapEntryLite.computeSerializedSize(metadata, Boolean.valueOf(key), value));
+        this.output.writeUInt32NoTag(
+                MapEntryLite.computeSerializedSize(metadata, Boolean.valueOf(key), value));
         MapEntryLite.writeTo(this.output, metadata, Boolean.valueOf(key), value);
     }
 
-    private <V> void writeDeterministicIntegerMap(int fieldNumber, MapEntryLite.Metadata<Integer, V> metadata, Map<Integer, V> map) throws IOException {
+    private <V> void writeDeterministicIntegerMap(
+            int fieldNumber, MapEntryLite.Metadata<Integer, V> metadata, Map<Integer, V> map)
+            throws IOException {
         int[] keys = new int[map.size()];
         int index = 0;
         Iterator<Integer> it = map.keySet().iterator();
@@ -604,12 +652,15 @@ final class CodedOutputStreamWriter implements Writer {
         for (int key : keys) {
             V value = map.get(Integer.valueOf(key));
             this.output.writeTag(fieldNumber, 2);
-            this.output.writeUInt32NoTag(MapEntryLite.computeSerializedSize(metadata, Integer.valueOf(key), value));
+            this.output.writeUInt32NoTag(
+                    MapEntryLite.computeSerializedSize(metadata, Integer.valueOf(key), value));
             MapEntryLite.writeTo(this.output, metadata, Integer.valueOf(key), value);
         }
     }
 
-    private <V> void writeDeterministicLongMap(int fieldNumber, MapEntryLite.Metadata<Long, V> metadata, Map<Long, V> map) throws IOException {
+    private <V> void writeDeterministicLongMap(
+            int fieldNumber, MapEntryLite.Metadata<Long, V> metadata, Map<Long, V> map)
+            throws IOException {
         long[] keys = new long[map.size()];
         int index = 0;
         Iterator<Long> it = map.keySet().iterator();
@@ -622,12 +673,15 @@ final class CodedOutputStreamWriter implements Writer {
         for (long key : keys) {
             V value = map.get(Long.valueOf(key));
             this.output.writeTag(fieldNumber, 2);
-            this.output.writeUInt32NoTag(MapEntryLite.computeSerializedSize(metadata, Long.valueOf(key), value));
+            this.output.writeUInt32NoTag(
+                    MapEntryLite.computeSerializedSize(metadata, Long.valueOf(key), value));
             MapEntryLite.writeTo(this.output, metadata, Long.valueOf(key), value);
         }
     }
 
-    private <V> void writeDeterministicStringMap(int fieldNumber, MapEntryLite.Metadata<String, V> metadata, Map<String, V> map) throws IOException {
+    private <V> void writeDeterministicStringMap(
+            int fieldNumber, MapEntryLite.Metadata<String, V> metadata, Map<String, V> map)
+            throws IOException {
         String[] keys = new String[map.size()];
         int index = 0;
         for (String k : map.keySet()) {

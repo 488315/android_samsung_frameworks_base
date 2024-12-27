@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.types;
 
 import com.samsung.android.sume.core.Def;
+
 import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -76,7 +77,10 @@ public enum DataType implements NumericEnum {
     }
 
     private static int makeType(DataType depth, int cn) {
-        Def.require(depth != NONE && depth.getValue() <= MAX_DEPTH.getValue(), "1st argument is not depth", new Object[0]);
+        Def.require(
+                depth != NONE && depth.getValue() <= MAX_DEPTH.getValue(),
+                "1st argument is not depth",
+                new Object[0]);
         return (depth.getValue() & 15) + (cn << 4);
     }
 
@@ -133,17 +137,25 @@ public enum DataType implements NumericEnum {
     }
 
     private static DataType from(final int value) {
-        return (DataType) Arrays.stream(values()).filter(new Predicate() { // from class: com.samsung.android.sume.core.types.DataType$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return DataType.lambda$from$0(value, (DataType) obj);
-            }
-        }).findFirst().orElseThrow(new Supplier() { // from class: com.samsung.android.sume.core.types.DataType$$ExternalSyntheticLambda1
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return DataType.lambda$from$1(value);
-            }
-        });
+        return (DataType)
+                Arrays.stream(values())
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.types.DataType$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return DataType.lambda$from$0(value, (DataType) obj);
+                                    }
+                                })
+                        .findFirst()
+                        .orElseThrow(
+                                new Supplier() { // from class:
+                                                 // com.samsung.android.sume.core.types.DataType$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Supplier
+                                    public final Object get() {
+                                        return DataType.lambda$from$1(value);
+                                    }
+                                });
     }
 
     static /* synthetic */ boolean lambda$from$0(int value, DataType e) {

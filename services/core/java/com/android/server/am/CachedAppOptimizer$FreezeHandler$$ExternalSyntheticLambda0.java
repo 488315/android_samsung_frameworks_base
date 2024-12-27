@@ -1,15 +1,16 @@
 package com.android.server.am;
 
-import com.android.server.am.CachedAppOptimizer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class CachedAppOptimizer$FreezeHandler$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class CachedAppOptimizer$FreezeHandler$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ CachedAppOptimizer.FreezeHandler f$0;
     public final /* synthetic */ ProcessRecord f$1;
 
-    public /* synthetic */ CachedAppOptimizer$FreezeHandler$$ExternalSyntheticLambda0(CachedAppOptimizer.FreezeHandler freezeHandler, ProcessRecord processRecord, int i) {
+    public /* synthetic */ CachedAppOptimizer$FreezeHandler$$ExternalSyntheticLambda0(
+            CachedAppOptimizer.FreezeHandler freezeHandler, ProcessRecord processRecord, int i) {
         this.$r8$classId = i;
         this.f$0 = freezeHandler;
         this.f$1 = processRecord;
@@ -25,7 +26,13 @@ public final /* synthetic */ class CachedAppOptimizer$FreezeHandler$$ExternalSyn
                 ActivityManagerService.boostPriorityForLockedSection();
                 synchronized (activityManagerService) {
                     try {
-                        processRecord.killLocked(14, 19, "Unable to freeze binder interface", "Unable to freeze binder interface", true, true);
+                        processRecord.killLocked(
+                                14,
+                                19,
+                                "Unable to freeze binder interface",
+                                "Unable to freeze binder interface",
+                                true,
+                                true);
                     } finally {
                         ActivityManagerService.resetPriorityAfterLockedSection();
                     }
@@ -39,7 +46,13 @@ public final /* synthetic */ class CachedAppOptimizer$FreezeHandler$$ExternalSyn
                 ActivityManagerService.boostPriorityForLockedSection();
                 synchronized (activityManagerService2) {
                     try {
-                        processRecord2.killLocked(14, 19, "Unable to freeze binder interface", "Unable to freeze binder interface", true, true);
+                        processRecord2.killLocked(
+                                14,
+                                19,
+                                "Unable to freeze binder interface",
+                                "Unable to freeze binder interface",
+                                true,
+                                true);
                     } finally {
                     }
                 }
@@ -56,7 +69,13 @@ public final /* synthetic */ class CachedAppOptimizer$FreezeHandler$$ExternalSyn
                             ActivityManagerService.resetPriorityAfterLockedSection();
                             return;
                         } else {
-                            processRecord3.killLocked(9, 7, "excessive binder traffic during cached", "excessive binder traffic during cached", true, true);
+                            processRecord3.killLocked(
+                                    9,
+                                    7,
+                                    "excessive binder traffic during cached",
+                                    "excessive binder traffic during cached",
+                                    true,
+                                    true);
                             return;
                         }
                     } finally {

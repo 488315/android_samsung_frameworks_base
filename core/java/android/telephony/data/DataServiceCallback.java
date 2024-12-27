@@ -3,7 +3,9 @@ package android.telephony.data;
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.RemoteException;
+
 import com.android.telephony.Rlog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -22,8 +24,7 @@ public class DataServiceCallback {
     private final IDataServiceCallback mCallback;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResultCode {
-    }
+    public @interface ResultCode {}
 
     public DataServiceCallback(IDataServiceCallback callback) {
         this.mCallback = callback;

@@ -1,15 +1,16 @@
 package com.android.internal.telephony.util;
 
-import java.io.IOException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
+
 /* loaded from: classes5.dex */
 public final class XmlUtils {
-    private XmlUtils() {
-    }
+    private XmlUtils() {}
 
-    public static void beginDocument(XmlPullParser parser, String firstElementName) throws XmlPullParserException, IOException {
+    public static void beginDocument(XmlPullParser parser, String firstElementName)
+            throws XmlPullParserException, IOException {
         int type;
         do {
             type = parser.next();
@@ -21,11 +22,16 @@ public final class XmlUtils {
             throw new XmlPullParserException("No start tag found");
         }
         if (!parser.getName().equals(firstElementName)) {
-            throw new XmlPullParserException("Unexpected start tag: found " + parser.getName() + ", expected " + firstElementName);
+            throw new XmlPullParserException(
+                    "Unexpected start tag: found "
+                            + parser.getName()
+                            + ", expected "
+                            + firstElementName);
         }
     }
 
-    public static void nextElement(XmlPullParser parser) throws XmlPullParserException, IOException {
+    public static void nextElement(XmlPullParser parser)
+            throws XmlPullParserException, IOException {
         int type;
         do {
             type = parser.next();
@@ -35,7 +41,8 @@ public final class XmlUtils {
         } while (type != 1);
     }
 
-    public static boolean nextElementWithin(XmlPullParser parser, int outerDepth) throws IOException, XmlPullParserException {
+    public static boolean nextElementWithin(XmlPullParser parser, int outerDepth)
+            throws IOException, XmlPullParserException {
         while (true) {
             int type = parser.next();
             if (type != 1) {

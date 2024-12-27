@@ -2,6 +2,7 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -22,7 +23,13 @@ public final class ExtendedRegistrationInfo implements Parcelable {
         this.mIsPsOnlyReg = false;
     }
 
-    public ExtendedRegistrationInfo(int snapShotStatus, int unprocessedDataRegState, int unprocessedDataRadioTechnology, int mobileOptionalRadioTech, int unprocessedVoiceRegState, boolean isPsOnlyReg) {
+    public ExtendedRegistrationInfo(
+            int snapShotStatus,
+            int unprocessedDataRegState,
+            int unprocessedDataRadioTechnology,
+            int mobileOptionalRadioTech,
+            int unprocessedVoiceRegState,
+            boolean isPsOnlyReg) {
         this.mSnapShotStatus = snapShotStatus;
         this.mUnprocessedDataRegState = unprocessedDataRegState;
         this.mUnprocessedDataRadioTechnology = unprocessedDataRadioTechnology;
@@ -70,11 +77,35 @@ public final class ExtendedRegistrationInfo implements Parcelable {
     }
 
     public String toString() {
-        return new StringBuilder(256).append("ExtendedRegistrationInfo{ snapshotStatus=").append(this.mSnapShotStatus).append(" unprocessedDataRegState=").append(NetworkRegistrationInfo.registrationStateToString(this.mUnprocessedDataRegState)).append(" unprocessedDataRat=").append(this.mUnprocessedDataRadioTechnology).append(" mobileOptionalRat=").append(this.mMobileOptionalRadioTech).append(" unprocessedVoiceRegState=").append(NetworkRegistrationInfo.registrationStateToString(this.mUnprocessedVoiceRegState)).append(" isPsOnlyReg=").append(this.mIsPsOnlyReg).append("}").toString();
+        return new StringBuilder(256)
+                .append("ExtendedRegistrationInfo{ snapshotStatus=")
+                .append(this.mSnapShotStatus)
+                .append(" unprocessedDataRegState=")
+                .append(
+                        NetworkRegistrationInfo.registrationStateToString(
+                                this.mUnprocessedDataRegState))
+                .append(" unprocessedDataRat=")
+                .append(this.mUnprocessedDataRadioTechnology)
+                .append(" mobileOptionalRat=")
+                .append(this.mMobileOptionalRadioTech)
+                .append(" unprocessedVoiceRegState=")
+                .append(
+                        NetworkRegistrationInfo.registrationStateToString(
+                                this.mUnprocessedVoiceRegState))
+                .append(" isPsOnlyReg=")
+                .append(this.mIsPsOnlyReg)
+                .append("}")
+                .toString();
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mSnapShotStatus), Integer.valueOf(this.mUnprocessedDataRegState), Integer.valueOf(this.mUnprocessedDataRadioTechnology), Integer.valueOf(this.mMobileOptionalRadioTech), Integer.valueOf(this.mUnprocessedVoiceRegState), Boolean.valueOf(this.mIsPsOnlyReg));
+        return Objects.hash(
+                Integer.valueOf(this.mSnapShotStatus),
+                Integer.valueOf(this.mUnprocessedDataRegState),
+                Integer.valueOf(this.mUnprocessedDataRadioTechnology),
+                Integer.valueOf(this.mMobileOptionalRadioTech),
+                Integer.valueOf(this.mUnprocessedVoiceRegState),
+                Boolean.valueOf(this.mIsPsOnlyReg));
     }
 
     public boolean equals(Object o) {
@@ -85,7 +116,12 @@ public final class ExtendedRegistrationInfo implements Parcelable {
             return false;
         }
         ExtendedRegistrationInfo other = (ExtendedRegistrationInfo) o;
-        return this.mSnapShotStatus == other.mSnapShotStatus && this.mUnprocessedDataRegState == other.mUnprocessedDataRegState && this.mUnprocessedDataRadioTechnology == other.mUnprocessedDataRadioTechnology && this.mMobileOptionalRadioTech == other.mMobileOptionalRadioTech && this.mUnprocessedVoiceRegState == other.mUnprocessedVoiceRegState && this.mIsPsOnlyReg == other.mIsPsOnlyReg;
+        return this.mSnapShotStatus == other.mSnapShotStatus
+                && this.mUnprocessedDataRegState == other.mUnprocessedDataRegState
+                && this.mUnprocessedDataRadioTechnology == other.mUnprocessedDataRadioTechnology
+                && this.mMobileOptionalRadioTech == other.mMobileOptionalRadioTech
+                && this.mUnprocessedVoiceRegState == other.mUnprocessedVoiceRegState
+                && this.mIsPsOnlyReg == other.mIsPsOnlyReg;
     }
 
     @Override // android.os.Parcelable

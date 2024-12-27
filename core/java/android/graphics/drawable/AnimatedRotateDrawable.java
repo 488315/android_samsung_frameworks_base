@@ -4,14 +4,16 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.drawable.DrawableWrapper;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class AnimatedRotateDrawable extends DrawableWrapper implements Animatable {
@@ -80,7 +82,9 @@ public class AnimatedRotateDrawable extends DrawableWrapper implements Animatabl
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.AnimatedRotateDrawable);
         super.inflate(r, parser, attrs, theme);
         updateStateFromTypedArray(a);
@@ -97,7 +101,8 @@ public class AnimatedRotateDrawable extends DrawableWrapper implements Animatabl
             return;
         }
         if (state.mThemeAttrs != null) {
-            TypedArray a = t.resolveAttributes(state.mThemeAttrs, R.styleable.AnimatedRotateDrawable);
+            TypedArray a =
+                    t.resolveAttributes(state.mThemeAttrs, R.styleable.AnimatedRotateDrawable);
             try {
                 try {
                     updateStateFromTypedArray(a);
@@ -115,7 +120,10 @@ public class AnimatedRotateDrawable extends DrawableWrapper implements Animatabl
     private void verifyRequiredAttributes(TypedArray a) throws XmlPullParserException {
         if (getDrawable() == null) {
             if (this.mState.mThemeAttrs == null || this.mState.mThemeAttrs[1] == 0) {
-                throw new XmlPullParserException(a.getPositionDescription() + ": <animated-rotate> tag requires a 'drawable' attribute or child tag defining a drawable");
+                throw new XmlPullParserException(
+                        a.getPositionDescription()
+                                + ": <animated-rotate> tag requires a 'drawable' attribute or child"
+                                + " tag defining a drawable");
             }
         }
     }
@@ -183,7 +191,8 @@ public class AnimatedRotateDrawable extends DrawableWrapper implements Animatabl
             }
         }
 
-        @Override // android.graphics.drawable.DrawableWrapper.DrawableWrapperState, android.graphics.drawable.Drawable.ConstantState
+        @Override // android.graphics.drawable.DrawableWrapper.DrawableWrapperState,
+        // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable(Resources res) {
             return new AnimatedRotateDrawable(this, res);
         }
@@ -191,17 +200,20 @@ public class AnimatedRotateDrawable extends DrawableWrapper implements Animatabl
 
     private AnimatedRotateDrawable(AnimatedRotateState state, Resources res) {
         super(state, res);
-        this.mNextFrame = new Runnable() { // from class: android.graphics.drawable.AnimatedRotateDrawable.1
-            @Override // java.lang.Runnable
-            public void run() {
-                AnimatedRotateDrawable.this.mCurrentDegrees += AnimatedRotateDrawable.this.mIncrement;
-                if (AnimatedRotateDrawable.this.mCurrentDegrees > 360.0f - AnimatedRotateDrawable.this.mIncrement) {
-                    AnimatedRotateDrawable.this.mCurrentDegrees = 0.0f;
-                }
-                AnimatedRotateDrawable.this.invalidateSelf();
-                AnimatedRotateDrawable.this.nextFrame();
-            }
-        };
+        this.mNextFrame =
+                new Runnable() { // from class: android.graphics.drawable.AnimatedRotateDrawable.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        AnimatedRotateDrawable.this.mCurrentDegrees +=
+                                AnimatedRotateDrawable.this.mIncrement;
+                        if (AnimatedRotateDrawable.this.mCurrentDegrees
+                                > 360.0f - AnimatedRotateDrawable.this.mIncrement) {
+                            AnimatedRotateDrawable.this.mCurrentDegrees = 0.0f;
+                        }
+                        AnimatedRotateDrawable.this.invalidateSelf();
+                        AnimatedRotateDrawable.this.nextFrame();
+                    }
+                };
         this.mState = state;
         updateLocalState();
     }

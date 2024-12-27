@@ -4,8 +4,7 @@ import android.os.Build;
 
 /* loaded from: classes2.dex */
 public final class SdkLevel {
-    private SdkLevel() {
-    }
+    private SdkLevel() {}
 
     public static boolean isAtLeastR() {
         return true;
@@ -32,6 +31,7 @@ public final class SdkLevel {
     }
 
     private static boolean isAtLeastPreReleaseCodename(String codename) {
-        return !"REL".equals(Build.VERSION.CODENAME) && Build.VERSION.CODENAME.compareTo(codename) >= 0;
+        return !"REL".equals(Build.VERSION.CODENAME)
+                && Build.VERSION.CODENAME.compareTo(codename) >= 0;
     }
 }

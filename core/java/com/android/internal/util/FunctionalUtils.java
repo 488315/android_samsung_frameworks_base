@@ -2,7 +2,7 @@ package com.android.internal.util;
 
 import android.os.RemoteException;
 import android.util.ExceptionUtils;
-import com.android.internal.util.FunctionalUtils;
+
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -13,7 +13,8 @@ import java.util.function.Supplier;
 public class FunctionalUtils {
 
     @FunctionalInterface
-    public interface ThrowingChecked2Consumer<Input, ExceptionOne extends Exception, ExceptionTwo extends Exception> {
+    public interface ThrowingChecked2Consumer<
+            Input, ExceptionOne extends Exception, ExceptionTwo extends Exception> {
         void accept(Input input) throws Exception, Exception;
     }
 
@@ -32,8 +33,7 @@ public class FunctionalUtils {
         Output get() throws Exception;
     }
 
-    private FunctionalUtils() {
-    }
+    private FunctionalUtils() {}
 
     public static <T> Consumer<T> uncheckExceptions(ThrowingConsumer<T> action) {
         return action;
@@ -59,11 +59,14 @@ public class FunctionalUtils {
         return action;
     }
 
-    public static Runnable handleExceptions(final ThrowingRunnable r, final Consumer<Throwable> handler) {
-        return new Runnable() { // from class: com.android.internal.util.FunctionalUtils$$ExternalSyntheticLambda0
+    public static Runnable handleExceptions(
+            final ThrowingRunnable r, final Consumer<Throwable> handler) {
+        return new Runnable() { // from class:
+                                // com.android.internal.util.FunctionalUtils$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                FunctionalUtils.lambda$handleExceptions$0(FunctionalUtils.ThrowingRunnable.this, handler);
+                FunctionalUtils.lambda$handleExceptions$0(
+                        FunctionalUtils.ThrowingRunnable.this, handler);
             }
         };
     }
@@ -181,6 +184,10 @@ public class FunctionalUtils {
             return fullFunction;
         }
         int endClassIdx = fullFunction.indexOf(36, firstDollarIdx + 1);
-        return endClassIdx == -1 ? fullFunction.substring(0, endPkgIdx - 1) + "$Lambda" : fullFunction.substring(0, endPkgIdx) + fullFunction.substring(firstDollarIdx + 1, endClassIdx) + "$Lambda";
+        return endClassIdx == -1
+                ? fullFunction.substring(0, endPkgIdx - 1) + "$Lambda"
+                : fullFunction.substring(0, endPkgIdx)
+                        + fullFunction.substring(firstDollarIdx + 1, endClassIdx)
+                        + "$Lambda";
     }
 }

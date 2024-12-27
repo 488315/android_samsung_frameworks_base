@@ -4,24 +4,27 @@ import android.app.slice.Slice;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class AudioPortMixExtUseCase implements Parcelable {
-    public static final Parcelable.Creator<AudioPortMixExtUseCase> CREATOR = new Parcelable.Creator<AudioPortMixExtUseCase>() { // from class: android.media.audio.common.AudioPortMixExtUseCase.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortMixExtUseCase createFromParcel(Parcel _aidl_source) {
-            return new AudioPortMixExtUseCase(_aidl_source);
-        }
+    public static final Parcelable.Creator<AudioPortMixExtUseCase> CREATOR =
+            new Parcelable.Creator<AudioPortMixExtUseCase>() { // from class:
+                // android.media.audio.common.AudioPortMixExtUseCase.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortMixExtUseCase createFromParcel(Parcel _aidl_source) {
+                    return new AudioPortMixExtUseCase(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortMixExtUseCase[] newArray(int _aidl_size) {
-            return new AudioPortMixExtUseCase[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortMixExtUseCase[] newArray(int _aidl_size) {
+                    return new AudioPortMixExtUseCase[_aidl_size];
+                }
+            };
     public static final int source = 2;
     public static final int stream = 1;
     public static final int unspecified = 0;
@@ -141,11 +144,17 @@ public final class AudioPortMixExtUseCase implements Parcelable {
     public String toString() {
         switch (this._tag) {
             case 0:
-                return "AudioPortMixExtUseCase.unspecified(" + getUnspecified() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioPortMixExtUseCase.unspecified("
+                        + getUnspecified()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "AudioPortMixExtUseCase.stream(" + getStream() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioPortMixExtUseCase.stream("
+                        + getStream()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 2:
-                return "AudioPortMixExtUseCase.source(" + getSource() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioPortMixExtUseCase.source("
+                        + getSource()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -166,12 +175,18 @@ public final class AudioPortMixExtUseCase implements Parcelable {
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
     }
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

@@ -30,40 +30,39 @@ public interface IIrisDaemonCallback extends IInterface {
 
     public static class Default implements IIrisDaemonCallback {
         @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-        public void onEnrollResult(long deviceId, int irisId, int groupId, int remaining) throws RemoteException {
-        }
+        public void onEnrollResult(long deviceId, int irisId, int groupId, int remaining)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-        public void onAcquired(long deviceId, EyeInfo eyeInfo) throws RemoteException {
-        }
+        public void onAcquired(long deviceId, EyeInfo eyeInfo) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-        public void onAuthenticated(long deviceId, int irisId, int groupId, byte[] hatData, byte[] fidoResultData) throws RemoteException {
-        }
+        public void onAuthenticated(
+                long deviceId, int irisId, int groupId, byte[] hatData, byte[] fidoResultData)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-        public void onError(long deviceId, int error) throws RemoteException {
-        }
+        public void onError(long deviceId, int error) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-        public void onRemoved(long deviceId, int irisId, int groupId) throws RemoteException {
-        }
+        public void onRemoved(long deviceId, int irisId, int groupId) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-        public void onIRPropertyChanged(long deviceId, String key, String value) throws RemoteException {
-        }
+        public void onIRPropertyChanged(long deviceId, String key, String value)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-        public void onEnumerate(long deviceId, int[] irisIds, int[] groupIds) throws RemoteException {
-        }
+        public void onEnumerate(long deviceId, int[] irisIds, int[] groupIds)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-        public void onImageProcessed(long deviceId, int imageId, byte[] previewImage, int width, int height) throws RemoteException {
-        }
+        public void onImageProcessed(
+                long deviceId, int imageId, byte[] previewImage, int width, int height)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-        public void onGeneralParameterChanged(long deviceId, String key, String value) throws RemoteException {
-        }
+        public void onGeneralParameterChanged(long deviceId, String key, String value)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -71,7 +70,7 @@ public interface IIrisDaemonCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIrisDaemonCallback {
+    public abstract static class Stub extends Binder implements IIrisDaemonCallback {
         static final int TRANSACTION_onAcquired = 2;
         static final int TRANSACTION_onAuthenticated = 3;
         static final int TRANSACTION_onEnrollResult = 1;
@@ -133,7 +132,8 @@ public interface IIrisDaemonCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIrisDaemonCallback.DESCRIPTOR);
             }
@@ -239,7 +239,8 @@ public interface IIrisDaemonCallback extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-            public void onEnrollResult(long deviceId, int irisId, int groupId, int remaining) throws RemoteException {
+            public void onEnrollResult(long deviceId, int irisId, int groupId, int remaining)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -273,7 +274,9 @@ public interface IIrisDaemonCallback extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-            public void onAuthenticated(long deviceId, int irisId, int groupId, byte[] hatData, byte[] fidoResultData) throws RemoteException {
+            public void onAuthenticated(
+                    long deviceId, int irisId, int groupId, byte[] hatData, byte[] fidoResultData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -325,7 +328,8 @@ public interface IIrisDaemonCallback extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-            public void onIRPropertyChanged(long deviceId, String key, String value) throws RemoteException {
+            public void onIRPropertyChanged(long deviceId, String key, String value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -342,7 +346,8 @@ public interface IIrisDaemonCallback extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-            public void onEnumerate(long deviceId, int[] irisIds, int[] groupIds) throws RemoteException {
+            public void onEnumerate(long deviceId, int[] irisIds, int[] groupIds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -359,7 +364,9 @@ public interface IIrisDaemonCallback extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-            public void onImageProcessed(long deviceId, int imageId, byte[] previewImage, int width, int height) throws RemoteException {
+            public void onImageProcessed(
+                    long deviceId, int imageId, byte[] previewImage, int width, int height)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -378,7 +385,8 @@ public interface IIrisDaemonCallback extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemonCallback
-            public void onGeneralParameterChanged(long deviceId, String key, String value) throws RemoteException {
+            public void onGeneralParameterChanged(long deviceId, String key, String value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

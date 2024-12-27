@@ -5,8 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-import com.android.internal.util.CallbackRegistry;
-import com.android.internal.util.ObservableServiceConnection;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -27,7 +26,8 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
     private final Object mLock = new Object();
     private boolean mBoundCalled = false;
     private int mLastDisconnectReason = 0;
-    private final CallbackRegistry<Callback<T>, ObservableServiceConnection<T>, T> mCallbackRegistry = new CallbackRegistry<>(new AnonymousClass1());
+    private final CallbackRegistry<Callback<T>, ObservableServiceConnection<T>, T>
+            mCallbackRegistry = new CallbackRegistry<>(new AnonymousClass1());
 
     public interface Callback<T> {
         void onConnected(ObservableServiceConnection<T> observableServiceConnection, T t);
@@ -36,34 +36,48 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DisconnectReason {
-    }
+    public @interface DisconnectReason {}
 
     public interface ServiceTransformer<T> {
         T convert(IBinder iBinder);
     }
 
     /* renamed from: com.android.internal.util.ObservableServiceConnection$1, reason: invalid class name */
-    class AnonymousClass1 extends CallbackRegistry.NotifierCallback<Callback<T>, ObservableServiceConnection<T>, T> {
-        AnonymousClass1() {
-        }
+    class AnonymousClass1
+            extends CallbackRegistry.NotifierCallback<
+                    Callback<T>, ObservableServiceConnection<T>, T> {
+        AnonymousClass1() {}
 
         @Override // com.android.internal.util.CallbackRegistry.NotifierCallback
-        public /* bridge */ /* synthetic */ void onNotifyCallback(Object obj, Object obj2, int i, Object obj3) {
-            onNotifyCallback((Callback<int>) obj, (ObservableServiceConnection<int>) obj2, i, (int) obj3);
+        public /* bridge */ /* synthetic */ void onNotifyCallback(
+                Object obj, Object obj2, int i, Object obj3) {
+            onNotifyCallback(
+                    (Callback<int>) obj, (ObservableServiceConnection<int>) obj2, i, (int) obj3);
         }
 
-        public void onNotifyCallback(final Callback<T> callback, final ObservableServiceConnection<T> sender, final int disconnectReason, final T service) {
-            ObservableServiceConnection.this.mExecutor.execute(new Runnable() { // from class: com.android.internal.util.ObservableServiceConnection$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ObservableServiceConnection.AnonymousClass1.this.lambda$onNotifyCallback$0(service, callback, sender, disconnectReason);
-                }
-            });
+        public void onNotifyCallback(
+                final Callback<T> callback,
+                final ObservableServiceConnection<T> sender,
+                final int disconnectReason,
+                final T service) {
+            ObservableServiceConnection.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // com.android.internal.util.ObservableServiceConnection$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ObservableServiceConnection.AnonymousClass1.this
+                                    .lambda$onNotifyCallback$0(
+                                            service, callback, sender, disconnectReason);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onNotifyCallback$0(Object service, Callback callback, ObservableServiceConnection sender, int disconnectReason) {
+        public /* synthetic */ void lambda$onNotifyCallback$0(
+                Object service,
+                Callback callback,
+                ObservableServiceConnection sender,
+                int disconnectReason) {
             synchronized (ObservableServiceConnection.this.mLock) {
                 if (service != null) {
                     callback.onConnected(sender, service);
@@ -74,7 +88,12 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
         }
     }
 
-    public ObservableServiceConnection(Context context, Executor executor, ServiceTransformer<T> transformer, Intent serviceIntent, int flags) {
+    public ObservableServiceConnection(
+            Context context,
+            Executor executor,
+            ServiceTransformer<T> transformer,
+            Intent serviceIntent,
+            int flags) {
         this.mContext = context;
         this.mExecutor = executor;
         this.mTransformer = transformer;
@@ -91,7 +110,9 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
             if (this.mBoundCalled) {
                 return false;
             }
-            boolean bindResult = this.mContext.bindService(this.mServiceIntent, this.mFlags, this.mExecutor, this);
+            boolean bindResult =
+                    this.mContext.bindService(
+                            this.mServiceIntent, this.mFlags, this.mExecutor, this);
             this.mBoundCalled = true;
             return bindResult;
         }
@@ -103,12 +124,14 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
 
     public void addCallback(final Callback<T> callback) {
         this.mCallbackRegistry.add(callback);
-        this.mExecutor.execute(new Runnable() { // from class: com.android.internal.util.ObservableServiceConnection$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                ObservableServiceConnection.this.lambda$addCallback$0(callback);
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // com.android.internal.util.ObservableServiceConnection$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ObservableServiceConnection.this.lambda$addCallback$0(callback);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */

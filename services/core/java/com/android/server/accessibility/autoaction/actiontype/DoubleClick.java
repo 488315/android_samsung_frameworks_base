@@ -14,7 +14,8 @@ public final class DoubleClick extends CornerActionType {
         int actionIndex = this.mLastMotionEvent.getActionIndex();
         MotionEvent.PointerCoords pointerCoords = new MotionEvent.PointerCoords();
         this.mLastMotionEvent.getPointerCoords(actionIndex, pointerCoords);
-        MotionEvent.PointerCoords pointerCoords2 = new MotionEvent.PointerCoords[]{pointerCoords}[0];
+        MotionEvent.PointerCoords pointerCoords2 =
+                new MotionEvent.PointerCoords[] {pointerCoords}[0];
         MotionEvent obtain = MotionEvent.obtain(j, j2, 0, pointerCoords2.x, pointerCoords2.y, 1);
         obtain.setSource(4098);
         obtain.setFlags(8388608);

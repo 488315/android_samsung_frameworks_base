@@ -12,7 +12,9 @@ import android.util.Slog;
 import android.view.Display;
 import android.view.DisplayInfo;
 import android.view.MotionEvent;
+
 import com.android.internal.R;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -67,8 +69,15 @@ public class MultiWindowEdgeDetector {
 
     private void loadResources() {
         updateCustomBoundsIfNeeded();
-        this.mCornerRadius = this.mContext.getResources().getDimensionPixelSize(R.dimen.multiwindow_freeform_gesture_guide_corner_radius);
-        this.mGestureThreshold = this.mContext.getResources().getDimensionPixelSize(R.dimen.multiwindow_freeform_gesture_threshold);
+        this.mCornerRadius =
+                this.mContext
+                        .getResources()
+                        .getDimensionPixelSize(
+                                R.dimen.multiwindow_freeform_gesture_guide_corner_radius);
+        this.mGestureThreshold =
+                this.mContext
+                        .getResources()
+                        .getDimensionPixelSize(R.dimen.multiwindow_freeform_gesture_threshold);
         if (SAFE_DEBUG) {
             updateFromSystemProperties();
         }
@@ -101,7 +110,8 @@ public class MultiWindowEdgeDetector {
     }
 
     public static void updateCustomBoundsIfNeeded() {
-        if (MultiWindowCoreState.MW_FREEFORM_CORNER_GESTURE_CUSTOM_VALUE > 0 && sWidth != MultiWindowCoreState.MW_FREEFORM_CORNER_GESTURE_CUSTOM_VALUE) {
+        if (MultiWindowCoreState.MW_FREEFORM_CORNER_GESTURE_CUSTOM_VALUE > 0
+                && sWidth != MultiWindowCoreState.MW_FREEFORM_CORNER_GESTURE_CUSTOM_VALUE) {
             int i = MultiWindowCoreState.MW_FREEFORM_CORNER_GESTURE_CUSTOM_VALUE;
             sHeight = i;
             sWidth = i;
@@ -116,7 +126,11 @@ public class MultiWindowEdgeDetector {
         }
         DisplayInfo displayInfo = new DisplayInfo();
         display.getDisplayInfo(displayInfo);
-        boolean changed = (this.mScreenWidth == displayInfo.logicalWidth && this.mScreenHeight == displayInfo.logicalHeight) ? false : true;
+        boolean changed =
+                (this.mScreenWidth == displayInfo.logicalWidth
+                                && this.mScreenHeight == displayInfo.logicalHeight)
+                        ? false
+                        : true;
         boolean needUpdate = changed || this.mScreenOrientation == 0;
         if (needUpdate) {
             this.mScreenWidth = displayInfo.logicalWidth;
@@ -126,7 +140,17 @@ public class MultiWindowEdgeDetector {
                 sWidth = (int) ((sWidth * WIDTH_SCALE_FOR_LANDSCAPE_CORNER_R) + 0.5f);
             }
             if (SAFE_DEBUG) {
-                Slog.i(TAG, this.mPrefixLog + "updateScreenInfo: mScreenWidth=" + this.mScreenWidth + ", mScreenHeight=" + this.mScreenHeight + ", mScreenOrientation=" + this.mScreenOrientation + ", sWidth=" + sWidth);
+                Slog.i(
+                        TAG,
+                        this.mPrefixLog
+                                + "updateScreenInfo: mScreenWidth="
+                                + this.mScreenWidth
+                                + ", mScreenHeight="
+                                + this.mScreenHeight
+                                + ", mScreenOrientation="
+                                + this.mScreenOrientation
+                                + ", sWidth="
+                                + sWidth);
             }
         }
     }
@@ -136,7 +160,13 @@ public class MultiWindowEdgeDetector {
         int currentHeight = this.mContext.getResources().getDisplayMetrics().heightPixels;
         int currentOrientation = currentWidth > currentHeight ? 2 : 1;
         if (this.mScreenOrientation != currentOrientation) {
-            Slog.w(TAG, this.mPrefixLog + "ensureScreenInfo: ScreenInfo is wrong, mScreenOr=" + this.mScreenOrientation + ", currentOr=" + currentOrientation);
+            Slog.w(
+                    TAG,
+                    this.mPrefixLog
+                            + "ensureScreenInfo: ScreenInfo is wrong, mScreenOr="
+                            + this.mScreenOrientation
+                            + ", currentOr="
+                            + currentOrientation);
             updateScreenInfo();
         }
     }
@@ -177,7 +207,8 @@ public class MultiWindowEdgeDetector {
     }
 
     private ActivityManager.RunningTaskInfo getTopFullscreenTaskInfo() {
-        List<ActivityManager.RunningTaskInfo> taskInfos = MultiWindowManager.getInstance().getVisibleTasks();
+        List<ActivityManager.RunningTaskInfo> taskInfos =
+                MultiWindowManager.getInstance().getVisibleTasks();
         if (taskInfos == null || taskInfos.isEmpty()) {
             return null;
         }
@@ -213,7 +244,21 @@ public class MultiWindowEdgeDetector {
         } else if (x > this.mScreenWidth - sWidth) {
             flags = 1 | 8;
         }
-        Log.i(TAG, this.mPrefixLog + "checkEdgeFlags: " + Utils.edgeFlagToString(flags) + ", [" + x + "," + y + "], w=" + sWidth + ", h=" + sHeight + ", screenWidth=" + this.mScreenWidth);
+        Log.i(
+                TAG,
+                this.mPrefixLog
+                        + "checkEdgeFlags: "
+                        + Utils.edgeFlagToString(flags)
+                        + ", ["
+                        + x
+                        + ","
+                        + y
+                        + "], w="
+                        + sWidth
+                        + ", h="
+                        + sHeight
+                        + ", screenWidth="
+                        + this.mScreenWidth);
         return flags;
     }
 
@@ -238,7 +283,19 @@ public class MultiWindowEdgeDetector {
     private boolean isExceedThreshold(int dx, int dy) {
         int distance = Math.abs(dx) + Math.abs(dy);
         boolean result = distance >= this.mGestureThreshold;
-        Log.i(TAG, this.mPrefixLog + "isExceedThreshold: " + result + ", dx=" + Math.abs(dx) + ", dy=" + Math.abs(dy) + ", distance=" + distance + ", threshold=" + this.mGestureThreshold);
+        Log.i(
+                TAG,
+                this.mPrefixLog
+                        + "isExceedThreshold: "
+                        + result
+                        + ", dx="
+                        + Math.abs(dx)
+                        + ", dy="
+                        + Math.abs(dy)
+                        + ", distance="
+                        + distance
+                        + ", threshold="
+                        + this.mGestureThreshold);
         return result;
     }
 
@@ -284,7 +341,17 @@ public class MultiWindowEdgeDetector {
                 changed = true;
             }
             if (changed) {
-                Log.i(TAG, this.mPrefixLog + "updateFromSystemProperties: sWidth=" + sWidth + ", sHeight=" + sHeight + ", mCornerRadius=" + this.mCornerRadius + ", mMaxDegrees=" + this.mMaxDegrees);
+                Log.i(
+                        TAG,
+                        this.mPrefixLog
+                                + "updateFromSystemProperties: sWidth="
+                                + sWidth
+                                + ", sHeight="
+                                + sHeight
+                                + ", mCornerRadius="
+                                + this.mCornerRadius
+                                + ", mMaxDegrees="
+                                + this.mMaxDegrees);
             }
         }
     }
@@ -306,8 +373,7 @@ public class MultiWindowEdgeDetector {
         }
 
         public static void applyResizeRect(Rect outBounds, int edgeFlags, int x, int y) {
-            if (outBounds == null) {
-            }
+            if (outBounds == null) {}
             switch (edgeFlags) {
                 case 5:
                     outBounds.left = x;
@@ -320,7 +386,8 @@ public class MultiWindowEdgeDetector {
             }
         }
 
-        public static boolean adjustMinimalTaskBounds(Rect outBounds, int edgeFlags, int minWidth, int minHeight) {
+        public static boolean adjustMinimalTaskBounds(
+                Rect outBounds, int edgeFlags, int minWidth, int minHeight) {
             if (outBounds == null || minWidth < 1 || minHeight < 1) {
                 return false;
             }

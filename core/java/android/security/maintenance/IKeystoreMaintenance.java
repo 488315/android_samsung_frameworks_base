@@ -23,7 +23,8 @@ public interface IKeystoreMaintenance extends IInterface {
 
     void initUserSuperKeys(int i, byte[] bArr, boolean z) throws RemoteException;
 
-    void migrateKeyNamespace(KeyDescriptor keyDescriptor, KeyDescriptor keyDescriptor2) throws RemoteException;
+    void migrateKeyNamespace(KeyDescriptor keyDescriptor, KeyDescriptor keyDescriptor2)
+            throws RemoteException;
 
     void onUserAdded(int i) throws RemoteException;
 
@@ -35,40 +36,33 @@ public interface IKeystoreMaintenance extends IInterface {
 
     public static class Default implements IKeystoreMaintenance {
         @Override // android.security.maintenance.IKeystoreMaintenance
-        public void onUserAdded(int userId) throws RemoteException {
-        }
+        public void onUserAdded(int userId) throws RemoteException {}
 
         @Override // android.security.maintenance.IKeystoreMaintenance
-        public void initUserSuperKeys(int userId, byte[] password, boolean allowExisting) throws RemoteException {
-        }
+        public void initUserSuperKeys(int userId, byte[] password, boolean allowExisting)
+                throws RemoteException {}
 
         @Override // android.security.maintenance.IKeystoreMaintenance
-        public void onUserRemoved(int userId) throws RemoteException {
-        }
+        public void onUserRemoved(int userId) throws RemoteException {}
 
         @Override // android.security.maintenance.IKeystoreMaintenance
-        public void onUserLskfRemoved(int userId) throws RemoteException {
-        }
+        public void onUserLskfRemoved(int userId) throws RemoteException {}
 
         @Override // android.security.maintenance.IKeystoreMaintenance
-        public void onUserPasswordChanged(int userId, byte[] password) throws RemoteException {
-        }
+        public void onUserPasswordChanged(int userId, byte[] password) throws RemoteException {}
 
         @Override // android.security.maintenance.IKeystoreMaintenance
-        public void clearNamespace(int domain, long nspace) throws RemoteException {
-        }
+        public void clearNamespace(int domain, long nspace) throws RemoteException {}
 
         @Override // android.security.maintenance.IKeystoreMaintenance
-        public void earlyBootEnded() throws RemoteException {
-        }
+        public void earlyBootEnded() throws RemoteException {}
 
         @Override // android.security.maintenance.IKeystoreMaintenance
-        public void migrateKeyNamespace(KeyDescriptor source, KeyDescriptor destination) throws RemoteException {
-        }
+        public void migrateKeyNamespace(KeyDescriptor source, KeyDescriptor destination)
+                throws RemoteException {}
 
         @Override // android.security.maintenance.IKeystoreMaintenance
-        public void deleteAllKeys() throws RemoteException {
-        }
+        public void deleteAllKeys() throws RemoteException {}
 
         @Override // android.security.maintenance.IKeystoreMaintenance
         public long[] getAppUidsAffectedBySid(int userId, long sid) throws RemoteException {
@@ -86,7 +80,7 @@ public interface IKeystoreMaintenance extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeystoreMaintenance {
+    public abstract static class Stub extends Binder implements IKeystoreMaintenance {
         static final int TRANSACTION_clearNamespace = 6;
         static final int TRANSACTION_deleteAllKeys = 9;
         static final int TRANSACTION_earlyBootEnded = 7;
@@ -154,7 +148,8 @@ public interface IKeystoreMaintenance extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKeystoreMaintenance.DESCRIPTOR);
             }
@@ -208,8 +203,10 @@ public interface IKeystoreMaintenance extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 8:
-                    KeyDescriptor _arg07 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
-                    KeyDescriptor _arg14 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg07 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg14 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     migrateKeyNamespace(_arg07, _arg14);
                     reply.writeNoException();
@@ -269,7 +266,8 @@ public interface IKeystoreMaintenance extends IInterface {
             }
 
             @Override // android.security.maintenance.IKeystoreMaintenance
-            public void initUserSuperKeys(int userId, byte[] password, boolean allowExisting) throws RemoteException {
+            public void initUserSuperKeys(int userId, byte[] password, boolean allowExisting)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -368,7 +366,8 @@ public interface IKeystoreMaintenance extends IInterface {
             }
 
             @Override // android.security.maintenance.IKeystoreMaintenance
-            public void migrateKeyNamespace(KeyDescriptor source, KeyDescriptor destination) throws RemoteException {
+            public void migrateKeyNamespace(KeyDescriptor source, KeyDescriptor destination)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();

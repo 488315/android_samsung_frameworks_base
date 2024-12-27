@@ -10,8 +10,7 @@ public final class ClipDataProto {
         public static final long HEIGHT = 1120986464258L;
         public static final long WIDTH = 1120986464257L;
 
-        public Icon() {
-        }
+        public Icon() {}
     }
 
     public final class Item {
@@ -21,7 +20,6 @@ public final class ClipDataProto {
         public static final long TEXT = 1138166333442L;
         public static final long URI = 1138166333443L;
 
-        public Item() {
-        }
+        public Item() {}
     }
 }

@@ -12,7 +12,13 @@ public class TsRecordEvent extends FilterEvent {
     private final int mScIndexMask;
     private final int mTsIndexMask;
 
-    private TsRecordEvent(int pid, int tsIndexMask, int scIndexMask, long dataLength, long pts, int firstMbInSlice) {
+    private TsRecordEvent(
+            int pid,
+            int tsIndexMask,
+            int scIndexMask,
+            long dataLength,
+            long pts,
+            int firstMbInSlice) {
         this.mPid = pid;
         this.mTsIndexMask = tsIndexMask;
         this.mScIndexMask = scIndexMask;

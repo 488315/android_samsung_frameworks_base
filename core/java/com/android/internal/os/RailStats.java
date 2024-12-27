@@ -2,6 +2,7 @@ package com.android.internal.os;
 
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import java.util.Map;
 
 /* loaded from: classes5.dex */
@@ -14,13 +15,25 @@ public final class RailStats {
     private long mWifiTotalEnergyUseduWs = 0;
     private boolean mRailStatsAvailability = true;
 
-    public void updateRailData(long index, String railName, String subSystemName, long timestampSinceBootMs, long energyUsedSinceBootuWs) {
+    public void updateRailData(
+            long index,
+            String railName,
+            String subSystemName,
+            long timestampSinceBootMs,
+            long energyUsedSinceBootuWs) {
         if (!subSystemName.equals("wifi") && !subSystemName.equals(CELLULAR_SUBSYSTEM)) {
             return;
         }
         RailInfoData node = this.mRailInfoData.get(Long.valueOf(index));
         if (node == null) {
-            this.mRailInfoData.put(Long.valueOf(index), new RailInfoData(index, railName, subSystemName, timestampSinceBootMs, energyUsedSinceBootuWs));
+            this.mRailInfoData.put(
+                    Long.valueOf(index),
+                    new RailInfoData(
+                            index,
+                            railName,
+                            subSystemName,
+                            timestampSinceBootMs,
+                            energyUsedSinceBootuWs));
             if (subSystemName.equals("wifi")) {
                 this.mWifiTotalEnergyUseduWs += energyUsedSinceBootuWs;
                 return;
@@ -87,7 +100,12 @@ public final class RailStats {
         public String subSystemName;
         public long timestampSinceBootMs;
 
-        private RailInfoData(long index, String railName, String subSystemName, long timestampSinceBootMs, long energyUsedSinceBoot) {
+        private RailInfoData(
+                long index,
+                String railName,
+                String subSystemName,
+                long timestampSinceBootMs,
+                long energyUsedSinceBoot) {
             this.index = index;
             this.railName = railName;
             this.subSystemName = subSystemName;

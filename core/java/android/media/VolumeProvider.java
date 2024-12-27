@@ -14,19 +14,19 @@ public abstract class VolumeProvider {
     private int mCurrentVolume;
     private final int mMaxVolume;
 
-    public static abstract class Callback {
+    public abstract static class Callback {
         public abstract void onVolumeChanged(VolumeProvider volumeProvider);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ControlType {
-    }
+    public @interface ControlType {}
 
     public VolumeProvider(int volumeControl, int maxVolume, int currentVolume) {
         this(volumeControl, maxVolume, currentVolume, null);
     }
 
-    public VolumeProvider(int volumeControl, int maxVolume, int currentVolume, String volumeControlId) {
+    public VolumeProvider(
+            int volumeControl, int maxVolume, int currentVolume, String volumeControlId) {
         this.mControlType = volumeControl;
         this.mMaxVolume = maxVolume;
         this.mCurrentVolume = currentVolume;
@@ -56,11 +56,9 @@ public abstract class VolumeProvider {
         return this.mControlId;
     }
 
-    public void onSetVolumeTo(int volume) {
-    }
+    public void onSetVolumeTo(int volume) {}
 
-    public void onAdjustVolume(int direction) {
-    }
+    public void onAdjustVolume(int direction) {}
 
     public void setCallback(Callback callback) {
         this.mCallback = callback;

@@ -20,11 +20,12 @@ class ExpandableListPosition {
         this.type = 0;
     }
 
-    private ExpandableListPosition() {
-    }
+    private ExpandableListPosition() {}
 
     long getPackedPosition() {
-        return this.type == 1 ? ExpandableListView.getPackedPositionForChild(this.groupPos, this.childPos) : ExpandableListView.getPackedPositionForGroup(this.groupPos);
+        return this.type == 1
+                ? ExpandableListView.getPackedPositionForChild(this.groupPos, this.childPos)
+                : ExpandableListView.getPackedPositionForGroup(this.groupPos);
     }
 
     static ExpandableListPosition obtainGroupPosition(int groupPosition) {

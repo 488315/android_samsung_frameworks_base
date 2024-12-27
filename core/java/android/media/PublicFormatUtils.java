@@ -8,8 +8,7 @@ class PublicFormatUtils {
 
     private static native int nativeGetPublicFormat(int i, int i2);
 
-    PublicFormatUtils() {
-    }
+    PublicFormatUtils() {}
 
     public static int getHalFormat(int imageFormat) {
         return nativeGetHalFormat(imageFormat);

@@ -3,7 +3,6 @@ package com.android.server.vibrator;
 import android.os.SystemClock;
 import android.os.vibrator.PrimitiveSegment;
 import android.util.SparseBooleanArray;
-import com.android.server.vibrator.Vibration;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -62,7 +61,13 @@ public final class VibrationStats {
         public final int vibrationType;
         public final int vibratorOnMillis;
 
-        public StatsInfo(int i, int i2, int i3, Vibration.Status status, VibrationStats vibrationStats, long j) {
+        public StatsInfo(
+                int i,
+                int i2,
+                int i3,
+                Vibration.Status status,
+                VibrationStats vibrationStats,
+                long j) {
             this.uid = i;
             this.vibrationType = i2;
             this.usage = i3;
@@ -92,10 +97,13 @@ public final class VibrationStats {
             this.halSetExternalControlCount = vibrationStats.mVibratorSetExternalControlCount;
             this.halCompositionSize = vibrationStats.mVibrationCompositionTotalSize;
             this.halPwleSize = vibrationStats.mVibrationPwleTotalSize;
-            this.halSupportedCompositionPrimitivesUsed = filteredKeys(vibrationStats.mVibratorPrimitivesUsed, true);
+            this.halSupportedCompositionPrimitivesUsed =
+                    filteredKeys(vibrationStats.mVibratorPrimitivesUsed, true);
             this.halSupportedEffectsUsed = filteredKeys(vibrationStats.mVibratorEffectsUsed, true);
-            this.halUnsupportedCompositionPrimitivesUsed = filteredKeys(vibrationStats.mVibratorPrimitivesUsed, false);
-            this.halUnsupportedEffectsUsed = filteredKeys(vibrationStats.mVibratorEffectsUsed, false);
+            this.halUnsupportedCompositionPrimitivesUsed =
+                    filteredKeys(vibrationStats.mVibratorPrimitivesUsed, false);
+            this.halUnsupportedEffectsUsed =
+                    filteredKeys(vibrationStats.mVibratorEffectsUsed, false);
         }
 
         public static int[] filteredKeys(SparseBooleanArray sparseBooleanArray, boolean z) {

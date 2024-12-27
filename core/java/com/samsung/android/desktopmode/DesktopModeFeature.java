@@ -8,8 +8,10 @@ import android.os.Debug;
 import android.os.SystemProperties;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
@@ -44,26 +46,49 @@ public class DesktopModeFeature {
         boolean z = false;
         DEBUG = Debug.semIsProductDev() || Build.IS_DEBUGGABLE || Log.isLoggable("DMS", 3);
         FEATURE_STANDALONE_MODE_WALLPAPER = Build.VERSION.SEM_PLATFORM_INT < 140100;
-        IS_TABLET = SystemProperties.get("ro.build.characteristics").contains(BnRConstants.DEVICETYPE_TABLET) || isDebuggableAndSysPropSet(BnRConstants.DEVICETYPE_TABLET);
-        SUPPORTED_MODES = Collections.unmodifiableSet(new ArraySet(Arrays.asList(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_DEX_MODE").split(","))));
+        IS_TABLET =
+                SystemProperties.get("ro.build.characteristics")
+                                .contains(BnRConstants.DEVICETYPE_TABLET)
+                        || isDebuggableAndSysPropSet(BnRConstants.DEVICETYPE_TABLET);
+        SUPPORTED_MODES =
+                Collections.unmodifiableSet(
+                        new ArraySet(
+                                Arrays.asList(
+                                        SemFloatingFeature.getInstance()
+                                                .getString(
+                                                        "SEC_FLOATING_FEATURE_COMMON_CONFIG_DEX_MODE")
+                                                .split(","))));
         SUPPORT_DUAL = SUPPORTED_MODES.contains("dual") || isDebuggableAndSysPropSet("dual");
-        SUPPORT_DEX_ON_PC = SUPPORTED_MODES.contains("dexforpc") || isDebuggableAndSysPropSet("dop");
-        SUPPORT_STANDALONE = SUPPORTED_MODES.contains("standalone") || isDebuggableAndSysPropSet("standalone");
-        SUPPORT_WIRELESS_DEX = SUPPORTED_MODES.contains(AudioDeviceDescription.CONNECTION_WIRELESS) || isDebuggableAndSysPropSet(AudioDeviceDescription.CONNECTION_WIRELESS);
+        SUPPORT_DEX_ON_PC =
+                SUPPORTED_MODES.contains("dexforpc") || isDebuggableAndSysPropSet("dop");
+        SUPPORT_STANDALONE =
+                SUPPORTED_MODES.contains("standalone") || isDebuggableAndSysPropSet("standalone");
+        SUPPORT_WIRELESS_DEX =
+                SUPPORTED_MODES.contains(AudioDeviceDescription.CONNECTION_WIRELESS)
+                        || isDebuggableAndSysPropSet(AudioDeviceDescription.CONNECTION_WIRELESS);
         SUPPORT_NEW_DEX = SUPPORTED_MODES.contains("newdex") || isDebuggableAndSysPropSet("newdex");
         SUPPORT_UIBC_EXTENSION_MOUSE_ICON_SYNC = SUPPORT_WIRELESS_DEX;
-        SPEN_USP_LEVEL = SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION");
+        SPEN_USP_LEVEL =
+                SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION");
         SUPPORT_SPEN = SPEN_USP_LEVEL > 0;
         if (SUPPORT_SPEN && SPEN_USP_LEVEL % 10 == 5) {
             z = true;
         }
         SPEN_INBOX_MODEL = z;
-        SUPPORT_SFC = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_BATTERY_SUPPORT_PD_HV");
-        FOLDABLE_TYPE_FOLD = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_FOLDABLE_TYPE_FOLD");
+        SUPPORT_SFC =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_BATTERY_SUPPORT_PD_HV");
+        FOLDABLE_TYPE_FOLD =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_FOLDABLE_TYPE_FOLD");
     }
 
     private static boolean isDebuggableAndSysPropSet(String key) {
-        return Build.IS_DEBUGGABLE && SystemProperties.getBoolean(new StringBuilder().append("persist.service.dex.").append(key).toString(), false);
+        return Build.IS_DEBUGGABLE
+                && SystemProperties.getBoolean(
+                        new StringBuilder().append("persist.service.dex.").append(key).toString(),
+                        false);
     }
 
     public static boolean isDesktopMode(Context context) {
@@ -71,6 +96,7 @@ public class DesktopModeFeature {
     }
 
     public static boolean isDesktopMode(Resources resources) {
-        return resources.getConfiguration().dexMode == 1 || resources.getConfiguration().dexMode == 2;
+        return resources.getConfiguration().dexMode == 1
+                || resources.getConfiguration().dexMode == 2;
     }
 }

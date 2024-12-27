@@ -1,9 +1,10 @@
 package com.android.server.display.brightness.clamper;
 
 import android.os.Handler;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.am.KillPolicyManager$$ExternalSyntheticOutline0;
-import com.android.server.display.brightness.clamper.BrightnessClamperController;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,7 +31,7 @@ public abstract class BrightnessClamper {
             POWER = type2;
             Type type3 = new Type("WEAR_BEDTIME_MODE", 2);
             WEAR_BEDTIME_MODE = type3;
-            $VALUES = new Type[]{type, type2, type3};
+            $VALUES = new Type[] {type, type2, type3};
         }
 
         public static Type valueOf(String str) {
@@ -42,14 +43,23 @@ public abstract class BrightnessClamper {
         }
     }
 
-    public BrightnessClamper(Handler handler, BrightnessClamperController.ClamperChangeListener clamperChangeListener) {
+    public BrightnessClamper(
+            Handler handler,
+            BrightnessClamperController.ClamperChangeListener clamperChangeListener) {
         this.mHandler = handler;
         this.mChangeListener = clamperChangeListener;
     }
 
     public void dump(PrintWriter printWriter) {
         printWriter.println("BrightnessClamper:" + getType());
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(KillPolicyManager$$ExternalSyntheticOutline0.m(new StringBuilder(" mBrightnessCap: "), this.mBrightnessCap, printWriter, " mIsActive: "), this.mIsActive, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                KillPolicyManager$$ExternalSyntheticOutline0.m(
+                        new StringBuilder(" mBrightnessCap: "),
+                        this.mBrightnessCap,
+                        printWriter,
+                        " mIsActive: "),
+                this.mIsActive,
+                printWriter);
     }
 
     public abstract Type getType();

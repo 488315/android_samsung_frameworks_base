@@ -13,7 +13,8 @@ public final class BatterySaverStateMachineProto {
     public static final long IS_BATTERY_LEVEL_LOW = 1133871366152L;
     public static final long IS_FULL_ENABLED = 1133871366158L;
     public static final long IS_POWERED = 1133871366150L;
-    public static final long LAST_ADAPTIVE_BATTERY_SAVER_CHANGED_EXTERNALLY_ELAPSED = 1112396529681L;
+    public static final long LAST_ADAPTIVE_BATTERY_SAVER_CHANGED_EXTERNALLY_ELAPSED =
+            1112396529681L;
     public static final long SETTINGS_LOADED = 1133871366147L;
     public static final long SETTING_AUTOMATIC_TRIGGER = 1159641169939L;
     public static final long SETTING_BATTERY_SAVER_ENABLED = 1133871366153L;

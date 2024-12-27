@@ -1,7 +1,6 @@
 package android.os;
 
 import android.companion.virtualcamera.SupportedStreamConfiguration$$ExternalSyntheticOutline0;
-import android.os.Parcelable;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -49,7 +48,8 @@ public class CreateAppDataResult implements Parcelable {
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             this.exceptionMessage = parcel.readString();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                             parcel.setDataPosition(dataPosition + readInt);
                             return;
@@ -86,6 +86,7 @@ public class CreateAppDataResult implements Parcelable {
         parcel.writeString(this.exceptionMessage);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

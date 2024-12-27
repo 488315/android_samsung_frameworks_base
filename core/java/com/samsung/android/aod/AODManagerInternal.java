@@ -1,6 +1,5 @@
 package com.samsung.android.aod;
 
-import com.samsung.android.aod.AODManager;
 
 /* loaded from: classes5.dex */
 public abstract class AODManagerInternal {

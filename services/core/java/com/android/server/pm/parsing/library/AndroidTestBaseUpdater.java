@@ -10,7 +10,8 @@ public class AndroidTestBaseUpdater extends PackageSharedLibraryUpdater {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updatePackage(com.android.internal.pm.parsing.pkg.ParsedPackage r3, boolean r4, boolean r5) {
+    public final void updatePackage(
+            com.android.internal.pm.parsing.pkg.ParsedPackage r3, boolean r4, boolean r5) {
         /*
             r2 = this;
             if (r4 != 0) goto L24
@@ -46,6 +47,9 @@ public class AndroidTestBaseUpdater extends PackageSharedLibraryUpdater {
         L3a:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.parsing.library.AndroidTestBaseUpdater.updatePackage(com.android.internal.pm.parsing.pkg.ParsedPackage, boolean, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.parsing.library.AndroidTestBaseUpdater.updatePackage(com.android.internal.pm.parsing.pkg.ParsedPackage,"
+                    + " boolean, boolean):void");
     }
 }

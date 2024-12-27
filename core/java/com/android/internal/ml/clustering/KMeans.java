@@ -2,6 +2,7 @@ package com.android.internal.ml.clustering;
 
 import android.hardware.scontext.SContextConstants;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -163,7 +164,11 @@ public class KMeans {
         }
 
         public String toString() {
-            return "Mean(centroid: " + Arrays.toString(this.mCentroid) + ", size: " + this.mClosestItems.size() + NavigationBarInflaterView.KEY_CODE_END;
+            return "Mean(centroid: "
+                    + Arrays.toString(this.mCentroid)
+                    + ", size: "
+                    + this.mClosestItems.size()
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
     }
 }

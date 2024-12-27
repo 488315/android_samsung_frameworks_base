@@ -3,26 +3,29 @@ package android.hardware.radio.messaging;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CdmaSmsAddress implements Parcelable {
-    public static final Parcelable.Creator<CdmaSmsAddress> CREATOR = new Parcelable.Creator<CdmaSmsAddress>() { // from class: android.hardware.radio.messaging.CdmaSmsAddress.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSmsAddress createFromParcel(Parcel _aidl_source) {
-            CdmaSmsAddress _aidl_out = new CdmaSmsAddress();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CdmaSmsAddress> CREATOR =
+            new Parcelable.Creator<CdmaSmsAddress>() { // from class:
+                // android.hardware.radio.messaging.CdmaSmsAddress.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSmsAddress createFromParcel(Parcel _aidl_source) {
+                    CdmaSmsAddress _aidl_out = new CdmaSmsAddress();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSmsAddress[] newArray(int _aidl_size) {
-            return new CdmaSmsAddress[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSmsAddress[] newArray(int _aidl_size) {
+                    return new CdmaSmsAddress[_aidl_size];
+                }
+            };
     public static final int DIGIT_MODE_EIGHT_BIT = 1;
     public static final int DIGIT_MODE_FOUR_BIT = 0;
     public static final int NUMBER_PLAN_DATA = 3;

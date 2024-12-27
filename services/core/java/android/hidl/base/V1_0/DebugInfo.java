@@ -6,6 +6,7 @@ import android.hardware.usb.V1_1.PortStatus_1_1$$ExternalSyntheticOutline0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -41,7 +42,14 @@ public final class DebugInfo {
         }
 
         public static final String toString(int i) {
-            return i == 0 ? "UNKNOWN" : i == 1 ? "IS_64BIT" : i == 2 ? "IS_32BIT" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i);
+            return i == 0
+                    ? "UNKNOWN"
+                    : i == 1
+                            ? "IS_64BIT"
+                            : i == 2
+                                    ? "IS_32BIT"
+                                    : AudioChannelMask$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("0x"), i);
         }
     }
 
@@ -49,7 +57,8 @@ public final class DebugInfo {
         ArrayList arrayList = new ArrayList();
         HwBlob readBuffer = hwParcel.readBuffer(16L);
         int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+        HwBlob readEmbeddedBuffer =
+                hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             DebugInfo debugInfo = new DebugInfo();
@@ -80,11 +89,16 @@ public final class DebugInfo {
             return false;
         }
         DebugInfo debugInfo = (DebugInfo) obj;
-        return this.pid == debugInfo.pid && this.ptr == debugInfo.ptr && this.arch == debugInfo.arch;
+        return this.pid == debugInfo.pid
+                && this.ptr == debugInfo.ptr
+                && this.arch == debugInfo.arch;
     }
 
     public final int hashCode() {
-        return Objects.hash(AudioConfig$$ExternalSyntheticOutline0.m(this.pid), Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.ptr))), AudioConfig$$ExternalSyntheticOutline0.m(this.arch));
+        return Objects.hash(
+                AudioConfig$$ExternalSyntheticOutline0.m(this.pid),
+                Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.ptr))),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.arch));
     }
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
@@ -98,7 +112,13 @@ public final class DebugInfo {
     }
 
     public final String toString() {
-        return "{.pid = " + this.pid + ", .ptr = " + this.ptr + ", .arch = " + Architecture.toString(this.arch) + "}";
+        return "{.pid = "
+                + this.pid
+                + ", .ptr = "
+                + this.ptr
+                + ", .arch = "
+                + Architecture.toString(this.arch)
+                + "}";
     }
 
     public final void writeEmbeddedToBlob(HwBlob hwBlob, long j) {

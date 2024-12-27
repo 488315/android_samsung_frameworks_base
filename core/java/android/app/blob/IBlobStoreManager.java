@@ -1,6 +1,5 @@
 package android.app.blob;
 
-import android.app.blob.IBlobStoreSession;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,6 +8,7 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.text.TextUtils;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -17,7 +17,8 @@ public interface IBlobStoreManager extends IInterface {
 
     void abandonSession(long j, String str) throws RemoteException;
 
-    void acquireLease(BlobHandle blobHandle, int i, CharSequence charSequence, long j, String str) throws RemoteException;
+    void acquireLease(BlobHandle blobHandle, int i, CharSequence charSequence, long j, String str)
+            throws RemoteException;
 
     long createSession(BlobHandle blobHandle, String str) throws RemoteException;
 
@@ -48,30 +49,34 @@ public interface IBlobStoreManager extends IInterface {
         }
 
         @Override // android.app.blob.IBlobStoreManager
-        public IBlobStoreSession openSession(long sessionId, String packageName) throws RemoteException {
+        public IBlobStoreSession openSession(long sessionId, String packageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.blob.IBlobStoreManager
-        public ParcelFileDescriptor openBlob(BlobHandle handle, String packageName) throws RemoteException {
+        public ParcelFileDescriptor openBlob(BlobHandle handle, String packageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.blob.IBlobStoreManager
-        public void abandonSession(long sessionId, String packageName) throws RemoteException {
-        }
+        public void abandonSession(long sessionId, String packageName) throws RemoteException {}
 
         @Override // android.app.blob.IBlobStoreManager
-        public void acquireLease(BlobHandle handle, int descriptionResId, CharSequence description, long leaseTimeoutMillis, String packageName) throws RemoteException {
-        }
+        public void acquireLease(
+                BlobHandle handle,
+                int descriptionResId,
+                CharSequence description,
+                long leaseTimeoutMillis,
+                String packageName)
+                throws RemoteException {}
 
         @Override // android.app.blob.IBlobStoreManager
-        public void releaseLease(BlobHandle handle, String packageName) throws RemoteException {
-        }
+        public void releaseLease(BlobHandle handle, String packageName) throws RemoteException {}
 
         @Override // android.app.blob.IBlobStoreManager
-        public void releaseAllLeases(String packageName) throws RemoteException {
-        }
+        public void releaseAllLeases(String packageName) throws RemoteException {}
 
         @Override // android.app.blob.IBlobStoreManager
         public long getRemainingLeaseQuotaBytes(String packageName) throws RemoteException {
@@ -79,8 +84,7 @@ public interface IBlobStoreManager extends IInterface {
         }
 
         @Override // android.app.blob.IBlobStoreManager
-        public void waitForIdle(RemoteCallback callback) throws RemoteException {
-        }
+        public void waitForIdle(RemoteCallback callback) throws RemoteException {}
 
         @Override // android.app.blob.IBlobStoreManager
         public List<BlobInfo> queryBlobsForUser(int userId) throws RemoteException {
@@ -88,8 +92,7 @@ public interface IBlobStoreManager extends IInterface {
         }
 
         @Override // android.app.blob.IBlobStoreManager
-        public void deleteBlob(long blobId) throws RemoteException {
-        }
+        public void deleteBlob(long blobId) throws RemoteException {}
 
         @Override // android.app.blob.IBlobStoreManager
         public List<BlobHandle> getLeasedBlobs(String packageName) throws RemoteException {
@@ -97,7 +100,8 @@ public interface IBlobStoreManager extends IInterface {
         }
 
         @Override // android.app.blob.IBlobStoreManager
-        public LeaseInfo getLeaseInfo(BlobHandle blobHandle, String packageName) throws RemoteException {
+        public LeaseInfo getLeaseInfo(BlobHandle blobHandle, String packageName)
+                throws RemoteException {
             return null;
         }
 
@@ -107,7 +111,7 @@ public interface IBlobStoreManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBlobStoreManager {
+    public abstract static class Stub extends Binder implements IBlobStoreManager {
         static final int TRANSACTION_abandonSession = 4;
         static final int TRANSACTION_acquireLease = 5;
         static final int TRANSACTION_createSession = 1;
@@ -181,7 +185,8 @@ public interface IBlobStoreManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBlobStoreManager.DESCRIPTOR);
             }
@@ -224,7 +229,8 @@ public interface IBlobStoreManager extends IInterface {
                 case 5:
                     BlobHandle _arg05 = (BlobHandle) data.readTypedObject(BlobHandle.CREATOR);
                     int _arg15 = data.readInt();
-                    CharSequence _arg2 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg2 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     long _arg3 = data.readLong();
                     String _arg4 = data.readString();
                     data.enforceNoDataAvail();
@@ -252,7 +258,8 @@ public interface IBlobStoreManager extends IInterface {
                     reply.writeLong(_result4);
                     return true;
                 case 9:
-                    RemoteCallback _arg09 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg09 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     waitForIdle(_arg09);
                     reply.writeNoException();
@@ -307,7 +314,8 @@ public interface IBlobStoreManager extends IInterface {
             }
 
             @Override // android.app.blob.IBlobStoreManager
-            public long createSession(BlobHandle handle, String packageName) throws RemoteException {
+            public long createSession(BlobHandle handle, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -325,7 +333,8 @@ public interface IBlobStoreManager extends IInterface {
             }
 
             @Override // android.app.blob.IBlobStoreManager
-            public IBlobStoreSession openSession(long sessionId, String packageName) throws RemoteException {
+            public IBlobStoreSession openSession(long sessionId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -334,7 +343,8 @@ public interface IBlobStoreManager extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    IBlobStoreSession _result = IBlobStoreSession.Stub.asInterface(_reply.readStrongBinder());
+                    IBlobStoreSession _result =
+                            IBlobStoreSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -343,7 +353,8 @@ public interface IBlobStoreManager extends IInterface {
             }
 
             @Override // android.app.blob.IBlobStoreManager
-            public ParcelFileDescriptor openBlob(BlobHandle handle, String packageName) throws RemoteException {
+            public ParcelFileDescriptor openBlob(BlobHandle handle, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -352,7 +363,9 @@ public interface IBlobStoreManager extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -377,7 +390,13 @@ public interface IBlobStoreManager extends IInterface {
             }
 
             @Override // android.app.blob.IBlobStoreManager
-            public void acquireLease(BlobHandle handle, int descriptionResId, CharSequence description, long leaseTimeoutMillis, String packageName) throws RemoteException {
+            public void acquireLease(
+                    BlobHandle handle,
+                    int descriptionResId,
+                    CharSequence description,
+                    long leaseTimeoutMillis,
+                    String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -513,7 +532,8 @@ public interface IBlobStoreManager extends IInterface {
             }
 
             @Override // android.app.blob.IBlobStoreManager
-            public LeaseInfo getLeaseInfo(BlobHandle blobHandle, String packageName) throws RemoteException {
+            public LeaseInfo getLeaseInfo(BlobHandle blobHandle, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

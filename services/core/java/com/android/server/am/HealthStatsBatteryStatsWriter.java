@@ -11,15 +11,25 @@ public final class HealthStatsBatteryStatsWriter {
     public final long mNowRealtimeMs = SystemClock.elapsedRealtime();
     public final long mNowUptimeMs = SystemClock.uptimeMillis();
 
-    public final void addTimer(HealthStatsWriter healthStatsWriter, int i, BatteryStats.Timer timer) {
+    public final void addTimer(
+            HealthStatsWriter healthStatsWriter, int i, BatteryStats.Timer timer) {
         if (timer != null) {
-            healthStatsWriter.addTimer(i, timer.getCountLocked(0), timer.getTotalTimeLocked(this.mNowRealtimeMs * 1000, 0) / 1000);
+            healthStatsWriter.addTimer(
+                    i,
+                    timer.getCountLocked(0),
+                    timer.getTotalTimeLocked(this.mNowRealtimeMs * 1000, 0) / 1000);
         }
     }
 
-    public final void addTimers(HealthStatsWriter healthStatsWriter, int i, String str, BatteryStats.Timer timer) {
+    public final void addTimers(
+            HealthStatsWriter healthStatsWriter, int i, String str, BatteryStats.Timer timer) {
         if (timer != null) {
-            healthStatsWriter.addTimers(i, str, new TimerStat(timer.getCountLocked(0), timer.getTotalTimeLocked(this.mNowRealtimeMs * 1000, 0) / 1000));
+            healthStatsWriter.addTimers(
+                    i,
+                    str,
+                    new TimerStat(
+                            timer.getCountLocked(0),
+                            timer.getTotalTimeLocked(this.mNowRealtimeMs * 1000, 0) / 1000));
         }
     }
 }

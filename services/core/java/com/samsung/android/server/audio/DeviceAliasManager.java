@@ -33,8 +33,8 @@ public final class DeviceAliasManager {
         SparseArray sparseArray = new SparseArray();
         this.mDevices = sparseArray;
         this.mLeOnlyDevices = new SparseArray();
-        sparseArray.put(2, new DeviceAlias(new int[]{1}, new int[]{0, 8}));
-        sparseArray.put(1, new DeviceAlias(new int[]{2}, new int[]{0, 8}));
+        sparseArray.put(2, new DeviceAlias(new int[] {1}, new int[] {0, 8}));
+        sparseArray.put(1, new DeviceAlias(new int[] {2}, new int[] {0, 8}));
         int numStreamTypes = AudioSystem.getNumStreamTypes();
         int[] iArr = new int[numStreamTypes];
         for (int i = 0; i < numStreamTypes; i++) {
@@ -42,10 +42,10 @@ public final class DeviceAliasManager {
                 iArr[i] = i;
             }
         }
-        this.mDevices.put(128, new DeviceAlias(new int[]{536870912, 536870914}, iArr));
-        this.mDevices.put(536870912, new DeviceAlias(new int[]{128, 536870914}, iArr));
-        this.mDevices.put(536870914, new DeviceAlias(new int[]{536870912, 128}, iArr));
-        this.mLeOnlyDevices.put(536870912, new DeviceAlias(new int[]{536870914}, iArr));
-        this.mLeOnlyDevices.put(536870914, new DeviceAlias(new int[]{536870912}, iArr));
+        this.mDevices.put(128, new DeviceAlias(new int[] {536870912, 536870914}, iArr));
+        this.mDevices.put(536870912, new DeviceAlias(new int[] {128, 536870914}, iArr));
+        this.mDevices.put(536870914, new DeviceAlias(new int[] {536870912, 128}, iArr));
+        this.mLeOnlyDevices.put(536870912, new DeviceAlias(new int[] {536870914}, iArr));
+        this.mLeOnlyDevices.put(536870914, new DeviceAlias(new int[] {536870912}, iArr));
     }
 }

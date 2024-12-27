@@ -15,9 +15,11 @@ import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
+
 import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -98,19 +100,26 @@ public final class ArtManagerService extends IArtManager.Stub {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final android.content.pm.dex.PackageOptimizationInfo getPackageOptimizationInfo(android.content.pm.ApplicationInfo r23, java.lang.String r24, java.lang.String r25) {
+        public final android.content.pm.dex.PackageOptimizationInfo getPackageOptimizationInfo(
+                android.content.pm.ApplicationInfo r23,
+                java.lang.String r24,
+                java.lang.String r25) {
             /*
                 Method dump skipped, instructions count: 900
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.dex.ArtManagerService.ArtManagerInternalImpl.getPackageOptimizationInfo(android.content.pm.ApplicationInfo, java.lang.String, java.lang.String):android.content.pm.dex.PackageOptimizationInfo");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.pm.dex.ArtManagerService.ArtManagerInternalImpl.getPackageOptimizationInfo(android.content.pm.ApplicationInfo,"
+                        + " java.lang.String,"
+                        + " java.lang.String):android.content.pm.dex.PackageOptimizationInfo");
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x0029, code lost:
-    
-        throw new java.lang.IllegalArgumentException("Compilation reason not configured for TRON logging: ".concat(r1));
-     */
+
+       throw new java.lang.IllegalArgumentException("Compilation reason not configured for TRON logging: ".concat(r1));
+    */
     static {
         /*
             java.lang.String r0 = "ArtManagerService"
@@ -138,7 +147,9 @@ public final class ArtManagerService extends IArtManager.Stub {
         L2a:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.dex.ArtManagerService.<clinit>():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.dex.ArtManagerService.<clinit>():void");
     }
 
     public ArtManagerService(Context context) {
@@ -203,13 +214,17 @@ public final class ArtManagerService extends IArtManager.Stub {
     }
 
     public final boolean checkAndroidPermissions(int i, String str) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.READ_RUNTIME_PROFILES", "ArtManagerService");
-        int noteOp = ((AppOpsManager) this.mContext.getSystemService(AppOpsManager.class)).noteOp(43, i, str);
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.READ_RUNTIME_PROFILES", "ArtManagerService");
+        int noteOp =
+                ((AppOpsManager) this.mContext.getSystemService(AppOpsManager.class))
+                        .noteOp(43, i, str);
         if (noteOp != 0) {
             if (noteOp != 3) {
                 return false;
             }
-            this.mContext.enforceCallingOrSelfPermission("android.permission.PACKAGE_USAGE_STATS", "ArtManagerService");
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.PACKAGE_USAGE_STATS", "ArtManagerService");
         }
         return true;
     }
@@ -223,64 +238,95 @@ public final class ArtManagerService extends IArtManager.Stub {
             return true;
         }
         if (i == 1) {
-            return (Build.IS_USERDEBUG || Build.IS_ENG) && SystemProperties.getBoolean("persist.device_config.runtime_native_boot.profilebootclasspath", SystemProperties.getBoolean("dalvik.vm.profilebootclasspath", false));
+            return (Build.IS_USERDEBUG || Build.IS_ENG)
+                    && SystemProperties.getBoolean(
+                            "persist.device_config.runtime_native_boot.profilebootclasspath",
+                            SystemProperties.getBoolean("dalvik.vm.profilebootclasspath", false));
         }
-        throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid profile type:"));
+        throw new IllegalArgumentException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid profile type:"));
     }
 
-    public final void postError(final int i, final ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallback, final String str) {
+    public final void postError(
+            final int i,
+            final ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallback,
+            final String str) {
         if (DEBUG) {
-            Slog.d("ArtManagerService", "Failed to snapshot profile for " + str + " with error: " + i);
+            Slog.d(
+                    "ArtManagerService",
+                    "Failed to snapshot profile for " + str + " with error: " + i);
         }
-        this.mHandler.post(new Runnable() { // from class: com.android.server.pm.dex.ArtManagerService$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallback2 = iSnapshotRuntimeProfileCallback;
-                int i2 = i;
-                String str2 = str;
-                try {
-                    iSnapshotRuntimeProfileCallback2.onError(i2);
-                } catch (RemoteException | RuntimeException e) {
-                    Slog.w("ArtManagerService", "Failed to callback after profile snapshot for " + str2, e);
-                }
-            }
-        });
-    }
-
-    public final void postSuccess(final ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallback, final ParcelFileDescriptor parcelFileDescriptor, final String str) {
-        if (DEBUG) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("Successfully snapshot profile for ", str, "ArtManagerService");
-        }
-        this.mHandler.post(new Runnable() { // from class: com.android.server.pm.dex.ArtManagerService$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                ParcelFileDescriptor parcelFileDescriptor2 = parcelFileDescriptor;
-                ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallback2 = iSnapshotRuntimeProfileCallback;
-                String str2 = str;
-                try {
-                    try {
-                        if (parcelFileDescriptor2.getFileDescriptor().valid()) {
-                            iSnapshotRuntimeProfileCallback2.onSuccess(parcelFileDescriptor2);
-                        } else {
-                            Slog.wtf("ArtManagerService", "The snapshot FD became invalid before posting the result for " + str2);
-                            iSnapshotRuntimeProfileCallback2.onError(2);
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.pm.dex.ArtManagerService$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallback2 =
+                                iSnapshotRuntimeProfileCallback;
+                        int i2 = i;
+                        String str2 = str;
+                        try {
+                            iSnapshotRuntimeProfileCallback2.onError(i2);
+                        } catch (RemoteException | RuntimeException e) {
+                            Slog.w(
+                                    "ArtManagerService",
+                                    "Failed to callback after profile snapshot for " + str2,
+                                    e);
                         }
-                    } catch (RemoteException | RuntimeException e) {
-                        Slog.w("ArtManagerService", "Failed to call onSuccess after profile snapshot for " + str2, e);
                     }
-                    IoUtils.closeQuietly(parcelFileDescriptor2);
-                } catch (Throwable th) {
-                    IoUtils.closeQuietly(parcelFileDescriptor2);
-                    throw th;
-                }
-            }
-        });
+                });
+    }
+
+    public final void postSuccess(
+            final ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallback,
+            final ParcelFileDescriptor parcelFileDescriptor,
+            final String str) {
+        if (DEBUG) {
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "Successfully snapshot profile for ", str, "ArtManagerService");
+        }
+        this.mHandler.post(
+                new Runnable() { // from class:
+                    // com.android.server.pm.dex.ArtManagerService$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ParcelFileDescriptor parcelFileDescriptor2 = parcelFileDescriptor;
+                        ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallback2 =
+                                iSnapshotRuntimeProfileCallback;
+                        String str2 = str;
+                        try {
+                            try {
+                                if (parcelFileDescriptor2.getFileDescriptor().valid()) {
+                                    iSnapshotRuntimeProfileCallback2.onSuccess(
+                                            parcelFileDescriptor2);
+                                } else {
+                                    Slog.wtf(
+                                            "ArtManagerService",
+                                            "The snapshot FD became invalid before posting the"
+                                                + " result for "
+                                                    + str2);
+                                    iSnapshotRuntimeProfileCallback2.onError(2);
+                                }
+                            } catch (RemoteException | RuntimeException e) {
+                                Slog.w(
+                                        "ArtManagerService",
+                                        "Failed to call onSuccess after profile snapshot for "
+                                                + str2,
+                                        e);
+                            }
+                            IoUtils.closeQuietly(parcelFileDescriptor2);
+                        } catch (Throwable th) {
+                            IoUtils.closeQuietly(parcelFileDescriptor2);
+                            throw th;
+                        }
+                    }
+                });
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0038, code lost:
-    
-        if ((r2.applicationInfo.flags & 2) != 2) goto L21;
-     */
+
+       if ((r2.applicationInfo.flags & 2) != 2) goto L21;
+    */
     /* JADX WARN: Removed duplicated region for block: B:18:0x004a  */
     /* JADX WARN: Removed duplicated region for block: B:20:0x004f  */
     /* JADX WARN: Removed duplicated region for block: B:23:0x005b  */
@@ -290,11 +336,21 @@ public final class ArtManagerService extends IArtManager.Stub {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void snapshotRuntimeProfile(int r10, java.lang.String r11, java.lang.String r12, android.content.pm.dex.ISnapshotRuntimeProfileCallback r13, java.lang.String r14) {
+    public final void snapshotRuntimeProfile(
+            int r10,
+            java.lang.String r11,
+            java.lang.String r12,
+            android.content.pm.dex.ISnapshotRuntimeProfileCallback r13,
+            java.lang.String r14) {
         /*
             Method dump skipped, instructions count: 285
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.dex.ArtManagerService.snapshotRuntimeProfile(int, java.lang.String, java.lang.String, android.content.pm.dex.ISnapshotRuntimeProfileCallback, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.dex.ArtManagerService.snapshotRuntimeProfile(int,"
+                    + " java.lang.String, java.lang.String,"
+                    + " android.content.pm.dex.ISnapshotRuntimeProfileCallback,"
+                    + " java.lang.String):void");
     }
 }

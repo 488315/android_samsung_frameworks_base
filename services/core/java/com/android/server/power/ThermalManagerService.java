@@ -28,6 +28,7 @@ import android.os.SystemClock;
 import android.os.Temperature;
 import android.util.ArrayMap;
 import android.util.EventLog;
+
 import com.android.internal.hidden_from_bootclasspath.android.os.Flags;
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.ConcurrentUtils;
@@ -38,7 +39,7 @@ import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.FgThread;
 import com.android.server.SystemService;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.power.ThermalManagerService;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -88,8 +89,7 @@ public final class ThermalManagerService extends SystemService {
             }
         }
 
-        public TemperatureWatcher() {
-        }
+        public TemperatureWatcher() {}
 
         public static float normalizeTemperature(float f, float f2) {
             float f3 = f2 - 30.0f;
@@ -109,13 +109,25 @@ public final class ThermalManagerService extends SystemService {
                         updateTemperature();
                     }
                     if (this.mSamples.isEmpty()) {
-                        android.util.Slog.e("ThermalManagerService", "No temperature samples found");
-                        FrameworkStatsLog.write(FrameworkStatsLog.THERMAL_HEADROOM_CALLED, Binder.getCallingUid(), 5, Float.NaN, i);
+                        android.util.Slog.e(
+                                "ThermalManagerService", "No temperature samples found");
+                        FrameworkStatsLog.write(
+                                FrameworkStatsLog.THERMAL_HEADROOM_CALLED,
+                                Binder.getCallingUid(),
+                                5,
+                                Float.NaN,
+                                i);
                         return Float.NaN;
                     }
                     if (this.mSevereThresholds.isEmpty()) {
-                        android.util.Slog.e("ThermalManagerService", "No temperature thresholds found");
-                        FrameworkStatsLog.write(FrameworkStatsLog.THERMAL_HEADROOM_CALLED, Binder.getCallingUid(), 6, Float.NaN, i);
+                        android.util.Slog.e(
+                                "ThermalManagerService", "No temperature thresholds found");
+                        FrameworkStatsLog.write(
+                                FrameworkStatsLog.THERMAL_HEADROOM_CALLED,
+                                Binder.getCallingUid(),
+                                6,
+                                Float.NaN,
+                                i);
                         return Float.NaN;
                     }
                     int i2 = 0;
@@ -126,26 +138,38 @@ public final class ThermalManagerService extends SystemService {
                         Float f2 = (Float) this.mSevereThresholds.get(str);
                         if (f2 == null) {
                             i2++;
-                            android.util.Slog.e("ThermalManagerService", "No threshold found for " + str);
+                            android.util.Slog.e(
+                                    "ThermalManagerService", "No threshold found for " + str);
                         } else {
                             float f3 = ((Sample) arrayList.getLast()).temperature;
                             if (arrayList.size() < 3) {
                                 normalizeTemperature = normalizeTemperature(f3, f2.floatValue());
-                                if (!Float.isNaN(f) && normalizeTemperature <= f) {
-                                }
+                                if (!Float.isNaN(f) && normalizeTemperature <= f) {}
                                 f = normalizeTemperature;
                             } else {
-                                normalizeTemperature = normalizeTemperature((getSlopeOf(arrayList) * i * 1000.0f) + f3, f2.floatValue());
-                                if (!Float.isNaN(f) && normalizeTemperature <= f) {
-                                }
+                                normalizeTemperature =
+                                        normalizeTemperature(
+                                                (getSlopeOf(arrayList) * i * 1000.0f) + f3,
+                                                f2.floatValue());
+                                if (!Float.isNaN(f) && normalizeTemperature <= f) {}
                                 f = normalizeTemperature;
                             }
                         }
                     }
                     if (i2 == this.mSamples.size()) {
-                        FrameworkStatsLog.write(FrameworkStatsLog.THERMAL_HEADROOM_CALLED, Binder.getCallingUid(), 6, Float.NaN, i);
+                        FrameworkStatsLog.write(
+                                FrameworkStatsLog.THERMAL_HEADROOM_CALLED,
+                                Binder.getCallingUid(),
+                                6,
+                                Float.NaN,
+                                i);
                     } else {
-                        FrameworkStatsLog.write(FrameworkStatsLog.THERMAL_HEADROOM_CALLED, Binder.getCallingUid(), 1, f, i);
+                        FrameworkStatsLog.write(
+                                FrameworkStatsLog.THERMAL_HEADROOM_CALLED,
+                                Binder.getCallingUid(),
+                                1,
+                                f,
+                                i);
                     }
                     return f;
                 } catch (Throwable th) {
@@ -200,18 +224,24 @@ public final class ThermalManagerService extends SystemService {
         public final void updateTemperature() {
             synchronized (this.mSamples) {
                 try {
-                    if (SystemClock.elapsedRealtime() - this.mLastForecastCallTimeMillis >= this.mInactivityThresholdMillis) {
+                    if (SystemClock.elapsedRealtime() - this.mLastForecastCallTimeMillis
+                            >= this.mInactivityThresholdMillis) {
                         this.mSamples.clear();
                         return;
                     }
-                    this.mHandler.postDelayed(new Runnable() { // from class: com.android.server.power.ThermalManagerService$TemperatureWatcher$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ThermalManagerService.TemperatureWatcher.this.updateTemperature();
-                        }
-                    }, 1000L);
+                    this.mHandler.postDelayed(
+                            new Runnable() { // from class:
+                                             // com.android.server.power.ThermalManagerService$TemperatureWatcher$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ThermalManagerService.TemperatureWatcher.this
+                                            .updateTemperature();
+                                }
+                            },
+                            1000L);
                     long elapsedRealtime = SystemClock.elapsedRealtime();
-                    List currentTemperatures = ThermalManagerService.this.mHalWrapper.getCurrentTemperatures(3, true);
+                    List currentTemperatures =
+                            ThermalManagerService.this.mHalWrapper.getCurrentTemperatures(3, true);
                     int i = 0;
                     while (true) {
                         ArrayList arrayList = (ArrayList) currentTemperatures;
@@ -220,7 +250,11 @@ public final class ThermalManagerService extends SystemService {
                         }
                         Temperature temperature = (Temperature) arrayList.get(i);
                         if (!Float.isNaN(temperature.getValue())) {
-                            ArrayList arrayList2 = (ArrayList) this.mSamples.computeIfAbsent(temperature.getName(), new ThermalManagerService$TemperatureWatcher$$ExternalSyntheticLambda1());
+                            ArrayList arrayList2 =
+                                    (ArrayList)
+                                            this.mSamples.computeIfAbsent(
+                                                    temperature.getName(),
+                                                    new ThermalManagerService$TemperatureWatcher$$ExternalSyntheticLambda1());
                             if (arrayList2.size() == 30) {
                                 arrayList2.removeFirst();
                             }
@@ -237,21 +271,26 @@ public final class ThermalManagerService extends SystemService {
         public final void updateThresholds() {
             synchronized (this.mSamples) {
                 try {
-                    List temperatureThresholds = ThermalManagerService.this.mHalWrapper.getTemperatureThresholds(3, true);
+                    List temperatureThresholds =
+                            ThermalManagerService.this.mHalWrapper.getTemperatureThresholds(
+                                    3, true);
                     if (Flags.allowThermalHeadroomThresholds()) {
                         Arrays.fill(this.mHeadroomThresholds, Float.NaN);
                     }
                     for (int i = 0; i < temperatureThresholds.size(); i++) {
-                        TemperatureThreshold temperatureThreshold = (TemperatureThreshold) temperatureThresholds.get(i);
+                        TemperatureThreshold temperatureThreshold =
+                                (TemperatureThreshold) temperatureThresholds.get(i);
                         float[] fArr = temperatureThreshold.hotThrottlingThresholds;
                         if (fArr.length > 3) {
                             float f = fArr[3];
                             if (!Float.isNaN(f)) {
-                                this.mSevereThresholds.put(temperatureThreshold.name, Float.valueOf(f));
+                                this.mSevereThresholds.put(
+                                        temperatureThreshold.name, Float.valueOf(f));
                                 if (Flags.allowThermalHeadroomThresholds()) {
                                     for (int i2 = 1; i2 <= 6; i2++) {
                                         if (i2 != 3) {
-                                            float[] fArr2 = temperatureThreshold.hotThrottlingThresholds;
+                                            float[] fArr2 =
+                                                    temperatureThreshold.hotThrottlingThresholds;
                                             if (fArr2.length > i2) {
                                                 updateHeadroomThreshold(i2, fArr2[i2], f);
                                             }
@@ -281,9 +320,14 @@ public final class ThermalManagerService extends SystemService {
                     IThermal service = IThermal.getService(true);
                     this.mThermalHal10 = service;
                     service.linkToDeath(new ThermalHalWrapper.DeathRecipient(), 5612L);
-                    android.util.Slog.i("ThermalManagerService$ThermalHalWrapper", "Thermal HAL 1.0 service connected, no thermal call back will be called due to legacy API.");
+                    android.util.Slog.i(
+                            "ThermalManagerService$ThermalHalWrapper",
+                            "Thermal HAL 1.0 service connected, no thermal call back will be called"
+                                + " due to legacy API.");
                 } catch (RemoteException | NoSuchElementException unused) {
-                    android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Thermal HAL 1.0 service not connected.");
+                    android.util.Slog.e(
+                            "ThermalManagerService$ThermalHalWrapper",
+                            "Thermal HAL 1.0 service not connected.");
                     this.mThermalHal10 = null;
                 }
                 if (this.mThermalHal10 == null) {
@@ -298,7 +342,9 @@ public final class ThermalManagerService extends SystemService {
             synchronized (this.mHalLock) {
                 try {
                     printWriter.print("\t");
-                    printWriter.println("ThermalHAL 1.0 connected: ".concat(this.mThermalHal10 != null ? "yes" : "no"));
+                    printWriter.println(
+                            "ThermalHAL 1.0 connected: "
+                                    .concat(this.mThermalHal10 != null ? "yes" : "no"));
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -314,9 +360,14 @@ public final class ThermalManagerService extends SystemService {
                     return arrayList;
                 }
                 try {
-                    iThermal.getCoolingDevices(new ThermalManagerService$ThermalHal10Wrapper$$ExternalSyntheticLambda0(arrayList, i, z, 0));
+                    iThermal.getCoolingDevices(
+                            new ThermalManagerService$ThermalHal10Wrapper$$ExternalSyntheticLambda0(
+                                    arrayList, i, z, 0));
                 } catch (RemoteException e) {
-                    android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getCurrentCoolingDevices, reconnecting...", e);
+                    android.util.Slog.e(
+                            "ThermalManagerService$ThermalHalWrapper",
+                            "Couldn't getCurrentCoolingDevices, reconnecting...",
+                            e);
                     connectToHal();
                 }
                 return arrayList;
@@ -332,9 +383,14 @@ public final class ThermalManagerService extends SystemService {
                     return arrayList;
                 }
                 try {
-                    iThermal.getTemperatures(new ThermalManagerService$ThermalHal10Wrapper$$ExternalSyntheticLambda1(arrayList, i, z, 0));
+                    iThermal.getTemperatures(
+                            new ThermalManagerService$ThermalHal10Wrapper$$ExternalSyntheticLambda1(
+                                    arrayList, i, z, 0));
                 } catch (RemoteException e) {
-                    android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getCurrentTemperatures, reconnecting...", e);
+                    android.util.Slog.e(
+                            "ThermalManagerService$ThermalHalWrapper",
+                            "Couldn't getCurrentTemperatures, reconnecting...",
+                            e);
                     connectToHal();
                 }
                 return arrayList;
@@ -353,37 +409,60 @@ public final class ThermalManagerService extends SystemService {
         public final Object mThermalCallback11;
         public Object mThermalHal11;
 
-        public ThermalHal11Wrapper(ThermalManagerService$$ExternalSyntheticLambda0 thermalManagerService$$ExternalSyntheticLambda0, int i) {
+        public ThermalHal11Wrapper(
+                ThermalManagerService$$ExternalSyntheticLambda0
+                        thermalManagerService$$ExternalSyntheticLambda0,
+                int i) {
             this.$r8$classId = i;
             switch (i) {
                 case 1:
                     this.mThermalHal11 = null;
-                    this.mThermalCallback11 = new IThermalChangedCallback.Stub() { // from class: com.android.server.power.ThermalManagerService$ThermalHal20Wrapper$1
-                        public final void notifyThrottling(android.hardware.thermal.V2_0.Temperature temperature) {
-                            Temperature temperature2 = new Temperature(temperature.value, temperature.type, temperature.name, temperature.throttlingStatus);
-                            long clearCallingIdentity = Binder.clearCallingIdentity();
-                            try {
-                                ThermalManagerService.ThermalHal11Wrapper.this.mCallback.onValues(temperature2);
-                            } finally {
-                                Binder.restoreCallingIdentity(clearCallingIdentity);
-                            }
-                        }
-                    };
+                    this.mThermalCallback11 =
+                            new IThermalChangedCallback
+                                    .Stub() { // from class:
+                                              // com.android.server.power.ThermalManagerService$ThermalHal20Wrapper$1
+                                public final void notifyThrottling(
+                                        android.hardware.thermal.V2_0.Temperature temperature) {
+                                    Temperature temperature2 =
+                                            new Temperature(
+                                                    temperature.value,
+                                                    temperature.type,
+                                                    temperature.name,
+                                                    temperature.throttlingStatus);
+                                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                                    try {
+                                        ThermalManagerService.ThermalHal11Wrapper.this.mCallback
+                                                .onValues(temperature2);
+                                    } finally {
+                                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                                    }
+                                }
+                            };
                     this.mCallback = thermalManagerService$$ExternalSyntheticLambda0;
                     break;
                 default:
                     this.mThermalHal11 = null;
-                    this.mThermalCallback11 = new IThermalCallback.Stub() { // from class: com.android.server.power.ThermalManagerService.ThermalHal11Wrapper.1
-                        public final void notifyThrottling(boolean z, android.hardware.thermal.V1_0.Temperature temperature) {
-                            Temperature temperature2 = new Temperature(temperature.currentValue, temperature.type, temperature.name, z ? 3 : 0);
-                            long clearCallingIdentity = Binder.clearCallingIdentity();
-                            try {
-                                ThermalHal11Wrapper.this.mCallback.onValues(temperature2);
-                            } finally {
-                                Binder.restoreCallingIdentity(clearCallingIdentity);
-                            }
-                        }
-                    };
+                    this.mThermalCallback11 =
+                            new IThermalCallback
+                                    .Stub() { // from class:
+                                              // com.android.server.power.ThermalManagerService.ThermalHal11Wrapper.1
+                                public final void notifyThrottling(
+                                        boolean z,
+                                        android.hardware.thermal.V1_0.Temperature temperature) {
+                                    Temperature temperature2 =
+                                            new Temperature(
+                                                    temperature.currentValue,
+                                                    temperature.type,
+                                                    temperature.name,
+                                                    z ? 3 : 0);
+                                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                                    try {
+                                        ThermalHal11Wrapper.this.mCallback.onValues(temperature2);
+                                    } finally {
+                                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                                    }
+                                }
+                            };
                     this.mCallback = thermalManagerService$$ExternalSyntheticLambda0;
                     break;
             }
@@ -398,13 +477,21 @@ public final class ThermalManagerService extends SystemService {
                     synchronized (this.mHalLock) {
                         z = true;
                         try {
-                            android.hardware.thermal.V1_1.IThermal service = android.hardware.thermal.V1_1.IThermal.getService(true);
+                            android.hardware.thermal.V1_1.IThermal service =
+                                    android.hardware.thermal.V1_1.IThermal.getService(true);
                             this.mThermalHal11 = service;
                             service.linkToDeath(new ThermalHalWrapper.DeathRecipient(), 5612L);
-                            ((android.hardware.thermal.V1_1.IThermal) this.mThermalHal11).registerThermalCallback((AnonymousClass1) this.mThermalCallback11);
-                            android.util.Slog.i("ThermalManagerService$ThermalHalWrapper", "Thermal HAL 1.1 service connected, limited thermal functions due to legacy API.");
+                            ((android.hardware.thermal.V1_1.IThermal) this.mThermalHal11)
+                                    .registerThermalCallback(
+                                            (AnonymousClass1) this.mThermalCallback11);
+                            android.util.Slog.i(
+                                    "ThermalManagerService$ThermalHalWrapper",
+                                    "Thermal HAL 1.1 service connected, limited thermal functions"
+                                        + " due to legacy API.");
                         } catch (RemoteException | NoSuchElementException unused) {
-                            android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Thermal HAL 1.1 service not connected.");
+                            android.util.Slog.e(
+                                    "ThermalManagerService$ThermalHalWrapper",
+                                    "Thermal HAL 1.1 service not connected.");
                             this.mThermalHal11 = null;
                         }
                         if (((android.hardware.thermal.V1_1.IThermal) this.mThermalHal11) == null) {
@@ -416,13 +503,23 @@ public final class ThermalManagerService extends SystemService {
                     synchronized (this.mHalLock) {
                         z2 = true;
                         try {
-                            android.hardware.thermal.V2_0.IThermal service2 = android.hardware.thermal.V2_0.IThermal.getService(true);
+                            android.hardware.thermal.V2_0.IThermal service2 =
+                                    android.hardware.thermal.V2_0.IThermal.getService(true);
                             this.mThermalHal11 = service2;
                             service2.linkToDeath(new ThermalHalWrapper.DeathRecipient(), 5612L);
-                            ((android.hardware.thermal.V2_0.IThermal) this.mThermalHal11).registerThermalChangedCallback((ThermalManagerService$ThermalHal20Wrapper$1) this.mThermalCallback11, false, 0);
-                            android.util.Slog.i("ThermalManagerService$ThermalHalWrapper", "Thermal HAL 2.0 service connected.");
+                            ((android.hardware.thermal.V2_0.IThermal) this.mThermalHal11)
+                                    .registerThermalChangedCallback(
+                                            (ThermalManagerService$ThermalHal20Wrapper$1)
+                                                    this.mThermalCallback11,
+                                            false,
+                                            0);
+                            android.util.Slog.i(
+                                    "ThermalManagerService$ThermalHalWrapper",
+                                    "Thermal HAL 2.0 service connected.");
                         } catch (RemoteException | NoSuchElementException unused2) {
-                            android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Thermal HAL 2.0 service not connected.");
+                            android.util.Slog.e(
+                                    "ThermalManagerService$ThermalHalWrapper",
+                                    "Thermal HAL 2.0 service not connected.");
                             this.mThermalHal11 = null;
                         }
                         if (((android.hardware.thermal.V2_0.IThermal) this.mThermalHal11) == null) {
@@ -440,7 +537,14 @@ public final class ThermalManagerService extends SystemService {
                     synchronized (this.mHalLock) {
                         try {
                             printWriter.print("\t");
-                            printWriter.println("ThermalHAL 1.1 connected: ".concat(((android.hardware.thermal.V1_1.IThermal) this.mThermalHal11) != null ? "yes" : "no"));
+                            printWriter.println(
+                                    "ThermalHAL 1.1 connected: "
+                                            .concat(
+                                                    ((android.hardware.thermal.V1_1.IThermal)
+                                                                            this.mThermalHal11)
+                                                                    != null
+                                                            ? "yes"
+                                                            : "no"));
                         } finally {
                         }
                     }
@@ -449,7 +553,14 @@ public final class ThermalManagerService extends SystemService {
                     synchronized (this.mHalLock) {
                         try {
                             printWriter.print("\t");
-                            printWriter.println("ThermalHAL 2.0 connected: ".concat(((android.hardware.thermal.V2_0.IThermal) this.mThermalHal11) != null ? "yes" : "no"));
+                            printWriter.println(
+                                    "ThermalHAL 2.0 connected: "
+                                            .concat(
+                                                    ((android.hardware.thermal.V2_0.IThermal)
+                                                                            this.mThermalHal11)
+                                                                    != null
+                                                            ? "yes"
+                                                            : "no"));
                         } finally {
                         }
                     }
@@ -465,12 +576,18 @@ public final class ThermalManagerService extends SystemService {
                 case 0:
                     synchronized (this.mHalLock) {
                         arrayList = new ArrayList();
-                        android.hardware.thermal.V1_1.IThermal iThermal = (android.hardware.thermal.V1_1.IThermal) this.mThermalHal11;
+                        android.hardware.thermal.V1_1.IThermal iThermal =
+                                (android.hardware.thermal.V1_1.IThermal) this.mThermalHal11;
                         if (iThermal != null) {
                             try {
-                                iThermal.getCoolingDevices(new ThermalManagerService$ThermalHal10Wrapper$$ExternalSyntheticLambda0(arrayList, i, z, 1));
+                                iThermal.getCoolingDevices(
+                                        new ThermalManagerService$ThermalHal10Wrapper$$ExternalSyntheticLambda0(
+                                                arrayList, i, z, 1));
                             } catch (RemoteException e) {
-                                android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getCurrentCoolingDevices, reconnecting...", e);
+                                android.util.Slog.e(
+                                        "ThermalManagerService$ThermalHalWrapper",
+                                        "Couldn't getCurrentCoolingDevices, reconnecting...",
+                                        e);
                                 connectToHal();
                             }
                         }
@@ -479,25 +596,49 @@ public final class ThermalManagerService extends SystemService {
                 default:
                     synchronized (this.mHalLock) {
                         arrayList2 = new ArrayList();
-                        android.hardware.thermal.V2_0.IThermal iThermal2 = (android.hardware.thermal.V2_0.IThermal) this.mThermalHal11;
+                        android.hardware.thermal.V2_0.IThermal iThermal2 =
+                                (android.hardware.thermal.V2_0.IThermal) this.mThermalHal11;
                         if (iThermal2 != null) {
                             try {
-                                iThermal2.getCurrentCoolingDevices(z, i, new IThermal.getCurrentCoolingDevicesCallback() { // from class: com.android.server.power.ThermalManagerService$ThermalHal20Wrapper$$ExternalSyntheticLambda0
-                                    public final void onValues(ThermalStatus thermalStatus, ArrayList arrayList3) {
-                                        List list = arrayList2;
-                                        if (thermalStatus.code != 0) {
-                                            BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(new StringBuilder("Couldn't get cooling device because of HAL error: "), thermalStatus.debugMessage, "ThermalManagerService$ThermalHalWrapper");
-                                            return;
-                                        }
-                                        Iterator it = arrayList3.iterator();
-                                        while (it.hasNext()) {
-                                            CoolingDevice coolingDevice = (CoolingDevice) it.next();
-                                            list.add(new android.os.CoolingDevice(coolingDevice.value, coolingDevice.type, coolingDevice.name));
-                                        }
-                                    }
-                                });
+                                iThermal2.getCurrentCoolingDevices(
+                                        z,
+                                        i,
+                                        new IThermal
+                                                .getCurrentCoolingDevicesCallback() { // from class:
+                                            // com.android.server.power.ThermalManagerService$ThermalHal20Wrapper$$ExternalSyntheticLambda0
+                                            public final void onValues(
+                                                    ThermalStatus thermalStatus,
+                                                    ArrayList arrayList3) {
+                                                List list = arrayList2;
+                                                if (thermalStatus.code != 0) {
+                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                            .m$1(
+                                                                    new StringBuilder(
+                                                                            "Couldn't get cooling"
+                                                                                + " device because"
+                                                                                + " of HAL error:"
+                                                                                + " "),
+                                                                    thermalStatus.debugMessage,
+                                                                    "ThermalManagerService$ThermalHalWrapper");
+                                                    return;
+                                                }
+                                                Iterator it = arrayList3.iterator();
+                                                while (it.hasNext()) {
+                                                    CoolingDevice coolingDevice =
+                                                            (CoolingDevice) it.next();
+                                                    list.add(
+                                                            new android.os.CoolingDevice(
+                                                                    coolingDevice.value,
+                                                                    coolingDevice.type,
+                                                                    coolingDevice.name));
+                                                }
+                                            }
+                                        });
                             } catch (RemoteException e2) {
-                                android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getCurrentCoolingDevices, reconnecting...", e2);
+                                android.util.Slog.e(
+                                        "ThermalManagerService$ThermalHalWrapper",
+                                        "Couldn't getCurrentCoolingDevices, reconnecting...",
+                                        e2);
                                 connectToHal();
                             }
                         }
@@ -514,12 +655,18 @@ public final class ThermalManagerService extends SystemService {
                 case 0:
                     synchronized (this.mHalLock) {
                         arrayList = new ArrayList();
-                        android.hardware.thermal.V1_1.IThermal iThermal = (android.hardware.thermal.V1_1.IThermal) this.mThermalHal11;
+                        android.hardware.thermal.V1_1.IThermal iThermal =
+                                (android.hardware.thermal.V1_1.IThermal) this.mThermalHal11;
                         if (iThermal != null) {
                             try {
-                                iThermal.getTemperatures(new ThermalManagerService$ThermalHal10Wrapper$$ExternalSyntheticLambda1(arrayList, i, z, 1));
+                                iThermal.getTemperatures(
+                                        new ThermalManagerService$ThermalHal10Wrapper$$ExternalSyntheticLambda1(
+                                                arrayList, i, z, 1));
                             } catch (RemoteException e) {
-                                android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getCurrentTemperatures, reconnecting...", e);
+                                android.util.Slog.e(
+                                        "ThermalManagerService$ThermalHalWrapper",
+                                        "Couldn't getCurrentTemperatures, reconnecting...",
+                                        e);
                                 connectToHal();
                             }
                         }
@@ -528,29 +675,60 @@ public final class ThermalManagerService extends SystemService {
                 default:
                     synchronized (this.mHalLock) {
                         arrayList2 = new ArrayList();
-                        android.hardware.thermal.V2_0.IThermal iThermal2 = (android.hardware.thermal.V2_0.IThermal) this.mThermalHal11;
+                        android.hardware.thermal.V2_0.IThermal iThermal2 =
+                                (android.hardware.thermal.V2_0.IThermal) this.mThermalHal11;
                         if (iThermal2 != null) {
                             try {
-                                iThermal2.getCurrentTemperatures(z, i, new IThermal.getCurrentTemperaturesCallback() { // from class: com.android.server.power.ThermalManagerService$ThermalHal20Wrapper$$ExternalSyntheticLambda2
-                                    public final void onValues(ThermalStatus thermalStatus, ArrayList arrayList3) {
-                                        List list = arrayList2;
-                                        if (thermalStatus.code != 0) {
-                                            BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(new StringBuilder("Couldn't get temperatures because of HAL error: "), thermalStatus.debugMessage, "ThermalManagerService$ThermalHalWrapper");
-                                            return;
-                                        }
-                                        Iterator it = arrayList3.iterator();
-                                        while (it.hasNext()) {
-                                            android.hardware.thermal.V2_0.Temperature temperature = (android.hardware.thermal.V2_0.Temperature) it.next();
-                                            if (!Temperature.isValidStatus(temperature.throttlingStatus)) {
-                                                android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Invalid status data from HAL");
-                                                temperature.throttlingStatus = 0;
+                                iThermal2.getCurrentTemperatures(
+                                        z,
+                                        i,
+                                        new IThermal
+                                                .getCurrentTemperaturesCallback() { // from class:
+                                            // com.android.server.power.ThermalManagerService$ThermalHal20Wrapper$$ExternalSyntheticLambda2
+                                            public final void onValues(
+                                                    ThermalStatus thermalStatus,
+                                                    ArrayList arrayList3) {
+                                                List list = arrayList2;
+                                                if (thermalStatus.code != 0) {
+                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                            .m$1(
+                                                                    new StringBuilder(
+                                                                            "Couldn't get"
+                                                                                + " temperatures"
+                                                                                + " because of HAL"
+                                                                                + " error: "),
+                                                                    thermalStatus.debugMessage,
+                                                                    "ThermalManagerService$ThermalHalWrapper");
+                                                    return;
+                                                }
+                                                Iterator it = arrayList3.iterator();
+                                                while (it.hasNext()) {
+                                                    android.hardware.thermal.V2_0.Temperature
+                                                            temperature =
+                                                                    (android.hardware.thermal.V2_0
+                                                                                    .Temperature)
+                                                                            it.next();
+                                                    if (!Temperature.isValidStatus(
+                                                            temperature.throttlingStatus)) {
+                                                        android.util.Slog.e(
+                                                                "ThermalManagerService$ThermalHalWrapper",
+                                                                "Invalid status data from HAL");
+                                                        temperature.throttlingStatus = 0;
+                                                    }
+                                                    list.add(
+                                                            new Temperature(
+                                                                    temperature.value,
+                                                                    temperature.type,
+                                                                    temperature.name,
+                                                                    temperature.throttlingStatus));
+                                                }
                                             }
-                                            list.add(new Temperature(temperature.value, temperature.type, temperature.name, temperature.throttlingStatus));
-                                        }
-                                    }
-                                });
+                                        });
                             } catch (RemoteException e2) {
-                                android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getCurrentTemperatures, reconnecting...", e2);
+                                android.util.Slog.e(
+                                        "ThermalManagerService$ThermalHalWrapper",
+                                        "Couldn't getCurrentTemperatures, reconnecting...",
+                                        e2);
                                 connectToHal();
                             }
                         }
@@ -568,35 +746,97 @@ public final class ThermalManagerService extends SystemService {
                 default:
                     synchronized (this.mHalLock) {
                         arrayList = new ArrayList();
-                        android.hardware.thermal.V2_0.IThermal iThermal = (android.hardware.thermal.V2_0.IThermal) this.mThermalHal11;
+                        android.hardware.thermal.V2_0.IThermal iThermal =
+                                (android.hardware.thermal.V2_0.IThermal) this.mThermalHal11;
                         if (iThermal != null) {
                             try {
-                                iThermal.getTemperatureThresholds(z, i, new IThermal.getTemperatureThresholdsCallback() { // from class: com.android.server.power.ThermalManagerService$ThermalHal20Wrapper$$ExternalSyntheticLambda1
-                                    public final void onValues(ThermalStatus thermalStatus, ArrayList arrayList2) {
-                                        final ThermalManagerService.ThermalHal11Wrapper thermalHal11Wrapper = ThermalManagerService.ThermalHal11Wrapper.this;
-                                        List list = arrayList;
-                                        thermalHal11Wrapper.getClass();
-                                        if (thermalStatus.code == 0) {
-                                            list.addAll((Collection) arrayList2.stream().map(new Function() { // from class: com.android.server.power.ThermalManagerService$ThermalHal20Wrapper$$ExternalSyntheticLambda3
-                                                @Override // java.util.function.Function
-                                                public final Object apply(Object obj) {
-                                                    android.hardware.thermal.V2_0.TemperatureThreshold temperatureThreshold = (android.hardware.thermal.V2_0.TemperatureThreshold) obj;
-                                                    ThermalManagerService.ThermalHal11Wrapper.this.getClass();
-                                                    TemperatureThreshold temperatureThreshold2 = new TemperatureThreshold();
-                                                    temperatureThreshold2.name = temperatureThreshold.name;
-                                                    temperatureThreshold2.type = temperatureThreshold.type;
-                                                    temperatureThreshold2.coldThrottlingThresholds = temperatureThreshold.coldThrottlingThresholds;
-                                                    temperatureThreshold2.hotThrottlingThresholds = temperatureThreshold.hotThrottlingThresholds;
-                                                    return temperatureThreshold2;
+                                iThermal.getTemperatureThresholds(
+                                        z,
+                                        i,
+                                        new IThermal
+                                                .getTemperatureThresholdsCallback() { // from class:
+                                            // com.android.server.power.ThermalManagerService$ThermalHal20Wrapper$$ExternalSyntheticLambda1
+                                            public final void onValues(
+                                                    ThermalStatus thermalStatus,
+                                                    ArrayList arrayList2) {
+                                                final ThermalManagerService.ThermalHal11Wrapper
+                                                        thermalHal11Wrapper =
+                                                                ThermalManagerService
+                                                                        .ThermalHal11Wrapper.this;
+                                                List list = arrayList;
+                                                thermalHal11Wrapper.getClass();
+                                                if (thermalStatus.code == 0) {
+                                                    list.addAll(
+                                                            (Collection)
+                                                                    arrayList2.stream()
+                                                                            .map(
+                                                                                    new Function() { // from class: com.android.server.power.ThermalManagerService$ThermalHal20Wrapper$$ExternalSyntheticLambda3
+                                                                                        @Override // java.util.function.Function
+                                                                                        public final
+                                                                                        Object
+                                                                                                apply(
+                                                                                                        Object
+                                                                                                                obj) {
+                                                                                            android
+                                                                                                            .hardware
+                                                                                                            .thermal
+                                                                                                            .V2_0
+                                                                                                            .TemperatureThreshold
+                                                                                                    temperatureThreshold =
+                                                                                                            (android
+                                                                                                                            .hardware
+                                                                                                                            .thermal
+                                                                                                                            .V2_0
+                                                                                                                            .TemperatureThreshold)
+                                                                                                                    obj;
+                                                                                            ThermalManagerService
+                                                                                                    .ThermalHal11Wrapper
+                                                                                                    .this
+                                                                                                    .getClass();
+                                                                                            TemperatureThreshold
+                                                                                                    temperatureThreshold2 =
+                                                                                                            new TemperatureThreshold();
+                                                                                            temperatureThreshold2
+                                                                                                            .name =
+                                                                                                    temperatureThreshold
+                                                                                                            .name;
+                                                                                            temperatureThreshold2
+                                                                                                            .type =
+                                                                                                    temperatureThreshold
+                                                                                                            .type;
+                                                                                            temperatureThreshold2
+                                                                                                            .coldThrottlingThresholds =
+                                                                                                    temperatureThreshold
+                                                                                                            .coldThrottlingThresholds;
+                                                                                            temperatureThreshold2
+                                                                                                            .hotThrottlingThresholds =
+                                                                                                    temperatureThreshold
+                                                                                                            .hotThrottlingThresholds;
+                                                                                            return temperatureThreshold2;
+                                                                                        }
+                                                                                    })
+                                                                            .collect(
+                                                                                    Collectors
+                                                                                            .toList()));
+                                                } else {
+                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                            .m$1(
+                                                                    new StringBuilder(
+                                                                            "Couldn't get"
+                                                                                + " temperature"
+                                                                                + " thresholds"
+                                                                                + " because of HAL"
+                                                                                + " error: "),
+                                                                    thermalStatus.debugMessage,
+                                                                    "ThermalManagerService$ThermalHalWrapper");
                                                 }
-                                            }).collect(Collectors.toList()));
-                                        } else {
-                                            BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(new StringBuilder("Couldn't get temperature thresholds because of HAL error: "), thermalStatus.debugMessage, "ThermalManagerService$ThermalHalWrapper");
-                                        }
-                                    }
-                                });
+                                            }
+                                        });
                             } catch (RemoteException e) {
-                                android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getTemperatureThresholds, reconnecting...", e);
+                                android.util.Slog.e(
+                                        "ThermalManagerService$ThermalHalWrapper",
+                                        "Couldn't getTemperatureThresholds, reconnecting...",
+                                        e);
                             }
                         }
                     }
@@ -608,41 +848,58 @@ public final class ThermalManagerService extends SystemService {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class ThermalHalAidlWrapper extends ThermalHalWrapper implements IBinder.DeathRecipient {
         public android.hardware.thermal.IThermal mInstance = null;
-        public final AnonymousClass1 mThermalChangedCallback = new IThermalChangedCallback.Stub() { // from class: com.android.server.power.ThermalManagerService.ThermalHalAidlWrapper.1
-            public final String getInterfaceHash() {
-                return "2f49c78011338b42b43d5d0e250d9b520850cc1f";
-            }
+        public final AnonymousClass1 mThermalChangedCallback =
+                new IThermalChangedCallback
+                        .Stub() { // from class:
+                                  // com.android.server.power.ThermalManagerService.ThermalHalAidlWrapper.1
+                    public final String getInterfaceHash() {
+                        return "2f49c78011338b42b43d5d0e250d9b520850cc1f";
+                    }
 
-            public final int getInterfaceVersion() {
-                return 2;
-            }
+                    public final int getInterfaceVersion() {
+                        return 2;
+                    }
 
-            public final void notifyThrottling(android.hardware.thermal.Temperature temperature) {
-                Temperature temperature2 = new Temperature(temperature.value, temperature.type, temperature.name, temperature.throttlingStatus);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
-                try {
-                    ThermalHalAidlWrapper.this.mCallback.onValues(temperature2);
-                } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
-                }
-            }
-        };
+                    public final void notifyThrottling(
+                            android.hardware.thermal.Temperature temperature) {
+                        Temperature temperature2 =
+                                new Temperature(
+                                        temperature.value,
+                                        temperature.type,
+                                        temperature.name,
+                                        temperature.throttlingStatus);
+                        long clearCallingIdentity = Binder.clearCallingIdentity();
+                        try {
+                            ThermalHalAidlWrapper.this.mCallback.onValues(temperature2);
+                        } finally {
+                            Binder.restoreCallingIdentity(clearCallingIdentity);
+                        }
+                    }
+                };
 
         /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.power.ThermalManagerService$ThermalHalAidlWrapper$1] */
-        public ThermalHalAidlWrapper(ThermalManagerService$$ExternalSyntheticLambda0 thermalManagerService$$ExternalSyntheticLambda0) {
+        public ThermalHalAidlWrapper(
+                ThermalManagerService$$ExternalSyntheticLambda0
+                        thermalManagerService$$ExternalSyntheticLambda0) {
             this.mCallback = thermalManagerService$$ExternalSyntheticLambda0;
         }
 
         @Override // android.os.IBinder.DeathRecipient
         public final synchronized void binderDied() {
-            android.util.Slog.w("ThermalManagerService$ThermalHalWrapper", "Thermal AIDL HAL died, reconnecting...");
+            android.util.Slog.w(
+                    "ThermalManagerService$ThermalHalWrapper",
+                    "Thermal AIDL HAL died, reconnecting...");
             connectToHal();
         }
 
         @Override // com.android.server.power.ThermalManagerService.ThermalHalWrapper
         public final boolean connectToHal() {
             synchronized (this.mHalLock) {
-                initProxyAndRegisterCallback(Binder.allowBlocking(ServiceManager.waitForDeclaredService(android.hardware.thermal.IThermal.DESCRIPTOR + "/default")));
+                initProxyAndRegisterCallback(
+                        Binder.allowBlocking(
+                                ServiceManager.waitForDeclaredService(
+                                        android.hardware.thermal.IThermal.DESCRIPTOR
+                                                + "/default")));
             }
             return this.mInstance != null;
         }
@@ -652,7 +909,9 @@ public final class ThermalManagerService extends SystemService {
             synchronized (this.mHalLock) {
                 try {
                     printWriter.print("\t");
-                    printWriter.println("ThermalHAL AIDL 2  connected: ".concat(this.mInstance != null ? "yes" : "no"));
+                    printWriter.println(
+                            "ThermalHAL AIDL 2  connected: "
+                                    .concat(this.mInstance != null ? "yes" : "no"));
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -670,22 +929,40 @@ public final class ThermalManagerService extends SystemService {
                 }
                 try {
                     try {
-                        coolingDevicesWithType = z ? iThermal.getCoolingDevicesWithType(i) : iThermal.getCoolingDevices();
+                        coolingDevicesWithType =
+                                z
+                                        ? iThermal.getCoolingDevicesWithType(i)
+                                        : iThermal.getCoolingDevices();
                     } catch (IllegalArgumentException | IllegalStateException e) {
-                        android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getCurrentCoolingDevices due to invalid status", e);
+                        android.util.Slog.e(
+                                "ThermalManagerService$ThermalHalWrapper",
+                                "Couldn't getCurrentCoolingDevices due to invalid status",
+                                e);
                     }
                 } catch (RemoteException e2) {
-                    android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getCurrentCoolingDevices, reconnecting", e2);
+                    android.util.Slog.e(
+                            "ThermalManagerService$ThermalHalWrapper",
+                            "Couldn't getCurrentCoolingDevices, reconnecting",
+                            e2);
                     connectToHal();
                 }
                 if (coolingDevicesWithType == null) {
                     return arrayList;
                 }
-                for (android.hardware.thermal.CoolingDevice coolingDevice : coolingDevicesWithType) {
+                for (android.hardware.thermal.CoolingDevice coolingDevice :
+                        coolingDevicesWithType) {
                     if (!android.os.CoolingDevice.isValidType(coolingDevice.type)) {
-                        android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Invalid cooling device type " + coolingDevice.type + " from AIDL HAL");
+                        android.util.Slog.e(
+                                "ThermalManagerService$ThermalHalWrapper",
+                                "Invalid cooling device type "
+                                        + coolingDevice.type
+                                        + " from AIDL HAL");
                     } else if (!z || coolingDevice.type == i) {
-                        arrayList.add(new android.os.CoolingDevice(coolingDevice.value, coolingDevice.type, coolingDevice.name));
+                        arrayList.add(
+                                new android.os.CoolingDevice(
+                                        coolingDevice.value,
+                                        coolingDevice.type,
+                                        coolingDevice.name));
                     }
                 }
                 return arrayList;
@@ -703,12 +980,21 @@ public final class ThermalManagerService extends SystemService {
                 }
                 try {
                     try {
-                        temperaturesWithType = z ? iThermal.getTemperaturesWithType(i) : iThermal.getTemperatures();
+                        temperaturesWithType =
+                                z
+                                        ? iThermal.getTemperaturesWithType(i)
+                                        : iThermal.getTemperatures();
                     } catch (IllegalArgumentException | IllegalStateException e) {
-                        android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getCurrentCoolingDevices due to invalid status", e);
+                        android.util.Slog.e(
+                                "ThermalManagerService$ThermalHalWrapper",
+                                "Couldn't getCurrentCoolingDevices due to invalid status",
+                                e);
                     }
                 } catch (RemoteException e2) {
-                    android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getCurrentTemperatures, reconnecting", e2);
+                    android.util.Slog.e(
+                            "ThermalManagerService$ThermalHalWrapper",
+                            "Couldn't getCurrentTemperatures, reconnecting",
+                            e2);
                     connectToHal();
                 }
                 if (temperaturesWithType == null) {
@@ -716,11 +1002,20 @@ public final class ThermalManagerService extends SystemService {
                 }
                 for (android.hardware.thermal.Temperature temperature : temperaturesWithType) {
                     if (!Temperature.isValidStatus(temperature.throttlingStatus)) {
-                        android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Invalid temperature status " + temperature.throttlingStatus + " received from AIDL HAL");
+                        android.util.Slog.e(
+                                "ThermalManagerService$ThermalHalWrapper",
+                                "Invalid temperature status "
+                                        + temperature.throttlingStatus
+                                        + " received from AIDL HAL");
                         temperature.throttlingStatus = 0;
                     }
                     if (!z || temperature.type == i) {
-                        arrayList.add(new Temperature(temperature.value, temperature.type, temperature.name, temperature.throttlingStatus));
+                        arrayList.add(
+                                new Temperature(
+                                        temperature.value,
+                                        temperature.type,
+                                        temperature.name,
+                                        temperature.throttlingStatus));
                     }
                 }
                 return arrayList;
@@ -737,26 +1032,41 @@ public final class ThermalManagerService extends SystemService {
                 }
                 try {
                     try {
-                        TemperatureThreshold[] temperatureThresholdsWithType = z ? iThermal.getTemperatureThresholdsWithType(i) : iThermal.getTemperatureThresholds();
+                        TemperatureThreshold[] temperatureThresholdsWithType =
+                                z
+                                        ? iThermal.getTemperatureThresholdsWithType(i)
+                                        : iThermal.getTemperatureThresholds();
                         if (temperatureThresholdsWithType == null) {
                             return arrayList;
                         }
                         if (z) {
-                            return (List) Arrays.stream(temperatureThresholdsWithType).filter(new Predicate() { // from class: com.android.server.power.ThermalManagerService$ThermalHalAidlWrapper$$ExternalSyntheticLambda0
-                                @Override // java.util.function.Predicate
-                                public final boolean test(Object obj) {
-                                    return ((TemperatureThreshold) obj).type == i;
-                                }
-                            }).collect(Collectors.toList());
+                            return (List)
+                                    Arrays.stream(temperatureThresholdsWithType)
+                                            .filter(
+                                                    new Predicate() { // from class:
+                                                                      // com.android.server.power.ThermalManagerService$ThermalHalAidlWrapper$$ExternalSyntheticLambda0
+                                                        @Override // java.util.function.Predicate
+                                                        public final boolean test(Object obj) {
+                                                            return ((TemperatureThreshold) obj).type
+                                                                    == i;
+                                                        }
+                                                    })
+                                            .collect(Collectors.toList());
                         }
                         return Arrays.asList(temperatureThresholdsWithType);
                     } catch (RemoteException e) {
-                        android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getTemperatureThresholds, reconnecting...", e);
+                        android.util.Slog.e(
+                                "ThermalManagerService$ThermalHalWrapper",
+                                "Couldn't getTemperatureThresholds, reconnecting...",
+                                e);
                         connectToHal();
                         return arrayList;
                     }
                 } catch (IllegalArgumentException | IllegalStateException e2) {
-                    android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't getTemperatureThresholds due to invalid status", e2);
+                    android.util.Slog.e(
+                            "ThermalManagerService$ThermalHalWrapper",
+                            "Couldn't getTemperatureThresholds due to invalid status",
+                            e2);
                     return arrayList;
                 }
             }
@@ -769,15 +1079,24 @@ public final class ThermalManagerService extends SystemService {
                     try {
                         iBinder.linkToDeath(this, 0);
                     } catch (RemoteException e) {
-                        android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Unable to connect IThermal AIDL instance", e);
+                        android.util.Slog.e(
+                                "ThermalManagerService$ThermalHalWrapper",
+                                "Unable to connect IThermal AIDL instance",
+                                e);
                         connectToHal();
                     }
                     if (this.mInstance != null) {
                         try {
-                            android.util.Slog.i("ThermalManagerService$ThermalHalWrapper", "Thermal HAL AIDL service connected with version " + this.mInstance.getInterfaceVersion());
+                            android.util.Slog.i(
+                                    "ThermalManagerService$ThermalHalWrapper",
+                                    "Thermal HAL AIDL service connected with version "
+                                            + this.mInstance.getInterfaceVersion());
                             registerThermalChangedCallback();
                         } catch (RemoteException e2) {
-                            android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Unable to read interface version from Thermal HAL", e2);
+                            android.util.Slog.e(
+                                    "ThermalManagerService$ThermalHalWrapper",
+                                    "Unable to read interface version from Thermal HAL",
+                                    e2);
                             connectToHal();
                         }
                     }
@@ -789,10 +1108,16 @@ public final class ThermalManagerService extends SystemService {
             try {
                 this.mInstance.registerThermalChangedCallback(this.mThermalChangedCallback);
             } catch (RemoteException e) {
-                android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Unable to connect IThermal AIDL instance", e);
+                android.util.Slog.e(
+                        "ThermalManagerService$ThermalHalWrapper",
+                        "Unable to connect IThermal AIDL instance",
+                        e);
                 connectToHal();
             } catch (IllegalArgumentException | IllegalStateException e2) {
-                android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Couldn't registerThermalChangedCallback due to invalid status", e2);
+                android.util.Slog.e(
+                        "ThermalManagerService$ThermalHalWrapper",
+                        "Couldn't registerThermalChangedCallback due to invalid status",
+                        e2);
             }
         }
     }
@@ -804,21 +1129,25 @@ public final class ThermalManagerService extends SystemService {
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class DeathRecipient implements IHwBinder.DeathRecipient {
-            public DeathRecipient() {
-            }
+            public DeathRecipient() {}
 
             public final void serviceDied(long j) {
                 if (j == 5612) {
-                    android.util.Slog.e("ThermalManagerService$ThermalHalWrapper", "Thermal HAL service died cookie: " + j);
+                    android.util.Slog.e(
+                            "ThermalManagerService$ThermalHalWrapper",
+                            "Thermal HAL service died cookie: " + j);
                     synchronized (ThermalHalWrapper.this.mHalLock) {
                         ThermalHalWrapper.this.connectToHal();
                         ThermalHalWrapper thermalHalWrapper = ThermalHalWrapper.this;
                         synchronized (thermalHalWrapper.mHalLock) {
                             try {
-                                ArrayList arrayList = (ArrayList) thermalHalWrapper.getCurrentTemperatures(0, false);
+                                ArrayList arrayList =
+                                        (ArrayList)
+                                                thermalHalWrapper.getCurrentTemperatures(0, false);
                                 int size = arrayList.size();
                                 for (int i = 0; i < size; i++) {
-                                    thermalHalWrapper.mCallback.onValues((Temperature) arrayList.get(i));
+                                    thermalHalWrapper.mCallback.onValues(
+                                            (Temperature) arrayList.get(i));
                                 }
                             } catch (Throwable th) {
                                 throw th;
@@ -851,8 +1180,7 @@ public final class ThermalManagerService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ThermalShellCommand extends ShellCommand {
-        public ThermalShellCommand() {
-        }
+        public ThermalShellCommand() {}
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
@@ -876,7 +1204,7 @@ public final class ThermalManagerService extends SystemService {
         /* JADX WARN: Removed duplicated region for block: B:94:0x02af  */
         /* JADX WARN: Removed duplicated region for block: B:95:0x02b1  */
         /* JADX WARN: Removed duplicated region for block: B:96:0x02b2 A[Catch: all -> 0x0112, PHI: r1
-          0x02b2: PHI (r1v5 int) = (r1v0 int), (r1v7 int), (r1v8 int), (r1v9 int), (r1v10 int), (r1v11 int), (r1v12 int) binds: [B:88:0x0298, B:95:0x02b1, B:94:0x02af, B:93:0x02ad, B:92:0x02aa, B:91:0x02a7, B:90:0x02a4] A[DONT_GENERATE, DONT_INLINE], TRY_LEAVE, TryCatch #0 {all -> 0x0112, blocks: (B:56:0x00d1, B:57:0x0101, B:60:0x01f8, B:61:0x01fb, B:84:0x023e, B:85:0x024a, B:88:0x0298, B:89:0x029b, B:96:0x02b2, B:98:0x02b6, B:100:0x02bc, B:101:0x02c5, B:107:0x02d3, B:108:0x024e, B:111:0x0259, B:114:0x0263, B:117:0x026e, B:120:0x0278, B:123:0x0282, B:126:0x028d, B:129:0x0106, B:132:0x0115, B:135:0x0121, B:138:0x012d, B:141:0x0139, B:144:0x0145, B:147:0x0150, B:150:0x015b, B:153:0x0167, B:156:0x0173, B:159:0x017f, B:162:0x018b, B:165:0x0197, B:168:0x01a2, B:171:0x01ad, B:174:0x01b8, B:177:0x01c2, B:180:0x01cc, B:183:0x01d7, B:186:0x01e2, B:189:0x01ed), top: B:55:0x00d1, inners: #4 }] */
+        0x02b2: PHI (r1v5 int) = (r1v0 int), (r1v7 int), (r1v8 int), (r1v9 int), (r1v10 int), (r1v11 int), (r1v12 int) binds: [B:88:0x0298, B:95:0x02b1, B:94:0x02af, B:93:0x02ad, B:92:0x02aa, B:91:0x02a7, B:90:0x02a4] A[DONT_GENERATE, DONT_INLINE], TRY_LEAVE, TryCatch #0 {all -> 0x0112, blocks: (B:56:0x00d1, B:57:0x0101, B:60:0x01f8, B:61:0x01fb, B:84:0x023e, B:85:0x024a, B:88:0x0298, B:89:0x029b, B:96:0x02b2, B:98:0x02b6, B:100:0x02bc, B:101:0x02c5, B:107:0x02d3, B:108:0x024e, B:111:0x0259, B:114:0x0263, B:117:0x026e, B:120:0x0278, B:123:0x0282, B:126:0x028d, B:129:0x0106, B:132:0x0115, B:135:0x0121, B:138:0x012d, B:141:0x0139, B:144:0x0145, B:147:0x0150, B:150:0x015b, B:153:0x0167, B:156:0x0173, B:159:0x017f, B:162:0x018b, B:165:0x0197, B:168:0x01a2, B:171:0x01ad, B:174:0x01b8, B:177:0x01c2, B:180:0x01cc, B:183:0x01d7, B:186:0x01e2, B:189:0x01ed), top: B:55:0x00d1, inners: #4 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -886,7 +1214,9 @@ public final class ThermalManagerService extends SystemService {
                 Method dump skipped, instructions count: 1072
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.ThermalManagerService.ThermalShellCommand.onCommand(java.lang.String):int");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.power.ThermalManagerService.ThermalShellCommand.onCommand(java.lang.String):int");
         }
 
         public final void onHelp() {
@@ -895,21 +1225,38 @@ public final class ThermalManagerService extends SystemService {
             outPrintWriter.println("  help");
             outPrintWriter.println("    Print this help text.");
             outPrintWriter.println("");
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  inject-temperature TYPE STATUS NAME [VALUE]", "    injects a new temperature sample for the specified device.", "    type and status strings follow the names in android.os.Temperature.", "  override-status STATUS");
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    sets and locks the thermal status of the device to STATUS.", "    status code is defined in android.os.Temperature.", "  reset", "    unlocks the thermal status of the device.");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "  inject-temperature TYPE STATUS NAME [VALUE]",
+                    "    injects a new temperature sample for the specified device.",
+                    "    type and status strings follow the names in android.os.Temperature.",
+                    "  override-status STATUS");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "    sets and locks the thermal status of the device to STATUS.",
+                    "    status code is defined in android.os.Temperature.",
+                    "  reset",
+                    "    unlocks the thermal status of the device.");
             outPrintWriter.println("  headroom FORECAST_SECONDS");
-            outPrintWriter.println("    gets the thermal headroom forecast in specified seconds, from [0,60].");
+            outPrintWriter.println(
+                    "    gets the thermal headroom forecast in specified seconds, from [0,60].");
             outPrintWriter.println();
         }
     }
 
     /* renamed from: -$$Nest$mpostEventListenerCurrentTemperatures, reason: not valid java name */
-    public static void m826$$Nest$mpostEventListenerCurrentTemperatures(ThermalManagerService thermalManagerService, IThermalEventListener iThermalEventListener, Integer num) {
+    public static void m826$$Nest$mpostEventListenerCurrentTemperatures(
+            ThermalManagerService thermalManagerService,
+            IThermalEventListener iThermalEventListener,
+            Integer num) {
         synchronized (thermalManagerService.mLock) {
             try {
                 int size = thermalManagerService.mTemperatureMap.size();
                 for (int i = 0; i < size; i++) {
-                    postEventListener((Temperature) thermalManagerService.mTemperatureMap.valueAt(i), iThermalEventListener, num);
+                    postEventListener(
+                            (Temperature) thermalManagerService.mTemperatureMap.valueAt(i),
+                            iThermalEventListener,
+                            num);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -929,240 +1276,359 @@ public final class ThermalManagerService extends SystemService {
         this.mTemperatureMap = new ArrayMap();
         this.mHalReady = new AtomicBoolean();
         this.mTemperatureWatcher = new TemperatureWatcher();
-        this.mService = new IThermalService.Stub() { // from class: com.android.server.power.ThermalManagerService.1
-            public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-                ThermalManagerService.this.dumpInternal(fileDescriptor, printWriter, strArr);
-            }
-
-            public final android.os.CoolingDevice[] getCurrentCoolingDevices() {
-                ThermalManagerService.this.getContext().enforceCallingOrSelfPermission("android.permission.DEVICE_POWER", null);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
-                try {
-                    if (!ThermalManagerService.this.mHalReady.get()) {
-                        return new android.os.CoolingDevice[0];
+        this.mService =
+                new IThermalService
+                        .Stub() { // from class: com.android.server.power.ThermalManagerService.1
+                    public final void dump(
+                            FileDescriptor fileDescriptor,
+                            PrintWriter printWriter,
+                            String[] strArr) {
+                        ThermalManagerService.this.dumpInternal(
+                                fileDescriptor, printWriter, strArr);
                     }
-                    ArrayList arrayList = (ArrayList) ThermalManagerService.this.mHalWrapper.getCurrentCoolingDevices(0, false);
-                    return (android.os.CoolingDevice[]) arrayList.toArray(new android.os.CoolingDevice[arrayList.size()]);
-                } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
-                }
-            }
 
-            public final android.os.CoolingDevice[] getCurrentCoolingDevicesWithType(int i) {
-                ThermalManagerService.this.getContext().enforceCallingOrSelfPermission("android.permission.DEVICE_POWER", null);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
-                try {
-                    if (!ThermalManagerService.this.mHalReady.get()) {
-                        return new android.os.CoolingDevice[0];
-                    }
-                    ArrayList arrayList = (ArrayList) ThermalManagerService.this.mHalWrapper.getCurrentCoolingDevices(i, true);
-                    return (android.os.CoolingDevice[]) arrayList.toArray(new android.os.CoolingDevice[arrayList.size()]);
-                } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
-                }
-            }
-
-            public final Temperature[] getCurrentTemperatures() {
-                ThermalManagerService.this.getContext().enforceCallingOrSelfPermission("android.permission.DEVICE_POWER", null);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
-                try {
-                    if (!ThermalManagerService.this.mHalReady.get()) {
-                        return new Temperature[0];
-                    }
-                    ArrayList arrayList = (ArrayList) ThermalManagerService.this.mHalWrapper.getCurrentTemperatures(0, false);
-                    return (Temperature[]) arrayList.toArray(new Temperature[arrayList.size()]);
-                } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
-                }
-            }
-
-            public final Temperature[] getCurrentTemperaturesWithType(int i) {
-                ThermalManagerService.this.getContext().enforceCallingOrSelfPermission("android.permission.DEVICE_POWER", null);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
-                try {
-                    if (!ThermalManagerService.this.mHalReady.get()) {
-                        return new Temperature[0];
-                    }
-                    ArrayList arrayList = (ArrayList) ThermalManagerService.this.mHalWrapper.getCurrentTemperatures(i, true);
-                    return (Temperature[]) arrayList.toArray(new Temperature[arrayList.size()]);
-                } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
-                }
-            }
-
-            public final int getCurrentThermalStatus() {
-                int i;
-                synchronized (ThermalManagerService.this.mLock) {
-                    try {
+                    public final android.os.CoolingDevice[] getCurrentCoolingDevices() {
+                        ThermalManagerService.this
+                                .getContext()
+                                .enforceCallingOrSelfPermission(
+                                        "android.permission.DEVICE_POWER", null);
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            int callingUid = Binder.getCallingUid();
-                            int i2 = 2;
-                            int i3 = ThermalManagerService.this.mHalReady.get() ? 1 : 2;
-                            switch (ThermalManagerService.this.mStatus) {
-                                case 1:
-                                    i2 = 1;
-                                    break;
-                                case 2:
-                                    break;
-                                case 3:
-                                    i2 = 3;
-                                    break;
-                                case 4:
-                                    i2 = 4;
-                                    break;
-                                case 5:
-                                    i2 = 5;
-                                    break;
-                                case 6:
-                                    i2 = 6;
-                                    break;
-                                default:
-                                    i2 = 0;
-                                    break;
+                            if (!ThermalManagerService.this.mHalReady.get()) {
+                                return new android.os.CoolingDevice[0];
                             }
-                            FrameworkStatsLog.write(FrameworkStatsLog.THERMAL_STATUS_CALLED, callingUid, i3, i2);
-                            i = ThermalManagerService.this.mStatus;
+                            ArrayList arrayList =
+                                    (ArrayList)
+                                            ThermalManagerService.this.mHalWrapper
+                                                    .getCurrentCoolingDevices(0, false);
+                            return (android.os.CoolingDevice[])
+                                    arrayList.toArray(
+                                            new android.os.CoolingDevice[arrayList.size()]);
                         } finally {
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-                return i;
-            }
 
-            public final float getThermalHeadroom(int i) {
-                if (!ThermalManagerService.this.mHalReady.get()) {
-                    FrameworkStatsLog.write(FrameworkStatsLog.THERMAL_HEADROOM_CALLED, IThermalService.Stub.getCallingUid(), 2, Float.NaN, i);
-                    return Float.NaN;
-                }
-                if (i >= 0 && i <= 60) {
-                    return ThermalManagerService.this.mTemperatureWatcher.getForecast(i);
-                }
-                FrameworkStatsLog.write(FrameworkStatsLog.THERMAL_HEADROOM_CALLED, IThermalService.Stub.getCallingUid(), 4, Float.NaN, i);
-                return Float.NaN;
-            }
-
-            public final float[] getThermalHeadroomThresholds() {
-                float[] copyOf;
-                if (!ThermalManagerService.this.mHalReady.get()) {
-                    FrameworkStatsLog.write(FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS_CALLED, Binder.getCallingUid(), 2);
-                    throw new IllegalStateException("Thermal HAL connection is not initialized");
-                }
-                if (!Flags.allowThermalHeadroomThresholds()) {
-                    FrameworkStatsLog.write(FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS_CALLED, Binder.getCallingUid(), 3);
-                    throw new UnsupportedOperationException("Thermal headroom thresholds not enabled");
-                }
-                synchronized (ThermalManagerService.this.mTemperatureWatcher.mSamples) {
-                    FrameworkStatsLog.write(FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS_CALLED, Binder.getCallingUid(), 1);
-                    float[] fArr = ThermalManagerService.this.mTemperatureWatcher.mHeadroomThresholds;
-                    copyOf = Arrays.copyOf(fArr, fArr.length);
-                }
-                return copyOf;
-            }
-
-            /* JADX WARN: Multi-variable type inference failed */
-            public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-                int callingUid = Binder.getCallingUid();
-                if (callingUid == 2000 || callingUid == 0) {
-                    ThermalManagerService.this.new ThermalShellCommand().exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
-                } else {
-                    android.util.Slog.w("ThermalManagerService", "Only shell is allowed to call thermalservice shell commands");
-                }
-            }
-
-            public final boolean registerThermalEventListener(IThermalEventListener iThermalEventListener) {
-                ThermalManagerService.this.getContext().enforceCallingOrSelfPermission("android.permission.DEVICE_POWER", null);
-                synchronized (ThermalManagerService.this.mLock) {
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
-                    try {
-                        if (!ThermalManagerService.this.mThermalEventListeners.register(iThermalEventListener, null)) {
-                            return false;
-                        }
-                        ThermalManagerService.m826$$Nest$mpostEventListenerCurrentTemperatures(ThermalManagerService.this, iThermalEventListener, null);
-                        return true;
-                    } finally {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
-                    }
-                }
-            }
-
-            public final boolean registerThermalEventListenerWithType(IThermalEventListener iThermalEventListener, int i) {
-                ThermalManagerService.this.getContext().enforceCallingOrSelfPermission("android.permission.DEVICE_POWER", null);
-                synchronized (ThermalManagerService.this.mLock) {
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
-                    try {
-                        if (!ThermalManagerService.this.mThermalEventListeners.register(iThermalEventListener, new Integer(i))) {
-                            return false;
-                        }
-                        ThermalManagerService.m826$$Nest$mpostEventListenerCurrentTemperatures(ThermalManagerService.this, iThermalEventListener, new Integer(i));
-                        return true;
-                    } finally {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
-                    }
-                }
-            }
-
-            public final boolean registerThermalStatusListener(IThermalStatusListener iThermalStatusListener) {
-                synchronized (ThermalManagerService.this.mLock) {
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
-                    try {
-                        if (!ThermalManagerService.this.mThermalStatusListeners.register(iThermalStatusListener)) {
-                            return false;
-                        }
-                        ThermalManagerService thermalManagerService = ThermalManagerService.this;
-                        thermalManagerService.getClass();
-                        if (!FgThread.getHandler().post(new ThermalManagerService$$ExternalSyntheticLambda2(1, thermalManagerService, iThermalStatusListener))) {
-                            android.util.Slog.e("ThermalManagerService", "Thermal callback failed to queue");
-                        }
-                        return true;
-                    } finally {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
-                    }
-                }
-            }
-
-            public final boolean unregisterThermalEventListener(IThermalEventListener iThermalEventListener) {
-                boolean unregister;
-                ThermalManagerService.this.getContext().enforceCallingOrSelfPermission("android.permission.DEVICE_POWER", null);
-                synchronized (ThermalManagerService.this.mLock) {
-                    try {
+                    public final android.os.CoolingDevice[] getCurrentCoolingDevicesWithType(
+                            int i) {
+                        ThermalManagerService.this
+                                .getContext()
+                                .enforceCallingOrSelfPermission(
+                                        "android.permission.DEVICE_POWER", null);
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            unregister = ThermalManagerService.this.mThermalEventListeners.unregister(iThermalEventListener);
+                            if (!ThermalManagerService.this.mHalReady.get()) {
+                                return new android.os.CoolingDevice[0];
+                            }
+                            ArrayList arrayList =
+                                    (ArrayList)
+                                            ThermalManagerService.this.mHalWrapper
+                                                    .getCurrentCoolingDevices(i, true);
+                            return (android.os.CoolingDevice[])
+                                    arrayList.toArray(
+                                            new android.os.CoolingDevice[arrayList.size()]);
                         } finally {
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-                return unregister;
-            }
 
-            public final boolean unregisterThermalStatusListener(IThermalStatusListener iThermalStatusListener) {
-                boolean unregister;
-                synchronized (ThermalManagerService.this.mLock) {
-                    try {
+                    public final Temperature[] getCurrentTemperatures() {
+                        ThermalManagerService.this
+                                .getContext()
+                                .enforceCallingOrSelfPermission(
+                                        "android.permission.DEVICE_POWER", null);
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            unregister = ThermalManagerService.this.mThermalStatusListeners.unregister(iThermalStatusListener);
+                            if (!ThermalManagerService.this.mHalReady.get()) {
+                                return new Temperature[0];
+                            }
+                            ArrayList arrayList =
+                                    (ArrayList)
+                                            ThermalManagerService.this.mHalWrapper
+                                                    .getCurrentTemperatures(0, false);
+                            return (Temperature[])
+                                    arrayList.toArray(new Temperature[arrayList.size()]);
                         } finally {
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-                return unregister;
-            }
-        };
+
+                    public final Temperature[] getCurrentTemperaturesWithType(int i) {
+                        ThermalManagerService.this
+                                .getContext()
+                                .enforceCallingOrSelfPermission(
+                                        "android.permission.DEVICE_POWER", null);
+                        long clearCallingIdentity = Binder.clearCallingIdentity();
+                        try {
+                            if (!ThermalManagerService.this.mHalReady.get()) {
+                                return new Temperature[0];
+                            }
+                            ArrayList arrayList =
+                                    (ArrayList)
+                                            ThermalManagerService.this.mHalWrapper
+                                                    .getCurrentTemperatures(i, true);
+                            return (Temperature[])
+                                    arrayList.toArray(new Temperature[arrayList.size()]);
+                        } finally {
+                            Binder.restoreCallingIdentity(clearCallingIdentity);
+                        }
+                    }
+
+                    public final int getCurrentThermalStatus() {
+                        int i;
+                        synchronized (ThermalManagerService.this.mLock) {
+                            try {
+                                long clearCallingIdentity = Binder.clearCallingIdentity();
+                                try {
+                                    int callingUid = Binder.getCallingUid();
+                                    int i2 = 2;
+                                    int i3 = ThermalManagerService.this.mHalReady.get() ? 1 : 2;
+                                    switch (ThermalManagerService.this.mStatus) {
+                                        case 1:
+                                            i2 = 1;
+                                            break;
+                                        case 2:
+                                            break;
+                                        case 3:
+                                            i2 = 3;
+                                            break;
+                                        case 4:
+                                            i2 = 4;
+                                            break;
+                                        case 5:
+                                            i2 = 5;
+                                            break;
+                                        case 6:
+                                            i2 = 6;
+                                            break;
+                                        default:
+                                            i2 = 0;
+                                            break;
+                                    }
+                                    FrameworkStatsLog.write(
+                                            FrameworkStatsLog.THERMAL_STATUS_CALLED,
+                                            callingUid,
+                                            i3,
+                                            i2);
+                                    i = ThermalManagerService.this.mStatus;
+                                } finally {
+                                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                        return i;
+                    }
+
+                    public final float getThermalHeadroom(int i) {
+                        if (!ThermalManagerService.this.mHalReady.get()) {
+                            FrameworkStatsLog.write(
+                                    FrameworkStatsLog.THERMAL_HEADROOM_CALLED,
+                                    IThermalService.Stub.getCallingUid(),
+                                    2,
+                                    Float.NaN,
+                                    i);
+                            return Float.NaN;
+                        }
+                        if (i >= 0 && i <= 60) {
+                            return ThermalManagerService.this.mTemperatureWatcher.getForecast(i);
+                        }
+                        FrameworkStatsLog.write(
+                                FrameworkStatsLog.THERMAL_HEADROOM_CALLED,
+                                IThermalService.Stub.getCallingUid(),
+                                4,
+                                Float.NaN,
+                                i);
+                        return Float.NaN;
+                    }
+
+                    public final float[] getThermalHeadroomThresholds() {
+                        float[] copyOf;
+                        if (!ThermalManagerService.this.mHalReady.get()) {
+                            FrameworkStatsLog.write(
+                                    FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS_CALLED,
+                                    Binder.getCallingUid(),
+                                    2);
+                            throw new IllegalStateException(
+                                    "Thermal HAL connection is not initialized");
+                        }
+                        if (!Flags.allowThermalHeadroomThresholds()) {
+                            FrameworkStatsLog.write(
+                                    FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS_CALLED,
+                                    Binder.getCallingUid(),
+                                    3);
+                            throw new UnsupportedOperationException(
+                                    "Thermal headroom thresholds not enabled");
+                        }
+                        synchronized (ThermalManagerService.this.mTemperatureWatcher.mSamples) {
+                            FrameworkStatsLog.write(
+                                    FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS_CALLED,
+                                    Binder.getCallingUid(),
+                                    1);
+                            float[] fArr =
+                                    ThermalManagerService.this
+                                            .mTemperatureWatcher
+                                            .mHeadroomThresholds;
+                            copyOf = Arrays.copyOf(fArr, fArr.length);
+                        }
+                        return copyOf;
+                    }
+
+                    /* JADX WARN: Multi-variable type inference failed */
+                    public final void onShellCommand(
+                            FileDescriptor fileDescriptor,
+                            FileDescriptor fileDescriptor2,
+                            FileDescriptor fileDescriptor3,
+                            String[] strArr,
+                            ShellCallback shellCallback,
+                            ResultReceiver resultReceiver) {
+                        int callingUid = Binder.getCallingUid();
+                        if (callingUid == 2000 || callingUid == 0) {
+                            ThermalManagerService.this.new ThermalShellCommand()
+                                    .exec(
+                                            this,
+                                            fileDescriptor,
+                                            fileDescriptor2,
+                                            fileDescriptor3,
+                                            strArr,
+                                            shellCallback,
+                                            resultReceiver);
+                        } else {
+                            android.util.Slog.w(
+                                    "ThermalManagerService",
+                                    "Only shell is allowed to call thermalservice shell commands");
+                        }
+                    }
+
+                    public final boolean registerThermalEventListener(
+                            IThermalEventListener iThermalEventListener) {
+                        ThermalManagerService.this
+                                .getContext()
+                                .enforceCallingOrSelfPermission(
+                                        "android.permission.DEVICE_POWER", null);
+                        synchronized (ThermalManagerService.this.mLock) {
+                            long clearCallingIdentity = Binder.clearCallingIdentity();
+                            try {
+                                if (!ThermalManagerService.this.mThermalEventListeners.register(
+                                        iThermalEventListener, null)) {
+                                    return false;
+                                }
+                                ThermalManagerService
+                                        .m826$$Nest$mpostEventListenerCurrentTemperatures(
+                                                ThermalManagerService.this,
+                                                iThermalEventListener,
+                                                null);
+                                return true;
+                            } finally {
+                                Binder.restoreCallingIdentity(clearCallingIdentity);
+                            }
+                        }
+                    }
+
+                    public final boolean registerThermalEventListenerWithType(
+                            IThermalEventListener iThermalEventListener, int i) {
+                        ThermalManagerService.this
+                                .getContext()
+                                .enforceCallingOrSelfPermission(
+                                        "android.permission.DEVICE_POWER", null);
+                        synchronized (ThermalManagerService.this.mLock) {
+                            long clearCallingIdentity = Binder.clearCallingIdentity();
+                            try {
+                                if (!ThermalManagerService.this.mThermalEventListeners.register(
+                                        iThermalEventListener, new Integer(i))) {
+                                    return false;
+                                }
+                                ThermalManagerService
+                                        .m826$$Nest$mpostEventListenerCurrentTemperatures(
+                                                ThermalManagerService.this,
+                                                iThermalEventListener,
+                                                new Integer(i));
+                                return true;
+                            } finally {
+                                Binder.restoreCallingIdentity(clearCallingIdentity);
+                            }
+                        }
+                    }
+
+                    public final boolean registerThermalStatusListener(
+                            IThermalStatusListener iThermalStatusListener) {
+                        synchronized (ThermalManagerService.this.mLock) {
+                            long clearCallingIdentity = Binder.clearCallingIdentity();
+                            try {
+                                if (!ThermalManagerService.this.mThermalStatusListeners.register(
+                                        iThermalStatusListener)) {
+                                    return false;
+                                }
+                                ThermalManagerService thermalManagerService =
+                                        ThermalManagerService.this;
+                                thermalManagerService.getClass();
+                                if (!FgThread.getHandler()
+                                        .post(
+                                                new ThermalManagerService$$ExternalSyntheticLambda2(
+                                                        1,
+                                                        thermalManagerService,
+                                                        iThermalStatusListener))) {
+                                    android.util.Slog.e(
+                                            "ThermalManagerService",
+                                            "Thermal callback failed to queue");
+                                }
+                                return true;
+                            } finally {
+                                Binder.restoreCallingIdentity(clearCallingIdentity);
+                            }
+                        }
+                    }
+
+                    public final boolean unregisterThermalEventListener(
+                            IThermalEventListener iThermalEventListener) {
+                        boolean unregister;
+                        ThermalManagerService.this
+                                .getContext()
+                                .enforceCallingOrSelfPermission(
+                                        "android.permission.DEVICE_POWER", null);
+                        synchronized (ThermalManagerService.this.mLock) {
+                            try {
+                                long clearCallingIdentity = Binder.clearCallingIdentity();
+                                try {
+                                    unregister =
+                                            ThermalManagerService.this.mThermalEventListeners
+                                                    .unregister(iThermalEventListener);
+                                } finally {
+                                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                        return unregister;
+                    }
+
+                    public final boolean unregisterThermalStatusListener(
+                            IThermalStatusListener iThermalStatusListener) {
+                        boolean unregister;
+                        synchronized (ThermalManagerService.this.mLock) {
+                            try {
+                                long clearCallingIdentity = Binder.clearCallingIdentity();
+                                try {
+                                    unregister =
+                                            ThermalManagerService.this.mThermalStatusListeners
+                                                    .unregister(iThermalStatusListener);
+                                } finally {
+                                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                        return unregister;
+                    }
+                };
         this.mContext = context;
         this.mHalWrapper = thermalHalWrapper;
         if (thermalHalWrapper != null) {
-            thermalHalWrapper.setCallback(new ThermalManagerService$$ExternalSyntheticLambda0(this));
+            thermalHalWrapper.setCallback(
+                    new ThermalManagerService$$ExternalSyntheticLambda0(this));
         }
         this.mStatus = 0;
     }
@@ -1178,17 +1644,32 @@ public final class ThermalManagerService extends SystemService {
         Iterator it = list.iterator();
         while (it.hasNext()) {
             TemperatureThreshold temperatureThreshold = (TemperatureThreshold) it.next();
-            printWriter.println("\tTemperatureThreshold{mType=" + temperatureThreshold.type + ", mName=" + temperatureThreshold.name + ", mHotThrottlingThresholds=" + Arrays.toString(temperatureThreshold.hotThrottlingThresholds) + ", mColdThrottlingThresholds=" + Arrays.toString(temperatureThreshold.coldThrottlingThresholds) + "}");
+            printWriter.println(
+                    "\tTemperatureThreshold{mType="
+                            + temperatureThreshold.type
+                            + ", mName="
+                            + temperatureThreshold.name
+                            + ", mHotThrottlingThresholds="
+                            + Arrays.toString(temperatureThreshold.hotThrottlingThresholds)
+                            + ", mColdThrottlingThresholds="
+                            + Arrays.toString(temperatureThreshold.coldThrottlingThresholds)
+                            + "}");
         }
     }
 
-    public static void postEventListener(Temperature temperature, IThermalEventListener iThermalEventListener, Integer num) {
-        if ((num == null || num.intValue() == temperature.getType()) && !FgThread.getHandler().post(new ThermalManagerService$$ExternalSyntheticLambda2(0, iThermalEventListener, temperature))) {
+    public static void postEventListener(
+            Temperature temperature, IThermalEventListener iThermalEventListener, Integer num) {
+        if ((num == null || num.intValue() == temperature.getType())
+                && !FgThread.getHandler()
+                        .post(
+                                new ThermalManagerService$$ExternalSyntheticLambda2(
+                                        0, iThermalEventListener, temperature))) {
             android.util.Slog.e("ThermalManagerService", "Thermal callback failed to queue");
         }
     }
 
-    public void dumpInternal(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public void dumpInternal(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (DumpUtils.checkDumpPermission(getContext(), "ThermalManagerService", printWriter)) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
@@ -1207,11 +1688,16 @@ public final class ThermalManagerService extends SystemService {
                             printWriter.println("HAL connection:");
                             this.mHalWrapper.dump(printWriter);
                             printWriter.println("Current temperatures from HAL:");
-                            dumpItemsLocked(printWriter, this.mHalWrapper.getCurrentTemperatures(0, false));
+                            dumpItemsLocked(
+                                    printWriter, this.mHalWrapper.getCurrentTemperatures(0, false));
                             printWriter.println("Current cooling devices from HAL:");
-                            dumpItemsLocked(printWriter, this.mHalWrapper.getCurrentCoolingDevices(0, false));
+                            dumpItemsLocked(
+                                    printWriter,
+                                    this.mHalWrapper.getCurrentCoolingDevices(0, false));
                             printWriter.println("Temperature static thresholds from HAL:");
-                            dumpTemperatureThresholds(printWriter, this.mHalWrapper.getTemperatureThresholds(0, false));
+                            dumpTemperatureThresholds(
+                                    printWriter,
+                                    this.mHalWrapper.getTemperatureThresholds(0, false));
                         }
                     } finally {
                     }
@@ -1219,7 +1705,8 @@ public final class ThermalManagerService extends SystemService {
                 if (Flags.allowThermalHeadroomThresholds()) {
                     synchronized (this.mTemperatureWatcher.mSamples) {
                         printWriter.println("Temperature headroom thresholds:");
-                        printWriter.println(Arrays.toString(this.mTemperatureWatcher.mHeadroomThresholds));
+                        printWriter.println(
+                                Arrays.toString(this.mTemperatureWatcher.mHeadroomThresholds));
                     }
                 }
             } finally {
@@ -1232,14 +1719,23 @@ public final class ThermalManagerService extends SystemService {
         int beginBroadcast = this.mThermalEventListeners.beginBroadcast();
         for (int i = 0; i < beginBroadcast; i++) {
             try {
-                postEventListener(temperature, this.mThermalEventListeners.getBroadcastItem(i), (Integer) this.mThermalEventListeners.getBroadcastCookie(i));
+                postEventListener(
+                        temperature,
+                        this.mThermalEventListeners.getBroadcastItem(i),
+                        (Integer) this.mThermalEventListeners.getBroadcastCookie(i));
             } catch (Throwable th) {
                 this.mThermalEventListeners.finishBroadcast();
                 throw th;
             }
         }
         this.mThermalEventListeners.finishBroadcast();
-        EventLog.writeEvent(2737, temperature.getName(), Integer.valueOf(temperature.getType()), Float.valueOf(temperature.getValue()), Integer.valueOf(temperature.getStatus()), Integer.valueOf(this.mStatus));
+        EventLog.writeEvent(
+                2737,
+                temperature.getName(),
+                Integer.valueOf(temperature.getType()),
+                Float.valueOf(temperature.getValue()),
+                Integer.valueOf(temperature.getStatus()),
+                Integer.valueOf(this.mStatus));
     }
 
     @Override // com.android.server.SystemService
@@ -1250,33 +1746,47 @@ public final class ThermalManagerService extends SystemService {
                 try {
                     boolean z = this.mHalWrapper != null;
                     if (!z) {
-                        ThermalHalAidlWrapper thermalHalAidlWrapper = new ThermalHalAidlWrapper(new ThermalManagerService$$ExternalSyntheticLambda0(this));
+                        ThermalHalAidlWrapper thermalHalAidlWrapper =
+                                new ThermalHalAidlWrapper(
+                                        new ThermalManagerService$$ExternalSyntheticLambda0(this));
                         this.mHalWrapper = thermalHalAidlWrapper;
                         z = thermalHalAidlWrapper.connectToHal();
                     }
                     if (!z) {
-                        ThermalHal11Wrapper thermalHal11Wrapper = new ThermalHal11Wrapper(new ThermalManagerService$$ExternalSyntheticLambda0(this), 1);
+                        ThermalHal11Wrapper thermalHal11Wrapper =
+                                new ThermalHal11Wrapper(
+                                        new ThermalManagerService$$ExternalSyntheticLambda0(this),
+                                        1);
                         this.mHalWrapper = thermalHal11Wrapper;
                         z = thermalHal11Wrapper.connectToHal();
                     }
                     if (!z) {
-                        ThermalHal11Wrapper thermalHal11Wrapper2 = new ThermalHal11Wrapper(new ThermalManagerService$$ExternalSyntheticLambda0(this), 0);
+                        ThermalHal11Wrapper thermalHal11Wrapper2 =
+                                new ThermalHal11Wrapper(
+                                        new ThermalManagerService$$ExternalSyntheticLambda0(this),
+                                        0);
                         this.mHalWrapper = thermalHal11Wrapper2;
                         z = thermalHal11Wrapper2.connectToHal();
                     }
                     if (!z) {
-                        ThermalManagerService$$ExternalSyntheticLambda0 thermalManagerService$$ExternalSyntheticLambda0 = new ThermalManagerService$$ExternalSyntheticLambda0(this);
+                        ThermalManagerService$$ExternalSyntheticLambda0
+                                thermalManagerService$$ExternalSyntheticLambda0 =
+                                        new ThermalManagerService$$ExternalSyntheticLambda0(this);
                         ThermalHal10Wrapper thermalHal10Wrapper = new ThermalHal10Wrapper();
                         thermalHal10Wrapper.mThermalHal10 = null;
-                        thermalHal10Wrapper.mCallback = thermalManagerService$$ExternalSyntheticLambda0;
+                        thermalHal10Wrapper.mCallback =
+                                thermalManagerService$$ExternalSyntheticLambda0;
                         this.mHalWrapper = thermalHal10Wrapper;
                         z = thermalHal10Wrapper.connectToHal();
                     }
                     if (z) {
-                        ArrayList arrayList = (ArrayList) this.mHalWrapper.getCurrentTemperatures(0, false);
+                        ArrayList arrayList =
+                                (ArrayList) this.mHalWrapper.getCurrentTemperatures(0, false);
                         int size = arrayList.size();
                         if (size == 0) {
-                            android.util.Slog.w("ThermalManagerService", "Thermal HAL reported invalid data, abort connection");
+                            android.util.Slog.w(
+                                    "ThermalManagerService",
+                                    "Thermal HAL reported invalid data, abort connection");
                         }
                         for (int i2 = 0; i2 < size; i2++) {
                             onTemperatureChanged((Temperature) arrayList.get(i2), false);
@@ -1285,31 +1795,44 @@ public final class ThermalManagerService extends SystemService {
                         this.mTemperatureWatcher.updateThresholds();
                         this.mHalReady.set(true);
                     } else {
-                        android.util.Slog.w("ThermalManagerService", "No Thermal HAL service on this device");
+                        android.util.Slog.w(
+                                "ThermalManagerService", "No Thermal HAL service on this device");
                     }
                 } finally {
                 }
             }
         }
-        if (i != 1000 || (statsManager = (StatsManager) this.mContext.getSystemService(StatsManager.class)) == null) {
+        if (i != 1000
+                || (statsManager =
+                                (StatsManager) this.mContext.getSystemService(StatsManager.class))
+                        == null) {
             return;
         }
-        statsManager.setPullAtomCallback(FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS, (StatsManager.PullAtomMetadata) null, ConcurrentUtils.DIRECT_EXECUTOR, new StatsManager.StatsPullAtomCallback() { // from class: com.android.server.power.ThermalManagerService$$ExternalSyntheticLambda1
-            public final int onPullAtom(int i3, List list) {
-                float[] copyOf;
-                ThermalManagerService thermalManagerService = ThermalManagerService.this;
-                if (i3 != 10201) {
-                    thermalManagerService.getClass();
-                    return 0;
-                }
-                synchronized (thermalManagerService.mTemperatureWatcher.mSamples) {
-                    float[] fArr = thermalManagerService.mTemperatureWatcher.mHeadroomThresholds;
-                    copyOf = Arrays.copyOf(fArr, fArr.length);
-                }
-                list.add(FrameworkStatsLog.buildStatsEvent(FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS, copyOf));
-                return 0;
-            }
-        });
+        statsManager.setPullAtomCallback(
+                FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS,
+                (StatsManager.PullAtomMetadata) null,
+                ConcurrentUtils.DIRECT_EXECUTOR,
+                new StatsManager
+                        .StatsPullAtomCallback() { // from class:
+                                                   // com.android.server.power.ThermalManagerService$$ExternalSyntheticLambda1
+                    public final int onPullAtom(int i3, List list) {
+                        float[] copyOf;
+                        ThermalManagerService thermalManagerService = ThermalManagerService.this;
+                        if (i3 != 10201) {
+                            thermalManagerService.getClass();
+                            return 0;
+                        }
+                        synchronized (thermalManagerService.mTemperatureWatcher.mSamples) {
+                            float[] fArr =
+                                    thermalManagerService.mTemperatureWatcher.mHeadroomThresholds;
+                            copyOf = Arrays.copyOf(fArr, fArr.length);
+                        }
+                        list.add(
+                                FrameworkStatsLog.buildStatsEvent(
+                                        FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS, copyOf));
+                        return 0;
+                    }
+                });
     }
 
     @Override // com.android.server.SystemService
@@ -1351,7 +1874,10 @@ public final class ThermalManagerService extends SystemService {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L1c
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.ThermalManagerService.onTemperatureChanged(android.os.Temperature, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.ThermalManagerService.onTemperatureChanged(android.os.Temperature,"
+                    + " boolean):void");
     }
 
     public final void onTemperatureMapChangedLocked() {
@@ -1359,7 +1885,8 @@ public final class ThermalManagerService extends SystemService {
         int i = 0;
         for (int i2 = 0; i2 < size; i2++) {
             Temperature temperature = (Temperature) this.mTemperatureMap.valueAt(i2);
-            if ((temperature.getType() == 3 || temperature.getType() == 2) && temperature.getStatus() >= i) {
+            if ((temperature.getType() == 3 || temperature.getType() == 2)
+                    && temperature.getStatus() >= i) {
                 i = temperature.getStatus();
             }
         }
@@ -1370,15 +1897,23 @@ public final class ThermalManagerService extends SystemService {
     }
 
     public final void setStatusLocked(int i) {
-        if (BatteryService$$ExternalSyntheticOutline0.m45m("/data/data/com.sec.android.sdhms/sdhms_cooldown_disable") || i == this.mStatus) {
+        if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                        "/data/data/com.sec.android.sdhms/sdhms_cooldown_disable")
+                || i == this.mStatus) {
             return;
         }
         this.mStatus = i;
         int beginBroadcast = this.mThermalStatusListeners.beginBroadcast();
         for (int i2 = 0; i2 < beginBroadcast; i2++) {
             try {
-                if (!FgThread.getHandler().post(new ThermalManagerService$$ExternalSyntheticLambda2(1, this, this.mThermalStatusListeners.getBroadcastItem(i2)))) {
-                    android.util.Slog.e("ThermalManagerService", "Thermal callback failed to queue");
+                if (!FgThread.getHandler()
+                        .post(
+                                new ThermalManagerService$$ExternalSyntheticLambda2(
+                                        1,
+                                        this,
+                                        this.mThermalStatusListeners.getBroadcastItem(i2)))) {
+                    android.util.Slog.e(
+                            "ThermalManagerService", "Thermal callback failed to queue");
                 }
             } finally {
                 this.mThermalStatusListeners.finishBroadcast();

@@ -43,7 +43,13 @@ public class ActionMenuItem implements MenuItem {
     private boolean mHasIconTintMode = false;
     private int mFlags = 16;
 
-    public ActionMenuItem(Context context, int group, int id, int categoryOrder, int ordering, CharSequence title) {
+    public ActionMenuItem(
+            Context context,
+            int group,
+            int id,
+            int categoryOrder,
+            int ordering,
+            CharSequence title) {
         this.mContext = context;
         this.mId = id;
         this.mGroup = group;
@@ -254,7 +260,8 @@ public class ActionMenuItem implements MenuItem {
     }
 
     @Override // android.view.MenuItem
-    public MenuItem setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener menuItemClickListener) {
+    public MenuItem setOnMenuItemClickListener(
+            MenuItem.OnMenuItemClickListener menuItemClickListener) {
         this.mClickListener = menuItemClickListener;
         return this;
     }
@@ -267,7 +274,8 @@ public class ActionMenuItem implements MenuItem {
     }
 
     @Override // android.view.MenuItem
-    public MenuItem setShortcut(char numericChar, char alphaChar, int numericModifiers, int alphaModifiers) {
+    public MenuItem setShortcut(
+            char numericChar, char alphaChar, int numericModifiers, int alphaModifiers) {
         this.mShortcutNumericChar = numericChar;
         this.mShortcutNumericModifiers = KeyEvent.normalizeMetaState(numericModifiers);
         this.mShortcutAlphabeticChar = Character.toLowerCase(alphaChar);
@@ -311,8 +319,7 @@ public class ActionMenuItem implements MenuItem {
     }
 
     @Override // android.view.MenuItem
-    public void setShowAsAction(int show) {
-    }
+    public void setShowAsAction(int show) {}
 
     @Override // android.view.MenuItem
     public MenuItem setActionView(View actionView) {

@@ -2,17 +2,20 @@ package com.android.server.appfunctions.agentpolicy;
 
 import android.R;
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class AppFunctionAgentPolicyManager$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class AppFunctionAgentPolicyManager$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
-    public /* synthetic */ AppFunctionAgentPolicyManager$$ExternalSyntheticLambda0(int i, Object obj) {
+    public /* synthetic */ AppFunctionAgentPolicyManager$$ExternalSyntheticLambda0(
+            int i, Object obj) {
         this.$r8$classId = i;
         this.f$0 = obj;
     }
@@ -26,13 +29,19 @@ public final /* synthetic */ class AppFunctionAgentPolicyManager$$ExternalSynthe
         Object obj = this.f$0;
         switch (i) {
             case 0:
-                AppFunctionAgentPolicyManager appFunctionAgentPolicyManager = (AppFunctionAgentPolicyManager) obj;
+                AppFunctionAgentPolicyManager appFunctionAgentPolicyManager =
+                        (AppFunctionAgentPolicyManager) obj;
                 appFunctionAgentPolicyManager.getClass();
                 Slog.d("AppFunctionAgentPolicyManager", "start agent policy loading");
                 try {
-                    openRawResource = appFunctionAgentPolicyManager.mContext.getResources().openRawResource(R.raw.default_ringtone_vibration_effect);
+                    openRawResource =
+                            appFunctionAgentPolicyManager
+                                    .mContext
+                                    .getResources()
+                                    .openRawResource(R.raw.default_ringtone_vibration_effect);
                     try {
-                        bufferedReader = new BufferedReader(new InputStreamReader(openRawResource, "UTF-8"));
+                        bufferedReader =
+                                new BufferedReader(new InputStreamReader(openRawResource, "UTF-8"));
                         try {
                             sb = new StringBuilder();
                         } finally {
@@ -45,7 +54,8 @@ public final /* synthetic */ class AppFunctionAgentPolicyManager$$ExternalSynthe
                 while (true) {
                     String readLine = bufferedReader.readLine();
                     if (readLine == null) {
-                        AppFunctionAgentPolicyManager.updateAgentList(sb, appFunctionAgentPolicyManager.defaultAgentPolicyInfo, true);
+                        AppFunctionAgentPolicyManager.updateAgentList(
+                                sb, appFunctionAgentPolicyManager.defaultAgentPolicyInfo, true);
                         bufferedReader.close();
                         if (openRawResource != null) {
                             openRawResource.close();
@@ -58,10 +68,12 @@ public final /* synthetic */ class AppFunctionAgentPolicyManager$$ExternalSynthe
                     sb.append(readLine);
                 }
             case 1:
-                AppFunctionAgentPolicyManager.m229$$Nest$mtryScpmRegister(AppFunctionAgentPolicyManager.this);
+                AppFunctionAgentPolicyManager.m229$$Nest$mtryScpmRegister(
+                        AppFunctionAgentPolicyManager.this);
                 return;
             default:
-                AppFunctionAgentPolicyManager.m229$$Nest$mtryScpmRegister(AppFunctionAgentPolicyManager.this);
+                AppFunctionAgentPolicyManager.m229$$Nest$mtryScpmRegister(
+                        AppFunctionAgentPolicyManager.this);
                 return;
         }
     }

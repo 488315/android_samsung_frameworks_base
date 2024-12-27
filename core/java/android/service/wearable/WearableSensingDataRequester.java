@@ -2,6 +2,7 @@ package android.service.wearable;
 
 import android.annotation.SystemApi;
 import android.app.wearable.WearableSensingDataRequest;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.function.Consumer;
@@ -16,8 +17,8 @@ public interface WearableSensingDataRequester {
     public static final int STATUS_UNKNOWN = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StatusCode {
-    }
+    public @interface StatusCode {}
 
-    void requestData(WearableSensingDataRequest wearableSensingDataRequest, Consumer<Integer> consumer);
+    void requestData(
+            WearableSensingDataRequest wearableSensingDataRequest, Consumer<Integer> consumer);
 }

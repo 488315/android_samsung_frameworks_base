@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class VolumeShaperConfiguration implements Parcelable {
-    public static final Parcelable.Creator<VolumeShaperConfiguration> CREATOR = new Parcelable.Creator<VolumeShaperConfiguration>() { // from class: android.media.VolumeShaperConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VolumeShaperConfiguration createFromParcel(Parcel _aidl_source) {
-            VolumeShaperConfiguration _aidl_out = new VolumeShaperConfiguration();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<VolumeShaperConfiguration> CREATOR =
+            new Parcelable.Creator<VolumeShaperConfiguration>() { // from class:
+                // android.media.VolumeShaperConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VolumeShaperConfiguration createFromParcel(Parcel _aidl_source) {
+                    VolumeShaperConfiguration _aidl_out = new VolumeShaperConfiguration();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VolumeShaperConfiguration[] newArray(int _aidl_size) {
-            return new VolumeShaperConfiguration[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VolumeShaperConfiguration[] newArray(int _aidl_size) {
+                    return new VolumeShaperConfiguration[_aidl_size];
+                }
+            };
     public InterpolatorConfig interpolatorConfig;
     public int type = 0;
     public int id = 0;
@@ -88,7 +90,9 @@ public class VolumeShaperConfiguration implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.interpolatorConfig = (InterpolatorConfig) _aidl_parcel.readTypedObject(InterpolatorConfig.CREATOR);
+                this.interpolatorConfig =
+                        (InterpolatorConfig)
+                                _aidl_parcel.readTypedObject(InterpolatorConfig.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

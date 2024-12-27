@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.sec.android.iaft.callback.IIAFTCallback;
 
 /* loaded from: classes6.dex */
@@ -23,20 +24,17 @@ public interface IIAFTManagerService extends IInterface {
 
     public static class Default implements IIAFTManagerService {
         @Override // com.sec.android.iaft.IIAFTManagerService
-        public void startAtraceAndAnalyze(int pid, String packageName, int policy) throws RemoteException {
-        }
+        public void startAtraceAndAnalyze(int pid, String packageName, int policy)
+                throws RemoteException {}
 
         @Override // com.sec.android.iaft.IIAFTManagerService
-        public void startAtrace() throws RemoteException {
-        }
+        public void startAtrace() throws RemoteException {}
 
         @Override // com.sec.android.iaft.IIAFTManagerService
-        public void stopTrace() throws RemoteException {
-        }
+        public void stopTrace() throws RemoteException {}
 
         @Override // com.sec.android.iaft.IIAFTManagerService
-        public void registerCallback(IIAFTCallback callback) throws RemoteException {
-        }
+        public void registerCallback(IIAFTCallback callback) throws RemoteException {}
 
         @Override // com.sec.android.iaft.IIAFTManagerService
         public boolean traceLogSupported() throws RemoteException {
@@ -49,7 +47,7 @@ public interface IIAFTManagerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIAFTManagerService {
+    public abstract static class Stub extends Binder implements IIAFTManagerService {
         static final int TRANSACTION_registerCallback = 4;
         static final int TRANSACTION_startAtrace = 2;
         static final int TRANSACTION_startAtraceAndAnalyze = 1;
@@ -99,7 +97,8 @@ public interface IIAFTManagerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIAFTManagerService.DESCRIPTOR);
             }
@@ -157,7 +156,8 @@ public interface IIAFTManagerService extends IInterface {
             }
 
             @Override // com.sec.android.iaft.IIAFTManagerService
-            public void startAtraceAndAnalyze(int pid, String packageName, int policy) throws RemoteException {
+            public void startAtraceAndAnalyze(int pid, String packageName, int policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

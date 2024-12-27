@@ -4,6 +4,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+
 import com.android.internal.inputmethod.IRemoteInputConnection;
 
 /* loaded from: classes4.dex */
@@ -40,6 +41,6 @@ public interface InputMethodSession {
 
     void viewClicked(boolean z);
 
-    default void invalidateInputInternal(EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId) {
-    }
+    default void invalidateInputInternal(
+            EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId) {}
 }

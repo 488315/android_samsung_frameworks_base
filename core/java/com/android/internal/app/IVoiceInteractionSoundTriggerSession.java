@@ -6,11 +6,11 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.app.IHotwordRecognitionStatusCallback;
 
 /* loaded from: classes5.dex */
 public interface IVoiceInteractionSoundTriggerSession extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.app.IVoiceInteractionSoundTriggerSession";
+    public static final String DESCRIPTOR =
+            "com.android.internal.app.IVoiceInteractionSoundTriggerSession";
 
     void detach() throws RemoteException;
 
@@ -22,9 +22,16 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
 
     int setParameter(int i, int i2, int i3) throws RemoteException;
 
-    int startRecognition(int i, String str, IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallback, SoundTrigger.RecognitionConfig recognitionConfig, boolean z) throws RemoteException;
+    int startRecognition(
+            int i,
+            String str,
+            IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallback,
+            SoundTrigger.RecognitionConfig recognitionConfig,
+            boolean z)
+            throws RemoteException;
 
-    int stopRecognition(int i, IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallback) throws RemoteException;
+    int stopRecognition(int i, IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallback)
+            throws RemoteException;
 
     public static class Default implements IVoiceInteractionSoundTriggerSession {
         @Override // com.android.internal.app.IVoiceInteractionSoundTriggerSession
@@ -33,12 +40,19 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
         }
 
         @Override // com.android.internal.app.IVoiceInteractionSoundTriggerSession
-        public int startRecognition(int keyphraseId, String bcp47Locale, IHotwordRecognitionStatusCallback callback, SoundTrigger.RecognitionConfig recognitionConfig, boolean runInBatterySaver) throws RemoteException {
+        public int startRecognition(
+                int keyphraseId,
+                String bcp47Locale,
+                IHotwordRecognitionStatusCallback callback,
+                SoundTrigger.RecognitionConfig recognitionConfig,
+                boolean runInBatterySaver)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionSoundTriggerSession
-        public int stopRecognition(int keyphraseId, IHotwordRecognitionStatusCallback callback) throws RemoteException {
+        public int stopRecognition(int keyphraseId, IHotwordRecognitionStatusCallback callback)
+                throws RemoteException {
             return 0;
         }
 
@@ -53,13 +67,13 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
         }
 
         @Override // com.android.internal.app.IVoiceInteractionSoundTriggerSession
-        public SoundTrigger.ModelParamRange queryParameter(int keyphraseId, int modelParam) throws RemoteException {
+        public SoundTrigger.ModelParamRange queryParameter(int keyphraseId, int modelParam)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionSoundTriggerSession
-        public void detach() throws RemoteException {
-        }
+        public void detach() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -67,7 +81,8 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoiceInteractionSoundTriggerSession {
+    public abstract static class Stub extends Binder
+            implements IVoiceInteractionSoundTriggerSession {
         static final int TRANSACTION_detach = 7;
         static final int TRANSACTION_getDspModuleProperties = 1;
         static final int TRANSACTION_getParameter = 5;
@@ -84,7 +99,8 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IVoiceInteractionSoundTriggerSession.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IVoiceInteractionSoundTriggerSession.DESCRIPTOR);
             if (iin != null && (iin instanceof IVoiceInteractionSoundTriggerSession)) {
                 return (IVoiceInteractionSoundTriggerSession) iin;
             }
@@ -123,7 +139,8 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVoiceInteractionSoundTriggerSession.DESCRIPTOR);
             }
@@ -140,8 +157,12 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
                 case 2:
                     int _arg0 = data.readInt();
                     String _arg1 = data.readString();
-                    IHotwordRecognitionStatusCallback _arg2 = IHotwordRecognitionStatusCallback.Stub.asInterface(data.readStrongBinder());
-                    SoundTrigger.RecognitionConfig _arg3 = (SoundTrigger.RecognitionConfig) data.readTypedObject(SoundTrigger.RecognitionConfig.CREATOR);
+                    IHotwordRecognitionStatusCallback _arg2 =
+                            IHotwordRecognitionStatusCallback.Stub.asInterface(
+                                    data.readStrongBinder());
+                    SoundTrigger.RecognitionConfig _arg3 =
+                            (SoundTrigger.RecognitionConfig)
+                                    data.readTypedObject(SoundTrigger.RecognitionConfig.CREATOR);
                     boolean _arg4 = data.readBoolean();
                     data.enforceNoDataAvail();
                     int _result2 = startRecognition(_arg0, _arg1, _arg2, _arg3, _arg4);
@@ -150,7 +171,9 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
                     return true;
                 case 3:
                     int _arg02 = data.readInt();
-                    IHotwordRecognitionStatusCallback _arg12 = IHotwordRecognitionStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    IHotwordRecognitionStatusCallback _arg12 =
+                            IHotwordRecognitionStatusCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result3 = stopRecognition(_arg02, _arg12);
                     reply.writeNoException();
@@ -214,7 +237,9 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
                     _data.writeInterfaceToken(IVoiceInteractionSoundTriggerSession.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    SoundTrigger.ModuleProperties _result = (SoundTrigger.ModuleProperties) _reply.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
+                    SoundTrigger.ModuleProperties _result =
+                            (SoundTrigger.ModuleProperties)
+                                    _reply.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -223,7 +248,13 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionSoundTriggerSession
-            public int startRecognition(int keyphraseId, String bcp47Locale, IHotwordRecognitionStatusCallback callback, SoundTrigger.RecognitionConfig recognitionConfig, boolean runInBatterySaver) throws RemoteException {
+            public int startRecognition(
+                    int keyphraseId,
+                    String bcp47Locale,
+                    IHotwordRecognitionStatusCallback callback,
+                    SoundTrigger.RecognitionConfig recognitionConfig,
+                    boolean runInBatterySaver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -244,7 +275,8 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionSoundTriggerSession
-            public int stopRecognition(int keyphraseId, IHotwordRecognitionStatusCallback callback) throws RemoteException {
+            public int stopRecognition(int keyphraseId, IHotwordRecognitionStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -262,7 +294,8 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionSoundTriggerSession
-            public int setParameter(int keyphraseId, int modelParam, int value) throws RemoteException {
+            public int setParameter(int keyphraseId, int modelParam, int value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -299,7 +332,8 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionSoundTriggerSession
-            public SoundTrigger.ModelParamRange queryParameter(int keyphraseId, int modelParam) throws RemoteException {
+            public SoundTrigger.ModelParamRange queryParameter(int keyphraseId, int modelParam)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -308,7 +342,9 @@ public interface IVoiceInteractionSoundTriggerSession extends IInterface {
                     _data.writeInt(modelParam);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    SoundTrigger.ModelParamRange _result = (SoundTrigger.ModelParamRange) _reply.readTypedObject(SoundTrigger.ModelParamRange.CREATOR);
+                    SoundTrigger.ModelParamRange _result =
+                            (SoundTrigger.ModelParamRange)
+                                    _reply.readTypedObject(SoundTrigger.ModelParamRange.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

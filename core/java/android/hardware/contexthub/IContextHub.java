@@ -1,16 +1,17 @@
 package android.hardware.contexthub;
 
-import android.hardware.contexthub.IContextHubCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IContextHub extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$contexthub$IContextHub".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$contexthub$IContextHub".replace('$', '.');
     public static final int EX_CONTEXT_HUB_UNSPECIFIED = -1;
     public static final String HASH = "03f1982c8e20e58494a4ff8c9736b1c257dfeb6c";
     public static final int VERSION = 3;
@@ -33,7 +34,8 @@ public interface IContextHub extends IInterface {
 
     void onHostEndpointDisconnected(char c) throws RemoteException;
 
-    void onNanSessionStateChanged(NanSessionStateUpdate nanSessionStateUpdate) throws RemoteException;
+    void onNanSessionStateChanged(NanSessionStateUpdate nanSessionStateUpdate)
+            throws RemoteException;
 
     void onSettingChanged(byte b, boolean z) throws RemoteException;
 
@@ -41,7 +43,8 @@ public interface IContextHub extends IInterface {
 
     void registerCallback(int i, IContextHubCallback iContextHubCallback) throws RemoteException;
 
-    void sendMessageDeliveryStatusToHub(int i, MessageDeliveryStatus messageDeliveryStatus) throws RemoteException;
+    void sendMessageDeliveryStatusToHub(int i, MessageDeliveryStatus messageDeliveryStatus)
+            throws RemoteException;
 
     void sendMessageToHub(int i, ContextHubMessage contextHubMessage) throws RemoteException;
 
@@ -56,44 +59,41 @@ public interface IContextHub extends IInterface {
         }
 
         @Override // android.hardware.contexthub.IContextHub
-        public void loadNanoapp(int contextHubId, NanoappBinary appBinary, int transactionId) throws RemoteException {
-        }
+        public void loadNanoapp(int contextHubId, NanoappBinary appBinary, int transactionId)
+                throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
-        public void unloadNanoapp(int contextHubId, long appId, int transactionId) throws RemoteException {
-        }
+        public void unloadNanoapp(int contextHubId, long appId, int transactionId)
+                throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
-        public void disableNanoapp(int contextHubId, long appId, int transactionId) throws RemoteException {
-        }
+        public void disableNanoapp(int contextHubId, long appId, int transactionId)
+                throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
-        public void enableNanoapp(int contextHubId, long appId, int transactionId) throws RemoteException {
-        }
+        public void enableNanoapp(int contextHubId, long appId, int transactionId)
+                throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
-        public void onSettingChanged(byte setting, boolean enabled) throws RemoteException {
-        }
+        public void onSettingChanged(byte setting, boolean enabled) throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
-        public void queryNanoapps(int contextHubId) throws RemoteException {
-        }
+        public void queryNanoapps(int contextHubId) throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
-        public void registerCallback(int contextHubId, IContextHubCallback cb) throws RemoteException {
-        }
+        public void registerCallback(int contextHubId, IContextHubCallback cb)
+                throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
-        public void sendMessageToHub(int contextHubId, ContextHubMessage message) throws RemoteException {
-        }
+        public void sendMessageToHub(int contextHubId, ContextHubMessage message)
+                throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
-        public void onHostEndpointConnected(HostEndpointInfo hostEndpointInfo) throws RemoteException {
-        }
+        public void onHostEndpointConnected(HostEndpointInfo hostEndpointInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
-        public void onHostEndpointDisconnected(char hostEndpointId) throws RemoteException {
-        }
+        public void onHostEndpointDisconnected(char hostEndpointId) throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
         public long[] getPreloadedNanoappIds(int contextHubId) throws RemoteException {
@@ -101,16 +101,15 @@ public interface IContextHub extends IInterface {
         }
 
         @Override // android.hardware.contexthub.IContextHub
-        public void onNanSessionStateChanged(NanSessionStateUpdate update) throws RemoteException {
-        }
+        public void onNanSessionStateChanged(NanSessionStateUpdate update) throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
-        public void setTestMode(boolean enable) throws RemoteException {
-        }
+        public void setTestMode(boolean enable) throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
-        public void sendMessageDeliveryStatusToHub(int contextHubId, MessageDeliveryStatus messageDeliveryStatus) throws RemoteException {
-        }
+        public void sendMessageDeliveryStatusToHub(
+                int contextHubId, MessageDeliveryStatus messageDeliveryStatus)
+                throws RemoteException {}
 
         @Override // android.hardware.contexthub.IContextHub
         public int getInterfaceVersion() {
@@ -128,7 +127,7 @@ public interface IContextHub extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContextHub {
+    public abstract static class Stub extends Binder implements IContextHub {
         static final int TRANSACTION_disableNanoapp = 4;
         static final int TRANSACTION_enableNanoapp = 5;
         static final int TRANSACTION_getContextHubs = 1;
@@ -169,7 +168,8 @@ public interface IContextHub extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -196,7 +196,8 @@ public interface IContextHub extends IInterface {
                     return true;
                 case 2:
                     int _arg0 = data.readInt();
-                    NanoappBinary _arg1 = (NanoappBinary) data.readTypedObject(NanoappBinary.CREATOR);
+                    NanoappBinary _arg1 =
+                            (NanoappBinary) data.readTypedObject(NanoappBinary.CREATOR);
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     loadNanoapp(_arg0, _arg1, _arg2);
@@ -241,20 +242,23 @@ public interface IContextHub extends IInterface {
                     return true;
                 case 8:
                     int _arg07 = data.readInt();
-                    IContextHubCallback _arg16 = IContextHubCallback.Stub.asInterface(data.readStrongBinder());
+                    IContextHubCallback _arg16 =
+                            IContextHubCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallback(_arg07, _arg16);
                     reply.writeNoException();
                     return true;
                 case 9:
                     int _arg08 = data.readInt();
-                    ContextHubMessage _arg17 = (ContextHubMessage) data.readTypedObject(ContextHubMessage.CREATOR);
+                    ContextHubMessage _arg17 =
+                            (ContextHubMessage) data.readTypedObject(ContextHubMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendMessageToHub(_arg08, _arg17);
                     reply.writeNoException();
                     return true;
                 case 10:
-                    HostEndpointInfo _arg09 = (HostEndpointInfo) data.readTypedObject(HostEndpointInfo.CREATOR);
+                    HostEndpointInfo _arg09 =
+                            (HostEndpointInfo) data.readTypedObject(HostEndpointInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onHostEndpointConnected(_arg09);
                     reply.writeNoException();
@@ -273,7 +277,9 @@ public interface IContextHub extends IInterface {
                     reply.writeLongArray(_result2);
                     return true;
                 case 13:
-                    NanSessionStateUpdate _arg012 = (NanSessionStateUpdate) data.readTypedObject(NanSessionStateUpdate.CREATOR);
+                    NanSessionStateUpdate _arg012 =
+                            (NanSessionStateUpdate)
+                                    data.readTypedObject(NanSessionStateUpdate.CREATOR);
                     data.enforceNoDataAvail();
                     onNanSessionStateChanged(_arg012);
                     reply.writeNoException();
@@ -286,7 +292,9 @@ public interface IContextHub extends IInterface {
                     return true;
                 case 15:
                     int _arg014 = data.readInt();
-                    MessageDeliveryStatus _arg18 = (MessageDeliveryStatus) data.readTypedObject(MessageDeliveryStatus.CREATOR);
+                    MessageDeliveryStatus _arg18 =
+                            (MessageDeliveryStatus)
+                                    data.readTypedObject(MessageDeliveryStatus.CREATOR);
                     data.enforceNoDataAvail();
                     sendMessageDeliveryStatusToHub(_arg014, _arg18);
                     reply.writeNoException();
@@ -325,7 +333,8 @@ public interface IContextHub extends IInterface {
                         throw new RemoteException("Method getContextHubs is unimplemented.");
                     }
                     _reply.readException();
-                    List<ContextHubInfo> _result = _reply.createTypedArrayList(ContextHubInfo.CREATOR);
+                    List<ContextHubInfo> _result =
+                            _reply.createTypedArrayList(ContextHubInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -334,7 +343,8 @@ public interface IContextHub extends IInterface {
             }
 
             @Override // android.hardware.contexthub.IContextHub
-            public void loadNanoapp(int contextHubId, NanoappBinary appBinary, int transactionId) throws RemoteException {
+            public void loadNanoapp(int contextHubId, NanoappBinary appBinary, int transactionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -354,7 +364,8 @@ public interface IContextHub extends IInterface {
             }
 
             @Override // android.hardware.contexthub.IContextHub
-            public void unloadNanoapp(int contextHubId, long appId, int transactionId) throws RemoteException {
+            public void unloadNanoapp(int contextHubId, long appId, int transactionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -374,7 +385,8 @@ public interface IContextHub extends IInterface {
             }
 
             @Override // android.hardware.contexthub.IContextHub
-            public void disableNanoapp(int contextHubId, long appId, int transactionId) throws RemoteException {
+            public void disableNanoapp(int contextHubId, long appId, int transactionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -394,7 +406,8 @@ public interface IContextHub extends IInterface {
             }
 
             @Override // android.hardware.contexthub.IContextHub
-            public void enableNanoapp(int contextHubId, long appId, int transactionId) throws RemoteException {
+            public void enableNanoapp(int contextHubId, long appId, int transactionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -451,7 +464,8 @@ public interface IContextHub extends IInterface {
             }
 
             @Override // android.hardware.contexthub.IContextHub
-            public void registerCallback(int contextHubId, IContextHubCallback cb) throws RemoteException {
+            public void registerCallback(int contextHubId, IContextHubCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -470,7 +484,8 @@ public interface IContextHub extends IInterface {
             }
 
             @Override // android.hardware.contexthub.IContextHub
-            public void sendMessageToHub(int contextHubId, ContextHubMessage message) throws RemoteException {
+            public void sendMessageToHub(int contextHubId, ContextHubMessage message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -489,7 +504,8 @@ public interface IContextHub extends IInterface {
             }
 
             @Override // android.hardware.contexthub.IContextHub
-            public void onHostEndpointConnected(HostEndpointInfo hostEndpointInfo) throws RemoteException {
+            public void onHostEndpointConnected(HostEndpointInfo hostEndpointInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -497,7 +513,8 @@ public interface IContextHub extends IInterface {
                     _data.writeTypedObject(hostEndpointInfo, 0);
                     boolean _status = this.mRemote.transact(10, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method onHostEndpointConnected is unimplemented.");
+                        throw new RemoteException(
+                                "Method onHostEndpointConnected is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -515,7 +532,8 @@ public interface IContextHub extends IInterface {
                     _data.writeInt(hostEndpointId);
                     boolean _status = this.mRemote.transact(11, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method onHostEndpointDisconnected is unimplemented.");
+                        throw new RemoteException(
+                                "Method onHostEndpointDisconnected is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -533,7 +551,8 @@ public interface IContextHub extends IInterface {
                     _data.writeInt(contextHubId);
                     boolean _status = this.mRemote.transact(12, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getPreloadedNanoappIds is unimplemented.");
+                        throw new RemoteException(
+                                "Method getPreloadedNanoappIds is unimplemented.");
                     }
                     _reply.readException();
                     long[] _result = _reply.createLongArray();
@@ -545,7 +564,8 @@ public interface IContextHub extends IInterface {
             }
 
             @Override // android.hardware.contexthub.IContextHub
-            public void onNanSessionStateChanged(NanSessionStateUpdate update) throws RemoteException {
+            public void onNanSessionStateChanged(NanSessionStateUpdate update)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -553,7 +573,8 @@ public interface IContextHub extends IInterface {
                     _data.writeTypedObject(update, 0);
                     boolean _status = this.mRemote.transact(13, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method onNanSessionStateChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method onNanSessionStateChanged is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -581,7 +602,9 @@ public interface IContextHub extends IInterface {
             }
 
             @Override // android.hardware.contexthub.IContextHub
-            public void sendMessageDeliveryStatusToHub(int contextHubId, MessageDeliveryStatus messageDeliveryStatus) throws RemoteException {
+            public void sendMessageDeliveryStatusToHub(
+                    int contextHubId, MessageDeliveryStatus messageDeliveryStatus)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -590,7 +613,8 @@ public interface IContextHub extends IInterface {
                     _data.writeTypedObject(messageDeliveryStatus, 0);
                     boolean _status = this.mRemote.transact(15, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method sendMessageDeliveryStatusToHub is unimplemented.");
+                        throw new RemoteException(
+                                "Method sendMessageDeliveryStatusToHub is unimplemented.");
                     }
                     _reply.readException();
                 } finally {

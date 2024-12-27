@@ -11,6 +11,7 @@ import android.os.SystemClock;
 import android.text.format.Time;
 import android.util.Log;
 import android.util.Size;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -33,28 +34,45 @@ public final class DngCreator implements AutoCloseable {
     private static final String TAG = "DngCreator";
     private static final int TAG_ORIENTATION_UNKNOWN = 9;
     private static final String TIFF_DATETIME_FORMAT = "yyyy:MM:dd HH:mm:ss";
-    private final Calendar mGPSTimeStampCalendar = Calendar.getInstance(TimeZone.getTimeZone(Time.TIMEZONE_UTC));
+    private final Calendar mGPSTimeStampCalendar =
+            Calendar.getInstance(TimeZone.getTimeZone(Time.TIMEZONE_UTC));
     private long mNativeContext;
     private static final String GPS_DATE_FORMAT_STR = "yyyy:MM:dd";
-    private static final DateFormat sExifGPSDateStamp = new SimpleDateFormat(GPS_DATE_FORMAT_STR, Locale.US);
+    private static final DateFormat sExifGPSDateStamp =
+            new SimpleDateFormat(GPS_DATE_FORMAT_STR, Locale.US);
 
     private static native void nativeClassInit();
 
-    private native synchronized void nativeDestroy();
+    private synchronized native void nativeDestroy();
 
-    private native synchronized void nativeInit(CameraMetadataNative cameraMetadataNative, CameraMetadataNative cameraMetadataNative2, String str);
+    private synchronized native void nativeInit(
+            CameraMetadataNative cameraMetadataNative,
+            CameraMetadataNative cameraMetadataNative2,
+            String str);
 
-    private native synchronized void nativeSetDescription(String str);
+    private synchronized native void nativeSetDescription(String str);
 
-    private native synchronized void nativeSetGpsTags(int[] iArr, String str, int[] iArr2, String str2, String str3, int[] iArr3);
+    private synchronized native void nativeSetGpsTags(
+            int[] iArr, String str, int[] iArr2, String str2, String str3, int[] iArr3);
 
-    private native synchronized void nativeSetOrientation(int i);
+    private synchronized native void nativeSetOrientation(int i);
 
-    private native synchronized void nativeSetThumbnail(ByteBuffer byteBuffer, int i, int i2);
+    private synchronized native void nativeSetThumbnail(ByteBuffer byteBuffer, int i, int i2);
 
-    private native synchronized void nativeWriteImage(OutputStream outputStream, int i, int i2, ByteBuffer byteBuffer, int i3, int i4, long j, boolean z) throws IOException;
+    private synchronized native void nativeWriteImage(
+            OutputStream outputStream,
+            int i,
+            int i2,
+            ByteBuffer byteBuffer,
+            int i3,
+            int i4,
+            long j,
+            boolean z)
+            throws IOException;
 
-    private native synchronized void nativeWriteInputStream(OutputStream outputStream, InputStream inputStream, int i, int i2, long j) throws IOException;
+    private synchronized native void nativeWriteInputStream(
+            OutputStream outputStream, InputStream inputStream, int i, int i2, long j)
+            throws IOException;
 
     public DngCreator(CameraCharacteristics characteristics, CaptureResult metadata) {
         long timeOffset;
@@ -62,7 +80,9 @@ public final class DngCreator implements AutoCloseable {
             throw new IllegalArgumentException("Null argument to DngCreator constructor");
         }
         long currentTime = System.currentTimeMillis();
-        int timestampSource = ((Integer) characteristics.get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE)).intValue();
+        int timestampSource =
+                ((Integer) characteristics.get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE))
+                        .intValue();
         if (timestampSource == 1) {
             timeOffset = currentTime - SystemClock.elapsedRealtime();
         } else if (timestampSource == 0) {
@@ -73,7 +93,8 @@ public final class DngCreator implements AutoCloseable {
         }
         Long timestamp = (Long) metadata.get(CaptureResult.SENSOR_TIMESTAMP);
         long captureTime = currentTime;
-        captureTime = timestamp != null ? (timestamp.longValue() / 1000000) + timeOffset : captureTime;
+        captureTime =
+                timestamp != null ? (timestamp.longValue() / 1000000) + timeOffset : captureTime;
         DateFormat dateTimeStampFormat = new SimpleDateFormat(TIFF_DATETIME_FORMAT, Locale.US);
         dateTimeStampFormat.setTimeZone(TimeZone.getDefault());
         String formattedCaptureTime = dateTimeStampFormat.format(Long.valueOf(captureTime));
@@ -82,7 +103,8 @@ public final class DngCreator implements AutoCloseable {
 
     public DngCreator setOrientation(int orientation) {
         if (orientation < 0 || orientation > 8) {
-            throw new IllegalArgumentException("Orientation " + orientation + " is not a valid EXIF orientation value");
+            throw new IllegalArgumentException(
+                    "Orientation " + orientation + " is not a valid EXIF orientation value");
         }
         if (orientation == 0) {
             orientation = 9;
@@ -98,7 +120,12 @@ public final class DngCreator implements AutoCloseable {
         int width = pixels.getWidth();
         int height = pixels.getHeight();
         if (width > 256 || height > 256) {
-            throw new IllegalArgumentException("Thumbnail dimensions width,height (" + width + "," + height + ") too large, dimensions must be smaller than 256");
+            throw new IllegalArgumentException(
+                    "Thumbnail dimensions width,height ("
+                            + width
+                            + ","
+                            + height
+                            + ") too large, dimensions must be smaller than 256");
         }
         ByteBuffer rgbBuffer = convertToRGB(pixels);
         nativeSetThumbnail(rgbBuffer, width, height);
@@ -116,7 +143,12 @@ public final class DngCreator implements AutoCloseable {
         int width = pixels.getWidth();
         int height = pixels.getHeight();
         if (width > 256 || height > 256) {
-            throw new IllegalArgumentException("Thumbnail dimensions width,height (" + width + "," + height + ") too large, dimensions must be smaller than 256");
+            throw new IllegalArgumentException(
+                    "Thumbnail dimensions width,height ("
+                            + width
+                            + ","
+                            + height
+                            + ") too large, dimensions must be smaller than 256");
         }
         ByteBuffer rgbBuffer = convertToRGB(pixels);
         nativeSetThumbnail(rgbBuffer, width, height);
@@ -133,10 +165,18 @@ public final class DngCreator implements AutoCloseable {
         int[] latTag = toExifLatLong(latitude);
         int[] longTag = toExifLatLong(longitude);
         String latRef = latitude >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? "N" : "S";
-        String longRef = longitude >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? GPS_LONG_REF_EAST : "W";
+        String longRef =
+                longitude >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? GPS_LONG_REF_EAST : "W";
         String dateTag = sExifGPSDateStamp.format(Long.valueOf(time));
         this.mGPSTimeStampCalendar.setTimeInMillis(time);
-        int[] timeTag = {this.mGPSTimeStampCalendar.get(11), 1, this.mGPSTimeStampCalendar.get(12), 1, this.mGPSTimeStampCalendar.get(13), 1};
+        int[] timeTag = {
+            this.mGPSTimeStampCalendar.get(11),
+            1,
+            this.mGPSTimeStampCalendar.get(12),
+            1,
+            this.mGPSTimeStampCalendar.get(13),
+            1
+        };
         nativeSetGpsTags(latTag, latRef, longTag, longRef, dateTag, timeTag);
         return this;
     }
@@ -149,7 +189,8 @@ public final class DngCreator implements AutoCloseable {
         return this;
     }
 
-    public void writeInputStream(OutputStream dngOutput, Size size, InputStream pixels, long offset) throws IOException {
+    public void writeInputStream(OutputStream dngOutput, Size size, InputStream pixels, long offset)
+            throws IOException {
         if (dngOutput == null) {
             throw new IllegalArgumentException("Null dngOutput passed to writeInputStream");
         }
@@ -165,12 +206,18 @@ public final class DngCreator implements AutoCloseable {
         int width = size.getWidth();
         int height = size.getHeight();
         if (width <= 0 || height <= 0) {
-            throw new IllegalArgumentException("Size with invalid width, height: (" + width + "," + height + ") passed to writeInputStream");
+            throw new IllegalArgumentException(
+                    "Size with invalid width, height: ("
+                            + width
+                            + ","
+                            + height
+                            + ") passed to writeInputStream");
         }
         nativeWriteInputStream(dngOutput, pixels, width, height, offset);
     }
 
-    public void writeByteBuffer(OutputStream dngOutput, Size size, ByteBuffer pixels, long offset) throws IOException {
+    public void writeByteBuffer(OutputStream dngOutput, Size size, ByteBuffer pixels, long offset)
+            throws IOException {
         if (dngOutput == null) {
             throw new IllegalArgumentException("Null dngOutput passed to writeByteBuffer");
         }
@@ -204,7 +251,14 @@ public final class DngCreator implements AutoCloseable {
             throw new IllegalArgumentException("Image with no planes passed to writeImage");
         }
         ByteBuffer buf = planes[0].getBuffer();
-        writeByteBuffer(pixels.getWidth(), pixels.getHeight(), buf, dngOutput, planes[0].getPixelStride(), planes[0].getRowStride(), 0L);
+        writeByteBuffer(
+                pixels.getWidth(),
+                pixels.getHeight(),
+                buf,
+                dngOutput,
+                planes[0].getPixelStride(),
+                planes[0].getRowStride(),
+                0L);
     }
 
     @Override // java.lang.AutoCloseable
@@ -225,21 +279,51 @@ public final class DngCreator implements AutoCloseable {
         nativeClassInit();
     }
 
-    private void writeByteBuffer(int width, int height, ByteBuffer pixels, OutputStream dngOutput, int pixelStride, int rowStride, long offset) throws IOException {
+    private void writeByteBuffer(
+            int width,
+            int height,
+            ByteBuffer pixels,
+            OutputStream dngOutput,
+            int pixelStride,
+            int rowStride,
+            long offset)
+            throws IOException {
         if (width <= 0 || height <= 0) {
-            throw new IllegalArgumentException("Image with invalid width, height: (" + width + "," + height + ") passed to write");
+            throw new IllegalArgumentException(
+                    "Image with invalid width, height: ("
+                            + width
+                            + ","
+                            + height
+                            + ") passed to write");
         }
         long capacity = pixels.capacity();
         long totalSize = (rowStride * height) + offset;
         if (capacity < totalSize) {
-            throw new IllegalArgumentException("Image size " + capacity + " is too small (must be larger than " + totalSize + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "Image size "
+                            + capacity
+                            + " is too small (must be larger than "
+                            + totalSize
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         int minRowStride = pixelStride * width;
         if (minRowStride > rowStride) {
-            throw new IllegalArgumentException("Invalid image pixel stride, row byte width " + minRowStride + " is too large, expecting " + rowStride);
+            throw new IllegalArgumentException(
+                    "Invalid image pixel stride, row byte width "
+                            + minRowStride
+                            + " is too large, expecting "
+                            + rowStride);
         }
         pixels.clear();
-        nativeWriteImage(dngOutput, width, height, pixels, rowStride, pixelStride, offset, pixels.isDirect());
+        nativeWriteImage(
+                dngOutput,
+                width,
+                height,
+                pixels,
+                rowStride,
+                pixelStride,
+                offset,
+                pixels.isDirect());
         pixels.clear();
     }
 
@@ -339,6 +423,6 @@ public final class DngCreator implements AutoCloseable {
         double value3 = (value2 - degrees) * 60.0d;
         int minutes = (int) value3;
         int seconds = (int) ((value3 - minutes) * 6000.0d);
-        return new int[]{degrees, 1, minutes, 1, seconds, 100};
+        return new int[] {degrees, 1, minutes, 1, seconds, 100};
     }
 }

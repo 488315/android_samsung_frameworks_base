@@ -3,14 +3,15 @@ package android.net;
 import android.annotation.SystemApi;
 import android.app.ActivityThread;
 import android.content.Context;
-import android.net.IVpnManager;
 import android.os.Debug;
 import android.os.Process;
 import android.os.ServiceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.NtpTrustedTime;
+
 import com.android.net.module.util.ProxyUtils;
+
 import java.net.InetSocketAddress;
 import java.net.ProxySelector;
 import java.net.URI;
@@ -20,8 +21,7 @@ import java.util.List;
 public final class Proxy {
     private static final String ENTERPRISE_PROXY_PROPERTY = "enterprise.proxy.auth";
 
-    @Deprecated
-    public static final String EXTRA_PROXY_INFO = "android.intent.extra.PROXY_INFO";
+    @Deprecated public static final String EXTRA_PROXY_INFO = "android.intent.extra.PROXY_INFO";
     public static final String PROXY_CHANGE_ACTION = "android.intent.action.PROXY_CHANGE";
     private static final String TAG = "Proxy";
     private static ConnectivityManager sConnectivityManager = null;
@@ -122,7 +122,8 @@ public final class Proxy {
         setHttpProxyConfiguration(host, port, exclList, pacFileUrl);
     }
 
-    public static void setHttpProxyConfiguration(String host, String port, String exclList, Uri pacFileUrl) {
+    public static void setHttpProxyConfiguration(
+            String host, String port, String exclList, Uri pacFileUrl) {
         int[] knoxVpnZtnaProxyInfo = new int[2];
         if (host == null && port == null) {
             knoxVpnZtnaProxyInfo = getKnoxVpnZtnaProxyInfo();
@@ -136,7 +137,14 @@ public final class Proxy {
             }
         }
         if (DBG) {
-            Log.d(TAG, "setHttpProxySystemPropertyInternal for uid " + Process.myUid() + " The host value is " + host + " the port value is " + port);
+            Log.d(
+                    TAG,
+                    "setHttpProxySystemPropertyInternal for uid "
+                            + Process.myUid()
+                            + " The host value is "
+                            + host
+                            + " the port value is "
+                            + port);
         }
         if (exclList != null) {
             exclList = exclList.replace(",", NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
@@ -179,17 +187,24 @@ public final class Proxy {
     }
 
     private static IVpnManager getVpnManagerService() {
-        return IVpnManager.Stub.asInterface(ServiceManager.getService(Context.VPN_MANAGEMENT_SERVICE));
+        return IVpnManager.Stub.asInterface(
+                ServiceManager.getService(Context.VPN_MANAGEMENT_SERVICE));
     }
 
     private static int[] getKnoxVpnZtnaProxyInfo() {
         int[] knoxVpnZtnaProxyInfo = new int[2];
         try {
             String packageName = ActivityThread.currentPackageName();
-            return getVpnManagerService().getKnoxVpnZtnaProxyInfoForUid(Process.myUid(), packageName);
+            return getVpnManagerService()
+                    .getKnoxVpnZtnaProxyInfoForUid(Process.myUid(), packageName);
         } catch (Exception e) {
             if (DBG) {
-                Log.e(TAG, "getProxyInfo " + Process.myUid() + " error occured " + Log.getStackTraceString(e));
+                Log.e(
+                        TAG,
+                        "getProxyInfo "
+                                + Process.myUid()
+                                + " error occured "
+                                + Log.getStackTraceString(e));
                 return knoxVpnZtnaProxyInfo;
             }
             return knoxVpnZtnaProxyInfo;

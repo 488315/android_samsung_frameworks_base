@@ -5,7 +5,9 @@ import android.os.VibrationEffect;
 import android.os.vibrator.RampSegment;
 import android.os.vibrator.VibrationEffectSegment;
 import android.util.Slog;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +33,12 @@ public final class ComposePwleVibratorStep extends AbstractVibratorStep {
             }
             RampSegment rampSegment2 = rampSegment;
             arrayList.add(rampSegment2);
-            float endAmplitude = ((RampSegment) arrayList.get(arrayList.size() - 1)).getEndAmplitude();
+            float endAmplitude =
+                    ((RampSegment) arrayList.get(arrayList.size() - 1)).getEndAmplitude();
             int size2 = arrayList.size();
-            if (size2 <= i2 && (endAmplitude == FullScreenMagnificationGestureHandler.MAX_SCALE || (size2 >= i2 / 2 && endAmplitude <= f))) {
+            if (size2 <= i2
+                    && (endAmplitude == FullScreenMagnificationGestureHandler.MAX_SCALE
+                            || (size2 >= i2 / 2 && endAmplitude <= f))) {
                 f = rampSegment2.getEndAmplitude();
                 i3 = arrayList.size();
             }
@@ -55,17 +60,31 @@ public final class ComposePwleVibratorStep extends AbstractVibratorStep {
             }
             List unrollRampSegments = unrollRampSegments(composed, i, pwleSizeMax);
             if (unrollRampSegments.isEmpty()) {
-                Slog.w("VibrationThread", "Ignoring wrong segment for a ComposePwleStep: " + this.effect.getSegments().get(this.segmentIndex));
+                Slog.w(
+                        "VibrationThread",
+                        "Ignoring wrong segment for a ComposePwleStep: "
+                                + this.effect.getSegments().get(this.segmentIndex));
                 return nextSteps(1);
             }
-            Slog.d("VibrationThread", "Compose " + unrollRampSegments + " PWLEs on vibrator " + this.controller.mVibratorInfo.getId());
-            RampSegment[] rampSegmentArr = (RampSegment[]) unrollRampSegments.toArray(new RampSegment[unrollRampSegments.size()]);
+            Slog.d(
+                    "VibrationThread",
+                    "Compose "
+                            + unrollRampSegments
+                            + " PWLEs on vibrator "
+                            + this.controller.mVibratorInfo.getId());
+            RampSegment[] rampSegmentArr =
+                    (RampSegment[])
+                            unrollRampSegments.toArray(new RampSegment[unrollRampSegments.size()]);
             VibratorController vibratorController = this.controller;
             long j = this.conductor.mVibration.id;
             if (vibratorController.mVibratorInfo.hasCapability(1024L)) {
                 synchronized (vibratorController.mLock) {
                     try {
-                        composePwle = vibratorController.mNativeWrapper.composePwle(rampSegmentArr, vibratorController.mVibratorInfo.getDefaultBraking(), j);
+                        composePwle =
+                                vibratorController.mNativeWrapper.composePwle(
+                                        rampSegmentArr,
+                                        vibratorController.mVibratorInfo.getDefaultBraking(),
+                                        j);
                         if (composePwle > 0) {
                             vibratorController.mCurrentAmplitude = -1.0f;
                             vibratorController.notifyListenerOnVibrating(true);
@@ -82,7 +101,10 @@ public final class ComposePwleVibratorStep extends AbstractVibratorStep {
             vibrationStats.mVibrationPwleTotalSize += rampSegmentArr.length;
             if (composePwle > 0) {
                 for (RampSegment rampSegment : rampSegmentArr) {
-                    if (rampSegment.getStartAmplitude() == FullScreenMagnificationGestureHandler.MAX_SCALE && rampSegment.getEndAmplitude() == FullScreenMagnificationGestureHandler.MAX_SCALE) {
+                    if (rampSegment.getStartAmplitude()
+                                    == FullScreenMagnificationGestureHandler.MAX_SCALE
+                            && rampSegment.getEndAmplitude()
+                                    == FullScreenMagnificationGestureHandler.MAX_SCALE) {
                         composePwle -= rampSegment.getDuration();
                     }
                 }

@@ -21,10 +21,6 @@ import android.graphics.RecordingCanvas;
 import android.graphics.Rect;
 import android.graphics.RenderNode;
 import android.graphics.animation.NativeInterpolatorFactory;
-import android.graphics.drawable.Animatable2;
-import android.graphics.drawable.AnimatedVectorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
 import android.os.Handler;
 import android.util.ArrayMap;
 import android.util.AttributeSet;
@@ -35,15 +31,19 @@ import android.util.PathParser;
 import android.util.Property;
 import android.view.Choreographer;
 import android.view.NativeVectorDrawableAnimator;
+
 import com.android.internal.R;
 import com.android.internal.util.VirtualRefBasePtr;
+
 import dalvik.annotation.optimization.FastNative;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
@@ -95,7 +95,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static native void nAddAnimator(long j, long j2, long j3, long j4, long j5, int i, int i2);
+    public static native void nAddAnimator(
+            long j, long j2, long j3, long j4, long j5, int i, int i2);
 
     /* JADX INFO: Access modifiers changed from: private */
     public static native long nCreateAnimatorSet();
@@ -129,7 +130,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
     public static native void nReset(long j);
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static native void nReverse(long j, VectorDrawableAnimatorRT vectorDrawableAnimatorRT, int i);
+    public static native void nReverse(
+            long j, VectorDrawableAnimatorRT vectorDrawableAnimatorRT, int i);
 
     /* JADX INFO: Access modifiers changed from: private */
     public static native void nSetPropertyHolderData(long j, float[] fArr, int i);
@@ -141,7 +143,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
     public static native void nSetVectorDrawableTarget(long j, long j2);
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static native void nStart(long j, VectorDrawableAnimatorRT vectorDrawableAnimatorRT, int i);
+    public static native void nStart(
+            long j, VectorDrawableAnimatorRT vectorDrawableAnimatorRT, int i);
 
     public AnimatedVectorDrawable() {
         this(null, null);
@@ -151,22 +154,24 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         this.mAnimatorSetFromXml = null;
         this.mAnimationCallbacks = null;
         this.mAnimatorListener = null;
-        this.mCallback = new Drawable.Callback() { // from class: android.graphics.drawable.AnimatedVectorDrawable.1
-            @Override // android.graphics.drawable.Drawable.Callback
-            public void invalidateDrawable(Drawable who) {
-                AnimatedVectorDrawable.this.invalidateSelf();
-            }
+        this.mCallback =
+                new Drawable.Callback() { // from class:
+                    // android.graphics.drawable.AnimatedVectorDrawable.1
+                    @Override // android.graphics.drawable.Drawable.Callback
+                    public void invalidateDrawable(Drawable who) {
+                        AnimatedVectorDrawable.this.invalidateSelf();
+                    }
 
-            @Override // android.graphics.drawable.Drawable.Callback
-            public void scheduleDrawable(Drawable who, Runnable what, long when) {
-                AnimatedVectorDrawable.this.scheduleSelf(what, when);
-            }
+                    @Override // android.graphics.drawable.Drawable.Callback
+                    public void scheduleDrawable(Drawable who, Runnable what, long when) {
+                        AnimatedVectorDrawable.this.scheduleSelf(what, when);
+                    }
 
-            @Override // android.graphics.drawable.Drawable.Callback
-            public void unscheduleDrawable(Drawable who, Runnable what) {
-                AnimatedVectorDrawable.this.unscheduleSelf(what);
-            }
-        };
+                    @Override // android.graphics.drawable.Drawable.Callback
+                    public void unscheduleDrawable(Drawable who, Runnable what) {
+                        AnimatedVectorDrawable.this.unscheduleSelf(what);
+                    }
+                };
         this.mAnimatedVectorState = new AnimatedVectorDrawableState(state, this.mCallback, res);
         this.mAnimatorSet = new VectorDrawableAnimatorRT(this);
         this.mRes = res;
@@ -175,7 +180,9 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
     @Override // android.graphics.drawable.Drawable
     public Drawable mutate() {
         if (!this.mMutated && super.mutate() == this) {
-            this.mAnimatedVectorState = new AnimatedVectorDrawableState(this.mAnimatedVectorState, this.mCallback, this.mRes);
+            this.mAnimatedVectorState =
+                    new AnimatedVectorDrawableState(
+                            this.mAnimatedVectorState, this.mCallback, this.mRes);
             this.mMutated = true;
         }
         return this;
@@ -203,12 +210,17 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
 
     @Override // android.graphics.drawable.Drawable
     public int getChangingConfigurations() {
-        return super.getChangingConfigurations() | this.mAnimatedVectorState.getChangingConfigurations();
+        return super.getChangingConfigurations()
+                | this.mAnimatedVectorState.getChangingConfigurations();
     }
 
     @Override // android.graphics.drawable.Drawable
     public void draw(Canvas canvas) {
-        if (!canvas.isHardwareAccelerated() && (this.mAnimatorSet instanceof VectorDrawableAnimatorRT) && !this.mAnimatorSet.isRunning() && ((VectorDrawableAnimatorRT) this.mAnimatorSet).mPendingAnimationActions.size() > 0) {
+        if (!canvas.isHardwareAccelerated()
+                && (this.mAnimatorSet instanceof VectorDrawableAnimatorRT)
+                && !this.mAnimatorSet.isRunning()
+                && ((VectorDrawableAnimatorRT) this.mAnimatorSet).mPendingAnimationActions.size()
+                        > 0) {
             fallbackOntoUI();
         }
         this.mAnimatorSet.onDraw(canvas);
@@ -319,7 +331,9 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources res, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources res, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         AnimatedVectorDrawableState state = this.mAnimatedVectorState;
         int eventType = parser.getEventType();
         float pathErrorScale = 1.0f;
@@ -331,10 +345,12 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
             if (eventType == 2) {
                 String tagName = parser.getName();
                 if (ANIMATED_VECTOR.equals(tagName)) {
-                    TypedArray a = obtainAttributes(res, theme, attrs, R.styleable.AnimatedVectorDrawable);
+                    TypedArray a =
+                            obtainAttributes(res, theme, attrs, R.styleable.AnimatedVectorDrawable);
                     int drawableRes = a.getResourceId(0, 0);
                     if (drawableRes != 0) {
-                        VectorDrawable vectorDrawable = (VectorDrawable) res.getDrawable(drawableRes, theme).mutate();
+                        VectorDrawable vectorDrawable =
+                                (VectorDrawable) res.getDrawable(drawableRes, theme).mutate();
                         vectorDrawable.setAllowCaching(false);
                         vectorDrawable.setCallback(this.mCallback);
                         pathErrorScale = vectorDrawable.getPixelSize();
@@ -345,13 +361,21 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
                     }
                     a.recycle();
                 } else if (TARGET.equals(tagName)) {
-                    TypedArray a2 = obtainAttributes(res, theme, attrs, R.styleable.AnimatedVectorDrawableTarget);
+                    TypedArray a2 =
+                            obtainAttributes(
+                                    res, theme, attrs, R.styleable.AnimatedVectorDrawableTarget);
                     String target = a2.getString(0);
                     int animResId = a2.getResourceId(1, 0);
                     if (animResId != 0) {
                         if (theme != null) {
-                            Animator animator = AnimatorInflater.loadAnimator(res, theme, animResId, pathErrorScale);
-                            updateAnimatorProperty(animator, target, state.mVectorDrawable, state.mShouldIgnoreInvalidAnim);
+                            Animator animator =
+                                    AnimatorInflater.loadAnimator(
+                                            res, theme, animResId, pathErrorScale);
+                            updateAnimatorProperty(
+                                    animator,
+                                    target,
+                                    state.mVectorDrawable,
+                                    state.mShouldIgnoreInvalidAnim);
                             state.addTargetAnimator(target, animator);
                         } else {
                             state.addPendingAnimator(animResId, pathErrorScale, target);
@@ -366,7 +390,11 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static void updateAnimatorProperty(Animator animator, String targetName, VectorDrawable vectorDrawable, boolean ignoreInvalidAnim) {
+    public static void updateAnimatorProperty(
+            Animator animator,
+            String targetName,
+            VectorDrawable vectorDrawable,
+            boolean ignoreInvalidAnim) {
         if (animator instanceof ObjectAnimator) {
             PropertyValuesHolder[] holders = ((ObjectAnimator) animator).getValues();
             for (PropertyValuesHolder pvh : holders) {
@@ -376,13 +404,21 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
                 if (targetNameObj instanceof VectorDrawable.VObject) {
                     property = ((VectorDrawable.VObject) targetNameObj).getProperty(propertyName);
                 } else if (targetNameObj instanceof VectorDrawable.VectorDrawableState) {
-                    property = ((VectorDrawable.VectorDrawableState) targetNameObj).getProperty(propertyName);
+                    property =
+                            ((VectorDrawable.VectorDrawableState) targetNameObj)
+                                    .getProperty(propertyName);
                 }
                 if (property != null) {
                     if (containsSameValueType(pvh, property)) {
                         pvh.setProperty(property);
                     } else if (!ignoreInvalidAnim) {
-                        throw new RuntimeException("Wrong valueType for Property: " + propertyName + ".  Expected type: " + property.getType().toString() + ". Actual type defined in resources: " + pvh.getValueType().toString());
+                        throw new RuntimeException(
+                                "Wrong valueType for Property: "
+                                        + propertyName
+                                        + ".  Expected type: "
+                                        + property.getType().toString()
+                                        + ". Actual type defined in resources: "
+                                        + pvh.getValueType().toString());
                     }
                 }
             }
@@ -400,14 +436,20 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
     private static boolean containsSameValueType(PropertyValuesHolder holder, Property property) {
         Class type1 = holder.getValueType();
         Class type2 = property.getType();
-        return (type1 == Float.TYPE || type1 == Float.class) ? type2 == Float.TYPE || type2 == Float.class : (type1 == Integer.TYPE || type1 == Integer.class) ? type2 == Integer.TYPE || type2 == Integer.class : type1 == type2;
+        return (type1 == Float.TYPE || type1 == Float.class)
+                ? type2 == Float.TYPE || type2 == Float.class
+                : (type1 == Integer.TYPE || type1 == Integer.class)
+                        ? type2 == Integer.TYPE || type2 == Integer.class
+                        : type1 == type2;
     }
 
     public void forceAnimationOnUI() {
         if (this.mAnimatorSet instanceof VectorDrawableAnimatorRT) {
             VectorDrawableAnimatorRT animator = (VectorDrawableAnimatorRT) this.mAnimatorSet;
             if (animator.isRunning()) {
-                throw new UnsupportedOperationException("Cannot force Animated Vector Drawable to run on UI thread when the animation has started on RenderThread.");
+                throw new UnsupportedOperationException(
+                        "Cannot force Animated Vector Drawable to run on UI thread when the"
+                                + " animation has started on RenderThread.");
             }
             fallbackOntoUI();
         }
@@ -429,7 +471,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
 
     @Override // android.graphics.drawable.Drawable
     public boolean canApplyTheme() {
-        return (this.mAnimatedVectorState != null && this.mAnimatedVectorState.canApplyTheme()) || super.canApplyTheme();
+        return (this.mAnimatedVectorState != null && this.mAnimatedVectorState.canApplyTheme())
+                || super.canApplyTheme();
     }
 
     @Override // android.graphics.drawable.Drawable
@@ -455,11 +498,13 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         ArrayList<Animator> mAnimators;
         int mChangingConfigurations;
         ArrayList<PendingAnimator> mPendingAnims;
-        private final boolean mShouldIgnoreInvalidAnim = AnimatedVectorDrawable.shouldIgnoreInvalidAnimation();
+        private final boolean mShouldIgnoreInvalidAnim =
+                AnimatedVectorDrawable.shouldIgnoreInvalidAnimation();
         ArrayMap<Animator, String> mTargetNameMap;
         VectorDrawable mVectorDrawable;
 
-        public AnimatedVectorDrawableState(AnimatedVectorDrawableState copy, Drawable.Callback owner, Resources res) {
+        public AnimatedVectorDrawableState(
+                AnimatedVectorDrawableState copy, Drawable.Callback owner, Resources res) {
             if (copy != null) {
                 this.mChangingConfigurations = copy.mChangingConfigurations;
                 if (copy.mVectorDrawable != null) {
@@ -471,7 +516,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
                     }
                     this.mVectorDrawable = (VectorDrawable) this.mVectorDrawable.mutate();
                     this.mVectorDrawable.setCallback(owner);
-                    this.mVectorDrawable.setLayoutDirection(copy.mVectorDrawable.getLayoutDirection());
+                    this.mVectorDrawable.setLayoutDirection(
+                            copy.mVectorDrawable.getLayoutDirection());
                     this.mVectorDrawable.setBounds(copy.mVectorDrawable.getBounds());
                     this.mVectorDrawable.setAllowCaching(false);
                 }
@@ -492,7 +538,9 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
 
         @Override // android.graphics.drawable.Drawable.ConstantState
         public boolean canApplyTheme() {
-            return (this.mVectorDrawable != null && this.mVectorDrawable.canApplyTheme()) || this.mPendingAnims != null || super.canApplyTheme();
+            return (this.mVectorDrawable != null && this.mVectorDrawable.canApplyTheme())
+                    || this.mPendingAnims != null
+                    || super.canApplyTheme();
         }
 
         @Override // android.graphics.drawable.Drawable.ConstantState
@@ -531,7 +579,11 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
                 if (res != null) {
                     inflatePendingAnimators(res, null);
                 } else {
-                    Log.e(AnimatedVectorDrawable.LOGTAG, "Failed to load animators. Either the AnimatedVectorDrawable must be created using a Resources object or applyTheme() must be called with a non-null Theme object.");
+                    Log.e(
+                            AnimatedVectorDrawable.LOGTAG,
+                            "Failed to load animators. Either the AnimatedVectorDrawable must be"
+                                + " created using a Resources object or applyTheme() must be called"
+                                + " with a non-null Theme object.");
                 }
                 this.mPendingAnims = null;
             }
@@ -553,10 +605,17 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
             Object target = this.mVectorDrawable.getTargetByName(targetName);
             if (!this.mShouldIgnoreInvalidAnim) {
                 if (target == null) {
-                    throw new IllegalStateException("Target with the name \"" + targetName + "\" cannot be found in the VectorDrawable to be animated.");
+                    throw new IllegalStateException(
+                            "Target with the name \""
+                                    + targetName
+                                    + "\" cannot be found in the VectorDrawable to be animated.");
                 }
-                if (!(target instanceof VectorDrawable.VectorDrawableState) && !(target instanceof VectorDrawable.VObject)) {
-                    throw new UnsupportedOperationException("Target should be either VGroup, VPath, or ConstantState, " + target.getClass() + " is not supported");
+                if (!(target instanceof VectorDrawable.VectorDrawableState)
+                        && !(target instanceof VectorDrawable.VObject)) {
+                    throw new UnsupportedOperationException(
+                            "Target should be either VGroup, VPath, or ConstantState, "
+                                    + target.getClass()
+                                    + " is not supported");
                 }
             }
             localAnimator.setTarget(target);
@@ -571,7 +630,11 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
                 for (int i = 0; i < count; i++) {
                     PendingAnimator pendingAnimator = pendingAnims.get(i);
                     Animator animator = pendingAnimator.newInstance(res, t);
-                    AnimatedVectorDrawable.updateAnimatorProperty(animator, pendingAnimator.target, this.mVectorDrawable, this.mShouldIgnoreInvalidAnim);
+                    AnimatedVectorDrawable.updateAnimatorProperty(
+                            animator,
+                            pendingAnimator.target,
+                            this.mVectorDrawable,
+                            this.mShouldIgnoreInvalidAnim);
                     addTargetAnimator(pendingAnimator.target, animator);
                 }
             }
@@ -589,7 +652,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
             }
 
             public Animator newInstance(Resources res, Resources.Theme theme) {
-                return AnimatorInflater.loadAnimator(res, theme, this.animResId, this.pathErrorScale);
+                return AnimatorInflater.loadAnimator(
+                        res, theme, this.animResId, this.pathErrorScale);
             }
         }
     }
@@ -647,25 +711,33 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         }
         this.mAnimationCallbacks.add(callback);
         if (this.mAnimatorListener == null) {
-            this.mAnimatorListener = new AnimatorListenerAdapter() { // from class: android.graphics.drawable.AnimatedVectorDrawable.2
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animation) {
-                    ArrayList<Animatable2.AnimationCallback> tmpCallbacks = new ArrayList<>(AnimatedVectorDrawable.this.mAnimationCallbacks);
-                    int size = tmpCallbacks.size();
-                    for (int i = 0; i < size; i++) {
-                        tmpCallbacks.get(i).onAnimationStart(AnimatedVectorDrawable.this);
-                    }
-                }
+            this.mAnimatorListener =
+                    new AnimatorListenerAdapter() { // from class:
+                        // android.graphics.drawable.AnimatedVectorDrawable.2
+                        @Override // android.animation.AnimatorListenerAdapter,
+                        // android.animation.Animator.AnimatorListener
+                        public void onAnimationStart(Animator animation) {
+                            ArrayList<Animatable2.AnimationCallback> tmpCallbacks =
+                                    new ArrayList<>(
+                                            AnimatedVectorDrawable.this.mAnimationCallbacks);
+                            int size = tmpCallbacks.size();
+                            for (int i = 0; i < size; i++) {
+                                tmpCallbacks.get(i).onAnimationStart(AnimatedVectorDrawable.this);
+                            }
+                        }
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    ArrayList<Animatable2.AnimationCallback> tmpCallbacks = new ArrayList<>(AnimatedVectorDrawable.this.mAnimationCallbacks);
-                    int size = tmpCallbacks.size();
-                    for (int i = 0; i < size; i++) {
-                        tmpCallbacks.get(i).onAnimationEnd(AnimatedVectorDrawable.this);
-                    }
-                }
-            };
+                        @Override // android.animation.AnimatorListenerAdapter,
+                        // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            ArrayList<Animatable2.AnimationCallback> tmpCallbacks =
+                                    new ArrayList<>(
+                                            AnimatedVectorDrawable.this.mAnimationCallbacks);
+                            int size = tmpCallbacks.size();
+                            for (int i = 0; i < size; i++) {
+                                tmpCallbacks.get(i).onAnimationEnd(AnimatedVectorDrawable.this);
+                            }
+                        }
+                    };
         }
         this.mAnimatorSet.setListener(this.mAnimatorListener);
     }
@@ -702,7 +774,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
     }
 
     private void hidden_semSetPathColor(int color) {
-        if (this.mAnimatedVectorState == null || this.mAnimatedVectorState.mVectorDrawable == null) {
+        if (this.mAnimatedVectorState == null
+                || this.mAnimatedVectorState.mVectorDrawable == null) {
             return;
         }
         this.mAnimatedVectorState.mVectorDrawable.setPathColor("all", color);
@@ -722,7 +795,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         @Override // android.graphics.drawable.AnimatedVectorDrawable.VectorDrawableAnimator
         public void init(AnimatorSet set) {
             if (this.mSet != null) {
-                throw new UnsupportedOperationException("VectorDrawableAnimator cannot be re-initialized");
+                throw new UnsupportedOperationException(
+                        "VectorDrawableAnimator cannot be re-initialized");
             }
             this.mSet = set.mo77clone();
             this.mTotalDuration = this.mSet.getTotalDuration();
@@ -801,8 +875,7 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         }
 
         @Override // android.graphics.drawable.AnimatedVectorDrawable.VectorDrawableAnimator
-        public void removeThreadedRendererAnimatorListener() {
-        }
+        public void removeThreadedRendererAnimatorListener() {}
 
         @Override // android.graphics.drawable.AnimatedVectorDrawable.VectorDrawableAnimator
         public void onDraw(Canvas canvas) {
@@ -852,7 +925,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         }
     }
 
-    public static class VectorDrawableAnimatorRT implements VectorDrawableAnimator, NativeVectorDrawableAnimator {
+    public static class VectorDrawableAnimatorRT
+            implements VectorDrawableAnimator, NativeVectorDrawableAnimator {
         private static final int END_ANIMATION = 4;
         private static final int MAX_SAMPLE_POINTS = 300;
         private static final int RESET_ANIMATION = 3;
@@ -866,7 +940,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         private long mTotalDuration;
         private Animator.AnimatorListener mListener = null;
         private final LongArray mStartDelays = new LongArray();
-        private PropertyValuesHolder.PropertyValues mTmpValues = new PropertyValuesHolder.PropertyValues();
+        private PropertyValuesHolder.PropertyValues mTmpValues =
+                new PropertyValuesHolder.PropertyValues();
         private boolean mContainsSequentialAnimators = false;
         private boolean mStarted = false;
         private boolean mInitialized = false;
@@ -886,10 +961,12 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         @Override // android.graphics.drawable.AnimatedVectorDrawable.VectorDrawableAnimator
         public void init(AnimatorSet set) {
             if (this.mInitialized) {
-                throw new UnsupportedOperationException("VectorDrawableAnimator cannot be re-initialized");
+                throw new UnsupportedOperationException(
+                        "VectorDrawableAnimator cannot be re-initialized");
             }
             parseAnimatorSet(set, 0L);
-            long vectorDrawableTreePtr = this.mDrawable.mAnimatedVectorState.mVectorDrawable.getNativeTree();
+            long vectorDrawableTreePtr =
+                    this.mDrawable.mAnimatedVectorState.mVectorDrawable.getNativeTree();
             AnimatedVectorDrawable.nSetVectorDrawableTarget(this.mSetPtr, vectorDrawableTreePtr);
             this.mInitialized = true;
             this.mTotalDuration = set.getTotalDuration();
@@ -928,52 +1005,76 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
             PropertyValuesHolder[] values = animator.getValues();
             Object target = animator.getTarget();
             if (target instanceof VectorDrawable.VGroup) {
-                createRTAnimatorForGroup(values, animator, (VectorDrawable.VGroup) target, startTime);
+                createRTAnimatorForGroup(
+                        values, animator, (VectorDrawable.VGroup) target, startTime);
                 return;
             }
             if (target instanceof VectorDrawable.VPath) {
                 for (PropertyValuesHolder propertyValuesHolder : values) {
                     propertyValuesHolder.getPropertyValues(this.mTmpValues);
-                    if ((this.mTmpValues.endValue instanceof PathParser.PathData) && this.mTmpValues.propertyName.equals("pathData")) {
+                    if ((this.mTmpValues.endValue instanceof PathParser.PathData)
+                            && this.mTmpValues.propertyName.equals("pathData")) {
                         createRTAnimatorForPath(animator, (VectorDrawable.VPath) target, startTime);
                     } else if (target instanceof VectorDrawable.VFullPath) {
-                        createRTAnimatorForFullPath(animator, (VectorDrawable.VFullPath) target, startTime);
+                        createRTAnimatorForFullPath(
+                                animator, (VectorDrawable.VFullPath) target, startTime);
                     } else if (!this.mDrawable.mAnimatedVectorState.mShouldIgnoreInvalidAnim) {
-                        throw new IllegalArgumentException("ClipPath only supports PathData property");
+                        throw new IllegalArgumentException(
+                                "ClipPath only supports PathData property");
                     }
                 }
                 return;
             }
             if (target instanceof VectorDrawable.VectorDrawableState) {
-                createRTAnimatorForRootGroup(values, animator, (VectorDrawable.VectorDrawableState) target, startTime);
+                createRTAnimatorForRootGroup(
+                        values, animator, (VectorDrawable.VectorDrawableState) target, startTime);
             }
         }
 
-        private void createRTAnimatorForGroup(PropertyValuesHolder[] values, ObjectAnimator animator, VectorDrawable.VGroup target, long startTime) {
+        private void createRTAnimatorForGroup(
+                PropertyValuesHolder[] values,
+                ObjectAnimator animator,
+                VectorDrawable.VGroup target,
+                long startTime) {
             long nativePtr = target.getNativePtr();
             for (PropertyValuesHolder propertyValuesHolder : values) {
                 propertyValuesHolder.getPropertyValues(this.mTmpValues);
-                int propertyId = VectorDrawable.VGroup.getPropertyIndex(this.mTmpValues.propertyName);
-                if ((this.mTmpValues.type == Float.class || this.mTmpValues.type == Float.TYPE) && propertyId >= 0) {
-                    long propertyPtr = AnimatedVectorDrawable.nCreateGroupPropertyHolder(nativePtr, propertyId, ((Float) this.mTmpValues.startValue).floatValue(), ((Float) this.mTmpValues.endValue).floatValue());
+                int propertyId =
+                        VectorDrawable.VGroup.getPropertyIndex(this.mTmpValues.propertyName);
+                if ((this.mTmpValues.type == Float.class || this.mTmpValues.type == Float.TYPE)
+                        && propertyId >= 0) {
+                    long propertyPtr =
+                            AnimatedVectorDrawable.nCreateGroupPropertyHolder(
+                                    nativePtr,
+                                    propertyId,
+                                    ((Float) this.mTmpValues.startValue).floatValue(),
+                                    ((Float) this.mTmpValues.endValue).floatValue());
                     if (this.mTmpValues.dataSource != null) {
-                        float[] dataPoints = createFloatDataPoints(this.mTmpValues.dataSource, animator.getDuration());
-                        AnimatedVectorDrawable.nSetPropertyHolderData(propertyPtr, dataPoints, dataPoints.length);
+                        float[] dataPoints =
+                                createFloatDataPoints(
+                                        this.mTmpValues.dataSource, animator.getDuration());
+                        AnimatedVectorDrawable.nSetPropertyHolderData(
+                                propertyPtr, dataPoints, dataPoints.length);
                     }
                     createNativeChildAnimator(propertyPtr, startTime, animator);
                 }
             }
         }
 
-        private void createRTAnimatorForPath(ObjectAnimator animator, VectorDrawable.VPath target, long startTime) {
+        private void createRTAnimatorForPath(
+                ObjectAnimator animator, VectorDrawable.VPath target, long startTime) {
             long nativePtr = target.getNativePtr();
-            long startPathDataPtr = ((PathParser.PathData) this.mTmpValues.startValue).getNativePtr();
+            long startPathDataPtr =
+                    ((PathParser.PathData) this.mTmpValues.startValue).getNativePtr();
             long endPathDataPtr = ((PathParser.PathData) this.mTmpValues.endValue).getNativePtr();
-            long propertyPtr = AnimatedVectorDrawable.nCreatePathDataPropertyHolder(nativePtr, startPathDataPtr, endPathDataPtr);
+            long propertyPtr =
+                    AnimatedVectorDrawable.nCreatePathDataPropertyHolder(
+                            nativePtr, startPathDataPtr, endPathDataPtr);
             createNativeChildAnimator(propertyPtr, startTime, animator);
         }
 
-        private void createRTAnimatorForFullPath(ObjectAnimator animator, VectorDrawable.VFullPath target, long startTime) {
+        private void createRTAnimatorForFullPath(
+                ObjectAnimator animator, VectorDrawable.VFullPath target, long startTime) {
             long propertyPtr;
             int propertyId = target.getPropertyIndex(this.mTmpValues.propertyName);
             long nativePtr = target.getNativePtr();
@@ -982,30 +1083,56 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
                     if (this.mDrawable.mAnimatedVectorState.mShouldIgnoreInvalidAnim) {
                         return;
                     } else {
-                        throw new IllegalArgumentException("Property: " + this.mTmpValues.propertyName + " is not supported for FullPath");
+                        throw new IllegalArgumentException(
+                                "Property: "
+                                        + this.mTmpValues.propertyName
+                                        + " is not supported for FullPath");
                     }
                 } else {
-                    propertyPtr = AnimatedVectorDrawable.nCreatePathPropertyHolder(nativePtr, propertyId, ((Float) this.mTmpValues.startValue).floatValue(), ((Float) this.mTmpValues.endValue).floatValue());
+                    propertyPtr =
+                            AnimatedVectorDrawable.nCreatePathPropertyHolder(
+                                    nativePtr,
+                                    propertyId,
+                                    ((Float) this.mTmpValues.startValue).floatValue(),
+                                    ((Float) this.mTmpValues.endValue).floatValue());
                     if (this.mTmpValues.dataSource != null) {
-                        float[] dataPoints = createFloatDataPoints(this.mTmpValues.dataSource, animator.getDuration());
-                        AnimatedVectorDrawable.nSetPropertyHolderData(propertyPtr, dataPoints, dataPoints.length);
+                        float[] dataPoints =
+                                createFloatDataPoints(
+                                        this.mTmpValues.dataSource, animator.getDuration());
+                        AnimatedVectorDrawable.nSetPropertyHolderData(
+                                propertyPtr, dataPoints, dataPoints.length);
                     }
                 }
-            } else if (this.mTmpValues.type == Integer.class || this.mTmpValues.type == Integer.TYPE) {
-                propertyPtr = AnimatedVectorDrawable.nCreatePathColorPropertyHolder(nativePtr, propertyId, ((Integer) this.mTmpValues.startValue).intValue(), ((Integer) this.mTmpValues.endValue).intValue());
+            } else if (this.mTmpValues.type == Integer.class
+                    || this.mTmpValues.type == Integer.TYPE) {
+                propertyPtr =
+                        AnimatedVectorDrawable.nCreatePathColorPropertyHolder(
+                                nativePtr,
+                                propertyId,
+                                ((Integer) this.mTmpValues.startValue).intValue(),
+                                ((Integer) this.mTmpValues.endValue).intValue());
                 if (this.mTmpValues.dataSource != null) {
-                    int[] dataPoints2 = createIntDataPoints(this.mTmpValues.dataSource, animator.getDuration());
-                    AnimatedVectorDrawable.nSetPropertyHolderData(propertyPtr, dataPoints2, dataPoints2.length);
+                    int[] dataPoints2 =
+                            createIntDataPoints(this.mTmpValues.dataSource, animator.getDuration());
+                    AnimatedVectorDrawable.nSetPropertyHolderData(
+                            propertyPtr, dataPoints2, dataPoints2.length);
                 }
             } else if (this.mDrawable.mAnimatedVectorState.mShouldIgnoreInvalidAnim) {
                 return;
             } else {
-                throw new UnsupportedOperationException("Unsupported type: " + this.mTmpValues.type + ". Only float, int or PathData value is supported for Paths.");
+                throw new UnsupportedOperationException(
+                        "Unsupported type: "
+                                + this.mTmpValues.type
+                                + ". Only float, int or PathData value is supported for Paths.");
             }
             createNativeChildAnimator(propertyPtr, startTime, animator);
         }
 
-        private void createRTAnimatorForRootGroup(PropertyValuesHolder[] values, ObjectAnimator animator, VectorDrawable.VectorDrawableState target, long startTime) {
+        private void createRTAnimatorForRootGroup(
+                PropertyValuesHolder[] values,
+                ObjectAnimator animator,
+                VectorDrawable.VectorDrawableState target,
+                long startTime) {
             Float startValue;
             Float endValue;
             long nativePtr = target.getNativeRenderer();
@@ -1013,7 +1140,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
                 if (this.mDrawable.mAnimatedVectorState.mShouldIgnoreInvalidAnim) {
                     return;
                 } else {
-                    throw new UnsupportedOperationException("Only alpha is supported for root group");
+                    throw new UnsupportedOperationException(
+                            "Only alpha is supported for root group");
                 }
             }
             int i = 0;
@@ -1042,10 +1170,14 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
                     throw new UnsupportedOperationException("No alpha values are specified");
                 }
             }
-            long propertyPtr = AnimatedVectorDrawable.nCreateRootAlphaPropertyHolder(nativePtr, startValue.floatValue(), endValue.floatValue());
+            long propertyPtr =
+                    AnimatedVectorDrawable.nCreateRootAlphaPropertyHolder(
+                            nativePtr, startValue.floatValue(), endValue.floatValue());
             if (this.mTmpValues.dataSource != null) {
-                float[] dataPoints = createFloatDataPoints(this.mTmpValues.dataSource, animator.getDuration());
-                AnimatedVectorDrawable.nSetPropertyHolderData(propertyPtr, dataPoints, dataPoints.length);
+                float[] dataPoints =
+                        createFloatDataPoints(this.mTmpValues.dataSource, animator.getDuration());
+                AnimatedVectorDrawable.nSetPropertyHolderData(
+                        propertyPtr, dataPoints, dataPoints.length);
             }
             createNativeChildAnimator(propertyPtr, startTime, animator);
         }
@@ -1055,13 +1187,18 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
             int animIntervalMs = (int) (frameIntervalNanos / 1000000);
             int numAnimFrames = Math.max(2, (int) Math.ceil(duration / animIntervalMs));
             if (numAnimFrames > 300) {
-                Log.w(AnimatedVectorDrawable.LOGTAG, "Duration for the animation is too long :" + duration + ", the animation will subsample the keyframe or path data.");
+                Log.w(
+                        AnimatedVectorDrawable.LOGTAG,
+                        "Duration for the animation is too long :"
+                                + duration
+                                + ", the animation will subsample the keyframe or path data.");
                 return 300;
             }
             return numAnimFrames;
         }
 
-        private static float[] createFloatDataPoints(PropertyValuesHolder.PropertyValues.DataSource dataSource, long duration) {
+        private static float[] createFloatDataPoints(
+                PropertyValuesHolder.PropertyValues.DataSource dataSource, long duration) {
             int numAnimFrames = getFrameCount(duration);
             float[] values = new float[numAnimFrames];
             float lastFrame = numAnimFrames - 1;
@@ -1072,7 +1209,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
             return values;
         }
 
-        private static int[] createIntDataPoints(PropertyValuesHolder.PropertyValues.DataSource dataSource, long duration) {
+        private static int[] createIntDataPoints(
+                PropertyValuesHolder.PropertyValues.DataSource dataSource, long duration) {
             int numAnimFrames = getFrameCount(duration);
             int[] values = new int[numAnimFrames];
             float lastFrame = numAnimFrames - 1;
@@ -1083,22 +1221,32 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
             return values;
         }
 
-        private void createNativeChildAnimator(long propertyPtr, long extraDelay, ObjectAnimator animator) {
+        private void createNativeChildAnimator(
+                long propertyPtr, long extraDelay, ObjectAnimator animator) {
             long duration = animator.getDuration();
             int repeatCount = animator.getRepeatCount();
             long startDelay = extraDelay + animator.getStartDelay();
             TimeInterpolator interpolator = animator.getInterpolator();
-            long nativeInterpolator = NativeInterpolatorFactory.createNativeInterpolator(interpolator, duration);
+            long nativeInterpolator =
+                    NativeInterpolatorFactory.createNativeInterpolator(interpolator, duration);
             long startDelay2 = (long) (startDelay * ValueAnimator.getDurationScale());
             long duration2 = (long) (duration * ValueAnimator.getDurationScale());
             this.mStartDelays.add(startDelay2);
-            AnimatedVectorDrawable.nAddAnimator(this.mSetPtr, propertyPtr, nativeInterpolator, startDelay2, duration2, repeatCount, animator.getRepeatMode());
+            AnimatedVectorDrawable.nAddAnimator(
+                    this.mSetPtr,
+                    propertyPtr,
+                    nativeInterpolator,
+                    startDelay2,
+                    duration2,
+                    repeatCount,
+                    animator.getRepeatMode());
         }
 
         protected void recordLastSeenTarget(RecordingCanvas canvas) {
             RenderNode node = canvas.mNode;
             this.mLastSeenTarget = new WeakReference<>(node);
-            if ((this.mInitialized || this.mPendingAnimationActions.size() > 0) && useTarget(node)) {
+            if ((this.mInitialized || this.mPendingAnimationActions.size() > 0)
+                    && useTarget(node)) {
                 for (int i = 0; i < this.mPendingAnimationActions.size(); i++) {
                     handlePendingAction(this.mPendingAnimationActions.get(i));
                 }
@@ -1120,7 +1268,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
                     endAnimation();
                     return;
                 }
-                throw new UnsupportedOperationException("Animation action " + pendingAnimationAction + "is not supported");
+                throw new UnsupportedOperationException(
+                        "Animation action " + pendingAnimationAction + "is not supported");
             }
         }
 
@@ -1246,7 +1395,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         }
 
         @Override // android.view.NativeVectorDrawableAnimator
-        public void setThreadedRendererAnimatorListener(Animator.AnimatorListener animatorListener) {
+        public void setThreadedRendererAnimatorListener(
+                Animator.AnimatorListener animatorListener) {
             this.mThreadedRendererAnimatorListener = animatorListener;
         }
 
@@ -1296,12 +1446,10 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         }
 
         @Override // android.graphics.drawable.AnimatedVectorDrawable.VectorDrawableAnimator
-        public void pause() {
-        }
+        public void pause() {}
 
         @Override // android.graphics.drawable.AnimatedVectorDrawable.VectorDrawableAnimator
-        public void resume() {
-        }
+        public void resume() {}
 
         /* JADX INFO: Access modifiers changed from: private */
         public void onAnimationEnd(int listenerId) {
@@ -1319,12 +1467,14 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
         }
 
         private static void callOnFinished(final VectorDrawableAnimatorRT set, final int id) {
-            set.mHandler.post(new Runnable() { // from class: android.graphics.drawable.AnimatedVectorDrawable$VectorDrawableAnimatorRT$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AnimatedVectorDrawable.VectorDrawableAnimatorRT.this.onAnimationEnd(id);
-                }
-            });
+            set.mHandler.post(
+                    new Runnable() { // from class:
+                        // android.graphics.drawable.AnimatedVectorDrawable$VectorDrawableAnimatorRT$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AnimatedVectorDrawable.VectorDrawableAnimatorRT.this.onAnimationEnd(id);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1340,7 +1490,8 @@ public class AnimatedVectorDrawable extends Drawable implements Animatable2 {
                 } else if (pendingAction == 3) {
                     animatorSet.reset();
                 } else {
-                    throw new UnsupportedOperationException("Animation action " + pendingAction + "is not supported");
+                    throw new UnsupportedOperationException(
+                            "Animation action " + pendingAction + "is not supported");
                 }
             }
             this.mPendingAnimationActions.clear();

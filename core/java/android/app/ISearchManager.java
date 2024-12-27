@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -26,7 +27,8 @@ public interface ISearchManager extends IInterface {
 
     public static class Default implements ISearchManager {
         @Override // android.app.ISearchManager
-        public SearchableInfo getSearchableInfo(ComponentName launchActivity) throws RemoteException {
+        public SearchableInfo getSearchableInfo(ComponentName launchActivity)
+                throws RemoteException {
             return null;
         }
 
@@ -51,8 +53,7 @@ public interface ISearchManager extends IInterface {
         }
 
         @Override // android.app.ISearchManager
-        public void launchAssist(int userHandle, Bundle args) throws RemoteException {
-        }
+        public void launchAssist(int userHandle, Bundle args) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -60,7 +61,7 @@ public interface ISearchManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISearchManager {
+    public abstract static class Stub extends Binder implements ISearchManager {
         public static final String DESCRIPTOR = "android.app.ISearchManager";
         static final int TRANSACTION_getGlobalSearchActivities = 3;
         static final int TRANSACTION_getGlobalSearchActivity = 4;
@@ -114,7 +115,8 @@ public interface ISearchManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -124,7 +126,8 @@ public interface ISearchManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     SearchableInfo _result = getSearchableInfo(_arg0);
                     reply.writeNoException();
@@ -179,7 +182,8 @@ public interface ISearchManager extends IInterface {
             }
 
             @Override // android.app.ISearchManager
-            public SearchableInfo getSearchableInfo(ComponentName launchActivity) throws RemoteException {
+            public SearchableInfo getSearchableInfo(ComponentName launchActivity)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -187,7 +191,8 @@ public interface ISearchManager extends IInterface {
                     _data.writeTypedObject(launchActivity, 0);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    SearchableInfo _result = (SearchableInfo) _reply.readTypedObject(SearchableInfo.CREATOR);
+                    SearchableInfo _result =
+                            (SearchableInfo) _reply.readTypedObject(SearchableInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -203,7 +208,8 @@ public interface ISearchManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    List<SearchableInfo> _result = _reply.createTypedArrayList(SearchableInfo.CREATOR);
+                    List<SearchableInfo> _result =
+                            _reply.createTypedArrayList(SearchableInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -235,7 +241,8 @@ public interface ISearchManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -251,7 +258,8 @@ public interface ISearchManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

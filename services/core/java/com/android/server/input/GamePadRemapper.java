@@ -2,6 +2,7 @@ package com.android.server.input;
 
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.util.ArraySet;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -40,11 +41,45 @@ public final class GamePadRemapper {
     }
 
     public static final String getButtonString(int i) {
-        return i != 96 ? i != 97 ? i != 99 ? i != 100 ? i != 102 ? i != 103 ? i != 106 ? i != 107 ? i != 2048 ? i != 2059 ? i != 2063 ? i != 2065 ? i != 2066 ? VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Wrong button ") : "BUTTON_RTRIGGER" : "BUTTON_LTRIGGER" : "STICK_DPAD" : "STICK_RIGHT" : "STICK_LEFT" : "BUTTON_THUMBR" : "BUTTON_THUMBL" : "BUTTON_R2" : "BUTTON_L1" : "BUTTON_Y" : "BUTTON_X" : "BUTTON_B" : "BUTTON_A";
+        return i != 96
+                ? i != 97
+                        ? i != 99
+                                ? i != 100
+                                        ? i != 102
+                                                ? i != 103
+                                                        ? i != 106
+                                                                ? i != 107
+                                                                        ? i != 2048
+                                                                                ? i != 2059
+                                                                                        ? i != 2063
+                                                                                                ? i
+                                                                                                                != 2065
+                                                                                                        ? i
+                                                                                                                        != 2066
+                                                                                                                ? VibrationParam$1$$ExternalSyntheticOutline0
+                                                                                                                        .m(
+                                                                                                                                i,
+                                                                                                                                "Wrong"
+                                                                                                                                    + " button"
+                                                                                                                                    + " ")
+                                                                                                                : "BUTTON_RTRIGGER"
+                                                                                                        : "BUTTON_LTRIGGER"
+                                                                                                : "STICK_DPAD"
+                                                                                        : "STICK_RIGHT"
+                                                                                : "STICK_LEFT"
+                                                                        : "BUTTON_THUMBR"
+                                                                : "BUTTON_THUMBL"
+                                                        : "BUTTON_R2"
+                                                : "BUTTON_L1"
+                                        : "BUTTON_Y"
+                                : "BUTTON_X"
+                        : "BUTTON_B"
+                : "BUTTON_A";
     }
 
     public static boolean isValidButton(int i) {
-        return i == 96 || i == 97 || i == 99 || i == 100 || i == 102 || i == 103 || i == 106 || i == 107 || i == 2065 || i == 2066;
+        return i == 96 || i == 97 || i == 99 || i == 100 || i == 102 || i == 103 || i == 106
+                || i == 107 || i == 2065 || i == 2066;
     }
 
     public static boolean isValidId(int i) {

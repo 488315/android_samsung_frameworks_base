@@ -2,28 +2,31 @@ package android.content.pm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Collections;
 import java.util.List;
 
 /* loaded from: classes.dex */
 public class ParceledListSlice<T extends Parcelable> extends BaseParceledListSlice<T> {
-    public static final Parcelable.ClassLoaderCreator<ParceledListSlice> CREATOR = new Parcelable.ClassLoaderCreator<ParceledListSlice>() { // from class: android.content.pm.ParceledListSlice.1
-        @Override // android.os.Parcelable.Creator
-        public ParceledListSlice createFromParcel(Parcel parcel) {
-            return new ParceledListSlice(parcel, null);
-        }
+    public static final Parcelable.ClassLoaderCreator<ParceledListSlice> CREATOR =
+            new Parcelable.ClassLoaderCreator<
+                    ParceledListSlice>() { // from class: android.content.pm.ParceledListSlice.1
+                @Override // android.os.Parcelable.Creator
+                public ParceledListSlice createFromParcel(Parcel parcel) {
+                    return new ParceledListSlice(parcel, null);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.ClassLoaderCreator
-        public ParceledListSlice createFromParcel(Parcel in, ClassLoader loader) {
-            return new ParceledListSlice(in, loader);
-        }
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.ClassLoaderCreator
+                public ParceledListSlice createFromParcel(Parcel in, ClassLoader loader) {
+                    return new ParceledListSlice(in, loader);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public ParceledListSlice[] newArray(int size) {
-            return new ParceledListSlice[size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public ParceledListSlice[] newArray(int size) {
+                    return new ParceledListSlice[size];
+                }
+            };
 
     @Override // android.content.pm.BaseParceledListSlice
     public /* bridge */ /* synthetic */ List getList() {

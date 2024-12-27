@@ -6,10 +6,13 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.content.NativeLibraryHelper;
+
 import com.samsung.android.core.CoreSaConstant;
 import com.samsung.android.wallpaperbackup.GenerateXML;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -135,16 +138,15 @@ public final class DumpUtils {
         PROCESS_STATS_STATE_TO_AGGREGATED_STATE[13] = 8;
         PROCESS_STATS_STATE_TO_AGGREGATED_STATE[14] = 8;
         PROCESS_STATS_STATE_TO_AGGREGATED_STATE[15] = 8;
-        ADJ_SCREEN_NAMES_CSV = new String[]{"off", "on"};
-        ADJ_MEM_NAMES_CSV = new String[]{"norm", "mod", "low", "crit"};
-        ADJ_SCREEN_TAGS = new String[]{"0", "1"};
-        ADJ_SCREEN_PROTO_ENUMS = new int[]{1, 2};
-        ADJ_MEM_TAGS = new String[]{"n", "m", XmlTags.TAG_LEASEE, "c"};
-        ADJ_MEM_PROTO_ENUMS = new int[]{1, 2, 3, 4};
+        ADJ_SCREEN_NAMES_CSV = new String[] {"off", "on"};
+        ADJ_MEM_NAMES_CSV = new String[] {"norm", "mod", "low", "crit"};
+        ADJ_SCREEN_TAGS = new String[] {"0", "1"};
+        ADJ_SCREEN_PROTO_ENUMS = new int[] {1, 2};
+        ADJ_MEM_TAGS = new String[] {"n", "m", XmlTags.TAG_LEASEE, "c"};
+        ADJ_MEM_PROTO_ENUMS = new int[] {1, 2, 3, 4};
     }
 
-    private DumpUtils() {
-    }
+    private DumpUtils() {}
 
     public static void printScreenLabel(PrintWriter pw, int offset) {
         switch (offset) {
@@ -249,22 +251,45 @@ public final class DumpUtils {
     }
 
     public static void printProcStateTag(PrintWriter pw, int state) {
-        printArrayEntry(pw, STATE_TAGS, printArrayEntry(pw, ADJ_MEM_TAGS, printArrayEntry(pw, ADJ_SCREEN_TAGS, state, 64), 16), 1);
+        printArrayEntry(
+                pw,
+                STATE_TAGS,
+                printArrayEntry(
+                        pw, ADJ_MEM_TAGS, printArrayEntry(pw, ADJ_SCREEN_TAGS, state, 64), 16),
+                1);
     }
 
-    public static void printProcStateTagProto(ProtoOutputStream proto, long screenId, long memId, long stateId, int state) {
-        printProto(proto, stateId, STATE_PROTO_ENUMS, printProto(proto, memId, ADJ_MEM_PROTO_ENUMS, printProto(proto, screenId, ADJ_SCREEN_PROTO_ENUMS, state, 64), 16), 1);
+    public static void printProcStateTagProto(
+            ProtoOutputStream proto, long screenId, long memId, long stateId, int state) {
+        printProto(
+                proto,
+                stateId,
+                STATE_PROTO_ENUMS,
+                printProto(
+                        proto,
+                        memId,
+                        ADJ_MEM_PROTO_ENUMS,
+                        printProto(proto, screenId, ADJ_SCREEN_PROTO_ENUMS, state, 64),
+                        16),
+                1);
     }
 
     public static void printAdjTag(PrintWriter pw, int state) {
         printArrayEntry(pw, ADJ_MEM_TAGS, printArrayEntry(pw, ADJ_SCREEN_TAGS, state, 4), 1);
     }
 
-    public static void printProcStateAdjTagProto(ProtoOutputStream proto, long screenId, long memId, int state) {
-        printProto(proto, memId, ADJ_MEM_PROTO_ENUMS, printProto(proto, screenId, ADJ_SCREEN_PROTO_ENUMS, state, 64), 16);
+    public static void printProcStateAdjTagProto(
+            ProtoOutputStream proto, long screenId, long memId, int state) {
+        printProto(
+                proto,
+                memId,
+                ADJ_MEM_PROTO_ENUMS,
+                printProto(proto, screenId, ADJ_SCREEN_PROTO_ENUMS, state, 64),
+                16);
     }
 
-    public static void printProcStateDurationProto(ProtoOutputStream proto, long fieldId, int procState, long duration) {
+    public static void printProcStateDurationProto(
+            ProtoOutputStream proto, long fieldId, int procState, long duration) {
         long stateToken = proto.start(fieldId);
         printProto(proto, 1159641169923L, STATE_PROTO_ENUMS, procState, 1);
         proto.write(1112396529668L, duration);
@@ -285,7 +310,13 @@ public final class DumpUtils {
         pw.print(value);
     }
 
-    public static long dumpSingleTime(PrintWriter pw, String prefix, long[] durations, int curState, long curStartTime, long now) {
+    public static long dumpSingleTime(
+            PrintWriter pw,
+            String prefix,
+            long[] durations,
+            int curState,
+            long curStartTime,
+            long now) {
         int i;
         long totalTime = 0;
         int printedScreen = -1;
@@ -332,7 +363,13 @@ public final class DumpUtils {
         return totalTime;
     }
 
-    public static void dumpAdjTimesCheckin(PrintWriter pw, String sep, long[] durations, int curState, long curStartTime, long now) {
+    public static void dumpAdjTimesCheckin(
+            PrintWriter pw,
+            String sep,
+            long[] durations,
+            int curState,
+            long curStartTime,
+            long now) {
         for (int iscreen = 0; iscreen < 8; iscreen += 4) {
             for (int imem = 0; imem < 4; imem++) {
                 int state = imem + iscreen;
@@ -347,7 +384,8 @@ public final class DumpUtils {
         }
     }
 
-    private static void dumpStateHeadersCsv(PrintWriter pw, String sep, int[] screenStates, int[] memStates, int[] procStates) {
+    private static void dumpStateHeadersCsv(
+            PrintWriter pw, String sep, int[] screenStates, int[] memStates, int[] procStates) {
         int NS = screenStates != null ? screenStates.length : 1;
         int NM = memStates != null ? memStates.length : 1;
         int NP = procStates != null ? procStates.length : 1;
@@ -378,20 +416,44 @@ public final class DumpUtils {
         }
     }
 
-    public static void dumpProcessSummaryLocked(PrintWriter pw, String prefix, String header, ArrayList<ProcessState> procs, int[] screenStates, int[] memStates, int[] procStates, long now, long totalTime) {
+    public static void dumpProcessSummaryLocked(
+            PrintWriter pw,
+            String prefix,
+            String header,
+            ArrayList<ProcessState> procs,
+            int[] screenStates,
+            int[] memStates,
+            int[] procStates,
+            long now,
+            long totalTime) {
         for (int i = procs.size() - 1; i >= 0; i--) {
             ProcessState proc = procs.get(i);
-            proc.dumpSummary(pw, prefix, header, screenStates, memStates, procStates, now, totalTime);
+            proc.dumpSummary(
+                    pw, prefix, header, screenStates, memStates, procStates, now, totalTime);
         }
     }
 
-    public static void dumpProcessListCsv(PrintWriter pw, ArrayList<ProcessState> procs, boolean sepScreenStates, int[] screenStates, boolean sepMemStates, int[] memStates, boolean sepProcStates, int[] procStates, long now) {
+    public static void dumpProcessListCsv(
+            PrintWriter pw,
+            ArrayList<ProcessState> procs,
+            boolean sepScreenStates,
+            int[] screenStates,
+            boolean sepMemStates,
+            int[] memStates,
+            boolean sepProcStates,
+            int[] procStates,
+            long now) {
         pw.print("process");
         pw.print(CSV_SEP);
         pw.print("uid");
         pw.print(CSV_SEP);
         pw.print("vers");
-        dumpStateHeadersCsv(pw, CSV_SEP, sepScreenStates ? screenStates : null, sepMemStates ? memStates : null, sepProcStates ? procStates : null);
+        dumpStateHeadersCsv(
+                pw,
+                CSV_SEP,
+                sepScreenStates ? screenStates : null,
+                sepMemStates ? memStates : null,
+                sepProcStates ? procStates : null);
         pw.println();
         for (int i = procs.size() - 1; i >= 0; i--) {
             ProcessState proc = procs.get(i);
@@ -400,7 +462,15 @@ public final class DumpUtils {
             UserHandle.formatUid(pw, proc.getUid());
             pw.print(CSV_SEP);
             pw.print(proc.getVersion());
-            proc.dumpCsv(pw, sepScreenStates, screenStates, sepMemStates, memStates, sepProcStates, procStates, now);
+            proc.dumpCsv(
+                    pw,
+                    sepScreenStates,
+                    screenStates,
+                    sepMemStates,
+                    memStates,
+                    sepProcStates,
+                    procStates,
+                    now);
             pw.println();
         }
     }
@@ -415,7 +485,8 @@ public final class DumpUtils {
         return value - (index * mod);
     }
 
-    public static int printProto(ProtoOutputStream proto, long fieldId, int[] enums, int value, int mod) {
+    public static int printProto(
+            ProtoOutputStream proto, long fieldId, int[] enums, int value, int mod) {
         int index = value / mod;
         if (index >= 0 && index < enums.length) {
             proto.write(fieldId, enums[index]);
@@ -449,7 +520,8 @@ public final class DumpUtils {
         return (procStateIndex << 15) | screenStateIndex;
     }
 
-    public static void printAggregatedProcStateTagProto(ProtoOutputStream proto, long screenId, long stateId, int state) {
+    public static void printAggregatedProcStateTagProto(
+            ProtoOutputStream proto, long screenId, long stateId, int state) {
         try {
             proto.write(stateId, state >> 15);
         } catch (IndexOutOfBoundsException e) {

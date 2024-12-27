@@ -7,7 +7,9 @@ import android.media.AudioSystem;
 import android.media.Utils;
 import android.media.audio.Flags;
 import android.util.Pair;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -47,7 +49,13 @@ public final class AdiDeviceState {
             return false;
         }
         AdiDeviceState adiDeviceState = (AdiDeviceState) obj;
-        return this.mDeviceType == adiDeviceState.mDeviceType && this.mInternalDeviceType == adiDeviceState.mInternalDeviceType && this.mDeviceAddress.equals(adiDeviceState.mDeviceAddress) && this.mSAEnabled == adiDeviceState.mSAEnabled && this.mHasHeadTracker == adiDeviceState.mHasHeadTracker && this.mHeadTrackerEnabled == adiDeviceState.mHeadTrackerEnabled && this.mAudioDeviceCategory == adiDeviceState.mAudioDeviceCategory;
+        return this.mDeviceType == adiDeviceState.mDeviceType
+                && this.mInternalDeviceType == adiDeviceState.mInternalDeviceType
+                && this.mDeviceAddress.equals(adiDeviceState.mDeviceAddress)
+                && this.mSAEnabled == adiDeviceState.mSAEnabled
+                && this.mHasHeadTracker == adiDeviceState.mHasHeadTracker
+                && this.mHeadTrackerEnabled == adiDeviceState.mHeadTrackerEnabled
+                && this.mAudioDeviceCategory == adiDeviceState.mAudioDeviceCategory;
     }
 
     public final synchronized AudioDeviceAttributes getAudioDeviceAttributes() {
@@ -71,7 +79,14 @@ public final class AdiDeviceState {
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mDeviceType), Integer.valueOf(this.mInternalDeviceType), this.mDeviceAddress, Boolean.valueOf(this.mSAEnabled), Boolean.valueOf(this.mHasHeadTracker), Boolean.valueOf(this.mHeadTrackerEnabled), Integer.valueOf(this.mAudioDeviceCategory));
+        return Objects.hash(
+                Integer.valueOf(this.mDeviceType),
+                Integer.valueOf(this.mInternalDeviceType),
+                this.mDeviceAddress,
+                Boolean.valueOf(this.mSAEnabled),
+                Boolean.valueOf(this.mHasHeadTracker),
+                Boolean.valueOf(this.mHeadTrackerEnabled),
+                Integer.valueOf(this.mAudioDeviceCategory));
     }
 
     public final synchronized boolean isHeadTrackerEnabled() {

@@ -2,8 +2,7 @@ package com.android.internal.app;
 
 import android.content.Context;
 import android.os.LocaleList;
-import com.android.internal.app.LocalePickerWithRegion;
-import com.android.internal.app.LocaleStore;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -34,13 +33,26 @@ class SystemLocaleCollector implements LocalePickerWithRegion.LocaleCollectorBas
     }
 
     @Override // com.android.internal.app.LocalePickerWithRegion.LocaleCollectorBase
-    public Set<LocaleStore.LocaleInfo> getSupportedLocaleList(LocaleStore.LocaleInfo parent, boolean translatedOnly, boolean isForCountryMode) {
+    public Set<LocaleStore.LocaleInfo> getSupportedLocaleList(
+            LocaleStore.LocaleInfo parent, boolean translatedOnly, boolean isForCountryMode) {
         Set<String> langTagsToIgnore = getIgnoredLocaleList(translatedOnly);
         if (isForCountryMode) {
-            Set<LocaleStore.LocaleInfo> localeList = LocaleStore.getLevelLocales(this.mContext, langTagsToIgnore, parent, translatedOnly, this.mExplicitLocales);
+            Set<LocaleStore.LocaleInfo> localeList =
+                    LocaleStore.getLevelLocales(
+                            this.mContext,
+                            langTagsToIgnore,
+                            parent,
+                            translatedOnly,
+                            this.mExplicitLocales);
             return localeList;
         }
-        Set<LocaleStore.LocaleInfo> localeList2 = LocaleStore.getLevelLocales(this.mContext, langTagsToIgnore, null, translatedOnly, this.mExplicitLocales);
+        Set<LocaleStore.LocaleInfo> localeList2 =
+                LocaleStore.getLevelLocales(
+                        this.mContext,
+                        langTagsToIgnore,
+                        null,
+                        translatedOnly,
+                        this.mExplicitLocales);
         return localeList2;
     }
 

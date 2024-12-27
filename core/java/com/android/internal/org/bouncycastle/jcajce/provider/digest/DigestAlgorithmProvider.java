@@ -6,10 +6,13 @@ import com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvi
 
 /* loaded from: classes5.dex */
 abstract class DigestAlgorithmProvider extends AlgorithmProvider {
-    DigestAlgorithmProvider() {
-    }
+    DigestAlgorithmProvider() {}
 
-    protected void addHMACAlgorithm(ConfigurableProvider provider, String algorithm, String algorithmClassName, String keyGeneratorClassName) {
+    protected void addHMACAlgorithm(
+            ConfigurableProvider provider,
+            String algorithm,
+            String algorithmClassName,
+            String keyGeneratorClassName) {
         String mainName = "HMAC" + algorithm;
         provider.addAlgorithm("Mac." + mainName, algorithmClassName);
         provider.addAlgorithm("Alg.Alias.Mac.HMAC-" + algorithm, mainName);
@@ -19,7 +22,8 @@ abstract class DigestAlgorithmProvider extends AlgorithmProvider {
         provider.addAlgorithm("Alg.Alias.KeyGenerator.HMAC/" + algorithm, mainName);
     }
 
-    protected void addHMACAlias(ConfigurableProvider provider, String algorithm, ASN1ObjectIdentifier oid) {
+    protected void addHMACAlias(
+            ConfigurableProvider provider, String algorithm, ASN1ObjectIdentifier oid) {
         String mainName = "HMAC" + algorithm;
         provider.addAlgorithm("Alg.Alias.Mac." + oid, mainName);
         provider.addAlgorithm("Alg.Alias.KeyGenerator." + oid, mainName);

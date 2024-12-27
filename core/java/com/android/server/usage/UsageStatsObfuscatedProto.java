@@ -18,15 +18,13 @@ public final class UsageStatsObfuscatedProto {
         public static final long ACTION_TOKEN = 1120986464257L;
         public static final long COUNTS = 2246267895810L;
 
-        public ChooserAction() {
-        }
+        public ChooserAction() {}
 
         public final class CategoryCount {
             public static final long CATEGORY_TOKEN = 1120986464257L;
             public static final long COUNT = 1120986464258L;
 
-            public CategoryCount() {
-            }
+            public CategoryCount() {}
         }
     }
 }

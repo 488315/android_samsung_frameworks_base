@@ -49,6 +49,7 @@ import android.security.LegacyVpnProfileStore;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.net.IOemNetd;
 import com.android.internal.net.VpnProfile;
 import com.android.internal.notification.SystemNotificationChannels;
@@ -74,11 +75,11 @@ import com.android.server.am.Pageboost$PageboostFileDBHelper$$ExternalSyntheticO
 import com.android.server.connectivity.EnterpriseVpn$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.EnterpriseServiceCallback;
 import com.android.server.enterprise.storage.EdmStorageProvider;
-import com.android.server.enterprise.vpn.knoxvpn.KnoxVpnFirewallHelper;
 import com.android.server.enterprise.vpn.knoxvpn.profile.VpnPackageInfo;
 import com.android.server.enterprise.vpn.knoxvpn.profile.VpnProfileConfig;
 import com.android.server.enterprise.vpn.knoxvpn.profile.VpnProfileInfo;
 import com.android.server.enterprise.vpn.knoxvpn.storage.KnoxVpnStorageProvider;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.EdmConstants;
 import com.samsung.android.knox.EnterpriseDeviceManager;
@@ -93,6 +94,10 @@ import com.samsung.android.knox.net.vpn.IVpnInfoPolicy;
 import com.samsung.android.knox.net.vpn.KnoxVpnContext;
 import com.samsung.android.knox.net.vpn.serviceprovider.IKnoxVpnService;
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -105,12 +110,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements EnterpriseServiceCallback {
+public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub
+        implements EnterpriseServiceCallback {
     public static INetd mNetdService;
     public static IOemNetd mOemNetdService;
     public boolean isDeviceBootCompleted;
@@ -165,19 +169,26 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 this.threadStartTime = SystemClock.elapsedRealtime();
                 boolean z = KnoxVpnEngineService.DBG;
                 if (z) {
-                    Log.d("KnoxVpnEngineService", "ChainingStateMachine: thread start time is " + this.threadStartTime);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "ChainingStateMachine: thread start time is " + this.threadStartTime);
                 }
-                IKnoxVpnService binderInterfaceForProfile = KnoxVpnEngineService.this.getBinderInterfaceForProfile(this.profileName);
+                IKnoxVpnService binderInterfaceForProfile =
+                        KnoxVpnEngineService.this.getBinderInterfaceForProfile(this.profileName);
                 if (binderInterfaceForProfile == null) {
                     if (z) {
-                        Log.d("KnoxVpnEngineService", "Error occured while ChainingStateMachine: The error code is 110");
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "Error occured while ChainingStateMachine: The error code is 110");
                         return;
                     }
                     return;
                 }
                 int state = binderInterfaceForProfile.getState(this.profileName);
                 if (z) {
-                    Log.d("KnoxVpnEngineService", "ChainingStateMachine: currentState of the profile is " + state);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "ChainingStateMachine: currentState of the profile is " + state);
                 }
                 if (state == -1 || state == 5 || state == 1) {
                     startChainedConnection(this.idleStateSleepTime, this.profileName);
@@ -185,11 +196,17 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     startChainedConnection(this.connectingStateSleepTime, this.profileName);
                 }
                 if (z) {
-                    Log.d("KnoxVpnEngineService", "ChainingStateMachine: thread stop time is " + SystemClock.elapsedRealtime());
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "ChainingStateMachine: thread stop time is "
+                                    + SystemClock.elapsedRealtime());
                 }
             } catch (Exception e) {
                 if (KnoxVpnEngineService.DBG) {
-                    VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at ChainingStateMachine API "), "KnoxVpnEngineService");
+                    VpnManagerService$$ExternalSyntheticOutline0.m(
+                            e,
+                            new StringBuilder("Exception at ChainingStateMachine API "),
+                            "KnoxVpnEngineService");
                 }
             }
         }
@@ -197,26 +214,42 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         public final void startChainedConnection(long j, String str) {
             boolean z = KnoxVpnEngineService.DBG;
             if (z) {
-                DualAppManagerService$$ExternalSyntheticOutline0.m("ChainingStateMachine: startChainedConnection is being called for profile ", str, "KnoxVpnEngineService");
+                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                        "ChainingStateMachine: startChainedConnection is being called for profile ",
+                        str,
+                        "KnoxVpnEngineService");
             }
             try {
                 Thread.sleep(j);
                 if (z) {
-                    Log.d("KnoxVpnEngineService", "ChainingStateMachine: The thread running time after delay is  " + SystemClock.elapsedRealtime());
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "ChainingStateMachine: The thread running time after delay is  "
+                                    + SystemClock.elapsedRealtime());
                 }
-                IKnoxVpnService binderInterfaceForProfile = KnoxVpnEngineService.this.getBinderInterfaceForProfile(str);
+                IKnoxVpnService binderInterfaceForProfile =
+                        KnoxVpnEngineService.this.getBinderInterfaceForProfile(str);
                 if (binderInterfaceForProfile != null) {
                     if (z) {
-                        Log.d("KnoxVpnEngineService", "ChainingStateMachine: state of the profile after delay is " + binderInterfaceForProfile.getState(str));
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "ChainingStateMachine: state of the profile after delay is "
+                                        + binderInterfaceForProfile.getState(str));
                     }
                     int state = binderInterfaceForProfile.getState(str);
                     if (state == -1 || state == 5 || state == 1) {
-                        VpnProfileInfo profileEntry = KnoxVpnEngineService.this.vpnConfig.getProfileEntry(str);
+                        VpnProfileInfo profileEntry =
+                                KnoxVpnEngineService.this.vpnConfig.getProfileEntry(str);
                         if (profileEntry != null) {
-                            KnoxVpnEngineService.this.mIgnoreConnectCheckForChaining.put(Integer.valueOf(profileEntry.personaId), Boolean.TRUE);
+                            KnoxVpnEngineService.this.mIgnoreConnectCheckForChaining.put(
+                                    Integer.valueOf(profileEntry.personaId), Boolean.TRUE);
                             int startVpnProfile = KnoxVpnEngineService.this.startVpnProfile(str);
                             if (z) {
-                                Log.d("KnoxVpnEngineService", "ChainingStateMachine: the profile is going to be started after the delay and the result is " + startVpnProfile);
+                                Log.d(
+                                        "KnoxVpnEngineService",
+                                        "ChainingStateMachine: the profile is going to be started"
+                                            + " after the delay and the result is "
+                                                + startVpnProfile);
                                 return;
                             }
                             return;
@@ -226,23 +259,37 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     if (state == 2 || state == 3) {
                         long elapsedRealtime = SystemClock.elapsedRealtime();
                         if (z) {
-                            Log.d("KnoxVpnEngineService", "ChainingStateMachine: currentTime after the thread has started is  " + elapsedRealtime);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "ChainingStateMachine: currentTime after the thread has started"
+                                        + " is  "
+                                            + elapsedRealtime);
                         }
                         if (elapsedRealtime - this.threadStartTime <= 90000) {
                             if (z) {
-                                Log.d("KnoxVpnEngineService", "ChainingStateMachine: the profile is going to be delayed again " + str);
+                                Log.d(
+                                        "KnoxVpnEngineService",
+                                        "ChainingStateMachine: the profile is going to be delayed"
+                                            + " again "
+                                                + str);
                             }
                             startChainedConnection(this.connectingStateSleepTime, str);
                             return;
                         }
                         if (z) {
-                            Log.d("KnoxVpnEngineService", "ChainingStateMachine: time out has happened and going to exit " + str);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "ChainingStateMachine: time out has happened and going to exit "
+                                            + str);
                         }
                     }
                 }
             } catch (Exception e) {
                 if (KnoxVpnEngineService.DBG) {
-                    VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at startChainedConnection API "), "KnoxVpnEngineService");
+                    VpnManagerService$$ExternalSyntheticOutline0.m(
+                            e,
+                            new StringBuilder("Exception at startChainedConnection API "),
+                            "KnoxVpnEngineService");
                 }
             }
         }
@@ -275,14 +322,15 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 Method dump skipped, instructions count: 1636
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.KnoxVpnHandler.handleMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.KnoxVpnHandler.handleMessage(android.os.Message):void");
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VpnReceiver extends BroadcastReceiver {
-        public VpnReceiver() {
-        }
+        public VpnReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -296,15 +344,22 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             if (action.equalsIgnoreCase("android.intent.action.PACKAGE_ADDED")) {
                 Uri data = intent.getData();
                 schemeSpecificPart = data != null ? data.getSchemeSpecificPart() : null;
-                boolean booleanExtra = intent.getBooleanExtra("android.intent.extra.REPLACING", false);
+                boolean booleanExtra =
+                        intent.getBooleanExtra("android.intent.extra.REPLACING", false);
                 boolean z = KnoxVpnEngineService.DBG;
                 if (z) {
-                    AccessibilityManagerService$$ExternalSyntheticOutline0.m("Vpn Receiver : The extra value is ", "KnoxVpnEngineService", booleanExtra);
+                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                            "Vpn Receiver : The extra value is ",
+                            "KnoxVpnEngineService",
+                            booleanExtra);
                 }
                 int intExtra = intent.getIntExtra("android.intent.extra.UID", -1);
                 if (intExtra > -1) {
                     if (z) {
-                        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("Vpn Receiver : Package Added = ", schemeSpecificPart, "KnoxVpnEngineService");
+                        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                                "Vpn Receiver : Package Added = ",
+                                schemeSpecificPart,
+                                "KnoxVpnEngineService");
                     }
                     bundle.putInt("uid", intExtra);
                     bundle.putString("package", schemeSpecificPart);
@@ -318,9 +373,13 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 Uri data2 = intent.getData();
                 schemeSpecificPart = data2 != null ? data2.getSchemeSpecificPart() : null;
                 int intExtra2 = intent.getIntExtra("android.intent.extra.UID", -1);
-                boolean booleanExtra2 = intent.getBooleanExtra("android.intent.extra.REPLACING", false);
+                boolean booleanExtra2 =
+                        intent.getBooleanExtra("android.intent.extra.REPLACING", false);
                 if (KnoxVpnEngineService.DBG) {
-                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("Vpn Receiver : Package Removed = ", schemeSpecificPart, "KnoxVpnEngineService");
+                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                            "Vpn Receiver : Package Removed = ",
+                            schemeSpecificPart,
+                            "KnoxVpnEngineService");
                 }
                 bundle.putInt("uid", intExtra2);
                 bundle.putString("package", schemeSpecificPart);
@@ -330,7 +389,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             }
             if (action.equalsIgnoreCase("android.intent.action.AIRPLANE_MODE")) {
                 Log.i("KnoxVpnEngineService", "Airplane Event received.");
-                if (intent.getBooleanExtra(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, false)) {
+                if (intent.getBooleanExtra(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN, false)) {
                     KnoxVpnEngineService.this.sendMessageToHandler$1(20, null);
                     return;
                 }
@@ -362,41 +422,64 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     Log.d("KnoxVpnEngineService", "networkInfo is null");
                     return;
                 }
-                Log.d("KnoxVpnEngineService", "change in connectivity has occured  for the network type " + networkInfo.getType() + networkInfo.getDetailedState() + networkInfo.getState());
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "change in connectivity has occured  for the network type "
+                                + networkInfo.getType()
+                                + networkInfo.getDetailedState()
+                                + networkInfo.getState());
                 if (networkInfo.getType() == 1) {
                     Bundle extras = intent.getExtras();
-                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED || networkInfo.getDetailedState() == NetworkInfo.DetailedState.CONNECTED) {
-                        extras.putString(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "CONNECTED");
+                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED
+                            || networkInfo.getDetailedState()
+                                    == NetworkInfo.DetailedState.CONNECTED) {
+                        extras.putString(
+                                LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "CONNECTED");
                         KnoxVpnEngineService.this.sendMessageToHandler$1(25, extras);
                     } else {
-                        if (networkInfo.getState() != NetworkInfo.State.DISCONNECTED && networkInfo.getDetailedState() != NetworkInfo.DetailedState.DISCONNECTED) {
+                        if (networkInfo.getState() != NetworkInfo.State.DISCONNECTED
+                                && networkInfo.getDetailedState()
+                                        != NetworkInfo.DetailedState.DISCONNECTED) {
                             return;
                         }
-                        extras.putString(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "DISCONNECTED");
+                        extras.putString(
+                                LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "DISCONNECTED");
                         KnoxVpnEngineService.this.sendMessageToHandler$1(25, extras);
                     }
                 } else if (networkInfo.getType() == 0) {
                     Bundle extras2 = intent.getExtras();
-                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED || networkInfo.getDetailedState() == NetworkInfo.DetailedState.CONNECTED) {
-                        extras2.putString(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "CONNECTED");
+                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED
+                            || networkInfo.getDetailedState()
+                                    == NetworkInfo.DetailedState.CONNECTED) {
+                        extras2.putString(
+                                LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "CONNECTED");
                         KnoxVpnEngineService.this.sendMessageToHandler$1(26, extras2);
                     } else {
-                        if (networkInfo.getState() != NetworkInfo.State.DISCONNECTED && networkInfo.getDetailedState() != NetworkInfo.DetailedState.DISCONNECTED) {
+                        if (networkInfo.getState() != NetworkInfo.State.DISCONNECTED
+                                && networkInfo.getDetailedState()
+                                        != NetworkInfo.DetailedState.DISCONNECTED) {
                             return;
                         }
-                        extras2.putString(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "DISCONNECTED");
+                        extras2.putString(
+                                LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "DISCONNECTED");
                         KnoxVpnEngineService.this.sendMessageToHandler$1(26, extras2);
                     }
                 } else if (networkInfo.getType() == 9) {
                     Bundle extras3 = intent.getExtras();
-                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED || networkInfo.getDetailedState() == NetworkInfo.DetailedState.CONNECTED) {
-                        extras3.putString(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "CONNECTED");
+                    if (networkInfo.getState() == NetworkInfo.State.CONNECTED
+                            || networkInfo.getDetailedState()
+                                    == NetworkInfo.DetailedState.CONNECTED) {
+                        extras3.putString(
+                                LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "CONNECTED");
                         KnoxVpnEngineService.this.sendMessageToHandler$1(27, extras3);
                     } else {
-                        if (networkInfo.getState() != NetworkInfo.State.DISCONNECTED && networkInfo.getDetailedState() != NetworkInfo.DetailedState.DISCONNECTED) {
+                        if (networkInfo.getState() != NetworkInfo.State.DISCONNECTED
+                                && networkInfo.getDetailedState()
+                                        != NetworkInfo.DetailedState.DISCONNECTED) {
                             return;
                         }
-                        extras3.putString(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "DISCONNECTED");
+                        extras3.putString(
+                                LauncherConfigurationInternal.KEY_STATE_BOOLEAN, "DISCONNECTED");
                         KnoxVpnEngineService.this.sendMessageToHandler$1(27, extras3);
                     }
                 }
@@ -415,13 +498,19 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 return;
             }
             if (action.equals("enterprise.container.admin.changed")) {
-                bundle.putInt("android.intent.extra.user_handle", intent.getIntExtra("containerid", -1));
-                bundle.putInt("android.intent.extra.UID", intent.getIntExtra("android.intent.extra.UID", -1));
+                bundle.putInt(
+                        "android.intent.extra.user_handle", intent.getIntExtra("containerid", -1));
+                bundle.putInt(
+                        "android.intent.extra.UID",
+                        intent.getIntExtra("android.intent.extra.UID", -1));
                 KnoxVpnEngineService.this.sendMessageToHandler$1(12, bundle);
                 return;
             }
-            if (action.equals("com.samsung.android.knox.intent.action.VPN_PROXY_BROADCAST_INTERNAL")) {
-                bundle.putInt("uid", intent.getIntExtra("com.samsung.android.knox.intent.extra.caller", -1));
+            if (action.equals(
+                    "com.samsung.android.knox.intent.action.VPN_PROXY_BROADCAST_INTERNAL")) {
+                bundle.putInt(
+                        "uid",
+                        intent.getIntExtra("com.samsung.android.knox.intent.extra.caller", -1));
                 KnoxVpnEngineService.this.sendMessageToHandler$1(18, bundle);
                 return;
             }
@@ -459,7 +548,15 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             boolean booleanExtra3 = intent.getBooleanExtra("connected", false);
             boolean booleanExtra4 = intent.getBooleanExtra("configured", false);
             boolean booleanExtra5 = intent.getBooleanExtra("rndis", false);
-            RCPManagerService$$ExternalSyntheticOutline0.m("KnoxVpnEngineService", FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("usb_tethering status: usbConnected ", booleanExtra3, " usbConfigured ", booleanExtra4, " rndisEnabled "), booleanExtra5);
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    "KnoxVpnEngineService",
+                    FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                            "usb_tethering status: usbConnected ",
+                            booleanExtra3,
+                            " usbConfigured ",
+                            booleanExtra4,
+                            " rndisEnabled "),
+                    booleanExtra5);
             if (!booleanExtra3) {
                 bundle.putInt("bundle_usb_status", 1);
                 KnoxVpnEngineService.this.sendMessageToHandler$1(33, bundle);
@@ -492,27 +589,46 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             int i = this.containerId;
             knoxVpnHelper.getClass();
             String personifiedName = KnoxVpnHelper.getPersonifiedName(i, packageName);
-            Log.d("KnoxVpnEngineService", "onBindingDied has been called for the vpn client " + personifiedName);
-            ((ArrayList) KnoxVpnEngineService.this.mVpnClientStatus).add("onBindingDied callback has been recieved for the vpn client " + personifiedName + " at " + System.currentTimeMillis());
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "onBindingDied has been called for the vpn client " + personifiedName);
+            ((ArrayList) KnoxVpnEngineService.this.mVpnClientStatus)
+                    .add(
+                            "onBindingDied callback has been recieved for the vpn client "
+                                    + personifiedName
+                                    + " at "
+                                    + System.currentTimeMillis());
         }
 
         @Override // android.content.ServiceConnection
-        public final synchronized void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        public final synchronized void onServiceConnected(
+                ComponentName componentName, IBinder iBinder) {
             try {
                 KnoxVpnEngineService.this.mInjector.getClass();
                 IKnoxVpnService asInterface = IKnoxVpnService.Stub.asInterface(iBinder);
-                KnoxVpnEngineService.m559$$Nest$mlogVpnVendor(KnoxVpnEngineService.this, componentName);
+                KnoxVpnEngineService.m559$$Nest$mlogVpnVendor(
+                        KnoxVpnEngineService.this, componentName);
                 String packageName = componentName.getPackageName();
                 KnoxVpnHelper knoxVpnHelper = KnoxVpnEngineService.this.mKnoxVpnHelper;
                 int i = this.containerId;
                 knoxVpnHelper.getClass();
                 String personifiedName = KnoxVpnHelper.getPersonifiedName(i, packageName);
-                Log.d("KnoxVpnEngineService", "Vendor VPN service connected: pkgName = " + personifiedName);
-                KnoxVpnEngineService.m561$$Nest$msetVpnInterface(KnoxVpnEngineService.this, personifiedName, asInterface);
-                ((ArrayList) KnoxVpnEngineService.this.mVpnClientStatus).add("onServiceConnected callback has been recieved for the vpn client " + personifiedName + " at " + System.currentTimeMillis());
-                KnoxVpnEngineService.m566$$Nest$mvalidateProfilesForVendor(KnoxVpnEngineService.this, personifiedName, asInterface);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Vendor VPN service connected: pkgName = " + personifiedName);
+                KnoxVpnEngineService.m561$$Nest$msetVpnInterface(
+                        KnoxVpnEngineService.this, personifiedName, asInterface);
+                ((ArrayList) KnoxVpnEngineService.this.mVpnClientStatus)
+                        .add(
+                                "onServiceConnected callback has been recieved for the vpn client "
+                                        + personifiedName
+                                        + " at "
+                                        + System.currentTimeMillis());
+                KnoxVpnEngineService.m566$$Nest$mvalidateProfilesForVendor(
+                        KnoxVpnEngineService.this, personifiedName, asInterface);
                 if (KnoxVpnEngineService.this.isNetworkConnected()) {
-                    KnoxVpnEngineService.this.startVpnConnectionForBindedClient(asInterface, personifiedName);
+                    KnoxVpnEngineService.this.startVpnConnectionForBindedClient(
+                            asInterface, personifiedName);
                 }
                 KnoxVpnEngineService.this.sendBindSuccessIntent(this.adminUid, personifiedName);
             } catch (Throwable th) {
@@ -527,10 +643,19 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             int i = this.containerId;
             knoxVpnHelper.getClass();
             String personifiedName = KnoxVpnHelper.getPersonifiedName(i, packageName);
-            Log.d("KnoxVpnEngineService", "Vendor VPN service disconnected : vendorName = " + personifiedName);
-            KnoxVpnEngineService.m564$$Nest$mstopStrongwanProxyConnection(KnoxVpnEngineService.this, packageName, personifiedName, this.containerId);
-            KnoxVpnEngineService.m561$$Nest$msetVpnInterface(KnoxVpnEngineService.this, personifiedName, null);
-            ((ArrayList) KnoxVpnEngineService.this.mVpnClientStatus).add("onServiceDisconnected callback has been recieved for the vpn client " + personifiedName + " at " + System.currentTimeMillis());
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Vendor VPN service disconnected : vendorName = " + personifiedName);
+            KnoxVpnEngineService.m564$$Nest$mstopStrongwanProxyConnection(
+                    KnoxVpnEngineService.this, packageName, personifiedName, this.containerId);
+            KnoxVpnEngineService.m561$$Nest$msetVpnInterface(
+                    KnoxVpnEngineService.this, personifiedName, null);
+            ((ArrayList) KnoxVpnEngineService.this.mVpnClientStatus)
+                    .add(
+                            "onServiceDisconnected callback has been recieved for the vpn client "
+                                    + personifiedName
+                                    + " at "
+                                    + System.currentTimeMillis());
             StringBuilder sb = new StringBuilder("Trying to bind again.. Vendor: ");
             sb.append(personifiedName);
             Log.d("KnoxVpnEngineService", sb.toString());
@@ -539,7 +664,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     /* renamed from: -$$Nest$mhandleActionAdminChanged, reason: not valid java name */
-    public static void m548$$Nest$mhandleActionAdminChanged(KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
+    public static void m548$$Nest$mhandleActionAdminChanged(
+            KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
         knoxVpnEngineService.getClass();
         int i = bundle.getInt("android.intent.extra.user_handle", -1);
         int i2 = bundle.getInt("android.intent.extra.UID", -1);
@@ -556,29 +682,38 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m549$$Nest$mhandleActionLockBootCompleted(com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService r6, int r7) {
+    public static void m549$$Nest$mhandleActionLockBootCompleted(
+            com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService r6, int r7) {
         /*
             Method dump skipped, instructions count: 260
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.m549$$Nest$mhandleActionLockBootCompleted(com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.m549$$Nest$mhandleActionLockBootCompleted(com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService,"
+                    + " int):void");
     }
 
     /* renamed from: -$$Nest$mhandleActionMobileChanged, reason: not valid java name */
-    public static void m550$$Nest$mhandleActionMobileChanged(KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
+    public static void m550$$Nest$mhandleActionMobileChanged(
+            KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
         Collection<VpnProfileInfo> values;
         synchronized (knoxVpnEngineService) {
             try {
                 values = knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values();
             } catch (Throwable unused) {
-                Log.e("KnoxVpnEngineService", "Exception occured while trying to apply iptable rule for user 0 during connectivity change of mobile network");
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "Exception occured while trying to apply iptable rule for user 0 during"
+                            + " connectivity change of mobile network");
             }
             if (values == null) {
                 return;
             }
             if (knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values().size() > 0) {
                 boolean z = false;
-                for (VpnProfileInfo vpnProfileInfo : knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
+                for (VpnProfileInfo vpnProfileInfo :
+                        knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
                     int i = vpnProfileInfo.activateState;
                     Iterator it = vpnProfileInfo.mPackageMap.values().iterator();
                     while (true) {
@@ -602,16 +737,31 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     }
                 }
                 for (VpnProfileInfo vpnProfileInfo2 : values) {
-                    knoxVpnEngineService.mFirewallHelper.removeInputFilterDropRulesForInterface(1, knoxVpnEngineService.mKnoxVpnHelper.getuserIdListForProfile(vpnProfileInfo2.mProfileName));
-                    knoxVpnEngineService.mFirewallHelper.removeInputFilterDropRulesForInterface(0, knoxVpnEngineService.mKnoxVpnHelper.getuidListForProfile(vpnProfileInfo2.mProfileName));
-                    if (knoxVpnEngineService.mKnoxVpnHelper.isNativeVpnClient(vpnProfileInfo2.mProfileName)) {
+                    knoxVpnEngineService.mFirewallHelper.removeInputFilterDropRulesForInterface(
+                            1,
+                            knoxVpnEngineService.mKnoxVpnHelper.getuserIdListForProfile(
+                                    vpnProfileInfo2.mProfileName));
+                    knoxVpnEngineService.mFirewallHelper.removeInputFilterDropRulesForInterface(
+                            0,
+                            knoxVpnEngineService.mKnoxVpnHelper.getuidListForProfile(
+                                    vpnProfileInfo2.mProfileName));
+                    if (knoxVpnEngineService.mKnoxVpnHelper.isNativeVpnClient(
+                            vpnProfileInfo2.mProfileName)) {
                         knoxVpnEngineService.mFirewallHelper.removeIpRulesForExemptedUid(1016, 3);
                     } else {
-                        knoxVpnEngineService.mFirewallHelper.removeIpRulesForExemptedUid(vpnProfileInfo2.mVendorUid, 3);
+                        knoxVpnEngineService.mFirewallHelper.removeIpRulesForExemptedUid(
+                                vpnProfileInfo2.mVendorUid, 3);
                     }
                     Iterator it2 = vpnProfileInfo2.mExemptPackageList.iterator();
                     while (it2.hasNext()) {
-                        knoxVpnEngineService.updateRulesToExemptUid(0, vpnProfileInfo2.mProfileName, null, null, 2, ((Integer) it2.next()).intValue(), 3);
+                        knoxVpnEngineService.updateRulesToExemptUid(
+                                0,
+                                vpnProfileInfo2.mProfileName,
+                                null,
+                                null,
+                                2,
+                                ((Integer) it2.next()).intValue(),
+                                3);
                         vpnProfileInfo2 = vpnProfileInfo2;
                     }
                 }
@@ -620,19 +770,24 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 while (it3.hasNext()) {
                     int intValue = ((Integer) it3.next()).intValue();
                     knoxVpnEngineService.mKnoxVpnHelper.getClass();
-                    knoxVpnEngineService.mFirewallHelper.removeExemptRulesForDownloadManagerUid(KnoxVpnHelper.getUIDForPackage(intValue, "com.android.providers.downloads"));
+                    knoxVpnEngineService.mFirewallHelper.removeExemptRulesForDownloadManagerUid(
+                            KnoxVpnHelper.getUIDForPackage(
+                                    intValue, "com.android.providers.downloads"));
                 }
                 if (bundle.getBoolean("noConnectivity")) {
                     Log.d("KnoxVpnEngineService", "Default Mobile Network lost connectivity");
                     return;
                 }
-                if (bundle.getString(LauncherConfigurationInternal.KEY_STATE_BOOLEAN).equalsIgnoreCase("DISCONNECTED")) {
+                if (bundle.getString(LauncherConfigurationInternal.KEY_STATE_BOOLEAN)
+                        .equalsIgnoreCase("DISCONNECTED")) {
                     Log.d("KnoxVpnEngineService", "Default Mobile Network is disconnected");
                     return;
                 }
                 knoxVpnEngineService.getKnoxVpnHelperInstance().getClass();
                 String activeNetworkInterface = KnoxVpnHelper.getActiveNetworkInterface();
-                Log.d("KnoxVpnEngineService", "Default Mobile Network interface Name is " + activeNetworkInterface);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Default Mobile Network interface Name is " + activeNetworkInterface);
                 for (VpnProfileInfo vpnProfileInfo3 : values) {
                     int i2 = vpnProfileInfo3.activateState;
                     Iterator it4 = vpnProfileInfo3.mPackageMap.values().iterator();
@@ -657,18 +812,40 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         String str = vpnProfileInfo3.mVendorPkgName;
                         knoxVpnHelper3.getClass();
                         String regularPackageName = KnoxVpnHelper.getRegularPackageName(str);
-                        knoxVpnEngineService.mFirewallHelper.addInputFilterDropRulesForInterface(regularPackageName, activeNetworkInterface, 1, knoxVpnEngineService.mKnoxVpnHelper.getuserIdListForProfile(vpnProfileInfo3.mProfileName));
-                        knoxVpnEngineService.mFirewallHelper.addInputFilterDropRulesForInterface(regularPackageName, activeNetworkInterface, 0, knoxVpnEngineService.mKnoxVpnHelper.getuidListForProfile(vpnProfileInfo3.mProfileName));
-                        if (knoxVpnEngineService.getChainingEnabledForProfile(vpnProfileInfo3.mVendorUid) != 1) {
-                            if (knoxVpnEngineService.mKnoxVpnHelper.isNativeVpnClient(vpnProfileInfo3.mProfileName)) {
-                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(1016, 3, activeNetworkInterface);
+                        knoxVpnEngineService.mFirewallHelper.addInputFilterDropRulesForInterface(
+                                regularPackageName,
+                                activeNetworkInterface,
+                                1,
+                                knoxVpnEngineService.mKnoxVpnHelper.getuserIdListForProfile(
+                                        vpnProfileInfo3.mProfileName));
+                        knoxVpnEngineService.mFirewallHelper.addInputFilterDropRulesForInterface(
+                                regularPackageName,
+                                activeNetworkInterface,
+                                0,
+                                knoxVpnEngineService.mKnoxVpnHelper.getuidListForProfile(
+                                        vpnProfileInfo3.mProfileName));
+                        if (knoxVpnEngineService.getChainingEnabledForProfile(
+                                        vpnProfileInfo3.mVendorUid)
+                                != 1) {
+                            if (knoxVpnEngineService.mKnoxVpnHelper.isNativeVpnClient(
+                                    vpnProfileInfo3.mProfileName)) {
+                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(
+                                        1016, 3, activeNetworkInterface);
                             } else {
-                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(vpnProfileInfo3.mVendorUid, 3, activeNetworkInterface);
+                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(
+                                        vpnProfileInfo3.mVendorUid, 3, activeNetworkInterface);
                             }
                         }
                         Iterator it5 = vpnProfileInfo3.mExemptPackageList.iterator();
                         while (it5.hasNext()) {
-                            knoxVpnEngineService.updateRulesToExemptUid(1, vpnProfileInfo3.mProfileName, null, activeNetworkInterface, 2, ((Integer) it5.next()).intValue(), 3);
+                            knoxVpnEngineService.updateRulesToExemptUid(
+                                    1,
+                                    vpnProfileInfo3.mProfileName,
+                                    null,
+                                    activeNetworkInterface,
+                                    2,
+                                    ((Integer) it5.next()).intValue(),
+                                    3);
                             vpnProfileInfo3 = vpnProfileInfo3;
                         }
                     }
@@ -677,34 +854,48 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 while (it6.hasNext()) {
                     int intValue2 = ((Integer) it6.next()).intValue();
                     knoxVpnEngineService.mKnoxVpnHelper.getClass();
-                    knoxVpnEngineService.mFirewallHelper.addExemptRulesForDownloadManagerUid(KnoxVpnHelper.getUIDForPackage(intValue2, "com.android.providers.downloads"), activeNetworkInterface);
+                    knoxVpnEngineService.mFirewallHelper.addExemptRulesForDownloadManagerUid(
+                            KnoxVpnHelper.getUIDForPackage(
+                                    intValue2, "com.android.providers.downloads"),
+                            activeNetworkInterface);
                 }
             }
         }
     }
 
     /* renamed from: -$$Nest$mhandleActionUserRemoved, reason: not valid java name */
-    public static void m551$$Nest$mhandleActionUserRemoved(KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
+    public static void m551$$Nest$mhandleActionUserRemoved(
+            KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
         synchronized (knoxVpnEngineService) {
             int i = bundle.getInt("android.intent.extra.user_handle", -10000);
-            Log.d("KnoxVpnEngineService", "handleActionUserRemoved : Got USERREMOVED intent : " + i);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "handleActionUserRemoved : Got USERREMOVED intent : " + i);
             try {
                 knoxVpnEngineService.mKnoxVpnHelper.getClass();
-                knoxVpnEngineService.mFirewallHelper.removeExemptRulesForDownloadManagerUid(KnoxVpnHelper.getUIDForPackage(i, "com.android.providers.downloads"));
+                knoxVpnEngineService.mFirewallHelper.removeExemptRulesForDownloadManagerUid(
+                        KnoxVpnHelper.getUIDForPackage(i, "com.android.providers.downloads"));
             } catch (Exception unused) {
             }
-            knoxVpnEngineService.mKnoxVpnHelper.addOrRemoveSystemAppFromDataSaverWhitelist(UserHandle.getUid(i, 1002), null, false);
-            ConcurrentHashMap concurrentHashMap = knoxVpnEngineService.mIgnoreConnectCheckForChaining;
+            knoxVpnEngineService.mKnoxVpnHelper.addOrRemoveSystemAppFromDataSaverWhitelist(
+                    UserHandle.getUid(i, 1002), null, false);
+            ConcurrentHashMap concurrentHashMap =
+                    knoxVpnEngineService.mIgnoreConnectCheckForChaining;
             if (concurrentHashMap != null && concurrentHashMap.containsKey(Integer.valueOf(i))) {
                 knoxVpnEngineService.mIgnoreConnectCheckForChaining.remove(Integer.valueOf(i));
             }
             try {
-                KnoxVpnStorageProvider knoxVpnStorageProvider = knoxVpnEngineService.mVpnStorageProvider;
+                KnoxVpnStorageProvider knoxVpnStorageProvider =
+                        knoxVpnEngineService.mVpnStorageProvider;
                 String[] strArr = {Integer.toString(i)};
                 knoxVpnStorageProvider.getClass();
-                ArrayList dataByFields = KnoxVpnStorageProvider.mEDM.getDataByFields("VpnProfileInfo", new String[]{"personaId"}, strArr, null);
+                ArrayList dataByFields =
+                        KnoxVpnStorageProvider.mEDM.getDataByFields(
+                                "VpnProfileInfo", new String[] {"personaId"}, strArr, null);
                 if (DBG) {
-                    Log.d("KnoxVpnEngineService", "handleActionUserRemoved : #1 cvList.size() : " + dataByFields.size());
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "handleActionUserRemoved : #1 cvList.size() : " + dataByFields.size());
                 }
                 Iterator it = dataByFields.iterator();
                 while (it.hasNext()) {
@@ -712,36 +903,56 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     contentValues.getAsInteger("adminUid").getClass();
                     String asString = contentValues.getAsString("profileName");
                     if (DBG) {
-                        Log.d("KnoxVpnEngineService", "handleActionUserRemoved : profileName = " + asString);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "handleActionUserRemoved : profileName = " + asString);
                     }
-                    VpnProfileInfo profileEntry = knoxVpnEngineService.vpnConfig.getProfileEntry(asString);
-                    if (profileEntry != null && UserHandle.getUserId(profileEntry.mVendorUid) == i) {
-                        knoxVpnEngineService.removeProfileFromKeyStore(profileEntry.mVendorUid, asString, profileEntry.mVendorPkgName);
+                    VpnProfileInfo profileEntry =
+                            knoxVpnEngineService.vpnConfig.getProfileEntry(asString);
+                    if (profileEntry != null
+                            && UserHandle.getUserId(profileEntry.mVendorUid) == i) {
+                        knoxVpnEngineService.removeProfileFromKeyStore(
+                                profileEntry.mVendorUid, asString, profileEntry.mVendorPkgName);
                         knoxVpnEngineService.removeProfileFromHashMapAndDB(asString);
                     }
                 }
             } catch (Exception e) {
-                Log.d("KnoxVpnEngineService", "handleActionUserRemoved : Exception : " + Log.getStackTraceString(e));
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "handleActionUserRemoved : Exception : " + Log.getStackTraceString(e));
             }
             try {
-                KnoxVpnStorageProvider knoxVpnStorageProvider2 = knoxVpnEngineService.mVpnStorageProvider;
+                KnoxVpnStorageProvider knoxVpnStorageProvider2 =
+                        knoxVpnEngineService.mVpnStorageProvider;
                 String[] strArr2 = {Integer.toString(i)};
                 knoxVpnStorageProvider2.getClass();
-                ArrayList dataByFields2 = KnoxVpnStorageProvider.mEDM.getDataByFields("VpnPackageInfo", new String[]{"packageCid"}, strArr2, null);
+                ArrayList dataByFields2 =
+                        KnoxVpnStorageProvider.mEDM.getDataByFields(
+                                "VpnPackageInfo", new String[] {"packageCid"}, strArr2, null);
                 if (DBG) {
-                    Log.d("KnoxVpnEngineService", "handleActionUserRemoved : #3 cvList.size() : " + dataByFields2.size());
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "handleActionUserRemoved : #3 cvList.size() : " + dataByFields2.size());
                 }
                 Iterator it2 = dataByFields2.iterator();
                 while (it2.hasNext()) {
                     ContentValues contentValues2 = (ContentValues) it2.next();
                     String asString2 = contentValues2.getAsString("profileName");
                     String asString3 = contentValues2.getAsString("packageName");
-                    VpnProfileInfo profileEntry2 = knoxVpnEngineService.vpnConfig.getProfileEntry(asString2);
+                    VpnProfileInfo profileEntry2 =
+                            knoxVpnEngineService.vpnConfig.getProfileEntry(asString2);
                     if (profileEntry2 != null) {
                         int i2 = profileEntry2.admin_id;
                         boolean z = DBG;
                         if (z) {
-                            Log.d("KnoxVpnEngineService", "handleActionUserRemoved : profileName = " + asString2 + " adminId = " + i2 + " transformedPackageName = " + asString3);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "handleActionUserRemoved : profileName = "
+                                            + asString2
+                                            + " adminId = "
+                                            + i2
+                                            + " transformedPackageName = "
+                                            + asString3);
                         }
                         if (z) {
                             StringBuilder sb = new StringBuilder();
@@ -755,37 +966,53 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         KnoxVpnHelper knoxVpnHelper2 = knoxVpnEngineService.mKnoxVpnHelper;
                         String str2 = profileEntry2.mVendorPkgName;
                         knoxVpnHelper2.getClass();
-                        KnoxVpnContext knoxVpnContext = new KnoxVpnContext(i2, i, KnoxVpnHelper.getRegularPackageName(str2));
+                        KnoxVpnContext knoxVpnContext =
+                                new KnoxVpnContext(
+                                        i2, i, KnoxVpnHelper.getRegularPackageName(str2));
                         knoxVpnEngineService.getKnoxVpnHelperInstance().getClass();
-                        if (asString3.equalsIgnoreCase(KnoxVpnHelper.getPersonifiedName(KnoxVpnHelper.getContainerIdFromPackageName(asString3), "ADD_ALL_PACKAGES"))) {
-                            knoxVpnEngineService.removeAllPackagesFromVpn(knoxVpnContext, asString2);
+                        if (asString3.equalsIgnoreCase(
+                                KnoxVpnHelper.getPersonifiedName(
+                                        KnoxVpnHelper.getContainerIdFromPackageName(asString3),
+                                        "ADD_ALL_PACKAGES"))) {
+                            knoxVpnEngineService.removeAllPackagesFromVpn(
+                                    knoxVpnContext, asString2);
                         } else {
                             knoxVpnEngineService.mKnoxVpnHelper.getClass();
-                            knoxVpnEngineService.removePackagesFromVpn(knoxVpnContext, new String[]{KnoxVpnHelper.getRegularPackageName(asString3)}, asString2);
+                            knoxVpnEngineService.removePackagesFromVpn(
+                                    knoxVpnContext,
+                                    new String[] {KnoxVpnHelper.getRegularPackageName(asString3)},
+                                    asString2);
                         }
                     }
                 }
             } catch (Exception e2) {
-                Log.d("KnoxVpnEngineService", "handleActionUserRemoved : Exception : " + Log.getStackTraceString(e2));
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "handleActionUserRemoved : Exception : " + Log.getStackTraceString(e2));
             }
         }
     }
 
     /* renamed from: -$$Nest$mhandleActionWifiChanged, reason: not valid java name */
-    public static void m552$$Nest$mhandleActionWifiChanged(KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
+    public static void m552$$Nest$mhandleActionWifiChanged(
+            KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
         Collection<VpnProfileInfo> values;
         synchronized (knoxVpnEngineService) {
             try {
                 values = knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values();
             } catch (Throwable unused) {
-                Log.e("KnoxVpnEngineService", "Exception occured while trying to apply iptable rule for user 0 during connectivity change of wifi network");
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "Exception occured while trying to apply iptable rule for user 0 during"
+                            + " connectivity change of wifi network");
             }
             if (values == null) {
                 return;
             }
             if (values.size() > 0) {
                 boolean z = false;
-                for (VpnProfileInfo vpnProfileInfo : knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
+                for (VpnProfileInfo vpnProfileInfo :
+                        knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
                     int i = vpnProfileInfo.activateState;
                     Iterator it = vpnProfileInfo.mPackageMap.values().iterator();
                     while (true) {
@@ -809,16 +1036,31 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     }
                 }
                 for (VpnProfileInfo vpnProfileInfo2 : values) {
-                    knoxVpnEngineService.mFirewallHelper.removeInputFilterDropRulesForInterface(1, knoxVpnEngineService.mKnoxVpnHelper.getuserIdListForProfile(vpnProfileInfo2.mProfileName));
-                    knoxVpnEngineService.mFirewallHelper.removeInputFilterDropRulesForInterface(0, knoxVpnEngineService.mKnoxVpnHelper.getuidListForProfile(vpnProfileInfo2.mProfileName));
-                    if (knoxVpnEngineService.mKnoxVpnHelper.isNativeVpnClient(vpnProfileInfo2.mProfileName)) {
+                    knoxVpnEngineService.mFirewallHelper.removeInputFilterDropRulesForInterface(
+                            1,
+                            knoxVpnEngineService.mKnoxVpnHelper.getuserIdListForProfile(
+                                    vpnProfileInfo2.mProfileName));
+                    knoxVpnEngineService.mFirewallHelper.removeInputFilterDropRulesForInterface(
+                            0,
+                            knoxVpnEngineService.mKnoxVpnHelper.getuidListForProfile(
+                                    vpnProfileInfo2.mProfileName));
+                    if (knoxVpnEngineService.mKnoxVpnHelper.isNativeVpnClient(
+                            vpnProfileInfo2.mProfileName)) {
                         knoxVpnEngineService.mFirewallHelper.removeIpRulesForExemptedUid(1016, 3);
                     } else {
-                        knoxVpnEngineService.mFirewallHelper.removeIpRulesForExemptedUid(vpnProfileInfo2.mVendorUid, 3);
+                        knoxVpnEngineService.mFirewallHelper.removeIpRulesForExemptedUid(
+                                vpnProfileInfo2.mVendorUid, 3);
                     }
                     Iterator it2 = vpnProfileInfo2.mExemptPackageList.iterator();
                     while (it2.hasNext()) {
-                        knoxVpnEngineService.updateRulesToExemptUid(0, vpnProfileInfo2.mProfileName, null, null, 2, ((Integer) it2.next()).intValue(), 3);
+                        knoxVpnEngineService.updateRulesToExemptUid(
+                                0,
+                                vpnProfileInfo2.mProfileName,
+                                null,
+                                null,
+                                2,
+                                ((Integer) it2.next()).intValue(),
+                                3);
                         vpnProfileInfo2 = vpnProfileInfo2;
                     }
                 }
@@ -827,19 +1069,24 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 while (it3.hasNext()) {
                     int intValue = ((Integer) it3.next()).intValue();
                     knoxVpnEngineService.mKnoxVpnHelper.getClass();
-                    knoxVpnEngineService.mFirewallHelper.removeExemptRulesForDownloadManagerUid(KnoxVpnHelper.getUIDForPackage(intValue, "com.android.providers.downloads"));
+                    knoxVpnEngineService.mFirewallHelper.removeExemptRulesForDownloadManagerUid(
+                            KnoxVpnHelper.getUIDForPackage(
+                                    intValue, "com.android.providers.downloads"));
                 }
                 if (bundle.getBoolean("noConnectivity")) {
                     Log.d("KnoxVpnEngineService", "Default Wifi Network lost connectivity");
                     return;
                 }
-                if (bundle.getString(LauncherConfigurationInternal.KEY_STATE_BOOLEAN).equalsIgnoreCase("DISCONNECTED")) {
+                if (bundle.getString(LauncherConfigurationInternal.KEY_STATE_BOOLEAN)
+                        .equalsIgnoreCase("DISCONNECTED")) {
                     Log.d("KnoxVpnEngineService", "Default Wifi Network is disconnected");
                     return;
                 }
                 knoxVpnEngineService.getKnoxVpnHelperInstance().getClass();
                 String activeNetworkInterface = KnoxVpnHelper.getActiveNetworkInterface();
-                Log.d("KnoxVpnEngineService", "Default Wifi Network interface Name is " + activeNetworkInterface);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Default Wifi Network interface Name is " + activeNetworkInterface);
                 for (VpnProfileInfo vpnProfileInfo3 : values) {
                     int i2 = vpnProfileInfo3.activateState;
                     Iterator it4 = vpnProfileInfo3.mPackageMap.values().iterator();
@@ -864,18 +1111,40 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         String str = vpnProfileInfo3.mVendorPkgName;
                         knoxVpnHelper3.getClass();
                         String regularPackageName = KnoxVpnHelper.getRegularPackageName(str);
-                        knoxVpnEngineService.mFirewallHelper.addInputFilterDropRulesForInterface(regularPackageName, activeNetworkInterface, 1, knoxVpnEngineService.mKnoxVpnHelper.getuserIdListForProfile(vpnProfileInfo3.mProfileName));
-                        knoxVpnEngineService.mFirewallHelper.addInputFilterDropRulesForInterface(regularPackageName, activeNetworkInterface, 0, knoxVpnEngineService.mKnoxVpnHelper.getuidListForProfile(vpnProfileInfo3.mProfileName));
-                        if (knoxVpnEngineService.getChainingEnabledForProfile(vpnProfileInfo3.mVendorUid) != 1) {
-                            if (knoxVpnEngineService.mKnoxVpnHelper.isNativeVpnClient(vpnProfileInfo3.mProfileName)) {
-                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(1016, 3, activeNetworkInterface);
+                        knoxVpnEngineService.mFirewallHelper.addInputFilterDropRulesForInterface(
+                                regularPackageName,
+                                activeNetworkInterface,
+                                1,
+                                knoxVpnEngineService.mKnoxVpnHelper.getuserIdListForProfile(
+                                        vpnProfileInfo3.mProfileName));
+                        knoxVpnEngineService.mFirewallHelper.addInputFilterDropRulesForInterface(
+                                regularPackageName,
+                                activeNetworkInterface,
+                                0,
+                                knoxVpnEngineService.mKnoxVpnHelper.getuidListForProfile(
+                                        vpnProfileInfo3.mProfileName));
+                        if (knoxVpnEngineService.getChainingEnabledForProfile(
+                                        vpnProfileInfo3.mVendorUid)
+                                != 1) {
+                            if (knoxVpnEngineService.mKnoxVpnHelper.isNativeVpnClient(
+                                    vpnProfileInfo3.mProfileName)) {
+                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(
+                                        1016, 3, activeNetworkInterface);
                             } else {
-                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(vpnProfileInfo3.mVendorUid, 3, activeNetworkInterface);
+                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(
+                                        vpnProfileInfo3.mVendorUid, 3, activeNetworkInterface);
                             }
                         }
                         Iterator it5 = vpnProfileInfo3.mExemptPackageList.iterator();
                         while (it5.hasNext()) {
-                            knoxVpnEngineService.updateRulesToExemptUid(1, vpnProfileInfo3.mProfileName, null, activeNetworkInterface, 2, ((Integer) it5.next()).intValue(), 3);
+                            knoxVpnEngineService.updateRulesToExemptUid(
+                                    1,
+                                    vpnProfileInfo3.mProfileName,
+                                    null,
+                                    activeNetworkInterface,
+                                    2,
+                                    ((Integer) it5.next()).intValue(),
+                                    3);
                             vpnProfileInfo3 = vpnProfileInfo3;
                         }
                     }
@@ -884,78 +1153,110 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 while (it6.hasNext()) {
                     int intValue2 = ((Integer) it6.next()).intValue();
                     knoxVpnEngineService.mKnoxVpnHelper.getClass();
-                    knoxVpnEngineService.mFirewallHelper.addExemptRulesForDownloadManagerUid(KnoxVpnHelper.getUIDForPackage(intValue2, "com.android.providers.downloads"), activeNetworkInterface);
+                    knoxVpnEngineService.mFirewallHelper.addExemptRulesForDownloadManagerUid(
+                            KnoxVpnHelper.getUIDForPackage(
+                                    intValue2, "com.android.providers.downloads"),
+                            activeNetworkInterface);
                 }
             }
         }
     }
 
     /* renamed from: -$$Nest$mhandleCaptivePortal, reason: not valid java name */
-    public static void m553$$Nest$mhandleCaptivePortal(KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
+    public static void m553$$Nest$mhandleCaptivePortal(
+            KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
         Collection values;
         synchronized (knoxVpnEngineService) {
             try {
                 try {
                     values = knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values();
                 } catch (Exception unused) {
-                    Log.e("KnoxVpnEngineService", "Exception occured while handling captive portal firewall rules");
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "Exception occured while handling captive portal firewall rules");
                 }
                 if (values == null) {
                     return;
                 }
                 if (values.size() > 0) {
                     knoxVpnEngineService.mKnoxVpnHelper.getClass();
-                    int uIDForPackage = KnoxVpnHelper.getUIDForPackage(0, "com.google.android.captiveportallogin");
-                    if (uIDForPackage != -1 ? knoxVpnEngineService.mKnoxVpnHelper.checKIfUidIsExempted(uIDForPackage) : false) {
+                    int uIDForPackage =
+                            KnoxVpnHelper.getUIDForPackage(
+                                    0, "com.google.android.captiveportallogin");
+                    if (uIDForPackage != -1
+                            ? knoxVpnEngineService.mKnoxVpnHelper.checKIfUidIsExempted(
+                                    uIDForPackage)
+                            : false) {
                         if (mIsCaptiveExempt && bundle.getInt("captive") == 0) {
                             Log.i("KnoxVpnEngineService", "Removing iptables captive rules");
-                            knoxVpnEngineService.mFirewallHelper.removeRulesToDropIpv6SystemQueries(uIDForPackage);
-                            knoxVpnEngineService.mFirewallHelper.removeRulesToDropIpv6SystemQueries(1000);
-                            knoxVpnEngineService.mFirewallHelper.removeRulesToDropIpv6SystemQueries(1073);
-                            KnoxVpnFirewallHelper knoxVpnFirewallHelper = knoxVpnEngineService.mFirewallHelper;
+                            knoxVpnEngineService.mFirewallHelper.removeRulesToDropIpv6SystemQueries(
+                                    uIDForPackage);
+                            knoxVpnEngineService.mFirewallHelper.removeRulesToDropIpv6SystemQueries(
+                                    1000);
+                            knoxVpnEngineService.mFirewallHelper.removeRulesToDropIpv6SystemQueries(
+                                    1073);
+                            KnoxVpnFirewallHelper knoxVpnFirewallHelper =
+                                    knoxVpnEngineService.mFirewallHelper;
                             knoxVpnFirewallHelper.getClass();
                             KnoxVpnFirewallHelper.applyBlockingRulesForDns(1000, 1000, 4);
                             knoxVpnFirewallHelper.deleteRulesToExemptCaptivePortalQueries(4, 1000);
                             knoxVpnFirewallHelper.deleteRulesToExemptCaptivePortalQueries(6, 1000);
-                            KnoxVpnFirewallHelper knoxVpnFirewallHelper2 = knoxVpnEngineService.mFirewallHelper;
+                            KnoxVpnFirewallHelper knoxVpnFirewallHelper2 =
+                                    knoxVpnEngineService.mFirewallHelper;
                             knoxVpnFirewallHelper2.getClass();
-                            KnoxVpnFirewallHelper.applyBlockingRulesForDns(uIDForPackage, uIDForPackage, 4);
-                            knoxVpnFirewallHelper2.deleteRulesToExemptCaptivePortalQueries(4, uIDForPackage);
-                            knoxVpnFirewallHelper2.deleteRulesToExemptCaptivePortalQueries(6, uIDForPackage);
-                            KnoxVpnFirewallHelper knoxVpnFirewallHelper3 = knoxVpnEngineService.mFirewallHelper;
+                            KnoxVpnFirewallHelper.applyBlockingRulesForDns(
+                                    uIDForPackage, uIDForPackage, 4);
+                            knoxVpnFirewallHelper2.deleteRulesToExemptCaptivePortalQueries(
+                                    4, uIDForPackage);
+                            knoxVpnFirewallHelper2.deleteRulesToExemptCaptivePortalQueries(
+                                    6, uIDForPackage);
+                            KnoxVpnFirewallHelper knoxVpnFirewallHelper3 =
+                                    knoxVpnEngineService.mFirewallHelper;
                             knoxVpnFirewallHelper3.getClass();
                             KnoxVpnFirewallHelper.applyBlockingRulesForDns(1073, 1073, 4);
                             knoxVpnFirewallHelper3.deleteRulesToExemptCaptivePortalQueries(4, 1073);
                             knoxVpnFirewallHelper3.deleteRulesToExemptCaptivePortalQueries(6, 1073);
                             knoxVpnEngineService.mKnoxVpnHelper.getClass();
-                            String activeNetworkInterface = KnoxVpnHelper.getActiveNetworkInterface();
+                            String activeNetworkInterface =
+                                    KnoxVpnHelper.getActiveNetworkInterface();
                             Integer[] numArr = KnoxVpnConstants.AID_EXEMPT_LIST;
                             for (int i = 0; i < 3; i++) {
-                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(numArr[i].intValue(), 3, activeNetworkInterface);
+                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(
+                                        numArr[i].intValue(), 3, activeNetworkInterface);
                             }
                             synchronized (knoxVpnEngineService.mCaptiveExemptLock) {
                                 mIsCaptiveExempt = false;
                             }
                         } else if (!mIsCaptiveExempt && bundle.getInt("captive") == 1) {
                             Log.i("KnoxVpnEngineService", "Adding iptables captive rules");
-                            knoxVpnEngineService.mFirewallHelper.insertRulesToDropIpv6SystemQueries(uIDForPackage);
-                            knoxVpnEngineService.mFirewallHelper.insertRulesToDropIpv6SystemQueries(1000);
-                            knoxVpnEngineService.mFirewallHelper.insertRulesToDropIpv6SystemQueries(1073);
+                            knoxVpnEngineService.mFirewallHelper.insertRulesToDropIpv6SystemQueries(
+                                    uIDForPackage);
+                            knoxVpnEngineService.mFirewallHelper.insertRulesToDropIpv6SystemQueries(
+                                    1000);
+                            knoxVpnEngineService.mFirewallHelper.insertRulesToDropIpv6SystemQueries(
+                                    1073);
                             Integer[] numArr2 = KnoxVpnConstants.AID_EXEMPT_LIST;
                             for (int i2 = 0; i2 < 3; i2++) {
-                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(numArr2[i2].intValue(), 3, "wlan0");
+                                knoxVpnEngineService.mFirewallHelper.addIpRulesForExemptedUid(
+                                        numArr2[i2].intValue(), 3, "wlan0");
                             }
-                            KnoxVpnFirewallHelper knoxVpnFirewallHelper4 = knoxVpnEngineService.mFirewallHelper;
+                            KnoxVpnFirewallHelper knoxVpnFirewallHelper4 =
+                                    knoxVpnEngineService.mFirewallHelper;
                             knoxVpnFirewallHelper4.getClass();
                             KnoxVpnFirewallHelper.applyBlockingRulesForDns(1000, 1000, 3);
                             knoxVpnFirewallHelper4.insertRulesToExemptCaptivePortalQueries(4, 1000);
                             knoxVpnFirewallHelper4.insertRulesToExemptCaptivePortalQueries(6, 1000);
-                            KnoxVpnFirewallHelper knoxVpnFirewallHelper5 = knoxVpnEngineService.mFirewallHelper;
+                            KnoxVpnFirewallHelper knoxVpnFirewallHelper5 =
+                                    knoxVpnEngineService.mFirewallHelper;
                             knoxVpnFirewallHelper5.getClass();
-                            KnoxVpnFirewallHelper.applyBlockingRulesForDns(uIDForPackage, uIDForPackage, 3);
-                            knoxVpnFirewallHelper5.insertRulesToExemptCaptivePortalQueries(4, uIDForPackage);
-                            knoxVpnFirewallHelper5.insertRulesToExemptCaptivePortalQueries(6, uIDForPackage);
-                            KnoxVpnFirewallHelper knoxVpnFirewallHelper6 = knoxVpnEngineService.mFirewallHelper;
+                            KnoxVpnFirewallHelper.applyBlockingRulesForDns(
+                                    uIDForPackage, uIDForPackage, 3);
+                            knoxVpnFirewallHelper5.insertRulesToExemptCaptivePortalQueries(
+                                    4, uIDForPackage);
+                            knoxVpnFirewallHelper5.insertRulesToExemptCaptivePortalQueries(
+                                    6, uIDForPackage);
+                            KnoxVpnFirewallHelper knoxVpnFirewallHelper6 =
+                                    knoxVpnEngineService.mFirewallHelper;
                             knoxVpnFirewallHelper6.getClass();
                             KnoxVpnFirewallHelper.applyBlockingRulesForDns(1073, 1073, 3);
                             knoxVpnFirewallHelper6.insertRulesToExemptCaptivePortalQueries(4, 1073);
@@ -973,10 +1274,15 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     /* renamed from: -$$Nest$mhandleConnectivityAction, reason: not valid java name */
-    public static void m554$$Nest$mhandleConnectivityAction(KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
+    public static void m554$$Nest$mhandleConnectivityAction(
+            KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
         synchronized (knoxVpnEngineService) {
             boolean z = bundle.getBoolean("noConnectivity");
-            Log.d("KnoxVpnEngineService", "vpn handle : connectivity action : Handle MSG CONNECTIVITY_ACTION. networkDown = " + z);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "vpn handle : connectivity action : Handle MSG CONNECTIVITY_ACTION. networkDown"
+                        + " = "
+                            + z);
             if (!z) {
                 knoxVpnEngineService.runAllVpnService();
             }
@@ -984,41 +1290,78 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     /* renamed from: -$$Nest$mhandleVpnInterfaceState, reason: not valid java name */
-    public static void m555$$Nest$mhandleVpnInterfaceState(KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
+    public static void m555$$Nest$mhandleVpnInterfaceState(
+            KnoxVpnEngineService knoxVpnEngineService, Bundle bundle) {
         Collection values;
         synchronized (knoxVpnEngineService) {
             try {
                 try {
-                    String string = bundle.getString("com.samsung.android.knox.intent.extra.ACTION_INTERNAL");
+                    String string =
+                            bundle.getString(
+                                    "com.samsung.android.knox.intent.extra.ACTION_INTERNAL");
                     if (string != null && string.equals("pac_info")) {
-                        String string2 = bundle.getString("com.samsung.android.knox.intent.extra.PROFILE_NAME_INTERNAL");
-                        VpnProfileInfo profileEntry = knoxVpnEngineService.vpnConfig.getProfileEntry(string2);
+                        String string2 =
+                                bundle.getString(
+                                        "com.samsung.android.knox.intent.extra.PROFILE_NAME_INTERNAL");
+                        VpnProfileInfo profileEntry =
+                                knoxVpnEngineService.vpnConfig.getProfileEntry(string2);
                         if (profileEntry == null) {
                             return;
                         }
                         if (profileEntry.routeType == 0) {
                             return;
                         }
-                        int i = bundle.getInt("com.samsung.android.knox.intent.extra.STATE_INTERNAL");
+                        int i =
+                                bundle.getInt(
+                                        "com.samsung.android.knox.intent.extra.STATE_INTERNAL");
                         if (i == 0) {
-                            Log.e("KnoxVpnEngineService", "The PAC Service has been disconnected for unknown reason,removing rules");
-                            knoxVpnEngineService.updateProxyRules(0, string2, knoxVpnEngineService.getKnoxVpnHelperInstance().getListOfUid(string2));
+                            Log.e(
+                                    "KnoxVpnEngineService",
+                                    "The PAC Service has been disconnected for unknown"
+                                        + " reason,removing rules");
+                            knoxVpnEngineService.updateProxyRules(
+                                    0,
+                                    string2,
+                                    knoxVpnEngineService
+                                            .getKnoxVpnHelperInstance()
+                                            .getListOfUid(string2));
                         } else if (i == 1) {
-                            Log.e("KnoxVpnEngineService", "The PAC Service has been connected successfully,adding rules");
-                            knoxVpnEngineService.updateProxyRules(1, string2, knoxVpnEngineService.getKnoxVpnHelperInstance().getListOfUid(string2));
+                            Log.e(
+                                    "KnoxVpnEngineService",
+                                    "The PAC Service has been connected successfully,adding rules");
+                            knoxVpnEngineService.updateProxyRules(
+                                    1,
+                                    string2,
+                                    knoxVpnEngineService
+                                            .getKnoxVpnHelperInstance()
+                                            .getListOfUid(string2));
                         }
                     } else if (string != null && string.equals("VpnUtils_info")) {
-                        Iterator it = ((ArrayList) knoxVpnEngineService.mKnoxVpnHelper.profileListForClient()).iterator();
+                        Iterator it =
+                                ((ArrayList)
+                                                knoxVpnEngineService.mKnoxVpnHelper
+                                                        .profileListForClient())
+                                        .iterator();
                         while (it.hasNext()) {
                             String str = (String) it.next();
                             knoxVpnEngineService.removeProfileFromHashMapAndDB(str);
-                            IKnoxVpnService binderInterfaceForProfile = knoxVpnEngineService.getBinderInterfaceForProfile(str);
+                            IKnoxVpnService binderInterfaceForProfile =
+                                    knoxVpnEngineService.getBinderInterfaceForProfile(str);
                             if (binderInterfaceForProfile != null) {
                                 binderInterfaceForProfile.removeConnection(str);
                             }
                         }
-                    } else if (string != null && string.equals("tethering_info") && (values = knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) != null && values.size() > 0) {
-                        Iterator it2 = knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values().iterator();
+                    } else if (string != null
+                            && string.equals("tethering_info")
+                            && (values = knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values())
+                                    != null
+                            && values.size() > 0) {
+                        Iterator it2 =
+                                knoxVpnEngineService
+                                        .vpnConfig
+                                        .vpnProfileInfoMap
+                                        .values()
+                                        .iterator();
                         while (true) {
                             if (!it2.hasNext()) {
                                 break;
@@ -1027,28 +1370,57 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                             if (vpnProfileInfo.mUsbTethering == 1) {
                                 int i2 = vpnProfileInfo.activateState;
                                 String str2 = vpnProfileInfo.mInterfaceName;
-                                String interfaceNameForUsbtethering = knoxVpnEngineService.mKnoxVpnHelper.getInterfaceNameForUsbtethering();
+                                String interfaceNameForUsbtethering =
+                                        knoxVpnEngineService.mKnoxVpnHelper
+                                                .getInterfaceNameForUsbtethering();
                                 int i3 = vpnProfileInfo.isUsbTetheringAuthEnabled;
                                 if (interfaceNameForUsbtethering != null) {
                                     if (i2 != 1 || str2 == null || str2.isEmpty()) {
                                         if (i2 == 1) {
-                                            Log.d("KnoxVpnEngineService", "Applying rules to drop tether packets since vpn is not connected, but still in activated state when the usb is plugged");
-                                            knoxVpnEngineService.mFirewallHelper.addRulesForDroppingTetherPackets(interfaceNameForUsbtethering);
+                                            Log.d(
+                                                    "KnoxVpnEngineService",
+                                                    "Applying rules to drop tether packets since"
+                                                        + " vpn is not connected, but still in"
+                                                        + " activated state when the usb is"
+                                                        + " plugged");
+                                            knoxVpnEngineService.mFirewallHelper
+                                                    .addRulesForDroppingTetherPackets(
+                                                            interfaceNameForUsbtethering);
                                         }
                                     } else if (i3 == 1) {
-                                        Log.d("KnoxVpnTetherAuthentication", "usb tether auth process is started after usb is plugged");
-                                        knoxVpnEngineService.mKnoxVpnTetherAuthentication.startTetherAuthProcess(vpnProfileInfo.personaId, interfaceNameForUsbtethering, knoxVpnEngineService.mKnoxVpnHelper.getIpAddressForUsbTetheringInterface());
+                                        Log.d(
+                                                "KnoxVpnTetherAuthentication",
+                                                "usb tether auth process is started after usb is"
+                                                    + " plugged");
+                                        knoxVpnEngineService.mKnoxVpnTetherAuthentication
+                                                .startTetherAuthProcess(
+                                                        vpnProfileInfo.personaId,
+                                                        interfaceNameForUsbtethering,
+                                                        knoxVpnEngineService.mKnoxVpnHelper
+                                                                .getIpAddressForUsbTetheringInterface());
                                     } else {
-                                        String[] dnsServerListForInterface = knoxVpnEngineService.getVpnManagerService().getDnsServerListForInterface(str2);
+                                        String[] dnsServerListForInterface =
+                                                knoxVpnEngineService
+                                                        .getVpnManagerService()
+                                                        .getDnsServerListForInterface(str2);
                                         knoxVpnEngineService.mKnoxVpnHelper.getClass();
-                                        knoxVpnEngineService.mFirewallHelper.addRulesForUsbTethering(vpnProfileInfo.mInterface_type, str2, interfaceNameForUsbtethering, KnoxVpnHelper.getNetworkPartWithMask(interfaceNameForUsbtethering), dnsServerListForInterface);
+                                        knoxVpnEngineService.mFirewallHelper
+                                                .addRulesForUsbTethering(
+                                                        vpnProfileInfo.mInterface_type,
+                                                        str2,
+                                                        interfaceNameForUsbtethering,
+                                                        KnoxVpnHelper.getNetworkPartWithMask(
+                                                                interfaceNameForUsbtethering),
+                                                        dnsServerListForInterface);
                                     }
                                 }
                             }
                         }
                     }
                 } catch (Exception e) {
-                    Log.d("KnoxVpnEngineService", "handleVpnInterfaceState : Exception : " + Log.getStackTraceString(e));
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "handleVpnInterfaceState : Exception : " + Log.getStackTraceString(e));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1057,39 +1429,62 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     /* renamed from: -$$Nest$minitializeVpnVendorForUserAfterBootComplete, reason: not valid java name */
-    public static void m556$$Nest$minitializeVpnVendorForUserAfterBootComplete(KnoxVpnEngineService knoxVpnEngineService, int i) {
+    public static void m556$$Nest$minitializeVpnVendorForUserAfterBootComplete(
+            KnoxVpnEngineService knoxVpnEngineService, int i) {
         int i2;
         synchronized (knoxVpnEngineService) {
             try {
                 try {
-                    Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterBootComplete " + i);
-                    Iterator it = knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values().iterator();
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "initializeVpnVendorForUserAfterBootComplete " + i);
+                    Iterator it =
+                            knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values().iterator();
                     while (true) {
                         if (!it.hasNext()) {
                             break;
                         }
                         VpnProfileInfo vpnProfileInfo = (VpnProfileInfo) it.next();
-                        if (vpnProfileInfo.isUsbTetheringAuthEnabled == 1 && (i2 = vpnProfileInfo.personaId) == i) {
+                        if (vpnProfileInfo.isUsbTetheringAuthEnabled == 1
+                                && (i2 = vpnProfileInfo.personaId) == i) {
                             String str = vpnProfileInfo.mProfileName;
-                            knoxVpnEngineService.mKnoxVpnTetherAuthentication.bindTetherAuthService(i2, str, knoxVpnEngineService.mKnoxVpnHelper.getTetherAuthDetailsFromDatabase(str));
+                            knoxVpnEngineService.mKnoxVpnTetherAuthentication.bindTetherAuthService(
+                                    i2,
+                                    str,
+                                    knoxVpnEngineService.mKnoxVpnHelper
+                                            .getTetherAuthDetailsFromDatabase(str));
                             break;
                         }
                     }
                     ArrayList arrayList = new ArrayList();
-                    for (VpnProfileInfo vpnProfileInfo2 : knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
+                    for (VpnProfileInfo vpnProfileInfo2 :
+                            knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
                         String str2 = vpnProfileInfo2.mProfileName;
                         int i3 = vpnProfileInfo2.personaId;
                         boolean z = DBG;
                         if (z) {
-                            Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterBootComplete : ProfileName: " + str2 + " , cid = " + i3);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "initializeVpnVendorForUserAfterBootComplete : ProfileName: "
+                                            + str2
+                                            + " , cid = "
+                                            + i3);
                         }
                         String str3 = vpnProfileInfo2.mVendorPkgName;
                         if (z) {
-                            Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterBootComplete : Checking vendor : " + str3);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "initializeVpnVendorForUserAfterBootComplete : Checking vendor"
+                                        + " : "
+                                            + str3);
                         }
                         if (i3 == i && str3 != null && !arrayList.contains(str3)) {
                             if (z) {
-                                Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterBootComplete : Adding vendor : " + str3);
+                                Log.d(
+                                        "KnoxVpnEngineService",
+                                        "initializeVpnVendorForUserAfterBootComplete : Adding"
+                                            + " vendor : "
+                                                + str3);
                             }
                             arrayList.add(str3);
                         }
@@ -1098,14 +1493,25 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     while (it2.hasNext()) {
                         String str4 = (String) it2.next();
                         if (knoxVpnEngineService.mVpnConnectionList.containsKey(str4)) {
-                            knoxVpnEngineService.startVpnConnectionForBindedClient(knoxVpnEngineService.getVpnInterface(str4), str4);
+                            knoxVpnEngineService.startVpnConnectionForBindedClient(
+                                    knoxVpnEngineService.getVpnInterface(str4), str4);
                         } else {
-                            Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterBootComplete : Binding to vendor : " + str4);
-                            knoxVpnEngineService.bindKnoxVpnInterface(knoxVpnEngineService.mKnoxVpnHelper.getAdminIdFromPackageName(str4), str4);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "initializeVpnVendorForUserAfterBootComplete : Binding to"
+                                        + " vendor : "
+                                            + str4);
+                            knoxVpnEngineService.bindKnoxVpnInterface(
+                                    knoxVpnEngineService.mKnoxVpnHelper.getAdminIdFromPackageName(
+                                            str4),
+                                    str4);
                         }
                     }
                 } catch (Exception e) {
-                    Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterBootComplete : Exception: " + Log.getStackTraceString(e));
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "initializeVpnVendorForUserAfterBootComplete : Exception: "
+                                    + Log.getStackTraceString(e));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1114,26 +1520,44 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     /* renamed from: -$$Nest$minitializeVpnVendorForUserAfterLockBootComplete, reason: not valid java name */
-    public static void m557$$Nest$minitializeVpnVendorForUserAfterLockBootComplete(KnoxVpnEngineService knoxVpnEngineService, int i) {
+    public static void m557$$Nest$minitializeVpnVendorForUserAfterLockBootComplete(
+            KnoxVpnEngineService knoxVpnEngineService, int i) {
         synchronized (knoxVpnEngineService) {
             try {
                 try {
-                    Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterLockBootComplete " + i);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "initializeVpnVendorForUserAfterLockBootComplete " + i);
                     ArrayList arrayList = new ArrayList();
-                    for (VpnProfileInfo vpnProfileInfo : knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
+                    for (VpnProfileInfo vpnProfileInfo :
+                            knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
                         String str = vpnProfileInfo.mProfileName;
                         int i2 = vpnProfileInfo.personaId;
                         boolean z = DBG;
                         if (z) {
-                            Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterLockBootComplete : ProfileName: " + str + " , cid = " + i2);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "initializeVpnVendorForUserAfterLockBootComplete : ProfileName:"
+                                        + " "
+                                            + str
+                                            + " , cid = "
+                                            + i2);
                         }
                         String str2 = vpnProfileInfo.mVendorPkgName;
                         if (z) {
-                            Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterLockBootComplete : Checking vendor : " + str2);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "initializeVpnVendorForUserAfterLockBootComplete : Checking"
+                                        + " vendor : "
+                                            + str2);
                         }
                         if (i2 == i && str2 != null && !arrayList.contains(str2)) {
                             if (z) {
-                                Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterLockBootComplete : Adding vendor : " + str2);
+                                Log.d(
+                                        "KnoxVpnEngineService",
+                                        "initializeVpnVendorForUserAfterLockBootComplete : Adding"
+                                            + " vendor : "
+                                                + str2);
                             }
                             arrayList.add(str2);
                         }
@@ -1142,14 +1566,28 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     while (it.hasNext()) {
                         String str3 = (String) it.next();
                         if (knoxVpnEngineService.mVpnConnectionList.containsKey(str3)) {
-                            Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterLockBootComplete: skip binding for " + str3);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "initializeVpnVendorForUserAfterLockBootComplete: skip binding"
+                                        + " for "
+                                            + str3);
                         } else {
-                            Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterLockBootComplete : Binding to vendor : " + str3);
-                            knoxVpnEngineService.bindKnoxVpnInterface(knoxVpnEngineService.mKnoxVpnHelper.getAdminIdFromPackageName(str3), str3);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "initializeVpnVendorForUserAfterLockBootComplete : Binding to"
+                                        + " vendor : "
+                                            + str3);
+                            knoxVpnEngineService.bindKnoxVpnInterface(
+                                    knoxVpnEngineService.mKnoxVpnHelper.getAdminIdFromPackageName(
+                                            str3),
+                                    str3);
                         }
                     }
                 } catch (Exception e) {
-                    Log.d("KnoxVpnEngineService", "initializeVpnVendorForUserAfterLockBootComplete : Exception: " + Log.getStackTraceString(e));
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "initializeVpnVendorForUserAfterLockBootComplete : Exception: "
+                                    + Log.getStackTraceString(e));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1158,7 +1596,11 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     /* renamed from: -$$Nest$mkillRunningProcessToApplyProxy, reason: not valid java name */
-    public static void m558$$Nest$mkillRunningProcessToApplyProxy(KnoxVpnEngineService knoxVpnEngineService, String str, HashMap hashMap, HashSet hashSet) {
+    public static void m558$$Nest$mkillRunningProcessToApplyProxy(
+            KnoxVpnEngineService knoxVpnEngineService,
+            String str,
+            HashMap hashMap,
+            HashSet hashSet) {
         int i;
         HashMap hashMap2 = hashMap;
         knoxVpnEngineService.getClass();
@@ -1181,39 +1623,83 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         int i3 = i2;
                         while (i3 < 2) {
                             String str2 = strArr[i3];
-                            KnoxVpnHelper knoxVpnHelperInstance = knoxVpnEngineService.getKnoxVpnHelperInstance();
+                            KnoxVpnHelper knoxVpnHelperInstance =
+                                    knoxVpnEngineService.getKnoxVpnHelperInstance();
                             int intValue = num.intValue();
                             knoxVpnHelperInstance.getClass();
                             int uIDForPackage = KnoxVpnHelper.getUIDForPackage(intValue, str2);
                             if (hashSet.contains(Integer.valueOf(uIDForPackage))) {
-                                Log.d("KnoxVpnEngineService", "The following app uid " + uIDForPackage + "is not going to be restarted since it is added to exempt list");
+                                Log.d(
+                                        "KnoxVpnEngineService",
+                                        "The following app uid "
+                                                + uIDForPackage
+                                                + "is not going to be restarted since it is added"
+                                                + " to exempt list");
                             } else {
-                                ApplicationInfo applicationInfo = knoxVpnEngineService.mContext.getPackageManager().getApplicationInfo(str2, i2);
-                                if (knoxVpnEngineService.getAMSInstance().checkIfProcessIsRunning(uIDForPackage, applicationInfo.processName)) {
-                                    Log.d("KnoxVpnEngineService", "Proxy config has been applied for the entire user, going to restart the app " + str2 + "whose uid is " + uIDForPackage);
-                                    knoxVpnEngineService.getAMSInstance().killApplicationProcess(applicationInfo.processName, uIDForPackage);
+                                ApplicationInfo applicationInfo =
+                                        knoxVpnEngineService
+                                                .mContext
+                                                .getPackageManager()
+                                                .getApplicationInfo(str2, i2);
+                                if (knoxVpnEngineService
+                                        .getAMSInstance()
+                                        .checkIfProcessIsRunning(
+                                                uIDForPackage, applicationInfo.processName)) {
+                                    Log.d(
+                                            "KnoxVpnEngineService",
+                                            "Proxy config has been applied for the entire user,"
+                                                + " going to restart the app "
+                                                    + str2
+                                                    + "whose uid is "
+                                                    + uIDForPackage);
+                                    knoxVpnEngineService
+                                            .getAMSInstance()
+                                            .killApplicationProcess(
+                                                    applicationInfo.processName, uIDForPackage);
                                     z = true;
                                 }
-                                knoxVpnEngineService.getAMSInstance().killBackgroundProcesses(str2, num.intValue());
+                                knoxVpnEngineService
+                                        .getAMSInstance()
+                                        .killBackgroundProcesses(str2, num.intValue());
                             }
                             i3++;
                             i2 = 0;
                         }
                         i = i2;
                     } else {
-                        KnoxVpnHelper knoxVpnHelperInstance2 = knoxVpnEngineService.getKnoxVpnHelperInstance();
+                        KnoxVpnHelper knoxVpnHelperInstance2 =
+                                knoxVpnEngineService.getKnoxVpnHelperInstance();
                         int intValue2 = num.intValue();
                         knoxVpnHelperInstance2.getClass();
                         String packageNameForUid = KnoxVpnHelper.getPackageNameForUid(intValue2);
                         if (Arrays.asList(strArr).contains(packageNameForUid)) {
                             i = 0;
-                            ApplicationInfo applicationInfo2 = knoxVpnEngineService.mContext.getPackageManager().getApplicationInfo(packageNameForUid, 0);
-                            if (knoxVpnEngineService.getAMSInstance().checkIfProcessIsRunning(num.intValue(), applicationInfo2.processName)) {
-                                Log.d("KnoxVpnEngineService", "Proxy config has been applied, going to restart the app " + packageNameForUid + "whose uid is " + num);
-                                knoxVpnEngineService.getAMSInstance().killApplicationProcess(applicationInfo2.processName, num.intValue());
+                            ApplicationInfo applicationInfo2 =
+                                    knoxVpnEngineService
+                                            .mContext
+                                            .getPackageManager()
+                                            .getApplicationInfo(packageNameForUid, 0);
+                            if (knoxVpnEngineService
+                                    .getAMSInstance()
+                                    .checkIfProcessIsRunning(
+                                            num.intValue(), applicationInfo2.processName)) {
+                                Log.d(
+                                        "KnoxVpnEngineService",
+                                        "Proxy config has been applied, going to restart the app "
+                                                + packageNameForUid
+                                                + "whose uid is "
+                                                + num);
+                                knoxVpnEngineService
+                                        .getAMSInstance()
+                                        .killApplicationProcess(
+                                                applicationInfo2.processName, num.intValue());
                                 z = true;
                             }
-                            knoxVpnEngineService.getAMSInstance().killBackgroundProcesses(packageNameForUid, UserHandle.getUserId(num.intValue()));
+                            knoxVpnEngineService
+                                    .getAMSInstance()
+                                    .killBackgroundProcesses(
+                                            packageNameForUid,
+                                            UserHandle.getUserId(num.intValue()));
                         } else {
                             i = 0;
                         }
@@ -1225,7 +1711,11 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     knoxVpnEngineService.createProcessKillNotification(str);
                 }
             } catch (Exception e) {
-                Log.e("KnoxVpnEngineService", "Exception occured while trying to kill application process to enable proxy " + Log.getStackTraceString(e));
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "Exception occured while trying to kill application process to enable proxy"
+                            + " "
+                                + Log.getStackTraceString(e));
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
         } catch (Throwable th) {
@@ -1235,7 +1725,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     /* renamed from: -$$Nest$mlogVpnVendor, reason: not valid java name */
-    public static void m559$$Nest$mlogVpnVendor(KnoxVpnEngineService knoxVpnEngineService, ComponentName componentName) {
+    public static void m559$$Nest$mlogVpnVendor(
+            KnoxVpnEngineService knoxVpnEngineService, ComponentName componentName) {
         knoxVpnEngineService.getClass();
         if (componentName == null) {
             return;
@@ -1245,13 +1736,20 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             String className = componentName.getClassName();
             if (!TextUtils.isEmpty(packageName) && !TextUtils.isEmpty(className)) {
                 if (DBG) {
-                    Log.d("KnoxVpnEngineService", "VPN service name " + className + " pkgname " + packageName);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "VPN service name " + className + " pkgname " + packageName);
                 }
-                int i = "com.samsung.android.knox.net.vpn.KnoxONSVpnService".equals(className) ? 2 : 1;
+                int i =
+                        "com.samsung.android.knox.net.vpn.KnoxONSVpnService".equals(className)
+                                ? 2
+                                : 1;
                 String[] strArr = {"packageName"};
                 String[] strArr2 = {packageName};
                 knoxVpnEngineService.mVpnStorageProvider.getClass();
-                ArrayList dataByFields = KnoxVpnStorageProvider.mEDM.getDataByFields("vpnVendor", strArr, strArr2, null);
+                ArrayList dataByFields =
+                        KnoxVpnStorageProvider.mEDM.getDataByFields(
+                                "vpnVendor", strArr, strArr2, null);
                 if (dataByFields.isEmpty()) {
                     ContentValues contentValues = new ContentValues();
                     contentValues.put("packageName", packageName);
@@ -1270,41 +1768,58 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     }
                     contentValues2.put("namespace", Integer.valueOf(i2 | i));
                     knoxVpnEngineService.mVpnStorageProvider.getClass();
-                    KnoxVpnStorageProvider.putDataByFields("vpnVendor", strArr, strArr2, contentValues2);
+                    KnoxVpnStorageProvider.putDataByFields(
+                            "vpnVendor", strArr, strArr2, contentValues2);
                 }
-                KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:logVpnVendor");
+                KnoxAnalyticsData knoxAnalyticsData =
+                        new KnoxAnalyticsData("KNOX_VPN", 1, "API:logVpnVendor");
                 knoxVpnEngineService.mData = knoxAnalyticsData;
                 knoxAnalyticsData.setProperty("vndrPkgN", packageName);
                 knoxVpnEngineService.mData.setProperty("NS", (i & 1) != 0 ? "Old" : "New");
                 KnoxAnalytics.log(knoxVpnEngineService.mData);
             }
         } catch (Exception e) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("failed to log vendor namespace "), "KnoxVpnEngineService");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("failed to log vendor namespace "),
+                    "KnoxVpnEngineService");
         }
     }
 
     /* renamed from: -$$Nest$mregisterNetworkCallback, reason: not valid java name */
-    public static void m560$$Nest$mregisterNetworkCallback(final KnoxVpnEngineService knoxVpnEngineService) {
+    public static void m560$$Nest$mregisterNetworkCallback(
+            final KnoxVpnEngineService knoxVpnEngineService) {
         knoxVpnEngineService.getClass();
         Log.d("KnoxVpnEngineService", "Registering network callback");
-        Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService$$ExternalSyntheticLambda0
-            public final void runOrThrow() {
-                KnoxVpnEngineService knoxVpnEngineService2 = KnoxVpnEngineService.this;
-                knoxVpnEngineService2.getClass();
-                NetworkRequest.Builder addCapability = new NetworkRequest.Builder().addTransportType(1).addCapability(16);
-                if (knoxVpnEngineService2.mConnectivityManager == null) {
-                    knoxVpnEngineService2.mConnectivityManager = (ConnectivityManager) knoxVpnEngineService2.mContext.getSystemService(ConnectivityManager.class);
-                }
-                knoxVpnEngineService2.mConnectivityManager.registerNetworkCallback(addCapability.build(), knoxVpnEngineService2.mNetworkCallback);
-            }
-        });
+        Binder.withCleanCallingIdentity(
+                new FunctionalUtils
+                        .ThrowingRunnable() { // from class:
+                                              // com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService$$ExternalSyntheticLambda0
+                    public final void runOrThrow() {
+                        KnoxVpnEngineService knoxVpnEngineService2 = KnoxVpnEngineService.this;
+                        knoxVpnEngineService2.getClass();
+                        NetworkRequest.Builder addCapability =
+                                new NetworkRequest.Builder().addTransportType(1).addCapability(16);
+                        if (knoxVpnEngineService2.mConnectivityManager == null) {
+                            knoxVpnEngineService2.mConnectivityManager =
+                                    (ConnectivityManager)
+                                            knoxVpnEngineService2.mContext.getSystemService(
+                                                    ConnectivityManager.class);
+                        }
+                        knoxVpnEngineService2.mConnectivityManager.registerNetworkCallback(
+                                addCapability.build(), knoxVpnEngineService2.mNetworkCallback);
+                    }
+                });
     }
 
     /* renamed from: -$$Nest$msetVpnInterface, reason: not valid java name */
-    public static void m561$$Nest$msetVpnInterface(KnoxVpnEngineService knoxVpnEngineService, String str, Object obj) {
+    public static void m561$$Nest$msetVpnInterface(
+            KnoxVpnEngineService knoxVpnEngineService, String str, Object obj) {
         knoxVpnEngineService.getClass();
         if (DBG) {
-            Log.d("KnoxVpnEngineService", "setVpnInterface: vendorName value is " + str + "vpnInterface value is " + obj);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "setVpnInterface: vendorName value is " + str + "vpnInterface value is " + obj);
         }
         if (obj == null) {
             obj = NULL_OBJECT;
@@ -1313,21 +1828,37 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     /* renamed from: -$$Nest$mstartVpnConnectionForAllClients, reason: not valid java name */
-    public static void m562$$Nest$mstartVpnConnectionForAllClients(KnoxVpnEngineService knoxVpnEngineService) {
+    public static void m562$$Nest$mstartVpnConnectionForAllClients(
+            KnoxVpnEngineService knoxVpnEngineService) {
         synchronized (knoxVpnEngineService) {
             try {
                 try {
                     HashSet hashSet = new HashSet();
-                    for (VpnProfileInfo vpnProfileInfo : knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
+                    for (VpnProfileInfo vpnProfileInfo :
+                            knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
                         String str = vpnProfileInfo.mProfileName;
                         if (knoxVpnEngineService.getBinderInterfaceForProfile(str) != null) {
-                            int vPNTransitionState = knoxVpnEngineService.getVPNTransitionState(str);
-                            if (vpnProfileInfo.routeType != 0 && (vPNTransitionState == 1 || vPNTransitionState == 5 || vPNTransitionState == -1)) {
-                                Log.d("KnoxVpnEngineService", "starting the vpn connection for the profile after UPSM is switched off " + str + "state:" + vPNTransitionState);
+                            int vPNTransitionState =
+                                    knoxVpnEngineService.getVPNTransitionState(str);
+                            if (vpnProfileInfo.routeType != 0
+                                    && (vPNTransitionState == 1
+                                            || vPNTransitionState == 5
+                                            || vPNTransitionState == -1)) {
+                                Log.d(
+                                        "KnoxVpnEngineService",
+                                        "starting the vpn connection for the profile after UPSM is"
+                                            + " switched off "
+                                                + str
+                                                + "state:"
+                                                + vPNTransitionState);
                                 knoxVpnEngineService.startVpnProfile(str);
                             }
-                        } else if (knoxVpnEngineService.mVpnConnectionList.containsKey(vpnProfileInfo.mVendorPkgName)) {
-                            Log.d("KnoxVpnEngineService", "startVpnConnectionForAllClients: skip binding for " + vpnProfileInfo.mVendorPkgName);
+                        } else if (knoxVpnEngineService.mVpnConnectionList.containsKey(
+                                vpnProfileInfo.mVendorPkgName)) {
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "startVpnConnectionForAllClients: skip binding for "
+                                            + vpnProfileInfo.mVendorPkgName);
                         } else {
                             hashSet.add(vpnProfileInfo.mVendorPkgName);
                         }
@@ -1335,11 +1866,20 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     Iterator it = hashSet.iterator();
                     while (it.hasNext()) {
                         String str2 = (String) it.next();
-                        Log.d("KnoxVpnEngineService", "The client binder object was set to null due to app getting killed when UPSM was switched on and trying to bind again");
-                        knoxVpnEngineService.bindKnoxVpnInterface(knoxVpnEngineService.mKnoxVpnHelper.getAdminIdFromPackageName(str2), str2);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "The client binder object was set to null due to app getting killed"
+                                    + " when UPSM was switched on and trying to bind again");
+                        knoxVpnEngineService.bindKnoxVpnInterface(
+                                knoxVpnEngineService.mKnoxVpnHelper.getAdminIdFromPackageName(str2),
+                                str2);
                     }
                 } catch (Exception e) {
-                    Log.e("KnoxVpnEngineService", "Exception occured while trying to start the vpn connection after UPSM is switched off" + Log.getStackTraceString(e));
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "Exception occured while trying to start the vpn connection after UPSM"
+                                + " is switched off"
+                                    + Log.getStackTraceString(e));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1348,22 +1888,40 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     /* renamed from: -$$Nest$mstartVpnConnectionForClient, reason: not valid java name */
-    public static void m563$$Nest$mstartVpnConnectionForClient(KnoxVpnEngineService knoxVpnEngineService, int i) {
+    public static void m563$$Nest$mstartVpnConnectionForClient(
+            KnoxVpnEngineService knoxVpnEngineService, int i) {
         synchronized (knoxVpnEngineService) {
             try {
                 try {
                     HashSet hashSet = new HashSet();
-                    for (VpnProfileInfo vpnProfileInfo : knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
+                    for (VpnProfileInfo vpnProfileInfo :
+                            knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
                         if (vpnProfileInfo.mVendorUid == i) {
                             String str = vpnProfileInfo.mProfileName;
                             if (knoxVpnEngineService.getBinderInterfaceForProfile(str) != null) {
-                                int vPNTransitionState = knoxVpnEngineService.getVPNTransitionState(str);
-                                if (vpnProfileInfo.routeType != 0 && (vPNTransitionState == 1 || vPNTransitionState == 5 || vPNTransitionState == -1)) {
-                                    Log.d("KnoxVpnEngineService", "starting the vpn connection for the profile after system restriction is removed " + str + "state:" + vPNTransitionState + "vpnClient:" + i);
+                                int vPNTransitionState =
+                                        knoxVpnEngineService.getVPNTransitionState(str);
+                                if (vpnProfileInfo.routeType != 0
+                                        && (vPNTransitionState == 1
+                                                || vPNTransitionState == 5
+                                                || vPNTransitionState == -1)) {
+                                    Log.d(
+                                            "KnoxVpnEngineService",
+                                            "starting the vpn connection for the profile after"
+                                                + " system restriction is removed "
+                                                    + str
+                                                    + "state:"
+                                                    + vPNTransitionState
+                                                    + "vpnClient:"
+                                                    + i);
                                     knoxVpnEngineService.startVpnProfile(str);
                                 }
-                            } else if (knoxVpnEngineService.mVpnConnectionList.containsKey(vpnProfileInfo.mVendorPkgName)) {
-                                Log.d("KnoxVpnEngineService", "startVpnConnectionForClient: skip binding for " + vpnProfileInfo.mVendorPkgName);
+                            } else if (knoxVpnEngineService.mVpnConnectionList.containsKey(
+                                    vpnProfileInfo.mVendorPkgName)) {
+                                Log.d(
+                                        "KnoxVpnEngineService",
+                                        "startVpnConnectionForClient: skip binding for "
+                                                + vpnProfileInfo.mVendorPkgName);
                             } else {
                                 hashSet.add(vpnProfileInfo.mVendorPkgName);
                             }
@@ -1372,11 +1930,20 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     Iterator it = hashSet.iterator();
                     while (it.hasNext()) {
                         String str2 = (String) it.next();
-                        Log.d("KnoxVpnEngineService", "The client binder object was set to null due to app getting killed during idle or power mode and trying to bind again");
-                        knoxVpnEngineService.bindKnoxVpnInterface(knoxVpnEngineService.mKnoxVpnHelper.getAdminIdFromPackageName(str2), str2);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "The client binder object was set to null due to app getting killed"
+                                    + " during idle or power mode and trying to bind again");
+                        knoxVpnEngineService.bindKnoxVpnInterface(
+                                knoxVpnEngineService.mKnoxVpnHelper.getAdminIdFromPackageName(str2),
+                                str2);
                     }
                 } catch (Exception e) {
-                    Log.e("KnoxVpnEngineService", "Exception occured while trying to start the vpn connection after the system restriction is removed" + Log.getStackTraceString(e));
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "Exception occured while trying to start the vpn connection after the"
+                                + " system restriction is removed"
+                                    + Log.getStackTraceString(e));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1385,52 +1952,97 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     /* renamed from: -$$Nest$mstopStrongwanProxyConnection, reason: not valid java name */
-    public static void m564$$Nest$mstopStrongwanProxyConnection(KnoxVpnEngineService knoxVpnEngineService, String str, String str2, int i) {
+    public static void m564$$Nest$mstopStrongwanProxyConnection(
+            KnoxVpnEngineService knoxVpnEngineService, String str, String str2, int i) {
         knoxVpnEngineService.getClass();
         try {
             if (str.equalsIgnoreCase("com.samsung.sVpn")) {
                 knoxVpnEngineService.getActiveProfilesForVendor(str2);
-                if (((ArrayList) knoxVpnEngineService.getActiveProfilesForVendor(str2)).size() > 0) {
-                    knoxVpnEngineService.getVpnManagerService().prepareVpn("[Legacy VPN]", "[Legacy VPN]", i);
+                if (((ArrayList) knoxVpnEngineService.getActiveProfilesForVendor(str2)).size()
+                        > 0) {
+                    knoxVpnEngineService
+                            .getVpnManagerService()
+                            .prepareVpn("[Legacy VPN]", "[Legacy VPN]", i);
                 }
             }
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception occured at stopStrongwanProxyConnection API "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception occured at stopStrongwanProxyConnection API "),
+                    "KnoxVpnEngineService");
         }
     }
 
     /* renamed from: -$$Nest$mstopVpnConnectionForAirplaneMode, reason: not valid java name */
-    public static void m565$$Nest$mstopVpnConnectionForAirplaneMode(KnoxVpnEngineService knoxVpnEngineService) {
+    public static void m565$$Nest$mstopVpnConnectionForAirplaneMode(
+            KnoxVpnEngineService knoxVpnEngineService) {
         knoxVpnEngineService.getClass();
         int i = 0;
         try {
-            for (VpnProfileInfo vpnProfileInfo : knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
+            for (VpnProfileInfo vpnProfileInfo :
+                    knoxVpnEngineService.vpnConfig.vpnProfileInfoMap.values()) {
                 i = vpnProfileInfo.personaId;
                 if (vpnProfileInfo.activateState == 1) {
                     String str = vpnProfileInfo.mProfileName;
                     Log.i("KnoxVpnEngineService", "Airplane Mode: Stopping connection for " + str);
-                    AuditLog.logAsUser(5, 5, false, Process.myPid(), "KnoxVpnEngineService", "Airplane Mode: Stopping connection for profile " + str, i);
-                    IKnoxVpnService binderInterfaceForProfile = knoxVpnEngineService.getBinderInterfaceForProfile(str);
-                    if ((binderInterfaceForProfile != null ? binderInterfaceForProfile.stopConnection(str) : -1) != 0) {
-                        Log.i("KnoxVpnEngineService", "Airplane Mode: Stopping connection for " + str + " failed!!");
+                    AuditLog.logAsUser(
+                            5,
+                            5,
+                            false,
+                            Process.myPid(),
+                            "KnoxVpnEngineService",
+                            "Airplane Mode: Stopping connection for profile " + str,
+                            i);
+                    IKnoxVpnService binderInterfaceForProfile =
+                            knoxVpnEngineService.getBinderInterfaceForProfile(str);
+                    if ((binderInterfaceForProfile != null
+                                    ? binderInterfaceForProfile.stopConnection(str)
+                                    : -1)
+                            != 0) {
+                        Log.i(
+                                "KnoxVpnEngineService",
+                                "Airplane Mode: Stopping connection for " + str + " failed!!");
                     }
                 }
             }
         } catch (Exception e) {
-            AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception stopping vpn connection for airplane mode", i);
-            Log.i("KnoxVpnEngineService", "Airplane Mode: ACTION_AIRPLANE_MODE_CHANGED Exception", e);
+            AuditLog.logAsUser(
+                    3,
+                    5,
+                    false,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Exception stopping vpn connection for airplane mode",
+                    i);
+            Log.i(
+                    "KnoxVpnEngineService",
+                    "Airplane Mode: ACTION_AIRPLANE_MODE_CHANGED Exception",
+                    e);
         }
     }
 
     /* renamed from: -$$Nest$mvalidateProfilesForVendor, reason: not valid java name */
-    public static void m566$$Nest$mvalidateProfilesForVendor(KnoxVpnEngineService knoxVpnEngineService, String str, IKnoxVpnService iKnoxVpnService) {
+    public static void m566$$Nest$mvalidateProfilesForVendor(
+            KnoxVpnEngineService knoxVpnEngineService,
+            String str,
+            IKnoxVpnService iKnoxVpnService) {
         knoxVpnEngineService.getClass();
         if (DBG) {
-            Log.d("KnoxVpnEngineService", "validateProfilesForVendor - vendorNameWithCid = " + str + " vpnInterface = " + iKnoxVpnService);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "validateProfilesForVendor - vendorNameWithCid = "
+                            + str
+                            + " vpnInterface = "
+                            + iKnoxVpnService);
         }
         try {
             knoxVpnEngineService.mVpnStorageProvider.getClass();
-            ArrayList dataByFields = KnoxVpnStorageProvider.mEDM.getDataByFields("VpnProfileInfo", new String[]{"vendorName"}, new String[]{str}, null);
+            ArrayList dataByFields =
+                    KnoxVpnStorageProvider.mEDM.getDataByFields(
+                            "VpnProfileInfo",
+                            new String[] {"vendorName"},
+                            new String[] {str},
+                            null);
             if (iKnoxVpnService != null) {
                 Iterator it = dataByFields.iterator();
                 while (it.hasNext()) {
@@ -1440,26 +2052,36 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     int intValue = contentValues.getAsInteger("adminUid").intValue();
                     int intValue2 = contentValues.getAsInteger("activateState").intValue();
                     if (DBG) {
-                        Log.d("KnoxVpnEngineService", "validateProfilesForVendor : profileName = " + asString);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "validateProfilesForVendor : profileName = " + asString);
                     }
                     if (iKnoxVpnService.getConnection(asString) == null) {
-                        VpnProfileInfo profileEntry = knoxVpnEngineService.vpnConfig.getProfileEntry(asString);
+                        VpnProfileInfo profileEntry =
+                                knoxVpnEngineService.vpnConfig.getProfileEntry(asString);
                         if (profileEntry != null) {
-                            knoxVpnEngineService.removeProfileFromKeyStore(profileEntry.mVendorUid, asString, profileEntry.mVendorPkgName);
+                            knoxVpnEngineService.removeProfileFromKeyStore(
+                                    profileEntry.mVendorUid, asString, profileEntry.mVendorPkgName);
                         }
                         iKnoxVpnService.createConnection(asString2);
                         if (iKnoxVpnService.getConnection(asString) == null) {
                             if (intValue2 == 1) {
-                                knoxVpnEngineService.sendVpnConnectionFailIntent(intValue, str, asString);
+                                knoxVpnEngineService.sendVpnConnectionFailIntent(
+                                        intValue, str, asString);
                             }
-                            Log.d("KnoxVpnEngineService", "JsonProfile null and recreate connection fail");
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "JsonProfile null and recreate connection fail");
                             knoxVpnEngineService.removeProfileFromHashMapAndDB(asString);
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("validateProfilesForVendor : Failure at "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("validateProfilesForVendor : Failure at "),
+                    "KnoxVpnEngineService");
         }
     }
 
@@ -1493,15 +2115,23 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         this.mCaptiveExemptLock = new Object();
         this.notificationFlagState = null;
         this.isDeviceBootCompleted = false;
-        this.mNetworkCallback = new ConnectivityManager.NetworkCallback() { // from class: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.1
-            @Override // android.net.ConnectivityManager.NetworkCallback
-            public final void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
-                super.onCapabilitiesChanged(network, networkCapabilities);
-                if (KnoxVpnEngineService.mIsCaptiveExempt && networkCapabilities.hasCapability(16)) {
-                    KnoxVpnEngineService.this.sendMessageToHandler$1(29, SystemUpdateManagerService$$ExternalSyntheticOutline0.m(0, "captive"));
-                }
-            }
-        };
+        this.mNetworkCallback =
+                new ConnectivityManager
+                        .NetworkCallback() { // from class:
+                                             // com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.1
+                    @Override // android.net.ConnectivityManager.NetworkCallback
+                    public final void onCapabilitiesChanged(
+                            Network network, NetworkCapabilities networkCapabilities) {
+                        super.onCapabilitiesChanged(network, networkCapabilities);
+                        if (KnoxVpnEngineService.mIsCaptiveExempt
+                                && networkCapabilities.hasCapability(16)) {
+                            KnoxVpnEngineService.this.sendMessageToHandler$1(
+                                    29,
+                                    SystemUpdateManagerService$$ExternalSyntheticOutline0.m(
+                                            0, "captive"));
+                        }
+                    }
+                };
         Log.d("KnoxVpnEngineService", "Initializing in constructor");
         this.mInjector = injector;
         Objects.requireNonNull(context);
@@ -1563,17 +2193,24 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
         this.mVpnStorageProvider.getClass();
         EdmStorageProvider edmStorageProvider = KnoxVpnStorageProvider.mEDM;
-        if (edmStorageProvider != null && (writableDatabase = edmStorageProvider.mEdmDbHelper.getWritableDatabase()) != null) {
+        if (edmStorageProvider != null
+                && (writableDatabase = edmStorageProvider.mEdmDbHelper.getWritableDatabase())
+                        != null) {
             try {
                 writableDatabase.execSQL("SELECT 1 FROM VpnNotificationTable WHERE 1=0");
                 try {
-                    Iterator it = KnoxVpnStorageProvider.mEDM.getDataByFields("VpnNotificationTable", null, null, null).iterator();
+                    Iterator it =
+                            KnoxVpnStorageProvider.mEDM
+                                    .getDataByFields("VpnNotificationTable", null, null, null)
+                                    .iterator();
                     while (it.hasNext()) {
-                        KnoxVpnStorageProvider.putDataByFields("VpnNotificationFlagTable", null, null, (ContentValues) it.next());
+                        KnoxVpnStorageProvider.putDataByFields(
+                                "VpnNotificationFlagTable", null, null, (ContentValues) it.next());
                     }
                     writableDatabase.execSQL("DROP TABLE VpnNotificationTable;");
                 } catch (Exception e2) {
-                    VpnManagerService$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception = "), "KnoxVpnStorageProvider");
+                    VpnManagerService$$ExternalSyntheticOutline0.m(
+                            e2, new StringBuilder("Exception = "), "KnoxVpnStorageProvider");
                 }
             } catch (Exception unused) {
             }
@@ -1590,14 +2227,19 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     this.mFirewallHelper = KnoxVpnFirewallHelper.getInstance();
                     getVpnManagerService().registerSystemDefaultNetworkCallback();
                     addBlockingRulesForPackages();
-                    this.mKnoxVpnTetherAuthentication = KnoxVpnTetherAuthentication.getInstance(this.mContext);
+                    this.mKnoxVpnTetherAuthentication =
+                            KnoxVpnTetherAuthentication.getInstance(this.mContext);
                 }
             } catch (Exception unused2) {
-                Log.e("KnoxVpnEngineService", "Error occured while trying to ini the BroadcastReceiver");
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "Error occured while trying to ini the BroadcastReceiver");
             }
         }
         Log.d("KnoxVpnVersion", "writeVersionInProperties : 2.3.0");
-        switch (KnoxVpnVersion$1.$SwitchMap$com$samsung$android$knox$EdmConstants$EnterpriseKnoxSdkVersion[EdmConstants.getEnterpriseKnoxSdkVersion().ordinal()]) {
+        switch (KnoxVpnVersion$1
+                .$SwitchMap$com$samsung$android$knox$EdmConstants$EnterpriseKnoxSdkVersion[
+                EdmConstants.getEnterpriseKnoxSdkVersion().ordinal()]) {
             case 13:
                 str = "2.2.2";
                 break;
@@ -1648,7 +2290,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             try {
                 mOemNetdService = IOemNetd.Stub.asInterface(iNetd.getOemNetd());
             } catch (RemoteException e) {
-                ActivityManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed to get OemNetd listener "), "KnoxVpnEngineService");
+                ActivityManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("Failed to get OemNetd listener "),
+                        "KnoxVpnEngineService");
             }
         }
         return mOemNetdService;
@@ -1706,7 +2351,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean updateIfNonLegacyUserAndCheckIfVendorAllowed(com.samsung.android.knox.net.vpn.KnoxVpnContext r7, int r8) {
+    public static boolean updateIfNonLegacyUserAndCheckIfVendorAllowed(
+            com.samsung.android.knox.net.vpn.KnoxVpnContext r7, int r8) {
         /*
             int r0 = r7.personaId
             r1 = 1
@@ -1770,30 +2416,41 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         L76:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.updateIfNonLegacyUserAndCheckIfVendorAllowed(com.samsung.android.knox.net.vpn.KnoxVpnContext, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.updateIfNonLegacyUserAndCheckIfVendorAllowed(com.samsung.android.knox.net.vpn.KnoxVpnContext,"
+                    + " int):boolean");
     }
 
     /* JADX WARN: Can't wrap try/catch for region: R(9:30|(1:31)|(4:145|146|(1:148)|(3:150|151|152)(4:153|154|155|(4:157|158|159|160)(29:161|(1:165)|166|(4:169|170|171|167)|175|176|177|178|179|(2:181|(1:183)(1:258))(1:259)|184|(4:187|188|189|185)|190|191|192|193|194|195|196|(4:199|(5:211|212|(3:214|(1:216)|217)|218|(4:222|223|224|225)(2:220|221))(3:201|202|(3:208|209|210)(3:204|205|206))|207|197)|226|227|(2:229|(3:231|232|233)(1:234))(1:254)|(2:236|(1:238)(2:239|(1:241)(1:(3:243|244|245))))|246|247|248|249|250)))(2:33|(4:46|47|(1:49)|(8:51|52|53|54|55|56|57|58)(24:65|(4:68|69|70|66)|71|72|(5:75|76|77|78|73)|81|82|(2:83|(3:85|(3:91|92|(4:96|97|(1:99)|100)(2:94|95))(3:87|88|89)|90)(2:140|141))|101|102|103|104|(1:137)|108|109|(3:118|(1:120)|(3:122|(3:124|125|126)(3:129|130|131)|(1:128))(3:132|133|134))|113|114|115|36|37|(1:39)|41|42)))|35|36|37|(0)|41|42) */
     /* JADX WARN: Code restructure failed: missing block: B:43:0x0653, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:45:0x0655, code lost:
-    
-        android.util.Log.e("KnoxVpnEngineService", "Exception = " + android.util.Log.getStackTraceString(r0));
-     */
+
+       android.util.Log.e("KnoxVpnEngineService", "Exception = " + android.util.Log.getStackTraceString(r0));
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:39:0x0634 A[Catch: all -> 0x0059, Exception -> 0x0653, TRY_LEAVE, TryCatch #4 {Exception -> 0x0653, blocks: (B:37:0x0628, B:39:0x0634), top: B:36:0x0628, outer: #9 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized com.samsung.android.knox.net.vpn.EnterpriseResponseData activateVpnProfile(com.samsung.android.knox.net.vpn.KnoxVpnContext r25, java.lang.String r26, boolean r27) {
+    public final synchronized com.samsung.android.knox.net.vpn.EnterpriseResponseData
+            activateVpnProfile(
+                    com.samsung.android.knox.net.vpn.KnoxVpnContext r25,
+                    java.lang.String r26,
+                    boolean r27) {
         /*
             Method dump skipped, instructions count: 1651
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.activateVpnProfile(com.samsung.android.knox.net.vpn.KnoxVpnContext, java.lang.String, boolean):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.activateVpnProfile(com.samsung.android.knox.net.vpn.KnoxVpnContext,"
+                    + " java.lang.String,"
+                    + " boolean):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:10:0x0128  */
@@ -1802,37 +2459,77 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData addAllContainerPackagesToVpn(com.samsung.android.knox.net.vpn.KnoxVpnContext r13, int r14, java.lang.String r15) {
+    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData
+            addAllContainerPackagesToVpn(
+                    com.samsung.android.knox.net.vpn.KnoxVpnContext r13,
+                    int r14,
+                    java.lang.String r15) {
         /*
             Method dump skipped, instructions count: 392
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.addAllContainerPackagesToVpn(com.samsung.android.knox.net.vpn.KnoxVpnContext, int, java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.addAllContainerPackagesToVpn(com.samsung.android.knox.net.vpn.KnoxVpnContext,"
+                    + " int,"
+                    + " java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
     }
 
-    public final synchronized EnterpriseResponseData addAllPackages(KnoxVpnContext knoxVpnContext, String str) {
+    public final synchronized EnterpriseResponseData addAllPackages(
+            KnoxVpnContext knoxVpnContext, String str) {
         VpnProfileInfo profileEntry;
-        Log.d("KnoxVpnEngineService", "addAllPackages : vpnContext.personaId value is " + knoxVpnContext.personaId + " profileName value is " + str);
+        Log.d(
+                "KnoxVpnEngineService",
+                "addAllPackages : vpnContext.personaId value is "
+                        + knoxVpnContext.personaId
+                        + " profileName value is "
+                        + str);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData(-1);
         enterpriseResponseData.setStatus(1, -1);
         try {
             profileEntry = this.vpnConfig.getProfileEntry(str);
         } catch (Exception e) {
-            Log.d("KnoxVpnEngineService", "Error while adding all the packages to vpn: exception occured: The error code is -1" + Log.getStackTraceString(e));
-            AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception while adding all the packages to vpn for profile " + str, knoxVpnContext.personaId);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Error while adding all the packages to vpn: exception occured: The error code"
+                        + " is -1"
+                            + Log.getStackTraceString(e));
+            AuditLog.logAsUser(
+                    3,
+                    5,
+                    false,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Exception while adding all the packages to vpn for profile " + str,
+                    knoxVpnContext.personaId);
         }
         if (profileEntry == null) {
-            Log.d("KnoxVpnEngineService", "Error while adding all the packages to vpn: The error code is -1");
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Error while adding all the packages to vpn: The error code is -1");
             return enterpriseResponseData;
         }
         KnoxVpnHelper knoxVpnHelper = this.mKnoxVpnHelper;
         int i = knoxVpnContext.personaId;
         knoxVpnHelper.getClass();
-        if (writeAddAllPackageToDB(knoxVpnContext, KnoxVpnHelper.getPersonifiedName(i, "ADD_ALL_PACKAGES"), str) == -1) {
+        if (writeAddAllPackageToDB(
+                        knoxVpnContext,
+                        KnoxVpnHelper.getPersonifiedName(i, "ADD_ALL_PACKAGES"),
+                        str)
+                == -1) {
             enterpriseResponseData.setData(126);
-            Log.d("KnoxVpnEngineService", "Error while adding all the packages to vpn: The error code is 126");
-            AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error while adding all packages to vpn for profile " + str, knoxVpnContext.personaId);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Error while adding all the packages to vpn: The error code is 126");
+            AuditLog.logAsUser(
+                    3,
+                    5,
+                    false,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Error while adding all packages to vpn for profile " + str,
+                    knoxVpnContext.personaId);
             return enterpriseResponseData;
         }
         if (profileEntry.activateState == 1) {
@@ -1852,22 +2549,39 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         int vPNTransitionState = getVPNTransitionState(str);
         if (vPNTransitionState != -1 && vPNTransitionState != 1) {
             if (vPNTransitionState == 2) {
-                this.mFirewallHelper.addMiscRulesRange(knoxVpnContext.personaId, getVirtualInterfaceType(str), null);
-                this.mFirewallHelper.addRangeRulesForFilteredPackages(knoxVpnContext.personaId, profileEntry.mVendorPkgName, profileEntry.mIpChainName, defaultNetworkInterface);
+                this.mFirewallHelper.addMiscRulesRange(
+                        knoxVpnContext.personaId, getVirtualInterfaceType(str), null);
+                this.mFirewallHelper.addRangeRulesForFilteredPackages(
+                        knoxVpnContext.personaId,
+                        profileEntry.mVendorPkgName,
+                        profileEntry.mIpChainName,
+                        defaultNetworkInterface);
                 KnoxVpnHelper knoxVpnHelperInstance = getKnoxVpnHelperInstance();
                 int i3 = knoxVpnContext.personaId;
                 knoxVpnHelperInstance.getClass();
                 updateProxyRules(3, str, KnoxVpnHelper.updateProxyList(i3, true));
             } else if (vPNTransitionState == 3) {
-                this.mFirewallHelper.addMiscRulesRange(knoxVpnContext.personaId, getVirtualInterfaceType(str), null);
-                this.mFirewallHelper.addRangeRulesForFilteredPackages(knoxVpnContext.personaId, profileEntry.mVendorPkgName, profileEntry.mIpChainName, defaultNetworkInterface);
+                this.mFirewallHelper.addMiscRulesRange(
+                        knoxVpnContext.personaId, getVirtualInterfaceType(str), null);
+                this.mFirewallHelper.addRangeRulesForFilteredPackages(
+                        knoxVpnContext.personaId,
+                        profileEntry.mVendorPkgName,
+                        profileEntry.mIpChainName,
+                        defaultNetworkInterface);
             } else if (vPNTransitionState == 4) {
                 String str2 = profileEntry.mInterfaceName;
                 int i4 = profileEntry.mNetId;
-                Log.d("KnoxVpnEngineService", "addAllPackages : profileName = " + str + "interfaceValue = " + str2);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "addAllPackages : profileName = " + str + "interfaceValue = " + str2);
                 if (str2 != null) {
-                    this.mFirewallHelper.addMiscRulesRange(knoxVpnContext.personaId, getVirtualInterfaceType(str), str2);
-                    this.mFirewallHelper.addRangeRulesForFilteredPackages(knoxVpnContext.personaId, profileEntry.mVendorPkgName, profileEntry.mIpChainName, defaultNetworkInterface);
+                    this.mFirewallHelper.addMiscRulesRange(
+                            knoxVpnContext.personaId, getVirtualInterfaceType(str), str2);
+                    this.mFirewallHelper.addRangeRulesForFilteredPackages(
+                            knoxVpnContext.personaId,
+                            profileEntry.mVendorPkgName,
+                            profileEntry.mIpChainName,
+                            defaultNetworkInterface);
                     KnoxVpnHelper knoxVpnHelper2 = this.mKnoxVpnHelper;
                     int i5 = knoxVpnContext.personaId;
                     knoxVpnHelper2.getClass();
@@ -1882,31 +2596,60 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     updateProxyRules(3, str, KnoxVpnHelper.updateProxyList(i7, true));
                 }
             } else if (vPNTransitionState != 5) {
-                this.mFirewallHelper.addRangeRulesForFilteredPackages(knoxVpnContext.personaId, profileEntry.mVendorPkgName, profileEntry.mIpChainName, defaultNetworkInterface);
+                this.mFirewallHelper.addRangeRulesForFilteredPackages(
+                        knoxVpnContext.personaId,
+                        profileEntry.mVendorPkgName,
+                        profileEntry.mIpChainName,
+                        defaultNetworkInterface);
                 Log.e("KnoxVpnEngineService", "addAllPackages : VPN State not valid");
             }
             updateNotification(knoxVpnContext.personaId, str, true);
             this.mKnoxVpnHelper.updateUidsToVpnUidRange(str);
-            Log.d("KnoxVpnEngineService", "success while adding all the packages to vpn: The error code is 0");
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "success while adding all the packages to vpn: The error code is 0");
             enterpriseResponseData.setData(0);
             enterpriseResponseData.setStatus(0, 0);
-            AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", "Success while adding all the packages to vpn for profile " + str, knoxVpnContext.personaId);
+            AuditLog.logAsUser(
+                    5,
+                    5,
+                    true,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Success while adding all the packages to vpn for profile " + str,
+                    knoxVpnContext.personaId);
             return enterpriseResponseData;
         }
-        this.mFirewallHelper.addMiscRulesRange(knoxVpnContext.personaId, getVirtualInterfaceType(str), null);
-        this.mFirewallHelper.addRangeRulesForFilteredPackages(knoxVpnContext.personaId, profileEntry.mVendorPkgName, profileEntry.mIpChainName, defaultNetworkInterface);
+        this.mFirewallHelper.addMiscRulesRange(
+                knoxVpnContext.personaId, getVirtualInterfaceType(str), null);
+        this.mFirewallHelper.addRangeRulesForFilteredPackages(
+                knoxVpnContext.personaId,
+                profileEntry.mVendorPkgName,
+                profileEntry.mIpChainName,
+                defaultNetworkInterface);
         KnoxVpnHelper knoxVpnHelperInstance3 = getKnoxVpnHelperInstance();
         int i8 = knoxVpnContext.personaId;
         knoxVpnHelperInstance3.getClass();
         updateProxyRules(3, str, KnoxVpnHelper.updateProxyList(i8, true));
         startVpnProfile(str);
-        Log.d("KnoxVpnEngineService", "addAllPackages : start connection called. profileName = " + str);
+        Log.d(
+                "KnoxVpnEngineService",
+                "addAllPackages : start connection called. profileName = " + str);
         updateNotification(knoxVpnContext.personaId, str, true);
         this.mKnoxVpnHelper.updateUidsToVpnUidRange(str);
-        Log.d("KnoxVpnEngineService", "success while adding all the packages to vpn: The error code is 0");
+        Log.d(
+                "KnoxVpnEngineService",
+                "success while adding all the packages to vpn: The error code is 0");
         enterpriseResponseData.setData(0);
         enterpriseResponseData.setStatus(0, 0);
-        AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", "Success while adding all the packages to vpn for profile " + str, knoxVpnContext.personaId);
+        AuditLog.logAsUser(
+                5,
+                5,
+                true,
+                Process.myPid(),
+                "KnoxVpnEngineService",
+                "Success while adding all the packages to vpn for profile " + str,
+                knoxVpnContext.personaId);
         return enterpriseResponseData;
     }
 
@@ -1920,12 +2663,16 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData addAllPackagesToVpn(com.samsung.android.knox.net.vpn.KnoxVpnContext r11, java.lang.String r12) {
+    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData addAllPackagesToVpn(
+            com.samsung.android.knox.net.vpn.KnoxVpnContext r11, java.lang.String r12) {
         /*
             Method dump skipped, instructions count: 317
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.addAllPackagesToVpn(com.samsung.android.knox.net.vpn.KnoxVpnContext, java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.addAllPackagesToVpn(com.samsung.android.knox.net.vpn.KnoxVpnContext,"
+                    + " java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
     }
 
     public final synchronized void addBlockingRulesForPackages() {
@@ -1936,17 +2683,25 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             try {
                 values = this.vpnConfig.vpnProfileInfoMap.values();
             } catch (Exception e) {
-                Log.e("KnoxVpnEngineService", "addBlockingRulesForPackages : Exception when reading package DB:" + Log.getStackTraceString(e));
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "addBlockingRulesForPackages : Exception when reading package DB:"
+                                + Log.getStackTraceString(e));
             }
             if (values != null && values.size() > 0) {
                 if (values.size() > 0) {
                     KnoxVpnFirewallHelper knoxVpnFirewallHelper = this.mFirewallHelper;
                     knoxVpnFirewallHelper.getClass();
                     Log.d(KnoxVpnFirewallHelper.TAG, "deleting blocking rules");
-                    knoxVpnFirewallHelper.runSingleCommand("ip rule del blackhole fwmark 60 prio 50 ;ip -6 rule del blackhole fwmark 60 prio 50 ;");
+                    knoxVpnFirewallHelper.runSingleCommand(
+                            "ip rule del blackhole fwmark 60 prio 50 ;ip -6 rule del blackhole"
+                                + " fwmark 60 prio 50 ;");
                     Log.d(KnoxVpnFirewallHelper.TAG, "Adding blocking rules");
-                    knoxVpnFirewallHelper.runSingleCommand("ip rule add blackhole fwmark 60 prio 50 ;ip -6 rule add blackhole fwmark 60 prio 50 ;");
-                    this.mFirewallHelper.addRulesForNoUidPackets(3, "block_traffic", "block_traffic");
+                    knoxVpnFirewallHelper.runSingleCommand(
+                            "ip rule add blackhole fwmark 60 prio 50 ;ip -6 rule add blackhole"
+                                + " fwmark 60 prio 50 ;");
+                    this.mFirewallHelper.addRulesForNoUidPackets(
+                            3, "block_traffic", "block_traffic");
                     allowAppsToMakeDnsQueryForNetId();
                 }
                 Iterator it = values.iterator();
@@ -1963,18 +2718,25 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     String regularPackageName = KnoxVpnHelper.getRegularPackageName(str4);
                     int i4 = vpnProfileInfo.chainingEnabled;
                     ArrayList arrayList = new ArrayList();
-                    getVpnManagerService().createEnterpriseVpnInstance(regularPackageName, str, i3, i4);
+                    getVpnManagerService()
+                            .createEnterpriseVpnInstance(regularPackageName, str, i3, i4);
                     this.mKnoxVpnHelper.updateUidsToVpnUidRange(str);
                     KnoxVpnFirewallHelper knoxVpnFirewallHelper2 = this.mFirewallHelper;
                     knoxVpnFirewallHelper2.getClass();
                     if (str3 != null) {
-                        knoxVpnFirewallHelper2.insertRules(46, "*mangle", Arrays.asList(str3.concat("_uidlist"), str3.concat("_act")), null, false);
+                        knoxVpnFirewallHelper2.insertRules(
+                                46,
+                                "*mangle",
+                                Arrays.asList(str3.concat("_uidlist"), str3.concat("_act")),
+                                null,
+                                false);
                     }
                     this.mFirewallHelper.addRulesInOutputChain(str3);
                     addExemptRulesForUid(i, str);
                     Iterator it2 = vpnProfileInfo.mExemptPackageList.iterator();
                     while (it2.hasNext()) {
-                        updateRulesToExemptUid(1, str, null, null, 1, ((Integer) it2.next()).intValue(), 0);
+                        updateRulesToExemptUid(
+                                1, str, null, null, 1, ((Integer) it2.next()).intValue(), 0);
                         str4 = str4;
                         arrayList = arrayList;
                         it = it;
@@ -1988,25 +2750,41 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                             KnoxVpnHelper knoxVpnHelper = this.mKnoxVpnHelper;
                             String packageName = vpnPackageInfo.getPackageName();
                             knoxVpnHelper.getClass();
-                            int containerIdFromPackageName = KnoxVpnHelper.getContainerIdFromPackageName(packageName);
+                            int containerIdFromPackageName =
+                                    KnoxVpnHelper.getContainerIdFromPackageName(packageName);
                             if (i2 == 1) {
-                                getOemNetdService$1().knoxVpnBlockUserWideDnsQuery(true, containerIdFromPackageName);
-                                this.mFirewallHelper.addMiscRulesRange(containerIdFromPackageName, getVirtualInterfaceType(str), str2);
+                                getOemNetdService$1()
+                                        .knoxVpnBlockUserWideDnsQuery(
+                                                true, containerIdFromPackageName);
+                                this.mFirewallHelper.addMiscRulesRange(
+                                        containerIdFromPackageName,
+                                        getVirtualInterfaceType(str),
+                                        str2);
                             }
-                            this.mFirewallHelper.addRangeRulesForFilteredPackages(containerIdFromPackageName, str5, str3, this.mKnoxVpnHelper.getDefaultNetworkInterface(str));
+                            this.mFirewallHelper.addRangeRulesForFilteredPackages(
+                                    containerIdFromPackageName,
+                                    str5,
+                                    str3,
+                                    this.mKnoxVpnHelper.getDefaultNetworkInterface(str));
                         } else {
                             arrayList2.add(Integer.valueOf(vpnPackageInfo.getUid()));
                         }
                     }
                     if (!arrayList2.isEmpty()) {
                         if (i2 == 1) {
-                            this.mFirewallHelper.addMiscRules(getVirtualInterfaceType(str), str2, arrayList2);
+                            this.mFirewallHelper.addMiscRules(
+                                    getVirtualInterfaceType(str), str2, arrayList2);
                         }
-                        this.mFirewallHelper.addRulesForFilteredPackages(str5, str3, arrayList2, this.mKnoxVpnHelper.getDefaultNetworkInterface(str));
+                        this.mFirewallHelper.addRulesForFilteredPackages(
+                                str5,
+                                str3,
+                                arrayList2,
+                                this.mKnoxVpnHelper.getDefaultNetworkInterface(str));
                     }
                     if (i2 == 1) {
                         c = 3;
-                        this.mFirewallHelper.addMarkingRulesForFilteredPackages(3, "block_traffic", str3);
+                        this.mFirewallHelper.addMarkingRulesForFilteredPackages(
+                                3, "block_traffic", str3);
                     } else {
                         c = 3;
                     }
@@ -2018,20 +2796,32 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
     }
 
-    public final synchronized EnterpriseResponseData addContainerPackagesToVpn(KnoxVpnContext knoxVpnContext, int i, String[] strArr, String str) {
+    public final synchronized EnterpriseResponseData addContainerPackagesToVpn(
+            KnoxVpnContext knoxVpnContext, int i, String[] strArr, String str) {
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
-        Log.d("KnoxVpnEngineService", "addContainerPackagesToVpn : containerId value is " + i + " profileName value is " + str);
+        Log.d(
+                "KnoxVpnEngineService",
+                "addContainerPackagesToVpn : containerId value is "
+                        + i
+                        + " profileName value is "
+                        + str);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData(-1);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             enterpriseResponseData.setData(140);
             return enterpriseResponseData;
         }
-        int addContainerPackagesToVpnValidation = this.mKnoxVpnApiValidation.addContainerPackagesToVpnValidation(knoxVpnContext, i, strArr, str);
+        int addContainerPackagesToVpnValidation =
+                this.mKnoxVpnApiValidation.addContainerPackagesToVpnValidation(
+                        knoxVpnContext, i, strArr, str);
         if (addContainerPackagesToVpnValidation != 100) {
             enterpriseResponseData.setData(Integer.valueOf(addContainerPackagesToVpnValidation));
-            Log.d("KnoxVpnEngineService", "Error occured while adding container packages to vpn: The error code is " + addContainerPackagesToVpnValidation);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Error occured while adding container packages to vpn: The error code is "
+                            + addContainerPackagesToVpnValidation);
             if (addContainerPackagesToVpnValidation == 113) {
                 enterpriseResponseData.setStatus(1, 11);
             }
@@ -2041,7 +2831,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         EnterpriseResponseData addPackages = addPackages(knoxVpnContext, strArr, str);
         try {
             if (((Integer) addPackages.getData()).intValue() == 0) {
-                KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:addContainerPackagesToVpn");
+                KnoxAnalyticsData knoxAnalyticsData =
+                        new KnoxAnalyticsData("KNOX_VPN", 1, "API:addContainerPackagesToVpn");
                 this.mData = knoxAnalyticsData;
                 setCommonProperties(knoxAnalyticsData, knoxVpnContext, str, -1);
                 Arrays.sort(strArr);
@@ -2063,7 +2854,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     public final void addExemptRulesForUid(int i, String str) {
-        Log.d("KnoxVpnEngineService", "addExemptRulesForUid : vendor = " + i + " for profile " + str);
+        Log.d(
+                "KnoxVpnEngineService",
+                "addExemptRulesForUid : vendor = " + i + " for profile " + str);
         if (getChainingEnabledForProfile(i) != 1) {
             Log.d("KnoxVpnEngineService", "addExemptRulesForUid : uid = " + i);
             if (UserHandle.getAppId(i) != 1000) {
@@ -2073,14 +2866,36 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             KnoxVpnFirewallHelper knoxVpnFirewallHelper = this.mFirewallHelper;
             knoxVpnFirewallHelper.getClass();
             KnoxVpnFirewallHelper.applyBlockingRulesForDns(1016, 1016, 3);
-            KnoxVpnFirewallHelper.IpRestoreActionType ipRestoreActionType = KnoxVpnFirewallHelper.IpRestoreActionType.INSERT;
-            knoxVpnFirewallHelper.insertRule(true, "*mangle", null, new KnoxVpnFirewallHelper.IpRestoreParam("knox_vpn_EXEMPT", " -m owner --gid-owner 1016", "ACCEPT", "", ipRestoreActionType), 46);
-            knoxVpnFirewallHelper.insertRule(true, "*mangle", null, new KnoxVpnFirewallHelper.IpRestoreParam("knox_vpn_EXEMPT", " -m owner --uid-owner 1016", "ACCEPT", "", ipRestoreActionType), 46);
+            KnoxVpnFirewallHelper.IpRestoreActionType ipRestoreActionType =
+                    KnoxVpnFirewallHelper.IpRestoreActionType.INSERT;
+            knoxVpnFirewallHelper.insertRule(
+                    true,
+                    "*mangle",
+                    null,
+                    new KnoxVpnFirewallHelper.IpRestoreParam(
+                            "knox_vpn_EXEMPT",
+                            " -m owner --gid-owner 1016",
+                            "ACCEPT",
+                            "",
+                            ipRestoreActionType),
+                    46);
+            knoxVpnFirewallHelper.insertRule(
+                    true,
+                    "*mangle",
+                    null,
+                    new KnoxVpnFirewallHelper.IpRestoreParam(
+                            "knox_vpn_EXEMPT",
+                            " -m owner --uid-owner 1016",
+                            "ACCEPT",
+                            "",
+                            ipRestoreActionType),
+                    46);
         }
     }
 
     public final void addMiscRulesForProfile(String str) {
-        DualAppManagerService$$ExternalSyntheticOutline0.m("addMiscRulesForProfile : profileName =  ", str, "KnoxVpnEngineService");
+        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                "addMiscRulesForProfile : profileName =  ", str, "KnoxVpnEngineService");
         VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
         ArrayList arrayList = new ArrayList();
         if (profileEntry == null || profileEntry.activateState == 0) {
@@ -2093,7 +2908,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 KnoxVpnHelper knoxVpnHelper = this.mKnoxVpnHelper;
                 String packageName = vpnPackageInfo.getPackageName();
                 knoxVpnHelper.getClass();
-                this.mFirewallHelper.addMiscRulesRange(KnoxVpnHelper.getContainerIdFromPackageName(packageName), getVirtualInterfaceType(str), str2);
+                this.mFirewallHelper.addMiscRulesRange(
+                        KnoxVpnHelper.getContainerIdFromPackageName(packageName),
+                        getVirtualInterfaceType(str),
+                        str2);
             } else {
                 arrayList.add(Integer.valueOf(vpnPackageInfo.getUid()));
             }
@@ -2104,7 +2922,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         this.mFirewallHelper.addMiscRules(getVirtualInterfaceType(str), str2, arrayList);
     }
 
-    public final EnterpriseResponseData addPackages(KnoxVpnContext knoxVpnContext, String[] strArr, String str) {
+    public final EnterpriseResponseData addPackages(
+            KnoxVpnContext knoxVpnContext, String[] strArr, String str) {
         String str2;
         IPackageManager iPackageManager;
         int i;
@@ -2119,20 +2938,35 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         ArrayList arrayList = new ArrayList();
         VpnProfileInfo profileEntry = this.mKnoxVpnHelper.vpnConfig.getProfileEntry(str);
         if (profileEntry == null) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("Error occured while trying to fetch the profile list for the vpn client ", str, "FW-KnoxVpnHelper");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "Error occured while trying to fetch the profile list for the vpn client ",
+                    str,
+                    "FW-KnoxVpnHelper");
             str2 = null;
         } else {
             str2 = profileEntry.mIpChainName;
         }
-        NetworkScoreService$$ExternalSyntheticOutline0.m(i2, "addPackages : profileName value is ", str, "personaId value is", "KnoxVpnEngineService");
+        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                i2,
+                "addPackages : profileName value is ",
+                str,
+                "personaId value is",
+                "KnoxVpnEngineService");
         try {
-            int addPackagesToVpnValidation = this.mKnoxVpnApiValidation.addPackagesToVpnValidation(knoxVpnContext, strArr2, str);
+            int addPackagesToVpnValidation =
+                    this.mKnoxVpnApiValidation.addPackagesToVpnValidation(
+                            knoxVpnContext, strArr2, str);
             if (addPackagesToVpnValidation != 100) {
                 enterpriseResponseData.setData(Integer.valueOf(addPackagesToVpnValidation));
-                Log.d("KnoxVpnEngineService", "Error occured while adding packages to vpn(addPackagesToVpnValidation): The error code is " + addPackagesToVpnValidation);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Error occured while adding packages to vpn(addPackagesToVpnValidation):"
+                            + " The error code is "
+                                + addPackagesToVpnValidation);
                 return enterpriseResponseData;
             }
-            IPackageManager asInterface = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
+            IPackageManager asInterface =
+                    IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
             StringBuilder sb = new StringBuilder();
             this.mKnoxVpnHelper.getClass();
             String personifiedName = KnoxVpnHelper.getPersonifiedName(i2, "ADD_ALL_PACKAGES");
@@ -2144,15 +2978,29 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 int uIDForPackage = KnoxVpnHelper.getUIDForPackage(i2, str3);
                 if (uIDForPackage > 0) {
                     i = length;
-                    String profileOwningTheUid = this.mKnoxVpnHelper.getProfileOwningTheUid(uIDForPackage);
+                    String profileOwningTheUid =
+                            this.mKnoxVpnHelper.getProfileOwningTheUid(uIDForPackage);
                     if (profileOwningTheUid == null || !profileOwningTheUid.equalsIgnoreCase(str)) {
-                        String profileOwningThePackage = this.mKnoxVpnHelper.getProfileOwningThePackage(personifiedName);
-                        if (profileOwningThePackage != null && profileOwningThePackage.equalsIgnoreCase(str) && i2 == UserHandle.getUserId(uIDForPackage)) {
-                            Log.d("KnoxVpnEngineService", "addPackages:userId for the appId already added to the profile, skipping it " + uIDForPackage);
+                        String profileOwningThePackage =
+                                this.mKnoxVpnHelper.getProfileOwningThePackage(personifiedName);
+                        if (profileOwningThePackage != null
+                                && profileOwningThePackage.equalsIgnoreCase(str)
+                                && i2 == UserHandle.getUserId(uIDForPackage)) {
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "addPackages:userId for the appId already added to the profile,"
+                                        + " skipping it "
+                                            + uIDForPackage);
                         } else if (asInterface == null) {
                             iPackageManager = asInterface;
-                        } else if (asInterface.checkUidPermission("android.permission.INTERNET", uIDForPackage) != 0) {
-                            Log.d("KnoxVpnEngineService", "addPackages:uid is not granted internet permission " + uIDForPackage + str3);
+                        } else if (asInterface.checkUidPermission(
+                                        "android.permission.INTERNET", uIDForPackage)
+                                != 0) {
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "addPackages:uid is not granted internet permission "
+                                            + uIDForPackage
+                                            + str3);
                             writePackagestoPermissionCheckDb(i2, uIDForPackage, str, str3);
                         } else {
                             StringBuilder sb2 = new StringBuilder();
@@ -2164,7 +3012,11 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                             arrayList.add(Integer.valueOf(uIDForPackage));
                         }
                     } else {
-                        Log.d("KnoxVpnEngineService", "addPackages:uid already added to the profile, skipping it " + uIDForPackage + str3);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "addPackages:uid already added to the profile, skipping it "
+                                        + uIDForPackage
+                                        + str3);
                     }
                     iPackageManager = asInterface;
                     i3++;
@@ -2177,12 +3029,35 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 }
                 int writePackageToDB = writePackageToDB(uIDForPackage, i2, str, str3);
                 if (writePackageToDB == -1) {
-                    Log.d("KnoxVpnEngineService", "Error occured while adding packages to vpn(writePackageToDB): The error code is " + writePackageToDB);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "Error occured while adding packages to vpn(writePackageToDB): The"
+                                + " error code is "
+                                    + writePackageToDB);
                     enterpriseResponseData.setData(1);
                     if (sb.length() > 0) {
-                        AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", sb.subSequence(0, sb.length() - 2).toString() + " added to vpn for profile " + str, knoxVpnContext.personaId);
+                        AuditLog.logAsUser(
+                                5,
+                                5,
+                                true,
+                                Process.myPid(),
+                                "KnoxVpnEngineService",
+                                sb.subSequence(0, sb.length() - 2).toString()
+                                        + " added to vpn for profile "
+                                        + str,
+                                knoxVpnContext.personaId);
                     }
-                    AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error occurred while adding package " + str3 + " to vpn for profile " + str, knoxVpnContext.personaId);
+                    AuditLog.logAsUser(
+                            3,
+                            5,
+                            false,
+                            Process.myPid(),
+                            "KnoxVpnEngineService",
+                            "Error occurred while adding package "
+                                    + str3
+                                    + " to vpn for profile "
+                                    + str,
+                            knoxVpnContext.personaId);
                     return enterpriseResponseData;
                 }
                 sb.append(str3);
@@ -2194,36 +3069,58 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             }
             this.mKnoxVpnHelper.updateUidsToVpnUidRange(str);
             if (sb.length() > 0) {
-                AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", sb.subSequence(0, sb.length() - 2).toString() + " added to vpn for profile " + str, knoxVpnContext.personaId);
+                AuditLog.logAsUser(
+                        5,
+                        5,
+                        true,
+                        Process.myPid(),
+                        "KnoxVpnEngineService",
+                        sb.subSequence(0, sb.length() - 2).toString()
+                                + " added to vpn for profile "
+                                + str,
+                        knoxVpnContext.personaId);
             }
-            this.mFirewallHelper.addRulesForFilteredPackages(knoxVpnContext.getVendorName(), str2, arrayList, this.mKnoxVpnHelper.getDefaultNetworkInterface(str));
+            this.mFirewallHelper.addRulesForFilteredPackages(
+                    knoxVpnContext.getVendorName(),
+                    str2,
+                    arrayList,
+                    this.mKnoxVpnHelper.getDefaultNetworkInterface(str));
             refreshDomainInHashMap(str);
             updateNotification(i2, str, true);
-            Log.d("KnoxVpnEngineService", "Error occured while adding packages to vpn: The error code is 0");
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Error occured while adding packages to vpn: The error code is 0");
             enterpriseResponseData.setData(0);
             enterpriseResponseData.setStatus(0, 0);
             return enterpriseResponseData;
         } catch (Exception e) {
-            Log.d("KnoxVpnEngineService", "Error occured while adding packages to vpn: exception occured: The error code is -1" + Log.getStackTraceString(e));
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Error occured while adding packages to vpn: exception occured: The error code"
+                        + " is -1"
+                            + Log.getStackTraceString(e));
             enterpriseResponseData.setData(-1);
             enterpriseResponseData.setStatus(1, 2);
             return enterpriseResponseData;
         }
     }
 
-    public final synchronized EnterpriseResponseData addPackagesToVpn(KnoxVpnContext knoxVpnContext, String[] strArr, String str) {
+    public final synchronized EnterpriseResponseData addPackagesToVpn(
+            KnoxVpnContext knoxVpnContext, String[] strArr, String str) {
         try {
             ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
             EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
             enterpriseResponseData.setData((Object) null);
             enterpriseResponseData.setStatus(1, -1);
-            if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+            if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                    knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
                 return enterpriseResponseData;
             }
             EnterpriseResponseData addPackages = addPackages(knoxVpnContext, strArr, str);
             try {
                 if (((Integer) addPackages.getData()).intValue() == 0) {
-                    KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:addPackagesToVpn");
+                    KnoxAnalyticsData knoxAnalyticsData =
+                            new KnoxAnalyticsData("KNOX_VPN", 1, "API:addPackagesToVpn");
                     this.mData = knoxAnalyticsData;
                     setCommonProperties(knoxAnalyticsData, knoxVpnContext, str, -1);
                     Arrays.sort(strArr);
@@ -2253,16 +3150,28 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             return;
         }
         int i3 = profileEntry.mNetId;
-        NetworkScoreService$$ExternalSyntheticOutline0.m(i, "The following app added to the interface ", str2, "will not go through vpn since it was blacklisted ", "KnoxVpnEngineService");
+        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                i,
+                "The following app added to the interface ",
+                str2,
+                "will not go through vpn since it was blacklisted ",
+                "KnoxVpnEngineService");
         if (getNetworkManagementService() != null) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
                     ArrayList arrayList = new ArrayList();
                     arrayList.add(new UidRangeParcel(i, i2));
-                    getOemNetdService$1().knoxVpnExemptUidFromKnoxVpn(i3, (UidRangeParcel[]) arrayList.toArray(new UidRangeParcel[arrayList.size()]));
+                    getOemNetdService$1()
+                            .knoxVpnExemptUidFromKnoxVpn(
+                                    i3,
+                                    (UidRangeParcel[])
+                                            arrayList.toArray(
+                                                    new UidRangeParcel[arrayList.size()]));
                 } catch (Exception unused) {
-                    Log.e("KnoxVpnEngineService", "Exception occured while trying to add Uid From Vpn List ");
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "Exception occured while trying to add Uid From Vpn List ");
                 }
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -2270,7 +3179,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
     }
 
-    public final synchronized void addVpnUidRanges(String str, int i, String str2, String str3, String str4) {
+    public final synchronized void addVpnUidRanges(
+            String str, int i, String str2, String str3, String str4) {
         try {
             if (Binder.getCallingUid() != 1000) {
                 return;
@@ -2286,7 +3196,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             int size = profileEntry.mPackageMap.size();
             int i3 = 1;
             if (i2 == 0 || (size <= 0 && i2 == 1)) {
-                Log.d("KnoxVpnEngineService", "Applying firewall rules after vpn is up is stopped for the profile " + str);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Applying firewall rules after vpn is up is stopped for the profile "
+                                + str);
                 IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
                 if (binderInterfaceForProfile != null) {
                     try {
@@ -2312,11 +3225,20 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             String str5 = profileEntry.mIpChainName;
             int i5 = profileEntry.mVendorUid;
             String str6 = profileEntry.mVendorPkgName;
-            Log.d("KnoxVpnEngineService", "start applying exempt rules for knox vpn profile " + str);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "start applying exempt rules for knox vpn profile " + str);
             Iterator it = profileEntry.mExemptPackageList.iterator();
             while (it.hasNext()) {
                 int i6 = i4;
-                updateRulesToExemptUid(1, str, str2, activeNetworkInterface, 3, ((Integer) it.next()).intValue(), i6);
+                updateRulesToExemptUid(
+                        1,
+                        str,
+                        str2,
+                        activeNetworkInterface,
+                        3,
+                        ((Integer) it.next()).intValue(),
+                        i6);
                 i3 = i3;
                 i5 = i5;
                 i4 = i6;
@@ -2345,17 +3267,32 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     KnoxVpnHelper knoxVpnHelper = this.mKnoxVpnHelper;
                     String packageName = vpnPackageInfo.getPackageName();
                     knoxVpnHelper.getClass();
-                    int containerIdFromPackageName = KnoxVpnHelper.getContainerIdFromPackageName(packageName);
+                    int containerIdFromPackageName =
+                            KnoxVpnHelper.getContainerIdFromPackageName(packageName);
                     this.mKnoxVpnHelper.getClass();
                     int startUid = KnoxVpnHelper.startUid(containerIdFromPackageName);
                     this.mKnoxVpnHelper.getClass();
-                    setDnsSystemProperty(startUid, KnoxVpnHelper.stopUid(containerIdFromPackageName), i, str, str2);
+                    setDnsSystemProperty(
+                            startUid,
+                            KnoxVpnHelper.stopUid(containerIdFromPackageName),
+                            i,
+                            str,
+                            str2);
                 } else {
                     int uid = vpnPackageInfo.getUid();
                     setDnsSystemProperty(uid, uid, i, str, str2);
                 }
             }
-            Log.d("KnoxVpnEngineService", "addVpnUidRanges:defaultInterface value to which the virual tunnel is added is " + str8 + " for the profile " + str + " with interface type " + i7 + " netId " + i);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "addVpnUidRanges:defaultInterface value to which the virual tunnel is added is "
+                            + str8
+                            + " for the profile "
+                            + str
+                            + " with interface type "
+                            + i7
+                            + " netId "
+                            + i);
             KnoxVpnFirewallHelper knoxVpnFirewallHelper = this.mFirewallHelper;
             knoxVpnFirewallHelper.getClass();
             boolean checknterface = KnoxVpnFirewallHelper.checknterface(str2);
@@ -2367,12 +3304,14 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 } else if (i7 == 2) {
                     knoxVpnFirewallHelper.insertNatRules(6, str10);
                 } else if (i7 != 3) {
-                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i7, "unknown interface type has been recieved ", str9);
+                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                            i7, "unknown interface type has been recieved ", str9);
                 } else {
                     knoxVpnFirewallHelper.insertNatRules(46, str10);
                 }
             } else {
-                DualAppManagerService$$ExternalSyntheticOutline0.m("not allowed name  : ", str2, str9);
+                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                        "not allowed name  : ", str2, str9);
             }
             this.mFirewallHelper.addIpRouteAndPolicyRules(i7, str2);
             this.mFirewallHelper.addRulesForNoUidPackets(i7, str7, str2);
@@ -2382,21 +3321,45 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             this.mFirewallHelper.updateDropRulesForNoUidPackets(0, str2, str3, str8, str4);
             if (profileEntry.mUsbTethering == i8) {
                 try {
-                    String interfaceNameForUsbtethering = this.mKnoxVpnHelper.getInterfaceNameForUsbtethering();
+                    String interfaceNameForUsbtethering =
+                            this.mKnoxVpnHelper.getInterfaceNameForUsbtethering();
                     int i9 = profileEntry.isUsbTetheringAuthEnabled;
                     if (interfaceNameForUsbtethering != null) {
                         if (i9 != i8) {
-                            String[] dnsServerListForInterface = getVpnManagerService().getDnsServerListForInterface(str2);
+                            String[] dnsServerListForInterface =
+                                    getVpnManagerService().getDnsServerListForInterface(str2);
                             this.mKnoxVpnHelper.getClass();
-                            this.mFirewallHelper.addRulesForUsbTethering(getVirtualInterfaceType(str), str2, interfaceNameForUsbtethering, KnoxVpnHelper.getNetworkPartWithMask(interfaceNameForUsbtethering), dnsServerListForInterface);
+                            this.mFirewallHelper.addRulesForUsbTethering(
+                                    getVirtualInterfaceType(str),
+                                    str2,
+                                    interfaceNameForUsbtethering,
+                                    KnoxVpnHelper.getNetworkPartWithMask(
+                                            interfaceNameForUsbtethering),
+                                    dnsServerListForInterface);
                         } else if (this.mKnoxVpnTetherAuthentication.isTetherAuthSuccessful) {
-                            Log.d("KnoxVpnTetherAuthentication", "vpn is up and and if mutual authentication is already validated");
-                            String[] dnsServerListForInterface2 = getVpnManagerService().getDnsServerListForInterface(str2);
+                            Log.d(
+                                    "KnoxVpnTetherAuthentication",
+                                    "vpn is up and and if mutual authentication is already"
+                                        + " validated");
+                            String[] dnsServerListForInterface2 =
+                                    getVpnManagerService().getDnsServerListForInterface(str2);
                             this.mKnoxVpnHelper.getClass();
-                            this.mFirewallHelper.addRulesForUsbTethering(getVirtualInterfaceType(str), str2, interfaceNameForUsbtethering, KnoxVpnHelper.getNetworkPartWithMask(interfaceNameForUsbtethering), dnsServerListForInterface2);
+                            this.mFirewallHelper.addRulesForUsbTethering(
+                                    getVirtualInterfaceType(str),
+                                    str2,
+                                    interfaceNameForUsbtethering,
+                                    KnoxVpnHelper.getNetworkPartWithMask(
+                                            interfaceNameForUsbtethering),
+                                    dnsServerListForInterface2);
                         } else {
-                            Log.d("KnoxVpnTetherAuthentication", "vpn is up and if mutual authentication is going to be validated");
-                            this.mKnoxVpnTetherAuthentication.startTetherAuthProcess(profileEntry.personaId, interfaceNameForUsbtethering, this.mKnoxVpnHelper.getIpAddressForUsbTetheringInterface());
+                            Log.d(
+                                    "KnoxVpnTetherAuthentication",
+                                    "vpn is up and if mutual authentication is going to be"
+                                        + " validated");
+                            this.mKnoxVpnTetherAuthentication.startTetherAuthProcess(
+                                    profileEntry.personaId,
+                                    interfaceNameForUsbtethering,
+                                    this.mKnoxVpnHelper.getIpAddressForUsbTetheringInterface());
                         }
                     }
                 } catch (RemoteException unused3) {
@@ -2412,7 +3375,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     } else if (i7 == 2) {
                         knoxVpnFirewallHelper2.insertRulesToAcceptProxyPackets(6, uid2, str2);
                     } else if (i7 != 3) {
-                        Log.e(KnoxVpnFirewallHelper.TAG, "unknown interface type has been recieved " + i7);
+                        Log.e(
+                                KnoxVpnFirewallHelper.TAG,
+                                "unknown interface type has been recieved " + i7);
                     } else {
                         knoxVpnFirewallHelper2.insertRulesToAcceptProxyPackets(46, uid2, str2);
                     }
@@ -2422,8 +3387,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 } else {
                     getKnoxVpnPacProcessor().setCurrentProxyScript(str, str2, profileEntry.mPacurl);
                     getKnoxVpnPacProcessor().setMiscValueForPacProfile(i, str, str2);
-                    this.mFirewallHelper.removeRulesToAllowAccessToLocalHostWithValidMark(profileEntry.getProxyInfo().getPort(), i7, null);
-                    this.mFirewallHelper.addRulesToAllowAccessToLocalHostWithValidMark(profileEntry.getProxyInfo().getPort(), i7, str2);
+                    this.mFirewallHelper.removeRulesToAllowAccessToLocalHostWithValidMark(
+                            profileEntry.getProxyInfo().getPort(), i7, null);
+                    this.mFirewallHelper.addRulesToAllowAccessToLocalHostWithValidMark(
+                            profileEntry.getProxyInfo().getPort(), i7, str2);
                 }
             }
             handleChainingScenarioForStartConnection(str);
@@ -2431,8 +3398,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 Log.d("KnoxVpnEngineService", "Applying Knox VPN Analytics rules after vpn is up");
             }
             System.currentTimeMillis();
-            long currentTimeMillis = System.currentTimeMillis() - profileEntry.mVpnStartTimeToConnect;
-            KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", i8, "API:addVpnUidRanges");
+            long currentTimeMillis =
+                    System.currentTimeMillis() - profileEntry.mVpnStartTimeToConnect;
+            KnoxAnalyticsData knoxAnalyticsData =
+                    new KnoxAnalyticsData("KNOX_VPN", i8, "API:addVpnUidRanges");
             this.mData = knoxAnalyticsData;
             knoxAnalyticsData.setProperty("vpnEt", currentTimeMillis);
             this.mData.setProperty("vndrPkgN", profileEntry.mVendorPkgName);
@@ -2448,9 +3417,14 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         try {
             try {
                 this.mKnoxVpnHelper.getClass();
-                getOemNetdService$1().knoxVpnInsertUidForDnsAuthorization(new int[]{KnoxVpnHelper.getUIDForPackage(0, "com.android.providers.downloads")});
-                getOemNetdService$1().knoxVpnInsertUidForDnsAuthorization(new int[]{1002});
-                getOemNetdService$1().knoxVpnInsertUidForDnsAuthorization(new int[]{1000});
+                getOemNetdService$1()
+                        .knoxVpnInsertUidForDnsAuthorization(
+                                new int[] {
+                                    KnoxVpnHelper.getUIDForPackage(
+                                            0, "com.android.providers.downloads")
+                                });
+                getOemNetdService$1().knoxVpnInsertUidForDnsAuthorization(new int[] {1002});
+                getOemNetdService$1().knoxVpnInsertUidForDnsAuthorization(new int[] {1000});
             } catch (Exception unused) {
                 Log.e("KnoxVpnEngineService", "Error at allowAppsToMakeDnsQueryForNetId");
             }
@@ -2459,12 +3433,16 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
     }
 
-    public final synchronized int allowAuthUsbTetheringOverVpn(KnoxVpnContext knoxVpnContext, String str, Bundle bundle) {
+    public final synchronized int allowAuthUsbTetheringOverVpn(
+            KnoxVpnContext knoxVpnContext, String str, Bundle bundle) {
         try {
-            if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission(knoxVpnContext).mCallerUid)) {
+            if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                    knoxVpnContext, checkCallingUidPermission(knoxVpnContext).mCallerUid)) {
                 return 140;
             }
-            int allowUsbTetheringValidation = this.mKnoxVpnApiValidation.allowUsbTetheringValidation(knoxVpnContext, str, bundle);
+            int allowUsbTetheringValidation =
+                    this.mKnoxVpnApiValidation.allowUsbTetheringValidation(
+                            knoxVpnContext, str, bundle);
             if (allowUsbTetheringValidation != 100) {
                 return allowUsbTetheringValidation;
             }
@@ -2485,18 +3463,32 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             this.mKnoxVpnHelper.enableKnoxVpnFlagForTether(true);
             profileEntry.isUsbTetheringAuthEnabled = 1;
             this.mKnoxVpnHelper.updateUsbTetherAuthDetails(str, bundle, true);
-            this.mKnoxVpnHelper.addOrRemoveAppsFromBatteryOptimization(str, "com.samsung.knox.vpn.tether.auth", true);
-            this.mKnoxVpnTetherAuthentication.bindTetherAuthService(knoxVpnContext.getPersonaId(), str, bundle);
-            String interfaceNameForUsbtethering = this.mKnoxVpnHelper.getInterfaceNameForUsbtethering();
+            this.mKnoxVpnHelper.addOrRemoveAppsFromBatteryOptimization(
+                    str, "com.samsung.knox.vpn.tether.auth", true);
+            this.mKnoxVpnTetherAuthentication.bindTetherAuthService(
+                    knoxVpnContext.getPersonaId(), str, bundle);
+            String interfaceNameForUsbtethering =
+                    this.mKnoxVpnHelper.getInterfaceNameForUsbtethering();
             String str2 = profileEntry.mInterfaceName;
             int i = profileEntry.activateState;
             if (interfaceNameForUsbtethering != null) {
                 if (str2 == null && i == 1) {
-                    Log.d("KnoxVpnTetherAuthentication", "Applying rules to drop tether packets after allowAuthUsbTetheringOverVpn API is called and before vpn comes up");
-                    this.mFirewallHelper.addRulesForDroppingTetherPackets(interfaceNameForUsbtethering);
+                    Log.d(
+                            "KnoxVpnTetherAuthentication",
+                            "Applying rules to drop tether packets after"
+                                + " allowAuthUsbTetheringOverVpn API is called and before vpn comes"
+                                + " up");
+                    this.mFirewallHelper.addRulesForDroppingTetherPackets(
+                            interfaceNameForUsbtethering);
                 } else if (str2 != null && i == 1) {
-                    Log.d("KnoxVpnTetherAuthentication", "start tether auth process after allowAuthUsbTetheringOverVpn API is called");
-                    this.mKnoxVpnTetherAuthentication.startTetherAuthProcess(profileEntry.personaId, interfaceNameForUsbtethering, this.mKnoxVpnHelper.getIpAddressForUsbTetheringInterface());
+                    Log.d(
+                            "KnoxVpnTetherAuthentication",
+                            "start tether auth process after allowAuthUsbTetheringOverVpn API is"
+                                + " called");
+                    this.mKnoxVpnTetherAuthentication.startTetherAuthProcess(
+                            profileEntry.personaId,
+                            interfaceNameForUsbtethering,
+                            this.mKnoxVpnHelper.getIpAddressForUsbTetheringInterface());
                 }
             }
             return allowUsbTetheringValidation;
@@ -2505,17 +3497,22 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
     }
 
-    public final synchronized int allowNoAuthUsbTetheringOverVpn(KnoxVpnContext knoxVpnContext, String str) {
+    public final synchronized int allowNoAuthUsbTetheringOverVpn(
+            KnoxVpnContext knoxVpnContext, String str) {
         try {
             ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
             try {
-                if (!getEnterpriseDeviceManagerService().isCallerValidKPU(checkCallingUidPermission)) {
+                if (!getEnterpriseDeviceManagerService()
+                        .isCallerValidKPU(checkCallingUidPermission)) {
                     return 141;
                 }
-                if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+                if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                        knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
                     return 140;
                 }
-                int allowUsbTetheringValidation = this.mKnoxVpnApiValidation.allowUsbTetheringValidation(knoxVpnContext, str, null);
+                int allowUsbTetheringValidation =
+                        this.mKnoxVpnApiValidation.allowUsbTetheringValidation(
+                                knoxVpnContext, str, null);
                 if (allowUsbTetheringValidation != 100) {
                     return allowUsbTetheringValidation;
                 }
@@ -2534,17 +3531,28 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 profileEntry.mUsbTethering = 1;
                 this.mKnoxVpnHelper.registerNetdTetherEventListener(true);
                 this.mKnoxVpnHelper.enableKnoxVpnFlagForTether(true);
-                String interfaceNameForUsbtethering = this.mKnoxVpnHelper.getInterfaceNameForUsbtethering();
+                String interfaceNameForUsbtethering =
+                        this.mKnoxVpnHelper.getInterfaceNameForUsbtethering();
                 String str2 = profileEntry.mInterfaceName;
                 int i = profileEntry.activateState;
                 if (interfaceNameForUsbtethering != null) {
                     if (str2 == null && i == 1) {
-                        Log.d("KnoxVpnEngineService", "Applying rules to drop tether packets after enableUsbTethering API is called and before vpn comes up");
-                        this.mFirewallHelper.addRulesForDroppingTetherPackets(interfaceNameForUsbtethering);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "Applying rules to drop tether packets after enableUsbTethering API"
+                                    + " is called and before vpn comes up");
+                        this.mFirewallHelper.addRulesForDroppingTetherPackets(
+                                interfaceNameForUsbtethering);
                     } else if (str2 != null && i == 1) {
-                        String[] dnsServerListForInterface = getVpnManagerService().getDnsServerListForInterface(str2);
+                        String[] dnsServerListForInterface =
+                                getVpnManagerService().getDnsServerListForInterface(str2);
                         this.mKnoxVpnHelper.getClass();
-                        this.mFirewallHelper.addRulesForUsbTethering(getVirtualInterfaceType(str), str2, interfaceNameForUsbtethering, KnoxVpnHelper.getNetworkPartWithMask(interfaceNameForUsbtethering), dnsServerListForInterface);
+                        this.mFirewallHelper.addRulesForUsbTethering(
+                                getVirtualInterfaceType(str),
+                                str2,
+                                interfaceNameForUsbtethering,
+                                KnoxVpnHelper.getNetworkPartWithMask(interfaceNameForUsbtethering),
+                                dnsServerListForInterface);
                     }
                 }
                 return allowUsbTetheringValidation;
@@ -2559,60 +3567,94 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     public final boolean bindKnoxVpnInterface(int i, String str) {
-        DualAppManagerService$$ExternalSyntheticOutline0.m("Bind to Vpn Vendor Service : vendorName = ", str, "KnoxVpnEngineService");
+        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                "Bind to Vpn Vendor Service : vendorName = ", str, "KnoxVpnEngineService");
         this.mKnoxVpnHelper.getClass();
         String regularPackageName = KnoxVpnHelper.getRegularPackageName(str);
         this.mKnoxVpnHelper.getClass();
         int containerIdFromPackageName = KnoxVpnHelper.getContainerIdFromPackageName(str);
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "bindKnoxVpnInterface is being called by the admin ", "KnoxVpnEngineService");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i, "bindKnoxVpnInterface is being called by the admin ", "KnoxVpnEngineService");
         this.mKnoxVpnHelper.getClass();
         if (KnoxVpnHelper.getUIDForPackage(containerIdFromPackageName, regularPackageName) < 0) {
             Log.d("KnoxVpnEngineService", "Bind to VPN Vendor is fail ");
-            AuditLog.logEventAsUser(containerIdFromPackageName, 17, new Object[]{regularPackageName});
+            AuditLog.logEventAsUser(
+                    containerIdFromPackageName, 17, new Object[] {regularPackageName});
             return false;
         }
         if (DBG) {
-            Log.d("KnoxVpnEngineService", "bindKnoxVpnInterface : user > " + containerIdFromPackageName + ", package name > " + regularPackageName);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "bindKnoxVpnInterface : user > "
+                            + containerIdFromPackageName
+                            + ", package name > "
+                            + regularPackageName);
         }
         if (getVpnInterface(str) != null) {
             sendBindSuccessIntent(i, str);
             return true;
         }
         if (this.mVpnConnectionList.containsKey(str)) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("unbinding previous service before binding again for the vpn client ", str, "KnoxVpnEngineService");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "unbinding previous service before binding again for the vpn client ",
+                    str,
+                    "KnoxVpnEngineService");
             try {
                 this.mContext.unbindService((ServiceConnection) this.mVpnConnectionList.get(str));
             } catch (Exception unused) {
-                Log.e("KnoxVpnEngineService", "unbinding failed since the service is already unbinded or not existing");
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "unbinding failed since the service is already unbinded or not existing");
             }
             this.mVpnConnectionList.remove(str);
         }
-        String m$1 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(regularPackageName, ".BIND_SERVICE_NEW");
-        Log.d("KnoxVpnEngineService", "Bind to Vpn Vendor Service : vendorAction = " + m$1 + " container ID : " + containerIdFromPackageName);
-        VpnServiceConnection vpnServiceConnection = new VpnServiceConnection(containerIdFromPackageName, i);
+        String m$1 =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                        regularPackageName, ".BIND_SERVICE_NEW");
+        Log.d(
+                "KnoxVpnEngineService",
+                "Bind to Vpn Vendor Service : vendorAction = "
+                        + m$1
+                        + " container ID : "
+                        + containerIdFromPackageName);
+        VpnServiceConnection vpnServiceConnection =
+                new VpnServiceConnection(containerIdFromPackageName, i);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             Intent intent = new Intent(m$1);
-            List<ResolveInfo> queryIntentServicesAsUser = this.mContext.getPackageManager().queryIntentServicesAsUser(intent, 0, containerIdFromPackageName);
+            List<ResolveInfo> queryIntentServicesAsUser =
+                    this.mContext
+                            .getPackageManager()
+                            .queryIntentServicesAsUser(intent, 0, containerIdFromPackageName);
             if (queryIntentServicesAsUser.size() > 0) {
                 for (ResolveInfo resolveInfo : queryIntentServicesAsUser) {
                     if (resolveInfo.serviceInfo.packageName.equalsIgnoreCase(regularPackageName)) {
                         ServiceInfo serviceInfo = resolveInfo.serviceInfo;
-                        intent.setComponent(new ComponentName(serviceInfo.packageName, serviceInfo.name));
+                        intent.setComponent(
+                                new ComponentName(serviceInfo.packageName, serviceInfo.name));
                     }
                 }
             }
             intent.setPackage(regularPackageName);
-            boolean bindServiceAsUser = this.mContext.bindServiceAsUser(intent, vpnServiceConnection, 83886081, new UserHandle(containerIdFromPackageName));
+            boolean bindServiceAsUser =
+                    this.mContext.bindServiceAsUser(
+                            intent,
+                            vpnServiceConnection,
+                            83886081,
+                            new UserHandle(containerIdFromPackageName));
             if (bindServiceAsUser) {
                 this.mVpnConnectionList.put(str, vpnServiceConnection);
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
-            Log.d("KnoxVpnEngineService", "Bind to Vpn Vendor Service : bindSuccess = " + bindServiceAsUser);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Bind to Vpn Vendor Service : bindSuccess = " + bindServiceAsUser);
             if (bindServiceAsUser) {
-                AuditLog.logEventAsUser(containerIdFromPackageName, 18, new Object[]{regularPackageName});
+                AuditLog.logEventAsUser(
+                        containerIdFromPackageName, 18, new Object[] {regularPackageName});
             } else {
-                AuditLog.logEventAsUser(containerIdFromPackageName, 19, new Object[]{regularPackageName});
+                AuditLog.logEventAsUser(
+                        containerIdFromPackageName, 19, new Object[] {regularPackageName});
             }
             return bindServiceAsUser;
         } catch (Throwable th) {
@@ -2622,14 +3664,16 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     public final boolean bindKnoxVpnInterface(KnoxVpnContext knoxVpnContext) {
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission(knoxVpnContext).mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission(knoxVpnContext).mCallerUid)) {
             return false;
         }
         KnoxVpnHelper knoxVpnHelper = this.mKnoxVpnHelper;
         int personaId = knoxVpnContext.getPersonaId();
         String vendorName = knoxVpnContext.getVendorName();
         knoxVpnHelper.getClass();
-        return bindKnoxVpnInterface(knoxVpnContext.adminId, KnoxVpnHelper.getPersonifiedName(personaId, vendorName));
+        return bindKnoxVpnInterface(
+                knoxVpnContext.adminId, KnoxVpnHelper.getPersonifiedName(personaId, vendorName));
     }
 
     public final void blockIncomingICMPPackets(boolean z) {
@@ -2640,27 +3684,72 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             knoxVpnFirewallHelper.getClass();
             if (z) {
                 String concat = " -p ICMP --icmp-type 8 -i ".concat(activeNetworkInterface);
-                KnoxVpnFirewallHelper.IpRestoreActionType ipRestoreActionType = KnoxVpnFirewallHelper.IpRestoreActionType.INSERT;
-                knoxVpnFirewallHelper.insertRule(true, "*filter", null, new KnoxVpnFirewallHelper.IpRestoreParam("knox_vpn_filter_input_drop", concat, "DROP", "", ipRestoreActionType), 4);
-                knoxVpnFirewallHelper.insertRule(true, "*filter", null, new KnoxVpnFirewallHelper.IpRestoreParam("knox_vpn_filter_input_drop", " -p ICMPV6 --icmpv6-type 8 -i ".concat(activeNetworkInterface), "DROP", "", ipRestoreActionType), 6);
+                KnoxVpnFirewallHelper.IpRestoreActionType ipRestoreActionType =
+                        KnoxVpnFirewallHelper.IpRestoreActionType.INSERT;
+                knoxVpnFirewallHelper.insertRule(
+                        true,
+                        "*filter",
+                        null,
+                        new KnoxVpnFirewallHelper.IpRestoreParam(
+                                "knox_vpn_filter_input_drop",
+                                concat,
+                                "DROP",
+                                "",
+                                ipRestoreActionType),
+                        4);
+                knoxVpnFirewallHelper.insertRule(
+                        true,
+                        "*filter",
+                        null,
+                        new KnoxVpnFirewallHelper.IpRestoreParam(
+                                "knox_vpn_filter_input_drop",
+                                " -p ICMPV6 --icmpv6-type 8 -i ".concat(activeNetworkInterface),
+                                "DROP",
+                                "",
+                                ipRestoreActionType),
+                        6);
                 return;
             }
             String concat2 = " -p ICMP --icmp-type 8 -i ".concat(activeNetworkInterface);
-            KnoxVpnFirewallHelper.IpRestoreActionType ipRestoreActionType2 = KnoxVpnFirewallHelper.IpRestoreActionType.DELETE;
-            knoxVpnFirewallHelper.insertRule(false, "*filter", null, new KnoxVpnFirewallHelper.IpRestoreParam("knox_vpn_filter_input_drop", concat2, "DROP", "", ipRestoreActionType2), 4);
-            knoxVpnFirewallHelper.insertRule(false, "*filter", null, new KnoxVpnFirewallHelper.IpRestoreParam("knox_vpn_filter_input_drop", " -p ICMPV6 --icmpv6-type 8 -i ".concat(activeNetworkInterface), "DROP", "", ipRestoreActionType2), 6);
+            KnoxVpnFirewallHelper.IpRestoreActionType ipRestoreActionType2 =
+                    KnoxVpnFirewallHelper.IpRestoreActionType.DELETE;
+            knoxVpnFirewallHelper.insertRule(
+                    false,
+                    "*filter",
+                    null,
+                    new KnoxVpnFirewallHelper.IpRestoreParam(
+                            "knox_vpn_filter_input_drop",
+                            concat2,
+                            "DROP",
+                            "",
+                            ipRestoreActionType2),
+                    4);
+            knoxVpnFirewallHelper.insertRule(
+                    false,
+                    "*filter",
+                    null,
+                    new KnoxVpnFirewallHelper.IpRestoreParam(
+                            "knox_vpn_filter_input_drop",
+                            " -p ICMPV6 --icmpv6-type 8 -i ".concat(activeNetworkInterface),
+                            "DROP",
+                            "",
+                            ipRestoreActionType2),
+                    6);
         }
     }
 
     public final ContextInfo checkCallingUidPermission(KnoxVpnContext knoxVpnContext) {
-        ArrayList arrayList = new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_VPN_GENERIC"));
+        ArrayList arrayList =
+                new ArrayList(
+                        Arrays.asList("com.samsung.android.knox.permission.KNOX_VPN_GENERIC"));
         ContextInfo contextInfo = new ContextInfo(knoxVpnContext.adminId, knoxVpnContext.personaId);
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mInjector.mContext);
         }
         EnterpriseDeviceManager enterpriseDeviceManager = this.mEDM;
         if (enterpriseDeviceManager != null) {
-            return enterpriseDeviceManager.enforceActiveAdminPermissionByContext(contextInfo, arrayList);
+            return enterpriseDeviceManager.enforceActiveAdminPermissionByContext(
+                    contextInfo, arrayList);
         }
         throw new SecurityException("Admin cannot be verified");
     }
@@ -2673,23 +3762,37 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             if (profileEntry != null) {
                 String str2 = profileEntry.mVendorPkgName;
                 Log.d("KnoxVpnEngineService", "checkChainingStatus: vendorName value is " + str2);
-                String profileOwningThePackage = this.mKnoxVpnHelper.getProfileOwningThePackage(str2);
-                Log.d("KnoxVpnEngineService", "checkChainingStatus: profile_added_vendor_name value is " + profileOwningThePackage);
-                if (profileOwningThePackage != null && (binderInterfaceForProfile = getBinderInterfaceForProfile(profileOwningThePackage)) != null) {
+                String profileOwningThePackage =
+                        this.mKnoxVpnHelper.getProfileOwningThePackage(str2);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "checkChainingStatus: profile_added_vendor_name value is "
+                                + profileOwningThePackage);
+                if (profileOwningThePackage != null
+                        && (binderInterfaceForProfile =
+                                        getBinderInterfaceForProfile(profileOwningThePackage))
+                                != null) {
                     int state = binderInterfaceForProfile.getState(profileOwningThePackage);
                     Log.d("KnoxVpnEngineService", "checkChainingStatus: state value is " + state);
                     if (state != 4) {
-                        if (((Boolean) this.mIgnoreConnectCheckForChaining.get(Integer.valueOf(profileEntry.personaId))).booleanValue()) {
-                        }
+                        if (((Boolean)
+                                        this.mIgnoreConnectCheckForChaining.get(
+                                                Integer.valueOf(profileEntry.personaId)))
+                                .booleanValue()) {}
                     }
                     i = 1;
-                    this.mIgnoreConnectCheckForChaining.put(Integer.valueOf(profileEntry.personaId), Boolean.FALSE);
+                    this.mIgnoreConnectCheckForChaining.put(
+                            Integer.valueOf(profileEntry.personaId), Boolean.FALSE);
                 }
             }
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at checkChainingStatus API "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception at checkChainingStatus API "),
+                    "KnoxVpnEngineService");
         }
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "checkChainingStatus: chaining_status value is ", "KnoxVpnEngineService");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i, "checkChainingStatus: chaining_status value is ", "KnoxVpnEngineService");
         return i;
     }
 
@@ -2714,12 +3817,18 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         KnoxVpnHelper knoxVpnHelperInstance = getKnoxVpnHelperInstance();
                         String packageName = vpnPackageInfo.getPackageName();
                         knoxVpnHelperInstance.getClass();
-                        int containerIdFromPackageName = KnoxVpnHelper.getContainerIdFromPackageName(packageName);
+                        int containerIdFromPackageName =
+                                KnoxVpnHelper.getContainerIdFromPackageName(packageName);
                         if (vpnProfileInfo.activateState == i2) {
                             Iterator it2 = hashSet.iterator();
                             boolean z2 = false;
                             while (it2.hasNext()) {
-                                String[] packagesForUid = knoxVpnEngineService.mContext.getPackageManager().getPackagesForUid(((Integer) it2.next()).intValue());
+                                String[] packagesForUid =
+                                        knoxVpnEngineService
+                                                .mContext
+                                                .getPackageManager()
+                                                .getPackagesForUid(
+                                                        ((Integer) it2.next()).intValue());
                                 if (packagesForUid != null) {
                                     int length = packagesForUid.length;
                                     int i3 = 0;
@@ -2729,7 +3838,11 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                                         }
                                         String str = packagesForUid[i3];
                                         if (Arrays.asList(strArr).contains(str)) {
-                                            DualAppManagerService$$ExternalSyntheticOutline0.m("checkExistsEmailPackageInProfiles :: Email package is matched but exempted: ", str, "KnoxVpnEngineService");
+                                            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                                    "checkExistsEmailPackageInProfiles :: Email"
+                                                        + " package is matched but exempted: ",
+                                                    str,
+                                                    "KnoxVpnEngineService");
                                             z2 = true;
                                             break;
                                         }
@@ -2750,7 +3863,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         KnoxVpnHelper.setProxyFlagForEmail(containerIdFromPackageName, false);
                     } else {
                         if (vpnProfileInfo.activateState == 1) {
-                            hashMap2.put(Integer.valueOf(vpnPackageInfo.getUid()), vpnPackageInfo.getPackageName());
+                            hashMap2.put(
+                                    Integer.valueOf(vpnPackageInfo.getUid()),
+                                    vpnPackageInfo.getPackageName());
                         }
                         KnoxVpnHelper knoxVpnHelperInstance2 = getKnoxVpnHelperInstance();
                         int userId = UserHandle.getUserId(vpnPackageInfo.getUid());
@@ -2790,7 +3905,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             String str2 = (String) hashMap2.get(num2);
             knoxVpnHelperInstance4.getClass();
             if (asList.contains(KnoxVpnHelper.getRegularPackageName(str2))) {
-                Log.d("KnoxVpnEngineService", "checkExistsEmailPackageInProfiles :: Email package is matched : " + ((String) hashMap2.get(num2)));
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "checkExistsEmailPackageInProfiles :: Email package is matched : "
+                                + ((String) hashMap2.get(num2)));
                 KnoxVpnHelper knoxVpnHelperInstance5 = getKnoxVpnHelperInstance();
                 int userId2 = UserHandle.getUserId(intValue3);
                 knoxVpnHelperInstance5.getClass();
@@ -2812,7 +3930,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 str = null;
             }
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at checkIfCallerIsVpnVendor "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception at checkIfCallerIsVpnVendor "),
+                    "KnoxVpnEngineService");
         }
         return implementsVpnService(UserHandle.getUserId(i), str);
     }
@@ -2821,13 +3942,19 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         try {
             for (VpnProfileInfo vpnProfileInfo : this.vpnConfig.vpnProfileInfoMap.values()) {
                 if (vpnProfileInfo.getProxyInfo().getPort() == i) {
-                    Log.d("KnoxVpnEngineService", "The local proxy port is currently owned by the vpn profile " + vpnProfileInfo.mProfileName);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "The local proxy port is currently owned by the vpn profile "
+                                    + vpnProfileInfo.mProfileName);
                     return true;
                 }
             }
             return false;
         } catch (Exception unused) {
-            Log.e("KnoxVpnEngineService", "Exception occured while trying to check if local proxy port exists for vpn profile");
+            Log.e(
+                    "KnoxVpnEngineService",
+                    "Exception occured while trying to check if local proxy port exists for vpn"
+                        + " profile");
             return false;
         }
     }
@@ -2855,7 +3982,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 }
             }
         }
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "checkIfUidIsExempted returned false for uid ", "KnoxVpnEngineService");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i, "checkIfUidIsExempted returned false for uid ", "KnoxVpnEngineService");
         return false;
     }
 
@@ -2864,7 +3992,11 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         try {
             boolean z2 = DBG;
             if (z2) {
-                Log.d("KnoxVpnEngineService", "checkIfVendorCreatedKnoxProfile: profile name and the vendor uid is " + str + i);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "checkIfVendorCreatedKnoxProfile: profile name and the vendor uid is "
+                                + str
+                                + i);
             }
             VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
             if (profileEntry != null) {
@@ -2873,23 +4005,34 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 knoxVpnHelper.getClass();
                 String regularPackageName = KnoxVpnHelper.getRegularPackageName(str2);
                 if (z2) {
-                    Log.d("KnoxVpnEngineService", "The vendor name who created the profile is " + regularPackageName);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "The vendor name who created the profile is " + regularPackageName);
                 }
                 this.mKnoxVpnHelper.getClass();
                 if (KnoxVpnHelper.getUIDForPackage(i2, regularPackageName) == i) {
                     if (z2) {
-                        Log.d("KnoxVpnEngineService", "The vendor name who created the profile and the caller has the same uid");
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "The vendor name who created the profile and the caller has the"
+                                    + " same uid");
                     }
                     z = true;
                 }
             }
         } catch (Exception e) {
             if (DBG) {
-                VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("checkIfVendorCreatedKnoxProfile Exception :"), "KnoxVpnEngineService");
+                VpnManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("checkIfVendorCreatedKnoxProfile Exception :"),
+                        "KnoxVpnEngineService");
             }
         }
         if (DBG) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m("checkIfVendorCreatedKnoxProfile: profilecreatedByKnoxVendor ", "KnoxVpnEngineService", z);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    "checkIfVendorCreatedKnoxProfile: profilecreatedByKnoxVendor ",
+                    "KnoxVpnEngineService",
+                    z);
         }
         return z;
     }
@@ -2900,7 +4043,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             this.mVpnStorageProvider.getClass();
             int profileId = KnoxVpnStorageProvider.getProfileId();
             this.mVpnStorageProvider.getClass();
-            ArrayList dataByFields = KnoxVpnStorageProvider.mEDM.getDataByFields("VpnProfileInfo", null, null, null);
+            ArrayList dataByFields =
+                    KnoxVpnStorageProvider.mEDM.getDataByFields("VpnProfileInfo", null, null, null);
             if (profileId != 0 || dataByFields.size() <= 0) {
                 return;
             }
@@ -2911,37 +4055,65 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 if (asString != null) {
                     contentValues.put("profileId", Integer.valueOf(profileId));
                     this.mVpnStorageProvider.getClass();
-                    KnoxVpnStorageProvider.putDataByFields("VpnProfileInfo", new String[]{"profileName"}, new String[]{asString}, contentValues);
+                    KnoxVpnStorageProvider.putDataByFields(
+                            "VpnProfileInfo",
+                            new String[] {"profileName"},
+                            new String[] {asString},
+                            contentValues);
                     String[] strArr = {String.valueOf(profileId)};
                     profileId++;
                     ContentValues contentValues2 = new ContentValues();
                     contentValues2.put("profileCount", Integer.valueOf(profileId));
                     this.mVpnStorageProvider.getClass();
-                    KnoxVpnStorageProvider.putDataByFields("VpnAnalyticsTable", new String[]{"profileCount"}, strArr, contentValues2);
+                    KnoxVpnStorageProvider.putDataByFields(
+                            "VpnAnalyticsTable",
+                            new String[] {"profileCount"},
+                            strArr,
+                            contentValues2);
                 }
             }
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("exception - "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("exception - "), "KnoxVpnEngineService");
         }
     }
 
     public final void createProcessKillNotification(String str) {
         try {
-            String string = this.mContext.getString(R.string.permdesc_observeCompanionDevicePresence);
+            String string =
+                    this.mContext.getString(R.string.permdesc_observeCompanionDevicePresence);
             String string2 = this.mContext.getString(R.string.permdesc_nfcTransactionEvent);
             VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
             if (profileEntry != null) {
                 int userId = UserHandle.getUserId(profileEntry.mVendorUid);
-                getNotificationManager().notifyAsUser(null, str.hashCode(), new Notification.Builder(this.mContext, SystemNotificationChannels.VPN).setSmallIcon(R.drawable.ic_dialog_alert).setContentTitle(string).setContentText(string2).setDefaults(0).setPriority(2).setAutoCancel(true).setStyle(new Notification.BigTextStyle().bigText(string2)).build(), new UserHandle(userId));
+                getNotificationManager()
+                        .notifyAsUser(
+                                null,
+                                str.hashCode(),
+                                new Notification.Builder(
+                                                this.mContext, SystemNotificationChannels.VPN)
+                                        .setSmallIcon(R.drawable.ic_dialog_alert)
+                                        .setContentTitle(string)
+                                        .setContentText(string2)
+                                        .setDefaults(0)
+                                        .setPriority(2)
+                                        .setAutoCancel(true)
+                                        .setStyle(new Notification.BigTextStyle().bigText(string2))
+                                        .build(),
+                                new UserHandle(userId));
             }
         } catch (Exception unused) {
             if (DBG) {
-                Log.e("KnoxVpnEngineService", "Exception occured while trying to create a notification to inform user about process restart ");
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "Exception occured while trying to create a notification to inform user"
+                            + " about process restart ");
             }
         }
     }
 
-    public final synchronized EnterpriseResponseData createVpnProfile(KnoxVpnContext knoxVpnContext, String str) {
+    public final synchronized EnterpriseResponseData createVpnProfile(
+            KnoxVpnContext knoxVpnContext, String str) {
         String personifiedName;
         IKnoxVpnService vpnInterface;
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
@@ -2951,7 +4123,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         this.mKnoxVpnHelper.getClass();
         if (KnoxVpnHelper.isUsbTetheringConfigured(str)) {
             try {
-                if (!getEnterpriseDeviceManagerService().isCallerValidKPU(checkCallingUidPermission)) {
+                if (!getEnterpriseDeviceManagerService()
+                        .isCallerValidKPU(checkCallingUidPermission)) {
                     enterpriseResponseData.setData(141);
                     return enterpriseResponseData;
                 }
@@ -2963,17 +4136,27 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 return enterpriseResponseData;
             }
         }
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             enterpriseResponseData.setData(140);
             return enterpriseResponseData;
         }
         String str2 = knoxVpnContext.vendorName;
-        Log.d("KnoxVpnEngineService", "createVpnProfile: vendorName = " + str2 + " : personaId = " + knoxVpnContext.personaId);
-        int createVpnProfileValidation = this.mKnoxVpnApiValidation.createVpnProfileValidation(knoxVpnContext, str);
+        Log.d(
+                "KnoxVpnEngineService",
+                "createVpnProfile: vendorName = "
+                        + str2
+                        + " : personaId = "
+                        + knoxVpnContext.personaId);
+        int createVpnProfileValidation =
+                this.mKnoxVpnApiValidation.createVpnProfileValidation(knoxVpnContext, str);
         if (createVpnProfileValidation != 100) {
             enterpriseResponseData.setData(Integer.valueOf(createVpnProfileValidation));
-            Log.d("KnoxVpnEngineService", "knox vpn profile creation failed: The error code is " + createVpnProfileValidation);
-            AuditLog.logEventAsUser(knoxVpnContext.personaId, 20, new Object[]{str2});
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "knox vpn profile creation failed: The error code is "
+                            + createVpnProfileValidation);
+            AuditLog.logEventAsUser(knoxVpnContext.personaId, 20, new Object[] {str2});
             return enterpriseResponseData;
         }
         try {
@@ -2991,7 +4174,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
         if (vpnInterface == null) {
             enterpriseResponseData.setData(110);
-            Log.d("KnoxVpnEngineService", "knox vpn profile creation failed: The error code is 110");
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "knox vpn profile creation failed: The error code is 110");
             return enterpriseResponseData;
         }
         this.mKnoxVpnHelper.getClass();
@@ -3000,8 +4185,18 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         int createConnection = vpnInterface.createConnection(str);
         if (createConnection != 0) {
             enterpriseResponseData.setData(102);
-            Log.d("KnoxVpnEngineService", "knox vpn profile creation failed: The error code is 102");
-            AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error received from vendor while creating vpn connection for profile " + profileNameFromJsonString, knoxVpnContext.personaId);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "knox vpn profile creation failed: The error code is 102");
+            AuditLog.logAsUser(
+                    3,
+                    5,
+                    false,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Error received from vendor while creating vpn connection for profile "
+                            + profileNameFromJsonString,
+                    knoxVpnContext.personaId);
             return enterpriseResponseData;
         }
         this.mVpnStorageProvider.getClass();
@@ -3009,18 +4204,34 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         if (!this.mKnoxVpnHelper.addVpnProfileToDatabase(knoxVpnContext, str, profileId)) {
             boolean z = DBG;
             if (z) {
-                Log.d("KnoxVpnEngineService", "knox vpn profile creation failed : failure to add the entry to db");
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "knox vpn profile creation failed : failure to add the entry to db");
             }
             Bundle bundle = new Bundle();
             bundle.putString("profileName", profileNameFromJsonString);
             sendMessageToHandler$1(16, bundle);
             int removeConnection = vpnInterface.removeConnection(profileNameFromJsonString);
             if (z) {
-                Log.d("KnoxVpnEngineService", "knox vpn profile creation failed : removeStatus value is " + removeConnection);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "knox vpn profile creation failed : removeStatus value is "
+                                + removeConnection);
             }
             enterpriseResponseData.setData(126);
-            Log.d("KnoxVpnEngineService", "knox vpn profile creation failed: The error code is 126");
-            AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error occurred while adding profile " + profileNameFromJsonString + " into database", knoxVpnContext.personaId);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "knox vpn profile creation failed: The error code is 126");
+            AuditLog.logAsUser(
+                    3,
+                    5,
+                    false,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Error occurred while adding profile "
+                            + profileNameFromJsonString
+                            + " into database",
+                    knoxVpnContext.personaId);
             return enterpriseResponseData;
         }
         if (this.mKnoxVpnHelper.addVpnProfileToMap(knoxVpnContext, str, profileId)) {
@@ -3029,21 +4240,32 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     setupIntentFilter$1();
                     try {
                         this.mInjector.getClass();
-                        KnoxVpnFirewallHelper knoxVpnFirewallHelper = KnoxVpnFirewallHelper.getInstance();
+                        KnoxVpnFirewallHelper knoxVpnFirewallHelper =
+                                KnoxVpnFirewallHelper.getInstance();
                         this.mFirewallHelper = knoxVpnFirewallHelper;
                         try {
                             knoxVpnFirewallHelper.getClass();
                             Log.d(KnoxVpnFirewallHelper.TAG, "deleting blocking rules");
-                            knoxVpnFirewallHelper.runSingleCommand("ip rule del blackhole fwmark 60 prio 50 ;ip -6 rule del blackhole fwmark 60 prio 50 ;");
+                            knoxVpnFirewallHelper.runSingleCommand(
+                                    "ip rule del blackhole fwmark 60 prio 50 ;ip -6 rule del"
+                                        + " blackhole fwmark 60 prio 50 ;");
                             Log.d(KnoxVpnFirewallHelper.TAG, "Adding blocking rules");
-                            knoxVpnFirewallHelper.runSingleCommand("ip rule add blackhole fwmark 60 prio 50 ;ip -6 rule add blackhole fwmark 60 prio 50 ;");
-                            this.mFirewallHelper.addRulesForNoUidPackets(3, "block_traffic", "block_traffic");
-                            Log.d("KnoxVpnEngineService", "Setting the system property to confirm Generic vpn policy has been configured");
+                            knoxVpnFirewallHelper.runSingleCommand(
+                                    "ip rule add blackhole fwmark 60 prio 50 ;ip -6 rule add"
+                                        + " blackhole fwmark 60 prio 50 ;");
+                            this.mFirewallHelper.addRulesForNoUidPackets(
+                                    3, "block_traffic", "block_traffic");
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "Setting the system property to confirm Generic vpn policy has"
+                                        + " been configured");
                             SystemProperties.set("net.vpn.framework", "2.0");
                             allowAppsToMakeDnsQueryForNetId();
-                            this.mKnoxVpnHelper.addOrRemoveAppsFromBatteryOptimization(profileNameFromJsonString, "com.android.vpndialogs", true);
+                            this.mKnoxVpnHelper.addOrRemoveAppsFromBatteryOptimization(
+                                    profileNameFromJsonString, "com.android.vpndialogs", true);
                             getVpnManagerService().registerSystemDefaultNetworkCallback();
-                            this.mKnoxVpnTetherAuthentication = KnoxVpnTetherAuthentication.getInstance(this.mContext);
+                            this.mKnoxVpnTetherAuthentication =
+                                    KnoxVpnTetherAuthentication.getInstance(this.mContext);
                         } catch (Exception e3) {
                             e = e3;
                         }
@@ -3051,26 +4273,53 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         e = e4;
                     }
                 }
-                if (this.mKnoxVpnHelper.getConnectionType(profileNameFromJsonString) == 1 && !this.mProcessManager.isProcessObserverRegistered()) {
+                if (this.mKnoxVpnHelper.getConnectionType(profileNameFromJsonString) == 1
+                        && !this.mProcessManager.isProcessObserverRegistered()) {
                     this.mProcessManager.registerProcessObserver();
                 }
                 this.mKnoxVpnHelper.getClass();
-                addExemptRulesForUid(KnoxVpnHelper.getUidForPackageName(personifiedName), profileNameFromJsonString);
-                this.mKnoxVpnHelper.addOrRemoveSystemAppFromBatteryOptimization(profileNameFromJsonString, true);
-                this.mKnoxVpnHelper.addOrRemoveAppsFromBatteryOptimization(profileNameFromJsonString, str2, true);
-                this.mKnoxVpnHelper.addOrRemoveSystemAppFromDataSaverWhitelist(UserHandle.getUid(knoxVpnContext.personaId, 1002), profileNameFromJsonString, true);
-                String randomIpChainName = this.mKnoxVpnHelper.setRandomIpChainName(profileNameFromJsonString);
-                Log.d("KnoxVpnEngineService", "The IP Chain Name obtained for the profile " + profileNameFromJsonString + " is " + randomIpChainName);
+                addExemptRulesForUid(
+                        KnoxVpnHelper.getUidForPackageName(personifiedName),
+                        profileNameFromJsonString);
+                this.mKnoxVpnHelper.addOrRemoveSystemAppFromBatteryOptimization(
+                        profileNameFromJsonString, true);
+                this.mKnoxVpnHelper.addOrRemoveAppsFromBatteryOptimization(
+                        profileNameFromJsonString, str2, true);
+                this.mKnoxVpnHelper.addOrRemoveSystemAppFromDataSaverWhitelist(
+                        UserHandle.getUid(knoxVpnContext.personaId, 1002),
+                        profileNameFromJsonString,
+                        true);
+                String randomIpChainName =
+                        this.mKnoxVpnHelper.setRandomIpChainName(profileNameFromJsonString);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "The IP Chain Name obtained for the profile "
+                                + profileNameFromJsonString
+                                + " is "
+                                + randomIpChainName);
                 KnoxVpnFirewallHelper knoxVpnFirewallHelper2 = this.mFirewallHelper;
                 try {
                     knoxVpnFirewallHelper2.getClass();
                     if (randomIpChainName != null) {
-                        knoxVpnFirewallHelper2.insertRules(46, "*mangle", Arrays.asList(randomIpChainName.concat("_uidlist"), randomIpChainName.concat("_act")), null, false);
+                        knoxVpnFirewallHelper2.insertRules(
+                                46,
+                                "*mangle",
+                                Arrays.asList(
+                                        randomIpChainName.concat("_uidlist"),
+                                        randomIpChainName.concat("_act")),
+                                null,
+                                false);
                     }
                     this.mFirewallHelper.addRulesInOutputChain(randomIpChainName);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        getVpnManagerService().createEnterpriseVpnInstance(str2, profileNameFromJsonString, knoxVpnContext.personaId, this.mKnoxVpnHelper.getChainingValueForProfile(profileNameFromJsonString));
+                        getVpnManagerService()
+                                .createEnterpriseVpnInstance(
+                                        str2,
+                                        profileNameFromJsonString,
+                                        knoxVpnContext.personaId,
+                                        this.mKnoxVpnHelper.getChainingValueForProfile(
+                                                profileNameFromJsonString));
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         Log.d("KnoxVpnEngineService", "profileid : " + profileId);
                         String[] strArr = {"profileCount"};
@@ -3078,29 +4327,60 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         ContentValues contentValues = new ContentValues();
                         contentValues.put("profileCount", Integer.valueOf(profileId + 1));
                         this.mVpnStorageProvider.getClass();
-                        KnoxVpnStorageProvider.putDataByFields("VpnAnalyticsTable", strArr, strArr2, contentValues);
-                        Log.d("KnoxVpnEngineService", "knox vpn profile creation success: The error code is " + createConnection);
-                        AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", "Vpn profile " + profileNameFromJsonString + " successfully created", knoxVpnContext.personaId);
+                        KnoxVpnStorageProvider.putDataByFields(
+                                "VpnAnalyticsTable", strArr, strArr2, contentValues);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "knox vpn profile creation success: The error code is "
+                                        + createConnection);
+                        AuditLog.logAsUser(
+                                5,
+                                5,
+                                true,
+                                Process.myPid(),
+                                "KnoxVpnEngineService",
+                                "Vpn profile "
+                                        + profileNameFromJsonString
+                                        + " successfully created",
+                                knoxVpnContext.personaId);
                         try {
-                            KnoxVpnStorageProvider knoxVpnStorageProvider = this.mVpnStorageProvider;
-                            String[] strArr3 = {profileNameFromJsonString, String.valueOf(checkCallingUidPermission.mCallerUid)};
+                            KnoxVpnStorageProvider knoxVpnStorageProvider =
+                                    this.mVpnStorageProvider;
+                            String[] strArr3 = {
+                                profileNameFromJsonString,
+                                String.valueOf(checkCallingUidPermission.mCallerUid)
+                            };
                             knoxVpnStorageProvider.getClass();
-                            KnoxVpnStorageProvider.mEDM.deleteDataByFields("vpnConnectionFail", new String[]{"profileName", "adminUid"}, strArr3);
+                            KnoxVpnStorageProvider.mEDM.deleteDataByFields(
+                                    "vpnConnectionFail",
+                                    new String[] {"profileName", "adminUid"},
+                                    strArr3);
                         } catch (Exception e5) {
-                            Log.e("KnoxVpnEngineService", "Exception at removeProfileByEnterpriseVpnConnectionFailTable " + Log.getStackTraceString(e5));
+                            Log.e(
+                                    "KnoxVpnEngineService",
+                                    "Exception at removeProfileByEnterpriseVpnConnectionFailTable "
+                                            + Log.getStackTraceString(e5));
                         }
                         enterpriseResponseData.setData(Integer.valueOf(createConnection));
                         enterpriseResponseData.setStatus(0, 0);
                         try {
                             if (((Integer) enterpriseResponseData.getData()).intValue() == 0) {
-                                KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:createVpnProfile");
+                                KnoxAnalyticsData knoxAnalyticsData =
+                                        new KnoxAnalyticsData(
+                                                "KNOX_VPN", 1, "API:createVpnProfile");
                                 this.mData = knoxAnalyticsData;
-                                setCommonProperties(knoxAnalyticsData, knoxVpnContext, profileNameFromJsonString, -1);
+                                setCommonProperties(
+                                        knoxAnalyticsData,
+                                        knoxVpnContext,
+                                        profileNameFromJsonString,
+                                        -1);
                                 setPropertiesWithLocalEntry(this.mData, profileNameFromJsonString);
                                 KnoxAnalytics.log(this.mData);
                             }
                         } catch (Exception e6) {
-                            Log.e("KnoxVpnEngineService", "Exception = " + Log.getStackTraceString(e6));
+                            Log.e(
+                                    "KnoxVpnEngineService",
+                                    "Exception = " + Log.getStackTraceString(e6));
                         }
                         return enterpriseResponseData;
                     } catch (Throwable th) {
@@ -3116,14 +4396,20 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         } else {
             boolean z2 = DBG;
             if (z2) {
-                Log.d("KnoxVpnEngineService", "knox vpn profile creation failed : failure to add the entry to local entry");
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "knox vpn profile creation failed : failure to add the entry to local"
+                            + " entry");
             }
             Bundle bundle2 = new Bundle();
             bundle2.putString("profileName", profileNameFromJsonString);
             sendMessageToHandler$1(16, bundle2);
             int removeConnection2 = vpnInterface.removeConnection(profileNameFromJsonString);
             if (z2) {
-                Log.d("KnoxVpnEngineService", "knox vpn profile creation failed : removeStatus value is " + removeConnection2);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "knox vpn profile creation failed : removeStatus value is "
+                                + removeConnection2);
             }
             String[] strArr4 = {"profileName"};
             String[] strArr5 = {profileNameFromJsonString};
@@ -3131,8 +4417,19 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 this.mVpnStorageProvider.getClass();
                 KnoxVpnStorageProvider.mEDM.deleteDataByFields("VpnProfileInfo", strArr4, strArr5);
                 enterpriseResponseData.setData(127);
-                Log.d("KnoxVpnEngineService", "knox vpn profile creation failed: The error code is 127");
-                AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error occurred while adding vpn profile " + profileNameFromJsonString + " in vpn map", knoxVpnContext.personaId);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "knox vpn profile creation failed: The error code is 127");
+                AuditLog.logAsUser(
+                        3,
+                        5,
+                        false,
+                        Process.myPid(),
+                        "KnoxVpnEngineService",
+                        "Error occurred while adding vpn profile "
+                                + profileNameFromJsonString
+                                + " in vpn map",
+                        knoxVpnContext.personaId);
                 return enterpriseResponseData;
             } catch (Exception e9) {
                 e = e9;
@@ -3140,12 +4437,23 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
         Exception exc = e;
         enterpriseResponseData.setData(-1);
-        Log.d("KnoxVpnEngineService", "knox vpn profile creation failed: exception occured: The error code is -1" + Log.getStackTraceString(exc));
-        AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception occurred while creating vpn profile for vendor " + str2, knoxVpnContext.personaId);
+        Log.d(
+                "KnoxVpnEngineService",
+                "knox vpn profile creation failed: exception occured: The error code is -1"
+                        + Log.getStackTraceString(exc));
+        AuditLog.logAsUser(
+                3,
+                5,
+                false,
+                Process.myPid(),
+                "KnoxVpnEngineService",
+                "Exception occurred while creating vpn profile for vendor " + str2,
+                knoxVpnContext.personaId);
         return enterpriseResponseData;
     }
 
-    public final synchronized int disallowUsbTetheringOverVpn(KnoxVpnContext knoxVpnContext, String str) {
+    public final synchronized int disallowUsbTetheringOverVpn(
+            KnoxVpnContext knoxVpnContext, String str) {
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
         try {
             VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
@@ -3154,15 +4462,18 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     return 100;
                 }
                 if (profileEntry.isUsbTetheringAuthEnabled == 0) {
-                    if (!getEnterpriseDeviceManagerService().isCallerValidKPU(checkCallingUidPermission)) {
+                    if (!getEnterpriseDeviceManagerService()
+                            .isCallerValidKPU(checkCallingUidPermission)) {
                         return 141;
                     }
                 }
             }
-            if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+            if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                    knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
                 return 140;
             }
-            int disallowUsbTetheringValidation = this.mKnoxVpnApiValidation.disallowUsbTetheringValidation(knoxVpnContext, str);
+            int disallowUsbTetheringValidation =
+                    this.mKnoxVpnApiValidation.disallowUsbTetheringValidation(knoxVpnContext, str);
             if (disallowUsbTetheringValidation != 100) {
                 return disallowUsbTetheringValidation;
             }
@@ -3175,12 +4486,14 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 profileEntry2.mUsbTethering = 0;
                 this.mKnoxVpnHelper.registerNetdTetherEventListener(false);
                 this.mKnoxVpnHelper.enableKnoxVpnFlagForTether(false);
-                this.mFirewallHelper.removeRulesForUsbTethering(profileEntry2.mInterface_type, profileEntry2.mInterfaceName);
+                this.mFirewallHelper.removeRulesForUsbTethering(
+                        profileEntry2.mInterface_type, profileEntry2.mInterfaceName);
                 if (profileEntry2.isUsbTetheringAuthEnabled == 1) {
                     this.mKnoxVpnHelper.updateUsbTetherAuthDetails(str, null, false);
                     profileEntry2.isUsbTetheringAuthEnabled = 0;
                     this.mKnoxVpnTetherAuthentication.unbindTetherAuthService();
-                    this.mKnoxVpnHelper.addOrRemoveAppsFromBatteryOptimization(str, "com.samsung.knox.vpn.tether.auth", false);
+                    this.mKnoxVpnHelper.addOrRemoveAppsFromBatteryOptimization(
+                            str, "com.samsung.knox.vpn.tether.auth", false);
                 }
             } catch (Exception unused) {
                 disallowUsbTetheringValidation = 101;
@@ -3193,115 +4506,317 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
     }
 
-    public final synchronized void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final synchronized void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         try {
         } catch (Exception unused) {
-            Log.e("KnoxVpnEngineService", "knoxvpnprofileinfo: error occured while trying to print the profile state");
+            Log.e(
+                    "KnoxVpnEngineService",
+                    "knoxvpnprofileinfo: error occured while trying to print the profile state");
         }
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
-            printWriter.println("knoxvpnprofileinfo: Permission Denial: can't dump PersonaManager from from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid() + " without permission android.permission.DUMP");
+            printWriter.println(
+                    "knoxvpnprofileinfo: Permission Denial: can't dump PersonaManager from from"
+                        + " pid="
+                            + Binder.getCallingPid()
+                            + ", uid="
+                            + Binder.getCallingUid()
+                            + " without permission android.permission.DUMP");
             return;
         }
-        printWriter.print("knoxvpnprofileinfo: The profile info being printed at time " + System.currentTimeMillis() + "\n");
+        printWriter.print(
+                "knoxvpnprofileinfo: The profile info being printed at time "
+                        + System.currentTimeMillis()
+                        + "\n");
         Iterator it = ((ArrayList) this.mVpnClientStatus).iterator();
         while (it.hasNext()) {
             printWriter.print("knoxvpnprofileinfo:" + ((String) it.next()) + "\n");
         }
-        Iterator it2 = ((ArrayList) this.mKnoxVpnPacProcessor.getKnoxVpnProxyClientStatus()).iterator();
+        Iterator it2 =
+                ((ArrayList) this.mKnoxVpnPacProcessor.getKnoxVpnProxyClientStatus()).iterator();
         while (it2.hasNext()) {
             printWriter.print("knoxvpnprofileinfo:" + ((String) it2.next()) + "\n");
         }
         KnoxVpnTetherAuthentication knoxVpnTetherAuthentication = this.mKnoxVpnTetherAuthentication;
         if (knoxVpnTetherAuthentication != null) {
-            Iterator it3 = ((ArrayList) knoxVpnTetherAuthentication.getKnoxVpnTetherAuthClientStatus()).iterator();
+            Iterator it3 =
+                    ((ArrayList) knoxVpnTetherAuthentication.getKnoxVpnTetherAuthClientStatus())
+                            .iterator();
             while (it3.hasNext()) {
                 printWriter.print("knoxvpnprofileinfo:" + ((String) it3.next()) + "\n");
             }
         }
-        List<ActivityManager.ProcessErrorStateInfo> processesInErrorState = getAMSInstance().getProcessesInErrorState();
+        List<ActivityManager.ProcessErrorStateInfo> processesInErrorState =
+                getAMSInstance().getProcessesInErrorState();
         if (processesInErrorState != null) {
-            for (ActivityManager.ProcessErrorStateInfo processErrorStateInfo : processesInErrorState) {
+            for (ActivityManager.ProcessErrorStateInfo processErrorStateInfo :
+                    processesInErrorState) {
                 String str = processErrorStateInfo.processName;
                 if (str != null && str.equalsIgnoreCase("com.knox.vpn.proxyhandler")) {
-                    printWriter.print("knoxvpnprofileinfo: knox vpn proxy apk error condition is " + processErrorStateInfo.condition + "\n");
-                    printWriter.print("knoxvpnprofileinfo: knox vpn proxy apk error longMsg is " + processErrorStateInfo.longMsg + "\n");
-                    printWriter.print("knoxvpnprofileinfo: knox vpn proxy apk error shortMsg is " + processErrorStateInfo.shortMsg + "\n");
-                    printWriter.print("knoxvpnprofileinfo: knox vpn proxy apk error stackTrace is " + processErrorStateInfo.stackTrace + "\n");
-                    printWriter.print("knoxvpnprofileinfo: knox vpn proxy apk error pid is " + processErrorStateInfo.pid + "\n");
-                    printWriter.print("knoxvpnprofileinfo: knox vpn proxy apk error uid is " + processErrorStateInfo.uid + "\n");
+                    printWriter.print(
+                            "knoxvpnprofileinfo: knox vpn proxy apk error condition is "
+                                    + processErrorStateInfo.condition
+                                    + "\n");
+                    printWriter.print(
+                            "knoxvpnprofileinfo: knox vpn proxy apk error longMsg is "
+                                    + processErrorStateInfo.longMsg
+                                    + "\n");
+                    printWriter.print(
+                            "knoxvpnprofileinfo: knox vpn proxy apk error shortMsg is "
+                                    + processErrorStateInfo.shortMsg
+                                    + "\n");
+                    printWriter.print(
+                            "knoxvpnprofileinfo: knox vpn proxy apk error stackTrace is "
+                                    + processErrorStateInfo.stackTrace
+                                    + "\n");
+                    printWriter.print(
+                            "knoxvpnprofileinfo: knox vpn proxy apk error pid is "
+                                    + processErrorStateInfo.pid
+                                    + "\n");
+                    printWriter.print(
+                            "knoxvpnprofileinfo: knox vpn proxy apk error uid is "
+                                    + processErrorStateInfo.uid
+                                    + "\n");
                 }
             }
         }
         for (VpnProfileInfo vpnProfileInfo : this.vpnConfig.vpnProfileInfoMap.values()) {
-            printWriter.print("knoxvpnprofileinfo: profile name is " + vpnProfileInfo.getProfileName() + "\n");
-            printWriter.print("knoxvpnprofileinfo: The default interface to which the profile is connected to is " + vpnProfileInfo.mDefaultInterface + "\n");
-            printWriter.print("knoxvpnprofileinfo: The vitual interface to which the profile is connected to is " + vpnProfileInfo.mInterfaceName + "\n");
-            printWriter.print("knoxvpnprofileinfo: The vitual interface v4 address to which the profile is connected to is " + vpnProfileInfo.mInterfaceAddress + "\n");
-            printWriter.print("knoxvpnprofileinfo: The vitual interface v6 address to which the profile is connected to is " + vpnProfileInfo.mInterfaceV6Address + "\n");
-            printWriter.print("knoxvpnprofileinfo: The profile is triggered by the vpn client " + vpnProfileInfo.mVendorPkgName + "\n");
-            printWriter.print("knoxvpnprofileinfo: The admin id of the profile is " + vpnProfileInfo.admin_id + "\n");
-            printWriter.print("knoxvpnprofileinfo: The profile has been created under the user " + vpnProfileInfo.personaId + "\n");
-            printWriter.print("knoxvpnprofileinfo: The activation state of the vpn profile " + vpnProfileInfo.activateState + "\n");
-            printWriter.print("knoxvpnprofileinfo: is chaining enabled for the profile ? " + vpnProfileInfo.chainingEnabled + "\n");
-            printWriter.print("knoxvpnprofileinfo: is uid tracking enabled for the profile ? " + vpnProfileInfo.uidPidSearchEnabled + "\n");
-            printWriter.print("knoxvpnprofileinfo: The profile is triggered by the vpn client whose uid is " + vpnProfileInfo.mVendorUid + "\n");
-            printWriter.print("knoxvpnprofileinfo: The ipChainValue for the profile configured is " + vpnProfileInfo.mIpChainName + "\n");
-            printWriter.print("knoxvpnprofileinfo: The usb tethering for the profile configured is " + vpnProfileInfo.mUsbTethering + "\n");
-            printWriter.print("knoxvpnprofileinfo: usb interface name, if active is " + this.mKnoxVpnHelper.getInterfaceNameForUsbtethering() + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: profile name is "
+                            + vpnProfileInfo.getProfileName()
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: The default interface to which the profile is connected to"
+                        + " is "
+                            + vpnProfileInfo.mDefaultInterface
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: The vitual interface to which the profile is connected to"
+                        + " is "
+                            + vpnProfileInfo.mInterfaceName
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: The vitual interface v4 address to which the profile is"
+                        + " connected to is "
+                            + vpnProfileInfo.mInterfaceAddress
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: The vitual interface v6 address to which the profile is"
+                        + " connected to is "
+                            + vpnProfileInfo.mInterfaceV6Address
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: The profile is triggered by the vpn client "
+                            + vpnProfileInfo.mVendorPkgName
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: The admin id of the profile is "
+                            + vpnProfileInfo.admin_id
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: The profile has been created under the user "
+                            + vpnProfileInfo.personaId
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: The activation state of the vpn profile "
+                            + vpnProfileInfo.activateState
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: is chaining enabled for the profile ? "
+                            + vpnProfileInfo.chainingEnabled
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: is uid tracking enabled for the profile ? "
+                            + vpnProfileInfo.uidPidSearchEnabled
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: The profile is triggered by the vpn client whose uid is "
+                            + vpnProfileInfo.mVendorUid
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: The ipChainValue for the profile configured is "
+                            + vpnProfileInfo.mIpChainName
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: The usb tethering for the profile configured is "
+                            + vpnProfileInfo.mUsbTethering
+                            + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: usb interface name, if active is "
+                            + this.mKnoxVpnHelper.getInterfaceNameForUsbtethering()
+                            + "\n");
             int i = vpnProfileInfo.isUsbTetheringAuthEnabled;
-            printWriter.print("knoxvpnprofileinfo: is usb tethering configured with auth " + i + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: is usb tethering configured with auth " + i + "\n");
             if (i == 1) {
-                printWriter.print("knoxvpnprofileinfo: usbTetherAuthConfig login page configured ? " + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(0, vpnProfileInfo.getProfileName(), "tetherLoginpage") + "\n");
-                printWriter.print("knoxvpnprofileinfo: usbTetherAuthConfig response page configured ? " + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(0, vpnProfileInfo.getProfileName(), "tetherResponsePage") + "\n");
-                printWriter.print("knoxvpnprofileinfo: usbTetherAuthConfig client cert issuer CN configured ? " + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(0, vpnProfileInfo.getProfileName(), "tetherClientCertIssuerCN") + "\n");
-                printWriter.print("knoxvpnprofileinfo: usbTetherAuthConfig client cert issued CN configured ? " + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(0, vpnProfileInfo.getProfileName(), "tetherClientCertIssuedCN") + "\n");
-                printWriter.print("knoxvpnprofileinfo: usbTetherAuthConfig captive cert configured ? " + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(1, vpnProfileInfo.getProfileName(), "tetherCaptivePortalCert") + "\n");
-                printWriter.print("knoxvpnprofileinfo: usbTetherAuthConfig captive alias configured ? " + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(0, vpnProfileInfo.getProfileName(), "tetherCaptivePortalAlias") + "\n");
-                printWriter.print("knoxvpnprofileinfo: usbTetherAuthConfig ca cert configured ? " + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(1, vpnProfileInfo.getProfileName(), "tetherCACert") + "\n");
-                printWriter.print("knoxvpnprofileinfo: usbTetherAuthConfig ca alias configured ? " + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(0, vpnProfileInfo.getProfileName(), "tetherCAlias") + "\n");
-                printWriter.print("knoxvpnprofileinfo: usbTetherAuthConfig user cert configured ? " + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(1, vpnProfileInfo.getProfileName(), "tetherServerCert") + "\n");
-                printWriter.print("knoxvpnprofileinfo: usbTetherAuthConfig user alias configured ? " + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(0, vpnProfileInfo.getProfileName(), "tetherServerAlias") + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: usbTetherAuthConfig login page configured ? "
+                                + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(
+                                        0, vpnProfileInfo.getProfileName(), "tetherLoginpage")
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: usbTetherAuthConfig response page configured ? "
+                                + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(
+                                        0, vpnProfileInfo.getProfileName(), "tetherResponsePage")
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: usbTetherAuthConfig client cert issuer CN configured ?"
+                            + " "
+                                + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(
+                                        0,
+                                        vpnProfileInfo.getProfileName(),
+                                        "tetherClientCertIssuerCN")
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: usbTetherAuthConfig client cert issued CN configured ?"
+                            + " "
+                                + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(
+                                        0,
+                                        vpnProfileInfo.getProfileName(),
+                                        "tetherClientCertIssuedCN")
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: usbTetherAuthConfig captive cert configured ? "
+                                + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(
+                                        1,
+                                        vpnProfileInfo.getProfileName(),
+                                        "tetherCaptivePortalCert")
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: usbTetherAuthConfig captive alias configured ? "
+                                + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(
+                                        0,
+                                        vpnProfileInfo.getProfileName(),
+                                        "tetherCaptivePortalAlias")
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: usbTetherAuthConfig ca cert configured ? "
+                                + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(
+                                        1, vpnProfileInfo.getProfileName(), "tetherCACert")
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: usbTetherAuthConfig ca alias configured ? "
+                                + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(
+                                        0, vpnProfileInfo.getProfileName(), "tetherCAlias")
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: usbTetherAuthConfig user cert configured ? "
+                                + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(
+                                        1, vpnProfileInfo.getProfileName(), "tetherServerCert")
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: usbTetherAuthConfig user alias configured ? "
+                                + this.mKnoxVpnHelper.getUsbTetheringAuthConfig(
+                                        0, vpnProfileInfo.getProfileName(), "tetherServerAlias")
+                                + "\n");
             }
-            printWriter.print("knoxvpnprofileinfo: connection type is " + vpnProfileInfo.vpnConnectionType + "\n");
+            printWriter.print(
+                    "knoxvpnprofileinfo: connection type is "
+                            + vpnProfileInfo.vpnConnectionType
+                            + "\n");
             for (VpnPackageInfo vpnPackageInfo : vpnProfileInfo.mPackageMap.values()) {
                 if (vpnPackageInfo.getUid() == -2) {
                     KnoxVpnHelper knoxVpnHelperInstance = getKnoxVpnHelperInstance();
                     String packageName = vpnPackageInfo.getPackageName();
                     knoxVpnHelperInstance.getClass();
-                    printWriter.print("knoxvpnprofileinfo: The following user has been added to the profile " + KnoxVpnHelper.getContainerIdFromPackageName(packageName) + "\n");
+                    printWriter.print(
+                            "knoxvpnprofileinfo: The following user has been added to the profile "
+                                    + KnoxVpnHelper.getContainerIdFromPackageName(packageName)
+                                    + "\n");
                 } else {
-                    printWriter.print("knoxvpnprofileinfo: The following application with uid has been added to the profile " + vpnPackageInfo.getUid() + " whose package name is " + vpnPackageInfo.getPackageName() + "\n");
+                    printWriter.print(
+                            "knoxvpnprofileinfo: The following application with uid has been added"
+                                + " to the profile "
+                                    + vpnPackageInfo.getUid()
+                                    + " whose package name is "
+                                    + vpnPackageInfo.getPackageName()
+                                    + "\n");
                 }
             }
             Iterator it4 = vpnProfileInfo.mExemptPackageList.iterator();
             while (it4.hasNext()) {
-                printWriter.print("knoxvpnprofileinfo: The following application with uid has been exempted from vpn connection " + ((Integer) it4.next()).intValue() + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: The following application with uid has been exempted"
+                            + " from vpn connection "
+                                + ((Integer) it4.next()).intValue()
+                                + "\n");
             }
-            Iterator it5 = this.mKnoxVpnHelper.getUninsalledAppsFromExemptedList(vpnProfileInfo.getProfileName()).iterator();
+            Iterator it5 =
+                    this.mKnoxVpnHelper
+                            .getUninsalledAppsFromExemptedList(vpnProfileInfo.getProfileName())
+                            .iterator();
             while (it5.hasNext()) {
-                printWriter.print("knoxvpnprofileinfo:Exempted app is either uninstalled by end-user or not yet installed " + ((String) it5.next()) + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo:Exempted app is either uninstalled by end-user or not"
+                            + " yet installed "
+                                + ((String) it5.next())
+                                + "\n");
             }
             if (vpnProfileInfo.mProxyServer != null || vpnProfileInfo.mPacurl != Uri.EMPTY) {
                 String profileName = vpnProfileInfo.getProfileName();
                 if (vpnProfileInfo.getProxyInfo() != null) {
                     int port = vpnProfileInfo.getProxyInfo().getPort();
                     String host = vpnProfileInfo.getProxyInfo().getHost();
-                    printWriter.print("knoxvpnprofileinfo: The profile has been configured with proxy configuration whose local port as set in f/w is " + port + "\n");
-                    printWriter.print("knoxvpnprofileinfo: The profile has been configured with proxy configuration whose local host as set in f/w is " + host + "\n");
+                    printWriter.print(
+                            "knoxvpnprofileinfo: The profile has been configured with proxy"
+                                + " configuration whose local port as set in f/w is "
+                                    + port
+                                    + "\n");
+                    printWriter.print(
+                            "knoxvpnprofileinfo: The profile has been configured with proxy"
+                                + " configuration whose local host as set in f/w is "
+                                    + host
+                                    + "\n");
                 }
-                printWriter.print("knoxvpnprofileinfo: is the proxy credentials predefined for the profile? " + vpnProfileInfo.credentialsPredefined + "\n");
-                printWriter.print("knoxvpnprofileinfo: is proxy auth required for the profile " + vpnProfileInfo.proxyAuthRequried + "\n");
-                printWriter.print("knoxvpnprofileinfo: The profile has been configured with the pac url " + vpnProfileInfo.mPacurl + "\n");
-                printWriter.print("knoxvpnprofileinfo: The profile has been configured with the Static Proxy Server " + vpnProfileInfo.mProxyServer + "\n");
-                printWriter.print("knoxvpnprofileinfo: The profile has been configured with the Static Proxy port " + vpnProfileInfo.mProxyPort + "\n");
-                printWriter.print("knoxvpnprofileinfo: The proxy port retrieved from the apk is " + this.mKnoxVpnPacProcessor.getProxyPortForProfile(profileName) + "\n");
-                printWriter.print("knoxvpnprofileinfo: check to see if proxy thread is running or not in the apk is " + this.mKnoxVpnPacProcessor.isProxyThreadRunning(profileName) + "\n");
-                printWriter.print("knoxvpnprofileinfo: current state of the proxy thread in the apk is " + this.mKnoxVpnPacProcessor.getProxythreadStatus(profileName) + "\n");
-                printWriter.print("knoxvpnprofileinfo: check to see if proxy thread is alive or not in the apk is " + this.mKnoxVpnPacProcessor.isProxyThreadAlive(profileName) + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: is the proxy credentials predefined for the profile? "
+                                + vpnProfileInfo.credentialsPredefined
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: is proxy auth required for the profile "
+                                + vpnProfileInfo.proxyAuthRequried
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: The profile has been configured with the pac url "
+                                + vpnProfileInfo.mPacurl
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: The profile has been configured with the Static Proxy"
+                            + " Server "
+                                + vpnProfileInfo.mProxyServer
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: The profile has been configured with the Static Proxy"
+                            + " port "
+                                + vpnProfileInfo.mProxyPort
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: The proxy port retrieved from the apk is "
+                                + this.mKnoxVpnPacProcessor.getProxyPortForProfile(profileName)
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: check to see if proxy thread is running or not in the"
+                            + " apk is "
+                                + this.mKnoxVpnPacProcessor.isProxyThreadRunning(profileName)
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: current state of the proxy thread in the apk is "
+                                + this.mKnoxVpnPacProcessor.getProxythreadStatus(profileName)
+                                + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: check to see if proxy thread is alive or not in the"
+                            + " apk is "
+                                + this.mKnoxVpnPacProcessor.isProxyThreadAlive(profileName)
+                                + "\n");
             }
-            IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(vpnProfileInfo.getProfileName());
+            IKnoxVpnService binderInterfaceForProfile =
+                    getBinderInterfaceForProfile(vpnProfileInfo.getProfileName());
             if (binderInterfaceForProfile != null) {
-                printWriter.print("knoxvpnprofileinfo: The state of the profile in client is " + binderInterfaceForProfile.getState(vpnProfileInfo.getProfileName()) + "\n");
+                printWriter.print(
+                        "knoxvpnprofileinfo: The state of the profile in client is "
+                                + binderInterfaceForProfile.getState(
+                                        vpnProfileInfo.getProfileName())
+                                + "\n");
             }
         }
     }
@@ -3320,14 +4835,17 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 for (VpnProfileInfo vpnProfileInfo : this.vpnConfig.vpnProfileInfoMap.values()) {
                     String str2 = vpnProfileInfo.mVendorPkgName;
                     int i = vpnProfileInfo.activateState;
-                    if (str2.equals(str) && i == 1 && !this.mKnoxVpnHelper.checkIfVpnProfileTableIsEmpty(str2)) {
+                    if (str2.equals(str)
+                            && i == 1
+                            && !this.mKnoxVpnHelper.checkIfVpnProfileTableIsEmpty(str2)) {
                         String str3 = vpnProfileInfo.mProfileName;
                         Log.d("KnoxVpnEngineService", "profileName = " + str3);
                         arrayList.add(str3);
                     }
                 }
             } catch (Exception e) {
-                VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), "KnoxVpnEngineService");
+                VpnManagerService$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("Exception = "), "KnoxVpnEngineService");
             }
         }
         return arrayList;
@@ -3339,18 +4857,27 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData getAllContainerPackagesInVpnProfile(com.samsung.android.knox.net.vpn.KnoxVpnContext r9, int r10, java.lang.String r11) {
+    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData
+            getAllContainerPackagesInVpnProfile(
+                    com.samsung.android.knox.net.vpn.KnoxVpnContext r9,
+                    int r10,
+                    java.lang.String r11) {
         /*
             Method dump skipped, instructions count: 288
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getAllContainerPackagesInVpnProfile(com.samsung.android.knox.net.vpn.KnoxVpnContext, int, java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getAllContainerPackagesInVpnProfile(com.samsung.android.knox.net.vpn.KnoxVpnContext,"
+                    + " int,"
+                    + " java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
     }
 
     public final EnterpriseResponseData getAllPackages(KnoxVpnContext knoxVpnContext, String str) {
         boolean z = DBG;
         if (z) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("get all packages : Profile : ", str, "KnoxVpnEngineService");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "get all packages : Profile : ", str, "KnoxVpnEngineService");
         }
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         int i = -1;
@@ -3360,7 +4887,12 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             int personaId = knoxVpnContext.getPersonaId();
             ArrayList arrayList = new ArrayList();
             this.mVpnStorageProvider.getClass();
-            ArrayList dataByFields = KnoxVpnStorageProvider.mEDM.getDataByFields("VpnPackageInfo", new String[]{"profileName", "packageCid"}, new String[]{str, Integer.toString(personaId)}, new String[]{"packageUid", "packageName"});
+            ArrayList dataByFields =
+                    KnoxVpnStorageProvider.mEDM.getDataByFields(
+                            "VpnPackageInfo",
+                            new String[] {"profileName", "packageCid"},
+                            new String[] {str, Integer.toString(personaId)},
+                            new String[] {"packageUid", "packageName"});
             if (z) {
                 printProfileVpnMap();
             }
@@ -3369,18 +4901,29 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 while (it.hasNext()) {
                     ContentValues contentValues = (ContentValues) it.next();
                     String asString = contentValues.getAsString("packageName");
-                    Log.d("KnoxVpnEngineService", "getAllPackages_personifiedPackageName::" + asString);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "getAllPackages_personifiedPackageName::" + asString);
                     int intValue = contentValues.getAsInteger("packageUid").intValue();
                     Log.d("KnoxVpnEngineService", "getAllPackages_uid::" + intValue);
                     this.mKnoxVpnHelper.getClass();
-                    if (!asString.equalsIgnoreCase(KnoxVpnHelper.getPersonifiedName(personaId, "ADD_ALL_PACKAGES"))) {
+                    if (!asString.equalsIgnoreCase(
+                            KnoxVpnHelper.getPersonifiedName(personaId, "ADD_ALL_PACKAGES"))) {
                         if (intValue == i) {
                             this.mKnoxVpnHelper.getClass();
                             arrayList.add(KnoxVpnHelper.getRegularPackageName(asString));
                         } else {
                             long clearCallingIdentity = Binder.clearCallingIdentity();
-                            String[] packagesForUid = this.mContext.getPackageManager().getPackagesForUid(intValue);
-                            Log.d("KnoxVpnEngineService", "getAllPackages_packagesforUid[]::" + this.mContext.getPackageManager().getPackagesForUid(intValue) + " uid::" + intValue);
+                            String[] packagesForUid =
+                                    this.mContext.getPackageManager().getPackagesForUid(intValue);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "getAllPackages_packagesforUid[]::"
+                                            + this.mContext
+                                                    .getPackageManager()
+                                                    .getPackagesForUid(intValue)
+                                            + " uid::"
+                                            + intValue);
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                             if (packagesForUid != null) {
                                 for (String str2 : packagesForUid) {
@@ -3392,14 +4935,18 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     }
                 }
             }
-            Iterator it2 = ((ArrayList) getPackageListNoInternetPermission(personaId, str)).iterator();
+            Iterator it2 =
+                    ((ArrayList) getPackageListNoInternetPermission(personaId, str)).iterator();
             while (it2.hasNext()) {
                 arrayList.add((String) it2.next());
             }
             enterpriseResponseData.setData((String[]) arrayList.toArray(new String[0]));
             enterpriseResponseData.setStatus(0, 0);
         } catch (Exception e) {
-            EnterpriseVpn$$ExternalSyntheticOutline0.m(e, new StringBuilder("get all packages : Exceptionin notify: "), "KnoxVpnEngineService");
+            EnterpriseVpn$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("get all packages : Exceptionin notify: "),
+                    "KnoxVpnEngineService");
         }
         return enterpriseResponseData;
     }
@@ -3410,7 +4957,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData getAllPackagesInVpnProfile(com.samsung.android.knox.net.vpn.KnoxVpnContext r8, java.lang.String r9) {
+    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData getAllPackagesInVpnProfile(
+            com.samsung.android.knox.net.vpn.KnoxVpnContext r8, java.lang.String r9) {
         /*
             r7 = this;
             com.samsung.android.knox.net.vpn.EnterpriseResponseData r0 = new com.samsung.android.knox.net.vpn.EnterpriseResponseData
@@ -3518,12 +5066,17 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             com.samsung.android.knox.net.vpn.EnterpriseResponseData r7 = r7.getAllPackages(r8, r9)
             return r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getAllPackagesInVpnProfile(com.samsung.android.knox.net.vpn.KnoxVpnContext, java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getAllPackagesInVpnProfile(com.samsung.android.knox.net.vpn.KnoxVpnContext,"
+                    + " java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
     }
 
-    public final EnterpriseResponseData getAllRangedPackages(KnoxVpnContext knoxVpnContext, String str) {
+    public final EnterpriseResponseData getAllRangedPackages(
+            KnoxVpnContext knoxVpnContext, String str) {
         if (DBG) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("get all ranged packages : Profile : ", str, "KnoxVpnEngineService");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "get all ranged packages : Profile : ", str, "KnoxVpnEngineService");
         }
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setStatus(1, -1);
@@ -3537,12 +5090,18 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         KnoxVpnHelper knoxVpnHelper = this.mKnoxVpnHelper;
                         String packageName = vpnPackageInfo.getPackageName();
                         knoxVpnHelper.getClass();
-                        int containerIdFromPackageName = KnoxVpnHelper.getContainerIdFromPackageName(packageName);
+                        int containerIdFromPackageName =
+                                KnoxVpnHelper.getContainerIdFromPackageName(packageName);
                         if (DBG) {
-                            Log.d("KnoxVpnEngineService", "get all ranged packages : containerId " + containerIdFromPackageName);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "get all ranged packages : containerId "
+                                            + containerIdFromPackageName);
                         }
                         if (containerIdFromPackageName == knoxVpnContext.personaId) {
-                            enterpriseResponseData.setData(this.mKnoxVpnHelper.getUserPackageListForProfile(containerIdFromPackageName, str));
+                            enterpriseResponseData.setData(
+                                    this.mKnoxVpnHelper.getUserPackageListForProfile(
+                                            containerIdFromPackageName, str));
                             enterpriseResponseData.setStatus(0, 0);
                             return enterpriseResponseData;
                         }
@@ -3550,12 +5109,18 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 }
             }
         } catch (Exception e) {
-            EnterpriseVpn$$ExternalSyntheticOutline0.m(e, new StringBuilder("Error occured while fetching all packages of a profile: exception occured: The error code is -1"), "KnoxVpnEngineService");
+            EnterpriseVpn$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder(
+                            "Error occured while fetching all packages of a profile: exception"
+                                + " occured: The error code is -1"),
+                    "KnoxVpnEngineService");
         }
         return enterpriseResponseData;
     }
 
-    public final synchronized EnterpriseResponseData getAllVpnProfiles(KnoxVpnContext knoxVpnContext) {
+    public final synchronized EnterpriseResponseData getAllVpnProfiles(
+            KnoxVpnContext knoxVpnContext) {
         IKnoxVpnService vpnInterface;
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData((Object) null);
@@ -3564,7 +5129,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             return enterpriseResponseData;
         }
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             return enterpriseResponseData;
         }
         int i = knoxVpnContext.adminId;
@@ -3572,22 +5138,28 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         int i2 = knoxVpnContext.personaId;
         this.mKnoxVpnHelper.getClass();
         String personifiedName = KnoxVpnHelper.getPersonifiedName(i2, str);
-        Log.d("KnoxVpnEngineService", "getAllVpnProfiles: vendorNameWithCid value is " + personifiedName);
+        Log.d(
+                "KnoxVpnEngineService",
+                "getAllVpnProfiles: vendorNameWithCid value is " + personifiedName);
         if (KnoxCustomManagerService.SETTING_PKG_NAME.equals(str)) {
             if (this.mVpnInfoPolicy == null) {
                 this.mInjector.getClass();
-                this.mVpnInfoPolicy = IVpnInfoPolicy.Stub.asInterface(ServiceManager.getService("vpn_policy"));
+                this.mVpnInfoPolicy =
+                        IVpnInfoPolicy.Stub.asInterface(ServiceManager.getService("vpn_policy"));
             }
             IVpnInfoPolicy iVpnInfoPolicy = this.mVpnInfoPolicy;
             if (iVpnInfoPolicy != null) {
                 try {
-                    List allVpnSettingsProfiles = iVpnInfoPolicy.getAllVpnSettingsProfiles(checkCallingUidPermission);
+                    List allVpnSettingsProfiles =
+                            iVpnInfoPolicy.getAllVpnSettingsProfiles(checkCallingUidPermission);
                     if (allVpnSettingsProfiles != null) {
                         enterpriseResponseData.setData(allVpnSettingsProfiles);
                         enterpriseResponseData.setStatus(0, 0);
                     }
                 } catch (RemoteException unused) {
-                    Log.e("KnoxVpnEngineService", "Exception occured while getting vpn settings profiles");
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "Exception occured while getting vpn settings profiles");
                 }
                 return enterpriseResponseData;
             }
@@ -3595,7 +5167,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         try {
             vpnInterface = getVpnInterface(personifiedName);
         } catch (Exception e) {
-            Log.e("KnoxVpnEngineService", "getAllVpnProfiles exception result is " + Log.getStackTraceString(e));
+            Log.e(
+                    "KnoxVpnEngineService",
+                    "getAllVpnProfiles exception result is " + Log.getStackTraceString(e));
         }
         if (vpnInterface == null) {
             Log.d("KnoxVpnEngineService", "getAllVpnProfiles: interface returned null");
@@ -3610,13 +5184,17 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 String profileNameFromJsonString = KnoxVpnHelper.getProfileNameFromJsonString(str2);
                 boolean z = DBG;
                 if (z) {
-                    Log.d("KnoxVpnEngineService", "getAllVpnProfiles: profileName > " + profileNameFromJsonString);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "getAllVpnProfiles: profileName > " + profileNameFromJsonString);
                 }
                 if (z) {
                     Log.d("KnoxVpnEngineService", "getAllVpnProfiles: profile > " + str2);
                 }
-                VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(profileNameFromJsonString);
-                if (profileEntry != null && (i == profileEntry.admin_id || UserHandle.getAppId(i) == 1000)) {
+                VpnProfileInfo profileEntry =
+                        this.vpnConfig.getProfileEntry(profileNameFromJsonString);
+                if (profileEntry != null
+                        && (i == profileEntry.admin_id || UserHandle.getAppId(i) == 1000)) {
                     if (i2 == profileEntry.personaId) {
                         r2.add(str2);
                     }
@@ -3633,21 +5211,35 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         if (profileEntry != null) {
             return getVpnInterface(profileEntry.mVendorPkgName);
         }
-        AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", XmlUtils$$ExternalSyntheticOutline0.m("Error getting binder for profile ", str, ". Vendor service might not be running"), -1);
-        StorageManagerService$$ExternalSyntheticOutline0.m("get binder for profile : Profile does not exist : ", str, "KnoxVpnEngineService");
+        AuditLog.logAsUser(
+                3,
+                5,
+                false,
+                Process.myPid(),
+                "KnoxVpnEngineService",
+                XmlUtils$$ExternalSyntheticOutline0.m(
+                        "Error getting binder for profile ",
+                        str,
+                        ". Vendor service might not be running"),
+                -1);
+        StorageManagerService$$ExternalSyntheticOutline0.m(
+                "get binder for profile : Profile does not exist : ", str, "KnoxVpnEngineService");
         return null;
     }
 
-    public final EnterpriseResponseData getCACertificate(KnoxVpnContext knoxVpnContext, String str) {
+    public final EnterpriseResponseData getCACertificate(
+            KnoxVpnContext knoxVpnContext, String str) {
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData((Object) null);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             return enterpriseResponseData;
         }
         try {
-            if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData) != 0) {
+            if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData)
+                    != 0) {
                 return enterpriseResponseData;
             }
             IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
@@ -3659,23 +5251,26 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             enterpriseResponseData.setStatus(0, 0);
             return enterpriseResponseData;
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("getting CACertificate : Failure at "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("getting CACertificate : Failure at "),
+                    "KnoxVpnEngineService");
             return null;
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0054, code lost:
-    
-        if (r3 == false) goto L22;
-     */
+
+       if (r3 == false) goto L22;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0056, code lost:
-    
-        android.util.Log.d("KnoxVpnEngineService", "getChainingEnabledForProfile:chaining enabled for profile");
-     */
+
+       android.util.Log.d("KnoxVpnEngineService", "getChainingEnabledForProfile:chaining enabled for profile");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x005c, code lost:
-    
-        r0 = r2.chainingEnabled;
-     */
+
+       r0 = r2.chainingEnabled;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3742,7 +5337,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         L73:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getChainingEnabledForProfile(int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getChainingEnabledForProfile(int):int");
     }
 
     public final List getDomainsByProfileName(String str) {
@@ -3753,9 +5350,13 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     public final IEnterpriseDeviceManager getEnterpriseDeviceManagerService() {
         IBinder service = ServiceManager.getService("enterprise_policy");
         if (service != null && this.mEnterpriseDeviceManagerService == null) {
-            this.mEnterpriseDeviceManagerService = IEnterpriseDeviceManager.Stub.asInterface(service);
+            this.mEnterpriseDeviceManagerService =
+                    IEnterpriseDeviceManager.Stub.asInterface(service);
             if (DBG) {
-                Log.d("KnoxVpnEngineService", "getEnterpriseDeviceManagerService value is" + this.mEnterpriseDeviceManagerService);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "getEnterpriseDeviceManagerService value is"
+                                + this.mEnterpriseDeviceManagerService);
             }
         }
         return this.mEnterpriseDeviceManagerService;
@@ -3767,37 +5368,65 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData((Object) null);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             return enterpriseResponseData;
         }
         try {
         } catch (Exception e) {
             if (DBG) {
-                VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("getting vpn error string : Failure at "), "KnoxVpnEngineService");
+                VpnManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("getting vpn error string : Failure at "),
+                        "KnoxVpnEngineService");
             }
         }
         if (this.mKnoxVpnApiValidation.getErrorStringValidation(knoxVpnContext, str) != null) {
             IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
             if (binderInterfaceForProfile == null) {
-                Log.d("KnoxVpnEngineService", "getting error string for the profile failed: Error occured since the service is not started");
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "getting error string for the profile failed: Error occured since the"
+                            + " service is not started");
                 return enterpriseResponseData;
             }
             enterpriseResponseData.setData(binderInterfaceForProfile.getErrorString(str));
             enterpriseResponseData.setStatus(0, 0);
             return enterpriseResponseData;
         }
-        Log.d("KnoxVpnEngineService", "getting error string for the profile failed: Error occured while validating the profile");
+        Log.d(
+                "KnoxVpnEngineService",
+                "getting error string for the profile failed: Error occured while validating the"
+                    + " profile");
         this.mVpnStorageProvider.getClass();
-        ArrayList dataByFields = KnoxVpnStorageProvider.mEDM.getDataByFields("vpnConnectionFail", new String[]{"profileName"}, new String[]{str}, new String[]{"profileName", "adminUid", "errorType", "vendorName", "containerID", "packageList"});
-        if (dataByFields.size() > 0 && ((ContentValues) dataByFields.get(0)).getAsInteger("adminUid").intValue() == checkCallingUidPermission.mCallerUid) {
+        ArrayList dataByFields =
+                KnoxVpnStorageProvider.mEDM.getDataByFields(
+                        "vpnConnectionFail",
+                        new String[] {"profileName"},
+                        new String[] {str},
+                        new String[] {
+                            "profileName",
+                            "adminUid",
+                            "errorType",
+                            "vendorName",
+                            "containerID",
+                            "packageList"
+                        });
+        if (dataByFields.size() > 0
+                && ((ContentValues) dataByFields.get(0)).getAsInteger("adminUid").intValue()
+                        == checkCallingUidPermission.mCallerUid) {
             Log.d("KnoxVpnEngineService", "Error occured while try to recreate the profile");
             enterpriseResponseData.setData(toJSONObject((ContentValues) dataByFields.get(0)));
             enterpriseResponseData.setStatus(2, -1);
             try {
                 this.mVpnStorageProvider.getClass();
-                KnoxVpnStorageProvider.mEDM.deleteDataByFields("vpnConnectionFail", new String[]{"profileName"}, new String[]{str});
+                KnoxVpnStorageProvider.mEDM.deleteDataByFields(
+                        "vpnConnectionFail", new String[] {"profileName"}, new String[] {str});
             } catch (Exception e2) {
-                Log.e("KnoxVpnEngineService", "Exception at removeProfileByEnterpriseVpnConnectionFailTable " + Log.getStackTraceString(e2));
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "Exception at removeProfileByEnterpriseVpnConnectionFailTable "
+                                + Log.getStackTraceString(e2));
             }
         }
         return enterpriseResponseData;
@@ -3807,7 +5436,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         String str;
         try {
         } catch (Exception unused) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "Exception occured while trying to fetch interfacename for the uid ", "KnoxVpnEngineService");
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Exception occured while trying to fetch interfacename for the uid ",
+                    "KnoxVpnEngineService");
         }
         if (Binder.getCallingUid() != 1000) {
             return null;
@@ -3828,14 +5460,20 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         knoxVpnHelperInstance.getClass();
                         if (userId == KnoxVpnHelper.getContainerIdFromPackageName(packageName)) {
                             try {
-                                for (VpnProfileInfo vpnProfileInfo2 : this.vpnConfig.vpnProfileInfoMap.values()) {
-                                    if (vpnProfileInfo2.activateState == 1 && vpnProfileInfo2.mVendorUid == i) {
+                                for (VpnProfileInfo vpnProfileInfo2 :
+                                        this.vpnConfig.vpnProfileInfoMap.values()) {
+                                    if (vpnProfileInfo2.activateState == 1
+                                            && vpnProfileInfo2.mVendorUid == i) {
                                         str = vpnProfileInfo2.mProfileName;
                                         break;
                                     }
                                 }
                             } catch (Exception unused2) {
-                                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "Exception occured while trying to fetch profile name for the uid ", "KnoxVpnEngineService");
+                                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                                        i,
+                                        "Exception occured while trying to fetch profile name for"
+                                            + " the uid ",
+                                        "KnoxVpnEngineService");
                             }
                             str = null;
                             if (str == null) {
@@ -3885,7 +5523,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             }
             return -1;
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), "KnoxVpnEngineService");
             return -1;
         }
     }
@@ -3902,7 +5541,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         if (service != null && this.mNetworkManagementService == null) {
             this.mNetworkManagementService = INetworkManagementService.Stub.asInterface(service);
             if (z) {
-                Log.d("KnoxVpnEngineService", "getNetworkManagementService mNetworkManagementService value is" + this.mNetworkManagementService);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "getNetworkManagementService mNetworkManagementService value is"
+                                + this.mNetworkManagementService);
             }
         }
         return this.mNetworkManagementService;
@@ -3913,7 +5555,12 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         int callingUid = Binder.getCallingUid();
         int userId = UserHandle.getUserId(callingUid);
         try {
-            if (AppGlobals.getPackageManager().checkPermission("com.samsung.android.knox.permission.KNOX_INTERNAL_EXCEPTION", this.mContext.getPackageManager().getNameForUid(callingUid), userId) == 0) {
+            if (AppGlobals.getPackageManager()
+                            .checkPermission(
+                                    "com.samsung.android.knox.permission.KNOX_INTERNAL_EXCEPTION",
+                                    this.mContext.getPackageManager().getNameForUid(callingUid),
+                                    userId)
+                    == 0) {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     return getNotificationDismissibleFlagInternal(i);
@@ -3930,7 +5577,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
 
     public final int getNotificationDismissibleFlagInternal(int i) {
         ConcurrentHashMap concurrentHashMap;
-        if (Binder.getCallingUid() == 1000 && (concurrentHashMap = this.notificationFlagState) != null && concurrentHashMap.containsKey(Integer.valueOf(i))) {
+        if (Binder.getCallingUid() == 1000
+                && (concurrentHashMap = this.notificationFlagState) != null
+                && concurrentHashMap.containsKey(Integer.valueOf(i))) {
             return ((Integer) this.notificationFlagState.get(Integer.valueOf(i))).intValue();
         }
         return 1;
@@ -3938,7 +5587,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
 
     public NotificationManager getNotificationManager() {
         if (this.mNotificationManager == null) {
-            this.mNotificationManager = (NotificationManager) this.mContext.getSystemService("notification");
+            this.mNotificationManager =
+                    (NotificationManager) this.mContext.getSystemService("notification");
         }
         return this.mNotificationManager;
     }
@@ -3947,14 +5597,21 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         ArrayList arrayList = new ArrayList();
         try {
             this.mVpnStorageProvider.getClass();
-            ArrayList dataByFields = KnoxVpnStorageProvider.mEDM.getDataByFields("vpnNoInternetPermission", new String[]{"profileName"}, new String[]{str}, new String[]{"packageUid"});
+            ArrayList dataByFields =
+                    KnoxVpnStorageProvider.mEDM.getDataByFields(
+                            "vpnNoInternetPermission",
+                            new String[] {"profileName"},
+                            new String[] {str},
+                            new String[] {"packageUid"});
             if (dataByFields.size() > 0) {
                 Iterator it = dataByFields.iterator();
                 while (it.hasNext()) {
-                    int intValue = ((ContentValues) it.next()).getAsInteger("packageUid").intValue();
+                    int intValue =
+                            ((ContentValues) it.next()).getAsInteger("packageUid").intValue();
                     if (intValue != -1 && UserHandle.getUserId(intValue) == i) {
                         long clearCallingIdentity = Binder.clearCallingIdentity();
-                        String[] packagesForUid = this.mContext.getPackageManager().getPackagesForUid(intValue);
+                        String[] packagesForUid =
+                                this.mContext.getPackageManager().getPackagesForUid(intValue);
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         for (String str2 : packagesForUid) {
                             arrayList.add(str2);
@@ -4012,7 +5669,11 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         if (vpnPackageInfo.getUid() == i) {
                             strArr[0] = vpnProfileInfo.getProxyInfo().getHost();
                             strArr[1] = Integer.toString(vpnProfileInfo.getProxyInfo().getPort());
-                            Log.d("KnoxVpnEngineService", "proxy information is requested by the uid belonging to per-app domain " + i);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "proxy information is requested by the uid belonging to per-app"
+                                        + " domain "
+                                            + i);
                             return strArr;
                         }
                         if (vpnPackageInfo.getUid() == -2) {
@@ -4020,21 +5681,35 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                             KnoxVpnHelper knoxVpnHelperInstance = getKnoxVpnHelperInstance();
                             String packageName = vpnPackageInfo.getPackageName();
                             knoxVpnHelperInstance.getClass();
-                            if (userId == KnoxVpnHelper.getContainerIdFromPackageName(packageName)) {
+                            if (userId
+                                    == KnoxVpnHelper.getContainerIdFromPackageName(packageName)) {
                                 Iterator it = vpnProfileInfo.mExemptPackageList.iterator();
                                 while (it.hasNext()) {
                                     if (i == ((Integer) it.next()).intValue()) {
-                                        Log.d("KnoxVpnEngineService", "proxy information is requested by the uid belonging to exempt list in user domain " + i);
+                                        Log.d(
+                                                "KnoxVpnEngineService",
+                                                "proxy information is requested by the uid"
+                                                    + " belonging to exempt list in user domain "
+                                                        + i);
                                         return strArr;
                                     }
                                 }
                                 if (i == vpnProfileInfo.mVendorUid) {
-                                    Log.d("KnoxVpnEngineService", "proxy information is requested by the uid belonging to vpn client " + i);
+                                    Log.d(
+                                            "KnoxVpnEngineService",
+                                            "proxy information is requested by the uid belonging to"
+                                                + " vpn client "
+                                                    + i);
                                     return strArr;
                                 }
                                 strArr[0] = vpnProfileInfo.getProxyInfo().getHost();
-                                strArr[1] = Integer.toString(vpnProfileInfo.getProxyInfo().getPort());
-                                Log.d("KnoxVpnEngineService", "proxy information is requested by the uid belonging to user domain " + i);
+                                strArr[1] =
+                                        Integer.toString(vpnProfileInfo.getProxyInfo().getPort());
+                                Log.d(
+                                        "KnoxVpnEngineService",
+                                        "proxy information is requested by the uid belonging to"
+                                            + " user domain "
+                                                + i);
                                 return strArr;
                             }
                         }
@@ -4042,7 +5717,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 }
             }
         } catch (Exception unused) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "Exception occured while trying to fetch the proxy information for the uid ", "KnoxVpnEngineService");
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Exception occured while trying to fetch the proxy information for the uid ",
+                    "KnoxVpnEngineService");
         }
         return strArr;
     }
@@ -4122,7 +5800,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         L7b:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getSharedUidPackges(int, java.lang.String[]):java.lang.String[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getSharedUidPackges(int,"
+                    + " java.lang.String[]):java.lang.String[]");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:12:0x007d A[Catch: Exception -> 0x0094, TryCatch #0 {Exception -> 0x0094, blocks: (B:7:0x003e, B:12:0x007d, B:14:0x0096, B:17:0x009f, B:19:0x00a4, B:21:0x00af, B:23:0x00b5, B:25:0x00c5, B:38:0x0070, B:41:0x0064, B:28:0x0047, B:31:0x004c, B:34:0x0057), top: B:6:0x003e, inners: #1 }] */
@@ -4131,7 +5812,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData getState(com.samsung.android.knox.net.vpn.KnoxVpnContext r7, java.lang.String r8) {
+    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData getState(
+            com.samsung.android.knox.net.vpn.KnoxVpnContext r7, java.lang.String r8) {
         /*
             r6 = this;
             java.lang.String r0 = "knox vpn profile current state request failed: The error code is "
@@ -4245,7 +5927,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         Le3:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getState(com.samsung.android.knox.net.vpn.KnoxVpnContext, java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getState(com.samsung.android.knox.net.vpn.KnoxVpnContext,"
+                    + " java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
     }
 
     public final int getUidPidEnabled(int i, String str) {
@@ -4254,36 +5939,50 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
             if (profileEntry != null) {
                 if (DBG) {
-                    Log.d("KnoxVpnEngineService", "The packageName stored in database is " + profileEntry.mVendorPkgName + "callerUid is " + i);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "The packageName stored in database is "
+                                    + profileEntry.mVendorPkgName
+                                    + "callerUid is "
+                                    + i);
                 }
                 if (profileEntry.mVendorUid == i) {
                     if (profileEntry.routeType == 0) {
                         i2 = profileEntry.uidPidSearchEnabled;
                     } else if (profileEntry.routeType == 1) {
-                        Log.d("KnoxVpnEngineService", "activated state of the profile " + profileEntry.activateState);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "activated state of the profile " + profileEntry.activateState);
                         i2 = profileEntry.uidPidSearchEnabled;
                     }
                 }
             }
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), "KnoxVpnEngineService");
         }
         if (DBG) {
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i2, "getUidPidSearchEnabledForProfile: uidPidSearchEnabled value is ", "KnoxVpnEngineService");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    i2,
+                    "getUidPidSearchEnabledForProfile: uidPidSearchEnabled value is ",
+                    "KnoxVpnEngineService");
         }
         return i2;
     }
 
-    public final synchronized EnterpriseResponseData getUserCertificate(KnoxVpnContext knoxVpnContext, String str) {
+    public final synchronized EnterpriseResponseData getUserCertificate(
+            KnoxVpnContext knoxVpnContext, String str) {
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData((Object) null);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             return enterpriseResponseData;
         }
         try {
-            if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData) != 0) {
+            if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData)
+                    != 0) {
                 return enterpriseResponseData;
             }
             IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
@@ -4295,7 +5994,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             enterpriseResponseData.setStatus(0, 0);
             return enterpriseResponseData;
         } catch (Exception e) {
-            Log.e("KnoxVpnEngineService", "getting user certificate : Failure at " + Log.getStackTraceString(e));
+            Log.e(
+                    "KnoxVpnEngineService",
+                    "getting user certificate : Failure at " + Log.getStackTraceString(e));
             return null;
         }
     }
@@ -4311,10 +6012,16 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 return -1;
             }
             int state = binderInterfaceForProfile.getState(str);
-            Log.d("KnoxVpnEngineService", "State of vpn profile received from vpn vendor for profileName is = " + str + " state = " + state);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "State of vpn profile received from vpn vendor for profileName is = "
+                            + str
+                            + " state = "
+                            + state);
             return state;
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("getVPNState : Failure at "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("getVPNState : Failure at "), "KnoxVpnEngineService");
             return -1;
         }
     }
@@ -4382,7 +6089,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             monitor-exit(r4)
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getVPNTransitionState(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.getVPNTransitionState(java.lang.String):int");
     }
 
     public final String getVendorNameForProfile(String str) {
@@ -4403,7 +6112,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 }
             }
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at getVendorNameForProfile API "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception at getVendorNameForProfile API "),
+                    "KnoxVpnEngineService");
         }
         return str2;
     }
@@ -4427,7 +6139,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             }
             return null;
         } catch (Exception e) {
-            EnterpriseVpn$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception when retrieving Binder interface : "), "KnoxVpnEngineService");
+            EnterpriseVpn$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception when retrieving Binder interface : "),
+                    "KnoxVpnEngineService");
             return null;
         }
     }
@@ -4437,61 +6152,85 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         return IVpnManager.Stub.asInterface(ServiceManager.getService("vpn_management"));
     }
 
-    public final synchronized EnterpriseResponseData getVpnModeOfOperation(KnoxVpnContext knoxVpnContext, String str) {
+    public final synchronized EnterpriseResponseData getVpnModeOfOperation(
+            KnoxVpnContext knoxVpnContext, String str) {
         int vpnModeOfOperationValidation;
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData(-1);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             enterpriseResponseData.setData(140);
             return enterpriseResponseData;
         }
         try {
-            vpnModeOfOperationValidation = this.mKnoxVpnApiValidation.getVpnModeOfOperationValidation(knoxVpnContext, str);
+            vpnModeOfOperationValidation =
+                    this.mKnoxVpnApiValidation.getVpnModeOfOperationValidation(knoxVpnContext, str);
         } catch (Exception e) {
             if (DBG) {
-                Log.e("KnoxVpnEngineService", "getting vpn mode : Failure at " + Log.getStackTraceString(e));
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "getting vpn mode : Failure at " + Log.getStackTraceString(e));
             }
         }
         if (vpnModeOfOperationValidation != 100) {
             enterpriseResponseData.setData(Integer.valueOf(vpnModeOfOperationValidation));
-            Log.d("KnoxVpnEngineService", "getting the mode of operation for the profile has failed:The error code is " + vpnModeOfOperationValidation);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "getting the mode of operation for the profile has failed:The error code is "
+                            + vpnModeOfOperationValidation);
             return enterpriseResponseData;
         }
         IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
         if (binderInterfaceForProfile == null) {
             enterpriseResponseData.setData(110);
-            Log.d("KnoxVpnEngineService", "getting the mode of operation for the profile has failed: The error code is 110");
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "getting the mode of operation for the profile has failed: The error code is"
+                        + " 110");
             return enterpriseResponseData;
         }
         int vpnModeOfOperation = binderInterfaceForProfile.getVpnModeOfOperation(str);
-        Log.d("KnoxVpnEngineService", "getVpnModeOfOperation : profileName = " + str + " :currentMode = " + vpnModeOfOperation);
+        Log.d(
+                "KnoxVpnEngineService",
+                "getVpnModeOfOperation : profileName = "
+                        + str
+                        + " :currentMode = "
+                        + vpnModeOfOperation);
         enterpriseResponseData.setData(Integer.valueOf(vpnModeOfOperation));
         enterpriseResponseData.setStatus(0, 0);
         return enterpriseResponseData;
     }
 
-    public final synchronized EnterpriseResponseData getVpnProfile(KnoxVpnContext knoxVpnContext, String str) {
+    public final synchronized EnterpriseResponseData getVpnProfile(
+            KnoxVpnContext knoxVpnContext, String str) {
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
         Log.d("KnoxVpnEngineService", "profile info is going to be fetched for the proifle " + str);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData((Object) null);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             return enterpriseResponseData;
         }
         try {
         } catch (Exception e) {
-            Log.e("KnoxVpnEngineService", "getVpnProfile exception result is " + Log.getStackTraceString(e));
+            Log.e(
+                    "KnoxVpnEngineService",
+                    "getVpnProfile exception result is " + Log.getStackTraceString(e));
         }
         if (this.mKnoxVpnApiValidation.getVpnProfileValidation(knoxVpnContext, str) == null) {
-            Log.d("KnoxVpnEngineService", "getting vpn profile Info failed: Error occured while validating the profile");
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "getting vpn profile Info failed: Error occured while validating the profile");
             return enterpriseResponseData;
         }
         IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
         if (binderInterfaceForProfile == null) {
-            Log.d("KnoxVpnEngineService", "getting vpn profile Info failed: Error occured due to invalid interface");
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "getting vpn profile Info failed: Error occured due to invalid interface");
             return enterpriseResponseData;
         }
         String connection = binderInterfaceForProfile.getConnection(str);
@@ -4521,25 +6260,41 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             personifiedName = KnoxVpnHelper.getPersonifiedName(userId, string);
             z2 = DBG;
             if (z2) {
-                Log.d("KnoxVpnEngineService", "vpn handle : package added : package =  " + personifiedName + " : uid = " + i);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "vpn handle : package added : package =  "
+                                + personifiedName
+                                + " : uid = "
+                                + i);
             }
         } catch (Exception e) {
-            Log.e("KnoxVpnEngineService", "vpn handle : pakcage add : Exception:" + Log.getStackTraceString(e));
+            Log.e(
+                    "KnoxVpnEngineService",
+                    "vpn handle : pakcage add : Exception:" + Log.getStackTraceString(e));
         }
         if (personifiedName == null) {
             return;
         }
         if (this.vpnInterfaceMap.containsKey(personifiedName)) {
             if (z2) {
-                Log.d("KnoxVpnEngineService", "vpn handle : package added : calling bind package =  ".concat(personifiedName));
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "vpn handle : package added : calling bind package =  "
+                                .concat(personifiedName));
             }
-            bindKnoxVpnInterface(this.mKnoxVpnHelper.getAdminIdFromPackageName(personifiedName), personifiedName);
+            bindKnoxVpnInterface(
+                    this.mKnoxVpnHelper.getAdminIdFromPackageName(personifiedName),
+                    personifiedName);
             return;
         }
         if (isProxyServicePackage(personifiedName)) {
-            Log.d("KnoxVpnEngineService", "Knox vpn proxy support package has been added in user " + userId);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Knox vpn proxy support package has been added in user " + userId);
             if (z) {
-                Log.d("KnoxVpnEngineService", "Knox vpn proxy support package has been updated in user " + userId);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Knox vpn proxy support package has been updated in user " + userId);
                 for (String str : this.vpnConfig.getProfileNames()) {
                     VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
                     if (profileEntry != null) {
@@ -4549,7 +6304,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         int i2 = profileEntry.mNetId;
                         if (uri != Uri.EMPTY || str2 != null) {
                             if (str3 != null) {
-                                Log.d("KnoxVpnEngineService", "Binding again to pac service after package update");
+                                Log.d(
+                                        "KnoxVpnEngineService",
+                                        "Binding again to pac service after package update");
                                 getKnoxVpnPacProcessor().bindProxyService(str, str3, uri, i2);
                             }
                         }
@@ -4559,7 +6316,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             return;
         }
         if (string.equalsIgnoreCase("com.knox.vpn.proxyhandler")) {
-            Log.d("KnoxVpnEngineService", "Knox vpn proxy support package has been added on profile users " + userId);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Knox vpn proxy support package has been added on profile users " + userId);
             return;
         }
         if (string.equalsIgnoreCase("com.samsung.knox.vpn.tether.auth")) {
@@ -4568,7 +6327,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             knoxVpnHelper.getClass();
             if (KnoxVpnHelper.checkIfPlatformSigned(userId2)) {
                 if (this.mKnoxVpnTetherAuthentication.isTetherAuthSuccessful) {
-                    Log.d("KnoxVpnTetherAuthentication", "usb tether auth application is installed and mutual authentication not needed");
+                    Log.d(
+                            "KnoxVpnTetherAuthentication",
+                            "usb tether auth application is installed and mutual authentication not"
+                                + " needed");
                     return;
                 }
                 Iterator it = this.vpnConfig.vpnProfileInfoMap.values().iterator();
@@ -4577,22 +6339,39 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         break;
                     }
                     VpnProfileInfo vpnProfileInfo = (VpnProfileInfo) it.next();
-                    if (vpnProfileInfo.isUsbTetheringAuthEnabled == 1 && UserHandle.getUserId(i) == vpnProfileInfo.personaId) {
+                    if (vpnProfileInfo.isUsbTetheringAuthEnabled == 1
+                            && UserHandle.getUserId(i) == vpnProfileInfo.personaId) {
                         String profileName = vpnProfileInfo.getProfileName();
-                        this.mKnoxVpnHelper.addOrRemoveAppsFromBatteryOptimization(profileName, "com.samsung.knox.vpn.tether.auth", true);
-                        Log.d("KnoxVpnTetherAuthentication", "usb tether auth application is installed, start bind to usb auth service");
-                        this.mKnoxVpnTetherAuthentication.bindTetherAuthService(UserHandle.getUserId(i), profileName);
-                        String interfaceNameForUsbtethering = this.mKnoxVpnHelper.getInterfaceNameForUsbtethering();
+                        this.mKnoxVpnHelper.addOrRemoveAppsFromBatteryOptimization(
+                                profileName, "com.samsung.knox.vpn.tether.auth", true);
+                        Log.d(
+                                "KnoxVpnTetherAuthentication",
+                                "usb tether auth application is installed, start bind to usb auth"
+                                    + " service");
+                        this.mKnoxVpnTetherAuthentication.bindTetherAuthService(
+                                UserHandle.getUserId(i), profileName);
+                        String interfaceNameForUsbtethering =
+                                this.mKnoxVpnHelper.getInterfaceNameForUsbtethering();
                         String str4 = vpnProfileInfo.mInterfaceName;
                         int i3 = vpnProfileInfo.activateState;
                         if (interfaceNameForUsbtethering != null) {
                             if (str4 == null && i3 == 1) {
-                                Log.d("KnoxVpnTetherAuthentication", "usb tether auth application is installed, adding blocking rules since vpn is not up");
-                                this.mFirewallHelper.addRulesForDroppingTetherPackets(interfaceNameForUsbtethering);
+                                Log.d(
+                                        "KnoxVpnTetherAuthentication",
+                                        "usb tether auth application is installed, adding blocking"
+                                            + " rules since vpn is not up");
+                                this.mFirewallHelper.addRulesForDroppingTetherPackets(
+                                        interfaceNameForUsbtethering);
                             } else if (str4 != null && i3 == 1) {
-                                Log.d("KnoxVpnTetherAuthentication", "usb tether auth application is installed, start mutual authentication");
+                                Log.d(
+                                        "KnoxVpnTetherAuthentication",
+                                        "usb tether auth application is installed, start mutual"
+                                            + " authentication");
                                 this.mFirewallHelper.removeRulesForDroppingTethePackets();
-                                this.mKnoxVpnTetherAuthentication.startTetherAuthProcess(vpnProfileInfo.personaId, interfaceNameForUsbtethering, this.mKnoxVpnHelper.getIpAddressForUsbTetheringInterface());
+                                this.mKnoxVpnTetherAuthentication.startTetherAuthProcess(
+                                        vpnProfileInfo.personaId,
+                                        interfaceNameForUsbtethering,
+                                        this.mKnoxVpnHelper.getIpAddressForUsbTetheringInterface());
                             }
                         }
                     }
@@ -4601,83 +6380,154 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
         if (z) {
             Log.d("KnoxVpnEngineService", "vpn handle : package added: package being updated");
-            int checkIfUidHasInternetPermission = this.mKnoxVpnHelper.checkIfUidHasInternetPermission(i);
+            int checkIfUidHasInternetPermission =
+                    this.mKnoxVpnHelper.checkIfUidHasInternetPermission(i);
             if (checkIfUidHasInternetPermission == 0) {
-                String profileNameForPermissionUpdatedApp = this.mKnoxVpnHelper.getProfileNameForPermissionUpdatedApp(i);
+                String profileNameForPermissionUpdatedApp =
+                        this.mKnoxVpnHelper.getProfileNameForPermissionUpdatedApp(i);
                 if (profileNameForPermissionUpdatedApp != null) {
-                    Log.d("KnoxVpnEngineService", "The app is being upgraded with internet permission, adding to vpn profile " + profileNameForPermissionUpdatedApp);
-                    VpnProfileInfo profileEntry2 = this.vpnConfig.getProfileEntry(profileNameForPermissionUpdatedApp);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "The app is being upgraded with internet permission, adding to vpn"
+                                + " profile "
+                                    + profileNameForPermissionUpdatedApp);
+                    VpnProfileInfo profileEntry2 =
+                            this.vpnConfig.getProfileEntry(profileNameForPermissionUpdatedApp);
                     if (profileEntry2 != null) {
                         ArrayList arrayList = new ArrayList();
                         arrayList.add(Integer.valueOf(i));
-                        this.mFirewallHelper.addRulesForFilteredPackages(profileEntry2.mVendorPkgName, profileEntry2.mIpChainName, arrayList, this.mKnoxVpnHelper.getDefaultNetworkInterface(profileNameForPermissionUpdatedApp));
-                        this.mKnoxVpnHelper.updateUidsToVpnUidRange(profileNameForPermissionUpdatedApp);
+                        this.mFirewallHelper.addRulesForFilteredPackages(
+                                profileEntry2.mVendorPkgName,
+                                profileEntry2.mIpChainName,
+                                arrayList,
+                                this.mKnoxVpnHelper.getDefaultNetworkInterface(
+                                        profileNameForPermissionUpdatedApp));
+                        this.mKnoxVpnHelper.updateUidsToVpnUidRange(
+                                profileNameForPermissionUpdatedApp);
                     }
                     removePackagesFromPermissionCheckDb(i);
                     writePackageToDB(i, userId, profileNameForPermissionUpdatedApp, string);
                     refreshDomainInHashMap(profileNameForPermissionUpdatedApp);
                 }
-            } else if (checkIfUidHasInternetPermission == 1 && (profileOwningTheUid = this.mKnoxVpnHelper.getProfileOwningTheUid(i)) != null) {
-                Log.d("KnoxVpnEngineService", "The app is being downgraded without internet permission, removing from vpn profile " + profileOwningTheUid);
+            } else if (checkIfUidHasInternetPermission == 1
+                    && (profileOwningTheUid = this.mKnoxVpnHelper.getProfileOwningTheUid(i))
+                            != null) {
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "The app is being downgraded without internet permission, removing from vpn"
+                            + " profile "
+                                + profileOwningTheUid);
                 removePackageListByUid(i, profileOwningTheUid, string);
                 writePackagestoPermissionCheckDb(userId, i, profileOwningTheUid, string);
             }
             return;
         }
         if (this.mKnoxVpnHelper.isWideVpnExists(userId)) {
-            Log.d("KnoxVpnEngineService", "No action needed for package added use-case, since user-wide vpn is configured ");
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "No action needed for package added use-case, since user-wide vpn is configured"
+                        + " ");
             KnoxVpnHelper knoxVpnHelper2 = this.mKnoxVpnHelper;
             knoxVpnHelper2.getClass();
-            String profileOwningThePackage = knoxVpnHelper2.getProfileOwningThePackage(KnoxVpnHelper.getPersonifiedName(userId, "ADD_ALL_PACKAGES"));
+            String profileOwningThePackage =
+                    knoxVpnHelper2.getProfileOwningThePackage(
+                            KnoxVpnHelper.getPersonifiedName(userId, "ADD_ALL_PACKAGES"));
             VpnProfileInfo profileEntry3 = this.vpnConfig.getProfileEntry(profileOwningThePackage);
             if (profileEntry3 != null && profileEntry3.activateState == 1) {
                 if (!this.mKnoxVpnHelper.updateExemptedListToDatabase(i, personifiedName)) {
                     return;
                 }
-                if (!this.mKnoxVpnHelper.getuserIdForExemptedUids().contains(Integer.valueOf(userId))) {
+                if (!this.mKnoxVpnHelper
+                        .getuserIdForExemptedUids()
+                        .contains(Integer.valueOf(userId))) {
                     this.mKnoxVpnHelper.getClass();
-                    int uIDForPackage = KnoxVpnHelper.getUIDForPackage(userId, "com.android.providers.downloads");
+                    int uIDForPackage =
+                            KnoxVpnHelper.getUIDForPackage(
+                                    userId, "com.android.providers.downloads");
                     KnoxVpnFirewallHelper knoxVpnFirewallHelper = this.mFirewallHelper;
                     this.mKnoxVpnHelper.getClass();
-                    knoxVpnFirewallHelper.addExemptRulesForDownloadManagerUid(uIDForPackage, KnoxVpnHelper.getActiveNetworkInterface());
+                    knoxVpnFirewallHelper.addExemptRulesForDownloadManagerUid(
+                            uIDForPackage, KnoxVpnHelper.getActiveNetworkInterface());
                 }
                 profileEntry3.mExemptPackageList.add(Integer.valueOf(i));
                 updateRulesToExemptUid(1, profileOwningThePackage, null, null, 1, i, 0);
-                updateRulesToExemptUid(1, profileOwningThePackage, profileEntry3.mInterfaceName, profileEntry3.mDefaultInterface, 2, i, profileEntry3.mInterface_type);
-                updateRulesToExemptUid(1, profileOwningThePackage, profileEntry3.mInterfaceName, profileEntry3.mDefaultInterface, 3, i, profileEntry3.mInterface_type);
+                updateRulesToExemptUid(
+                        1,
+                        profileOwningThePackage,
+                        profileEntry3.mInterfaceName,
+                        profileEntry3.mDefaultInterface,
+                        2,
+                        i,
+                        profileEntry3.mInterface_type);
+                updateRulesToExemptUid(
+                        1,
+                        profileOwningThePackage,
+                        profileEntry3.mInterfaceName,
+                        profileEntry3.mDefaultInterface,
+                        3,
+                        i,
+                        profileEntry3.mInterface_type);
                 this.mKnoxVpnHelper.updateUidsToVpnUidRange(profileOwningThePackage);
             }
             return;
         }
-        String profileOwningThePackage2 = this.mKnoxVpnHelper.getProfileOwningThePackage(personifiedName);
+        String profileOwningThePackage2 =
+                this.mKnoxVpnHelper.getProfileOwningThePackage(personifiedName);
         if (profileOwningThePackage2 != null) {
             VpnProfileInfo profileEntry4 = this.vpnConfig.getProfileEntry(profileOwningThePackage2);
             String str5 = null;
-            VpnPackageInfo vpnPackageInfo = profileEntry4 != null ? profileEntry4.getPackage(personifiedName) : null;
+            VpnPackageInfo vpnPackageInfo =
+                    profileEntry4 != null ? profileEntry4.getPackage(personifiedName) : null;
             int i4 = -1;
             if (vpnPackageInfo == null) {
-                Log.d("KnoxVpnEngineService", "The application added might be an update to an existing one to the profile");
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "The application added might be an update to an existing one to the"
+                            + " profile");
             } else {
                 if (vpnPackageInfo.getUid() != -1) {
-                    Log.d("KnoxVpnEngineService", "The application added is already added to a vpn profile, so cancelling further calls");
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "The application added is already added to a vpn profile, so cancelling"
+                                + " further calls");
                     return;
                 }
-                Log.d("KnoxVpnEngineService", "The application added by admin but not present in the device till now has been installed");
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "The application added by admin but not present in the device till now has"
+                            + " been installed");
             }
             String profileOwningTheUid2 = this.mKnoxVpnHelper.getProfileOwningTheUid(i);
-            if (profileOwningTheUid2 != null && !profileOwningTheUid2.equalsIgnoreCase(profileOwningThePackage2)) {
-                Log.d("KnoxVpnEngineService", "Multiple profile exists with same uid, so cancelling adding further attempts");
+            if (profileOwningTheUid2 != null
+                    && !profileOwningTheUid2.equalsIgnoreCase(profileOwningThePackage2)) {
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Multiple profile exists with same uid, so cancelling adding further"
+                            + " attempts");
                 return;
             }
             if (DBG) {
-                Log.d("KnoxVpnEngineService", "vpn handle : package added : checking update package =  " + personifiedName);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "vpn handle : package added : checking update package =  "
+                                + personifiedName);
             }
             if (updatePackageData(i, personifiedName)) {
-                Log.d("KnoxVpnEngineService", "vpn handle : package add : Package found in DB with rule proceed with logic");
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "vpn handle : package add : Package found in DB with rule proceed with"
+                            + " logic");
                 this.mVpnStorageProvider.getClass();
-                ArrayList dataByFields = KnoxVpnStorageProvider.mEDM.getDataByFields("VpnPackageInfo", new String[]{"packageName"}, new String[]{personifiedName}, new String[]{"profileName", "packageUid"});
+                ArrayList dataByFields =
+                        KnoxVpnStorageProvider.mEDM.getDataByFields(
+                                "VpnPackageInfo",
+                                new String[] {"packageName"},
+                                new String[] {personifiedName},
+                                new String[] {"profileName", "packageUid"});
                 try {
-                    Log.d("KnoxVpnEngineService", "getting vpn object from database : Cursor not null");
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "getting vpn object from database : Cursor not null");
                     Iterator it2 = dataByFields.iterator();
                     while (it2.hasNext()) {
                         ContentValues contentValues = (ContentValues) it2.next();
@@ -4685,20 +6535,29 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         i4 = contentValues.getAsInteger("packageUid").intValue();
                     }
                 } catch (Exception e2) {
-                    Log.e("KnoxVpnEngineService", "getting vpn object from database : Exception: " + Log.getStackTraceString(e2));
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "getting vpn object from database : Exception: "
+                                    + Log.getStackTraceString(e2));
                 }
                 VpnProfileInfo profileEntry5 = this.vpnConfig.getProfileEntry(str5);
                 if (profileEntry5 != null) {
                     profileEntry5.addPackageEntry(i4, userId, personifiedName);
                 }
-                if (profileEntry5.activateState == 1 && getVPNTransitionState(str5) == 4 && this.mKnoxVpnHelper.getpackageCountByUserId(userId, str5) == 1) {
+                if (profileEntry5.activateState == 1
+                        && getVPNTransitionState(str5) == 4
+                        && this.mKnoxVpnHelper.getpackageCountByUserId(userId, str5) == 1) {
                     refreshDomainInHashMap(str5);
                     updateNotification(userId, str5, true);
                 }
                 ArrayList arrayList2 = new ArrayList();
                 arrayList2.add(Integer.valueOf(i4));
                 this.mKnoxVpnHelper.updateUidsToVpnUidRange(str5);
-                this.mFirewallHelper.addRulesForFilteredPackages(profileEntry5.mVendorPkgName, profileEntry5.mIpChainName, arrayList2, this.mKnoxVpnHelper.getDefaultNetworkInterface(str5));
+                this.mFirewallHelper.addRulesForFilteredPackages(
+                        profileEntry5.mVendorPkgName,
+                        profileEntry5.mIpChainName,
+                        arrayList2,
+                        this.mKnoxVpnHelper.getDefaultNetworkInterface(str5));
                 startVpnForPerApplication(str5, arrayList2, true);
                 if (DBG) {
                     printProfileVpnMap();
@@ -4716,7 +6575,12 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         this.mKnoxVpnHelper.getClass();
         String personifiedName = KnoxVpnHelper.getPersonifiedName(userId, string);
         boolean z = bundle.getBoolean("new_install_or_update");
-        Log.d("KnoxVpnEngineService", "handleActionPackageRemoved : packageName = " + personifiedName + " : replacing = " + z);
+        Log.d(
+                "KnoxVpnEngineService",
+                "handleActionPackageRemoved : packageName = "
+                        + personifiedName
+                        + " : replacing = "
+                        + z);
         if (this.vpnInterfaceMap.containsKey(personifiedName)) {
             if (z) {
                 Log.d("KnoxVpnEngineService", "Package is being reinstalled. Skip remove profile");
@@ -4724,9 +6588,18 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             }
             Log.d("KnoxVpnEngineService", "handleActionPackageRemoved : packageName is Vpn Vendor");
             try {
-                Log.d("KnoxVpnEngineService", "handleActionPackageRemoved : Getting profile list for vendor from DB");
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "handleActionPackageRemoved : Getting profile list for vendor from DB");
                 this.mVpnStorageProvider.getClass();
-                Iterator it = KnoxVpnStorageProvider.mEDM.getDataByFields("VpnProfileInfo", new String[]{"vendorName"}, new String[]{personifiedName}, null).iterator();
+                Iterator it =
+                        KnoxVpnStorageProvider.mEDM
+                                .getDataByFields(
+                                        "VpnProfileInfo",
+                                        new String[] {"vendorName"},
+                                        new String[] {personifiedName},
+                                        null)
+                                .iterator();
                 while (it.hasNext()) {
                     ContentValues contentValues = (ContentValues) it.next();
                     String asString = contentValues.getAsString("profileName");
@@ -4736,12 +6609,16 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     if (intValue == 1) {
                         sendVpnConnectionFailIntent(intValue2, asString2, asString);
                     }
-                    Log.d("KnoxVpnEngineService", "handleActionPackageRemoved : Remvoing profile = " + asString);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "handleActionPackageRemoved : Remvoing profile = " + asString);
                     removeProfileFromKeyStore(i, asString, personifiedName);
                     removeProfileFromHashMapAndDB(asString);
                 }
             } catch (Exception e) {
-                Log.e("KnoxVpnEngineService", "handleActionPackageRemoved : Failure at " + Log.getStackTraceString(e));
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "handleActionPackageRemoved : Failure at " + Log.getStackTraceString(e));
             }
             EnterpriseDeviceManager.getInstance(this.mContext);
         }
@@ -4756,15 +6633,26 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     break;
                 }
                 VpnProfileInfo vpnProfileInfo = (VpnProfileInfo) it2.next();
-                if (vpnProfileInfo.isUsbTetheringAuthEnabled == 1 && UserHandle.getUserId(i) == vpnProfileInfo.personaId) {
-                    Log.d("KnoxVpnTetherAuthentication", "unbind from usb tethering service after usb tether app is uninstalled");
+                if (vpnProfileInfo.isUsbTetheringAuthEnabled == 1
+                        && UserHandle.getUserId(i) == vpnProfileInfo.personaId) {
+                    Log.d(
+                            "KnoxVpnTetherAuthentication",
+                            "unbind from usb tethering service after usb tether app is"
+                                + " uninstalled");
                     try {
                         this.mKnoxVpnTetherAuthentication.unbindTetherAuthService();
                     } catch (RemoteException unused) {
                     }
-                    if (vpnProfileInfo.activateState == 1 && (interfaceNameForUsbtethering = this.mKnoxVpnHelper.getInterfaceNameForUsbtethering()) != null) {
-                        Log.d("KnoxVpnTetherAuthentication", "Adding tethering blocking rules after usb tether app is uninstalled");
-                        this.mFirewallHelper.addRulesForDroppingTetherPackets(interfaceNameForUsbtethering);
+                    if (vpnProfileInfo.activateState == 1
+                            && (interfaceNameForUsbtethering =
+                                            this.mKnoxVpnHelper.getInterfaceNameForUsbtethering())
+                                    != null) {
+                        Log.d(
+                                "KnoxVpnTetherAuthentication",
+                                "Adding tethering blocking rules after usb tether app is"
+                                    + " uninstalled");
+                        this.mFirewallHelper.addRulesForDroppingTetherPackets(
+                                interfaceNameForUsbtethering);
                     }
                 }
             }
@@ -4782,19 +6670,31 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
 
     public final void handleChainingScenarioForStartConnection(String str) {
         try {
-            int checkIfProfileHasChainingFeature = this.mKnoxVpnHelper.checkIfProfileHasChainingFeature(str);
-            Log.d("KnoxVpnEngineService", "handleChainingScenarioForStartConnection: chaining_enabled value is " + checkIfProfileHasChainingFeature);
+            int checkIfProfileHasChainingFeature =
+                    this.mKnoxVpnHelper.checkIfProfileHasChainingFeature(str);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "handleChainingScenarioForStartConnection: chaining_enabled value is "
+                            + checkIfProfileHasChainingFeature);
             VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
             if (profileEntry == null) {
-                Log.d("KnoxVpnEngineService", "handleChainingScenarioForStartConnection: profile in outerProfile is " + profileEntry);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "handleChainingScenarioForStartConnection: profile in outerProfile is "
+                                + profileEntry);
                 return;
             }
             int i = profileEntry.personaId;
-            Log.d("KnoxVpnEngineService", "handleChainingScenarioForStartConnection: userIdOfOuterProfile value is " + i);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "handleChainingScenarioForStartConnection: userIdOfOuterProfile value is " + i);
             if (checkIfProfileHasChainingFeature == 0) {
                 for (VpnProfileInfo vpnProfileInfo : this.vpnConfig.vpnProfileInfoMap.values()) {
                     if (vpnProfileInfo.chainingEnabled == 1 && vpnProfileInfo.personaId == i) {
-                        Log.d("KnoxVpnEngineService", "handleChainingScenarioForStartConnection: chained profile is going to be started");
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "handleChainingScenarioForStartConnection: chained profile is going"
+                                    + " to be started");
                         String str2 = vpnProfileInfo.mProfileName;
                         try {
                             ChainingStateMachine chainingStateMachine = this.mChainingStateMachine;
@@ -4802,24 +6702,34 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                                 chainingStateMachine.interrupt();
                                 this.mChainingStateMachine = null;
                             }
-                            ChainingStateMachine chainingStateMachine2 = new ChainingStateMachine(str2);
+                            ChainingStateMachine chainingStateMachine2 =
+                                    new ChainingStateMachine(str2);
                             this.mChainingStateMachine = chainingStateMachine2;
                             chainingStateMachine2.start();
                         } catch (Exception e) {
-                            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at startChainedProfile API "), "KnoxVpnEngineService");
+                            VpnManagerService$$ExternalSyntheticOutline0.m(
+                                    e,
+                                    new StringBuilder("Exception at startChainedProfile API "),
+                                    "KnoxVpnEngineService");
                         }
                     }
                 }
             }
         } catch (Exception e2) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception at handleChainingScenarioForStartConnection API "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e2,
+                    new StringBuilder("Exception at handleChainingScenarioForStartConnection API "),
+                    "KnoxVpnEngineService");
         }
     }
 
     public final boolean implementsVpnService(int i, String str) {
         boolean z = false;
         try {
-            List queryIntentServicesAsUser = this.mContext.getPackageManager().queryIntentServicesAsUser(new Intent(str + ".BIND_SERVICE_NEW"), 0, i);
+            List queryIntentServicesAsUser =
+                    this.mContext
+                            .getPackageManager()
+                            .queryIntentServicesAsUser(new Intent(str + ".BIND_SERVICE_NEW"), 0, i);
             if (queryIntentServicesAsUser.size() > 0) {
                 Iterator it = queryIntentServicesAsUser.iterator();
                 while (true) {
@@ -4833,10 +6743,14 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 }
             }
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at implementsVpnService "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception at implementsVpnService "),
+                    "KnoxVpnEngineService");
         }
         if (DBG) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m("implementsVpnService : supportsKnox value is ", "KnoxVpnEngineService", z);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    "implementsVpnService : supportsKnox value is ", "KnoxVpnEngineService", z);
         }
         return z;
     }
@@ -4852,7 +6766,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             Method dump skipped, instructions count: 1055
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.initializeHashtable():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.initializeHashtable():void");
     }
 
     public final boolean isNetworkConnected() {
@@ -4880,24 +6796,35 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     int i2 = vpnProfileInfo.activateState;
                     if (i2 != 0) {
                         if (i2 == 1) {
-                            for (VpnPackageInfo vpnPackageInfo : vpnProfileInfo.mPackageMap.values()) {
+                            for (VpnPackageInfo vpnPackageInfo :
+                                    vpnProfileInfo.mPackageMap.values()) {
                                 if (vpnPackageInfo.getUid() == i) {
                                     return true;
                                 }
                                 if (vpnPackageInfo.getUid() == -2) {
                                     if (i == vpnProfileInfo.mVendorUid) {
-                                        Log.d("KnoxVpnEngineService", "knox vpn proxy setting skipping for vendor entry " + i);
+                                        Log.d(
+                                                "KnoxVpnEngineService",
+                                                "knox vpn proxy setting skipping for vendor entry "
+                                                        + i);
                                         return false;
                                     }
                                     int userId = UserHandle.getUserId(i);
-                                    KnoxVpnHelper knoxVpnHelperInstance = getKnoxVpnHelperInstance();
+                                    KnoxVpnHelper knoxVpnHelperInstance =
+                                            getKnoxVpnHelperInstance();
                                     String packageName = vpnPackageInfo.getPackageName();
                                     knoxVpnHelperInstance.getClass();
-                                    if (userId == KnoxVpnHelper.getContainerIdFromPackageName(packageName)) {
+                                    if (userId
+                                            == KnoxVpnHelper.getContainerIdFromPackageName(
+                                                    packageName)) {
                                         Iterator it = vpnProfileInfo.mExemptPackageList.iterator();
                                         while (it.hasNext()) {
                                             if (i == ((Integer) it.next()).intValue()) {
-                                                Log.d("KnoxVpnEngineService", "knox vpn proxy setting skipping for exempted entry " + i);
+                                                Log.d(
+                                                        "KnoxVpnEngineService",
+                                                        "knox vpn proxy setting skipping for"
+                                                            + " exempted entry "
+                                                                + i);
                                                 return false;
                                             }
                                         }
@@ -4906,16 +6833,27 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                                 }
                             }
                         } else if (DBG) {
-                            Log.d("KnoxVpnEngineService", "knox vpn proxy settings is being queried by CS for unknown state vpn profile " + vpnProfileInfo.mProfileName);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "knox vpn proxy settings is being queried by CS for unknown"
+                                        + " state vpn profile "
+                                            + vpnProfileInfo.mProfileName);
                         }
                     } else if (DBG) {
-                        Log.d("KnoxVpnEngineService", "knox vpn proxy settings is being queried by CS for the de-activated vpn profile " + vpnProfileInfo.mProfileName);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "knox vpn proxy settings is being queried by CS for the"
+                                    + " de-activated vpn profile "
+                                        + vpnProfileInfo.mProfileName);
                     }
                 }
             }
         } catch (Exception unused) {
             if (DBG) {
-                Log.e("KnoxVpnEngineService", "Exception occured while retrieving the profile info object, might be that the proxy info has not been configured yet ");
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "Exception occured while retrieving the profile info object, might be that"
+                            + " the proxy info has not been configured yet ");
             }
         }
         return false;
@@ -4923,15 +6861,20 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
 
     public final boolean isProxyServicePackage(String str) {
         this.mKnoxVpnHelper.getClass();
-        return str.equalsIgnoreCase(KnoxVpnHelper.getPersonifiedName(0, "com.knox.vpn.proxyhandler"));
+        return str.equalsIgnoreCase(
+                KnoxVpnHelper.getPersonifiedName(0, "com.knox.vpn.proxyhandler"));
     }
 
-    public final synchronized int isUsbTetheringOverVpnEnabled(KnoxVpnContext knoxVpnContext, String str) {
+    public final synchronized int isUsbTetheringOverVpnEnabled(
+            KnoxVpnContext knoxVpnContext, String str) {
         int i;
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission(knoxVpnContext).mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission(knoxVpnContext).mCallerUid)) {
             return 140;
         }
-        int isUsbTetheringOverVpnEnabledValidation = this.mKnoxVpnApiValidation.isUsbTetheringOverVpnEnabledValidation(knoxVpnContext, str);
+        int isUsbTetheringOverVpnEnabledValidation =
+                this.mKnoxVpnApiValidation.isUsbTetheringOverVpnEnabledValidation(
+                        knoxVpnContext, str);
         if (isUsbTetheringOverVpnEnabledValidation != 100) {
             return isUsbTetheringOverVpnEnabledValidation;
         }
@@ -4948,8 +6891,7 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     public final void onAdminAdded(int i) {
@@ -4965,7 +6907,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     public final void onPreAdminRemoval(int i) {
         Log.d("KnoxVpnEngineService", "[onPreAdminRemoval]");
         if (DBG) {
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "Admin has VPN Permission : Pre admin remove ", "KnoxVpnEngineService");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    i, "Admin has VPN Permission : Pre admin remove ", "KnoxVpnEngineService");
         }
         try {
             Bundle bundle = new Bundle();
@@ -4977,16 +6920,27 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
 
     public final void printProfileVpnMap() {
         if (DBG) {
-            Log.v("KnoxVpnEngineService", "********************Printing profile map ********************");
+            Log.v(
+                    "KnoxVpnEngineService",
+                    "********************Printing profile map ********************");
             try {
-                Log.v("KnoxVpnEngineService", "No of profiles: " + this.vpnConfig.vpnProfileInfoMap.size());
+                Log.v(
+                        "KnoxVpnEngineService",
+                        "No of profiles: " + this.vpnConfig.vpnProfileInfoMap.size());
                 for (VpnProfileInfo vpnProfileInfo : this.vpnConfig.vpnProfileInfoMap.values()) {
                     if (vpnProfileInfo != null) {
                         String str = vpnProfileInfo.mProfileName;
                         String str2 = vpnProfileInfo.mInterfaceName;
                         int vPNTransitionState = getVPNTransitionState(str);
                         Log.v("KnoxVpnEngineService", "{ProfileName = " + str + ": [");
-                        Log.v("KnoxVpnEngineService", "iface:" + str2 + " ; personaId: " + vpnProfileInfo.personaId + " ; adminId: " + vpnProfileInfo.admin_id);
+                        Log.v(
+                                "KnoxVpnEngineService",
+                                "iface:"
+                                        + str2
+                                        + " ; personaId: "
+                                        + vpnProfileInfo.personaId
+                                        + " ; adminId: "
+                                        + vpnProfileInfo.admin_id);
                         StringBuilder sb = new StringBuilder();
                         sb.append("state: ");
                         sb.append(vPNTransitionState);
@@ -4996,7 +6950,15 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         sb2.append(vpnProfileInfo.activateState == 0 ? "false " : "true ");
                         Log.v("KnoxVpnEngineService", sb2.toString());
                         for (VpnPackageInfo vpnPackageInfo : vpnProfileInfo.mPackageMap.values()) {
-                            Log.v("KnoxVpnEngineService", "{ uid:" + vpnPackageInfo.getUid() + ", packageName:" + vpnPackageInfo.getPackageName() + ", profileName:" + str + "}},");
+                            Log.v(
+                                    "KnoxVpnEngineService",
+                                    "{ uid:"
+                                            + vpnPackageInfo.getUid()
+                                            + ", packageName:"
+                                            + vpnPackageInfo.getPackageName()
+                                            + ", profileName:"
+                                            + str
+                                            + "}},");
                         }
                     } else {
                         Log.v("KnoxVpnEngineService", "VpnProfileInfo contains NULL object.");
@@ -5007,7 +6969,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             } catch (Exception e) {
                 Log.v("KnoxVpnEngineService", "Exception: " + Log.getStackTraceString(e));
             }
-            Log.v("KnoxVpnEngineService", "-----------------Printing profile map --------------------------");
+            Log.v(
+                    "KnoxVpnEngineService",
+                    "-----------------Printing profile map --------------------------");
         }
     }
 
@@ -5016,9 +6980,22 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         this.mVpnStorageProvider.getClass();
         if (KnoxVpnStorageProvider.mEDM != null) {
             arrayList = new ArrayList();
-            Cursor query = KnoxVpnStorageProvider.mEDM.mEdmDbHelper.getReadableDatabase().query("VpnPackageInfo", new String[]{"packageCid", "packageUid"}, "profileName=?", new String[]{str}, null, null, null);
+            Cursor query =
+                    KnoxVpnStorageProvider.mEDM
+                            .mEdmDbHelper
+                            .getReadableDatabase()
+                            .query(
+                                    "VpnPackageInfo",
+                                    new String[] {"packageCid", "packageUid"},
+                                    "profileName=?",
+                                    new String[] {str},
+                                    null,
+                                    null,
+                                    null);
             if (query != null) {
-                Log.d("KnoxVpnStorageProvider", "getDomainsByProfileName : cursor.size : " + query.getCount());
+                Log.d(
+                        "KnoxVpnStorageProvider",
+                        "getDomainsByProfileName : cursor.size : " + query.getCount());
                 try {
                     query.moveToFirst();
                     if (query.getCount() > 0) {
@@ -5026,7 +7003,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                             int i = query.getInt(0);
                             Log.d("KnoxVpnStorageProvider", "getDomainsByProfileName : cid : " + i);
                             int i2 = query.getInt(1);
-                            Log.d("KnoxVpnStorageProvider", "getDomainsByProfileName : uid : " + i2);
+                            Log.d(
+                                    "KnoxVpnStorageProvider",
+                                    "getDomainsByProfileName : uid : " + i2);
                             if (i2 != -1 && i >= 0) {
                                 arrayList.add(String.valueOf(i));
                             }
@@ -5044,9 +7023,13 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             this.mNotificationMap.put(str, arrayList);
         }
         if (DBG) {
-            Log.v("KnoxVpnEngineService", "#################### Printing domain map ####################");
+            Log.v(
+                    "KnoxVpnEngineService",
+                    "#################### Printing domain map ####################");
             try {
-                Log.v("KnoxVpnEngineService", "Domain Count : " + this.mNotificationMap.size() + " [ ");
+                Log.v(
+                        "KnoxVpnEngineService",
+                        "Domain Count : " + this.mNotificationMap.size() + " [ ");
                 for (String str2 : this.mNotificationMap.keySet()) {
                     ArrayList arrayList2 = (ArrayList) this.mNotificationMap.get(str2);
                     String str3 = "";
@@ -5068,7 +7051,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             } catch (Exception e) {
                 Log.v("KnoxVpnEngineService", "Exception: " + Log.getStackTraceString(e));
             }
-            Log.v("KnoxVpnEngineService", "#################### Printing domain map ####################");
+            Log.v(
+                    "KnoxVpnEngineService",
+                    "#################### Printing domain map ####################");
         }
     }
 
@@ -5076,18 +7061,27 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         try {
             String[] strArr = {String.valueOf(i)};
             this.mVpnStorageProvider.getClass();
-            ArrayList dataByFields = KnoxVpnStorageProvider.mEDM.getDataByFields("VpnNotificationFlagTable", new String[]{"notificationUserId"}, strArr, null);
+            ArrayList dataByFields =
+                    KnoxVpnStorageProvider.mEDM.getDataByFields(
+                            "VpnNotificationFlagTable",
+                            new String[] {"notificationUserId"},
+                            strArr,
+                            null);
             int i2 = 1;
             if (dataByFields.size() > 0) {
                 Iterator it = dataByFields.iterator();
                 int i3 = 1;
-                while (it.hasNext() && (i3 = ((ContentValues) it.next()).getAsInteger("dismissFlag").intValue()) != 1) {
-                }
+                while (it.hasNext()
+                        && (i3 = ((ContentValues) it.next()).getAsInteger("dismissFlag").intValue())
+                                != 1) {}
                 i2 = i3;
             }
             this.notificationFlagState.put(Integer.valueOf(i), Integer.valueOf(i2));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception when updating Notification Map:"), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception when updating Notification Map:"),
+                    "KnoxVpnEngineService");
         }
     }
 
@@ -5097,76 +7091,114 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             this.mKnoxVpnHelper.getClass();
             String personifiedName = KnoxVpnHelper.getPersonifiedName(i, "ADD_ALL_PACKAGES");
             if (DBG) {
-                Log.d("KnoxVpnEngineService", "removeAddAllPackageInfofromDatabase: removePackage value is " + personifiedName);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "removeAddAllPackageInfofromDatabase: removePackage value is "
+                                + personifiedName);
             }
             this.mVpnStorageProvider.getClass();
-            if (KnoxVpnStorageProvider.mEDM.deleteDataByFields("VpnPackageInfo", new String[]{"packageName", "profileName"}, new String[]{personifiedName, str})) {
+            if (KnoxVpnStorageProvider.mEDM.deleteDataByFields(
+                    "VpnPackageInfo",
+                    new String[] {"packageName", "profileName"},
+                    new String[] {personifiedName, str})) {
                 i2 = 0;
             }
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at removeAddAllPackageInfofromDatabase API "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception at removeAddAllPackageInfofromDatabase API "),
+                    "KnoxVpnEngineService");
         }
         if (DBG) {
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i2, "removeAddAllPackageInfofromDatabase: status value is ", "KnoxVpnEngineService");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    i2,
+                    "removeAddAllPackageInfofromDatabase: status value is ",
+                    "KnoxVpnEngineService");
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:60:0x00ce, code lost:
-    
-        if (r8.personaId != r14) goto L33;
-     */
+
+       if (r8.personaId != r14) goto L33;
+    */
     /* JADX WARN: Removed duplicated region for block: B:10:0x00ea  */
     /* JADX WARN: Removed duplicated region for block: B:14:0x010b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData removeAllContainerPackagesFromVpn(com.samsung.android.knox.net.vpn.KnoxVpnContext r13, int r14, java.lang.String r15) {
+    public final com.samsung.android.knox.net.vpn.EnterpriseResponseData
+            removeAllContainerPackagesFromVpn(
+                    com.samsung.android.knox.net.vpn.KnoxVpnContext r13,
+                    int r14,
+                    java.lang.String r15) {
         /*
             Method dump skipped, instructions count: 331
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.removeAllContainerPackagesFromVpn(com.samsung.android.knox.net.vpn.KnoxVpnContext, int, java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.removeAllContainerPackagesFromVpn(com.samsung.android.knox.net.vpn.KnoxVpnContext,"
+                    + " int,"
+                    + " java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
     }
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:100:0x02c4
-        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
-        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
-        */
-    public final synchronized com.samsung.android.knox.net.vpn.EnterpriseResponseData removeAllPackages(com.samsung.android.knox.net.vpn.KnoxVpnContext r19, java.lang.String r20) {
+    jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:100:0x02c4
+    	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
+    	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
+    */
+    public final synchronized com.samsung.android.knox.net.vpn.EnterpriseResponseData
+            removeAllPackages(
+                    com.samsung.android.knox.net.vpn.KnoxVpnContext r19, java.lang.String r20) {
         /*
             Method dump skipped, instructions count: 867
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.removeAllPackages(com.samsung.android.knox.net.vpn.KnoxVpnContext, java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.removeAllPackages(com.samsung.android.knox.net.vpn.KnoxVpnContext,"
+                    + " java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
     }
 
-    public final synchronized EnterpriseResponseData removeAllPackagesFromVpn(KnoxVpnContext knoxVpnContext, String str) {
+    public final synchronized EnterpriseResponseData removeAllPackagesFromVpn(
+            KnoxVpnContext knoxVpnContext, String str) {
         try {
             ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
             if (DBG) {
-                Log.d("KnoxVpnEngineService", "removeAllPackagesFromVpn: vpnContext.personaId value is " + knoxVpnContext.personaId + "profileName value is " + str);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "removeAllPackagesFromVpn: vpnContext.personaId value is "
+                                + knoxVpnContext.personaId
+                                + "profileName value is "
+                                + str);
             }
             EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
             enterpriseResponseData.setData(-1);
             enterpriseResponseData.setStatus(1, -1);
-            if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+            if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                    knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
                 enterpriseResponseData.setData(140);
                 return enterpriseResponseData;
             }
-            int removeAllPackagesFromVpnValidation = this.mKnoxVpnApiValidation.removeAllPackagesFromVpnValidation(knoxVpnContext, str);
+            int removeAllPackagesFromVpnValidation =
+                    this.mKnoxVpnApiValidation.removeAllPackagesFromVpnValidation(
+                            knoxVpnContext, str);
             if (removeAllPackagesFromVpnValidation != 100) {
                 enterpriseResponseData.setData(Integer.valueOf(removeAllPackagesFromVpnValidation));
-                Log.d("KnoxVpnEngineService", "removing all the packages from vpn failed: The error code is " + removeAllPackagesFromVpnValidation);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "removing all the packages from vpn failed: The error code is "
+                                + removeAllPackagesFromVpnValidation);
                 return enterpriseResponseData;
             }
             EnterpriseResponseData removeAllPackages = removeAllPackages(knoxVpnContext, str);
             try {
                 if (((Integer) removeAllPackages.getData()).intValue() == 0) {
-                    KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:removeAllPackagesFromVpn");
+                    KnoxAnalyticsData knoxAnalyticsData =
+                            new KnoxAnalyticsData("KNOX_VPN", 1, "API:removeAllPackagesFromVpn");
                     this.mData = knoxAnalyticsData;
                     setCommonProperties(knoxAnalyticsData, knoxVpnContext, str, -1);
                     int i = knoxVpnContext.personaId;
@@ -5184,17 +7216,24 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
     }
 
-    public final synchronized EnterpriseResponseData removeContainerPackagesFromVpn(KnoxVpnContext knoxVpnContext, int i, String[] strArr, String str) {
+    public final synchronized EnterpriseResponseData removeContainerPackagesFromVpn(
+            KnoxVpnContext knoxVpnContext, int i, String[] strArr, String str) {
         String str2;
         int i2;
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
-        Log.d("KnoxVpnEngineService", "removeContainerPackagesFromVpn : containerId value is " + i + " profileName value is " + str);
+        Log.d(
+                "KnoxVpnEngineService",
+                "removeContainerPackagesFromVpn : containerId value is "
+                        + i
+                        + " profileName value is "
+                        + str);
         this.mKnoxVpnHelper.getClass();
         String personifiedName = KnoxVpnHelper.getPersonifiedName(i, "ADD_ALL_PACKAGES");
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData(-1);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             enterpriseResponseData.setData(140);
             return enterpriseResponseData;
         }
@@ -5202,25 +7241,42 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
             if (profileEntry == null) {
                 enterpriseResponseData.setData(108);
-                Log.d("KnoxVpnEngineService", "Error while removing the container packages from vpn: The error code is 108");
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Error while removing the container packages from vpn: The error code is"
+                            + " 108");
                 return enterpriseResponseData;
             }
             if (profileEntry.activateState == 1 && this.mKnoxVpnHelper.isWideVpnExists(i)) {
-                Log.d("KnoxVpnEngineService", "removeContainerPackagesFromVpn: removing previously added rules before updating");
-                this.mFirewallHelper.removeMiscRulesRange(i, getVirtualInterfaceType(str), profileEntry.mInterfaceName);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "removeContainerPackagesFromVpn: removing previously added rules before"
+                            + " updating");
+                this.mFirewallHelper.removeMiscRulesRange(
+                        i, getVirtualInterfaceType(str), profileEntry.mInterfaceName);
             }
-            int removeContainerPackagesFromVpnValidation = this.mKnoxVpnApiValidation.removeContainerPackagesFromVpnValidation(knoxVpnContext, i, strArr, str);
+            int removeContainerPackagesFromVpnValidation =
+                    this.mKnoxVpnApiValidation.removeContainerPackagesFromVpnValidation(
+                            knoxVpnContext, i, strArr, str);
             if (removeContainerPackagesFromVpnValidation != 100) {
-                enterpriseResponseData.setData(Integer.valueOf(removeContainerPackagesFromVpnValidation));
-                Log.d("KnoxVpnEngineService", "Error occured while removing the container packages from vpn: The error code is " + removeContainerPackagesFromVpnValidation);
+                enterpriseResponseData.setData(
+                        Integer.valueOf(removeContainerPackagesFromVpnValidation));
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Error occured while removing the container packages from vpn: The error"
+                            + " code is "
+                                + removeContainerPackagesFromVpnValidation);
                 if (removeContainerPackagesFromVpnValidation == 113) {
                     enterpriseResponseData.setStatus(1, 11);
                 }
                 return enterpriseResponseData;
             }
             if (profileEntry.activateState == 1 && this.mKnoxVpnHelper.isWideVpnExists(i)) {
-                Log.d("KnoxVpnEngineService", "removeContainerPackagesFromVpn: adding rules for newly added rules");
-                this.mFirewallHelper.addMiscRulesRange(i, getVirtualInterfaceType(str), profileEntry.mInterfaceName);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "removeContainerPackagesFromVpn: adding rules for newly added rules");
+                this.mFirewallHelper.addMiscRulesRange(
+                        i, getVirtualInterfaceType(str), profileEntry.mInterfaceName);
             }
             ArrayList arrayList = new ArrayList();
             ArrayList arrayList2 = new ArrayList();
@@ -5238,7 +7294,7 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     } else {
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            strArr2 = getSharedUidPackges(i, new String[]{str3});
+                            strArr2 = getSharedUidPackges(i, new String[] {str3});
                         } catch (Exception unused) {
                         } catch (Throwable th) {
                             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -5283,7 +7339,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                                     removePackagesFromPermissionCheckDb(uid);
                                     unsetDnsSystemProperty(uid, uid, str);
                                     getKnoxVpnHelperInstance().getClass();
-                                    updateProxyRules(2, str, KnoxVpnHelper.updateProxyList(uid, false));
+                                    updateProxyRules(
+                                            2, str, KnoxVpnHelper.updateProxyList(uid, false));
                                     profileEntry.removePackageEntry(str5);
                                 }
                             }
@@ -5315,39 +7372,84 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 personifiedName = str2;
             }
             this.mKnoxVpnHelper.updateUidsToVpnUidRange(str);
-            this.mFirewallHelper.removeMiscRules(getVirtualInterfaceType(str), profileEntry.mInterfaceName, arrayList);
-            this.mFirewallHelper.removeRulesForFilteredPackages(profileEntry.mVendorPkgName, profileEntry.mIpChainName, arrayList2);
+            this.mFirewallHelper.removeMiscRules(
+                    getVirtualInterfaceType(str), profileEntry.mInterfaceName, arrayList);
+            this.mFirewallHelper.removeRulesForFilteredPackages(
+                    profileEntry.mVendorPkgName, profileEntry.mIpChainName, arrayList2);
             refreshDomainInHashMap(str);
             updateNotification(i, str, false);
             int size = profileEntry.mPackageMap.size();
-            boolean z = profileEntry.vpnConnectionType == 1 && !this.mProcessManager.processRunCheck(profileEntry);
+            boolean z =
+                    profileEntry.vpnConnectionType == 1
+                            && !this.mProcessManager.processRunCheck(profileEntry);
             if ((size <= 0 || z) && profileEntry.activateState == 1) {
                 try {
                     IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
                     if (binderInterfaceForProfile != null) {
                         int stopConnection = binderInterfaceForProfile.stopConnection(str);
                         if (stopConnection != 0) {
-                            AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error occurred trying to stop vpn connection from profile " + str, knoxVpnContext.personaId);
+                            AuditLog.logAsUser(
+                                    3,
+                                    5,
+                                    false,
+                                    Process.myPid(),
+                                    "KnoxVpnEngineService",
+                                    "Error occurred trying to stop vpn connection from profile "
+                                            + str,
+                                    knoxVpnContext.personaId);
                         } else {
-                            AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", "Connection with vpn vendor service stopped for profile " + str, knoxVpnContext.personaId);
+                            AuditLog.logAsUser(
+                                    5,
+                                    5,
+                                    true,
+                                    Process.myPid(),
+                                    "KnoxVpnEngineService",
+                                    "Connection with vpn vendor service stopped for profile " + str,
+                                    knoxVpnContext.personaId);
                         }
-                        Log.d("KnoxVpnEngineService", "stopping the vpn connection status for on-demand configuration after removing all the container packages " + stopConnection);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "stopping the vpn connection status for on-demand configuration"
+                                    + " after removing all the container packages "
+                                        + stopConnection);
                     }
                 } catch (Exception e) {
-                    AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception stopping connection for profile " + str + " after removing all container packages", knoxVpnContext.personaId);
+                    AuditLog.logAsUser(
+                            3,
+                            5,
+                            false,
+                            Process.myPid(),
+                            "KnoxVpnEngineService",
+                            "Exception stopping connection for profile "
+                                    + str
+                                    + " after removing all container packages",
+                            knoxVpnContext.personaId);
                     StringBuilder sb = new StringBuilder();
-                    sb.append("stopping the vpn connection failed for on-demand configuration after removing all the container packages ");
+                    sb.append(
+                            "stopping the vpn connection failed for on-demand configuration after"
+                                + " removing all the container packages ");
                     sb.append(Log.getStackTraceString(e));
                     Log.d("KnoxVpnEngineService", sb.toString());
                 }
             }
-            Log.d("KnoxVpnEngineService", "removing all container packages from vpn is a success: The error code is 0");
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "removing all container packages from vpn is a success: The error code is 0");
             enterpriseResponseData.setData(0);
             enterpriseResponseData.setStatus(0, 0);
-            AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", "Success while removing all the packages from vpn for profile " + str, knoxVpnContext.personaId);
+            AuditLog.logAsUser(
+                    5,
+                    5,
+                    true,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Success while removing all the packages from vpn for profile " + str,
+                    knoxVpnContext.personaId);
             try {
                 if (((Integer) enterpriseResponseData.getData()).intValue() == 0) {
-                    KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:removeContainerPackagesFromVpn");
+                    KnoxAnalyticsData knoxAnalyticsData =
+                            new KnoxAnalyticsData(
+                                    "KNOX_VPN", 1, "API:removeContainerPackagesFromVpn");
                     this.mData = knoxAnalyticsData;
                     setCommonProperties(knoxAnalyticsData, knoxVpnContext, str, -1);
                     Arrays.sort(strArr);
@@ -5364,15 +7466,28 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             }
             return enterpriseResponseData;
         } catch (Exception e3) {
-            Log.d("KnoxVpnEngineService", "Error occured while removing all container packages from vpn: exception occured: The error code is -1" + Log.getStackTraceString(e3));
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Error occured while removing all container packages from vpn: exception"
+                        + " occured: The error code is -1"
+                            + Log.getStackTraceString(e3));
             enterpriseResponseData.setData(-1);
-            AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception while removing all container packages from vpn for profile " + str, knoxVpnContext.personaId);
+            AuditLog.logAsUser(
+                    3,
+                    5,
+                    false,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Exception while removing all container packages from vpn for profile " + str,
+                    knoxVpnContext.personaId);
             return enterpriseResponseData;
         }
     }
 
     public final void removeExemptRulesForUid(int i, String str) {
-        Log.d("KnoxVpnEngineService", "removeExemptRulesForUid : vendor = " + i + " for profile " + str);
+        Log.d(
+                "KnoxVpnEngineService",
+                "removeExemptRulesForUid : vendor = " + i + " for profile " + str);
         if (getChainingEnabledForProfile(i) != 1) {
             Log.d("KnoxVpnEngineService", "removeExemptRulesForUid : vendorUid = " + i);
             if (UserHandle.getAppId(i) != 1000) {
@@ -5382,9 +7497,30 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             KnoxVpnFirewallHelper knoxVpnFirewallHelper = this.mFirewallHelper;
             knoxVpnFirewallHelper.getClass();
             KnoxVpnFirewallHelper.applyBlockingRulesForDns(1016, 1016, 4);
-            KnoxVpnFirewallHelper.IpRestoreActionType ipRestoreActionType = KnoxVpnFirewallHelper.IpRestoreActionType.DELETE;
-            knoxVpnFirewallHelper.insertRule(false, "*mangle", null, new KnoxVpnFirewallHelper.IpRestoreParam("knox_vpn_EXEMPT", " -m owner --gid-owner 1016", "ACCEPT", "", ipRestoreActionType), 46);
-            knoxVpnFirewallHelper.insertRule(false, "*mangle", null, new KnoxVpnFirewallHelper.IpRestoreParam("knox_vpn_EXEMPT", " -m owner --uid-owner 1016", "ACCEPT", "", ipRestoreActionType), 46);
+            KnoxVpnFirewallHelper.IpRestoreActionType ipRestoreActionType =
+                    KnoxVpnFirewallHelper.IpRestoreActionType.DELETE;
+            knoxVpnFirewallHelper.insertRule(
+                    false,
+                    "*mangle",
+                    null,
+                    new KnoxVpnFirewallHelper.IpRestoreParam(
+                            "knox_vpn_EXEMPT",
+                            " -m owner --gid-owner 1016",
+                            "ACCEPT",
+                            "",
+                            ipRestoreActionType),
+                    46);
+            knoxVpnFirewallHelper.insertRule(
+                    false,
+                    "*mangle",
+                    null,
+                    new KnoxVpnFirewallHelper.IpRestoreParam(
+                            "knox_vpn_EXEMPT",
+                            " -m owner --uid-owner 1016",
+                            "ACCEPT",
+                            "",
+                            ipRestoreActionType),
+                    46);
         }
     }
 
@@ -5407,15 +7543,44 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                             Integer num = (Integer) it.next();
                             int intValue = num.intValue();
                             if (intValue == i2) {
-                                boolean updateExemptedListToDatabase = this.mKnoxVpnHelper.updateExemptedListToDatabase(-1, str2);
-                                Log.d(str5, "removeExemptedUidDetailsAfterUninstall: removing from exempeted list " + updateExemptedListToDatabase);
+                                boolean updateExemptedListToDatabase =
+                                        this.mKnoxVpnHelper.updateExemptedListToDatabase(-1, str2);
+                                Log.d(
+                                        str5,
+                                        "removeExemptedUidDetailsAfterUninstall: removing from"
+                                            + " exempeted list "
+                                                + updateExemptedListToDatabase);
                                 if (updateExemptedListToDatabase) {
                                     str4 = str5;
                                     updateRulesToExemptUid(0, str, null, null, 1, intValue, 0);
-                                    updateRulesToExemptUid(0, str, profileEntry.mInterfaceName, profileEntry.mDefaultInterface, 2, intValue, profileEntry.mInterface_type);
-                                    updateRulesToExemptUid(0, str, profileEntry.mInterfaceName, profileEntry.mDefaultInterface, 3, intValue, profileEntry.mInterface_type);
+                                    updateRulesToExemptUid(
+                                            0,
+                                            str,
+                                            profileEntry.mInterfaceName,
+                                            profileEntry.mDefaultInterface,
+                                            2,
+                                            intValue,
+                                            profileEntry.mInterface_type);
+                                    updateRulesToExemptUid(
+                                            0,
+                                            str,
+                                            profileEntry.mInterfaceName,
+                                            profileEntry.mDefaultInterface,
+                                            3,
+                                            intValue,
+                                            profileEntry.mInterface_type);
                                     it.remove();
-                                    AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", String.format("Success removing uid = %d from exempted list after uninstallation for profile %s", num, str), userId);
+                                    AuditLog.logAsUser(
+                                            5,
+                                            5,
+                                            true,
+                                            Process.myPid(),
+                                            "KnoxVpnEngineService",
+                                            String.format(
+                                                    "Success removing uid = %d from exempted list"
+                                                        + " after uninstallation for profile %s",
+                                                    num, str),
+                                            userId);
                                     str5 = str4;
                                 }
                             }
@@ -5427,8 +7592,19 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         e = e;
                         String str6 = str5;
                         str3 = str6;
-                        Log.e(str3, "removePackagesAfterUninstall exception " + Log.getStackTraceString(e));
-                        AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception while removing packages exempted from vpn after uninstallation for profile ".concat(str), userId);
+                        Log.e(
+                                str3,
+                                "removePackagesAfterUninstall exception "
+                                        + Log.getStackTraceString(e));
+                        AuditLog.logAsUser(
+                                3,
+                                5,
+                                false,
+                                Process.myPid(),
+                                "KnoxVpnEngineService",
+                                "Exception while removing packages exempted from vpn after uninstallation for profile "
+                                        .concat(str),
+                                userId);
                         return;
                     }
                 } else {
@@ -5438,22 +7614,63 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         Integer num2 = (Integer) it2.next();
                         int intValue2 = num2.intValue();
                         if (intValue2 == i2) {
-                            boolean removeExemptedListToDatabase = this.mKnoxVpnHelper.removeExemptedListToDatabase(i2);
+                            boolean removeExemptedListToDatabase =
+                                    this.mKnoxVpnHelper.removeExemptedListToDatabase(i2);
                             String str8 = str7;
                             try {
-                                Log.d(str8, "removeExemptedUidDetailsAfterUninstall: removing from exempeted list " + removeExemptedListToDatabase);
+                                Log.d(
+                                        str8,
+                                        "removeExemptedUidDetailsAfterUninstall: removing from"
+                                            + " exempeted list "
+                                                + removeExemptedListToDatabase);
                                 if (removeExemptedListToDatabase) {
                                     str3 = str8;
                                     try {
                                         updateRulesToExemptUid(0, str, null, null, 1, intValue2, 0);
-                                        updateRulesToExemptUid(0, str, profileEntry.mInterfaceName, profileEntry.mDefaultInterface, 2, intValue2, profileEntry.mInterface_type);
-                                        updateRulesToExemptUid(0, str, profileEntry.mInterfaceName, profileEntry.mDefaultInterface, 3, intValue2, profileEntry.mInterface_type);
+                                        updateRulesToExemptUid(
+                                                0,
+                                                str,
+                                                profileEntry.mInterfaceName,
+                                                profileEntry.mDefaultInterface,
+                                                2,
+                                                intValue2,
+                                                profileEntry.mInterface_type);
+                                        updateRulesToExemptUid(
+                                                0,
+                                                str,
+                                                profileEntry.mInterfaceName,
+                                                profileEntry.mDefaultInterface,
+                                                3,
+                                                intValue2,
+                                                profileEntry.mInterface_type);
                                         it2.remove();
-                                        AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", String.format("Success removing uid = %d from exempted list after uninstallation for profile %s", num2, str), userId);
+                                        AuditLog.logAsUser(
+                                                5,
+                                                5,
+                                                true,
+                                                Process.myPid(),
+                                                "KnoxVpnEngineService",
+                                                String.format(
+                                                        "Success removing uid = %d from exempted"
+                                                            + " list after uninstallation for"
+                                                            + " profile %s",
+                                                        num2, str),
+                                                userId);
                                     } catch (Exception e2) {
                                         e = e2;
-                                        Log.e(str3, "removePackagesAfterUninstall exception " + Log.getStackTraceString(e));
-                                        AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception while removing packages exempted from vpn after uninstallation for profile ".concat(str), userId);
+                                        Log.e(
+                                                str3,
+                                                "removePackagesAfterUninstall exception "
+                                                        + Log.getStackTraceString(e));
+                                        AuditLog.logAsUser(
+                                                3,
+                                                5,
+                                                false,
+                                                Process.myPid(),
+                                                "KnoxVpnEngineService",
+                                                "Exception while removing packages exempted from vpn after uninstallation for profile "
+                                                        .concat(str),
+                                                userId);
                                         return;
                                     }
                                 } else {
@@ -5462,8 +7679,19 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                             } catch (Exception e3) {
                                 e = e3;
                                 str3 = str8;
-                                Log.e(str3, "removePackagesAfterUninstall exception " + Log.getStackTraceString(e));
-                                AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception while removing packages exempted from vpn after uninstallation for profile ".concat(str), userId);
+                                Log.e(
+                                        str3,
+                                        "removePackagesAfterUninstall exception "
+                                                + Log.getStackTraceString(e));
+                                AuditLog.logAsUser(
+                                        3,
+                                        5,
+                                        false,
+                                        Process.myPid(),
+                                        "KnoxVpnEngineService",
+                                        "Exception while removing packages exempted from vpn after uninstallation for profile "
+                                                .concat(str),
+                                        userId);
                                 return;
                             }
                         } else {
@@ -5474,11 +7702,14 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     }
                     str3 = str7;
                 }
-                if (this.mKnoxVpnHelper.getuserIdForExemptedUids().contains(Integer.valueOf(userId))) {
+                if (this.mKnoxVpnHelper
+                        .getuserIdForExemptedUids()
+                        .contains(Integer.valueOf(userId))) {
                     return;
                 }
                 this.mKnoxVpnHelper.getClass();
-                this.mFirewallHelper.removeExemptRulesForDownloadManagerUid(KnoxVpnHelper.getUIDForPackage(userId, "com.android.providers.downloads"));
+                this.mFirewallHelper.removeExemptRulesForDownloadManagerUid(
+                        KnoxVpnHelper.getUIDForPackage(userId, "com.android.providers.downloads"));
             } catch (Exception e4) {
                 e = e4;
             }
@@ -5502,11 +7733,14 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             Method dump skipped, instructions count: 700
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.removeFromHashMapByProfileName(java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.removeFromHashMapByProfileName(java.lang.String):void");
     }
 
     public final void removeMiscRulesForProfile(String str) {
-        DualAppManagerService$$ExternalSyntheticOutline0.m("removeMiscRulesForProfile : profileName =  ", str, "KnoxVpnEngineService");
+        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                "removeMiscRulesForProfile : profileName =  ", str, "KnoxVpnEngineService");
         VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
         ArrayList arrayList = new ArrayList();
         if (profileEntry != null) {
@@ -5517,7 +7751,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     KnoxVpnHelper knoxVpnHelper = this.mKnoxVpnHelper;
                     String packageName = vpnPackageInfo.getPackageName();
                     knoxVpnHelper.getClass();
-                    this.mFirewallHelper.removeMiscRulesRange(KnoxVpnHelper.getContainerIdFromPackageName(packageName), getVirtualInterfaceType(str), str2);
+                    this.mFirewallHelper.removeMiscRulesRange(
+                            KnoxVpnHelper.getContainerIdFromPackageName(packageName),
+                            getVirtualInterfaceType(str),
+                            str2);
                 } else {
                     arrayList.add(Integer.valueOf(vpnPackageInfo.getUid()));
                 }
@@ -5525,7 +7762,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             if (arrayList.isEmpty()) {
                 return;
             }
-            this.mFirewallHelper.removeMiscRules(getVirtualInterfaceType(str), profileEntry.mInterfaceName, arrayList);
+            this.mFirewallHelper.removeMiscRules(
+                    getVirtualInterfaceType(str), profileEntry.mInterfaceName, arrayList);
         }
     }
 
@@ -5561,19 +7799,34 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 arrayList.add(Integer.valueOf(i));
                 if (profileEntry.activateState == 0) {
                     profileEntry.removePackageEntry(personifiedName);
-                    AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", personifiedName + " removed from vpn for profile " + str, userId);
+                    AuditLog.logAsUser(
+                            5,
+                            5,
+                            true,
+                            Process.myPid(),
+                            "KnoxVpnEngineService",
+                            personifiedName + " removed from vpn for profile " + str,
+                            userId);
                     return;
                 }
                 ArrayList arrayList2 = new ArrayList();
                 arrayList2.add(Integer.valueOf(i));
-                this.mFirewallHelper.removeMiscRules(getVirtualInterfaceType(str), profileEntry.mInterfaceName, arrayList2);
+                this.mFirewallHelper.removeMiscRules(
+                        getVirtualInterfaceType(str), profileEntry.mInterfaceName, arrayList2);
                 unsetDnsSystemProperty(i, i, str);
                 getKnoxVpnHelperInstance().getClass();
                 updateProxyRules(2, str, KnoxVpnHelper.updateProxyList(i, false));
                 profileEntry.removePackageEntry(personifiedName);
                 this.mKnoxVpnHelper.updateUidsToVpnUidRange(str);
                 z = false;
-                AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", personifiedName + " removed from vpn for profile " + str, userId);
+                AuditLog.logAsUser(
+                        5,
+                        5,
+                        true,
+                        Process.myPid(),
+                        "KnoxVpnEngineService",
+                        personifiedName + " removed from vpn for profile " + str,
+                        userId);
             } else {
                 int length = packagesForUid.length;
                 int i5 = 0;
@@ -5581,14 +7834,22 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     String str6 = packagesForUid[i5];
                     this.mKnoxVpnHelper.getClass();
                     String personifiedName2 = KnoxVpnHelper.getPersonifiedName(userId, str6);
-                    if (profileEntry.getPackage(personifiedName2) != null && removePackagesFromDatabase(str, personifiedName2)) {
+                    if (profileEntry.getPackage(personifiedName2) != null
+                            && removePackagesFromDatabase(str, personifiedName2)) {
                         arrayList.add(Integer.valueOf(i));
                         if (profileEntry.activateState == 0) {
                             profileEntry.removePackageEntry(personifiedName2);
                             i2 = i5;
                             i3 = length;
                             strArr = packagesForUid;
-                            AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", personifiedName2 + str5 + str, userId);
+                            AuditLog.logAsUser(
+                                    5,
+                                    5,
+                                    true,
+                                    Process.myPid(),
+                                    "KnoxVpnEngineService",
+                                    personifiedName2 + str5 + str,
+                                    userId);
                             str3 = str5;
                             z2 = false;
                         } else {
@@ -5598,7 +7859,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                             strArr = packagesForUid;
                             ArrayList arrayList3 = new ArrayList();
                             arrayList3.add(Integer.valueOf(i));
-                            this.mFirewallHelper.removeMiscRules(getVirtualInterfaceType(str), profileEntry.mInterfaceName, arrayList3);
+                            this.mFirewallHelper.removeMiscRules(
+                                    getVirtualInterfaceType(str),
+                                    profileEntry.mInterfaceName,
+                                    arrayList3);
                             unsetDnsSystemProperty(i, i, str);
                             getKnoxVpnHelperInstance().getClass();
                             updateProxyRules(i4, str, KnoxVpnHelper.updateProxyList(i, false));
@@ -5606,7 +7870,14 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                             this.mKnoxVpnHelper.updateUidsToVpnUidRange(str);
                             str3 = str7;
                             z2 = false;
-                            AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", personifiedName2 + str7 + str, userId);
+                            AuditLog.logAsUser(
+                                    5,
+                                    5,
+                                    true,
+                                    Process.myPid(),
+                                    "KnoxVpnEngineService",
+                                    personifiedName2 + str7 + str,
+                                    userId);
                         }
                         i5 = i2 + 1;
                         z3 = z2;
@@ -5629,11 +7900,13 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 }
                 z = z3;
             }
-            this.mFirewallHelper.removeRulesForFilteredPackages(profileEntry.mVendorPkgName, str4, arrayList);
+            this.mFirewallHelper.removeRulesForFilteredPackages(
+                    profileEntry.mVendorPkgName, str4, arrayList);
             refreshDomainInHashMap(str);
             updateNotification(userId, str, z);
             int size = profileEntry.mPackageMap.size();
-            if (profileEntry.vpnConnectionType == 1 && !this.mProcessManager.processRunCheck(profileEntry)) {
+            if (profileEntry.vpnConnectionType == 1
+                    && !this.mProcessManager.processRunCheck(profileEntry)) {
                 z = true;
             }
             if ((size <= 0 || z) && profileEntry.activateState == 1) {
@@ -5642,32 +7915,79 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     if (binderInterfaceForProfile != null) {
                         int stopConnection = binderInterfaceForProfile.stopConnection(str);
                         if (stopConnection != 0) {
-                            AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error occurred trying to stop vpn connection from profile " + str, userId);
+                            AuditLog.logAsUser(
+                                    3,
+                                    5,
+                                    false,
+                                    Process.myPid(),
+                                    "KnoxVpnEngineService",
+                                    "Error occurred trying to stop vpn connection from profile "
+                                            + str,
+                                    userId);
                         } else {
-                            AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", "Connection with vpn vendor service stopped for profile " + str, userId);
+                            AuditLog.logAsUser(
+                                    5,
+                                    5,
+                                    true,
+                                    Process.myPid(),
+                                    "KnoxVpnEngineService",
+                                    "Connection with vpn vendor service stopped for profile " + str,
+                                    userId);
                         }
-                        Log.d("KnoxVpnEngineService", "removePackagesAfterUninstall: stopping the vpn connection status for on-demand configuration after removing all the packages " + stopConnection);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "removePackagesAfterUninstall: stopping the vpn connection status"
+                                    + " for on-demand configuration after removing all the packages"
+                                    + " "
+                                        + stopConnection);
                     }
                 } catch (Exception e) {
-                    AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception stopping connection for profile " + str + " after removing package list by uid", userId);
+                    AuditLog.logAsUser(
+                            3,
+                            5,
+                            false,
+                            Process.myPid(),
+                            "KnoxVpnEngineService",
+                            "Exception stopping connection for profile "
+                                    + str
+                                    + " after removing package list by uid",
+                            userId);
                     StringBuilder sb = new StringBuilder();
-                    sb.append("removePackagesAfterUninstall: stopping the vpn connection failed for on-demand configuration after removing all the packages ");
+                    sb.append(
+                            "removePackagesAfterUninstall: stopping the vpn connection failed for"
+                                + " on-demand configuration after removing all the packages ");
                     sb.append(Log.getStackTraceString(e));
                     Log.d("KnoxVpnEngineService", sb.toString());
                 }
             }
         } catch (Exception e2) {
-            Log.e("KnoxVpnEngineService", "removePackagesAfterUninstall exception " + Log.getStackTraceString(e2));
-            AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception while removing packages from vpn after uninstallation for profile ".concat(str), userId);
+            Log.e(
+                    "KnoxVpnEngineService",
+                    "removePackagesAfterUninstall exception " + Log.getStackTraceString(e2));
+            AuditLog.logAsUser(
+                    3,
+                    5,
+                    false,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Exception while removing packages from vpn after uninstallation for profile "
+                            .concat(str),
+                    userId);
         }
     }
 
     public final boolean removePackagesFromDatabase(String str, String str2) {
         try {
             this.mVpnStorageProvider.getClass();
-            return KnoxVpnStorageProvider.mEDM.deleteDataByFields("VpnPackageInfo", new String[]{"packageName", "profileName"}, new String[]{str2, str});
+            return KnoxVpnStorageProvider.mEDM.deleteDataByFields(
+                    "VpnPackageInfo",
+                    new String[] {"packageName", "profileName"},
+                    new String[] {str2, str});
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at removePackagesFromDatabase API "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception at removePackagesFromDatabase API "),
+                    "KnoxVpnEngineService");
             return false;
         }
     }
@@ -5676,27 +7996,36 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         try {
             String num = Integer.toString(i);
             this.mVpnStorageProvider.getClass();
-            KnoxVpnStorageProvider.mEDM.deleteDataByFields("vpnNoInternetPermission", new String[]{"packageUid"}, new String[]{num});
+            KnoxVpnStorageProvider.mEDM.deleteDataByFields(
+                    "vpnNoInternetPermission", new String[] {"packageUid"}, new String[] {num});
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at removePackagestoPermissionCheckDb API "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception at removePackagestoPermissionCheckDb API "),
+                    "KnoxVpnEngineService");
         }
     }
 
-    public final synchronized EnterpriseResponseData removePackagesFromVpn(KnoxVpnContext knoxVpnContext, String[] strArr, String str) {
+    public final synchronized EnterpriseResponseData removePackagesFromVpn(
+            KnoxVpnContext knoxVpnContext, String[] strArr, String str) {
         String str2;
         int i;
         String[] strArr2 = strArr;
         synchronized (this) {
             ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
-            Log.d("KnoxVpnEngineService", "package is going to be removed from vpn for the profile " + str);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "package is going to be removed from vpn for the profile " + str);
             int personaId = knoxVpnContext.getPersonaId();
             this.mKnoxVpnHelper.getClass();
-            String personifiedName = KnoxVpnHelper.getPersonifiedName(personaId, "ADD_ALL_PACKAGES");
+            String personifiedName =
+                    KnoxVpnHelper.getPersonifiedName(personaId, "ADD_ALL_PACKAGES");
             StringBuilder sb = new StringBuilder();
             EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
             enterpriseResponseData.setData(2);
             enterpriseResponseData.setStatus(1, -1);
-            if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+            if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                    knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
                 enterpriseResponseData.setData(140);
                 return enterpriseResponseData;
             }
@@ -5704,22 +8033,39 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
                 if (profileEntry == null) {
                     enterpriseResponseData.setData(108);
-                    Log.d("KnoxVpnEngineService", "Error while removing the packages from vpn: The error code is 108");
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "Error while removing the packages from vpn: The error code is 108");
                     return enterpriseResponseData;
                 }
-                if (profileEntry.activateState == 1 && this.mKnoxVpnHelper.isWideVpnExists(personaId)) {
-                    Log.d("KnoxVpnEngineService", "removePackagesFromVpn: removing previously added rules before updating");
-                    this.mFirewallHelper.removeMiscRulesRange(personaId, getVirtualInterfaceType(str), profileEntry.mInterfaceName);
+                if (profileEntry.activateState == 1
+                        && this.mKnoxVpnHelper.isWideVpnExists(personaId)) {
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "removePackagesFromVpn: removing previously added rules before"
+                                + " updating");
+                    this.mFirewallHelper.removeMiscRulesRange(
+                            personaId, getVirtualInterfaceType(str), profileEntry.mInterfaceName);
                 }
-                int removePackagesFromVpnValidation = this.mKnoxVpnApiValidation.removePackagesFromVpnValidation(knoxVpnContext, strArr2, str);
+                int removePackagesFromVpnValidation =
+                        this.mKnoxVpnApiValidation.removePackagesFromVpnValidation(
+                                knoxVpnContext, strArr2, str);
                 if (removePackagesFromVpnValidation != 100) {
-                    enterpriseResponseData.setData(Integer.valueOf(removePackagesFromVpnValidation));
-                    Log.d("KnoxVpnEngineService", "Error occured while removing packages from vpn: The error code is " + removePackagesFromVpnValidation);
+                    enterpriseResponseData.setData(
+                            Integer.valueOf(removePackagesFromVpnValidation));
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "Error occured while removing packages from vpn: The error code is "
+                                    + removePackagesFromVpnValidation);
                     return enterpriseResponseData;
                 }
-                if (profileEntry.activateState == 1 && this.mKnoxVpnHelper.isWideVpnExists(personaId)) {
-                    Log.d("KnoxVpnEngineService", "removePackagesFromVpn: adding rules for newly added rules");
-                    this.mFirewallHelper.addMiscRulesRange(personaId, getVirtualInterfaceType(str), profileEntry.mInterfaceName);
+                if (profileEntry.activateState == 1
+                        && this.mKnoxVpnHelper.isWideVpnExists(personaId)) {
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "removePackagesFromVpn: adding rules for newly added rules");
+                    this.mFirewallHelper.addMiscRulesRange(
+                            personaId, getVirtualInterfaceType(str), profileEntry.mInterfaceName);
                 }
                 ArrayList arrayList = new ArrayList();
                 ArrayList arrayList2 = new ArrayList();
@@ -5738,7 +8084,7 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         } else {
                             long clearCallingIdentity = Binder.clearCallingIdentity();
                             try {
-                                strArr3 = getSharedUidPackges(personaId, new String[]{str3});
+                                strArr3 = getSharedUidPackges(personaId, new String[] {str3});
                             } catch (Exception unused) {
                             } catch (Throwable th) {
                                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -5764,7 +8110,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                                         String str4 = strArr4[i3];
                                         String[] strArr5 = strArr4;
                                         this.mKnoxVpnHelper.getClass();
-                                        String personifiedName3 = KnoxVpnHelper.getPersonifiedName(personaId, str4);
+                                        String personifiedName3 =
+                                                KnoxVpnHelper.getPersonifiedName(personaId, str4);
                                         if (removePackagesFromDatabase(str, personifiedName3)) {
                                             arrayList4.add(personifiedName3);
                                         }
@@ -5781,7 +8128,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                             while (it.hasNext()) {
                                 String str5 = (String) it.next();
                                 VpnPackageInfo vpnPackageInfo = profileEntry.getPackage(str5);
-                                if (vpnPackageInfo != null && vpnPackageInfo.getCid() == personaId) {
+                                if (vpnPackageInfo != null
+                                        && vpnPackageInfo.getCid() == personaId) {
                                     arrayList2.add(Integer.valueOf(vpnPackageInfo.getUid()));
                                     if (profileEntry.activateState == 0) {
                                         profileEntry.removePackageEntry(str5);
@@ -5793,7 +8141,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                                         removePackagesFromPermissionCheckDb(uid);
                                         unsetDnsSystemProperty(uid, uid, str);
                                         getKnoxVpnHelperInstance().getClass();
-                                        updateProxyRules(2, str, KnoxVpnHelper.updateProxyList(uid, false));
+                                        updateProxyRules(
+                                                2, str, KnoxVpnHelper.updateProxyList(uid, false));
                                         profileEntry.removePackageEntry(str5);
                                         sb.append(str5);
                                         sb.append(", ");
@@ -5818,7 +8167,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                                 removePackagesFromPermissionCheckDb(uid2);
                                 unsetDnsSystemProperty(uid2, uid2, str);
                                 getKnoxVpnHelperInstance().getClass();
-                                updateProxyRules(2, str, KnoxVpnHelper.updateProxyList(uid2, false));
+                                updateProxyRules(
+                                        2, str, KnoxVpnHelper.updateProxyList(uid2, false));
                                 profileEntry.removePackageEntry(personifiedName2);
                                 sb.append(personifiedName2);
                                 sb.append(", ");
@@ -5837,38 +8187,79 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     length = i;
                 }
                 this.mKnoxVpnHelper.updateUidsToVpnUidRange(str);
-                this.mFirewallHelper.removeMiscRules(getVirtualInterfaceType(str), profileEntry.mInterfaceName, arrayList);
-                this.mFirewallHelper.removeRulesForFilteredPackages(profileEntry.mVendorPkgName, profileEntry.mIpChainName, arrayList2);
+                this.mFirewallHelper.removeMiscRules(
+                        getVirtualInterfaceType(str), profileEntry.mInterfaceName, arrayList);
+                this.mFirewallHelper.removeRulesForFilteredPackages(
+                        profileEntry.mVendorPkgName, profileEntry.mIpChainName, arrayList2);
                 refreshDomainInHashMap(str);
                 updateNotification(personaId, str, false);
                 int size = profileEntry.mPackageMap.size();
-                boolean z = profileEntry.vpnConnectionType == 1 && !this.mProcessManager.processRunCheck(profileEntry);
+                boolean z =
+                        profileEntry.vpnConnectionType == 1
+                                && !this.mProcessManager.processRunCheck(profileEntry);
                 if ((size <= 0 || z) && profileEntry.activateState == 1) {
                     try {
-                        IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
+                        IKnoxVpnService binderInterfaceForProfile =
+                                getBinderInterfaceForProfile(str);
                         if (binderInterfaceForProfile != null) {
                             int stopConnection = binderInterfaceForProfile.stopConnection(str);
                             if (stopConnection != 0) {
-                                AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error stopping connection for vpn profile " + str + ". Vendor service might not be running", knoxVpnContext.personaId);
+                                AuditLog.logAsUser(
+                                        3,
+                                        5,
+                                        false,
+                                        Process.myPid(),
+                                        "KnoxVpnEngineService",
+                                        "Error stopping connection for vpn profile "
+                                                + str
+                                                + ". Vendor service might not be running",
+                                        knoxVpnContext.personaId);
                             } else {
-                                AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", "Connection with vpn vendor service stopped for profile " + str + " after removing all the packages", knoxVpnContext.personaId);
+                                AuditLog.logAsUser(
+                                        5,
+                                        5,
+                                        true,
+                                        Process.myPid(),
+                                        "KnoxVpnEngineService",
+                                        "Connection with vpn vendor service stopped for profile "
+                                                + str
+                                                + " after removing all the packages",
+                                        knoxVpnContext.personaId);
                             }
-                            Log.d("KnoxVpnEngineService", "stopping the vpn connection status for on-demand configuration after removing all the packages " + stopConnection);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "stopping the vpn connection status for on-demand configuration"
+                                        + " after removing all the packages "
+                                            + stopConnection);
                         }
                     } catch (Exception e) {
-                        AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception stopping connection for profile " + str + " after removing packages from vpn", knoxVpnContext.personaId);
+                        AuditLog.logAsUser(
+                                3,
+                                5,
+                                false,
+                                Process.myPid(),
+                                "KnoxVpnEngineService",
+                                "Exception stopping connection for profile "
+                                        + str
+                                        + " after removing packages from vpn",
+                                knoxVpnContext.personaId);
                         StringBuilder sb2 = new StringBuilder();
-                        sb2.append("stopping the vpn connection failed for on-demand configuration after removing all the packages ");
+                        sb2.append(
+                                "stopping the vpn connection failed for on-demand configuration"
+                                    + " after removing all the packages ");
                         sb2.append(Log.getStackTraceString(e));
                         Log.d("KnoxVpnEngineService", sb2.toString());
                     }
                 }
-                Log.d("KnoxVpnEngineService", "removing packages from vpn is a success: The error code is 0");
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "removing packages from vpn is a success: The error code is 0");
                 enterpriseResponseData.setData(0);
                 enterpriseResponseData.setStatus(0, 0);
                 try {
                     if (((Integer) enterpriseResponseData.getData()).intValue() == 0) {
-                        KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:removePackagesFromVpn");
+                        KnoxAnalyticsData knoxAnalyticsData =
+                                new KnoxAnalyticsData("KNOX_VPN", 1, "API:removePackagesFromVpn");
                         this.mData = knoxAnalyticsData;
                         setCommonProperties(knoxAnalyticsData, knoxVpnContext, str, -1);
                         Arrays.sort(strArr);
@@ -5883,13 +8274,33 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     Log.e("KnoxVpnEngineService", "Exception = " + Log.getStackTraceString(e2));
                 }
                 if (sb.length() > 0) {
-                    AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", sb.subSequence(0, sb.length() - 2).toString() + " removed from vpn for profile " + str, knoxVpnContext.personaId);
+                    AuditLog.logAsUser(
+                            5,
+                            5,
+                            true,
+                            Process.myPid(),
+                            "KnoxVpnEngineService",
+                            sb.subSequence(0, sb.length() - 2).toString()
+                                    + " removed from vpn for profile "
+                                    + str,
+                            knoxVpnContext.personaId);
                 }
                 return enterpriseResponseData;
             } catch (Exception e3) {
-                Log.d("KnoxVpnEngineService", "Error occured while removing packages from vpn: exception occured: The error code is -1" + Log.getStackTraceString(e3));
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Error occured while removing packages from vpn: exception occured: The"
+                            + " error code is -1"
+                                + Log.getStackTraceString(e3));
                 enterpriseResponseData.setData(-1);
-                AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception while removing packages from vpn for profile " + str, knoxVpnContext.personaId);
+                AuditLog.logAsUser(
+                        3,
+                        5,
+                        false,
+                        Process.myPid(),
+                        "KnoxVpnEngineService",
+                        "Exception while removing packages from vpn for profile " + str,
+                        knoxVpnContext.personaId);
                 return enterpriseResponseData;
             }
         }
@@ -5901,11 +8312,19 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             try {
                 VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
                 if (profileEntry != null) {
-                    getNotificationManager().cancelAsUser(null, str.hashCode(), new UserHandle(UserHandle.getUserId(profileEntry.mVendorUid)));
+                    getNotificationManager()
+                            .cancelAsUser(
+                                    null,
+                                    str.hashCode(),
+                                    new UserHandle(UserHandle.getUserId(profileEntry.mVendorUid)));
                 }
             } catch (Exception e) {
                 if (DBG) {
-                    Log.e("KnoxVpnEngineService", "Exception occured while trying to remove a notification which informed user about process restart " + Log.getStackTraceString(e));
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "Exception occured while trying to remove a notification which informed"
+                                + " user about process restart "
+                                    + Log.getStackTraceString(e));
                 }
             }
         } finally {
@@ -5914,16 +8333,27 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     public final void removeProfileFromHashMapAndDB(String str) {
-        Log.d("KnoxVpnEngineService", "removeProfileFromHashMapAndDB : removeProfileFromHashMapAndDB beginning");
+        Log.d(
+                "KnoxVpnEngineService",
+                "removeProfileFromHashMapAndDB : removeProfileFromHashMapAndDB beginning");
         try {
             this.mVpnStorageProvider.getClass();
-            boolean deleteDataByFields = KnoxVpnStorageProvider.mEDM.deleteDataByFields("VpnProfileInfo", new String[]{"profileName"}, new String[]{str});
+            boolean deleteDataByFields =
+                    KnoxVpnStorageProvider.mEDM.deleteDataByFields(
+                            "VpnProfileInfo", new String[] {"profileName"}, new String[] {str});
             if (deleteDataByFields) {
                 removeFromHashMapByProfileName(str);
             }
-            Log.d("KnoxVpnEngineService", "remove vpn connection for per app : success : " + deleteDataByFields);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "remove vpn connection for per app : success : " + deleteDataByFields);
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("remove vpn connection for perapp : Error in handling remove connection for per app vpn Feature"), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder(
+                            "remove vpn connection for perapp : Error in handling remove connection"
+                                + " for per app vpn Feature"),
+                    "KnoxVpnEngineService");
         }
     }
 
@@ -5940,7 +8370,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         VpnProfile vpnProfile = (VpnProfile) it.next();
                         if (vpnProfile.name.equals(str)) {
                             if (DBG) {
-                                Log.d("KnoxVpnEngineService", "The profileInfo present in the keystore belongs to knox, so going to delete it");
+                                Log.d(
+                                        "KnoxVpnEngineService",
+                                        "The profileInfo present in the keystore belongs to knox,"
+                                            + " so going to delete it");
                             }
                             LegacyVpnProfileStore.remove("VPN_" + vpnProfile.key);
                             return;
@@ -5948,7 +8381,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     }
                 }
             } catch (Exception e) {
-                VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception occured at removeProfileFromKeyStore API "), "KnoxVpnEngineService");
+                VpnManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("Exception occured at removeProfileFromKeyStore API "),
+                        "KnoxVpnEngineService");
             }
         }
     }
@@ -5959,16 +8395,28 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             return;
         }
         int i3 = profileEntry.mNetId;
-        NetworkScoreService$$ExternalSyntheticOutline0.m(i, "The following app removed from the interface ", str2, "will not go through vpn since it was blacklisted ", "KnoxVpnEngineService");
+        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                i,
+                "The following app removed from the interface ",
+                str2,
+                "will not go through vpn since it was blacklisted ",
+                "KnoxVpnEngineService");
         if (getNetworkManagementService() != null) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
                     ArrayList arrayList = new ArrayList();
                     arrayList.add(new UidRangeParcel(i, i2));
-                    getOemNetdService$1().knoxVpnRemoveExemptUidFromKnoxVpn(i3, (UidRangeParcel[]) arrayList.toArray(new UidRangeParcel[arrayList.size()]));
+                    getOemNetdService$1()
+                            .knoxVpnRemoveExemptUidFromKnoxVpn(
+                                    i3,
+                                    (UidRangeParcel[])
+                                            arrayList.toArray(
+                                                    new UidRangeParcel[arrayList.size()]));
                 } catch (Exception unused) {
-                    Log.e("KnoxVpnEngineService", "Exception occured while trying to remove Uid From Vpn List ");
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "Exception occured while trying to remove Uid From Vpn List ");
                 }
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -5976,20 +8424,25 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
     }
 
-    public final synchronized EnterpriseResponseData removeVpnProfile(KnoxVpnContext knoxVpnContext, String str) {
+    public final synchronized EnterpriseResponseData removeVpnProfile(
+            KnoxVpnContext knoxVpnContext, String str) {
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
-        Log.d("KnoxVpnEngineService", "knox vpn profile is going to be removed : profileName value is " + str);
+        Log.d(
+                "KnoxVpnEngineService",
+                "knox vpn profile is going to be removed : profileName value is " + str);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData(-1);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             enterpriseResponseData.setData(140);
             return enterpriseResponseData;
         }
         if (KnoxCustomManagerService.SETTING_PKG_NAME.equals(knoxVpnContext.vendorName)) {
             if (this.mVpnInfoPolicy == null) {
                 this.mInjector.getClass();
-                this.mVpnInfoPolicy = IVpnInfoPolicy.Stub.asInterface(ServiceManager.getService("vpn_policy"));
+                this.mVpnInfoPolicy =
+                        IVpnInfoPolicy.Stub.asInterface(ServiceManager.getService("vpn_policy"));
             }
             IVpnInfoPolicy iVpnInfoPolicy = this.mVpnInfoPolicy;
             if (iVpnInfoPolicy != null) {
@@ -5999,43 +8452,94 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                         enterpriseResponseData.setStatus(0, 0);
                     }
                 } catch (RemoteException unused) {
-                    Log.e("KnoxVpnEngineService", "Exception occured while removing vpn settings profile");
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "Exception occured while removing vpn settings profile");
                 }
                 return enterpriseResponseData;
             }
         }
         try {
-            int removeVpnProfileValidation = this.mKnoxVpnApiValidation.removeVpnProfileValidation(knoxVpnContext, str);
+            int removeVpnProfileValidation =
+                    this.mKnoxVpnApiValidation.removeVpnProfileValidation(knoxVpnContext, str);
             if (removeVpnProfileValidation != 100) {
                 enterpriseResponseData.setData(Integer.valueOf(removeVpnProfileValidation));
-                Log.d("KnoxVpnEngineService", "Error occured while removing the vpn profile: The error code is " + removeVpnProfileValidation);
-                AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error validating information from profile " + str + " before removing", knoxVpnContext.personaId);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Error occured while removing the vpn profile: The error code is "
+                                + removeVpnProfileValidation);
+                AuditLog.logAsUser(
+                        3,
+                        5,
+                        false,
+                        Process.myPid(),
+                        "KnoxVpnEngineService",
+                        "Error validating information from profile " + str + " before removing",
+                        knoxVpnContext.personaId);
                 return enterpriseResponseData;
             }
             IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
             if (binderInterfaceForProfile == null) {
                 enterpriseResponseData.setData(110);
-                Log.d("KnoxVpnEngineService", "Error occured while removing the vpn profile: The error code is 110");
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Error occured while removing the vpn profile: The error code is 110");
                 return enterpriseResponseData;
             }
             VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
             if (profileEntry.activateState == 1) {
                 int state = binderInterfaceForProfile.getState(str);
-                Log.d("KnoxVpnEngineService", "knox vpn profile is going to be removed: currentStateOfProfile value is " + state);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "knox vpn profile is going to be removed: currentStateOfProfile value is "
+                                + state);
                 if (state != 1 || state != 5) {
                     if (binderInterfaceForProfile.stopConnection(str) != 0) {
-                        AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error occurred trying to stop vpn connection from profile " + str, knoxVpnContext.personaId);
+                        AuditLog.logAsUser(
+                                3,
+                                5,
+                                false,
+                                Process.myPid(),
+                                "KnoxVpnEngineService",
+                                "Error occurred trying to stop vpn connection from profile " + str,
+                                knoxVpnContext.personaId);
                     } else {
-                        AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", "Connection with vpn vendor service stopped for profile " + str, knoxVpnContext.personaId);
+                        AuditLog.logAsUser(
+                                5,
+                                5,
+                                true,
+                                Process.myPid(),
+                                "KnoxVpnEngineService",
+                                "Connection with vpn vendor service stopped for profile " + str,
+                                knoxVpnContext.personaId);
                     }
-                    Log.d("KnoxVpnEngineService", "knox vpn profile is going to be removed: stopConnectionStatus value is " + state);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "knox vpn profile is going to be removed: stopConnectionStatus value is"
+                                + " "
+                                    + state);
                 }
                 int state2 = binderInterfaceForProfile.getState(str);
-                Log.d("KnoxVpnEngineService", "knox vpn profile is going to be removed: currentStateOfProfile after stopping the connection is " + state2);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "knox vpn profile is going to be removed: currentStateOfProfile after"
+                            + " stopping the connection is "
+                                + state2);
                 if (state2 != 1 && state2 != 5) {
                     enterpriseResponseData.setData(306);
-                    Log.d("KnoxVpnEngineService", "Error occured while removing the vpn profile: The error code is 306");
-                    AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error occurred while removing vpn profile " + str + ". Stop vpn connection before removing profile", knoxVpnContext.personaId);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "Error occured while removing the vpn profile: The error code is 306");
+                    AuditLog.logAsUser(
+                            3,
+                            5,
+                            false,
+                            Process.myPid(),
+                            "KnoxVpnEngineService",
+                            "Error occurred while removing vpn profile "
+                                    + str
+                                    + ". Stop vpn connection before removing profile",
+                            knoxVpnContext.personaId);
                     return enterpriseResponseData;
                 }
             }
@@ -6043,18 +8547,38 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             int removeConnection = binderInterfaceForProfile.removeConnection(str);
             if (removeConnection != 0) {
                 enterpriseResponseData.setData(102);
-                Log.d("KnoxVpnEngineService", "Error occured while removing the vpn profile: The error code is 102");
-                AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error received from vendor while removing vpn connection for profile " + str, knoxVpnContext.personaId);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Error occured while removing the vpn profile: The error code is 102");
+                AuditLog.logAsUser(
+                        3,
+                        5,
+                        false,
+                        Process.myPid(),
+                        "KnoxVpnEngineService",
+                        "Error received from vendor while removing vpn connection for profile "
+                                + str,
+                        knoxVpnContext.personaId);
                 return enterpriseResponseData;
             }
             removeProfileFromHashMapAndDB(str);
-            Log.d("KnoxVpnEngineService", "knox vpn profile removal is a success: The error code is " + removeConnection);
-            AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", "Vpn profile " + str + " successfully removed", knoxVpnContext.personaId);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "knox vpn profile removal is a success: The error code is " + removeConnection);
+            AuditLog.logAsUser(
+                    5,
+                    5,
+                    true,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Vpn profile " + str + " successfully removed",
+                    knoxVpnContext.personaId);
             enterpriseResponseData.setData(Integer.valueOf(removeConnection));
             enterpriseResponseData.setStatus(0, 0);
             try {
                 if (((Integer) enterpriseResponseData.getData()).intValue() == 0) {
-                    KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:removeVpnProfile");
+                    KnoxAnalyticsData knoxAnalyticsData =
+                            new KnoxAnalyticsData("KNOX_VPN", 1, "API:removeVpnProfile");
                     this.mData = knoxAnalyticsData;
                     setCommonProperties(knoxAnalyticsData, knoxVpnContext, str, i);
                     KnoxAnalytics.log(this.mData);
@@ -6064,8 +8588,19 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             }
             return enterpriseResponseData;
         } catch (Exception e2) {
-            Log.d("KnoxVpnEngineService", "Error occured while removing the vpn profile: exception occured: The error code is -1" + Log.getStackTraceString(e2));
-            AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception occurred while removing vpn profile " + str, knoxVpnContext.personaId);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "Error occured while removing the vpn profile: exception occured: The error"
+                        + " code is -1"
+                            + Log.getStackTraceString(e2));
+            AuditLog.logAsUser(
+                    3,
+                    5,
+                    false,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Exception occurred while removing vpn profile " + str,
+                    knoxVpnContext.personaId);
             return enterpriseResponseData;
         }
     }
@@ -6089,11 +8624,13 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     KnoxVpnHelper knoxVpnHelper = this.mKnoxVpnHelper;
                     String packageName = vpnPackageInfo.getPackageName();
                     knoxVpnHelper.getClass();
-                    int containerIdFromPackageName = KnoxVpnHelper.getContainerIdFromPackageName(packageName);
+                    int containerIdFromPackageName =
+                            KnoxVpnHelper.getContainerIdFromPackageName(packageName);
                     this.mKnoxVpnHelper.getClass();
                     int startUid = KnoxVpnHelper.startUid(containerIdFromPackageName);
                     this.mKnoxVpnHelper.getClass();
-                    unsetDnsSystemProperty(startUid, KnoxVpnHelper.stopUid(containerIdFromPackageName), str);
+                    unsetDnsSystemProperty(
+                            startUid, KnoxVpnHelper.stopUid(containerIdFromPackageName), str);
                 } else {
                     int uid = vpnPackageInfo.getUid();
                     unsetDnsSystemProperty(uid, uid, str);
@@ -6101,36 +8638,69 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             }
             Log.d("KnoxVpnEngineService", "updating firewall rules after vpn is down");
             System.currentTimeMillis();
-            Log.d("KnoxVpnEngineService", "removeVpnUidRanges:defaultInterface value to which the virual tunnel was added is " + profileEntry.mDefaultInterface + " for the profile " + str);
-            this.mFirewallHelper.removeNatRules(getVirtualInterfaceType(str), profileEntry.mInterfaceName);
-            this.mFirewallHelper.removeIpRouteAndPolicyRules(getVirtualInterfaceType(str), profileEntry.mInterfaceName);
-            this.mFirewallHelper.removeRulesForNoUidPackets(profileEntry.mInterface_type, profileEntry.mInterfaceName, profileEntry.mIpChainName);
-            this.mFirewallHelper.removeRulesToAcceptIncomingPackets(profileEntry.mInterface_type, profileEntry.mInterfaceName);
-            this.mFirewallHelper.updateDropRulesForNoUidPackets(1, profileEntry.mInterfaceName, profileEntry.mInterfaceAddress, profileEntry.mDefaultInterface, profileEntry.mInterfaceV6Address);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "removeVpnUidRanges:defaultInterface value to which the virual tunnel was added"
+                        + " is "
+                            + profileEntry.mDefaultInterface
+                            + " for the profile "
+                            + str);
+            this.mFirewallHelper.removeNatRules(
+                    getVirtualInterfaceType(str), profileEntry.mInterfaceName);
+            this.mFirewallHelper.removeIpRouteAndPolicyRules(
+                    getVirtualInterfaceType(str), profileEntry.mInterfaceName);
+            this.mFirewallHelper.removeRulesForNoUidPackets(
+                    profileEntry.mInterface_type,
+                    profileEntry.mInterfaceName,
+                    profileEntry.mIpChainName);
+            this.mFirewallHelper.removeRulesToAcceptIncomingPackets(
+                    profileEntry.mInterface_type, profileEntry.mInterfaceName);
+            this.mFirewallHelper.updateDropRulesForNoUidPackets(
+                    1,
+                    profileEntry.mInterfaceName,
+                    profileEntry.mInterfaceAddress,
+                    profileEntry.mDefaultInterface,
+                    profileEntry.mInterfaceV6Address);
             if (profileEntry.mProxyServer != null || profileEntry.mPacurl != Uri.EMPTY) {
-                this.mFirewallHelper.removeRulesToAcceptProxyPackets(profileEntry.mInterface_type, UserHandle.getUid(profileEntry.personaId, 1002), profileEntry.mInterfaceName);
+                this.mFirewallHelper.removeRulesToAcceptProxyPackets(
+                        profileEntry.mInterface_type,
+                        UserHandle.getUid(profileEntry.personaId, 1002),
+                        profileEntry.mInterfaceName);
                 if (profileEntry.getProxyInfo() != null) {
-                    this.mFirewallHelper.removeRulesToAllowAccessToLocalHostWithValidMark(profileEntry.getProxyInfo().getPort(), profileEntry.mInterface_type, profileEntry.mInterfaceName);
+                    this.mFirewallHelper.removeRulesToAllowAccessToLocalHostWithValidMark(
+                            profileEntry.getProxyInfo().getPort(),
+                            profileEntry.mInterface_type,
+                            profileEntry.mInterfaceName);
                 }
                 if (profileEntry.activateState == 1) {
                     KnoxVpnPacProcessor knoxVpnPacProcessor = getKnoxVpnPacProcessor();
                     knoxVpnPacProcessor.getClass();
                     try {
-                        KnoxVpnPacProcessor.getProxyService(knoxVpnPacProcessor.getConfiguredUser(str)).resetInterface(str);
+                        KnoxVpnPacProcessor.getProxyService(
+                                        knoxVpnPacProcessor.getConfiguredUser(str))
+                                .resetInterface(str);
                     } catch (Exception unused) {
-                        Log.e("KnoxVpnPacProcessor", "error occured while trying to reset interface name");
+                        Log.e(
+                                "KnoxVpnPacProcessor",
+                                "error occured while trying to reset interface name");
                     }
                 }
             }
             if (profileEntry.mUsbTethering == 1) {
                 if (profileEntry.activateState == 1) {
-                    Log.d("KnoxVpnEngineService", "Applying rules to drop tether packets since vpn is down, but still in activated state");
-                    String interfaceNameForUsbtethering = this.mKnoxVpnHelper.getInterfaceNameForUsbtethering();
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "Applying rules to drop tether packets since vpn is down, but still in"
+                                + " activated state");
+                    String interfaceNameForUsbtethering =
+                            this.mKnoxVpnHelper.getInterfaceNameForUsbtethering();
                     if (interfaceNameForUsbtethering != null) {
-                        this.mFirewallHelper.addRulesForDroppingTetherPackets(interfaceNameForUsbtethering);
+                        this.mFirewallHelper.addRulesForDroppingTetherPackets(
+                                interfaceNameForUsbtethering);
                     }
                 }
-                this.mFirewallHelper.removeRulesForUsbTethering(profileEntry.mInterface_type, profileEntry.mInterfaceName);
+                this.mFirewallHelper.removeRulesForUsbTethering(
+                        profileEntry.mInterface_type, profileEntry.mInterfaceName);
             }
             int i = profileEntry.activateState;
             if (i == 0) {
@@ -6140,7 +8710,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 knoxVpnFirewallHelper.insertRule(false, "*mangle", str2 + "_act", null, 46);
                 removeMiscRulesForProfile(str);
             } else if (i == 1) {
-                this.mFirewallHelper.addMarkingRulesForFilteredPackages(3, "block_traffic", profileEntry.mIpChainName);
+                this.mFirewallHelper.addMarkingRulesForFilteredPackages(
+                        3, "block_traffic", profileEntry.mIpChainName);
                 updateBlockingRules(str);
                 if (profileEntry.mVpnClientType == 1) {
                     try {
@@ -6165,9 +8736,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0075, code lost:
-    
-        android.util.Log.d("KnoxVpnEngineService", "run all vpn : startVpnProfile : profileName " + r3 + " state : " + r4);
-     */
+
+       android.util.Log.d("KnoxVpnEngineService", "run all vpn : startVpnProfile : profileName " + r3 + " state : " + r4);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -6248,7 +8819,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         L9e:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.runAllVpnService():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.runAllVpnService():void");
     }
 
     public final void sendBindSuccessIntent(int i, String str) {
@@ -6262,11 +8835,20 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             if (packagesForUid != null && i != -1) {
                 Intent intent = new Intent();
                 intent.setAction("com.samsung.android.knox.intent.action.VPN_BIND_RESULT");
-                intent.putExtra("com.samsung.android.knox.intent.extra.VPN_BIND_VENDOR", regularPackageName);
-                intent.putExtra("com.samsung.android.knox.intent.extra.VPN_BIND_CID", containerIdFromPackageName);
+                intent.putExtra(
+                        "com.samsung.android.knox.intent.extra.VPN_BIND_VENDOR",
+                        regularPackageName);
+                intent.putExtra(
+                        "com.samsung.android.knox.intent.extra.VPN_BIND_CID",
+                        containerIdFromPackageName);
                 intent.putExtra("com.samsung.android.knox.intent.extra.VPN_BIND_STATUS", true);
-                Log.d("KnoxVpnEngineService", "Sending bind success intent to User " + containerIdFromPackageName);
-                this.mContext.sendBroadcastAsUser(intent, UserHandle.ALL, "com.samsung.android.knox.permission.KNOX_VPN_GENERIC");
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Sending bind success intent to User " + containerIdFromPackageName);
+                this.mContext.sendBroadcastAsUser(
+                        intent,
+                        UserHandle.ALL,
+                        "com.samsung.android.knox.permission.KNOX_VPN_GENERIC");
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -6292,9 +8874,12 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             for (VpnPackageInfo vpnPackageInfo : profileEntry.mPackageMap.values()) {
                 this.mKnoxVpnHelper.getClass();
                 if (KnoxVpnHelper.isPackageForAddAllPackages(vpnPackageInfo)) {
-                    strArr = this.mKnoxVpnHelper.getUserPackageListForProfile(containerIdFromPackageName, str2);
+                    strArr =
+                            this.mKnoxVpnHelper.getUserPackageListForProfile(
+                                    containerIdFromPackageName, str2);
                 } else if (vpnPackageInfo.getPackageName() != null) {
-                    if (!vpnPackageInfo.getPackageName().contains("_") || vpnPackageInfo.getPackageName().split("_", 2).length < 1) {
+                    if (!vpnPackageInfo.getPackageName().contains("_")
+                            || vpnPackageInfo.getPackageName().split("_", 2).length < 1) {
                         i2 = i3 + 1;
                         strArr[i3] = vpnPackageInfo.getPackageName();
                     } else {
@@ -6312,17 +8897,31 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         if (!str.contains("_") || str.split("_", 2).length < 1) {
             intent.putExtra("com.samsung.android.knox.intent.extra.EXTRA_VENDOR_NAME", str);
         } else {
-            intent.putExtra("com.samsung.android.knox.intent.extra.EXTRA_VENDOR_NAME", str.split("_", 2)[1]);
+            intent.putExtra(
+                    "com.samsung.android.knox.intent.extra.EXTRA_VENDOR_NAME",
+                    str.split("_", 2)[1]);
         }
-        intent.putExtra("com.samsung.android.knox.intent.extra.EXTRA_VENDOR_NAME", str.split("_", 2)[1]);
+        intent.putExtra(
+                "com.samsung.android.knox.intent.extra.EXTRA_VENDOR_NAME", str.split("_", 2)[1]);
         intent.putExtra("com.samsung.android.knox.intent.extra.EXTRA_PROFILE_NAME", str2);
-        intent.putExtra("com.samsung.android.knox.intent.extra.EXTRA_USER_ID", containerIdFromPackageName);
+        intent.putExtra(
+                "com.samsung.android.knox.intent.extra.EXTRA_USER_ID", containerIdFromPackageName);
         intent.putExtra("com.samsung.android.knox.intent.extra.EXTRA_PACKAGE_LIST", strArr);
         Log.v("KnoxVpnEngineService", "Sending Vpn Connection Fail intent - profile: " + str2);
-        this.mContext.sendBroadcastAsUser(intent, new UserHandle(UserHandle.getUserId(i)), "com.samsung.android.knox.permission.KNOX_VPN_GENERIC");
+        this.mContext.sendBroadcastAsUser(
+                intent,
+                new UserHandle(UserHandle.getUserId(i)),
+                "com.samsung.android.knox.permission.KNOX_VPN_GENERIC");
         if (this.vpnConfig.getProfileEntry(str2) != null) {
-            ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("profileName", str2);
-            Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, m, "adminUid", FrameworkStatsLog.APP_BACKGROUND_RESTRICTIONS_INFO__EXEMPTION_REASON__REASON_DOMAIN_VERIFICATION_V1, "errorType");
+            ContentValues m =
+                    AccountManagerService$$ExternalSyntheticOutline0.m("profileName", str2);
+            Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                    i,
+                    m,
+                    "adminUid",
+                    FrameworkStatsLog
+                            .APP_BACKGROUND_RESTRICTIONS_INFO__EXEMPTION_REASON__REASON_DOMAIN_VERIFICATION_V1,
+                    "errorType");
             if (!str.contains("_") || str.split("_", 2).length < 1) {
                 m.put("vendorName", str);
             } else {
@@ -6341,22 +8940,37 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             stringBuffer.append("]");
             m.put("packageList", stringBuffer.toString());
             this.mVpnStorageProvider.getClass();
-            boolean putDataByFields = KnoxVpnStorageProvider.mEDM.putDataByFields("vpnConnectionFail", null, null, m);
+            boolean putDataByFields =
+                    KnoxVpnStorageProvider.mEDM.putDataByFields("vpnConnectionFail", null, null, m);
             if (DBG) {
-                Log.d("KnoxVpnEngineService", "add profile in database (vpnConnectionFail): status is " + putDataByFields + "profile Name is" + str2);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "add profile in database (vpnConnectionFail): status is "
+                                + putDataByFields
+                                + "profile Name is"
+                                + str2);
             }
         }
     }
 
     public final boolean setActivate(int i, String str) {
         VpnProfileInfo profileEntry;
-        NetworkScoreService$$ExternalSyntheticOutline0.m(i, "setActivate: profileName value is ", str, "activateState value is ", "KnoxVpnEngineService");
+        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                i,
+                "setActivate: profileName value is ",
+                str,
+                "activateState value is ",
+                "KnoxVpnEngineService");
         boolean z = false;
         try {
             profileEntry = this.vpnConfig.getProfileEntry(str);
         } catch (Exception e) {
             if (DBG) {
-                VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception occured while storing activateState info in db "), "KnoxVpnEngineService");
+                VpnManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder(
+                                "Exception occured while storing activateState info in db "),
+                        "KnoxVpnEngineService");
             }
         }
         if (profileEntry == null) {
@@ -6366,17 +8980,23 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         ContentValues contentValues = new ContentValues();
         contentValues.put("activateState", Integer.valueOf(i));
         this.mVpnStorageProvider.getClass();
-        if (KnoxVpnStorageProvider.mEDM.putDataByFields("VpnProfileInfo", new String[]{"profileName"}, new String[]{str}, contentValues)) {
+        if (KnoxVpnStorageProvider.mEDM.putDataByFields(
+                "VpnProfileInfo",
+                new String[] {"profileName"},
+                new String[] {str},
+                contentValues)) {
             profileEntry.activateState = i;
             z = true;
         } else {
             profileEntry.activateState = i2;
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("setActivate: isActivateInfoSaved value is ", "KnoxVpnEngineService", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "setActivate: isActivateInfoSaved value is ", "KnoxVpnEngineService", z);
         return z;
     }
 
-    public final EnterpriseResponseData setAutoRetryOnConnectionError(KnoxVpnContext knoxVpnContext, String str, boolean z) {
+    public final EnterpriseResponseData setAutoRetryOnConnectionError(
+            KnoxVpnContext knoxVpnContext, String str, boolean z) {
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData(Boolean.FALSE);
         enterpriseResponseData.setStatus(1, -1);
@@ -6386,52 +9006,67 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             }
             return enterpriseResponseData;
         }
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission(knoxVpnContext).mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission(knoxVpnContext).mCallerUid)) {
             return enterpriseResponseData;
         }
         if (str != null) {
             try {
-                if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData) != 0) {
+                if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData)
+                        != 0) {
                     return enterpriseResponseData;
                 }
                 IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
                 if (binderInterfaceForProfile == null) {
-                    Log.e("KnoxVpnEngineService", "setAutoRetryOnConnectionError : VPN Service not started");
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "setAutoRetryOnConnectionError : VPN Service not started");
                     return enterpriseResponseData;
                 }
-                boolean autoRetryOnConnectionError = binderInterfaceForProfile.setAutoRetryOnConnectionError(str, z);
-                Log.d("KnoxVpnEngineService", "setAutoRetryOnConnectionError : success = " + autoRetryOnConnectionError);
+                boolean autoRetryOnConnectionError =
+                        binderInterfaceForProfile.setAutoRetryOnConnectionError(str, z);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "setAutoRetryOnConnectionError : success = " + autoRetryOnConnectionError);
                 enterpriseResponseData.setData(Boolean.valueOf(autoRetryOnConnectionError));
                 enterpriseResponseData.setStatus(0, 0);
             } catch (Exception e) {
-                VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("setAutoRetryOnConnectionError : Failure at "), "KnoxVpnEngineService");
+                VpnManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("setAutoRetryOnConnectionError : Failure at "),
+                        "KnoxVpnEngineService");
                 return null;
             }
         }
         try {
             if (((Boolean) enterpriseResponseData.getData()).booleanValue()) {
-                KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:setAutoRetryOnConnectionError");
+                KnoxAnalyticsData knoxAnalyticsData =
+                        new KnoxAnalyticsData("KNOX_VPN", 1, "API:setAutoRetryOnConnectionError");
                 this.mData = knoxAnalyticsData;
                 setCommonProperties(knoxAnalyticsData, knoxVpnContext, str, -1);
                 this.mData.setProperty("enb", z);
                 KnoxAnalytics.log(this.mData);
             }
         } catch (Exception e2) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception = "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("Exception = "), "KnoxVpnEngineService");
         }
         return enterpriseResponseData;
     }
 
-    public final EnterpriseResponseData setCACertificate(KnoxVpnContext knoxVpnContext, String str, byte[] bArr) {
+    public final EnterpriseResponseData setCACertificate(
+            KnoxVpnContext knoxVpnContext, String str, byte[] bArr) {
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData(Boolean.FALSE);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             return enterpriseResponseData;
         }
         try {
-            if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData) != 0) {
+            if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData)
+                    != 0) {
                 return enterpriseResponseData;
             }
             IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
@@ -6439,26 +9074,33 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 Log.e("KnoxVpnEngineService", "setting CACertificate : Service is not started");
                 return enterpriseResponseData;
             }
-            enterpriseResponseData.setData(Boolean.valueOf(binderInterfaceForProfile.setCACertificate(str, bArr)));
+            enterpriseResponseData.setData(
+                    Boolean.valueOf(binderInterfaceForProfile.setCACertificate(str, bArr)));
             enterpriseResponseData.setStatus(0, 0);
             try {
                 if (((Boolean) enterpriseResponseData.getData()).booleanValue()) {
-                    KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:setCACertificate");
+                    KnoxAnalyticsData knoxAnalyticsData =
+                            new KnoxAnalyticsData("KNOX_VPN", 1, "API:setCACertificate");
                     this.mData = knoxAnalyticsData;
                     setCommonProperties(knoxAnalyticsData, knoxVpnContext, str, -1);
                     KnoxAnalytics.log(this.mData);
                 }
             } catch (Exception e) {
-                VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), "KnoxVpnEngineService");
+                VpnManagerService$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("Exception = "), "KnoxVpnEngineService");
             }
             return enterpriseResponseData;
         } catch (Exception e2) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e2, new StringBuilder("setting CACertificate : Failure at "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e2,
+                    new StringBuilder("setting CACertificate : Failure at "),
+                    "KnoxVpnEngineService");
             return null;
         }
     }
 
-    public final void setCommonProperties(KnoxAnalyticsData knoxAnalyticsData, KnoxVpnContext knoxVpnContext, String str, int i) {
+    public final void setCommonProperties(
+            KnoxAnalyticsData knoxAnalyticsData, KnoxVpnContext knoxVpnContext, String str, int i) {
         VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
         if (knoxVpnContext != null) {
             knoxAnalyticsData.setProperty("admUid", knoxVpnContext.adminId);
@@ -6477,26 +9119,36 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             String[] strArr = {"notificationUserId", "adminUid"};
             String[] strArr2 = {String.valueOf(i2), String.valueOf(i)};
             this.mVpnStorageProvider.getClass();
-            ArrayList dataByFields = KnoxVpnStorageProvider.mEDM.getDataByFields("VpnNotificationFlagTable", strArr, strArr2, null);
+            ArrayList dataByFields =
+                    KnoxVpnStorageProvider.mEDM.getDataByFields(
+                            "VpnNotificationFlagTable", strArr, strArr2, null);
             if (dataByFields.isEmpty()) {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("dismissFlag", Integer.valueOf(i3));
                 contentValues.put("notificationUserId", Integer.valueOf(i2));
                 contentValues.put("adminUid", Integer.valueOf(i));
                 this.mVpnStorageProvider.getClass();
-                putDataByFields = KnoxVpnStorageProvider.mEDM.putDataByFields("VpnNotificationFlagTable", null, null, contentValues);
+                putDataByFields =
+                        KnoxVpnStorageProvider.mEDM.putDataByFields(
+                                "VpnNotificationFlagTable", null, null, contentValues);
             } else {
                 ContentValues contentValues2 = (ContentValues) dataByFields.get(0);
                 contentValues2.put("dismissFlag", Integer.valueOf(i3));
                 this.mVpnStorageProvider.getClass();
-                putDataByFields = KnoxVpnStorageProvider.mEDM.putDataByFields("VpnNotificationFlagTable", strArr, strArr2, contentValues2);
+                putDataByFields =
+                        KnoxVpnStorageProvider.mEDM.putDataByFields(
+                                "VpnNotificationFlagTable", strArr, strArr2, contentValues2);
             }
             return putDataByFields;
         } catch (Exception e) {
             if (!DBG) {
                 return false;
             }
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception occured while storing notificationFlagState info in db "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder(
+                            "Exception occured while storing notificationFlagState info in db "),
+                    "KnoxVpnEngineService");
             return false;
         }
     }
@@ -6508,14 +9160,29 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 try {
                     if (this.vpnConfig.getProfileEntry(str) != null) {
                         if (DBG) {
-                            Log.d("KnoxVpnEngineService", "setDnsSystemProperty is reached : whose profileName is " + str + "whose start uid is " + i + " whose stop uid is " + i2 + " whose interface " + str2 + " whose netId is " + i3);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "setDnsSystemProperty is reached : whose profileName is "
+                                            + str
+                                            + "whose start uid is "
+                                            + i
+                                            + " whose stop uid is "
+                                            + i2
+                                            + " whose interface "
+                                            + str2
+                                            + " whose netId is "
+                                            + i3);
                         }
                         ArraySet arraySet = new ArraySet();
                         arraySet.add(new UidRangeParcel(i, i2));
-                        getOemNetdService$1().networkAddUidRanges(i3, toUidRangeStableParcels(arraySet));
+                        getOemNetdService$1()
+                                .networkAddUidRanges(i3, toUidRangeStableParcels(arraySet));
                     }
                 } catch (Exception unused) {
-                    Log.e("KnoxVpnEngineService", "Exception occured while trying to set the dns entry for the profile ".concat(str));
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "Exception occured while trying to set the dns entry for the profile "
+                                    .concat(str));
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             } catch (Throwable th) {
@@ -6531,7 +9198,11 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int setNotificationDismissibleFlag(com.samsung.android.knox.net.vpn.KnoxVpnContext r8, java.lang.String r9, int r10, int r11) {
+    public final int setNotificationDismissibleFlag(
+            com.samsung.android.knox.net.vpn.KnoxVpnContext r8,
+            java.lang.String r9,
+            int r10,
+            int r11) {
         /*
             r7 = this;
             java.lang.String r0 = "setNotificationDismissibleFlag : Exception : "
@@ -6613,7 +9284,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             android.os.Binder.restoreCallingIdentity(r5)
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.setNotificationDismissibleFlag(com.samsung.android.knox.net.vpn.KnoxVpnContext, java.lang.String, int, int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.setNotificationDismissibleFlag(com.samsung.android.knox.net.vpn.KnoxVpnContext,"
+                    + " java.lang.String, int, int):int");
     }
 
     public final void setPropertiesWithLocalEntry(KnoxAnalyticsData knoxAnalyticsData, String str) {
@@ -6633,34 +9307,48 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         }
     }
 
-    public final EnterpriseResponseData setServerCertValidationUserAcceptanceCriteria(KnoxVpnContext knoxVpnContext, String str, boolean z, List list, int i) {
+    public final EnterpriseResponseData setServerCertValidationUserAcceptanceCriteria(
+            KnoxVpnContext knoxVpnContext, String str, boolean z, List list, int i) {
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData(Boolean.FALSE);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             return enterpriseResponseData;
         }
         if (str != null) {
             try {
-                if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData) != 0) {
+                if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData)
+                        != 0) {
                     return enterpriseResponseData;
                 }
                 IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
                 if (binderInterfaceForProfile == null) {
-                    Log.e("KnoxVpnEngineService", "setting server cert validation : VPN Service not started");
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "setting server cert validation : VPN Service not started");
                     return enterpriseResponseData;
                 }
-                enterpriseResponseData.setData(Boolean.valueOf(binderInterfaceForProfile.setServerCertValidationUserAcceptanceCriteria(str, z, list, i)));
+                enterpriseResponseData.setData(
+                        Boolean.valueOf(
+                                binderInterfaceForProfile
+                                        .setServerCertValidationUserAcceptanceCriteria(
+                                                str, z, list, i)));
                 enterpriseResponseData.setStatus(0, 0);
             } catch (Exception e) {
-                VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("setting server cert validation : Failure at "), "KnoxVpnEngineService");
+                VpnManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("setting server cert validation : Failure at "),
+                        "KnoxVpnEngineService");
                 return null;
             }
         }
         try {
             if (((Boolean) enterpriseResponseData.getData()).booleanValue()) {
-                KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:setServerCertValidationUserAcceptanceCriteria");
+                KnoxAnalyticsData knoxAnalyticsData =
+                        new KnoxAnalyticsData(
+                                "KNOX_VPN", 1, "API:setServerCertValidationUserAcceptanceCriteria");
                 this.mData = knoxAnalyticsData;
                 setCommonProperties(knoxAnalyticsData, knoxVpnContext, str, -1);
                 this.mData.setProperty("enb", z);
@@ -6673,39 +9361,50 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 KnoxAnalytics.log(this.mData);
             }
         } catch (Exception e2) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception = "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("Exception = "), "KnoxVpnEngineService");
         }
         return enterpriseResponseData;
     }
 
-    public final synchronized EnterpriseResponseData setUserCertificate(KnoxVpnContext knoxVpnContext, String str, byte[] bArr, String str2) {
+    public final synchronized EnterpriseResponseData setUserCertificate(
+            KnoxVpnContext knoxVpnContext, String str, byte[] bArr, String str2) {
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData(Boolean.FALSE);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             return enterpriseResponseData;
         }
         if (str != null) {
             try {
-                if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData) != 0) {
+                if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData)
+                        != 0) {
                     return enterpriseResponseData;
                 }
                 IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
                 if (binderInterfaceForProfile == null) {
-                    Log.e("KnoxVpnEngineService", "setting user certificate : VPN Service not started");
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "setting user certificate : VPN Service not started");
                     return enterpriseResponseData;
                 }
-                enterpriseResponseData.setData(Boolean.valueOf(binderInterfaceForProfile.setUserCertificate(str, bArr, str2)));
+                enterpriseResponseData.setData(
+                        Boolean.valueOf(
+                                binderInterfaceForProfile.setUserCertificate(str, bArr, str2)));
                 enterpriseResponseData.setStatus(0, 0);
             } catch (Exception e) {
-                Log.e("KnoxVpnEngineService", "setting user certificate : Failure at " + Log.getStackTraceString(e));
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "setting user certificate : Failure at " + Log.getStackTraceString(e));
                 return null;
             }
         }
         try {
             if (((Boolean) enterpriseResponseData.getData()).booleanValue()) {
-                KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:setUserCertificate");
+                KnoxAnalyticsData knoxAnalyticsData =
+                        new KnoxAnalyticsData("KNOX_VPN", 1, "API:setUserCertificate");
                 this.mData = knoxAnalyticsData;
                 setCommonProperties(knoxAnalyticsData, knoxVpnContext, str, -1);
                 KnoxAnalytics.log(this.mData);
@@ -6716,41 +9415,59 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         return enterpriseResponseData;
     }
 
-    public final synchronized EnterpriseResponseData setVpnModeOfOperation(KnoxVpnContext knoxVpnContext, String str, int i) {
+    public final synchronized EnterpriseResponseData setVpnModeOfOperation(
+            KnoxVpnContext knoxVpnContext, String str, int i) {
         int vpnModeOfOperationValidation;
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData(-1);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             enterpriseResponseData.setData(140);
             return enterpriseResponseData;
         }
         try {
-            vpnModeOfOperationValidation = this.mKnoxVpnApiValidation.setVpnModeOfOperationValidation(knoxVpnContext, str, i);
+            vpnModeOfOperationValidation =
+                    this.mKnoxVpnApiValidation.setVpnModeOfOperationValidation(
+                            knoxVpnContext, str, i);
         } catch (Exception e) {
             if (DBG) {
-                Log.e("KnoxVpnEngineService", "setting vpn mode : Failure at " + Log.getStackTraceString(e));
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "setting vpn mode : Failure at " + Log.getStackTraceString(e));
             }
         }
         if (vpnModeOfOperationValidation != 100) {
             enterpriseResponseData.setData(Integer.valueOf(vpnModeOfOperationValidation));
-            Log.d("KnoxVpnEngineService", "setting the mode of operation for the profile has failed:The error code is " + vpnModeOfOperationValidation);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "setting the mode of operation for the profile has failed:The error code is "
+                            + vpnModeOfOperationValidation);
             return enterpriseResponseData;
         }
         IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
         if (binderInterfaceForProfile == null) {
             enterpriseResponseData.setData(110);
-            Log.d("KnoxVpnEngineService", "setting the mode of operation for the profile has failed: The error code is 110");
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "setting the mode of operation for the profile has failed: The error code is"
+                        + " 110");
             return enterpriseResponseData;
         }
         int vpnModeOfOperation = binderInterfaceForProfile.setVpnModeOfOperation(str, i);
-        Log.d("KnoxVpnEngineService", "setVpnModeOfOperation : profileName = " + str + " :setMode = " + vpnModeOfOperation);
+        Log.d(
+                "KnoxVpnEngineService",
+                "setVpnModeOfOperation : profileName = "
+                        + str
+                        + " :setMode = "
+                        + vpnModeOfOperation);
         enterpriseResponseData.setData(Integer.valueOf(vpnModeOfOperation));
         enterpriseResponseData.setStatus(0, 0);
         try {
             if (((Integer) enterpriseResponseData.getData()).intValue() == 0) {
-                KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_VPN", 1, "API:setVpnModeOfOperation");
+                KnoxAnalyticsData knoxAnalyticsData =
+                        new KnoxAnalyticsData("KNOX_VPN", 1, "API:setVpnModeOfOperation");
                 this.mData = knoxAnalyticsData;
                 setCommonProperties(knoxAnalyticsData, knoxVpnContext, str, -1);
                 this.mData.setProperty("vpnMd", i);
@@ -6794,19 +9511,35 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             intentFilter2.addAction("com.samsung.android.knox.intent.action.UCM_REFRESH_DONE");
             intentFilter2.addAction("android.net.wifi.STATE_CHANGE");
             intentFilter2.addAction("android.hardware.usb.action.USB_STATE");
-            this.mContext.registerReceiverAsUser(this.receiver, userHandle, intentFilter2, null, null, 2);
+            this.mContext.registerReceiverAsUser(
+                    this.receiver, userHandle, intentFilter2, null, null, 2);
             IntentFilter intentFilter3 = new IntentFilter();
             intentFilter3.addAction("enterprise.container.uninstalled");
             intentFilter3.addAction("enterprise.container.admin.changed");
-            this.mContext.registerReceiverAsUser(this.receiver, userHandle, intentFilter3, "com.samsung.android.knox.permission.KNOX_CONTAINER", null, 2);
+            this.mContext.registerReceiverAsUser(
+                    this.receiver,
+                    userHandle,
+                    intentFilter3,
+                    "com.samsung.android.knox.permission.KNOX_CONTAINER",
+                    null,
+                    2);
             IntentFilter intentFilter4 = new IntentFilter();
-            intentFilter4.addAction("com.samsung.android.knox.intent.action.INTERFACE_STATUS_INTERNAL");
-            intentFilter4.addAction("com.samsung.android.knox.intent.action.VPN_PROXY_BROADCAST_INTERNAL");
-            this.mContext.registerReceiverAsUser(this.receiver, userHandle, intentFilter4, "com.samsung.android.knox.permission.KNOX_VPN_INTERNAL", null, 2);
+            intentFilter4.addAction(
+                    "com.samsung.android.knox.intent.action.INTERFACE_STATUS_INTERNAL");
+            intentFilter4.addAction(
+                    "com.samsung.android.knox.intent.action.VPN_PROXY_BROADCAST_INTERNAL");
+            this.mContext.registerReceiverAsUser(
+                    this.receiver,
+                    userHandle,
+                    intentFilter4,
+                    "com.samsung.android.knox.permission.KNOX_VPN_INTERNAL",
+                    null,
+                    2);
             IntentFilter intentFilter5 = new IntentFilter();
             intentFilter5.addAction("android.intent.action.PACKAGE_DATA_CLEARED");
             intentFilter5.addDataScheme("package");
-            this.mContext.registerReceiverAsUser(this.receiver, userHandle, intentFilter5, null, null);
+            this.mContext.registerReceiverAsUser(
+                    this.receiver, userHandle, intentFilter5, null, null);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -6830,39 +9563,59 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized com.samsung.android.knox.net.vpn.EnterpriseResponseData startConnection(com.samsung.android.knox.net.vpn.KnoxVpnContext r29, java.lang.String r30) {
+    public final synchronized com.samsung.android.knox.net.vpn.EnterpriseResponseData
+            startConnection(
+                    com.samsung.android.knox.net.vpn.KnoxVpnContext r29, java.lang.String r30) {
         /*
             Method dump skipped, instructions count: 492
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.startConnection(com.samsung.android.knox.net.vpn.KnoxVpnContext, java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.startConnection(com.samsung.android.knox.net.vpn.KnoxVpnContext,"
+                    + " java.lang.String):com.samsung.android.knox.net.vpn.EnterpriseResponseData");
     }
 
-    public final void startVpnConnectionForBindedClient(IKnoxVpnService iKnoxVpnService, String str) {
+    public final void startVpnConnectionForBindedClient(
+            IKnoxVpnService iKnoxVpnService, String str) {
         try {
             for (VpnProfileInfo vpnProfileInfo : this.vpnConfig.vpnProfileInfoMap.values()) {
-                if (vpnProfileInfo.mVendorPkgName.equalsIgnoreCase(str) && vpnProfileInfo.routeType != 0 && vpnProfileInfo.activateState != 0) {
+                if (vpnProfileInfo.mVendorPkgName.equalsIgnoreCase(str)
+                        && vpnProfileInfo.routeType != 0
+                        && vpnProfileInfo.activateState != 0) {
                     String str2 = vpnProfileInfo.mProfileName;
                     int state = iKnoxVpnService.getState(str2);
-                    Log.d("KnoxVpnEngineService", "Start the vpn connection after binding successfully for the profile " + str2 + " with the vpn client " + vpnProfileInfo.mVendorPkgName + " whose current state is " + state);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "Start the vpn connection after binding successfully for the profile "
+                                    + str2
+                                    + " with the vpn client "
+                                    + vpnProfileInfo.mVendorPkgName
+                                    + " whose current state is "
+                                    + state);
                     if (state == 1 || state == 5 || state == -1) {
                         startVpnProfile(str2);
                     }
                 }
             }
         } catch (Exception e) {
-            EnterpriseVpn$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception occured while doing runAllVpnService "), "KnoxVpnEngineService");
+            EnterpriseVpn$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception occured while doing runAllVpnService "),
+                    "KnoxVpnEngineService");
         }
     }
 
     public final int startVpnForPerApplication(String str, List list, boolean z) {
-        DualAppManagerService$$ExternalSyntheticOutline0.m("startVpnForPerApplication: profileName value is ", str, "KnoxVpnEngineService");
+        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                "startVpnForPerApplication: profileName value is ", str, "KnoxVpnEngineService");
         try {
             VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
             if (profileEntry == null) {
                 return 108;
             }
-            if (this.mKnoxVpnHelper.checkIfProfileHasChainingFeature(str) == 1 && checkChainingStatus(str) == 0) {
+            if (this.mKnoxVpnHelper.checkIfProfileHasChainingFeature(str) == 1
+                    && checkChainingStatus(str) == 0) {
                 return EndpointMonitorConst.TRACE_EVENT_SCHED_CLS_EGRESS;
             }
             if (profileEntry.activateState == 0) {
@@ -6878,12 +9631,18 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     String str2 = profileEntry.mInterfaceName;
                     int i = profileEntry.mNetId;
                     if (DBG) {
-                        Log.d("KnoxVpnEngineService", "startVpnForPackage: for connected state profileName value is " + str + "interfaceValue value is " + str2);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "startVpnForPackage: for connected state profileName value is "
+                                        + str
+                                        + "interfaceValue value is "
+                                        + str2);
                     }
                     if (str2 == null) {
                         return -1;
                     }
-                    this.mFirewallHelper.addMiscRules(getVirtualInterfaceType(str), profileEntry.mInterfaceName, list);
+                    this.mFirewallHelper.addMiscRules(
+                            getVirtualInterfaceType(str), profileEntry.mInterfaceName, list);
                     Iterator it = ((ArrayList) list).iterator();
                     while (it.hasNext()) {
                         int intValue = ((Integer) it.next()).intValue();
@@ -6906,19 +9665,26 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             }
             return 0;
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("startVpnForPackage: "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("startVpnForPackage: "), "KnoxVpnEngineService");
             return -1;
         }
     }
 
     public final int startVpnForUserwideVpn(int i, String str) {
-        NetworkScoreService$$ExternalSyntheticOutline0.m(i, "startVpnForPackage: profileName value is ", str, " container id value is ", "KnoxVpnEngineService");
+        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                i,
+                "startVpnForPackage: profileName value is ",
+                str,
+                " container id value is ",
+                "KnoxVpnEngineService");
         try {
             VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
             if (profileEntry == null) {
                 return 108;
             }
-            if (this.mKnoxVpnHelper.checkIfProfileHasChainingFeature(str) == 1 && checkChainingStatus(str) == 0) {
+            if (this.mKnoxVpnHelper.checkIfProfileHasChainingFeature(str) == 1
+                    && checkChainingStatus(str) == 0) {
                 return EndpointMonitorConst.TRACE_EVENT_SCHED_CLS_EGRESS;
             }
             if (profileEntry.activateState == 0) {
@@ -6934,7 +9700,12 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     String str2 = profileEntry.mInterfaceName;
                     int i2 = profileEntry.mNetId;
                     if (DBG) {
-                        Log.d("KnoxVpnEngineService", "startVpnForPackage: for connected state profileName value is " + str + "interfaceValue value is " + str2);
+                        Log.d(
+                                "KnoxVpnEngineService",
+                                "startVpnForPackage: for connected state profileName value is "
+                                        + str
+                                        + "interfaceValue value is "
+                                        + str2);
                     }
                     if (str2 == null) {
                         return -1;
@@ -6958,7 +9729,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             this.mFirewallHelper.addMiscRulesRange(i, getVirtualInterfaceType(str), null);
             return 0;
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("startVpnForPackage: "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("startVpnForPackage: "), "KnoxVpnEngineService");
             return -1;
         }
     }
@@ -6966,17 +9738,17 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     /* JADX WARN: Can't wrap try/catch for region: R(15:40|41|(1:96)(1:45)|(9:95|48|(1:50)(1:93)|51|(3:87|88|89)(1:53)|(1:86)(1:56)|(1:85)|59|(3:61|62|63)(6:(1:65)|(1:(3:70|71|72))|73|74|75|(3:77|78|79)(3:80|71|72)))|47|48|(0)(0)|51|(0)(0)|(0)|86|(0)|85|59|(0)(0)) */
     /* JADX WARN: Can't wrap try/catch for region: R(6:(1:65)|(1:(3:70|71|72))|73|74|75|(3:77|78|79)(3:80|71|72)) */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x0112, code lost:
-    
-        if (r10 == (-1)) goto L57;
-     */
+
+       if (r10 == (-1)) goto L57;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:81:0x01ca, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:83:0x0167, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:50:0x011f  */
     /* JADX WARN: Removed duplicated region for block: B:53:0x0134  */
@@ -6993,21 +9765,28 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             Method dump skipped, instructions count: 554
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.startVpnProfile(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.startVpnProfile(java.lang.String):int");
     }
 
-    public final synchronized EnterpriseResponseData stopConnection(KnoxVpnContext knoxVpnContext, String str) {
+    public final synchronized EnterpriseResponseData stopConnection(
+            KnoxVpnContext knoxVpnContext, String str) {
         ContextInfo checkCallingUidPermission = checkCallingUidPermission(knoxVpnContext);
-        Log.d("KnoxVpnEngineService", "knox vpn profile is going to be stopped for the profile " + str);
+        Log.d(
+                "KnoxVpnEngineService",
+                "knox vpn profile is going to be stopped for the profile " + str);
         EnterpriseResponseData enterpriseResponseData = new EnterpriseResponseData();
         enterpriseResponseData.setData(-1);
         enterpriseResponseData.setStatus(1, -1);
-        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
+        if (!updateIfNonLegacyUserAndCheckIfVendorAllowed(
+                knoxVpnContext, checkCallingUidPermission.mCallerUid)) {
             enterpriseResponseData.setData(140);
             return enterpriseResponseData;
         }
         try {
-            if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData) != 0) {
+            if (validateAdminAndVendorForProfile(knoxVpnContext, str, enterpriseResponseData)
+                    != 0) {
                 return enterpriseResponseData;
             }
             IKnoxVpnService binderInterfaceForProfile = getBinderInterfaceForProfile(str);
@@ -7019,14 +9798,37 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             enterpriseResponseData.setData(Integer.valueOf(stopConnection));
             enterpriseResponseData.setStatus(0, 0);
             if (stopConnection != 0) {
-                AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Error occurred trying to stop vpn connection from profile " + str, knoxVpnContext.personaId);
+                AuditLog.logAsUser(
+                        3,
+                        5,
+                        false,
+                        Process.myPid(),
+                        "KnoxVpnEngineService",
+                        "Error occurred trying to stop vpn connection from profile " + str,
+                        knoxVpnContext.personaId);
             } else {
-                AuditLog.logAsUser(5, 5, true, Process.myPid(), "KnoxVpnEngineService", "Connection with vpn vendor service stopped for profile " + str, knoxVpnContext.personaId);
+                AuditLog.logAsUser(
+                        5,
+                        5,
+                        true,
+                        Process.myPid(),
+                        "KnoxVpnEngineService",
+                        "Connection with vpn vendor service stopped for profile " + str,
+                        knoxVpnContext.personaId);
             }
             return enterpriseResponseData;
         } catch (Exception e) {
-            Log.e("KnoxVpnEngineService", "stopping vpn connection : Failure at " + Log.getStackTraceString(e));
-            AuditLog.logAsUser(3, 5, false, Process.myPid(), "KnoxVpnEngineService", "Exception stopping connection for profile " + str, knoxVpnContext.personaId);
+            Log.e(
+                    "KnoxVpnEngineService",
+                    "stopping vpn connection : Failure at " + Log.getStackTraceString(e));
+            AuditLog.logAsUser(
+                    3,
+                    5,
+                    false,
+                    Process.myPid(),
+                    "KnoxVpnEngineService",
+                    "Exception stopping connection for profile " + str,
+                    knoxVpnContext.personaId);
             return enterpriseResponseData;
         }
     }
@@ -7041,7 +9843,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             Method dump skipped, instructions count: 556
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.stopVpnConnectionAfterAdminRemoval(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.stopVpnConnectionAfterAdminRemoval(int):void");
     }
 
     public final void syncVpnProfile(IKnoxVpnService iKnoxVpnService, String str) {
@@ -7050,10 +9854,15 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             String connection = iKnoxVpnService.getConnection(str);
             if (connection != null) {
                 this.mKnoxVpnHelper.getClass();
-                Log.d("KnoxVpnEngineService", "Profile in VendorDB is removed successfullyStatus of remove: " + iKnoxVpnService.removeConnection(KnoxVpnHelper.getProfileNameFromJsonString(connection)));
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Profile in VendorDB is removed successfullyStatus of remove: "
+                                + iKnoxVpnService.removeConnection(
+                                        KnoxVpnHelper.getProfileNameFromJsonString(connection)));
             }
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Sync the profile : Failure at "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Sync the profile : Failure at "), "KnoxVpnEngineService");
         }
     }
 
@@ -7072,7 +9881,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 }
                 this.receiver = null;
             } catch (Exception unused) {
-                Log.e("KnoxVpnEngineService", "Error occured while trying to unregister the reciever");
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "Error occured while trying to unregister the reciever");
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
         } catch (Throwable th) {
@@ -7090,7 +9901,9 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                     if (profileEntry != null && profileEntry.mInterfaceName != null) {
                         boolean z = DBG;
                         if (z) {
-                            Log.d("KnoxVpnEngineService", "unsetDnsSystemProperty: interface name is not null");
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "unsetDnsSystemProperty: interface name is not null");
                         }
                         String str2 = profileEntry.mInterfaceName;
                         int i3 = profileEntry.mNetId;
@@ -7099,14 +9912,29 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                             return;
                         }
                         if (z) {
-                            Log.d("KnoxVpnEngineService", "unsetDnsSystemProperty is reached : whose profileName is " + str + "whose start uid is " + i + " whose stop uid is " + i2 + " whose interface " + str2 + " whose netId is " + i3);
+                            Log.d(
+                                    "KnoxVpnEngineService",
+                                    "unsetDnsSystemProperty is reached : whose profileName is "
+                                            + str
+                                            + "whose start uid is "
+                                            + i
+                                            + " whose stop uid is "
+                                            + i2
+                                            + " whose interface "
+                                            + str2
+                                            + " whose netId is "
+                                            + i3);
                         }
                         ArraySet arraySet = new ArraySet();
                         arraySet.add(new UidRangeParcel(i, i2));
-                        getOemNetdService$1().networkRemoveUidRanges(i3, toUidRangeStableParcels(arraySet));
+                        getOemNetdService$1()
+                                .networkRemoveUidRanges(i3, toUidRangeStableParcels(arraySet));
                     }
                 } catch (Exception unused) {
-                    Log.e("KnoxVpnEngineService", "Exception occured while trying to unset the dns entry for the profile ".concat(str));
+                    Log.e(
+                            "KnoxVpnEngineService",
+                            "Exception occured while trying to unset the dns entry for the profile "
+                                    .concat(str));
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             } catch (Throwable th) {
@@ -7129,7 +9957,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 KnoxVpnHelper knoxVpnHelper = this.mKnoxVpnHelper;
                 String packageName = vpnPackageInfo.getPackageName();
                 knoxVpnHelper.getClass();
-                this.mFirewallHelper.removeMiscRulesRange(KnoxVpnHelper.getContainerIdFromPackageName(packageName), getVirtualInterfaceType(str), str2);
+                this.mFirewallHelper.removeMiscRulesRange(
+                        KnoxVpnHelper.getContainerIdFromPackageName(packageName),
+                        getVirtualInterfaceType(str),
+                        str2);
             } else {
                 arrayList.add(Integer.valueOf(vpnPackageInfo.getUid()));
             }
@@ -7145,14 +9976,18 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     public final void updateNotification(int i, String str, boolean z) {
         VpnProfileInfo profileEntry;
         if (DBG) {
-            Log.d("KnoxVpnEngineService", "updateNotification profileName : " + str + " , flag : " + z);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "updateNotification profileName : " + str + " , flag : " + z);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 profileEntry = this.vpnConfig.getProfileEntry(str);
             } catch (Exception e) {
-                Log.e("KnoxVpnEngineService", "updateNotification : Exception : " + Log.getStackTraceString(e));
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "updateNotification : Exception : " + Log.getStackTraceString(e));
             }
             if (profileEntry == null) {
                 return;
@@ -7168,20 +10003,40 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
     public final boolean updatePackageData(int i, String str) {
         if (str != null) {
             try {
-                Log.d("KnoxVpnEngineService", "Inside updatePackageData : packageName = ".concat(str));
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "Inside updatePackageData : packageName = ".concat(str));
                 this.mVpnStorageProvider.getClass();
-                if (KnoxVpnStorageProvider.mEDM.getDataByFields("VpnPackageInfo", new String[]{"packageName"}, new String[]{str}, new String[]{"profileName", "packageUid"}).size() > 0) {
-                    Log.d("KnoxVpnEngineService", "update to package : Cursor not null and data present, so update packageData UID in DB");
+                if (KnoxVpnStorageProvider.mEDM
+                                .getDataByFields(
+                                        "VpnPackageInfo",
+                                        new String[] {"packageName"},
+                                        new String[] {str},
+                                        new String[] {"profileName", "packageUid"})
+                                .size()
+                        > 0) {
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "update to package : Cursor not null and data present, so update"
+                                + " packageData UID in DB");
                     ContentValues contentValues = new ContentValues();
                     contentValues.put("packageUid", Integer.valueOf(i));
                     String[] strArr = {"packageName"};
                     String[] strArr2 = {str};
-                    Log.d("KnoxVpnEngineService", "update to package : update to package before DB insert:" + strArr2[0] + strArr[0]);
+                    Log.d(
+                            "KnoxVpnEngineService",
+                            "update to package : update to package before DB insert:"
+                                    + strArr2[0]
+                                    + strArr[0]);
                     this.mVpnStorageProvider.getClass();
-                    return KnoxVpnStorageProvider.mEDM.putDataByFields("VpnPackageInfo", strArr, strArr2, contentValues);
+                    return KnoxVpnStorageProvider.mEDM.putDataByFields(
+                            "VpnPackageInfo", strArr, strArr2, contentValues);
                 }
             } catch (Exception e) {
-                EnterpriseVpn$$ExternalSyntheticOutline0.m(e, new StringBuilder("update to package : Exception:"), "KnoxVpnEngineService");
+                EnterpriseVpn$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("update to package : Exception:"),
+                        "KnoxVpnEngineService");
             }
         }
         return false;
@@ -7193,15 +10048,20 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateProxyRules(final int r16, final java.lang.String r17, final java.util.HashMap r18) {
+    public final void updateProxyRules(
+            final int r16, final java.lang.String r17, final java.util.HashMap r18) {
         /*
             Method dump skipped, instructions count: 449
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.updateProxyRules(int, java.lang.String, java.util.HashMap):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.vpn.knoxvpn.KnoxVpnEngineService.updateProxyRules(int,"
+                    + " java.lang.String, java.util.HashMap):void");
     }
 
-    public final void updateRulesToExemptUid(int i, String str, String str2, String str3, int i2, int i3, int i4) {
+    public final void updateRulesToExemptUid(
+            int i, String str, String str2, String str3, int i2, int i3, int i4) {
         this.mFirewallHelper.getClass();
         List defaultRouteAppUidList = KnoxVpnFirewallHelper.getDefaultRouteAppUidList();
         try {
@@ -7234,18 +10094,27 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 removeUidFromExemptList(i3, i3, str, str2);
             }
         } catch (Exception e) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "Error at updateRulesToExemtUid ", "KnoxVpnEngineService");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e, "Error at updateRulesToExemtUid ", "KnoxVpnEngineService");
         }
     }
 
-    public final int validateAdminAndVendorForProfile(KnoxVpnContext knoxVpnContext, String str, EnterpriseResponseData enterpriseResponseData) {
+    public final int validateAdminAndVendorForProfile(
+            KnoxVpnContext knoxVpnContext,
+            String str,
+            EnterpriseResponseData enterpriseResponseData) {
         int i = knoxVpnContext.adminId;
         String str2 = knoxVpnContext.vendorName;
         int i2 = knoxVpnContext.personaId;
         this.mKnoxVpnHelper.getClass();
         KnoxVpnHelper.getPersonifiedName(i2, str2);
         if (str == null || str2 == null) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "Admin check null for profile : ", str, " :admin = ", "KnoxVpnEngineService");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Admin check null for profile : ",
+                    str,
+                    " :admin = ",
+                    "KnoxVpnEngineService");
             enterpriseResponseData.setStatus(1, 7);
             return -1;
         }
@@ -7255,20 +10124,28 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         } else {
             if (i == profileEntry.admin_id || UserHandle.getAppId(i) == 1000) {
                 if (VpnProfileConfig.DBG) {
-                    Log.d(VpnProfileConfig.TAG, "KnoxVpn: Profile admin validation success. profile : ".concat(str));
+                    Log.d(
+                            VpnProfileConfig.TAG,
+                            "KnoxVpn: Profile admin validation success. profile : ".concat(str));
                 }
                 return 0;
             }
-            Log.d(VpnProfileConfig.TAG, "KnoxVpn: Admin does not have permissions for this profile : ".concat(str));
+            Log.d(
+                    VpnProfileConfig.TAG,
+                    "KnoxVpn: Admin does not have permissions for this profile : ".concat(str));
         }
-        NetworkScoreService$$ExternalSyntheticOutline0.m(i, "Admin check failed for profile : ", str, " :admin = ", "KnoxVpnEngineService");
+        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                i, "Admin check failed for profile : ", str, " :admin = ", "KnoxVpnEngineService");
         enterpriseResponseData.setStatus(1, 8);
         return 1;
     }
 
-    public final int writeAddAllPackageToDB(KnoxVpnContext knoxVpnContext, String str, String str2) {
+    public final int writeAddAllPackageToDB(
+            KnoxVpnContext knoxVpnContext, String str, String str2) {
         if (DBG) {
-            Log.d("KnoxVpnEngineService", "writeAddAllPackageToDB:profileName = " + str2 + " :packageName = " + str);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "writeAddAllPackageToDB:profileName = " + str2 + " :packageName = " + str);
         }
         int i = knoxVpnContext.adminId;
         int i2 = knoxVpnContext.personaId;
@@ -7280,8 +10157,12 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             contentValues.put("packageUid", (Integer) (-2));
             contentValues.put("packageCid", Integer.valueOf(i2));
             this.mVpnStorageProvider.getClass();
-            boolean putDataByFields = KnoxVpnStorageProvider.mEDM.putDataByFields("VpnPackageInfo", null, null, contentValues);
-            Log.d("KnoxVpnEngineService", "writeAddAllPackageToDB: status value is" + putDataByFields);
+            boolean putDataByFields =
+                    KnoxVpnStorageProvider.mEDM.putDataByFields(
+                            "VpnPackageInfo", null, null, contentValues);
+            Log.d(
+                    "KnoxVpnEngineService",
+                    "writeAddAllPackageToDB: status value is" + putDataByFields);
             if (!putDataByFields) {
                 return -1;
             }
@@ -7292,7 +10173,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             return 0;
         } catch (Exception e) {
             if (DBG) {
-                VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at writeAddAllPackageToDB API"), "KnoxVpnEngineService");
+                VpnManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("Exception at writeAddAllPackageToDB API"),
+                        "KnoxVpnEngineService");
             }
             return -1;
         }
@@ -7302,7 +10186,15 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
         int i3;
         boolean z = DBG;
         if (z) {
-            GestureWakeup$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("write package DB : profileName = ", str, " :packageName = ", str2, " :cid = "), i2, "KnoxVpnEngineService");
+            GestureWakeup$$ExternalSyntheticOutline0.m(
+                    InitialConfiguration$$ExternalSyntheticOutline0.m(
+                            "write package DB : profileName = ",
+                            str,
+                            " :packageName = ",
+                            str2,
+                            " :cid = "),
+                    i2,
+                    "KnoxVpnEngineService");
         }
         try {
             this.mKnoxVpnHelper.getClass();
@@ -7311,7 +10203,10 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
                 Log.d("KnoxVpnEngineService", "write package DB : Transformed UID: " + i);
             }
             if (z) {
-                Log.d("KnoxVpnEngineService", "write package DB : Transformed packagename before adding to db : " + personifiedName);
+                Log.d(
+                        "KnoxVpnEngineService",
+                        "write package DB : Transformed packagename before adding to db : "
+                                + personifiedName);
             }
             ContentValues contentValues = new ContentValues();
             contentValues.put("packageName", personifiedName);
@@ -7319,7 +10214,8 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             contentValues.put("packageUid", Integer.valueOf(i));
             contentValues.put("packageCid", Integer.valueOf(i2));
             this.mVpnStorageProvider.getClass();
-            if (!KnoxVpnStorageProvider.mEDM.putDataByFields("VpnPackageInfo", null, null, contentValues)) {
+            if (!KnoxVpnStorageProvider.mEDM.putDataByFields(
+                    "VpnPackageInfo", null, null, contentValues)) {
                 return 126;
             }
             VpnProfileInfo profileEntry = this.vpnConfig.getProfileEntry(str);
@@ -7338,7 +10234,11 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             }
             return i3;
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("write package DB : Exception occured for adding vpn, package map."), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder(
+                            "write package DB : Exception occured for adding vpn, package map."),
+                    "KnoxVpnEngineService");
             return -1;
         }
     }
@@ -7348,8 +10248,18 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             this.mKnoxVpnHelper.getClass();
             String personifiedName = KnoxVpnHelper.getPersonifiedName(i, str2);
             this.mVpnStorageProvider.getClass();
-            if (KnoxVpnStorageProvider.mEDM.getDataByFields("vpnNoInternetPermission", new String[]{"packageUid"}, new String[]{Integer.toString(i2)}, new String[]{"packageUid"}).size() > 0) {
-                Log.e("KnoxVpnEngineService", "Error adding the package to permission check db since it is already added");
+            if (KnoxVpnStorageProvider.mEDM
+                            .getDataByFields(
+                                    "vpnNoInternetPermission",
+                                    new String[] {"packageUid"},
+                                    new String[] {Integer.toString(i2)},
+                                    new String[] {"packageUid"})
+                            .size()
+                    > 0) {
+                Log.e(
+                        "KnoxVpnEngineService",
+                        "Error adding the package to permission check db since it is already"
+                            + " added");
                 return;
             }
             ContentValues contentValues = new ContentValues();
@@ -7357,12 +10267,18 @@ public final class KnoxVpnEngineService extends IKnoxVpnPolicy.Stub implements E
             contentValues.put("packageName", personifiedName);
             contentValues.put("packageUid", Integer.valueOf(i2));
             this.mVpnStorageProvider.getClass();
-            if (KnoxVpnStorageProvider.mEDM.putDataByFields("vpnNoInternetPermission", null, null, contentValues)) {
+            if (KnoxVpnStorageProvider.mEDM.putDataByFields(
+                    "vpnNoInternetPermission", null, null, contentValues)) {
                 return;
             }
-            Log.e("KnoxVpnEngineService", "Error adding the package info to permission exempt list in db");
+            Log.e(
+                    "KnoxVpnEngineService",
+                    "Error adding the package info to permission exempt list in db");
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at writePackagestoPermissionCheckDb API "), "KnoxVpnEngineService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception at writePackagestoPermissionCheckDb API "),
+                    "KnoxVpnEngineService");
         }
     }
 }

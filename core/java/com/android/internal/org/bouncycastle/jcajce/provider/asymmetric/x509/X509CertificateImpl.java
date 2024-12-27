@@ -37,6 +37,7 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Integers;
 import com.android.internal.org.bouncycastle.util.Properties;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -65,6 +66,7 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes5.dex */
@@ -76,7 +78,13 @@ abstract class X509CertificateImpl extends X509Certificate implements BCX509Cert
     protected String sigAlgName;
     protected byte[] sigAlgParams;
 
-    X509CertificateImpl(JcaJceHelper bcHelper, Certificate c, BasicConstraints basicConstraints, boolean[] keyUsage, String sigAlgName, byte[] sigAlgParams) {
+    X509CertificateImpl(
+            JcaJceHelper bcHelper,
+            Certificate c,
+            BasicConstraints basicConstraints,
+            boolean[] keyUsage,
+            String sigAlgName,
+            byte[] sigAlgParams) {
         this.bcHelper = bcHelper;
         this.c = c;
         this.basicConstraints = basicConstraints;
@@ -101,17 +109,21 @@ abstract class X509CertificateImpl extends X509Certificate implements BCX509Cert
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity()
+            throws CertificateExpiredException, CertificateNotYetValidException {
         checkValidity(new Date());
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity(Date date)
+            throws CertificateExpiredException, CertificateNotYetValidException {
         if (date.getTime() > getNotAfter().getTime()) {
-            throw new CertificateExpiredException("certificate expired on " + this.c.getEndDate().getTime());
+            throw new CertificateExpiredException(
+                    "certificate expired on " + this.c.getEndDate().getTime());
         }
         if (date.getTime() < getNotBefore().getTime()) {
-            throw new CertificateNotYetValidException("certificate not valid till " + this.c.getStartDate().getTime());
+            throw new CertificateNotYetValidException(
+                    "certificate not valid till " + this.c.getStartDate().getTime());
         }
     }
 
@@ -324,11 +336,22 @@ abstract class X509CertificateImpl extends X509Certificate implements BCX509Cert
     @Override // java.security.cert.X509Extension
     public boolean hasUnsupportedCriticalExtension() {
         Extensions extensions;
-        if (getVersion() == 3 && (extensions = this.c.getTBSCertificate().getExtensions()) != null) {
+        if (getVersion() == 3
+                && (extensions = this.c.getTBSCertificate().getExtensions()) != null) {
             Enumeration e = extensions.oids();
             while (e.hasMoreElements()) {
                 ASN1ObjectIdentifier oid = (ASN1ObjectIdentifier) e.nextElement();
-                if (!oid.equals((ASN1Primitive) Extension.keyUsage) && !oid.equals((ASN1Primitive) Extension.certificatePolicies) && !oid.equals((ASN1Primitive) Extension.policyMappings) && !oid.equals((ASN1Primitive) Extension.inhibitAnyPolicy) && !oid.equals((ASN1Primitive) Extension.cRLDistributionPoints) && !oid.equals((ASN1Primitive) Extension.issuingDistributionPoint) && !oid.equals((ASN1Primitive) Extension.deltaCRLIndicator) && !oid.equals((ASN1Primitive) Extension.policyConstraints) && !oid.equals((ASN1Primitive) Extension.basicConstraints) && !oid.equals((ASN1Primitive) Extension.subjectAlternativeName) && !oid.equals((ASN1Primitive) Extension.nameConstraints)) {
+                if (!oid.equals((ASN1Primitive) Extension.keyUsage)
+                        && !oid.equals((ASN1Primitive) Extension.certificatePolicies)
+                        && !oid.equals((ASN1Primitive) Extension.policyMappings)
+                        && !oid.equals((ASN1Primitive) Extension.inhibitAnyPolicy)
+                        && !oid.equals((ASN1Primitive) Extension.cRLDistributionPoints)
+                        && !oid.equals((ASN1Primitive) Extension.issuingDistributionPoint)
+                        && !oid.equals((ASN1Primitive) Extension.deltaCRLIndicator)
+                        && !oid.equals((ASN1Primitive) Extension.policyConstraints)
+                        && !oid.equals((ASN1Primitive) Extension.basicConstraints)
+                        && !oid.equals((ASN1Primitive) Extension.subjectAlternativeName)
+                        && !oid.equals((ASN1Primitive) Extension.nameConstraints)) {
                     Extension ext = extensions.getExtension(oid);
                     if (ext.isCritical()) {
                         return true;
@@ -383,21 +406,37 @@ abstract class X509CertificateImpl extends X509Certificate implements BCX509Cert
                 if (ext.getExtnValue() != null) {
                     byte[] octs = ext.getExtnValue().getOctets();
                     ASN1InputStream dIn = new ASN1InputStream(octs);
-                    buf.append("                       critical(").append(ext.isCritical()).append(") ");
+                    buf.append("                       critical(")
+                            .append(ext.isCritical())
+                            .append(") ");
                     try {
                         if (oid.equals((ASN1Primitive) Extension.basicConstraints)) {
                             buf.append(BasicConstraints.getInstance(dIn.readObject())).append(nl);
                         } else if (oid.equals((ASN1Primitive) Extension.keyUsage)) {
                             buf.append(KeyUsage.getInstance(dIn.readObject())).append(nl);
-                        } else if (oid.equals((ASN1Primitive) MiscObjectIdentifiers.netscapeCertType)) {
-                            buf.append(new NetscapeCertType(DERBitString.getInstance(dIn.readObject()))).append(nl);
-                        } else if (oid.equals((ASN1Primitive) MiscObjectIdentifiers.netscapeRevocationURL)) {
-                            buf.append(new NetscapeRevocationURL(DERIA5String.getInstance(dIn.readObject()))).append(nl);
-                        } else if (oid.equals((ASN1Primitive) MiscObjectIdentifiers.verisignCzagExtension)) {
-                            buf.append(new VerisignCzagExtension(DERIA5String.getInstance(dIn.readObject()))).append(nl);
+                        } else if (oid.equals(
+                                (ASN1Primitive) MiscObjectIdentifiers.netscapeCertType)) {
+                            buf.append(
+                                            new NetscapeCertType(
+                                                    DERBitString.getInstance(dIn.readObject())))
+                                    .append(nl);
+                        } else if (oid.equals(
+                                (ASN1Primitive) MiscObjectIdentifiers.netscapeRevocationURL)) {
+                            buf.append(
+                                            new NetscapeRevocationURL(
+                                                    DERIA5String.getInstance(dIn.readObject())))
+                                    .append(nl);
+                        } else if (oid.equals(
+                                (ASN1Primitive) MiscObjectIdentifiers.verisignCzagExtension)) {
+                            buf.append(
+                                            new VerisignCzagExtension(
+                                                    DERIA5String.getInstance(dIn.readObject())))
+                                    .append(nl);
                         } else {
                             buf.append(oid.getId());
-                            buf.append(" value = ").append(ASN1Dump.dumpAsString(dIn.readObject())).append(nl);
+                            buf.append(" value = ")
+                                    .append(ASN1Dump.dumpAsString(dIn.readObject()))
+                                    .append(nl);
                         }
                     } catch (Exception e2) {
                         buf.append(oid.getId());
@@ -412,62 +451,102 @@ abstract class X509CertificateImpl extends X509Certificate implements BCX509Cert
     }
 
     @Override // java.security.cert.Certificate
-    public final void verify(PublicKey key) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
-        doVerify(key, new SignatureCreator() { // from class: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.X509CertificateImpl.1
-            @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.SignatureCreator
-            public Signature createSignature(String sigName) throws NoSuchAlgorithmException {
-                try {
-                    return X509CertificateImpl.this.bcHelper.createSignature(sigName);
-                } catch (Exception e) {
-                    return Signature.getInstance(sigName);
-                }
-            }
-        });
+    public final void verify(PublicKey key)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    NoSuchProviderException,
+                    SignatureException {
+        doVerify(
+                key,
+                new SignatureCreator() { // from class:
+                                         // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.X509CertificateImpl.1
+                    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.SignatureCreator
+                    public Signature createSignature(String sigName)
+                            throws NoSuchAlgorithmException {
+                        try {
+                            return X509CertificateImpl.this.bcHelper.createSignature(sigName);
+                        } catch (Exception e) {
+                            return Signature.getInstance(sigName);
+                        }
+                    }
+                });
     }
 
     @Override // java.security.cert.Certificate
-    public final void verify(PublicKey key, final String sigProvider) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
-        doVerify(key, new SignatureCreator() { // from class: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.X509CertificateImpl.2
-            @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.SignatureCreator
-            public Signature createSignature(String sigName) throws NoSuchAlgorithmException, NoSuchProviderException {
-                if (sigProvider != null) {
-                    return Signature.getInstance(sigName, sigProvider);
-                }
-                return Signature.getInstance(sigName);
-            }
-        });
+    public final void verify(PublicKey key, final String sigProvider)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    NoSuchProviderException,
+                    SignatureException {
+        doVerify(
+                key,
+                new SignatureCreator() { // from class:
+                                         // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.X509CertificateImpl.2
+                    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.SignatureCreator
+                    public Signature createSignature(String sigName)
+                            throws NoSuchAlgorithmException, NoSuchProviderException {
+                        if (sigProvider != null) {
+                            return Signature.getInstance(sigName, sigProvider);
+                        }
+                        return Signature.getInstance(sigName);
+                    }
+                });
     }
 
     @Override // java.security.cert.X509Certificate, java.security.cert.Certificate
-    public final void verify(PublicKey key, final Provider sigProvider) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    public final void verify(PublicKey key, final Provider sigProvider)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    SignatureException {
         try {
-            doVerify(key, new SignatureCreator() { // from class: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.X509CertificateImpl.3
-                @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.SignatureCreator
-                public Signature createSignature(String sigName) throws NoSuchAlgorithmException {
-                    if (sigProvider != null) {
-                        return Signature.getInstance(sigName, sigProvider);
-                    }
-                    return Signature.getInstance(sigName);
-                }
-            });
+            doVerify(
+                    key,
+                    new SignatureCreator() { // from class:
+                                             // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.X509CertificateImpl.3
+                        @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.SignatureCreator
+                        public Signature createSignature(String sigName)
+                                throws NoSuchAlgorithmException {
+                            if (sigProvider != null) {
+                                return Signature.getInstance(sigName, sigProvider);
+                            }
+                            return Signature.getInstance(sigName);
+                        }
+                    });
         } catch (NoSuchProviderException e) {
             throw new NoSuchAlgorithmException("provider issue: " + e.getMessage());
         }
     }
 
-    private void doVerify(PublicKey key, SignatureCreator signatureCreator) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchProviderException {
-        if ((key instanceof CompositePublicKey) && X509SignatureUtil.isCompositeAlgorithm(this.c.getSignatureAlgorithm())) {
+    private void doVerify(PublicKey key, SignatureCreator signatureCreator)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    SignatureException,
+                    NoSuchProviderException {
+        if ((key instanceof CompositePublicKey)
+                && X509SignatureUtil.isCompositeAlgorithm(this.c.getSignatureAlgorithm())) {
             List<PublicKey> pubKeys = ((CompositePublicKey) key).getPublicKeys();
-            ASN1Sequence keySeq = ASN1Sequence.getInstance(this.c.getSignatureAlgorithm().getParameters());
-            ASN1Sequence sigSeq = ASN1Sequence.getInstance(DERBitString.getInstance(this.c.getSignature()).getBytes());
+            ASN1Sequence keySeq =
+                    ASN1Sequence.getInstance(this.c.getSignatureAlgorithm().getParameters());
+            ASN1Sequence sigSeq =
+                    ASN1Sequence.getInstance(
+                            DERBitString.getInstance(this.c.getSignature()).getBytes());
             boolean success = false;
             for (int i = 0; i != pubKeys.size(); i++) {
                 if (pubKeys.get(i) != null) {
-                    AlgorithmIdentifier sigAlg = AlgorithmIdentifier.getInstance(keySeq.getObjectAt(i));
+                    AlgorithmIdentifier sigAlg =
+                            AlgorithmIdentifier.getInstance(keySeq.getObjectAt(i));
                     String sigName = X509SignatureUtil.getSignatureName(sigAlg);
                     SignatureException sigExc = null;
                     try {
-                        checkSignature(pubKeys.get(i), signatureCreator.createSignature(sigName), sigAlg.getParameters(), DERBitString.getInstance(sigSeq.getObjectAt(i)).getBytes());
+                        checkSignature(
+                                pubKeys.get(i),
+                                signatureCreator.createSignature(sigName),
+                                sigAlg.getParameters(),
+                                DERBitString.getInstance(sigSeq.getObjectAt(i)).getBytes());
                         success = true;
                     } catch (SignatureException e) {
                         sigExc = e;
@@ -483,15 +562,23 @@ abstract class X509CertificateImpl extends X509Certificate implements BCX509Cert
             return;
         }
         if (X509SignatureUtil.isCompositeAlgorithm(this.c.getSignatureAlgorithm())) {
-            ASN1Sequence keySeq2 = ASN1Sequence.getInstance(this.c.getSignatureAlgorithm().getParameters());
-            ASN1Sequence sigSeq2 = ASN1Sequence.getInstance(DERBitString.getInstance(this.c.getSignature()).getBytes());
+            ASN1Sequence keySeq2 =
+                    ASN1Sequence.getInstance(this.c.getSignatureAlgorithm().getParameters());
+            ASN1Sequence sigSeq2 =
+                    ASN1Sequence.getInstance(
+                            DERBitString.getInstance(this.c.getSignature()).getBytes());
             boolean success2 = false;
             for (int i2 = 0; i2 != sigSeq2.size(); i2++) {
-                AlgorithmIdentifier sigAlg2 = AlgorithmIdentifier.getInstance(keySeq2.getObjectAt(i2));
+                AlgorithmIdentifier sigAlg2 =
+                        AlgorithmIdentifier.getInstance(keySeq2.getObjectAt(i2));
                 String sigName2 = X509SignatureUtil.getSignatureName(sigAlg2);
                 SignatureException sigExc2 = null;
                 try {
-                    checkSignature(key, signatureCreator.createSignature(sigName2), sigAlg2.getParameters(), DERBitString.getInstance(sigSeq2.getObjectAt(i2)).getBytes());
+                    checkSignature(
+                            key,
+                            signatureCreator.createSignature(sigName2),
+                            sigAlg2.getParameters(),
+                            DERBitString.getInstance(sigSeq2.getObjectAt(i2)).getBytes());
                     success2 = true;
                 } catch (InvalidKeyException e2) {
                 } catch (NoSuchAlgorithmException e3) {
@@ -513,24 +600,37 @@ abstract class X509CertificateImpl extends X509Certificate implements BCX509Cert
             List<PublicKey> keys = ((CompositePublicKey) key).getPublicKeys();
             for (int i3 = 0; i3 != keys.size(); i3++) {
                 try {
-                    checkSignature(keys.get(i3), signature, this.c.getSignatureAlgorithm().getParameters(), getSignature());
+                    checkSignature(
+                            keys.get(i3),
+                            signature,
+                            this.c.getSignatureAlgorithm().getParameters(),
+                            getSignature());
                     return;
                 } catch (InvalidKeyException e5) {
                 }
             }
             throw new InvalidKeyException("no matching signature found");
         }
-        checkSignature(key, signature, this.c.getSignatureAlgorithm().getParameters(), getSignature());
+        checkSignature(
+                key, signature, this.c.getSignatureAlgorithm().getParameters(), getSignature());
     }
 
-    private void checkSignature(PublicKey key, Signature signature, ASN1Encodable params, byte[] sigBytes) throws CertificateException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
-        if (!isAlgIdEqual(this.c.getSignatureAlgorithm(), this.c.getTBSCertificate().getSignature())) {
-            throw new CertificateException("signature algorithm in TBS cert not same as outer cert");
+    private void checkSignature(
+            PublicKey key, Signature signature, ASN1Encodable params, byte[] sigBytes)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    SignatureException,
+                    InvalidKeyException {
+        if (!isAlgIdEqual(
+                this.c.getSignatureAlgorithm(), this.c.getTBSCertificate().getSignature())) {
+            throw new CertificateException(
+                    "signature algorithm in TBS cert not same as outer cert");
         }
         X509SignatureUtil.setSignatureParameters(signature, params);
         signature.initVerify(key);
         try {
-            OutputStream sigOut = new BufferedOutputStream(OutputStreamFactory.createStream(signature), 512);
+            OutputStream sigOut =
+                    new BufferedOutputStream(OutputStreamFactory.createStream(signature), 512);
             this.c.getTBSCertificate().encodeTo(sigOut, ASN1Encoding.DER);
             sigOut.close();
             if (!signature.verify(sigBytes)) {
@@ -545,7 +645,8 @@ abstract class X509CertificateImpl extends X509Certificate implements BCX509Cert
         if (!id1.getAlgorithm().equals((ASN1Primitive) id2.getAlgorithm())) {
             return false;
         }
-        if (Properties.isOverrideSet("com.android.internal.org.bouncycastle.x509.allow_absent_equiv_NULL")) {
+        if (Properties.isOverrideSet(
+                "com.android.internal.org.bouncycastle.x509.allow_absent_equiv_NULL")) {
             if (id1.getParameters() == null) {
                 return id2.getParameters() == null || id2.getParameters().equals(DERNull.INSTANCE);
             }
@@ -562,7 +663,8 @@ abstract class X509CertificateImpl extends X509Certificate implements BCX509Cert
         return true;
     }
 
-    private static Collection getAlternativeNames(Certificate c, String oid) throws CertificateParsingException {
+    private static Collection getAlternativeNames(Certificate c, String oid)
+            throws CertificateParsingException {
         byte[] extOctets = getExtensionOctets(c, oid);
         if (extOctets == null) {
             return null;
@@ -586,10 +688,13 @@ abstract class X509CertificateImpl extends X509Certificate implements BCX509Cert
                         list.add(((ASN1String) genName.getName()).getString());
                         temp.add(Collections.unmodifiableList(list));
                     case 4:
-                        list.add(X500Name.getInstance(RFC4519Style.INSTANCE, genName.getName()).toString());
+                        list.add(
+                                X500Name.getInstance(RFC4519Style.INSTANCE, genName.getName())
+                                        .toString());
                         temp.add(Collections.unmodifiableList(list));
                     case 7:
-                        byte[] addrBytes = DEROctetString.getInstance(genName.getName()).getOctets();
+                        byte[] addrBytes =
+                                DEROctetString.getInstance(genName.getName()).getOctets();
                         try {
                             String addr = InetAddress.getByAddress(addrBytes).getHostAddress();
                             list.add(addr);

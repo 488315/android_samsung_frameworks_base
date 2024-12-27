@@ -9,14 +9,16 @@ import android.telephony.ims.stub.ImsFeatureConfiguration;
 
 /* loaded from: classes4.dex */
 public interface IImsServiceControllerListener extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.ims.aidl.IImsServiceControllerListener";
+    public static final String DESCRIPTOR =
+            "android.telephony.ims.aidl.IImsServiceControllerListener";
 
-    void onUpdateSupportedImsFeatures(ImsFeatureConfiguration imsFeatureConfiguration) throws RemoteException;
+    void onUpdateSupportedImsFeatures(ImsFeatureConfiguration imsFeatureConfiguration)
+            throws RemoteException;
 
     public static class Default implements IImsServiceControllerListener {
         @Override // android.telephony.ims.aidl.IImsServiceControllerListener
-        public void onUpdateSupportedImsFeatures(ImsFeatureConfiguration c) throws RemoteException {
-        }
+        public void onUpdateSupportedImsFeatures(ImsFeatureConfiguration c)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +26,7 @@ public interface IImsServiceControllerListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsServiceControllerListener {
+    public abstract static class Stub extends Binder implements IImsServiceControllerListener {
         static final int TRANSACTION_onUpdateSupportedImsFeatures = 1;
 
         public Stub() {
@@ -62,7 +64,8 @@ public interface IImsServiceControllerListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsServiceControllerListener.DESCRIPTOR);
             }
@@ -72,7 +75,9 @@ public interface IImsServiceControllerListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ImsFeatureConfiguration _arg0 = (ImsFeatureConfiguration) data.readTypedObject(ImsFeatureConfiguration.CREATOR);
+                    ImsFeatureConfiguration _arg0 =
+                            (ImsFeatureConfiguration)
+                                    data.readTypedObject(ImsFeatureConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     onUpdateSupportedImsFeatures(_arg0);
                     return true;
@@ -98,7 +103,8 @@ public interface IImsServiceControllerListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsServiceControllerListener
-            public void onUpdateSupportedImsFeatures(ImsFeatureConfiguration c) throws RemoteException {
+            public void onUpdateSupportedImsFeatures(ImsFeatureConfiguration c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsServiceControllerListener.DESCRIPTOR);

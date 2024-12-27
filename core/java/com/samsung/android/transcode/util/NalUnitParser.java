@@ -1,7 +1,7 @@
 package com.samsung.android.transcode.util;
 
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
-import com.samsung.android.transcode.util.NalUnitParser;
+
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -17,7 +17,8 @@ public class NalUnitParser {
     private static final int MDCV_SEI_MESSAGE_PAYLOAD_SIZE = 24;
     private static final int MDCV_SEI_MESSAGE_PAYLOAD_TYPE = 137;
     private static final byte[] NAL_START_CODE = {0, 0, 0, 1};
-    private static final String STREAM_DUMP_PATH = "/data/data/com.samsung.app.newtrim/files/inputStream.bin";
+    private static final String STREAM_DUMP_PATH =
+            "/data/data/com.samsung.app.newtrim/files/inputStream.bin";
     private static final String TAG = "NalUnitParser";
     private byte[] mBuffer;
     private final int mBufferSize;
@@ -50,12 +51,19 @@ public class NalUnitParser {
         }
 
         static AVCNalUnitType getNalType(final int val) {
-            return (AVCNalUnitType) Arrays.stream(values()).filter(new Predicate() { // from class: com.samsung.android.transcode.util.NalUnitParser$AVCNalUnitType$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return NalUnitParser.AVCNalUnitType.lambda$getNalType$0(val, (NalUnitParser.AVCNalUnitType) obj);
-                }
-            }).findFirst().orElse(UNKNOWN);
+            return (AVCNalUnitType)
+                    Arrays.stream(values())
+                            .filter(
+                                    new Predicate() { // from class:
+                                                      // com.samsung.android.transcode.util.NalUnitParser$AVCNalUnitType$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            return NalUnitParser.AVCNalUnitType.lambda$getNalType$0(
+                                                    val, (NalUnitParser.AVCNalUnitType) obj);
+                                        }
+                                    })
+                            .findFirst()
+                            .orElse(UNKNOWN);
         }
 
         static /* synthetic */ boolean lambda$getNalType$0(int val, AVCNalUnitType type) {
@@ -86,12 +94,21 @@ public class NalUnitParser {
         }
 
         static HEVCNalUnitType getNalType(final int val) {
-            return (HEVCNalUnitType) Arrays.stream(values()).filter(new Predicate() { // from class: com.samsung.android.transcode.util.NalUnitParser$HEVCNalUnitType$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return NalUnitParser.HEVCNalUnitType.lambda$getNalType$0(val, (NalUnitParser.HEVCNalUnitType) obj);
-                }
-            }).findFirst().orElse(UNKNOWN);
+            return (HEVCNalUnitType)
+                    Arrays.stream(values())
+                            .filter(
+                                    new Predicate() { // from class:
+                                                      // com.samsung.android.transcode.util.NalUnitParser$HEVCNalUnitType$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            return NalUnitParser.HEVCNalUnitType
+                                                    .lambda$getNalType$0(
+                                                            val,
+                                                            (NalUnitParser.HEVCNalUnitType) obj);
+                                        }
+                                    })
+                            .findFirst()
+                            .orElse(UNKNOWN);
         }
 
         static /* synthetic */ boolean lambda$getNalType$0(int val, HEVCNalUnitType type) {
@@ -123,32 +140,59 @@ public class NalUnitParser {
         }
         boolean allMetaInOneNal = false;
         if (this.mMasteringDisplayColorMetaStartPos == this.mContentsLevelInfoMetaStartPos) {
-            masteringDisplayColorMetaEndPos = findNalStartCode(this.mBuffer, this.mMasteringDisplayColorMetaStartPos + 4);
+            masteringDisplayColorMetaEndPos =
+                    findNalStartCode(this.mBuffer, this.mMasteringDisplayColorMetaStartPos + 4);
             contentsLevelInfoMetaEndPos = masteringDisplayColorMetaEndPos;
             allMetaInOneNal = true;
         } else {
-            masteringDisplayColorMetaEndPos = findNalStartCode(this.mBuffer, this.mMasteringDisplayColorMetaStartPos + 4);
+            masteringDisplayColorMetaEndPos =
+                    findNalStartCode(this.mBuffer, this.mMasteringDisplayColorMetaStartPos + 4);
             if (findContentLightLevel()) {
-                contentsLevelInfoMetaEndPos = findNalStartCode(this.mBuffer, this.mContentsLevelInfoMetaStartPos + 4);
+                contentsLevelInfoMetaEndPos =
+                        findNalStartCode(this.mBuffer, this.mContentsLevelInfoMetaStartPos + 4);
             } else {
                 LogS.e(TAG, "cannot find Content light level info meta");
                 return false;
             }
         }
-        LogS.e(TAG, "Mastering display color meta buffer position : " + this.mMasteringDisplayColorMetaStartPos + " ~ " + masteringDisplayColorMetaEndPos);
-        LogS.e(TAG, "Content light level info meta buffer position : " + this.mContentsLevelInfoMetaStartPos + " ~ " + contentsLevelInfoMetaEndPos);
-        int sizeOfMasteringDisplayColorMeta = masteringDisplayColorMetaEndPos - this.mMasteringDisplayColorMetaStartPos;
+        LogS.e(
+                TAG,
+                "Mastering display color meta buffer position : "
+                        + this.mMasteringDisplayColorMetaStartPos
+                        + " ~ "
+                        + masteringDisplayColorMetaEndPos);
+        LogS.e(
+                TAG,
+                "Content light level info meta buffer position : "
+                        + this.mContentsLevelInfoMetaStartPos
+                        + " ~ "
+                        + contentsLevelInfoMetaEndPos);
+        int sizeOfMasteringDisplayColorMeta =
+                masteringDisplayColorMetaEndPos - this.mMasteringDisplayColorMetaStartPos;
         LogS.e(TAG, "Mastering display color meta data size : " + sizeOfMasteringDisplayColorMeta);
-        int sizeOfContentsLevelInfoMeta = allMetaInOneNal ? 0 : contentsLevelInfoMetaEndPos - this.mContentsLevelInfoMetaStartPos;
+        int sizeOfContentsLevelInfoMeta =
+                allMetaInOneNal
+                        ? 0
+                        : contentsLevelInfoMetaEndPos - this.mContentsLevelInfoMetaStartPos;
         if (sizeOfMasteringDisplayColorMeta < 0 || sizeOfContentsLevelInfoMeta < 0) {
-            LogS.e(TAG, "invalid size : " + sizeOfMasteringDisplayColorMeta + " " + sizeOfContentsLevelInfoMeta);
+            LogS.e(
+                    TAG,
+                    "invalid size : "
+                            + sizeOfMasteringDisplayColorMeta
+                            + " "
+                            + sizeOfContentsLevelInfoMeta);
             return false;
         }
-        this.mHdrStaticMeta = ByteBuffer.allocate(sizeOfMasteringDisplayColorMeta + sizeOfContentsLevelInfoMeta);
-        this.mHdrStaticMeta.put(this.mBuffer, this.mMasteringDisplayColorMetaStartPos, sizeOfMasteringDisplayColorMeta);
+        this.mHdrStaticMeta =
+                ByteBuffer.allocate(sizeOfMasteringDisplayColorMeta + sizeOfContentsLevelInfoMeta);
+        this.mHdrStaticMeta.put(
+                this.mBuffer,
+                this.mMasteringDisplayColorMetaStartPos,
+                sizeOfMasteringDisplayColorMeta);
         if (!allMetaInOneNal) {
             LogS.e(TAG, "Content light level info meta data size : " + sizeOfContentsLevelInfoMeta);
-            this.mHdrStaticMeta.put(this.mBuffer, this.mContentsLevelInfoMetaStartPos, sizeOfContentsLevelInfoMeta);
+            this.mHdrStaticMeta.put(
+                    this.mBuffer, this.mContentsLevelInfoMetaStartPos, sizeOfContentsLevelInfoMeta);
         }
         this.mBuffer = null;
         return true;
@@ -187,7 +231,8 @@ public class NalUnitParser {
     private int findPPSPosition(byte[] buffer, boolean isHEVC) {
         int index;
         int index2 = 0;
-        while (buffer.length - index2 >= NAL_START_CODE.length && (index = findNalStartCode(buffer, index2)) >= 0) {
+        while (buffer.length - index2 >= NAL_START_CODE.length
+                && (index = findNalStartCode(buffer, index2)) >= 0) {
             if (isPPSNalUnit(buffer, index, isHEVC)) {
                 return index;
             }
@@ -217,9 +262,15 @@ public class NalUnitParser {
                 index += 4;
                 if (isMasteringDisplayColorInfo(index + 2)) {
                     if (findContentLightLevelWithinDisplayMasteringNal(index + 26)) {
-                        LogS.e(TAG, "Mastering display color meta and Content light level info meta in one NAL");
+                        LogS.e(
+                                TAG,
+                                "Mastering display color meta and Content light level info meta in"
+                                    + " one NAL");
                     } else {
-                        LogS.e(TAG, "Mastering display color meta and Content light level info meta not  in one NAL");
+                        LogS.e(
+                                TAG,
+                                "Mastering display color meta and Content light level info meta not"
+                                    + "  in one NAL");
                     }
                     return true;
                 }
@@ -231,7 +282,9 @@ public class NalUnitParser {
     }
 
     private boolean findContentLightLevelWithinDisplayMasteringNal(int startIndex) {
-        for (int index = startIndex; index + 2 < this.mBufferSize && !isNalStartCode(this.mBuffer, index); index++) {
+        for (int index = startIndex;
+                index + 2 < this.mBufferSize && !isNalStartCode(this.mBuffer, index);
+                index++) {
             if (isContentLightLevelInfo(index)) {
                 this.mContentsLevelInfoMetaStartPos = this.mMasteringDisplayColorMetaStartPos;
                 return true;

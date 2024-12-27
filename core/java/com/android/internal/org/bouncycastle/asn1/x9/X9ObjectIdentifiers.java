@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.x9;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
+
 import com.samsung.android.media.AudioParameter;
 
 /* loaded from: classes5.dex */
@@ -34,7 +35,8 @@ public interface X9ObjectIdentifiers {
     public static final ASN1ObjectIdentifier c2onb191v5 = cTwoCurve.branch("9");
     public static final ASN1ObjectIdentifier c2pnb208w1 = cTwoCurve.branch("10");
     public static final ASN1ObjectIdentifier c2tnb239v1 = cTwoCurve.branch("11");
-    public static final ASN1ObjectIdentifier c2tnb239v2 = cTwoCurve.branch(AudioParameter.VALUE_VM_CSD_500_WARNING);
+    public static final ASN1ObjectIdentifier c2tnb239v2 =
+            cTwoCurve.branch(AudioParameter.VALUE_VM_CSD_500_WARNING);
     public static final ASN1ObjectIdentifier c2tnb239v3 = cTwoCurve.branch("13");
     public static final ASN1ObjectIdentifier c2onb239v4 = cTwoCurve.branch("14");
     public static final ASN1ObjectIdentifier c2onb239v5 = cTwoCurve.branch("15");
@@ -52,11 +54,16 @@ public interface X9ObjectIdentifiers {
     public static final ASN1ObjectIdentifier prime239v3 = primeCurve.branch("6");
     public static final ASN1ObjectIdentifier prime256v1 = primeCurve.branch("7");
     public static final ASN1ObjectIdentifier id_dsa = new ASN1ObjectIdentifier("1.2.840.10040.4.1");
-    public static final ASN1ObjectIdentifier id_dsa_with_sha1 = new ASN1ObjectIdentifier("1.2.840.10040.4.3");
-    public static final ASN1ObjectIdentifier x9_63_scheme = new ASN1ObjectIdentifier("1.3.133.16.840.63.0");
-    public static final ASN1ObjectIdentifier dhSinglePass_stdDH_sha1kdf_scheme = x9_63_scheme.branch("2");
-    public static final ASN1ObjectIdentifier dhSinglePass_cofactorDH_sha1kdf_scheme = x9_63_scheme.branch("3");
-    public static final ASN1ObjectIdentifier mqvSinglePass_sha1kdf_scheme = x9_63_scheme.branch("16");
+    public static final ASN1ObjectIdentifier id_dsa_with_sha1 =
+            new ASN1ObjectIdentifier("1.2.840.10040.4.3");
+    public static final ASN1ObjectIdentifier x9_63_scheme =
+            new ASN1ObjectIdentifier("1.3.133.16.840.63.0");
+    public static final ASN1ObjectIdentifier dhSinglePass_stdDH_sha1kdf_scheme =
+            x9_63_scheme.branch("2");
+    public static final ASN1ObjectIdentifier dhSinglePass_cofactorDH_sha1kdf_scheme =
+            x9_63_scheme.branch("3");
+    public static final ASN1ObjectIdentifier mqvSinglePass_sha1kdf_scheme =
+            x9_63_scheme.branch("16");
     public static final ASN1ObjectIdentifier ansi_X9_42 = new ASN1ObjectIdentifier("1.2.840.10046");
     public static final ASN1ObjectIdentifier dhpublicnumber = ansi_X9_42.branch("2.1");
     public static final ASN1ObjectIdentifier x9_42_schemes = ansi_X9_42.branch("3");
@@ -68,7 +75,8 @@ public interface X9ObjectIdentifiers {
     public static final ASN1ObjectIdentifier dhHybridOneFlow = x9_42_schemes.branch("6");
     public static final ASN1ObjectIdentifier mqv2 = x9_42_schemes.branch("7");
     public static final ASN1ObjectIdentifier mqv1 = x9_42_schemes.branch("8");
-    public static final ASN1ObjectIdentifier x9_44 = new ASN1ObjectIdentifier("1.3.133.16.840.9.44");
+    public static final ASN1ObjectIdentifier x9_44 =
+            new ASN1ObjectIdentifier("1.3.133.16.840.9.44");
     public static final ASN1ObjectIdentifier x9_44_components = x9_44.branch("1");
     public static final ASN1ObjectIdentifier id_kdf_kdf2 = x9_44_components.branch("1");
     public static final ASN1ObjectIdentifier id_kdf_kdf3 = x9_44_components.branch("2");

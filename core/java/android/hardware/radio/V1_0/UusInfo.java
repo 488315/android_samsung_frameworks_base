@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -20,18 +21,29 @@ public final class UusInfo {
             return false;
         }
         UusInfo other = (UusInfo) otherObject;
-        if (this.uusType == other.uusType && this.uusDcs == other.uusDcs && HidlSupport.deepEquals(this.uusData, other.uusData)) {
+        if (this.uusType == other.uusType
+                && this.uusDcs == other.uusDcs
+                && HidlSupport.deepEquals(this.uusData, other.uusData)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.uusType))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.uusDcs))), Integer.valueOf(HidlSupport.deepHashCode(this.uusData)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.uusType))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.uusDcs))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.uusData)));
     }
 
     public final String toString() {
-        return "{.uusType = " + UusType.toString(this.uusType) + ", .uusDcs = " + UusDcs.toString(this.uusDcs) + ", .uusData = " + this.uusData + "}";
+        return "{.uusType = "
+                + UusType.toString(this.uusType)
+                + ", .uusDcs = "
+                + UusDcs.toString(this.uusDcs)
+                + ", .uusData = "
+                + this.uusData
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -43,7 +55,8 @@ public final class UusInfo {
         ArrayList<UusInfo> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             UusInfo _hidl_vec_element = new UusInfo();
@@ -53,11 +66,16 @@ public final class UusInfo {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.uusType = _hidl_blob.getInt32(_hidl_offset + 0);
         this.uusDcs = _hidl_blob.getInt32(_hidl_offset + 4);
         this.uusData = _hidl_blob.getString(_hidl_offset + 8);
-        parcel.readEmbeddedBuffer(this.uusData.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.uusData.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 8 + 0,
+                false);
     }
 
     public final void writeToParcel(HwParcel parcel) {

@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ISemContextEngineManager extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.contextengine.ISemContextEngineManager";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.contextengine.ISemContextEngineManager";
 
     void setDefault() throws RemoteException;
 
     public static class Default implements ISemContextEngineManager {
         @Override // com.samsung.android.contextengine.ISemContextEngineManager
-        public void setDefault() throws RemoteException {
-        }
+        public void setDefault() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ISemContextEngineManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemContextEngineManager {
+    public abstract static class Stub extends Binder implements ISemContextEngineManager {
         static final int TRANSACTION_setDefault = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ISemContextEngineManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemContextEngineManager.DESCRIPTOR);
             }

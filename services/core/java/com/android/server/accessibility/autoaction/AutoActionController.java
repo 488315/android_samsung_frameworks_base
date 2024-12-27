@@ -10,6 +10,7 @@ import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.Toast;
+
 import com.android.server.accessibility.BaseEventStreamTransformation;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -41,13 +42,18 @@ public final class AutoActionController extends BaseEventStreamTransformation {
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.accessibility.autoaction.AutoActionController$ActionScheduler$3, reason: invalid class name */
         public final class AnonymousClass3 implements Runnable {
-            public AnonymousClass3() {
-            }
+            public AnonymousClass3() {}
 
             @Override // java.lang.Runnable
             public final void run() {
                 ActionScheduler actionScheduler = ActionScheduler.this;
-                Toast.makeText(AutoActionController.this.mContext, actionScheduler.mIsPauseAutoClick ? R.string.config_chooserActivity : R.string.config_clockFontFamily, 0).show();
+                Toast.makeText(
+                                AutoActionController.this.mContext,
+                                actionScheduler.mIsPauseAutoClick
+                                        ? R.string.config_chooserActivity
+                                        : R.string.config_clockFontFamily,
+                                0)
+                        .show();
             }
         }
 
@@ -65,9 +71,12 @@ public final class AutoActionController extends BaseEventStreamTransformation {
             if (this.mActive) {
                 CornerActionController cornerActionController = this.mCornerActionController;
                 if (cornerActionController != null) {
-                    CornerActionCircleCue cornerActionCircleCue = cornerActionController.mDurationProgress;
+                    CornerActionCircleCue cornerActionCircleCue =
+                            cornerActionController.mDurationProgress;
                     if (cornerActionCircleCue != null) {
-                        cornerActionCircleCue.runOnUiThread(new CornerActionCircleCue$$ExternalSyntheticLambda2(cornerActionCircleCue, false));
+                        cornerActionCircleCue.runOnUiThread(
+                                new CornerActionCircleCue$$ExternalSyntheticLambda2(
+                                        cornerActionCircleCue, false));
                     }
                     this.mCornerActionController.clearDuration();
                 }
@@ -87,9 +96,9 @@ public final class AutoActionController extends BaseEventStreamTransformation {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:84:0x01fc, code lost:
-        
-            if (r14 != (-1)) goto L88;
-         */
+
+           if (r14 != (-1)) goto L88;
+        */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -100,16 +109,39 @@ public final class AutoActionController extends BaseEventStreamTransformation {
                 Method dump skipped, instructions count: 629
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.autoaction.AutoActionController.ActionScheduler.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.accessibility.autoaction.AutoActionController.ActionScheduler.run():void");
         }
 
         public final String toString() {
-            return "ActionScheduler: { active=" + this.mActive + ", type=" + this.mType + ", delay=" + this.mDelay + ", scheduledActionTime=" + this.mScheduledActionTime + ", anchor={x:" + this.mAnchorCoords.x + ", y:" + this.mAnchorCoords.y + "}, metastate=" + this.mMetaState + ", policyFlags=" + this.mEventPolicyFlags + ", lastMotionEvent=" + this.mLastMotionEvent + " }";
+            return "ActionScheduler: { active="
+                    + this.mActive
+                    + ", type="
+                    + this.mType
+                    + ", delay="
+                    + this.mDelay
+                    + ", scheduledActionTime="
+                    + this.mScheduledActionTime
+                    + ", anchor={x:"
+                    + this.mAnchorCoords.x
+                    + ", y:"
+                    + this.mAnchorCoords.y
+                    + "}, metastate="
+                    + this.mMetaState
+                    + ", policyFlags="
+                    + this.mEventPolicyFlags
+                    + ", lastMotionEvent="
+                    + this.mLastMotionEvent
+                    + " }";
         }
 
         public final void updateIsPauseAutoClick(boolean z) {
             this.mIsPauseAutoClick = z;
-            Settings.Secure.putInt(AutoActionController.this.mContext.getContentResolver(), "accessibility_auto_click_paused_state", z ? 1 : 0);
+            Settings.Secure.putInt(
+                    AutoActionController.this.mContext.getContentResolver(),
+                    "accessibility_auto_click_paused_state",
+                    z ? 1 : 0);
         }
     }
 
@@ -125,31 +157,57 @@ public final class AutoActionController extends BaseEventStreamTransformation {
 
         public AutoActionObserver(int i, Handler handler) {
             super(handler);
-            this.mAutoActionTypeSettingUri = Settings.Secure.getUriFor("accessibility_auto_action_type");
-            this.mAutoActionDelaySettingUri = Settings.Secure.getUriFor("accessibility_auto_action_delay");
-            this.mCornerActionEnabledSettingUri = Settings.Secure.getUriFor("accessibility_corner_action_enabled");
-            this.mPauseAutoClickWithSettingUri = Settings.Secure.getUriFor("accessibility_pause_auto_click_with");
+            this.mAutoActionTypeSettingUri =
+                    Settings.Secure.getUriFor("accessibility_auto_action_type");
+            this.mAutoActionDelaySettingUri =
+                    Settings.Secure.getUriFor("accessibility_auto_action_delay");
+            this.mCornerActionEnabledSettingUri =
+                    Settings.Secure.getUriFor("accessibility_corner_action_enabled");
+            this.mPauseAutoClickWithSettingUri =
+                    Settings.Secure.getUriFor("accessibility_pause_auto_click_with");
             this.mUserId = i;
         }
 
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
             if (this.mAutoActionTypeSettingUri.equals(uri)) {
-                this.mActionScheduler.mType = Settings.Secure.getIntForUser(this.mContentResolver, "accessibility_auto_action_type", 0, this.mUserId);
+                this.mActionScheduler.mType =
+                        Settings.Secure.getIntForUser(
+                                this.mContentResolver,
+                                "accessibility_auto_action_type",
+                                0,
+                                this.mUserId);
                 return;
             }
             if (this.mAutoActionDelaySettingUri.equals(uri)) {
-                this.mActionScheduler.mDelay = Settings.Secure.getIntForUser(this.mContentResolver, "accessibility_auto_action_delay", 600, this.mUserId);
+                this.mActionScheduler.mDelay =
+                        Settings.Secure.getIntForUser(
+                                this.mContentResolver,
+                                "accessibility_auto_action_delay",
+                                600,
+                                this.mUserId);
                 return;
             }
             if (!this.mCornerActionEnabledSettingUri.equals(uri)) {
-                if (this.mPauseAutoClickWithSettingUri.equals(uri) && Settings.Secure.getIntForUser(this.mContentResolver, "accessibility_pause_auto_click_with", 0, this.mUserId) == -1) {
+                if (this.mPauseAutoClickWithSettingUri.equals(uri)
+                        && Settings.Secure.getIntForUser(
+                                        this.mContentResolver,
+                                        "accessibility_pause_auto_click_with",
+                                        0,
+                                        this.mUserId)
+                                == -1) {
                     this.mActionScheduler.updateIsPauseAutoClick(false);
                     return;
                 }
                 return;
             }
-            boolean z2 = Settings.Secure.getIntForUser(this.mContentResolver, "accessibility_corner_action_enabled", 0, this.mUserId) != 0;
+            boolean z2 =
+                    Settings.Secure.getIntForUser(
+                                    this.mContentResolver,
+                                    "accessibility_corner_action_enabled",
+                                    0,
+                                    this.mUserId)
+                            != 0;
             ActionScheduler actionScheduler = this.mActionScheduler;
             if (!z2) {
                 actionScheduler.mCornerActionController = null;
@@ -157,7 +215,9 @@ public final class AutoActionController extends BaseEventStreamTransformation {
             }
             actionScheduler.getClass();
             AutoActionController autoActionController = AutoActionController.this;
-            actionScheduler.mCornerActionController = new CornerActionController(autoActionController.mContext, autoActionController.mUserId);
+            actionScheduler.mCornerActionController =
+                    new CornerActionController(
+                            autoActionController.mContext, autoActionController.mUserId);
         }
     }
 
@@ -213,11 +273,15 @@ public final class AutoActionController extends BaseEventStreamTransformation {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onMotionEvent(android.view.MotionEvent r10, android.view.MotionEvent r11, int r12) {
+    public final void onMotionEvent(
+            android.view.MotionEvent r10, android.view.MotionEvent r11, int r12) {
         /*
             Method dump skipped, instructions count: 432
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.autoaction.AutoActionController.onMotionEvent(android.view.MotionEvent, android.view.MotionEvent, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.autoaction.AutoActionController.onMotionEvent(android.view.MotionEvent,"
+                    + " android.view.MotionEvent, int):void");
     }
 }

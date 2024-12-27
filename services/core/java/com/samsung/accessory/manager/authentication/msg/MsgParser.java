@@ -2,6 +2,7 @@ package com.samsung.accessory.manager.authentication.msg;
 
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
 import android.util.Slog;
+
 import com.android.server.am.mars.MARsFreezeStateRecord$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -36,7 +37,9 @@ public final class MsgParser {
         StringBuilder sb = new StringBuilder();
         int i = 0;
         while (i < bArr.length) {
-            i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%02x", new Object[]{Byte.valueOf(bArr[i])}, sb, i, 1);
+            i =
+                    MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                            "%02x", new Object[] {Byte.valueOf(bArr[i])}, sb, i, 1);
         }
         return sb.toString();
     }
@@ -60,7 +63,12 @@ public final class MsgParser {
         } else if (i == 2) {
             i3 = 1;
         }
-        boolean verify_certificate = this.mMsgHelper.verify_certificate(i3, byteArrayToString(this.keyInform.chipPubKey), byteArrayToString(this.keyInform.rootPriv_Sig_r), byteArrayToString(this.keyInform.rootPriv_Sig_s));
+        boolean verify_certificate =
+                this.mMsgHelper.verify_certificate(
+                        i3,
+                        byteArrayToString(this.keyInform.chipPubKey),
+                        byteArrayToString(this.keyInform.rootPriv_Sig_r),
+                        byteArrayToString(this.keyInform.rootPriv_Sig_s));
         if (verify_certificate) {
             this.publicKey = byteArrayToString(this.keyInform.chipPubKey);
         }
@@ -76,7 +84,9 @@ public final class MsgParser {
                 return false;
             }
             this.productId = this.mMsg.getData()[1];
-            Slog.secD("SAccessoryManager_MsgParser", "productId = " + Integer.toHexString(this.productId) + "h");
+            Slog.secD(
+                    "SAccessoryManager_MsgParser",
+                    "productId = " + Integer.toHexString(this.productId) + "h");
             byte b = this.productId;
             KeyInformation keyInformation = new KeyInformation();
             int i2 = b & 255;
@@ -107,7 +117,12 @@ public final class MsgParser {
                 int i3 = keyInformation2.signatureSize / 2;
                 System.arraycopy(data, 0, keyInformation2.signedRandVal_r, 0, i3);
                 System.arraycopy(data, i3, keyInformation2.signedRandVal_s, 0, i3);
-                z2 = this.mMsgHelper.verify_rand_signature(byteArrayToString(this.keyInform.chipPubKey), this.randNum, byteArrayToString(this.keyInform.signedRandVal_r), byteArrayToString(this.keyInform.signedRandVal_s));
+                z2 =
+                        this.mMsgHelper.verify_rand_signature(
+                                byteArrayToString(this.keyInform.chipPubKey),
+                                this.randNum,
+                                byteArrayToString(this.keyInform.signedRandVal_r),
+                                byteArrayToString(this.keyInform.signedRandVal_s));
             } else {
                 Slog.e("SAccessoryManager_MsgParser", "signature is invalid");
                 z2 = false;
@@ -135,7 +150,9 @@ public final class MsgParser {
                 this.managerUrl = bArr2;
                 bArr2[0] = (byte) length;
                 System.arraycopy(data2, 0, bArr2, 1, length);
-                Slog.secD("SAccessoryManager_MsgParser", "url: " + byteArrayToString(this.managerUrl));
+                Slog.secD(
+                        "SAccessoryManager_MsgParser",
+                        "url: " + byteArrayToString(this.managerUrl));
                 return true;
             case 10:
                 Message message5 = new Message(i, bArr);
@@ -147,14 +164,18 @@ public final class MsgParser {
                 this.extraData = bArr3;
                 bArr3[0] = (byte) length2;
                 System.arraycopy(data3, 0, bArr3, 1, length2);
-                Slog.secD("SAccessoryManager_MsgParser", "extra Data: " + byteArrayToString(this.extraData));
+                Slog.secD(
+                        "SAccessoryManager_MsgParser",
+                        "extra Data: " + byteArrayToString(this.extraData));
                 return true;
             case 11:
                 Message message6 = new Message(i, bArr);
                 this.mMsg = message6;
                 byte[] data4 = message6.getData();
                 this.urlExtra = data4;
-                int i4 = (data4[0] & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT) + 1;
+                int i4 =
+                        (data4[0] & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT)
+                                + 1;
                 int i5 = data4[i4] & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT;
                 byte[] bArr4 = new byte[i4];
                 this.managerUrl = bArr4;
@@ -162,8 +183,12 @@ public final class MsgParser {
                 this.extraData = new byte[i6];
                 System.arraycopy(data4, 0, bArr4, 0, i4);
                 System.arraycopy(this.urlExtra, i4, this.extraData, 0, i6);
-                Slog.secD("SAccessoryManager_MsgParser", "url: " + byteArrayToString(this.managerUrl));
-                Slog.secD("SAccessoryManager_MsgParser", "extra Data: " + byteArrayToString(this.extraData));
+                Slog.secD(
+                        "SAccessoryManager_MsgParser",
+                        "url: " + byteArrayToString(this.managerUrl));
+                Slog.secD(
+                        "SAccessoryManager_MsgParser",
+                        "extra Data: " + byteArrayToString(this.extraData));
                 return true;
             default:
                 return true;

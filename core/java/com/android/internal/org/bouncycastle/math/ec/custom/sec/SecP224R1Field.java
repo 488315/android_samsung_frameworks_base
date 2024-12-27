@@ -4,6 +4,7 @@ import com.android.internal.org.bouncycastle.math.raw.Mod;
 import com.android.internal.org.bouncycastle.math.raw.Nat;
 import com.android.internal.org.bouncycastle.math.raw.Nat224;
 import com.android.internal.org.bouncycastle.util.Pack;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -25,7 +26,8 @@ public class SecP224R1Field {
 
     public static void addExt(int[] xx, int[] yy, int[] zz) {
         int c = Nat.add(14, xx, yy, zz);
-        if ((c != 0 || (zz[13] == -1 && Nat.gte(14, zz, PExt))) && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
+        if ((c != 0 || (zz[13] == -1 && Nat.gte(14, zz, PExt)))
+                && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
             Nat.incAt(14, zz, PExtInv.length);
         }
     }
@@ -75,7 +77,8 @@ public class SecP224R1Field {
 
     public static void multiplyAddToExt(int[] x, int[] y, int[] zz) {
         int c = Nat224.mulAddTo(x, y, zz);
-        if ((c != 0 || (zz[13] == -1 && Nat.gte(14, zz, PExt))) && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
+        if ((c != 0 || (zz[13] == -1 && Nat.gte(14, zz, PExt)))
+                && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
             Nat.incAt(14, zz, PExtInv.length);
         }
     }

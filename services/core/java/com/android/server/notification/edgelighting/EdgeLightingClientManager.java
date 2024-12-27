@@ -19,14 +19,17 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
 import com.samsung.android.edge.IEdgeLightingCallback;
 import com.samsung.android.edge.SemEdgeLightingInfo;
 import com.samsung.android.feature.SemCarrierFeature;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -43,7 +46,8 @@ public final class EdgeLightingClientManager {
     public boolean mNeedToRecheckSetting = true;
     public final List mEdgeLightingList = new ArrayList();
     public final ArrayList mHosts = new ArrayList();
-    public final EdgeLightingListenerManager mEdgeLightingListenerManager = new EdgeLightingListenerManager();
+    public final EdgeLightingListenerManager mEdgeLightingListenerManager =
+            new EdgeLightingListenerManager();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.notification.edgelighting.EdgeLightingClientManager$1, reason: invalid class name */
@@ -70,14 +74,19 @@ public final class EdgeLightingClientManager {
                     int i = message.arg1;
                     Pair pair = (Pair) message.obj;
                     Intent intent = new Intent();
-                    intent.setClassName(Constants.SYSTEMUI_PACKAGE_NAME, "com.android.systemui.edgelighting.EdgeLightingService");
+                    intent.setClassName(
+                            Constants.SYSTEMUI_PACKAGE_NAME,
+                            "com.android.systemui.edgelighting.EdgeLightingService");
                     intent.putExtra("packagename", (String) pair.first);
                     intent.putExtra("info", (Parcelable) pair.second);
                     intent.putExtra("reason", i);
                     boolean z = EdgeLightingClientManager.DEBUG;
-                    Slog.d("EdgeLightingClientManager", "startService packagename=" + ((String) pair.first) + ",reason=" + i);
+                    Slog.d(
+                            "EdgeLightingClientManager",
+                            "startService packagename=" + ((String) pair.first) + ",reason=" + i);
                     try {
-                        ((EdgeLightingClientManager) obj).mContext.startServiceAsUser(intent, UserHandle.SEM_OWNER);
+                        ((EdgeLightingClientManager) obj)
+                                .mContext.startServiceAsUser(intent, UserHandle.SEM_OWNER);
                         break;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -90,20 +99,26 @@ public final class EdgeLightingClientManager {
                     if (i2 == 1) {
                         Object obj2 = message.obj;
                         if (obj2 instanceof EdgeLightingHost.HostLightingInfo) {
-                            EdgeLightingHost.HostLightingInfo hostLightingInfo = (EdgeLightingHost.HostLightingInfo) obj2;
+                            EdgeLightingHost.HostLightingInfo hostLightingInfo =
+                                    (EdgeLightingHost.HostLightingInfo) obj2;
                             String str = hostLightingInfo.mPackageName;
                             SemEdgeLightingInfo semEdgeLightingInfo = hostLightingInfo.mInfo;
                             int i3 = message.arg1;
                             edgeLightingHost.getClass();
                             try {
-                                IEdgeLightingCallback asInterface = IEdgeLightingCallback.Stub.asInterface(edgeLightingHost.token);
+                                IEdgeLightingCallback asInterface =
+                                        IEdgeLightingCallback.Stub.asInterface(
+                                                edgeLightingHost.token);
                                 if (asInterface != null) {
                                     asInterface.onStartEdgeLighting(str, semEdgeLightingInfo, i3);
                                     break;
                                 }
                             } catch (RemoteException e2) {
                                 boolean z2 = EdgeLightingClientManager.DEBUG;
-                                Slog.e("EdgeLightingClientManager", "onStartEdgeLighting : RemoteException : ", e2);
+                                Slog.e(
+                                        "EdgeLightingClientManager",
+                                        "onStartEdgeLighting : RemoteException : ",
+                                        e2);
                             }
                         }
                     } else if (i2 == 2) {
@@ -113,14 +128,19 @@ public final class EdgeLightingClientManager {
                             int i4 = message.arg1;
                             edgeLightingHost.getClass();
                             try {
-                                IEdgeLightingCallback asInterface2 = IEdgeLightingCallback.Stub.asInterface(edgeLightingHost.token);
+                                IEdgeLightingCallback asInterface2 =
+                                        IEdgeLightingCallback.Stub.asInterface(
+                                                edgeLightingHost.token);
                                 if (asInterface2 != null) {
                                     asInterface2.onStopEdgeLighting(str2, i4);
                                     break;
                                 }
                             } catch (RemoteException e3) {
                                 boolean z3 = EdgeLightingClientManager.DEBUG;
-                                Slog.e("EdgeLightingClientManager", "onStopEdgeLighting : RemoteException : ", e3);
+                                Slog.e(
+                                        "EdgeLightingClientManager",
+                                        "onStopEdgeLighting : RemoteException : ",
+                                        e3);
                                 return;
                             }
                         }
@@ -128,14 +148,18 @@ public final class EdgeLightingClientManager {
                         boolean z4 = message.arg1 == 1;
                         edgeLightingHost.getClass();
                         try {
-                            IEdgeLightingCallback asInterface3 = IEdgeLightingCallback.Stub.asInterface(edgeLightingHost.token);
+                            IEdgeLightingCallback asInterface3 =
+                                    IEdgeLightingCallback.Stub.asInterface(edgeLightingHost.token);
                             if (asInterface3 != null) {
                                 asInterface3.onScreenChanged(z4);
                                 break;
                             }
                         } catch (RemoteException e4) {
                             boolean z5 = EdgeLightingClientManager.DEBUG;
-                            Slog.e("EdgeLightingClientManager", "onScreenChanged : RemoteException : ", e4);
+                            Slog.e(
+                                    "EdgeLightingClientManager",
+                                    "onScreenChanged : RemoteException : ",
+                                    e4);
                             return;
                         }
                     }
@@ -159,8 +183,10 @@ public final class EdgeLightingClientManager {
             public String mPackageName;
         }
 
-        public EdgeLightingHost(IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
-            this.mHandler = new AnonymousClass1(this, EdgeLightingClientManager.this.mHandler.getLooper());
+        public EdgeLightingHost(
+                IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
+            this.mHandler =
+                    new AnonymousClass1(this, EdgeLightingClientManager.this.mHandler.getLooper());
             this.token = iBinder;
             this.component = componentName;
             this.condition = i;
@@ -179,13 +205,19 @@ public final class EdgeLightingClientManager {
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             boolean z = EdgeLightingClientManager.DEBUG;
-            Slog.v("EdgeLightingClientManager", "binderDied : component = " + this.component.toShortString());
+            Slog.v(
+                    "EdgeLightingClientManager",
+                    "binderDied : component = " + this.component.toShortString());
             synchronized (EdgeLightingClientManager.this.mEdgeLightingList) {
                 try {
-                    int size = ((ArrayList) EdgeLightingClientManager.this.mEdgeLightingList).size();
+                    int size =
+                            ((ArrayList) EdgeLightingClientManager.this.mEdgeLightingList).size();
                     ((ArrayList) EdgeLightingClientManager.this.mEdgeLightingList).clear();
-                    if (size != 0 && ((ArrayList) EdgeLightingClientManager.this.mEdgeLightingList).size() == 0) {
-                        EdgeLightingClientManager.this.mEdgeLightingListenerManager.stopEdgeLighting();
+                    if (size != 0
+                            && ((ArrayList) EdgeLightingClientManager.this.mEdgeLightingList).size()
+                                    == 0) {
+                        EdgeLightingClientManager.this.mEdgeLightingListenerManager
+                                .stopEdgeLighting();
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -196,26 +228,39 @@ public final class EdgeLightingClientManager {
                 EdgeLightingClientManager.this.mHosts.remove(this);
             }
             this.token.unlinkToDeath(this, 0);
-            EdgeLightingHistory.getInstance().updateHostHistory(this.component.getPackageName(), "binderDied.");
+            EdgeLightingHistory.getInstance()
+                    .updateHostHistory(this.component.getPackageName(), "binderDied.");
             if (EdgeLightingClientManager.this.mIsConnectedMode) {
                 final String packageName = this.component.getPackageName();
-                this.mHandler.postDelayed(new Runnable() { // from class: com.android.server.notification.edgelighting.EdgeLightingClientManager.EdgeLightingHost.2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EdgeLightingHost edgeLightingHost = EdgeLightingHost.this;
-                        String str = packageName;
-                        edgeLightingHost.getClass();
-                        if (Constants.SYSTEMUI_PACKAGE_NAME.equals(str) && Settings.System.getIntForUser(EdgeLightingClientManager.this.mContext.getContentResolver(), "edge_lighting", 1, -2) == 1) {
-                            boolean z2 = EdgeLightingClientManager.DEBUG;
-                            Slog.v("EdgeLightingClientManager", "startEdgeLightingService");
-                            EdgeLightingClientManager.this.createEdgeLightingService(UserHandle.SEM_OWNER);
-                        }
-                    }
-                }, 1000L);
+                this.mHandler.postDelayed(
+                        new Runnable() { // from class:
+                                         // com.android.server.notification.edgelighting.EdgeLightingClientManager.EdgeLightingHost.2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EdgeLightingHost edgeLightingHost = EdgeLightingHost.this;
+                                String str = packageName;
+                                edgeLightingHost.getClass();
+                                if (Constants.SYSTEMUI_PACKAGE_NAME.equals(str)
+                                        && Settings.System.getIntForUser(
+                                                        EdgeLightingClientManager.this.mContext
+                                                                .getContentResolver(),
+                                                        "edge_lighting",
+                                                        1,
+                                                        -2)
+                                                == 1) {
+                                    boolean z2 = EdgeLightingClientManager.DEBUG;
+                                    Slog.v("EdgeLightingClientManager", "startEdgeLightingService");
+                                    EdgeLightingClientManager.this.createEdgeLightingService(
+                                            UserHandle.SEM_OWNER);
+                                }
+                            }
+                        },
+                        1000L);
             }
         }
 
-        public final void onStartEdgeLighting(String str, SemEdgeLightingInfo semEdgeLightingInfo, int i) {
+        public final void onStartEdgeLighting(
+                String str, SemEdgeLightingInfo semEdgeLightingInfo, int i) {
             if (EdgeLightingHistory.IS_DEV_DEBUG || EdgeLightingClientManager.DEBUG) {
                 boolean z = EdgeLightingClientManager.DEBUG;
                 StringBuilder sb = new StringBuilder("onStartEdgeLighting pkg = ");
@@ -223,7 +268,8 @@ public final class EdgeLightingClientManager {
                 sb.append(", info = ");
                 sb.append(semEdgeLightingInfo);
                 sb.append(", reason = ");
-                DeviceIdleController$$ExternalSyntheticOutline0.m(sb, i, "EdgeLightingClientManager");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        sb, i, "EdgeLightingClientManager");
             }
             if (this.token == null) {
                 Slog.w("EdgeLightingClientManager", "onStartEdgeLighting : token is null");
@@ -239,7 +285,9 @@ public final class EdgeLightingClientManager {
         public final void onStopEdgeLighting(int i, String str) {
             if (EdgeLightingHistory.IS_DEV_DEBUG || EdgeLightingClientManager.DEBUG) {
                 boolean z = EdgeLightingClientManager.DEBUG;
-                Slog.d("EdgeLightingClientManager", "onStopEdgeLighting pkg = " + str + ", reason = " + i);
+                Slog.d(
+                        "EdgeLightingClientManager",
+                        "onStopEdgeLighting pkg = " + str + ", reason = " + i);
             }
             if (this.token == null) {
                 Slog.w("EdgeLightingClientManager", "onStopEdgeLighting : token is null");
@@ -277,35 +325,69 @@ public final class EdgeLightingClientManager {
             this.EDGE_LIGHTING_SETTING = uriFor;
             Uri uriFor2 = Settings.System.getUriFor("edge_lighting_show_condition");
             this.EDGE_LIGHTING_SHOW_CONDITION = uriFor2;
-            String string = SemCscFeature.getInstance().getString("CscFeature_Framework_ConfigDefStatusEdgeLighting");
+            String string =
+                    SemCscFeature.getInstance()
+                            .getString("CscFeature_Framework_ConfigDefStatusEdgeLighting");
             this.defaultEdgeLighting = string;
-            String string2 = SemCarrierFeature.getInstance().getString(0, "CarrierFeature_SystemUI_ConfigDefStatusEdgeLighting", "", false);
+            String string2 =
+                    SemCarrierFeature.getInstance()
+                            .getString(
+                                    0,
+                                    "CarrierFeature_SystemUI_ConfigDefStatusEdgeLighting",
+                                    "",
+                                    false);
             this.defaultCarrierEdgeLighting = string2;
-            this.mDefaultValue = ((string == null || !string.contains("-defaulton")) && (string2 == null || !string2.contains("-defaulton"))) ? 1 : 0;
-            this.mLastEnabled = Settings.System.getIntForUser(EdgeLightingClientManager.this.mContext.getContentResolver(), "edge_lighting", this.mDefaultValue, -2) == 1;
-            ContentResolver contentResolver = EdgeLightingClientManager.this.mContext.getContentResolver();
+            this.mDefaultValue =
+                    ((string == null || !string.contains("-defaulton"))
+                                    && (string2 == null || !string2.contains("-defaulton")))
+                            ? 1
+                            : 0;
+            this.mLastEnabled =
+                    Settings.System.getIntForUser(
+                                    EdgeLightingClientManager.this.mContext.getContentResolver(),
+                                    "edge_lighting",
+                                    this.mDefaultValue,
+                                    -2)
+                            == 1;
+            ContentResolver contentResolver =
+                    EdgeLightingClientManager.this.mContext.getContentResolver();
             contentResolver.registerContentObserver(uriFor, false, this, -1);
             contentResolver.registerContentObserver(uriFor2, false, this, -1);
             boolean z = EdgeLightingClientManager.DEBUG;
             StringBuilder sb = new StringBuilder("EdgeLightingSettingObserver : mLastEnabled = ");
             sb.append(this.mLastEnabled);
             sb.append(" mDefaultValue = ");
-            DeviceIdleController$$ExternalSyntheticOutline0.m(sb, this.mDefaultValue, "EdgeLightingClientManager");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    sb, this.mDefaultValue, "EdgeLightingClientManager");
         }
 
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
             if (uri == null || this.EDGE_LIGHTING_SETTING.equals(uri)) {
-                boolean z2 = Settings.System.getIntForUser(EdgeLightingClientManager.this.mContext.getContentResolver(), "edge_lighting", this.mDefaultValue, -2) == 1;
+                boolean z2 =
+                        Settings.System.getIntForUser(
+                                        EdgeLightingClientManager.this.mContext
+                                                .getContentResolver(),
+                                        "edge_lighting",
+                                        this.mDefaultValue,
+                                        -2)
+                                == 1;
                 boolean z3 = EdgeLightingClientManager.DEBUG;
-                AnyMotionDetector$$ExternalSyntheticOutline0.m("EdgeLightingClientManager", BatteryService$$ExternalSyntheticOutline0.m("onChange - edge_lighting : newValue = ", " mLastEnabled = ", z2), this.mLastEnabled);
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        "EdgeLightingClientManager",
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                "onChange - edge_lighting : newValue = ", " mLastEnabled = ", z2),
+                        this.mLastEnabled);
                 if (z2 != this.mLastEnabled) {
                     this.mLastEnabled = z2;
                     if (z2) {
                         Intent intent = new Intent();
-                        intent.setClassName(Constants.SYSTEMUI_PACKAGE_NAME, "com.android.systemui.edgelighting.EdgeLightingService");
+                        intent.setClassName(
+                                Constants.SYSTEMUI_PACKAGE_NAME,
+                                "com.android.systemui.edgelighting.EdgeLightingService");
                         try {
-                            EdgeLightingClientManager.this.mContext.startServiceAsUser(intent, UserHandle.SEM_OWNER);
+                            EdgeLightingClientManager.this.mContext.startServiceAsUser(
+                                    intent, UserHandle.SEM_OWNER);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -313,7 +395,12 @@ public final class EdgeLightingClientManager {
                 }
             }
             if (uri == null || this.EDGE_LIGHTING_SHOW_CONDITION.equals(uri)) {
-                int intForUser = Settings.System.getIntForUser(EdgeLightingClientManager.this.mContext.getContentResolver(), "edge_lighting_show_condition", 0, -2);
+                int intForUser =
+                        Settings.System.getIntForUser(
+                                EdgeLightingClientManager.this.mContext.getContentResolver(),
+                                "edge_lighting_show_condition",
+                                0,
+                                -2);
                 if (intForUser != 0) {
                     if (intForUser == 1) {
                         EdgeLightingClientManager.this.mCondition = 1;
@@ -321,36 +408,69 @@ public final class EdgeLightingClientManager {
                         EdgeLightingClientManager.this.mCondition = 0;
                     }
                     boolean z4 = EdgeLightingClientManager.DEBUG;
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("onChange - edge_lighting_show_condition : mCondition = "), EdgeLightingClientManager.this.mCondition, "EdgeLightingClientManager");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            new StringBuilder(
+                                    "onChange - edge_lighting_show_condition : mCondition = "),
+                            EdgeLightingClientManager.this.mCondition,
+                            "EdgeLightingClientManager");
                 }
                 EdgeLightingClientManager.this.mCondition = 3;
                 boolean z42 = EdgeLightingClientManager.DEBUG;
-                DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("onChange - edge_lighting_show_condition : mCondition = "), EdgeLightingClientManager.this.mCondition, "EdgeLightingClientManager");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        new StringBuilder(
+                                "onChange - edge_lighting_show_condition : mCondition = "),
+                        EdgeLightingClientManager.this.mCondition,
+                        "EdgeLightingClientManager");
             }
         }
 
         public final void recheckEdgeLightingDefaultValue() {
             String str;
             String str2 = this.defaultEdgeLighting;
-            this.mDefaultValue = ((str2 == null || !str2.contains("-defaulton")) && ((str = this.defaultCarrierEdgeLighting) == null || !str.contains("-defaulton"))) ? 1 : 0;
+            this.mDefaultValue =
+                    ((str2 == null || !str2.contains("-defaulton"))
+                                    && ((str = this.defaultCarrierEdgeLighting) == null
+                                            || !str.contains("-defaulton")))
+                            ? 1
+                            : 0;
             boolean z = EdgeLightingClientManager.DEBUG;
-            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("recheckEdgeLightingDefaultValue : mDefaultValue = "), this.mDefaultValue, "EdgeLightingClientManager");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("recheckEdgeLightingDefaultValue : mDefaultValue = "),
+                    this.mDefaultValue,
+                    "EdgeLightingClientManager");
             try {
-                this.mLastEnabled = Settings.System.getIntForUser(EdgeLightingClientManager.this.mContext.getContentResolver(), "edge_lighting", -2) == 1;
-                Slog.d("EdgeLightingClientManager", "recheckEdgeLightingDefaultValue : mLastEnabled = " + this.mLastEnabled);
+                this.mLastEnabled =
+                        Settings.System.getIntForUser(
+                                        EdgeLightingClientManager.this.mContext
+                                                .getContentResolver(),
+                                        "edge_lighting",
+                                        -2)
+                                == 1;
+                Slog.d(
+                        "EdgeLightingClientManager",
+                        "recheckEdgeLightingDefaultValue : mLastEnabled = " + this.mLastEnabled);
             } catch (Settings.SettingNotFoundException unused) {
                 this.mLastEnabled = this.mDefaultValue == 1;
-                Settings.System.putIntForUser(EdgeLightingClientManager.this.mContext.getContentResolver(), "edge_lighting", this.mDefaultValue, -2);
+                Settings.System.putIntForUser(
+                        EdgeLightingClientManager.this.mContext.getContentResolver(),
+                        "edge_lighting",
+                        this.mDefaultValue,
+                        -2);
                 boolean z2 = EdgeLightingClientManager.DEBUG;
-                AnyMotionDetector$$ExternalSyntheticOutline0.m("EdgeLightingClientManager", new StringBuilder("recheckEdgeLightingDefaultValue - SettingNotFoundException : mLastEnabled = "), this.mLastEnabled);
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        "EdgeLightingClientManager",
+                        new StringBuilder(
+                                "recheckEdgeLightingDefaultValue - SettingNotFoundException :"
+                                    + " mLastEnabled = "),
+                        this.mLastEnabled);
             }
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:6:0x0034, code lost:
-    
-        if (r5 != 2) goto L12;
-     */
+
+       if (r5 != 2) goto L12;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -401,13 +521,17 @@ public final class EdgeLightingClientManager {
             r4.mEdgeLightingSettingObserver = r0
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.edgelighting.EdgeLightingClientManager.<init>(android.content.Context):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.edgelighting.EdgeLightingClientManager.<init>(android.content.Context):void");
     }
 
     public final void createEdgeLightingService(UserHandle userHandle) {
         if (this.mIsConnectedMode) {
             Intent intent = new Intent();
-            intent.setClassName(Constants.SYSTEMUI_PACKAGE_NAME, "com.android.systemui.edgelighting.EdgeLightingService");
+            intent.setClassName(
+                    Constants.SYSTEMUI_PACKAGE_NAME,
+                    "com.android.systemui.edgelighting.EdgeLightingService");
             try {
                 this.mContext.startServiceAsUser(intent, userHandle);
             } catch (Exception e) {
@@ -444,7 +568,15 @@ public final class EdgeLightingClientManager {
                     this.mEdgeLightingSettingObserver.recheckEdgeLightingDefaultValue();
                 }
                 if (EdgeLightingHistory.IS_DEV_DEBUG || DEBUG) {
-                    Slog.d("EdgeLightingClientManager", "isAvailableEdgeLighting: condition=" + i + " mCondition=" + this.mCondition + " mIsConnected=" + this.mIsConnectedMode + this.mHosts.size());
+                    Slog.d(
+                            "EdgeLightingClientManager",
+                            "isAvailableEdgeLighting: condition="
+                                    + i
+                                    + " mCondition="
+                                    + this.mCondition
+                                    + " mIsConnected="
+                                    + this.mIsConnectedMode
+                                    + this.mHosts.size());
                 }
                 if (!this.mEdgeLightingSettingObserver.mLastEnabled) {
                     return false;
@@ -482,13 +614,15 @@ public final class EdgeLightingClientManager {
                     if (edgeLightingHost != null) {
                         edgeLightingHost.getClass();
                         if (EdgeLightingHistory.IS_DEV_DEBUG || DEBUG) {
-                            DeviceIdleController$$ExternalSyntheticOutline0.m("onScreenChanged on = ", "EdgeLightingClientManager", z);
+                            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                    "onScreenChanged on = ", "EdgeLightingClientManager", z);
                         }
                         if (edgeLightingHost.token == null) {
                             Slog.w("EdgeLightingClientManager", "onScreenChanged : token is null");
                         } else {
                             AnonymousClass1 anonymousClass1 = edgeLightingHost.mHandler;
-                            anonymousClass1.sendMessage(anonymousClass1.obtainMessage(3, z ? 1 : 0, 0));
+                            anonymousClass1.sendMessage(
+                                    anonymousClass1.obtainMessage(3, z ? 1 : 0, 0));
                         }
                     }
                 }
@@ -498,12 +632,17 @@ public final class EdgeLightingClientManager {
         }
     }
 
-    public final void startEdgeLightingInternal(String str, SemEdgeLightingInfo semEdgeLightingInfo, int i) {
+    public final void startEdgeLightingInternal(
+            String str, SemEdgeLightingInfo semEdgeLightingInfo, int i) {
         PackageManager packageManager = this.mContext.getPackageManager();
         try {
             packageManager.getApplicationInfo(str, 0);
             if (packageManager.isPackageSuspended(str)) {
-                EdgeLightingHistory.getInstance().updateRejectHistory("startEdgeLightingInternal() reject edge lighting because application suspend package=" + str);
+                EdgeLightingHistory.getInstance()
+                        .updateRejectHistory(
+                                "startEdgeLightingInternal() reject edge lighting because"
+                                    + " application suspend package="
+                                        + str);
                 return;
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -521,14 +660,22 @@ public final class EdgeLightingClientManager {
                         edgeLightingHost.onStartEdgeLighting(str, semEdgeLightingInfo, i);
                     }
                 }
-                EdgeLightingHistory.getInstance().updateEdgeLightingHistory("start : " + str + " : " + semEdgeLightingInfo.toString() + "," + i);
+                EdgeLightingHistory.getInstance()
+                        .updateEdgeLightingHistory(
+                                "start : "
+                                        + str
+                                        + " : "
+                                        + semEdgeLightingInfo.toString()
+                                        + ","
+                                        + i);
             } catch (Throwable th) {
                 throw th;
             }
         }
     }
 
-    public final void startEdgeLightingService(String str, SemEdgeLightingInfo semEdgeLightingInfo, int i) {
+    public final void startEdgeLightingService(
+            String str, SemEdgeLightingInfo semEdgeLightingInfo, int i) {
         if (EdgeLightingHistory.IS_DEV_DEBUG || DEBUG) {
             StringBuilder sb = new StringBuilder("startEdgeLightingService : pkg = ");
             sb.append(str);
@@ -538,14 +685,17 @@ public final class EdgeLightingClientManager {
             DeviceIdleController$$ExternalSyntheticOutline0.m(sb, i, "EdgeLightingClientManager");
         }
         AnonymousClass1 anonymousClass1 = this.mHandler;
-        anonymousClass1.sendMessage(anonymousClass1.obtainMessage(0, i, 0, new Pair(str, semEdgeLightingInfo)));
+        anonymousClass1.sendMessage(
+                anonymousClass1.obtainMessage(0, i, 0, new Pair(str, semEdgeLightingInfo)));
     }
 
     public final void stopEdgeLightingInternal(int i, String str) {
         synchronized (this.mHosts) {
             try {
                 if (!this.mIsConnectedMode && this.mHosts.size() < 1) {
-                    Slog.e("EdgeLightingClientManager", "stopEdgeLightingInternal mHosts is null. pkg=" + str + ",reason=" + i);
+                    Slog.e(
+                            "EdgeLightingClientManager",
+                            "stopEdgeLightingInternal mHosts is null. pkg=" + str + ",reason=" + i);
                 }
                 Iterator it = this.mHosts.iterator();
                 while (it.hasNext()) {
@@ -554,7 +704,8 @@ public final class EdgeLightingClientManager {
                         edgeLightingHost.onStopEdgeLighting(i, str);
                     }
                 }
-                EdgeLightingHistory.getInstance().updateEdgeLightingHistory("stop : " + str + "," + i);
+                EdgeLightingHistory.getInstance()
+                        .updateEdgeLightingHistory("stop : " + str + "," + i);
             } catch (Throwable th) {
                 throw th;
             }

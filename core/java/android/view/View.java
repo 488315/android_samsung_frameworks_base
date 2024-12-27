@@ -88,18 +88,6 @@ import android.util.SparseIntArray;
 import android.util.StateSet;
 import android.util.SuperNotCalledException;
 import android.util.TypedValue;
-import android.view.AccessibilityIterators;
-import android.view.ActionMode;
-import android.view.ContentInfo;
-import android.view.ContextMenu;
-import android.view.KeyEvent;
-import android.view.SemBlurInfo;
-import android.view.ViewDebug;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowInsets;
-import android.view.WindowInsetsAnimation;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityEventSource;
 import android.view.accessibility.AccessibilityManager;
@@ -132,6 +120,7 @@ import android.webkit.WebView;
 import android.widget.Checkable;
 import android.widget.ScrollBarDrawable;
 import android.window.OnBackInvokedDispatcher;
+
 import com.android.internal.R;
 import com.android.internal.graphics.drawable.BackgroundBlurDrawable;
 import com.android.internal.policy.DecorView;
@@ -142,6 +131,7 @@ import com.android.internal.view.ScrollCaptureInternal;
 import com.android.internal.view.TooltipPopup;
 import com.android.internal.view.menu.MenuBuilder;
 import com.android.internal.widget.ScrollBarUtils;
+
 import com.google.android.collect.Lists;
 import com.google.android.collect.Maps;
 import com.samsung.android.content.smartclip.SemSmartClipCroppedArea;
@@ -159,6 +149,7 @@ import com.samsung.android.rune.ViewRune;
 import com.samsung.android.wallpaperbackup.GenerateXML;
 import com.samsung.android.widget.SemHoverPopupWindow;
 import com.samsung.android.widget.SemPressGestureDetector;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -197,10 +188,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     static final int ALL_RTL_PROPERTIES_RESOLVED = 1610678816;
     public static final int AUTOFILL_FLAG_INCLUDE_NOT_IMPORTANT_VIEWS = 1;
     public static final String AUTOFILL_HINT_CREDENTIAL_MANAGER = "credential";
-    public static final String AUTOFILL_HINT_CREDIT_CARD_EXPIRATION_DATE = "creditCardExpirationDate";
+    public static final String AUTOFILL_HINT_CREDIT_CARD_EXPIRATION_DATE =
+            "creditCardExpirationDate";
     public static final String AUTOFILL_HINT_CREDIT_CARD_EXPIRATION_DAY = "creditCardExpirationDay";
-    public static final String AUTOFILL_HINT_CREDIT_CARD_EXPIRATION_MONTH = "creditCardExpirationMonth";
-    public static final String AUTOFILL_HINT_CREDIT_CARD_EXPIRATION_YEAR = "creditCardExpirationYear";
+    public static final String AUTOFILL_HINT_CREDIT_CARD_EXPIRATION_MONTH =
+            "creditCardExpirationMonth";
+    public static final String AUTOFILL_HINT_CREDIT_CARD_EXPIRATION_YEAR =
+            "creditCardExpirationYear";
     public static final String AUTOFILL_HINT_CREDIT_CARD_NUMBER = "creditCardNumber";
     public static final String AUTOFILL_HINT_CREDIT_CARD_SECURITY_CODE = "creditCardSecurityCode";
     public static final String AUTOFILL_HINT_EMAIL_ADDRESS = "emailAddress";
@@ -245,14 +239,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     static final int DRAG_MASK = 3;
     static final int DRAWING_CACHE_ENABLED = 32768;
 
-    @Deprecated
-    public static final int DRAWING_CACHE_QUALITY_AUTO = 0;
+    @Deprecated public static final int DRAWING_CACHE_QUALITY_AUTO = 0;
 
-    @Deprecated
-    public static final int DRAWING_CACHE_QUALITY_HIGH = 1048576;
+    @Deprecated public static final int DRAWING_CACHE_QUALITY_HIGH = 1048576;
 
-    @Deprecated
-    public static final int DRAWING_CACHE_QUALITY_LOW = 524288;
+    @Deprecated public static final int DRAWING_CACHE_QUALITY_LOW = 524288;
     static final int DRAWING_CACHE_QUALITY_MASK = 1572864;
     static final int DRAW_MASK = 128;
     static final int DUPLICATE_PARENT_STATE = 4194304;
@@ -475,10 +466,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public static final float REQUESTED_FRAME_RATE_CATEGORY_LOW = -2.0f;
     public static final float REQUESTED_FRAME_RATE_CATEGORY_NORMAL = -3.0f;
     public static final float REQUESTED_FRAME_RATE_CATEGORY_NO_PREFERENCE = -1.0f;
-    protected static final String SAMSUNG_BASIC_INTERACTION_METADATA_NAME = "SamsungBasicInteraction";
+    protected static final String SAMSUNG_BASIC_INTERACTION_METADATA_NAME =
+            "SamsungBasicInteraction";
     protected static final String SAMSUNG_BASIC_INTERACTION_METADATA_VALUE_SEP10 = "SEP10";
     protected static final String SAMSUNG_BASIC_INTERACTION_METADATA_VALUE_SEP11 = "SEP11";
-    protected static final String SAMSUNG_DISPLAY_CUTOUT_BG_METADATA_NAME = "DisplayCutoutBackground";
+    protected static final String SAMSUNG_DISPLAY_CUTOUT_BG_METADATA_NAME =
+            "DisplayCutoutBackground";
     static final int SAVE_DISABLED = 65536;
     static final int SAVE_DISABLED_MASK = 65536;
     public static final int SCREEN_STATE_OFF = 0;
@@ -535,46 +528,33 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public static final int STATUS_BAR_DISABLE_SEARCH = 33554432;
     public static final int STATUS_BAR_DISABLE_SYSTEM_INFO = 1048576;
 
-    @Deprecated
-    public static final int STATUS_BAR_HIDDEN = 1;
+    @Deprecated public static final int STATUS_BAR_HIDDEN = 1;
 
-    @Deprecated
-    public static final int STATUS_BAR_VISIBLE = 0;
+    @Deprecated public static final int STATUS_BAR_VISIBLE = 0;
     public static final int SYSTEM_UI_CLEARABLE_FLAGS = 7;
 
-    @Deprecated
-    public static final int SYSTEM_UI_FLAG_FULLSCREEN = 4;
+    @Deprecated public static final int SYSTEM_UI_FLAG_FULLSCREEN = 4;
 
-    @Deprecated
-    public static final int SYSTEM_UI_FLAG_HIDE_NAVIGATION = 2;
+    @Deprecated public static final int SYSTEM_UI_FLAG_HIDE_NAVIGATION = 2;
 
-    @Deprecated
-    public static final int SYSTEM_UI_FLAG_IMMERSIVE = 2048;
+    @Deprecated public static final int SYSTEM_UI_FLAG_IMMERSIVE = 2048;
 
-    @Deprecated
-    public static final int SYSTEM_UI_FLAG_IMMERSIVE_STICKY = 4096;
+    @Deprecated public static final int SYSTEM_UI_FLAG_IMMERSIVE_STICKY = 4096;
 
-    @Deprecated
-    public static final int SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN = 1024;
+    @Deprecated public static final int SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN = 1024;
     public static final int SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION = 512;
 
-    @Deprecated
-    public static final int SYSTEM_UI_FLAG_LAYOUT_STABLE = 256;
+    @Deprecated public static final int SYSTEM_UI_FLAG_LAYOUT_STABLE = 256;
 
-    @Deprecated
-    public static final int SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR = 16;
+    @Deprecated public static final int SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR = 16;
 
-    @Deprecated
-    public static final int SYSTEM_UI_FLAG_LIGHT_STATUS_BAR = 8192;
+    @Deprecated public static final int SYSTEM_UI_FLAG_LIGHT_STATUS_BAR = 8192;
 
-    @Deprecated
-    public static final int SYSTEM_UI_FLAG_LOW_PROFILE = 1;
+    @Deprecated public static final int SYSTEM_UI_FLAG_LOW_PROFILE = 1;
 
-    @Deprecated
-    public static final int SYSTEM_UI_FLAG_VISIBLE = 0;
+    @Deprecated public static final int SYSTEM_UI_FLAG_VISIBLE = 0;
 
-    @Deprecated
-    public static final int SYSTEM_UI_LAYOUT_FLAGS = 1536;
+    @Deprecated public static final int SYSTEM_UI_LAYOUT_FLAGS = 1536;
     private static final int SYSTEM_UI_RESERVED_LEGACY1 = 16384;
     private static final int SYSTEM_UI_RESERVED_LEGACY2 = 65536;
     public static final int TEXT_ALIGNMENT_CENTER = 4;
@@ -650,12 +630,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @ViewDebug.ExportedProperty(category = "attributes", hasAdjacentMapping = true)
     public String[] mAttributes;
+
     private String[] mAutofillHints;
     private AutofillId mAutofillId;
     private int mAutofillViewId;
 
     @ViewDebug.ExportedProperty(deepExport = true, prefix = "bg_")
     private Drawable mBackground;
+
     private int mBackgroundBlurColor;
     private float mBackgroundBlurCornerRadiusBL;
     private float mBackgroundBlurCornerRadiusBR;
@@ -671,14 +653,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private SemGfxImageFilter mBlurFilter;
     private SemBlurInfo mBlurInfo;
 
-    @ViewDebug.ExportedProperty
-    private int mBlurMode;
+    @ViewDebug.ExportedProperty private int mBlurMode;
     private int mBlurRadius;
     private Rect mBlurViewBounds;
     private Bitmap mBlurredBitmap;
 
     @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT)
     protected int mBottom;
+
     private Drawable mBottomLeftRound;
     private int mBottomLeftRoundColor;
     private Drawable mBottomRightRound;
@@ -691,12 +673,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @ViewDebug.ExportedProperty(category = "drawing")
     Rect mClipBounds;
+
     private ContentCaptureSession mContentCaptureSession;
     private boolean mContentCaptureSessionCached;
     private CharSequence mContentDescription;
 
     @ViewDebug.ExportedProperty(deepExport = true)
     protected Context mContext;
+
     private int mCornerOffset;
     protected Animation mCurrentAnimation;
     private Drawable mDefaultFocusHighlight;
@@ -716,6 +700,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @ViewDebug.ExportedProperty(deepExport = true, prefix = "fg_")
     private ForegroundInfo mForegroundInfo;
+
     private float mFrameContentVelocity;
     private ArrayList<FrameMetricsObserver> mFrameMetricsObservers;
     int mFrameRateCompatibility;
@@ -736,6 +721,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @ViewDebug.ExportedProperty(resolveId = true)
     int mID;
+
     private boolean mIgnoreNextUpEvent;
     private boolean mInContextButtonPress;
     private int mInferredAccessibilityDataSensitive;
@@ -758,6 +744,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT)
     protected int mLeft;
+
     private boolean mLeftPaddingDefined;
     ListenerInfo mListenerInfo;
     private float mLongClickX;
@@ -777,6 +764,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @ViewDebug.ExportedProperty(category = "measurement")
     private int mMinWidth;
+
     private PointerIcon mMousePointerIcon;
     private boolean mNeedToSendSavedStickyDragEvent;
     private boolean mNeededToChangedScrollBarPosition;
@@ -805,6 +793,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @ViewDebug.ExportedProperty(category = "padding")
     protected int mPaddingTop;
+
     protected ViewParent mParent;
     private CheckForLongPress mPendingCheckForLongPress;
     private CheckForTap mPendingCheckForTap;
@@ -813,8 +802,26 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private PointerIcon mPointerIconForStylus;
     private float mPreferredFrameRate;
 
-    @ViewDebug.ExportedProperty(flagMapping = {@ViewDebug.FlagToString(equals = 4096, mask = 4096, name = "FORCE_LAYOUT"), @ViewDebug.FlagToString(equals = 8192, mask = 8192, name = "LAYOUT_REQUIRED"), @ViewDebug.FlagToString(equals = 32768, mask = 32768, name = "DRAWING_CACHE_INVALID", outputIf = false), @ViewDebug.FlagToString(equals = 32, mask = 32, name = "DRAWN", outputIf = true), @ViewDebug.FlagToString(equals = 32, mask = 32, name = "NOT_DRAWN", outputIf = false), @ViewDebug.FlagToString(equals = 2097152, mask = 2097152, name = "DIRTY")}, formatToHexString = true)
+    @ViewDebug.ExportedProperty(
+            flagMapping = {
+                @ViewDebug.FlagToString(equals = 4096, mask = 4096, name = "FORCE_LAYOUT"),
+                @ViewDebug.FlagToString(equals = 8192, mask = 8192, name = "LAYOUT_REQUIRED"),
+                @ViewDebug.FlagToString(
+                        equals = 32768,
+                        mask = 32768,
+                        name = "DRAWING_CACHE_INVALID",
+                        outputIf = false),
+                @ViewDebug.FlagToString(equals = 32, mask = 32, name = "DRAWN", outputIf = true),
+                @ViewDebug.FlagToString(
+                        equals = 32,
+                        mask = 32,
+                        name = "NOT_DRAWN",
+                        outputIf = false),
+                @ViewDebug.FlagToString(equals = 2097152, mask = 2097152, name = "DIRTY")
+            },
+            formatToHexString = true)
     public int mPrivateFlags;
+
     int mPrivateFlags2;
     int mPrivateFlags3;
     private int mPrivateFlags4;
@@ -825,6 +832,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT)
     protected int mRight;
+
     private boolean mRightPaddingDefined;
     private int mRoundRadius;
     private RoundScrollbarRenderer mRoundScrollbarRenderer;
@@ -842,6 +850,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @ViewDebug.ExportedProperty(category = "scrolling")
     protected int mScrollY;
+
     public final Rect mSemHorizontalScrollbarRect;
     public boolean mSemScrollingByScrollbar;
     public boolean mSemScrollingVertical;
@@ -859,14 +868,73 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private CharSequence mStateDescription;
     private StateListAnimator mStateListAnimator;
 
-    @ViewDebug.ExportedProperty(flagMapping = {@ViewDebug.FlagToString(equals = 1, mask = 1, name = "LOW_PROFILE"), @ViewDebug.FlagToString(equals = 2, mask = 2, name = "HIDE_NAVIGATION"), @ViewDebug.FlagToString(equals = 4, mask = 4, name = "FULLSCREEN"), @ViewDebug.FlagToString(equals = 256, mask = 256, name = "LAYOUT_STABLE"), @ViewDebug.FlagToString(equals = 512, mask = 512, name = "LAYOUT_HIDE_NAVIGATION"), @ViewDebug.FlagToString(equals = 1024, mask = 1024, name = "LAYOUT_FULLSCREEN"), @ViewDebug.FlagToString(equals = 2048, mask = 2048, name = "IMMERSIVE"), @ViewDebug.FlagToString(equals = 4096, mask = 4096, name = "IMMERSIVE_STICKY"), @ViewDebug.FlagToString(equals = 8192, mask = 8192, name = "LIGHT_STATUS_BAR"), @ViewDebug.FlagToString(equals = 16, mask = 16, name = "LIGHT_NAVIGATION_BAR"), @ViewDebug.FlagToString(equals = 65536, mask = 65536, name = "STATUS_BAR_DISABLE_EXPAND"), @ViewDebug.FlagToString(equals = 131072, mask = 131072, name = "STATUS_BAR_DISABLE_NOTIFICATION_ICONS"), @ViewDebug.FlagToString(equals = 262144, mask = 262144, name = "STATUS_BAR_DISABLE_NOTIFICATION_ALERTS"), @ViewDebug.FlagToString(equals = 524288, mask = 524288, name = "STATUS_BAR_DISABLE_NOTIFICATION_TICKER"), @ViewDebug.FlagToString(equals = 1048576, mask = 1048576, name = "STATUS_BAR_DISABLE_SYSTEM_INFO"), @ViewDebug.FlagToString(equals = 2097152, mask = 2097152, name = "STATUS_BAR_DISABLE_HOME"), @ViewDebug.FlagToString(equals = 4194304, mask = 4194304, name = "STATUS_BAR_DISABLE_BACK"), @ViewDebug.FlagToString(equals = 8388608, mask = 8388608, name = "STATUS_BAR_DISABLE_CLOCK"), @ViewDebug.FlagToString(equals = 16777216, mask = 16777216, name = "STATUS_BAR_DISABLE_RECENT"), @ViewDebug.FlagToString(equals = 33554432, mask = 33554432, name = "STATUS_BAR_DISABLE_SEARCH"), @ViewDebug.FlagToString(equals = 67108864, mask = 67108864, name = "STATUS_BAR_DISABLE_ONGOING_CALL_CHIP")}, formatToHexString = true)
+    @ViewDebug.ExportedProperty(
+            flagMapping = {
+                @ViewDebug.FlagToString(equals = 1, mask = 1, name = "LOW_PROFILE"),
+                @ViewDebug.FlagToString(equals = 2, mask = 2, name = "HIDE_NAVIGATION"),
+                @ViewDebug.FlagToString(equals = 4, mask = 4, name = "FULLSCREEN"),
+                @ViewDebug.FlagToString(equals = 256, mask = 256, name = "LAYOUT_STABLE"),
+                @ViewDebug.FlagToString(equals = 512, mask = 512, name = "LAYOUT_HIDE_NAVIGATION"),
+                @ViewDebug.FlagToString(equals = 1024, mask = 1024, name = "LAYOUT_FULLSCREEN"),
+                @ViewDebug.FlagToString(equals = 2048, mask = 2048, name = "IMMERSIVE"),
+                @ViewDebug.FlagToString(equals = 4096, mask = 4096, name = "IMMERSIVE_STICKY"),
+                @ViewDebug.FlagToString(equals = 8192, mask = 8192, name = "LIGHT_STATUS_BAR"),
+                @ViewDebug.FlagToString(equals = 16, mask = 16, name = "LIGHT_NAVIGATION_BAR"),
+                @ViewDebug.FlagToString(
+                        equals = 65536,
+                        mask = 65536,
+                        name = "STATUS_BAR_DISABLE_EXPAND"),
+                @ViewDebug.FlagToString(
+                        equals = 131072,
+                        mask = 131072,
+                        name = "STATUS_BAR_DISABLE_NOTIFICATION_ICONS"),
+                @ViewDebug.FlagToString(
+                        equals = 262144,
+                        mask = 262144,
+                        name = "STATUS_BAR_DISABLE_NOTIFICATION_ALERTS"),
+                @ViewDebug.FlagToString(
+                        equals = 524288,
+                        mask = 524288,
+                        name = "STATUS_BAR_DISABLE_NOTIFICATION_TICKER"),
+                @ViewDebug.FlagToString(
+                        equals = 1048576,
+                        mask = 1048576,
+                        name = "STATUS_BAR_DISABLE_SYSTEM_INFO"),
+                @ViewDebug.FlagToString(
+                        equals = 2097152,
+                        mask = 2097152,
+                        name = "STATUS_BAR_DISABLE_HOME"),
+                @ViewDebug.FlagToString(
+                        equals = 4194304,
+                        mask = 4194304,
+                        name = "STATUS_BAR_DISABLE_BACK"),
+                @ViewDebug.FlagToString(
+                        equals = 8388608,
+                        mask = 8388608,
+                        name = "STATUS_BAR_DISABLE_CLOCK"),
+                @ViewDebug.FlagToString(
+                        equals = 16777216,
+                        mask = 16777216,
+                        name = "STATUS_BAR_DISABLE_RECENT"),
+                @ViewDebug.FlagToString(
+                        equals = 33554432,
+                        mask = 33554432,
+                        name = "STATUS_BAR_DISABLE_SEARCH"),
+                @ViewDebug.FlagToString(
+                        equals = 67108864,
+                        mask = 67108864,
+                        name = "STATUS_BAR_DISABLE_ONGOING_CALL_CHIP")
+            },
+            formatToHexString = true)
     int mSystemUiVisibility;
+
     protected Object mTag;
     private int[] mTempNestedScrollConsumed;
     TooltipInfo mTooltipInfo;
 
     @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT)
     protected int mTop;
+
     private Drawable mTopLeftRound;
     private int mTopLeftRoundColor;
     private Drawable mTopRightRound;
@@ -889,14 +957,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @ViewDebug.ExportedProperty(category = "padding")
     protected int mUserPaddingLeft;
+
     int mUserPaddingLeftInitial;
 
     @ViewDebug.ExportedProperty(category = "padding")
     protected int mUserPaddingRight;
+
     int mUserPaddingRightInitial;
 
     @ViewDebug.ExportedProperty(category = "padding")
     int mUserPaddingStart;
+
     private float mVerticalScrollFactor;
     private int mVerticalScrollbarPosition;
     private Vibrator mVibrator;
@@ -904,6 +975,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @ViewDebug.ExportedProperty(formatToHexString = true)
     int mViewFlags;
+
     private ViewTranslationCallback mViewTranslationCallback;
     private ViewTranslationResponse mViewTranslationResponse;
     private Handler mVisibilityChangeForAutofillHandler;
@@ -916,11 +988,16 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     static boolean sTextureViewIgnoresDrawableSetters = false;
     private static final int[] VISIBILITY_FLAGS = {0, 4, 8};
     private static final int[] DRAWING_CACHE_QUALITY_FLAGS = {0, 524288, 1048576};
-    private static final boolean sToolkitFrameRateDefaultNormalReadOnlyFlagValue = Flags.toolkitFrameRateDefaultNormalReadOnly();
-    private static final boolean sToolkitFrameRateBySizeReadOnlyFlagValue = Flags.toolkitFrameRateBySizeReadOnly();
-    private static final boolean sToolkitFrameRateSmallUsesPercentReadOnlyFlagValue = Flags.toolkitFrameRateSmallUsesPercentReadOnly();
-    private static final boolean sToolkitFrameRateViewEnablingReadOnlyFlagValue = Flags.toolkitFrameRateViewEnablingReadOnly();
-    private static boolean sToolkitFrameRateVelocityMappingReadOnlyFlagValue = Flags.toolkitFrameRateVelocityMappingReadOnly();
+    private static final boolean sToolkitFrameRateDefaultNormalReadOnlyFlagValue =
+            Flags.toolkitFrameRateDefaultNormalReadOnly();
+    private static final boolean sToolkitFrameRateBySizeReadOnlyFlagValue =
+            Flags.toolkitFrameRateBySizeReadOnly();
+    private static final boolean sToolkitFrameRateSmallUsesPercentReadOnlyFlagValue =
+            Flags.toolkitFrameRateSmallUsesPercentReadOnly();
+    private static final boolean sToolkitFrameRateViewEnablingReadOnlyFlagValue =
+            Flags.toolkitFrameRateViewEnablingReadOnly();
+    private static boolean sToolkitFrameRateVelocityMappingReadOnlyFlagValue =
+            Flags.toolkitFrameRateVelocityMappingReadOnly();
     protected static final int[] EMPTY_STATE_SET = StateSet.get(0);
     protected static final int[] WINDOW_FOCUSED_STATE_SET = StateSet.get(1);
     protected static final int[] SELECTED_STATE_SET = StateSet.get(2);
@@ -936,7 +1013,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] ENABLED_FOCUSED_STATE_SET = StateSet.get(12);
     protected static final int[] ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET = StateSet.get(13);
     protected static final int[] ENABLED_FOCUSED_SELECTED_STATE_SET = StateSet.get(14);
-    protected static final int[] ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET = StateSet.get(15);
+    protected static final int[] ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET =
+            StateSet.get(15);
     protected static final int[] PRESSED_STATE_SET = StateSet.get(16);
     protected static final int[] PRESSED_WINDOW_FOCUSED_STATE_SET = StateSet.get(17);
     protected static final int[] PRESSED_SELECTED_STATE_SET = StateSet.get(18);
@@ -944,228 +1022,244 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     protected static final int[] PRESSED_FOCUSED_STATE_SET = StateSet.get(20);
     protected static final int[] PRESSED_FOCUSED_WINDOW_FOCUSED_STATE_SET = StateSet.get(21);
     protected static final int[] PRESSED_FOCUSED_SELECTED_STATE_SET = StateSet.get(22);
-    protected static final int[] PRESSED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET = StateSet.get(23);
+    protected static final int[] PRESSED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET =
+            StateSet.get(23);
     protected static final int[] PRESSED_ENABLED_STATE_SET = StateSet.get(24);
     protected static final int[] PRESSED_ENABLED_WINDOW_FOCUSED_STATE_SET = StateSet.get(25);
     protected static final int[] PRESSED_ENABLED_SELECTED_STATE_SET = StateSet.get(26);
-    protected static final int[] PRESSED_ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET = StateSet.get(27);
+    protected static final int[] PRESSED_ENABLED_SELECTED_WINDOW_FOCUSED_STATE_SET =
+            StateSet.get(27);
     protected static final int[] PRESSED_ENABLED_FOCUSED_STATE_SET = StateSet.get(28);
-    protected static final int[] PRESSED_ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET = StateSet.get(29);
+    protected static final int[] PRESSED_ENABLED_FOCUSED_WINDOW_FOCUSED_STATE_SET =
+            StateSet.get(29);
     protected static final int[] PRESSED_ENABLED_FOCUSED_SELECTED_STATE_SET = StateSet.get(30);
-    protected static final int[] PRESSED_ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET = StateSet.get(31);
-    protected static boolean sToolkitSetFrameRateReadOnlyFlagValue = Flags.toolkitSetFrameRateReadOnly();
-    private static boolean sToolkitMetricsForFrameRateDecisionFlagValue = Flags.toolkitMetricsForFrameRateDecision();
-    private static boolean sUseMeasureCacheDuringForceLayoutFlagValue = Flags.enableUseMeasureCacheDuringForceLayout();
+    protected static final int[] PRESSED_ENABLED_FOCUSED_SELECTED_WINDOW_FOCUSED_STATE_SET =
+            StateSet.get(31);
+    protected static boolean sToolkitSetFrameRateReadOnlyFlagValue =
+            Flags.toolkitSetFrameRateReadOnly();
+    private static boolean sToolkitMetricsForFrameRateDecisionFlagValue =
+            Flags.toolkitMetricsForFrameRateDecision();
+    private static boolean sUseMeasureCacheDuringForceLayoutFlagValue =
+            Flags.enableUseMeasureCacheDuringForceLayout();
     static final int DEBUG_CORNERS_COLOR = Color.rgb(63, 127, 255);
-    static final ThreadLocal<Rect> sThreadLocal = ThreadLocal.withInitial(new Supplier() { // from class: android.view.View$$ExternalSyntheticLambda3
-        @Override // java.util.function.Supplier
-        public final Object get() {
-            return new Rect();
-        }
-    });
+    static final ThreadLocal<Rect> sThreadLocal =
+            ThreadLocal.withInitial(
+                    new Supplier() { // from class: android.view.View$$ExternalSyntheticLambda3
+                        @Override // java.util.function.Supplier
+                        public final Object get() {
+                            return new Rect();
+                        }
+                    });
     private static final int[] LAYOUT_DIRECTION_FLAGS = {0, 1, 2, 3};
     private static final int[] PFLAG2_TEXT_DIRECTION_FLAGS = {0, 64, 128, 192, 256, 320, 384, 448};
-    private static final int[] PFLAG2_TEXT_ALIGNMENT_FLAGS = {0, 8192, 16384, 24576, 32768, UsbManager.USB_DATA_TRANSFER_RATE_40G, AudioChannelLayout.VOICE_CALL_MONO};
-    private static final boolean DEBUG_ROUNDED_CORNER = SystemProperties.getBoolean("view.debug.rounded_corner", false);
+    private static final int[] PFLAG2_TEXT_ALIGNMENT_FLAGS = {
+        0,
+        8192,
+        16384,
+        24576,
+        32768,
+        UsbManager.USB_DATA_TRANSFER_RATE_40G,
+        AudioChannelLayout.VOICE_CALL_MONO
+    };
+    private static final boolean DEBUG_ROUNDED_CORNER =
+            SystemProperties.getBoolean("view.debug.rounded_corner", false);
     private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
     public static boolean sIsSamsungBasicInteraction = false;
     public static int sSEP_Version = 0;
     public static boolean sIsDisplayCutoutBackground = false;
     private static boolean sMetaDataNeedCheck = true;
-    public static final Property<View, Float> ALPHA = new FloatProperty<View>("alpha") { // from class: android.view.View.3
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            if (object != null) {
-                object.setAlpha(value);
-            }
-        }
+    public static final Property<View, Float> ALPHA =
+            new FloatProperty<View>("alpha") { // from class: android.view.View.3
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    if (object != null) {
+                        object.setAlpha(value);
+                    }
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getAlpha());
-        }
-    };
-    public static final Property<View, Float> TRANSLATION_X = new FloatProperty<View>("translationX") { // from class: android.view.View.4
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            object.setTranslationX(value);
-        }
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getAlpha());
+                }
+            };
+    public static final Property<View, Float> TRANSLATION_X =
+            new FloatProperty<View>("translationX") { // from class: android.view.View.4
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    object.setTranslationX(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getTranslationX());
-        }
-    };
-    public static final Property<View, Float> TRANSLATION_Y = new FloatProperty<View>("translationY") { // from class: android.view.View.5
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            object.setTranslationY(value);
-        }
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getTranslationX());
+                }
+            };
+    public static final Property<View, Float> TRANSLATION_Y =
+            new FloatProperty<View>("translationY") { // from class: android.view.View.5
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    object.setTranslationY(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getTranslationY());
-        }
-    };
-    public static final Property<View, Float> TRANSLATION_Z = new FloatProperty<View>("translationZ") { // from class: android.view.View.6
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            object.setTranslationZ(value);
-        }
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getTranslationY());
+                }
+            };
+    public static final Property<View, Float> TRANSLATION_Z =
+            new FloatProperty<View>("translationZ") { // from class: android.view.View.6
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    object.setTranslationZ(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getTranslationZ());
-        }
-    };
-    public static final Property<View, Float> X = new FloatProperty<View>("x") { // from class: android.view.View.7
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            object.setX(value);
-        }
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getTranslationZ());
+                }
+            };
+    public static final Property<View, Float> X =
+            new FloatProperty<View>("x") { // from class: android.view.View.7
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    object.setX(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getX());
-        }
-    };
-    public static final Property<View, Float> Y = new FloatProperty<View>("y") { // from class: android.view.View.8
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            object.setY(value);
-        }
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getX());
+                }
+            };
+    public static final Property<View, Float> Y =
+            new FloatProperty<View>("y") { // from class: android.view.View.8
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    object.setY(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getY());
-        }
-    };
-    public static final Property<View, Float> Z = new FloatProperty<View>("z") { // from class: android.view.View.9
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            object.setZ(value);
-        }
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getY());
+                }
+            };
+    public static final Property<View, Float> Z =
+            new FloatProperty<View>("z") { // from class: android.view.View.9
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    object.setZ(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getZ());
-        }
-    };
-    public static final Property<View, Float> ROTATION = new FloatProperty<View>(GenerateXML.ROTATION) { // from class: android.view.View.10
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            object.setRotation(value);
-        }
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getZ());
+                }
+            };
+    public static final Property<View, Float> ROTATION =
+            new FloatProperty<View>(GenerateXML.ROTATION) { // from class: android.view.View.10
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    object.setRotation(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getRotation());
-        }
-    };
-    public static final Property<View, Float> ROTATION_X = new FloatProperty<View>("rotationX") { // from class: android.view.View.11
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            object.setRotationX(value);
-        }
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getRotation());
+                }
+            };
+    public static final Property<View, Float> ROTATION_X =
+            new FloatProperty<View>("rotationX") { // from class: android.view.View.11
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    object.setRotationX(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getRotationX());
-        }
-    };
-    public static final Property<View, Float> ROTATION_Y = new FloatProperty<View>("rotationY") { // from class: android.view.View.12
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            object.setRotationY(value);
-        }
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getRotationX());
+                }
+            };
+    public static final Property<View, Float> ROTATION_Y =
+            new FloatProperty<View>("rotationY") { // from class: android.view.View.12
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    object.setRotationY(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getRotationY());
-        }
-    };
-    public static final Property<View, Float> SCALE_X = new FloatProperty<View>("scaleX") { // from class: android.view.View.13
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            object.setScaleX(value);
-        }
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getRotationY());
+                }
+            };
+    public static final Property<View, Float> SCALE_X =
+            new FloatProperty<View>("scaleX") { // from class: android.view.View.13
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    object.setScaleX(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getScaleX());
-        }
-    };
-    public static final Property<View, Float> SCALE_Y = new FloatProperty<View>("scaleY") { // from class: android.view.View.14
-        @Override // android.util.FloatProperty
-        public void setValue(View object, float value) {
-            object.setScaleY(value);
-        }
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getScaleX());
+                }
+            };
+    public static final Property<View, Float> SCALE_Y =
+            new FloatProperty<View>("scaleY") { // from class: android.view.View.14
+                @Override // android.util.FloatProperty
+                public void setValue(View object, float value) {
+                    object.setScaleY(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(View object) {
-            return Float.valueOf(object.getScaleY());
-        }
-    };
+                @Override // android.util.Property
+                public Float get(View object) {
+                    return Float.valueOf(object.getScaleY());
+                }
+            };
     private static int sHoverUIEnableFlag = 0;
     protected static int sHoverUIFeatureLevel = -1;
     protected static boolean sIsCheckedHoverUIFeatureLevel = false;
     static final int TEST_BLUR_DISABLED = SystemProperties.getInt("test.debug.blur_disabled", 0);
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AccessibilityDataSensitive {
-    }
+    public @interface AccessibilityDataSensitive {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AutofillFlags {
-    }
+    public @interface AutofillFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AutofillImportance {
-    }
+    public @interface AutofillImportance {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AutofillType {
-    }
+    public @interface AutofillType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ContentCaptureImportance {
-    }
+    public @interface ContentCaptureImportance {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ContentSensitivity {
-    }
+    public @interface ContentSensitivity {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DrawingCacheQuality {
-    }
+    public @interface DrawingCacheQuality {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FindViewFlags {
-    }
+    public @interface FindViewFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FocusDirection {
-    }
+    public @interface FocusDirection {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FocusRealDirection {
-    }
+    public @interface FocusRealDirection {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Focusable {
-    }
+    public @interface Focusable {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FocusableMode {
-    }
+    public @interface FocusableMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LayerType {
-    }
+    public @interface LayerType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LayoutDir {
-    }
+    public @interface LayoutDir {}
 
     public interface OnAddRemoveListener {
         void onViewAdded(View view, View view2);
@@ -1196,7 +1290,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public interface OnCreateContextMenuListener {
-        void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo);
+        void onCreateContextMenu(
+                ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo);
     }
 
     public interface OnDragListener {
@@ -1220,7 +1315,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public interface OnLayoutChangeListener {
-        void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
+        void onLayoutChange(
+                View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
     }
 
     public interface OnScrollChangeListener {
@@ -1241,38 +1337,31 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResolvedLayoutDir {
-    }
+    public @interface ResolvedLayoutDir {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScrollBarStyle {
-    }
+    public @interface ScrollBarStyle {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScrollCaptureHint {
-    }
+    public @interface ScrollCaptureHint {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScrollIndicators {
-    }
+    public @interface ScrollIndicators {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SystemUiVisibility {
-    }
+    public @interface SystemUiVisibility {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TextAlignment {
-    }
+    public @interface TextAlignment {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ViewStructureType {
-    }
+    public @interface ViewStructureType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Visibility {
-    }
+    public @interface Visibility {}
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<View> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<View> {
         private int mAccessibilityFocusedId;
         private int mAccessibilityHeadingId;
         private int mAccessibilityLiveRegionId;
@@ -1375,16 +1464,25 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         @Override // android.view.inspector.InspectionCompanion
         public void mapProperties(PropertyMapper propertyMapper) {
             this.mAccessibilityFocusedId = propertyMapper.mapBoolean("accessibilityFocused", 0);
-            this.mAccessibilityHeadingId = propertyMapper.mapBoolean("accessibilityHeading", 16844160);
+            this.mAccessibilityHeadingId =
+                    propertyMapper.mapBoolean("accessibilityHeading", 16844160);
             SparseArray<String> accessibilityLiveRegionEnumMapping = new SparseArray<>();
             accessibilityLiveRegionEnumMapping.put(0, "none");
             accessibilityLiveRegionEnumMapping.put(1, "polite");
             accessibilityLiveRegionEnumMapping.put(2, "assertive");
             Objects.requireNonNull(accessibilityLiveRegionEnumMapping);
-            this.mAccessibilityLiveRegionId = propertyMapper.mapIntEnum("accessibilityLiveRegion", 16843758, new View$InspectionCompanion$$ExternalSyntheticLambda0(accessibilityLiveRegionEnumMapping));
-            this.mAccessibilityPaneTitleId = propertyMapper.mapObject("accessibilityPaneTitle", 16844156);
-            this.mAccessibilityTraversalAfterId = propertyMapper.mapResourceId("accessibilityTraversalAfter", 16843986);
-            this.mAccessibilityTraversalBeforeId = propertyMapper.mapResourceId("accessibilityTraversalBefore", 16843985);
+            this.mAccessibilityLiveRegionId =
+                    propertyMapper.mapIntEnum(
+                            "accessibilityLiveRegion",
+                            16843758,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    accessibilityLiveRegionEnumMapping));
+            this.mAccessibilityPaneTitleId =
+                    propertyMapper.mapObject("accessibilityPaneTitle", 16844156);
+            this.mAccessibilityTraversalAfterId =
+                    propertyMapper.mapResourceId("accessibilityTraversalAfter", 16843986);
+            this.mAccessibilityTraversalBeforeId =
+                    propertyMapper.mapResourceId("accessibilityTraversalBefore", 16843985);
             this.mActivatedId = propertyMapper.mapBoolean("activated", 0);
             this.mAlphaId = propertyMapper.mapFloat("alpha", 16843551);
             this.mAutofillHintsId = propertyMapper.mapObject("autofillHints", 16844118);
@@ -1395,26 +1493,42 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mClickableId = propertyMapper.mapBoolean("clickable", 16842981);
             this.mContentDescriptionId = propertyMapper.mapObject("contentDescription", 16843379);
             this.mContextClickableId = propertyMapper.mapBoolean("contextClickable", 16844007);
-            this.mDefaultFocusHighlightEnabledId = propertyMapper.mapBoolean("defaultFocusHighlightEnabled", 16844130);
+            this.mDefaultFocusHighlightEnabledId =
+                    propertyMapper.mapBoolean("defaultFocusHighlightEnabled", 16844130);
             SparseArray<String> drawingCacheQualityEnumMapping = new SparseArray<>();
             drawingCacheQualityEnumMapping.put(0, "auto");
             drawingCacheQualityEnumMapping.put(524288, "low");
             drawingCacheQualityEnumMapping.put(1048576, "high");
             Objects.requireNonNull(drawingCacheQualityEnumMapping);
-            this.mDrawingCacheQualityId = propertyMapper.mapIntEnum("drawingCacheQuality", 16842984, new View$InspectionCompanion$$ExternalSyntheticLambda0(drawingCacheQualityEnumMapping));
-            this.mDuplicateParentStateId = propertyMapper.mapBoolean("duplicateParentState", 16842985);
-            this.mElevationId = propertyMapper.mapFloat(SemMediaPostProcessor.ProcessingFormat.Key.ELEVATION, 16843840);
+            this.mDrawingCacheQualityId =
+                    propertyMapper.mapIntEnum(
+                            "drawingCacheQuality",
+                            16842984,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    drawingCacheQualityEnumMapping));
+            this.mDuplicateParentStateId =
+                    propertyMapper.mapBoolean("duplicateParentState", 16842985);
+            this.mElevationId =
+                    propertyMapper.mapFloat(
+                            SemMediaPostProcessor.ProcessingFormat.Key.ELEVATION, 16843840);
             this.mEnabledId = propertyMapper.mapBoolean("enabled", 16842766);
             this.mFadingEdgeLengthId = propertyMapper.mapInt("fadingEdgeLength", 16842976);
-            this.mFilterTouchesWhenObscuredId = propertyMapper.mapBoolean("filterTouchesWhenObscured", 16843460);
+            this.mFilterTouchesWhenObscuredId =
+                    propertyMapper.mapBoolean("filterTouchesWhenObscured", 16843460);
             this.mFitsSystemWindowsId = propertyMapper.mapBoolean("fitsSystemWindows", 16842973);
             SparseArray<String> focusableEnumMapping = new SparseArray<>();
             focusableEnumMapping.put(0, "false");
             focusableEnumMapping.put(1, "true");
             focusableEnumMapping.put(16, "auto");
             Objects.requireNonNull(focusableEnumMapping);
-            this.mFocusableId = propertyMapper.mapIntEnum("focusable", 16842970, new View$InspectionCompanion$$ExternalSyntheticLambda0(focusableEnumMapping));
-            this.mFocusableInTouchModeId = propertyMapper.mapBoolean("focusableInTouchMode", 16842971);
+            this.mFocusableId =
+                    propertyMapper.mapIntEnum(
+                            "focusable",
+                            16842970,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    focusableEnumMapping));
+            this.mFocusableInTouchModeId =
+                    propertyMapper.mapBoolean("focusableInTouchMode", 16842971);
             this.mFocusedId = propertyMapper.mapBoolean("focused", 0);
             this.mFocusedByDefaultId = propertyMapper.mapBoolean("focusedByDefault", 16844100);
             this.mForceDarkAllowedId = propertyMapper.mapBoolean("forceDarkAllowed", 16844172);
@@ -1422,7 +1536,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mForegroundGravityId = propertyMapper.mapGravity("foregroundGravity", 16843264);
             this.mForegroundTintId = propertyMapper.mapObject("foregroundTint", 16843885);
             this.mForegroundTintModeId = propertyMapper.mapObject("foregroundTintMode", 16843886);
-            this.mHapticFeedbackEnabledId = propertyMapper.mapBoolean("hapticFeedbackEnabled", 16843358);
+            this.mHapticFeedbackEnabledId =
+                    propertyMapper.mapBoolean("hapticFeedbackEnabled", 16843358);
             this.mIdId = propertyMapper.mapResourceId("id", 16842960);
             SparseArray<String> importantForAccessibilityEnumMapping = new SparseArray<>();
             importantForAccessibilityEnumMapping.put(0, "auto");
@@ -1430,7 +1545,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             importantForAccessibilityEnumMapping.put(2, "no");
             importantForAccessibilityEnumMapping.put(4, "noHideDescendants");
             Objects.requireNonNull(importantForAccessibilityEnumMapping);
-            this.mImportantForAccessibilityId = propertyMapper.mapIntEnum("importantForAccessibility", 16843690, new View$InspectionCompanion$$ExternalSyntheticLambda0(importantForAccessibilityEnumMapping));
+            this.mImportantForAccessibilityId =
+                    propertyMapper.mapIntEnum(
+                            "importantForAccessibility",
+                            16843690,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    importantForAccessibilityEnumMapping));
             SparseArray<String> importantForAutofillEnumMapping = new SparseArray<>();
             importantForAutofillEnumMapping.put(0, "auto");
             importantForAutofillEnumMapping.put(1, "yes");
@@ -1438,7 +1558,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             importantForAutofillEnumMapping.put(4, "yesExcludeDescendants");
             importantForAutofillEnumMapping.put(8, "noExcludeDescendants");
             Objects.requireNonNull(importantForAutofillEnumMapping);
-            this.mImportantForAutofillId = propertyMapper.mapIntEnum("importantForAutofill", 16844120, new View$InspectionCompanion$$ExternalSyntheticLambda0(importantForAutofillEnumMapping));
+            this.mImportantForAutofillId =
+                    propertyMapper.mapIntEnum(
+                            "importantForAutofill",
+                            16844120,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    importantForAutofillEnumMapping));
             SparseArray<String> importantForContentCaptureEnumMapping = new SparseArray<>();
             importantForContentCaptureEnumMapping.put(0, "auto");
             importantForContentCaptureEnumMapping.put(1, "yes");
@@ -1446,41 +1571,66 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             importantForContentCaptureEnumMapping.put(4, "yesExcludeDescendants");
             importantForContentCaptureEnumMapping.put(8, "noExcludeDescendants");
             Objects.requireNonNull(importantForContentCaptureEnumMapping);
-            this.mImportantForContentCaptureId = propertyMapper.mapIntEnum("importantForContentCapture", 16844295, new View$InspectionCompanion$$ExternalSyntheticLambda0(importantForContentCaptureEnumMapping));
+            this.mImportantForContentCaptureId =
+                    propertyMapper.mapIntEnum(
+                            "importantForContentCapture",
+                            16844295,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    importantForContentCaptureEnumMapping));
             this.mIsScrollContainerId = propertyMapper.mapBoolean("isScrollContainer", 16843342);
             this.mKeepScreenOnId = propertyMapper.mapBoolean("keepScreenOn", 16843286);
-            this.mKeyboardNavigationClusterId = propertyMapper.mapBoolean("keyboardNavigationCluster", 16844096);
+            this.mKeyboardNavigationClusterId =
+                    propertyMapper.mapBoolean("keyboardNavigationCluster", 16844096);
             this.mLabelForId = propertyMapper.mapResourceId("labelFor", 16843718);
             SparseArray<String> layerTypeEnumMapping = new SparseArray<>();
             layerTypeEnumMapping.put(0, "none");
             layerTypeEnumMapping.put(1, "software");
             layerTypeEnumMapping.put(2, "hardware");
             Objects.requireNonNull(layerTypeEnumMapping);
-            this.mLayerTypeId = propertyMapper.mapIntEnum("layerType", 16843604, new View$InspectionCompanion$$ExternalSyntheticLambda0(layerTypeEnumMapping));
+            this.mLayerTypeId =
+                    propertyMapper.mapIntEnum(
+                            "layerType",
+                            16843604,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    layerTypeEnumMapping));
             SparseArray<String> layoutDirectionEnumMapping = new SparseArray<>();
             layoutDirectionEnumMapping.put(0, "ltr");
             layoutDirectionEnumMapping.put(1, "rtl");
             Objects.requireNonNull(layoutDirectionEnumMapping);
-            this.mLayoutDirectionId = propertyMapper.mapIntEnum("layoutDirection", 16843698, new View$InspectionCompanion$$ExternalSyntheticLambda0(layoutDirectionEnumMapping));
+            this.mLayoutDirectionId =
+                    propertyMapper.mapIntEnum(
+                            "layoutDirection",
+                            16843698,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    layoutDirectionEnumMapping));
             this.mLongClickableId = propertyMapper.mapBoolean("longClickable", 16842982);
             this.mMinHeightId = propertyMapper.mapInt("minHeight", 16843072);
             this.mMinWidthId = propertyMapper.mapInt("minWidth", 16843071);
-            this.mNestedScrollingEnabledId = propertyMapper.mapBoolean("nestedScrollingEnabled", 16843830);
-            this.mNextClusterForwardId = propertyMapper.mapResourceId("nextClusterForward", 16844098);
+            this.mNestedScrollingEnabledId =
+                    propertyMapper.mapBoolean("nestedScrollingEnabled", 16843830);
+            this.mNextClusterForwardId =
+                    propertyMapper.mapResourceId("nextClusterForward", 16844098);
             this.mNextFocusDownId = propertyMapper.mapResourceId("nextFocusDown", 16842980);
             this.mNextFocusForwardId = propertyMapper.mapResourceId("nextFocusForward", 16843580);
             this.mNextFocusLeftId = propertyMapper.mapResourceId("nextFocusLeft", 16842977);
             this.mNextFocusRightId = propertyMapper.mapResourceId("nextFocusRight", 16842978);
             this.mNextFocusUpId = propertyMapper.mapResourceId("nextFocusUp", 16842979);
-            this.mOutlineAmbientShadowColorId = propertyMapper.mapColor("outlineAmbientShadowColor", 16844162);
+            this.mOutlineAmbientShadowColorId =
+                    propertyMapper.mapColor("outlineAmbientShadowColor", 16844162);
             this.mOutlineProviderId = propertyMapper.mapObject("outlineProvider", 16843960);
-            this.mOutlineSpotShadowColorId = propertyMapper.mapColor("outlineSpotShadowColor", 16844161);
+            this.mOutlineSpotShadowColorId =
+                    propertyMapper.mapColor("outlineSpotShadowColor", 16844161);
             SparseArray<String> overScrollModeEnumMapping = new SparseArray<>();
             overScrollModeEnumMapping.put(0, "always");
             overScrollModeEnumMapping.put(1, "ifContentScrolls");
             overScrollModeEnumMapping.put(2, "never");
             Objects.requireNonNull(overScrollModeEnumMapping);
-            this.mOverScrollModeId = propertyMapper.mapIntEnum("overScrollMode", 16843457, new View$InspectionCompanion$$ExternalSyntheticLambda0(overScrollModeEnumMapping));
+            this.mOverScrollModeId =
+                    propertyMapper.mapIntEnum(
+                            "overScrollMode",
+                            16843457,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    overScrollModeEnumMapping));
             this.mPaddingBottomId = propertyMapper.mapInt("paddingBottom", 16842969);
             this.mPaddingLeftId = propertyMapper.mapInt("paddingLeft", 16842966);
             this.mPaddingRightId = propertyMapper.mapInt("paddingRight", 16842968);
@@ -1493,7 +1643,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             rawLayoutDirectionEnumMapping.put(2, "inherit");
             rawLayoutDirectionEnumMapping.put(3, "locale");
             Objects.requireNonNull(rawLayoutDirectionEnumMapping);
-            this.mRawLayoutDirectionId = propertyMapper.mapIntEnum("rawLayoutDirection", 0, new View$InspectionCompanion$$ExternalSyntheticLambda0(rawLayoutDirectionEnumMapping));
+            this.mRawLayoutDirectionId =
+                    propertyMapper.mapIntEnum(
+                            "rawLayoutDirection",
+                            0,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    rawLayoutDirectionEnumMapping));
             SparseArray<String> rawTextAlignmentEnumMapping = new SparseArray<>();
             rawTextAlignmentEnumMapping.put(0, "inherit");
             rawTextAlignmentEnumMapping.put(1, "gravity");
@@ -1503,7 +1658,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             rawTextAlignmentEnumMapping.put(5, "viewStart");
             rawTextAlignmentEnumMapping.put(6, "viewEnd");
             Objects.requireNonNull(rawTextAlignmentEnumMapping);
-            this.mRawTextAlignmentId = propertyMapper.mapIntEnum("rawTextAlignment", 0, new View$InspectionCompanion$$ExternalSyntheticLambda0(rawTextAlignmentEnumMapping));
+            this.mRawTextAlignmentId =
+                    propertyMapper.mapIntEnum(
+                            "rawTextAlignment",
+                            0,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    rawTextAlignmentEnumMapping));
             SparseArray<String> rawTextDirectionEnumMapping = new SparseArray<>();
             rawTextDirectionEnumMapping.put(0, "inherit");
             rawTextDirectionEnumMapping.put(1, "firstStrong");
@@ -1514,20 +1674,31 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             rawTextDirectionEnumMapping.put(6, "firstStrongLtr");
             rawTextDirectionEnumMapping.put(7, "firstStrongRtl");
             Objects.requireNonNull(rawTextDirectionEnumMapping);
-            this.mRawTextDirectionId = propertyMapper.mapIntEnum("rawTextDirection", 0, new View$InspectionCompanion$$ExternalSyntheticLambda0(rawTextDirectionEnumMapping));
+            this.mRawTextDirectionId =
+                    propertyMapper.mapIntEnum(
+                            "rawTextDirection",
+                            0,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    rawTextDirectionEnumMapping));
             IntFlagMapping requiresFadingEdgeFlagMapping = new IntFlagMapping();
             requiresFadingEdgeFlagMapping.add(4096, 4096, Slice.HINT_HORIZONTAL);
             requiresFadingEdgeFlagMapping.add(12288, 0, "none");
             requiresFadingEdgeFlagMapping.add(8192, 8192, "vertical");
             Objects.requireNonNull(requiresFadingEdgeFlagMapping);
-            this.mRequiresFadingEdgeId = propertyMapper.mapIntFlag("requiresFadingEdge", 16843685, new View$InspectionCompanion$$ExternalSyntheticLambda1(requiresFadingEdgeFlagMapping));
+            this.mRequiresFadingEdgeId =
+                    propertyMapper.mapIntFlag(
+                            "requiresFadingEdge",
+                            16843685,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda1(
+                                    requiresFadingEdgeFlagMapping));
             this.mRotationId = propertyMapper.mapFloat(GenerateXML.ROTATION, 16843558);
             this.mRotationXId = propertyMapper.mapFloat("rotationX", 16843559);
             this.mRotationYId = propertyMapper.mapFloat("rotationY", 16843560);
             this.mSaveEnabledId = propertyMapper.mapBoolean("saveEnabled", 16842983);
             this.mScaleXId = propertyMapper.mapFloat("scaleX", 16843556);
             this.mScaleYId = propertyMapper.mapFloat("scaleY", 16843557);
-            this.mScreenReaderFocusableId = propertyMapper.mapBoolean("screenReaderFocusable", 16844148);
+            this.mScreenReaderFocusableId =
+                    propertyMapper.mapBoolean("screenReaderFocusable", 16844148);
             IntFlagMapping scrollIndicatorsFlagMapping = new IntFlagMapping();
             scrollIndicatorsFlagMapping.add(2, 2, GenerateXML.BOTTOM);
             scrollIndicatorsFlagMapping.add(32, 32, "end");
@@ -1537,11 +1708,18 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             scrollIndicatorsFlagMapping.add(16, 16, "start");
             scrollIndicatorsFlagMapping.add(1, 1, GenerateXML.TOP);
             Objects.requireNonNull(scrollIndicatorsFlagMapping);
-            this.mScrollIndicatorsId = propertyMapper.mapIntFlag("scrollIndicators", 16844006, new View$InspectionCompanion$$ExternalSyntheticLambda1(scrollIndicatorsFlagMapping));
+            this.mScrollIndicatorsId =
+                    propertyMapper.mapIntFlag(
+                            "scrollIndicators",
+                            16844006,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda1(
+                                    scrollIndicatorsFlagMapping));
             this.mScrollXId = propertyMapper.mapInt("scrollX", 16842962);
             this.mScrollYId = propertyMapper.mapInt("scrollY", 16842963);
-            this.mScrollbarDefaultDelayBeforeFadeId = propertyMapper.mapInt("scrollbarDefaultDelayBeforeFade", 16843433);
-            this.mScrollbarFadeDurationId = propertyMapper.mapInt("scrollbarFadeDuration", 16843432);
+            this.mScrollbarDefaultDelayBeforeFadeId =
+                    propertyMapper.mapInt("scrollbarDefaultDelayBeforeFade", 16843433);
+            this.mScrollbarFadeDurationId =
+                    propertyMapper.mapInt("scrollbarFadeDuration", 16843432);
             this.mScrollbarSizeId = propertyMapper.mapInt("scrollbarSize", 16842851);
             SparseArray<String> scrollbarStyleEnumMapping = new SparseArray<>();
             scrollbarStyleEnumMapping.put(0, "insideOverlay");
@@ -1549,10 +1727,16 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             scrollbarStyleEnumMapping.put(33554432, "outsideOverlay");
             scrollbarStyleEnumMapping.put(50331648, "outsideInset");
             Objects.requireNonNull(scrollbarStyleEnumMapping);
-            this.mScrollbarStyleId = propertyMapper.mapIntEnum("scrollbarStyle", 16842879, new View$InspectionCompanion$$ExternalSyntheticLambda0(scrollbarStyleEnumMapping));
+            this.mScrollbarStyleId =
+                    propertyMapper.mapIntEnum(
+                            "scrollbarStyle",
+                            16842879,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    scrollbarStyleEnumMapping));
             this.mSelectedId = propertyMapper.mapBoolean(Slice.HINT_SELECTED, 0);
             this.mSolidColorId = propertyMapper.mapColor("solidColor", 16843594);
-            this.mSoundEffectsEnabledId = propertyMapper.mapBoolean("soundEffectsEnabled", 16843285);
+            this.mSoundEffectsEnabledId =
+                    propertyMapper.mapBoolean("soundEffectsEnabled", 16843285);
             this.mStateListAnimatorId = propertyMapper.mapObject("stateListAnimator", 16843848);
             this.mTagId = propertyMapper.mapObject("tag", 16842961);
             SparseArray<String> textAlignmentEnumMapping = new SparseArray<>();
@@ -1563,7 +1747,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             textAlignmentEnumMapping.put(5, "viewStart");
             textAlignmentEnumMapping.put(6, "viewEnd");
             Objects.requireNonNull(textAlignmentEnumMapping);
-            this.mTextAlignmentId = propertyMapper.mapIntEnum("textAlignment", 16843697, new View$InspectionCompanion$$ExternalSyntheticLambda0(textAlignmentEnumMapping));
+            this.mTextAlignmentId =
+                    propertyMapper.mapIntEnum(
+                            "textAlignment",
+                            16843697,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    textAlignmentEnumMapping));
             SparseArray<String> textDirectionEnumMapping = new SparseArray<>();
             textDirectionEnumMapping.put(1, "firstStrong");
             textDirectionEnumMapping.put(2, "anyRtl");
@@ -1573,7 +1762,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             textDirectionEnumMapping.put(6, "firstStrongLtr");
             textDirectionEnumMapping.put(7, "firstStrongRtl");
             Objects.requireNonNull(textDirectionEnumMapping);
-            this.mTextDirectionId = propertyMapper.mapIntEnum("textDirection", 0, new View$InspectionCompanion$$ExternalSyntheticLambda0(textDirectionEnumMapping));
+            this.mTextDirectionId =
+                    propertyMapper.mapIntEnum(
+                            "textDirection",
+                            0,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    textDirectionEnumMapping));
             this.mTooltipTextId = propertyMapper.mapObject("tooltipText", 16844084);
             this.mTransformPivotXId = propertyMapper.mapFloat("transformPivotX", 16843552);
             this.mTransformPivotYId = propertyMapper.mapFloat("transformPivotY", 16843553);
@@ -1586,7 +1780,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             visibilityEnumMapping.put(4, "invisible");
             visibilityEnumMapping.put(8, "gone");
             Objects.requireNonNull(visibilityEnumMapping);
-            this.mVisibilityId = propertyMapper.mapIntEnum("visibility", 16842972, new View$InspectionCompanion$$ExternalSyntheticLambda0(visibilityEnumMapping));
+            this.mVisibilityId =
+                    propertyMapper.mapIntEnum(
+                            "visibility",
+                            16842972,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    visibilityEnumMapping));
             this.mPropertiesMapped = true;
         }
 
@@ -1597,10 +1796,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             }
             propertyReader.readBoolean(this.mAccessibilityFocusedId, node.isAccessibilityFocused());
             propertyReader.readBoolean(this.mAccessibilityHeadingId, node.isAccessibilityHeading());
-            propertyReader.readIntEnum(this.mAccessibilityLiveRegionId, node.getAccessibilityLiveRegion());
-            propertyReader.readObject(this.mAccessibilityPaneTitleId, node.getAccessibilityPaneTitle());
-            propertyReader.readResourceId(this.mAccessibilityTraversalAfterId, node.getAccessibilityTraversalAfter());
-            propertyReader.readResourceId(this.mAccessibilityTraversalBeforeId, node.getAccessibilityTraversalBefore());
+            propertyReader.readIntEnum(
+                    this.mAccessibilityLiveRegionId, node.getAccessibilityLiveRegion());
+            propertyReader.readObject(
+                    this.mAccessibilityPaneTitleId, node.getAccessibilityPaneTitle());
+            propertyReader.readResourceId(
+                    this.mAccessibilityTraversalAfterId, node.getAccessibilityTraversalAfter());
+            propertyReader.readResourceId(
+                    this.mAccessibilityTraversalBeforeId, node.getAccessibilityTraversalBefore());
             propertyReader.readBoolean(this.mActivatedId, node.isActivated());
             propertyReader.readFloat(this.mAlphaId, node.getAlpha());
             propertyReader.readObject(this.mAutofillHintsId, node.getAutofillHints());
@@ -1611,13 +1814,16 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             propertyReader.readBoolean(this.mClickableId, node.isClickable());
             propertyReader.readObject(this.mContentDescriptionId, node.getContentDescription());
             propertyReader.readBoolean(this.mContextClickableId, node.isContextClickable());
-            propertyReader.readBoolean(this.mDefaultFocusHighlightEnabledId, node.getDefaultFocusHighlightEnabled());
+            propertyReader.readBoolean(
+                    this.mDefaultFocusHighlightEnabledId, node.getDefaultFocusHighlightEnabled());
             propertyReader.readIntEnum(this.mDrawingCacheQualityId, node.getDrawingCacheQuality());
-            propertyReader.readBoolean(this.mDuplicateParentStateId, node.isDuplicateParentStateEnabled());
+            propertyReader.readBoolean(
+                    this.mDuplicateParentStateId, node.isDuplicateParentStateEnabled());
             propertyReader.readFloat(this.mElevationId, node.getElevation());
             propertyReader.readBoolean(this.mEnabledId, node.isEnabled());
             propertyReader.readInt(this.mFadingEdgeLengthId, node.getFadingEdgeLength());
-            propertyReader.readBoolean(this.mFilterTouchesWhenObscuredId, node.getFilterTouchesWhenObscured());
+            propertyReader.readBoolean(
+                    this.mFilterTouchesWhenObscuredId, node.getFilterTouchesWhenObscured());
             propertyReader.readBoolean(this.mFitsSystemWindowsId, node.getFitsSystemWindows());
             propertyReader.readIntEnum(this.mFocusableId, node.getFocusable());
             propertyReader.readBoolean(this.mFocusableInTouchModeId, node.isFocusableInTouchMode());
@@ -1628,30 +1834,39 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             propertyReader.readGravity(this.mForegroundGravityId, node.getForegroundGravity());
             propertyReader.readObject(this.mForegroundTintId, node.getForegroundTintList());
             propertyReader.readObject(this.mForegroundTintModeId, node.getForegroundTintMode());
-            propertyReader.readBoolean(this.mHapticFeedbackEnabledId, node.isHapticFeedbackEnabled());
+            propertyReader.readBoolean(
+                    this.mHapticFeedbackEnabledId, node.isHapticFeedbackEnabled());
             propertyReader.readResourceId(this.mIdId, node.getId());
-            propertyReader.readIntEnum(this.mImportantForAccessibilityId, node.getImportantForAccessibility());
-            propertyReader.readIntEnum(this.mImportantForAutofillId, node.getImportantForAutofill());
-            propertyReader.readIntEnum(this.mImportantForContentCaptureId, node.getImportantForContentCapture());
+            propertyReader.readIntEnum(
+                    this.mImportantForAccessibilityId, node.getImportantForAccessibility());
+            propertyReader.readIntEnum(
+                    this.mImportantForAutofillId, node.getImportantForAutofill());
+            propertyReader.readIntEnum(
+                    this.mImportantForContentCaptureId, node.getImportantForContentCapture());
             propertyReader.readBoolean(this.mIsScrollContainerId, node.isScrollContainer());
             propertyReader.readBoolean(this.mKeepScreenOnId, node.getKeepScreenOn());
-            propertyReader.readBoolean(this.mKeyboardNavigationClusterId, node.isKeyboardNavigationCluster());
+            propertyReader.readBoolean(
+                    this.mKeyboardNavigationClusterId, node.isKeyboardNavigationCluster());
             propertyReader.readResourceId(this.mLabelForId, node.getLabelFor());
             propertyReader.readIntEnum(this.mLayerTypeId, node.getLayerType());
             propertyReader.readIntEnum(this.mLayoutDirectionId, node.getLayoutDirection());
             propertyReader.readBoolean(this.mLongClickableId, node.isLongClickable());
             propertyReader.readInt(this.mMinHeightId, node.getMinimumHeight());
             propertyReader.readInt(this.mMinWidthId, node.getMinimumWidth());
-            propertyReader.readBoolean(this.mNestedScrollingEnabledId, node.isNestedScrollingEnabled());
-            propertyReader.readResourceId(this.mNextClusterForwardId, node.getNextClusterForwardId());
+            propertyReader.readBoolean(
+                    this.mNestedScrollingEnabledId, node.isNestedScrollingEnabled());
+            propertyReader.readResourceId(
+                    this.mNextClusterForwardId, node.getNextClusterForwardId());
             propertyReader.readResourceId(this.mNextFocusDownId, node.getNextFocusDownId());
             propertyReader.readResourceId(this.mNextFocusForwardId, node.getNextFocusForwardId());
             propertyReader.readResourceId(this.mNextFocusLeftId, node.getNextFocusLeftId());
             propertyReader.readResourceId(this.mNextFocusRightId, node.getNextFocusRightId());
             propertyReader.readResourceId(this.mNextFocusUpId, node.getNextFocusUpId());
-            propertyReader.readColor(this.mOutlineAmbientShadowColorId, node.getOutlineAmbientShadowColor());
+            propertyReader.readColor(
+                    this.mOutlineAmbientShadowColorId, node.getOutlineAmbientShadowColor());
             propertyReader.readObject(this.mOutlineProviderId, node.getOutlineProvider());
-            propertyReader.readColor(this.mOutlineSpotShadowColorId, node.getOutlineSpotShadowColor());
+            propertyReader.readColor(
+                    this.mOutlineSpotShadowColorId, node.getOutlineSpotShadowColor());
             propertyReader.readIntEnum(this.mOverScrollModeId, node.getOverScrollMode());
             propertyReader.readInt(this.mPaddingBottomId, node.getPaddingBottom());
             propertyReader.readInt(this.mPaddingLeftId, node.getPaddingLeft());
@@ -1669,11 +1884,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             propertyReader.readBoolean(this.mSaveEnabledId, node.isSaveEnabled());
             propertyReader.readFloat(this.mScaleXId, node.getScaleX());
             propertyReader.readFloat(this.mScaleYId, node.getScaleY());
-            propertyReader.readBoolean(this.mScreenReaderFocusableId, node.isScreenReaderFocusable());
+            propertyReader.readBoolean(
+                    this.mScreenReaderFocusableId, node.isScreenReaderFocusable());
             propertyReader.readIntFlag(this.mScrollIndicatorsId, node.getScrollIndicators());
             propertyReader.readInt(this.mScrollXId, node.getScrollX());
             propertyReader.readInt(this.mScrollYId, node.getScrollY());
-            propertyReader.readInt(this.mScrollbarDefaultDelayBeforeFadeId, node.getScrollBarDefaultDelayBeforeFade());
+            propertyReader.readInt(
+                    this.mScrollbarDefaultDelayBeforeFadeId,
+                    node.getScrollBarDefaultDelayBeforeFade());
             propertyReader.readInt(this.mScrollbarFadeDurationId, node.getScrollBarFadeDuration());
             propertyReader.readInt(this.mScrollbarSizeId, node.getScrollBarSize());
             propertyReader.readIntEnum(this.mScrollbarStyleId, node.getScrollBarStyle());
@@ -1707,12 +1925,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         private Matrix mInverseMatrix;
         private final Matrix mMatrix = new Matrix();
 
-        @ViewDebug.ExportedProperty
-        private float mAlpha = 1.0f;
+        @ViewDebug.ExportedProperty private float mAlpha = 1.0f;
         float mTransitionAlpha = 1.0f;
 
-        TransformationInfo() {
-        }
+        TransformationInfo() {}
     }
 
     static class TintInfo {
@@ -1721,8 +1937,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         boolean mHasTintMode;
         ColorStateList mTintList;
 
-        TintInfo() {
-        }
+        TintInfo() {}
     }
 
     private static class ForegroundInfo {
@@ -1772,8 +1987,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         private boolean mPreferKeepClear = false;
         private Rect mHandwritingArea = null;
 
-        ListenerInfo() {
-        }
+        ListenerInfo() {}
     }
 
     private static class TooltipInfo {
@@ -1798,7 +2012,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         public boolean updateAnchorPos(MotionEvent event) {
             int newAnchorX = (int) event.getX();
             int newAnchorY = (int) event.getY();
-            if (Math.abs(newAnchorX - this.mAnchorX) <= this.mHoverSlop && Math.abs(newAnchorY - this.mAnchorY) <= this.mHoverSlop) {
+            if (Math.abs(newAnchorX - this.mAnchorX) <= this.mHoverSlop
+                    && Math.abs(newAnchorY - this.mAnchorY) <= this.mHoverSlop) {
                 return false;
             }
             this.mAnchorX = newAnchorX;
@@ -1903,10 +2118,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         this.VELOCITY_THRESHOLD_T1 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_t1", 4000);
         this.VELOCITY_THRESHOLD_T2 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_t2", 500);
         this.VELOCITY_THRESHOLD_T3 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_t3", 125);
-        this.VELOCITY_FRAMERATE1 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate1", 120);
-        this.VELOCITY_FRAMERATE2 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate2", 120);
-        this.VELOCITY_FRAMERATE3 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate3", 120);
-        this.VELOCITY_FRAMERATE4 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate4", 60);
+        this.VELOCITY_FRAMERATE1 =
+                SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate1", 120);
+        this.VELOCITY_FRAMERATE2 =
+                SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate2", 120);
+        this.VELOCITY_FRAMERATE3 =
+                SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate3", 120);
+        this.VELOCITY_FRAMERATE4 =
+                SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate4", 60);
         this.mIsFlingState = false;
         this.mBlurInfo = null;
         this.mBlurMode = -1;
@@ -1935,7 +2154,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         setOverScrollMode(1);
         this.mUserPaddingStart = Integer.MIN_VALUE;
         this.mUserPaddingEnd = Integer.MIN_VALUE;
-        this.mRenderNode = RenderNode.create(getClass().getName(), new ViewAnimationHostBridge(this));
+        this.mRenderNode =
+                RenderNode.create(getClass().getName(), new ViewAnimationHostBridge(this));
         if (!sCompatibilityDone && context != null) {
             int targetSdkVersion = context.getApplicationInfo().targetSdkVersion;
             if (targetSdkVersion <= 23) {
@@ -1974,7 +2194,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 z6 = false;
             }
             sAutoFocusableOffUIThreadWontNotifyParents = z6;
-            sUseDefaultFocusHighlight = context.getResources().getBoolean(R.bool.config_useDefaultFocusHighlight);
+            sUseDefaultFocusHighlight =
+                    context.getResources().getBoolean(R.bool.config_useDefaultFocusHighlight);
             if (targetSdkVersion >= 28) {
                 z7 = true;
             } else {
@@ -2026,7 +2247,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             sCompatibilityDone = true;
         }
         try {
-            if (!ViewRune.WIDGET_PEN_SUPPORTED || Settings.System.getInt(context.getContentResolver(), "disable_pen_gesture", 0) != 0) {
+            if (!ViewRune.WIDGET_PEN_SUPPORTED
+                    || Settings.System.getInt(
+                                    context.getContentResolver(), "disable_pen_gesture", 0)
+                            != 0) {
                 this.mDisablePenGestureforfactorytest = true;
             }
         } catch (Exception e) {
@@ -2035,14 +2259,19 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         try {
             if (sMetaDataNeedCheck) {
                 try {
-                    ApplicationInfo info = this.mContext.getPackageManager().getApplicationInfo(this.mContext.getPackageName(), 128);
+                    ApplicationInfo info =
+                            this.mContext
+                                    .getPackageManager()
+                                    .getApplicationInfo(this.mContext.getPackageName(), 128);
                     if (info.metaData != null) {
-                        String data = info.metaData.getString(SAMSUNG_BASIC_INTERACTION_METADATA_NAME);
+                        String data =
+                                info.metaData.getString(SAMSUNG_BASIC_INTERACTION_METADATA_NAME);
                         if (data != null && data.startsWith("SEP") && data.length() == 5) {
                             sIsSamsungBasicInteraction = true;
                             sSEP_Version = Integer.parseInt(data.substring(3, 5));
                         }
-                        sIsDisplayCutoutBackground = info.metaData.getBoolean(SAMSUNG_DISPLAY_CUTOUT_BG_METADATA_NAME);
+                        sIsDisplayCutoutBackground =
+                                info.metaData.getBoolean(SAMSUNG_DISPLAY_CUTOUT_BG_METADATA_NAME);
                     }
                 } catch (Exception e2) {
                     Log.d(VIEW_LOG_TAG, "Unable to get SamsungBasicInteraction metadata");
@@ -2074,9 +2303,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         String rawString;
         CharSequence[] rawHints;
         this.mSourceLayoutId = Resources.getAttributeSetSourceResId(attrs);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.View, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(attrs, R.styleable.View, defStyleAttr, defStyleRes);
         retrieveExplicitStyle(context.getTheme(), attrs);
-        saveAttributeDataForStyleable(context, R.styleable.View, attrs, a, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.View, attrs, a, defStyleAttr, defStyleRes);
         if (sDebugViewAttributes) {
             saveAttributeData(attrs, a);
         }
@@ -2393,7 +2624,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     padding2 = padding3;
                     int cacheQuality = a.getInt(attr, 0);
                     if (cacheQuality != 0) {
-                        int viewFlagValues13 = DRAWING_CACHE_QUALITY_FLAGS[cacheQuality] | startPadding;
+                        int viewFlagValues13 =
+                                DRAWING_CACHE_QUALITY_FLAGS[cacheQuality] | startPadding;
                         endPadding = 1572864 | endPadding;
                         padding3 = padding2;
                         rightPaddingDefined2 = rightPaddingDefined;
@@ -2506,7 +2738,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     rightPaddingDefined = rightPaddingDefined2;
                     padding2 = padding3;
                     if (context.isRestricted()) {
-                        throw new IllegalStateException("The android:onClick attribute cannot be used within a restricted context");
+                        throw new IllegalStateException(
+                                "The android:onClick attribute cannot be used within a restricted"
+                                    + " context");
                     }
                     String handlerName = a.getString(attr);
                     if (handlerName != null) {
@@ -2759,7 +2993,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     paddingHorizontal = paddingHorizontal2;
                     rightPaddingDefined = rightPaddingDefined2;
                     padding2 = padding3;
-                    setStateListAnimator(AnimatorInflater.loadStateListAnimator(context, a.getResourceId(attr, 0)));
+                    setStateListAnimator(
+                            AnimatorInflater.loadStateListAnimator(
+                                    context, a.getResourceId(attr, 0)));
                     break;
                 case 77:
                     paddingHorizontal = paddingHorizontal2;
@@ -2778,7 +3014,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     if (this.mBackgroundTint == null) {
                         this.mBackgroundTint = new TintInfo();
                     }
-                    this.mBackgroundTint.mBlendMode = Drawable.parseBlendMode(a.getInt(78, -1), null);
+                    this.mBackgroundTint.mBlendMode =
+                            Drawable.parseBlendMode(a.getInt(78, -1), null);
                     this.mBackgroundTint.mHasTintMode = true;
                     break;
                 case 79:
@@ -2937,7 +3174,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         }
                         if (rawHints == null) {
                             if (rawString == null) {
-                                throw new IllegalArgumentException("Could not resolve autofillHints");
+                                throw new IllegalArgumentException(
+                                        "Could not resolve autofillHints");
                             }
                             rawHints = rawString.split(",");
                         }
@@ -3114,7 +3352,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     } else {
                         paddingHorizontal = paddingHorizontal2;
                     }
-                    this.mForegroundInfo.mInsidePadding = a.getBoolean(attr, this.mForegroundInfo.mInsidePadding);
+                    this.mForegroundInfo.mInsidePadding =
+                            a.getBoolean(attr, this.mForegroundInfo.mInsidePadding);
                     rightPaddingDefined = rightPaddingDefined2;
                     padding2 = padding3;
                     break;
@@ -3180,11 +3419,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (!this.mLeftPaddingDefined && startPaddingDefined) {
                 topPadding = padding4;
             }
-            this.mUserPaddingLeftInitial = topPadding >= 0 ? topPadding : this.mUserPaddingLeftInitial;
+            this.mUserPaddingLeftInitial =
+                    topPadding >= 0 ? topPadding : this.mUserPaddingLeftInitial;
             if (!this.mRightPaddingDefined && endPaddingDefined) {
                 rightPadding = paddingHorizontal3;
             }
-            this.mUserPaddingRightInitial = rightPadding >= 0 ? rightPadding : this.mUserPaddingRightInitial;
+            this.mUserPaddingRightInitial =
+                    rightPadding >= 0 ? rightPadding : this.mUserPaddingRightInitial;
         } else {
             boolean hasRelativePadding = startPaddingDefined || endPaddingDefined;
             if (this.mLeftPaddingDefined && !hasRelativePadding) {
@@ -3197,7 +3438,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         int i2 = this.mUserPaddingLeftInitial;
         int i3 = viewFlagValues2 >= 0 ? viewFlagValues2 : this.mPaddingTop;
         int rightPadding4 = this.mUserPaddingRightInitial;
-        internalSetPadding(i2, i3, rightPadding4, bottomPadding >= 0 ? bottomPadding : this.mPaddingBottom);
+        internalSetPadding(
+                i2, i3, rightPadding4, bottomPadding >= 0 ? bottomPadding : this.mPaddingBottom);
         if (endPadding != 0) {
             setFlags(startPadding, endPadding);
         }
@@ -3242,7 +3484,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public int[] getAttributeResolutionStack(int attribute) {
-        if (!sDebugViewAttributes || this.mAttributeResolutionStacks == null || this.mAttributeResolutionStacks.get(attribute) == null) {
+        if (!sDebugViewAttributes
+                || this.mAttributeResolutionStacks == null
+                || this.mAttributeResolutionStacks.get(attribute) == null) {
             return new int[0];
         }
         int[] attributeResolutionStack = this.mAttributeResolutionStacks.get(attribute);
@@ -3269,7 +3513,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             return map;
         }
         for (int i = 0; i < this.mAttributeSourceResId.size(); i++) {
-            map.put(Integer.valueOf(this.mAttributeSourceResId.keyAt(i)), Integer.valueOf(this.mAttributeSourceResId.valueAt(i)));
+            map.put(
+                    Integer.valueOf(this.mAttributeSourceResId.keyAt(i)),
+                    Integer.valueOf(this.mAttributeSourceResId.valueAt(i)));
         }
         return map;
     }
@@ -3300,7 +3546,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             try {
                 this.mResolvedMethod.invoke(this.mResolvedContext, v);
             } catch (IllegalAccessException e) {
-                throw new IllegalStateException("Could not execute non-public method for android:onClick", e);
+                throw new IllegalStateException(
+                        "Could not execute non-public method for android:onClick", e);
             } catch (InvocationTargetException e2) {
                 throw new IllegalStateException("Could not execute method for android:onClick", e2);
             }
@@ -3310,7 +3557,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             Method method;
             while (context != null) {
                 try {
-                    if (!context.isRestricted() && (method = context.getClass().getMethod(this.mMethodName, View.class)) != null) {
+                    if (!context.isRestricted()
+                            && (method = context.getClass().getMethod(this.mMethodName, View.class))
+                                    != null) {
                         this.mResolvedMethod = method;
                         this.mResolvedContext = context;
                         return;
@@ -3324,8 +3573,22 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 }
             }
             int id = this.mHostView.getId();
-            String idText = id == -1 ? "" : " with id '" + this.mHostView.getContext().getResources().getResourceEntryName(id) + "'";
-            throw new IllegalStateException("Could not find method " + this.mMethodName + "(View) in a parent or ancestor Context for android:onClick attribute defined on view " + this.mHostView.getClass() + idText);
+            String idText =
+                    id == -1
+                            ? ""
+                            : " with id '"
+                                    + this.mHostView
+                                            .getContext()
+                                            .getResources()
+                                            .getResourceEntryName(id)
+                                    + "'";
+            throw new IllegalStateException(
+                    "Could not find method "
+                            + this.mMethodName
+                            + "(View) in a parent or ancestor Context for android:onClick attribute"
+                            + " defined on view "
+                            + this.mHostView.getClass()
+                            + idText);
         }
     }
 
@@ -3405,10 +3668,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         this.VELOCITY_THRESHOLD_T1 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_t1", 4000);
         this.VELOCITY_THRESHOLD_T2 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_t2", 500);
         this.VELOCITY_THRESHOLD_T3 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_t3", 125);
-        this.VELOCITY_FRAMERATE1 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate1", 120);
-        this.VELOCITY_FRAMERATE2 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate2", 120);
-        this.VELOCITY_FRAMERATE3 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate3", 120);
-        this.VELOCITY_FRAMERATE4 = SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate4", 60);
+        this.VELOCITY_FRAMERATE1 =
+                SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate1", 120);
+        this.VELOCITY_FRAMERATE2 =
+                SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate2", 120);
+        this.VELOCITY_FRAMERATE3 =
+                SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate3", 120);
+        this.VELOCITY_FRAMERATE4 =
+                SystemProperties.getInt("sys.toolkit.dvrr.velocity_framerate4", 60);
         this.mIsFlingState = false;
         this.mBlurInfo = null;
         this.mBlurMode = -1;
@@ -3427,7 +3694,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         this.mSmartClipDataTag = null;
         this.mSmartClipDataExtractionListener = null;
         this.mResources = null;
-        this.mRenderNode = RenderNode.create(getClass().getName(), new ViewAnimationHostBridge(this));
+        this.mRenderNode =
+                RenderNode.create(getClass().getName(), new ViewAnimationHostBridge(this));
     }
 
     public final boolean isShowingLayoutBounds() {
@@ -3454,11 +3722,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         this.mExplicitStyle = theme.getExplicitStyle(attrs);
     }
 
-    public final void saveAttributeDataForStyleable(Context context, int[] styleable, AttributeSet attrs, TypedArray t, int defStyleAttr, int defStyleRes) {
+    public final void saveAttributeDataForStyleable(
+            Context context,
+            int[] styleable,
+            AttributeSet attrs,
+            TypedArray t,
+            int defStyleAttr,
+            int defStyleRes) {
         if (!sDebugViewAttributes) {
             return;
         }
-        int[] attributeResolutionStack = context.getTheme().getAttributeResolutionStack(defStyleAttr, defStyleRes, this.mExplicitStyle);
+        int[] attributeResolutionStack =
+                context.getTheme()
+                        .getAttributeResolutionStack(
+                                defStyleAttr, defStyleRes, this.mExplicitStyle);
         if (this.mAttributeResolutionStacks == null) {
             this.mAttributeResolutionStacks = new SparseArray<>();
         }
@@ -3629,7 +3906,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     protected void initializeFadingEdgeInternal(TypedArray a) {
         initScrollCache();
-        this.mScrollCache.fadingEdgeLength = a.getDimensionPixelSize(25, ViewConfiguration.get(this.mContext).getScaledFadingEdgeLength());
+        this.mScrollCache.fadingEdgeLength =
+                a.getDimensionPixelSize(
+                        25, ViewConfiguration.get(this.mContext).getScaledFadingEdgeLength());
     }
 
     public int getVerticalFadingEdgeLength() {
@@ -3652,16 +3931,22 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         this.mViewCredentialHandler = null;
     }
 
-    public void setPendingCredentialRequest(GetCredentialRequest request, OutcomeReceiver<GetCredentialResponse, GetCredentialException> callback) {
+    public void setPendingCredentialRequest(
+            GetCredentialRequest request,
+            OutcomeReceiver<GetCredentialResponse, GetCredentialException> callback) {
         Preconditions.checkNotNull(request, "request must not be null");
         Preconditions.checkNotNull(callback, "callback must not be null");
         for (CredentialOption option : request.getCredentialOptions()) {
-            ArrayList<AutofillId> ids = option.getCandidateQueryData().getParcelableArrayList(CredentialProviderService.EXTRA_AUTOFILL_ID, AutofillId.class);
+            ArrayList<AutofillId> ids =
+                    option.getCandidateQueryData()
+                            .getParcelableArrayList(
+                                    CredentialProviderService.EXTRA_AUTOFILL_ID, AutofillId.class);
             ArrayList<AutofillId> ids2 = ids != null ? ids : new ArrayList<>();
             if (!ids2.contains(getAutofillId())) {
                 ids2.add(getAutofillId());
             }
-            option.getCandidateQueryData().putParcelableArrayList(CredentialProviderService.EXTRA_AUTOFILL_ID, ids2);
+            option.getCandidateQueryData()
+                    .putParcelableArrayList(CredentialProviderService.EXTRA_AUTOFILL_ID, ids2);
         }
         this.mViewCredentialHandler = new ViewCredentialHandler(request, callback);
     }
@@ -3733,9 +4018,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             scrollabilityCache.state = 1;
         }
         scrollabilityCache.fadeScrollBars = fadeScrollbars;
-        scrollabilityCache.scrollBarFadeDuration = a.getInt(45, ViewConfiguration.getScrollBarFadeDuration());
-        scrollabilityCache.scrollBarDefaultDelayBeforeFade = a.getInt(46, ViewConfiguration.getScrollDefaultDelay());
-        scrollabilityCache.scrollBarSize = a.getDimensionPixelSize(1, ViewConfiguration.get(this.mContext).getScaledScrollBarSize());
+        scrollabilityCache.scrollBarFadeDuration =
+                a.getInt(45, ViewConfiguration.getScrollBarFadeDuration());
+        scrollabilityCache.scrollBarDefaultDelayBeforeFade =
+                a.getInt(46, ViewConfiguration.getScrollDefaultDelay());
+        scrollabilityCache.scrollBarSize =
+                a.getDimensionPixelSize(
+                        1, ViewConfiguration.get(this.mContext).getScaledScrollBarSize());
         scrollabilityCache.scrollBar.setHorizontalTrackDrawable(a.getDrawable(4));
         Drawable thumb = a.getDrawable(2);
         if (thumb != null) {
@@ -3751,7 +4040,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (thumb2 != null) {
             scrollabilityCache.scrollBar.setVerticalThumbDrawable(thumb2);
             if (this.mContext != null) {
-                int padding = this.mContext.getResources().getDimensionPixelSize(R.dimen.sem_scroller_default_vertical_padding);
+                int padding =
+                        this.mContext
+                                .getResources()
+                                .getDimensionPixelSize(
+                                        R.dimen.sem_scroller_default_vertical_padding);
                 this.mAppWidgetScrollBarBottomPadding = padding;
                 this.mAppWidgetScrollBarTopPadding = padding;
             }
@@ -3820,7 +4113,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     private void initializeScrollIndicatorsInternal() {
         if (this.mScrollIndicatorDrawable == null) {
-            this.mScrollIndicatorDrawable = this.mContext.getDrawable(R.drawable.scroll_indicator_material);
+            this.mScrollIndicatorDrawable =
+                    this.mContext.getDrawable(R.drawable.scroll_indicator_material);
         }
     }
 
@@ -3869,7 +4163,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 return true;
             }
         }
-        boolean canScrollHorizontally = computeHorizontalScrollRange() > computeHorizontalScrollExtent();
+        boolean canScrollHorizontally =
+                computeHorizontalScrollRange() > computeHorizontalScrollExtent();
         if (isHorizontalScrollBarEnabled() && canScrollHorizontally) {
             Rect touchBounds2 = this.mScrollCache.mScrollBarTouchBounds;
             getHorizontalScrollBarBounds(null, touchBounds2);
@@ -3887,18 +4182,28 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private boolean isOnVerticalScrollbarThumb(float x, float y) {
         int range;
         int extent;
-        if (this.mScrollCache != null && isVerticalScrollBarEnabled() && !isVerticalScrollBarHidden() && (range = computeVerticalScrollRange()) > (extent = computeVerticalScrollExtent())) {
+        if (this.mScrollCache != null
+                && isVerticalScrollBarEnabled()
+                && !isVerticalScrollBarHidden()
+                && (range = computeVerticalScrollRange())
+                        > (extent = computeVerticalScrollExtent())) {
             float x2 = x + getScrollX();
             float y2 = y + getScrollY();
             Rect bounds = this.mScrollCache.mScrollBarBounds;
             Rect touchBounds = this.mScrollCache.mScrollBarTouchBounds;
             getVerticalScrollBarBounds(bounds, touchBounds);
             int offset = computeVerticalScrollOffset();
-            int thumbLength = ScrollBarUtils.getThumbLength(bounds.height(), bounds.width(), extent, range);
-            int thumbOffset = ScrollBarUtils.getThumbOffset(bounds.height(), thumbLength, extent, range, offset);
+            int thumbLength =
+                    ScrollBarUtils.getThumbLength(bounds.height(), bounds.width(), extent, range);
+            int thumbOffset =
+                    ScrollBarUtils.getThumbOffset(
+                            bounds.height(), thumbLength, extent, range, offset);
             int thumbTop = bounds.top + thumbOffset;
             int adjust = Math.max(this.mScrollCache.scrollBarMinTouchTarget - thumbLength, 0) / 2;
-            if (x2 >= touchBounds.left && x2 <= touchBounds.right && y2 >= thumbTop - adjust && y2 <= thumbTop + thumbLength + adjust) {
+            if (x2 >= touchBounds.left
+                    && x2 <= touchBounds.right
+                    && y2 >= thumbTop - adjust
+                    && y2 <= thumbTop + thumbLength + adjust) {
                 return true;
             }
         }
@@ -3908,18 +4213,27 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private boolean isOnHorizontalScrollbarThumb(float x, float y) {
         int range;
         int extent;
-        if (this.mScrollCache != null && isHorizontalScrollBarEnabled() && (range = computeHorizontalScrollRange()) > (extent = computeHorizontalScrollExtent())) {
+        if (this.mScrollCache != null
+                && isHorizontalScrollBarEnabled()
+                && (range = computeHorizontalScrollRange())
+                        > (extent = computeHorizontalScrollExtent())) {
             float x2 = x + getScrollX();
             float y2 = y + getScrollY();
             Rect bounds = this.mScrollCache.mScrollBarBounds;
             Rect touchBounds = this.mScrollCache.mScrollBarTouchBounds;
             getHorizontalScrollBarBounds(bounds, touchBounds);
             int offset = computeHorizontalScrollOffset();
-            int thumbLength = ScrollBarUtils.getThumbLength(bounds.width(), bounds.height(), extent, range);
-            int thumbOffset = ScrollBarUtils.getThumbOffset(bounds.width(), thumbLength, extent, range, offset);
+            int thumbLength =
+                    ScrollBarUtils.getThumbLength(bounds.width(), bounds.height(), extent, range);
+            int thumbOffset =
+                    ScrollBarUtils.getThumbOffset(
+                            bounds.width(), thumbLength, extent, range, offset);
             int thumbLeft = bounds.left + thumbOffset;
             int adjust = Math.max(this.mScrollCache.scrollBarMinTouchTarget - thumbLength, 0) / 2;
-            if (x2 >= thumbLeft - adjust && x2 <= thumbLeft + thumbLength + adjust && y2 >= touchBounds.top && y2 <= touchBounds.bottom) {
+            if (x2 >= thumbLeft - adjust
+                    && x2 <= thumbLeft + thumbLength + adjust
+                    && y2 >= touchBounds.top
+                    && y2 <= touchBounds.bottom) {
                 return true;
             }
         }
@@ -3927,7 +4241,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     boolean isDraggingScrollBar() {
-        return (this.mScrollCache == null || this.mScrollCache.mScrollBarDraggingState == 0) ? false : true;
+        return (this.mScrollCache == null || this.mScrollCache.mScrollBarDraggingState == 0)
+                ? false
+                : true;
     }
 
     @RemotableViewMethod
@@ -4034,7 +4350,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             TypedValue outValue = new TypedValue();
             Context con = getContext();
             if (con != null && con.getTheme() != null) {
-                this.mIsDeviceDefault = con.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, outValue, true) && outValue.data != 0;
+                this.mIsDeviceDefault =
+                        con.getTheme()
+                                        .resolveAttribute(
+                                                R.attr.parentIsDeviceDefault, outValue, true)
+                                && outValue.data != 0;
             }
         }
         if (!isClickable()) {
@@ -4082,7 +4402,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         getListenerInfo().mOnCreateContextMenuListener = l;
     }
 
-    public void addFrameMetricsListener(Window window, Window.OnFrameMetricsAvailableListener listener, Handler handler) {
+    public void addFrameMetricsListener(
+            Window window, Window.OnFrameMetricsAvailableListener listener, Handler handler) {
         if (this.mAttachInfo != null) {
             if (this.mAttachInfo.mThreadedRenderer != null) {
                 if (this.mFrameMetricsObservers == null) {
@@ -4110,7 +4431,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         ThreadedRenderer renderer = getThreadedRenderer();
         FrameMetricsObserver fmo = findFrameMetricsObserver(listener);
         if (fmo == null) {
-            throw new IllegalArgumentException("attempt to remove OnFrameMetricsAvailableListener that was never added");
+            throw new IllegalArgumentException(
+                    "attempt to remove OnFrameMetricsAvailableListener that was never added");
         }
         if (this.mFrameMetricsObservers != null) {
             this.mFrameMetricsObservers.remove(fmo);
@@ -4135,7 +4457,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    private FrameMetricsObserver findFrameMetricsObserver(Window.OnFrameMetricsAvailableListener listener) {
+    private FrameMetricsObserver findFrameMetricsObserver(
+            Window.OnFrameMetricsAvailableListener listener) {
         if (this.mFrameMetricsObservers != null) {
             for (int i = 0; i < this.mFrameMetricsObservers.size(); i++) {
                 FrameMetricsObserver observer = this.mFrameMetricsObservers.get(i);
@@ -4213,7 +4536,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private boolean performLongClickInternal(float x, float y) {
         sendAccessibilityEvent(2);
         boolean handled = false;
-        OnLongClickListener listener = this.mListenerInfo == null ? null : this.mListenerInfo.mOnLongClickListener;
+        OnLongClickListener listener =
+                this.mListenerInfo == null ? null : this.mListenerInfo.mOnLongClickListener;
         boolean shouldPerformHapticFeedback = true;
         if (listener != null && (handled = listener.onLongClick(this))) {
             shouldPerformHapticFeedback = listener.onLongClickUseDefaultHapticFeedback(this);
@@ -4283,10 +4607,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void startActivityForResult(Intent intent, int requestCode) {
         this.mStartActivityRequestWho = "@android:view:" + System.identityHashCode(this);
-        getContext().startActivityForResult(this.mStartActivityRequestWho, intent, requestCode, null);
+        getContext()
+                .startActivityForResult(this.mStartActivityRequestWho, intent, requestCode, null);
     }
 
-    public boolean dispatchActivityResult(String who, int requestCode, int resultCode, Intent data) {
+    public boolean dispatchActivityResult(
+            String who, int requestCode, int resultCode, Intent data) {
         if (this.mStartActivityRequestWho != null && this.mStartActivityRequestWho.equals(who)) {
             onActivityResult(requestCode, resultCode, data);
             this.mStartActivityRequestWho = null;
@@ -4295,8 +4621,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return false;
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {}
 
     public void setOnKeyListener(OnKeyListener l) {
         getListenerInfo().mOnKeyListener = l;
@@ -4371,12 +4696,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             return false;
         }
         View child = this;
-        RectF position = this.mAttachInfo != null ? this.mAttachInfo.mTmpTransformRect : new RectF();
+        RectF position =
+                this.mAttachInfo != null ? this.mAttachInfo.mTmpTransformRect : new RectF();
         position.set(rectangle);
         ViewParent parent = this.mParent;
         boolean scrolled = false;
         while (parent != null) {
-            rectangle.set((int) position.left, (int) position.top, (int) position.right, (int) position.bottom);
+            rectangle.set(
+                    (int) position.left,
+                    (int) position.top,
+                    (int) position.right,
+                    (int) position.bottom);
             scrolled |= parent.requestChildRectangleOnScreen(child, rectangle, immediate);
             if (!(parent instanceof View)) {
                 break;
@@ -4475,7 +4805,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (viewRoot != null) {
                 if (this.mIsHandwritingDelegate) {
                     viewRoot.getHandwritingInitiator().onDelegateViewFocused(this);
-                } else if (android.view.inputmethod.Flags.initiationWithoutInputConnection() && onCheckIsTextEditor()) {
+                } else if (android.view.inputmethod.Flags.initiationWithoutInputConnection()
+                        && onCheckIsTextEditor()) {
                     viewRoot.getHandwritingInitiator().onEditorFocused(this);
                 }
             }
@@ -4590,7 +4921,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void sendAccessibilityEventUncheckedInternal(final AccessibilityEvent event) {
         boolean isWindowStateChanged = event.getEventType() == 32;
-        boolean isWindowDisappearedEvent = isWindowStateChanged && (32 & event.getContentChangeTypes()) != 0;
+        boolean isWindowDisappearedEvent =
+                isWindowStateChanged && (32 & event.getContentChangeTypes()) != 0;
         boolean detached = detached();
         if (!isShown() && !isWindowDisappearedEvent && !detached) {
             return;
@@ -4603,19 +4935,22 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (throttle != null) {
             throttle.post(event);
         } else if (!isWindowDisappearedEvent && detached) {
-            postDelayed(new Runnable() { // from class: android.view.View$$ExternalSyntheticLambda10
-                @Override // java.lang.Runnable
-                public final void run() {
-                    View.this.lambda$sendAccessibilityEventUncheckedInternal$0(event);
-                }
-            }, ViewConfiguration.getSendRecurringAccessibilityEventsInterval());
+            postDelayed(
+                    new Runnable() { // from class: android.view.View$$ExternalSyntheticLambda10
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            View.this.lambda$sendAccessibilityEventUncheckedInternal$0(event);
+                        }
+                    },
+                    ViewConfiguration.getSendRecurringAccessibilityEventsInterval());
         } else {
             requestParentSendAccessibilityEvent(event);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$sendAccessibilityEventUncheckedInternal$0(AccessibilityEvent event) {
+    public /* synthetic */ void lambda$sendAccessibilityEventUncheckedInternal$0(
+            AccessibilityEvent event) {
         if (AccessibilityManager.getInstance(this.mContext).isEnabled() && isShown()) {
             requestParentSendAccessibilityEvent(event);
         }
@@ -4629,7 +4964,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    private SendAccessibilityEventThrottle getThrottleForAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
+    private SendAccessibilityEventThrottle getThrottleForAccessibilityEvent(
+            AccessibilityEvent accessibilityEvent) {
         byte b = 0;
         if (accessibilityEvent.getEventType() == 4096) {
             if (this.mSendViewScrolledAccessibilityEvent == null) {
@@ -4696,7 +5032,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         event.setScrollY(getScrollY());
         switch (event.getEventType()) {
             case 8:
-                ArrayList<View> focusablesTempList = this.mAttachInfo != null ? this.mAttachInfo.mTempArrayList : new ArrayList<>();
+                ArrayList<View> focusablesTempList =
+                        this.mAttachInfo != null
+                                ? this.mAttachInfo.mTempArrayList
+                                : new ArrayList<>();
                 getRootView().addFocusables(focusablesTempList, 2, 0);
                 event.setItemCount(focusablesTempList.size());
                 event.setCurrentItemIndex(focusablesTempList.indexOf(this));
@@ -4752,7 +5091,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         RectF position = this.mAttachInfo.mTmpTransformRect;
         getBoundsToScreenInternal(position, clipToParent);
-        outRect.set(Math.round(position.left), Math.round(position.top), Math.round(position.right), Math.round(position.bottom));
+        outRect.set(
+                Math.round(position.left),
+                Math.round(position.top),
+                Math.round(position.right),
+                Math.round(position.bottom));
         this.mAttachInfo.mViewRootImpl.applyViewBoundsSandboxingIfNeeded(outRect);
     }
 
@@ -4771,7 +5114,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         RectF position = this.mAttachInfo.mTmpTransformRect;
         getBoundsToWindowInternal(position, clipToParent);
-        outRect.set(Math.round(position.left), Math.round(position.top), Math.round(position.right), Math.round(position.bottom));
+        outRect.set(
+                Math.round(position.left),
+                Math.round(position.top),
+                Math.round(position.right),
+                Math.round(position.bottom));
     }
 
     private void getBoundsToScreenInternal(RectF position, boolean clipToParent) {
@@ -4862,7 +5209,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 structure.setIsCredential(isCredential());
             }
             if (getViewCredentialHandler() != null) {
-                structure.setPendingCredentialRequest(getViewCredentialHandler().getRequest(), getViewCredentialHandler().getCallback());
+                structure.setPendingCredentialRequest(
+                        getViewCredentialHandler().getRequest(),
+                        getViewCredentialHandler().getCallback());
             }
             structure.setImportantForAutofill(getImportantForAutofill());
             structure.setReceiveContentMimeTypes(getReceiveContentMimeTypes());
@@ -4886,7 +5235,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 }
             }
         }
-        structure.setDimens(ignoredParentLeft + this.mLeft, ignoredParentTop + this.mTop, this.mScrollX, this.mScrollY, this.mRight - this.mLeft, this.mBottom - this.mTop);
+        structure.setDimens(
+                ignoredParentLeft + this.mLeft,
+                ignoredParentTop + this.mTop,
+                this.mScrollX,
+                this.mScrollY,
+                this.mRight - this.mLeft,
+                this.mBottom - this.mTop);
         if (viewFor == 0) {
             if (!hasIdentityMatrix()) {
                 structure.setTransformation(getMatrix());
@@ -4962,24 +5317,32 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void setOnReceiveContentListener(String[] mimeTypes, OnReceiveContentListener listener) {
         if (listener != null) {
-            Preconditions.checkArgument(mimeTypes != null && mimeTypes.length > 0, "When the listener is set, MIME types must also be set");
+            Preconditions.checkArgument(
+                    mimeTypes != null && mimeTypes.length > 0,
+                    "When the listener is set, MIME types must also be set");
         }
         if (mimeTypes != null) {
-            Preconditions.checkArgument(Arrays.stream(mimeTypes).noneMatch(new Predicate() { // from class: android.view.View$$ExternalSyntheticLambda9
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    boolean startsWith;
-                    startsWith = ((String) obj).startsWith("*");
-                    return startsWith;
-                }
-            }), "A MIME type set here must not start with *: " + Arrays.toString(mimeTypes));
+            Preconditions.checkArgument(
+                    Arrays.stream(mimeTypes)
+                            .noneMatch(
+                                    new Predicate() { // from class:
+                                                      // android.view.View$$ExternalSyntheticLambda9
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            boolean startsWith;
+                                            startsWith = ((String) obj).startsWith("*");
+                                            return startsWith;
+                                        }
+                                    }),
+                    "A MIME type set here must not start with *: " + Arrays.toString(mimeTypes));
         }
         this.mReceiveContentMimeTypes = ArrayUtils.isEmpty(mimeTypes) ? null : mimeTypes;
         getListenerInfo().mOnReceiveContentListener = listener;
     }
 
     public ContentInfo performReceiveContent(ContentInfo payload) {
-        OnReceiveContentListener listener = this.mListenerInfo == null ? null : getListenerInfo().mOnReceiveContentListener;
+        OnReceiveContentListener listener =
+                this.mListenerInfo == null ? null : getListenerInfo().mOnReceiveContentListener;
         if (listener != null) {
             ContentInfo remaining = listener.onReceiveContent(this, payload);
             if (remaining == null) {
@@ -4998,12 +5361,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return this.mReceiveContentMimeTypes;
     }
 
-    public void autofill(AutofillValue value) {
-    }
+    public void autofill(AutofillValue value) {}
 
     public void autofill(SparseArray<AutofillValue> values) {
         AccessibilityNodeProvider provider;
-        if (!this.mContext.isAutofillCompatibilityEnabled() || (provider = getAccessibilityNodeProvider()) == null) {
+        if (!this.mContext.isAutofillCompatibilityEnabled()
+                || (provider = getAccessibilityNodeProvider()) == null) {
             return;
         }
         int valueCount = values.size();
@@ -5013,7 +5376,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 int virtualId = values.keyAt(i);
                 CharSequence text = value.getTextValue();
                 Bundle arguments = new Bundle();
-                arguments.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, text);
+                arguments.putCharSequence(
+                        AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, text);
                 provider.performAction(virtualId, 2097152, arguments);
             }
         }
@@ -5049,7 +5413,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return this.mViewCredentialHandler.getRequest();
     }
 
-    public final OutcomeReceiver<GetCredentialResponse, GetCredentialException> getPendingCredentialCallback() {
+    public final OutcomeReceiver<GetCredentialResponse, GetCredentialException>
+            getPendingCredentialCallback() {
         if (this.mViewCredentialHandler == null) {
             return null;
         }
@@ -5114,7 +5479,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return null;
     }
 
-    @ViewDebug.ExportedProperty(mapping = {@ViewDebug.IntToString(from = 0, to = "auto"), @ViewDebug.IntToString(from = 1, to = "yes"), @ViewDebug.IntToString(from = 2, to = "no"), @ViewDebug.IntToString(from = 4, to = "yesExcludeDescendants"), @ViewDebug.IntToString(from = 8, to = "noExcludeDescendants")})
+    @ViewDebug.ExportedProperty(
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "auto"),
+                @ViewDebug.IntToString(from = 1, to = "yes"),
+                @ViewDebug.IntToString(from = 2, to = "no"),
+                @ViewDebug.IntToString(from = 4, to = "yesExcludeDescendants"),
+                @ViewDebug.IntToString(from = 8, to = "noExcludeDescendants")
+            })
     public int getImportantForAutofill() {
         return (this.mPrivateFlags3 & PFLAG3_IMPORTANT_FOR_AUTOFILL_MASK) >> 19;
     }
@@ -5125,11 +5497,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public final boolean isImportantForAutofill() {
-        for (ViewParent parent = this.mParent; parent instanceof View; parent = parent.getParent()) {
+        for (ViewParent parent = this.mParent;
+                parent instanceof View;
+                parent = parent.getParent()) {
             int parentImportance = ((View) parent).getImportantForAutofill();
             if (parentImportance == 8 || parentImportance == 4) {
                 if (Log.isLoggable(AUTOFILL_LOG_TAG, 2)) {
-                    Log.v(AUTOFILL_LOG_TAG, "View (" + this + ") is not important for autofill because parent " + parent + "'s importance is " + parentImportance);
+                    Log.v(
+                            AUTOFILL_LOG_TAG,
+                            "View ("
+                                    + this
+                                    + ") is not important for autofill because parent "
+                                    + parent
+                                    + "'s importance is "
+                                    + parentImportance);
                 }
                 return false;
             }
@@ -5140,12 +5521,19 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         if (importance == 8 || importance == 2) {
             if (Log.isLoggable(AUTOFILL_LOG_TAG, 2)) {
-                Log.v(AUTOFILL_LOG_TAG, "View (" + this + ") is not important for autofill because its importance is " + importance);
+                Log.v(
+                        AUTOFILL_LOG_TAG,
+                        "View ("
+                                + this
+                                + ") is not important for autofill because its importance is "
+                                + importance);
             }
             return false;
         }
         if (importance != 0) {
-            Log.w(AUTOFILL_LOG_TAG, "invalid autofill importance (" + importance + " on view " + this);
+            Log.w(
+                    AUTOFILL_LOG_TAG,
+                    "invalid autofill importance (" + importance + " on view " + this);
             return false;
         }
         int id = this.mID;
@@ -5206,7 +5594,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    @ViewDebug.ExportedProperty(mapping = {@ViewDebug.IntToString(from = 0, to = "auto"), @ViewDebug.IntToString(from = 1, to = "yes"), @ViewDebug.IntToString(from = 2, to = "no"), @ViewDebug.IntToString(from = 4, to = "yesExcludeDescendants"), @ViewDebug.IntToString(from = 8, to = "noExcludeDescendants")})
+    @ViewDebug.ExportedProperty(
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "auto"),
+                @ViewDebug.IntToString(from = 1, to = "yes"),
+                @ViewDebug.IntToString(from = 2, to = "no"),
+                @ViewDebug.IntToString(from = 4, to = "yesExcludeDescendants"),
+                @ViewDebug.IntToString(from = 8, to = "noExcludeDescendants")
+            })
     public int getImportantForContentCapture() {
         return this.mPrivateFlags4 & 15;
     }
@@ -5230,11 +5625,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     private boolean calculateIsImportantForContentCapture() {
-        for (ViewParent parent = this.mParent; parent instanceof View; parent = parent.getParent()) {
+        for (ViewParent parent = this.mParent;
+                parent instanceof View;
+                parent = parent.getParent()) {
             int parentImportance = ((View) parent).getImportantForContentCapture();
             if (parentImportance == 8 || parentImportance == 4) {
                 if (Log.isLoggable(CONTENT_CAPTURE_LOG_TAG, 2)) {
-                    Log.v(CONTENT_CAPTURE_LOG_TAG, "View (" + this + ") is not important for content capture because parent " + parent + "'s importance is " + parentImportance);
+                    Log.v(
+                            CONTENT_CAPTURE_LOG_TAG,
+                            "View ("
+                                    + this
+                                    + ") is not important for content capture because parent "
+                                    + parent
+                                    + "'s importance is "
+                                    + parentImportance);
                 }
                 return false;
             }
@@ -5245,12 +5649,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         if (importance == 8 || importance == 2) {
             if (Log.isLoggable(CONTENT_CAPTURE_LOG_TAG, 2)) {
-                Log.v(CONTENT_CAPTURE_LOG_TAG, "View (" + this + ") is not important for content capture because its importance is " + importance);
+                Log.v(
+                        CONTENT_CAPTURE_LOG_TAG,
+                        "View ("
+                                + this
+                                + ") is not important for content capture because its importance is"
+                                + " "
+                                + importance);
             }
             return false;
         }
         if (importance != 0) {
-            Log.w(CONTENT_CAPTURE_LOG_TAG, "invalid content capture importance (" + importance + " on view " + this);
+            Log.w(
+                    CONTENT_CAPTURE_LOG_TAG,
+                    "invalid content capture importance (" + importance + " on view " + this);
             return false;
         }
         if (this instanceof ViewGroup) {
@@ -5267,9 +5679,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     private void notifyAppearedOrDisappearedForContentCaptureIfNeeded(boolean appeared) {
         AttachInfo ai = this.mAttachInfo;
-        if ((ai == null || ai.mReadyForContentCaptureUpdates) && this.mContext.getContentCaptureOptions() != null) {
+        if ((ai == null || ai.mReadyForContentCaptureUpdates)
+                && this.mContext.getContentCaptureOptions() != null) {
             if (appeared) {
-                boolean isRecycledWithoutRelayout = getNotifiedContentCaptureDisappeared() && getVisibility() == 0 && !isLayoutRequested();
+                boolean isRecycledWithoutRelayout =
+                        getNotifiedContentCaptureDisappeared()
+                                && getVisibility() == 0
+                                && !isLayoutRequested();
                 if (getVisibility() == 0 && !getNotifiedContentCaptureAppeared()) {
                     if (!isLaidOut() && !isRecycledWithoutRelayout) {
                         return;
@@ -5353,7 +5769,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             session = ((View) this.mParent).getContentCaptureSession();
         }
         if (session == null) {
-            ContentCaptureManager ccm = (ContentCaptureManager) this.mContext.getSystemService(ContentCaptureManager.class);
+            ContentCaptureManager ccm =
+                    (ContentCaptureManager)
+                            this.mContext.getSystemService(ContentCaptureManager.class);
             if (ccm == null) {
                 return null;
             }
@@ -5384,10 +5802,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     private boolean isAutofillable() {
         AutofillManager afm;
-        if (getAutofillType() == 0 || (afm = getAutofillManager()) == null || getAutofillViewId() <= 1073741823) {
+        if (getAutofillType() == 0
+                || (afm = getAutofillManager()) == null
+                || getAutofillViewId() <= 1073741823) {
             return false;
         }
-        if ((isImportantForAutofill() && afm.isTriggerFillRequestOnFilteredImportantViewsEnabled()) || (!isImportantForAutofill() && afm.isTriggerFillRequestOnUnimportantViewEnabled())) {
+        if ((isImportantForAutofill() && afm.isTriggerFillRequestOnFilteredImportantViewsEnabled())
+                || (!isImportantForAutofill()
+                        && afm.isTriggerFillRequestOnUnimportantViewEnabled())) {
             if (afm.isAutofillable(this)) {
                 return true;
             }
@@ -5412,8 +5834,16 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return isAutofillable() && isAttachedToWindow();
     }
 
-    private void populateVirtualStructure(ViewStructure structure, AccessibilityNodeProvider provider, AccessibilityNodeInfo info, boolean forAutofill) {
-        structure.setId(AccessibilityNodeInfo.getVirtualDescendantId(info.getSourceNodeId()), null, null, info.getViewIdResourceName());
+    private void populateVirtualStructure(
+            ViewStructure structure,
+            AccessibilityNodeProvider provider,
+            AccessibilityNodeInfo info,
+            boolean forAutofill) {
+        structure.setId(
+                AccessibilityNodeInfo.getVirtualDescendantId(info.getSourceNodeId()),
+                null,
+                null,
+                info.getViewIdResourceName());
         Rect rect = structure.getTempRect();
         info.getBoundsInParent(rect);
         structure.setDimens(rect.left, rect.top, 0, 0, rect.width(), rect.height());
@@ -5447,10 +5877,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             structure.setContextClickable(true);
         }
         if (forAutofill) {
-            structure.setAutofillId(new AutofillId(getAutofillId(), AccessibilityNodeInfo.getVirtualDescendantId(info.getSourceNodeId())));
+            structure.setAutofillId(
+                    new AutofillId(
+                            getAutofillId(),
+                            AccessibilityNodeInfo.getVirtualDescendantId(info.getSourceNodeId())));
         }
         if (getViewCredentialHandler() != null) {
-            structure.setPendingCredentialRequest(getViewCredentialHandler().getRequest(), getViewCredentialHandler().getCallback());
+            structure.setPendingCredentialRequest(
+                    getViewCredentialHandler().getRequest(),
+                    getViewCredentialHandler().getCallback());
         }
         CharSequence cname = info.getClassName();
         structure.setClassName(cname != null ? cname.toString() : null);
@@ -5487,10 +5922,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (NCHILDREN > 0) {
             structure.setChildCount(NCHILDREN);
             for (int i = 0; i < NCHILDREN; i++) {
-                if (AccessibilityNodeInfo.getVirtualDescendantId(info.getChildNodeIds().get(i)) == -1) {
+                if (AccessibilityNodeInfo.getVirtualDescendantId(info.getChildNodeIds().get(i))
+                        == -1) {
                     Log.e(VIEW_LOG_TAG, "Virtual view pointing to its host. Ignoring");
                 } else {
-                    AccessibilityNodeInfo cinfo = provider.createAccessibilityNodeInfo(AccessibilityNodeInfo.getVirtualDescendantId(info.getChildId(i)));
+                    AccessibilityNodeInfo cinfo =
+                            provider.createAccessibilityNodeInfo(
+                                    AccessibilityNodeInfo.getVirtualDescendantId(
+                                            info.getChildId(i)));
                     if (cinfo != null) {
                         ViewStructure child = structure.newChild(i);
                         populateVirtualStructure(child, provider, cinfo, forAutofill);
@@ -5526,18 +5965,25 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public void dispatchInitialProvideContentCaptureStructure() {
         AttachInfo ai = this.mAttachInfo;
         if (ai == null) {
-            Log.w(CONTENT_CAPTURE_LOG_TAG, "dispatchProvideContentCaptureStructure(): no AttachInfo for " + this);
+            Log.w(
+                    CONTENT_CAPTURE_LOG_TAG,
+                    "dispatchProvideContentCaptureStructure(): no AttachInfo for " + this);
             return;
         }
         ContentCaptureManager ccm = ai.mContentCaptureManager;
         if (ccm == null) {
-            Log.w(CONTENT_CAPTURE_LOG_TAG, "dispatchProvideContentCaptureStructure(): no ContentCaptureManager for " + this);
+            Log.w(
+                    CONTENT_CAPTURE_LOG_TAG,
+                    "dispatchProvideContentCaptureStructure(): no ContentCaptureManager for "
+                            + this);
             return;
         }
         ai.mReadyForContentCaptureUpdates = true;
         if (!isImportantForContentCapture()) {
             if (Log.isLoggable(CONTENT_CAPTURE_LOG_TAG, 3)) {
-                Log.d(CONTENT_CAPTURE_LOG_TAG, "dispatchProvideContentCaptureStructure(): decorView is not important");
+                Log.d(
+                        CONTENT_CAPTURE_LOG_TAG,
+                        "dispatchProvideContentCaptureStructure(): decorView is not important");
                 return;
             }
             return;
@@ -5546,7 +5992,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         ContentCaptureSession session = getContentCaptureSession();
         if (session == null) {
             if (Log.isLoggable(CONTENT_CAPTURE_LOG_TAG, 3)) {
-                Log.d(CONTENT_CAPTURE_LOG_TAG, "dispatchProvideContentCaptureStructure(): no session for " + this);
+                Log.d(
+                        CONTENT_CAPTURE_LOG_TAG,
+                        "dispatchProvideContentCaptureStructure(): no session for " + this);
             }
         } else {
             session.notifyViewTreeEvent(true);
@@ -5593,7 +6041,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (label != null) {
                 info.setLabeledBy(label);
             }
-            if ((this.mAttachInfo.mAccessibilityFetchFlags & 256) != 0 && Resources.resourceHasPackage(this.mID)) {
+            if ((this.mAttachInfo.mAccessibilityFetchFlags & 256) != 0
+                    && Resources.resourceHasPackage(this.mID)) {
                 try {
                     String viewId = getResources().getResourceName(this.mID);
                     info.setViewIdResourceName(viewId);
@@ -5616,7 +6065,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (rootView3 == null) {
                 rootView3 = this;
             }
-            View next = rootView3.findViewInsideOutShouldExist(this, this.mAccessibilityTraversalBeforeId);
+            View next =
+                    rootView3.findViewInsideOutShouldExist(
+                            this, this.mAccessibilityTraversalBeforeId);
             if (next != null && next.includeForAccessibility()) {
                 info.setTraversalBefore(next);
             }
@@ -5626,7 +6077,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (rootView4 == null) {
                 rootView4 = this;
             }
-            View next2 = rootView4.findViewInsideOutShouldExist(this, this.mAccessibilityTraversalAfterId);
+            View next2 =
+                    rootView4.findViewInsideOutShouldExist(
+                            this, this.mAccessibilityTraversalAfterId);
             if (next2 != null && next2.includeForAccessibility()) {
                 info.setTraversalAfter(next2);
             }
@@ -5703,8 +6156,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    public void addExtraDataToAccessibilityNodeInfo(AccessibilityNodeInfo info, String extraDataKey, Bundle arguments) {
-    }
+    public void addExtraDataToAccessibilityNodeInfo(
+            AccessibilityNodeInfo info, String extraDataKey, Bundle arguments) {}
 
     private void populateAccessibilityNodeInfoDrawingOrderInParent(AccessibilityNodeInfo info) {
         if ((this.mPrivateFlags & 16) == 0) {
@@ -5736,13 +6189,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 } else {
                     int childIndex = parentGroup.indexOfChild(viewAtDrawingLevel);
                     boolean customOrder = parentGroup.isChildrenDrawingOrderEnabled();
-                    int childDrawIndex2 = (childIndex < 0 || !customOrder) ? childIndex : parentGroup.getChildDrawingOrder(childCount, childIndex);
+                    int childDrawIndex2 =
+                            (childIndex < 0 || !customOrder)
+                                    ? childIndex
+                                    : parentGroup.getChildDrawingOrder(childCount, childIndex);
                     int numChildrenToIterate = customOrder ? childCount : childDrawIndex2;
                     if (childDrawIndex2 != 0) {
                         for (int i2 = 0; i2 < numChildrenToIterate; i2++) {
-                            int otherDrawIndex = customOrder ? parentGroup.getChildDrawingOrder(childCount, i2) : i2;
+                            int otherDrawIndex =
+                                    customOrder
+                                            ? parentGroup.getChildDrawingOrder(childCount, i2)
+                                            : i2;
                             if (otherDrawIndex < childDrawIndex2) {
-                                drawingOrderInParent += numViewsForAccessibility(parentGroup.getChildAt(i2));
+                                drawingOrderInParent +=
+                                        numViewsForAccessibility(parentGroup.getChildAt(i2));
                             }
                         }
                     }
@@ -5801,7 +6261,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         Object current = this;
         while (current instanceof View) {
             View view = (View) current;
-            if (view.getAlpha() <= 0.0f || view.getTransitionAlpha() <= 0.0f || view.getVisibility() != 0) {
+            if (view.getAlpha() <= 0.0f
+                    || view.getTransitionAlpha() <= 0.0f
+                    || view.getVisibility() != 0) {
                 return false;
             }
             current = view.mParent;
@@ -6150,8 +6612,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public WindowInsets dispatchApplyWindowInsets(WindowInsets insets) {
         try {
             this.mPrivateFlags3 |= 32;
-            if (this.mListenerInfo != null && this.mListenerInfo.mOnApplyWindowInsetsListener != null) {
-                return this.mListenerInfo.mOnApplyWindowInsetsListener.onApplyWindowInsets(this, insets);
+            if (this.mListenerInfo != null
+                    && this.mListenerInfo.mOnApplyWindowInsetsListener != null) {
+                return this.mListenerInfo.mOnApplyWindowInsetsListener.onApplyWindowInsets(
+                        this, insets);
             }
             return onApplyWindowInsets(insets);
         } finally {
@@ -6168,27 +6632,34 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public void dispatchWindowInsetsAnimationPrepare(WindowInsetsAnimation animation) {
-        if (this.mListenerInfo != null && this.mListenerInfo.mWindowInsetsAnimationCallback != null) {
+        if (this.mListenerInfo != null
+                && this.mListenerInfo.mWindowInsetsAnimationCallback != null) {
             this.mListenerInfo.mWindowInsetsAnimationCallback.onPrepare(animation);
         }
     }
 
-    public WindowInsetsAnimation.Bounds dispatchWindowInsetsAnimationStart(WindowInsetsAnimation animation, WindowInsetsAnimation.Bounds bounds) {
-        if (this.mListenerInfo != null && this.mListenerInfo.mWindowInsetsAnimationCallback != null) {
+    public WindowInsetsAnimation.Bounds dispatchWindowInsetsAnimationStart(
+            WindowInsetsAnimation animation, WindowInsetsAnimation.Bounds bounds) {
+        if (this.mListenerInfo != null
+                && this.mListenerInfo.mWindowInsetsAnimationCallback != null) {
             return this.mListenerInfo.mWindowInsetsAnimationCallback.onStart(animation, bounds);
         }
         return bounds;
     }
 
-    public WindowInsets dispatchWindowInsetsAnimationProgress(WindowInsets insets, List<WindowInsetsAnimation> runningAnimations) {
-        if (this.mListenerInfo != null && this.mListenerInfo.mWindowInsetsAnimationCallback != null) {
-            return this.mListenerInfo.mWindowInsetsAnimationCallback.onProgress(insets, runningAnimations);
+    public WindowInsets dispatchWindowInsetsAnimationProgress(
+            WindowInsets insets, List<WindowInsetsAnimation> runningAnimations) {
+        if (this.mListenerInfo != null
+                && this.mListenerInfo.mWindowInsetsAnimationCallback != null) {
+            return this.mListenerInfo.mWindowInsetsAnimationCallback.onProgress(
+                    insets, runningAnimations);
         }
         return insets;
     }
 
     public void dispatchWindowInsetsAnimationEnd(WindowInsetsAnimation animation) {
-        if (this.mListenerInfo != null && this.mListenerInfo.mWindowInsetsAnimationCallback != null) {
+        if (this.mListenerInfo != null
+                && this.mListenerInfo.mWindowInsetsAnimationCallback != null) {
             this.mListenerInfo.mWindowInsetsAnimationCallback.onEnd(animation);
         }
     }
@@ -6210,7 +6681,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     private void updatePositionUpdateListener() {
         final ListenerInfo info = getListenerInfo();
-        if (getSystemGestureExclusionRects().isEmpty() && collectPreferKeepClearRects().isEmpty() && collectUnrestrictedPreferKeepClearRects().isEmpty() && (info.mHandwritingArea == null || !shouldTrackHandwritingArea())) {
+        if (getSystemGestureExclusionRects().isEmpty()
+                && collectPreferKeepClearRects().isEmpty()
+                && collectUnrestrictedPreferKeepClearRects().isEmpty()
+                && (info.mHandwritingArea == null || !shouldTrackHandwritingArea())) {
             if (info.mPositionUpdateListener != null) {
                 this.mRenderNode.removePositionUpdateListener(info.mPositionUpdateListener);
                 info.mPositionUpdateListener = null;
@@ -6220,23 +6694,25 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             return;
         }
         if (info.mPositionUpdateListener == null) {
-            info.mPositionChangedUpdate = new Runnable() { // from class: android.view.View$$ExternalSyntheticLambda8
-                @Override // java.lang.Runnable
-                public final void run() {
-                    View.this.lambda$updatePositionUpdateListener$2();
-                }
-            };
-            info.mPositionUpdateListener = new RenderNode.PositionUpdateListener() { // from class: android.view.View.1
-                @Override // android.graphics.RenderNode.PositionUpdateListener
-                public void positionChanged(long n, int l, int t, int r, int b) {
-                    View.this.postUpdate(info.mPositionChangedUpdate);
-                }
+            info.mPositionChangedUpdate =
+                    new Runnable() { // from class: android.view.View$$ExternalSyntheticLambda8
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            View.this.lambda$updatePositionUpdateListener$2();
+                        }
+                    };
+            info.mPositionUpdateListener =
+                    new RenderNode.PositionUpdateListener() { // from class: android.view.View.1
+                        @Override // android.graphics.RenderNode.PositionUpdateListener
+                        public void positionChanged(long n, int l, int t, int r, int b) {
+                            View.this.postUpdate(info.mPositionChangedUpdate);
+                        }
 
-                @Override // android.graphics.RenderNode.PositionUpdateListener
-                public void positionLost(long frameNumber) {
-                    View.this.postUpdate(info.mPositionChangedUpdate);
-                }
-            };
+                        @Override // android.graphics.RenderNode.PositionUpdateListener
+                        public void positionLost(long frameNumber) {
+                            View.this.postUpdate(info.mPositionChangedUpdate);
+                        }
+                    };
             this.mRenderNode.addPositionUpdateListener(info.mPositionUpdateListener);
         }
     }
@@ -6334,9 +6810,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     /* JADX INFO: Access modifiers changed from: package-private */
     public List<Rect> collectPreferKeepClearRects() {
         ListenerInfo info = this.mListenerInfo;
-        boolean keepClearForFocus = isFocused() && ViewConfiguration.get(this.mContext).isPreferKeepClearForFocusEnabled();
+        boolean keepClearForFocus =
+                isFocused()
+                        && ViewConfiguration.get(this.mContext).isPreferKeepClearForFocusEnabled();
         boolean keepBoundsClear = (info != null && info.mPreferKeepClear) || keepClearForFocus;
-        boolean hasCustomKeepClearRects = (info == null || info.mKeepClearRects == null) ? false : true;
+        boolean hasCustomKeepClearRects =
+                (info == null || info.mKeepClearRects == null) ? false : true;
         if (!keepBoundsClear && !hasCustomKeepClearRects) {
             return Collections.emptyList();
         }
@@ -6369,7 +6848,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return Collections.emptyList();
     }
 
-    public void setHandwritingBoundsOffsets(float offsetLeft, float offsetTop, float offsetRight, float offsetBottom) {
+    public void setHandwritingBoundsOffsets(
+            float offsetLeft, float offsetTop, float offsetRight, float offsetBottom) {
         this.mHandwritingBoundsOffsetLeft = offsetLeft;
         this.mHandwritingBoundsOffsetTop = offsetTop;
         this.mHandwritingBoundsOffsetRight = offsetRight;
@@ -6468,8 +6948,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public void getLocationInSurface(int[] location) {
         getLocationInWindow(location);
         if (this.mAttachInfo != null && this.mAttachInfo.mViewRootImpl != null) {
-            location[0] = location[0] + this.mAttachInfo.mViewRootImpl.mWindowAttributes.surfaceInsets.left;
-            location[1] = location[1] + this.mAttachInfo.mViewRootImpl.mWindowAttributes.surfaceInsets.top;
+            location[0] =
+                    location[0]
+                            + this.mAttachInfo.mViewRootImpl.mWindowAttributes.surfaceInsets.left;
+            location[1] =
+                    location[1]
+                            + this.mAttachInfo.mViewRootImpl.mWindowAttributes.surfaceInsets.top;
         }
     }
 
@@ -6504,15 +6988,18 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     @Deprecated
     protected boolean computeFitSystemWindows(Rect inoutInsets, Rect outLocalInsets) {
-        WindowInsets innerInsets = computeSystemWindowInsets(new WindowInsets(inoutInsets), outLocalInsets);
+        WindowInsets innerInsets =
+                computeSystemWindowInsets(new WindowInsets(inoutInsets), outLocalInsets);
         inoutInsets.set(innerInsets.getSystemWindowInsetsAsRect());
         return innerInsets.isSystemWindowInsetsConsumed();
     }
 
     public WindowInsets computeSystemWindowInsets(WindowInsets in, Rect outLocalInsets) {
-        boolean isOptionalFitSystemWindows = ((this.mViewFlags & 2048) == 0 && (this.mPrivateFlags4 & 256) == 0) ? false : true;
+        boolean isOptionalFitSystemWindows =
+                ((this.mViewFlags & 2048) == 0 && (this.mPrivateFlags4 & 256) == 0) ? false : true;
         if (isOptionalFitSystemWindows && this.mAttachInfo != null) {
-            Window.OnContentApplyWindowInsetsListener listener = this.mAttachInfo.mContentOnApplyWindowInsetsListener;
+            Window.OnContentApplyWindowInsetsListener listener =
+                    this.mAttachInfo.mContentOnApplyWindowInsetsListener;
             if (listener == null) {
                 outLocalInsets.setEmpty();
                 return in;
@@ -6526,7 +7013,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     protected boolean hasContentOnApplyWindowInsetsListener() {
-        return (this.mAttachInfo == null || this.mAttachInfo.mContentOnApplyWindowInsetsListener == null) ? false : true;
+        return (this.mAttachInfo == null
+                        || this.mAttachInfo.mContentOnApplyWindowInsetsListener == null)
+                ? false
+                : true;
     }
 
     public void setFitsSystemWindows(boolean fitSystemWindows) {
@@ -6565,7 +7055,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return (this.mPrivateFlags4 & 256) != 0;
     }
 
-    @ViewDebug.ExportedProperty(mapping = {@ViewDebug.IntToString(from = 0, to = "VISIBLE"), @ViewDebug.IntToString(from = 4, to = "INVISIBLE"), @ViewDebug.IntToString(from = 8, to = "GONE")})
+    @ViewDebug.ExportedProperty(
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "VISIBLE"),
+                @ViewDebug.IntToString(from = 4, to = "INVISIBLE"),
+                @ViewDebug.IntToString(from = 8, to = "GONE")
+            })
     public int getVisibility() {
         return this.mViewFlags & 12;
     }
@@ -6661,7 +7156,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return 268435456 == (this.mViewFlags & 268435456);
     }
 
-    @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT, mapping = {@ViewDebug.IntToString(from = 0, to = "LTR"), @ViewDebug.IntToString(from = 1, to = "RTL"), @ViewDebug.IntToString(from = 2, to = "INHERIT"), @ViewDebug.IntToString(from = 3, to = "LOCALE")})
+    @ViewDebug.ExportedProperty(
+            category = TtmlUtils.TAG_LAYOUT,
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "LTR"),
+                @ViewDebug.IntToString(from = 1, to = "RTL"),
+                @ViewDebug.IntToString(from = 2, to = "INHERIT"),
+                @ViewDebug.IntToString(from = 3, to = "LOCALE")
+            })
     public int getRawLayoutDirection() {
         return (this.mPrivateFlags2 & 12) >> 2;
     }
@@ -6678,7 +7180,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT, mapping = {@ViewDebug.IntToString(from = 0, to = "RESOLVED_DIRECTION_LTR"), @ViewDebug.IntToString(from = 1, to = "RESOLVED_DIRECTION_RTL")})
+    @ViewDebug.ExportedProperty(
+            category = TtmlUtils.TAG_LAYOUT,
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "RESOLVED_DIRECTION_LTR"),
+                @ViewDebug.IntToString(from = 1, to = "RESOLVED_DIRECTION_RTL")
+            })
     public int getLayoutDirection() {
         return (this.mPrivateFlags2 & 16) == 16 ? 1 : 0;
     }
@@ -6695,20 +7202,31 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void setHasTransientState(boolean hasTransientState) {
         boolean oldHasTransientState = hasTransientState();
-        this.mTransientStateCount = hasTransientState ? this.mTransientStateCount + 1 : this.mTransientStateCount - 1;
+        this.mTransientStateCount =
+                hasTransientState ? this.mTransientStateCount + 1 : this.mTransientStateCount - 1;
         if (this.mTransientStateCount < 0) {
             this.mTransientStateCount = 0;
-            Log.e(VIEW_LOG_TAG, "hasTransientState decremented below 0: unmatched pair of setHasTransientState calls");
+            Log.e(
+                    VIEW_LOG_TAG,
+                    "hasTransientState decremented below 0: unmatched pair of setHasTransientState"
+                        + " calls");
             return;
         }
-        if ((hasTransientState && this.mTransientStateCount == 1) || (!hasTransientState && this.mTransientStateCount == 0)) {
-            this.mPrivateFlags2 = (this.mPrivateFlags2 & Integer.MAX_VALUE) | (hasTransientState ? Integer.MIN_VALUE : 0);
+        if ((hasTransientState && this.mTransientStateCount == 1)
+                || (!hasTransientState && this.mTransientStateCount == 0)) {
+            this.mPrivateFlags2 =
+                    (this.mPrivateFlags2 & Integer.MAX_VALUE)
+                            | (hasTransientState ? Integer.MIN_VALUE : 0);
             boolean newHasTransientState = hasTransientState();
             if (this.mParent != null && newHasTransientState != oldHasTransientState) {
                 try {
                     this.mParent.childHasTransientStateChanged(this, newHasTransientState);
                 } catch (AbstractMethodError e) {
-                    Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e);
+                    Log.e(
+                            VIEW_LOG_TAG,
+                            this.mParent.getClass().getSimpleName()
+                                    + " does not fully implement ViewParent",
+                            e);
                 }
             }
         }
@@ -6823,8 +7341,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         dispatchSetPressed(pressed);
     }
 
-    protected void dispatchSetPressed(boolean pressed) {
-    }
+    protected void dispatchSetPressed(boolean pressed) {}
 
     @ViewDebug.ExportedProperty
     public boolean isPressed() {
@@ -6874,7 +7391,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return 1 == (this.mViewFlags & 1);
     }
 
-    @ViewDebug.ExportedProperty(category = "focus", mapping = {@ViewDebug.IntToString(from = 0, to = "NOT_FOCUSABLE"), @ViewDebug.IntToString(from = 1, to = "FOCUSABLE"), @ViewDebug.IntToString(from = 16, to = "FOCUSABLE_AUTO")})
+    @ViewDebug.ExportedProperty(
+            category = "focus",
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "NOT_FOCUSABLE"),
+                @ViewDebug.IntToString(from = 1, to = "FOCUSABLE"),
+                @ViewDebug.IntToString(from = 16, to = "FOCUSABLE_AUTO")
+            })
     public int getFocusable() {
         if ((this.mViewFlags & 16) > 0) {
             return 16;
@@ -6967,7 +7490,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             return;
         }
         View view2 = this;
-        for (ViewGroup viewGroup = this.mParent; viewGroup instanceof ViewGroup; viewGroup = viewGroup.getParent()) {
+        for (ViewGroup viewGroup = this.mParent;
+                viewGroup instanceof ViewGroup;
+                viewGroup = viewGroup.getParent()) {
             viewGroup.mFocusedInCluster = view2;
             if (viewGroup != view) {
                 view2 = viewGroup;
@@ -6988,7 +7513,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 }
                 if (direction == 2 || direction == 1) {
                     ((ViewGroup) oldFocus.mParent).clearFocusedInCluster(oldFocus);
-                } else if ((oldFocus instanceof ViewGroup) && ((ViewGroup) oldFocus).getDescendantFocusability() == 262144 && ViewRootImpl.isViewDescendantOf(this, oldFocus)) {
+                } else if ((oldFocus instanceof ViewGroup)
+                        && ((ViewGroup) oldFocus).getDescendantFocusability() == 262144
+                        && ViewRootImpl.isViewDescendantOf(this, oldFocus)) {
                     ((ViewGroup) oldFocus.mParent).clearFocusedInCluster(oldFocus);
                 }
             }
@@ -7028,7 +7555,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             currentCluster = this;
         }
         if (isRootNamespace()) {
-            return FocusFinder.getInstance().findNextKeyboardNavigationCluster(this, currentCluster, direction);
+            return FocusFinder.getInstance()
+                    .findNextKeyboardNavigationCluster(this, currentCluster, direction);
         }
         if (this.mParent != null) {
             return this.mParent.keyboardNavigationClusterSearch(currentCluster, direction);
@@ -7086,7 +7614,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ boolean lambda$findUserSetNextFocus$3(View rootView, View startView, View t) {
+    public /* synthetic */ boolean lambda$findUserSetNextFocus$3(
+            View rootView, View startView, View t) {
         return findViewInsideOutShouldExist(rootView, t, t.mNextFocusForwardId) == startView;
     }
 
@@ -7107,7 +7636,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return null;
     }
 
-    static /* synthetic */ boolean lambda$findUserSetNextKeyboardNavigationCluster$4(int id, View t) {
+    static /* synthetic */ boolean lambda$findUserSetNextKeyboardNavigationCluster$4(
+            int id, View t) {
         return t.mNextClusterForwardId == id;
     }
 
@@ -7159,7 +7689,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if ((flags & 4) != 0) {
                 outViews.add(this);
             }
-        } else if ((flags & 2) != 0 && searched != null && searched.length() > 0 && this.mContentDescription != null && this.mContentDescription.length() > 0) {
+        } else if ((flags & 2) != 0
+                && searched != null
+                && searched.length() > 0
+                && this.mContentDescription != null
+                && this.mContentDescription.length() > 0) {
             String searchedLowerCase = searched.toString().toLowerCase();
             String contentDescriptionLowerCase = this.mContentDescription.toString().toLowerCase();
             if (contentDescriptionLowerCase.contains(searchedLowerCase)) {
@@ -7176,7 +7710,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void addTouchables(ArrayList<View> views) {
         int viewFlags = this.mViewFlags;
-        if (((viewFlags & 16384) == 16384 || (viewFlags & 2097152) == 2097152 || (viewFlags & 8388608) == 8388608) && (viewFlags & 32) == 0) {
+        if (((viewFlags & 16384) == 16384
+                        || (viewFlags & 2097152) == 2097152
+                        || (viewFlags & 8388608) == 8388608)
+                && (viewFlags & 32) == 0) {
             views.add(this);
         }
     }
@@ -7187,7 +7724,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public boolean requestAccessibilityFocus() {
         AccessibilityManager manager = AccessibilityManager.getInstance(this.mContext);
-        if (!manager.isEnabled() || !manager.isTouchExplorationEnabled() || (this.mViewFlags & 12) != 0 || (this.mPrivateFlags2 & 67108864) != 0) {
+        if (!manager.isEnabled()
+                || !manager.isTouchExplorationEnabled()
+                || (this.mViewFlags & 12) != 0
+                || (this.mPrivateFlags2 & 67108864) != 0) {
             return false;
         }
         this.mPrivateFlags2 |= 67108864;
@@ -7208,7 +7748,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         View focusHost;
         clearAccessibilityFocusNoCallbacks(0);
         ViewRootImpl viewRootImpl = getViewRootImpl();
-        if (viewRootImpl != null && (focusHost = viewRootImpl.getAccessibilityFocusedHost()) != null && ViewRootImpl.isViewDescendantOf(focusHost, this)) {
+        if (viewRootImpl != null
+                && (focusHost = viewRootImpl.getAccessibilityFocusedHost()) != null
+                && ViewRootImpl.isViewDescendantOf(focusHost, this)) {
             viewRootImpl.setAccessibilityFocus(null, null);
         }
     }
@@ -7278,7 +7820,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (!canTakeFocus()) {
             return false;
         }
-        if ((isInTouchMode() && 262144 != (this.mViewFlags & 262144)) || hasAncestorThatBlocksDescendantFocus()) {
+        if ((isInTouchMode() && 262144 != (this.mViewFlags & 262144))
+                || hasAncestorThatBlocksDescendantFocus()) {
             return false;
         }
         if (!isLayoutValid()) {
@@ -7322,7 +7865,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return false;
     }
 
-    @ViewDebug.ExportedProperty(category = Context.ACCESSIBILITY_SERVICE, mapping = {@ViewDebug.IntToString(from = 0, to = "auto"), @ViewDebug.IntToString(from = 1, to = "yes"), @ViewDebug.IntToString(from = 2, to = "no"), @ViewDebug.IntToString(from = 4, to = "noHideDescendants")})
+    @ViewDebug.ExportedProperty(
+            category = Context.ACCESSIBILITY_SERVICE,
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "auto"),
+                @ViewDebug.IntToString(from = 1, to = "yes"),
+                @ViewDebug.IntToString(from = 2, to = "no"),
+                @ViewDebug.IntToString(from = 4, to = "noHideDescendants")
+            })
     public int getImportantForAccessibility() {
         return (this.mPrivateFlags2 & PFLAG2_IMPORTANT_FOR_ACCESSIBILITY_MASK) >> 20;
     }
@@ -7344,7 +7894,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         int oldMode = getImportantForAccessibility();
         if (mode != oldMode) {
             boolean hideDescendants = mode == 4;
-            if ((mode == 2 || hideDescendants) && (focusHost = findAccessibilityFocusHost(hideDescendants)) != null) {
+            if ((mode == 2 || hideDescendants)
+                    && (focusHost = findAccessibilityFocusHost(hideDescendants)) != null) {
                 focusHost.clearAccessibilityFocus();
             }
             boolean maySkipNotify = oldMode == 0 || mode == 0;
@@ -7365,7 +7916,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (isAccessibilityFocusedViewOrHost()) {
             return this;
         }
-        if (searchDescendants && (viewRoot = getViewRootImpl()) != null && (focusHost = viewRoot.getAccessibilityFocusedHost()) != null && ViewRootImpl.isViewDescendantOf(focusHost, this)) {
+        if (searchDescendants
+                && (viewRoot = getViewRootImpl()) != null
+                && (focusHost = viewRoot.getAccessibilityFocusedHost()) != null
+                && ViewRootImpl.isViewDescendantOf(focusHost, this)) {
             return focusHost;
         }
         return null;
@@ -7376,12 +7930,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (mode == 2 || mode == 4) {
             return false;
         }
-        for (ViewParent parent = this.mParent; parent instanceof View; parent = parent.getParent()) {
+        for (ViewParent parent = this.mParent;
+                parent instanceof View;
+                parent = parent.getParent()) {
             if (((View) parent).getImportantForAccessibility() == 4) {
                 return false;
             }
         }
-        return mode == 1 || isActionableForAccessibility() || hasListenersForAccessibility() || getAccessibilityNodeProvider() != null || getAccessibilityDelegate() != null || getAccessibilityLiveRegion() != 0 || isAccessibilityPane() || isAccessibilityHeading();
+        return mode == 1
+                || isActionableForAccessibility()
+                || hasListenersForAccessibility()
+                || getAccessibilityNodeProvider() != null
+                || getAccessibilityDelegate() != null
+                || getAccessibilityLiveRegion() != 0
+                || isAccessibilityPane()
+                || isAccessibilityHeading();
     }
 
     public ViewParent getParentForAccessibility() {
@@ -7406,8 +7969,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return null;
     }
 
-    public void addChildrenForAccessibility(ArrayList<View> outChildren) {
-    }
+    public void addChildrenForAccessibility(ArrayList<View> outChildren) {}
 
     public boolean includeForAccessibility() {
         return includeForAccessibility(true);
@@ -7417,10 +7979,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (this.mAttachInfo == null) {
             return false;
         }
-        if (forNodeTree && !AccessibilityManager.getInstance(this.mContext).isRequestFromAccessibilityTool() && isAccessibilityDataSensitive()) {
+        if (forNodeTree
+                && !AccessibilityManager.getInstance(this.mContext).isRequestFromAccessibilityTool()
+                && isAccessibilityDataSensitive()) {
             return false;
         }
-        return (this.mAttachInfo.mAccessibilityFetchFlags & 128) != 0 || isImportantForAccessibility();
+        return (this.mAttachInfo.mAccessibilityFetchFlags & 128) != 0
+                || isImportantForAccessibility();
     }
 
     @ViewDebug.ExportedProperty(category = Context.ACCESSIBILITY_SERVICE)
@@ -7438,7 +8003,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         if (getFilterTouchesWhenObscured()) {
             this.mInferredAccessibilityDataSensitive = 1;
-        } else if ((this.mParent instanceof View) && ((View) this.mParent).isAccessibilityDataSensitive()) {
+        } else if ((this.mParent instanceof View)
+                && ((View) this.mParent).isAccessibilityDataSensitive()) {
             this.mInferredAccessibilityDataSensitive = 1;
         } else {
             this.mInferredAccessibilityDataSensitive = 2;
@@ -7451,22 +8017,37 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public boolean isActionableForAccessibility() {
-        return isClickable() || isLongClickable() || isFocusable() || isContextClickable() || isScreenReaderFocusable();
+        return isClickable()
+                || isLongClickable()
+                || isFocusable()
+                || isContextClickable()
+                || isScreenReaderFocusable();
     }
 
     private boolean hasListenersForAccessibility() {
         ListenerInfo info = getListenerInfo();
-        return (this.mTouchDelegate == null && info.mOnKeyListener == null && info.mOnTouchListener == null && info.mOnGenericMotionListener == null && info.mOnHoverListener == null && info.mOnDragListener == null) ? false : true;
+        return (this.mTouchDelegate == null
+                        && info.mOnKeyListener == null
+                        && info.mOnTouchListener == null
+                        && info.mOnGenericMotionListener == null
+                        && info.mOnHoverListener == null
+                        && info.mOnDragListener == null)
+                ? false
+                : true;
     }
 
     public void notifyViewAccessibilityStateChangedIfNeeded(int changeType) {
-        if (!AccessibilityManager.getInstance(this.mContext).isEnabled() || this.mAttachInfo == null) {
+        if (!AccessibilityManager.getInstance(this.mContext).isEnabled()
+                || this.mAttachInfo == null) {
             return;
         }
-        if (this.mAttachInfo != null && this.mAttachInfo.mViewRootImpl.mThread != Thread.currentThread()) {
+        if (this.mAttachInfo != null
+                && this.mAttachInfo.mViewRootImpl.mThread != Thread.currentThread()) {
             return;
         }
-        if (changeType != 1 && ((isAccessibilityPane() || (changeType == 32 && isAggregatedVisible())) && (isAggregatedVisible() || changeType == 32))) {
+        if (changeType != 1
+                && ((isAccessibilityPane() || (changeType == 32 && isAggregatedVisible()))
+                        && (isAggregatedVisible() || changeType == 32))) {
             AccessibilityEvent event = AccessibilityEvent.obtain();
             onInitializeAccessibilityEvent(event);
             event.setEventType(32);
@@ -7478,7 +8059,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     this.mParent.requestSendAccessibilityEvent(this, event);
                     return;
                 } catch (AbstractMethodError e) {
-                    Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e);
+                    Log.e(
+                            VIEW_LOG_TAG,
+                            this.mParent.getClass().getSimpleName()
+                                    + " does not fully implement ViewParent",
+                            e);
                     return;
                 }
             }
@@ -7495,7 +8080,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             try {
                 this.mParent.notifySubtreeAccessibilityStateChanged(this, this, changeType);
             } catch (AbstractMethodError e2) {
-                Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e2);
+                Log.e(
+                        VIEW_LOG_TAG,
+                        this.mParent.getClass().getSimpleName()
+                                + " does not fully implement ViewParent",
+                        e2);
             }
         }
     }
@@ -7505,13 +8094,19 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public void notifySubtreeAccessibilityStateChangedIfNeeded() {
-        if (AccessibilityManager.getInstance(this.mContext).isEnabled() && this.mAttachInfo != null && (this.mPrivateFlags2 & 134217728) == 0) {
+        if (AccessibilityManager.getInstance(this.mContext).isEnabled()
+                && this.mAttachInfo != null
+                && (this.mPrivateFlags2 & 134217728) == 0) {
             this.mPrivateFlags2 |= 134217728;
             if (this.mParent != null) {
                 try {
                     this.mParent.notifySubtreeAccessibilityStateChanged(this, this, 1);
                 } catch (AbstractMethodError e) {
-                    Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e);
+                    Log.e(
+                            VIEW_LOG_TAG,
+                            this.mParent.getClass().getSimpleName()
+                                    + " does not fully implement ViewParent",
+                            e);
                 }
             }
         }
@@ -7519,7 +8114,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     private void notifySubtreeAccessibilityStateChangedByParentIfNeeded() {
         View sendA11yEventView;
-        if (AccessibilityManager.getInstance(this.mContext).isEnabled() && (sendA11yEventView = (View) getParentForAccessibility()) != null && sendA11yEventView.isShown()) {
+        if (AccessibilityManager.getInstance(this.mContext).isEnabled()
+                && (sendA11yEventView = (View) getParentForAccessibility()) != null
+                && sendA11yEventView.isShown()) {
             sendA11yEventView.notifySubtreeAccessibilityStateChangedIfNeeded();
         }
     }
@@ -7551,7 +8148,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public boolean performAccessibilityActionInternal(int action, Bundle arguments) {
         int start;
-        if (isNestedScrollingEnabled() && ((action == 8192 || action == 4096 || action == 16908344 || action == 16908345 || action == 16908346 || action == 16908347) && dispatchNestedPrePerformAccessibilityAction(action, arguments))) {
+        if (isNestedScrollingEnabled()
+                && ((action == 8192
+                                || action == 4096
+                                || action == 16908344
+                                || action == 16908345
+                                || action == 16908346
+                                || action == 16908347)
+                        && dispatchNestedPrePerformAccessibilityAction(action, arguments))) {
             return true;
         }
         switch (action) {
@@ -7607,15 +8211,23 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 return false;
             case 256:
                 if (arguments != null) {
-                    int granularity = arguments.getInt(AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT);
-                    boolean extendSelection2 = arguments.getBoolean(AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN);
+                    int granularity =
+                            arguments.getInt(
+                                    AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT);
+                    boolean extendSelection2 =
+                            arguments.getBoolean(
+                                    AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN);
                     return traverseAtGranularity(granularity, true, extendSelection2);
                 }
                 return false;
             case 512:
                 if (arguments != null) {
-                    int granularity2 = arguments.getInt(AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT);
-                    boolean extendSelection3 = arguments.getBoolean(AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN);
+                    int granularity2 =
+                            arguments.getInt(
+                                    AccessibilityNodeInfo.ACTION_ARGUMENT_MOVEMENT_GRANULARITY_INT);
+                    boolean extendSelection3 =
+                            arguments.getBoolean(
+                                    AccessibilityNodeInfo.ACTION_ARGUMENT_EXTEND_SELECTION_BOOLEAN);
                     return traverseAtGranularity(granularity2, false, extendSelection3);
                 }
                 return false;
@@ -7625,12 +8237,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     return false;
                 }
                 if (arguments != null) {
-                    start = arguments.getInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, -1);
+                    start =
+                            arguments.getInt(
+                                    AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, -1);
                 } else {
                     start = -1;
                 }
-                int end = arguments != null ? arguments.getInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, -1) : -1;
-                if ((getAccessibilitySelectionStart() != start || getAccessibilitySelectionEnd() != end) && start == end) {
+                int end =
+                        arguments != null
+                                ? arguments.getInt(
+                                        AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, -1)
+                                : -1;
+                if ((getAccessibilitySelectionStart() != start
+                                || getAccessibilitySelectionEnd() != end)
+                        && start == end) {
                     setAccessibilitySelection(start, end);
                     notifyViewAccessibilityStateChangedIfNeeded(0);
                     return true;
@@ -7670,14 +8290,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         getLocationInWindow(location);
                         int centerX = location[0] + (getWidth() / 2);
                         int centerY = location[1] + (getHeight() / 2);
-                        return this.mAttachInfo.mSession.dropForAccessibility(this.mAttachInfo.mWindow, centerX, centerY);
+                        return this.mAttachInfo.mSession.dropForAccessibility(
+                                this.mAttachInfo.mWindow, centerX, centerY);
                     }
                 } catch (RemoteException e) {
                     Log.e(VIEW_LOG_TAG, "Unable to drop for accessibility", e);
                 }
                 return false;
             case 16908375:
-                if (!startedSystemDragForAccessibility() || this.mAttachInfo == null || this.mAttachInfo.mDragToken == null) {
+                if (!startedSystemDragForAccessibility()
+                        || this.mAttachInfo == null
+                        || this.mAttachInfo.mDragToken == null) {
                     return false;
                 }
                 cancelDragAndDrop();
@@ -7690,17 +8313,22 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private boolean canAcceptAccessibilityDrop() {
         ListenerInfo li;
         if (canAcceptDrag() && (li = this.mListenerInfo) != null) {
-            return (li.mOnDragListener == null && li.mOnReceiveContentListener == null) ? false : true;
+            return (li.mOnDragListener == null && li.mOnReceiveContentListener == null)
+                    ? false
+                    : true;
         }
         return false;
     }
 
-    private boolean traverseAtGranularity(int granularity, boolean forward, boolean extendSelection) {
+    private boolean traverseAtGranularity(
+            int granularity, boolean forward, boolean extendSelection) {
         AccessibilityIterators.TextSegmentIterator iterator;
         int selectionStart;
         int selectionEnd;
         CharSequence text = getIterableTextForAccessibility();
-        if (text == null || text.length() == 0 || (iterator = getIteratorForGranularity(granularity)) == null) {
+        if (text == null
+                || text.length() == 0
+                || (iterator = getIteratorForGranularity(granularity)) == null) {
             return false;
         }
         int current = getAccessibilitySelectionEnd();
@@ -7738,8 +8366,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return false;
     }
 
-    public void prepareForExtendedAccessibilitySelection() {
-    }
+    public void prepareForExtendedAccessibilitySelection() {}
 
     public int getAccessibilitySelectionStart() {
         return this.mAccessibilityCursorPosition;
@@ -7761,7 +8388,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         sendAccessibilityEvent(8192);
     }
 
-    private void sendViewTextTraversedAtGranularityEvent(int action, int granularity, int fromIndex, int toIndex) {
+    private void sendViewTextTraversedAtGranularityEvent(
+            int action, int granularity, int fromIndex, int toIndex) {
         if (this.mParent == null) {
             return;
         }
@@ -7780,7 +8408,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             case 1:
                 CharSequence text = getIterableTextForAccessibility();
                 if (text != null && text.length() > 0) {
-                    AccessibilityIterators.CharacterTextSegmentIterator iterator = AccessibilityIterators.CharacterTextSegmentIterator.getInstance(this.mContext.getResources().getConfiguration().locale);
+                    AccessibilityIterators.CharacterTextSegmentIterator iterator =
+                            AccessibilityIterators.CharacterTextSegmentIterator.getInstance(
+                                    this.mContext.getResources().getConfiguration().locale);
                     iterator.initialize(text.toString());
                     return iterator;
                 }
@@ -7788,7 +8418,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             case 2:
                 CharSequence text2 = getIterableTextForAccessibility();
                 if (text2 != null && text2.length() > 0) {
-                    AccessibilityIterators.WordTextSegmentIterator iterator2 = AccessibilityIterators.WordTextSegmentIterator.getInstance(this.mContext.getResources().getConfiguration().locale);
+                    AccessibilityIterators.WordTextSegmentIterator iterator2 =
+                            AccessibilityIterators.WordTextSegmentIterator.getInstance(
+                                    this.mContext.getResources().getConfiguration().locale);
                     iterator2.initialize(text2.toString());
                     return iterator2;
                 }
@@ -7796,7 +8428,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             case 8:
                 CharSequence text3 = getIterableTextForAccessibility();
                 if (text3 != null && text3.length() > 0) {
-                    AccessibilityIterators.ParagraphTextSegmentIterator iterator3 = AccessibilityIterators.ParagraphTextSegmentIterator.getInstance();
+                    AccessibilityIterators.ParagraphTextSegmentIterator iterator3 =
+                            AccessibilityIterators.ParagraphTextSegmentIterator.getInstance();
                     iterator3.initialize(text3.toString());
                     return iterator3;
                 }
@@ -7832,8 +8465,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         notifyAppearedOrDisappearedForContentCaptureIfNeeded(true);
     }
 
-    public void onFinishTemporaryDetach() {
-    }
+    public void onFinishTemporaryDetach() {}
 
     public KeyEvent.DispatcherState getKeyDispatcherState() {
         if (this.mAttachInfo != null) {
@@ -7851,10 +8483,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mInputEventConsistencyVerifier.onKeyEvent(event, 0);
         }
         ListenerInfo li = this.mListenerInfo;
-        if (li != null && li.mOnKeyListener != null && (this.mViewFlags & 32) == 0 && li.mOnKeyListener.onKey(this, event.getKeyCode(), event)) {
+        if (li != null
+                && li.mOnKeyListener != null
+                && (this.mViewFlags & 32) == 0
+                && li.mOnKeyListener.onKey(this, event.getKeyCode(), event)) {
             return true;
         }
-        if (event.dispatch(this, this.mAttachInfo != null ? this.mAttachInfo.mKeyDispatchState : null, this)) {
+        if (event.dispatch(
+                this, this.mAttachInfo != null ? this.mAttachInfo.mKeyDispatchState : null, this)) {
             return true;
         }
         if (this.mInputEventConsistencyVerifier != null) {
@@ -7975,7 +8611,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     boolean isAccessibilityFocusedViewOrHost() {
-        return isAccessibilityFocused() || (getViewRootImpl() != null && getViewRootImpl().getAccessibilityFocusedHost() == this);
+        return isAccessibilityFocused()
+                || (getViewRootImpl() != null
+                        && getViewRootImpl().getAccessibilityFocusedHost() == this);
     }
 
     protected boolean canReceivePointerEvents() {
@@ -7998,7 +8636,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             return false;
         }
         ListenerInfo li = this.mListenerInfo;
-        if (li != null && li.mOnCapturedPointerListener != null && li.mOnCapturedPointerListener.onCapturedPointer(this, event)) {
+        if (li != null
+                && li.mOnCapturedPointerListener != null
+                && li.mOnCapturedPointerListener.onCapturedPointer(this, event)) {
             return true;
         }
         return onCapturedPointerEvent(event);
@@ -8033,18 +8673,23 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private boolean dispatchGenericMotionEventInternal(MotionEvent event) {
         boolean isRotaryEncoderEvent = event.isFromSource(4194304);
         if (isRotaryEncoderEvent && (this.mPrivateFlags4 & 1048576) == 0) {
-            if (ViewConfiguration.get(this.mContext).isViewBasedRotaryEncoderHapticScrollFeedbackEnabled()) {
+            if (ViewConfiguration.get(this.mContext)
+                    .isViewBasedRotaryEncoderHapticScrollFeedbackEnabled()) {
                 this.mPrivateFlags4 |= 2097152;
             }
             this.mPrivateFlags4 |= 1048576;
         }
-        boolean processForRotaryScrollHaptics = isRotaryEncoderEvent && (2097152 & this.mPrivateFlags4) != 0;
+        boolean processForRotaryScrollHaptics =
+                isRotaryEncoderEvent && (2097152 & this.mPrivateFlags4) != 0;
         if (processForRotaryScrollHaptics) {
             this.mPrivateFlags4 &= -4194305;
             this.mPrivateFlags4 |= 8388608;
         }
         ListenerInfo li = this.mListenerInfo;
-        if (li != null && li.mOnGenericMotionListener != null && (this.mViewFlags & 32) == 0 && li.mOnGenericMotionListener.onGenericMotion(this, event)) {
+        if (li != null
+                && li.mOnGenericMotionListener != null
+                && (this.mViewFlags & 32) == 0
+                && li.mOnGenericMotionListener.onGenericMotion(this, event)) {
             return true;
         }
         boolean onGenericMotionEventResult = onGenericMotionEvent(event);
@@ -8061,7 +8706,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         int actionButton = event.getActionButton();
         switch (event.getActionMasked()) {
             case 11:
-                if (isContextClickable() && !this.mInContextButtonPress && !this.mHasPerformedLongPress && ((actionButton == 32 || actionButton == 2) && performContextClick(event.getX(), event.getY()))) {
+                if (isContextClickable()
+                        && !this.mInContextButtonPress
+                        && !this.mHasPerformedLongPress
+                        && ((actionButton == 32 || actionButton == 2)
+                                && performContextClick(event.getX(), event.getY()))) {
                     this.mInContextButtonPress = true;
                     setPressed(true, event.getX(), event.getY());
                     removeTapCallback();
@@ -8085,7 +8734,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     protected boolean dispatchHoverEvent(MotionEvent event) {
         ListenerInfo li = this.mListenerInfo;
-        if (li != null && li.mOnHoverListener != null && (this.mViewFlags & 32) == 0 && li.mOnHoverListener.onHover(this, event)) {
+        if (li != null
+                && li.mOnHoverListener != null
+                && (this.mViewFlags & 32) == 0
+                && li.mOnHoverListener.onHover(this, event)) {
             return true;
         }
         return onHoverEvent(event);
@@ -8144,7 +8796,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         } else if ((this.mPrivateFlags & 2) != 0) {
             notifyFocusChangeToImeFocusController(true);
             ViewRootImpl viewRoot = getViewRootImpl();
-            if (viewRoot != null && android.view.inputmethod.Flags.initiationWithoutInputConnection() && onCheckIsTextEditor()) {
+            if (viewRoot != null
+                    && android.view.inputmethod.Flags.initiationWithoutInputConnection()
+                    && onCheckIsTextEditor()) {
                 viewRoot.getHandwritingInitiator().onEditorFocused(this);
             }
         }
@@ -8163,15 +8817,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         onVisibilityChanged(changedView, visibility);
     }
 
-    protected void onVisibilityChanged(View changedView, int visibility) {
-    }
+    protected void onVisibilityChanged(View changedView, int visibility) {}
 
     public void dispatchDisplayHint(int hint) {
         onDisplayHint(hint);
     }
 
-    protected void onDisplayHint(int hint) {
-    }
+    protected void onDisplayHint(int hint) {}
 
     public void dispatchWindowVisibilityChanged(int visibility) {
         onWindowVisibilityChanged(visibility);
@@ -8198,7 +8850,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public void onVisibilityAggregated(boolean isVisible) {
         int i;
         boolean oldVisible = isAggregatedVisible();
-        this.mPrivateFlags3 = isVisible ? this.mPrivateFlags3 | 536870912 : this.mPrivateFlags3 & (-536870913);
+        this.mPrivateFlags3 =
+                isVisible ? this.mPrivateFlags3 | 536870912 : this.mPrivateFlags3 & (-536870913);
         if (isVisible && this.mAttachInfo != null) {
             initialAwakenScrollBars();
         }
@@ -8237,7 +8890,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     private void notifyAutofillManagerViewVisibilityChanged(boolean isVisible) {
         AutofillManager afm;
-        if (isAutofillable() && (afm = getAutofillManager()) != null && getAutofillViewId() > 1073741823) {
+        if (isAutofillable()
+                && (afm = getAutofillManager()) != null
+                && getAutofillViewId() > 1073741823) {
             if (this.mVisibilityChangeForAutofillHandler != null) {
                 this.mVisibilityChangeForAutofillHandler.removeMessages(0);
             }
@@ -8246,7 +8901,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 return;
             }
             if (this.mVisibilityChangeForAutofillHandler == null) {
-                this.mVisibilityChangeForAutofillHandler = new VisibilityChangeForAutofillHandler(afm, this);
+                this.mVisibilityChangeForAutofillHandler =
+                        new VisibilityChangeForAutofillHandler(afm, this);
             }
             this.mVisibilityChangeForAutofillHandler.obtainMessage(0, this).sendToTarget();
         }
@@ -8265,9 +8921,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             translateToWindowIfNeeded(outRect);
             return;
         }
-        WindowManager windowManager = (WindowManager) this.mContext.getSystemService(WindowManager.class);
+        WindowManager windowManager =
+                (WindowManager) this.mContext.getSystemService(WindowManager.class);
         WindowMetrics metrics = windowManager.getMaximumWindowMetrics();
-        Insets insets = metrics.getWindowInsets().getInsets(WindowInsets.Type.navigationBars() | WindowInsets.Type.displayCutout());
+        Insets insets =
+                metrics.getWindowInsets()
+                        .getInsets(
+                                WindowInsets.Type.navigationBars()
+                                        | WindowInsets.Type.displayCutout());
         outRect.set(metrics.getBounds());
         outRect.inset(insets);
         outRect.offsetTo(0, 0);
@@ -8287,8 +8948,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         onConfigurationChanged(newConfig);
     }
 
-    protected void onConfigurationChanged(Configuration newConfig) {
-    }
+    protected void onConfigurationChanged(Configuration newConfig) {}
 
     void dispatchCollectViewAttributes(AttachInfo attachInfo, int visibility) {
         performCollectViewAttributes(attachInfo, visibility);
@@ -8310,7 +8970,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     void needGlobalAttributesUpdate(boolean force) {
         AttachInfo ai = this.mAttachInfo;
         if (ai != null && !ai.mRecomputeGlobalAttributes) {
-            if (force || ai.mKeepScreenOn || ai.mSystemUiVisibility != 0 || ai.mHasSystemUiListeners) {
+            if (force
+                    || ai.mKeepScreenOn
+                    || ai.mSystemUiVisibility != 0
+                    || ai.mHasSystemUiListeners) {
                 ai.mRecomputeGlobalAttributes = true;
             }
         }
@@ -8340,8 +9003,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 return true;
             }
             if (event.getRepeatCount() == 0) {
-                boolean clickable = (this.mViewFlags & 16384) == 16384 || (this.mViewFlags & 2097152) == 2097152;
-                boolean isTooltipAvailable = (this.mViewFlags & 1073741824) == 1073741824 && (this.mSemViewFlags & 2) != 2;
+                boolean clickable =
+                        (this.mViewFlags & 16384) == 16384
+                                || (this.mViewFlags & 2097152) == 2097152;
+                boolean isTooltipAvailable =
+                        (this.mViewFlags & 1073741824) == 1073741824
+                                && (this.mSemViewFlags & 2) != 2;
                 if (clickable || isTooltipAvailable) {
                     float x = getWidth() / 2.0f;
                     float y = getHeight() / 2.0f;
@@ -8397,36 +9064,40 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return null;
     }
 
-    public void onInputConnectionOpenedInternal(InputConnection inputConnection, EditorInfo editorInfo, Handler handler) {
-    }
+    public void onInputConnectionOpenedInternal(
+            InputConnection inputConnection, EditorInfo editorInfo, Handler handler) {}
 
-    public void onInputConnectionClosedInternal() {
-    }
+    public void onInputConnectionClosedInternal() {}
 
     public boolean checkInputConnectionProxy(View view) {
         return false;
     }
 
     public void semSetDisplayCutoutBackgroundColor(final int color) {
-        post(new Runnable() { // from class: android.view.View.2
-            @Override // java.lang.Runnable
-            public void run() {
-                ViewRootImpl viewRootImpl = View.this.getViewRootImpl();
-                if (viewRootImpl != null) {
-                    View rootView = viewRootImpl.getView();
-                    if (rootView instanceof DecorView) {
-                        DecorView decorView = (DecorView) rootView;
-                        decorView.setDisplayCutoutBackgroundColor(color);
-                        Log.d(viewRootImpl.getTag(), "DecorView.setDisplayCutoutBackgroundColor() #" + Integer.toHexString(color));
+        post(
+                new Runnable() { // from class: android.view.View.2
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        ViewRootImpl viewRootImpl = View.this.getViewRootImpl();
+                        if (viewRootImpl != null) {
+                            View rootView = viewRootImpl.getView();
+                            if (rootView instanceof DecorView) {
+                                DecorView decorView = (DecorView) rootView;
+                                decorView.setDisplayCutoutBackgroundColor(color);
+                                Log.d(
+                                        viewRootImpl.getTag(),
+                                        "DecorView.setDisplayCutoutBackgroundColor() #"
+                                                + Integer.toHexString(color));
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
     }
 
     public void semSetRoundedCorners(int corners) {
         if ((corners & (-16)) != 0) {
-            throw new IllegalArgumentException("Use wrong rounded corners to the param, corners = " + corners);
+            throw new IllegalArgumentException(
+                    "Use wrong rounded corners to the param, corners = " + corners);
         }
         if (this.mRoundRadius == -1) {
             initRoundedCorner();
@@ -8443,28 +9114,56 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mTopLeftRound = getTopLeftRound();
             this.mTopLeftRound.setTint(this.mTopLeftRoundColor);
             if (DEBUG_ROUNDED_CORNER) {
-                Log.i(VIEW_LOG_TAG, "set TL bounds[ " + this.mTopLeftRound.getBounds() + " ] color[ " + this.mTopLeftRoundColor + " ] this - " + this);
+                Log.i(
+                        VIEW_LOG_TAG,
+                        "set TL bounds[ "
+                                + this.mTopLeftRound.getBounds()
+                                + " ] color[ "
+                                + this.mTopLeftRoundColor
+                                + " ] this - "
+                                + this);
             }
         }
         if (this.mTopRightRound == null && (corners & 2) != 0) {
             this.mTopRightRound = getTopRightRound();
             this.mTopRightRound.setTint(this.mTopRightRoundColor);
             if (DEBUG_ROUNDED_CORNER) {
-                Log.i(VIEW_LOG_TAG, "set TR bounds[ " + this.mTopRightRound.getBounds() + " ] color[ " + this.mTopRightRoundColor + " ] this - " + this);
+                Log.i(
+                        VIEW_LOG_TAG,
+                        "set TR bounds[ "
+                                + this.mTopRightRound.getBounds()
+                                + " ] color[ "
+                                + this.mTopRightRoundColor
+                                + " ] this - "
+                                + this);
             }
         }
         if (this.mBottomLeftRound == null && (corners & 4) != 0) {
             this.mBottomLeftRound = getBottomLeftRound();
             this.mBottomLeftRound.setTint(this.mBottomLeftRoundColor);
             if (DEBUG_ROUNDED_CORNER) {
-                Log.i(VIEW_LOG_TAG, "set BL bounds[ " + this.mBottomLeftRound.getBounds() + " ] color[ " + this.mBottomLeftRoundColor + " ] this - " + this);
+                Log.i(
+                        VIEW_LOG_TAG,
+                        "set BL bounds[ "
+                                + this.mBottomLeftRound.getBounds()
+                                + " ] color[ "
+                                + this.mBottomLeftRoundColor
+                                + " ] this - "
+                                + this);
             }
         }
         if (this.mBottomRightRound == null && (corners & 8) != 0) {
             this.mBottomRightRound = getBottomRightRound();
             this.mBottomRightRound.setTint(this.mBottomRightRoundColor);
             if (DEBUG_ROUNDED_CORNER) {
-                Log.i(VIEW_LOG_TAG, "set BR bounds[ " + this.mBottomRightRound.getBounds() + " ] color[ " + this.mBottomRightRoundColor + " ] this - " + this);
+                Log.i(
+                        VIEW_LOG_TAG,
+                        "set BR bounds[ "
+                                + this.mBottomRightRound.getBounds()
+                                + " ] color[ "
+                                + this.mBottomRightRoundColor
+                                + " ] this - "
+                                + this);
             }
         }
     }
@@ -8499,19 +9198,43 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         try {
             Log.i(VIEW_LOG_TAG, "RoundedCornerOffset " + this.mRoundedCornerOffset);
             if (this.mTopLeftRound != null) {
-                this.mTopLeftRound.setBounds(this.mRoundedCornerBounds.left + this.mRoundedCornerOffset.first.intValue(), this.mRoundedCornerBounds.top, this.mRoundedCornerBounds.left + this.mRoundRadius + this.mRoundedCornerOffset.first.intValue(), this.mRoundedCornerBounds.top + this.mRoundRadius);
+                this.mTopLeftRound.setBounds(
+                        this.mRoundedCornerBounds.left + this.mRoundedCornerOffset.first.intValue(),
+                        this.mRoundedCornerBounds.top,
+                        this.mRoundedCornerBounds.left
+                                + this.mRoundRadius
+                                + this.mRoundedCornerOffset.first.intValue(),
+                        this.mRoundedCornerBounds.top + this.mRoundRadius);
                 this.mTopLeftRound.draw(canvas);
             }
             if (this.mTopRightRound != null) {
-                this.mTopRightRound.setBounds((this.mRoundedCornerBounds.right - this.mRoundRadius) - this.mRoundedCornerOffset.second.intValue(), this.mRoundedCornerBounds.top, this.mRoundedCornerBounds.right - this.mRoundedCornerOffset.second.intValue(), this.mRoundedCornerBounds.top + this.mRoundRadius);
+                this.mTopRightRound.setBounds(
+                        (this.mRoundedCornerBounds.right - this.mRoundRadius)
+                                - this.mRoundedCornerOffset.second.intValue(),
+                        this.mRoundedCornerBounds.top,
+                        this.mRoundedCornerBounds.right
+                                - this.mRoundedCornerOffset.second.intValue(),
+                        this.mRoundedCornerBounds.top + this.mRoundRadius);
                 this.mTopRightRound.draw(canvas);
             }
             if (this.mBottomLeftRound != null) {
-                this.mBottomLeftRound.setBounds(this.mRoundedCornerBounds.left + this.mRoundedCornerOffset.first.intValue(), this.mRoundedCornerBounds.bottom - this.mRoundRadius, this.mRoundedCornerBounds.left + this.mRoundRadius + this.mRoundedCornerOffset.first.intValue(), this.mRoundedCornerBounds.bottom);
+                this.mBottomLeftRound.setBounds(
+                        this.mRoundedCornerBounds.left + this.mRoundedCornerOffset.first.intValue(),
+                        this.mRoundedCornerBounds.bottom - this.mRoundRadius,
+                        this.mRoundedCornerBounds.left
+                                + this.mRoundRadius
+                                + this.mRoundedCornerOffset.first.intValue(),
+                        this.mRoundedCornerBounds.bottom);
                 this.mBottomLeftRound.draw(canvas);
             }
             if (this.mBottomRightRound != null) {
-                this.mBottomRightRound.setBounds((this.mRoundedCornerBounds.right - this.mRoundRadius) - this.mRoundedCornerOffset.second.intValue(), this.mRoundedCornerBounds.bottom - this.mRoundRadius, this.mRoundedCornerBounds.right - this.mRoundedCornerOffset.second.intValue(), this.mRoundedCornerBounds.bottom);
+                this.mBottomRightRound.setBounds(
+                        (this.mRoundedCornerBounds.right - this.mRoundRadius)
+                                - this.mRoundedCornerOffset.second.intValue(),
+                        this.mRoundedCornerBounds.bottom - this.mRoundRadius,
+                        this.mRoundedCornerBounds.right
+                                - this.mRoundedCornerOffset.second.intValue(),
+                        this.mRoundedCornerBounds.bottom);
                 this.mBottomRightRound.draw(canvas);
             }
         } catch (NullPointerException ex) {
@@ -8525,7 +9248,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             throw new IllegalArgumentException("There is no rounded corner on = " + this);
         }
         if ((corners & (-16)) != 0) {
-            throw new IllegalArgumentException("Use wrong rounded corners to the param, corners = " + corners);
+            throw new IllegalArgumentException(
+                    "Use wrong rounded corners to the param, corners = " + corners);
         }
         if (DEBUG_ROUNDED_CORNER) {
             return;
@@ -8584,8 +9308,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     private void initRoundedCorner() {
-        this.mRoundRadius = this.mContext.getResources().getDimensionPixelSize(R.dimen.sem_rounded_corner_radius);
-        int color = DEBUG_ROUNDED_CORNER ? -16776961 : this.mResources.getColor(R.color.sem_round_and_bgcolor_dark, null);
+        this.mRoundRadius =
+                this.mContext
+                        .getResources()
+                        .getDimensionPixelSize(R.dimen.sem_rounded_corner_radius);
+        int color =
+                DEBUG_ROUNDED_CORNER
+                        ? -16776961
+                        : this.mResources.getColor(R.color.sem_round_and_bgcolor_dark, null);
         this.mBottomRightRoundColor = color;
         this.mBottomLeftRoundColor = color;
         this.mTopRightRoundColor = color;
@@ -8662,8 +9392,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return null;
     }
 
-    protected void onCreateContextMenu(ContextMenu menu) {
-    }
+    protected void onCreateContextMenu(ContextMenu menu) {}
 
     public boolean onTrackballEvent(MotionEvent event) {
         return false;
@@ -8689,10 +9418,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             }
         }
         if (!oldHoveringTouchDelegate) {
-            if ((action == 9 || action == 7) && !pointInHoveredChild(event) && pointInDelegateRegion) {
+            if ((action == 9 || action == 7)
+                    && !pointInHoveredChild(event)
+                    && pointInDelegateRegion) {
                 this.mHoveringTouchDelegate = true;
             }
-        } else if (action == 10 || (action == 7 && (pointInHoveredChild(event) || !pointInDelegateRegion))) {
+        } else if (action == 10
+                || (action == 7 && (pointInHoveredChild(event) || !pointInDelegateRegion))) {
             this.mHoveringTouchDelegate = false;
         }
         switch (action) {
@@ -8701,16 +9433,23 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     boolean handled = this.mTouchDelegate.onTouchExplorationHoverEvent(event);
                     break;
                 } else if (!oldHoveringTouchDelegate && this.mHoveringTouchDelegate) {
-                    MotionEvent eventNoHistory = event.getHistorySize() == 0 ? event : MotionEvent.obtainNoHistory(event);
+                    MotionEvent eventNoHistory =
+                            event.getHistorySize() == 0
+                                    ? event
+                                    : MotionEvent.obtainNoHistory(event);
                     eventNoHistory.setAction(9);
-                    boolean handled2 = this.mTouchDelegate.onTouchExplorationHoverEvent(eventNoHistory);
+                    boolean handled2 =
+                            this.mTouchDelegate.onTouchExplorationHoverEvent(eventNoHistory);
                     eventNoHistory.setAction(action);
                     break;
                 } else if (oldHoveringTouchDelegate && !this.mHoveringTouchDelegate) {
                     boolean hoverExitPending = event.isHoverExitPending();
                     event.setHoverExitPending(true);
                     this.mTouchDelegate.onTouchExplorationHoverEvent(event);
-                    MotionEvent eventNoHistory2 = event.getHistorySize() == 0 ? event : MotionEvent.obtainNoHistory(event);
+                    MotionEvent eventNoHistory2 =
+                            event.getHistorySize() == 0
+                                    ? event
+                                    : MotionEvent.obtainNoHistory(event);
                     eventNoHistory2.setHoverExitPending(hoverExitPending);
                     eventNoHistory2.setAction(10);
                     this.mTouchDelegate.onTouchExplorationHoverEvent(eventNoHistory2);
@@ -8739,7 +9478,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         int action = event.getActionMasked();
         if (!this.mSendingHoverAccessibilityEvents) {
-            if ((action == 9 || action == 7) && !hasHoveredChild() && pointInView(event.getX(), event.getY())) {
+            if ((action == 9 || action == 7)
+                    && !hasHoveredChild()
+                    && pointInView(event.getX(), event.getY())) {
                 sendAccessibilityHoverEvent(128);
                 this.mSendingHoverAccessibilityEvents = true;
             }
@@ -8747,20 +9488,26 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mSendingHoverAccessibilityEvents = false;
             sendAccessibilityHoverEvent(256);
         }
-        if ((action == 9 || action == 7) && event.isFromSource(8194) && isOnScrollbar(event.getX(), event.getY())) {
+        if ((action == 9 || action == 7)
+                && event.isFromSource(8194)
+                && isOnScrollbar(event.getX(), event.getY())) {
             awakenScrollBars();
         }
         getViewRootImpl();
         boolean z = ViewRune.WIDGET_PEN_SUPPORTED;
         int tooltype = event.getToolType(0);
         boolean compareTooltype = tooltype == 2 || tooltype == 1 || tooltype == 3;
-        boolean compareTooltypeByApp = this.mHoverPopupToolTypeByApp == 0 || this.mHoverPopupToolTypeByApp == tooltype;
+        boolean compareTooltypeByApp =
+                this.mHoverPopupToolTypeByApp == 0 || this.mHoverPopupToolTypeByApp == tooltype;
         if (compareTooltypeByApp && compareTooltype && this.mHoverPopupType != 0) {
             if (tooltype == 1 && semIsDesktopMode() && event.isFromSource(8194)) {
                 tooltype = 3;
             }
             SemHoverPopupWindow hoverPopup = semGetHoverPopup(tooltype, false);
-            if (this.mTooltipInfo == null && hoverPopup != null && !hoverPopup.onHoverEvent(event) && isFingerHoveredInAppWidget()) {
+            if (this.mTooltipInfo == null
+                    && hoverPopup != null
+                    && !hoverPopup.onHoverEvent(event)
+                    && isFingerHoveredInAppWidget()) {
                 if (action == 9 && (event.getButtonState() & 32) == 0) {
                     hoverPopup.setHoveringPoint((int) event.getRawX(), (int) event.getRawY());
                     semIsDesktopMode();
@@ -8796,7 +9543,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private boolean isHoverable() {
         int viewFlags = this.mViewFlags;
         if ((viewFlags & 32) != 32 || isHovered()) {
-            return (viewFlags & 16384) == 16384 || (viewFlags & 2097152) == 2097152 || (viewFlags & 8388608) == 8388608;
+            return (viewFlags & 16384) == 16384
+                    || (viewFlags & 2097152) == 2097152
+                    || (viewFlags & 8388608) == 8388608;
         }
         return false;
     }
@@ -8823,8 +9572,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    public void onHoverChanged(boolean hovered) {
-    }
+    public void onHoverChanged(boolean hovered) {}
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Removed duplicated region for block: B:52:0x0139  */
@@ -8837,7 +9585,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             Method dump skipped, instructions count: 366
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.View.handleScrollBarDragging(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.View.handleScrollBarDragging(android.view.MotionEvent):boolean");
     }
 
     @ViewDebug.ExportedProperty
@@ -8926,7 +9676,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                             }
                             this.mPendingCheckForTap.x = motionEvent.getX();
                             this.mPendingCheckForTap.y = motionEvent.getY();
-                            postDelayed(this.mPendingCheckForTap, ViewConfiguration.getTapTimeout());
+                            postDelayed(
+                                    this.mPendingCheckForTap, ViewConfiguration.getTapTimeout());
                             break;
                         } else {
                             setPressed(true, x, y);
@@ -8970,7 +9721,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                                     this.mUnsetPressedState.run();
                                 }
                             } else {
-                                postDelayed(this.mUnsetPressedState, ViewConfiguration.getPressedStateDuration());
+                                postDelayed(
+                                        this.mUnsetPressedState,
+                                        ViewConfiguration.getPressedStateDuration());
                             }
                             removeTapCallback();
                         }
@@ -8996,7 +9749,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     } else {
                         i = this.mTouchSlop;
                     }
-                    if (CoreRune.MW_SPLIT_IS_FLEX_SCROLL_WHEEL && (motionEvent.getFlags() & 1048576) != 0) {
+                    if (CoreRune.MW_SPLIT_IS_FLEX_SCROLL_WHEEL
+                            && (motionEvent.getFlags() & 1048576) != 0) {
                         setPressed(false);
                         removeLongPressCallback();
                         removeTapCallback();
@@ -9012,7 +9766,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                             i5 = 16384;
                         } else {
                             removeLongPressCallback();
-                            long longPressTimeout = ((long) (ViewConfiguration.getLongPressTimeout() * this.mAmbiguousGestureMultiplier)) - (motionEvent.getEventTime() - motionEvent.getDownTime());
+                            long longPressTimeout =
+                                    ((long)
+                                                    (ViewConfiguration.getLongPressTimeout()
+                                                            * this.mAmbiguousGestureMultiplier))
+                                            - (motionEvent.getEventTime()
+                                                    - motionEvent.getDownTime());
                             i6 = i2;
                             i4 = classification;
                             str = VIEW_LOG_TAG;
@@ -9073,11 +9832,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     private boolean hasExpensiveMeasuresDuringInputEvent() {
         AttachInfo attachInfo = this.mAttachInfo;
-        if (attachInfo == null || attachInfo.mRootView == null || !attachInfo.mHandlingPointerEvent) {
+        if (attachInfo == null
+                || attachInfo.mRootView == null
+                || !attachInfo.mHandlingPointerEvent) {
             return false;
         }
         ViewFrameInfo info = attachInfo.mViewRootImpl.mViewFrameInfo;
-        long durationFromVsyncTimeMs = (System.nanoTime() - Choreographer.getInstance().getLastFrameTimeNanos()) / 1000000;
+        long durationFromVsyncTimeMs =
+                (System.nanoTime() - Choreographer.getInstance().getLastFrameTimeNanos()) / 1000000;
         return durationFromVsyncTimeMs > 3 || info.getAndIncreaseViewMeasuredCount() > 10;
     }
 
@@ -9166,7 +9928,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     private boolean canTakeFocus() {
-        return (this.mViewFlags & 12) == 0 && (this.mViewFlags & 1) == 1 && (this.mViewFlags & 32) == 0 && (sCanFocusZeroSized || !isLayoutValid() || hasSize());
+        return (this.mViewFlags & 12) == 0
+                && (this.mViewFlags & 1) == 1
+                && (this.mViewFlags & 32) == 0
+                && (sCanFocusZeroSized || !isLayoutValid() || hasSize());
     }
 
     void setFlags(int flags, int mask) {
@@ -9182,7 +9947,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         int privateFlags = this.mPrivateFlags;
         boolean shouldNotifyFocusableAvailable = false;
         int focusableChangedByAuto = 0;
-        if ((this.mViewFlags & 16) != 0 && (changed & BatteryStats.HistoryItem.EVENT_TEMP_WHITELIST_FINISH) != 0) {
+        if ((this.mViewFlags & 16) != 0
+                && (changed & BatteryStats.HistoryItem.EVENT_TEMP_WHITELIST_FINISH) != 0) {
             if ((this.mViewFlags & 16384) != 0) {
                 newFocus = 1;
             } else {
@@ -9201,7 +9967,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 }
             } else if ((old & 1) == 0 && (privateFlags & 2) == 0 && this.mParent != null) {
                 ViewRootImpl viewRootImpl = getViewRootImpl();
-                if (!sAutoFocusableOffUIThreadWontNotifyParents || focusableChangedByAuto == 0 || viewRootImpl == null || viewRootImpl.mThread == Thread.currentThread()) {
+                if (!sAutoFocusableOffUIThreadWontNotifyParents
+                        || focusableChangedByAuto == 0
+                        || viewRootImpl == null
+                        || viewRootImpl.mThread == Thread.currentThread()) {
                     shouldNotifyFocusableAvailable = canTakeFocus();
                 }
             }
@@ -9273,7 +10042,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             }
             if (this.mAttachInfo != null) {
                 dispatchVisibilityChanged(this, newVisibility);
-                if (this.mParent != null && getWindowVisibility() == 0 && (!(this.mParent instanceof ViewGroup) || ((ViewGroup) this.mParent).isShown())) {
+                if (this.mParent != null
+                        && getWindowVisibility() == 0
+                        && (!(this.mParent instanceof ViewGroup)
+                                || ((ViewGroup) this.mParent).isShown())) {
                     dispatchVisibilityAggregated(newVisibility == 0);
                 }
                 if ((old & 12) == 0) {
@@ -9297,7 +10069,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         if ((changed & 128) != 0) {
             if ((this.mViewFlags & 128) != 0) {
-                if (this.mBackground != null || this.mDefaultFocusHighlight != null || (this.mForegroundInfo != null && this.mForegroundInfo.mDrawable != null)) {
+                if (this.mBackground != null
+                        || this.mDefaultFocusHighlight != null
+                        || (this.mForegroundInfo != null
+                                && this.mForegroundInfo.mDrawable != null)) {
                     this.mPrivateFlags &= PackageManager.INSTALL_FAILED_PRE_APPROVAL_NOT_AVAILABLE;
                 } else {
                     this.mPrivateFlags |= 128;
@@ -9308,14 +10083,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             requestLayout();
             invalidate(true);
         }
-        if ((67108864 & changed) != 0 && this.mParent != null && this.mAttachInfo != null && !this.mAttachInfo.mRecomputeGlobalAttributes) {
+        if ((67108864 & changed) != 0
+                && this.mParent != null
+                && this.mAttachInfo != null
+                && !this.mAttachInfo.mRecomputeGlobalAttributes) {
             this.mParent.recomputeViewAttributes(this);
         }
         if (accessibilityEnabled) {
             if (isAccessibilityPane()) {
                 changed &= -13;
             }
-            if ((changed & 1) != 0 || (changed & 12) != 0 || (changed & 16384) != 0 || (2097152 & changed) != 0 || (8388608 & changed) != 0) {
+            if ((changed & 1) != 0
+                    || (changed & 12) != 0
+                    || (changed & 16384) != 0
+                    || (2097152 & changed) != 0
+                    || (8388608 & changed) != 0) {
                 if (oldIncludeForAccessibility != includeForAccessibility(false)) {
                     notifySubtreeAccessibilityStateChangedIfNeeded();
                     return;
@@ -9338,16 +10120,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     private HapticScrollFeedbackProvider getScrollFeedbackProvider() {
         if (this.mScrollFeedbackProvider == null) {
-            this.mScrollFeedbackProvider = new HapticScrollFeedbackProvider(this, ViewConfiguration.get(this.mContext), false);
+            this.mScrollFeedbackProvider =
+                    new HapticScrollFeedbackProvider(
+                            this, ViewConfiguration.get(this.mContext), false);
         }
         return this.mScrollFeedbackProvider;
     }
 
     private void doRotaryProgressForScrollHaptics(MotionEvent rotaryEvent) {
         float axisScrollValue = rotaryEvent.getAxisValue(26);
-        float verticalScrollFactor = ViewConfiguration.get(this.mContext).getScaledVerticalScrollFactor();
+        float verticalScrollFactor =
+                ViewConfiguration.get(this.mContext).getScaledVerticalScrollFactor();
         int scrollAmount = -Math.round(axisScrollValue * verticalScrollFactor);
-        getScrollFeedbackProvider().onScrollProgress(rotaryEvent.getDeviceId(), 4194304, 26, scrollAmount);
+        getScrollFeedbackProvider()
+                .onScrollProgress(rotaryEvent.getDeviceId(), 4194304, 26, scrollAmount);
     }
 
     private void doRotaryLimitForScrollHaptics(MotionEvent rotaryEvent) {
@@ -9382,11 +10168,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-    }
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {}
 
-    protected void dispatchDraw(Canvas canvas) {
-    }
+    protected void dispatchDraw(Canvas canvas) {}
 
     public final ViewParent getParent() {
         return this.mParent;
@@ -9429,7 +10213,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return this.mMeasuredWidth & 16777215;
     }
 
-    @ViewDebug.ExportedProperty(category = "measurement", flagMapping = {@ViewDebug.FlagToString(equals = 16777216, mask = -16777216, name = "MEASURED_STATE_TOO_SMALL")})
+    @ViewDebug.ExportedProperty(
+            category = "measurement",
+            flagMapping = {
+                @ViewDebug.FlagToString(
+                        equals = 16777216,
+                        mask = -16777216,
+                        name = "MEASURED_STATE_TOO_SMALL")
+            })
     public final int getMeasuredWidthAndState() {
         return this.mMeasuredWidth;
     }
@@ -9438,7 +10229,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return this.mMeasuredHeight & 16777215;
     }
 
-    @ViewDebug.ExportedProperty(category = "measurement", flagMapping = {@ViewDebug.FlagToString(equals = 16777216, mask = -16777216, name = "MEASURED_STATE_TOO_SMALL")})
+    @ViewDebug.ExportedProperty(
+            category = "measurement",
+            flagMapping = {
+                @ViewDebug.FlagToString(
+                        equals = 16777216,
+                        mask = -16777216,
+                        name = "MEASURED_STATE_TOO_SMALL")
+            })
     public final int getMeasuredHeightAndState() {
         return this.mMeasuredHeight;
     }
@@ -9885,25 +10683,39 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return sanitizeFloatPropertyValue(value, propertyName, -3.4028235E38f, Float.MAX_VALUE);
     }
 
-    private static float sanitizeFloatPropertyValue(float value, String propertyName, float min, float max) {
+    private static float sanitizeFloatPropertyValue(
+            float value, String propertyName, float min, float max) {
         if (value >= min && value <= max) {
             return value;
         }
         if (value < min || value == Float.NEGATIVE_INFINITY) {
             if (sThrowOnInvalidFloatProperties) {
-                throw new IllegalArgumentException("Cannot set '" + propertyName + "' to " + value + ", the value must be >= " + min);
+                throw new IllegalArgumentException(
+                        "Cannot set '"
+                                + propertyName
+                                + "' to "
+                                + value
+                                + ", the value must be >= "
+                                + min);
             }
             return min;
         }
         if (value > max || value == Float.POSITIVE_INFINITY) {
             if (sThrowOnInvalidFloatProperties) {
-                throw new IllegalArgumentException("Cannot set '" + propertyName + "' to " + value + ", the value must be <= " + max);
+                throw new IllegalArgumentException(
+                        "Cannot set '"
+                                + propertyName
+                                + "' to "
+                                + value
+                                + ", the value must be <= "
+                                + max);
             }
             return max;
         }
         if (Float.isNaN(value)) {
             if (sThrowOnInvalidFloatProperties) {
-                throw new IllegalArgumentException("Cannot set '" + propertyName + "' to Float.NaN");
+                throw new IllegalArgumentException(
+                        "Cannot set '" + propertyName + "' to Float.NaN");
             }
             return 0.0f;
         }
@@ -9945,7 +10757,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     @RemotableViewMethod
     public void setElevation(float elevation) {
         if (elevation != getElevation()) {
-            float elevation2 = sanitizeFloatPropertyValue(elevation, SemMediaPostProcessor.ProcessingFormat.Key.ELEVATION);
+            float elevation2 =
+                    sanitizeFloatPropertyValue(
+                            elevation, SemMediaPostProcessor.ProcessingFormat.Key.ELEVATION);
             invalidateViewProperty(true, false);
             this.mRenderNode.setElevation(elevation2);
             invalidateViewProperty(false, true);
@@ -10133,7 +10947,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         RectF tmpRect = this.mAttachInfo.mTmpTransformRect;
         tmpRect.set(0.0f, 0.0f, getWidth(), getHeight());
         getMatrix().mapRect(tmpRect);
-        outRect.set(((int) tmpRect.left) + this.mLeft, ((int) tmpRect.top) + this.mTop, ((int) tmpRect.right) + this.mLeft, ((int) tmpRect.bottom) + this.mTop);
+        outRect.set(
+                ((int) tmpRect.left) + this.mLeft,
+                ((int) tmpRect.top) + this.mTop,
+                ((int) tmpRect.right) + this.mLeft,
+                ((int) tmpRect.bottom) + this.mTop);
     }
 
     final boolean pointInView(float localX, float localY) {
@@ -10141,7 +10959,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public boolean pointInView(float localX, float localY, float slop) {
-        return localX >= (-slop) && localY >= (-slop) && localX < ((float) (this.mRight - this.mLeft)) + slop && localY < ((float) (this.mBottom - this.mTop)) + slop;
+        return localX >= (-slop)
+                && localY >= (-slop)
+                && localX < ((float) (this.mRight - this.mLeft)) + slop
+                && localY < ((float) (this.mBottom - this.mTop)) + slop;
     }
 
     public void getFocusedRect(Rect r) {
@@ -10304,7 +11125,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /* JADX INFO: Access modifiers changed from: protected */
     public boolean awakenScrollBars() {
-        return this.mScrollCache != null && awakenScrollBars(this.mScrollCache.scrollBarDefaultDelayBeforeFade, true);
+        return this.mScrollCache != null
+                && awakenScrollBars(this.mScrollCache.scrollBarDefaultDelayBeforeFade, true);
     }
 
     private boolean initialAwakenScrollBars() {
@@ -10347,14 +11169,25 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     private boolean skipInvalidate() {
-        return ((this.mViewFlags & 12) == 0 || this.mCurrentAnimation != null || ((this.mParent instanceof ViewGroup) && ((ViewGroup) this.mParent).isViewTransitioning(this))) ? false : true;
+        return ((this.mViewFlags & 12) == 0
+                        || this.mCurrentAnimation != null
+                        || ((this.mParent instanceof ViewGroup)
+                                && ((ViewGroup) this.mParent).isViewTransitioning(this)))
+                ? false
+                : true;
     }
 
     @Deprecated
     public void invalidate(Rect dirty) {
         int scrollX = this.mScrollX;
         int scrollY = this.mScrollY;
-        invalidateInternal(dirty.left - scrollX, dirty.top - scrollY, dirty.right - scrollX, dirty.bottom - scrollY, true, false);
+        invalidateInternal(
+                dirty.left - scrollX,
+                dirty.top - scrollY,
+                dirty.right - scrollX,
+                dirty.bottom - scrollY,
+                true,
+                false);
     }
 
     @Deprecated
@@ -10369,10 +11202,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public void invalidate(boolean invalidateCache) {
-        invalidateInternal(0, 0, this.mRight - this.mLeft, this.mBottom - this.mTop, invalidateCache, true);
+        invalidateInternal(
+                0, 0, this.mRight - this.mLeft, this.mBottom - this.mTop, invalidateCache, true);
     }
 
-    void invalidateInternal(int l, int t, int r, int b, boolean invalidateCache, boolean fullInvalidate) {
+    void invalidateInternal(
+            int l, int t, int r, int b, boolean invalidateCache, boolean fullInvalidate) {
         View receiver;
         if (this.mGhostView != null) {
             this.mGhostView.invalidate(true);
@@ -10383,7 +11218,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         this.mPrivateFlags4 &= -193;
         this.mContentCaptureSessionCached = false;
-        if ((this.mPrivateFlags & 48) == 48 || ((invalidateCache && (this.mPrivateFlags & 32768) == 32768) || (this.mPrivateFlags & Integer.MIN_VALUE) != Integer.MIN_VALUE || (fullInvalidate && isOpaque() != this.mLastIsOpaque))) {
+        if ((this.mPrivateFlags & 48) == 48
+                || ((invalidateCache && (this.mPrivateFlags & 32768) == 32768)
+                        || (this.mPrivateFlags & Integer.MIN_VALUE) != Integer.MIN_VALUE
+                        || (fullInvalidate && isOpaque() != this.mLastIsOpaque))) {
             if (fullInvalidate) {
                 this.mLastIsOpaque = isOpaque();
                 this.mPrivateFlags &= -33;
@@ -10400,7 +11238,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 damage.set(l, t, r, b);
                 p.invalidateChild(this, damage);
             }
-            if (this.mBackground != null && this.mBackground.isProjected() && (receiver = getProjectionReceiver()) != null) {
+            if (this.mBackground != null
+                    && this.mBackground.isProjected()
+                    && (receiver = getProjectionReceiver()) != null) {
                 receiver.damageInParent();
             }
         }
@@ -10421,7 +11261,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     void invalidateViewProperty(boolean invalidateParent, boolean forceRedraw) {
-        if (!isHardwareAccelerated() || !this.mRenderNode.hasDisplayList() || (this.mPrivateFlags & 64) != 0) {
+        if (!isHardwareAccelerated()
+                || !this.mRenderNode.hasDisplayList()
+                || (this.mPrivateFlags & 64) != 0) {
             if (invalidateParent) {
                 invalidateParentCaches();
             }
@@ -10471,7 +11313,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mPrivateFlags &= -8388609;
         }
         int flags = this.mViewFlags;
-        if (((flags & 512) == 0 && (flags & 256) == 0) || (flags & 50331648) == 0 || (50331648 & flags) == 33554432) {
+        if (((flags & 512) == 0 && (flags & 256) == 0)
+                || (flags & 50331648) == 0
+                || (50331648 & flags) == 33554432) {
             this.mPrivateFlags |= 16777216;
         } else {
             this.mPrivateFlags &= -16777217;
@@ -10541,7 +11385,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public void postOnAnimationDelayed(Runnable action, long delayMillis) {
         AttachInfo attachInfo = this.mAttachInfo;
         if (attachInfo != null) {
-            attachInfo.mViewRootImpl.mChoreographer.postCallbackDelayed(1, action, null, delayMillis);
+            attachInfo.mViewRootImpl.mChoreographer.postCallbackDelayed(
+                    1, action, null, delayMillis);
         } else {
             getRunQueue().postDelayed(action, delayMillis);
         }
@@ -10574,7 +11419,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    public void postInvalidateDelayed(long delayMilliseconds, int left, int top, int right, int bottom) {
+    public void postInvalidateDelayed(
+            long delayMilliseconds, int left, int top, int right, int bottom) {
         AttachInfo attachInfo = this.mAttachInfo;
         if (attachInfo != null) {
             AttachInfo.InvalidateInfo info = AttachInfo.InvalidateInfo.obtain();
@@ -10616,8 +11462,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    public void computeScroll() {
-    }
+    public void computeScroll() {}
 
     public boolean isHorizontalFadingEdgeEnabled() {
         return (this.mViewFlags & 4096) == 4096;
@@ -10661,7 +11506,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     protected float getBottomFadingEdgeStrength() {
-        return computeVerticalScrollOffset() + computeVerticalScrollExtent() < computeVerticalScrollRange() ? 1.0f : 0.0f;
+        return computeVerticalScrollOffset() + computeVerticalScrollExtent()
+                        < computeVerticalScrollRange()
+                ? 1.0f
+                : 0.0f;
     }
 
     protected float getLeftFadingEdgeStrength() {
@@ -10669,7 +11517,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     protected float getRightFadingEdgeStrength() {
-        return computeHorizontalScrollOffset() + computeHorizontalScrollExtent() < computeHorizontalScrollRange() ? 1.0f : 0.0f;
+        return computeHorizontalScrollOffset() + computeHorizontalScrollExtent()
+                        < computeHorizontalScrollRange()
+                ? 1.0f
+                : 0.0f;
     }
 
     public boolean isHorizontalScrollBarEnabled() {
@@ -10697,7 +11548,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     protected void recomputePadding() {
-        internalSetPadding(this.mUserPaddingLeft, this.mPaddingTop, this.mUserPaddingRight, this.mUserPaddingBottom);
+        internalSetPadding(
+                this.mUserPaddingLeft,
+                this.mPaddingTop,
+                this.mUserPaddingRight,
+                this.mUserPaddingBottom);
     }
 
     public void setScrollbarFadingEnabled(boolean fadeScrollbars) {
@@ -10716,7 +11571,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public int getScrollBarDefaultDelayBeforeFade() {
-        return this.mScrollCache == null ? ViewConfiguration.getScrollDefaultDelay() : this.mScrollCache.scrollBarDefaultDelayBeforeFade;
+        return this.mScrollCache == null
+                ? ViewConfiguration.getScrollDefaultDelay()
+                : this.mScrollCache.scrollBarDefaultDelayBeforeFade;
     }
 
     public void setScrollBarDefaultDelayBeforeFade(int scrollBarDefaultDelayBeforeFade) {
@@ -10724,7 +11581,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public int getScrollBarFadeDuration() {
-        return this.mScrollCache == null ? ViewConfiguration.getScrollBarFadeDuration() : this.mScrollCache.scrollBarFadeDuration;
+        return this.mScrollCache == null
+                ? ViewConfiguration.getScrollBarFadeDuration()
+                : this.mScrollCache.scrollBarFadeDuration;
     }
 
     public void setScrollBarFadeDuration(int scrollBarFadeDuration) {
@@ -10732,7 +11591,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public int getScrollBarSize() {
-        return this.mScrollCache == null ? ViewConfiguration.get(this.mContext).getScaledScrollBarSize() : this.mScrollCache.scrollBarSize;
+        return this.mScrollCache == null
+                ? ViewConfiguration.get(this.mContext).getScaledScrollBarSize()
+                : this.mScrollCache.scrollBarSize;
     }
 
     public void setScrollBarSize(int scrollBarSize) {
@@ -10747,7 +11608,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    @ViewDebug.ExportedProperty(mapping = {@ViewDebug.IntToString(from = 0, to = "INSIDE_OVERLAY"), @ViewDebug.IntToString(from = 16777216, to = "INSIDE_INSET"), @ViewDebug.IntToString(from = 33554432, to = "OUTSIDE_OVERLAY"), @ViewDebug.IntToString(from = 50331648, to = "OUTSIDE_INSET")})
+    @ViewDebug.ExportedProperty(
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "INSIDE_OVERLAY"),
+                @ViewDebug.IntToString(from = 16777216, to = "INSIDE_INSET"),
+                @ViewDebug.IntToString(from = 33554432, to = "OUTSIDE_OVERLAY"),
+                @ViewDebug.IntToString(from = 50331648, to = "OUTSIDE_INSET")
+            })
     public int getScrollBarStyle() {
         return this.mViewFlags & 50331648;
     }
@@ -10823,7 +11690,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         Drawable dr;
         int leftRtl;
         int rightRtl;
-        if ((this.mPrivateFlags3 & SCROLL_INDICATORS_PFLAG3_MASK) == 0 || (dr = this.mScrollIndicatorDrawable) == null || this.mAttachInfo == null) {
+        if ((this.mPrivateFlags3 & SCROLL_INDICATORS_PFLAG3_MASK) == 0
+                || (dr = this.mScrollIndicatorDrawable) == null
+                || this.mAttachInfo == null) {
             return;
         }
         int h = dr.getIntrinsicHeight();
@@ -10875,14 +11744,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             return;
         }
         int inside = (this.mViewFlags & 33554432) == 0 ? -1 : 0;
-        boolean drawVerticalScrollBar = isVerticalScrollBarEnabled() && !isVerticalScrollBarHidden();
+        boolean drawVerticalScrollBar =
+                isVerticalScrollBarEnabled() && !isVerticalScrollBarHidden();
         int size = getHorizontalScrollbarHeight();
         int verticalScrollBarGap = drawVerticalScrollBar ? getVerticalScrollbarWidth() : 0;
         int width = this.mRight - this.mLeft;
         int height = this.mBottom - this.mTop;
         bounds.top = ((this.mScrollY + height) - size) - (this.mUserPaddingBottom & inside);
         bounds.left = this.mScrollX + (this.mPaddingLeft & inside);
-        bounds.right = ((this.mScrollX + width) - (this.mUserPaddingRight & inside)) - verticalScrollBarGap;
+        bounds.right =
+                ((this.mScrollX + width) - (this.mUserPaddingRight & inside))
+                        - verticalScrollBarGap;
         bounds.bottom = bounds.top + size;
         if (touchBounds == null) {
             return;
@@ -10908,7 +11780,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (this.mRoundScrollbarRenderer == null) {
             getStraightVerticalScrollBarBounds(bounds, touchBounds);
         } else {
-            this.mRoundScrollbarRenderer.getRoundVerticalScrollBarBounds(bounds != null ? bounds : touchBounds);
+            this.mRoundScrollbarRenderer.getRoundVerticalScrollBarBounds(
+                    bounds != null ? bounds : touchBounds);
         }
     }
 
@@ -10939,9 +11812,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 bounds.left = ((this.mScrollX + width) - size) - (this.mUserPaddingRight & inside);
                 break;
         }
-        bounds.top = this.mScrollY + (this.mPaddingTop & inside) + this.mAppWidgetScrollBarTopPadding;
+        bounds.top =
+                this.mScrollY + (this.mPaddingTop & inside) + this.mAppWidgetScrollBarTopPadding;
         bounds.right = bounds.left + size;
-        bounds.bottom = ((this.mScrollY + height) - (this.mUserPaddingBottom & inside)) - this.mAppWidgetScrollBarBottomPadding;
+        bounds.bottom =
+                ((this.mScrollY + height) - (this.mUserPaddingBottom & inside))
+                        - this.mAppWidgetScrollBarBottomPadding;
         if (touchBounds == null) {
             return;
         }
@@ -10981,7 +11857,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 cache.interpolatorValues = new float[1];
             }
             float[] values = cache.interpolatorValues;
-            if (cache.scrollBarInterpolator.timeToValues(values) == Interpolator.Result.FREEZE_END) {
+            if (cache.scrollBarInterpolator.timeToValues(values)
+                    == Interpolator.Result.FREEZE_END) {
                 cache.state = 0;
             } else {
                 cache.scrollBar.mutate().setAlpha(Math.round(values[0]));
@@ -10992,16 +11869,22 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             invalidate = false;
         }
         boolean drawHorizontalScrollBar = isHorizontalScrollBarEnabled();
-        boolean drawVerticalScrollBar = isVerticalScrollBarEnabled() && !isVerticalScrollBarHidden();
+        boolean drawVerticalScrollBar =
+                isVerticalScrollBarEnabled() && !isVerticalScrollBarHidden();
         if (this.mRoundScrollbarRenderer != null) {
             if (drawVerticalScrollBar) {
                 Rect bounds = cache.mScrollBarBounds;
                 getVerticalScrollBarBounds(bounds, null);
-                if (this.mVerticalScrollbarPosition == 1 || (this.mVerticalScrollbarPosition == 0 && isLayoutRtl())) {
+                if (this.mVerticalScrollbarPosition == 1
+                        || (this.mVerticalScrollbarPosition == 0 && isLayoutRtl())) {
                     z = true;
                 }
                 boolean shouldDrawScrollbarAtLeft = z;
-                this.mRoundScrollbarRenderer.drawRoundScrollbars(canvas, cache.scrollBar.getAlpha() / 255.0f, bounds, shouldDrawScrollbarAtLeft);
+                this.mRoundScrollbarRenderer.drawRoundScrollbars(
+                        canvas,
+                        cache.scrollBar.getAlpha() / 255.0f,
+                        bounds,
+                        shouldDrawScrollbarAtLeft);
                 if (invalidate) {
                     invalidate();
                     return;
@@ -11013,11 +11896,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (drawVerticalScrollBar || drawHorizontalScrollBar) {
             ScrollBarDrawable scrollBar2 = cache.scrollBar;
             if (drawHorizontalScrollBar) {
-                scrollBar2.setParameters(computeHorizontalScrollRange(), computeHorizontalScrollOffset(), computeHorizontalScrollExtent(), false);
+                scrollBar2.setParameters(
+                        computeHorizontalScrollRange(),
+                        computeHorizontalScrollOffset(),
+                        computeHorizontalScrollExtent(),
+                        false);
                 Rect bounds2 = cache.mScrollBarBounds;
                 getHorizontalScrollBarBounds(bounds2, null);
                 scrollBar = scrollBar2;
-                onDrawHorizontalScrollBar(canvas, scrollBar2, bounds2.left, bounds2.top, bounds2.right, bounds2.bottom);
+                onDrawHorizontalScrollBar(
+                        canvas,
+                        scrollBar2,
+                        bounds2.left,
+                        bounds2.top,
+                        bounds2.right,
+                        bounds2.bottom);
                 if (invalidate) {
                     invalidate(bounds2);
                 }
@@ -11025,14 +11918,24 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 scrollBar = scrollBar2;
             }
             if (drawVerticalScrollBar) {
-                scrollBar.setParameters(computeVerticalScrollRange(), computeVerticalScrollOffset(), computeVerticalScrollExtent(), true);
+                scrollBar.setParameters(
+                        computeVerticalScrollRange(),
+                        computeVerticalScrollOffset(),
+                        computeVerticalScrollExtent(),
+                        true);
                 Rect bounds3 = cache.mScrollBarBounds;
                 getVerticalScrollBarBounds(bounds3, null);
                 if (this.mNeededToChangedScrollBarPosition) {
                     bounds3.left -= this.mScrollBarPositionPadding;
                     bounds3.right -= this.mScrollBarPositionPadding;
                 }
-                onDrawVerticalScrollBar(canvas, scrollBar, bounds3.left, bounds3.top, bounds3.right, bounds3.bottom);
+                onDrawVerticalScrollBar(
+                        canvas,
+                        scrollBar,
+                        bounds3.left,
+                        bounds3.top,
+                        bounds3.right,
+                        bounds3.bottom);
                 if (invalidate) {
                     invalidate(bounds3);
                 }
@@ -11048,19 +11951,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return false;
     }
 
-    protected void onDrawHorizontalScrollBar(Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
+    protected void onDrawHorizontalScrollBar(
+            Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
         scrollBar.setBounds(l, t, r, b);
         scrollBar.draw(canvas);
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
-    public void onDrawVerticalScrollBar(Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
+    public void onDrawVerticalScrollBar(
+            Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
         scrollBar.setBounds(l, t, r, b);
         scrollBar.draw(canvas);
     }
 
-    protected void onDraw(Canvas canvas) {
-    }
+    protected void onDraw(Canvas canvas) {}
 
     void assignParent(ViewParent parent) {
         if (this.mParent == null) {
@@ -11070,7 +11974,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 this.mParent = null;
                 return;
             }
-            throw new RuntimeException("view " + this + " being added, but it already has a parent");
+            throw new RuntimeException(
+                    "view " + this + " being added, but it already has a parent");
         }
     }
 
@@ -11089,7 +11994,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (sTraceLayoutSteps) {
             setTraversalTracingEnabled(true);
         }
-        if (sTraceRequestLayoutClass != null && sTraceRequestLayoutClass.equals(getClass().getSimpleName())) {
+        if (sTraceRequestLayoutClass != null
+                && sTraceRequestLayoutClass.equals(getClass().getSimpleName())) {
             setRelayoutTracingEnabled(true);
         }
     }
@@ -11130,8 +12036,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         onScreenStateChanged(screenState);
     }
 
-    public void onScreenStateChanged(int screenState) {
-    }
+    public void onScreenStateChanged(int screenState) {}
 
     void dispatchMovedToDisplay(Display display, Configuration config) {
         if (this.mAttachInfo != null) {
@@ -11141,8 +12046,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         onMovedToDisplay(display.getDisplayId(), config);
     }
 
-    public void onMovedToDisplay(int displayId, Configuration config) {
-    }
+    public void onMovedToDisplay(int displayId, Configuration config) {}
 
     private boolean hasRtlSupport() {
         return this.mContext.getApplicationInfo().hasRtlSupport();
@@ -11156,8 +12060,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return (this.mPrivateFlags2 & ALL_RTL_PROPERTIES_RESOLVED) != ALL_RTL_PROPERTIES_RESOLVED;
     }
 
-    public void onRtlPropertiesChanged(int layoutDirection) {
-    }
+    public void onRtlPropertiesChanged(int layoutDirection) {}
 
     public boolean resolveLayoutDirection() {
         this.mPrivateFlags2 &= -49;
@@ -11179,7 +12082,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                             break;
                         }
                     } catch (AbstractMethodError e) {
-                        Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e);
+                        Log.e(
+                                VIEW_LOG_TAG,
+                                this.mParent.getClass().getSimpleName()
+                                        + " does not fully implement ViewParent",
+                                e);
                         break;
                     }
                     break;
@@ -11202,7 +12109,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     try {
                         return this.mParent.canResolveLayoutDirection();
                     } catch (AbstractMethodError e) {
-                        Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e);
+                        Log.e(
+                                VIEW_LOG_TAG,
+                                this.mParent.getClass().getSimpleName()
+                                        + " does not fully implement ViewParent",
+                                e);
                         return false;
                     }
                 }
@@ -11231,7 +12142,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public void resolvePadding() {
         int resolvedLayoutDirection = getLayoutDirection();
         if (!isRtlCompatibilityMode()) {
-            if (this.mBackground != null && (!this.mLeftPaddingDefined || !this.mRightPaddingDefined)) {
+            if (this.mBackground != null
+                    && (!this.mLeftPaddingDefined || !this.mRightPaddingDefined)) {
                 Rect padding = sThreadLocal.get();
                 if (padding == null) {
                     padding = new Rect();
@@ -11273,9 +12185,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         break;
                     }
             }
-            this.mUserPaddingBottom = this.mUserPaddingBottom >= 0 ? this.mUserPaddingBottom : this.mPaddingBottom;
+            this.mUserPaddingBottom =
+                    this.mUserPaddingBottom >= 0 ? this.mUserPaddingBottom : this.mPaddingBottom;
         }
-        internalSetPadding(this.mUserPaddingLeft, this.mPaddingTop, this.mUserPaddingRight, this.mUserPaddingBottom);
+        internalSetPadding(
+                this.mUserPaddingLeft,
+                this.mPaddingTop,
+                this.mUserPaddingRight,
+                this.mUserPaddingBottom);
         onRtlPropertiesChanged(resolvedLayoutDirection);
         this.mPrivateFlags2 |= 536870912;
     }
@@ -11292,8 +12209,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         this.mPrivateFlags2 &= -536870913;
     }
 
-    protected void onDetachedFromWindow() {
-    }
+    protected void onDetachedFromWindow() {}
 
     protected void onDetachedFromWindowInternal() {
         if (this.mHoverPopupType != 0 && this.mHoverPopup != null) {
@@ -11331,8 +12247,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    void invalidateInheritedLayoutMode(int layoutModeOfRoot) {
-    }
+    void invalidateInheritedLayoutMode(int layoutModeOfRoot) {}
 
     /* JADX INFO: Access modifiers changed from: protected */
     public int getWindowAttachCount() {
@@ -11427,7 +12342,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         performCollectViewAttributes(this.mAttachInfo, visibility);
         onAttachedToWindow();
         ListenerInfo li = this.mListenerInfo;
-        CopyOnWriteArrayList<OnAttachStateChangeListener> listeners = li != null ? li.mOnAttachStateChangeListeners : null;
+        CopyOnWriteArrayList<OnAttachStateChangeListener> listeners =
+                li != null ? li.mOnAttachStateChangeListeners : null;
         if (listeners != null && listeners.size() > 0) {
             Iterator<OnAttachStateChangeListener> it = listeners.iterator();
             while (it.hasNext()) {
@@ -11478,7 +12394,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             info.mViewRootImpl.getImeFocusController().onViewDetachedFromWindow(this);
         }
         ListenerInfo li = this.mListenerInfo;
-        CopyOnWriteArrayList<OnAttachStateChangeListener> listeners = li != null ? li.mOnAttachStateChangeListeners : null;
+        CopyOnWriteArrayList<OnAttachStateChangeListener> listeners =
+                li != null ? li.mOnAttachStateChangeListeners : null;
         if (listeners != null && listeners.size() > 0) {
             Iterator<OnAttachStateChangeListener> it = listeners.iterator();
             while (it.hasNext()) {
@@ -11511,7 +12428,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         this.mPrivateFlags3 &= -17;
         onCancelPendingInputEvents();
         if ((this.mPrivateFlags3 & 16) != 16) {
-            throw new SuperNotCalledException("View " + getClass().getSimpleName() + " did not call through to super.onCancelPendingInputEvents()");
+            throw new SuperNotCalledException(
+                    "View "
+                            + getClass().getSimpleName()
+                            + " did not call through to super.onCancelPendingInputEvents()");
         }
     }
 
@@ -11530,7 +12450,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mPrivateFlags &= -131073;
             Parcelable state = onSaveInstanceState();
             if ((this.mPrivateFlags & 131072) == 0) {
-                throw new IllegalStateException("Derived class did not call super.onSaveInstanceState()");
+                throw new IllegalStateException(
+                        "Derived class did not call super.onSaveInstanceState()");
             }
             if (state != null) {
                 container.put(this.mID, state);
@@ -11541,7 +12462,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     /* JADX INFO: Access modifiers changed from: protected */
     public Parcelable onSaveInstanceState() {
         this.mPrivateFlags |= 131072;
-        if (this.mStartActivityRequestWho != null || isAutofilled() || this.mAutofillViewId > 1073741823) {
+        if (this.mStartActivityRequestWho != null
+                || isAutofilled()
+                || this.mAutofillViewId > 1073741823) {
             BaseSavedState state = new BaseSavedState(AbsSavedState.EMPTY_STATE);
             if (this.mStartActivityRequestWho != null) {
                 state.mSavedData |= 1;
@@ -11571,7 +12494,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mPrivateFlags &= -131073;
             onRestoreInstanceState(state);
             if ((this.mPrivateFlags & 131072) == 0) {
-                throw new IllegalStateException("Derived class did not call super.onRestoreInstanceState()");
+                throw new IllegalStateException(
+                        "Derived class did not call super.onRestoreInstanceState()");
             }
         }
     }
@@ -11580,7 +12504,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public void onRestoreInstanceState(Parcelable state) {
         this.mPrivateFlags |= 131072;
         if (state != null && !(state instanceof AbsSavedState)) {
-            throw new IllegalArgumentException("Wrong state class, expecting View State but received " + state.getClass().toString() + " instead. This usually happens when two views of different type have the same id in the same hierarchy. This view's id is " + ViewDebug.resolveId(this.mContext, getId()) + ". Make sure other views do not use the same id.");
+            throw new IllegalArgumentException(
+                    "Wrong state class, expecting View State but received "
+                            + state.getClass().toString()
+                            + " instead. This usually happens when two views of different type have"
+                            + " the same id in the same hierarchy. This view's id is "
+                            + ViewDebug.resolveId(this.mContext, getId())
+                            + ". Make sure other views do not use the same id.");
         }
         if (state != null && (state instanceof BaseSavedState)) {
             BaseSavedState baseState = (BaseSavedState) state;
@@ -11594,7 +12524,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 ((BaseSavedState) state).mSavedData &= -5;
                 if ((this.mPrivateFlags3 & 1073741824) != 0) {
                     if (Log.isLoggable(AUTOFILL_LOG_TAG, 3)) {
-                        Log.d(AUTOFILL_LOG_TAG, "onRestoreInstanceState(): not setting autofillId to " + baseState.mAutofillViewId + " because view explicitly set it to " + this.mAutofillId);
+                        Log.d(
+                                AUTOFILL_LOG_TAG,
+                                "onRestoreInstanceState(): not setting autofillId to "
+                                        + baseState.mAutofillViewId
+                                        + " because view explicitly set it to "
+                                        + this.mAutofillId);
                     }
                 } else {
                     this.mAutofillViewId = baseState.mAutofillViewId;
@@ -11621,7 +12556,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void setLayerType(int layerType, Paint paint) {
         if (layerType < 0 || layerType > 2) {
-            throw new IllegalArgumentException("Layer type can only be one of: LAYER_TYPE_NONE, LAYER_TYPE_SOFTWARE or LAYER_TYPE_HARDWARE");
+            throw new IllegalArgumentException(
+                    "Layer type can only be one of: LAYER_TYPE_NONE, LAYER_TYPE_SOFTWARE or"
+                        + " LAYER_TYPE_HARDWARE");
         }
         boolean typeChanged = this.mRenderNode.setLayerType(layerType);
         if (!typeChanged) {
@@ -11665,7 +12602,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    @ViewDebug.ExportedProperty(category = "drawing", mapping = {@ViewDebug.IntToString(from = 0, to = KeyProperties.DIGEST_NONE), @ViewDebug.IntToString(from = 1, to = "SOFTWARE"), @ViewDebug.IntToString(from = 2, to = "HARDWARE")})
+    @ViewDebug.ExportedProperty(
+            category = "drawing",
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = KeyProperties.DIGEST_NONE),
+                @ViewDebug.IntToString(from = 1, to = "SOFTWARE"),
+                @ViewDebug.IntToString(from = 2, to = "HARDWARE")
+            })
     public int getLayerType() {
         return this.mLayerType;
     }
@@ -11731,7 +12674,19 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public void outputDirtyFlags(String indent, boolean clear, int clearMask) {
-        Log.d(VIEW_LOG_TAG, indent + this + "             DIRTY(" + (this.mPrivateFlags & 2097152) + ") DRAWN(" + (this.mPrivateFlags & 32) + ") CACHE_VALID(" + (this.mPrivateFlags & 32768) + ") INVALIDATED(" + (this.mPrivateFlags & Integer.MIN_VALUE) + NavigationBarInflaterView.KEY_CODE_END);
+        Log.d(
+                VIEW_LOG_TAG,
+                indent
+                        + this
+                        + "             DIRTY("
+                        + (this.mPrivateFlags & 2097152)
+                        + ") DRAWN("
+                        + (this.mPrivateFlags & 32)
+                        + ") CACHE_VALID("
+                        + (this.mPrivateFlags & 32768)
+                        + ") INVALIDATED("
+                        + (this.mPrivateFlags & Integer.MIN_VALUE)
+                        + NavigationBarInflaterView.KEY_CODE_END);
         if (clear) {
             this.mPrivateFlags &= clearMask;
         }
@@ -11745,11 +12700,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    protected void dispatchGetDisplayList() {
-    }
+    protected void dispatchGetDisplayList() {}
 
     public boolean canHaveDisplayList() {
-        return (this.mAttachInfo == null || this.mAttachInfo.mThreadedRenderer == null) ? false : true;
+        return (this.mAttachInfo == null || this.mAttachInfo.mThreadedRenderer == null)
+                ? false
+                : true;
     }
 
     public RenderNode updateDisplayListIfDirty() {
@@ -11757,7 +12713,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (!canHaveDisplayList()) {
             return renderNode;
         }
-        if ((this.mPrivateFlags & 32768) == 0 || !renderNode.hasDisplayList() || this.mRecreateDisplayList) {
+        if ((this.mPrivateFlags & 32768) == 0
+                || !renderNode.hasDisplayList()
+                || this.mRecreateDisplayList) {
             if (renderNode.hasDisplayList() && !this.mRecreateDisplayList) {
                 this.mPrivateFlags |= 32800;
                 this.mPrivateFlags &= -2097153;
@@ -11800,7 +12758,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         draw(canvas);
                     }
                 }
-                if (CoreRune.FW_VRR_DISCRETE && sToolkitSetFrameRateReadOnlyFlagValue && sToolkitFrameRateViewEnablingReadOnlyFlagValue) {
+                if (CoreRune.FW_VRR_DISCRETE
+                        && sToolkitSetFrameRateReadOnlyFlagValue
+                        && sToolkitFrameRateViewEnablingReadOnlyFlagValue) {
                     votePreferredFrameRate();
                 }
             } finally {
@@ -11809,7 +12769,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             }
         } else {
             if ((this.mPrivateFlags4 & 536870912) == 536870912) {
-                if (CoreRune.FW_VRR_DISCRETE && sToolkitSetFrameRateReadOnlyFlagValue && sToolkitFrameRateViewEnablingReadOnlyFlagValue) {
+                if (CoreRune.FW_VRR_DISCRETE
+                        && sToolkitSetFrameRateReadOnlyFlagValue
+                        && sToolkitFrameRateViewEnablingReadOnlyFlagValue) {
                     votePreferredFrameRate();
                 }
                 this.mPrivateFlags4 &= -536870913;
@@ -11913,7 +12875,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         boolean opaque = drawingCacheBackgroundColor != 0 || isOpaque();
         boolean use32BitCache = attachInfo != null && attachInfo.mUse32BitDrawingCache;
         long projectedBitmapSize = width * height * ((!opaque || use32BitCache) ? 4 : 2);
-        long drawingCacheSize = ViewConfiguration.get(this.mContext).getScaledMaximumDrawingCacheSize();
+        long drawingCacheSize =
+                ViewConfiguration.get(this.mContext).getScaledMaximumDrawingCacheSize();
         if (width > 0 && height > 0) {
             if (projectedBitmapSize <= drawingCacheSize) {
                 boolean clear = true;
@@ -11928,7 +12891,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         bitmap.recycle();
                     }
                     try {
-                        bitmap = Bitmap.createBitmap(this.mResources.getDisplayMetrics(), width, height, quality);
+                        bitmap =
+                                Bitmap.createBitmap(
+                                        this.mResources.getDisplayMetrics(),
+                                        width,
+                                        height,
+                                        quality);
                         bitmap.setDensity(getResources().getDisplayMetrics().densityDpi);
                         if (autoScale) {
                             try {
@@ -11979,7 +12947,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 }
                 canvas.translate(-this.mScrollX, -this.mScrollY);
                 this.mPrivateFlags |= 32;
-                if (this.mAttachInfo == null || !this.mAttachInfo.mHardwareAccelerated || this.mLayerType != 0) {
+                if (this.mAttachInfo == null
+                        || !this.mAttachInfo.mHardwareAccelerated
+                        || this.mLayerType != 0) {
                     this.mPrivateFlags |= 32768;
                 }
                 if ((this.mPrivateFlags & 128) == 128) {
@@ -12002,7 +12972,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             }
         }
         if (width > 0 && height > 0) {
-            Log.w(VIEW_LOG_TAG, getClass().getSimpleName() + " not displayed because it is too large to fit into a software layer (or drawing cache), needs " + projectedBitmapSize + " bytes, only " + drawingCacheSize + " available");
+            Log.w(
+                    VIEW_LOG_TAG,
+                    getClass().getSimpleName()
+                            + " not displayed because it is too large to fit into a software layer"
+                            + " (or drawing cache), needs "
+                            + projectedBitmapSize
+                            + " bytes, only "
+                            + drawingCacheSize
+                            + " available");
         }
         destroyDrawingCache();
         this.mCachingFailed = true;
@@ -12017,7 +12995,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         int height2 = (int) ((height * scale) + 0.5f);
         Canvas oldCanvas = null;
         try {
-            Canvas canvas = canvasProvider.getCanvas(this, width2 > 0 ? width2 : 1, height2 > 0 ? height2 : 1);
+            Canvas canvas =
+                    canvasProvider.getCanvas(
+                            this, width2 > 0 ? width2 : 1, height2 > 0 ? height2 : 1);
             if (attachInfo != null) {
                 oldCanvas = attachInfo.mCanvas;
                 attachInfo.mCanvas = null;
@@ -12123,12 +13103,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return false;
     }
 
-    private boolean applyLegacyAnimation(ViewGroup parent, long drawingTime, Animation a, boolean scalingRequired) {
+    private boolean applyLegacyAnimation(
+            ViewGroup parent, long drawingTime, Animation a, boolean scalingRequired) {
         Transformation invalidationTransform;
         int flags = parent.mGroupFlags;
         boolean initialized = a.isInitialized();
         if (!initialized) {
-            a.initialize(this.mRight - this.mLeft, this.mBottom - this.mTop, parent.getWidth(), parent.getHeight());
+            a.initialize(
+                    this.mRight - this.mLeft,
+                    this.mBottom - this.mTop,
+                    parent.getWidth(),
+                    parent.getHeight());
             a.initializeInvalidateRegion(0, 0, this.mRight - this.mLeft, this.mBottom - this.mTop);
             if (this.mAttachInfo != null) {
                 a.setListenerHandler(this.mAttachInfo.mHandler);
@@ -12160,11 +13145,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     parent.mInvalidateRegion = new RectF();
                 }
                 RectF region = parent.mInvalidateRegion;
-                a.getInvalidateRegion(0, 0, this.mRight - this.mLeft, this.mBottom - this.mTop, region, invalidationTransform);
+                a.getInvalidateRegion(
+                        0,
+                        0,
+                        this.mRight - this.mLeft,
+                        this.mBottom - this.mTop,
+                        region,
+                        invalidationTransform);
                 parent.mPrivateFlags |= 64;
                 int left = this.mLeft + ((int) region.left);
                 int top = this.mTop + ((int) region.top);
-                parent.invalidate(left, top, ((int) (region.width() + 0.5f)) + left, ((int) (region.height() + 0.5f)) + top);
+                parent.invalidate(
+                        left,
+                        top,
+                        ((int) (region.width() + 0.5f)) + left,
+                        ((int) (region.height() + 0.5f)) + top);
             }
         }
         return more;
@@ -12174,12 +13169,16 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         int transformType;
         if (renderNode != null) {
             renderNode.setHasOverlappingRendering(getHasOverlappingRendering());
-            renderNode.setClipToBounds((this.mParent instanceof ViewGroup) && ((ViewGroup) this.mParent).getClipChildren());
+            renderNode.setClipToBounds(
+                    (this.mParent instanceof ViewGroup)
+                            && ((ViewGroup) this.mParent).getClipChildren());
             float alpha = 1.0f;
-            if ((this.mParent instanceof ViewGroup) && (((ViewGroup) this.mParent).mGroupFlags & 2048) != 0) {
+            if ((this.mParent instanceof ViewGroup)
+                    && (((ViewGroup) this.mParent).mGroupFlags & 2048) != 0) {
                 ViewGroup parentVG = (ViewGroup) this.mParent;
                 Transformation t = parentVG.getChildTransformation();
-                if (parentVG.getChildStaticTransformation(this, t) && (transformType = t.getTransformationType()) != 0) {
+                if (parentVG.getChildStaticTransformation(this, t)
+                        && (transformType = t.getTransformationType()) != 0) {
                     if ((transformType & 1) != 0) {
                         alpha = t.getAlpha();
                     }
@@ -12206,7 +13205,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     protected final boolean drawsWithRenderNode(Canvas canvas) {
-        return this.mAttachInfo != null && this.mAttachInfo.mHardwareAccelerated && canvas.isHardwareAccelerated();
+        return this.mAttachInfo != null
+                && this.mAttachInfo.mHardwareAccelerated
+                && canvas.isHardwareAccelerated();
     }
 
     /* JADX WARN: Removed duplicated region for block: B:100:0x033c  */
@@ -12234,7 +13235,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             Method dump skipped, instructions count: 988
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.View.draw(android.graphics.Canvas, android.view.ViewGroup, long):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.view.View.draw(android.graphics.Canvas,"
+                    + " android.view.ViewGroup, long):boolean");
     }
 
     static Paint getDebugPaint() {
@@ -12400,7 +13403,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 leftSaveCount2 = bottomSaveCount;
                 rightSaveCount = -1;
             } else {
-                int rightSaveCount3 = canvas.saveUnclippedLayer(right3 - length, top2, right3, bottom);
+                int rightSaveCount3 =
+                        canvas.saveUnclippedLayer(right3 - length, top2, right3, bottom);
                 leftSaveCount = leftSaveCount3;
                 topSaveCount3 = topSaveCount2;
                 leftSaveCount2 = bottomSaveCount;
@@ -12517,7 +13521,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         int moveX = 0;
         int moveY = 0;
-        if (getLastBackgroundResource() == 17304791 && this.mContext.getResources().getAssets().getSamsungThemeOverlays().size() > 0) {
+        if (getLastBackgroundResource() == 17304791
+                && this.mContext.getResources().getAssets().getSamsungThemeOverlays().size() > 0) {
             int width = this.mRight - this.mLeft;
             int height = this.mBottom - this.mTop;
             if (width > height) {
@@ -12531,8 +13536,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         } else {
             setBackgroundBounds();
         }
-        if (canvas.isHardwareAccelerated() && this.mAttachInfo != null && this.mAttachInfo.mThreadedRenderer != null) {
-            this.mBackgroundRenderNode = getDrawableRenderNode(background, this.mBackgroundRenderNode);
+        if (canvas.isHardwareAccelerated()
+                && this.mAttachInfo != null
+                && this.mAttachInfo.mThreadedRenderer != null) {
+            this.mBackgroundRenderNode =
+                    getDrawableRenderNode(background, this.mBackgroundRenderNode);
             RenderNode renderNode = this.mBackgroundRenderNode;
             if (renderNode != null && renderNode.hasDisplayList()) {
                 setBackgroundRenderNodeProperties(renderNode);
@@ -12572,7 +13580,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     private RenderNode getDrawableRenderNode(Drawable drawable, RenderNode renderNode) {
         if (renderNode == null) {
-            renderNode = RenderNode.create(drawable.getClass().getName(), new ViewAnimationHostBridge(this));
+            renderNode =
+                    RenderNode.create(
+                            drawable.getClass().getName(), new ViewAnimationHostBridge(this));
             renderNode.setUsageHint(1);
         }
         Rect bounds = drawable.getBounds();
@@ -12691,9 +13701,16 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     private boolean setOpticalFrame(int left, int top, int right, int bottom) {
-        Insets parentInsets = this.mParent instanceof View ? ((View) this.mParent).getOpticalInsets() : Insets.NONE;
+        Insets parentInsets =
+                this.mParent instanceof View
+                        ? ((View) this.mParent).getOpticalInsets()
+                        : Insets.NONE;
         Insets childInsets = getOpticalInsets();
-        return setFrame((parentInsets.left + left) - childInsets.left, (parentInsets.top + top) - childInsets.top, parentInsets.left + right + childInsets.right, parentInsets.top + bottom + childInsets.bottom);
+        return setFrame(
+                (parentInsets.left + left) - childInsets.left,
+                (parentInsets.top + top) - childInsets.top,
+                parentInsets.left + right + childInsets.right,
+                parentInsets.top + bottom + childInsets.bottom);
     }
 
     public void layout(int l, int t, int r, int b) {
@@ -12712,7 +13729,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         int oldT = this.mTop;
         int oldB = this.mBottom;
         int oldR = this.mRight;
-        boolean changed = isLayoutModeOptical(this.mParent) ? setOpticalFrame(l, t, r, b) : setFrame(l, t, r, b);
+        boolean changed =
+                isLayoutModeOptical(this.mParent)
+                        ? setOpticalFrame(l, t, r, b)
+                        : setFrame(l, t, r, b);
         View view2 = null;
         if (!changed && (this.mPrivateFlags & 8192) != 8192) {
             view = null;
@@ -12736,13 +13756,16 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (li == null || li.mOnLayoutChangeListeners == null) {
                 view = null;
             } else {
-                ArrayList<OnLayoutChangeListener> listenersCopy = (ArrayList) li.mOnLayoutChangeListeners.clone();
+                ArrayList<OnLayoutChangeListener> listenersCopy =
+                        (ArrayList) li.mOnLayoutChangeListeners.clone();
                 int numListeners = listenersCopy.size();
                 int i = 0;
                 while (i < numListeners) {
                     int numListeners2 = numListeners;
                     int numListeners3 = oldL;
-                    listenersCopy.get(i).onLayoutChange(this, l, t, r, b, numListeners3, oldT, oldR, oldB);
+                    listenersCopy
+                            .get(i)
+                            .onLayoutChange(this, l, t, r, b, numListeners3, oldT, oldR, oldB);
                     i++;
                     view2 = view2;
                     numListeners = numListeners2;
@@ -12792,13 +13815,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return false;
     }
 
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    }
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {}
 
     /* JADX INFO: Access modifiers changed from: protected */
     public boolean setFrame(int left, int top, int right, int bottom) {
         boolean changed = false;
-        if (this.mLeft != left || this.mRight != right || this.mTop != top || this.mBottom != bottom) {
+        if (this.mLeft != left
+                || this.mRight != right
+                || this.mTop != top
+                || this.mBottom != bottom) {
             changed = true;
             int drawn = this.mPrivateFlags & 32;
             int oldWidth = this.mRight - this.mLeft;
@@ -12811,7 +13836,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mTop = top;
             this.mRight = right;
             this.mBottom = bottom;
-            this.mRenderNode.setLeftTopRightBottom(this.mLeft, this.mTop, this.mRight, this.mBottom);
+            this.mRenderNode.setLeftTopRightBottom(
+                    this.mLeft, this.mTop, this.mRight, this.mBottom);
             this.mPrivateFlags |= 16;
             if (sizeChanged) {
                 sizeChange(newWidth, newHeight, oldWidth, oldHeight);
@@ -12856,7 +13882,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 float density = this.mAttachInfo.mDensity;
                 int narrowSize = (int) (FRAME_RATE_NARROW_SIZE_DP * density);
                 int smallSize = (int) (FRAME_RATE_SQUARE_SMALL_SIZE_DP * density);
-                if (newWidth > narrowSize && newHeight > narrowSize && (newWidth > smallSize || newHeight > smallSize)) {
+                if (newWidth > narrowSize
+                        && newHeight > narrowSize
+                        && (newWidth > smallSize || newHeight > smallSize)) {
                     isSmall = false;
                 }
                 boolean z = CoreRune.FW_DVRR_TOOLKIT_SUPPORT_HIGH_FRAME_RATE;
@@ -12868,7 +13896,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     category = 2;
                 }
                 this.mSizeBasedFrameRateCategoryAndReason = 16777216 | category;
-            } else if (CoreRune.FW_DVRR_TOOLKIT_SUPPORT_HIGH_FRAME_RATE && isLarge && this.mAttachInfo.mViewRootImpl != null && this.mAttachInfo.mViewRootImpl.mWindowAttributes.type != 2011 && (this instanceof WebView)) {
+            } else if (CoreRune.FW_DVRR_TOOLKIT_SUPPORT_HIGH_FRAME_RATE
+                    && isLarge
+                    && this.mAttachInfo.mViewRootImpl != null
+                    && this.mAttachInfo.mViewRootImpl.mWindowAttributes.type != 2011
+                    && (this instanceof WebView)) {
                 this.mSizeBasedFrameRateCategoryAndReason = 218103813;
             } else {
                 category = sToolkitFrameRateDefaultNormalReadOnlyFlagValue ? 3 : 5;
@@ -12881,7 +13913,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mOverlay.getOverlayView().setRight(newWidth);
             this.mOverlay.getOverlayView().setBottom(newHeight);
         }
-        if (!sCanFocusZeroSized && isLayoutValid() && (!(this.mParent instanceof ViewGroup) || !((ViewGroup) this.mParent).isLayoutSuppressed())) {
+        if (!sCanFocusZeroSized
+                && isLayoutValid()
+                && (!(this.mParent instanceof ViewGroup)
+                        || !((ViewGroup) this.mParent).isLayoutSuppressed())) {
             if (newWidth <= 0 || newHeight <= 0) {
                 if (hasFocus()) {
                     clearFocus();
@@ -12890,7 +13925,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     }
                 }
                 clearAccessibilityFocus();
-            } else if ((oldWidth <= 0 || oldHeight <= 0) && this.mParent != null && canTakeFocus()) {
+            } else if ((oldWidth <= 0 || oldHeight <= 0)
+                    && this.mParent != null
+                    && canTakeFocus()) {
                 this.mParent.focusableViewAvailable(this);
             }
         }
@@ -12900,8 +13937,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    protected void onFinishInflate() {
-    }
+    protected void onFinishInflate() {}
 
     public Resources getResources() {
         return this.mResources;
@@ -12913,7 +13949,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             Rect dirty = drawable.getDirtyBounds();
             int scrollX = this.mScrollX;
             int scrollY = this.mScrollY;
-            invalidate(dirty.left + scrollX, dirty.top + scrollY, dirty.right + scrollX, dirty.bottom + scrollY);
+            invalidate(
+                    dirty.left + scrollX,
+                    dirty.top + scrollY,
+                    dirty.right + scrollX,
+                    dirty.bottom + scrollY);
             rebuildOutline();
         }
     }
@@ -12923,7 +13963,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (verifyDrawable(who) && what != null) {
             long delay = when - SystemClock.uptimeMillis();
             if (this.mAttachInfo != null) {
-                this.mAttachInfo.mViewRootImpl.mChoreographer.postCallbackDelayed(1, what, who, Choreographer.subtractFrameDelay(delay));
+                this.mAttachInfo.mViewRootImpl.mChoreographer.postCallbackDelayed(
+                        1, what, who, Choreographer.subtractFrameDelay(delay));
             } else {
                 getRunQueue().postDelayed(what, delay);
             }
@@ -12950,7 +13991,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (!isLayoutDirectionResolved() && getRawLayoutDirection() == 2) {
             return;
         }
-        int layoutDirection = isLayoutDirectionResolved() ? getLayoutDirection() : getRawLayoutDirection();
+        int layoutDirection =
+                isLayoutDirectionResolved() ? getLayoutDirection() : getRawLayoutDirection();
         if (this.mBackground != null) {
             this.mBackground.setLayoutDirection(layoutDirection);
         }
@@ -12968,8 +14010,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return (this.mPrivateFlags2 & 1073741824) == 1073741824;
     }
 
-    public void onResolveDrawables(int layoutDirection) {
-    }
+    public void onResolveDrawables(int layoutDirection) {}
 
     protected void resetResolvedDrawables() {
         resetResolvedDrawablesInternal();
@@ -12980,7 +14021,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     protected boolean verifyDrawable(Drawable who) {
-        return who == this.mBackground || (this.mForegroundInfo != null && this.mForegroundInfo.mDrawable == who) || this.mDefaultFocusHighlight == who;
+        return who == this.mBackground
+                || (this.mForegroundInfo != null && this.mForegroundInfo.mDrawable == who)
+                || this.mDefaultFocusHighlight == who;
     }
 
     protected void drawableStateChanged() {
@@ -12999,7 +14042,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (fg != null && fg.isStateful()) {
             changed |= fg.setState(state);
         }
-        if (this.mScrollCache != null && (scrollBar = this.mScrollCache.scrollBar) != null && scrollBar.isStateful()) {
+        if (this.mScrollCache != null
+                && (scrollBar = this.mScrollCache.scrollBar) != null
+                && scrollBar.isStateful()) {
             changed |= scrollBar.setState(state) && this.mScrollCache.state != 0;
         }
         if (this.mStateListAnimator != null) {
@@ -13026,8 +14071,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         dispatchDrawableHotspotChanged(x, y);
     }
 
-    public void dispatchDrawableHotspotChanged(float x, float y) {
-    }
+    public void dispatchDrawableHotspotChanged(float x, float y) {}
 
     public void refreshDrawableState() {
         this.mPrivateFlags |= 1024;
@@ -13045,7 +14089,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private Drawable getDefaultFocusHighlightDrawable() {
         if (this.mDefaultFocusHighlightCache == null && this.mContext != null) {
             if (CoreRune.BAIDU_CARLIFE && isCarLifeDisplay()) {
-                this.mDefaultFocusHighlightCache = this.mContext.getDrawable(R.drawable.carlife_selector_background_focused);
+                this.mDefaultFocusHighlightCache =
+                        this.mContext.getDrawable(R.drawable.carlife_selector_background_focused);
             } else {
                 int[] attrs = {16843534};
                 TypedArray ta = this.mContext.obtainStyledAttributes(attrs);
@@ -13071,20 +14116,37 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 highlight.setVisible(getWindowVisibility() == 0 && isShown(), false);
             }
             highlight.setCallback(this);
-        } else if ((this.mViewFlags & 128) != 0 && this.mBackground == null && (this.mForegroundInfo == null || this.mForegroundInfo.mDrawable == null)) {
+        } else if ((this.mViewFlags & 128) != 0
+                && this.mBackground == null
+                && (this.mForegroundInfo == null || this.mForegroundInfo.mDrawable == null)) {
             this.mPrivateFlags |= 128;
         }
         invalidate();
     }
 
     public boolean isDefaultFocusHighlightNeeded(Drawable background, Drawable foreground) {
-        boolean lackFocusState = ((background != null && background.isStateful() && background.hasFocusStateSpecified()) || (foreground != null && foreground.isStateful() && foreground.hasFocusStateSpecified())) ? false : true;
-        return !isInTouchMode() && getDefaultFocusHighlightEnabled() && lackFocusState && isAttachedToWindow() && sUseDefaultFocusHighlight;
+        boolean lackFocusState =
+                ((background != null
+                                        && background.isStateful()
+                                        && background.hasFocusStateSpecified())
+                                || (foreground != null
+                                        && foreground.isStateful()
+                                        && foreground.hasFocusStateSpecified()))
+                        ? false
+                        : true;
+        return !isInTouchMode()
+                && getDefaultFocusHighlightEnabled()
+                && lackFocusState
+                && isAttachedToWindow()
+                && sUseDefaultFocusHighlight;
     }
 
     private void switchDefaultFocusHighlight() {
         if (isFocused()) {
-            boolean needed = isDefaultFocusHighlightNeeded(this.mBackground, this.mForegroundInfo == null ? null : this.mForegroundInfo.mDrawable);
+            boolean needed =
+                    isDefaultFocusHighlightNeeded(
+                            this.mBackground,
+                            this.mForegroundInfo == null ? null : this.mForegroundInfo.mDrawable);
             boolean active = this.mDefaultFocusHighlight != null;
             if (needed && !active) {
                 setDefaultFocusHighlight(getDefaultFocusHighlightDrawable());
@@ -13138,7 +14200,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if ((1073741824 & privateFlags) != 0) {
             viewStateIndex |= 32;
         }
-        if (this.mAttachInfo != null && this.mAttachInfo.mHardwareAccelerationRequested && !CoreRune.GFW_DEBUG_DISABLE_HWRENDERING) {
+        if (this.mAttachInfo != null
+                && this.mAttachInfo.mHardwareAccelerationRequested
+                && !CoreRune.GFW_DEBUG_DISABLE_HWRENDERING) {
             viewStateIndex |= 64;
         }
         if ((268435456 & privateFlags) != 0) {
@@ -13250,18 +14314,22 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     case 1:
                         this.mUserPaddingLeftInitial = padding.right;
                         this.mUserPaddingRightInitial = padding.left;
-                        internalSetPadding(padding.right, padding.top, padding.left, padding.bottom);
+                        internalSetPadding(
+                                padding.right, padding.top, padding.left, padding.bottom);
                         break;
                     default:
                         this.mUserPaddingLeftInitial = padding.left;
                         this.mUserPaddingRightInitial = padding.right;
-                        internalSetPadding(padding.left, padding.top, padding.right, padding.bottom);
+                        internalSetPadding(
+                                padding.left, padding.top, padding.right, padding.bottom);
                         break;
                 }
                 this.mLeftPaddingDefined = false;
                 this.mRightPaddingDefined = false;
             }
-            if (this.mBackground == null || this.mBackground.getMinimumHeight() != background.getMinimumHeight() || this.mBackground.getMinimumWidth() != background.getMinimumWidth()) {
+            if (this.mBackground == null
+                    || this.mBackground.getMinimumHeight() != background.getMinimumHeight()
+                    || this.mBackground.getMinimumWidth() != background.getMinimumWidth()) {
                 requestLayout = true;
             }
             this.mBackground = background;
@@ -13287,7 +14355,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 Log.i(VIEW_LOG_TAG, "setBackgroundDrawable null Callers=" + Debug.getCallers(7));
             }
             this.mBackground = null;
-            if ((this.mViewFlags & 128) != 0 && this.mDefaultFocusHighlight == null && (this.mForegroundInfo == null || this.mForegroundInfo.mDrawable == null)) {
+            if ((this.mViewFlags & 128) != 0
+                    && this.mDefaultFocusHighlight == null
+                    && (this.mForegroundInfo == null || this.mForegroundInfo.mDrawable == null)) {
                 this.mPrivateFlags |= 128;
             }
             requestLayout = true;
@@ -13347,7 +14417,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public PorterDuff.Mode getBackgroundTintMode() {
         if (this.mBackgroundTint != null && this.mBackgroundTint.mBlendMode != null) {
-            PorterDuff.Mode porterDuffMode = BlendMode.blendModeToPorterDuffMode(this.mBackgroundTint.mBlendMode);
+            PorterDuff.Mode porterDuffMode =
+                    BlendMode.blendModeToPorterDuffMode(this.mBackgroundTint.mBlendMode);
             return porterDuffMode;
         }
         return null;
@@ -13418,7 +14489,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 foreground.setVisible(getWindowVisibility() == 0 && isShown(), false);
             }
             foreground.setCallback(this);
-        } else if ((this.mViewFlags & 128) != 0 && this.mBackground == null && this.mDefaultFocusHighlight == null) {
+        } else if ((this.mViewFlags & 128) != 0
+                && this.mBackground == null
+                && this.mDefaultFocusHighlight == null) {
             this.mPrivateFlags |= 128;
         }
         requestLayout();
@@ -13497,7 +14570,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public PorterDuff.Mode getForegroundTintMode() {
-        BlendMode blendMode = (this.mForegroundInfo == null || this.mForegroundInfo.mTintInfo == null) ? null : this.mForegroundInfo.mTintInfo.mBlendMode;
+        BlendMode blendMode =
+                (this.mForegroundInfo == null || this.mForegroundInfo.mTintInfo == null)
+                        ? null
+                        : this.mForegroundInfo.mTintInfo.mBlendMode;
         if (blendMode != null) {
             return BlendMode.blendModeToPorterDuffMode(blendMode);
         }
@@ -13512,7 +14588,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     private void applyForegroundTint() {
-        if (this.mForegroundInfo != null && this.mForegroundInfo.mDrawable != null && this.mForegroundInfo.mTintInfo != null) {
+        if (this.mForegroundInfo != null
+                && this.mForegroundInfo.mDrawable != null
+                && this.mForegroundInfo.mTintInfo != null) {
             TintInfo tintInfo = this.mForegroundInfo.mTintInfo;
             if (tintInfo.mHasTintList || tintInfo.mHasTintMode) {
                 this.mForegroundInfo.mDrawable = this.mForegroundInfo.mDrawable.mutate();
@@ -13545,7 +14623,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     private void drawAutofilledHighlight(Canvas canvas) {
         Drawable autofilledHighlight;
-        if (isAutofilled() && !hideAutofillHighlight() && (autofilledHighlight = getAutofilledDrawable()) != null) {
+        if (isAutofilled()
+                && !hideAutofillHighlight()
+                && (autofilledHighlight = getAutofilledDrawable()) != null) {
             autofilledHighlight.setBounds(0, 0, getWidth(), getHeight());
             autofilledHighlight.draw(canvas);
         }
@@ -13563,10 +14643,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 if (this.mForegroundInfo.mInsidePadding) {
                     selfBounds.set(0, 0, getWidth(), getHeight());
                 } else {
-                    selfBounds.set(getPaddingLeft(), getPaddingTop(), getWidth() - getPaddingRight(), getHeight() - getPaddingBottom());
+                    selfBounds.set(
+                            getPaddingLeft(),
+                            getPaddingTop(),
+                            getWidth() - getPaddingRight(),
+                            getHeight() - getPaddingBottom());
                 }
                 int ld = getLayoutDirection();
-                Gravity.apply(this.mForegroundInfo.mGravity, foreground.getIntrinsicWidth(), foreground.getIntrinsicHeight(), selfBounds, overlayBounds, ld);
+                Gravity.apply(
+                        this.mForegroundInfo.mGravity,
+                        foreground.getIntrinsicWidth(),
+                        foreground.getIntrinsicHeight(),
+                        selfBounds,
+                        overlayBounds,
+                        ld);
                 foreground.setBounds(overlayBounds);
             }
             foreground.draw(canvas);
@@ -13697,7 +14787,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public boolean isPaddingRelative() {
-        return (this.mUserPaddingStart == Integer.MIN_VALUE && this.mUserPaddingEnd == Integer.MIN_VALUE) ? false : true;
+        return (this.mUserPaddingStart == Integer.MIN_VALUE
+                        && this.mUserPaddingEnd == Integer.MIN_VALUE)
+                ? false
+                : true;
     }
 
     Insets computeOpticalInsets() {
@@ -13709,11 +14802,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             this.mPaddingLeft = this.mUserPaddingLeftInitial;
             this.mPaddingRight = this.mUserPaddingRightInitial;
         } else if (isLayoutRtl()) {
-            this.mPaddingLeft = this.mUserPaddingEnd >= 0 ? this.mUserPaddingEnd : this.mUserPaddingLeftInitial;
-            this.mPaddingRight = this.mUserPaddingStart >= 0 ? this.mUserPaddingStart : this.mUserPaddingRightInitial;
+            this.mPaddingLeft =
+                    this.mUserPaddingEnd >= 0 ? this.mUserPaddingEnd : this.mUserPaddingLeftInitial;
+            this.mPaddingRight =
+                    this.mUserPaddingStart >= 0
+                            ? this.mUserPaddingStart
+                            : this.mUserPaddingRightInitial;
         } else {
-            this.mPaddingLeft = this.mUserPaddingStart >= 0 ? this.mUserPaddingStart : this.mUserPaddingLeftInitial;
-            this.mPaddingRight = this.mUserPaddingEnd >= 0 ? this.mUserPaddingEnd : this.mUserPaddingRightInitial;
+            this.mPaddingLeft =
+                    this.mUserPaddingStart >= 0
+                            ? this.mUserPaddingStart
+                            : this.mUserPaddingLeftInitial;
+            this.mPaddingRight =
+                    this.mUserPaddingEnd >= 0
+                            ? this.mUserPaddingEnd
+                            : this.mUserPaddingRightInitial;
         }
     }
 
@@ -13745,8 +14848,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    protected void dispatchSetSelected(boolean selected) {
-    }
+    protected void dispatchSetSelected(boolean selected) {}
 
     @ViewDebug.ExportedProperty
     public boolean isSelected() {
@@ -13755,15 +14857,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void setActivated(boolean activated) {
         if (((this.mPrivateFlags & 1073741824) != 0) != activated) {
-            this.mPrivateFlags = (this.mPrivateFlags & (-1073741825)) | (activated ? 1073741824 : 0);
+            this.mPrivateFlags =
+                    (this.mPrivateFlags & (-1073741825)) | (activated ? 1073741824 : 0);
             invalidate(true);
             refreshDrawableState();
             dispatchSetActivated(activated);
         }
     }
 
-    protected void dispatchSetActivated(boolean activated) {
-    }
+    protected void dispatchSetActivated(boolean activated) {}
 
     @ViewDebug.ExportedProperty
     public boolean isActivated() {
@@ -13850,7 +14952,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT, indexMapping = {@ViewDebug.IntToString(from = 0, to = "x"), @ViewDebug.IntToString(from = 1, to = "y")})
+    @ViewDebug.ExportedProperty(
+            category = TtmlUtils.TAG_LAYOUT,
+            indexMapping = {
+                @ViewDebug.IntToString(from = 0, to = "x"),
+                @ViewDebug.IntToString(from = 1, to = "y")
+            })
     public int[] getLocationOnScreen() {
         int[] location = new int[2];
         getLocationOnScreen(location);
@@ -13930,7 +15037,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    protected <T extends View> T findViewByPredicateTraversal(Predicate<View> predicate, View childToSkip) {
+    protected <T extends View> T findViewByPredicateTraversal(
+            Predicate<View> predicate, View childToSkip) {
         if (predicate.test(this)) {
             return this;
         }
@@ -13980,14 +15088,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:16:0x001c, code lost:
-    
-        return r1;
-     */
+
+       return r1;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final <T extends android.view.View> T findViewByPredicateInsideOut(android.view.View r5, java.util.function.Predicate<android.view.View> r6) {
+    public final <T extends android.view.View> T findViewByPredicateInsideOut(
+            android.view.View r5, java.util.function.Predicate<android.view.View> r6) {
         /*
             r4 = this;
             r0 = 0
@@ -14013,7 +15122,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         L1c:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.View.findViewByPredicateInsideOut(android.view.View, java.util.function.Predicate):android.view.View");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.View.findViewByPredicateInsideOut(android.view.View,"
+                    + " java.util.function.Predicate):android.view.View");
     }
 
     public void setId(int id) {
@@ -14062,7 +15174,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void setTag(int key, Object tag) {
         if ((key >>> 24) < 2) {
-            throw new IllegalArgumentException("The key must be an application-specific resource id.");
+            throw new IllegalArgumentException(
+                    "The key must be an application-specific resource id.");
         }
         setKeyedTag(key, tag);
     }
@@ -14100,11 +15213,46 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if ((this.mPrivateFlags & 2) != 0) {
             Log.d(VIEW_LOG_TAG, debugIndent(depth) + " FOCUSED");
         }
-        Log.d(VIEW_LOG_TAG, debugIndent(depth) + "frame={" + this.mLeft + ", " + this.mTop + ", " + this.mRight + ", " + this.mBottom + "} scroll={" + this.mScrollX + ", " + this.mScrollY + "} ");
-        if (this.mPaddingLeft != 0 || this.mPaddingTop != 0 || this.mPaddingRight != 0 || this.mPaddingBottom != 0) {
-            Log.d(VIEW_LOG_TAG, debugIndent(depth) + "padding={" + this.mPaddingLeft + ", " + this.mPaddingTop + ", " + this.mPaddingRight + ", " + this.mPaddingBottom + "}");
+        Log.d(
+                VIEW_LOG_TAG,
+                debugIndent(depth)
+                        + "frame={"
+                        + this.mLeft
+                        + ", "
+                        + this.mTop
+                        + ", "
+                        + this.mRight
+                        + ", "
+                        + this.mBottom
+                        + "} scroll={"
+                        + this.mScrollX
+                        + ", "
+                        + this.mScrollY
+                        + "} ");
+        if (this.mPaddingLeft != 0
+                || this.mPaddingTop != 0
+                || this.mPaddingRight != 0
+                || this.mPaddingBottom != 0) {
+            Log.d(
+                    VIEW_LOG_TAG,
+                    debugIndent(depth)
+                            + "padding={"
+                            + this.mPaddingLeft
+                            + ", "
+                            + this.mPaddingTop
+                            + ", "
+                            + this.mPaddingRight
+                            + ", "
+                            + this.mPaddingBottom
+                            + "}");
         }
-        Log.d(VIEW_LOG_TAG, debugIndent(depth) + "mMeasureWidth=" + this.mMeasuredWidth + " mMeasureHeight=" + this.mMeasuredHeight);
+        Log.d(
+                VIEW_LOG_TAG,
+                debugIndent(depth)
+                        + "mMeasureWidth="
+                        + this.mMeasuredWidth
+                        + " mMeasureHeight="
+                        + this.mMeasuredHeight);
         String output3 = debugIndent(depth);
         if (this.mLayoutParams == null) {
             output = output3 + "BAD! no layout params";
@@ -14113,7 +15261,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         Log.d(VIEW_LOG_TAG, output);
         Log.d(VIEW_LOG_TAG, ((debugIndent(depth) + "flags={") + printFlags(this.mViewFlags)) + "}");
-        Log.d(VIEW_LOG_TAG, ((debugIndent(depth) + "privateFlags={") + printPrivateFlags(this.mPrivateFlags)) + "}");
+        Log.d(
+                VIEW_LOG_TAG,
+                ((debugIndent(depth) + "privateFlags={") + printPrivateFlags(this.mPrivateFlags))
+                        + "}");
     }
 
     protected static String debugIndent(int depth) {
@@ -14141,14 +15292,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         int endIndex = Math.min(stackTraceElements.length, 1 + 20);
         for (int i = 1; i < endIndex; i++) {
             StackTraceElement s = stackTraceElements[i];
-            sb.append(s.getMethodName()).append(NavigationBarInflaterView.KEY_CODE_START).append(s.getFileName()).append(":").append(s.getLineNumber()).append(") <- ");
+            sb.append(s.getMethodName())
+                    .append(NavigationBarInflaterView.KEY_CODE_START)
+                    .append(s.getFileName())
+                    .append(":")
+                    .append(s.getLineNumber())
+                    .append(") <- ");
         }
         Log.d(VIEW_LOG_TAG, name + ": " + ((Object) sb));
     }
 
     public void requestLayout() {
         if (isRelayoutTracingEnabled()) {
-            Trace.instantForTrack(4096L, "requestLayoutTracing", this.mTracingStrings.classSimpleName);
+            Trace.instantForTrack(
+                    4096L, "requestLayoutTracing", this.mTracingStrings.classSimpleName);
             printStackStrace(this.mTracingStrings.requestLayoutStacktracePrefix);
         }
         if (this.mMeasureCache != null) {
@@ -14156,7 +15313,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         if (this.mAttachInfo != null && this.mAttachInfo.mViewRequestingLayout == null) {
             ViewRootImpl viewRoot = getViewRootImpl();
-            if (viewRoot != null && viewRoot.isInLayout() && !viewRoot.requestLayoutDuringLayout(this)) {
+            if (viewRoot != null
+                    && viewRoot.isInLayout()
+                    && !viewRoot.requestLayoutDuringLayout(this)) {
                 return;
             } else {
                 this.mAttachInfo.mViewRequestingLayout = this;
@@ -14200,7 +15359,24 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         int widthMeasureSpec2 = widthMeasureSpec;
         int heightMeasureSpec2 = heightMeasureSpec;
         if (ViewRootImpl.DEBUG_MEASURE) {
-            Trace.traceBegin(8L, "measure for " + getClass().getSimpleName() + " w:" + widthMeasureSpec2 + "/" + getMeasureSpecMode(widthMeasureSpec) + "/" + MeasureSpec.getSize(widthMeasureSpec) + " h:" + heightMeasureSpec2 + "/" + getMeasureSpecMode(heightMeasureSpec2) + "/" + MeasureSpec.getSize(heightMeasureSpec) + " " + this);
+            Trace.traceBegin(
+                    8L,
+                    "measure for "
+                            + getClass().getSimpleName()
+                            + " w:"
+                            + widthMeasureSpec2
+                            + "/"
+                            + getMeasureSpecMode(widthMeasureSpec)
+                            + "/"
+                            + MeasureSpec.getSize(widthMeasureSpec)
+                            + " h:"
+                            + heightMeasureSpec2
+                            + "/"
+                            + getMeasureSpecMode(heightMeasureSpec2)
+                            + "/"
+                            + MeasureSpec.getSize(heightMeasureSpec)
+                            + " "
+                            + this);
         }
         boolean optical = isLayoutModeOptical(this);
         if (optical != isLayoutModeOptical(this.mParent)) {
@@ -14208,17 +15384,27 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             int oWidth = insets.left + insets.right;
             int oHeight = insets.top + insets.bottom;
             widthMeasureSpec2 = MeasureSpec.adjust(widthMeasureSpec2, optical ? -oWidth : oWidth);
-            heightMeasureSpec2 = MeasureSpec.adjust(heightMeasureSpec2, optical ? -oHeight : oHeight);
+            heightMeasureSpec2 =
+                    MeasureSpec.adjust(heightMeasureSpec2, optical ? -oHeight : oHeight);
         }
         long key = (widthMeasureSpec2 << 32) | (heightMeasureSpec2 & 4294967295L);
         if (this.mMeasureCache == null) {
             this.mMeasureCache = new LongSparseLongArray(2);
         }
         boolean forceLayout = (this.mPrivateFlags & 4096) == 4096;
-        boolean specChanged = (widthMeasureSpec2 == this.mOldWidthMeasureSpec && heightMeasureSpec2 == this.mOldHeightMeasureSpec) ? false : true;
-        boolean isSpecExactly = MeasureSpec.getMode(widthMeasureSpec2) == 1073741824 && MeasureSpec.getMode(heightMeasureSpec2) == 1073741824;
-        boolean matchesSpecSize = getMeasuredWidth() == MeasureSpec.getSize(widthMeasureSpec2) && getMeasuredHeight() == MeasureSpec.getSize(heightMeasureSpec2);
-        boolean needsLayout = specChanged && !(!sAlwaysRemeasureExactly && isSpecExactly && matchesSpecSize);
+        boolean specChanged =
+                (widthMeasureSpec2 == this.mOldWidthMeasureSpec
+                                && heightMeasureSpec2 == this.mOldHeightMeasureSpec)
+                        ? false
+                        : true;
+        boolean isSpecExactly =
+                MeasureSpec.getMode(widthMeasureSpec2) == 1073741824
+                        && MeasureSpec.getMode(heightMeasureSpec2) == 1073741824;
+        boolean matchesSpecSize =
+                getMeasuredWidth() == MeasureSpec.getSize(widthMeasureSpec2)
+                        && getMeasuredHeight() == MeasureSpec.getSize(heightMeasureSpec2);
+        boolean needsLayout =
+                specChanged && !(!sAlwaysRemeasureExactly && isSpecExactly && matchesSpecSize);
         if (forceLayout || needsLayout) {
             this.mPrivateFlags &= -2049;
             resolveRtlPropertiesIfNeeded();
@@ -14231,7 +15417,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 if (isTraversalTracingEnabled()) {
                     Trace.beginSection(this.mTracingStrings.onMeasure);
                 }
-                if (com.android.internal.hidden_from_bootclasspath.android.os.Flags.adpfMeasureDuringInputEventBoost()) {
+                if (com.android.internal.hidden_from_bootclasspath.android.os.Flags
+                        .adpfMeasureDuringInputEventBoost()) {
                     boolean notifyRenderer = hasExpensiveMeasuresDuringInputEvent();
                     if (notifyRenderer) {
                         Trace.traceBegin(8L, "CPU_LOAD_UP: hasExpensiveMeasuresDuringInputEvent");
@@ -14252,19 +15439,28 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if ((this.mPrivateFlags & 2048) == 2048) {
                 this.mPrivateFlags |= 8192;
             } else {
-                throw new IllegalStateException("View with id " + getId() + ": " + getClass().getName() + "#onMeasure() did not set the measured dimension by calling setMeasuredDimension()");
+                throw new IllegalStateException(
+                        "View with id "
+                                + getId()
+                                + ": "
+                                + getClass().getName()
+                                + "#onMeasure() did not set the measured dimension by calling"
+                                + " setMeasuredDimension()");
             }
         }
         this.mOldWidthMeasureSpec = widthMeasureSpec2;
         this.mOldHeightMeasureSpec = heightMeasureSpec2;
-        this.mMeasureCache.put(key, (this.mMeasuredWidth << 32) | (this.mMeasuredHeight & 4294967295L));
+        this.mMeasureCache.put(
+                key, (this.mMeasuredWidth << 32) | (this.mMeasuredHeight & 4294967295L));
         if (ViewRootImpl.DEBUG_MEASURE) {
             Trace.traceEnd(8L);
         }
     }
 
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec), getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
+        setMeasuredDimension(
+                getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
+                getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
@@ -14332,11 +15528,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     protected int getSuggestedMinimumHeight() {
-        return this.mBackground == null ? this.mMinHeight : Math.max(this.mMinHeight, this.mBackground.getMinimumHeight());
+        return this.mBackground == null
+                ? this.mMinHeight
+                : Math.max(this.mMinHeight, this.mBackground.getMinimumHeight());
     }
 
     protected int getSuggestedMinimumWidth() {
-        return this.mBackground == null ? this.mMinWidth : Math.max(this.mMinWidth, this.mBackground.getMinimumWidth());
+        return this.mBackground == null
+                ? this.mMinWidth
+                : Math.max(this.mMinWidth, this.mBackground.getMinimumWidth());
     }
 
     public int getMinimumHeight() {
@@ -14381,7 +15581,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public void setAnimation(Animation animation) {
         this.mCurrentAnimation = animation;
         if (animation != null) {
-            if (this.mAttachInfo != null && this.mAttachInfo.mDisplayState == 1 && animation.getStartTime() == -1) {
+            if (this.mAttachInfo != null
+                    && this.mAttachInfo.mDisplayState == 1
+                    && animation.getStartTime() == -1) {
                 animation.setStartTime(AnimationUtils.currentAnimationTimeMillis());
             }
             animation.reset();
@@ -14408,15 +15610,23 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 int[] location = attachInfo.mTransparentLocation;
                 getLocationInWindow(location);
                 int shadowOffset = getZ() > 0.0f ? (int) getZ() : 0;
-                region.op(location[0] - shadowOffset, location[1] - shadowOffset, ((location[0] + this.mRight) - this.mLeft) + shadowOffset, ((location[1] + this.mBottom) - this.mTop) + (shadowOffset * 3), Region.Op.DIFFERENCE);
+                region.op(
+                        location[0] - shadowOffset,
+                        location[1] - shadowOffset,
+                        ((location[0] + this.mRight) - this.mLeft) + shadowOffset,
+                        ((location[1] + this.mBottom) - this.mTop) + (shadowOffset * 3),
+                        Region.Op.DIFFERENCE);
             } else {
                 if (this.mBackground != null && this.mBackground.getOpacity() != -2) {
                     applyDrawableToTransparentRegion(this.mBackground, region);
                 }
-                if (this.mForegroundInfo != null && this.mForegroundInfo.mDrawable != null && this.mForegroundInfo.mDrawable.getOpacity() != -2) {
+                if (this.mForegroundInfo != null
+                        && this.mForegroundInfo.mDrawable != null
+                        && this.mForegroundInfo.mDrawable.getOpacity() != -2) {
                     applyDrawableToTransparentRegion(this.mForegroundInfo.mDrawable, region);
                 }
-                if (this.mDefaultFocusHighlight != null && this.mDefaultFocusHighlight.getOpacity() != -2) {
+                if (this.mDefaultFocusHighlight != null
+                        && this.mDefaultFocusHighlight.getOpacity() != -2) {
                     applyDrawableToTransparentRegion(this.mDefaultFocusHighlight, region);
                 }
             }
@@ -14425,7 +15635,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public void playSoundEffect(int soundConstant) {
-        if (this.mAttachInfo == null || this.mAttachInfo.mRootCallbacks == null || !isSoundEffectsEnabled()) {
+        if (this.mAttachInfo == null
+                || this.mAttachInfo.mRootCallbacks == null
+                || !isSoundEffectsEnabled()) {
             return;
         }
         this.mAttachInfo.mRootCallbacks.playSoundEffect(soundConstant);
@@ -14451,13 +15663,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (!this.mAttachInfo.canPerformHapticFeedback()) {
                 return false;
             }
-            if (this.mContext.getDisplayId() != 0 && this.mContext.getResources().getConfiguration().isDesktopModeEnabled()) {
+            if (this.mContext.getDisplayId() != 0
+                    && this.mContext.getResources().getConfiguration().isDesktopModeEnabled()) {
                 return false;
             }
-            getSystemVibrator().performHapticFeedback(feedbackConstant, always, "View#performHapticFeedback", fromIme);
+            getSystemVibrator()
+                    .performHapticFeedback(
+                            feedbackConstant, always, "View#performHapticFeedback", fromIme);
             return true;
         }
-        return this.mAttachInfo.mRootCallbacks.performHapticFeedback(feedbackConstant, always, fromIme);
+        return this.mAttachInfo.mRootCallbacks.performHapticFeedback(
+                feedbackConstant, always, fromIme);
     }
 
     private Vibrator getSystemVibrator() {
@@ -14473,7 +15689,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public void setSystemUiVisibility(int visibility) {
         if (visibility != this.mSystemUiVisibility) {
             this.mSystemUiVisibility = visibility;
-            if (this.mParent != null && this.mAttachInfo != null && !this.mAttachInfo.mRecomputeGlobalAttributes) {
+            if (this.mParent != null
+                    && this.mAttachInfo != null
+                    && !this.mAttachInfo.mRecomputeGlobalAttributes) {
                 this.mParent.recomputeViewAttributes(this);
             }
         }
@@ -14493,8 +15711,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     @Deprecated
-    public void onWindowSystemUiVisibilityChanged(int visible) {
-    }
+    public void onWindowSystemUiVisibilityChanged(int visible) {}
 
     @Deprecated
     public void dispatchWindowSystemUiVisiblityChanged(int visible) {
@@ -14504,7 +15721,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     @Deprecated
     public void setOnSystemUiVisibilityChangeListener(OnSystemUiVisibilityChangeListener l) {
         getListenerInfo().mOnSystemUiVisibilityChangeListener = l;
-        if (this.mParent != null && this.mAttachInfo != null && !this.mAttachInfo.mRecomputeGlobalAttributes) {
+        if (this.mParent != null
+                && this.mAttachInfo != null
+                && !this.mAttachInfo.mRecomputeGlobalAttributes) {
             this.mParent.recomputeViewAttributes(this);
         }
     }
@@ -14513,7 +15732,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     public void dispatchSystemUiVisibilityChanged(int visibility) {
         ListenerInfo li = this.mListenerInfo;
         if (li != null && li.mOnSystemUiVisibilityChangeListener != null) {
-            li.mOnSystemUiVisibilityChangeListener.onSystemUiVisibilityChange(visibility & PUBLIC_STATUS_BAR_VISIBILITY_MASK);
+            li.mOnSystemUiVisibilityChangeListener.onSystemUiVisibilityChange(
+                    visibility & PUBLIC_STATUS_BAR_VISIBILITY_MASK);
         }
     }
 
@@ -14535,8 +15755,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    public void onSystemBarAppearanceChanged(int appearance) {
-    }
+    public void onSystemBarAppearanceChanged(int appearance) {}
 
     public static class DragShadowBuilder {
         private Point mSemLastTouchPoint;
@@ -14612,15 +15831,23 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     @Deprecated
-    public final boolean startDrag(ClipData data, DragShadowBuilder shadowBuilder, Object myLocalState, int flags) {
+    public final boolean startDrag(
+            ClipData data, DragShadowBuilder shadowBuilder, Object myLocalState, int flags) {
         return startDragAndDrop(data, shadowBuilder, myLocalState, flags);
     }
 
-    public final boolean startDragAndDrop(ClipData data, DragShadowBuilder shadowBuilder, Object myLocalState, int flags) {
+    public final boolean startDragAndDrop(
+            ClipData data, DragShadowBuilder shadowBuilder, Object myLocalState, int flags) {
         return startDragAndDrop(data, shadowBuilder, myLocalState, flags, null, null);
     }
 
-    public final boolean hidden_startDragAndDrop(ClipData data, DragShadowBuilder shadowBuilder, Object myLocalState, int flags, RectF selectedArea, Point location) {
+    public final boolean hidden_startDragAndDrop(
+            ClipData data,
+            DragShadowBuilder shadowBuilder,
+            Object myLocalState,
+            int flags,
+            RectF selectedArea,
+            Point location) {
         return startDragAndDrop(data, shadowBuilder, myLocalState, flags, selectedArea, location);
     }
 
@@ -14635,12 +15862,22 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private final boolean startDragAndDrop(android.content.ClipData r38, android.view.View.DragShadowBuilder r39, java.lang.Object r40, int r41, android.graphics.RectF r42, android.graphics.Point r43) {
+    private final boolean startDragAndDrop(
+            android.content.ClipData r38,
+            android.view.View.DragShadowBuilder r39,
+            java.lang.Object r40,
+            int r41,
+            android.graphics.RectF r42,
+            android.graphics.Point r43) {
         /*
             Method dump skipped, instructions count: 1394
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.View.startDragAndDrop(android.content.ClipData, android.view.View$DragShadowBuilder, java.lang.Object, int, android.graphics.RectF, android.graphics.Point):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.View.startDragAndDrop(android.content.ClipData,"
+                    + " android.view.View$DragShadowBuilder, java.lang.Object, int,"
+                    + " android.graphics.RectF, android.graphics.Point):boolean");
     }
 
     static boolean hasActivityPendingIntents(ClipData data) {
@@ -14735,7 +15972,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public final boolean startMovingTask(float startX, float startY) {
         try {
-            return this.mAttachInfo.mSession.startMovingTask(this.mAttachInfo.mWindow, startX, startY);
+            return this.mAttachInfo.mSession.startMovingTask(
+                    this.mAttachInfo.mWindow, startX, startY);
         } catch (RemoteException e) {
             Log.e(VIEW_LOG_TAG, "Unable to start moving", e);
             return false;
@@ -14764,7 +16002,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (permissions != null) {
             permissions.takeTransient();
         }
-        ContentInfo payload = new ContentInfo.Builder(event.getClipData(), 3).setDragAndDropPermissions(permissions).build();
+        ContentInfo payload =
+                new ContentInfo.Builder(event.getClipData(), 3)
+                        .setDragAndDropPermissions(permissions)
+                        .build();
         ContentInfo remainingPayload = performReceiveContent(payload);
         return remainingPayload != payload;
     }
@@ -14783,9 +16024,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x006b, code lost:
-    
-        return r1;
-     */
+
+       return r1;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -14860,7 +16101,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         L6b:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.View.callDragEventHandler(android.view.DragEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.View.callDragEventHandler(android.view.DragEvent):boolean");
     }
 
     boolean canAcceptDrag() {
@@ -14876,8 +16119,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    public void onCloseSystemDialogs(String reason) {
-    }
+    public void onCloseSystemDialogs(String reason) {}
 
     public void applyDrawableToTransparentRegion(Drawable dr, Region region) {
         Region r = dr.getTransparentRegion();
@@ -14909,9 +16151,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /* JADX INFO: Access modifiers changed from: private */
     public void checkForLongClick(long delay, float x, float y, int classification) {
-        boolean isTooltipAvailable = (this.mViewFlags & 1073741824) == 1073741824 && (this.mSemViewFlags & 2) != 2;
+        boolean isTooltipAvailable =
+                (this.mViewFlags & 1073741824) == 1073741824 && (this.mSemViewFlags & 2) != 2;
         if (ViewRootImpl.DEBUG_TOUCH_EVENT) {
-            Log.i(VIEW_LOG_TAG, "checkForLongClick delay : " + delay + ", x : " + x + ", y : " + y + ", classification : " + classification + ", caller=" + Debug.getCallers(3));
+            Log.i(
+                    VIEW_LOG_TAG,
+                    "checkForLongClick delay : "
+                            + delay
+                            + ", x : "
+                            + x
+                            + ", y : "
+                            + y
+                            + ", classification : "
+                            + classification
+                            + ", caller="
+                            + Debug.getCallers(3));
         }
         if ((this.mViewFlags & 2097152) == 2097152 || isTooltipAvailable) {
             this.mHasPerformedLongPress = false;
@@ -14932,16 +16186,28 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
-    public boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX, int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
+    public boolean overScrollBy(
+            int deltaX,
+            int deltaY,
+            int scrollX,
+            int scrollY,
+            int scrollRangeX,
+            int scrollRangeY,
+            int maxOverScrollX,
+            int maxOverScrollY,
+            boolean isTouchEvent) {
         int maxOverScrollX2;
         int maxOverScrollY2;
         boolean clampedX;
         boolean clampedY;
         int overScrollMode = this.mOverScrollMode;
-        boolean canScrollHorizontal = computeHorizontalScrollRange() > computeHorizontalScrollExtent();
+        boolean canScrollHorizontal =
+                computeHorizontalScrollRange() > computeHorizontalScrollExtent();
         boolean canScrollVertical = computeVerticalScrollRange() > computeVerticalScrollExtent();
-        boolean overScrollHorizontal = overScrollMode == 0 || (overScrollMode == 1 && canScrollHorizontal);
-        boolean overScrollVertical = overScrollMode == 0 || (overScrollMode == 1 && canScrollVertical);
+        boolean overScrollHorizontal =
+                overScrollMode == 0 || (overScrollMode == 1 && canScrollHorizontal);
+        boolean overScrollVertical =
+                overScrollMode == 0 || (overScrollMode == 1 && canScrollVertical);
         int newScrollX = scrollX + deltaX;
         if (overScrollHorizontal) {
             maxOverScrollX2 = maxOverScrollX;
@@ -14980,8 +16246,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return clampedX || clampedY;
     }
 
-    protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
-    }
+    protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {}
 
     public int getOverScrollMode() {
         return this.mOverScrollMode;
@@ -15021,7 +16286,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         return true;
                     }
                 } catch (AbstractMethodError e) {
-                    Log.e(VIEW_LOG_TAG, "ViewParent " + p + " does not implement interface method onStartNestedScroll", e);
+                    Log.e(
+                            VIEW_LOG_TAG,
+                            "ViewParent "
+                                    + p
+                                    + " does not implement interface method onStartNestedScroll",
+                            e);
                 }
                 if (p instanceof View) {
                     View child2 = p;
@@ -15044,7 +16314,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return this.mNestedScrollingParent != null;
     }
 
-    public boolean dispatchNestedScroll(int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int[] offsetInWindow) {
+    public boolean dispatchNestedScroll(
+            int dxConsumed,
+            int dyConsumed,
+            int dxUnconsumed,
+            int dyUnconsumed,
+            int[] offsetInWindow) {
         if (isNestedScrollingEnabled() && this.mNestedScrollingParent != null) {
             if (dxConsumed != 0 || dyConsumed != 0 || dxUnconsumed != 0 || dyUnconsumed != 0) {
                 int startX = 0;
@@ -15054,7 +16329,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     startX = offsetInWindow[0];
                     startY = offsetInWindow[1];
                 }
-                this.mNestedScrollingParent.onNestedScroll(this, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
+                this.mNestedScrollingParent.onNestedScroll(
+                        this, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
                 if (offsetInWindow != null) {
                     getLocationInWindow(offsetInWindow);
                     offsetInWindow[0] = offsetInWindow[0] - startX;
@@ -15123,9 +16399,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (this.mVerticalScrollFactor == 0.0f) {
             TypedValue outValue = new TypedValue();
             if (!this.mContext.getTheme().resolveAttribute(16842829, outValue, true)) {
-                throw new IllegalStateException("Expected theme to define listPreferredItemHeight.");
+                throw new IllegalStateException(
+                        "Expected theme to define listPreferredItemHeight.");
             }
-            this.mVerticalScrollFactor = outValue.getDimension(this.mContext.getResources().getDisplayMetrics());
+            this.mVerticalScrollFactor =
+                    outValue.getDimension(this.mContext.getResources().getDisplayMetrics());
         }
         return this.mVerticalScrollFactor;
     }
@@ -15139,7 +16417,18 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return getVerticalScrollFactor();
     }
 
-    @ViewDebug.ExportedProperty(category = "text", mapping = {@ViewDebug.IntToString(from = 0, to = "INHERIT"), @ViewDebug.IntToString(from = 1, to = "FIRST_STRONG"), @ViewDebug.IntToString(from = 2, to = "ANY_RTL"), @ViewDebug.IntToString(from = 3, to = "LTR"), @ViewDebug.IntToString(from = 4, to = "RTL"), @ViewDebug.IntToString(from = 5, to = "LOCALE"), @ViewDebug.IntToString(from = 6, to = "FIRST_STRONG_LTR"), @ViewDebug.IntToString(from = 7, to = "FIRST_STRONG_RTL")})
+    @ViewDebug.ExportedProperty(
+            category = "text",
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "INHERIT"),
+                @ViewDebug.IntToString(from = 1, to = "FIRST_STRONG"),
+                @ViewDebug.IntToString(from = 2, to = "ANY_RTL"),
+                @ViewDebug.IntToString(from = 3, to = "LTR"),
+                @ViewDebug.IntToString(from = 4, to = "RTL"),
+                @ViewDebug.IntToString(from = 5, to = "LOCALE"),
+                @ViewDebug.IntToString(from = 6, to = "FIRST_STRONG_LTR"),
+                @ViewDebug.IntToString(from = 7, to = "FIRST_STRONG_RTL")
+            })
     public int getRawTextDirection() {
         return (this.mPrivateFlags2 & 448) >> 6;
     }
@@ -15156,7 +16445,18 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    @ViewDebug.ExportedProperty(category = "text", mapping = {@ViewDebug.IntToString(from = 0, to = "INHERIT"), @ViewDebug.IntToString(from = 1, to = "FIRST_STRONG"), @ViewDebug.IntToString(from = 2, to = "ANY_RTL"), @ViewDebug.IntToString(from = 3, to = "LTR"), @ViewDebug.IntToString(from = 4, to = "RTL"), @ViewDebug.IntToString(from = 5, to = "LOCALE"), @ViewDebug.IntToString(from = 6, to = "FIRST_STRONG_LTR"), @ViewDebug.IntToString(from = 7, to = "FIRST_STRONG_RTL")})
+    @ViewDebug.ExportedProperty(
+            category = "text",
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "INHERIT"),
+                @ViewDebug.IntToString(from = 1, to = "FIRST_STRONG"),
+                @ViewDebug.IntToString(from = 2, to = "ANY_RTL"),
+                @ViewDebug.IntToString(from = 3, to = "LTR"),
+                @ViewDebug.IntToString(from = 4, to = "RTL"),
+                @ViewDebug.IntToString(from = 5, to = "LOCALE"),
+                @ViewDebug.IntToString(from = 6, to = "FIRST_STRONG_LTR"),
+                @ViewDebug.IntToString(from = 7, to = "FIRST_STRONG_RTL")
+            })
     public int getTextDirection() {
         return (this.mPrivateFlags2 & 7168) >> 10;
     }
@@ -15184,7 +16484,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                                 parentResolvedDirection = this.mParent.getTextDirection();
                             }
                         } catch (AbstractMethodError e) {
-                            Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e);
+                            Log.e(
+                                    VIEW_LOG_TAG,
+                                    this.mParent.getClass().getSimpleName()
+                                            + " does not fully implement ViewParent",
+                                    e);
                             parentResolvedDirection = 3;
                         }
                         switch (parentResolvedDirection) {
@@ -15202,7 +16506,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                                 break;
                         }
                     } catch (AbstractMethodError e2) {
-                        Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e2);
+                        Log.e(
+                                VIEW_LOG_TAG,
+                                this.mParent.getClass().getSimpleName()
+                                        + " does not fully implement ViewParent",
+                                e2);
                         this.mPrivateFlags2 |= 1536;
                         return true;
                     }
@@ -15233,7 +16541,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     try {
                         return this.mParent.canResolveTextDirection();
                     } catch (AbstractMethodError e) {
-                        Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e);
+                        Log.e(
+                                VIEW_LOG_TAG,
+                                this.mParent.getClass().getSimpleName()
+                                        + " does not fully implement ViewParent",
+                                e);
                         return false;
                     }
                 }
@@ -15256,7 +16568,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return (this.mPrivateFlags2 & 512) == 512;
     }
 
-    @ViewDebug.ExportedProperty(category = "text", mapping = {@ViewDebug.IntToString(from = 0, to = "INHERIT"), @ViewDebug.IntToString(from = 1, to = "GRAVITY"), @ViewDebug.IntToString(from = 2, to = "TEXT_START"), @ViewDebug.IntToString(from = 3, to = "TEXT_END"), @ViewDebug.IntToString(from = 4, to = "CENTER"), @ViewDebug.IntToString(from = 5, to = "VIEW_START"), @ViewDebug.IntToString(from = 6, to = "VIEW_END")})
+    @ViewDebug.ExportedProperty(
+            category = "text",
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "INHERIT"),
+                @ViewDebug.IntToString(from = 1, to = "GRAVITY"),
+                @ViewDebug.IntToString(from = 2, to = "TEXT_START"),
+                @ViewDebug.IntToString(from = 3, to = "TEXT_END"),
+                @ViewDebug.IntToString(from = 4, to = "CENTER"),
+                @ViewDebug.IntToString(from = 5, to = "VIEW_START"),
+                @ViewDebug.IntToString(from = 6, to = "VIEW_END")
+            })
     public int getRawTextAlignment() {
         return (this.mPrivateFlags2 & PFLAG2_TEXT_ALIGNMENT_MASK) >> 13;
     }
@@ -15273,7 +16595,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    @ViewDebug.ExportedProperty(category = "text", mapping = {@ViewDebug.IntToString(from = 0, to = "INHERIT"), @ViewDebug.IntToString(from = 1, to = "GRAVITY"), @ViewDebug.IntToString(from = 2, to = "TEXT_START"), @ViewDebug.IntToString(from = 3, to = "TEXT_END"), @ViewDebug.IntToString(from = 4, to = "CENTER"), @ViewDebug.IntToString(from = 5, to = "VIEW_START"), @ViewDebug.IntToString(from = 6, to = "VIEW_END")})
+    @ViewDebug.ExportedProperty(
+            category = "text",
+            mapping = {
+                @ViewDebug.IntToString(from = 0, to = "INHERIT"),
+                @ViewDebug.IntToString(from = 1, to = "GRAVITY"),
+                @ViewDebug.IntToString(from = 2, to = "TEXT_START"),
+                @ViewDebug.IntToString(from = 3, to = "TEXT_END"),
+                @ViewDebug.IntToString(from = 4, to = "CENTER"),
+                @ViewDebug.IntToString(from = 5, to = "VIEW_START"),
+                @ViewDebug.IntToString(from = 6, to = "VIEW_END")
+            })
     public int getTextAlignment() {
         return (this.mPrivateFlags2 & PFLAG2_TEXT_ALIGNMENT_RESOLVED_MASK) >> 17;
     }
@@ -15297,7 +16629,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         try {
                             parentResolvedTextAlignment = this.mParent.getTextAlignment();
                         } catch (AbstractMethodError e) {
-                            Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e);
+                            Log.e(
+                                    VIEW_LOG_TAG,
+                                    this.mParent.getClass().getSimpleName()
+                                            + " does not fully implement ViewParent",
+                                    e);
                             parentResolvedTextAlignment = 1;
                         }
                         switch (parentResolvedTextAlignment) {
@@ -15314,7 +16650,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                                 break;
                         }
                     } catch (AbstractMethodError e2) {
-                        Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e2);
+                        Log.e(
+                                VIEW_LOG_TAG,
+                                this.mParent.getClass().getSimpleName()
+                                        + " does not fully implement ViewParent",
+                                e2);
                         this.mPrivateFlags2 |= 196608;
                         return true;
                     }
@@ -15344,7 +16684,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     try {
                         return this.mParent.canResolveTextAlignment();
                     } catch (AbstractMethodError e) {
-                        Log.e(VIEW_LOG_TAG, this.mParent.getClass().getSimpleName() + " does not fully implement ViewParent", e);
+                        Log.e(
+                                VIEW_LOG_TAG,
+                                this.mParent.getClass().getSimpleName()
+                                        + " does not fully implement ViewParent",
+                                e);
                         return false;
                     }
                 }
@@ -15392,7 +16736,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void findNamedViews(Map<String, View> namedElements) {
         String transitionName;
-        if ((getVisibility() == 0 || this.mGhostView != null) && (transitionName = getTransitionName()) != null) {
+        if ((getVisibility() == 0 || this.mGhostView != null)
+                && (transitionName = getTransitionName()) != null) {
             namedElements.put(transitionName, this);
         }
     }
@@ -15410,7 +16755,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             }
             if (this.mMousePointerIcon != null && this.mMousePointerIcon.getType() == -1) {
                 this.mMousePointerIcon.setType(20000);
-            } else if ((this.mViewFlags & 1073741824) == 1073741824 && (this.mViewFlags & 32) == 0 && isSPenHoveringSettingsEnabled()) {
+            } else if ((this.mViewFlags & 1073741824) == 1073741824
+                    && (this.mViewFlags & 32) == 0
+                    && isSPenHoveringSettingsEnabled()) {
                 return PointerIcon.getSystemIcon(this.mContext, 20010);
             }
         } else if (toolType == 3) {
@@ -15438,9 +16785,25 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void semSetPointerIcon(int toolType, PointerIcon pointerIcon) {
         if (pointerIcon != null) {
-            Log.i("PointerIcon", "[View]semSetPointerIcon = " + pointerIcon.getType() + ", toolType = " + toolType + ", view = " + this + ", callingPid = " + Binder.getCallingPid());
+            Log.i(
+                    "PointerIcon",
+                    "[View]semSetPointerIcon = "
+                            + pointerIcon.getType()
+                            + ", toolType = "
+                            + toolType
+                            + ", view = "
+                            + this
+                            + ", callingPid = "
+                            + Binder.getCallingPid());
         } else {
-            Log.i("PointerIcon", "[View]semSetPointerIcon is NULL , toolType = " + toolType + ", view = " + this + ", callingPid = " + Binder.getCallingPid());
+            Log.i(
+                    "PointerIcon",
+                    "[View]semSetPointerIcon is NULL , toolType = "
+                            + toolType
+                            + ", view = "
+                            + this
+                            + ", callingPid = "
+                            + Binder.getCallingPid());
         }
         if (toolType == 2) {
             if (pointerIcon != null && pointerIcon.getType() == -1) {
@@ -15487,8 +16850,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    public void onPointerCaptureChange(boolean hasCapture) {
-    }
+    public void onPointerCaptureChange(boolean hasCapture) {}
 
     public void dispatchPointerCaptureChanged(boolean hasCapture) {
         onPointerCaptureChange(hasCapture);
@@ -15510,8 +16872,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         public static final int UNSPECIFIED = 0;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface MeasureSpecMode {
-        }
+        public @interface MeasureSpecMode {}
 
         public static int makeMeasureSpec(int size, int mode) {
             return (1073741823 & size) | ((-1073741824) & mode);
@@ -15537,7 +16898,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             }
             int size2 = size + delta;
             if (size2 < 0) {
-                Log.e(View.VIEW_LOG_TAG, "MeasureSpec.adjust: new size would be negative! (" + size2 + ") spec: " + toString(measureSpec) + " delta: " + delta);
+                Log.e(
+                        View.VIEW_LOG_TAG,
+                        "MeasureSpec.adjust: new size would be negative! ("
+                                + size2
+                                + ") spec: "
+                                + toString(measureSpec)
+                                + " delta: "
+                                + delta);
                 size2 = 0;
             }
             return makeMeasureSpec(size2, mode);
@@ -15568,12 +16936,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         private float mX;
         private float mY;
 
-        private CheckForLongPress() {
-        }
+        private CheckForLongPress() {}
 
         @Override // java.lang.Runnable
         public void run() {
-            if (this.mOriginalPressedState == View.this.isPressed() && View.this.mParent != null && this.mOriginalWindowAttachCount == View.this.mWindowAttachCount) {
+            if (this.mOriginalPressedState == View.this.isPressed()
+                    && View.this.mParent != null
+                    && this.mOriginalWindowAttachCount == View.this.mWindowAttachCount) {
                 View.this.recordGestureClassification(this.mClassification);
                 if (View.this.performLongClick(this.mX, this.mY)) {
                     View.this.mHasPerformedLongPress = true;
@@ -15603,21 +16972,20 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         public float x;
         public float y;
 
-        private CheckForTap() {
-        }
+        private CheckForTap() {}
 
         @Override // java.lang.Runnable
         public void run() {
             View.this.mPrivateFlags &= -33554433;
             View.this.setPressed(true, this.x, this.y);
-            long delay = ViewConfiguration.getLongPressTimeout() - ViewConfiguration.getTapTimeout();
+            long delay =
+                    ViewConfiguration.getLongPressTimeout() - ViewConfiguration.getTapTimeout();
             View.this.checkForLongClick(delay, this.x, this.y, 3);
         }
     }
 
     private final class PerformClick implements Runnable {
-        private PerformClick() {
-        }
+        private PerformClick() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -15650,8 +17018,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return this.mTransitionName;
     }
 
-    public void requestKeyboardShortcuts(List<KeyboardShortcutGroup> data, int deviceId) {
-    }
+    public void requestKeyboardShortcuts(List<KeyboardShortcutGroup> data, int deviceId) {}
 
     public interface OnLongClickListener {
         boolean onLongClick(View view);
@@ -15662,8 +17029,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     private final class UnsetPressedState implements Runnable {
-        private UnsetPressedState() {
-        }
+        private UnsetPressedState() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -15688,23 +17054,25 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public static class BaseSavedState extends AbsSavedState {
         static final int AUTOFILL_ID = 4;
-        public static final Parcelable.Creator<BaseSavedState> CREATOR = new Parcelable.ClassLoaderCreator<BaseSavedState>() { // from class: android.view.View.BaseSavedState.1
-            @Override // android.os.Parcelable.Creator
-            public BaseSavedState createFromParcel(Parcel in) {
-                return new BaseSavedState(in);
-            }
+        public static final Parcelable.Creator<BaseSavedState> CREATOR =
+                new Parcelable.ClassLoaderCreator<
+                        BaseSavedState>() { // from class: android.view.View.BaseSavedState.1
+                    @Override // android.os.Parcelable.Creator
+                    public BaseSavedState createFromParcel(Parcel in) {
+                        return new BaseSavedState(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.ClassLoaderCreator
-            public BaseSavedState createFromParcel(Parcel in, ClassLoader loader) {
-                return new BaseSavedState(in, loader);
-            }
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.ClassLoaderCreator
+                    public BaseSavedState createFromParcel(Parcel in, ClassLoader loader) {
+                        return new BaseSavedState(in, loader);
+                    }
 
-            @Override // android.os.Parcelable.Creator
-            public BaseSavedState[] newArray(int size) {
-                return new BaseSavedState[size];
-            }
-        };
+                    @Override // android.os.Parcelable.Creator
+                    public BaseSavedState[] newArray(int size) {
+                        return new BaseSavedState[size];
+                    }
+                };
         static final int IS_AUTOFILLED = 2;
         static final int START_ACTIVITY_REQUESTED_WHO_SAVED = 1;
         int mAutofillViewId;
@@ -15805,7 +17173,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         final Rect mVisibleInsets = new Rect();
         final Rect mStableInsets = new Rect();
         final Rect mCaptionInsets = new Rect();
-        final ViewTreeObserver.InternalInsetsInfo mGivenInternalInsets = new ViewTreeObserver.InternalInsetsInfo();
+        final ViewTreeObserver.InternalInsetsInfo mGivenInternalInsets =
+                new ViewTreeObserver.InternalInsetsInfo();
         final ArrayList<View> mScrollContainers = new ArrayList<>();
         final KeyEvent.DispatcherState mKeyDispatchState = new KeyEvent.DispatcherState();
         final int[] mTransparentLocation = new int[2];
@@ -15834,15 +17203,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
         static class InvalidateInfo {
             private static final int POOL_LIMIT = 10;
-            private static final Pools.SynchronizedPool<InvalidateInfo> sPool = new Pools.SynchronizedPool<>(10);
+            private static final Pools.SynchronizedPool<InvalidateInfo> sPool =
+                    new Pools.SynchronizedPool<>(10);
             int bottom;
             int left;
             int right;
             View target;
             int top;
 
-            InvalidateInfo() {
-            }
+            InvalidateInfo() {}
 
             public static InvalidateInfo obtain() {
                 InvalidateInfo instance = sPool.acquire();
@@ -15855,7 +17224,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             }
         }
 
-        AttachInfo(IWindowSession session, IWindow window, Display display, ViewRootImpl viewRootImpl, Handler handler, Callbacks effectPlayer, Context context) {
+        AttachInfo(
+                IWindowSession session,
+                IWindow window,
+                Display display,
+                ViewRootImpl viewRootImpl,
+                Handler handler,
+                Callbacks effectPlayer,
+                Context context) {
             this.mSession = session;
             this.mWindow = window;
             this.mWindowToken = window.asBinder();
@@ -15883,7 +17259,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 this.mViewRootImpl.removeSensitiveContentAppProtection();
             }
             if (this.mSensitiveViewsCount < 0) {
-                Log.wtf(View.VIEW_LOG_TAG, "mSensitiveViewsCount is negative" + this.mSensitiveViewsCount);
+                Log.wtf(
+                        View.VIEW_LOG_TAG,
+                        "mSensitiveViewsCount is negative" + this.mSensitiveViewsCount);
                 this.mSensitiveViewsCount = 0;
             }
         }
@@ -15892,7 +17270,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (this.mContentCaptureManager != null) {
                 return this.mContentCaptureManager;
             }
-            this.mContentCaptureManager = (ContentCaptureManager) context.getSystemService(ContentCaptureManager.class);
+            this.mContentCaptureManager =
+                    (ContentCaptureManager) context.getSystemService(ContentCaptureManager.class);
             return this.mContentCaptureManager;
         }
 
@@ -15900,12 +17279,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (this.mContentCaptureManager == null) {
                 return;
             }
-            ArrayList<Object> events = ensureEvents(this.mContentCaptureManager.getMainContentCaptureSession());
+            ArrayList<Object> events =
+                    ensureEvents(this.mContentCaptureManager.getMainContentCaptureSession());
             events.add(insets);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public void delayNotifyContentCaptureEvent(ContentCaptureSession session, View view, boolean appeared) {
+        public void delayNotifyContentCaptureEvent(
+                ContentCaptureSession session, View view, boolean appeared) {
             ArrayList<Object> events = ensureEvents(session);
             events.add(appeared ? view : view.getAutofillId());
         }
@@ -15946,7 +17327,10 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             writer.println(innerPrefix + "mHasWindowFocus=" + this.mHasWindowFocus);
             writer.println(innerPrefix + "mWindowVisibility=" + this.mWindowVisibility);
             writer.println(innerPrefix + "mInTouchMode=" + this.mInTouchMode);
-            writer.println(innerPrefix + "mUnbufferedDispatchRequested=" + this.mUnbufferedDispatchRequested);
+            writer.println(
+                    innerPrefix
+                            + "mUnbufferedDispatchRequested="
+                            + this.mUnbufferedDispatchRequested);
         }
     }
 
@@ -15978,7 +17362,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         public int scrollBarFadeDuration = ViewConfiguration.getScrollBarFadeDuration();
         public final Paint paint = new Paint();
         public final Matrix matrix = new Matrix();
-        public Shader shader = new LinearGradient(0.0f, 0.0f, 0.0f, 1.0f, -16777216, 0, Shader.TileMode.CLAMP);
+        public Shader shader =
+                new LinearGradient(0.0f, 0.0f, 0.0f, 1.0f, -16777216, 0, Shader.TileMode.CLAMP);
 
         public ScrollabilityCache(ViewConfiguration configuration, View host) {
             this.fadingEdgeLength = configuration.getScaledFadingEdgeLength();
@@ -15993,11 +17378,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (color != this.mLastColor) {
                 this.mLastColor = color;
                 if (color != 0) {
-                    this.shader = new LinearGradient(0.0f, 0.0f, 0.0f, 1.0f, color | (-16777216), color & 16777215, Shader.TileMode.CLAMP);
+                    this.shader =
+                            new LinearGradient(
+                                    0.0f,
+                                    0.0f,
+                                    0.0f,
+                                    1.0f,
+                                    color | (-16777216),
+                                    color & 16777215,
+                                    Shader.TileMode.CLAMP);
                     this.paint.setShader(this.shader);
                     this.paint.setXfermode(null);
                 } else {
-                    this.shader = new LinearGradient(0.0f, 0.0f, 0.0f, 1.0f, -16777216, 0, Shader.TileMode.CLAMP);
+                    this.shader =
+                            new LinearGradient(
+                                    0.0f, 0.0f, 0.0f, 1.0f, -16777216, 0, Shader.TileMode.CLAMP);
                     this.paint.setShader(this.shader);
                     this.paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
                 }
@@ -16012,7 +17407,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                 Interpolator interpolator = this.scrollBarInterpolator;
                 int framesCount = 0 + 1;
                 interpolator.setKeyFrame(0, nextFrame, OPAQUE);
-                interpolator.setKeyFrame(framesCount, nextFrame + this.scrollBarFadeDuration, TRANSPARENT);
+                interpolator.setKeyFrame(
+                        framesCount, nextFrame + this.scrollBarFadeDuration, TRANSPARENT);
                 this.state = 2;
                 this.host.invalidate(true);
             }
@@ -16023,20 +17419,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         private AccessibilityEvent mAccessibilityEvent;
         public volatile boolean mIsPending;
 
-        private SendAccessibilityEventThrottle() {
-        }
+        private SendAccessibilityEventThrottle() {}
 
         public void post(AccessibilityEvent accessibilityEvent) {
             updateWithAccessibilityEvent(accessibilityEvent);
             if (!this.mIsPending) {
                 this.mIsPending = true;
-                View.this.postDelayed(this, ViewConfiguration.getSendRecurringAccessibilityEventsInterval());
+                View.this.postDelayed(
+                        this, ViewConfiguration.getSendRecurringAccessibilityEventsInterval());
             }
         }
 
         @Override // java.lang.Runnable
         public void run() {
-            if (AccessibilityManager.getInstance(View.this.mContext).isEnabled() && View.this.isShown()) {
+            if (AccessibilityManager.getInstance(View.this.mContext).isEnabled()
+                    && View.this.isShown()) {
                 View.this.requestParentSendAccessibilityEvent(this.mAccessibilityEvent);
             }
             reset();
@@ -16114,11 +17511,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             host.onInitializeAccessibilityNodeInfoInternal(info);
         }
 
-        public void addExtraDataToAccessibilityNodeInfo(View host, AccessibilityNodeInfo info, String extraDataKey, Bundle arguments) {
+        public void addExtraDataToAccessibilityNodeInfo(
+                View host, AccessibilityNodeInfo info, String extraDataKey, Bundle arguments) {
             host.addExtraDataToAccessibilityNodeInfo(info, extraDataKey, arguments);
         }
 
-        public boolean onRequestSendAccessibilityEvent(ViewGroup host, View child, AccessibilityEvent event) {
+        public boolean onRequestSendAccessibilityEvent(
+                ViewGroup host, View child, AccessibilityEvent event) {
             return host.onRequestSendAccessibilityEventInternal(child, event);
         }
 
@@ -16134,8 +17533,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private static class MatchIdPredicate implements Predicate<View> {
         public int mId;
 
-        private MatchIdPredicate() {
-        }
+        private MatchIdPredicate() {}
 
         @Override // java.util.function.Predicate
         public boolean test(View view) {
@@ -16146,8 +17544,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private static class MatchLabelForPredicate implements Predicate<View> {
         private int mLabeledId;
 
-        private MatchLabelForPredicate() {
-        }
+        private MatchLabelForPredicate() {}
 
         @Override // java.util.function.Predicate
         public boolean test(View view) {
@@ -16158,8 +17555,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     private static class SensitiveAutofillHintsHelper {
         private static final ArraySet<String> SENSITIVE_CONTENT_AUTOFILL_HINTS = new ArraySet<>();
 
-        private SensitiveAutofillHintsHelper() {
-        }
+        private SensitiveAutofillHintsHelper() {}
 
         static {
             SENSITIVE_CONTENT_AUTOFILL_HINTS.add(View.AUTOFILL_HINT_USERNAME);
@@ -16203,21 +17599,25 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         getListenerInfo().mScrollCaptureCallback = callback;
     }
 
-    public ScrollCaptureCallback createScrollCaptureCallbackInternal(Rect localVisibleRect, Point windowOffset) {
+    public ScrollCaptureCallback createScrollCaptureCallbackInternal(
+            Rect localVisibleRect, Point windowOffset) {
         if (this.mAttachInfo == null) {
             return null;
         }
         if (this.mAttachInfo.mScrollCaptureInternal == null) {
             this.mAttachInfo.mScrollCaptureInternal = new ScrollCaptureInternal();
         }
-        return this.mAttachInfo.mScrollCaptureInternal.requestCallback(this, localVisibleRect, windowOffset);
+        return this.mAttachInfo.mScrollCaptureInternal.requestCallback(
+                this, localVisibleRect, windowOffset);
     }
 
-    public void dispatchScrollCaptureSearch(Rect localVisibleRect, Point windowOffset, Consumer<ScrollCaptureTarget> targets) {
+    public void dispatchScrollCaptureSearch(
+            Rect localVisibleRect, Point windowOffset, Consumer<ScrollCaptureTarget> targets) {
         onScrollCaptureSearch(localVisibleRect, windowOffset, targets);
     }
 
-    public void onScrollCaptureSearch(Rect localVisibleRect, Point windowOffset, Consumer<ScrollCaptureTarget> targets) {
+    public void onScrollCaptureSearch(
+            Rect localVisibleRect, Point windowOffset, Consumer<ScrollCaptureTarget> targets) {
         int hint = getScrollCaptureHint();
         if ((hint & 1) != 0) {
             return;
@@ -16229,7 +17629,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (!rectIsVisible) {
             return;
         }
-        ScrollCaptureCallback callback = this.mListenerInfo == null ? null : this.mListenerInfo.mScrollCaptureCallback;
+        ScrollCaptureCallback callback =
+                this.mListenerInfo == null ? null : this.mListenerInfo.mScrollCaptureCallback;
         if (callback == null) {
             callback = createScrollCaptureCallbackInternal(localVisibleRect, windowOffset);
         }
@@ -16252,7 +17653,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                     } else if (field.getType().equals(int[].class)) {
                         int[] values = (int[]) field.get(null);
                         for (int i = 0; i < values.length; i++) {
-                            dumpFlag(found, field.getName() + NavigationBarInflaterView.SIZE_MOD_START + i + NavigationBarInflaterView.SIZE_MOD_END, values[i]);
+                            dumpFlag(
+                                    found,
+                                    field.getName()
+                                            + NavigationBarInflaterView.SIZE_MOD_START
+                                            + i
+                                            + NavigationBarInflaterView.SIZE_MOD_END,
+                                    values[i]);
                         }
                     }
                 }
@@ -16291,7 +17698,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         } else {
             stream.addProperty("id", this.mID);
         }
-        stream.addProperty("misc:transformation.alpha", this.mTransformationInfo != null ? this.mTransformationInfo.mAlpha : 0.0f);
+        stream.addProperty(
+                "misc:transformation.alpha",
+                this.mTransformationInfo != null ? this.mTransformationInfo.mAlpha : 0.0f);
         stream.addProperty("misc:transitionName", getTransitionName());
         stream.addProperty("layout:left", this.mLeft);
         stream.addProperty("layout:right", this.mRight);
@@ -16334,7 +17743,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         stream.addProperty("drawing:scaleY", getScaleY());
         stream.addProperty("drawing:pivotX", getPivotX());
         stream.addProperty("drawing:pivotY", getPivotY());
-        stream.addProperty("drawing:clipBounds", this.mClipBounds == null ? null : this.mClipBounds.toString());
+        stream.addProperty(
+                "drawing:clipBounds",
+                this.mClipBounds == null ? null : this.mClipBounds.toString());
         stream.addProperty("drawing:opaque", isOpaque());
         stream.addProperty("drawing:alpha", getAlpha());
         stream.addProperty("drawing:transitionAlpha", getTransitionAlpha());
@@ -16379,9 +17790,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         stream.addProperty("text:textDirection", getTextDirection());
         stream.addProperty("text:textAlignment", getTextAlignment());
         CharSequence contentDescription = getContentDescription();
-        stream.addUserProperty("accessibility:contentDescription", contentDescription == null ? "" : contentDescription.toString());
+        stream.addUserProperty(
+                "accessibility:contentDescription",
+                contentDescription == null ? "" : contentDescription.toString());
         stream.addProperty("accessibility:labelFor", getLabelFor());
-        stream.addProperty("accessibility:importantForAccessibility", getImportantForAccessibility());
+        stream.addProperty(
+                "accessibility:importantForAccessibility", getImportantForAccessibility());
     }
 
     boolean shouldDrawRoundScrollbar() {
@@ -16481,9 +17895,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:8:0x001d, code lost:
-    
-        return true;
-     */
+
+       return true;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -16521,7 +17935,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             r0 = 0
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.View.setSemHoverPopupWindowSettings(int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.View.setSemHoverPopupWindowSettings(int):boolean");
     }
 
     protected boolean isHoveringUIEnabled() {
@@ -16555,19 +17971,22 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         setFlags(1073741824, 1073741824);
         if (this.mTooltipInfo == null) {
             this.mTooltipInfo = new TooltipInfo();
-            this.mTooltipInfo.mShowTooltipRunnable = new Runnable() { // from class: android.view.View$$ExternalSyntheticLambda13
-                @Override // java.lang.Runnable
-                public final void run() {
-                    View.this.showHoverTooltip();
-                }
-            };
-            this.mTooltipInfo.mHideTooltipRunnable = new Runnable() { // from class: android.view.View$$ExternalSyntheticLambda14
-                @Override // java.lang.Runnable
-                public final void run() {
-                    View.this.hideTooltip();
-                }
-            };
-            this.mTooltipInfo.mHoverSlop = ViewConfiguration.get(this.mContext).getScaledHoverSlop();
+            this.mTooltipInfo.mShowTooltipRunnable =
+                    new Runnable() { // from class: android.view.View$$ExternalSyntheticLambda13
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            View.this.showHoverTooltip();
+                        }
+                    };
+            this.mTooltipInfo.mHideTooltipRunnable =
+                    new Runnable() { // from class: android.view.View$$ExternalSyntheticLambda14
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            View.this.hideTooltip();
+                        }
+                    };
+            this.mTooltipInfo.mHoverSlop =
+                    ViewConfiguration.get(this.mContext).getScaledHoverSlop();
             this.mTooltipInfo.clearAnchorPos();
         }
         this.mTooltipInfo.mTooltipText = tooltipText;
@@ -16632,7 +18051,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (this.mAttachInfo == null || this.mTooltipInfo == null) {
             return false;
         }
-        if ((fromLongClick && (this.mViewFlags & 32) != 0) || TextUtils.isEmpty(this.mTooltipInfo.mTooltipText)) {
+        if ((fromLongClick && (this.mViewFlags & 32) != 0)
+                || TextUtils.isEmpty(this.mTooltipInfo.mTooltipText)) {
             return false;
         }
         hideTooltip();
@@ -16694,17 +18114,22 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         if (this.mTooltipInfo == null) {
             return false;
         }
-        boolean isDeviceDefault = this.mAttachInfo != null && this.mAttachInfo.mViewRootImpl.mIsDeviceDefault;
+        boolean isDeviceDefault =
+                this.mAttachInfo != null && this.mAttachInfo.mViewRootImpl.mIsDeviceDefault;
         if (isDeviceDefault && event.isFromSource(16386) && !isSPenHoveringSettingsEnabled()) {
             return false;
         }
         switch (event.getAction()) {
             case 7:
-                if ((this.mViewFlags & 1073741824) == 1073741824 && (!isDeviceDefault || (this.mViewFlags & 32) == 0)) {
-                    if (!this.mTooltipInfo.mTooltipFromLongClick && this.mTooltipInfo.updateAnchorPos(event)) {
+                if ((this.mViewFlags & 1073741824) == 1073741824
+                        && (!isDeviceDefault || (this.mViewFlags & 32) == 0)) {
+                    if (!this.mTooltipInfo.mTooltipFromLongClick
+                            && this.mTooltipInfo.updateAnchorPos(event)) {
                         if (this.mTooltipInfo.mTooltipPopup == null) {
                             removeCallbacks(this.mTooltipInfo.mShowTooltipRunnable);
-                            postDelayed(this.mTooltipInfo.mShowTooltipRunnable, ViewConfiguration.getHoverTooltipShowTimeout());
+                            postDelayed(
+                                    this.mTooltipInfo.mShowTooltipRunnable,
+                                    ViewConfiguration.getHoverTooltipShowTimeout());
                         }
                         if ((getWindowSystemUiVisibility() & 1) == 1) {
                             timeout = ViewConfiguration.getHoverTooltipHideShortTimeout();
@@ -16747,7 +18172,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             return;
         }
         removeCallbacks(this.mTooltipInfo.mHideTooltipRunnable);
-        postDelayed(this.mTooltipInfo.mHideTooltipRunnable, ViewConfiguration.getLongPressTooltipHideTimeout());
+        postDelayed(
+                this.mTooltipInfo.mHideTooltipRunnable,
+                ViewConfiguration.getLongPressTooltipHideTimeout());
     }
 
     private int getFocusableAttribute(TypedArray attributes) {
@@ -16782,7 +18209,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     boolean onUnhandledKeyEvent(KeyEvent event) {
         if (this.mListenerInfo != null && this.mListenerInfo.mUnhandledKeyListeners != null) {
             for (int i = this.mListenerInfo.mUnhandledKeyListeners.size() - 1; i >= 0; i--) {
-                if (((OnUnhandledKeyEventListener) this.mListenerInfo.mUnhandledKeyListeners.get(i)).onUnhandledKeyEvent(this, event)) {
+                if (((OnUnhandledKeyEventListener) this.mListenerInfo.mUnhandledKeyListeners.get(i))
+                        .onUnhandledKeyEvent(this, event)) {
                     return true;
                 }
             }
@@ -16792,7 +18220,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     boolean hasUnhandledKeyListener() {
-        return (this.mListenerInfo == null || this.mListenerInfo.mUnhandledKeyListeners == null || this.mListenerInfo.mUnhandledKeyListeners.isEmpty()) ? false : true;
+        return (this.mListenerInfo == null
+                        || this.mListenerInfo.mUnhandledKeyListeners == null
+                        || this.mListenerInfo.mUnhandledKeyListeners.isEmpty())
+                ? false
+                : true;
     }
 
     public void addOnUnhandledKeyEventListener(OnUnhandledKeyEventListener listener) {
@@ -16808,7 +18240,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public void removeOnUnhandledKeyEventListener(OnUnhandledKeyEventListener listener) {
-        if (this.mListenerInfo != null && this.mListenerInfo.mUnhandledKeyListeners != null && !this.mListenerInfo.mUnhandledKeyListeners.isEmpty()) {
+        if (this.mListenerInfo != null
+                && this.mListenerInfo.mUnhandledKeyListeners != null
+                && !this.mListenerInfo.mUnhandledKeyListeners.isEmpty()) {
             this.mListenerInfo.mUnhandledKeyListeners.remove(listener);
             if (this.mListenerInfo.mUnhandledKeyListeners.isEmpty()) {
                 this.mListenerInfo.mUnhandledKeyListeners = null;
@@ -16840,7 +18274,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     private boolean isSPenHoveringSettingsEnabled() {
-        return Settings.System.getIntForUser(this.mContext.getContentResolver(), Settings.System.SEM_PEN_HOVERING, 0, -3) == 1;
+        return Settings.System.getIntForUser(
+                        this.mContext.getContentResolver(), Settings.System.SEM_PEN_HOVERING, 0, -3)
+                == 1;
     }
 
     public boolean semIsDesktopMode() {
@@ -16866,7 +18302,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public boolean isStylusHandwritingAvailable() {
-        return ((InputMethodManager) getContext().getSystemService(InputMethodManager.class)).isStylusHandwritingAvailable();
+        return ((InputMethodManager) getContext().getSystemService(InputMethodManager.class))
+                .isStylusHandwritingAvailable();
     }
 
     private void setTraversalTracingEnabled(boolean enabled) {
@@ -16899,11 +18336,13 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return (this.mPrivateFlags4 & 524288) == 524288;
     }
 
-    public void onCreateViewTranslationRequest(int[] supportedFormats, Consumer<ViewTranslationRequest> requestsCollector) {
-    }
+    public void onCreateViewTranslationRequest(
+            int[] supportedFormats, Consumer<ViewTranslationRequest> requestsCollector) {}
 
-    public void onCreateVirtualViewTranslationRequests(long[] virtualIds, int[] supportedFormats, Consumer<ViewTranslationRequest> requestsCollector) {
-    }
+    public void onCreateVirtualViewTranslationRequests(
+            long[] virtualIds,
+            int[] supportedFormats,
+            Consumer<ViewTranslationRequest> requestsCollector) {}
 
     public ViewTranslationCallback getViewTranslationCallback() {
         return this.mViewTranslationCallback;
@@ -16929,21 +18368,29 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         this.mViewTranslationResponse = null;
     }
 
-    public void onVirtualViewTranslationResponses(LongSparseArray<ViewTranslationResponse> response) {
-    }
+    public void onVirtualViewTranslationResponses(
+            LongSparseArray<ViewTranslationResponse> response) {}
 
-    public void dispatchCreateViewTranslationRequest(Map<AutofillId, long[]> viewIds, int[] supportedFormats, TranslationCapability capability, final List<ViewTranslationRequest> requests) {
+    public void dispatchCreateViewTranslationRequest(
+            Map<AutofillId, long[]> viewIds,
+            int[] supportedFormats,
+            TranslationCapability capability,
+            final List<ViewTranslationRequest> requests) {
         AutofillId autofillId = getAutofillId();
         if (viewIds.containsKey(autofillId)) {
             if (viewIds.get(autofillId) == null) {
-                onCreateViewTranslationRequest(supportedFormats, new ViewTranslationRequestConsumer(requests));
+                onCreateViewTranslationRequest(
+                        supportedFormats, new ViewTranslationRequestConsumer(requests));
             } else {
-                onCreateVirtualViewTranslationRequests(viewIds.get(autofillId), supportedFormats, new Consumer() { // from class: android.view.View$$ExternalSyntheticLambda12
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        requests.add((ViewTranslationRequest) obj);
-                    }
-                });
+                onCreateVirtualViewTranslationRequests(
+                        viewIds.get(autofillId),
+                        supportedFormats,
+                        new Consumer() { // from class: android.view.View$$ExternalSyntheticLambda12
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                requests.add((ViewTranslationRequest) obj);
+                            }
+                        });
             }
         }
     }
@@ -16965,7 +18412,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (request != null && request.getKeys().size() > 0) {
                 this.mRequests.add(request);
                 if (Log.isLoggable(View.CONTENT_CAPTURE_LOG_TAG, 2)) {
-                    Log.v(View.CONTENT_CAPTURE_LOG_TAG, "Calling setHasTransientState(true) for " + View.this.getAutofillId());
+                    Log.v(
+                            View.CONTENT_CAPTURE_LOG_TAG,
+                            "Calling setHasTransientState(true) for " + View.this.getAutofillId());
                 }
                 View.this.setHasTransientState(true);
                 View.this.setHasTranslationTransientState(true);
@@ -16973,7 +18422,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    public void generateDisplayHash(String hashAlgorithm, Rect bounds, final Executor executor, final DisplayHashResultCallback callback) {
+    public void generateDisplayHash(
+            String hashAlgorithm,
+            Rect bounds,
+            final Executor executor,
+            final DisplayHashResultCallback callback) {
         IWindowSession session = getWindowSession();
         if (session == null) {
             callback.onDisplayHashError(-3);
@@ -16998,17 +18451,23 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             callback.onDisplayHashError(-4);
             return;
         }
-        RemoteCallback remoteCallback = new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: android.view.View$$ExternalSyntheticLambda7
-            @Override // android.os.RemoteCallback.OnResultListener
-            public final void onResult(Bundle bundle) {
-                executor.execute(new Runnable() { // from class: android.view.View$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        View.lambda$generateDisplayHash$6(Bundle.this, r2);
-                    }
-                });
-            }
-        });
+        RemoteCallback remoteCallback =
+                new RemoteCallback(
+                        new RemoteCallback
+                                .OnResultListener() { // from class:
+                                                      // android.view.View$$ExternalSyntheticLambda7
+                            @Override // android.os.RemoteCallback.OnResultListener
+                            public final void onResult(Bundle bundle) {
+                                executor.execute(
+                                        new Runnable() { // from class:
+                                                         // android.view.View$$ExternalSyntheticLambda1
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                View.lambda$generateDisplayHash$6(Bundle.this, r2);
+                                            }
+                                        });
+                            }
+                        });
         try {
             session.generateDisplayHash(window, visibleBounds, hashAlgorithm, remoteCallback);
         } catch (RemoteException e) {
@@ -17017,8 +18476,12 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
     }
 
-    static /* synthetic */ void lambda$generateDisplayHash$6(Bundle result, DisplayHashResultCallback callback) {
-        DisplayHash displayHash = (DisplayHash) result.getParcelable(DisplayHashResultCallback.EXTRA_DISPLAY_HASH, DisplayHash.class);
+    static /* synthetic */ void lambda$generateDisplayHash$6(
+            Bundle result, DisplayHashResultCallback callback) {
+        DisplayHash displayHash =
+                (DisplayHash)
+                        result.getParcelable(
+                                DisplayHashResultCallback.EXTRA_DISPLAY_HASH, DisplayHash.class);
         int errorCode = result.getInt(DisplayHashResultCallback.EXTRA_DISPLAY_HASH_ERROR_CODE, -1);
         if (displayHash != null) {
             callback.onDisplayHashResult(displayHash);
@@ -17039,7 +18502,15 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         ViewRootImpl viewRootImpl = getViewRootImpl();
         Object obj = this.mParent;
         boolean isInputMethodWindowType = viewRootImpl.mWindowAttributes.type == 2011;
-        if (((this.mPrivateFlags4 & 402653184) == 402653184 || this.mLastFrameLeft != this.mLeft || this.mLastFrameTop != this.mTop) && viewRootImpl.shouldCheckFrameRateCategory() && (obj instanceof View) && ((View) obj).getFrameContentVelocity() <= 0.0f && ((!CoreRune.FW_DVRR_TOOLKIT_POLICY_FOR_SCROLL || !viewRootImpl.getScrollFlingState()) && !isInputMethodWindowType)) {
+        if (((this.mPrivateFlags4 & 402653184) == 402653184
+                        || this.mLastFrameLeft != this.mLeft
+                        || this.mLastFrameTop != this.mTop)
+                && viewRootImpl.shouldCheckFrameRateCategory()
+                && (obj instanceof View)
+                && ((View) obj).getFrameContentVelocity() <= 0.0f
+                && ((!CoreRune.FW_DVRR_TOOLKIT_POLICY_FOR_SCROLL
+                                || !viewRootImpl.getScrollFlingState())
+                        && !isInputMethodWindowType)) {
             if (CoreRune.FW_DVRR_TOOLKIT_FORCE_DEFAULT_NORMAL) {
                 return 134217731;
             }
@@ -17073,7 +18544,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         }
         float velocity = this.mFrameContentVelocity;
         float frameRate = this.mPreferredFrameRate;
-        if (viewRootImpl.shouldCheckFrameRate(frameRate > 0.0f) && (frameRate > 0.0f || (this.mAttachInfo.mViewVelocityApi && velocity > 0.0f))) {
+        if (viewRootImpl.shouldCheckFrameRate(frameRate > 0.0f)
+                && (frameRate > 0.0f || (this.mAttachInfo.mViewVelocityApi && velocity > 0.0f))) {
             float velocityFrameRate = 0.0f;
             if (this.mAttachInfo.mViewVelocityApi && velocity > 0.0f) {
                 velocityFrameRate = convertVelocityToFrameRate(velocity);
@@ -17157,11 +18629,29 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         ViewRootImpl viewRoot;
         if (this.mAttachInfo != null && this.mAttachInfo.mViewVelocityApi) {
             this.mFrameContentVelocity = Math.abs(pixelsPerSecond);
-            if (CoreRune.FW_DVRR_TOOLKIT_POLICY_FOR_SCROLL && (viewRoot = getViewRootImpl()) != null) {
+            if (CoreRune.FW_DVRR_TOOLKIT_POLICY_FOR_SCROLL
+                    && (viewRoot = getViewRootImpl()) != null) {
                 boolean isFlingState = pixelsPerSecond > 0.0f;
                 if (isFlingState != this.mIsFlingState) {
                     if (isFlingState) {
-                        Log.d(VIEW_LOG_TAG, "pixelsPerSecond=" + pixelsPerSecond + " T1=" + this.VELOCITY_THRESHOLD_T1 + " T2=" + this.VELOCITY_THRESHOLD_T2 + " T3=" + this.VELOCITY_THRESHOLD_T3 + " frameRate1=" + this.VELOCITY_FRAMERATE1 + " frameRate2=" + this.VELOCITY_FRAMERATE2 + " frameRate3=" + this.VELOCITY_FRAMERATE3 + " frameRate4=" + this.VELOCITY_FRAMERATE4);
+                        Log.d(
+                                VIEW_LOG_TAG,
+                                "pixelsPerSecond="
+                                        + pixelsPerSecond
+                                        + " T1="
+                                        + this.VELOCITY_THRESHOLD_T1
+                                        + " T2="
+                                        + this.VELOCITY_THRESHOLD_T2
+                                        + " T3="
+                                        + this.VELOCITY_THRESHOLD_T3
+                                        + " frameRate1="
+                                        + this.VELOCITY_FRAMERATE1
+                                        + " frameRate2="
+                                        + this.VELOCITY_FRAMERATE2
+                                        + " frameRate3="
+                                        + this.VELOCITY_FRAMERATE3
+                                        + " frameRate4="
+                                        + this.VELOCITY_FRAMERATE4);
                     }
                     this.mIsFlingState = isFlingState;
                     viewRoot.setScrollFlingState(isFlingState);
@@ -17182,7 +18672,14 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     public void setRequestedFrameRate(float frameRate) {
         if (sToolkitSetFrameRateReadOnlyFlagValue) {
-            Log.i(VIEW_LOG_TAG, "setRequestedFrameRate frameRate=" + frameRate + ", this=" + this + ", caller=" + Debug.getCallers(5));
+            Log.i(
+                    VIEW_LOG_TAG,
+                    "setRequestedFrameRate frameRate="
+                            + frameRate
+                            + ", this="
+                            + this
+                            + ", caller="
+                            + Debug.getCallers(5));
             this.mPreferredFrameRate = frameRate;
         }
     }
@@ -17276,8 +18773,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     @RemotableViewMethod
     public void semSetBlurInfo(SemBlurInfo blurInfo) {
         Log.d(VIEW_LOG_TAG, "semSetBlurInfo, blurInfo : " + blurInfo + ", " + this);
-        if (TEST_BLUR_DISABLED != 0) {
-        }
+        if (TEST_BLUR_DISABLED != 0) {}
         if (blurInfo == null) {
             clearBlurMode();
             return;
@@ -17373,13 +18869,18 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
             if (this.mBackground instanceof BackgroundBlurDrawable) {
                 drawable = (BackgroundBlurDrawable) this.mBackground;
             } else if (this.mAttachInfo != null) {
-                drawable = this.mAttachInfo.mViewRootImpl.createBackgroundBlurDrawable(isBlurDebug());
+                drawable =
+                        this.mAttachInfo.mViewRootImpl.createBackgroundBlurDrawable(isBlurDebug());
                 setBackground(drawable);
             } else {
                 return;
             }
             drawable.setBlurRadius(this.mBlurRadius);
-            drawable.setCornerRadius(this.mBackgroundBlurCornerRadiusTL, this.mBackgroundBlurCornerRadiusTR, this.mBackgroundBlurCornerRadiusBL, this.mBackgroundBlurCornerRadiusBR);
+            drawable.setCornerRadius(
+                    this.mBackgroundBlurCornerRadiusTL,
+                    this.mBackgroundBlurCornerRadiusTR,
+                    this.mBackgroundBlurCornerRadiusBL,
+                    this.mBackgroundBlurCornerRadiusBR);
             drawable.setColor(this.mBackgroundBlurColor);
             if (this.mBlurColorCurve != null) {
                 drawable.setBlurColorCurve(this.mBlurColorCurve);
@@ -17479,12 +18980,16 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         int height = getHeight() / this.mCanvasDownScale;
                         if (width > 0 && height > 0) {
                             if (this.mCanvasBlurBitmap == null) {
-                                this.mCanvasBlurBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                                this.mCanvasBlurBitmap =
+                                        Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
                             }
                             if (this.mCanvasBlurBitmap != null) {
-                                if (this.mCanvasBlurBitmap.getHeight() != height || this.mCanvasBlurBitmap.getWidth() != width) {
+                                if (this.mCanvasBlurBitmap.getHeight() != height
+                                        || this.mCanvasBlurBitmap.getWidth() != width) {
                                     this.mCanvasBlurBitmap.recycle();
-                                    this.mCanvasBlurBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                                    this.mCanvasBlurBitmap =
+                                            Bitmap.createBitmap(
+                                                    width, height, Bitmap.Config.ARGB_8888);
                                 }
                                 this.mCapturingCanvas = true;
                                 Canvas blurCanvas = new Canvas(this.mCanvasBlurBitmap);
@@ -17509,7 +19014,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                                 this.mBlurViewBounds.bottom = getHeight();
                                 Trace.traceBegin(8L, "applying canvas blur " + this);
                                 this.mBlurFilter.applyToBitmap(bitmap, bitmap);
-                                canvas.drawBitmap(bitmap, this.mBlurBitmapBounds, this.mBlurViewBounds, (Paint) null);
+                                canvas.drawBitmap(
+                                        bitmap,
+                                        this.mBlurBitmapBounds,
+                                        this.mBlurViewBounds,
+                                        (Paint) null);
                                 Trace.traceEnd(8L);
                                 break;
                             }
@@ -17522,7 +19031,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                             this.mBlurredBitmap = null;
                         }
                         if (this.mCapturedBitmap != null) {
-                            this.mBlurredBitmap = this.mBlurFilter.applyToBitmap(this.mCapturedBitmap);
+                            this.mBlurredBitmap =
+                                    this.mBlurFilter.applyToBitmap(this.mCapturedBitmap);
                         }
                     }
                     if (this.mBlurredBitmap != null && this.mBlurRadius > 0) {
@@ -17530,7 +19040,11 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
                         this.mBlurBitmapBounds.bottom = this.mBlurredBitmap.getHeight();
                         this.mBlurViewBounds.right = getWidth();
                         this.mBlurViewBounds.bottom = getHeight();
-                        canvas.drawBitmap(this.mBlurredBitmap, this.mBlurBitmapBounds, this.mBlurViewBounds, (Paint) null);
+                        canvas.drawBitmap(
+                                this.mBlurredBitmap,
+                                this.mBlurBitmapBounds,
+                                this.mBlurViewBounds,
+                                (Paint) null);
                         break;
                     }
                 }
@@ -17569,7 +19083,8 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return this.mSmartClipDataExtractionListener;
     }
 
-    public boolean semSetSmartClipDataExtractionListener(SemSmartClipDataExtractionListener listener) {
+    public boolean semSetSmartClipDataExtractionListener(
+            SemSmartClipDataExtractionListener listener) {
         this.mSmartClipDataExtractionListener = listener;
         return true;
     }
@@ -17583,13 +19098,17 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         return true;
     }
 
-    public int semExtractSmartClipData(SemSmartClipCroppedArea croppedArea, SemSmartClipDataElement resultElement) {
+    public int semExtractSmartClipData(
+            SemSmartClipCroppedArea croppedArea, SemSmartClipDataElement resultElement) {
         SmartClipDataElementImpl elementImpl = (SmartClipDataElementImpl) resultElement;
         if (elementImpl == null) {
             return 0;
         }
         SemSmartClipDataRepository repository = elementImpl.getDataRepository();
-        SmartClipDataCropperImpl cropper = repository != null ? (SmartClipDataCropperImpl) repository.getSmartClipDataCropper() : null;
+        SmartClipDataCropperImpl cropper =
+                repository != null
+                        ? (SmartClipDataCropperImpl) repository.getSmartClipDataCropper()
+                        : null;
         if (cropper == null) {
             return 0;
         }
@@ -17610,19 +19129,21 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
 
     private void translateToWindowIfNeeded(Rect outRect) {
         ViewRootImpl viewRootImpl = getViewRootImpl();
-        CompatTranslator translator = viewRootImpl != null ? viewRootImpl.getCompatTranslator() : null;
+        CompatTranslator translator =
+                viewRootImpl != null ? viewRootImpl.getCompatTranslator() : null;
         if (translator != null) {
             translator.translateToWindow(outRect);
         }
     }
 
     private void postRequestSendStickyDragStartedEvent() {
-        post(new Runnable() { // from class: android.view.View$$ExternalSyntheticLambda4
-            @Override // java.lang.Runnable
-            public final void run() {
-                View.this.lambda$postRequestSendStickyDragStartedEvent$8();
-            }
-        });
+        post(
+                new Runnable() { // from class: android.view.View$$ExternalSyntheticLambda4
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        View.this.lambda$postRequestSendStickyDragStartedEvent$8();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -17633,7 +19154,9 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
     }
 
     public View semDispatchFindView(float x, float y, boolean findImage) {
-        this.mBixbyTouchFoundText = SemPressGestureDetector.getText(this.mContext, this.mContext.getPackageName(), this);
+        this.mBixbyTouchFoundText =
+                SemPressGestureDetector.getText(
+                        this.mContext, this.mContext.getPackageName(), this);
         if (this.mBixbyTouchFoundText != null) {
             return this;
         }

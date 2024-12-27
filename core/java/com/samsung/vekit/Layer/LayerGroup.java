@@ -1,6 +1,7 @@
 package com.samsung.vekit.Layer;
 
 import android.util.Log;
+
 import com.samsung.vekit.Animation.Animation;
 import com.samsung.vekit.Common.Object.Element;
 import com.samsung.vekit.Common.Type.AnimationType;
@@ -13,6 +14,7 @@ import com.samsung.vekit.Interface.HierarchyInterface;
 import com.samsung.vekit.Item.FragmentAudioItem;
 import com.samsung.vekit.Item.Item;
 import com.samsung.vekit.Panel.Panel;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -57,15 +59,26 @@ public class LayerGroup extends Element implements HierarchyInterface<Layer> {
             } else {
                 long layerDuration = 0;
                 for (Item item2 : layer.getChildren()) {
-                    if (!item2.getItemType().equals(ItemType.FRAGMENT_AUDIO) || !((FragmentAudioItem) item2).isEnableAutoDuration()) {
+                    if (!item2.getItemType().equals(ItemType.FRAGMENT_AUDIO)
+                            || !((FragmentAudioItem) item2).isEnableAutoDuration()) {
                         layerDuration += item2.getDuration() + item2.getPadding();
                     }
                 }
-                Log.i(this.TAG, "total duration : " + this.totalDuration + "layerDuration : " + layerDuration);
+                Log.i(
+                        this.TAG,
+                        "total duration : "
+                                + this.totalDuration
+                                + "layerDuration : "
+                                + layerDuration);
                 this.totalDuration = Math.max(this.totalDuration, layerDuration);
             }
         }
-        Log.i(this.TAG, "Final total duration : " + this.totalDuration + ", FrameworkMode : " + this.context.getFrameworkType().toString());
+        Log.i(
+                this.TAG,
+                "Final total duration : "
+                        + this.totalDuration
+                        + ", FrameworkMode : "
+                        + this.context.getFrameworkType().toString());
         calculateAutoDurationItems();
         return this.totalDuration;
     }
@@ -81,7 +94,8 @@ public class LayerGroup extends Element implements HierarchyInterface<Layer> {
             Layer layer = it.next();
             if (layer.getLayerType().equals(LayerType.AUDIO)) {
                 for (Item item : layer.getChildren()) {
-                    if (item.getItemType().equals(ItemType.FRAGMENT_AUDIO) && ((FragmentAudioItem) item).isEnableAutoDuration()) {
+                    if (item.getItemType().equals(ItemType.FRAGMENT_AUDIO)
+                            && ((FragmentAudioItem) item).isEnableAutoDuration()) {
                         ((FragmentAudioItem) item).setDuration((int) this.totalDuration).update();
                     }
                 }
@@ -251,7 +265,9 @@ public class LayerGroup extends Element implements HierarchyInterface<Layer> {
     public void checkValidAnimation(Animation animation) throws Exception {
         boolean valid = animation.getAnimationType() != AnimationType.TRANSITION;
         if (!valid) {
-            throw new Exception("isInvalidElement : please attach correct uiAnimation(not TransitionAnimation) to LayerGroup.");
+            throw new Exception(
+                    "isInvalidElement : please attach correct uiAnimation(not TransitionAnimation)"
+                        + " to LayerGroup.");
         }
     }
 }

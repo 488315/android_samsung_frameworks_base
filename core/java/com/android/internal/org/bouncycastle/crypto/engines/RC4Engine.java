@@ -21,7 +21,8 @@ public class RC4Engine implements StreamCipher {
             setKey(this.workingKey);
             return;
         }
-        throw new IllegalArgumentException("invalid parameter passed to RC4 init - " + params.getClass().getName());
+        throw new IllegalArgumentException(
+                "invalid parameter passed to RC4 init - " + params.getClass().getName());
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.StreamCipher
@@ -36,7 +37,9 @@ public class RC4Engine implements StreamCipher {
         byte tmp = this.engineState[this.x];
         this.engineState[this.x] = this.engineState[this.y];
         this.engineState[this.y] = tmp;
-        return (byte) (this.engineState[(this.engineState[this.x] + this.engineState[this.y]) & 255] ^ in);
+        return (byte)
+                (this.engineState[(this.engineState[this.x] + this.engineState[this.y]) & 255]
+                        ^ in);
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.StreamCipher
@@ -53,7 +56,12 @@ public class RC4Engine implements StreamCipher {
             byte tmp = this.engineState[this.x];
             this.engineState[this.x] = this.engineState[this.y];
             this.engineState[this.y] = tmp;
-            out[i + outOff] = (byte) (in[i + inOff] ^ this.engineState[(this.engineState[this.x] + this.engineState[this.y]) & 255]);
+            out[i + outOff] =
+                    (byte)
+                            (in[i + inOff]
+                                    ^ this.engineState[
+                                            (this.engineState[this.x] + this.engineState[this.y])
+                                                    & 255]);
         }
         return len;
     }

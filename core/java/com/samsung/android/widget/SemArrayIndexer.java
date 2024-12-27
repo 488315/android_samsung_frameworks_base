@@ -1,6 +1,7 @@
 package com.samsung.android.widget;
 
 import android.os.Bundle;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */

@@ -1,6 +1,5 @@
 package android.accounts;
 
-import android.accounts.IAccountAuthenticatorResponse;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,19 +8,21 @@ import android.util.Log;
 
 /* loaded from: classes.dex */
 public class AccountAuthenticatorResponse implements Parcelable {
-    public static final Parcelable.Creator<AccountAuthenticatorResponse> CREATOR = new Parcelable.Creator<AccountAuthenticatorResponse>() { // from class: android.accounts.AccountAuthenticatorResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccountAuthenticatorResponse createFromParcel(Parcel source) {
-            return new AccountAuthenticatorResponse(source);
-        }
+    public static final Parcelable.Creator<AccountAuthenticatorResponse> CREATOR =
+            new Parcelable.Creator<AccountAuthenticatorResponse>() { // from class:
+                // android.accounts.AccountAuthenticatorResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccountAuthenticatorResponse createFromParcel(Parcel source) {
+                    return new AccountAuthenticatorResponse(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccountAuthenticatorResponse[] newArray(int size) {
-            return new AccountAuthenticatorResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccountAuthenticatorResponse[] newArray(int size) {
+                    return new AccountAuthenticatorResponse[size];
+                }
+            };
     private static final String TAG = "AccountAuthenticator";
     private IAccountAuthenticatorResponse mAccountAuthenticatorResponse;
 
@@ -30,13 +31,17 @@ public class AccountAuthenticatorResponse implements Parcelable {
     }
 
     public AccountAuthenticatorResponse(Parcel parcel) {
-        this.mAccountAuthenticatorResponse = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+        this.mAccountAuthenticatorResponse =
+                IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
     }
 
     public void onResult(Bundle result) {
         if (Log.isLoggable(TAG, 2)) {
             result.keySet();
-            Log.v(TAG, "AccountAuthenticatorResponse.onResult: " + AccountManager.sanitizeResult(result));
+            Log.v(
+                    TAG,
+                    "AccountAuthenticatorResponse.onResult: "
+                            + AccountManager.sanitizeResult(result));
         }
         try {
             this.mAccountAuthenticatorResponse.onResult(result);

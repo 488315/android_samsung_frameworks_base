@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Debug;
 import android.os.SemSystemProperties;
 import android.os.SystemProperties;
+
 import com.samsung.android.feature.SemFloatingFeature;
 
 /* loaded from: classes6.dex */
@@ -128,9 +129,13 @@ public class ViewRune {
         COMMON_ONEUI_4_1 = Build.VERSION.SEM_PLATFORM_INT >= 130100;
         COMMON_ONEUI_5_1_1 = Build.VERSION.SEM_PLATFORM_INT >= 140500;
         ONE_UI_6_1 = Build.VERSION.SEM_PLATFORM_INT >= 150100;
-        NAVIBAR_FLOATING_FEATURES = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_NAVIGATION_BAR_THEME", "");
+        NAVIBAR_FLOATING_FEATURES =
+                SemFloatingFeature.getInstance()
+                        .getString(
+                                "SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_NAVIGATION_BAR_THEME", "");
         NAVIBAR_ENABLED = !NAVIBAR_FLOATING_FEATURES.isEmpty();
-        NAVIBAR_SUPPORT_LIGHT_NAVIGATIONBAR = NAVIBAR_FLOATING_FEATURES.contains("SupportLightNavigationBar");
+        NAVIBAR_SUPPORT_LIGHT_NAVIGATIONBAR =
+                NAVIBAR_FLOATING_FEATURES.contains("SupportLightNavigationBar");
         SHAREVIA_NEARBY_SHARING = COMMON_ONEUI_2_5;
         SHAREVIA_REMOVE_EXIF = COMMON_ONEUI_3_1;
         SHAREVIA_CHIP_BUTTON_FOR_NEARBY = COMMON_ONEUI_3_1;
@@ -140,28 +145,53 @@ public class ViewRune {
         SHAREVIA_SUPPORT_INCLUDE_ORIGINAL_OPTION_MENU = COMMON_ONEUI_4_1;
         BUILD_TYPE_ENG = "eng".equals(Build.TYPE);
         SHIP_BUILD = "true".equals(SemSystemProperties.get("ro.product_ship", "false"));
-        WIDGET_SSS_TRANSLATE_SUPPORTED = !SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_DISABLE_NATIVE_AI", false);
-        WIDGET_PEN_SUPPORTED = SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION", -1) > 0;
+        WIDGET_SSS_TRANSLATE_SUPPORTED =
+                !SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_DISABLE_NATIVE_AI", false);
+        WIDGET_PEN_SUPPORTED =
+                SemFloatingFeature.getInstance()
+                                .getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION", -1)
+                        > 0;
         WIDGET_MULTIPLE_PEN_TEXT_SUPPORTED = WIDGET_PEN_SUPPORTED;
         WIDGET_SEARCHVIEW_USE_SVI = COMMON_ONEUI_2_1;
-        WIDGET_COPYANDPASTE_LOGGING = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE");
-        WIDGET_ONEUI_TOAST_SUPPRORT_SUB_DISPLAY = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY").contains("LARGESCREEN");
+        WIDGET_COPYANDPASTE_LOGGING =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE");
+        WIDGET_ONEUI_TOAST_SUPPRORT_SUB_DISPLAY =
+                SemFloatingFeature.getInstance()
+                        .getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY")
+                        .contains("LARGESCREEN");
         WIDGET_HOVER_POPUP = WIDGET_PEN_SUPPORTED;
         WIDGET_LABEL_TOAST = true;
-        SUPPORT_DIRECT_WRITING = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_SIP_SUPPORT_DIRECT_WRITING_ENABLE");
-        STRIDE_OCR_VERSION = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_CAMERA_CONFIG_STRIDE_OCR_VERSION", "");
-        EAGLE_EYE_FEATURE = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_EAGLE_EYE");
+        SUPPORT_DIRECT_WRITING =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_SIP_SUPPORT_DIRECT_WRITING_ENABLE");
+        STRIDE_OCR_VERSION =
+                SemFloatingFeature.getInstance()
+                        .getString("SEC_FLOATING_FEATURE_CAMERA_CONFIG_STRIDE_OCR_VERSION", "");
+        EAGLE_EYE_FEATURE =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_EAGLE_EYE");
         if (STRIDE_OCR_VERSION.isEmpty() || !STRIDE_OCR_VERSION.equals("None")) {
-            z = !(STRIDE_OCR_VERSION.isEmpty() || STRIDE_OCR_VERSION.equals("None")) || EAGLE_EYE_FEATURE;
+            z =
+                    !(STRIDE_OCR_VERSION.isEmpty() || STRIDE_OCR_VERSION.equals("None"))
+                            || EAGLE_EYE_FEATURE;
         } else {
             z = false;
         }
         SUPPORT_EAGLE_EYE = z;
-        SUPPORT_WRITING_TOOLKIT = !SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_DISABLE_NATIVE_AI", false) && SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_COMMON_CONFIG_AI_VERSION", -1) >= 20242;
+        SUPPORT_WRITING_TOOLKIT =
+                !SemFloatingFeature.getInstance()
+                                .getBoolean("SEC_FLOATING_FEATURE_COMMON_DISABLE_NATIVE_AI", false)
+                        && SemFloatingFeature.getInstance()
+                                        .getInt("SEC_FLOATING_FEATURE_COMMON_CONFIG_AI_VERSION", -1)
+                                >= 20242;
     }
 
     public static String getFWViewSystemVersion() {
-        return "NULL".equals(VIEW_SYSTEM_VERSION) ? VIEW_SYSTEM_DEFAULT_VERSION : VIEW_SYSTEM_VERSION;
+        return "NULL".equals(VIEW_SYSTEM_VERSION)
+                ? VIEW_SYSTEM_DEFAULT_VERSION
+                : VIEW_SYSTEM_VERSION;
     }
 
     public static void setFWViewSystemVersion(String version) {

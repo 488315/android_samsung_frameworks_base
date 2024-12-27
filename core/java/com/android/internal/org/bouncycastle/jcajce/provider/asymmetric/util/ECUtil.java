@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
@@ -25,6 +26,7 @@ import com.android.internal.org.bouncycastle.math.ec.FixedPointCombMultiplier;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Fingerprint;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.lang.reflect.Method;
 import java.math.BigInteger;
 import java.security.AccessController;
@@ -78,23 +80,44 @@ public class ECUtil {
         return res;
     }
 
-    public static ECDomainParameters getDomainParameters(ProviderConfiguration configuration, ECParameterSpec params) {
+    public static ECDomainParameters getDomainParameters(
+            ProviderConfiguration configuration, ECParameterSpec params) {
         if (params instanceof ECNamedCurveParameterSpec) {
             ECNamedCurveParameterSpec nParams = (ECNamedCurveParameterSpec) params;
             ASN1ObjectIdentifier nameOid = getNamedCurveOid(nParams.getName());
-            ECDomainParameters domainParameters = new ECNamedDomainParameters(nameOid, nParams.getCurve(), nParams.getG(), nParams.getN(), nParams.getH(), nParams.getSeed());
+            ECDomainParameters domainParameters =
+                    new ECNamedDomainParameters(
+                            nameOid,
+                            nParams.getCurve(),
+                            nParams.getG(),
+                            nParams.getN(),
+                            nParams.getH(),
+                            nParams.getSeed());
             return domainParameters;
         }
         if (params == null) {
             ECParameterSpec iSpec = configuration.getEcImplicitlyCa();
-            ECDomainParameters domainParameters2 = new ECDomainParameters(iSpec.getCurve(), iSpec.getG(), iSpec.getN(), iSpec.getH(), iSpec.getSeed());
+            ECDomainParameters domainParameters2 =
+                    new ECDomainParameters(
+                            iSpec.getCurve(),
+                            iSpec.getG(),
+                            iSpec.getN(),
+                            iSpec.getH(),
+                            iSpec.getSeed());
             return domainParameters2;
         }
-        ECDomainParameters domainParameters3 = new ECDomainParameters(params.getCurve(), params.getG(), params.getN(), params.getH(), params.getSeed());
+        ECDomainParameters domainParameters3 =
+                new ECDomainParameters(
+                        params.getCurve(),
+                        params.getG(),
+                        params.getN(),
+                        params.getH(),
+                        params.getSeed());
         return domainParameters3;
     }
 
-    public static ECDomainParameters getDomainParameters(ProviderConfiguration configuration, X962Parameters params) {
+    public static ECDomainParameters getDomainParameters(
+            ProviderConfiguration configuration, X962Parameters params) {
         if (params.isNamedCurve()) {
             ASN1ObjectIdentifier oid = ASN1ObjectIdentifier.getInstance(params.getParameters());
             X9ECParameters ecP = getNamedCurveByOid(oid);
@@ -107,31 +130,48 @@ public class ECUtil {
         }
         if (params.isImplicitlyCA()) {
             ECParameterSpec iSpec = configuration.getEcImplicitlyCa();
-            ECDomainParameters domainParameters2 = new ECDomainParameters(iSpec.getCurve(), iSpec.getG(), iSpec.getN(), iSpec.getH(), iSpec.getSeed());
+            ECDomainParameters domainParameters2 =
+                    new ECDomainParameters(
+                            iSpec.getCurve(),
+                            iSpec.getG(),
+                            iSpec.getN(),
+                            iSpec.getH(),
+                            iSpec.getSeed());
             return domainParameters2;
         }
         X9ECParameters ecP2 = X9ECParameters.getInstance(params.getParameters());
-        ECDomainParameters domainParameters3 = new ECDomainParameters(ecP2.getCurve(), ecP2.getG(), ecP2.getN(), ecP2.getH(), ecP2.getSeed());
+        ECDomainParameters domainParameters3 =
+                new ECDomainParameters(
+                        ecP2.getCurve(), ecP2.getG(), ecP2.getN(), ecP2.getH(), ecP2.getSeed());
         return domainParameters3;
     }
 
-    public static AsymmetricKeyParameter generatePublicKeyParameter(PublicKey key) throws InvalidKeyException {
+    public static AsymmetricKeyParameter generatePublicKeyParameter(PublicKey key)
+            throws InvalidKeyException {
         if (key instanceof ECPublicKey) {
             ECPublicKey k = (ECPublicKey) key;
             ECParameterSpec s = k.getParameters();
-            return new ECPublicKeyParameters(k.getQ(), new ECDomainParameters(s.getCurve(), s.getG(), s.getN(), s.getH(), s.getSeed()));
+            return new ECPublicKeyParameters(
+                    k.getQ(),
+                    new ECDomainParameters(
+                            s.getCurve(), s.getG(), s.getN(), s.getH(), s.getSeed()));
         }
         if (key instanceof java.security.interfaces.ECPublicKey) {
-            java.security.interfaces.ECPublicKey pubKey = (java.security.interfaces.ECPublicKey) key;
+            java.security.interfaces.ECPublicKey pubKey =
+                    (java.security.interfaces.ECPublicKey) key;
             ECParameterSpec s2 = EC5Util.convertSpec(pubKey.getParams());
-            return new ECPublicKeyParameters(EC5Util.convertPoint(pubKey.getParams(), pubKey.getW()), new ECDomainParameters(s2.getCurve(), s2.getG(), s2.getN(), s2.getH(), s2.getSeed()));
+            return new ECPublicKeyParameters(
+                    EC5Util.convertPoint(pubKey.getParams(), pubKey.getW()),
+                    new ECDomainParameters(
+                            s2.getCurve(), s2.getG(), s2.getN(), s2.getH(), s2.getSeed()));
         }
         try {
             byte[] bytes = key.getEncoded();
             if (bytes == null) {
                 throw new InvalidKeyException("no encoding for EC public key");
             }
-            PublicKey publicKey = BouncyCastleProvider.getPublicKey(SubjectPublicKeyInfo.getInstance(bytes));
+            PublicKey publicKey =
+                    BouncyCastleProvider.getPublicKey(SubjectPublicKeyInfo.getInstance(bytes));
             if (publicKey instanceof java.security.interfaces.ECPublicKey) {
                 return generatePublicKeyParameter(publicKey);
             }
@@ -141,7 +181,8 @@ public class ECUtil {
         }
     }
 
-    public static AsymmetricKeyParameter generatePrivateKeyParameter(PrivateKey key) throws InvalidKeyException {
+    public static AsymmetricKeyParameter generatePrivateKeyParameter(PrivateKey key)
+            throws InvalidKeyException {
         if (key instanceof ECPrivateKey) {
             ECPrivateKey k = (ECPrivateKey) key;
             ECParameterSpec s = k.getParameters();
@@ -150,21 +191,37 @@ public class ECUtil {
             }
             if (k.getParameters() instanceof ECNamedCurveParameterSpec) {
                 String name = ((ECNamedCurveParameterSpec) k.getParameters()).getName();
-                return new ECPrivateKeyParameters(k.getD(), new ECNamedDomainParameters(ECNamedCurveTable.getOID(name), s.getCurve(), s.getG(), s.getN(), s.getH(), s.getSeed()));
+                return new ECPrivateKeyParameters(
+                        k.getD(),
+                        new ECNamedDomainParameters(
+                                ECNamedCurveTable.getOID(name),
+                                s.getCurve(),
+                                s.getG(),
+                                s.getN(),
+                                s.getH(),
+                                s.getSeed()));
             }
-            return new ECPrivateKeyParameters(k.getD(), new ECDomainParameters(s.getCurve(), s.getG(), s.getN(), s.getH(), s.getSeed()));
+            return new ECPrivateKeyParameters(
+                    k.getD(),
+                    new ECDomainParameters(
+                            s.getCurve(), s.getG(), s.getN(), s.getH(), s.getSeed()));
         }
         if (key instanceof java.security.interfaces.ECPrivateKey) {
-            java.security.interfaces.ECPrivateKey privKey = (java.security.interfaces.ECPrivateKey) key;
+            java.security.interfaces.ECPrivateKey privKey =
+                    (java.security.interfaces.ECPrivateKey) key;
             ECParameterSpec s2 = EC5Util.convertSpec(privKey.getParams());
-            return new ECPrivateKeyParameters(privKey.getS(), new ECDomainParameters(s2.getCurve(), s2.getG(), s2.getN(), s2.getH(), s2.getSeed()));
+            return new ECPrivateKeyParameters(
+                    privKey.getS(),
+                    new ECDomainParameters(
+                            s2.getCurve(), s2.getG(), s2.getN(), s2.getH(), s2.getSeed()));
         }
         try {
             byte[] bytes = key.getEncoded();
             if (bytes == null) {
                 throw new InvalidKeyException("no encoding for EC private key");
             }
-            PrivateKey privateKey = BouncyCastleProvider.getPrivateKey(PrivateKeyInfo.getInstance(bytes));
+            PrivateKey privateKey =
+                    BouncyCastleProvider.getPrivateKey(PrivateKeyInfo.getInstance(bytes));
             if (privateKey instanceof java.security.interfaces.ECPrivateKey) {
                 return generatePrivateKeyParameter(privateKey);
             }
@@ -174,7 +231,8 @@ public class ECUtil {
         }
     }
 
-    public static int getOrderBitLength(ProviderConfiguration configuration, BigInteger order, BigInteger privateValue) {
+    public static int getOrderBitLength(
+            ProviderConfiguration configuration, BigInteger order, BigInteger privateValue) {
         if (order == null) {
             ECParameterSpec implicitCA = configuration.getEcImplicitlyCa();
             if (implicitCA == null) {
@@ -205,7 +263,10 @@ public class ECUtil {
         while (names.hasMoreElements()) {
             String name = (String) names.nextElement();
             X9ECParameters params = ECNamedCurveTable.getByName(name);
-            if (params.getN().equals(ecParameterSpec.getN()) && params.getH().equals(ecParameterSpec.getH()) && params.getCurve().equals(ecParameterSpec.getCurve()) && params.getG().equals(ecParameterSpec.getG())) {
+            if (params.getN().equals(ecParameterSpec.getN())
+                    && params.getH().equals(ecParameterSpec.getH())
+                    && params.getCurve().equals(ecParameterSpec.getCurve())
+                    && params.getG().equals(ecParameterSpec.getG())) {
                 return ECNamedCurveTable.getOID(name);
             }
         }
@@ -237,9 +298,16 @@ public class ECUtil {
         String nl = Strings.lineSeparator();
         ECPoint q = new FixedPointCombMultiplier().multiply(spec.getG(), d).normalize();
         buf.append(algorithm);
-        buf.append(" Private Key [").append(generateKeyFingerprint(q, spec)).append(NavigationBarInflaterView.SIZE_MOD_END).append(nl);
-        buf.append("            X: ").append(q.getAffineXCoord().toBigInteger().toString(16)).append(nl);
-        buf.append("            Y: ").append(q.getAffineYCoord().toBigInteger().toString(16)).append(nl);
+        buf.append(" Private Key [")
+                .append(generateKeyFingerprint(q, spec))
+                .append(NavigationBarInflaterView.SIZE_MOD_END)
+                .append(nl);
+        buf.append("            X: ")
+                .append(q.getAffineXCoord().toBigInteger().toString(16))
+                .append(nl);
+        buf.append("            Y: ")
+                .append(q.getAffineYCoord().toBigInteger().toString(16))
+                .append(nl);
         return buf.toString();
     }
 
@@ -247,9 +315,16 @@ public class ECUtil {
         StringBuffer buf = new StringBuffer();
         String nl = Strings.lineSeparator();
         buf.append(algorithm);
-        buf.append(" Public Key [").append(generateKeyFingerprint(q, spec)).append(NavigationBarInflaterView.SIZE_MOD_END).append(nl);
-        buf.append("            X: ").append(q.getAffineXCoord().toBigInteger().toString(16)).append(nl);
-        buf.append("            Y: ").append(q.getAffineYCoord().toBigInteger().toString(16)).append(nl);
+        buf.append(" Public Key [")
+                .append(generateKeyFingerprint(q, spec))
+                .append(NavigationBarInflaterView.SIZE_MOD_END)
+                .append(nl);
+        buf.append("            X: ")
+                .append(q.getAffineXCoord().toBigInteger().toString(16))
+                .append(nl);
+        buf.append("            Y: ")
+                .append(q.getAffineYCoord().toBigInteger().toString(16))
+                .append(nl);
         return buf.toString();
     }
 
@@ -257,22 +332,32 @@ public class ECUtil {
         ECCurve curve = spec.getCurve();
         ECPoint g = spec.getG();
         if (curve != null) {
-            return new Fingerprint(Arrays.concatenate(publicPoint.getEncoded(false), curve.getA().getEncoded(), curve.getB().getEncoded(), g.getEncoded(false))).toString();
+            return new Fingerprint(
+                            Arrays.concatenate(
+                                    publicPoint.getEncoded(false),
+                                    curve.getA().getEncoded(),
+                                    curve.getB().getEncoded(),
+                                    g.getEncoded(false)))
+                    .toString();
         }
         return new Fingerprint(publicPoint.getEncoded(false)).toString();
     }
 
     public static String getNameFrom(final AlgorithmParameterSpec paramSpec) {
-        return (String) AccessController.doPrivileged(new PrivilegedAction() { // from class: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.ECUtil.1
-            @Override // java.security.PrivilegedAction
-            public Object run() {
-                try {
-                    Method m = paramSpec.getClass().getMethod("getName", new Class[0]);
-                    return m.invoke(paramSpec, new Object[0]);
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-        });
+        return (String)
+                AccessController.doPrivileged(
+                        new PrivilegedAction() { // from class:
+                                                 // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.ECUtil.1
+                            @Override // java.security.PrivilegedAction
+                            public Object run() {
+                                try {
+                                    Method m =
+                                            paramSpec.getClass().getMethod("getName", new Class[0]);
+                                    return m.invoke(paramSpec, new Object[0]);
+                                } catch (Exception e) {
+                                    return null;
+                                }
+                            }
+                        });
     }
 }

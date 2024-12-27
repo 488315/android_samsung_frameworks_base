@@ -1,19 +1,20 @@
 package com.android.internal.org.bouncycastle.jcajce.util;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.nist.NISTObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
+
 import java.io.IOException;
 import java.security.AlgorithmParameters;
 
 /* loaded from: classes5.dex */
 public class JcaJceUtils {
-    private JcaJceUtils() {
-    }
+    private JcaJceUtils() {}
 
     public static ASN1Encodable extractParameters(AlgorithmParameters params) throws IOException {
         try {
@@ -25,7 +26,8 @@ public class JcaJceUtils {
         }
     }
 
-    public static void loadParameters(AlgorithmParameters params, ASN1Encodable sParams) throws IOException {
+    public static void loadParameters(AlgorithmParameters params, ASN1Encodable sParams)
+            throws IOException {
         try {
             params.init(sParams.toASN1Primitive().getEncoded(), "ASN.1");
         } catch (Exception e) {

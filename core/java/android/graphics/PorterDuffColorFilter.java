@@ -1,7 +1,5 @@
 package android.graphics;
 
-import android.graphics.PorterDuff;
-
 /* loaded from: classes.dex */
 public class PorterDuffColorFilter extends ColorFilter {
     private int mColor;

@@ -13,14 +13,15 @@ public final class EpicDisplayListener implements DisplayManager.DisplayListener
     }
 
     @Override // android.hardware.display.DisplayManager.DisplayListener
-    public void onDisplayAdded(int i) {
-    }
+    public void onDisplayAdded(int i) {}
 
     @Override // android.hardware.display.DisplayManager.DisplayListener
     public void onDisplayChanged(int i) {
         Display display;
         Display.Mode mode;
-        if (i == -1 || (display = this.mDisplayManager.getDisplay(i)) == null || (mode = display.getMode()) == null) {
+        if (i == -1
+                || (display = this.mDisplayManager.getDisplay(i)) == null
+                || (mode = display.getMode()) == null) {
             return;
         }
         mode.getRefreshRate();
@@ -28,6 +29,5 @@ public final class EpicDisplayListener implements DisplayManager.DisplayListener
     }
 
     @Override // android.hardware.display.DisplayManager.DisplayListener
-    public void onDisplayRemoved(int i) {
-    }
+    public void onDisplayRemoved(int i) {}
 }

@@ -5,24 +5,26 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class EventControl implements Parcelable {
-    public static final Parcelable.Creator<EventControl> CREATOR = new Parcelable.Creator<EventControl>() { // from class: com.sec.android.allshare.iface.EventControl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EventControl createFromParcel(Parcel source) {
-            EventControl eventsync = new EventControl();
-            eventsync.mWhat = source.readInt();
-            eventsync.mArg1 = source.readInt();
-            eventsync.mArg2 = source.readInt();
-            eventsync.mStr = source.readString();
-            return eventsync;
-        }
+    public static final Parcelable.Creator<EventControl> CREATOR =
+            new Parcelable.Creator<
+                    EventControl>() { // from class: com.sec.android.allshare.iface.EventControl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EventControl createFromParcel(Parcel source) {
+                    EventControl eventsync = new EventControl();
+                    eventsync.mWhat = source.readInt();
+                    eventsync.mArg1 = source.readInt();
+                    eventsync.mArg2 = source.readInt();
+                    eventsync.mStr = source.readString();
+                    return eventsync;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EventControl[] newArray(int size) {
-            return new EventControl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EventControl[] newArray(int size) {
+                    return new EventControl[size];
+                }
+            };
     public int mArg1;
     public int mArg2;
     public String mStr;

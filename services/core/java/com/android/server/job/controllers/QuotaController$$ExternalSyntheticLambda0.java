@@ -3,8 +3,9 @@ package com.android.server.job.controllers;
 import android.app.usage.UsageEvents;
 import android.os.SystemClock;
 import android.util.IndentingPrintWriter;
+
 import com.android.server.job.JobSchedulerService;
-import com.android.server.job.controllers.QuotaController;
+
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -51,7 +52,8 @@ public final /* synthetic */ class QuotaController$$ExternalSyntheticLambda0 imp
                     indentingPrintWriter.print(topAppTimer.mStartTimeElapsed);
                     indentingPrintWriter.print(" (");
                     JobSchedulerService.sElapsedRealtimeClock.getClass();
-                    indentingPrintWriter.print(SystemClock.elapsedRealtime() - topAppTimer.mStartTimeElapsed);
+                    indentingPrintWriter.print(
+                            SystemClock.elapsedRealtime() - topAppTimer.mStartTimeElapsed);
                     indentingPrintWriter.print("ms ago)");
                 } else {
                     indentingPrintWriter.print("NOT active");
@@ -59,7 +61,9 @@ public final /* synthetic */ class QuotaController$$ExternalSyntheticLambda0 imp
                 indentingPrintWriter.println();
                 indentingPrintWriter.increaseIndent();
                 for (i = 0; i < topAppTimer.mActivities.size(); i++) {
-                    indentingPrintWriter.println(((UsageEvents.Event) topAppTimer.mActivities.valueAt(i)).getClassName());
+                    indentingPrintWriter.println(
+                            ((UsageEvents.Event) topAppTimer.mActivities.valueAt(i))
+                                    .getClassName());
                 }
                 indentingPrintWriter.decreaseIndent();
                 return;

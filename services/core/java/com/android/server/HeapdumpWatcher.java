@@ -7,7 +7,9 @@ import android.os.Debug;
 import android.os.PowerManager;
 import android.telecom.TelecomManager;
 import android.util.Slog;
+
 import com.android.server.am.ActivityManagerService;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -20,7 +22,8 @@ public final class HeapdumpWatcher {
     public static Context mContext;
     public ActivityManagerService mActivity;
     public final WatchdogSoftdog softdog;
-    public static final double THRESHOLD_OF_HEAPSIZE = (Runtime.getRuntime().maxMemory() * 0.96d) / 1048576.0d;
+    public static final double THRESHOLD_OF_HEAPSIZE =
+            (Runtime.getRuntime().maxMemory() * 0.96d) / 1048576.0d;
     public static boolean mHeapDumped = false;
     public int mOverThresholdCnt = 0;
     public int mScreenOffCount = 0;
@@ -42,10 +45,13 @@ public final class HeapdumpWatcher {
             Slog.e("Watchdog:HeapdumpWatcher", "Failed to get AudioManager");
             return false;
         }
-        for (AudioPlaybackConfiguration audioPlaybackConfiguration : audioManager.getActivePlaybackConfigurations()) {
+        for (AudioPlaybackConfiguration audioPlaybackConfiguration :
+                audioManager.getActivePlaybackConfigurations()) {
             int usage = audioPlaybackConfiguration.getAudioAttributes().getUsage();
             if (usage != 2 && usage != 6 && audioPlaybackConfiguration.isActive()) {
-                Slog.w("Watchdog:HeapdumpWatcher", "!@ audio is active by uid : " + audioPlaybackConfiguration.getClientUid());
+                Slog.w(
+                        "Watchdog:HeapdumpWatcher",
+                        "!@ audio is active by uid : " + audioPlaybackConfiguration.getClientUid());
                 return false;
             }
         }
@@ -72,7 +78,10 @@ public final class HeapdumpWatcher {
         if (this.mScreenOffCount > 2) {
             return true;
         }
-        HeapdumpWatcher$$ExternalSyntheticOutline0.m(new StringBuilder("!@ screen is on now (or off few seconds ago) cnt : "), this.mScreenOffCount, "Watchdog:HeapdumpWatcher");
+        HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                new StringBuilder("!@ screen is on now (or off few seconds ago) cnt : "),
+                this.mScreenOffCount,
+                "Watchdog:HeapdumpWatcher");
         return false;
     }
 
@@ -87,17 +96,25 @@ public final class HeapdumpWatcher {
                 @Override // java.lang.Thread, java.lang.Runnable
                 public final void run() {
                     try {
-                        if (!Files.exists(Paths.get("/data/log/core", new String[0]), new LinkOption[0])) {
+                        if (!Files.exists(
+                                Paths.get("/data/log/core", new String[0]), new LinkOption[0])) {
                             Slog.w("Watchdog:HeapdumpWatcher", " create folder /data/log/core");
-                            Files.createDirectory(Paths.get("/data/log/core", new String[0]), PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwxrwxrwx")));
+                            Files.createDirectory(
+                                    Paths.get("/data/log/core", new String[0]),
+                                    PosixFilePermissions.asFileAttribute(
+                                            PosixFilePermissions.fromString("rwxrwxrwx")));
                         }
                         Slog.i("Watchdog:HeapdumpWatcher", "Start dumping for java heapdump");
                         HeapdumpWatcher.this.softdog.softdogKick(1000);
                         Debug.dumpHprofData("/data/log/core/system_server.hprof");
                     } catch (IOException unused) {
-                        Slog.w("Watchdog:HeapdumpWatcher", "IOException: Cannot dump for java heapdump");
+                        Slog.w(
+                                "Watchdog:HeapdumpWatcher",
+                                "IOException: Cannot dump for java heapdump");
                     } catch (RuntimeException unused2) {
-                        Slog.w("Watchdog:HeapdumpWatcher", "RuntimeException: Cannot dump for java heapdump");
+                        Slog.w(
+                                "Watchdog:HeapdumpWatcher",
+                                "RuntimeException: Cannot dump for java heapdump");
                     }
                 }
             }.start();

@@ -7,7 +7,18 @@ import android.text.ParcelableSpan;
 
 /* loaded from: classes4.dex */
 public interface LineBackgroundSpan extends ParagraphStyle {
-    void drawBackground(Canvas canvas, Paint paint, int i, int i2, int i3, int i4, int i5, CharSequence charSequence, int i6, int i7, int i8);
+    void drawBackground(
+            Canvas canvas,
+            Paint paint,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            CharSequence charSequence,
+            int i6,
+            int i7,
+            int i8);
 
     public static class Standard implements LineBackgroundSpan, ParcelableSpan {
         private final int mColor;
@@ -50,7 +61,18 @@ public interface LineBackgroundSpan extends ParagraphStyle {
         }
 
         @Override // android.text.style.LineBackgroundSpan
-        public void drawBackground(Canvas canvas, Paint paint, int left, int right, int top, int baseline, int bottom, CharSequence text, int start, int end, int lineNumber) {
+        public void drawBackground(
+                Canvas canvas,
+                Paint paint,
+                int left,
+                int right,
+                int top,
+                int baseline,
+                int bottom,
+                CharSequence text,
+                int start,
+                int end,
+                int lineNumber) {
             int originColor = paint.getColor();
             paint.setColor(this.mColor);
             canvas.drawRect(left, top, right, bottom, paint);

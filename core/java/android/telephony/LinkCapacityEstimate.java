@@ -3,6 +3,7 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -10,17 +11,18 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class LinkCapacityEstimate implements Parcelable {
-    public static final Parcelable.Creator<LinkCapacityEstimate> CREATOR = new Parcelable.Creator() { // from class: android.telephony.LinkCapacityEstimate.1
-        @Override // android.os.Parcelable.Creator
-        public LinkCapacityEstimate createFromParcel(Parcel in) {
-            return new LinkCapacityEstimate(in);
-        }
+    public static final Parcelable.Creator<LinkCapacityEstimate> CREATOR =
+            new Parcelable.Creator() { // from class: android.telephony.LinkCapacityEstimate.1
+                @Override // android.os.Parcelable.Creator
+                public LinkCapacityEstimate createFromParcel(Parcel in) {
+                    return new LinkCapacityEstimate(in);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public LinkCapacityEstimate[] newArray(int size) {
-            return new LinkCapacityEstimate[size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public LinkCapacityEstimate[] newArray(int size) {
+                    return new LinkCapacityEstimate[size];
+                }
+            };
     public static final int INVALID = -1;
     public static final int LCE_TYPE_COMBINED = 2;
     public static final int LCE_TYPE_PRIMARY = 0;
@@ -30,8 +32,7 @@ public final class LinkCapacityEstimate implements Parcelable {
     private final int mUplinkCapacityKbps;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LceType {
-    }
+    public @interface LceType {}
 
     public LinkCapacityEstimate(int type, int downlinkCapacityKbps, int uplinkCapacityKbps) {
         this.mDownlinkCapacityKbps = downlinkCapacityKbps;
@@ -58,7 +59,13 @@ public final class LinkCapacityEstimate implements Parcelable {
     }
 
     public String toString() {
-        return "{mType=" + this.mType + ", mDownlinkCapacityKbps=" + this.mDownlinkCapacityKbps + ", mUplinkCapacityKbps=" + this.mUplinkCapacityKbps + "}";
+        return "{mType="
+                + this.mType
+                + ", mDownlinkCapacityKbps="
+                + this.mDownlinkCapacityKbps
+                + ", mUplinkCapacityKbps="
+                + this.mUplinkCapacityKbps
+                + "}";
     }
 
     @Override // android.os.Parcelable
@@ -81,13 +88,18 @@ public final class LinkCapacityEstimate implements Parcelable {
             return true;
         }
         LinkCapacityEstimate that = (LinkCapacityEstimate) o;
-        if (this.mDownlinkCapacityKbps != that.mDownlinkCapacityKbps || this.mUplinkCapacityKbps != that.mUplinkCapacityKbps || this.mType != that.mType) {
+        if (this.mDownlinkCapacityKbps != that.mDownlinkCapacityKbps
+                || this.mUplinkCapacityKbps != that.mUplinkCapacityKbps
+                || this.mType != that.mType) {
             return false;
         }
         return true;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mDownlinkCapacityKbps), Integer.valueOf(this.mUplinkCapacityKbps), Integer.valueOf(this.mType));
+        return Objects.hash(
+                Integer.valueOf(this.mDownlinkCapacityKbps),
+                Integer.valueOf(this.mUplinkCapacityKbps),
+                Integer.valueOf(this.mType));
     }
 }

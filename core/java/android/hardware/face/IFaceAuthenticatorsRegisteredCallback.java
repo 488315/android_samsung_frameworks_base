@@ -5,18 +5,21 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IFaceAuthenticatorsRegisteredCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.face.IFaceAuthenticatorsRegisteredCallback";
+    public static final String DESCRIPTOR =
+            "android.hardware.face.IFaceAuthenticatorsRegisteredCallback";
 
-    void onAllAuthenticatorsRegistered(List<FaceSensorPropertiesInternal> list) throws RemoteException;
+    void onAllAuthenticatorsRegistered(List<FaceSensorPropertiesInternal> list)
+            throws RemoteException;
 
     public static class Default implements IFaceAuthenticatorsRegisteredCallback {
         @Override // android.hardware.face.IFaceAuthenticatorsRegisteredCallback
-        public void onAllAuthenticatorsRegistered(List<FaceSensorPropertiesInternal> sensors) throws RemoteException {
-        }
+        public void onAllAuthenticatorsRegistered(List<FaceSensorPropertiesInternal> sensors)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +27,8 @@ public interface IFaceAuthenticatorsRegisteredCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFaceAuthenticatorsRegisteredCallback {
+    public abstract static class Stub extends Binder
+            implements IFaceAuthenticatorsRegisteredCallback {
         static final int TRANSACTION_onAllAuthenticatorsRegistered = 1;
 
         public Stub() {
@@ -35,7 +39,8 @@ public interface IFaceAuthenticatorsRegisteredCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IFaceAuthenticatorsRegisteredCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IFaceAuthenticatorsRegisteredCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof IFaceAuthenticatorsRegisteredCallback)) {
                 return (IFaceAuthenticatorsRegisteredCallback) iin;
             }
@@ -62,7 +67,8 @@ public interface IFaceAuthenticatorsRegisteredCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFaceAuthenticatorsRegisteredCallback.DESCRIPTOR);
             }
@@ -72,7 +78,8 @@ public interface IFaceAuthenticatorsRegisteredCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<FaceSensorPropertiesInternal> _arg0 = data.createTypedArrayList(FaceSensorPropertiesInternal.CREATOR);
+                    List<FaceSensorPropertiesInternal> _arg0 =
+                            data.createTypedArrayList(FaceSensorPropertiesInternal.CREATOR);
                     data.enforceNoDataAvail();
                     onAllAuthenticatorsRegistered(_arg0);
                     return true;
@@ -98,7 +105,8 @@ public interface IFaceAuthenticatorsRegisteredCallback extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceAuthenticatorsRegisteredCallback
-            public void onAllAuthenticatorsRegistered(List<FaceSensorPropertiesInternal> sensors) throws RemoteException {
+            public void onAllAuthenticatorsRegistered(List<FaceSensorPropertiesInternal> sensors)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFaceAuthenticatorsRegisteredCallback.DESCRIPTOR);

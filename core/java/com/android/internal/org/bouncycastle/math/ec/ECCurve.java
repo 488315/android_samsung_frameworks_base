@@ -1,7 +1,5 @@
 package com.android.internal.org.bouncycastle.math.ec;
 
-import com.android.internal.org.bouncycastle.math.ec.ECFieldElement;
-import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.math.ec.endo.ECEndomorphism;
 import com.android.internal.org.bouncycastle.math.ec.endo.GLVEndomorphism;
 import com.android.internal.org.bouncycastle.math.field.FiniteField;
@@ -9,6 +7,7 @@ import com.android.internal.org.bouncycastle.math.field.FiniteFields;
 import com.android.internal.org.bouncycastle.math.raw.Nat;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
 import com.android.internal.org.bouncycastle.util.Integers;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.Hashtable;
@@ -35,9 +34,13 @@ public abstract class ECCurve {
 
     protected abstract ECCurve cloneCurve();
 
-    protected abstract ECPoint createRawPoint(ECFieldElement eCFieldElement, ECFieldElement eCFieldElement2);
+    protected abstract ECPoint createRawPoint(
+            ECFieldElement eCFieldElement, ECFieldElement eCFieldElement2);
 
-    protected abstract ECPoint createRawPoint(ECFieldElement eCFieldElement, ECFieldElement eCFieldElement2, ECFieldElement[] eCFieldElementArr);
+    protected abstract ECPoint createRawPoint(
+            ECFieldElement eCFieldElement,
+            ECFieldElement eCFieldElement2,
+            ECFieldElement[] eCFieldElementArr);
 
     protected abstract ECPoint decompressPoint(int i, BigInteger bigInteger);
 
@@ -54,7 +57,7 @@ public abstract class ECCurve {
     public abstract ECFieldElement randomFieldElementMult(SecureRandom secureRandom);
 
     public static int[] getAllCoordinateSystems() {
-        return new int[]{0, 1, 2, 3, 4, 5, 6, 7};
+        return new int[] {0, 1, 2, 3, 4, 5, 6, 7};
     }
 
     public class Config {
@@ -267,7 +270,8 @@ public abstract class ECCurve {
             case 1:
             case 5:
             default:
-                throw new IllegalArgumentException("Invalid point encoding 0x" + Integer.toString(type, 16));
+                throw new IllegalArgumentException(
+                        "Invalid point encoding 0x" + Integer.toString(type, 16));
             case 2:
             case 3:
                 if (encoded.length != expectedLength + 1) {
@@ -282,10 +286,15 @@ public abstract class ECCurve {
                 break;
             case 4:
                 if (encoded.length != (expectedLength * 2) + 1) {
-                    throw new IllegalArgumentException("Incorrect length for uncompressed encoding");
+                    throw new IllegalArgumentException(
+                            "Incorrect length for uncompressed encoding");
                 }
                 BigInteger X2 = BigIntegers.fromUnsignedByteArray(encoded, 1, expectedLength);
-                p = validatePoint(X2, BigIntegers.fromUnsignedByteArray(encoded, expectedLength + 1, expectedLength));
+                p =
+                        validatePoint(
+                                X2,
+                                BigIntegers.fromUnsignedByteArray(
+                                        encoded, expectedLength + 1, expectedLength));
                 break;
             case 6:
             case 7:
@@ -293,13 +302,16 @@ public abstract class ECCurve {
                     throw new IllegalArgumentException("Incorrect length for hybrid encoding");
                 }
                 BigInteger X3 = BigIntegers.fromUnsignedByteArray(encoded, 1, expectedLength);
-                BigInteger Y = BigIntegers.fromUnsignedByteArray(encoded, expectedLength + 1, expectedLength);
+                BigInteger Y =
+                        BigIntegers.fromUnsignedByteArray(
+                                encoded, expectedLength + 1, expectedLength);
                 boolean testBit = Y.testBit(0);
                 if (type == 7) {
                     z = true;
                 }
                 if (testBit != z) {
-                    throw new IllegalArgumentException("Inconsistent Y coordinate in hybrid encoding");
+                    throw new IllegalArgumentException(
+                            "Inconsistent Y coordinate in hybrid encoding");
                 }
                 p = validatePoint(X3, Y);
                 break;
@@ -330,7 +342,8 @@ public abstract class ECCurve {
             System.arraycopy(py, pyStart, table, (pos2 + FE_BYTES) - pyLen, pyLen);
             pos = pos2 + FE_BYTES;
         }
-        return new AbstractECLookupTable() { // from class: com.android.internal.org.bouncycastle.math.ec.ECCurve.1
+        return new AbstractECLookupTable() { // from class:
+                                             // com.android.internal.org.bouncycastle.math.ec.ECCurve.1
             @Override // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
             public int getSize() {
                 return len;
@@ -353,7 +366,8 @@ public abstract class ECCurve {
                 return createPoint(x, y);
             }
 
-            @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable, com.android.internal.org.bouncycastle.math.ec.ECLookupTable
+            @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable,
+                      // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
             public ECPoint lookupVar(int index) {
                 byte[] x = new byte[FE_BYTES];
                 byte[] y = new byte[FE_BYTES];
@@ -366,7 +380,9 @@ public abstract class ECCurve {
             }
 
             private ECPoint createPoint(byte[] x, byte[] y) {
-                return ECCurve.this.createRawPoint(ECCurve.this.fromBigInteger(new BigInteger(1, x)), ECCurve.this.fromBigInteger(new BigInteger(1, y)));
+                return ECCurve.this.createRawPoint(
+                        ECCurve.this.fromBigInteger(new BigInteger(1, x)),
+                        ECCurve.this.fromBigInteger(new BigInteger(1, y)));
             }
         };
     }
@@ -391,13 +407,18 @@ public abstract class ECCurve {
         for (int i = 0; i < len; i++) {
             ECPoint point = points[off + i];
             if (point != null && this != point.getCurve()) {
-                throw new IllegalArgumentException("'points' entries must be null or on this curve");
+                throw new IllegalArgumentException(
+                        "'points' entries must be null or on this curve");
             }
         }
     }
 
     public boolean equals(ECCurve other) {
-        return this == other || (other != null && getField().equals(other.getField()) && getA().toBigInteger().equals(other.getA().toBigInteger()) && getB().toBigInteger().equals(other.getB().toBigInteger()));
+        return this == other
+                || (other != null
+                        && getField().equals(other.getField())
+                        && getA().toBigInteger().equals(other.getA().toBigInteger())
+                        && getB().toBigInteger().equals(other.getB().toBigInteger()));
     }
 
     public boolean equals(Object obj) {
@@ -405,10 +426,11 @@ public abstract class ECCurve {
     }
 
     public int hashCode() {
-        return (getField().hashCode() ^ Integers.rotateLeft(getA().toBigInteger().hashCode(), 8)) ^ Integers.rotateLeft(getB().toBigInteger().hashCode(), 16);
+        return (getField().hashCode() ^ Integers.rotateLeft(getA().toBigInteger().hashCode(), 8))
+                ^ Integers.rotateLeft(getB().toBigInteger().hashCode(), 16);
     }
 
-    public static abstract class AbstractFp extends ECCurve {
+    public abstract static class AbstractFp extends ECCurve {
         protected AbstractFp(BigInteger q) {
             super(FiniteFields.getPrimeField(q));
         }
@@ -488,7 +510,13 @@ public abstract class ECCurve {
             this.coord = 4;
         }
 
-        protected Fp(BigInteger q, BigInteger r, ECFieldElement a, ECFieldElement b, BigInteger order, BigInteger cofactor) {
+        protected Fp(
+                BigInteger q,
+                BigInteger r,
+                ECFieldElement a,
+                ECFieldElement b,
+                BigInteger order,
+                BigInteger cofactor) {
             super(q);
             this.q = q;
             this.r = r;
@@ -550,7 +578,11 @@ public abstract class ECCurve {
                     case 2:
                     case 3:
                     case 4:
-                        return new ECPoint.Fp(this, fromBigInteger(p.x.toBigInteger()), fromBigInteger(p.y.toBigInteger()), new ECFieldElement[]{fromBigInteger(p.zs[0].toBigInteger())});
+                        return new ECPoint.Fp(
+                                this,
+                                fromBigInteger(p.x.toBigInteger()),
+                                fromBigInteger(p.y.toBigInteger()),
+                                new ECFieldElement[] {fromBigInteger(p.zs[0].toBigInteger())});
                 }
             }
             return super.importPoint(p);
@@ -562,7 +594,7 @@ public abstract class ECCurve {
         }
     }
 
-    public static abstract class AbstractF2m extends ECCurve {
+    public abstract static class AbstractF2m extends ECCurve {
         private BigInteger[] si;
 
         public static BigInteger inverse(int m, int[] ks, BigInteger x) {
@@ -577,7 +609,7 @@ public abstract class ECCurve {
                 if (k3 != 0) {
                     throw new IllegalArgumentException("k3 must be 0 if k2 == 0");
                 }
-                return FiniteFields.getBinaryExtensionField(new int[]{0, k1, m});
+                return FiniteFields.getBinaryExtensionField(new int[] {0, k1, m});
             }
             if (k2 <= k1) {
                 throw new IllegalArgumentException("k2 must be > k1");
@@ -585,7 +617,7 @@ public abstract class ECCurve {
             if (k3 <= k2) {
                 throw new IllegalArgumentException("k3 must be > k2");
             }
-            return FiniteFields.getBinaryExtensionField(new int[]{0, k1, k2, k3, m});
+            return FiniteFields.getBinaryExtensionField(new int[] {0, k1, k2, k3, m});
         }
 
         protected AbstractF2m(int m, int k1, int k2, int k3) {
@@ -709,7 +741,10 @@ public abstract class ECCurve {
         }
 
         public boolean isKoblitz() {
-            return this.order != null && this.cofactor != null && this.b.isOne() && (this.a.isZero() || this.a.isOne());
+            return this.order != null
+                    && this.cofactor != null
+                    && this.b.isOne()
+                    && (this.a.isZero() || this.a.isOne());
         }
 
         private static BigInteger implRandomFieldElementMult(SecureRandom r, int m) {
@@ -733,7 +768,8 @@ public abstract class ECCurve {
             this(m, k, 0, 0, a, b, (BigInteger) null, (BigInteger) null);
         }
 
-        public F2m(int m, int k, BigInteger a, BigInteger b, BigInteger order, BigInteger cofactor) {
+        public F2m(
+                int m, int k, BigInteger a, BigInteger b, BigInteger order, BigInteger cofactor) {
             this(m, k, 0, 0, a, b, order, cofactor);
         }
 
@@ -741,7 +777,15 @@ public abstract class ECCurve {
             this(m, k1, k2, k3, a, b, (BigInteger) null, (BigInteger) null);
         }
 
-        public F2m(int m, int k1, int k2, int k3, BigInteger a, BigInteger b, BigInteger order, BigInteger cofactor) {
+        public F2m(
+                int m,
+                int k1,
+                int k2,
+                int k3,
+                BigInteger a,
+                BigInteger b,
+                BigInteger order,
+                BigInteger cofactor) {
             super(m, k1, k2, k3);
             this.m = m;
             this.k1 = k1;
@@ -755,7 +799,15 @@ public abstract class ECCurve {
             this.coord = 6;
         }
 
-        protected F2m(int m, int k1, int k2, int k3, ECFieldElement a, ECFieldElement b, BigInteger order, BigInteger cofactor) {
+        protected F2m(
+                int m,
+                int k1,
+                int k2,
+                int k3,
+                ECFieldElement a,
+                ECFieldElement b,
+                BigInteger order,
+                BigInteger cofactor) {
             super(m, k1, k2, k3);
             this.m = m;
             this.k1 = k1;
@@ -771,7 +823,8 @@ public abstract class ECCurve {
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve
         protected ECCurve cloneCurve() {
-            return new F2m(this.m, this.k1, this.k2, this.k3, this.a, this.b, this.order, this.cofactor);
+            return new F2m(
+                    this.m, this.k1, this.k2, this.k3, this.a, this.b, this.order, this.cofactor);
         }
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve
@@ -842,7 +895,8 @@ public abstract class ECCurve {
         @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve
         public ECLookupTable createCacheSafeLookupTable(ECPoint[] points, int off, final int len) {
             final int FE_LONGS = (this.m + 63) >>> 6;
-            final int[] ks = isTrinomial() ? new int[]{this.k1} : new int[]{this.k1, this.k2, this.k3};
+            final int[] ks =
+                    isTrinomial() ? new int[] {this.k1} : new int[] {this.k1, this.k2, this.k3};
             final long[] table = new long[len * FE_LONGS * 2];
             int pos = 0;
             for (int i = 0; i < len; i++) {
@@ -852,7 +906,8 @@ public abstract class ECCurve {
                 ((ECFieldElement.F2m) p.getRawYCoord()).x.copyTo(table, pos2);
                 pos = pos2 + FE_LONGS;
             }
-            return new AbstractECLookupTable() { // from class: com.android.internal.org.bouncycastle.math.ec.ECCurve.F2m.1
+            return new AbstractECLookupTable() { // from class:
+                                                 // com.android.internal.org.bouncycastle.math.ec.ECCurve.F2m.1
                 @Override // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
                 public int getSize() {
                     return len;
@@ -875,7 +930,8 @@ public abstract class ECCurve {
                     return createPoint(x, y);
                 }
 
-                @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable, com.android.internal.org.bouncycastle.math.ec.ECLookupTable
+                @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable,
+                          // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
                 public ECPoint lookupVar(int index) {
                     long[] x = Nat.create64(FE_LONGS);
                     long[] y = Nat.create64(FE_LONGS);

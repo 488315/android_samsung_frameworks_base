@@ -2,9 +2,11 @@ package com.samsung.android.graphics.spr.document.shape;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
 import com.samsung.android.graphics.spr.document.SprDocument;
 import com.samsung.android.graphics.spr.document.SprInputStream;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeShadow;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -65,7 +67,13 @@ public class SprObjectShapeUse extends SprObjectBase {
     }
 
     @Override // com.samsung.android.graphics.spr.document.shape.SprObjectBase
-    public void preDraw(SprDocument document, Paint strokePaint, Paint fillPaint, boolean isVisibleStroke, boolean isVisibleFill, SprAttributeShadow shadow) {
+    public void preDraw(
+            SprDocument document,
+            Paint strokePaint,
+            Paint fillPaint,
+            boolean isVisibleStroke,
+            boolean isVisibleFill,
+            SprAttributeShadow shadow) {
         SprObjectBase link = document.getReference(this.link);
         if (link != null) {
             link.preDraw(document, strokePaint, fillPaint, isVisibleStroke, isVisibleFill, shadow);

@@ -1,7 +1,9 @@
 package android.hardware.lights;
 
 import android.annotation.SystemApi;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

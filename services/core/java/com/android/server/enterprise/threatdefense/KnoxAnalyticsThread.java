@@ -1,11 +1,14 @@
 package com.android.server.enterprise.threatdefense;
 
 import android.util.Log;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.analytics.KnoxAnalytics;
 import com.samsung.android.knox.analytics.KnoxAnalyticsData;
 import com.samsung.android.knox.analytics.util.KnoxAnalyticsDataConverter;
+
 import java.util.Hashtable;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -137,7 +140,10 @@ public final class KnoxAnalyticsThread {
         Ld2:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.threatdefense.KnoxAnalyticsThread.countApiCall(int, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.threatdefense.KnoxAnalyticsThread.countApiCall(int,"
+                    + " java.lang.String):void");
     }
 
     public final void flush(int i, String str) {
@@ -165,7 +171,8 @@ public final class KnoxAnalyticsThread {
             try {
                 ((Hashtable) hashtable.get(str)).replace(Integer.valueOf(i), 0L);
                 j3 = ((Long) ((Hashtable) hashtable.get(str)).get(Integer.valueOf(i))).longValue();
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("Flush!! status: ", j2, "->");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m("Flush!! status: ", j2, "->");
                 m.append(j3);
                 Log.i("KnoxAnalyticsThread", m.toString());
             } catch (Throwable th2) {
@@ -183,7 +190,9 @@ public final class KnoxAnalyticsThread {
                             long j5 = j3;
                             j3 = j;
                             j2 = j5;
-                            StringBuilder m2 = BatteryService$$ExternalSyntheticOutline0.m("Flush!! status: ", j2, "->");
+                            StringBuilder m2 =
+                                    BatteryService$$ExternalSyntheticOutline0.m(
+                                            "Flush!! status: ", j2, "->");
                             m2.append(j3);
                             Log.i("KnoxAnalyticsThread", m2.toString());
                         }
@@ -196,12 +205,14 @@ public final class KnoxAnalyticsThread {
     }
 
     public final void sendKnoxAnalyticsLogs(int i, String str, long j) {
-        KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_MTD", 1, "MTD_USAGE_EVENT");
+        KnoxAnalyticsData knoxAnalyticsData =
+                new KnoxAnalyticsData("KNOX_MTD", 1, "MTD_USAGE_EVENT");
         knoxAnalyticsData.setProperty(KnoxAnalyticsDataConverter.EVENT, EVENT[i]);
         knoxAnalyticsData.setProperty("c", j);
         knoxAnalyticsData.setProperty("pN", str);
         if (j == 0) {
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "Skip!! api=", "KnoxAnalyticsThread");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    i, "Skip!! api=", "KnoxAnalyticsThread");
             return;
         }
         KnoxAnalytics.log(knoxAnalyticsData);

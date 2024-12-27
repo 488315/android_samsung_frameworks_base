@@ -30,12 +30,13 @@ import android.os.RemoteException;
 import android.util.ArraySet;
 import android.util.IndentingPrintWriter;
 import android.util.MutableInt;
+
 import com.android.server.broadcastradio.RadioEventLogger;
 import com.android.server.broadcastradio.RadioServiceUserController;
-import com.android.server.broadcastradio.hal2.AnnouncementAggregator;
-import com.android.server.broadcastradio.hal2.RadioModule;
 import com.android.server.utils.Slogf;
+
 import com.att.iqi.lib.metrics.hw.HwConstants;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -71,23 +72,21 @@ public final class RadioModule {
             this.this$0 = obj;
         }
 
-        private final void debug$com$android$server$broadcastradio$hal2$RadioModule$1(NativeHandle nativeHandle, ArrayList arrayList) {
-        }
+        private final void debug$com$android$server$broadcastradio$hal2$RadioModule$1(
+                NativeHandle nativeHandle, ArrayList arrayList) {}
 
-        private final void debug$com$android$server$broadcastradio$hal2$RadioModule$2(NativeHandle nativeHandle, ArrayList arrayList) {
-        }
+        private final void debug$com$android$server$broadcastradio$hal2$RadioModule$2(
+                NativeHandle nativeHandle, ArrayList arrayList) {}
 
-        private final void ping$com$android$server$broadcastradio$hal2$RadioModule$1() {
-        }
+        private final void ping$com$android$server$broadcastradio$hal2$RadioModule$1() {}
 
-        private final void ping$com$android$server$broadcastradio$hal2$RadioModule$2() {
-        }
+        private final void ping$com$android$server$broadcastradio$hal2$RadioModule$2() {}
 
-        private final void setHALInstrumentation$com$android$server$broadcastradio$hal2$RadioModule$1() {
-        }
+        private final void
+                setHALInstrumentation$com$android$server$broadcastradio$hal2$RadioModule$1() {}
 
-        private final void setHALInstrumentation$com$android$server$broadcastradio$hal2$RadioModule$2() {
-        }
+        private final void
+                setHALInstrumentation$com$android$server$broadcastradio$hal2$RadioModule$2() {}
 
         @Override // android.hidl.base.V1_0.IBase
         public final IHwBinder asBinder() {
@@ -122,9 +121,118 @@ public final class RadioModule {
         public final ArrayList getHashChain() {
             switch (this.$r8$classId) {
                 case 0:
-                    return new ArrayList(Arrays.asList(new byte[]{-81, 36, -72, 124, -88, -72, -16, 47, -51, -30, 5, -28, 125, -74, -87, 96, -97, -57, -23, -41, 125, 115, -26, -108, -20, -113, -100, 80, -116, -95, -107, 117}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, -48, 45, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, 36, -13, -51, 105, 87, 19, -109, 36, -72, 59, 24, -54, 76}));
+                    return new ArrayList(
+                            Arrays.asList(
+                                    new byte[] {
+                                        -81, 36, -72, 124, -88, -72, -16, 47, -51, -30, 5, -28, 125,
+                                        -74, -87, 96, -97, -57, -23, -41, 125, 115, -26, -108, -20,
+                                        -113, -100, 80, -116, -95, -107, 117
+                                    },
+                                    new byte[] {
+                                        -20,
+                                        Byte.MAX_VALUE,
+                                        -41,
+                                        -98,
+                                        -48,
+                                        45,
+                                        -6,
+                                        -123,
+                                        -68,
+                                        73,
+                                        -108,
+                                        38,
+                                        -83,
+                                        -82,
+                                        62,
+                                        -66,
+                                        35,
+                                        -17,
+                                        5,
+                                        36,
+                                        -13,
+                                        -51,
+                                        105,
+                                        87,
+                                        19,
+                                        -109,
+                                        36,
+                                        -72,
+                                        59,
+                                        24,
+                                        -54,
+                                        76
+                                    }));
                 default:
-                    return new ArrayList(Arrays.asList(new byte[]{61, -114, -42, 125, Byte.MIN_VALUE, 126, -97, 21, -48, 112, -125, -112, -92, 22, -66, -32, 9, HwConstants.IQ_CONFIG_POS_WIFI_ENABLED, -10, -94, 33, -106, -63, 4, -52, -98, 68, 60, -115, 33, 125, -8}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, -48, 45, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, 36, -13, -51, 105, 87, 19, -109, 36, -72, 59, 24, -54, 76}));
+                    return new ArrayList(
+                            Arrays.asList(
+                                    new byte[] {
+                                        61,
+                                        -114,
+                                        -42,
+                                        125,
+                                        Byte.MIN_VALUE,
+                                        126,
+                                        -97,
+                                        21,
+                                        -48,
+                                        112,
+                                        -125,
+                                        -112,
+                                        -92,
+                                        22,
+                                        -66,
+                                        -32,
+                                        9,
+                                        HwConstants.IQ_CONFIG_POS_WIFI_ENABLED,
+                                        -10,
+                                        -94,
+                                        33,
+                                        -106,
+                                        -63,
+                                        4,
+                                        -52,
+                                        -98,
+                                        68,
+                                        60,
+                                        -115,
+                                        33,
+                                        125,
+                                        -8
+                                    },
+                                    new byte[] {
+                                        -20,
+                                        Byte.MAX_VALUE,
+                                        -41,
+                                        -98,
+                                        -48,
+                                        45,
+                                        -6,
+                                        -123,
+                                        -68,
+                                        73,
+                                        -108,
+                                        38,
+                                        -83,
+                                        -82,
+                                        62,
+                                        -66,
+                                        35,
+                                        -17,
+                                        5,
+                                        36,
+                                        -13,
+                                        -51,
+                                        105,
+                                        87,
+                                        19,
+                                        -109,
+                                        36,
+                                        -72,
+                                        59,
+                                        24,
+                                        -54,
+                                        76
+                                    }));
             }
         }
 
@@ -132,9 +240,15 @@ public final class RadioModule {
         public final ArrayList interfaceChain() {
             switch (this.$r8$classId) {
                 case 0:
-                    return new ArrayList(Arrays.asList("android.hardware.broadcastradio@2.0::ITunerCallback", IBase.kInterfaceName));
+                    return new ArrayList(
+                            Arrays.asList(
+                                    "android.hardware.broadcastradio@2.0::ITunerCallback",
+                                    IBase.kInterfaceName));
                 default:
-                    return new ArrayList(Arrays.asList("android.hardware.broadcastradio@2.0::IAnnouncementListener", IBase.kInterfaceName));
+                    return new ArrayList(
+                            Arrays.asList(
+                                    "android.hardware.broadcastradio@2.0::IAnnouncementListener",
+                                    IBase.kInterfaceName));
             }
         }
 
@@ -171,62 +285,86 @@ public final class RadioModule {
             switch (this.$r8$classId) {
                 case 0:
                     if (i == 1) {
-                        hwParcel.enforceInterface("android.hardware.broadcastradio@2.0::ITunerCallback");
+                        hwParcel.enforceInterface(
+                                "android.hardware.broadcastradio@2.0::ITunerCallback");
                         final int readInt32 = hwParcel.readInt32();
                         final ProgramSelector programSelector = new ProgramSelector();
-                        programSelector.readEmbeddedFromParcel(hwParcel, hwParcel.readBuffer(32L), 0L);
-                        ((RadioModule) this.this$0).fireLater(new Runnable() { // from class: com.android.server.broadcastradio.hal2.RadioModule$1$$ExternalSyntheticLambda3
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                final int i3;
-                                RadioModule.AnonymousClass1 anonymousClass1 = RadioModule.AnonymousClass1.this;
-                                ProgramSelector programSelector2 = programSelector;
-                                int i4 = readInt32;
-                                anonymousClass1.getClass();
-                                final android.hardware.radio.ProgramSelector programSelectorFromHal = Convert.programSelectorFromHal(programSelector2);
-                                if (i4 != 0) {
-                                    i3 = 2;
-                                    if (i4 != 2) {
-                                        int i5 = 3;
-                                        if (i4 != 3) {
-                                            i3 = 4;
-                                            if (i4 != 4) {
-                                                i5 = 5;
-                                                if (i4 != 5) {
-                                                    if (i4 != 6) {
-                                                        i3 = 7;
+                        programSelector.readEmbeddedFromParcel(
+                                hwParcel, hwParcel.readBuffer(32L), 0L);
+                        ((RadioModule) this.this$0)
+                                .fireLater(
+                                        new Runnable() { // from class:
+                                                         // com.android.server.broadcastradio.hal2.RadioModule$1$$ExternalSyntheticLambda3
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                final int i3;
+                                                RadioModule.AnonymousClass1 anonymousClass1 =
+                                                        RadioModule.AnonymousClass1.this;
+                                                ProgramSelector programSelector2 = programSelector;
+                                                int i4 = readInt32;
+                                                anonymousClass1.getClass();
+                                                final android.hardware.radio.ProgramSelector
+                                                        programSelectorFromHal =
+                                                                Convert.programSelectorFromHal(
+                                                                        programSelector2);
+                                                if (i4 != 0) {
+                                                    i3 = 2;
+                                                    if (i4 != 2) {
+                                                        int i5 = 3;
+                                                        if (i4 != 3) {
+                                                            i3 = 4;
+                                                            if (i4 != 4) {
+                                                                i5 = 5;
+                                                                if (i4 != 5) {
+                                                                    if (i4 != 6) {
+                                                                        i3 = 7;
+                                                                    }
+                                                                }
+                                                            }
+                                                            i3 = i5;
+                                                        }
+                                                    } else {
+                                                        i3 = 1;
                                                     }
+                                                } else {
+                                                    i3 = 0;
+                                                }
+                                                synchronized (
+                                                        ((RadioModule) anonymousClass1.this$0)
+                                                                .mLock) {
+                                                    ((RadioModule) anonymousClass1.this$0)
+                                                            .fanoutAidlCallbackLocked(
+                                                                    new RadioModule
+                                                                            .AidlCallbackRunnable() { // from class: com.android.server.broadcastradio.hal2.RadioModule$1$$ExternalSyntheticLambda5
+                                                                        @Override // com.android.server.broadcastradio.hal2.RadioModule.AidlCallbackRunnable
+                                                                        public final void run(
+                                                                                ITunerCallback
+                                                                                        iTunerCallback) {
+                                                                            iTunerCallback
+                                                                                    .onTuneFailed(
+                                                                                            i3,
+                                                                                            programSelectorFromHal);
+                                                                        }
+                                                                    });
                                                 }
                                             }
-                                            i3 = i5;
-                                        }
-                                    } else {
-                                        i3 = 1;
-                                    }
-                                } else {
-                                    i3 = 0;
-                                }
-                                synchronized (((RadioModule) anonymousClass1.this$0).mLock) {
-                                    ((RadioModule) anonymousClass1.this$0).fanoutAidlCallbackLocked(new RadioModule.AidlCallbackRunnable() { // from class: com.android.server.broadcastradio.hal2.RadioModule$1$$ExternalSyntheticLambda5
-                                        @Override // com.android.server.broadcastradio.hal2.RadioModule.AidlCallbackRunnable
-                                        public final void run(ITunerCallback iTunerCallback) {
-                                            iTunerCallback.onTuneFailed(i3, programSelectorFromHal);
-                                        }
-                                    });
-                                }
-                            }
-                        });
+                                        });
                         return;
                     }
                     if (i == 2) {
-                        hwParcel.enforceInterface("android.hardware.broadcastradio@2.0::ITunerCallback");
+                        hwParcel.enforceInterface(
+                                "android.hardware.broadcastradio@2.0::ITunerCallback");
                         ProgramInfo programInfo = new ProgramInfo();
                         programInfo.readEmbeddedFromParcel(hwParcel, hwParcel.readBuffer(120L), 0L);
-                        ((RadioModule) this.this$0).fireLater(new RadioModule$$ExternalSyntheticLambda3(1, this, programInfo));
+                        ((RadioModule) this.this$0)
+                                .fireLater(
+                                        new RadioModule$$ExternalSyntheticLambda3(
+                                                1, this, programInfo));
                         return;
                     }
                     if (i == 3) {
-                        hwParcel.enforceInterface("android.hardware.broadcastradio@2.0::ITunerCallback");
+                        hwParcel.enforceInterface(
+                                "android.hardware.broadcastradio@2.0::ITunerCallback");
                         ProgramListChunk programListChunk = new ProgramListChunk();
                         programListChunk.purge = false;
                         programListChunk.complete = false;
@@ -237,48 +375,78 @@ public final class RadioModule {
                         programListChunk.purge = readBuffer.getBool(0L);
                         programListChunk.complete = readBuffer.getBool(1L);
                         int int32 = readBuffer.getInt32(16L);
-                        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 120, readBuffer.handle(), 8L, true);
+                        HwBlob readEmbeddedBuffer =
+                                hwParcel.readEmbeddedBuffer(
+                                        int32 * 120, readBuffer.handle(), 8L, true);
                         arrayList.clear();
                         for (int i3 = 0; i3 < int32; i3++) {
                             ProgramInfo programInfo2 = new ProgramInfo();
-                            programInfo2.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i3 * 120);
+                            programInfo2.readEmbeddedFromParcel(
+                                    hwParcel, readEmbeddedBuffer, i3 * 120);
                             programListChunk.modified.add(programInfo2);
                         }
                         int int322 = readBuffer.getInt32(32L);
-                        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, readBuffer.handle(), 24L, true);
+                        HwBlob readEmbeddedBuffer2 =
+                                hwParcel.readEmbeddedBuffer(
+                                        int322 * 16, readBuffer.handle(), 24L, true);
                         programListChunk.removed.clear();
                         for (int i4 = 0; i4 < int322; i4++) {
                             ProgramIdentifier programIdentifier = new ProgramIdentifier();
                             programIdentifier.readEmbeddedFromParcel(readEmbeddedBuffer2, i4 * 16);
                             programListChunk.removed.add(programIdentifier);
                         }
-                        ((RadioModule) this.this$0).fireLater(new RadioModule$$ExternalSyntheticLambda3(3, this, programListChunk));
+                        ((RadioModule) this.this$0)
+                                .fireLater(
+                                        new RadioModule$$ExternalSyntheticLambda3(
+                                                3, this, programListChunk));
                         return;
                     }
                     if (i == 4) {
-                        hwParcel.enforceInterface("android.hardware.broadcastradio@2.0::ITunerCallback");
+                        hwParcel.enforceInterface(
+                                "android.hardware.broadcastradio@2.0::ITunerCallback");
                         final boolean readBool = hwParcel.readBool();
-                        ((RadioModule) this.this$0).fireLater(new Runnable() { // from class: com.android.server.broadcastradio.hal2.RadioModule$1$$ExternalSyntheticLambda1
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                RadioModule.AnonymousClass1 anonymousClass1 = RadioModule.AnonymousClass1.this;
-                                final boolean z = readBool;
-                                synchronized (((RadioModule) anonymousClass1.this$0).mLock) {
-                                    ((RadioModule) anonymousClass1.this$0).mAntennaConnected = Boolean.valueOf(z);
-                                    ((RadioModule) anonymousClass1.this$0).fanoutAidlCallbackLocked(new RadioModule.AidlCallbackRunnable() { // from class: com.android.server.broadcastradio.hal2.RadioModule$1$$ExternalSyntheticLambda7
-                                        @Override // com.android.server.broadcastradio.hal2.RadioModule.AidlCallbackRunnable
-                                        public final void run(ITunerCallback iTunerCallback) {
-                                            iTunerCallback.onAntennaState(z);
-                                        }
-                                    });
-                                }
-                            }
-                        });
+                        ((RadioModule) this.this$0)
+                                .fireLater(
+                                        new Runnable() { // from class:
+                                                         // com.android.server.broadcastradio.hal2.RadioModule$1$$ExternalSyntheticLambda1
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                RadioModule.AnonymousClass1 anonymousClass1 =
+                                                        RadioModule.AnonymousClass1.this;
+                                                final boolean z = readBool;
+                                                synchronized (
+                                                        ((RadioModule) anonymousClass1.this$0)
+                                                                .mLock) {
+                                                    ((RadioModule) anonymousClass1.this$0)
+                                                                    .mAntennaConnected =
+                                                            Boolean.valueOf(z);
+                                                    ((RadioModule) anonymousClass1.this$0)
+                                                            .fanoutAidlCallbackLocked(
+                                                                    new RadioModule
+                                                                            .AidlCallbackRunnable() { // from class: com.android.server.broadcastradio.hal2.RadioModule$1$$ExternalSyntheticLambda7
+                                                                        @Override // com.android.server.broadcastradio.hal2.RadioModule.AidlCallbackRunnable
+                                                                        public final void run(
+                                                                                ITunerCallback
+                                                                                        iTunerCallback) {
+                                                                            iTunerCallback
+                                                                                    .onAntennaState(
+                                                                                            z);
+                                                                        }
+                                                                    });
+                                                }
+                                            }
+                                        });
                         return;
                     }
                     if (i == 5) {
-                        hwParcel.enforceInterface("android.hardware.broadcastradio@2.0::ITunerCallback");
-                        ((RadioModule) this.this$0).fireLater(new RadioModule$$ExternalSyntheticLambda3(2, this, VendorKeyValue.readVectorFromParcel(hwParcel)));
+                        hwParcel.enforceInterface(
+                                "android.hardware.broadcastradio@2.0::ITunerCallback");
+                        ((RadioModule) this.this$0)
+                                .fireLater(
+                                        new RadioModule$$ExternalSyntheticLambda3(
+                                                2,
+                                                this,
+                                                VendorKeyValue.readVectorFromParcel(hwParcel)));
                         return;
                     }
                     switch (i) {
@@ -299,7 +467,8 @@ public final class RadioModule {
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString("android.hardware.broadcastradio@2.0::ITunerCallback");
+                            hwParcel2.writeString(
+                                    "android.hardware.broadcastradio@2.0::ITunerCallback");
                             hwParcel2.send();
                             return;
                         case 256398152:
@@ -315,7 +484,8 @@ public final class RadioModule {
                                 long j = i5 * 32;
                                 byte[] bArr = (byte[]) hashChain.get(i5);
                                 if (bArr == null || bArr.length != 32) {
-                                    throw new IllegalArgumentException("Array element is not of the expected length");
+                                    throw new IllegalArgumentException(
+                                            "Array element is not of the expected length");
                                 }
                                 hwBlob2.putInt8Array(j, bArr);
                             }
@@ -349,11 +519,14 @@ public final class RadioModule {
                     byte b = 0;
                     switch (i) {
                         case 1:
-                            hwParcel.enforceInterface("android.hardware.broadcastradio@2.0::IAnnouncementListener");
+                            hwParcel.enforceInterface(
+                                    "android.hardware.broadcastradio@2.0::IAnnouncementListener");
                             ArrayList arrayList2 = new ArrayList();
                             HwBlob readBuffer2 = hwParcel.readBuffer(16L);
                             int int323 = readBuffer2.getInt32(8L);
-                            HwBlob readEmbeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 56, readBuffer2.handle(), 0L, true);
+                            HwBlob readEmbeddedBuffer3 =
+                                    hwParcel.readEmbeddedBuffer(
+                                            int323 * 56, readBuffer2.handle(), 0L, true);
                             arrayList2.clear();
                             int i6 = 0;
                             while (i6 < int323) {
@@ -364,21 +537,34 @@ public final class RadioModule {
                                 ArrayList arrayList3 = new ArrayList();
                                 announcement.vendorInfo = arrayList3;
                                 long j2 = i6 * 56;
-                                programSelector2.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer3, j2);
+                                programSelector2.readEmbeddedFromParcel(
+                                        hwParcel, readEmbeddedBuffer3, j2);
                                 announcement.type = readEmbeddedBuffer3.getInt8(32 + j2);
                                 int int324 = readEmbeddedBuffer3.getInt32(j2 + 48);
-                                HwBlob readEmbeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 32, readEmbeddedBuffer3.handle(), j2 + 40, true);
+                                HwBlob readEmbeddedBuffer4 =
+                                        hwParcel.readEmbeddedBuffer(
+                                                int324 * 32,
+                                                readEmbeddedBuffer3.handle(),
+                                                j2 + 40,
+                                                true);
                                 arrayList3.clear();
                                 for (int i7 = 0; i7 < int324; i7++) {
                                     VendorKeyValue vendorKeyValue = new VendorKeyValue();
-                                    vendorKeyValue.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer4, i7 * 32);
+                                    vendorKeyValue.readEmbeddedFromParcel(
+                                            hwParcel, readEmbeddedBuffer4, i7 * 32);
                                     announcement.vendorInfo.add(vendorKeyValue);
                                 }
                                 arrayList2.add(announcement);
                                 i6++;
                                 b = 0;
                             }
-                            ((IAnnouncementListener) this.this$0).onListUpdated((List) arrayList2.stream().map(new RadioModule$2$$ExternalSyntheticLambda0()).collect(Collectors.toList()));
+                            ((IAnnouncementListener) this.this$0)
+                                    .onListUpdated(
+                                            (List)
+                                                    arrayList2.stream()
+                                                            .map(
+                                                                    new RadioModule$2$$ExternalSyntheticLambda0())
+                                                            .collect(Collectors.toList()));
                             return;
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
@@ -397,7 +583,8 @@ public final class RadioModule {
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString("android.hardware.broadcastradio@2.0::IAnnouncementListener");
+                            hwParcel2.writeString(
+                                    "android.hardware.broadcastradio@2.0::IAnnouncementListener");
                             hwParcel2.send();
                             return;
                         case 256398152:
@@ -413,7 +600,8 @@ public final class RadioModule {
                                 long j3 = i8 * 32;
                                 byte[] bArr2 = (byte[]) hashChain2.get(i8);
                                 if (bArr2 == null || bArr2.length != 32) {
-                                    throw new IllegalArgumentException("Array element is not of the expected length");
+                                    throw new IllegalArgumentException(
+                                            "Array element is not of the expected length");
                                 }
                                 hwBlob4.putInt8Array(j3, bArr2);
                             }
@@ -454,12 +642,10 @@ public final class RadioModule {
         public final IHwInterface queryLocalInterface(String str) {
             switch (this.$r8$classId) {
                 case 0:
-                    if ("android.hardware.broadcastradio@2.0::ITunerCallback".equals(str)) {
-                    }
+                    if ("android.hardware.broadcastradio@2.0::ITunerCallback".equals(str)) {}
                     break;
                 default:
-                    if ("android.hardware.broadcastradio@2.0::IAnnouncementListener".equals(str)) {
-                    }
+                    if ("android.hardware.broadcastradio@2.0::IAnnouncementListener".equals(str)) {}
                     break;
             }
             return this;
@@ -492,7 +678,8 @@ public final class RadioModule {
         void run(ITunerCallback iTunerCallback);
     }
 
-    public RadioModule(IBroadcastRadio iBroadcastRadio, RadioManager.ModuleProperties moduleProperties) {
+    public RadioModule(
+            IBroadcastRadio iBroadcastRadio, RadioManager.ModuleProperties moduleProperties) {
         Objects.requireNonNull(moduleProperties);
         this.mProperties = moduleProperties;
         Objects.requireNonNull(iBroadcastRadio);
@@ -512,7 +699,8 @@ public final class RadioModule {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.broadcastradio.hal2.RadioModule tryLoadingModule(int r10, java.lang.String r11) {
+    public static com.android.server.broadcastradio.hal2.RadioModule tryLoadingModule(
+            int r10, java.lang.String r11) {
         /*
             java.lang.String r0 = "android.hardware.broadcastradio@2.0::IBroadcastRadio"
             java.lang.String r1 = "BcRadio2Srv.module"
@@ -612,11 +800,15 @@ public final class RadioModule {
             com.android.server.utils.Slogf.e(r1, r11, r10)
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.broadcastradio.hal2.RadioModule.tryLoadingModule(int, java.lang.String):com.android.server.broadcastradio.hal2.RadioModule");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.broadcastradio.hal2.RadioModule.tryLoadingModule(int,"
+                    + " java.lang.String):com.android.server.broadcastradio.hal2.RadioModule");
     }
 
     /* JADX WARN: Type inference failed for: r6v7, types: [com.android.server.broadcastradio.hal2.RadioModule$3] */
-    public final AnonymousClass3 addAnnouncementListener(int[] iArr, AnnouncementAggregator.ModuleWatcher moduleWatcher) {
+    public final AnonymousClass3 addAnnouncementListener(
+            int[] iArr, AnnouncementAggregator.ModuleWatcher moduleWatcher) {
         this.mEventLogger.logRadioEvent("Add AnnouncementListener", new Object[0]);
         ArrayList arrayList = new ArrayList();
         for (int i : iArr) {
@@ -640,8 +832,11 @@ public final class RadioModule {
             IHwBinder readStrongBinder = hwParcel2.readStrongBinder();
             ICloseHandle$Proxy iCloseHandle$Proxy = null;
             if (readStrongBinder != null) {
-                IHwInterface queryLocalInterface = readStrongBinder.queryLocalInterface("android.hardware.broadcastradio@2.0::ICloseHandle");
-                if (queryLocalInterface == null || !(queryLocalInterface instanceof ICloseHandle$Proxy)) {
+                IHwInterface queryLocalInterface =
+                        readStrongBinder.queryLocalInterface(
+                                "android.hardware.broadcastradio@2.0::ICloseHandle");
+                if (queryLocalInterface == null
+                        || !(queryLocalInterface instanceof ICloseHandle$Proxy)) {
                     ICloseHandle$Proxy iCloseHandle$Proxy2 = new ICloseHandle$Proxy();
                     iCloseHandle$Proxy2.mRemote = readStrongBinder;
                     try {
@@ -650,7 +845,8 @@ public final class RadioModule {
                             if (!it.hasNext()) {
                                 break;
                             }
-                            if (((String) it.next()).equals("android.hardware.broadcastradio@2.0::ICloseHandle")) {
+                            if (((String) it.next())
+                                    .equals("android.hardware.broadcastradio@2.0::ICloseHandle")) {
                                 iCloseHandle$Proxy = iCloseHandle$Proxy2;
                                 break;
                             }
@@ -665,13 +861,16 @@ public final class RadioModule {
             mutable.value = iCloseHandle$Proxy;
             hwParcel2.release();
             Convert.throwOnError(mutableInt.value, "addAnnouncementListener");
-            return new ICloseHandle.Stub() { // from class: com.android.server.broadcastradio.hal2.RadioModule.3
+            return new ICloseHandle
+                    .Stub() { // from class: com.android.server.broadcastradio.hal2.RadioModule.3
                 public final void close() {
                     try {
-                        ICloseHandle$Proxy iCloseHandle$Proxy3 = (ICloseHandle$Proxy) Mutable.this.value;
+                        ICloseHandle$Proxy iCloseHandle$Proxy3 =
+                                (ICloseHandle$Proxy) Mutable.this.value;
                         iCloseHandle$Proxy3.getClass();
                         HwParcel hwParcel3 = new HwParcel();
-                        hwParcel3.writeInterfaceToken("android.hardware.broadcastradio@2.0::ICloseHandle");
+                        hwParcel3.writeInterfaceToken(
+                                "android.hardware.broadcastradio@2.0::ICloseHandle");
                         HwParcel hwParcel4 = new HwParcel();
                         try {
                             iCloseHandle$Proxy3.mRemote.transact(1, hwParcel3, hwParcel4, 0);
@@ -712,21 +911,27 @@ public final class RadioModule {
     public final void dumpInfo(IndentingPrintWriter indentingPrintWriter) {
         indentingPrintWriter.printf("RadioModule\n", new Object[0]);
         indentingPrintWriter.increaseIndent();
-        indentingPrintWriter.printf("BroadcastRadioService: %s\n", new Object[]{this.mService});
-        indentingPrintWriter.printf("Properties: %s\n", new Object[]{this.mProperties});
+        indentingPrintWriter.printf("BroadcastRadioService: %s\n", new Object[] {this.mService});
+        indentingPrintWriter.printf("Properties: %s\n", new Object[] {this.mProperties});
         synchronized (this.mLock) {
             try {
-                indentingPrintWriter.printf("HIDL 2.0 HAL TunerSession: %s\n", new Object[]{this.mHalTunerSession});
+                indentingPrintWriter.printf(
+                        "HIDL 2.0 HAL TunerSession: %s\n", new Object[] {this.mHalTunerSession});
                 indentingPrintWriter.printf("Is antenna connected? ", new Object[0]);
                 Boolean bool = this.mAntennaConnected;
                 if (bool == null) {
                     indentingPrintWriter.printf("null\n", new Object[0]);
                 } else {
-                    indentingPrintWriter.printf("%s\n", new Object[]{bool.booleanValue() ? "Yes" : "No"});
+                    indentingPrintWriter.printf(
+                            "%s\n", new Object[] {bool.booleanValue() ? "Yes" : "No"});
                 }
-                indentingPrintWriter.printf("Current ProgramInfo: %s\n", new Object[]{this.mCurrentProgramInfo});
-                indentingPrintWriter.printf("ProgramInfoCache: %s\n", new Object[]{this.mProgramInfoCache});
-                indentingPrintWriter.printf("Union of AIDL ProgramFilters: %s\n", new Object[]{this.mUnionOfAidlProgramFilters});
+                indentingPrintWriter.printf(
+                        "Current ProgramInfo: %s\n", new Object[] {this.mCurrentProgramInfo});
+                indentingPrintWriter.printf(
+                        "ProgramInfoCache: %s\n", new Object[] {this.mProgramInfoCache});
+                indentingPrintWriter.printf(
+                        "Union of AIDL ProgramFilters: %s\n",
+                        new Object[] {this.mUnionOfAidlProgramFilters});
                 indentingPrintWriter.printf("AIDL TunerSessions:\n", new Object[0]);
                 indentingPrintWriter.increaseIndent();
                 Iterator it = ((ArraySet) this.mAidlTunerSessions).iterator();
@@ -772,12 +977,14 @@ public final class RadioModule {
     }
 
     public final void fireLater(final Runnable runnable) {
-        this.mHandler.post(new Runnable() { // from class: com.android.server.broadcastradio.hal2.RadioModule$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                runnable.run();
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.broadcastradio.hal2.RadioModule$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        runnable.run();
+                    }
+                });
     }
 
     public final void onTunerSessionProgramListFilterChangedLocked(TunerSession tunerSession) {
@@ -819,15 +1026,22 @@ public final class RadioModule {
                 }
             }
         }
-        ProgramList.Filter filter2 = arraySet == null ? null : new ProgramList.Filter(arraySet, arraySet2, z2, z);
+        ProgramList.Filter filter2 =
+                arraySet == null ? null : new ProgramList.Filter(arraySet, arraySet2, z2, z);
         if (filter2 != null) {
             if (!filter2.equals(this.mUnionOfAidlProgramFilters)) {
                 this.mUnionOfAidlProgramFilters = filter2;
                 try {
-                    Convert.throwOnError(this.mHalTunerSession.startProgramListUpdates(Convert.programFilterToHal(filter2)), "startProgramListUpdates");
+                    Convert.throwOnError(
+                            this.mHalTunerSession.startProgramListUpdates(
+                                    Convert.programFilterToHal(filter2)),
+                            "startProgramListUpdates");
                     return;
                 } catch (RemoteException e) {
-                    Slogf.e("BcRadio2Srv.module", "mHalTunerSession.startProgramListUpdates() failed: ", e);
+                    Slogf.e(
+                            "BcRadio2Srv.module",
+                            "mHalTunerSession.startProgramListUpdates() failed: ",
+                            e);
                     return;
                 }
             }
@@ -837,7 +1051,9 @@ public final class RadioModule {
                     try {
                         ProgramInfoCache programInfoCache3 = tunerSession.mProgramInfoCache;
                         if (programInfoCache3 != null) {
-                            tunerSession.dispatchClientUpdateChunks(programInfoCache3.filterAndUpdateFromInternal(programInfoCache2, true, 100, 500));
+                            tunerSession.dispatchClientUpdateChunks(
+                                    programInfoCache3.filterAndUpdateFromInternal(
+                                            programInfoCache2, true, 100, 500));
                         }
                     } finally {
                     }

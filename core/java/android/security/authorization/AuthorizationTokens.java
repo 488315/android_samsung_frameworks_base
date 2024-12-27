@@ -8,21 +8,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class AuthorizationTokens implements Parcelable {
-    public static final Parcelable.Creator<AuthorizationTokens> CREATOR = new Parcelable.Creator<AuthorizationTokens>() { // from class: android.security.authorization.AuthorizationTokens.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthorizationTokens createFromParcel(Parcel _aidl_source) {
-            AuthorizationTokens _aidl_out = new AuthorizationTokens();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AuthorizationTokens> CREATOR =
+            new Parcelable.Creator<
+                    AuthorizationTokens>() { // from class:
+                                             // android.security.authorization.AuthorizationTokens.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthorizationTokens createFromParcel(Parcel _aidl_source) {
+                    AuthorizationTokens _aidl_out = new AuthorizationTokens();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthorizationTokens[] newArray(int _aidl_size) {
-            return new AuthorizationTokens[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthorizationTokens[] newArray(int _aidl_size) {
+                    return new AuthorizationTokens[_aidl_size];
+                }
+            };
     public HardwareAuthToken authToken;
     public TimeStampToken timestampToken;
 
@@ -52,14 +55,16 @@ public class AuthorizationTokens implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.authToken = (HardwareAuthToken) _aidl_parcel.readTypedObject(HardwareAuthToken.CREATOR);
+            this.authToken =
+                    (HardwareAuthToken) _aidl_parcel.readTypedObject(HardwareAuthToken.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.timestampToken = (TimeStampToken) _aidl_parcel.readTypedObject(TimeStampToken.CREATOR);
+                this.timestampToken =
+                        (TimeStampToken) _aidl_parcel.readTypedObject(TimeStampToken.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

@@ -3,6 +3,7 @@ package android.app.search;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -21,19 +22,21 @@ public final class SearchTargetEvent implements Parcelable {
     public static final int ACTION_SURFACE_INVISIBLE = 8;
     public static final int ACTION_SURFACE_VISIBLE = 1;
     public static final int ACTION_TAP = 3;
-    public static final Parcelable.Creator<SearchTargetEvent> CREATOR = new Parcelable.Creator<SearchTargetEvent>() { // from class: android.app.search.SearchTargetEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchTargetEvent createFromParcel(Parcel parcel) {
-            return new SearchTargetEvent(parcel);
-        }
+    public static final Parcelable.Creator<SearchTargetEvent> CREATOR =
+            new Parcelable.Creator<
+                    SearchTargetEvent>() { // from class: android.app.search.SearchTargetEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchTargetEvent createFromParcel(Parcel parcel) {
+                    return new SearchTargetEvent(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchTargetEvent[] newArray(int size) {
-            return new SearchTargetEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchTargetEvent[] newArray(int size) {
+                    return new SearchTargetEvent[size];
+                }
+            };
     public static final int FLAG_IME_SHOWN = 1;
     private final int mAction;
     private int mFlags;
@@ -41,12 +44,10 @@ public final class SearchTargetEvent implements Parcelable {
     private final List<String> mTargetIds;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ActionType {
-    }
+    public @interface ActionType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FlagType {
-    }
+    public @interface FlagType {}
 
     private SearchTargetEvent(List<String> targetIds, String location, int actionType, int flags) {
         this.mTargetIds = (List) Objects.requireNonNull(targetIds);
@@ -92,7 +93,12 @@ public final class SearchTargetEvent implements Parcelable {
             return false;
         }
         SearchTargetEvent other = (SearchTargetEvent) o;
-        return (this.mTargetIds.equals(other.mTargetIds) && this.mAction == other.mAction && this.mFlags == other.mFlags && this.mLocation == null) ? other.mLocation == null : this.mLocation.equals(other.mLocation);
+        return (this.mTargetIds.equals(other.mTargetIds)
+                        && this.mAction == other.mAction
+                        && this.mFlags == other.mFlags
+                        && this.mLocation == null)
+                ? other.mLocation == null
+                : this.mLocation.equals(other.mLocation);
     }
 
     @Override // android.os.Parcelable
@@ -137,7 +143,8 @@ public final class SearchTargetEvent implements Parcelable {
         }
 
         public SearchTargetEvent build() {
-            return new SearchTargetEvent(this.mTargetIds, this.mLocation, this.mAction, this.mFlags);
+            return new SearchTargetEvent(
+                    this.mTargetIds, this.mLocation, this.mAction, this.mFlags);
         }
     }
 }

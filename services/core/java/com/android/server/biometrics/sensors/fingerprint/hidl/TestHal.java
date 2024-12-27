@@ -14,9 +14,12 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.util.Slog;
+
 import com.android.server.biometrics.sensors.fingerprint.FingerprintUtils;
+
 import com.att.iqi.lib.metrics.hw.HwConstants;
 import com.att.iqi.lib.metrics.mm.MM05;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,8 +57,7 @@ public final class TestHal extends HwBinder implements IBiometricsFingerprint {
     }
 
     @Override // android.hidl.base.V1_0.IBase
-    public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-    }
+    public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {}
 
     @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
     public final int enroll(int i, int i2, byte[] bArr) {
@@ -90,12 +92,125 @@ public final class TestHal extends HwBinder implements IBiometricsFingerprint {
 
     @Override // android.hidl.base.V1_0.IBase
     public final ArrayList getHashChain() {
-        return new ArrayList(Arrays.asList(new byte[]{122, 120, -23, -106, 59, -20, MM05.IQ_SIP_CALL_STATE_DISCONNECTING, 7, 30, 125, 70, -110, -116, 97, 0, -30, 23, 66, 112, -119, 45, 63, 21, -95, -22, -83, 7, 73, -105, -83, -14, 121}, new byte[]{20, 15, -113, 98, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED, 12, -49, -100, -46, -126, -82, 54, -123, -96, -12, -17, 10, -97, -105, 29, 119, -33, -68, 115, 80, -52, -76, -32, 76, -14, -107, -20}, new byte[]{31, -67, -63, -8, 82, -8, -67, 46, 74, 108, 92, -77, 10, -62, -73, -122, 104, -55, -115, -50, 17, -118, 97, 118, 45, 64, 52, -82, -123, -97, 67, -40}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, -48, 45, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, 36, -13, -51, 105, 87, 19, -109, 36, -72, 59, 24, -54, 76}));
+        return new ArrayList(
+                Arrays.asList(
+                        new byte[] {
+                            122,
+                            120,
+                            -23,
+                            -106,
+                            59,
+                            -20,
+                            MM05.IQ_SIP_CALL_STATE_DISCONNECTING,
+                            7,
+                            30,
+                            125,
+                            70,
+                            -110,
+                            -116,
+                            97,
+                            0,
+                            -30,
+                            23,
+                            66,
+                            112,
+                            -119,
+                            45,
+                            63,
+                            21,
+                            -95,
+                            -22,
+                            -83,
+                            7,
+                            73,
+                            -105,
+                            -83,
+                            -14,
+                            121
+                        },
+                        new byte[] {
+                            20,
+                            15,
+                            -113,
+                            98,
+                            HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED,
+                            12,
+                            -49,
+                            -100,
+                            -46,
+                            -126,
+                            -82,
+                            54,
+                            -123,
+                            -96,
+                            -12,
+                            -17,
+                            10,
+                            -97,
+                            -105,
+                            29,
+                            119,
+                            -33,
+                            -68,
+                            115,
+                            80,
+                            -52,
+                            -76,
+                            -32,
+                            76,
+                            -14,
+                            -107,
+                            -20
+                        },
+                        new byte[] {
+                            31, -67, -63, -8, 82, -8, -67, 46, 74, 108, 92, -77, 10, -62, -73, -122,
+                            104, -55, -115, -50, 17, -118, 97, 118, 45, 64, 52, -82, -123, -97, 67,
+                            -40
+                        },
+                        new byte[] {
+                            -20,
+                            Byte.MAX_VALUE,
+                            -41,
+                            -98,
+                            -48,
+                            45,
+                            -6,
+                            -123,
+                            -68,
+                            73,
+                            -108,
+                            38,
+                            -83,
+                            -82,
+                            62,
+                            -66,
+                            35,
+                            -17,
+                            5,
+                            36,
+                            -13,
+                            -51,
+                            105,
+                            87,
+                            19,
+                            -109,
+                            36,
+                            -72,
+                            59,
+                            24,
+                            -54,
+                            76
+                        }));
     }
 
     @Override // android.hidl.base.V1_0.IBase
     public final ArrayList interfaceChain() {
-        return new ArrayList(Arrays.asList("android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint", "android.hardware.biometrics.fingerprint@2.2::IBiometricsFingerprint", "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint", IBase.kInterfaceName));
+        return new ArrayList(
+                Arrays.asList(
+                        "android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint",
+                        "android.hardware.biometrics.fingerprint@2.2::IBiometricsFingerprint",
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint",
+                        IBase.kInterfaceName));
     }
 
     @Override // android.hidl.base.V1_0.IBase
@@ -114,30 +229,33 @@ public final class TestHal extends HwBinder implements IBiometricsFingerprint {
     }
 
     @Override // android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint
-    public final void onFingerDown(int i, float f, float f2, int i2) {
-    }
+    public final void onFingerDown(int i, float f, float f2, int i2) {}
 
     @Override // android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint
-    public final void onFingerUp() {
-    }
+    public final void onFingerUp() {}
 
     public final void onTransact(int i, HwParcel hwParcel, HwParcel hwParcel2, int i2) {
         switch (i) {
             case 1:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
-                this.mCallback = IBiometricsFingerprintClientCallback.asInterface(hwParcel.readStrongBinder());
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+                this.mCallback =
+                        IBiometricsFingerprintClientCallback.asInterface(
+                                hwParcel.readStrongBinder());
                 hwParcel2.writeStatus(0);
                 hwParcel2.writeInt64(1L);
                 hwParcel2.send();
                 return;
             case 2:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
                 hwParcel2.writeStatus(0);
                 hwParcel2.writeInt64(0L);
                 hwParcel2.send();
                 return;
             case 3:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
                 byte[] bArr = new byte[69];
                 hwParcel.readBuffer(69L).copyToInt8Array(0L, bArr, 69);
                 enroll(hwParcel.readInt32(), hwParcel.readInt32(), bArr);
@@ -146,40 +264,46 @@ public final class TestHal extends HwBinder implements IBiometricsFingerprint {
                 hwParcel2.send();
                 return;
             case 4:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
                 hwParcel2.writeStatus(0);
                 hwParcel2.writeInt32(0);
                 hwParcel2.send();
                 return;
             case 5:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
                 hwParcel2.writeStatus(0);
                 hwParcel2.writeInt64(0L);
                 hwParcel2.send();
                 return;
             case 6:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
                 cancel();
                 hwParcel2.writeStatus(0);
                 hwParcel2.writeInt32(0);
                 hwParcel2.send();
                 return;
             case 7:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
                 enumerate();
                 hwParcel2.writeStatus(0);
                 hwParcel2.writeInt32(0);
                 hwParcel2.send();
                 return;
             case 8:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
                 remove(hwParcel.readInt32(), hwParcel.readInt32());
                 hwParcel2.writeStatus(0);
                 hwParcel2.writeInt32(0);
                 hwParcel2.send();
                 return;
             case 9:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
                 hwParcel.readInt32();
                 hwParcel.readString();
                 hwParcel2.writeStatus(0);
@@ -187,21 +311,24 @@ public final class TestHal extends HwBinder implements IBiometricsFingerprint {
                 hwParcel2.send();
                 return;
             case 10:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
                 authenticate(hwParcel.readInt32(), hwParcel.readInt64());
                 hwParcel2.writeStatus(0);
                 hwParcel2.writeInt32(0);
                 hwParcel2.send();
                 return;
             case 11:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint");
                 hwParcel.readInt32();
                 hwParcel2.writeStatus(0);
                 hwParcel2.writeBool(false);
                 hwParcel2.send();
                 return;
             case 12:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint");
                 hwParcel.readInt32();
                 hwParcel.readInt32();
                 hwParcel.readFloat();
@@ -210,7 +337,8 @@ public final class TestHal extends HwBinder implements IBiometricsFingerprint {
                 hwParcel2.send();
                 return;
             case 13:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint");
                 hwParcel2.writeStatus(0);
                 hwParcel2.send();
                 return;
@@ -233,7 +361,8 @@ public final class TestHal extends HwBinder implements IBiometricsFingerprint {
                     case 256136003:
                         hwParcel.enforceInterface(IBase.kInterfaceName);
                         hwParcel2.writeStatus(0);
-                        hwParcel2.writeString("android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint");
+                        hwParcel2.writeString(
+                                "android.hardware.biometrics.fingerprint@2.3::IBiometricsFingerprint");
                         hwParcel2.send();
                         return;
                     case 256398152:
@@ -249,7 +378,8 @@ public final class TestHal extends HwBinder implements IBiometricsFingerprint {
                             long j = i3 * 32;
                             byte[] bArr2 = (byte[]) hashChain.get(i3);
                             if (bArr2 == null || bArr2.length != 32) {
-                                throw new IllegalArgumentException("Array element is not of the expected length");
+                                throw new IllegalArgumentException(
+                                        "Array element is not of the expected length");
                             }
                             hwBlob2.putInt8Array(j, bArr2);
                         }
@@ -283,8 +413,7 @@ public final class TestHal extends HwBinder implements IBiometricsFingerprint {
     }
 
     @Override // android.hidl.base.V1_0.IBase
-    public final void ping() {
-    }
+    public final void ping() {}
 
     @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
     public final int postEnroll() {
@@ -309,9 +438,15 @@ public final class TestHal extends HwBinder implements IBiometricsFingerprint {
         IBiometricsFingerprintClientCallback iBiometricsFingerprintClientCallback = this.mCallback;
         if (iBiometricsFingerprintClientCallback != null) {
             if (i2 == 0) {
-                List biometricsForUser = FingerprintUtils.getInstance(this.mSensorId).getBiometricsForUser(this.mContext, i);
+                List biometricsForUser =
+                        FingerprintUtils.getInstance(this.mSensorId)
+                                .getBiometricsForUser(this.mContext, i);
                 for (int i3 = 0; i3 < biometricsForUser.size(); i3++) {
-                    this.mCallback.onRemoved(((Fingerprint) biometricsForUser.get(i3)).getBiometricId(), i, (biometricsForUser.size() - i3) - 1, 0L);
+                    this.mCallback.onRemoved(
+                            ((Fingerprint) biometricsForUser.get(i3)).getBiometricId(),
+                            i,
+                            (biometricsForUser.size() - i3) - 1,
+                            0L);
                 }
             } else {
                 iBiometricsFingerprintClientCallback.onRemoved(i2, i, 0, 0L);
@@ -326,11 +461,11 @@ public final class TestHal extends HwBinder implements IBiometricsFingerprint {
     }
 
     @Override // android.hidl.base.V1_0.IBase
-    public final void setHALInstrumentation() {
-    }
+    public final void setHALInstrumentation() {}
 
     @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
-    public final long setNotify(IBiometricsFingerprintClientCallback iBiometricsFingerprintClientCallback) {
+    public final long setNotify(
+            IBiometricsFingerprintClientCallback iBiometricsFingerprintClientCallback) {
         this.mCallback = iBiometricsFingerprintClientCallback;
         return 1L;
     }

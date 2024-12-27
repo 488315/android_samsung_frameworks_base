@@ -5,11 +5,13 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public interface ISemWifiApClientListUpdateCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.wifi.ISemWifiApClientListUpdateCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.wifi.ISemWifiApClientListUpdateCallback";
 
     void onClientListUpdated(List<SemWifiApClientDetails> list, long j) throws RemoteException;
 
@@ -17,12 +19,12 @@ public interface ISemWifiApClientListUpdateCallback extends IInterface {
 
     public static class Default implements ISemWifiApClientListUpdateCallback {
         @Override // com.samsung.android.wifi.ISemWifiApClientListUpdateCallback
-        public void onClientListUpdated(List<SemWifiApClientDetails> clientsList, long totalDataUsageInBytes) throws RemoteException {
-        }
+        public void onClientListUpdated(
+                List<SemWifiApClientDetails> clientsList, long totalDataUsageInBytes)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiApClientListUpdateCallback
-        public void onOverallDataLimitChanged(long dataLimitInBytes) throws RemoteException {
-        }
+        public void onOverallDataLimitChanged(long dataLimitInBytes) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +32,7 @@ public interface ISemWifiApClientListUpdateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemWifiApClientListUpdateCallback {
+    public abstract static class Stub extends Binder implements ISemWifiApClientListUpdateCallback {
         static final int TRANSACTION_onClientListUpdated = 1;
         static final int TRANSACTION_onOverallDataLimitChanged = 2;
 
@@ -71,7 +73,8 @@ public interface ISemWifiApClientListUpdateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemWifiApClientListUpdateCallback.DESCRIPTOR);
             }
@@ -81,7 +84,8 @@ public interface ISemWifiApClientListUpdateCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<SemWifiApClientDetails> _arg0 = data.createTypedArrayList(SemWifiApClientDetails.CREATOR);
+                    List<SemWifiApClientDetails> _arg0 =
+                            data.createTypedArrayList(SemWifiApClientDetails.CREATOR);
                     long _arg1 = data.readLong();
                     data.enforceNoDataAvail();
                     onClientListUpdated(_arg0, _arg1);
@@ -113,7 +117,9 @@ public interface ISemWifiApClientListUpdateCallback extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiApClientListUpdateCallback
-            public void onClientListUpdated(List<SemWifiApClientDetails> clientsList, long totalDataUsageInBytes) throws RemoteException {
+            public void onClientListUpdated(
+                    List<SemWifiApClientDetails> clientsList, long totalDataUsageInBytes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiApClientListUpdateCallback.DESCRIPTOR);

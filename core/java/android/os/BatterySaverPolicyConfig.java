@@ -1,9 +1,9 @@
 package android.os;
 
 import android.annotation.SystemApi;
-import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -11,19 +11,22 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class BatterySaverPolicyConfig implements Parcelable {
-    public static final Parcelable.Creator<BatterySaverPolicyConfig> CREATOR = new Parcelable.Creator<BatterySaverPolicyConfig>() { // from class: android.os.BatterySaverPolicyConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BatterySaverPolicyConfig createFromParcel(Parcel in) {
-            return new BatterySaverPolicyConfig(in);
-        }
+    public static final Parcelable.Creator<BatterySaverPolicyConfig> CREATOR =
+            new Parcelable.Creator<
+                    BatterySaverPolicyConfig>() { // from class:
+                                                  // android.os.BatterySaverPolicyConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BatterySaverPolicyConfig createFromParcel(Parcel in) {
+                    return new BatterySaverPolicyConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BatterySaverPolicyConfig[] newArray(int size) {
-            return new BatterySaverPolicyConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BatterySaverPolicyConfig[] newArray(int size) {
+                    return new BatterySaverPolicyConfig[size];
+                }
+            };
     private final float mAdjustBrightnessFactor;
     private final boolean mAdvertiseIsEnabled;
     private final boolean mDeferFullBackup;
@@ -49,7 +52,8 @@ public final class BatterySaverPolicyConfig implements Parcelable {
         this.mAdvertiseIsEnabled = in.mAdvertiseIsEnabled;
         this.mDeferFullBackup = in.mDeferFullBackup;
         this.mDeferKeyValueBackup = in.mDeferKeyValueBackup;
-        this.mDeviceSpecificSettings = Collections.unmodifiableMap(new ArrayMap(in.mDeviceSpecificSettings));
+        this.mDeviceSpecificSettings =
+                Collections.unmodifiableMap(new ArrayMap(in.mDeviceSpecificSettings));
         this.mDisableAnimation = in.mDisableAnimation;
         this.mDisableAod = in.mDisableAod;
         this.mDisableLaunchBoost = in.mDisableLaunchBoost;
@@ -136,7 +140,44 @@ public final class BatterySaverPolicyConfig implements Parcelable {
         for (Map.Entry<String, String> entry : this.mDeviceSpecificSettings.entrySet()) {
             sb.append(entry.getKey()).append("=").append(entry.getValue()).append(",");
         }
-        return "adjust_brightness_disabled=" + (!this.mEnableAdjustBrightness) + ",adjust_brightness_factor=" + this.mAdjustBrightnessFactor + ",advertise_is_enabled=" + this.mAdvertiseIsEnabled + ",animation_disabled=" + this.mDisableAnimation + ",aod_disabled=" + this.mDisableAod + ",datasaver_disabled=" + (!this.mEnableDataSaver) + ",enable_night_mode=" + this.mEnableNightMode + ",firewall_disabled=" + (!this.mEnableFirewall) + ",force_all_apps_standby=" + this.mForceAllAppsStandby + ",force_background_check=" + this.mForceBackgroundCheck + ",fullbackup_deferred=" + this.mDeferFullBackup + ",gps_mode=" + this.mLocationMode + ",keyvaluebackup_deferred=" + this.mDeferKeyValueBackup + ",launch_boost_disabled=" + this.mDisableLaunchBoost + ",optional_sensors_disabled=" + this.mDisableOptionalSensors + ",quick_doze_enabled=" + this.mEnableQuickDoze + ",soundtrigger_mode=" + this.mSoundTriggerMode + ",vibration_disabled=" + this.mDisableVibration + "," + sb.toString();
+        return "adjust_brightness_disabled="
+                + (!this.mEnableAdjustBrightness)
+                + ",adjust_brightness_factor="
+                + this.mAdjustBrightnessFactor
+                + ",advertise_is_enabled="
+                + this.mAdvertiseIsEnabled
+                + ",animation_disabled="
+                + this.mDisableAnimation
+                + ",aod_disabled="
+                + this.mDisableAod
+                + ",datasaver_disabled="
+                + (!this.mEnableDataSaver)
+                + ",enable_night_mode="
+                + this.mEnableNightMode
+                + ",firewall_disabled="
+                + (!this.mEnableFirewall)
+                + ",force_all_apps_standby="
+                + this.mForceAllAppsStandby
+                + ",force_background_check="
+                + this.mForceBackgroundCheck
+                + ",fullbackup_deferred="
+                + this.mDeferFullBackup
+                + ",gps_mode="
+                + this.mLocationMode
+                + ",keyvaluebackup_deferred="
+                + this.mDeferKeyValueBackup
+                + ",launch_boost_disabled="
+                + this.mDisableLaunchBoost
+                + ",optional_sensors_disabled="
+                + this.mDisableOptionalSensors
+                + ",quick_doze_enabled="
+                + this.mEnableQuickDoze
+                + ",soundtrigger_mode="
+                + this.mSoundTriggerMode
+                + ",vibration_disabled="
+                + this.mDisableVibration
+                + ","
+                + sb.toString();
     }
 
     public float getAdjustBrightnessFactor() {
@@ -288,7 +329,8 @@ public final class BatterySaverPolicyConfig implements Parcelable {
             this.mDeferFullBackup = batterySaverPolicyConfig.getDeferFullBackup();
             this.mDeferKeyValueBackup = batterySaverPolicyConfig.getDeferKeyValueBackup();
             for (String key : batterySaverPolicyConfig.getDeviceSpecificSettings().keySet()) {
-                this.mDeviceSpecificSettings.put(key, batterySaverPolicyConfig.getDeviceSpecificSettings().get(key));
+                this.mDeviceSpecificSettings.put(
+                        key, batterySaverPolicyConfig.getDeviceSpecificSettings().get(key));
             }
             this.mDisableAnimation = batterySaverPolicyConfig.getDisableAnimation();
             this.mDisableAod = batterySaverPolicyConfig.getDisableAod();

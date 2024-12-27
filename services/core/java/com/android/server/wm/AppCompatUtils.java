@@ -5,7 +5,9 @@ import android.graphics.Rect;
 import android.view.InsetsSource;
 import android.view.InsetsState;
 import android.view.WindowInsets;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
@@ -44,7 +46,9 @@ public abstract class AppCompatUtils {
                 break;
             }
             insetsSource = insetsState.sourceAt(sourceSize);
-            if (insetsSource.getType() == WindowInsets.Type.navigationBars() && insetsSource.hasFlags(2) && insetsSource.isVisible()) {
+            if (insetsSource.getType() == WindowInsets.Type.navigationBars()
+                    && insetsSource.hasFlags(2)
+                    && insetsSource.isVisible()) {
                 break;
             } else {
                 sourceSize--;
@@ -56,18 +60,34 @@ public abstract class AppCompatUtils {
     }
 
     public static float computeAspectRatio(Rect rect) {
-        return (rect.width() == 0 || rect.height() == 0) ? FullScreenMagnificationGestureHandler.MAX_SCALE : Math.max(r0, r2) / Math.min(r0, r2);
+        return (rect.width() == 0 || rect.height() == 0)
+                ? FullScreenMagnificationGestureHandler.MAX_SCALE
+                : Math.max(r0, r2) / Math.min(r0, r2);
     }
 
     public static Rect getAppBounds(final ActivityRecord activityRecord) {
         final Rect appBounds = activityRecord.getConfiguration().windowConfiguration.getAppBounds();
-        return appBounds == null ? activityRecord.getBounds() : (Rect) activityRecord.mAppCompatController.mTransparentPolicy.mTransparentPolicyState.findOpaqueNotFinishingActivityBelow().map(new AppCompatUtils$$ExternalSyntheticLambda0()).orElseGet(new Supplier() { // from class: com.android.server.wm.AppCompatUtils$$ExternalSyntheticLambda1
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                ActivityRecord activityRecord2 = ActivityRecord.this;
-                return activityRecord2.hasSizeCompatBounds() ? activityRecord2.getScreenResolvedBounds() : appBounds;
-            }
-        });
+        return appBounds == null
+                ? activityRecord.getBounds()
+                : (Rect)
+                        activityRecord
+                                .mAppCompatController
+                                .mTransparentPolicy
+                                .mTransparentPolicyState
+                                .findOpaqueNotFinishingActivityBelow()
+                                .map(new AppCompatUtils$$ExternalSyntheticLambda0())
+                                .orElseGet(
+                                        new Supplier() { // from class:
+                                                         // com.android.server.wm.AppCompatUtils$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Supplier
+                                            public final Object get() {
+                                                ActivityRecord activityRecord2 =
+                                                        ActivityRecord.this;
+                                                return activityRecord2.hasSizeCompatBounds()
+                                                        ? activityRecord2.getScreenResolvedBounds()
+                                                        : appBounds;
+                                            }
+                                        });
     }
 
     public static void offsetBounds(Configuration configuration, int i, int i2) {

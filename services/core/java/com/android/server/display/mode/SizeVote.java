@@ -1,6 +1,7 @@
 package com.android.server.display.mode;
 
 import android.hardware.broadcastradio.V2_0.AmFmBandRange$$ExternalSyntheticOutline0;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,11 +27,18 @@ public final class SizeVote implements Vote {
             return false;
         }
         SizeVote sizeVote = (SizeVote) obj;
-        return this.mWidth == sizeVote.mWidth && this.mHeight == sizeVote.mHeight && this.mMinWidth == sizeVote.mMinWidth && this.mMinHeight == sizeVote.mMinHeight;
+        return this.mWidth == sizeVote.mWidth
+                && this.mHeight == sizeVote.mHeight
+                && this.mMinWidth == sizeVote.mMinWidth
+                && this.mMinHeight == sizeVote.mMinHeight;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mWidth), Integer.valueOf(this.mHeight), Integer.valueOf(this.mMinWidth), Integer.valueOf(this.mMinHeight));
+        return Objects.hash(
+                Integer.valueOf(this.mWidth),
+                Integer.valueOf(this.mHeight),
+                Integer.valueOf(this.mMinWidth),
+                Integer.valueOf(this.mMinHeight));
     }
 
     public final String toString() {

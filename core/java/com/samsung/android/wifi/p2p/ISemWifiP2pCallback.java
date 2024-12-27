@@ -16,12 +16,10 @@ public interface ISemWifiP2pCallback extends IInterface {
 
     public static class Default implements ISemWifiP2pCallback {
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pCallback
-        public void onSuccess() throws RemoteException {
-        }
+        public void onSuccess() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pCallback
-        public void onFailure(int reason) throws RemoteException {
-        }
+        public void onFailure(int reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ISemWifiP2pCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemWifiP2pCallback {
+    public abstract static class Stub extends Binder implements ISemWifiP2pCallback {
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -70,7 +68,8 @@ public interface ISemWifiP2pCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemWifiP2pCallback.DESCRIPTOR);
             }

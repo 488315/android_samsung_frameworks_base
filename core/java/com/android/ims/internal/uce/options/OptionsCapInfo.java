@@ -2,23 +2,27 @@ package com.android.ims.internal.uce.options;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.ims.internal.uce.common.CapInfo;
 
 /* loaded from: classes5.dex */
 public class OptionsCapInfo implements Parcelable {
-    public static final Parcelable.Creator<OptionsCapInfo> CREATOR = new Parcelable.Creator<OptionsCapInfo>() { // from class: com.android.ims.internal.uce.options.OptionsCapInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OptionsCapInfo createFromParcel(Parcel source) {
-            return new OptionsCapInfo(source);
-        }
+    public static final Parcelable.Creator<OptionsCapInfo> CREATOR =
+            new Parcelable.Creator<
+                    OptionsCapInfo>() { // from class:
+                                        // com.android.ims.internal.uce.options.OptionsCapInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OptionsCapInfo createFromParcel(Parcel source) {
+                    return new OptionsCapInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OptionsCapInfo[] newArray(int size) {
-            return new OptionsCapInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OptionsCapInfo[] newArray(int size) {
+                    return new OptionsCapInfo[size];
+                }
+            };
     private CapInfo mCapInfo;
     private String mSdp;
 
@@ -65,6 +69,7 @@ public class OptionsCapInfo implements Parcelable {
 
     public void readFromParcel(Parcel source) {
         this.mSdp = source.readString();
-        this.mCapInfo = (CapInfo) source.readParcelable(CapInfo.class.getClassLoader(), CapInfo.class);
+        this.mCapInfo =
+                (CapInfo) source.readParcelable(CapInfo.class.getClassLoader(), CapInfo.class);
     }
 }

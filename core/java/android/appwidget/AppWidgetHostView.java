@@ -5,7 +5,6 @@ import android.app.ActivityOptions;
 import android.app.ActivityThread;
 import android.app.LoadedApk;
 import android.app.PendingIntent;
-import android.appwidget.AppWidgetHost;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -41,9 +40,12 @@ import android.widget.FrameLayout;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsAdapter;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import com.samsung.android.app.SemDualAppManager;
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,14 +58,16 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
     public static final int APPWIDGET_HOST_TYPE_HOME = 1;
     public static final int APPWIDGET_HOST_TYPE_LOCK_AND_AOD = 2;
     private static final int FIRST_RESOURCE_COLOR_ID = 17170461;
-    private static final LayoutInflater.Filter INFLATER_FILTER = new LayoutInflater.Filter() { // from class: android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda3
-        @Override // android.view.LayoutInflater.Filter
-        public final boolean onLoadClass(Class cls) {
-            boolean isAnnotationPresent;
-            isAnnotationPresent = cls.isAnnotationPresent(RemoteViews.RemoteView.class);
-            return isAnnotationPresent;
-        }
-    };
+    private static final LayoutInflater.Filter INFLATER_FILTER =
+            new LayoutInflater.Filter() { // from class:
+                // android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda3
+                @Override // android.view.LayoutInflater.Filter
+                public final boolean onLoadClass(Class cls) {
+                    boolean isAnnotationPresent;
+                    isAnnotationPresent = cls.isAnnotationPresent(RemoteViews.RemoteView.class);
+                    return isAnnotationPresent;
+                }
+            };
     private static final String KEY_INFLATION_ID = "inflation_id";
     private static final String KEY_JAILED_ARRAY = "jail";
     private static final int LAST_RESOURCE_COLOR_ID = 17170525;
@@ -143,13 +147,16 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         if (info != null) {
             String description = info.loadLabel(getContext().getPackageManager());
             if ((info.providerInfo.applicationInfo.flags & 1073741824) != 0) {
-                description = Resources.getSystem().getString(R.string.suspended_widget_accessibility, description);
+                description =
+                        Resources.getSystem()
+                                .getString(R.string.suspended_widget_accessibility, description);
             }
             setContentDescription(description);
         }
     }
 
-    public static Rect getDefaultPaddingForWidget(Context context, ComponentName component, Rect padding) {
+    public static Rect getDefaultPaddingForWidget(
+            Context context, ComponentName component, Rect padding) {
         return getDefaultPaddingForWidget(context, padding);
     }
 
@@ -224,13 +231,21 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         try {
             super.dispatchRestoreInstanceState(state);
         } catch (Exception e) {
-            Log.e(TAG, "failed to restoreInstanceState for widget id: " + this.mAppWidgetId + ", " + (this.mInfo == null ? "null" : this.mInfo.provider), e);
+            Log.e(
+                    TAG,
+                    "failed to restoreInstanceState for widget id: "
+                            + this.mAppWidgetId
+                            + ", "
+                            + (this.mInfo == null ? "null" : this.mInfo.provider),
+                    e);
         }
     }
 
     private SizeF computeSizeFromLayout(int left, int top, int right, int bottom) {
         float density = getResources().getDisplayMetrics().density;
-        return new SizeF((((right - left) - getPaddingLeft()) - getPaddingRight()) / density, (((bottom - top) - getPaddingTop()) - getPaddingBottom()) / density);
+        return new SizeF(
+                (((right - left) - getPaddingLeft()) - getPaddingRight()) / density,
+                (((bottom - top) - getPaddingTop()) - getPaddingBottom()) / density);
     }
 
     @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
@@ -240,9 +255,18 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             SizeF oldSize = this.mCurrentSize;
             SizeF newSize = computeSizeFromLayout(left, top, right, bottom);
             this.mCurrentSize = newSize;
-            if (this.mLastInflatedRemoteViews != null && (toApply = this.mLastInflatedRemoteViews.getRemoteViewsToApplyIfDifferent(oldSize, newSize)) != null) {
+            if (this.mLastInflatedRemoteViews != null
+                    && (toApply =
+                                    this.mLastInflatedRemoteViews.getRemoteViewsToApplyIfDifferent(
+                                            oldSize, newSize))
+                            != null) {
                 applyRemoteViews(toApply, false);
-                measureChildWithMargins(this.mView, View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 1073741824), 0, View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), 1073741824), 0);
+                measureChildWithMargins(
+                        this.mView,
+                        View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 1073741824),
+                        0,
+                        View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), 1073741824),
+                        0);
             }
             super.onLayout(changed, left, top, right, bottom);
         } catch (RuntimeException e) {
@@ -257,14 +281,22 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         View child = getErrorView();
         prepareView(child);
         addViewInLayout(child, 0, child.getLayoutParams());
-        measureChild(child, View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 1073741824), View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), 1073741824));
-        child.layout(0, 0, child.getMeasuredWidth() + this.mPaddingLeft + this.mPaddingRight, child.getMeasuredHeight() + this.mPaddingTop + this.mPaddingBottom);
+        measureChild(
+                child,
+                View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 1073741824),
+                View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), 1073741824));
+        child.layout(
+                0,
+                0,
+                child.getMeasuredWidth() + this.mPaddingLeft + this.mPaddingRight,
+                child.getMeasuredHeight() + this.mPaddingTop + this.mPaddingBottom);
         this.mView = child;
         this.mViewMode = 2;
     }
 
     @Deprecated
-    public void updateAppWidgetSize(Bundle newOptions, int minWidth, int minHeight, int maxWidth, int maxHeight) {
+    public void updateAppWidgetSize(
+            Bundle newOptions, int minWidth, int minHeight, int maxWidth, int maxHeight) {
         updateAppWidgetSize(newOptions, minWidth, minHeight, maxWidth, maxHeight, false);
     }
 
@@ -282,7 +314,10 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         int i = 0;
         while (i < sizes.size()) {
             SizeF size = sizes.get(i);
-            SizeF paddedSize = new SizeF(Math.max(0.0f, size.getWidth() - xPaddingDips), Math.max(0.0f, size.getHeight() - yPaddingDips));
+            SizeF paddedSize =
+                    new SizeF(
+                            Math.max(0.0f, size.getWidth() - xPaddingDips),
+                            Math.max(0.0f, size.getHeight() - yPaddingDips));
             paddedSizes.add(paddedSize);
             minWidth = Math.min(minWidth, paddedSize.getWidth());
             maxWidth = Math.max(maxWidth, paddedSize.getWidth());
@@ -292,7 +327,10 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             padding = padding;
             density = density;
         }
-        if (paddedSizes.equals(widgetManager.getAppWidgetOptions(this.mAppWidgetId).getParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES))) {
+        if (paddedSizes.equals(
+                widgetManager
+                        .getAppWidgetOptions(this.mAppWidgetId)
+                        .getParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES))) {
             return;
         }
         Bundle options = newOptions.deepCopy();
@@ -304,7 +342,13 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         updateAppWidgetOptions(options);
     }
 
-    public void updateAppWidgetSize(Bundle newOptions, int minWidth, int minHeight, int maxWidth, int maxHeight, boolean ignorePadding) {
+    public void updateAppWidgetSize(
+            Bundle newOptions,
+            int minWidth,
+            int minHeight,
+            int maxWidth,
+            int maxHeight,
+            boolean ignorePadding) {
         Bundle newOptions2;
         if (newOptions != null) {
             newOptions2 = newOptions;
@@ -322,7 +366,11 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         AppWidgetManager widgetManager = AppWidgetManager.getInstance(this.mContext);
         Bundle oldOptions = widgetManager.getAppWidgetOptions(this.mAppWidgetId);
         boolean needsUpdate = false;
-        if (newMinWidth != oldOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH) || newMinHeight != oldOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT) || newMaxWidth != oldOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH) || newMaxHeight != oldOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT)) {
+        if (newMinWidth != oldOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)
+                || newMinHeight != oldOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT)
+                || newMaxWidth != oldOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH)
+                || newMaxHeight
+                        != oldOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT)) {
             needsUpdate = true;
         }
         if (needsUpdate) {
@@ -330,13 +378,15 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             newOptions2.putInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, newMinHeight);
             newOptions2.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, newMaxWidth);
             newOptions2.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, newMaxHeight);
-            newOptions2.putParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES, new ArrayList<>());
+            newOptions2.putParcelableArrayList(
+                    AppWidgetManager.OPTION_APPWIDGET_SIZES, new ArrayList<>());
             updateAppWidgetOptions(newOptions2);
         }
     }
 
     public void updateAppWidgetOptions(Bundle options) {
-        AppWidgetManager.getInstance(this.mContext).updateAppWidgetOptions(this.mAppWidgetId, options);
+        AppWidgetManager.getInstance(this.mContext)
+                .updateAppWidgetOptions(this.mAppWidgetId, options);
     }
 
     @Override // android.widget.FrameLayout, android.view.ViewGroup
@@ -368,10 +418,14 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
     public void updateAppWidget(RemoteViews remoteViews) {
         this.mLastInflatedRemoteViews = remoteViews;
         applyRemoteViews(remoteViews, true);
-        if (this.mInfo != null && this.mInfo.getProfile() != null && SemDualAppManager.isDualAppId(this.mInfo.getProfile().getIdentifier())) {
+        if (this.mInfo != null
+                && this.mInfo.getProfile() != null
+                && SemDualAppManager.isDualAppId(this.mInfo.getProfile().getIdentifier())) {
             SemDualAppManager.drawDualAppBadge(this.mContext, this, this.mInfo.getProfile());
         }
-        if (this.mInfo != null && this.mInfo.getProfile() != null && SemPersonaManager.isKnoxId(this.mInfo.getProfile().getIdentifier())) {
+        if (this.mInfo != null
+                && this.mInfo.getProfile() != null
+                && SemPersonaManager.isKnoxId(this.mInfo.getProfile().getIdentifier())) {
             SemPersonaManager.drawKnoxAppBadge(this.mContext, this, this.mInfo.getProfile());
         }
     }
@@ -402,7 +456,8 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             if (this.mIsForcedOrientation) {
                 remoteViews.setOrientation(this.mIsPortrait);
             }
-            RemoteViews rvToApply = remoteViews.getRemoteViewsToApply(this.mContext, this.mCurrentSize);
+            RemoteViews rvToApply =
+                    remoteViews.getRemoteViewsToApply(this.mContext, this.mCurrentSize);
             if (this.mOnLightBackground) {
                 rvToApply = rvToApply.getDarkTextViews();
             }
@@ -411,9 +466,16 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
                 return;
             }
             this.mRemoteContext = getRemoteContextEnsuringCorrectCachedApkPath();
-            if (!this.mColorMappingChanged && rvToApply.canRecycleView(this.mView) && !this.mConfigChanged) {
+            if (!this.mColorMappingChanged
+                    && rvToApply.canRecycleView(this.mView)
+                    && !this.mConfigChanged) {
                 try {
-                    rvToApply.reapply(this.mContext, this.mView, this.mInteractionHandler, this.mCurrentSize, this.mColorResources);
+                    rvToApply.reapply(
+                            this.mContext,
+                            this.mView,
+                            this.mInteractionHandler,
+                            this.mCurrentSize,
+                            this.mColorResources);
                     content = this.mView;
                     this.mLastInflatedRemoteViewsId = rvToApply.computeUniqueId(remoteViews);
                     recycled = true;
@@ -423,7 +485,13 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             }
             if (content == null) {
                 try {
-                    content = rvToApply.apply(this.mContext, this, this.mInteractionHandler, this.mCurrentSize, this.mColorResources);
+                    content =
+                            rvToApply.apply(
+                                    this.mContext,
+                                    this,
+                                    this.mInteractionHandler,
+                                    this.mCurrentSize,
+                                    this.mColorResources);
                     this.mLastInflatedRemoteViewsId = rvToApply.computeUniqueId(remoteViews);
                 } catch (RuntimeException e2) {
                     exception = e2;
@@ -457,8 +525,15 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
                 View child = getErrorView();
                 prepareView(child);
                 addViewInLayout(child, 0, child.getLayoutParams());
-                measureChild(child, View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 1073741824), View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), 1073741824));
-                child.layout(0, 0, child.getMeasuredWidth() + this.mPaddingLeft + this.mPaddingRight, child.getMeasuredHeight() + this.mPaddingTop + this.mPaddingBottom);
+                measureChild(
+                        child,
+                        View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 1073741824),
+                        View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), 1073741824));
+                child.layout(
+                        0,
+                        0,
+                        child.getMeasuredWidth() + this.mPaddingLeft + this.mPaddingRight,
+                        child.getMeasuredHeight() + this.mPaddingTop + this.mPaddingBottom);
                 this.mView = child;
                 this.mViewMode = 2;
                 Log.e(TAG, "Error on prepare/add Views", e);
@@ -484,14 +559,32 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         if (this.mLastExecutionSignal != null) {
             this.mLastExecutionSignal.cancel();
         }
-        if (!this.mColorMappingChanged && remoteViews.canRecycleView(this.mView) && !this.mConfigChanged) {
+        if (!this.mColorMappingChanged
+                && remoteViews.canRecycleView(this.mView)
+                && !this.mConfigChanged) {
             try {
-                this.mLastExecutionSignal = remoteViews.reapplyAsync(this.mContext, this.mView, this.mAsyncExecutor, new ViewApplyListener(remoteViews, layoutId, true), this.mInteractionHandler, this.mCurrentSize, this.mColorResources);
+                this.mLastExecutionSignal =
+                        remoteViews.reapplyAsync(
+                                this.mContext,
+                                this.mView,
+                                this.mAsyncExecutor,
+                                new ViewApplyListener(remoteViews, layoutId, true),
+                                this.mInteractionHandler,
+                                this.mCurrentSize,
+                                this.mColorResources);
             } catch (Exception e) {
             }
         }
         if (this.mLastExecutionSignal == null) {
-            this.mLastExecutionSignal = remoteViews.applyAsync(this.mContext, this, this.mAsyncExecutor, new ViewApplyListener(remoteViews, layoutId, false), this.mInteractionHandler, this.mCurrentSize, this.mColorResources);
+            this.mLastExecutionSignal =
+                    remoteViews.applyAsync(
+                            this.mContext,
+                            this,
+                            this.mAsyncExecutor,
+                            new ViewApplyListener(remoteViews, layoutId, false),
+                            this.mInteractionHandler,
+                            this.mCurrentSize,
+                            this.mColorResources);
         }
         this.mConfigChanged = false;
     }
@@ -514,10 +607,13 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             int viewId = AppWidgetHostView.this.mLastViewIdToDataChanged;
             if (viewId > -1) {
                 AppWidgetHostView.this.mLastViewIdToDataChanged = -1;
-                Log.i(AppWidgetHostView.TAG, "onViewApplied, Trigger viewDataChanged for viewId : " + viewId);
+                Log.i(
+                        AppWidgetHostView.TAG,
+                        "onViewApplied, Trigger viewDataChanged for viewId : " + viewId);
                 AppWidgetHostView.this.onViewDataChanged(viewId);
             }
-            AppWidgetHostView.this.mLastInflatedRemoteViewsId = this.mViews.computeUniqueId(AppWidgetHostView.this.mLastInflatedRemoteViews);
+            AppWidgetHostView.this.mLastInflatedRemoteViewsId =
+                    this.mViews.computeUniqueId(AppWidgetHostView.this.mLastInflatedRemoteViews);
             AppWidgetHostView.this.restoreInstanceState();
             AppWidgetHostView.this.mLastExecutionSignal = null;
         }
@@ -525,7 +621,15 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         @Override // android.widget.RemoteViews.OnViewAppliedListener
         public void onError(Exception e) {
             if (this.mIsReapply) {
-                AppWidgetHostView.this.mLastExecutionSignal = this.mViews.applyAsync(AppWidgetHostView.this.mContext, AppWidgetHostView.this, AppWidgetHostView.this.mAsyncExecutor, AppWidgetHostView.this.new ViewApplyListener(this.mViews, this.mLayoutId, false), AppWidgetHostView.this.mInteractionHandler, AppWidgetHostView.this.mCurrentSize);
+                AppWidgetHostView.this.mLastExecutionSignal =
+                        this.mViews.applyAsync(
+                                AppWidgetHostView.this.mContext,
+                                AppWidgetHostView.this,
+                                AppWidgetHostView.this.mAsyncExecutor,
+                                AppWidgetHostView.this
+                                .new ViewApplyListener(this.mViews, this.mLayoutId, false),
+                                AppWidgetHostView.this.mInteractionHandler,
+                                AppWidgetHostView.this.mCurrentSize);
             } else {
                 AppWidgetHostView.this.applyContent(null, false, e);
             }
@@ -544,8 +648,11 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             if (adapter instanceof BaseAdapter) {
                 BaseAdapter baseAdapter = (BaseAdapter) adapter;
                 baseAdapter.notifyDataSetChanged();
-            } else if (adapter == null && (adapterView instanceof RemoteViewsAdapter.RemoteAdapterConnectionCallback)) {
-                ((RemoteViewsAdapter.RemoteAdapterConnectionCallback) adapterView).deferNotifyDataSetChanged();
+            } else if (adapter == null
+                    && (adapterView
+                            instanceof RemoteViewsAdapter.RemoteAdapterConnectionCallback)) {
+                ((RemoteViewsAdapter.RemoteAdapterConnectionCallback) adapterView)
+                        .deferNotifyDataSetChanged();
             }
             this.mLastViewIdToDataChanged = -1;
             return;
@@ -558,7 +665,9 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         try {
             ApplicationInfo expectedAppInfo = this.mInfo.providerInfo.applicationInfo;
             LoadedApk.checkAndUpdateApkPaths(expectedAppInfo);
-            Context newContext = this.mContext.createApplicationContext(this.mInfo.providerInfo.applicationInfo, 4);
+            Context newContext =
+                    this.mContext.createApplicationContext(
+                            this.mInfo.providerInfo.applicationInfo, 4);
             if (this.mColorResources != null) {
                 this.mColorResources.apply(newContext);
             }
@@ -567,22 +676,35 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             Log.e(TAG, "Package name " + this.mInfo.providerInfo.packageName + " not found");
             return this.mContext;
         } catch (Resources.NotFoundException e2) {
-            Log.w(TAG, "Failed to get RemoteContext." + this.mInfo.providerInfo.applicationInfo.sourceDir + ", " + e2, e2);
+            Log.w(
+                    TAG,
+                    "Failed to get RemoteContext."
+                            + this.mInfo.providerInfo.applicationInfo.sourceDir
+                            + ", "
+                            + e2,
+                    e2);
             if (1 != 0) {
                 String packageName = this.mInfo.providerInfo.applicationInfo.packageName;
                 if (!clearResourcePackageCache(this.mContext, packageName)) {
                     return this.mContext;
                 }
                 try {
-                    ApplicationInfo ai = this.mContext.getPackageManager().getApplicationInfo(packageName, 0);
+                    ApplicationInfo ai =
+                            this.mContext.getPackageManager().getApplicationInfo(packageName, 0);
                     try {
                         return this.mContext.createApplicationContext(ai, 4);
                     } catch (PackageManager.NameNotFoundException e3) {
-                        Log.e(TAG, "Package name " + this.mInfo.providerInfo.packageName + " not found");
+                        Log.e(
+                                TAG,
+                                "Package name "
+                                        + this.mInfo.providerInfo.packageName
+                                        + " not found");
                         return this.mContext;
                     }
                 } catch (PackageManager.NameNotFoundException e4) {
-                    Log.e(TAG, "Package name " + this.mInfo.providerInfo.packageName + " not found");
+                    Log.e(
+                            TAG,
+                            "Package name " + this.mInfo.providerInfo.packageName + " not found");
                     return this.mContext;
                 }
             }
@@ -612,7 +734,13 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
                 resourcePackages.remove(pkg);
             }
             return true;
-        } catch (ClassCastException | ClassNotFoundException | IllegalAccessException | IllegalArgumentException | NoSuchFieldException | NullPointerException | SecurityException e) {
+        } catch (ClassCastException
+                | ClassNotFoundException
+                | IllegalAccessException
+                | IllegalArgumentException
+                | NoSuchFieldException
+                | NullPointerException
+                | SecurityException e) {
             Log.e(TAG, "Failed to clear cache for " + pkg + ", " + e, e);
             return false;
         }
@@ -634,7 +762,11 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             if (this.mInfo != null) {
                 Context theirContext = getRemoteContextEnsuringCorrectCachedApkPath();
                 this.mRemoteContext = theirContext;
-                LayoutInflater inflater = ((LayoutInflater) theirContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).cloneInContext(theirContext);
+                LayoutInflater inflater =
+                        ((LayoutInflater)
+                                        theirContext.getSystemService(
+                                                Context.LAYOUT_INFLATER_SERVICE))
+                                .cloneInContext(theirContext);
                 inflater.setFilter(INFLATER_FILTER);
                 AppWidgetManager manager = AppWidgetManager.getInstance(this.mContext);
                 Bundle options = manager.getAppWidgetOptions(this.mAppWidgetId);
@@ -648,12 +780,14 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
                 }
                 defaultView = inflater.inflate(layoutId, (ViewGroup) this, false);
                 if (!(defaultView instanceof AdapterView)) {
-                    defaultView.setOnClickListener(new View.OnClickListener() { // from class: android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda2
-                        @Override // android.view.View.OnClickListener
-                        public final void onClick(View view) {
-                            AppWidgetHostView.this.onDefaultViewClicked(view);
-                        }
-                    });
+                    defaultView.setOnClickListener(
+                            new View.OnClickListener() { // from class:
+                                // android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda2
+                                @Override // android.view.View.OnClickListener
+                                public final void onClick(View view) {
+                                    AppWidgetHostView.this.onDefaultViewClicked(view);
+                                }
+                            });
                 }
             } else {
                 Log.w(TAG, "can't inflate defaultView because mInfo is missing");
@@ -673,11 +807,18 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
     /* JADX INFO: Access modifiers changed from: private */
     public void onDefaultViewClicked(View view) {
         if (this.mInfo != null) {
-            LauncherApps launcherApps = (LauncherApps) getContext().getSystemService(LauncherApps.class);
-            List<LauncherActivityInfo> activities = launcherApps.getActivityList(this.mInfo.provider.getPackageName(), this.mInfo.getProfile());
+            LauncherApps launcherApps =
+                    (LauncherApps) getContext().getSystemService(LauncherApps.class);
+            List<LauncherActivityInfo> activities =
+                    launcherApps.getActivityList(
+                            this.mInfo.provider.getPackageName(), this.mInfo.getProfile());
             if (!activities.isEmpty()) {
                 LauncherActivityInfo ai = activities.get(0);
-                launcherApps.startMainActivity(ai.getComponentName(), ai.getUser(), RemoteViews.getSourceBounds(view), null);
+                launcherApps.startMainActivity(
+                        ai.getComponentName(),
+                        ai.getUser(),
+                        RemoteViews.getSourceBounds(view),
+                        null);
             }
         }
     }
@@ -695,7 +836,8 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
         info.setClassName(AppWidgetHostView.class.getName());
     }
 
-    public ActivityOptions createSharedElementActivityOptions(int[] sharedViewIds, String[] sharedViewNames, Intent fillInIntent) {
+    public ActivityOptions createSharedElementActivityOptions(
+            int[] sharedViewIds, String[] sharedViewNames, Intent fillInIntent) {
         Context parentContext = getContext();
         while ((parentContext instanceof ContextWrapper) && !(parentContext instanceof Activity)) {
             parentContext = ((ContextWrapper) parentContext).getBaseContext();
@@ -716,24 +858,38 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             return null;
         }
         fillInIntent.putExtra(RemoteViews.EXTRA_SHARED_ELEMENT_BOUNDS, extras);
-        ActivityOptions opts = ActivityOptions.makeSceneTransitionAnimation((Activity) parentContext, (Pair[]) sharedElements.toArray(new Pair[sharedElements.size()]));
+        ActivityOptions opts =
+                ActivityOptions.makeSceneTransitionAnimation(
+                        (Activity) parentContext,
+                        (Pair[]) sharedElements.toArray(new Pair[sharedElements.size()]));
         opts.setPendingIntentLaunchFlags(268435456);
         return opts;
     }
 
-    private RemoteViews.InteractionHandler getHandler(final RemoteViews.InteractionHandler handler) {
-        return new RemoteViews.InteractionHandler() { // from class: android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda0
+    private RemoteViews.InteractionHandler getHandler(
+            final RemoteViews.InteractionHandler handler) {
+        return new RemoteViews.InteractionHandler() { // from class:
+            // android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda0
             @Override // android.widget.RemoteViews.InteractionHandler
-            public final boolean onInteraction(View view, PendingIntent pendingIntent, RemoteViews.RemoteResponse remoteResponse) {
+            public final boolean onInteraction(
+                    View view,
+                    PendingIntent pendingIntent,
+                    RemoteViews.RemoteResponse remoteResponse) {
                 boolean lambda$getHandler$1;
-                lambda$getHandler$1 = AppWidgetHostView.this.lambda$getHandler$1(handler, view, pendingIntent, remoteResponse);
+                lambda$getHandler$1 =
+                        AppWidgetHostView.this.lambda$getHandler$1(
+                                handler, view, pendingIntent, remoteResponse);
                 return lambda$getHandler$1;
             }
         };
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ boolean lambda$getHandler$1(RemoteViews.InteractionHandler handler, View view, PendingIntent pendingIntent, RemoteViews.RemoteResponse response) {
+    public /* synthetic */ boolean lambda$getHandler$1(
+            RemoteViews.InteractionHandler handler,
+            View view,
+            PendingIntent pendingIntent,
+            RemoteViews.RemoteResponse response) {
         AppWidgetManager manager = AppWidgetManager.getInstance(this.mContext);
         if (manager != null) {
             manager.noteAppWidgetTapped(this.mAppWidgetId);
@@ -745,7 +901,8 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
     }
 
     public void setColorResources(SparseIntArray colorMapping) {
-        if (this.mColorResources != null && isSameColorMapping(this.mColorResources.getColorMapping(), colorMapping)) {
+        if (this.mColorResources != null
+                && isSameColorMapping(this.mColorResources.getColorMapping(), colorMapping)) {
             return;
         }
         setColorResources(RemoteViews.ColorResources.create(this.mContext, colorMapping));
@@ -777,7 +934,8 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             return false;
         }
         for (int i = 0; i < oldColors.size(); i++) {
-            if (oldColors.keyAt(i) != newColors.keyAt(i) || oldColors.valueAt(i) != newColors.valueAt(i)) {
+            if (oldColors.keyAt(i) != newColors.keyAt(i)
+                    || oldColors.valueAt(i) != newColors.valueAt(i)) {
                 return false;
             }
         }
@@ -799,12 +957,14 @@ public class AppWidgetHostView extends FrameLayout implements AppWidgetHost.AppW
             super.dispatchDraw(canvas);
         } catch (Exception e) {
             Log.e(TAG, "Drawing view failed: " + e);
-            post(new Runnable() { // from class: android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AppWidgetHostView.this.handleViewError();
-                }
-            });
+            post(
+                    new Runnable() { // from class:
+                        // android.appwidget.AppWidgetHostView$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AppWidgetHostView.this.handleViewError();
+                        }
+                    });
         }
     }
 

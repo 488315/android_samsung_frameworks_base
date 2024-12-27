@@ -29,16 +29,21 @@ import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseBooleanArray;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.config.sysui.SystemUiSystemPropertiesFlags;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.Preconditions;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
-import com.android.server.notification.NotificationChannelLogger;
-import com.android.server.notification.NotificationManagerService;
+
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.PrintWriter;
 import java.time.Clock;
 import java.time.Duration;
@@ -52,9 +57,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -90,7 +92,8 @@ public final class PreferencesHelper implements RankingConfig {
     public int mLockScreenPrivateNotificationsValue = -1000;
     public final HashSet mAllowList = new HashSet();
     public int mHideContentXmlVersion = 0;
-    public final int mDeviceFirstApiLevel = SystemProperties.getInt("ro.product.first_api_level", 0);
+    public final int mDeviceFirstApiLevel =
+            SystemProperties.getInt("ro.product.first_api_level", 0);
     public final List mOngoingActivityAllowedAppList = new ArrayList();
     public final List mBlockList = new ArrayList();
     public final List mCscConfigNoneBlockableList = new ArrayList();
@@ -143,7 +146,17 @@ public final class PreferencesHelper implements RankingConfig {
         public int visibility;
     }
 
-    public PreferencesHelper(Context context, PackageManager packageManager, RankingHandler rankingHandler, ZenModeHelper zenModeHelper, PermissionHelper permissionHelper, PermissionManager permissionManager, NotificationChannelLogger notificationChannelLogger, AppOpsManager appOpsManager, boolean z, Clock clock) {
+    public PreferencesHelper(
+            Context context,
+            PackageManager packageManager,
+            RankingHandler rankingHandler,
+            ZenModeHelper zenModeHelper,
+            PermissionHelper permissionHelper,
+            PermissionManager permissionManager,
+            NotificationChannelLogger notificationChannelLogger,
+            AppOpsManager appOpsManager,
+            boolean z,
+            Clock clock) {
         this.mContext = context;
         this.mZenModeHelper = zenModeHelper;
         this.mRankingHandler = rankingHandler;
@@ -153,14 +166,16 @@ public final class PreferencesHelper implements RankingConfig {
         this.mNotificationChannelLogger = notificationChannelLogger;
         this.mAppOps = appOpsManager;
         this.mShowReviewPermissionsNotification = z;
-        this.mIsMediaNotificationFilteringEnabled = context.getResources().getBoolean(R.bool.config_secondaryBuiltInDisplayIsRound);
+        this.mIsMediaNotificationFilteringEnabled =
+                context.getResources().getBoolean(R.bool.config_secondaryBuiltInDisplayIsRound);
         this.mClock = clock;
         updateBadgingEnabled();
         updateBubblesEnabled();
         updateMediaNotificationFilteringEnabled();
     }
 
-    public static JSONArray dumpBansJson(NotificationManagerService.DumpFilter dumpFilter, ArrayMap arrayMap) {
+    public static JSONArray dumpBansJson(
+            NotificationManagerService.DumpFilter dumpFilter, ArrayMap arrayMap) {
         JSONArray jSONArray = new JSONArray();
         ArrayMap arrayMap2 = new ArrayMap();
         if (arrayMap != null) {
@@ -187,7 +202,12 @@ public final class PreferencesHelper implements RankingConfig {
         return jSONArray;
     }
 
-    public static void dumpPackagePreferencesLocked(ProtoOutputStream protoOutputStream, long j, NotificationManagerService.DumpFilter dumpFilter, ArrayMap arrayMap, ArrayMap arrayMap2) {
+    public static void dumpPackagePreferencesLocked(
+            ProtoOutputStream protoOutputStream,
+            long j,
+            NotificationManagerService.DumpFilter dumpFilter,
+            ArrayMap arrayMap,
+            ArrayMap arrayMap2) {
         Set<Pair> keySet = arrayMap2 != null ? arrayMap2.keySet() : null;
         int size = arrayMap.size();
         for (int i = 0; i < size; i++) {
@@ -196,9 +216,12 @@ public final class PreferencesHelper implements RankingConfig {
                 long start = protoOutputStream.start(j);
                 protoOutputStream.write(1138166333441L, packagePreferences.pkg);
                 protoOutputStream.write(1120986464258L, packagePreferences.uid);
-                Object pair = new Pair(Integer.valueOf(packagePreferences.uid), packagePreferences.pkg);
+                Object pair =
+                        new Pair(Integer.valueOf(packagePreferences.uid), packagePreferences.pkg);
                 if (arrayMap2 != null && keySet.contains(pair)) {
-                    protoOutputStream.write(1172526071811L, ((Boolean) ((Pair) arrayMap2.get(pair)).first).booleanValue() ? 3 : 0);
+                    protoOutputStream.write(
+                            1172526071811L,
+                            ((Boolean) ((Pair) arrayMap2.get(pair)).first).booleanValue() ? 3 : 0);
                     keySet.remove(pair);
                 }
                 protoOutputStream.write(1120986464260L, packagePreferences.priority);
@@ -210,7 +233,8 @@ public final class PreferencesHelper implements RankingConfig {
                 }
                 Iterator it2 = packagePreferences.groups.values().iterator();
                 while (it2.hasNext()) {
-                    ((NotificationChannelGroup) it2.next()).dumpDebug(protoOutputStream, 2246267895816L);
+                    ((NotificationChannelGroup) it2.next())
+                            .dumpDebug(protoOutputStream, 2246267895816L);
                 }
                 protoOutputStream.end(start);
             }
@@ -221,7 +245,9 @@ public final class PreferencesHelper implements RankingConfig {
                     long start2 = protoOutputStream.start(j);
                     protoOutputStream.write(1138166333441L, (String) pair2.second);
                     protoOutputStream.write(1120986464258L, ((Integer) pair2.first).intValue());
-                    protoOutputStream.write(1172526071811L, ((Boolean) ((Pair) arrayMap2.get(pair2)).first).booleanValue() ? 3 : 0);
+                    protoOutputStream.write(
+                            1172526071811L,
+                            ((Boolean) ((Pair) arrayMap2.get(pair2)).first).booleanValue() ? 3 : 0);
                     protoOutputStream.end(start2);
                 }
             }
@@ -229,18 +255,23 @@ public final class PreferencesHelper implements RankingConfig {
     }
 
     public static LogMaker getChannelLog(NotificationChannel notificationChannel, String str) {
-        return new LogMaker(856).setType(6).setPackageName(str).addTaggedData(857, notificationChannel.getId()).addTaggedData(858, Integer.valueOf(notificationChannel.getImportance()));
+        return new LogMaker(856)
+                .setType(6)
+                .setPackageName(str)
+                .addTaggedData(857, notificationChannel.getId())
+                .addTaggedData(858, Integer.valueOf(notificationChannel.getImportance()));
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:7:0x0021, code lost:
-    
-        return true;
-     */
+
+       return true;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean hasUserConfiguredSettings(com.android.server.notification.PreferencesHelper.PackagePreferences r2) {
+    public static boolean hasUserConfiguredSettings(
+            com.android.server.notification.PreferencesHelper.PackagePreferences r2) {
         /*
             android.util.ArrayMap r0 = r2.channels
             java.util.Collection r0 = r0.values()
@@ -264,26 +295,37 @@ public final class PreferencesHelper implements RankingConfig {
         L24:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.PreferencesHelper.hasUserConfiguredSettings(com.android.server.notification.PreferencesHelper$PackagePreferences):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.PreferencesHelper.hasUserConfiguredSettings(com.android.server.notification.PreferencesHelper$PackagePreferences):boolean");
     }
 
-    public static void lockFieldsForUpdateLocked(NotificationChannel notificationChannel, NotificationChannel notificationChannel2) {
+    public static void lockFieldsForUpdateLocked(
+            NotificationChannel notificationChannel, NotificationChannel notificationChannel2) {
         if (notificationChannel.canBypassDnd() != notificationChannel2.canBypassDnd()) {
             notificationChannel2.lockFields(1);
         }
-        if (notificationChannel.getLockscreenVisibility() != notificationChannel2.getLockscreenVisibility()) {
+        if (notificationChannel.getLockscreenVisibility()
+                != notificationChannel2.getLockscreenVisibility()) {
             notificationChannel2.lockFields(2);
         }
         if (notificationChannel.getImportance() != notificationChannel2.getImportance()) {
             notificationChannel2.lockFields(4);
         }
-        if (notificationChannel.shouldShowLights() != notificationChannel2.shouldShowLights() || notificationChannel.getLightColor() != notificationChannel2.getLightColor()) {
+        if (notificationChannel.shouldShowLights() != notificationChannel2.shouldShowLights()
+                || notificationChannel.getLightColor() != notificationChannel2.getLightColor()) {
             notificationChannel2.lockFields(8);
         }
         if (!Objects.equals(notificationChannel.getSound(), notificationChannel2.getSound())) {
             notificationChannel2.lockFields(32);
         }
-        if (!Arrays.equals(notificationChannel.getVibrationPattern(), notificationChannel2.getVibrationPattern()) || !Objects.equals(notificationChannel.getVibrationEffect(), notificationChannel2.getVibrationEffect()) || notificationChannel.shouldVibrate() != notificationChannel2.shouldVibrate()) {
+        if (!Arrays.equals(
+                        notificationChannel.getVibrationPattern(),
+                        notificationChannel2.getVibrationPattern())
+                || !Objects.equals(
+                        notificationChannel.getVibrationEffect(),
+                        notificationChannel2.getVibrationEffect())
+                || notificationChannel.shouldVibrate() != notificationChannel2.shouldVibrate()) {
             notificationChannel2.lockFields(16);
         }
         if (notificationChannel.canShowBadge() != notificationChannel2.canShowBadge()) {
@@ -308,13 +350,28 @@ public final class PreferencesHelper implements RankingConfig {
             return false;
         }
         if (this.mBubblesEnabled.indexOfKey(identifier) < 0) {
-            this.mBubblesEnabled.put(identifier, Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "notification_bubbles", 1, identifier) == 1);
+            this.mBubblesEnabled.put(
+                    identifier,
+                    Settings.Secure.getIntForUser(
+                                    this.mContext.getContentResolver(),
+                                    "notification_bubbles",
+                                    1,
+                                    identifier)
+                            == 1);
         }
         return this.mBubblesEnabled.get(identifier, true);
     }
 
-    public final boolean channelIsLiveLocked(PackagePreferences packagePreferences, NotificationChannel notificationChannel) {
-        return (isGroupBlocked(packagePreferences.uid, packagePreferences.pkg, notificationChannel.getGroup()) || notificationChannel.isDeleted() || notificationChannel.getImportance() == 0) ? false : true;
+    public final boolean channelIsLiveLocked(
+            PackagePreferences packagePreferences, NotificationChannel notificationChannel) {
+        return (isGroupBlocked(
+                                packagePreferences.uid,
+                                packagePreferences.pkg,
+                                notificationChannel.getGroup())
+                        || notificationChannel.isDeleted()
+                        || notificationChannel.getImportance() == 0)
+                ? false
+                : true;
     }
 
     public final boolean createDefaultChannelIfNeededLocked(PackagePreferences packagePreferences) {
@@ -322,13 +379,23 @@ public final class PreferencesHelper implements RankingConfig {
             return false;
         }
         if (packagePreferences.channels.containsKey("miscellaneous")) {
-            ((NotificationChannel) packagePreferences.channels.get("miscellaneous")).setName(this.mContext.getString(R.string.global_action_toggle_silent_mode));
+            ((NotificationChannel) packagePreferences.channels.get("miscellaneous"))
+                    .setName(this.mContext.getString(R.string.global_action_toggle_silent_mode));
             return false;
         }
-        if (this.mPm.getApplicationInfoAsUser(packagePreferences.pkg, 0, UserHandle.getUserId(packagePreferences.uid)).targetSdkVersion >= 26) {
+        if (this.mPm.getApplicationInfoAsUser(
+                                packagePreferences.pkg,
+                                0,
+                                UserHandle.getUserId(packagePreferences.uid))
+                        .targetSdkVersion
+                >= 26) {
             return false;
         }
-        NotificationChannel notificationChannel = new NotificationChannel("miscellaneous", this.mContext.getString(R.string.global_action_toggle_silent_mode), packagePreferences.importance);
+        NotificationChannel notificationChannel =
+                new NotificationChannel(
+                        "miscellaneous",
+                        this.mContext.getString(R.string.global_action_toggle_silent_mode),
+                        packagePreferences.importance);
         notificationChannel.setBypassDnd(packagePreferences.priority == 2);
         notificationChannel.setLockscreenVisibility(packagePreferences.visibility);
         if (packagePreferences.importance != -1000) {
@@ -354,26 +421,41 @@ public final class PreferencesHelper implements RankingConfig {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean createNotificationChannel(java.lang.String r17, int r18, android.app.NotificationChannel r19, boolean r20, int r21, boolean r22) {
+    public final boolean createNotificationChannel(
+            java.lang.String r17,
+            int r18,
+            android.app.NotificationChannel r19,
+            boolean r20,
+            int r21,
+            boolean r22) {
         /*
             Method dump skipped, instructions count: 665
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.PreferencesHelper.createNotificationChannel(java.lang.String, int, android.app.NotificationChannel, boolean, int, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.PreferencesHelper.createNotificationChannel(java.lang.String,"
+                    + " int, android.app.NotificationChannel, boolean, int, boolean):boolean");
     }
 
     public final boolean deleteDefaultChannelIfNeededLocked(PackagePreferences packagePreferences) {
         if (!packagePreferences.channels.containsKey("miscellaneous")) {
             return false;
         }
-        if (this.mPm.getApplicationInfoAsUser(packagePreferences.pkg, 0, UserHandle.getUserId(packagePreferences.uid)).targetSdkVersion < 26) {
+        if (this.mPm.getApplicationInfoAsUser(
+                                packagePreferences.pkg,
+                                0,
+                                UserHandle.getUserId(packagePreferences.uid))
+                        .targetSdkVersion
+                < 26) {
             return false;
         }
         ((NotificationChannel) packagePreferences.channels.get("miscellaneous")).setDeleted(true);
         return true;
     }
 
-    public final boolean deleteNotificationChannelLocked(String str, int i, NotificationChannel notificationChannel) {
+    public final boolean deleteNotificationChannelLocked(
+            String str, int i, NotificationChannel notificationChannel) {
         if (notificationChannel.isDeleted()) {
             return false;
         }
@@ -384,8 +466,21 @@ public final class PreferencesHelper implements RankingConfig {
         MetricsLogger.action(channelLog);
         NotificationChannelLogger notificationChannelLogger = this.mNotificationChannelLogger;
         notificationChannelLogger.getClass();
-        NotificationChannelLogger.NotificationChannelEvent notificationChannelEvent = NotificationChannelLogger.NotificationChannelEvent.NOTIFICATION_CHANNEL_CREATED;
-        ((NotificationChannelLoggerImpl) notificationChannelLogger).logNotificationChannel(notificationChannel.getConversationId() != null ? NotificationChannelLogger.NotificationChannelEvent.NOTIFICATION_CHANNEL_CONVERSATION_DELETED : NotificationChannelLogger.NotificationChannelEvent.NOTIFICATION_CHANNEL_DELETED, notificationChannel, i, str, NotificationChannelLogger.getLoggingImportance(notificationChannel, notificationChannel.getImportance()), 0);
+        NotificationChannelLogger.NotificationChannelEvent notificationChannelEvent =
+                NotificationChannelLogger.NotificationChannelEvent.NOTIFICATION_CHANNEL_CREATED;
+        ((NotificationChannelLoggerImpl) notificationChannelLogger)
+                .logNotificationChannel(
+                        notificationChannel.getConversationId() != null
+                                ? NotificationChannelLogger.NotificationChannelEvent
+                                        .NOTIFICATION_CHANNEL_CONVERSATION_DELETED
+                                : NotificationChannelLogger.NotificationChannelEvent
+                                        .NOTIFICATION_CHANNEL_DELETED,
+                        notificationChannel,
+                        i,
+                        str,
+                        NotificationChannelLogger.getLoggingImportance(
+                                notificationChannel, notificationChannel.getImportance()),
+                        0);
         return true;
     }
 
@@ -397,13 +492,19 @@ public final class PreferencesHelper implements RankingConfig {
         return z;
     }
 
-    public final void dump(PrintWriter printWriter, NotificationManagerService.DumpFilter dumpFilter, ArrayMap arrayMap) {
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "    ", "per-package config version: ");
+    public final void dump(
+            PrintWriter printWriter,
+            NotificationManagerService.DumpFilter dumpFilter,
+            ArrayMap arrayMap) {
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        printWriter, "    ", "per-package config version: ");
         m.append(this.XML_VERSION);
         printWriter.println(m.toString());
         printWriter.println("PackagePreferences:");
         synchronized (this.mLock) {
-            dumpPackagePreferencesLocked(printWriter, dumpFilter, this.mPackagePreferences, arrayMap);
+            dumpPackagePreferencesLocked(
+                    printWriter, dumpFilter, this.mPackagePreferences, arrayMap);
             printWriter.println("Restored without uid:");
             dumpPackagePreferencesLocked(printWriter, dumpFilter, this.mRestoredWithoutUids, null);
         }
@@ -415,10 +516,12 @@ public final class PreferencesHelper implements RankingConfig {
         synchronized (this.mLock) {
             for (int i = 0; i < this.mPackagePreferences.size(); i++) {
                 try {
-                    PackagePreferences packagePreferences = (PackagePreferences) this.mPackagePreferences.valueAt(i);
+                    PackagePreferences packagePreferences =
+                            (PackagePreferences) this.mPackagePreferences.valueAt(i);
                     int i2 = 0;
                     for (int i3 = 0; i3 < packagePreferences.channels.size(); i3++) {
-                        if (!((NotificationChannel) packagePreferences.channels.valueAt(i3)).isDeleted()) {
+                        if (!((NotificationChannel) packagePreferences.channels.valueAt(i3))
+                                .isDeleted()) {
                             i2++;
                         }
                     }
@@ -444,7 +547,8 @@ public final class PreferencesHelper implements RankingConfig {
         return jSONArray;
     }
 
-    public final JSONObject dumpJson(NotificationManagerService.DumpFilter dumpFilter, ArrayMap arrayMap) {
+    public final JSONObject dumpJson(
+            NotificationManagerService.DumpFilter dumpFilter, ArrayMap arrayMap) {
         JSONObject jSONObject = new JSONObject();
         JSONArray jSONArray = new JSONArray();
         synchronized (this.mLock) {
@@ -463,18 +567,24 @@ public final class PreferencesHelper implements RankingConfig {
                     if (i >= size) {
                         break;
                     }
-                    PackagePreferences packagePreferences = (PackagePreferences) this.mPackagePreferences.valueAt(i);
+                    PackagePreferences packagePreferences =
+                            (PackagePreferences) this.mPackagePreferences.valueAt(i);
                     if (dumpFilter.matches(packagePreferences.pkg)) {
                         JSONObject jSONObject2 = new JSONObject();
                         try {
                             jSONObject2.put("userId", UserHandle.getUserId(packagePreferences.uid));
                             jSONObject2.put("packageName", packagePreferences.pkg);
-                            Object pair = new Pair(Integer.valueOf(packagePreferences.uid), packagePreferences.pkg);
+                            Object pair =
+                                    new Pair(
+                                            Integer.valueOf(packagePreferences.uid),
+                                            packagePreferences.pkg);
                             if (arrayMap != null && keySet.contains(pair)) {
                                 if (!((Boolean) ((Pair) arrayMap.get(pair)).first).booleanValue()) {
                                     i2 = 0;
                                 }
-                                jSONObject2.put("importance", NotificationListenerService.Ranking.importanceToString(i2));
+                                jSONObject2.put(
+                                        "importance",
+                                        NotificationListenerService.Ranking.importanceToString(i2));
                                 keySet.remove(pair);
                             }
                             int i3 = packagePreferences.priority;
@@ -483,7 +593,10 @@ public final class PreferencesHelper implements RankingConfig {
                             }
                             int i4 = packagePreferences.visibility;
                             if (i4 != -1000) {
-                                jSONObject2.put(LauncherConfigurationInternal.KEY_SUPPLEMENT_SERVICE_PAGE_VISIBILITY_BOOLEAN, Notification.visibilityToString(i4));
+                                jSONObject2.put(
+                                        LauncherConfigurationInternal
+                                                .KEY_SUPPLEMENT_SERVICE_PAGE_VISIBILITY_BOOLEAN,
+                                        Notification.visibilityToString(i4));
                             }
                             boolean z = packagePreferences.showBadge;
                             if (!z) {
@@ -515,9 +628,16 @@ public final class PreferencesHelper implements RankingConfig {
                 if (dumpFilter.matches((String) pair2.second)) {
                     JSONObject jSONObject3 = new JSONObject();
                     try {
-                        jSONObject3.put("userId", UserHandle.getUserId(((Integer) pair2.first).intValue()));
+                        jSONObject3.put(
+                                "userId", UserHandle.getUserId(((Integer) pair2.first).intValue()));
                         jSONObject3.put("packageName", pair2.second);
-                        jSONObject3.put("importance", NotificationListenerService.Ranking.importanceToString(((Boolean) ((Pair) arrayMap.get(pair2)).first).booleanValue() ? 3 : 0));
+                        jSONObject3.put(
+                                "importance",
+                                NotificationListenerService.Ranking.importanceToString(
+                                        ((Boolean) ((Pair) arrayMap.get(pair2)).first)
+                                                        .booleanValue()
+                                                ? 3
+                                                : 0));
                     } catch (JSONException unused3) {
                     }
                     jSONArray.put(jSONObject3);
@@ -555,12 +675,20 @@ public final class PreferencesHelper implements RankingConfig {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void dumpPackagePreferencesLocked(java.io.PrintWriter r19, com.android.server.notification.NotificationManagerService.DumpFilter r20, android.util.ArrayMap r21, android.util.ArrayMap r22) {
+    public final void dumpPackagePreferencesLocked(
+            java.io.PrintWriter r19,
+            com.android.server.notification.NotificationManagerService.DumpFilter r20,
+            android.util.ArrayMap r21,
+            android.util.ArrayMap r22) {
         /*
             Method dump skipped, instructions count: 701
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.PreferencesHelper.dumpPackagePreferencesLocked(java.io.PrintWriter, com.android.server.notification.NotificationManagerService$DumpFilter, android.util.ArrayMap, android.util.ArrayMap):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.PreferencesHelper.dumpPackagePreferencesLocked(java.io.PrintWriter,"
+                    + " com.android.server.notification.NotificationManagerService$DumpFilter,"
+                    + " android.util.ArrayMap, android.util.ArrayMap):void");
     }
 
     public final int getAppsBypassingDndCount(int i) {
@@ -570,13 +698,17 @@ public final class PreferencesHelper implements RankingConfig {
                 int size = this.mPackagePreferences.size();
                 i2 = 0;
                 for (int i3 = 0; i3 < size; i3++) {
-                    PackagePreferences packagePreferences = (PackagePreferences) this.mPackagePreferences.valueAt(i3);
-                    if (i == UserHandle.getUserId(packagePreferences.uid) && packagePreferences.importance != 0) {
+                    PackagePreferences packagePreferences =
+                            (PackagePreferences) this.mPackagePreferences.valueAt(i3);
+                    if (i == UserHandle.getUserId(packagePreferences.uid)
+                            && packagePreferences.importance != 0) {
                         Iterator it = packagePreferences.channels.values().iterator();
                         while (true) {
                             if (it.hasNext()) {
-                                NotificationChannel notificationChannel = (NotificationChannel) it.next();
-                                if (channelIsLiveLocked(packagePreferences, notificationChannel) && notificationChannel.canBypassDnd()) {
+                                NotificationChannel notificationChannel =
+                                        (NotificationChannel) it.next();
+                                if (channelIsLiveLocked(packagePreferences, notificationChannel)
+                                        && notificationChannel.canBypassDnd()) {
                                     i2++;
                                     break;
                                 }
@@ -591,25 +723,39 @@ public final class PreferencesHelper implements RankingConfig {
         return i2;
     }
 
-    public final NotificationChannel getConversationNotificationChannel(String str, int i, String str2, String str3, boolean z, boolean z2) {
+    public final NotificationChannel getConversationNotificationChannel(
+            String str, int i, String str2, String str3, boolean z, boolean z2) {
         NotificationChannel notificationChannel;
         Preconditions.checkNotNull(str);
         synchronized (this.mLock) {
             try {
-                PackagePreferences orCreatePackagePreferencesLocked = getOrCreatePackagePreferencesLocked(i, str);
+                PackagePreferences orCreatePackagePreferencesLocked =
+                        getOrCreatePackagePreferencesLocked(i, str);
                 if (str2 == null) {
                     str2 = "miscellaneous";
                 }
                 NotificationChannel notificationChannel2 = null;
                 if (str3 != null) {
-                    for (NotificationChannel notificationChannel3 : orCreatePackagePreferencesLocked.channels.values()) {
-                        if (str3.equals(notificationChannel3.getConversationId()) && str2.equals(notificationChannel3.getParentChannelId()) && (z2 || !notificationChannel3.isDeleted())) {
+                    for (NotificationChannel notificationChannel3 :
+                            orCreatePackagePreferencesLocked.channels.values()) {
+                        if (str3.equals(notificationChannel3.getConversationId())
+                                && str2.equals(notificationChannel3.getParentChannelId())
+                                && (z2 || !notificationChannel3.isDeleted())) {
                             notificationChannel2 = notificationChannel3;
                             break;
                         }
                     }
                 }
-                return (notificationChannel2 != null || !z || (notificationChannel = (NotificationChannel) orCreatePackagePreferencesLocked.channels.get(str2)) == null || (!z2 && notificationChannel.isDeleted())) ? notificationChannel2 : notificationChannel;
+                return (notificationChannel2 != null
+                                || !z
+                                || (notificationChannel =
+                                                (NotificationChannel)
+                                                        orCreatePackagePreferencesLocked.channels
+                                                                .get(str2))
+                                        == null
+                                || (!z2 && notificationChannel.isDeleted()))
+                        ? notificationChannel2
+                        : notificationChannel;
             } finally {
             }
         }
@@ -617,7 +763,12 @@ public final class PreferencesHelper implements RankingConfig {
 
     public int getFsiState(String str, int i, boolean z) {
         if (z) {
-            return this.mPermissionManager.checkPermissionForPreflight("android.permission.USE_FULL_SCREEN_INTENT", new AttributionSource.Builder(i).setPackageName(str).build()) == 0 ? 1 : 2;
+            return this.mPermissionManager.checkPermissionForPreflight(
+                                    "android.permission.USE_FULL_SCREEN_INTENT",
+                                    new AttributionSource.Builder(i).setPackageName(str).build())
+                            == 0
+                    ? 1
+                    : 2;
         }
         return 0;
     }
@@ -650,7 +801,8 @@ public final class PreferencesHelper implements RankingConfig {
         }
     }
 
-    public final NotificationChannelGroup getNotificationChannelGroup(int i, String str, String str2) {
+    public final NotificationChannelGroup getNotificationChannelGroup(
+            int i, String str, String str2) {
         Objects.requireNonNull(str2);
         synchronized (this.mLock) {
             try {
@@ -665,18 +817,24 @@ public final class PreferencesHelper implements RankingConfig {
         }
     }
 
-    public final NotificationChannelGroup getNotificationChannelGroupWithChannels(int i, String str, String str2, boolean z) {
+    public final NotificationChannelGroup getNotificationChannelGroupWithChannels(
+            int i, String str, String str2, boolean z) {
         int i2;
         Objects.requireNonNull(str);
         synchronized (this.mLock) {
             try {
                 PackagePreferences packagePreferencesLocked = getPackagePreferencesLocked(i, str);
-                if (packagePreferencesLocked != null && str2 != null && packagePreferencesLocked.groups.containsKey(str2)) {
-                    NotificationChannelGroup clone = ((NotificationChannelGroup) packagePreferencesLocked.groups.get(str2)).clone();
+                if (packagePreferencesLocked != null
+                        && str2 != null
+                        && packagePreferencesLocked.groups.containsKey(str2)) {
+                    NotificationChannelGroup clone =
+                            ((NotificationChannelGroup) packagePreferencesLocked.groups.get(str2))
+                                    .clone();
                     clone.setChannels(new ArrayList());
                     int size = packagePreferencesLocked.channels.size();
                     while (i2 < size) {
-                        NotificationChannel notificationChannel = (NotificationChannel) packagePreferencesLocked.channels.valueAt(i2);
+                        NotificationChannel notificationChannel =
+                                (NotificationChannel) packagePreferencesLocked.channels.valueAt(i2);
                         i2 = (!z && notificationChannel.isDeleted()) ? i2 + 1 : 0;
                         if (str2.equals(notificationChannel.getGroup())) {
                             clone.addChannel(notificationChannel);
@@ -690,7 +848,8 @@ public final class PreferencesHelper implements RankingConfig {
         }
     }
 
-    public final ParceledListSlice getNotificationChannelGroups(int i, String str, Set set, boolean z, boolean z2, boolean z3) {
+    public final ParceledListSlice getNotificationChannelGroups(
+            int i, String str, Set set, boolean z, boolean z2, boolean z3) {
         Objects.requireNonNull(str);
         ArrayMap arrayMap = new ArrayMap();
         synchronized (this.mLock) {
@@ -699,23 +858,33 @@ public final class PreferencesHelper implements RankingConfig {
                 if (packagePreferencesLocked == null) {
                     return ParceledListSlice.emptyList();
                 }
-                NotificationChannelGroup notificationChannelGroup = new NotificationChannelGroup(null, null);
+                NotificationChannelGroup notificationChannelGroup =
+                        new NotificationChannelGroup(null, null);
                 int size = packagePreferencesLocked.channels.size();
                 for (int i2 = 0; i2 < size; i2++) {
-                    NotificationChannel notificationChannel = (NotificationChannel) packagePreferencesLocked.channels.valueAt(i2);
+                    NotificationChannel notificationChannel =
+                            (NotificationChannel) packagePreferencesLocked.channels.valueAt(i2);
                     if (z || !notificationChannel.isDeleted()) {
                         if (set != null && notificationChannel.getImportance() != 0) {
-                            if (!((HashSet) set).contains(notificationChannel.getId())) {
-                            }
+                            if (!((HashSet) set).contains(notificationChannel.getId())) {}
                         }
                         if (notificationChannel.getGroup() == null) {
                             notificationChannelGroup.addChannel(notificationChannel);
-                        } else if (packagePreferencesLocked.groups.get(notificationChannel.getGroup()) != null) {
-                            NotificationChannelGroup notificationChannelGroup2 = (NotificationChannelGroup) arrayMap.get(notificationChannel.getGroup());
+                        } else if (packagePreferencesLocked.groups.get(
+                                        notificationChannel.getGroup())
+                                != null) {
+                            NotificationChannelGroup notificationChannelGroup2 =
+                                    (NotificationChannelGroup)
+                                            arrayMap.get(notificationChannel.getGroup());
                             if (notificationChannelGroup2 == null) {
-                                notificationChannelGroup2 = ((NotificationChannelGroup) packagePreferencesLocked.groups.get(notificationChannel.getGroup())).clone();
+                                notificationChannelGroup2 =
+                                        ((NotificationChannelGroup)
+                                                        packagePreferencesLocked.groups.get(
+                                                                notificationChannel.getGroup()))
+                                                .clone();
                                 notificationChannelGroup2.setChannels(new ArrayList());
-                                arrayMap.put(notificationChannel.getGroup(), notificationChannelGroup2);
+                                arrayMap.put(
+                                        notificationChannel.getGroup(), notificationChannelGroup2);
                             }
                             notificationChannelGroup2.addChannel(notificationChannel);
                         }
@@ -725,9 +894,11 @@ public final class PreferencesHelper implements RankingConfig {
                     arrayMap.put(null, notificationChannelGroup);
                 }
                 if (z3) {
-                    for (NotificationChannelGroup notificationChannelGroup3 : packagePreferencesLocked.groups.values()) {
+                    for (NotificationChannelGroup notificationChannelGroup3 :
+                            packagePreferencesLocked.groups.values()) {
                         if (!arrayMap.containsKey(notificationChannelGroup3.getId())) {
-                            arrayMap.put(notificationChannelGroup3.getId(), notificationChannelGroup3);
+                            arrayMap.put(
+                                    notificationChannelGroup3.getId(), notificationChannelGroup3);
                         }
                     }
                 }
@@ -749,7 +920,8 @@ public final class PreferencesHelper implements RankingConfig {
                 }
                 int size = packagePreferencesLocked.channels.size();
                 for (int i2 = 0; i2 < size; i2++) {
-                    NotificationChannel notificationChannel = (NotificationChannel) packagePreferencesLocked.channels.valueAt(i2);
+                    NotificationChannel notificationChannel =
+                            (NotificationChannel) packagePreferencesLocked.channels.valueAt(i2);
                     if (z || !notificationChannel.isDeleted()) {
                         arrayList.add(notificationChannel);
                     }
@@ -770,12 +942,40 @@ public final class PreferencesHelper implements RankingConfig {
     }
 
     public final PackagePreferences getOrCreatePackagePreferencesLocked(int i, String str) {
-        return getOrCreatePackagePreferencesLocked(str, UserHandle.getUserId(i), i, -1000, 0, -1000, true, 0, this.mClock.millis(), true, false, -1);
+        return getOrCreatePackagePreferencesLocked(
+                str,
+                UserHandle.getUserId(i),
+                i,
+                -1000,
+                0,
+                -1000,
+                true,
+                0,
+                this.mClock.millis(),
+                true,
+                false,
+                -1);
     }
 
-    public final PackagePreferences getOrCreatePackagePreferencesLocked(String str, int i, int i2, int i3, int i4, int i5, boolean z, int i6, long j, boolean z2, boolean z3, int i7) {
+    public final PackagePreferences getOrCreatePackagePreferencesLocked(
+            String str,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            boolean z,
+            int i6,
+            long j,
+            boolean z2,
+            boolean z3,
+            int i7) {
         String packagePreferencesKey = packagePreferencesKey(i2, str);
-        PackagePreferences packagePreferences = i2 == UNKNOWN_UID ? (PackagePreferences) this.mRestoredWithoutUids.get(unrestoredPackageKey(i, str)) : (PackagePreferences) this.mPackagePreferences.get(packagePreferencesKey);
+        PackagePreferences packagePreferences =
+                i2 == UNKNOWN_UID
+                        ? (PackagePreferences)
+                                this.mRestoredWithoutUids.get(unrestoredPackageKey(i, str))
+                        : (PackagePreferences) this.mPackagePreferences.get(packagePreferencesKey);
         if (packagePreferences == null) {
             packagePreferences = new PackagePreferences();
             packagePreferences.uid = UNKNOWN_UID;
@@ -827,13 +1027,16 @@ public final class PreferencesHelper implements RankingConfig {
             packagePreferences.appLockScreenVisibility = -1000;
             packagePreferences.isAllowPopup = true;
             packagePreferences.reminder = false;
-            if (NmRune.NM_SUPPORT_HIDE_CONTENT_CONVERSATION_PACKAGE && this.mAllowList.contains(packagePreferences.pkg)) {
+            if (NmRune.NM_SUPPORT_HIDE_CONTENT_CONVERSATION_PACKAGE
+                    && this.mAllowList.contains(packagePreferences.pkg)) {
                 packagePreferences.appLockScreenVisibility = 0;
             }
             try {
                 createDefaultChannelIfNeededLocked(packagePreferences);
             } catch (PackageManager.NameNotFoundException e) {
-                Slog.e("NotificationPrefHelper", "createDefaultChannelIfNeededLocked - Exception: " + e);
+                Slog.e(
+                        "NotificationPrefHelper",
+                        "createDefaultChannelIfNeededLocked - Exception: " + e);
             }
             if (packagePreferences.uid == UNKNOWN_UID) {
                 Flags.persistIncompleteRestoreData();
@@ -873,10 +1076,14 @@ public final class PreferencesHelper implements RankingConfig {
     public final boolean hasNotificationChannelsBypassingDnd(int i, String str) {
         synchronized (this.mLock) {
             try {
-                PackagePreferences packagePreferences = (PackagePreferences) this.mPackagePreferences.get(packagePreferencesKey(i, str));
+                PackagePreferences packagePreferences =
+                        (PackagePreferences)
+                                this.mPackagePreferences.get(packagePreferencesKey(i, str));
                 if (packagePreferences != null) {
-                    for (NotificationChannel notificationChannel : packagePreferences.channels.values()) {
-                        if (channelIsLiveLocked(packagePreferences, notificationChannel) && notificationChannel.canBypassDnd()) {
+                    for (NotificationChannel notificationChannel :
+                            packagePreferences.channels.values()) {
+                        if (channelIsLiveLocked(packagePreferences, notificationChannel)
+                                && notificationChannel.canBypassDnd()) {
                             return true;
                         }
                     }
@@ -908,7 +1115,10 @@ public final class PreferencesHelper implements RankingConfig {
         boolean z;
         synchronized (this.mLock) {
             try {
-                z = isInInvalidMsgState(str, i) ? getOrCreatePackagePreferencesLocked(i, str).userDemotedMsgApp : false;
+                z =
+                        isInInvalidMsgState(str, i)
+                                ? getOrCreatePackagePreferencesLocked(i, str).userDemotedMsgApp
+                                : false;
             } catch (Throwable th) {
                 throw th;
             }
@@ -921,7 +1131,16 @@ public final class PreferencesHelper implements RankingConfig {
         Delegate delegate;
         synchronized (this.mLock) {
             PackagePreferences packagePreferencesLocked = getPackagePreferencesLocked(i, str);
-            z = (packagePreferencesLocked == null || (delegate = packagePreferencesLocked.delegate) == null || str2 == null || i2 == UNKNOWN_UID || !str2.equals(delegate.mPkg) || i2 != delegate.mUid || !delegate.mEnabled) ? false : true;
+            z =
+                    (packagePreferencesLocked == null
+                                    || (delegate = packagePreferencesLocked.delegate) == null
+                                    || str2 == null
+                                    || i2 == UNKNOWN_UID
+                                    || !str2.equals(delegate.mPkg)
+                                    || i2 != delegate.mUid
+                                    || !delegate.mEnabled)
+                            ? false
+                            : true;
         }
         return z;
     }
@@ -936,7 +1155,9 @@ public final class PreferencesHelper implements RankingConfig {
         }
         synchronized (this.mLock) {
             try {
-                NotificationChannelGroup notificationChannelGroup = (NotificationChannelGroup) getOrCreatePackagePreferencesLocked(i, str).groups.get(str2);
+                NotificationChannelGroup notificationChannelGroup =
+                        (NotificationChannelGroup)
+                                getOrCreatePackagePreferencesLocked(i, str).groups.get(str2);
                 if (notificationChannelGroup == null) {
                     return false;
                 }
@@ -951,8 +1172,11 @@ public final class PreferencesHelper implements RankingConfig {
         boolean z;
         synchronized (this.mLock) {
             try {
-                PackagePreferences orCreatePackagePreferencesLocked = getOrCreatePackagePreferencesLocked(i, str);
-                z = orCreatePackagePreferencesLocked.hasSentInvalidMessage && !orCreatePackagePreferencesLocked.hasSentValidMessage;
+                PackagePreferences orCreatePackagePreferencesLocked =
+                        getOrCreatePackagePreferencesLocked(i, str);
+                z =
+                        orCreatePackagePreferencesLocked.hasSentInvalidMessage
+                                && !orCreatePackagePreferencesLocked.hasSentValidMessage;
             } finally {
             }
         }
@@ -971,16 +1195,20 @@ public final class PreferencesHelper implements RankingConfig {
                 synchronized (this.mLock) {
                     try {
                         boolean z = false;
-                        for (PackagePreferences packagePreferences : this.mPackagePreferences.values()) {
+                        for (PackagePreferences packagePreferences :
+                                this.mPackagePreferences.values()) {
                             if (packagePreferences.pkg.equals(str2)) {
                                 if (str3 == null) {
                                     packagePreferences.oemLockedImportance = true;
                                     Iterator it = packagePreferences.channels.values().iterator();
                                     while (it.hasNext()) {
-                                        ((NotificationChannel) it.next()).setImportanceLockedByOEM(true);
+                                        ((NotificationChannel) it.next())
+                                                .setImportanceLockedByOEM(true);
                                     }
                                 } else {
-                                    NotificationChannel notificationChannel = (NotificationChannel) packagePreferences.channels.get(str3);
+                                    NotificationChannel notificationChannel =
+                                            (NotificationChannel)
+                                                    packagePreferences.channels.get(str3);
                                     if (notificationChannel != null) {
                                         notificationChannel.setImportanceLockedByOEM(true);
                                     }
@@ -990,7 +1218,10 @@ public final class PreferencesHelper implements RankingConfig {
                             }
                         }
                         if (!z) {
-                            List list = (List) ((HashMap) this.mOemLockedApps).getOrDefault(str2, new ArrayList());
+                            List list =
+                                    (List)
+                                            ((HashMap) this.mOemLockedApps)
+                                                    .getOrDefault(str2, new ArrayList());
                             if (str3 != null) {
                                 list.add(str3);
                             }
@@ -1003,18 +1234,31 @@ public final class PreferencesHelper implements RankingConfig {
         }
     }
 
-    public final void lockChannelsForOEMwithPackagePreferences(PackagePreferences packagePreferences) {
+    public final void lockChannelsForOEMwithPackagePreferences(
+            PackagePreferences packagePreferences) {
         String[] split;
         if (((ArrayList) this.mCscConfigNoneBlockableList).size() == 0) {
-            ((ArrayList) this.mCscConfigNoneBlockableList).addAll(Arrays.asList(this.mContext.getResources().getStringArray(17236310)));
-            String string = SemCscFeature.getInstance().getString("CscFeature_Setting_ConfigBlockNotiAppList");
+            ((ArrayList) this.mCscConfigNoneBlockableList)
+                    .addAll(Arrays.asList(this.mContext.getResources().getStringArray(17236310)));
+            String string =
+                    SemCscFeature.getInstance()
+                            .getString("CscFeature_Setting_ConfigBlockNotiAppList");
             if (string != null && string.length() > 0) {
-                ((ArrayList) this.mCscConfigNoneBlockableList).addAll(Arrays.asList(string.split(",")));
+                ((ArrayList) this.mCscConfigNoneBlockableList)
+                        .addAll(Arrays.asList(string.split(",")));
             }
         }
         if (((ArrayList) this.mCscConfigNoneBlockableList).size() > 0) {
-            for (String str : (String[]) ((ArrayList) this.mCscConfigNoneBlockableList).toArray(new String[((ArrayList) this.mCscConfigNoneBlockableList).size()])) {
-                if (!TextUtils.isEmpty(str) && (split = str.split(":")) != null && split.length > 0) {
+            for (String str :
+                    (String[])
+                            ((ArrayList) this.mCscConfigNoneBlockableList)
+                                    .toArray(
+                                            new String
+                                                    [((ArrayList) this.mCscConfigNoneBlockableList)
+                                                            .size()])) {
+                if (!TextUtils.isEmpty(str)
+                        && (split = str.split(":")) != null
+                        && split.length > 0) {
                     String str2 = split[0];
                     String str3 = split.length == 2 ? split[1] : null;
                     if (packagePreferences.pkg.equals(str2)) {
@@ -1025,7 +1269,8 @@ public final class PreferencesHelper implements RankingConfig {
                                 ((NotificationChannel) it.next()).setImportanceLockedByOEM(true);
                             }
                         } else {
-                            NotificationChannel notificationChannel = (NotificationChannel) packagePreferences.channels.get(str3);
+                            NotificationChannel notificationChannel =
+                                    (NotificationChannel) packagePreferences.channels.get(str3);
                             if (notificationChannel != null) {
                                 notificationChannel.setImportanceLockedByOEM(true);
                             } else {
@@ -1041,9 +1286,14 @@ public final class PreferencesHelper implements RankingConfig {
     public final void migrateNotificationPermissions(List list) {
         Iterator it = list.iterator();
         while (it.hasNext()) {
-            for (PackageInfo packageInfo : this.mPm.getInstalledPackagesAsUser(PackageManager.PackageInfoFlags.of(131072L), ((UserInfo) it.next()).getUserHandle().getIdentifier())) {
+            for (PackageInfo packageInfo :
+                    this.mPm.getInstalledPackagesAsUser(
+                            PackageManager.PackageInfoFlags.of(131072L),
+                            ((UserInfo) it.next()).getUserHandle().getIdentifier())) {
                 synchronized (this.mLock) {
-                    PackagePreferences orCreatePackagePreferencesLocked = getOrCreatePackagePreferencesLocked(packageInfo.applicationInfo.uid, packageInfo.packageName);
+                    PackagePreferences orCreatePackagePreferencesLocked =
+                            getOrCreatePackagePreferencesLocked(
+                                    packageInfo.applicationInfo.uid, packageInfo.packageName);
                     if (orCreatePackagePreferencesLocked.migrateToPm) {
                         int i = orCreatePackagePreferencesLocked.uid;
                         if (i != UNKNOWN_UID) {
@@ -1054,11 +1304,17 @@ public final class PreferencesHelper implements RankingConfig {
                                 hasUserConfiguredSettings(orCreatePackagePreferencesLocked);
                                 PermissionHelper permissionHelper = this.mPermissionHelper;
                                 permissionHelper.getClass();
-                                if (str != null && !permissionHelper.isPermissionFixed(str, userId)) {
-                                    permissionHelper.setNotificationPermission(str, z, true, userId);
+                                if (str != null
+                                        && !permissionHelper.isPermissionFixed(str, userId)) {
+                                    permissionHelper.setNotificationPermission(
+                                            str, z, true, userId);
                                 }
                             } catch (Exception e) {
-                                Slog.e("NotificationPrefHelper", "could not migrate setting for " + orCreatePackagePreferencesLocked.pkg, e);
+                                Slog.e(
+                                        "NotificationPrefHelper",
+                                        "could not migrate setting for "
+                                                + orCreatePackagePreferencesLocked.pkg,
+                                        e);
                             }
                         }
                     }
@@ -1070,8 +1326,10 @@ public final class PreferencesHelper implements RankingConfig {
     public final boolean onlyHasDefaultChannel(String str, int i) {
         synchronized (this.mLock) {
             try {
-                PackagePreferences orCreatePackagePreferencesLocked = getOrCreatePackagePreferencesLocked(i, str);
-                return orCreatePackagePreferencesLocked.channels.size() == 1 && orCreatePackagePreferencesLocked.channels.containsKey("miscellaneous");
+                PackagePreferences orCreatePackagePreferencesLocked =
+                        getOrCreatePackagePreferencesLocked(i, str);
+                return orCreatePackagePreferencesLocked.channels.size() == 1
+                        && orCreatePackagePreferencesLocked.channels.containsKey("miscellaneous");
             } catch (Throwable th) {
                 throw th;
             }
@@ -1099,8 +1357,10 @@ public final class PreferencesHelper implements RankingConfig {
             try {
                 int size = this.mPackagePreferences.size();
                 for (int i2 = 0; i2 < size; i2++) {
-                    PackagePreferences packagePreferences = (PackagePreferences) this.mPackagePreferences.valueAt(i2);
-                    if (UserHandle.getUserId(packagePreferences.uid) == i && packagePreferences.reminder) {
+                    PackagePreferences packagePreferences =
+                            (PackagePreferences) this.mPackagePreferences.valueAt(i2);
+                    if (UserHandle.getUserId(packagePreferences.uid) == i
+                            && packagePreferences.reminder) {
                         packagePreferences.reminder = false;
                     }
                 }
@@ -1119,9 +1379,13 @@ public final class PreferencesHelper implements RankingConfig {
             try {
                 int size = this.mPackagePreferences.size();
                 for (int i = 0; i < size; i++) {
-                    PackagePreferences packagePreferences = (PackagePreferences) this.mPackagePreferences.valueAt(i);
+                    PackagePreferences packagePreferences =
+                            (PackagePreferences) this.mPackagePreferences.valueAt(i);
                     if (list.contains(packagePreferences.pkg)) {
-                        Slog.d("NotificationPrefHelper", "resetDefaultAllowOngoingActivityExceptGivenApps - excepPackage = " + packagePreferences.pkg);
+                        Slog.d(
+                                "NotificationPrefHelper",
+                                "resetDefaultAllowOngoingActivityExceptGivenApps - excepPackage = "
+                                        + packagePreferences.pkg);
                     } else {
                         packagePreferences.allowOngoingActivity = -1;
                     }
@@ -1140,7 +1404,12 @@ public final class PreferencesHelper implements RankingConfig {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void restoreChannel(com.android.modules.utils.TypedXmlPullParser r7, boolean r8, com.android.server.notification.PreferencesHelper.PackagePreferences r9, boolean r10, boolean r11) {
+    public final void restoreChannel(
+            com.android.modules.utils.TypedXmlPullParser r7,
+            boolean r8,
+            com.android.server.notification.PreferencesHelper.PackagePreferences r9,
+            boolean r10,
+            boolean r11) {
         /*
             r6 = this;
             java.lang.String r0 = "id"
@@ -1242,117 +1511,122 @@ public final class PreferencesHelper implements RankingConfig {
         Lc1:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.PreferencesHelper.restoreChannel(com.android.modules.utils.TypedXmlPullParser, boolean, com.android.server.notification.PreferencesHelper$PackagePreferences, boolean, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.PreferencesHelper.restoreChannel(com.android.modules.utils.TypedXmlPullParser,"
+                    + " boolean,"
+                    + " com.android.server.notification.PreferencesHelper$PackagePreferences,"
+                    + " boolean, boolean):void");
     }
 
     /* JADX WARN: Can't wrap try/catch for region: R(29:2|3|(28:142|143|144|145|146|7|(1:141)(6:10|11|12|13|14|(17:16|17|(1:134)(1:21)|22|(1:133)(1:25)|26|(1:132)(1:30)|31|(5:33|34|35|36|(1:38))(1:131)|39|(1:125)(1:47)|48|(7:49|(1:1)|123|99|100|101|97)|57|58|59|(2:61|(4:63|(1:65)(1:70)|66|68)(1:71))(1:72)))|135|17|(1:19)|134|22|(0)|133|26|(1:28)|132|31|(0)(0)|39|(1:41)|125|48|(3:49|(3:51|53|56)(1:124)|97)|57|58|59|(0)(0))|5|6|7|(0)|141|135|17|(0)|134|22|(0)|133|26|(0)|132|31|(0)(0)|39|(0)|125|48|(3:49|(0)(0)|97)|57|58|59|(0)(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:103:0x02d2, code lost:
-    
-        r8 = "name";
-        r9 = r6;
-        restoreChannel(r40, r41, r7, r31, hasNotificationChannelsBypassingDnd(r7.uid, r7.pkg));
-     */
+
+       r8 = "name";
+       r9 = r6;
+       restoreChannel(r40, r41, r7, r31, hasNotificationChannelsBypassingDnd(r7.uid, r7.pkg));
+    */
     /* JADX WARN: Code restructure failed: missing block: B:105:0x02f3, code lost:
-    
-        if ("delegate".equals(r9) == false) goto L76;
-     */
+
+       if ("delegate".equals(r9) == false) goto L76;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:106:0x02f5, code lost:
-    
-        r1 = r29;
-        r3 = r40.getAttributeInt(r16, r1, com.android.server.notification.PreferencesHelper.UNKNOWN_UID);
-        r4 = com.android.internal.util.XmlUtils.readStringAttribute(r40, r8);
-        r5 = r40.getAttributeBoolean(r16, "enabled", true);
-     */
+
+       r1 = r29;
+       r3 = r40.getAttributeInt(r16, r1, com.android.server.notification.PreferencesHelper.UNKNOWN_UID);
+       r4 = com.android.internal.util.XmlUtils.readStringAttribute(r40, r8);
+       r5 = r40.getAttributeBoolean(r16, "enabled", true);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:107:0x0308, code lost:
-    
-        if (r3 == com.android.server.notification.PreferencesHelper.UNKNOWN_UID) goto L102;
-     */
+
+       if (r3 == com.android.server.notification.PreferencesHelper.UNKNOWN_UID) goto L102;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:109:0x030e, code lost:
-    
-        if (android.text.TextUtils.isEmpty(r4) != false) goto L102;
-     */
+
+       if (android.text.TextUtils.isEmpty(r4) != false) goto L102;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:110:0x0310, code lost:
-    
-        r6 = new com.android.server.notification.PreferencesHelper.Delegate(r3, r4, r5);
-     */
+
+       r6 = new com.android.server.notification.PreferencesHelper.Delegate(r3, r4, r5);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:111:0x0317, code lost:
-    
-        r7.delegate = r6;
-     */
+
+       r7.delegate = r6;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:112:0x0316, code lost:
-    
-        r6 = r16;
-     */
+
+       r6 = r16;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:114:0x02eb, code lost:
-    
-        r8 = "name";
-        r9 = r6;
-     */
+
+       r8 = "name";
+       r9 = r6;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:116:0x026e, code lost:
-    
-        if (r13 != false) goto L141;
-     */
+
+       if (r13 != false) goto L141;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:119:0x0270, code lost:
-    
-        android.util.Slog.w(r11, "Skipping further groups for " + r7.pkg);
-        r13 = r9;
-     */
+
+       android.util.Slog.w(r11, "Skipping further groups for " + r7.pkg);
+       r13 = r9;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:74:0x0323, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:76:0x0325, code lost:
-    
-        android.util.Slog.e(r11, "deleteDefaultChannelIfNeededLocked - Exception: " + r0);
-     */
+
+       android.util.Slog.e(r11, "deleteDefaultChannelIfNeededLocked - Exception: " + r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:79:0x024d, code lost:
-    
-        if (r1 != 4) goto L77;
-     */
+
+       if (r1 != 4) goto L77;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:80:0x0255, code lost:
-    
-        r6 = r40.getName();
-     */
+
+       r6 = r40.getName();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:82:0x0262, code lost:
-    
-        if ("channelGroup".equals(r6) == false) goto L136;
-     */
+
+       if ("channelGroup".equals(r6) == false) goto L136;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:84:0x026c, code lost:
-    
-        if (r7.groups.size() < 6000) goto L139;
-     */
+
+       if (r7.groups.size() < 6000) goto L139;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:86:0x0288, code lost:
-    
-        r1 = r40.getAttributeValue(r16, "id");
-        r2 = r40.getAttributeValue(r16, "name");
-     */
+
+       r1 = r40.getAttributeValue(r16, "id");
+       r2 = r40.getAttributeValue(r16, "name");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:87:0x0296, code lost:
-    
-        if (android.text.TextUtils.isEmpty(r1) != false) goto L87;
-     */
+
+       if (android.text.TextUtils.isEmpty(r1) != false) goto L87;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:88:0x0298, code lost:
-    
-        r3 = new android.app.NotificationChannelGroup(r1, r2);
-        r3.populateFromXml(r40);
-        r7.groups.put(r1, r3);
-     */
+
+       r3 = new android.app.NotificationChannelGroup(r1, r2);
+       r3.populateFromXml(r40);
+       r7.groups.put(r1, r3);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:90:0x02ab, code lost:
-    
-        if ("channel".equals(r6) == false) goto L145;
-     */
+
+       if ("channel".equals(r6) == false) goto L145;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:92:0x02b5, code lost:
-    
-        if (r7.channels.size() < 5000) goto L147;
-     */
+
+       if (r7.channels.size() < 5000) goto L147;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:93:0x02b7, code lost:
-    
-        if (r14 != false) goto L148;
-     */
+
+       if (r14 != false) goto L148;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:95:0x02b9, code lost:
-    
-        android.util.Slog.w(r11, "Skipping further channels for " + r7.pkg);
-        r14 = r9;
-     */
+
+       android.util.Slog.w(r11, "Skipping further channels for " + r7.pkg);
+       r14 = r9;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:124:0x0246 A[ADDED_TO_REGION, EDGE_INSN: B:124:0x0246->B:57:0x0246 BREAK  A[LOOP:0: B:49:0x0236->B:97:0x0236], SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:131:0x01fa  */
@@ -1374,12 +1648,24 @@ public final class PreferencesHelper implements RankingConfig {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void restorePackage(com.android.modules.utils.TypedXmlPullParser r40, boolean r41, int r42, java.lang.String r43, boolean r44, boolean r45, java.util.ArrayList r46, java.util.ArrayList r47) {
+    public final void restorePackage(
+            com.android.modules.utils.TypedXmlPullParser r40,
+            boolean r41,
+            int r42,
+            java.lang.String r43,
+            boolean r44,
+            boolean r45,
+            java.util.ArrayList r46,
+            java.util.ArrayList r47) {
         /*
             Method dump skipped, instructions count: 872
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.PreferencesHelper.restorePackage(com.android.modules.utils.TypedXmlPullParser, boolean, int, java.lang.String, boolean, boolean, java.util.ArrayList, java.util.ArrayList):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.PreferencesHelper.restorePackage(com.android.modules.utils.TypedXmlPullParser,"
+                    + " boolean, int, java.lang.String, boolean, boolean, java.util.ArrayList,"
+                    + " java.util.ArrayList):void");
     }
 
     public final void setAllowOngoingActivityState(int i, int i2, String str) {
@@ -1395,9 +1681,12 @@ public final class PreferencesHelper implements RankingConfig {
                 if (!list.isEmpty()) {
                     int size = this.mPackagePreferences.size();
                     for (int i2 = 0; i2 < size; i2++) {
-                        PackagePreferences packagePreferences = (PackagePreferences) this.mPackagePreferences.valueAt(i2);
-                        for (NotificationChannel notificationChannel : packagePreferences.channels.values()) {
-                            if (channelIsLiveLocked(packagePreferences, notificationChannel) && notificationChannel.canBypassDnd()) {
+                        PackagePreferences packagePreferences =
+                                (PackagePreferences) this.mPackagePreferences.valueAt(i2);
+                        for (NotificationChannel notificationChannel :
+                                packagePreferences.channels.values()) {
+                            if (channelIsLiveLocked(packagePreferences, notificationChannel)
+                                    && notificationChannel.canBypassDnd()) {
                                 notificationChannel.setBypassDnd(false);
                             }
                         }
@@ -1406,7 +1695,12 @@ public final class PreferencesHelper implements RankingConfig {
                     while (it.hasNext()) {
                         String[] split = ((String) it.next()).split(":");
                         if (split.length == 2) {
-                            Iterator it2 = getOrCreatePackagePreferencesLocked(Integer.parseInt(split[1]), split[0]).channels.values().iterator();
+                            Iterator it2 =
+                                    getOrCreatePackagePreferencesLocked(
+                                                    Integer.parseInt(split[1]), split[0])
+                                            .channels
+                                            .values()
+                                            .iterator();
                             while (it2.hasNext()) {
                                 ((NotificationChannel) it2.next()).setBypassDnd(true);
                             }
@@ -1439,7 +1733,8 @@ public final class PreferencesHelper implements RankingConfig {
         if (this.mCurrentUserHasChannelsBypassingDnd) {
             return;
         }
-        ArrayList appsToBypassDndForEnabledForMode = this.mZenModeHelper.getAppsToBypassDndForEnabledForMode();
+        ArrayList appsToBypassDndForEnabledForMode =
+                this.mZenModeHelper.getAppsToBypassDndForEnabledForMode();
         synchronized (this.mLock) {
             try {
                 ArrayList arrayList = new ArrayList();
@@ -1451,9 +1746,13 @@ public final class PreferencesHelper implements RankingConfig {
                         String[] split = str.split(":");
                         if (split.length >= 2) {
                             for (int i2 = 0; i2 < this.mPackagePreferences.size(); i2++) {
-                                PackagePreferences packagePreferences = (PackagePreferences) this.mPackagePreferences.valueAt(i2);
-                                if (packagePreferences.pkg.equals(split[0]) && UserHandle.getUserId(packagePreferences.uid) == Integer.parseInt(split[1])) {
-                                    if (this.mPermissionHelper.hasPermission(packagePreferences.uid)) {
+                                PackagePreferences packagePreferences =
+                                        (PackagePreferences) this.mPackagePreferences.valueAt(i2);
+                                if (packagePreferences.pkg.equals(split[0])
+                                        && UserHandle.getUserId(packagePreferences.uid)
+                                                == Integer.parseInt(split[1])) {
+                                    if (this.mPermissionHelper.hasPermission(
+                                            packagePreferences.uid)) {
                                         z3 = true;
                                     } else {
                                         arrayList.add(str);
@@ -1483,7 +1782,9 @@ public final class PreferencesHelper implements RankingConfig {
         for (int i = 0; i < size; i++) {
             this.mAllowList.add(list.get(i).toString());
         }
-        Slog.d("NotificationPrefHelper", "setHideContentAllowList - size = " + this.mAllowList.size());
+        Slog.d(
+                "NotificationPrefHelper",
+                "setHideContentAllowList - size = " + this.mAllowList.size());
     }
 
     public final void setNotificationAlertsEnabledForPackage(String str, int i, boolean z) {
@@ -1492,7 +1793,10 @@ public final class PreferencesHelper implements RankingConfig {
                 PackagePreferences packagePreferencesLocked = getPackagePreferencesLocked(i, str);
                 if (packagePreferencesLocked != null) {
                     packagePreferencesLocked.isNotificationAlertsEnabled = z;
-                    Slog.w("NotificationPrefHelper", "Set a isNotificationAlertsEnabled : " + packagePreferencesLocked.isNotificationAlertsEnabled);
+                    Slog.w(
+                            "NotificationPrefHelper",
+                            "Set a isNotificationAlertsEnabled : "
+                                    + packagePreferencesLocked.isNotificationAlertsEnabled);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1508,8 +1812,11 @@ public final class PreferencesHelper implements RankingConfig {
         ((ArrayList) this.mOngoingActivityAllowedAppList).clear();
         int size = list.size();
         for (int i = 0; i < size; i++) {
-            ((ArrayList) this.mOngoingActivityAllowedAppList).add(((String) list.get(i)).toString());
-            Slog.d("NotificationPrefHelper", "setOngoingActivityAppList package= " + ((String) list.get(i)));
+            ((ArrayList) this.mOngoingActivityAllowedAppList)
+                    .add(((String) list.get(i)).toString());
+            Slog.d(
+                    "NotificationPrefHelper",
+                    "setOngoingActivityAppList package= " + ((String) list.get(i)));
         }
     }
 
@@ -1526,7 +1833,8 @@ public final class PreferencesHelper implements RankingConfig {
     }
 
     public final void syncChannelsBypassingDnd() {
-        this.mCurrentUserHasChannelsBypassingDnd = (this.mZenModeHelper.getNotificationPolicy().state & 1) != 0;
+        this.mCurrentUserHasChannelsBypassingDnd =
+                (this.mZenModeHelper.getNotificationPolicy().state & 1) != 0;
         updateCurrentUserHasChannelsBypassingDnd(1000, true);
     }
 
@@ -1539,7 +1847,13 @@ public final class PreferencesHelper implements RankingConfig {
             int keyAt = this.mBadgingEnabled.keyAt(i);
             boolean z2 = this.mBadgingEnabled.get(keyAt);
             boolean z3 = true;
-            boolean z4 = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "notification_badging", 1, keyAt) != 0;
+            boolean z4 =
+                    Settings.Secure.getIntForUser(
+                                    this.mContext.getContentResolver(),
+                                    "notification_badging",
+                                    1,
+                                    keyAt)
+                            != 0;
             this.mBadgingEnabled.put(keyAt, z4);
             if (z2 == z4) {
                 z3 = false;
@@ -1560,7 +1874,13 @@ public final class PreferencesHelper implements RankingConfig {
             int keyAt = this.mBubblesEnabled.keyAt(i);
             boolean z2 = this.mBubblesEnabled.get(keyAt);
             boolean z3 = true;
-            boolean z4 = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "notification_bubbles", 1, keyAt) == 1;
+            boolean z4 =
+                    Settings.Secure.getIntForUser(
+                                    this.mContext.getContentResolver(),
+                                    "notification_bubbles",
+                                    1,
+                                    keyAt)
+                            == 1;
             this.mBubblesEnabled.put(keyAt, z4);
             if (z2 == z4) {
                 z3 = false;
@@ -1572,55 +1892,93 @@ public final class PreferencesHelper implements RankingConfig {
         }
     }
 
-    public final void updateChildrenConversationChannels(PackagePreferences packagePreferences, NotificationChannel notificationChannel, NotificationChannel notificationChannel2) {
+    public final void updateChildrenConversationChannels(
+            PackagePreferences packagePreferences,
+            NotificationChannel notificationChannel,
+            NotificationChannel notificationChannel2) {
         boolean z;
-        if (notificationChannel.equals(notificationChannel2) || notificationChannel.isConversation()) {
+        if (notificationChannel.equals(notificationChannel2)
+                || notificationChannel.isConversation()) {
             return;
         }
         for (NotificationChannel notificationChannel3 : packagePreferences.channels.values()) {
-            if (notificationChannel3.isConversation() && notificationChannel.getId().equals(notificationChannel3.getParentChannelId())) {
+            if (notificationChannel3.isConversation()
+                    && notificationChannel
+                            .getId()
+                            .equals(notificationChannel3.getParentChannelId())) {
                 String str = packagePreferences.pkg;
                 int i = packagePreferences.uid;
-                int loggingImportance = NotificationChannelLogger.getLoggingImportance(notificationChannel3, notificationChannel3.getImportance());
-                if ((notificationChannel3.getUserLockedFields() & 1) != 0 || notificationChannel.canBypassDnd() == notificationChannel2.canBypassDnd()) {
+                int loggingImportance =
+                        NotificationChannelLogger.getLoggingImportance(
+                                notificationChannel3, notificationChannel3.getImportance());
+                if ((notificationChannel3.getUserLockedFields() & 1) != 0
+                        || notificationChannel.canBypassDnd()
+                                == notificationChannel2.canBypassDnd()) {
                     z = false;
                 } else {
                     notificationChannel3.setBypassDnd(notificationChannel2.canBypassDnd());
                     z = true;
                 }
-                if ((notificationChannel3.getUserLockedFields() & 2) == 0 && notificationChannel.getLockscreenVisibility() != notificationChannel2.getLockscreenVisibility()) {
-                    notificationChannel3.setLockscreenVisibility(notificationChannel2.getLockscreenVisibility());
+                if ((notificationChannel3.getUserLockedFields() & 2) == 0
+                        && notificationChannel.getLockscreenVisibility()
+                                != notificationChannel2.getLockscreenVisibility()) {
+                    notificationChannel3.setLockscreenVisibility(
+                            notificationChannel2.getLockscreenVisibility());
                     z = true;
                 }
-                if ((notificationChannel3.getUserLockedFields() & 4) == 0 && notificationChannel.getImportance() != notificationChannel2.getImportance()) {
+                if ((notificationChannel3.getUserLockedFields() & 4) == 0
+                        && notificationChannel.getImportance()
+                                != notificationChannel2.getImportance()) {
                     notificationChannel3.setImportance(notificationChannel2.getImportance());
                     z = true;
                 }
-                if ((notificationChannel3.getUserLockedFields() & 8) == 0 && (notificationChannel.shouldShowLights() != notificationChannel2.shouldShowLights() || notificationChannel.getLightColor() != notificationChannel2.getLightColor())) {
+                if ((notificationChannel3.getUserLockedFields() & 8) == 0
+                        && (notificationChannel.shouldShowLights()
+                                        != notificationChannel2.shouldShowLights()
+                                || notificationChannel.getLightColor()
+                                        != notificationChannel2.getLightColor())) {
                     notificationChannel3.enableLights(notificationChannel2.shouldShowLights());
                     notificationChannel3.setLightColor(notificationChannel2.getLightColor());
                     z = true;
                 }
-                if ((notificationChannel3.getUserLockedFields() & 32) == 0 && !Objects.equals(notificationChannel.getSound(), notificationChannel2.getSound())) {
-                    notificationChannel3.setSound(notificationChannel2.getSound(), notificationChannel2.getAudioAttributes());
+                if ((notificationChannel3.getUserLockedFields() & 32) == 0
+                        && !Objects.equals(
+                                notificationChannel.getSound(), notificationChannel2.getSound())) {
+                    notificationChannel3.setSound(
+                            notificationChannel2.getSound(),
+                            notificationChannel2.getAudioAttributes());
                     z = true;
                 }
-                if ((notificationChannel3.getUserLockedFields() & 16) == 0 && (!Arrays.equals(notificationChannel.getVibrationPattern(), notificationChannel2.getVibrationPattern()) || !Objects.equals(notificationChannel.getVibrationEffect(), notificationChannel2.getVibrationEffect()) || notificationChannel.shouldVibrate() != notificationChannel2.shouldVibrate())) {
-                    notificationChannel3.setVibrationPattern(notificationChannel2.getVibrationPattern());
+                if ((notificationChannel3.getUserLockedFields() & 16) == 0
+                        && (!Arrays.equals(
+                                        notificationChannel.getVibrationPattern(),
+                                        notificationChannel2.getVibrationPattern())
+                                || !Objects.equals(
+                                        notificationChannel.getVibrationEffect(),
+                                        notificationChannel2.getVibrationEffect())
+                                || notificationChannel.shouldVibrate()
+                                        != notificationChannel2.shouldVibrate())) {
+                    notificationChannel3.setVibrationPattern(
+                            notificationChannel2.getVibrationPattern());
                     notificationChannel3.enableVibration(notificationChannel2.shouldVibrate());
                     z = true;
                 }
-                if ((notificationChannel3.getUserLockedFields() & 128) == 0 && notificationChannel.canShowBadge() != notificationChannel2.canShowBadge()) {
+                if ((notificationChannel3.getUserLockedFields() & 128) == 0
+                        && notificationChannel.canShowBadge()
+                                != notificationChannel2.canShowBadge()) {
                     notificationChannel3.setShowBadge(notificationChannel2.canShowBadge());
                     z = true;
                 }
-                if ((notificationChannel3.getUserLockedFields() & 256) == 0 && notificationChannel.getAllowBubbles() != notificationChannel2.getAllowBubbles()) {
+                if ((notificationChannel3.getUserLockedFields() & 256) == 0
+                        && notificationChannel.getAllowBubbles()
+                                != notificationChannel2.getAllowBubbles()) {
                     notificationChannel3.setAllowBubbles(notificationChannel2.getAllowBubbles());
                     z = true;
                 }
                 if (z) {
                     MetricsLogger.action(getChannelLog(notificationChannel3, str).setSubtype(1));
-                    this.mNotificationChannelLogger.logNotificationChannelModified(notificationChannel3, i, str, loggingImportance, true);
+                    this.mNotificationChannelLogger.logNotificationChannelModified(
+                            notificationChannel3, i, str, loggingImportance, true);
                 }
             }
         }
@@ -1647,14 +2005,21 @@ public final class PreferencesHelper implements RankingConfig {
             try {
                 int size = this.mPackagePreferences.size();
                 for (int i3 = 0; i3 < size; i3++) {
-                    PackagePreferences packagePreferences = (PackagePreferences) this.mPackagePreferences.valueAt(i3);
-                    if (arrayList.contains(Integer.valueOf(UserHandle.getUserId(packagePreferences.uid)))) {
+                    PackagePreferences packagePreferences =
+                            (PackagePreferences) this.mPackagePreferences.valueAt(i3);
+                    if (arrayList.contains(
+                            Integer.valueOf(UserHandle.getUserId(packagePreferences.uid)))) {
                         Iterator it = packagePreferences.channels.values().iterator();
                         while (true) {
                             if (it.hasNext()) {
-                                NotificationChannel notificationChannel = (NotificationChannel) it.next();
-                                if (channelIsLiveLocked(packagePreferences, notificationChannel) && notificationChannel.canBypassDnd()) {
-                                    arraySet.add(new Pair(packagePreferences.pkg, Integer.valueOf(packagePreferences.uid)));
+                                NotificationChannel notificationChannel =
+                                        (NotificationChannel) it.next();
+                                if (channelIsLiveLocked(packagePreferences, notificationChannel)
+                                        && notificationChannel.canBypassDnd()) {
+                                    arraySet.add(
+                                            new Pair(
+                                                    packagePreferences.pkg,
+                                                    Integer.valueOf(packagePreferences.uid)));
                                     break;
                                 }
                             }
@@ -1666,7 +2031,8 @@ public final class PreferencesHelper implements RankingConfig {
             }
         }
         for (int size2 = arraySet.size() - 1; size2 >= 0; size2--) {
-            if (!this.mPermissionHelper.hasPermission(((Integer) ((Pair) arraySet.valueAt(size2)).second).intValue())) {
+            if (!this.mPermissionHelper.hasPermission(
+                    ((Integer) ((Pair) arraySet.valueAt(size2)).second).intValue())) {
                 arraySet.removeAt(size2);
             }
         }
@@ -1681,12 +2047,15 @@ public final class PreferencesHelper implements RankingConfig {
         synchronized (this.mLock) {
             try {
                 for (PackagePreferences packagePreferences : this.mPackagePreferences.values()) {
-                    if (i == UserHandle.getUserId(packagePreferences.uid) && arraySet != null && arraySet.contains(packagePreferences.pkg)) {
+                    if (i == UserHandle.getUserId(packagePreferences.uid)
+                            && arraySet != null
+                            && arraySet.contains(packagePreferences.pkg)) {
                         packagePreferences.defaultAppLockedImportance = false;
                         if (!packagePreferences.fixedImportance) {
                             Iterator it = packagePreferences.channels.values().iterator();
                             while (it.hasNext()) {
-                                ((NotificationChannel) it.next()).setImportanceLockedByCriticalDeviceFunction(false);
+                                ((NotificationChannel) it.next())
+                                        .setImportanceLockedByCriticalDeviceFunction(false);
                             }
                         }
                     }
@@ -1694,11 +2063,14 @@ public final class PreferencesHelper implements RankingConfig {
                 Iterator it2 = arraySet2.iterator();
                 while (it2.hasNext()) {
                     Pair pair = (Pair) it2.next();
-                    PackagePreferences orCreatePackagePreferencesLocked = getOrCreatePackagePreferencesLocked(((Integer) pair.second).intValue(), (String) pair.first);
+                    PackagePreferences orCreatePackagePreferencesLocked =
+                            getOrCreatePackagePreferencesLocked(
+                                    ((Integer) pair.second).intValue(), (String) pair.first);
                     orCreatePackagePreferencesLocked.defaultAppLockedImportance = true;
                     Iterator it3 = orCreatePackagePreferencesLocked.channels.values().iterator();
                     while (it3.hasNext()) {
-                        ((NotificationChannel) it3.next()).setImportanceLockedByCriticalDeviceFunction(true);
+                        ((NotificationChannel) it3.next())
+                                .setImportanceLockedByCriticalDeviceFunction(true);
                     }
                 }
             } catch (Throwable th) {
@@ -1708,14 +2080,25 @@ public final class PreferencesHelper implements RankingConfig {
     }
 
     public final void updateMediaNotificationFilteringEnabled() {
-        boolean z = Settings.Global.getInt(this.mContext.getContentResolver(), "qs_media_controls", 1) > 0 && this.mContext.getResources().getBoolean(R.bool.config_secondaryBuiltInDisplayIsRound);
+        boolean z =
+                Settings.Global.getInt(this.mContext.getContentResolver(), "qs_media_controls", 1)
+                                > 0
+                        && this.mContext
+                                .getResources()
+                                .getBoolean(R.bool.config_secondaryBuiltInDisplayIsRound);
         if (z != this.mIsMediaNotificationFilteringEnabled) {
             this.mIsMediaNotificationFilteringEnabled = z;
             updateConfig();
         }
     }
 
-    public final void updateNotificationChannel(String str, int i, NotificationChannel notificationChannel, boolean z, int i2, boolean z2) {
+    public final void updateNotificationChannel(
+            String str,
+            int i,
+            NotificationChannel notificationChannel,
+            boolean z,
+            int i2,
+            boolean z2) {
         boolean z3;
         boolean z4;
         boolean z5;
@@ -1723,8 +2106,12 @@ public final class PreferencesHelper implements RankingConfig {
         Objects.requireNonNull(notificationChannel.getId());
         synchronized (this.mLock) {
             try {
-                PackagePreferences orCreatePackagePreferencesLocked = getOrCreatePackagePreferencesLocked(i, str);
-                NotificationChannel notificationChannel2 = (NotificationChannel) orCreatePackagePreferencesLocked.channels.get(notificationChannel.getId());
+                PackagePreferences orCreatePackagePreferencesLocked =
+                        getOrCreatePackagePreferencesLocked(i, str);
+                NotificationChannel notificationChannel2 =
+                        (NotificationChannel)
+                                orCreatePackagePreferencesLocked.channels.get(
+                                        notificationChannel.getId());
                 if (notificationChannel2 == null || notificationChannel2.isDeleted()) {
                     throw new IllegalArgumentException("Channel does not exist");
                 }
@@ -1738,20 +2125,32 @@ public final class PreferencesHelper implements RankingConfig {
                 } else {
                     notificationChannel.unlockFields(notificationChannel.getUserLockedFields());
                 }
-                if (notificationChannel2.isImportanceLockedByCriticalDeviceFunction() && !notificationChannel2.isBlockable() && notificationChannel2.getImportance() != 0) {
+                if (notificationChannel2.isImportanceLockedByCriticalDeviceFunction()
+                        && !notificationChannel2.isBlockable()
+                        && notificationChannel2.getImportance() != 0) {
                     try {
-                        Bundle bundle = this.mPm.getApplicationInfoAsUser(str, 128, UserHandle.getUserId(i)).metaData;
-                        if (bundle != null && !bundle.getBoolean("com.samsung.android.notification.blockable", false)) {
+                        Bundle bundle =
+                                this.mPm.getApplicationInfoAsUser(str, 128, UserHandle.getUserId(i))
+                                        .metaData;
+                        if (bundle != null
+                                && !bundle.getBoolean(
+                                        "com.samsung.android.notification.blockable", false)) {
                             notificationChannel.setImportance(notificationChannel2.getImportance());
                         }
                     } catch (PackageManager.NameNotFoundException unused) {
-                        Slog.d("NotificationPrefHelper", "NameNotFoundException pkg " + orCreatePackagePreferencesLocked.pkg);
+                        Slog.d(
+                                "NotificationPrefHelper",
+                                "NameNotFoundException pkg "
+                                        + orCreatePackagePreferencesLocked.pkg);
                     }
                 }
-                orCreatePackagePreferencesLocked.channels.put(notificationChannel.getId(), notificationChannel);
+                orCreatePackagePreferencesLocked.channels.put(
+                        notificationChannel.getId(), notificationChannel);
                 if (onlyHasDefaultChannel(str, i)) {
-                    orCreatePackagePreferencesLocked.priority = notificationChannel.canBypassDnd() ? 2 : 0;
-                    orCreatePackagePreferencesLocked.visibility = notificationChannel.getLockscreenVisibility();
+                    orCreatePackagePreferencesLocked.priority =
+                            notificationChannel.canBypassDnd() ? 2 : 0;
+                    orCreatePackagePreferencesLocked.visibility =
+                            notificationChannel.getLockscreenVisibility();
                     orCreatePackagePreferencesLocked.showBadge = notificationChannel.canShowBadge();
                     z4 = true;
                 } else {
@@ -1759,14 +2158,30 @@ public final class PreferencesHelper implements RankingConfig {
                 }
                 boolean z6 = z4;
                 if (!notificationChannel2.equals(notificationChannel)) {
-                    MetricsLogger.action(getChannelLog(notificationChannel, str).setSubtype(z ? 1 : 0));
-                    this.mNotificationChannelLogger.logNotificationChannelModified(notificationChannel, i, str, NotificationChannelLogger.getLoggingImportance(notificationChannel2, notificationChannel2.getImportance()), z);
+                    MetricsLogger.action(
+                            getChannelLog(notificationChannel, str).setSubtype(z ? 1 : 0));
+                    this.mNotificationChannelLogger.logNotificationChannelModified(
+                            notificationChannel,
+                            i,
+                            str,
+                            NotificationChannelLogger.getLoggingImportance(
+                                    notificationChannel2, notificationChannel2.getImportance()),
+                            z);
                     z6 = true;
                 }
-                if (z && SystemUiSystemPropertiesFlags.getResolver().isEnabled(SystemUiSystemPropertiesFlags.NotificationFlags.PROPAGATE_CHANNEL_UPDATES_TO_CONVERSATIONS)) {
-                    updateChildrenConversationChannels(orCreatePackagePreferencesLocked, notificationChannel2, notificationChannel);
+                if (z
+                        && SystemUiSystemPropertiesFlags.getResolver()
+                                .isEnabled(
+                                        SystemUiSystemPropertiesFlags.NotificationFlags
+                                                .PROPAGATE_CHANNEL_UPDATES_TO_CONVERSATIONS)) {
+                    updateChildrenConversationChannels(
+                            orCreatePackagePreferencesLocked,
+                            notificationChannel2,
+                            notificationChannel);
                 }
-                if (notificationChannel.canBypassDnd() == this.mCurrentUserHasChannelsBypassingDnd && notificationChannel2.getImportance() == notificationChannel.getImportance()) {
+                if (notificationChannel.canBypassDnd() == this.mCurrentUserHasChannelsBypassingDnd
+                        && notificationChannel2.getImportance()
+                                == notificationChannel.getImportance()) {
                     z3 = false;
                     z5 = z6;
                 }
@@ -1787,13 +2202,39 @@ public final class PreferencesHelper implements RankingConfig {
         ZenModeHelper zenModeHelper = this.mZenModeHelper;
         NotificationManager.Policy notificationPolicy = zenModeHelper.getNotificationPolicy();
         if (notificationPolicy != null) {
-            zenModeHelper.setNotificationPolicy(new NotificationManager.Policy(notificationPolicy.priorityCategories, notificationPolicy.priorityCallSenders, notificationPolicy.priorityMessageSenders, notificationPolicy.suppressedVisualEffects, z ? 1 : 0, notificationPolicy.priorityConversationSenders, notificationPolicy.exceptionContactsFlag, notificationPolicy.getExceptionContacts(), notificationPolicy.appBypassDndFlag, notificationPolicy.getAppBypassDndList()), z2 ? 5 : 4, i);
+            zenModeHelper.setNotificationPolicy(
+                    new NotificationManager.Policy(
+                            notificationPolicy.priorityCategories,
+                            notificationPolicy.priorityCallSenders,
+                            notificationPolicy.priorityMessageSenders,
+                            notificationPolicy.suppressedVisualEffects,
+                            z ? 1 : 0,
+                            notificationPolicy.priorityConversationSenders,
+                            notificationPolicy.exceptionContactsFlag,
+                            notificationPolicy.getExceptionContacts(),
+                            notificationPolicy.appBypassDndFlag,
+                            notificationPolicy.getAppBypassDndList()),
+                    z2 ? 5 : 4,
+                    i);
         } else {
-            zenModeHelper.setNotificationPolicy(new NotificationManager.Policy(notificationPolicy.priorityCategories, notificationPolicy.priorityCallSenders, notificationPolicy.priorityMessageSenders, notificationPolicy.suppressedVisualEffects, z ? 1 : 0, notificationPolicy.priorityConversationSenders), z2 ? 5 : 4, i);
+            zenModeHelper.setNotificationPolicy(
+                    new NotificationManager.Policy(
+                            notificationPolicy.priorityCategories,
+                            notificationPolicy.priorityCallSenders,
+                            notificationPolicy.priorityMessageSenders,
+                            notificationPolicy.suppressedVisualEffects,
+                            z ? 1 : 0,
+                            notificationPolicy.priorityConversationSenders),
+                    z2 ? 5 : 4,
+                    i);
         }
     }
 
-    public final void writePackageXml(PackagePreferences packagePreferences, TypedXmlSerializer typedXmlSerializer, ArrayMap arrayMap, boolean z) {
+    public final void writePackageXml(
+            PackagePreferences packagePreferences,
+            TypedXmlSerializer typedXmlSerializer,
+            ArrayMap arrayMap,
+            boolean z) {
         typedXmlSerializer.startTag((String) null, "package");
         typedXmlSerializer.attribute((String) null, "name", packagePreferences.pkg);
         if (arrayMap.isEmpty()) {
@@ -1804,7 +2245,10 @@ public final class PreferencesHelper implements RankingConfig {
         } else {
             Pair pair = new Pair(Integer.valueOf(packagePreferences.uid), packagePreferences.pkg);
             Pair pair2 = (Pair) arrayMap.get(pair);
-            typedXmlSerializer.attributeInt((String) null, "importance", (pair2 == null || !((Boolean) pair2.first).booleanValue()) ? 0 : 3);
+            typedXmlSerializer.attributeInt(
+                    (String) null,
+                    "importance",
+                    (pair2 == null || !((Boolean) pair2.first).booleanValue()) ? 0 : 3);
             arrayMap.remove(pair);
         }
         int i2 = packagePreferences.priority;
@@ -1813,27 +2257,45 @@ public final class PreferencesHelper implements RankingConfig {
         }
         int i3 = packagePreferences.visibility;
         if (i3 != -1000) {
-            typedXmlSerializer.attributeInt((String) null, LauncherConfigurationInternal.KEY_SUPPLEMENT_SERVICE_PAGE_VISIBILITY_BOOLEAN, i3);
+            typedXmlSerializer.attributeInt(
+                    (String) null,
+                    LauncherConfigurationInternal.KEY_SUPPLEMENT_SERVICE_PAGE_VISIBILITY_BOOLEAN,
+                    i3);
         }
         int i4 = packagePreferences.bubblePreference;
         if (i4 != 0) {
             typedXmlSerializer.attributeInt((String) null, "allow_bubble", i4);
         }
-        typedXmlSerializer.attributeBoolean((String) null, "show_badge", packagePreferences.showBadge);
-        typedXmlSerializer.attributeInt((String) null, "app_user_locked_fields", packagePreferences.lockedAppFields);
-        typedXmlSerializer.attributeBoolean((String) null, "sent_invalid_msg", packagePreferences.hasSentInvalidMessage);
-        typedXmlSerializer.attributeBoolean((String) null, "sent_valid_msg", packagePreferences.hasSentValidMessage);
-        typedXmlSerializer.attributeBoolean((String) null, "user_demote_msg_app", packagePreferences.userDemotedMsgApp);
-        typedXmlSerializer.attributeBoolean((String) null, "sent_valid_bubble", packagePreferences.hasSentValidBubble);
+        typedXmlSerializer.attributeBoolean(
+                (String) null, "show_badge", packagePreferences.showBadge);
+        typedXmlSerializer.attributeInt(
+                (String) null, "app_user_locked_fields", packagePreferences.lockedAppFields);
+        typedXmlSerializer.attributeBoolean(
+                (String) null, "sent_invalid_msg", packagePreferences.hasSentInvalidMessage);
+        typedXmlSerializer.attributeBoolean(
+                (String) null, "sent_valid_msg", packagePreferences.hasSentValidMessage);
+        typedXmlSerializer.attributeBoolean(
+                (String) null, "user_demote_msg_app", packagePreferences.userDemotedMsgApp);
+        typedXmlSerializer.attributeBoolean(
+                (String) null, "sent_valid_bubble", packagePreferences.hasSentValidBubble);
         Flags.persistIncompleteRestoreData();
         if (packagePreferences.uid == UNKNOWN_UID) {
-            typedXmlSerializer.attributeLong((String) null, "creation_time", packagePreferences.creationTime);
+            typedXmlSerializer.attributeLong(
+                    (String) null, "creation_time", packagePreferences.creationTime);
             typedXmlSerializer.attributeInt((String) null, "userid", packagePreferences.userId);
         }
-        typedXmlSerializer.attributeBoolean((String) null, "allow_edge_lighting", packagePreferences.allowEdgeLighting);
-        typedXmlSerializer.attributeBoolean((String) null, "allow_sub_display_noti", packagePreferences.allowSubDisplayNoti);
-        typedXmlSerializer.attributeInt((String) null, "allow_ongoing_activity_setting", packagePreferences.allowOngoingActivity);
-        typedXmlSerializer.attributeBoolean((String) null, "notification_alerts_enabled", packagePreferences.isNotificationAlertsEnabled);
+        typedXmlSerializer.attributeBoolean(
+                (String) null, "allow_edge_lighting", packagePreferences.allowEdgeLighting);
+        typedXmlSerializer.attributeBoolean(
+                (String) null, "allow_sub_display_noti", packagePreferences.allowSubDisplayNoti);
+        typedXmlSerializer.attributeInt(
+                (String) null,
+                "allow_ongoing_activity_setting",
+                packagePreferences.allowOngoingActivity);
+        typedXmlSerializer.attributeBoolean(
+                (String) null,
+                "notification_alerts_enabled",
+                packagePreferences.isNotificationAlertsEnabled);
         int i5 = packagePreferences.muteByWearable;
         if (i5 != -1) {
             typedXmlSerializer.attributeInt((String) null, "mute_for_wearable_app", i5);

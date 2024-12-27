@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.dreams.IDreamOverlayCallback;
 import android.view.WindowManager;
 
 /* loaded from: classes3.dex */
@@ -18,30 +17,35 @@ public interface IDreamOverlayClient extends IInterface {
 
     void onWakeRequested() throws RemoteException;
 
-    void startDream(WindowManager.LayoutParams layoutParams, IDreamOverlayCallback iDreamOverlayCallback, String str, boolean z) throws RemoteException;
+    void startDream(
+            WindowManager.LayoutParams layoutParams,
+            IDreamOverlayCallback iDreamOverlayCallback,
+            String str,
+            boolean z)
+            throws RemoteException;
 
     void wakeUp() throws RemoteException;
 
     public static class Default implements IDreamOverlayClient {
         @Override // android.service.dreams.IDreamOverlayClient
-        public void startDream(WindowManager.LayoutParams params, IDreamOverlayCallback callback, String dreamComponent, boolean shouldShowComplications) throws RemoteException {
-        }
+        public void startDream(
+                WindowManager.LayoutParams params,
+                IDreamOverlayCallback callback,
+                String dreamComponent,
+                boolean shouldShowComplications)
+                throws RemoteException {}
 
         @Override // android.service.dreams.IDreamOverlayClient
-        public void wakeUp() throws RemoteException {
-        }
+        public void wakeUp() throws RemoteException {}
 
         @Override // android.service.dreams.IDreamOverlayClient
-        public void endDream() throws RemoteException {
-        }
+        public void endDream() throws RemoteException {}
 
         @Override // android.service.dreams.IDreamOverlayClient
-        public void onWakeRequested() throws RemoteException {
-        }
+        public void onWakeRequested() throws RemoteException {}
 
         @Override // android.service.dreams.IDreamOverlayClient
-        public void comeToFront() throws RemoteException {
-        }
+        public void comeToFront() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -49,7 +53,7 @@ public interface IDreamOverlayClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDreamOverlayClient {
+    public abstract static class Stub extends Binder implements IDreamOverlayClient {
         static final int TRANSACTION_comeToFront = 5;
         static final int TRANSACTION_endDream = 3;
         static final int TRANSACTION_onWakeRequested = 4;
@@ -99,7 +103,8 @@ public interface IDreamOverlayClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDreamOverlayClient.DESCRIPTOR);
             }
@@ -109,8 +114,11 @@ public interface IDreamOverlayClient extends IInterface {
             }
             switch (code) {
                 case 1:
-                    WindowManager.LayoutParams _arg0 = (WindowManager.LayoutParams) data.readTypedObject(WindowManager.LayoutParams.CREATOR);
-                    IDreamOverlayCallback _arg1 = IDreamOverlayCallback.Stub.asInterface(data.readStrongBinder());
+                    WindowManager.LayoutParams _arg0 =
+                            (WindowManager.LayoutParams)
+                                    data.readTypedObject(WindowManager.LayoutParams.CREATOR);
+                    IDreamOverlayCallback _arg1 =
+                            IDreamOverlayCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg2 = data.readString();
                     boolean _arg3 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -155,7 +163,12 @@ public interface IDreamOverlayClient extends IInterface {
             }
 
             @Override // android.service.dreams.IDreamOverlayClient
-            public void startDream(WindowManager.LayoutParams params, IDreamOverlayCallback callback, String dreamComponent, boolean shouldShowComplications) throws RemoteException {
+            public void startDream(
+                    WindowManager.LayoutParams params,
+                    IDreamOverlayCallback callback,
+                    String dreamComponent,
+                    boolean shouldShowComplications)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

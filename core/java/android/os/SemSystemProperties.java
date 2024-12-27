@@ -2,8 +2,7 @@ package android.os;
 
 /* loaded from: classes3.dex */
 public class SemSystemProperties {
-    private SemSystemProperties() {
-    }
+    private SemSystemProperties() {}
 
     public static String get(String key) {
         return SystemProperties.get(key);

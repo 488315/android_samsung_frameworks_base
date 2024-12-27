@@ -14,8 +14,8 @@ public interface IStickyModifierStateListener extends IInterface {
 
     public static class Default implements IStickyModifierStateListener {
         @Override // android.hardware.input.IStickyModifierStateListener
-        public void onStickyModifierStateChanged(int modifierState, int lockedModifierState) throws RemoteException {
-        }
+        public void onStickyModifierStateChanged(int modifierState, int lockedModifierState)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IStickyModifierStateListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStickyModifierStateListener {
+    public abstract static class Stub extends Binder implements IStickyModifierStateListener {
         static final int TRANSACTION_onStickyModifierStateChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IStickyModifierStateListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IStickyModifierStateListener.DESCRIPTOR);
             }
@@ -98,7 +99,8 @@ public interface IStickyModifierStateListener extends IInterface {
             }
 
             @Override // android.hardware.input.IStickyModifierStateListener
-            public void onStickyModifierStateChanged(int modifierState, int lockedModifierState) throws RemoteException {
+            public void onStickyModifierStateChanged(int modifierState, int lockedModifierState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IStickyModifierStateListener.DESCRIPTOR);

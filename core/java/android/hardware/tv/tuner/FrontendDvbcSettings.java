@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class FrontendDvbcSettings implements Parcelable {
-    public static final Parcelable.Creator<FrontendDvbcSettings> CREATOR = new Parcelable.Creator<FrontendDvbcSettings>() { // from class: android.hardware.tv.tuner.FrontendDvbcSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendDvbcSettings createFromParcel(Parcel _aidl_source) {
-            FrontendDvbcSettings _aidl_out = new FrontendDvbcSettings();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FrontendDvbcSettings> CREATOR =
+            new Parcelable.Creator<FrontendDvbcSettings>() { // from class:
+                // android.hardware.tv.tuner.FrontendDvbcSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendDvbcSettings createFromParcel(Parcel _aidl_source) {
+                    FrontendDvbcSettings _aidl_out = new FrontendDvbcSettings();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendDvbcSettings[] newArray(int _aidl_size) {
-            return new FrontendDvbcSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendDvbcSettings[] newArray(int _aidl_size) {
+                    return new FrontendDvbcSettings[_aidl_size];
+                }
+            };
     public long frequency = 0;
     public long endFrequency = 0;
     public int modulation = 0;

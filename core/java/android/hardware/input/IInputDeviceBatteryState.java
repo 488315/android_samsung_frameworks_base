@@ -3,26 +3,29 @@ package android.hardware.input;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public class IInputDeviceBatteryState implements Parcelable {
-    public static final Parcelable.Creator<IInputDeviceBatteryState> CREATOR = new Parcelable.Creator<IInputDeviceBatteryState>() { // from class: android.hardware.input.IInputDeviceBatteryState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IInputDeviceBatteryState createFromParcel(Parcel _aidl_source) {
-            IInputDeviceBatteryState _aidl_out = new IInputDeviceBatteryState();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<IInputDeviceBatteryState> CREATOR =
+            new Parcelable.Creator<IInputDeviceBatteryState>() { // from class:
+                // android.hardware.input.IInputDeviceBatteryState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IInputDeviceBatteryState createFromParcel(Parcel _aidl_source) {
+                    IInputDeviceBatteryState _aidl_out = new IInputDeviceBatteryState();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IInputDeviceBatteryState[] newArray(int _aidl_size) {
-            return new IInputDeviceBatteryState[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IInputDeviceBatteryState[] newArray(int _aidl_size) {
+                    return new IInputDeviceBatteryState[_aidl_size];
+                }
+            };
     public int deviceId = 0;
     public long updateTime = 0;
     public boolean isPresent = false;
@@ -112,14 +115,26 @@ public class IInputDeviceBatteryState implements Parcelable {
             return false;
         }
         IInputDeviceBatteryState that = (IInputDeviceBatteryState) other;
-        if (Objects.deepEquals(Integer.valueOf(this.deviceId), Integer.valueOf(that.deviceId)) && Objects.deepEquals(Long.valueOf(this.updateTime), Long.valueOf(that.updateTime)) && Objects.deepEquals(Boolean.valueOf(this.isPresent), Boolean.valueOf(that.isPresent)) && Objects.deepEquals(Integer.valueOf(this.status), Integer.valueOf(that.status)) && Objects.deepEquals(Float.valueOf(this.capacity), Float.valueOf(that.capacity))) {
+        if (Objects.deepEquals(Integer.valueOf(this.deviceId), Integer.valueOf(that.deviceId))
+                && Objects.deepEquals(Long.valueOf(this.updateTime), Long.valueOf(that.updateTime))
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.isPresent), Boolean.valueOf(that.isPresent))
+                && Objects.deepEquals(Integer.valueOf(this.status), Integer.valueOf(that.status))
+                && Objects.deepEquals(Float.valueOf(this.capacity), Float.valueOf(that.capacity))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.deviceId), Long.valueOf(this.updateTime), Boolean.valueOf(this.isPresent), Integer.valueOf(this.status), Float.valueOf(this.capacity)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.deviceId),
+                                Long.valueOf(this.updateTime),
+                                Boolean.valueOf(this.isPresent),
+                                Integer.valueOf(this.status),
+                                Float.valueOf(this.capacity))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

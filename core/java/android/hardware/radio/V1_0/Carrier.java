@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -21,18 +22,33 @@ public final class Carrier {
             return false;
         }
         Carrier other = (Carrier) otherObject;
-        if (HidlSupport.deepEquals(this.mcc, other.mcc) && HidlSupport.deepEquals(this.mnc, other.mnc) && this.matchType == other.matchType && HidlSupport.deepEquals(this.matchData, other.matchData)) {
+        if (HidlSupport.deepEquals(this.mcc, other.mcc)
+                && HidlSupport.deepEquals(this.mnc, other.mnc)
+                && this.matchType == other.matchType
+                && HidlSupport.deepEquals(this.matchData, other.matchData)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.mcc)), Integer.valueOf(HidlSupport.deepHashCode(this.mnc)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.matchType))), Integer.valueOf(HidlSupport.deepHashCode(this.matchData)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.mcc)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.mnc)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.matchType))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.matchData)));
     }
 
     public final String toString() {
-        return "{.mcc = " + this.mcc + ", .mnc = " + this.mnc + ", .matchType = " + CarrierMatchType.toString(this.matchType) + ", .matchData = " + this.matchData + "}";
+        return "{.mcc = "
+                + this.mcc
+                + ", .mnc = "
+                + this.mnc
+                + ", .matchType = "
+                + CarrierMatchType.toString(this.matchType)
+                + ", .matchData = "
+                + this.matchData
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -44,7 +60,8 @@ public final class Carrier {
         ArrayList<Carrier> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 56, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 56, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             Carrier _hidl_vec_element = new Carrier();
@@ -54,14 +71,21 @@ public final class Carrier {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.mcc = _hidl_blob.getString(_hidl_offset + 0);
-        parcel.readEmbeddedBuffer(this.mcc.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 0 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.mcc.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 0 + 0, false);
         this.mnc = _hidl_blob.getString(_hidl_offset + 16);
-        parcel.readEmbeddedBuffer(this.mnc.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 16 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.mnc.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 16 + 0, false);
         this.matchType = _hidl_blob.getInt32(_hidl_offset + 32);
         this.matchData = _hidl_blob.getString(_hidl_offset + 40);
-        parcel.readEmbeddedBuffer(this.matchData.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 40 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.matchData.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 40 + 0,
+                false);
     }
 
     public final void writeToParcel(HwParcel parcel) {

@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface ISatelliteSupportedStateCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.satellite.ISatelliteSupportedStateCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.satellite.ISatelliteSupportedStateCallback";
 
     void onSatelliteSupportedStateChanged(boolean z) throws RemoteException;
 
     public static class Default implements ISatelliteSupportedStateCallback {
         @Override // android.telephony.satellite.ISatelliteSupportedStateCallback
-        public void onSatelliteSupportedStateChanged(boolean supported) throws RemoteException {
-        }
+        public void onSatelliteSupportedStateChanged(boolean supported) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ISatelliteSupportedStateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatelliteSupportedStateCallback {
+    public abstract static class Stub extends Binder implements ISatelliteSupportedStateCallback {
         static final int TRANSACTION_onSatelliteSupportedStateChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ISatelliteSupportedStateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISatelliteSupportedStateCallback.DESCRIPTOR);
             }

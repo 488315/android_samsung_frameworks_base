@@ -8,7 +8,8 @@ public final /* synthetic */ class InstallingSession$$ExternalSyntheticLambda0 i
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ InstallingSession f$0;
 
-    public /* synthetic */ InstallingSession$$ExternalSyntheticLambda0(InstallingSession installingSession, int i) {
+    public /* synthetic */ InstallingSession$$ExternalSyntheticLambda0(
+            InstallingSession installingSession, int i) {
         this.$r8$classId = i;
         this.f$0 = installingSession;
     }
@@ -20,7 +21,8 @@ public final /* synthetic */ class InstallingSession$$ExternalSyntheticLambda0 i
         installingSession.getClass();
         switch (i) {
             case 0:
-                Trace.asyncTraceEnd(262144L, "queueInstall", System.identityHashCode(installingSession));
+                Trace.asyncTraceEnd(
+                        262144L, "queueInstall", System.identityHashCode(installingSession));
                 Trace.traceBegin(262144L, "startInstall");
                 InstallRequest installRequest = new InstallRequest(installingSession);
                 installingSession.handleStartCopy(installRequest);

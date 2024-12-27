@@ -10,7 +10,8 @@ public final class Usb20ACMixerUnit extends UsbACMixerUnit implements UsbAudioCh
         return this.mNumOutputs;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbACMixerUnit, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbACMixerUnit,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public final int parseRawDescriptors(ByteStream byteStream) {
         super.parseRawDescriptors(byteStream);
         byteStream.unpackUsbInt();

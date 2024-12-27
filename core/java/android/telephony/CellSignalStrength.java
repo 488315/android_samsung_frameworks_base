@@ -29,10 +29,10 @@ public abstract class CellSignalStrength {
 
     public abstract void setDefaultValues();
 
-    public abstract void updateLevel(PersistableBundle persistableBundle, ServiceState serviceState);
+    public abstract void updateLevel(
+            PersistableBundle persistableBundle, ServiceState serviceState);
 
-    protected CellSignalStrength() {
-    }
+    protected CellSignalStrength() {}
 
     public static final int getRssiDbmFromAsu(int asu) {
         if (asu > 31 || asu < 0) {
@@ -76,7 +76,8 @@ public abstract class CellSignalStrength {
         return value;
     }
 
-    protected static final int inRangeOrUnavailable(int value, int rangeMin, int rangeMax, int special) {
+    protected static final int inRangeOrUnavailable(
+            int value, int rangeMin, int rangeMax, int special) {
         if ((value < rangeMin || value > rangeMax) && value != special) {
             return Integer.MAX_VALUE;
         }

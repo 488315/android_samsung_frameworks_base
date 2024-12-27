@@ -14,8 +14,7 @@ public final class MediametricsMessage {
         public static final long REQUEST_SOURCE = 1138166333442L;
         public static final long STATUS = 1120986464257L;
 
-        public AudioPolicyData() {
-        }
+        public AudioPolicyData() {}
     }
 
     public final class AudioRecordData {
@@ -35,8 +34,7 @@ public final class MediametricsMessage {
         public static final long SOURCE = 1138166333442L;
         public static final long START_COUNT = 1112396529679L;
 
-        public AudioRecordData() {
-        }
+        public AudioRecordData() {}
     }
 
     public final class AudioThreadData {
@@ -67,8 +65,7 @@ public final class MediametricsMessage {
         public static final long WARMUP_MILLIS_HIST = 1138166333446L;
         public static final long WORK_MILLIS_HIST = 1138166333444L;
 
-        public AudioThreadData() {
-        }
+        public AudioThreadData() {}
     }
 
     public final class AudioTrackData {
@@ -84,8 +81,7 @@ public final class MediametricsMessage {
         public static final long TRACK_USAGE = 1138166333443L;
         public static final long UNDERRUN_FRAMES = 1120986464262L;
 
-        public AudioTrackData() {
-        }
+        public AudioTrackData() {}
     }
 
     public final class CodecData {
@@ -164,8 +160,7 @@ public final class MediametricsMessage {
         public static final long VIDEO_QP_P_MIN = 1120986464297L;
         public static final long WIDTH = 1120986464262L;
 
-        public CodecData() {
-        }
+        public CodecData() {}
     }
 
     public final class ExtractorData {
@@ -180,8 +175,7 @@ public final class MediametricsMessage {
         public static final long TRACKS = 1120986464259L;
         public static final int UNSET = 0;
 
-        public ExtractorData() {
-        }
+        public ExtractorData() {}
     }
 
     public final class NuPlayerData {
@@ -206,8 +200,7 @@ public final class MediametricsMessage {
         public static final long WHICH_PLAYER = 1138166333441L;
         public static final long WIDTH = 1120986464260L;
 
-        public NuPlayerData() {
-        }
+        public NuPlayerData() {}
     }
 
     public final class RecorderData {
@@ -234,7 +227,6 @@ public final class MediametricsMessage {
         public static final long VIDEO_TIMESCALE = 1120986464275L;
         public static final long WIDTH = 1120986464261L;
 
-        public RecorderData() {
-        }
+        public RecorderData() {}
     }
 }

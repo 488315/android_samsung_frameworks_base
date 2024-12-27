@@ -5,6 +5,7 @@ import android.hardware.broadcastradio.AmFmBandRange$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -44,7 +45,13 @@ public class NativeNetworkConfig implements Parcelable {
         private boolean excludeLocalRoutes = false;
 
         public NativeNetworkConfig build() {
-            return new NativeNetworkConfig(this.netId, this.networkType, this.permission, this.secure, this.vpnType, this.excludeLocalRoutes);
+            return new NativeNetworkConfig(
+                    this.netId,
+                    this.networkType,
+                    this.permission,
+                    this.secure,
+                    this.vpnType,
+                    this.excludeLocalRoutes);
         }
 
         public Builder setExcludeLocalRoutes(boolean z) {
@@ -95,7 +102,8 @@ public class NativeNetworkConfig implements Parcelable {
         try {
         } finally {
             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                BadParcelableException badParcelableException = new BadParcelableException("Overflow in the size of parcelable");
+                BadParcelableException badParcelableException =
+                        new BadParcelableException("Overflow in the size of parcelable");
             }
             parcel.setDataPosition(dataPosition + readInt);
             return builder.build();
@@ -136,19 +144,22 @@ public class NativeNetworkConfig implements Parcelable {
                         if (parcel.dataPosition() - dataPosition >= readInt) {
                             builder.build();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else {
                             builder.setVpnType(parcel.readInt());
                             if (parcel.dataPosition() - dataPosition >= readInt) {
                                 builder.build();
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else {
                                 builder.setExcludeLocalRoutes(parcel.readBoolean());
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             }
                         }
@@ -173,22 +184,63 @@ public class NativeNetworkConfig implements Parcelable {
             return false;
         }
         NativeNetworkConfig nativeNetworkConfig = (NativeNetworkConfig) obj;
-        return Objects.deepEquals(Integer.valueOf(this.netId), Integer.valueOf(nativeNetworkConfig.netId)) && Objects.deepEquals(Integer.valueOf(this.networkType), Integer.valueOf(nativeNetworkConfig.networkType)) && Objects.deepEquals(Integer.valueOf(this.permission), Integer.valueOf(nativeNetworkConfig.permission)) && Objects.deepEquals(Boolean.valueOf(this.secure), Boolean.valueOf(nativeNetworkConfig.secure)) && Objects.deepEquals(Integer.valueOf(this.vpnType), Integer.valueOf(nativeNetworkConfig.vpnType)) && Objects.deepEquals(Boolean.valueOf(this.excludeLocalRoutes), Boolean.valueOf(nativeNetworkConfig.excludeLocalRoutes));
+        return Objects.deepEquals(
+                        Integer.valueOf(this.netId), Integer.valueOf(nativeNetworkConfig.netId))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.networkType),
+                        Integer.valueOf(nativeNetworkConfig.networkType))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.permission),
+                        Integer.valueOf(nativeNetworkConfig.permission))
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.secure), Boolean.valueOf(nativeNetworkConfig.secure))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.vpnType), Integer.valueOf(nativeNetworkConfig.vpnType))
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.excludeLocalRoutes),
+                        Boolean.valueOf(nativeNetworkConfig.excludeLocalRoutes));
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.netId), Integer.valueOf(this.networkType), Integer.valueOf(this.permission), Boolean.valueOf(this.secure), Integer.valueOf(this.vpnType), Boolean.valueOf(this.excludeLocalRoutes)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.netId),
+                                Integer.valueOf(this.networkType),
+                                Integer.valueOf(this.permission),
+                                Boolean.valueOf(this.secure),
+                                Integer.valueOf(this.vpnType),
+                                Boolean.valueOf(this.excludeLocalRoutes))
+                        .toArray());
     }
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        StringBuilder m = AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("netId: "), this.netId, stringJoiner, "networkType: "), this.networkType, stringJoiner, "permission: "), this.permission, stringJoiner, "secure: ");
+        StringBuilder m =
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("netId: "),
+                                        this.netId,
+                                        stringJoiner,
+                                        "networkType: "),
+                                this.networkType,
+                                stringJoiner,
+                                "permission: "),
+                        this.permission,
+                        stringJoiner,
+                        "secure: ");
         m.append(this.secure);
         stringJoiner.add(m.toString());
-        StringBuilder m2 = AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("vpnType: "), this.vpnType, stringJoiner, "excludeLocalRoutes: ");
+        StringBuilder m2 =
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("vpnType: "),
+                        this.vpnType,
+                        stringJoiner,
+                        "excludeLocalRoutes: ");
         m2.append(this.excludeLocalRoutes);
         stringJoiner.add(m2.toString());
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, new StringBuilder("NativeNetworkConfig"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner, new StringBuilder("NativeNetworkConfig"));
     }
 
     @Override // android.os.Parcelable
@@ -203,6 +255,7 @@ public class NativeNetworkConfig implements Parcelable {
         parcel.writeBoolean(this.excludeLocalRoutes);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

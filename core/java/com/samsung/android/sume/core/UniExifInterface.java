@@ -3,7 +3,9 @@ package com.samsung.android.sume.core;
 import android.media.ExifInterface;
 import android.util.Log;
 import android.util.Pair;
+
 import com.samsung.android.media.SemBitmapFactory;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -144,12 +146,17 @@ public class UniExifInterface extends ExifInterface {
 
     public static UniExifInterface of(File file) {
         ByteBuffer exifBuffer = parseExif(file);
-        return (UniExifInterface) Optional.ofNullable(exifBuffer).map(new Function() { // from class: com.samsung.android.sume.core.UniExifInterface$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return UniExifInterface.of((ByteBuffer) obj);
-            }
-        }).orElse(null);
+        return (UniExifInterface)
+                Optional.ofNullable(exifBuffer)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.UniExifInterface$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return UniExifInterface.of((ByteBuffer) obj);
+                                    }
+                                })
+                        .orElse(null);
     }
 
     public static UniExifInterface of(String path) {
@@ -167,12 +174,17 @@ public class UniExifInterface extends ExifInterface {
 
     private static ByteBuffer parseHeifExif(File file) {
         byte[] exifBuf = SemBitmapFactory.getExifDataFile(file.getPath());
-        return (ByteBuffer) Optional.ofNullable(exifBuf).map(new Function() { // from class: com.samsung.android.sume.core.UniExifInterface$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ByteBuffer.wrap((byte[]) obj);
-            }
-        }).orElse(null);
+        return (ByteBuffer)
+                Optional.ofNullable(exifBuf)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.UniExifInterface$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return ByteBuffer.wrap((byte[]) obj);
+                                    }
+                                })
+                        .orElse(null);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -190,7 +202,10 @@ public class UniExifInterface extends ExifInterface {
                 while (fis.read(buffer, 0, i) > 0) {
                     offset += j;
                     boolean z = true;
-                    Pair markers = new Pair(Integer.valueOf(buffer[0] & 255), Integer.valueOf(buffer[1] & 255));
+                    Pair markers =
+                            new Pair(
+                                    Integer.valueOf(buffer[0] & 255),
+                                    Integer.valueOf(buffer[1] & 255));
                     if (((Number) markers.first).intValue() != 255) {
                         z = false;
                     }
@@ -200,7 +215,8 @@ public class UniExifInterface extends ExifInterface {
                         fis.close();
                         return byteBuffer;
                     }
-                    if (208 > ((Number) markers.second).intValue() || 215 < ((Number) markers.second).intValue()) {
+                    if (208 > ((Number) markers.second).intValue()
+                            || 215 < ((Number) markers.second).intValue()) {
                         if (((Number) markers.second).intValue() == 225) {
                             int byte_first = fis.read();
                             int byte_second = fis.read();

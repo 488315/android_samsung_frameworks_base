@@ -14,6 +14,7 @@ public final /* synthetic */ class TaskFragment$$ExternalSyntheticLambda6 implem
     @Override // java.util.function.Predicate
     public final boolean test(Object obj) {
         TaskFragment taskFragment = this.f$0;
-        return !taskFragment.isAllowedToEmbedActivityInTrustedMode(taskFragment.mTaskFragmentOrganizerUid, (ActivityRecord) obj);
+        return !taskFragment.isAllowedToEmbedActivityInTrustedMode(
+                taskFragment.mTaskFragmentOrganizerUid, (ActivityRecord) obj);
     }
 }

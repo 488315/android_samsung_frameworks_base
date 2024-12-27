@@ -2,8 +2,7 @@ package com.android.server.enterprise.storage;
 
 import android.content.res.XmlResourceParser;
 import android.util.Log;
-import com.android.server.enterprise.storage.Column;
-import com.android.server.enterprise.storage.EdmStorageHelper;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -12,7 +11,8 @@ public final class EnterpriseXmlParser {
     public final EdmStorageHelper.AnonymousClass1 mCallback;
     public final XmlResourceParser mParser;
 
-    public EnterpriseXmlParser(XmlResourceParser xmlResourceParser, EdmStorageHelper.AnonymousClass1 anonymousClass1) {
+    public EnterpriseXmlParser(
+            XmlResourceParser xmlResourceParser, EdmStorageHelper.AnonymousClass1 anonymousClass1) {
         this.mParser = xmlResourceParser;
         this.mCallback = anonymousClass1;
     }
@@ -30,9 +30,12 @@ public final class EnterpriseXmlParser {
                     String name = this.mParser.getName();
                     if (name.equalsIgnoreCase("table")) {
                         String attributeValue = this.mParser.getAttributeValue(null, "name");
-                        String attributeValue2 = this.mParser.getAttributeValue(null, "foreignrefertable");
-                        String attributeValue3 = this.mParser.getAttributeValue(null, "foreignreferkey");
-                        String attributeValue4 = this.mParser.getAttributeValue(null, "foreignkeyname");
+                        String attributeValue2 =
+                                this.mParser.getAttributeValue(null, "foreignrefertable");
+                        String attributeValue3 =
+                                this.mParser.getAttributeValue(null, "foreignreferkey");
+                        String attributeValue4 =
+                                this.mParser.getAttributeValue(null, "foreignkeyname");
                         table = new Table();
                         table.mColumns = new ArrayList();
                         table.mTableName = attributeValue;

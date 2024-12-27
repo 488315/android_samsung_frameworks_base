@@ -23,6 +23,7 @@ import android.util.ArraySet;
 import android.util.Pair;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.pm.parsing.AppInfoUtils;
 import com.android.internal.pm.pkg.AndroidPackageSplitImpl;
 import com.android.internal.pm.pkg.SEInfoUtil;
@@ -59,6 +60,9 @@ import com.android.internal.util.CollectionUtils;
 import com.android.internal.util.Parcelling;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.AndroidPackageSplit;
+
+import libcore.util.EmptyArray;
+
 import java.io.File;
 import java.security.PublicKey;
 import java.util.ArrayList;
@@ -69,10 +73,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import libcore.util.EmptyArray;
 
 /* loaded from: classes5.dex */
-public class PackageImpl implements ParsedPackage, AndroidPackageInternal, AndroidPackageHidden, ParsingPackage, ParsingPackageHidden, Parcelable {
+public class PackageImpl
+        implements ParsedPackage,
+                AndroidPackageInternal,
+                AndroidPackageHidden,
+                ParsingPackage,
+                ParsingPackageHidden,
+                Parcelable {
     protected List<ParsedActivity> activities;
     protected List<String> adoptPermissions;
     private Boolean anyDensity;
@@ -165,8 +174,7 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     private List<FeatureInfo> reqFeatures;
     private Boolean requestRawExternalStorageAccess;
 
-    @Deprecated
-    protected Set<String> requestedPermissions;
+    @Deprecated protected Set<String> requestedPermissions;
     private String requiredAccountType;
     private int requiresSmallestWidthDp;
     private Boolean resizeable;
@@ -219,38 +227,63 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     protected String volumeUuid;
     private String zygotePreloadName;
     private static final SparseArray<int[]> EMPTY_INT_ARRAY_SPARSE_ARRAY = new SparseArray<>();
-    private static final Comparator<ParsedMainComponent> ORDER_COMPARATOR = new Comparator() { // from class: com.android.internal.pm.parsing.pkg.PackageImpl$$ExternalSyntheticLambda0
-        @Override // java.util.Comparator
-        public final int compare(Object obj, Object obj2) {
-            int compare;
-            compare = Integer.compare(((ParsedMainComponent) obj2).getOrder(), ((ParsedMainComponent) obj).getOrder());
-            return compare;
-        }
-    };
-    public static final Parcelling.BuiltIn.ForBoolean sForBoolean = (Parcelling.BuiltIn.ForBoolean) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForBoolean.class);
-    public static final Parcelling.BuiltIn.ForInternedString sForInternedString = (Parcelling.BuiltIn.ForInternedString) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForInternedString.class);
-    public static final Parcelling.BuiltIn.ForInternedStringArray sForInternedStringArray = (Parcelling.BuiltIn.ForInternedStringArray) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForInternedStringArray.class);
-    public static final Parcelling.BuiltIn.ForInternedStringList sForInternedStringList = (Parcelling.BuiltIn.ForInternedStringList) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForInternedStringList.class);
-    public static final Parcelling.BuiltIn.ForInternedStringValueMap sForInternedStringValueMap = (Parcelling.BuiltIn.ForInternedStringValueMap) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForInternedStringValueMap.class);
-    public static final Parcelling.BuiltIn.ForStringSet sForStringSet = (Parcelling.BuiltIn.ForStringSet) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForStringSet.class);
-    public static final Parcelling.BuiltIn.ForInternedStringSet sForInternedStringSet = (Parcelling.BuiltIn.ForInternedStringSet) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForInternedStringSet.class);
-    protected static final ParsingUtils.StringPairListParceler sForIntentInfoPairs = new ParsingUtils.StringPairListParceler();
-    public static final Parcelable.Creator<PackageImpl> CREATOR = new Parcelable.Creator<PackageImpl>() { // from class: com.android.internal.pm.parsing.pkg.PackageImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageImpl createFromParcel(Parcel source) {
-            return new PackageImpl(source);
-        }
+    private static final Comparator<ParsedMainComponent> ORDER_COMPARATOR =
+            new Comparator() { // from class:
+                               // com.android.internal.pm.parsing.pkg.PackageImpl$$ExternalSyntheticLambda0
+                @Override // java.util.Comparator
+                public final int compare(Object obj, Object obj2) {
+                    int compare;
+                    compare =
+                            Integer.compare(
+                                    ((ParsedMainComponent) obj2).getOrder(),
+                                    ((ParsedMainComponent) obj).getOrder());
+                    return compare;
+                }
+            };
+    public static final Parcelling.BuiltIn.ForBoolean sForBoolean =
+            (Parcelling.BuiltIn.ForBoolean)
+                    Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForBoolean.class);
+    public static final Parcelling.BuiltIn.ForInternedString sForInternedString =
+            (Parcelling.BuiltIn.ForInternedString)
+                    Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForInternedString.class);
+    public static final Parcelling.BuiltIn.ForInternedStringArray sForInternedStringArray =
+            (Parcelling.BuiltIn.ForInternedStringArray)
+                    Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForInternedStringArray.class);
+    public static final Parcelling.BuiltIn.ForInternedStringList sForInternedStringList =
+            (Parcelling.BuiltIn.ForInternedStringList)
+                    Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForInternedStringList.class);
+    public static final Parcelling.BuiltIn.ForInternedStringValueMap sForInternedStringValueMap =
+            (Parcelling.BuiltIn.ForInternedStringValueMap)
+                    Parcelling.Cache.getOrCreate(
+                            Parcelling.BuiltIn.ForInternedStringValueMap.class);
+    public static final Parcelling.BuiltIn.ForStringSet sForStringSet =
+            (Parcelling.BuiltIn.ForStringSet)
+                    Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForStringSet.class);
+    public static final Parcelling.BuiltIn.ForInternedStringSet sForInternedStringSet =
+            (Parcelling.BuiltIn.ForInternedStringSet)
+                    Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForInternedStringSet.class);
+    protected static final ParsingUtils.StringPairListParceler sForIntentInfoPairs =
+            new ParsingUtils.StringPairListParceler();
+    public static final Parcelable.Creator<PackageImpl> CREATOR =
+            new Parcelable.Creator<
+                    PackageImpl>() { // from class:
+                                     // com.android.internal.pm.parsing.pkg.PackageImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageImpl createFromParcel(Parcel source) {
+                    return new PackageImpl(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageImpl[] newArray(int size) {
-            return new PackageImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageImpl[] newArray(int size) {
+                    return new PackageImpl[size];
+                }
+            };
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
-    public /* bridge */ /* synthetic */ ParsingPackage asSplit(String[] strArr, String[] strArr2, int[] iArr, SparseArray sparseArray) {
+    public /* bridge */ /* synthetic */ ParsingPackage asSplit(
+            String[] strArr, String[] strArr2, int[] iArr, SparseArray sparseArray) {
         return asSplit(strArr, strArr2, iArr, (SparseArray<int[]>) sparseArray);
     }
 
@@ -264,8 +297,15 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return setUpgradeKeySets((Set<String>) set);
     }
 
-    public static PackageImpl forParsing(String packageName, String baseCodePath, String codePath, TypedArray manifestArray, boolean isCoreApp, ParsingPackageUtils.Callback callback) {
-        return new PackageImpl(packageName, baseCodePath, codePath, manifestArray, isCoreApp, callback);
+    public static PackageImpl forParsing(
+            String packageName,
+            String baseCodePath,
+            String codePath,
+            TypedArray manifestArray,
+            boolean isCoreApp,
+            ParsingPackageUtils.Callback callback) {
+        return new PackageImpl(
+                packageName, baseCodePath, codePath, manifestArray, isCoreApp, callback);
     }
 
     public static AndroidPackage buildFakeForDeletion(String packageName, String volumeUuid) {
@@ -289,13 +329,15 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public PackageImpl addAdoptPermission(String adoptPermission) {
-        this.adoptPermissions = CollectionUtils.add(this.adoptPermissions, TextUtils.safeIntern(adoptPermission));
+        this.adoptPermissions =
+                CollectionUtils.add(this.adoptPermissions, TextUtils.safeIntern(adoptPermission));
         return this;
     }
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public final PackageImpl addApexSystemService(ParsedApexSystemService parsedApexSystemService) {
-        this.apexSystemServices = CollectionUtils.add(this.apexSystemServices, parsedApexSystemService);
+        this.apexSystemServices =
+                CollectionUtils.add(this.apexSystemServices, parsedApexSystemService);
         return this;
     }
 
@@ -320,7 +362,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public PackageImpl addImplicitPermission(String permission) {
         addUsesPermission((ParsedUsesPermission) new ParsedUsesPermissionImpl(permission, 0));
-        this.implicitPermissions = CollectionUtils.add(this.implicitPermissions, TextUtils.safeIntern(permission));
+        this.implicitPermissions =
+                CollectionUtils.add(this.implicitPermissions, TextUtils.safeIntern(permission));
         return this;
     }
 
@@ -343,7 +386,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public PackageImpl addLibraryName(String libraryName) {
-        this.libraryNames = CollectionUtils.add(this.libraryNames, TextUtils.safeIntern(libraryName));
+        this.libraryNames =
+                CollectionUtils.add(this.libraryNames, TextUtils.safeIntern(libraryName));
         return this;
     }
 
@@ -354,7 +398,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
                 if (this.mimeGroups != null && this.mimeGroups.size() > 500) {
                     throw new IllegalStateException("Max limit on number of MIME Groups reached");
                 }
-                this.mimeGroups = CollectionUtils.add(this.mimeGroups, filter.getMimeGroup(groupIndex));
+                this.mimeGroups =
+                        CollectionUtils.add(this.mimeGroups, filter.getMimeGroup(groupIndex));
             }
         }
     }
@@ -367,7 +412,9 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public ParsingPackage addOverlayable(String overlayableName, String actorName) {
-        this.overlayables = CollectionUtils.add(this.overlayables, overlayableName, TextUtils.safeIntern(actorName));
+        this.overlayables =
+                CollectionUtils.add(
+                        this.overlayables, overlayableName, TextUtils.safeIntern(actorName));
         return this;
     }
 
@@ -385,7 +432,9 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public PackageImpl addPreferredActivityFilter(String className, ParsedIntentInfo intentInfo) {
-        this.preferredActivityFilters = CollectionUtils.add(this.preferredActivityFilters, Pair.create(className, intentInfo));
+        this.preferredActivityFilters =
+                CollectionUtils.add(
+                        this.preferredActivityFilters, Pair.create(className, intentInfo));
         return this;
     }
 
@@ -401,7 +450,9 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public PackageImpl addProtectedBroadcast(String protectedBroadcast) {
         if (!this.protectedBroadcasts.contains(protectedBroadcast)) {
-            this.protectedBroadcasts = CollectionUtils.add(this.protectedBroadcasts, TextUtils.safeIntern(protectedBroadcast));
+            this.protectedBroadcasts =
+                    CollectionUtils.add(
+                            this.protectedBroadcasts, TextUtils.safeIntern(protectedBroadcast));
         }
         return this;
     }
@@ -421,7 +472,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public PackageImpl addQueriesPackage(String packageName) {
-        this.queriesPackages = CollectionUtils.add(this.queriesPackages, TextUtils.safeIntern(packageName));
+        this.queriesPackages =
+                CollectionUtils.add(this.queriesPackages, TextUtils.safeIntern(packageName));
         return this;
     }
 
@@ -473,7 +525,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     public PackageImpl addUsesOptionalLibrary(String libraryName) {
         String libraryName2 = TextUtils.safeIntern(libraryName);
         if (!ArrayUtils.contains(this.usesOptionalLibraries, libraryName2)) {
-            this.usesOptionalLibraries = CollectionUtils.add(this.usesOptionalLibraries, libraryName2);
+            this.usesOptionalLibraries =
+                    CollectionUtils.add(this.usesOptionalLibraries, libraryName2);
         }
         return this;
     }
@@ -482,7 +535,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     public final PackageImpl addUsesOptionalNativeLibrary(String libraryName) {
         String libraryName2 = TextUtils.safeIntern(libraryName);
         if (!ArrayUtils.contains(this.usesOptionalNativeLibraries, libraryName2)) {
-            this.usesOptionalNativeLibraries = CollectionUtils.add(this.usesOptionalNativeLibraries, libraryName2);
+            this.usesOptionalNativeLibraries =
+                    CollectionUtils.add(this.usesOptionalNativeLibraries, libraryName2);
         }
         return this;
     }
@@ -490,24 +544,47 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public PackageImpl addUsesPermission(ParsedUsesPermission permission) {
         this.usesPermissions = CollectionUtils.add(this.usesPermissions, permission);
-        this.requestedPermissions = CollectionUtils.add(this.requestedPermissions, permission.getName());
+        this.requestedPermissions =
+                CollectionUtils.add(this.requestedPermissions, permission.getName());
         return this;
     }
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
-    public PackageImpl addUsesSdkLibrary(String libraryName, long versionMajor, String[] certSha256Digests, boolean usesSdkLibrariesOptional) {
-        this.usesSdkLibraries = CollectionUtils.add(this.usesSdkLibraries, TextUtils.safeIntern(libraryName));
-        this.usesSdkLibrariesVersionsMajor = ArrayUtils.appendLong(this.usesSdkLibrariesVersionsMajor, versionMajor, true);
-        this.usesSdkLibrariesCertDigests = (String[][]) ArrayUtils.appendElement(String[].class, this.usesSdkLibrariesCertDigests, certSha256Digests, true);
-        this.usesSdkLibrariesOptional = ArrayUtils.appendBoolean(this.usesSdkLibrariesOptional, usesSdkLibrariesOptional);
+    public PackageImpl addUsesSdkLibrary(
+            String libraryName,
+            long versionMajor,
+            String[] certSha256Digests,
+            boolean usesSdkLibrariesOptional) {
+        this.usesSdkLibraries =
+                CollectionUtils.add(this.usesSdkLibraries, TextUtils.safeIntern(libraryName));
+        this.usesSdkLibrariesVersionsMajor =
+                ArrayUtils.appendLong(this.usesSdkLibrariesVersionsMajor, versionMajor, true);
+        this.usesSdkLibrariesCertDigests =
+                (String[][])
+                        ArrayUtils.appendElement(
+                                String[].class,
+                                this.usesSdkLibrariesCertDigests,
+                                certSha256Digests,
+                                true);
+        this.usesSdkLibrariesOptional =
+                ArrayUtils.appendBoolean(this.usesSdkLibrariesOptional, usesSdkLibrariesOptional);
         return this;
     }
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
-    public PackageImpl addUsesStaticLibrary(String libraryName, long version, String[] certSha256Digests) {
-        this.usesStaticLibraries = CollectionUtils.add(this.usesStaticLibraries, TextUtils.safeIntern(libraryName));
-        this.usesStaticLibrariesVersions = ArrayUtils.appendLong(this.usesStaticLibrariesVersions, version, true);
-        this.usesStaticLibrariesCertDigests = (String[][]) ArrayUtils.appendElement(String[].class, this.usesStaticLibrariesCertDigests, certSha256Digests, true);
+    public PackageImpl addUsesStaticLibrary(
+            String libraryName, long version, String[] certSha256Digests) {
+        this.usesStaticLibraries =
+                CollectionUtils.add(this.usesStaticLibraries, TextUtils.safeIntern(libraryName));
+        this.usesStaticLibrariesVersions =
+                ArrayUtils.appendLong(this.usesStaticLibrariesVersions, version, true);
+        this.usesStaticLibrariesCertDigests =
+                (String[][])
+                        ArrayUtils.appendElement(
+                                String[].class,
+                                this.usesStaticLibrariesCertDigests,
+                                certSha256Digests,
+                                true);
         return this;
     }
 
@@ -517,7 +594,11 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     }
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
-    public PackageImpl asSplit(String[] splitNames, String[] splitCodePaths, int[] splitRevisionCodes, SparseArray<int[]> splitDependencies) {
+    public PackageImpl asSplit(
+            String[] splitNames,
+            String[] splitCodePaths,
+            int[] splitRevisionCodes,
+            SparseArray<int[]> splitDependencies) {
         this.splitNames = splitNames;
         this.splitCodePaths = splitCodePaths;
         this.splitRevisionCodes = splitRevisionCodes;
@@ -530,7 +611,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
 
     protected void assignDerivedFields() {
         this.mStorageUuid = StorageManager.convert(this.volumeUuid);
-        this.mLongVersionCode = PackageInfo.composeLongVersionCode(this.versionCodeMajor, this.versionCode);
+        this.mLongVersionCode =
+                PackageInfo.composeLongVersionCode(this.versionCodeMajor, this.versionCode);
     }
 
     private ArrayMap<String, String> buildAppClassNamesByProcess() {
@@ -558,10 +640,22 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     public List<AndroidPackageSplit> getSplits() {
         if (this.mSplits == null) {
             ArrayList<AndroidPackageSplit> splits = new ArrayList<>();
-            splits.add(new AndroidPackageSplitImpl(null, getBaseApkPath(), getBaseRevisionCode(), isDeclaredHavingCode() ? 4 : 0, getClassLoaderName()));
+            splits.add(
+                    new AndroidPackageSplitImpl(
+                            null,
+                            getBaseApkPath(),
+                            getBaseRevisionCode(),
+                            isDeclaredHavingCode() ? 4 : 0,
+                            getClassLoaderName()));
             if (this.splitNames != null) {
                 for (int index = 0; index < this.splitNames.length; index++) {
-                    splits.add(new AndroidPackageSplitImpl(this.splitNames[index], this.splitCodePaths[index], this.splitRevisionCodes[index], this.splitFlags[index], this.splitClassLoaderNames[index]));
+                    splits.add(
+                            new AndroidPackageSplitImpl(
+                                    this.splitNames[index],
+                                    this.splitCodePaths[index],
+                                    this.splitRevisionCodes[index],
+                                    this.splitFlags[index],
+                                    this.splitClassLoaderNames[index]));
                 }
             }
             if (this.splitDependencies != null) {
@@ -574,7 +668,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
                             dependencies.add(splits.get(dependencyIndex));
                         }
                     }
-                    ((AndroidPackageSplitImpl) splits.get(splitIndex)).fillDependencies(Collections.unmodifiableList(dependencies));
+                    ((AndroidPackageSplitImpl) splits.get(splitIndex))
+                            .fillDependencies(Collections.unmodifiableList(dependencies));
                 }
             }
             this.mSplits = Collections.unmodifiableList(splits);
@@ -583,10 +678,15 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     }
 
     public String toString() {
-        return "Package{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.packageName + "}";
+        return "Package{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + this.packageName
+                + "}";
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<ParsedActivity> getActivities() {
         return this.activities;
     }
@@ -606,7 +706,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.appComponentFactory;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<ParsedAttribution> getAttributions() {
         return this.attributions;
     }
@@ -626,7 +727,9 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.banner;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.content.om.OverlayConfig.PackageProvider.Package, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.content.om.OverlayConfig.PackageProvider.Package,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String getBaseApkPath() {
         return this.mBaseApkPath;
     }
@@ -641,7 +744,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.category;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String getClassLoaderName() {
         return this.classLoaderName;
     }
@@ -666,7 +770,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.compileSdkVersionCodeName;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<ConfigurationInfo> getConfigPreferences() {
         return this.configPreferences;
     }
@@ -711,12 +816,14 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.installLocation;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<ParsedInstrumentation> getInstrumentations() {
         return this.instrumentations;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public Map<String, ArraySet<PublicKey>> getKeySetMapping() {
         return this.keySetMapping;
     }
@@ -736,7 +843,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.largestWidthLimitDp;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<String> getLibraryNames() {
         return this.libraryNames;
     }
@@ -756,12 +864,14 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.manageSpaceActivityName;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public float getMaxAspectRatio() {
         return this.maxAspectRatio;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public int getMaxSdkVersion() {
         return this.maxSdkVersion;
     }
@@ -771,7 +881,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.memtagMode;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public Bundle getMetaData() {
         return this.metaData;
     }
@@ -781,7 +892,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.mimeGroups;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public float getMinAspectRatio() {
         return this.minAspectRatio;
     }
@@ -791,7 +903,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.minExtensionVersions;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public int getMinSdkVersion() {
         return this.minSdkVersion;
     }
@@ -821,12 +934,14 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.overlayCategory;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.content.om.OverlayConfig.PackageProvider.Package
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.content.om.OverlayConfig.PackageProvider.Package
     public int getOverlayPriority() {
         return this.overlayPriority;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.content.om.OverlayConfig.PackageProvider.Package
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.content.om.OverlayConfig.PackageProvider.Package
     public String getOverlayTarget() {
         return this.overlayTarget;
     }
@@ -841,7 +956,9 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.overlayables;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.content.om.OverlayConfig.PackageProvider.Package, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.content.om.OverlayConfig.PackageProvider.Package,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String getPackageName() {
         return this.packageName;
     }
@@ -851,7 +968,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.mPath;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String getPermission() {
         return this.permission;
     }
@@ -861,7 +979,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.permissionGroups;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<ParsedPermission> getPermissions() {
         return this.permissions;
     }
@@ -871,7 +990,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.preferredActivityFilters;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String getProcessName() {
         return this.processName != null ? this.processName : this.packageName;
     }
@@ -891,7 +1011,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.protectedBroadcasts;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<ParsedProvider> getProviders() {
         return this.providers;
     }
@@ -911,7 +1032,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.queriesProviders;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<ParsedActivity> getReceivers() {
         return this.receivers;
     }
@@ -921,7 +1043,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.reqFeatures;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     @Deprecated
     public Set<String> getRequestedPermissions() {
         return this.requestedPermissions;
@@ -937,7 +1060,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.requiresSmallestWidthDp;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public Boolean getResizeableActivity() {
         return this.resizeableActivity;
     }
@@ -962,7 +1086,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.roundIconRes;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String getSdkLibraryName() {
         return this.sdkLibraryName;
     }
@@ -972,12 +1097,14 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.sdkLibVersionMajor;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<ParsedService> getServices() {
         return this.services;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String getSharedUserId() {
         return this.sharedUserId;
     }
@@ -997,14 +1124,17 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.splitClassLoaderNames == null ? EmptyArray.STRING : this.splitClassLoaderNames;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String[] getSplitCodePaths() {
         return this.splitCodePaths == null ? EmptyArray.STRING : this.splitCodePaths;
     }
 
     @Override // com.android.server.pm.pkg.AndroidPackage
     public SparseArray<int[]> getSplitDependencies() {
-        return this.splitDependencies == null ? EMPTY_INT_ARRAY_SPARSE_ARRAY : this.splitDependencies;
+        return this.splitDependencies == null
+                ? EMPTY_INT_ARRAY_SPARSE_ARRAY
+                : this.splitDependencies;
     }
 
     @Override // com.android.server.pm.pkg.AndroidPackage
@@ -1012,7 +1142,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.splitFlags;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String[] getSplitNames() {
         return this.splitNames == null ? EmptyArray.STRING : this.splitNames;
     }
@@ -1022,7 +1153,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.splitRevisionCodes == null ? EmptyArray.INT : this.splitRevisionCodes;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String getStaticSharedLibraryName() {
         return this.staticSharedLibraryName;
     }
@@ -1042,12 +1174,15 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.targetSandboxVersion;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.content.om.OverlayConfig.PackageProvider.Package, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.content.om.OverlayConfig.PackageProvider.Package,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public int getTargetSdkVersion() {
         return this.targetSdkVersion;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String getTaskAffinity() {
         return this.taskAffinity;
     }
@@ -1057,7 +1192,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.theme;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public int getUiOptions() {
         return this.uiOptions;
     }
@@ -1067,7 +1203,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.upgradeKeySets;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<String> getUsesLibraries() {
         return this.usesLibraries;
     }
@@ -1080,7 +1217,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.mUsesLibrariesSorted;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<String> getUsesNativeLibraries() {
         return this.usesNativeLibraries;
     }
@@ -1103,12 +1241,14 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.usesOptionalNativeLibraries;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<ParsedUsesPermission> getUsesPermissions() {
         return this.usesPermissions;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<String> getUsesSdkLibraries() {
         return this.usesSdkLibraries;
     }
@@ -1126,7 +1266,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.usesSdkLibrariesCertDigests;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public long[] getUsesSdkLibrariesVersionsMajor() {
         return this.usesSdkLibrariesVersionsMajor;
     }
@@ -1136,7 +1277,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.usesSdkLibrariesOptional;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public List<String> getUsesStaticLibraries() {
         return this.usesStaticLibraries;
     }
@@ -1159,12 +1301,14 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.usesStaticLibrariesVersions;
     }
 
-    @Override // com.android.internal.pm.parsing.pkg.AndroidPackageHidden, com.android.internal.pm.pkg.parsing.ParsingPackageHidden
+    @Override // com.android.internal.pm.parsing.pkg.AndroidPackageHidden,
+              // com.android.internal.pm.pkg.parsing.ParsingPackageHidden
     public int getVersionCode() {
         return this.versionCode;
     }
 
-    @Override // com.android.internal.pm.parsing.pkg.AndroidPackageHidden, com.android.internal.pm.pkg.parsing.ParsingPackageHidden
+    @Override // com.android.internal.pm.parsing.pkg.AndroidPackageHidden,
+              // com.android.internal.pm.pkg.parsing.ParsingPackageHidden
     public int getVersionCodeMajor() {
         return this.versionCodeMajor;
     }
@@ -1179,12 +1323,14 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.volumeUuid;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public String getZygotePreloadName() {
         return this.zygotePreloadName;
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isAllowCrossUidActivitySwitchFromBelow() {
         return this.mAllowCrossUidActivitySwitchFromBelow;
     }
@@ -1209,7 +1355,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return getBoolean(2147483648L);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isBackupAllowed() {
         return getBoolean(4L);
     }
@@ -1229,12 +1376,14 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return getBoolean(68719476736L);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isTaskReparentingAllowed() {
         return getBoolean(1024L);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isAnyDensity() {
         if (this.anyDensity == null) {
             return this.targetSdkVersion >= 4;
@@ -1247,12 +1396,14 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return getBoolean(16777216L);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isHardwareAccelerated() {
         return getBoolean(2L);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isSaveStateDisallowed() {
         return getBoolean(34359738368L);
     }
@@ -1357,7 +1508,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return getBoolean(1048576L);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.content.om.OverlayConfig.PackageProvider.Package
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.content.om.OverlayConfig.PackageProvider.Package
     public boolean isOverlayIsStatic() {
         return getBoolean(549755813888L);
     }
@@ -1372,12 +1524,14 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return getBoolean(64L);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isProfileable() {
         return !getBoolean(FrontendInnerFec.FEC_20_30);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isProfileableByShell() {
         return isProfileable() && getBoolean(8388608L);
     }
@@ -1397,7 +1551,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return getBoolean(281474976710656L);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isResizeable() {
         if (this.resizeable == null) {
             return this.targetSdkVersion >= 4;
@@ -1405,7 +1560,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.resizeable.booleanValue();
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isResizeableActivityViaSdkVersion() {
         return getBoolean(536870912L);
     }
@@ -1420,12 +1576,14 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return getBoolean(562949953421312L);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isStaticSharedLibrary() {
         return getBoolean(524288L);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isExtraLargeScreensSupported() {
         if (this.supportsExtraLargeScreens == null) {
             return this.targetSdkVersion >= 9;
@@ -1433,7 +1591,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.supportsExtraLargeScreens.booleanValue();
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isLargeScreensSupported() {
         if (this.supportsLargeScreens == null) {
             return this.targetSdkVersion >= 4;
@@ -1441,7 +1600,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this.supportsLargeScreens.booleanValue();
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isNormalScreensSupported() {
         return this.supportsNormalScreens == null || this.supportsNormalScreens.booleanValue();
     }
@@ -1451,7 +1611,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return getBoolean(16384L);
     }
 
-    @Override // com.android.server.pm.pkg.AndroidPackage, com.android.internal.pm.pkg.parsing.ParsingPackage
+    @Override // com.android.server.pm.pkg.AndroidPackage,
+              // com.android.internal.pm.pkg.parsing.ParsingPackage
     public boolean isSmallScreensSupported() {
         if (this.supportsSmallScreens == null) {
             return this.targetSdkVersion >= 4;
@@ -1496,7 +1657,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public PackageImpl removeUsesOptionalNativeLibrary(String libraryName) {
-        this.usesOptionalNativeLibraries = CollectionUtils.remove(this.usesOptionalNativeLibraries, libraryName);
+        this.usesOptionalNativeLibraries =
+                CollectionUtils.remove(this.usesOptionalNativeLibraries, libraryName);
         return this;
     }
 
@@ -1956,7 +2118,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     }
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
-    public ParsingPackage setResetEnabledSettingsOnAppDataCleared(boolean resetEnabledSettingsOnAppDataCleared) {
+    public ParsingPackage setResetEnabledSettingsOnAppDataCleared(
+            boolean resetEnabledSettingsOnAppDataCleared) {
         setBoolean(281474976710656L, resetEnabledSettingsOnAppDataCleared);
         return this;
     }
@@ -2233,7 +2396,10 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         appInfo.enabled = getBoolean(FrontendInnerFec.FEC_18_30);
         appInfo.fullBackupContent = this.fullBackupContent;
         appInfo.dataExtractionRulesRes = this.dataExtractionRules;
-        appInfo.icon = (!ParsingPackageUtils.sUseRoundIcon || this.roundIconRes == 0) ? this.iconRes : this.roundIconRes;
+        appInfo.icon =
+                (!ParsingPackageUtils.sUseRoundIcon || this.roundIconRes == 0)
+                        ? this.iconRes
+                        : this.roundIconRes;
         appInfo.iconRes = this.iconRes;
         appInfo.roundIconRes = this.roundIconRes;
         appInfo.installLocation = this.installLocation;
@@ -2253,7 +2419,10 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         appInfo.processName = getProcessName();
         appInfo.requiresSmallestWidthDp = this.requiresSmallestWidthDp;
         appInfo.splitClassLoaderNames = this.splitClassLoaderNames;
-        appInfo.splitDependencies = (this.splitDependencies == null || this.splitDependencies.size() == 0) ? null : this.splitDependencies;
+        appInfo.splitDependencies =
+                (this.splitDependencies == null || this.splitDependencies.size() == 0)
+                        ? null
+                        : this.splitDependencies;
         appInfo.splitNames = this.splitNames;
         appInfo.storageUuid = this.mStorageUuid;
         appInfo.targetSandboxVersion = this.targetSandboxVersion;
@@ -2271,8 +2440,10 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         appInfo.setBaseResourcePath(this.mBaseApkPath);
         appInfo.setCodePath(this.mPath);
         appInfo.setResourcePath(this.mPath);
-        appInfo.setSplitCodePaths(ArrayUtils.size(this.splitCodePaths) == 0 ? null : this.splitCodePaths);
-        appInfo.setSplitResourcePaths(ArrayUtils.size(this.splitCodePaths) != 0 ? this.splitCodePaths : null);
+        appInfo.setSplitCodePaths(
+                ArrayUtils.size(this.splitCodePaths) == 0 ? null : this.splitCodePaths);
+        appInfo.setSplitResourcePaths(
+                ArrayUtils.size(this.splitCodePaths) != 0 ? this.splitCodePaths : null);
         appInfo.setVersionCode(this.mLongVersionCode);
         appInfo.setAppClassNamesByProcess(buildAppClassNamesByProcess());
         appInfo.setLocaleConfigRes(this.mLocaleConfigRes);
@@ -2309,7 +2480,13 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return (this.mBooleans2 & flag) != 0;
     }
 
-    public PackageImpl(String packageName, String baseApkPath, String path, TypedArray manifestArray, boolean isCoreApp, ParsingPackageUtils.Callback callback) {
+    public PackageImpl(
+            String packageName,
+            String baseApkPath,
+            String path,
+            TypedArray manifestArray,
+            boolean isCoreApp,
+            ParsingPackageUtils.Callback callback) {
         this.usesLibraries = Collections.emptyList();
         this.usesOptionalLibraries = Collections.emptyList();
         this.usesNativeLibraries = Collections.emptyList();
@@ -2401,18 +2578,28 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     private void assignDerivedFields2() {
         this.mBaseAppInfoFlags = AppInfoUtils.appInfoFlags(this);
         this.mBaseAppInfoPrivateFlags = AppInfoUtils.appInfoPrivateFlags(this);
-        this.mBaseAppInfoPrivateFlagsExt = AppInfoUtils.appInfoPrivateFlagsExt(this, this.mCallback == null ? false : this.mCallback.getHiddenApiWhitelistedApps().contains(this.packageName));
+        this.mBaseAppInfoPrivateFlagsExt =
+                AppInfoUtils.appInfoPrivateFlagsExt(
+                        this,
+                        this.mCallback == null
+                                ? false
+                                : this.mCallback
+                                        .getHiddenApiWhitelistedApps()
+                                        .contains(this.packageName));
         String baseAppDataDir = Environment.getDataDirectoryPath(getVolumeUuid()) + File.separator;
         String systemUserSuffix = File.separator + 0 + File.separator;
-        this.mBaseAppDataCredentialProtectedDirForSystemUser = TextUtils.safeIntern(baseAppDataDir + "user" + systemUserSuffix);
-        this.mBaseAppDataDeviceProtectedDirForSystemUser = TextUtils.safeIntern(baseAppDataDir + Environment.DIR_USER_DE + systemUserSuffix);
+        this.mBaseAppDataCredentialProtectedDirForSystemUser =
+                TextUtils.safeIntern(baseAppDataDir + "user" + systemUserSuffix);
+        this.mBaseAppDataDeviceProtectedDirForSystemUser =
+                TextUtils.safeIntern(baseAppDataDir + Environment.DIR_USER_DE + systemUserSuffix);
     }
 
     private void makeImmutable() {
         this.usesLibraries = Collections.unmodifiableList(this.usesLibraries);
         this.usesOptionalLibraries = Collections.unmodifiableList(this.usesOptionalLibraries);
         this.usesNativeLibraries = Collections.unmodifiableList(this.usesNativeLibraries);
-        this.usesOptionalNativeLibraries = Collections.unmodifiableList(this.usesOptionalNativeLibraries);
+        this.usesOptionalNativeLibraries =
+                Collections.unmodifiableList(this.usesOptionalNativeLibraries);
         this.originalPackages = Collections.unmodifiableList(this.originalPackages);
         this.adoptPermissions = Collections.unmodifiableList(this.adoptPermissions);
         this.requestedPermissions = Collections.unmodifiableSet(this.requestedPermissions);
@@ -2445,7 +2632,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         this.queriesPackages = Collections.unmodifiableList(this.queriesPackages);
         this.queriesProviders = Collections.unmodifiableSet(this.queriesProviders);
         this.mimeGroups = Collections.unmodifiableSet(this.mimeGroups);
-        this.mKnownActivityEmbeddingCerts = Collections.unmodifiableSet(this.mKnownActivityEmbeddingCerts);
+        this.mKnownActivityEmbeddingCerts =
+                Collections.unmodifiableSet(this.mKnownActivityEmbeddingCerts);
     }
 
     @Override // com.android.server.pm.pkg.AndroidPackage
@@ -2461,13 +2649,16 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
 
     @Override // com.android.internal.pm.parsing.pkg.ParsedPackage
     public PackageImpl addUsesOptionalLibrary(int index, String libraryName) {
-        this.usesOptionalLibraries = CollectionUtils.add(this.usesOptionalLibraries, index, TextUtils.safeIntern(libraryName));
+        this.usesOptionalLibraries =
+                CollectionUtils.add(
+                        this.usesOptionalLibraries, index, TextUtils.safeIntern(libraryName));
         return this;
     }
 
     @Override // com.android.internal.pm.parsing.pkg.ParsedPackage
     public PackageImpl addUsesLibrary(int index, String libraryName) {
-        this.usesLibraries = CollectionUtils.add(this.usesLibraries, index, TextUtils.safeIntern(libraryName));
+        this.usesLibraries =
+                CollectionUtils.add(this.usesLibraries, index, TextUtils.safeIntern(libraryName));
         return this;
     }
 
@@ -2479,7 +2670,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public PackageImpl removeUsesOptionalLibrary(String libraryName) {
-        this.usesOptionalLibraries = CollectionUtils.remove(this.usesOptionalLibraries, libraryName);
+        this.usesOptionalLibraries =
+                CollectionUtils.remove(this.usesOptionalLibraries, libraryName);
         return this;
     }
 
@@ -2546,7 +2738,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         }
         int permissionGroupsSize = this.permissionGroups.size();
         for (int index2 = 0; index2 < permissionGroupsSize; index2++) {
-            ComponentMutateUtils.setPackageName(this.permissionGroups.get(index2), this.packageName);
+            ComponentMutateUtils.setPackageName(
+                    this.permissionGroups.get(index2), this.packageName);
         }
         int activitiesSize = this.activities.size();
         for (int index3 = 0; index3 < activitiesSize; index3++) {
@@ -2566,7 +2759,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         }
         int instrumentationsSize = this.instrumentations.size();
         for (int index7 = 0; index7 < instrumentationsSize; index7++) {
-            ComponentMutateUtils.setPackageName(this.instrumentations.get(index7), this.packageName);
+            ComponentMutateUtils.setPackageName(
+                    this.instrumentations.get(index7), this.packageName);
         }
         return this;
     }
@@ -2575,19 +2769,23 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     public PackageImpl setAllComponentsDirectBootAware(boolean allComponentsDirectBootAware) {
         int activitiesSize = this.activities.size();
         for (int index = 0; index < activitiesSize; index++) {
-            ComponentMutateUtils.setDirectBootAware(this.activities.get(index), allComponentsDirectBootAware);
+            ComponentMutateUtils.setDirectBootAware(
+                    this.activities.get(index), allComponentsDirectBootAware);
         }
         int receiversSize = this.receivers.size();
         for (int index2 = 0; index2 < receiversSize; index2++) {
-            ComponentMutateUtils.setDirectBootAware(this.receivers.get(index2), allComponentsDirectBootAware);
+            ComponentMutateUtils.setDirectBootAware(
+                    this.receivers.get(index2), allComponentsDirectBootAware);
         }
         int providersSize = this.providers.size();
         for (int index3 = 0; index3 < providersSize; index3++) {
-            ComponentMutateUtils.setDirectBootAware(this.providers.get(index3), allComponentsDirectBootAware);
+            ComponentMutateUtils.setDirectBootAware(
+                    this.providers.get(index3), allComponentsDirectBootAware);
         }
         int servicesSize = this.services.size();
         for (int index4 = 0; index4 < servicesSize; index4++) {
-            ComponentMutateUtils.setDirectBootAware(this.services.get(index4), allComponentsDirectBootAware);
+            ComponentMutateUtils.setDirectBootAware(
+                    this.services.get(index4), allComponentsDirectBootAware);
         }
         return this;
     }
@@ -2692,7 +2890,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         return this;
     }
 
-    @Override // com.android.internal.pm.parsing.pkg.AndroidPackageHidden, com.android.internal.pm.pkg.parsing.ParsingPackageHidden
+    @Override // com.android.internal.pm.parsing.pkg.AndroidPackageHidden,
+              // com.android.internal.pm.pkg.parsing.ParsingPackageHidden
     public ApplicationInfo toAppInfoWithoutState() {
         ApplicationInfo appInfo = toAppInfoWithoutStateWithoutFlags();
         appInfo.flags = this.mBaseAppInfoFlags;
@@ -2973,20 +3172,25 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         this.originalPackages = in.createStringArrayList();
         this.adoptPermissions = sForInternedStringList.unparcel(in);
         this.requestedPermissions = sForInternedStringSet.unparcel(in);
-        this.usesPermissions = ParsingUtils.createTypedInterfaceList(in, ParsedUsesPermissionImpl.CREATOR);
+        this.usesPermissions =
+                ParsingUtils.createTypedInterfaceList(in, ParsedUsesPermissionImpl.CREATOR);
         this.implicitPermissions = sForInternedStringSet.unparcel(in);
         this.upgradeKeySets = sForStringSet.unparcel(in);
         this.keySetMapping = ParsingPackageUtils.readKeySetMapping(in);
         this.protectedBroadcasts = sForInternedStringList.unparcel(in);
         this.activities = ParsingUtils.createTypedInterfaceList(in, ParsedActivityImpl.CREATOR);
-        this.apexSystemServices = ParsingUtils.createTypedInterfaceList(in, ParsedApexSystemServiceImpl.CREATOR);
+        this.apexSystemServices =
+                ParsingUtils.createTypedInterfaceList(in, ParsedApexSystemServiceImpl.CREATOR);
         this.receivers = ParsingUtils.createTypedInterfaceList(in, ParsedActivityImpl.CREATOR);
         this.services = ParsingUtils.createTypedInterfaceList(in, ParsedServiceImpl.CREATOR);
         this.providers = ParsingUtils.createTypedInterfaceList(in, ParsedProviderImpl.CREATOR);
-        this.attributions = ParsingUtils.createTypedInterfaceList(in, ParsedAttributionImpl.CREATOR);
+        this.attributions =
+                ParsingUtils.createTypedInterfaceList(in, ParsedAttributionImpl.CREATOR);
         this.permissions = ParsingUtils.createTypedInterfaceList(in, ParsedPermissionImpl.CREATOR);
-        this.permissionGroups = ParsingUtils.createTypedInterfaceList(in, ParsedPermissionGroupImpl.CREATOR);
-        this.instrumentations = ParsingUtils.createTypedInterfaceList(in, ParsedInstrumentationImpl.CREATOR);
+        this.permissionGroups =
+                ParsingUtils.createTypedInterfaceList(in, ParsedPermissionGroupImpl.CREATOR);
+        this.instrumentations =
+                ParsingUtils.createTypedInterfaceList(in, ParsedInstrumentationImpl.CREATOR);
         this.preferredActivityFilters = sForIntentInfoPairs.unparcel(in);
         this.processes = in.readHashMap(ParsedProcessImpl.class.getClassLoader());
         this.metaData = in.readBundle(boot);
@@ -3321,11 +3525,9 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         private static final long VISIBLE_TO_INSTANT_APPS = 2199023255552L;
         private static final long VM_SAFE_MODE = 256;
 
-        public @interface Flags {
-        }
+        public @interface Flags {}
 
-        private Booleans() {
-        }
+        private Booleans() {}
     }
 
     private static class Booleans2 {
@@ -3333,10 +3535,8 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         private static final long STUB = 1;
         private static final long UPDATABLE_SYSTEM = 4;
 
-        public @interface Flags {
-        }
+        public @interface Flags {}
 
-        private Booleans2() {
-        }
+        private Booleans2() {}
     }
 }

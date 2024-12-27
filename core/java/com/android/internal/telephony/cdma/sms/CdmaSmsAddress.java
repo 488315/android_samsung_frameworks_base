@@ -1,6 +1,7 @@
 package com.android.internal.telephony.cdma.sms;
 
 import android.util.SparseBooleanArray;
+
 import com.android.internal.telephony.SmsAddress;
 import com.android.internal.util.HexDump;
 
@@ -27,9 +28,12 @@ public class CdmaSmsAddress extends SmsAddress {
     public int numberMode;
     public int numberOfDigits;
     public int numberPlan;
-    private static final char[] numericCharsDialable = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '#'};
+    private static final char[] numericCharsDialable = {
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '#'
+    };
     private static final char[] numericCharsSugar = {'(', ')', ' ', '-', '+', '.', '/', '\\'};
-    private static final SparseBooleanArray numericCharDialableMap = new SparseBooleanArray(numericCharsDialable.length + numericCharsSugar.length);
+    private static final SparseBooleanArray numericCharDialableMap =
+            new SparseBooleanArray(numericCharsDialable.length + numericCharsSugar.length);
 
     public String toString() {
         StringBuilder builder = new StringBuilder();

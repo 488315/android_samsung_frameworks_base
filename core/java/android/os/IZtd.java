@@ -1,15 +1,17 @@
 package android.os;
 
-import android.os.IZtdListener;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface IZtd extends IInterface {
     public static final String DESCRIPTOR = "android.os.IZtd";
 
-    int startMonitoringDomains(int i, int[] iArr, List<String> list, IZtdListener iZtdListener) throws RemoteException;
+    int startMonitoringDomains(int i, int[] iArr, List<String> list, IZtdListener iZtdListener)
+            throws RemoteException;
 
-    int startMonitoringFiles(int i, int[] iArr, List<String> list, List<String> list2, IZtdListener iZtdListener) throws RemoteException;
+    int startMonitoringFiles(
+            int i, int[] iArr, List<String> list, List<String> list2, IZtdListener iZtdListener)
+            throws RemoteException;
 
     void startTracing(int i, int i2, long j, IZtdListener iZtdListener) throws RemoteException;
 
@@ -21,15 +23,20 @@ public interface IZtd extends IInterface {
 
     public static class Default implements IZtd {
         @Override // android.os.IZtd
-        public void startTracing(int traceType, int uid, long period, IZtdListener listener) throws RemoteException {
-        }
+        public void startTracing(int traceType, int uid, long period, IZtdListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IZtd
-        public void stopTracing(int traceType, int uid) throws RemoteException {
-        }
+        public void stopTracing(int traceType, int uid) throws RemoteException {}
 
         @Override // android.os.IZtd
-        public int startMonitoringFiles(int requestorUid, int[] allowedUids, List<String> files, List<String> inodes, IZtdListener listener) throws RemoteException {
+        public int startMonitoringFiles(
+                int requestorUid,
+                int[] allowedUids,
+                List<String> files,
+                List<String> inodes,
+                IZtdListener listener)
+                throws RemoteException {
             return 0;
         }
 
@@ -39,7 +46,9 @@ public interface IZtd extends IInterface {
         }
 
         @Override // android.os.IZtd
-        public int startMonitoringDomains(int requestorUid, int[] allowedUids, List<String> domains, IZtdListener listener) throws RemoteException {
+        public int startMonitoringDomains(
+                int requestorUid, int[] allowedUids, List<String> domains, IZtdListener listener)
+                throws RemoteException {
             return 0;
         }
 
@@ -54,7 +63,7 @@ public interface IZtd extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IZtd {
+    public abstract static class Stub extends Binder implements IZtd {
         static final int TRANSACTION_startMonitoringDomains = 5;
         static final int TRANSACTION_startMonitoringFiles = 3;
         static final int TRANSACTION_startTracing = 1;
@@ -107,7 +116,8 @@ public interface IZtd extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IZtd.DESCRIPTOR);
             }
@@ -187,7 +197,8 @@ public interface IZtd extends IInterface {
             }
 
             @Override // android.os.IZtd
-            public void startTracing(int traceType, int uid, long period, IZtdListener listener) throws RemoteException {
+            public void startTracing(int traceType, int uid, long period, IZtdListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IZtd.DESCRIPTOR);
@@ -215,7 +226,13 @@ public interface IZtd extends IInterface {
             }
 
             @Override // android.os.IZtd
-            public int startMonitoringFiles(int requestorUid, int[] allowedUids, List<String> files, List<String> inodes, IZtdListener listener) throws RemoteException {
+            public int startMonitoringFiles(
+                    int requestorUid,
+                    int[] allowedUids,
+                    List<String> files,
+                    List<String> inodes,
+                    IZtdListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -253,7 +270,12 @@ public interface IZtd extends IInterface {
             }
 
             @Override // android.os.IZtd
-            public int startMonitoringDomains(int requestorUid, int[] allowedUids, List<String> domains, IZtdListener listener) throws RemoteException {
+            public int startMonitoringDomains(
+                    int requestorUid,
+                    int[] allowedUids,
+                    List<String> domains,
+                    IZtdListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

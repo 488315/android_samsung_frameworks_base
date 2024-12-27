@@ -9,11 +9,13 @@ public final class AsPackageName {
     public static final String CMC = "com.samsung.android.mdecservice";
     public static final String CSC = "com.samsung.sec.android.application.csc";
     public static final String DMB = "com.sec.android.app.dmb";
-    public static final String DVFS_SOUNDALIVE = "com.sec.android.app.soundalive.compatibility.SAContentProvider";
+    public static final String DVFS_SOUNDALIVE =
+            "com.sec.android.app.soundalive.compatibility.SAContentProvider";
     public static final String EMERGENCY_SERVICE = "com.sec.android.emergencymode.service";
     public static final String FM_RADIO = "com.sec.android.app.fm";
     public static final String MULTI_SOUND_SETTING = "com.samsung.android.setting.multisound";
-    public static final String MULTI_SOUND_SETTING_ACTIVITY = "com.samsung.android.setting.multisound.MultiSoundSettingsActivity";
+    public static final String MULTI_SOUND_SETTING_ACTIVITY =
+            "com.samsung.android.setting.multisound.MultiSoundSettingsActivity";
     public static final String NTT_DOCOMO = "com.nttdocomo.android.phonemotion";
     public static final String PHONE = "com.android.server.telecom";
     public static final String RINGTONE_PICKER = "com.android.providers.media";
@@ -22,7 +24,8 @@ public final class AsPackageName {
     public static final String SETTINGS = "com.android.settings";
     public static final String SOUNDALIVE_FOR_KARAOKE = "com.sec.android.app.soundalive";
     public static final String SOUNDASSISTANT = "com.samsung.android.soundassistant";
-    public static final String SOUNDASSISTANT_INTENT_SERVICE = "com.sec.android.soundassistant.services.SoundAssistIntentService";
+    public static final String SOUNDASSISTANT_INTENT_SERVICE =
+            "com.sec.android.soundassistant.services.SoundAssistIntentService";
     public static final String SOUND_PICKER = "com.samsung.android.secsoundpicker";
     public static final String SYSTEMUI = "com.android.systemui";
     public static final String TELECOM = "com.android.server.telecom";

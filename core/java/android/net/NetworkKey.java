@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -15,27 +16,27 @@ import java.util.Objects;
 @Deprecated
 /* loaded from: classes3.dex */
 public class NetworkKey implements Parcelable {
-    public static final Parcelable.Creator<NetworkKey> CREATOR = new Parcelable.Creator<NetworkKey>() { // from class: android.net.NetworkKey.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkKey createFromParcel(Parcel in) {
-            return new NetworkKey(in);
-        }
+    public static final Parcelable.Creator<NetworkKey> CREATOR =
+            new Parcelable.Creator<NetworkKey>() { // from class: android.net.NetworkKey.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkKey createFromParcel(Parcel in) {
+                    return new NetworkKey(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkKey[] newArray(int size) {
-            return new NetworkKey[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkKey[] newArray(int size) {
+                    return new NetworkKey[size];
+                }
+            };
     private static final String TAG = "NetworkKey";
     public static final int TYPE_WIFI = 1;
     public final int type;
     public final WifiKey wifiKey;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NetworkType {
-    }
+    public @interface NetworkType {}
 
     public static NetworkKey createFromScanResult(ScanResult result) {
         Objects.requireNonNull(result);
@@ -60,7 +61,9 @@ public class NetworkKey implements Parcelable {
         if (wifiInfo != null) {
             String ssid = wifiInfo.getSSID();
             String bssid = wifiInfo.getBSSID();
-            if (!TextUtils.isEmpty(ssid) && !ssid.equals("<unknown ssid>") && !TextUtils.isEmpty(bssid)) {
+            if (!TextUtils.isEmpty(ssid)
+                    && !ssid.equals("<unknown ssid>")
+                    && !TextUtils.isEmpty(bssid)) {
                 try {
                     WifiKey wifiKey = new WifiKey(ssid, bssid);
                     return new NetworkKey(wifiKey);

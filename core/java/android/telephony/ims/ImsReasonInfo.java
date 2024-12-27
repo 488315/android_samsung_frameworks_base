@@ -3,6 +3,7 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
@@ -206,19 +207,19 @@ public final class ImsReasonInfo implements Parcelable {
     public static final int EXTRA_CODE_USER_TERMINATED_BY_REMOTE = 210;
 
     @SystemApi
-    public static final String EXTRA_MSG_SERVICE_NOT_AUTHORIZED = "Forbidden. Not Authorized for Service";
+    public static final String EXTRA_MSG_SERVICE_NOT_AUTHORIZED =
+            "Forbidden. Not Authorized for Service";
+
     private static final Map<Integer, String> sImsCodeMap = new HashMap();
     public int mCode;
     public int mExtraCode;
     public String mExtraMessage;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ImsCode {
-    }
+    public @interface ImsCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UtReason {
-    }
+    public @interface UtReason {}
 
     static {
         sImsCodeMap.put(0, "CODE_UNSPECIFIED");
@@ -396,19 +397,21 @@ public final class ImsReasonInfo implements Parcelable {
         sImsCodeMap.put(61454, "CODE_OEM_CAUSE_14");
         sImsCodeMap.put(61455, "CODE_OEM_CAUSE_15");
         sImsCodeMap.put(9000, "CODE_LOCAL_E911_RETRY_REQUIRED");
-        CREATOR = new Parcelable.Creator<ImsReasonInfo>() { // from class: android.telephony.ims.ImsReasonInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ImsReasonInfo createFromParcel(Parcel in) {
-                return new ImsReasonInfo(in);
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        ImsReasonInfo>() { // from class: android.telephony.ims.ImsReasonInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ImsReasonInfo createFromParcel(Parcel in) {
+                        return new ImsReasonInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ImsReasonInfo[] newArray(int size) {
-                return new ImsReasonInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ImsReasonInfo[] newArray(int size) {
+                        return new ImsReasonInfo[size];
+                    }
+                };
     }
 
     public ImsReasonInfo() {
@@ -448,8 +451,19 @@ public final class ImsReasonInfo implements Parcelable {
     }
 
     public String toString() {
-        String imsCode = sImsCodeMap.containsKey(Integer.valueOf(this.mCode)) ? sImsCodeMap.get(Integer.valueOf(this.mCode)) : "UNKNOWN_CODE";
-        return "ImsReasonInfo :: {" + this.mCode + " : " + imsCode + ", " + this.mExtraCode + ", " + this.mExtraMessage + "}";
+        String imsCode =
+                sImsCodeMap.containsKey(Integer.valueOf(this.mCode))
+                        ? sImsCodeMap.get(Integer.valueOf(this.mCode))
+                        : "UNKNOWN_CODE";
+        return "ImsReasonInfo :: {"
+                + this.mCode
+                + " : "
+                + imsCode
+                + ", "
+                + this.mExtraCode
+                + ", "
+                + this.mExtraMessage
+                + "}";
     }
 
     @Override // android.os.Parcelable

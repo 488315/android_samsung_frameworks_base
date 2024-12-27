@@ -5,7 +5,9 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.telephony.Rlog;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -13,19 +15,22 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class ImsConferenceState implements Parcelable {
-    public static final Parcelable.Creator<ImsConferenceState> CREATOR = new Parcelable.Creator<ImsConferenceState>() { // from class: android.telephony.ims.ImsConferenceState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsConferenceState createFromParcel(Parcel in) {
-            return new ImsConferenceState(in);
-        }
+    public static final Parcelable.Creator<ImsConferenceState> CREATOR =
+            new Parcelable.Creator<
+                    ImsConferenceState>() { // from class:
+                                            // android.telephony.ims.ImsConferenceState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsConferenceState createFromParcel(Parcel in) {
+                    return new ImsConferenceState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsConferenceState[] newArray(int size) {
-            return new ImsConferenceState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsConferenceState[] newArray(int size) {
+                    return new ImsConferenceState[size];
+                }
+            };
     public static final String DISPLAY_TEXT = "display-text";
     public static final String ENDPOINT = "endpoint";
     public static final String SIP_STATUS_CODE = "sipstatuscode";
@@ -94,7 +99,13 @@ public final class ImsConferenceState implements Parcelable {
         if (status.equals(STATUS_ON_HOLD) || status.equals(STATUS_SEND_ONLY)) {
             return 5;
         }
-        return (status.equals("connected") || status.equals(STATUS_MUTED_VIA_FOCUS) || status.equals(STATUS_DISCONNECTING) || status.equals(STATUS_SEND_RECV) || !status.equals("disconnected")) ? 4 : 6;
+        return (status.equals("connected")
+                        || status.equals(STATUS_MUTED_VIA_FOCUS)
+                        || status.equals(STATUS_DISCONNECTING)
+                        || status.equals(STATUS_SEND_RECV)
+                        || !status.equals("disconnected"))
+                ? 4
+                : 6;
     }
 
     public String toString() {

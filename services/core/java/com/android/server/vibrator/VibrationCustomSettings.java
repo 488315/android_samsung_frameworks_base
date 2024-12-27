@@ -4,7 +4,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.provider.Settings;
-import com.android.server.vibrator.VibrationSettings;
+
 import com.samsung.android.server.vibrator.VibratorHelper;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -31,7 +31,10 @@ public final class VibrationCustomSettings {
     public int mMotorType = 0;
     public boolean mOnlyWatchConnected = false;
 
-    public VibrationCustomSettings(Context context, VibrationSettings.SettingsContentObserver settingsContentObserver, VibratorManagerService vibratorManagerService) {
+    public VibrationCustomSettings(
+            Context context,
+            VibrationSettings.SettingsContentObserver settingsContentObserver,
+            VibratorManagerService vibratorManagerService) {
         this.mContext = context;
         this.mSettingObserver = settingsContentObserver;
         this.mService = vibratorManagerService;
@@ -45,6 +48,8 @@ public final class VibrationCustomSettings {
     }
 
     public final void registerSettingsObserver(Uri uri) {
-        this.mContext.getContentResolver().registerContentObserver(uri, true, this.mSettingObserver, -1);
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(uri, true, this.mSettingObserver, -1);
     }
 }

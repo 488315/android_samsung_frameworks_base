@@ -4,29 +4,32 @@ import android.app.appsearch.GenericDocument;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.MathUtils;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class GenericDocumentWrapper implements Parcelable {
-    public static final Parcelable.Creator<GenericDocumentWrapper> CREATOR = new Parcelable.Creator<GenericDocumentWrapper>() { // from class: android.app.appfunctions.GenericDocumentWrapper.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GenericDocumentWrapper createFromParcel(Parcel in) {
-            int length = in.readInt();
-            int offset = in.dataPosition();
-            in.setDataPosition(MathUtils.addOrThrow(offset, length));
-            Parcel p = Parcel.obtain();
-            p.appendFrom(in, offset, length);
-            p.setDataPosition(0);
-            return new GenericDocumentWrapper(p);
-        }
+    public static final Parcelable.Creator<GenericDocumentWrapper> CREATOR =
+            new Parcelable.Creator<GenericDocumentWrapper>() { // from class:
+                // android.app.appfunctions.GenericDocumentWrapper.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GenericDocumentWrapper createFromParcel(Parcel in) {
+                    int length = in.readInt();
+                    int offset = in.dataPosition();
+                    in.setDataPosition(MathUtils.addOrThrow(offset, length));
+                    Parcel p = Parcel.obtain();
+                    p.appendFrom(in, offset, length);
+                    p.setDataPosition(0);
+                    return new GenericDocumentWrapper(p);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GenericDocumentWrapper[] newArray(int size) {
-            return new GenericDocumentWrapper[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GenericDocumentWrapper[] newArray(int size) {
+                    return new GenericDocumentWrapper[size];
+                }
+            };
     private GenericDocument mGenericDocument;
     private final Object mLock;
     private Parcel mParcel;
@@ -57,7 +60,10 @@ public final class GenericDocumentWrapper implements Parcelable {
             if (this.mGenericDocument != null) {
                 return;
             }
-            byte[] dataBlob = (byte[]) Objects.requireNonNull(((Parcel) Objects.requireNonNull(this.mParcel)).readBlob());
+            byte[] dataBlob =
+                    (byte[])
+                            Objects.requireNonNull(
+                                    ((Parcel) Objects.requireNonNull(this.mParcel)).readBlob());
             Parcel unmarshallParcel = Parcel.obtain();
             try {
                 unmarshallParcel.unmarshall(dataBlob, 0, dataBlob.length);

@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class FrontendAtsc3PlpSettings implements Parcelable {
-    public static final Parcelable.Creator<FrontendAtsc3PlpSettings> CREATOR = new Parcelable.Creator<FrontendAtsc3PlpSettings>() { // from class: android.hardware.tv.tuner.FrontendAtsc3PlpSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendAtsc3PlpSettings createFromParcel(Parcel _aidl_source) {
-            FrontendAtsc3PlpSettings _aidl_out = new FrontendAtsc3PlpSettings();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FrontendAtsc3PlpSettings> CREATOR =
+            new Parcelable.Creator<FrontendAtsc3PlpSettings>() { // from class:
+                // android.hardware.tv.tuner.FrontendAtsc3PlpSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendAtsc3PlpSettings createFromParcel(Parcel _aidl_source) {
+                    FrontendAtsc3PlpSettings _aidl_out = new FrontendAtsc3PlpSettings();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendAtsc3PlpSettings[] newArray(int _aidl_size) {
-            return new FrontendAtsc3PlpSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendAtsc3PlpSettings[] newArray(int _aidl_size) {
+                    return new FrontendAtsc3PlpSettings[_aidl_size];
+                }
+            };
     public int plpId = 0;
     public int modulation = 0;
     public int interleaveMode = 0;

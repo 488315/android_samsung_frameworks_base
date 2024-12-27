@@ -8,11 +8,14 @@ import android.os.ServiceManager;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
 import com.android.server.biometrics.BiometricHandlerProvider;
 import com.android.server.biometrics.SemBiometricFeature;
+
 import com.samsung.android.hardware.secinputdev.ISemInputDeviceManager;
+
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -79,22 +82,35 @@ public final class SemUdfpsTspManager {
     }
 
     public ISemInputDeviceManager getInputDeviceManager() {
-        final AtomicReference atomicReference = new AtomicReference(ISemInputDeviceManager.Stub.asInterface(ServiceManager.getService("SemInputDeviceManagerService")));
+        final AtomicReference atomicReference =
+                new AtomicReference(
+                        ISemInputDeviceManager.Stub.asInterface(
+                                ServiceManager.getService("SemInputDeviceManagerService")));
         if (atomicReference.get() == null) {
             ServiceThread serviceThread = new ServiceThread(10, "FingerprintService", true);
             final CountDownLatch countDownLatch = new CountDownLatch(1);
             serviceThread.start();
-            serviceThread.getThreadHandler().post(new Runnable() { // from class: com.android.server.biometrics.sensors.fingerprint.SemUdfpsTspManager$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AtomicReference atomicReference2 = atomicReference;
-                    CountDownLatch countDownLatch2 = countDownLatch;
-                    atomicReference2.set(ISemInputDeviceManager.Stub.asInterface(ServiceManager.waitForService("SemInputDeviceManagerService")));
-                    countDownLatch2.countDown();
-                }
-            });
+            serviceThread
+                    .getThreadHandler()
+                    .post(
+                            new Runnable() { // from class:
+                                             // com.android.server.biometrics.sensors.fingerprint.SemUdfpsTspManager$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    AtomicReference atomicReference2 = atomicReference;
+                                    CountDownLatch countDownLatch2 = countDownLatch;
+                                    atomicReference2.set(
+                                            ISemInputDeviceManager.Stub.asInterface(
+                                                    ServiceManager.waitForService(
+                                                            "SemInputDeviceManagerService")));
+                                    countDownLatch2.countDown();
+                                }
+                            });
             try {
-                Slog.d("FingerprintService", "getInputDeviceManager: wait for service result = " + countDownLatch.await(2L, TimeUnit.SECONDS));
+                Slog.d(
+                        "FingerprintService",
+                        "getInputDeviceManager: wait for service result = "
+                                + countDownLatch.await(2L, TimeUnit.SECONDS));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -109,7 +125,8 @@ public final class SemUdfpsTspManager {
 
     public final synchronized void screenOff() {
         try {
-            if (SemBiometricFeature.FP_FEATURE_SENSOR_IS_OPTICAL && SemBiometricFeature.FEATURE_SUPPORT_AOD) {
+            if (SemBiometricFeature.FP_FEATURE_SENSOR_IS_OPTICAL
+                    && SemBiometricFeature.FEATURE_SUPPORT_AOD) {
                 setHalfMode(true);
             }
             if (SemBiometricFeature.FP_FEATURE_SENSOR_IS_ULTRASONIC) {
@@ -124,58 +141,73 @@ public final class SemUdfpsTspManager {
     }
 
     public final void sendCommand(final int i) {
-        getHandler().post(new Runnable() { // from class: com.android.server.biometrics.sensors.fingerprint.SemUdfpsTspManager$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                SemUdfpsTspManager semUdfpsTspManager = SemUdfpsTspManager.this;
-                int i2 = i;
-                ISemInputDeviceManager inputDeviceManager = semUdfpsTspManager.getInputDeviceManager();
-                if (inputDeviceManager == null) {
-                    Slog.w("FingerprintService", "sendCommand fail : InputDeviceManager is null");
-                    return;
-                }
-                semUdfpsTspManager.mLastCmd = i2;
-                try {
-                    switch (i2) {
-                        case 2:
-                            inputDeviceManager.setFodEnable(1, 1, 0, 0);
-                            break;
-                        case 3:
-                            inputDeviceManager.setFodEnable(1, 0, 0, 0);
-                            break;
-                        case 4:
-                            inputDeviceManager.setFodEnable(1, 1, 1, 0);
-                            break;
-                        case 5:
-                            inputDeviceManager.setFodEnable(1, 0, 1, 0);
-                            break;
-                        case 6:
-                            inputDeviceManager.setFodEnable(0, 0, 0, 0);
-                            break;
-                        case 7:
-                            Rect rect = semUdfpsTspManager.mFodRect;
-                            if (rect != null && !rect.isEmpty()) {
-                                Rect rect2 = semUdfpsTspManager.mFodRect;
-                                inputDeviceManager.setFodRect(rect2.left, rect2.top, rect2.right, rect2.bottom);
-                                break;
+        getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.biometrics.sensors.fingerprint.SemUdfpsTspManager$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemUdfpsTspManager semUdfpsTspManager = SemUdfpsTspManager.this;
+                                int i2 = i;
+                                ISemInputDeviceManager inputDeviceManager =
+                                        semUdfpsTspManager.getInputDeviceManager();
+                                if (inputDeviceManager == null) {
+                                    Slog.w(
+                                            "FingerprintService",
+                                            "sendCommand fail : InputDeviceManager is null");
+                                    return;
+                                }
+                                semUdfpsTspManager.mLastCmd = i2;
+                                try {
+                                    switch (i2) {
+                                        case 2:
+                                            inputDeviceManager.setFodEnable(1, 1, 0, 0);
+                                            break;
+                                        case 3:
+                                            inputDeviceManager.setFodEnable(1, 0, 0, 0);
+                                            break;
+                                        case 4:
+                                            inputDeviceManager.setFodEnable(1, 1, 1, 0);
+                                            break;
+                                        case 5:
+                                            inputDeviceManager.setFodEnable(1, 0, 1, 0);
+                                            break;
+                                        case 6:
+                                            inputDeviceManager.setFodEnable(0, 0, 0, 0);
+                                            break;
+                                        case 7:
+                                            Rect rect = semUdfpsTspManager.mFodRect;
+                                            if (rect != null && !rect.isEmpty()) {
+                                                Rect rect2 = semUdfpsTspManager.mFodRect;
+                                                inputDeviceManager.setFodRect(
+                                                        rect2.left,
+                                                        rect2.top,
+                                                        rect2.right,
+                                                        rect2.bottom);
+                                                break;
+                                            }
+                                            break;
+                                        case 8:
+                                            inputDeviceManager.setFodLpMode(
+                                                    semUdfpsTspManager.mIsLpMode ? 1 : 0);
+                                            break;
+                                        case 9:
+                                            inputDeviceManager.setTemperature(1);
+                                            break;
+                                        case 10:
+                                            inputDeviceManager.setFodEnable(
+                                                    1, 0, 0, semUdfpsTspManager.mInterruptDelay);
+                                            break;
+                                    }
+                                } catch (RemoteException e) {
+                                    Slog.w(
+                                            "FingerprintService",
+                                            "sendCommand fail with e : " + e.getMessage());
+                                }
+                                BootReceiver$$ExternalSyntheticOutline0.m(
+                                        i2, "setTspMode: [", "] done", "FingerprintService");
                             }
-                            break;
-                        case 8:
-                            inputDeviceManager.setFodLpMode(semUdfpsTspManager.mIsLpMode ? 1 : 0);
-                            break;
-                        case 9:
-                            inputDeviceManager.setTemperature(1);
-                            break;
-                        case 10:
-                            inputDeviceManager.setFodEnable(1, 0, 0, semUdfpsTspManager.mInterruptDelay);
-                            break;
-                    }
-                } catch (RemoteException e) {
-                    Slog.w("FingerprintService", "sendCommand fail with e : " + e.getMessage());
-                }
-                BootReceiver$$ExternalSyntheticOutline0.m(i2, "setTspMode: [", "] done", "FingerprintService");
-            }
-        });
+                        });
     }
 
     public final void setFodEnable() {
@@ -187,7 +219,16 @@ public final class SemUdfpsTspManager {
     public final synchronized void setFodRect(Rect rect) {
         this.mFodRect = rect;
         Locale locale = Locale.ENGLISH;
-        this.mCommands.put(7, "set_fod_rect," + rect.left + "," + rect.top + "," + rect.right + "," + rect.bottom);
+        this.mCommands.put(
+                7,
+                "set_fod_rect,"
+                        + rect.left
+                        + ","
+                        + rect.top
+                        + ","
+                        + rect.right
+                        + ","
+                        + rect.bottom);
         sendCommand(7);
     }
 

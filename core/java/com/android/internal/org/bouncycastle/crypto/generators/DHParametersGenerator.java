@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.crypto.generators;
 
 import com.android.internal.org.bouncycastle.crypto.params.DHParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DHValidationParameters;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -19,7 +20,8 @@ public class DHParametersGenerator {
     }
 
     public DHParameters generateParameters() {
-        BigInteger[] safePrimes = DHParametersHelper.generateSafePrimes(this.size, this.certainty, this.random);
+        BigInteger[] safePrimes =
+                DHParametersHelper.generateSafePrimes(this.size, this.certainty, this.random);
         BigInteger p = safePrimes[0];
         BigInteger q = safePrimes[1];
         BigInteger g = DHParametersHelper.selectGenerator(p, q, this.random);

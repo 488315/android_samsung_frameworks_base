@@ -7,7 +7,8 @@ import android.util.Slog;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public abstract class FullBackupRestoreObserverUtils {
-    public static IFullBackupRestoreObserver sendEndRestore(IFullBackupRestoreObserver iFullBackupRestoreObserver) {
+    public static IFullBackupRestoreObserver sendEndRestore(
+            IFullBackupRestoreObserver iFullBackupRestoreObserver) {
         if (iFullBackupRestoreObserver == null) {
             return iFullBackupRestoreObserver;
         }
@@ -20,7 +21,8 @@ public abstract class FullBackupRestoreObserverUtils {
         }
     }
 
-    public static IFullBackupRestoreObserver sendOnRestorePackage(IFullBackupRestoreObserver iFullBackupRestoreObserver, String str) {
+    public static IFullBackupRestoreObserver sendOnRestorePackage(
+            IFullBackupRestoreObserver iFullBackupRestoreObserver, String str) {
         if (iFullBackupRestoreObserver == null) {
             return iFullBackupRestoreObserver;
         }

@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.SemWallpaperColors;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -12,8 +11,11 @@ import android.util.Log;
 import android.view.Display;
 import android.view.DisplayInfo;
 import android.view.WindowManager;
+
 import com.android.internal.R;
+
 import com.samsung.android.wallpaper.Rune;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -31,8 +33,21 @@ public class SemWallpaperColorsArea implements Cloneable {
     public static final int BODY_TOP = 2;
     public static final float COVER_DISPLAY_DENSITY = 1.0f;
     public static final float COVER_LARGE_DISPLAY_DENSITY = 2.125f;
-    private static final String DISPLAY_CATEGORY_BUILTIN = "com.samsung.android.hardware.display.category.BUILTIN";
-    public static final String[] NAME = {"STATUSBAR", "BODY", "BODY_TOP", "BODY_MID", "BODY_BOTTOM", "NAVIBAR", "NAVIBAR", "BACKGROUND", "BODY_CENTER", "BODY_LEFT", "BODY_RIGHT"};
+    private static final String DISPLAY_CATEGORY_BUILTIN =
+            "com.samsung.android.hardware.display.category.BUILTIN";
+    public static final String[] NAME = {
+        "STATUSBAR",
+        "BODY",
+        "BODY_TOP",
+        "BODY_MID",
+        "BODY_BOTTOM",
+        "NAVIBAR",
+        "NAVIBAR",
+        "BACKGROUND",
+        "BODY_CENTER",
+        "BODY_LEFT",
+        "BODY_RIGHT"
+    };
     public static final int NAVIBAR = 5;
     public static final int NAVIBAR_HOME = 6;
     public static final int RATIO_FOLD_SUB_CRITERIA = 2;
@@ -59,7 +74,11 @@ public class SemWallpaperColorsArea implements Cloneable {
         this(context, which, rotation, null);
     }
 
-    public SemWallpaperColorsArea(Context context, int which, int rotation, WallpaperColorOverrideAreas baseOverrideColorArea) {
+    public SemWallpaperColorsArea(
+            Context context,
+            int which,
+            int rotation,
+            WallpaperColorOverrideAreas baseOverrideColorArea) {
         int width;
         int height;
         this.mKeyMap = new HashMap();
@@ -69,7 +88,8 @@ public class SemWallpaperColorsArea implements Cloneable {
         this.mRotation = rotation;
         if (context != null) {
             if (baseOverrideColorArea != null) {
-                this.mWallpaperColorOverrideAreas = new WallpaperColorOverrideAreas(context, which, baseOverrideColorArea);
+                this.mWallpaperColorOverrideAreas =
+                        new WallpaperColorOverrideAreas(context, which, baseOverrideColorArea);
             } else {
                 this.mWallpaperColorOverrideAreas = new WallpaperColorOverrideAreas(context, which);
                 this.mWallpaperColorOverrideAreas.load();
@@ -85,18 +105,33 @@ public class SemWallpaperColorsArea implements Cloneable {
             width = size.x;
             height = size.y;
         }
-        Log.d(TAG, "SemWallpaperColorsArea [" + width + ", " + height + "] which: " + which + " rotation: " + rotation + " has Base: " + (baseOverrideColorArea != null));
+        Log.d(
+                TAG,
+                "SemWallpaperColorsArea ["
+                        + width
+                        + ", "
+                        + height
+                        + "] which: "
+                        + which
+                        + " rotation: "
+                        + rotation
+                        + " has Base: "
+                        + (baseOverrideColorArea != null));
         boolean isLandscapeMode = width > height;
         this.mWidth = width;
         this.mHeight = height;
         int statusBarHeight = 0;
         int navigationBarHeight = 0;
         int statusBarTopMargin = 0;
-        if ((Rune.SUPPORT_SUB_DISPLAY_MODE && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && (this.mWhich & 16) == 16) || (Rune.VIRTUAL_DISPLAY_WALLPAPER && (this.mWhich & 32) == 32)) {
+        if ((Rune.SUPPORT_SUB_DISPLAY_MODE
+                        && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                        && (this.mWhich & 16) == 16)
+                || (Rune.VIRTUAL_DISPLAY_WALLPAPER && (this.mWhich & 32) == 32)) {
             if (Rune.SUPPORT_LARGE_FRONT_SUB_DISPLAY) {
                 statusBarHeight = 30;
                 navigationBarHeight = 67;
-                statusBarTopMargin = resource.getDimensionPixelSize(R.dimen.status_bar_camera_top_margin);
+                statusBarTopMargin =
+                        resource.getDimensionPixelSize(R.dimen.status_bar_camera_top_margin);
             }
         } else if (rotation != 0) {
             if (!isLandscapeMode) {
@@ -112,9 +147,12 @@ public class SemWallpaperColorsArea implements Cloneable {
             }
             statusBarHeight = resource.getDimensionPixelSize(R.dimen.status_bar_height_portrait);
             navigationBarHeight = resource.getDimensionPixelSize(R.dimen.navigation_bar_height);
-            statusBarTopMargin = resource.getDimensionPixelSize(R.dimen.status_bar_camera_top_margin);
+            statusBarTopMargin =
+                    resource.getDimensionPixelSize(R.dimen.status_bar_camera_top_margin);
         }
-        if (!Rune.SUPPORT_SUB_DISPLAY_MODE || !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE || (this.mWhich & 16) != 16) {
+        if (!Rune.SUPPORT_SUB_DISPLAY_MODE
+                || !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                || (this.mWhich & 16) != 16) {
             this.mDensity = resource.getDisplayMetrics().density;
         } else if (Rune.SUPPORT_LARGE_FRONT_SUB_DISPLAY) {
             this.mDensity = 2.125f;
@@ -126,7 +164,26 @@ public class SemWallpaperColorsArea implements Cloneable {
         this.mDpStatusBarHeight = (int) (statusBarHeight / this.mDensity);
         this.mDpNavigationBarHeight = (int) (navigationBarHeight / this.mDensity);
         this.mDpStatusBarTopMargin = (int) (statusBarTopMargin / this.mDensity);
-        Log.d(TAG, "SemWallpaperColorsArea which = " + this.mWhich + ", mDensity : " + this.mDensity + ", " + this.mWidth + "x" + this.mHeight + "," + this.mDpWidth + "x" + this.mDpHeight + "," + this.mDpStatusBarHeight + "," + this.mDpNavigationBarHeight + ", " + this.mDpStatusBarTopMargin);
+        Log.d(
+                TAG,
+                "SemWallpaperColorsArea which = "
+                        + this.mWhich
+                        + ", mDensity : "
+                        + this.mDensity
+                        + ", "
+                        + this.mWidth
+                        + "x"
+                        + this.mHeight
+                        + ","
+                        + this.mDpWidth
+                        + "x"
+                        + this.mDpHeight
+                        + ","
+                        + this.mDpStatusBarHeight
+                        + ","
+                        + this.mDpNavigationBarHeight
+                        + ", "
+                        + this.mDpStatusBarTopMargin);
     }
 
     public Rect get(int area) {
@@ -153,7 +210,8 @@ public class SemWallpaperColorsArea implements Cloneable {
                         rect.left = (int) (this.mDpWidth * 0.07d);
                         rect.right = this.mDpWidth - rect.left;
                         rect.top = (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.078d);
-                        rect.bottom = (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.843d);
+                        rect.bottom =
+                                (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.843d);
                         break;
                     case 2:
                         rect.left = ((int) (this.mDpWidth * 0.5d)) - 160;
@@ -208,7 +266,8 @@ public class SemWallpaperColorsArea implements Cloneable {
                         rect.left = (int) (this.mDpWidth * 0.025d);
                         rect.right = this.mDpWidth - rect.left;
                         rect.top = (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.08d);
-                        rect.bottom = (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.844d);
+                        rect.bottom =
+                                (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.844d);
                         break;
                     case 2:
                         rect.left = ((int) (this.mDpWidth * 0.5d)) - 160;
@@ -268,7 +327,10 @@ public class SemWallpaperColorsArea implements Cloneable {
                     rect.bottom = (int) (rect.top + (this.mDpHeight * 0.64344263f));
                     break;
             }
-        } else if (Rune.SUPPORT_SUB_DISPLAY_MODE && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && Rune.SUPPORT_LARGE_FRONT_SUB_DISPLAY && (this.mWhich & 16) == 16) {
+        } else if (Rune.SUPPORT_SUB_DISPLAY_MODE
+                && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                && Rune.SUPPORT_LARGE_FRONT_SUB_DISPLAY
+                && (this.mWhich & 16) == 16) {
             displayType = 3;
             rotationType = 0;
             switch (area) {
@@ -314,7 +376,9 @@ public class SemWallpaperColorsArea implements Cloneable {
                     rect.bottom = this.mDpHeight;
                     break;
             }
-        } else if (Rune.SUPPORT_SUB_DISPLAY_MODE && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && (this.mWhich & 16) == 16) {
+        } else if (Rune.SUPPORT_SUB_DISPLAY_MODE
+                && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                && (this.mWhich & 16) == 16) {
             displayType = 3;
             rotationType = 0;
             switch (area) {
@@ -361,7 +425,9 @@ public class SemWallpaperColorsArea implements Cloneable {
                     rect.bottom = rect.top + 163;
                     break;
             }
-        } else if (Rune.SUPPORT_SUB_DISPLAY_MODE && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && (this.mWhich & 16) == 0) {
+        } else if (Rune.SUPPORT_SUB_DISPLAY_MODE
+                && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                && (this.mWhich & 16) == 0) {
             displayType = 0;
             if (this.mRotation != 0) {
                 rotationType = 3;
@@ -376,7 +442,8 @@ public class SemWallpaperColorsArea implements Cloneable {
                         rect.left = (int) (this.mDpWidth * 0.036d);
                         rect.right = this.mDpWidth - rect.left;
                         rect.top = (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.072d);
-                        rect.bottom = (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.855d);
+                        rect.bottom =
+                                (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.855d);
                         break;
                     case 2:
                         rect.left = ((int) (this.mDpWidth * 0.5d)) - 160;
@@ -434,7 +501,8 @@ public class SemWallpaperColorsArea implements Cloneable {
                         rect.left = (int) (this.mDpWidth * 0.036d);
                         rect.right = this.mDpWidth - rect.left;
                         rect.top = (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.074d);
-                        rect.bottom = (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.855d);
+                        rect.bottom =
+                                (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.855d);
                         break;
                     case 2:
                         rect.left = ((int) (this.mDpWidth * 0.5d)) - 160;
@@ -479,7 +547,9 @@ public class SemWallpaperColorsArea implements Cloneable {
             }
         } else {
             displayType = 0;
-            if (Rune.SUPPORT_SUB_DISPLAY_MODE && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && (this.mWhich & 16) == 16) {
+            if (Rune.SUPPORT_SUB_DISPLAY_MODE
+                    && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                    && (this.mWhich & 16) == 16) {
                 displayType = 2;
             }
             if (this.mRotation != 0) {
@@ -593,7 +663,8 @@ public class SemWallpaperColorsArea implements Cloneable {
                         rect.left = (int) (this.mDpWidth * 0.036d);
                         rect.right = this.mDpWidth - rect.left;
                         rect.top = (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.074d);
-                        rect.bottom = (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.854d);
+                        rect.bottom =
+                                (int) ((this.mDpHeight - this.mDpNavigationBarHeight) * 0.854d);
                         break;
                     case 2:
                         rect.left = 40;
@@ -640,8 +711,20 @@ public class SemWallpaperColorsArea implements Cloneable {
         if (this.mWallpaperColorOverrideAreas != null) {
             Long areaFlag = this.mKeyMap.get(Integer.valueOf(area));
             long safeAreaFlag = areaFlag == null ? 0L : areaFlag.longValue();
-            Log.i(TAG, "Get custom area. display type = " + displayType + ", rotation = " + rotationType + ", area = " + area + " areaFlag = " + safeAreaFlag + " rect = " + rect);
-            RectF customRectF = this.mWallpaperColorOverrideAreas.get(displayType, rotationType, safeAreaFlag);
+            Log.i(
+                    TAG,
+                    "Get custom area. display type = "
+                            + displayType
+                            + ", rotation = "
+                            + rotationType
+                            + ", area = "
+                            + area
+                            + " areaFlag = "
+                            + safeAreaFlag
+                            + " rect = "
+                            + rect);
+            RectF customRectF =
+                    this.mWallpaperColorOverrideAreas.get(displayType, rotationType, safeAreaFlag);
             if (customRectF != null) {
                 rect.left = (int) (this.mDpWidth * customRectF.left);
                 rect.right = (int) (this.mDpWidth * customRectF.right);
@@ -701,8 +784,18 @@ public class SemWallpaperColorsArea implements Cloneable {
         Point size = new Point();
         size.x = displayInfo.logicalWidth;
         size.y = displayInfo.logicalHeight;
-        Log.d(TAG, "getDisplaySize() which:" + which + ", displayId: " + displayId + ", size: " + size);
-        if (!Rune.SUPPORT_SUB_DISPLAY_MODE || Rune.SUPPORT_COVER_DISPLAY_WATCHFACE || (which & 8) == 8 || WallpaperManager.getInstance(this.mContext).getLidState() != 0) {
+        Log.d(
+                TAG,
+                "getDisplaySize() which:"
+                        + which
+                        + ", displayId: "
+                        + displayId
+                        + ", size: "
+                        + size);
+        if (!Rune.SUPPORT_SUB_DISPLAY_MODE
+                || Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                || (which & 8) == 8
+                || WallpaperManager.getInstance(this.mContext).getLidState() != 0) {
             return size;
         }
         float ratio = size.y / size.x;
@@ -713,18 +806,26 @@ public class SemWallpaperColorsArea implements Cloneable {
             DisplayInfo display = getDisplayInfo(displayId2, which);
             size.x = display.logicalWidth;
             size.y = display.logicalHeight;
-            Log.d(TAG, "getDisplaySize() wrong displayInfo, changed to displayId: " + displayId2 + ", size: " + size);
+            Log.d(
+                    TAG,
+                    "getDisplaySize() wrong displayInfo, changed to displayId: "
+                            + displayId2
+                            + ", size: "
+                            + size);
         }
         return size;
     }
 
     private DisplayInfo getDisplayInfo(int displayId, int which) {
-        DisplayManager displayManager = (DisplayManager) this.mContext.getSystemService(DisplayManager.class);
+        DisplayManager displayManager =
+                (DisplayManager) this.mContext.getSystemService(DisplayManager.class);
         Display display = displayManager.getDisplay(displayId);
         DisplayInfo displayInfo = new DisplayInfo();
         if (display != null) {
             if (Rune.VIRTUAL_DISPLAY_WALLPAPER && (which & 32) == 32) {
-                Display[] displays = displayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_VIEW_COVER_DISPLAY);
+                Display[] displays =
+                        displayManager.getDisplays(
+                                DisplayManager.DISPLAY_CATEGORY_VIEW_COVER_DISPLAY);
                 if (displays.length > 0) {
                     Display display2 = displays[0];
                     display2.getDisplayInfo(displayInfo);
@@ -738,7 +839,8 @@ public class SemWallpaperColorsArea implements Cloneable {
             }
         } else {
             Log.d(TAG, "getDisplayInfo display == null");
-            WindowManager wm = (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
+            WindowManager wm =
+                    (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
             Display defaultDisplay = wm.getDefaultDisplay();
             defaultDisplay.getDisplayInfo(displayInfo);
         }
@@ -747,9 +849,15 @@ public class SemWallpaperColorsArea implements Cloneable {
 
     private Point getCoverScreenSize(Context context, int which) {
         Point screenSize = null;
-        if (Rune.SUPPORT_SUB_DISPLAY_MODE && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && (which & 16) == 16 && Rune.SUPPORT_LARGE_FRONT_SUB_DISPLAY) {
-            DisplayManager displayManager = (DisplayManager) context.getSystemService(DisplayManager.class);
-            Display[] displays = displayManager.getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
+        if (Rune.SUPPORT_SUB_DISPLAY_MODE
+                && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                && (which & 16) == 16
+                && Rune.SUPPORT_LARGE_FRONT_SUB_DISPLAY) {
+            DisplayManager displayManager =
+                    (DisplayManager) context.getSystemService(DisplayManager.class);
+            Display[] displays =
+                    displayManager.getDisplays(
+                            "com.samsung.android.hardware.display.category.BUILTIN");
             for (Display display : displays) {
                 int id = display.getDisplayId();
                 if (id == 1) {
@@ -780,7 +888,9 @@ public class SemWallpaperColorsArea implements Cloneable {
         while (it.hasNext()) {
             SemWallpaperColors.WallpaperColorsData data = it.next();
             if (data != null) {
-                this.mKeyMap.put(Integer.valueOf(data.getInternalKey()), Long.valueOf(data.getExternalKey()));
+                this.mKeyMap.put(
+                        Integer.valueOf(data.getInternalKey()),
+                        Long.valueOf(data.getExternalKey()));
             }
         }
     }

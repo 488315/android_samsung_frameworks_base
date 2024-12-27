@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,7 +49,8 @@ public class MenuBuilder implements Menu {
     private boolean mOptionalIconsVisible = false;
     private boolean mIsClosing = false;
     private ArrayList<MenuItemImpl> mTempShortcutItemList = new ArrayList<>();
-    private CopyOnWriteArrayList<WeakReference<MenuPresenter>> mPresenters = new CopyOnWriteArrayList<>();
+    private CopyOnWriteArrayList<WeakReference<MenuPresenter>> mPresenters =
+            new CopyOnWriteArrayList<>();
     private boolean mGroupDividerEnabled = false;
     private ArrayList<MenuItemImpl> mItems = new ArrayList<>();
     private ArrayList<MenuItemImpl> mVisibleItems = new ArrayList<>();
@@ -117,7 +119,8 @@ public class MenuBuilder implements Menu {
         startDispatchingItemsChanged();
     }
 
-    private boolean dispatchSubMenuSelected(SubMenuBuilder subMenu, MenuPresenter preferredPresenter) {
+    private boolean dispatchSubMenuSelected(
+            SubMenuBuilder subMenu, MenuPresenter preferredPresenter) {
         if (this.mPresenters.isEmpty()) {
             return false;
         }
@@ -219,7 +222,8 @@ public class MenuBuilder implements Menu {
         if (states == null) {
             return;
         }
-        SparseArray<Parcelable> viewStates = states.getSparseParcelableArray(getActionViewStatesKey());
+        SparseArray<Parcelable> viewStates =
+                states.getSparseParcelableArray(getActionViewStatesKey());
         int itemCount = size();
         for (int i = 0; i < itemCount; i++) {
             MenuItem item = getItem(i);
@@ -248,7 +252,9 @@ public class MenuBuilder implements Menu {
 
     private MenuItem addInternal(int group, int id, int categoryOrder, CharSequence title) {
         int ordering = getOrdering(categoryOrder);
-        MenuItemImpl item = createNewMenuItem(group, id, categoryOrder, ordering, title, this.mDefaultShowAsAction);
+        MenuItemImpl item =
+                createNewMenuItem(
+                        group, id, categoryOrder, ordering, title, this.mDefaultShowAsAction);
         if (this.mCurrentMenuInfo != null) {
             item.setMenuInfo(this.mCurrentMenuInfo);
         }
@@ -257,8 +263,15 @@ public class MenuBuilder implements Menu {
         return item;
     }
 
-    private MenuItemImpl createNewMenuItem(int group, int id, int categoryOrder, int ordering, CharSequence title, int defaultShowAsAction) {
-        return new MenuItemImpl(this, group, id, categoryOrder, ordering, title, defaultShowAsAction);
+    private MenuItemImpl createNewMenuItem(
+            int group,
+            int id,
+            int categoryOrder,
+            int ordering,
+            CharSequence title,
+            int defaultShowAsAction) {
+        return new MenuItemImpl(
+                this, group, id, categoryOrder, ordering, title, defaultShowAsAction);
     }
 
     @Override // android.view.Menu
@@ -314,7 +327,15 @@ public class MenuBuilder implements Menu {
     }
 
     @Override // android.view.Menu
-    public int addIntentOptions(int group, int id, int categoryOrder, ComponentName caller, Intent[] specifics, Intent intent, int flags, MenuItem[] outSpecificItems) {
+    public int addIntentOptions(
+            int group,
+            int id,
+            int categoryOrder,
+            ComponentName caller,
+            Intent[] specifics,
+            Intent intent,
+            int flags,
+            MenuItem[] outSpecificItems) {
         PackageManager pm = this.mContext.getPackageManager();
         List<ResolveInfo> lri = pm.queryIntentActivityOptions(caller, specifics, intent, 0);
         int N = lri != null ? lri.size() : 0;
@@ -323,9 +344,15 @@ public class MenuBuilder implements Menu {
         }
         for (int i = 0; i < N; i++) {
             ResolveInfo ri = lri.get(i);
-            Intent rintent = new Intent(ri.specificIndex < 0 ? intent : specifics[ri.specificIndex]);
-            rintent.setComponent(new ComponentName(ri.activityInfo.applicationInfo.packageName, ri.activityInfo.name));
-            MenuItem item = add(group, id, categoryOrder, ri.loadLabel(pm)).setIcon(ri.loadIcon(pm)).setIntent(rintent);
+            Intent rintent =
+                    new Intent(ri.specificIndex < 0 ? intent : specifics[ri.specificIndex]);
+            rintent.setComponent(
+                    new ComponentName(
+                            ri.activityInfo.applicationInfo.packageName, ri.activityInfo.name));
+            MenuItem item =
+                    add(group, id, categoryOrder, ri.loadLabel(pm))
+                            .setIcon(ri.loadIcon(pm))
+                            .setIntent(rintent);
             if (outSpecificItems != null && ri.specificIndex >= 0) {
                 outSpecificItems[ri.specificIndex] = item;
             }
@@ -394,7 +421,9 @@ public class MenuBuilder implements Menu {
         int N = this.mItems.size();
         for (int i = 0; i < N; i++) {
             MenuItemImpl curItem = this.mItems.get(i);
-            if (curItem.getGroupId() == group && curItem.isExclusiveCheckable() && curItem.isCheckable()) {
+            if (curItem.getGroupId() == group
+                    && curItem.isExclusiveCheckable()
+                    && curItem.isCheckable()) {
                 curItem.setCheckedInt(curItem == item);
             }
         }
@@ -537,9 +566,9 @@ public class MenuBuilder implements Menu {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:5:0x0017, code lost:
-    
-        if (android.view.ViewConfiguration.get(r2.mContext).shouldShowMenuShortcutsWhenKeyboardPresent() != false) goto L9;
-     */
+
+       if (android.view.ViewConfiguration.get(r2.mContext).shouldShowMenuShortcutsWhenKeyboardPresent() != false) goto L9;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -564,7 +593,9 @@ public class MenuBuilder implements Menu {
             r2.mShortcutsVisible = r1
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.view.menu.MenuBuilder.setShortcutsVisibleInner(boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.view.menu.MenuBuilder.setShortcutsVisibleInner(boolean):void");
     }
 
     public boolean isShortcutsVisible() {
@@ -624,12 +655,20 @@ public class MenuBuilder implements Menu {
         for (int i = 0; i < N; i++) {
             MenuItemImpl item = this.mItems.get(i);
             if (item.hasSubMenu()) {
-                ((MenuBuilder) item.getSubMenu()).findItemsWithShortcutForKey(items, keyCode, event);
+                ((MenuBuilder) item.getSubMenu())
+                        .findItemsWithShortcutForKey(items, keyCode, event);
             }
             char shortcutChar = qwerty ? item.getAlphabeticShortcut() : item.getNumericShortcut();
-            int shortcutModifiers = qwerty ? item.getAlphabeticModifiers() : item.getNumericModifiers();
-            boolean isModifiersExactMatch = (modifierState & Menu.SUPPORTED_MODIFIERS_MASK) == (69647 & shortcutModifiers);
-            if (isModifiersExactMatch && shortcutChar != 0 && ((shortcutChar == possibleChars.meta[0] || shortcutChar == possibleChars.meta[2] || (qwerty && shortcutChar == '\b' && keyCode == 67)) && item.isEnabled())) {
+            int shortcutModifiers =
+                    qwerty ? item.getAlphabeticModifiers() : item.getNumericModifiers();
+            boolean isModifiersExactMatch =
+                    (modifierState & Menu.SUPPORTED_MODIFIERS_MASK) == (69647 & shortcutModifiers);
+            if (isModifiersExactMatch
+                    && shortcutChar != 0
+                    && ((shortcutChar == possibleChars.meta[0]
+                                    || shortcutChar == possibleChars.meta[2]
+                                    || (qwerty && shortcutChar == '\b' && keyCode == 67))
+                            && item.isEnabled())) {
                 items.add(item);
             }
         }
@@ -653,7 +692,9 @@ public class MenuBuilder implements Menu {
         for (int i = 0; i < size; i++) {
             MenuItemImpl item = items.get(i);
             char shortcutChar = qwerty ? item.getAlphabeticShortcut() : item.getNumericShortcut();
-            if ((shortcutChar == possibleChars.meta[0] && (metaState & 2) == 0) || ((shortcutChar == possibleChars.meta[2] && (metaState & 2) != 0) || (qwerty && shortcutChar == '\b' && keyCode == 67))) {
+            if ((shortcutChar == possibleChars.meta[0] && (metaState & 2) == 0)
+                    || ((shortcutChar == possibleChars.meta[2] && (metaState & 2) != 0)
+                            || (qwerty && shortcutChar == '\b' && keyCode == 67))) {
                 return item;
             }
         }
@@ -833,7 +874,8 @@ public class MenuBuilder implements Menu {
         onItemsChanged(false);
     }
 
-    private void setHeaderInternal(int titleRes, CharSequence title, int iconRes, Drawable icon, View view) {
+    private void setHeaderInternal(
+            int titleRes, CharSequence title, int iconRes, Drawable icon, View view) {
         Resources r = getResources();
         if (view != null) {
             this.mHeaderView = view;

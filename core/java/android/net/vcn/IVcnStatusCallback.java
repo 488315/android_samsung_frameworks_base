@@ -10,18 +10,22 @@ import android.os.RemoteException;
 public interface IVcnStatusCallback extends IInterface {
     public static final String DESCRIPTOR = "android.net.vcn.IVcnStatusCallback";
 
-    void onGatewayConnectionError(String str, int i, String str2, String str3) throws RemoteException;
+    void onGatewayConnectionError(String str, int i, String str2, String str3)
+            throws RemoteException;
 
     void onVcnStatusChanged(int i) throws RemoteException;
 
     public static class Default implements IVcnStatusCallback {
         @Override // android.net.vcn.IVcnStatusCallback
-        public void onVcnStatusChanged(int statusCode) throws RemoteException {
-        }
+        public void onVcnStatusChanged(int statusCode) throws RemoteException {}
 
         @Override // android.net.vcn.IVcnStatusCallback
-        public void onGatewayConnectionError(String gatewayConnectionName, int errorCode, String exceptionClass, String exceptionMessage) throws RemoteException {
-        }
+        public void onGatewayConnectionError(
+                String gatewayConnectionName,
+                int errorCode,
+                String exceptionClass,
+                String exceptionMessage)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +33,7 @@ public interface IVcnStatusCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVcnStatusCallback {
+    public abstract static class Stub extends Binder implements IVcnStatusCallback {
         static final int TRANSACTION_onGatewayConnectionError = 2;
         static final int TRANSACTION_onVcnStatusChanged = 1;
 
@@ -70,7 +74,8 @@ public interface IVcnStatusCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVcnStatusCallback.DESCRIPTOR);
             }
@@ -126,7 +131,12 @@ public interface IVcnStatusCallback extends IInterface {
             }
 
             @Override // android.net.vcn.IVcnStatusCallback
-            public void onGatewayConnectionError(String gatewayConnectionName, int errorCode, String exceptionClass, String exceptionMessage) throws RemoteException {
+            public void onGatewayConnectionError(
+                    String gatewayConnectionName,
+                    int errorCode,
+                    String exceptionClass,
+                    String exceptionMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IVcnStatusCallback.DESCRIPTOR);

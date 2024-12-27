@@ -3,6 +3,7 @@ package com.samsung.android.speech;
 import android.content.Context;
 import android.service.notification.ZenModeConfig;
 import android.telecom.Logging.Session;
+
 import com.samsung.android.content.smartclip.SemSmartClipDataRepository;
 
 /* loaded from: classes6.dex */
@@ -49,11 +50,48 @@ public class Config {
     public static final String PDT_SO_FILE_PATH_64 = "/system/lib64/libVoiceCommandEngine.so";
     public static final String SAMSUNG_SO_FILE_PATH = "/system/lib/libsasr-jni.so";
     public static final String VERSION = "18.11.13";
-    private static final String[] MODELS_SAMSUNG = {"models_16k_KOR.bin", "models_hci_daco.bin", "models_16k_CHI.bin", "models_16k_ESP.bin", "models_16k_FRA.bin", "models_16k_GER.bin", "models_16k_ITA.bin", "models_16k_JAPANESE_bi.bin", "models_16k_RUSSIAN_bi.bin", "models_hci_daco.bin", "models_hci_daco.bin", "models_16k_ESP.bin", "models_hci_daco.bin", "models_hci_daco.bin", "models_hci_daco.bin"};
-    private static final String[] STRING_SAMSUNG = {"kor", "eng", "chi", "spa", "fra", "ger", "ita", "jap", "rus", "eng", "eng", "spa", "chi", "chi", "chi"};
-    private static final String[] STRING_LANGUAGE = {"ko_kr", "en_us", "zh_cn", "es_es", "fr_fr", "de_de", "it_it", "ja_jp", "ru_ru", "pt_br", "en_uk", "es_la", "zh_tw", "zh_hk", "zh_sg"};
-    private static final String[] STRING_DOMAIN = {"stop", ZenModeConfig.SCHEDULE_PATH, "call", "alarm", SemSmartClipDataRepository.CONTENT_TYPE_AUDIO, "radio", "video", Context.CAMERA_SERVICE, "gallery", "cancel", "yesno"};
-    private static final String[] STRING_LOCALE = {"ko-KR", "en-US", "zh-CN", "es-ES", "fr-FR", "de-DE", "it-IT", "ja-JP", "ru-RU", "pt-BR", "en-UK", "es-LA", "zh-TW", "zh-HK", "zh-SG"};
+    private static final String[] MODELS_SAMSUNG = {
+        "models_16k_KOR.bin",
+        "models_hci_daco.bin",
+        "models_16k_CHI.bin",
+        "models_16k_ESP.bin",
+        "models_16k_FRA.bin",
+        "models_16k_GER.bin",
+        "models_16k_ITA.bin",
+        "models_16k_JAPANESE_bi.bin",
+        "models_16k_RUSSIAN_bi.bin",
+        "models_hci_daco.bin",
+        "models_hci_daco.bin",
+        "models_16k_ESP.bin",
+        "models_hci_daco.bin",
+        "models_hci_daco.bin",
+        "models_hci_daco.bin"
+    };
+    private static final String[] STRING_SAMSUNG = {
+        "kor", "eng", "chi", "spa", "fra", "ger", "ita", "jap", "rus", "eng", "eng", "spa", "chi",
+        "chi", "chi"
+    };
+    private static final String[] STRING_LANGUAGE = {
+        "ko_kr", "en_us", "zh_cn", "es_es", "fr_fr", "de_de", "it_it", "ja_jp", "ru_ru", "pt_br",
+        "en_uk", "es_la", "zh_tw", "zh_hk", "zh_sg"
+    };
+    private static final String[] STRING_DOMAIN = {
+        "stop",
+        ZenModeConfig.SCHEDULE_PATH,
+        "call",
+        "alarm",
+        SemSmartClipDataRepository.CONTENT_TYPE_AUDIO,
+        "radio",
+        "video",
+        Context.CAMERA_SERVICE,
+        "gallery",
+        "cancel",
+        "yesno"
+    };
+    private static final String[] STRING_LOCALE = {
+        "ko-KR", "en-US", "zh-CN", "es-ES", "fr-FR", "de-DE", "it-IT", "ja-JP", "ru-RU", "pt-BR",
+        "en-UK", "es-LA", "zh-TW", "zh-HK", "zh-SG"
+    };
 
     public static String GetPDTAM(int language, int domain) {
         if (language >= 15) {
@@ -62,7 +100,12 @@ public class Config {
         if (domain < 11) {
             String PDTModelLangauge = STRING_LANGUAGE[language];
             String PDTModelDomain = STRING_DOMAIN[domain];
-            return DEFAULT_PDT_PATH + PDTModelLangauge + "/samsung_voicecommand_" + PDTModelDomain + Session.SESSION_SEPARATION_CHAR_CHILD + PDTModelLangauge;
+            return DEFAULT_PDT_PATH
+                    + PDTModelLangauge
+                    + "/samsung_voicecommand_"
+                    + PDTModelDomain
+                    + Session.SESSION_SEPARATION_CHAR_CHILD
+                    + PDTModelLangauge;
         }
         return null;
     }
@@ -74,7 +117,12 @@ public class Config {
         if (domain < 11) {
             String OEMModelLangauge = STRING_LANGUAGE[language];
             String OEMModelDomain = STRING_DOMAIN[domain];
-            return DEFAULT_OEM_PATH + OEMModelLangauge + "/samsung_voicecommand_" + OEMModelDomain + Session.SESSION_SEPARATION_CHAR_CHILD + OEMModelLangauge;
+            return DEFAULT_OEM_PATH
+                    + OEMModelLangauge
+                    + "/samsung_voicecommand_"
+                    + OEMModelDomain
+                    + Session.SESSION_SEPARATION_CHAR_CHILD
+                    + OEMModelLangauge;
         }
         return null;
     }

@@ -19,8 +19,7 @@ public class TimeFilter implements AutoCloseable {
 
     private native int nativeSetTimestamp(long j);
 
-    private TimeFilter() {
-    }
+    private TimeFilter() {}
 
     public int setCurrentTimestamp(long timestamp) {
         int res = nativeSetTimestamp(timestamp);

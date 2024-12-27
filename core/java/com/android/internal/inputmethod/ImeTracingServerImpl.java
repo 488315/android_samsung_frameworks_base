@@ -5,8 +5,9 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
 import android.view.inputmethod.InputMethodManager;
-import com.android.internal.inputmethod.ImeTracing;
+
 import com.android.internal.util.TraceBuffer;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,14 +25,15 @@ class ImeTracingServerImpl extends ImeTracing {
     private static final String TRACE_FILENAME_IMS = "ime_trace_service.winscope";
     private final Object mEnabledLock = new Object();
     private final TraceBuffer mBufferClients = new TraceBuffer(4194304);
-    private final File mTraceFileClients = new File("/data/misc/wmtrace/ime_trace_clients.winscope");
+    private final File mTraceFileClients =
+            new File("/data/misc/wmtrace/ime_trace_clients.winscope");
     private final TraceBuffer mBufferIms = new TraceBuffer(4194304);
     private final File mTraceFileIms = new File("/data/misc/wmtrace/ime_trace_service.winscope");
     private final TraceBuffer mBufferImms = new TraceBuffer(4194304);
-    private final File mTraceFileImms = new File("/data/misc/wmtrace/ime_trace_managerservice.winscope");
+    private final File mTraceFileImms =
+            new File("/data/misc/wmtrace/ime_trace_managerservice.winscope");
 
-    ImeTracingServerImpl() {
-    }
+    ImeTracingServerImpl() {}
 
     @Override // com.android.internal.inputmethod.ImeTracing
     public void addToBuffer(ProtoOutputStream proto, int source) {
@@ -54,12 +56,10 @@ class ImeTracingServerImpl extends ImeTracing {
     }
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void triggerClientDump(String where, InputMethodManager immInstance, byte[] icProto) {
-    }
+    public void triggerClientDump(String where, InputMethodManager immInstance, byte[] icProto) {}
 
     @Override // com.android.internal.inputmethod.ImeTracing
-    public void triggerServiceDump(String where, ImeTracing.ServiceDumper dumper, byte[] icProto) {
-    }
+    public void triggerServiceDump(String where, ImeTracing.ServiceDumper dumper, byte[] icProto) {}
 
     @Override // com.android.internal.inputmethod.ImeTracing
     public void triggerManagerServiceDump(String where, ImeTracing.ServiceDumper dumper) {
@@ -81,7 +81,9 @@ class ImeTracingServerImpl extends ImeTracing {
 
     private void writeTracesToFilesLocked() {
         try {
-            long timeOffsetNs = TimeUnit.MILLISECONDS.toNanos(System.currentTimeMillis()) - SystemClock.elapsedRealtimeNanos();
+            long timeOffsetNs =
+                    TimeUnit.MILLISECONDS.toNanos(System.currentTimeMillis())
+                            - SystemClock.elapsedRealtimeNanos();
             ProtoOutputStream clientsProto = new ProtoOutputStream();
             clientsProto.write(1125281431553L, MAGIC_NUMBER_CLIENTS_VALUE);
             clientsProto.write(1125281431555L, timeOffsetNs);
@@ -111,7 +113,10 @@ class ImeTracingServerImpl extends ImeTracing {
                 Log.w("imeTracing", "Warn: Tracing is already started.");
                 return;
             }
-            logAndPrintln(pw, "Starting tracing in /data/misc/wmtrace/: ime_trace_clients.winscope, ime_trace_service.winscope, ime_trace_managerservice.winscope");
+            logAndPrintln(
+                    pw,
+                    "Starting tracing in /data/misc/wmtrace/: ime_trace_clients.winscope,"
+                        + " ime_trace_service.winscope, ime_trace_managerservice.winscope");
             sEnabled = true;
             resetBuffers();
         }
@@ -125,7 +130,11 @@ class ImeTracingServerImpl extends ImeTracing {
         }
         synchronized (this.mEnabledLock) {
             if (isAvailable() && isEnabled()) {
-                logAndPrintln(pw, "Stopping tracing and writing traces in /data/misc/wmtrace/: ime_trace_clients.winscope, ime_trace_service.winscope, ime_trace_managerservice.winscope");
+                logAndPrintln(
+                        pw,
+                        "Stopping tracing and writing traces in /data/misc/wmtrace/:"
+                            + " ime_trace_clients.winscope, ime_trace_service.winscope,"
+                            + " ime_trace_managerservice.winscope");
                 sEnabled = false;
                 writeTracesToFilesLocked();
                 return;
@@ -142,7 +151,10 @@ class ImeTracingServerImpl extends ImeTracing {
         synchronized (this.mEnabledLock) {
             if (isAvailable() && isEnabled()) {
                 sEnabled = false;
-                logAndPrintln(pw, "Writing traces in /data/misc/wmtrace/: ime_trace_clients.winscope, ime_trace_service.winscope, ime_trace_managerservice.winscope");
+                logAndPrintln(
+                        pw,
+                        "Writing traces in /data/misc/wmtrace/: ime_trace_clients.winscope,"
+                            + " ime_trace_service.winscope, ime_trace_managerservice.winscope");
                 writeTracesToFilesLocked();
                 sEnabled = true;
             }

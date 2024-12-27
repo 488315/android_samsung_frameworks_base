@@ -1,7 +1,7 @@
 package android.app;
 
-import android.app.ConfigurationChangedListenerController;
 import android.os.IBinder;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -12,8 +12,7 @@ class ConfigurationChangedListenerController {
     private final Object mLock = new Object();
     private final List<ListenerContainer> mListenerContainers = new ArrayList();
 
-    ConfigurationChangedListenerController() {
-    }
+    ConfigurationChangedListenerController() {}
 
     void addListener(Executor executor, Consumer<IBinder> consumer) {
         synchronized (this.mLock) {
@@ -72,12 +71,15 @@ class ConfigurationChangedListenerController {
         }
 
         public void accept(final IBinder activityToken) {
-            this.mExecutor.execute(new Runnable() { // from class: android.app.ConfigurationChangedListenerController$ListenerContainer$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ConfigurationChangedListenerController.ListenerContainer.this.lambda$accept$0(activityToken);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.app.ConfigurationChangedListenerController$ListenerContainer$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ConfigurationChangedListenerController.ListenerContainer.this
+                                    .lambda$accept$0(activityToken);
+                        }
+                    });
         }
     }
 }

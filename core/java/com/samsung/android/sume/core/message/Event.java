@@ -1,7 +1,9 @@
 package com.samsung.android.sume.core.message;
 
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
+
 import java.util.Map;
 
 /* loaded from: classes6.dex */

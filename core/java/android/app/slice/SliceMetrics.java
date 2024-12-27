@@ -3,6 +3,7 @@ package android.app.slice;
 import android.content.Context;
 import android.metrics.LogMaker;
 import android.net.Uri;
+
 import com.android.internal.logging.MetricsLogger;
 
 @Deprecated
@@ -33,7 +34,11 @@ public class SliceMetrics {
 
     public void logTouch(int actionType, Uri subSlice) {
         synchronized (this.mLogMaker) {
-            this.mLogMaker.setCategory(1401).setType(4).addTaggedData(1404, subSlice.getAuthority()).addTaggedData(1405, subSlice.getPath());
+            this.mLogMaker
+                    .setCategory(1401)
+                    .setType(4)
+                    .addTaggedData(1404, subSlice.getAuthority())
+                    .addTaggedData(1405, subSlice.getPath());
             this.mMetricsLogger.write(this.mLogMaker);
         }
     }

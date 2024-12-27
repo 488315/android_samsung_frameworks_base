@@ -10,10 +10,16 @@ import android.text.TextUtils;
 import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
+
+import libcore.io.IoUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,8 +28,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -36,44 +40,60 @@ public final class PersistentDataStore {
     public boolean mParentalControlsEnabledChanged;
     public final Handler mHandler = new Handler();
     public final List mBlockedRatings = Collections.synchronizedList(new ArrayList());
-    public final AnonymousClass1 mSaveRunnable = new Runnable() { // from class: com.android.server.tv.PersistentDataStore.1
-        @Override // java.lang.Runnable
-        public final void run() {
-            PersistentDataStore persistentDataStore = PersistentDataStore.this;
-            persistentDataStore.getClass();
-            try {
-                FileOutputStream startWrite = persistentDataStore.mAtomicFile.startWrite();
-                try {
-                    TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(startWrite);
-                    persistentDataStore.saveToXml(resolveSerializer);
-                    resolveSerializer.flush();
-                    persistentDataStore.mAtomicFile.finishWrite(startWrite);
-                    if (persistentDataStore.mParentalControlsEnabledChanged) {
-                        persistentDataStore.mParentalControlsEnabledChanged = false;
-                        persistentDataStore.mContext.sendBroadcastAsUser(new Intent("android.media.tv.action.PARENTAL_CONTROLS_ENABLED_CHANGED"), UserHandle.ALL);
+    public final AnonymousClass1 mSaveRunnable =
+            new Runnable() { // from class: com.android.server.tv.PersistentDataStore.1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    PersistentDataStore persistentDataStore = PersistentDataStore.this;
+                    persistentDataStore.getClass();
+                    try {
+                        FileOutputStream startWrite = persistentDataStore.mAtomicFile.startWrite();
+                        try {
+                            TypedXmlSerializer resolveSerializer =
+                                    Xml.resolveSerializer(startWrite);
+                            persistentDataStore.saveToXml(resolveSerializer);
+                            resolveSerializer.flush();
+                            persistentDataStore.mAtomicFile.finishWrite(startWrite);
+                            if (persistentDataStore.mParentalControlsEnabledChanged) {
+                                persistentDataStore.mParentalControlsEnabledChanged = false;
+                                persistentDataStore.mContext.sendBroadcastAsUser(
+                                        new Intent(
+                                                "android.media.tv.action.PARENTAL_CONTROLS_ENABLED_CHANGED"),
+                                        UserHandle.ALL);
+                            }
+                            if (persistentDataStore.mBlockedRatingsChanged) {
+                                persistentDataStore.mBlockedRatingsChanged = false;
+                                persistentDataStore.mContext.sendBroadcastAsUser(
+                                        new Intent(
+                                                "android.media.tv.action.BLOCKED_RATINGS_CHANGED"),
+                                        UserHandle.ALL);
+                            }
+                        } catch (Throwable th) {
+                            persistentDataStore.mAtomicFile.failWrite(startWrite);
+                            throw th;
+                        }
+                    } catch (IOException e) {
+                        Slog.w(
+                                "TvInputManagerService",
+                                "Failed to save tv input manager persistent store data.",
+                                e);
                     }
-                    if (persistentDataStore.mBlockedRatingsChanged) {
-                        persistentDataStore.mBlockedRatingsChanged = false;
-                        persistentDataStore.mContext.sendBroadcastAsUser(new Intent("android.media.tv.action.BLOCKED_RATINGS_CHANGED"), UserHandle.ALL);
-                    }
-                } catch (Throwable th) {
-                    persistentDataStore.mAtomicFile.failWrite(startWrite);
-                    throw th;
                 }
-            } catch (IOException e) {
-                Slog.w("TvInputManagerService", "Failed to save tv input manager persistent store data.", e);
-            }
-        }
-    };
+            };
 
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.tv.PersistentDataStore$1] */
     public PersistentDataStore(Context context, int i) {
         this.mContext = context;
         File userSystemDirectory = Environment.getUserSystemDirectory(i);
         if (!userSystemDirectory.exists() && !userSystemDirectory.mkdirs()) {
-            throw new IllegalStateException(AccountManagerService$$ExternalSyntheticOutline0.m(userSystemDirectory, "User dir cannot be created: "));
+            throw new IllegalStateException(
+                    AccountManagerService$$ExternalSyntheticOutline0.m(
+                            userSystemDirectory, "User dir cannot be created: "));
         }
-        this.mAtomicFile = new AtomicFile(new File(userSystemDirectory, "tv-input-manager-state.xml"), "tv-input-state");
+        this.mAtomicFile =
+                new AtomicFile(
+                        new File(userSystemDirectory, "tv-input-manager-state.xml"),
+                        "tv-input-state");
     }
 
     public final void loadFromXml(TypedXmlPullParser typedXmlPullParser) {
@@ -84,15 +104,18 @@ public final class PersistentDataStore {
                 int depth2 = typedXmlPullParser.getDepth();
                 while (XmlUtils.nextElementWithin(typedXmlPullParser, depth2)) {
                     if (typedXmlPullParser.getName().equals("rating")) {
-                        String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "string");
+                        String attributeValue =
+                                typedXmlPullParser.getAttributeValue((String) null, "string");
                         if (TextUtils.isEmpty(attributeValue)) {
                             throw new XmlPullParserException("Missing string attribute on rating");
                         }
-                        this.mBlockedRatings.add(TvContentRating.unflattenFromString(attributeValue));
+                        this.mBlockedRatings.add(
+                                TvContentRating.unflattenFromString(attributeValue));
                     }
                 }
             } else if (typedXmlPullParser.getName().equals("parental-controls")) {
-                this.mParentalControlsEnabled = typedXmlPullParser.getAttributeBoolean((String) null, "enabled");
+                this.mParentalControlsEnabled =
+                        typedXmlPullParser.getAttributeBoolean((String) null, "enabled");
             }
         }
     }
@@ -112,7 +135,10 @@ public final class PersistentDataStore {
                     IoUtils.closeQuietly(openRead);
                 }
             } catch (IOException | XmlPullParserException e) {
-                Slog.w("TvInputManagerService", "Failed to load tv input manager persistent store data.", e);
+                Slog.w(
+                        "TvInputManagerService",
+                        "Failed to load tv input manager persistent store data.",
+                        e);
                 this.mBlockedRatings.clear();
                 this.mParentalControlsEnabled = false;
             }
@@ -123,14 +149,16 @@ public final class PersistentDataStore {
 
     public final void saveToXml(TypedXmlSerializer typedXmlSerializer) {
         typedXmlSerializer.startDocument((String) null, Boolean.TRUE);
-        typedXmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+        typedXmlSerializer.setFeature(
+                "http://xmlpull.org/v1/doc/features.html#indent-output", true);
         typedXmlSerializer.startTag((String) null, "tv-input-manager-state");
         typedXmlSerializer.startTag((String) null, "blocked-ratings");
         synchronized (this.mBlockedRatings) {
             try {
                 for (TvContentRating tvContentRating : this.mBlockedRatings) {
                     typedXmlSerializer.startTag((String) null, "rating");
-                    typedXmlSerializer.attribute((String) null, "string", tvContentRating.flattenToString());
+                    typedXmlSerializer.attribute(
+                            (String) null, "string", tvContentRating.flattenToString());
                     typedXmlSerializer.endTag((String) null, "rating");
                 }
             } catch (Throwable th) {
@@ -139,7 +167,8 @@ public final class PersistentDataStore {
         }
         typedXmlSerializer.endTag((String) null, "blocked-ratings");
         typedXmlSerializer.startTag((String) null, "parental-controls");
-        typedXmlSerializer.attributeBoolean((String) null, "enabled", this.mParentalControlsEnabled);
+        typedXmlSerializer.attributeBoolean(
+                (String) null, "enabled", this.mParentalControlsEnabled);
         typedXmlSerializer.endTag((String) null, "parental-controls");
         typedXmlSerializer.endTag((String) null, "tv-input-manager-state");
         typedXmlSerializer.endDocument();

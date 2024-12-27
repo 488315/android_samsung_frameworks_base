@@ -10,6 +10,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.crypto.params.DSAPublicKeyParameters;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -37,7 +38,11 @@ public class JDKDSAPublicKey implements DSAPublicKey {
 
     JDKDSAPublicKey(DSAPublicKeyParameters params) {
         this.y = params.getY();
-        this.dsaSpec = new DSAParameterSpec(params.getParameters().getP(), params.getParameters().getQ(), params.getParameters().getG());
+        this.dsaSpec =
+                new DSAParameterSpec(
+                        params.getParameters().getP(),
+                        params.getParameters().getQ(),
+                        params.getParameters().getG());
     }
 
     JDKDSAPublicKey(BigInteger y, DSAParameterSpec dsaSpec) {
@@ -76,9 +81,20 @@ public class JDKDSAPublicKey implements DSAPublicKey {
     public byte[] getEncoded() {
         try {
             if (this.dsaSpec == null) {
-                return new SubjectPublicKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.id_dsa), new ASN1Integer(this.y)).getEncoded(ASN1Encoding.DER);
+                return new SubjectPublicKeyInfo(
+                                new AlgorithmIdentifier(X9ObjectIdentifiers.id_dsa),
+                                new ASN1Integer(this.y))
+                        .getEncoded(ASN1Encoding.DER);
             }
-            return new SubjectPublicKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.id_dsa, new DSAParameter(this.dsaSpec.getP(), this.dsaSpec.getQ(), this.dsaSpec.getG())), new ASN1Integer(this.y)).getEncoded(ASN1Encoding.DER);
+            return new SubjectPublicKeyInfo(
+                            new AlgorithmIdentifier(
+                                    X9ObjectIdentifiers.id_dsa,
+                                    new DSAParameter(
+                                            this.dsaSpec.getP(),
+                                            this.dsaSpec.getQ(),
+                                            this.dsaSpec.getG())),
+                            new ASN1Integer(this.y))
+                    .getEncoded(ASN1Encoding.DER);
         } catch (IOException e) {
             return null;
         }
@@ -103,7 +119,8 @@ public class JDKDSAPublicKey implements DSAPublicKey {
     }
 
     public int hashCode() {
-        return ((getY().hashCode() ^ getParams().getG().hashCode()) ^ getParams().getP().hashCode()) ^ getParams().getQ().hashCode();
+        return ((getY().hashCode() ^ getParams().getG().hashCode()) ^ getParams().getP().hashCode())
+                ^ getParams().getQ().hashCode();
     }
 
     public boolean equals(Object o) {
@@ -111,12 +128,19 @@ public class JDKDSAPublicKey implements DSAPublicKey {
             return false;
         }
         DSAPublicKey other = (DSAPublicKey) o;
-        return getY().equals(other.getY()) && getParams().getG().equals(other.getParams().getG()) && getParams().getP().equals(other.getParams().getP()) && getParams().getQ().equals(other.getParams().getQ());
+        return getY().equals(other.getY())
+                && getParams().getG().equals(other.getParams().getG())
+                && getParams().getP().equals(other.getParams().getP())
+                && getParams().getQ().equals(other.getParams().getQ());
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         this.y = (BigInteger) in.readObject();
-        this.dsaSpec = new DSAParameterSpec((BigInteger) in.readObject(), (BigInteger) in.readObject(), (BigInteger) in.readObject());
+        this.dsaSpec =
+                new DSAParameterSpec(
+                        (BigInteger) in.readObject(),
+                        (BigInteger) in.readObject(),
+                        (BigInteger) in.readObject());
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {

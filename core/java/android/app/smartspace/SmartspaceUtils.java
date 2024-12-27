@@ -5,8 +5,7 @@ import android.text.TextUtils;
 
 /* loaded from: classes.dex */
 public final class SmartspaceUtils {
-    private SmartspaceUtils() {
-    }
+    private SmartspaceUtils() {}
 
     public static boolean isEmpty(Text text) {
         return text == null || TextUtils.isEmpty(text.getText());

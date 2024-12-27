@@ -1,6 +1,5 @@
 package android.hardware.biometrics;
 
-import android.hardware.biometrics.IBiometricStateListener;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -14,22 +13,17 @@ public abstract class BiometricStateListener extends IBiometricStateListener.Stu
     public static final int STATE_KEYGUARD_AUTH = 2;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Action {
-    }
+    public @interface Action {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-    }
+    public @interface State {}
 
     @Override // android.hardware.biometrics.IBiometricStateListener
-    public void onStateChanged(int newState) {
-    }
+    public void onStateChanged(int newState) {}
 
     @Override // android.hardware.biometrics.IBiometricStateListener
-    public void onBiometricAction(int action) {
-    }
+    public void onBiometricAction(int action) {}
 
     @Override // android.hardware.biometrics.IBiometricStateListener
-    public void onEnrollmentsChanged(int userId, int sensorId, boolean hasEnrollments) {
-    }
+    public void onEnrollmentsChanged(int userId, int sensorId, boolean hasEnrollments) {}
 }

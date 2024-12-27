@@ -10,10 +10,11 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.Parcelable;
 import android.os.RemoteException;
-import android.telephony.TelephonyScanManager;
 import android.util.SparseArray;
+
 import com.android.internal.telephony.ITelephony;
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -36,15 +37,12 @@ public final class TelephonyScanManager {
     private final Messenger mMessenger;
     private final SparseArray<NetworkScanInfo> mScanInfo = new SparseArray<>();
 
-    public static abstract class NetworkScanCallback {
-        public void onResults(List<CellInfo> results) {
-        }
+    public abstract static class NetworkScanCallback {
+        public void onResults(List<CellInfo> results) {}
 
-        public void onComplete() {
-        }
+        public void onComplete() {}
 
-        public void onError(int error) {
-        }
+        public void onError(int error) {}
     }
 
     private static class NetworkScanInfo {
@@ -52,7 +50,8 @@ public final class TelephonyScanManager {
         private final Executor mExecutor;
         private final NetworkScanRequest mRequest;
 
-        NetworkScanInfo(NetworkScanRequest request, Executor executor, NetworkScanCallback callback) {
+        NetworkScanInfo(
+                NetworkScanRequest request, Executor executor, NetworkScanCallback callback) {
             this.mRequest = request;
             this.mExecutor = executor;
             this.mCallback = callback;
@@ -65,12 +64,14 @@ public final class TelephonyScanManager {
         this.mLooper = thread.getLooper();
         this.mHandler = new AnonymousClass1(this.mLooper);
         this.mMessenger = new Messenger(this.mHandler);
-        this.mDeathRecipient = new IBinder.DeathRecipient() { // from class: android.telephony.TelephonyScanManager.2
-            @Override // android.os.IBinder.DeathRecipient
-            public void binderDied() {
-                TelephonyScanManager.this.mHandler.obtainMessage(5).sendToTarget();
-            }
-        };
+        this.mDeathRecipient =
+                new IBinder
+                        .DeathRecipient() { // from class: android.telephony.TelephonyScanManager.2
+                    @Override // android.os.IBinder.DeathRecipient
+                    public void binderDied() {
+                        TelephonyScanManager.this.mHandler.obtainMessage(5).sendToTarget();
+                    }
+                };
     }
 
     /* renamed from: android.telephony.TelephonyScanManager$1, reason: invalid class name */
@@ -86,18 +87,22 @@ public final class TelephonyScanManager {
             if (message.what == 5) {
                 synchronized (TelephonyScanManager.this.mScanInfo) {
                     for (int i = 0; i < TelephonyScanManager.this.mScanInfo.size(); i++) {
-                        NetworkScanInfo nsi2 = (NetworkScanInfo) TelephonyScanManager.this.mScanInfo.valueAt(i);
+                        NetworkScanInfo nsi2 =
+                                (NetworkScanInfo) TelephonyScanManager.this.mScanInfo.valueAt(i);
                         if (nsi2 != null) {
                             Executor e = nsi2.mExecutor;
                             final NetworkScanCallback cb = nsi2.mCallback;
                             if (e != null && cb != null) {
                                 try {
-                                    e.execute(new Runnable() { // from class: android.telephony.TelephonyScanManager$1$$ExternalSyntheticLambda0
-                                        @Override // java.lang.Runnable
-                                        public final void run() {
-                                            TelephonyScanManager.NetworkScanCallback.this.onError(3);
-                                        }
-                                    });
+                                    e.execute(
+                                            new Runnable() { // from class:
+                                                             // android.telephony.TelephonyScanManager$1$$ExternalSyntheticLambda0
+                                                @Override // java.lang.Runnable
+                                                public final void run() {
+                                                    TelephonyScanManager.NetworkScanCallback.this
+                                                            .onError(3);
+                                                }
+                                            });
                                 } catch (RejectedExecutionException e2) {
                                 }
                             }
@@ -111,7 +116,12 @@ public final class TelephonyScanManager {
                 nsi = (NetworkScanInfo) TelephonyScanManager.this.mScanInfo.get(message.arg2);
             }
             if (nsi == null) {
-                com.android.telephony.Rlog.e(TelephonyScanManager.TAG, "Unexpceted message " + message.what + " as there is no NetworkScanInfo with id " + message.arg2);
+                com.android.telephony.Rlog.e(
+                        TelephonyScanManager.TAG,
+                        "Unexpceted message "
+                                + message.what
+                                + " as there is no NetworkScanInfo with id "
+                                + message.arg2);
                 return;
             }
             final NetworkScanCallback callback = nsi.mCallback;
@@ -121,67 +131,91 @@ public final class TelephonyScanManager {
                 case 4:
                     try {
                         Bundle b = message.getData();
-                        Parcelable[] parcelables = b.getParcelableArray(TelephonyScanManager.SCAN_RESULT_KEY);
+                        Parcelable[] parcelables =
+                                b.getParcelableArray(TelephonyScanManager.SCAN_RESULT_KEY);
                         final CellInfo[] ci = new CellInfo[parcelables.length];
                         for (int i2 = 0; i2 < parcelables.length; i2++) {
                             ci[i2] = (CellInfo) parcelables[i2];
                         }
-                        executor.execute(new Runnable() { // from class: android.telephony.TelephonyScanManager$1$$ExternalSyntheticLambda1
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                TelephonyScanManager.AnonymousClass1.lambda$handleMessage$1(ci, callback);
-                            }
-                        });
+                        executor.execute(
+                                new Runnable() { // from class:
+                                                 // android.telephony.TelephonyScanManager$1$$ExternalSyntheticLambda1
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        TelephonyScanManager.AnonymousClass1.lambda$handleMessage$1(
+                                                ci, callback);
+                                    }
+                                });
                         return;
                     } catch (Exception e3) {
-                        com.android.telephony.Rlog.e(TelephonyScanManager.TAG, "Exception in networkscan callback onResults", e3);
+                        com.android.telephony.Rlog.e(
+                                TelephonyScanManager.TAG,
+                                "Exception in networkscan callback onResults",
+                                e3);
                         return;
                     }
                 case 2:
                     try {
                         final int errorCode = message.arg1;
-                        executor.execute(new Runnable() { // from class: android.telephony.TelephonyScanManager$1$$ExternalSyntheticLambda2
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                TelephonyScanManager.AnonymousClass1.lambda$handleMessage$2(errorCode, callback);
-                            }
-                        });
+                        executor.execute(
+                                new Runnable() { // from class:
+                                                 // android.telephony.TelephonyScanManager$1$$ExternalSyntheticLambda2
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        TelephonyScanManager.AnonymousClass1.lambda$handleMessage$2(
+                                                errorCode, callback);
+                                    }
+                                });
                         synchronized (TelephonyScanManager.this.mScanInfo) {
                             TelephonyScanManager.this.mScanInfo.remove(message.arg2);
                         }
                         return;
                     } catch (Exception e4) {
-                        com.android.telephony.Rlog.e(TelephonyScanManager.TAG, "Exception in networkscan callback onError", e4);
+                        com.android.telephony.Rlog.e(
+                                TelephonyScanManager.TAG,
+                                "Exception in networkscan callback onError",
+                                e4);
                         return;
                     }
                 case 3:
                     try {
-                        executor.execute(new Runnable() { // from class: android.telephony.TelephonyScanManager$1$$ExternalSyntheticLambda3
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                TelephonyScanManager.AnonymousClass1.lambda$handleMessage$3(TelephonyScanManager.NetworkScanCallback.this);
-                            }
-                        });
+                        executor.execute(
+                                new Runnable() { // from class:
+                                                 // android.telephony.TelephonyScanManager$1$$ExternalSyntheticLambda3
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        TelephonyScanManager.AnonymousClass1.lambda$handleMessage$3(
+                                                TelephonyScanManager.NetworkScanCallback.this);
+                                    }
+                                });
                         synchronized (TelephonyScanManager.this.mScanInfo) {
                             TelephonyScanManager.this.mScanInfo.remove(message.arg2);
                         }
                         return;
                     } catch (Exception e5) {
-                        com.android.telephony.Rlog.e(TelephonyScanManager.TAG, "Exception in networkscan callback onComplete", e5);
+                        com.android.telephony.Rlog.e(
+                                TelephonyScanManager.TAG,
+                                "Exception in networkscan callback onComplete",
+                                e5);
                         return;
                     }
                 default:
-                    com.android.telephony.Rlog.e(TelephonyScanManager.TAG, "Unhandled message " + Integer.toHexString(message.what));
+                    com.android.telephony.Rlog.e(
+                            TelephonyScanManager.TAG,
+                            "Unhandled message " + Integer.toHexString(message.what));
                     return;
             }
         }
 
-        static /* synthetic */ void lambda$handleMessage$1(CellInfo[] ci, NetworkScanCallback callback) {
-            com.android.telephony.Rlog.d(TelephonyScanManager.TAG, "onResults: " + Arrays.toString(ci));
+        static /* synthetic */ void lambda$handleMessage$1(
+                CellInfo[] ci, NetworkScanCallback callback) {
+            com.android.telephony.Rlog.d(
+                    TelephonyScanManager.TAG, "onResults: " + Arrays.toString(ci));
             callback.onResults(Arrays.asList(ci));
         }
 
-        static /* synthetic */ void lambda$handleMessage$2(int errorCode, NetworkScanCallback callback) {
+        static /* synthetic */ void lambda$handleMessage$2(
+                int errorCode, NetworkScanCallback callback) {
             com.android.telephony.Rlog.d(TelephonyScanManager.TAG, "onError: " + errorCode);
             callback.onError(errorCode);
         }
@@ -192,7 +226,14 @@ public final class TelephonyScanManager {
         }
     }
 
-    public NetworkScan requestNetworkScan(int subId, boolean renounceFineLocationAccess, NetworkScanRequest request, Executor executor, NetworkScanCallback callback, String callingPackage, String callingFeatureId) {
+    public NetworkScan requestNetworkScan(
+            int subId,
+            boolean renounceFineLocationAccess,
+            NetworkScanRequest request,
+            Executor executor,
+            NetworkScanCallback callback,
+            String callingPackage,
+            String callingFeatureId) {
         try {
             Objects.requireNonNull(request, "Request was null");
             Objects.requireNonNull(callback, "Callback was null");
@@ -204,7 +245,15 @@ public final class TelephonyScanManager {
             try {
                 synchronized (this.mScanInfo) {
                     try {
-                        int scanId = telephony.requestNetworkScan(subId, renounceFineLocationAccess, request, this.mMessenger, new Binder(), callingPackage, callingFeatureId);
+                        int scanId =
+                                telephony.requestNetworkScan(
+                                        subId,
+                                        renounceFineLocationAccess,
+                                        request,
+                                        this.mMessenger,
+                                        new Binder(),
+                                        callingPackage,
+                                        callingFeatureId);
                         if (scanId != -1) {
                             telephony.asBinder().linkToDeath(this.mDeathRecipient, 0);
                             saveScanInfo(scanId, request, executor, callback);
@@ -218,7 +267,8 @@ public final class TelephonyScanManager {
                             throw th;
                         } catch (RemoteException e) {
                             ex = e;
-                            com.android.telephony.Rlog.e(TAG, "requestNetworkScan RemoteException", ex);
+                            com.android.telephony.Rlog.e(
+                                    TAG, "requestNetworkScan RemoteException", ex);
                             return null;
                         } catch (NullPointerException e2) {
                             ex = e2;
@@ -237,11 +287,15 @@ public final class TelephonyScanManager {
         }
     }
 
-    private void saveScanInfo(int id, NetworkScanRequest request, Executor executor, NetworkScanCallback callback) {
+    private void saveScanInfo(
+            int id, NetworkScanRequest request, Executor executor, NetworkScanCallback callback) {
         this.mScanInfo.put(id, new NetworkScanInfo(request, executor, callback));
     }
 
     private ITelephony getITelephony() {
-        return ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+        return ITelephony.Stub.asInterface(
+                TelephonyFrameworkInitializer.getTelephonyServiceManager()
+                        .getTelephonyServiceRegisterer()
+                        .get());
     }
 }

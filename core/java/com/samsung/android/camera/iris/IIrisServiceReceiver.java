@@ -26,32 +26,28 @@ public interface IIrisServiceReceiver extends IInterface {
 
     public static class Default implements IIrisServiceReceiver {
         @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
-        public void onEnrollResult(long deviceId, int irisId, int groupId, int remaining) throws RemoteException {
-        }
+        public void onEnrollResult(long deviceId, int irisId, int groupId, int remaining)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
-        public void onAcquired(long deviceId, int acquiredInfo) throws RemoteException {
-        }
+        public void onAcquired(long deviceId, int acquiredInfo) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
-        public void onAuthenticationSucceeded(long deviceId, Iris ir, byte[] fidoResultData) throws RemoteException {
-        }
+        public void onAuthenticationSucceeded(long deviceId, Iris ir, byte[] fidoResultData)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
-        public void onAuthenticationFailed(long deviceId) throws RemoteException {
-        }
+        public void onAuthenticationFailed(long deviceId) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
-        public void onError(long deviceId, int error) throws RemoteException {
-        }
+        public void onError(long deviceId, int error) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
-        public void onRemoved(long deviceId, int irisId, int groupId) throws RemoteException {
-        }
+        public void onRemoved(long deviceId, int irisId, int groupId) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
-        public void onIRImage(long deviceId, byte[] irisImage, int width, int height) throws RemoteException {
-        }
+        public void onIRImage(long deviceId, byte[] irisImage, int width, int height)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -59,7 +55,7 @@ public interface IIrisServiceReceiver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIrisServiceReceiver {
+    public abstract static class Stub extends Binder implements IIrisServiceReceiver {
         static final int TRANSACTION_onAcquired = 2;
         static final int TRANSACTION_onAuthenticationFailed = 4;
         static final int TRANSACTION_onAuthenticationSucceeded = 3;
@@ -115,7 +111,8 @@ public interface IIrisServiceReceiver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIrisServiceReceiver.DESCRIPTOR);
             }
@@ -193,7 +190,8 @@ public interface IIrisServiceReceiver extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
-            public void onEnrollResult(long deviceId, int irisId, int groupId, int remaining) throws RemoteException {
+            public void onEnrollResult(long deviceId, int irisId, int groupId, int remaining)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
@@ -221,7 +219,8 @@ public interface IIrisServiceReceiver extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
-            public void onAuthenticationSucceeded(long deviceId, Iris ir, byte[] fidoResultData) throws RemoteException {
+            public void onAuthenticationSucceeded(long deviceId, Iris ir, byte[] fidoResultData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);
@@ -274,7 +273,8 @@ public interface IIrisServiceReceiver extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisServiceReceiver
-            public void onIRImage(long deviceId, byte[] irisImage, int width, int height) throws RemoteException {
+            public void onIRImage(long deviceId, byte[] irisImage, int width, int height)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IIrisServiceReceiver.DESCRIPTOR);

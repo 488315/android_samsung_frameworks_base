@@ -1,5 +1,7 @@
 package com.android.server.locksettings.recoverablekeystore.certificate;
 
+import org.w3c.dom.Element;
+
 import java.security.cert.CertPath;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -7,7 +9,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import org.w3c.dom.Element;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -24,8 +25,15 @@ public final class CertXml {
 
     public static CertXml parse(byte[] bArr) {
         Element xmlRootNode = CertUtils.getXmlRootNode(bArr);
-        long parseLong = Long.parseLong((String) ((ArrayList) CertUtils.getXmlNodeContents(1, xmlRootNode, "metadata", "serial")).get(0));
-        List xmlNodeContents = CertUtils.getXmlNodeContents(0, xmlRootNode, "intermediates", "cert");
+        long parseLong =
+                Long.parseLong(
+                        (String)
+                                ((ArrayList)
+                                                CertUtils.getXmlNodeContents(
+                                                        1, xmlRootNode, "metadata", "serial"))
+                                        .get(0));
+        List xmlNodeContents =
+                CertUtils.getXmlNodeContents(0, xmlRootNode, "intermediates", "cert");
         ArrayList arrayList = new ArrayList();
         Iterator it = ((ArrayList) xmlNodeContents).iterator();
         while (it.hasNext()) {
@@ -49,7 +57,12 @@ public final class CertXml {
         return this.intermediateCerts;
     }
 
-    public CertPath getEndpointCert(int i, Date date, X509Certificate x509Certificate) throws CertValidationException {
-        return CertUtils.validateCert(date, x509Certificate, this.intermediateCerts, (X509Certificate) this.endpointCerts.get(i));
+    public CertPath getEndpointCert(int i, Date date, X509Certificate x509Certificate)
+            throws CertValidationException {
+        return CertUtils.validateCert(
+                date,
+                x509Certificate,
+                this.intermediateCerts,
+                (X509Certificate) this.endpointCerts.get(i));
     }
 }

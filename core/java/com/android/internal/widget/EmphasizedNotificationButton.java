@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.RemotableViewMethod;
 import android.widget.Button;
 import android.widget.RemoteViews;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -56,21 +57,33 @@ public class EmphasizedNotificationButton extends Button {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public EmphasizedNotificationButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public EmphasizedNotificationButton(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mGluedLayoutDirection = -1;
         this.mRipple = (RippleDrawable) getBackground();
         this.mRipple.mutate();
         DrawableWrapper inset = (DrawableWrapper) this.mRipple.getDrawable(0);
         this.mBackground = (GradientDrawable) inset.getDrawable();
-        this.mIconSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.notification_actions_icon_drawable_size);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, android.R.styleable.TextView, defStyleAttr, defStyleRes);
+        this.mIconSize =
+                this.mContext
+                        .getResources()
+                        .getDimensionPixelSize(R.dimen.notification_actions_icon_drawable_size);
+        TypedArray typedArray =
+                context.obtainStyledAttributes(
+                        attrs, android.R.styleable.TextView, defStyleAttr, defStyleRes);
         try {
             this.mInitialDrawablePadding = typedArray.getDimensionPixelSize(52, 0);
             if (typedArray != null) {
                 typedArray.close();
             }
-            Log.v(TAG, "iconSize = " + this.mIconSize + "px, initialDrawablePadding = " + this.mInitialDrawablePadding + "px");
+            Log.v(
+                    TAG,
+                    "iconSize = "
+                            + this.mIconSize
+                            + "px, initialDrawablePadding = "
+                            + this.mInitialDrawablePadding
+                            + "px");
         } catch (Throwable th) {
             if (typedArray != null) {
                 try {
@@ -104,7 +117,8 @@ public class EmphasizedNotificationButton extends Button {
     @RemotableViewMethod
     public Runnable setImageIconAsync(Icon icon) {
         final Drawable drawable = icon == null ? null : icon.loadDrawable(this.mContext);
-        return new Runnable() { // from class: com.android.internal.widget.EmphasizedNotificationButton$$ExternalSyntheticLambda0
+        return new Runnable() { // from class:
+                                // com.android.internal.widget.EmphasizedNotificationButton$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
                 EmphasizedNotificationButton.this.lambda$setImageIconAsync$0(drawable);
@@ -130,7 +144,8 @@ public class EmphasizedNotificationButton extends Button {
     @RemotableViewMethod
     public Runnable glueIconAsync(Icon icon) {
         final Drawable drawable = icon == null ? null : icon.loadDrawable(this.mContext);
-        return new Runnable() { // from class: com.android.internal.widget.EmphasizedNotificationButton$$ExternalSyntheticLambda2
+        return new Runnable() { // from class:
+                                // com.android.internal.widget.EmphasizedNotificationButton$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
                 EmphasizedNotificationButton.this.lambda$glueIconAsync$1(drawable);
@@ -167,7 +182,8 @@ public class EmphasizedNotificationButton extends Button {
 
     @RemotableViewMethod
     public Runnable glueLabelAsync(final CharSequence label) {
-        return new Runnable() { // from class: com.android.internal.widget.EmphasizedNotificationButton$$ExternalSyntheticLambda1
+        return new Runnable() { // from class:
+                                // com.android.internal.widget.EmphasizedNotificationButton$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
                 EmphasizedNotificationButton.this.lambda$glueLabelAsync$2(label);
@@ -190,7 +206,12 @@ public class EmphasizedNotificationButton extends Button {
     @Override // android.widget.TextView, android.view.View
     public void onRtlPropertiesChanged(int layoutDirection) {
         super.onRtlPropertiesChanged(layoutDirection);
-        Log.v(TAG, "onRtlPropertiesChanged: layoutDirection = " + layoutDirection + ", gluedLayoutDirection = " + this.mGluedLayoutDirection);
+        Log.v(
+                TAG,
+                "onRtlPropertiesChanged: layoutDirection = "
+                        + layoutDirection
+                        + ", gluedLayoutDirection = "
+                        + this.mGluedLayoutDirection);
         boolean alreadyGlued = this.mGluedLayoutDirection != -1;
         if (alreadyGlued && layoutDirection != this.mGluedLayoutDirection) {
             Log.d(TAG, "onRtlPropertiesChanged: layout direction changed; regluing");
@@ -214,7 +235,10 @@ public class EmphasizedNotificationButton extends Button {
         }
         int layoutDirection = getLayoutDirection();
         if (layoutDirection != 0 && layoutDirection != 1) {
-            Log.e(TAG, "glueIconAndLabelIfNeeded: resolved layout direction neither LTR nor RTL; doing nothing");
+            Log.e(
+                    TAG,
+                    "glueIconAndLabelIfNeeded: resolved layout direction neither LTR nor RTL; doing"
+                        + " nothing");
             return;
         }
         glueIconAndLabel(layoutDirection);
@@ -241,7 +265,18 @@ public class EmphasizedNotificationButton extends Button {
             return;
         }
         boolean rtlLayout = layoutDirection == 1;
-        Log.d(TAG, "glueIconAndLabel: icon = " + this.mIconToGlue + ", iconSize = " + this.mIconSize + "px, initialDrawablePadding = " + this.mInitialDrawablePadding + "px, labelToGlue.length = " + this.mLabelToGlue.length() + ", rtlLayout = " + rtlLayout);
+        Log.d(
+                TAG,
+                "glueIconAndLabel: icon = "
+                        + this.mIconToGlue
+                        + ", iconSize = "
+                        + this.mIconSize
+                        + "px, initialDrawablePadding = "
+                        + this.mInitialDrawablePadding
+                        + "px, labelToGlue.length = "
+                        + this.mLabelToGlue.length()
+                        + ", rtlLayout = "
+                        + rtlLayout);
         logIfTextDirectionNotFirstStrong();
         SpannableStringBuilder builder2 = new SpannableStringBuilder();
         builder2.append((CharSequence) (rtlLayout ? RIGHT_TO_LEFT_ISOLATE : LEFT_TO_RIGHT_ISOLATE));
@@ -256,11 +291,19 @@ public class EmphasizedNotificationButton extends Button {
 
     private void logIfTextDirectionNotFirstStrong() {
         if (!isTextDirectionResolved()) {
-            Log.e(TAG, "glueIconAndLabel: text direction not resolved; letting View assume FIRST STRONG");
+            Log.e(
+                    TAG,
+                    "glueIconAndLabel: text direction not resolved; letting View assume FIRST"
+                        + " STRONG");
         }
         int textDirection = getTextDirection();
         if (textDirection != 1) {
-            Log.w(TAG, "glueIconAndLabel: expected text direction TEXT_DIRECTION_FIRST_STRONG but found " + textDirection + "; will use a FIRST STRONG ISOLATE regardless");
+            Log.w(
+                    TAG,
+                    "glueIconAndLabel: expected text direction TEXT_DIRECTION_FIRST_STRONG but"
+                        + " found "
+                            + textDirection
+                            + "; will use a FIRST STRONG ISOLATE regardless");
         }
     }
 
@@ -290,13 +333,27 @@ public class EmphasizedNotificationButton extends Button {
         }
 
         @Override // android.text.style.ReplacementSpan
-        public int getSize(Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fontMetrics) {
+        public int getSize(
+                Paint paint,
+                CharSequence text,
+                int start,
+                int end,
+                Paint.FontMetricsInt fontMetrics) {
             Log.v(TAG, "getSize returning " + this.mWidth + "px");
             return this.mWidth;
         }
 
         @Override // android.text.style.ReplacementSpan
-        public void draw(Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, Paint paint) {
+        public void draw(
+                Canvas canvas,
+                CharSequence text,
+                int start,
+                int end,
+                float x,
+                int top,
+                int y,
+                int bottom,
+                Paint paint) {
             Log.v(TAG, "drawing nothing");
         }
     }
@@ -321,7 +378,15 @@ public class EmphasizedNotificationButton extends Button {
                 this.mBaselineShiftOffset = 0;
             }
             this.mMeasured = true;
-            Log.d(TAG, "updateMeasureState: imageHeight = " + this.mImageHeight + "px, textHeight = " + textHeight + "px, baselineShiftOffset = " + this.mBaselineShiftOffset + "px");
+            Log.d(
+                    TAG,
+                    "updateMeasureState: imageHeight = "
+                            + this.mImageHeight
+                            + "px, textHeight = "
+                            + textHeight
+                            + "px, baselineShiftOffset = "
+                            + this.mBaselineShiftOffset
+                            + "px");
             textPaint.baselineShift += this.mBaselineShiftOffset;
         }
 
@@ -332,7 +397,11 @@ public class EmphasizedNotificationButton extends Button {
             } else if (!this.mMeasured) {
                 Log.e(TAG, "updateDrawState: called without measure; doing nothing");
             } else {
-                Log.v(TAG, "updateDrawState: baselineShiftOffset = " + this.mBaselineShiftOffset + "px");
+                Log.v(
+                        TAG,
+                        "updateDrawState: baselineShiftOffset = "
+                                + this.mBaselineShiftOffset
+                                + "px");
                 textPaint.baselineShift += this.mBaselineShiftOffset;
             }
         }

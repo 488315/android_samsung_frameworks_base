@@ -1,6 +1,5 @@
 package android.app.admin;
 
-import android.app.admin.IKeyguardCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -11,12 +10,14 @@ import android.os.RemoteException;
 public interface IKeyguardClient extends IInterface {
     public static final String DESCRIPTOR = "android.app.admin.IKeyguardClient";
 
-    void onCreateKeyguardSurface(IBinder iBinder, IKeyguardCallback iKeyguardCallback) throws RemoteException;
+    void onCreateKeyguardSurface(IBinder iBinder, IKeyguardCallback iKeyguardCallback)
+            throws RemoteException;
 
     public static class Default implements IKeyguardClient {
         @Override // android.app.admin.IKeyguardClient
-        public void onCreateKeyguardSurface(IBinder hostInputToken, IKeyguardCallback keyguardCallback) throws RemoteException {
-        }
+        public void onCreateKeyguardSurface(
+                IBinder hostInputToken, IKeyguardCallback keyguardCallback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +25,7 @@ public interface IKeyguardClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyguardClient {
+    public abstract static class Stub extends Binder implements IKeyguardClient {
         static final int TRANSACTION_onCreateKeyguardSurface = 1;
 
         public Stub() {
@@ -62,7 +63,8 @@ public interface IKeyguardClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKeyguardClient.DESCRIPTOR);
             }
@@ -73,7 +75,8 @@ public interface IKeyguardClient extends IInterface {
             switch (code) {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
-                    IKeyguardCallback _arg1 = IKeyguardCallback.Stub.asInterface(data.readStrongBinder());
+                    IKeyguardCallback _arg1 =
+                            IKeyguardCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCreateKeyguardSurface(_arg0, _arg1);
                     return true;
@@ -99,7 +102,9 @@ public interface IKeyguardClient extends IInterface {
             }
 
             @Override // android.app.admin.IKeyguardClient
-            public void onCreateKeyguardSurface(IBinder hostInputToken, IKeyguardCallback keyguardCallback) throws RemoteException {
+            public void onCreateKeyguardSurface(
+                    IBinder hostInputToken, IKeyguardCallback keyguardCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IKeyguardClient.DESCRIPTOR);

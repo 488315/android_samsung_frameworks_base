@@ -6,6 +6,7 @@ import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -148,7 +149,10 @@ public final class Capabilities extends MessageNano {
                     break;
                 case 26:
                     int arrayLength3 = WireFormatNano.getRepeatedFieldArrayLength(input, 26);
-                    int i3 = this.frameworkCapabilities == null ? 0 : this.frameworkCapabilities.length;
+                    int i3 =
+                            this.frameworkCapabilities == null
+                                    ? 0
+                                    : this.frameworkCapabilities.length;
                     FrameworkCapability[] newArray3 = new FrameworkCapability[i3 + arrayLength3];
                     if (i3 != 0) {
                         System.arraycopy(this.frameworkCapabilities, 0, newArray3, 0, i3);

@@ -3,6 +3,7 @@ package android.hardware.radio.V1_6;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,18 +23,38 @@ public final class SliceInfo {
             return false;
         }
         SliceInfo other = (SliceInfo) otherObject;
-        if (this.sst == other.sst && this.sliceDifferentiator == other.sliceDifferentiator && this.mappedHplmnSst == other.mappedHplmnSst && this.mappedHplmnSD == other.mappedHplmnSD && this.status == other.status) {
+        if (this.sst == other.sst
+                && this.sliceDifferentiator == other.sliceDifferentiator
+                && this.mappedHplmnSst == other.mappedHplmnSst
+                && this.mappedHplmnSD == other.mappedHplmnSD
+                && this.status == other.status) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.sst))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.sliceDifferentiator))), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.mappedHplmnSst))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mappedHplmnSD))), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.status))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.sst))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.sliceDifferentiator))),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.mappedHplmnSst))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mappedHplmnSD))),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.status))));
     }
 
     public final String toString() {
-        return "{.sst = " + SliceServiceType.toString(this.sst) + ", .sliceDifferentiator = " + this.sliceDifferentiator + ", .mappedHplmnSst = " + SliceServiceType.toString(this.mappedHplmnSst) + ", .mappedHplmnSD = " + this.mappedHplmnSD + ", .status = " + SliceStatus.toString(this.status) + "}";
+        return "{.sst = "
+                + SliceServiceType.toString(this.sst)
+                + ", .sliceDifferentiator = "
+                + this.sliceDifferentiator
+                + ", .mappedHplmnSst = "
+                + SliceServiceType.toString(this.mappedHplmnSst)
+                + ", .mappedHplmnSD = "
+                + this.mappedHplmnSD
+                + ", .status = "
+                + SliceStatus.toString(this.status)
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -45,7 +66,8 @@ public final class SliceInfo {
         ArrayList<SliceInfo> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 20, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 20, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SliceInfo _hidl_vec_element = new SliceInfo();
@@ -55,7 +77,8 @@ public final class SliceInfo {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.sst = _hidl_blob.getInt8(0 + _hidl_offset);
         this.sliceDifferentiator = _hidl_blob.getInt32(4 + _hidl_offset);
         this.mappedHplmnSst = _hidl_blob.getInt8(8 + _hidl_offset);

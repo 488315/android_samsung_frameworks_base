@@ -32,14 +32,14 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.UserHandle;
-import android.permission.IOnPermissionsChangeListener;
-import android.permission.IPermissionManager;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags;
 import com.android.internal.util.CollectionUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -52,7 +52,8 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class PermissionManager {
-    public static final String ACTION_REVIEW_PERMISSION_DECISIONS = "android.permission.action.REVIEW_PERMISSION_DECISIONS";
+    public static final String ACTION_REVIEW_PERMISSION_DECISIONS =
+            "android.permission.action.REVIEW_PERMISSION_DECISIONS";
     public static final String CACHE_KEY_PACKAGE_INFO = "cache_key.package_info";
     public static final long CANNOT_INSTALL_WITH_BAD_PERMISSION_GROUPS = 146211400;
     public static final boolean DEBUG_DEVICE_PERMISSIONS = false;
@@ -63,15 +64,19 @@ public final class PermissionManager {
     public static final int EXPLICIT_SET_FLAGS = 32823;
 
     @SystemApi
-    public static final String EXTRA_PERMISSION_USAGES = "android.permission.extra.PERMISSION_USAGES";
-    public static final String KILL_APP_REASON_GIDS_CHANGED = "permission grant or revoke changed gids";
+    public static final String EXTRA_PERMISSION_USAGES =
+            "android.permission.extra.PERMISSION_USAGES";
+
+    public static final String KILL_APP_REASON_GIDS_CHANGED =
+            "permission grant or revoke changed gids";
     public static final String KILL_APP_REASON_PERMISSIONS_REVOKED = "permissions revoked";
     public static final String LOG_TAG_TRACE_GRANTS = "PermissionGrantTrace";
     public static final int PERMISSION_GRANTED = 0;
     public static final int PERMISSION_HARD_DENIED = 2;
     public static final int PERMISSION_SOFT_DENIED = 1;
     private static final String SYSTEM_PKG = "android";
-    private static PropertyInvalidatedCache<PackageNamePermissionQuery, Integer> sPackageNamePermissionCache;
+    private static PropertyInvalidatedCache<PackageNamePermissionQuery, Integer>
+            sPackageNamePermissionCache;
     private static final PropertyInvalidatedCache<PermissionQuery, Integer> sPermissionCache;
     private static volatile boolean sShouldWarnMissingActivityManager;
     private final Context mContext;
@@ -81,15 +86,19 @@ public final class PermissionManager {
     private static final String LOG_TAG = PermissionManager.class.getName();
     public static final boolean USE_ACCESS_CHECKING_SERVICE = SdkLevel.isAtLeastV();
     private static long sLastIndicatorUpdateTime = -1;
-    private static final int[] EXEMPTED_ROLES = {17039411, 17039410, 17039412, 17039413, 17039414, 17039415};
+    private static final int[] EXEMPTED_ROLES = {
+        17039411, 17039410, 17039412, 17039413, 17039414, 17039415
+    };
     private static final String[] INDICATOR_EXEMPTED_PACKAGES = new String[EXEMPTED_ROLES.length];
-    private final ArrayMap<PackageManager.OnPermissionsChangedListener, IOnPermissionsChangeListener> mPermissionListeners = new ArrayMap<>();
+    private final ArrayMap<
+                    PackageManager.OnPermissionsChangedListener, IOnPermissionsChangeListener>
+            mPermissionListeners = new ArrayMap<>();
     private final IPackageManager mPackageManager = AppGlobals.getPackageManager();
-    private final IPermissionManager mPermissionManager = IPermissionManager.Stub.asInterface(ServiceManager.getServiceOrThrow("permissionmgr"));
+    private final IPermissionManager mPermissionManager =
+            IPermissionManager.Stub.asInterface(ServiceManager.getServiceOrThrow("permissionmgr"));
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PermissionResult {
-    }
+    public @interface PermissionResult {}
 
     static {
         Set<String> emptySet;
@@ -101,48 +110,73 @@ public final class PermissionManager {
         DEVICE_AWARE_PERMISSIONS = emptySet;
         sShouldWarnMissingActivityManager = true;
         String str = CACHE_KEY_PACKAGE_INFO;
-        sPermissionCache = new PropertyInvalidatedCache<PermissionQuery, Integer>(2048, str, "checkPermission") { // from class: android.permission.PermissionManager.1
-            @Override // android.app.PropertyInvalidatedCache
-            public Integer recompute(PermissionQuery query) {
-                return Integer.valueOf(PermissionManager.checkPermissionUncached(query.permission, query.pid, query.uid, query.deviceId));
-            }
-        };
-        sPackageNamePermissionCache = new PropertyInvalidatedCache<PackageNamePermissionQuery, Integer>(16, str, "checkPackageNamePermission") { // from class: android.permission.PermissionManager.2
-            @Override // android.app.PropertyInvalidatedCache
-            public Integer recompute(PackageNamePermissionQuery query) {
-                return Integer.valueOf(PermissionManager.checkPackageNamePermissionUncached(query.permName, query.pkgName, query.persistentDeviceId, query.userId));
-            }
+        sPermissionCache =
+                new PropertyInvalidatedCache<PermissionQuery, Integer>(
+                        2048,
+                        str,
+                        "checkPermission") { // from class: android.permission.PermissionManager.1
+                    @Override // android.app.PropertyInvalidatedCache
+                    public Integer recompute(PermissionQuery query) {
+                        return Integer.valueOf(
+                                PermissionManager.checkPermissionUncached(
+                                        query.permission, query.pid, query.uid, query.deviceId));
+                    }
+                };
+        sPackageNamePermissionCache =
+                new PropertyInvalidatedCache<PackageNamePermissionQuery, Integer>(
+                        16,
+                        str,
+                        "checkPackageNamePermission") { // from class:
+                                                        // android.permission.PermissionManager.2
+                    @Override // android.app.PropertyInvalidatedCache
+                    public Integer recompute(PackageNamePermissionQuery query) {
+                        return Integer.valueOf(
+                                PermissionManager.checkPackageNamePermissionUncached(
+                                        query.permName,
+                                        query.pkgName,
+                                        query.persistentDeviceId,
+                                        query.userId));
+                    }
 
-            @Override // android.app.PropertyInvalidatedCache
-            public boolean bypass(PackageNamePermissionQuery query) {
-                return query.userId < 0;
-            }
-        };
+                    @Override // android.app.PropertyInvalidatedCache
+                    public boolean bypass(PackageNamePermissionQuery query) {
+                        return query.userId < 0;
+                    }
+                };
     }
 
     public PermissionManager(Context context) throws ServiceManager.ServiceNotFoundException {
         this.mContext = context;
-        this.mLegacyPermissionManager = (LegacyPermissionManager) context.getSystemService(LegacyPermissionManager.class);
+        this.mLegacyPermissionManager =
+                (LegacyPermissionManager) context.getSystemService(LegacyPermissionManager.class);
     }
 
-    public int checkPermissionForDataDelivery(String permission, AttributionSource attributionSource, String message) {
-        return PermissionChecker.checkPermissionForDataDelivery(this.mContext, permission, -1, attributionSource, message);
+    public int checkPermissionForDataDelivery(
+            String permission, AttributionSource attributionSource, String message) {
+        return PermissionChecker.checkPermissionForDataDelivery(
+                this.mContext, permission, -1, attributionSource, message);
     }
 
-    public int checkPermissionForStartDataDelivery(String permission, AttributionSource attributionSource, String message) {
-        return PermissionChecker.checkPermissionForDataDelivery(this.mContext, permission, -1, attributionSource, message, true);
+    public int checkPermissionForStartDataDelivery(
+            String permission, AttributionSource attributionSource, String message) {
+        return PermissionChecker.checkPermissionForDataDelivery(
+                this.mContext, permission, -1, attributionSource, message, true);
     }
 
     public void finishDataDelivery(String permission, AttributionSource attributionSource) {
-        PermissionChecker.finishDataDelivery(this.mContext, AppOpsManager.permissionToOp(permission), attributionSource);
+        PermissionChecker.finishDataDelivery(
+                this.mContext, AppOpsManager.permissionToOp(permission), attributionSource);
     }
 
-    public int checkPermissionForDataDeliveryFromDataSource(String permission, AttributionSource attributionSource, String message) {
-        return PermissionChecker.checkPermissionForDataDeliveryFromDataSource(this.mContext, permission, -1, attributionSource, message);
+    public int checkPermissionForDataDeliveryFromDataSource(
+            String permission, AttributionSource attributionSource, String message) {
+        return PermissionChecker.checkPermissionForDataDeliveryFromDataSource(
+                this.mContext, permission, -1, attributionSource, message);
     }
 
     public int checkPermissionForPreflight(String permission, AttributionSource attributionSource) {
-        return PermissionChecker.checkPermissionForPreflight(this.mContext, permission, attributionSource);
+        return PermissionChecker.checkPermissionForPreflight(
+                this.mContext, permission, attributionSource);
     }
 
     public PermissionInfo getPermissionInfo(String permissionName, int flags) {
@@ -156,7 +190,8 @@ public final class PermissionManager {
 
     public List<PermissionInfo> queryPermissionsByGroup(String groupName, int flags) {
         try {
-            ParceledListSlice<PermissionInfo> parceledList = this.mPermissionManager.queryPermissionsByGroup(groupName, flags);
+            ParceledListSlice<PermissionInfo> parceledList =
+                    this.mPermissionManager.queryPermissionsByGroup(groupName, flags);
             if (parceledList == null) {
                 return null;
             }
@@ -192,7 +227,8 @@ public final class PermissionManager {
 
     public List<PermissionGroupInfo> getAllPermissionGroups(int flags) {
         try {
-            ParceledListSlice<PermissionGroupInfo> parceledList = this.mPermissionManager.getAllPermissionGroups(flags);
+            ParceledListSlice<PermissionGroupInfo> parceledList =
+                    this.mPermissionManager.getAllPermissionGroups(flags);
             if (parceledList == null) {
                 return Collections.emptyList();
             }
@@ -204,7 +240,11 @@ public final class PermissionManager {
 
     public boolean isPermissionRevokedByPolicy(String packageName, String permissionName) {
         try {
-            return this.mPermissionManager.isPermissionRevokedByPolicy(packageName, permissionName, this.mContext.getDeviceId(), this.mContext.getUserId());
+            return this.mPermissionManager.isPermissionRevokedByPolicy(
+                    packageName,
+                    permissionName,
+                    this.mContext.getDeviceId(),
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -223,34 +263,48 @@ public final class PermissionManager {
     }
 
     @SystemApi
-    public void grantRuntimePermission(String packageName, String permissionName, String persistentDeviceId) {
-        grantRuntimePermissionInternal(packageName, permissionName, persistentDeviceId, this.mContext.getUser());
+    public void grantRuntimePermission(
+            String packageName, String permissionName, String persistentDeviceId) {
+        grantRuntimePermissionInternal(
+                packageName, permissionName, persistentDeviceId, this.mContext.getUser());
     }
 
-    private void grantRuntimePermissionInternal(String packageName, String permissionName, String persistentDeviceId, UserHandle user) {
+    private void grantRuntimePermissionInternal(
+            String packageName, String permissionName, String persistentDeviceId, UserHandle user) {
         try {
-            this.mPermissionManager.grantRuntimePermission(packageName, permissionName, persistentDeviceId, user.getIdentifier());
+            this.mPermissionManager.grantRuntimePermission(
+                    packageName, permissionName, persistentDeviceId, user.getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void revokeRuntimePermission(String packageName, String permissionName, UserHandle user, String reason) {
+    public void revokeRuntimePermission(
+            String packageName, String permissionName, UserHandle user, String reason) {
         String persistentDeviceId = getPersistentDeviceId(this.mContext.getDeviceId());
         if (persistentDeviceId == null) {
             return;
         }
-        revokeRuntimePermissionInternal(packageName, permissionName, persistentDeviceId, user, reason);
+        revokeRuntimePermissionInternal(
+                packageName, permissionName, persistentDeviceId, user, reason);
     }
 
     @SystemApi
-    public void revokeRuntimePermission(String packageName, String permissionName, String persistentDeviceId, String reason) {
-        revokeRuntimePermissionInternal(packageName, permissionName, persistentDeviceId, this.mContext.getUser(), reason);
+    public void revokeRuntimePermission(
+            String packageName, String permissionName, String persistentDeviceId, String reason) {
+        revokeRuntimePermissionInternal(
+                packageName, permissionName, persistentDeviceId, this.mContext.getUser(), reason);
     }
 
-    private void revokeRuntimePermissionInternal(String packageName, String permissionName, String persistentDeviceId, UserHandle user, String reason) {
+    private void revokeRuntimePermissionInternal(
+            String packageName,
+            String permissionName,
+            String persistentDeviceId,
+            UserHandle user,
+            String reason) {
         try {
-            this.mPermissionManager.revokeRuntimePermission(packageName, permissionName, persistentDeviceId, user.getIdentifier(), reason);
+            this.mPermissionManager.revokeRuntimePermission(
+                    packageName, permissionName, persistentDeviceId, user.getIdentifier(), reason);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -265,35 +319,70 @@ public final class PermissionManager {
     }
 
     @SystemApi
-    public int getPermissionFlags(String packageName, String permissionName, String persistentDeviceId) {
-        return getPermissionFlagsInternal(packageName, permissionName, persistentDeviceId, this.mContext.getUser());
+    public int getPermissionFlags(
+            String packageName, String permissionName, String persistentDeviceId) {
+        return getPermissionFlagsInternal(
+                packageName, permissionName, persistentDeviceId, this.mContext.getUser());
     }
 
-    private int getPermissionFlagsInternal(String packageName, String permissionName, String persistentDeviceId, UserHandle user) {
+    private int getPermissionFlagsInternal(
+            String packageName, String permissionName, String persistentDeviceId, UserHandle user) {
         try {
-            return this.mPermissionManager.getPermissionFlags(packageName, permissionName, persistentDeviceId, user.getIdentifier());
+            return this.mPermissionManager.getPermissionFlags(
+                    packageName, permissionName, persistentDeviceId, user.getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void updatePermissionFlags(String packageName, String permissionName, int flagMask, int flagValues, UserHandle user) {
+    public void updatePermissionFlags(
+            String packageName,
+            String permissionName,
+            int flagMask,
+            int flagValues,
+            UserHandle user) {
         String persistentDeviceId = getPersistentDeviceId(this.mContext.getDeviceId());
         if (persistentDeviceId == null) {
             return;
         }
-        updatePermissionFlagsInternal(packageName, permissionName, flagMask, flagValues, persistentDeviceId, user);
+        updatePermissionFlagsInternal(
+                packageName, permissionName, flagMask, flagValues, persistentDeviceId, user);
     }
 
     @SystemApi
-    public void updatePermissionFlags(String packageName, String permissionName, String persistentDeviceId, int flagMask, int flagValues) {
-        updatePermissionFlagsInternal(packageName, permissionName, flagMask, flagValues, persistentDeviceId, this.mContext.getUser());
+    public void updatePermissionFlags(
+            String packageName,
+            String permissionName,
+            String persistentDeviceId,
+            int flagMask,
+            int flagValues) {
+        updatePermissionFlagsInternal(
+                packageName,
+                permissionName,
+                flagMask,
+                flagValues,
+                persistentDeviceId,
+                this.mContext.getUser());
     }
 
-    private void updatePermissionFlagsInternal(String packageName, String permissionName, int flagMask, int flagValues, String persistentDeviceId, UserHandle user) {
+    private void updatePermissionFlagsInternal(
+            String packageName,
+            String permissionName,
+            int flagMask,
+            int flagValues,
+            String persistentDeviceId,
+            UserHandle user) {
         try {
-            boolean checkAdjustPolicyFlagPermission = this.mContext.getApplicationInfo().targetSdkVersion >= 29;
-            this.mPermissionManager.updatePermissionFlags(packageName, permissionName, flagMask, flagValues, checkAdjustPolicyFlagPermission, persistentDeviceId, user.getIdentifier());
+            boolean checkAdjustPolicyFlagPermission =
+                    this.mContext.getApplicationInfo().targetSdkVersion >= 29;
+            this.mPermissionManager.updatePermissionFlags(
+                    packageName,
+                    permissionName,
+                    flagMask,
+                    flagValues,
+                    checkAdjustPolicyFlagPermission,
+                    persistentDeviceId,
+                    user.getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -301,7 +390,9 @@ public final class PermissionManager {
 
     public Set<String> getAllowlistedRestrictedPermissions(String packageName, int allowlistFlag) {
         try {
-            List<String> allowlist = this.mPermissionManager.getAllowlistedRestrictedPermissions(packageName, allowlistFlag, this.mContext.getUserId());
+            List<String> allowlist =
+                    this.mPermissionManager.getAllowlistedRestrictedPermissions(
+                            packageName, allowlistFlag, this.mContext.getUserId());
             if (allowlist == null) {
                 return Collections.emptySet();
             }
@@ -311,17 +402,21 @@ public final class PermissionManager {
         }
     }
 
-    public boolean addAllowlistedRestrictedPermission(String packageName, String permissionName, int allowlistFlags) {
+    public boolean addAllowlistedRestrictedPermission(
+            String packageName, String permissionName, int allowlistFlags) {
         try {
-            return this.mPermissionManager.addAllowlistedRestrictedPermission(packageName, permissionName, allowlistFlags, this.mContext.getUserId());
+            return this.mPermissionManager.addAllowlistedRestrictedPermission(
+                    packageName, permissionName, allowlistFlags, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public boolean removeAllowlistedRestrictedPermission(String packageName, String permissionName, int allowlistFlags) {
+    public boolean removeAllowlistedRestrictedPermission(
+            String packageName, String permissionName, int allowlistFlags) {
         try {
-            return this.mPermissionManager.removeAllowlistedRestrictedPermission(packageName, permissionName, allowlistFlags, this.mContext.getUserId());
+            return this.mPermissionManager.removeAllowlistedRestrictedPermission(
+                    packageName, permissionName, allowlistFlags, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -329,7 +424,8 @@ public final class PermissionManager {
 
     public boolean isAutoRevokeExempted(String packageName) {
         try {
-            return this.mPermissionManager.isAutoRevokeExempted(packageName, this.mContext.getUserId());
+            return this.mPermissionManager.isAutoRevokeExempted(
+                    packageName, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -337,7 +433,8 @@ public final class PermissionManager {
 
     public boolean setAutoRevokeExempted(String packageName, boolean exempted) {
         try {
-            return this.mPermissionManager.setAutoRevokeExempted(packageName, exempted, this.mContext.getUserId());
+            return this.mPermissionManager.setAutoRevokeExempted(
+                    packageName, exempted, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -346,18 +443,24 @@ public final class PermissionManager {
     public boolean shouldShowRequestPermissionRationale(String permissionName) {
         try {
             String packageName = this.mContext.getPackageName();
-            return this.mPermissionManager.shouldShowRequestPermissionRationale(packageName, permissionName, this.mContext.getDeviceId(), this.mContext.getUserId());
+            return this.mPermissionManager.shouldShowRequestPermissionRationale(
+                    packageName,
+                    permissionName,
+                    this.mContext.getDeviceId(),
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void addOnPermissionsChangeListener(PackageManager.OnPermissionsChangedListener listener) {
+    public void addOnPermissionsChangeListener(
+            PackageManager.OnPermissionsChangedListener listener) {
         synchronized (this.mPermissionListeners) {
             if (this.mPermissionListeners.get(listener) != null) {
                 return;
             }
-            OnPermissionsChangeListenerDelegate delegate = new OnPermissionsChangeListenerDelegate(listener, Looper.getMainLooper());
+            OnPermissionsChangeListenerDelegate delegate =
+                    new OnPermissionsChangeListenerDelegate(listener, Looper.getMainLooper());
             try {
                 this.mPermissionManager.addOnPermissionsChangeListener(delegate);
                 this.mPermissionListeners.put(listener, delegate);
@@ -367,7 +470,8 @@ public final class PermissionManager {
         }
     }
 
-    public void removeOnPermissionsChangeListener(PackageManager.OnPermissionsChangedListener listener) {
+    public void removeOnPermissionsChangeListener(
+            PackageManager.OnPermissionsChangedListener listener) {
         synchronized (this.mPermissionListeners) {
             IOnPermissionsChangeListener delegate = this.mPermissionListeners.get(listener);
             if (delegate != null) {
@@ -404,7 +508,8 @@ public final class PermissionManager {
             return this.mSplitPermissionInfos;
         }
         try {
-            List<SplitPermissionInfoParcelable> parcelableList = ActivityThread.getPermissionManager().getSplitPermissions();
+            List<SplitPermissionInfoParcelable> parcelableList =
+                    ActivityThread.getPermissionManager().getSplitPermissions();
             this.mSplitPermissionInfos = splitPermissionInfoListToNonParcelableList(parcelableList);
             return this.mSplitPermissionInfos;
         } catch (RemoteException e) {
@@ -433,7 +538,8 @@ public final class PermissionManager {
     public List<PermissionGroupUsage> getIndicatorAppOpUsageData(boolean micMuted) {
         initializeUsageHelper();
         boolean includeMicrophoneUsage = !micMuted;
-        return this.mUsageHelper.getOpUsageDataByDevice(includeMicrophoneUsage, VirtualDeviceManager.PERSISTENT_DEVICE_ID_DEFAULT);
+        return this.mUsageHelper.getOpUsageDataByDevice(
+                includeMicrophoneUsage, VirtualDeviceManager.PERSISTENT_DEVICE_ID_DEFAULT);
     }
 
     public static boolean shouldShowPackageForIndicatorCached(Context context, String packageName) {
@@ -455,7 +561,8 @@ public final class PermissionManager {
 
     public static void updateIndicatorExemptedPackages(Context context) {
         long now = SystemClock.elapsedRealtime();
-        if (sLastIndicatorUpdateTime == -1 || now - sLastIndicatorUpdateTime > EXEMPTED_INDICATOR_ROLE_UPDATE_FREQUENCY_MS) {
+        if (sLastIndicatorUpdateTime == -1
+                || now - sLastIndicatorUpdateTime > EXEMPTED_INDICATOR_ROLE_UPDATE_FREQUENCY_MS) {
             sLastIndicatorUpdateTime = now;
             for (int i = 0; i < EXEMPTED_ROLES.length; i++) {
                 INDICATOR_EXEMPTED_PACKAGES[i] = context.getString(EXEMPTED_ROLES[i]);
@@ -466,7 +573,9 @@ public final class PermissionManager {
     @SystemApi
     public Set<String> getAutoRevokeExemptionRequestedPackages() {
         try {
-            return CollectionUtils.toSet(this.mPermissionManager.getAutoRevokeExemptionRequestedPackages(this.mContext.getUser().getIdentifier()));
+            return CollectionUtils.toSet(
+                    this.mPermissionManager.getAutoRevokeExemptionRequestedPackages(
+                            this.mContext.getUser().getIdentifier()));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -475,13 +584,16 @@ public final class PermissionManager {
     @SystemApi
     public Set<String> getAutoRevokeExemptionGrantedPackages() {
         try {
-            return CollectionUtils.toSet(this.mPermissionManager.getAutoRevokeExemptionGrantedPackages(this.mContext.getUser().getIdentifier()));
+            return CollectionUtils.toSet(
+                    this.mPermissionManager.getAutoRevokeExemptionGrantedPackages(
+                            this.mContext.getUser().getIdentifier()));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    private List<SplitPermissionInfo> splitPermissionInfoListToNonParcelableList(List<SplitPermissionInfoParcelable> parcelableList) {
+    private List<SplitPermissionInfo> splitPermissionInfoListToNonParcelableList(
+            List<SplitPermissionInfoParcelable> parcelableList) {
         int size = parcelableList.size();
         List<SplitPermissionInfo> list = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
@@ -490,12 +602,17 @@ public final class PermissionManager {
         return list;
     }
 
-    public static List<SplitPermissionInfoParcelable> splitPermissionInfoListToParcelableList(List<SplitPermissionInfo> splitPermissionsList) {
+    public static List<SplitPermissionInfoParcelable> splitPermissionInfoListToParcelableList(
+            List<SplitPermissionInfo> splitPermissionsList) {
         int size = splitPermissionsList.size();
         List<SplitPermissionInfoParcelable> outList = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
             SplitPermissionInfo info = splitPermissionsList.get(i);
-            outList.add(new SplitPermissionInfoParcelable(info.getSplitPermission(), info.getNewPermissions(), info.getTargetSdk()));
+            outList.add(
+                    new SplitPermissionInfoParcelable(
+                            info.getSplitPermission(),
+                            info.getNewPermissions(),
+                            info.getTargetSdk()));
         }
         return outList;
     }
@@ -541,14 +658,33 @@ public final class PermissionManager {
 
     @SystemApi
     @Deprecated
-    public void startOneTimePermissionSession(String packageName, long timeoutMillis, int importanceToResetTimer, int importanceToKeepSessionAlive) {
-        startOneTimePermissionSession(packageName, timeoutMillis, -1L, importanceToResetTimer, importanceToKeepSessionAlive);
+    public void startOneTimePermissionSession(
+            String packageName,
+            long timeoutMillis,
+            int importanceToResetTimer,
+            int importanceToKeepSessionAlive) {
+        startOneTimePermissionSession(
+                packageName,
+                timeoutMillis,
+                -1L,
+                importanceToResetTimer,
+                importanceToKeepSessionAlive);
     }
 
     @SystemApi
-    public void startOneTimePermissionSession(String packageName, long timeoutMillis, long revokeAfterKilledDelayMillis, int importanceToResetTimer, int importanceToKeepSessionAlive) {
+    public void startOneTimePermissionSession(
+            String packageName,
+            long timeoutMillis,
+            long revokeAfterKilledDelayMillis,
+            int importanceToResetTimer,
+            int importanceToKeepSessionAlive) {
         try {
-            this.mPermissionManager.startOneTimePermissionSession(packageName, this.mContext.getDeviceId(), this.mContext.getUserId(), timeoutMillis, revokeAfterKilledDelayMillis);
+            this.mPermissionManager.startOneTimePermissionSession(
+                    packageName,
+                    this.mContext.getDeviceId(),
+                    this.mContext.getUserId(),
+                    timeoutMillis,
+                    revokeAfterKilledDelayMillis);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -557,21 +693,25 @@ public final class PermissionManager {
     @SystemApi
     public void stopOneTimePermissionSession(String packageName) {
         try {
-            this.mPermissionManager.stopOneTimePermissionSession(packageName, this.mContext.getUserId());
+            this.mPermissionManager.stopOneTimePermissionSession(
+                    packageName, this.mContext.getUserId());
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
     }
 
     @SystemApi
-    public int checkDeviceIdentifierAccess(String packageName, String message, String callingFeatureId, int pid, int uid) {
-        return this.mLegacyPermissionManager.checkDeviceIdentifierAccess(packageName, message, callingFeatureId, pid, uid);
+    public int checkDeviceIdentifierAccess(
+            String packageName, String message, String callingFeatureId, int pid, int uid) {
+        return this.mLegacyPermissionManager.checkDeviceIdentifierAccess(
+                packageName, message, callingFeatureId, pid, uid);
     }
 
     public AttributionSource registerAttributionSource(AttributionSource source) {
         try {
             if (Flags.serverSideAttributionRegistration()) {
-                IBinder newToken = this.mPermissionManager.registerAttributionSource(source.asState());
+                IBinder newToken =
+                        this.mPermissionManager.registerAttributionSource(source.asState());
                 return source.withToken(newToken);
             }
             AttributionSource registeredSource = source.withToken(new Binder());
@@ -603,7 +743,8 @@ public final class PermissionManager {
 
     public void revokePostNotificationPermissionWithoutKillForTest(String packageName, int userId) {
         try {
-            this.mPermissionManager.revokePostNotificationPermissionWithoutKillForTest(packageName, userId);
+            this.mPermissionManager.revokePostNotificationPermissionWithoutKillForTest(
+                    packageName, userId);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -615,11 +756,18 @@ public final class PermissionManager {
         if (am == null) {
             int appId = UserHandle.getAppId(uid);
             if (appId != 0 && appId != 1000) {
-                Slog.w(LOG_TAG, "Missing ActivityManager; assuming " + uid + " does not hold " + permission);
+                Slog.w(
+                        LOG_TAG,
+                        "Missing ActivityManager; assuming "
+                                + uid
+                                + " does not hold "
+                                + permission);
                 return -1;
             }
             if (sShouldWarnMissingActivityManager) {
-                Slog.w(LOG_TAG, "Missing ActivityManager; assuming " + uid + " holds " + permission);
+                Slog.w(
+                        LOG_TAG,
+                        "Missing ActivityManager; assuming " + uid + " holds " + permission);
                 sShouldWarnMissingActivityManager = false;
             }
             return 0;
@@ -646,11 +794,17 @@ public final class PermissionManager {
         }
 
         public String toString() {
-            return TextUtils.formatSimple("PermissionQuery(permission=\"%s\", pid=%d, uid=%d, deviceId=%d)", this.permission, Integer.valueOf(this.pid), Integer.valueOf(this.uid), Integer.valueOf(this.deviceId));
+            return TextUtils.formatSimple(
+                    "PermissionQuery(permission=\"%s\", pid=%d, uid=%d, deviceId=%d)",
+                    this.permission,
+                    Integer.valueOf(this.pid),
+                    Integer.valueOf(this.uid),
+                    Integer.valueOf(this.deviceId));
         }
 
         public int hashCode() {
-            return Objects.hash(this.permission, Integer.valueOf(this.uid), Integer.valueOf(this.deviceId));
+            return Objects.hash(
+                    this.permission, Integer.valueOf(this.uid), Integer.valueOf(this.deviceId));
         }
 
         public boolean equals(Object rval) {
@@ -659,7 +813,9 @@ public final class PermissionManager {
             }
             try {
                 PermissionQuery other = (PermissionQuery) rval;
-                return this.uid == other.uid && this.deviceId == other.deviceId && Objects.equals(this.permission, other.permission);
+                return this.uid == other.uid
+                        && this.deviceId == other.deviceId
+                        && Objects.equals(this.permission, other.permission);
             } catch (ClassCastException e) {
                 return false;
             }
@@ -667,13 +823,17 @@ public final class PermissionManager {
     }
 
     public static int checkPermission(String permission, int pid, int uid, int deviceId) {
-        return sPermissionCache.query(new PermissionQuery(permission, pid, uid, deviceId)).intValue();
+        return sPermissionCache
+                .query(new PermissionQuery(permission, pid, uid, deviceId))
+                .intValue();
     }
 
     @SystemApi
-    public Map<String, PermissionState> getAllPermissionStates(String packageName, String persistentDeviceId) {
+    public Map<String, PermissionState> getAllPermissionStates(
+            String packageName, String persistentDeviceId) {
         try {
-            return this.mPermissionManager.getAllPermissionStates(packageName, persistentDeviceId, this.mContext.getUserId());
+            return this.mPermissionManager.getAllPermissionStates(
+                    packageName, persistentDeviceId, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -689,7 +849,8 @@ public final class PermissionManager {
         final String pkgName;
         final int userId;
 
-        PackageNamePermissionQuery(String permName, String pkgName, String persistentDeviceId, int userId) {
+        PackageNamePermissionQuery(
+                String permName, String pkgName, String persistentDeviceId, int userId) {
             this.permName = permName;
             this.pkgName = pkgName;
             this.persistentDeviceId = persistentDeviceId;
@@ -697,11 +858,21 @@ public final class PermissionManager {
         }
 
         public String toString() {
-            return TextUtils.formatSimple("PackageNamePermissionQuery(pkgName=\"%s\", permName=\"%s\", persistentDeviceId=%s, userId=%s\")", this.pkgName, this.permName, this.persistentDeviceId, Integer.valueOf(this.userId));
+            return TextUtils.formatSimple(
+                    "PackageNamePermissionQuery(pkgName=\"%s\", permName=\"%s\","
+                        + " persistentDeviceId=%s, userId=%s\")",
+                    this.pkgName,
+                    this.permName,
+                    this.persistentDeviceId,
+                    Integer.valueOf(this.userId));
         }
 
         public int hashCode() {
-            return Objects.hash(this.permName, this.pkgName, this.persistentDeviceId, Integer.valueOf(this.userId));
+            return Objects.hash(
+                    this.permName,
+                    this.pkgName,
+                    this.persistentDeviceId,
+                    Integer.valueOf(this.userId));
         }
 
         public boolean equals(Object rval) {
@@ -710,7 +881,10 @@ public final class PermissionManager {
             }
             try {
                 PackageNamePermissionQuery other = (PackageNamePermissionQuery) rval;
-                return Objects.equals(this.permName, other.permName) && Objects.equals(this.pkgName, other.pkgName) && Objects.equals(this.persistentDeviceId, other.persistentDeviceId) && this.userId == other.userId;
+                return Objects.equals(this.permName, other.permName)
+                        && Objects.equals(this.pkgName, other.pkgName)
+                        && Objects.equals(this.persistentDeviceId, other.persistentDeviceId)
+                        && this.userId == other.userId;
             } catch (ClassCastException e) {
                 return false;
             }
@@ -718,17 +892,24 @@ public final class PermissionManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static int checkPackageNamePermissionUncached(String permName, String pkgName, String persistentDeviceId, int userId) {
+    public static int checkPackageNamePermissionUncached(
+            String permName, String pkgName, String persistentDeviceId, int userId) {
         try {
-            return ActivityThread.getPermissionManager().checkPermission(pkgName, permName, persistentDeviceId, userId);
+            return ActivityThread.getPermissionManager()
+                    .checkPermission(pkgName, permName, persistentDeviceId, userId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public int checkPackageNamePermission(String permName, String pkgName, int deviceId, int userId) {
+    public int checkPackageNamePermission(
+            String permName, String pkgName, int deviceId, int userId) {
         String persistentDeviceId = getPersistentDeviceId(deviceId);
-        return sPackageNamePermissionCache.query(new PackageNamePermissionQuery(permName, pkgName, persistentDeviceId, userId)).intValue();
+        return sPackageNamePermissionCache
+                .query(
+                        new PackageNamePermissionQuery(
+                                permName, pkgName, persistentDeviceId, userId))
+                .intValue();
     }
 
     private String getPersistentDeviceId(int deviceId) {
@@ -736,7 +917,9 @@ public final class PermissionManager {
             return VirtualDeviceManager.PERSISTENT_DEVICE_ID_DEFAULT;
         }
         if (android.companion.virtual.flags.Flags.vdmPublicApis()) {
-            VirtualDeviceManager virtualDeviceManager = (VirtualDeviceManager) this.mContext.getSystemService(VirtualDeviceManager.class);
+            VirtualDeviceManager virtualDeviceManager =
+                    (VirtualDeviceManager)
+                            this.mContext.getSystemService(VirtualDeviceManager.class);
             if (virtualDeviceManager == null) {
                 return null;
             }
@@ -752,25 +935,37 @@ public final class PermissionManager {
             }
             return persistentDeviceId;
         }
-        Slog.e(LOG_TAG, "vdmPublicApis flag is not enabled when device Id " + deviceId + "is not default.");
+        Slog.e(
+                LOG_TAG,
+                "vdmPublicApis flag is not enabled when device Id " + deviceId + "is not default.");
         return null;
     }
 
     @SystemApi
-    public int checkPermission(String permissionName, String packageName, String persistentDeviceId) {
-        return sPackageNamePermissionCache.query(new PackageNamePermissionQuery(permissionName, packageName, persistentDeviceId, this.mContext.getUserId())).intValue();
+    public int checkPermission(
+            String permissionName, String packageName, String persistentDeviceId) {
+        return sPackageNamePermissionCache
+                .query(
+                        new PackageNamePermissionQuery(
+                                permissionName,
+                                packageName,
+                                persistentDeviceId,
+                                this.mContext.getUserId()))
+                .intValue();
     }
 
     public static void disablePackageNamePermissionCache() {
         sPackageNamePermissionCache.disableLocal();
     }
 
-    private final class OnPermissionsChangeListenerDelegate extends IOnPermissionsChangeListener.Stub implements Handler.Callback {
+    private final class OnPermissionsChangeListenerDelegate
+            extends IOnPermissionsChangeListener.Stub implements Handler.Callback {
         private static final int MSG_PERMISSIONS_CHANGED = 1;
         private final Handler mHandler;
         private final PackageManager.OnPermissionsChangedListener mListener;
 
-        public OnPermissionsChangeListenerDelegate(PackageManager.OnPermissionsChangedListener listener, Looper looper) {
+        public OnPermissionsChangeListenerDelegate(
+                PackageManager.OnPermissionsChangedListener listener, Looper looper) {
             this.mListener = listener;
             this.mHandler = new Handler(looper, this);
         }
@@ -801,19 +996,22 @@ public final class PermissionManager {
 
     @SystemApi
     public static final class PermissionState implements Parcelable {
-        public static final Parcelable.Creator<PermissionState> CREATOR = new Parcelable.Creator<PermissionState>() { // from class: android.permission.PermissionManager.PermissionState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PermissionState createFromParcel(Parcel source) {
-                return new PermissionState(source);
-            }
+        public static final Parcelable.Creator<PermissionState> CREATOR =
+                new Parcelable.Creator<
+                        PermissionState>() { // from class:
+                                             // android.permission.PermissionManager.PermissionState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PermissionState createFromParcel(Parcel source) {
+                        return new PermissionState(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PermissionState[] newArray(int size) {
-                return new PermissionState[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PermissionState[] newArray(int size) {
+                        return new PermissionState[size];
+                    }
+                };
         private final int mFlags;
         private final boolean mGranted;
 

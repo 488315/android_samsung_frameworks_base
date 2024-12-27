@@ -18,8 +18,7 @@ public interface IOemNetdUnsolicitedEventListener extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetdUnsolicitedEventListener
-        public void onRegistered() throws RemoteException {
-        }
+        public void onRegistered() throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -46,7 +45,8 @@ public interface IOemNetdUnsolicitedEventListener extends IInterface {
             public void onRegistered() throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("com.android.internal.net.IOemNetdUnsolicitedEventListener");
+                    obtain.writeInterfaceToken(
+                            "com.android.internal.net.IOemNetdUnsolicitedEventListener");
                     this.mRemote.transact(1, obtain, null, 1);
                 } finally {
                     obtain.recycle();
@@ -62,8 +62,13 @@ public interface IOemNetdUnsolicitedEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("com.android.internal.net.IOemNetdUnsolicitedEventListener");
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IOemNetdUnsolicitedEventListener)) ? new Proxy(iBinder) : (IOemNetdUnsolicitedEventListener) queryLocalInterface;
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(
+                            "com.android.internal.net.IOemNetdUnsolicitedEventListener");
+            return (queryLocalInterface == null
+                            || !(queryLocalInterface instanceof IOemNetdUnsolicitedEventListener))
+                    ? new Proxy(iBinder)
+                    : (IOemNetdUnsolicitedEventListener) queryLocalInterface;
         }
 
         @Override // android.os.IInterface
@@ -72,9 +77,11 @@ public interface IOemNetdUnsolicitedEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
-                parcel.enforceInterface("com.android.internal.net.IOemNetdUnsolicitedEventListener");
+                parcel.enforceInterface(
+                        "com.android.internal.net.IOemNetdUnsolicitedEventListener");
             }
             if (i == 1598968902) {
                 parcel2.writeString("com.android.internal.net.IOemNetdUnsolicitedEventListener");

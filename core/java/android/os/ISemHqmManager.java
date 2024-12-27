@@ -10,40 +10,124 @@ public interface ISemHqmManager extends IInterface {
 
     boolean getHqmEnable() throws RemoteException;
 
-    boolean sendHWParamServer(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7) throws RemoteException;
+    boolean sendHWParamServer(
+            int i,
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            String str6,
+            String str7)
+            throws RemoteException;
 
-    boolean sendHWParamToHQM(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8) throws RemoteException;
+    boolean sendHWParamToHQM(
+            int i,
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            String str6,
+            String str7,
+            String str8)
+            throws RemoteException;
 
-    boolean sendHWParamToHQMwithAppId(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9) throws RemoteException;
+    boolean sendHWParamToHQMwithAppId(
+            int i,
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            String str6,
+            String str7,
+            String str8,
+            String str9)
+            throws RemoteException;
 
-    boolean sendHWParamToHQMwithFile(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10) throws RemoteException;
+    boolean sendHWParamToHQMwithFile(
+            int i,
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            String str6,
+            String str7,
+            String str8,
+            String str9,
+            String str10)
+            throws RemoteException;
 
     void sendSystemInfoToHQM(int i, String str, String str2) throws RemoteException;
 
     public static class Default implements ISemHqmManager {
         @Override // android.os.ISemHqmManager
-        public boolean sendHWParamServer(int type, String id, String ver, String manufacture, String hitType, String feature, String logMaps, String envlogMaps) throws RemoteException {
+        public boolean sendHWParamServer(
+                int type,
+                String id,
+                String ver,
+                String manufacture,
+                String hitType,
+                String feature,
+                String logMaps,
+                String envlogMaps)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.ISemHqmManager
-        public boolean sendHWParamToHQM(int type, String id, String feature, String hitType, String ver, String manufacture, String dev_custom_dataset, String custom_dataset, String pri_custom_dataset) throws RemoteException {
+        public boolean sendHWParamToHQM(
+                int type,
+                String id,
+                String feature,
+                String hitType,
+                String ver,
+                String manufacture,
+                String dev_custom_dataset,
+                String custom_dataset,
+                String pri_custom_dataset)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.ISemHqmManager
-        public boolean sendHWParamToHQMwithAppId(int type, String id, String feature, String hitType, String ver, String manufacture, String dev_custom_dataset, String custom_dataset, String pri_custom_dataset, String appID) throws RemoteException {
+        public boolean sendHWParamToHQMwithAppId(
+                int type,
+                String id,
+                String feature,
+                String hitType,
+                String ver,
+                String manufacture,
+                String dev_custom_dataset,
+                String custom_dataset,
+                String pri_custom_dataset,
+                String appID)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.ISemHqmManager
-        public boolean sendHWParamToHQMwithFile(int type, String id, String feature, String hitType, String ver, String manufacture, String dev_custom_dataset, String custom_dataset, String pri_custom_dataset, String appID, String filePath) throws RemoteException {
+        public boolean sendHWParamToHQMwithFile(
+                int type,
+                String id,
+                String feature,
+                String hitType,
+                String ver,
+                String manufacture,
+                String dev_custom_dataset,
+                String custom_dataset,
+                String pri_custom_dataset,
+                String appID,
+                String filePath)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.ISemHqmManager
-        public void sendSystemInfoToHQM(int type, String dataset, String sub_dataset) throws RemoteException {
-        }
+        public void sendSystemInfoToHQM(int type, String dataset, String sub_dataset)
+                throws RemoteException {}
 
         @Override // android.os.ISemHqmManager
         public boolean getHqmEnable() throws RemoteException {
@@ -66,7 +150,7 @@ public interface ISemHqmManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemHqmManager {
+    public abstract static class Stub extends Binder implements ISemHqmManager {
         static final int TRANSACTION_getCFServerEnable = 8;
         static final int TRANSACTION_getDVServerEnable = 7;
         static final int TRANSACTION_getHqmEnable = 6;
@@ -125,7 +209,8 @@ public interface ISemHqmManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemHqmManager.DESCRIPTOR);
             }
@@ -144,7 +229,9 @@ public interface ISemHqmManager extends IInterface {
                     String _arg6 = data.readString();
                     String _arg7 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result = sendHWParamServer(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
+                    boolean _result =
+                            sendHWParamServer(
+                                    _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
                     reply.writeNoException();
                     reply.writeBoolean(_result);
                     return true;
@@ -159,7 +246,10 @@ public interface ISemHqmManager extends IInterface {
                     String _arg72 = data.readString();
                     String _arg8 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result2 = sendHWParamToHQM(_arg02, _arg12, _arg22, _arg32, _arg42, _arg52, _arg62, _arg72, _arg8);
+                    boolean _result2 =
+                            sendHWParamToHQM(
+                                    _arg02, _arg12, _arg22, _arg32, _arg42, _arg52, _arg62, _arg72,
+                                    _arg8);
                     reply.writeNoException();
                     reply.writeBoolean(_result2);
                     return true;
@@ -175,7 +265,10 @@ public interface ISemHqmManager extends IInterface {
                     String _arg82 = data.readString();
                     String _arg9 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result3 = sendHWParamToHQMwithAppId(_arg03, _arg13, _arg23, _arg33, _arg43, _arg53, _arg63, _arg73, _arg82, _arg9);
+                    boolean _result3 =
+                            sendHWParamToHQMwithAppId(
+                                    _arg03, _arg13, _arg23, _arg33, _arg43, _arg53, _arg63, _arg73,
+                                    _arg82, _arg9);
                     reply.writeNoException();
                     reply.writeBoolean(_result3);
                     return true;
@@ -192,7 +285,10 @@ public interface ISemHqmManager extends IInterface {
                     String _arg92 = data.readString();
                     String _arg10 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result4 = sendHWParamToHQMwithFile(_arg04, _arg14, _arg24, _arg34, _arg44, _arg54, _arg64, _arg74, _arg83, _arg92, _arg10);
+                    boolean _result4 =
+                            sendHWParamToHQMwithFile(
+                                    _arg04, _arg14, _arg24, _arg34, _arg44, _arg54, _arg64, _arg74,
+                                    _arg83, _arg92, _arg10);
                     reply.writeNoException();
                     reply.writeBoolean(_result4);
                     return true;
@@ -241,7 +337,16 @@ public interface ISemHqmManager extends IInterface {
             }
 
             @Override // android.os.ISemHqmManager
-            public boolean sendHWParamServer(int type, String id, String ver, String manufacture, String hitType, String feature, String logMaps, String envlogMaps) throws RemoteException {
+            public boolean sendHWParamServer(
+                    int type,
+                    String id,
+                    String ver,
+                    String manufacture,
+                    String hitType,
+                    String feature,
+                    String logMaps,
+                    String envlogMaps)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -265,7 +370,17 @@ public interface ISemHqmManager extends IInterface {
             }
 
             @Override // android.os.ISemHqmManager
-            public boolean sendHWParamToHQM(int type, String id, String feature, String hitType, String ver, String manufacture, String dev_custom_dataset, String custom_dataset, String pri_custom_dataset) throws RemoteException {
+            public boolean sendHWParamToHQM(
+                    int type,
+                    String id,
+                    String feature,
+                    String hitType,
+                    String ver,
+                    String manufacture,
+                    String dev_custom_dataset,
+                    String custom_dataset,
+                    String pri_custom_dataset)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -290,7 +405,18 @@ public interface ISemHqmManager extends IInterface {
             }
 
             @Override // android.os.ISemHqmManager
-            public boolean sendHWParamToHQMwithAppId(int type, String id, String feature, String hitType, String ver, String manufacture, String dev_custom_dataset, String custom_dataset, String pri_custom_dataset, String appID) throws RemoteException {
+            public boolean sendHWParamToHQMwithAppId(
+                    int type,
+                    String id,
+                    String feature,
+                    String hitType,
+                    String ver,
+                    String manufacture,
+                    String dev_custom_dataset,
+                    String custom_dataset,
+                    String pri_custom_dataset,
+                    String appID)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -316,7 +442,19 @@ public interface ISemHqmManager extends IInterface {
             }
 
             @Override // android.os.ISemHqmManager
-            public boolean sendHWParamToHQMwithFile(int type, String id, String feature, String hitType, String ver, String manufacture, String dev_custom_dataset, String custom_dataset, String pri_custom_dataset, String appID, String filePath) throws RemoteException {
+            public boolean sendHWParamToHQMwithFile(
+                    int type,
+                    String id,
+                    String feature,
+                    String hitType,
+                    String ver,
+                    String manufacture,
+                    String dev_custom_dataset,
+                    String custom_dataset,
+                    String pri_custom_dataset,
+                    String appID,
+                    String filePath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -418,7 +556,8 @@ public interface ISemHqmManager extends IInterface {
             }
 
             @Override // android.os.ISemHqmManager
-            public void sendSystemInfoToHQM(int type, String dataset, String sub_dataset) throws RemoteException {
+            public void sendSystemInfoToHQM(int type, String dataset, String sub_dataset)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

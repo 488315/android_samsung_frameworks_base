@@ -20,7 +20,8 @@ public class SContextSpecificPoseAlertAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    public SContextSpecificPoseAlertAttribute(int retentionTime, int minimumAngle, int maximumAngle, int movingThrs) {
+    public SContextSpecificPoseAlertAttribute(
+            int retentionTime, int minimumAngle, int maximumAngle, int movingThrs) {
         this.mRetentionTime = 1;
         this.mMinimumAngle = -90;
         this.mMaximumAngle = 90;
@@ -32,7 +33,8 @@ public class SContextSpecificPoseAlertAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mRetentionTime < 0) {
             Log.e(TAG, "The retention time is wrong.");

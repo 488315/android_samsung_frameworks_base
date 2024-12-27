@@ -10,7 +10,8 @@ import java.util.function.Predicate;
 /* loaded from: classes5.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_ENABLE_BIND_PACKAGE_ISOLATED_PROCESS, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(Arrays.asList(Flags.FLAG_ENABLE_BIND_PACKAGE_ISOLATED_PROCESS, ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,12 +19,15 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.content.flags.FeatureFlags
     public boolean enableBindPackageIsolatedProcess() {
-        return getValue(Flags.FLAG_ENABLE_BIND_PACKAGE_ISOLATED_PROCESS, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.content.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).enableBindPackageIsolatedProcess();
-            }
-        });
+        return getValue(
+                Flags.FLAG_ENABLE_BIND_PACKAGE_ISOLATED_PROCESS,
+                new Predicate() { // from class:
+                                  // com.android.internal.hidden_from_bootclasspath.android.content.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).enableBindPackageIsolatedProcess();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {

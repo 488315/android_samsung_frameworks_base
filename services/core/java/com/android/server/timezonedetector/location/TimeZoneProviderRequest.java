@@ -6,7 +6,8 @@ import java.util.Objects;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class TimeZoneProviderRequest {
-    public static final TimeZoneProviderRequest STOP_UPDATES = new TimeZoneProviderRequest(false, null, null);
+    public static final TimeZoneProviderRequest STOP_UPDATES =
+            new TimeZoneProviderRequest(false, null, null);
     public final Duration mEventFilteringAgeThreshold;
     public final Duration mInitializationTimeout;
     public final boolean mSendUpdates;
@@ -25,14 +26,28 @@ public final class TimeZoneProviderRequest {
             return false;
         }
         TimeZoneProviderRequest timeZoneProviderRequest = (TimeZoneProviderRequest) obj;
-        return this.mSendUpdates == timeZoneProviderRequest.mSendUpdates && Objects.equals(this.mInitializationTimeout, timeZoneProviderRequest.mInitializationTimeout) && Objects.equals(this.mEventFilteringAgeThreshold, timeZoneProviderRequest.mEventFilteringAgeThreshold);
+        return this.mSendUpdates == timeZoneProviderRequest.mSendUpdates
+                && Objects.equals(
+                        this.mInitializationTimeout, timeZoneProviderRequest.mInitializationTimeout)
+                && Objects.equals(
+                        this.mEventFilteringAgeThreshold,
+                        timeZoneProviderRequest.mEventFilteringAgeThreshold);
     }
 
     public final int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mSendUpdates), this.mInitializationTimeout, this.mEventFilteringAgeThreshold);
+        return Objects.hash(
+                Boolean.valueOf(this.mSendUpdates),
+                this.mInitializationTimeout,
+                this.mEventFilteringAgeThreshold);
     }
 
     public final String toString() {
-        return "TimeZoneProviderRequest{mSendUpdates=" + this.mSendUpdates + ", mInitializationTimeout=" + this.mInitializationTimeout + ", mEventFilteringAgeThreshold=" + this.mEventFilteringAgeThreshold + "}";
+        return "TimeZoneProviderRequest{mSendUpdates="
+                + this.mSendUpdates
+                + ", mInitializationTimeout="
+                + this.mInitializationTimeout
+                + ", mEventFilteringAgeThreshold="
+                + this.mEventFilteringAgeThreshold
+                + "}";
     }
 }

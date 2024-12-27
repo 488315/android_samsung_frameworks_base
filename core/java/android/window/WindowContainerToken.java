@@ -3,23 +3,24 @@ package android.window;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.window.IWindowContainerToken;
 
 /* loaded from: classes4.dex */
 public final class WindowContainerToken implements Parcelable {
-    public static final Parcelable.Creator<WindowContainerToken> CREATOR = new Parcelable.Creator<WindowContainerToken>() { // from class: android.window.WindowContainerToken.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContainerToken createFromParcel(Parcel in) {
-            return new WindowContainerToken(in);
-        }
+    public static final Parcelable.Creator<WindowContainerToken> CREATOR =
+            new Parcelable.Creator<
+                    WindowContainerToken>() { // from class: android.window.WindowContainerToken.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContainerToken createFromParcel(Parcel in) {
+                    return new WindowContainerToken(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContainerToken[] newArray(int size) {
-            return new WindowContainerToken[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContainerToken[] newArray(int size) {
+                    return new WindowContainerToken[size];
+                }
+            };
     private final IWindowContainerToken mRealToken;
 
     public WindowContainerToken(IWindowContainerToken realToken) {
@@ -53,6 +54,7 @@ public final class WindowContainerToken implements Parcelable {
     }
 
     public boolean equals(Object obj) {
-        return (obj instanceof WindowContainerToken) && this.mRealToken.asBinder() == ((WindowContainerToken) obj).asBinder();
+        return (obj instanceof WindowContainerToken)
+                && this.mRealToken.asBinder() == ((WindowContainerToken) obj).asBinder();
     }
 }

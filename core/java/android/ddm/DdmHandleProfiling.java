@@ -2,10 +2,12 @@ package android.ddm;
 
 import android.os.Debug;
 import android.util.Log;
-import java.nio.ByteBuffer;
+
 import org.apache.harmony.dalvik.ddmc.Chunk;
 import org.apache.harmony.dalvik.ddmc.ChunkHandler;
 import org.apache.harmony.dalvik.ddmc.DdmServer;
+
+import java.nio.ByteBuffer;
 
 /* loaded from: classes.dex */
 public class DdmHandleProfiling extends DdmHandle {
@@ -19,8 +21,7 @@ public class DdmHandleProfiling extends DdmHandle {
     public static final int CHUNK_SPSE = ChunkHandler.type("SPSE");
     private static DdmHandleProfiling mInstance = new DdmHandleProfiling();
 
-    private DdmHandleProfiling() {
-    }
+    private DdmHandleProfiling() {}
 
     public static void register() {
         DdmServer.registerHandler(CHUNK_MPRS, mInstance);
@@ -32,11 +33,9 @@ public class DdmHandleProfiling extends DdmHandle {
         DdmServer.registerHandler(CHUNK_SPSE, mInstance);
     }
 
-    public void onConnected() {
-    }
+    public void onConnected() {}
 
-    public void onDisconnected() {
-    }
+    public void onDisconnected() {}
 
     public Chunk handleChunk(Chunk request) {
         int type = request.type;

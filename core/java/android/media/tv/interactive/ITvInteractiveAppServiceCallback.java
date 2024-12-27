@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface ITvInteractiveAppServiceCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.media.tv.interactive.ITvInteractiveAppServiceCallback";
+    public static final String DESCRIPTOR =
+            "android.media.tv.interactive.ITvInteractiveAppServiceCallback";
 
     void onStateChanged(int i, int i2, int i3) throws RemoteException;
 
     public static class Default implements ITvInteractiveAppServiceCallback {
         @Override // android.media.tv.interactive.ITvInteractiveAppServiceCallback
-        public void onStateChanged(int type, int state, int error) throws RemoteException {
-        }
+        public void onStateChanged(int type, int state, int error) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ITvInteractiveAppServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvInteractiveAppServiceCallback {
+    public abstract static class Stub extends Binder implements ITvInteractiveAppServiceCallback {
         static final int TRANSACTION_onStateChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ITvInteractiveAppServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITvInteractiveAppServiceCallback.DESCRIPTOR);
             }

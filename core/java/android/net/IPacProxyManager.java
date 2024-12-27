@@ -1,6 +1,5 @@
 package android.net;
 
-import android.net.IPacProxyInstalledListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -13,22 +12,20 @@ public interface IPacProxyManager extends IInterface {
 
     void addListener(IPacProxyInstalledListener iPacProxyInstalledListener) throws RemoteException;
 
-    void removeListener(IPacProxyInstalledListener iPacProxyInstalledListener) throws RemoteException;
+    void removeListener(IPacProxyInstalledListener iPacProxyInstalledListener)
+            throws RemoteException;
 
     void setCurrentProxyScriptUrl(ProxyInfo proxyInfo) throws RemoteException;
 
     public static class Default implements IPacProxyManager {
         @Override // android.net.IPacProxyManager
-        public void addListener(IPacProxyInstalledListener listener) throws RemoteException {
-        }
+        public void addListener(IPacProxyInstalledListener listener) throws RemoteException {}
 
         @Override // android.net.IPacProxyManager
-        public void removeListener(IPacProxyInstalledListener listener) throws RemoteException {
-        }
+        public void removeListener(IPacProxyInstalledListener listener) throws RemoteException {}
 
         @Override // android.net.IPacProxyManager
-        public void setCurrentProxyScriptUrl(ProxyInfo proxyInfo) throws RemoteException {
-        }
+        public void setCurrentProxyScriptUrl(ProxyInfo proxyInfo) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +33,7 @@ public interface IPacProxyManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPacProxyManager {
+    public abstract static class Stub extends Binder implements IPacProxyManager {
         static final int TRANSACTION_addListener = 1;
         static final int TRANSACTION_removeListener = 2;
         static final int TRANSACTION_setCurrentProxyScriptUrl = 3;
@@ -80,7 +77,8 @@ public interface IPacProxyManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPacProxyManager.DESCRIPTOR);
             }
@@ -90,13 +88,15 @@ public interface IPacProxyManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IPacProxyInstalledListener _arg0 = IPacProxyInstalledListener.Stub.asInterface(data.readStrongBinder());
+                    IPacProxyInstalledListener _arg0 =
+                            IPacProxyInstalledListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addListener(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IPacProxyInstalledListener _arg02 = IPacProxyInstalledListener.Stub.asInterface(data.readStrongBinder());
+                    IPacProxyInstalledListener _arg02 =
+                            IPacProxyInstalledListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeListener(_arg02);
                     reply.writeNoException();

@@ -1,6 +1,5 @@
 package com.samsung.android.sume.core.functional;
 
-import java.lang.Enum;
 
 @FunctionalInterface
 /* loaded from: classes6.dex */

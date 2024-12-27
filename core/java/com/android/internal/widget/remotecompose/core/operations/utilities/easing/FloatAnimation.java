@@ -26,14 +26,14 @@ public class FloatAnimation extends Easing {
         return str;
     }
 
-    public FloatAnimation() {
-    }
+    public FloatAnimation() {}
 
     public FloatAnimation(float... description) {
         setAnimationDescription(description);
     }
 
-    public FloatAnimation(int type, float duration, float[] description, float initialValue, float wrap) {
+    public FloatAnimation(
+            int type, float duration, float[] description, float initialValue, float wrap) {
         setAnimationDescription(packToFloatArray(duration, type, description, initialValue, wrap));
     }
 
@@ -65,7 +65,12 @@ public class FloatAnimation extends Easing {
             i3 = 0 + 1;
         }
         if (fArr2.length > 1) {
-            fArr2[i3] = Float.intBitsToFloat((length << 16) | (((1 ^ (Float.isNaN(f3) ? 1 : 0)) | (Float.isNaN(f2) ? 0 : 2)) << 8) | i);
+            fArr2[i3] =
+                    Float.intBitsToFloat(
+                            (length << 16)
+                                    | (((1 ^ (Float.isNaN(f3) ? 1 : 0)) | (Float.isNaN(f2) ? 0 : 2))
+                                            << 8)
+                                    | i);
             i3++;
         }
         if (length > 0) {
@@ -115,7 +120,12 @@ public class FloatAnimation extends Easing {
                 this.mEasingCurve = new CubicEasing(type);
                 break;
             case 11:
-                this.mEasingCurve = new CubicEasing(params[offset + 0], params[offset + 1], params[offset + 2], params[offset + 3]);
+                this.mEasingCurve =
+                        new CubicEasing(
+                                params[offset + 0],
+                                params[offset + 1],
+                                params[offset + 2],
+                                params[offset + 3]);
                 break;
             case 12:
                 this.mEasingCurve = new StepCurve(params, offset, len);
@@ -145,7 +155,8 @@ public class FloatAnimation extends Easing {
     public void setTargetValue(float value) {
         if (Float.isNaN(this.mWrap)) {
             this.mTargetValue = value;
-        } else if (Math.abs(((value % this.mWrap) + this.mWrap) - this.mInitialValue) < Math.abs((value % this.mWrap) - this.mInitialValue)) {
+        } else if (Math.abs(((value % this.mWrap) + this.mWrap) - this.mInitialValue)
+                < Math.abs((value % this.mWrap) - this.mInitialValue)) {
             this.mTargetValue = (value % this.mWrap) + this.mWrap;
         } else {
             this.mTargetValue = value % this.mWrap;
@@ -169,12 +180,15 @@ public class FloatAnimation extends Easing {
 
     @Override // com.android.internal.widget.remotecompose.core.operations.utilities.easing.Easing
     public float get(float t) {
-        return (this.mEasingCurve.get(t / this.mDuration) * (this.mTargetValue - this.mInitialValue)) + this.mInitialValue;
+        return (this.mEasingCurve.get(t / this.mDuration)
+                        * (this.mTargetValue - this.mInitialValue))
+                + this.mInitialValue;
     }
 
     @Override // com.android.internal.widget.remotecompose.core.operations.utilities.easing.Easing
     public float getDiff(float t) {
-        return this.mEasingCurve.getDiff(t / this.mDuration) * (this.mTargetValue - this.mInitialValue);
+        return this.mEasingCurve.getDiff(t / this.mDuration)
+                * (this.mTargetValue - this.mInitialValue);
     }
 
     public float getInitialValue() {

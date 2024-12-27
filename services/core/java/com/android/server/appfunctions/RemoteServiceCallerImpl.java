@@ -14,7 +14,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.util.Log;
-import com.android.server.appfunctions.RemoteServiceCallerImpl;
+
 import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Function;
@@ -33,10 +33,20 @@ public final class RemoteServiceCallerImpl implements RemoteServiceCaller {
         public final IBinder mCallerBinder;
         public final CancellationSignal mCancellationSignal;
         public final long mCancellationTimeoutMillis;
-        public final RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda2 mCancellationTimeoutRunnable = new RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda2(1, this);
-        public RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda1 mDirectServiceVulture;
+        public final RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda2
+                mCancellationTimeoutRunnable =
+                        new RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda2(
+                                1, this);
+        public RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda1
+                mDirectServiceVulture;
 
-        public OneOffServiceConnection(Intent intent, UserHandle userHandle, long j, CancellationSignal cancellationSignal, RunAppFunctionServiceCallback runAppFunctionServiceCallback, IBinder iBinder) {
+        public OneOffServiceConnection(
+                Intent intent,
+                UserHandle userHandle,
+                long j,
+                CancellationSignal cancellationSignal,
+                RunAppFunctionServiceCallback runAppFunctionServiceCallback,
+                IBinder iBinder) {
             this.mCallback = runAppFunctionServiceCallback;
             this.mCancellationTimeoutMillis = j;
             this.mCancellationSignal = cancellationSignal;
@@ -49,7 +59,9 @@ public final class RemoteServiceCallerImpl implements RemoteServiceCaller {
             Executor executor = RemoteServiceCallerImpl.this.mExecutor;
             RunAppFunctionServiceCallback runAppFunctionServiceCallback = this.mCallback;
             Objects.requireNonNull(runAppFunctionServiceCallback);
-            executor.execute(new RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda2(0, runAppFunctionServiceCallback));
+            executor.execute(
+                    new RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda2(
+                            0, runAppFunctionServiceCallback));
         }
 
         @Override // android.content.ServiceConnection
@@ -58,43 +70,74 @@ public final class RemoteServiceCallerImpl implements RemoteServiceCaller {
             Executor executor = RemoteServiceCallerImpl.this.mExecutor;
             RunAppFunctionServiceCallback runAppFunctionServiceCallback = this.mCallback;
             Objects.requireNonNull(runAppFunctionServiceCallback);
-            executor.execute(new RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda2(0, runAppFunctionServiceCallback));
+            executor.execute(
+                    new RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda2(
+                            0, runAppFunctionServiceCallback));
         }
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             final Object apply = RemoteServiceCallerImpl.this.mInterfaceConverter.apply(iBinder);
-            RemoteServiceCallerImpl.this.mExecutor.execute(new Runnable() { // from class: com.android.server.appfunctions.RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RemoteServiceCallerImpl.OneOffServiceConnection oneOffServiceConnection = RemoteServiceCallerImpl.OneOffServiceConnection.this;
-                    Object obj = apply;
-                    RunAppFunctionServiceCallback runAppFunctionServiceCallback = oneOffServiceConnection.mCallback;
-                    runAppFunctionServiceCallback.getClass();
-                    try {
-                        ((IAppFunctionService) obj).executeAppFunction(runAppFunctionServiceCallback.mRequestInternal.getClientRequest(), runAppFunctionServiceCallback.mRequestInternal.getCallingPackage(), runAppFunctionServiceCallback.mCancellationCallback, new IExecuteAppFunctionCallback.Stub() { // from class: com.android.server.appfunctions.RunAppFunctionServiceCallback.1
-                            public final /* synthetic */ RemoteServiceCallerImpl.OneOffServiceConnection val$serviceUsageCompleteListener;
+            RemoteServiceCallerImpl.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // com.android.server.appfunctions.RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RemoteServiceCallerImpl.OneOffServiceConnection
+                                    oneOffServiceConnection =
+                                            RemoteServiceCallerImpl.OneOffServiceConnection.this;
+                            Object obj = apply;
+                            RunAppFunctionServiceCallback runAppFunctionServiceCallback =
+                                    oneOffServiceConnection.mCallback;
+                            runAppFunctionServiceCallback.getClass();
+                            try {
+                                ((IAppFunctionService) obj)
+                                        .executeAppFunction(
+                                                runAppFunctionServiceCallback.mRequestInternal
+                                                        .getClientRequest(),
+                                                runAppFunctionServiceCallback.mRequestInternal
+                                                        .getCallingPackage(),
+                                                runAppFunctionServiceCallback.mCancellationCallback,
+                                                new IExecuteAppFunctionCallback
+                                                        .Stub() { // from class:
+                                                                  // com.android.server.appfunctions.RunAppFunctionServiceCallback.1
+                                                    public final /* synthetic */
+                                                    RemoteServiceCallerImpl.OneOffServiceConnection
+                                                            val$serviceUsageCompleteListener;
 
-                            public AnonymousClass1(RemoteServiceCallerImpl.OneOffServiceConnection oneOffServiceConnection2) {
-                                r2 = oneOffServiceConnection2;
-                            }
+                                                    public AnonymousClass1(
+                                                            RemoteServiceCallerImpl
+                                                                            .OneOffServiceConnection
+                                                                    oneOffServiceConnection2) {
+                                                        r2 = oneOffServiceConnection2;
+                                                    }
 
-                            public final void onError(AppFunctionException appFunctionException) {
-                                RunAppFunctionServiceCallback.this.mSafeExecuteAppFunctionCallback.onError(appFunctionException);
-                                r2.safeUnbind();
-                            }
+                                                    public final void onError(
+                                                            AppFunctionException
+                                                                    appFunctionException) {
+                                                        RunAppFunctionServiceCallback.this
+                                                                .mSafeExecuteAppFunctionCallback
+                                                                .onError(appFunctionException);
+                                                        r2.safeUnbind();
+                                                    }
 
-                            public final void onSuccess(ExecuteAppFunctionResponse executeAppFunctionResponse) {
-                                RunAppFunctionServiceCallback.this.mSafeExecuteAppFunctionCallback.onResult(executeAppFunctionResponse);
-                                r2.safeUnbind();
+                                                    public final void onSuccess(
+                                                            ExecuteAppFunctionResponse
+                                                                    executeAppFunctionResponse) {
+                                                        RunAppFunctionServiceCallback.this
+                                                                .mSafeExecuteAppFunctionCallback
+                                                                .onResult(
+                                                                        executeAppFunctionResponse);
+                                                        r2.safeUnbind();
+                                                    }
+                                                });
+                            } catch (Exception e) {
+                                runAppFunctionServiceCallback.mSafeExecuteAppFunctionCallback
+                                        .onError(new AppFunctionException(3000, e.getMessage()));
+                                oneOffServiceConnection2.safeUnbind();
                             }
-                        });
-                    } catch (Exception e) {
-                        runAppFunctionServiceCallback.mSafeExecuteAppFunctionCallback.onError(new AppFunctionException(3000, e.getMessage()));
-                        oneOffServiceConnection2.safeUnbind();
-                    }
-                }
-            });
+                        }
+                    });
         }
 
         @Override // android.content.ServiceConnection
@@ -103,16 +146,24 @@ public final class RemoteServiceCallerImpl implements RemoteServiceCaller {
             Executor executor = RemoteServiceCallerImpl.this.mExecutor;
             RunAppFunctionServiceCallback runAppFunctionServiceCallback = this.mCallback;
             Objects.requireNonNull(runAppFunctionServiceCallback);
-            executor.execute(new RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda2(0, runAppFunctionServiceCallback));
+            executor.execute(
+                    new RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda2(
+                            0, runAppFunctionServiceCallback));
         }
 
         public final void safeUnbind() {
             try {
-                RemoteServiceCallerImpl.this.mHandler.removeCallbacks(this.mCancellationTimeoutRunnable);
+                RemoteServiceCallerImpl.this.mHandler.removeCallbacks(
+                        this.mCancellationTimeoutRunnable);
                 RemoteServiceCallerImpl.this.mContext.unbindService(this);
-                RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda1 remoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda1 = this.mDirectServiceVulture;
-                if (remoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda1 != null) {
-                    this.mCallerBinder.unlinkToDeath(remoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda1, 0);
+                RemoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda1
+                        remoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda1 =
+                                this.mDirectServiceVulture;
+                if (remoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda1
+                        != null) {
+                    this.mCallerBinder.unlinkToDeath(
+                            remoteServiceCallerImpl$OneOffServiceConnection$$ExternalSyntheticLambda1,
+                            0);
                 }
             } catch (Exception e) {
                 Log.w("AppFunctionsServiceCall", "Failed to unbind", e);
@@ -120,7 +171,11 @@ public final class RemoteServiceCallerImpl implements RemoteServiceCaller {
         }
     }
 
-    public RemoteServiceCallerImpl(Context context, AppFunctionManagerServiceImpl$$ExternalSyntheticLambda0 appFunctionManagerServiceImpl$$ExternalSyntheticLambda0, Executor executor) {
+    public RemoteServiceCallerImpl(
+            Context context,
+            AppFunctionManagerServiceImpl$$ExternalSyntheticLambda0
+                    appFunctionManagerServiceImpl$$ExternalSyntheticLambda0,
+            Executor executor) {
         this.mContext = context;
         this.mInterfaceConverter = appFunctionManagerServiceImpl$$ExternalSyntheticLambda0;
         this.mExecutor = executor;

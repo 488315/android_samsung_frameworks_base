@@ -3,13 +3,15 @@ package com.android.server;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.util.Log;
-import com.android.server.FMPlayerNativeBase;
+
 import com.samsung.android.feature.SemFloatingFeature;
+
 import java.util.Arrays;
 
 /* loaded from: classes5.dex */
 public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase {
-    public static final boolean FEATURE_SUPPORT_RDS = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FMRADIO_SUPPORT_RDS");
+    public static final boolean FEATURE_SUPPORT_RDS =
+            SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FMRADIO_SUPPORT_RDS");
     public static final int GET = 162;
     public static final int GET_CURRENT_CHANNEL = 13;
     public static final int GET_CURRENT_FM_BAND = 3;
@@ -122,8 +124,19 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
 
     protected void initEndpointBes() {
         UsbInterface usbInterface;
-        Log.d("FMRadioBestechnic", "interface Count - " + this.mUsbDevice.getInterfaceCount() + " End ID - " + this.mUsbDevice.getInterface(this.mUsbDevice.getInterfaceCount() - 1).getId());
-        if (this.mUsbDevice.getInterface(this.mUsbDevice.getInterfaceCount() - 1).getId() == 4 && (usbInterface = this.mUsbDevice.getInterface(this.mUsbDevice.getInterfaceCount() - 1)) != null) {
+        Log.d(
+                "FMRadioBestechnic",
+                "interface Count - "
+                        + this.mUsbDevice.getInterfaceCount()
+                        + " End ID - "
+                        + this.mUsbDevice
+                                .getInterface(this.mUsbDevice.getInterfaceCount() - 1)
+                                .getId());
+        if (this.mUsbDevice.getInterface(this.mUsbDevice.getInterfaceCount() - 1).getId() == 4
+                && (usbInterface =
+                                this.mUsbDevice.getInterface(
+                                        this.mUsbDevice.getInterfaceCount() - 1))
+                        != null) {
             Log.d("FMRadioBestechnic", "claim HID " + usbInterface.toString());
             if (this.mUsbDeviceConnection.claimInterface(usbInterface, true)) {
                 this.mCDCInterface = usbInterface;
@@ -131,16 +144,24 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
                     UsbEndpoint endpoint = usbInterface.getEndpoint(j);
                     switch (endpoint.getType()) {
                         case 3:
-                            Log.d("FMRadioBestechnic", "found USB endpoint the Type is  USB_ENDPOINT_XFER_INT");
+                            Log.d(
+                                    "FMRadioBestechnic",
+                                    "found USB endpoint the Type is  USB_ENDPOINT_XFER_INT");
                             if (endpoint.getDirection() == 0) {
                                 Log.d("FMRadioBestechnic", "found USB_DIR_OUT");
-                                Log.d("FMRadioBestechnic", "endpoint.getEndpointNumber:" + endpoint.getEndpointNumber());
+                                Log.d(
+                                        "FMRadioBestechnic",
+                                        "endpoint.getEndpointNumber:"
+                                                + endpoint.getEndpointNumber());
                                 this.mUsbEndpoint = endpoint;
                                 break;
                             } else if (endpoint.getDirection() == 128) {
                                 Log.d("FMRadioBestechnic", "found USB_DIR_IN");
                                 this.mUsbEndpoint = endpoint;
-                                Log.d("FMRadioBestechnic", "endpoint.getEndpointNumber:" + endpoint.getEndpointNumber());
+                                Log.d(
+                                        "FMRadioBestechnic",
+                                        "endpoint.getEndpointNumber:"
+                                                + endpoint.getEndpointNumber());
                                 break;
                             } else {
                                 break;
@@ -185,17 +206,21 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
 
         private int verifyInfo(byte[] datas) {
             byte[] num = {1, 0, 8, 0, 0};
-            if (PlayerExternalChipsetBes.this.startsWith(datas, num) && PlayerExternalChipsetBes.this.mUsbDevice.getDeviceClass() != 2) {
+            if (PlayerExternalChipsetBes.this.startsWith(datas, num)
+                    && PlayerExternalChipsetBes.this.mUsbDevice.getDeviceClass() != 2) {
                 byte[] buffer = PlayerExternalChipsetBes.this.queryInfo();
                 if (buffer != null) {
-                    Log.d("FMRadioBestechnic", "buffer: " + PlayerExternalChipsetBes.this.toHex(buffer));
+                    Log.d(
+                            "FMRadioBestechnic",
+                            "buffer: " + PlayerExternalChipsetBes.this.toHex(buffer));
                 }
                 if (buffer == null) {
                     return 0;
                 }
                 Log.d("FMRadioBestechnic", "has result");
-                if (PlayerExternalChipsetBes.this.startsWith(buffer, new byte[]{1, 1}) || PlayerExternalChipsetBes.this.startsWith(buffer, new byte[]{1, 0})) {
-                    if (!PlayerExternalChipsetBes.this.startsWith(buffer, new byte[]{1, 0})) {
+                if (PlayerExternalChipsetBes.this.startsWith(buffer, new byte[] {1, 1})
+                        || PlayerExternalChipsetBes.this.startsWith(buffer, new byte[] {1, 0})) {
+                    if (!PlayerExternalChipsetBes.this.startsWith(buffer, new byte[] {1, 0})) {
                         int i = (buffer[2] & 255) + ((buffer[3] << 8) & 65535);
                         PlayerExternalChipsetBes.this.mCurrentRssi = Byte.toUnsignedInt(buffer[4]);
                     } else {
@@ -203,8 +228,9 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
                     }
                     return 1;
                 }
-                if (PlayerExternalChipsetBes.this.startsWith(buffer, new byte[]{0, 1}) || PlayerExternalChipsetBes.this.startsWith(buffer, new byte[]{0, 0})) {
-                    if (!PlayerExternalChipsetBes.this.startsWith(buffer, new byte[]{0, 0})) {
+                if (PlayerExternalChipsetBes.this.startsWith(buffer, new byte[] {0, 1})
+                        || PlayerExternalChipsetBes.this.startsWith(buffer, new byte[] {0, 0})) {
+                    if (!PlayerExternalChipsetBes.this.startsWith(buffer, new byte[] {0, 0})) {
                         int chan = (buffer[2] & 255) + ((buffer[3] << 8) & 65535);
                         PlayerExternalChipsetBes.this.mCurrentRssi = Byte.toUnsignedInt(buffer[4]);
                         if (chan > 10800 || chan < 8700) {
@@ -216,12 +242,23 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
                     }
                     return 2;
                 }
-                if (PlayerExternalChipsetBes.this.startsWith(buffer, new byte[]{2}) || PlayerExternalChipsetBes.this.mIsRDSEnabled) {
+                if (PlayerExternalChipsetBes.this.startsWith(buffer, new byte[] {2})
+                        || PlayerExternalChipsetBes.this.mIsRDSEnabled) {
                     ExtRDSData radio_data = new ExtRDSData(buffer);
                     PlayerExternalChipsetBes.this.rdsParser.parseData(radio_data);
                     if (PlayerExternalChipsetBes.this.rdsParser.isRDSDataValid()) {
-                        Log.d("FMRadioBestechnic", "RDSDataValid, PS: " + PlayerExternalChipsetBes.this.rdsParser.getProgramService() + " - RT: " + PlayerExternalChipsetBes.this.rdsParser.getRadioText());
-                        FMPlayerNativeBase.RDSData RDSdata = new FMPlayerNativeBase.RDSData(PlayerExternalChipsetBes.this.getTunedFrequency(), PlayerExternalChipsetBes.this.rdsParser.getProgramService(), PlayerExternalChipsetBes.this.rdsParser.getRadioText());
+                        Log.d(
+                                "FMRadioBestechnic",
+                                "RDSDataValid, PS: "
+                                        + PlayerExternalChipsetBes.this.rdsParser
+                                                .getProgramService()
+                                        + " - RT: "
+                                        + PlayerExternalChipsetBes.this.rdsParser.getRadioText());
+                        FMPlayerNativeBase.RDSData RDSdata =
+                                new FMPlayerNativeBase.RDSData(
+                                        PlayerExternalChipsetBes.this.getTunedFrequency(),
+                                        PlayerExternalChipsetBes.this.rdsParser.getProgramService(),
+                                        PlayerExternalChipsetBes.this.rdsParser.getRadioText());
                         Log.d("FMRadioBestechnic", RDSdata.toString());
                         PlayerExternalChipsetBes.this.mService.notifyEvent(10, RDSdata);
                     }
@@ -241,8 +278,15 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
             }
             int count = 0;
             while (true) {
-                if (PlayerExternalChipsetBes.this.mIsRDSEnabled || (PlayerExternalChipsetBes.this.mIsRunning && !Thread.currentThread().isInterrupted())) {
-                    int ret2 = PlayerExternalChipsetBes.this.mUsbDeviceConnection.bulkTransfer(PlayerExternalChipsetBes.this.mUsbEndpoint, buffer, length, 1000);
+                if (PlayerExternalChipsetBes.this.mIsRDSEnabled
+                        || (PlayerExternalChipsetBes.this.mIsRunning
+                                && !Thread.currentThread().isInterrupted())) {
+                    int ret2 =
+                            PlayerExternalChipsetBes.this.mUsbDeviceConnection.bulkTransfer(
+                                    PlayerExternalChipsetBes.this.mUsbEndpoint,
+                                    buffer,
+                                    length,
+                                    1000);
                     if (ret2 < 0) {
                         count++;
                         if (count == 50 && PlayerExternalChipsetBes.this.mUsbDevice != null) {
@@ -252,7 +296,9 @@ public abstract class PlayerExternalChipsetBes extends PlayerExternalChipsetBase
                         }
                     } else if (ret2 > 0) {
                         count = 0;
-                        Log.d("FMRadioBestechnic", "Received NOTIFY: " + PlayerExternalChipsetBes.this.toHex(buffer));
+                        Log.d(
+                                "FMRadioBestechnic",
+                                "Received NOTIFY: " + PlayerExternalChipsetBes.this.toHex(buffer));
                         int infoRet = verifyInfo(Arrays.copyOfRange(buffer, 0, ret2));
                         switch (infoRet) {
                             case 0:

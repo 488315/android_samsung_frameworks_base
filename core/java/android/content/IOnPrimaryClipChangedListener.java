@@ -12,8 +12,7 @@ public interface IOnPrimaryClipChangedListener extends IInterface {
 
     public static class Default implements IOnPrimaryClipChangedListener {
         @Override // android.content.IOnPrimaryClipChangedListener
-        public void dispatchPrimaryClipChanged() throws RemoteException {
-        }
+        public void dispatchPrimaryClipChanged() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IOnPrimaryClipChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnPrimaryClipChangedListener {
+    public abstract static class Stub extends Binder implements IOnPrimaryClipChangedListener {
         public static final String DESCRIPTOR = "android.content.IOnPrimaryClipChangedListener";
         static final int TRANSACTION_dispatchPrimaryClipChanged = 1;
 
@@ -60,7 +59,8 @@ public interface IOnPrimaryClipChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

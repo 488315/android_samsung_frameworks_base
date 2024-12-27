@@ -7,11 +7,13 @@ import android.telephony.ims.RcsContactTerminatedReason;
 import android.telephony.ims.SipDetails;
 import android.telephony.ims.stub.RcsCapabilityExchangeImplBase;
 import android.util.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes4.dex */
-public class RcsSubscribeResponseAidlWrapper implements RcsCapabilityExchangeImplBase.SubscribeResponseCallback {
+public class RcsSubscribeResponseAidlWrapper
+        implements RcsCapabilityExchangeImplBase.SubscribeResponseCallback {
     private final ISubscribeResponseCallback mResponseBinder;
 
     public RcsSubscribeResponseAidlWrapper(ISubscribeResponseCallback responseBinder) {
@@ -31,7 +33,8 @@ public class RcsSubscribeResponseAidlWrapper implements RcsCapabilityExchangeImp
     @Deprecated
     public void onNetworkResponse(int code, String reasonPhrase) throws ImsException {
         try {
-            this.mResponseBinder.onNetworkResponse(new SipDetails.Builder(3).setSipResponseCode(code, reasonPhrase).build());
+            this.mResponseBinder.onNetworkResponse(
+                    new SipDetails.Builder(3).setSipResponseCode(code, reasonPhrase).build());
         } catch (RemoteException e) {
             throw new ImsException(e.getMessage(), 1);
         }
@@ -39,9 +42,15 @@ public class RcsSubscribeResponseAidlWrapper implements RcsCapabilityExchangeImp
 
     @Override // android.telephony.ims.stub.RcsCapabilityExchangeImplBase.SubscribeResponseCallback
     @Deprecated
-    public void onNetworkResponse(int code, String reasonPhrase, int reasonHeaderCause, String reasonHeaderText) throws ImsException {
+    public void onNetworkResponse(
+            int code, String reasonPhrase, int reasonHeaderCause, String reasonHeaderText)
+            throws ImsException {
         try {
-            this.mResponseBinder.onNetworkResponse(new SipDetails.Builder(3).setSipResponseCode(code, reasonPhrase).setSipResponseReasonHeader(reasonHeaderCause, reasonHeaderText).build());
+            this.mResponseBinder.onNetworkResponse(
+                    new SipDetails.Builder(3)
+                            .setSipResponseCode(code, reasonPhrase)
+                            .setSipResponseReasonHeader(reasonHeaderCause, reasonHeaderText)
+                            .build());
         } catch (RemoteException e) {
             throw new ImsException(e.getMessage(), 1);
         }
@@ -66,7 +75,8 @@ public class RcsSubscribeResponseAidlWrapper implements RcsCapabilityExchangeImp
     }
 
     @Override // android.telephony.ims.stub.RcsCapabilityExchangeImplBase.SubscribeResponseCallback
-    public void onResourceTerminated(List<Pair<Uri, String>> uriTerminatedReason) throws ImsException {
+    public void onResourceTerminated(List<Pair<Uri, String>> uriTerminatedReason)
+            throws ImsException {
         try {
             this.mResponseBinder.onResourceTerminated(getTerminatedReasonList(uriTerminatedReason));
         } catch (RemoteException e) {
@@ -74,11 +84,13 @@ public class RcsSubscribeResponseAidlWrapper implements RcsCapabilityExchangeImp
         }
     }
 
-    private List<RcsContactTerminatedReason> getTerminatedReasonList(List<Pair<Uri, String>> uriTerminatedReason) {
+    private List<RcsContactTerminatedReason> getTerminatedReasonList(
+            List<Pair<Uri, String>> uriTerminatedReason) {
         List<RcsContactTerminatedReason> uriTerminatedReasonList = new ArrayList<>();
         if (uriTerminatedReason != null) {
             for (Pair<Uri, String> pair : uriTerminatedReason) {
-                RcsContactTerminatedReason reason = new RcsContactTerminatedReason(pair.first, pair.second);
+                RcsContactTerminatedReason reason =
+                        new RcsContactTerminatedReason(pair.first, pair.second);
                 uriTerminatedReasonList.add(reason);
             }
         }

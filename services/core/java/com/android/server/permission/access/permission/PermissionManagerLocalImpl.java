@@ -1,6 +1,7 @@
 package com.android.server.permission.access.permission;
 
 import android.os.Build;
+
 import com.android.server.permission.PermissionManagerLocal;
 import com.android.server.permission.access.AccessCheckingService;
 import com.android.server.permission.access.SchemePolicy;
@@ -12,9 +13,18 @@ public final class PermissionManagerLocalImpl implements PermissionManagerLocal 
     public final AppIdPermissionPolicy policy;
 
     public PermissionManagerLocalImpl(AccessCheckingService accessCheckingService) {
-        SchemePolicy schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar = accessCheckingService.getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar("uid", "permission");
-        Intrinsics.checkNotNull("null cannot be cast to non-null type com.android.server.permission.access.permission.AppIdPermissionPolicy", schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar);
-        this.policy = (AppIdPermissionPolicy) schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar;
+        SchemePolicy
+                schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar =
+                        accessCheckingService
+                                .getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                                        "uid", "permission");
+        Intrinsics.checkNotNull(
+                "null cannot be cast to non-null type"
+                    + " com.android.server.permission.access.permission.AppIdPermissionPolicy",
+                schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar);
+        this.policy =
+                (AppIdPermissionPolicy)
+                        schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar;
     }
 
     @Override // com.android.server.permission.PermissionManagerLocal

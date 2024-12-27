@@ -4,6 +4,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import vendor.samsung.hardware.khdm.ISehKhdm;
 import vendor.samsung.hardware.khdm.SehDeviceInfo;
 
@@ -28,7 +29,8 @@ public class HdmVendorController {
     }
 
     public static ISehKhdm getService() {
-        IBinder waitForService = ServiceManager.waitForService("vendor.samsung.hardware.khdm.ISehKhdm/default");
+        IBinder waitForService =
+                ServiceManager.waitForService("vendor.samsung.hardware.khdm.ISehKhdm/default");
         int i = ISehKhdm.Stub.$r8$clinit;
         if (waitForService == null) {
             return null;
@@ -42,7 +44,8 @@ public class HdmVendorController {
         return proxy;
     }
 
-    public static native byte[] hdm_apply_policy(byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4, byte[] bArr5, boolean z);
+    public static native byte[] hdm_apply_policy(
+            byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4, byte[] bArr5, boolean z);
 
     public static native int hdm_delete_keys();
 
@@ -70,7 +73,8 @@ public class HdmVendorController {
         return bArr2;
     }
 
-    public final byte[] hdmApplyPolicy(byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4, byte[] bArr5, boolean z) {
+    public final byte[] hdmApplyPolicy(
+            byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4, byte[] bArr5, boolean z) {
         try {
             Log.i("Hdm - VendorInterface", "hdmApplyPolicy policy: ");
             if (this.hidlSupport) {
@@ -99,7 +103,10 @@ public class HdmVendorController {
             }
             sehDeviceInfo.macAddr = bArr10;
             sehDeviceInfo.isWrappedKey = z;
-            return parseDeviceResponse(((ISehKhdm.Stub.Proxy) getService()).applyPolicy(bArr, sehDeviceInfo, bArr6), "hdmApplyPolicy", bArr6);
+            return parseDeviceResponse(
+                    ((ISehKhdm.Stub.Proxy) getService()).applyPolicy(bArr, sehDeviceInfo, bArr6),
+                    "hdmApplyPolicy",
+                    bArr6);
         } catch (Exception e) {
             Log.e("Hdm - VendorInterface", "hdmApplyPolicy failed: " + e, e);
             return null;
@@ -127,7 +134,10 @@ public class HdmVendorController {
             }
             sehDeviceInfo.macAddr = bArr5;
             sehDeviceInfo.isWrappedKey = z;
-            return parseDeviceResponse(((ISehKhdm.Stub.Proxy) getService()).getDeviceId(sehDeviceInfo, bArr3), "hdmGetId", bArr3);
+            return parseDeviceResponse(
+                    ((ISehKhdm.Stub.Proxy) getService()).getDeviceId(sehDeviceInfo, bArr3),
+                    "hdmGetId",
+                    bArr3);
         } catch (Exception e) {
             Log.e("Hdm - VendorInterface", "hdmGetId failed: " + e, e);
             return null;
@@ -154,7 +164,10 @@ public class HdmVendorController {
                 return hdm_get_policy(z, bArr, bArr2);
             }
             byte[] bArr3 = new byte[15000];
-            return parseDeviceResponse(((ISehKhdm.Stub.Proxy) getService()).getPolicy(z, bArr, bArr2, bArr3), "hdmGetPolicy", bArr3);
+            return parseDeviceResponse(
+                    ((ISehKhdm.Stub.Proxy) getService()).getPolicy(z, bArr, bArr2, bArr3),
+                    "hdmGetPolicy",
+                    bArr3);
         } catch (Exception e) {
             Log.e("Hdm - VendorInterface", "hdmGetPolicy failed: " + e, e);
             return null;

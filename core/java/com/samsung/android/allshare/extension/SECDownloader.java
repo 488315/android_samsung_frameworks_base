@@ -2,6 +2,7 @@ package com.samsung.android.allshare.extension;
 
 import android.os.Bundle;
 import android.os.Parcelable;
+
 import com.samsung.android.allshare.DLog;
 import com.samsung.android.allshare.IAllShareConnector;
 import com.samsung.android.allshare.Item;
@@ -9,6 +10,7 @@ import com.sec.android.allshare.iface.CVMessage;
 import com.sec.android.allshare.iface.IBundleHolder;
 import com.sec.android.allshare.iface.message.AllShareAction;
 import com.sec.android.allshare.iface.message.AllShareKey;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -28,7 +30,8 @@ public class SECDownloader {
 
     public boolean Download(String serverName, ArrayList<Item> itemList) {
         boolean result = false;
-        if (this.mAllShareConnector == null || !this.mAllShareConnector.isAllShareServiceConnected()) {
+        if (this.mAllShareConnector == null
+                || !this.mAllShareConnector.isAllShareServiceConnected()) {
             DLog.w_api(TAG_CLASS, "Download, AllShare Service is not available");
             return false;
         }
@@ -51,7 +54,8 @@ public class SECDownloader {
         req_msg.setActionID(AllShareAction.ACTION_DOWNLOAD_REQUEST);
         Bundle req_bundle = new Bundle();
         req_bundle.putString(AllShareKey.BUNDLE_STRING_DEVICE_NAME, serverName);
-        req_bundle.putParcelableArrayList(AllShareKey.BUNDLE_PARCELABLE_ARRAYLIST_CONTENT_URI, bundleList);
+        req_bundle.putParcelableArrayList(
+                AllShareKey.BUNDLE_PARCELABLE_ARRAYLIST_CONTENT_URI, bundleList);
         req_msg.setBundle(req_bundle);
         CVMessage res_msg = this.mAllShareConnector.requestCVMSync(req_msg);
         if (res_msg == null) {
@@ -75,42 +79,61 @@ public class SECDownloader {
     }
 
     private void downloadRemains(final String serverName, final ArrayList<Item> itemList) {
-        new Thread(new Runnable() { // from class: com.samsung.android.allshare.extension.SECDownloader.1
-            @Override // java.lang.Runnable
-            public void run() {
-                DLog.i_api(SECDownloader.TAG_CLASS, "downloadRemains, Thread Start!!!");
-                int i = 50;
-                while (true) {
-                    ArrayList<Bundle> bundleList = new ArrayList<>();
-                    while (i < itemList.size() && bundleList.size() < 50) {
-                        Parcelable parcelable = (Item) itemList.get(i);
-                        if (parcelable != null && (parcelable instanceof IBundleHolder)) {
-                            bundleList.add(((IBundleHolder) parcelable).getBundle());
-                        }
-                        i++;
-                    }
-                    CVMessage req_msg = new CVMessage();
-                    req_msg.setActionID(AllShareAction.ACTION_DOWNLOAD_REQUEST);
-                    Bundle req_bundle = new Bundle();
-                    req_bundle.putString(AllShareKey.BUNDLE_STRING_DEVICE_NAME, serverName);
-                    req_bundle.putParcelableArrayList(AllShareKey.BUNDLE_PARCELABLE_ARRAYLIST_CONTENT_URI, bundleList);
-                    req_msg.setBundle(req_bundle);
-                    CVMessage res_msg = SECDownloader.this.mAllShareConnector.requestCVMSync(req_msg);
-                    if (res_msg == null) {
-                        DLog.w_api(SECDownloader.TAG_CLASS, "downloadRemains, res_msg is null");
-                        break;
-                    }
-                    Bundle res_bundle = res_msg.getBundle();
-                    if (res_bundle == null) {
-                        DLog.w_api(SECDownloader.TAG_CLASS, "downloadRemains, res_bundle is null");
-                        break;
-                    } else if (i == itemList.size()) {
-                        DLog.i_api(SECDownloader.TAG_CLASS, "downloadRemains, finish size = " + i);
-                        break;
-                    }
-                }
-                DLog.i_api(SECDownloader.TAG_CLASS, "downloadRemains, Thread End!!!");
-            }
-        }).start();
+        new Thread(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.allshare.extension.SECDownloader.1
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                DLog.i_api(
+                                        SECDownloader.TAG_CLASS,
+                                        "downloadRemains, Thread Start!!!");
+                                int i = 50;
+                                while (true) {
+                                    ArrayList<Bundle> bundleList = new ArrayList<>();
+                                    while (i < itemList.size() && bundleList.size() < 50) {
+                                        Parcelable parcelable = (Item) itemList.get(i);
+                                        if (parcelable != null
+                                                && (parcelable instanceof IBundleHolder)) {
+                                            bundleList.add(
+                                                    ((IBundleHolder) parcelable).getBundle());
+                                        }
+                                        i++;
+                                    }
+                                    CVMessage req_msg = new CVMessage();
+                                    req_msg.setActionID(AllShareAction.ACTION_DOWNLOAD_REQUEST);
+                                    Bundle req_bundle = new Bundle();
+                                    req_bundle.putString(
+                                            AllShareKey.BUNDLE_STRING_DEVICE_NAME, serverName);
+                                    req_bundle.putParcelableArrayList(
+                                            AllShareKey.BUNDLE_PARCELABLE_ARRAYLIST_CONTENT_URI,
+                                            bundleList);
+                                    req_msg.setBundle(req_bundle);
+                                    CVMessage res_msg =
+                                            SECDownloader.this.mAllShareConnector.requestCVMSync(
+                                                    req_msg);
+                                    if (res_msg == null) {
+                                        DLog.w_api(
+                                                SECDownloader.TAG_CLASS,
+                                                "downloadRemains, res_msg is null");
+                                        break;
+                                    }
+                                    Bundle res_bundle = res_msg.getBundle();
+                                    if (res_bundle == null) {
+                                        DLog.w_api(
+                                                SECDownloader.TAG_CLASS,
+                                                "downloadRemains, res_bundle is null");
+                                        break;
+                                    } else if (i == itemList.size()) {
+                                        DLog.i_api(
+                                                SECDownloader.TAG_CLASS,
+                                                "downloadRemains, finish size = " + i);
+                                        break;
+                                    }
+                                }
+                                DLog.i_api(
+                                        SECDownloader.TAG_CLASS, "downloadRemains, Thread End!!!");
+                            }
+                        })
+                .start();
     }
 }

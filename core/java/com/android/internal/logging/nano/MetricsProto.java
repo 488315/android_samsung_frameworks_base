@@ -4,6 +4,7 @@ import com.android.framework.protobuf.nano.CodedInputByteBufferNano;
 import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -1668,19 +1669,21 @@ public interface MetricsProto {
         }
 
         /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-            jadx.core.utils.exceptions.JadxRuntimeException: Failed to find switch 'out' block (already processed)
-            	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.calcSwitchOut(SwitchRegionMaker.java:202)
-            	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.process(SwitchRegionMaker.java:61)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:115)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
-            	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:103)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:92)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:49)
-            	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
-            */
+        jadx.core.utils.exceptions.JadxRuntimeException: Failed to find switch 'out' block (already processed)
+        	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.calcSwitchOut(SwitchRegionMaker.java:202)
+        	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.process(SwitchRegionMaker.java:61)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:115)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
+        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:103)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:92)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:49)
+        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
+        */
         @Override // com.android.framework.protobuf.nano.MessageNano
-        public com.android.internal.logging.nano.MetricsProto.MetricsEvent mergeFrom(com.android.framework.protobuf.nano.CodedInputByteBufferNano r3) throws java.io.IOException {
+        public com.android.internal.logging.nano.MetricsProto.MetricsEvent mergeFrom(
+                com.android.framework.protobuf.nano.CodedInputByteBufferNano r3)
+                throws java.io.IOException {
             /*
                 r2 = this;
             L1:
@@ -1698,10 +1701,13 @@ public interface MetricsProto {
             L10:
                 goto L1
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.internal.logging.nano.MetricsProto.MetricsEvent.mergeFrom(com.android.framework.protobuf.nano.CodedInputByteBufferNano):com.android.internal.logging.nano.MetricsProto$MetricsEvent");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.internal.logging.nano.MetricsProto.MetricsEvent.mergeFrom(com.android.framework.protobuf.nano.CodedInputByteBufferNano):com.android.internal.logging.nano.MetricsProto$MetricsEvent");
         }
 
-        public static MetricsEvent parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static MetricsEvent parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (MetricsEvent) MessageNano.mergeFrom(new MetricsEvent(), data);
         }
 

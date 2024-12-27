@@ -14,8 +14,11 @@ import android.os.PowerWhitelistManager;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.ArrayMap;
+
 import com.android.internal.content.NativeLibraryHelper;
+
 import com.samsung.android.app.usage.IUsageStatsWatcher;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.Duration;
@@ -30,14 +33,11 @@ public final class UsageStatsManager {
     public static final String EXTRA_EVENT_ACTION = "android.app.usage.extra.EVENT_ACTION";
     public static final String EXTRA_EVENT_CATEGORY = "android.app.usage.extra.EVENT_CATEGORY";
 
-    @SystemApi
-    public static final String EXTRA_OBSERVER_ID = "android.app.usage.extra.OBSERVER_ID";
+    @SystemApi public static final String EXTRA_OBSERVER_ID = "android.app.usage.extra.OBSERVER_ID";
 
-    @SystemApi
-    public static final String EXTRA_TIME_LIMIT = "android.app.usage.extra.TIME_LIMIT";
+    @SystemApi public static final String EXTRA_TIME_LIMIT = "android.app.usage.extra.TIME_LIMIT";
 
-    @SystemApi
-    public static final String EXTRA_TIME_USED = "android.app.usage.extra.TIME_USED";
+    @SystemApi public static final String EXTRA_TIME_USED = "android.app.usage.extra.TIME_USED";
     public static final int INTERVAL_BEST = 4;
     public static final int INTERVAL_COUNT = 4;
     public static final int INTERVAL_DAILY = 0;
@@ -79,36 +79,29 @@ public final class UsageStatsManager {
     public static final int REASON_SUB_USAGE_USER_INTERACTION = 3;
     public static final int STANDBY_BUCKET_ACTIVE = 10;
 
-    @SystemApi
-    public static final int STANDBY_BUCKET_EXEMPTED = 5;
+    @SystemApi public static final int STANDBY_BUCKET_EXEMPTED = 5;
     public static final int STANDBY_BUCKET_FREQUENT = 30;
 
-    @SystemApi
-    public static final int STANDBY_BUCKET_NEVER = 50;
+    @SystemApi public static final int STANDBY_BUCKET_NEVER = 50;
     public static final int STANDBY_BUCKET_RARE = 40;
     public static final int STANDBY_BUCKET_RESTRICTED = 45;
     public static final int STANDBY_BUCKET_WORKING_SET = 20;
 
-    @SystemApi
-    public static final int USAGE_SOURCE_CURRENT_ACTIVITY = 2;
+    @SystemApi public static final int USAGE_SOURCE_CURRENT_ACTIVITY = 2;
 
-    @SystemApi
-    public static final int USAGE_SOURCE_TASK_ROOT_ACTIVITY = 1;
+    @SystemApi public static final int USAGE_SOURCE_TASK_ROOT_ACTIVITY = 1;
     private static final UsageEvents sEmptyResults = new UsageEvents();
     private final Context mContext;
     private final IUsageStatsManager mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ForcedReasons {
-    }
+    public @interface ForcedReasons {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StandbyBuckets {
-    }
+    public @interface StandbyBuckets {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UsageSource {
-    }
+    public @interface UsageSource {}
 
     public UsageStatsManager(Context context, IUsageStatsManager service) {
         this.mContext = context;
@@ -117,7 +110,13 @@ public final class UsageStatsManager {
 
     public List<UsageStats> queryUsageStats(int intervalType, long beginTime, long endTime) {
         try {
-            ParceledListSlice<UsageStats> slice = this.mService.queryUsageStats(intervalType, beginTime, endTime, this.mContext.getOpPackageName(), this.mContext.getUserId());
+            ParceledListSlice<UsageStats> slice =
+                    this.mService.queryUsageStats(
+                            intervalType,
+                            beginTime,
+                            endTime,
+                            this.mContext.getOpPackageName(),
+                            this.mContext.getUserId());
             if (slice != null) {
                 return slice.getList();
             }
@@ -126,9 +125,12 @@ public final class UsageStatsManager {
         return Collections.emptyList();
     }
 
-    public List<ConfigurationStats> queryConfigurations(int intervalType, long beginTime, long endTime) {
+    public List<ConfigurationStats> queryConfigurations(
+            int intervalType, long beginTime, long endTime) {
         try {
-            ParceledListSlice<ConfigurationStats> slice = this.mService.queryConfigurationStats(intervalType, beginTime, endTime, this.mContext.getOpPackageName());
+            ParceledListSlice<ConfigurationStats> slice =
+                    this.mService.queryConfigurationStats(
+                            intervalType, beginTime, endTime, this.mContext.getOpPackageName());
             if (slice != null) {
                 return slice.getList();
             }
@@ -139,7 +141,9 @@ public final class UsageStatsManager {
 
     public List<EventStats> queryEventStats(int intervalType, long beginTime, long endTime) {
         try {
-            ParceledListSlice<EventStats> slice = this.mService.queryEventStats(intervalType, beginTime, endTime, this.mContext.getOpPackageName());
+            ParceledListSlice<EventStats> slice =
+                    this.mService.queryEventStats(
+                            intervalType, beginTime, endTime, this.mContext.getOpPackageName());
             if (slice != null) {
                 return slice.getList();
             }
@@ -150,7 +154,8 @@ public final class UsageStatsManager {
 
     public UsageEvents queryEvents(long beginTime, long endTime) {
         try {
-            UsageEvents iter = this.mService.queryEvents(beginTime, endTime, this.mContext.getOpPackageName());
+            UsageEvents iter =
+                    this.mService.queryEvents(beginTime, endTime, this.mContext.getOpPackageName());
             if (iter != null) {
                 return iter;
             }
@@ -161,7 +166,8 @@ public final class UsageStatsManager {
 
     public UsageEvents queryEvents(UsageEventsQuery query) {
         try {
-            UsageEvents iter = this.mService.queryEventsWithFilter(query, this.mContext.getOpPackageName());
+            UsageEvents iter =
+                    this.mService.queryEventsWithFilter(query, this.mContext.getOpPackageName());
             if (iter != null) {
                 return iter;
             }
@@ -172,7 +178,9 @@ public final class UsageStatsManager {
 
     public UsageEvents queryEventsForSelf(long beginTime, long endTime) {
         try {
-            UsageEvents events = this.mService.queryEventsForPackage(beginTime, endTime, this.mContext.getOpPackageName());
+            UsageEvents events =
+                    this.mService.queryEventsForPackage(
+                            beginTime, endTime, this.mContext.getOpPackageName());
             if (events != null) {
                 return events;
             }
@@ -210,7 +218,8 @@ public final class UsageStatsManager {
 
     public boolean isAppInactive(String packageName) {
         try {
-            return this.mService.isAppInactive(packageName, this.mContext.getUserId(), this.mContext.getOpPackageName());
+            return this.mService.isAppInactive(
+                    packageName, this.mContext.getUserId(), this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             return false;
         }
@@ -225,7 +234,10 @@ public final class UsageStatsManager {
 
     public int getAppStandbyBucket() {
         try {
-            return this.mService.getAppStandbyBucket(this.mContext.getOpPackageName(), this.mContext.getOpPackageName(), this.mContext.getUserId());
+            return this.mService.getAppStandbyBucket(
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             return 10;
         }
@@ -234,7 +246,8 @@ public final class UsageStatsManager {
     @SystemApi
     public int getAppStandbyBucket(String packageName) {
         try {
-            return this.mService.getAppStandbyBucket(packageName, this.mContext.getOpPackageName(), this.mContext.getUserId());
+            return this.mService.getAppStandbyBucket(
+                    packageName, this.mContext.getOpPackageName(), this.mContext.getUserId());
         } catch (RemoteException e) {
             return 10;
         }
@@ -252,7 +265,9 @@ public final class UsageStatsManager {
     @SystemApi
     public Map<String, Integer> getAppStandbyBuckets() {
         try {
-            ParceledListSlice<AppStandbyInfo> slice = this.mService.getAppStandbyBuckets(this.mContext.getOpPackageName(), this.mContext.getUserId());
+            ParceledListSlice<AppStandbyInfo> slice =
+                    this.mService.getAppStandbyBuckets(
+                            this.mContext.getOpPackageName(), this.mContext.getUserId());
             List<AppStandbyInfo> bucketList = slice.getList();
             ArrayMap<String, Integer> bucketMap = new ArrayMap<>();
             int n = bucketList.size();
@@ -273,7 +288,8 @@ public final class UsageStatsManager {
         }
         List<AppStandbyInfo> bucketInfoList = new ArrayList<>(appBuckets.size());
         for (Map.Entry<String, Integer> bucketEntry : appBuckets.entrySet()) {
-            bucketInfoList.add(new AppStandbyInfo(bucketEntry.getKey(), bucketEntry.getValue().intValue()));
+            bucketInfoList.add(
+                    new AppStandbyInfo(bucketEntry.getKey(), bucketEntry.getValue().intValue()));
         }
         ParceledListSlice<AppStandbyInfo> slice = new ParceledListSlice<>(bucketInfoList);
         try {
@@ -285,7 +301,8 @@ public final class UsageStatsManager {
 
     public int getAppMinStandbyBucket(String packageName) {
         try {
-            return this.mService.getAppMinStandbyBucket(packageName, this.mContext.getOpPackageName(), this.mContext.getUserId());
+            return this.mService.getAppMinStandbyBucket(
+                    packageName, this.mContext.getOpPackageName(), this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -300,7 +317,8 @@ public final class UsageStatsManager {
             throw new IllegalArgumentException("estimated launch time must be positive");
         }
         try {
-            this.mService.setEstimatedLaunchTime(packageName, estimatedLaunchTimeMillis, this.mContext.getUserId());
+            this.mService.setEstimatedLaunchTime(
+                    packageName, estimatedLaunchTimeMillis, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -311,7 +329,8 @@ public final class UsageStatsManager {
         if (estimatedLaunchTimesMillis == null) {
             throw new NullPointerException("estimatedLaunchTimesMillis cannot be null");
         }
-        List<AppLaunchEstimateInfo> estimateList = new ArrayList<>(estimatedLaunchTimesMillis.size());
+        List<AppLaunchEstimateInfo> estimateList =
+                new ArrayList<>(estimatedLaunchTimesMillis.size());
         for (Map.Entry<String, Long> estimateEntry : estimatedLaunchTimesMillis.entrySet()) {
             String pkgName = estimateEntry.getKey();
             if (pkgName == null) {
@@ -332,9 +351,19 @@ public final class UsageStatsManager {
     }
 
     @SystemApi
-    public void registerAppUsageObserver(int observerId, String[] observedEntities, long timeLimit, TimeUnit timeUnit, PendingIntent callbackIntent) {
+    public void registerAppUsageObserver(
+            int observerId,
+            String[] observedEntities,
+            long timeLimit,
+            TimeUnit timeUnit,
+            PendingIntent callbackIntent) {
         try {
-            this.mService.registerAppUsageObserver(observerId, observedEntities, timeUnit.toMillis(timeLimit), callbackIntent, this.mContext.getOpPackageName());
+            this.mService.registerAppUsageObserver(
+                    observerId,
+                    observedEntities,
+                    timeUnit.toMillis(timeLimit),
+                    callbackIntent,
+                    this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -350,9 +379,22 @@ public final class UsageStatsManager {
     }
 
     @SystemApi
-    public void registerUsageSessionObserver(int sessionObserverId, String[] observedEntities, Duration timeLimit, Duration sessionThresholdTime, PendingIntent limitReachedCallbackIntent, PendingIntent sessionEndCallbackIntent) {
+    public void registerUsageSessionObserver(
+            int sessionObserverId,
+            String[] observedEntities,
+            Duration timeLimit,
+            Duration sessionThresholdTime,
+            PendingIntent limitReachedCallbackIntent,
+            PendingIntent sessionEndCallbackIntent) {
         try {
-            this.mService.registerUsageSessionObserver(sessionObserverId, observedEntities, timeLimit.toMillis(), sessionThresholdTime.toMillis(), limitReachedCallbackIntent, sessionEndCallbackIntent, this.mContext.getOpPackageName());
+            this.mService.registerUsageSessionObserver(
+                    sessionObserverId,
+                    observedEntities,
+                    timeLimit.toMillis(),
+                    sessionThresholdTime.toMillis(),
+                    limitReachedCallbackIntent,
+                    sessionEndCallbackIntent,
+                    this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -361,16 +403,28 @@ public final class UsageStatsManager {
     @SystemApi
     public void unregisterUsageSessionObserver(int sessionObserverId) {
         try {
-            this.mService.unregisterUsageSessionObserver(sessionObserverId, this.mContext.getOpPackageName());
+            this.mService.unregisterUsageSessionObserver(
+                    sessionObserverId, this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
     @SystemApi
-    public void registerAppUsageLimitObserver(int observerId, String[] observedEntities, Duration timeLimit, Duration timeUsed, PendingIntent callbackIntent) {
+    public void registerAppUsageLimitObserver(
+            int observerId,
+            String[] observedEntities,
+            Duration timeLimit,
+            Duration timeUsed,
+            PendingIntent callbackIntent) {
         try {
-            this.mService.registerAppUsageLimitObserver(observerId, observedEntities, timeLimit.toMillis(), timeUsed.toMillis(), callbackIntent, this.mContext.getOpPackageName());
+            this.mService.registerAppUsageLimitObserver(
+                    observerId,
+                    observedEntities,
+                    timeLimit.toMillis(),
+                    timeUsed.toMillis(),
+                    callbackIntent,
+                    this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -379,7 +433,8 @@ public final class UsageStatsManager {
     @SystemApi
     public void unregisterAppUsageLimitObserver(int observerId) {
         try {
-            this.mService.unregisterAppUsageLimitObserver(observerId, this.mContext.getOpPackageName());
+            this.mService.unregisterAppUsageLimitObserver(
+                    observerId, this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -404,7 +459,8 @@ public final class UsageStatsManager {
     @SystemApi
     public void reportUsageStart(Activity activity, String token) {
         try {
-            this.mService.reportUsageStart(activity.getActivityToken(), token, this.mContext.getOpPackageName());
+            this.mService.reportUsageStart(
+                    activity.getActivityToken(), token, this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -413,7 +469,11 @@ public final class UsageStatsManager {
     @SystemApi
     public void reportUsageStart(Activity activity, String token, long timeAgoMs) {
         try {
-            this.mService.reportPastUsageStart(activity.getActivityToken(), token, timeAgoMs, this.mContext.getOpPackageName());
+            this.mService.reportPastUsageStart(
+                    activity.getActivityToken(),
+                    token,
+                    timeAgoMs,
+                    this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -422,7 +482,8 @@ public final class UsageStatsManager {
     @SystemApi
     public void reportUsageStop(Activity activity, String token) {
         try {
-            this.mService.reportUsageStop(activity.getActivityToken(), token, this.mContext.getOpPackageName());
+            this.mService.reportUsageStop(
+                    activity.getActivityToken(), token, this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -514,7 +575,8 @@ public final class UsageStatsManager {
             case 1024:
                 sb.append(FullBackup.FILES_TREE_TOKEN);
                 if (subReason > 0) {
-                    sb.append(NativeLibraryHelper.CLEAR_ABI_OVERRIDE).append(Integer.toBinaryString(subReason));
+                    sb.append(NativeLibraryHelper.CLEAR_ABI_OVERRIDE)
+                            .append(Integer.toBinaryString(subReason));
                     break;
                 }
                 break;
@@ -528,7 +590,8 @@ public final class UsageStatsManager {
             case 1536:
                 sb.append(XmlTags.TAG_SESSION);
                 if (subReason > 0) {
-                    sb.append(NativeLibraryHelper.CLEAR_ABI_OVERRIDE).append(Integer.toBinaryString(subReason));
+                    sb.append(NativeLibraryHelper.CLEAR_ABI_OVERRIDE)
+                            .append(Integer.toBinaryString(subReason));
                     break;
                 }
                 break;
@@ -571,7 +634,8 @@ public final class UsageStatsManager {
     @SystemApi
     @Deprecated
     public void whitelistAppTemporarily(String packageName, long duration, UserHandle user) {
-        ((PowerWhitelistManager) this.mContext.getSystemService(PowerWhitelistManager.class)).whitelistAppTemporarily(packageName, duration);
+        ((PowerWhitelistManager) this.mContext.getSystemService(PowerWhitelistManager.class))
+                .whitelistAppTemporarily(packageName, duration);
     }
 
     @SystemApi
@@ -583,9 +647,15 @@ public final class UsageStatsManager {
         }
     }
 
-    public void reportChooserSelection(String packageName, int userId, String contentType, String[] annotations, String action) {
+    public void reportChooserSelection(
+            String packageName,
+            int userId,
+            String contentType,
+            String[] annotations,
+            String action) {
         try {
-            this.mService.reportChooserSelection(packageName, userId, contentType, annotations, action);
+            this.mService.reportChooserSelection(
+                    packageName, userId, contentType, annotations, action);
         } catch (RemoteException e) {
         }
     }
@@ -593,7 +663,8 @@ public final class UsageStatsManager {
     @SystemApi
     public long getLastTimeAnyComponentUsed(String packageName) {
         try {
-            return this.mService.getLastTimeAnyComponentUsed(packageName, this.mContext.getOpPackageName());
+            return this.mService.getLastTimeAnyComponentUsed(
+                    packageName, this.mContext.getOpPackageName());
         } catch (RemoteException re) {
             throw re.rethrowFromSystemServer();
         }
@@ -602,7 +673,13 @@ public final class UsageStatsManager {
     @SystemApi
     public List<BroadcastResponseStats> queryBroadcastResponseStats(String packageName, long id) {
         try {
-            return this.mService.queryBroadcastResponseStats(packageName, id, this.mContext.getOpPackageName(), this.mContext.getUserId()).getList();
+            return this.mService
+                    .queryBroadcastResponseStats(
+                            packageName,
+                            id,
+                            this.mContext.getOpPackageName(),
+                            this.mContext.getUserId())
+                    .getList();
         } catch (RemoteException re) {
             throw re.rethrowFromSystemServer();
         }
@@ -611,7 +688,8 @@ public final class UsageStatsManager {
     @SystemApi
     public void clearBroadcastResponseStats(String packageName, long id) {
         try {
-            this.mService.clearBroadcastResponseStats(packageName, id, this.mContext.getOpPackageName(), this.mContext.getUserId());
+            this.mService.clearBroadcastResponseStats(
+                    packageName, id, this.mContext.getOpPackageName(), this.mContext.getUserId());
         } catch (RemoteException re) {
             throw re.rethrowFromSystemServer();
         }
@@ -619,7 +697,8 @@ public final class UsageStatsManager {
 
     public void clearBroadcastEvents() {
         try {
-            this.mService.clearBroadcastEvents(this.mContext.getOpPackageName(), this.mContext.getUserId());
+            this.mService.clearBroadcastEvents(
+                    this.mContext.getOpPackageName(), this.mContext.getUserId());
         } catch (RemoteException re) {
             throw re.rethrowFromSystemServer();
         }
@@ -627,7 +706,8 @@ public final class UsageStatsManager {
 
     public boolean isPackageExemptedFromBroadcastResponseStats(String packageName) {
         try {
-            return this.mService.isPackageExemptedFromBroadcastResponseStats(packageName, this.mContext.getUserId());
+            return this.mService.isPackageExemptedFromBroadcastResponseStats(
+                    packageName, this.mContext.getUserId());
         } catch (RemoteException re) {
             throw re.rethrowFromSystemServer();
         }
@@ -641,9 +721,19 @@ public final class UsageStatsManager {
         }
     }
 
-    public void semRegisterAppUsageObserver(int observerId, String[] observedEntities, long timeLimit, TimeUnit timeUnit, PendingIntent callbackIntent) {
+    public void semRegisterAppUsageObserver(
+            int observerId,
+            String[] observedEntities,
+            long timeLimit,
+            TimeUnit timeUnit,
+            PendingIntent callbackIntent) {
         try {
-            this.mService.registerAppUsageObserver(observerId, observedEntities, timeUnit.toMillis(timeLimit), callbackIntent, this.mContext.getOpPackageName());
+            this.mService.registerAppUsageObserver(
+                    observerId,
+                    observedEntities,
+                    timeUnit.toMillis(timeLimit),
+                    callbackIntent,
+                    this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -671,7 +761,8 @@ public final class UsageStatsManager {
         }
     }
 
-    public void registerUsageStatsWatcher(IUsageStatsWatcher watcher, List<ComponentName> watchingComponents) {
+    public void registerUsageStatsWatcher(
+            IUsageStatsWatcher watcher, List<ComponentName> watchingComponents) {
         try {
             this.mService.registerUsageStatsWatcherWithComponent(watcher, watchingComponents);
         } catch (RemoteException e) {

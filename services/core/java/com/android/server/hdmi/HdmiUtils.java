@@ -2,10 +2,13 @@ package com.android.server.hdmi;
 
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
+
 import com.google.android.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,8 +20,41 @@ import java.util.Objects;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public abstract class HdmiUtils {
-    public static final Map ADDRESS_TO_TYPE = Map.ofEntries(Map.entry(0, Lists.newArrayList(new Integer[]{0})), Map.entry(1, Lists.newArrayList(new Integer[]{1})), Map.entry(2, Lists.newArrayList(new Integer[]{1})), Map.entry(3, Lists.newArrayList(new Integer[]{3})), Map.entry(4, Lists.newArrayList(new Integer[]{4})), Map.entry(5, Lists.newArrayList(new Integer[]{5})), Map.entry(6, Lists.newArrayList(new Integer[]{3})), Map.entry(7, Lists.newArrayList(new Integer[]{3})), Map.entry(8, Lists.newArrayList(new Integer[]{4})), Map.entry(9, Lists.newArrayList(new Integer[]{1})), Map.entry(10, Lists.newArrayList(new Integer[]{3})), Map.entry(11, Lists.newArrayList(new Integer[]{4})), Map.entry(12, Lists.newArrayList(new Integer[]{4, 1, 3, 7})), Map.entry(13, Lists.newArrayList(new Integer[]{4, 1, 3, 7})), Map.entry(14, Lists.newArrayList(new Integer[]{0})), Map.entry(15, Collections.emptyList()));
-    public static final String[] DEFAULT_NAMES = {"TV", "Recorder_1", "Recorder_2", "Tuner_1", "Playback_1", "AudioSystem", "Tuner_2", "Tuner_3", "Playback_2", "Recorder_3", "Tuner_4", "Playback_3", "Backup_1", "Backup_2", "Secondary_TV"};
+    public static final Map ADDRESS_TO_TYPE =
+            Map.ofEntries(
+                    Map.entry(0, Lists.newArrayList(new Integer[] {0})),
+                    Map.entry(1, Lists.newArrayList(new Integer[] {1})),
+                    Map.entry(2, Lists.newArrayList(new Integer[] {1})),
+                    Map.entry(3, Lists.newArrayList(new Integer[] {3})),
+                    Map.entry(4, Lists.newArrayList(new Integer[] {4})),
+                    Map.entry(5, Lists.newArrayList(new Integer[] {5})),
+                    Map.entry(6, Lists.newArrayList(new Integer[] {3})),
+                    Map.entry(7, Lists.newArrayList(new Integer[] {3})),
+                    Map.entry(8, Lists.newArrayList(new Integer[] {4})),
+                    Map.entry(9, Lists.newArrayList(new Integer[] {1})),
+                    Map.entry(10, Lists.newArrayList(new Integer[] {3})),
+                    Map.entry(11, Lists.newArrayList(new Integer[] {4})),
+                    Map.entry(12, Lists.newArrayList(new Integer[] {4, 1, 3, 7})),
+                    Map.entry(13, Lists.newArrayList(new Integer[] {4, 1, 3, 7})),
+                    Map.entry(14, Lists.newArrayList(new Integer[] {0})),
+                    Map.entry(15, Collections.emptyList()));
+    public static final String[] DEFAULT_NAMES = {
+        "TV",
+        "Recorder_1",
+        "Recorder_2",
+        "Tuner_1",
+        "Playback_1",
+        "AudioSystem",
+        "Tuner_2",
+        "Tuner_3",
+        "Playback_2",
+        "Recorder_3",
+        "Tuner_4",
+        "Playback_3",
+        "Backup_1",
+        "Backup_2",
+        "Secondary_TV"
+    };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CodecSad {
@@ -39,7 +75,8 @@ public abstract class HdmiUtils {
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(this.audioCodec), Integer.valueOf(Arrays.hashCode(this.sad)));
+            return Objects.hash(
+                    Integer.valueOf(this.audioCodec), Integer.valueOf(Arrays.hashCode(this.sad)));
         }
     }
 
@@ -58,7 +95,8 @@ public abstract class HdmiUtils {
                 return false;
             }
             DeviceConfig deviceConfig = (DeviceConfig) obj;
-            return deviceConfig.name.equals(this.name) && deviceConfig.supportedCodecs.equals(this.supportedCodecs);
+            return deviceConfig.name.equals(this.name)
+                    && deviceConfig.supportedCodecs.equals(this.supportedCodecs);
         }
 
         public final int hashCode() {
@@ -81,7 +119,9 @@ public abstract class HdmiUtils {
                 Method dump skipped, instructions count: 538
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.hdmi.HdmiUtils.ShortAudioDescriptorXmlParser.parse(java.io.InputStream):java.util.List");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.hdmi.HdmiUtils.ShortAudioDescriptorXmlParser.parse(java.io.InputStream):java.util.List");
         }
 
         public static void skip(TypedXmlPullParser typedXmlPullParser) {
@@ -105,7 +145,10 @@ public abstract class HdmiUtils {
         if (i2 == i) {
             return true;
         }
-        Slog.w(str, DualAppManagerService$$ExternalSyntheticOutline0.m(i, i2, "Invalid source [Expected:", ", Actual:", "]"));
+        Slog.w(
+                str,
+                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                        i, i2, "Invalid source [Expected:", ", Actual:", "]"));
         return false;
     }
 
@@ -170,7 +213,8 @@ public abstract class HdmiUtils {
     }
 
     public static boolean isEligibleAddressForDevice(int i, int i2) {
-        return isValidAddress(i2) && ((List) ADDRESS_TO_TYPE.get(Integer.valueOf(i2))).contains(Integer.valueOf(i));
+        return isValidAddress(i2)
+                && ((List) ADDRESS_TO_TYPE.get(Integer.valueOf(i2))).contains(Integer.valueOf(i));
     }
 
     public static boolean isInActiveRoutingPath(int i, int i2) {
@@ -235,11 +279,16 @@ public abstract class HdmiUtils {
     }
 
     public static boolean verifyAddressType(int i, int i2) {
-        List newArrayList = isValidAddress(i) ? (List) ADDRESS_TO_TYPE.get(Integer.valueOf(i)) : Lists.newArrayList(new Integer[]{-1});
+        List newArrayList =
+                isValidAddress(i)
+                        ? (List) ADDRESS_TO_TYPE.get(Integer.valueOf(i))
+                        : Lists.newArrayList(new Integer[] {-1});
         if (newArrayList.contains(Integer.valueOf(i2))) {
             return true;
         }
-        Slog.w("HdmiUtils", "Device type mismatch:[Expected:" + i2 + ", Actual:" + newArrayList + "]");
+        Slog.w(
+                "HdmiUtils",
+                "Device type mismatch:[Expected:" + i2 + ", Actual:" + newArrayList + "]");
         return false;
     }
 }

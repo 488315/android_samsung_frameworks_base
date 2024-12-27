@@ -2,14 +2,16 @@ package android.graphics.drawable;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.DrawableContainer;
 import android.os.SystemClock;
 import android.util.AttributeSet;
+
 import com.android.ims.ImsConfig;
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class AnimationDrawable extends DrawableContainer implements Runnable, Animatable {
@@ -28,7 +30,10 @@ public class AnimationDrawable extends DrawableContainer implements Runnable, An
         boolean changed = super.setVisible(visible, restart);
         if (visible) {
             if (restart || changed) {
-                boolean startFromZero = restart || !(this.mRunning || this.mAnimationState.mOneShot) || this.mCurFrame >= this.mAnimationState.getChildCount();
+                boolean startFromZero =
+                        restart
+                                || !(this.mRunning || this.mAnimationState.mOneShot)
+                                || this.mCurFrame >= this.mAnimationState.getChildCount();
                 setFrame(startFromZero ? 0 : this.mCurFrame, true, this.mAnimating);
             }
         } else {
@@ -129,7 +134,9 @@ public class AnimationDrawable extends DrawableContainer implements Runnable, An
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.AnimationDrawable);
         super.inflateWithAttributes(r, parser, a, 0);
         updateStateFromTypedArray(a);
@@ -139,7 +146,9 @@ public class AnimationDrawable extends DrawableContainer implements Runnable, An
         setFrame(0, true, false);
     }
 
-    private void inflateChildElements(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    private void inflateChildElements(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         int type;
         int innerDepth = parser.getDepth() + 1;
         while (true) {
@@ -147,11 +156,17 @@ public class AnimationDrawable extends DrawableContainer implements Runnable, An
             if (type2 != 1) {
                 int depth = parser.getDepth();
                 if (depth >= innerDepth || type2 != 3) {
-                    if (type2 == 2 && depth <= innerDepth && parser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
-                        TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.AnimationDrawableItem);
+                    if (type2 == 2
+                            && depth <= innerDepth
+                            && parser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
+                        TypedArray a =
+                                obtainAttributes(
+                                        r, theme, attrs, R.styleable.AnimationDrawableItem);
                         int duration = a.getInt(0, -1);
                         if (duration < 0) {
-                            throw new XmlPullParserException(parser.getPositionDescription() + ": <item> tag requires a 'duration' attribute");
+                            throw new XmlPullParserException(
+                                    parser.getPositionDescription()
+                                            + ": <item> tag requires a 'duration' attribute");
                         }
                         Drawable dr = a.getDrawable(1);
                         a.recycle();
@@ -160,7 +175,10 @@ public class AnimationDrawable extends DrawableContainer implements Runnable, An
                                 type = parser.next();
                             } while (type == 4);
                             if (type != 2) {
-                                throw new XmlPullParserException(parser.getPositionDescription() + ": <item> tag requires a 'drawable' attribute or child tag defining a drawable");
+                                throw new XmlPullParserException(
+                                        parser.getPositionDescription()
+                                                + ": <item> tag requires a 'drawable' attribute or"
+                                                + " child tag defining a drawable");
                             }
                             dr = Drawable.createFromXmlInner(r, parser, attrs, theme);
                         }
@@ -179,7 +197,8 @@ public class AnimationDrawable extends DrawableContainer implements Runnable, An
     }
 
     private void updateStateFromTypedArray(TypedArray a) {
-        this.mAnimationState.mVariablePadding = a.getBoolean(1, this.mAnimationState.mVariablePadding);
+        this.mAnimationState.mVariablePadding =
+                a.getBoolean(1, this.mAnimationState.mVariablePadding);
         this.mAnimationState.mOneShot = a.getBoolean(2, this.mAnimationState.mOneShot);
     }
 

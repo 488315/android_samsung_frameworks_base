@@ -1,7 +1,8 @@
 package com.android.modules.utils;
 
-import java.io.IOException;
 import org.xmlpull.v1.XmlSerializer;
+
+import java.io.IOException;
 
 /* loaded from: classes5.dex */
 public interface TypedXmlSerializer extends XmlSerializer {

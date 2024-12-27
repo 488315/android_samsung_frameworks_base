@@ -5,28 +5,33 @@ import android.app.assist.ActivityId;
 import android.content.ComponentName;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class ActivityEvent implements Parcelable {
-    public static final Parcelable.Creator<ActivityEvent> CREATOR = new Parcelable.Creator<ActivityEvent>() { // from class: android.service.contentcapture.ActivityEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityEvent createFromParcel(Parcel parcel) {
-            ComponentName componentName = (ComponentName) parcel.readParcelable(null, ComponentName.class);
-            int eventType = parcel.readInt();
-            ActivityId activityId = (ActivityId) parcel.readParcelable(null, ActivityId.class);
-            return new ActivityEvent(activityId, componentName, eventType);
-        }
+    public static final Parcelable.Creator<ActivityEvent> CREATOR =
+            new Parcelable.Creator<
+                    ActivityEvent>() { // from class: android.service.contentcapture.ActivityEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityEvent createFromParcel(Parcel parcel) {
+                    ComponentName componentName =
+                            (ComponentName) parcel.readParcelable(null, ComponentName.class);
+                    int eventType = parcel.readInt();
+                    ActivityId activityId =
+                            (ActivityId) parcel.readParcelable(null, ActivityId.class);
+                    return new ActivityEvent(activityId, componentName, eventType);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityEvent[] newArray(int size) {
-            return new ActivityEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityEvent[] newArray(int size) {
+                    return new ActivityEvent[size];
+                }
+            };
     public static final int TYPE_ACTIVITY_DESTROYED = 24;
     public static final int TYPE_ACTIVITY_PAUSED = 2;
     public static final int TYPE_ACTIVITY_RESUMED = 1;
@@ -37,8 +42,7 @@ public final class ActivityEvent implements Parcelable {
     private final int mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ActivityEventType {
-    }
+    public @interface ActivityEventType {}
 
     public ActivityEvent(ActivityId activityId, ComponentName componentName, int type) {
         this.mActivityId = activityId;
@@ -76,7 +80,12 @@ public final class ActivityEvent implements Parcelable {
     }
 
     public String toString() {
-        return "ActivityEvent[" + this.mComponentName.toShortString() + ", ActivityId: " + this.mActivityId + "]:" + getTypeAsString(this.mType);
+        return "ActivityEvent["
+                + this.mComponentName.toShortString()
+                + ", ActivityId: "
+                + this.mActivityId
+                + "]:"
+                + getTypeAsString(this.mType);
     }
 
     @Override // android.os.Parcelable

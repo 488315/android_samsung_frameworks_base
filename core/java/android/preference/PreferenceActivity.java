@@ -14,8 +14,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -32,13 +30,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Deprecated
 /* loaded from: classes3.dex */
-public abstract class PreferenceActivity extends ListActivity implements PreferenceManager.OnPreferenceTreeClickListener, PreferenceFragment.OnPreferenceStartFragmentCallback {
+public abstract class PreferenceActivity extends ListActivity
+        implements PreferenceManager.OnPreferenceTreeClickListener,
+                PreferenceFragment.OnPreferenceStartFragmentCallback {
     private static final String BACK_STACK_PREFS = ":android:prefs";
     private static final String CUR_HEADER_TAG = ":android:cur_header";
     public static final String EXTRA_NO_HEADERS = ":android:no_headers";
@@ -48,7 +50,8 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     private static final String EXTRA_PREFS_SHOW_SKIP = "extra_prefs_show_skip";
     public static final String EXTRA_SHOW_FRAGMENT = ":android:show_fragment";
     public static final String EXTRA_SHOW_FRAGMENT_ARGUMENTS = ":android:show_fragment_args";
-    public static final String EXTRA_SHOW_FRAGMENT_SHORT_TITLE = ":android:show_fragment_short_title";
+    public static final String EXTRA_SHOW_FRAGMENT_SHORT_TITLE =
+            ":android:show_fragment_short_title";
     public static final String EXTRA_SHOW_FRAGMENT_TITLE = ":android:show_fragment_title";
     private static final int FIRST_REQUEST_CODE = 100;
     private static final String HEADERS_TAG = ":android:headers";
@@ -81,36 +84,48 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     private View mSplitBarView = null;
     private boolean mUpdateLayoutBySplitChange = false;
     private View.OnLayoutChangeListener mSplitBarLayoutChangeListner = null;
-    private Handler mHandler = new Handler() { // from class: android.preference.PreferenceActivity.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            Header mappedHeader;
-            switch (msg.what) {
-                case 1:
-                    PreferenceActivity.this.bindPreferences();
-                    break;
-                case 2:
-                    ArrayList<Header> oldHeaders = new ArrayList<>(PreferenceActivity.this.mHeaders);
-                    PreferenceActivity.this.mHeaders.clear();
-                    PreferenceActivity.this.onBuildHeaders(PreferenceActivity.this.mHeaders);
-                    if (PreferenceActivity.this.mAdapter instanceof BaseAdapter) {
-                        ((BaseAdapter) PreferenceActivity.this.mAdapter).notifyDataSetChanged();
-                    }
-                    Header header = PreferenceActivity.this.onGetNewHeader();
-                    if (header != null && header.fragment != null) {
-                        Header mappedHeader2 = PreferenceActivity.this.findBestMatchingHeader(header, oldHeaders);
-                        if (mappedHeader2 == null || PreferenceActivity.this.mCurHeader != mappedHeader2) {
-                            PreferenceActivity.this.switchToHeader(header);
+    private Handler mHandler =
+            new Handler() { // from class: android.preference.PreferenceActivity.1
+                @Override // android.os.Handler
+                public void handleMessage(Message msg) {
+                    Header mappedHeader;
+                    switch (msg.what) {
+                        case 1:
+                            PreferenceActivity.this.bindPreferences();
                             break;
-                        }
-                    } else if (PreferenceActivity.this.mCurHeader != null && (mappedHeader = PreferenceActivity.this.findBestMatchingHeader(PreferenceActivity.this.mCurHeader, PreferenceActivity.this.mHeaders)) != null) {
-                        PreferenceActivity.this.setSelectedHeader(mappedHeader);
-                        break;
+                        case 2:
+                            ArrayList<Header> oldHeaders =
+                                    new ArrayList<>(PreferenceActivity.this.mHeaders);
+                            PreferenceActivity.this.mHeaders.clear();
+                            PreferenceActivity.this.onBuildHeaders(
+                                    PreferenceActivity.this.mHeaders);
+                            if (PreferenceActivity.this.mAdapter instanceof BaseAdapter) {
+                                ((BaseAdapter) PreferenceActivity.this.mAdapter)
+                                        .notifyDataSetChanged();
+                            }
+                            Header header = PreferenceActivity.this.onGetNewHeader();
+                            if (header != null && header.fragment != null) {
+                                Header mappedHeader2 =
+                                        PreferenceActivity.this.findBestMatchingHeader(
+                                                header, oldHeaders);
+                                if (mappedHeader2 == null
+                                        || PreferenceActivity.this.mCurHeader != mappedHeader2) {
+                                    PreferenceActivity.this.switchToHeader(header);
+                                    break;
+                                }
+                            } else if (PreferenceActivity.this.mCurHeader != null
+                                    && (mappedHeader =
+                                                    PreferenceActivity.this.findBestMatchingHeader(
+                                                            PreferenceActivity.this.mCurHeader,
+                                                            PreferenceActivity.this.mHeaders))
+                                            != null) {
+                                PreferenceActivity.this.setSelectedHeader(mappedHeader);
+                                break;
+                            }
+                            break;
                     }
-                    break;
-            }
-        }
-    };
+                }
+            };
     private boolean mEnableSplitBar = true;
     private boolean mIsMultiPane = false;
 
@@ -124,13 +139,17 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
             TextView summary;
             TextView title;
 
-            private HeaderViewHolder() {
-            }
+            private HeaderViewHolder() {}
         }
 
-        public HeaderAdapter(Context context, List<Header> objects, int layoutResId, boolean removeIconBehavior) {
+        public HeaderAdapter(
+                Context context,
+                List<Header> objects,
+                int layoutResId,
+                boolean removeIconBehavior) {
             super(context, 0, objects);
-            this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.mInflater =
+                    (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             this.mLayoutResId = layoutResId;
             this.mRemoveIconIfEmpty = removeIconBehavior;
         }
@@ -175,19 +194,21 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
 
     @Deprecated
     public static final class Header implements Parcelable {
-        public static final Parcelable.Creator<Header> CREATOR = new Parcelable.Creator<Header>() { // from class: android.preference.PreferenceActivity.Header.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Header createFromParcel(Parcel source) {
-                return new Header(source);
-            }
+        public static final Parcelable.Creator<Header> CREATOR =
+                new Parcelable.Creator<
+                        Header>() { // from class: android.preference.PreferenceActivity.Header.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Header createFromParcel(Parcel source) {
+                        return new Header(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Header[] newArray(int size) {
-                return new Header[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Header[] newArray(int size) {
+                        return new Header[size];
+                    }
+                };
         public CharSequence breadCrumbShortTitle;
         public int breadCrumbShortTitleRes;
         public CharSequence breadCrumbTitle;
@@ -203,8 +224,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         public CharSequence title;
         public int titleRes;
 
-        public Header() {
-        }
+        public Header() {}
 
         public CharSequence getTitle(Resources res) {
             if (this.titleRes != 0) {
@@ -300,7 +320,9 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         int i;
         super.onCreate(savedInstanceState);
         this.mInsideOnCreate = true;
-        TypedArray sa = obtainStyledAttributes(null, R.styleable.PreferenceActivity, R.attr.preferenceActivityStyle, 0);
+        TypedArray sa =
+                obtainStyledAttributes(
+                        null, R.styleable.PreferenceActivity, R.attr.preferenceActivityStyle, 0);
         int layoutResId = sa.getResourceId(0, R.layout.preference_list_content);
         this.mPreferenceHeaderItemResId = sa.getResourceId(1, R.layout.preference_header_item);
         this.mPreferenceHeaderRemoveEmptyIcon = sa.getBoolean(2, false);
@@ -328,8 +350,10 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         } else {
             this.mSplitBarView = findViewById(R.id.prefs_split_bar);
             if (this.mSplitBarView != null) {
-                LinearLayout.LayoutParams llp = (LinearLayout.LayoutParams) this.mHeadersContainer.getLayoutParams();
-                LinearLayout.LayoutParams rlp = (LinearLayout.LayoutParams) this.mPrefsContainer.getLayoutParams();
+                LinearLayout.LayoutParams llp =
+                        (LinearLayout.LayoutParams) this.mHeadersContainer.getLayoutParams();
+                LinearLayout.LayoutParams rlp =
+                        (LinearLayout.LayoutParams) this.mPrefsContainer.getLayoutParams();
                 float leftPanelWeight = llp.weight;
                 float rightPanelWeight = rlp.weight;
                 float weightSum = leftPanelWeight + rightPanelWeight;
@@ -342,7 +366,8 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
             }
         }
         if (savedInstanceState != null) {
-            ArrayList<Header> headers = savedInstanceState.getParcelableArrayList(HEADERS_TAG, Header.class);
+            ArrayList<Header> headers =
+                    savedInstanceState.getParcelableArrayList(HEADERS_TAG, Header.class);
             if (headers == null) {
                 showBreadCrumbs(getTitle(), null);
             } else {
@@ -365,7 +390,12 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
             }
         }
         if (this.mHeaders.size() > 0) {
-            setListAdapter(new HeaderAdapter(this, this.mHeaders, this.mPreferenceHeaderItemResId, this.mPreferenceHeaderRemoveEmptyIcon));
+            setListAdapter(
+                    new HeaderAdapter(
+                            this,
+                            this.mHeaders,
+                            this.mPreferenceHeaderItemResId,
+                            this.mPreferenceHeaderRemoveEmptyIcon));
             if (!this.mSinglePane) {
                 getListView().setChoiceMode(1);
             }
@@ -379,7 +409,8 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
             }
             if (initialTitle != 0) {
                 CharSequence initialTitleStr = getText(initialTitle);
-                CharSequence initialShortTitleStr = initialShortTitle != 0 ? getText(initialShortTitle) : null;
+                CharSequence initialShortTitleStr =
+                        initialShortTitle != 0 ? getText(initialShortTitle) : null;
                 showBreadCrumbs(initialTitleStr, initialShortTitleStr);
             }
         }
@@ -410,29 +441,38 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         if (intent.getBooleanExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false)) {
             findViewById(R.id.button_bar).setVisibility(0);
             Button backButton = (Button) findViewById(R.id.back_button);
-            backButton.setOnClickListener(new View.OnClickListener() { // from class: android.preference.PreferenceActivity.2
-                @Override // android.view.View.OnClickListener
-                public void onClick(View v) {
-                    PreferenceActivity.this.setResult(0);
-                    PreferenceActivity.this.finish();
-                }
-            });
+            backButton.setOnClickListener(
+                    new View
+                            .OnClickListener() { // from class:
+                                                 // android.preference.PreferenceActivity.2
+                        @Override // android.view.View.OnClickListener
+                        public void onClick(View v) {
+                            PreferenceActivity.this.setResult(0);
+                            PreferenceActivity.this.finish();
+                        }
+                    });
             Button skipButton = (Button) findViewById(R.id.skip_button);
-            skipButton.setOnClickListener(new View.OnClickListener() { // from class: android.preference.PreferenceActivity.3
-                @Override // android.view.View.OnClickListener
-                public void onClick(View v) {
-                    PreferenceActivity.this.setResult(-1);
-                    PreferenceActivity.this.finish();
-                }
-            });
+            skipButton.setOnClickListener(
+                    new View
+                            .OnClickListener() { // from class:
+                                                 // android.preference.PreferenceActivity.3
+                        @Override // android.view.View.OnClickListener
+                        public void onClick(View v) {
+                            PreferenceActivity.this.setResult(-1);
+                            PreferenceActivity.this.finish();
+                        }
+                    });
             this.mNextButton = (Button) findViewById(R.id.next_button);
-            this.mNextButton.setOnClickListener(new View.OnClickListener() { // from class: android.preference.PreferenceActivity.4
-                @Override // android.view.View.OnClickListener
-                public void onClick(View v) {
-                    PreferenceActivity.this.setResult(-1);
-                    PreferenceActivity.this.finish();
-                }
-            });
+            this.mNextButton.setOnClickListener(
+                    new View
+                            .OnClickListener() { // from class:
+                                                 // android.preference.PreferenceActivity.4
+                        @Override // android.view.View.OnClickListener
+                        public void onClick(View v) {
+                            PreferenceActivity.this.setResult(-1);
+                            PreferenceActivity.this.finish();
+                        }
+                    });
             if (intent.hasExtra(EXTRA_PREFS_SET_NEXT_TEXT)) {
                 String buttonText = intent.getStringExtra(EXTRA_PREFS_SET_NEXT_TEXT);
                 if (TextUtils.isEmpty(buttonText)) {
@@ -457,155 +497,244 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         this.mIsRTL = preference.isRTL() && preference.hasRTL();
         if (this.mIsDeviceDefault && !this.mSinglePane && this.mSplitBarView != null) {
             if (this.mSplitBarLayoutChangeListner == null) {
-                this.mSplitBarLayoutChangeListner = new View.OnLayoutChangeListener() { // from class: android.preference.PreferenceActivity.5
-                    @Override // android.view.View.OnLayoutChangeListener
-                    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                        float mRightLayoutStartPosition;
-                        if (!PreferenceActivity.this.mEnableSplitBar) {
-                            return;
-                        }
-                        if (PreferenceActivity.this.mIsRTL) {
-                            mRightLayoutStartPosition = PreferenceActivity.this.mHeadersContainer.getX();
-                        } else {
-                            mRightLayoutStartPosition = PreferenceActivity.this.mPrefsContainer.getX();
-                        }
-                        if (PreferenceActivity.this.mIsDeviceDefault && PreferenceActivity.this.mSplitBarView != null) {
-                            float x = mRightLayoutStartPosition - (PreferenceActivity.this.mSplitBarView.getWidth() / 2.0f);
-                            if (x < 0.0f) {
-                                x = 0.0f;
+                this.mSplitBarLayoutChangeListner =
+                        new View
+                                .OnLayoutChangeListener() { // from class:
+                                                            // android.preference.PreferenceActivity.5
+                            @Override // android.view.View.OnLayoutChangeListener
+                            public void onLayoutChange(
+                                    View v,
+                                    int left,
+                                    int top,
+                                    int right,
+                                    int bottom,
+                                    int oldLeft,
+                                    int oldTop,
+                                    int oldRight,
+                                    int oldBottom) {
+                                float mRightLayoutStartPosition;
+                                if (!PreferenceActivity.this.mEnableSplitBar) {
+                                    return;
+                                }
+                                if (PreferenceActivity.this.mIsRTL) {
+                                    mRightLayoutStartPosition =
+                                            PreferenceActivity.this.mHeadersContainer.getX();
+                                } else {
+                                    mRightLayoutStartPosition =
+                                            PreferenceActivity.this.mPrefsContainer.getX();
+                                }
+                                if (PreferenceActivity.this.mIsDeviceDefault
+                                        && PreferenceActivity.this.mSplitBarView != null) {
+                                    float x =
+                                            mRightLayoutStartPosition
+                                                    - (PreferenceActivity.this.mSplitBarView
+                                                                    .getWidth()
+                                                            / 2.0f);
+                                    if (x < 0.0f) {
+                                        x = 0.0f;
+                                    }
+                                    if (PreferenceActivity.this.mSplitBarView.getX() != x) {
+                                        PreferenceActivity.this.mSplitBarView.setX(x);
+                                    }
+                                }
                             }
-                            if (PreferenceActivity.this.mSplitBarView.getX() != x) {
-                                PreferenceActivity.this.mSplitBarView.setX(x);
-                            }
-                        }
-                    }
-                };
+                        };
             }
             this.mSplitBarView.addOnLayoutChangeListener(this.mSplitBarLayoutChangeListner);
-            this.mSplitBarView.setOnTouchListener(new View.OnTouchListener() { // from class: android.preference.PreferenceActivity.6
-                @Override // android.view.View.OnTouchListener
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (!PreferenceActivity.this.mEnableSplitBar) {
-                        return false;
-                    }
-                    int action = event.getAction();
-                    View splitBar = null;
-                    if (v instanceof ViewGroup) {
-                        splitBar = ((ViewGroup) v).getChildAt(0);
-                    }
-                    if (splitBar == null) {
-                        return false;
-                    }
-                    if (action == 0) {
-                        splitBar.setVisibility(0);
-                        PreferenceActivity.this.mUpdateLayoutBySplitChange = false;
-                        return true;
-                    }
-                    if (action != 2) {
-                        if (action != 1) {
-                            float x = PreferenceActivity.this.mPrefsContainer.getX() - (PreferenceActivity.this.mSplitBarView.getWidth() / 2.0f);
-                            if (x < 0.0f) {
-                                x = 0.0f;
+            this.mSplitBarView.setOnTouchListener(
+                    new View
+                            .OnTouchListener() { // from class:
+                                                 // android.preference.PreferenceActivity.6
+                        @Override // android.view.View.OnTouchListener
+                        public boolean onTouch(View v, MotionEvent event) {
+                            if (!PreferenceActivity.this.mEnableSplitBar) {
+                                return false;
                             }
-                            if (action != 3 || !PreferenceActivity.this.mIsDeviceDefault) {
-                                PreferenceActivity.this.mSplitBarView.setX(x);
+                            int action = event.getAction();
+                            View splitBar = null;
+                            if (v instanceof ViewGroup) {
+                                splitBar = ((ViewGroup) v).getChildAt(0);
+                            }
+                            if (splitBar == null) {
+                                return false;
+                            }
+                            if (action == 0) {
+                                splitBar.setVisibility(0);
+                                PreferenceActivity.this.mUpdateLayoutBySplitChange = false;
+                                return true;
+                            }
+                            if (action != 2) {
+                                if (action != 1) {
+                                    float x =
+                                            PreferenceActivity.this.mPrefsContainer.getX()
+                                                    - (PreferenceActivity.this.mSplitBarView
+                                                                    .getWidth()
+                                                            / 2.0f);
+                                    if (x < 0.0f) {
+                                        x = 0.0f;
+                                    }
+                                    if (action != 3 || !PreferenceActivity.this.mIsDeviceDefault) {
+                                        PreferenceActivity.this.mSplitBarView.setX(x);
+                                    }
+                                    PreferenceActivity.this.mUpdateLayoutBySplitChange = false;
+                                    splitBar.setVisibility(4);
+                                    return true;
+                                }
+                                LinearLayout.LayoutParams llp2 =
+                                        (LinearLayout.LayoutParams)
+                                                PreferenceActivity.this.mHeadersContainer
+                                                        .getLayoutParams();
+                                if (PreferenceActivity.mSplitBarMovedLeftWeight != llp2.weight) {
+                                    PreferenceActivity.mSplitBarMovedLeftWeight = llp2.weight;
+                                }
+                                splitBar.setVisibility(4);
+                                splitBar.requestLayout();
+                                return true;
+                            }
+                            int splitBarwidth = PreferenceActivity.this.mSplitBarView.getWidth();
+                            int parentLayoutWidth =
+                                    ((View) PreferenceActivity.this.mSplitBarView.getParent())
+                                            .getWidth();
+                            float touchX = event.getX();
+                            float newSplitBarPosX = PreferenceActivity.this.mSplitBarView.getX();
+                            float newSplitBarCenterPosX = (splitBarwidth / 2.0f) + newSplitBarPosX;
+                            float touchXInParentRect = newSplitBarPosX + touchX;
+                            if (PreferenceActivity.this.mIsDeviceDefault
+                                    && PreferenceActivity.this.mIsRTL) {
+                                if (touchX > splitBarwidth
+                                        && touchXInParentRect <= parentLayoutWidth) {
+                                    newSplitBarCenterPosX += touchX - splitBarwidth;
+                                    if (newSplitBarCenterPosX / parentLayoutWidth > 0.8f) {
+                                        DisplayMetrics d =
+                                                PreferenceActivity.this
+                                                        .getResources()
+                                                        .getDisplayMetrics();
+                                        float splitXinFullview =
+                                                TypedValue.applyDimension(
+                                                        1,
+                                                        PreferenceActivity
+                                                                .SPLIT_BAR_SPLIT_X_IN_FULLVIEW,
+                                                        d);
+                                        newSplitBarCenterPosX =
+                                                parentLayoutWidth - splitXinFullview;
+                                    }
+                                    PreferenceActivity.this.mSplitBarView.setX(
+                                            newSplitBarCenterPosX - (splitBarwidth / 2.0f));
+                                    PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
+                                } else if (touchX < 0.0f && touchXInParentRect >= 0.0f) {
+                                    newSplitBarCenterPosX += touchX;
+                                    float splitRatio = newSplitBarCenterPosX / parentLayoutWidth;
+                                    if (splitRatio < 0.33999997f) {
+                                        newSplitBarCenterPosX = parentLayoutWidth * 0.33999997f;
+                                    } else if (splitRatio > 0.8f) {
+                                        DisplayMetrics d2 =
+                                                PreferenceActivity.this
+                                                        .getResources()
+                                                        .getDisplayMetrics();
+                                        float splitXinFullview2 =
+                                                TypedValue.applyDimension(
+                                                        1,
+                                                        PreferenceActivity
+                                                                .SPLIT_BAR_SPLIT_X_IN_FULLVIEW,
+                                                        d2);
+                                        newSplitBarCenterPosX =
+                                                parentLayoutWidth - splitXinFullview2;
+                                    }
+                                    PreferenceActivity.this.mSplitBarView.setX(
+                                            newSplitBarCenterPosX - (splitBarwidth / 2.0f));
+                                    PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
+                                }
+                            } else if (touchX > splitBarwidth
+                                    && touchXInParentRect <= parentLayoutWidth) {
+                                newSplitBarCenterPosX += touchX - splitBarwidth;
+                                float splitRatio2 = newSplitBarCenterPosX / parentLayoutWidth;
+                                if (splitRatio2 > PreferenceActivity.SPLIT_BAR_MOVEABLE_AREA_MAX) {
+                                    newSplitBarCenterPosX =
+                                            parentLayoutWidth
+                                                    * PreferenceActivity
+                                                            .SPLIT_BAR_MOVEABLE_AREA_MAX;
+                                } else if (splitRatio2 < 0.2f) {
+                                    DisplayMetrics d3 =
+                                            PreferenceActivity.this
+                                                    .getResources()
+                                                    .getDisplayMetrics();
+                                    float splitXinFullview3 =
+                                            TypedValue.applyDimension(
+                                                    1,
+                                                    PreferenceActivity
+                                                            .SPLIT_BAR_SPLIT_X_IN_FULLVIEW,
+                                                    d3);
+                                    newSplitBarCenterPosX = splitXinFullview3;
+                                }
+                                PreferenceActivity.this.mSplitBarView.setX(
+                                        newSplitBarCenterPosX - (splitBarwidth / 2.0f));
+                                PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
+                            } else if (touchX < 0.0f && touchXInParentRect >= 0.0f) {
+                                newSplitBarCenterPosX += touchX;
+                                if (newSplitBarCenterPosX / parentLayoutWidth < 0.2f) {
+                                    DisplayMetrics d4 =
+                                            PreferenceActivity.this
+                                                    .getResources()
+                                                    .getDisplayMetrics();
+                                    float splitXinFullview4 =
+                                            TypedValue.applyDimension(
+                                                    1,
+                                                    PreferenceActivity
+                                                            .SPLIT_BAR_SPLIT_X_IN_FULLVIEW,
+                                                    d4);
+                                    newSplitBarCenterPosX = splitXinFullview4;
+                                }
+                                PreferenceActivity.this.mSplitBarView.setX(
+                                        newSplitBarCenterPosX - (splitBarwidth / 2.0f));
+                                PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
+                            }
+                            if (PreferenceActivity.this.mUpdateLayoutBySplitChange) {
+                                PreferenceActivity.mUserUpdateSplit = true;
+                                LinearLayout.LayoutParams llp3 =
+                                        (LinearLayout.LayoutParams)
+                                                PreferenceActivity.this.mHeadersContainer
+                                                        .getLayoutParams();
+                                LinearLayout.LayoutParams rlp2 =
+                                        (LinearLayout.LayoutParams)
+                                                PreferenceActivity.this.mPrefsContainer
+                                                        .getLayoutParams();
+                                float leftPanelWeight2 = llp3.weight;
+                                float rightPanelWeight2 = rlp2.weight;
+                                float weightSum2 = leftPanelWeight2 + rightPanelWeight2;
+                                float leftPanelWidthRatio =
+                                        newSplitBarCenterPosX / parentLayoutWidth;
+                                float newLeftPanelWeight = weightSum2 * leftPanelWidthRatio;
+                                float newRightPanelWeight = weightSum2 - newLeftPanelWeight;
+                                llp3.weight = newLeftPanelWeight;
+                                rlp2.weight = newRightPanelWeight;
+                                if (PreferenceActivity.this.mIsDeviceDefault) {
+                                    if (PreferenceActivity.this.mIsRTL) {
+                                        PreferenceActivity.this.mHeadersContainer.setLayoutParams(
+                                                rlp2);
+                                        PreferenceActivity.this.mPrefsContainer.setLayoutParams(
+                                                llp3);
+                                    } else {
+                                        PreferenceActivity.this.mHeadersContainer.setLayoutParams(
+                                                llp3);
+                                        PreferenceActivity.this.mPrefsContainer.setLayoutParams(
+                                                rlp2);
+                                    }
+                                }
                             }
                             PreferenceActivity.this.mUpdateLayoutBySplitChange = false;
-                            splitBar.setVisibility(4);
                             return true;
                         }
-                        LinearLayout.LayoutParams llp2 = (LinearLayout.LayoutParams) PreferenceActivity.this.mHeadersContainer.getLayoutParams();
-                        if (PreferenceActivity.mSplitBarMovedLeftWeight != llp2.weight) {
-                            PreferenceActivity.mSplitBarMovedLeftWeight = llp2.weight;
-                        }
-                        splitBar.setVisibility(4);
-                        splitBar.requestLayout();
-                        return true;
-                    }
-                    int splitBarwidth = PreferenceActivity.this.mSplitBarView.getWidth();
-                    int parentLayoutWidth = ((View) PreferenceActivity.this.mSplitBarView.getParent()).getWidth();
-                    float touchX = event.getX();
-                    float newSplitBarPosX = PreferenceActivity.this.mSplitBarView.getX();
-                    float newSplitBarCenterPosX = (splitBarwidth / 2.0f) + newSplitBarPosX;
-                    float touchXInParentRect = newSplitBarPosX + touchX;
-                    if (PreferenceActivity.this.mIsDeviceDefault && PreferenceActivity.this.mIsRTL) {
-                        if (touchX > splitBarwidth && touchXInParentRect <= parentLayoutWidth) {
-                            newSplitBarCenterPosX += touchX - splitBarwidth;
-                            if (newSplitBarCenterPosX / parentLayoutWidth > 0.8f) {
-                                DisplayMetrics d = PreferenceActivity.this.getResources().getDisplayMetrics();
-                                float splitXinFullview = TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, d);
-                                newSplitBarCenterPosX = parentLayoutWidth - splitXinFullview;
-                            }
-                            PreferenceActivity.this.mSplitBarView.setX(newSplitBarCenterPosX - (splitBarwidth / 2.0f));
-                            PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
-                        } else if (touchX < 0.0f && touchXInParentRect >= 0.0f) {
-                            newSplitBarCenterPosX += touchX;
-                            float splitRatio = newSplitBarCenterPosX / parentLayoutWidth;
-                            if (splitRatio < 0.33999997f) {
-                                newSplitBarCenterPosX = parentLayoutWidth * 0.33999997f;
-                            } else if (splitRatio > 0.8f) {
-                                DisplayMetrics d2 = PreferenceActivity.this.getResources().getDisplayMetrics();
-                                float splitXinFullview2 = TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, d2);
-                                newSplitBarCenterPosX = parentLayoutWidth - splitXinFullview2;
-                            }
-                            PreferenceActivity.this.mSplitBarView.setX(newSplitBarCenterPosX - (splitBarwidth / 2.0f));
-                            PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
-                        }
-                    } else if (touchX > splitBarwidth && touchXInParentRect <= parentLayoutWidth) {
-                        newSplitBarCenterPosX += touchX - splitBarwidth;
-                        float splitRatio2 = newSplitBarCenterPosX / parentLayoutWidth;
-                        if (splitRatio2 > PreferenceActivity.SPLIT_BAR_MOVEABLE_AREA_MAX) {
-                            newSplitBarCenterPosX = parentLayoutWidth * PreferenceActivity.SPLIT_BAR_MOVEABLE_AREA_MAX;
-                        } else if (splitRatio2 < 0.2f) {
-                            DisplayMetrics d3 = PreferenceActivity.this.getResources().getDisplayMetrics();
-                            float splitXinFullview3 = TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, d3);
-                            newSplitBarCenterPosX = splitXinFullview3;
-                        }
-                        PreferenceActivity.this.mSplitBarView.setX(newSplitBarCenterPosX - (splitBarwidth / 2.0f));
-                        PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
-                    } else if (touchX < 0.0f && touchXInParentRect >= 0.0f) {
-                        newSplitBarCenterPosX += touchX;
-                        if (newSplitBarCenterPosX / parentLayoutWidth < 0.2f) {
-                            DisplayMetrics d4 = PreferenceActivity.this.getResources().getDisplayMetrics();
-                            float splitXinFullview4 = TypedValue.applyDimension(1, PreferenceActivity.SPLIT_BAR_SPLIT_X_IN_FULLVIEW, d4);
-                            newSplitBarCenterPosX = splitXinFullview4;
-                        }
-                        PreferenceActivity.this.mSplitBarView.setX(newSplitBarCenterPosX - (splitBarwidth / 2.0f));
-                        PreferenceActivity.this.mUpdateLayoutBySplitChange = true;
-                    }
-                    if (PreferenceActivity.this.mUpdateLayoutBySplitChange) {
-                        PreferenceActivity.mUserUpdateSplit = true;
-                        LinearLayout.LayoutParams llp3 = (LinearLayout.LayoutParams) PreferenceActivity.this.mHeadersContainer.getLayoutParams();
-                        LinearLayout.LayoutParams rlp2 = (LinearLayout.LayoutParams) PreferenceActivity.this.mPrefsContainer.getLayoutParams();
-                        float leftPanelWeight2 = llp3.weight;
-                        float rightPanelWeight2 = rlp2.weight;
-                        float weightSum2 = leftPanelWeight2 + rightPanelWeight2;
-                        float leftPanelWidthRatio = newSplitBarCenterPosX / parentLayoutWidth;
-                        float newLeftPanelWeight = weightSum2 * leftPanelWidthRatio;
-                        float newRightPanelWeight = weightSum2 - newLeftPanelWeight;
-                        llp3.weight = newLeftPanelWeight;
-                        rlp2.weight = newRightPanelWeight;
-                        if (PreferenceActivity.this.mIsDeviceDefault) {
-                            if (PreferenceActivity.this.mIsRTL) {
-                                PreferenceActivity.this.mHeadersContainer.setLayoutParams(rlp2);
-                                PreferenceActivity.this.mPrefsContainer.setLayoutParams(llp3);
-                            } else {
-                                PreferenceActivity.this.mHeadersContainer.setLayoutParams(llp3);
-                                PreferenceActivity.this.mPrefsContainer.setLayoutParams(rlp2);
-                            }
-                        }
-                    }
-                    PreferenceActivity.this.mUpdateLayoutBySplitChange = false;
-                    return true;
-                }
-            });
+                    });
         }
         this.mInsideOnCreate = false;
     }
 
     @Override // android.app.Activity
     public void onBackPressed() {
-        if (this.mCurHeader != null && this.mSinglePane && getFragmentManager().getBackStackEntryCount() == 0 && getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT) == null) {
+        if (this.mCurHeader != null
+                && this.mSinglePane
+                && getFragmentManager().getBackStackEntryCount() == 0
+                && getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT) == null) {
             this.mCurHeader = null;
             this.mPrefsContainer.setVisibility(8);
             this.mHeadersContainer.setVisibility(0);
@@ -661,8 +790,7 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         return null;
     }
 
-    public void onBuildHeaders(List<Header> target) {
-    }
+    public void onBuildHeaders(List<Header> target) {}
 
     public void invalidateHeaders() {
         if (!this.mHandler.hasMessages(2)) {
@@ -671,248 +799,258 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:102:0x0112, code lost:
-    
-        r16 = r2.getName();
-     */
+
+       r16 = r2.getName();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:103:0x011e, code lost:
-    
-        if (r16.equals(com.samsung.android.share.SemShareConstants.SURVEY_CONTENT_EXTRA) == false) goto L80;
-     */
+
+       if (r16.equals(com.samsung.android.share.SemShareConstants.SURVEY_CONTENT_EXTRA) == false) goto L80;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:104:0x0120, code lost:
-    
-        getResources().parseBundleExtra(com.samsung.android.share.SemShareConstants.SURVEY_CONTENT_EXTRA, r3, r9);
-        com.android.internal.util.XmlUtils.skipCurrentTag(r2);
-     */
+
+       getResources().parseBundleExtra(com.samsung.android.share.SemShareConstants.SURVEY_CONTENT_EXTRA, r3, r9);
+       com.android.internal.util.XmlUtils.skipCurrentTag(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:107:0x0132, code lost:
-    
-        if (r16.equals("intent") == false) goto L83;
-     */
+
+       if (r16.equals("intent") == false) goto L83;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:108:0x0134, code lost:
-    
-        r13.intent = android.content.Intent.parseIntent(getResources(), r2, r3);
-     */
+
+       r13.intent = android.content.Intent.parseIntent(getResources(), r2, r3);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:110:0x013f, code lost:
-    
-        com.android.internal.util.XmlUtils.skipCurrentTag(r2);
-     */
+
+       com.android.internal.util.XmlUtils.skipCurrentTag(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:114:0x00f4, code lost:
-    
-        r9 = r18;
-     */
+
+       r9 = r18;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:116:0x015c, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:121:0x015f, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:126:0x0159, code lost:
-    
-        r0 = th;
-     */
+
+       r0 = th;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:133:0x004e, code lost:
-    
-        r18 = r9;
-     */
+
+       r18 = r9;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:32:0x004c, code lost:
-    
-        if (r11 != 4) goto L146;
-     */
+
+       if (r11 != 4) goto L146;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x0061, code lost:
-    
-        if (android.provider.Downloads.Impl.RequestHeaders.COLUMN_HEADER.equals(r2.getName()) == false) goto L150;
-     */
+
+       if (android.provider.Downloads.Impl.RequestHeaders.COLUMN_HEADER.equals(r2.getName()) == false) goto L150;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0162, code lost:
-    
-        r18 = r9;
-        com.android.internal.util.XmlUtils.skipCurrentTag(r2);
-     */
+
+       r18 = r9;
+       com.android.internal.util.XmlUtils.skipCurrentTag(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x016b, code lost:
-    
-        r9 = r18;
-        r7 = 2;
-        r8 = 1;
-     */
+
+       r9 = r18;
+       r7 = 2;
+       r8 = 1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:42:0x0063, code lost:
-    
-        r13 = new android.preference.PreferenceActivity.Header();
-     */
+
+       r13 = new android.preference.PreferenceActivity.Header();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:45:0x006c, code lost:
-    
-        r14 = obtainStyledAttributes(r3, com.android.internal.R.styleable.PreferenceHeader);
-        r18 = r9;
-        r13.id = r14.getResourceId(r8, -1);
-        r8 = r14.peekValue(r7);
-     */
+
+       r14 = obtainStyledAttributes(r3, com.android.internal.R.styleable.PreferenceHeader);
+       r18 = r9;
+       r13.id = r14.getResourceId(r8, -1);
+       r8 = r14.peekValue(r7);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x007e, code lost:
-    
-        if (r8 == null) goto L37;
-     */
+
+       if (r8 == null) goto L37;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:48:0x0082, code lost:
-    
-        if (r8.type != 3) goto L37;
-     */
+
+       if (r8.type != 3) goto L37;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:50:0x0086, code lost:
-    
-        if (r8.resourceId == 0) goto L36;
-     */
+
+       if (r8.resourceId == 0) goto L36;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:51:0x0088, code lost:
-    
-        r13.titleRes = r8.resourceId;
-     */
+
+       r13.titleRes = r8.resourceId;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:52:0x008d, code lost:
-    
-        r13.title = r8.string;
-     */
+
+       r13.title = r8.string;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:53:0x0091, code lost:
-    
-        r9 = r14.peekValue(3);
-     */
+
+       r9 = r14.peekValue(3);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:54:0x0096, code lost:
-    
-        if (r9 == null) goto L45;
-     */
+
+       if (r9 == null) goto L45;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:56:0x009a, code lost:
-    
-        if (r9.type != 3) goto L45;
-     */
+
+       if (r9.type != 3) goto L45;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x009e, code lost:
-    
-        if (r9.resourceId == 0) goto L44;
-     */
+
+       if (r9.resourceId == 0) goto L44;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:59:0x00a0, code lost:
-    
-        r13.summaryRes = r9.resourceId;
-     */
+
+       r13.summaryRes = r9.resourceId;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:60:0x00a5, code lost:
-    
-        r13.summary = r9.string;
-     */
+
+       r13.summary = r9.string;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:61:0x00a9, code lost:
-    
-        r9 = r14.peekValue(5);
-     */
+
+       r9 = r14.peekValue(5);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:62:0x00af, code lost:
-    
-        if (r9 == null) goto L53;
-     */
+
+       if (r9 == null) goto L53;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:64:0x00b3, code lost:
-    
-        if (r9.type != 3) goto L53;
-     */
+
+       if (r9.type != 3) goto L53;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:66:0x00b7, code lost:
-    
-        if (r9.resourceId == 0) goto L52;
-     */
+
+       if (r9.resourceId == 0) goto L52;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:67:0x00b9, code lost:
-    
-        r13.breadCrumbTitleRes = r9.resourceId;
-     */
+
+       r13.breadCrumbTitleRes = r9.resourceId;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:68:0x00be, code lost:
-    
-        r13.breadCrumbTitle = r9.string;
-     */
+
+       r13.breadCrumbTitle = r9.string;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:69:0x00c2, code lost:
-    
-        r9 = r14.peekValue(6);
-     */
+
+       r9 = r14.peekValue(6);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:70:0x00c8, code lost:
-    
-        if (r9 == null) goto L61;
-     */
+
+       if (r9 == null) goto L61;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:72:0x00cc, code lost:
-    
-        if (r9.type != 3) goto L61;
-     */
+
+       if (r9.type != 3) goto L61;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:74:0x00d0, code lost:
-    
-        if (r9.resourceId == 0) goto L60;
-     */
+
+       if (r9.resourceId == 0) goto L60;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:75:0x00d2, code lost:
-    
-        r13.breadCrumbShortTitleRes = r9.resourceId;
-     */
+
+       r13.breadCrumbShortTitleRes = r9.resourceId;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:76:0x00d7, code lost:
-    
-        r13.breadCrumbShortTitle = r9.string;
-     */
+
+       r13.breadCrumbShortTitle = r9.string;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:77:0x00db, code lost:
-    
-        r13.iconRes = r14.getResourceId(0, 0);
-        r13.fragment = r14.getString(4);
-        r14.recycle();
-     */
+
+       r13.iconRes = r14.getResourceId(0, 0);
+       r13.fragment = r14.getString(4);
+       r14.recycle();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:78:0x00ec, code lost:
-    
-        if (r18 != null) goto L64;
-     */
+
+       if (r18 != null) goto L64;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:79:0x00ee, code lost:
-    
-        r9 = new android.os.Bundle();
-     */
+
+       r9 = new android.os.Bundle();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:80:0x00f6, code lost:
-    
-        r12 = r2.getDepth();
-     */
+
+       r12 = r2.getDepth();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:81:0x00fa, code lost:
-    
-        r7 = r2.next();
-     */
+
+       r7 = r2.next();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:82:0x0100, code lost:
-    
-        if (r7 == 1) goto L156;
-     */
+
+       if (r7 == 1) goto L156;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:84:0x0103, code lost:
-    
-        if (r7 != 3) goto L72;
-     */
+
+       if (r7 != 3) goto L72;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:86:0x0109, code lost:
-    
-        if (r2.getDepth() <= r12) goto L157;
-     */
+
+       if (r2.getDepth() <= r12) goto L157;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:89:0x014a, code lost:
-    
-        if (r9.size() <= 0) goto L90;
-     */
+
+       if (r9.size() <= 0) goto L90;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:90:0x014c, code lost:
-    
-        r13.fragmentArguments = r9;
-     */
+
+       r13.fragmentArguments = r9;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:91:0x014e, code lost:
-    
-        r9 = null;
-     */
+
+       r9 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:93:0x0152, code lost:
-    
-        r21.add(r13);
-        r7 = 2;
-        r8 = 1;
-     */
+
+       r21.add(r13);
+       r7 = 2;
+       r8 = 1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:96:0x010c, code lost:
-    
-        if (r7 == 3) goto L158;
-     */
+
+       if (r7 == 3) goto L158;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:98:0x010f, code lost:
-    
-        if (r7 != 4) goto L77;
-     */
+
+       if (r7 != 4) goto L77;
+    */
     /* JADX WARN: Removed duplicated region for block: B:130:0x01e9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void loadHeadersFromResource(int r20, java.util.List<android.preference.PreferenceActivity.Header> r21) {
+    public void loadHeadersFromResource(
+            int r20, java.util.List<android.preference.PreferenceActivity.Header> r21) {
         /*
             Method dump skipped, instructions count: 493
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.preference.PreferenceActivity.loadHeadersFromResource(int, java.util.List):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.preference.PreferenceActivity.loadHeadersFromResource(int,"
+                    + " java.util.List):void");
     }
 
     protected boolean isValidFragment(String fragmentName) {
         if (getApplicationInfo().targetSdkVersion >= 19) {
-            throw new RuntimeException("Subclasses of PreferenceActivity must override isValidFragment(String) to verify that the Fragment class is valid! " + getClass().getName() + " has not checked if fragment " + fragmentName + " is valid.");
+            throw new RuntimeException(
+                    "Subclasses of PreferenceActivity must override isValidFragment(String) to"
+                        + " verify that the Fragment class is valid! "
+                            + getClass().getName()
+                            + " has not checked if fragment "
+                            + fragmentName
+                            + " is valid.");
         }
         return true;
     }
@@ -962,7 +1100,9 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     protected void onRestoreInstanceState(Bundle state) {
         Bundle container;
         PreferenceScreen preferenceScreen;
-        if (this.mPreferenceManager != null && (container = state.getBundle(PREFERENCES_TAG)) != null && (preferenceScreen = getPreferenceScreen()) != null) {
+        if (this.mPreferenceManager != null
+                && (container = state.getBundle(PREFERENCES_TAG)) != null
+                && (preferenceScreen = getPreferenceScreen()) != null) {
             preferenceScreen.restoreHierarchyState(container);
             this.mSavedInstanceState = state;
             return;
@@ -1011,7 +1151,8 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         }
     }
 
-    public Intent onBuildStartFragmentIntent(String fragmentName, Bundle args, int titleRes, int shortTitleRes) {
+    public Intent onBuildStartFragmentIntent(
+            String fragmentName, Bundle args, int titleRes, int shortTitleRes) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(this, getClass());
         intent.putExtra(EXTRA_SHOW_FRAGMENT, fragmentName);
@@ -1022,11 +1163,18 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         return intent;
     }
 
-    public void startWithFragment(String fragmentName, Bundle args, Fragment resultTo, int resultRequestCode) {
+    public void startWithFragment(
+            String fragmentName, Bundle args, Fragment resultTo, int resultRequestCode) {
         startWithFragment(fragmentName, args, resultTo, resultRequestCode, 0, 0);
     }
 
-    public void startWithFragment(String fragmentName, Bundle args, Fragment resultTo, int resultRequestCode, int titleRes, int shortTitleRes) {
+    public void startWithFragment(
+            String fragmentName,
+            Bundle args,
+            Fragment resultTo,
+            int resultRequestCode,
+            int titleRes,
+            int shortTitleRes) {
         Intent intent = onBuildStartFragmentIntent(fragmentName, args, titleRes, shortTitleRes);
         if (resultTo == null) {
             startActivity(intent);
@@ -1071,7 +1219,8 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         }
     }
 
-    public void setParentTitle(CharSequence title, CharSequence shortTitle, View.OnClickListener listener) {
+    public void setParentTitle(
+            CharSequence title, CharSequence shortTitle, View.OnClickListener listener) {
         if (this.mFragmentBreadCrumbs != null) {
             this.mFragmentBreadCrumbs.setParentTitle(title, shortTitle, listener);
         }
@@ -1107,7 +1256,8 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         int i;
         getFragmentManager().popBackStack(BACK_STACK_PREFS, 1);
         if (!isValidFragment(fragmentName)) {
-            throw new IllegalArgumentException("Invalid fragment for this activity: " + fragmentName);
+            throw new IllegalArgumentException(
+                    "Invalid fragment for this activity: " + fragmentName);
         }
         Fragment f = Fragment.instantiate(this, fragmentName, args);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -1186,7 +1336,8 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         if (NM > 1) {
             for (int j2 = 0; j2 < NM; j2++) {
                 Header oh2 = matches.get(j2);
-                if (cur.fragmentArguments != null && cur.fragmentArguments.equals(oh2.fragmentArguments)) {
+                if (cur.fragmentArguments != null
+                        && cur.fragmentArguments.equals(oh2.fragmentArguments)) {
                     return oh2;
                 }
                 if (cur.extras != null && cur.extras.equals(oh2.extras)) {
@@ -1213,7 +1364,13 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
         transaction.commitAllowingStateLoss();
     }
 
-    public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes, CharSequence titleText, Fragment resultTo, int resultRequestCode) {
+    public void startPreferencePanel(
+            String fragmentClass,
+            Bundle args,
+            int titleRes,
+            CharSequence titleText,
+            Fragment resultTo,
+            int resultRequestCode) {
         Fragment f = Fragment.instantiate(this, fragmentClass, args);
         if (resultTo != null) {
             f.setTargetFragment(resultTo, resultRequestCode);
@@ -1233,13 +1390,15 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     public void finishPreferencePanel(Fragment caller, int resultCode, Intent resultData) {
         onBackPressed();
         if (caller != null && caller.getTargetFragment() != null) {
-            caller.getTargetFragment().onActivityResult(caller.getTargetRequestCode(), resultCode, resultData);
+            caller.getTargetFragment()
+                    .onActivityResult(caller.getTargetRequestCode(), resultCode, resultData);
         }
     }
 
     @Override // android.preference.PreferenceFragment.OnPreferenceStartFragmentCallback
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
-        startPreferencePanel(pref.getFragment(), pref.getExtras(), pref.getTitleRes(), pref.getTitle(), null, 0);
+        startPreferencePanel(
+                pref.getFragment(), pref.getExtras(), pref.getTitleRes(), pref.getTitle(), null, 0);
         return true;
     }
 
@@ -1272,7 +1431,8 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
             if (this.mAdapter == null) {
                 throw new RuntimeException("This should be called after super.onCreate.");
             }
-            throw new RuntimeException("Modern two-pane PreferenceActivity requires use of a PreferenceFragment");
+            throw new RuntimeException(
+                    "Modern two-pane PreferenceActivity requires use of a PreferenceFragment");
         }
     }
 
@@ -1299,13 +1459,16 @@ public abstract class PreferenceActivity extends ListActivity implements Prefere
     @Deprecated
     public void addPreferencesFromIntent(Intent intent) {
         requirePreferenceManager();
-        setPreferenceScreen(this.mPreferenceManager.inflateFromIntent(intent, getPreferenceScreen()));
+        setPreferenceScreen(
+                this.mPreferenceManager.inflateFromIntent(intent, getPreferenceScreen()));
     }
 
     @Deprecated
     public void addPreferencesFromResource(int preferencesResId) {
         requirePreferenceManager();
-        setPreferenceScreen(this.mPreferenceManager.inflateFromResource(this, preferencesResId, getPreferenceScreen()));
+        setPreferenceScreen(
+                this.mPreferenceManager.inflateFromResource(
+                        this, preferencesResId, getPreferenceScreen()));
     }
 
     @Override // android.preference.PreferenceManager.OnPreferenceTreeClickListener

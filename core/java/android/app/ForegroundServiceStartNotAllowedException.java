@@ -4,20 +4,23 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /* loaded from: classes.dex */
-public final class ForegroundServiceStartNotAllowedException extends ServiceStartNotAllowedException implements Parcelable {
-    public static final Parcelable.Creator<ForegroundServiceStartNotAllowedException> CREATOR = new Parcelable.Creator<ForegroundServiceStartNotAllowedException>() { // from class: android.app.ForegroundServiceStartNotAllowedException.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ForegroundServiceStartNotAllowedException createFromParcel(Parcel source) {
-            return new ForegroundServiceStartNotAllowedException(source);
-        }
+public final class ForegroundServiceStartNotAllowedException extends ServiceStartNotAllowedException
+        implements Parcelable {
+    public static final Parcelable.Creator<ForegroundServiceStartNotAllowedException> CREATOR =
+            new Parcelable.Creator<ForegroundServiceStartNotAllowedException>() { // from class:
+                // android.app.ForegroundServiceStartNotAllowedException.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ForegroundServiceStartNotAllowedException createFromParcel(Parcel source) {
+                    return new ForegroundServiceStartNotAllowedException(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ForegroundServiceStartNotAllowedException[] newArray(int size) {
-            return new ForegroundServiceStartNotAllowedException[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ForegroundServiceStartNotAllowedException[] newArray(int size) {
+                    return new ForegroundServiceStartNotAllowedException[size];
+                }
+            };
 
     public ForegroundServiceStartNotAllowedException(String message) {
         super(message);

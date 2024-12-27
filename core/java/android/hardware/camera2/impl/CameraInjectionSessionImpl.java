@@ -7,12 +7,15 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 
 /* loaded from: classes2.dex */
-public class CameraInjectionSessionImpl extends CameraInjectionSession implements IBinder.DeathRecipient {
+public class CameraInjectionSessionImpl extends CameraInjectionSession
+        implements IBinder.DeathRecipient {
     private static final String TAG = "CameraInjectionSessionImpl";
     private final Executor mExecutor;
     private ICameraInjectionSession mInjectionSession;
@@ -20,7 +23,8 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession implement
     private final CameraInjectionCallback mCallback = new CameraInjectionCallback();
     private final Object mInterfaceLock = new Object();
 
-    public CameraInjectionSessionImpl(CameraInjectionSession.InjectionStatusCallback callback, Executor executor) {
+    public CameraInjectionSessionImpl(
+            CameraInjectionSession.InjectionStatusCallback callback, Executor executor) {
         this.mInjectionStatusCallback = callback;
         this.mExecutor = executor;
     }
@@ -54,12 +58,14 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession implement
             if (this.mInjectionSession == null) {
                 return;
             }
-            Runnable r = new Runnable() { // from class: android.hardware.camera2.impl.CameraInjectionSessionImpl.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    CameraInjectionSessionImpl.this.mInjectionStatusCallback.onInjectionError(1);
-                }
-            };
+            Runnable r = new Runnable() { // from class:
+                        // android.hardware.camera2.impl.CameraInjectionSessionImpl.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            CameraInjectionSessionImpl.this.mInjectionStatusCallback
+                                    .onInjectionError(1);
+                        }
+                    };
             long ident = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(r);
@@ -90,12 +96,15 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession implement
             long ident = Binder.clearCallingIdentity();
             try {
                 remoteSessionBinder.linkToDeath(this, 0);
-                this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.impl.CameraInjectionSessionImpl.2
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        CameraInjectionSessionImpl.this.mInjectionStatusCallback.onInjectionSucceeded(CameraInjectionSessionImpl.this);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.hardware.camera2.impl.CameraInjectionSessionImpl.2
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                CameraInjectionSessionImpl.this.mInjectionStatusCallback
+                                        .onInjectionSucceeded(CameraInjectionSessionImpl.this);
+                            }
+                        });
             } catch (RemoteException e) {
                 scheduleNotifyError(0);
             } finally {
@@ -105,7 +114,10 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession implement
     }
 
     public void onInjectionError(int errorCode) {
-        Log.v(TAG, String.format("Injection session error received, code %d", Integer.valueOf(errorCode)));
+        Log.v(
+                TAG,
+                String.format(
+                        "Injection session error received, code %d", Integer.valueOf(errorCode)));
         synchronized (this.mInterfaceLock) {
             if (this.mInjectionSession == null) {
                 return;
@@ -131,12 +143,19 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession implement
     private void scheduleNotifyError(int errorCode) {
         long ident = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(PooledLambda.obtainRunnable(new BiConsumer() { // from class: android.hardware.camera2.impl.CameraInjectionSessionImpl$$ExternalSyntheticLambda0
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((CameraInjectionSessionImpl) obj).notifyError(((Integer) obj2).intValue());
-                }
-            }, this, Integer.valueOf(errorCode)).recycleOnUse());
+            this.mExecutor.execute(
+                    PooledLambda.obtainRunnable(
+                                    new BiConsumer() { // from class:
+                                        // android.hardware.camera2.impl.CameraInjectionSessionImpl$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.BiConsumer
+                                        public final void accept(Object obj, Object obj2) {
+                                            ((CameraInjectionSessionImpl) obj)
+                                                    .notifyError(((Integer) obj2).intValue());
+                                        }
+                                    },
+                                    this,
+                                    Integer.valueOf(errorCode))
+                            .recycleOnUse());
         } finally {
             Binder.restoreCallingIdentity(ident);
         }
@@ -150,8 +169,7 @@ public class CameraInjectionSessionImpl extends CameraInjectionSession implement
     }
 
     public class CameraInjectionCallback extends ICameraInjectionCallback.Stub {
-        public CameraInjectionCallback() {
-        }
+        public CameraInjectionCallback() {}
 
         @Override // android.hardware.camera2.ICameraInjectionCallback.Stub, android.os.IInterface
         public IBinder asBinder() {

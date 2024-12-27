@@ -5,40 +5,40 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.telephony.INetworkServiceCallback;
 
 /* loaded from: classes4.dex */
 public interface INetworkService extends IInterface {
     void createNetworkServiceProvider(int i) throws RemoteException;
 
-    void registerForNetworkRegistrationInfoChanged(int i, INetworkServiceCallback iNetworkServiceCallback) throws RemoteException;
+    void registerForNetworkRegistrationInfoChanged(
+            int i, INetworkServiceCallback iNetworkServiceCallback) throws RemoteException;
 
     void removeNetworkServiceProvider(int i) throws RemoteException;
 
-    void requestNetworkRegistrationInfo(int i, int i2, INetworkServiceCallback iNetworkServiceCallback) throws RemoteException;
+    void requestNetworkRegistrationInfo(
+            int i, int i2, INetworkServiceCallback iNetworkServiceCallback) throws RemoteException;
 
-    void unregisterForNetworkRegistrationInfoChanged(int i, INetworkServiceCallback iNetworkServiceCallback) throws RemoteException;
+    void unregisterForNetworkRegistrationInfoChanged(
+            int i, INetworkServiceCallback iNetworkServiceCallback) throws RemoteException;
 
     public static class Default implements INetworkService {
         @Override // android.telephony.INetworkService
-        public void createNetworkServiceProvider(int slotId) throws RemoteException {
-        }
+        public void createNetworkServiceProvider(int slotId) throws RemoteException {}
 
         @Override // android.telephony.INetworkService
-        public void removeNetworkServiceProvider(int slotId) throws RemoteException {
-        }
+        public void removeNetworkServiceProvider(int slotId) throws RemoteException {}
 
         @Override // android.telephony.INetworkService
-        public void requestNetworkRegistrationInfo(int slotId, int domain, INetworkServiceCallback callback) throws RemoteException {
-        }
+        public void requestNetworkRegistrationInfo(
+                int slotId, int domain, INetworkServiceCallback callback) throws RemoteException {}
 
         @Override // android.telephony.INetworkService
-        public void registerForNetworkRegistrationInfoChanged(int slotId, INetworkServiceCallback callback) throws RemoteException {
-        }
+        public void registerForNetworkRegistrationInfoChanged(
+                int slotId, INetworkServiceCallback callback) throws RemoteException {}
 
         @Override // android.telephony.INetworkService
-        public void unregisterForNetworkRegistrationInfoChanged(int slotId, INetworkServiceCallback callback) throws RemoteException {
-        }
+        public void unregisterForNetworkRegistrationInfoChanged(
+                int slotId, INetworkServiceCallback callback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -46,7 +46,7 @@ public interface INetworkService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INetworkService {
+    public abstract static class Stub extends Binder implements INetworkService {
         public static final String DESCRIPTOR = "android.telephony.INetworkService";
         static final int TRANSACTION_createNetworkServiceProvider = 1;
         static final int TRANSACTION_registerForNetworkRegistrationInfoChanged = 4;
@@ -97,7 +97,8 @@ public interface INetworkService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -119,19 +120,22 @@ public interface INetworkService extends IInterface {
                 case 3:
                     int _arg03 = data.readInt();
                     int _arg1 = data.readInt();
-                    INetworkServiceCallback _arg2 = INetworkServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    INetworkServiceCallback _arg2 =
+                            INetworkServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestNetworkRegistrationInfo(_arg03, _arg1, _arg2);
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    INetworkServiceCallback _arg12 = INetworkServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    INetworkServiceCallback _arg12 =
+                            INetworkServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerForNetworkRegistrationInfoChanged(_arg04, _arg12);
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    INetworkServiceCallback _arg13 = INetworkServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    INetworkServiceCallback _arg13 =
+                            INetworkServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterForNetworkRegistrationInfoChanged(_arg05, _arg13);
                     return true;
@@ -181,7 +185,9 @@ public interface INetworkService extends IInterface {
             }
 
             @Override // android.telephony.INetworkService
-            public void requestNetworkRegistrationInfo(int slotId, int domain, INetworkServiceCallback callback) throws RemoteException {
+            public void requestNetworkRegistrationInfo(
+                    int slotId, int domain, INetworkServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -195,7 +201,8 @@ public interface INetworkService extends IInterface {
             }
 
             @Override // android.telephony.INetworkService
-            public void registerForNetworkRegistrationInfoChanged(int slotId, INetworkServiceCallback callback) throws RemoteException {
+            public void registerForNetworkRegistrationInfoChanged(
+                    int slotId, INetworkServiceCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -208,7 +215,8 @@ public interface INetworkService extends IInterface {
             }
 
             @Override // android.telephony.INetworkService
-            public void unregisterForNetworkRegistrationInfoChanged(int slotId, INetworkServiceCallback callback) throws RemoteException {
+            public void unregisterForNetworkRegistrationInfoChanged(
+                    int slotId, INetworkServiceCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

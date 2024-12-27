@@ -2,6 +2,7 @@ package com.samsung.android.sume.core.filter;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MediaBufferGroup;
@@ -14,6 +15,7 @@ import com.samsung.android.sume.core.functional.BiBufferProcessor;
 import com.samsung.android.sume.core.functional.ExecuteDelegator;
 import com.samsung.android.sume.core.types.Status;
 import com.samsung.android.sume.solution.filter.UniImgp;
+
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
@@ -57,12 +59,18 @@ public abstract class NNFWFilter implements MediaFilter {
     public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) {
         if (obuf.isEmpty()) {
             MediaFormat iFmt = ibuf.getFormat();
-            MutableMediaFormat oFmt = (MutableMediaFormat) Optional.ofNullable(this.descriptor.getOutputFormat()).map(new Function() { // from class: com.samsung.android.sume.core.filter.NNFWFilter$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return ((MutableMediaFormat) obj).copy();
-                }
-            }).orElse(null);
+            MutableMediaFormat oFmt =
+                    (MutableMediaFormat)
+                            Optional.ofNullable(this.descriptor.getOutputFormat())
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.sume.core.filter.NNFWFilter$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return ((MutableMediaFormat) obj).copy();
+                                                }
+                                            })
+                                    .orElse(null);
             Def.require((iFmt == null && oFmt == null) ? false : true);
             if (iFmt != null && oFmt != null) {
                 if (oFmt.getShape() == null || oFmt.getShape().isEmpty()) {
@@ -76,12 +84,17 @@ public abstract class NNFWFilter implements MediaFilter {
         long triggerTs = System.currentTimeMillis();
         try {
             if (this.executeDelegator != null) {
-                this.executeDelegator.execute(ibuf, obuf, new BiBufferProcessor() { // from class: com.samsung.android.sume.core.filter.NNFWFilter$$ExternalSyntheticLambda1
-                    @Override // com.samsung.android.sume.core.functional.BiBufferProcessor
-                    public final void process(MediaBuffer mediaBuffer, MediaBuffer mediaBuffer2) {
-                        NNFWFilter.this.runAdapter(mediaBuffer, mediaBuffer2);
-                    }
-                });
+                this.executeDelegator.execute(
+                        ibuf,
+                        obuf,
+                        new BiBufferProcessor() { // from class:
+                                                  // com.samsung.android.sume.core.filter.NNFWFilter$$ExternalSyntheticLambda1
+                            @Override // com.samsung.android.sume.core.functional.BiBufferProcessor
+                            public final void process(
+                                    MediaBuffer mediaBuffer, MediaBuffer mediaBuffer2) {
+                                NNFWFilter.this.runAdapter(mediaBuffer, mediaBuffer2);
+                            }
+                        });
             } else {
                 obuf.put(MediaBuffer.of(obuf.getFormat()));
                 runAdapter(ibuf, obuf);
@@ -96,9 +109,20 @@ public abstract class NNFWFilter implements MediaFilter {
             }
             if (this.targetFormat != null) {
                 Log.d(TAG, "convert to target-format: " + this.targetFormat);
-                obuf.put((MediaBuffer) UniImgp.ofCvtData().run((MediaBuffer) obuf, MediaBuffer.mutableOf(this.targetFormat)));
+                obuf.put(
+                        (MediaBuffer)
+                                UniImgp.ofCvtData()
+                                        .run(
+                                                (MediaBuffer) obuf,
+                                                MediaBuffer.mutableOf(this.targetFormat)));
             }
-            Log.d(TAG, NavigationBarInflaterView.SIZE_MOD_START + this.descriptor.getFw() + "] processing nn ts: " + (System.currentTimeMillis() - triggerTs) + "ms");
+            Log.d(
+                    TAG,
+                    NavigationBarInflaterView.SIZE_MOD_START
+                            + this.descriptor.getFw()
+                            + "] processing nn ts: "
+                            + (System.currentTimeMillis() - triggerTs)
+                            + "ms");
             return obuf;
         } catch (Exception e) {
             e.printStackTrace();

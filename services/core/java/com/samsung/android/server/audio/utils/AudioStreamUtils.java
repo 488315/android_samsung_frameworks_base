@@ -2,7 +2,9 @@ package com.samsung.android.server.audio.utils;
 
 import android.media.AudioSystem;
 import android.util.Log;
+
 import com.android.server.SystemService;
+
 import com.samsung.android.audio.Rune;
 import com.samsung.android.media.SemAudioSystem;
 
@@ -23,7 +25,8 @@ public abstract class AudioStreamUtils {
         if ((i2 & 1) != 0) {
             return 0;
         }
-        if ((i2 & SystemService.PHASE_DEVICE_SPECIFIC_SERVICES_READY) != 0 || AudioSystem.isStreamActiveRemotely(3, 0)) {
+        if ((i2 & SystemService.PHASE_DEVICE_SPECIFIC_SERVICES_READY) != 0
+                || AudioSystem.isStreamActiveRemotely(3, 0)) {
             Log.v("AS.AudioStreamUtils", "getActiveStreamTypeInternal: forcing STREAM_MUSIC");
             return 3;
         }
@@ -34,22 +37,32 @@ public abstract class AudioStreamUtils {
             return 5;
         }
         if ((i2 & 2048) != 0) {
-            Log.v("AS.AudioStreamUtils", "getActiveStreamTypeInternal: forcing STREAM_ASSISTANT...");
+            Log.v(
+                    "AS.AudioStreamUtils",
+                    "getActiveStreamTypeInternal: forcing STREAM_ASSISTANT...");
             return 11;
         }
         if (i == 1) {
             if (z && (i2 & 4) == 0) {
-                Log.v("AS.AudioStreamUtils", "getActiveStreamTypeInternal: only adjust media volume");
+                Log.v(
+                        "AS.AudioStreamUtils",
+                        "getActiveStreamTypeInternal: only adjust media volume");
                 return 3;
             }
-            Log.v("AS.AudioStreamUtils", "getActiveStreamTypeInternal: forcing STREAM_RING b/c default");
+            Log.v(
+                    "AS.AudioStreamUtils",
+                    "getActiveStreamTypeInternal: forcing STREAM_RING b/c default");
             return 2;
         }
         if (!Rune.SEC_AUDIO_DEFAULT_STREAM_NOTIFICATION || z) {
-            Log.v("AS.AudioStreamUtils", "getActiveStreamTypeInternal: using STREAM_MUSIC as default");
+            Log.v(
+                    "AS.AudioStreamUtils",
+                    "getActiveStreamTypeInternal: using STREAM_MUSIC as default");
             return 3;
         }
-        Log.v("AS.AudioStreamUtils", "getActiveStreamTypeInternal: using STREAM_NOTIFICATION as default");
+        Log.v(
+                "AS.AudioStreamUtils",
+                "getActiveStreamTypeInternal: using STREAM_NOTIFICATION as default");
         return 5;
     }
 }

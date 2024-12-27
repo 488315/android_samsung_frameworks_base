@@ -1,7 +1,6 @@
 package android.media;
 
 import android.graphics.Bitmap;
-import android.media.MediaMetadata;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -31,8 +30,7 @@ public abstract class MediaMetadataEditor {
 
     public abstract void apply();
 
-    protected MediaMetadataEditor() {
-    }
+    protected MediaMetadataEditor() {}
 
     public synchronized void clear() {
         if (this.mApplied) {
@@ -76,7 +74,8 @@ public abstract class MediaMetadataEditor {
         return keys;
     }
 
-    public synchronized MediaMetadataEditor putString(int key, String value) throws IllegalArgumentException {
+    public synchronized MediaMetadataEditor putString(int key, String value)
+            throws IllegalArgumentException {
         if (this.mApplied) {
             Log.e(TAG, "Can't edit a previously applied MediaMetadataEditor");
             return this;
@@ -89,7 +88,8 @@ public abstract class MediaMetadataEditor {
         return this;
     }
 
-    public synchronized MediaMetadataEditor putLong(int key, long value) throws IllegalArgumentException {
+    public synchronized MediaMetadataEditor putLong(int key, long value)
+            throws IllegalArgumentException {
         if (this.mApplied) {
             Log.e(TAG, "Can't edit a previously applied MediaMetadataEditor");
             return this;
@@ -102,7 +102,8 @@ public abstract class MediaMetadataEditor {
         return this;
     }
 
-    public synchronized MediaMetadataEditor putBitmap(int key, Bitmap bitmap) throws IllegalArgumentException {
+    public synchronized MediaMetadataEditor putBitmap(int key, Bitmap bitmap)
+            throws IllegalArgumentException {
         if (this.mApplied) {
             Log.e(TAG, "Can't edit a previously applied MediaMetadataEditor");
             return this;
@@ -115,7 +116,8 @@ public abstract class MediaMetadataEditor {
         return this;
     }
 
-    public synchronized MediaMetadataEditor putObject(int key, Object value) throws IllegalArgumentException {
+    public synchronized MediaMetadataEditor putObject(int key, Object value)
+            throws IllegalArgumentException {
         if (this.mApplied) {
             Log.e(TAG, "Can't edit a previously applied MediaMetadataEditor");
             return this;
@@ -152,21 +154,24 @@ public abstract class MediaMetadataEditor {
         return this.mEditorMetadata.getLong(String.valueOf(key), defaultValue);
     }
 
-    public synchronized String getString(int key, String defaultValue) throws IllegalArgumentException {
+    public synchronized String getString(int key, String defaultValue)
+            throws IllegalArgumentException {
         if (METADATA_KEYS_TYPE.get(key, -1) != 1) {
             throw new IllegalArgumentException("Invalid type 'String' for key " + key);
         }
         return this.mEditorMetadata.getString(String.valueOf(key), defaultValue);
     }
 
-    public synchronized Bitmap getBitmap(int key, Bitmap defaultValue) throws IllegalArgumentException {
+    public synchronized Bitmap getBitmap(int key, Bitmap defaultValue)
+            throws IllegalArgumentException {
         if (key != 100) {
             throw new IllegalArgumentException("Invalid type 'Bitmap' for key " + key);
         }
         return this.mEditorArtwork != null ? this.mEditorArtwork : defaultValue;
     }
 
-    public synchronized Object getObject(int key, Object defaultValue) throws IllegalArgumentException {
+    public synchronized Object getObject(int key, Object defaultValue)
+            throws IllegalArgumentException {
         switch (METADATA_KEYS_TYPE.get(key, -1)) {
             case 0:
                 if (this.mEditorMetadata.containsKey(String.valueOf(key))) {

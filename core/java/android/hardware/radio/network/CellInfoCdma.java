@@ -3,26 +3,29 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CellInfoCdma implements Parcelable {
-    public static final Parcelable.Creator<CellInfoCdma> CREATOR = new Parcelable.Creator<CellInfoCdma>() { // from class: android.hardware.radio.network.CellInfoCdma.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoCdma createFromParcel(Parcel _aidl_source) {
-            CellInfoCdma _aidl_out = new CellInfoCdma();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CellInfoCdma> CREATOR =
+            new Parcelable.Creator<
+                    CellInfoCdma>() { // from class: android.hardware.radio.network.CellInfoCdma.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoCdma createFromParcel(Parcel _aidl_source) {
+                    CellInfoCdma _aidl_out = new CellInfoCdma();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoCdma[] newArray(int _aidl_size) {
-            return new CellInfoCdma[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoCdma[] newArray(int _aidl_size) {
+                    return new CellInfoCdma[_aidl_size];
+                }
+            };
     public CellIdentityCdma cellIdentityCdma;
     public CdmaSignalStrength signalStrengthCdma;
     public EvdoSignalStrength signalStrengthEvdo;
@@ -59,7 +62,8 @@ public class CellInfoCdma implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.cellIdentityCdma = (CellIdentityCdma) _aidl_parcel.readTypedObject(CellIdentityCdma.CREATOR);
+            this.cellIdentityCdma =
+                    (CellIdentityCdma) _aidl_parcel.readTypedObject(CellIdentityCdma.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -67,14 +71,17 @@ public class CellInfoCdma implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.signalStrengthCdma = (CdmaSignalStrength) _aidl_parcel.readTypedObject(CdmaSignalStrength.CREATOR);
+            this.signalStrengthCdma =
+                    (CdmaSignalStrength) _aidl_parcel.readTypedObject(CdmaSignalStrength.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.signalStrengthEvdo = (EvdoSignalStrength) _aidl_parcel.readTypedObject(EvdoSignalStrength.CREATOR);
+                this.signalStrengthEvdo =
+                        (EvdoSignalStrength)
+                                _aidl_parcel.readTypedObject(EvdoSignalStrength.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -100,7 +107,9 @@ public class CellInfoCdma implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.cellIdentityCdma);
-        return _mask | describeContents(this.signalStrengthCdma) | describeContents(this.signalStrengthEvdo);
+        return _mask
+                | describeContents(this.signalStrengthCdma)
+                | describeContents(this.signalStrengthEvdo);
     }
 
     private int describeContents(Object _v) {

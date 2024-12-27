@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IVoiceInteractionAccessibilitySettingsListener extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.app.IVoiceInteractionAccessibilitySettingsListener";
+    public static final String DESCRIPTOR =
+            "com.android.internal.app.IVoiceInteractionAccessibilitySettingsListener";
 
     void onAccessibilityDetectionChanged(boolean z) throws RemoteException;
 
     public static class Default implements IVoiceInteractionAccessibilitySettingsListener {
         @Override // com.android.internal.app.IVoiceInteractionAccessibilitySettingsListener
-        public void onAccessibilityDetectionChanged(boolean enable) throws RemoteException {
-        }
+        public void onAccessibilityDetectionChanged(boolean enable) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,8 @@ public interface IVoiceInteractionAccessibilitySettingsListener extends IInterfa
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoiceInteractionAccessibilitySettingsListener {
+    public abstract static class Stub extends Binder
+            implements IVoiceInteractionAccessibilitySettingsListener {
         static final int TRANSACTION_onAccessibilityDetectionChanged = 1;
 
         public Stub() {
@@ -34,7 +35,9 @@ public interface IVoiceInteractionAccessibilitySettingsListener extends IInterfa
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IVoiceInteractionAccessibilitySettingsListener.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(
+                            IVoiceInteractionAccessibilitySettingsListener.DESCRIPTOR);
             if (iin != null && (iin instanceof IVoiceInteractionAccessibilitySettingsListener)) {
                 return (IVoiceInteractionAccessibilitySettingsListener) iin;
             }
@@ -61,7 +64,8 @@ public interface IVoiceInteractionAccessibilitySettingsListener extends IInterfa
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVoiceInteractionAccessibilitySettingsListener.DESCRIPTOR);
             }
@@ -100,7 +104,8 @@ public interface IVoiceInteractionAccessibilitySettingsListener extends IInterfa
             public void onAccessibilityDetectionChanged(boolean enable) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(IVoiceInteractionAccessibilitySettingsListener.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            IVoiceInteractionAccessibilitySettingsListener.DESCRIPTOR);
                     _data.writeBoolean(enable);
                     this.mRemote.transact(1, _data, null, 1);
                 } finally {

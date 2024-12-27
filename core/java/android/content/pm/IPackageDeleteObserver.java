@@ -12,8 +12,7 @@ public interface IPackageDeleteObserver extends IInterface {
 
     public static class Default implements IPackageDeleteObserver {
         @Override // android.content.pm.IPackageDeleteObserver
-        public void packageDeleted(String packageName, int returnCode) throws RemoteException {
-        }
+        public void packageDeleted(String packageName, int returnCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IPackageDeleteObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPackageDeleteObserver {
+    public abstract static class Stub extends Binder implements IPackageDeleteObserver {
         public static final String DESCRIPTOR = "android.content.pm.IPackageDeleteObserver";
         static final int TRANSACTION_packageDeleted = 1;
 
@@ -60,7 +59,8 @@ public interface IPackageDeleteObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

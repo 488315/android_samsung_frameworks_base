@@ -2,7 +2,7 @@ package com.android.internal.widget;
 
 import android.os.Trace;
 import android.view.View;
-import com.android.internal.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,33 +12,33 @@ import java.util.concurrent.TimeUnit;
 /* loaded from: classes5.dex */
 final class GapWorker implements Runnable {
     static final ThreadLocal<GapWorker> sGapWorker = new ThreadLocal<>();
-    static Comparator<Task> sTaskComparator = new Comparator<Task>() { // from class: com.android.internal.widget.GapWorker.1
-        @Override // java.util.Comparator
-        public int compare(Task lhs, Task rhs) {
-            if ((lhs.view == null) != (rhs.view == null)) {
-                return lhs.view == null ? 1 : -1;
-            }
-            if (lhs.immediate != rhs.immediate) {
-                return lhs.immediate ? -1 : 1;
-            }
-            int deltaViewVelocity = rhs.viewVelocity - lhs.viewVelocity;
-            if (deltaViewVelocity != 0) {
-                return deltaViewVelocity;
-            }
-            int deltaDistanceToItem = lhs.distanceToItem - rhs.distanceToItem;
-            if (deltaDistanceToItem != 0) {
-                return deltaDistanceToItem;
-            }
-            return 0;
-        }
-    };
+    static Comparator<Task> sTaskComparator =
+            new Comparator<Task>() { // from class: com.android.internal.widget.GapWorker.1
+                @Override // java.util.Comparator
+                public int compare(Task lhs, Task rhs) {
+                    if ((lhs.view == null) != (rhs.view == null)) {
+                        return lhs.view == null ? 1 : -1;
+                    }
+                    if (lhs.immediate != rhs.immediate) {
+                        return lhs.immediate ? -1 : 1;
+                    }
+                    int deltaViewVelocity = rhs.viewVelocity - lhs.viewVelocity;
+                    if (deltaViewVelocity != 0) {
+                        return deltaViewVelocity;
+                    }
+                    int deltaDistanceToItem = lhs.distanceToItem - rhs.distanceToItem;
+                    if (deltaDistanceToItem != 0) {
+                        return deltaDistanceToItem;
+                    }
+                    return 0;
+                }
+            };
     long mFrameIntervalNs;
     long mPostTimeNs;
     ArrayList<RecyclerView> mRecyclerViews = new ArrayList<>();
     private ArrayList<Task> mTasks = new ArrayList<>();
 
-    GapWorker() {
-    }
+    GapWorker() {}
 
     static class Task {
         public int distanceToItem;
@@ -47,8 +47,7 @@ final class GapWorker implements Runnable {
         public RecyclerView view;
         public int viewVelocity;
 
-        Task() {
-        }
+        Task() {}
 
         public void clear() {
             this.immediate = false;
@@ -59,14 +58,14 @@ final class GapWorker implements Runnable {
         }
     }
 
-    static class LayoutPrefetchRegistryImpl implements RecyclerView.LayoutManager.LayoutPrefetchRegistry {
+    static class LayoutPrefetchRegistryImpl
+            implements RecyclerView.LayoutManager.LayoutPrefetchRegistry {
         int mCount;
         int[] mPrefetchArray;
         int mPrefetchDx;
         int mPrefetchDy;
 
-        LayoutPrefetchRegistryImpl() {
-        }
+        LayoutPrefetchRegistryImpl() {}
 
         void setPrefetchVector(int dx, int dy) {
             this.mPrefetchDx = dx;
@@ -85,7 +84,8 @@ final class GapWorker implements Runnable {
                         layout.collectInitialPrefetchPositions(view.mAdapter.getItemCount(), this);
                     }
                 } else if (!view.hasPendingAdapterUpdates()) {
-                    layout.collectAdjacentPrefetchPositions(this.mPrefetchDx, this.mPrefetchDy, view.mState, this);
+                    layout.collectAdjacentPrefetchPositions(
+                            this.mPrefetchDx, this.mPrefetchDy, view.mState, this);
                 }
                 if (this.mCount > layout.mPrefetchMaxCountObserved) {
                     layout.mPrefetchMaxCountObserved = this.mCount;
@@ -164,7 +164,8 @@ final class GapWorker implements Runnable {
         for (int i2 = 0; i2 < viewCount; i2++) {
             RecyclerView view2 = this.mRecyclerViews.get(i2);
             LayoutPrefetchRegistryImpl prefetchRegistry = view2.mPrefetchRegistry;
-            int viewVelocity = Math.abs(prefetchRegistry.mPrefetchDx) + Math.abs(prefetchRegistry.mPrefetchDy);
+            int viewVelocity =
+                    Math.abs(prefetchRegistry.mPrefetchDx) + Math.abs(prefetchRegistry.mPrefetchDy);
             for (int j = 0; j < prefetchRegistry.mCount * 2; j += 2) {
                 if (totalTaskIndex >= this.mTasks.size()) {
                     task = new Task();
@@ -196,12 +197,14 @@ final class GapWorker implements Runnable {
         return false;
     }
 
-    private RecyclerView.ViewHolder prefetchPositionWithDeadline(RecyclerView view, int position, long deadlineNs) {
+    private RecyclerView.ViewHolder prefetchPositionWithDeadline(
+            RecyclerView view, int position, long deadlineNs) {
         if (isPrefetchPositionAttached(view, position)) {
             return null;
         }
         RecyclerView.Recycler recycler = view.mRecycler;
-        RecyclerView.ViewHolder holder = recycler.tryGetViewHolderForPositionByDeadline(position, false, deadlineNs);
+        RecyclerView.ViewHolder holder =
+                recycler.tryGetViewHolderForPositionByDeadline(position, false, deadlineNs);
         if (holder != null) {
             if (holder.isBound()) {
                 recycler.recycleView(holder.itemView);
@@ -216,7 +219,8 @@ final class GapWorker implements Runnable {
         if (innerView == null) {
             return;
         }
-        if (innerView.mDataSetHasChangedAfterLayout && innerView.mChildHelper.getUnfilteredChildCount() != 0) {
+        if (innerView.mDataSetHasChangedAfterLayout
+                && innerView.mChildHelper.getUnfilteredChildCount() != 0) {
             innerView.removeAndRecycleViews();
         }
         LayoutPrefetchRegistryImpl innerPrefetchRegistry = innerView.mPrefetchRegistry;
@@ -237,7 +241,8 @@ final class GapWorker implements Runnable {
 
     private void flushTaskWithDeadline(Task task, long deadlineNs) {
         long taskDeadlineNs = task.immediate ? Long.MAX_VALUE : deadlineNs;
-        RecyclerView.ViewHolder holder = prefetchPositionWithDeadline(task.view, task.position, taskDeadlineNs);
+        RecyclerView.ViewHolder holder =
+                prefetchPositionWithDeadline(task.view, task.position, taskDeadlineNs);
         if (holder != null && holder.mNestedRecyclerView != null) {
             prefetchInnerRecyclerViewWithDeadline(holder.mNestedRecyclerView.get(), deadlineNs);
         }
@@ -267,7 +272,8 @@ final class GapWorker implements Runnable {
             if (this.mRecyclerViews.isEmpty()) {
                 return;
             }
-            long lastFrameVsyncNs = TimeUnit.MILLISECONDS.toNanos(this.mRecyclerViews.get(0).getDrawingTime());
+            long lastFrameVsyncNs =
+                    TimeUnit.MILLISECONDS.toNanos(this.mRecyclerViews.get(0).getDrawingTime());
             if (lastFrameVsyncNs == 0) {
                 return;
             }

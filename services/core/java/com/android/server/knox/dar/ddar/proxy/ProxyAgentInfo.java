@@ -22,8 +22,11 @@ public final class ProxyAgentInfo {
         if (obj != null) {
             try {
                 ProxyAgentInfo proxyAgentInfo = (ProxyAgentInfo) obj;
-                if (this.mName.equalsIgnoreCase(proxyAgentInfo.mName) && this.mUserId == proxyAgentInfo.mUserId) {
-                    if (this.mCompName.flattenToString().equals(proxyAgentInfo.mCompName.flattenToString())) {
+                if (this.mName.equalsIgnoreCase(proxyAgentInfo.mName)
+                        && this.mUserId == proxyAgentInfo.mUserId) {
+                    if (this.mCompName
+                            .flattenToString()
+                            .equals(proxyAgentInfo.mCompName.flattenToString())) {
                         return true;
                     }
                 }
@@ -36,6 +39,8 @@ public final class ProxyAgentInfo {
     }
 
     public final String toString() {
-        return String.format("ProxyAgentInfo {mName:%s mCompName:%s mUserId:%d}", this.mName, this.mCompName, Integer.valueOf(this.mUserId));
+        return String.format(
+                "ProxyAgentInfo {mName:%s mCompName:%s mUserId:%d}",
+                this.mName, this.mCompName, Integer.valueOf(this.mUserId));
     }
 }

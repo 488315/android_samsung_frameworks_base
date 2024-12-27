@@ -68,7 +68,9 @@ public final class ResampleInputStream extends InputStream {
                 }
                 return length2;
             }
-            int n = this.mInputStream.read(this.mBuf, this.mBufCount, this.mBuf.length - this.mBufCount);
+            int n =
+                    this.mInputStream.read(
+                            this.mBuf, this.mBufCount, this.mBuf.length - this.mBufCount);
             if (n == -1) {
                 return -1;
             }

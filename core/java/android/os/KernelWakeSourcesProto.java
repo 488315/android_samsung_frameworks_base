@@ -16,7 +16,6 @@ public final class KernelWakeSourcesProto {
         public static final long TOTAL_TIME = 1112396529671L;
         public static final long WAKEUP_COUNT = 1120986464260L;
 
-        public WakeupSource() {
-        }
+        public WakeupSource() {}
     }
 }

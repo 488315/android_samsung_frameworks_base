@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.service.translation.ITranslationService;
 import android.util.Slog;
+
 import com.android.internal.infra.ServiceConnector;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -18,8 +19,15 @@ final class RemoteTranslationService extends ServiceConnector.Impl {
     private final IBinder mRemoteCallback;
     private final int mRequestTimeoutMs;
 
-    public RemoteTranslationService(Context context, ComponentName componentName, int i, IBinder iBinder) {
-        super(context, new Intent("android.service.translation.TranslationService").setComponent(componentName), 0, i, new RemoteTranslationService$$ExternalSyntheticLambda0());
+    public RemoteTranslationService(
+            Context context, ComponentName componentName, int i, IBinder iBinder) {
+        super(
+                context,
+                new Intent("android.service.translation.TranslationService")
+                        .setComponent(componentName),
+                0,
+                i,
+                new RemoteTranslationService$$ExternalSyntheticLambda0());
         this.mIdleUnbindTimeoutMs = 0L;
         this.mRequestTimeoutMs = 5000;
         this.mComponentName = componentName;
@@ -40,7 +48,10 @@ final class RemoteTranslationService extends ServiceConnector.Impl {
                 iTranslationService.onDisconnected();
             }
         } catch (Exception e) {
-            Slog.w("RemoteTranslationService", "Exception calling onServiceConnectionStatusChanged(" + z + "): ", e);
+            Slog.w(
+                    "RemoteTranslationService",
+                    "Exception calling onServiceConnectionStatusChanged(" + z + "): ",
+                    e);
         }
     }
 }

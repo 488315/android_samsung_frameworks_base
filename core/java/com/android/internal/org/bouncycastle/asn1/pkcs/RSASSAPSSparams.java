@@ -11,12 +11,15 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
 public class RSASSAPSSparams extends ASN1Object {
-    public static final AlgorithmIdentifier DEFAULT_HASH_ALGORITHM = new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);
-    public static final AlgorithmIdentifier DEFAULT_MASK_GEN_FUNCTION = new AlgorithmIdentifier(PKCSObjectIdentifiers.id_mgf1, DEFAULT_HASH_ALGORITHM);
+    public static final AlgorithmIdentifier DEFAULT_HASH_ALGORITHM =
+            new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);
+    public static final AlgorithmIdentifier DEFAULT_MASK_GEN_FUNCTION =
+            new AlgorithmIdentifier(PKCSObjectIdentifiers.id_mgf1, DEFAULT_HASH_ALGORITHM);
     public static final ASN1Integer DEFAULT_SALT_LENGTH = new ASN1Integer(20);
     public static final ASN1Integer DEFAULT_TRAILER_FIELD = new ASN1Integer(1);
     private AlgorithmIdentifier hashAlgorithm;
@@ -41,7 +44,11 @@ public class RSASSAPSSparams extends ASN1Object {
         this.trailerField = DEFAULT_TRAILER_FIELD;
     }
 
-    public RSASSAPSSparams(AlgorithmIdentifier hashAlgorithm, AlgorithmIdentifier maskGenAlgorithm, ASN1Integer saltLength, ASN1Integer trailerField) {
+    public RSASSAPSSparams(
+            AlgorithmIdentifier hashAlgorithm,
+            AlgorithmIdentifier maskGenAlgorithm,
+            ASN1Integer saltLength,
+            ASN1Integer trailerField) {
         this.hashAlgorithm = hashAlgorithm;
         this.maskGenAlgorithm = maskGenAlgorithm;
         this.saltLength = saltLength;
@@ -90,7 +97,8 @@ public class RSASSAPSSparams extends ASN1Object {
         return this.trailerField.getValue();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(4);
         if (!this.hashAlgorithm.equals(DEFAULT_HASH_ALGORITHM)) {

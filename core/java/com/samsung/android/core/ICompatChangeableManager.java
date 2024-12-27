@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -50,7 +51,8 @@ public interface ICompatChangeableManager extends IInterface {
         }
 
         @Override // com.samsung.android.core.ICompatChangeableManager
-        public boolean isMinAspectRatioOverrideDisallowed(String packageName) throws RemoteException {
+        public boolean isMinAspectRatioOverrideDisallowed(String packageName)
+                throws RemoteException {
             return false;
         }
 
@@ -60,7 +62,7 @@ public interface ICompatChangeableManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICompatChangeableManager {
+    public abstract static class Stub extends Binder implements ICompatChangeableManager {
         static final int TRANSACTION_getCompatChangeablePackageNameList = 2;
         static final int TRANSACTION_getUid = 3;
         static final int TRANSACTION_hasGameCategory = 5;
@@ -113,7 +115,8 @@ public interface ICompatChangeableManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICompatChangeableManager.DESCRIPTOR);
             }
@@ -251,7 +254,8 @@ public interface ICompatChangeableManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.ICompatChangeableManager
-            public boolean isOrientationOverrideDisallowed(String packageName) throws RemoteException {
+            public boolean isOrientationOverrideDisallowed(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -268,7 +272,8 @@ public interface ICompatChangeableManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.ICompatChangeableManager
-            public boolean isMinAspectRatioOverrideDisallowed(String packageName) throws RemoteException {
+            public boolean isMinAspectRatioOverrideDisallowed(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

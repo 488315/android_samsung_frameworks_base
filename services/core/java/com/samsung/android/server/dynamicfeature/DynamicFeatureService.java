@@ -10,20 +10,24 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
+
 import com.samsung.android.provider.Feature;
 import com.samsung.android.provider.IDynamicFeatureManager;
 import com.samsung.android.provider.SemDynamicFeature;
-import com.samsung.android.server.dynamicfeature.DFeature;
 import com.samsung.android.server.dynamicfeature.db.DynamicFeatureDBHelper;
 import com.samsung.android.server.dynamicfeature.dlog.Dlog;
 import com.samsung.android.server.dynamicfeature.json.JsonParser;
 import com.samsung.android.server.dynamicfeature.network.HttpConnector;
 import com.samsung.android.server.dynamicfeature.sentinel.Tracker;
+
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -32,7 +36,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.concurrent.Callable;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -70,8 +73,7 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.server.dynamicfeature.DynamicFeatureService$1, reason: invalid class name */
     public final class AnonymousClass1 {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         public final void onFeatureUpdateComplete(String str, boolean z) {
             DynamicFeatureService dynamicFeatureService = DynamicFeatureService.this;
@@ -114,71 +116,149 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                 dFeature = DynamicFeatureService.mCurrentBroadcastFeature;
             }
             try {
-                if (!((Boolean) httpConnector.mExecutorService.submit(new Callable() { // from class: com.samsung.android.server.dynamicfeature.network.HttpConnector$$ExternalSyntheticLambda1
-                    @Override // java.util.concurrent.Callable
-                    public final Object call() {
-                        String str2 = str;
-                        HttpConnector httpConnector2 = HttpConnector.this;
-                        httpConnector2.getClass();
-                        OutputStream outputStream = null;
-                        boolean z = false;
-                        try {
-                            try {
-                                try {
-                                    String str3 = "https://dynamicfeature.dvc.samsung.com/dynamic-feature/error-report" + httpConnector2.getParams(true);
-                                    Slog.d("dynamicfeature_HttpConnector", "error report url is " + str3);
-                                    JSONObject jSONObject = new JSONObject();
-                                    DFeature dFeature2 = dFeature;
-                                    Object obj = "";
-                                    jSONObject.put("namespace", dFeature2 == null ? "" : dFeature2.namespace);
-                                    jSONObject.put("name", dFeature2 == null ? "" : dFeature2.name);
-                                    if (dFeature2 != null) {
-                                        obj = Integer.valueOf(dFeature2.version);
-                                    }
-                                    jSONObject.put("version", obj);
-                                    jSONObject.put("errorMessage", str2);
-                                    Slog.d("dynamicfeature_HttpConnector", "error report payload : " + jSONObject.toString());
-                                    Dlog.event("error report payload : " + jSONObject.toString());
-                                    HttpURLConnection connection = HttpConnector.getConnection(str3);
-                                    OutputStream outputStream2 = connection.getOutputStream();
-                                    byte[] bytes = jSONObject.toString().getBytes("utf-8");
-                                    outputStream2.write(bytes, 0, bytes.length);
-                                    int responseCode = connection.getResponseCode();
-                                    httpConnector2.mLastResultCode = responseCode;
-                                    if (responseCode != 200) {
-                                        Slog.e("dynamicfeature_HttpConnector", "Error on connection : " + responseCode);
-                                    } else {
-                                        Slog.d("dynamicfeature_HttpConnector", "Error committed ");
-                                        z = true;
-                                    }
-                                    outputStream2.close();
-                                } catch (Exception e) {
-                                    Slog.e("dynamicfeature_HttpConnector", "sendErrorReport failed: " + e.getMessage());
-                                    if (0 != 0) {
-                                        outputStream.close();
-                                    }
-                                }
-                            } catch (IOException e2) {
-                                BootReceiver$$ExternalSyntheticOutline0.m("Cannot close handle : ", e2, "dynamicfeature_HttpConnector");
-                            }
-                            return Boolean.valueOf(z);
-                        } catch (Throwable th) {
-                            if (0 != 0) {
-                                try {
-                                    outputStream.close();
-                                } catch (IOException e3) {
-                                    BootReceiver$$ExternalSyntheticOutline0.m("Cannot close handle : ", e3, "dynamicfeature_HttpConnector");
-                                }
-                            }
-                            throw th;
-                        }
-                    }
-                }).get()).booleanValue()) {
+                if (!((Boolean)
+                                httpConnector
+                                        .mExecutorService
+                                        .submit(
+                                                new Callable() { // from class:
+                                                    // com.samsung.android.server.dynamicfeature.network.HttpConnector$$ExternalSyntheticLambda1
+                                                    @Override // java.util.concurrent.Callable
+                                                    public final Object call() {
+                                                        String str2 = str;
+                                                        HttpConnector httpConnector2 =
+                                                                HttpConnector.this;
+                                                        httpConnector2.getClass();
+                                                        OutputStream outputStream = null;
+                                                        boolean z = false;
+                                                        try {
+                                                            try {
+                                                                try {
+                                                                    String str3 =
+                                                                            "https://dynamicfeature.dvc.samsung.com/dynamic-feature/error-report"
+                                                                                    + httpConnector2
+                                                                                            .getParams(
+                                                                                                    true);
+                                                                    Slog.d(
+                                                                            "dynamicfeature_HttpConnector",
+                                                                            "error report url is "
+                                                                                    + str3);
+                                                                    JSONObject jSONObject =
+                                                                            new JSONObject();
+                                                                    DFeature dFeature2 = dFeature;
+                                                                    Object obj = "";
+                                                                    jSONObject.put(
+                                                                            "namespace",
+                                                                            dFeature2 == null
+                                                                                    ? ""
+                                                                                    : dFeature2
+                                                                                            .namespace);
+                                                                    jSONObject.put(
+                                                                            "name",
+                                                                            dFeature2 == null
+                                                                                    ? ""
+                                                                                    : dFeature2
+                                                                                            .name);
+                                                                    if (dFeature2 != null) {
+                                                                        obj =
+                                                                                Integer.valueOf(
+                                                                                        dFeature2
+                                                                                                .version);
+                                                                    }
+                                                                    jSONObject.put("version", obj);
+                                                                    jSONObject.put(
+                                                                            "errorMessage", str2);
+                                                                    Slog.d(
+                                                                            "dynamicfeature_HttpConnector",
+                                                                            "error report payload :"
+                                                                                + " "
+                                                                                    + jSONObject
+                                                                                            .toString());
+                                                                    Dlog.event(
+                                                                            "error report payload :"
+                                                                                + " "
+                                                                                    + jSONObject
+                                                                                            .toString());
+                                                                    HttpURLConnection connection =
+                                                                            HttpConnector
+                                                                                    .getConnection(
+                                                                                            str3);
+                                                                    OutputStream outputStream2 =
+                                                                            connection
+                                                                                    .getOutputStream();
+                                                                    byte[] bytes =
+                                                                            jSONObject
+                                                                                    .toString()
+                                                                                    .getBytes(
+                                                                                            "utf-8");
+                                                                    outputStream2.write(
+                                                                            bytes, 0, bytes.length);
+                                                                    int responseCode =
+                                                                            connection
+                                                                                    .getResponseCode();
+                                                                    httpConnector2.mLastResultCode =
+                                                                            responseCode;
+                                                                    if (responseCode != 200) {
+                                                                        Slog.e(
+                                                                                "dynamicfeature_HttpConnector",
+                                                                                "Error on"
+                                                                                    + " connection"
+                                                                                    + " : "
+                                                                                        + responseCode);
+                                                                    } else {
+                                                                        Slog.d(
+                                                                                "dynamicfeature_HttpConnector",
+                                                                                "Error committed ");
+                                                                        z = true;
+                                                                    }
+                                                                    outputStream2.close();
+                                                                } catch (Exception e) {
+                                                                    Slog.e(
+                                                                            "dynamicfeature_HttpConnector",
+                                                                            "sendErrorReport"
+                                                                                + " failed: "
+                                                                                    + e
+                                                                                            .getMessage());
+                                                                    if (0 != 0) {
+                                                                        outputStream.close();
+                                                                    }
+                                                                }
+                                                            } catch (IOException e2) {
+                                                                BootReceiver$$ExternalSyntheticOutline0
+                                                                        .m(
+                                                                                "Cannot close"
+                                                                                    + " handle : ",
+                                                                                e2,
+                                                                                "dynamicfeature_HttpConnector");
+                                                            }
+                                                            return Boolean.valueOf(z);
+                                                        } catch (Throwable th) {
+                                                            if (0 != 0) {
+                                                                try {
+                                                                    outputStream.close();
+                                                                } catch (IOException e3) {
+                                                                    BootReceiver$$ExternalSyntheticOutline0
+                                                                            .m(
+                                                                                    "Cannot close"
+                                                                                        + " handle"
+                                                                                        + " : ",
+                                                                                    e3,
+                                                                                    "dynamicfeature_HttpConnector");
+                                                                }
+                                                            }
+                                                            throw th;
+                                                        }
+                                                    }
+                                                })
+                                        .get())
+                        .booleanValue()) {
                     Slog.e("dynamicfeature_HttpConnector", "Fail to commit error log");
                 }
                 anonymousClass1.getClass();
             } catch (Exception e) {
-                NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("requestSendErrorConnection error "), "dynamicfeature_HttpConnector");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("requestSendErrorConnection error "),
+                        "dynamicfeature_HttpConnector");
             }
         }
     }
@@ -196,9 +276,9 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:62:0x007f, code lost:
-        
-            if (r2.equals("com.samsung.feature.FORCE_START") == false) goto L20;
-         */
+
+           if (r2.equals("com.samsung.feature.FORCE_START") == false) goto L20;
+        */
         @Override // android.content.BroadcastReceiver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -209,7 +289,10 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                 Method dump skipped, instructions count: 472
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.dynamicfeature.DynamicFeatureService.AnonymousClass2.onReceive(android.content.Context, android.content.Intent):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.samsung.android.server.dynamicfeature.DynamicFeatureService.AnonymousClass2.onReceive(android.content.Context,"
+                        + " android.content.Intent):void");
         }
     }
 
@@ -230,7 +313,9 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                 case 0:
                     this.this$0.updateFeatureViaServer();
                     DynamicFeatureService dynamicFeatureService = this.this$0;
-                    dynamicFeatureService.mHandler.postDelayed(dynamicFeatureService.updateRunnable, InfoBoard.basicInfo.jobIntervalMill * 60000);
+                    dynamicFeatureService.mHandler.postDelayed(
+                            dynamicFeatureService.updateRunnable,
+                            InfoBoard.basicInfo.jobIntervalMill * 60000);
                     break;
                 case 1:
                     this.this$0.updateFeatureViaServer();
@@ -240,10 +325,12 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                         DynamicFeatureService.setCurrentBroadcastFeature(null);
                         DynamicFeatureService.m1228$$Nest$mreleaseUpdate(this.this$0);
                         DynamicFeatureService dynamicFeatureService2 = this.this$0;
-                        dynamicFeatureService2.mContext.unregisterReceiver(dynamicFeatureService2.mTracker);
+                        dynamicFeatureService2.mContext.unregisterReceiver(
+                                dynamicFeatureService2.mTracker);
                         break;
                     } catch (Exception e) {
-                        NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("FAIL :"), "dynamicfeature_Service");
+                        NandswapManager$$ExternalSyntheticOutline0.m(
+                                e, new StringBuilder("FAIL :"), "dynamicfeature_Service");
                     }
             }
         }
@@ -254,8 +341,7 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
         public DFeature feature;
         public int state;
 
-        public DeliveryRunnable() {
-        }
+        public DeliveryRunnable() {}
 
         @Override // java.lang.Runnable
         public final void run() {
@@ -275,7 +361,10 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                     InfoBoard.removeProperty(persistPropertyKey);
                     return;
                 } catch (Exception unused) {
-                    BootReceiver$$ExternalSyntheticOutline0.m("Fail to set property : ", persistPropertyKey, "dynamicfeature_Service");
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            "Fail to set property : ",
+                            persistPropertyKey,
+                            "dynamicfeature_Service");
                     return;
                 }
             }
@@ -283,7 +372,8 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
             try {
                 SystemProperties.set(persistPropertyKey2, this.feature.value);
             } catch (Exception unused2) {
-                BootReceiver$$ExternalSyntheticOutline0.m("Fail to set property : ", persistPropertyKey2, "dynamicfeature_Service");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        "Fail to set property : ", persistPropertyKey2, "dynamicfeature_Service");
             }
         }
     }
@@ -299,9 +389,11 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
         @Override // java.lang.Runnable
         public final void run() {
             try {
-                CheckUpdateJobService.scheduleDynamicFeatureScheduler(DynamicFeatureService.this.mContext, this.mService);
+                CheckUpdateJobService.scheduleDynamicFeatureScheduler(
+                        DynamicFeatureService.this.mContext, this.mService);
             } catch (Exception e) {
-                NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("FAIL :"), "dynamicfeature_Service");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("FAIL :"), "dynamicfeature_Service");
             }
         }
     }
@@ -324,9 +416,9 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:28:0x012b, code lost:
-    
-        if (r5 == null) goto L30;
-     */
+
+       if (r5 == null) goto L30;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -336,7 +428,9 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
             Method dump skipped, instructions count: 440
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.dynamicfeature.DynamicFeatureService.<init>(android.content.Context):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.dynamicfeature.DynamicFeatureService.<init>(android.content.Context):void");
     }
 
     public static void ASSERT(String str, boolean z) {
@@ -406,7 +500,11 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
         }
         this.mRemoved = arrayList6;
         this.mFeatures = this.nextFeatures;
-        this.mContext.registerReceiver(this.mTracker, BatteryService$$ExternalSyntheticOutline0.m("android.intent.action.DROPBOX_ENTRY_ADDED"), 2);
+        this.mContext.registerReceiver(
+                this.mTracker,
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "android.intent.action.DROPBOX_ENTRY_ADDED"),
+                2);
         Dlog.event("applyDiff want to blockUpdate");
         synchronized ("dynamicfeature_Service") {
             this.mStopUpdateRequest++;
@@ -431,7 +529,8 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                     sb.append(InfoBoard.TERM_HANDLING_FEATURE * j);
                     Slog.d("dynamicfeature_Service", sb.toString());
                     i++;
-                    this.mHandler.postDelayed(deliveryRunnable, InfoBoard.TERM_HANDLING_FEATURE * j);
+                    this.mHandler.postDelayed(
+                            deliveryRunnable, InfoBoard.TERM_HANDLING_FEATURE * j);
                 }
             }
             ArrayList arrayList8 = this.mRemoved;
@@ -449,14 +548,16 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                     sb2.append(InfoBoard.TERM_HANDLING_FEATURE * j2);
                     Slog.d("dynamicfeature_Service", sb2.toString());
                     i++;
-                    this.mHandler.postDelayed(deliveryRunnable2, InfoBoard.TERM_HANDLING_FEATURE * j2);
+                    this.mHandler.postDelayed(
+                            deliveryRunnable2, InfoBoard.TERM_HANDLING_FEATURE * j2);
                 }
             }
             StringBuilder sb3 = new StringBuilder("Stop tracking after ");
             long j3 = i;
             sb3.append(InfoBoard.TERM_HANDLING_FEATURE * j3);
             Slog.d("dynamicfeature_Service", sb3.toString());
-            this.mHandler.postDelayed(this.postNotifyUpdateRunnable, InfoBoard.TERM_HANDLING_FEATURE * j3);
+            this.mHandler.postDelayed(
+                    this.postNotifyUpdateRunnable, InfoBoard.TERM_HANDLING_FEATURE * j3);
             return;
         }
         ArrayList arrayList9 = this.mDiff;
@@ -472,7 +573,10 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                     this.mContext.sendBroadcast(intent);
                     StringBuilder sb4 = new StringBuilder("send broadcast for new or edit : ");
                     sb4.append(intent.getAction());
-                    SemDynamicFeature.Properties properties = (SemDynamicFeature.Properties) intent.getParcelableExtra("PROPERTY_CARGO", SemDynamicFeature.Properties.class);
+                    SemDynamicFeature.Properties properties =
+                            (SemDynamicFeature.Properties)
+                                    intent.getParcelableExtra(
+                                            "PROPERTY_CARGO", SemDynamicFeature.Properties.class);
                     if (properties == null) {
                         Slog.e("dynamicfeature_Feature", "The cargo is null : " + intent);
                     }
@@ -488,7 +592,9 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                     Intent intent2 = new Intent(dFeature8.getIntentAction());
                     this.mContext.sendBroadcast(intent2);
                     dFeature8.loadCargo(intent2, true);
-                    Slog.d("dynamicfeature_Service", "send broadcast for removed : " + intent2.getAction());
+                    Slog.d(
+                            "dynamicfeature_Service",
+                            "send broadcast for removed : " + intent2.getAction());
                 }
             }
         }
@@ -505,7 +611,10 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                 try {
                     SystemProperties.set(persistPropertyKey, dFeature9.value);
                 } catch (Exception unused) {
-                    BootReceiver$$ExternalSyntheticOutline0.m("Fail to set property : ", persistPropertyKey, "dynamicfeature_Service");
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            "Fail to set property : ",
+                            persistPropertyKey,
+                            "dynamicfeature_Service");
                 }
             }
         }
@@ -517,7 +626,10 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                 try {
                     InfoBoard.removeProperty(persistPropertyKey2);
                 } catch (Exception unused2) {
-                    BootReceiver$$ExternalSyntheticOutline0.m("Fail to set property : ", persistPropertyKey2, "dynamicfeature_Service");
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            "Fail to set property : ",
+                            persistPropertyKey2,
+                            "dynamicfeature_Service");
                 }
             }
         }
@@ -533,14 +645,24 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
         ArrayList arrayList = this.nextFeatures;
         dynamicFeatureDBHelper2.getClass();
         sQLiteDatabase2.execSQL("DROP TABLE IF EXISTS DF_FEATURE_TABLE");
-        sQLiteDatabase2.execSQL("CREATE TABLE IF NOT EXISTS DF_FEATURE_TABLE (namespace TEXT,name TEXT,value TEXT,version INTEGER,property BOOLEAN,reboot BOOLEAN,package TEXT, signature TEXT, type TEXT,  PRIMARY KEY(namespace, name))");
-        sQLiteDatabase2.execSQL("CREATE TABLE IF NOT EXISTS DF_INFO_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT, virtualid TEXT,jobIntervalMill INTEGER,usertrial TEXT,lastUpdateTime TEXT )");
-        sQLiteDatabase2.execSQL("CREATE TABLE IF NOT EXISTS DF_PARAM_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT, mcc TEXT,mnc TEXT,csc TEXT,sdkVersion INTEGER,oneUiVersion TEXT, binaryType TEXT )");
+        sQLiteDatabase2.execSQL(
+                "CREATE TABLE IF NOT EXISTS DF_FEATURE_TABLE (namespace TEXT,name TEXT,value"
+                    + " TEXT,version INTEGER,property BOOLEAN,reboot BOOLEAN,package TEXT,"
+                    + " signature TEXT, type TEXT,  PRIMARY KEY(namespace, name))");
+        sQLiteDatabase2.execSQL(
+                "CREATE TABLE IF NOT EXISTS DF_INFO_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + " virtualid TEXT,jobIntervalMill INTEGER,usertrial TEXT,lastUpdateTime TEXT"
+                    + " )");
+        sQLiteDatabase2.execSQL(
+                "CREATE TABLE IF NOT EXISTS DF_PARAM_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + " mcc TEXT,mnc TEXT,csc TEXT,sdkVersion INTEGER,oneUiVersion TEXT, binaryType"
+                    + " TEXT )");
         sQLiteDatabase2.beginTransaction();
         for (int i = 0; i < arrayList.size(); i++) {
             try {
                 try {
-                    DynamicFeatureDBHelper.insertFeature(sQLiteDatabase2, (DFeature) arrayList.get(i));
+                    DynamicFeatureDBHelper.insertFeature(
+                            sQLiteDatabase2, (DFeature) arrayList.get(i));
                 } catch (Exception e) {
                     Slog.e(DynamicFeatureDBHelper.TAG, e.getMessage());
                 }
@@ -573,12 +695,16 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void dump(java.io.FileDescriptor r27, java.io.PrintWriter r28, java.lang.String[] r29) {
+    public final void dump(
+            java.io.FileDescriptor r27, java.io.PrintWriter r28, java.lang.String[] r29) {
         /*
             Method dump skipped, instructions count: 2442
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.dynamicfeature.DynamicFeatureService.dump(java.io.FileDescriptor, java.io.PrintWriter, java.lang.String[]):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.dynamicfeature.DynamicFeatureService.dump(java.io.FileDescriptor,"
+                    + " java.io.PrintWriter, java.lang.String[]):void");
     }
 
     public final void ee(String str) {
@@ -649,7 +775,10 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
             DynamicFeatureDBHelper dynamicFeatureDBHelper2 = this.mDbHelper;
             SQLiteDatabase sQLiteDatabase2 = this.mDb;
             dynamicFeatureDBHelper2.getClass();
-            sQLiteDatabase2.execSQL("CREATE TABLE IF NOT EXISTS DF_INFO_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT, virtualid TEXT,jobIntervalMill INTEGER,usertrial TEXT,lastUpdateTime TEXT )");
+            sQLiteDatabase2.execSQL(
+                    "CREATE TABLE IF NOT EXISTS DF_INFO_TABLE (_ID INTEGER PRIMARY KEY"
+                        + " AUTOINCREMENT, virtualid TEXT,jobIntervalMill INTEGER,usertrial"
+                        + " TEXT,lastUpdateTime TEXT )");
             DynamicFeatureDBHelper dynamicFeatureDBHelper3 = this.mDbHelper;
             SQLiteDatabase sQLiteDatabase3 = this.mDb;
             dynamicFeatureDBHelper3.getClass();
@@ -672,12 +801,16 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean sendAbTestResult(java.lang.String r21, java.lang.String r22, java.lang.String r23) {
+    public final boolean sendAbTestResult(
+            java.lang.String r21, java.lang.String r22, java.lang.String r23) {
         /*
             Method dump skipped, instructions count: 489
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.dynamicfeature.DynamicFeatureService.sendAbTestResult(java.lang.String, java.lang.String, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.dynamicfeature.DynamicFeatureService.sendAbTestResult(java.lang.String,"
+                    + " java.lang.String, java.lang.String):boolean");
     }
 
     public final boolean testCheckProperty(String str, String str2) {
@@ -697,26 +830,42 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
     public final void testSetUp() {
         synchronized (HttpConnector.class) {
             HttpConnector.isStopped++;
-            Dlog.event("HttpConnector::stopUpdate " + Dlog.getCallers(5) + "  " + HttpConnector.isStopped);
+            Dlog.event(
+                    "HttpConnector::stopUpdate "
+                            + Dlog.getCallers(5)
+                            + "  "
+                            + HttpConnector.isStopped);
         }
         this.testOnlyBackupTermHandling = InfoBoard.TERM_HANDLING_FEATURE;
         InfoBoard.TERM_HANDLING_FEATURE = InfoBoard.TERM_HANDLING_TEST_FEATURE;
         this.testOnlyReceiver = new AnonymousClass2(this, 1);
-        this.mContext.registerReceiver(this.testOnlyReceiver, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("com.sec.df.changed.SEC_UI.MODE_NIGHT", "com.sec.df.changed.SEC_UI.MODE_ANIMATION"), 2);
+        this.mContext.registerReceiver(
+                this.testOnlyReceiver,
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        "com.sec.df.changed.SEC_UI.MODE_NIGHT",
+                        "com.sec.df.changed.SEC_UI.MODE_ANIMATION"),
+                2);
     }
 
     public final void testTearDown() {
         this.mContext.unregisterReceiver(this.testOnlyReceiver);
         synchronized (HttpConnector.class) {
             HttpConnector.isStopped--;
-            Dlog.event("HttpConnector::resumeUpdate " + Dlog.getCallers(5) + "  " + HttpConnector.isStopped);
+            Dlog.event(
+                    "HttpConnector::resumeUpdate "
+                            + Dlog.getCallers(5)
+                            + "  "
+                            + HttpConnector.isStopped);
         }
         InfoBoard.TERM_HANDLING_FEATURE = this.testOnlyBackupTermHandling;
     }
 
     public final void testVerifyIntent(Intent intent, String str, String str2) {
         ll("Intent1 received " + intent);
-        SemDynamicFeature.Properties properties = (SemDynamicFeature.Properties) intent.getParcelableExtra("PROPERTY_CARGO", SemDynamicFeature.Properties.class);
+        SemDynamicFeature.Properties properties =
+                (SemDynamicFeature.Properties)
+                        intent.getParcelableExtra(
+                                "PROPERTY_CARGO", SemDynamicFeature.Properties.class);
         ll("   Intent1 received properties " + properties);
         if (properties != null) {
             String string = properties.getString(str, "__default");
@@ -801,7 +950,9 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
         L77:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.dynamicfeature.DynamicFeatureService.testVerifyProperty():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.dynamicfeature.DynamicFeatureService.testVerifyProperty():boolean");
     }
 
     public final void updateFeature(String str) {
@@ -821,7 +972,8 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
             onFeatureListUpdated();
             Slog.d("dynamicfeature_Service", "Update complete");
         } catch (Exception e) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("updateFeature"), "dynamicfeature_Service");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("updateFeature"), "dynamicfeature_Service");
         }
     }
 
@@ -839,56 +991,69 @@ public final class DynamicFeatureService extends IDynamicFeatureManager.Stub {
                     httpConnector.mFeatures = this.mFeatures;
                     AnonymousClass1 anonymousClass1 = this.mFeatureServiceCallBack;
                     try {
-                        Pair pair = (Pair) httpConnector.mExecutorService.submit(new Callable() { // from class: com.samsung.android.server.dynamicfeature.network.HttpConnector$$ExternalSyntheticLambda0
-                            /* JADX WARN: Can't wrap try/catch for region: R(16:16|17|18|(4:21|(5:26|27|(1:29)|30|31)|32|19)|37|38|(1:40)|41|42|43|(2:45|(5:47|48|49|50|(3:52|53|55)(1:59)))(6:65|66|67|(3:68|69|(1:71)(1:72))|73|74)|64|48|49|50|(0)(0)) */
-                            /* JADX WARN: Code restructure failed: missing block: B:61:0x01ee, code lost:
-                            
-                                r0 = move-exception;
-                             */
-                            /* JADX WARN: Code restructure failed: missing block: B:62:0x01ef, code lost:
-                            
-                                com.android.server.BootReceiver$$ExternalSyntheticOutline0.m("Cannot close handle : ", r0, "dynamicfeature_HttpConnector");
-                             */
-                            /* JADX WARN: Multi-variable type inference failed */
-                            /* JADX WARN: Removed duplicated region for block: B:52:0x01f8 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-                            /* JADX WARN: Removed duplicated region for block: B:59:? A[RETURN, SYNTHETIC] */
-                            /* JADX WARN: Type inference failed for: r0v0, types: [java.lang.String] */
-                            /* JADX WARN: Type inference failed for: r0v1 */
-                            /* JADX WARN: Type inference failed for: r0v11, types: [java.io.InputStreamReader] */
-                            /* JADX WARN: Type inference failed for: r0v14 */
-                            /* JADX WARN: Type inference failed for: r0v15 */
-                            /* JADX WARN: Type inference failed for: r0v16 */
-                            /* JADX WARN: Type inference failed for: r0v19 */
-                            /* JADX WARN: Type inference failed for: r0v2 */
-                            /* JADX WARN: Type inference failed for: r0v21 */
-                            /* JADX WARN: Type inference failed for: r0v23 */
-                            /* JADX WARN: Type inference failed for: r0v3 */
-                            /* JADX WARN: Type inference failed for: r0v4 */
-                            /* JADX WARN: Type inference failed for: r0v5, types: [java.io.InputStreamReader] */
-                            /* JADX WARN: Type inference failed for: r0v7, types: [java.io.InputStreamReader] */
-                            /* JADX WARN: Type inference failed for: r0v8 */
-                            /* JADX WARN: Type inference failed for: r3v13, types: [java.lang.String] */
-                            /* JADX WARN: Type inference failed for: r3v9, types: [java.lang.String] */
-                            /* JADX WARN: Type inference failed for: r4v5, types: [org.json.JSONObject] */
-                            @Override // java.util.concurrent.Callable
-                            /*
-                                Code decompiled incorrectly, please refer to instructions dump.
-                                To view partially-correct code enable 'Show inconsistent code' option in preferences
-                            */
-                            public final java.lang.Object call() {
-                                /*
-                                    Method dump skipped, instructions count: 691
-                                    To view this dump change 'Code comments level' option to 'DEBUG'
-                                */
-                                throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.dynamicfeature.network.HttpConnector$$ExternalSyntheticLambda0.call():java.lang.Object");
-                            }
-                        }).get();
+                        Pair pair =
+                                (Pair)
+                                        httpConnector
+                                                .mExecutorService
+                                                .submit(
+                                                        new Callable() { // from class:
+                                                            // com.samsung.android.server.dynamicfeature.network.HttpConnector$$ExternalSyntheticLambda0
+                                                            /* JADX WARN: Can't wrap try/catch for region: R(16:16|17|18|(4:21|(5:26|27|(1:29)|30|31)|32|19)|37|38|(1:40)|41|42|43|(2:45|(5:47|48|49|50|(3:52|53|55)(1:59)))(6:65|66|67|(3:68|69|(1:71)(1:72))|73|74)|64|48|49|50|(0)(0)) */
+                                                            /* JADX WARN: Code restructure failed: missing block: B:61:0x01ee, code lost:
+
+                                                               r0 = move-exception;
+                                                            */
+                                                            /* JADX WARN: Code restructure failed: missing block: B:62:0x01ef, code lost:
+
+                                                               com.android.server.BootReceiver$$ExternalSyntheticOutline0.m("Cannot close handle : ", r0, "dynamicfeature_HttpConnector");
+                                                            */
+                                                            /* JADX WARN: Multi-variable type inference failed */
+                                                            /* JADX WARN: Removed duplicated region for block: B:52:0x01f8 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+                                                            /* JADX WARN: Removed duplicated region for block: B:59:? A[RETURN, SYNTHETIC] */
+                                                            /* JADX WARN: Type inference failed for: r0v0, types: [java.lang.String] */
+                                                            /* JADX WARN: Type inference failed for: r0v1 */
+                                                            /* JADX WARN: Type inference failed for: r0v11, types: [java.io.InputStreamReader] */
+                                                            /* JADX WARN: Type inference failed for: r0v14 */
+                                                            /* JADX WARN: Type inference failed for: r0v15 */
+                                                            /* JADX WARN: Type inference failed for: r0v16 */
+                                                            /* JADX WARN: Type inference failed for: r0v19 */
+                                                            /* JADX WARN: Type inference failed for: r0v2 */
+                                                            /* JADX WARN: Type inference failed for: r0v21 */
+                                                            /* JADX WARN: Type inference failed for: r0v23 */
+                                                            /* JADX WARN: Type inference failed for: r0v3 */
+                                                            /* JADX WARN: Type inference failed for: r0v4 */
+                                                            /* JADX WARN: Type inference failed for: r0v5, types: [java.io.InputStreamReader] */
+                                                            /* JADX WARN: Type inference failed for: r0v7, types: [java.io.InputStreamReader] */
+                                                            /* JADX WARN: Type inference failed for: r0v8 */
+                                                            /* JADX WARN: Type inference failed for: r3v13, types: [java.lang.String] */
+                                                            /* JADX WARN: Type inference failed for: r3v9, types: [java.lang.String] */
+                                                            /* JADX WARN: Type inference failed for: r4v5, types: [org.json.JSONObject] */
+                                                            @Override // java.util.concurrent.Callable
+                                                            /*
+                                                                Code decompiled incorrectly, please refer to instructions dump.
+                                                                To view partially-correct code enable 'Show inconsistent code' option in preferences
+                                                            */
+                                                            public final java.lang.Object call() {
+                                                                /*
+                                                                    Method dump skipped, instructions count: 691
+                                                                    To view this dump change 'Code comments level' option to 'DEBUG'
+                                                                */
+                                                                throw new UnsupportedOperationException(
+                                                                        "Method not decompiled:"
+                                                                            + " com.samsung.android.server.dynamicfeature.network.HttpConnector$$ExternalSyntheticLambda0.call():java.lang.Object");
+                                                            }
+                                                        })
+                                                .get();
                         if (((String) pair.first).length() == 0) {
                             Slog.e("dynamicfeature_HttpConnector", "No result to update");
                         }
-                        anonymousClass1.onFeatureUpdateComplete((String) pair.first, ((Boolean) pair.second).booleanValue());
+                        anonymousClass1.onFeatureUpdateComplete(
+                                (String) pair.first, ((Boolean) pair.second).booleanValue());
                     } catch (Exception e) {
-                        NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("requestConnection error "), "dynamicfeature_HttpConnector");
+                        NandswapManager$$ExternalSyntheticOutline0.m(
+                                e,
+                                new StringBuilder("requestConnection error "),
+                                "dynamicfeature_HttpConnector");
                     }
                 }
             }

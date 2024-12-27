@@ -31,9 +31,9 @@ import android.view.animation.LinearInterpolator;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.RemoteViews;
-import android.widget.RemoteViewsAdapter;
+
 import com.android.internal.R;
+
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Locale;
@@ -100,7 +100,8 @@ public class Chronometer extends TextView {
         void onChronometerTick(Chronometer chronometer);
     }
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<Chronometer> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<Chronometer> {
         private int mCountDownId;
         private int mFormatId;
         private boolean mPropertiesMapped = false;
@@ -108,7 +109,8 @@ public class Chronometer extends TextView {
         @Override // android.view.inspector.InspectionCompanion
         public void mapProperties(PropertyMapper propertyMapper) {
             this.mCountDownId = propertyMapper.mapBoolean("countDown", 16844059);
-            this.mFormatId = propertyMapper.mapObject(Telephony.CellBroadcasts.MESSAGE_FORMAT, 16843013);
+            this.mFormatId =
+                    propertyMapper.mapObject(Telephony.CellBroadcasts.MESSAGE_FORMAT, 16843013);
             this.mPropertiesMapped = true;
         }
 
@@ -154,30 +156,35 @@ public class Chronometer extends TextView {
         this.mMilliSecondCount = 0;
         this.mFormatterArgs = new Object[1];
         this.mRecycle = new StringBuilder(8);
-        this.mTickRunnable = new Runnable() { // from class: android.widget.Chronometer.1
-            @Override // java.lang.Runnable
-            public void run() {
-                int tickTime;
-                if (Chronometer.this.mRequestedTickTime != 1000) {
-                    tickTime = Chronometer.this.mRequestedTickTime;
-                } else if (Chronometer.this.mPlaySpeed != 1.0f) {
-                    tickTime = (int) (1000.0f / Chronometer.this.mPlaySpeed);
-                } else {
-                    tickTime = 1000;
-                }
-                if (Chronometer.this.mRunning) {
-                    Chronometer.this.updateText(SystemClock.elapsedRealtime());
-                    Chronometer.this.dispatchChronometerTick();
-                    if (tickTime != 1000) {
-                        Chronometer.this.postDelayed(Chronometer.this.mTickRunnable, tickTime);
-                    } else {
-                        Chronometer.this.postTickOnNextSecond();
+        this.mTickRunnable =
+                new Runnable() { // from class: android.widget.Chronometer.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        int tickTime;
+                        if (Chronometer.this.mRequestedTickTime != 1000) {
+                            tickTime = Chronometer.this.mRequestedTickTime;
+                        } else if (Chronometer.this.mPlaySpeed != 1.0f) {
+                            tickTime = (int) (1000.0f / Chronometer.this.mPlaySpeed);
+                        } else {
+                            tickTime = 1000;
+                        }
+                        if (Chronometer.this.mRunning) {
+                            Chronometer.this.updateText(SystemClock.elapsedRealtime());
+                            Chronometer.this.dispatchChronometerTick();
+                            if (tickTime != 1000) {
+                                Chronometer.this.postDelayed(
+                                        Chronometer.this.mTickRunnable, tickTime);
+                            } else {
+                                Chronometer.this.postTickOnNextSecond();
+                            }
+                        }
                     }
-                }
-            }
-        };
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Chronometer, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.Chronometer, attrs, a, defStyleAttr, defStyleRes);
+                };
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.Chronometer, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.Chronometer, attrs, a, defStyleAttr, defStyleRes);
         setFormat(a.getString(0));
         setCountDown(a.getBoolean(1, false));
         a.recycle();
@@ -201,7 +208,13 @@ public class Chronometer extends TextView {
 
     public boolean isTheFinalCountDown() {
         try {
-            getContext().startActivity(new Intent("android.intent.action.VIEW", Uri.parse("https://youtu.be/9jK-NcRmVcw")).addCategory(Intent.CATEGORY_BROWSABLE).addFlags(528384));
+            getContext()
+                    .startActivity(
+                            new Intent(
+                                            "android.intent.action.VIEW",
+                                            Uri.parse("https://youtu.be/9jK-NcRmVcw"))
+                                    .addCategory(Intent.CATEGORY_BROWSABLE)
+                                    .addFlags(528384));
             return true;
         } catch (Exception e) {
             return false;
@@ -215,7 +228,9 @@ public class Chronometer extends TextView {
             if (this.mBaseTimerSeconds > this.mFirstTimerSeconds) {
                 this.mBaseTimerSeconds = this.mFirstTimerSeconds;
             }
-            if ((this.mFirstTimerSeconds == 0 && this.mOriginalBase == 0) || this.mFirstTimerSeconds == this.mBaseTimerSeconds || this.mFirstTimerSeconds == 0) {
+            if ((this.mFirstTimerSeconds == 0 && this.mOriginalBase == 0)
+                    || this.mFirstTimerSeconds == this.mBaseTimerSeconds
+                    || this.mFirstTimerSeconds == 0) {
                 setProgressInternal(this.mMaxProgress, false);
             } else {
                 float scale = this.mBaseTimerSeconds / this.mFirstTimerSeconds;
@@ -273,7 +288,9 @@ public class Chronometer extends TextView {
         this.mProgressAnimationDuration = Math.max((int) this.mBaseTimerSeconds, 0);
         if (started) {
             if (this.mMode == 1 || this.mMode == 4) {
-                if ((this.mFirstTimerSeconds == 0 && this.mOriginalBase == 0) || this.mFirstTimerSeconds == this.mBaseTimerSeconds || this.mFirstTimerSeconds == 0) {
+                if ((this.mFirstTimerSeconds == 0 && this.mOriginalBase == 0)
+                        || this.mFirstTimerSeconds == this.mBaseTimerSeconds
+                        || this.mFirstTimerSeconds == 0) {
                     setProgressInternal(this.mMaxProgress, false);
                 } else {
                     float scale = this.mBaseTimerSeconds / this.mFirstTimerSeconds;
@@ -329,12 +346,14 @@ public class Chronometer extends TextView {
             Method dump skipped, instructions count: 321
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.Chronometer.updateText(long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.widget.Chronometer.updateText(long):void");
     }
 
     private ChronometerProgressDrawable getChronometerProgressDrawable() {
         if (this.mProgressDrawable instanceof LayerDrawable) {
-            Drawable drawable = ((LayerDrawable) this.mProgressDrawable).findDrawableByLayerId(16908301);
+            Drawable drawable =
+                    ((LayerDrawable) this.mProgressDrawable).findDrawableByLayerId(16908301);
             if (drawable instanceof ChronometerProgressDrawable) {
                 return (ChronometerProgressDrawable) drawable;
             }
@@ -348,7 +367,8 @@ public class Chronometer extends TextView {
 
     private ChronometerProgressDrawable getChronometerBackgroundDrawable() {
         if (this.mProgressDrawable instanceof LayerDrawable) {
-            Drawable drawable = ((LayerDrawable) this.mProgressDrawable).findDrawableByLayerId(16908288);
+            Drawable drawable =
+                    ((LayerDrawable) this.mProgressDrawable).findDrawableByLayerId(16908288);
             if (drawable instanceof ChronometerProgressDrawable) {
                 return (ChronometerProgressDrawable) drawable;
             }
@@ -460,7 +480,8 @@ public class Chronometer extends TextView {
             measures.add(new Measure(Integer.valueOf(m), MeasureUnit.MINUTE));
         }
         measures.add(new Measure(Integer.valueOf(s), MeasureUnit.SECOND));
-        return MeasureFormat.getInstance(Locale.getDefault(), MeasureFormat.FormatWidth.WIDE).formatMeasures((Measure[]) measures.toArray(new Measure[measures.size()]));
+        return MeasureFormat.getInstance(Locale.getDefault(), MeasureFormat.FormatWidth.WIDE)
+                .formatMeasures((Measure[]) measures.toArray(new Measure[measures.size()]));
     }
 
     @Override // android.view.View
@@ -500,7 +521,8 @@ public class Chronometer extends TextView {
         int progress2 = MathUtils.constrain(progress, this.mMinProgress, this.mMaxProgress);
         this.mProgress = progress2;
         if (this.mProgressDrawable instanceof LayerDrawable) {
-            Drawable drawable = ((LayerDrawable) this.mProgressDrawable).findDrawableByLayerId(16908301);
+            Drawable drawable =
+                    ((LayerDrawable) this.mProgressDrawable).findDrawableByLayerId(16908301);
             if (drawable instanceof ClipDrawable) {
                 drawable = ((ClipDrawable) drawable).getDrawable();
             }
@@ -524,10 +546,18 @@ public class Chronometer extends TextView {
     }
 
     private void initializeHorizontalProgressMode() {
-        HorizontalProgressDrawable primaryProgress = new HorizontalProgressDrawable(false, colorToColorStateList(this.mProgressColor), colorToColorStateList(this.mProgressWarningColor));
-        HorizontalProgressDrawable background = new HorizontalProgressDrawable(true, colorToColorStateList(this.mProgressBackgroundColor), null);
+        HorizontalProgressDrawable primaryProgress =
+                new HorizontalProgressDrawable(
+                        false,
+                        colorToColorStateList(this.mProgressColor),
+                        colorToColorStateList(this.mProgressWarningColor));
+        HorizontalProgressDrawable background =
+                new HorizontalProgressDrawable(
+                        true, colorToColorStateList(this.mProgressBackgroundColor), null);
         drawables[0].setLevel(10000);
-        Drawable[] drawables = {new ClipDrawable(background, 21, 1), new ClipDrawable(primaryProgress, 21, 1)};
+        Drawable[] drawables = {
+            new ClipDrawable(background, 21, 1), new ClipDrawable(primaryProgress, 21, 1)
+        };
         drawables[1].setLevel(0);
         LayerDrawable layer = new LayerDrawable(drawables);
         layer.setPaddingMode(1);
@@ -543,8 +573,14 @@ public class Chronometer extends TextView {
     }
 
     private void initializeRoundCicleMode() {
-        CirCleProgressDrawable primaryProgress = new CirCleProgressDrawable(false, colorToColorStateList(this.mProgressColor), colorToColorStateList(this.mProgressWarningColor));
-        CirCleProgressDrawable background = new CirCleProgressDrawable(true, colorToColorStateList(this.mProgressBackgroundColor), null);
+        CirCleProgressDrawable primaryProgress =
+                new CirCleProgressDrawable(
+                        false,
+                        colorToColorStateList(this.mProgressColor),
+                        colorToColorStateList(this.mProgressWarningColor));
+        CirCleProgressDrawable background =
+                new CirCleProgressDrawable(
+                        true, colorToColorStateList(this.mProgressBackgroundColor), null);
         Drawable[] drawables = {background, primaryProgress};
         LayerDrawable layer = new LayerDrawable(drawables);
         layer.setPaddingMode(1);
@@ -560,7 +596,7 @@ public class Chronometer extends TextView {
 
     private ColorStateList colorToColorStateList(int color) {
         int[][] EMPTY = {new int[0]};
-        return new ColorStateList(EMPTY, new int[]{color});
+        return new ColorStateList(EMPTY, new int[] {color});
     }
 
     private void setProgressDrawable(Drawable d) {
@@ -622,7 +658,8 @@ public class Chronometer extends TextView {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public synchronized void doRefreshProgress(int id, int progress, boolean callBackToApp, boolean animate) {
+    public synchronized void doRefreshProgress(
+            int id, int progress, boolean callBackToApp, boolean animate) {
         int range = this.mMaxProgress - this.mMinProgress;
         float scale = range > 0 ? (progress - this.mMinProgress) / range : 0.0f;
         Drawable d = this.mCurrentDrawable;
@@ -654,7 +691,8 @@ public class Chronometer extends TextView {
         }
     }
 
-    @Override // android.widget.TextView, android.view.View, android.view.accessibility.AccessibilityEventSource
+    @Override // android.widget.TextView, android.view.View,
+              // android.view.accessibility.AccessibilityEventSource
     public void sendAccessibilityEventUnchecked(AccessibilityEvent event) {
         if (event.getEventType() == 2048 && event.getContentChangeTypes() == 2) {
             return;
@@ -708,13 +746,13 @@ public class Chronometer extends TextView {
 
     private static class RefreshData {
         private static final int POOL_MAX = 24;
-        private static final Pools.SynchronizedPool<RefreshData> sPool = new Pools.SynchronizedPool<>(24);
+        private static final Pools.SynchronizedPool<RefreshData> sPool =
+                new Pools.SynchronizedPool<>(24);
         public boolean animate;
         public int id;
         public int progress;
 
-        private RefreshData() {
-        }
+        private RefreshData() {}
 
         public static RefreshData obtain(int id, int progress, boolean animate) {
             RefreshData rd = sPool.acquire();
@@ -733,8 +771,7 @@ public class Chronometer extends TextView {
     }
 
     private class RefreshProgressRunnable implements Runnable {
-        private RefreshProgressRunnable() {
-        }
+        private RefreshProgressRunnable() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -762,29 +799,35 @@ public class Chronometer extends TextView {
         final Paint mPaint = new Paint();
         int mAlpha = 255;
         final ProgressState mState = new ProgressState();
-        private final IntProperty<ChronometerProgressDrawable> VISUAL_CIRCLE_PROGRESS = new IntProperty<ChronometerProgressDrawable>("visual_progress") { // from class: android.widget.Chronometer.ChronometerProgressDrawable.1
-            @Override // android.util.IntProperty
-            public void setValue(ChronometerProgressDrawable object, int value) {
-                int newValue = value;
-                if (Chronometer.this.getVisibility() == 8) {
-                    ChronometerProgressDrawable.this.mAnimator.cancel();
-                    newValue = Chronometer.this.mMaxProgress;
-                }
-                object.mProgress = newValue;
-                Drawable drawable = ((LayerDrawable) Chronometer.this.mProgressDrawable).findDrawableByLayerId(16908301);
-                if (drawable instanceof ClipDrawable) {
-                    drawable.setLevel(newValue);
-                }
-                ChronometerProgressDrawable.this.invalidateSelf();
-            }
+        private final IntProperty<ChronometerProgressDrawable> VISUAL_CIRCLE_PROGRESS =
+                new IntProperty<ChronometerProgressDrawable>(
+                        "visual_progress") { // from class:
+                                             // android.widget.Chronometer.ChronometerProgressDrawable.1
+                    @Override // android.util.IntProperty
+                    public void setValue(ChronometerProgressDrawable object, int value) {
+                        int newValue = value;
+                        if (Chronometer.this.getVisibility() == 8) {
+                            ChronometerProgressDrawable.this.mAnimator.cancel();
+                            newValue = Chronometer.this.mMaxProgress;
+                        }
+                        object.mProgress = newValue;
+                        Drawable drawable =
+                                ((LayerDrawable) Chronometer.this.mProgressDrawable)
+                                        .findDrawableByLayerId(16908301);
+                        if (drawable instanceof ClipDrawable) {
+                            drawable.setLevel(newValue);
+                        }
+                        ChronometerProgressDrawable.this.invalidateSelf();
+                    }
 
-            @Override // android.util.Property
-            public Integer get(ChronometerProgressDrawable object) {
-                return Integer.valueOf(object.mProgress);
-            }
-        };
+                    @Override // android.util.Property
+                    public Integer get(ChronometerProgressDrawable object) {
+                        return Integer.valueOf(object.mProgress);
+                    }
+                };
 
-        public ChronometerProgressDrawable(boolean isBackground, ColorStateList color, ColorStateList warningColor) {
+        public ChronometerProgressDrawable(
+                boolean isBackground, ColorStateList color, ColorStateList warningColor) {
             this.mIsBackground = isBackground;
             this.mPaint.setStyle(Paint.Style.STROKE);
             this.mPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -848,7 +891,9 @@ public class Chronometer extends TextView {
                 this.mAnimator.setFloatValues(this.mProgress);
                 this.mAnimator.end();
                 this.mAnimator.cancel();
-                Drawable drawable = ((LayerDrawable) Chronometer.this.mProgressDrawable).findDrawableByLayerId(16908301);
+                Drawable drawable =
+                        ((LayerDrawable) Chronometer.this.mProgressDrawable)
+                                .findDrawableByLayerId(16908301);
                 if (drawable instanceof ClipDrawable) {
                     drawable.setLevel(progress);
                 }
@@ -920,8 +965,7 @@ public class Chronometer extends TextView {
         }
 
         private class ProgressState extends Drawable.ConstantState {
-            private ProgressState() {
-            }
+            private ProgressState() {}
 
             @Override // android.graphics.drawable.Drawable.ConstantState
             public Drawable newDrawable() {
@@ -938,7 +982,8 @@ public class Chronometer extends TextView {
     private class CirCleProgressDrawable extends ChronometerProgressDrawable {
         private RectF mArcRect;
 
-        public CirCleProgressDrawable(boolean isBackground, ColorStateList color, ColorStateList warningColor) {
+        public CirCleProgressDrawable(
+                boolean isBackground, ColorStateList color, ColorStateList warningColor) {
             super(isBackground, color, warningColor);
             this.mArcRect = new RectF();
         }
@@ -948,9 +993,16 @@ public class Chronometer extends TextView {
             this.mPaint.setStrokeWidth(Chronometer.this.mRoundStrokeWidth);
             int prevAlpha = this.mPaint.getAlpha();
             this.mPaint.setAlpha(modulateAlpha(prevAlpha, this.mAlpha));
-            this.mArcRect.set((Chronometer.this.mRoundStrokeWidth / 2.0f) + Chronometer.this.mCirclePadding, (Chronometer.this.mRoundStrokeWidth / 2.0f) + Chronometer.this.mCirclePadding, (Chronometer.this.getWidth() - (Chronometer.this.mRoundStrokeWidth / 2.0f)) - Chronometer.this.mCirclePadding, (Chronometer.this.getWidth() - (Chronometer.this.mRoundStrokeWidth / 2.0f)) - Chronometer.this.mCirclePadding);
+            this.mArcRect.set(
+                    (Chronometer.this.mRoundStrokeWidth / 2.0f) + Chronometer.this.mCirclePadding,
+                    (Chronometer.this.mRoundStrokeWidth / 2.0f) + Chronometer.this.mCirclePadding,
+                    (Chronometer.this.getWidth() - (Chronometer.this.mRoundStrokeWidth / 2.0f))
+                            - Chronometer.this.mCirclePadding,
+                    (Chronometer.this.getWidth() - (Chronometer.this.mRoundStrokeWidth / 2.0f))
+                            - Chronometer.this.mCirclePadding);
             int range = Chronometer.this.mMaxProgress - Chronometer.this.mMinProgress;
-            float scale = range > 0 ? (this.mProgress - Chronometer.this.mMinProgress) / range : 0.0f;
+            float scale =
+                    range > 0 ? (this.mProgress - Chronometer.this.mMinProgress) / range : 0.0f;
             canvas.save();
             if (this.mIsBackground) {
                 canvas.drawArc(this.mArcRect, 270.0f, 360.0f, false, this.mPaint);
@@ -963,7 +1015,8 @@ public class Chronometer extends TextView {
     }
 
     private class HorizontalProgressDrawable extends ChronometerProgressDrawable {
-        public HorizontalProgressDrawable(boolean isBackground, ColorStateList color, ColorStateList warningColor) {
+        public HorizontalProgressDrawable(
+                boolean isBackground, ColorStateList color, ColorStateList warningColor) {
             super(isBackground, color, warningColor);
         }
 
@@ -974,19 +1027,25 @@ public class Chronometer extends TextView {
             this.mPaint.setAlpha(modulateAlpha(prevAlpha, this.mAlpha));
             canvas.save();
             float yOffSet = Chronometer.this.mRoundStrokeWidth / 2.0f;
-            canvas.drawLine(yOffSet, yOffSet, Chronometer.this.getWidth() - yOffSet, yOffSet, this.mPaint);
+            canvas.drawLine(
+                    yOffSet, yOffSet, Chronometer.this.getWidth() - yOffSet, yOffSet, this.mPaint);
             canvas.restore();
             this.mPaint.setAlpha(prevAlpha);
         }
     }
 
-    @Override // android.widget.TextView, android.view.View, android.graphics.drawable.Drawable.Callback
+    @Override // android.widget.TextView, android.view.View,
+              // android.graphics.drawable.Drawable.Callback
     public void invalidateDrawable(Drawable dr) {
         if (verifyDrawable(dr)) {
             Rect dirty = dr.getBounds();
             int scrollX = getScrollX() + getPaddingLeft();
             int scrollY = getScrollY() + getPaddingTop();
-            invalidate(dirty.left + scrollX, dirty.top + scrollY, dirty.right + scrollX, dirty.bottom + scrollY);
+            invalidate(
+                    dirty.left + scrollX,
+                    dirty.top + scrollY,
+                    dirty.right + scrollX,
+                    dirty.bottom + scrollY);
             return;
         }
         super.invalidateDrawable(dr);
@@ -1040,7 +1099,9 @@ public class Chronometer extends TextView {
         this.mProgressColor = color;
         ChronometerProgressDrawable drawable = getChronometerProgressDrawable();
         if (drawable != null) {
-            drawable.updateColor(colorToColorStateList(this.mProgressColor), colorToColorStateList(this.mProgressWarningColor));
+            drawable.updateColor(
+                    colorToColorStateList(this.mProgressColor),
+                    colorToColorStateList(this.mProgressWarningColor));
         }
     }
 

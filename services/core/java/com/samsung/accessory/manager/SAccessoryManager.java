@@ -17,16 +17,19 @@ import android.os.PowerManager;
 import android.os.UEventObserver;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.input.InputManagerService;
+
 import com.samsung.accessory.manager.authentication.AuthenticationResult;
 import com.samsung.accessory.manager.authentication.AuthenticationSession;
 import com.samsung.accessory.manager.authentication.LocalAuthenticator;
 import com.samsung.accessory.manager.authentication.cover.CoverAuthenticator;
 import com.samsung.accessory.manager.authentication.usb.UsbAuthenticator;
 import com.samsung.accessory.manager.authentication.wirelesscharger.WirelessChargerAuthenticator;
+
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -37,7 +40,8 @@ import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class SAccessoryManager extends SAccessoryManagerInternal implements InputManagerService.SecAccessoryManagerCallbacks {
+public final class SAccessoryManager extends SAccessoryManagerInternal
+        implements InputManagerService.SecAccessoryManagerCallbacks {
     public static final boolean DBG = Debug.semIsProductDev();
     public boolean isUsbReady;
     public final AuthHandler mAuthHandler;
@@ -59,8 +63,7 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.accessory.manager.SAccessoryManager$1, reason: invalid class name */
     public final class AnonymousClass1 {
-        public /* synthetic */ AnonymousClass1() {
-        }
+        public /* synthetic */ AnonymousClass1() {}
 
         /* JADX WARN: Multi-variable type inference failed */
         /* JADX WARN: Type inference failed for: r2v0, types: [java.lang.String] */
@@ -84,19 +87,31 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
                 i = 0;
             }
             try {
-                sAccessoryManager.mUsbpdIds = new String(cArr, 0, fileReader.read(cArr, 0, 1024)).trim();
+                sAccessoryManager.mUsbpdIds =
+                        new String(cArr, 0, fileReader.read(cArr, 0, 1024)).trim();
                 try {
                     fileReader.close();
-                    Log.i("SAccessoryManager_SAccessoryManager", "Service start and check pdids: " + sAccessoryManager.mUsbpdIds);
+                    Log.i(
+                            "SAccessoryManager_SAccessoryManager",
+                            "Service start and check pdids: " + sAccessoryManager.mUsbpdIds);
                     char[] cArr2 = new char[1024];
                     fileReader = new FileReader("/sys/class/sec/ccic/usbpd_type");
                     try {
-                        i = Integer.valueOf(new String(cArr2, 0, fileReader.read(cArr2, 0, 1024)).trim()).intValue();
+                        i =
+                                Integer.valueOf(
+                                                new String(
+                                                                cArr2,
+                                                                0,
+                                                                fileReader.read(cArr2, 0, 1024))
+                                                        .trim())
+                                        .intValue();
                     } catch (Throwable th) {
                         th = th;
                     }
                 } catch (FileNotFoundException unused3) {
-                    Log.e("SAccessoryManager_SAccessoryManager", "This kernel does not have ccic dock support");
+                    Log.e(
+                            "SAccessoryManager_SAccessoryManager",
+                            "This kernel does not have ccic dock support");
                 } catch (Exception unused4) {
                 }
                 try {
@@ -109,8 +124,14 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
                         String str2 = split[1];
                         byte[] bArr = new byte[str2.length()];
                         byte[] bytes2 = str2.getBytes();
-                        if (bytes2.length != 4 || bytes2[0] != bytes[0] || (b = bytes2[1]) < bytes[1] || b > bytes[5]) {
-                            Log.e("SAccessoryManager_SAccessoryManager", "This device is not support usb authentication usb_pdids: " + sAccessoryManager.mUsbpdIds);
+                        if (bytes2.length != 4
+                                || bytes2[0] != bytes[0]
+                                || (b = bytes2[1]) < bytes[1]
+                                || b > bytes[5]) {
+                            Log.e(
+                                    "SAccessoryManager_SAccessoryManager",
+                                    "This device is not support usb authentication usb_pdids: "
+                                            + sAccessoryManager.mUsbpdIds);
                         } else {
                             sAccessoryManager.attachUsbTypeC(i);
                         }
@@ -139,7 +160,12 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
         }
 
         public void onSessionEvent(int i, AuthenticationSession authenticationSession) {
-            SAccessoryManager.this.mAuthHandler.obtainMessage(i != 1 ? i != 2 ? i != 3 ? i != 4 ? -1 : 13 : 12 : 11 : 10, authenticationSession).sendToTarget();
+            SAccessoryManager.this
+                    .mAuthHandler
+                    .obtainMessage(
+                            i != 1 ? i != 2 ? i != 3 ? i != 4 ? -1 : 13 : 12 : 11 : 10,
+                            authenticationSession)
+                    .sendToTarget();
         }
 
         public void start(Message message) {
@@ -160,7 +186,10 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
             AuthenticationResult authenticationResult;
             SAccessoryManager sAccessoryManager = SAccessoryManager.this;
             sAccessoryManager.getClass();
-            if (sAccessoryManager.modelName.contains("SM-F900") && authenticationSession != null && (authenticationResult = authenticationSession.mResult) != null && authenticationResult.mReason == 0) {
+            if (sAccessoryManager.modelName.contains("SM-F900")
+                    && authenticationSession != null
+                    && (authenticationResult = authenticationSession.mResult) != null
+                    && authenticationResult.mReason == 0) {
                 boolean z = SAccessoryManager.DBG;
                 Log.i("SAccessoryManager_SAccessoryManager", "F900, set auth state true");
             } else if (sAccessoryManager.modelName.contains("SM-F900")) {
@@ -214,7 +243,8 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
             } else {
                 str = "MSG_AUTH_STOP_REQUEST";
             }
-            VpnManagerService$$ExternalSyntheticOutline0.m(sb, str, "SAccessoryManager_SAccessoryManager");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    sb, str, "SAccessoryManager_SAccessoryManager");
             int i2 = message.what;
             if (i2 == 1) {
                 sAccessoryManager.handleAuthStartRequest(message, false);
@@ -231,7 +261,9 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
                         if (sAccessoryManager.mSessions.containsKey(authenticationSession)) {
                             authenticationSession.startSession();
                         } else {
-                            Log.e("SAccessoryManager_SAccessoryManager", "The session does not exist! so can't restart the session!");
+                            Log.e(
+                                    "SAccessoryManager_SAccessoryManager",
+                                    "The session does not exist! so can't restart the session!");
                         }
                     } finally {
                     }
@@ -249,52 +281,67 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
                             authenticationSession2.mSessionHandler.sendEmptyMessage(12);
                         }
                     } else {
-                        Log.e("SAccessoryManager_SAccessoryManager", "The session does not exist! so can't stop the session!");
+                        Log.e(
+                                "SAccessoryManager_SAccessoryManager",
+                                "The session does not exist! so can't stop the session!");
                     }
                 }
                 return;
             }
             switch (i2) {
                 case 10:
-                    AuthenticationSession authenticationSession3 = (AuthenticationSession) message.obj;
-                    AuthenticationResultCallback authenticationResultCallback = authenticationSession3.mAuthResultCallback;
+                    AuthenticationSession authenticationSession3 =
+                            (AuthenticationSession) message.obj;
+                    AuthenticationResultCallback authenticationResultCallback =
+                            authenticationSession3.mAuthResultCallback;
                     if (authenticationResultCallback != null) {
-                        authenticationResultCallback.onAuthenticationStarting(authenticationSession3);
+                        authenticationResultCallback.onAuthenticationStarting(
+                                authenticationSession3);
                         return;
                     }
                     return;
                 case 11:
-                    AuthenticationResultCallback authenticationResultCallback2 = ((AuthenticationSession) message.obj).mAuthResultCallback;
+                    AuthenticationResultCallback authenticationResultCallback2 =
+                            ((AuthenticationSession) message.obj).mAuthResultCallback;
                     if (authenticationResultCallback2 != null) {
                         authenticationResultCallback2.onAuthenticationStarted();
                         return;
                     }
                     return;
                 case 12:
-                    AuthenticationSession authenticationSession4 = (AuthenticationSession) message.obj;
-                    AuthenticationResultCallback authenticationResultCallback3 = authenticationSession4.mAuthResultCallback;
+                    AuthenticationSession authenticationSession4 =
+                            (AuthenticationSession) message.obj;
+                    AuthenticationResultCallback authenticationResultCallback3 =
+                            authenticationSession4.mAuthResultCallback;
                     if (authenticationResultCallback3 != null) {
-                        authenticationResultCallback3.onAuthenticationComplted(authenticationSession4.mResult);
+                        authenticationResultCallback3.onAuthenticationComplted(
+                                authenticationSession4.mResult);
                         return;
                     }
                     Log.d("SAccessoryManager_SAccessoryManager", "sendIntentToReceiver");
                     AuthenticationResult authenticationResult = authenticationSession4.mResult;
-                    Intent intent = new Intent("com.samsung.accessory.authentication.action.TEST_AUTHENTICATION_REPLY");
+                    Intent intent =
+                            new Intent(
+                                    "com.samsung.accessory.authentication.action.TEST_AUTHENTICATION_REPLY");
                     intent.putExtras(authenticationResult.getResultBundle());
                     intent.setPackage(authenticationResult.mRequestPkg);
                     sAccessoryManager.mContext.sendBroadcastAsUser(intent, UserHandle.CURRENT);
                     return;
                 case 13:
-                    AuthenticationSession authenticationSession5 = (AuthenticationSession) message.obj;
+                    AuthenticationSession authenticationSession5 =
+                            (AuthenticationSession) message.obj;
                     synchronized (sAccessoryManager.mSessions) {
                         try {
-                            if (sAccessoryManager.mSessions.remove(authenticationSession5) != null) {
+                            if (sAccessoryManager.mSessions.remove(authenticationSession5)
+                                    != null) {
                                 Log.d("SAccessoryManager_SAccessoryManager", "session removed");
                             }
-                            if (sAccessoryManager.mSessions.size() == 0 && sAccessoryManager.mWakeLock.isHeld()) {
+                            if (sAccessoryManager.mSessions.size() == 0
+                                    && sAccessoryManager.mWakeLock.isHeld()) {
                                 sAccessoryManager.mWakeLock.release();
                             }
-                            AuthenticationResultCallback authenticationResultCallback4 = authenticationSession5.mAuthResultCallback;
+                            AuthenticationResultCallback authenticationResultCallback4 =
+                                    authenticationSession5.mAuthResultCallback;
                             if (authenticationResultCallback4 != null) {
                                 authenticationResultCallback4.onAuthenticationStopped();
                             }
@@ -303,7 +350,10 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
                     }
                     return;
                 case 14:
-                    Log.i("SAccessoryManager_SAccessoryManager", "Check auth chip again. Skip detach process if there is no auth chip in this time");
+                    Log.i(
+                            "SAccessoryManager_SAccessoryManager",
+                            "Check auth chip again. Skip detach process if there is no auth chip in"
+                                + " this time");
                     DetachCheck detachCheck = sAccessoryManager.mDetachCheck;
                     byte[] requestStartTypeS = detachCheck.requestStartTypeS();
                     if (requestStartTypeS != null && requestStartTypeS.length == 16) {
@@ -315,8 +365,11 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
                     while (it.hasNext()) {
                         LocalAuthenticator localAuthenticator = (LocalAuthenticator) it.next();
                         if (localAuthenticator instanceof CoverAuthenticator) {
-                            Log.i("SAccessoryManager_SAccessoryManager", "there is no authentication chip, so do detach process");
-                            ((CoverAuthenticator) localAuthenticator).onCoverAttached(System.nanoTime(), false, false);
+                            Log.i(
+                                    "SAccessoryManager_SAccessoryManager",
+                                    "there is no authentication chip, so do detach process");
+                            ((CoverAuthenticator) localAuthenticator)
+                                    .onCoverAttached(System.nanoTime(), false, false);
                         }
                     }
                     return;
@@ -338,13 +391,16 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
     }
 
     /* renamed from: -$$Nest$mwirelessChargerConnected, reason: not valid java name */
-    public static void m1129$$Nest$mwirelessChargerConnected(SAccessoryManager sAccessoryManager, int i) {
+    public static void m1129$$Nest$mwirelessChargerConnected(
+            SAccessoryManager sAccessoryManager, int i) {
         Iterator it = sAccessoryManager.mLocalAuthenticator.iterator();
         while (it.hasNext()) {
             LocalAuthenticator localAuthenticator = (LocalAuthenticator) it.next();
             if (localAuthenticator instanceof WirelessChargerAuthenticator) {
-                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "Wireless Charger Connected = ", "SAccessoryManager_SAccessoryManager");
-                WirelessChargerAuthenticator wirelessChargerAuthenticator = (WirelessChargerAuthenticator) localAuthenticator;
+                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                        i, "Wireless Charger Connected = ", "SAccessoryManager_SAccessoryManager");
+                WirelessChargerAuthenticator wirelessChargerAuthenticator =
+                        (WirelessChargerAuthenticator) localAuthenticator;
                 if (i == 1) {
                     sAccessoryManager.wirelesschargerState = true;
                     wirelessChargerAuthenticator.onWirelessChargerConnected(true);
@@ -366,104 +422,140 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
         this.modelName = "Samsung Mobile";
         AnonymousClass1 anonymousClass1 = new AnonymousClass1();
         this.mSessionEventListener = new AnonymousClass1();
-        UEventObserver uEventObserver = new UEventObserver() { // from class: com.samsung.accessory.manager.SAccessoryManager.3
-            public final void onUEvent(UEventObserver.UEvent uEvent) {
-                byte b;
-                try {
-                    boolean z = SAccessoryManager.DBG;
-                    Log.i("SAccessoryManager_SAccessoryManager", "UEventObserver, event : " + uEvent);
-                    if (!SAccessoryManager.this.mIsFactory && (Integer.parseInt(uEvent.get("SWITCH_STATE")) == 200 || Integer.parseInt(uEvent.get("SWITCH_STATE")) == 0)) {
-                        if (Integer.parseInt(uEvent.get("SWITCH_STATE")) == 0) {
-                            SAccessoryManager.this.attachUsbTypeC(Integer.parseInt(uEvent.get("SWITCH_STATE")));
-                            return;
-                        }
-                        String[] split = uEvent.get("USBPD_IDS") != null ? uEvent.get("USBPD_IDS").split(":") : null;
-                        byte[] bytes = "b001b7ff".getBytes();
-                        if (SAccessoryManager.this.isUsbReady && split != null && split.length == 2 && split[0].equals("04e8")) {
-                            String str = split[1];
-                            byte[] bArr = new byte[str.length()];
-                            byte[] bytes2 = str.getBytes();
-                            if (bytes2.length != 4 || bytes2[0] != bytes[0] || (b = bytes2[1]) < bytes[1] || b > bytes[5]) {
-                                Log.i("SAccessoryManager_SAccessoryManager", "UEventObserver, event : ");
-                                return;
-                            } else {
-                                SAccessoryManager.this.attachUsbTypeC(Integer.parseInt(uEvent.get("SWITCH_STATE")));
+        UEventObserver uEventObserver = new UEventObserver() { // from class:
+                    // com.samsung.accessory.manager.SAccessoryManager.3
+                    public final void onUEvent(UEventObserver.UEvent uEvent) {
+                        byte b;
+                        try {
+                            boolean z = SAccessoryManager.DBG;
+                            Log.i(
+                                    "SAccessoryManager_SAccessoryManager",
+                                    "UEventObserver, event : " + uEvent);
+                            if (!SAccessoryManager.this.mIsFactory
+                                    && (Integer.parseInt(uEvent.get("SWITCH_STATE")) == 200
+                                            || Integer.parseInt(uEvent.get("SWITCH_STATE")) == 0)) {
+                                if (Integer.parseInt(uEvent.get("SWITCH_STATE")) == 0) {
+                                    SAccessoryManager.this.attachUsbTypeC(
+                                            Integer.parseInt(uEvent.get("SWITCH_STATE")));
+                                    return;
+                                }
+                                String[] split =
+                                        uEvent.get("USBPD_IDS") != null
+                                                ? uEvent.get("USBPD_IDS").split(":")
+                                                : null;
+                                byte[] bytes = "b001b7ff".getBytes();
+                                if (SAccessoryManager.this.isUsbReady
+                                        && split != null
+                                        && split.length == 2
+                                        && split[0].equals("04e8")) {
+                                    String str = split[1];
+                                    byte[] bArr = new byte[str.length()];
+                                    byte[] bytes2 = str.getBytes();
+                                    if (bytes2.length != 4
+                                            || bytes2[0] != bytes[0]
+                                            || (b = bytes2[1]) < bytes[1]
+                                            || b > bytes[5]) {
+                                        Log.i(
+                                                "SAccessoryManager_SAccessoryManager",
+                                                "UEventObserver, event : ");
+                                        return;
+                                    } else {
+                                        SAccessoryManager.this.attachUsbTypeC(
+                                                Integer.parseInt(uEvent.get("SWITCH_STATE")));
+                                        return;
+                                    }
+                                }
                                 return;
                             }
+                            Log.d(
+                                    "SAccessoryManager_SAccessoryManager",
+                                    "uEvent switch state is not related with usb auth or Factory"
+                                        + " binary");
+                        } catch (NumberFormatException unused) {
+                            boolean z2 = SAccessoryManager.DBG;
+                            Log.e(
+                                    "SAccessoryManager_SAccessoryManager",
+                                    "Could not parse switch state from event " + uEvent);
                         }
-                        return;
                     }
-                    Log.d("SAccessoryManager_SAccessoryManager", "uEvent switch state is not related with usb auth or Factory binary");
-                } catch (NumberFormatException unused) {
-                    boolean z2 = SAccessoryManager.DBG;
-                    Log.e("SAccessoryManager_SAccessoryManager", "Could not parse switch state from event " + uEvent);
-                }
-            }
-        };
+                };
         final int i = 0;
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(this) { // from class: com.samsung.accessory.manager.SAccessoryManager.4
-            public final /* synthetic */ SAccessoryManager this$0;
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver(
+                        this) { // from class: com.samsung.accessory.manager.SAccessoryManager.4
+                    public final /* synthetic */ SAccessoryManager this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            /* JADX WARN: Code restructure failed: missing block: B:29:0x00b1, code lost:
-            
-                if (r13 > com.android.server.backup.BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS) goto L34;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:51:0x00cc, code lost:
-            
-                if (r4.getAttachState() != false) goto L44;
-             */
-            /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Removed duplicated region for block: B:68:0x015c  */
-            /* JADX WARN: Removed duplicated region for block: B:76:0x0172  */
-            /* JADX WARN: Removed duplicated region for block: B:78:0x0179  */
-            /* JADX WARN: Removed duplicated region for block: B:95:0x0156 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-            /* JADX WARN: Type inference failed for: r4v8, types: [java.lang.StringBuilder] */
-            /* JADX WARN: Type inference failed for: r7v12 */
-            /* JADX WARN: Type inference failed for: r7v13, types: [int] */
-            /* JADX WARN: Type inference failed for: r7v16 */
-            /* JADX WARN: Type inference failed for: r7v2 */
-            /* JADX WARN: Type inference failed for: r7v3 */
-            /* JADX WARN: Type inference failed for: r7v5, types: [java.io.FileReader] */
-            /* JADX WARN: Type inference failed for: r7v7 */
-            /* JADX WARN: Type inference failed for: r7v8 */
-            /* JADX WARN: Type inference failed for: r7v9 */
-            @Override // android.content.BroadcastReceiver
-            /*
-                Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
-            */
-            public final void onReceive(android.content.Context r20, android.content.Intent r21) {
-                /*
-                    Method dump skipped, instructions count: 440
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.samsung.accessory.manager.SAccessoryManager.AnonymousClass4.onReceive(android.content.Context, android.content.Intent):void");
-            }
-        };
+                    /* JADX WARN: Code restructure failed: missing block: B:29:0x00b1, code lost:
+
+                       if (r13 > com.android.server.backup.BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS) goto L34;
+                    */
+                    /* JADX WARN: Code restructure failed: missing block: B:51:0x00cc, code lost:
+
+                       if (r4.getAttachState() != false) goto L44;
+                    */
+                    /* JADX WARN: Multi-variable type inference failed */
+                    /* JADX WARN: Removed duplicated region for block: B:68:0x015c  */
+                    /* JADX WARN: Removed duplicated region for block: B:76:0x0172  */
+                    /* JADX WARN: Removed duplicated region for block: B:78:0x0179  */
+                    /* JADX WARN: Removed duplicated region for block: B:95:0x0156 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+                    /* JADX WARN: Type inference failed for: r4v8, types: [java.lang.StringBuilder] */
+                    /* JADX WARN: Type inference failed for: r7v12 */
+                    /* JADX WARN: Type inference failed for: r7v13, types: [int] */
+                    /* JADX WARN: Type inference failed for: r7v16 */
+                    /* JADX WARN: Type inference failed for: r7v2 */
+                    /* JADX WARN: Type inference failed for: r7v3 */
+                    /* JADX WARN: Type inference failed for: r7v5, types: [java.io.FileReader] */
+                    /* JADX WARN: Type inference failed for: r7v7 */
+                    /* JADX WARN: Type inference failed for: r7v8 */
+                    /* JADX WARN: Type inference failed for: r7v9 */
+                    @Override // android.content.BroadcastReceiver
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                        To view partially-correct code enable 'Show inconsistent code' option in preferences
+                    */
+                    public final void onReceive(
+                            android.content.Context r20, android.content.Intent r21) {
+                        /*
+                            Method dump skipped, instructions count: 440
+                            To view this dump change 'Code comments level' option to 'DEBUG'
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.samsung.accessory.manager.SAccessoryManager.AnonymousClass4.onReceive(android.content.Context,"
+                                    + " android.content.Intent):void");
+                    }
+                };
         final int i2 = 1;
-        BroadcastReceiver broadcastReceiver2 = new BroadcastReceiver(this) { // from class: com.samsung.accessory.manager.SAccessoryManager.4
-            public final /* synthetic */ SAccessoryManager this$0;
+        BroadcastReceiver broadcastReceiver2 =
+                new BroadcastReceiver(
+                        this) { // from class: com.samsung.accessory.manager.SAccessoryManager.4
+                    public final /* synthetic */ SAccessoryManager this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                /*
-                    Method dump skipped, instructions count: 440
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.samsung.accessory.manager.SAccessoryManager.AnonymousClass4.onReceive(android.content.Context, android.content.Intent):void");
-            }
-        };
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        /*
+                            Method dump skipped, instructions count: 440
+                            To view this dump change 'Code comments level' option to 'DEBUG'
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.samsung.accessory.manager.SAccessoryManager.AnonymousClass4.onReceive(android.content.Context,"
+                                    + " android.content.Intent):void");
+                    }
+                };
         Log.i("SAccessoryManager_SAccessoryManager", "SAccessoryManager starting up");
         this.mContext = context;
-        PowerManager.WakeLock newWakeLock = ((PowerManager) context.getSystemService("power")).newWakeLock(1, "SAccessoryManager_SAccessoryManager");
+        PowerManager.WakeLock newWakeLock =
+                ((PowerManager) context.getSystemService("power"))
+                        .newWakeLock(1, "SAccessoryManager_SAccessoryManager");
         this.mWakeLock = newWakeLock;
         newWakeLock.setReferenceCounted(false);
         HandlerThread handlerThread = new HandlerThread("SAccessoryManager_SAccessoryManager");
@@ -475,23 +567,47 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
         }
         this.mIsFactory = FactoryTest.isFactoryBinary();
         if (DBG) {
-            context.registerReceiver(broadcastReceiver, new IntentFilter("com.samsung.accessory.authentication.action.TEST_AUTHENTICATION_REQUEST"));
+            context.registerReceiver(
+                    broadcastReceiver,
+                    new IntentFilter(
+                            "com.samsung.accessory.authentication.action.TEST_AUTHENTICATION_REQUEST"));
         }
-        context.registerReceiver(broadcastReceiver2, new IntentFilter("com.samsung.server.BatteryService.action.SEC_BATTERY_EVENT"));
+        context.registerReceiver(
+                broadcastReceiver2,
+                new IntentFilter("com.samsung.server.BatteryService.action.SEC_BATTERY_EVENT"));
         try {
             PackageManager packageManager = context.getPackageManager();
             if (packageManager != null) {
                 if (packageManager.hasSystemFeature("com.sec.feature.usb_authentication")) {
-                    arrayList.add(new UsbAuthenticator(context, handlerThread.getLooper(), anonymousClass1));
+                    arrayList.add(
+                            new UsbAuthenticator(
+                                    context, handlerThread.getLooper(), anonymousClass1));
                     uEventObserver.startObserving("DEVPATH=/devices/virtual/sec/ccic");
                 }
-                if (packageManager.hasSystemFeature("com.sec.feature.nfc_authentication") || packageManager.hasSystemFeature("com.sec.feature.nfc_authentication_cover")) {
-                    arrayList.add(new CoverAuthenticator(context, inputManagerService, handlerThread.getLooper(), anonymousClass1));
+                if (packageManager.hasSystemFeature("com.sec.feature.nfc_authentication")
+                        || packageManager.hasSystemFeature(
+                                "com.sec.feature.nfc_authentication_cover")) {
+                    arrayList.add(
+                            new CoverAuthenticator(
+                                    context,
+                                    inputManagerService,
+                                    handlerThread.getLooper(),
+                                    anonymousClass1));
                 }
-                if (packageManager.hasSystemFeature("com.sec.feature.wirelesscharger_authentication")) {
-                    arrayList.add(new WirelessChargerAuthenticator(context, handlerThread.getLooper(), anonymousClass1));
+                if (packageManager.hasSystemFeature(
+                        "com.sec.feature.wirelesscharger_authentication")) {
+                    arrayList.add(
+                            new WirelessChargerAuthenticator(
+                                    context, handlerThread.getLooper(), anonymousClass1));
                 }
-                Log.d("SAccessoryManager_SAccessoryManager", "feature check nfc: " + packageManager.hasSystemFeature("com.sec.feature.nfc_authentication") + ", usb: " + packageManager.hasSystemFeature("com.sec.feature.usb_authentication"));
+                Log.d(
+                        "SAccessoryManager_SAccessoryManager",
+                        "feature check nfc: "
+                                + packageManager.hasSystemFeature(
+                                        "com.sec.feature.nfc_authentication")
+                                + ", usb: "
+                                + packageManager.hasSystemFeature(
+                                        "com.sec.feature.usb_authentication"));
             }
         } catch (Throwable unused) {
             Log.e("SAccessoryManager_SAccessoryManager", "package manager error for check feature");
@@ -504,8 +620,13 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
         while (it.hasNext()) {
             LocalAuthenticator localAuthenticator = (LocalAuthenticator) it.next();
             if (localAuthenticator instanceof UsbAuthenticator) {
-                Log.d("SAccessoryManager_SAccessoryManager", "USB Type C attached, attached = " + i);
-                RCPManagerService$$ExternalSyntheticOutline0.m("SAccessoryManager_SAccessoryManager", new StringBuilder("USB State "), this.usbState);
+                Log.d(
+                        "SAccessoryManager_SAccessoryManager",
+                        "USB Type C attached, attached = " + i);
+                RCPManagerService$$ExternalSyntheticOutline0.m(
+                        "SAccessoryManager_SAccessoryManager",
+                        new StringBuilder("USB State "),
+                        this.usbState);
                 UsbAuthenticator usbAuthenticator = (UsbAuthenticator) localAuthenticator;
                 if (i == 200) {
                     if (!this.usbState) {
@@ -521,9 +642,15 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
     }
 
     @Override // com.samsung.accessory.manager.SAccessoryManagerInternal
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
-            printWriter.println("Permission Denial: can't dump SAccessoryManager from from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid() + " without permission android.permission.DUMP");
+            printWriter.println(
+                    "Permission Denial: can't dump SAccessoryManager from from pid="
+                            + Binder.getCallingPid()
+                            + ", uid="
+                            + Binder.getCallingUid()
+                            + " without permission android.permission.DUMP");
             return;
         }
         Iterator it = this.mLocalAuthenticator.iterator();
@@ -646,6 +773,9 @@ public final class SAccessoryManager extends SAccessoryManagerInternal implement
             monitor-exit(r1)     // Catch: java.lang.Throwable -> L67
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.accessory.manager.SAccessoryManager.handleAuthStartRequest(android.os.Message, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.accessory.manager.SAccessoryManager.handleAuthStartRequest(android.os.Message,"
+                    + " boolean):void");
     }
 }

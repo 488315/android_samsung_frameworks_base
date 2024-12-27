@@ -23,7 +23,10 @@ public class FilterFunction {
     public Frame execute(KeyValueMap inputMap) {
         int filterOutCount = this.mFilter.getNumberOfOutputs();
         if (filterOutCount > 1) {
-            throw new RuntimeException("Calling execute on filter " + this.mFilter + " with multiple outputs! Use executeMulti() instead!");
+            throw new RuntimeException(
+                    "Calling execute on filter "
+                            + this.mFilter
+                            + " with multiple outputs! Use executeMulti() instead!");
         }
         if (!this.mFilterIsSetup) {
             connectFilterOutputs();

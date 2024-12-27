@@ -2,12 +2,16 @@ package android.view;
 
 import android.os.IBinder;
 import android.util.ArrayMap;
-import java.util.Objects;
+
 import libcore.util.NativeAllocationRegistry;
+
+import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public abstract class SurfaceControlHdrLayerInfoListener {
-    private static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(SurfaceControlHdrLayerInfoListener.class.getClassLoader(), nGetDestructor());
+    private static final NativeAllocationRegistry sRegistry =
+            NativeAllocationRegistry.createMalloced(
+                    SurfaceControlHdrLayerInfoListener.class.getClassLoader(), nGetDestructor());
     private ArrayMap<IBinder, Runnable> mRegisteredListeners = new ArrayMap<>();
 
     private static native long nGetDestructor();

@@ -1,6 +1,7 @@
 package android.view.autofill;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;

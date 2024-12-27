@@ -1,7 +1,7 @@
 package com.android.server.power.stats;
 
 import android.os.BatteryConsumer;
-import com.android.server.power.stats.MultiStateStats;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -21,8 +21,8 @@ public final class AggregatedPowerStatsConfig {
     /* renamed from: com.android.server.power.stats.AggregatedPowerStatsConfig$1, reason: invalid class name */
     public final class AnonymousClass1 extends PowerStatsProcessor {
         @Override // com.android.server.power.stats.PowerStatsProcessor
-        public final void finish(PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {
-        }
+        public final void finish(
+                PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -49,11 +49,33 @@ public final class AggregatedPowerStatsConfig {
         }
 
         public final MultiStateStats.States[] getDeviceStateConfig() {
-            return new MultiStateStats.States[]{new MultiStateStats.States("pwr", isTracked(0, this.mTrackedDeviceStates), AggregatedPowerStatsConfig.STATE_LABELS_POWER), new MultiStateStats.States("scr", isTracked(1, this.mTrackedDeviceStates), AggregatedPowerStatsConfig.STATE_LABELS_SCREEN)};
+            return new MultiStateStats.States[] {
+                new MultiStateStats.States(
+                        "pwr",
+                        isTracked(0, this.mTrackedDeviceStates),
+                        AggregatedPowerStatsConfig.STATE_LABELS_POWER),
+                new MultiStateStats.States(
+                        "scr",
+                        isTracked(1, this.mTrackedDeviceStates),
+                        AggregatedPowerStatsConfig.STATE_LABELS_SCREEN)
+            };
         }
 
         public final MultiStateStats.States[] getUidStateConfig() {
-            return new MultiStateStats.States[]{new MultiStateStats.States("pwr", isTracked(0, this.mTrackedUidStates), AggregatedPowerStatsConfig.STATE_LABELS_POWER), new MultiStateStats.States("scr", isTracked(1, this.mTrackedUidStates), AggregatedPowerStatsConfig.STATE_LABELS_SCREEN), new MultiStateStats.States("ps", isTracked(2, this.mTrackedUidStates), AggregatedPowerStatsConfig.STATE_LABELS_PROCESS_STATE)};
+            return new MultiStateStats.States[] {
+                new MultiStateStats.States(
+                        "pwr",
+                        isTracked(0, this.mTrackedUidStates),
+                        AggregatedPowerStatsConfig.STATE_LABELS_POWER),
+                new MultiStateStats.States(
+                        "scr",
+                        isTracked(1, this.mTrackedUidStates),
+                        AggregatedPowerStatsConfig.STATE_LABELS_SCREEN),
+                new MultiStateStats.States(
+                        "ps",
+                        isTracked(2, this.mTrackedUidStates),
+                        AggregatedPowerStatsConfig.STATE_LABELS_PROCESS_STATE)
+            };
         }
 
         public final void trackDeviceStates(int... iArr) {

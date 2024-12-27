@@ -2,7 +2,7 @@ package android.telephony.mbms;
 
 import android.os.Binder;
 import android.os.RemoteException;
-import android.telephony.mbms.IStreamingServiceCallback;
+
 import java.util.concurrent.Executor;
 
 /* loaded from: classes4.dex */
@@ -11,7 +11,8 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
     private final Executor mExecutor;
     private volatile boolean mIsStopped = false;
 
-    public InternalStreamingServiceCallback(StreamingServiceCallback appCallback, Executor executor) {
+    public InternalStreamingServiceCallback(
+            StreamingServiceCallback appCallback, Executor executor) {
         this.mAppCallback = appCallback;
         this.mExecutor = executor;
     }
@@ -23,12 +24,15 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingServiceCallback.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalStreamingServiceCallback.this.mAppCallback.onError(errorCode, message);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalStreamingServiceCallback.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalStreamingServiceCallback.this.mAppCallback.onError(
+                                    errorCode, message);
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }
@@ -41,12 +45,15 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingServiceCallback.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalStreamingServiceCallback.this.mAppCallback.onStreamStateUpdated(state, reason);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalStreamingServiceCallback.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalStreamingServiceCallback.this.mAppCallback.onStreamStateUpdated(
+                                    state, reason);
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }
@@ -59,12 +66,15 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingServiceCallback.3
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalStreamingServiceCallback.this.mAppCallback.onMediaDescriptionUpdated();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalStreamingServiceCallback.3
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalStreamingServiceCallback.this.mAppCallback
+                                    .onMediaDescriptionUpdated();
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }
@@ -77,12 +87,15 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingServiceCallback.4
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalStreamingServiceCallback.this.mAppCallback.onBroadcastSignalStrengthUpdated(signalStrength);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalStreamingServiceCallback.4
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalStreamingServiceCallback.this.mAppCallback
+                                    .onBroadcastSignalStrengthUpdated(signalStrength);
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }
@@ -95,12 +108,15 @@ public class InternalStreamingServiceCallback extends IStreamingServiceCallback.
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingServiceCallback.5
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalStreamingServiceCallback.this.mAppCallback.onStreamMethodUpdated(methodType);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalStreamingServiceCallback.5
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalStreamingServiceCallback.this.mAppCallback
+                                    .onStreamMethodUpdated(methodType);
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }

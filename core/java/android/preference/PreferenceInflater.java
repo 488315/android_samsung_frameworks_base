@@ -3,10 +3,13 @@ package android.preference;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+
 import com.android.internal.util.XmlUtils;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 @Deprecated
 /* loaded from: classes3.dex */
@@ -21,7 +24,10 @@ class PreferenceInflater extends GenericInflater<Preference, PreferenceGroup> {
         init(preferenceManager);
     }
 
-    PreferenceInflater(GenericInflater<Preference, PreferenceGroup> original, PreferenceManager preferenceManager, Context newContext) {
+    PreferenceInflater(
+            GenericInflater<Preference, PreferenceGroup> original,
+            PreferenceManager preferenceManager,
+            Context newContext) {
         super(original, newContext);
         init(preferenceManager);
     }
@@ -38,7 +44,9 @@ class PreferenceInflater extends GenericInflater<Preference, PreferenceGroup> {
 
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.preference.GenericInflater
-    public boolean onCreateCustomFromTag(XmlPullParser parser, Preference parentPreference, AttributeSet attrs) throws XmlPullParserException {
+    public boolean onCreateCustomFromTag(
+            XmlPullParser parser, Preference parentPreference, AttributeSet attrs)
+            throws XmlPullParserException {
         String tag = parser.getName();
         if (tag.equals("intent")) {
             try {
@@ -54,7 +62,9 @@ class PreferenceInflater extends GenericInflater<Preference, PreferenceGroup> {
             }
         }
         if (tag.equals("extra")) {
-            getContext().getResources().parseBundleExtra("extra", attrs, parentPreference.getExtras());
+            getContext()
+                    .getResources()
+                    .parseBundleExtra("extra", attrs, parentPreference.getExtras());
             try {
                 XmlUtils.skipCurrentTag(parser);
                 return true;
@@ -69,7 +79,8 @@ class PreferenceInflater extends GenericInflater<Preference, PreferenceGroup> {
 
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.preference.GenericInflater
-    public PreferenceGroup onMergeRoots(PreferenceGroup givenRoot, boolean attachToGivenRoot, PreferenceGroup xmlRoot) {
+    public PreferenceGroup onMergeRoots(
+            PreferenceGroup givenRoot, boolean attachToGivenRoot, PreferenceGroup xmlRoot) {
         if (givenRoot == null) {
             xmlRoot.onAttachedToHierarchy(this.mPreferenceManager);
             return xmlRoot;

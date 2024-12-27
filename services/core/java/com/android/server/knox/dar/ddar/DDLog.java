@@ -3,8 +3,11 @@ package com.android.server.knox.dar.ddar;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.dar.ddar.proxy.IProxyAgentService;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,7 +29,8 @@ public abstract class DDLog {
     public final class CountingOutputStream extends FilterOutputStream {
         public long count;
 
-        @Override // java.io.FilterOutputStream, java.io.OutputStream, java.io.Closeable, java.lang.AutoCloseable
+        @Override // java.io.FilterOutputStream, java.io.OutputStream, java.io.Closeable,
+                  // java.lang.AutoCloseable
         public final synchronized void close() {
             ((FilterOutputStream) this).out.close();
         }
@@ -53,35 +57,43 @@ public abstract class DDLog {
         public CountingOutputStream cos = null;
         public OutputStreamWriter fos = null;
         public boolean loggerRunning = false;
-        public final AnonymousClass2 logWorker = new Thread() { // from class: com.android.server.knox.dar.ddar.DDLog.Logger.2
-            @Override // java.lang.Thread, java.lang.Runnable
-            public final void run() {
-                OutputStreamWriter outputStreamWriter;
-                Log.d("DualDAR:DDLog:Logger", "DDAR Logger started running");
-                while (true) {
-                    Logger logger = Logger.this;
-                    if (!logger.loggerRunning) {
-                        return;
-                    }
-                    try {
-                        if (((LinkedBlockingQueue) logger.storeQ).size() == 0 && (outputStreamWriter = Logger.this.fos) != null) {
-                            outputStreamWriter.flush();
+        public final AnonymousClass2 logWorker =
+                new Thread() { // from class: com.android.server.knox.dar.ddar.DDLog.Logger.2
+                    @Override // java.lang.Thread, java.lang.Runnable
+                    public final void run() {
+                        OutputStreamWriter outputStreamWriter;
+                        Log.d("DualDAR:DDLog:Logger", "DDAR Logger started running");
+                        while (true) {
+                            Logger logger = Logger.this;
+                            if (!logger.loggerRunning) {
+                                return;
+                            }
+                            try {
+                                if (((LinkedBlockingQueue) logger.storeQ).size() == 0
+                                        && (outputStreamWriter = Logger.this.fos) != null) {
+                                    outputStreamWriter.flush();
+                                }
+                                Logger.m631$$Nest$mrealStore(
+                                        Logger.this,
+                                        (String) ((LinkedBlockingQueue) Logger.this.storeQ).take());
+                            } catch (Exception e) {
+                                Log.w(
+                                        "DualDAR:DDLog:Logger",
+                                        "Caught exception in log worker: " + e);
+                                e.printStackTrace();
+                            }
                         }
-                        Logger.m631$$Nest$mrealStore(Logger.this, (String) ((LinkedBlockingQueue) Logger.this.storeQ).take());
-                    } catch (Exception e) {
-                        Log.w("DualDAR:DDLog:Logger", "Caught exception in log worker: " + e);
-                        e.printStackTrace();
                     }
-                }
-            }
-        };
+                };
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.knox.dar.ddar.DDLog$Logger$1, reason: invalid class name */
         public final class AnonymousClass1 implements FilenameFilter {
             @Override // java.io.FilenameFilter
             public final boolean accept(File file, String str) {
-                return str.startsWith("ddar_fw_log") && str.endsWith(".txt") && !str.equalsIgnoreCase("ddar_fw_log.txt");
+                return str.startsWith("ddar_fw_log")
+                        && str.endsWith(".txt")
+                        && !str.equalsIgnoreCase("ddar_fw_log.txt");
             }
         }
 
@@ -94,7 +106,8 @@ public abstract class DDLog {
                         if (logger.currentFile == null) {
                             logger.openCurrentFile();
                             if (logger.currentFile == null) {
-                                throw new IllegalStateException("No current file set in realStore!");
+                                throw new IllegalStateException(
+                                        "No current file set in realStore!");
                             }
                         }
                         CountingOutputStream countingOutputStream = logger.cos;
@@ -102,12 +115,18 @@ public abstract class DDLog {
                             j = countingOutputStream.count;
                         }
                         if (j > 4194304) {
-                            Log.d("DualDAR:DDLog:Logger", "File '" + logger.currentFile.getAbsolutePath() + "' is larger than 4194304 bytes. Rotating file.");
+                            Log.d(
+                                    "DualDAR:DDLog:Logger",
+                                    "File '"
+                                            + logger.currentFile.getAbsolutePath()
+                                            + "' is larger than 4194304 bytes. Rotating file.");
                             logger.roll();
                         }
                         logger.fos.write(str);
                     } catch (Exception e) {
-                        Log.e("DualDAR:DDLog:Logger", "Caught exception while writing to stream! " + e);
+                        Log.e(
+                                "DualDAR:DDLog:Logger",
+                                "Caught exception while writing to stream! " + e);
                         e.printStackTrace();
                     }
                 } catch (Throwable th) {
@@ -127,9 +146,15 @@ public abstract class DDLog {
             }
             if (logger.loggerRunning) {
                 try {
-                    logger.storeQ.add(new SimpleDateFormat("MM-dd HH:mm:ss.SSS").format((Object) new Date(System.currentTimeMillis())) + " " + str);
+                    logger.storeQ.add(
+                            new SimpleDateFormat("MM-dd HH:mm:ss.SSS")
+                                            .format((Object) new Date(System.currentTimeMillis()))
+                                    + " "
+                                    + str);
                 } catch (Exception e) {
-                    Log.e("DualDAR:DDLog:Logger", "Caught exception while adding to store queue! " + e);
+                    Log.e(
+                            "DualDAR:DDLog:Logger",
+                            "Caught exception while adding to store queue! " + e);
                     e.printStackTrace();
                 }
             }
@@ -139,19 +164,38 @@ public abstract class DDLog {
             File[] listFiles = this.storageDir.listFiles(new AnonymousClass1());
             for (int i = 0; i < listFiles.length; i++) {
                 if (!listFiles[i].delete()) {
-                    Log.w("DualDAR:DDLog:Logger", String.format("Failed to delete file: %s", listFiles[i]));
+                    Log.w(
+                            "DualDAR:DDLog:Logger",
+                            String.format("Failed to delete file: %s", listFiles[i]));
                 }
-                Log.d("DualDAR:DDLog:Logger", "Log File " + listFiles[i].getAbsolutePath() + "is removed as next backup log file is ready");
+                Log.d(
+                        "DualDAR:DDLog:Logger",
+                        "Log File "
+                                + listFiles[i].getAbsolutePath()
+                                + "is removed as next backup log file is ready");
             }
         }
 
         public final void moveCurrentToBackup() {
-            File file = new File(this.storageDir, XmlUtils$$ExternalSyntheticOutline0.m("ddar_fw_log", new SimpleDateFormat("-yyyy-MM-dd-HH-mm-ss").format(new Date()), ".txt"));
-            Log.d("DualDAR:DDLog:Logger", "Rename Log File " + this.currentFile.getAbsolutePath() + " to " + file.getAbsolutePath());
+            File file =
+                    new File(
+                            this.storageDir,
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    "ddar_fw_log",
+                                    new SimpleDateFormat("-yyyy-MM-dd-HH-mm-ss").format(new Date()),
+                                    ".txt"));
+            Log.d(
+                    "DualDAR:DDLog:Logger",
+                    "Rename Log File "
+                            + this.currentFile.getAbsolutePath()
+                            + " to "
+                            + file.getAbsolutePath());
             if (this.currentFile.renameTo(file)) {
                 return;
             }
-            Log.w("DualDAR:DDLog:Logger", String.format("Failed to renameTo file: %s to %s", this.currentFile, file));
+            Log.w(
+                    "DualDAR:DDLog:Logger",
+                    String.format("Failed to renameTo file: %s to %s", this.currentFile, file));
         }
 
         public final void openCurrentFile() {
@@ -160,8 +204,15 @@ public abstract class DDLog {
             if (!file.exists() && !this.currentFile.createNewFile()) {
                 throw new IOException("Cannot create file " + this.currentFile.getAbsolutePath());
             }
-            Log.d("DualDAR:DDLog:Logger", "Opened Existing or New Log file " + this.currentFile.getAbsolutePath() + " of length " + this.currentFile.length());
-            CountingOutputStream countingOutputStream = new CountingOutputStream(new BufferedOutputStream(new FileOutputStream(this.currentFile, true)));
+            Log.d(
+                    "DualDAR:DDLog:Logger",
+                    "Opened Existing or New Log file "
+                            + this.currentFile.getAbsolutePath()
+                            + " of length "
+                            + this.currentFile.length());
+            CountingOutputStream countingOutputStream =
+                    new CountingOutputStream(
+                            new BufferedOutputStream(new FileOutputStream(this.currentFile, true)));
             this.cos = countingOutputStream;
             long length = this.currentFile.length();
             synchronized (countingOutputStream) {
@@ -179,7 +230,9 @@ public abstract class DDLog {
                         this.fos.close();
                         this.fos = null;
                     } catch (IOException e) {
-                        Log.e("DualDAR:DDLog:Logger", "Caught exception while closing stream! " + e);
+                        Log.e(
+                                "DualDAR:DDLog:Logger",
+                                "Caught exception while closing stream! " + e);
                         e.printStackTrace();
                     }
                 }

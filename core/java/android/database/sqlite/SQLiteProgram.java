@@ -2,6 +2,7 @@ package android.database.sqlite;
 
 import android.database.DatabaseUtils;
 import android.os.CancellationSignal;
+
 import java.util.Arrays;
 
 /* loaded from: classes.dex */
@@ -14,7 +15,11 @@ public abstract class SQLiteProgram extends SQLiteClosable {
     private final boolean mReadOnly;
     private final String mSql;
 
-    SQLiteProgram(SQLiteDatabase db, String sql, Object[] bindArgs, CancellationSignal cancellationSignalForPrepare) {
+    SQLiteProgram(
+            SQLiteDatabase db,
+            String sql,
+            Object[] bindArgs,
+            CancellationSignal cancellationSignalForPrepare) {
         boolean z;
         this.mDatabase = db;
         this.mSql = sql.trim();
@@ -31,7 +36,12 @@ public abstract class SQLiteProgram extends SQLiteClosable {
                 boolean assumeReadOnly = n == 1;
                 try {
                     SQLiteStatementInfo info = new SQLiteStatementInfo();
-                    db.getThreadSession().prepare(this.mSql, db.getThreadDefaultConnectionFlags(assumeReadOnly), cancellationSignalForPrepare, info);
+                    db.getThreadSession()
+                            .prepare(
+                                    this.mSql,
+                                    db.getThreadDefaultConnectionFlags(assumeReadOnly),
+                                    cancellationSignalForPrepare,
+                                    info);
                     if (n != 7 && n != 8) {
                         z = info.readOnly;
                         this.mReadOnly = z;
@@ -50,7 +60,12 @@ public abstract class SQLiteProgram extends SQLiteClosable {
                 break;
         }
         if (bindArgs != null && bindArgs.length > this.mNumParameters) {
-            throw new IllegalArgumentException("Too many bind arguments.  " + bindArgs.length + " arguments were provided but the statement needs " + this.mNumParameters + " arguments.");
+            throw new IllegalArgumentException(
+                    "Too many bind arguments.  "
+                            + bindArgs.length
+                            + " arguments were provided but the statement needs "
+                            + this.mNumParameters
+                            + " arguments.");
         }
         if (this.mNumParameters != 0) {
             this.mBindArgs = new Object[this.mNumParameters];
@@ -61,7 +76,8 @@ public abstract class SQLiteProgram extends SQLiteClosable {
             this.mBindArgs = null;
         }
         if (n == 7) {
-            SQLitePragma.checkAndSetSpecialPragma(this.mDatabase, this.mSql, cancellationSignalForPrepare);
+            SQLitePragma.checkAndSetSpecialPragma(
+                    this.mDatabase, this.mSql, cancellationSignalForPrepare);
         }
     }
 
@@ -149,7 +165,12 @@ public abstract class SQLiteProgram extends SQLiteClosable {
 
     private void bind(int index, Object value) {
         if (index < 1 || index > this.mNumParameters) {
-            throw new IllegalArgumentException("Cannot bind argument at index " + index + " because the index is out of range.  The statement has " + this.mNumParameters + " parameters.");
+            throw new IllegalArgumentException(
+                    "Cannot bind argument at index "
+                            + index
+                            + " because the index is out of range.  The statement has "
+                            + this.mNumParameters
+                            + " parameters.");
         }
         this.mBindArgs[index - 1] = value;
     }

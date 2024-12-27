@@ -5,6 +5,7 @@ import android.os.Process;
 import android.os.SystemProperties;
 import android.util.Log;
 import android.util.Printer;
+
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
@@ -32,15 +33,19 @@ public final class SQLiteDebug {
         static {
             DEBUG_LOG_SLOW_QUERIES = Build.IS_DEBUGGABLE || Log.isLoggable("SQLiteSlowQueries", 2);
             SLOW_QUERY_THRESHOLD_UID_PROP = "db.log.slow_query_threshold." + Process.myUid();
-            DEBUG_LOG_DETAILED = Build.IS_DEBUGGABLE && SystemProperties.getBoolean("db.log.detailed", false);
+            DEBUG_LOG_DETAILED =
+                    Build.IS_DEBUGGABLE && SystemProperties.getBoolean("db.log.detailed", false);
         }
     }
 
-    private SQLiteDebug() {
-    }
+    private SQLiteDebug() {}
 
     public static boolean shouldLogSlowQuery(long elapsedTimeMillis) {
-        int slowQueryMillis = Math.min(SystemProperties.getInt("db.log.slow_query_threshold", Integer.MAX_VALUE), SystemProperties.getInt(NoPreloadHolder.SLOW_QUERY_THRESHOLD_UID_PROP, Integer.MAX_VALUE));
+        int slowQueryMillis =
+                Math.min(
+                        SystemProperties.getInt("db.log.slow_query_threshold", Integer.MAX_VALUE),
+                        SystemProperties.getInt(
+                                NoPreloadHolder.SLOW_QUERY_THRESHOLD_UID_PROP, Integer.MAX_VALUE));
         return elapsedTimeMillis >= ((long) slowQueryMillis);
     }
 
@@ -62,7 +67,15 @@ public final class SQLiteDebug {
         public int lookaside;
         public long pageSize;
 
-        public DbStats(String dbName, long pageCount, long pageSize, int lookaside, int hits, int misses, int cachesize, boolean arePoolStats) {
+        public DbStats(
+                String dbName,
+                long pageCount,
+                long pageSize,
+                int lookaside,
+                int hits,
+                int misses,
+                int cachesize,
+                boolean arePoolStats) {
             this.dbName = dbName;
             this.pageSize = pageSize / 1024;
             this.dbSize = (pageCount * pageSize) / 1024;

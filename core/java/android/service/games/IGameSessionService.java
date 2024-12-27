@@ -5,19 +5,28 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.games.IGameSessionController;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes3.dex */
 public interface IGameSessionService extends IInterface {
     public static final String DESCRIPTOR = "android.service.games.IGameSessionService";
 
-    void create(IGameSessionController iGameSessionController, CreateGameSessionRequest createGameSessionRequest, GameSessionViewHostConfiguration gameSessionViewHostConfiguration, AndroidFuture androidFuture) throws RemoteException;
+    void create(
+            IGameSessionController iGameSessionController,
+            CreateGameSessionRequest createGameSessionRequest,
+            GameSessionViewHostConfiguration gameSessionViewHostConfiguration,
+            AndroidFuture androidFuture)
+            throws RemoteException;
 
     public static class Default implements IGameSessionService {
         @Override // android.service.games.IGameSessionService
-        public void create(IGameSessionController gameSessionController, CreateGameSessionRequest createGameSessionRequest, GameSessionViewHostConfiguration gameSessionViewHostConfiguration, AndroidFuture createGameSessionResultFuture) throws RemoteException {
-        }
+        public void create(
+                IGameSessionController gameSessionController,
+                CreateGameSessionRequest createGameSessionRequest,
+                GameSessionViewHostConfiguration gameSessionViewHostConfiguration,
+                AndroidFuture createGameSessionResultFuture)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +34,7 @@ public interface IGameSessionService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGameSessionService {
+    public abstract static class Stub extends Binder implements IGameSessionService {
         static final int TRANSACTION_create = 1;
 
         public Stub() {
@@ -63,7 +72,8 @@ public interface IGameSessionService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGameSessionService.DESCRIPTOR);
             }
@@ -73,10 +83,16 @@ public interface IGameSessionService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IGameSessionController _arg0 = IGameSessionController.Stub.asInterface(data.readStrongBinder());
-                    CreateGameSessionRequest _arg1 = (CreateGameSessionRequest) data.readTypedObject(CreateGameSessionRequest.CREATOR);
-                    GameSessionViewHostConfiguration _arg2 = (GameSessionViewHostConfiguration) data.readTypedObject(GameSessionViewHostConfiguration.CREATOR);
-                    AndroidFuture _arg3 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    IGameSessionController _arg0 =
+                            IGameSessionController.Stub.asInterface(data.readStrongBinder());
+                    CreateGameSessionRequest _arg1 =
+                            (CreateGameSessionRequest)
+                                    data.readTypedObject(CreateGameSessionRequest.CREATOR);
+                    GameSessionViewHostConfiguration _arg2 =
+                            (GameSessionViewHostConfiguration)
+                                    data.readTypedObject(GameSessionViewHostConfiguration.CREATOR);
+                    AndroidFuture _arg3 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     create(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -102,7 +118,12 @@ public interface IGameSessionService extends IInterface {
             }
 
             @Override // android.service.games.IGameSessionService
-            public void create(IGameSessionController gameSessionController, CreateGameSessionRequest createGameSessionRequest, GameSessionViewHostConfiguration gameSessionViewHostConfiguration, AndroidFuture createGameSessionResultFuture) throws RemoteException {
+            public void create(
+                    IGameSessionController gameSessionController,
+                    CreateGameSessionRequest createGameSessionRequest,
+                    GameSessionViewHostConfiguration gameSessionViewHostConfiguration,
+                    AndroidFuture createGameSessionResultFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IGameSessionService.DESCRIPTOR);

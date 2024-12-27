@@ -3,6 +3,7 @@ package android.hardware.broadcastradio.V2_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,11 +25,23 @@ public final class Properties {
             return false;
         }
         Properties properties = (Properties) obj;
-        return HidlSupport.deepEquals(this.maker, properties.maker) && HidlSupport.deepEquals(this.product, properties.product) && HidlSupport.deepEquals(this.version, properties.version) && HidlSupport.deepEquals(this.serial, properties.serial) && HidlSupport.deepEquals(this.supportedIdentifierTypes, properties.supportedIdentifierTypes) && HidlSupport.deepEquals(this.vendorInfo, properties.vendorInfo);
+        return HidlSupport.deepEquals(this.maker, properties.maker)
+                && HidlSupport.deepEquals(this.product, properties.product)
+                && HidlSupport.deepEquals(this.version, properties.version)
+                && HidlSupport.deepEquals(this.serial, properties.serial)
+                && HidlSupport.deepEquals(
+                        this.supportedIdentifierTypes, properties.supportedIdentifierTypes)
+                && HidlSupport.deepEquals(this.vendorInfo, properties.vendorInfo);
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.maker)), Integer.valueOf(HidlSupport.deepHashCode(this.product)), Integer.valueOf(HidlSupport.deepHashCode(this.version)), Integer.valueOf(HidlSupport.deepHashCode(this.serial)), Integer.valueOf(HidlSupport.deepHashCode(this.supportedIdentifierTypes)), Integer.valueOf(HidlSupport.deepHashCode(this.vendorInfo)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.maker)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.product)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.version)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.serial)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.supportedIdentifierTypes)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.vendorInfo)));
     }
 
     public final void readFromParcel(HwParcel hwParcel) {
@@ -42,13 +55,15 @@ public final class Properties {
         this.serial = readBuffer.getString(48L);
         hwParcel.readEmbeddedBuffer(r0.getBytes().length + 1, readBuffer.handle(), 48L, false);
         int int32 = readBuffer.getInt32(72L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, readBuffer.handle(), 64L, true);
+        HwBlob readEmbeddedBuffer =
+                hwParcel.readEmbeddedBuffer(int32 * 4, readBuffer.handle(), 64L, true);
         this.supportedIdentifierTypes.clear();
         for (int i = 0; i < int32; i++) {
             this.supportedIdentifierTypes.add(Integer.valueOf(readEmbeddedBuffer.getInt32(i * 4)));
         }
         int int322 = readBuffer.getInt32(88L);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 32, readBuffer.handle(), 80L, true);
+        HwBlob readEmbeddedBuffer2 =
+                hwParcel.readEmbeddedBuffer(int322 * 32, readBuffer.handle(), 80L, true);
         this.vendorInfo.clear();
         for (int i2 = 0; i2 < int322; i2++) {
             VendorKeyValue vendorKeyValue = new VendorKeyValue();
@@ -58,6 +73,18 @@ public final class Properties {
     }
 
     public final String toString() {
-        return "{.maker = " + this.maker + ", .product = " + this.product + ", .version = " + this.version + ", .serial = " + this.serial + ", .supportedIdentifierTypes = " + this.supportedIdentifierTypes + ", .vendorInfo = " + this.vendorInfo + "}";
+        return "{.maker = "
+                + this.maker
+                + ", .product = "
+                + this.product
+                + ", .version = "
+                + this.version
+                + ", .serial = "
+                + this.serial
+                + ", .supportedIdentifierTypes = "
+                + this.supportedIdentifierTypes
+                + ", .vendorInfo = "
+                + this.vendorInfo
+                + "}";
     }
 }

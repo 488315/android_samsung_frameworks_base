@@ -21,6 +21,7 @@ import android.util.AtomicFile;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.util.Xml;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
@@ -31,6 +32,9 @@ import com.android.server.SystemService;
 import com.android.server.wm.ActivityTaskManagerInternal;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.PackageConfigurationUpdaterImpl;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -39,7 +43,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -54,30 +57,55 @@ public final class GrammaticalInflectionService extends SystemService {
     public final PermissionManager mPermissionManager;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class GrammaticalInflectionBinderService extends IGrammaticalInflectionManager.Stub {
-        public GrammaticalInflectionBinderService() {
-        }
+    public final class GrammaticalInflectionBinderService
+            extends IGrammaticalInflectionManager.Stub {
+        public GrammaticalInflectionBinderService() {}
 
         public final int getSystemGrammaticalGender(AttributionSource attributionSource, int i) {
-            if (GrammaticalInflectionUtils.checkSystemGrammaticalGenderPermission(GrammaticalInflectionService.this.mPermissionManager, attributionSource)) {
+            if (GrammaticalInflectionUtils.checkSystemGrammaticalGenderPermission(
+                    GrammaticalInflectionService.this.mPermissionManager, attributionSource)) {
                 if (GrammaticalInflectionService.checkSystemTermsOfAddressIsEnabled()) {
                     return GrammaticalInflectionService.this.getSystemGrammaticalGender(i);
                 }
                 return 0;
             }
-            throw new SecurityException("AttributionSource: " + attributionSource + " does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.");
+            throw new SecurityException(
+                    "AttributionSource: "
+                            + attributionSource
+                            + " does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.");
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-            GrammaticalInflectionService grammaticalInflectionService = GrammaticalInflectionService.this;
-            new GrammaticalInflectionShellCommand(grammaticalInflectionService.mBinderService, grammaticalInflectionService.mContext.getAttributionSource()).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+        public final void onShellCommand(
+                FileDescriptor fileDescriptor,
+                FileDescriptor fileDescriptor2,
+                FileDescriptor fileDescriptor3,
+                String[] strArr,
+                ShellCallback shellCallback,
+                ResultReceiver resultReceiver) {
+            GrammaticalInflectionService grammaticalInflectionService =
+                    GrammaticalInflectionService.this;
+            new GrammaticalInflectionShellCommand(
+                            grammaticalInflectionService.mBinderService,
+                            grammaticalInflectionService.mContext.getAttributionSource())
+                    .exec(
+                            this,
+                            fileDescriptor,
+                            fileDescriptor2,
+                            fileDescriptor3,
+                            strArr,
+                            shellCallback,
+                            resultReceiver);
         }
 
-        public final int peekSystemGrammaticalGenderByUserId(AttributionSource attributionSource, int i) {
-            GrammaticalInflectionService grammaticalInflectionService = GrammaticalInflectionService.this;
+        public final int peekSystemGrammaticalGenderByUserId(
+                AttributionSource attributionSource, int i) {
+            GrammaticalInflectionService grammaticalInflectionService =
+                    GrammaticalInflectionService.this;
             grammaticalInflectionService.getClass();
-            if (GrammaticalInflectionService.checkSystemTermsOfAddressIsEnabled() && GrammaticalInflectionUtils.checkSystemGrammaticalGenderPermission(grammaticalInflectionService.mPermissionManager, attributionSource)) {
+            if (GrammaticalInflectionService.checkSystemTermsOfAddressIsEnabled()
+                    && GrammaticalInflectionUtils.checkSystemGrammaticalGenderPermission(
+                            grammaticalInflectionService.mPermissionManager, attributionSource)) {
                 return GrammaticalInflectionService.this.getSystemGrammaticalGender(i);
             }
             return 0;
@@ -88,25 +116,28 @@ public final class GrammaticalInflectionService extends SystemService {
         }
 
         public final void setSystemWideGrammaticalGender(int i, int i2) {
-            GrammaticalInflectionService.m569$$Nest$menforceCallerPermissions(GrammaticalInflectionService.this);
+            GrammaticalInflectionService.m569$$Nest$menforceCallerPermissions(
+                    GrammaticalInflectionService.this);
             GrammaticalInflectionService.this.setSystemWideGrammaticalGender(i, i2);
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GrammaticalInflectionManagerInternalImpl {
-        public GrammaticalInflectionManagerInternalImpl() {
-        }
+        public GrammaticalInflectionManagerInternalImpl() {}
     }
 
     /* renamed from: -$$Nest$menforceCallerPermissions, reason: not valid java name */
-    public static void m569$$Nest$menforceCallerPermissions(GrammaticalInflectionService grammaticalInflectionService) {
+    public static void m569$$Nest$menforceCallerPermissions(
+            GrammaticalInflectionService grammaticalInflectionService) {
         grammaticalInflectionService.getClass();
         int callingUid = Binder.getCallingUid();
         if (callingUid == 1000 || callingUid == 2000 || callingUid == 0) {
             return;
         }
-        grammaticalInflectionService.mContext.enforceCallingOrSelfPermission("android.permission.CHANGE_CONFIGURATION", "Caller must be system, shell, root or hold CHANGE_CONFIGURATION permission.");
+        grammaticalInflectionService.mContext.enforceCallingOrSelfPermission(
+                "android.permission.CHANGE_CONFIGURATION",
+                "Caller must be system, shell, root or hold CHANGE_CONFIGURATION permission.");
     }
 
     public GrammaticalInflectionService(Context context) {
@@ -114,12 +145,17 @@ public final class GrammaticalInflectionService extends SystemService {
         this.mLock = new Object();
         this.mGrammaticalGenderCache = new SparseIntArray();
         this.mContext = context;
-        this.mActivityTaskManagerInternal = (ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class);
-        this.mPackageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        this.mActivityTaskManagerInternal =
+                (ActivityTaskManagerInternal)
+                        LocalServices.getService(ActivityTaskManagerInternal.class);
+        this.mPackageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
         context.getAttributionSource();
-        this.mBackupHelper = new GrammaticalInflectionBackupHelper(this, context.getPackageManager());
+        this.mBackupHelper =
+                new GrammaticalInflectionBackupHelper(this, context.getPackageManager());
         this.mBinderService = new GrammaticalInflectionBinderService();
-        this.mPermissionManager = (PermissionManager) context.getSystemService(PermissionManager.class);
+        this.mPermissionManager =
+                (PermissionManager) context.getSystemService(PermissionManager.class);
     }
 
     public static boolean checkSystemTermsOfAddressIsEnabled() {
@@ -148,7 +184,12 @@ public final class GrammaticalInflectionService extends SystemService {
             int grammaticalGender = configuration.getGrammaticalGender();
             configuration.setGrammaticalGender(i);
             ActivityTaskManager.getService().updateConfiguration(configuration);
-            FrameworkStatsLog.write(FrameworkStatsLog.SYSTEM_GRAMMATICAL_INFLECTION_CHANGED, 1, i2, i != 0, grammaticalGender != 0);
+            FrameworkStatsLog.write(
+                    FrameworkStatsLog.SYSTEM_GRAMMATICAL_INFLECTION_CHANGED,
+                    1,
+                    i2,
+                    i != 0,
+                    grammaticalGender != 0);
             Duration duration = GrammaticalInflectionBackupHelper.STAGE_DATA_RETENTION_PERIOD;
             BackupManager.dataChanged("android");
         } catch (RemoteException e) {
@@ -170,76 +211,124 @@ public final class GrammaticalInflectionService extends SystemService {
     @Override // com.android.server.SystemService
     public final void onStart() {
         publishBinderService("grammatical_inflection", this.mBinderService);
-        LocalServices.addService(GrammaticalInflectionManagerInternalImpl.class, new GrammaticalInflectionManagerInternalImpl());
+        LocalServices.addService(
+                GrammaticalInflectionManagerInternalImpl.class,
+                new GrammaticalInflectionManagerInternalImpl());
     }
 
     @Override // com.android.server.SystemService
     public final void onUserUnlocked(final SystemService.TargetUser targetUser) {
         if (checkSystemTermsOfAddressIsEnabled()) {
-            IoThread.getHandler().post(new Runnable() { // from class: com.android.server.grammaticalinflection.GrammaticalInflectionService$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    int i;
-                    GrammaticalInflectionService grammaticalInflectionService = GrammaticalInflectionService.this;
-                    SystemService.TargetUser targetUser2 = targetUser;
-                    grammaticalInflectionService.getClass();
-                    int userIdentifier = targetUser2.getUserIdentifier();
-                    File file = new File(new File(Environment.getDataSystemCeDirectory(userIdentifier), "grammatical_inflection"), "user_settings.xml");
-                    synchronized (grammaticalInflectionService.mLock) {
-                        try {
-                            if (!file.exists()) {
-                                Log.d("GrammaticalInflection", "User " + userIdentifier + " doesn't have the grammatical gender file.");
-                                return;
-                            }
-                            if (grammaticalInflectionService.mGrammaticalGenderCache.indexOfKey(userIdentifier) >= 0) {
-                                return;
-                            }
-                            try {
-                                FileInputStream fileInputStream = new FileInputStream(file);
-                                try {
-                                    TypedXmlPullParser resolvePullParser = Xml.resolvePullParser(fileInputStream);
-                                    XmlUtils.nextElement(resolvePullParser);
-                                    while (true) {
-                                        if (resolvePullParser.getEventType() == 1) {
-                                            i = 0;
-                                            break;
-                                        } else {
-                                            if ("grammatical_inflection".equals(resolvePullParser.getName())) {
-                                                i = resolvePullParser.getAttributeInt((String) null, "grammatical_gender");
-                                                break;
+            IoThread.getHandler()
+                    .post(
+                            new Runnable() { // from class:
+                                // com.android.server.grammaticalinflection.GrammaticalInflectionService$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    int i;
+                                    GrammaticalInflectionService grammaticalInflectionService =
+                                            GrammaticalInflectionService.this;
+                                    SystemService.TargetUser targetUser2 = targetUser;
+                                    grammaticalInflectionService.getClass();
+                                    int userIdentifier = targetUser2.getUserIdentifier();
+                                    File file =
+                                            new File(
+                                                    new File(
+                                                            Environment.getDataSystemCeDirectory(
+                                                                    userIdentifier),
+                                                            "grammatical_inflection"),
+                                                    "user_settings.xml");
+                                    synchronized (grammaticalInflectionService.mLock) {
+                                        try {
+                                            if (!file.exists()) {
+                                                Log.d(
+                                                        "GrammaticalInflection",
+                                                        "User "
+                                                                + userIdentifier
+                                                                + " doesn't have the grammatical"
+                                                                + " gender file.");
+                                                return;
                                             }
-                                            XmlUtils.nextElement(resolvePullParser);
+                                            if (grammaticalInflectionService.mGrammaticalGenderCache
+                                                            .indexOfKey(userIdentifier)
+                                                    >= 0) {
+                                                return;
+                                            }
+                                            try {
+                                                FileInputStream fileInputStream =
+                                                        new FileInputStream(file);
+                                                try {
+                                                    TypedXmlPullParser resolvePullParser =
+                                                            Xml.resolvePullParser(fileInputStream);
+                                                    XmlUtils.nextElement(resolvePullParser);
+                                                    while (true) {
+                                                        if (resolvePullParser.getEventType() == 1) {
+                                                            i = 0;
+                                                            break;
+                                                        } else {
+                                                            if ("grammatical_inflection"
+                                                                    .equals(
+                                                                            resolvePullParser
+                                                                                    .getName())) {
+                                                                i =
+                                                                        resolvePullParser
+                                                                                .getAttributeInt(
+                                                                                        (String)
+                                                                                                null,
+                                                                                        "grammatical_gender");
+                                                                break;
+                                                            }
+                                                            XmlUtils.nextElement(resolvePullParser);
+                                                        }
+                                                    }
+                                                    grammaticalInflectionService
+                                                            .mGrammaticalGenderCache.put(
+                                                            userIdentifier, i);
+                                                    fileInputStream.close();
+                                                    GrammaticalInflectionService
+                                                            .updateConfiguration(i, userIdentifier);
+                                                } catch (Throwable th) {
+                                                    try {
+                                                        fileInputStream.close();
+                                                    } catch (Throwable th2) {
+                                                        th.addSuppressed(th2);
+                                                    }
+                                                    throw th;
+                                                }
+                                            } catch (IOException | XmlPullParserException e) {
+                                                Log.e(
+                                                        "GrammaticalInflection",
+                                                        "Failed to parse XML configuration from "
+                                                                + file,
+                                                        e);
+                                            }
+                                        } finally {
                                         }
                                     }
-                                    grammaticalInflectionService.mGrammaticalGenderCache.put(userIdentifier, i);
-                                    fileInputStream.close();
-                                    GrammaticalInflectionService.updateConfiguration(i, userIdentifier);
-                                } catch (Throwable th) {
-                                    try {
-                                        fileInputStream.close();
-                                    } catch (Throwable th2) {
-                                        th.addSuppressed(th2);
-                                    }
-                                    throw th;
                                 }
-                            } catch (IOException | XmlPullParserException e) {
-                                Log.e("GrammaticalInflection", "Failed to parse XML configuration from " + file, e);
-                            }
-                        } finally {
-                        }
-                    }
-                }
-            });
+                            });
         }
     }
 
     public final void setRequestedApplicationGrammaticalGender(String str, int i, int i2) {
         Integer num;
-        ActivityTaskManagerInternal.PackageConfig findPackageConfiguration = ActivityTaskManagerService.this.mPackageConfigPersister.findPackageConfiguration(i, str);
-        int intValue = (findPackageConfiguration == null || (num = findPackageConfiguration.mGrammaticalGender) == null) ? 0 : num.intValue();
-        PackageConfigurationUpdaterImpl packageConfigurationUpdaterImpl = new PackageConfigurationUpdaterImpl(i, ActivityTaskManagerService.this, str);
+        ActivityTaskManagerInternal.PackageConfig findPackageConfiguration =
+                ActivityTaskManagerService.this.mPackageConfigPersister.findPackageConfiguration(
+                        i, str);
+        int intValue =
+                (findPackageConfiguration == null
+                                || (num = findPackageConfiguration.mGrammaticalGender) == null)
+                        ? 0
+                        : num.intValue();
+        PackageConfigurationUpdaterImpl packageConfigurationUpdaterImpl =
+                new PackageConfigurationUpdaterImpl(i, ActivityTaskManagerService.this, str);
         if (SystemProperties.getBoolean("i18n.grammatical_Inflection.enabled", true)) {
-            FrameworkStatsLog.write(FrameworkStatsLog.APPLICATION_GRAMMATICAL_INFLECTION_CHANGED, 2, this.mPackageManagerInternal.getPackageUid(str, 0L, i), i2 != 0, intValue != 0);
+            FrameworkStatsLog.write(
+                    FrameworkStatsLog.APPLICATION_GRAMMATICAL_INFLECTION_CHANGED,
+                    2,
+                    this.mPackageManagerInternal.getPackageUid(str, 0L, i),
+                    i2 != 0,
+                    intValue != 0);
             synchronized (packageConfigurationUpdaterImpl) {
                 packageConfigurationUpdaterImpl.mGrammaticalGender = i2;
             }
@@ -260,10 +349,16 @@ public final class GrammaticalInflectionService extends SystemService {
         try {
             if (checkSystemTermsOfAddressIsEnabled()) {
                 Trace.beginSection("GrammaticalInflectionService.setSystemWideGrammaticalGender");
-                if (!GrammaticalInflectionManager.VALID_GRAMMATICAL_GENDER_VALUES.contains(Integer.valueOf(i))) {
+                if (!GrammaticalInflectionManager.VALID_GRAMMATICAL_GENDER_VALUES.contains(
+                        Integer.valueOf(i))) {
                     throw new IllegalArgumentException("Unknown grammatical gender");
                 }
-                File file = new File(new File(Environment.getDataSystemCeDirectory(i2), "grammatical_inflection"), "user_settings.xml");
+                File file =
+                        new File(
+                                new File(
+                                        Environment.getDataSystemCeDirectory(i2),
+                                        "grammatical_inflection"),
+                                "user_settings.xml");
                 synchronized (this.mLock) {
                     AtomicFile atomicFile = new AtomicFile(file);
                     try {

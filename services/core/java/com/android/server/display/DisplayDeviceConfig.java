@@ -13,6 +13,7 @@ import android.util.MathUtils;
 import android.util.Slog;
 import android.util.Spline;
 import android.view.SurfaceControl;
+
 import com.android.internal.display.BrightnessSynchronizer;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -20,7 +21,6 @@ import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.HeapdumpWatcher$$ExternalSyntheticOutline0;
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.display.DensityMapping;
 import com.android.server.display.config.AutoBrightness;
 import com.android.server.display.config.AutoBrightnessSettingName;
 import com.android.server.display.config.BlockingZoneConfig;
@@ -56,6 +56,7 @@ import com.android.server.display.feature.DisplayManagerFlags;
 import com.android.server.display.utils.DebugUtils;
 import com.android.server.display.utils.DeviceConfigParsingUtils;
 import com.android.server.power.PowerManagerUtil;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -160,11 +161,14 @@ public final class DisplayDeviceConfig {
         public static final BrightnessLimitMapType DEFAULT;
 
         static {
-            BrightnessLimitMapType brightnessLimitMapType = new BrightnessLimitMapType("DEFAULT", 0);
+            BrightnessLimitMapType brightnessLimitMapType =
+                    new BrightnessLimitMapType("DEFAULT", 0);
             DEFAULT = brightnessLimitMapType;
-            BrightnessLimitMapType brightnessLimitMapType2 = new BrightnessLimitMapType("ADAPTIVE", 1);
+            BrightnessLimitMapType brightnessLimitMapType2 =
+                    new BrightnessLimitMapType("ADAPTIVE", 1);
             ADAPTIVE = brightnessLimitMapType2;
-            $VALUES = new BrightnessLimitMapType[]{brightnessLimitMapType, brightnessLimitMapType2};
+            $VALUES =
+                    new BrightnessLimitMapType[] {brightnessLimitMapType, brightnessLimitMapType2};
         }
 
         public static BrightnessLimitMapType valueOf(String str) {
@@ -187,7 +191,21 @@ public final class DisplayDeviceConfig {
         public float transitionPoint;
 
         public final String toString() {
-            return "HBM{minLux: " + this.minimumLux + ", transition: " + this.transitionPoint + ", timeWindow: " + this.timeWindowMillis + "ms, timeMax: " + this.timeMaxMillis + "ms, timeMin: " + this.timeMinMillis + "ms, allowInLowPowerMode: " + this.allowInLowPowerMode + ", minimumHdrPercentOfScreen: " + this.minimumHdrPercentOfScreen + "} ";
+            return "HBM{minLux: "
+                    + this.minimumLux
+                    + ", transition: "
+                    + this.transitionPoint
+                    + ", timeWindow: "
+                    + this.timeWindowMillis
+                    + "ms, timeMax: "
+                    + this.timeMaxMillis
+                    + "ms, timeMin: "
+                    + this.timeMinMillis
+                    + "ms, allowInLowPowerMode: "
+                    + this.allowInLowPowerMode
+                    + ", minimumHdrPercentOfScreen: "
+                    + this.minimumHdrPercentOfScreen
+                    + "} ";
         }
     }
 
@@ -202,7 +220,8 @@ public final class DisplayDeviceConfig {
         }
 
         public final String toString() {
-            StringBuilder sb = new StringBuilder("PowerThrottlingConfigData{brightnessLowestCapAllowed: ");
+            StringBuilder sb =
+                    new StringBuilder("PowerThrottlingConfigData{brightnessLowestCapAllowed: ");
             sb.append(this.brightnessLowestCapAllowed);
             sb.append(", pollingWindowMillis: ");
             return AmFmBandRange$$ExternalSyntheticOutline0.m(this.pollingWindowMillis, sb, "} ");
@@ -228,7 +247,8 @@ public final class DisplayDeviceConfig {
                     return false;
                 }
                 ThrottlingLevel throttlingLevel = (ThrottlingLevel) obj;
-                return throttlingLevel.thermalStatus == this.thermalStatus && throttlingLevel.powerQuotaMilliWatts == this.powerQuotaMilliWatts;
+                return throttlingLevel.thermalStatus == this.thermalStatus
+                        && throttlingLevel.powerQuotaMilliWatts == this.powerQuotaMilliWatts;
             }
 
             public final int hashCode() {
@@ -245,13 +265,18 @@ public final class DisplayDeviceConfig {
             Iterator it = list.iterator();
             while (it.hasNext()) {
                 ThrottlingLevel throttlingLevel = (ThrottlingLevel) it.next();
-                this.throttlingLevels.add(new ThrottlingLevel(throttlingLevel.powerQuotaMilliWatts, throttlingLevel.thermalStatus));
+                this.throttlingLevels.add(
+                        new ThrottlingLevel(
+                                throttlingLevel.powerQuotaMilliWatts,
+                                throttlingLevel.thermalStatus));
             }
         }
 
         public static PowerThrottlingData create(List list) {
             if (list == null || list.size() == 0) {
-                Slog.e("DisplayDeviceConfig", "PowerThrottlingData received null or empty throttling levels");
+                Slog.e(
+                        "DisplayDeviceConfig",
+                        "PowerThrottlingData received null or empty throttling levels");
                 return null;
             }
             ThrottlingLevel throttlingLevel = (ThrottlingLevel) list.get(0);
@@ -260,16 +285,26 @@ public final class DisplayDeviceConfig {
             while (i < size) {
                 ThrottlingLevel throttlingLevel2 = (ThrottlingLevel) list.get(i);
                 if (throttlingLevel2.thermalStatus <= throttlingLevel.thermalStatus) {
-                    StringBuilder sb = new StringBuilder("powerThrottlingMap must be strictly increasing, ignoring configuration. ThermalStatus ");
+                    StringBuilder sb =
+                            new StringBuilder(
+                                    "powerThrottlingMap must be strictly increasing, ignoring"
+                                        + " configuration. ThermalStatus ");
                     sb.append(throttlingLevel2.thermalStatus);
                     sb.append(" <= ");
-                    VaultKeeperService$$ExternalSyntheticOutline0.m(sb, throttlingLevel.thermalStatus, "DisplayDeviceConfig");
+                    VaultKeeperService$$ExternalSyntheticOutline0.m(
+                            sb, throttlingLevel.thermalStatus, "DisplayDeviceConfig");
                     return null;
                 }
                 float f = throttlingLevel2.powerQuotaMilliWatts;
                 float f2 = throttlingLevel.powerQuotaMilliWatts;
                 if (f >= f2) {
-                    Slog.e("DisplayDeviceConfig", "powerThrottlingMap must be strictly decreasing, ignoring configuration. powerQuotaMilliWatts " + f + " >= " + f2);
+                    Slog.e(
+                            "DisplayDeviceConfig",
+                            "powerThrottlingMap must be strictly decreasing, ignoring"
+                                + " configuration. powerQuotaMilliWatts "
+                                    + f
+                                    + " >= "
+                                    + f2);
                     return null;
                 }
                 i++;
@@ -285,7 +320,8 @@ public final class DisplayDeviceConfig {
             if (!(obj instanceof PowerThrottlingData)) {
                 return false;
             }
-            return ((ArrayList) this.throttlingLevels).equals(((PowerThrottlingData) obj).throttlingLevels);
+            return ((ArrayList) this.throttlingLevels)
+                    .equals(((PowerThrottlingData) obj).throttlingLevels);
         }
 
         public final int hashCode() {
@@ -316,7 +352,8 @@ public final class DisplayDeviceConfig {
                     return false;
                 }
                 ThrottlingLevel throttlingLevel = (ThrottlingLevel) obj;
-                return throttlingLevel.thermalStatus == this.thermalStatus && throttlingLevel.brightness == this.brightness;
+                return throttlingLevel.thermalStatus == this.thermalStatus
+                        && throttlingLevel.brightness == this.brightness;
             }
 
             public final int hashCode() {
@@ -333,13 +370,17 @@ public final class DisplayDeviceConfig {
             Iterator it = list.iterator();
             while (it.hasNext()) {
                 ThrottlingLevel throttlingLevel = (ThrottlingLevel) it.next();
-                this.throttlingLevels.add(new ThrottlingLevel(throttlingLevel.brightness, throttlingLevel.thermalStatus));
+                this.throttlingLevels.add(
+                        new ThrottlingLevel(
+                                throttlingLevel.brightness, throttlingLevel.thermalStatus));
             }
         }
 
         public static ThermalBrightnessThrottlingData create(List list) {
             if (list == null || list.size() == 0) {
-                Slog.e("DisplayDeviceConfig", "BrightnessThrottlingData received null or empty throttling levels");
+                Slog.e(
+                        "DisplayDeviceConfig",
+                        "BrightnessThrottlingData received null or empty throttling levels");
                 return null;
             }
             ThrottlingLevel throttlingLevel = (ThrottlingLevel) list.get(0);
@@ -348,16 +389,26 @@ public final class DisplayDeviceConfig {
             while (i < size) {
                 ThrottlingLevel throttlingLevel2 = (ThrottlingLevel) list.get(i);
                 if (throttlingLevel2.thermalStatus <= throttlingLevel.thermalStatus) {
-                    StringBuilder sb = new StringBuilder("brightnessThrottlingMap must be strictly increasing, ignoring configuration. ThermalStatus ");
+                    StringBuilder sb =
+                            new StringBuilder(
+                                    "brightnessThrottlingMap must be strictly increasing, ignoring"
+                                        + " configuration. ThermalStatus ");
                     sb.append(throttlingLevel2.thermalStatus);
                     sb.append(" <= ");
-                    VaultKeeperService$$ExternalSyntheticOutline0.m(sb, throttlingLevel.thermalStatus, "DisplayDeviceConfig");
+                    VaultKeeperService$$ExternalSyntheticOutline0.m(
+                            sb, throttlingLevel.thermalStatus, "DisplayDeviceConfig");
                     return null;
                 }
                 float f = throttlingLevel.brightness;
                 float f2 = throttlingLevel2.brightness;
                 if (f2 >= f) {
-                    Slog.e("DisplayDeviceConfig", "brightnessThrottlingMap must be strictly decreasing, ignoring configuration. Brightness " + f2 + " >= " + f2);
+                    Slog.e(
+                            "DisplayDeviceConfig",
+                            "brightnessThrottlingMap must be strictly decreasing, ignoring"
+                                + " configuration. Brightness "
+                                    + f2
+                                    + " >= "
+                                    + f2);
                     return null;
                 }
                 i++;
@@ -367,7 +418,12 @@ public final class DisplayDeviceConfig {
             while (it.hasNext()) {
                 ThrottlingLevel throttlingLevel3 = (ThrottlingLevel) it.next();
                 if (throttlingLevel3.brightness > 1.0f) {
-                    Slog.e("DisplayDeviceConfig", "brightnessThrottlingMap contains a brightness value exceeding system max. Brightness " + throttlingLevel3.brightness + " > 1.0");
+                    Slog.e(
+                            "DisplayDeviceConfig",
+                            "brightnessThrottlingMap contains a brightness value exceeding system"
+                                + " max. Brightness "
+                                    + throttlingLevel3.brightness
+                                    + " > 1.0");
                     return null;
                 }
             }
@@ -381,7 +437,8 @@ public final class DisplayDeviceConfig {
             if (!(obj instanceof ThermalBrightnessThrottlingData)) {
                 return false;
             }
-            return ((ArrayList) this.throttlingLevels).equals(((ThermalBrightnessThrottlingData) obj).throttlingLevels);
+            return ((ArrayList) this.throttlingLevels)
+                    .equals(((ThermalBrightnessThrottlingData) obj).throttlingLevels);
         }
 
         public final int hashCode() {
@@ -389,7 +446,9 @@ public final class DisplayDeviceConfig {
         }
 
         public final String toString() {
-            return "ThermalBrightnessThrottlingData{throttlingLevels:" + this.throttlingLevels + "} ";
+            return "ThermalBrightnessThrottlingData{throttlingLevels:"
+                    + this.throttlingLevels
+                    + "} ";
         }
     }
 
@@ -397,13 +456,35 @@ public final class DisplayDeviceConfig {
         float[] fArr = HysteresisLevels.DEFAULT_SCREEN_THRESHOLD_LEVELS;
         float[] fArr2 = HysteresisLevels.DEFAULT_SCREEN_BRIGHTENING_THRESHOLDS;
         float[] fArr3 = HysteresisLevels.DEFAULT_SCREEN_DARKENING_THRESHOLDS;
-        this.mScreenBrightnessHysteresis = HysteresisLevels.createHysteresisLevels(null, 17236307, 17236302, 17236306, fArr, fArr2, fArr3, true);
-        this.mScreenBrightnessIdleHysteresis = HysteresisLevels.createHysteresisLevels(null, 17236307, 17236302, 17236306, fArr, fArr2, fArr3, true);
+        this.mScreenBrightnessHysteresis =
+                HysteresisLevels.createHysteresisLevels(
+                        null, 17236307, 17236302, 17236306, fArr, fArr2, fArr3, true);
+        this.mScreenBrightnessIdleHysteresis =
+                HysteresisLevels.createHysteresisLevels(
+                        null, 17236307, 17236302, 17236306, fArr, fArr2, fArr3, true);
         float[] fArr4 = HysteresisLevels.DEFAULT_AMBIENT_THRESHOLD_LEVELS;
         float[] fArr5 = HysteresisLevels.DEFAULT_AMBIENT_BRIGHTENING_THRESHOLDS;
         float[] fArr6 = HysteresisLevels.DEFAULT_AMBIENT_DARKENING_THRESHOLDS;
-        this.mAmbientBrightnessHysteresis = HysteresisLevels.createHysteresisLevels(null, R.array.config_mainBuiltInDisplayCutoutSideOverride, R.array.config_longPressVibePattern, R.array.config_lteDbmThresholds, fArr4, fArr5, fArr6, false);
-        this.mAmbientBrightnessIdleHysteresis = HysteresisLevels.createHysteresisLevels(null, R.array.config_mainBuiltInDisplayCutoutSideOverride, R.array.config_longPressVibePattern, R.array.config_lteDbmThresholds, fArr4, fArr5, fArr6, false);
+        this.mAmbientBrightnessHysteresis =
+                HysteresisLevels.createHysteresisLevels(
+                        null,
+                        R.array.config_mainBuiltInDisplayCutoutSideOverride,
+                        R.array.config_longPressVibePattern,
+                        R.array.config_lteDbmThresholds,
+                        fArr4,
+                        fArr5,
+                        fArr6,
+                        false);
+        this.mAmbientBrightnessIdleHysteresis =
+                HysteresisLevels.createHysteresisLevels(
+                        null,
+                        R.array.config_mainBuiltInDisplayCutoutSideOverride,
+                        R.array.config_longPressVibePattern,
+                        R.array.config_lteDbmThresholds,
+                        fArr4,
+                        fArr5,
+                        fArr6,
+                        false);
         this.mAmbientBrightnessThresholdsTouchHigh = null;
         this.mAmbientBrightnessThresholdsTouchLow = null;
         this.mIsHighBrightnessModeEnabled = false;
@@ -461,8 +542,10 @@ public final class DisplayDeviceConfig {
         return 0;
     }
 
-    public static DisplayDeviceConfig getConfigFromPmValues(Context context, DisplayManagerFlags displayManagerFlags) {
-        DisplayDeviceConfig displayDeviceConfig = new DisplayDeviceConfig(context, displayManagerFlags);
+    public static DisplayDeviceConfig getConfigFromPmValues(
+            Context context, DisplayManagerFlags displayManagerFlags) {
+        DisplayDeviceConfig displayDeviceConfig =
+                new DisplayDeviceConfig(context, displayManagerFlags);
         displayDeviceConfig.mLoadedFrom = "Static values";
         displayDeviceConfig.mBacklightMinimum = FullScreenMagnificationGestureHandler.MAX_SCALE;
         displayDeviceConfig.mBacklightMaximum = 1.0f;
@@ -483,7 +566,15 @@ public final class DisplayDeviceConfig {
         displayDeviceConfig.mBrightnessToBacklightSpline = Spline.createSpline(fArr, fArr);
         displayDeviceConfig.mBacklightToBrightnessSpline = Spline.createSpline(fArr, fArr);
         displayDeviceConfig.mIsSimpleMappingStrategy = true;
-        displayDeviceConfig.mAmbientLightSensor = new SensorData(displayDeviceConfig.mContext.getResources().getString(R.string.display_rotation_camera_compat_toast_in_multi_window), "");
+        displayDeviceConfig.mAmbientLightSensor =
+                new SensorData(
+                        displayDeviceConfig
+                                .mContext
+                                .getResources()
+                                .getString(
+                                        R.string
+                                                .display_rotation_camera_compat_toast_in_multi_window),
+                        "");
         displayDeviceConfig.mProximitySensor = new SensorData();
         displayDeviceConfig.mTempSensor = new SensorData("SKIN", null);
         displayDeviceConfig.loadAutoBrightnessAvailableFromConfigXml();
@@ -590,52 +681,102 @@ public final class DisplayDeviceConfig {
                 break;
             }
             float[] fArr2 = this.mBacklight;
-            fArr[i] = MathUtils.map(fArr2[0], fArr2[fArr2.length - 1], this.mBacklightMinimum, this.mBacklightMaximum, fArr2[i]);
+            fArr[i] =
+                    MathUtils.map(
+                            fArr2[0],
+                            fArr2[fArr2.length - 1],
+                            this.mBacklightMinimum,
+                            this.mBacklightMaximum,
+                            fArr2[i]);
             i++;
         }
-        this.mBrightnessToBacklightSpline = this.mInterpolationType == 1 ? Spline.createLinearSpline(fArr, this.mBacklight) : Spline.createSpline(fArr, this.mBacklight);
-        this.mBacklightToBrightnessSpline = this.mInterpolationType == 1 ? Spline.createLinearSpline(this.mBacklight, this.mBrightness) : Spline.createSpline(this.mBacklight, this.mBrightness);
-        this.mBacklightToNitsSpline = this.mInterpolationType == 1 ? Spline.createLinearSpline(this.mBacklight, this.mNits) : Spline.createSpline(this.mBacklight, this.mNits);
-        this.mNitsToBacklightSpline = this.mInterpolationType == 1 ? Spline.createLinearSpline(this.mNits, this.mBacklight) : Spline.createSpline(this.mNits, this.mBacklight);
+        this.mBrightnessToBacklightSpline =
+                this.mInterpolationType == 1
+                        ? Spline.createLinearSpline(fArr, this.mBacklight)
+                        : Spline.createSpline(fArr, this.mBacklight);
+        this.mBacklightToBrightnessSpline =
+                this.mInterpolationType == 1
+                        ? Spline.createLinearSpline(this.mBacklight, this.mBrightness)
+                        : Spline.createSpline(this.mBacklight, this.mBrightness);
+        this.mBacklightToNitsSpline =
+                this.mInterpolationType == 1
+                        ? Spline.createLinearSpline(this.mBacklight, this.mNits)
+                        : Spline.createSpline(this.mBacklight, this.mNits);
+        this.mNitsToBacklightSpline =
+                this.mInterpolationType == 1
+                        ? Spline.createLinearSpline(this.mNits, this.mBacklight)
+                        : Spline.createSpline(this.mNits, this.mBacklight);
     }
 
     public final float[] getAutoBrightnessBrighteningLevels(int i, int i2) {
-        DisplayBrightnessMappingConfig displayBrightnessMappingConfig = this.mDisplayBrightnessMapping;
+        DisplayBrightnessMappingConfig displayBrightnessMappingConfig =
+                this.mDisplayBrightnessMapping;
         if (displayBrightnessMappingConfig == null) {
             return null;
         }
-        float[] fArr = (float[]) ((HashMap) displayBrightnessMappingConfig.mBrightnessLevelsMap).get(DisplayBrightnessMappingConfig.autoBrightnessModeToString(i) + "_" + DisplayBrightnessMappingConfig.autoBrightnessPresetToString(i2));
+        float[] fArr =
+                (float[])
+                        ((HashMap) displayBrightnessMappingConfig.mBrightnessLevelsMap)
+                                .get(
+                                        DisplayBrightnessMappingConfig.autoBrightnessModeToString(i)
+                                                + "_"
+                                                + DisplayBrightnessMappingConfig
+                                                        .autoBrightnessPresetToString(i2));
         if (fArr != null) {
             return fArr;
         }
-        return (float[]) ((HashMap) displayBrightnessMappingConfig.mBrightnessLevelsMap).get(DisplayBrightnessMappingConfig.autoBrightnessModeToString(i) + "_" + AutoBrightnessSettingName.normal.getRawName());
+        return (float[])
+                ((HashMap) displayBrightnessMappingConfig.mBrightnessLevelsMap)
+                        .get(
+                                DisplayBrightnessMappingConfig.autoBrightnessModeToString(i)
+                                        + "_"
+                                        + AutoBrightnessSettingName.normal.getRawName());
     }
 
     public final float[] getAutoBrightnessBrighteningLevelsLux(int i, int i2) {
-        DisplayBrightnessMappingConfig displayBrightnessMappingConfig = this.mDisplayBrightnessMapping;
+        DisplayBrightnessMappingConfig displayBrightnessMappingConfig =
+                this.mDisplayBrightnessMapping;
         if (displayBrightnessMappingConfig == null) {
             return null;
         }
-        float[] fArr = (float[]) ((HashMap) displayBrightnessMappingConfig.mBrightnessLevelsLuxMap).get(DisplayBrightnessMappingConfig.autoBrightnessModeToString(i) + "_" + DisplayBrightnessMappingConfig.autoBrightnessPresetToString(i2));
+        float[] fArr =
+                (float[])
+                        ((HashMap) displayBrightnessMappingConfig.mBrightnessLevelsLuxMap)
+                                .get(
+                                        DisplayBrightnessMappingConfig.autoBrightnessModeToString(i)
+                                                + "_"
+                                                + DisplayBrightnessMappingConfig
+                                                        .autoBrightnessPresetToString(i2));
         if (fArr != null) {
             return fArr;
         }
-        return (float[]) ((HashMap) displayBrightnessMappingConfig.mBrightnessLevelsLuxMap).get(DisplayBrightnessMappingConfig.autoBrightnessModeToString(i) + "_" + AutoBrightnessSettingName.normal.getRawName());
+        return (float[])
+                ((HashMap) displayBrightnessMappingConfig.mBrightnessLevelsLuxMap)
+                        .get(
+                                DisplayBrightnessMappingConfig.autoBrightnessModeToString(i)
+                                        + "_"
+                                        + AutoBrightnessSettingName.normal.getRawName());
     }
 
     public float[] getBacklight() {
         EvenDimmerBrightnessData evenDimmerBrightnessData = this.mEvenDimmerBrightnessData;
-        return evenDimmerBrightnessData != null ? evenDimmerBrightnessData.mBacklight : this.mBacklight;
+        return evenDimmerBrightnessData != null
+                ? evenDimmerBrightnessData.mBacklight
+                : this.mBacklight;
     }
 
     public final float getBacklightFromNits(float f) {
         EvenDimmerBrightnessData evenDimmerBrightnessData = this.mEvenDimmerBrightnessData;
-        return evenDimmerBrightnessData != null ? evenDimmerBrightnessData.mNitsToBacklight.interpolate(f) : this.mNitsToBacklightSpline.interpolate(f);
+        return evenDimmerBrightnessData != null
+                ? evenDimmerBrightnessData.mNitsToBacklight.interpolate(f)
+                : this.mNitsToBacklightSpline.interpolate(f);
     }
 
     public final float getBrightnessFromBacklight(float f) {
         EvenDimmerBrightnessData evenDimmerBrightnessData = this.mEvenDimmerBrightnessData;
-        return evenDimmerBrightnessData != null ? evenDimmerBrightnessData.mBacklightToBrightness.interpolate(f) : this.mBacklightToBrightnessSpline.interpolate(f);
+        return evenDimmerBrightnessData != null
+                ? evenDimmerBrightnessData.mBacklightToBrightness.interpolate(f)
+                : this.mBacklightToBrightnessSpline.interpolate(f);
     }
 
     public final float getHdrBrightnessFromSdr(float f) {
@@ -643,27 +784,50 @@ public final class DisplayDeviceConfig {
             return -1.0f;
         }
         EvenDimmerBrightnessData evenDimmerBrightnessData = this.mEvenDimmerBrightnessData;
-        float interpolate = evenDimmerBrightnessData != null ? evenDimmerBrightnessData.mBrightnessToBacklight.interpolate(f) : this.mBrightnessToBacklightSpline.interpolate(f);
+        float interpolate =
+                evenDimmerBrightnessData != null
+                        ? evenDimmerBrightnessData.mBrightnessToBacklight.interpolate(f)
+                        : this.mBrightnessToBacklightSpline.interpolate(f);
         float nitsFromBacklight = getNitsFromBacklight(interpolate);
         if (nitsFromBacklight == -1.0f) {
             return -1.0f;
         }
         float interpolate2 = this.mSdrToHdrSpline.interpolate(nitsFromBacklight);
         EvenDimmerBrightnessData evenDimmerBrightnessData2 = this.mEvenDimmerBrightnessData;
-        if ((evenDimmerBrightnessData2 != null ? evenDimmerBrightnessData2.mNitsToBacklight : this.mNitsToBacklightSpline) == null) {
+        if ((evenDimmerBrightnessData2 != null
+                        ? evenDimmerBrightnessData2.mNitsToBacklight
+                        : this.mNitsToBacklightSpline)
+                == null) {
             return -1.0f;
         }
-        float max = Math.max(this.mBacklightMinimum, Math.min(this.mBacklightMaximum, getBacklightFromNits(interpolate2)));
+        float max =
+                Math.max(
+                        this.mBacklightMinimum,
+                        Math.min(this.mBacklightMaximum, getBacklightFromNits(interpolate2)));
         float brightnessFromBacklight = getBrightnessFromBacklight(max);
         if (DEBUG) {
-            Slog.d("DisplayDeviceConfig", "getHdrBrightnessFromSdr: sdr brightness " + f + " backlight " + interpolate + " nits " + nitsFromBacklight + " hdrNits " + interpolate2 + " hdrBacklight " + max + " hdrBrightness " + brightnessFromBacklight);
+            Slog.d(
+                    "DisplayDeviceConfig",
+                    "getHdrBrightnessFromSdr: sdr brightness "
+                            + f
+                            + " backlight "
+                            + interpolate
+                            + " nits "
+                            + nitsFromBacklight
+                            + " hdrNits "
+                            + interpolate2
+                            + " hdrBacklight "
+                            + max
+                            + " hdrBrightness "
+                            + brightnessFromBacklight);
         }
         return brightnessFromBacklight;
     }
 
     public final HighBrightnessModeData getHighBrightnessModeData() {
         HighBrightnessModeData highBrightnessModeData;
-        if (!this.mIsHighBrightnessModeEnabled || (highBrightnessModeData = this.mHbmData) == null) {
+        if (!this.mIsHighBrightnessModeEnabled
+                || (highBrightnessModeData = this.mHbmData) == null) {
             return null;
         }
         HighBrightnessModeData highBrightnessModeData2 = new HighBrightnessModeData();
@@ -673,7 +837,8 @@ public final class DisplayDeviceConfig {
         highBrightnessModeData2.timeMinMillis = highBrightnessModeData.timeMinMillis;
         highBrightnessModeData2.transitionPoint = highBrightnessModeData.transitionPoint;
         highBrightnessModeData2.allowInLowPowerMode = highBrightnessModeData.allowInLowPowerMode;
-        highBrightnessModeData2.minimumHdrPercentOfScreen = highBrightnessModeData.minimumHdrPercentOfScreen;
+        highBrightnessModeData2.minimumHdrPercentOfScreen =
+                highBrightnessModeData.minimumHdrPercentOfScreen;
         return highBrightnessModeData2;
     }
 
@@ -683,7 +848,8 @@ public final class DisplayDeviceConfig {
             if (evenDimmerBrightnessData.mBacklightToNits == null) {
                 return -1.0f;
             }
-            return this.mEvenDimmerBrightnessData.mBacklightToNits.interpolate(Math.max(f, this.mBacklightMinimum));
+            return this.mEvenDimmerBrightnessData.mBacklightToNits.interpolate(
+                    Math.max(f, this.mBacklightMinimum));
         }
         if (this.mBacklightToNitsSpline != null) {
             return this.mBacklightToNitsSpline.interpolate(Math.max(f, this.mBacklightMinimum));
@@ -716,14 +882,22 @@ public final class DisplayDeviceConfig {
             Method dump skipped, instructions count: 471
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.DisplayDeviceConfig.initFromFile(java.io.File):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.DisplayDeviceConfig.initFromFile(java.io.File):boolean");
     }
 
     public final void loadAutoBrightnessAvailableFromConfigXml() {
         if (this.mIsCoverDisplay) {
-            this.mAutoBrightnessAvailable = this.mContext.getResources().getBoolean(R.bool.config_defaultAdasGnssLocationEnabled);
+            this.mAutoBrightnessAvailable =
+                    this.mContext
+                            .getResources()
+                            .getBoolean(R.bool.config_defaultAdasGnssLocationEnabled);
         } else {
-            this.mAutoBrightnessAvailable = this.mContext.getResources().getBoolean(R.bool.config_batterySaverStickyBehaviourDisabled);
+            this.mAutoBrightnessAvailable =
+                    this.mContext
+                            .getResources()
+                            .getBoolean(R.bool.config_batterySaverStickyBehaviourDisabled);
         }
     }
 
@@ -733,54 +907,116 @@ public final class DisplayDeviceConfig {
         BigInteger bigInteger3;
         BigInteger bigInteger4;
         AutoBrightness autoBrightness = displayConfiguration.autoBrightness;
-        if (autoBrightness == null || (bigInteger4 = autoBrightness.brighteningLightDebounceMillis) == null) {
-            this.mAutoBrightnessBrighteningLightDebounce = this.mContext.getResources().getInteger(R.integer.config_burnInProtectionMaxRadius);
+        if (autoBrightness == null
+                || (bigInteger4 = autoBrightness.brighteningLightDebounceMillis) == null) {
+            this.mAutoBrightnessBrighteningLightDebounce =
+                    this.mContext
+                            .getResources()
+                            .getInteger(R.integer.config_burnInProtectionMaxRadius);
         } else {
             this.mAutoBrightnessBrighteningLightDebounce = bigInteger4.intValue();
         }
-        if (autoBrightness == null || (bigInteger3 = autoBrightness.darkeningLightDebounceMillis) == null) {
-            this.mAutoBrightnessDarkeningLightDebounce = this.mContext.getResources().getInteger(R.integer.config_burnInProtectionMaxVerticalOffset);
+        if (autoBrightness == null
+                || (bigInteger3 = autoBrightness.darkeningLightDebounceMillis) == null) {
+            this.mAutoBrightnessDarkeningLightDebounce =
+                    this.mContext
+                            .getResources()
+                            .getInteger(R.integer.config_burnInProtectionMaxVerticalOffset);
         } else {
             this.mAutoBrightnessDarkeningLightDebounce = bigInteger3.intValue();
         }
-        if (autoBrightness == null || (bigInteger2 = autoBrightness.brighteningLightDebounceIdleMillis) == null) {
-            this.mAutoBrightnessBrighteningLightDebounceIdle = this.mAutoBrightnessBrighteningLightDebounce;
+        if (autoBrightness == null
+                || (bigInteger2 = autoBrightness.brighteningLightDebounceIdleMillis) == null) {
+            this.mAutoBrightnessBrighteningLightDebounceIdle =
+                    this.mAutoBrightnessBrighteningLightDebounce;
         } else {
             this.mAutoBrightnessBrighteningLightDebounceIdle = bigInteger2.intValue();
         }
-        if (autoBrightness == null || (bigInteger = autoBrightness.darkeningLightDebounceIdleMillis) == null) {
-            this.mAutoBrightnessDarkeningLightDebounceIdle = this.mAutoBrightnessDarkeningLightDebounce;
+        if (autoBrightness == null
+                || (bigInteger = autoBrightness.darkeningLightDebounceIdleMillis) == null) {
+            this.mAutoBrightnessDarkeningLightDebounceIdle =
+                    this.mAutoBrightnessDarkeningLightDebounce;
         } else {
             this.mAutoBrightnessDarkeningLightDebounceIdle = bigInteger.intValue();
         }
         Context context = this.mContext;
         EvenDimmerBrightnessData evenDimmerBrightnessData = this.mEvenDimmerBrightnessData;
-        this.mDisplayBrightnessMapping = new DisplayBrightnessMappingConfig(context, this.mFlags, autoBrightness, evenDimmerBrightnessData != null ? evenDimmerBrightnessData.mBacklightToBrightness : this.mBacklightToBrightnessSpline);
+        this.mDisplayBrightnessMapping =
+                new DisplayBrightnessMappingConfig(
+                        context,
+                        this.mFlags,
+                        autoBrightness,
+                        evenDimmerBrightnessData != null
+                                ? evenDimmerBrightnessData.mBacklightToBrightness
+                                : this.mBacklightToBrightnessSpline);
         this.mDdcAutoBrightnessAvailable = true;
         if (autoBrightness != null) {
             Boolean bool = autoBrightness.enabled;
             this.mDdcAutoBrightnessAvailable = bool == null ? false : bool.booleanValue();
         }
-        this.mAutoBrightnessAvailable = this.mContext.getResources().getBoolean(R.bool.config_batterySaverStickyBehaviourDisabled) && this.mDdcAutoBrightnessAvailable;
+        this.mAutoBrightnessAvailable =
+                this.mContext
+                                .getResources()
+                                .getBoolean(R.bool.config_batterySaverStickyBehaviourDisabled)
+                        && this.mDdcAutoBrightnessAvailable;
     }
 
     public final void loadBrightnessChangeThresholds() {
         Resources resources = this.mContext.getResources();
         this.mScreenBrightnessHysteresis = null;
         this.mScreenBrightnessIdleHysteresis = null;
-        this.mAmbientBrightnessHysteresis = SecHysteresisLevels.loadAmbientBrightnessConfig(resources);
-        this.mAmbientBrightnessIdleHysteresis = SecHysteresisLevels.loadAmbientBrightnessConfig(resources);
+        this.mAmbientBrightnessHysteresis =
+                SecHysteresisLevels.loadAmbientBrightnessConfig(resources);
+        this.mAmbientBrightnessIdleHysteresis =
+                SecHysteresisLevels.loadAmbientBrightnessConfig(resources);
         if (PowerManagerUtil.SEC_LIGHT_SENSOR_BLOCKING_PREVENTION_MULTI) {
-            this.mAmbientBrightnessThresholdsTouchHigh = resources != null ? new SecHysteresisLevels(resources.getIntArray(R.array.config_face_acquire_vendor_biometricprompt_ignorelist), resources.getIntArray(R.array.config_face_acquire_vendor_enroll_ignorelist), resources.getIntArray(R.array.config_foldedDeviceStates), resources.getIntArray(R.array.config_fontManagerServiceCerts)) : null;
-            this.mAmbientBrightnessThresholdsTouchLow = resources != null ? new SecHysteresisLevels(resources.getIntArray(R.array.config_face_acquire_vendor_biometricprompt_ignorelist), resources.getIntArray(R.array.config_face_acquire_vendor_enroll_ignorelist), resources.getIntArray(R.array.config_forceQueryablePackages), resources.getIntArray(R.array.config_forceSlowJpegModeList)) : null;
+            this.mAmbientBrightnessThresholdsTouchHigh =
+                    resources != null
+                            ? new SecHysteresisLevels(
+                                    resources.getIntArray(
+                                            R.array
+                                                    .config_face_acquire_vendor_biometricprompt_ignorelist),
+                                    resources.getIntArray(
+                                            R.array.config_face_acquire_vendor_enroll_ignorelist),
+                                    resources.getIntArray(R.array.config_foldedDeviceStates),
+                                    resources.getIntArray(R.array.config_fontManagerServiceCerts))
+                            : null;
+            this.mAmbientBrightnessThresholdsTouchLow =
+                    resources != null
+                            ? new SecHysteresisLevels(
+                                    resources.getIntArray(
+                                            R.array
+                                                    .config_face_acquire_vendor_biometricprompt_ignorelist),
+                                    resources.getIntArray(
+                                            R.array.config_face_acquire_vendor_enroll_ignorelist),
+                                    resources.getIntArray(R.array.config_forceQueryablePackages),
+                                    resources.getIntArray(R.array.config_forceSlowJpegModeList))
+                            : null;
         }
     }
 
     public final void loadBrightnessConstraintsFromConfigXml() {
-        float f = this.mContext.getResources().getFloat(R.dimen.conversation_badge_protrusion_group_expanded_face_pile);
-        float max = Math.max(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT, Resources.getSystem().getInteger(!this.mIsCoverDisplay ? R.integer.config_vibratorControlServiceDumpSizeLimit : R.integer.config_defaultPowerStatsThrottlePeriodWifi)) / 255.0f;
+        float f =
+                this.mContext
+                        .getResources()
+                        .getFloat(R.dimen.conversation_badge_protrusion_group_expanded_face_pile);
+        float max =
+                Math.max(
+                                IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT,
+                                Resources.getSystem()
+                                        .getInteger(
+                                                !this.mIsCoverDisplay
+                                                        ? R.integer
+                                                                .config_vibratorControlServiceDumpSizeLimit
+                                                        : R.integer
+                                                                .config_defaultPowerStatsThrottlePeriodWifi))
+                        / 255.0f;
         if (f == -2.0f || max == -2.0f) {
-            this.mBacklightMinimum = BrightnessSynchronizer.brightnessIntToFloat(this.mContext.getResources().getInteger(R.integer.config_wakeUpToLastStateTimeoutMillis));
+            this.mBacklightMinimum =
+                    BrightnessSynchronizer.brightnessIntToFloat(
+                            this.mContext
+                                    .getResources()
+                                    .getInteger(R.integer.config_wakeUpToLastStateTimeoutMillis));
             this.mBacklightMaximum = max;
         } else {
             this.mBacklightMinimum = f;
@@ -791,7 +1027,13 @@ public final class DisplayDeviceConfig {
     public final void loadBrightnessDefaultFromConfigXml() {
         float f = this.mContext.getResources().getFloat(R.dimen.conversation_badge_protrusion);
         if (f == -2.0f) {
-            this.mBrightnessDefault = BrightnessSynchronizer.brightnessIntToFloat(this.mContext.getResources().getInteger(R.integer.config_wait_for_datagram_sending_response_timeout_millis));
+            this.mBrightnessDefault =
+                    BrightnessSynchronizer.brightnessIntToFloat(
+                            this.mContext
+                                    .getResources()
+                                    .getInteger(
+                                            R.integer
+                                                    .config_wait_for_datagram_sending_response_timeout_millis));
         } else {
             this.mBrightnessDefault = f;
         }
@@ -899,12 +1141,15 @@ public final class DisplayDeviceConfig {
             r8.constrainNitsAndBacklightArrays()
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.DisplayDeviceConfig.loadBrightnessMap(com.android.server.display.config.DisplayConfiguration):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.DisplayDeviceConfig.loadBrightnessMap(com.android.server.display.config.DisplayConfiguration):void");
     }
 
     public final void loadBrightnessMapFromConfigXml() {
         Resources resources = this.mContext.getResources();
-        float[] floatArray = BrightnessMappingStrategy.getFloatArray(resources.obtainTypedArray(17236304));
+        float[] floatArray =
+                BrightnessMappingStrategy.getFloatArray(resources.obtainTypedArray(17236304));
         int[] intArray = resources.getIntArray(17236303);
         int length = intArray.length;
         float[] fArr = new float[length];
@@ -914,7 +1159,9 @@ public final class DisplayDeviceConfig {
         if (length == 0 || floatArray.length == 0) {
             this.mNits = null;
             this.mBacklight = null;
-            float[] fArr2 = {FullScreenMagnificationGestureHandler.MAX_SCALE, this.mBacklightMaximum};
+            float[] fArr2 = {
+                FullScreenMagnificationGestureHandler.MAX_SCALE, this.mBacklightMaximum
+            };
             this.mBrightnessToBacklightSpline = Spline.createSpline(fArr2, fArr2);
             this.mBacklightToBrightnessSpline = Spline.createSpline(fArr2, fArr2);
             this.mIsSimpleMappingStrategy = true;
@@ -923,11 +1170,18 @@ public final class DisplayDeviceConfig {
         StringBuilder sb = new StringBuilder("backlight min=");
         sb.append(intArray[0]);
         sb.append(" backlight max=");
-        DeviceIdleController$$ExternalSyntheticOutline0.m(sb, intArray[intArray.length - 1], "DisplayDeviceConfig");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                sb, intArray[intArray.length - 1], "DisplayDeviceConfig");
         this.mRawNits = floatArray;
         this.mRawBacklight = fArr;
-        if (BrightnessSynchronizer.floatEquals(fArr[0], this.mBacklightMinimum) && this.mRawBacklight[0] != this.mBacklightMinimum) {
-            Slog.d("DisplayDeviceConfig", "adjust backlight min boundary : " + this.mRawBacklight[0] + " " + this.mBacklightMinimum);
+        if (BrightnessSynchronizer.floatEquals(fArr[0], this.mBacklightMinimum)
+                && this.mRawBacklight[0] != this.mBacklightMinimum) {
+            Slog.d(
+                    "DisplayDeviceConfig",
+                    "adjust backlight min boundary : "
+                            + this.mRawBacklight[0]
+                            + " "
+                            + this.mBacklightMinimum);
             this.mRawBacklight[0] = this.mBacklightMinimum;
         }
         float[] fArr3 = this.mRawBacklight;
@@ -952,9 +1206,18 @@ public final class DisplayDeviceConfig {
         BigDecimal bigDecimal2 = displayConfiguration.screenBrightnessRampFastIncrease;
         BigDecimal bigDecimal3 = displayConfiguration.screenBrightnessRampSlowDecrease;
         BigDecimal bigDecimal4 = displayConfiguration.screenBrightnessRampSlowIncrease;
-        if (bigDecimal == null || bigDecimal2 == null || bigDecimal3 == null || bigDecimal4 == null) {
-            if (bigDecimal != null || bigDecimal2 != null || bigDecimal3 != null || bigDecimal4 != null) {
-                Slog.w("DisplayDeviceConfig", "Per display brightness ramp values ignored because not all values are present in display device config");
+        if (bigDecimal == null
+                || bigDecimal2 == null
+                || bigDecimal3 == null
+                || bigDecimal4 == null) {
+            if (bigDecimal != null
+                    || bigDecimal2 != null
+                    || bigDecimal3 != null
+                    || bigDecimal4 != null) {
+                Slog.w(
+                        "DisplayDeviceConfig",
+                        "Per display brightness ramp values ignored because not all values are"
+                            + " present in display device config");
             }
             loadBrightnessRampsFromConfigXml();
         } else {
@@ -973,7 +1236,10 @@ public final class DisplayDeviceConfig {
         BigDecimal bigDecimal6 = displayConfiguration.screenBrightnessRampSlowIncreaseIdle;
         if (bigDecimal5 == null || bigDecimal6 == null) {
             if (bigDecimal5 != null || bigDecimal6 != null) {
-                Slog.w("DisplayDeviceConfig", "Per display idle brightness ramp values ignored because not all values are present in display device config");
+                Slog.w(
+                        "DisplayDeviceConfig",
+                        "Per display idle brightness ramp values ignored because not all values are"
+                            + " present in display device config");
             }
             this.mBrightnessRampSlowDecreaseIdle = this.mBrightnessRampSlowDecrease;
             this.mBrightnessRampSlowIncreaseIdle = this.mBrightnessRampSlowIncrease;
@@ -994,15 +1260,24 @@ public final class DisplayDeviceConfig {
     }
 
     public final void loadBrightnessRampsFromConfigXml() {
-        this.mBrightnessRampFastIncrease = BrightnessSynchronizer.brightnessIntToFloat(this.mContext.getResources().getInteger(R.integer.config_defaultDisplayDefaultColorMode));
-        float brightnessIntToFloat = BrightnessSynchronizer.brightnessIntToFloat(this.mContext.getResources().getInteger(R.integer.config_defaultHapticFeedbackIntensity));
+        this.mBrightnessRampFastIncrease =
+                BrightnessSynchronizer.brightnessIntToFloat(
+                        this.mContext
+                                .getResources()
+                                .getInteger(R.integer.config_defaultDisplayDefaultColorMode));
+        float brightnessIntToFloat =
+                BrightnessSynchronizer.brightnessIntToFloat(
+                        this.mContext
+                                .getResources()
+                                .getInteger(R.integer.config_defaultHapticFeedbackIntensity));
         this.mBrightnessRampSlowIncrease = brightnessIntToFloat;
         this.mBrightnessRampFastDecrease = this.mBrightnessRampFastIncrease;
         this.mBrightnessRampSlowDecrease = brightnessIntToFloat;
     }
 
     public final void loadDensityMapping(DisplayConfiguration displayConfiguration) {
-        com.android.server.display.config.DensityMapping densityMapping = displayConfiguration.densityMapping;
+        com.android.server.display.config.DensityMapping densityMapping =
+                displayConfiguration.densityMapping;
         if (densityMapping == null) {
             return;
         }
@@ -1013,7 +1288,11 @@ public final class DisplayDeviceConfig {
         DensityMapping.Entry[] entryArr = new DensityMapping.Entry[arrayList.size()];
         for (int i = 0; i < arrayList.size(); i++) {
             Density density = (Density) arrayList.get(i);
-            entryArr[i] = new DensityMapping.Entry(density.width.intValue(), density.height.intValue(), density.density.intValue());
+            entryArr[i] =
+                    new DensityMapping.Entry(
+                            density.width.intValue(),
+                            density.height.intValue(),
+                            density.density.intValue());
         }
         this.mDensityMapping = new DensityMapping(entryArr);
     }
@@ -1031,7 +1310,11 @@ public final class DisplayDeviceConfig {
         highBrightnessModeData.minimumLux = highBrightnessMode.minimumLux_all.floatValue();
         float floatValue = highBrightnessMode.transitionPoint_all.floatValue();
         if (floatValue >= this.mBacklightMaximum) {
-            throw new IllegalArgumentException("HBM transition point invalid. " + this.mHbmData.transitionPoint + " is not less than " + this.mBacklightMaximum);
+            throw new IllegalArgumentException(
+                    "HBM transition point invalid. "
+                            + this.mHbmData.transitionPoint
+                            + " is not less than "
+                            + this.mBacklightMaximum);
         }
         this.mHbmData.transitionPoint = getBrightnessFromBacklight(floatValue);
         HbmTiming hbmTiming = highBrightnessMode.timing_all;
@@ -1043,14 +1326,22 @@ public final class DisplayDeviceConfig {
         highBrightnessModeData2.allowInLowPowerMode = bool2 != null ? bool2.booleanValue() : false;
         RefreshRateRange refreshRateRange = highBrightnessMode.refreshRate_all;
         if (refreshRateRange != null) {
-            ((ArrayList) this.mRefreshRateLimitations).add(new DisplayManagerInternal.RefreshRateLimitation(1, refreshRateRange.minimum.floatValue(), refreshRateRange.maximum.floatValue()));
+            ((ArrayList) this.mRefreshRateLimitations)
+                    .add(
+                            new DisplayManagerInternal.RefreshRateLimitation(
+                                    1,
+                                    refreshRateRange.minimum.floatValue(),
+                                    refreshRateRange.maximum.floatValue()));
         }
         BigDecimal bigDecimal = highBrightnessMode.minimumHdrPercentOfScreen_all;
         if (bigDecimal != null) {
             this.mHbmData.minimumHdrPercentOfScreen = bigDecimal.floatValue();
             float f = this.mHbmData.minimumHdrPercentOfScreen;
             if (f > 1.0f || f < FullScreenMagnificationGestureHandler.MAX_SCALE) {
-                Slog.w("DisplayDeviceConfig", "Invalid minimum HDR percent of screen: " + String.valueOf(this.mHbmData.minimumHdrPercentOfScreen));
+                Slog.w(
+                        "DisplayDeviceConfig",
+                        "Invalid minimum HDR percent of screen: "
+                                + String.valueOf(this.mHbmData.minimumHdrPercentOfScreen));
                 this.mHbmData.minimumHdrPercentOfScreen = 0.5f;
             }
         } else {
@@ -1063,7 +1354,10 @@ public final class DisplayDeviceConfig {
         boolean z = this.mBacklightMaximum > 1.0f;
         this.mIsHighBrightnessModeEnabled = z;
         if (z) {
-            float integer = this.mContext.getResources().getInteger(R.integer.config_burnInProtectionMinHorizontalOffset);
+            float integer =
+                    this.mContext
+                            .getResources()
+                            .getInteger(R.integer.config_burnInProtectionMinHorizontalOffset);
             HighBrightnessModeData highBrightnessModeData = new HighBrightnessModeData();
             highBrightnessModeData.minimumLux = integer;
             highBrightnessModeData.transitionPoint = 1.0f;
@@ -1077,12 +1371,18 @@ public final class DisplayDeviceConfig {
         }
     }
 
-    public final void loadIdleScreenRefreshRateTimeoutConfigs(DisplayConfiguration displayConfiguration) {
+    public final void loadIdleScreenRefreshRateTimeoutConfigs(
+            DisplayConfiguration displayConfiguration) {
         IdleScreenRefreshRateTimeout idleScreenRefreshRateTimeout;
-        if (!this.mFlags.mIdleScreenRefreshRateTimeout.isEnabled() || displayConfiguration == null || (idleScreenRefreshRateTimeout = displayConfiguration.idleScreenRefreshRateTimeout) == null) {
+        if (!this.mFlags.mIdleScreenRefreshRateTimeout.isEnabled()
+                || displayConfiguration == null
+                || (idleScreenRefreshRateTimeout =
+                                displayConfiguration.idleScreenRefreshRateTimeout)
+                        == null) {
             return;
         }
-        IdleScreenRefreshRateTimeoutLuxThresholds idleScreenRefreshRateTimeoutLuxThresholds = idleScreenRefreshRateTimeout.luxThresholds;
+        IdleScreenRefreshRateTimeoutLuxThresholds idleScreenRefreshRateTimeoutLuxThresholds =
+                idleScreenRefreshRateTimeout.luxThresholds;
         if (idleScreenRefreshRateTimeoutLuxThresholds != null) {
             if (idleScreenRefreshRateTimeoutLuxThresholds.point == null) {
                 idleScreenRefreshRateTimeoutLuxThresholds.point = new ArrayList();
@@ -1090,53 +1390,90 @@ public final class DisplayDeviceConfig {
             Iterator it = ((ArrayList) idleScreenRefreshRateTimeoutLuxThresholds.point).iterator();
             int i = -1;
             while (it.hasNext()) {
-                IdleScreenRefreshRateTimeoutLuxThresholdPoint idleScreenRefreshRateTimeoutLuxThresholdPoint = (IdleScreenRefreshRateTimeoutLuxThresholdPoint) it.next();
+                IdleScreenRefreshRateTimeoutLuxThresholdPoint
+                        idleScreenRefreshRateTimeoutLuxThresholdPoint =
+                                (IdleScreenRefreshRateTimeoutLuxThresholdPoint) it.next();
                 int intValue = idleScreenRefreshRateTimeoutLuxThresholdPoint.lux.intValue();
                 if (i >= intValue) {
-                    throw new RuntimeException("Lux values should be in ascending order in the idle screen refresh rate timeout config");
+                    throw new RuntimeException(
+                            "Lux values should be in ascending order in the idle screen refresh"
+                                + " rate timeout config");
                 }
                 if (idleScreenRefreshRateTimeoutLuxThresholdPoint.timeout.intValue() < 0) {
-                    throw new RuntimeException("The timeout value cannot be negative in idle screen refresh rate timeout config");
+                    throw new RuntimeException(
+                            "The timeout value cannot be negative in idle screen refresh rate"
+                                + " timeout config");
                 }
                 i = intValue;
             }
         }
-        IdleScreenRefreshRateTimeoutLuxThresholds idleScreenRefreshRateTimeoutLuxThresholds2 = displayConfiguration.idleScreenRefreshRateTimeout.luxThresholds;
+        IdleScreenRefreshRateTimeoutLuxThresholds idleScreenRefreshRateTimeoutLuxThresholds2 =
+                displayConfiguration.idleScreenRefreshRateTimeout.luxThresholds;
         if (idleScreenRefreshRateTimeoutLuxThresholds2.point == null) {
             idleScreenRefreshRateTimeoutLuxThresholds2.point = new ArrayList();
         }
-        this.mIdleScreenRefreshRateTimeoutLuxThresholds = idleScreenRefreshRateTimeoutLuxThresholds2.point;
+        this.mIdleScreenRefreshRateTimeoutLuxThresholds =
+                idleScreenRefreshRateTimeoutLuxThresholds2.point;
     }
 
     public final void loadLuxThrottling(DisplayConfiguration displayConfiguration) {
         LuxThrottling luxThrottling = displayConfiguration.luxThrottling;
         if (luxThrottling != null) {
             HighBrightnessMode highBrightnessMode = displayConfiguration.highBrightnessMode;
-            float floatValue = highBrightnessMode != null ? highBrightnessMode.transitionPoint_all.floatValue() : 1.0f;
+            float floatValue =
+                    highBrightnessMode != null
+                            ? highBrightnessMode.transitionPoint_all.floatValue()
+                            : 1.0f;
             if (luxThrottling.brightnessLimitMap == null) {
                 luxThrottling.brightnessLimitMap = new ArrayList();
             }
             Iterator it = ((ArrayList) luxThrottling.brightnessLimitMap).iterator();
             while (it.hasNext()) {
                 BrightnessLimitMap brightnessLimitMap = (BrightnessLimitMap) it.next();
-                PredefinedBrightnessLimitNames predefinedBrightnessLimitNames = brightnessLimitMap.type;
+                PredefinedBrightnessLimitNames predefinedBrightnessLimitNames =
+                        brightnessLimitMap.type;
                 int ordinal = predefinedBrightnessLimitNames.ordinal();
-                BrightnessLimitMapType brightnessLimitMapType = ordinal != 0 ? ordinal != 1 ? null : BrightnessLimitMapType.ADAPTIVE : BrightnessLimitMapType.DEFAULT;
+                BrightnessLimitMapType brightnessLimitMapType =
+                        ordinal != 0
+                                ? ordinal != 1 ? null : BrightnessLimitMapType.ADAPTIVE
+                                : BrightnessLimitMapType.DEFAULT;
                 if (brightnessLimitMapType == null) {
-                    Slog.wtf("DisplayDeviceConfig", "Invalid NBM config: unsupported map type=" + predefinedBrightnessLimitNames);
-                } else if (((HashMap) this.mLuxThrottlingData).containsKey(brightnessLimitMapType)) {
-                    Slog.wtf("DisplayDeviceConfig", "Invalid NBM config: duplicate map type=" + brightnessLimitMapType);
+                    Slog.wtf(
+                            "DisplayDeviceConfig",
+                            "Invalid NBM config: unsupported map type="
+                                    + predefinedBrightnessLimitNames);
+                } else if (((HashMap) this.mLuxThrottlingData)
+                        .containsKey(brightnessLimitMapType)) {
+                    Slog.wtf(
+                            "DisplayDeviceConfig",
+                            "Invalid NBM config: duplicate map type=" + brightnessLimitMapType);
                 } else {
                     HashMap hashMap = new HashMap();
-                    for (NonNegativeFloatToFloatPoint nonNegativeFloatToFloatPoint : brightnessLimitMap.map.getPoint()) {
+                    for (NonNegativeFloatToFloatPoint nonNegativeFloatToFloatPoint :
+                            brightnessLimitMap.map.getPoint()) {
                         float floatValue2 = nonNegativeFloatToFloatPoint.first.floatValue();
                         float floatValue3 = nonNegativeFloatToFloatPoint.second.floatValue();
                         if (floatValue3 > floatValue) {
-                            Slog.wtf("DisplayDeviceConfig", "Invalid NBM config: maxBrightness is greater than hbm.transitionPoint. type=" + predefinedBrightnessLimitNames + "; lux=" + floatValue2 + "; maxBrightness=" + floatValue3);
+                            Slog.wtf(
+                                    "DisplayDeviceConfig",
+                                    "Invalid NBM config: maxBrightness is greater than"
+                                        + " hbm.transitionPoint. type="
+                                            + predefinedBrightnessLimitNames
+                                            + "; lux="
+                                            + floatValue2
+                                            + "; maxBrightness="
+                                            + floatValue3);
                         } else if (hashMap.containsKey(Float.valueOf(floatValue2))) {
-                            Slog.wtf("DisplayDeviceConfig", "Invalid NBM config: duplicate lux key. type=" + predefinedBrightnessLimitNames + "; lux=" + floatValue2);
+                            Slog.wtf(
+                                    "DisplayDeviceConfig",
+                                    "Invalid NBM config: duplicate lux key. type="
+                                            + predefinedBrightnessLimitNames
+                                            + "; lux="
+                                            + floatValue2);
                         } else {
-                            hashMap.put(Float.valueOf(floatValue2), Float.valueOf(getBrightnessFromBacklight(floatValue3)));
+                            hashMap.put(
+                                    Float.valueOf(floatValue2),
+                                    Float.valueOf(getBrightnessFromBacklight(floatValue3)));
                         }
                     }
                     if (!hashMap.isEmpty()) {
@@ -1170,7 +1507,8 @@ public final class DisplayDeviceConfig {
                     Iterator it2 = arrayList2.iterator();
                     while (true) {
                         if (it2.hasNext()) {
-                            PowerThrottlingPoint powerThrottlingPoint = (PowerThrottlingPoint) it2.next();
+                            PowerThrottlingPoint powerThrottlingPoint =
+                                    (PowerThrottlingPoint) it2.next();
                             ThermalStatus thermalStatus = powerThrottlingPoint.thermalStatus;
                             if (thermalStatus == null) {
                                 break;
@@ -1183,21 +1521,34 @@ public final class DisplayDeviceConfig {
                                 case EF42:
                                 case EF51:
                                 case EF60:
-                                    arrayList3.add(new PowerThrottlingData.ThrottlingLevel(powerThrottlingPoint.powerQuotaMilliWatts.floatValue(), convertThermalStatus(thermalStatus)));
+                                    arrayList3.add(
+                                            new PowerThrottlingData.ThrottlingLevel(
+                                                    powerThrottlingPoint.powerQuotaMilliWatts
+                                                            .floatValue(),
+                                                    convertThermalStatus(thermalStatus)));
                             }
                         } else {
                             String str = powerThrottlingMap.id;
                             if (str == null) {
                                 str = "default";
                             }
-                            if (((HashMap) this.mPowerThrottlingDataMapByThrottlingId).containsKey(str)) {
-                                throw new RuntimeException(XmlUtils$$ExternalSyntheticOutline0.m("Power throttling data with ID ", str, " already exists"));
+                            if (((HashMap) this.mPowerThrottlingDataMapByThrottlingId)
+                                    .containsKey(str)) {
+                                throw new RuntimeException(
+                                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                                "Power throttling data with ID ",
+                                                str,
+                                                " already exists"));
                             }
-                            ((HashMap) this.mPowerThrottlingDataMapByThrottlingId).put(str, PowerThrottlingData.create(arrayList3));
+                            ((HashMap) this.mPowerThrottlingDataMapByThrottlingId)
+                                    .put(str, PowerThrottlingData.create(arrayList3));
                         }
                     }
                 }
-                this.mPowerThrottlingConfigData = new PowerThrottlingConfigData(powerThrottlingConfig.brightnessLowestCapAllowed.floatValue(), powerThrottlingConfig.pollingWindowMillis.intValue());
+                this.mPowerThrottlingConfigData =
+                        new PowerThrottlingConfigData(
+                                powerThrottlingConfig.brightnessLowestCapAllowed.floatValue(),
+                                powerThrottlingConfig.pollingWindowMillis.intValue());
                 return;
             }
         }
@@ -1206,25 +1557,45 @@ public final class DisplayDeviceConfig {
 
     public final void loadRefreshRateSetting(DisplayConfiguration displayConfiguration) {
         RefreshRateZoneProfiles refreshRateZoneProfiles;
-        RefreshRateConfigs refreshRateConfigs = displayConfiguration == null ? null : displayConfiguration.refreshRate;
-        BlockingZoneConfig blockingZoneConfig = refreshRateConfigs == null ? null : refreshRateConfigs.lowerBlockingZoneConfigs;
-        BlockingZoneConfig blockingZoneConfig2 = refreshRateConfigs != null ? refreshRateConfigs.higherBlockingZoneConfigs : null;
+        RefreshRateConfigs refreshRateConfigs =
+                displayConfiguration == null ? null : displayConfiguration.refreshRate;
+        BlockingZoneConfig blockingZoneConfig =
+                refreshRateConfigs == null ? null : refreshRateConfigs.lowerBlockingZoneConfigs;
+        BlockingZoneConfig blockingZoneConfig2 =
+                refreshRateConfigs != null ? refreshRateConfigs.higherBlockingZoneConfigs : null;
         if (blockingZoneConfig != null) {
             this.mLowBlockingZoneThermalMapId = blockingZoneConfig.refreshRateThermalThrottlingId;
         }
         if (blockingZoneConfig == null) {
-            this.mDefaultLowBlockingZoneRefreshRate = this.mContext.getResources().getInteger(R.integer.config_dozeWakeLockScreenDebounce);
+            this.mDefaultLowBlockingZoneRefreshRate =
+                    this.mContext
+                            .getResources()
+                            .getInteger(R.integer.config_dozeWakeLockScreenDebounce);
         } else {
-            this.mDefaultLowBlockingZoneRefreshRate = blockingZoneConfig.defaultRefreshRate.intValue();
+            this.mDefaultLowBlockingZoneRefreshRate =
+                    blockingZoneConfig.defaultRefreshRate.intValue();
         }
         if (blockingZoneConfig == null) {
-            int[] intArray = this.mContext.getResources().getIntArray(R.array.config_reduceBrightColorsCoefficients);
-            int[] intArray2 = this.mContext.getResources().getIntArray(R.array.config_mainBuiltInDisplayWaterfallCutout);
+            int[] intArray =
+                    this.mContext
+                            .getResources()
+                            .getIntArray(R.array.config_reduceBrightColorsCoefficients);
+            int[] intArray2 =
+                    this.mContext
+                            .getResources()
+                            .getIntArray(R.array.config_mainBuiltInDisplayWaterfallCutout);
             if (intArray == null || intArray2 == null || intArray.length != intArray2.length) {
-                throw new RuntimeException("display low brightness threshold array and ambient brightness threshold array have different length: lowDisplayBrightnessThresholdsInt=" + Arrays.toString(intArray) + ", lowAmbientBrightnessThresholdsInt=" + Arrays.toString(intArray2));
+                throw new RuntimeException(
+                        "display low brightness threshold array and ambient brightness threshold"
+                            + " array have different length: lowDisplayBrightnessThresholdsInt="
+                                + Arrays.toString(intArray)
+                                + ", lowAmbientBrightnessThresholdsInt="
+                                + Arrays.toString(intArray2));
             }
-            this.mLowDisplayBrightnessThresholds = DeviceConfigParsingUtils.displayBrightnessThresholdsIntToFloat(intArray);
-            this.mLowAmbientBrightnessThresholds = DeviceConfigParsingUtils.ambientBrightnessThresholdsIntToFloat(intArray2);
+            this.mLowDisplayBrightnessThresholds =
+                    DeviceConfigParsingUtils.displayBrightnessThresholdsIntToFloat(intArray);
+            this.mLowAmbientBrightnessThresholds =
+                    DeviceConfigParsingUtils.ambientBrightnessThresholdsIntToFloat(intArray2);
         } else {
             BlockingZoneThreshold blockingZoneThreshold = blockingZoneConfig.blockingZoneThreshold;
             if (blockingZoneThreshold.displayBrightnessPoint == null) {
@@ -1239,29 +1610,45 @@ public final class DisplayDeviceConfig {
                 if (floatValue < FullScreenMagnificationGestureHandler.MAX_SCALE) {
                     this.mLowDisplayBrightnessThresholds[i] = floatValue;
                 } else {
-                    this.mLowDisplayBrightnessThresholds[i] = getBrightnessFromBacklight(getBacklightFromNits(floatValue));
+                    this.mLowDisplayBrightnessThresholds[i] =
+                            getBrightnessFromBacklight(getBacklightFromNits(floatValue));
                 }
-                this.mLowAmbientBrightnessThresholds[i] = ((DisplayBrightnessPoint) arrayList.get(i)).lux.floatValue();
+                this.mLowAmbientBrightnessThresholds[i] =
+                        ((DisplayBrightnessPoint) arrayList.get(i)).lux.floatValue();
             }
         }
         if (blockingZoneConfig2 != null) {
             this.mHighBlockingZoneThermalMapId = blockingZoneConfig2.refreshRateThermalThrottlingId;
         }
         if (blockingZoneConfig2 == null) {
-            this.mDefaultHighBlockingZoneRefreshRate = this.mContext.getResources().getInteger(R.integer.config_lowPowerStandbyNonInteractiveTimeout);
+            this.mDefaultHighBlockingZoneRefreshRate =
+                    this.mContext
+                            .getResources()
+                            .getInteger(R.integer.config_lowPowerStandbyNonInteractiveTimeout);
         } else {
-            this.mDefaultHighBlockingZoneRefreshRate = blockingZoneConfig2.defaultRefreshRate.intValue();
+            this.mDefaultHighBlockingZoneRefreshRate =
+                    blockingZoneConfig2.defaultRefreshRate.intValue();
         }
         if (blockingZoneConfig2 == null) {
-            int[] intArray3 = this.mContext.getResources().getIntArray(R.array.vendor_cross_profile_apps);
-            int[] intArray4 = this.mContext.getResources().getIntArray(R.array.unloggable_phone_numbers);
+            int[] intArray3 =
+                    this.mContext.getResources().getIntArray(R.array.vendor_cross_profile_apps);
+            int[] intArray4 =
+                    this.mContext.getResources().getIntArray(R.array.unloggable_phone_numbers);
             if (intArray3 == null || intArray4 == null || intArray3.length != intArray4.length) {
-                throw new RuntimeException("display high brightness threshold array and ambient brightness threshold array have different length: highDisplayBrightnessThresholdsInt=" + Arrays.toString(intArray3) + ", highAmbientBrightnessThresholdsInt=" + Arrays.toString(intArray4));
+                throw new RuntimeException(
+                        "display high brightness threshold array and ambient brightness threshold"
+                            + " array have different length: highDisplayBrightnessThresholdsInt="
+                                + Arrays.toString(intArray3)
+                                + ", highAmbientBrightnessThresholdsInt="
+                                + Arrays.toString(intArray4));
             }
-            this.mHighDisplayBrightnessThresholds = DeviceConfigParsingUtils.displayBrightnessThresholdsIntToFloat(intArray3);
-            this.mHighAmbientBrightnessThresholds = DeviceConfigParsingUtils.ambientBrightnessThresholdsIntToFloat(intArray4);
+            this.mHighDisplayBrightnessThresholds =
+                    DeviceConfigParsingUtils.displayBrightnessThresholdsIntToFloat(intArray3);
+            this.mHighAmbientBrightnessThresholds =
+                    DeviceConfigParsingUtils.ambientBrightnessThresholdsIntToFloat(intArray4);
         } else {
-            BlockingZoneThreshold blockingZoneThreshold2 = blockingZoneConfig2.blockingZoneThreshold;
+            BlockingZoneThreshold blockingZoneThreshold2 =
+                    blockingZoneConfig2.blockingZoneThreshold;
             if (blockingZoneThreshold2.displayBrightnessPoint == null) {
                 blockingZoneThreshold2.displayBrightnessPoint = new ArrayList();
             }
@@ -1274,12 +1661,15 @@ public final class DisplayDeviceConfig {
                 if (floatValue2 < FullScreenMagnificationGestureHandler.MAX_SCALE) {
                     this.mHighDisplayBrightnessThresholds[i2] = floatValue2;
                 } else {
-                    this.mHighDisplayBrightnessThresholds[i2] = getBrightnessFromBacklight(getBacklightFromNits(floatValue2));
+                    this.mHighDisplayBrightnessThresholds[i2] =
+                            getBrightnessFromBacklight(getBacklightFromNits(floatValue2));
                 }
-                this.mHighAmbientBrightnessThresholds[i2] = ((DisplayBrightnessPoint) arrayList2.get(i2)).lux.floatValue();
+                this.mHighAmbientBrightnessThresholds[i2] =
+                        ((DisplayBrightnessPoint) arrayList2.get(i2)).lux.floatValue();
             }
         }
-        if (refreshRateConfigs == null || (refreshRateZoneProfiles = refreshRateConfigs.refreshRateZoneProfiles) == null) {
+        if (refreshRateConfigs == null
+                || (refreshRateZoneProfiles = refreshRateConfigs.refreshRateZoneProfiles) == null) {
             return;
         }
         if (refreshRateZoneProfiles.refreshRateZoneProfile == null) {
@@ -1289,18 +1679,37 @@ public final class DisplayDeviceConfig {
         while (it.hasNext()) {
             RefreshRateZone refreshRateZone = (RefreshRateZone) it.next();
             RefreshRateRange refreshRateRange = refreshRateZone.refreshRateRange;
-            ((HashMap) this.mRefreshRateZoneProfiles).put(refreshRateZone.id, new SurfaceControl.RefreshRateRange(refreshRateRange.minimum.floatValue(), refreshRateRange.maximum.floatValue()));
+            ((HashMap) this.mRefreshRateZoneProfiles)
+                    .put(
+                            refreshRateZone.id,
+                            new SurfaceControl.RefreshRateRange(
+                                    refreshRateRange.minimum.floatValue(),
+                                    refreshRateRange.maximum.floatValue()));
         }
     }
 
     public final Spline loadSdrHdrMapFromConfigXml() {
         float[] floatArray = getFloatArray(this.mContext.getResources().obtainTypedArray(17236309));
-        float[] floatArray2 = getFloatArray(this.mContext.getResources().obtainTypedArray(17236308));
+        float[] floatArray2 =
+                getFloatArray(this.mContext.getResources().obtainTypedArray(17236308));
         if (this.mIsCoverDisplay) {
-            float[] floatArray3 = getFloatArray(this.mContext.getResources().obtainTypedArray(R.array.config_secondaryBuiltInDisplayWaterfallCutout));
-            float[] floatArray4 = getFloatArray(this.mContext.getResources().obtainTypedArray(R.array.config_secondaryBuiltInDisplayCutoutSideOverride));
+            float[] floatArray3 =
+                    getFloatArray(
+                            this.mContext
+                                    .getResources()
+                                    .obtainTypedArray(
+                                            R.array.config_secondaryBuiltInDisplayWaterfallCutout));
+            float[] floatArray4 =
+                    getFloatArray(
+                            this.mContext
+                                    .getResources()
+                                    .obtainTypedArray(
+                                            R.array
+                                                    .config_secondaryBuiltInDisplayCutoutSideOverride));
             if (floatArray3.length != 0 && floatArray4.length != 0) {
-                Slog.d("DisplayDeviceConfig", "loadSdrHdrMapFromConfigXml: use seperate config for cover display");
+                Slog.d(
+                        "DisplayDeviceConfig",
+                        "loadSdrHdrMapFromConfigXml: use seperate config for cover display");
                 floatArray = (float[]) floatArray3.clone();
                 floatArray2 = (float[]) floatArray4.clone();
             }
@@ -1313,7 +1722,8 @@ public final class DisplayDeviceConfig {
             StringBuilder sb = new StringBuilder("loadSdrHdrMapFromConfigXml: wrong length: ");
             sb.append(floatArray.length);
             sb.append(", ");
-            HeapdumpWatcher$$ExternalSyntheticOutline0.m(sb, floatArray2.length, "DisplayDeviceConfig");
+            HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                    sb, floatArray2.length, "DisplayDeviceConfig");
             return null;
         }
         for (int i = 0; i < floatArray.length; i++) {
@@ -1321,11 +1731,20 @@ public final class DisplayDeviceConfig {
                 float f = floatArray[i];
                 int i2 = i - 1;
                 if (f < floatArray[i2]) {
-                    Slog.e("DisplayDeviceConfig", "loadSdrHdrMapFromConfigXml: sdrHdrRatioMap must be non-decreasing, ignoring rest  of configuration. sdr nits: " + floatArray[i] + " < " + floatArray[i2]);
+                    Slog.e(
+                            "DisplayDeviceConfig",
+                            "loadSdrHdrMapFromConfigXml: sdrHdrRatioMap must be non-decreasing,"
+                                + " ignoring rest  of configuration. sdr nits: "
+                                    + floatArray[i]
+                                    + " < "
+                                    + floatArray[i2]);
                     return null;
                 }
-                if (f < FullScreenMagnificationGestureHandler.MAX_SCALE || floatArray2[i] < FullScreenMagnificationGestureHandler.MAX_SCALE) {
-                    StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "loadSdrHdrMapFromConfigXml: invalid value: [", "] ");
+                if (f < FullScreenMagnificationGestureHandler.MAX_SCALE
+                        || floatArray2[i] < FullScreenMagnificationGestureHandler.MAX_SCALE) {
+                    StringBuilder m =
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    i, "loadSdrHdrMapFromConfigXml: invalid value: [", "] ");
                     m.append(floatArray[i]);
                     m.append(", ");
                     m.append(floatArray2[i]);
@@ -1343,12 +1762,15 @@ public final class DisplayDeviceConfig {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void loadThermalThrottlingConfig(com.android.server.display.config.DisplayConfiguration r10) {
+    public final void loadThermalThrottlingConfig(
+            com.android.server.display.config.DisplayConfiguration r10) {
         /*
             Method dump skipped, instructions count: 472
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.DisplayDeviceConfig.loadThermalThrottlingConfig(com.android.server.display.config.DisplayConfiguration):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.DisplayDeviceConfig.loadThermalThrottlingConfig(com.android.server.display.config.DisplayConfiguration):void");
     }
 
     public final String toString() {
@@ -1468,6 +1890,7 @@ public final class DisplayDeviceConfig {
         sb.append("\nmVrrSupported= ");
         sb.append(this.mVrrSupportEnabled);
         sb.append("\n, mUseSurfaceControlBrightness=");
-        return OptionalBool$$ExternalSyntheticOutline0.m("}", sb, this.mUseSurfaceControlBrightness);
+        return OptionalBool$$ExternalSyntheticOutline0.m(
+                "}", sb, this.mUseSurfaceControlBrightness);
     }
 }

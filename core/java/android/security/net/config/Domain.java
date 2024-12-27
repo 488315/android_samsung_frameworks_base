@@ -1,6 +1,7 @@
 package android.security.net.config;
 
 import com.android.internal.logging.nano.MetricsProto;
+
 import java.util.Locale;
 
 /* loaded from: classes3.dex */
@@ -17,7 +18,10 @@ public final class Domain {
     }
 
     public int hashCode() {
-        return this.hostname.hashCode() ^ (this.subdomainsIncluded ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
+        return this.hostname.hashCode()
+                ^ (this.subdomainsIncluded
+                        ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP
+                        : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
     }
 
     public boolean equals(Object other) {
@@ -28,6 +32,7 @@ public final class Domain {
             return false;
         }
         Domain otherDomain = (Domain) other;
-        return otherDomain.subdomainsIncluded == this.subdomainsIncluded && otherDomain.hostname.equals(this.hostname);
+        return otherDomain.subdomainsIncluded == this.subdomainsIncluded
+                && otherDomain.hostname.equals(this.hostname);
     }
 }

@@ -2,6 +2,7 @@ package com.android.server.firewall;
 
 import android.content.ComponentName;
 import android.content.Intent;
+
 import org.xmlpull.v1.XmlPullParser;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,9 +22,17 @@ public final class OrFilter extends FilterList {
     }
 
     @Override // com.android.server.firewall.Filter
-    public final boolean matches(IntentFirewall intentFirewall, ComponentName componentName, Intent intent, int i, int i2, String str, int i3) {
+    public final boolean matches(
+            IntentFirewall intentFirewall,
+            ComponentName componentName,
+            Intent intent,
+            int i,
+            int i2,
+            String str,
+            int i3) {
         for (int i4 = 0; i4 < this.children.size(); i4++) {
-            if (((Filter) this.children.get(i4)).matches(intentFirewall, componentName, intent, i, i2, str, i3)) {
+            if (((Filter) this.children.get(i4))
+                    .matches(intentFirewall, componentName, intent, i, i2, str, i3)) {
                 return true;
             }
         }

@@ -13,24 +13,27 @@ public interface ListenerExecutor {
     public interface ListenerOperation<TListener> {
         void operate(TListener tlistener) throws Exception;
 
-        default void onPreExecute() {
-        }
+        default void onPreExecute() {}
 
-        default void onFailure(Exception e) {
-        }
+        default void onFailure(Exception e) {}
 
-        default void onPostExecute(boolean success) {
-        }
+        default void onPostExecute(boolean success) {}
 
-        default void onComplete(boolean success) {
-        }
+        default void onComplete(boolean success) {}
     }
 
-    default <TListener> void executeSafely(Executor executor, Supplier<TListener> listenerSupplier, ListenerOperation<TListener> operation) {
+    default <TListener> void executeSafely(
+            Executor executor,
+            Supplier<TListener> listenerSupplier,
+            ListenerOperation<TListener> operation) {
         executeSafely(executor, listenerSupplier, operation, null);
     }
 
-    default <TListener, TListenerOperation extends ListenerOperation<TListener>> void executeSafely(Executor executor, final Supplier<TListener> listenerSupplier, final TListenerOperation operation, final FailureCallback<TListenerOperation> failureCallback) {
+    default <TListener, TListenerOperation extends ListenerOperation<TListener>> void executeSafely(
+            Executor executor,
+            final Supplier<TListener> listenerSupplier,
+            final TListenerOperation operation,
+            final FailureCallback<TListenerOperation> failureCallback) {
         final TListener listener;
         if (operation == null || (listener = listenerSupplier.get()) == null) {
             return;
@@ -40,12 +43,15 @@ public interface ListenerExecutor {
         try {
             operation.onPreExecute();
             preexecute = true;
-            executor.execute(new Runnable() { // from class: com.android.internal.listeners.ListenerExecutor$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ListenerExecutor.lambda$executeSafely$0(listener, listenerSupplier, operation, failureCallback);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                                     // com.android.internal.listeners.ListenerExecutor$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ListenerExecutor.lambda$executeSafely$0(
+                                    listener, listenerSupplier, operation, failureCallback);
+                        }
+                    });
             executing = true;
         } finally {
             if (!executing) {
@@ -57,7 +63,11 @@ public interface ListenerExecutor {
         }
     }
 
-    static /* synthetic */ void lambda$executeSafely$0(Object listener, Supplier listenerSupplier, ListenerOperation operation, FailureCallback failureCallback) {
+    static /* synthetic */ void lambda$executeSafely$0(
+            Object listener,
+            Supplier listenerSupplier,
+            ListenerOperation operation,
+            FailureCallback failureCallback) {
         boolean success = false;
         try {
             try {

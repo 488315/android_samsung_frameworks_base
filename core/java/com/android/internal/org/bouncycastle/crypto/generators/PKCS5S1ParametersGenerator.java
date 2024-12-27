@@ -30,7 +30,8 @@ public class PKCS5S1ParametersGenerator extends PBEParametersGenerator {
     public CipherParameters generateDerivedParameters(int keySize) {
         int keySize2 = keySize / 8;
         if (keySize2 > this.digest.getDigestSize()) {
-            throw new IllegalArgumentException("Can't generate a derived key " + keySize2 + " bytes long.");
+            throw new IllegalArgumentException(
+                    "Can't generate a derived key " + keySize2 + " bytes long.");
         }
         byte[] dKey = generateDerivedKey();
         return new KeyParameter(dKey, 0, keySize2);
@@ -41,7 +42,8 @@ public class PKCS5S1ParametersGenerator extends PBEParametersGenerator {
         int keySize2 = keySize / 8;
         int ivSize2 = ivSize / 8;
         if (keySize2 + ivSize2 > this.digest.getDigestSize()) {
-            throw new IllegalArgumentException("Can't generate a derived key " + (keySize2 + ivSize2) + " bytes long.");
+            throw new IllegalArgumentException(
+                    "Can't generate a derived key " + (keySize2 + ivSize2) + " bytes long.");
         }
         byte[] dKey = generateDerivedKey();
         return new ParametersWithIV(new KeyParameter(dKey, 0, keySize2), dKey, keySize2, ivSize2);

@@ -3,27 +3,29 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class Call implements Parcelable {
-    public static final Parcelable.Creator<Call> CREATOR = new Parcelable.Creator<Call>() { // from class: android.hardware.radio.voice.Call.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Call createFromParcel(Parcel _aidl_source) {
-            Call _aidl_out = new Call();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Call> CREATOR =
+            new Parcelable.Creator<Call>() { // from class: android.hardware.radio.voice.Call.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Call createFromParcel(Parcel _aidl_source) {
+                    Call _aidl_out = new Call();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Call[] newArray(int _aidl_size) {
-            return new Call[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Call[] newArray(int _aidl_size) {
+                    return new Call[_aidl_size];
+                }
+            };
     public static final int PRESENTATION_ALLOWED = 0;
     public static final int PRESENTATION_PAYPHONE = 3;
     public static final int PRESENTATION_RESTRICTED = 1;

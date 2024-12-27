@@ -8,19 +8,22 @@ import android.os.Parcelable;
 public class SemContextDeviceActivityDetector extends SemContextEventContext {
     public static final int ACTIVITY_MOVING = 2;
     public static final int ACTIVITY_STATIONARY = 1;
-    public static final Parcelable.Creator<SemContextDeviceActivityDetector> CREATOR = new Parcelable.Creator<SemContextDeviceActivityDetector>() { // from class: com.samsung.android.hardware.context.SemContextDeviceActivityDetector.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextDeviceActivityDetector createFromParcel(Parcel in) {
-            return new SemContextDeviceActivityDetector(in);
-        }
+    public static final Parcelable.Creator<SemContextDeviceActivityDetector> CREATOR =
+            new Parcelable.Creator<
+                    SemContextDeviceActivityDetector>() { // from class:
+                                                          // com.samsung.android.hardware.context.SemContextDeviceActivityDetector.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextDeviceActivityDetector createFromParcel(Parcel in) {
+                    return new SemContextDeviceActivityDetector(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextDeviceActivityDetector[] newArray(int size) {
-            return new SemContextDeviceActivityDetector[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextDeviceActivityDetector[] newArray(int size) {
+                    return new SemContextDeviceActivityDetector[size];
+                }
+            };
     public static final int DETECTED = 1;
     public static final int ERROR_SENSOR_OUT = 3;
     public static final int NOT_DETECTED = 2;

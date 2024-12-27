@@ -12,7 +12,6 @@ public final class AppTimeTrackerProto {
         public static final long DURATION_MS = 1112396529666L;
         public static final long PACKAGE = 1138166333441L;
 
-        public PackageTime() {
-        }
+        public PackageTime() {}
     }
 }

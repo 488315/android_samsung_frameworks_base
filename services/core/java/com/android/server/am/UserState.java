@@ -6,8 +6,10 @@ import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.util.EventLog;
 import android.util.Slog;
+
 import com.android.internal.util.ProgressReporter;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,7 +30,17 @@ public final class UserState {
     }
 
     public static String stateToString(int i) {
-        return i != 0 ? i != 1 ? i != 2 ? i != 3 ? i != 4 ? i != 5 ? Integer.toString(i) : "SHUTDOWN" : "STOPPING" : "RUNNING_UNLOCKED" : "RUNNING_UNLOCKING" : "RUNNING_LOCKED" : "BOOTING";
+        return i != 0
+                ? i != 1
+                        ? i != 2
+                                ? i != 3
+                                        ? i != 4
+                                                ? i != 5 ? Integer.toString(i) : "SHUTDOWN"
+                                                : "STOPPING"
+                                        : "RUNNING_UNLOCKED"
+                                : "RUNNING_UNLOCKING"
+                        : "RUNNING_LOCKED"
+                : "BOOTING";
     }
 
     public final void setState(int i) {
@@ -42,7 +54,9 @@ public final class UserState {
         if (i != 5) {
             Trace.asyncTraceBegin(64L, stateToString(i) + " " + identifier, identifier);
         }
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(identifier, "User ", " state changed from ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        identifier, "User ", " state changed from ");
         m.append(stateToString(this.state));
         m.append(" to ");
         m.append(stateToString(i));
@@ -57,7 +71,14 @@ public final class UserState {
             setState(i2);
             return true;
         }
-        Slog.w("ActivityManager", "Expected user " + this.mHandle.getIdentifier() + " in state " + stateToString(i) + " but was in state " + stateToString(this.state));
+        Slog.w(
+                "ActivityManager",
+                "Expected user "
+                        + this.mHandle.getIdentifier()
+                        + " in state "
+                        + stateToString(i)
+                        + " but was in state "
+                        + stateToString(this.state));
         Slog.i("ActivityManager", "!@Boot: setStateFail, finishUserUnlocking");
         return false;
     }

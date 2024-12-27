@@ -10,12 +10,10 @@ public interface IIncidentAuthListener extends IInterface {
 
     public static class Default implements IIncidentAuthListener {
         @Override // android.os.IIncidentAuthListener
-        public void onReportApproved() throws RemoteException {
-        }
+        public void onReportApproved() throws RemoteException {}
 
         @Override // android.os.IIncidentAuthListener
-        public void onReportDenied() throws RemoteException {
-        }
+        public void onReportDenied() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +21,7 @@ public interface IIncidentAuthListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIncidentAuthListener {
+    public abstract static class Stub extends Binder implements IIncidentAuthListener {
         static final int TRANSACTION_onReportApproved = 1;
         static final int TRANSACTION_onReportDenied = 2;
 
@@ -64,7 +62,8 @@ public interface IIncidentAuthListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIncidentAuthListener.DESCRIPTOR);
             }

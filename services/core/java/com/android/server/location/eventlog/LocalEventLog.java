@@ -1,8 +1,9 @@
 package com.android.server.location.eventlog;
 
 import android.util.TimeUtils;
+
 import com.android.internal.util.Preconditions;
-import com.android.server.location.eventlog.LocationEventLog;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
@@ -64,13 +65,20 @@ public abstract class LocalEventLog {
             int length;
             int i = this.mIndex;
             LocalEventLog localEventLog = LocalEventLog.this;
-            long j = i == -1 ? 0L : (localEventLog.mEntries[i] & Integer.MAX_VALUE) >>> LocalEventLog.TIME_DELTA_OFFSET;
+            long j =
+                    i == -1
+                            ? 0L
+                            : (localEventLog.mEntries[i] & Integer.MAX_VALUE)
+                                    >>> LocalEventLog.TIME_DELTA_OFFSET;
             do {
                 this.mLogTime += j;
                 int i2 = this.mIndex;
                 iArr = localEventLog.mEntries;
                 if (i2 == -1) {
-                    length = (((localEventLog.mLogEndIndex - localEventLog.mLogSize) % iArr.length) + iArr.length) % iArr.length;
+                    length =
+                            (((localEventLog.mLogEndIndex - localEventLog.mLogSize) % iArr.length)
+                                            + iArr.length)
+                                    % iArr.length;
                 } else {
                     if (i2 < 0) {
                         throw new IllegalArgumentException();
@@ -100,7 +108,8 @@ public abstract class LocalEventLog {
                     LocalEventLog localEventLog = LocalEventLog.this;
                     int[] iArr = localEventLog.mEntries;
                     int i = this.mIndex;
-                    this.mCurrentTime = j + ((iArr[i] & Integer.MAX_VALUE) >>> LocalEventLog.TIME_DELTA_OFFSET);
+                    this.mCurrentTime =
+                            j + ((iArr[i] & Integer.MAX_VALUE) >>> LocalEventLog.TIME_DELTA_OFFSET);
                     Object obj = localEventLog.mLogEvents[i];
                     Objects.requireNonNull(obj);
                     this.mCurrentLogEvent = obj;
@@ -132,7 +141,9 @@ public abstract class LocalEventLog {
         this.mLastLogTime = -1L;
     }
 
-    public static void iterate(LocationEventLog$$ExternalSyntheticLambda0 locationEventLog$$ExternalSyntheticLambda0, LocalEventLog... localEventLogArr) {
+    public static void iterate(
+            LocationEventLog$$ExternalSyntheticLambda0 locationEventLog$$ExternalSyntheticLambda0,
+            LocalEventLog... localEventLogArr) {
         ArrayList arrayList = new ArrayList(localEventLogArr.length);
         for (LocalEventLog localEventLog : localEventLogArr) {
             Objects.requireNonNull(localEventLog);
@@ -147,7 +158,9 @@ public abstract class LocalEventLog {
             LogIterator logIterator2 = null;
             while (it.hasNext()) {
                 LogIterator logIterator3 = (LogIterator) it.next();
-                if (logIterator3 != null && (logIterator2 == null || logIterator3.mCurrentTime < logIterator2.mCurrentTime)) {
+                if (logIterator3 != null
+                        && (logIterator2 == null
+                                || logIterator3.mCurrentTime < logIterator2.mCurrentTime)) {
                     logIterator2 = logIterator3;
                 }
             }
@@ -158,10 +171,13 @@ public abstract class LocalEventLog {
             Object obj = logIterator2.mCurrentLogEvent;
             Consumer consumer = locationEventLog$$ExternalSyntheticLambda0.f$3;
             String str = locationEventLog$$ExternalSyntheticLambda0.f$0;
-            if (str == null || ((obj instanceof LocationEventLog.ProviderEvent) && str.equals(((LocationEventLog.ProviderEvent) obj).mProvider))) {
+            if (str == null
+                    || ((obj instanceof LocationEventLog.ProviderEvent)
+                            && str.equals(((LocationEventLog.ProviderEvent) obj).mProvider))) {
                 StringBuilder sb = locationEventLog$$ExternalSyntheticLambda0.f$1;
                 sb.setLength(0);
-                sb.append(TimeUtils.logTimeOfDay(j + locationEventLog$$ExternalSyntheticLambda0.f$2));
+                sb.append(
+                        TimeUtils.logTimeOfDay(j + locationEventLog$$ExternalSyntheticLambda0.f$2));
                 sb.append(": ");
                 sb.append(obj);
                 consumer.accept(sb.toString());
@@ -264,7 +280,10 @@ public abstract class LocalEventLog {
             monitor-exit(r15)
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.location.eventlog.LocalEventLog.addLog(long, java.lang.Object):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.location.eventlog.LocalEventLog.addLog(long,"
+                    + " java.lang.Object):void");
     }
 
     public final void addLogEventInternal(Object obj, int i, boolean z) {
@@ -277,7 +296,10 @@ public abstract class LocalEventLog {
         int length2 = iArr.length;
         int i3 = TIME_DELTA_OFFSET;
         if (i2 == length2) {
-            this.mStartTime += (iArr[(((this.mLogEndIndex - i2) % iArr.length) + iArr.length) % iArr.length] & Integer.MAX_VALUE) >>> i3;
+            this.mStartTime +=
+                    (iArr[(((this.mLogEndIndex - i2) % iArr.length) + iArr.length) % iArr.length]
+                                    & Integer.MAX_VALUE)
+                            >>> i3;
             this.mModificationCount++;
         } else {
             this.mLogSize = i2 + 1;
@@ -287,7 +309,9 @@ public abstract class LocalEventLog {
             z2 = true;
         }
         Preconditions.checkArgument(z2);
-        iArr[i4] = (((z ? 1 : 0) << IS_FILLER_OFFSET) & Integer.MIN_VALUE) | ((i << i3) & Integer.MAX_VALUE);
+        iArr[i4] =
+                (((z ? 1 : 0) << IS_FILLER_OFFSET) & Integer.MIN_VALUE)
+                        | ((i << i3) & Integer.MAX_VALUE);
         int i5 = this.mLogEndIndex;
         this.mLogEvents[i5] = obj;
         if (i5 == -1) {

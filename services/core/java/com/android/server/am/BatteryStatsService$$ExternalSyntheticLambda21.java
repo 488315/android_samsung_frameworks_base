@@ -2,7 +2,8 @@ package com.android.server.am;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda21 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda21
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ int f$1;
@@ -11,7 +12,14 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
     public final /* synthetic */ long f$4;
     public final /* synthetic */ long f$5;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda21(int i, int i2, int i3, long j, long j2, long j3, BatteryStatsService batteryStatsService) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda21(
+            int i,
+            int i2,
+            int i3,
+            long j,
+            long j2,
+            long j3,
+            BatteryStatsService batteryStatsService) {
         this.$r8$classId = i3;
         this.f$0 = batteryStatsService;
         this.f$1 = i;
@@ -21,7 +29,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
         this.f$5 = j3;
     }
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda21(int i, int i2, long j, long j2, long j3, BatteryStatsService batteryStatsService) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda21(
+            int i, int i2, long j, long j2, long j3, BatteryStatsService batteryStatsService) {
         this.$r8$classId = 2;
         this.f$0 = batteryStatsService;
         this.f$1 = i;
@@ -51,7 +60,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
                         if (batteryStatsService.mStats.mOnBattery) {
                             if (i != 3 && i != 2) {
                                 str = "inactive";
-                                batteryStatsService.mWorker.scheduleSync(2, "wifi-data: ".concat(str));
+                                batteryStatsService.mWorker.scheduleSync(
+                                        2, "wifi-data: ".concat(str));
                             }
                             str = "active";
                             batteryStatsService.mWorker.scheduleSync(2, "wifi-data: ".concat(str));
@@ -74,7 +84,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
                             return;
                         }
                         batteryStatsService2.mLastPowerStateFromRadio = i3;
-                        batteryStatsService2.mStats.noteMobileRadioPowerStateLocked(i3, i4, j4, j5, j6);
+                        batteryStatsService2.mStats.noteMobileRadioPowerStateLocked(
+                                i3, i4, j4, j5, j6);
                         return;
                     } finally {
                     }

@@ -10,6 +10,7 @@ import android.os.RemoteException;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextFlags;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -86,19 +87,85 @@ public final class CoreSettingsObserver extends ContentObserver {
         hashMap3.put("updatable_driver_sphal_libraries", String.class);
         hashMap3.put("navigationbar_current_color", cls);
         Class cls2 = Boolean.TYPE;
-        arrayList.add(new DeviceConfigEntry("widget", "CursorControlFeature__enable_cursor_drag_from_anywhere", "widget__enable_cursor_drag_from_anywhere", cls2, Boolean.TRUE));
-        arrayList.add(new DeviceConfigEntry("widget", "CursorControlFeature__min_angle_from_vertical_to_start_cursor_drag", "widget__min_angle_from_vertical_to_start_cursor_drag", cls, 45));
-        arrayList.add(new DeviceConfigEntry("widget", "CursorControlFeature__finger_to_cursor_distance", "widget__finger_to_cursor_distance", cls, -1));
+        arrayList.add(
+                new DeviceConfigEntry(
+                        "widget",
+                        "CursorControlFeature__enable_cursor_drag_from_anywhere",
+                        "widget__enable_cursor_drag_from_anywhere",
+                        cls2,
+                        Boolean.TRUE));
+        arrayList.add(
+                new DeviceConfigEntry(
+                        "widget",
+                        "CursorControlFeature__min_angle_from_vertical_to_start_cursor_drag",
+                        "widget__min_angle_from_vertical_to_start_cursor_drag",
+                        cls,
+                        45));
+        arrayList.add(
+                new DeviceConfigEntry(
+                        "widget",
+                        "CursorControlFeature__finger_to_cursor_distance",
+                        "widget__finger_to_cursor_distance",
+                        cls,
+                        -1));
         Boolean bool = Boolean.FALSE;
-        arrayList.add(new DeviceConfigEntry("widget", "CursorControlFeature__enable_insertion_handle_gestures", "widget__enable_insertion_handle_gestures", cls2, bool));
-        arrayList.add(new DeviceConfigEntry("widget", "CursorControlFeature__insertion_handle_delta_height", "widget__insertion_handle_delta_height", cls, 25));
-        arrayList.add(new DeviceConfigEntry("widget", "CursorControlFeature__insertion_handle_opacity", "widget__insertion_handle_opacity", cls, 50));
+        arrayList.add(
+                new DeviceConfigEntry(
+                        "widget",
+                        "CursorControlFeature__enable_insertion_handle_gestures",
+                        "widget__enable_insertion_handle_gestures",
+                        cls2,
+                        bool));
+        arrayList.add(
+                new DeviceConfigEntry(
+                        "widget",
+                        "CursorControlFeature__insertion_handle_delta_height",
+                        "widget__insertion_handle_delta_height",
+                        cls,
+                        25));
+        arrayList.add(
+                new DeviceConfigEntry(
+                        "widget",
+                        "CursorControlFeature__insertion_handle_opacity",
+                        "widget__insertion_handle_opacity",
+                        cls,
+                        50));
         Class cls3 = Float.TYPE;
-        arrayList.add(new DeviceConfigEntry("widget", "CursorControlFeature__line_slop_ratio", "widget__line_slop_ratio", cls3, Float.valueOf(0.5f)));
-        arrayList.add(new DeviceConfigEntry("widget", "CursorControlFeature__enable_new_magnifier", "widget__enable_new_magnifier", cls2, bool));
-        arrayList.add(new DeviceConfigEntry("widget", "CursorControlFeature__magnifier_zoom_factor", "widget__magnifier_zoom_factor", cls3, Float.valueOf(1.5f)));
-        arrayList.add(new DeviceConfigEntry("widget", "CursorControlFeature__magnifier_aspect_ratio", "widget__magnifier_aspect_ratio", cls3, Float.valueOf(5.5f)));
-        arrayList.add(new DeviceConfigEntry("text", "TextEditing__enable_new_context_menu", "text__enable_new_context_menu", cls2, bool));
+        arrayList.add(
+                new DeviceConfigEntry(
+                        "widget",
+                        "CursorControlFeature__line_slop_ratio",
+                        "widget__line_slop_ratio",
+                        cls3,
+                        Float.valueOf(0.5f)));
+        arrayList.add(
+                new DeviceConfigEntry(
+                        "widget",
+                        "CursorControlFeature__enable_new_magnifier",
+                        "widget__enable_new_magnifier",
+                        cls2,
+                        bool));
+        arrayList.add(
+                new DeviceConfigEntry(
+                        "widget",
+                        "CursorControlFeature__magnifier_zoom_factor",
+                        "widget__magnifier_zoom_factor",
+                        cls3,
+                        Float.valueOf(1.5f)));
+        arrayList.add(
+                new DeviceConfigEntry(
+                        "widget",
+                        "CursorControlFeature__magnifier_aspect_ratio",
+                        "widget__magnifier_aspect_ratio",
+                        cls3,
+                        Float.valueOf(5.5f)));
+        arrayList.add(
+                new DeviceConfigEntry(
+                        "text",
+                        "TextEditing__enable_new_context_menu",
+                        "text__enable_new_context_menu",
+                        cls2,
+                        bool));
         int i = 0;
         while (true) {
             String[] strArr = TextFlags.TEXT_ACONFIGS_FLAGS;
@@ -107,7 +174,13 @@ public final class CoreSettingsObserver extends ContentObserver {
                 return;
             }
             String str = strArr[i];
-            sDeviceConfigEntries.add(new DeviceConfigEntry("text", str, TextFlags.getKeyForFlag(str), Boolean.TYPE, Boolean.valueOf(TextFlags.TEXT_ACONFIG_DEFAULT_VALUE[i])));
+            sDeviceConfigEntries.add(
+                    new DeviceConfigEntry(
+                            "text",
+                            str,
+                            TextFlags.getKeyForFlag(str),
+                            Boolean.TYPE,
+                            Boolean.valueOf(TextFlags.TEXT_ACONFIG_DEFAULT_VALUE[i])));
             i++;
         }
     }
@@ -120,7 +193,20 @@ public final class CoreSettingsObserver extends ContentObserver {
             synchronized (list) {
                 try {
                     if (!sDeviceConfigContextEntriesLoaded) {
-                        ((ArrayList) list).add(new DeviceConfigEntry("widget", "AnalogClockFeature__analog_clock_seconds_hand_fps", "widget__analog_clock_seconds_hand_fps", Integer.TYPE, Integer.valueOf(activityManagerService.mContext.getResources().getInteger(R.integer.config_displayWhiteBalanceBrightnessFilterHorizon))));
+                        ((ArrayList) list)
+                                .add(
+                                        new DeviceConfigEntry(
+                                                "widget",
+                                                "AnalogClockFeature__analog_clock_seconds_hand_fps",
+                                                "widget__analog_clock_seconds_hand_fps",
+                                                Integer.TYPE,
+                                                Integer.valueOf(
+                                                        activityManagerService
+                                                                .mContext
+                                                                .getResources()
+                                                                .getInteger(
+                                                                        R.integer
+                                                                                .config_displayWhiteBalanceBrightnessFilterHorizon))));
                         sDeviceConfigContextEntriesLoaded = true;
                     }
                 } finally {
@@ -130,15 +216,27 @@ public final class CoreSettingsObserver extends ContentObserver {
         this.mActivityManagerService = activityManagerService;
         Iterator it = sSecureSettingToTypeMap.keySet().iterator();
         while (it.hasNext()) {
-            this.mActivityManagerService.mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor((String) it.next()), false, this);
+            this.mActivityManagerService
+                    .mContext
+                    .getContentResolver()
+                    .registerContentObserver(
+                            Settings.Secure.getUriFor((String) it.next()), false, this);
         }
         Iterator it2 = sSystemSettingToTypeMap.keySet().iterator();
         while (it2.hasNext()) {
-            this.mActivityManagerService.mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor((String) it2.next()), false, this);
+            this.mActivityManagerService
+                    .mContext
+                    .getContentResolver()
+                    .registerContentObserver(
+                            Settings.System.getUriFor((String) it2.next()), false, this);
         }
         Iterator it3 = sGlobalSettingToTypeMap.keySet().iterator();
         while (it3.hasNext()) {
-            this.mActivityManagerService.mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor((String) it3.next()), false, this);
+            this.mActivityManagerService
+                    .mContext
+                    .getContentResolver()
+                    .registerContentObserver(
+                            Settings.Global.getUriFor((String) it3.next()), false, this);
         }
         HashSet hashSet = new HashSet();
         Iterator it4 = ((ArrayList) sDeviceConfigEntries).iterator();
@@ -146,13 +244,18 @@ public final class CoreSettingsObserver extends ContentObserver {
             DeviceConfigEntry deviceConfigEntry = (DeviceConfigEntry) it4.next();
             if (!hashSet.contains(deviceConfigEntry.namespace)) {
                 Executor mainExecutor = ActivityThread.currentApplication().getMainExecutor();
-                DeviceConfig.OnPropertiesChangedListener onPropertiesChangedListener = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.server.am.CoreSettingsObserver$$ExternalSyntheticLambda0
-                    public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                        CoreSettingsObserver.this.onChange(false);
-                    }
-                };
+                DeviceConfig.OnPropertiesChangedListener onPropertiesChangedListener =
+                        new DeviceConfig
+                                .OnPropertiesChangedListener() { // from class:
+                                                                 // com.android.server.am.CoreSettingsObserver$$ExternalSyntheticLambda0
+                            public final void onPropertiesChanged(
+                                    DeviceConfig.Properties properties) {
+                                CoreSettingsObserver.this.onChange(false);
+                            }
+                        };
                 String str = deviceConfigEntry.namespace;
-                DeviceConfig.addOnPropertiesChangedListener(str, mainExecutor, onPropertiesChangedListener);
+                DeviceConfig.addOnPropertiesChangedListener(
+                        str, mainExecutor, onPropertiesChangedListener);
                 hashSet.add(str);
             }
         }
@@ -175,10 +278,18 @@ public final class CoreSettingsObserver extends ContentObserver {
     }
 
     public void populateSettings(Bundle bundle, Map map) {
-        ContentResolver contentResolver = this.mActivityManagerService.mContext.getContentResolver();
+        ContentResolver contentResolver =
+                this.mActivityManagerService.mContext.getContentResolver();
         for (Map.Entry entry : map.entrySet()) {
             String str = (String) entry.getKey();
-            String stringForUser = map == sSecureSettingToTypeMap ? Settings.Secure.getStringForUser(contentResolver, str, contentResolver.getUserId()) : map == sSystemSettingToTypeMap ? Settings.System.getStringForUser(contentResolver, str, contentResolver.getUserId()) : Settings.Global.getString(contentResolver, str);
+            String stringForUser =
+                    map == sSecureSettingToTypeMap
+                            ? Settings.Secure.getStringForUser(
+                                    contentResolver, str, contentResolver.getUserId())
+                            : map == sSystemSettingToTypeMap
+                                    ? Settings.System.getStringForUser(
+                                            contentResolver, str, contentResolver.getUserId())
+                                    : Settings.Global.getString(contentResolver, str);
             if (stringForUser == null) {
                 bundle.remove(str);
             } else {
@@ -211,13 +322,18 @@ public final class CoreSettingsObserver extends ContentObserver {
             if (cls == String.class) {
                 this.mCoreSettings.putString(str3, DeviceConfig.getString(str2, str, (String) obj));
             } else if (cls == Integer.TYPE) {
-                this.mCoreSettings.putInt(str3, DeviceConfig.getInt(str2, str, ((Integer) obj).intValue()));
+                this.mCoreSettings.putInt(
+                        str3, DeviceConfig.getInt(str2, str, ((Integer) obj).intValue()));
             } else if (cls == Float.TYPE) {
-                this.mCoreSettings.putFloat(str3, DeviceConfig.getFloat(str2, str, ((Float) obj).floatValue()));
+                this.mCoreSettings.putFloat(
+                        str3, DeviceConfig.getFloat(str2, str, ((Float) obj).floatValue()));
             } else if (cls == Long.TYPE) {
-                this.mCoreSettings.putLong(str3, DeviceConfig.getLong(str2, str, ((Long) obj).longValue()));
+                this.mCoreSettings.putLong(
+                        str3, DeviceConfig.getLong(str2, str, ((Long) obj).longValue()));
             } else if (cls == Boolean.TYPE) {
-                this.mCoreSettings.putInt(str3, DeviceConfig.getBoolean(str2, str, ((Boolean) obj).booleanValue()) ? 1 : 0);
+                this.mCoreSettings.putInt(
+                        str3,
+                        DeviceConfig.getBoolean(str2, str, ((Boolean) obj).booleanValue()) ? 1 : 0);
             }
         }
         ActivityManagerService activityManagerService = this.mActivityManagerService;
@@ -228,7 +344,8 @@ public final class CoreSettingsObserver extends ContentObserver {
             try {
                 ProcessList processList = activityManagerService.mProcessList;
                 for (int size = processList.mLruProcesses.size() - 1; size >= 0; size--) {
-                    IApplicationThread iApplicationThread = ((ProcessRecord) processList.mLruProcesses.get(size)).mThread;
+                    IApplicationThread iApplicationThread =
+                            ((ProcessRecord) processList.mLruProcesses.get(size)).mThread;
                     if (iApplicationThread != null) {
                         try {
                             iApplicationThread.setCoreSettings(bundle);

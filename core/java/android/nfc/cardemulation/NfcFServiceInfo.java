@@ -17,49 +17,63 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.R;
 import com.android.server.SecureKeyConst;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class NfcFServiceInfo implements Parcelable {
-    public static final Parcelable.Creator<NfcFServiceInfo> CREATOR = new Parcelable.Creator<NfcFServiceInfo>() { // from class: android.nfc.cardemulation.NfcFServiceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NfcFServiceInfo createFromParcel(Parcel source) {
-            String dynamicSystemCode;
-            String dynamicNfcid2;
-            ResolveInfo info = ResolveInfo.CREATOR.createFromParcel(source);
-            String description = source.readString();
-            String systemCode = source.readString();
-            if (source.readInt() == 0) {
-                dynamicSystemCode = null;
-            } else {
-                String dynamicSystemCode2 = source.readString();
-                dynamicSystemCode = dynamicSystemCode2;
-            }
-            String nfcid2 = source.readString();
-            if (source.readInt() == 0) {
-                dynamicNfcid2 = null;
-            } else {
-                String dynamicNfcid22 = source.readString();
-                dynamicNfcid2 = dynamicNfcid22;
-            }
-            int uid = source.readInt();
-            String t3tPmm = source.readString();
-            NfcFServiceInfo service = new NfcFServiceInfo(info, description, systemCode, dynamicSystemCode, nfcid2, dynamicNfcid2, uid, t3tPmm);
-            return service;
-        }
+    public static final Parcelable.Creator<NfcFServiceInfo> CREATOR =
+            new Parcelable.Creator<
+                    NfcFServiceInfo>() { // from class: android.nfc.cardemulation.NfcFServiceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NfcFServiceInfo createFromParcel(Parcel source) {
+                    String dynamicSystemCode;
+                    String dynamicNfcid2;
+                    ResolveInfo info = ResolveInfo.CREATOR.createFromParcel(source);
+                    String description = source.readString();
+                    String systemCode = source.readString();
+                    if (source.readInt() == 0) {
+                        dynamicSystemCode = null;
+                    } else {
+                        String dynamicSystemCode2 = source.readString();
+                        dynamicSystemCode = dynamicSystemCode2;
+                    }
+                    String nfcid2 = source.readString();
+                    if (source.readInt() == 0) {
+                        dynamicNfcid2 = null;
+                    } else {
+                        String dynamicNfcid22 = source.readString();
+                        dynamicNfcid2 = dynamicNfcid22;
+                    }
+                    int uid = source.readInt();
+                    String t3tPmm = source.readString();
+                    NfcFServiceInfo service =
+                            new NfcFServiceInfo(
+                                    info,
+                                    description,
+                                    systemCode,
+                                    dynamicSystemCode,
+                                    nfcid2,
+                                    dynamicNfcid2,
+                                    uid,
+                                    t3tPmm);
+                    return service;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NfcFServiceInfo[] newArray(int size) {
-            return new NfcFServiceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NfcFServiceInfo[] newArray(int size) {
+                    return new NfcFServiceInfo[size];
+                }
+            };
     private static final String DEFAULT_T3T_PMM = "FFFFFFFFFFFFFFFF";
     static final String TAG = "NfcFServiceInfo";
     private final String mDescription;
@@ -71,7 +85,15 @@ public final class NfcFServiceInfo implements Parcelable {
     private final String mT3tPmm;
     private final int mUid;
 
-    public NfcFServiceInfo(ResolveInfo info, String description, String systemCode, String dynamicSystemCode, String nfcid2, String dynamicNfcid2, int uid, String t3tPmm) {
+    public NfcFServiceInfo(
+            ResolveInfo info,
+            String description,
+            String systemCode,
+            String dynamicSystemCode,
+            String nfcid2,
+            String dynamicNfcid2,
+            int uid,
+            String t3tPmm) {
         this.mService = info;
         this.mDescription = description;
         this.mSystemCode = systemCode;
@@ -82,7 +104,8 @@ public final class NfcFServiceInfo implements Parcelable {
         this.mT3tPmm = t3tPmm;
     }
 
-    public NfcFServiceInfo(PackageManager pm, ResolveInfo info) throws XmlPullParserException, IOException {
+    public NfcFServiceInfo(PackageManager pm, ResolveInfo info)
+            throws XmlPullParserException, IOException {
         String str;
         int depth;
         ServiceInfo si = info.serviceInfo;
@@ -91,12 +114,15 @@ public final class NfcFServiceInfo implements Parcelable {
             try {
                 parser = si.loadXmlMetaData(pm, "android.nfc.cardemulation.host_nfcf_service");
                 if (parser == null) {
-                    throw new XmlPullParserException("No android.nfc.cardemulation.host_nfcf_service meta-data");
+                    throw new XmlPullParserException(
+                            "No android.nfc.cardemulation.host_nfcf_service meta-data");
                 }
-                for (int eventType = parser.getEventType(); eventType != 2 && eventType != 1; eventType = parser.next()) {
-                }
+                for (int eventType = parser.getEventType();
+                        eventType != 2 && eventType != 1;
+                        eventType = parser.next()) {}
                 if (!"host-nfcf-service".equals(parser.getName())) {
-                    throw new XmlPullParserException("Meta-data does not start with <host-nfcf-service> tag");
+                    throw new XmlPullParserException(
+                            "Meta-data does not start with <host-nfcf-service> tag");
                 }
                 Resources res = pm.getResourcesForApplication(si.applicationInfo);
                 AttributeSet attrs = Xml.asAttributeSet(parser);
@@ -125,10 +151,13 @@ public final class NfcFServiceInfo implements Parcelable {
                         break;
                     }
                     String tagName = parser.getName();
-                    if (eventType2 == 2 && "system-code-filter".equals(tagName) && systemCode == null) {
+                    if (eventType2 == 2
+                            && "system-code-filter".equals(tagName)
+                            && systemCode == null) {
                         TypedArray a = res.obtainAttributes(attrs, R.styleable.SystemCodeFilter);
                         String systemCode2 = a.getString(0).toUpperCase();
-                        if (!isValidSystemCode(systemCode2) && !systemCode2.equalsIgnoreCase("NULL")) {
+                        if (!isValidSystemCode(systemCode2)
+                                && !systemCode2.equalsIgnoreCase("NULL")) {
                             Log.e(TAG, "Invalid System Code: " + systemCode2);
                             systemCode = null;
                         } else {
@@ -136,10 +165,14 @@ public final class NfcFServiceInfo implements Parcelable {
                         }
                         a.recycle();
                         depth2 = depth;
-                    } else if (eventType2 == 2 && "nfcid2-filter".equals(tagName) && nfcid2 == null) {
+                    } else if (eventType2 == 2
+                            && "nfcid2-filter".equals(tagName)
+                            && nfcid2 == null) {
                         TypedArray a2 = res.obtainAttributes(attrs, R.styleable.Nfcid2Filter);
                         String nfcid22 = a2.getString(0).toUpperCase();
-                        if (!nfcid22.equalsIgnoreCase("RANDOM") && !nfcid22.equalsIgnoreCase("NULL") && !isValidNfcid2(nfcid22)) {
+                        if (!nfcid22.equalsIgnoreCase("RANDOM")
+                                && !nfcid22.equalsIgnoreCase("NULL")
+                                && !isValidNfcid2(nfcid22)) {
                             Log.e(TAG, "Invalid NFCID2: " + nfcid22);
                             nfcid2 = null;
                         } else {
@@ -147,7 +180,9 @@ public final class NfcFServiceInfo implements Parcelable {
                         }
                         a2.recycle();
                         depth2 = depth;
-                    } else if (eventType2 == 2 && tagName.equals("t3tPmm-filter") && t3tPmm == null) {
+                    } else if (eventType2 == 2
+                            && tagName.equals("t3tPmm-filter")
+                            && t3tPmm == null) {
                         TypedArray a3 = res.obtainAttributes(attrs, R.styleable.T3tPmmFilter);
                         t3tPmm = a3.getString(0).toUpperCase();
                         a3.recycle();
@@ -174,7 +209,8 @@ public final class NfcFServiceInfo implements Parcelable {
     }
 
     public ComponentName getComponent() {
-        return new ComponentName(this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
+        return new ComponentName(
+                this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
     }
 
     public String getSystemCode() {
@@ -238,7 +274,11 @@ public final class NfcFServiceInfo implements Parcelable {
             return false;
         }
         NfcFServiceInfo thatService = (NfcFServiceInfo) o;
-        return thatService.getComponent().equals(getComponent()) && thatService.getUid() == getUid() && thatService.mSystemCode.equalsIgnoreCase(this.mSystemCode) && thatService.mNfcid2.equalsIgnoreCase(this.mNfcid2) && thatService.mT3tPmm.equalsIgnoreCase(this.mT3tPmm);
+        return thatService.getComponent().equals(getComponent())
+                && thatService.getUid() == getUid()
+                && thatService.mSystemCode.equalsIgnoreCase(this.mSystemCode)
+                && thatService.mNfcid2.equalsIgnoreCase(this.mNfcid2)
+                && thatService.mT3tPmm.equalsIgnoreCase(this.mT3tPmm);
     }
 
     public int hashCode() {
@@ -269,7 +309,14 @@ public final class NfcFServiceInfo implements Parcelable {
     }
 
     public void dump(ParcelFileDescriptor fd, PrintWriter pw, String[] args) {
-        pw.println("    " + getComponent() + " (Description: " + getDescription() + ") (UID: " + getUid() + NavigationBarInflaterView.KEY_CODE_END);
+        pw.println(
+                "    "
+                        + getComponent()
+                        + " (Description: "
+                        + getDescription()
+                        + ") (UID: "
+                        + getUid()
+                        + NavigationBarInflaterView.KEY_CODE_END);
         pw.println("    System Code: " + getSystemCode());
         pw.println("    NFCID2: " + getNfcid2());
         pw.println("    T3tPmm: " + getT3tPmm());
@@ -291,7 +338,8 @@ public final class NfcFServiceInfo implements Parcelable {
             Log.e(TAG, "System Code " + systemCode + " is not a valid System Code.");
             return false;
         }
-        if (!systemCode.startsWith("4") || systemCode.toUpperCase().endsWith(SecureKeyConst.AT_CMD_DRK_V1_WRITING_END)) {
+        if (!systemCode.startsWith("4")
+                || systemCode.toUpperCase().endsWith(SecureKeyConst.AT_CMD_DRK_V1_WRITING_END)) {
             Log.e(TAG, "System Code " + systemCode + " is not a valid System Code.");
             return false;
         }

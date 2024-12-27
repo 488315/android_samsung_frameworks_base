@@ -1,7 +1,5 @@
 package com.android.internal.org.bouncycastle.math.ec;
 
-import com.android.internal.org.bouncycastle.math.ec.ECCurve;
-import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -11,13 +9,50 @@ class Tnaf {
     private static final BigInteger MINUS_ONE = ECConstants.ONE.negate();
     private static final BigInteger MINUS_TWO = ECConstants.TWO.negate();
     private static final BigInteger MINUS_THREE = ECConstants.THREE.negate();
-    public static final ZTauElement[] alpha0 = {null, new ZTauElement(ECConstants.ONE, ECConstants.ZERO), null, new ZTauElement(MINUS_THREE, MINUS_ONE), null, new ZTauElement(MINUS_ONE, MINUS_ONE), null, new ZTauElement(ECConstants.ONE, MINUS_ONE), null};
-    public static final byte[][] alpha0Tnaf = {null, new byte[]{1}, null, new byte[]{-1, 0, 1}, null, new byte[]{1, 0, 1}, null, new byte[]{-1, 0, 0, 1}};
-    public static final ZTauElement[] alpha1 = {null, new ZTauElement(ECConstants.ONE, ECConstants.ZERO), null, new ZTauElement(MINUS_THREE, ECConstants.ONE), null, new ZTauElement(MINUS_ONE, ECConstants.ONE), null, new ZTauElement(ECConstants.ONE, ECConstants.ONE), null};
-    public static final byte[][] alpha1Tnaf = {null, new byte[]{1}, null, new byte[]{-1, 0, 1}, null, new byte[]{1, 0, 1}, null, new byte[]{-1, 0, 0, -1}};
+    public static final ZTauElement[] alpha0 = {
+        null,
+        new ZTauElement(ECConstants.ONE, ECConstants.ZERO),
+        null,
+        new ZTauElement(MINUS_THREE, MINUS_ONE),
+        null,
+        new ZTauElement(MINUS_ONE, MINUS_ONE),
+        null,
+        new ZTauElement(ECConstants.ONE, MINUS_ONE),
+        null
+    };
+    public static final byte[][] alpha0Tnaf = {
+        null,
+        new byte[] {1},
+        null,
+        new byte[] {-1, 0, 1},
+        null,
+        new byte[] {1, 0, 1},
+        null,
+        new byte[] {-1, 0, 0, 1}
+    };
+    public static final ZTauElement[] alpha1 = {
+        null,
+        new ZTauElement(ECConstants.ONE, ECConstants.ZERO),
+        null,
+        new ZTauElement(MINUS_THREE, ECConstants.ONE),
+        null,
+        new ZTauElement(MINUS_ONE, ECConstants.ONE),
+        null,
+        new ZTauElement(ECConstants.ONE, ECConstants.ONE),
+        null
+    };
+    public static final byte[][] alpha1Tnaf = {
+        null,
+        new byte[] {1},
+        null,
+        new byte[] {-1, 0, 1},
+        null,
+        new byte[] {1, 0, 1},
+        null,
+        new byte[] {-1, 0, 0, -1}
+    };
 
-    Tnaf() {
-    }
+    Tnaf() {}
 
     public static BigInteger norm(byte mu, ZTauElement lambda) {
         BigInteger s1 = lambda.u.multiply(lambda.u);
@@ -104,7 +139,8 @@ class Tnaf {
         return new ZTauElement(q0, q1);
     }
 
-    public static SimpleBigDecimal approximateDivisionByN(BigInteger k, BigInteger s, BigInteger vm, byte a, int m, int c) {
+    public static SimpleBigDecimal approximateDivisionByN(
+            BigInteger k, BigInteger s, BigInteger vm, byte a, int m, int c) {
         int _k = ((m + 5) / 2) + c;
         BigInteger ns = k.shiftRight(((m - _k) - 2) + a);
         BigInteger gs = s.multiply(ns);
@@ -133,7 +169,13 @@ class Tnaf {
         while (true) {
             if (!r0.equals(ECConstants.ZERO) || !r1.equals(ECConstants.ZERO)) {
                 if (r0.testBit(0)) {
-                    u[i] = (byte) ECConstants.TWO.subtract(r0.subtract(r1.shiftLeft(1)).mod(ECConstants.FOUR)).intValue();
+                    u[i] =
+                            (byte)
+                                    ECConstants.TWO
+                                            .subtract(
+                                                    r0.subtract(r1.shiftLeft(1))
+                                                            .mod(ECConstants.FOUR))
+                                            .intValue();
                     if (u[i] == 1) {
                         r0 = r0.clearBit(0);
                     } else {
@@ -167,7 +209,8 @@ class Tnaf {
 
     public static byte getMu(ECCurve.AbstractF2m curve) {
         if (!curve.isKoblitz()) {
-            throw new IllegalArgumentException("No Koblitz curve (ABC), TNAF multiplication not possible");
+            throw new IllegalArgumentException(
+                    "No Koblitz curve (ABC), TNAF multiplication not possible");
         }
         if (curve.getA().isZero()) {
             return (byte) -1;
@@ -241,7 +284,7 @@ class Tnaf {
         }
         BigInteger dividend0 = ECConstants.ONE.add(ui[1]).shiftRight(shifts);
         BigInteger dividend1 = ECConstants.ONE.add(ui[0]).shiftRight(shifts).negate();
-        return new BigInteger[]{dividend0, dividend1};
+        return new BigInteger[] {dividend0, dividend1};
     }
 
     public static BigInteger[] getSi(int fieldSize, int curveA, BigInteger cofactor) {
@@ -255,7 +298,7 @@ class Tnaf {
         }
         BigInteger dividend0 = ECConstants.ONE.add(ui[1]).shiftRight(shifts);
         BigInteger dividend1 = ECConstants.ONE.add(ui[0]).shiftRight(shifts).negate();
-        return new BigInteger[]{dividend0, dividend1};
+        return new BigInteger[] {dividend0, dividend1};
     }
 
     protected static int getShiftsForCofactor(BigInteger h) {
@@ -270,7 +313,8 @@ class Tnaf {
         throw new IllegalArgumentException("h (Cofactor) must be 2 or 4");
     }
 
-    public static ZTauElement partModReduction(BigInteger k, int m, byte a, BigInteger[] s, byte mu, byte c) {
+    public static ZTauElement partModReduction(
+            BigInteger k, int m, byte a, BigInteger[] s, byte mu, byte c) {
         BigInteger d0;
         if (mu == 1) {
             d0 = s[0].add(s[1]);
@@ -283,7 +327,9 @@ class Tnaf {
         SimpleBigDecimal lambda0 = approximateDivisionByN(k, s[0], vm, a, m, c);
         SimpleBigDecimal lambda1 = approximateDivisionByN(k, s[1], vm, a, m, c);
         ZTauElement q = round(lambda0, lambda1, mu);
-        BigInteger r0 = k.subtract(d0.multiply(q.u)).subtract(BigInteger.valueOf(2L).multiply(s[1]).multiply(q.v));
+        BigInteger r0 =
+                k.subtract(d0.multiply(q.u))
+                        .subtract(BigInteger.valueOf(2L).multiply(s[1]).multiply(q.v));
         BigInteger r1 = s[1].multiply(q.u).subtract(s[0].multiply(q.v));
         return new ZTauElement(r0, r1);
     }
@@ -327,7 +373,13 @@ class Tnaf {
         return q;
     }
 
-    public static byte[] tauAdicWNaf(byte mu, ZTauElement lambda, byte width, BigInteger pow2w, BigInteger tw, ZTauElement[] alpha) {
+    public static byte[] tauAdicWNaf(
+            byte mu,
+            ZTauElement lambda,
+            byte width,
+            BigInteger pow2w,
+            BigInteger tw,
+            ZTauElement[] alpha) {
         byte uLocal;
         if (mu != 1 && mu != -1) {
             throw new IllegalArgumentException("mu must be 1 or -1");

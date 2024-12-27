@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.math.field;
 
 import com.android.internal.org.bouncycastle.util.Integers;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -46,10 +47,12 @@ class GenericPolynomialExtensionField implements PolynomialExtensionField {
             return false;
         }
         GenericPolynomialExtensionField other = (GenericPolynomialExtensionField) obj;
-        return this.subfield.equals(other.subfield) && this.minimalPolynomial.equals(other.minimalPolynomial);
+        return this.subfield.equals(other.subfield)
+                && this.minimalPolynomial.equals(other.minimalPolynomial);
     }
 
     public int hashCode() {
-        return this.subfield.hashCode() ^ Integers.rotateLeft(this.minimalPolynomial.hashCode(), 16);
+        return this.subfield.hashCode()
+                ^ Integers.rotateLeft(this.minimalPolynomial.hashCode(), 16);
     }
 }

@@ -5,23 +5,29 @@ import android.graphics.drawable.Icon;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class ChooserAction implements Parcelable {
-    public static final Parcelable.Creator<ChooserAction> CREATOR = new Parcelable.Creator<ChooserAction>() { // from class: android.service.chooser.ChooserAction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ChooserAction createFromParcel(Parcel source) {
-            return new ChooserAction(Icon.CREATOR.createFromParcel(source), TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source), PendingIntent.CREATOR.createFromParcel(source));
-        }
+    public static final Parcelable.Creator<ChooserAction> CREATOR =
+            new Parcelable.Creator<
+                    ChooserAction>() { // from class: android.service.chooser.ChooserAction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ChooserAction createFromParcel(Parcel source) {
+                    return new ChooserAction(
+                            Icon.CREATOR.createFromParcel(source),
+                            TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source),
+                            PendingIntent.CREATOR.createFromParcel(source));
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ChooserAction[] newArray(int size) {
-            return new ChooserAction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ChooserAction[] newArray(int size) {
+                    return new ChooserAction[size];
+                }
+            };
     private final PendingIntent mAction;
     private final Icon mIcon;
     private final CharSequence mLabel;

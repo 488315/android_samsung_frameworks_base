@@ -17,11 +17,9 @@ public class EventLogTags {
         }
     }
 
-    public EventLogTags() throws IOException {
-    }
+    public EventLogTags() throws IOException {}
 
-    public EventLogTags(BufferedReader input) throws IOException {
-    }
+    public EventLogTags(BufferedReader input) throws IOException {}
 
     public Description get(String name) {
         return null;

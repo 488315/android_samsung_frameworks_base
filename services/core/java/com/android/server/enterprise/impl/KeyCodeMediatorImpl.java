@@ -6,13 +6,16 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.adapter.AdapterRegistry;
 import com.android.server.enterprise.adapter.IWindowManagerAdapter;
 import com.android.server.enterprise.adapterlayer.WindowManagerAdapter;
 import com.android.server.enterprise.common.KeyCodeRestrictionCallback;
+
 import com.samsung.android.knox.custom.utils.KnoxsdkFileLog;
 import com.samsung.android.view.SemWindowManager;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -47,7 +50,8 @@ public final class KeyCodeMediatorImpl implements Handler.Callback {
         HashSet hashSet = new HashSet();
         Iterator it = ((HashSet) this.mRestrictionCallbacks).iterator();
         while (it.hasNext()) {
-            KeyCodeRestrictionCallback keyCodeRestrictionCallback = (KeyCodeRestrictionCallback) it.next();
+            KeyCodeRestrictionCallback keyCodeRestrictionCallback =
+                    (KeyCodeRestrictionCallback) it.next();
             if (keyCodeRestrictionCallback.getRestrictedKeyCodes() != null) {
                 hashSet.addAll(keyCodeRestrictionCallback.getRestrictedKeyCodes());
             }
@@ -60,7 +64,9 @@ public final class KeyCodeMediatorImpl implements Handler.Callback {
         long clearCallingIdentity;
         SemWindowManager.KeyCustomizationInfo keyCustomizationInfo;
         int i = message.what;
-        IWindowManagerAdapter iWindowManagerAdapter = (IWindowManagerAdapter) AdapterRegistry.mAdapterHandles.get(IWindowManagerAdapter.class);
+        IWindowManagerAdapter iWindowManagerAdapter =
+                (IWindowManagerAdapter)
+                        AdapterRegistry.mAdapterHandles.get(IWindowManagerAdapter.class);
         Objects.requireNonNull(iWindowManagerAdapter);
         WindowManagerAdapter windowManagerAdapter = (WindowManagerAdapter) iWindowManagerAdapter;
         Iterator it = WindowManagerAdapter.PRESS_TYPES_TO_BLOCK.iterator();
@@ -72,7 +78,9 @@ public final class KeyCodeMediatorImpl implements Handler.Callback {
             clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
-                    keyCustomizationInfo = windowManagerAdapter.mWindowManagerService.getKeyCustomizationInfo(10, num.intValue(), i);
+                    keyCustomizationInfo =
+                            windowManagerAdapter.mWindowManagerService.getKeyCustomizationInfo(
+                                    10, num.intValue(), i);
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 } finally {
                 }
@@ -81,15 +89,24 @@ public final class KeyCodeMediatorImpl implements Handler.Callback {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 keyCustomizationInfo = null;
             }
-            if (keyCustomizationInfo != null && keyCustomizationInfo.id == 10 && keyCustomizationInfo.action == 4) {
-                IWindowManagerAdapter iWindowManagerAdapter2 = (IWindowManagerAdapter) AdapterRegistry.mAdapterHandles.get(IWindowManagerAdapter.class);
+            if (keyCustomizationInfo != null
+                    && keyCustomizationInfo.id == 10
+                    && keyCustomizationInfo.action == 4) {
+                IWindowManagerAdapter iWindowManagerAdapter2 =
+                        (IWindowManagerAdapter)
+                                AdapterRegistry.mAdapterHandles.get(IWindowManagerAdapter.class);
                 Objects.requireNonNull(iWindowManagerAdapter2);
-                WindowManagerAdapter windowManagerAdapter2 = (WindowManagerAdapter) iWindowManagerAdapter2;
+                WindowManagerAdapter windowManagerAdapter2 =
+                        (WindowManagerAdapter) iWindowManagerAdapter2;
                 clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     try {
-                        KnoxsdkFileLog.d("WindowManagerAdapter", "clearKeyCustomizationInfoByKeyCode with priority/keyCode : 10/" + i);
-                        windowManagerAdapter2.mWindowManagerService.clearKeyCustomizationInfoByAction(10, i, 4);
+                        KnoxsdkFileLog.d(
+                                "WindowManagerAdapter",
+                                "clearKeyCustomizationInfoByKeyCode with priority/keyCode : 10/"
+                                        + i);
+                        windowManagerAdapter2.mWindowManagerService
+                                .clearKeyCustomizationInfoByAction(10, i, 4);
                     } finally {
                     }
                 } catch (Exception e2) {
@@ -100,25 +117,39 @@ public final class KeyCodeMediatorImpl implements Handler.Callback {
         }
         Iterator it2 = ((HashSet) this.mRestrictionCallbacks).iterator();
         while (it2.hasNext()) {
-            KeyCodeRestrictionCallback keyCodeRestrictionCallback = (KeyCodeRestrictionCallback) it2.next();
+            KeyCodeRestrictionCallback keyCodeRestrictionCallback =
+                    (KeyCodeRestrictionCallback) it2.next();
             if (!keyCodeRestrictionCallback.isKeyCodeInputAllowed(i)) {
                 AnonymousClass1 anonymousClass1 = this.mInjector;
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "keyCode ", " must be blocked by ");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                i, "keyCode ", " must be blocked by ");
                 m.append(keyCodeRestrictionCallback.getServiceName());
                 String sb = m.toString();
                 anonymousClass1.getClass();
                 KnoxsdkFileLog.w("KeyCodeMediator", sb);
-                IWindowManagerAdapter iWindowManagerAdapter3 = (IWindowManagerAdapter) AdapterRegistry.mAdapterHandles.get(IWindowManagerAdapter.class);
+                IWindowManagerAdapter iWindowManagerAdapter3 =
+                        (IWindowManagerAdapter)
+                                AdapterRegistry.mAdapterHandles.get(IWindowManagerAdapter.class);
                 Objects.requireNonNull(iWindowManagerAdapter3);
-                WindowManagerAdapter windowManagerAdapter3 = (WindowManagerAdapter) iWindowManagerAdapter3;
+                WindowManagerAdapter windowManagerAdapter3 =
+                        (WindowManagerAdapter) iWindowManagerAdapter3;
                 clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     try {
-                        SemWindowManager.KeyCustomizationInfo keyCustomizationInfo2 = new SemWindowManager.KeyCustomizationInfo(3, 10, i, 4, (Intent) null, -1, -2);
-                        KnoxsdkFileLog.d("WindowManagerAdapter", "putKeyCustomizationInfo with pressType : 3, " + WindowManagerAdapter.keyCustomizationInfoToString(keyCustomizationInfo2));
-                        windowManagerAdapter3.mWindowManagerService.putKeyCustomizationInfo(keyCustomizationInfo2);
+                        SemWindowManager.KeyCustomizationInfo keyCustomizationInfo2 =
+                                new SemWindowManager.KeyCustomizationInfo(
+                                        3, 10, i, 4, (Intent) null, -1, -2);
+                        KnoxsdkFileLog.d(
+                                "WindowManagerAdapter",
+                                "putKeyCustomizationInfo with pressType : 3, "
+                                        + WindowManagerAdapter.keyCustomizationInfoToString(
+                                                keyCustomizationInfo2));
+                        windowManagerAdapter3.mWindowManagerService.putKeyCustomizationInfo(
+                                keyCustomizationInfo2);
                     } catch (Exception e3) {
-                        KnoxsdkFileLog.e("WindowManagerAdapter", "fail to putKeyCustomizationInfo " + e3);
+                        KnoxsdkFileLog.e(
+                                "WindowManagerAdapter", "fail to putKeyCustomizationInfo " + e3);
                     }
                     return true;
                 } finally {
@@ -138,7 +169,8 @@ public final class KeyCodeMediatorImpl implements Handler.Callback {
             }
         } else {
             this.mInjector.getClass();
-            KnoxsdkFileLog.w("KeyCodeMediator", "Restricted Keycodes are appearing Null for Admin: " + i);
+            KnoxsdkFileLog.w(
+                    "KeyCodeMediator", "Restricted Keycodes are appearing Null for Admin: " + i);
         }
     }
 

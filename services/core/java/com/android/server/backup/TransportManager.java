@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.util.Preconditions;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
@@ -20,6 +21,7 @@ import com.android.server.backup.transport.TransportNotAvailableException;
 import com.android.server.backup.transport.TransportNotRegisteredException;
 import com.android.server.backup.transport.TransportStats;
 import com.android.server.backup.transport.TransportStats$$ExternalSyntheticLambda0;
+
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashMap;
@@ -56,7 +58,13 @@ public final class TransportManager {
         public String name;
         public final String transportDirName;
 
-        public TransportDescription(String str, String str2, Intent intent, String str3, Intent intent2, CharSequence charSequence) {
+        public TransportDescription(
+                String str,
+                String str2,
+                Intent intent,
+                String str3,
+                Intent intent2,
+                CharSequence charSequence) {
             this.name = str;
             this.transportDirName = str2;
             this.configurationIntent = intent;
@@ -77,10 +85,16 @@ public final class TransportManager {
         this.mCurrentTransportName = str;
         TransportStats transportStats = new TransportStats();
         this.mTransportStats = transportStats;
-        this.mTransportConnectionManager = new TransportConnectionManager(i, context, transportStats);
+        this.mTransportConnectionManager =
+                new TransportConnectionManager(i, context, transportStats);
     }
 
-    public TransportManager(int i, Context context, Set set, String str, TransportConnectionManager transportConnectionManager) {
+    public TransportManager(
+            int i,
+            Context context,
+            Set set,
+            String str,
+            TransportConnectionManager transportConnectionManager) {
         this.mTransportServiceIntent = new Intent(SERVICE_ACTION_TRANSPORT_HOST);
         this.mOnTransportRegisteredListener = new TransportManager$$ExternalSyntheticLambda0();
         this.mTransportLock = new Object();
@@ -97,18 +111,36 @@ public final class TransportManager {
         return AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "[UserID:", "] ", str);
     }
 
-    public final void disposeOfTransportClient(TransportConnection transportConnection, String str) {
+    public final void disposeOfTransportClient(
+            TransportConnection transportConnection, String str) {
         this.mTransportConnectionManager.disposeOfTransportClient(transportConnection, str);
     }
 
     public final void dumpTransportClients(PrintWriter printWriter) {
         List unmodifiableList;
         TransportConnectionManager transportConnectionManager = this.mTransportConnectionManager;
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("Transport clients created: "), transportConnectionManager.mTransportClientsCreated, printWriter);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("Transport clients created: "),
+                transportConnectionManager.mTransportClientsCreated,
+                printWriter);
         synchronized (transportConnectionManager.mTransportClientsLock) {
-            printWriter.println("Current transport clients: " + ((WeakHashMap) transportConnectionManager.mTransportClientsCallerMap).size());
-            for (TransportConnection transportConnection : ((WeakHashMap) transportConnectionManager.mTransportClientsCallerMap).keySet()) {
-                printWriter.println("    " + transportConnection + " [" + ((String) ((WeakHashMap) transportConnectionManager.mTransportClientsCallerMap).get(transportConnection)) + "]");
+            printWriter.println(
+                    "Current transport clients: "
+                            + ((WeakHashMap) transportConnectionManager.mTransportClientsCallerMap)
+                                    .size());
+            for (TransportConnection transportConnection :
+                    ((WeakHashMap) transportConnectionManager.mTransportClientsCallerMap)
+                            .keySet()) {
+                printWriter.println(
+                        "    "
+                                + transportConnection
+                                + " ["
+                                + ((String)
+                                        ((WeakHashMap)
+                                                        transportConnectionManager
+                                                                .mTransportClientsCallerMap)
+                                                .get(transportConnection))
+                                + "]");
                 synchronized (transportConnection.mLogBufferLock) {
                     unmodifiableList = Collections.unmodifiableList(transportConnection.mLogBuffer);
                 }
@@ -124,14 +156,21 @@ public final class TransportManager {
         TransportStats transportStats = this.mTransportStats;
         synchronized (transportStats.mStatsLock) {
             try {
-                Optional reduce = ((HashMap) transportStats.mTransportStats).values().stream().reduce(new TransportStats$$ExternalSyntheticLambda0());
+                Optional reduce =
+                        ((HashMap) transportStats.mTransportStats)
+                                .values().stream()
+                                        .reduce(new TransportStats$$ExternalSyntheticLambda0());
                 if (reduce.isPresent()) {
                     TransportStats.dumpStats(printWriter, "", (TransportStats.Stats) reduce.get());
                 }
                 if (!((HashMap) transportStats.mTransportStats).isEmpty()) {
                     printWriter.println("Per transport:");
-                    for (ComponentName componentName : ((HashMap) transportStats.mTransportStats).keySet()) {
-                        TransportStats.Stats stats = (TransportStats.Stats) ((HashMap) transportStats.mTransportStats).get(componentName);
+                    for (ComponentName componentName :
+                            ((HashMap) transportStats.mTransportStats).keySet()) {
+                        TransportStats.Stats stats =
+                                (TransportStats.Stats)
+                                        ((HashMap) transportStats.mTransportStats)
+                                                .get(componentName);
                         printWriter.println("    " + componentName.flattenToShortString());
                         TransportStats.dumpStats(printWriter, "        ", stats);
                     }
@@ -145,7 +184,8 @@ public final class TransportManager {
     public final void forEachRegisteredTransport(Consumer consumer) {
         synchronized (this.mTransportLock) {
             try {
-                Iterator it = ((ArrayMap) this.mRegisteredTransportsDescriptionMap).values().iterator();
+                Iterator it =
+                        ((ArrayMap) this.mRegisteredTransportsDescriptionMap).values().iterator();
                 while (it.hasNext()) {
                     consumer.accept(((TransportDescription) it.next()).name);
                 }
@@ -172,7 +212,8 @@ public final class TransportManager {
             throw new IllegalStateException("No transport selected");
         }
         synchronized (this.mTransportLock) {
-            transportClientOrThrow = getTransportClientOrThrow(this.mCurrentTransportName, "BMS.requestBackup()");
+            transportClientOrThrow =
+                    getTransportClientOrThrow(this.mCurrentTransportName, "BMS.requestBackup()");
         }
         return transportClientOrThrow;
     }
@@ -198,17 +239,23 @@ public final class TransportManager {
         }
     }
 
-    public final TransportDescription getRegisteredTransportDescriptionOrThrowLocked(ComponentName componentName) {
-        TransportDescription transportDescription = (TransportDescription) this.mRegisteredTransportsDescriptionMap.get(componentName);
+    public final TransportDescription getRegisteredTransportDescriptionOrThrowLocked(
+            ComponentName componentName) {
+        TransportDescription transportDescription =
+                (TransportDescription) this.mRegisteredTransportsDescriptionMap.get(componentName);
         if (transportDescription != null) {
             return transportDescription;
         }
-        throw new TransportNotRegisteredException("Transport for host " + componentName + " not registered");
+        throw new TransportNotRegisteredException(
+                "Transport for host " + componentName + " not registered");
     }
 
     public final TransportDescription getRegisteredTransportDescriptionOrThrowLocked(String str) {
         Map.Entry registeredTransportEntryLocked = getRegisteredTransportEntryLocked(str);
-        TransportDescription transportDescription = registeredTransportEntryLocked == null ? null : (TransportDescription) registeredTransportEntryLocked.getValue();
+        TransportDescription transportDescription =
+                registeredTransportEntryLocked == null
+                        ? null
+                        : (TransportDescription) registeredTransportEntryLocked.getValue();
         if (transportDescription != null) {
             return transportDescription;
         }
@@ -228,7 +275,9 @@ public final class TransportManager {
         try {
             return getTransportClientOrThrow(str, str2);
         } catch (TransportNotRegisteredException unused) {
-            Slog.w("BackupTransportManager", addUserIdToLogMessage(this.mUserId, "Transport " + str + " not registered"));
+            Slog.w(
+                    "BackupTransportManager",
+                    addUserIdToLogMessage(this.mUserId, "Transport " + str + " not registered"));
             return null;
         }
     }
@@ -238,11 +287,16 @@ public final class TransportManager {
         synchronized (this.mTransportLock) {
             try {
                 Map.Entry registeredTransportEntryLocked = getRegisteredTransportEntryLocked(str);
-                ComponentName componentName = registeredTransportEntryLocked == null ? null : (ComponentName) registeredTransportEntryLocked.getKey();
+                ComponentName componentName =
+                        registeredTransportEntryLocked == null
+                                ? null
+                                : (ComponentName) registeredTransportEntryLocked.getKey();
                 if (componentName == null) {
                     throw new TransportNotRegisteredException(str);
                 }
-                transportClient = this.mTransportConnectionManager.getTransportClient(componentName, null, str2);
+                transportClient =
+                        this.mTransportConnectionManager.getTransportClient(
+                                componentName, null, str2);
             } finally {
             }
         }
@@ -285,14 +339,30 @@ public final class TransportManager {
         boolean contains = this.mTransportWhitelist.contains(componentName);
         int i = this.mUserId;
         if (!contains) {
-            Slog.w("BackupTransportManager", addUserIdToLogMessage(i, "BackupTransport " + componentName.flattenToShortString() + " not whitelisted."));
+            Slog.w(
+                    "BackupTransportManager",
+                    addUserIdToLogMessage(
+                            i,
+                            "BackupTransport "
+                                    + componentName.flattenToShortString()
+                                    + " not whitelisted."));
             return false;
         }
         try {
-            if ((this.mPackageManager.getPackageInfoAsUser(componentName.getPackageName(), 0, i).applicationInfo.privateFlags & 8) != 0) {
+            if ((this.mPackageManager.getPackageInfoAsUser(componentName.getPackageName(), 0, i)
+                                    .applicationInfo
+                                    .privateFlags
+                            & 8)
+                    != 0) {
                 return true;
             }
-            Slog.w("BackupTransportManager", addUserIdToLogMessage(i, "Transport package " + componentName.getPackageName() + " not privileged"));
+            Slog.w(
+                    "BackupTransportManager",
+                    addUserIdToLogMessage(
+                            i,
+                            "Transport package "
+                                    + componentName.getPackageName()
+                                    + " not privileged"));
             return false;
         } catch (PackageManager.NameNotFoundException e) {
             Slog.w("BackupTransportManager", addUserIdToLogMessage(i, "Package not found."), e);
@@ -302,7 +372,9 @@ public final class TransportManager {
 
     public final void onPackageRemoved(String str) {
         synchronized (this.mTransportLock) {
-            this.mRegisteredTransportsDescriptionMap.keySet().removeIf(new TransportManager$$ExternalSyntheticLambda2(1, str));
+            this.mRegisteredTransportsDescriptionMap
+                    .keySet()
+                    .removeIf(new TransportManager$$ExternalSyntheticLambda2(1, str));
         }
     }
 
@@ -310,7 +382,9 @@ public final class TransportManager {
         String name;
         String str;
         int i = this.mUserId;
-        Preconditions.checkState(!Thread.holdsLock(this.mTransportLock), "Can't call transport with transport lock held");
+        Preconditions.checkState(
+                !Thread.holdsLock(this.mTransportLock),
+                "Can't call transport with transport lock held");
         if (!isTransportTrusted(componentName)) {
             return -2;
         }
@@ -318,36 +392,57 @@ public final class TransportManager {
         Bundle bundle = new Bundle();
         bundle.putBoolean("android.app.backup.extra.TRANSPORT_REGISTRATION", true);
         TransportConnectionManager transportConnectionManager = this.mTransportConnectionManager;
-        TransportConnection transportClient = transportConnectionManager.getTransportClient(componentName, bundle, "TransportManager.registerTransport()");
+        TransportConnection transportClient =
+                transportConnectionManager.getTransportClient(
+                        componentName, bundle, "TransportManager.registerTransport()");
         int i2 = -1;
         try {
-            BackupTransportClient connectOrThrow = transportClient.connectOrThrow("TransportManager.registerTransport()");
+            BackupTransportClient connectOrThrow =
+                    transportClient.connectOrThrow("TransportManager.registerTransport()");
             try {
                 name = connectOrThrow.name();
                 AndroidFuture newFuture = connectOrThrow.mTransportFutures.newFuture();
                 connectOrThrow.mTransportBinder.transportDirName(newFuture);
                 str = (String) connectOrThrow.getFutureResult(newFuture);
             } catch (RemoteException unused) {
-                Slog.e("BackupTransportManager", addUserIdToLogMessage(i, "Transport " + flattenToShortString + " died while registering"));
+                Slog.e(
+                        "BackupTransportManager",
+                        addUserIdToLogMessage(
+                                i,
+                                "Transport " + flattenToShortString + " died while registering"));
             }
             if (name != null && str != null) {
                 registerTransport(componentName, connectOrThrow);
-                Slog.d("BackupTransportManager", addUserIdToLogMessage(i, "Transport " + flattenToShortString + " registered"));
+                Slog.d(
+                        "BackupTransportManager",
+                        addUserIdToLogMessage(
+                                i, "Transport " + flattenToShortString + " registered"));
                 this.mOnTransportRegisteredListener.onTransportRegistered(name, str);
                 i2 = 0;
-                transportConnectionManager.disposeOfTransportClient(transportClient, "TransportManager.registerTransport()");
+                transportConnectionManager.disposeOfTransportClient(
+                        transportClient, "TransportManager.registerTransport()");
                 return i2;
             }
             return -2;
         } catch (TransportNotAvailableException unused2) {
-            Slog.e("BackupTransportManager", addUserIdToLogMessage(i, "Couldn't connect to transport " + flattenToShortString + " for registration"));
-            transportConnectionManager.disposeOfTransportClient(transportClient, "TransportManager.registerTransport()");
+            Slog.e(
+                    "BackupTransportManager",
+                    addUserIdToLogMessage(
+                            i,
+                            "Couldn't connect to transport "
+                                    + flattenToShortString
+                                    + " for registration"));
+            transportConnectionManager.disposeOfTransportClient(
+                    transportClient, "TransportManager.registerTransport()");
             return -1;
         }
     }
 
-    public final void registerTransport(ComponentName componentName, BackupTransportClient backupTransportClient) {
-        Preconditions.checkState(!Thread.holdsLock(this.mTransportLock), "Can't call transport with transport lock held");
+    public final void registerTransport(
+            ComponentName componentName, BackupTransportClient backupTransportClient) {
+        Preconditions.checkState(
+                !Thread.holdsLock(this.mTransportLock),
+                "Can't call transport with transport lock held");
         String name = backupTransportClient.name();
         AndroidFuture newFuture = backupTransportClient.mTransportFutures.newFuture();
         backupTransportClient.mTransportBinder.transportDirName(newFuture);
@@ -363,14 +458,23 @@ public final class TransportManager {
         Intent intent2 = (Intent) backupTransportClient.getFutureResult(newFuture4);
         AndroidFuture newFuture5 = backupTransportClient.mTransportFutures.newFuture();
         backupTransportClient.mTransportBinder.dataManagementIntentLabel(newFuture5);
-        TransportDescription transportDescription = new TransportDescription(name, str, intent, str2, intent2, (CharSequence) backupTransportClient.getFutureResult(newFuture5));
+        TransportDescription transportDescription =
+                new TransportDescription(
+                        name,
+                        str,
+                        intent,
+                        str2,
+                        intent2,
+                        (CharSequence) backupTransportClient.getFutureResult(newFuture5));
         synchronized (this.mTransportLock) {
-            ((ArrayMap) this.mRegisteredTransportsDescriptionMap).put(componentName, transportDescription);
+            ((ArrayMap) this.mRegisteredTransportsDescriptionMap)
+                    .put(componentName, transportDescription);
         }
     }
 
     public final void registerTransportsForIntent(Intent intent, Predicate predicate) {
-        List queryIntentServicesAsUser = this.mPackageManager.queryIntentServicesAsUser(intent, 0, this.mUserId);
+        List queryIntentServicesAsUser =
+                this.mPackageManager.queryIntentServicesAsUser(intent, 0, this.mUserId);
         if (queryIntentServicesAsUser == null) {
             return;
         }
@@ -387,9 +491,14 @@ public final class TransportManager {
         int i = this.mUserId;
         try {
             this.mPackageManager.getPackageInfoAsUser(str, 0, i);
-            registerTransportsForIntent(new Intent(this.mTransportServiceIntent).setPackage(str), predicate.and(new TransportManager$$ExternalSyntheticLambda2(1, str)));
+            registerTransportsForIntent(
+                    new Intent(this.mTransportServiceIntent).setPackage(str),
+                    predicate.and(new TransportManager$$ExternalSyntheticLambda2(1, str)));
         } catch (PackageManager.NameNotFoundException unused) {
-            Slog.e("BackupTransportManager", addUserIdToLogMessage(i, "Trying to register transports from package not found " + str));
+            Slog.e(
+                    "BackupTransportManager",
+                    addUserIdToLogMessage(
+                            i, "Trying to register transports from package not found " + str));
         }
     }
 
@@ -402,12 +511,26 @@ public final class TransportManager {
         return str2;
     }
 
-    public final void updateTransportAttributes(ComponentName componentName, String str, Intent intent, String str2, Intent intent2, CharSequence charSequence) {
+    public final void updateTransportAttributes(
+            ComponentName componentName,
+            String str,
+            Intent intent,
+            String str2,
+            Intent intent2,
+            CharSequence charSequence) {
         synchronized (this.mTransportLock) {
             try {
-                TransportDescription transportDescription = (TransportDescription) this.mRegisteredTransportsDescriptionMap.get(componentName);
+                TransportDescription transportDescription =
+                        (TransportDescription)
+                                this.mRegisteredTransportsDescriptionMap.get(componentName);
                 if (transportDescription == null) {
-                    Slog.e("BackupTransportManager", addUserIdToLogMessage(this.mUserId, "Transport " + str + " not registered tried to change description"));
+                    Slog.e(
+                            "BackupTransportManager",
+                            addUserIdToLogMessage(
+                                    this.mUserId,
+                                    "Transport "
+                                            + str
+                                            + " not registered tried to change description"));
                     return;
                 }
                 transportDescription.name = str;
@@ -415,7 +538,10 @@ public final class TransportManager {
                 transportDescription.currentDestinationString = str2;
                 transportDescription.dataManagementIntent = intent2;
                 transportDescription.dataManagementLabel = charSequence;
-                Slog.d("BackupTransportManager", addUserIdToLogMessage(this.mUserId, "Transport " + str + " updated its attributes"));
+                Slog.d(
+                        "BackupTransportManager",
+                        addUserIdToLogMessage(
+                                this.mUserId, "Transport " + str + " updated its attributes"));
             } catch (Throwable th) {
                 throw th;
             }

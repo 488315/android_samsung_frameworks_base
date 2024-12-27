@@ -12,8 +12,8 @@ public interface ITabletModeChangedListener extends IInterface {
 
     public static class Default implements ITabletModeChangedListener {
         @Override // android.hardware.input.ITabletModeChangedListener
-        public void onTabletModeChanged(long whenNanos, boolean inTabletMode) throws RemoteException {
-        }
+        public void onTabletModeChanged(long whenNanos, boolean inTabletMode)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +21,7 @@ public interface ITabletModeChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITabletModeChangedListener {
+    public abstract static class Stub extends Binder implements ITabletModeChangedListener {
         public static final String DESCRIPTOR = "android.hardware.input.ITabletModeChangedListener";
         static final int TRANSACTION_onTabletModeChanged = 1;
 
@@ -60,7 +60,8 @@ public interface ITabletModeChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -97,7 +98,8 @@ public interface ITabletModeChangedListener extends IInterface {
             }
 
             @Override // android.hardware.input.ITabletModeChangedListener
-            public void onTabletModeChanged(long whenNanos, boolean inTabletMode) throws RemoteException {
+            public void onTabletModeChanged(long whenNanos, boolean inTabletMode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -11,11 +11,19 @@ public class BezierControlPoint {
         setValues(0.0f, 0.0f, 1.0f, 1.0f);
     }
 
-    public BezierControlPoint(float controlPointX1, float controlPointY1, float controlPointX2, float controlPointY2) {
+    public BezierControlPoint(
+            float controlPointX1,
+            float controlPointY1,
+            float controlPointX2,
+            float controlPointY2) {
         setValues(controlPointX1, controlPointY1, controlPointX2, controlPointY2);
     }
 
-    public void setValues(float controlPointX1, float controlPointY1, float controlPointX2, float controlPointY2) {
+    public void setValues(
+            float controlPointX1,
+            float controlPointY1,
+            float controlPointX2,
+            float controlPointY2) {
         this.controlPointX1 = controlPointX1;
         this.controlPointX2 = controlPointX2;
         this.controlPointY1 = controlPointY1;

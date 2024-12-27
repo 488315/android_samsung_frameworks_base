@@ -3,7 +3,7 @@ package android.view.animation;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.animation.Animation;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -61,7 +61,13 @@ public class RotateAnimation extends Animation {
         initializePivotPoint();
     }
 
-    public RotateAnimation(float fromDegrees, float toDegrees, int pivotXType, float pivotXValue, int pivotYType, float pivotYValue) {
+    public RotateAnimation(
+            float fromDegrees,
+            float toDegrees,
+            int pivotXType,
+            float pivotXValue,
+            int pivotYType,
+            float pivotYValue) {
         this.mPivotXType = 0;
         this.mPivotYType = 0;
         this.mPivotXValue = 0.0f;
@@ -86,7 +92,8 @@ public class RotateAnimation extends Animation {
 
     @Override // android.view.animation.Animation
     protected void applyTransformation(float interpolatedTime, Transformation t) {
-        float degrees = this.mFromDegrees + ((this.mToDegrees - this.mFromDegrees) * interpolatedTime);
+        float degrees =
+                this.mFromDegrees + ((this.mToDegrees - this.mFromDegrees) * interpolatedTime);
         float scale = getScaleFactor();
         if (this.mPivotX == 0.0f && this.mPivotY == 0.0f) {
             t.getMatrix().setRotate(degrees);

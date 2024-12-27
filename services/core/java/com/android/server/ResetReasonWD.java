@@ -9,7 +9,8 @@ import java.util.regex.Pattern;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 class ResetReasonWD extends CommonPlatformResetReasonCode {
-    @Override // com.android.server.CommonPlatformResetReasonCode, com.android.server.ResetReasonCode
+    @Override // com.android.server.CommonPlatformResetReasonCode,
+              // com.android.server.ResetReasonCode
     public List addCauseStackFromContexts(List list) {
         ArrayList arrayList = new ArrayList();
         StringBuilder sb = new StringBuilder("");
@@ -47,7 +48,8 @@ class ResetReasonWD extends CommonPlatformResetReasonCode {
         return "sys_watchdog";
     }
 
-    @Override // com.android.server.CommonPlatformResetReasonCode, com.android.server.ResetReasonCode
+    @Override // com.android.server.CommonPlatformResetReasonCode,
+              // com.android.server.ResetReasonCode
     public Pattern getPatternByReason() {
         Pattern compile = Pattern.compile("PLATFORM WATCHDOG RESET");
         this.pattern = compile;

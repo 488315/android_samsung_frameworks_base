@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class OperationResult implements Parcelable {
-    public static final Parcelable.Creator<OperationResult> CREATOR = new Parcelable.Creator<OperationResult>() { // from class: android.security.keymaster.OperationResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OperationResult createFromParcel(Parcel in) {
-            return new OperationResult(in);
-        }
+    public static final Parcelable.Creator<OperationResult> CREATOR =
+            new Parcelable.Creator<
+                    OperationResult>() { // from class: android.security.keymaster.OperationResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OperationResult createFromParcel(Parcel in) {
+                    return new OperationResult(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OperationResult[] newArray(int length) {
-            return new OperationResult[length];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OperationResult[] newArray(int length) {
+                    return new OperationResult[length];
+                }
+            };
     public final int inputConsumed;
     public final long operationHandle;
     public final KeymasterArguments outParams;
@@ -26,7 +28,13 @@ public class OperationResult implements Parcelable {
     public final int resultCode;
     public final IBinder token;
 
-    public OperationResult(int resultCode, IBinder token, long operationHandle, int inputConsumed, byte[] output, KeymasterArguments outParams) {
+    public OperationResult(
+            int resultCode,
+            IBinder token,
+            long operationHandle,
+            int inputConsumed,
+            byte[] output,
+            KeymasterArguments outParams) {
         this.resultCode = resultCode;
         this.token = token;
         this.operationHandle = operationHandle;

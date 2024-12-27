@@ -5,6 +5,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,21 +15,24 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class TimeZoneProviderSuggestion implements Parcelable {
-    public static final Parcelable.Creator<TimeZoneProviderSuggestion> CREATOR = new Parcelable.Creator<TimeZoneProviderSuggestion>() { // from class: android.service.timezone.TimeZoneProviderSuggestion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneProviderSuggestion createFromParcel(Parcel in) {
-            ArrayList<String> timeZoneIds = in.readArrayList(null, String.class);
-            long elapsedRealtimeMillis = in.readLong();
-            return new TimeZoneProviderSuggestion(timeZoneIds, elapsedRealtimeMillis);
-        }
+    public static final Parcelable.Creator<TimeZoneProviderSuggestion> CREATOR =
+            new Parcelable.Creator<
+                    TimeZoneProviderSuggestion>() { // from class:
+                                                    // android.service.timezone.TimeZoneProviderSuggestion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneProviderSuggestion createFromParcel(Parcel in) {
+                    ArrayList<String> timeZoneIds = in.readArrayList(null, String.class);
+                    long elapsedRealtimeMillis = in.readLong();
+                    return new TimeZoneProviderSuggestion(timeZoneIds, elapsedRealtimeMillis);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneProviderSuggestion[] newArray(int size) {
-            return new TimeZoneProviderSuggestion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneProviderSuggestion[] newArray(int size) {
+                    return new TimeZoneProviderSuggestion[size];
+                }
+            };
     private final long mElapsedRealtimeMillis;
     private final List<String> mTimeZoneIds;
 
@@ -46,7 +50,14 @@ public final class TimeZoneProviderSuggestion implements Parcelable {
     }
 
     public String toString() {
-        return "TimeZoneProviderSuggestion{mTimeZoneIds=" + this.mTimeZoneIds + ", mElapsedRealtimeMillis=" + this.mElapsedRealtimeMillis + NavigationBarInflaterView.KEY_CODE_START + Duration.ofMillis(this.mElapsedRealtimeMillis) + NavigationBarInflaterView.KEY_CODE_END + '}';
+        return "TimeZoneProviderSuggestion{mTimeZoneIds="
+                + this.mTimeZoneIds
+                + ", mElapsedRealtimeMillis="
+                + this.mElapsedRealtimeMillis
+                + NavigationBarInflaterView.KEY_CODE_START
+                + Duration.ofMillis(this.mElapsedRealtimeMillis)
+                + NavigationBarInflaterView.KEY_CODE_END
+                + '}';
     }
 
     @Override // android.os.Parcelable
@@ -78,7 +89,8 @@ public final class TimeZoneProviderSuggestion implements Parcelable {
             return false;
         }
         TimeZoneProviderSuggestion that = (TimeZoneProviderSuggestion) o;
-        if (this.mElapsedRealtimeMillis == that.mElapsedRealtimeMillis && this.mTimeZoneIds.equals(that.mTimeZoneIds)) {
+        if (this.mElapsedRealtimeMillis == that.mElapsedRealtimeMillis
+                && this.mTimeZoneIds.equals(that.mTimeZoneIds)) {
             return true;
         }
         return false;

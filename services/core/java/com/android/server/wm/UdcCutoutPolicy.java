@@ -9,6 +9,7 @@ import android.view.DisplayCutout;
 import android.view.InsetsSource;
 import android.view.InsetsState;
 import android.view.WindowInsets;
+
 import com.android.server.wm.utils.RotationCache;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,22 +31,27 @@ public final class UdcCutoutPolicy {
 
     public static boolean supportsUdcCutout(PackageItemInfo packageItemInfo) {
         Bundle bundle;
-        return (packageItemInfo == null || (bundle = packageItemInfo.metaData) == null || bundle.getBoolean("com.samsung.android.supports_udc_cutout", true)) ? false : true;
+        return (packageItemInfo == null
+                        || (bundle = packageItemInfo.metaData) == null
+                        || bundle.getBoolean("com.samsung.android.supports_udc_cutout", true))
+                ? false
+                : true;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x002e, code lost:
-    
-        if (supportsUdcCutout(r5.getApplicationInfo(r6, android.os.UserHandle.getUserId(r6), 0, r10)) != false) goto L21;
-     */
+
+       if (supportsUdcCutout(r5.getApplicationInfo(r6, android.os.UserHandle.getUserId(r6), 0, r10)) != false) goto L21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0047, code lost:
-    
-        if (supportsUdcCutout(r0.info.applicationInfo) != false) goto L7;
-     */
+
+       if (supportsUdcCutout(r0.info.applicationInfo) != false) goto L7;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void updateUseLayoutInUdcCutoutIfNeeded(com.android.server.wm.WindowContainer r11) {
+    public static void updateUseLayoutInUdcCutoutIfNeeded(
+            com.android.server.wm.WindowContainer r11) {
         /*
             com.android.server.wm.WindowState r0 = r11.asWindowState()
             r1 = 1
@@ -90,7 +96,9 @@ public final class UdcCutoutPolicy {
             r11.mUseConfigurationInUdcCutout = r2
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.UdcCutoutPolicy.updateUseLayoutInUdcCutoutIfNeeded(com.android.server.wm.WindowContainer):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.UdcCutoutPolicy.updateUseLayoutInUdcCutoutIfNeeded(com.android.server.wm.WindowContainer):void");
     }
 
     public final void adjustInsetsForUdc(WindowContainer windowContainer, InsetsState insetsState) {
@@ -103,8 +111,14 @@ public final class UdcCutoutPolicy {
             WindowState windowState = (WindowState) windowContainer;
             windowState.getClass();
             ActivityRecord activityRecord2 = windowState.mActivityRecord;
-            DisplayFrames fixedRotationTransformDisplayFrames = activityRecord2 != null ? activityRecord2.getFixedRotationTransformDisplayFrames() : null;
-            displayFrames = fixedRotationTransformDisplayFrames == null ? windowState.mToken.getFixedRotationTransformDisplayFrames() : fixedRotationTransformDisplayFrames;
+            DisplayFrames fixedRotationTransformDisplayFrames =
+                    activityRecord2 != null
+                            ? activityRecord2.getFixedRotationTransformDisplayFrames()
+                            : null;
+            displayFrames =
+                    fixedRotationTransformDisplayFrames == null
+                            ? windowState.mToken.getFixedRotationTransformDisplayFrames()
+                            : fixedRotationTransformDisplayFrames;
         } else {
             displayFrames = null;
         }
@@ -115,7 +129,8 @@ public final class UdcCutoutPolicy {
         insetsState.setDisplayCutout(displayCutout);
         if (displayCutout.isEmpty()) {
             for (int sourceSize = insetsState.sourceSize() - 1; sourceSize >= 0; sourceSize--) {
-                if (insetsState.sourceAt(sourceSize).getType() == WindowInsets.Type.displayCutout()) {
+                if (insetsState.sourceAt(sourceSize).getType()
+                        == WindowInsets.Type.displayCutout()) {
                     insetsState.removeSourceAt(sourceSize);
                 }
             }

@@ -1,7 +1,7 @@
 package com.android.internal.widget;
 
 import android.app.admin.PasswordMetrics;
-import com.android.internal.widget.LockPatternUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -17,10 +17,12 @@ public abstract class LockSettingsInternal {
     public static final int ARM_REBOOT_ERROR_UNSPECIFIED = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ArmRebootEscrowErrorCode {
-    }
+    public @interface ArmRebootEscrowErrorCode {}
 
-    public abstract long addEscrowToken(byte[] bArr, int i, LockPatternUtils.EscrowTokenStateChangeCallback escrowTokenStateChangeCallback);
+    public abstract long addEscrowToken(
+            byte[] bArr,
+            int i,
+            LockPatternUtils.EscrowTokenStateChangeCallback escrowTokenStateChangeCallback);
 
     public abstract int armRebootEscrow();
 
@@ -44,17 +46,20 @@ public abstract class LockSettingsInternal {
 
     public abstract void refreshStrongAuthTimeout(int i);
 
-    public abstract void registerLockSettingsStateListener(LockSettingsStateListener lockSettingsStateListener);
+    public abstract void registerLockSettingsStateListener(
+            LockSettingsStateListener lockSettingsStateListener);
 
     public abstract boolean removeEscrowToken(long j, int i);
 
     public abstract void removeUser(int i);
 
-    public abstract boolean setLockCredentialWithToken(LockscreenCredential lockscreenCredential, long j, byte[] bArr, int i);
+    public abstract boolean setLockCredentialWithToken(
+            LockscreenCredential lockscreenCredential, long j, byte[] bArr, int i);
 
     public abstract void setRebootEscrowListener(RebootEscrowListener rebootEscrowListener);
 
     public abstract boolean unlockUserWithToken(long j, byte[] bArr, int i);
 
-    public abstract void unregisterLockSettingsStateListener(LockSettingsStateListener lockSettingsStateListener);
+    public abstract void unregisterLockSettingsStateListener(
+            LockSettingsStateListener lockSettingsStateListener);
 }

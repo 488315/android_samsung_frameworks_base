@@ -4,14 +4,18 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.midi.MidiDispatcher;
+
 import dalvik.system.CloseGuard;
+
+import libcore.io.IoUtils;
+
 import java.io.Closeable;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
-import libcore.io.IoUtils;
 
 /* loaded from: classes2.dex */
 public final class MidiOutputPort extends MidiSender implements Closeable {
@@ -30,47 +34,53 @@ public final class MidiOutputPort extends MidiSender implements Closeable {
         this.mDispatcher = new MidiDispatcher();
         this.mGuard = CloseGuard.get();
         this.mTotalBytes = new AtomicInteger();
-        this.mThread = new Thread() { // from class: android.media.midi.MidiOutputPort.1
-            @Override // java.lang.Thread, java.lang.Runnable
-            public void run() {
-                int count;
-                byte[] buffer = new byte[1024];
-                while (true) {
-                    try {
-                        count = MidiOutputPort.this.mInputStream.read(buffer);
-                    } catch (IOException e) {
-                    } catch (Throwable th) {
-                        IoUtils.closeQuietly(MidiOutputPort.this.mInputStream);
-                        throw th;
-                    }
-                    if (count >= 0) {
-                        int packetType = MidiPortImpl.getPacketType(buffer, count);
-                        switch (packetType) {
-                            case 1:
-                                int offset = MidiPortImpl.getDataOffset(buffer, count);
-                                int size = MidiPortImpl.getDataSize(buffer, count);
-                                long timestamp = MidiPortImpl.getPacketTimestamp(buffer, count);
-                                MidiOutputPort.this.mDispatcher.send(buffer, offset, size, timestamp);
-                                break;
-                            case 2:
-                                MidiOutputPort.this.mDispatcher.flush();
-                                break;
-                            default:
-                                Log.e(MidiOutputPort.TAG, "Unknown packet type " + packetType);
-                                break;
+        this.mThread =
+                new Thread() { // from class: android.media.midi.MidiOutputPort.1
+                    @Override // java.lang.Thread, java.lang.Runnable
+                    public void run() {
+                        int count;
+                        byte[] buffer = new byte[1024];
+                        while (true) {
+                            try {
+                                count = MidiOutputPort.this.mInputStream.read(buffer);
+                            } catch (IOException e) {
+                            } catch (Throwable th) {
+                                IoUtils.closeQuietly(MidiOutputPort.this.mInputStream);
+                                throw th;
+                            }
+                            if (count >= 0) {
+                                int packetType = MidiPortImpl.getPacketType(buffer, count);
+                                switch (packetType) {
+                                    case 1:
+                                        int offset = MidiPortImpl.getDataOffset(buffer, count);
+                                        int size = MidiPortImpl.getDataSize(buffer, count);
+                                        long timestamp =
+                                                MidiPortImpl.getPacketTimestamp(buffer, count);
+                                        MidiOutputPort.this.mDispatcher.send(
+                                                buffer, offset, size, timestamp);
+                                        break;
+                                    case 2:
+                                        MidiOutputPort.this.mDispatcher.flush();
+                                        break;
+                                    default:
+                                        Log.e(
+                                                MidiOutputPort.TAG,
+                                                "Unknown packet type " + packetType);
+                                        break;
+                                }
+                                MidiOutputPort.this.mTotalBytes.addAndGet(count);
+                            } else {
+                                IoUtils.closeQuietly(MidiOutputPort.this.mInputStream);
+                                return;
+                            }
                         }
-                        MidiOutputPort.this.mTotalBytes.addAndGet(count);
-                    } else {
-                        IoUtils.closeQuietly(MidiOutputPort.this.mInputStream);
-                        return;
                     }
-                }
-            }
-        };
+                };
         this.mDeviceServer = server;
         this.mToken = token;
         this.mPortNumber = portNumber;
-        this.mInputStream = new ParcelFileDescriptor.AutoCloseInputStream(new ParcelFileDescriptor(fd));
+        this.mInputStream =
+                new ParcelFileDescriptor.AutoCloseInputStream(new ParcelFileDescriptor(fd));
         this.mThread.start();
         this.mGuard.open("close");
     }

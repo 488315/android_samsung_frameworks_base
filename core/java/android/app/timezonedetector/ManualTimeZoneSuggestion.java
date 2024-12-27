@@ -3,6 +3,7 @@ package android.app.timezonedetector;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ShellCommand;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,19 +13,21 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class ManualTimeZoneSuggestion implements Parcelable {
-    public static final Parcelable.Creator<ManualTimeZoneSuggestion> CREATOR = new Parcelable.Creator<ManualTimeZoneSuggestion>() { // from class: android.app.timezonedetector.ManualTimeZoneSuggestion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ManualTimeZoneSuggestion createFromParcel(Parcel in) {
-            return ManualTimeZoneSuggestion.createFromParcel(in);
-        }
+    public static final Parcelable.Creator<ManualTimeZoneSuggestion> CREATOR =
+            new Parcelable.Creator<ManualTimeZoneSuggestion>() { // from class:
+                // android.app.timezonedetector.ManualTimeZoneSuggestion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ManualTimeZoneSuggestion createFromParcel(Parcel in) {
+                    return ManualTimeZoneSuggestion.createFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ManualTimeZoneSuggestion[] newArray(int size) {
-            return new ManualTimeZoneSuggestion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ManualTimeZoneSuggestion[] newArray(int size) {
+                    return new ManualTimeZoneSuggestion[size];
+                }
+            };
     private ArrayList<String> mDebugInfo;
     private final String mZoneId;
 
@@ -57,7 +60,9 @@ public final class ManualTimeZoneSuggestion implements Parcelable {
     }
 
     public List<String> getDebugInfo() {
-        return this.mDebugInfo == null ? Collections.emptyList() : Collections.unmodifiableList(this.mDebugInfo);
+        return this.mDebugInfo == null
+                ? Collections.emptyList()
+                : Collections.unmodifiableList(this.mDebugInfo);
     }
 
     public void addDebugInfo(String... debugInfos) {
@@ -83,7 +88,11 @@ public final class ManualTimeZoneSuggestion implements Parcelable {
     }
 
     public String toString() {
-        return "ManualTimeZoneSuggestion{mZoneId=" + this.mZoneId + ", mDebugInfo=" + this.mDebugInfo + '}';
+        return "ManualTimeZoneSuggestion{mZoneId="
+                + this.mZoneId
+                + ", mDebugInfo="
+                + this.mDebugInfo
+                + '}';
     }
 
     public static ManualTimeZoneSuggestion parseCommandLineArg(ShellCommand cmd) {

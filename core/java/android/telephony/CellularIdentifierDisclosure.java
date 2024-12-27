@@ -2,6 +2,7 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -12,19 +13,22 @@ public final class CellularIdentifierDisclosure implements Parcelable {
     public static final int CELLULAR_IDENTIFIER_IMSI = 1;
     public static final int CELLULAR_IDENTIFIER_SUCI = 3;
     public static final int CELLULAR_IDENTIFIER_UNKNOWN = 0;
-    public static final Parcelable.Creator<CellularIdentifierDisclosure> CREATOR = new Parcelable.Creator<CellularIdentifierDisclosure>() { // from class: android.telephony.CellularIdentifierDisclosure.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellularIdentifierDisclosure createFromParcel(Parcel in) {
-            return new CellularIdentifierDisclosure(in);
-        }
+    public static final Parcelable.Creator<CellularIdentifierDisclosure> CREATOR =
+            new Parcelable.Creator<
+                    CellularIdentifierDisclosure>() { // from class:
+                                                      // android.telephony.CellularIdentifierDisclosure.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellularIdentifierDisclosure createFromParcel(Parcel in) {
+                    return new CellularIdentifierDisclosure(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellularIdentifierDisclosure[] newArray(int size) {
-            return new CellularIdentifierDisclosure[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellularIdentifierDisclosure[] newArray(int size) {
+                    return new CellularIdentifierDisclosure[size];
+                }
+            };
     public static final int NAS_PROTOCOL_MESSAGE_ATTACH_REQUEST = 1;
     public static final int NAS_PROTOCOL_MESSAGE_AUTHENTICATION_AND_CIPHERING_RESPONSE = 6;
     public static final int NAS_PROTOCOL_MESSAGE_CM_REESTABLISHMENT_REQUEST = 9;
@@ -44,14 +48,13 @@ public final class CellularIdentifierDisclosure implements Parcelable {
     private String mPlmn;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CellularIdentifier {
-    }
+    public @interface CellularIdentifier {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NasProtocolMessage {
-    }
+    public @interface NasProtocolMessage {}
 
-    public CellularIdentifierDisclosure(int nasProtocolMessage, int cellularIdentifier, String plmn, boolean isEmergency) {
+    public CellularIdentifierDisclosure(
+            int nasProtocolMessage, int cellularIdentifier, String plmn, boolean isEmergency) {
         this.mNasProtocolMessage = nasProtocolMessage;
         this.mCellularIdentifier = cellularIdentifier;
         this.mPlmn = plmn;
@@ -92,7 +95,14 @@ public final class CellularIdentifierDisclosure implements Parcelable {
     }
 
     public String toString() {
-        return "CellularIdentifierDisclosure:{ mNasProtocolMessage = " + this.mNasProtocolMessage + " mCellularIdentifier = " + this.mCellularIdentifier + " mIsEmergency = " + this.mIsEmergency + " mPlmn = " + this.mPlmn;
+        return "CellularIdentifierDisclosure:{ mNasProtocolMessage = "
+                + this.mNasProtocolMessage
+                + " mCellularIdentifier = "
+                + this.mCellularIdentifier
+                + " mIsEmergency = "
+                + this.mIsEmergency
+                + " mPlmn = "
+                + this.mPlmn;
     }
 
     public boolean equals(Object o) {
@@ -103,11 +113,18 @@ public final class CellularIdentifierDisclosure implements Parcelable {
             return false;
         }
         CellularIdentifierDisclosure that = (CellularIdentifierDisclosure) o;
-        return this.mNasProtocolMessage == that.mNasProtocolMessage && this.mCellularIdentifier == that.mCellularIdentifier && this.mIsEmergency == that.mIsEmergency && this.mPlmn.equals(that.mPlmn);
+        return this.mNasProtocolMessage == that.mNasProtocolMessage
+                && this.mCellularIdentifier == that.mCellularIdentifier
+                && this.mIsEmergency == that.mIsEmergency
+                && this.mPlmn.equals(that.mPlmn);
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mNasProtocolMessage), Integer.valueOf(this.mCellularIdentifier), Boolean.valueOf(this.mIsEmergency), this.mPlmn);
+        return Objects.hash(
+                Integer.valueOf(this.mNasProtocolMessage),
+                Integer.valueOf(this.mCellularIdentifier),
+                Boolean.valueOf(this.mIsEmergency),
+                this.mPlmn);
     }
 
     private void readFromParcel(Parcel in) {

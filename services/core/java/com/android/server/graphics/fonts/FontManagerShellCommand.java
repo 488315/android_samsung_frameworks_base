@@ -13,10 +13,14 @@ import android.text.FontConfig;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.util.DumpUtils;
 import com.android.modules.utils.TypedXmlPullParser;
-import com.android.server.graphics.fonts.FontManagerService;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,7 +34,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -60,13 +63,15 @@ public final class FontManagerShellCommand extends ShellCommand {
         indentingPrintWriter.println(sb.toString());
     }
 
-    public static void dumpFontConfig(IndentingPrintWriter indentingPrintWriter, FontConfig fontConfig) {
+    public static void dumpFontConfig(
+            IndentingPrintWriter indentingPrintWriter, FontConfig fontConfig) {
         List fontFamilies = fontConfig.getFontFamilies();
         indentingPrintWriter.println("Named Family List");
         indentingPrintWriter.increaseIndent();
         List namedFamilyLists = fontConfig.getNamedFamilyLists();
         for (int i = 0; i < namedFamilyLists.size(); i++) {
-            FontConfig.NamedFamilyList namedFamilyList = (FontConfig.NamedFamilyList) namedFamilyLists.get(i);
+            FontConfig.NamedFamilyList namedFamilyList =
+                    (FontConfig.NamedFamilyList) namedFamilyLists.get(i);
             indentingPrintWriter.println("Named Family (" + namedFamilyList.getName() + ")");
             indentingPrintWriter.increaseIndent();
             List families = namedFamilyList.getFamilies();
@@ -122,12 +127,19 @@ public final class FontManagerShellCommand extends ShellCommand {
         List aliases = fontConfig.getAliases();
         for (int i8 = 0; i8 < aliases.size(); i8++) {
             FontConfig.Alias alias = (FontConfig.Alias) aliases.get(i8);
-            indentingPrintWriter.println("alias = " + alias.getName() + ", reference = " + alias.getOriginal() + ", width = " + alias.getWeight());
+            indentingPrintWriter.println(
+                    "alias = "
+                            + alias.getName()
+                            + ", reference = "
+                            + alias.getOriginal()
+                            + ", width = "
+                            + alias.getWeight());
         }
         indentingPrintWriter.decreaseIndent();
     }
 
-    public static void dumpSingleFontConfig(IndentingPrintWriter indentingPrintWriter, FontConfig.Font font) {
+    public static void dumpSingleFontConfig(
+            IndentingPrintWriter indentingPrintWriter, FontConfig.Font font) {
         StringBuilder sb = new StringBuilder("style = ");
         sb.append(font.getStyle());
         sb.append(", path = ");
@@ -166,15 +178,19 @@ public final class FontManagerShellCommand extends ShellCommand {
                     String name = resolvePullParser.getName();
                     if (depth == 1) {
                         if (!"fontFamilyUpdateRequest".equals(name)) {
-                            throw new FontManagerService.SystemFontException(-10007, "Expected <fontFamilyUpdateRequest> but got: " + name);
+                            throw new FontManagerService.SystemFontException(
+                                    -10007, "Expected <fontFamilyUpdateRequest> but got: " + name);
                         }
                     } else if (depth != 2) {
                         continue;
                     } else {
                         if (!"family".equals(name)) {
-                            throw new FontManagerService.SystemFontException(-10007, "Expected <family> but got: " + name);
+                            throw new FontManagerService.SystemFontException(
+                                    -10007, "Expected <family> but got: " + name);
                         }
-                        arrayList.add(new FontUpdateRequest(FontUpdateRequest.Family.readFromXml(resolvePullParser)));
+                        arrayList.add(
+                                new FontUpdateRequest(
+                                        FontUpdateRequest.Family.readFromXml(resolvePullParser)));
                     }
                 }
             }
@@ -184,16 +200,21 @@ public final class FontManagerShellCommand extends ShellCommand {
     }
 
     public final int dump(ShellCommand shellCommand) {
-        if (!DumpUtils.checkDumpPermission(this.mService.mContext, "FontManagerShellCommand", shellCommand.getErrPrintWriter())) {
+        if (!DumpUtils.checkDumpPermission(
+                this.mService.mContext,
+                "FontManagerShellCommand",
+                shellCommand.getErrPrintWriter())) {
             return 1;
         }
-        IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(shellCommand.getOutPrintWriter(), "  ");
+        IndentingPrintWriter indentingPrintWriter =
+                new IndentingPrintWriter(shellCommand.getOutPrintWriter(), "  ");
         String nextArg = shellCommand.getNextArg();
         FontConfig systemFontConfig = this.mService.getSystemFontConfig();
         if (nextArg == null) {
             dumpFontConfig(indentingPrintWriter, systemFontConfig);
         } else {
-            FontFamily[] fontFamilyArr = (FontFamily[]) SystemFonts.buildSystemFallback(systemFontConfig).get(nextArg);
+            FontFamily[] fontFamilyArr =
+                    (FontFamily[]) SystemFonts.buildSystemFallback(systemFontConfig).get(nextArg);
             if (fontFamilyArr == null) {
                 indentingPrintWriter.println("Font Family \"" + nextArg + "\" not found");
             } else {
@@ -240,11 +261,13 @@ public final class FontManagerShellCommand extends ShellCommand {
         }
         String nextArg = shellCommand.getNextArg();
         if (nextArg == null) {
-            throw new FontManagerService.SystemFontException(-10008, "Cert file path argument is required.");
+            throw new FontManagerService.SystemFontException(
+                    -10008, "Cert file path argument is required.");
         }
         File file = new File(nextArg);
         if (!file.isFile()) {
-            throw new FontManagerService.SystemFontException(-10008, "Cert file (" + file + ") is not found");
+            throw new FontManagerService.SystemFontException(
+                    -10008, "Cert file (" + file + ") is not found");
         }
         FontManagerService fontManagerService = this.mService;
         fontManagerService.mDebugCertFilePath = nextArg;
@@ -329,7 +352,9 @@ public final class FontManagerShellCommand extends ShellCommand {
                 case 3:
                     FontManagerService fontManagerService = this.mService;
                     fontManagerService.getClass();
-                    UpdatableFontDir.deleteAllFiles(new File("/data/fonts/files"), new File("/data/fonts/config/config.xml"));
+                    UpdatableFontDir.deleteAllFiles(
+                            new File("/data/fonts/files"),
+                            new File("/data/fonts/config/config.xml"));
                     fontManagerService.initialize();
                     getOutPrintWriter().println("Success");
                     break;
@@ -351,7 +376,10 @@ public final class FontManagerShellCommand extends ShellCommand {
             PrintWriter errPrintWriter = getErrPrintWriter();
             errPrintWriter.println(e.getErrorCode());
             errPrintWriter.println(e.getMessage());
-            Slog.e("FontManagerShellCommand", "Command failed: " + Arrays.toString(getAllArgs()), e);
+            Slog.e(
+                    "FontManagerShellCommand",
+                    "Command failed: " + Arrays.toString(getAllArgs()),
+                    e);
             return 1;
         }
     }
@@ -364,7 +392,8 @@ public final class FontManagerShellCommand extends ShellCommand {
         outPrintWriter.println();
         outPrintWriter.println("dump [family name]");
         outPrintWriter.println("    Dump all font files in the specified family name.");
-        outPrintWriter.println("    Dump current system font configuration if no family name was specified.");
+        outPrintWriter.println(
+                "    Dump current system font configuration if no family name was specified.");
         outPrintWriter.println();
         outPrintWriter.println("update [font file path] [signature file path]");
         outPrintWriter.println("    Update installed font files with new font file.");
@@ -373,15 +402,18 @@ public final class FontManagerShellCommand extends ShellCommand {
         outPrintWriter.println("    Update font families with the new definitions.");
         outPrintWriter.println();
         outPrintWriter.println("install-debug-cert [cert file path]");
-        outPrintWriter.println("    Install debug certificate file. This command can be used only on");
+        outPrintWriter.println(
+                "    Install debug certificate file. This command can be used only on");
         outPrintWriter.println("    debuggable device with root user.");
         outPrintWriter.println();
         outPrintWriter.println("clear");
-        outPrintWriter.println("    Remove all installed font files and reset to the initial state.");
+        outPrintWriter.println(
+                "    Remove all installed font files and reset to the initial state.");
         outPrintWriter.println();
         outPrintWriter.println("restart");
         outPrintWriter.println("    Restart FontManagerService emulating device reboot.");
-        outPrintWriter.println("    WARNING: this is not a safe operation. Other processes may misbehave if");
+        outPrintWriter.println(
+                "    WARNING: this is not a safe operation. Other processes may misbehave if");
         outPrintWriter.println("    they are using fonts updated by FontManagerService.");
         outPrintWriter.println("    This command exists merely for testing.");
         outPrintWriter.println();
@@ -391,15 +423,25 @@ public final class FontManagerShellCommand extends ShellCommand {
 
     public final void status(ShellCommand shellCommand) {
         Map emptyMap;
-        IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(shellCommand.getOutPrintWriter(), "  ");
+        IndentingPrintWriter indentingPrintWriter =
+                new IndentingPrintWriter(shellCommand.getOutPrintWriter(), "  ");
         FontConfig systemFontConfig = this.mService.getSystemFontConfig();
         indentingPrintWriter.println("Current Version: " + systemFontConfig.getConfigVersion());
-        indentingPrintWriter.println("Last Modified Date: " + LocalDateTime.ofEpochSecond(systemFontConfig.getLastModifiedTimeMillis(), 0, ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME));
+        indentingPrintWriter.println(
+                "Last Modified Date: "
+                        + LocalDateTime.ofEpochSecond(
+                                        systemFontConfig.getLastModifiedTimeMillis(),
+                                        0,
+                                        ZoneOffset.UTC)
+                                .format(DateTimeFormatter.ISO_DATE_TIME));
         FontManagerService fontManagerService = this.mService;
         synchronized (fontManagerService.mUpdatableFontDirLock) {
             try {
                 UpdatableFontDir updatableFontDir = fontManagerService.mUpdatableFontDir;
-                emptyMap = updatableFontDir == null ? Collections.emptyMap() : updatableFontDir.getPostScriptMap();
+                emptyMap =
+                        updatableFontDir == null
+                                ? Collections.emptyMap()
+                                : updatableFontDir.getPostScriptMap();
             } finally {
             }
         }
@@ -410,11 +452,13 @@ public final class FontManagerShellCommand extends ShellCommand {
         ParcelFileDescriptor openFileForSystem;
         String nextArg = shellCommand.getNextArg();
         if (nextArg == null) {
-            throw new FontManagerService.SystemFontException(-10003, "Font file path argument is required.");
+            throw new FontManagerService.SystemFontException(
+                    -10003, "Font file path argument is required.");
         }
         String nextArg2 = shellCommand.getNextArg();
         if (nextArg2 == null) {
-            throw new FontManagerService.SystemFontException(-10003, "Signature file argument is required.");
+            throw new FontManagerService.SystemFontException(
+                    -10003, "Signature file argument is required.");
         }
         try {
             openFileForSystem = shellCommand.openFileForSystem(nextArg, "r");
@@ -425,24 +469,32 @@ public final class FontManagerShellCommand extends ShellCommand {
             ParcelFileDescriptor openFileForSystem2 = shellCommand.openFileForSystem(nextArg2, "r");
             try {
                 if (openFileForSystem == null) {
-                    throw new FontManagerService.SystemFontException(-10001, "Failed to open font file");
+                    throw new FontManagerService.SystemFontException(
+                            -10001, "Failed to open font file");
                 }
                 if (openFileForSystem2 == null) {
-                    throw new FontManagerService.SystemFontException(-10002, "Failed to open signature file");
+                    throw new FontManagerService.SystemFontException(
+                            -10002, "Failed to open signature file");
                 }
                 try {
-                    FileInputStream fileInputStream = new FileInputStream(openFileForSystem2.getFileDescriptor());
+                    FileInputStream fileInputStream =
+                            new FileInputStream(openFileForSystem2.getFileDescriptor());
                     try {
                         int available = fileInputStream.available();
                         if (available > 8192) {
-                            throw new FontManagerService.SystemFontException(-10005, "Signature file is too large");
+                            throw new FontManagerService.SystemFontException(
+                                    -10005, "Signature file is too large");
                         }
                         byte[] bArr = new byte[available];
                         if (fileInputStream.read(bArr, 0, available) != available) {
-                            throw new FontManagerService.SystemFontException(-10004, "Invalid read length");
+                            throw new FontManagerService.SystemFontException(
+                                    -10004, "Invalid read length");
                         }
                         fileInputStream.close();
-                        this.mService.update(-1, Collections.singletonList(new FontUpdateRequest(openFileForSystem, bArr)));
+                        this.mService.update(
+                                -1,
+                                Collections.singletonList(
+                                        new FontUpdateRequest(openFileForSystem, bArr)));
                         openFileForSystem2.close();
                         openFileForSystem.close();
                         shellCommand.getOutPrintWriter().println("Success");
@@ -455,7 +507,8 @@ public final class FontManagerShellCommand extends ShellCommand {
                         throw th;
                     }
                 } catch (IOException e2) {
-                    throw new FontManagerService.SystemFontException(-10004, "Failed to read signature file.", e2);
+                    throw new FontManagerService.SystemFontException(
+                            -10004, "Failed to read signature file.", e2);
                 }
             } finally {
             }
@@ -466,12 +519,15 @@ public final class FontManagerShellCommand extends ShellCommand {
     public final void updateFamily(ShellCommand shellCommand) {
         String nextArg = shellCommand.getNextArg();
         if (nextArg == null) {
-            throw new FontManagerService.SystemFontException(-10003, "XML file path argument is required.");
+            throw new FontManagerService.SystemFontException(
+                    -10003, "XML file path argument is required.");
         }
         try {
             ParcelFileDescriptor openFileForSystem = shellCommand.openFileForSystem(nextArg, "r");
             try {
-                List parseFontFamilyUpdateXml = parseFontFamilyUpdateXml(new FileInputStream(openFileForSystem.getFileDescriptor()));
+                List parseFontFamilyUpdateXml =
+                        parseFontFamilyUpdateXml(
+                                new FileInputStream(openFileForSystem.getFileDescriptor()));
                 openFileForSystem.close();
                 this.mService.update(-1, parseFontFamilyUpdateXml);
                 shellCommand.getOutPrintWriter().println("Success");

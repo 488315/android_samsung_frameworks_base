@@ -12,11 +12,34 @@ import android.os.RemoteException;
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
 /* loaded from: classes.dex */
 public interface ActivityManagerLocal {
-    boolean bindSdkSandboxService(Intent intent, ServiceConnection serviceConnection, int i, IBinder iBinder, String str, String str2, int i2) throws RemoteException;
+    boolean bindSdkSandboxService(
+            Intent intent,
+            ServiceConnection serviceConnection,
+            int i,
+            IBinder iBinder,
+            String str,
+            String str2,
+            int i2)
+            throws RemoteException;
 
-    boolean bindSdkSandboxService(Intent intent, ServiceConnection serviceConnection, int i, IBinder iBinder, String str, String str2, Context.BindServiceFlags bindServiceFlags) throws RemoteException;
+    boolean bindSdkSandboxService(
+            Intent intent,
+            ServiceConnection serviceConnection,
+            int i,
+            IBinder iBinder,
+            String str,
+            String str2,
+            Context.BindServiceFlags bindServiceFlags)
+            throws RemoteException;
 
-    boolean bindSdkSandboxService(Intent intent, ServiceConnection serviceConnection, int i, String str, String str2, int i2) throws RemoteException;
+    boolean bindSdkSandboxService(
+            Intent intent,
+            ServiceConnection serviceConnection,
+            int i,
+            String str,
+            String str2,
+            int i2)
+            throws RemoteException;
 
     boolean canAllowWhileInUsePermissionInFgs(int i, int i2, String str);
 
@@ -24,7 +47,8 @@ public interface ActivityManagerLocal {
 
     void killSdkSandboxClientAppProcess(IBinder iBinder);
 
-    ComponentName startSdkSandboxService(Intent intent, int i, String str, String str2) throws RemoteException;
+    ComponentName startSdkSandboxService(Intent intent, int i, String str, String str2)
+            throws RemoteException;
 
     boolean stopSdkSandboxService(Intent intent, int i, String str, String str2);
 

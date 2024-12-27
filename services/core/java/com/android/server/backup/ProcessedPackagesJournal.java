@@ -1,6 +1,7 @@
 package com.android.server.backup;
 
 import android.util.Slog;
+
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.EOFException;
@@ -26,7 +27,8 @@ public final class ProcessedPackagesJournal {
             return;
         }
         try {
-            DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
+            DataInputStream dataInputStream =
+                    new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
             while (true) {
                 try {
                     String readUTF = dataInputStream.readUTF();

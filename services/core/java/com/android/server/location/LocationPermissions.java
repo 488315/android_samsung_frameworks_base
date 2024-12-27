@@ -2,6 +2,7 @@ package com.android.server.location;
 
 import android.content.Context;
 import android.os.Binder;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -19,8 +20,14 @@ public abstract class LocationPermissions {
 
     public static void enforceCallingOrSelfBypassPermission(Context context) {
         int callingUid = Binder.getCallingUid();
-        if (context.checkPermission("android.permission.LOCATION_BYPASS", Binder.getCallingPid(), callingUid) != 0) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(callingUid, "uid", " does not have android.permission.LOCATION_BYPASS."));
+        if (context.checkPermission(
+                        "android.permission.LOCATION_BYPASS", Binder.getCallingPid(), callingUid)
+                != 0) {
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            callingUid,
+                            "uid",
+                            " does not have android.permission.LOCATION_BYPASS."));
         }
     }
 
@@ -29,10 +36,17 @@ public abstract class LocationPermissions {
             return;
         }
         if (i3 == 1) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "uid ", " does not have android.permission.ACCESS_COARSE_LOCATION or android.permission.ACCESS_FINE_LOCATION."));
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i,
+                            "uid ",
+                            " does not have android.permission.ACCESS_COARSE_LOCATION or"
+                                + " android.permission.ACCESS_FINE_LOCATION."));
         }
         if (i3 == 2) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "uid ", " does not have android.permission.ACCESS_FINE_LOCATION."));
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "uid ", " does not have android.permission.ACCESS_FINE_LOCATION."));
         }
     }
 
@@ -40,6 +54,8 @@ public abstract class LocationPermissions {
         if (context.checkPermission("android.permission.ACCESS_FINE_LOCATION", i2, i) == 0) {
             return 2;
         }
-        return context.checkPermission("android.permission.ACCESS_COARSE_LOCATION", i2, i) == 0 ? 1 : 0;
+        return context.checkPermission("android.permission.ACCESS_COARSE_LOCATION", i2, i) == 0
+                ? 1
+                : 0;
     }
 }

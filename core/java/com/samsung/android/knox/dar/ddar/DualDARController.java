@@ -3,6 +3,7 @@ package com.samsung.android.knox.dar.ddar;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.dar.StreamCipher;
 import com.samsung.android.knox.dar.ddar.fsm.Event;
@@ -54,7 +55,8 @@ public class DualDARController {
         Bundle params = new Bundle();
         params.putInt("user_id", userId);
         Bundle response = processCommand("ON_WORKSPACE_CREATION", params);
-        boolean ret = response != null && response.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
+        boolean ret =
+                response != null && response.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
         if (!ret) {
             Log.e(TAG, "handleWorkspaceCreation failed");
             return false;
@@ -68,7 +70,8 @@ public class DualDARController {
         Bundle params = new Bundle();
         params.putInt("user_id", userId);
         Bundle response = processCommand("ON_BEFORE_UNLOCK_USER", params);
-        boolean ret = response != null && response.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
+        boolean ret =
+                response != null && response.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
         if (!ret) {
             Log.e(TAG, "handleBeforeUnlockUser failed");
             return false;
@@ -89,14 +92,16 @@ public class DualDARController {
             savedCredential = null;
         }
         if (savedCredential != null) {
-            if (SemPersonaManager.isDualDARNativeCrypto(userId) && (encryptedSavedCred = StreamCipher.encryptStream(savedCredential)) != null) {
+            if (SemPersonaManager.isDualDARNativeCrypto(userId)
+                    && (encryptedSavedCred = StreamCipher.encryptStream(savedCredential)) != null) {
                 savedCredential = encryptedSavedCred;
             }
             request.putByteArray("EXISTING_PASSWORD", savedCredential);
         }
         request.putInt("user_id", userId);
         if (credential != null) {
-            if (SemPersonaManager.isDualDARNativeCrypto(userId) && (encryptedCred = StreamCipher.encryptStream(credential)) != null) {
+            if (SemPersonaManager.isDualDARNativeCrypto(userId)
+                    && (encryptedCred = StreamCipher.encryptStream(credential)) != null) {
                 credential = encryptedCred;
             }
             request.putByteArray("NEW_PASSWORD", credential);
@@ -104,7 +109,8 @@ public class DualDARController {
         Bundle response = processCommand("ON_PASSWORD2_CHANGE", request);
         Wiper.wipe(request.getByteArray("EXISTING_PASSWORD"));
         Wiper.wipe(request.getByteArray("NEW_PASSWORD"));
-        boolean ret = response != null && response.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
+        boolean ret =
+                response != null && response.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
         if (!ret) {
             Log.e(TAG, "Authentication Change Failure by dual dar client");
             return false;
@@ -118,7 +124,8 @@ public class DualDARController {
         Bundle request = new Bundle();
         request.putBoolean("NEW_PASSWORD", isCredential);
         Bundle response = processCommand("ON_PASSWORD1_CHANGE", request);
-        boolean ret = response != null && response.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
+        boolean ret =
+                response != null && response.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
         if (!ret) {
             Log.e(TAG, "Failed to handle user 0 password change");
             return false;
@@ -132,14 +139,16 @@ public class DualDARController {
         Log.d(TAG, "onPassword2Auth()");
         Bundle request = new Bundle();
         if (credential != null) {
-            if (SemPersonaManager.isDualDARNativeCrypto(userId) && (encryptedCred = StreamCipher.encryptStream(credential)) != null) {
+            if (SemPersonaManager.isDualDARNativeCrypto(userId)
+                    && (encryptedCred = StreamCipher.encryptStream(credential)) != null) {
                 credential = encryptedCred;
             }
             request.putByteArray("EXISTING_PASSWORD", credential);
         }
         request.putInt("user_id", userId);
         Bundle response = processCommand("ON_PASSWORD2_AUTH", request);
-        boolean ret = response != null && response.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
+        boolean ret =
+                response != null && response.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false);
         Wiper.wipe(request.getByteArray("EXISTING_PASSWORD"));
         if (!ret) {
             Log.e(TAG, "Authentication Failure by dual dar client");
@@ -211,7 +220,8 @@ public class DualDARController {
         Log.e(TAG, "handling onUserRemoved succeeded by KnoxCore");
     }
 
-    public boolean onDualDarStateChanged(State prevState, State currentState, Event event, int dualDarUserId) {
+    public boolean onDualDarStateChanged(
+            State prevState, State currentState, Event event, int dualDarUserId) {
         Bundle request = new Bundle();
         request.putInt("user_id", dualDarUserId);
         request.putString("PREVIOUS_STATE", prevState.name());
@@ -228,7 +238,8 @@ public class DualDARController {
         return ret;
     }
 
-    public boolean setResetPasswordToken(int dualDarUserId, byte[] password, long tokenHandle, byte[] token) {
+    public boolean setResetPasswordToken(
+            int dualDarUserId, byte[] password, long tokenHandle, byte[] token) {
         Bundle request = new Bundle();
         request.putInt("user_id", dualDarUserId);
         if (password != null) {
@@ -262,7 +273,8 @@ public class DualDARController {
         }
     }
 
-    public boolean resetPasswordWithToken(int dualDarUserId, byte[] newPassword, long tokenHandle, byte[] token) {
+    public boolean resetPasswordWithToken(
+            int dualDarUserId, byte[] newPassword, long tokenHandle, byte[] token) {
         Bundle request = new Bundle();
         request.putInt("user_id", dualDarUserId);
         if (newPassword != null && newPassword.length > 0) {
@@ -298,10 +310,13 @@ public class DualDARController {
     }
 
     private Bundle processCommand(String command, Bundle params) {
-        return KnoxProxyManager.getInstance(this.mContext).relayMessage("KNOXCORE_PROXY_AGENT", DUALDAR_CONTROLLER_SERVICE, command, params);
+        return KnoxProxyManager.getInstance(this.mContext)
+                .relayMessage("KNOXCORE_PROXY_AGENT", DUALDAR_CONTROLLER_SERVICE, command, params);
     }
 
     private Bundle processCommandAsync(String command, Bundle params) {
-        return KnoxProxyManager.getInstance(this.mContext).relayMessageAsync("KNOXCORE_PROXY_AGENT", DUALDAR_CONTROLLER_SERVICE, command, params);
+        return KnoxProxyManager.getInstance(this.mContext)
+                .relayMessageAsync(
+                        "KNOXCORE_PROXY_AGENT", DUALDAR_CONTROLLER_SERVICE, command, params);
     }
 }

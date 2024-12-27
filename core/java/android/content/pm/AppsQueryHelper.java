@@ -7,6 +7,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.ArraySet;
 import android.view.inputmethod.InputMethod;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +49,8 @@ public class AppsQueryHelper {
         }
         if (nonLaunchableApps) {
             Intent intent = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
-            List<ResolveInfo> resolveInfos = queryIntentActivitiesAsUser(intent, user.getIdentifier());
+            List<ResolveInfo> resolveInfos =
+                    queryIntentActivitiesAsUser(intent, user.getIdentifier());
             ArraySet<String> appsWithLaunchers = new ArraySet<>();
             int resolveInfosSize = resolveInfos.size();
             for (int i2 = 0; i2 < resolveInfosSize; i2++) {
@@ -66,21 +68,27 @@ public class AppsQueryHelper {
             }
         }
         if (interactAcrossUsers) {
-            List<PackageInfo> packagesHoldingPermissions = getPackagesHoldingPermission(Manifest.permission.INTERACT_ACROSS_USERS, user.getIdentifier());
+            List<PackageInfo> packagesHoldingPermissions =
+                    getPackagesHoldingPermission(
+                            Manifest.permission.INTERACT_ACROSS_USERS, user.getIdentifier());
             int packagesHoldingPermissionsSize = packagesHoldingPermissions.size();
             for (int i4 = 0; i4 < packagesHoldingPermissionsSize; i4++) {
                 PackageInfo packageInfo = packagesHoldingPermissions.get(i4);
-                if ((!systemAppsOnly || packageInfo.applicationInfo.isSystemApp()) && !result.contains(packageInfo.packageName)) {
+                if ((!systemAppsOnly || packageInfo.applicationInfo.isSystemApp())
+                        && !result.contains(packageInfo.packageName)) {
                     result.add(packageInfo.packageName);
                 }
             }
         }
         if (imes) {
-            List<ResolveInfo> resolveInfos2 = queryIntentServicesAsUser(new Intent(InputMethod.SERVICE_INTERFACE), user.getIdentifier());
+            List<ResolveInfo> resolveInfos2 =
+                    queryIntentServicesAsUser(
+                            new Intent(InputMethod.SERVICE_INTERFACE), user.getIdentifier());
             int resolveInfosSize2 = resolveInfos2.size();
             for (int i5 = 0; i5 < resolveInfosSize2; i5++) {
                 ServiceInfo serviceInfo = resolveInfos2.get(i5).serviceInfo;
-                if ((!systemAppsOnly || serviceInfo.applicationInfo.isSystemApp()) && !result.contains(serviceInfo.packageName)) {
+                if ((!systemAppsOnly || serviceInfo.applicationInfo.isSystemApp())
+                        && !result.contains(serviceInfo.packageName)) {
                     result.add(serviceInfo.packageName);
                 }
             }
@@ -89,7 +97,8 @@ public class AppsQueryHelper {
             int allAppsSize3 = this.mAllApps.size();
             for (int i6 = 0; i6 < allAppsSize3; i6++) {
                 ApplicationInfo appInfo3 = this.mAllApps.get(i6);
-                if ((!systemAppsOnly || appInfo3.isSystemApp()) && appInfo3.isRequiredForSystemUser()) {
+                if ((!systemAppsOnly || appInfo3.isSystemApp())
+                        && appInfo3.isRequiredForSystemUser()) {
                     result.add(appInfo3.packageName);
                 }
             }
@@ -107,7 +116,9 @@ public class AppsQueryHelper {
 
     protected List<ResolveInfo> queryIntentActivitiesAsUser(Intent intent, int userId) {
         try {
-            return this.mPackageManager.queryIntentActivities(intent, null, 795136L, userId).getList();
+            return this.mPackageManager
+                    .queryIntentActivities(intent, null, 795136L, userId)
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -115,7 +126,9 @@ public class AppsQueryHelper {
 
     protected List<ResolveInfo> queryIntentServicesAsUser(Intent intent, int userId) {
         try {
-            return this.mPackageManager.queryIntentServices(intent, null, 819328L, userId).getList();
+            return this.mPackageManager
+                    .queryIntentServices(intent, null, 819328L, userId)
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -123,7 +136,9 @@ public class AppsQueryHelper {
 
     protected List<PackageInfo> getPackagesHoldingPermission(String perm, int userId) {
         try {
-            return this.mPackageManager.getPackagesHoldingPermissions(new String[]{perm}, 0L, userId).getList();
+            return this.mPackageManager
+                    .getPackagesHoldingPermissions(new String[] {perm}, 0L, userId)
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

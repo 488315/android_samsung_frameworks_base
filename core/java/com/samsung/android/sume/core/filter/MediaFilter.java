@@ -3,6 +3,7 @@ package com.samsung.android.sume.core.filter;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.descriptor.MFDescriptor;
 import com.samsung.android.sume.core.descriptor.nn.NNDescriptor;
@@ -12,6 +13,7 @@ import com.samsung.android.sume.core.message.MessageProducer;
 import com.samsung.android.sume.core.types.OptionBase;
 import com.samsung.android.sume.core.types.PadType;
 import com.samsung.android.sume.core.types.SplitType;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.stream.Stream;
@@ -31,8 +33,7 @@ public interface MediaFilter extends MessageConsumer, Operator {
     public static final int OPTION_WAIT_RECEIVE_ALL = 6;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OptionType {
-    }
+    public @interface OptionType {}
 
     public enum Type {
         NN,
@@ -45,25 +46,22 @@ public interface MediaFilter extends MessageConsumer, Operator {
 
     Stream<MediaFilter> stream();
 
-    default void prepare() {
-    }
+    default void prepare() {}
 
-    default void release() {
-    }
+    default void release() {}
 
     default String getId() {
         MFDescriptor descriptor = getDescriptor();
-        return descriptor instanceof NNDescriptor ? ((NNDescriptor) descriptor).getModelId() : descriptor.getFilterId();
+        return descriptor instanceof NNDescriptor
+                ? ((NNDescriptor) descriptor).getModelId()
+                : descriptor.getFilterId();
     }
 
-    default void pause() {
-    }
+    default void pause() {}
 
-    default void resume() {
-    }
+    default void resume() {}
 
-    default void setMessageProducer(MessageProducer messageProducer) {
-    }
+    default void setMessageProducer(MessageProducer messageProducer) {}
 
     default void accept(MediaFilterRetriever retriever, MediaFilter parent) {
         retriever.retrieve(this, parent);
@@ -71,22 +69,24 @@ public interface MediaFilter extends MessageConsumer, Operator {
 
     public static class Option extends OptionBase {
         private static final String TAG = Def.tagOf((Class<?>) Option.class);
-        public static final Parcelable.Creator<Option> CREATOR = new Parcelable.Creator<Option>() { // from class: com.samsung.android.sume.core.filter.MediaFilter.Option.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Option createFromParcel(Parcel in) {
-                return new Option(in);
-            }
+        public static final Parcelable.Creator<Option> CREATOR =
+                new Parcelable.Creator<
+                        Option>() { // from class:
+                                    // com.samsung.android.sume.core.filter.MediaFilter.Option.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Option createFromParcel(Parcel in) {
+                        return new Option(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Option[] newArray(int size) {
-                return new Option[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Option[] newArray(int size) {
+                        return new Option[size];
+                    }
+                };
 
-        public Option() {
-        }
+        public Option() {}
 
         protected Option(Parcel in) {
             super(in);

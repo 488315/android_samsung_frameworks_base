@@ -23,6 +23,7 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
@@ -42,6 +43,7 @@ import com.android.server.enterprise.storage.EdmStorageProvider;
 import com.android.server.enterprise.utils.KpuHelper;
 import com.android.server.enterprise.utils.Utils;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.analytics.service.EventQueue;
@@ -55,6 +57,7 @@ import com.samsung.android.knox.license.LicenseInfo;
 import com.samsung.android.knox.license.LicenseResult;
 import com.samsung.android.knox.license.RightsObject;
 import com.samsung.android.knox.ucm.core.IUcmService;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -65,7 +68,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub implements EnterpriseServiceCallback, IDeviceProfileObserver {
+public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub
+        implements EnterpriseServiceCallback, IDeviceProfileObserver {
     public static final int MY_PID = Process.myPid();
     public static EdmStorageProvider mEdmStorageProvider;
     public static IPackageManager mPMS;
@@ -75,13 +79,17 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
     public final Map mKlmPkgRecords;
     public final AnonymousClass1 mPackageRemovedReceiver;
     public IUcmService mUcmeService = null;
-    public final List samsungSpecialPackages = new ArrayList(List.of("com.sec.enterprise.knox.cloudmdm.smdms", "com.sec.knox.kccagent", "com.sec.knox.klat.agent"));
+    public final List samsungSpecialPackages =
+            new ArrayList(
+                    List.of(
+                            "com.sec.enterprise.knox.cloudmdm.smdms",
+                            "com.sec.knox.kccagent",
+                            "com.sec.knox.klat.agent"));
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.license.EnterpriseLicenseService$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -96,13 +104,18 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
             if (EnterpriseLicenseService.this.getInstanceId(schemeSpecificPart) != null) {
                 EnterpriseLicenseService.this.resetLicenseByAdmin(schemeSpecificPart);
             }
-            new Thread(new EnterpriseLicenseService$$ExternalSyntheticLambda0(this, AccountManagerService$$ExternalSyntheticOutline0.m142m("packageName", schemeSpecificPart), 4)).start();
+            new Thread(
+                            new EnterpriseLicenseService$$ExternalSyntheticLambda0(
+                                    this,
+                                    AccountManagerService$$ExternalSyntheticOutline0.m142m(
+                                            "packageName", schemeSpecificPart),
+                                    4))
+                    .start();
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class Injector {
-    }
+    class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LicenseResultRecord implements IBinder.DeathRecipient {
@@ -116,7 +129,8 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
             this.callback = iLicenseResultCallback;
         }
 
-        public LicenseResultRecord(String str, String str2, ILicenseResultCallback iLicenseResultCallback, Map map) {
+        public LicenseResultRecord(
+                String str, String str2, ILicenseResultCallback iLicenseResultCallback, Map map) {
             this.key = str;
             this.licenseKey = str2;
             this.callback = iLicenseResultCallback;
@@ -160,7 +174,17 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
             return "";
         }
         String[] split = str2.split(PackageManagerShellCommandDataLoader.STDIN_PATH);
-        return split.length < 6 ? "" : getMaskedText(String.join(PackageManagerShellCommandDataLoader.STDIN_PATH, split[0], split[1], split[2], split[3], split[4], split[5]));
+        return split.length < 6
+                ? ""
+                : getMaskedText(
+                        String.join(
+                                PackageManagerShellCommandDataLoader.STDIN_PATH,
+                                split[0],
+                                split[1],
+                                split[2],
+                                split[3],
+                                split[4],
+                                split[5]));
     }
 
     public static String getMaskedText(String str) {
@@ -178,7 +202,9 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
     public static List getPermissions(String str) {
         int callingUid = Binder.getCallingUid();
         if (UserHandle.getAppId(callingUid) != 1000) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(callingUid, "Caller ", " is not SYSTEM_SERVICE OR SYSTEM APP"));
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            callingUid, "Caller ", " is not SYSTEM_SERVICE OR SYSTEM APP"));
         }
         List list = null;
         if (str != null && !str.trim().isEmpty()) {
@@ -205,31 +231,40 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
     }
 
     public static boolean isLicenseLocked(int i) {
-        ((PersonaManagerAdapter) ((IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class))).getClass();
+        ((PersonaManagerAdapter)
+                        ((IPersonaManagerAdapter)
+                                AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class)))
+                .getClass();
         int attributes = SemPersonaManager.getAttributes(i);
         if (attributes == -1) {
             return false;
         }
         boolean z = (attributes & 16) > 0;
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isLicenseLocked : ", "EnterpriseLicenseService", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isLicenseLocked : ", "EnterpriseLicenseService", z);
         return z;
     }
 
     public static boolean resetELMInfo(String str) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("rightsObject", (byte[]) null);
-        return mEdmStorageProvider.putValues("LICENSE", contentValues, AccountManagerService$$ExternalSyntheticOutline0.m("pkgName", str));
+        return mEdmStorageProvider.putValues(
+                "LICENSE",
+                contentValues,
+                AccountManagerService$$ExternalSyntheticOutline0.m("pkgName", str));
     }
 
     public static void unregisterLicenseResultRecord(String str, Map map) {
         ILicenseResultCallback iLicenseResultCallback;
         Log.d("EnterpriseLicenseService", "unregisterLicenseResultRecord() for " + str);
         if (!map.containsKey(str)) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("license record not found for ", str, "EnterpriseLicenseService");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "license record not found for ", str, "EnterpriseLicenseService");
             return;
         }
         LicenseResultRecord licenseResultRecord = (LicenseResultRecord) map.get(str);
-        if (licenseResultRecord != null && (iLicenseResultCallback = licenseResultRecord.callback) != null) {
+        if (licenseResultRecord != null
+                && (iLicenseResultCallback = licenseResultRecord.callback) != null) {
             iLicenseResultCallback.asBinder().unlinkToDeath(licenseResultRecord, 0);
             Log.d("EnterpriseLicenseService", "DeathRecipient unlinked from " + str);
         }
@@ -238,9 +273,9 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
 
     /* JADX WARN: Can't wrap try/catch for region: R(16:3|4|5|(1:6)|(3:39|40|(2:42|(4:44|45|46|(7:48|49|50|51|52|53|54)(7:67|58|(2:60|61)|62|63|64|65))(3:71|10|(7:21|22|23|24|(2:26|(3:30|(1:32)|33))(1:36)|34|35)(6:14|15|16|17|18|19))))|8|9|10|(1:12)|21|22|23|24|(0)(0)|34|35) */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0143, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:26:0x0160 A[Catch: all -> 0x0098, TRY_ENTER, TryCatch #3 {, blocks: (B:4:0x000b, B:52:0x0093, B:63:0x00d9, B:23:0x014e, B:26:0x0160, B:28:0x016c, B:30:0x016f, B:32:0x0174, B:36:0x018c, B:17:0x013e, B:75:0x019f, B:76:0x01a2, B:40:0x0032, B:42:0x0040, B:44:0x0050, B:46:0x0069, B:48:0x007c, B:51:0x0090, B:57:0x00aa, B:58:0x00af, B:60:0x00b4, B:38:0x0153, B:12:0x00e9, B:14:0x00f3, B:16:0x0127, B:22:0x0147), top: B:3:0x000b, inners: #4 }] */
     /* JADX WARN: Removed duplicated region for block: B:36:0x018c A[Catch: all -> 0x0098, TRY_LEAVE, TryCatch #3 {, blocks: (B:4:0x000b, B:52:0x0093, B:63:0x00d9, B:23:0x014e, B:26:0x0160, B:28:0x016c, B:30:0x016f, B:32:0x0174, B:36:0x018c, B:17:0x013e, B:75:0x019f, B:76:0x01a2, B:40:0x0032, B:42:0x0040, B:44:0x0050, B:46:0x0069, B:48:0x007c, B:51:0x0090, B:57:0x00aa, B:58:0x00af, B:60:0x00b4, B:38:0x0153, B:12:0x00e9, B:14:0x00f3, B:16:0x0127, B:22:0x0147), top: B:3:0x000b, inners: #4 }] */
@@ -249,15 +284,24 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized void activateKnoxLicense(com.samsung.android.knox.ContextInfo r21, java.lang.String r22, java.lang.String r23, com.samsung.android.knox.license.ILicenseResultCallback r24) {
+    public final synchronized void activateKnoxLicense(
+            com.samsung.android.knox.ContextInfo r21,
+            java.lang.String r22,
+            java.lang.String r23,
+            com.samsung.android.knox.license.ILicenseResultCallback r24) {
         /*
             Method dump skipped, instructions count: 421
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.license.EnterpriseLicenseService.activateKnoxLicense(com.samsung.android.knox.ContextInfo, java.lang.String, java.lang.String, com.samsung.android.knox.license.ILicenseResultCallback):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.license.EnterpriseLicenseService.activateKnoxLicense(com.samsung.android.knox.ContextInfo,"
+                    + " java.lang.String, java.lang.String,"
+                    + " com.samsung.android.knox.license.ILicenseResultCallback):void");
     }
 
-    public final synchronized void activateKnoxLicenseForUMC(ContextInfo contextInfo, String str, String str2) {
+    public final synchronized void activateKnoxLicenseForUMC(
+            ContextInfo contextInfo, String str, String str2) {
         activateKnoxLicense(contextInfo, str, str2, null);
     }
 
@@ -269,44 +313,98 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized void activateLicense(com.samsung.android.knox.ContextInfo r20, java.lang.String r21, java.lang.String r22, java.lang.String r23, com.samsung.android.knox.license.ILicenseResultCallback r24) {
+    public final synchronized void activateLicense(
+            com.samsung.android.knox.ContextInfo r20,
+            java.lang.String r21,
+            java.lang.String r22,
+            java.lang.String r23,
+            com.samsung.android.knox.license.ILicenseResultCallback r24) {
         /*
             Method dump skipped, instructions count: 414
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.license.EnterpriseLicenseService.activateLicense(com.samsung.android.knox.ContextInfo, java.lang.String, java.lang.String, java.lang.String, com.samsung.android.knox.license.ILicenseResultCallback):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.license.EnterpriseLicenseService.activateLicense(com.samsung.android.knox.ContextInfo,"
+                    + " java.lang.String, java.lang.String, java.lang.String,"
+                    + " com.samsung.android.knox.license.ILicenseResultCallback):void");
     }
 
-    public final synchronized void activateLicenseForUMC(ContextInfo contextInfo, String str, String str2, String str3) {
+    public final synchronized void activateLicenseForUMC(
+            ContextInfo contextInfo, String str, String str2, String str3) {
         activateLicense(contextInfo, str, str2, str3, null);
     }
 
     public final Bundle callLicenseAgent(String str, String str2, Bundle bundle) {
         Log.d("EnterpriseLicenseService", "callLicenseAgent() - ".concat(str));
         try {
-            return this.mContext.getContentResolver().call(LicenseAgentDbContract.DB_URI, str, str2, bundle);
+            return this.mContext
+                    .getContentResolver()
+                    .call(LicenseAgentDbContract.DB_URI, str, str2, bundle);
         } catch (Exception e) {
             switch (str) {
                 case "ELMRegistrationInternal":
-                    sendElmResult("fail", 301, bundle.getString("com.samsung.android.knox.intent.extra.LICENSE_DATA_UUID"), bundle.getString("com.samsung.android.knox.intent.extra.LICENSE_DATA_PACKAGENAME"), bundle.getString("com.samsung.android.knox.intent.extra.LICENSE_DATA_REQUEST_PACKAGENAME"), null, -1, new ArrayList(), new ArrayList(), null);
+                    sendElmResult(
+                            "fail",
+                            301,
+                            bundle.getString(
+                                    "com.samsung.android.knox.intent.extra.LICENSE_DATA_UUID"),
+                            bundle.getString(
+                                    "com.samsung.android.knox.intent.extra.LICENSE_DATA_PACKAGENAME"),
+                            bundle.getString(
+                                    "com.samsung.android.knox.intent.extra.LICENSE_DATA_REQUEST_PACKAGENAME"),
+                            null,
+                            -1,
+                            new ArrayList(),
+                            new ArrayList(),
+                            null);
                     break;
                 case "KLMDeactivationInternal":
-                    sendKlmResult("fail", 301, 802, bundle.getString("com.samsung.android.knox.intent.extra.LICENSE_DATA_UUID"), bundle.getString("com.samsung.android.knox.intent.extra.KNOX_LICENSE_DATA_PACKAGENAME"), bundle.getString("com.samsung.android.knox.intent.extra.KNOX_LICENSE_DATA_REQUEST_PACKAGENAME"), -1, new ArrayList(), new ArrayList(), null);
+                    sendKlmResult(
+                            "fail",
+                            301,
+                            802,
+                            bundle.getString(
+                                    "com.samsung.android.knox.intent.extra.LICENSE_DATA_UUID"),
+                            bundle.getString(
+                                    "com.samsung.android.knox.intent.extra.KNOX_LICENSE_DATA_PACKAGENAME"),
+                            bundle.getString(
+                                    "com.samsung.android.knox.intent.extra.KNOX_LICENSE_DATA_REQUEST_PACKAGENAME"),
+                            -1,
+                            new ArrayList(),
+                            new ArrayList(),
+                            null);
                     break;
                 case "KLMRegistrationInternal":
-                    sendKlmResult("fail", 301, 800, bundle.getString("com.samsung.android.knox.intent.extra.LICENSE_DATA_UUID"), bundle.getString("com.samsung.android.knox.intent.extra.KNOX_LICENSE_DATA_PACKAGENAME"), bundle.getString("com.samsung.android.knox.intent.extra.KNOX_LICENSE_DATA_REQUEST_PACKAGENAME"), -1, new ArrayList(), new ArrayList(), null);
+                    sendKlmResult(
+                            "fail",
+                            301,
+                            800,
+                            bundle.getString(
+                                    "com.samsung.android.knox.intent.extra.LICENSE_DATA_UUID"),
+                            bundle.getString(
+                                    "com.samsung.android.knox.intent.extra.KNOX_LICENSE_DATA_PACKAGENAME"),
+                            bundle.getString(
+                                    "com.samsung.android.knox.intent.extra.KNOX_LICENSE_DATA_REQUEST_PACKAGENAME"),
+                            -1,
+                            new ArrayList(),
+                            new ArrayList(),
+                            null);
                     break;
             }
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception calling KLMSAgent: "), "EnterpriseLicenseService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception calling KLMSAgent: "),
+                    "EnterpriseLicenseService");
             return null;
         }
     }
 
     /* JADX WARN: Can't wrap try/catch for region: R(16:3|4|5|6|(3:39|40|(2:42|(2:44|(4:46|47|48|(7:50|51|52|53|54|55|56)(7:69|60|(2:62|63)|64|65|66|67))(3:73|10|(7:21|22|23|24|(2:26|(3:30|(1:32)|33))(1:36)|34|35)(6:14|15|16|17|18|19)))(3:74|75|76)))|8|9|10|(1:12)|21|22|23|24|(0)(0)|34|35) */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0150, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:26:0x016e A[Catch: all -> 0x009c, TRY_ENTER, TryCatch #3 {, blocks: (B:4:0x000c, B:54:0x0097, B:65:0x00dd, B:23:0x015b, B:26:0x016e, B:28:0x017a, B:30:0x017d, B:32:0x0182, B:36:0x019a, B:17:0x014b, B:80:0x01ad, B:81:0x01b0, B:40:0x0034, B:42:0x0042, B:44:0x004e, B:46:0x0054, B:48:0x006d, B:50:0x0080, B:53:0x0094, B:59:0x00ae, B:60:0x00b3, B:62:0x00b8, B:38:0x0160, B:12:0x00f6, B:14:0x0100, B:16:0x0134, B:22:0x0154, B:75:0x00ec, B:76:0x00f1), top: B:3:0x000c, inners: #6 }] */
     /* JADX WARN: Removed duplicated region for block: B:36:0x019a A[Catch: all -> 0x009c, TRY_LEAVE, TryCatch #3 {, blocks: (B:4:0x000c, B:54:0x0097, B:65:0x00dd, B:23:0x015b, B:26:0x016e, B:28:0x017a, B:30:0x017d, B:32:0x0182, B:36:0x019a, B:17:0x014b, B:80:0x01ad, B:81:0x01b0, B:40:0x0034, B:42:0x0042, B:44:0x004e, B:46:0x0054, B:48:0x006d, B:50:0x0080, B:53:0x0094, B:59:0x00ae, B:60:0x00b3, B:62:0x00b8, B:38:0x0160, B:12:0x00f6, B:14:0x0100, B:16:0x0134, B:22:0x0154, B:75:0x00ec, B:76:0x00f1), top: B:3:0x000c, inners: #6 }] */
@@ -315,18 +413,27 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized void deActivateKnoxLicense(com.samsung.android.knox.ContextInfo r21, java.lang.String r22, java.lang.String r23, com.samsung.android.knox.license.ILicenseResultCallback r24) {
+    public final synchronized void deActivateKnoxLicense(
+            com.samsung.android.knox.ContextInfo r21,
+            java.lang.String r22,
+            java.lang.String r23,
+            com.samsung.android.knox.license.ILicenseResultCallback r24) {
         /*
             Method dump skipped, instructions count: 435
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.license.EnterpriseLicenseService.deActivateKnoxLicense(com.samsung.android.knox.ContextInfo, java.lang.String, java.lang.String, com.samsung.android.knox.license.ILicenseResultCallback):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.license.EnterpriseLicenseService.deActivateKnoxLicense(com.samsung.android.knox.ContextInfo,"
+                    + " java.lang.String, java.lang.String,"
+                    + " com.samsung.android.knox.license.ILicenseResultCallback):void");
     }
 
     public final boolean deleteAllApiCallData() {
         enforcePermission$1();
         try {
-            return LicenseLogService.mEdmStorageProvider.deleteDataByFields("LICENSE_LOG", null, null);
+            return LicenseLogService.mEdmStorageProvider.deleteDataByFields(
+                    "LICENSE_LOG", null, null);
         } catch (Exception e) {
             Log.w("EnterpriseLicenseService", "deleteAllApiCallData() failed");
             e.printStackTrace();
@@ -340,7 +447,8 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
             try {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("instanceId", str2);
-                ContentValues value = mEdmStorageProvider.getValue(contentValues, "LICENSE", "pkgName");
+                ContentValues value =
+                        mEdmStorageProvider.getValue(contentValues, "LICENSE", "pkgName");
                 if (value == null) {
                     Log.w("EnterpriseLicenseService", "deleteApiCallData(): result is null");
                     return false;
@@ -350,7 +458,8 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
                     Log.w("EnterpriseLicenseService", "deleteApiCallData(): Record does not exist");
                     return false;
                 }
-                return LicenseLogService.mEdmStorageProvider.deleteDataByFields("LICENSE_LOG", new String[]{"pkgName"}, new String[]{asString});
+                return LicenseLogService.mEdmStorageProvider.deleteDataByFields(
+                        "LICENSE_LOG", new String[] {"pkgName"}, new String[] {asString});
             } catch (Exception e) {
                 Log.w("EnterpriseLicenseService", "deleteApiCallData() failed");
                 e.printStackTrace();
@@ -363,7 +472,8 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         enforcePermission$1();
         if (str != null && !str.trim().isEmpty()) {
             try {
-                return LicenseLogService.mEdmStorageProvider.deleteDataByFields("LICENSE_LOG", new String[]{"pkgName"}, new String[]{str});
+                return LicenseLogService.mEdmStorageProvider.deleteDataByFields(
+                        "LICENSE_LOG", new String[] {"pkgName"}, new String[] {str});
             } catch (Exception e) {
                 Log.w("EnterpriseLicenseService", "deleteApiCallDataByAdmin() failed");
                 e.printStackTrace();
@@ -386,17 +496,22 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
                 if (!str.trim().isEmpty()) {
                     ContentValues contentValues = new ContentValues();
                     contentValues.put("instanceId", str);
-                    ContentValues value = mEdmStorageProvider.getValue(contentValues, "LICENSE", "pkgName");
+                    ContentValues value =
+                            mEdmStorageProvider.getValue(contentValues, "LICENSE", "pkgName");
                     if (value == null) {
                         Log.w("EnterpriseLicenseService", "deleteLicense(): result is null");
                         return false;
                     }
                     String asString = value.getAsString("pkgName");
                     if (asString == null) {
-                        Log.w("EnterpriseLicenseService", "deleteLicense(): pkgName is null, Record does not exist");
+                        Log.w(
+                                "EnterpriseLicenseService",
+                                "deleteLicense(): pkgName is null, Record does not exist");
                         return false;
                     }
-                    z = mEdmStorageProvider.deleteDataByFields("LICENSE", new String[]{"pkgName"}, new String[]{asString});
+                    z =
+                            mEdmStorageProvider.deleteDataByFields(
+                                    "LICENSE", new String[] {"pkgName"}, new String[] {asString});
                     if (z) {
                         mPMS.setLicensePermissionsForMDM(asString);
                     }
@@ -421,7 +536,9 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
                 }
                 if (!str.trim().isEmpty()) {
                     String instanceId = getInstanceId(str);
-                    z = mEdmStorageProvider.deleteDataByFields("LICENSE", new String[]{"pkgName"}, new String[]{str});
+                    z =
+                            mEdmStorageProvider.deleteDataByFields(
+                                    "LICENSE", new String[] {"pkgName"}, new String[] {str});
                     if (z) {
                         if (isPackageInstalled(str)) {
                             mPMS.setLicensePermissionsForMDM(str);
@@ -429,8 +546,18 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
                         try {
                             if (Integer.parseInt(instanceId) > -1) {
                                 Log.d("EnterpriseLicenseService", "isElmKey(True)");
-                                Log.d("EnterpriseLicenseService", "deleteLicenseByAdmin(): notify ELM observers");
-                                notifyElmObservers(str, new LicenseResult(str, LicenseResult.Status.SUCCESS, 0, LicenseResult.Type.ELM_DEACTIVATION, (ArrayList) null, (String) null));
+                                Log.d(
+                                        "EnterpriseLicenseService",
+                                        "deleteLicenseByAdmin(): notify ELM observers");
+                                notifyElmObservers(
+                                        str,
+                                        new LicenseResult(
+                                                str,
+                                                LicenseResult.Status.SUCCESS,
+                                                0,
+                                                LicenseResult.Type.ELM_DEACTIVATION,
+                                                (ArrayList) null,
+                                                (String) null));
                             }
                         } catch (NumberFormatException unused2) {
                             Log.e("EnterpriseLicenseService", "isElmKey(False)");
@@ -450,11 +577,14 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
             return;
         }
         try {
-            this.mContext.enforceCallingPermission("com.samsung.android.knox.permission.KNOX_LICENSE_INTERNAL", null);
+            this.mContext.enforceCallingPermission(
+                    "com.samsung.android.knox.permission.KNOX_LICENSE_INTERNAL", null);
         } catch (SecurityException e) {
             String message = e.getMessage();
             if (message != null) {
-                message = message.concat(",com.samsung.android.knox.permission.KNOX_LICENSE_INTERNAL");
+                message =
+                        message.concat(
+                                ",com.samsung.android.knox.permission.KNOX_LICENSE_INTERNAL");
             }
             throw new SecurityException(message);
         }
@@ -467,7 +597,9 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         try {
             Bundle callLicenseAgent = callLicenseAgent("getAllActivations", null, null);
             if (callLicenseAgent != null) {
-                arrayList = callLicenseAgent.getParcelableArrayList(KnoxCustomManagerService.SPCM_KEY_RESULT);
+                arrayList =
+                        callLicenseAgent.getParcelableArrayList(
+                                KnoxCustomManagerService.SPCM_KEY_RESULT);
             }
             return arrayList;
         } finally {
@@ -478,13 +610,22 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
     public final LicenseInfo[] getAllLicenseInfo() {
         enforcePermission$1();
         try {
-            ArrayList arrayList = (ArrayList) mEdmStorageProvider.getValuesList("LICENSE", new String[]{"pkgName", "instanceId", "pkgVersion"}, null);
+            ArrayList arrayList =
+                    (ArrayList)
+                            mEdmStorageProvider.getValuesList(
+                                    "LICENSE",
+                                    new String[] {"pkgName", "instanceId", "pkgVersion"},
+                                    null);
             if (!arrayList.isEmpty()) {
                 ArrayList arrayList2 = new ArrayList();
                 Iterator it = arrayList.iterator();
                 while (it.hasNext()) {
                     ContentValues contentValues = (ContentValues) it.next();
-                    arrayList2.add(new LicenseInfo(contentValues.getAsString("pkgName"), contentValues.getAsString("instanceId"), contentValues.getAsString("pkgVersion")));
+                    arrayList2.add(
+                            new LicenseInfo(
+                                    contentValues.getAsString("pkgName"),
+                                    contentValues.getAsString("instanceId"),
+                                    contentValues.getAsString("pkgVersion")));
                 }
                 if (arrayList2.size() > 0) {
                     return (LicenseInfo[]) arrayList2.toArray(new LicenseInfo[arrayList2.size()]);
@@ -502,16 +643,21 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
             try {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("instanceId", str);
-                ContentValues value = mEdmStorageProvider.getValue(contentValues, "LICENSE", "pkgName");
+                ContentValues value =
+                        mEdmStorageProvider.getValue(contentValues, "LICENSE", "pkgName");
                 if (value == null) {
-                    Log.w("EnterpriseLicenseService", "getApiCallData(): result is null, Record does not exist");
+                    Log.w(
+                            "EnterpriseLicenseService",
+                            "getApiCallData(): result is null, Record does not exist");
                     return null;
                 }
                 String asString = value.getAsString("pkgName");
                 if (asString != null) {
                     return LicenseLog.getLog(asString);
                 }
-                Log.w("EnterpriseLicenseService", "getApiCallData(): pkgName is null, Record does not exist");
+                Log.w(
+                        "EnterpriseLicenseService",
+                        "getApiCallData(): pkgName is null, Record does not exist");
                 return null;
             } catch (Exception e) {
                 Log.w("EnterpriseLicenseService", "getApiCallData() failed");
@@ -523,7 +669,8 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
 
     public final Bundle getApiCallDataByAdmin(ContextInfo contextInfo, String str) {
         try {
-            this.mContext.enforceCallingPermission("com.samsung.android.knox.permission.KNOX_LICENSE_LOG", null);
+            this.mContext.enforceCallingPermission(
+                    "com.samsung.android.knox.permission.KNOX_LICENSE_LOG", null);
             if (str != null && !str.trim().isEmpty()) {
                 try {
                     return LicenseLog.getLog(str);
@@ -555,7 +702,10 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         String str2 = null;
         if (str != null && !str.trim().isEmpty()) {
             try {
-                ArrayList arrayList = (ArrayList) mEdmStorageProvider.getValuesList("LICENSE", new String[]{"pkgName", "instanceId"}, null);
+                ArrayList arrayList =
+                        (ArrayList)
+                                mEdmStorageProvider.getValuesList(
+                                        "LICENSE", new String[] {"pkgName", "instanceId"}, null);
                 if (!arrayList.isEmpty()) {
                     Iterator it = arrayList.iterator();
                     while (it.hasNext()) {
@@ -574,7 +724,10 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
     }
 
     public final ActivationInfo getLicenseActivationInfo(ContextInfo contextInfo, String str) {
-        String nameForUid = this.mContext.getPackageManager().getNameForUid(Utils.getCallingOrUserUid(contextInfo));
+        String nameForUid =
+                this.mContext
+                        .getPackageManager()
+                        .getNameForUid(Utils.getCallingOrUserUid(contextInfo));
         if (str != null) {
             enforcePermission$1();
         } else {
@@ -583,7 +736,10 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             Bundle callLicenseAgent = callLicenseAgent("getActivations", str, null);
-            return callLicenseAgent != null ? (ActivationInfo) callLicenseAgent.getParcelable(KnoxCustomManagerService.SPCM_KEY_RESULT) : null;
+            return callLicenseAgent != null
+                    ? (ActivationInfo)
+                            callLicenseAgent.getParcelable(KnoxCustomManagerService.SPCM_KEY_RESULT)
+                    : null;
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -595,7 +751,12 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
             return null;
         }
         try {
-            ArrayList arrayList = (ArrayList) mEdmStorageProvider.getValuesList("LICENSE", new String[]{"pkgName", "instanceId", "pkgVersion"}, null);
+            ArrayList arrayList =
+                    (ArrayList)
+                            mEdmStorageProvider.getValuesList(
+                                    "LICENSE",
+                                    new String[] {"pkgName", "instanceId", "pkgVersion"},
+                                    null);
             if (arrayList.isEmpty()) {
                 return null;
             }
@@ -604,7 +765,10 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
                 ContentValues contentValues = (ContentValues) it.next();
                 String asString = contentValues.getAsString("instanceId");
                 if (asString != null && asString.equals(str)) {
-                    return new LicenseInfo(contentValues.getAsString("pkgName"), asString, contentValues.getAsString("pkgVersion"));
+                    return new LicenseInfo(
+                            contentValues.getAsString("pkgName"),
+                            asString,
+                            contentValues.getAsString("pkgVersion"));
                 }
             }
             return null;
@@ -620,7 +784,12 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
             return null;
         }
         try {
-            ArrayList arrayList = (ArrayList) mEdmStorageProvider.getValuesList("LICENSE", new String[]{"pkgName", "instanceId", "pkgVersion"}, null);
+            ArrayList arrayList =
+                    (ArrayList)
+                            mEdmStorageProvider.getValuesList(
+                                    "LICENSE",
+                                    new String[] {"pkgName", "instanceId", "pkgVersion"},
+                                    null);
             if (arrayList.isEmpty()) {
                 return null;
             }
@@ -629,7 +798,10 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
                 ContentValues contentValues = (ContentValues) it.next();
                 String asString = contentValues.getAsString("pkgName");
                 if (asString != null && asString.equals(str)) {
-                    return new LicenseInfo(str, contentValues.getAsString("instanceId"), contentValues.getAsString("pkgVersion"));
+                    return new LicenseInfo(
+                            str,
+                            contentValues.getAsString("instanceId"),
+                            contentValues.getAsString("pkgVersion"));
                 }
             }
             return null;
@@ -644,8 +816,10 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         if (nameForUid == null || !nameForUid.contains(":")) {
             return nameForUid;
         }
-        ActivityManager activityManager = (ActivityManager) this.mContext.getSystemService("activity");
-        String packageFromAppProcesses = activityManager != null ? activityManager.getPackageFromAppProcesses(i2) : "";
+        ActivityManager activityManager =
+                (ActivityManager) this.mContext.getSystemService("activity");
+        String packageFromAppProcesses =
+                activityManager != null ? activityManager.getPackageFromAppProcesses(i2) : "";
         return TextUtils.isEmpty(packageFromAppProcesses) ? nameForUid : packageFromAppProcesses;
     }
 
@@ -718,7 +892,9 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
     public final synchronized IUcmService getUcmService() {
         try {
             if (this.mUcmeService == null) {
-                this.mUcmeService = IUcmService.Stub.asInterface(ServiceManager.getService("com.samsung.ucs.ucsservice"));
+                this.mUcmeService =
+                        IUcmService.Stub.asInterface(
+                                ServiceManager.getService("com.samsung.ucs.ucsservice"));
             }
         } catch (Throwable th) {
             throw th;
@@ -732,12 +908,16 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
             e.printStackTrace();
         }
         if (Arrays.asList(strArr).contains(str)) {
-            Log.d("EnterpriseLicenseService", "Request allowed from callerSharedPackages to targetPackageName");
+            Log.d(
+                    "EnterpriseLicenseService",
+                    "Request allowed from callerSharedPackages to targetPackageName");
             return true;
         }
         for (String str2 : strArr) {
             if (isCallerAllowedToPerformActionForAnotherPackage(i, str2)) {
-                Log.d("EnterpriseLicenseService", "Request allowed by platform signature or license permission");
+                Log.d(
+                        "EnterpriseLicenseService",
+                        "Request allowed by platform signature or license permission");
                 return true;
             }
         }
@@ -755,13 +935,19 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
                 }
             }
             KpuHelper.getInstance(this.mContext).getClass();
-            if (!"com.samsung.android.knox.kpu".equals(str) && !KpuHelper.isKpuPermissionGranted(i, str)) {
+            if (!"com.samsung.android.knox.kpu".equals(str)
+                    && !KpuHelper.isKpuPermissionGranted(i, str)) {
                 try {
                     if (AppGlobals.getPackageManager().checkSignatures("android", str, i) != 0) {
                         return false;
                     }
                     try {
-                        return AppGlobals.getPackageManager().checkPermission("com.samsung.android.knox.permission.KNOX_LICENSE_INTERNAL", str, i) == 0;
+                        return AppGlobals.getPackageManager()
+                                        .checkPermission(
+                                                "com.samsung.android.knox.permission.KNOX_LICENSE_INTERNAL",
+                                                str,
+                                                i)
+                                == 0;
                     } catch (RemoteException e2) {
                         e2.printStackTrace();
                         return false;
@@ -784,7 +970,10 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         Log.d("EnterpriseLicenseService", "isEulaBypassAllowed");
         enforcePermission$1();
         try {
-            ArrayList arrayList = (ArrayList) mEdmStorageProvider.getValuesListAsUser(0, 0, "KNOX_CUSTOM", new String[]{"mamPackageName"});
+            ArrayList arrayList =
+                    (ArrayList)
+                            mEdmStorageProvider.getValuesListAsUser(
+                                    0, 0, "KNOX_CUSTOM", new String[] {"mamPackageName"});
             if (!arrayList.isEmpty()) {
                 Iterator it = arrayList.iterator();
                 while (it.hasNext()) {
@@ -807,13 +996,20 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
 
     public final boolean isPackageInstalled(String str) {
         Log.d("EnterpriseLicenseService", "isPackageInstalled()");
-        for (UserInfo userInfo : ((UserManager) this.mContext.getSystemService("user")).getUsers()) {
+        for (UserInfo userInfo :
+                ((UserManager) this.mContext.getSystemService("user")).getUsers()) {
             try {
                 this.mContext.getPackageManager().getPackageInfoAsUser(str, 0, userInfo.id);
-                Log.d("EnterpriseLicenseService", "isPackageInstalled() - " + str + " found in user " + userInfo.id);
+                Log.d(
+                        "EnterpriseLicenseService",
+                        "isPackageInstalled() - " + str + " found in user " + userInfo.id);
                 return true;
             } catch (PackageManager.NameNotFoundException unused) {
-                GestureWakeup$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("isPackageInstalled() - ", str, " not found in user "), userInfo.id, "EnterpriseLicenseService");
+                GestureWakeup$$ExternalSyntheticOutline0.m(
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "isPackageInstalled() - ", str, " not found in user "),
+                        userInfo.id,
+                        "EnterpriseLicenseService");
             }
         }
         return false;
@@ -835,15 +1031,25 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
                 edmStorageProvider.getClass();
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("pkgName", str);
-                RightsObject rightsObject = (RightsObject) Utils.deserializeObject(edmStorageProvider.getBlob(contentValues, "LICENSE", "rightsObject"));
+                RightsObject rightsObject =
+                        (RightsObject)
+                                Utils.deserializeObject(
+                                        edmStorageProvider.getBlob(
+                                                contentValues, "LICENSE", "rightsObject"));
                 return rightsObject != null && rightsObject.getPermissions().contains(str2);
             }
         }
-        ArrayList arrayList = (ArrayList) mEdmStorageProvider.getValuesList("LICENSE", new String[]{"rightsObject"}, null);
+        ArrayList arrayList =
+                (ArrayList)
+                        mEdmStorageProvider.getValuesList(
+                                "LICENSE", new String[] {"rightsObject"}, null);
         if (!arrayList.isEmpty()) {
             Iterator it = arrayList.iterator();
             while (it.hasNext()) {
-                RightsObject rightsObject2 = (RightsObject) Utils.deserializeObject(((ContentValues) it.next()).getAsByteArray("rightsObject"));
+                RightsObject rightsObject2 =
+                        (RightsObject)
+                                Utils.deserializeObject(
+                                        ((ContentValues) it.next()).getAsByteArray("rightsObject"));
                 if (rightsObject2 != null && rightsObject2.getPermissions().contains(str2)) {
                     return true;
                 }
@@ -903,27 +1109,32 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminRemoved(int i) {
-    }
+    public final void onAdminRemoved(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onPreAdminRemoval(int i) {
-    }
+    public final void onPreAdminRemoval(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     public final void onUserStarting(int i) {
         updateAdminPermissions();
     }
 
-    public final boolean processKnoxLicenseResponse(String str, String str2, String str3, String str4, Error error, int i, String str5, RightsObject rightsObject, int i2) {
+    public final boolean processKnoxLicenseResponse(
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            Error error,
+            int i,
+            String str5,
+            RightsObject rightsObject,
+            int i2) {
         ArrayList arrayList;
         boolean z;
         ArrayList arrayList2;
@@ -948,11 +1159,19 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
                         z = mEdmStorageProvider.putValuesNoUpdate("LICENSE", contentValues2);
                     }
                     if (z) {
-                        Log.d("EnterpriseLicenseService", "processKnoxLicenseResponse(): License Table update.");
-                        Log.d("EnterpriseLicenseService", "result setLicensePermissionForMDM(" + str2 + "): " + mPMS.setLicensePermissionsForMDM(str2));
+                        Log.d(
+                                "EnterpriseLicenseService",
+                                "processKnoxLicenseResponse(): License Table update.");
+                        Log.d(
+                                "EnterpriseLicenseService",
+                                "result setLicensePermissionForMDM("
+                                        + str2
+                                        + "): "
+                                        + mPMS.setLicensePermissionsForMDM(str2));
                         arrayList2 = new ArrayList(mPMS.getPackageGrantedPermissionsForMDM(str2));
                         int i3 = EnterpriseDeviceManagerService.$r8$clinit;
-                        ((EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance).startDeferredServicesIfNeeded();
+                        ((EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance)
+                                .startDeferredServicesIfNeeded();
                     } else {
                         arrayList2 = null;
                     }
@@ -965,15 +1184,40 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
                 ArrayList arrayList3 = z ? (ArrayList) getPermissions(str2) : new ArrayList();
                 if (str != null) {
                     if (i != 801 && ((ConcurrentHashMap) this.mKlmPkgRecords).containsKey(str)) {
-                        str7 = ((LicenseResultRecord) ((ConcurrentHashMap) this.mKlmPkgRecords).get(str)).licenseKey;
+                        str7 =
+                                ((LicenseResultRecord)
+                                                ((ConcurrentHashMap) this.mKlmPkgRecords).get(str))
+                                        .licenseKey;
                     } else if (i != 801) {
-                        Log.w("EnterpriseLicenseService", "klm activation record not found for " + str + " and package " + str2);
+                        Log.w(
+                                "EnterpriseLicenseService",
+                                "klm activation record not found for "
+                                        + str
+                                        + " and package "
+                                        + str2);
                     }
                 }
                 try {
-                    LicenseResult licenseResult = new LicenseResult(str2, str4, error.getErrorCode(), LicenseResult.Type.fromKlmStatus(i), arrayList, getMaskedKlm(str7));
+                    LicenseResult licenseResult =
+                            new LicenseResult(
+                                    str2,
+                                    str4,
+                                    error.getErrorCode(),
+                                    LicenseResult.Type.fromKlmStatus(i),
+                                    arrayList,
+                                    getMaskedKlm(str7));
                     str6 = "EnterpriseLicenseService";
-                    sendKlmResult(str4, error.getErrorCode(), i, str, str2, str5, i2, arrayList, arrayList3, null);
+                    sendKlmResult(
+                            str4,
+                            error.getErrorCode(),
+                            i,
+                            str,
+                            str2,
+                            str5,
+                            i2,
+                            arrayList,
+                            arrayList3,
+                            null);
                     IUcmService ucmService = getUcmService();
                     if (ucmService != null) {
                         ucmService.notifyLicenseStatus(str2, str4, error.getErrorCode());
@@ -1005,9 +1249,9 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
 
     /* JADX WARN: Can't wrap try/catch for region: R(16:(1:33)(2:117|(2:120|121)(16:119|35|36|(5:102|103|104|105|106)|38|(1:(1:41)(13:60|61|62|63|64|(1:66)|68|(3:70|(1:72)|73)(1:83)|(2:75|(1:77)(1:78))|79|80|81|82))|100|64|(0)|68|(0)(0)|(0)|79|80|81|82))|35|36|(0)|38|(0)|100|64|(0)|68|(0)(0)|(0)|79|80|81|82) */
     /* JADX WARN: Code restructure failed: missing block: B:116:0x01a6, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:102:0x017f A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:15:0x0059 A[Catch: all -> 0x004c, TryCatch #8 {all -> 0x004c, blocks: (B:4:0x0029, B:6:0x003a, B:9:0x0041, B:12:0x004f, B:15:0x0059, B:17:0x0064, B:19:0x006c, B:21:0x0076, B:22:0x0085, B:23:0x009e, B:46:0x0338, B:48:0x033f, B:50:0x0345, B:53:0x0355, B:55:0x035f, B:56:0x036e, B:57:0x0387, B:58:0x03d1, B:87:0x029d, B:89:0x02a4, B:91:0x02aa, B:94:0x02bd, B:96:0x02c7, B:97:0x02d6, B:98:0x02ef, B:80:0x0283, B:68:0x01ee, B:70:0x01f5, B:72:0x01fb, B:75:0x020e, B:77:0x0218, B:78:0x0227, B:79:0x0240), top: B:3:0x0029 }] */
@@ -1038,31 +1282,47 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized boolean processLicenseActivationResponse(java.lang.String r24, java.lang.String r25, java.lang.String r26, java.lang.String r27, java.lang.String r28, com.samsung.android.knox.license.RightsObject r29, com.samsung.android.knox.license.Error r30, java.lang.String r31, java.lang.String r32, int r33) {
+    public final synchronized boolean processLicenseActivationResponse(
+            java.lang.String r24,
+            java.lang.String r25,
+            java.lang.String r26,
+            java.lang.String r27,
+            java.lang.String r28,
+            com.samsung.android.knox.license.RightsObject r29,
+            com.samsung.android.knox.license.Error r30,
+            java.lang.String r31,
+            java.lang.String r32,
+            int r33) {
         /*
             Method dump skipped, instructions count: 980
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.license.EnterpriseLicenseService.processLicenseActivationResponse(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, com.samsung.android.knox.license.RightsObject, com.samsung.android.knox.license.Error, java.lang.String, java.lang.String, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.license.EnterpriseLicenseService.processLicenseActivationResponse(java.lang.String,"
+                    + " java.lang.String, java.lang.String, java.lang.String, java.lang.String,"
+                    + " com.samsung.android.knox.license.RightsObject,"
+                    + " com.samsung.android.knox.license.Error, java.lang.String, java.lang.String,"
+                    + " int):boolean");
     }
 
     /* JADX WARN: Can't wrap try/catch for region: R(11:(10:(1:(1:41)(22:58|59|60|61|62|63|(9:67|68|69|70|71|(1:74)(0)|77|64|65)|144|145|(2:79|(2:81|(1:85)))|(1:87)|89|90|91|92|93|(2:(1:96)|97)(1:104)|98|99|(1:101)|102|103))|91|92|93|(0)(0)|98|99|(0)|102|103)|61|62|63|(2:64|65)|144|145|(0)|(0)|89|90) */
     /* JADX WARN: Code restructure failed: missing block: B:109:0x02d8, code lost:
-    
-        r0 = th;
-     */
+
+       r0 = th;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:110:0x02d9, code lost:
-    
-        r12 = r29;
-        r16 = r11;
-        r15 = r18;
-        r11 = r19;
-        r5 = r20;
-     */
+
+       r12 = r29;
+       r16 = r11;
+       r15 = r18;
+       r11 = r19;
+       r5 = r20;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:111:0x02e3, code lost:
-    
-        r2 = "com.samsung.android.knox.intent.extra.LICENSE_RESULT_TYPE";
-     */
+
+       r2 = "com.samsung.android.knox.intent.extra.LICENSE_RESULT_TYPE";
+    */
     /* JADX WARN: Removed duplicated region for block: B:101:0x0291  */
     /* JADX WARN: Removed duplicated region for block: B:104:0x027f  */
     /* JADX WARN: Removed duplicated region for block: B:121:0x037e  */
@@ -1080,17 +1340,31 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean processLicenseValidationResult(java.lang.String r26, com.samsung.android.knox.license.RightsObject r27, com.samsung.android.knox.license.Error r28, java.lang.String r29, java.lang.String r30, java.lang.String r31, java.lang.String r32) {
+    public final boolean processLicenseValidationResult(
+            java.lang.String r26,
+            com.samsung.android.knox.license.RightsObject r27,
+            com.samsung.android.knox.license.Error r28,
+            java.lang.String r29,
+            java.lang.String r30,
+            java.lang.String r31,
+            java.lang.String r32) {
         /*
             Method dump skipped, instructions count: 1087
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.license.EnterpriseLicenseService.processLicenseValidationResult(java.lang.String, com.samsung.android.knox.license.RightsObject, com.samsung.android.knox.license.Error, java.lang.String, java.lang.String, java.lang.String, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.license.EnterpriseLicenseService.processLicenseValidationResult(java.lang.String,"
+                    + " com.samsung.android.knox.license.RightsObject,"
+                    + " com.samsung.android.knox.license.Error, java.lang.String, java.lang.String,"
+                    + " java.lang.String, java.lang.String):boolean");
     }
 
-    public final void registerLicenseResultRecord(String str, String str2, ILicenseResultCallback iLicenseResultCallback, Map map) {
+    public final void registerLicenseResultRecord(
+            String str, String str2, ILicenseResultCallback iLicenseResultCallback, Map map) {
         Log.d("EnterpriseLicenseService", "registerLicenseResultRecord() for " + str);
-        LicenseResultRecord licenseResultRecord = new LicenseResultRecord(str, str2, iLicenseResultCallback, map);
+        LicenseResultRecord licenseResultRecord =
+                new LicenseResultRecord(str, str2, iLicenseResultCallback, map);
         if (iLicenseResultCallback != null) {
             try {
                 iLicenseResultCallback.asBinder().linkToDeath(licenseResultRecord, 0);
@@ -1116,14 +1390,17 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
                 if (!str.trim().isEmpty()) {
                     ContentValues contentValues = new ContentValues();
                     contentValues.put("instanceId", str);
-                    ContentValues value = mEdmStorageProvider.getValue(contentValues, "LICENSE", "pkgName");
+                    ContentValues value =
+                            mEdmStorageProvider.getValue(contentValues, "LICENSE", "pkgName");
                     if (value == null) {
                         Log.w("EnterpriseLicenseService", "resetLicense(): result is null");
                         return false;
                     }
                     String asString = value.getAsString("pkgName");
                     if (asString == null) {
-                        Log.w("EnterpriseLicenseService", "resetLicense(): pkgName is null, Record does not exist");
+                        Log.w(
+                                "EnterpriseLicenseService",
+                                "resetLicense(): pkgName is null, Record does not exist");
                         return false;
                     }
                     z = resetELMInfo(asString);
@@ -1164,38 +1441,76 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
     }
 
     public final void sendDeviceRegistrationIntentToKpmAgent(String str, String str2) {
-        Log.d("EnterpriseLicenseService", "sendDeviceRegistrationIntentToKpmAgent : status : " + str);
+        Log.d(
+                "EnterpriseLicenseService",
+                "sendDeviceRegistrationIntentToKpmAgent : status : " + str);
         if ("success".equals(str)) {
-            Intent intent = new Intent("com.samsung.android.knox.intent.action.DEVICE_REGISTRATION_INTERNAL");
+            Intent intent =
+                    new Intent(
+                            "com.samsung.android.knox.intent.action.DEVICE_REGISTRATION_INTERNAL");
             intent.putExtra("packageName", str2);
             intent.setPackage("com.samsung.android.knox.attestation");
             intent.addFlags(32);
-            this.mContext.sendBroadcastAsUser(intent, UserHandle.ALL, "com.samsung.android.knox.permission.KNOX_DEVICE_REGISTRATION_REQUEST_INTENT_INTERNAL");
+            this.mContext.sendBroadcastAsUser(
+                    intent,
+                    UserHandle.ALL,
+                    "com.samsung.android.knox.permission.KNOX_DEVICE_REGISTRATION_REQUEST_INTENT_INTERNAL");
         }
     }
 
-    public final void sendElmResult(int i, String str, String str2, String str3, LicenseResultRecord licenseResultRecord) {
-        sendElmResult("fail", i, str, str2, str3, null, -1, new ArrayList(), new ArrayList(), licenseResultRecord);
+    public final void sendElmResult(
+            int i, String str, String str2, String str3, LicenseResultRecord licenseResultRecord) {
+        sendElmResult(
+                "fail",
+                i,
+                str,
+                str2,
+                str3,
+                null,
+                -1,
+                new ArrayList(),
+                new ArrayList(),
+                licenseResultRecord);
     }
 
-    public final void sendElmResult(String str, int i, String str2, String str3, String str4, String str5, int i2, ArrayList arrayList, ArrayList arrayList2, LicenseResultRecord licenseResultRecord) {
+    public final void sendElmResult(
+            String str,
+            int i,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            int i2,
+            ArrayList arrayList,
+            ArrayList arrayList2,
+            LicenseResultRecord licenseResultRecord) {
         LicenseResultRecord licenseResultRecord2;
         boolean z;
         if (licenseResultRecord != null || str2 == null) {
             licenseResultRecord2 = licenseResultRecord;
         } else {
-            LicenseResultRecord licenseResultRecord3 = (LicenseResultRecord) ((ConcurrentHashMap) this.mElmPkgRecords).get(str2);
+            LicenseResultRecord licenseResultRecord3 =
+                    (LicenseResultRecord) ((ConcurrentHashMap) this.mElmPkgRecords).get(str2);
             if (licenseResultRecord3 != null) {
                 unregisterLicenseResultRecord(str2, this.mElmPkgRecords);
             } else {
-                Log.e("EnterpriseLicenseService", "ELM Record not found. Caller died or race condition for ".concat(str2));
+                Log.e(
+                        "EnterpriseLicenseService",
+                        "ELM Record not found. Caller died or race condition for ".concat(str2));
             }
             licenseResultRecord2 = licenseResultRecord3;
         }
         if (licenseResultRecord2 != null && licenseResultRecord2.callback != null) {
             z = true;
             try {
-                licenseResultRecord2.callback.onLicenseResult(new LicenseResult(str3, str, i, LicenseResult.Type.fromElmStatus(800), arrayList, licenseResultRecord2.licenseKey));
+                licenseResultRecord2.callback.onLicenseResult(
+                        new LicenseResult(
+                                str3,
+                                str,
+                                i,
+                                LicenseResult.Type.fromElmStatus(800),
+                                arrayList,
+                                licenseResultRecord2.licenseKey));
                 Log.i("EnterpriseLicenseService", "ELM result sent by callback to " + str3);
             } catch (DeadObjectException e) {
                 Log.e("EnterpriseLicenseService", "DeadObjectException in sendElmResult", e);
@@ -1212,11 +1527,14 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
             intent.putExtra("com.samsung.android.knox.intent.extra.LICENSE_DATA_PACKAGENAME", str3);
             intent.putExtra("com.samsung.android.knox.intent.extra.LICENSE_PERM_GROUP", str5);
             intent.putExtra("com.samsung.android.knox.intent.extra.LICENSE_ATTESTATION_STATUS", i2);
-            intent.putStringArrayListExtra("com.samsung.android.knox.intent.extra.LICENSE_GRANTED_PERMISSIONS", arrayList);
+            intent.putStringArrayListExtra(
+                    "com.samsung.android.knox.intent.extra.LICENSE_GRANTED_PERMISSIONS", arrayList);
             if (arrayList2 != null) {
                 Bundle bundle = new Bundle();
                 bundle.putStringArrayList("Permissions", arrayList2);
-                intent.putExtra("com.samsung.android.knox.intent.extra.LICENSE_DATA_LICENSE_PERMISSIONS", bundle);
+                intent.putExtra(
+                        "com.samsung.android.knox.intent.extra.LICENSE_DATA_LICENSE_PERMISSIONS",
+                        bundle);
             }
             if (str4 != null && !str4.equals(str3)) {
                 intent.setPackage(str4);
@@ -1229,12 +1547,29 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
             long clearCallingIdentity2 = Binder.clearCallingIdentity();
             this.mContext.sendBroadcastAsUser(intent, UserHandle.ALL);
             Binder.restoreCallingIdentity(clearCallingIdentity2);
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("ELM result sent by Intent to ", str3, "EnterpriseLicenseService");
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    "ELM result sent by Intent to ", str3, "EnterpriseLicenseService");
         }
     }
 
-    public final void sendKlmResult(int i, int i2, String str, String str2, String str3, LicenseResultRecord licenseResultRecord) {
-        sendKlmResult("fail", i, i2, str, str2, str3, -1, new ArrayList(), new ArrayList(), licenseResultRecord);
+    public final void sendKlmResult(
+            int i,
+            int i2,
+            String str,
+            String str2,
+            String str3,
+            LicenseResultRecord licenseResultRecord) {
+        sendKlmResult(
+                "fail",
+                i,
+                i2,
+                str,
+                str2,
+                str3,
+                -1,
+                new ArrayList(),
+                new ArrayList(),
+                licenseResultRecord);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:21:0x008a  */
@@ -1245,24 +1580,42 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void sendKlmResult(java.lang.String r19, int r20, int r21, java.lang.String r22, java.lang.String r23, java.lang.String r24, int r25, java.util.ArrayList r26, java.util.ArrayList r27, com.android.server.enterprise.license.EnterpriseLicenseService.LicenseResultRecord r28) {
+    public final void sendKlmResult(
+            java.lang.String r19,
+            int r20,
+            int r21,
+            java.lang.String r22,
+            java.lang.String r23,
+            java.lang.String r24,
+            int r25,
+            java.util.ArrayList r26,
+            java.util.ArrayList r27,
+            com.android.server.enterprise.license.EnterpriseLicenseService.LicenseResultRecord
+                    r28) {
         /*
             Method dump skipped, instructions count: 277
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.license.EnterpriseLicenseService.sendKlmResult(java.lang.String, int, int, java.lang.String, java.lang.String, java.lang.String, int, java.util.ArrayList, java.util.ArrayList, com.android.server.enterprise.license.EnterpriseLicenseService$LicenseResultRecord):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.license.EnterpriseLicenseService.sendKlmResult(java.lang.String,"
+                    + " int, int, java.lang.String, java.lang.String, java.lang.String, int,"
+                    + " java.util.ArrayList, java.util.ArrayList,"
+                    + " com.android.server.enterprise.license.EnterpriseLicenseService$LicenseResultRecord):void");
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void systemReady() {
-    }
+    public final void systemReady() {}
 
     public final void updateAdminPermissions() {
         if (Binder.getCallingPid() != MY_PID) {
             throw new SecurityException("Caller is not SYSTEM_PROCESS");
         }
         try {
-            ArrayList arrayList = (ArrayList) mEdmStorageProvider.getValuesList("LICENSE", new String[]{"pkgName"}, null);
+            ArrayList arrayList =
+                    (ArrayList)
+                            mEdmStorageProvider.getValuesList(
+                                    "LICENSE", new String[] {"pkgName"}, null);
             if (arrayList.isEmpty()) {
                 return;
             }
@@ -1290,8 +1643,10 @@ public final class EnterpriseLicenseService extends IEnterpriseLicense.Stub impl
         try {
             Log.d("EnterpriseLicenseService", "validateLicenses to ".concat("all packages"));
             Bundle bundle = new Bundle();
-            bundle.putString("com.samsung.android.knox.intent.extra.KNOX_LICENSE_DATA_PACKAGENAME", null);
-            new Thread(new EnterpriseLicenseService$$ExternalSyntheticLambda0(this, bundle, 3)).start();
+            bundle.putString(
+                    "com.samsung.android.knox.intent.extra.KNOX_LICENSE_DATA_PACKAGENAME", null);
+            new Thread(new EnterpriseLicenseService$$ExternalSyntheticLambda0(this, bundle, 3))
+                    .start();
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }

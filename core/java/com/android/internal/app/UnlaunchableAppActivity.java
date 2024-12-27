@@ -17,13 +17,17 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.telecom.TelecomManager;
 import android.util.Log;
+
 import com.android.internal.R;
 import com.android.internal.hidden_from_bootclasspath.android.os.Flags;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.function.Supplier;
 
 /* loaded from: classes5.dex */
-public class UnlaunchableAppActivity extends Activity implements DialogInterface.OnDismissListener, DialogInterface.OnClickListener {
+public class UnlaunchableAppActivity extends Activity
+        implements DialogInterface.OnDismissListener, DialogInterface.OnClickListener {
     private static final String EXTRA_UNLAUNCHABLE_REASON = "unlaunchable_reason";
     private static final String TAG = "UnlaunchableAppActivity";
     private static final int UNLAUNCHABLE_REASON_QUIET_MODE = 1;
@@ -44,7 +48,10 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
         this.mTelecomManager = (TelecomManager) getSystemService(TelecomManager.class);
         this.mReason = intent.getIntExtra(EXTRA_UNLAUNCHABLE_REASON, -1);
         this.mUserId = intent.getIntExtra("android.intent.extra.user_handle", -10000);
-        this.mTarget = (IntentSender) intent.getParcelableExtra("android.intent.extra.INTENT", IntentSender.class);
+        this.mTarget =
+                (IntentSender)
+                        intent.getParcelableExtra(
+                                "android.intent.extra.INTENT", IntentSender.class);
         String targetPackageName = intent.getStringExtra("android.intent.extra.PACKAGE_NAME");
         Log.i(TAG, "Unlaunchable activity for target package: " + targetPackageName);
         UserManager userManager = UserManager.get(this);
@@ -53,8 +60,15 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
             finish();
             return;
         }
-        if (Flags.allowPrivateProfile() && android.multiuser.Flags.enablePrivateSpaceFeatures() && !userManager.isManagedProfile(this.mUserId)) {
-            Log.e(TAG, "Unlaunchable activity for target package " + targetPackageName + " called for a non-managed-profile " + this.mUserId);
+        if (Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && !userManager.isManagedProfile(this.mUserId)) {
+            Log.e(
+                    TAG,
+                    "Unlaunchable activity for target package "
+                            + targetPackageName
+                            + " called for a non-managed-profile "
+                            + this.mUserId);
             finish();
             return;
         }
@@ -73,7 +87,10 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
             i = R.string.work_mode_turn_on_btn;
         }
         String btnTitle = resources.getString(i);
-        if (targetPackageName != null && targetPackageName.equals(this.mTelecomManager.getDefaultDialerPackage(UserHandle.of(this.mUserId)))) {
+        if (targetPackageName != null
+                && targetPackageName.equals(
+                        this.mTelecomManager.getDefaultDialerPackage(
+                                UserHandle.of(this.mUserId)))) {
             showEmergencyCallButton = true;
         } else {
             showEmergencyCallButton = false;
@@ -84,7 +101,10 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
         } else {
             builder = new AlertDialog.Builder(this);
         }
-        builder.setTitle(dialogTitle).setOnDismissListener(this).setPositiveButton(btnTitle, this).setNegativeButton(17039360, (DialogInterface.OnClickListener) null);
+        builder.setTitle(dialogTitle)
+                .setOnDismissListener(this)
+                .setPositiveButton(btnTitle, this)
+                .setNegativeButton(17039360, (DialogInterface.OnClickListener) null);
         builder.setMessage(dialogMessage);
         AlertDialog dialog = builder.create();
         dialog.create();
@@ -106,14 +126,20 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
         if (SemPersonaManager.isSecureFolderId(this.mUserId)) {
             return getResources().getString(R.string.secure_folder_decrypt_title);
         }
-        return ((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.UNLAUNCHABLE_APP_WORK_PAUSED_TITLE, new Supplier() { // from class: com.android.internal.app.UnlaunchableAppActivity$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                String lambda$getDialogTitle$0;
-                lambda$getDialogTitle$0 = UnlaunchableAppActivity.this.lambda$getDialogTitle$0();
-                return lambda$getDialogTitle$0;
-            }
-        });
+        return ((DevicePolicyManager) getSystemService(DevicePolicyManager.class))
+                .getResources()
+                .getString(
+                        DevicePolicyResources.Strings.Core.UNLAUNCHABLE_APP_WORK_PAUSED_TITLE,
+                        new Supplier() { // from class:
+                                         // com.android.internal.app.UnlaunchableAppActivity$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                String lambda$getDialogTitle$0;
+                                lambda$getDialogTitle$0 =
+                                        UnlaunchableAppActivity.this.lambda$getDialogTitle$0();
+                                return lambda$getDialogTitle$0;
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -140,12 +166,15 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
         }
         if (which == -1) {
             final UserManager userManager = UserManager.get(this);
-            new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.internal.app.UnlaunchableAppActivity$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    UnlaunchableAppActivity.this.lambda$onClick$1(userManager);
-                }
-            });
+            new Handler(Looper.getMainLooper())
+                    .post(
+                            new Runnable() { // from class:
+                                             // com.android.internal.app.UnlaunchableAppActivity$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    UnlaunchableAppActivity.this.lambda$onClick$1(userManager);
+                                }
+                            });
         } else if (which == -3) {
             launchEmergencyDialer();
         }
@@ -157,7 +186,8 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
     }
 
     private void launchEmergencyDialer() {
-        startActivity(this.mTelecomManager.createLaunchEmergencyDialerIntent(null).setFlags(343932928));
+        startActivity(
+                this.mTelecomManager.createLaunchEmergencyDialerIntent(null).setFlags(343932928));
     }
 
     private static final Intent createBaseIntent() {
@@ -174,11 +204,14 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
         return intent;
     }
 
-    public static Intent createInQuietModeDialogIntent(int userId, IntentSender target, ResolveInfo resolveInfo) {
+    public static Intent createInQuietModeDialogIntent(
+            int userId, IntentSender target, ResolveInfo resolveInfo) {
         Intent intent = createInQuietModeDialogIntent(userId);
         intent.putExtra("android.intent.extra.INTENT", target);
         if (resolveInfo != null) {
-            intent.putExtra("android.intent.extra.PACKAGE_NAME", resolveInfo.getComponentInfo().packageName);
+            intent.putExtra(
+                    "android.intent.extra.PACKAGE_NAME",
+                    resolveInfo.getComponentInfo().packageName);
         }
         return intent;
     }

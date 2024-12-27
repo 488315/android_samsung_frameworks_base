@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class IncrementalNewFileParams implements Parcelable {
-    public static final Parcelable.Creator<IncrementalNewFileParams> CREATOR = new Parcelable.Creator<IncrementalNewFileParams>() { // from class: android.os.incremental.IncrementalNewFileParams.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IncrementalNewFileParams createFromParcel(Parcel _aidl_source) {
-            IncrementalNewFileParams _aidl_out = new IncrementalNewFileParams();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<IncrementalNewFileParams> CREATOR =
+            new Parcelable.Creator<
+                    IncrementalNewFileParams>() { // from class:
+                                                  // android.os.incremental.IncrementalNewFileParams.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IncrementalNewFileParams createFromParcel(Parcel _aidl_source) {
+                    IncrementalNewFileParams _aidl_out = new IncrementalNewFileParams();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IncrementalNewFileParams[] newArray(int _aidl_size) {
-            return new IncrementalNewFileParams[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IncrementalNewFileParams[] newArray(int _aidl_size) {
+                    return new IncrementalNewFileParams[_aidl_size];
+                }
+            };
     public byte[] fileId;
     public byte[] metadata;
     public byte[] signature;

@@ -1,6 +1,7 @@
 package android.telecom;
 
 import android.os.Bundle;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -15,6 +16,5 @@ public interface CallEventCallback {
 
     void onMuteStateChanged(boolean z);
 
-    default void onVideoStateChanged(int videoState) {
-    }
+    default void onVideoStateChanged(int videoState) {}
 }

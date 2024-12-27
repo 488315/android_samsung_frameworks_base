@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Size;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -22,13 +23,21 @@ public class LocalImageResolver {
 
     public static Drawable resolveImage(Uri uri, Context context) throws IOException {
         try {
-            ImageDecoder.Source source = ImageDecoder.createSource(context.getContentResolver(), uri);
-            return ImageDecoder.decodeDrawable(source, new ImageDecoder.OnHeaderDecodedListener() { // from class: com.android.internal.widget.LocalImageResolver$$ExternalSyntheticLambda1
-                @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
-                public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source2) {
-                    LocalImageResolver.onHeaderDecoded(imageDecoder, imageInfo, 480, 480);
-                }
-            });
+            ImageDecoder.Source source =
+                    ImageDecoder.createSource(context.getContentResolver(), uri);
+            return ImageDecoder.decodeDrawable(
+                    source,
+                    new ImageDecoder
+                            .OnHeaderDecodedListener() { // from class:
+                                                         // com.android.internal.widget.LocalImageResolver$$ExternalSyntheticLambda1
+                        @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
+                        public final void onHeaderDecoded(
+                                ImageDecoder imageDecoder,
+                                ImageDecoder.ImageInfo imageInfo,
+                                ImageDecoder.Source source2) {
+                            LocalImageResolver.onHeaderDecoded(imageDecoder, imageInfo, 480, 480);
+                        }
+                    });
         } catch (Exception e) {
             throw new IOException(e);
         }
@@ -60,7 +69,8 @@ public class LocalImageResolver {
             case 4:
             case 6:
                 Uri uri = getResolvableUri(icon);
-                if (uri != null && (result = resolveImage(uri, context, maxWidth, maxHeight)) != null) {
+                if (uri != null
+                        && (result = resolveImage(uri, context, maxWidth, maxHeight)) != null) {
                     return tintDrawable(icon, result);
                 }
                 break;
@@ -91,15 +101,22 @@ public class LocalImageResolver {
         return resolveImage(source, maxWidth, maxHeight);
     }
 
-    private static Drawable resolveBitmapImage(Icon icon, Context context, int maxWidth, int maxHeight) {
+    private static Drawable resolveBitmapImage(
+            Icon icon, Context context, int maxWidth, int maxHeight) {
         if (maxWidth > 0 && maxHeight > 0) {
             Bitmap bitmap = icon.getBitmap();
             if (bitmap == null) {
                 return null;
             }
             if (bitmap.getWidth() > maxWidth || bitmap.getHeight() > maxHeight) {
-                Icon smallerIcon = icon.getType() == 5 ? Icon.createWithAdaptiveBitmap(bitmap) : Icon.createWithBitmap(bitmap);
-                smallerIcon.setTintList(icon.getTintList()).setTintBlendMode(icon.getTintBlendMode()).scaleDownIfNecessary(maxWidth, maxHeight);
+                Icon smallerIcon =
+                        icon.getType() == 5
+                                ? Icon.createWithAdaptiveBitmap(bitmap)
+                                : Icon.createWithBitmap(bitmap);
+                smallerIcon
+                        .setTintList(icon.getTintList())
+                        .setTintBlendMode(icon.getTintBlendMode())
+                        .scaleDownIfNecessary(maxWidth, maxHeight);
                 return smallerIcon.loadDrawable(context);
             }
         }
@@ -118,21 +135,35 @@ public class LocalImageResolver {
         return drawable;
     }
 
-    private static Drawable resolveImage(ImageDecoder.Source source, final int maxWidth, final int maxHeight) {
+    private static Drawable resolveImage(
+            ImageDecoder.Source source, final int maxWidth, final int maxHeight) {
         try {
-            return ImageDecoder.decodeDrawable(source, new ImageDecoder.OnHeaderDecodedListener() { // from class: com.android.internal.widget.LocalImageResolver$$ExternalSyntheticLambda0
-                @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
-                public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source2) {
-                    LocalImageResolver.lambda$resolveImage$1(maxWidth, maxHeight, imageDecoder, imageInfo, source2);
-                }
-            });
+            return ImageDecoder.decodeDrawable(
+                    source,
+                    new ImageDecoder
+                            .OnHeaderDecodedListener() { // from class:
+                                                         // com.android.internal.widget.LocalImageResolver$$ExternalSyntheticLambda0
+                        @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
+                        public final void onHeaderDecoded(
+                                ImageDecoder imageDecoder,
+                                ImageDecoder.ImageInfo imageInfo,
+                                ImageDecoder.Source source2) {
+                            LocalImageResolver.lambda$resolveImage$1(
+                                    maxWidth, maxHeight, imageDecoder, imageInfo, source2);
+                        }
+                    });
         } catch (Resources.NotFoundException | IOException e) {
             Log.d(TAG, "Couldn't use ImageDecoder for drawable, falling back to non-resized load.");
             return null;
         }
     }
 
-    static /* synthetic */ void lambda$resolveImage$1(int maxWidth, int maxHeight, ImageDecoder decoder, ImageDecoder.ImageInfo info, ImageDecoder.Source unused) {
+    static /* synthetic */ void lambda$resolveImage$1(
+            int maxWidth,
+            int maxHeight,
+            ImageDecoder decoder,
+            ImageDecoder.ImageInfo info,
+            ImageDecoder.Source unused) {
         if (maxWidth <= 0 || maxHeight <= 0) {
             return;
         }
@@ -160,7 +191,8 @@ public class LocalImageResolver {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static void onHeaderDecoded(ImageDecoder decoder, ImageDecoder.ImageInfo info, int maxWidth, int maxHeight) {
+    public static void onHeaderDecoded(
+            ImageDecoder decoder, ImageDecoder.ImageInfo info, int maxWidth, int maxHeight) {
         double ratio;
         Size size = info.getSize();
         int originalSize = Math.max(size.getHeight(), size.getWidth());

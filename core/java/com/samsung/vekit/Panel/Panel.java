@@ -3,6 +3,7 @@ package com.samsung.vekit.Panel;
 import android.graphics.Matrix;
 import android.hardware.scontext.SContextConstants;
 import android.util.Log;
+
 import com.samsung.vekit.Common.Object.Matrix4;
 import com.samsung.vekit.Common.Object.Quaternion;
 import com.samsung.vekit.Common.Object.Vector2;
@@ -77,7 +78,8 @@ public class Panel {
         float verticalY;
         float horizontalX;
         float horizontalY;
-        if (this.perspective.getX().floatValue() == 0.0f && this.perspective.getY().floatValue() == 0.0f) {
+        if (this.perspective.getX().floatValue() == 0.0f
+                && this.perspective.getY().floatValue() == 0.0f) {
             this.perspectiveMatrix.identity();
             return;
         }
@@ -101,7 +103,16 @@ public class Panel {
             horizontalY = 0.0f;
         }
         float horizontalX2 = 0.0f - verticalX;
-        float[] dst = {horizontalX2, horizontalX + 1.0f, 0.0f - verticalY, 0.0f - horizontalX, verticalY + 1.0f, 0.0f - horizontalY, verticalX + 1.0f, horizontalY + 1.0f};
+        float[] dst = {
+            horizontalX2,
+            horizontalX + 1.0f,
+            0.0f - verticalY,
+            0.0f - horizontalX,
+            verticalY + 1.0f,
+            0.0f - horizontalY,
+            verticalX + 1.0f,
+            horizontalY + 1.0f
+        };
         Matrix mat = new Matrix();
         mat.setPolyToPoly(dst, 0, src, 0, src.length >> 1);
         float[] values = new float[9];
@@ -175,10 +186,40 @@ public class Panel {
         }
         quaternion4.w = d4;
         this.rotation = this.quaternion.getRotation();
-        Log.d("Panel", "rotation : " + this.rotation.getX() + ", " + this.rotation.getY() + ", " + this.rotation.getZ());
-        Log.d("Panel", "scale : " + this.scale.getX() + ", " + this.scale.getY() + ", " + this.scale.getZ());
-        Log.d("Panel", "position : " + this.position.getX() + ", " + this.position.getY() + ", " + this.position.getZ());
-        Log.d("Panel", "quaternion : " + this.quaternion.getX() + ", " + this.quaternion.getY() + ", " + this.quaternion.getZ() + ", " + this.quaternion.getW());
+        Log.d(
+                "Panel",
+                "rotation : "
+                        + this.rotation.getX()
+                        + ", "
+                        + this.rotation.getY()
+                        + ", "
+                        + this.rotation.getZ());
+        Log.d(
+                "Panel",
+                "scale : "
+                        + this.scale.getX()
+                        + ", "
+                        + this.scale.getY()
+                        + ", "
+                        + this.scale.getZ());
+        Log.d(
+                "Panel",
+                "position : "
+                        + this.position.getX()
+                        + ", "
+                        + this.position.getY()
+                        + ", "
+                        + this.position.getZ());
+        Log.d(
+                "Panel",
+                "quaternion : "
+                        + this.quaternion.getX()
+                        + ", "
+                        + this.quaternion.getY()
+                        + ", "
+                        + this.quaternion.getZ()
+                        + ", "
+                        + this.quaternion.getW());
         return this;
     }
 
@@ -213,14 +254,24 @@ public class Panel {
     }
 
     public Panel setScale(float scaleX, float scaleY, float scaleZ) {
-        return setScale(new Vector3<>(Float.valueOf(scaleX), Float.valueOf(scaleY), Float.valueOf(scaleZ)));
+        return setScale(
+                new Vector3<>(Float.valueOf(scaleX), Float.valueOf(scaleY), Float.valueOf(scaleZ)));
     }
 
     private void updateMatrix() {
         this.matrix.identity();
-        this.matrix.scale(this.scale.getX().floatValue(), this.scale.getY().floatValue(), this.scale.getZ().floatValue());
-        this.matrix.rotate(this.rotation.getX().floatValue(), this.rotation.getY().floatValue(), this.rotation.getZ().floatValue());
-        this.matrix.translate(this.position.getX().floatValue(), this.position.getY().floatValue(), this.position.getZ().floatValue());
+        this.matrix.scale(
+                this.scale.getX().floatValue(),
+                this.scale.getY().floatValue(),
+                this.scale.getZ().floatValue());
+        this.matrix.rotate(
+                this.rotation.getX().floatValue(),
+                this.rotation.getY().floatValue(),
+                this.rotation.getZ().floatValue());
+        this.matrix.translate(
+                this.position.getX().floatValue(),
+                this.position.getY().floatValue(),
+                this.position.getZ().floatValue());
     }
 
     public Vector3<Float> getRotation() {
@@ -230,7 +281,10 @@ public class Panel {
     public Panel setRotation(Vector3<Float> rotation) {
         this.rotation = rotation;
         this.quaternion = new Quaternion();
-        this.quaternion.setRotation(rotation.getX().floatValue(), rotation.getY().floatValue(), rotation.getZ().floatValue());
+        this.quaternion.setRotation(
+                rotation.getX().floatValue(),
+                rotation.getY().floatValue(),
+                rotation.getZ().floatValue());
         updateMatrix();
         return this;
     }
@@ -243,7 +297,8 @@ public class Panel {
     }
 
     public Panel setRotation(float eulerX, float eulerY, float eulerZ) {
-        return setRotation(new Vector3<>(Float.valueOf(eulerX), Float.valueOf(eulerY), Float.valueOf(eulerZ)));
+        return setRotation(
+                new Vector3<>(Float.valueOf(eulerX), Float.valueOf(eulerY), Float.valueOf(eulerZ)));
     }
 
     public Panel setRotation(AxisType axisType, float degree) {
@@ -288,7 +343,10 @@ public class Panel {
     }
 
     public Panel translate(Vector3<Float> position) {
-        return translate(position.getX().floatValue(), position.getY().floatValue(), position.getZ().floatValue());
+        return translate(
+                position.getX().floatValue(),
+                position.getY().floatValue(),
+                position.getZ().floatValue());
     }
 
     public Panel rotate(AxisType axisType, float angle) {
@@ -304,7 +362,10 @@ public class Panel {
     }
 
     public Panel rotate(Vector3<Float> rotation) {
-        return rotate(rotation.getX().floatValue(), rotation.getY().floatValue(), rotation.getZ().floatValue());
+        return rotate(
+                rotation.getX().floatValue(),
+                rotation.getY().floatValue(),
+                rotation.getZ().floatValue());
     }
 
     public Panel scale(float scaleX, float scaleY, float scaleZ) {
@@ -314,6 +375,7 @@ public class Panel {
     }
 
     public Panel scale(Vector3<Float> scale) {
-        return scale(scale.getX().floatValue(), scale.getY().floatValue(), scale.getZ().floatValue());
+        return scale(
+                scale.getX().floatValue(), scale.getY().floatValue(), scale.getZ().floatValue());
     }
 }

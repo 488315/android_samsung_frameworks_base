@@ -9,7 +9,7 @@ import android.provider.DeviceConfig;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseArray;
-import com.android.server.am.BaseAppStateTracker;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,7 +24,13 @@ public abstract class BaseAppStateEventsTracker extends BaseAppStateTracker {
         public final String mKeyMaxTrackingDuration;
         public volatile long mMaxTrackingDuration;
 
-        public BaseAppStateEventsPolicy(BaseAppStateTracker.Injector injector, BaseAppStateEventsTracker baseAppStateEventsTracker, String str, boolean z, String str2, long j) {
+        public BaseAppStateEventsPolicy(
+                BaseAppStateTracker.Injector injector,
+                BaseAppStateEventsTracker baseAppStateEventsTracker,
+                String str,
+                boolean z,
+                String str2,
+                long j) {
             super(injector, baseAppStateEventsTracker, str, z);
             this.mKeyMaxTrackingDuration = str2;
             this.mDefaultMaxTrackingDuration = j;
@@ -54,7 +60,11 @@ public abstract class BaseAppStateEventsTracker extends BaseAppStateTracker {
                     updateTrackerEnabled();
                 }
             } else {
-                long j = DeviceConfig.getLong("activity_manager", this.mKeyMaxTrackingDuration, this.mDefaultMaxTrackingDuration);
+                long j =
+                        DeviceConfig.getLong(
+                                "activity_manager",
+                                this.mKeyMaxTrackingDuration,
+                                this.mDefaultMaxTrackingDuration);
                 if (j != this.mMaxTrackingDuration) {
                     this.mMaxTrackingDuration = j;
                     onMaxTrackingDurationChanged();
@@ -65,7 +75,11 @@ public abstract class BaseAppStateEventsTracker extends BaseAppStateTracker {
         @Override // com.android.server.am.BaseAppStatePolicy
         public void onSystemReady() {
             updateTrackerEnabled();
-            long j = DeviceConfig.getLong("activity_manager", this.mKeyMaxTrackingDuration, this.mDefaultMaxTrackingDuration);
+            long j =
+                    DeviceConfig.getLong(
+                            "activity_manager",
+                            this.mKeyMaxTrackingDuration,
+                            this.mDefaultMaxTrackingDuration);
             if (j != this.mMaxTrackingDuration) {
                 this.mMaxTrackingDuration = j;
                 onMaxTrackingDurationChanged();
@@ -73,7 +87,8 @@ public abstract class BaseAppStateEventsTracker extends BaseAppStateTracker {
         }
     }
 
-    public BaseAppStateEventsTracker(Context context, AppRestrictionController appRestrictionController) {
+    public BaseAppStateEventsTracker(
+            Context context, AppRestrictionController appRestrictionController) {
         super(context, appRestrictionController);
         this.mPkgEvents = new UidProcessMap();
         this.mTopUids = new ArraySet();
@@ -85,7 +100,8 @@ public abstract class BaseAppStateEventsTracker extends BaseAppStateTracker {
 
     @Override // com.android.server.am.BaseAppStateTracker
     public void dump(PrintWriter printWriter, String str) {
-        BaseAppStateEventsPolicy baseAppStateEventsPolicy = (BaseAppStateEventsPolicy) this.mInjector.mAppStatePolicy;
+        BaseAppStateEventsPolicy baseAppStateEventsPolicy =
+                (BaseAppStateEventsPolicy) this.mInjector.mAppStatePolicy;
         synchronized (this.mLock) {
             try {
                 long elapsedRealtime = SystemClock.elapsedRealtime();
@@ -95,14 +111,17 @@ public abstract class BaseAppStateEventsTracker extends BaseAppStateTracker {
                     ArrayMap arrayMap = (ArrayMap) sparseArray.valueAt(size);
                     for (int size2 = arrayMap.size() - 1; size2 >= 0; size2--) {
                         String str2 = (String) arrayMap.keyAt(size2);
-                        BaseAppStateEvents baseAppStateEvents = (BaseAppStateEvents) arrayMap.valueAt(size2);
+                        BaseAppStateEvents baseAppStateEvents =
+                                (BaseAppStateEvents) arrayMap.valueAt(size2);
                         printWriter.print(str);
                         printWriter.print("* ");
                         printWriter.print(str2);
                         printWriter.print('/');
                         printWriter.print(UserHandle.formatUid(keyAt));
                         printWriter.print(" exemption=");
-                        printWriter.println(baseAppStateEventsPolicy.getExemptionReasonString(keyAt, baseAppStateEvents.mExemptReason, str2));
+                        printWriter.println(
+                                baseAppStateEventsPolicy.getExemptionReasonString(
+                                        keyAt, baseAppStateEvents.mExemptReason, str2));
                         dumpEventLocked(printWriter, str, baseAppStateEvents, elapsedRealtime);
                     }
                 }
@@ -114,12 +133,15 @@ public abstract class BaseAppStateEventsTracker extends BaseAppStateTracker {
         baseAppStateEventsPolicy.dump(printWriter, str);
     }
 
-    public void dumpEventLocked(PrintWriter printWriter, String str, BaseAppStateEvents baseAppStateEvents, long j) {
-        baseAppStateEvents.dump(printWriter, ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("  ", str), j);
+    public void dumpEventLocked(
+            PrintWriter printWriter, String str, BaseAppStateEvents baseAppStateEvents, long j) {
+        baseAppStateEvents.dump(
+                printWriter,
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("  ", str),
+                j);
     }
 
-    public void dumpOthers(PrintWriter printWriter, String str) {
-    }
+    public void dumpOthers(PrintWriter printWriter, String str) {}
 
     public final BaseAppStateEvents getUidEventsLocked(int i) {
         ArrayMap arrayMap = (ArrayMap) this.mPkgEvents.mMap.get(i);
@@ -172,8 +194,7 @@ public abstract class BaseAppStateEventsTracker extends BaseAppStateTracker {
         }
     }
 
-    public void onUntrackingUidLocked(int i) {
-    }
+    public void onUntrackingUidLocked(int i) {}
 
     @Override // com.android.server.am.BaseAppStateTracker
     public final void onUserRemoved(int i) {
@@ -211,7 +232,8 @@ public abstract class BaseAppStateEventsTracker extends BaseAppStateTracker {
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
             ArrayMap arrayMap = (ArrayMap) sparseArray.valueAt(size);
             for (int size2 = arrayMap.size() - 1; size2 >= 0; size2--) {
-                BaseAppStateEvents baseAppStateEvents = (BaseAppStateEvents) arrayMap.valueAt(size2);
+                BaseAppStateEvents baseAppStateEvents =
+                        (BaseAppStateEvents) arrayMap.valueAt(size2);
                 for (int i = 0; i < baseAppStateEvents.mEvents.length; i++) {
                     baseAppStateEvents.trimEvents(i, j);
                 }

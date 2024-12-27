@@ -2,7 +2,9 @@ package com.samsung.android.knox.dar;
 
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.android.internal.widget.LockscreenCredential;
+
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -56,7 +58,8 @@ public class StreamCipher {
 
     public long issueKeyStream() {
         synchronized (this.mKeyMap) {
-            if (this.mPublicHandle == 0 || !this.mKeyMap.containsKey(Long.valueOf(this.mPublicHandle))) {
+            if (this.mPublicHandle == 0
+                    || !this.mKeyMap.containsKey(Long.valueOf(this.mPublicHandle))) {
                 this.mPublicHandle = issueKeyStream(64);
             }
         }
@@ -302,7 +305,8 @@ public class StreamCipher {
         return getStreamCredential(credential, res);
     }
 
-    private static LockscreenCredential getStreamCredential(LockscreenCredential credential, byte[] res) {
+    private static LockscreenCredential getStreamCredential(
+            LockscreenCredential credential, byte[] res) {
         return LockscreenCredential.streamCredential(credential.getType(), res);
     }
 

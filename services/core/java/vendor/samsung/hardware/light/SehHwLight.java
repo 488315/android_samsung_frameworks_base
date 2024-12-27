@@ -34,7 +34,8 @@ public final class SehHwLight implements Parcelable {
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             sehHwLight.type = parcel.readInt();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -77,7 +78,9 @@ public final class SehHwLight implements Parcelable {
         parcel.writeInt(0);
         parcel.writeInt(this.id);
         parcel.writeInt(this.ordinal);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.type, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.type, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

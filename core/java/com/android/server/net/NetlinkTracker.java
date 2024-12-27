@@ -3,6 +3,7 @@ package com.android.server.net;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.RouteInfo;
+
 import java.util.Arrays;
 
 /* loaded from: classes5.dex */
@@ -26,13 +27,12 @@ public class NetlinkTracker extends BaseNetworkObserver {
         this.mDnsServerRepository = new DnsServerRepository();
     }
 
-    private void maybeLog(String operation, String iface, LinkAddress address) {
-    }
+    private void maybeLog(String operation, String iface, LinkAddress address) {}
 
-    private void maybeLog(String operation, Object o) {
-    }
+    private void maybeLog(String operation, Object o) {}
 
-    @Override // com.android.server.net.BaseNetworkObserver, android.net.INetworkManagementEventObserver
+    @Override // com.android.server.net.BaseNetworkObserver,
+              // android.net.INetworkManagementEventObserver
     public void interfaceRemoved(String iface) {
         maybeLog("interfaceRemoved", iface);
         if (this.mInterfaceName.equals(iface)) {
@@ -41,7 +41,8 @@ public class NetlinkTracker extends BaseNetworkObserver {
         }
     }
 
-    @Override // com.android.server.net.BaseNetworkObserver, android.net.INetworkManagementEventObserver
+    @Override // com.android.server.net.BaseNetworkObserver,
+              // android.net.INetworkManagementEventObserver
     public void addressUpdated(String iface, LinkAddress address) {
         boolean changed;
         if (this.mInterfaceName.equals(iface)) {
@@ -55,7 +56,8 @@ public class NetlinkTracker extends BaseNetworkObserver {
         }
     }
 
-    @Override // com.android.server.net.BaseNetworkObserver, android.net.INetworkManagementEventObserver
+    @Override // com.android.server.net.BaseNetworkObserver,
+              // android.net.INetworkManagementEventObserver
     public void addressRemoved(String iface, LinkAddress address) {
         boolean changed;
         if (this.mInterfaceName.equals(iface)) {
@@ -69,7 +71,8 @@ public class NetlinkTracker extends BaseNetworkObserver {
         }
     }
 
-    @Override // com.android.server.net.BaseNetworkObserver, android.net.INetworkManagementEventObserver
+    @Override // com.android.server.net.BaseNetworkObserver,
+              // android.net.INetworkManagementEventObserver
     public void routeUpdated(RouteInfo route) {
         boolean changed;
         if (this.mInterfaceName.equals(route.getInterface())) {
@@ -83,7 +86,8 @@ public class NetlinkTracker extends BaseNetworkObserver {
         }
     }
 
-    @Override // com.android.server.net.BaseNetworkObserver, android.net.INetworkManagementEventObserver
+    @Override // com.android.server.net.BaseNetworkObserver,
+              // android.net.INetworkManagementEventObserver
     public void routeRemoved(RouteInfo route) {
         boolean changed;
         if (this.mInterfaceName.equals(route.getInterface())) {
@@ -97,7 +101,8 @@ public class NetlinkTracker extends BaseNetworkObserver {
         }
     }
 
-    @Override // com.android.server.net.BaseNetworkObserver, android.net.INetworkManagementEventObserver
+    @Override // com.android.server.net.BaseNetworkObserver,
+              // android.net.INetworkManagementEventObserver
     public void interfaceDnsServerInfo(String iface, long lifetime, String[] addresses) {
         if (this.mInterfaceName.equals(iface)) {
             maybeLog("interfaceDnsServerInfo", Arrays.toString(addresses));

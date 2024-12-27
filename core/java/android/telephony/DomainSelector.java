@@ -1,7 +1,6 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.telephony.DomainSelectionService;
 
 @SystemApi
 /* loaded from: classes4.dex */

@@ -2,10 +2,12 @@ package com.android.server.am.mars.filter.filter;
 
 import android.content.Context;
 import android.util.ArrayMap;
+
 import com.android.server.am.MARsPolicyManager;
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.database.MARsVersionManager;
 import com.android.server.am.mars.filter.IFilter;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -25,14 +27,14 @@ public final class TopPackageFilter implements IFilter {
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void deInit() {
-    }
+    public final void deInit() {}
 
     @Override // com.android.server.am.mars.filter.IFilter
     public final int filter(int i, int i2, int i3, String str) {
         if (MARsUtils.isChinaPolicyEnabled() && !MARsUtils.getScreenOnState()) {
             String[][] strArr = MARsVersionManager.mMARsSettingsInfoDefault;
-            if (MARsVersionManager.MARsVersionManagerHolder.INSTANCE.isAdjustRestrictionMatch(5, str, null, null)) {
+            if (MARsVersionManager.MARsVersionManagerHolder.INSTANCE.isAdjustRestrictionMatch(
+                    5, str, null, null)) {
                 return 0;
             }
         }
@@ -56,8 +58,7 @@ public final class TopPackageFilter implements IFilter {
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void init(Context context) {
-    }
+    public final void init(Context context) {}
 
     public final void updateTopPkgList(ArrayList arrayList, int i) {
         if (arrayList != null) {

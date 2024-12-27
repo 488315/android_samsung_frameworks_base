@@ -17,9 +17,10 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.util.HexDump;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
-import com.android.server.net.watchlist.WatchlistReportDbHelper;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -57,7 +58,15 @@ public final class WatchlistLoggingHandler extends Handler {
         synchronized (WatchlistReportDbHelper.class) {
             watchlistReportDbHelper = WatchlistReportDbHelper.sInstance;
             if (watchlistReportDbHelper == null) {
-                watchlistReportDbHelper = new WatchlistReportDbHelper(context, new File(Environment.getDataSystemDirectory(), "watchlist_report.db").getAbsolutePath(), null, 2);
+                watchlistReportDbHelper =
+                        new WatchlistReportDbHelper(
+                                context,
+                                new File(
+                                                Environment.getDataSystemDirectory(),
+                                                "watchlist_report.db")
+                                        .getAbsolutePath(),
+                                null,
+                                2);
                 watchlistReportDbHelper.setIdleConnectionTimeout(30000L);
                 WatchlistReportDbHelper.sInstance = watchlistReportDbHelper;
             }
@@ -103,12 +112,20 @@ public final class WatchlistLoggingHandler extends Handler {
     }
 
     public List getAllDigestsForReport(WatchlistReportDbHelper.AggregatedResult aggregatedResult) {
-        List<ApplicationInfo> installedApplications = this.mContext.getPackageManager().getInstalledApplications(131072);
-        HashSet hashSet = new HashSet(aggregatedResult.appDigestCNCList.size() + installedApplications.size());
+        List<ApplicationInfo> installedApplications =
+                this.mContext.getPackageManager().getInstalledApplications(131072);
+        HashSet hashSet =
+                new HashSet(
+                        aggregatedResult.appDigestCNCList.size() + installedApplications.size());
         int size = installedApplications.size();
         for (int i = 0; i < size; i++) {
             int i2 = installedApplications.get(i).uid;
-            byte[] bArr = (byte[]) this.mCachedUidDigestMap.computeIfAbsent(Integer.valueOf(i2), new WatchlistLoggingHandler$$ExternalSyntheticLambda0(this, i2));
+            byte[] bArr =
+                    (byte[])
+                            this.mCachedUidDigestMap.computeIfAbsent(
+                                    Integer.valueOf(i2),
+                                    new WatchlistLoggingHandler$$ExternalSyntheticLambda0(
+                                            this, i2));
             if (bArr != null) {
                 hashSet.add(HexDump.toHexString(bArr));
             }
@@ -131,13 +148,15 @@ public final class WatchlistLoggingHandler extends Handler {
             Method dump skipped, instructions count: 341
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.watchlist.WatchlistLoggingHandler.handleMessage(android.os.Message):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.watchlist.WatchlistLoggingHandler.handleMessage(android.os.Message):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0023, code lost:
-    
-        if ((r4.mPm.getApplicationInfo(r2[0], 0).flags & 256) != 0) goto L16;
-     */
+
+       if ((r4.mPm.getApplicationInfo(r2[0], 0).flags & 256) != 0) goto L16;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -213,7 +232,10 @@ public final class WatchlistLoggingHandler extends Handler {
         L8c:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.watchlist.WatchlistLoggingHandler.insertRecord(int, java.lang.String, long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.watchlist.WatchlistLoggingHandler.insertRecord(int,"
+                    + " java.lang.String, long):void");
     }
 
     public final void tryAggregateRecords(long j) {
@@ -223,18 +245,27 @@ public final class WatchlistLoggingHandler extends Handler {
         StringBuilder sb;
         long currentTimeMillis2 = System.currentTimeMillis();
         try {
-            long j2 = Settings.Global.getLong(this.mResolver, "network_watchlist_last_report_time", 0L);
+            long j2 =
+                    Settings.Global.getLong(
+                            this.mResolver, "network_watchlist_last_report_time", 0L);
             if (j < j2) {
-                Slog.i("WatchlistLoggingHandler", "Last report time is larger than current time, reset report");
+                Slog.i(
+                        "WatchlistLoggingHandler",
+                        "Last report time is larger than current time, reset report");
                 this.mDbHelper.cleanup(j2);
             } else if (j >= j2 + ONE_DAY_MS) {
                 Slog.i("WatchlistLoggingHandler", "Start aggregating watchlist records.");
                 DropBoxManager dropBoxManager = this.mDropBoxManager;
-                if (dropBoxManager == null || !dropBoxManager.isTagEnabled("network_watchlist_report")) {
-                    Slog.w("WatchlistLoggingHandler", "Network Watchlist dropbox tag is not enabled");
+                if (dropBoxManager == null
+                        || !dropBoxManager.isTagEnabled("network_watchlist_report")) {
+                    Slog.w(
+                            "WatchlistLoggingHandler",
+                            "Network Watchlist dropbox tag is not enabled");
                 } else {
-                    Settings.Global.putLong(this.mResolver, "network_watchlist_last_report_time", j);
-                    WatchlistReportDbHelper.AggregatedResult aggregatedRecords = this.mDbHelper.getAggregatedRecords(j);
+                    Settings.Global.putLong(
+                            this.mResolver, "network_watchlist_last_report_time", j);
+                    WatchlistReportDbHelper.AggregatedResult aggregatedRecords =
+                            this.mDbHelper.getAggregatedRecords(j);
                     if (aggregatedRecords == null) {
                         Slog.i("WatchlistLoggingHandler", "Cannot get result from database");
                         currentTimeMillis = System.currentTimeMillis();
@@ -250,9 +281,17 @@ public final class WatchlistLoggingHandler extends Handler {
                         System.arraycopy(watchlistSettings.mPrivacySecretKey, 0, bArr, 0, 48);
                     }
                     WatchlistConfig watchlistConfig = this.mConfig;
-                    byte[] serializeReport = ReportEncoder.serializeReport(watchlistConfig, PrivacyUtils.createDpEncodedReportMap(watchlistConfig.mIsSecureConfig, bArr, allDigestsForReport, aggregatedRecords));
+                    byte[] serializeReport =
+                            ReportEncoder.serializeReport(
+                                    watchlistConfig,
+                                    PrivacyUtils.createDpEncodedReportMap(
+                                            watchlistConfig.mIsSecureConfig,
+                                            bArr,
+                                            allDigestsForReport,
+                                            aggregatedRecords));
                     if (serializeReport != null) {
-                        this.mDropBoxManager.addData("network_watchlist_report", serializeReport, 0);
+                        this.mDropBoxManager.addData(
+                                "network_watchlist_report", serializeReport, 0);
                     }
                 }
                 this.mDbHelper.cleanup(j);
@@ -265,7 +304,10 @@ public final class WatchlistLoggingHandler extends Handler {
             sb.append(currentTimeMillis - currentTimeMillis2);
             Slog.i(str, sb.toString());
         } finally {
-            Slog.i("WatchlistLoggingHandler", "Milliseconds spent on tryAggregateRecords(): " + (System.currentTimeMillis() - currentTimeMillis2));
+            Slog.i(
+                    "WatchlistLoggingHandler",
+                    "Milliseconds spent on tryAggregateRecords(): "
+                            + (System.currentTimeMillis() - currentTimeMillis2));
         }
     }
 }

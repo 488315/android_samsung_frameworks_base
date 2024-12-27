@@ -2,7 +2,7 @@ package com.android.server.wm;
 
 import android.graphics.Point;
 import android.graphics.Rect;
-import com.android.server.wm.DisplayPolicy;
+
 import com.samsung.android.rune.CoreRune;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,11 +17,18 @@ public final class AppCompatDisplayInsets {
     public final Rect[] mNonDecorInsets = new Rect[4];
     public final Rect[] mStableInsets = new Rect[4];
 
-    public AppCompatDisplayInsets(DisplayContent displayContent, ActivityRecord activityRecord, Rect rect, boolean z) {
+    public AppCompatDisplayInsets(
+            DisplayContent displayContent, ActivityRecord activityRecord, Rect rect, boolean z) {
         boolean z2 = CoreRune.MT_APP_COMPAT_ROTATION_COMPAT_MODE;
-        boolean z3 = z2 && activityRecord.mAtmService.mMultiTaskingAppCompatController.mOrientationPolicy.shouldCreateAppCompatDisplayInsetsForRotationCompat(activityRecord);
+        boolean z3 =
+                z2
+                        && activityRecord.mAtmService.mMultiTaskingAppCompatController
+                                .mOrientationPolicy
+                                .shouldCreateAppCompatDisplayInsetsForRotationCompat(
+                                        activityRecord);
         this.mIsRotationCompatMode = z3;
-        activityRecord.mAtmService.mMultiTaskingAppCompatController.mSizeCompatModePolicy.getClass();
+        activityRecord.mAtmService.mMultiTaskingAppCompatController.mSizeCompatModePolicy
+                .getClass();
         Rect rect2 = z2 && z3 ? null : rect;
         int i = displayContent.mDisplayRotation.mRotation;
         boolean tasksAreFloating = activityRecord.getWindowConfiguration().tasksAreFloating();
@@ -43,7 +50,10 @@ public final class AppCompatDisplayInsets {
         boolean z4 = rect2 != null;
         this.mIsInFixedOrientationOrAspectRatioLetterbox = z4;
         rect2 = z4 ? rect2 : task != null ? task.getBounds() : displayContent.getBounds();
-        int rotation = (activityRecord.hasFixedRotationTransform() && z4) ? activityRecord.getWindowConfiguration().getRotation() : displayContent.getConfiguration().windowConfiguration.getRotation();
+        int rotation =
+                (activityRecord.hasFixedRotationTransform() && z4)
+                        ? activityRecord.getWindowConfiguration().getRotation()
+                        : displayContent.getConfiguration().windowConfiguration.getRotation();
         boolean z5 = rotation == 1 || rotation == 3;
         int width = rect2.width();
         int height = rect2.height();
@@ -59,7 +69,8 @@ public final class AppCompatDisplayInsets {
             boolean z6 = i3 == 1 || i3 == 3;
             int i4 = z6 ? displayContent.mBaseDisplayHeight : displayContent.mBaseDisplayWidth;
             int i5 = z6 ? displayContent.mBaseDisplayWidth : displayContent.mBaseDisplayHeight;
-            DisplayPolicy.DecorInsets.Info decorInsetsInfo = displayPolicy.getDecorInsetsInfo(i3, i4, i5);
+            DisplayPolicy.DecorInsets.Info decorInsetsInfo =
+                    displayPolicy.getDecorInsetsInfo(i3, i4, i5);
             if (z) {
                 this.mStableInsets[i3].set(decorInsetsInfo.mOverrideConfigInsets);
                 this.mNonDecorInsets[i3].set(decorInsetsInfo.mOverrideNonDecorInsets);

@@ -5,6 +5,9 @@ import android.security.keystore.KeyProperties;
 import android.text.format.DateFormat;
 import android.util.ArraySet;
 import android.util.Log;
+
+import libcore.io.IoUtils;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,12 +20,29 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Collections;
 import java.util.Set;
+
 import javax.security.auth.x500.X500Principal;
-import libcore.io.IoUtils;
 
 /* loaded from: classes3.dex */
 abstract class DirectoryCertificateSource implements CertificateSource {
-    private static final char[] DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.AM_PM, 'b', 'c', DateFormat.DATE, 'e', 'f'};
+    private static final char[] DIGITS = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.AM_PM,
+        'b',
+        'c',
+        DateFormat.DATE,
+        'e',
+        'f'
+    };
     private static final String LOG_TAG = "DirectoryCertificateSrc";
     private final CertificateFactory mCertFactory;
     private Set<X509Certificate> mCertificates;
@@ -54,7 +74,8 @@ abstract class DirectoryCertificateSource implements CertificateSource {
             Set<X509Certificate> certs = new ArraySet<>();
             if (this.mDir.isDirectory()) {
                 for (String caFile : this.mDir.list()) {
-                    if (!isCertMarkedAsRemoved(caFile) && (cert = readCertificate(caFile)) != null) {
+                    if (!isCertMarkedAsRemoved(caFile)
+                            && (cert = readCertificate(caFile)) != null) {
                         certs.add(cert);
                     }
                 }
@@ -66,42 +87,51 @@ abstract class DirectoryCertificateSource implements CertificateSource {
 
     @Override // android.security.net.config.CertificateSource
     public X509Certificate findBySubjectAndPublicKey(final X509Certificate cert) {
-        return findCert(cert.getSubjectX500Principal(), new CertSelector() { // from class: android.security.net.config.DirectoryCertificateSource.1
-            @Override // android.security.net.config.DirectoryCertificateSource.CertSelector
-            public boolean match(X509Certificate ca) {
-                return ca.getPublicKey().equals(cert.getPublicKey());
-            }
-        });
+        return findCert(
+                cert.getSubjectX500Principal(),
+                new CertSelector() { // from class:
+                                     // android.security.net.config.DirectoryCertificateSource.1
+                    @Override // android.security.net.config.DirectoryCertificateSource.CertSelector
+                    public boolean match(X509Certificate ca) {
+                        return ca.getPublicKey().equals(cert.getPublicKey());
+                    }
+                });
     }
 
     @Override // android.security.net.config.CertificateSource
     public X509Certificate findByIssuerAndSignature(final X509Certificate cert) {
-        return findCert(cert.getIssuerX500Principal(), new CertSelector() { // from class: android.security.net.config.DirectoryCertificateSource.2
-            @Override // android.security.net.config.DirectoryCertificateSource.CertSelector
-            public boolean match(X509Certificate ca) {
-                try {
-                    cert.verify(ca.getPublicKey());
-                    return true;
-                } catch (Exception e) {
-                    return false;
-                }
-            }
-        });
+        return findCert(
+                cert.getIssuerX500Principal(),
+                new CertSelector() { // from class:
+                                     // android.security.net.config.DirectoryCertificateSource.2
+                    @Override // android.security.net.config.DirectoryCertificateSource.CertSelector
+                    public boolean match(X509Certificate ca) {
+                        try {
+                            cert.verify(ca.getPublicKey());
+                            return true;
+                        } catch (Exception e) {
+                            return false;
+                        }
+                    }
+                });
     }
 
     @Override // android.security.net.config.CertificateSource
     public Set<X509Certificate> findAllByIssuerAndSignature(final X509Certificate cert) {
-        return findCerts(cert.getIssuerX500Principal(), new CertSelector() { // from class: android.security.net.config.DirectoryCertificateSource.3
-            @Override // android.security.net.config.DirectoryCertificateSource.CertSelector
-            public boolean match(X509Certificate ca) {
-                try {
-                    cert.verify(ca.getPublicKey());
-                    return true;
-                } catch (Exception e) {
-                    return false;
-                }
-            }
-        });
+        return findCerts(
+                cert.getIssuerX500Principal(),
+                new CertSelector() { // from class:
+                                     // android.security.net.config.DirectoryCertificateSource.3
+                    @Override // android.security.net.config.DirectoryCertificateSource.CertSelector
+                    public boolean match(X509Certificate ca) {
+                        try {
+                            cert.verify(ca.getPublicKey());
+                            return true;
+                        } catch (Exception e) {
+                            return false;
+                        }
+                    }
+                });
     }
 
     @Override // android.security.net.config.CertificateSource
@@ -120,7 +150,10 @@ abstract class DirectoryCertificateSource implements CertificateSource {
             if (!new File(this.mDir, fileName).exists()) {
                 break;
             }
-            if (!isCertMarkedAsRemoved(fileName) && (cert = readCertificate(fileName)) != null && subj.equals(cert.getSubjectX500Principal()) && selector.match(cert)) {
+            if (!isCertMarkedAsRemoved(fileName)
+                    && (cert = readCertificate(fileName)) != null
+                    && subj.equals(cert.getSubjectX500Principal())
+                    && selector.match(cert)) {
                 if (certs == null) {
                     certs = new ArraySet<>();
                 }
@@ -136,7 +169,10 @@ abstract class DirectoryCertificateSource implements CertificateSource {
         for (int index = 0; index >= 0; index++) {
             String fileName = hash + MediaMetrics.SEPARATOR + index;
             if (new File(this.mDir, fileName).exists()) {
-                if (!isCertMarkedAsRemoved(fileName) && (cert = readCertificate(fileName)) != null && subj.equals(cert.getSubjectX500Principal()) && selector.match(cert)) {
+                if (!isCertMarkedAsRemoved(fileName)
+                        && (cert = readCertificate(fileName)) != null
+                        && subj.equals(cert.getSubjectX500Principal())
+                        && selector.match(cert)) {
                     return cert;
                 }
             } else {
@@ -167,7 +203,9 @@ abstract class DirectoryCertificateSource implements CertificateSource {
 
     private static int hashName(X500Principal principal) {
         try {
-            byte[] digest = MessageDigest.getInstance(KeyProperties.DIGEST_MD5).digest(principal.getEncoded());
+            byte[] digest =
+                    MessageDigest.getInstance(KeyProperties.DIGEST_MD5)
+                            .digest(principal.getEncoded());
             int offset = 0 + 1;
             int offset2 = offset + 1;
             int i = ((digest[0] & 255) << 0) | ((digest[offset] & 255) << 8);

@@ -23,12 +23,10 @@ public interface IIsrbManager extends IInterface {
         }
 
         @Override // com.samsung.android.isrb.IIsrbManager
-        public void setIsrbEnable(boolean state) throws RemoteException {
-        }
+        public void setIsrbEnable(boolean state) throws RemoteException {}
 
         @Override // com.samsung.android.isrb.IIsrbManager
-        public void setFakeTime() throws RemoteException {
-        }
+        public void setFakeTime() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +34,7 @@ public interface IIsrbManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIsrbManager {
+    public abstract static class Stub extends Binder implements IIsrbManager {
         static final int TRANSACTION_isBootCompleteState = 1;
         static final int TRANSACTION_setFakeTime = 3;
         static final int TRANSACTION_setIsrbEnable = 2;
@@ -80,7 +78,8 @@ public interface IIsrbManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIsrbManager.DESCRIPTOR);
             }

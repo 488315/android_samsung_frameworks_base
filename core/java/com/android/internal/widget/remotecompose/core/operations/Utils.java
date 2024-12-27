@@ -27,21 +27,32 @@ public class Utils {
 
     public static String floatToString(float idvalue, float value) {
         if (Float.isNaN(idvalue)) {
-            return NavigationBarInflaterView.SIZE_MOD_START + idFromNan(idvalue) + NavigationBarInflaterView.SIZE_MOD_END + floatToString(value);
+            return NavigationBarInflaterView.SIZE_MOD_START
+                    + idFromNan(idvalue)
+                    + NavigationBarInflaterView.SIZE_MOD_END
+                    + floatToString(value);
         }
         return floatToString(value);
     }
 
     public static String floatToString(float value) {
         if (Float.isNaN(value)) {
-            return NavigationBarInflaterView.SIZE_MOD_START + idFromNan(value) + NavigationBarInflaterView.SIZE_MOD_END;
+            return NavigationBarInflaterView.SIZE_MOD_START
+                    + idFromNan(value)
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
         return Float.toString(value);
     }
 
     public static void log(String str) {
         StackTraceElement s = new Throwable().getStackTrace()[1];
-        System.out.println(NavigationBarInflaterView.KEY_CODE_START + s.getFileName() + ":" + s.getLineNumber() + ")." + str);
+        System.out.println(
+                NavigationBarInflaterView.KEY_CODE_START
+                        + s.getFileName()
+                        + ":"
+                        + s.getLineNumber()
+                        + ")."
+                        + str);
     }
 
     public static void logStack(String str, int n) {
@@ -49,7 +60,14 @@ public class Utils {
         for (int i = 1; i < n + 1; i++) {
             StackTraceElement s = st[i];
             String space = new String(new char[i]).replace((char) 0, ' ');
-            System.out.println(space + NavigationBarInflaterView.KEY_CODE_START + s.getFileName() + ":" + s.getLineNumber() + ")." + str);
+            System.out.println(
+                    space
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + s.getFileName()
+                            + ":"
+                            + s.getLineNumber()
+                            + ")."
+                            + str);
         }
     }
 
@@ -90,7 +108,11 @@ public class Utils {
         float f_g2 = f_g + ((((float) Math.pow(g2 / 255.0f, 2.2d)) - f_g) * t);
         float f_b2 = f_b + ((((float) Math.pow(b2 / 255.0f, 2.2d)) - f_b) * t);
         float f_a = c1fa + ((c2fa - c1fa) * t);
-        int outr = clamp((int) (((float) Math.pow(f_r + ((f_r2 - f_r) * t), 0.45454545454545453d)) * 255.0f));
+        int outr =
+                clamp(
+                        (int)
+                                (((float) Math.pow(f_r + ((f_r2 - f_r) * t), 0.45454545454545453d))
+                                        * 255.0f));
         int outg = clamp((int) (((float) Math.pow(f_g2, 0.45454545454545453d)) * 255.0f));
         int outb = clamp((int) (((float) Math.pow(f_b2, 0.45454545454545453d)) * 255.0f));
         int outa = clamp((int) (255.0f * f_a));

@@ -10,8 +10,11 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -24,7 +27,8 @@ public interface IRadioIndication extends IBase {
     @Override // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
     IHwBinder asBinder();
 
-    void callRing(int i, boolean z, CdmaSignalInfoRecord cdmaSignalInfoRecord) throws RemoteException;
+    void callRing(int i, boolean z, CdmaSignalInfoRecord cdmaSignalInfoRecord)
+            throws RemoteException;
 
     void callStateChanged(int i) throws RemoteException;
 
@@ -46,7 +50,8 @@ public interface IRadioIndication extends IBase {
 
     void currentSignalStrength(int i, SignalStrength signalStrength) throws RemoteException;
 
-    void dataCallListChanged(int i, ArrayList<SetupDataCallResult> arrayList) throws RemoteException;
+    void dataCallListChanged(int i, ArrayList<SetupDataCallResult> arrayList)
+            throws RemoteException;
 
     @Override // android.internal.hidl.base.V1_0.IBase
     void debug(NativeHandle nativeHandle, ArrayList<String> arrayList) throws RemoteException;
@@ -95,7 +100,8 @@ public interface IRadioIndication extends IBase {
     @Override // android.internal.hidl.base.V1_0.IBase
     void notifySyspropsChanged() throws RemoteException;
 
-    void onSupplementaryServiceIndication(int i, StkCcUnsolSsResult stkCcUnsolSsResult) throws RemoteException;
+    void onSupplementaryServiceIndication(int i, StkCcUnsolSsResult stkCcUnsolSsResult)
+            throws RemoteException;
 
     void onUssd(int i, int i2, String str) throws RemoteException;
 
@@ -198,7 +204,8 @@ public interface IRadioIndication extends IBase {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -324,7 +331,8 @@ public interface IRadioIndication extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadioIndication
-        public void nitzTimeReceived(int type, String nitzTime, long receivedTime) throws RemoteException {
+        public void nitzTimeReceived(int type, String nitzTime, long receivedTime)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -340,7 +348,8 @@ public interface IRadioIndication extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadioIndication
-        public void currentSignalStrength(int type, SignalStrength signalStrength) throws RemoteException {
+        public void currentSignalStrength(int type, SignalStrength signalStrength)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -355,7 +364,8 @@ public interface IRadioIndication extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadioIndication
-        public void dataCallListChanged(int type, ArrayList<SetupDataCallResult> dcList) throws RemoteException {
+        public void dataCallListChanged(int type, ArrayList<SetupDataCallResult> dcList)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -473,7 +483,8 @@ public interface IRadioIndication extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadioIndication
-        public void callRing(int type, boolean isGsm, CdmaSignalInfoRecord record) throws RemoteException {
+        public void callRing(int type, boolean isGsm, CdmaSignalInfoRecord record)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -576,7 +587,8 @@ public interface IRadioIndication extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadioIndication
-        public void cdmaCallWaiting(int type, CdmaCallWaiting callWaitingRecord) throws RemoteException {
+        public void cdmaCallWaiting(int type, CdmaCallWaiting callWaitingRecord)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -782,7 +794,8 @@ public interface IRadioIndication extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadioIndication
-        public void hardwareConfigChanged(int type, ArrayList<HardwareConfig> configs) throws RemoteException {
+        public void hardwareConfigChanged(int type, ArrayList<HardwareConfig> configs)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -812,7 +825,8 @@ public interface IRadioIndication extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadioIndication
-        public void onSupplementaryServiceIndication(int type, StkCcUnsolSsResult ss) throws RemoteException {
+        public void onSupplementaryServiceIndication(int type, StkCcUnsolSsResult ss)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -886,7 +900,8 @@ public interface IRadioIndication extends IBase {
             }
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -902,7 +917,8 @@ public interface IRadioIndication extends IBase {
             }
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -918,7 +934,8 @@ public interface IRadioIndication extends IBase {
             }
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -934,7 +951,8 @@ public interface IRadioIndication extends IBase {
             }
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -946,7 +964,9 @@ public interface IRadioIndication extends IBase {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -960,7 +980,8 @@ public interface IRadioIndication extends IBase {
             }
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -973,12 +994,15 @@ public interface IRadioIndication extends IBase {
             }
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -992,7 +1016,8 @@ public interface IRadioIndication extends IBase {
             }
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -1009,7 +1034,8 @@ public interface IRadioIndication extends IBase {
             }
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -1022,51 +1048,128 @@ public interface IRadioIndication extends IBase {
             }
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements IRadioIndication {
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements IRadioIndication {
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(IRadioIndication.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(IRadioIndication.kInterfaceName, IBase.kInterfaceName));
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return IRadioIndication.kInterfaceName;
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{-119, -41, -113, -92, -101, 9, -30, MidiConstants.STATUS_SONG_SELECT, 24, 18, -69, 99, -31, -65, -84, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, MidiConstants.STATUS_SONG_SELECT, 24, -87, 86, 20, 115, -58, MidiConstants.STATUS_CONTROL_CHANGE, -19, 105, 4, -50, 24, 55, 125, 84}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                -119,
+                                -41,
+                                -113,
+                                -92,
+                                -101,
+                                9,
+                                -30,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                24,
+                                18,
+                                -69,
+                                99,
+                                -31,
+                                -65,
+                                -84,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                24,
+                                -87,
+                                86,
+                                20,
+                                115,
+                                -58,
+                                MidiConstants.STATUS_CONTROL_CHANGE,
+                                -19,
+                                105,
+                                4,
+                                -50,
+                                24,
+                                55,
+                                125,
+                                84
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -1075,12 +1178,14 @@ public interface IRadioIndication extends IBase {
             return info;
         }
 
-        @Override // android.hardware.radio.V1_0.IRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_0.IRadioIndication,
+        // android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -1102,7 +1207,9 @@ public interface IRadioIndication extends IBase {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(IRadioIndication.kInterfaceName);
@@ -1161,7 +1268,8 @@ public interface IRadioIndication extends IBase {
                 case 10:
                     _hidl_request.enforceInterface(IRadioIndication.kInterfaceName);
                     int type10 = _hidl_request.readInt32();
-                    ArrayList<SetupDataCallResult> dcList = SetupDataCallResult.readVectorFromParcel(_hidl_request);
+                    ArrayList<SetupDataCallResult> dcList =
+                            SetupDataCallResult.readVectorFromParcel(_hidl_request);
                     dataCallListChanged(type10, dcList);
                     return;
                 case 11:
@@ -1332,7 +1440,8 @@ public interface IRadioIndication extends IBase {
                 case 39:
                     _hidl_request.enforceInterface(IRadioIndication.kInterfaceName);
                     int type39 = _hidl_request.readInt32();
-                    ArrayList<HardwareConfig> configs = HardwareConfig.readVectorFromParcel(_hidl_request);
+                    ArrayList<HardwareConfig> configs =
+                            HardwareConfig.readVectorFromParcel(_hidl_request);
                     hardwareConfigChanged(type39, configs);
                     return;
                 case 40:
@@ -1410,7 +1519,8 @@ public interface IRadioIndication extends IBase {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

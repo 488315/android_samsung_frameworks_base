@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.Voicemail;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -13,17 +14,18 @@ public class VoicemailContract {
     public static final String ACTION_FETCH_VOICEMAIL = "android.intent.action.FETCH_VOICEMAIL";
     public static final String ACTION_NEW_VOICEMAIL = "android.intent.action.NEW_VOICEMAIL";
     public static final String ACTION_SYNC_VOICEMAIL = "android.provider.action.SYNC_VOICEMAIL";
-    public static final String ACTION_VOICEMAIL_SMS_RECEIVED = "com.android.internal.provider.action.VOICEMAIL_SMS_RECEIVED";
+    public static final String ACTION_VOICEMAIL_SMS_RECEIVED =
+            "com.android.internal.provider.action.VOICEMAIL_SMS_RECEIVED";
     public static final String AUTHORITY = "com.android.voicemail";
-    public static final String EXTRA_PHONE_ACCOUNT_HANDLE = "android.provider.extra.PHONE_ACCOUNT_HANDLE";
+    public static final String EXTRA_PHONE_ACCOUNT_HANDLE =
+            "android.provider.extra.PHONE_ACCOUNT_HANDLE";
     public static final String EXTRA_SELF_CHANGE = "com.android.voicemail.extra.SELF_CHANGE";
     public static final String EXTRA_TARGET_PACKAGE = "android.provider.extra.TARGET_PACAKGE";
     public static final String EXTRA_VOICEMAIL_SMS = "android.provider.extra.VOICEMAIL_SMS";
     public static final String PARAM_KEY_SOURCE_PACKAGE = "source_package";
     public static final String SOURCE_PACKAGE_FIELD = "source_package";
 
-    private VoicemailContract() {
-    }
+    private VoicemailContract() {}
 
     public static final class Voicemails implements BaseColumns, OpenableColumns {
         public static final String ARCHIVED = "archived";
@@ -55,16 +57,19 @@ public class VoicemailContract {
         public static final int TRANSCRIPTION_NOT_STARTED = 0;
         public static final String TRANSCRIPTION_STATE = "transcription_state";
         public static final String _DATA = "_data";
-        public static final Uri CONTENT_URI = Uri.parse("content://com.android.voicemail/voicemail");
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://com.android.voicemail/voicemail");
         public static int STATE_INBOX = 0;
         public static int STATE_DELETED = 1;
         public static int STATE_UNDELETED = 2;
 
-        private Voicemails() {
-        }
+        private Voicemails() {}
 
         public static Uri buildSourceUri(String packageName) {
-            return CONTENT_URI.buildUpon().appendQueryParameter("source_package", packageName).build();
+            return CONTENT_URI
+                    .buildUpon()
+                    .appendQueryParameter("source_package", packageName)
+                    .build();
         }
 
         public static Uri insert(Context context, Voicemail voicemail) {
@@ -84,7 +89,8 @@ public class VoicemailContract {
         }
 
         public static int deleteAll(Context context) {
-            return context.getContentResolver().delete(buildSourceUri(context.getPackageName()), "", new String[0]);
+            return context.getContentResolver()
+                    .delete(buildSourceUri(context.getPackageName()), "", new String[0]);
         }
 
         private static ContentValues getContentValues(Voicemail voicemail) {
@@ -97,7 +103,9 @@ public class VoicemailContract {
             contentValues.put("is_read", Integer.valueOf(voicemail.isRead() ? 1 : 0));
             PhoneAccountHandle phoneAccount = voicemail.getPhoneAccount();
             if (phoneAccount != null) {
-                contentValues.put("subscription_component_name", phoneAccount.getComponentName().flattenToString());
+                contentValues.put(
+                        "subscription_component_name",
+                        phoneAccount.getComponentName().flattenToString());
                 contentValues.put("subscription_id", phoneAccount.getId());
             }
             if (voicemail.getTranscription() != null) {
@@ -140,11 +148,13 @@ public class VoicemailContract {
         public static final String SOURCE_TYPE = "source_type";
         public static final String VOICEMAIL_ACCESS_URI = "voicemail_access_uri";
 
-        private Status() {
-        }
+        private Status() {}
 
         public static Uri buildSourceUri(String packageName) {
-            return CONTENT_URI.buildUpon().appendQueryParameter("source_package", packageName).build();
+            return CONTENT_URI
+                    .buildUpon()
+                    .appendQueryParameter("source_package", packageName)
+                    .build();
         }
     }
 }

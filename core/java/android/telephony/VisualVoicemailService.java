@@ -25,38 +25,56 @@ public abstract class VisualVoicemailService extends Service {
     public static final int MSG_TASK_STOPPED = 5;
     public static final String SERVICE_INTERFACE = "android.telephony.VisualVoicemailService";
     private static final String TAG = "VvmService";
-    private final Messenger mMessenger = new Messenger(new Handler() { // from class: android.telephony.VisualVoicemailService.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            PhoneAccountHandle handle = (PhoneAccountHandle) msg.getData().getParcelable(VisualVoicemailService.DATA_PHONE_ACCOUNT_HANDLE, PhoneAccountHandle.class);
-            VisualVoicemailTask task = new VisualVoicemailTask(msg.replyTo, msg.arg1);
-            switch (msg.what) {
-                case 1:
-                    VisualVoicemailService.this.onCellServiceConnected(task, handle);
-                    break;
-                case 2:
-                    VisualVoicemailSms sms = (VisualVoicemailSms) msg.getData().getParcelable(VisualVoicemailService.DATA_SMS, VisualVoicemailSms.class);
-                    VisualVoicemailService.this.onSmsReceived(task, sms);
-                    break;
-                case 3:
-                    VisualVoicemailService.this.onSimRemoved(task, handle);
-                    break;
-                case 4:
-                default:
-                    super.handleMessage(msg);
-                    break;
-                case 5:
-                    VisualVoicemailService.this.onStopped(task);
-                    break;
-            }
-        }
-    });
+    private final Messenger mMessenger =
+            new Messenger(
+                    new Handler() { // from class: android.telephony.VisualVoicemailService.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            PhoneAccountHandle handle =
+                                    (PhoneAccountHandle)
+                                            msg.getData()
+                                                    .getParcelable(
+                                                            VisualVoicemailService
+                                                                    .DATA_PHONE_ACCOUNT_HANDLE,
+                                                            PhoneAccountHandle.class);
+                            VisualVoicemailTask task =
+                                    new VisualVoicemailTask(msg.replyTo, msg.arg1);
+                            switch (msg.what) {
+                                case 1:
+                                    VisualVoicemailService.this.onCellServiceConnected(
+                                            task, handle);
+                                    break;
+                                case 2:
+                                    VisualVoicemailSms sms =
+                                            (VisualVoicemailSms)
+                                                    msg.getData()
+                                                            .getParcelable(
+                                                                    VisualVoicemailService.DATA_SMS,
+                                                                    VisualVoicemailSms.class);
+                                    VisualVoicemailService.this.onSmsReceived(task, sms);
+                                    break;
+                                case 3:
+                                    VisualVoicemailService.this.onSimRemoved(task, handle);
+                                    break;
+                                case 4:
+                                default:
+                                    super.handleMessage(msg);
+                                    break;
+                                case 5:
+                                    VisualVoicemailService.this.onStopped(task);
+                                    break;
+                            }
+                        }
+                    });
 
-    public abstract void onCellServiceConnected(VisualVoicemailTask visualVoicemailTask, PhoneAccountHandle phoneAccountHandle);
+    public abstract void onCellServiceConnected(
+            VisualVoicemailTask visualVoicemailTask, PhoneAccountHandle phoneAccountHandle);
 
-    public abstract void onSimRemoved(VisualVoicemailTask visualVoicemailTask, PhoneAccountHandle phoneAccountHandle);
+    public abstract void onSimRemoved(
+            VisualVoicemailTask visualVoicemailTask, PhoneAccountHandle phoneAccountHandle);
 
-    public abstract void onSmsReceived(VisualVoicemailTask visualVoicemailTask, VisualVoicemailSms visualVoicemailSms);
+    public abstract void onSmsReceived(
+            VisualVoicemailTask visualVoicemailTask, VisualVoicemailSms visualVoicemailSms);
 
     public abstract void onStopped(VisualVoicemailTask visualVoicemailTask);
 
@@ -76,12 +94,15 @@ public abstract class VisualVoicemailService extends Service {
                 message.arg1 = this.mTaskId;
                 this.mReplyTo.send(message);
             } catch (RemoteException e) {
-                Log.e(VisualVoicemailService.TAG, "Cannot send MSG_TASK_ENDED, remote handler no longer exist");
+                Log.e(
+                        VisualVoicemailService.TAG,
+                        "Cannot send MSG_TASK_ENDED, remote handler no longer exist");
             }
         }
 
         public boolean equals(Object obj) {
-            return (obj instanceof VisualVoicemailTask) && this.mTaskId == ((VisualVoicemailTask) obj).mTaskId;
+            return (obj instanceof VisualVoicemailTask)
+                    && this.mTaskId == ((VisualVoicemailTask) obj).mTaskId;
         }
 
         public int hashCode() {
@@ -95,8 +116,12 @@ public abstract class VisualVoicemailService extends Service {
     }
 
     @SystemApi
-    public static final void setSmsFilterSettings(Context context, PhoneAccountHandle phoneAccountHandle, VisualVoicemailSmsFilterSettings settings) {
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(TelephonyManager.class);
+    public static final void setSmsFilterSettings(
+            Context context,
+            PhoneAccountHandle phoneAccountHandle,
+            VisualVoicemailSmsFilterSettings settings) {
+        TelephonyManager telephonyManager =
+                (TelephonyManager) context.getSystemService(TelephonyManager.class);
         int subId = getSubId(context, phoneAccountHandle);
         if (settings == null) {
             telephonyManager.disableVisualVoicemailSmsFilter(subId);
@@ -106,14 +131,25 @@ public abstract class VisualVoicemailService extends Service {
     }
 
     @SystemApi
-    public static final void sendVisualVoicemailSms(Context context, PhoneAccountHandle phoneAccountHandle, String number, short port, String text, PendingIntent sentIntent) {
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(TelephonyManager.class);
-        telephonyManager.sendVisualVoicemailSmsForSubscriber(getSubId(context, phoneAccountHandle), number, port, text, sentIntent);
+    public static final void sendVisualVoicemailSms(
+            Context context,
+            PhoneAccountHandle phoneAccountHandle,
+            String number,
+            short port,
+            String text,
+            PendingIntent sentIntent) {
+        TelephonyManager telephonyManager =
+                (TelephonyManager) context.getSystemService(TelephonyManager.class);
+        telephonyManager.sendVisualVoicemailSmsForSubscriber(
+                getSubId(context, phoneAccountHandle), number, port, text, sentIntent);
     }
 
     private static int getSubId(Context context, PhoneAccountHandle phoneAccountHandle) {
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(TelephonyManager.class);
-        TelecomManager telecomManager = (TelecomManager) context.getSystemService(TelecomManager.class);
-        return telephonyManager.getSubIdForPhoneAccount(telecomManager.getPhoneAccount(phoneAccountHandle));
+        TelephonyManager telephonyManager =
+                (TelephonyManager) context.getSystemService(TelephonyManager.class);
+        TelecomManager telecomManager =
+                (TelecomManager) context.getSystemService(TelecomManager.class);
+        return telephonyManager.getSubIdForPhoneAccount(
+                telecomManager.getPhoneAccount(phoneAccountHandle));
     }
 }

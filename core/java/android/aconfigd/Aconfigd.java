@@ -11,15 +11,13 @@ public final class Aconfigd {
         public static final long PACKAGE_MAP = 1138166333443L;
         public static final long VERSION = 1155346202625L;
 
-        public PersistStorageRecord() {
-        }
+        public PersistStorageRecord() {}
     }
 
     public final class PersistStorageRecords {
         public static final long RECORDS = 2246267895809L;
 
-        public PersistStorageRecords() {
-        }
+        public PersistStorageRecords() {}
     }
 
     public final class FlagOverride {
@@ -27,15 +25,13 @@ public final class Aconfigd {
         public static final long FLAG_VALUE = 1138166333443L;
         public static final long PACKAGE_NAME = 1138166333441L;
 
-        public FlagOverride() {
-        }
+        public FlagOverride() {}
     }
 
     public final class LocalFlagOverrides {
         public static final long OVERRIDES = 2246267895809L;
 
-        public LocalFlagOverrides() {
-        }
+        public LocalFlagOverrides() {}
     }
 
     public final class StorageRequestMessage {
@@ -47,8 +43,7 @@ public final class Aconfigd {
         public static final long REMOVE_LOCAL_OVERRIDE_MESSAGE = 1146756268037L;
         public static final long RESET_STORAGE_MESSAGE = 1146756268038L;
 
-        public StorageRequestMessage() {
-        }
+        public StorageRequestMessage() {}
 
         public final class NewStorageMessage {
             public static final long CONTAINER = 1138166333441L;
@@ -56,8 +51,7 @@ public final class Aconfigd {
             public static final long FLAG_VALUE = 1138166333444L;
             public static final long PACKAGE_MAP = 1138166333442L;
 
-            public NewStorageMessage() {
-            }
+            public NewStorageMessage() {}
         }
 
         public final class FlagOverrideMessage {
@@ -66,16 +60,14 @@ public final class Aconfigd {
             public static final long IS_LOCAL = 1133871366148L;
             public static final long PACKAGE_NAME = 1138166333441L;
 
-            public FlagOverrideMessage() {
-            }
+            public FlagOverrideMessage() {}
         }
 
         public final class OTAFlagStagingMessage {
             public static final long BUILD_ID = 1138166333441L;
             public static final long OVERRIDES = 2246267895810L;
 
-            public OTAFlagStagingMessage() {
-            }
+            public OTAFlagStagingMessage() {}
         }
 
         public final class RemoveLocalOverrideMessage {
@@ -83,24 +75,21 @@ public final class Aconfigd {
             public static final long PACKAGE_NAME = 1138166333442L;
             public static final long REMOVE_ALL = 1133871366145L;
 
-            public RemoveLocalOverrideMessage() {
-            }
+            public RemoveLocalOverrideMessage() {}
         }
 
         public final class FlagQueryMessage {
             public static final long FLAG_NAME = 1138166333442L;
             public static final long PACKAGE_NAME = 1138166333441L;
 
-            public FlagQueryMessage() {
-            }
+            public FlagQueryMessage() {}
         }
 
         public final class ResetStorageMessage {
             public static final long ALL = 1133871366145L;
             public static final long CONTAINER = 1138166333442L;
 
-            public ResetStorageMessage() {
-            }
+            public ResetStorageMessage() {}
         }
 
         public final class ListStorageMessage {
@@ -108,16 +97,14 @@ public final class Aconfigd {
             public static final long CONTAINER = 1138166333442L;
             public static final long PACKAGE_NAME = 1138166333443L;
 
-            public ListStorageMessage() {
-            }
+            public ListStorageMessage() {}
         }
     }
 
     public final class StorageRequestMessages {
         public static final long MSGS = 2246267895809L;
 
-        public StorageRequestMessages() {
-        }
+        public StorageRequestMessages() {}
     }
 
     public final class StorageReturnMessage {
@@ -130,24 +117,20 @@ public final class Aconfigd {
         public static final long REMOVE_LOCAL_OVERRIDE_MESSAGE = 1146756268037L;
         public static final long RESET_STORAGE_MESSAGE = 1146756268038L;
 
-        public StorageReturnMessage() {
-        }
+        public StorageReturnMessage() {}
 
         public final class NewStorageReturnMessage {
             public static final long STORAGE_UPDATED = 1133871366145L;
 
-            public NewStorageReturnMessage() {
-            }
+            public NewStorageReturnMessage() {}
         }
 
         public final class FlagOverrideReturnMessage {
-            public FlagOverrideReturnMessage() {
-            }
+            public FlagOverrideReturnMessage() {}
         }
 
         public final class OTAFlagStagingReturnMessage {
-            public OTAFlagStagingReturnMessage() {
-            }
+            public OTAFlagStagingReturnMessage() {}
         }
 
         public final class FlagQueryReturnMessage {
@@ -161,32 +144,27 @@ public final class Aconfigd {
             public static final long PACKAGE_NAME = 1138166333441L;
             public static final long SERVER_FLAG_VALUE = 1138166333443L;
 
-            public FlagQueryReturnMessage() {
-            }
+            public FlagQueryReturnMessage() {}
         }
 
         public final class RemoveLocalOverrideReturnMessage {
-            public RemoveLocalOverrideReturnMessage() {
-            }
+            public RemoveLocalOverrideReturnMessage() {}
         }
 
         public final class ResetStorageReturnMessage {
-            public ResetStorageReturnMessage() {
-            }
+            public ResetStorageReturnMessage() {}
         }
 
         public final class ListStorageReturnMessage {
             public static final long FLAGS = 2246267895809L;
 
-            public ListStorageReturnMessage() {
-            }
+            public ListStorageReturnMessage() {}
         }
     }
 
     public final class StorageReturnMessages {
         public static final long MSGS = 2246267895809L;
 
-        public StorageReturnMessages() {
-        }
+        public StorageReturnMessages() {}
     }
 }

@@ -18,12 +18,14 @@ import android.service.notification.StatusBarNotification;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.view.Display;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
-import com.android.server.power.HqmDataDispatcher;
+
 import com.att.iqi.libs.PreferenceStore;
 import com.samsung.android.hardware.secinputdev.ISemInputDeviceManager;
 import com.samsung.android.view.SemWindowManager;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -52,92 +54,120 @@ public final class ScreenCurtainController implements Observer {
     public String mPackageNameOnScreenCurtain = "";
     public int mWakefulness = 1;
     public int mLastCallState = 0;
-    public final AnonymousClass1 mFoldStateListener = new SemWindowManager.FoldStateListener() { // from class: com.android.server.power.ScreenCurtainController.1
-        public final void onFoldStateChanged(boolean z) {
-            synchronized (ScreenCurtainController.this.mLock) {
-                try {
-                    ScreenCurtainController screenCurtainController = ScreenCurtainController.this;
-                    if (screenCurtainController.mFolded != z) {
-                        screenCurtainController.mFolded = z;
-                        if (screenCurtainController.mScreenCurtainEnabled) {
-                            DisplayAssistantHandler displayAssistantHandler = screenCurtainController.mHandler;
-                            displayAssistantHandler.sendMessageAtTime(displayAssistantHandler.obtainMessage(3, 8), SystemClock.uptimeMillis());
+    public final AnonymousClass1 mFoldStateListener =
+            new SemWindowManager
+                    .FoldStateListener() { // from class:
+                                           // com.android.server.power.ScreenCurtainController.1
+                public final void onFoldStateChanged(boolean z) {
+                    synchronized (ScreenCurtainController.this.mLock) {
+                        try {
+                            ScreenCurtainController screenCurtainController =
+                                    ScreenCurtainController.this;
+                            if (screenCurtainController.mFolded != z) {
+                                screenCurtainController.mFolded = z;
+                                if (screenCurtainController.mScreenCurtainEnabled) {
+                                    DisplayAssistantHandler displayAssistantHandler =
+                                            screenCurtainController.mHandler;
+                                    displayAssistantHandler.sendMessageAtTime(
+                                            displayAssistantHandler.obtainMessage(3, 8),
+                                            SystemClock.uptimeMillis());
+                                }
+                            }
+                        } catch (Throwable th) {
+                            throw th;
                         }
                     }
-                } catch (Throwable th) {
-                    throw th;
                 }
-            }
-        }
 
-        public final void onTableModeChanged(boolean z) {
-        }
-    };
-    public final AnonymousClass2 mReceiver = new BroadcastReceiver() { // from class: com.android.server.power.ScreenCurtainController.2
-        @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
-            int i;
-            String action = intent.getAction();
-            action.getClass();
-            i = 0;
-            switch (action) {
-                case "android.intent.action.SCREEN_OFF":
-                    i = 4;
-                    break;
-                case "android.samsung.media.action.AUDIO_MODE":
-                    if (intent.getIntExtra("android.samsung.media.extra.AUDIO_MODE", 0) >= 1) {
-                        i = 3;
-                        break;
+                public final void onTableModeChanged(boolean z) {}
+            };
+    public final AnonymousClass2 mReceiver =
+            new BroadcastReceiver() { // from class:
+                                      // com.android.server.power.ScreenCurtainController.2
+                @Override // android.content.BroadcastReceiver
+                public final void onReceive(Context context, Intent intent) {
+                    int i;
+                    String action = intent.getAction();
+                    action.getClass();
+                    i = 0;
+                    switch (action) {
+                        case "android.intent.action.SCREEN_OFF":
+                            i = 4;
+                            break;
+                        case "android.samsung.media.action.AUDIO_MODE":
+                            if (intent.getIntExtra("android.samsung.media.extra.AUDIO_MODE", 0)
+                                    >= 1) {
+                                i = 3;
+                                break;
+                            }
+                            break;
+                        case "com.samsung.android.bixby.intent.action.CLIENT_VIEW_STATE_UPDATED":
+                            i = 5;
+                            break;
+                        case "com.samsung.pen.INSERT":
+                            ScreenCurtainController screenCurtainController =
+                                    ScreenCurtainController.this;
+                            if (!screenCurtainController.mPenInsertStateInitialized) {
+                                screenCurtainController.mPenInsertStateInitialized = true;
+                                break;
+                            } else if (!intent.getBooleanExtra("penInsert", true)) {
+                                i = 6;
+                                break;
+                            }
+                            break;
                     }
-                    break;
-                case "com.samsung.android.bixby.intent.action.CLIENT_VIEW_STATE_UPDATED":
-                    i = 5;
-                    break;
-                case "com.samsung.pen.INSERT":
-                    ScreenCurtainController screenCurtainController = ScreenCurtainController.this;
-                    if (!screenCurtainController.mPenInsertStateInitialized) {
-                        screenCurtainController.mPenInsertStateInitialized = true;
-                        break;
-                    } else if (!intent.getBooleanExtra("penInsert", true)) {
-                        i = 6;
-                        break;
+                    if (i != 0) {
+                        DisplayAssistantHandler displayAssistantHandler =
+                                ScreenCurtainController.this.mHandler;
+                        displayAssistantHandler.sendMessageAtTime(
+                                displayAssistantHandler.obtainMessage(3, Integer.valueOf(i)),
+                                SystemClock.uptimeMillis());
                     }
-                    break;
-            }
-            if (i != 0) {
-                DisplayAssistantHandler displayAssistantHandler = ScreenCurtainController.this.mHandler;
-                displayAssistantHandler.sendMessageAtTime(displayAssistantHandler.obtainMessage(3, Integer.valueOf(i)), SystemClock.uptimeMillis());
-            }
-        }
-    };
-    public final AnonymousClass3 mDeathRecipient = new IBinder.DeathRecipient() { // from class: com.android.server.power.ScreenCurtainController.3
-        @Override // android.os.IBinder.DeathRecipient
-        public final void binderDied() {
-            Slog.d("ScreenCurtainController", "DeathRecipient: binderDied()");
-            DisplayAssistantHandler displayAssistantHandler = ScreenCurtainController.this.mHandler;
-            displayAssistantHandler.sendMessageAtTime(displayAssistantHandler.obtainMessage(3, 7), SystemClock.uptimeMillis());
-        }
-    };
+                }
+            };
+    public final AnonymousClass3 mDeathRecipient =
+            new IBinder
+                    .DeathRecipient() { // from class:
+                                        // com.android.server.power.ScreenCurtainController.3
+                @Override // android.os.IBinder.DeathRecipient
+                public final void binderDied() {
+                    Slog.d("ScreenCurtainController", "DeathRecipient: binderDied()");
+                    DisplayAssistantHandler displayAssistantHandler =
+                            ScreenCurtainController.this.mHandler;
+                    displayAssistantHandler.sendMessageAtTime(
+                            displayAssistantHandler.obtainMessage(3, 7),
+                            SystemClock.uptimeMillis());
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class CallStateCallback extends TelephonyCallback implements TelephonyCallback.CallStateListener {
-        public CallStateCallback() {
-        }
+    public final class CallStateCallback extends TelephonyCallback
+            implements TelephonyCallback.CallStateListener {
+        public CallStateCallback() {}
 
         @Override // android.telephony.TelephonyCallback.CallStateListener
         public final void onCallStateChanged(int i) {
             synchronized (ScreenCurtainController.this.mLock) {
                 try {
                     if (i == 1) {
-                        DisplayAssistantHandler displayAssistantHandler = ScreenCurtainController.this.mHandler;
-                        displayAssistantHandler.sendMessageAtTime(displayAssistantHandler.obtainMessage(3, 1), SystemClock.uptimeMillis());
+                        DisplayAssistantHandler displayAssistantHandler =
+                                ScreenCurtainController.this.mHandler;
+                        displayAssistantHandler.sendMessageAtTime(
+                                displayAssistantHandler.obtainMessage(3, 1),
+                                SystemClock.uptimeMillis());
                     } else if (i == 0) {
-                        ScreenCurtainController screenCurtainController = ScreenCurtainController.this;
-                        if (screenCurtainController.mLastScreenCurtainDisabledReason == 1 && screenCurtainController.mLastCallState == 1) {
-                            Slog.d("ScreenCurtainController", "screen curtain auto enable scheduled");
+                        ScreenCurtainController screenCurtainController =
+                                ScreenCurtainController.this;
+                        if (screenCurtainController.mLastScreenCurtainDisabledReason == 1
+                                && screenCurtainController.mLastCallState == 1) {
+                            Slog.d(
+                                    "ScreenCurtainController",
+                                    "screen curtain auto enable scheduled");
                             screenCurtainController.mHandler.removeMessages(2);
-                            DisplayAssistantHandler displayAssistantHandler2 = screenCurtainController.mHandler;
-                            displayAssistantHandler2.sendMessageDelayed(displayAssistantHandler2.obtainMessage(2), 5000L);
+                            DisplayAssistantHandler displayAssistantHandler2 =
+                                    screenCurtainController.mHandler;
+                            displayAssistantHandler2.sendMessageDelayed(
+                                    displayAssistantHandler2.obtainMessage(2), 5000L);
                         }
                     }
                     ScreenCurtainController.this.mLastCallState = i;
@@ -161,7 +191,8 @@ public final class ScreenCurtainController implements Observer {
             if (i == 1) {
                 ScreenCurtainController screenCurtainController = ScreenCurtainController.this;
                 if (!((Boolean) message.obj).booleanValue()) {
-                    screenCurtainController.mContext.unregisterReceiver(screenCurtainController.mReceiver);
+                    screenCurtainController.mContext.unregisterReceiver(
+                            screenCurtainController.mReceiver);
                     try {
                         screenCurtainController.mNotificationListener.unregisterAsSystemService();
                         return;
@@ -171,16 +202,27 @@ public final class ScreenCurtainController implements Observer {
                 }
                 screenCurtainController.getClass();
                 IntentFilter intentFilter = new IntentFilter();
-                intentFilter.addAction("com.samsung.android.bixby.intent.action.CLIENT_VIEW_STATE_UPDATED");
+                intentFilter.addAction(
+                        "com.samsung.android.bixby.intent.action.CLIENT_VIEW_STATE_UPDATED");
                 intentFilter.addAction("com.samsung.pen.INSERT");
                 intentFilter.addAction("android.samsung.media.action.AUDIO_MODE");
                 intentFilter.addAction("android.intent.action.SCREEN_OFF");
-                screenCurtainController.mContext.registerReceiver(screenCurtainController.mReceiver, intentFilter, null, screenCurtainController.mHandler);
+                screenCurtainController.mContext.registerReceiver(
+                        screenCurtainController.mReceiver,
+                        intentFilter,
+                        null,
+                        screenCurtainController.mHandler);
                 try {
-                    screenCurtainController.mNotificationListener.registerAsSystemService(screenCurtainController.mContext, new ComponentName(screenCurtainController.mContext.getPackageName(), ScreenCurtainController.class.getCanonicalName()), -1);
+                    screenCurtainController.mNotificationListener.registerAsSystemService(
+                            screenCurtainController.mContext,
+                            new ComponentName(
+                                    screenCurtainController.mContext.getPackageName(),
+                                    ScreenCurtainController.class.getCanonicalName()),
+                            -1);
                 } catch (RemoteException unused2) {
                 }
-                HqmDataDispatcher.DisplayStat displayStat = screenCurtainController.mHqmDataDispatcher.getDisplayStat(0);
+                HqmDataDispatcher.DisplayStat displayStat =
+                        screenCurtainController.mHqmDataDispatcher.getDisplayStat(0);
                 if (!displayStat.mScreenCurtainEnabled) {
                     displayStat.mScreenCurtainCount++;
                     HqmDataDispatcher.Timer timer = displayStat.mScreenCurtainTimer;
@@ -196,9 +238,12 @@ public final class ScreenCurtainController implements Observer {
                 Slog.d("ScreenCurtainController", "handleAutoEnableScreenCurtain");
                 synchronized (screenCurtainController2.mLock) {
                     try {
-                        if (screenCurtainController2.mLastScreenCurtainDisabledTime >= screenCurtainController2.mLastUserActivityTime) {
-                            screenCurtainController2.mServiceIntent.putExtra(PreferenceStore.PREF_SERVICE_STATE, "StartService");
-                            screenCurtainController2.mContext.startService(screenCurtainController2.mServiceIntent);
+                        if (screenCurtainController2.mLastScreenCurtainDisabledTime
+                                >= screenCurtainController2.mLastUserActivityTime) {
+                            screenCurtainController2.mServiceIntent.putExtra(
+                                    PreferenceStore.PREF_SERVICE_STATE, "StartService");
+                            screenCurtainController2.mContext.startService(
+                                    screenCurtainController2.mServiceIntent);
                         }
                     } finally {
                     }
@@ -247,11 +292,14 @@ public final class ScreenCurtainController implements Observer {
                 try {
                     if (screenCurtainController3.mScreenCurtainEnabled) {
                         if (intValue == 7) {
-                            screenCurtainController3.setScreenCurtainEnabledLocked(0, 0, screenCurtainController3.mToken, false);
+                            screenCurtainController3.setScreenCurtainEnabledLocked(
+                                    0, 0, screenCurtainController3.mToken, false);
                         }
                         screenCurtainController3.mLastScreenCurtainDisabledReason = intValue;
-                        screenCurtainController3.mServiceIntent.putExtra(PreferenceStore.PREF_SERVICE_STATE, "StopService");
-                        screenCurtainController3.mContext.startService(screenCurtainController3.mServiceIntent);
+                        screenCurtainController3.mServiceIntent.putExtra(
+                                PreferenceStore.PREF_SERVICE_STATE, "StopService");
+                        screenCurtainController3.mContext.startService(
+                                screenCurtainController3.mServiceIntent);
                     }
                 } finally {
                 }
@@ -261,41 +309,53 @@ public final class ScreenCurtainController implements Observer {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NotificationListener extends NotificationListenerService {
-        public NotificationListener() {
-        }
+        public NotificationListener() {}
 
         @Override // android.service.notification.NotificationListenerService
-        public final void onNotificationPosted(StatusBarNotification statusBarNotification, NotificationListenerService.RankingMap rankingMap) {
+        public final void onNotificationPosted(
+                StatusBarNotification statusBarNotification,
+                NotificationListenerService.RankingMap rankingMap) {
             if (statusBarNotification == null || statusBarNotification.getNotification() == null) {
                 return;
             }
             String str = statusBarNotification.getNotification().category;
-            if ((str == null || !(str.equals("call") || str.equals("alarm"))) && statusBarNotification.getNotification().fullScreenIntent == null) {
+            if ((str == null || !(str.equals("call") || str.equals("alarm")))
+                    && statusBarNotification.getNotification().fullScreenIntent == null) {
                 return;
             }
             DisplayAssistantHandler displayAssistantHandler = ScreenCurtainController.this.mHandler;
-            displayAssistantHandler.sendMessageAtTime(displayAssistantHandler.obtainMessage(3, 2), SystemClock.uptimeMillis());
+            displayAssistantHandler.sendMessageAtTime(
+                    displayAssistantHandler.obtainMessage(3, 2), SystemClock.uptimeMillis());
         }
 
         @Override // android.service.notification.NotificationListenerService
-        public final void onNotificationRemoved(StatusBarNotification statusBarNotification, NotificationListenerService.RankingMap rankingMap, int i) {
-        }
+        public final void onNotificationRemoved(
+                StatusBarNotification statusBarNotification,
+                NotificationListenerService.RankingMap rankingMap,
+                int i) {}
     }
 
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.power.ScreenCurtainController$1] */
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.power.ScreenCurtainController$2] */
     /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.power.ScreenCurtainController$3] */
-    public ScreenCurtainController(Context context, Object obj, Looper looper, ISemInputDeviceManager iSemInputDeviceManager) {
+    public ScreenCurtainController(
+            Context context,
+            Object obj,
+            Looper looper,
+            ISemInputDeviceManager iSemInputDeviceManager) {
         this.mContext = context;
         this.mLock = obj;
         DisplayAssistantHandler displayAssistantHandler = new DisplayAssistantHandler(looper);
         this.mHandler = displayAssistantHandler;
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(TelephonyManager.class);
+        TelephonyManager telephonyManager =
+                (TelephonyManager) context.getSystemService(TelephonyManager.class);
         this.mTelephonyManager = telephonyManager;
-        this.mDisplayManagerInternal = (DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class);
+        this.mDisplayManagerInternal =
+                (DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class);
         this.mInputDeviceManager = iSemInputDeviceManager;
         if (PowerManagerUtil.SEC_FEATURE_FOLD_COVER_DISPLAY) {
-            displayAssistantHandler.post(new ScreenCurtainController$$ExternalSyntheticLambda0(this, 1));
+            displayAssistantHandler.post(
+                    new ScreenCurtainController$$ExternalSyntheticLambda0(this, 1));
         }
         this.mNotificationListener = new NotificationListener();
         CallStateCallback callStateCallback = new CallStateCallback();
@@ -307,12 +367,16 @@ public final class ScreenCurtainController implements Observer {
     }
 
     public final void setScreenCurtainEnabledLocked(int i, int i2, IBinder iBinder, boolean z) {
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("enableScreenCurtain: enabled=", ", displayState=", z);
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "enableScreenCurtain: enabled=", ", displayState=", z);
         m.append(Display.stateToString(i2));
         Slog.d("ScreenCurtainController", m.toString());
         IBinder iBinder2 = this.mToken;
         if (iBinder2 != null && iBinder2 != iBinder) {
-            Slog.e("ScreenCurtainController", "enableScreenCurtain: Already in use by another client");
+            Slog.e(
+                    "ScreenCurtainController",
+                    "enableScreenCurtain: Already in use by another client");
             return;
         }
         boolean z2 = this.mScreenCurtainEnabled && z;
@@ -336,9 +400,13 @@ public final class ScreenCurtainController implements Observer {
                 str = packagesForUid[0];
             }
             if ("com.samsung.android.displayassistant".equals(str)) {
-                this.mServiceIntent.setClassName("com.samsung.android.displayassistant", "com.samsung.android.displayassistant.presentation.ui.screencurtain.ScreenCurtainService");
+                this.mServiceIntent.setClassName(
+                        "com.samsung.android.displayassistant",
+                        "com.samsung.android.displayassistant.presentation.ui.screencurtain.ScreenCurtainService");
             } else {
-                this.mServiceIntent.setClassName("com.samsung.android.statsd", "com.samsung.android.statsd.screencurtain.ScreenCurtainService");
+                this.mServiceIntent.setClassName(
+                        "com.samsung.android.statsd",
+                        "com.samsung.android.statsd.screencurtain.ScreenCurtainService");
             }
             if (PowerManagerUtil.SEC_FEATURE_FOLD_COVER_DISPLAY) {
                 this.mFoldedWhenEnabled = this.mFolded;
@@ -348,7 +416,8 @@ public final class ScreenCurtainController implements Observer {
             boolean z3 = PowerManagerUtil.SEC_FEATURE_FOLD_COVER_DISPLAY;
             if (!z3 || z || this.mWakefulness != 1 || this.mFoldedWhenEnabled == this.mFolded) {
                 try {
-                    this.mInputDeviceManager.setTspEnabled((z3 && this.mFolded) ? 2 : 1, z ? 21 : 22, false);
+                    this.mInputDeviceManager.setTspEnabled(
+                            (z3 && this.mFolded) ? 2 : 1, z ? 21 : 22, false);
                 } catch (RemoteException unused2) {
                 }
             }
@@ -358,14 +427,17 @@ public final class ScreenCurtainController implements Observer {
             return;
         }
         DisplayAssistantHandler displayAssistantHandler = this.mHandler;
-        displayAssistantHandler.sendMessage(displayAssistantHandler.obtainMessage(1, Boolean.valueOf(z)));
+        displayAssistantHandler.sendMessage(
+                displayAssistantHandler.obtainMessage(1, Boolean.valueOf(z)));
     }
 
     @Override // java.util.Observer
     public final void update(Observable observable, Object obj) {
         if (observable instanceof ForegroundPackageObserver) {
             this.mPackageNameOnScreenCurtain = String.valueOf(obj);
-            Slog.d("ScreenCurtainController", "ForegroundPackageObserver update: " + this.mPackageNameOnScreenCurtain);
+            Slog.d(
+                    "ScreenCurtainController",
+                    "ForegroundPackageObserver update: " + this.mPackageNameOnScreenCurtain);
         }
     }
 }

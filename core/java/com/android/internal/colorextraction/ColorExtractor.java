@@ -6,8 +6,10 @@ import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.AsyncTask;
 import android.util.SparseArray;
+
 import com.android.internal.colorextraction.types.ExtractionType;
 import com.android.internal.colorextraction.types.Tonal;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -31,10 +33,18 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
     }
 
     public ColorExtractor(Context context) {
-        this(context, new Tonal(context), true, (WallpaperManager) context.getSystemService(WallpaperManager.class));
+        this(
+                context,
+                new Tonal(context),
+                true,
+                (WallpaperManager) context.getSystemService(WallpaperManager.class));
     }
 
-    public ColorExtractor(Context context, ExtractionType extractionType, boolean immediately, WallpaperManager wallpaperManager) {
+    public ColorExtractor(
+            Context context,
+            ExtractionType extractionType,
+            boolean immediately,
+            WallpaperManager wallpaperManager) {
         this.mContext = context;
         this.mExtractionType = extractionType;
         this.mGradientColors = new SparseArray<>();
@@ -56,7 +66,8 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
 
     private void initExtractColors(WallpaperManager wallpaperManager, boolean immediately) {
         if (!immediately) {
-            new LoadWallpaperColors().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wallpaperManager);
+            new LoadWallpaperColors()
+                    .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, wallpaperManager);
             return;
         }
         this.mSystemColors = wallpaperManager.getWallpaperColors(1);
@@ -68,8 +79,7 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
         private WallpaperColors mLockColors;
         private WallpaperColors mSystemColors;
 
-        private LoadWallpaperColors() {
-        }
+        private LoadWallpaperColors() {}
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
@@ -102,7 +112,8 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
 
     public GradientColors getColors(int which, int type) {
         if (type != 0 && type != 1 && type != 2) {
-            throw new IllegalArgumentException("type should be TYPE_NORMAL, TYPE_DARK or TYPE_EXTRA_DARK");
+            throw new IllegalArgumentException(
+                    "type should be TYPE_NORMAL, TYPE_DARK or TYPE_EXTRA_DARK");
         }
         if (which != 2 && which != 1) {
             throw new IllegalArgumentException("which should be FLAG_SYSTEM or FLAG_NORMAL");
@@ -141,7 +152,8 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
     }
 
     protected void triggerColorsChanged(int which) {
-        ArrayList<WeakReference<OnColorsChangedListener>> references = new ArrayList<>(this.mOnColorsChangedListeners);
+        ArrayList<WeakReference<OnColorsChangedListener>> references =
+                new ArrayList<>(this.mOnColorsChangedListeners);
         int size = references.size();
         for (int i = 0; i < size; i++) {
             WeakReference<OnColorsChangedListener> weakReference = references.get(i);
@@ -154,12 +166,21 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
         }
     }
 
-    private void extractInto(WallpaperColors inWallpaperColors, GradientColors outGradientColorsNormal, GradientColors outGradientColorsDark, GradientColors outGradientColorsExtraDark) {
-        this.mExtractionType.extractInto(inWallpaperColors, outGradientColorsNormal, outGradientColorsDark, outGradientColorsExtraDark);
+    private void extractInto(
+            WallpaperColors inWallpaperColors,
+            GradientColors outGradientColorsNormal,
+            GradientColors outGradientColorsDark,
+            GradientColors outGradientColorsExtraDark) {
+        this.mExtractionType.extractInto(
+                inWallpaperColors,
+                outGradientColorsNormal,
+                outGradientColorsDark,
+                outGradientColorsExtraDark);
     }
 
     public void destroy() {
-        WallpaperManager wallpaperManager = (WallpaperManager) this.mContext.getSystemService(WallpaperManager.class);
+        WallpaperManager wallpaperManager =
+                (WallpaperManager) this.mContext.getSystemService(WallpaperManager.class);
         if (wallpaperManager != null) {
             wallpaperManager.removeOnColorsChangedListener(this);
         }
@@ -170,7 +191,8 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
     }
 
     public void removeOnColorsChangedListener(OnColorsChangedListener listener) {
-        ArrayList<WeakReference<OnColorsChangedListener>> references = new ArrayList<>(this.mOnColorsChangedListeners);
+        ArrayList<WeakReference<OnColorsChangedListener>> references =
+                new ArrayList<>(this.mOnColorsChangedListeners);
         int size = references.size();
         for (int i = 0; i < size; i++) {
             WeakReference<OnColorsChangedListener> weakReference = references.get(i);
@@ -231,15 +253,22 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
                 return false;
             }
             GradientColors other = (GradientColors) o;
-            return other.mMainColor == this.mMainColor && other.mSecondaryColor == this.mSecondaryColor && other.mSupportsDarkText == this.mSupportsDarkText;
+            return other.mMainColor == this.mMainColor
+                    && other.mSecondaryColor == this.mSecondaryColor
+                    && other.mSupportsDarkText == this.mSupportsDarkText;
         }
 
         public int hashCode() {
-            return (((this.mMainColor * 31) + this.mSecondaryColor) * 31) + (!this.mSupportsDarkText ? 1 : 0);
+            return (((this.mMainColor * 31) + this.mSecondaryColor) * 31)
+                    + (!this.mSupportsDarkText ? 1 : 0);
         }
 
         public String toString() {
-            return "GradientColors(" + Integer.toHexString(this.mMainColor) + ", " + Integer.toHexString(this.mSecondaryColor) + NavigationBarInflaterView.KEY_CODE_END;
+            return "GradientColors("
+                    + Integer.toHexString(this.mMainColor)
+                    + ", "
+                    + Integer.toHexString(this.mSecondaryColor)
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
     }
 }

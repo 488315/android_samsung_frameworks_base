@@ -6,21 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class MappedImage implements Parcelable {
-    public static final Parcelable.Creator<MappedImage> CREATOR = new Parcelable.Creator<MappedImage>() { // from class: android.gsi.MappedImage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MappedImage createFromParcel(Parcel _aidl_source) {
-            MappedImage _aidl_out = new MappedImage();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<MappedImage> CREATOR =
+            new Parcelable.Creator<MappedImage>() { // from class: android.gsi.MappedImage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MappedImage createFromParcel(Parcel _aidl_source) {
+                    MappedImage _aidl_out = new MappedImage();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MappedImage[] newArray(int _aidl_size) {
-            return new MappedImage[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MappedImage[] newArray(int _aidl_size) {
+                    return new MappedImage[_aidl_size];
+                }
+            };
     public String path;
 
     @Override // android.os.Parcelable

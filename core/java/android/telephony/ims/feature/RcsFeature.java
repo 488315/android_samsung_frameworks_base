@@ -15,12 +15,12 @@ import android.telephony.ims.aidl.ISubscribeResponseCallback;
 import android.telephony.ims.aidl.RcsOptionsResponseAidlWrapper;
 import android.telephony.ims.aidl.RcsPublishResponseAidlWrapper;
 import android.telephony.ims.aidl.RcsSubscribeResponseAidlWrapper;
-import android.telephony.ims.feature.ImsFeature;
-import android.telephony.ims.feature.RcsFeature;
 import android.telephony.ims.stub.CapabilityExchangeEventListener;
 import android.telephony.ims.stub.RcsCapabilityExchangeImplBase;
 import android.util.Log;
+
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashSet;
@@ -54,14 +54,21 @@ public class RcsFeature extends ImsFeature {
 
         @Override // android.telephony.ims.aidl.IImsRcsFeature
         public int queryCapabilityStatus() throws RemoteException {
-            return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda2
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    Integer lambda$queryCapabilityStatus$0;
-                    lambda$queryCapabilityStatus$0 = RcsFeature.RcsFeatureBinder.this.lambda$queryCapabilityStatus$0();
-                    return lambda$queryCapabilityStatus$0;
-                }
-            }, "queryCapabilityStatus")).intValue();
+            return ((Integer)
+                            executeMethodAsyncForResult(
+                                    new Supplier() { // from class:
+                                                     // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            Integer lambda$queryCapabilityStatus$0;
+                                            lambda$queryCapabilityStatus$0 =
+                                                    RcsFeature.RcsFeatureBinder.this
+                                                            .lambda$queryCapabilityStatus$0();
+                                            return lambda$queryCapabilityStatus$0;
+                                        }
+                                    },
+                                    "queryCapabilityStatus"))
+                    .intValue();
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -76,12 +83,15 @@ public class RcsFeature extends ImsFeature {
 
         @Override // android.telephony.ims.aidl.IImsRcsFeature
         public void addCapabilityCallback(final IImsCapabilityCallback c) throws RemoteException {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$addCapabilityCallback$1(c);
-                }
-            }, "addCapabilityCallback");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RcsFeature.RcsFeatureBinder.this.lambda$addCapabilityCallback$1(c);
+                        }
+                    },
+                    "addCapabilityCallback");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -90,148 +100,229 @@ public class RcsFeature extends ImsFeature {
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsFeature
-        public void removeCapabilityCallback(final IImsCapabilityCallback c) throws RemoteException {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$removeCapabilityCallback$2(c);
-                }
-            }, "removeCapabilityCallback");
+        public void removeCapabilityCallback(final IImsCapabilityCallback c)
+                throws RemoteException {
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RcsFeature.RcsFeatureBinder.this.lambda$removeCapabilityCallback$2(c);
+                        }
+                    },
+                    "removeCapabilityCallback");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$changeCapabilitiesConfiguration$3(CapabilityChangeRequest r, IImsCapabilityCallback c) {
+        public /* synthetic */ void lambda$changeCapabilitiesConfiguration$3(
+                CapabilityChangeRequest r, IImsCapabilityCallback c) {
             this.mReference.requestChangeEnabledCapabilities(r, c);
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsFeature
-        public void changeCapabilitiesConfiguration(final CapabilityChangeRequest r, final IImsCapabilityCallback c) throws RemoteException {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$changeCapabilitiesConfiguration$3(r, c);
-                }
-            }, "changeCapabilitiesConfiguration");
+        public void changeCapabilitiesConfiguration(
+                final CapabilityChangeRequest r, final IImsCapabilityCallback c)
+                throws RemoteException {
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RcsFeature.RcsFeatureBinder.this
+                                    .lambda$changeCapabilitiesConfiguration$3(r, c);
+                        }
+                    },
+                    "changeCapabilitiesConfiguration");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$queryCapabilityConfiguration$4(int capability, int radioTech, IImsCapabilityCallback c) {
+        public /* synthetic */ void lambda$queryCapabilityConfiguration$4(
+                int capability, int radioTech, IImsCapabilityCallback c) {
             this.mReference.queryCapabilityConfigurationInternal(capability, radioTech, c);
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsFeature
-        public void queryCapabilityConfiguration(final int capability, final int radioTech, final IImsCapabilityCallback c) throws RemoteException {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda7
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$queryCapabilityConfiguration$4(capability, radioTech, c);
-                }
-            }, "queryCapabilityConfiguration");
+        public void queryCapabilityConfiguration(
+                final int capability, final int radioTech, final IImsCapabilityCallback c)
+                throws RemoteException {
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda7
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RcsFeature.RcsFeatureBinder.this.lambda$queryCapabilityConfiguration$4(
+                                    capability, radioTech, c);
+                        }
+                    },
+                    "queryCapabilityConfiguration");
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsFeature
         public int getFeatureState() throws RemoteException {
             final RcsFeature rcsFeature = this.mReference;
             Objects.requireNonNull(rcsFeature);
-            return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda6
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    return Integer.valueOf(RcsFeature.this.getFeatureState());
-                }
-            }, "getFeatureState")).intValue();
+            return ((Integer)
+                            executeMethodAsyncForResult(
+                                    new Supplier() { // from class:
+                                                     // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda6
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            return Integer.valueOf(
+                                                    RcsFeature.this.getFeatureState());
+                                        }
+                                    },
+                                    "getFeatureState"))
+                    .intValue();
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsFeature
-        public void setCapabilityExchangeEventListener(ICapabilityExchangeEventListener listener) throws RemoteException {
-            final CapabilityExchangeEventListener listenerWrapper = listener != null ? new CapabilityExchangeAidlWrapper(listener) : null;
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$setCapabilityExchangeEventListener$5(listenerWrapper);
-                }
-            }, "setCapabilityExchangeEventListener");
+        public void setCapabilityExchangeEventListener(ICapabilityExchangeEventListener listener)
+                throws RemoteException {
+            final CapabilityExchangeEventListener listenerWrapper =
+                    listener != null ? new CapabilityExchangeAidlWrapper(listener) : null;
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RcsFeature.RcsFeatureBinder.this
+                                    .lambda$setCapabilityExchangeEventListener$5(listenerWrapper);
+                        }
+                    },
+                    "setCapabilityExchangeEventListener");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$setCapabilityExchangeEventListener$5(CapabilityExchangeEventListener listenerWrapper) {
+        public /* synthetic */ void lambda$setCapabilityExchangeEventListener$5(
+                CapabilityExchangeEventListener listenerWrapper) {
             this.mReference.setCapabilityExchangeEventListener(listenerWrapper);
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsFeature
-        public void publishCapabilities(final String pidfXml, IPublishResponseCallback callback) throws RemoteException {
-            final RcsCapabilityExchangeImplBase.PublishResponseCallback callbackWrapper = new RcsPublishResponseAidlWrapper(callback);
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$publishCapabilities$6(pidfXml, callbackWrapper);
-                }
-            }, "publishCapabilities");
+        public void publishCapabilities(final String pidfXml, IPublishResponseCallback callback)
+                throws RemoteException {
+            final RcsCapabilityExchangeImplBase.PublishResponseCallback callbackWrapper =
+                    new RcsPublishResponseAidlWrapper(callback);
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RcsFeature.RcsFeatureBinder.this.lambda$publishCapabilities$6(
+                                    pidfXml, callbackWrapper);
+                        }
+                    },
+                    "publishCapabilities");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$publishCapabilities$6(String pidfXml, RcsCapabilityExchangeImplBase.PublishResponseCallback callbackWrapper) {
-            this.mReference.getCapabilityExchangeImplBaseInternal().publishCapabilities(pidfXml, callbackWrapper);
+        public /* synthetic */ void lambda$publishCapabilities$6(
+                String pidfXml,
+                RcsCapabilityExchangeImplBase.PublishResponseCallback callbackWrapper) {
+            this.mReference
+                    .getCapabilityExchangeImplBaseInternal()
+                    .publishCapabilities(pidfXml, callbackWrapper);
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsFeature
-        public void subscribeForCapabilities(final List<Uri> uris, ISubscribeResponseCallback callback) throws RemoteException {
-            final RcsCapabilityExchangeImplBase.SubscribeResponseCallback wrapper = new RcsSubscribeResponseAidlWrapper(callback);
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda11
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$subscribeForCapabilities$7(uris, wrapper);
-                }
-            }, "subscribeForCapabilities");
+        public void subscribeForCapabilities(
+                final List<Uri> uris, ISubscribeResponseCallback callback) throws RemoteException {
+            final RcsCapabilityExchangeImplBase.SubscribeResponseCallback wrapper =
+                    new RcsSubscribeResponseAidlWrapper(callback);
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda11
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RcsFeature.RcsFeatureBinder.this.lambda$subscribeForCapabilities$7(
+                                    uris, wrapper);
+                        }
+                    },
+                    "subscribeForCapabilities");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$subscribeForCapabilities$7(List uris, RcsCapabilityExchangeImplBase.SubscribeResponseCallback wrapper) {
-            this.mReference.getCapabilityExchangeImplBaseInternal().subscribeForCapabilities(uris, wrapper);
+        public /* synthetic */ void lambda$subscribeForCapabilities$7(
+                List uris, RcsCapabilityExchangeImplBase.SubscribeResponseCallback wrapper) {
+            this.mReference
+                    .getCapabilityExchangeImplBaseInternal()
+                    .subscribeForCapabilities(uris, wrapper);
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsFeature
-        public void sendOptionsCapabilityRequest(final Uri contactUri, final List<String> myCapabilities, IOptionsResponseCallback callback) throws RemoteException {
-            final RcsCapabilityExchangeImplBase.OptionsResponseCallback callbackWrapper = new RcsOptionsResponseAidlWrapper(callback);
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda9
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RcsFeature.RcsFeatureBinder.this.lambda$sendOptionsCapabilityRequest$8(contactUri, myCapabilities, callbackWrapper);
-                }
-            }, "sendOptionsCapabilityRequest");
+        public void sendOptionsCapabilityRequest(
+                final Uri contactUri,
+                final List<String> myCapabilities,
+                IOptionsResponseCallback callback)
+                throws RemoteException {
+            final RcsCapabilityExchangeImplBase.OptionsResponseCallback callbackWrapper =
+                    new RcsOptionsResponseAidlWrapper(callback);
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda9
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RcsFeature.RcsFeatureBinder.this.lambda$sendOptionsCapabilityRequest$8(
+                                    contactUri, myCapabilities, callbackWrapper);
+                        }
+                    },
+                    "sendOptionsCapabilityRequest");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$sendOptionsCapabilityRequest$8(Uri contactUri, List myCapabilities, RcsCapabilityExchangeImplBase.OptionsResponseCallback callbackWrapper) {
-            this.mReference.getCapabilityExchangeImplBaseInternal().sendOptionsCapabilityRequest(contactUri, new HashSet(myCapabilities), callbackWrapper);
+        public /* synthetic */ void lambda$sendOptionsCapabilityRequest$8(
+                Uri contactUri,
+                List myCapabilities,
+                RcsCapabilityExchangeImplBase.OptionsResponseCallback callbackWrapper) {
+            this.mReference
+                    .getCapabilityExchangeImplBaseInternal()
+                    .sendOptionsCapabilityRequest(
+                            contactUri, new HashSet(myCapabilities), callbackWrapper);
         }
 
-        private void executeMethodAsync(final Runnable r, String errorLogName) throws RemoteException {
+        private void executeMethodAsync(final Runnable r, String errorLogName)
+                throws RemoteException {
             try {
-                CompletableFuture.runAsync(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda8
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        TelephonyUtils.runWithCleanCallingIdentity(r);
-                    }
-                }, this.mExecutor).join();
+                CompletableFuture.runAsync(
+                                new Runnable() { // from class:
+                                                 // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda8
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        TelephonyUtils.runWithCleanCallingIdentity(r);
+                                    }
+                                },
+                                this.mExecutor)
+                        .join();
             } catch (CancellationException | CompletionException e) {
-                Log.w(RcsFeature.LOG_TAG, "RcsFeatureBinder - " + errorLogName + " exception: " + e.getMessage());
+                Log.w(
+                        RcsFeature.LOG_TAG,
+                        "RcsFeatureBinder - " + errorLogName + " exception: " + e.getMessage());
                 throw new RemoteException(e.getMessage());
             }
         }
 
-        private <T> T executeMethodAsyncForResult(final Supplier<T> r, String errorLogName) throws RemoteException {
-            CompletableFuture<T> future = CompletableFuture.supplyAsync(new Supplier() { // from class: android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda10
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    Object runWithCleanCallingIdentity;
-                    runWithCleanCallingIdentity = TelephonyUtils.runWithCleanCallingIdentity((Supplier<Object>) r);
-                    return runWithCleanCallingIdentity;
-                }
-            }, this.mExecutor);
+        private <T> T executeMethodAsyncForResult(final Supplier<T> r, String errorLogName)
+                throws RemoteException {
+            CompletableFuture<T> future =
+                    CompletableFuture.supplyAsync(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.feature.RcsFeature$RcsFeatureBinder$$ExternalSyntheticLambda10
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    Object runWithCleanCallingIdentity;
+                                    runWithCleanCallingIdentity =
+                                            TelephonyUtils.runWithCleanCallingIdentity(
+                                                    (Supplier<Object>) r);
+                                    return runWithCleanCallingIdentity;
+                                }
+                            },
+                            this.mExecutor);
             try {
                 return future.get();
             } catch (InterruptedException | ExecutionException e) {
-                Log.w(RcsFeature.LOG_TAG, "RcsFeatureBinder - " + errorLogName + " exception: " + e.getMessage());
+                Log.w(
+                        RcsFeature.LOG_TAG,
+                        "RcsFeatureBinder - " + errorLogName + " exception: " + e.getMessage());
                 throw new RemoteException(e.getMessage());
             }
         }
@@ -244,8 +335,7 @@ public class RcsFeature extends ImsFeature {
         public static final int CAPABILITY_TYPE_PRESENCE_UCE = 2;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface RcsImsCapabilityFlag {
-        }
+        public @interface RcsImsCapabilityFlag {}
 
         public RcsImsCapabilities(int capabilities) {
             super(capabilities);
@@ -293,12 +383,15 @@ public class RcsFeature extends ImsFeature {
     @Override // android.telephony.ims.feature.ImsFeature
     public void initialize(Context context, int slotId) {
         super.initialize(context, slotId);
-        getExecutor().execute(new Runnable() { // from class: android.telephony.ims.feature.RcsFeature$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                RcsFeature.this.lambda$initialize$0();
-            }
-        });
+        getExecutor()
+                .execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.feature.RcsFeature$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                RcsFeature.this.lambda$initialize$0();
+                            }
+                        });
     }
 
     @Override // android.telephony.ims.feature.ImsFeature
@@ -319,24 +412,22 @@ public class RcsFeature extends ImsFeature {
     }
 
     @Override // android.telephony.ims.feature.ImsFeature
-    public void changeEnabledCapabilities(CapabilityChangeRequest request, ImsFeature.CapabilityCallbackProxy callback) {
-    }
+    public void changeEnabledCapabilities(
+            CapabilityChangeRequest request, ImsFeature.CapabilityCallbackProxy callback) {}
 
-    public RcsCapabilityExchangeImplBase createCapabilityExchangeImpl(CapabilityExchangeEventListener listener) {
+    public RcsCapabilityExchangeImplBase createCapabilityExchangeImpl(
+            CapabilityExchangeEventListener listener) {
         return new RcsCapabilityExchangeImplBase();
     }
 
-    public void destroyCapabilityExchangeImpl(RcsCapabilityExchangeImplBase capExchangeImpl) {
-    }
+    public void destroyCapabilityExchangeImpl(RcsCapabilityExchangeImplBase capExchangeImpl) {}
 
     @Override // android.telephony.ims.feature.ImsFeature
-    public void onFeatureRemoved() {
-    }
+    public void onFeatureRemoved() {}
 
     @Override // android.telephony.ims.feature.ImsFeature
     /* renamed from: onFeatureReady, reason: merged with bridge method [inline-methods] */
-    public void lambda$initialize$0() {
-    }
+    public void lambda$initialize$0() {}
 
     @Override // android.telephony.ims.feature.ImsFeature
     public final IImsRcsFeature getBinder() {

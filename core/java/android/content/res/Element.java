@@ -3,6 +3,7 @@ package android.content.res;
 import android.text.format.DateFormat;
 import android.util.Pools;
 import android.util.Slog;
+
 import java.util.function.Supplier;
 
 /* loaded from: classes.dex */
@@ -55,8 +56,10 @@ public class Element {
     protected static final String TAG_ATTR_QUERY_SUFFIX = "querySuffix";
     protected static final String TAG_ATTR_READ_PERMISSION = "readPermission";
     protected static final String TAG_ATTR_REQUIRED_ACCOUNT_TYPE = "requiredAccountType";
-    protected static final String TAG_ATTR_REQUIRED_SYSTEM_PROPERTY_NAME = "requiredSystemPropertyName";
-    protected static final String TAG_ATTR_REQUIRED_SYSTEM_PROPERTY_VALUE = "requiredSystemPropertyValue";
+    protected static final String TAG_ATTR_REQUIRED_SYSTEM_PROPERTY_NAME =
+            "requiredSystemPropertyName";
+    protected static final String TAG_ATTR_REQUIRED_SYSTEM_PROPERTY_VALUE =
+            "requiredSystemPropertyValue";
     protected static final String TAG_ATTR_RESTRICTED_ACCOUNT_TYPE = "restrictedAccountType";
     protected static final String TAG_ATTR_SCHEME = "scheme";
     protected static final String TAG_ATTR_SHARED_USER_ID = "sharedUserId";
@@ -114,12 +117,15 @@ public class Element {
     protected static final String TAG_USES_PERMISSION_SDK_M = "uses-permission-sdk-m";
     protected static final String TAG_USES_SDK = "uses-sdk";
     protected static final String TAG_USES_SPLIT = "uses-split";
-    private static final ThreadLocal<Pools.SimplePool<Element>> sPool = ThreadLocal.withInitial(new Supplier() { // from class: android.content.res.Element$$ExternalSyntheticLambda0
-        @Override // java.util.function.Supplier
-        public final Object get() {
-            return Element.lambda$static$0();
-        }
-    });
+    private static final ThreadLocal<Pools.SimplePool<Element>> sPool =
+            ThreadLocal.withInitial(
+                    new Supplier() { // from class:
+                        // android.content.res.Element$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Supplier
+                        public final Object get() {
+                            return Element.lambda$static$0();
+                        }
+                    });
     String mTag;
     private final TagCounter[] mTagCounters = new TagCounter[35];
     private long mChildTagMask = 0;
@@ -808,9 +814,9 @@ public class Element {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:59:0x0095, code lost:
-    
-        if (r17.equals("activity") != false) goto L42;
-     */
+
+       if (r17.equals("activity") != false) goto L42;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -820,7 +826,8 @@ public class Element {
             Method dump skipped, instructions count: 486
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.res.Element.init(java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.content.res.Element.init(java.lang.String):void");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -1673,9 +1680,9 @@ public class Element {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0082, code lost:
-    
-        if (r7.equals(android.content.res.Element.TAG_ATTR_ZYGOTE_PRELOAD_NAME) != false) goto L52;
-     */
+
+       if (r7.equals(android.content.res.Element.TAG_ATTR_ZYGOTE_PRELOAD_NAME) != false) goto L52;
+    */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
     java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
     	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.restoreSwitchOverString(SwitchOverStringVisitor.java:109)
@@ -1878,7 +1885,9 @@ public class Element {
         Ld2:
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.res.Element.isComponentNameAttr(java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.content.res.Element.isComponentNameAttr(java.lang.String):boolean");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -1994,7 +2003,8 @@ public class Element {
 
     void validateStrAttr(String attrName, String attrValue) {
         if (attrValue != null && attrValue.length() > getAttrStrMaxLen(attrName)) {
-            throw new SecurityException("String length limit exceeded for attribute " + attrName + " in " + this.mTag);
+            throw new SecurityException(
+                    "String length limit exceeded for attribute " + attrName + " in " + this.mTag);
         }
         if (isComponentNameAttr(attrName)) {
             validateComponentName(attrValue);
@@ -2003,7 +2013,8 @@ public class Element {
 
     void validateResStrAttr(int index, CharSequence stringValue) {
         if (stringValue != null && stringValue.length() > getResStrMaxLen(index)) {
-            throw new SecurityException("String length limit exceeded for attribute in " + this.mTag);
+            throw new SecurityException(
+                    "String length limit exceeded for attribute in " + this.mTag);
         }
         if (isComponentNameAttr(index)) {
             validateComponentName(stringValue);
@@ -2022,7 +2033,11 @@ public class Element {
         if (counter != null) {
             counter.increment();
             if (!counter.isValid()) {
-                throw new SecurityException("The number of child " + element.mTag + " elements exceeded the max allowed in " + this.mTag);
+                throw new SecurityException(
+                        "The number of child "
+                                + element.mTag
+                                + " elements exceeded the max allowed in "
+                                + this.mTag);
             }
         }
     }

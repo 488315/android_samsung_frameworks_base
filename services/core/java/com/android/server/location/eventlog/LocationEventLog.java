@@ -9,8 +9,10 @@ import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.TimeUtils;
+
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
+
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
@@ -45,24 +47,41 @@ public final class LocationEventLog extends LocalEventLog {
         }
 
         public final synchronized String toString() {
-            return "min/max interval = " + intervalToString(this.mFastestIntervalMs) + "/" + intervalToString(this.mSlowestIntervalMs) + ", total/active/foreground duration = " + TimeUtils.formatDuration(this.mAddedTimeTotalMs) + "/" + TimeUtils.formatDuration(this.mActiveTimeTotalMs) + "/" + TimeUtils.formatDuration(this.mForegroundTimeTotalMs) + ", locations = " + this.mDeliveredLocationCount;
+            return "min/max interval = "
+                    + intervalToString(this.mFastestIntervalMs)
+                    + "/"
+                    + intervalToString(this.mSlowestIntervalMs)
+                    + ", total/active/foreground duration = "
+                    + TimeUtils.formatDuration(this.mAddedTimeTotalMs)
+                    + "/"
+                    + TimeUtils.formatDuration(this.mActiveTimeTotalMs)
+                    + "/"
+                    + TimeUtils.formatDuration(this.mForegroundTimeTotalMs)
+                    + ", locations = "
+                    + this.mDeliveredLocationCount;
         }
 
         public final synchronized void updateTotals() {
             try {
                 if (this.mAddedRequestCount > 0) {
                     long elapsedRealtime = SystemClock.elapsedRealtime();
-                    this.mAddedTimeTotalMs = (elapsedRealtime - this.mAddedTimeLastUpdateRealtimeMs) + this.mAddedTimeTotalMs;
+                    this.mAddedTimeTotalMs =
+                            (elapsedRealtime - this.mAddedTimeLastUpdateRealtimeMs)
+                                    + this.mAddedTimeTotalMs;
                     this.mAddedTimeLastUpdateRealtimeMs = elapsedRealtime;
                 }
                 if (this.mActiveRequestCount > 0) {
                     long elapsedRealtime2 = SystemClock.elapsedRealtime();
-                    this.mActiveTimeTotalMs = (elapsedRealtime2 - this.mActiveTimeLastUpdateRealtimeMs) + this.mActiveTimeTotalMs;
+                    this.mActiveTimeTotalMs =
+                            (elapsedRealtime2 - this.mActiveTimeLastUpdateRealtimeMs)
+                                    + this.mActiveTimeTotalMs;
                     this.mActiveTimeLastUpdateRealtimeMs = elapsedRealtime2;
                 }
                 if (this.mForegroundRequestCount > 0) {
                     long elapsedRealtime3 = SystemClock.elapsedRealtime();
-                    this.mForegroundTimeTotalMs = (elapsedRealtime3 - this.mForegroundTimeLastUpdateRealtimeMs) + this.mForegroundTimeTotalMs;
+                    this.mForegroundTimeTotalMs =
+                            (elapsedRealtime3 - this.mForegroundTimeLastUpdateRealtimeMs)
+                                    + this.mForegroundTimeTotalMs;
                     this.mForegroundTimeLastUpdateRealtimeMs = elapsedRealtime3;
                 }
             } catch (Throwable th) {
@@ -99,7 +118,10 @@ public final class LocationEventLog extends LocalEventLog {
             sb.append(TimeUtils.formatDuration(this.mAddedTimeTotalMs));
             sb.append(", tracking mode = ");
             boolean z = this.mHasFullTracking;
-            sb.append((z && this.mHasDutyCycling) ? "mixed tracking mode" : z ? "always full-tracking" : "always duty-cycling");
+            sb.append(
+                    (z && this.mHasDutyCycling)
+                            ? "mixed tracking mode"
+                            : z ? "always full-tracking" : "always duty-cycling");
             sb.append(", GNSS measurement events = ");
             sb.append(this.mReceivedMeasurementEventCount);
             return sb.toString();
@@ -108,7 +130,9 @@ public final class LocationEventLog extends LocalEventLog {
         public final synchronized void updateTotals() {
             if (this.mAddedRequestCount > 0) {
                 long elapsedRealtime = SystemClock.elapsedRealtime();
-                this.mAddedTimeTotalMs = (elapsedRealtime - this.mAddedTimeLastUpdateRealtimeMs) + this.mAddedTimeTotalMs;
+                this.mAddedTimeTotalMs =
+                        (elapsedRealtime - this.mAddedTimeLastUpdateRealtimeMs)
+                                + this.mAddedTimeTotalMs;
                 this.mAddedTimeLastUpdateRealtimeMs = elapsedRealtime;
             }
         }
@@ -120,7 +144,10 @@ public final class LocationEventLog extends LocalEventLog {
         public final CallerIdentity mIdentity;
         public final boolean mRegistered;
 
-        public GnssMeasurementClientRegisterEvent(boolean z, CallerIdentity callerIdentity, GnssMeasurementRequest gnssMeasurementRequest) {
+        public GnssMeasurementClientRegisterEvent(
+                boolean z,
+                CallerIdentity callerIdentity,
+                GnssMeasurementRequest gnssMeasurementRequest) {
             this.mRegistered = z;
             this.mIdentity = callerIdentity;
             this.mGnssMeasurementRequest = gnssMeasurementRequest;
@@ -130,7 +157,10 @@ public final class LocationEventLog extends LocalEventLog {
             if (!this.mRegistered) {
                 return "gnss measurements -registration " + this.mIdentity;
             }
-            return "gnss measurements +registration " + this.mIdentity + " -> " + this.mGnssMeasurementRequest;
+            return "gnss measurements +registration "
+                    + this.mIdentity
+                    + " -> "
+                    + this.mGnssMeasurementRequest;
         }
     }
 
@@ -145,7 +175,10 @@ public final class LocationEventLog extends LocalEventLog {
         }
 
         public final String toString() {
-            return "gnss measurements delivered GnssMeasurements[" + this.mNumGnssMeasurements + "] to " + this.mIdentity;
+            return "gnss measurements delivered GnssMeasurements["
+                    + this.mNumGnssMeasurements
+                    + "] to "
+                    + this.mIdentity;
         }
     }
 
@@ -195,13 +228,24 @@ public final class LocationEventLog extends LocalEventLog {
 
         public final String toString() {
             int i = this.mLocationPowerSaveMode;
-            return "location power save mode changed to ".concat(i != 0 ? i != 1 ? i != 2 ? i != 3 ? i != 4 ? "UNKNOWN" : "THROTTLE_REQUESTS_WHEN_SCREEN_OFF" : "FOREGROUND_ONLY" : "ALL_DISABLED_WHEN_SCREEN_OFF" : "GPS_DISABLED_WHEN_SCREEN_OFF" : "NO_CHANGE");
+            return "location power save mode changed to "
+                    .concat(
+                            i != 0
+                                    ? i != 1
+                                            ? i != 2
+                                                    ? i != 3
+                                                            ? i != 4
+                                                                    ? "UNKNOWN"
+                                                                    : "THROTTLE_REQUESTS_WHEN_SCREEN_OFF"
+                                                            : "FOREGROUND_ONLY"
+                                                    : "ALL_DISABLED_WHEN_SCREEN_OFF"
+                                            : "GPS_DISABLED_WHEN_SCREEN_OFF"
+                                    : "NO_CHANGE");
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class LocationsEventLog extends LocalEventLog {
-    }
+    public final class LocationsEventLog extends LocalEventLog {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProviderClientPermittedEvent extends ProviderEvent {
@@ -210,7 +254,8 @@ public final class LocationEventLog extends LocalEventLog {
         public final boolean mPermitted;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public /* synthetic */ ProviderClientPermittedEvent(String str, boolean z, Object obj, int i) {
+        public /* synthetic */ ProviderClientPermittedEvent(
+                String str, boolean z, Object obj, int i) {
             super(str);
             this.$r8$classId = i;
             this.mPermitted = z;
@@ -253,7 +298,11 @@ public final class LocationEventLog extends LocalEventLog {
         public final LocationRequest mLocationRequest;
         public final boolean mRegistered;
 
-        public ProviderClientRegisterEvent(String str, boolean z, CallerIdentity callerIdentity, LocationRequest locationRequest) {
+        public ProviderClientRegisterEvent(
+                String str,
+                boolean z,
+                CallerIdentity callerIdentity,
+                LocationRequest locationRequest) {
             super(str);
             this.mRegistered = z;
             this.mIdentity = callerIdentity;
@@ -264,11 +313,13 @@ public final class LocationEventLog extends LocalEventLog {
             boolean z = this.mRegistered;
             String str = this.mProvider;
             if (!z) {
-                StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m(str, " provider -registration ");
+                StringBuilder m =
+                        Preconditions$$ExternalSyntheticOutline0.m(str, " provider -registration ");
                 m.append(this.mIdentity);
                 return m.toString();
             }
-            StringBuilder m2 = Preconditions$$ExternalSyntheticOutline0.m(str, " provider +registration ");
+            StringBuilder m2 =
+                    Preconditions$$ExternalSyntheticOutline0.m(str, " provider +registration ");
             m2.append(this.mIdentity);
             m2.append(" -> ");
             m2.append(this.mLocationRequest);
@@ -288,7 +339,11 @@ public final class LocationEventLog extends LocalEventLog {
         }
 
         public final String toString() {
-            return this.mProvider + " provider delivered location[" + this.mNumLocations + "] to " + this.mIdentity;
+            return this.mProvider
+                    + " provider delivered location["
+                    + this.mNumLocations
+                    + "] to "
+                    + this.mIdentity;
         }
     }
 
@@ -335,7 +390,11 @@ public final class LocationEventLog extends LocalEventLog {
         public final String toString() {
             boolean z = this.mMocked;
             String str = this.mProvider;
-            return z ? ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, " provider added mock provider override") : ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, " provider removed mock provider override");
+            return z
+                    ? ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                            str, " provider added mock provider override")
+                    : ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                            str, " provider removed mock provider override");
         }
     }
 
@@ -420,12 +479,15 @@ public final class LocationEventLog extends LocalEventLog {
         return aggregateStats;
     }
 
-    public final GnssMeasurementAggregateStats getGnssMeasurementAggregateStats(CallerIdentity callerIdentity) {
+    public final GnssMeasurementAggregateStats getGnssMeasurementAggregateStats(
+            CallerIdentity callerIdentity) {
         GnssMeasurementAggregateStats gnssMeasurementAggregateStats;
         synchronized (this.mGnssMeasAggregateStats) {
             try {
                 CallerIdentity forAggregation = CallerIdentity.forAggregation(callerIdentity);
-                gnssMeasurementAggregateStats = (GnssMeasurementAggregateStats) this.mGnssMeasAggregateStats.get(forAggregation);
+                gnssMeasurementAggregateStats =
+                        (GnssMeasurementAggregateStats)
+                                this.mGnssMeasAggregateStats.get(forAggregation);
                 if (gnssMeasurementAggregateStats == null) {
                     gnssMeasurementAggregateStats = new GnssMeasurementAggregateStats();
                     gnssMeasurementAggregateStats.mFastestIntervalMs = Long.MAX_VALUE;
@@ -440,9 +502,15 @@ public final class LocationEventLog extends LocalEventLog {
     }
 
     public final void iterate(String str, Consumer consumer) {
-        LocationEventLog$$ExternalSyntheticLambda0 locationEventLog$$ExternalSyntheticLambda0 = new LocationEventLog$$ExternalSyntheticLambda0(str, new StringBuilder(), System.currentTimeMillis() - SystemClock.elapsedRealtime(), consumer);
+        LocationEventLog$$ExternalSyntheticLambda0 locationEventLog$$ExternalSyntheticLambda0 =
+                new LocationEventLog$$ExternalSyntheticLambda0(
+                        str,
+                        new StringBuilder(),
+                        System.currentTimeMillis() - SystemClock.elapsedRealtime(),
+                        consumer);
         synchronized (this) {
-            LocalEventLog.iterate(locationEventLog$$ExternalSyntheticLambda0, this, this.mLocationsLog);
+            LocalEventLog.iterate(
+                    locationEventLog$$ExternalSyntheticLambda0, this, this.mLocationsLog);
         }
     }
 
@@ -463,11 +531,14 @@ public final class LocationEventLog extends LocalEventLog {
         }
     }
 
-    public final void logProviderDeliveredLocations(String str, int i, CallerIdentity callerIdentity) {
+    public final void logProviderDeliveredLocations(
+            String str, int i, CallerIdentity callerIdentity) {
         synchronized (this) {
             LocationsEventLog locationsEventLog = this.mLocationsLog;
             locationsEventLog.getClass();
-            locationsEventLog.addLog(SystemClock.elapsedRealtime(), new ProviderDeliverLocationEvent(str, i, callerIdentity));
+            locationsEventLog.addLog(
+                    SystemClock.elapsedRealtime(),
+                    new ProviderDeliverLocationEvent(str, i, callerIdentity));
         }
         AggregateStats aggregateStats = getAggregateStats(str, callerIdentity);
         synchronized (aggregateStats) {

@@ -2,33 +2,35 @@ package android.media;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class AudioMixerAttributes implements Parcelable {
-    public static final Parcelable.Creator<AudioMixerAttributes> CREATOR = new Parcelable.Creator<AudioMixerAttributes>() { // from class: android.media.AudioMixerAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioMixerAttributes createFromParcel(Parcel p) {
-            return new AudioMixerAttributes(p);
-        }
+    public static final Parcelable.Creator<AudioMixerAttributes> CREATOR =
+            new Parcelable.Creator<
+                    AudioMixerAttributes>() { // from class: android.media.AudioMixerAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioMixerAttributes createFromParcel(Parcel p) {
+                    return new AudioMixerAttributes(p);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioMixerAttributes[] newArray(int size) {
-            return new AudioMixerAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioMixerAttributes[] newArray(int size) {
+                    return new AudioMixerAttributes[size];
+                }
+            };
     public static final int MIXER_BEHAVIOR_BIT_PERFECT = 1;
     public static final int MIXER_BEHAVIOR_DEFAULT = 0;
     private final AudioFormat mFormat;
     private final int mMixerBehavior;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MixerBehavior {
-    }
+    public @interface MixerBehavior {}
 
     AudioMixerAttributes(AudioFormat format, int mixerBehavior) {
         this.mFormat = format;
@@ -99,7 +101,11 @@ public final class AudioMixerAttributes implements Parcelable {
     }
 
     public String toString() {
-        return new String("AudioMixerAttributes: format:" + this.mFormat.toString() + " mixer behavior:" + mixerBehaviorToString(this.mMixerBehavior));
+        return new String(
+                "AudioMixerAttributes: format:"
+                        + this.mFormat.toString()
+                        + " mixer behavior:"
+                        + mixerBehaviorToString(this.mMixerBehavior));
     }
 
     @Override // android.os.Parcelable
@@ -114,7 +120,9 @@ public final class AudioMixerAttributes implements Parcelable {
     }
 
     private AudioMixerAttributes(Parcel in) {
-        this.mFormat = (AudioFormat) in.readParcelable(AudioFormat.class.getClassLoader(), AudioFormat.class);
+        this.mFormat =
+                (AudioFormat)
+                        in.readParcelable(AudioFormat.class.getClassLoader(), AudioFormat.class);
         this.mMixerBehavior = in.readInt();
     }
 }

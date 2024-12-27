@@ -18,20 +18,16 @@ public interface IAccessibilityManagerClient extends IInterface {
 
     public static class Default implements IAccessibilityManagerClient {
         @Override // android.view.accessibility.IAccessibilityManagerClient
-        public void setState(int stateFlags) throws RemoteException {
-        }
+        public void setState(int stateFlags) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManagerClient
-        public void notifyServicesStateChanged(long updatedUiTimeout) throws RemoteException {
-        }
+        public void notifyServicesStateChanged(long updatedUiTimeout) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManagerClient
-        public void setRelevantEventTypes(int eventTypes) throws RemoteException {
-        }
+        public void setRelevantEventTypes(int eventTypes) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManagerClient
-        public void setFocusAppearance(int strokeWidth, int color) throws RemoteException {
-        }
+        public void setFocusAppearance(int strokeWidth, int color) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -39,8 +35,9 @@ public interface IAccessibilityManagerClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAccessibilityManagerClient {
-        public static final String DESCRIPTOR = "android.view.accessibility.IAccessibilityManagerClient";
+    public abstract static class Stub extends Binder implements IAccessibilityManagerClient {
+        public static final String DESCRIPTOR =
+                "android.view.accessibility.IAccessibilityManagerClient";
         static final int TRANSACTION_notifyServicesStateChanged = 2;
         static final int TRANSACTION_setFocusAppearance = 4;
         static final int TRANSACTION_setRelevantEventTypes = 3;
@@ -87,7 +84,8 @@ public interface IAccessibilityManagerClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

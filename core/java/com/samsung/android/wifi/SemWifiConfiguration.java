@@ -3,6 +3,7 @@ package com.samsung.android.wifi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -39,36 +40,51 @@ public class SemWifiConfiguration implements Parcelable {
     public int networkDisableReason;
     public int networkScore;
     public int personalizedConnectionOption;
-    public static final String[] networkDisableReasonStrings = {"DISABLED_NONE", "DISABLED_SUSPICIOUS_NETWORK", "DISABLED_AUTHENTICATION_FAILURE", "DISABLED_ASSOCIATION_REJECTED", "DISABLED_DHCP_FAILED", "DISABLED_CAPTIVE_PORTAL", "DISABLED_TEMPORARY_NO_INTERNET", "DISABLED_PERMANENTLY_NO_INTERNET", "DISABLED_PERMANENTLY_NO_INTERNET_INITIAL", "DISABLED_TEMPORARY_ELE_DETECTION", "DISABLED_TEMPORARY_SILENT_ROAMING", "DISABLED_AUTHENTICATION_CA_CERTIFICATION_ERROR"};
-    public static final Parcelable.Creator<SemWifiConfiguration> CREATOR = new Parcelable.Creator<SemWifiConfiguration>() { // from class: com.samsung.android.wifi.SemWifiConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiConfiguration createFromParcel(Parcel in) {
-            SemWifiConfiguration config = new SemWifiConfiguration();
-            config.configKey = in.readString();
-            config.networkScore = in.readInt();
-            config.isCaptivePortal = in.readBoolean();
-            config.isLockDown = in.readBoolean();
-            config.isNoInternetAccessExpected = in.readBoolean();
-            config.disableTimeByWcm = in.readLong();
-            config.disableTimeByEle = in.readLong();
-            config.altNetworkTargetRssi = in.readInt();
-            config.networkDisableReason = in.readInt();
-            config.creationTime = in.readLong();
-            config.personalizedConnectionOption = in.readInt();
-            return config;
-        }
-
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiConfiguration[] newArray(int size) {
-            return new SemWifiConfiguration[size];
-        }
+    public static final String[] networkDisableReasonStrings = {
+        "DISABLED_NONE",
+        "DISABLED_SUSPICIOUS_NETWORK",
+        "DISABLED_AUTHENTICATION_FAILURE",
+        "DISABLED_ASSOCIATION_REJECTED",
+        "DISABLED_DHCP_FAILED",
+        "DISABLED_CAPTIVE_PORTAL",
+        "DISABLED_TEMPORARY_NO_INTERNET",
+        "DISABLED_PERMANENTLY_NO_INTERNET",
+        "DISABLED_PERMANENTLY_NO_INTERNET_INITIAL",
+        "DISABLED_TEMPORARY_ELE_DETECTION",
+        "DISABLED_TEMPORARY_SILENT_ROAMING",
+        "DISABLED_AUTHENTICATION_CA_CERTIFICATION_ERROR"
     };
+    public static final Parcelable.Creator<SemWifiConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    SemWifiConfiguration>() { // from class:
+                                              // com.samsung.android.wifi.SemWifiConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiConfiguration createFromParcel(Parcel in) {
+                    SemWifiConfiguration config = new SemWifiConfiguration();
+                    config.configKey = in.readString();
+                    config.networkScore = in.readInt();
+                    config.isCaptivePortal = in.readBoolean();
+                    config.isLockDown = in.readBoolean();
+                    config.isNoInternetAccessExpected = in.readBoolean();
+                    config.disableTimeByWcm = in.readLong();
+                    config.disableTimeByEle = in.readLong();
+                    config.altNetworkTargetRssi = in.readInt();
+                    config.networkDisableReason = in.readInt();
+                    config.creationTime = in.readLong();
+                    config.personalizedConnectionOption = in.readInt();
+                    return config;
+                }
+
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiConfiguration[] newArray(int size) {
+                    return new SemWifiConfiguration[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SemNetworkDisableReason {
-    }
+    public @interface SemNetworkDisableReason {}
 
     SemWifiConfiguration() {
         this.configKey = "";
@@ -124,7 +140,8 @@ public class SemWifiConfiguration implements Parcelable {
             sbuf.append(" NoInternetAccessExpected").append("\n");
         }
         if (this.networkDisableReason >= 0 && this.networkDisableReason < 12) {
-            sbuf.append(" disableReason: ").append(networkDisableReasonStrings[this.networkDisableReason]);
+            sbuf.append(" disableReason: ")
+                    .append(networkDisableReasonStrings[this.networkDisableReason]);
             if (this.disableTimeByWcm != 0) {
                 sbuf.append(" disableTimeByWcm: ").append(this.disableTimeByWcm);
             }
@@ -137,7 +154,9 @@ public class SemWifiConfiguration implements Parcelable {
         }
         sbuf.append(" networkScore: ").append(this.networkScore).append("\n");
         sbuf.append(" cTime: ").append(this.creationTime).append("\n");
-        sbuf.append(" personalizedConnectionOption: ").append(Integer.toHexString(this.personalizedConnectionOption)).append("\n");
+        sbuf.append(" personalizedConnectionOption: ")
+                .append(Integer.toHexString(this.personalizedConnectionOption))
+                .append("\n");
         return sbuf.toString();
     }
 
@@ -150,7 +169,12 @@ public class SemWifiConfiguration implements Parcelable {
             return false;
         }
         SemWifiConfiguration other = (SemWifiConfiguration) obj;
-        return matches(other) && this.networkScore == other.networkScore && this.isCaptivePortal == other.isCaptivePortal && this.isNoInternetAccessExpected == other.isNoInternetAccessExpected && this.networkDisableReason == other.networkDisableReason && this.isLockDown == other.isLockDown;
+        return matches(other)
+                && this.networkScore == other.networkScore
+                && this.isCaptivePortal == other.isCaptivePortal
+                && this.isNoInternetAccessExpected == other.isNoInternetAccessExpected
+                && this.networkDisableReason == other.networkDisableReason
+                && this.isLockDown == other.isLockDown;
     }
 
     @Override // android.os.Parcelable

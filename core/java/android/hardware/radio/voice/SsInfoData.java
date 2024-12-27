@@ -3,26 +3,29 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SsInfoData implements Parcelable {
-    public static final Parcelable.Creator<SsInfoData> CREATOR = new Parcelable.Creator<SsInfoData>() { // from class: android.hardware.radio.voice.SsInfoData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SsInfoData createFromParcel(Parcel _aidl_source) {
-            SsInfoData _aidl_out = new SsInfoData();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SsInfoData> CREATOR =
+            new Parcelable.Creator<
+                    SsInfoData>() { // from class: android.hardware.radio.voice.SsInfoData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SsInfoData createFromParcel(Parcel _aidl_source) {
+                    SsInfoData _aidl_out = new SsInfoData();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SsInfoData[] newArray(int _aidl_size) {
-            return new SsInfoData[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SsInfoData[] newArray(int _aidl_size) {
+                    return new SsInfoData[_aidl_size];
+                }
+            };
     public static final int SS_INFO_MAX = 4;
     public int[] ssInfo;
 

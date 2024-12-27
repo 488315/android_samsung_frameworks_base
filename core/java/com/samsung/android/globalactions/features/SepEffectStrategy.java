@@ -2,6 +2,7 @@ package com.samsung.android.globalactions.features;
 
 import android.view.Window;
 import android.view.WindowManager;
+
 import com.samsung.android.globalactions.presentation.strategies.WindowDecorationStrategy;
 
 /* loaded from: classes6.dex */

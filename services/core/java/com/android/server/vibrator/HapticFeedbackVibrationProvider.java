@@ -7,6 +7,7 @@ import android.os.Vibrator;
 import android.os.VibratorInfo;
 import android.os.vibrator.Flags;
 import android.util.SparseArray;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
@@ -17,10 +18,14 @@ public final class HapticFeedbackVibrationProvider {
     public boolean mIsDcMotor;
     public final float mKeyboardVibrationFixedAmplitude;
     public final VibratorInfo mVibratorInfo;
-    public static final VibrationAttributes TOUCH_VIBRATION_ATTRIBUTES = VibrationAttributes.createForUsage(18);
-    public static final VibrationAttributes PHYSICAL_EMULATION_VIBRATION_ATTRIBUTES = VibrationAttributes.createForUsage(34);
-    public static final VibrationAttributes HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES = VibrationAttributes.createForUsage(50);
-    public static final VibrationAttributes COMMUNICATION_REQUEST_VIBRATION_ATTRIBUTES = VibrationAttributes.createForUsage(65);
+    public static final VibrationAttributes TOUCH_VIBRATION_ATTRIBUTES =
+            VibrationAttributes.createForUsage(18);
+    public static final VibrationAttributes PHYSICAL_EMULATION_VIBRATION_ATTRIBUTES =
+            VibrationAttributes.createForUsage(34);
+    public static final VibrationAttributes HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES =
+            VibrationAttributes.createForUsage(50);
+    public static final VibrationAttributes COMMUNICATION_REQUEST_VIBRATION_ATTRIBUTES =
+            VibrationAttributes.createForUsage(65);
 
     public HapticFeedbackVibrationProvider(Resources resources, Vibrator vibrator) {
         this(resources, vibrator.getInfo());
@@ -31,7 +36,8 @@ public final class HapticFeedbackVibrationProvider {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public HapticFeedbackVibrationProvider(android.content.res.Resources r4, android.os.VibratorInfo r5) {
+    public HapticFeedbackVibrationProvider(
+            android.content.res.Resources r4, android.os.VibratorInfo r5) {
         /*
             r3 = this;
             android.util.SparseArray r0 = com.android.server.vibrator.HapticFeedbackCustomization.loadVibrationsInternal(r4, r5)     // Catch: java.lang.Throwable -> L5 java.lang.Throwable -> Le
@@ -52,13 +58,18 @@ public final class HapticFeedbackVibrationProvider {
             r3.<init>(r4, r5, r0)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.vibrator.HapticFeedbackVibrationProvider.<init>(android.content.res.Resources, android.os.VibratorInfo):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.vibrator.HapticFeedbackVibrationProvider.<init>(android.content.res.Resources,"
+                    + " android.os.VibratorInfo):void");
     }
 
-    public HapticFeedbackVibrationProvider(Resources resources, VibratorInfo vibratorInfo, SparseArray sparseArray) {
+    public HapticFeedbackVibrationProvider(
+            Resources resources, VibratorInfo vibratorInfo, SparseArray sparseArray) {
         this.mIsDcMotor = false;
         this.mVibratorInfo = vibratorInfo;
-        this.mHapticTextHandleEnabled = resources.getBoolean(R.bool.config_enableNewAutoSelectNetworkUI);
+        this.mHapticTextHandleEnabled =
+                resources.getBoolean(R.bool.config_enableNewAutoSelectNetworkUI);
         if (sparseArray != null && sparseArray.size() == 0) {
             sparseArray = null;
         }
@@ -72,7 +83,8 @@ public final class HapticFeedbackVibrationProvider {
         }
     }
 
-    public final VibrationAttributes getVibrationAttributesForHapticFeedback(int i, boolean z, boolean z2) {
+    public final VibrationAttributes getVibrationAttributesForHapticFeedback(
+            int i, boolean z, boolean z2) {
         VibrationAttributes build;
         boolean scrollFeedbackApi;
         if (i != 3 && i != 7) {
@@ -101,7 +113,12 @@ public final class HapticFeedbackVibrationProvider {
                 build = PHYSICAL_EMULATION_VIBRATION_ATTRIBUTES;
             }
         } else {
-            build = (Flags.keyboardCategoryEnabled() && z2) ? new VibrationAttributes.Builder(TOUCH_VIBRATION_ATTRIBUTES).setCategory(1).build() : TOUCH_VIBRATION_ATTRIBUTES;
+            build =
+                    (Flags.keyboardCategoryEnabled() && z2)
+                            ? new VibrationAttributes.Builder(TOUCH_VIBRATION_ATTRIBUTES)
+                                    .setCategory(1)
+                                    .build()
+                            : TOUCH_VIBRATION_ATTRIBUTES;
         }
         boolean z3 = false;
         int i2 = z ? 2 : 0;
@@ -118,7 +135,10 @@ public final class HapticFeedbackVibrationProvider {
         if (scrollFeedbackApi) {
             i2 |= 1;
         }
-        if (Flags.keyboardCategoryEnabled() && this.mKeyboardVibrationFixedAmplitude >= FullScreenMagnificationGestureHandler.MAX_SCALE && z2) {
+        if (Flags.keyboardCategoryEnabled()
+                && this.mKeyboardVibrationFixedAmplitude
+                        >= FullScreenMagnificationGestureHandler.MAX_SCALE
+                && z2) {
             if (i == 3) {
                 z3 = this.mVibratorInfo.isPrimitiveSupported(1);
             } else if (i == 7) {

@@ -5,13 +5,15 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.PackageUtils;
+
+import libcore.util.HexEncoding;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.security.PublicKey;
 import java.security.cert.CertificateException;
 import java.util.Arrays;
 import java.util.Set;
-import libcore.util.HexEncoding;
 
 /* loaded from: classes.dex */
 public final class SigningDetails implements Parcelable {
@@ -22,22 +24,24 @@ public final class SigningDetails implements Parcelable {
     private final int mSignatureSchemeVersion;
     private final Signature[] mSignatures;
     public static final SigningDetails UNKNOWN = new SigningDetails(null, 0, null, null);
-    public static final Parcelable.Creator<SigningDetails> CREATOR = new Parcelable.Creator<SigningDetails>() { // from class: android.content.pm.SigningDetails.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SigningDetails createFromParcel(Parcel source) {
-            if (source.readBoolean()) {
-                return SigningDetails.UNKNOWN;
-            }
-            return new SigningDetails(source);
-        }
+    public static final Parcelable.Creator<SigningDetails> CREATOR =
+            new Parcelable.Creator<
+                    SigningDetails>() { // from class: android.content.pm.SigningDetails.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SigningDetails createFromParcel(Parcel source) {
+                    if (source.readBoolean()) {
+                        return SigningDetails.UNKNOWN;
+                    }
+                    return new SigningDetails(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SigningDetails[] newArray(int size) {
-            return new SigningDetails[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SigningDetails[] newArray(int size) {
+                    return new SigningDetails[size];
+                }
+            };
 
     public @interface CapabilityMergeRule {
         public static final int MERGE_OTHER_CAPABILITY = 1;
@@ -62,18 +66,29 @@ public final class SigningDetails implements Parcelable {
         public static final int UNKNOWN = 0;
     }
 
-    public SigningDetails(Signature[] signatures, int signatureSchemeVersion, ArraySet<PublicKey> keys, Signature[] pastSigningCertificates) {
+    public SigningDetails(
+            Signature[] signatures,
+            int signatureSchemeVersion,
+            ArraySet<PublicKey> keys,
+            Signature[] pastSigningCertificates) {
         this.mSignatures = signatures;
         this.mSignatureSchemeVersion = signatureSchemeVersion;
         this.mPublicKeys = keys;
         this.mPastSigningCertificates = pastSigningCertificates;
     }
 
-    public SigningDetails(Signature[] signatures, int signatureSchemeVersion, Signature[] pastSigningCertificates) throws CertificateException {
-        this(signatures, signatureSchemeVersion, toSigningKeys(signatures), pastSigningCertificates);
+    public SigningDetails(
+            Signature[] signatures, int signatureSchemeVersion, Signature[] pastSigningCertificates)
+            throws CertificateException {
+        this(
+                signatures,
+                signatureSchemeVersion,
+                toSigningKeys(signatures),
+                pastSigningCertificates);
     }
 
-    public SigningDetails(Signature[] signatures, int signatureSchemeVersion) throws CertificateException {
+    public SigningDetails(Signature[] signatures, int signatureSchemeVersion)
+            throws CertificateException {
         this(signatures, signatureSchemeVersion, null);
     }
 
@@ -106,7 +121,10 @@ public final class SigningDetails implements Parcelable {
 
     public SigningDetails mergeLineageWith(SigningDetails otherSigningDetails, int mergeRule) {
         if (!hasPastSigningCertificates()) {
-            return (otherSigningDetails.hasPastSigningCertificates() && otherSigningDetails.hasAncestorOrSelf(this)) ? otherSigningDetails : this;
+            return (otherSigningDetails.hasPastSigningCertificates()
+                            && otherSigningDetails.hasAncestorOrSelf(this))
+                    ? otherSigningDetails
+                    : this;
         }
         if (!otherSigningDetails.hasPastSigningCertificates()) {
             return this;
@@ -123,23 +141,27 @@ public final class SigningDetails implements Parcelable {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0091, code lost:
-    
-        if (r7 < 0) goto L54;
-     */
+
+       if (r7 < 0) goto L54;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0093, code lost:
-    
-        return r10;
-     */
+
+       return r10;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.content.pm.SigningDetails mergeLineageWithAncestorOrSelf(android.content.pm.SigningDetails r11, int r12) {
+    private android.content.pm.SigningDetails mergeLineageWithAncestorOrSelf(
+            android.content.pm.SigningDetails r11, int r12) {
         /*
             Method dump skipped, instructions count: 250
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.pm.SigningDetails.mergeLineageWithAncestorOrSelf(android.content.pm.SigningDetails, int):android.content.pm.SigningDetails");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.content.pm.SigningDetails.mergeLineageWithAncestorOrSelf(android.content.pm.SigningDetails,"
+                    + " int):android.content.pm.SigningDetails");
     }
 
     public boolean hasCommonAncestor(SigningDetails otherSigningDetails) {
@@ -168,13 +190,16 @@ public final class SigningDetails implements Parcelable {
             }
             return true;
         }
-        String signatureDigest2 = PackageUtils.computeSha256Digest(this.mSignatures[0].toByteArray());
+        String signatureDigest2 =
+                PackageUtils.computeSha256Digest(this.mSignatures[0].toByteArray());
         if (certDigests.contains(signatureDigest2)) {
             return true;
         }
         if (hasPastSigningCertificates()) {
             for (int i = 0; i < this.mPastSigningCertificates.length - 1; i++) {
-                String signatureDigest3 = PackageUtils.computeSha256Digest(this.mPastSigningCertificates[i].toByteArray());
+                String signatureDigest3 =
+                        PackageUtils.computeSha256Digest(
+                                this.mPastSigningCertificates[i].toByteArray());
                 if (certDigests.contains(signatureDigest3)) {
                     return true;
                 }
@@ -198,7 +223,9 @@ public final class SigningDetails implements Parcelable {
         }
         int descendantIndex = descendantSigningDetails.mPastSigningCertificates.length - 1;
         int ancestorIndex = ancestorSigningDetails.mPastSigningCertificates.length - 1;
-        while (descendantIndex >= 0 && !descendantSigningDetails.mPastSigningCertificates[descendantIndex].equals(ancestorSigningDetails.mPastSigningCertificates[ancestorIndex])) {
+        while (descendantIndex >= 0
+                && !descendantSigningDetails.mPastSigningCertificates[descendantIndex].equals(
+                        ancestorSigningDetails.mPastSigningCertificates[ancestorIndex])) {
             descendantIndex--;
         }
         if (descendantIndex < 0) {
@@ -210,7 +237,8 @@ public final class SigningDetails implements Parcelable {
             if (descendantIndex < 0 || ancestorIndex < 0) {
                 break;
             }
-        } while (descendantSigningDetails.mPastSigningCertificates[descendantIndex].equals(ancestorSigningDetails.mPastSigningCertificates[ancestorIndex]));
+        } while (descendantSigningDetails.mPastSigningCertificates[descendantIndex].equals(
+                ancestorSigningDetails.mPastSigningCertificates[ancestorIndex]));
         if (descendantIndex < 0 || ancestorIndex < 0) {
             return descendantSigningDetails;
         }
@@ -239,7 +267,10 @@ public final class SigningDetails implements Parcelable {
     }
 
     public boolean hasAncestor(SigningDetails oldDetails) {
-        if (this != UNKNOWN && oldDetails != UNKNOWN && hasPastSigningCertificates() && oldDetails.mSignatures.length == 1) {
+        if (this != UNKNOWN
+                && oldDetails != UNKNOWN
+                && hasPastSigningCertificates()
+                && oldDetails.mSignatures.length == 1) {
             for (int i = 0; i < this.mPastSigningCertificates.length - 1; i++) {
                 if (this.mPastSigningCertificates[i].equals(oldDetails.mSignatures[0])) {
                     return true;
@@ -267,7 +298,8 @@ public final class SigningDetails implements Parcelable {
         }
         if (hasPastSigningCertificates()) {
             for (int i = 0; i < this.mPastSigningCertificates.length - 1; i++) {
-                if (otherSignatures.contains(this.mPastSigningCertificates[i]) && (this.mPastSigningCertificates[i].getFlags() & flags) == flags) {
+                if (otherSignatures.contains(this.mPastSigningCertificates[i])
+                        && (this.mPastSigningCertificates[i].getFlags() & flags) == flags) {
                     return true;
                 }
             }
@@ -288,13 +320,16 @@ public final class SigningDetails implements Parcelable {
         return hasCertificate(oldDetails.mSignatures[0], flags);
     }
 
-    public boolean checkCapabilityRecover(SigningDetails oldDetails, int flags) throws CertificateException {
+    public boolean checkCapabilityRecover(SigningDetails oldDetails, int flags)
+            throws CertificateException {
         if (oldDetails == UNKNOWN || this == UNKNOWN) {
             return false;
         }
         if (hasPastSigningCertificates() && oldDetails.mSignatures.length == 1) {
             for (int i = 0; i < this.mPastSigningCertificates.length; i++) {
-                if (Signature.areEffectiveMatch(oldDetails.mSignatures[0], this.mPastSigningCertificates[i]) && this.mPastSigningCertificates[i].getFlags() == flags) {
+                if (Signature.areEffectiveMatch(
+                                oldDetails.mSignatures[0], this.mPastSigningCertificates[i])
+                        && this.mPastSigningCertificates[i].getFlags() == flags) {
                     return true;
                 }
             }
@@ -322,7 +357,10 @@ public final class SigningDetails implements Parcelable {
         }
         if (hasPastSigningCertificates()) {
             for (int i = 0; i < this.mPastSigningCertificates.length - 1; i++) {
-                if (this.mPastSigningCertificates[i].equals(signature) && (flags == 0 || (this.mPastSigningCertificates[i].getFlags() & flags) == flags)) {
+                if (this.mPastSigningCertificates[i].equals(signature)
+                        && (flags == 0
+                                || (this.mPastSigningCertificates[i].getFlags() & flags)
+                                        == flags)) {
                     return true;
                 }
             }
@@ -338,8 +376,10 @@ public final class SigningDetails implements Parcelable {
         if (hasSha256Certificate(sha256Bytes, flags)) {
             return true;
         }
-        String[] mSignaturesSha256Digests = PackageUtils.computeSignaturesSha256Digests(this.mSignatures);
-        String mSignaturesSha256Digest = PackageUtils.computeSignaturesSha256Digest(mSignaturesSha256Digests);
+        String[] mSignaturesSha256Digests =
+                PackageUtils.computeSignaturesSha256Digests(this.mSignatures);
+        String mSignaturesSha256Digest =
+                PackageUtils.computeSignaturesSha256Digest(mSignaturesSha256Digests);
         return mSignaturesSha256Digest.equals(sha256String);
     }
 
@@ -357,8 +397,13 @@ public final class SigningDetails implements Parcelable {
         }
         if (hasPastSigningCertificates()) {
             for (int i = 0; i < this.mPastSigningCertificates.length - 1; i++) {
-                byte[] digest = PackageUtils.computeSha256DigestBytes(this.mPastSigningCertificates[i].toByteArray());
-                if (Arrays.equals(sha256Certificate, digest) && (flags == 0 || (this.mPastSigningCertificates[i].getFlags() & flags) == flags)) {
+                byte[] digest =
+                        PackageUtils.computeSha256DigestBytes(
+                                this.mPastSigningCertificates[i].toByteArray());
+                if (Arrays.equals(sha256Certificate, digest)
+                        && (flags == 0
+                                || (this.mPastSigningCertificates[i].getFlags() & flags)
+                                        == flags)) {
                     return true;
                 }
             }
@@ -408,7 +453,8 @@ public final class SigningDetails implements Parcelable {
             return false;
         }
         SigningDetails that = (SigningDetails) o;
-        if (this.mSignatureSchemeVersion != that.mSignatureSchemeVersion || !Signature.areExactMatch(this, that)) {
+        if (this.mSignatureSchemeVersion != that.mSignatureSchemeVersion
+                || !Signature.areExactMatch(this, that)) {
             return false;
         }
         if (this.mPublicKeys != null) {
@@ -423,7 +469,8 @@ public final class SigningDetails implements Parcelable {
         }
         if (this.mPastSigningCertificates != null) {
             for (int i = 0; i < this.mPastSigningCertificates.length; i++) {
-                if (this.mPastSigningCertificates[i].getFlags() != that.mPastSigningCertificates[i].getFlags()) {
+                if (this.mPastSigningCertificates[i].getFlags()
+                        != that.mPastSigningCertificates[i].getFlags()) {
                     return false;
                 }
             }
@@ -433,7 +480,10 @@ public final class SigningDetails implements Parcelable {
 
     public int hashCode() {
         int result = Arrays.hashCode(this.mSignatures);
-        return (((((result * 31) + this.mSignatureSchemeVersion) * 31) + (this.mPublicKeys != null ? this.mPublicKeys.hashCode() : 0)) * 31) + Arrays.hashCode(this.mPastSigningCertificates);
+        return (((((result * 31) + this.mSignatureSchemeVersion) * 31)
+                                + (this.mPublicKeys != null ? this.mPublicKeys.hashCode() : 0))
+                        * 31)
+                + Arrays.hashCode(this.mPastSigningCertificates);
     }
 
     public static class Builder {
@@ -458,17 +508,20 @@ public final class SigningDetails implements Parcelable {
 
         private void checkInvariants() {
             if (this.mSignatures == null) {
-                throw new IllegalStateException("SigningDetails requires the current signing certificates.");
+                throw new IllegalStateException(
+                        "SigningDetails requires the current signing certificates.");
             }
         }
 
         public SigningDetails build() throws CertificateException {
             checkInvariants();
-            return new SigningDetails(this.mSignatures, this.mSignatureSchemeVersion, this.mPastSigningCertificates);
+            return new SigningDetails(
+                    this.mSignatures, this.mSignatureSchemeVersion, this.mPastSigningCertificates);
         }
     }
 
-    public static ArraySet<PublicKey> toSigningKeys(Signature[] signatures) throws CertificateException {
+    public static ArraySet<PublicKey> toSigningKeys(Signature[] signatures)
+            throws CertificateException {
         ArraySet<PublicKey> keys = new ArraySet<>(signatures.length);
         for (Signature signature : signatures) {
             keys.add(signature.getPublicKey());
@@ -493,6 +546,5 @@ public final class SigningDetails implements Parcelable {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

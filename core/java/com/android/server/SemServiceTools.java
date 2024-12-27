@@ -3,9 +3,12 @@ package com.android.server;
 import android.security.keystore.KeyProperties;
 import android.text.format.DateFormat;
 import android.util.Log;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.Files;
@@ -28,9 +31,92 @@ import java.security.spec.InvalidKeySpecException;
 /* loaded from: classes5.dex */
 public class SemServiceTools {
     private static final String TAG = "SEC_ESE_ServiceTools";
-    public static final char[] HEX_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.CAPITAL_AM_PM, 'B', 'C', 'D', DateFormat.DAY, 'F'};
-    private static final byte[] x_cord = {71, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT, SprAttributeBase.TYPE_SHADOW, Byte.MAX_VALUE, -117, -100, 18, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT, Byte.MIN_VALUE, -115, 82, 102, MidiConstants.STATUS_NOTE_ON, -39, 70, 106, 5, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, 60, 2, -88, 62, 85, 57, MidiConstants.STATUS_PITCH_BEND, MidiConstants.STATUS_NOTE_ON, 21, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -114, -115, -9, 110};
-    private static final byte[] y_cord = {18, 15, -54, -43, 4, 126, MidiConstants.STATUS_MIDI_TIME_CODE, -95, -43, 106, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, 78, -85, -30, -124, -16, 111, -40, -45, -104, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT, 25, -81, -52, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN, 117, 100, -61, -83, -109, 56};
+    public static final char[] HEX_CHARS = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.CAPITAL_AM_PM,
+        'B',
+        'C',
+        'D',
+        DateFormat.DAY,
+        'F'
+    };
+    private static final byte[] x_cord = {
+        71,
+        SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT,
+        SprAttributeBase.TYPE_SHADOW,
+        Byte.MAX_VALUE,
+        -117,
+        -100,
+        18,
+        SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT,
+        Byte.MIN_VALUE,
+        -115,
+        82,
+        102,
+        MidiConstants.STATUS_NOTE_ON,
+        -39,
+        70,
+        106,
+        5,
+        SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33,
+        60,
+        2,
+        -88,
+        62,
+        85,
+        57,
+        MidiConstants.STATUS_PITCH_BEND,
+        MidiConstants.STATUS_NOTE_ON,
+        21,
+        SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+        -114,
+        -115,
+        -9,
+        110
+    };
+    private static final byte[] y_cord = {
+        18,
+        15,
+        -54,
+        -43,
+        4,
+        126,
+        MidiConstants.STATUS_MIDI_TIME_CODE,
+        -95,
+        -43,
+        106,
+        SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33,
+        SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN,
+        78,
+        -85,
+        -30,
+        -124,
+        -16,
+        111,
+        -40,
+        -45,
+        -104,
+        SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT,
+        25,
+        -81,
+        -52,
+        SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN,
+        117,
+        100,
+        -61,
+        -83,
+        -109,
+        56
+    };
 
     public static String getHexString(byte[] in) {
         StringBuilder sb = new StringBuilder();
@@ -109,11 +195,16 @@ public class SemServiceTools {
         }
         if (message != null && message.length >= 1) {
             if (rawSignature != null && rawSignature.length == 64) {
-                KeyPairGenerator kGen = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_EC);
+                KeyPairGenerator kGen =
+                        KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_EC);
                 ECGenParameterSpec ecSpec = new ECGenParameterSpec("secp256r1");
                 kGen.initialize(ecSpec);
                 KeyPair remoteKeyPair = kGen.generateKeyPair();
-                ECPublicKey pubKey = decodeECPublicKey(((ECPublicKey) remoteKeyPair.getPublic()).getParams(), x_cord, y_cord);
+                ECPublicKey pubKey =
+                        decodeECPublicKey(
+                                ((ECPublicKey) remoteKeyPair.getPublic()).getParams(),
+                                x_cord,
+                                y_cord);
                 Signature ecdsa = Signature.getInstance("SHA256withECDSA");
                 byte[] signature = getAsnSignature(rawSignature);
                 ecdsa.initVerify(pubKey);
@@ -129,7 +220,8 @@ public class SemServiceTools {
         return false;
     }
 
-    private static ECPublicKey decodeECPublicKey(ECParameterSpec params, byte[] x1, byte[] y1) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private static ECPublicKey decodeECPublicKey(ECParameterSpec params, byte[] x1, byte[] y1)
+            throws NoSuchAlgorithmException, InvalidKeySpecException {
         BigInteger x = new BigInteger(1, x1);
         BigInteger y = new BigInteger(1, y1);
         ECPoint w = new ECPoint(x, y);
@@ -149,21 +241,43 @@ public class SemServiceTools {
                 numOfPrefixZeroBytes++;
             }
             byte[] sig_r = new byte[rawSig_r.length - numOfPrefixZeroBytes];
-            System.arraycopy(rawSig_r, numOfPrefixZeroBytes, sig_r, 0, rawSig_r.length - numOfPrefixZeroBytes);
+            System.arraycopy(
+                    rawSig_r,
+                    numOfPrefixZeroBytes,
+                    sig_r,
+                    0,
+                    rawSig_r.length - numOfPrefixZeroBytes);
             int numOfPrefixZeroBytes2 = 0;
             while (rawSig_s[numOfPrefixZeroBytes2] == 0) {
                 numOfPrefixZeroBytes2++;
             }
             byte[] sig_s = new byte[rawSig_s.length - numOfPrefixZeroBytes2];
-            System.arraycopy(rawSig_s, numOfPrefixZeroBytes2, sig_s, 0, rawSig_s.length - numOfPrefixZeroBytes2);
+            System.arraycopy(
+                    rawSig_s,
+                    numOfPrefixZeroBytes2,
+                    sig_s,
+                    0,
+                    rawSig_s.length - numOfPrefixZeroBytes2);
             if ((sig_r[0] & 255) > 127) {
                 sig_r = concatenate((byte) 0, sig_r);
             }
             if ((sig_s[0] & 255) > 127) {
                 sig_s = concatenate((byte) 0, sig_s);
             }
-            byte[] sig = concatenate(concatenate(concatenate(concatenate(concatenate((byte) 2, (byte) sig_r.length), sig_r), (byte) 2), (byte) sig_s.length), sig_s);
-            byte[] sig2 = concatenate(SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, concatenate((byte) sig.length, sig));
+            byte[] sig =
+                    concatenate(
+                            concatenate(
+                                    concatenate(
+                                            concatenate(
+                                                    concatenate((byte) 2, (byte) sig_r.length),
+                                                    sig_r),
+                                            (byte) 2),
+                                    (byte) sig_s.length),
+                            sig_s);
+            byte[] sig2 =
+                    concatenate(
+                            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90,
+                            concatenate((byte) sig.length, sig));
             Log.d(TAG, "raw: " + bytesToHex(rawSig));
             Log.d(TAG, "encoded: " + bytesToHex(sig2));
             return sig2;
@@ -251,7 +365,10 @@ public class SemServiceTools {
             return finalSize3;
         }
         if (ccmData[offset] == -125) {
-            int finalSize4 = ((ccmData[offset + 1] & 255) << 16) + ((ccmData[offset + 2] & 255) << 8) + (ccmData[offset + 3] & 255);
+            int finalSize4 =
+                    ((ccmData[offset + 1] & 255) << 16)
+                            + ((ccmData[offset + 2] & 255) << 8)
+                            + (ccmData[offset + 3] & 255);
             return finalSize4;
         }
         Log.e(TAG, "Script Size Check error : -1");

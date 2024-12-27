@@ -1,10 +1,9 @@
 package android.hardware.camera2;
 
-import android.hardware.camera2.CaptureRequest;
-import android.hardware.camera2.CaptureResult;
 import android.os.RemoteException;
 import android.util.Size;
 import android.view.Surface;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
@@ -12,7 +11,7 @@ import java.util.Map;
 /* loaded from: classes2.dex */
 public abstract class DeviceInjectorSession implements AutoCloseable {
 
-    public static abstract class CharacteristicBuilder {
+    public abstract static class CharacteristicBuilder {
         public abstract CharacteristicBuilder addSupportedAEMode(int i);
 
         public abstract CharacteristicBuilder addSupportedAFMode(int i);
@@ -44,7 +43,7 @@ public abstract class DeviceInjectorSession implements AutoCloseable {
         public abstract CharacteristicBuilder setSensorOrientation(int i);
     }
 
-    public static abstract class RemoteDevice {
+    public abstract static class RemoteDevice {
         public abstract void clearRequest();
 
         public abstract void close();
@@ -55,7 +54,8 @@ public abstract class DeviceInjectorSession implements AutoCloseable {
 
         public abstract void deleteStream(int i);
 
-        public abstract CameraCharacteristics getCameraCharacteristic(CharacteristicBuilder characteristicBuilder);
+        public abstract CameraCharacteristics getCameraCharacteristic(
+                CharacteristicBuilder characteristicBuilder);
 
         public abstract String open(String str, int i);
 
@@ -64,31 +64,31 @@ public abstract class DeviceInjectorSession implements AutoCloseable {
         public abstract void submitRequest(CaptureRequest captureRequest, int[] iArr, boolean z);
     }
 
-    public static abstract class RemoteDeviceCallback {
+    public abstract static class RemoteDeviceCallback {
         public static final int ERROR_REMOTE_BUFFER = 1;
         public static final int ERROR_REMOTE_DEVICE = 0;
         public static final int ERROR_REMOTE_UNKNOWN = 2;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface ErrorCode {
-        }
+        public @interface ErrorCode {}
 
-        public abstract void onCaptureResult(Map<CaptureResult.Key, Object> map) throws RemoteException;
+        public abstract void onCaptureResult(Map<CaptureResult.Key, Object> map)
+                throws RemoteException;
 
         public abstract void onError(int i) throws RemoteException;
 
-        public abstract void onOrientationChanged(int i) throws RemoteException, IllegalArgumentException;
+        public abstract void onOrientationChanged(int i)
+                throws RemoteException, IllegalArgumentException;
     }
 
-    public static abstract class StatusCallback {
+    public abstract static class StatusCallback {
         public static final int ERROR_INJECTION_INVALID_ERROR = -1;
         public static final int ERROR_INJECTION_SERVICE = 1;
         public static final int ERROR_INJECTION_SESSION = 0;
         public static final int ERROR_INJECTION_UNSUPPORTED = 2;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface ErrorCode {
-        }
+        public @interface ErrorCode {}
 
         public abstract void onClose();
 
@@ -108,5 +108,6 @@ public abstract class DeviceInjectorSession implements AutoCloseable {
     @Override // java.lang.AutoCloseable
     public abstract void close();
 
-    public abstract void setDeviceInjectorPending(boolean z) throws CameraAccessException, SecurityException;
+    public abstract void setDeviceInjectorPending(boolean z)
+            throws CameraAccessException, SecurityException;
 }

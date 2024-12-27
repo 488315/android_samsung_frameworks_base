@@ -4,6 +4,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewDebug;
 import android.view.WindowManagerGlobal;
+
+import org.apache.harmony.dalvik.ddmc.Chunk;
+import org.apache.harmony.dalvik.ddmc.ChunkHandler;
+import org.apache.harmony.dalvik.ddmc.DdmServer;
+
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -11,9 +16,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
-import org.apache.harmony.dalvik.ddmc.Chunk;
-import org.apache.harmony.dalvik.ddmc.ChunkHandler;
-import org.apache.harmony.dalvik.ddmc.DdmServer;
 
 /* loaded from: classes.dex */
 public class DdmHandleViewDebug extends DdmHandle {
@@ -34,8 +36,7 @@ public class DdmHandleViewDebug extends DdmHandle {
     private static final int CHUNK_VUOP = ChunkHandler.type("VUOP");
     private static final DdmHandleViewDebug sInstance = new DdmHandleViewDebug();
 
-    private DdmHandleViewDebug() {
-    }
+    private DdmHandleViewDebug() {}
 
     public static void register() {
         DdmServer.registerHandler(CHUNK_VULW, sInstance);
@@ -43,11 +44,9 @@ public class DdmHandleViewDebug extends DdmHandle {
         DdmServer.registerHandler(CHUNK_VUOP, sInstance);
     }
 
-    public void onConnected() {
-    }
+    public void onConnected() {}
 
-    public void onDisconnected() {
-    }
+    public void onDisconnected() {}
 
     public Chunk handleChunk(Chunk request) {
         int type = request.type;
@@ -152,7 +151,8 @@ public class DdmHandleViewDebug extends DdmHandle {
             i = b.toByteArray();
             return new Chunk(CHUNK_VURT, (byte[]) i, 0, i.length);
         } catch (IOException | InterruptedException e) {
-            return createFailChunk(i, "Unexpected error while obtaining view hierarchy: " + e.getMessage());
+            return createFailChunk(
+                    i, "Unexpected error while obtaining view hierarchy: " + e.getMessage());
         }
     }
 
@@ -165,7 +165,11 @@ public class DdmHandleViewDebug extends DdmHandle {
                 byte[] data = b.toByteArray();
                 return new Chunk(CHUNK_VURT, data, 0, data.length);
             } catch (IOException e) {
-                Chunk createFailChunk = createFailChunk(1, "Unexpected error while obtaining view hierarchy: " + e.getMessage());
+                Chunk createFailChunk =
+                        createFailChunk(
+                                1,
+                                "Unexpected error while obtaining view hierarchy: "
+                                        + e.getMessage());
                 try {
                     dos.close();
                 } catch (IOException e2) {
@@ -187,7 +191,8 @@ public class DdmHandleViewDebug extends DdmHandle {
             byte[] data = b.toByteArray();
             return new Chunk(CHUNK_VURT, data, 0, data.length);
         } catch (IOException e) {
-            return createFailChunk(1, "Unexpected error while dumping the theme: " + e.getMessage());
+            return createFailChunk(
+                    1, "Unexpected error while dumping the theme: " + e.getMessage());
         }
     }
 
@@ -203,12 +208,13 @@ public class DdmHandleViewDebug extends DdmHandle {
     }
 
     private Chunk dumpDisplayLists(final View rootView, final View targetView) {
-        rootView.post(new Runnable() { // from class: android.ddm.DdmHandleViewDebug.1
-            @Override // java.lang.Runnable
-            public void run() {
-                ViewDebug.outputDisplayList(rootView, targetView);
-            }
-        });
+        rootView.post(
+                new Runnable() { // from class: android.ddm.DdmHandleViewDebug.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        ViewDebug.outputDisplayList(rootView, targetView);
+                    }
+                });
         return null;
     }
 
@@ -247,7 +253,9 @@ public class DdmHandleViewDebug extends DdmHandle {
                 byte[] data = b.toByteArray();
                 return new Chunk(CHUNK_VUOP, data, 0, data.length);
             } catch (IOException e) {
-                Chunk createFailChunk = createFailChunk(1, "Unexpected error while profiling view: " + e.getMessage());
+                Chunk createFailChunk =
+                        createFailChunk(
+                                1, "Unexpected error while profiling view: " + e.getMessage());
                 try {
                     bw.close();
                 } catch (IOException e2) {

@@ -9,9 +9,10 @@ import android.view.Choreographer;
 import android.view.ViewConfiguration;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
-import android.widget.Scroller;
+
 import com.samsung.android.os.SemPerfManager;
 import com.samsung.android.rune.CoreRune;
+
 import java.lang.reflect.Array;
 
 /* loaded from: classes4.dex */
@@ -49,12 +50,21 @@ public class OverScroller {
     }
 
     @Deprecated
-    public OverScroller(Context context, Interpolator interpolator, float bounceCoefficientX, float bounceCoefficientY) {
+    public OverScroller(
+            Context context,
+            Interpolator interpolator,
+            float bounceCoefficientX,
+            float bounceCoefficientY) {
         this(context, interpolator, true);
     }
 
     @Deprecated
-    public OverScroller(Context context, Interpolator interpolator, float bounceCoefficientX, float bounceCoefficientY, boolean flywheel) {
+    public OverScroller(
+            Context context,
+            Interpolator interpolator,
+            float bounceCoefficientX,
+            float bounceCoefficientY,
+            boolean flywheel) {
         this(context, interpolator, flywheel);
     }
 
@@ -145,10 +155,14 @@ public class OverScroller {
                 abortAnimation();
                 return true;
             case 1:
-                if (!this.mScrollerX.mFinished && !this.mScrollerX.update() && !this.mScrollerX.continueWhenFinished()) {
+                if (!this.mScrollerX.mFinished
+                        && !this.mScrollerX.update()
+                        && !this.mScrollerX.continueWhenFinished()) {
                     this.mScrollerX.finish();
                 }
-                if (!this.mScrollerY.mFinished && !this.mScrollerY.update() && !this.mScrollerY.continueWhenFinished()) {
+                if (!this.mScrollerY.mFinished
+                        && !this.mScrollerY.update()
+                        && !this.mScrollerY.continueWhenFinished()) {
                     this.mScrollerY.finish();
                     return true;
                 }
@@ -175,29 +189,78 @@ public class OverScroller {
         return spingbackX || spingbackY;
     }
 
-    public void fling(int startX, int startY, int velocityX, int velocityY, int minX, int maxX, int minY, int maxY) {
+    public void fling(
+            int startX,
+            int startY,
+            int velocityX,
+            int velocityY,
+            int minX,
+            int maxX,
+            int minY,
+            int maxY) {
         fling(startX, startY, velocityX, velocityY, minX, maxX, minY, maxY, 0, 0);
     }
 
-    protected void fling(int startX, int startY, int velocityX, int velocityY, int minX, int maxX, int minY, int maxY, boolean accDisabled) {
+    protected void fling(
+            int startX,
+            int startY,
+            int velocityX,
+            int velocityY,
+            int minX,
+            int maxX,
+            int minY,
+            int maxY,
+            boolean accDisabled) {
         fling(startX, startY, velocityX, velocityY, minX, maxX, minY, maxY, 0, 0, accDisabled);
     }
 
-    public void hidden_fling(int startX, int startY, int velocityX, int velocityY, int minX, int maxX, int minY, int maxY, boolean accDisabled) {
+    public void hidden_fling(
+            int startX,
+            int startY,
+            int velocityX,
+            int velocityY,
+            int minX,
+            int maxX,
+            int minY,
+            int maxY,
+            boolean accDisabled) {
         fling(startX, startY, velocityX, velocityY, minX, maxX, minY, maxY, 0, 0, accDisabled);
     }
 
     public void hidden_fling(int velocityX, int velocityY, boolean isSkipMove, float frameLatency) {
-        fling(0, 0, velocityX, velocityY, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, 0, 0, isSkipMove, frameLatency);
+        fling(
+                0,
+                0,
+                velocityX,
+                velocityY,
+                Integer.MIN_VALUE,
+                Integer.MAX_VALUE,
+                Integer.MIN_VALUE,
+                Integer.MAX_VALUE,
+                0,
+                0,
+                isSkipMove,
+                frameLatency);
     }
 
-    public void fling(int startX, int startY, int velocityX, int velocityY, int minX, int maxX, int minY, int maxY, int overX, int overY) {
+    public void fling(
+            int startX,
+            int startY,
+            int velocityX,
+            int velocityY,
+            int minX,
+            int maxX,
+            int minY,
+            int maxY,
+            int overX,
+            int overY) {
         int velocityY2;
         int velocityX2 = velocityX;
         if (this.mFlywheel && !isFinished()) {
             float oldVelocityX = this.mScrollerX.mCurrVelocity;
             float oldVelocityY = this.mScrollerY.mCurrVelocity;
-            if (Math.signum(velocityX2) == Math.signum(oldVelocityX) && Math.signum(velocityY) == Math.signum(oldVelocityY)) {
+            if (Math.signum(velocityX2) == Math.signum(oldVelocityX)
+                    && Math.signum(velocityY) == Math.signum(oldVelocityY)) {
                 velocityX2 = (int) (velocityX2 + oldVelocityX);
                 velocityY2 = (int) (velocityY + oldVelocityY);
                 this.mMode = 1;
@@ -211,7 +274,18 @@ public class OverScroller {
         this.mScrollerY.fling(startY, velocityY2, minY, maxY, overY);
     }
 
-    public void fling(int startX, int startY, int velocityX, int velocityY, int minX, int maxX, int minY, int maxY, int overX, int overY, boolean accDisabled) {
+    public void fling(
+            int startX,
+            int startY,
+            int velocityX,
+            int velocityY,
+            int minX,
+            int maxX,
+            int minY,
+            int maxY,
+            int overX,
+            int overY,
+            boolean accDisabled) {
         int velocityY2;
         int velocityX2 = velocityX;
         if (accDisabled) {
@@ -220,7 +294,8 @@ public class OverScroller {
         if (this.mFlywheel && !isFinished() && !accDisabled) {
             float oldVelocityX = this.mScrollerX.mCurrVelocity;
             float oldVelocityY = this.mScrollerY.mCurrVelocity;
-            if (Math.signum(velocityX2) == Math.signum(oldVelocityX) && Math.signum(velocityY) == Math.signum(oldVelocityY)) {
+            if (Math.signum(velocityX2) == Math.signum(oldVelocityX)
+                    && Math.signum(velocityY) == Math.signum(oldVelocityY)) {
                 velocityX2 = (int) (velocityX2 + oldVelocityX);
                 velocityY2 = (int) (velocityY + oldVelocityY);
                 this.mMode = 1;
@@ -240,7 +315,19 @@ public class OverScroller {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void fling(int r14, int r15, int r16, int r17, int r18, int r19, int r20, int r21, int r22, int r23, boolean r24, float r25) {
+    public void fling(
+            int r14,
+            int r15,
+            int r16,
+            int r17,
+            int r18,
+            int r19,
+            int r20,
+            int r21,
+            int r22,
+            int r23,
+            boolean r24,
+            float r25) {
         /*
             r13 = this;
             r0 = r13
@@ -317,7 +404,9 @@ public class OverScroller {
             r2.fling(r3, r4, r5, r6, r7)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.OverScroller.fling(int, int, int, int, int, int, int, int, int, int, boolean, float):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.widget.OverScroller.fling(int, int, int, int, int,"
+                    + " int, int, int, int, int, boolean, float):void");
     }
 
     public void notifyHorizontalEdgeReached(int startX, int finalX, int overX) {
@@ -329,7 +418,10 @@ public class OverScroller {
     }
 
     public boolean isOverScrolled() {
-        return ((this.mScrollerX.mFinished || this.mScrollerX.mState == 0) && (this.mScrollerY.mFinished || this.mScrollerY.mState == 0)) ? false : true;
+        return ((this.mScrollerX.mFinished || this.mScrollerX.mState == 0)
+                        && (this.mScrollerY.mFinished || this.mScrollerY.mState == 0))
+                ? false
+                : true;
     }
 
     public void abortAnimation() {
@@ -346,7 +438,9 @@ public class OverScroller {
     public boolean isScrollingInDirection(float xvel, float yvel) {
         int dx = this.mScrollerX.mFinal - this.mScrollerX.mStart;
         int dy = this.mScrollerY.mFinal - this.mScrollerY.mStart;
-        return !isFinished() && Math.signum(xvel) == Math.signum((float) dx) && Math.signum(yvel) == Math.signum((float) dy);
+        return !isFinished()
+                && Math.signum(xvel) == Math.signum((float) dx)
+                && Math.signum(yvel) == Math.signum((float) dy);
     }
 
     @Deprecated
@@ -397,8 +491,10 @@ public class OverScroller {
         private static float DECELERATION_RATE = (float) (Math.log(0.78d) / Math.log(0.9d));
         private static final float[] INFLEXIONS = {0.35f, 0.26f};
         private static float INFLEXION = INFLEXIONS[1];
-        private static final float[][] SPLINE_POSITIONS = (float[][]) Array.newInstance((Class<?>) Float.TYPE, 2, 101);
-        private static final float[][] SPLINE_TIMES = (float[][]) Array.newInstance((Class<?>) Float.TYPE, 2, 101);
+        private static final float[][] SPLINE_POSITIONS =
+                (float[][]) Array.newInstance((Class<?>) Float.TYPE, 2, 101);
+        private static final float[][] SPLINE_TIMES =
+                (float[][]) Array.newInstance((Class<?>) Float.TYPE, 2, 101);
         private static float[] SPLINE_POSITION = SPLINE_POSITIONS[1];
         private static float[] SPLINE_TIME = SPLINE_TIMES[1];
         private static boolean sIsSmoothFlingEnabled = true;
@@ -555,8 +651,12 @@ public class OverScroller {
                 SemPerfManager.onSmoothScrollEvent(false);
                 this.mIsDVFSBoosting = false;
             }
-            if (Process.myUid() >= 10000 && Process.myUid() <= 19999 && this.mSTBIndex != -1 && this.mFlingSTBFlag) {
-                Choreographer choreographer = Looper.myLooper() != null ? Choreographer.getInstance() : null;
+            if (Process.myUid() >= 10000
+                    && Process.myUid() <= 19999
+                    && this.mSTBIndex != -1
+                    && this.mFlingSTBFlag) {
+                Choreographer choreographer =
+                        Looper.myLooper() != null ? Choreographer.getInstance() : null;
                 if (choreographer != null) {
                     choreographer.setFlingSTBFlag(false, this.mSTBIndex);
                     this.mFlingSTBFlag = false;
@@ -617,7 +717,8 @@ public class OverScroller {
             this.mCurrVelocity = velocity;
             this.mSplineDuration = 0;
             this.mDuration = 0;
-            this.mStartTime = AnimationUtils.currentAnimationTimeMillis() - OverScroller.sIntervalTime;
+            this.mStartTime =
+                    AnimationUtils.currentAnimationTimeMillis() - OverScroller.sIntervalTime;
             this.mStart = start;
             this.mCurrentPosition = start;
             if (start > max || start < min) {
@@ -631,12 +732,19 @@ public class OverScroller {
                 this.mSplineDuration = splineFlingDuration;
                 this.mDuration = splineFlingDuration;
                 totalDistance = getSplineFlingDistance(velocity);
-                if (sIsSmoothFlingEnabled && !this.mIsDVFSBoosting && (velocity >= 800 || velocity <= MINIMUM_BOOSTED_FLING_VELOCITY_NEGATIVE)) {
+                if (sIsSmoothFlingEnabled
+                        && !this.mIsDVFSBoosting
+                        && (velocity >= 800
+                                || velocity <= MINIMUM_BOOSTED_FLING_VELOCITY_NEGATIVE)) {
                     SemPerfManager.onSmoothScrollEvent(true);
                     this.mIsDVFSBoosting = true;
                 }
-                if (Process.myUid() >= 10000 && Process.myUid() <= 19999 && this.mSTBIndex != -1 && !this.mFlingSTBFlag) {
-                    Choreographer choreographer = Looper.myLooper() != null ? Choreographer.getInstance() : null;
+                if (Process.myUid() >= 10000
+                        && Process.myUid() <= 19999
+                        && this.mSTBIndex != -1
+                        && !this.mFlingSTBFlag) {
+                    Choreographer choreographer =
+                            Looper.myLooper() != null ? Choreographer.getInstance() : null;
                     if (choreographer != null) {
                         choreographer.setFlingSTBFlag(true, this.mSTBIndex);
                         this.mFlingSTBFlag = true;
@@ -659,7 +767,8 @@ public class OverScroller {
         }
 
         private double getSplineDeceleration(int velocity) {
-            return Math.log((INFLEXION * Math.abs(velocity)) / (this.mFlingFriction * this.mPhysicalCoeff));
+            return Math.log(
+                    (INFLEXION * Math.abs(velocity)) / (this.mFlingFriction * this.mPhysicalCoeff));
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -674,7 +783,10 @@ public class OverScroller {
                 }
                 float value = 1.0f - SPLINE_POSITION[index];
                 double tuningValue = (3.0f * value) + DISTANCE_M2;
-                return this.mFlingFriction * tuningValue * this.mPhysicalCoeff * Math.exp((DECELERATION_RATE / decelMinusOne) * l);
+                return this.mFlingFriction
+                        * tuningValue
+                        * this.mPhysicalCoeff
+                        * Math.exp((DECELERATION_RATE / decelMinusOne) * l);
             }
             float rate2 = this.mFlingFriction;
             return rate2 * this.mPhysicalCoeff * Math.exp((DECELERATION_RATE / decelMinusOne) * l);
@@ -701,7 +813,11 @@ public class OverScroller {
             float velocitySquared = velocity * velocity;
             float distanceToApex = (velocitySquared / 2.0f) / Math.abs(this.mDeceleration);
             float distanceToEdge = Math.abs(end - start);
-            float totalDuration = (float) Math.sqrt(((distanceToApex + distanceToEdge) * 2.0d) / Math.abs(this.mDeceleration));
+            float totalDuration =
+                    (float)
+                            Math.sqrt(
+                                    ((distanceToApex + distanceToEdge) * 2.0d)
+                                            / Math.abs(this.mDeceleration));
             this.mStartTime -= (int) ((totalDuration - durationToApex) * 1000.0f);
             this.mStart = end;
             this.mCurrentPosition = end;
@@ -830,7 +946,9 @@ public class OverScroller {
                         distanceCoef = d_inf + ((t - t_inf) * velocityCoef);
                     }
                     distance = this.mSplineDistance * distanceCoef;
-                    this.mCurrVelocity = ((this.mSplineDistance * velocityCoef) / this.mSplineDuration) * 1000.0f;
+                    this.mCurrVelocity =
+                            ((this.mSplineDistance * velocityCoef) / this.mSplineDuration)
+                                    * 1000.0f;
                     break;
                 case 1:
                     float t2 = currentTime / this.mDuration;

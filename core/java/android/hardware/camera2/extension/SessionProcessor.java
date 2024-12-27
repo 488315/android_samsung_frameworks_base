@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
-import android.hardware.camera2.extension.ISessionProcessorImpl;
 import android.hardware.camera2.impl.CameraExtensionUtils;
 import android.hardware.camera2.impl.CameraMetadataNative;
 import android.os.Handler;
@@ -12,7 +11,9 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.camera.flags.Flags;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.Executor;
@@ -40,7 +41,12 @@ public abstract class SessionProcessor {
 
     public abstract void deInitSession(IBinder iBinder);
 
-    public abstract ExtensionConfiguration initSession(IBinder iBinder, String str, CharacteristicsMap characteristicsMap, CameraOutputSurface cameraOutputSurface, CameraOutputSurface cameraOutputSurface2);
+    public abstract ExtensionConfiguration initSession(
+            IBinder iBinder,
+            String str,
+            CharacteristicsMap characteristicsMap,
+            CameraOutputSurface cameraOutputSurface,
+            CameraOutputSurface cameraOutputSurface2);
 
     public abstract void onCaptureSessionEnd();
 
@@ -52,7 +58,8 @@ public abstract class SessionProcessor {
 
     public abstract int startRepeating(Executor executor, CaptureCallback captureCallback);
 
-    public abstract int startTrigger(CaptureRequest captureRequest, Executor executor, CaptureCallback captureCallback);
+    public abstract int startTrigger(
+            CaptureRequest captureRequest, Executor executor, CaptureCallback captureCallback);
 
     public abstract void stopRepeating();
 
@@ -71,17 +78,31 @@ public abstract class SessionProcessor {
         }
 
         @Override // android.hardware.camera2.extension.ISessionProcessorImpl
-        public CameraSessionConfig initSession(IBinder token, String cameraId, Map<String, CameraMetadataNative> charsMap, OutputSurface previewSurface, OutputSurface imageCaptureSurface, OutputSurface postviewSurface) throws RemoteException {
+        public CameraSessionConfig initSession(
+                IBinder token,
+                String cameraId,
+                Map<String, CameraMetadataNative> charsMap,
+                OutputSurface previewSurface,
+                OutputSurface imageCaptureSurface,
+                OutputSurface postviewSurface)
+                throws RemoteException {
             if (Flags.surfaceLeakFix()) {
                 this.mPreviewSurface = previewSurface;
                 this.mPostviewSurface = postviewSurface;
                 this.mImageCaptureSurface = imageCaptureSurface;
             }
-            ExtensionConfiguration config = SessionProcessor.this.initSession(token, cameraId, new CharacteristicsMap(charsMap), new CameraOutputSurface(previewSurface), new CameraOutputSurface(imageCaptureSurface));
+            ExtensionConfiguration config =
+                    SessionProcessor.this.initSession(
+                            token,
+                            cameraId,
+                            new CharacteristicsMap(charsMap),
+                            new CameraOutputSurface(previewSurface),
+                            new CameraOutputSurface(imageCaptureSurface));
             if (config == null) {
                 throw new IllegalArgumentException("Invalid extension configuration");
             }
-            ArrayList<CameraCharacteristics.Key<?>> vendorKeys = charsMap.get(cameraId).getAllVendorKeys(keyClass);
+            ArrayList<CameraCharacteristics.Key<?>> vendorKeys =
+                    charsMap.get(cameraId).getAllVendorKeys(keyClass);
             if (vendorKeys != null && !vendorKeys.isEmpty()) {
                 this.mVendorId = vendorKeys.get(0).getVendorId();
             }
@@ -95,7 +116,8 @@ public abstract class SessionProcessor {
                 if (this.mPreviewSurface != null && this.mPreviewSurface.surface != null) {
                     this.mPreviewSurface.surface.release();
                 }
-                if (this.mImageCaptureSurface != null && this.mImageCaptureSurface.surface != null) {
+                if (this.mImageCaptureSurface != null
+                        && this.mImageCaptureSurface.surface != null) {
                     this.mImageCaptureSurface.surface.release();
                 }
                 if (this.mPostviewSurface != null && this.mPostviewSurface.surface != null) {
@@ -105,11 +127,13 @@ public abstract class SessionProcessor {
         }
 
         @Override // android.hardware.camera2.extension.ISessionProcessorImpl
-        public void onCaptureSessionStart(IRequestProcessorImpl requestProcessor, String statsKey) throws RemoteException {
+        public void onCaptureSessionStart(IRequestProcessorImpl requestProcessor, String statsKey)
+                throws RemoteException {
             if (SessionProcessor.this.mCameraUsageTracker != null) {
                 SessionProcessor.this.mCameraUsageTracker.startCameraOperation();
             }
-            SessionProcessor.this.onCaptureSessionStart(new RequestProcessor(requestProcessor, this.mVendorId), statsKey);
+            SessionProcessor.this.onCaptureSessionStart(
+                    new RequestProcessor(requestProcessor, this.mVendorId), statsKey);
         }
 
         @Override // android.hardware.camera2.extension.ISessionProcessorImpl
@@ -122,7 +146,9 @@ public abstract class SessionProcessor {
 
         @Override // android.hardware.camera2.extension.ISessionProcessorImpl
         public int startRepeating(ICaptureCallback callback) throws RemoteException {
-            return SessionProcessor.this.startRepeating(new CameraExtensionUtils.HandlerExecutor(new Handler(Looper.getMainLooper())), new CaptureCallbackImpl(callback, this.mVendorId));
+            return SessionProcessor.this.startRepeating(
+                    new CameraExtensionUtils.HandlerExecutor(new Handler(Looper.getMainLooper())),
+                    new CaptureCallbackImpl(callback, this.mVendorId));
         }
 
         @Override // android.hardware.camera2.extension.ISessionProcessorImpl
@@ -131,8 +157,11 @@ public abstract class SessionProcessor {
         }
 
         @Override // android.hardware.camera2.extension.ISessionProcessorImpl
-        public int startCapture(ICaptureCallback callback, boolean isPostviewRequested) throws RemoteException {
-            return SessionProcessor.this.startMultiFrameCapture(new CameraExtensionUtils.HandlerExecutor(new Handler(Looper.getMainLooper())), new CaptureCallbackImpl(callback, this.mVendorId));
+        public int startCapture(ICaptureCallback callback, boolean isPostviewRequested)
+                throws RemoteException {
+            return SessionProcessor.this.startMultiFrameCapture(
+                    new CameraExtensionUtils.HandlerExecutor(new Handler(Looper.getMainLooper())),
+                    new CaptureCallbackImpl(callback, this.mVendorId));
         }
 
         @Override // android.hardware.camera2.extension.ISessionProcessorImpl
@@ -141,8 +170,12 @@ public abstract class SessionProcessor {
         }
 
         @Override // android.hardware.camera2.extension.ISessionProcessorImpl
-        public int startTrigger(CaptureRequest captureRequest, ICaptureCallback callback) throws RemoteException {
-            return SessionProcessor.this.startTrigger(captureRequest, new CameraExtensionUtils.HandlerExecutor(new Handler(Looper.getMainLooper())), new CaptureCallbackImpl(callback, this.mVendorId));
+        public int startTrigger(CaptureRequest captureRequest, ICaptureCallback callback)
+                throws RemoteException {
+            return SessionProcessor.this.startTrigger(
+                    captureRequest,
+                    new CameraExtensionUtils.HandlerExecutor(new Handler(Looper.getMainLooper())),
+                    new CaptureCallbackImpl(callback, this.mVendorId));
         }
 
         @Override // android.hardware.camera2.extension.ISessionProcessorImpl
@@ -166,7 +199,9 @@ public abstract class SessionProcessor {
             try {
                 this.mCaptureCallback.onCaptureStarted(captureSequenceId, timestamp);
             } catch (RemoteException e) {
-                Log.e(SessionProcessor.TAG, "Failed to notify capture start due to remote exception!");
+                Log.e(
+                        SessionProcessor.TAG,
+                        "Failed to notify capture start due to remote exception!");
             }
         }
 
@@ -175,7 +210,9 @@ public abstract class SessionProcessor {
             try {
                 this.mCaptureCallback.onCaptureProcessStarted(captureSequenceId);
             } catch (RemoteException e) {
-                Log.e(SessionProcessor.TAG, "Failed to notify process start due to remote exception!");
+                Log.e(
+                        SessionProcessor.TAG,
+                        "Failed to notify process start due to remote exception!");
             }
         }
 
@@ -184,7 +221,9 @@ public abstract class SessionProcessor {
             try {
                 this.mCaptureCallback.onCaptureProcessFailed(captureSequenceId, failure);
             } catch (RemoteException e) {
-                Log.e(SessionProcessor.TAG, "Failed to notify capture failure start due to remote exception!");
+                Log.e(
+                        SessionProcessor.TAG,
+                        "Failed to notify capture failure start due to remote exception!");
             }
         }
 
@@ -193,7 +232,9 @@ public abstract class SessionProcessor {
             try {
                 this.mCaptureCallback.onCaptureSequenceCompleted(captureSequenceId);
             } catch (RemoteException e) {
-                Log.e(SessionProcessor.TAG, "Failed to notify capture sequence done due to remote exception!");
+                Log.e(
+                        SessionProcessor.TAG,
+                        "Failed to notify capture sequence done due to remote exception!");
             }
         }
 
@@ -202,21 +243,29 @@ public abstract class SessionProcessor {
             try {
                 this.mCaptureCallback.onCaptureSequenceAborted(captureSequenceId);
             } catch (RemoteException e) {
-                Log.e(SessionProcessor.TAG, "Failed to notify capture sequence abort due to remote exception!");
+                Log.e(
+                        SessionProcessor.TAG,
+                        "Failed to notify capture sequence abort due to remote exception!");
             }
         }
 
         @Override // android.hardware.camera2.extension.SessionProcessor.CaptureCallback
-        public void onCaptureCompleted(long shutterTimestamp, int requestId, Map<CaptureResult.Key, Object> results) {
+        public void onCaptureCompleted(
+                long shutterTimestamp, int requestId, Map<CaptureResult.Key, Object> results) {
             CameraMetadataNative captureResults = new CameraMetadataNative();
             captureResults.setVendorId(this.mVendorId);
             for (Map.Entry<CaptureResult.Key, Object> entry : results.entrySet()) {
-                captureResults.set((CaptureResult.Key<CaptureResult.Key>) entry.getKey(), (CaptureResult.Key) entry.getValue());
+                captureResults.set(
+                        (CaptureResult.Key<CaptureResult.Key>) entry.getKey(),
+                        (CaptureResult.Key) entry.getValue());
             }
             try {
-                this.mCaptureCallback.onCaptureCompleted(shutterTimestamp, requestId, captureResults);
+                this.mCaptureCallback.onCaptureCompleted(
+                        shutterTimestamp, requestId, captureResults);
             } catch (RemoteException e) {
-                Log.e(SessionProcessor.TAG, "Failed to notify capture complete due to remote exception!");
+                Log.e(
+                        SessionProcessor.TAG,
+                        "Failed to notify capture complete due to remote exception!");
             }
         }
     }

@@ -5,7 +5,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Range;
 import android.util.RecurrenceRule;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.Period;
@@ -18,19 +20,21 @@ import java.util.Objects;
 public final class SubscriptionPlan implements Parcelable {
     public static final long BYTES_UNKNOWN = -1;
     public static final long BYTES_UNLIMITED = Long.MAX_VALUE;
-    public static final Parcelable.Creator<SubscriptionPlan> CREATOR = new Parcelable.Creator<SubscriptionPlan>() { // from class: android.telephony.SubscriptionPlan.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SubscriptionPlan createFromParcel(Parcel source) {
-            return new SubscriptionPlan(source);
-        }
+    public static final Parcelable.Creator<SubscriptionPlan> CREATOR =
+            new Parcelable.Creator<
+                    SubscriptionPlan>() { // from class: android.telephony.SubscriptionPlan.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SubscriptionPlan createFromParcel(Parcel source) {
+                    return new SubscriptionPlan(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SubscriptionPlan[] newArray(int size) {
-            return new SubscriptionPlan[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SubscriptionPlan[] newArray(int size) {
+                    return new SubscriptionPlan[size];
+                }
+            };
     public static final int LIMIT_BEHAVIOR_BILLED = 1;
     public static final int LIMIT_BEHAVIOR_DISABLED = 0;
     public static final int LIMIT_BEHAVIOR_THROTTLED = 2;
@@ -46,8 +50,7 @@ public final class SubscriptionPlan implements Parcelable {
     private CharSequence title;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LimitBehavior {
-    }
+    public @interface LimitBehavior {}
 
     private SubscriptionPlan(RecurrenceRule cycleRule) {
         this.dataLimitBytes = -1L;
@@ -55,7 +58,10 @@ public final class SubscriptionPlan implements Parcelable {
         this.dataUsageBytes = -1L;
         this.dataUsageTime = -1L;
         this.cycleRule = (RecurrenceRule) Preconditions.checkNotNull(cycleRule);
-        this.networkTypes = Arrays.copyOf(TelephonyManager.getAllNetworkTypes(), TelephonyManager.getAllNetworkTypes().length);
+        this.networkTypes =
+                Arrays.copyOf(
+                        TelephonyManager.getAllNetworkTypes(),
+                        TelephonyManager.getAllNetworkTypes().length);
     }
 
     private SubscriptionPlan(Parcel source) {
@@ -91,11 +97,35 @@ public final class SubscriptionPlan implements Parcelable {
     }
 
     public String toString() {
-        return "SubscriptionPlan{cycleRule=" + this.cycleRule + " title=" + this.title + " summary=" + this.summary + " dataLimitBytes=" + this.dataLimitBytes + " dataLimitBehavior=" + this.dataLimitBehavior + " dataUsageBytes=" + this.dataUsageBytes + " dataUsageTime=" + this.dataUsageTime + " networkTypes=" + Arrays.toString(this.networkTypes) + "}";
+        return "SubscriptionPlan{cycleRule="
+                + this.cycleRule
+                + " title="
+                + this.title
+                + " summary="
+                + this.summary
+                + " dataLimitBytes="
+                + this.dataLimitBytes
+                + " dataLimitBehavior="
+                + this.dataLimitBehavior
+                + " dataUsageBytes="
+                + this.dataUsageBytes
+                + " dataUsageTime="
+                + this.dataUsageTime
+                + " networkTypes="
+                + Arrays.toString(this.networkTypes)
+                + "}";
     }
 
     public int hashCode() {
-        return Objects.hash(this.cycleRule, this.title, this.summary, Long.valueOf(this.dataLimitBytes), Integer.valueOf(this.dataLimitBehavior), Long.valueOf(this.dataUsageBytes), Long.valueOf(this.dataUsageTime), Integer.valueOf(Arrays.hashCode(this.networkTypes)));
+        return Objects.hash(
+                this.cycleRule,
+                this.title,
+                this.summary,
+                Long.valueOf(this.dataLimitBytes),
+                Integer.valueOf(this.dataLimitBehavior),
+                Long.valueOf(this.dataUsageBytes),
+                Long.valueOf(this.dataUsageTime),
+                Integer.valueOf(Arrays.hashCode(this.networkTypes)));
     }
 
     public boolean equals(Object obj) {
@@ -103,7 +133,14 @@ public final class SubscriptionPlan implements Parcelable {
             return false;
         }
         SubscriptionPlan other = (SubscriptionPlan) obj;
-        return Objects.equals(this.cycleRule, other.cycleRule) && Objects.equals(this.title, other.title) && Objects.equals(this.summary, other.summary) && this.dataLimitBytes == other.dataLimitBytes && this.dataLimitBehavior == other.dataLimitBehavior && this.dataUsageBytes == other.dataUsageBytes && this.dataUsageTime == other.dataUsageTime && Arrays.equals(this.networkTypes, other.networkTypes);
+        return Objects.equals(this.cycleRule, other.cycleRule)
+                && Objects.equals(this.title, other.title)
+                && Objects.equals(this.summary, other.summary)
+                && this.dataLimitBytes == other.dataLimitBytes
+                && this.dataLimitBehavior == other.dataLimitBehavior
+                && this.dataUsageBytes == other.dataUsageBytes
+                && this.dataUsageTime == other.dataUsageTime
+                && Arrays.equals(this.networkTypes, other.networkTypes);
     }
 
     public RecurrenceRule getCycleRule() {
@@ -225,7 +262,10 @@ public final class SubscriptionPlan implements Parcelable {
         }
 
         public Builder resetNetworkTypes() {
-            this.plan.networkTypes = Arrays.copyOf(TelephonyManager.getAllNetworkTypes(), TelephonyManager.getAllNetworkTypes().length);
+            this.plan.networkTypes =
+                    Arrays.copyOf(
+                            TelephonyManager.getAllNetworkTypes(),
+                            TelephonyManager.getAllNetworkTypes().length);
             return this;
         }
     }

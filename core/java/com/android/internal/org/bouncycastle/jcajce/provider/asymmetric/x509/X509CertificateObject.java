@@ -11,6 +11,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.Certificate;
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.PKCS12BagAttributeCarrierImpl;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier;
+
 import java.io.IOException;
 import java.security.PublicKey;
 import java.security.cert.CertificateEncodingException;
@@ -19,6 +20,7 @@ import java.security.cert.CertificateNotYetValidException;
 import java.security.cert.CertificateParsingException;
 import java.util.Date;
 import java.util.Enumeration;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes5.dex */
@@ -35,20 +37,29 @@ class X509CertificateObject extends X509CertificateImpl implements PKCS12BagAttr
     private long[] validityValues;
 
     X509CertificateObject(JcaJceHelper bcHelper, Certificate c) throws CertificateParsingException {
-        super(bcHelper, c, createBasicConstraints(c), createKeyUsage(c), createSigAlgName(c), createSigAlgParams(c));
+        super(
+                bcHelper,
+                c,
+                createBasicConstraints(c),
+                createKeyUsage(c),
+                createSigAlgName(c),
+                createSigAlgParams(c));
         this.cacheLock = new Object();
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.X509CertificateImpl, java.security.cert.X509Certificate
-    public void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity(Date date)
+            throws CertificateExpiredException, CertificateNotYetValidException {
         long checkTime = date.getTime();
         long[] validityValues = getValidityValues();
         if (checkTime > validityValues[1]) {
-            throw new CertificateExpiredException("certificate expired on " + this.c.getEndDate().getTime());
+            throw new CertificateExpiredException(
+                    "certificate expired on " + this.c.getEndDate().getTime());
         }
         if (checkTime < validityValues[0]) {
-            throw new CertificateNotYetValidException("certificate not valid till " + this.c.getStartDate().getTime());
+            throw new CertificateNotYetValidException(
+                    "certificate not valid till " + this.c.getStartDate().getTime());
         }
     }
 
@@ -150,7 +161,10 @@ class X509CertificateObject extends X509CertificateImpl implements PKCS12BagAttr
                 if (this.hashValue != otherBC.hashValue) {
                     return false;
                 }
-            } else if ((this.internalCertificateValue == null || otherBC.internalCertificateValue == null) && (signature = this.c.getSignature()) != null && !signature.equals(otherBC.c.getSignature())) {
+            } else if ((this.internalCertificateValue == null
+                            || otherBC.internalCertificateValue == null)
+                    && (signature = this.c.getSignature()) != null
+                    && !signature.equals(otherBC.c.getSignature())) {
                 return false;
             }
         }
@@ -207,7 +221,15 @@ class X509CertificateObject extends X509CertificateImpl implements PKCS12BagAttr
             } catch (CertificateEncodingException e) {
                 encoding = null;
             }
-            X509CertificateInternal temp = new X509CertificateInternal(this.bcHelper, this.c, this.basicConstraints, this.keyUsage, this.sigAlgName, this.sigAlgParams, encoding);
+            X509CertificateInternal temp =
+                    new X509CertificateInternal(
+                            this.bcHelper,
+                            this.c,
+                            this.basicConstraints,
+                            this.keyUsage,
+                            this.sigAlgName,
+                            this.sigAlgParams,
+                            encoding);
             synchronized (this.cacheLock) {
                 if (this.internalCertificateValue == null) {
                     this.internalCertificateValue = temp;
@@ -218,7 +240,8 @@ class X509CertificateObject extends X509CertificateImpl implements PKCS12BagAttr
         }
     }
 
-    private static BasicConstraints createBasicConstraints(Certificate c) throws CertificateParsingException {
+    private static BasicConstraints createBasicConstraints(Certificate c)
+            throws CertificateParsingException {
         try {
             byte[] extOctets = getExtensionOctets(c, "2.5.29.19");
             if (extOctets == null) {

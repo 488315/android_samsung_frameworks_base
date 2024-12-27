@@ -8,19 +8,21 @@ import android.os.PersistableBundle;
 @SystemApi
 /* loaded from: classes.dex */
 public final class TokenInfo implements Parcelable {
-    public static final Parcelable.Creator<TokenInfo> CREATOR = new Parcelable.Creator<TokenInfo>() { // from class: android.app.ondeviceintelligence.TokenInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TokenInfo[] newArray(int size) {
-            return new TokenInfo[size];
-        }
+    public static final Parcelable.Creator<TokenInfo> CREATOR =
+            new Parcelable.Creator<
+                    TokenInfo>() { // from class: android.app.ondeviceintelligence.TokenInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TokenInfo[] newArray(int size) {
+                    return new TokenInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TokenInfo createFromParcel(Parcel in) {
-            return new TokenInfo(in.readLong(), in.readPersistableBundle());
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TokenInfo createFromParcel(Parcel in) {
+                    return new TokenInfo(in.readLong(), in.readPersistableBundle());
+                }
+            };
     private final long mCount;
     private final PersistableBundle mInfoParams;
 

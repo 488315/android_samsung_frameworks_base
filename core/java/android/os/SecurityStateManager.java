@@ -10,7 +10,9 @@ public class SecurityStateManager {
     private final ISecurityStateManager mService;
 
     public SecurityStateManager(ISecurityStateManager service) {
-        this.mService = (ISecurityStateManager) Objects.requireNonNull(service, "missing ISecurityStateManager");
+        this.mService =
+                (ISecurityStateManager)
+                        Objects.requireNonNull(service, "missing ISecurityStateManager");
     }
 
     public Bundle getGlobalSecurityState() {

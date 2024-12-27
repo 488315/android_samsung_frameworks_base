@@ -3,7 +3,9 @@ package android.speech.tts;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.logging.nano.MetricsProto;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,19 +14,20 @@ import java.util.Set;
 
 /* loaded from: classes3.dex */
 public class Voice implements Parcelable {
-    public static final Parcelable.Creator<Voice> CREATOR = new Parcelable.Creator<Voice>() { // from class: android.speech.tts.Voice.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Voice createFromParcel(Parcel in) {
-            return new Voice(in);
-        }
+    public static final Parcelable.Creator<Voice> CREATOR =
+            new Parcelable.Creator<Voice>() { // from class: android.speech.tts.Voice.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Voice createFromParcel(Parcel in) {
+                    return new Voice(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Voice[] newArray(int size) {
-            return new Voice[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Voice[] newArray(int size) {
+                    return new Voice[size];
+                }
+            };
     public static final int LATENCY_HIGH = 400;
     public static final int LATENCY_LOW = 200;
     public static final int LATENCY_NORMAL = 300;
@@ -42,7 +45,13 @@ public class Voice implements Parcelable {
     private final int mQuality;
     private final boolean mRequiresNetworkConnection;
 
-    public Voice(String name, Locale locale, int quality, int latency, boolean requiresNetworkConnection, Set<String> features) {
+    public Voice(
+            String name,
+            Locale locale,
+            int quality,
+            int latency,
+            boolean requiresNetworkConnection,
+            Set<String> features) {
         this.mName = name;
         this.mLocale = locale;
         this.mQuality = quality;
@@ -102,12 +111,36 @@ public class Voice implements Parcelable {
 
     public String toString() {
         StringBuilder builder = new StringBuilder(64);
-        return builder.append("Voice[Name: ").append(this.mName).append(", locale: ").append(this.mLocale).append(", quality: ").append(this.mQuality).append(", latency: ").append(this.mLatency).append(", requiresNetwork: ").append(this.mRequiresNetworkConnection).append(", features: ").append(this.mFeatures.toString()).append(NavigationBarInflaterView.SIZE_MOD_END).toString();
+        return builder.append("Voice[Name: ")
+                .append(this.mName)
+                .append(", locale: ")
+                .append(this.mLocale)
+                .append(", quality: ")
+                .append(this.mQuality)
+                .append(", latency: ")
+                .append(this.mLatency)
+                .append(", requiresNetwork: ")
+                .append(this.mRequiresNetworkConnection)
+                .append(", features: ")
+                .append(this.mFeatures.toString())
+                .append(NavigationBarInflaterView.SIZE_MOD_END)
+                .toString();
     }
 
     public int hashCode() {
         int result = (1 * 31) + (this.mFeatures == null ? 0 : this.mFeatures.hashCode());
-        return (((((((((result * 31) + this.mLatency) * 31) + (this.mLocale == null ? 0 : this.mLocale.hashCode())) * 31) + (this.mName != null ? this.mName.hashCode() : 0)) * 31) + this.mQuality) * 31) + (this.mRequiresNetworkConnection ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
+        return (((((((((result * 31) + this.mLatency) * 31)
+                                                                + (this.mLocale == null
+                                                                        ? 0
+                                                                        : this.mLocale.hashCode()))
+                                                        * 31)
+                                                + (this.mName != null ? this.mName.hashCode() : 0))
+                                        * 31)
+                                + this.mQuality)
+                        * 31)
+                + (this.mRequiresNetworkConnection
+                        ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP
+                        : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
     }
 
     public boolean equals(Object obj) {
@@ -142,7 +175,8 @@ public class Voice implements Parcelable {
         } else if (!this.mName.equals(other.mName)) {
             return false;
         }
-        if (this.mQuality == other.mQuality && this.mRequiresNetworkConnection == other.mRequiresNetworkConnection) {
+        if (this.mQuality == other.mQuality
+                && this.mRequiresNetworkConnection == other.mRequiresNetworkConnection) {
             return true;
         }
         return false;

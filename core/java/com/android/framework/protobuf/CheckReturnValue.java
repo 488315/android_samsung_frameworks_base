@@ -10,5 +10,4 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 /* loaded from: classes3.dex */
-@interface CheckReturnValue {
-}
+@interface CheckReturnValue {}

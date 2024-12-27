@@ -2,7 +2,9 @@ package com.samsung.android.knox.custom;
 
 import android.content.Context;
 import android.os.Binder;
+
 import com.samsung.android.knox.EnterpriseDeviceManager;
+
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +19,8 @@ public class PrivateKnoxCustom {
     public static final int KNOX_CUSTOM_FLAG_OFFSET = 30;
     public static final int KNOX_CUSTOM_RESERVED_FLAG = 2;
     public static final int KNOX_CUSTOM_RESERVED_OFFSET = 9;
-    public static final String KNOX_CUSTOM_SYSTEM_PERMISSION_ONESDK = "com.samsung.android.knox.permission.KNOX_CUSTOM_SYSTEM";
+    public static final String KNOX_CUSTOM_SYSTEM_PERMISSION_ONESDK =
+            "com.samsung.android.knox.permission.KNOX_CUSTOM_SYSTEM";
     public static final int KNOX_CUSTOM_TRUE = 8;
     public static final int PARAM_BUF_SIZE = 32;
     public static final String TAG = "PrivateKnoxCustom:";
@@ -50,7 +53,10 @@ public class PrivateKnoxCustom {
     private native boolean writeParamData(byte[] bArr);
 
     public final int enforceSystemPermission() throws SecurityException {
-        getEDM().enforceActiveAdminPermission(new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_CUSTOM_SYSTEM")));
+        getEDM().enforceActiveAdminPermission(
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.samsung.android.knox.permission.KNOX_CUSTOM_SYSTEM")));
         return 0;
     }
 

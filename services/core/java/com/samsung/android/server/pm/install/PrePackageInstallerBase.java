@@ -21,14 +21,16 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.pm.PackageInstallerService;
 import com.android.server.pm.PackageManagerServiceUtils;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.server.pm.PmLog;
 import com.samsung.android.server.pm.PmSharedPreferences;
-import com.samsung.android.server.pm.install.PrePackageInstallerBase;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -106,7 +108,12 @@ public abstract class PrePackageInstallerBase {
                 }
                 if (this.mFile.getName().endsWith(".apk.gz")) {
                     String name = this.mFile.getName();
-                    File file2 = new File(new File("/data/user_de/0/android/cache/PrePackageInstaller", name.replace(".apk.gz", "")), name.replace(".gz", ""));
+                    File file2 =
+                            new File(
+                                    new File(
+                                            "/data/user_de/0/android/cache/PrePackageInstaller",
+                                            name.replace(".apk.gz", "")),
+                                    name.replace(".gz", ""));
                     if (file2.exists()) {
                         return file2;
                     }
@@ -115,7 +122,9 @@ public abstract class PrePackageInstallerBase {
                         parentFile.mkdirs();
                     }
                     try {
-                        Slog.d("PrePackageInstaller", "Decompressing " + this.mFile + " to " + file2);
+                        Slog.d(
+                                "PrePackageInstaller",
+                                "Decompressing " + this.mFile + " to " + file2);
                         PackageManagerServiceUtils.decompressFile(this.mFile, file2);
                         this.mDecompressedFile = file2;
                     } catch (Exception unused) {
@@ -133,7 +142,12 @@ public abstract class PrePackageInstallerBase {
             if (file != null && file.exists() && this.mFile.getName().endsWith(".apk.gz")) {
                 if (this.mDecompressedFile == null) {
                     String name = this.mFile.getName();
-                    File file2 = new File(new File("/data/user_de/0/android/cache/PrePackageInstaller", name.replace(".apk.gz", "")), name.replace(".gz", ""));
+                    File file2 =
+                            new File(
+                                    new File(
+                                            "/data/user_de/0/android/cache/PrePackageInstaller",
+                                            name.replace(".apk.gz", "")),
+                                    name.replace(".gz", ""));
                     if (file2.exists()) {
                         this.mDecompressedFile = file2;
                     }
@@ -148,7 +162,11 @@ public abstract class PrePackageInstallerBase {
         }
 
         public final String toString() {
-            return "ApkFile{origin: " + this.mFile + ", decompressed: " + this.mDecompressedFile + "}";
+            return "ApkFile{origin: "
+                    + this.mFile
+                    + ", decompressed: "
+                    + this.mDecompressedFile
+                    + "}";
         }
     }
 
@@ -162,7 +180,8 @@ public abstract class PrePackageInstallerBase {
             try {
                 FileOutputStream fileOutputStream = new FileOutputStream(file, true);
                 try {
-                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, "UTF-8");
+                    OutputStreamWriter outputStreamWriter =
+                            new OutputStreamWriter(fileOutputStream, "UTF-8");
                     try {
                         synchronized (((StringBuffer) this.mResult)) {
                             outputStreamWriter.write(((StringBuffer) this.mResult).toString());
@@ -181,7 +200,9 @@ public abstract class PrePackageInstallerBase {
         }
 
         public void out(String str) {
-            String format = ((SimpleDateFormat) this.mLocalSender).format(new Date(System.currentTimeMillis()));
+            String format =
+                    ((SimpleDateFormat) this.mLocalSender)
+                            .format(new Date(System.currentTimeMillis()));
             Slog.i("PrePackageInstaller", str);
             synchronized (((StringBuffer) this.mResult)) {
                 ((StringBuffer) this.mResult).append(format + " : " + str + "\n");
@@ -194,7 +215,11 @@ public abstract class PrePackageInstallerBase {
         public static Context mContext;
     }
 
-    public PrePackageInstallerBase(Context context, PackageInstallerService packageInstallerService, boolean z, boolean z2) {
+    public PrePackageInstallerBase(
+            Context context,
+            PackageInstallerService packageInstallerService,
+            boolean z,
+            boolean z2) {
         LocalIntentReceiver localIntentReceiver = new LocalIntentReceiver();
         localIntentReceiver.mResult = new StringBuffer();
         localIntentReceiver.mLocalSender = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
@@ -210,21 +235,31 @@ public abstract class PrePackageInstallerBase {
         SettingsProviderProxy settingsProviderProxy = new SettingsProviderProxy();
         SettingsProviderProxy.mContext = context;
         this.mSettingsProviderProxy = settingsProviderProxy;
-        this.mFingerprint = Settings.System.getString(SettingsProviderProxy.mContext.getContentResolver(), "preload_fingerprint");
+        this.mFingerprint =
+                Settings.System.getString(
+                        SettingsProviderProxy.mContext.getContentResolver(), "preload_fingerprint");
         this.mPackageManager = context.getPackageManager();
     }
 
-    public static boolean isExistHigherVersionPkg(PackageInfo packageInfo, PackageInfo packageInfo2) {
+    public static boolean isExistHigherVersionPkg(
+            PackageInfo packageInfo, PackageInfo packageInfo2) {
         String str;
         String str2;
-        if (packageInfo2 == null || (str = packageInfo2.versionName) == null || (str2 = packageInfo.versionName) == null || packageInfo.versionCode > packageInfo2.versionCode) {
+        if (packageInfo2 == null
+                || (str = packageInfo2.versionName) == null
+                || (str2 = packageInfo.versionName) == null
+                || packageInfo.versionCode > packageInfo2.versionCode) {
             return false;
         }
-        return str.compareTo(str2) > 0 || packageInfo2.versionName.compareTo(packageInfo.versionName) == 0;
+        return str.compareTo(str2) > 0
+                || packageInfo2.versionName.compareTo(packageInfo.versionName) == 0;
     }
 
     public static boolean isValidApkFile(File file) {
-        return file != null && file.exists() && file.length() != 0 && file.getName().endsWith(".apk");
+        return file != null
+                && file.exists()
+                && file.length() != 0
+                && file.getName().endsWith(".apk");
     }
 
     public abstract void addInstallPackageList(File[] fileArr);
@@ -255,7 +290,8 @@ public abstract class PrePackageInstallerBase {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             try {
-                InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
+                InputStreamReader inputStreamReader =
+                        new InputStreamReader(fileInputStream, "UTF-8");
                 try {
                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                     while (true) {
@@ -266,8 +302,12 @@ public abstract class PrePackageInstallerBase {
                                 inputStreamReader.close();
                                 fileInputStream.close();
                                 return;
-                            } else if (readLine.length() > 0 && !readLine.startsWith("#") && !this.mUninstallPackageList.contains(readLine)) {
-                                localIntentReceiver.out("add to unInstallPackageList from list omcFile - pkg:" + readLine);
+                            } else if (readLine.length() > 0
+                                    && !readLine.startsWith("#")
+                                    && !this.mUninstallPackageList.contains(readLine)) {
+                                localIntentReceiver.out(
+                                        "add to unInstallPackageList from list omcFile - pkg:"
+                                                + readLine);
                                 this.mUninstallPackageList.add(readLine);
                             }
                         } finally {
@@ -288,7 +328,8 @@ public abstract class PrePackageInstallerBase {
                 if (this.mCachedPackageArchiveInfo.containsKey(file)) {
                     return (PackageInfo) this.mCachedPackageArchiveInfo.get(file);
                 }
-                PackageInfo packageArchiveInfo = this.mPackageManager.getPackageArchiveInfo(file.getAbsolutePath(), 0);
+                PackageInfo packageArchiveInfo =
+                        this.mPackageManager.getPackageArchiveInfo(file.getAbsolutePath(), 0);
                 synchronized (this.mLock) {
                     this.mCachedPackageArchiveInfo.put(file, packageArchiveInfo);
                 }
@@ -329,7 +370,10 @@ public abstract class PrePackageInstallerBase {
         String concat = this.mHistoryForSettingProvider.concat(str + ";");
         this.mHistoryForSettingProvider = concat;
         this.mSettingsProviderProxy.getClass();
-        Settings.System.putString(SettingsProviderProxy.mContext.getContentResolver(), "preload_install_history", concat);
+        Settings.System.putString(
+                SettingsProviderProxy.mContext.getContentResolver(),
+                "preload_install_history",
+                concat);
         LocalIntentReceiver localIntentReceiver = this.mLogMsg;
         localIntentReceiver.out("saveInstallHistory() : " + str);
         localIntentReceiver.flush();
@@ -360,12 +404,14 @@ public abstract class PrePackageInstallerBase {
                         PackageInfo packageInfo = this.mPackageManager.getPackageInfo(str, 0);
                         if (this.mIsUpgrade) {
                             if (isExistHigherVersionPkg(cachedPackageArchiveInfo, packageInfo)) {
-                                localIntentReceiver.out("exists higher Version: " + file.getAbsolutePath());
+                                localIntentReceiver.out(
+                                        "exists higher Version: " + file.getAbsolutePath());
                                 removeApkFileFromInstallList(apkFile);
                                 putInstallHistory(str);
                             }
                         } else if (packageInfo != null) {
-                            localIntentReceiver.out("already installed : " + file.getAbsolutePath());
+                            localIntentReceiver.out(
+                                    "already installed : " + file.getAbsolutePath());
                             removeApkFileFromInstallList(apkFile);
                             putInstallHistory(str);
                         }
@@ -374,7 +420,8 @@ public abstract class PrePackageInstallerBase {
                     localIntentReceiver.out("new : " + file.getAbsolutePath());
                 } catch (NullPointerException e) {
                     removeApkFileFromInstallList(apkFile);
-                    localIntentReceiver.out("something wrong occurred " + file.getAbsolutePath() + ", e = " + e);
+                    localIntentReceiver.out(
+                            "something wrong occurred " + file.getAbsolutePath() + ", e = " + e);
                 }
             } else {
                 removeApkFileFromInstallList(apkFile);
@@ -387,33 +434,54 @@ public abstract class PrePackageInstallerBase {
         if (this.mIsFirstBoot || this.mIsUpgrade || !Build.FINGERPRINT.equals(this.mFingerprint)) {
             Context context = this.mContext;
             synchronized (PmSharedPreferences.class) {
-                j = context.createDeviceProtectedStorageContext().getSharedPreferences(new File(Environment.getDataSystemDirectory(), "samsung_pm_settings.xml"), 0).getLong("attempt_count", 0L);
+                j =
+                        context.createDeviceProtectedStorageContext()
+                                .getSharedPreferences(
+                                        new File(
+                                                Environment.getDataSystemDirectory(),
+                                                "samsung_pm_settings.xml"),
+                                        0)
+                                .getLong("attempt_count", 0L);
             }
             long j2 = j + 1;
             PmSharedPreferences.putLong(this.mContext, j2 % 5);
             if (j2 < 5) {
                 LocalIntentReceiver localIntentReceiver = this.mLogMsg;
-                String str = "!@mIsUpgrade : " + this.mIsUpgrade + ", mIsFirstBoot : " + this.mIsFirstBoot + ", mFingerprint : " + this.mFingerprint;
+                String str =
+                        "!@mIsUpgrade : "
+                                + this.mIsUpgrade
+                                + ", mIsFirstBoot : "
+                                + this.mIsFirstBoot
+                                + ", mFingerprint : "
+                                + this.mFingerprint;
                 localIntentReceiver.getClass();
                 PmLog.logDebugInfo(str);
                 localIntentReceiver.out(str);
                 HandlerThread handlerThread = new HandlerThread("PrePackageInstallThread");
                 handlerThread.start();
                 final CompletableFuture completableFuture = new CompletableFuture();
-                handlerThread.getThreadHandler().post(new Runnable() { // from class: com.samsung.android.server.pm.install.PrePackageInstallerBase$$ExternalSyntheticLambda3
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        PrePackageInstallerBase prePackageInstallerBase = PrePackageInstallerBase.this;
-                        CompletableFuture completableFuture2 = completableFuture;
-                        prePackageInstallerBase.startPrePackageInstall();
-                        File file = new File("/data/user_de/0/android/cache/PrePackageInstaller");
-                        if (file.exists()) {
-                            FileUtils.deleteContentsAndDir(file);
-                        }
-                        PmSharedPreferences.putLong(prePackageInstallerBase.mContext, 0L);
-                        completableFuture2.complete(Boolean.TRUE);
-                    }
-                });
+                handlerThread
+                        .getThreadHandler()
+                        .post(
+                                new Runnable() { // from class:
+                                    // com.samsung.android.server.pm.install.PrePackageInstallerBase$$ExternalSyntheticLambda3
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        PrePackageInstallerBase prePackageInstallerBase =
+                                                PrePackageInstallerBase.this;
+                                        CompletableFuture completableFuture2 = completableFuture;
+                                        prePackageInstallerBase.startPrePackageInstall();
+                                        File file =
+                                                new File(
+                                                        "/data/user_de/0/android/cache/PrePackageInstaller");
+                                        if (file.exists()) {
+                                            FileUtils.deleteContentsAndDir(file);
+                                        }
+                                        PmSharedPreferences.putLong(
+                                                prePackageInstallerBase.mContext, 0L);
+                                        completableFuture2.complete(Boolean.TRUE);
+                                    }
+                                });
                 return completableFuture;
             }
         }
@@ -448,9 +516,11 @@ public abstract class PrePackageInstallerBase {
                     try {
                         FileInputStream fileInputStream = new FileInputStream(file);
                         try {
-                            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
+                            InputStreamReader inputStreamReader =
+                                    new InputStreamReader(fileInputStream, "UTF-8");
                             try {
-                                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                                BufferedReader bufferedReader =
+                                        new BufferedReader(inputStreamReader);
                                 while (true) {
                                     try {
                                         String readLine = bufferedReader.readLine();
@@ -461,11 +531,20 @@ public abstract class PrePackageInstallerBase {
                                             String[] split = readLine.split("/");
                                             if (split.length == 2) {
                                                 try {
-                                                    this.mPackageManager.grantRuntimePermission(split[0], split[1], UserHandle.OWNER);
-                                                    localIntentReceiver.out("grantPermission Pkg : " + split[0] + " , Request : " + split[1]);
+                                                    this.mPackageManager.grantRuntimePermission(
+                                                            split[0], split[1], UserHandle.OWNER);
+                                                    localIntentReceiver.out(
+                                                            "grantPermission Pkg : "
+                                                                    + split[0]
+                                                                    + " , Request : "
+                                                                    + split[1]);
                                                 } catch (Exception e) {
                                                     e.printStackTrace();
-                                                    localIntentReceiver.out("[Error] grantPermission Pkg : " + split[0] + " , Request : " + split[1]);
+                                                    localIntentReceiver.out(
+                                                            "[Error] grantPermission Pkg : "
+                                                                    + split[0]
+                                                                    + " , Request : "
+                                                                    + split[1]);
                                                 }
                                             }
                                         }
@@ -489,7 +568,8 @@ public abstract class PrePackageInstallerBase {
         }
         String str2 = Build.FINGERPRINT;
         this.mSettingsProviderProxy.getClass();
-        Settings.System.putString(SettingsProviderProxy.mContext.getContentResolver(), "preload_fingerprint", str2);
+        Settings.System.putString(
+                SettingsProviderProxy.mContext.getContentResolver(), "preload_fingerprint", str2);
         Intent intent = new Intent("com.samsung.intent.action.PREINSTALLER_FINISH");
         intent.addFlags(16777216);
         this.mContext.sendBroadcast(intent);
@@ -505,16 +585,29 @@ public abstract class PrePackageInstallerBase {
     public final int startInstallSession(PackageInstaller.Session session) {
         final LocalIntentReceiver localIntentReceiver = new LocalIntentReceiver();
         localIntentReceiver.mResult = new LinkedBlockingQueue();
-        localIntentReceiver.mLocalSender = new IIntentSender.Stub() { // from class: com.samsung.android.server.pm.install.PrePackageInstallerBase.LocalIntentReceiver.1
-            public final void send(int i, Intent intent, String str, IBinder iBinder, IIntentReceiver iIntentReceiver, String str2, Bundle bundle) {
-                try {
-                    ((LinkedBlockingQueue) LocalIntentReceiver.this.mResult).offer(intent, 60L, TimeUnit.SECONDS);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-        session.commit(new IntentSender((LocalIntentReceiver.AnonymousClass1) localIntentReceiver.mLocalSender));
+        localIntentReceiver.mLocalSender =
+                new IIntentSender
+                        .Stub() { // from class:
+                                  // com.samsung.android.server.pm.install.PrePackageInstallerBase.LocalIntentReceiver.1
+                    public final void send(
+                            int i,
+                            Intent intent,
+                            String str,
+                            IBinder iBinder,
+                            IIntentReceiver iIntentReceiver,
+                            String str2,
+                            Bundle bundle) {
+                        try {
+                            ((LinkedBlockingQueue) LocalIntentReceiver.this.mResult)
+                                    .offer(intent, 60L, TimeUnit.SECONDS);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                };
+        session.commit(
+                new IntentSender(
+                        (LocalIntentReceiver.AnonymousClass1) localIntentReceiver.mLocalSender));
         session.close();
         try {
             Intent intent = (Intent) ((LinkedBlockingQueue) localIntentReceiver.mResult).take();
@@ -525,7 +618,9 @@ public abstract class PrePackageInstallerBase {
                 localIntentReceiver2.out("SUCCESS install, " + stringExtra);
                 putInstallHistory(stringExtra);
             } else {
-                StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("FAIL install, ", stringExtra, ", msg = ");
+                StringBuilder m =
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "FAIL install, ", stringExtra, ", msg = ");
                 m.append(intent.getStringExtra("android.content.pm.extra.STATUS_MESSAGE"));
                 localIntentReceiver2.out(m.toString());
             }
@@ -536,7 +631,9 @@ public abstract class PrePackageInstallerBase {
     }
 
     public void startPrePackageInstall() {
-        String deviceOwner = ((DevicePolicyManager) this.mContext.getSystemService("device_policy")).getDeviceOwner();
+        String deviceOwner =
+                ((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                        .getDeviceOwner();
         LocalIntentReceiver localIntentReceiver = this.mLogMsg;
         if (deviceOwner != null) {
             localIntentReceiver.out("DeviceOwner abnormal case!! -> setDisabled");
@@ -545,7 +642,10 @@ public abstract class PrePackageInstallerBase {
         }
         ((HashSet) this.mInstallHistory).clear();
         this.mSettingsProviderProxy.getClass();
-        this.mHistoryForSettingProvider = Settings.System.getString(SettingsProviderProxy.mContext.getContentResolver(), "preload_install_history");
+        this.mHistoryForSettingProvider =
+                Settings.System.getString(
+                        SettingsProviderProxy.mContext.getContentResolver(),
+                        "preload_install_history");
         localIntentReceiver.out("loadInstallHistory() : " + this.mHistoryForSettingProvider);
         localIntentReceiver.flush();
         String str = this.mHistoryForSettingProvider;
@@ -567,85 +667,125 @@ public abstract class PrePackageInstallerBase {
             localIntentReceiver.out("sales_code reading failed");
         }
         localIntentReceiver.out("cscCode : " + str2);
-        ArrayList arrayList = new ArrayList(Arrays.asList("/system/preload", XmlUtils$$ExternalSyntheticOutline0.m("/prism/preload/", str2, "/hidden_app"), "/prism/preload/Common_app", "/system/carrier/preload", XmlUtils$$ExternalSyntheticOutline0.m("/product/preload/", str2, "/hidden_app"), "/product/preload/Common_app"));
+        ArrayList arrayList =
+                new ArrayList(
+                        Arrays.asList(
+                                "/system/preload",
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        "/prism/preload/", str2, "/hidden_app"),
+                                "/prism/preload/Common_app",
+                                "/system/carrier/preload",
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        "/product/preload/", str2, "/hidden_app"),
+                                "/product/preload/Common_app"));
         if (!this.mIsUpgrade) {
             arrayList.add("/system/preloadFactoryResetOnly");
         }
-        arrayList.forEach(new Consumer() { // from class: com.samsung.android.server.pm.install.PrePackageInstallerBase$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                PrePackageInstallerBase.this.addPackageLocation((String) obj);
-            }
-        });
+        arrayList.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.server.pm.install.PrePackageInstallerBase$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        PrePackageInstallerBase.this.addPackageLocation((String) obj);
+                    }
+                });
         ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(4);
         Iterator it = this.mInstallPackageList.iterator();
         while (it.hasNext()) {
             final ApkFile apkFile = (ApkFile) it.next();
             final int i = 1;
-            newFixedThreadPool.submit(new Callable(this) { // from class: com.samsung.android.server.pm.install.PrePackageInstallerBase$$ExternalSyntheticLambda1
-                public final /* synthetic */ PrePackageInstallerBase f$0;
+            newFixedThreadPool.submit(
+                    new Callable(this) { // from class:
+                        // com.samsung.android.server.pm.install.PrePackageInstallerBase$$ExternalSyntheticLambda1
+                        public final /* synthetic */ PrePackageInstallerBase f$0;
 
-                {
-                    this.f$0 = this;
-                }
+                        {
+                            this.f$0 = this;
+                        }
 
-                @Override // java.util.concurrent.Callable
-                public final Object call() {
-                    FileInputStream fileInputStream;
-                    switch (i) {
-                        case 0:
-                            File file = (File) apkFile;
-                            PrePackageInstallerBase prePackageInstallerBase = this.f$0;
-                            PackageInstallerService packageInstallerService = prePackageInstallerBase.mPackageInstallerService;
-                            String str4 = "!@INSTALL ------------------ " + file.getName();
-                            PrePackageInstallerBase.LocalIntentReceiver localIntentReceiver2 = prePackageInstallerBase.mLogMsg;
-                            localIntentReceiver2.getClass();
-                            PmLog.logDebugInfo(str4);
-                            localIntentReceiver2.out(str4);
-                            try {
-                                PackageInstaller.SessionParams sessionParams = new PackageInstaller.SessionParams(1);
-                                sessionParams.installFlags |= 67108864;
-                                sessionParams.sessionFlags |= 33554432;
-                                PackageInstaller.Session session = new PackageInstaller.Session(packageInstallerService.openSession(packageInstallerService.createSession(sessionParams, "PrePackageInstaller", prePackageInstallerBase.mContext.getAttributionTag(), 0)));
-                                long currentTimeMillis = System.currentTimeMillis();
-                                localIntentReceiver2.out("Write : " + file.getName());
-                                try {
-                                    fileInputStream = new FileInputStream(file);
-                                } catch (Exception e) {
-                                    localIntentReceiver2.out(e + " : ignored");
-                                }
-                                try {
-                                    OutputStream openWrite = session.openWrite(file.getName(), 0L, file.length());
+                        @Override // java.util.concurrent.Callable
+                        public final Object call() {
+                            FileInputStream fileInputStream;
+                            switch (i) {
+                                case 0:
+                                    File file = (File) apkFile;
+                                    PrePackageInstallerBase prePackageInstallerBase = this.f$0;
+                                    PackageInstallerService packageInstallerService =
+                                            prePackageInstallerBase.mPackageInstallerService;
+                                    String str4 = "!@INSTALL ------------------ " + file.getName();
+                                    PrePackageInstallerBase.LocalIntentReceiver
+                                            localIntentReceiver2 = prePackageInstallerBase.mLogMsg;
+                                    localIntentReceiver2.getClass();
+                                    PmLog.logDebugInfo(str4);
+                                    localIntentReceiver2.out(str4);
                                     try {
-                                        byte[] bArr = new byte[EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT];
-                                        while (true) {
-                                            int read = fileInputStream.read(bArr);
-                                            if (read == -1) {
-                                                session.fsync(openWrite);
-                                                if (openWrite != null) {
-                                                    openWrite.close();
-                                                }
-                                                fileInputStream.close();
-                                                localIntentReceiver2.out("Write " + file.getName() + " Done :" + (System.currentTimeMillis() - currentTimeMillis) + "ms");
-                                                return session;
-                                            }
-                                            openWrite.write(bArr, 0, read);
+                                        PackageInstaller.SessionParams sessionParams =
+                                                new PackageInstaller.SessionParams(1);
+                                        sessionParams.installFlags |= 67108864;
+                                        sessionParams.sessionFlags |= 33554432;
+                                        PackageInstaller.Session session =
+                                                new PackageInstaller.Session(
+                                                        packageInstallerService.openSession(
+                                                                packageInstallerService
+                                                                        .createSession(
+                                                                                sessionParams,
+                                                                                "PrePackageInstaller",
+                                                                                prePackageInstallerBase
+                                                                                        .mContext
+                                                                                        .getAttributionTag(),
+                                                                                0)));
+                                        long currentTimeMillis = System.currentTimeMillis();
+                                        localIntentReceiver2.out("Write : " + file.getName());
+                                        try {
+                                            fileInputStream = new FileInputStream(file);
+                                        } catch (Exception e) {
+                                            localIntentReceiver2.out(e + " : ignored");
                                         }
-                                    } finally {
+                                        try {
+                                            OutputStream openWrite =
+                                                    session.openWrite(
+                                                            file.getName(), 0L, file.length());
+                                            try {
+                                                byte[] bArr =
+                                                        new byte
+                                                                [EndpointMonitorConst
+                                                                        .FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT];
+                                                while (true) {
+                                                    int read = fileInputStream.read(bArr);
+                                                    if (read == -1) {
+                                                        session.fsync(openWrite);
+                                                        if (openWrite != null) {
+                                                            openWrite.close();
+                                                        }
+                                                        fileInputStream.close();
+                                                        localIntentReceiver2.out(
+                                                                "Write "
+                                                                        + file.getName()
+                                                                        + " Done :"
+                                                                        + (System
+                                                                                        .currentTimeMillis()
+                                                                                - currentTimeMillis)
+                                                                        + "ms");
+                                                        return session;
+                                                    }
+                                                    openWrite.write(bArr, 0, read);
+                                                }
+                                            } finally {
+                                            }
+                                        } finally {
+                                        }
+                                    } catch (Exception e2) {
+                                        localIntentReceiver2.out("error #2, " + e2);
+                                        return null;
                                     }
-                                } finally {
-                                }
-                            } catch (Exception e2) {
-                                localIntentReceiver2.out("error #2, " + e2);
-                                return null;
+                                default:
+                                    PrePackageInstallerBase prePackageInstallerBase2 = this.f$0;
+                                    prePackageInstallerBase2.getClass();
+                                    return prePackageInstallerBase2.getCachedPackageArchiveInfo(
+                                            ((PrePackageInstallerBase.ApkFile) apkFile).getFile());
                             }
-                        default:
-                            PrePackageInstallerBase prePackageInstallerBase2 = this.f$0;
-                            prePackageInstallerBase2.getClass();
-                            return prePackageInstallerBase2.getCachedPackageArchiveInfo(((PrePackageInstallerBase.ApkFile) apkFile).getFile());
-                    }
-                }
-            });
+                        }
+                    });
         }
         newFixedThreadPool.shutdown();
         try {
@@ -657,7 +797,8 @@ public abstract class PrePackageInstallerBase {
         localIntentReceiver.out("[CONFIRMED INSTALLING LIST]");
         Iterator it2 = this.mInstallPackageList.iterator();
         while (it2.hasNext()) {
-            localIntentReceiver.out("TO INSTALL :: " + ((ApkFile) it2.next()).getFile().getAbsolutePath());
+            localIntentReceiver.out(
+                    "TO INSTALL :: " + ((ApkFile) it2.next()).getFile().getAbsolutePath());
         }
         if (this.mInstallPackageList.size() == 0) {
             localIntentReceiver.out("apk count is 0. call setDisabled()");
@@ -670,74 +811,135 @@ public abstract class PrePackageInstallerBase {
                     while (it3.hasNext()) {
                         final File file = ((ApkFile) it3.next()).getFile();
                         final int i2 = 0;
-                        arrayList2.add(newFixedThreadPool2.submit(new Callable(this) { // from class: com.samsung.android.server.pm.install.PrePackageInstallerBase$$ExternalSyntheticLambda1
-                            public final /* synthetic */ PrePackageInstallerBase f$0;
+                        arrayList2.add(
+                                newFixedThreadPool2.submit(
+                                        new Callable(this) { // from class:
+                                            // com.samsung.android.server.pm.install.PrePackageInstallerBase$$ExternalSyntheticLambda1
+                                            public final /* synthetic */ PrePackageInstallerBase
+                                                    f$0;
 
-                            {
-                                this.f$0 = this;
-                            }
-
-                            @Override // java.util.concurrent.Callable
-                            public final Object call() {
-                                FileInputStream fileInputStream;
-                                switch (i2) {
-                                    case 0:
-                                        File file2 = (File) file;
-                                        PrePackageInstallerBase prePackageInstallerBase = this.f$0;
-                                        PackageInstallerService packageInstallerService = prePackageInstallerBase.mPackageInstallerService;
-                                        String str4 = "!@INSTALL ------------------ " + file2.getName();
-                                        PrePackageInstallerBase.LocalIntentReceiver localIntentReceiver2 = prePackageInstallerBase.mLogMsg;
-                                        localIntentReceiver2.getClass();
-                                        PmLog.logDebugInfo(str4);
-                                        localIntentReceiver2.out(str4);
-                                        try {
-                                            PackageInstaller.SessionParams sessionParams = new PackageInstaller.SessionParams(1);
-                                            sessionParams.installFlags |= 67108864;
-                                            sessionParams.sessionFlags |= 33554432;
-                                            PackageInstaller.Session session = new PackageInstaller.Session(packageInstallerService.openSession(packageInstallerService.createSession(sessionParams, "PrePackageInstaller", prePackageInstallerBase.mContext.getAttributionTag(), 0)));
-                                            long currentTimeMillis = System.currentTimeMillis();
-                                            localIntentReceiver2.out("Write : " + file2.getName());
-                                            try {
-                                                fileInputStream = new FileInputStream(file2);
-                                            } catch (Exception e2) {
-                                                localIntentReceiver2.out(e2 + " : ignored");
+                                            {
+                                                this.f$0 = this;
                                             }
-                                            try {
-                                                OutputStream openWrite = session.openWrite(file2.getName(), 0L, file2.length());
-                                                try {
-                                                    byte[] bArr = new byte[EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT];
-                                                    while (true) {
-                                                        int read = fileInputStream.read(bArr);
-                                                        if (read == -1) {
-                                                            session.fsync(openWrite);
-                                                            if (openWrite != null) {
-                                                                openWrite.close();
+
+                                            @Override // java.util.concurrent.Callable
+                                            public final Object call() {
+                                                FileInputStream fileInputStream;
+                                                switch (i2) {
+                                                    case 0:
+                                                        File file2 = (File) file;
+                                                        PrePackageInstallerBase
+                                                                prePackageInstallerBase = this.f$0;
+                                                        PackageInstallerService
+                                                                packageInstallerService =
+                                                                        prePackageInstallerBase
+                                                                                .mPackageInstallerService;
+                                                        String str4 =
+                                                                "!@INSTALL ------------------ "
+                                                                        + file2.getName();
+                                                        PrePackageInstallerBase.LocalIntentReceiver
+                                                                localIntentReceiver2 =
+                                                                        prePackageInstallerBase
+                                                                                .mLogMsg;
+                                                        localIntentReceiver2.getClass();
+                                                        PmLog.logDebugInfo(str4);
+                                                        localIntentReceiver2.out(str4);
+                                                        try {
+                                                            PackageInstaller.SessionParams
+                                                                    sessionParams =
+                                                                            new PackageInstaller
+                                                                                    .SessionParams(
+                                                                                    1);
+                                                            sessionParams.installFlags |= 67108864;
+                                                            sessionParams.sessionFlags |= 33554432;
+                                                            PackageInstaller.Session session =
+                                                                    new PackageInstaller.Session(
+                                                                            packageInstallerService
+                                                                                    .openSession(
+                                                                                            packageInstallerService
+                                                                                                    .createSession(
+                                                                                                            sessionParams,
+                                                                                                            "PrePackageInstaller",
+                                                                                                            prePackageInstallerBase
+                                                                                                                    .mContext
+                                                                                                                    .getAttributionTag(),
+                                                                                                            0)));
+                                                            long currentTimeMillis =
+                                                                    System.currentTimeMillis();
+                                                            localIntentReceiver2.out(
+                                                                    "Write : " + file2.getName());
+                                                            try {
+                                                                fileInputStream =
+                                                                        new FileInputStream(file2);
+                                                            } catch (Exception e2) {
+                                                                localIntentReceiver2.out(
+                                                                        e2 + " : ignored");
                                                             }
-                                                            fileInputStream.close();
-                                                            localIntentReceiver2.out("Write " + file2.getName() + " Done :" + (System.currentTimeMillis() - currentTimeMillis) + "ms");
-                                                            return session;
+                                                            try {
+                                                                OutputStream openWrite =
+                                                                        session.openWrite(
+                                                                                file2.getName(),
+                                                                                0L,
+                                                                                file2.length());
+                                                                try {
+                                                                    byte[] bArr =
+                                                                            new byte
+                                                                                    [EndpointMonitorConst
+                                                                                            .FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT];
+                                                                    while (true) {
+                                                                        int read =
+                                                                                fileInputStream
+                                                                                        .read(bArr);
+                                                                        if (read == -1) {
+                                                                            session.fsync(
+                                                                                    openWrite);
+                                                                            if (openWrite != null) {
+                                                                                openWrite.close();
+                                                                            }
+                                                                            fileInputStream.close();
+                                                                            localIntentReceiver2
+                                                                                    .out(
+                                                                                            "Write "
+                                                                                                    + file2
+                                                                                                            .getName()
+                                                                                                    + " Done"
+                                                                                                    + " :"
+                                                                                                    + (System
+                                                                                                                    .currentTimeMillis()
+                                                                                                            - currentTimeMillis)
+                                                                                                    + "ms");
+                                                                            return session;
+                                                                        }
+                                                                        openWrite.write(
+                                                                                bArr, 0, read);
+                                                                    }
+                                                                } finally {
+                                                                }
+                                                            } finally {
+                                                            }
+                                                        } catch (Exception e22) {
+                                                            localIntentReceiver2.out(
+                                                                    "error #2, " + e22);
+                                                            return null;
                                                         }
-                                                        openWrite.write(bArr, 0, read);
-                                                    }
-                                                } finally {
+                                                    default:
+                                                        PrePackageInstallerBase
+                                                                prePackageInstallerBase2 = this.f$0;
+                                                        prePackageInstallerBase2.getClass();
+                                                        return prePackageInstallerBase2
+                                                                .getCachedPackageArchiveInfo(
+                                                                        ((PrePackageInstallerBase
+                                                                                                .ApkFile)
+                                                                                        file)
+                                                                                .getFile());
                                                 }
-                                            } finally {
                                             }
-                                        } catch (Exception e22) {
-                                            localIntentReceiver2.out("error #2, " + e22);
-                                            return null;
-                                        }
-                                    default:
-                                        PrePackageInstallerBase prePackageInstallerBase2 = this.f$0;
-                                        prePackageInstallerBase2.getClass();
-                                        return prePackageInstallerBase2.getCachedPackageArchiveInfo(((PrePackageInstallerBase.ApkFile) file).getFile());
-                                }
-                            }
-                        }));
+                                        }));
                     }
                     Iterator it4 = arrayList2.iterator();
                     while (it4.hasNext()) {
-                        PackageInstaller.Session session = (PackageInstaller.Session) ((Future) it4.next()).get();
+                        PackageInstaller.Session session =
+                                (PackageInstaller.Session) ((Future) it4.next()).get();
                         if (session != null) {
                             if (startInstallSession(session) == 0) {
                                 this.mSuccessCount++;
@@ -747,9 +949,18 @@ public abstract class PrePackageInstallerBase {
                         }
                     }
                     newFixedThreadPool2.shutdownNow();
-                    this.mInstallPackageList.forEach(new PrePackageInstallerBase$$ExternalSyntheticLambda2());
-                    PmLog.logDebugInfoAndLogcat("PrePackageInstaller Result. SUCCESS : " + this.mSuccessCount + " FAIL : " + this.mFailCount + " SKIP : " + this.mSkipCount, "PrePackageInstaller");
-                    localIntentReceiver.out("installPreloadPackageList() --------------------- COMPLETE");
+                    this.mInstallPackageList.forEach(
+                            new PrePackageInstallerBase$$ExternalSyntheticLambda2());
+                    PmLog.logDebugInfoAndLogcat(
+                            "PrePackageInstaller Result. SUCCESS : "
+                                    + this.mSuccessCount
+                                    + " FAIL : "
+                                    + this.mFailCount
+                                    + " SKIP : "
+                                    + this.mSkipCount,
+                            "PrePackageInstaller");
+                    localIntentReceiver.out(
+                            "installPreloadPackageList() --------------------- COMPLETE");
                 } catch (InterruptedException | ExecutionException e2) {
                     localIntentReceiver.out("Fail to PrePackageInstall : " + e2);
                     throw new IllegalStateException(e2);

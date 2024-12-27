@@ -15,7 +15,9 @@ import android.net.metrics.RaEvent;
 import android.net.metrics.ValidationProbeEvent;
 import android.net.metrics.WakeupStats;
 import android.util.SparseIntArray;
+
 import com.android.server.connectivity.metrics.nano.IpConnectivityLogClass;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -37,12 +39,13 @@ public abstract class IpConnectivityEventBuilder {
         sparseIntArray.append(4, 0);
         sparseIntArray.append(5, 8);
         sparseIntArray.append(6, 9);
-        IFNAME_PREFIXES = new String[]{"rmnet", "wlan", "bt-pan", "p2p", "aware", "eth", "wpan"};
-        IFNAME_LINKLAYERS = new int[]{2, 4, 1, 7, 8, 3, 9};
+        IFNAME_PREFIXES = new String[] {"rmnet", "wlan", "bt-pan", "p2p", "aware", "eth", "wpan"};
+        IFNAME_LINKLAYERS = new int[] {2, 4, 1, 7, 8, 3, 9};
     }
 
     public static IpConnectivityLogClass.IpConnectivityEvent buildEvent(int i, String str, long j) {
-        IpConnectivityLogClass.IpConnectivityEvent ipConnectivityEvent = new IpConnectivityLogClass.IpConnectivityEvent();
+        IpConnectivityLogClass.IpConnectivityEvent ipConnectivityEvent =
+                new IpConnectivityLogClass.IpConnectivityEvent();
         ipConnectivityEvent.networkId = i;
         ipConnectivityEvent.transports = j;
         if (str != null) {
@@ -82,9 +85,13 @@ public abstract class IpConnectivityEventBuilder {
     }
 
     public static byte[] serialize(int i, List list) {
-        IpConnectivityLogClass.IpConnectivityLog ipConnectivityLog = new IpConnectivityLogClass.IpConnectivityLog();
+        IpConnectivityLogClass.IpConnectivityLog ipConnectivityLog =
+                new IpConnectivityLogClass.IpConnectivityLog();
         ArrayList arrayList = (ArrayList) list;
-        IpConnectivityLogClass.IpConnectivityEvent[] ipConnectivityEventArr = (IpConnectivityLogClass.IpConnectivityEvent[]) arrayList.toArray(new IpConnectivityLogClass.IpConnectivityEvent[arrayList.size()]);
+        IpConnectivityLogClass.IpConnectivityEvent[] ipConnectivityEventArr =
+                (IpConnectivityLogClass.IpConnectivityEvent[])
+                        arrayList.toArray(
+                                new IpConnectivityLogClass.IpConnectivityEvent[arrayList.size()]);
         ipConnectivityLog.events = ipConnectivityEventArr;
         ipConnectivityLog.droppedEvents = i;
         if (ipConnectivityEventArr.length > 0 || i > 0) {
@@ -106,29 +113,40 @@ public abstract class IpConnectivityEventBuilder {
     }
 
     public static IpConnectivityLogClass.IpConnectivityEvent toProto(ConnectStats connectStats) {
-        IpConnectivityLogClass.ConnectStatistics connectStatistics = new IpConnectivityLogClass.ConnectStatistics();
+        IpConnectivityLogClass.ConnectStatistics connectStatistics =
+                new IpConnectivityLogClass.ConnectStatistics();
         connectStatistics.connectCount = connectStats.connectCount;
         connectStatistics.connectBlockingCount = connectStats.connectBlockingCount;
         connectStatistics.ipv6AddrCount = connectStats.ipv6ConnectCount;
         connectStatistics.latenciesMs = connectStats.latencies.toArray();
         connectStatistics.errnosCounters = toPairArray(connectStats.errnos);
-        IpConnectivityLogClass.IpConnectivityEvent buildEvent = buildEvent(connectStats.netId, null, connectStats.transports);
+        IpConnectivityLogClass.IpConnectivityEvent buildEvent =
+                buildEvent(connectStats.netId, null, connectStats.transports);
         buildEvent.setConnectStatistics(connectStatistics);
         return buildEvent;
     }
 
-    public static IpConnectivityLogClass.IpConnectivityEvent toProto(DefaultNetworkEvent defaultNetworkEvent) {
-        IpConnectivityLogClass.DefaultNetworkEvent defaultNetworkEvent2 = new IpConnectivityLogClass.DefaultNetworkEvent();
+    public static IpConnectivityLogClass.IpConnectivityEvent toProto(
+            DefaultNetworkEvent defaultNetworkEvent) {
+        IpConnectivityLogClass.DefaultNetworkEvent defaultNetworkEvent2 =
+                new IpConnectivityLogClass.DefaultNetworkEvent();
         defaultNetworkEvent2.finalScore = defaultNetworkEvent.finalScore;
         defaultNetworkEvent2.initialScore = defaultNetworkEvent.initialScore;
         boolean z = defaultNetworkEvent.ipv4;
-        defaultNetworkEvent2.ipSupport = (z && defaultNetworkEvent.ipv6) ? 3 : defaultNetworkEvent.ipv6 ? 2 : z ? 1 : 0;
+        defaultNetworkEvent2.ipSupport =
+                (z && defaultNetworkEvent.ipv6) ? 3 : defaultNetworkEvent.ipv6 ? 2 : z ? 1 : 0;
         defaultNetworkEvent2.defaultNetworkDurationMs = defaultNetworkEvent.durationMs;
         defaultNetworkEvent2.validationDurationMs = defaultNetworkEvent.validatedMs;
         long j = defaultNetworkEvent.previousTransports;
         int bitCount = Long.bitCount(j);
-        defaultNetworkEvent2.previousDefaultNetworkLinkLayer = bitCount != 0 ? bitCount != 1 ? 6 : TRANSPORT_LINKLAYER_MAP.get(Long.numberOfTrailingZeros(j), 0) : 0;
-        IpConnectivityLogClass.IpConnectivityEvent buildEvent = buildEvent(defaultNetworkEvent.netId, null, defaultNetworkEvent.transports);
+        defaultNetworkEvent2.previousDefaultNetworkLinkLayer =
+                bitCount != 0
+                        ? bitCount != 1
+                                ? 6
+                                : TRANSPORT_LINKLAYER_MAP.get(Long.numberOfTrailingZeros(j), 0)
+                        : 0;
+        IpConnectivityLogClass.IpConnectivityEvent buildEvent =
+                buildEvent(defaultNetworkEvent.netId, null, defaultNetworkEvent.transports);
         if (defaultNetworkEvent.transports == 0) {
             buildEvent.linkLayer = 5;
         }
@@ -137,7 +155,8 @@ public abstract class IpConnectivityEventBuilder {
     }
 
     public static IpConnectivityLogClass.IpConnectivityEvent toProto(DnsEvent dnsEvent) {
-        IpConnectivityLogClass.DNSLookupBatch dNSLookupBatch = new IpConnectivityLogClass.DNSLookupBatch();
+        IpConnectivityLogClass.DNSLookupBatch dNSLookupBatch =
+                new IpConnectivityLogClass.DNSLookupBatch();
         dnsEvent.resize(dnsEvent.eventCount);
         byte[] bArr = dnsEvent.eventTypes;
         int[] iArr = new int[bArr.length];
@@ -152,7 +171,8 @@ public abstract class IpConnectivityEventBuilder {
         }
         dNSLookupBatch.returnCodes = iArr2;
         dNSLookupBatch.latenciesMs = dnsEvent.latenciesMs;
-        IpConnectivityLogClass.IpConnectivityEvent buildEvent = buildEvent(dnsEvent.netId, null, dnsEvent.transports);
+        IpConnectivityLogClass.IpConnectivityEvent buildEvent =
+                buildEvent(dnsEvent.netId, null, dnsEvent.transports);
         buildEvent.setDnsLookupBatch(dNSLookupBatch);
         return buildEvent;
     }
@@ -172,7 +192,8 @@ public abstract class IpConnectivityEventBuilder {
         wakeupStats2.l2BroadcastCount = wakeupStats.l2BroadcastCount;
         wakeupStats2.ethertypeCounts = toPairArray(wakeupStats.ethertypes);
         wakeupStats2.ipNextHeaderCounts = toPairArray(wakeupStats.ipNextHeaders);
-        IpConnectivityLogClass.IpConnectivityEvent buildEvent = buildEvent(0, wakeupStats.iface, 0L);
+        IpConnectivityLogClass.IpConnectivityEvent buildEvent =
+                buildEvent(0, wakeupStats.iface, 0L);
         buildEvent.setWakeupStats(wakeupStats2);
         return buildEvent;
     }
@@ -181,8 +202,13 @@ public abstract class IpConnectivityEventBuilder {
         ArrayList arrayList = new ArrayList(list.size());
         Iterator it = list.iterator();
         while (it.hasNext()) {
-            ConnectivityMetricsEvent connectivityMetricsEvent = (ConnectivityMetricsEvent) it.next();
-            IpConnectivityLogClass.IpConnectivityEvent buildEvent = buildEvent(connectivityMetricsEvent.netId, connectivityMetricsEvent.ifname, connectivityMetricsEvent.transports);
+            ConnectivityMetricsEvent connectivityMetricsEvent =
+                    (ConnectivityMetricsEvent) it.next();
+            IpConnectivityLogClass.IpConnectivityEvent buildEvent =
+                    buildEvent(
+                            connectivityMetricsEvent.netId,
+                            connectivityMetricsEvent.ifname,
+                            connectivityMetricsEvent.transports);
             buildEvent.timeMs = connectivityMetricsEvent.timestamp;
             DhcpErrorEvent dhcpErrorEvent = connectivityMetricsEvent.data;
             if (dhcpErrorEvent instanceof DhcpErrorEvent) {
@@ -191,36 +217,42 @@ public abstract class IpConnectivityEventBuilder {
                 buildEvent.setDhcpEvent(dHCPEvent);
             } else if (dhcpErrorEvent instanceof DhcpClientEvent) {
                 DhcpClientEvent dhcpClientEvent = (DhcpClientEvent) dhcpErrorEvent;
-                IpConnectivityLogClass.DHCPEvent dHCPEvent2 = new IpConnectivityLogClass.DHCPEvent();
+                IpConnectivityLogClass.DHCPEvent dHCPEvent2 =
+                        new IpConnectivityLogClass.DHCPEvent();
                 dHCPEvent2.setStateTransition(dhcpClientEvent.msg);
                 dHCPEvent2.durationMs = dhcpClientEvent.durationMs;
                 buildEvent.setDhcpEvent(dHCPEvent2);
             } else if (dhcpErrorEvent instanceof IpManagerEvent) {
                 IpManagerEvent ipManagerEvent = (IpManagerEvent) dhcpErrorEvent;
-                IpConnectivityLogClass.IpProvisioningEvent ipProvisioningEvent = new IpConnectivityLogClass.IpProvisioningEvent();
+                IpConnectivityLogClass.IpProvisioningEvent ipProvisioningEvent =
+                        new IpConnectivityLogClass.IpProvisioningEvent();
                 ipProvisioningEvent.eventType = ipManagerEvent.eventType;
                 ipProvisioningEvent.latencyMs = (int) ipManagerEvent.durationMs;
                 buildEvent.setIpProvisioningEvent(ipProvisioningEvent);
             } else if (dhcpErrorEvent instanceof IpReachabilityEvent) {
-                IpConnectivityLogClass.IpReachabilityEvent ipReachabilityEvent = new IpConnectivityLogClass.IpReachabilityEvent();
+                IpConnectivityLogClass.IpReachabilityEvent ipReachabilityEvent =
+                        new IpConnectivityLogClass.IpReachabilityEvent();
                 ipReachabilityEvent.eventType = ((IpReachabilityEvent) dhcpErrorEvent).eventType;
                 buildEvent.setIpReachabilityEvent(ipReachabilityEvent);
             } else if (dhcpErrorEvent instanceof NetworkEvent) {
                 NetworkEvent networkEvent = (NetworkEvent) dhcpErrorEvent;
-                IpConnectivityLogClass.NetworkEvent networkEvent2 = new IpConnectivityLogClass.NetworkEvent();
+                IpConnectivityLogClass.NetworkEvent networkEvent2 =
+                        new IpConnectivityLogClass.NetworkEvent();
                 networkEvent2.eventType = networkEvent.eventType;
                 networkEvent2.latencyMs = (int) networkEvent.durationMs;
                 buildEvent.setNetworkEvent(networkEvent2);
             } else if (dhcpErrorEvent instanceof ValidationProbeEvent) {
                 ValidationProbeEvent validationProbeEvent = (ValidationProbeEvent) dhcpErrorEvent;
-                IpConnectivityLogClass.ValidationProbeEvent validationProbeEvent2 = new IpConnectivityLogClass.ValidationProbeEvent();
+                IpConnectivityLogClass.ValidationProbeEvent validationProbeEvent2 =
+                        new IpConnectivityLogClass.ValidationProbeEvent();
                 validationProbeEvent2.latencyMs = (int) validationProbeEvent.durationMs;
                 validationProbeEvent2.probeType = validationProbeEvent.probeType;
                 validationProbeEvent2.probeResult = validationProbeEvent.returnCode;
                 buildEvent.setValidationProbeEvent(validationProbeEvent2);
             } else if (dhcpErrorEvent instanceof ApfProgramEvent) {
                 ApfProgramEvent apfProgramEvent = (ApfProgramEvent) dhcpErrorEvent;
-                IpConnectivityLogClass.ApfProgramEvent apfProgramEvent2 = new IpConnectivityLogClass.ApfProgramEvent();
+                IpConnectivityLogClass.ApfProgramEvent apfProgramEvent2 =
+                        new IpConnectivityLogClass.ApfProgramEvent();
                 apfProgramEvent2.lifetime = apfProgramEvent.lifetime;
                 apfProgramEvent2.effectiveLifetime = apfProgramEvent.actualLifetime;
                 apfProgramEvent2.filteredRas = apfProgramEvent.filteredRas;
@@ -236,7 +268,8 @@ public abstract class IpConnectivityEventBuilder {
                 buildEvent.setApfProgramEvent(apfProgramEvent2);
             } else if (dhcpErrorEvent instanceof ApfStats) {
                 ApfStats apfStats = (ApfStats) dhcpErrorEvent;
-                IpConnectivityLogClass.ApfStatistics apfStatistics = new IpConnectivityLogClass.ApfStatistics();
+                IpConnectivityLogClass.ApfStatistics apfStatistics =
+                        new IpConnectivityLogClass.ApfStatistics();
                 apfStatistics.durationMs = apfStats.durationMs;
                 apfStatistics.receivedRas = apfStats.receivedRas;
                 apfStatistics.matchingRas = apfStats.matchingRas;
@@ -245,7 +278,8 @@ public abstract class IpConnectivityEventBuilder {
                 apfStatistics.parseErrors = apfStats.parseErrors;
                 apfStatistics.programUpdates = apfStats.programUpdates;
                 apfStatistics.programUpdatesAll = apfStats.programUpdatesAll;
-                apfStatistics.programUpdatesAllowingMulticast = apfStats.programUpdatesAllowingMulticast;
+                apfStatistics.programUpdatesAllowingMulticast =
+                        apfStats.programUpdatesAllowingMulticast;
                 apfStatistics.maxProgramSize = apfStats.maxProgramSize;
                 buildEvent.setApfStatistics(apfStatistics);
             } else if (dhcpErrorEvent instanceof RaEvent) {

@@ -282,13 +282,17 @@ public class GLES10 {
 
     private static native void glColorPointerBounds(int i, int i2, int i3, Buffer buffer, int i4);
 
-    public static native void glCompressedTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, Buffer buffer);
+    public static native void glCompressedTexImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, Buffer buffer);
 
-    public static native void glCompressedTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
+    public static native void glCompressedTexSubImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
 
-    public static native void glCopyTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
+    public static native void glCopyTexImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
 
-    public static native void glCopyTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
+    public static native void glCopyTexSubImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
 
     public static native void glCullFace(int i);
 
@@ -442,7 +446,8 @@ public class GLES10 {
 
     public static native void glPushMatrix();
 
-    public static native void glReadPixels(int i, int i2, int i3, int i4, int i5, int i6, Buffer buffer);
+    public static native void glReadPixels(
+            int i, int i2, int i3, int i4, int i5, int i6, Buffer buffer);
 
     public static native void glRotatef(float f, float f2, float f3, float f4);
 
@@ -466,7 +471,8 @@ public class GLES10 {
 
     public static native void glStencilOp(int i, int i2, int i3);
 
-    private static native void glTexCoordPointerBounds(int i, int i2, int i3, Buffer buffer, int i4);
+    private static native void glTexCoordPointerBounds(
+            int i, int i2, int i3, Buffer buffer, int i4);
 
     public static native void glTexEnvf(int i, int i2, float f);
 
@@ -480,13 +486,15 @@ public class GLES10 {
 
     public static native void glTexEnvxv(int i, int i2, int[] iArr, int i3);
 
-    public static native void glTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
+    public static native void glTexImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
 
     public static native void glTexParameterf(int i, int i2, float f);
 
     public static native void glTexParameterx(int i, int i2, int i3);
 
-    public static native void glTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
+    public static native void glTexSubImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
 
     public static native void glTranslatef(float f, float f2, float f3);
 

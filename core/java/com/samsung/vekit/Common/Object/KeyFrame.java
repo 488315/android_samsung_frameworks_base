@@ -23,7 +23,11 @@ public class KeyFrame<T> {
         this.interpolationType = interpolationType;
     }
 
-    public KeyFrame(T target, long time, InterpolationType interpolationType, BezierControlPoint bezierControlPoint) {
+    public KeyFrame(
+            T target,
+            long time,
+            InterpolationType interpolationType,
+            BezierControlPoint bezierControlPoint) {
         this.bezierControlPoint = new BezierControlPoint();
         this.target = target;
         this.time = time;
@@ -39,8 +43,13 @@ public class KeyFrame<T> {
         return this.interpolationType;
     }
 
-    public void setBezierControlPoint(float controlPointX1, float controlPointY1, float controlPointX2, float controlPointY2) {
-        this.bezierControlPoint.setValues(controlPointX1, controlPointY1, controlPointX2, controlPointY2);
+    public void setBezierControlPoint(
+            float controlPointX1,
+            float controlPointY1,
+            float controlPointX2,
+            float controlPointY2) {
+        this.bezierControlPoint.setValues(
+                controlPointX1, controlPointY1, controlPointX2, controlPointY2);
     }
 
     public BezierControlPoint getBezierControlPoint() {
@@ -74,13 +83,17 @@ public class KeyFrame<T> {
     }
 
     @Deprecated
-    public KeyFrame(T from, T to, long duration, InterpolationType interpolationType, BezierControlPoint bezierControlPoint) {
+    public KeyFrame(
+            T from,
+            T to,
+            long duration,
+            InterpolationType interpolationType,
+            BezierControlPoint bezierControlPoint) {
         this.bezierControlPoint = new BezierControlPoint();
     }
 
     @Deprecated
-    public void setFrom(T from) {
-    }
+    public void setFrom(T from) {}
 
     @Deprecated
     public T getTo() {
@@ -88,8 +101,7 @@ public class KeyFrame<T> {
     }
 
     @Deprecated
-    public void setTo(T to) {
-    }
+    public void setTo(T to) {}
 
     @Deprecated
     public long getDuration() {
@@ -97,6 +109,5 @@ public class KeyFrame<T> {
     }
 
     @Deprecated
-    public void setDuration(long duration) {
-    }
+    public void setDuration(long duration) {}
 }

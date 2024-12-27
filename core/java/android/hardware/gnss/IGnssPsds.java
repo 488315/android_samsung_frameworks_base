@@ -1,6 +1,5 @@
 package android.hardware.gnss;
 
-import android.hardware.gnss.IGnssPsdsCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -23,12 +22,10 @@ public interface IGnssPsds extends IInterface {
 
     public static class Default implements IGnssPsds {
         @Override // android.hardware.gnss.IGnssPsds
-        public void injectPsdsData(int psdsType, byte[] psdsData) throws RemoteException {
-        }
+        public void injectPsdsData(int psdsType, byte[] psdsData) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssPsds
-        public void setCallback(IGnssPsdsCallback callback) throws RemoteException {
-        }
+        public void setCallback(IGnssPsdsCallback callback) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssPsds
         public int getInterfaceVersion() {
@@ -46,7 +43,7 @@ public interface IGnssPsds extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssPsds {
+    public abstract static class Stub extends Binder implements IGnssPsds {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_injectPsdsData = 1;
@@ -94,7 +91,8 @@ public interface IGnssPsds extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -122,7 +120,8 @@ public interface IGnssPsds extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IGnssPsdsCallback _arg02 = IGnssPsdsCallback.Stub.asInterface(data.readStrongBinder());
+                    IGnssPsdsCallback _arg02 =
+                            IGnssPsdsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg02);
                     reply.writeNoException();

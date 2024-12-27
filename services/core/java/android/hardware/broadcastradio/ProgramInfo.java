@@ -3,6 +3,7 @@ package android.hardware.broadcastradio;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -35,39 +36,55 @@ public final class ProgramInfo implements Parcelable {
                     throw new BadParcelableException("Parcelable too small");
                 }
                 if (parcel.dataPosition() - dataPosition < readInt) {
-                    programInfo.selector = (ProgramSelector) parcel.readTypedObject(ProgramSelector.CREATOR);
+                    programInfo.selector =
+                            (ProgramSelector) parcel.readTypedObject(ProgramSelector.CREATOR);
                     if (parcel.dataPosition() - dataPosition < readInt) {
                         Parcelable.Creator creator = ProgramIdentifier.CREATOR;
-                        programInfo.logicallyTunedTo = (ProgramIdentifier) parcel.readTypedObject(creator);
+                        programInfo.logicallyTunedTo =
+                                (ProgramIdentifier) parcel.readTypedObject(creator);
                         if (parcel.dataPosition() - dataPosition < readInt) {
-                            programInfo.physicallyTunedTo = (ProgramIdentifier) parcel.readTypedObject(creator);
+                            programInfo.physicallyTunedTo =
+                                    (ProgramIdentifier) parcel.readTypedObject(creator);
                             if (parcel.dataPosition() - dataPosition < readInt) {
-                                programInfo.relatedContent = (ProgramIdentifier[]) parcel.createTypedArray(creator);
+                                programInfo.relatedContent =
+                                        (ProgramIdentifier[]) parcel.createTypedArray(creator);
                                 if (parcel.dataPosition() - dataPosition < readInt) {
                                     programInfo.infoFlags = parcel.readInt();
                                     if (parcel.dataPosition() - dataPosition < readInt) {
                                         programInfo.signalQuality = parcel.readInt();
                                         if (parcel.dataPosition() - dataPosition < readInt) {
-                                            programInfo.metadata = (Metadata[]) parcel.createTypedArray(Metadata.CREATOR);
+                                            programInfo.metadata =
+                                                    (Metadata[])
+                                                            parcel.createTypedArray(
+                                                                    Metadata.CREATOR);
                                             if (parcel.dataPosition() - dataPosition < readInt) {
-                                                programInfo.vendorInfo = (VendorKeyValue[]) parcel.createTypedArray(VendorKeyValue.CREATOR);
+                                                programInfo.vendorInfo =
+                                                        (VendorKeyValue[])
+                                                                parcel.createTypedArray(
+                                                                        VendorKeyValue.CREATOR);
                                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                    throw new BadParcelableException(
+                                                            "Overflow in the size of parcelable");
                                                 }
                                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                throw new BadParcelableException(
+                                                        "Overflow in the size of parcelable");
                                             }
                                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -114,7 +131,12 @@ public final class ProgramInfo implements Parcelable {
 
     @Override // android.os.Parcelable
     public final int describeContents() {
-        return describeContents(this.vendorInfo) | describeContents(this.selector) | describeContents(this.logicallyTunedTo) | describeContents(this.physicallyTunedTo) | describeContents(this.relatedContent) | describeContents(this.metadata);
+        return describeContents(this.vendorInfo)
+                | describeContents(this.selector)
+                | describeContents(this.logicallyTunedTo)
+                | describeContents(this.physicallyTunedTo)
+                | describeContents(this.relatedContent)
+                | describeContents(this.metadata);
     }
 
     public final boolean equals(Object obj) {
@@ -125,7 +147,17 @@ public final class ProgramInfo implements Parcelable {
             return false;
         }
         ProgramInfo programInfo = (ProgramInfo) obj;
-        return Objects.deepEquals(this.selector, programInfo.selector) && Objects.deepEquals(this.logicallyTunedTo, programInfo.logicallyTunedTo) && Objects.deepEquals(this.physicallyTunedTo, programInfo.physicallyTunedTo) && Objects.deepEquals(this.relatedContent, programInfo.relatedContent) && Objects.deepEquals(Integer.valueOf(this.infoFlags), Integer.valueOf(programInfo.infoFlags)) && Objects.deepEquals(Integer.valueOf(this.signalQuality), Integer.valueOf(programInfo.signalQuality)) && Objects.deepEquals(this.metadata, programInfo.metadata) && Objects.deepEquals(this.vendorInfo, programInfo.vendorInfo);
+        return Objects.deepEquals(this.selector, programInfo.selector)
+                && Objects.deepEquals(this.logicallyTunedTo, programInfo.logicallyTunedTo)
+                && Objects.deepEquals(this.physicallyTunedTo, programInfo.physicallyTunedTo)
+                && Objects.deepEquals(this.relatedContent, programInfo.relatedContent)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.infoFlags), Integer.valueOf(programInfo.infoFlags))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.signalQuality),
+                        Integer.valueOf(programInfo.signalQuality))
+                && Objects.deepEquals(this.metadata, programInfo.metadata)
+                && Objects.deepEquals(this.vendorInfo, programInfo.vendorInfo);
     }
 
     public final int getStability() {
@@ -133,7 +165,17 @@ public final class ProgramInfo implements Parcelable {
     }
 
     public final int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.selector, this.logicallyTunedTo, this.physicallyTunedTo, this.relatedContent, Integer.valueOf(this.infoFlags), Integer.valueOf(this.signalQuality), this.metadata, this.vendorInfo).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.selector,
+                                this.logicallyTunedTo,
+                                this.physicallyTunedTo,
+                                this.relatedContent,
+                                Integer.valueOf(this.infoFlags),
+                                Integer.valueOf(this.signalQuality),
+                                this.metadata,
+                                this.vendorInfo)
+                        .toArray());
     }
 
     public final String toString() {
@@ -141,7 +183,29 @@ public final class ProgramInfo implements Parcelable {
         stringJoiner.add("selector: " + Objects.toString(this.selector));
         stringJoiner.add("logicallyTunedTo: " + Objects.toString(this.logicallyTunedTo));
         stringJoiner.add("physicallyTunedTo: " + Objects.toString(this.physicallyTunedTo));
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.vendorInfo), "ProgramInfo", AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.metadata), "vendorInfo: ", AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.relatedContent), "infoFlags: ", new StringBuilder("relatedContent: "), stringJoiner), this.infoFlags, stringJoiner, "signalQuality: "), this.signalQuality, stringJoiner, "metadata: "), stringJoiner), stringJoiner));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                        Arrays.toString(this.vendorInfo),
+                        "ProgramInfo",
+                        AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                                Arrays.toString(this.metadata),
+                                "vendorInfo: ",
+                                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                                AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                                                        Arrays.toString(this.relatedContent),
+                                                        "infoFlags: ",
+                                                        new StringBuilder("relatedContent: "),
+                                                        stringJoiner),
+                                                this.infoFlags,
+                                                stringJoiner,
+                                                "signalQuality: "),
+                                        this.signalQuality,
+                                        stringJoiner,
+                                        "metadata: "),
+                                stringJoiner),
+                        stringJoiner));
     }
 
     @Override // android.os.Parcelable

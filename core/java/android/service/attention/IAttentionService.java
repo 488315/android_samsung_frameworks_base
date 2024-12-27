@@ -5,8 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.attention.IAttentionCallback;
-import android.service.attention.IProximityUpdateCallback;
 
 /* loaded from: classes3.dex */
 public interface IAttentionService extends IInterface {
@@ -16,26 +14,24 @@ public interface IAttentionService extends IInterface {
 
     void checkAttention(IAttentionCallback iAttentionCallback) throws RemoteException;
 
-    void onStartProximityUpdates(IProximityUpdateCallback iProximityUpdateCallback) throws RemoteException;
+    void onStartProximityUpdates(IProximityUpdateCallback iProximityUpdateCallback)
+            throws RemoteException;
 
     void onStopProximityUpdates() throws RemoteException;
 
     public static class Default implements IAttentionService {
         @Override // android.service.attention.IAttentionService
-        public void checkAttention(IAttentionCallback callback) throws RemoteException {
-        }
+        public void checkAttention(IAttentionCallback callback) throws RemoteException {}
 
         @Override // android.service.attention.IAttentionService
-        public void cancelAttentionCheck(IAttentionCallback callback) throws RemoteException {
-        }
+        public void cancelAttentionCheck(IAttentionCallback callback) throws RemoteException {}
 
         @Override // android.service.attention.IAttentionService
-        public void onStartProximityUpdates(IProximityUpdateCallback callback) throws RemoteException {
-        }
+        public void onStartProximityUpdates(IProximityUpdateCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.attention.IAttentionService
-        public void onStopProximityUpdates() throws RemoteException {
-        }
+        public void onStopProximityUpdates() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -43,7 +39,7 @@ public interface IAttentionService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAttentionService {
+    public abstract static class Stub extends Binder implements IAttentionService {
         static final int TRANSACTION_cancelAttentionCheck = 2;
         static final int TRANSACTION_checkAttention = 1;
         static final int TRANSACTION_onStartProximityUpdates = 3;
@@ -90,7 +86,8 @@ public interface IAttentionService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAttentionService.DESCRIPTOR);
             }
@@ -100,17 +97,20 @@ public interface IAttentionService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IAttentionCallback _arg0 = IAttentionCallback.Stub.asInterface(data.readStrongBinder());
+                    IAttentionCallback _arg0 =
+                            IAttentionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     checkAttention(_arg0);
                     return true;
                 case 2:
-                    IAttentionCallback _arg02 = IAttentionCallback.Stub.asInterface(data.readStrongBinder());
+                    IAttentionCallback _arg02 =
+                            IAttentionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     cancelAttentionCheck(_arg02);
                     return true;
                 case 3:
-                    IProximityUpdateCallback _arg03 = IProximityUpdateCallback.Stub.asInterface(data.readStrongBinder());
+                    IProximityUpdateCallback _arg03 =
+                            IProximityUpdateCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onStartProximityUpdates(_arg03);
                     return true;
@@ -163,7 +163,8 @@ public interface IAttentionService extends IInterface {
             }
 
             @Override // android.service.attention.IAttentionService
-            public void onStartProximityUpdates(IProximityUpdateCallback callback) throws RemoteException {
+            public void onStartProximityUpdates(IProximityUpdateCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAttentionService.DESCRIPTOR);

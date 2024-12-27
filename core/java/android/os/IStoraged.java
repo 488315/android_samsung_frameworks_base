@@ -10,12 +10,10 @@ public interface IStoraged extends IInterface {
 
     public static class Default implements IStoraged {
         @Override // android.os.IStoraged
-        public void onUserStarted(int userId) throws RemoteException {
-        }
+        public void onUserStarted(int userId) throws RemoteException {}
 
         @Override // android.os.IStoraged
-        public void onUserStopped(int userId) throws RemoteException {
-        }
+        public void onUserStopped(int userId) throws RemoteException {}
 
         @Override // android.os.IStoraged
         public int getRecentPerf() throws RemoteException {
@@ -28,7 +26,7 @@ public interface IStoraged extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStoraged {
+    public abstract static class Stub extends Binder implements IStoraged {
         public static final String DESCRIPTOR = "android.os.IStoraged";
         static final int TRANSACTION_getRecentPerf = 3;
         static final int TRANSACTION_onUserStarted = 1;
@@ -73,7 +71,8 @@ public interface IStoraged extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

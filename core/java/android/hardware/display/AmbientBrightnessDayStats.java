@@ -4,7 +4,9 @@ import android.annotation.SystemApi;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
@@ -12,19 +14,21 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes2.dex */
 public final class AmbientBrightnessDayStats implements Parcelable {
-    public static final Parcelable.Creator<AmbientBrightnessDayStats> CREATOR = new Parcelable.Creator<AmbientBrightnessDayStats>() { // from class: android.hardware.display.AmbientBrightnessDayStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AmbientBrightnessDayStats createFromParcel(Parcel source) {
-            return new AmbientBrightnessDayStats(source);
-        }
+    public static final Parcelable.Creator<AmbientBrightnessDayStats> CREATOR =
+            new Parcelable.Creator<AmbientBrightnessDayStats>() { // from class:
+                // android.hardware.display.AmbientBrightnessDayStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AmbientBrightnessDayStats createFromParcel(Parcel source) {
+                    return new AmbientBrightnessDayStats(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AmbientBrightnessDayStats[] newArray(int size) {
-            return new AmbientBrightnessDayStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AmbientBrightnessDayStats[] newArray(int size) {
+                    return new AmbientBrightnessDayStats[size];
+                }
+            };
     private final float[] mBucketBoundaries;
     private final LocalDate mLocalDate;
     private final float[] mStats;
@@ -36,7 +40,8 @@ public final class AmbientBrightnessDayStats implements Parcelable {
     public AmbientBrightnessDayStats(LocalDate localDate, float[] bucketBoundaries, float[] stats) {
         Objects.requireNonNull(localDate);
         Objects.requireNonNull(bucketBoundaries);
-        Preconditions.checkArrayElementsInRange(bucketBoundaries, 0.0f, Float.MAX_VALUE, "bucketBoundaries");
+        Preconditions.checkArrayElementsInRange(
+                bucketBoundaries, 0.0f, Float.MAX_VALUE, "bucketBoundaries");
         if (bucketBoundaries.length < 1) {
             throw new IllegalArgumentException("Bucket boundaries must contain at least 1 value");
         }
@@ -44,9 +49,11 @@ public final class AmbientBrightnessDayStats implements Parcelable {
         if (stats == null) {
             stats = new float[bucketBoundaries.length];
         } else {
-            Preconditions.checkArrayElementsInRange(stats, 0.0f, Float.MAX_VALUE, Context.STATS_MANAGER);
+            Preconditions.checkArrayElementsInRange(
+                    stats, 0.0f, Float.MAX_VALUE, Context.STATS_MANAGER);
             if (bucketBoundaries.length != stats.length) {
-                throw new IllegalArgumentException("Bucket boundaries and stats must be of same size.");
+                throw new IllegalArgumentException(
+                        "Bucket boundaries and stats must be of same size.");
             }
         }
         this.mLocalDate = localDate;
@@ -80,7 +87,9 @@ public final class AmbientBrightnessDayStats implements Parcelable {
             return false;
         }
         AmbientBrightnessDayStats other = (AmbientBrightnessDayStats) obj;
-        if (this.mLocalDate.equals(other.mLocalDate) && Arrays.equals(this.mBucketBoundaries, other.mBucketBoundaries) && Arrays.equals(this.mStats, other.mStats)) {
+        if (this.mLocalDate.equals(other.mLocalDate)
+                && Arrays.equals(this.mBucketBoundaries, other.mBucketBoundaries)
+                && Arrays.equals(this.mStats, other.mStats)) {
             return true;
         }
         return false;
@@ -88,7 +97,8 @@ public final class AmbientBrightnessDayStats implements Parcelable {
 
     public int hashCode() {
         int result = (1 * 31) + this.mLocalDate.hashCode();
-        return (((result * 31) + Arrays.hashCode(this.mBucketBoundaries)) * 31) + Arrays.hashCode(this.mStats);
+        return (((result * 31) + Arrays.hashCode(this.mBucketBoundaries)) * 31)
+                + Arrays.hashCode(this.mStats);
     }
 
     public String toString() {
@@ -102,7 +112,12 @@ public final class AmbientBrightnessDayStats implements Parcelable {
             bucketBoundariesString.append(this.mBucketBoundaries[i]);
             statsString.append(this.mStats[i]);
         }
-        return this.mLocalDate + " {" + ((CharSequence) bucketBoundariesString) + "} {" + ((CharSequence) statsString) + "}";
+        return this.mLocalDate
+                + " {"
+                + ((CharSequence) bucketBoundariesString)
+                + "} {"
+                + ((CharSequence) statsString)
+                + "}";
     }
 
     @Override // android.os.Parcelable
@@ -133,7 +148,8 @@ public final class AmbientBrightnessDayStats implements Parcelable {
         int high = this.mBucketBoundaries.length - 1;
         while (low < high) {
             int mid = (low + high) / 2;
-            if (this.mBucketBoundaries[mid] <= ambientBrightness && ambientBrightness < this.mBucketBoundaries[mid + 1]) {
+            if (this.mBucketBoundaries[mid] <= ambientBrightness
+                    && ambientBrightness < this.mBucketBoundaries[mid + 1]) {
                 return mid;
             }
             if (this.mBucketBoundaries[mid] < ambientBrightness) {

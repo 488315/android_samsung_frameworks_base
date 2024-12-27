@@ -1,28 +1,29 @@
 package android.os;
 
-import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public final class CoolingDevice implements Parcelable {
-    public static final Parcelable.Creator<CoolingDevice> CREATOR = new Parcelable.Creator<CoolingDevice>() { // from class: android.os.CoolingDevice.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CoolingDevice createFromParcel(Parcel p) {
-            long value = p.readLong();
-            int type = p.readInt();
-            String name = p.readString();
-            return new CoolingDevice(value, type, name);
-        }
+    public static final Parcelable.Creator<CoolingDevice> CREATOR =
+            new Parcelable.Creator<CoolingDevice>() { // from class: android.os.CoolingDevice.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CoolingDevice createFromParcel(Parcel p) {
+                    long value = p.readLong();
+                    int type = p.readInt();
+                    String name = p.readString();
+                    return new CoolingDevice(value, type, name);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CoolingDevice[] newArray(int size) {
-            return new CoolingDevice[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CoolingDevice[] newArray(int size) {
+                    return new CoolingDevice[size];
+                }
+            };
     public static final int TYPE_BATTERY = 1;
     public static final int TYPE_CAMERA = 12;
     public static final int TYPE_COMPONENT = 6;
@@ -43,8 +44,7 @@ public final class CoolingDevice implements Parcelable {
     private final long mValue;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     public static boolean isValidType(int type) {
         return type >= 0 && type <= 14;
@@ -70,7 +70,13 @@ public final class CoolingDevice implements Parcelable {
     }
 
     public String toString() {
-        return "CoolingDevice{mValue=" + this.mValue + ", mType=" + this.mType + ", mName=" + this.mName + "}";
+        return "CoolingDevice{mValue="
+                + this.mValue
+                + ", mType="
+                + this.mType
+                + ", mName="
+                + this.mName
+                + "}";
     }
 
     public int hashCode() {
@@ -83,7 +89,9 @@ public final class CoolingDevice implements Parcelable {
             return false;
         }
         CoolingDevice other = (CoolingDevice) o;
-        return other.mValue == this.mValue && other.mType == this.mType && other.mName.equals(this.mName);
+        return other.mValue == this.mValue
+                && other.mType == this.mType
+                && other.mName.equals(this.mName);
     }
 
     @Override // android.os.Parcelable

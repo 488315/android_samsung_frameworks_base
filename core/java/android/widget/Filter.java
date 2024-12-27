@@ -52,7 +52,8 @@ public abstract class Filter {
                 handlerThread.start();
                 this.mThreadHandler = new RequestHandler(handlerThread.getLooper());
             }
-            long postingDelay = this.mDelayer == null ? 0L : this.mDelayer.getPostingDelay(charSequence);
+            long postingDelay =
+                    this.mDelayer == null ? 0L : this.mDelayer.getPostingDelay(charSequence);
             Message obtainMessage = this.mThreadHandler.obtainMessage(FILTER_TOKEN);
             RequestArguments requestArguments = new RequestArguments();
             requestArguments.constraint = charSequence != null ? charSequence.toString() : null;
@@ -88,7 +89,9 @@ public abstract class Filter {
                         }
                         synchronized (Filter.this.mLock) {
                             if (Filter.this.mThreadHandler != null) {
-                                Message finishMessage = Filter.this.mThreadHandler.obtainMessage(Filter.FINISH_TOKEN);
+                                Message finishMessage =
+                                        Filter.this.mThreadHandler.obtainMessage(
+                                                Filter.FINISH_TOKEN);
                                 Filter.this.mThreadHandler.sendMessageDelayed(finishMessage, 3000L);
                             }
                         }
@@ -113,8 +116,7 @@ public abstract class Filter {
     }
 
     private class ResultsHandler extends Handler {
-        private ResultsHandler() {
-        }
+        private ResultsHandler() {}
 
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
@@ -132,7 +134,6 @@ public abstract class Filter {
         FilterListener listener;
         FilterResults results;
 
-        private RequestArguments() {
-        }
+        private RequestArguments() {}
     }
 }

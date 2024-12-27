@@ -9,6 +9,7 @@ import com.android.internal.org.bouncycastle.crypto.params.DSAPrivateKeyParamete
 import com.android.internal.org.bouncycastle.crypto.params.DSAPublicKeyParameters;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -40,7 +41,8 @@ public class DSASigner implements DSAExt {
         } else {
             this.key = (DSAPublicKeyParameters) param;
         }
-        this.random = initSecureRandom(forSigning && !this.kCalculator.isDeterministic(), providedRandom);
+        this.random =
+                initSecureRandom(forSigning && !this.kCalculator.isDeterministic(), providedRandom);
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DSAExt
@@ -60,9 +62,10 @@ public class DSASigner implements DSAExt {
             this.kCalculator.init(q, this.random);
         }
         BigInteger k = this.kCalculator.nextK();
-        BigInteger r = params.getG().modPow(k.add(getRandomizer(q, this.random)), params.getP()).mod(q);
+        BigInteger r =
+                params.getG().modPow(k.add(getRandomizer(q, this.random)), params.getP()).mod(q);
         BigInteger s = BigIntegers.modOddInverse(q, k).multiply(m.add(x.multiply(r))).mod(q);
-        return new BigInteger[]{r, s};
+        return new BigInteger[] {r, s};
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DSA
@@ -71,14 +74,22 @@ public class DSASigner implements DSAExt {
         BigInteger q = params.getQ();
         BigInteger m = calculateE(q, message);
         BigInteger zero = BigInteger.valueOf(0L);
-        if (zero.compareTo(r) >= 0 || q.compareTo(r) <= 0 || zero.compareTo(s) >= 0 || q.compareTo(s) <= 0) {
+        if (zero.compareTo(r) >= 0
+                || q.compareTo(r) <= 0
+                || zero.compareTo(s) >= 0
+                || q.compareTo(s) <= 0) {
             return false;
         }
         BigInteger w = BigIntegers.modOddInverseVar(q, s);
         BigInteger u1 = m.multiply(w).mod(q);
         BigInteger u2 = r.multiply(w).mod(q);
         BigInteger p = params.getP();
-        BigInteger v = params.getG().modPow(u1, p).multiply(((DSAPublicKeyParameters) this.key).getY().modPow(u2, p)).mod(p).mod(q);
+        BigInteger v =
+                params.getG()
+                        .modPow(u1, p)
+                        .multiply(((DSAPublicKeyParameters) this.key).getY().modPow(u2, p))
+                        .mod(p)
+                        .mod(q);
         return v.equals(r);
     }
 
@@ -99,6 +110,9 @@ public class DSASigner implements DSAExt {
     }
 
     private BigInteger getRandomizer(BigInteger q, SecureRandom provided) {
-        return BigIntegers.createRandomBigInteger(7, CryptoServicesRegistrar.getSecureRandom(provided)).add(BigInteger.valueOf(128L)).multiply(q);
+        return BigIntegers.createRandomBigInteger(
+                        7, CryptoServicesRegistrar.getSecureRandom(provided))
+                .add(BigInteger.valueOf(128L))
+                .multiply(q);
     }
 }

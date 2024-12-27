@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class RequestNamespaceParcel implements Parcelable {
-    public static final Parcelable.Creator<RequestNamespaceParcel> CREATOR = new Parcelable.Creator<RequestNamespaceParcel>() { // from class: android.security.identity.RequestNamespaceParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RequestNamespaceParcel createFromParcel(Parcel _aidl_source) {
-            RequestNamespaceParcel _aidl_out = new RequestNamespaceParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RequestNamespaceParcel> CREATOR =
+            new Parcelable.Creator<
+                    RequestNamespaceParcel>() { // from class:
+                                                // android.security.identity.RequestNamespaceParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RequestNamespaceParcel createFromParcel(Parcel _aidl_source) {
+                    RequestNamespaceParcel _aidl_out = new RequestNamespaceParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RequestNamespaceParcel[] newArray(int _aidl_size) {
-            return new RequestNamespaceParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RequestNamespaceParcel[] newArray(int _aidl_size) {
+                    return new RequestNamespaceParcel[_aidl_size];
+                }
+            };
     public RequestEntryParcel[] entries;
     public String namespaceName;
 
@@ -57,7 +60,9 @@ public class RequestNamespaceParcel implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.entries = (RequestEntryParcel[]) _aidl_parcel.createTypedArray(RequestEntryParcel.CREATOR);
+                this.entries =
+                        (RequestEntryParcel[])
+                                _aidl_parcel.createTypedArray(RequestEntryParcel.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

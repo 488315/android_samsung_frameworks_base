@@ -6,21 +6,25 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class DemuxFilterSectionSettingsConditionTableInfo implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterSectionSettingsConditionTableInfo> CREATOR = new Parcelable.Creator<DemuxFilterSectionSettingsConditionTableInfo>() { // from class: android.hardware.tv.tuner.DemuxFilterSectionSettingsConditionTableInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterSectionSettingsConditionTableInfo createFromParcel(Parcel _aidl_source) {
-            DemuxFilterSectionSettingsConditionTableInfo _aidl_out = new DemuxFilterSectionSettingsConditionTableInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DemuxFilterSectionSettingsConditionTableInfo> CREATOR =
+            new Parcelable.Creator<DemuxFilterSectionSettingsConditionTableInfo>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterSectionSettingsConditionTableInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterSectionSettingsConditionTableInfo createFromParcel(
+                        Parcel _aidl_source) {
+                    DemuxFilterSectionSettingsConditionTableInfo _aidl_out =
+                            new DemuxFilterSectionSettingsConditionTableInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterSectionSettingsConditionTableInfo[] newArray(int _aidl_size) {
-            return new DemuxFilterSectionSettingsConditionTableInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterSectionSettingsConditionTableInfo[] newArray(int _aidl_size) {
+                    return new DemuxFilterSectionSettingsConditionTableInfo[_aidl_size];
+                }
+            };
     public int tableId = 0;
     public int version = 0;
 

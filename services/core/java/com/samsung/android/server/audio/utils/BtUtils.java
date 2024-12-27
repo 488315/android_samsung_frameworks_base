@@ -7,10 +7,12 @@ import android.content.pm.PackageManager;
 import android.media.AudioSystem;
 import android.os.ParcelUuid;
 import android.util.Log;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.utils.EventLogger;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,12 +20,14 @@ import java.util.List;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class BtUtils {
-    public static final ParcelUuid SAP_UUID = ParcelUuid.fromString("a49eb41e-cb06-495c-9f4f-bb80a90cdf00");
+    public static final ParcelUuid SAP_UUID =
+            ParcelUuid.fromString("a49eb41e-cb06-495c-9f4f-bb80a90cdf00");
     public static long sBtAppPackageListVersion = -1;
     public static List sBtAppPackageList = new ArrayList();
     public static final ArrayList sBtAppUidList = new ArrayList();
     public static int sSetParamCnt = 0;
-    public static final EventLogger sAuracastLogger = new EventLogger(50, "BLE broadcast app setParameters histories");
+    public static final EventLogger sAuracastLogger =
+            new EventLogger(50, "BLE broadcast app setParameters histories");
 
     public static void checkAndUpdateAuracastApp(int i, int i2, String str) {
         StringBuilder sb = new StringBuilder("l_auracast_app_key;");
@@ -35,7 +39,9 @@ public abstract class BtUtils {
                     sBtAppUidList.add(Integer.valueOf(i));
                     sb.append("uid_add=" + i);
                     AudioSystem.setParameters(sb.toString());
-                    eventLogger.enqueue(new EventLogger.StringEvent(sb.toString() + " " + str + " by installed"));
+                    eventLogger.enqueue(
+                            new EventLogger.StringEvent(
+                                    sb.toString() + " " + str + " by installed"));
                 }
             }
             return;
@@ -54,9 +60,13 @@ public abstract class BtUtils {
         }
     }
 
-    public static boolean isSamsungWatch(BluetoothDevice bluetoothDevice, BluetoothHeadset bluetoothHeadset) {
-        if (!((bluetoothDevice == null || bluetoothHeadset == null) ? false : "WA".equals(bluetoothHeadset.getSamsungHandsfreeDeviceType(bluetoothDevice)))) {
-            if (!(bluetoothDevice != null && ArrayUtils.contains(bluetoothDevice.getUuids(), SAP_UUID))) {
+    public static boolean isSamsungWatch(
+            BluetoothDevice bluetoothDevice, BluetoothHeadset bluetoothHeadset) {
+        if (!((bluetoothDevice == null || bluetoothHeadset == null)
+                ? false
+                : "WA".equals(bluetoothHeadset.getSamsungHandsfreeDeviceType(bluetoothDevice)))) {
+            if (!(bluetoothDevice != null
+                    && ArrayUtils.contains(bluetoothDevice.getUuids(), SAP_UUID))) {
                 return false;
             }
         }
@@ -94,7 +104,8 @@ public abstract class BtUtils {
     }
 
     public static void setBtVolumeMonitor(boolean z) {
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("setBtVolumeMonitor state = ", "AS.BtUtils", z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "setBtVolumeMonitor state = ", "AS.BtUtils", z);
         AudioSystem.setParameters("l_bt_type_headset=".concat(z ? "true" : "false"));
     }
 
@@ -102,7 +113,9 @@ public abstract class BtUtils {
         int i;
         String str;
         int i2;
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("updateBtAppList BT package list DB version = ", j, " size = ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "updateBtAppList BT package list DB version = ", j, " size = ");
         m.append(list.size());
         Log.i("AS.BtUtils", m.toString());
         sBtAppPackageList = list;
@@ -113,7 +126,8 @@ public abstract class BtUtils {
             Log.i("AS.BtUtils", "updateBtAppList PackageManager is null");
             return;
         }
-        loop0: while (true) {
+        loop0:
+        while (true) {
             i = 0;
             str = "";
             for (String str2 : sBtAppPackageList) {
@@ -124,7 +138,9 @@ public abstract class BtUtils {
                 }
                 if (i2 != 0) {
                     sBtAppUidList.add(Integer.valueOf(i2));
-                    Log.i("AS.BtUtils", "updateBtAppList add uid = " + i2 + " packageName = " + str2);
+                    Log.i(
+                            "AS.BtUtils",
+                            "updateBtAppList add uid = " + i2 + " packageName = " + str2);
                     str = str + i2 + ",";
                     i++;
                 }
@@ -139,6 +155,11 @@ public abstract class BtUtils {
         }
         sBtAppPackageListVersion = j;
         Log.i("AS.BtUtils", "updateBtAppList done");
-        sAuracastLogger.enqueue(new EventLogger.StringEvent("updateBtAppList BT list updated version = " + sBtAppPackageListVersion + " package list size = " + list.size()));
+        sAuracastLogger.enqueue(
+                new EventLogger.StringEvent(
+                        "updateBtAppList BT list updated version = "
+                                + sBtAppPackageListVersion
+                                + " package list size = "
+                                + list.size()));
     }
 }

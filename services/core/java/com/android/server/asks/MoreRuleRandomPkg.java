@@ -2,7 +2,9 @@ package com.android.server.asks;
 
 import android.net.INetd;
 import android.util.Slog;
+
 import com.samsung.android.knox.analytics.service.KnoxAnalyticsSystemService;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,7 +36,9 @@ public abstract class MoreRuleRandomPkg {
         hashMap.put("it", Double.valueOf(31.58631872617659d));
         hashMap.put("al", Double.valueOf(30.578946438169083d));
         hashMap.put("ar", Double.valueOf(30.226012333559666d));
-        hashMap.put(KnoxAnalyticsSystemService.STATUS_PARAMETER_NAME, Double.valueOf(29.623605393982075d));
+        hashMap.put(
+                KnoxAnalyticsSystemService.STATUS_PARAMETER_NAME,
+                Double.valueOf(29.623605393982075d));
         hashMap.put("to", Double.valueOf(29.280286221802744d));
         hashMap.put("nt", Double.valueOf(29.27985376517565d));
         hashMap.put("ng", Double.valueOf(26.79865965134355d));
@@ -698,7 +702,8 @@ public abstract class MoreRuleRandomPkg {
         }
         int i2 = 0;
         for (int i3 = 0; i3 < length; i3++) {
-            if (hashMap.containsKey(strArr[i3]) && ((Double) hashMap.get(strArr[i3])).doubleValue() > 0.1d) {
+            if (hashMap.containsKey(strArr[i3])
+                    && ((Double) hashMap.get(strArr[i3])).doubleValue() > 0.1d) {
                 i2++;
             }
         }

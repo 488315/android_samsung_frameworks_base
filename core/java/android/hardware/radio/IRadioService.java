@@ -1,24 +1,23 @@
 package android.hardware.radio;
 
-import android.hardware.radio.IAnnouncementListener;
-import android.hardware.radio.ICloseHandle;
-import android.hardware.radio.ITuner;
-import android.hardware.radio.ITunerCallback;
-import android.hardware.radio.RadioManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IRadioService extends IInterface {
-    ICloseHandle addAnnouncementListener(int[] iArr, IAnnouncementListener iAnnouncementListener) throws RemoteException;
+    ICloseHandle addAnnouncementListener(int[] iArr, IAnnouncementListener iAnnouncementListener)
+            throws RemoteException;
 
     List<RadioManager.ModuleProperties> listModules() throws RemoteException;
 
-    ITuner openTuner(int i, RadioManager.BandConfig bandConfig, boolean z, ITunerCallback iTunerCallback) throws RemoteException;
+    ITuner openTuner(
+            int i, RadioManager.BandConfig bandConfig, boolean z, ITunerCallback iTunerCallback)
+            throws RemoteException;
 
     public static class Default implements IRadioService {
         @Override // android.hardware.radio.IRadioService
@@ -27,12 +26,18 @@ public interface IRadioService extends IInterface {
         }
 
         @Override // android.hardware.radio.IRadioService
-        public ITuner openTuner(int moduleId, RadioManager.BandConfig bandConfig, boolean withAudio, ITunerCallback callback) throws RemoteException {
+        public ITuner openTuner(
+                int moduleId,
+                RadioManager.BandConfig bandConfig,
+                boolean withAudio,
+                ITunerCallback callback)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.radio.IRadioService
-        public ICloseHandle addAnnouncementListener(int[] enabledTypes, IAnnouncementListener listener) throws RemoteException {
+        public ICloseHandle addAnnouncementListener(
+                int[] enabledTypes, IAnnouncementListener listener) throws RemoteException {
             return null;
         }
 
@@ -42,7 +47,7 @@ public interface IRadioService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioService {
+    public abstract static class Stub extends Binder implements IRadioService {
         public static final String DESCRIPTOR = "android.hardware.radio.IRadioService";
         static final int TRANSACTION_addAnnouncementListener = 3;
         static final int TRANSACTION_listModules = 1;
@@ -87,7 +92,8 @@ public interface IRadioService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -103,7 +109,9 @@ public interface IRadioService extends IInterface {
                     return true;
                 case 2:
                     int _arg0 = data.readInt();
-                    RadioManager.BandConfig _arg1 = (RadioManager.BandConfig) data.readTypedObject(RadioManager.BandConfig.CREATOR);
+                    RadioManager.BandConfig _arg1 =
+                            (RadioManager.BandConfig)
+                                    data.readTypedObject(RadioManager.BandConfig.CREATOR);
                     boolean _arg2 = data.readBoolean();
                     ITunerCallback _arg3 = ITunerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
@@ -113,7 +121,8 @@ public interface IRadioService extends IInterface {
                     return true;
                 case 3:
                     int[] _arg02 = data.createIntArray();
-                    IAnnouncementListener _arg12 = IAnnouncementListener.Stub.asInterface(data.readStrongBinder());
+                    IAnnouncementListener _arg12 =
+                            IAnnouncementListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     ICloseHandle _result3 = addAnnouncementListener(_arg02, _arg12);
                     reply.writeNoException();
@@ -148,7 +157,8 @@ public interface IRadioService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    List<RadioManager.ModuleProperties> _result = _reply.createTypedArrayList(RadioManager.ModuleProperties.CREATOR);
+                    List<RadioManager.ModuleProperties> _result =
+                            _reply.createTypedArrayList(RadioManager.ModuleProperties.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -157,7 +167,12 @@ public interface IRadioService extends IInterface {
             }
 
             @Override // android.hardware.radio.IRadioService
-            public ITuner openTuner(int moduleId, RadioManager.BandConfig bandConfig, boolean withAudio, ITunerCallback callback) throws RemoteException {
+            public ITuner openTuner(
+                    int moduleId,
+                    RadioManager.BandConfig bandConfig,
+                    boolean withAudio,
+                    ITunerCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -177,7 +192,8 @@ public interface IRadioService extends IInterface {
             }
 
             @Override // android.hardware.radio.IRadioService
-            public ICloseHandle addAnnouncementListener(int[] enabledTypes, IAnnouncementListener listener) throws RemoteException {
+            public ICloseHandle addAnnouncementListener(
+                    int[] enabledTypes, IAnnouncementListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

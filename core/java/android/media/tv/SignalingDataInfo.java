@@ -3,7 +3,9 @@ package android.media.tv;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -11,19 +13,21 @@ import java.lang.annotation.RetentionPolicy;
 public final class SignalingDataInfo implements Parcelable {
     public static final String CONTENT_ENCODING_BASE64 = "Base64";
     public static final String CONTENT_ENCODING_UTF_8 = "UTF-8";
-    public static final Parcelable.Creator<SignalingDataInfo> CREATOR = new Parcelable.Creator<SignalingDataInfo>() { // from class: android.media.tv.SignalingDataInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalingDataInfo[] newArray(int size) {
-            return new SignalingDataInfo[size];
-        }
+    public static final Parcelable.Creator<SignalingDataInfo> CREATOR =
+            new Parcelable.Creator<
+                    SignalingDataInfo>() { // from class: android.media.tv.SignalingDataInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalingDataInfo[] newArray(int size) {
+                    return new SignalingDataInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalingDataInfo createFromParcel(Parcel in) {
-            return new SignalingDataInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalingDataInfo createFromParcel(Parcel in) {
+                    return new SignalingDataInfo(in);
+                }
+            };
     public static final int LLS_NO_GROUP_ID = -1;
     private final String mEncoding;
     private final int mGroup;
@@ -32,26 +36,29 @@ public final class SignalingDataInfo implements Parcelable {
     private final int mVersion;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ContentEncoding {
-    }
+    public @interface ContentEncoding {}
 
     public SignalingDataInfo(String table, String signalingDataType, int version, int group) {
         this.mTable = table;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTable);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTable);
         this.mSignalingDataType = signalingDataType;
         this.mVersion = version;
         this.mGroup = group;
         this.mEncoding = "UTF-8";
     }
 
-    public SignalingDataInfo(String table, String signalingDataType, int version, int group, String encoding) {
+    public SignalingDataInfo(
+            String table, String signalingDataType, int version, int group, String encoding) {
         this.mTable = table;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTable);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTable);
         this.mSignalingDataType = signalingDataType;
         this.mVersion = version;
         this.mGroup = group;
         this.mEncoding = encoding;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEncoding);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEncoding);
     }
 
     public String getTable() {
@@ -95,12 +102,15 @@ public final class SignalingDataInfo implements Parcelable {
         int group = in.readInt();
         String encoding = in.readString();
         this.mTable = table;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTable);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTable);
         this.mSignalingDataType = metadataType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataType);
         this.mVersion = version;
         this.mGroup = group;
         this.mEncoding = encoding;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEncoding);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEncoding);
     }
 }

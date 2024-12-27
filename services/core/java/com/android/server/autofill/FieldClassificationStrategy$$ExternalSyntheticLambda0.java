@@ -3,6 +3,7 @@ package com.android.server.autofill;
 import android.os.Bundle;
 import android.os.RemoteCallback;
 import android.util.ArrayMap;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,7 +18,15 @@ public final /* synthetic */ class FieldClassificationStrategy$$ExternalSyntheti
     public final /* synthetic */ ArrayMap f$6;
     public final /* synthetic */ ArrayMap f$7;
 
-    public /* synthetic */ FieldClassificationStrategy$$ExternalSyntheticLambda0(RemoteCallback remoteCallback, List list, String[] strArr, String[] strArr2, String str, Bundle bundle, ArrayMap arrayMap, ArrayMap arrayMap2) {
+    public /* synthetic */ FieldClassificationStrategy$$ExternalSyntheticLambda0(
+            RemoteCallback remoteCallback,
+            List list,
+            String[] strArr,
+            String[] strArr2,
+            String str,
+            Bundle bundle,
+            ArrayMap arrayMap,
+            ArrayMap arrayMap2) {
         this.f$0 = remoteCallback;
         this.f$1 = list;
         this.f$2 = strArr;

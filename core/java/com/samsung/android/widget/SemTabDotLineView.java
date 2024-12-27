@@ -9,6 +9,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationSet;
+
 import com.android.internal.R;
 
 /* loaded from: classes6.dex */
@@ -28,8 +29,13 @@ public class SemTabDotLineView extends View {
         super(context, attrs);
         this.mDiameter = 1;
         this.mDrawDot = true;
-        this.mDiameter = (int) TypedValue.applyDimension(1, 2.5f, context.getResources().getDisplayMetrics());
-        int color = context.getResources().getColor(R.color.sem_maintab_indicator_color, context.getTheme());
+        this.mDiameter =
+                (int)
+                        TypedValue.applyDimension(
+                                1, 2.5f, context.getResources().getDisplayMetrics());
+        int color =
+                context.getResources()
+                        .getColor(R.color.sem_maintab_indicator_color, context.getTheme());
         this.mPaint = new Paint();
         this.mPaint.setColor(color);
         this.mPaint.setFlags(1);
@@ -48,7 +54,14 @@ public class SemTabDotLineView extends View {
                 int height = getHeight();
                 float vCenter = height / 2.0f;
                 float vOffset = this.mDiameter / 2.0f;
-                canvas.drawRoundRect(0.0f, vCenter - vOffset, width, vCenter + vOffset, this.mDiameter, this.mDiameter, this.mPaint);
+                canvas.drawRoundRect(
+                        0.0f,
+                        vCenter - vOffset,
+                        width,
+                        vCenter + vOffset,
+                        this.mDiameter,
+                        this.mDiameter,
+                        this.mPaint);
             }
         }
     }
@@ -76,6 +89,5 @@ public class SemTabDotLineView extends View {
         startAnimation(animationSet);
     }
 
-    public void onReleased() {
-    }
+    public void onReleased() {}
 }

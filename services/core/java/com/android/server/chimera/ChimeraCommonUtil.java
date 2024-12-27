@@ -1,8 +1,10 @@
 package com.android.server.chimera;
 
 import android.os.Debug;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,7 +15,21 @@ import java.util.concurrent.ConcurrentHashMap;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public abstract class ChimeraCommonUtil {
-    public static final int[] ADJ_LEVELS = {999, FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, FrameworkStatsLog.VPN_CONNECTION_STATE_CHANGED, 800, 700, 600, 500, 400, 300, FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE, 200, 100, 0};
+    public static final int[] ADJ_LEVELS = {
+        999,
+        FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+        FrameworkStatsLog.VPN_CONNECTION_STATE_CHANGED,
+        800,
+        700,
+        600,
+        500,
+        400,
+        300,
+        FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE,
+        200,
+        100,
+        0
+    };
     public static final Map mAppLaunchInfoMap = new ConcurrentHashMap();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -37,7 +53,9 @@ public abstract class ChimeraCommonUtil {
         public static String getItem(int i, String str, String str2) {
             String[] split = str.split(" ");
             String concat = str2.concat("=");
-            return (split.length <= i || !split[i].startsWith(concat)) ? "0" : split[i].replace(concat, "");
+            return (split.length <= i || !split[i].startsWith(concat))
+                    ? "0"
+                    : split[i].replace(concat, "");
         }
     }
 
@@ -79,7 +97,13 @@ public abstract class ChimeraCommonUtil {
     }
 
     public static long[] getAnonSizeAndZramSize(int i) {
-        return new long[]{Math.max(getSmapsRollupParams(i, new String[]{"Pss_Anon:", "Swap:", "SwapShared:", "Writeback:"})[0], 0L), Math.max((long) (((r11[1] - r11[2]) - r11[3]) * 0.33d), 0L)};
+        return new long[] {
+            Math.max(
+                    getSmapsRollupParams(
+                            i, new String[] {"Pss_Anon:", "Swap:", "SwapShared:", "Writeback:"})[0],
+                    0L),
+            Math.max((long) (((r11[1] - r11[2]) - r11[3]) * 0.33d), 0L)
+        };
     }
 
     public static long getAvailableMemoryKb(SystemRepository systemRepository) {
@@ -94,7 +118,7 @@ public abstract class ChimeraCommonUtil {
         } else {
             z = false;
         }
-        long[] smapsRollupParams = getSmapsRollupParams(i, new String[]{"SwapPss:", "Writeback:"});
+        long[] smapsRollupParams = getSmapsRollupParams(i, new String[] {"SwapPss:", "Writeback:"});
         if (!z && j - smapsRollupParams[0] < 0) {
             j = Debug.getPss(i, null, null);
         }
@@ -110,7 +134,12 @@ public abstract class ChimeraCommonUtil {
         int length = strArr.length;
         long[] jArr = new long[length];
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "/proc/", "/smaps_rollup"), StandardCharsets.UTF_8));
+            BufferedReader bufferedReader =
+                    new BufferedReader(
+                            new FileReader(
+                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                            i, "/proc/", "/smaps_rollup"),
+                                    StandardCharsets.UTF_8));
             int i2 = 0;
             while (true) {
                 try {
@@ -150,7 +179,10 @@ public abstract class ChimeraCommonUtil {
                         fileReader.close();
                         return 0L;
                     }
-                    long parseInt = Integer.parseInt(readLine.substring(readLine.indexOf("MemTotal:")).replaceAll("\\D+", ""));
+                    long parseInt =
+                            Integer.parseInt(
+                                    readLine.substring(readLine.indexOf("MemTotal:"))
+                                            .replaceAll("\\D+", ""));
                     bufferedReader.close();
                     fileReader.close();
                     return parseInt;

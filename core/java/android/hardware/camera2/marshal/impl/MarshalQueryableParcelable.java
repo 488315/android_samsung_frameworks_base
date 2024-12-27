@@ -5,6 +5,7 @@ import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.utils.TypeReference;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
@@ -22,7 +23,12 @@ public class MarshalQueryableParcelable<T extends Parcelable> implements Marshal
             this.mClass = typeReference.getRawType();
             try {
                 try {
-                    this.mCreator = (Parcelable.Creator) this.mClass.getDeclaredField(MarshalQueryableParcelable.FIELD_CREATOR).get(null);
+                    this.mCreator =
+                            (Parcelable.Creator)
+                                    this.mClass
+                                            .getDeclaredField(
+                                                    MarshalQueryableParcelable.FIELD_CREATOR)
+                                            .get(null);
                 } catch (IllegalAccessException e) {
                     throw new AssertionError(e);
                 } catch (IllegalArgumentException e2) {
@@ -39,7 +45,8 @@ public class MarshalQueryableParcelable<T extends Parcelable> implements Marshal
             try {
                 value.writeToParcel(parcel, 0);
                 if (parcel.hasFileDescriptors()) {
-                    throw new UnsupportedOperationException("Parcelable " + value + " must not have file descriptors");
+                    throw new UnsupportedOperationException(
+                            "Parcelable " + value + " must not have file descriptors");
                 }
                 byte[] parcelContents = parcel.marshall();
                 parcel.recycle();

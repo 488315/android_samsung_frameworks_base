@@ -5,7 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.contentcapture.IDataShareReadAdapter;
+
 import com.android.internal.telephony.SemRILConstants;
 
 /* loaded from: classes3.dex */
@@ -18,12 +18,10 @@ public interface IDataShareCallback extends IInterface {
 
     public static class Default implements IDataShareCallback {
         @Override // android.service.contentcapture.IDataShareCallback
-        public void accept(IDataShareReadAdapter adapter) throws RemoteException {
-        }
+        public void accept(IDataShareReadAdapter adapter) throws RemoteException {}
 
         @Override // android.service.contentcapture.IDataShareCallback
-        public void reject() throws RemoteException {
-        }
+        public void reject() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -31,7 +29,7 @@ public interface IDataShareCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDataShareCallback {
+    public abstract static class Stub extends Binder implements IDataShareCallback {
         static final int TRANSACTION_accept = 1;
         static final int TRANSACTION_reject = 2;
 
@@ -72,7 +70,8 @@ public interface IDataShareCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDataShareCallback.DESCRIPTOR);
             }
@@ -82,7 +81,8 @@ public interface IDataShareCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IDataShareReadAdapter _arg0 = IDataShareReadAdapter.Stub.asInterface(data.readStrongBinder());
+                    IDataShareReadAdapter _arg0 =
+                            IDataShareReadAdapter.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     accept(_arg0);
                     return true;

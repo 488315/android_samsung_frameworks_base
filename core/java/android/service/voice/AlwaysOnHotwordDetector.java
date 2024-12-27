@@ -20,17 +20,17 @@ import android.os.ParcelFileDescriptor;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.SharedMemory;
-import android.service.voice.AlwaysOnHotwordDetector;
-import android.service.voice.HotwordDetector;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.app.IHotwordRecognitionStatusCallback;
 import com.android.internal.app.IVoiceInteractionManagerService;
 import com.android.internal.app.IVoiceInteractionSoundTriggerSession;
 import com.android.internal.hidden_from_bootclasspath.android.app.wearable.Flags;
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.util.FunctionalUtils;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -77,8 +77,7 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
     public static final int STATE_KEYPHRASE_ENROLLED = 2;
     public static final int STATE_KEYPHRASE_UNENROLLED = 1;
 
-    @Deprecated
-    public static final int STATE_KEYPHRASE_UNSUPPORTED = -1;
+    @Deprecated public static final int STATE_KEYPHRASE_UNSUPPORTED = -1;
     private static final int STATE_NOT_READY = 0;
     private static final int STATUS_ERROR = Integer.MIN_VALUE;
     private static final int STATUS_OK = 0;
@@ -101,23 +100,22 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
     private final String mText;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioCapabilities {
-    }
+    public @interface AudioCapabilities {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ModelParams {
-    }
+    public @interface ModelParams {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RecognitionFlags {
-    }
+    public @interface RecognitionFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RecognitionModes {
-    }
+    public @interface RecognitionModes {}
 
     @Override // android.service.voice.AbstractDetector, android.service.voice.HotwordDetector
-    public /* bridge */ /* synthetic */ boolean startRecognition(ParcelFileDescriptor parcelFileDescriptor, AudioFormat audioFormat, PersistableBundle persistableBundle) {
+    public /* bridge */ /* synthetic */ boolean startRecognition(
+            ParcelFileDescriptor parcelFileDescriptor,
+            AudioFormat audioFormat,
+            PersistableBundle persistableBundle) {
         return super.startRecognition(parcelFileDescriptor, audioFormat, persistableBundle);
     }
 
@@ -164,10 +162,19 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         private final List<SoundTrigger.KeyphraseRecognitionExtra> mKephraseExtras;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface DataFormat {
-        }
+        public @interface DataFormat {}
 
-        private EventPayload(boolean captureAvailable, AudioFormat audioFormat, int captureSession, int dataFormat, byte[] data, HotwordDetectedResult hotwordDetectedResult, ParcelFileDescriptor audioStream, List<SoundTrigger.KeyphraseRecognitionExtra> keyphraseExtras, long halEventReceivedMillis, boolean isRecognitionStopped) {
+        private EventPayload(
+                boolean captureAvailable,
+                AudioFormat audioFormat,
+                int captureSession,
+                int dataFormat,
+                byte[] data,
+                HotwordDetectedResult hotwordDetectedResult,
+                ParcelFileDescriptor audioStream,
+                List<SoundTrigger.KeyphraseRecognitionExtra> keyphraseExtras,
+                long halEventReceivedMillis,
+                boolean isRecognitionStopped) {
             this.mCaptureAvailable = captureAvailable;
             this.mCaptureSession = captureSession;
             this.mAudioFormat = audioFormat;
@@ -235,12 +242,12 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
             private byte[] mData = null;
             private HotwordDetectedResult mHotwordDetectedResult = null;
             private ParcelFileDescriptor mAudioStream = null;
-            private List<SoundTrigger.KeyphraseRecognitionExtra> mKeyphraseExtras = Collections.emptyList();
+            private List<SoundTrigger.KeyphraseRecognitionExtra> mKeyphraseExtras =
+                    Collections.emptyList();
             private long mHalEventReceivedMillis = -1;
             private boolean mIsRecognitionStopped = true;
 
-            public Builder() {
-            }
+            public Builder() {}
 
             Builder(SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent) {
                 setCaptureAvailable(keyphraseRecognitionEvent.isCaptureAvailable());
@@ -253,7 +260,8 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
                     setData(keyphraseRecognitionEvent.getData());
                 }
                 if (keyphraseRecognitionEvent.keyphraseExtras != null) {
-                    setKeyphraseRecognitionExtras(Arrays.asList(keyphraseRecognitionEvent.keyphraseExtras));
+                    setKeyphraseRecognitionExtras(
+                            Arrays.asList(keyphraseRecognitionEvent.keyphraseExtras));
                 }
                 setHalEventReceivedMillis(keyphraseRecognitionEvent.getHalEventReceivedMillis());
             }
@@ -293,7 +301,8 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
                 return this;
             }
 
-            public Builder setKeyphraseRecognitionExtras(List<SoundTrigger.KeyphraseRecognitionExtra> keyphraseRecognitionExtras) {
+            public Builder setKeyphraseRecognitionExtras(
+                    List<SoundTrigger.KeyphraseRecognitionExtra> keyphraseRecognitionExtras) {
                 this.mKeyphraseExtras = keyphraseRecognitionExtras;
                 return this;
             }
@@ -309,12 +318,22 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
             }
 
             public EventPayload build() {
-                return new EventPayload(this.mCaptureAvailable, this.mAudioFormat, this.mCaptureSession, this.mDataFormat, this.mData, this.mHotwordDetectedResult, this.mAudioStream, this.mKeyphraseExtras, this.mHalEventReceivedMillis, this.mIsRecognitionStopped);
+                return new EventPayload(
+                        this.mCaptureAvailable,
+                        this.mAudioFormat,
+                        this.mCaptureSession,
+                        this.mDataFormat,
+                        this.mData,
+                        this.mHotwordDetectedResult,
+                        this.mAudioStream,
+                        this.mKeyphraseExtras,
+                        this.mHalEventReceivedMillis,
+                        this.mIsRecognitionStopped);
             }
         }
     }
 
-    public static abstract class Callback implements HotwordDetector.Callback {
+    public abstract static class Callback implements HotwordDetector.Callback {
         public abstract void onAvailabilityChanged(int i);
 
         @Override // android.service.voice.HotwordDetector.Callback
@@ -335,19 +354,25 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         }
 
         @Override // android.service.voice.HotwordDetector.Callback
-        public void onRejected(HotwordRejectedResult result) {
-        }
+        public void onRejected(HotwordRejectedResult result) {}
 
         @Override // android.service.voice.HotwordDetector.Callback
-        public void onHotwordDetectionServiceInitialized(int status) {
-        }
+        public void onHotwordDetectionServiceInitialized(int status) {}
 
         @Override // android.service.voice.HotwordDetector.Callback
-        public void onHotwordDetectionServiceRestarted() {
-        }
+        public void onHotwordDetectionServiceRestarted() {}
     }
 
-    public AlwaysOnHotwordDetector(String text, Locale locale, Executor executor, Callback callback, KeyphraseEnrollmentInfo keyphraseEnrollmentInfo, IVoiceInteractionManagerService modelManagementService, int targetSdkVersion, boolean supportSandboxedDetectionService, String attributionTag) {
+    public AlwaysOnHotwordDetector(
+            String text,
+            Locale locale,
+            Executor executor,
+            Callback callback,
+            KeyphraseEnrollmentInfo keyphraseEnrollmentInfo,
+            IVoiceInteractionManagerService modelManagementService,
+            int targetSdkVersion,
+            boolean supportSandboxedDetectionService,
+            String attributionTag) {
         super(modelManagementService, executor, callback);
         this.mBinder = new Binder();
         this.mIsAvailabilityOverriddenByTestApi = false;
@@ -357,7 +382,8 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         this.mLocale = locale;
         this.mKeyphraseEnrollmentInfo = keyphraseEnrollmentInfo;
         this.mExternalCallback = callback;
-        this.mExternalExecutor = executor != null ? executor : new HandlerExecutor(new Handler(Looper.myLooper()));
+        this.mExternalExecutor =
+                executor != null ? executor : new HandlerExecutor(new Handler(Looper.myLooper()));
         this.mInternalCallback = new SoundTriggerListener(this.mHandler);
         this.mModelManagementService = modelManagementService;
         this.mSupportSandboxedDetectionService = supportSandboxedDetectionService;
@@ -365,28 +391,41 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
     }
 
     @Override // android.service.voice.AbstractDetector
-    void initialize(PersistableBundle options, SharedMemory sharedMemory) {
-    }
+    void initialize(PersistableBundle options, SharedMemory sharedMemory) {}
 
-    void initialize(PersistableBundle options, SharedMemory sharedMemory, SoundTrigger.ModuleProperties moduleProperties) {
+    void initialize(
+            PersistableBundle options,
+            SharedMemory sharedMemory,
+            SoundTrigger.ModuleProperties moduleProperties) {
         if (this.mSupportSandboxedDetectionService) {
-            initAndVerifyDetector(options, sharedMemory, this.mInternalCallback, 1, this.mAttributionTag);
+            initAndVerifyDetector(
+                    options, sharedMemory, this.mInternalCallback, 1, this.mAttributionTag);
         }
         try {
             Identity identity = new Identity();
             identity.packageName = ActivityThread.currentOpPackageName();
             if (moduleProperties == null) {
-                moduleProperties = this.mModelManagementService.listModuleProperties(identity).stream().filter(new Predicate() { // from class: android.service.voice.AlwaysOnHotwordDetector$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Predicate
-                    public final boolean test(Object obj) {
-                        return AlwaysOnHotwordDetector.lambda$initialize$0((SoundTrigger.ModuleProperties) obj);
-                    }
-                }).findFirst().orElse(null);
-                if (CompatChanges.isChangeEnabled(THROW_ON_INITIALIZE_IF_NO_DSP) && moduleProperties == null) {
+                moduleProperties =
+                        this.mModelManagementService.listModuleProperties(identity).stream()
+                                .filter(
+                                        new Predicate() { // from class:
+                                                          // android.service.voice.AlwaysOnHotwordDetector$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Predicate
+                                            public final boolean test(Object obj) {
+                                                return AlwaysOnHotwordDetector.lambda$initialize$0(
+                                                        (SoundTrigger.ModuleProperties) obj);
+                                            }
+                                        })
+                                .findFirst()
+                                .orElse(null);
+                if (CompatChanges.isChangeEnabled(THROW_ON_INITIALIZE_IF_NO_DSP)
+                        && moduleProperties == null) {
                     throw new IllegalStateException("No DSP module available to attach to");
                 }
             }
-            this.mSoundTriggerSession = this.mModelManagementService.createSoundTriggerSessionAsOriginator(identity, this.mBinder, moduleProperties);
+            this.mSoundTriggerSession =
+                    this.mModelManagementService.createSoundTriggerSessionAsOriginator(
+                            identity, this.mBinder, moduleProperties);
             new RefreshAvailabilityTask().execute(new Void[0]);
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
@@ -401,10 +440,12 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
     public final void updateState(PersistableBundle options, SharedMemory sharedMemory) {
         synchronized (this.mLock) {
             if (!this.mSupportSandboxedDetectionService) {
-                throw new IllegalStateException("updateState called, but it doesn't support hotword detection service");
+                throw new IllegalStateException(
+                        "updateState called, but it doesn't support hotword detection service");
             }
             if (this.mAvailability == -3 || this.mAvailability == 3) {
-                throw new IllegalStateException("updateState called on an invalid detector or error state");
+                throw new IllegalStateException(
+                        "updateState called on an invalid detector or error state");
             }
         }
         super.updateState(options, sharedMemory);
@@ -417,7 +458,8 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
             if (this.mKeyphraseMetadata == null && this.mAvailability == 2) {
                 Set<Locale> fakeSupportedLocales = new HashSet<>();
                 fakeSupportedLocales.add(this.mLocale);
-                this.mKeyphraseMetadata = new KeyphraseMetadata(1, this.mText, fakeSupportedLocales, 1);
+                this.mKeyphraseMetadata =
+                        new KeyphraseMetadata(1, this.mText, fakeSupportedLocales, 1);
             }
             notifyStateChangedLocked();
         }
@@ -430,14 +472,43 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         new RefreshAvailabilityTask().execute(new Void[0]);
     }
 
-    public void triggerHardwareRecognitionEventForTest(int status, int soundModelHandle, long halEventReceivedMillis, boolean captureAvailable, int captureSession, int captureDelayMs, int capturePreambleMs, boolean triggerInData, AudioFormat captureFormat, byte[] data, List<SoundTrigger.KeyphraseRecognitionExtra> keyphraseRecognitionExtras) {
+    public void triggerHardwareRecognitionEventForTest(
+            int status,
+            int soundModelHandle,
+            long halEventReceivedMillis,
+            boolean captureAvailable,
+            int captureSession,
+            int captureDelayMs,
+            int capturePreambleMs,
+            boolean triggerInData,
+            AudioFormat captureFormat,
+            byte[] data,
+            List<SoundTrigger.KeyphraseRecognitionExtra> keyphraseRecognitionExtras) {
         Log.d(TAG, "triggerHardwareRecognitionEventForTest()");
         synchronized (this.mLock) {
             if (this.mAvailability == -3 || this.mAvailability == 3) {
-                throw new IllegalStateException("triggerHardwareRecognitionEventForTest called on an invalid detector or error state");
+                throw new IllegalStateException(
+                        "triggerHardwareRecognitionEventForTest called on an invalid detector or"
+                            + " error state");
             }
             try {
-                this.mModelManagementService.triggerHardwareRecognitionEventForTest(new SoundTrigger.KeyphraseRecognitionEvent(status, soundModelHandle, captureAvailable, captureSession, captureDelayMs, capturePreambleMs, triggerInData, captureFormat, data, (SoundTrigger.KeyphraseRecognitionExtra[]) keyphraseRecognitionExtras.toArray(new SoundTrigger.KeyphraseRecognitionExtra[0]), halEventReceivedMillis, new Binder()), this.mInternalCallback);
+                this.mModelManagementService.triggerHardwareRecognitionEventForTest(
+                        new SoundTrigger.KeyphraseRecognitionEvent(
+                                status,
+                                soundModelHandle,
+                                captureAvailable,
+                                captureSession,
+                                captureDelayMs,
+                                capturePreambleMs,
+                                triggerInData,
+                                captureFormat,
+                                data,
+                                (SoundTrigger.KeyphraseRecognitionExtra[])
+                                        keyphraseRecognitionExtras.toArray(
+                                                new SoundTrigger.KeyphraseRecognitionExtra[0]),
+                                halEventReceivedMillis,
+                                new Binder()),
+                        this.mInternalCallback);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -454,10 +525,12 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
 
     private int getSupportedRecognitionModesLocked() {
         if (this.mAvailability == -3 || this.mAvailability == 3) {
-            throw new IllegalStateException("getSupportedRecognitionModes called on an invalid detector or error state");
+            throw new IllegalStateException(
+                    "getSupportedRecognitionModes called on an invalid detector or error state");
         }
         if (this.mAvailability != 2 || this.mKeyphraseMetadata == null) {
-            throw new UnsupportedOperationException("Getting supported recognition modes for the keyphrase is not supported");
+            throw new UnsupportedOperationException(
+                    "Getting supported recognition modes for the keyphrase is not supported");
         }
         return this.mKeyphraseMetadata.getRecognitionModeFlags();
     }
@@ -472,7 +545,8 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
 
     private int getSupportedAudioCapabilitiesLocked() {
         try {
-            SoundTrigger.ModuleProperties properties = this.mSoundTriggerSession.getDspModuleProperties();
+            SoundTrigger.ModuleProperties properties =
+                    this.mSoundTriggerSession.getDspModuleProperties();
             if (properties != null) {
                 return properties.getAudioCapabilities();
             }
@@ -508,10 +582,12 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         boolean z;
         synchronized (this.mLock) {
             if (this.mAvailability == -3 || this.mAvailability == 3) {
-                throw new IllegalStateException("stopRecognition called on an invalid detector or error state");
+                throw new IllegalStateException(
+                        "stopRecognition called on an invalid detector or error state");
             }
             if (this.mAvailability != 2) {
-                throw new UnsupportedOperationException("Recognition for the given keyphrase is not supported");
+                throw new UnsupportedOperationException(
+                        "Recognition for the given keyphrase is not supported");
             }
             z = stopRecognitionLocked() == 0;
         }
@@ -522,7 +598,8 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         int parameterLocked;
         synchronized (this.mLock) {
             if (this.mAvailability == -3 || this.mAvailability == 3) {
-                throw new IllegalStateException("setParameter called on an invalid detector or error state");
+                throw new IllegalStateException(
+                        "setParameter called on an invalid detector or error state");
             }
             parameterLocked = setParameterLocked(modelParam, value);
         }
@@ -533,7 +610,8 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         int parameterLocked;
         synchronized (this.mLock) {
             if (this.mAvailability == -3 || this.mAvailability == 3) {
-                throw new IllegalStateException("getParameter called on an invalid detector or error state");
+                throw new IllegalStateException(
+                        "getParameter called on an invalid detector or error state");
             }
             parameterLocked = getParameterLocked(modelParam);
         }
@@ -544,7 +622,8 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         ModelParamRange queryParameterLocked;
         synchronized (this.mLock) {
             if (this.mAvailability == -3 || this.mAvailability == 3) {
-                throw new IllegalStateException("queryParameter called on an invalid detector or error state");
+                throw new IllegalStateException(
+                        "queryParameter called on an invalid detector or error state");
             }
             queryParameterLocked = queryParameterLocked(modelParam);
         }
@@ -577,12 +656,15 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
 
     private Intent getManageIntentLocked(int action) {
         if (this.mAvailability == -3 || this.mAvailability == 3) {
-            throw new IllegalStateException("getManageIntent called on an invalid detector or error state");
+            throw new IllegalStateException(
+                    "getManageIntent called on an invalid detector or error state");
         }
         if (this.mAvailability != 2 && this.mAvailability != 1) {
-            throw new UnsupportedOperationException("Managing the given keyphrase is not supported");
+            throw new UnsupportedOperationException(
+                    "Managing the given keyphrase is not supported");
         }
-        return this.mKeyphraseEnrollmentInfo.getManageKeyphraseIntent(action, this.mText, this.mLocale);
+        return this.mKeyphraseEnrollmentInfo.getManageKeyphraseIntent(
+                action, this.mText, this.mLocale);
     }
 
     @Override // android.service.voice.AbstractDetector, android.service.voice.HotwordDetector
@@ -615,20 +697,35 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         synchronized (this.mLock) {
             if (this.mAvailability != -3 && this.mAvailability != -2 && this.mAvailability != 3) {
                 if (this.mIsAvailabilityOverriddenByTestApi) {
-                    Slog.w(TAG, "Suppressing system availability update. Availability is overridden by test API.");
+                    Slog.w(
+                            TAG,
+                            "Suppressing system availability update. Availability is overridden by"
+                                + " test API.");
                     return;
                 }
                 if (this.mAvailability == 2) {
                     try {
                         int result = stopRecognitionLocked();
                         if (result == 0) {
-                            sendSoundTriggerFailure(new SoundTriggerFailure(0, "stopped recognition because of enrollment update", 4));
+                            sendSoundTriggerFailure(
+                                    new SoundTriggerFailure(
+                                            0,
+                                            "stopped recognition because of enrollment update",
+                                            4));
                         }
-                        Log.w(TAG, "Failed to stop recognition after enrollment update: code=" + result);
+                        Log.w(
+                                TAG,
+                                "Failed to stop recognition after enrollment update: code="
+                                        + result);
                     } catch (Exception e) {
                         Slog.w(TAG, "Failed to stop recognition after enrollment update", e);
                         if (CompatChanges.isChangeEnabled(SEND_ON_FAILURE_FOR_ASYNC_EXCEPTIONS)) {
-                            sendSoundTriggerFailure(new SoundTriggerFailure(0, "Failed to stop recognition after enrollment update: " + Log.getStackTraceString(e), 3));
+                            sendSoundTriggerFailure(
+                                    new SoundTriggerFailure(
+                                            0,
+                                            "Failed to stop recognition after enrollment update: "
+                                                    + Log.getStackTraceString(e),
+                                            3));
                         } else {
                             updateAndNotifyStateChangedLocked(3);
                         }
@@ -638,19 +735,30 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
                 new RefreshAvailabilityTask().execute(new Void[0]);
                 return;
             }
-            Slog.w(TAG, "Received onSoundModelsChanged for an unsupported keyphrase/config or in the error state");
+            Slog.w(
+                    TAG,
+                    "Received onSoundModelsChanged for an unsupported keyphrase/config or in the"
+                        + " error state");
         }
     }
 
     private int startRecognitionLocked(int recognitionFlags, byte[] data) {
         int audioCapabilities;
         if (this.mAvailability == -3 || this.mAvailability == 3) {
-            throw new IllegalStateException("startRecognition called on an invalid detector or error state");
+            throw new IllegalStateException(
+                    "startRecognition called on an invalid detector or error state");
         }
         if (this.mAvailability != 2) {
-            throw new UnsupportedOperationException("Recognition for the given keyphrase is not supported");
+            throw new UnsupportedOperationException(
+                    "Recognition for the given keyphrase is not supported");
         }
-        SoundTrigger.KeyphraseRecognitionExtra[] recognitionExtra = {new SoundTrigger.KeyphraseRecognitionExtra(this.mKeyphraseMetadata.getId(), this.mKeyphraseMetadata.getRecognitionModeFlags(), 0, new SoundTrigger.ConfidenceLevel[0])};
+        SoundTrigger.KeyphraseRecognitionExtra[] recognitionExtra = {
+            new SoundTrigger.KeyphraseRecognitionExtra(
+                    this.mKeyphraseMetadata.getId(),
+                    this.mKeyphraseMetadata.getRecognitionModeFlags(),
+                    0,
+                    new SoundTrigger.ConfidenceLevel[0])
+        };
         boolean captureTriggerAudio = (recognitionFlags & 1) != 0;
         boolean allowMultipleTriggers = (recognitionFlags & 2) != 0;
         boolean runInBatterySaver = (recognitionFlags & 16) != 0;
@@ -664,7 +772,18 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
             audioCapabilities = audioCapabilities2 | 2;
         }
         try {
-            int code = this.mSoundTriggerSession.startRecognition(this.mKeyphraseMetadata.getId(), this.mLocale.toLanguageTag(), this.mInternalCallback, new SoundTrigger.RecognitionConfig(captureTriggerAudio, allowMultipleTriggers, recognitionExtra, data, audioCapabilities), runInBatterySaver);
+            int code =
+                    this.mSoundTriggerSession.startRecognition(
+                            this.mKeyphraseMetadata.getId(),
+                            this.mLocale.toLanguageTag(),
+                            this.mInternalCallback,
+                            new SoundTrigger.RecognitionConfig(
+                                    captureTriggerAudio,
+                                    allowMultipleTriggers,
+                                    recognitionExtra,
+                                    data,
+                                    audioCapabilities),
+                            runInBatterySaver);
             if (code != 0) {
                 Slog.w(TAG, "startRecognition() failed with error code " + code);
             }
@@ -676,7 +795,9 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
 
     private int stopRecognitionLocked() {
         try {
-            int code = this.mSoundTriggerSession.stopRecognition(this.mKeyphraseMetadata.getId(), this.mInternalCallback);
+            int code =
+                    this.mSoundTriggerSession.stopRecognition(
+                            this.mKeyphraseMetadata.getId(), this.mInternalCallback);
             if (code != 0) {
                 Slog.w(TAG, "stopRecognition() failed with error code " + code);
             }
@@ -688,7 +809,9 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
 
     private int setParameterLocked(int modelParam, int value) {
         try {
-            int code = this.mSoundTriggerSession.setParameter(this.mKeyphraseMetadata.getId(), modelParam, value);
+            int code =
+                    this.mSoundTriggerSession.setParameter(
+                            this.mKeyphraseMetadata.getId(), modelParam, value);
             if (code != 0) {
                 Slog.w(TAG, "setParameter failed with error code " + code);
             }
@@ -700,7 +823,8 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
 
     private int getParameterLocked(int modelParam) {
         try {
-            return this.mSoundTriggerSession.getParameter(this.mKeyphraseMetadata.getId(), modelParam);
+            return this.mSoundTriggerSession.getParameter(
+                    this.mKeyphraseMetadata.getId(), modelParam);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -708,7 +832,9 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
 
     private ModelParamRange queryParameterLocked(int modelParam) {
         try {
-            SoundTrigger.ModelParamRange modelParamRange = this.mSoundTriggerSession.queryParameter(this.mKeyphraseMetadata.getId(), modelParam);
+            SoundTrigger.ModelParamRange modelParamRange =
+                    this.mSoundTriggerSession.queryParameter(
+                            this.mKeyphraseMetadata.getId(), modelParam);
             if (modelParamRange == null) {
                 return null;
             }
@@ -754,9 +880,16 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onKeyphraseDetected(SoundTrigger.KeyphraseRecognitionEvent event, HotwordDetectedResult result) {
+        public void onKeyphraseDetected(
+                SoundTrigger.KeyphraseRecognitionEvent event, HotwordDetectedResult result) {
             Slog.i(AlwaysOnHotwordDetector.TAG, "onDetected");
-            Message.obtain(this.mHandler, 2, new EventPayload.Builder(event).setHotwordDetectedResult(result).build()).sendToTarget();
+            Message.obtain(
+                            this.mHandler,
+                            2,
+                            new EventPayload.Builder(event)
+                                    .setHotwordDetectedResult(result)
+                                    .build())
+                    .sendToTarget();
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
@@ -766,12 +899,18 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
             if (Flags.enableHotwordWearableSensingApi()) {
                 eventPayloadBuilder.setIsRecognitionStopped(false);
             }
-            Message.obtain(this.mHandler, 2, eventPayloadBuilder.setHotwordDetectedResult(result).build()).sendToTarget();
+            Message.obtain(
+                            this.mHandler,
+                            2,
+                            eventPayloadBuilder.setHotwordDetectedResult(result).build())
+                    .sendToTarget();
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
         public void onGenericSoundTriggerDetected(SoundTrigger.GenericRecognitionEvent event) {
-            Slog.w(AlwaysOnHotwordDetector.TAG, "Generic sound trigger event detected at AOHD: " + event);
+            Slog.w(
+                    AlwaysOnHotwordDetector.TAG,
+                    "Generic sound trigger event detected at AOHD: " + event);
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
@@ -781,8 +920,11 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onHotwordDetectionServiceFailure(HotwordDetectionServiceFailure hotwordDetectionServiceFailure) {
-            Slog.v(AlwaysOnHotwordDetector.TAG, "onHotwordDetectionServiceFailure: " + hotwordDetectionServiceFailure);
+        public void onHotwordDetectionServiceFailure(
+                HotwordDetectionServiceFailure hotwordDetectionServiceFailure) {
+            Slog.v(
+                    AlwaysOnHotwordDetector.TAG,
+                    "onHotwordDetectionServiceFailure: " + hotwordDetectionServiceFailure);
             if (hotwordDetectionServiceFailure != null) {
                 Message.obtain(this.mHandler, 9, hotwordDetectionServiceFailure).sendToTarget();
             } else {
@@ -791,19 +933,28 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onVisualQueryDetectionServiceFailure(VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) throws RemoteException {
-            Slog.w(AlwaysOnHotwordDetector.TAG, "onVisualQueryDetectionServiceFailure: " + visualQueryDetectionServiceFailure);
+        public void onVisualQueryDetectionServiceFailure(
+                VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
+                throws RemoteException {
+            Slog.w(
+                    AlwaysOnHotwordDetector.TAG,
+                    "onVisualQueryDetectionServiceFailure: " + visualQueryDetectionServiceFailure);
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
         public void onSoundTriggerFailure(SoundTriggerFailure soundTriggerFailure) {
-            Message.obtain(this.mHandler, 10, Objects.requireNonNull(soundTriggerFailure)).sendToTarget();
+            Message.obtain(this.mHandler, 10, Objects.requireNonNull(soundTriggerFailure))
+                    .sendToTarget();
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
         public void onUnknownFailure(String errorMessage) throws RemoteException {
             Slog.v(AlwaysOnHotwordDetector.TAG, "onUnknownFailure: " + errorMessage);
-            Message.obtain(this.mHandler, 11, !TextUtils.isEmpty(errorMessage) ? errorMessage : "Error data is null").sendToTarget();
+            Message.obtain(
+                            this.mHandler,
+                            11,
+                            !TextUtils.isEmpty(errorMessage) ? errorMessage : "Error data is null")
+                    .sendToTarget();
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
@@ -839,7 +990,11 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
     }
 
     void onDetectorRemoteException() {
-        Message.obtain(this.mHandler, 9, new HotwordDetectionServiceFailure(7, "Detector remote exception occurs")).sendToTarget();
+        Message.obtain(
+                        this.mHandler,
+                        9,
+                        new HotwordDetectionServiceFailure(7, "Detector remote exception occurs"))
+                .sendToTarget();
     }
 
     class MyHandler extends Handler {
@@ -851,27 +1006,35 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
         public void handleMessage(Message msg) {
             synchronized (AlwaysOnHotwordDetector.this.mLock) {
                 if (AlwaysOnHotwordDetector.this.mAvailability == -3) {
-                    Slog.w(AlwaysOnHotwordDetector.TAG, "Received message: " + msg.what + " for an invalid detector");
+                    Slog.w(
+                            AlwaysOnHotwordDetector.TAG,
+                            "Received message: " + msg.what + " for an invalid detector");
                 } else {
                     final Message message = Message.obtain(msg);
-                    Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.AlwaysOnHotwordDetector$MyHandler$$ExternalSyntheticLambda1
-                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                        public final void runOrThrow() {
-                            AlwaysOnHotwordDetector.MyHandler.this.lambda$handleMessage$1(message);
-                        }
-                    });
+                    Binder.withCleanCallingIdentity(
+                            new FunctionalUtils
+                                    .ThrowingRunnable() { // from class:
+                                                          // android.service.voice.AlwaysOnHotwordDetector$MyHandler$$ExternalSyntheticLambda1
+                                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                                public final void runOrThrow() {
+                                    AlwaysOnHotwordDetector.MyHandler.this.lambda$handleMessage$1(
+                                            message);
+                                }
+                            });
                 }
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$handleMessage$1(final Message message) throws Exception {
-            AlwaysOnHotwordDetector.this.mExternalExecutor.execute(new Runnable() { // from class: android.service.voice.AlwaysOnHotwordDetector$MyHandler$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AlwaysOnHotwordDetector.MyHandler.this.lambda$handleMessage$0(message);
-                }
-            });
+            AlwaysOnHotwordDetector.this.mExternalExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.voice.AlwaysOnHotwordDetector$MyHandler$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AlwaysOnHotwordDetector.MyHandler.this.lambda$handleMessage$0(message);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -879,10 +1042,12 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
             Slog.i(AlwaysOnHotwordDetector.TAG, "handle message " + message.what);
             switch (message.what) {
                 case 1:
-                    AlwaysOnHotwordDetector.this.mExternalCallback.onAvailabilityChanged(message.arg1);
+                    AlwaysOnHotwordDetector.this.mExternalCallback.onAvailabilityChanged(
+                            message.arg1);
                     break;
                 case 2:
-                    AlwaysOnHotwordDetector.this.mExternalCallback.onDetected((EventPayload) message.obj);
+                    AlwaysOnHotwordDetector.this.mExternalCallback.onDetected(
+                            (EventPayload) message.obj);
                     break;
                 case 3:
                     AlwaysOnHotwordDetector.this.mExternalCallback.onError();
@@ -894,22 +1059,28 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
                     AlwaysOnHotwordDetector.this.mExternalCallback.onRecognitionResumed();
                     break;
                 case 6:
-                    AlwaysOnHotwordDetector.this.mExternalCallback.onRejected((HotwordRejectedResult) message.obj);
+                    AlwaysOnHotwordDetector.this.mExternalCallback.onRejected(
+                            (HotwordRejectedResult) message.obj);
                     break;
                 case 7:
-                    AlwaysOnHotwordDetector.this.mExternalCallback.onHotwordDetectionServiceInitialized(message.arg1);
+                    AlwaysOnHotwordDetector.this.mExternalCallback
+                            .onHotwordDetectionServiceInitialized(message.arg1);
                     break;
                 case 8:
-                    AlwaysOnHotwordDetector.this.mExternalCallback.onHotwordDetectionServiceRestarted();
+                    AlwaysOnHotwordDetector.this.mExternalCallback
+                            .onHotwordDetectionServiceRestarted();
                     break;
                 case 9:
-                    AlwaysOnHotwordDetector.this.mExternalCallback.onFailure((HotwordDetectionServiceFailure) message.obj);
+                    AlwaysOnHotwordDetector.this.mExternalCallback.onFailure(
+                            (HotwordDetectionServiceFailure) message.obj);
                     break;
                 case 10:
-                    AlwaysOnHotwordDetector.this.mExternalCallback.onFailure((SoundTriggerFailure) message.obj);
+                    AlwaysOnHotwordDetector.this.mExternalCallback.onFailure(
+                            (SoundTriggerFailure) message.obj);
                     break;
                 case 11:
-                    AlwaysOnHotwordDetector.this.mExternalCallback.onUnknownFailure((String) message.obj);
+                    AlwaysOnHotwordDetector.this.mExternalCallback.onUnknownFailure(
+                            (String) message.obj);
                     break;
                 default:
                     super.handleMessage(message);
@@ -920,8 +1091,7 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
     }
 
     class RefreshAvailabilityTask extends AsyncTask<Void, Void, Void> {
-        RefreshAvailabilityTask() {
-        }
+        RefreshAvailabilityTask() {}
 
         @Override // android.os.AsyncTask
         public Void doInBackground(Void... params) {
@@ -942,8 +1112,10 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
             } catch (Exception e) {
                 Slog.w(AlwaysOnHotwordDetector.TAG, "Failed to refresh availability", e);
                 synchronized (AlwaysOnHotwordDetector.this.mLock) {
-                    if (CompatChanges.isChangeEnabled(AlwaysOnHotwordDetector.SEND_ON_FAILURE_FOR_ASYNC_EXCEPTIONS)) {
-                        AlwaysOnHotwordDetector.this.sendUnknownFailure("Failed to refresh availability: " + Log.getStackTraceString(e));
+                    if (CompatChanges.isChangeEnabled(
+                            AlwaysOnHotwordDetector.SEND_ON_FAILURE_FOR_ASYNC_EXCEPTIONS)) {
+                        AlwaysOnHotwordDetector.this.sendUnknownFailure(
+                                "Failed to refresh availability: " + Log.getStackTraceString(e));
                     } else {
                         AlwaysOnHotwordDetector.this.updateAndNotifyStateChangedLocked(3);
                     }
@@ -957,9 +1129,12 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
                 if (AlwaysOnHotwordDetector.this.mAvailability == -3) {
                     return -3;
                 }
-                if (!CompatChanges.isChangeEnabled(AlwaysOnHotwordDetector.THROW_ON_INITIALIZE_IF_NO_DSP)) {
+                if (!CompatChanges.isChangeEnabled(
+                        AlwaysOnHotwordDetector.THROW_ON_INITIALIZE_IF_NO_DSP)) {
                     try {
-                        SoundTrigger.ModuleProperties dspModuleProperties = AlwaysOnHotwordDetector.this.mSoundTriggerSession.getDspModuleProperties();
+                        SoundTrigger.ModuleProperties dspModuleProperties =
+                                AlwaysOnHotwordDetector.this.mSoundTriggerSession
+                                        .getDspModuleProperties();
                         if (dspModuleProperties == null) {
                             return -2;
                         }
@@ -974,7 +1149,11 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
 
         private void internalUpdateEnrolledKeyphraseMetadata() {
             try {
-                AlwaysOnHotwordDetector.this.mKeyphraseMetadata = AlwaysOnHotwordDetector.this.mModelManagementService.getEnrolledKeyphraseMetadata(AlwaysOnHotwordDetector.this.mText, AlwaysOnHotwordDetector.this.mLocale.toLanguageTag());
+                AlwaysOnHotwordDetector.this.mKeyphraseMetadata =
+                        AlwaysOnHotwordDetector.this.mModelManagementService
+                                .getEnrolledKeyphraseMetadata(
+                                        AlwaysOnHotwordDetector.this.mText,
+                                        AlwaysOnHotwordDetector.this.mLocale.toLanguageTag());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }

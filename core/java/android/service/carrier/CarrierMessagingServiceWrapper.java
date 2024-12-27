@@ -9,10 +9,9 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.service.carrier.CarrierMessagingServiceWrapper;
-import android.service.carrier.ICarrierMessagingCallback;
-import android.service.carrier.ICarrierMessagingService;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
@@ -27,7 +26,11 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
     private Executor mServiceReadyCallbackExecutor;
 
     @SystemApi
-    public boolean bindToCarrierMessagingService(Context context, String carrierPackageName, Executor executor, Runnable onServiceReadyCallback) {
+    public boolean bindToCarrierMessagingService(
+            Context context,
+            String carrierPackageName,
+            Executor executor,
+            Runnable onServiceReadyCallback) {
         Preconditions.checkState(this.mCarrierMessagingServiceConnection == null);
         Objects.requireNonNull(context);
         Objects.requireNonNull(carrierPackageName);
@@ -65,10 +68,21 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
     }
 
     @SystemApi
-    public void receiveSms(MessagePdu pdu, String format, int destPort, int subId, Executor executor, CarrierMessagingCallback callback) {
+    public void receiveSms(
+            MessagePdu pdu,
+            String format,
+            int destPort,
+            int subId,
+            Executor executor,
+            CarrierMessagingCallback callback) {
         if (this.mICarrierMessagingService != null) {
             try {
-                this.mICarrierMessagingService.filterSms(pdu, format, destPort, subId, new CarrierMessagingCallbackInternal(callback, executor));
+                this.mICarrierMessagingService.filterSms(
+                        pdu,
+                        format,
+                        destPort,
+                        subId,
+                        new CarrierMessagingCallbackInternal(callback, executor));
             } catch (RemoteException e) {
                 throw new RuntimeException(e);
             }
@@ -76,50 +90,103 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
     }
 
     @SystemApi
-    public void sendTextSms(String text, int subId, String destAddress, int sendSmsFlag, Executor executor, CarrierMessagingCallback callback) {
+    public void sendTextSms(
+            String text,
+            int subId,
+            String destAddress,
+            int sendSmsFlag,
+            Executor executor,
+            CarrierMessagingCallback callback) {
         Objects.requireNonNull(this.mICarrierMessagingService);
         try {
-            this.mICarrierMessagingService.sendTextSms(text, subId, destAddress, sendSmsFlag, new CarrierMessagingCallbackInternal(callback, executor));
+            this.mICarrierMessagingService.sendTextSms(
+                    text,
+                    subId,
+                    destAddress,
+                    sendSmsFlag,
+                    new CarrierMessagingCallbackInternal(callback, executor));
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
     }
 
     @SystemApi
-    public void sendDataSms(byte[] data, int subId, String destAddress, int destPort, int sendSmsFlag, Executor executor, CarrierMessagingCallback callback) {
+    public void sendDataSms(
+            byte[] data,
+            int subId,
+            String destAddress,
+            int destPort,
+            int sendSmsFlag,
+            Executor executor,
+            CarrierMessagingCallback callback) {
         Objects.requireNonNull(this.mICarrierMessagingService);
         try {
-            this.mICarrierMessagingService.sendDataSms(data, subId, destAddress, destPort, sendSmsFlag, new CarrierMessagingCallbackInternal(callback, executor));
+            this.mICarrierMessagingService.sendDataSms(
+                    data,
+                    subId,
+                    destAddress,
+                    destPort,
+                    sendSmsFlag,
+                    new CarrierMessagingCallbackInternal(callback, executor));
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
     }
 
     @SystemApi
-    public void sendMultipartTextSms(List<String> parts, int subId, String destAddress, int sendSmsFlag, Executor executor, CarrierMessagingCallback callback) {
+    public void sendMultipartTextSms(
+            List<String> parts,
+            int subId,
+            String destAddress,
+            int sendSmsFlag,
+            Executor executor,
+            CarrierMessagingCallback callback) {
         Objects.requireNonNull(this.mICarrierMessagingService);
         try {
-            this.mICarrierMessagingService.sendMultipartTextSms(parts, subId, destAddress, sendSmsFlag, new CarrierMessagingCallbackInternal(callback, executor));
+            this.mICarrierMessagingService.sendMultipartTextSms(
+                    parts,
+                    subId,
+                    destAddress,
+                    sendSmsFlag,
+                    new CarrierMessagingCallbackInternal(callback, executor));
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
     }
 
     @SystemApi
-    public void sendMms(Uri pduUri, int subId, Uri location, Executor executor, CarrierMessagingCallback callback) {
+    public void sendMms(
+            Uri pduUri,
+            int subId,
+            Uri location,
+            Executor executor,
+            CarrierMessagingCallback callback) {
         Objects.requireNonNull(this.mICarrierMessagingService);
         try {
-            this.mICarrierMessagingService.sendMms(pduUri, subId, location, new CarrierMessagingCallbackInternal(callback, executor));
+            this.mICarrierMessagingService.sendMms(
+                    pduUri,
+                    subId,
+                    location,
+                    new CarrierMessagingCallbackInternal(callback, executor));
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
     }
 
     @SystemApi
-    public void downloadMms(Uri pduUri, int subId, Uri location, Executor executor, CarrierMessagingCallback callback) {
+    public void downloadMms(
+            Uri pduUri,
+            int subId,
+            Uri location,
+            Executor executor,
+            CarrierMessagingCallback callback) {
         Objects.requireNonNull(this.mICarrierMessagingService);
         try {
-            this.mICarrierMessagingService.downloadMms(pduUri, subId, location, new CarrierMessagingCallbackInternal(callback, executor));
+            this.mICarrierMessagingService.downloadMms(
+                    pduUri,
+                    subId,
+                    location,
+                    new CarrierMessagingCallbackInternal(callback, executor));
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
@@ -131,35 +198,29 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
     }
 
     private final class CarrierMessagingServiceConnection implements ServiceConnection {
-        private CarrierMessagingServiceConnection() {
-        }
+        private CarrierMessagingServiceConnection() {}
 
         @Override // android.content.ServiceConnection
         public void onServiceConnected(ComponentName name, IBinder service) {
-            CarrierMessagingServiceWrapper.this.onServiceReady(ICarrierMessagingService.Stub.asInterface(service));
+            CarrierMessagingServiceWrapper.this.onServiceReady(
+                    ICarrierMessagingService.Stub.asInterface(service));
         }
 
         @Override // android.content.ServiceConnection
-        public void onServiceDisconnected(ComponentName name) {
-        }
+        public void onServiceDisconnected(ComponentName name) {}
     }
 
     @SystemApi
     public interface CarrierMessagingCallback {
-        default void onReceiveSmsComplete(int result) {
-        }
+        default void onReceiveSmsComplete(int result) {}
 
-        default void onSendSmsComplete(int result, int messageRef) {
-        }
+        default void onSendSmsComplete(int result, int messageRef) {}
 
-        default void onSendMultipartSmsComplete(int result, int[] messageRefs) {
-        }
+        default void onSendMultipartSmsComplete(int result, int[] messageRefs) {}
 
-        default void onSendMmsComplete(int result, byte[] sendConfPdu) {
-        }
+        default void onSendMmsComplete(int result, byte[] sendConfPdu) {}
 
-        default void onDownloadMmsComplete(int result) {
-        }
+        default void onDownloadMmsComplete(int result) {}
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -179,12 +240,15 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
 
         @Override // android.service.carrier.ICarrierMessagingCallback
         public void onFilterComplete(final int result) throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this.lambda$onFilterComplete$0(result);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this
+                                    .lambda$onFilterComplete$0(result);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -193,28 +257,37 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
         }
 
         @Override // android.service.carrier.ICarrierMessagingCallback
-        public void onSendSmsComplete(final int result, final int messageRef) throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this.lambda$onSendSmsComplete$1(result, messageRef);
-                }
-            });
+        public void onSendSmsComplete(final int result, final int messageRef)
+                throws RemoteException {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this
+                                    .lambda$onSendSmsComplete$1(result, messageRef);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onSendMultipartSmsComplete$2(int result, int[] messageRefs) {
+        public /* synthetic */ void lambda$onSendMultipartSmsComplete$2(
+                int result, int[] messageRefs) {
             this.mCarrierMessagingCallback.onSendMultipartSmsComplete(result, messageRefs);
         }
 
         @Override // android.service.carrier.ICarrierMessagingCallback
-        public void onSendMultipartSmsComplete(final int result, final int[] messageRefs) throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this.lambda$onSendMultipartSmsComplete$2(result, messageRefs);
-                }
-            });
+        public void onSendMultipartSmsComplete(final int result, final int[] messageRefs)
+                throws RemoteException {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this
+                                    .lambda$onSendMultipartSmsComplete$2(result, messageRefs);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -223,13 +296,17 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
         }
 
         @Override // android.service.carrier.ICarrierMessagingCallback
-        public void onSendMmsComplete(final int result, final byte[] sendConfPdu) throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this.lambda$onSendMmsComplete$3(result, sendConfPdu);
-                }
-            });
+        public void onSendMmsComplete(final int result, final byte[] sendConfPdu)
+                throws RemoteException {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this
+                                    .lambda$onSendMmsComplete$3(result, sendConfPdu);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -239,12 +316,15 @@ public final class CarrierMessagingServiceWrapper implements AutoCloseable {
 
         @Override // android.service.carrier.ICarrierMessagingCallback
         public void onDownloadMmsComplete(final int result) throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this.lambda$onDownloadMmsComplete$4(result);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.carrier.CarrierMessagingServiceWrapper$CarrierMessagingCallbackInternal$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            CarrierMessagingServiceWrapper.CarrierMessagingCallbackInternal.this
+                                    .lambda$onDownloadMmsComplete$4(result);
+                        }
+                    });
         }
     }
 }

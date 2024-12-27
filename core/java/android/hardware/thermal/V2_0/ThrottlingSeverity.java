@@ -1,7 +1,9 @@
 package android.hardware.thermal.V2_0;
 
 import android.security.keystore.KeyProperties;
+
 import com.samsung.android.globalactions.presentation.strategies.WindowManagerFunctionStrategy;
+
 import java.util.ArrayList;
 
 /* loaded from: classes2.dex */

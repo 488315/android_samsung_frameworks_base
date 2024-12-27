@@ -4,10 +4,14 @@ import com.android.internal.util.Preconditions;
 
 /* loaded from: classes.dex */
 public class GetCandidateCredentialsException extends Exception {
-    public static final String TYPE_INTERRUPTED = "android.credentials.GetCredentialException.TYPE_INTERRUPTED";
-    public static final String TYPE_NO_CREDENTIAL = "android.credentials.GetCandidateCredentialsException.TYPE_NO_CREDENTIAL";
-    public static final String TYPE_UNKNOWN = "android.credentials.GetCandidateCredentialsException.TYPE_UNKNOWN";
-    public static final String TYPE_USER_CANCELED = "android.credentials.GetCredentialException.TYPE_USER_CANCELED";
+    public static final String TYPE_INTERRUPTED =
+            "android.credentials.GetCredentialException.TYPE_INTERRUPTED";
+    public static final String TYPE_NO_CREDENTIAL =
+            "android.credentials.GetCandidateCredentialsException.TYPE_NO_CREDENTIAL";
+    public static final String TYPE_UNKNOWN =
+            "android.credentials.GetCandidateCredentialsException.TYPE_UNKNOWN";
+    public static final String TYPE_USER_CANCELED =
+            "android.credentials.GetCredentialException.TYPE_USER_CANCELED";
     private final String mType;
 
     public String getType() {

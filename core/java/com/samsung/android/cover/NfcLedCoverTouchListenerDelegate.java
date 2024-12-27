@@ -6,8 +6,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import com.samsung.android.cover.CoverManager;
-import com.samsung.android.cover.INfcLedCoverTouchListenerCallback;
 
 /* loaded from: classes6.dex */
 class NfcLedCoverTouchListenerDelegate extends INfcLedCoverTouchListenerCallback.Stub {
@@ -19,7 +17,8 @@ class NfcLedCoverTouchListenerDelegate extends INfcLedCoverTouchListenerCallback
     private ListenerDelegateHandler mHandler;
     private CoverManager.NfcLedCoverTouchListener mListener;
 
-    NfcLedCoverTouchListenerDelegate(CoverManager.NfcLedCoverTouchListener listener, Handler handler, Context context) {
+    NfcLedCoverTouchListenerDelegate(
+            CoverManager.NfcLedCoverTouchListener listener, Handler handler, Context context) {
         this.mListener = listener;
         Looper looper = handler == null ? context.getMainLooper() : handler.getLooper();
         this.mHandler = new ListenerDelegateHandler(looper, this.mListener);
@@ -40,20 +39,16 @@ class NfcLedCoverTouchListenerDelegate extends INfcLedCoverTouchListenerCallback
     }
 
     @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-    public void onCoverTapLeft() throws RemoteException {
-    }
+    public void onCoverTapLeft() throws RemoteException {}
 
     @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-    public void onCoverTapMid() throws RemoteException {
-    }
+    public void onCoverTapMid() throws RemoteException {}
 
     @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-    public void onCoverTapRight() throws RemoteException {
-    }
+    public void onCoverTapRight() throws RemoteException {}
 
     @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-    public void onSystemCoverEvent(int event, Bundle args) throws RemoteException {
-    }
+    public void onSystemCoverEvent(int event, Bundle args) throws RemoteException {}
 
     private static class ListenerDelegateHandler extends Handler {
         private final CoverManager.NfcLedCoverTouchListener mListener;

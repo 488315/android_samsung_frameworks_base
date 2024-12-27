@@ -7,8 +7,7 @@ public class SemSmartMemoryManager {
     private static final String TAG = "SemSmartMemoryManager";
     private static SemSmartMemoryManager sSmartMemMgr = null;
 
-    private SemSmartMemoryManager(Context context) {
-    }
+    private SemSmartMemoryManager(Context context) {}
 
     public static synchronized SemSmartMemoryManager getInstance(Context context) {
         SemSmartMemoryManager semSmartMemoryManager;

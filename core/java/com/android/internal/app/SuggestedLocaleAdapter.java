@@ -11,10 +11,11 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.internal.R;
-import com.android.internal.app.LocaleHelper;
-import com.android.internal.app.LocaleStore;
+
 import com.samsung.android.feature.SemCscFeature;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -54,11 +55,18 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
         this(localeOptions, countryMode, false);
     }
 
-    public SuggestedLocaleAdapter(Set<LocaleStore.LocaleInfo> localeOptions, boolean countryMode, boolean hasSpecificAppPackageName) {
+    public SuggestedLocaleAdapter(
+            Set<LocaleStore.LocaleInfo> localeOptions,
+            boolean countryMode,
+            boolean hasSpecificAppPackageName) {
         this(localeOptions, countryMode, hasSpecificAppPackageName, 0);
     }
 
-    public SuggestedLocaleAdapter(Set<LocaleStore.LocaleInfo> localeOptions, boolean countryMode, boolean hasSpecificAppPackageName, int changeDisplayName) {
+    public SuggestedLocaleAdapter(
+            Set<LocaleStore.LocaleInfo> localeOptions,
+            boolean countryMode,
+            boolean hasSpecificAppPackageName,
+            int changeDisplayName) {
         this.mDisplayLocale = null;
         this.mContextOverride = null;
         this.mCountryMode = countryMode;
@@ -105,7 +113,9 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
 
     @Override // android.widget.BaseAdapter, android.widget.ListAdapter
     public boolean isEnabled(int position) {
-        return getItemViewType(position) == 2 || getItemViewType(position) == 5 || getItemViewType(position) == 4;
+        return getItemViewType(position) == 2
+                || getItemViewType(position) == 5
+                || getItemViewType(position) == 4;
     }
 
     @Override // android.widget.BaseAdapter, android.widget.Adapter
@@ -171,7 +181,9 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
 
     private int getHeadersOffsetCount() {
         if (showHeaders()) {
-            if (showSecHeaders() && this.mSuggestionCount + this.mSecSuggestionCount < this.mLocaleOptions.size()) {
+            if (showSecHeaders()
+                    && this.mSuggestionCount + this.mSecSuggestionCount
+                            < this.mLocaleOptions.size()) {
                 int offset = 0 + 3;
                 return offset;
             }
@@ -201,7 +213,8 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
             if (this.mSuggestionCount == this.mLocaleOptions.size()) {
                 offset = -1;
             } else if (this.mSecSuggestionCount > 0) {
-                if (position > this.mSuggestionCount && position <= this.mSuggestionCount + this.mSecSuggestionCount + 1) {
+                if (position > this.mSuggestionCount
+                        && position <= this.mSuggestionCount + this.mSecSuggestionCount + 1) {
                     offset = -2;
                 } else if (position > this.mSuggestionCount + this.mSecSuggestionCount) {
                     offset = -3;
@@ -264,7 +277,8 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
                 if (itemType == 0) {
                     setTextTo(textView, R.string.language_picker_section_suggested);
                 } else if (itemType == 3) {
-                    if (SemCscFeature.getInstance().getBoolean("CscFeature_Common_ReplaceSecBrandAsGalaxy", false)) {
+                    if (SemCscFeature.getInstance()
+                            .getBoolean("CscFeature_Common_ReplaceSecBrandAsGalaxy", false)) {
                         setTextTo(textView, R.string.language_picker_section_suggested_sec_jpn);
                     } else {
                         setTextTo(textView, R.string.language_picker_section_suggested_sec);
@@ -278,55 +292,81 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
                 } else {
                     setTextTo(textView, R.string.language_picker_section_show_all);
                 }
-                textView.setTextLocale(this.mDisplayLocale != null ? this.mDisplayLocale : Locale.getDefault());
+                textView.setTextLocale(
+                        this.mDisplayLocale != null ? this.mDisplayLocale : Locale.getDefault());
                 return itemView;
             case 2:
             default:
                 updateTextView(itemView, (TextView) itemView.findViewById(R.id.locale), position);
                 return itemView;
             case 4:
-                itemView.findViewById(R.id.language_picker_item).findViewById(R.id.divider).setVisibility(8);
+                itemView.findViewById(R.id.language_picker_item)
+                        .findViewById(R.id.divider)
+                        .setVisibility(8);
                 itemView.findViewById(R.id.external_divider).setVisibility(0);
-                updateTextView(itemView, (TextView) itemView.findViewById(R.id.language_picker_item).findViewById(R.id.locale), position);
+                updateTextView(
+                        itemView,
+                        (TextView)
+                                itemView.findViewById(R.id.language_picker_item)
+                                        .findViewById(R.id.locale),
+                        position);
                 return itemView;
             case 5:
                 View externalDivider = itemView.findViewById(R.id.external_divider);
                 if (externalDivider != null) {
-                    itemView.findViewById(R.id.language_picker_item).findViewById(R.id.divider).setVisibility(8);
+                    itemView.findViewById(R.id.language_picker_item)
+                            .findViewById(R.id.divider)
+                            .setVisibility(8);
                     externalDivider.setVisibility(0);
                 }
                 if (((LocaleStore.LocaleInfo) getItem(position)).isAppCurrentLocale()) {
-                    title = (TextView) itemView.findViewById(R.id.language_picker_item).findViewById(R.id.locale);
+                    title =
+                            (TextView)
+                                    itemView.findViewById(R.id.language_picker_item)
+                                            .findViewById(R.id.locale);
                 } else {
                     title = (TextView) itemView.findViewById(R.id.locale);
                 }
                 title.setText(R.string.system_locale_title);
-                title.setContentDescription(itemView.getContext().getResources().getString(R.string.system_locale_title));
+                title.setContentDescription(
+                        itemView.getContext()
+                                .getResources()
+                                .getString(R.string.system_locale_title));
                 return itemView;
         }
     }
 
-    private View getNewViewIfNeeded(View convertView, ViewGroup parent, int itemType, int position) {
+    private View getNewViewIfNeeded(
+            View convertView, ViewGroup parent, int itemType, int position) {
         int i;
         View updatedView = convertView;
         switch (itemType) {
             case 0:
             case 1:
             case 3:
-                boolean shouldReuseView = (convertView instanceof TextView) && convertView.findViewById(R.id.section_header) != null;
+                boolean shouldReuseView =
+                        (convertView instanceof TextView)
+                                && convertView.findViewById(R.id.section_header) != null;
                 if (!shouldReuseView) {
                     break;
                 }
                 break;
             case 2:
             default:
-                boolean shouldReuseView2 = (!(convertView instanceof ViewGroup) || convertView.findViewById(R.id.locale) == null || convertView.findViewById(R.id.divider) == null) ? false : true;
+                boolean shouldReuseView2 =
+                        (!(convertView instanceof ViewGroup)
+                                        || convertView.findViewById(R.id.locale) == null
+                                        || convertView.findViewById(R.id.divider) == null)
+                                ? false
+                                : true;
                 if (!shouldReuseView2) {
-                    updatedView = new SemLocalePickerItemView(parent.getContext(), 1, this.mInflater);
+                    updatedView =
+                            new SemLocalePickerItemView(parent.getContext(), 1, this.mInflater);
                 }
                 TextView text = (TextView) updatedView.findViewById(R.id.locale);
                 LocaleStore.LocaleInfo item = (LocaleStore.LocaleInfo) getItem(position);
-                text.lambda$setTextAsync$0(item.getLabel(this.mCountryMode, this.mChangeDisplayName));
+                text.lambda$setTextAsync$0(
+                        item.getLabel(this.mCountryMode, this.mChangeDisplayName));
                 text.setTextLocale(item.getLocale());
                 text.setContentDescription(item.getContentDescription(this.mCountryMode));
                 View divder = updatedView.findViewById(R.id.divider);
@@ -342,11 +382,23 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
                 boolean isTopCorner = false;
                 int corners = 0;
                 int headersOffsetCount = getHeadersOffsetCount();
-                if (position == 1 || ((this.mSuggestionCount > 0 && position == this.mSuggestionCount + 2) || position == this.mSuggestionCount + this.mSecSuggestionCount + headersOffsetCount)) {
+                if (position == 1
+                        || ((this.mSuggestionCount > 0 && position == this.mSuggestionCount + 2)
+                                || position
+                                        == this.mSuggestionCount
+                                                + this.mSecSuggestionCount
+                                                + headersOffsetCount)) {
                     corners = 3;
                     isTopCorner = true;
                 }
-                if (position == getCount() - 1 || ((this.mSuggestionCount > 0 && position == this.mSuggestionCount) || (headersOffsetCount > 1 && position == ((this.mSuggestionCount + this.mSecSuggestionCount) + headersOffsetCount) - 2))) {
+                if (position == getCount() - 1
+                        || ((this.mSuggestionCount > 0 && position == this.mSuggestionCount)
+                                || (headersOffsetCount > 1
+                                        && position
+                                                == ((this.mSuggestionCount
+                                                                        + this.mSecSuggestionCount)
+                                                                + headersOffsetCount)
+                                                        - 2))) {
                     corners = isTopCorner ? 15 : 12;
                     divder.setVisibility(8);
                 }
@@ -357,10 +409,18 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
                 break;
             case 4:
                 boolean shouldReuseView3 = convertView instanceof LinearLayout;
-                boolean shouldReuseView4 = shouldReuseView3 && convertView.findViewById(R.id.external_divider) != null;
+                boolean shouldReuseView4 =
+                        shouldReuseView3 && convertView.findViewById(R.id.external_divider) != null;
                 if (!shouldReuseView4) {
-                    View updatedView2 = this.mInflater.inflate(R.layout.sec_app_language_picker_current_locale_item, parent, false);
-                    updatedView2.findViewById(R.id.language_picker_item).findViewById(R.id.divider).setVisibility(8);
+                    View updatedView2 =
+                            this.mInflater.inflate(
+                                    R.layout.sec_app_language_picker_current_locale_item,
+                                    parent,
+                                    false);
+                    updatedView2
+                            .findViewById(R.id.language_picker_item)
+                            .findViewById(R.id.divider)
+                            .setVisibility(8);
                     updatedView2.findViewById(R.id.external_divider).setVisibility(0);
                     semApplyRoundedCorner(updatedView2, position);
                     break;
@@ -368,18 +428,31 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
                 break;
             case 5:
                 if (((LocaleStore.LocaleInfo) getItem(position)).isAppCurrentLocale()) {
-                    boolean shouldReuseView5 = (convertView instanceof LinearLayout) && convertView.findViewById(R.id.language_picker_item) != null;
+                    boolean shouldReuseView5 =
+                            (convertView instanceof LinearLayout)
+                                    && convertView.findViewById(R.id.language_picker_item) != null;
                     if (!shouldReuseView5) {
-                        View updatedView3 = this.mInflater.inflate(R.layout.sec_app_language_picker_current_locale_item, parent, false);
-                        updatedView3.findViewById(R.id.language_picker_item).findViewById(R.id.divider).setVisibility(8);
+                        View updatedView3 =
+                                this.mInflater.inflate(
+                                        R.layout.sec_app_language_picker_current_locale_item,
+                                        parent,
+                                        false);
+                        updatedView3
+                                .findViewById(R.id.language_picker_item)
+                                .findViewById(R.id.divider)
+                                .setVisibility(8);
                         updatedView3.findViewById(R.id.external_divider).setVisibility(0);
                         semApplyRoundedCorner(updatedView3, position);
                         break;
                     }
                 } else {
-                    boolean shouldReuseView6 = (convertView instanceof TextView) && convertView.findViewById(R.id.locale) != null;
+                    boolean shouldReuseView6 =
+                            (convertView instanceof TextView)
+                                    && convertView.findViewById(R.id.locale) != null;
                     if (!shouldReuseView6) {
-                        View updatedView4 = this.mInflater.inflate(R.layout.language_picker_item, parent, false);
+                        View updatedView4 =
+                                this.mInflater.inflate(
+                                        R.layout.language_picker_item, parent, false);
                         semApplyRoundedCorner(updatedView4, position);
                         break;
                     }
@@ -421,7 +494,8 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
             corners = 3;
             isTopCorner = true;
         }
-        if (position == getCount() - 1 || (this.mSuggestionCount > 0 && position == this.mSuggestionCount)) {
+        if (position == getCount() - 1
+                || (this.mSuggestionCount > 0 && position == this.mSuggestionCount)) {
             corners = isTopCorner ? 15 : 12;
             divder.setVisibility(8);
         }
@@ -484,16 +558,17 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
     }
 
     class FilterByNativeAndUiNames extends Filter {
-        FilterByNativeAndUiNames() {
-        }
+        FilterByNativeAndUiNames() {}
 
         @Override // android.widget.Filter
         protected Filter.FilterResults performFiltering(CharSequence prefix) {
             Filter.FilterResults results = new Filter.FilterResults();
             if (SuggestedLocaleAdapter.this.mOriginalLocaleOptions == null) {
-                SuggestedLocaleAdapter.this.mOriginalLocaleOptions = new ArrayList<>(SuggestedLocaleAdapter.this.mLocaleOptions);
+                SuggestedLocaleAdapter.this.mOriginalLocaleOptions =
+                        new ArrayList<>(SuggestedLocaleAdapter.this.mLocaleOptions);
             }
-            ArrayList<LocaleStore.LocaleInfo> values = new ArrayList<>(SuggestedLocaleAdapter.this.mOriginalLocaleOptions);
+            ArrayList<LocaleStore.LocaleInfo> values =
+                    new ArrayList<>(SuggestedLocaleAdapter.this.mOriginalLocaleOptions);
             if (prefix == null || prefix.length() == 0) {
                 results.values = values;
                 results.count = values.size();
@@ -504,9 +579,13 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
                 ArrayList<LocaleStore.LocaleInfo> newValues = new ArrayList<>();
                 for (int i = 0; i < count; i++) {
                     LocaleStore.LocaleInfo value = values.get(i);
-                    String nameToCheck = LocaleHelper.normalizeForSearch(value.getFullNameInUiLanguage(), locale);
-                    String nativeNameToCheck = LocaleHelper.normalizeForSearch(value.getFullNameNative(), locale);
-                    if (wordMatches(nativeNameToCheck, prefixString) || wordMatches(nameToCheck, prefixString)) {
+                    String nameToCheck =
+                            LocaleHelper.normalizeForSearch(
+                                    value.getFullNameInUiLanguage(), locale);
+                    String nativeNameToCheck =
+                            LocaleHelper.normalizeForSearch(value.getFullNameNative(), locale);
+                    if (wordMatches(nativeNameToCheck, prefixString)
+                            || wordMatches(nameToCheck, prefixString)) {
                         newValues.add(value);
                     }
                 }
@@ -534,12 +613,15 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
             SuggestedLocaleAdapter.this.mLocaleOptions = (ArrayList) results.values;
             SuggestedLocaleAdapter.this.mSuggestionCount = 0;
             SuggestedLocaleAdapter.this.mSecSuggestionCount = 0;
-            Iterator<LocaleStore.LocaleInfo> it = SuggestedLocaleAdapter.this.mLocaleOptions.iterator();
+            Iterator<LocaleStore.LocaleInfo> it =
+                    SuggestedLocaleAdapter.this.mLocaleOptions.iterator();
             while (it.hasNext()) {
                 LocaleStore.LocaleInfo li = it.next();
                 if (li.isSuggested()) {
                     SuggestedLocaleAdapter.this.mSuggestionCount++;
-                } else if (!SuggestedLocaleAdapter.this.mCountryMode && li.isSecSuggested() && !SuggestedLocaleAdapter.this.mIsShowAll) {
+                } else if (!SuggestedLocaleAdapter.this.mCountryMode
+                        && li.isSecSuggested()
+                        && !SuggestedLocaleAdapter.this.mIsShowAll) {
                     SuggestedLocaleAdapter.this.mSecSuggestionCount++;
                 }
             }
@@ -559,9 +641,15 @@ public class SuggestedLocaleAdapter extends BaseAdapter implements Filterable {
     private void updateTextView(View convertView, TextView text, int position) {
         int i;
         LocaleStore.LocaleInfo item = (LocaleStore.LocaleInfo) getItem(position);
-        text.lambda$setTextAsync$0(this.mIsNumberingMode ? item.getNumberingSystem() : item.getLabel(this.mCountryMode, this.mChangeDisplayName));
+        text.lambda$setTextAsync$0(
+                this.mIsNumberingMode
+                        ? item.getNumberingSystem()
+                        : item.getLabel(this.mCountryMode, this.mChangeDisplayName));
         text.setTextLocale(item.getLocale());
-        text.setContentDescription(this.mIsNumberingMode ? item.getNumberingSystem() : item.getContentDescription(this.mCountryMode));
+        text.setContentDescription(
+                this.mIsNumberingMode
+                        ? item.getNumberingSystem()
+                        : item.getContentDescription(this.mCountryMode));
         if (this.mCountryMode) {
             int layoutDir = TextUtils.getLayoutDirectionFromLocale(item.getParent());
             convertView.setLayoutDirection(layoutDir);

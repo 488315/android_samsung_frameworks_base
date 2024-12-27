@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.descriptor.nn;
 
 import com.samsung.android.sume.core.types.nn.NNFileDescriptor;
+
 import java.util.function.Function;
 
 /* compiled from: D8$$SyntheticClass */

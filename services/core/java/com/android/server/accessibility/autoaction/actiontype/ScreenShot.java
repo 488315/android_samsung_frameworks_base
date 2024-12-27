@@ -20,6 +20,7 @@ public final class ScreenShot extends CornerActionType {
         intent.putExtra("callingPackageName", "com.samsung.accessibility");
         intent.putExtra("displayId", Integer.toString(i));
         intent.addFlags(268435456);
-        this.mContext.sendBroadcastAsUser(intent, UserHandle.SEM_CURRENT, "com.samsung.permission.CAPTURE");
+        this.mContext.sendBroadcastAsUser(
+                intent, UserHandle.SEM_CURRENT, "com.samsung.permission.CAPTURE");
     }
 }

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
@@ -18,8 +19,10 @@ import com.android.server.enterprise.license.EnterpriseLicenseService;
 import com.android.server.enterprise.license.IActivationKlmElmObserver;
 import com.android.server.enterprise.plm.common.HandlerObserver;
 import com.android.server.enterprise.plm.common.PlmMessage;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knox.license.LicenseResult;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -63,7 +66,8 @@ public final class SystemStateTracker extends Handler {
                     int i = SystemStateTracker.$r8$clinit;
                     Log.d("SystemStateTracker", action);
                     SystemStateTracker systemStateTracker = this.this$0;
-                    systemStateTracker.sendMessage(PlmMessage.obtain(systemStateTracker, 4, intent.getAction()));
+                    systemStateTracker.sendMessage(
+                            PlmMessage.obtain(systemStateTracker, 4, intent.getAction()));
                     break;
                 case 1:
                     String action2 = intent.getAction();
@@ -72,7 +76,12 @@ public final class SystemStateTracker extends Handler {
                     Log.d("SystemStateTracker", action2 + ":" + intExtra);
                     if (intent.getData() != null) {
                         SystemStateTracker systemStateTracker2 = this.this$0;
-                        systemStateTracker2.sendMessage(PlmMessage.obtain(systemStateTracker2, 2, intent.getData().getSchemeSpecificPart(), intent.getAction()));
+                        systemStateTracker2.sendMessage(
+                                PlmMessage.obtain(
+                                        systemStateTracker2,
+                                        2,
+                                        intent.getData().getSchemeSpecificPart(),
+                                        intent.getAction()));
                         break;
                     }
                     break;
@@ -81,7 +90,8 @@ public final class SystemStateTracker extends Handler {
                     int i3 = SystemStateTracker.$r8$clinit;
                     Log.d("SystemStateTracker", action3);
                     SystemStateTracker systemStateTracker3 = this.this$0;
-                    systemStateTracker3.sendMessage(PlmMessage.obtain(systemStateTracker3, 3, intent.getAction()));
+                    systemStateTracker3.sendMessage(
+                            PlmMessage.obtain(systemStateTracker3, 3, intent.getAction()));
                     break;
             }
         }
@@ -91,7 +101,9 @@ public final class SystemStateTracker extends Handler {
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class EbpfType {
-        public static final /* synthetic */ EbpfType[] $VALUES = {new EbpfType("CPU_UID_SYSTEM_TIME", 0), new EbpfType("CPU_UID_ACTIVE_TIME", 1)};
+        public static final /* synthetic */ EbpfType[] $VALUES = {
+            new EbpfType("CPU_UID_SYSTEM_TIME", 0), new EbpfType("CPU_UID_ACTIVE_TIME", 1)
+        };
 
         /* JADX INFO: Fake field, exist only in values array */
         EbpfType EF5;
@@ -107,16 +119,13 @@ public final class SystemStateTracker extends Handler {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LicenseStateListener implements IActivationKlmElmObserver {
-        public LicenseStateListener() {
-        }
+        public LicenseStateListener() {}
 
         @Override // com.android.server.enterprise.license.IActivationKlmElmObserver
-        public final void onUpdateContainerLicenseStatus(String str) {
-        }
+        public final void onUpdateContainerLicenseStatus(String str) {}
 
         @Override // com.android.server.enterprise.license.IActivationKlmElmObserver
-        public final void onUpdateElm(String str, LicenseResult licenseResult) {
-        }
+        public final void onUpdateElm(String str, LicenseResult licenseResult) {}
 
         @Override // com.android.server.enterprise.license.IActivationKlmElmObserver
         public final void onUpdateKlm(String str, LicenseResult licenseResult) {
@@ -128,8 +137,7 @@ public final class SystemStateTracker extends Handler {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LockStateListener {
-        public LockStateListener() {
-        }
+        public LockStateListener() {}
     }
 
     public SystemStateTracker(Looper looper, Context context, List list) {
@@ -146,7 +154,8 @@ public final class SystemStateTracker extends Handler {
         Iterator it = ((ArrayList) list).iterator();
         while (it.hasNext()) {
             ProcessAdapter processAdapter = (ProcessAdapter) it.next();
-            ((ArrayList) this.mTargetPackageNames).add(processAdapter.mKeepAliveImpl.mProcessContext.getPackageName());
+            ((ArrayList) this.mTargetPackageNames)
+                    .add(processAdapter.mKeepAliveImpl.mProcessContext.getPackageName());
         }
         this.mLicenseStateListener = null;
         this.mPackageStateListener = null;
@@ -168,7 +177,8 @@ public final class SystemStateTracker extends Handler {
 
     @Override // android.os.Handler
     public final void handleMessage(Message message) {
-        GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("handleMessage : "), message.what, "SystemStateTracker");
+        GestureWakeup$$ExternalSyntheticOutline0.m(
+                new StringBuilder("handleMessage : "), message.what, "SystemStateTracker");
         try {
             switch (message.what) {
                 case 1:
@@ -203,7 +213,8 @@ public final class SystemStateTracker extends Handler {
 
     public final void onBootStateChange(Message message) {
         String str = (String) ((PlmMessage) message.obj).obj1;
-        DualAppManagerService$$ExternalSyntheticOutline0.m("onBootStateChange(", str, ")", "SystemStateTracker");
+        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                "onBootStateChange(", str, ")", "SystemStateTracker");
         Iterator it = ((ArrayList) this.mBootStateObservers).iterator();
         while (it.hasNext()) {
             HandlerObserver handlerObserver = (HandlerObserver) it.next();
@@ -226,7 +237,9 @@ public final class SystemStateTracker extends Handler {
             int intValue = num.intValue();
             Long l = (Long) plmMessage.obj3;
             long longValue = l.longValue();
-            Log.d("SystemStateTracker", "onEbpfStateChange(" + ebpfType + ", " + intValue + ", " + longValue + ")");
+            Log.d(
+                    "SystemStateTracker",
+                    "onEbpfStateChange(" + ebpfType + ", " + intValue + ", " + longValue + ")");
             Iterator it = ((ArrayList) this.mEbpfStateObservers).iterator();
             while (it.hasNext()) {
                 ((HandlerObserver) it.next()).notifyMessage(ebpfType, num, l);
@@ -246,7 +259,17 @@ public final class SystemStateTracker extends Handler {
         long longValue2 = l2.longValue();
         Long l3 = (Long) plmMessage.obj4;
         long longValue3 = l3.longValue();
-        Log.d("SystemStateTracker", "onEbpfStateChange(" + ebpfType + ", " + intValue2 + ", " + longValue2 + ", " + longValue3 + ")");
+        Log.d(
+                "SystemStateTracker",
+                "onEbpfStateChange("
+                        + ebpfType
+                        + ", "
+                        + intValue2
+                        + ", "
+                        + longValue2
+                        + ", "
+                        + longValue3
+                        + ")");
         Iterator it2 = ((ArrayList) this.mEbpfStateObservers).iterator();
         while (it2.hasNext()) {
             HandlerObserver handlerObserver = (HandlerObserver) it2.next();
@@ -276,7 +299,8 @@ public final class SystemStateTracker extends Handler {
     public final void onEdmStateChange(Message message) {
         boolean booleanValue = ((Boolean) ((PlmMessage) message.obj).obj1).booleanValue();
         Log.d("SystemStateTracker", "onEdmStateChange(" + booleanValue + ")");
-        FlashNotificationsController$$ExternalSyntheticOutline0.m("SystemStateTracker", new StringBuilder("edm service ready : "), booleanValue);
+        FlashNotificationsController$$ExternalSyntheticOutline0.m(
+                "SystemStateTracker", new StringBuilder("edm service ready : "), booleanValue);
         this.mEdmServiceReady = booleanValue;
         Iterator it = ((ArrayList) this.mEdmStateObservers).iterator();
         while (it.hasNext()) {
@@ -293,7 +317,9 @@ public final class SystemStateTracker extends Handler {
         PlmMessage plmMessage = (PlmMessage) message.obj;
         String str = (String) plmMessage.obj1;
         Boolean bool = (Boolean) plmMessage.obj2;
-        Log.d("SystemStateTracker", "onLicenseStateChange(" + str + ", " + bool.booleanValue() + ")");
+        Log.d(
+                "SystemStateTracker",
+                "onLicenseStateChange(" + str + ", " + bool.booleanValue() + ")");
         Iterator it = ((ArrayList) this.mLicenseStateObservers).iterator();
         while (it.hasNext()) {
             HandlerObserver handlerObserver = (HandlerObserver) it.next();
@@ -311,9 +337,24 @@ public final class SystemStateTracker extends Handler {
         boolean booleanValue = bool.booleanValue();
         Integer num = (Integer) plmMessage.obj3;
         int intValue = num.intValue();
-        String str2 = intValue != -1 ? intValue != 6 ? intValue != 1 ? intValue != 2 ? intValue != 3 ? intValue != 4 ? "" : "PASSWORD" : "PIN" : "PASSWORD_OR_PIN" : "PATTERN" : "SMARTCARDNUMERIC" : "NONE";
+        String str2 =
+                intValue != -1
+                        ? intValue != 6
+                                ? intValue != 1
+                                        ? intValue != 2
+                                                ? intValue != 3
+                                                        ? intValue != 4 ? "" : "PASSWORD"
+                                                        : "PIN"
+                                                : "PASSWORD_OR_PIN"
+                                        : "PATTERN"
+                                : "SMARTCARDNUMERIC"
+                        : "NONE";
         String str3 = (String) plmMessage.obj4;
-        VpnManagerService$$ExternalSyntheticOutline0.m(AccessibilityManagerService$$ExternalSyntheticOutline0.m(intValue, "onLockStateChange(", ", ", str3, booleanValue), ")", "SystemStateTracker");
+        VpnManagerService$$ExternalSyntheticOutline0.m(
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        intValue, "onLockStateChange(", ", ", str3, booleanValue),
+                ")",
+                "SystemStateTracker");
         Iterator it = ((ArrayList) this.mLockStateObservers).iterator();
         while (it.hasNext()) {
             ((HandlerObserver) it.next()).notifyMessage(bool, num, str3);
@@ -331,7 +372,10 @@ public final class SystemStateTracker extends Handler {
         PlmMessage plmMessage = (PlmMessage) message.obj;
         String str = (String) plmMessage.obj1;
         String str2 = (String) plmMessage.obj2;
-        Log.d("SystemStateTracker", XmlUtils$$ExternalSyntheticOutline0.m("onPackageStateChange(", str, ", ", str2, ")"));
+        Log.d(
+                "SystemStateTracker",
+                XmlUtils$$ExternalSyntheticOutline0.m(
+                        "onPackageStateChange(", str, ", ", str2, ")"));
         Iterator it = ((ArrayList) this.mPackageStateObservers).iterator();
         while (it.hasNext()) {
             HandlerObserver handlerObserver = (HandlerObserver) it.next();
@@ -344,7 +388,8 @@ public final class SystemStateTracker extends Handler {
 
     public final void onUserStateChange(Message message) {
         String str = (String) ((PlmMessage) message.obj).obj1;
-        DualAppManagerService$$ExternalSyntheticOutline0.m("onUserStateChange(", str, ")", "SystemStateTracker");
+        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                "onUserStateChange(", str, ")", "SystemStateTracker");
         Iterator it = ((ArrayList) this.mUserStateObservers).iterator();
         while (it.hasNext()) {
             HandlerObserver handlerObserver = (HandlerObserver) it.next();
@@ -357,8 +402,11 @@ public final class SystemStateTracker extends Handler {
 
     public final void stopLicenseStateListener() {
         LicenseStateListener licenseStateListener;
-        EnterpriseLicenseService enterpriseLicenseService = (EnterpriseLicenseService) EnterpriseService.getPolicyService("enterprise_license_policy");
-        if (enterpriseLicenseService != null && (licenseStateListener = this.mLicenseStateListener) != null) {
+        EnterpriseLicenseService enterpriseLicenseService =
+                (EnterpriseLicenseService)
+                        EnterpriseService.getPolicyService("enterprise_license_policy");
+        if (enterpriseLicenseService != null
+                && (licenseStateListener = this.mLicenseStateListener) != null) {
             enterpriseLicenseService.enforcePermission$1();
             ((ArrayList) enterpriseLicenseService.mKlmElmChangeList).remove(licenseStateListener);
             this.mLicenseStateListener = null;
@@ -369,7 +417,9 @@ public final class SystemStateTracker extends Handler {
     public final void stopLockStateListener() {
         LockStateListener lockStateListener = this.mLockStateListener;
         if (lockStateListener != null) {
-            Iterator it = ((ArrayList) this.mLockDetectionTracker.mLockDetectionEventCallbacks).iterator();
+            Iterator it =
+                    ((ArrayList) this.mLockDetectionTracker.mLockDetectionEventCallbacks)
+                            .iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;

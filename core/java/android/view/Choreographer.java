@@ -13,7 +13,7 @@ import android.os.Trace;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TimeUtils;
-import android.view.DisplayEventReceiver;
+
 import java.io.PrintWriter;
 import java.util.function.BiConsumer;
 
@@ -59,8 +59,7 @@ public final class Choreographer {
     private final FrameData mFrameData;
     FrameInfo mFrameInfo;
 
-    @Deprecated
-    private long mFrameIntervalNanos;
+    @Deprecated private long mFrameIntervalNanos;
     private boolean mFrameScheduled;
     private long mFramesSinceSTB;
     private final FrameHandler mHandler;
@@ -75,48 +74,57 @@ public final class Choreographer {
     private long mSyncAndDrawFrameDuration;
     private static long sSTBFrameTimeThreshold = Long.MAX_VALUE;
     private static volatile long sFrameDelay = 10;
-    private static final ThreadLocal<Choreographer> sThreadInstance = new ThreadLocal<Choreographer>() { // from class: android.view.Choreographer.1
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // java.lang.ThreadLocal
-        public Choreographer initialValue() {
-            Looper looper = Looper.myLooper();
-            if (looper == null) {
-                throw new IllegalStateException("The current thread must have a looper!");
-            }
-            Choreographer choreographer = new Choreographer(looper, 0);
-            if (looper == Looper.getMainLooper()) {
-                Choreographer.mMainInstance = choreographer;
-            }
-            return choreographer;
-        }
+    private static final ThreadLocal<Choreographer> sThreadInstance =
+            new ThreadLocal<Choreographer>() { // from class: android.view.Choreographer.1
+                /* JADX INFO: Access modifiers changed from: protected */
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // java.lang.ThreadLocal
+                public Choreographer initialValue() {
+                    Looper looper = Looper.myLooper();
+                    if (looper == null) {
+                        throw new IllegalStateException("The current thread must have a looper!");
+                    }
+                    Choreographer choreographer = new Choreographer(looper, 0);
+                    if (looper == Looper.getMainLooper()) {
+                        Choreographer.mMainInstance = choreographer;
+                    }
+                    return choreographer;
+                }
+            };
+    private static final ThreadLocal<Choreographer> sSfThreadInstance =
+            new ThreadLocal<Choreographer>() { // from class: android.view.Choreographer.2
+                /* JADX INFO: Access modifiers changed from: protected */
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // java.lang.ThreadLocal
+                public Choreographer initialValue() {
+                    Looper looper = Looper.myLooper();
+                    if (looper == null) {
+                        throw new IllegalStateException("The current thread must have a looper!");
+                    }
+                    return new Choreographer(looper, 1);
+                }
+            };
+    private static final boolean USE_VSYNC =
+            SystemProperties.getBoolean("debug.choreographer.vsync", true);
+    private static final boolean USE_FRAME_TIME =
+            SystemProperties.getBoolean("debug.choreographer.frametime", true);
+    private static final int SKIPPED_FRAME_WARNING_LIMIT =
+            SystemProperties.getInt("debug.choreographer.skipwarning", 30);
+    private static final Object FRAME_CALLBACK_TOKEN =
+            new Object() { // from class: android.view.Choreographer.3
+                public String toString() {
+                    return "FRAME_CALLBACK_TOKEN";
+                }
+            };
+    private static final Object VSYNC_CALLBACK_TOKEN =
+            new Object() { // from class: android.view.Choreographer.4
+                public String toString() {
+                    return "VSYNC_CALLBACK_TOKEN";
+                }
+            };
+    private static final String[] CALLBACK_TRACE_TITLES = {
+        "input", "animation", "insets_animation", "traversal", "commit"
     };
-    private static final ThreadLocal<Choreographer> sSfThreadInstance = new ThreadLocal<Choreographer>() { // from class: android.view.Choreographer.2
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // java.lang.ThreadLocal
-        public Choreographer initialValue() {
-            Looper looper = Looper.myLooper();
-            if (looper == null) {
-                throw new IllegalStateException("The current thread must have a looper!");
-            }
-            return new Choreographer(looper, 1);
-        }
-    };
-    private static final boolean USE_VSYNC = SystemProperties.getBoolean("debug.choreographer.vsync", true);
-    private static final boolean USE_FRAME_TIME = SystemProperties.getBoolean("debug.choreographer.frametime", true);
-    private static final int SKIPPED_FRAME_WARNING_LIMIT = SystemProperties.getInt("debug.choreographer.skipwarning", 30);
-    private static final Object FRAME_CALLBACK_TOKEN = new Object() { // from class: android.view.Choreographer.3
-        public String toString() {
-            return "FRAME_CALLBACK_TOKEN";
-        }
-    };
-    private static final Object VSYNC_CALLBACK_TOKEN = new Object() { // from class: android.view.Choreographer.4
-        public String toString() {
-            return "VSYNC_CALLBACK_TOKEN";
-        }
-    };
-    private static final String[] CALLBACK_TRACE_TITLES = {"input", "animation", "insets_animation", "traversal", "commit"};
 
     public interface FrameCallback {
         void doFrame(long j);
@@ -153,11 +161,12 @@ public final class Choreographer {
         this.mDebugCallbackConsumer = null;
         this.mDebugCallStackCnt = 5;
         this.mDebugDispatchThresholdMs = 20;
-        this.mFlingSTBFlag = new boolean[]{false, false};
+        this.mFlingSTBFlag = new boolean[] {false, false};
         this.mLooper = looper;
         this.mHandler = new FrameHandler(looper);
         if (USE_VSYNC) {
-            frameDisplayEventReceiver = new FrameDisplayEventReceiver(looper, vsyncSource, layerHandle);
+            frameDisplayEventReceiver =
+                    new FrameDisplayEventReceiver(looper, vsyncSource, layerHandle);
         } else {
             frameDisplayEventReceiver = null;
         }
@@ -261,7 +270,8 @@ public final class Choreographer {
         postCallbackDelayed(callbackType, action, token, 0L);
     }
 
-    public void postCallbackDelayed(int callbackType, Runnable action, Object token, long delayMillis) {
+    public void postCallbackDelayed(
+            int callbackType, Runnable action, Object token, long delayMillis) {
         if (action == null) {
             throw new IllegalArgumentException("action must not be null");
         }
@@ -275,7 +285,9 @@ public final class Choreographer {
         if (this.mIsFg == isFg) {
             return;
         }
-        long delayValue = AnimationHandler.getInstance().getMaxAnimationCallbackDuration() + DEFAULT_THRESHOLD_BG_DELAY;
+        long delayValue =
+                AnimationHandler.getInstance().getMaxAnimationCallbackDuration()
+                        + DEFAULT_THRESHOLD_BG_DELAY;
         synchronized (this.mLock) {
             this.mHandler.removeMessages(3);
             int i = 0;
@@ -297,11 +309,13 @@ public final class Choreographer {
         }
     }
 
-    private void postCallbackDelayedInternal(int callbackType, Object action, Object token, long delayMillis) {
+    private void postCallbackDelayedInternal(
+            int callbackType, Object action, Object token, long delayMillis) {
         synchronized (this.mLock) {
             try {
                 try {
-                    if (this.mIsFg == this.mBgWaitingDelaySetting && (callbackType == 0 || callbackType == 3)) {
+                    if (this.mIsFg == this.mBgWaitingDelaySetting
+                            && (callbackType == 0 || callbackType == 3)) {
                         this.mIsFg = true;
                         this.mIsFirstBBA = true;
                         if (this.mBgWaitingDelaySetting) {
@@ -312,9 +326,14 @@ public final class Choreographer {
                     long now = SystemClock.uptimeMillis();
                     long dueTime = now + delayMillis;
                     if (this.mEnabledDebugCallback) {
-                        this.mCallbackQueues[callbackType].addCallbackLocked(dueTime, action, token, Debug.getCallers(this.mDebugCallStackCnt, " "));
+                        this.mCallbackQueues[callbackType].addCallbackLocked(
+                                dueTime,
+                                action,
+                                token,
+                                Debug.getCallers(this.mDebugCallStackCnt, " "));
                     } else {
-                        this.mCallbackQueues[callbackType].addCallbackLocked(dueTime, action, token, null);
+                        this.mCallbackQueues[callbackType].addCallbackLocked(
+                                dueTime, action, token, null);
                     }
                     if (dueTime <= now) {
                         scheduleFrameLocked(now);
@@ -391,7 +410,9 @@ public final class Choreographer {
         long nanoTime;
         synchronized (this.mLock) {
             if (!this.mCallbacksRunning) {
-                throw new IllegalStateException("This method must only be called as part of a callback while a frame is in progress.");
+                throw new IllegalStateException(
+                        "This method must only be called as part of a callback while a frame is in"
+                            + " progress.");
             }
             nanoTime = USE_FRAME_TIME ? this.mLastFrameTimeNanos : System.nanoTime();
         }
@@ -418,7 +439,10 @@ public final class Choreographer {
         if (this.mDisplayEventReceiver == null) {
             return System.nanoTime();
         }
-        return this.mDisplayEventReceiver.getLatestVsyncEventData().preferredFrameTimeline().expectedPresentationTime;
+        return this.mDisplayEventReceiver
+                .getLatestVsyncEventData()
+                .preferredFrameTimeline()
+                .expectedPresentationTime;
     }
 
     private void scheduleFrameLocked(long now) {
@@ -510,14 +534,17 @@ public final class Choreographer {
             Method dump skipped, instructions count: 640
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.Choreographer.doFrame(long, int, android.view.DisplayEventReceiver$VsyncEventData):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.view.Choreographer.doFrame(long, int,"
+                    + " android.view.DisplayEventReceiver$VsyncEventData):void");
     }
 
     void doCallbacks(int callbackType, long frameIntervalNanos) {
         long frameTimeNanos = this.mFrameData.mFrameTimeNanos;
         synchronized (this.mLock) {
             long now = System.nanoTime();
-            CallbackRecord callbacks = this.mCallbackQueues[callbackType].extractDueCallbacksLocked(now / 1000000);
+            CallbackRecord callbacks =
+                    this.mCallbackQueues[callbackType].extractDueCallbacksLocked(now / 1000000);
             if (callbacks == null) {
                 return;
             }
@@ -530,7 +557,8 @@ public final class Choreographer {
                     long lastFrameOffset = (jitterNanos % frameIntervalNanos) + frameIntervalNanos;
                     long frameTimeNanos2 = now - lastFrameOffset;
                     this.mLastFrameTimeNanos = frameTimeNanos2;
-                    this.mFrameData.update(frameTimeNanos2, this.mDisplayEventReceiver, jitterNanos);
+                    this.mFrameData.update(
+                            frameTimeNanos2, this.mDisplayEventReceiver, jitterNanos);
                 }
             }
             try {
@@ -539,10 +567,24 @@ public final class Choreographer {
                 while (c != null) {
                     long begin = this.mEnabledDebugCallback ? SystemClock.elapsedRealtime() : j;
                     c.run(this.mFrameData);
-                    if (this.mEnabledDebugCallback && this.mDebugCallbackConsumer != null && c.log != null) {
+                    if (this.mEnabledDebugCallback
+                            && this.mDebugCallbackConsumer != null
+                            && c.log != null) {
                         long dur = SystemClock.elapsedRealtime() - begin;
                         if (dur >= this.mDebugDispatchThresholdMs) {
-                            this.mDebugCallbackConsumer.accept("RunCallback: type=" + callbackType + ", action=" + c.action + ", token=" + c.token + ", latencyMillis=" + (SystemClock.uptimeMillis() - c.dueTime) + ", dur=" + dur + "ms\n", c.log);
+                            this.mDebugCallbackConsumer.accept(
+                                    "RunCallback: type="
+                                            + callbackType
+                                            + ", action="
+                                            + c.action
+                                            + ", token="
+                                            + c.token
+                                            + ", latencyMillis="
+                                            + (SystemClock.uptimeMillis() - c.dueTime)
+                                            + ", dur="
+                                            + dur
+                                            + "ms\n",
+                                    c.log);
                         }
                     }
                     c = c.next;
@@ -618,7 +660,8 @@ public final class Choreographer {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public CallbackRecord obtainCallbackLocked(long dueTime, Object action, Object token, String log) {
+    public CallbackRecord obtainCallbackLocked(
+            long dueTime, Object action, Object token, String log) {
         CallbackRecord callback = this.mCallbackPool;
         if (callback == null) {
             callback = new CallbackRecord();
@@ -642,7 +685,11 @@ public final class Choreographer {
         this.mCallbackPool = callback;
     }
 
-    public void setEnabledDebugCallback(boolean enabled, BiConsumer<String, String> consumer, int callStackCnt, int dispatchThresholdMs) {
+    public void setEnabledDebugCallback(
+            boolean enabled,
+            BiConsumer<String, String> consumer,
+            int callStackCnt,
+            int dispatchThresholdMs) {
         this.mEnabledDebugCallback = enabled;
         this.mDebugCallbackConsumer = consumer;
         this.mDebugCallStackCnt = callStackCnt;
@@ -655,8 +702,7 @@ public final class Choreographer {
         private long mDeadlineNanos = -1;
         private boolean mInCallback = false;
 
-        FrameTimeline() {
-        }
+        FrameTimeline() {}
 
         void setInCallback(boolean inCallback) {
             this.mInCallback = inCallback;
@@ -664,7 +710,8 @@ public final class Choreographer {
 
         private void checkInCallback() {
             if (!this.mInCallback) {
-                throw new IllegalStateException("FrameTimeline is not valid outside of the vsync callback");
+                throw new IllegalStateException(
+                        "FrameTimeline is not valid outside of the vsync callback");
             }
         }
 
@@ -724,7 +771,8 @@ public final class Choreographer {
 
         private void checkInCallback() {
             if (!this.mInCallback) {
-                throw new IllegalStateException("FrameData is not valid outside of the vsync callback");
+                throw new IllegalStateException(
+                        "FrameData is not valid outside of the vsync callback");
             }
         }
 
@@ -738,28 +786,40 @@ public final class Choreographer {
             }
         }
 
-        FrameTimeline update(long frameTimeNanos, DisplayEventReceiver.VsyncEventData vsyncEventData) {
+        FrameTimeline update(
+                long frameTimeNanos, DisplayEventReceiver.VsyncEventData vsyncEventData) {
             allocateFrameTimelines(vsyncEventData.frameTimelinesLength);
             this.mFrameTimeNanos = frameTimeNanos;
             this.mPreferredFrameTimelineIndex = vsyncEventData.preferredFrameTimelineIndex;
             for (int i = 0; i < this.mFrameTimelines.length; i++) {
-                DisplayEventReceiver.VsyncEventData.FrameTimeline frameTimeline = vsyncEventData.frameTimelines[i];
-                this.mFrameTimelines[i].update(frameTimeline.vsyncId, frameTimeline.expectedPresentationTime, frameTimeline.deadline);
+                DisplayEventReceiver.VsyncEventData.FrameTimeline frameTimeline =
+                        vsyncEventData.frameTimelines[i];
+                this.mFrameTimelines[i].update(
+                        frameTimeline.vsyncId,
+                        frameTimeline.expectedPresentationTime,
+                        frameTimeline.deadline);
             }
             return this.mFrameTimelines[this.mPreferredFrameTimelineIndex];
         }
 
-        FrameTimeline update(long frameTimeNanos, DisplayEventReceiver displayEventReceiver, long jitterNanos) {
+        FrameTimeline update(
+                long frameTimeNanos, DisplayEventReceiver displayEventReceiver, long jitterNanos) {
             int newPreferredIndex = 0;
-            long minimumDeadline = this.mFrameTimelines[this.mPreferredFrameTimelineIndex].mDeadlineNanos + jitterNanos;
-            while (newPreferredIndex < this.mFrameTimelines.length - 1 && this.mFrameTimelines[newPreferredIndex].mDeadlineNanos < minimumDeadline) {
+            long minimumDeadline =
+                    this.mFrameTimelines[this.mPreferredFrameTimelineIndex].mDeadlineNanos
+                            + jitterNanos;
+            while (newPreferredIndex < this.mFrameTimelines.length - 1
+                    && this.mFrameTimelines[newPreferredIndex].mDeadlineNanos < minimumDeadline) {
                 newPreferredIndex++;
             }
             long newPreferredDeadline = this.mFrameTimelines[newPreferredIndex].mDeadlineNanos;
             if (newPreferredDeadline < minimumDeadline) {
-                DisplayEventReceiver.VsyncEventData latestVsyncEventData = displayEventReceiver.getLatestVsyncEventData();
+                DisplayEventReceiver.VsyncEventData latestVsyncEventData =
+                        displayEventReceiver.getLatestVsyncEventData();
                 if (latestVsyncEventData == null) {
-                    Log.w(Choreographer.TAG, "Could not get latest VsyncEventData. Did SurfaceFlinger crash?");
+                    Log.w(
+                            Choreographer.TAG,
+                            "Could not get latest VsyncEventData. Did SurfaceFlinger crash?");
                 } else {
                     update(frameTimeNanos, latestVsyncEventData);
                 }
@@ -784,7 +844,8 @@ public final class Choreographer {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    Choreographer.this.doFrame(System.nanoTime(), 0, new DisplayEventReceiver.VsyncEventData());
+                    Choreographer.this.doFrame(
+                            System.nanoTime(), 0, new DisplayEventReceiver.VsyncEventData());
                     break;
                 case 1:
                     Choreographer.this.doScheduleVsync();
@@ -817,11 +878,14 @@ public final class Choreographer {
             msg.setAsynchronous(true);
             DisplayEventReceiver.VsyncEventData latestVsyncEventData = getLatestVsyncEventData();
             if (latestVsyncEventData != null && latestVsyncEventData.frameTimelinesLength > 0) {
-                this.mLastVsyncEventData.preferredFrameTimelineIndex = latestVsyncEventData.preferredFrameTimelineIndex;
-                this.mLastVsyncEventData.frameTimelinesLength = latestVsyncEventData.frameTimelinesLength;
+                this.mLastVsyncEventData.preferredFrameTimelineIndex =
+                        latestVsyncEventData.preferredFrameTimelineIndex;
+                this.mLastVsyncEventData.frameTimelinesLength =
+                        latestVsyncEventData.frameTimelinesLength;
                 this.mLastVsyncEventData.frameInterval = latestVsyncEventData.frameInterval;
                 for (int i = 0; i < latestVsyncEventData.frameTimelinesLength; i++) {
-                    this.mLastVsyncEventData.frameTimelines[i].copyFrom(latestVsyncEventData.frameTimelines[i]);
+                    this.mLastVsyncEventData.frameTimelines[i].copyFrom(
+                            latestVsyncEventData.frameTimelines[i]);
                 }
                 switch (solutionType) {
                     case 0:
@@ -843,7 +907,8 @@ public final class Choreographer {
                 if (Trace.isTagEnabled(8L)) {
                     Trace.traceBegin(8L, "STB invocation");
                 }
-                Choreographer choreographer = Looper.myLooper() != null ? Choreographer.getInstance() : null;
+                Choreographer choreographer =
+                        Looper.myLooper() != null ? Choreographer.getInstance() : null;
                 if (choreographer != null) {
                     choreographer.scheduleVsyncSS(3);
                     Choreographer.this.mSTBCount++;
@@ -855,22 +920,38 @@ public final class Choreographer {
         }
 
         private boolean isSTBNeeded() {
-            return (Choreographer.this.mFlingSTBFlag[0] || Choreographer.this.mFlingSTBFlag[1]) && System.nanoTime() - Choreographer.this.mFlingStartTime < 3000000000L;
+            return (Choreographer.this.mFlingSTBFlag[0] || Choreographer.this.mFlingSTBFlag[1])
+                    && System.nanoTime() - Choreographer.this.mFlingStartTime < 3000000000L;
         }
 
         @Override // android.view.DisplayEventReceiver
-        public void onVsync(long timestampNanos, long physicalDisplayId, int frame, DisplayEventReceiver.VsyncEventData vsyncEventData) {
+        public void onVsync(
+                long timestampNanos,
+                long physicalDisplayId,
+                int frame,
+                DisplayEventReceiver.VsyncEventData vsyncEventData) {
             try {
                 if (Trace.isTagEnabled(8L)) {
-                    Trace.traceBegin(8L, "Choreographer#onVsync " + vsyncEventData.preferredFrameTimeline().vsyncId);
+                    Trace.traceBegin(
+                            8L,
+                            "Choreographer#onVsync "
+                                    + vsyncEventData.preferredFrameTimeline().vsyncId);
                 }
                 long now = System.nanoTime();
                 if (timestampNanos > now) {
-                    Log.w(Choreographer.TAG, "Frame time is " + ((timestampNanos - now) * 1.0E-6f) + " ms in the future!  Check that graphics HAL is generating vsync timestamps using the correct timebase.");
+                    Log.w(
+                            Choreographer.TAG,
+                            "Frame time is "
+                                    + ((timestampNanos - now) * 1.0E-6f)
+                                    + " ms in the future!  Check that graphics HAL is generating"
+                                    + " vsync timestamps using the correct timebase.");
                     timestampNanos = now;
                 }
                 if (this.mHavePendingVsync) {
-                    Log.w(Choreographer.TAG, "Already have a pending vsync event.  There should only be one at a time.");
+                    Log.w(
+                            Choreographer.TAG,
+                            "Already have a pending vsync event.  There should only be one at a"
+                                + " time.");
                 } else {
                     this.mHavePendingVsync = true;
                 }
@@ -892,7 +973,8 @@ public final class Choreographer {
             Choreographer.this.doFrame(this.mTimestampNanos, this.mFrame, this.mLastVsyncEventData);
             if (isSTBNeeded()) {
                 long doFrameTime = System.nanoTime() - start;
-                int lastFrameIntervalMillis = (int) (Choreographer.this.mLastFrameIntervalNanos / 1000000);
+                int lastFrameIntervalMillis =
+                        (int) (Choreographer.this.mLastFrameIntervalNanos / 1000000);
                 if (lastFrameIntervalMillis == 8) {
                     Choreographer.sSTBFrameTimeThreshold = 10000000L;
                 } else if (lastFrameIntervalMillis == 16) {
@@ -900,7 +982,9 @@ public final class Choreographer {
                 } else {
                     Choreographer.sSTBFrameTimeThreshold = Long.MAX_VALUE;
                 }
-                if (doFrameTime - Choreographer.this.mSyncAndDrawFrameDuration > Choreographer.sSTBFrameTimeThreshold && Choreographer.this.mFramesSinceSTB != 1) {
+                if (doFrameTime - Choreographer.this.mSyncAndDrawFrameDuration
+                                > Choreographer.sSTBFrameTimeThreshold
+                        && Choreographer.this.mFramesSinceSTB != 1) {
                     scheduleSTB();
                 }
                 Choreographer.this.mSyncAndDrawFrameDuration = 0L;
@@ -915,8 +999,7 @@ public final class Choreographer {
         public CallbackRecord next;
         public Object token;
 
-        private CallbackRecord() {
-        }
+        private CallbackRecord() {}
 
         public void run(long frameTimeNanos) {
             if (this.token == Choreographer.FRAME_CALLBACK_TOKEN) {
@@ -940,8 +1023,7 @@ public final class Choreographer {
     private final class CallbackQueue {
         private CallbackRecord mHead;
 
-        private CallbackQueue() {
-        }
+        private CallbackQueue() {}
 
         public boolean hasDueCallbacksLocked(long now) {
             return this.mHead != null && this.mHead.dueTime <= now;
@@ -970,7 +1052,8 @@ public final class Choreographer {
         }
 
         public void addCallbackLocked(long dueTime, Object action, Object token, String log) {
-            CallbackRecord callback = Choreographer.this.obtainCallbackLocked(dueTime, action, token, log);
+            CallbackRecord callback =
+                    Choreographer.this.obtainCallbackLocked(dueTime, action, token, log);
             CallbackRecord entry = this.mHead;
             if (entry == null) {
                 this.mHead = callback;
@@ -999,7 +1082,8 @@ public final class Choreographer {
             CallbackRecord callback = this.mHead;
             while (callback != null) {
                 CallbackRecord next = callback.next;
-                if ((action == null || callback.action == action) && (token == null || callback.token == token)) {
+                if ((action == null || callback.action == action)
+                        && (token == null || callback.token == token)) {
                     if (predecessor != null) {
                         predecessor.next = next;
                     } else {

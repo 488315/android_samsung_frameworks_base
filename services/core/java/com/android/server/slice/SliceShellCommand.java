@@ -7,8 +7,11 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.ShellCommand;
 import android.util.ArraySet;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,13 +37,18 @@ public final class SliceShellCommand extends ShellCommand {
             try {
                 Uri build = new Uri.Builder().scheme("content").authority(nextArgRequired).build();
                 if ("vnd.android.slice".equals(context.getContentResolver().getType(build))) {
-                    Bundle call = context.getContentResolver().call(build, "get_permissions", (String) null, (Bundle) null);
+                    Bundle call =
+                            context.getContentResolver()
+                                    .call(build, "get_permissions", (String) null, (Bundle) null);
                     if (call != null) {
-                        String[] stringArray = call.getStringArray(KnoxCustomManagerService.SPCM_KEY_RESULT);
+                        String[] stringArray =
+                                call.getStringArray(KnoxCustomManagerService.SPCM_KEY_RESULT);
                         PrintWriter outPrintWriter = getOutPrintWriter();
                         ArraySet arraySet = new ArraySet();
                         if (stringArray != null && stringArray.length != 0) {
-                            for (PackageInfo packageInfo : context.getPackageManager().getPackagesHoldingPermissions(stringArray, 0)) {
+                            for (PackageInfo packageInfo :
+                                    context.getPackageManager()
+                                            .getPackagesHoldingPermissions(stringArray, 0)) {
                                 outPrintWriter.println(packageInfo.packageName);
                                 arraySet.add(packageInfo.packageName);
                             }
@@ -72,6 +80,10 @@ public final class SliceShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println("");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  get-permissions <authority>", "    List the pkgs that have permission to an authority.", "");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  get-permissions <authority>",
+                "    List the pkgs that have permission to an authority.",
+                "");
     }
 }

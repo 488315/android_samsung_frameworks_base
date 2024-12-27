@@ -36,29 +36,26 @@ public abstract class PagerAdapter {
         finishUpdate((View) container);
     }
 
-    public void startUpdate(View container) {
-    }
+    public void startUpdate(View container) {}
 
     public Object instantiateItem(View container, int position) {
-        throw new UnsupportedOperationException("Required method instantiateItem was not overridden");
+        throw new UnsupportedOperationException(
+                "Required method instantiateItem was not overridden");
     }
 
     public void destroyItem(View container, int position, Object object) {
         throw new UnsupportedOperationException("Required method destroyItem was not overridden");
     }
 
-    public void setPrimaryItem(View container, int position, Object object) {
-    }
+    public void setPrimaryItem(View container, int position, Object object) {}
 
-    public void finishUpdate(View container) {
-    }
+    public void finishUpdate(View container) {}
 
     public Parcelable saveState() {
         return null;
     }
 
-    public void restoreState(Parcelable state, ClassLoader loader) {
-    }
+    public void restoreState(Parcelable state, ClassLoader loader) {}
 
     public int getItemPosition(Object object) {
         return -1;

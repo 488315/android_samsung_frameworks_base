@@ -1,6 +1,7 @@
 package android.sec.clipboard.data;
 
 import android.os.Parcel;
+
 import com.samsung.android.content.clipboard.data.SemClipData;
 import com.samsung.android.content.clipboard.data.SemHtmlClipData;
 import com.samsung.android.content.clipboard.data.SemImageClipData;

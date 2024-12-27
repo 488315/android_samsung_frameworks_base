@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextActivityBatch extends SContextEventContext {
-    public static final Parcelable.Creator<SContextActivityBatch> CREATOR = new Parcelable.Creator<SContextActivityBatch>() { // from class: android.hardware.scontext.SContextActivityBatch.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextActivityBatch createFromParcel(Parcel in) {
-            return new SContextActivityBatch(in);
-        }
+    public static final Parcelable.Creator<SContextActivityBatch> CREATOR =
+            new Parcelable.Creator<SContextActivityBatch>() { // from class:
+                // android.hardware.scontext.SContextActivityBatch.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextActivityBatch createFromParcel(Parcel in) {
+                    return new SContextActivityBatch(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextActivityBatch[] newArray(int size) {
-            return new SContextActivityBatch[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextActivityBatch[] newArray(int size) {
+                    return new SContextActivityBatch[size];
+                }
+            };
     private Bundle mContext;
     private int mMode;
 
@@ -69,7 +71,8 @@ public class SContextActivityBatch extends SContextEventContext {
         return this.mMode;
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
         this.mMode = this.mContext.getInt("Mode");

@@ -1,6 +1,7 @@
 package com.android.internal.os;
 
 import android.os.Binder;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -9,7 +10,8 @@ import java.util.HashMap;
 /* loaded from: classes5.dex */
 public class BinderTransactionNameResolver {
     private static final Method NO_GET_DEFAULT_TRANSACTION_NAME_METHOD;
-    private final HashMap<Class<? extends Binder>, Method> mGetDefaultTransactionNameMethods = new HashMap<>();
+    private final HashMap<Class<? extends Binder>, Method> mGetDefaultTransactionNameMethods =
+            new HashMap<>();
 
     public static String noDefaultTransactionName(int transactionCode) {
         return String.valueOf(transactionCode);
@@ -17,7 +19,9 @@ public class BinderTransactionNameResolver {
 
     static {
         try {
-            NO_GET_DEFAULT_TRANSACTION_NAME_METHOD = BinderTransactionNameResolver.class.getMethod("noDefaultTransactionName", Integer.TYPE);
+            NO_GET_DEFAULT_TRANSACTION_NAME_METHOD =
+                    BinderTransactionNameResolver.class.getMethod(
+                            "noDefaultTransactionName", Integer.TYPE);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
@@ -31,7 +35,8 @@ public class BinderTransactionNameResolver {
             } catch (NoSuchMethodException e) {
                 method = NO_GET_DEFAULT_TRANSACTION_NAME_METHOD;
             }
-            if (method.getReturnType() != String.class || !Modifier.isStatic(method.getModifiers())) {
+            if (method.getReturnType() != String.class
+                    || !Modifier.isStatic(method.getModifiers())) {
                 method = NO_GET_DEFAULT_TRANSACTION_NAME_METHOD;
             }
             this.mGetDefaultTransactionNameMethods.put(binderClass, method);

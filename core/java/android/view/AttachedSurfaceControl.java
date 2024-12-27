@@ -2,7 +2,6 @@ package android.view;
 
 import android.graphics.Rect;
 import android.graphics.Region;
-import android.view.SurfaceControl;
 import android.window.InputTransferToken;
 import android.window.SurfaceSyncGroup;
 
@@ -21,23 +20,22 @@ public interface AttachedSurfaceControl {
         return 0;
     }
 
-    default void addOnBufferTransformHintChangedListener(OnBufferTransformHintChangedListener listener) {
-    }
+    default void addOnBufferTransformHintChangedListener(
+            OnBufferTransformHintChangedListener listener) {}
 
-    default void removeOnBufferTransformHintChangedListener(OnBufferTransformHintChangedListener listener) {
-    }
+    default void removeOnBufferTransformHintChangedListener(
+            OnBufferTransformHintChangedListener listener) {}
 
-    default void setTouchableRegion(Region r) {
-    }
+    default void setTouchableRegion(Region r) {}
 
     default SurfaceSyncGroup getOrCreateSurfaceSyncGroup() {
         return null;
     }
 
-    default void setChildBoundingInsets(Rect insets) {
-    }
+    default void setChildBoundingInsets(Rect insets) {}
 
     default InputTransferToken getInputTransferToken() {
-        throw new UnsupportedOperationException("The getInputTransferToken needs to be implemented before making this call.");
+        throw new UnsupportedOperationException(
+                "The getInputTransferToken needs to be implemented before making this call.");
     }
 }

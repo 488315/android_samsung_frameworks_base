@@ -14,12 +14,10 @@ public interface IMediaResourceMonitor extends IInterface {
 
     public static class Default implements IMediaResourceMonitor {
         @Override // android.media.IMediaResourceMonitor
-        public void notifyResourceGranted(int pid, int type) throws RemoteException {
-        }
+        public void notifyResourceGranted(int pid, int type) throws RemoteException {}
 
         @Override // android.media.IMediaResourceMonitor
-        public void notifyMediaInfo(int pid, MediaMonitorEvent event) throws RemoteException {
-        }
+        public void notifyMediaInfo(int pid, MediaMonitorEvent event) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +25,7 @@ public interface IMediaResourceMonitor extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaResourceMonitor {
+    public abstract static class Stub extends Binder implements IMediaResourceMonitor {
         public static final String DESCRIPTOR = "android.media.IMediaResourceMonitor";
         static final int TRANSACTION_notifyMediaInfo = 2;
         static final int TRANSACTION_notifyResourceGranted = 1;
@@ -69,7 +67,8 @@ public interface IMediaResourceMonitor extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -86,7 +85,8 @@ public interface IMediaResourceMonitor extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    MediaMonitorEvent _arg12 = (MediaMonitorEvent) data.readTypedObject(MediaMonitorEvent.CREATOR);
+                    MediaMonitorEvent _arg12 =
+                            (MediaMonitorEvent) data.readTypedObject(MediaMonitorEvent.CREATOR);
                     data.enforceNoDataAvail();
                     notifyMediaInfo(_arg02, _arg12);
                     return true;

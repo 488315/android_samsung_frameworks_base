@@ -9,7 +9,8 @@ import com.samsung.android.sume.core.filter.MediaFilter;
 /* loaded from: classes6.dex */
 public class CodecFilterCreator implements MediaFilterCreator {
     @Override // com.samsung.android.sume.core.filter.factory.MediaFilterCreator
-    public MediaFilter newFilter(MediaFilterFactory factory, MFDescriptor descriptor, MediaFilter successor) {
+    public MediaFilter newFilter(
+            MediaFilterFactory factory, MFDescriptor descriptor, MediaFilter successor) {
         switch (codecDescriptor.getMediaType()) {
             case COMPRESSED_AUDIO:
             case COMPRESSED_VIDEO:

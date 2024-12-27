@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IRemoteLockMonitorCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.widget.IRemoteLockMonitorCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.widget.IRemoteLockMonitorCallback";
 
     void changeRemoteLockState(RemoteLockInfo remoteLockInfo) throws RemoteException;
 
@@ -16,8 +17,7 @@ public interface IRemoteLockMonitorCallback extends IInterface {
 
     public static class Default implements IRemoteLockMonitorCallback {
         @Override // com.android.internal.widget.IRemoteLockMonitorCallback
-        public void changeRemoteLockState(RemoteLockInfo data) throws RemoteException {
-        }
+        public void changeRemoteLockState(RemoteLockInfo data) throws RemoteException {}
 
         @Override // com.android.internal.widget.IRemoteLockMonitorCallback
         public int checkRemoteLockPassword(byte[] password) throws RemoteException {
@@ -30,7 +30,7 @@ public interface IRemoteLockMonitorCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteLockMonitorCallback {
+    public abstract static class Stub extends Binder implements IRemoteLockMonitorCallback {
         static final int TRANSACTION_changeRemoteLockState = 1;
         static final int TRANSACTION_checkRemoteLockPassword = 2;
 
@@ -71,7 +71,8 @@ public interface IRemoteLockMonitorCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteLockMonitorCallback.DESCRIPTOR);
             }
@@ -81,7 +82,8 @@ public interface IRemoteLockMonitorCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RemoteLockInfo _arg0 = (RemoteLockInfo) data.readTypedObject(RemoteLockInfo.CREATOR);
+                    RemoteLockInfo _arg0 =
+                            (RemoteLockInfo) data.readTypedObject(RemoteLockInfo.CREATOR);
                     data.enforceNoDataAvail();
                     changeRemoteLockState(_arg0);
                     return true;

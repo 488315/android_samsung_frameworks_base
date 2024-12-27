@@ -41,7 +41,9 @@ import android.view.ViewStructure;
 import android.view.WindowManagerGlobal;
 import android.view.autofill.AutofillId;
 import android.view.autofill.AutofillValue;
+
 import com.android.internal.content.NativeLibraryHelper;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -72,19 +74,21 @@ public class AssistStructure implements Parcelable {
     private int mTaskId;
     private Rect mTmpRect;
     private final ArrayList<WindowNode> mWindowNodes;
-    public static final Parcelable.Creator<AssistStructure> CREATOR = new Parcelable.Creator<AssistStructure>() { // from class: android.app.assist.AssistStructure.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssistStructure createFromParcel(Parcel in) {
-            return new AssistStructure(in);
-        }
+    public static final Parcelable.Creator<AssistStructure> CREATOR =
+            new Parcelable.Creator<
+                    AssistStructure>() { // from class: android.app.assist.AssistStructure.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssistStructure createFromParcel(Parcel in) {
+                    return new AssistStructure(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssistStructure[] newArray(int size) {
-            return new AssistStructure[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssistStructure[] newArray(int size) {
+                    return new AssistStructure[size];
+                }
+            };
     private static final ArrayMap<Integer, String> INPUT_TYPE_VARIATIONS = new ArrayMap<>();
 
     public static class AutofillOverlay {
@@ -122,7 +126,8 @@ public class AssistStructure implements Parcelable {
         }
 
         @Override // android.os.Binder
-        protected boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        protected boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code == 2) {
                 AssistStructure as = this.mAssistStructure;
                 if (as == null) {
@@ -152,8 +157,7 @@ public class AssistStructure implements Parcelable {
         ViewNode node;
         int numChildren;
 
-        ViewStackEntry() {
-        }
+        ViewStackEntry() {}
     }
 
     static final class ParcelTransferWriter extends Binder {
@@ -188,7 +192,17 @@ public class AssistStructure implements Parcelable {
             this.mNumWrittenWindows = 0;
             this.mNumWrittenViews = 0;
             boolean more = writeToParcelInner(as, out);
-            Log.i(AssistStructure.TAG, "Flattened " + (more ? Slice.HINT_PARTIAL : "final") + " assist data: " + (out.dataPosition() - start) + " bytes, containing " + this.mNumWrittenWindows + " windows, " + this.mNumWrittenViews + " views");
+            Log.i(
+                    AssistStructure.TAG,
+                    "Flattened "
+                            + (more ? Slice.HINT_PARTIAL : "final")
+                            + " assist data: "
+                            + (out.dataPosition() - start)
+                            + " bytes, containing "
+                            + this.mNumWrittenWindows
+                            + " windows, "
+                            + this.mNumWrittenViews
+                            + " views");
         }
 
         boolean writeToParcelInner(AssistStructure as, Parcel out) {
@@ -225,7 +239,9 @@ public class AssistStructure implements Parcelable {
 
         void writeView(ViewNode child, Parcel out, PooledStringWriter pwriter, int levelAdj) {
             out.writeInt(AssistStructure.VALIDATE_VIEW_TOKEN);
-            int flags = child.writeSelfToParcel(out, pwriter, this.mSanitizeOnWrite, this.mTmpMatrix, true);
+            int flags =
+                    child.writeSelfToParcel(
+                            out, pwriter, this.mSanitizeOnWrite, this.mTmpMatrix, true);
             this.mNumWrittenViews++;
             if ((1048576 & flags) != 0) {
                 out.writeInt(child.mChildren.length);
@@ -238,7 +254,10 @@ public class AssistStructure implements Parcelable {
         boolean writeNextEntryToParcel(AssistStructure as, Parcel out, PooledStringWriter pwriter) {
             if (this.mCurViewStackEntry != null) {
                 if (this.mCurViewStackEntry.curChild < this.mCurViewStackEntry.numChildren) {
-                    ViewNode child = this.mCurViewStackEntry.node.mChildren[this.mCurViewStackEntry.curChild];
+                    ViewNode child =
+                            this.mCurViewStackEntry
+                                    .node
+                                    .mChildren[this.mCurViewStackEntry.curChild];
                     this.mCurViewStackEntry.curChild++;
                     writeView(child, out, pwriter, 1);
                     return true;
@@ -307,13 +326,18 @@ public class AssistStructure implements Parcelable {
             int token = this.mCurParcel.readInt();
             if (token != 0) {
                 if (token != validateToken) {
-                    throw new BadParcelableException("Got token " + Integer.toHexString(token) + ", expected token " + Integer.toHexString(validateToken));
+                    throw new BadParcelableException(
+                            "Got token "
+                                    + Integer.toHexString(token)
+                                    + ", expected token "
+                                    + Integer.toHexString(validateToken));
                 }
                 return this.mCurParcel;
             }
             this.mTransferToken = this.mCurParcel.readStrongBinder();
             if (this.mTransferToken == null) {
-                throw new IllegalStateException("Reached end of partial data without transfer token");
+                throw new IllegalStateException(
+                        "Reached end of partial data without transfer token");
             }
             fetchData();
             this.mStringReader = new PooledStringReader(this.mCurParcel);
@@ -364,7 +388,12 @@ public class AssistStructure implements Parcelable {
         }
 
         boolean isSimple() {
-            return this.mTextBackgroundColor == 1 && this.mTextSelectionStart == 0 && this.mTextSelectionEnd == 0 && this.mLineCharOffsets == null && this.mLineBaselines == null && this.mHint == null;
+            return this.mTextBackgroundColor == 1
+                    && this.mTextSelectionStart == 0
+                    && this.mTextSelectionEnd == 0
+                    && this.mLineCharOffsets == null
+                    && this.mLineBaselines == null
+                    && this.mHint == null;
         }
 
         ViewNodeText(Parcel in, boolean simple) {
@@ -452,7 +481,11 @@ public class AssistStructure implements Parcelable {
         }
 
         int resolveViewAutofillFlags(Context context, int fillRequestFlags) {
-            return ((fillRequestFlags & 1) == 0 && !context.isAutofillCompatibilityEnabled() && (fillRequestFlags & 512) == 0) ? 0 : 1;
+            return ((fillRequestFlags & 1) == 0
+                            && !context.isAutofillCompatibilityEnabled()
+                            && (fillRequestFlags & 512) == 0)
+                    ? 0
+                    : 1;
         }
 
         void writeSelfToParcel(Parcel out, PooledStringWriter pwriter, float[] tmpMatrix) {
@@ -588,8 +621,7 @@ public class AssistStructure implements Parcelable {
         float mAlpha = 1.0f;
 
         @SystemApi
-        public ViewNode() {
-        }
+        public ViewNode() {}
 
         ViewNode(Parcel in) {
             initializeFromParcelWithoutChildren(in, null, null);
@@ -598,7 +630,10 @@ public class AssistStructure implements Parcelable {
         ViewNode(ParcelTransferReader reader, int nestingLevel) {
             Parcel in = reader.readParcel(AssistStructure.VALIDATE_VIEW_TOKEN, nestingLevel);
             reader.mNumReadViews++;
-            initializeFromParcelWithoutChildren(in, (PooledStringReader) Objects.requireNonNull(reader.mStringReader), (float[]) Objects.requireNonNull(reader.mTmpMatrix));
+            initializeFromParcelWithoutChildren(
+                    in,
+                    (PooledStringReader) Objects.requireNonNull(reader.mStringReader),
+                    (float[]) Objects.requireNonNull(reader.mTmpMatrix));
             if ((this.mFlags & 1048576) != 0) {
                 int numChildren = in.readInt();
                 this.mChildren = new ViewNode[numChildren];
@@ -623,7 +658,8 @@ public class AssistStructure implements Parcelable {
             return in.readString();
         }
 
-        void initializeFromParcelWithoutChildren(Parcel in, PooledStringReader preader, float[] tmpMatrix) {
+        void initializeFromParcelWithoutChildren(
+                Parcel in, PooledStringReader preader, float[] tmpMatrix) {
             this.mClassName = readString(in, preader);
             this.mFlags = in.readInt();
             int flags = this.mFlags;
@@ -661,13 +697,16 @@ public class AssistStructure implements Parcelable {
                     this.mAutofillHints = in.readStringArray();
                 }
                 if ((autofillFlags & 4) != 0) {
-                    this.mAutofillValue = (AutofillValue) in.readParcelable(null, AutofillValue.class);
+                    this.mAutofillValue =
+                            (AutofillValue) in.readParcelable(null, AutofillValue.class);
                 }
                 if ((autofillFlags & 32) != 0) {
                     this.mAutofillOptions = in.readCharSequenceArray();
                 }
                 if ((autofillFlags & 64) != 0) {
-                    this.mHtmlInfo = (ViewStructure.HtmlInfo) in.readParcelable(null, ViewStructure.HtmlInfo.class);
+                    this.mHtmlInfo =
+                            (ViewStructure.HtmlInfo)
+                                    in.readParcelable(null, ViewStructure.HtmlInfo.class);
                 }
                 if ((autofillFlags & 256) != 0) {
                     this.mMinEms = in.readInt();
@@ -740,25 +779,35 @@ public class AssistStructure implements Parcelable {
             if ((4194304 & flags) != 0) {
                 this.mExtras = in.readBundle();
             }
-            this.mGetCredentialRequest = (GetCredentialRequest) in.readTypedObject(GetCredentialRequest.CREATOR);
-            this.mGetCredentialResultReceiver = (ResultReceiver) in.readTypedObject(ResultReceiver.CREATOR);
+            this.mGetCredentialRequest =
+                    (GetCredentialRequest) in.readTypedObject(GetCredentialRequest.CREATOR);
+            this.mGetCredentialResultReceiver =
+                    (ResultReceiver) in.readTypedObject(ResultReceiver.CREATOR);
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:15:0x0038, code lost:
-        
-            if ((((r25.mWidth & (-32768)) != 0) | ((r25.mHeight & (-32768)) != 0)) != false) goto L19;
-         */
+
+           if ((((r25.mWidth & (-32768)) != 0) | ((r25.mHeight & (-32768)) != 0)) != false) goto L19;
+        */
         /* JADX WARN: Multi-variable type inference failed */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        int writeSelfToParcel(android.os.Parcel r26, android.os.PooledStringWriter r27, boolean r28, float[] r29, boolean r30) {
+        int writeSelfToParcel(
+                android.os.Parcel r26,
+                android.os.PooledStringWriter r27,
+                boolean r28,
+                float[] r29,
+                boolean r30) {
             /*
                 Method dump skipped, instructions count: 708
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.assist.AssistStructure.ViewNode.writeSelfToParcel(android.os.Parcel, android.os.PooledStringWriter, boolean, float[], boolean):int");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.app.assist.AssistStructure.ViewNode.writeSelfToParcel(android.os.Parcel,"
+                        + " android.os.PooledStringWriter, boolean, float[], boolean):int");
         }
 
         public int getId() {
@@ -1078,19 +1127,21 @@ public class AssistStructure implements Parcelable {
     }
 
     public static final class ViewNodeParcelable implements Parcelable {
-        public static final Parcelable.Creator<ViewNodeParcelable> CREATOR = new Parcelable.Creator<ViewNodeParcelable>() { // from class: android.app.assist.AssistStructure.ViewNodeParcelable.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ViewNodeParcelable createFromParcel(Parcel in) {
-                return new ViewNodeParcelable(in);
-            }
+        public static final Parcelable.Creator<ViewNodeParcelable> CREATOR =
+                new Parcelable.Creator<ViewNodeParcelable>() { // from class:
+                    // android.app.assist.AssistStructure.ViewNodeParcelable.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ViewNodeParcelable createFromParcel(Parcel in) {
+                        return new ViewNodeParcelable(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ViewNodeParcelable[] newArray(int size) {
-                return new ViewNodeParcelable[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ViewNodeParcelable[] newArray(int size) {
+                        return new ViewNodeParcelable[size];
+                    }
+                };
         private final ViewNode mViewNode;
 
         public ViewNodeParcelable(ViewNode viewNode) {
@@ -1182,7 +1233,9 @@ public class AssistStructure implements Parcelable {
 
         @Override // android.view.ViewStructure
         public void setAssistBlocked(boolean state) {
-            this.mNode.mFlags = (this.mNode.mFlags & PackageManager.INSTALL_FAILED_PRE_APPROVAL_NOT_AVAILABLE) | (state ? 128 : 0);
+            this.mNode.mFlags =
+                    (this.mNode.mFlags & PackageManager.INSTALL_FAILED_PRE_APPROVAL_NOT_AVAILABLE)
+                            | (state ? 128 : 0);
         }
 
         @Override // android.view.ViewStructure
@@ -1407,7 +1460,8 @@ public class AssistStructure implements Parcelable {
         }
 
         @Override // android.view.ViewStructure
-        public OutcomeReceiver<GetCredentialResponse, GetCredentialException> getPendingCredentialCallback() {
+        public OutcomeReceiver<GetCredentialResponse, GetCredentialException>
+                getPendingCredentialCallback() {
             return this.mNode.mGetCredentialCallback;
         }
 
@@ -1415,7 +1469,8 @@ public class AssistStructure implements Parcelable {
         public void asyncCommit() {
             synchronized (this.mAssist) {
                 if (!this.mAsync) {
-                    throw new IllegalStateException("Child " + this + " was not created with ViewStructure.asyncNewChild");
+                    throw new IllegalStateException(
+                            "Child " + this + " was not created with ViewStructure.asyncNewChild");
                 }
                 if (!this.mAssist.mPendingAsyncChildren.remove(this)) {
                     throw new IllegalStateException("Child " + this + " already committed");
@@ -1475,44 +1530,73 @@ public class AssistStructure implements Parcelable {
         }
 
         @Override // android.view.ViewStructure
-        public void setPendingCredentialRequest(GetCredentialRequest request, OutcomeReceiver<GetCredentialResponse, GetCredentialException> callback) {
+        public void setPendingCredentialRequest(
+                GetCredentialRequest request,
+                OutcomeReceiver<GetCredentialResponse, GetCredentialException> callback) {
             this.mNode.mGetCredentialRequest = request;
             this.mNode.mGetCredentialCallback = callback;
             for (CredentialOption option : request.getCredentialOptions()) {
-                ArrayList<AutofillId> ids = option.getCandidateQueryData().getParcelableArrayList(CredentialProviderService.EXTRA_AUTOFILL_ID, AutofillId.class);
+                ArrayList<AutofillId> ids =
+                        option.getCandidateQueryData()
+                                .getParcelableArrayList(
+                                        CredentialProviderService.EXTRA_AUTOFILL_ID,
+                                        AutofillId.class);
                 ArrayList<AutofillId> ids2 = ids != null ? ids : new ArrayList<>();
                 if (!ids2.contains(getAutofillId())) {
                     ids2.add(getAutofillId());
                 }
-                option.getCandidateQueryData().putParcelableArrayList(CredentialProviderService.EXTRA_AUTOFILL_ID, ids2);
+                option.getCandidateQueryData()
+                        .putParcelableArrayList(CredentialProviderService.EXTRA_AUTOFILL_ID, ids2);
             }
             setUpResultReceiver(callback);
         }
 
-        private void setUpResultReceiver(final OutcomeReceiver<GetCredentialResponse, GetCredentialException> callback) {
+        private void setUpResultReceiver(
+                final OutcomeReceiver<GetCredentialResponse, GetCredentialException> callback) {
             if (this.mHandler == null) {
                 this.mHandler = new Handler(Looper.getMainLooper(), null, true);
             }
-            ResultReceiver resultReceiver = new ResultReceiver(this.mHandler) { // from class: android.app.assist.AssistStructure.ViewNodeBuilder.1
-                @Override // android.os.ResultReceiver
-                protected void onReceiveResult(int resultCode, Bundle resultData) {
-                    if (resultCode == 0) {
-                        Slog.d(AssistStructure.TAG, "onReceiveResult from Credential Manager");
-                        GetCredentialResponse getCredentialResponse = (GetCredentialResponse) resultData.getParcelable(CredentialProviderService.EXTRA_GET_CREDENTIAL_RESPONSE, GetCredentialResponse.class);
-                        callback.onResult(getCredentialResponse);
-                    } else {
-                        if (resultCode != -1) {
-                            Slog.d(AssistStructure.TAG, "Unknown resultCode from credential manager bottom sheet: " + resultCode);
-                            return;
+            ResultReceiver resultReceiver = new ResultReceiver(this.mHandler) { // from class:
+                        // android.app.assist.AssistStructure.ViewNodeBuilder.1
+                        @Override // android.os.ResultReceiver
+                        protected void onReceiveResult(int resultCode, Bundle resultData) {
+                            if (resultCode == 0) {
+                                Slog.d(
+                                        AssistStructure.TAG,
+                                        "onReceiveResult from Credential Manager");
+                                GetCredentialResponse getCredentialResponse =
+                                        (GetCredentialResponse)
+                                                resultData.getParcelable(
+                                                        CredentialProviderService
+                                                                .EXTRA_GET_CREDENTIAL_RESPONSE,
+                                                        GetCredentialResponse.class);
+                                callback.onResult(getCredentialResponse);
+                            } else {
+                                if (resultCode != -1) {
+                                    Slog.d(
+                                            AssistStructure.TAG,
+                                            "Unknown resultCode from credential manager bottom"
+                                                    + " sheet: "
+                                                    + resultCode);
+                                    return;
+                                }
+                                String[] exception =
+                                        resultData.getStringArray(
+                                                CredentialProviderService
+                                                        .EXTRA_GET_CREDENTIAL_EXCEPTION);
+                                if (exception != null && exception.length >= 2) {
+                                    Slog.w(
+                                            AssistStructure.TAG,
+                                            "Credman bottom sheet from pinned entry failed with: + "
+                                                    + exception[0]
+                                                    + " , "
+                                                    + exception[1]);
+                                    callback.onError(
+                                            new GetCredentialException(exception[0], exception[1]));
+                                }
+                            }
                         }
-                        String[] exception = resultData.getStringArray(CredentialProviderService.EXTRA_GET_CREDENTIAL_EXCEPTION);
-                        if (exception != null && exception.length >= 2) {
-                            Slog.w(AssistStructure.TAG, "Credman bottom sheet from pinned entry failed with: + " + exception[0] + " , " + exception[1]);
-                            callback.onError(new GetCredentialException(exception[0], exception[1]));
-                        }
-                    }
-                }
-            };
+                    };
             ResultReceiver ipcFriendlyResultReceiver = toIpcFriendlyResultReceiver(resultReceiver);
             this.mNode.mGetCredentialResultReceiver = ipcFriendlyResultReceiver;
         }
@@ -1585,32 +1669,39 @@ public class AssistStructure implements Parcelable {
     }
 
     private static final class HtmlInfoNode extends ViewStructure.HtmlInfo implements Parcelable {
-        public static final Parcelable.Creator<HtmlInfoNode> CREATOR = new Parcelable.Creator<HtmlInfoNode>() { // from class: android.app.assist.AssistStructure.HtmlInfoNode.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public HtmlInfoNode createFromParcel(Parcel parcel) {
-                String tag = parcel.readString();
-                HtmlInfoNodeBuilder builder = new HtmlInfoNodeBuilder(tag);
-                String[] names = parcel.readStringArray();
-                String[] values = parcel.readStringArray();
-                if (names != null && values != null) {
-                    if (names.length != values.length) {
-                        Log.w(AssistStructure.TAG, "HtmlInfo attributes mismatch: names=" + names.length + ", values=" + values.length);
-                    } else {
-                        for (int i = 0; i < names.length; i++) {
-                            builder.addAttribute(names[i], values[i]);
+        public static final Parcelable.Creator<HtmlInfoNode> CREATOR =
+                new Parcelable.Creator<HtmlInfoNode>() { // from class:
+                    // android.app.assist.AssistStructure.HtmlInfoNode.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public HtmlInfoNode createFromParcel(Parcel parcel) {
+                        String tag = parcel.readString();
+                        HtmlInfoNodeBuilder builder = new HtmlInfoNodeBuilder(tag);
+                        String[] names = parcel.readStringArray();
+                        String[] values = parcel.readStringArray();
+                        if (names != null && values != null) {
+                            if (names.length != values.length) {
+                                Log.w(
+                                        AssistStructure.TAG,
+                                        "HtmlInfo attributes mismatch: names="
+                                                + names.length
+                                                + ", values="
+                                                + values.length);
+                            } else {
+                                for (int i = 0; i < names.length; i++) {
+                                    builder.addAttribute(names[i], values[i]);
+                                }
+                            }
                         }
+                        return builder.build();
                     }
-                }
-                return builder.build();
-            }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public HtmlInfoNode[] newArray(int size) {
-                return new HtmlInfoNode[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public HtmlInfoNode[] newArray(int size) {
+                        return new HtmlInfoNode[size];
+                    }
+                };
         private ArrayList<Pair<String, String>> mAttributes;
         private final String[] mNames;
         private final String mTag;
@@ -1692,7 +1783,8 @@ public class AssistStructure implements Parcelable {
         this.mSanitizeOnWrite = false;
         this.mHaveData = true;
         this.mFlags = flags;
-        ArrayList<ViewRootImpl> views = WindowManagerGlobal.getInstance().getRootViews(activity.getActivityToken());
+        ArrayList<ViewRootImpl> views =
+                WindowManagerGlobal.getInstance().getRootViews(activity.getActivityToken());
         for (int i = 0; i < views.size(); i++) {
             ViewRootImpl root = views.get(i);
             if (root.getView() == null) {
@@ -1746,14 +1838,39 @@ public class AssistStructure implements Parcelable {
         int N = getWindowNodeCount();
         for (int i = 0; i < N; i++) {
             WindowNode node = getWindowNodeAt(i);
-            Log.i(TAG, "Window #" + i + " [" + node.getLeft() + "," + node.getTop() + " " + node.getWidth() + "x" + node.getHeight() + "] " + ((Object) node.getTitle()));
+            Log.i(
+                    TAG,
+                    "Window #"
+                            + i
+                            + " ["
+                            + node.getLeft()
+                            + ","
+                            + node.getTop()
+                            + " "
+                            + node.getWidth()
+                            + "x"
+                            + node.getHeight()
+                            + "] "
+                            + ((Object) node.getTitle()));
             dump("  ", node.getRootViewNode(), showSensitive);
         }
     }
 
     void dump(String prefix, ViewNode node, boolean showSensitive) {
         String safeText;
-        Log.i(TAG, prefix + "View [" + node.getLeft() + "," + node.getTop() + " " + node.getWidth() + "x" + node.getHeight() + "] " + node.getClassName());
+        Log.i(
+                TAG,
+                prefix
+                        + "View ["
+                        + node.getLeft()
+                        + ","
+                        + node.getTop()
+                        + " "
+                        + node.getWidth()
+                        + "x"
+                        + node.getHeight()
+                        + "] "
+                        + node.getClassName());
         int id = node.getId();
         if (id != 0) {
             StringBuilder sb = new StringBuilder();
@@ -1801,9 +1918,29 @@ public class AssistStructure implements Parcelable {
             } else {
                 safeText = "REDACTED[" + text.length() + " chars]";
             }
-            Log.i(TAG, prefix + "  Text (sel " + node.getTextSelectionStart() + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + node.getTextSelectionEnd() + "): " + safeText);
-            Log.i(TAG, prefix + "  Text size: " + node.getTextSize() + " , style: #" + node.getTextStyle());
-            Log.i(TAG, prefix + "  Text color fg: #" + Integer.toHexString(node.getTextColor()) + ", bg: #" + Integer.toHexString(node.getTextBackgroundColor()));
+            Log.i(
+                    TAG,
+                    prefix
+                            + "  Text (sel "
+                            + node.getTextSelectionStart()
+                            + NativeLibraryHelper.CLEAR_ABI_OVERRIDE
+                            + node.getTextSelectionEnd()
+                            + "): "
+                            + safeText);
+            Log.i(
+                    TAG,
+                    prefix
+                            + "  Text size: "
+                            + node.getTextSize()
+                            + " , style: #"
+                            + node.getTextStyle());
+            Log.i(
+                    TAG,
+                    prefix
+                            + "  Text color fg: #"
+                            + Integer.toHexString(node.getTextColor())
+                            + ", bg: #"
+                            + Integer.toHexString(node.getTextBackgroundColor()));
             Log.i(TAG, prefix + "  Input type: " + getInputTypeString(node.getInputType()));
             Log.i(TAG, prefix + "  Resource id: " + node.getTextIdEntry());
         }
@@ -1813,7 +1950,13 @@ public class AssistStructure implements Parcelable {
         }
         ViewStructure.HtmlInfo htmlInfo = node.getHtmlInfo();
         if (htmlInfo != null) {
-            Log.i(TAG, prefix + "  HtmlInfo: tag=" + htmlInfo.getTag() + ", attr=" + htmlInfo.getAttributes());
+            Log.i(
+                    TAG,
+                    prefix
+                            + "  HtmlInfo: tag="
+                            + htmlInfo.getTag()
+                            + ", attr="
+                            + htmlInfo.getAttributes());
         }
         LocaleList localeList = node.getLocaleList();
         if (localeList != null) {
@@ -1839,10 +1982,38 @@ public class AssistStructure implements Parcelable {
         if (autofillId == null) {
             Log.i(TAG, prefix + " No autofill ID");
         } else {
-            Log.i(TAG, prefix + "  Autofill info: id= " + autofillId + ", type=" + node.getAutofillType() + ", options=" + Arrays.toString(node.getAutofillOptions()) + ", hints=" + Arrays.toString(node.getAutofillHints()) + ", value=" + node.getAutofillValue() + ", sanitized=" + node.isSanitized() + ", important=" + node.getImportantForAutofill() + ", visibility=" + node.getVisibility() + ", isCredential=" + node.isCredential());
+            Log.i(
+                    TAG,
+                    prefix
+                            + "  Autofill info: id= "
+                            + autofillId
+                            + ", type="
+                            + node.getAutofillType()
+                            + ", options="
+                            + Arrays.toString(node.getAutofillOptions())
+                            + ", hints="
+                            + Arrays.toString(node.getAutofillHints())
+                            + ", value="
+                            + node.getAutofillValue()
+                            + ", sanitized="
+                            + node.isSanitized()
+                            + ", important="
+                            + node.getImportantForAutofill()
+                            + ", visibility="
+                            + node.getVisibility()
+                            + ", isCredential="
+                            + node.isCredential());
         }
         GetCredentialRequest getCredentialRequest = node.getPendingCredentialRequest();
-        Log.i(TAG, prefix + "  Credential Manager info: hasCredentialManagerRequest=" + (getCredentialRequest != null) + (getCredentialRequest != null ? ", sizeOfOptions=" + getCredentialRequest.getCredentialOptions().size() : ""));
+        Log.i(
+                TAG,
+                prefix
+                        + "  Credential Manager info: hasCredentialManagerRequest="
+                        + (getCredentialRequest != null)
+                        + (getCredentialRequest != null
+                                ? ", sizeOfOptions="
+                                        + getCredentialRequest.getCredentialOptions().size()
+                                : ""));
         int NCHILDREN = node.getChildCount();
         if (NCHILDREN > 0) {
             Log.i(TAG, prefix + "  Children:");
@@ -1929,7 +2100,11 @@ public class AssistStructure implements Parcelable {
                 }
             }
             if (this.mPendingAsyncChildren.size() > 0) {
-                Log.w(TAG, "Skipping assist structure, waiting too long for async children (have " + this.mPendingAsyncChildren.size() + " remaining");
+                Log.w(
+                        TAG,
+                        "Skipping assist structure, waiting too long for async children (have "
+                                + this.mPendingAsyncChildren.size()
+                                + " remaining");
                 skipStructure = true;
             }
         }

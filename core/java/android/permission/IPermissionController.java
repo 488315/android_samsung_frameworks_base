@@ -8,121 +8,152 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface IPermissionController extends IInterface {
     public static final String DESCRIPTOR = "android.permission.IPermissionController";
 
-    void applyStagedRuntimePermissionBackup(String str, UserHandle userHandle, AndroidFuture androidFuture) throws RemoteException;
+    void applyStagedRuntimePermissionBackup(
+            String str, UserHandle userHandle, AndroidFuture androidFuture) throws RemoteException;
 
-    void countPermissionApps(List<String> list, int i, AndroidFuture androidFuture) throws RemoteException;
+    void countPermissionApps(List<String> list, int i, AndroidFuture androidFuture)
+            throws RemoteException;
 
     void getAppPermissions(String str, AndroidFuture androidFuture) throws RemoteException;
 
-    void getGroupOfPlatformPermission(String str, AndroidFuture<String> androidFuture) throws RemoteException;
+    void getGroupOfPlatformPermission(String str, AndroidFuture<String> androidFuture)
+            throws RemoteException;
 
     void getHibernationEligibility(String str, AndroidFuture androidFuture) throws RemoteException;
 
     void getPermissionUsages(boolean z, long j, AndroidFuture androidFuture) throws RemoteException;
 
-    void getPlatformPermissionsForGroup(String str, AndroidFuture<List<String>> androidFuture) throws RemoteException;
+    void getPlatformPermissionsForGroup(String str, AndroidFuture<List<String>> androidFuture)
+            throws RemoteException;
 
-    void getPrivilegesDescriptionStringForProfile(String str, AndroidFuture<String> androidFuture) throws RemoteException;
+    void getPrivilegesDescriptionStringForProfile(String str, AndroidFuture<String> androidFuture)
+            throws RemoteException;
 
-    void getRuntimePermissionBackup(UserHandle userHandle, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
+    void getRuntimePermissionBackup(
+            UserHandle userHandle, ParcelFileDescriptor parcelFileDescriptor)
+            throws RemoteException;
 
     void getUnusedAppCount(AndroidFuture androidFuture) throws RemoteException;
 
-    void grantOrUpgradeDefaultRuntimePermissions(AndroidFuture androidFuture) throws RemoteException;
+    void grantOrUpgradeDefaultRuntimePermissions(AndroidFuture androidFuture)
+            throws RemoteException;
 
     void notifyOneTimePermissionSessionTimeout(String str, int i) throws RemoteException;
 
     void revokeRuntimePermission(String str, String str2) throws RemoteException;
 
-    void revokeRuntimePermissions(Bundle bundle, boolean z, int i, String str, AndroidFuture androidFuture) throws RemoteException;
+    void revokeRuntimePermissions(
+            Bundle bundle, boolean z, int i, String str, AndroidFuture androidFuture)
+            throws RemoteException;
 
-    void revokeSelfPermissionsOnKill(String str, List<String> list, int i, AndroidFuture androidFuture) throws RemoteException;
+    void revokeSelfPermissionsOnKill(
+            String str, List<String> list, int i, AndroidFuture androidFuture)
+            throws RemoteException;
 
-    void setRuntimePermissionGrantStateByDeviceAdminFromParams(String str, AdminPermissionControlParams adminPermissionControlParams, AndroidFuture androidFuture) throws RemoteException;
+    void setRuntimePermissionGrantStateByDeviceAdminFromParams(
+            String str,
+            AdminPermissionControlParams adminPermissionControlParams,
+            AndroidFuture androidFuture)
+            throws RemoteException;
 
-    void stageAndApplyRuntimePermissionsBackup(UserHandle userHandle, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
+    void stageAndApplyRuntimePermissionsBackup(
+            UserHandle userHandle, ParcelFileDescriptor parcelFileDescriptor)
+            throws RemoteException;
 
     void updateUserSensitiveForApp(int i, AndroidFuture androidFuture) throws RemoteException;
 
     public static class Default implements IPermissionController {
         @Override // android.permission.IPermissionController
-        public void revokeRuntimePermissions(Bundle request, boolean doDryRun, int reason, String callerPackageName, AndroidFuture callback) throws RemoteException {
-        }
+        public void revokeRuntimePermissions(
+                Bundle request,
+                boolean doDryRun,
+                int reason,
+                String callerPackageName,
+                AndroidFuture callback)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void getRuntimePermissionBackup(UserHandle user, ParcelFileDescriptor pipe) throws RemoteException {
-        }
+        public void getRuntimePermissionBackup(UserHandle user, ParcelFileDescriptor pipe)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void stageAndApplyRuntimePermissionsBackup(UserHandle user, ParcelFileDescriptor pipe) throws RemoteException {
-        }
+        public void stageAndApplyRuntimePermissionsBackup(
+                UserHandle user, ParcelFileDescriptor pipe) throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void applyStagedRuntimePermissionBackup(String packageName, UserHandle user, AndroidFuture callback) throws RemoteException {
-        }
+        public void applyStagedRuntimePermissionBackup(
+                String packageName, UserHandle user, AndroidFuture callback)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void getAppPermissions(String packageName, AndroidFuture callback) throws RemoteException {
-        }
+        public void getAppPermissions(String packageName, AndroidFuture callback)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void revokeRuntimePermission(String packageName, String permissionName) throws RemoteException {
-        }
+        public void revokeRuntimePermission(String packageName, String permissionName)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void countPermissionApps(List<String> permissionNames, int flags, AndroidFuture callback) throws RemoteException {
-        }
+        public void countPermissionApps(
+                List<String> permissionNames, int flags, AndroidFuture callback)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void getPermissionUsages(boolean countSystem, long numMillis, AndroidFuture callback) throws RemoteException {
-        }
+        public void getPermissionUsages(boolean countSystem, long numMillis, AndroidFuture callback)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void setRuntimePermissionGrantStateByDeviceAdminFromParams(String callerPackageName, AdminPermissionControlParams params, AndroidFuture callback) throws RemoteException {
-        }
+        public void setRuntimePermissionGrantStateByDeviceAdminFromParams(
+                String callerPackageName,
+                AdminPermissionControlParams params,
+                AndroidFuture callback)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void grantOrUpgradeDefaultRuntimePermissions(AndroidFuture callback) throws RemoteException {
-        }
+        public void grantOrUpgradeDefaultRuntimePermissions(AndroidFuture callback)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void notifyOneTimePermissionSessionTimeout(String packageName, int deviceId) throws RemoteException {
-        }
+        public void notifyOneTimePermissionSessionTimeout(String packageName, int deviceId)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void updateUserSensitiveForApp(int uid, AndroidFuture callback) throws RemoteException {
-        }
+        public void updateUserSensitiveForApp(int uid, AndroidFuture callback)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void getPrivilegesDescriptionStringForProfile(String deviceProfileName, AndroidFuture<String> callback) throws RemoteException {
-        }
+        public void getPrivilegesDescriptionStringForProfile(
+                String deviceProfileName, AndroidFuture<String> callback) throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void getPlatformPermissionsForGroup(String permissionGroupName, AndroidFuture<List<String>> callback) throws RemoteException {
-        }
+        public void getPlatformPermissionsForGroup(
+                String permissionGroupName, AndroidFuture<List<String>> callback)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void getGroupOfPlatformPermission(String permissionName, AndroidFuture<String> callback) throws RemoteException {
-        }
+        public void getGroupOfPlatformPermission(
+                String permissionName, AndroidFuture<String> callback) throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void getUnusedAppCount(AndroidFuture callback) throws RemoteException {
-        }
+        public void getUnusedAppCount(AndroidFuture callback) throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void getHibernationEligibility(String packageName, AndroidFuture callback) throws RemoteException {
-        }
+        public void getHibernationEligibility(String packageName, AndroidFuture callback)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionController
-        public void revokeSelfPermissionsOnKill(String packageName, List<String> permissions, int deviceId, AndroidFuture callback) throws RemoteException {
-        }
+        public void revokeSelfPermissionsOnKill(
+                String packageName, List<String> permissions, int deviceId, AndroidFuture callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -130,7 +161,7 @@ public interface IPermissionController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPermissionController {
+    public abstract static class Stub extends Binder implements IPermissionController {
         static final int TRANSACTION_applyStagedRuntimePermissionBackup = 4;
         static final int TRANSACTION_countPermissionApps = 7;
         static final int TRANSACTION_getAppPermissions = 5;
@@ -219,7 +250,8 @@ public interface IPermissionController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPermissionController.DESCRIPTOR);
             }
@@ -233,32 +265,39 @@ public interface IPermissionController extends IInterface {
                     boolean _arg1 = data.readBoolean();
                     int _arg2 = data.readInt();
                     String _arg3 = data.readString();
-                    AndroidFuture _arg4 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg4 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     revokeRuntimePermissions(_arg0, _arg1, _arg2, _arg3, _arg4);
                     return true;
                 case 2:
                     UserHandle _arg02 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
-                    ParcelFileDescriptor _arg12 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg12 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     getRuntimePermissionBackup(_arg02, _arg12);
                     return true;
                 case 3:
                     UserHandle _arg03 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
-                    ParcelFileDescriptor _arg13 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg13 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     stageAndApplyRuntimePermissionsBackup(_arg03, _arg13);
                     return true;
                 case 4:
                     String _arg04 = data.readString();
                     UserHandle _arg14 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
-                    AndroidFuture _arg22 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg22 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     applyStagedRuntimePermissionBackup(_arg04, _arg14, _arg22);
                     return true;
                 case 5:
                     String _arg05 = data.readString();
-                    AndroidFuture _arg15 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg15 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getAppPermissions(_arg05, _arg15);
                     return true;
@@ -271,26 +310,32 @@ public interface IPermissionController extends IInterface {
                 case 7:
                     List<String> _arg07 = data.createStringArrayList();
                     int _arg17 = data.readInt();
-                    AndroidFuture _arg23 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg23 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     countPermissionApps(_arg07, _arg17, _arg23);
                     return true;
                 case 8:
                     boolean _arg08 = data.readBoolean();
                     long _arg18 = data.readLong();
-                    AndroidFuture _arg24 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg24 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getPermissionUsages(_arg08, _arg18, _arg24);
                     return true;
                 case 9:
                     String _arg09 = data.readString();
-                    AdminPermissionControlParams _arg19 = (AdminPermissionControlParams) data.readTypedObject(AdminPermissionControlParams.CREATOR);
-                    AndroidFuture _arg25 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AdminPermissionControlParams _arg19 =
+                            (AdminPermissionControlParams)
+                                    data.readTypedObject(AdminPermissionControlParams.CREATOR);
+                    AndroidFuture _arg25 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     setRuntimePermissionGrantStateByDeviceAdminFromParams(_arg09, _arg19, _arg25);
                     return true;
                 case 10:
-                    AndroidFuture _arg010 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg010 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     grantOrUpgradeDefaultRuntimePermissions(_arg010);
                     return true;
@@ -302,36 +347,42 @@ public interface IPermissionController extends IInterface {
                     return true;
                 case 12:
                     int _arg012 = data.readInt();
-                    AndroidFuture _arg111 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg111 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     updateUserSensitiveForApp(_arg012, _arg111);
                     return true;
                 case 13:
                     String _arg013 = data.readString();
-                    AndroidFuture<String> _arg112 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<String> _arg112 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getPrivilegesDescriptionStringForProfile(_arg013, _arg112);
                     return true;
                 case 14:
                     String _arg014 = data.readString();
-                    AndroidFuture<List<String>> _arg113 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<List<String>> _arg113 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getPlatformPermissionsForGroup(_arg014, _arg113);
                     return true;
                 case 15:
                     String _arg015 = data.readString();
-                    AndroidFuture<String> _arg114 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<String> _arg114 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getGroupOfPlatformPermission(_arg015, _arg114);
                     return true;
                 case 16:
-                    AndroidFuture _arg016 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg016 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getUnusedAppCount(_arg016);
                     return true;
                 case 17:
                     String _arg017 = data.readString();
-                    AndroidFuture _arg115 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg115 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getHibernationEligibility(_arg017, _arg115);
                     return true;
@@ -339,7 +390,8 @@ public interface IPermissionController extends IInterface {
                     String _arg018 = data.readString();
                     List<String> _arg116 = data.createStringArrayList();
                     int _arg26 = data.readInt();
-                    AndroidFuture _arg32 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg32 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     revokeSelfPermissionsOnKill(_arg018, _arg116, _arg26, _arg32);
                     return true;
@@ -365,7 +417,13 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void revokeRuntimePermissions(Bundle request, boolean doDryRun, int reason, String callerPackageName, AndroidFuture callback) throws RemoteException {
+            public void revokeRuntimePermissions(
+                    Bundle request,
+                    boolean doDryRun,
+                    int reason,
+                    String callerPackageName,
+                    AndroidFuture callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -381,7 +439,8 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void getRuntimePermissionBackup(UserHandle user, ParcelFileDescriptor pipe) throws RemoteException {
+            public void getRuntimePermissionBackup(UserHandle user, ParcelFileDescriptor pipe)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -394,7 +453,8 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void stageAndApplyRuntimePermissionsBackup(UserHandle user, ParcelFileDescriptor pipe) throws RemoteException {
+            public void stageAndApplyRuntimePermissionsBackup(
+                    UserHandle user, ParcelFileDescriptor pipe) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -407,7 +467,9 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void applyStagedRuntimePermissionBackup(String packageName, UserHandle user, AndroidFuture callback) throws RemoteException {
+            public void applyStagedRuntimePermissionBackup(
+                    String packageName, UserHandle user, AndroidFuture callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -421,7 +483,8 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void getAppPermissions(String packageName, AndroidFuture callback) throws RemoteException {
+            public void getAppPermissions(String packageName, AndroidFuture callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -434,7 +497,8 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void revokeRuntimePermission(String packageName, String permissionName) throws RemoteException {
+            public void revokeRuntimePermission(String packageName, String permissionName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -447,7 +511,9 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void countPermissionApps(List<String> permissionNames, int flags, AndroidFuture callback) throws RemoteException {
+            public void countPermissionApps(
+                    List<String> permissionNames, int flags, AndroidFuture callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -461,7 +527,9 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void getPermissionUsages(boolean countSystem, long numMillis, AndroidFuture callback) throws RemoteException {
+            public void getPermissionUsages(
+                    boolean countSystem, long numMillis, AndroidFuture callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -475,7 +543,11 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void setRuntimePermissionGrantStateByDeviceAdminFromParams(String callerPackageName, AdminPermissionControlParams params, AndroidFuture callback) throws RemoteException {
+            public void setRuntimePermissionGrantStateByDeviceAdminFromParams(
+                    String callerPackageName,
+                    AdminPermissionControlParams params,
+                    AndroidFuture callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -489,7 +561,8 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void grantOrUpgradeDefaultRuntimePermissions(AndroidFuture callback) throws RemoteException {
+            public void grantOrUpgradeDefaultRuntimePermissions(AndroidFuture callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -501,7 +574,8 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void notifyOneTimePermissionSessionTimeout(String packageName, int deviceId) throws RemoteException {
+            public void notifyOneTimePermissionSessionTimeout(String packageName, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -514,7 +588,8 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void updateUserSensitiveForApp(int uid, AndroidFuture callback) throws RemoteException {
+            public void updateUserSensitiveForApp(int uid, AndroidFuture callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -527,7 +602,9 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void getPrivilegesDescriptionStringForProfile(String deviceProfileName, AndroidFuture<String> callback) throws RemoteException {
+            public void getPrivilegesDescriptionStringForProfile(
+                    String deviceProfileName, AndroidFuture<String> callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -540,7 +617,9 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void getPlatformPermissionsForGroup(String permissionGroupName, AndroidFuture<List<String>> callback) throws RemoteException {
+            public void getPlatformPermissionsForGroup(
+                    String permissionGroupName, AndroidFuture<List<String>> callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -553,7 +632,8 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void getGroupOfPlatformPermission(String permissionName, AndroidFuture<String> callback) throws RemoteException {
+            public void getGroupOfPlatformPermission(
+                    String permissionName, AndroidFuture<String> callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -578,7 +658,8 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void getHibernationEligibility(String packageName, AndroidFuture callback) throws RemoteException {
+            public void getHibernationEligibility(String packageName, AndroidFuture callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);
@@ -591,7 +672,12 @@ public interface IPermissionController extends IInterface {
             }
 
             @Override // android.permission.IPermissionController
-            public void revokeSelfPermissionsOnKill(String packageName, List<String> permissions, int deviceId, AndroidFuture callback) throws RemoteException {
+            public void revokeSelfPermissionsOnKill(
+                    String packageName,
+                    List<String> permissions,
+                    int deviceId,
+                    AndroidFuture callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPermissionController.DESCRIPTOR);

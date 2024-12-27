@@ -12,8 +12,7 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.UserHandle;
 import android.util.Slog;
-import com.android.server.wm.ActivityStarter;
-import com.android.server.wm.BackgroundActivityStartController;
+
 import com.samsung.android.rune.CoreRune;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,10 +29,16 @@ public final class AppTaskImpl extends IAppTask.Stub {
     }
 
     public final void checkCallerOrSystemOrRoot() {
-        if (this.mCallingUid == Binder.getCallingUid() || 1000 == Binder.getCallingUid() || Binder.getCallingUid() == 0) {
+        if (this.mCallingUid == Binder.getCallingUid()
+                || 1000 == Binder.getCallingUid()
+                || Binder.getCallingUid() == 0) {
             return;
         }
-        throw new SecurityException("Caller " + this.mCallingUid + " does not match caller of getAppTasks(): " + Binder.getCallingUid());
+        throw new SecurityException(
+                "Caller "
+                        + this.mCallingUid
+                        + " does not match caller of getAppTasks(): "
+                        + Binder.getCallingUid());
     }
 
     public final void finishAndRemoveTask() {
@@ -46,8 +51,16 @@ public final class AppTaskImpl extends IAppTask.Stub {
                 int callingPid = Binder.getCallingPid();
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    if (!this.mService.mTaskSupervisor.removeTaskById(this.mTaskId, callingUid, callingPid, "finish-and-remove-task", false, true, false)) {
-                        throw new IllegalArgumentException("Unable to find task ID " + this.mTaskId);
+                    if (!this.mService.mTaskSupervisor.removeTaskById(
+                            this.mTaskId,
+                            callingUid,
+                            callingPid,
+                            "finish-and-remove-task",
+                            false,
+                            true,
+                            false)) {
+                        throw new IllegalArgumentException(
+                                "Unable to find task ID " + this.mTaskId);
                     }
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -69,11 +82,16 @@ public final class AppTaskImpl extends IAppTask.Stub {
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    Task anyTaskForId = this.mService.mRootWindowContainer.anyTaskForId(this.mTaskId, 1, null, false);
+                    Task anyTaskForId =
+                            this.mService.mRootWindowContainer.anyTaskForId(
+                                    this.mTaskId, 1, null, false);
                     if (anyTaskForId == null) {
-                        throw new IllegalArgumentException("Unable to find task ID " + this.mTaskId);
+                        throw new IllegalArgumentException(
+                                "Unable to find task ID " + this.mTaskId);
                     }
-                    createRecentTaskInfo = this.mService.mRecentTasks.createRecentTaskInfo(anyTaskForId, false, true);
+                    createRecentTaskInfo =
+                            this.mService.mRecentTasks.createRecentTaskInfo(
+                                    anyTaskForId, false, true);
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
@@ -95,8 +113,12 @@ public final class AppTaskImpl extends IAppTask.Stub {
         this.mService.assertPackageMatchesCallingUid(str);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            if (CoreRune.SYSFW_APP_SPEG && (packageManager = this.mService.mContext.getPackageManager()) != null && packageManager.isSpeg(callingUid)) {
-                Slog.w("SPEG", "Not allowed app transition for callingPackage " + str + ":" + callingUid);
+            if (CoreRune.SYSFW_APP_SPEG
+                    && (packageManager = this.mService.mContext.getPackageManager()) != null
+                    && packageManager.isSpeg(callingUid)) {
+                Slog.w(
+                        "SPEG",
+                        "Not allowed app transition for callingPackage " + str + ":" + callingUid);
                 return;
             }
             WindowManagerGlobalLock windowManagerGlobalLock = this.mService.mGlobalLock;
@@ -105,7 +127,8 @@ public final class AppTaskImpl extends IAppTask.Stub {
                 try {
                     if (iApplicationThread != null) {
                         try {
-                            processController = this.mService.getProcessController(iApplicationThread);
+                            processController =
+                                    this.mService.getProcessController(iApplicationThread);
                         } catch (Throwable th) {
                             th = th;
                             WindowManagerService.resetPriorityAfterLockedSection();
@@ -114,12 +137,29 @@ public final class AppTaskImpl extends IAppTask.Stub {
                     } else {
                         processController = null;
                     }
-                    BackgroundActivityStartController.BalVerdict checkBackgroundActivityStart = this.mService.mTaskSupervisor.mBalController.checkBackgroundActivityStart(callingUid, callingPid, str, -1, -1, processController, null, BackgroundStartPrivileges.NONE, null, null, null);
-                    if (checkBackgroundActivityStart.mCode != 0 || this.mService.mAmInternal.isBackgroundActivityStartsEnabled()) {
+                    BackgroundActivityStartController.BalVerdict checkBackgroundActivityStart =
+                            this.mService.mTaskSupervisor.mBalController
+                                    .checkBackgroundActivityStart(
+                                            callingUid,
+                                            callingPid,
+                                            str,
+                                            -1,
+                                            -1,
+                                            processController,
+                                            null,
+                                            BackgroundStartPrivileges.NONE,
+                                            null,
+                                            null,
+                                            null);
+                    if (checkBackgroundActivityStart.mCode != 0
+                            || this.mService.mAmInternal.isBackgroundActivityStartsEnabled()) {
                         WindowManagerService.resetPriorityAfterLockedSection();
-                        this.mService.mTaskSupervisor.startActivityFromRecents(callingPid, callingUid, this.mTaskId, null, true);
+                        this.mService.mTaskSupervisor.startActivityFromRecents(
+                                callingPid, callingUid, this.mTaskId, null, true);
                     } else {
-                        Slog.w("AppTaskImpl", "moveTaskToFront blocked: : " + checkBackgroundActivityStart);
+                        Slog.w(
+                                "AppTaskImpl",
+                                "moveTaskToFront blocked: : " + checkBackgroundActivityStart);
                         WindowManagerService.resetPriorityAfterLockedSection();
                     }
                 } catch (Throwable th2) {
@@ -148,9 +188,12 @@ public final class AppTaskImpl extends IAppTask.Stub {
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    Task anyTaskForId = this.mService.mRootWindowContainer.anyTaskForId(this.mTaskId, 1, null, false);
+                    Task anyTaskForId =
+                            this.mService.mRootWindowContainer.anyTaskForId(
+                                    this.mTaskId, 1, null, false);
                     if (anyTaskForId == null) {
-                        throw new IllegalArgumentException("Unable to find task ID " + this.mTaskId);
+                        throw new IllegalArgumentException(
+                                "Unable to find task ID " + this.mTaskId);
                     }
                     Intent baseIntent = anyTaskForId.getBaseIntent();
                     if (z) {
@@ -171,7 +214,8 @@ public final class AppTaskImpl extends IAppTask.Stub {
         WindowManagerService.resetPriorityAfterLockedSection();
     }
 
-    public final int startActivity(IBinder iBinder, String str, String str2, Intent intent, String str3, Bundle bundle) {
+    public final int startActivity(
+            IBinder iBinder, String str, String str2, Intent intent, String str3, Bundle bundle) {
         Task anyTaskForId;
         IApplicationThread asInterface;
         checkCallerOrSystemOrRoot();
@@ -181,7 +225,9 @@ public final class AppTaskImpl extends IAppTask.Stub {
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                anyTaskForId = this.mService.mRootWindowContainer.anyTaskForId(this.mTaskId, 1, null, false);
+                anyTaskForId =
+                        this.mService.mRootWindowContainer.anyTaskForId(
+                                this.mTaskId, 1, null, false);
                 if (anyTaskForId == null) {
                     throw new IllegalArgumentException("Unable to find task ID " + this.mTaskId);
                 }
@@ -195,7 +241,8 @@ public final class AppTaskImpl extends IAppTask.Stub {
             }
         }
         WindowManagerService.resetPriorityAfterLockedSection();
-        ActivityStarter obtainStarter = this.mService.mActivityStartController.obtainStarter(intent, "AppTaskImpl");
+        ActivityStarter obtainStarter =
+                this.mService.mActivityStartController.obtainStarter(intent, "AppTaskImpl");
         ActivityStarter.Request request = obtainStarter.mRequest;
         request.caller = asInterface;
         request.callingPackage = str;

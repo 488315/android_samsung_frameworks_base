@@ -19,20 +19,16 @@ public interface IVoiceInteractionSessionListener extends IInterface {
 
     public static class Default implements IVoiceInteractionSessionListener {
         @Override // com.android.internal.app.IVoiceInteractionSessionListener
-        public void onVoiceSessionShown() throws RemoteException {
-        }
+        public void onVoiceSessionShown() throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionSessionListener
-        public void onVoiceSessionHidden() throws RemoteException {
-        }
+        public void onVoiceSessionHidden() throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionSessionListener
-        public void onVoiceSessionWindowVisibilityChanged(boolean visible) throws RemoteException {
-        }
+        public void onVoiceSessionWindowVisibilityChanged(boolean visible) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionSessionListener
-        public void onSetUiHints(Bundle args) throws RemoteException {
-        }
+        public void onSetUiHints(Bundle args) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -40,8 +36,9 @@ public interface IVoiceInteractionSessionListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoiceInteractionSessionListener {
-        public static final String DESCRIPTOR = "com.android.internal.app.IVoiceInteractionSessionListener";
+    public abstract static class Stub extends Binder implements IVoiceInteractionSessionListener {
+        public static final String DESCRIPTOR =
+                "com.android.internal.app.IVoiceInteractionSessionListener";
         static final int TRANSACTION_onSetUiHints = 4;
         static final int TRANSACTION_onVoiceSessionHidden = 2;
         static final int TRANSACTION_onVoiceSessionShown = 1;
@@ -88,7 +85,8 @@ public interface IVoiceInteractionSessionListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -157,7 +155,8 @@ public interface IVoiceInteractionSessionListener extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionSessionListener
-            public void onVoiceSessionWindowVisibilityChanged(boolean visible) throws RemoteException {
+            public void onVoiceSessionWindowVisibilityChanged(boolean visible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

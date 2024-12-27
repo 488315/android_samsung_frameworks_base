@@ -1,11 +1,13 @@
 package com.android.internal.org.bouncycastle.asn1.gm;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
+
 import com.samsung.android.globalactions.util.SamsungGlobalActionsAnalytics;
 
 /* loaded from: classes5.dex */
 public interface GMObjectIdentifiers {
-    public static final ASN1ObjectIdentifier sm_scheme = new ASN1ObjectIdentifier("1.2.156.10197.1");
+    public static final ASN1ObjectIdentifier sm_scheme =
+            new ASN1ObjectIdentifier("1.2.156.10197.1");
     public static final ASN1ObjectIdentifier sm6_ecb = sm_scheme.branch("101.1");
     public static final ASN1ObjectIdentifier sm6_cbc = sm_scheme.branch("101.2");
     public static final ASN1ObjectIdentifier sm6_ofb128 = sm_scheme.branch("101.3");
@@ -41,8 +43,10 @@ public interface GMObjectIdentifiers {
     public static final ASN1ObjectIdentifier sm2exchange = sm_scheme.branch("301.2");
     public static final ASN1ObjectIdentifier sm2encrypt = sm_scheme.branch("301.3");
     public static final ASN1ObjectIdentifier wapip192v1 = sm_scheme.branch("301.101");
-    public static final ASN1ObjectIdentifier sm2encrypt_recommendedParameters = sm2encrypt.branch("1");
-    public static final ASN1ObjectIdentifier sm2encrypt_specifiedParameters = sm2encrypt.branch("2");
+    public static final ASN1ObjectIdentifier sm2encrypt_recommendedParameters =
+            sm2encrypt.branch("1");
+    public static final ASN1ObjectIdentifier sm2encrypt_specifiedParameters =
+            sm2encrypt.branch("2");
     public static final ASN1ObjectIdentifier sm2encrypt_with_sm3 = sm2encrypt.branch("2.1");
     public static final ASN1ObjectIdentifier sm2encrypt_with_sha1 = sm2encrypt.branch("2.2");
     public static final ASN1ObjectIdentifier sm2encrypt_with_sha224 = sm2encrypt.branch("2.3");
@@ -62,7 +66,8 @@ public interface GMObjectIdentifiers {
     public static final ASN1ObjectIdentifier hmac_sm3 = sm3.branch("2");
     public static final ASN1ObjectIdentifier sm2sign_with_sm3 = sm_scheme.branch("501");
     public static final ASN1ObjectIdentifier sm2sign_with_sha1 = sm_scheme.branch("502");
-    public static final ASN1ObjectIdentifier sm2sign_with_sha256 = sm_scheme.branch(SamsungGlobalActionsAnalytics.SID_FRONT_COVER_DEVICE_OPTIONS);
+    public static final ASN1ObjectIdentifier sm2sign_with_sha256 =
+            sm_scheme.branch(SamsungGlobalActionsAnalytics.SID_FRONT_COVER_DEVICE_OPTIONS);
     public static final ASN1ObjectIdentifier sm2sign_with_sha512 = sm_scheme.branch("504");
     public static final ASN1ObjectIdentifier sm2sign_with_sha224 = sm_scheme.branch("505");
     public static final ASN1ObjectIdentifier sm2sign_with_sha384 = sm_scheme.branch("506");

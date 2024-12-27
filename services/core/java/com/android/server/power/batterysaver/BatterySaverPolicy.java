@@ -16,12 +16,13 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.IndentingPrintWriter;
 import android.util.KeyValueListParser;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.desktopmode.DesktopModeService$$ExternalSyntheticOutline0;
 import com.android.server.power.Slog;
-import com.android.server.power.batterysaver.BatterySaverPolicy;
 import com.android.server.utils.UserSettingDeviceConfigMediator$SettingsOverridesIndividualMediator;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,8 @@ import java.util.Set;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class BatterySaverPolicy extends ContentObserver implements DeviceConfig.OnPropertiesChangedListener {
+public final class BatterySaverPolicy extends ContentObserver
+        implements DeviceConfig.OnPropertiesChangedListener {
     public static final Policy DEFAULT_ADAPTIVE_POLICY;
     static final String KEY_ADJUST_BRIGHTNESS_FACTOR = "adjust_brightness_factor";
     static final String KEY_ADVERTISE_IS_ENABLED = "advertise_is_enabled";
@@ -74,8 +76,7 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
     public String mSettings;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface BatterySaverPolicyListener {
-    }
+    public interface BatterySaverPolicyListener {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Policy {
@@ -99,8 +100,27 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
         public final int mHashCode;
         public final int soundTriggerMode;
 
-        public Policy(float f, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, boolean z8, boolean z9, boolean z10, boolean z11, boolean z12, boolean z13, boolean z14, boolean z15, int i, int i2) {
-            this.adjustBrightnessFactor = Math.min(1.0f, Math.max(FullScreenMagnificationGestureHandler.MAX_SCALE, f));
+        public Policy(
+                float f,
+                boolean z,
+                boolean z2,
+                boolean z3,
+                boolean z4,
+                boolean z5,
+                boolean z6,
+                boolean z7,
+                boolean z8,
+                boolean z9,
+                boolean z10,
+                boolean z11,
+                boolean z12,
+                boolean z13,
+                boolean z14,
+                boolean z15,
+                int i,
+                int i2) {
+            this.adjustBrightnessFactor =
+                    Math.min(1.0f, Math.max(FullScreenMagnificationGestureHandler.MAX_SCALE, f));
             this.advertiseIsEnabled = z;
             this.deferFullBackup = z2;
             this.deferKeyValueBackup = z3;
@@ -128,7 +148,26 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
             } else {
                 this.soundTriggerMode = i2;
             }
-            this.mHashCode = Objects.hash(Float.valueOf(f), Boolean.valueOf(z), Boolean.valueOf(z2), Boolean.valueOf(z3), Boolean.valueOf(z4), Boolean.valueOf(z5), Boolean.valueOf(z6), Boolean.valueOf(z7), Boolean.valueOf(z8), Boolean.valueOf(z9), Boolean.valueOf(z10), Boolean.valueOf(z11), Boolean.valueOf(z12), Boolean.valueOf(z13), Boolean.valueOf(z14), Boolean.valueOf(z15), Integer.valueOf(i), Integer.valueOf(i2));
+            this.mHashCode =
+                    Objects.hash(
+                            Float.valueOf(f),
+                            Boolean.valueOf(z),
+                            Boolean.valueOf(z2),
+                            Boolean.valueOf(z3),
+                            Boolean.valueOf(z4),
+                            Boolean.valueOf(z5),
+                            Boolean.valueOf(z6),
+                            Boolean.valueOf(z7),
+                            Boolean.valueOf(z8),
+                            Boolean.valueOf(z9),
+                            Boolean.valueOf(z10),
+                            Boolean.valueOf(z11),
+                            Boolean.valueOf(z12),
+                            Boolean.valueOf(z13),
+                            Boolean.valueOf(z14),
+                            Boolean.valueOf(z15),
+                            Integer.valueOf(i),
+                            Integer.valueOf(i2));
         }
 
         public static Policy fromConfig(BatterySaverPolicyConfig batterySaverPolicyConfig) {
@@ -137,63 +176,189 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
                 return BatterySaverPolicy.OFF_POLICY;
             }
             batterySaverPolicyConfig.getDeviceSpecificSettings();
-            return new Policy(batterySaverPolicyConfig.getAdjustBrightnessFactor(), batterySaverPolicyConfig.getAdvertiseIsEnabled(), batterySaverPolicyConfig.getDeferFullBackup(), batterySaverPolicyConfig.getDeferKeyValueBackup(), batterySaverPolicyConfig.getDisableAnimation(), batterySaverPolicyConfig.getDisableAod(), batterySaverPolicyConfig.getDisableLaunchBoost(), batterySaverPolicyConfig.getDisableOptionalSensors(), batterySaverPolicyConfig.getDisableVibration(), batterySaverPolicyConfig.getEnableAdjustBrightness(), batterySaverPolicyConfig.getEnableDataSaver(), batterySaverPolicyConfig.getEnableFirewall(), batterySaverPolicyConfig.getEnableNightMode(), batterySaverPolicyConfig.getEnableQuickDoze(), batterySaverPolicyConfig.getForceAllAppsStandby(), batterySaverPolicyConfig.getForceBackgroundCheck(), batterySaverPolicyConfig.getLocationMode(), batterySaverPolicyConfig.getSoundTriggerMode());
+            return new Policy(
+                    batterySaverPolicyConfig.getAdjustBrightnessFactor(),
+                    batterySaverPolicyConfig.getAdvertiseIsEnabled(),
+                    batterySaverPolicyConfig.getDeferFullBackup(),
+                    batterySaverPolicyConfig.getDeferKeyValueBackup(),
+                    batterySaverPolicyConfig.getDisableAnimation(),
+                    batterySaverPolicyConfig.getDisableAod(),
+                    batterySaverPolicyConfig.getDisableLaunchBoost(),
+                    batterySaverPolicyConfig.getDisableOptionalSensors(),
+                    batterySaverPolicyConfig.getDisableVibration(),
+                    batterySaverPolicyConfig.getEnableAdjustBrightness(),
+                    batterySaverPolicyConfig.getEnableDataSaver(),
+                    batterySaverPolicyConfig.getEnableFirewall(),
+                    batterySaverPolicyConfig.getEnableNightMode(),
+                    batterySaverPolicyConfig.getEnableQuickDoze(),
+                    batterySaverPolicyConfig.getForceAllAppsStandby(),
+                    batterySaverPolicyConfig.getForceBackgroundCheck(),
+                    batterySaverPolicyConfig.getLocationMode(),
+                    batterySaverPolicyConfig.getSoundTriggerMode());
         }
 
-        public static Policy fromSettings(String str, String str2, DeviceConfig.Properties properties, String str3) {
+        public static Policy fromSettings(
+                String str, String str2, DeviceConfig.Properties properties, String str3) {
             return fromSettings(str, str2, properties, str3, BatterySaverPolicy.OFF_POLICY);
         }
 
-        public static Policy fromSettings(String str, String str2, DeviceConfig.Properties properties, String str3, Policy policy) {
-            UserSettingDeviceConfigMediator$SettingsOverridesIndividualMediator userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator = new UserSettingDeviceConfigMediator$SettingsOverridesIndividualMediator();
+        public static Policy fromSettings(
+                String str,
+                String str2,
+                DeviceConfig.Properties properties,
+                String str3,
+                Policy policy) {
+            UserSettingDeviceConfigMediator$SettingsOverridesIndividualMediator
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator =
+                            new UserSettingDeviceConfigMediator$SettingsOverridesIndividualMediator();
             String emptyIfNull = TextUtils.emptyIfNull(str3);
             try {
-                userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mSettingsParser.setString(str2);
+                userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mSettingsParser
+                        .setString(str2);
             } catch (IllegalArgumentException unused) {
-                String m = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Bad device specific battery saver constants: ", str2);
+                String m =
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                "Bad device specific battery saver constants: ", str2);
                 int i = Slog.$r8$clinit;
                 android.util.Slog.wtf("BatterySaverPolicy", m);
             }
             try {
-                userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mSettingsParser.setString(str);
-                userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mProperties = properties;
+                userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mSettingsParser
+                        .setString(str);
+                userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mProperties =
+                        properties;
             } catch (IllegalArgumentException unused2) {
-                String m2 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Bad battery saver constants: ", str);
+                String m2 =
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                "Bad battery saver constants: ", str);
                 int i2 = Slog.$r8$clinit;
                 android.util.Slog.wtf("BatterySaverPolicy", m2);
             }
-            float f = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getFloat(policy.adjustBrightnessFactor, ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_ADJUST_BRIGHTNESS_FACTOR, emptyIfNull));
-            boolean z = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_ADVERTISE_IS_ENABLED, emptyIfNull), policy.advertiseIsEnabled);
-            boolean z2 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_DEFER_FULL_BACKUP, emptyIfNull), policy.deferFullBackup);
-            boolean z3 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_DEFER_KEYVALUE_BACKUP, emptyIfNull), policy.deferKeyValueBackup);
-            boolean z4 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_DISABLE_ANIMATION, emptyIfNull), policy.disableAnimation);
-            boolean z5 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_DISABLE_AOD, emptyIfNull), policy.disableAod);
-            boolean z6 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_DISABLE_LAUNCH_BOOST, emptyIfNull), policy.disableLaunchBoost);
-            boolean z7 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_DISABLE_OPTIONAL_SENSORS, emptyIfNull), policy.disableOptionalSensors);
-            boolean z8 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_DISABLE_VIBRATION, emptyIfNull), policy.disableVibration);
-            boolean z9 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_ENABLE_BRIGHTNESS_ADJUSTMENT, emptyIfNull), policy.enableAdjustBrightness);
-            boolean z10 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_ENABLE_DATASAVER, emptyIfNull), policy.enableDataSaver);
-            boolean z11 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_ENABLE_FIREWALL, emptyIfNull), policy.enableFirewall);
-            boolean z12 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_ENABLE_NIGHT_MODE, emptyIfNull), policy.enableNightMode);
-            boolean z13 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_ENABLE_QUICK_DOZE, emptyIfNull), policy.enableQuickDoze);
-            boolean z14 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_FORCE_ALL_APPS_STANDBY, emptyIfNull), policy.forceAllAppsStandby);
-            boolean z15 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_FORCE_BACKGROUND_CHECK, emptyIfNull), policy.forceBackgroundCheck);
-            String m3 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_LOCATION_MODE, emptyIfNull);
-            KeyValueListParser keyValueListParser = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mSettingsParser;
-            DeviceConfig.Properties properties2 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mProperties;
+            float f =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getFloat(
+                            policy.adjustBrightnessFactor,
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_ADJUST_BRIGHTNESS_FACTOR, emptyIfNull));
+            boolean z =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_ADVERTISE_IS_ENABLED, emptyIfNull),
+                            policy.advertiseIsEnabled);
+            boolean z2 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_DEFER_FULL_BACKUP, emptyIfNull),
+                            policy.deferFullBackup);
+            boolean z3 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_DEFER_KEYVALUE_BACKUP, emptyIfNull),
+                            policy.deferKeyValueBackup);
+            boolean z4 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_DISABLE_ANIMATION, emptyIfNull),
+                            policy.disableAnimation);
+            boolean z5 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_DISABLE_AOD, emptyIfNull),
+                            policy.disableAod);
+            boolean z6 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_DISABLE_LAUNCH_BOOST, emptyIfNull),
+                            policy.disableLaunchBoost);
+            boolean z7 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_DISABLE_OPTIONAL_SENSORS, emptyIfNull),
+                            policy.disableOptionalSensors);
+            boolean z8 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_DISABLE_VIBRATION, emptyIfNull),
+                            policy.disableVibration);
+            boolean z9 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_ENABLE_BRIGHTNESS_ADJUSTMENT,
+                                    emptyIfNull),
+                            policy.enableAdjustBrightness);
+            boolean z10 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_ENABLE_DATASAVER, emptyIfNull),
+                            policy.enableDataSaver);
+            boolean z11 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_ENABLE_FIREWALL, emptyIfNull),
+                            policy.enableFirewall);
+            boolean z12 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_ENABLE_NIGHT_MODE, emptyIfNull),
+                            policy.enableNightMode);
+            boolean z13 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_ENABLE_QUICK_DOZE, emptyIfNull),
+                            policy.enableQuickDoze);
+            boolean z14 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_FORCE_ALL_APPS_STANDBY, emptyIfNull),
+                            policy.forceAllAppsStandby);
+            boolean z15 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.getBoolean(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    BatterySaverPolicy.KEY_FORCE_BACKGROUND_CHECK, emptyIfNull),
+                            policy.forceBackgroundCheck);
+            String m3 =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            BatterySaverPolicy.KEY_LOCATION_MODE, emptyIfNull);
+            KeyValueListParser keyValueListParser =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator
+                            .mSettingsParser;
+            DeviceConfig.Properties properties2 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mProperties;
             int i3 = policy.locationMode;
             if (properties2 != null) {
                 i3 = properties2.getInt(m3, i3);
             }
             int i4 = keyValueListParser.getInt(m3, i3);
-            String m4 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(BatterySaverPolicy.KEY_SOUNDTRIGGER_MODE, emptyIfNull);
-            KeyValueListParser keyValueListParser2 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mSettingsParser;
-            DeviceConfig.Properties properties3 = userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mProperties;
+            String m4 =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            BatterySaverPolicy.KEY_SOUNDTRIGGER_MODE, emptyIfNull);
+            KeyValueListParser keyValueListParser2 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator
+                            .mSettingsParser;
+            DeviceConfig.Properties properties3 =
+                    userSettingDeviceConfigMediator$SettingsOverridesIndividualMediator.mProperties;
             int i5 = policy.soundTriggerMode;
             if (properties3 != null) {
                 i5 = properties3.getInt(m4, i5);
             }
-            return new Policy(f, z, z2, z3, z4, z5, z6, z7, z8, z9, z10, z11, z12, z13, z14, z15, i4, keyValueListParser2.getInt(m4, i5));
+            return new Policy(
+                    f,
+                    z,
+                    z2,
+                    z3,
+                    z4,
+                    z5,
+                    z6,
+                    z7,
+                    z8,
+                    z9,
+                    z10,
+                    z11,
+                    z12,
+                    z13,
+                    z14,
+                    z15,
+                    i4,
+                    keyValueListParser2.getInt(m4, i5));
         }
 
         public final boolean equals(Object obj) {
@@ -204,7 +369,24 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
                 return false;
             }
             Policy policy = (Policy) obj;
-            return Float.compare(policy.adjustBrightnessFactor, this.adjustBrightnessFactor) == 0 && this.advertiseIsEnabled == policy.advertiseIsEnabled && this.deferFullBackup == policy.deferFullBackup && this.deferKeyValueBackup == policy.deferKeyValueBackup && this.disableAnimation == policy.disableAnimation && this.disableAod == policy.disableAod && this.disableLaunchBoost == policy.disableLaunchBoost && this.disableOptionalSensors == policy.disableOptionalSensors && this.disableVibration == policy.disableVibration && this.enableAdjustBrightness == policy.enableAdjustBrightness && this.enableDataSaver == policy.enableDataSaver && this.enableFirewall == policy.enableFirewall && this.enableNightMode == policy.enableNightMode && this.enableQuickDoze == policy.enableQuickDoze && this.forceAllAppsStandby == policy.forceAllAppsStandby && this.forceBackgroundCheck == policy.forceBackgroundCheck && this.locationMode == policy.locationMode && this.soundTriggerMode == policy.soundTriggerMode;
+            return Float.compare(policy.adjustBrightnessFactor, this.adjustBrightnessFactor) == 0
+                    && this.advertiseIsEnabled == policy.advertiseIsEnabled
+                    && this.deferFullBackup == policy.deferFullBackup
+                    && this.deferKeyValueBackup == policy.deferKeyValueBackup
+                    && this.disableAnimation == policy.disableAnimation
+                    && this.disableAod == policy.disableAod
+                    && this.disableLaunchBoost == policy.disableLaunchBoost
+                    && this.disableOptionalSensors == policy.disableOptionalSensors
+                    && this.disableVibration == policy.disableVibration
+                    && this.enableAdjustBrightness == policy.enableAdjustBrightness
+                    && this.enableDataSaver == policy.enableDataSaver
+                    && this.enableFirewall == policy.enableFirewall
+                    && this.enableNightMode == policy.enableNightMode
+                    && this.enableQuickDoze == policy.enableQuickDoze
+                    && this.forceAllAppsStandby == policy.forceAllAppsStandby
+                    && this.forceBackgroundCheck == policy.forceBackgroundCheck
+                    && this.locationMode == policy.locationMode
+                    && this.soundTriggerMode == policy.soundTriggerMode;
         }
 
         public final int hashCode() {
@@ -234,7 +416,9 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
             synchronized (BatterySaverPolicy.this.mLock) {
                 try {
                     if (this.mValue != z) {
-                        Slog.d("BatterySaverPolicy", this.mDebugName + " changed to " + z + ", updating policy.");
+                        Slog.d(
+                                "BatterySaverPolicy",
+                                this.mDebugName + " changed to " + z + ", updating policy.");
                         this.mValue = z;
                         BatterySaverPolicy.this.updatePolicyDependenciesLocked();
                         BatterySaverPolicy.this.maybeNotifyListenersOfPolicyChange();
@@ -247,7 +431,10 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
     }
 
     static {
-        Policy policy = new Policy(1.0f, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 0, 0);
+        Policy policy =
+                new Policy(
+                        1.0f, false, false, false, false, false, false, false, false, false, false,
+                        false, false, false, false, false, 0, 0);
         OFF_POLICY = policy;
         DEFAULT_ADAPTIVE_POLICY = policy;
     }
@@ -262,11 +449,14 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
         this.mAdaptivePolicy = policy;
         this.mEffectivePolicyRaw = OFF_POLICY;
         this.mPolicyLevel = 0;
-        this.mOnProjectionStateChangedListener = new UiModeManager.OnProjectionStateChangedListener() { // from class: com.android.server.power.batterysaver.BatterySaverPolicy$$ExternalSyntheticLambda1
-            public final void onProjectionStateChanged(int i, Set set) {
-                BatterySaverPolicy.this.mAutomotiveProjectionActive.update(!set.isEmpty());
-            }
-        };
+        this.mOnProjectionStateChangedListener =
+                new UiModeManager
+                        .OnProjectionStateChangedListener() { // from class:
+                                                              // com.android.server.power.batterysaver.BatterySaverPolicy$$ExternalSyntheticLambda1
+                    public final void onProjectionStateChanged(int i, Set set) {
+                        BatterySaverPolicy.this.mAutomotiveProjectionActive.update(!set.isEmpty());
+                    }
+                };
         this.mListeners = new ArrayList();
         this.mLock = obj;
         this.mHandler = BackgroundThread.getHandler();
@@ -274,24 +464,112 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
         this.mContentResolver = context.getContentResolver();
         this.mBatterySavingStats = batterySavingStats;
         Resources resources = context.getResources();
-        Policy policy2 = new Policy(0.9f, true, resources.getBoolean(R.bool.config_batterySaver_full_disableAod), resources.getBoolean(R.bool.config_batterySaver_full_disableLaunchBoost), resources.getBoolean(R.bool.config_batterySaver_full_disableOptionalSensors), resources.getBoolean(R.bool.config_batterySaver_full_disableVibration), resources.getBoolean(R.bool.config_batterySaver_full_enableAdjustBrightness), resources.getBoolean(R.bool.config_batterySaver_full_enableDataSaver), resources.getBoolean(R.bool.config_batterySaver_full_enableFirewall), true, resources.getBoolean(R.bool.config_batterySaver_full_enableQuickDoze), resources.getBoolean(R.bool.config_batterySaver_full_forceAllAppsStandby), false, resources.getBoolean(R.bool.config_batterySdCardAccessibility), resources.getBoolean(R.bool.config_batteryStatsResetOnUnplugAfterSignificantCharge), resources.getBoolean(R.bool.config_batteryStatsResetOnUnplugHighBatteryLevel), 1, resources.getInteger(R.integer.config_criticalBatteryWarningLevel));
+        Policy policy2 =
+                new Policy(
+                        0.9f,
+                        true,
+                        resources.getBoolean(R.bool.config_batterySaver_full_disableAod),
+                        resources.getBoolean(R.bool.config_batterySaver_full_disableLaunchBoost),
+                        resources.getBoolean(
+                                R.bool.config_batterySaver_full_disableOptionalSensors),
+                        resources.getBoolean(R.bool.config_batterySaver_full_disableVibration),
+                        resources.getBoolean(
+                                R.bool.config_batterySaver_full_enableAdjustBrightness),
+                        resources.getBoolean(R.bool.config_batterySaver_full_enableDataSaver),
+                        resources.getBoolean(R.bool.config_batterySaver_full_enableFirewall),
+                        true,
+                        resources.getBoolean(R.bool.config_batterySaver_full_enableQuickDoze),
+                        resources.getBoolean(R.bool.config_batterySaver_full_forceAllAppsStandby),
+                        false,
+                        resources.getBoolean(R.bool.config_batterySdCardAccessibility),
+                        resources.getBoolean(
+                                R.bool.config_batteryStatsResetOnUnplugAfterSignificantCharge),
+                        resources.getBoolean(
+                                R.bool.config_batteryStatsResetOnUnplugHighBatteryLevel),
+                        1,
+                        resources.getInteger(R.integer.config_criticalBatteryWarningLevel));
         this.DEFAULT_FULL_POLICY = policy2;
         this.mDefaultFullPolicy = policy2;
         this.mFullPolicy = policy2;
     }
 
-    public static void dumpPolicyLocked(IndentingPrintWriter indentingPrintWriter, String str, Policy policy) {
+    public static void dumpPolicyLocked(
+            IndentingPrintWriter indentingPrintWriter, String str, Policy policy) {
         indentingPrintWriter.println();
         indentingPrintWriter.println("Policy '" + str + "'");
         indentingPrintWriter.increaseIndent();
-        StringBuilder m = DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(new StringBuilder("advertise_is_enabled="), policy.advertiseIsEnabled, indentingPrintWriter, "disable_vibration="), policy.disableVibration, indentingPrintWriter, "disable_animation="), policy.disableAnimation, indentingPrintWriter, "defer_full_backup="), policy.deferFullBackup, indentingPrintWriter, "defer_keyvalue_backup="), policy.deferKeyValueBackup, indentingPrintWriter, "enable_firewall="), policy.enableFirewall, indentingPrintWriter, "enable_datasaver="), policy.enableDataSaver, indentingPrintWriter, "disable_launch_boost="), policy.disableLaunchBoost, indentingPrintWriter, "enable_brightness_adjustment="), policy.enableAdjustBrightness, indentingPrintWriter, "adjust_brightness_factor=");
+        StringBuilder m =
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        DesktopModeService$$ExternalSyntheticOutline0.m(
+                                DesktopModeService$$ExternalSyntheticOutline0.m(
+                                        DesktopModeService$$ExternalSyntheticOutline0.m(
+                                                DesktopModeService$$ExternalSyntheticOutline0.m(
+                                                        DesktopModeService$$ExternalSyntheticOutline0
+                                                                .m(
+                                                                        DesktopModeService$$ExternalSyntheticOutline0
+                                                                                .m(
+                                                                                        DesktopModeService$$ExternalSyntheticOutline0
+                                                                                                .m(
+                                                                                                        DesktopModeService$$ExternalSyntheticOutline0
+                                                                                                                .m(
+                                                                                                                        new StringBuilder(
+                                                                                                                                "advertise_is_enabled="),
+                                                                                                                        policy.advertiseIsEnabled,
+                                                                                                                        indentingPrintWriter,
+                                                                                                                        "disable_vibration="),
+                                                                                                        policy.disableVibration,
+                                                                                                        indentingPrintWriter,
+                                                                                                        "disable_animation="),
+                                                                                        policy.disableAnimation,
+                                                                                        indentingPrintWriter,
+                                                                                        "defer_full_backup="),
+                                                                        policy.deferFullBackup,
+                                                                        indentingPrintWriter,
+                                                                        "defer_keyvalue_backup="),
+                                                        policy.deferKeyValueBackup,
+                                                        indentingPrintWriter,
+                                                        "enable_firewall="),
+                                                policy.enableFirewall,
+                                                indentingPrintWriter,
+                                                "enable_datasaver="),
+                                        policy.enableDataSaver,
+                                        indentingPrintWriter,
+                                        "disable_launch_boost="),
+                                policy.disableLaunchBoost,
+                                indentingPrintWriter,
+                                "enable_brightness_adjustment="),
+                        policy.enableAdjustBrightness,
+                        indentingPrintWriter,
+                        "adjust_brightness_factor=");
         m.append(policy.adjustBrightnessFactor);
         indentingPrintWriter.println(m.toString());
         indentingPrintWriter.println("location_mode=" + policy.locationMode);
-        StringBuilder m2 = DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(new StringBuilder("force_all_apps_standby="), policy.forceAllAppsStandby, indentingPrintWriter, "force_background_check="), policy.forceBackgroundCheck, indentingPrintWriter, "disable_optional_sensors="), policy.disableOptionalSensors, indentingPrintWriter, "disable_aod="), policy.disableAod, indentingPrintWriter, "soundtrigger_mode=");
+        StringBuilder m2 =
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        DesktopModeService$$ExternalSyntheticOutline0.m(
+                                DesktopModeService$$ExternalSyntheticOutline0.m(
+                                        DesktopModeService$$ExternalSyntheticOutline0.m(
+                                                new StringBuilder("force_all_apps_standby="),
+                                                policy.forceAllAppsStandby,
+                                                indentingPrintWriter,
+                                                "force_background_check="),
+                                        policy.forceBackgroundCheck,
+                                        indentingPrintWriter,
+                                        "disable_optional_sensors="),
+                                policy.disableOptionalSensors,
+                                indentingPrintWriter,
+                                "disable_aod="),
+                        policy.disableAod,
+                        indentingPrintWriter,
+                        "soundtrigger_mode=");
         m2.append(policy.soundTriggerMode);
         indentingPrintWriter.println(m2.toString());
-        StringBuilder m3 = DesktopModeService$$ExternalSyntheticOutline0.m(new StringBuilder("enable_quick_doze="), policy.enableQuickDoze, indentingPrintWriter, "enable_night_mode=");
+        StringBuilder m3 =
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("enable_quick_doze="),
+                        policy.enableQuickDoze,
+                        indentingPrintWriter,
+                        "enable_night_mode=");
         m3.append(policy.enableNightMode);
         indentingPrintWriter.println(m3.toString());
         indentingPrintWriter.decreaseIndent();
@@ -310,7 +588,8 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
                 indentingPrintWriter.println();
                 this.mBatterySavingStats.dump(indentingPrintWriter);
                 indentingPrintWriter.println();
-                indentingPrintWriter.println("Battery saver policy (*NOTE* they only apply when battery saver is ON):");
+                indentingPrintWriter.println(
+                        "Battery saver policy (*NOTE* they only apply when battery saver is ON):");
                 indentingPrintWriter.increaseIndent();
                 indentingPrintWriter.println("Settings: battery_saver_constants");
                 indentingPrintWriter.increaseIndent();
@@ -329,16 +608,22 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
                     for (String str : keyset) {
                         indentingPrintWriter.print(str);
                         indentingPrintWriter.print(": ");
-                        indentingPrintWriter.println(this.mLastDeviceConfigProperties.getString(str, (String) null));
+                        indentingPrintWriter.println(
+                                this.mLastDeviceConfigProperties.getString(str, (String) null));
                     }
                 }
                 indentingPrintWriter.decreaseIndent();
-                indentingPrintWriter.println("mAccessibilityEnabled=" + PolicyBoolean.m830$$Nest$mget(this.mAccessibilityEnabled));
-                indentingPrintWriter.println("mAutomotiveProjectionActive=" + PolicyBoolean.m830$$Nest$mget(this.mAutomotiveProjectionActive));
+                indentingPrintWriter.println(
+                        "mAccessibilityEnabled="
+                                + PolicyBoolean.m830$$Nest$mget(this.mAccessibilityEnabled));
+                indentingPrintWriter.println(
+                        "mAutomotiveProjectionActive="
+                                + PolicyBoolean.m830$$Nest$mget(this.mAutomotiveProjectionActive));
                 indentingPrintWriter.println("mPolicyLevel=" + this.mPolicyLevel);
                 dumpPolicyLocked(indentingPrintWriter, "default full", this.mDefaultFullPolicy);
                 dumpPolicyLocked(indentingPrintWriter, "current full", this.mFullPolicy);
-                dumpPolicyLocked(indentingPrintWriter, "default adaptive", this.mDefaultAdaptivePolicy);
+                dumpPolicyLocked(
+                        indentingPrintWriter, "default adaptive", this.mDefaultAdaptivePolicy);
                 dumpPolicyLocked(indentingPrintWriter, "current adaptive", this.mAdaptivePolicy);
                 dumpPolicyLocked(indentingPrintWriter, "effective", this.mEffectivePolicyRaw);
                 indentingPrintWriter.decreaseIndent();
@@ -352,48 +637,85 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
         synchronized (this.mLock) {
             try {
                 Policy policy = this.mEffectivePolicyRaw;
-                PowerSaveState.Builder globalBatterySaverEnabled = new PowerSaveState.Builder().setGlobalBatterySaverEnabled(policy.advertiseIsEnabled);
+                PowerSaveState.Builder globalBatterySaverEnabled =
+                        new PowerSaveState.Builder()
+                                .setGlobalBatterySaverEnabled(policy.advertiseIsEnabled);
                 boolean z = true;
                 switch (i) {
                     case 1:
                         if (!policy.advertiseIsEnabled && policy.locationMode == 0) {
                             z = false;
                         }
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(z).setLocationMode(policy.locationMode).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(z)
+                                .setLocationMode(policy.locationMode)
+                                .build();
                     case 2:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.disableVibration).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.disableVibration)
+                                .build();
                     case 3:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.disableAnimation).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.disableAnimation)
+                                .build();
                     case 4:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.deferFullBackup).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.deferFullBackup)
+                                .build();
                     case 5:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.deferKeyValueBackup).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.deferKeyValueBackup)
+                                .build();
                     case 6:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.enableFirewall).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.enableFirewall)
+                                .build();
                     case 7:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.enableAdjustBrightness).setBrightnessFactor(policy.adjustBrightnessFactor).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.enableAdjustBrightness)
+                                .setBrightnessFactor(policy.adjustBrightnessFactor)
+                                .build();
                     case 8:
                         if (!policy.advertiseIsEnabled && policy.soundTriggerMode == 0) {
                             z = false;
                         }
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(z).setSoundTriggerMode(policy.soundTriggerMode).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(z)
+                                .setSoundTriggerMode(policy.soundTriggerMode)
+                                .build();
                     case 9:
                     default:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.advertiseIsEnabled).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.advertiseIsEnabled)
+                                .build();
                     case 10:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.enableDataSaver).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.enableDataSaver)
+                                .build();
                     case 11:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.forceAllAppsStandby).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.forceAllAppsStandby)
+                                .build();
                     case 12:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.forceBackgroundCheck).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.forceBackgroundCheck)
+                                .build();
                     case 13:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.disableOptionalSensors).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.disableOptionalSensors)
+                                .build();
                     case 14:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.disableAod).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.disableAod)
+                                .build();
                     case 15:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.enableQuickDoze).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.enableQuickDoze)
+                                .build();
                     case 16:
-                        return globalBatterySaverEnabled.setBatterySaverEnabled(policy.enableNightMode).build();
+                        return globalBatterySaverEnabled
+                                .setBatterySaverEnabled(policy.enableNightMode)
+                                .build();
                 }
             } catch (Throwable th) {
                 throw th;
@@ -420,21 +742,33 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
                     return;
                 }
                 List list = this.mListeners;
-                final BatterySaverPolicyListener[] batterySaverPolicyListenerArr = (BatterySaverPolicyListener[]) ((ArrayList) list).toArray(new BatterySaverPolicyListener[((ArrayList) list).size()]);
-                this.mHandler.post(new Runnable() { // from class: com.android.server.power.batterysaver.BatterySaverPolicy$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        BatterySaverPolicy batterySaverPolicy = BatterySaverPolicy.this;
-                        BatterySaverPolicy.BatterySaverPolicyListener[] batterySaverPolicyListenerArr2 = batterySaverPolicyListenerArr;
-                        batterySaverPolicy.getClass();
-                        for (BatterySaverPolicy.BatterySaverPolicyListener batterySaverPolicyListener : batterySaverPolicyListenerArr2) {
-                            BatterySaverController batterySaverController = (BatterySaverController) batterySaverPolicyListener;
-                            if (batterySaverController.isPolicyEnabled()) {
-                                batterySaverController.mHandler.postStateChanged(6, true);
+                final BatterySaverPolicyListener[] batterySaverPolicyListenerArr =
+                        (BatterySaverPolicyListener[])
+                                ((ArrayList) list)
+                                        .toArray(
+                                                new BatterySaverPolicyListener
+                                                        [((ArrayList) list).size()]);
+                this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // com.android.server.power.batterysaver.BatterySaverPolicy$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                BatterySaverPolicy batterySaverPolicy = BatterySaverPolicy.this;
+                                BatterySaverPolicy.BatterySaverPolicyListener[]
+                                        batterySaverPolicyListenerArr2 =
+                                                batterySaverPolicyListenerArr;
+                                batterySaverPolicy.getClass();
+                                for (BatterySaverPolicy.BatterySaverPolicyListener
+                                        batterySaverPolicyListener :
+                                                batterySaverPolicyListenerArr2) {
+                                    BatterySaverController batterySaverController =
+                                            (BatterySaverController) batterySaverPolicyListener;
+                                    if (batterySaverController.isPolicyEnabled()) {
+                                        batterySaverController.mHandler.postStateChanged(6, true);
+                                    }
+                                }
                             }
-                        }
-                    }
-                });
+                        });
             } catch (Throwable th) {
                 throw th;
             }
@@ -515,12 +849,16 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
             monitor-exit(r6)     // Catch: java.lang.Throwable -> L25
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.batterysaver.BatterySaverPolicy.onChange(boolean, android.net.Uri):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.batterysaver.BatterySaverPolicy.onChange(boolean,"
+                    + " android.net.Uri):void");
     }
 
     public final void onPropertiesChanged(DeviceConfig.Properties properties) {
         boolean maybeUpdateDefaultFullPolicy;
-        this.mLastDeviceConfigProperties = DeviceConfig.getProperties("battery_saver", new String[0]);
+        this.mLastDeviceConfigProperties =
+                DeviceConfig.getProperties("battery_saver", new String[0]);
         synchronized (this.mLock) {
             try {
                 Policy policy = null;
@@ -529,14 +867,27 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
                     if (str != null) {
                         if (str.endsWith("_adaptive")) {
                             if (policy2 == null) {
-                                policy2 = Policy.fromSettings("", "", this.mLastDeviceConfigProperties, "_adaptive", DEFAULT_ADAPTIVE_POLICY);
+                                policy2 =
+                                        Policy.fromSettings(
+                                                "",
+                                                "",
+                                                this.mLastDeviceConfigProperties,
+                                                "_adaptive",
+                                                DEFAULT_ADAPTIVE_POLICY);
                             }
                         } else if (policy == null) {
-                            policy = Policy.fromSettings(this.mSettings, this.mDeviceSpecificSettings, this.mLastDeviceConfigProperties, null, this.DEFAULT_FULL_POLICY);
+                            policy =
+                                    Policy.fromSettings(
+                                            this.mSettings,
+                                            this.mDeviceSpecificSettings,
+                                            this.mLastDeviceConfigProperties,
+                                            null,
+                                            this.DEFAULT_FULL_POLICY);
                         }
                     }
                 }
-                maybeUpdateDefaultFullPolicy = policy != null ? maybeUpdateDefaultFullPolicy(policy) : false;
+                maybeUpdateDefaultFullPolicy =
+                        policy != null ? maybeUpdateDefaultFullPolicy(policy) : false;
                 if (policy2 != null && !this.mAdaptivePolicy.equals(policy2)) {
                     this.mDefaultAdaptivePolicy = policy2;
                     this.mAdaptivePolicy = policy2;
@@ -568,7 +919,8 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
                     return true;
                 }
                 int i3 = Slog.$r8$clinit;
-                android.util.Slog.wtf("BatterySaverPolicy", "setPolicyLevel invalid level given: " + i);
+                android.util.Slog.wtf(
+                        "BatterySaverPolicy", "setPolicyLevel invalid level given: " + i);
                 return false;
             } catch (Throwable th) {
                 throw th;
@@ -587,13 +939,27 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
     public boolean updateConstantsLocked(String str, String str2) {
         String emptyIfNull = TextUtils.emptyIfNull(str);
         String emptyIfNull2 = TextUtils.emptyIfNull(str2);
-        if (emptyIfNull.equals(this.mSettings) && emptyIfNull2.equals(this.mDeviceSpecificSettings)) {
+        if (emptyIfNull.equals(this.mSettings)
+                && emptyIfNull2.equals(this.mDeviceSpecificSettings)) {
             return false;
         }
         this.mSettings = emptyIfNull;
         this.mDeviceSpecificSettings = emptyIfNull2;
-        boolean maybeUpdateDefaultFullPolicy = maybeUpdateDefaultFullPolicy(Policy.fromSettings(emptyIfNull, emptyIfNull2, this.mLastDeviceConfigProperties, null, this.DEFAULT_FULL_POLICY));
-        Policy fromSettings = Policy.fromSettings("", "", this.mLastDeviceConfigProperties, "_adaptive", DEFAULT_ADAPTIVE_POLICY);
+        boolean maybeUpdateDefaultFullPolicy =
+                maybeUpdateDefaultFullPolicy(
+                        Policy.fromSettings(
+                                emptyIfNull,
+                                emptyIfNull2,
+                                this.mLastDeviceConfigProperties,
+                                null,
+                                this.DEFAULT_FULL_POLICY));
+        Policy fromSettings =
+                Policy.fromSettings(
+                        "",
+                        "",
+                        this.mLastDeviceConfigProperties,
+                        "_adaptive",
+                        DEFAULT_ADAPTIVE_POLICY);
         this.mDefaultAdaptivePolicy = fromSettings;
         if (this.mPolicyLevel == 1 && !this.mAdaptivePolicy.equals(fromSettings)) {
             maybeUpdateDefaultFullPolicy = true;
@@ -604,9 +970,9 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x0022, code lost:
-    
-        if (r3 != 3) goto L15;
-     */
+
+       if (r3 != 3) goto L15;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -616,6 +982,8 @@ public final class BatterySaverPolicy extends ContentObserver implements DeviceC
             Method dump skipped, instructions count: 297
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.batterysaver.BatterySaverPolicy.updatePolicyDependenciesLocked():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.batterysaver.BatterySaverPolicy.updatePolicyDependenciesLocked():void");
     }
 }

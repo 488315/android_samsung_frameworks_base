@@ -2,8 +2,10 @@ package android.content.pm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.modules.utils.TypedXmlSerializer;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,19 +20,20 @@ import java.util.Arrays;
 
 /* loaded from: classes.dex */
 public class Signature implements Parcelable {
-    public static final Parcelable.Creator<Signature> CREATOR = new Parcelable.Creator<Signature>() { // from class: android.content.pm.Signature.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Signature createFromParcel(Parcel source) {
-            return new Signature(source);
-        }
+    public static final Parcelable.Creator<Signature> CREATOR =
+            new Parcelable.Creator<Signature>() { // from class: android.content.pm.Signature.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Signature createFromParcel(Parcel source) {
+                    return new Signature(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Signature[] newArray(int size) {
-            return new Signature[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Signature[] newArray(int size) {
+                    return new Signature[size];
+                }
+            };
     private Certificate[] mCertificateChain;
     private int mFlags;
     private int mHashCode;
@@ -46,7 +49,9 @@ public class Signature implements Parcelable {
     public Signature(Certificate[] certificateChain) throws CertificateEncodingException {
         this.mSignature = certificateChain[0].getEncoded();
         if (certificateChain.length > 1) {
-            this.mCertificateChain = (Certificate[]) Arrays.copyOfRange(certificateChain, 1, certificateChain.length);
+            this.mCertificateChain =
+                    (Certificate[])
+                            Arrays.copyOfRange(certificateChain, 1, certificateChain.length);
         }
     }
 
@@ -88,7 +93,10 @@ public class Signature implements Parcelable {
         this.mSignature = (byte[]) other.mSignature.clone();
         Certificate[] otherCertificateChain = other.mCertificateChain;
         if (otherCertificateChain != null && otherCertificateChain.length > 1) {
-            this.mCertificateChain = (Certificate[]) Arrays.copyOfRange(otherCertificateChain, 1, otherCertificateChain.length);
+            this.mCertificateChain =
+                    (Certificate[])
+                            Arrays.copyOfRange(
+                                    otherCertificateChain, 1, otherCertificateChain.length);
         }
         this.mFlags = other.mFlags;
     }
@@ -109,7 +117,8 @@ public class Signature implements Parcelable {
         byte[] sig = this.mSignature;
         int N = sig.length;
         int N2 = N * 2;
-        char[] text = (existingArray == null || N2 > existingArray.length) ? new char[N2] : existingArray;
+        char[] text =
+                (existingArray == null || N2 > existingArray.length) ? new char[N2] : existingArray;
         for (int j = 0; j < N; j++) {
             byte v = sig[j];
             int d = (v >> 4) & 15;
@@ -148,7 +157,7 @@ public class Signature implements Parcelable {
 
     public Signature[] getChainSignatures() throws CertificateEncodingException {
         if (this.mCertificateChain == null) {
-            return new Signature[]{this};
+            return new Signature[] {this};
         }
         Signature[] chain = new Signature[this.mCertificateChain.length + 1];
         int i = 0;
@@ -200,7 +209,8 @@ public class Signature implements Parcelable {
         dest.writeByteArray(this.mSignature);
     }
 
-    public void writeToXmlAttributeBytesHex(TypedXmlSerializer out, String namespace, String name) throws IOException {
+    public void writeToXmlAttributeBytesHex(TypedXmlSerializer out, String namespace, String name)
+            throws IOException {
         out.attributeBytesHex(namespace, name, this.mSignature);
     }
 
@@ -217,14 +227,18 @@ public class Signature implements Parcelable {
     }
 
     static boolean areExactArraysMatch(Signature[] a, Signature[] b) {
-        return ArrayUtils.size(a) == ArrayUtils.size(b) && ArrayUtils.containsAll(a, b) && ArrayUtils.containsAll(b, a);
+        return ArrayUtils.size(a) == ArrayUtils.size(b)
+                && ArrayUtils.containsAll(a, b)
+                && ArrayUtils.containsAll(b, a);
     }
 
-    public static boolean areEffectiveMatch(SigningDetails a, SigningDetails b) throws CertificateException {
+    public static boolean areEffectiveMatch(SigningDetails a, SigningDetails b)
+            throws CertificateException {
         return areEffectiveArraysMatch(a.getSignatures(), b.getSignatures());
     }
 
-    static boolean areEffectiveArraysMatch(Signature[] a, Signature[] b) throws CertificateException {
+    static boolean areEffectiveArraysMatch(Signature[] a, Signature[] b)
+            throws CertificateException {
         CertificateFactory cf = CertificateFactory.getInstance("X.509");
         Signature[] aPrime = new Signature[a.length];
         for (int i = 0; i < a.length; i++) {
@@ -250,7 +264,11 @@ public class Signature implements Parcelable {
         X509Certificate cert = (X509Certificate) cf.generateCertificate(is);
         Signature sPrime = new Signature(cert.getEncoded());
         if (Math.abs(sPrime.mSignature.length - s.mSignature.length) > 2) {
-            throw new CertificateException("Bounced cert length looks fishy; before " + s.mSignature.length + ", after " + sPrime.mSignature.length);
+            throw new CertificateException(
+                    "Bounced cert length looks fishy; before "
+                            + s.mSignature.length
+                            + ", after "
+                            + sPrime.mSignature.length);
         }
         return sPrime;
     }

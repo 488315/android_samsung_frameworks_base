@@ -9,20 +9,20 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IRemoteLockscreenValidationCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.remotelockscreenvalidation.IRemoteLockscreenValidationCallback";
+    public static final String DESCRIPTOR =
+            "android.service.remotelockscreenvalidation.IRemoteLockscreenValidationCallback";
 
     void onFailure(String str) throws RemoteException;
 
-    void onSuccess(RemoteLockscreenValidationResult remoteLockscreenValidationResult) throws RemoteException;
+    void onSuccess(RemoteLockscreenValidationResult remoteLockscreenValidationResult)
+            throws RemoteException;
 
     public static class Default implements IRemoteLockscreenValidationCallback {
         @Override // android.service.remotelockscreenvalidation.IRemoteLockscreenValidationCallback
-        public void onSuccess(RemoteLockscreenValidationResult result) throws RemoteException {
-        }
+        public void onSuccess(RemoteLockscreenValidationResult result) throws RemoteException {}
 
         @Override // android.service.remotelockscreenvalidation.IRemoteLockscreenValidationCallback
-        public void onFailure(String message) throws RemoteException {
-        }
+        public void onFailure(String message) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,8 @@ public interface IRemoteLockscreenValidationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteLockscreenValidationCallback {
+    public abstract static class Stub extends Binder
+            implements IRemoteLockscreenValidationCallback {
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -42,7 +43,8 @@ public interface IRemoteLockscreenValidationCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IRemoteLockscreenValidationCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IRemoteLockscreenValidationCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof IRemoteLockscreenValidationCallback)) {
                 return (IRemoteLockscreenValidationCallback) iin;
             }
@@ -71,7 +73,8 @@ public interface IRemoteLockscreenValidationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteLockscreenValidationCallback.DESCRIPTOR);
             }
@@ -81,7 +84,9 @@ public interface IRemoteLockscreenValidationCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RemoteLockscreenValidationResult _arg0 = (RemoteLockscreenValidationResult) data.readTypedObject(RemoteLockscreenValidationResult.CREATOR);
+                    RemoteLockscreenValidationResult _arg0 =
+                            (RemoteLockscreenValidationResult)
+                                    data.readTypedObject(RemoteLockscreenValidationResult.CREATOR);
                     data.enforceNoDataAvail();
                     onSuccess(_arg0);
                     return true;

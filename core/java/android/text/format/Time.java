@@ -2,11 +2,13 @@ package android.text.format;
 
 import android.app.settings.SettingsEnums;
 import android.util.TimeFormatException;
+
 import com.android.i18n.timezone.WallTime;
 import com.android.i18n.timezone.ZoneInfoData;
 import com.android.i18n.timezone.ZoneInfoDb;
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.content.NativeLibraryHelper;
+
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -178,7 +180,8 @@ public class Time {
     private boolean parseInternal(String s) {
         int len = s.length();
         if (len < 8) {
-            throw new TimeFormatException("String is too short: \"" + s + "\" Expected at least 8 characters.");
+            throw new TimeFormatException(
+                    "String is too short: \"" + s + "\" Expected at least 8 characters.");
         }
         boolean inUtc = false;
         int n = getChar(s, 0, 1000);
@@ -189,7 +192,11 @@ public class Time {
         this.monthDay = n3 + getChar(s, 7, 1);
         if (len > 8) {
             if (len < 15) {
-                throw new TimeFormatException("String is too short: \"" + s + "\" If there are more than 8 characters there must be at least 15.");
+                throw new TimeFormatException(
+                        "String is too short: \""
+                                + s
+                                + "\" If there are more than 8 characters there must be at least"
+                                + " 15.");
             }
             checkChar(s, 8, 'T');
             this.allDay = false;
@@ -219,7 +226,13 @@ public class Time {
     private void checkChar(String s, int spos, char expected) {
         char c = s.charAt(spos);
         if (c != expected) {
-            throw new TimeFormatException(String.format("Unexpected character 0x%02d at pos=%d.  Expected 0x%02d ('%c').", Integer.valueOf(c), Integer.valueOf(spos), Integer.valueOf(expected), Character.valueOf(expected)));
+            throw new TimeFormatException(
+                    String.format(
+                            "Unexpected character 0x%02d at pos=%d.  Expected 0x%02d ('%c').",
+                            Integer.valueOf(c),
+                            Integer.valueOf(spos),
+                            Integer.valueOf(expected),
+                            Character.valueOf(expected)));
         }
     }
 
@@ -290,7 +303,11 @@ public class Time {
                         offset = 0;
                         break;
                     default:
-                        throw new TimeFormatException(String.format("Unexpected character 0x%02d at position %d.  Expected + or -", Integer.valueOf(c), Integer.valueOf(tzIndex)));
+                        throw new TimeFormatException(
+                                String.format(
+                                        "Unexpected character 0x%02d at position %d.  Expected + or"
+                                            + " -",
+                                        Integer.valueOf(c), Integer.valueOf(tzIndex)));
                 }
                 inUtc = true;
                 if (offset != 0) {
@@ -301,7 +318,10 @@ public class Time {
                         int n9 = tzIndex + 5;
                         minute += (n8 + getChar(s, n9, 1)) * offset;
                     } else {
-                        throw new TimeFormatException(String.format("Unexpected length; should be %d characters", Integer.valueOf(tzIndex + 6)));
+                        throw new TimeFormatException(
+                                String.format(
+                                        "Unexpected length; should be %d characters",
+                                        Integer.valueOf(tzIndex + 6)));
                     }
                 }
             }
@@ -422,7 +442,13 @@ public class Time {
         int offset = (int) Math.abs(this.gmtoff);
         int minutes = (offset % 3600) / 60;
         int hours = offset / 3600;
-        return String.format(Locale.US, "%s%s%02d:%02d", base, sign, Integer.valueOf(hours), Integer.valueOf(minutes));
+        return String.format(
+                Locale.US,
+                "%s%s%02d:%02d",
+                base,
+                sign,
+                Integer.valueOf(hours),
+                Integer.valueOf(minutes));
     }
 
     public static boolean isEpoch(Time time) {
@@ -567,7 +593,20 @@ public class Time {
         }
 
         public String toStringInternal() {
-            return String.format("%04d%02d%02dT%02d%02d%02d%s(%d,%d,%d,%d,%d)", Integer.valueOf(this.wallTime.getYear()), Integer.valueOf(this.wallTime.getMonth() + 1), Integer.valueOf(this.wallTime.getMonthDay()), Integer.valueOf(this.wallTime.getHour()), Integer.valueOf(this.wallTime.getMinute()), Integer.valueOf(this.wallTime.getSecond()), this.timezone, Integer.valueOf(this.wallTime.getWeekDay()), Integer.valueOf(this.wallTime.getYearDay()), Integer.valueOf(this.wallTime.getGmtOffset()), Integer.valueOf(this.wallTime.getIsDst()), Long.valueOf(toMillis(false) / 1000));
+            return String.format(
+                    "%04d%02d%02dT%02d%02d%02d%s(%d,%d,%d,%d,%d)",
+                    Integer.valueOf(this.wallTime.getYear()),
+                    Integer.valueOf(this.wallTime.getMonth() + 1),
+                    Integer.valueOf(this.wallTime.getMonthDay()),
+                    Integer.valueOf(this.wallTime.getHour()),
+                    Integer.valueOf(this.wallTime.getMinute()),
+                    Integer.valueOf(this.wallTime.getSecond()),
+                    this.timezone,
+                    Integer.valueOf(this.wallTime.getWeekDay()),
+                    Integer.valueOf(this.wallTime.getYearDay()),
+                    Integer.valueOf(this.wallTime.getGmtOffset()),
+                    Integer.valueOf(this.wallTime.getIsDst()),
+                    Long.valueOf(toMillis(false) / 1000));
         }
 
         public static int compare(TimeCalculator aObject, TimeCalculator bObject) {

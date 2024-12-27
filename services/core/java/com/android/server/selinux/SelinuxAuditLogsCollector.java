@@ -1,6 +1,7 @@
 package com.android.server.selinux;
 
 import android.util.Log;
+
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
@@ -10,7 +11,8 @@ import java.util.regex.Pattern;
 /* loaded from: classes2.dex */
 public final class SelinuxAuditLogsCollector {
     public static final boolean DEBUG = Log.isLoggable("SelinuxAuditLogs", 3);
-    static final Matcher SELINUX_MATCHER = Pattern.compile("^.*\\bavc:\\s+(?<denial>.*)$").matcher("");
+    static final Matcher SELINUX_MATCHER =
+            Pattern.compile("^.*\\bavc:\\s+(?<denial>.*)$").matcher("");
     public final QuotaLimiter mQuotaLimiter;
     public final RateLimiter mRateLimiter;
     Instant mLastWrite = Instant.MIN;

@@ -1,6 +1,7 @@
 package android.filterfw.core;
 
 import android.graphics.Bitmap;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes.dex */
@@ -163,7 +164,8 @@ public abstract class Frame {
     }
 
     protected void setGenericObjectValue(Object value) {
-        throw new RuntimeException("Cannot set object value of unsupported type: " + value.getClass());
+        throw new RuntimeException(
+                "Cannot set object value of unsupported type: " + value.getClass());
     }
 
     protected static Bitmap convertBitmapToRGBA(Bitmap bitmap) {
@@ -186,11 +188,9 @@ public abstract class Frame {
         this.mRefCount = 1;
     }
 
-    protected void onFrameStore() {
-    }
+    protected void onFrameStore() {}
 
-    protected void onFrameFetch() {
-    }
+    protected void onFrameFetch() {}
 
     final int incRefCount() {
         this.mRefCount++;

@@ -11,19 +11,22 @@ import android.view.View;
 
 /* loaded from: classes4.dex */
 public class SemRemoteViewsBasicAnimation extends SemRemoteViewsAnimation {
-    public static final Parcelable.Creator<SemRemoteViewsBasicAnimation> CREATOR = new Parcelable.Creator<SemRemoteViewsBasicAnimation>() { // from class: android.widget.SemRemoteViewsBasicAnimation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemRemoteViewsBasicAnimation createFromParcel(Parcel in) {
-            return new SemRemoteViewsBasicAnimation(in);
-        }
+    public static final Parcelable.Creator<SemRemoteViewsBasicAnimation> CREATOR =
+            new Parcelable.Creator<
+                    SemRemoteViewsBasicAnimation>() { // from class:
+                                                      // android.widget.SemRemoteViewsBasicAnimation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemRemoteViewsBasicAnimation createFromParcel(Parcel in) {
+                    return new SemRemoteViewsBasicAnimation(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemRemoteViewsBasicAnimation[] newArray(int size) {
-            return new SemRemoteViewsBasicAnimation[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemRemoteViewsBasicAnimation[] newArray(int size) {
+                    return new SemRemoteViewsBasicAnimation[size];
+                }
+            };
     private static final String LOG_TAG = "SemRemoteViewsBasicAnimation";
     public static final String TYPE_TEXT_SWITCHER = "text_switcher";
     private static final String TYPE_UNKNOWN = "unknown";
@@ -67,7 +70,9 @@ public class SemRemoteViewsBasicAnimation extends SemRemoteViewsAnimation {
         View targetView;
         char c;
         String text;
-        if (this.mIsExpired || root == null || (targetView = root.findViewById(this.mViewId)) == null) {
+        if (this.mIsExpired
+                || root == null
+                || (targetView = root.findViewById(this.mViewId)) == null) {
             return;
         }
         String str = this.mAnimationType;
@@ -83,7 +88,8 @@ public class SemRemoteViewsBasicAnimation extends SemRemoteViewsAnimation {
         }
         switch (c) {
             case 0:
-                if ((targetView instanceof TextView) && (text = this.mExtras.getString("new_text")) != null) {
+                if ((targetView instanceof TextView)
+                        && (text = this.mExtras.getString("new_text")) != null) {
                     animateTextSwitcher((TextView) targetView, text);
                     break;
                 }
@@ -94,8 +100,7 @@ public class SemRemoteViewsBasicAnimation extends SemRemoteViewsAnimation {
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.SemRemoteViewsAnimation
     /* renamed from: endAnimation */
-    public void lambda$play$0(View root) {
-    }
+    public void lambda$play$0(View root) {}
 
     private void animateTextSwitcher(final TextView textView, final CharSequence text) {
         ObjectAnimator fadeout = ObjectAnimator.ofFloat(textView, "alpha", 1.0f, 0.0f);
@@ -107,15 +112,19 @@ public class SemRemoteViewsBasicAnimation extends SemRemoteViewsAnimation {
         moveUp.setDuration(300L);
         AnimatorSet fadeOutAndMoveUpSet = new AnimatorSet();
         fadeOutAndMoveUpSet.playTogether(fadeout, moveUp);
-        fadeOutAndMoveUpSet.addListener(new AnimatorListenerAdapter() { // from class: android.widget.SemRemoteViewsBasicAnimation.2
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                textView.lambda$setTextAsync$0(text);
-            }
-        });
+        fadeOutAndMoveUpSet.addListener(
+                new AnimatorListenerAdapter() { // from class:
+                                                // android.widget.SemRemoteViewsBasicAnimation.2
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        textView.lambda$setTextAsync$0(text);
+                    }
+                });
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(textView, "alpha", 0.0f, 1.0f);
-        ObjectAnimator moveUpFromBelow = ObjectAnimator.ofFloat(textView, "translationY", 50.0f, 0.0f);
+        ObjectAnimator moveUpFromBelow =
+                ObjectAnimator.ofFloat(textView, "translationY", 50.0f, 0.0f);
         if (fadeIn == null || moveUpFromBelow == null) {
             return;
         }
@@ -123,21 +132,25 @@ public class SemRemoteViewsBasicAnimation extends SemRemoteViewsAnimation {
         moveUpFromBelow.setDuration(300L);
         AnimatorSet fadeInAndMoveUpFromBelowSet = new AnimatorSet();
         fadeInAndMoveUpFromBelowSet.playTogether(fadeIn, moveUpFromBelow);
-        fadeInAndMoveUpFromBelowSet.addListener(new AnimatorListenerAdapter() { // from class: android.widget.SemRemoteViewsBasicAnimation.3
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationStart(Animator animation) {
-                super.onAnimationStart(animation);
-                textView.setTranslationY(50.0f);
-                textView.setAlpha(0.0f);
-            }
+        fadeInAndMoveUpFromBelowSet.addListener(
+                new AnimatorListenerAdapter() { // from class:
+                                                // android.widget.SemRemoteViewsBasicAnimation.3
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
+                        textView.setTranslationY(50.0f);
+                        textView.setAlpha(0.0f);
+                    }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                textView.setTranslationY(0.0f);
-                SemRemoteViewsBasicAnimation.this.mIsExpired = true;
-            }
-        });
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        textView.setTranslationY(0.0f);
+                        SemRemoteViewsBasicAnimation.this.mIsExpired = true;
+                    }
+                });
         AnimatorSet mAnimatorSet = new AnimatorSet();
         mAnimatorSet.playSequentially(fadeOutAndMoveUpSet, fadeInAndMoveUpFromBelowSet);
         mAnimatorSet.start();

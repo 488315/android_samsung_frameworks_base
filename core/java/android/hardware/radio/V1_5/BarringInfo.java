@@ -6,6 +6,7 @@ import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
 import android.security.keystore.KeyProperties;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -418,18 +419,30 @@ public final class BarringInfo {
                     return false;
                 }
                 Conditional other = (Conditional) otherObject;
-                if (this.factor == other.factor && this.timeSeconds == other.timeSeconds && this.isBarred == other.isBarred) {
+                if (this.factor == other.factor
+                        && this.timeSeconds == other.timeSeconds
+                        && this.isBarred == other.isBarred) {
                     return true;
                 }
                 return false;
             }
 
             public final int hashCode() {
-                return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.factor))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.timeSeconds))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isBarred))));
+                return Objects.hash(
+                        Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.factor))),
+                        Integer.valueOf(
+                                HidlSupport.deepHashCode(Integer.valueOf(this.timeSeconds))),
+                        Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isBarred))));
             }
 
             public final String toString() {
-                return "{.factor = " + this.factor + ", .timeSeconds = " + this.timeSeconds + ", .isBarred = " + this.isBarred + "}";
+                return "{.factor = "
+                        + this.factor
+                        + ", .timeSeconds = "
+                        + this.timeSeconds
+                        + ", .isBarred = "
+                        + this.isBarred
+                        + "}";
             }
 
             public final void readFromParcel(HwParcel parcel) {
@@ -441,7 +454,9 @@ public final class BarringInfo {
                 ArrayList<Conditional> _hidl_vec = new ArrayList<>();
                 HwBlob _hidl_blob = parcel.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 12, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        parcel.readEmbeddedBuffer(
+                                _hidl_vec_size * 12, _hidl_blob.handle(), 0L, true);
                 _hidl_vec.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     Conditional _hidl_vec_element = new Conditional();
@@ -451,7 +466,8 @@ public final class BarringInfo {
                 return _hidl_vec;
             }
 
-            public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+            public final void readEmbeddedFromParcel(
+                    HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
                 this.factor = _hidl_blob.getInt32(0 + _hidl_offset);
                 this.timeSeconds = _hidl_blob.getInt32(4 + _hidl_offset);
                 this.isBarred = _hidl_blob.getBool(8 + _hidl_offset);
@@ -463,7 +479,8 @@ public final class BarringInfo {
                 parcel.writeBuffer(_hidl_blob);
             }
 
-            public static final void writeVectorToParcel(HwParcel parcel, ArrayList<Conditional> _hidl_vec) {
+            public static final void writeVectorToParcel(
+                    HwParcel parcel, ArrayList<Conditional> _hidl_vec) {
                 HwBlob _hidl_blob = new HwBlob(16);
                 int _hidl_vec_size = _hidl_vec.size();
                 _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -503,8 +520,7 @@ public final class BarringInfo {
                 }
             }
 
-            private hidl_discriminator() {
-            }
+            private hidl_discriminator() {}
         }
 
         public void noinit(Monostate noinit) {
@@ -515,7 +531,15 @@ public final class BarringInfo {
         public Monostate noinit() {
             if (this.hidl_d != 0) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Monostate.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -531,7 +555,15 @@ public final class BarringInfo {
         public Conditional conditional() {
             if (this.hidl_d != 1) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Conditional.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -558,7 +590,9 @@ public final class BarringInfo {
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)), Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)),
+                    Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
         }
 
         public final String toString() {
@@ -574,7 +608,8 @@ public final class BarringInfo {
                     builder.append(conditional());
                     break;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
             builder.append("}");
             return builder.toString();
@@ -585,11 +620,13 @@ public final class BarringInfo {
             readEmbeddedFromParcel(parcel, blob, 0L);
         }
 
-        public static final ArrayList<BarringTypeSpecificInfo> readVectorFromParcel(HwParcel parcel) {
+        public static final ArrayList<BarringTypeSpecificInfo> readVectorFromParcel(
+                HwParcel parcel) {
             ArrayList<BarringTypeSpecificInfo> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 BarringTypeSpecificInfo _hidl_vec_element = new BarringTypeSpecificInfo();
@@ -599,19 +636,23 @@ public final class BarringInfo {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.hidl_d = _hidl_blob.getInt8(0 + _hidl_offset);
             switch (this.hidl_d) {
                 case 0:
                     this.hidl_o = new Monostate();
-                    ((Monostate) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
+                    ((Monostate) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
                     return;
                 case 1:
                     this.hidl_o = new Conditional();
-                    ((Conditional) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
+                    ((Conditional) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
                     return;
                 default:
-                    throw new IllegalStateException("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new IllegalStateException(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
 
@@ -621,7 +662,8 @@ public final class BarringInfo {
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<BarringTypeSpecificInfo> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<BarringTypeSpecificInfo> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -644,7 +686,8 @@ public final class BarringInfo {
                     conditional().writeEmbeddedToBlob(_hidl_blob, 4 + _hidl_offset);
                     return;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
     }
@@ -657,18 +700,30 @@ public final class BarringInfo {
             return false;
         }
         BarringInfo other = (BarringInfo) otherObject;
-        if (this.serviceType == other.serviceType && this.barringType == other.barringType && HidlSupport.deepEquals(this.barringTypeSpecificInfo, other.barringTypeSpecificInfo)) {
+        if (this.serviceType == other.serviceType
+                && this.barringType == other.barringType
+                && HidlSupport.deepEquals(
+                        this.barringTypeSpecificInfo, other.barringTypeSpecificInfo)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.serviceType))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.barringType))), Integer.valueOf(HidlSupport.deepHashCode(this.barringTypeSpecificInfo)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.serviceType))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.barringType))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.barringTypeSpecificInfo)));
     }
 
     public final String toString() {
-        return "{.serviceType = " + ServiceType.toString(this.serviceType) + ", .barringType = " + BarringType.toString(this.barringType) + ", .barringTypeSpecificInfo = " + this.barringTypeSpecificInfo + "}";
+        return "{.serviceType = "
+                + ServiceType.toString(this.serviceType)
+                + ", .barringType = "
+                + BarringType.toString(this.barringType)
+                + ", .barringTypeSpecificInfo = "
+                + this.barringTypeSpecificInfo
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -680,7 +735,8 @@ public final class BarringInfo {
         ArrayList<BarringInfo> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             BarringInfo _hidl_vec_element = new BarringInfo();
@@ -690,7 +746,8 @@ public final class BarringInfo {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.serviceType = _hidl_blob.getInt32(0 + _hidl_offset);
         this.barringType = _hidl_blob.getInt32(4 + _hidl_offset);
         this.barringTypeSpecificInfo.readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
@@ -702,7 +759,8 @@ public final class BarringInfo {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<BarringInfo> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<BarringInfo> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

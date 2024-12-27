@@ -6,7 +6,9 @@ import android.os.IInstalld;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.system.ErrnoException;
+
 import com.android.internal.security.VerityUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.security.cert.CertificateEncodingException;
@@ -43,7 +45,9 @@ public final class FileIntegrityManager {
                     authFd.close();
                 }
                 try {
-                    int errno = this.mService.setupFsverity(authToken, file.getPath(), this.mContext.getPackageName());
+                    int errno =
+                            this.mService.setupFsverity(
+                                    authToken, file.getPath(), this.mContext.getPackageName());
                     if (errno != 0) {
                         new ErrnoException("setupFsVerity", errno).rethrowAsIOException();
                     }
@@ -63,9 +67,11 @@ public final class FileIntegrityManager {
     }
 
     @Deprecated
-    public boolean isAppSourceCertificateTrusted(X509Certificate certificate) throws CertificateEncodingException {
+    public boolean isAppSourceCertificateTrusted(X509Certificate certificate)
+            throws CertificateEncodingException {
         try {
-            return this.mService.isAppSourceCertificateTrusted(certificate.getEncoded(), this.mContext.getOpPackageName());
+            return this.mService.isAppSourceCertificateTrusted(
+                    certificate.getEncoded(), this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

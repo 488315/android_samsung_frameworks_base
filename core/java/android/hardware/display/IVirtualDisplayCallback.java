@@ -16,16 +16,13 @@ public interface IVirtualDisplayCallback extends IInterface {
 
     public static class Default implements IVirtualDisplayCallback {
         @Override // android.hardware.display.IVirtualDisplayCallback
-        public void onPaused() throws RemoteException {
-        }
+        public void onPaused() throws RemoteException {}
 
         @Override // android.hardware.display.IVirtualDisplayCallback
-        public void onResumed() throws RemoteException {
-        }
+        public void onResumed() throws RemoteException {}
 
         @Override // android.hardware.display.IVirtualDisplayCallback
-        public void onStopped() throws RemoteException {
-        }
+        public void onStopped() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +30,7 @@ public interface IVirtualDisplayCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualDisplayCallback {
+    public abstract static class Stub extends Binder implements IVirtualDisplayCallback {
         public static final String DESCRIPTOR = "android.hardware.display.IVirtualDisplayCallback";
         static final int TRANSACTION_onPaused = 1;
         static final int TRANSACTION_onResumed = 2;
@@ -78,7 +75,8 @@ public interface IVirtualDisplayCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

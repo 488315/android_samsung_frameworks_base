@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioImsResponse extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$ims$IRadioImsResponse".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$ims$IRadioImsResponse".replace('$', '.');
     public static final String HASH = "ec0dfedf764f3916783848c540ad312a74fa755d";
     public static final int VERSION = 2;
 
@@ -21,7 +22,9 @@ public interface IRadioImsResponse extends IInterface {
 
     void setSrvccCallInfoResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void startImsTrafficResponse(RadioResponseInfo radioResponseInfo, ConnectionFailureInfo connectionFailureInfo) throws RemoteException;
+    void startImsTrafficResponse(
+            RadioResponseInfo radioResponseInfo, ConnectionFailureInfo connectionFailureInfo)
+            throws RemoteException;
 
     void stopImsTrafficResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
@@ -29,36 +32,32 @@ public interface IRadioImsResponse extends IInterface {
 
     void updateImsCallStatusResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void updateImsRegistrationInfoResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
+    void updateImsRegistrationInfoResponse(RadioResponseInfo radioResponseInfo)
+            throws RemoteException;
 
     public static class Default implements IRadioImsResponse {
         @Override // android.hardware.radio.ims.IRadioImsResponse
-        public void setSrvccCallInfoResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setSrvccCallInfoResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioImsResponse
-        public void updateImsRegistrationInfoResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void updateImsRegistrationInfoResponse(RadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioImsResponse
-        public void startImsTrafficResponse(RadioResponseInfo info, ConnectionFailureInfo failureInfo) throws RemoteException {
-        }
+        public void startImsTrafficResponse(
+                RadioResponseInfo info, ConnectionFailureInfo failureInfo) throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioImsResponse
-        public void stopImsTrafficResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void stopImsTrafficResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioImsResponse
-        public void triggerEpsFallbackResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void triggerEpsFallbackResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioImsResponse
-        public void sendAnbrQueryResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void sendAnbrQueryResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioImsResponse
-        public void updateImsCallStatusResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void updateImsCallStatusResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioImsResponse
         public int getInterfaceVersion() {
@@ -76,7 +75,7 @@ public interface IRadioImsResponse extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioImsResponse {
+    public abstract static class Stub extends Binder implements IRadioImsResponse {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_sendAnbrQueryResponse = 6;
@@ -109,7 +108,8 @@ public interface IRadioImsResponse extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -130,38 +130,47 @@ public interface IRadioImsResponse extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RadioResponseInfo _arg0 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg0 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setSrvccCallInfoResponse(_arg0);
                     return true;
                 case 2:
-                    RadioResponseInfo _arg02 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg02 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     updateImsRegistrationInfoResponse(_arg02);
                     return true;
                 case 3:
-                    RadioResponseInfo _arg03 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
-                    ConnectionFailureInfo _arg1 = (ConnectionFailureInfo) data.readTypedObject(ConnectionFailureInfo.CREATOR);
+                    RadioResponseInfo _arg03 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    ConnectionFailureInfo _arg1 =
+                            (ConnectionFailureInfo)
+                                    data.readTypedObject(ConnectionFailureInfo.CREATOR);
                     data.enforceNoDataAvail();
                     startImsTrafficResponse(_arg03, _arg1);
                     return true;
                 case 4:
-                    RadioResponseInfo _arg04 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg04 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     stopImsTrafficResponse(_arg04);
                     return true;
                 case 5:
-                    RadioResponseInfo _arg05 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg05 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     triggerEpsFallbackResponse(_arg05);
                     return true;
                 case 6:
-                    RadioResponseInfo _arg06 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg06 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     sendAnbrQueryResponse(_arg06);
                     return true;
                 case 7:
-                    RadioResponseInfo _arg07 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg07 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     updateImsCallStatusResponse(_arg07);
                     return true;
@@ -196,7 +205,8 @@ public interface IRadioImsResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setSrvccCallInfoResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setSrvccCallInfoResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -204,14 +214,16 @@ public interface IRadioImsResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.ims.IRadioImsResponse
-            public void updateImsRegistrationInfoResponse(RadioResponseInfo info) throws RemoteException {
+            public void updateImsRegistrationInfoResponse(RadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method updateImsRegistrationInfoResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method updateImsRegistrationInfoResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -219,7 +231,9 @@ public interface IRadioImsResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.ims.IRadioImsResponse
-            public void startImsTrafficResponse(RadioResponseInfo info, ConnectionFailureInfo failureInfo) throws RemoteException {
+            public void startImsTrafficResponse(
+                    RadioResponseInfo info, ConnectionFailureInfo failureInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -227,7 +241,8 @@ public interface IRadioImsResponse extends IInterface {
                     _data.writeTypedObject(failureInfo, 0);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method startImsTrafficResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method startImsTrafficResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -242,7 +257,8 @@ public interface IRadioImsResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(4, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method stopImsTrafficResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method stopImsTrafficResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -257,7 +273,8 @@ public interface IRadioImsResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(5, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method triggerEpsFallbackResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method triggerEpsFallbackResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -287,7 +304,8 @@ public interface IRadioImsResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(7, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method updateImsCallStatusResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method updateImsCallStatusResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

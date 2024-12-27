@@ -1,26 +1,27 @@
 package android.hardware.input;
 
 import android.annotation.SystemApi;
-import android.hardware.input.VirtualTouchDeviceConfig;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public final class VirtualStylusConfig extends VirtualTouchDeviceConfig implements Parcelable {
-    public static final Parcelable.Creator<VirtualStylusConfig> CREATOR = new Parcelable.Creator<VirtualStylusConfig>() { // from class: android.hardware.input.VirtualStylusConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualStylusConfig createFromParcel(Parcel in) {
-            return new VirtualStylusConfig(in);
-        }
+    public static final Parcelable.Creator<VirtualStylusConfig> CREATOR =
+            new Parcelable.Creator<VirtualStylusConfig>() { // from class:
+                // android.hardware.input.VirtualStylusConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualStylusConfig createFromParcel(Parcel in) {
+                    return new VirtualStylusConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualStylusConfig[] newArray(int size) {
-            return new VirtualStylusConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualStylusConfig[] newArray(int size) {
+                    return new VirtualStylusConfig[size];
+                }
+            };
 
     @Override // android.hardware.input.VirtualTouchDeviceConfig
     public /* bridge */ /* synthetic */ int getHeight() {
@@ -45,7 +46,8 @@ public final class VirtualStylusConfig extends VirtualTouchDeviceConfig implemen
         return 0;
     }
 
-    @Override // android.hardware.input.VirtualTouchDeviceConfig, android.hardware.input.VirtualInputDeviceConfig, android.os.Parcelable
+    @Override // android.hardware.input.VirtualTouchDeviceConfig,
+    // android.hardware.input.VirtualInputDeviceConfig, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
     }

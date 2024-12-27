@@ -1,14 +1,17 @@
 package com.android.internal.telecom;
 
 import android.telecom.PhoneAccountHandle;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /* loaded from: classes5.dex */
 public class ClientTransactionalServiceRepository {
-    private static final Map<PhoneAccountHandle, ClientTransactionalServiceWrapper> LOOKUP_TABLE = new ConcurrentHashMap();
+    private static final Map<PhoneAccountHandle, ClientTransactionalServiceWrapper> LOOKUP_TABLE =
+            new ConcurrentHashMap();
 
-    public ClientTransactionalServiceWrapper addNewCallForTransactionalServiceWrapper(PhoneAccountHandle phoneAccountHandle) {
+    public ClientTransactionalServiceWrapper addNewCallForTransactionalServiceWrapper(
+            PhoneAccountHandle phoneAccountHandle) {
         ClientTransactionalServiceWrapper service;
         if (!hasExistingServiceWrapper(phoneAccountHandle)) {
             service = new ClientTransactionalServiceWrapper(phoneAccountHandle, this);
@@ -19,7 +22,8 @@ public class ClientTransactionalServiceRepository {
         return service;
     }
 
-    private ClientTransactionalServiceWrapper getTransactionalServiceWrapper(PhoneAccountHandle pah) {
+    private ClientTransactionalServiceWrapper getTransactionalServiceWrapper(
+            PhoneAccountHandle pah) {
         return LOOKUP_TABLE.get(pah);
     }
 

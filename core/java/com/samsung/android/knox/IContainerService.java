@@ -25,7 +25,7 @@ public interface IContainerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContainerService {
+    public abstract static class Stub extends Binder implements IContainerService {
         static final int TRANSACTION_onMessage = 1;
 
         public Stub() {
@@ -63,7 +63,8 @@ public interface IContainerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContainerService.DESCRIPTOR);
             }

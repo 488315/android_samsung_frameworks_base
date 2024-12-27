@@ -13,7 +13,13 @@ public abstract class SemFilter {
     private String mVendor;
     private int mVersion;
 
-    protected SemFilter(String packageName, String filterName, String title, String vendor2, int category, int version) {
+    protected SemFilter(
+            String packageName,
+            String filterName,
+            String title,
+            String vendor2,
+            int category,
+            int version) {
         this.mFilterName = "";
         this.mPackageName = "";
         this.mTitle = "";

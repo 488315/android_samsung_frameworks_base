@@ -14,16 +14,24 @@ public interface ITranslationDirectManager extends IInterface {
 
     void onFinishTranslationSession(int i) throws RemoteException;
 
-    void onTranslationRequest(TranslationRequest translationRequest, int i, ICancellationSignal iCancellationSignal, ITranslationCallback iTranslationCallback) throws RemoteException;
+    void onTranslationRequest(
+            TranslationRequest translationRequest,
+            int i,
+            ICancellationSignal iCancellationSignal,
+            ITranslationCallback iTranslationCallback)
+            throws RemoteException;
 
     public static class Default implements ITranslationDirectManager {
         @Override // android.view.translation.ITranslationDirectManager
-        public void onTranslationRequest(TranslationRequest request, int sessionId, ICancellationSignal transport, ITranslationCallback callback) throws RemoteException {
-        }
+        public void onTranslationRequest(
+                TranslationRequest request,
+                int sessionId,
+                ICancellationSignal transport,
+                ITranslationCallback callback)
+                throws RemoteException {}
 
         @Override // android.view.translation.ITranslationDirectManager
-        public void onFinishTranslationSession(int sessionId) throws RemoteException {
-        }
+        public void onFinishTranslationSession(int sessionId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -31,7 +39,7 @@ public interface ITranslationDirectManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITranslationDirectManager {
+    public abstract static class Stub extends Binder implements ITranslationDirectManager {
         static final int TRANSACTION_onFinishTranslationSession = 2;
         static final int TRANSACTION_onTranslationRequest = 1;
 
@@ -72,7 +80,8 @@ public interface ITranslationDirectManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITranslationDirectManager.DESCRIPTOR);
             }
@@ -82,10 +91,13 @@ public interface ITranslationDirectManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    TranslationRequest _arg0 = (TranslationRequest) data.readTypedObject(TranslationRequest.CREATOR);
+                    TranslationRequest _arg0 =
+                            (TranslationRequest) data.readTypedObject(TranslationRequest.CREATOR);
                     int _arg1 = data.readInt();
-                    ICancellationSignal _arg2 = ICancellationSignal.Stub.asInterface(data.readStrongBinder());
-                    ITranslationCallback _arg3 = ITranslationCallback.Stub.asInterface(data.readStrongBinder());
+                    ICancellationSignal _arg2 =
+                            ICancellationSignal.Stub.asInterface(data.readStrongBinder());
+                    ITranslationCallback _arg3 =
+                            ITranslationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onTranslationRequest(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -116,7 +128,12 @@ public interface ITranslationDirectManager extends IInterface {
             }
 
             @Override // android.view.translation.ITranslationDirectManager
-            public void onTranslationRequest(TranslationRequest request, int sessionId, ICancellationSignal transport, ITranslationCallback callback) throws RemoteException {
+            public void onTranslationRequest(
+                    TranslationRequest request,
+                    int sessionId,
+                    ICancellationSignal transport,
+                    ITranslationCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITranslationDirectManager.DESCRIPTOR);

@@ -12,6 +12,7 @@ import com.android.internal.org.bouncycastle.asn1.BERSequence;
 import com.android.internal.org.bouncycastle.asn1.BERSet;
 import com.android.internal.org.bouncycastle.asn1.BERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
+
 import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
@@ -39,8 +40,14 @@ public class SignedData extends ASN1Object {
         return null;
     }
 
-    public SignedData(ASN1Set digestAlgorithms, ContentInfo contentInfo, ASN1Set certificates, ASN1Set crls, ASN1Set signerInfos) {
-        this.version = calculateVersion(contentInfo.getContentType(), certificates, crls, signerInfos);
+    public SignedData(
+            ASN1Set digestAlgorithms,
+            ContentInfo contentInfo,
+            ASN1Set certificates,
+            ASN1Set crls,
+            ASN1Set signerInfos) {
+        this.version =
+                calculateVersion(contentInfo.getContentType(), certificates, crls, signerInfos);
         this.digestAlgorithms = digestAlgorithms;
         this.contentInfo = contentInfo;
         this.certificates = certificates;
@@ -50,7 +57,8 @@ public class SignedData extends ASN1Object {
         this.certsBer = certificates instanceof BERSet;
     }
 
-    private ASN1Integer calculateVersion(ASN1ObjectIdentifier contentOid, ASN1Set certs, ASN1Set crls, ASN1Set signerInfs) {
+    private ASN1Integer calculateVersion(
+            ASN1ObjectIdentifier contentOid, ASN1Set certs, ASN1Set crls, ASN1Set signerInfs) {
         boolean otherCert = false;
         boolean otherCrl = false;
         boolean attrCertV1Found = false;
@@ -130,7 +138,8 @@ public class SignedData extends ASN1Object {
                         this.crls = ASN1Set.getInstance(tagged, false);
                         break;
                     default:
-                        throw new IllegalArgumentException("unknown tag value " + tagged.getTagNo());
+                        throw new IllegalArgumentException(
+                                "unknown tag value " + tagged.getTagNo());
                 }
             } else {
                 this.signerInfos = (ASN1Set) o;
@@ -162,7 +171,8 @@ public class SignedData extends ASN1Object {
         return this.signerInfos;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(6);
         v.add(this.version);

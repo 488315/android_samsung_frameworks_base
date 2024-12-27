@@ -11,6 +11,7 @@ import android.os.IInterface;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -39,85 +40,186 @@ public interface IContentProvider extends IInterface {
     public static final int UPDATE_TRANSACTION = 10;
     public static final String descriptor = "android.content.IContentProvider";
 
-    ContentProviderResult[] applyBatch(AttributionSource attributionSource, String str, ArrayList<ContentProviderOperation> arrayList) throws RemoteException, OperationApplicationException;
+    ContentProviderResult[] applyBatch(
+            AttributionSource attributionSource,
+            String str,
+            ArrayList<ContentProviderOperation> arrayList)
+            throws RemoteException, OperationApplicationException;
 
-    int bulkInsert(AttributionSource attributionSource, Uri uri, ContentValues[] contentValuesArr) throws RemoteException;
+    int bulkInsert(AttributionSource attributionSource, Uri uri, ContentValues[] contentValuesArr)
+            throws RemoteException;
 
-    Bundle call(AttributionSource attributionSource, String str, String str2, String str3, Bundle bundle) throws RemoteException;
+    Bundle call(
+            AttributionSource attributionSource,
+            String str,
+            String str2,
+            String str3,
+            Bundle bundle)
+            throws RemoteException;
 
     Uri canonicalize(AttributionSource attributionSource, Uri uri) throws RemoteException;
 
-    void canonicalizeAsync(AttributionSource attributionSource, Uri uri, RemoteCallback remoteCallback) throws RemoteException;
+    void canonicalizeAsync(
+            AttributionSource attributionSource, Uri uri, RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    int checkUriPermission(AttributionSource attributionSource, Uri uri, int i, int i2) throws RemoteException;
+    int checkUriPermission(AttributionSource attributionSource, Uri uri, int i, int i2)
+            throws RemoteException;
 
     ICancellationSignal createCancellationSignal() throws RemoteException;
 
     int delete(AttributionSource attributionSource, Uri uri, Bundle bundle) throws RemoteException;
 
-    String[] getStreamTypes(AttributionSource attributionSource, Uri uri, String str) throws RemoteException;
+    String[] getStreamTypes(AttributionSource attributionSource, Uri uri, String str)
+            throws RemoteException;
 
     String getType(AttributionSource attributionSource, Uri uri) throws RemoteException;
 
     void getTypeAnonymousAsync(Uri uri, RemoteCallback remoteCallback) throws RemoteException;
 
-    void getTypeAsync(AttributionSource attributionSource, Uri uri, RemoteCallback remoteCallback) throws RemoteException;
+    void getTypeAsync(AttributionSource attributionSource, Uri uri, RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    Uri insert(AttributionSource attributionSource, Uri uri, ContentValues contentValues, Bundle bundle) throws RemoteException;
+    Uri insert(
+            AttributionSource attributionSource,
+            Uri uri,
+            ContentValues contentValues,
+            Bundle bundle)
+            throws RemoteException;
 
-    AssetFileDescriptor openAssetFile(AttributionSource attributionSource, Uri uri, String str, ICancellationSignal iCancellationSignal) throws RemoteException, FileNotFoundException;
+    AssetFileDescriptor openAssetFile(
+            AttributionSource attributionSource,
+            Uri uri,
+            String str,
+            ICancellationSignal iCancellationSignal)
+            throws RemoteException, FileNotFoundException;
 
-    ParcelFileDescriptor openFile(AttributionSource attributionSource, Uri uri, String str, ICancellationSignal iCancellationSignal) throws RemoteException, FileNotFoundException;
+    ParcelFileDescriptor openFile(
+            AttributionSource attributionSource,
+            Uri uri,
+            String str,
+            ICancellationSignal iCancellationSignal)
+            throws RemoteException, FileNotFoundException;
 
-    AssetFileDescriptor openTypedAssetFile(AttributionSource attributionSource, Uri uri, String str, Bundle bundle, ICancellationSignal iCancellationSignal) throws RemoteException, FileNotFoundException;
+    AssetFileDescriptor openTypedAssetFile(
+            AttributionSource attributionSource,
+            Uri uri,
+            String str,
+            Bundle bundle,
+            ICancellationSignal iCancellationSignal)
+            throws RemoteException, FileNotFoundException;
 
-    Cursor query(AttributionSource attributionSource, Uri uri, String[] strArr, Bundle bundle, ICancellationSignal iCancellationSignal) throws RemoteException;
+    Cursor query(
+            AttributionSource attributionSource,
+            Uri uri,
+            String[] strArr,
+            Bundle bundle,
+            ICancellationSignal iCancellationSignal)
+            throws RemoteException;
 
-    boolean refresh(AttributionSource attributionSource, Uri uri, Bundle bundle, ICancellationSignal iCancellationSignal) throws RemoteException;
+    boolean refresh(
+            AttributionSource attributionSource,
+            Uri uri,
+            Bundle bundle,
+            ICancellationSignal iCancellationSignal)
+            throws RemoteException;
 
     Uri uncanonicalize(AttributionSource attributionSource, Uri uri) throws RemoteException;
 
-    void uncanonicalizeAsync(AttributionSource attributionSource, Uri uri, RemoteCallback remoteCallback) throws RemoteException;
+    void uncanonicalizeAsync(
+            AttributionSource attributionSource, Uri uri, RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    int update(AttributionSource attributionSource, Uri uri, ContentValues contentValues, Bundle bundle) throws RemoteException;
+    int update(
+            AttributionSource attributionSource,
+            Uri uri,
+            ContentValues contentValues,
+            Bundle bundle)
+            throws RemoteException;
 
     @Deprecated
     default String getType(Uri url) throws RemoteException {
-        return getType(new AttributionSource(Binder.getCallingUid(), AppGlobals.getPackageManager().getPackagesForUid(Binder.getCallingUid())[0], null), url);
+        return getType(
+                new AttributionSource(
+                        Binder.getCallingUid(),
+                        AppGlobals.getPackageManager().getPackagesForUid(Binder.getCallingUid())[0],
+                        null),
+                url);
     }
 
     @Deprecated
     default void getTypeAsync(Uri uri, RemoteCallback callback) throws RemoteException {
-        getTypeAsync(new AttributionSource(Binder.getCallingUid(), AppGlobals.getPackageManager().getPackagesForUid(Binder.getCallingUid())[0], null), uri, callback);
+        getTypeAsync(
+                new AttributionSource(
+                        Binder.getCallingUid(),
+                        AppGlobals.getPackageManager().getPackagesForUid(Binder.getCallingUid())[0],
+                        null),
+                uri,
+                callback);
     }
 
     @Deprecated
-    default Uri insert(String callingPkg, Uri url, ContentValues initialValues) throws RemoteException {
-        return insert(new AttributionSource(Binder.getCallingUid(), callingPkg, null), url, initialValues, null);
+    default Uri insert(String callingPkg, Uri url, ContentValues initialValues)
+            throws RemoteException {
+        return insert(
+                new AttributionSource(Binder.getCallingUid(), callingPkg, null),
+                url,
+                initialValues,
+                null);
     }
 
     @Deprecated
-    default int bulkInsert(String callingPkg, Uri url, ContentValues[] initialValues) throws RemoteException {
-        return bulkInsert(new AttributionSource(Binder.getCallingUid(), callingPkg, null), url, initialValues);
+    default int bulkInsert(String callingPkg, Uri url, ContentValues[] initialValues)
+            throws RemoteException {
+        return bulkInsert(
+                new AttributionSource(Binder.getCallingUid(), callingPkg, null),
+                url,
+                initialValues);
     }
 
     @Deprecated
-    default int delete(String callingPkg, Uri url, String selection, String[] selectionArgs) throws RemoteException {
-        return delete(new AttributionSource(Binder.getCallingUid(), callingPkg, null), url, ContentResolver.createSqlQueryBundle(selection, selectionArgs));
+    default int delete(String callingPkg, Uri url, String selection, String[] selectionArgs)
+            throws RemoteException {
+        return delete(
+                new AttributionSource(Binder.getCallingUid(), callingPkg, null),
+                url,
+                ContentResolver.createSqlQueryBundle(selection, selectionArgs));
     }
 
     @Deprecated
-    default int update(String callingPkg, Uri url, ContentValues values, String selection, String[] selectionArgs) throws RemoteException {
-        return update(new AttributionSource(Binder.getCallingUid(), callingPkg, null), url, values, ContentResolver.createSqlQueryBundle(selection, selectionArgs));
+    default int update(
+            String callingPkg,
+            Uri url,
+            ContentValues values,
+            String selection,
+            String[] selectionArgs)
+            throws RemoteException {
+        return update(
+                new AttributionSource(Binder.getCallingUid(), callingPkg, null),
+                url,
+                values,
+                ContentResolver.createSqlQueryBundle(selection, selectionArgs));
     }
 
     @Deprecated
-    default Bundle call(String callingPkg, String method, String arg, Bundle extras) throws RemoteException {
-        return call(new AttributionSource(Binder.getCallingUid(), callingPkg, null), "unknown", method, arg, extras);
+    default Bundle call(String callingPkg, String method, String arg, Bundle extras)
+            throws RemoteException {
+        return call(
+                new AttributionSource(Binder.getCallingUid(), callingPkg, null),
+                "unknown",
+                method,
+                arg,
+                extras);
     }
 
     @Deprecated
     default String[] getStreamTypes(Uri url, String mimeTypeFilter) throws RemoteException {
-        return getStreamTypes(new AttributionSource(Binder.getCallingUid(), AppGlobals.getPackageManager().getPackagesForUid(Binder.getCallingUid())[0], null), url, mimeTypeFilter);
+        return getStreamTypes(
+                new AttributionSource(
+                        Binder.getCallingUid(),
+                        AppGlobals.getPackageManager().getPackagesForUid(Binder.getCallingUid())[0],
+                        null),
+                url,
+                mimeTypeFilter);
     }
 }

@@ -7,21 +7,22 @@ import android.os.Parcelable;
 /* loaded from: classes2.dex */
 public class Status implements Parcelable {
     public static final int BAD_VALUE = 6;
-    public static final Parcelable.Creator<Status> CREATOR = new Parcelable.Creator<Status>() { // from class: android.hardware.cas.Status.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Status createFromParcel(Parcel _aidl_source) {
-            Status _aidl_out = new Status();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Status> CREATOR =
+            new Parcelable.Creator<Status>() { // from class: android.hardware.cas.Status.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Status createFromParcel(Parcel _aidl_source) {
+                    Status _aidl_out = new Status();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Status[] newArray(int _aidl_size) {
-            return new Status[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Status[] newArray(int _aidl_size) {
+                    return new Status[_aidl_size];
+                }
+            };
     public static final int ERROR_CAS_BLACKOUT = 20;
     public static final int ERROR_CAS_CANNOT_HANDLE = 4;
     public static final int ERROR_CAS_CARD_INVALID = 19;

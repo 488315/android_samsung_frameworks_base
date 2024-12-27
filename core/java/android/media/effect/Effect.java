@@ -10,6 +10,5 @@ public abstract class Effect {
 
     public abstract void setParameter(String str, Object obj);
 
-    public void setUpdateListener(EffectUpdateListener listener) {
-    }
+    public void setUpdateListener(EffectUpdateListener listener) {}
 }

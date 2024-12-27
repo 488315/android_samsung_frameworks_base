@@ -9,8 +9,6 @@ import android.content.pm.ProviderInfo;
 import android.hardware.gnss.GnssSignalType;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
-import android.os.BatteryStats;
-import android.os.FileUtils;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.system.ErrnoException;
@@ -24,8 +22,12 @@ import android.util.EmptyArray;
 import android.util.Log;
 import android.util.Slog;
 import android.webkit.MimeTypeMap;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.SizedInputStream;
+
+import libcore.io.IoUtils;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -49,7 +51,6 @@ import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 import java.util.zip.CheckedInputStream;
-import libcore.io.IoUtils;
 
 /* loaded from: classes3.dex */
 public final class FileUtils {
@@ -75,14 +76,12 @@ public final class FileUtils {
         void onProgress(long j);
     }
 
-    private FileUtils() {
-    }
+    private FileUtils() {}
 
     private static class NoImagePreloadHolder {
         public static final Pattern SAFE_FILENAME_PATTERN = Pattern.compile("[\\w%+,./=_-]+");
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     static {
@@ -231,7 +230,13 @@ public final class FileUtils {
         return copy(from, to, (CancellationSignal) null, (Executor) null, (ProgressListener) null);
     }
 
-    public static long copy(File from, File to, CancellationSignal signal, Executor executor, ProgressListener listener) throws IOException {
+    public static long copy(
+            File from,
+            File to,
+            CancellationSignal signal,
+            Executor executor,
+            ProgressListener listener)
+            throws IOException {
         FileInputStream in = new FileInputStream(from);
         try {
             FileOutputStream out = new FileOutputStream(to);
@@ -256,9 +261,22 @@ public final class FileUtils {
         return copy(in, out, (CancellationSignal) null, (Executor) null, (ProgressListener) null);
     }
 
-    public static long copy(InputStream in, OutputStream out, CancellationSignal signal, Executor executor, ProgressListener listener) throws IOException {
-        if (sEnableCopyOptimizations && (in instanceof FileInputStream) && (out instanceof FileOutputStream)) {
-            return copy(((FileInputStream) in).getFD(), ((FileOutputStream) out).getFD(), signal, executor, listener);
+    public static long copy(
+            InputStream in,
+            OutputStream out,
+            CancellationSignal signal,
+            Executor executor,
+            ProgressListener listener)
+            throws IOException {
+        if (sEnableCopyOptimizations
+                && (in instanceof FileInputStream)
+                && (out instanceof FileOutputStream)) {
+            return copy(
+                    ((FileInputStream) in).getFD(),
+                    ((FileOutputStream) out).getFD(),
+                    signal,
+                    executor,
+                    listener);
         }
         return copyInternalUserspace(in, out, signal, executor, listener);
     }
@@ -267,11 +285,24 @@ public final class FileUtils {
         return copy(in, out, (CancellationSignal) null, (Executor) null, (ProgressListener) null);
     }
 
-    public static long copy(FileDescriptor in, FileDescriptor out, CancellationSignal signal, Executor executor, ProgressListener listener) throws IOException {
+    public static long copy(
+            FileDescriptor in,
+            FileDescriptor out,
+            CancellationSignal signal,
+            Executor executor,
+            ProgressListener listener)
+            throws IOException {
         return copy(in, out, Long.MAX_VALUE, signal, executor, listener);
     }
 
-    public static long copy(FileDescriptor in, FileDescriptor out, long count, CancellationSignal signal, Executor executor, ProgressListener listener) throws IOException {
+    public static long copy(
+            FileDescriptor in,
+            FileDescriptor out,
+            long count,
+            CancellationSignal signal,
+            Executor executor,
+            ProgressListener listener)
+            throws IOException {
         if (sEnableCopyOptimizations) {
             try {
                 StructStat st_in = Os.fstat(in);
@@ -287,8 +318,8 @@ public final class FileUtils {
                     }
                 }
                 if (!OsConstants.S_ISFIFO(st_in.st_mode) && !OsConstants.S_ISFIFO(st_out.st_mode)) {
-                    if (!OsConstants.S_ISSOCK(st_in.st_mode) && !OsConstants.S_ISSOCK(st_out.st_mode)) {
-                    }
+                    if (!OsConstants.S_ISSOCK(st_in.st_mode)
+                            && !OsConstants.S_ISSOCK(st_out.st_mode)) {}
                     return copyInternalSpliceSocket(in, out, count, signal, executor, listener);
                 }
                 return copyInternalSplice(in, out, count, signal, executor, listener);
@@ -299,12 +330,26 @@ public final class FileUtils {
         return copyInternalUserspace(in, out, count, signal, executor, listener);
     }
 
-    public static long copyInternalSplice(FileDescriptor in, FileDescriptor out, long count, CancellationSignal signal, Executor executor, final ProgressListener listener) throws ErrnoException {
+    public static long copyInternalSplice(
+            FileDescriptor in,
+            FileDescriptor out,
+            long count,
+            CancellationSignal signal,
+            Executor executor,
+            final ProgressListener listener)
+            throws ErrnoException {
         long checkpoint = 0;
         final long progress = 0;
         long progress2 = count;
         while (true) {
-            long t = Os.splice(in, null, out, null, Math.min(progress2, 524288L), OsConstants.SPLICE_F_MOVE | OsConstants.SPLICE_F_MORE);
+            long t =
+                    Os.splice(
+                            in,
+                            null,
+                            out,
+                            null,
+                            Math.min(progress2, 524288L),
+                            OsConstants.SPLICE_F_MOVE | OsConstants.SPLICE_F_MORE);
             if (t == 0) {
                 break;
             }
@@ -316,29 +361,39 @@ public final class FileUtils {
                     signal.throwIfCanceled();
                 }
                 if (executor != null && listener != null) {
-                    executor.execute(new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda4
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            FileUtils.ProgressListener.this.onProgress(progress);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // android.os.FileUtils$$ExternalSyntheticLambda4
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    FileUtils.ProgressListener.this.onProgress(progress);
+                                }
+                            });
                 }
                 checkpoint = 0;
             }
         }
         if (executor != null && listener != null) {
             final long progressSnapshot = progress;
-            executor.execute(new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FileUtils.ProgressListener.this.onProgress(progressSnapshot);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FileUtils.ProgressListener.this.onProgress(progressSnapshot);
+                        }
+                    });
         }
         return progress;
     }
 
-    public static long copyInternalSpliceSocket(FileDescriptor in, FileDescriptor out, long count, CancellationSignal signal, Executor executor, final ProgressListener listener) throws ErrnoException {
+    public static long copyInternalSpliceSocket(
+            FileDescriptor in,
+            FileDescriptor out,
+            long count,
+            CancellationSignal signal,
+            Executor executor,
+            final ProgressListener listener)
+            throws ErrnoException {
         String str;
         String str2;
         long progress = 0;
@@ -355,15 +410,41 @@ public final class FileUtils {
                 str = ", read:";
                 str2 = ", copied:";
             } else {
-                long t = Os.splice(in, null, pipes[1], null, Math.min(countToRead, 524288L), OsConstants.SPLICE_F_MOVE | OsConstants.SPLICE_F_MORE);
+                long t =
+                        Os.splice(
+                                in,
+                                null,
+                                pipes[1],
+                                null,
+                                Math.min(countToRead, 524288L),
+                                OsConstants.SPLICE_F_MOVE | OsConstants.SPLICE_F_MORE);
                 if (t < 0) {
-                    Slog.e(TAG, "splice error, fdIn --> pipe, copy size:" + count + ", copied:" + progress + ", read:" + (count - countToRead) + ", in pipe:" + countInPipe);
+                    Slog.e(
+                            TAG,
+                            "splice error, fdIn --> pipe, copy size:"
+                                    + count
+                                    + ", copied:"
+                                    + progress
+                                    + ", read:"
+                                    + (count - countToRead)
+                                    + ", in pipe:"
+                                    + countInPipe);
                     break;
                 }
                 if (t == 0) {
                     str = ", read:";
                     str2 = ", copied:";
-                    Slog.w(TAG, "Reached the end of the input file. The size to be copied exceeds the actual size, copy size:" + count + ", copied:" + progress + ", read:" + (count - countToRead) + ", in pipe:" + countInPipe);
+                    Slog.w(
+                            TAG,
+                            "Reached the end of the input file. The size to be copied exceeds the"
+                                + " actual size, copy size:"
+                                    + count
+                                    + ", copied:"
+                                    + progress
+                                    + ", read:"
+                                    + (count - countToRead)
+                                    + ", in pipe:"
+                                    + countInPipe);
                     countToRead = 0;
                 } else {
                     str = ", read:";
@@ -373,9 +454,25 @@ public final class FileUtils {
                 }
             }
             if (countInPipe > 0) {
-                long t2 = Os.splice(pipes[0], null, out, null, Math.min(countInPipe, 524288L), OsConstants.SPLICE_F_MOVE | OsConstants.SPLICE_F_MORE);
+                long t2 =
+                        Os.splice(
+                                pipes[0],
+                                null,
+                                out,
+                                null,
+                                Math.min(countInPipe, 524288L),
+                                OsConstants.SPLICE_F_MOVE | OsConstants.SPLICE_F_MORE);
                 if (t2 <= 0) {
-                    Slog.e(TAG, "splice error, pipe --> fdOut, copy size:" + count + str2 + progress + str + (count - countToRead) + ", in pipe: " + countInPipe);
+                    Slog.e(
+                            TAG,
+                            "splice error, pipe --> fdOut, copy size:"
+                                    + count
+                                    + str2
+                                    + progress
+                                    + str
+                                    + (count - countToRead)
+                                    + ", in pipe: "
+                                    + countInPipe);
                     Os.close(pipes[0]);
                     Os.close(pipes[1]);
                     throw new ErrnoException("splice, pipe --> fdOut", OsConstants.EIO);
@@ -392,31 +489,41 @@ public final class FileUtils {
                 }
                 if (executor != null && listener != null) {
                     final long progressSnapshot = progress;
-                    executor.execute(new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda6
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            FileUtils.ProgressListener.this.onProgress(progressSnapshot);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // android.os.FileUtils$$ExternalSyntheticLambda6
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    FileUtils.ProgressListener.this.onProgress(progressSnapshot);
+                                }
+                            });
                 }
                 checkpoint = 0;
             }
         }
         if (executor != null && listener != null) {
             final long progressSnapshot2 = progress;
-            executor.execute(new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda7
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FileUtils.ProgressListener.this.onProgress(progressSnapshot2);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda7
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FileUtils.ProgressListener.this.onProgress(progressSnapshot2);
+                        }
+                    });
         }
         Os.close(pipes[0]);
         Os.close(pipes[1]);
         return progress;
     }
 
-    public static long copyInternalSendfile(FileDescriptor in, FileDescriptor out, long count, CancellationSignal signal, Executor executor, final ProgressListener listener) throws ErrnoException {
+    public static long copyInternalSendfile(
+            FileDescriptor in,
+            FileDescriptor out,
+            long count,
+            CancellationSignal signal,
+            Executor executor,
+            final ProgressListener listener)
+            throws ErrnoException {
         long checkpoint = 0;
         final long progress = 0;
         long progress2 = count;
@@ -433,41 +540,70 @@ public final class FileUtils {
                     signal.throwIfCanceled();
                 }
                 if (executor != null && listener != null) {
-                    executor.execute(new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            FileUtils.ProgressListener.this.onProgress(progress);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // android.os.FileUtils$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    FileUtils.ProgressListener.this.onProgress(progress);
+                                }
+                            });
                 }
                 checkpoint = 0;
             }
         }
         if (executor != null && listener != null) {
             final long progressSnapshot = progress;
-            executor.execute(new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FileUtils.ProgressListener.this.onProgress(progressSnapshot);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FileUtils.ProgressListener.this.onProgress(progressSnapshot);
+                        }
+                    });
         }
         return progress;
     }
 
     @Deprecated
-    public static long copyInternalUserspace(FileDescriptor in, FileDescriptor out, ProgressListener listener, CancellationSignal signal, long count) throws IOException {
-        return copyInternalUserspace(in, out, count, signal, new PendingIntent$$ExternalSyntheticLambda0(), listener);
+    public static long copyInternalUserspace(
+            FileDescriptor in,
+            FileDescriptor out,
+            ProgressListener listener,
+            CancellationSignal signal,
+            long count)
+            throws IOException {
+        return copyInternalUserspace(
+                in, out, count, signal, new PendingIntent$$ExternalSyntheticLambda0(), listener);
     }
 
-    public static long copyInternalUserspace(FileDescriptor in, FileDescriptor out, long count, CancellationSignal signal, Executor executor, ProgressListener listener) throws IOException {
+    public static long copyInternalUserspace(
+            FileDescriptor in,
+            FileDescriptor out,
+            long count,
+            CancellationSignal signal,
+            Executor executor,
+            ProgressListener listener)
+            throws IOException {
         if (count != Long.MAX_VALUE) {
-            return copyInternalUserspace(new SizedInputStream(new FileInputStream(in), count), new FileOutputStream(out), signal, executor, listener);
+            return copyInternalUserspace(
+                    new SizedInputStream(new FileInputStream(in), count),
+                    new FileOutputStream(out),
+                    signal,
+                    executor,
+                    listener);
         }
-        return copyInternalUserspace(new FileInputStream(in), new FileOutputStream(out), signal, executor, listener);
+        return copyInternalUserspace(
+                new FileInputStream(in), new FileOutputStream(out), signal, executor, listener);
     }
 
-    public static long copyInternalUserspace(InputStream in, OutputStream out, CancellationSignal signal, Executor executor, final ProgressListener listener) throws IOException {
+    public static long copyInternalUserspace(
+            InputStream in,
+            OutputStream out,
+            CancellationSignal signal,
+            Executor executor,
+            final ProgressListener listener)
+            throws IOException {
         final long progress = 0;
         long checkpoint = 0;
         byte[] buffer = new byte[8192];
@@ -484,24 +620,27 @@ public final class FileUtils {
                     signal.throwIfCanceled();
                 }
                 if (executor != null && listener != null) {
-                    executor.execute(new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda2
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            FileUtils.ProgressListener.this.onProgress(progress);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // android.os.FileUtils$$ExternalSyntheticLambda2
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    FileUtils.ProgressListener.this.onProgress(progress);
+                                }
+                            });
                 }
                 checkpoint = 0;
             }
         }
         if (executor != null && listener != null) {
             final long progressSnapshot = progress;
-            executor.execute(new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FileUtils.ProgressListener.this.onProgress(progressSnapshot);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class: android.os.FileUtils$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FileUtils.ProgressListener.this.onProgress(progressSnapshot);
+                        }
+                    });
         }
         return progress;
     }
@@ -523,7 +662,13 @@ public final class FileUtils {
                 }
                 byte[] data = new byte[max + 1];
                 int length = bis.read(data);
-                return length <= 0 ? "" : length <= max ? new String(data, 0, length) : ellipsis == null ? new String(data, 0, max) : new String(data, 0, max) + ellipsis;
+                return length <= 0
+                        ? ""
+                        : length <= max
+                                ? new String(data, 0, length)
+                                : ellipsis == null
+                                        ? new String(data, 0, max)
+                                        : new String(data, 0, max) + ellipsis;
             }
             if (max >= 0) {
                 ByteArrayOutputStream contents = new ByteArrayOutputStream();
@@ -616,8 +761,7 @@ public final class FileUtils {
         try {
             cis = new CheckedInputStream(new FileInputStream(file), checkSummer);
             byte[] buf = new byte[128];
-            while (cis.read(buf) >= 0) {
-            }
+            while (cis.read(buf) >= 0) {}
             long value = checkSummer.getValue();
             try {
                 cis.close();
@@ -635,7 +779,8 @@ public final class FileUtils {
         }
     }
 
-    public static byte[] digest(File file, String algorithm) throws IOException, NoSuchAlgorithmException {
+    public static byte[] digest(File file, String algorithm)
+            throws IOException, NoSuchAlgorithmException {
         FileInputStream in = new FileInputStream(file);
         try {
             byte[] digest = digest(in, algorithm);
@@ -651,21 +796,23 @@ public final class FileUtils {
         }
     }
 
-    public static byte[] digest(InputStream in, String algorithm) throws IOException, NoSuchAlgorithmException {
+    public static byte[] digest(InputStream in, String algorithm)
+            throws IOException, NoSuchAlgorithmException {
         return digestInternalUserspace(in, algorithm);
     }
 
-    public static byte[] digest(FileDescriptor fd, String algorithm) throws IOException, NoSuchAlgorithmException {
+    public static byte[] digest(FileDescriptor fd, String algorithm)
+            throws IOException, NoSuchAlgorithmException {
         return digestInternalUserspace(new FileInputStream(fd), algorithm);
     }
 
-    private static byte[] digestInternalUserspace(InputStream in, String algorithm) throws IOException, NoSuchAlgorithmException {
+    private static byte[] digestInternalUserspace(InputStream in, String algorithm)
+            throws IOException, NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance(algorithm);
         DigestInputStream digestStream = new DigestInputStream(in, digest);
         try {
             byte[] buffer = new byte[8192];
-            do {
-            } while (digestStream.read(buffer) != -1);
+            do {} while (digestStream.read(buffer) != -1);
             digestStream.close();
             return digest.digest();
         } catch (Throwable th) {
@@ -686,12 +833,14 @@ public final class FileUtils {
         if (files == null) {
             return false;
         }
-        Arrays.sort(files, new Comparator<File>() { // from class: android.os.FileUtils.1
-            @Override // java.util.Comparator
-            public int compare(File lhs, File rhs) {
-                return Long.compare(rhs.lastModified(), lhs.lastModified());
-            }
-        });
+        Arrays.sort(
+                files,
+                new Comparator<File>() { // from class: android.os.FileUtils.1
+                    @Override // java.util.Comparator
+                    public int compare(File lhs, File rhs) {
+                        return Long.compare(rhs.lastModified(), lhs.lastModified());
+                    }
+                });
         boolean deleted = false;
         for (int i = minCount; i < files.length; i++) {
             File file = files[i];
@@ -855,7 +1004,8 @@ public final class FileUtils {
 
     public static String rewriteAfterRename(File beforeDir, File afterDir, String path) {
         File result;
-        if (path == null || (result = rewriteAfterRename(beforeDir, afterDir, new File(path))) == null) {
+        if (path == null
+                || (result = rewriteAfterRename(beforeDir, afterDir, new File(path))) == null) {
             return null;
         }
         return result.getAbsolutePath();
@@ -880,7 +1030,8 @@ public final class FileUtils {
         return new File(afterDir, splice);
     }
 
-    private static File buildUniqueFileWithExtension(File parent, String name, String ext) throws FileNotFoundException {
+    private static File buildUniqueFileWithExtension(File parent, String name, String ext)
+            throws FileNotFoundException {
         File file = buildFile(parent, name, ext);
         int n = 0;
         while (file.exists()) {
@@ -888,13 +1039,16 @@ public final class FileUtils {
             if (n >= 32) {
                 throw new FileNotFoundException("Failed to create unique file");
             }
-            file = buildFile(parent, name + " (" + n2 + NavigationBarInflaterView.KEY_CODE_END, ext);
+            file =
+                    buildFile(
+                            parent, name + " (" + n2 + NavigationBarInflaterView.KEY_CODE_END, ext);
             n = n2;
         }
         return file;
     }
 
-    public static File buildUniqueFile(File parent, String mimeType, String displayName) throws FileNotFoundException {
+    public static File buildUniqueFile(File parent, String mimeType, String displayName)
+            throws FileNotFoundException {
         String[] parts = splitFileName(mimeType, displayName);
         return buildUniqueFileWithExtension(parent, parts[0], parts[1]);
     }
@@ -904,7 +1058,8 @@ public final class FileUtils {
         return buildFile(parent, parts[0], parts[1]);
     }
 
-    public static File buildUniqueFile(File parent, String displayName) throws FileNotFoundException {
+    public static File buildUniqueFile(File parent, String displayName)
+            throws FileNotFoundException {
         String name;
         String ext;
         int lastDot = displayName.lastIndexOf(46);
@@ -933,7 +1088,8 @@ public final class FileUtils {
             if (lastDot >= 0) {
                 name = displayName.substring(0, lastDot);
                 ext = displayName.substring(lastDot + 1);
-                mimeTypeFromExt = MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext.toLowerCase());
+                mimeTypeFromExt =
+                        MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext.toLowerCase());
             } else {
                 name = displayName;
                 ext = null;
@@ -947,7 +1103,8 @@ public final class FileUtils {
             } else {
                 extFromMimeType = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
             }
-            if (!Objects.equals(mimeType, mimeTypeFromExt) && !Objects.equals(ext, extFromMimeType)) {
+            if (!Objects.equals(mimeType, mimeTypeFromExt)
+                    && !Objects.equals(ext, extFromMimeType)) {
                 String ext2 = extFromMimeType;
                 name2 = displayName;
                 name3 = ext2;
@@ -959,7 +1116,7 @@ public final class FileUtils {
         if (name3 == null) {
             name3 = "";
         }
-        return new String[]{name2, name3};
+        return new String[] {name2, name3};
     }
 
     private static File buildFile(File parent, String name, String ext) {
@@ -978,7 +1135,9 @@ public final class FileUtils {
     }
 
     public static File[] listFilesOrEmpty(File dir, FilenameFilter filter) {
-        return dir != null ? ArrayUtils.defeatNullable(dir.listFiles(filter)) : ArrayUtils.EMPTY_FILE;
+        return dir != null
+                ? ArrayUtils.defeatNullable(dir.listFiles(filter))
+                : ArrayUtils.EMPTY_FILE;
     }
 
     public static File newFileOrNull(String path) {
@@ -1182,7 +1341,8 @@ public final class FileUtils {
         if (mode == OsConstants.F_OK) {
             return OsConstants.O_RDONLY;
         }
-        if (((OsConstants.R_OK | OsConstants.W_OK) & mode) == (OsConstants.R_OK | OsConstants.W_OK)) {
+        if (((OsConstants.R_OK | OsConstants.W_OK) & mode)
+                == (OsConstants.R_OK | OsConstants.W_OK)) {
             return OsConstants.O_RDWR;
         }
         if ((OsConstants.R_OK & mode) == OsConstants.R_OK) {
@@ -1203,7 +1363,8 @@ public final class FileUtils {
         try {
             ParcelFileDescriptor dupFd = ParcelFileDescriptor.dup(fd);
             try {
-                ParcelFileDescriptor originalMediaFormatFileDescriptor = MediaStore.getOriginalMediaFormatFileDescriptor(context, dupFd);
+                ParcelFileDescriptor originalMediaFormatFileDescriptor =
+                        MediaStore.getOriginalMediaFormatFileDescriptor(context, dupFd);
                 if (dupFd != null) {
                     dupFd.close();
                 }
@@ -1220,7 +1381,9 @@ public final class FileUtils {
             return sSecMediaProviderAppId;
         }
         PackageManager pm = context.getPackageManager();
-        ProviderInfo provider = pm.resolveContentProvider("secmedia", BatteryStats.HistoryItem.MOST_INTERESTING_STATES);
+        ProviderInfo provider =
+                pm.resolveContentProvider(
+                        "secmedia", BatteryStats.HistoryItem.MOST_INTERESTING_STATES);
         if (provider == null) {
             return -1;
         }
@@ -1233,7 +1396,10 @@ public final class FileUtils {
             return sMediaProviderAppId;
         }
         context.getPackageManager();
-        ProviderInfo provider = context.getPackageManager().resolveContentProvider("media", BatteryStats.HistoryItem.MOST_INTERESTING_STATES);
+        ProviderInfo provider =
+                context.getPackageManager()
+                        .resolveContentProvider(
+                                "media", BatteryStats.HistoryItem.MOST_INTERESTING_STATES);
         if (provider == null) {
             return -1;
         }
@@ -1278,25 +1444,25 @@ public final class FileUtils {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:18:0x002a, code lost:
-        
-            if (r6.sink != false) goto L23;
-         */
+
+           if (r6.sink != false) goto L23;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:19:0x004d, code lost:
-        
-            libcore.io.IoUtils.closeQuietly(r0);
-         */
+
+           libcore.io.IoUtils.closeQuietly(r0);
+        */
         /* JADX WARN: Code restructure failed: missing block: B:20:0x0051, code lost:
-        
-            return;
-         */
+
+           return;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:22:0x0044, code lost:
-        
-            android.os.SystemClock.sleep(java.util.concurrent.TimeUnit.SECONDS.toMillis(1));
-         */
+
+           android.os.SystemClock.sleep(java.util.concurrent.TimeUnit.SECONDS.toMillis(1));
+        */
         /* JADX WARN: Code restructure failed: missing block: B:26:0x0042, code lost:
-        
-            if (r6.sink == false) goto L24;
-         */
+
+           if (r6.sink == false) goto L24;
+        */
         @Override // java.lang.Thread, java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -1355,7 +1521,8 @@ public final class FileUtils {
                 libcore.io.IoUtils.closeQuietly(r0)
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.os.FileUtils.MemoryPipe.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled: android.os.FileUtils.MemoryPipe.run():void");
         }
 
         @Override // java.lang.AutoCloseable

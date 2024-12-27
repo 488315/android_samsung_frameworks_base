@@ -27,19 +27,34 @@ public interface ISoundTriggerSession extends IInterface {
 
     boolean isRecognitionActive(ParcelUuid parcelUuid) throws RemoteException;
 
-    int loadGenericSoundModel(SoundTrigger.GenericSoundModel genericSoundModel) throws RemoteException;
+    int loadGenericSoundModel(SoundTrigger.GenericSoundModel genericSoundModel)
+            throws RemoteException;
 
-    int loadKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel keyphraseSoundModel) throws RemoteException;
+    int loadKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel keyphraseSoundModel)
+            throws RemoteException;
 
-    SoundTrigger.ModelParamRange queryParameter(ParcelUuid parcelUuid, int i) throws RemoteException;
+    SoundTrigger.ModelParamRange queryParameter(ParcelUuid parcelUuid, int i)
+            throws RemoteException;
 
     int setParameter(ParcelUuid parcelUuid, int i, int i2) throws RemoteException;
 
-    int startRecognition(SoundTrigger.GenericSoundModel genericSoundModel, IRecognitionStatusCallback iRecognitionStatusCallback, SoundTrigger.RecognitionConfig recognitionConfig, boolean z) throws RemoteException;
+    int startRecognition(
+            SoundTrigger.GenericSoundModel genericSoundModel,
+            IRecognitionStatusCallback iRecognitionStatusCallback,
+            SoundTrigger.RecognitionConfig recognitionConfig,
+            boolean z)
+            throws RemoteException;
 
-    int startRecognitionForService(ParcelUuid parcelUuid, Bundle bundle, ComponentName componentName, SoundTrigger.RecognitionConfig recognitionConfig) throws RemoteException;
+    int startRecognitionForService(
+            ParcelUuid parcelUuid,
+            Bundle bundle,
+            ComponentName componentName,
+            SoundTrigger.RecognitionConfig recognitionConfig)
+            throws RemoteException;
 
-    int stopRecognition(ParcelUuid parcelUuid, IRecognitionStatusCallback iRecognitionStatusCallback) throws RemoteException;
+    int stopRecognition(
+            ParcelUuid parcelUuid, IRecognitionStatusCallback iRecognitionStatusCallback)
+            throws RemoteException;
 
     int stopRecognitionForService(ParcelUuid parcelUuid) throws RemoteException;
 
@@ -49,40 +64,53 @@ public interface ISoundTriggerSession extends IInterface {
 
     public static class Default implements ISoundTriggerSession {
         @Override // com.android.internal.app.ISoundTriggerSession
-        public SoundTrigger.GenericSoundModel getSoundModel(ParcelUuid soundModelId) throws RemoteException {
+        public SoundTrigger.GenericSoundModel getSoundModel(ParcelUuid soundModelId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.ISoundTriggerSession
-        public void updateSoundModel(SoundTrigger.GenericSoundModel soundModel) throws RemoteException {
-        }
+        public void updateSoundModel(SoundTrigger.GenericSoundModel soundModel)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.ISoundTriggerSession
-        public void deleteSoundModel(ParcelUuid soundModelId) throws RemoteException {
-        }
+        public void deleteSoundModel(ParcelUuid soundModelId) throws RemoteException {}
 
         @Override // com.android.internal.app.ISoundTriggerSession
-        public int startRecognition(SoundTrigger.GenericSoundModel soundModel, IRecognitionStatusCallback callback, SoundTrigger.RecognitionConfig config, boolean runInBatterySaver) throws RemoteException {
+        public int startRecognition(
+                SoundTrigger.GenericSoundModel soundModel,
+                IRecognitionStatusCallback callback,
+                SoundTrigger.RecognitionConfig config,
+                boolean runInBatterySaver)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.ISoundTriggerSession
-        public int stopRecognition(ParcelUuid soundModelId, IRecognitionStatusCallback callback) throws RemoteException {
+        public int stopRecognition(ParcelUuid soundModelId, IRecognitionStatusCallback callback)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.ISoundTriggerSession
-        public int loadGenericSoundModel(SoundTrigger.GenericSoundModel soundModel) throws RemoteException {
+        public int loadGenericSoundModel(SoundTrigger.GenericSoundModel soundModel)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.ISoundTriggerSession
-        public int loadKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel soundModel) throws RemoteException {
+        public int loadKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel soundModel)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.ISoundTriggerSession
-        public int startRecognitionForService(ParcelUuid soundModelId, Bundle params, ComponentName callbackIntent, SoundTrigger.RecognitionConfig config) throws RemoteException {
+        public int startRecognitionForService(
+                ParcelUuid soundModelId,
+                Bundle params,
+                ComponentName callbackIntent,
+                SoundTrigger.RecognitionConfig config)
+                throws RemoteException {
             return 0;
         }
 
@@ -112,7 +140,8 @@ public interface ISoundTriggerSession extends IInterface {
         }
 
         @Override // com.android.internal.app.ISoundTriggerSession
-        public int setParameter(ParcelUuid soundModelId, int modelParam, int value) throws RemoteException {
+        public int setParameter(ParcelUuid soundModelId, int modelParam, int value)
+                throws RemoteException {
             return 0;
         }
 
@@ -122,7 +151,8 @@ public interface ISoundTriggerSession extends IInterface {
         }
 
         @Override // com.android.internal.app.ISoundTriggerSession
-        public SoundTrigger.ModelParamRange queryParameter(ParcelUuid soundModelId, int modelParam) throws RemoteException {
+        public SoundTrigger.ModelParamRange queryParameter(ParcelUuid soundModelId, int modelParam)
+                throws RemoteException {
             return null;
         }
 
@@ -132,7 +162,7 @@ public interface ISoundTriggerSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISoundTriggerSession {
+    public abstract static class Stub extends Binder implements ISoundTriggerSession {
         static final int TRANSACTION_deleteSoundModel = 3;
         static final int TRANSACTION_getModelState = 12;
         static final int TRANSACTION_getModuleProperties = 13;
@@ -215,7 +245,8 @@ public interface ISoundTriggerSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISoundTriggerSession.DESCRIPTOR);
             }
@@ -232,7 +263,9 @@ public interface ISoundTriggerSession extends IInterface {
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 2:
-                    SoundTrigger.GenericSoundModel _arg02 = (SoundTrigger.GenericSoundModel) data.readTypedObject(SoundTrigger.GenericSoundModel.CREATOR);
+                    SoundTrigger.GenericSoundModel _arg02 =
+                            (SoundTrigger.GenericSoundModel)
+                                    data.readTypedObject(SoundTrigger.GenericSoundModel.CREATOR);
                     data.enforceNoDataAvail();
                     updateSoundModel(_arg02);
                     reply.writeNoException();
@@ -244,9 +277,14 @@ public interface ISoundTriggerSession extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 4:
-                    SoundTrigger.GenericSoundModel _arg04 = (SoundTrigger.GenericSoundModel) data.readTypedObject(SoundTrigger.GenericSoundModel.CREATOR);
-                    IRecognitionStatusCallback _arg1 = IRecognitionStatusCallback.Stub.asInterface(data.readStrongBinder());
-                    SoundTrigger.RecognitionConfig _arg2 = (SoundTrigger.RecognitionConfig) data.readTypedObject(SoundTrigger.RecognitionConfig.CREATOR);
+                    SoundTrigger.GenericSoundModel _arg04 =
+                            (SoundTrigger.GenericSoundModel)
+                                    data.readTypedObject(SoundTrigger.GenericSoundModel.CREATOR);
+                    IRecognitionStatusCallback _arg1 =
+                            IRecognitionStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    SoundTrigger.RecognitionConfig _arg2 =
+                            (SoundTrigger.RecognitionConfig)
+                                    data.readTypedObject(SoundTrigger.RecognitionConfig.CREATOR);
                     boolean _arg3 = data.readBoolean();
                     data.enforceNoDataAvail();
                     int _result2 = startRecognition(_arg04, _arg1, _arg2, _arg3);
@@ -255,21 +293,26 @@ public interface ISoundTriggerSession extends IInterface {
                     return true;
                 case 5:
                     ParcelUuid _arg05 = (ParcelUuid) data.readTypedObject(ParcelUuid.CREATOR);
-                    IRecognitionStatusCallback _arg12 = IRecognitionStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    IRecognitionStatusCallback _arg12 =
+                            IRecognitionStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result3 = stopRecognition(_arg05, _arg12);
                     reply.writeNoException();
                     reply.writeInt(_result3);
                     return true;
                 case 6:
-                    SoundTrigger.GenericSoundModel _arg06 = (SoundTrigger.GenericSoundModel) data.readTypedObject(SoundTrigger.GenericSoundModel.CREATOR);
+                    SoundTrigger.GenericSoundModel _arg06 =
+                            (SoundTrigger.GenericSoundModel)
+                                    data.readTypedObject(SoundTrigger.GenericSoundModel.CREATOR);
                     data.enforceNoDataAvail();
                     int _result4 = loadGenericSoundModel(_arg06);
                     reply.writeNoException();
                     reply.writeInt(_result4);
                     return true;
                 case 7:
-                    SoundTrigger.KeyphraseSoundModel _arg07 = (SoundTrigger.KeyphraseSoundModel) data.readTypedObject(SoundTrigger.KeyphraseSoundModel.CREATOR);
+                    SoundTrigger.KeyphraseSoundModel _arg07 =
+                            (SoundTrigger.KeyphraseSoundModel)
+                                    data.readTypedObject(SoundTrigger.KeyphraseSoundModel.CREATOR);
                     data.enforceNoDataAvail();
                     int _result5 = loadKeyphraseSoundModel(_arg07);
                     reply.writeNoException();
@@ -278,8 +321,11 @@ public interface ISoundTriggerSession extends IInterface {
                 case 8:
                     ParcelUuid _arg08 = (ParcelUuid) data.readTypedObject(ParcelUuid.CREATOR);
                     Bundle _arg13 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    ComponentName _arg22 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-                    SoundTrigger.RecognitionConfig _arg32 = (SoundTrigger.RecognitionConfig) data.readTypedObject(SoundTrigger.RecognitionConfig.CREATOR);
+                    ComponentName _arg22 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    SoundTrigger.RecognitionConfig _arg32 =
+                            (SoundTrigger.RecognitionConfig)
+                                    data.readTypedObject(SoundTrigger.RecognitionConfig.CREATOR);
                     data.enforceNoDataAvail();
                     int _result6 = startRecognitionForService(_arg08, _arg13, _arg22, _arg32);
                     reply.writeNoException();
@@ -365,7 +411,8 @@ public interface ISoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerSession
-            public SoundTrigger.GenericSoundModel getSoundModel(ParcelUuid soundModelId) throws RemoteException {
+            public SoundTrigger.GenericSoundModel getSoundModel(ParcelUuid soundModelId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -373,7 +420,9 @@ public interface ISoundTriggerSession extends IInterface {
                     _data.writeTypedObject(soundModelId, 0);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    SoundTrigger.GenericSoundModel _result = (SoundTrigger.GenericSoundModel) _reply.readTypedObject(SoundTrigger.GenericSoundModel.CREATOR);
+                    SoundTrigger.GenericSoundModel _result =
+                            (SoundTrigger.GenericSoundModel)
+                                    _reply.readTypedObject(SoundTrigger.GenericSoundModel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -382,7 +431,8 @@ public interface ISoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerSession
-            public void updateSoundModel(SoundTrigger.GenericSoundModel soundModel) throws RemoteException {
+            public void updateSoundModel(SoundTrigger.GenericSoundModel soundModel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -412,7 +462,12 @@ public interface ISoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerSession
-            public int startRecognition(SoundTrigger.GenericSoundModel soundModel, IRecognitionStatusCallback callback, SoundTrigger.RecognitionConfig config, boolean runInBatterySaver) throws RemoteException {
+            public int startRecognition(
+                    SoundTrigger.GenericSoundModel soundModel,
+                    IRecognitionStatusCallback callback,
+                    SoundTrigger.RecognitionConfig config,
+                    boolean runInBatterySaver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -432,7 +487,8 @@ public interface ISoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerSession
-            public int stopRecognition(ParcelUuid soundModelId, IRecognitionStatusCallback callback) throws RemoteException {
+            public int stopRecognition(ParcelUuid soundModelId, IRecognitionStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -450,7 +506,8 @@ public interface ISoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerSession
-            public int loadGenericSoundModel(SoundTrigger.GenericSoundModel soundModel) throws RemoteException {
+            public int loadGenericSoundModel(SoundTrigger.GenericSoundModel soundModel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -467,7 +524,8 @@ public interface ISoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerSession
-            public int loadKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel soundModel) throws RemoteException {
+            public int loadKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel soundModel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -484,7 +542,12 @@ public interface ISoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerSession
-            public int startRecognitionForService(ParcelUuid soundModelId, Bundle params, ComponentName callbackIntent, SoundTrigger.RecognitionConfig config) throws RemoteException {
+            public int startRecognitionForService(
+                    ParcelUuid soundModelId,
+                    Bundle params,
+                    ComponentName callbackIntent,
+                    SoundTrigger.RecognitionConfig config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -579,7 +642,9 @@ public interface ISoundTriggerSession extends IInterface {
                     _data.writeInterfaceToken(ISoundTriggerSession.DESCRIPTOR);
                     this.mRemote.transact(13, _data, _reply, 0);
                     _reply.readException();
-                    SoundTrigger.ModuleProperties _result = (SoundTrigger.ModuleProperties) _reply.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
+                    SoundTrigger.ModuleProperties _result =
+                            (SoundTrigger.ModuleProperties)
+                                    _reply.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -588,7 +653,8 @@ public interface ISoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerSession
-            public int setParameter(ParcelUuid soundModelId, int modelParam, int value) throws RemoteException {
+            public int setParameter(ParcelUuid soundModelId, int modelParam, int value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -607,7 +673,8 @@ public interface ISoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerSession
-            public int getParameter(ParcelUuid soundModelId, int modelParam) throws RemoteException {
+            public int getParameter(ParcelUuid soundModelId, int modelParam)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -625,7 +692,8 @@ public interface ISoundTriggerSession extends IInterface {
             }
 
             @Override // com.android.internal.app.ISoundTriggerSession
-            public SoundTrigger.ModelParamRange queryParameter(ParcelUuid soundModelId, int modelParam) throws RemoteException {
+            public SoundTrigger.ModelParamRange queryParameter(
+                    ParcelUuid soundModelId, int modelParam) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -634,7 +702,9 @@ public interface ISoundTriggerSession extends IInterface {
                     _data.writeInt(modelParam);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    SoundTrigger.ModelParamRange _result = (SoundTrigger.ModelParamRange) _reply.readTypedObject(SoundTrigger.ModelParamRange.CREATOR);
+                    SoundTrigger.ModelParamRange _result =
+                            (SoundTrigger.ModelParamRange)
+                                    _reply.readTypedObject(SoundTrigger.ModelParamRange.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

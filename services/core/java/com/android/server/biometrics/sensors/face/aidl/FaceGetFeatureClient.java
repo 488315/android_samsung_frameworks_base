@@ -6,6 +6,7 @@ import android.hardware.face.IFaceServiceReceiver;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.biometrics.log.BiometricContext;
 import com.android.server.biometrics.log.BiometricLogger;
 import com.android.server.biometrics.sensors.ClientMonitorCallback;
@@ -13,6 +14,7 @@ import com.android.server.biometrics.sensors.ClientMonitorCallbackConverter;
 import com.android.server.biometrics.sensors.ErrorConsumer;
 import com.android.server.biometrics.sensors.HalClientMonitor;
 import com.android.server.biometrics.sensors.face.hidl.HidlToAidlSessionAdapter;
+
 import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,8 +23,29 @@ public final class FaceGetFeatureClient extends HalClientMonitor implements Erro
     public final int mFeature;
     public final int mUserId;
 
-    public FaceGetFeatureClient(Context context, Supplier supplier, IBinder iBinder, ClientMonitorCallbackConverter clientMonitorCallbackConverter, int i, String str, int i2, BiometricLogger biometricLogger, BiometricContext biometricContext, int i3) {
-        super(context, supplier, iBinder, clientMonitorCallbackConverter, i, str, 0, i2, biometricLogger, biometricContext, false);
+    public FaceGetFeatureClient(
+            Context context,
+            Supplier supplier,
+            IBinder iBinder,
+            ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+            int i,
+            String str,
+            int i2,
+            BiometricLogger biometricLogger,
+            BiometricContext biometricContext,
+            int i3) {
+        super(
+                context,
+                supplier,
+                iBinder,
+                clientMonitorCallbackConverter,
+                i,
+                str,
+                0,
+                i2,
+                biometricLogger,
+                biometricContext,
+                false);
         this.mUserId = i;
         this.mFeature = i3;
     }

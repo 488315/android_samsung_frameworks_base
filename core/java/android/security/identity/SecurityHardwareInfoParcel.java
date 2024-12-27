@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class SecurityHardwareInfoParcel implements Parcelable {
-    public static final Parcelable.Creator<SecurityHardwareInfoParcel> CREATOR = new Parcelable.Creator<SecurityHardwareInfoParcel>() { // from class: android.security.identity.SecurityHardwareInfoParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SecurityHardwareInfoParcel createFromParcel(Parcel _aidl_source) {
-            SecurityHardwareInfoParcel _aidl_out = new SecurityHardwareInfoParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SecurityHardwareInfoParcel> CREATOR =
+            new Parcelable.Creator<
+                    SecurityHardwareInfoParcel>() { // from class:
+                                                    // android.security.identity.SecurityHardwareInfoParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SecurityHardwareInfoParcel createFromParcel(Parcel _aidl_source) {
+                    SecurityHardwareInfoParcel _aidl_out = new SecurityHardwareInfoParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SecurityHardwareInfoParcel[] newArray(int _aidl_size) {
-            return new SecurityHardwareInfoParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SecurityHardwareInfoParcel[] newArray(int _aidl_size) {
+                    return new SecurityHardwareInfoParcel[_aidl_size];
+                }
+            };
     public boolean directAccess = false;
     public String[] supportedDocTypes;
 

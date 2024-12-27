@@ -1,9 +1,11 @@
 package android.sax;
 
 import android.media.MediaMetrics;
-import java.util.ArrayList;
+
 import org.xml.sax.Locator;
 import org.xml.sax.SAXParseException;
+
+import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
 public class Element {
@@ -31,7 +33,9 @@ public class Element {
 
     public Element getChild(String uri, String localName) {
         if (this.endTextElementListener != null) {
-            throw new IllegalStateException("This element already has an end text element listener. It cannot have children.");
+            throw new IllegalStateException(
+                    "This element already has an end text element listener. It cannot have"
+                        + " children.");
         }
         if (this.children == null) {
             this.children = new Children();
@@ -83,7 +87,9 @@ public class Element {
             throw new IllegalStateException("End text element listener has already been set.");
         }
         if (this.children != null) {
-            throw new IllegalStateException("This element already has children. It cannot have an end text element listener.");
+            throw new IllegalStateException(
+                    "This element already has children. It cannot have an end text element"
+                        + " listener.");
         }
         this.endTextElementListener = endTextElementListener;
     }
@@ -111,7 +117,13 @@ public class Element {
             for (int i = requiredChildren.size() - 1; i >= 0; i--) {
                 Element child = requiredChildren.get(i);
                 if (!child.visited) {
-                    throw new BadXmlException("Element named " + this + " is missing required child element named " + child + MediaMetrics.SEPARATOR, locator);
+                    throw new BadXmlException(
+                            "Element named "
+                                    + this
+                                    + " is missing required child element named "
+                                    + child
+                                    + MediaMetrics.SEPARATOR,
+                            locator);
                 }
             }
         }

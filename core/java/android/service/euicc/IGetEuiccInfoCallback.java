@@ -13,8 +13,7 @@ public interface IGetEuiccInfoCallback extends IInterface {
 
     public static class Default implements IGetEuiccInfoCallback {
         @Override // android.service.euicc.IGetEuiccInfoCallback
-        public void onSuccess(EuiccInfo euiccInfo) throws RemoteException {
-        }
+        public void onSuccess(EuiccInfo euiccInfo) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +21,7 @@ public interface IGetEuiccInfoCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetEuiccInfoCallback {
+    public abstract static class Stub extends Binder implements IGetEuiccInfoCallback {
         public static final String DESCRIPTOR = "android.service.euicc.IGetEuiccInfoCallback";
         static final int TRANSACTION_onSuccess = 1;
 
@@ -61,7 +60,8 @@ public interface IGetEuiccInfoCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

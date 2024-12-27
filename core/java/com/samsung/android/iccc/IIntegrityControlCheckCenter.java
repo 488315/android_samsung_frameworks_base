@@ -66,7 +66,7 @@ public interface IIntegrityControlCheckCenter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIntegrityControlCheckCenter {
+    public abstract static class Stub extends Binder implements IIntegrityControlCheckCenter {
         static final int TRANSACTION_getBldpData = 7;
         static final int TRANSACTION_getDeviceInfo = 6;
         static final int TRANSACTION_getDeviceStatus = 5;
@@ -122,7 +122,8 @@ public interface IIntegrityControlCheckCenter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIntegrityControlCheckCenter.DESCRIPTOR);
             }

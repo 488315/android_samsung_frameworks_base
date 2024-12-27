@@ -1,6 +1,7 @@
 package android.net;
 
 import com.android.internal.net.VpnProfile;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -17,8 +18,7 @@ public abstract class PlatformVpnProfile {
     protected final int mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PlatformVpnType {
-    }
+    public @interface PlatformVpnType {}
 
     public abstract VpnProfile toVpnProfile() throws IOException, GeneralSecurityException;
 
@@ -53,7 +53,8 @@ public abstract class PlatformVpnProfile {
         }
     }
 
-    public static PlatformVpnProfile fromVpnProfile(VpnProfile profile) throws IOException, GeneralSecurityException {
+    public static PlatformVpnProfile fromVpnProfile(VpnProfile profile)
+            throws IOException, GeneralSecurityException {
         switch (profile.type) {
             case 6:
             case 7:

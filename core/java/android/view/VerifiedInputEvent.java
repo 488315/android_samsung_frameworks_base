@@ -2,31 +2,34 @@ package android.view;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes4.dex */
 public abstract class VerifiedInputEvent implements Parcelable {
-    public static final Parcelable.Creator<VerifiedInputEvent> CREATOR = new Parcelable.Creator<VerifiedInputEvent>() { // from class: android.view.VerifiedInputEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerifiedInputEvent[] newArray(int size) {
-            return new VerifiedInputEvent[size];
-        }
+    public static final Parcelable.Creator<VerifiedInputEvent> CREATOR =
+            new Parcelable.Creator<
+                    VerifiedInputEvent>() { // from class: android.view.VerifiedInputEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerifiedInputEvent[] newArray(int size) {
+                    return new VerifiedInputEvent[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerifiedInputEvent createFromParcel(Parcel in) {
-            int type = VerifiedInputEvent.peekInt(in);
-            if (type == 1) {
-                return VerifiedKeyEvent.CREATOR.createFromParcel(in);
-            }
-            if (type == 2) {
-                return VerifiedMotionEvent.CREATOR.createFromParcel(in);
-            }
-            throw new IllegalArgumentException("Unexpected input event type in parcel.");
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerifiedInputEvent createFromParcel(Parcel in) {
+                    int type = VerifiedInputEvent.peekInt(in);
+                    if (type == 1) {
+                        return VerifiedKeyEvent.CREATOR.createFromParcel(in);
+                    }
+                    if (type == 2) {
+                        return VerifiedMotionEvent.CREATOR.createFromParcel(in);
+                    }
+                    throw new IllegalArgumentException("Unexpected input event type in parcel.");
+                }
+            };
     private static final String TAG = "VerifiedInputEvent";
     protected static final int VERIFIED_KEY = 1;
     protected static final int VERIFIED_MOTION = 2;
@@ -37,10 +40,10 @@ public abstract class VerifiedInputEvent implements Parcelable {
     private int mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VerifiedInputEventType {
-    }
+    public @interface VerifiedInputEventType {}
 
-    protected VerifiedInputEvent(int type, int deviceId, long eventTimeNanos, int source, int displayId) {
+    protected VerifiedInputEvent(
+            int type, int deviceId, long eventTimeNanos, int source, int displayId) {
         this.mType = type;
         this.mDeviceId = deviceId;
         this.mEventTimeNanos = eventTimeNanos;
@@ -105,7 +108,11 @@ public abstract class VerifiedInputEvent implements Parcelable {
             return false;
         }
         VerifiedInputEvent that = (VerifiedInputEvent) o;
-        if (this.mType == that.mType && getDeviceId() == that.getDeviceId() && getEventTimeNanos() == that.getEventTimeNanos() && getSource() == that.getSource() && getDisplayId() == that.getDisplayId()) {
+        if (this.mType == that.mType
+                && getDeviceId() == that.getDeviceId()
+                && getEventTimeNanos() == that.getEventTimeNanos()
+                && getSource() == that.getSource()
+                && getDisplayId() == that.getDisplayId()) {
             return true;
         }
         return false;
@@ -113,6 +120,9 @@ public abstract class VerifiedInputEvent implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + this.mType;
-        return (((((((_hash * 31) + getDeviceId()) * 31) + Long.hashCode(getEventTimeNanos())) * 31) + getSource()) * 31) + getDisplayId();
+        return (((((((_hash * 31) + getDeviceId()) * 31) + Long.hashCode(getEventTimeNanos())) * 31)
+                                + getSource())
+                        * 31)
+                + getDisplayId();
     }
 }

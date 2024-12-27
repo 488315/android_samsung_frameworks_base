@@ -3,27 +3,30 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class EmergencyNumber implements Parcelable {
-    public static final Parcelable.Creator<EmergencyNumber> CREATOR = new Parcelable.Creator<EmergencyNumber>() { // from class: android.hardware.radio.voice.EmergencyNumber.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EmergencyNumber createFromParcel(Parcel _aidl_source) {
-            EmergencyNumber _aidl_out = new EmergencyNumber();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<EmergencyNumber> CREATOR =
+            new Parcelable.Creator<EmergencyNumber>() { // from class:
+                // android.hardware.radio.voice.EmergencyNumber.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EmergencyNumber createFromParcel(Parcel _aidl_source) {
+                    EmergencyNumber _aidl_out = new EmergencyNumber();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EmergencyNumber[] newArray(int _aidl_size) {
-            return new EmergencyNumber[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EmergencyNumber[] newArray(int _aidl_size) {
+                    return new EmergencyNumber[_aidl_size];
+                }
+            };
     public static final int SOURCE_DEFAULT = 8;
     public static final int SOURCE_MODEM_CONFIG = 4;
     public static final int SOURCE_NETWORK_SIGNALING = 1;

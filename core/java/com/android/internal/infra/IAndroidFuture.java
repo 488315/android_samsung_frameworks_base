@@ -14,8 +14,7 @@ public interface IAndroidFuture extends IInterface {
 
     public static class Default implements IAndroidFuture {
         @Override // com.android.internal.infra.IAndroidFuture
-        public void complete(AndroidFuture resultContainer) throws RemoteException {
-        }
+        public void complete(AndroidFuture resultContainer) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IAndroidFuture extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAndroidFuture {
+    public abstract static class Stub extends Binder implements IAndroidFuture {
         static final int TRANSACTION_complete = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IAndroidFuture extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAndroidFuture.DESCRIPTOR);
             }
@@ -71,7 +71,8 @@ public interface IAndroidFuture extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AndroidFuture _arg0 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg0 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     complete(_arg0);
                     return true;

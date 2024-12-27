@@ -27,7 +27,8 @@ public interface IMcfDeviceSyncService extends IInterface {
                 Parcel obtain = Parcel.obtain();
                 Parcel obtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.mcfds.lib.IMcfDeviceSyncService");
+                    obtain.writeInterfaceToken(
+                            "com.samsung.android.mcfds.lib.IMcfDeviceSyncService");
                     obtain.writeInt(1);
                     message.writeToParcel(obtain, 0);
                     this.mRemote.transact(1, obtain, obtain2, 0);

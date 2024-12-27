@@ -13,16 +13,16 @@ public interface IKeyguardCallback extends IInterface {
 
     void onDismiss() throws RemoteException;
 
-    void onRemoteContentReady(SurfaceControlViewHost.SurfacePackage surfacePackage) throws RemoteException;
+    void onRemoteContentReady(SurfaceControlViewHost.SurfacePackage surfacePackage)
+            throws RemoteException;
 
     public static class Default implements IKeyguardCallback {
         @Override // android.app.admin.IKeyguardCallback
-        public void onRemoteContentReady(SurfaceControlViewHost.SurfacePackage surfacePackage) throws RemoteException {
-        }
+        public void onRemoteContentReady(SurfaceControlViewHost.SurfacePackage surfacePackage)
+                throws RemoteException {}
 
         @Override // android.app.admin.IKeyguardCallback
-        public void onDismiss() throws RemoteException {
-        }
+        public void onDismiss() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface IKeyguardCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyguardCallback {
+    public abstract static class Stub extends Binder implements IKeyguardCallback {
         static final int TRANSACTION_onDismiss = 2;
         static final int TRANSACTION_onRemoteContentReady = 1;
 
@@ -71,7 +71,8 @@ public interface IKeyguardCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKeyguardCallback.DESCRIPTOR);
             }
@@ -81,7 +82,10 @@ public interface IKeyguardCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SurfaceControlViewHost.SurfacePackage _arg0 = (SurfaceControlViewHost.SurfacePackage) data.readTypedObject(SurfaceControlViewHost.SurfacePackage.CREATOR);
+                    SurfaceControlViewHost.SurfacePackage _arg0 =
+                            (SurfaceControlViewHost.SurfacePackage)
+                                    data.readTypedObject(
+                                            SurfaceControlViewHost.SurfacePackage.CREATOR);
                     data.enforceNoDataAvail();
                     onRemoteContentReady(_arg0);
                     return true;
@@ -110,7 +114,8 @@ public interface IKeyguardCallback extends IInterface {
             }
 
             @Override // android.app.admin.IKeyguardCallback
-            public void onRemoteContentReady(SurfaceControlViewHost.SurfacePackage surfacePackage) throws RemoteException {
+            public void onRemoteContentReady(SurfaceControlViewHost.SurfacePackage surfacePackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IKeyguardCallback.DESCRIPTOR);

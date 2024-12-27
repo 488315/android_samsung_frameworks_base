@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -39,8 +40,8 @@ public class MediaRouteControllerDialog extends AlertDialog {
 
     public MediaRouteControllerDialog(Context context, int theme) {
         super(context, theme);
-        this.mMediaRouteConnectingState = new int[]{16842912, 16842910};
-        this.mMediaRouteOnState = new int[]{16843518, 16842910};
+        this.mMediaRouteConnectingState = new int[] {16842912, 16842910};
+        this.mMediaRouteOnState = new int[] {16843518, 16842910};
         this.mVolumeControlEnabled = true;
         this.mRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
         this.mCallback = new MediaRouterCallback();
@@ -76,20 +77,27 @@ public class MediaRouteControllerDialog extends AlertDialog {
     protected void onCreate(Bundle savedInstanceState) {
         setTitle(this.mRoute.getName());
         Resources res = getContext().getResources();
-        setButton(-2, res.getString(R.string.media_route_controller_disconnect), new DialogInterface.OnClickListener() { // from class: com.android.internal.app.MediaRouteControllerDialog.1
-            @Override // android.content.DialogInterface.OnClickListener
-            public void onClick(DialogInterface dialogInterface, int id) {
-                if (MediaRouteControllerDialog.this.mRoute.isSelected()) {
-                    if (MediaRouteControllerDialog.this.mRoute.isBluetooth()) {
-                        MediaRouteControllerDialog.this.mRouter.getDefaultRoute().select();
-                    } else {
-                        MediaRouteControllerDialog.this.mRouter.getFallbackRoute().select();
+        setButton(
+                -2,
+                res.getString(R.string.media_route_controller_disconnect),
+                new DialogInterface
+                        .OnClickListener() { // from class:
+                                             // com.android.internal.app.MediaRouteControllerDialog.1
+                    @Override // android.content.DialogInterface.OnClickListener
+                    public void onClick(DialogInterface dialogInterface, int id) {
+                        if (MediaRouteControllerDialog.this.mRoute.isSelected()) {
+                            if (MediaRouteControllerDialog.this.mRoute.isBluetooth()) {
+                                MediaRouteControllerDialog.this.mRouter.getDefaultRoute().select();
+                            } else {
+                                MediaRouteControllerDialog.this.mRouter.getFallbackRoute().select();
+                            }
+                        }
+                        MediaRouteControllerDialog.this.dismiss();
                     }
-                }
-                MediaRouteControllerDialog.this.dismiss();
-            }
-        });
-        View customView = getLayoutInflater().inflate(R.layout.media_route_controller_dialog, (ViewGroup) null);
+                });
+        View customView =
+                getLayoutInflater()
+                        .inflate(R.layout.media_route_controller_dialog, (ViewGroup) null);
         setView(customView, 0, 0, 0, 0);
         super.onCreate(savedInstanceState);
         View customPanelView = getWindow().findViewById(R.id.customPanel);
@@ -98,43 +106,52 @@ public class MediaRouteControllerDialog extends AlertDialog {
         }
         this.mVolumeLayout = (LinearLayout) customView.findViewById(R.id.media_route_volume_layout);
         this.mVolumeSlider = (SeekBar) customView.findViewById(R.id.media_route_volume_slider);
-        this.mVolumeSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: com.android.internal.app.MediaRouteControllerDialog.2
-            private final Runnable mStopTrackingTouch = new Runnable() { // from class: com.android.internal.app.MediaRouteControllerDialog.2.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    if (MediaRouteControllerDialog.this.mVolumeSliderTouched) {
-                        MediaRouteControllerDialog.this.mVolumeSliderTouched = false;
-                        MediaRouteControllerDialog.this.updateVolume();
+        this.mVolumeSlider.setOnSeekBarChangeListener(
+                new SeekBar
+                        .OnSeekBarChangeListener() { // from class:
+                                                     // com.android.internal.app.MediaRouteControllerDialog.2
+                    private final Runnable mStopTrackingTouch =
+                            new Runnable() { // from class:
+                                             // com.android.internal.app.MediaRouteControllerDialog.2.1
+                                @Override // java.lang.Runnable
+                                public void run() {
+                                    if (MediaRouteControllerDialog.this.mVolumeSliderTouched) {
+                                        MediaRouteControllerDialog.this.mVolumeSliderTouched =
+                                                false;
+                                        MediaRouteControllerDialog.this.updateVolume();
+                                    }
+                                }
+                            };
+
+                    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                        if (MediaRouteControllerDialog.this.mVolumeSliderTouched) {
+                            MediaRouteControllerDialog.this.mVolumeSlider.removeCallbacks(
+                                    this.mStopTrackingTouch);
+                        } else {
+                            MediaRouteControllerDialog.this.mVolumeSliderTouched = true;
+                        }
                     }
-                }
-            };
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                if (MediaRouteControllerDialog.this.mVolumeSliderTouched) {
-                    MediaRouteControllerDialog.this.mVolumeSlider.removeCallbacks(this.mStopTrackingTouch);
-                } else {
-                    MediaRouteControllerDialog.this.mVolumeSliderTouched = true;
-                }
-            }
+                    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        MediaRouteControllerDialog.this.mVolumeSlider.postDelayed(
+                                this.mStopTrackingTouch, 250L);
+                    }
 
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                MediaRouteControllerDialog.this.mVolumeSlider.postDelayed(this.mStopTrackingTouch, 250L);
-            }
-
-            @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) {
-                    MediaRouteControllerDialog.this.mRoute.requestSetVolume(progress);
-                }
-            }
-        });
+                    @Override // android.widget.SeekBar.OnSeekBarChangeListener
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        if (fromUser) {
+                            MediaRouteControllerDialog.this.mRoute.requestSetVolume(progress);
+                        }
+                    }
+                });
         this.mMediaRouteButtonDrawable = obtainMediaRouteButtonDrawable();
         this.mCreated = true;
         if (update()) {
             this.mControlView = onCreateMediaControlView(savedInstanceState);
-            FrameLayout controlFrame = (FrameLayout) customView.findViewById(R.id.media_route_control_frame);
+            FrameLayout controlFrame =
+                    (FrameLayout) customView.findViewById(R.id.media_route_control_frame);
             if (this.mControlView != null) {
                 controlFrame.addView(this.mControlView);
                 controlFrame.setVisibility(0);
@@ -221,7 +238,8 @@ public class MediaRouteControllerDialog extends AlertDialog {
             return this.mMediaRouteButtonDrawable;
         }
         if (this.mRoute.isConnecting()) {
-            StateListDrawable stateListDrawable = (StateListDrawable) this.mMediaRouteButtonDrawable;
+            StateListDrawable stateListDrawable =
+                    (StateListDrawable) this.mMediaRouteButtonDrawable;
             stateListDrawable.setState(this.mMediaRouteConnectingState);
             return stateListDrawable.getCurrent();
         }
@@ -248,8 +266,7 @@ public class MediaRouteControllerDialog extends AlertDialog {
     }
 
     private final class MediaRouterCallback extends MediaRouter.SimpleCallback {
-        private MediaRouterCallback() {
-        }
+        private MediaRouterCallback() {}
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
         public void onRouteUnselected(MediaRouter router, int type, MediaRouter.RouteInfo info) {
@@ -269,12 +286,17 @@ public class MediaRouteControllerDialog extends AlertDialog {
         }
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
-        public void onRouteGrouped(MediaRouter router, MediaRouter.RouteInfo info, MediaRouter.RouteGroup group, int index) {
+        public void onRouteGrouped(
+                MediaRouter router,
+                MediaRouter.RouteInfo info,
+                MediaRouter.RouteGroup group,
+                int index) {
             MediaRouteControllerDialog.this.update();
         }
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
-        public void onRouteUngrouped(MediaRouter router, MediaRouter.RouteInfo info, MediaRouter.RouteGroup group) {
+        public void onRouteUngrouped(
+                MediaRouter router, MediaRouter.RouteInfo info, MediaRouter.RouteGroup group) {
             MediaRouteControllerDialog.this.update();
         }
     }

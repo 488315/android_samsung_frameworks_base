@@ -9,34 +9,35 @@ public final class BrightnessThresholds {
     public BigDecimal minimum;
 
     /* JADX WARN: Code restructure failed: missing block: B:69:0x00cb, code lost:
-    
-        if (r5 != 3) goto L58;
-     */
+
+       if (r5 != 3) goto L58;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:70:0x00cd, code lost:
-    
-        r0.brightnessThresholdPoints = r1;
-     */
+
+       r0.brightnessThresholdPoints = r1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:74:0x00d8, code lost:
-    
-        throw new javax.xml.datatype.DatatypeConfigurationException("ThresholdPoints is not closed");
-     */
+
+       throw new javax.xml.datatype.DatatypeConfigurationException("ThresholdPoints is not closed");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:81:0x00de, code lost:
-    
-        if (r1 != 3) goto L52;
-     */
+
+       if (r1 != 3) goto L52;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:82:0x00e0, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:84:0x00e8, code lost:
-    
-        throw new javax.xml.datatype.DatatypeConfigurationException("BrightnessThresholds is not closed");
-     */
+
+       throw new javax.xml.datatype.DatatypeConfigurationException("BrightnessThresholds is not closed");
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.display.config.BrightnessThresholds read(org.xmlpull.v1.XmlPullParser r8) {
+    public static com.android.server.display.config.BrightnessThresholds read(
+            org.xmlpull.v1.XmlPullParser r8) {
         /*
             com.android.server.display.config.BrightnessThresholds r0 = new com.android.server.display.config.BrightnessThresholds
             r0.<init>()
@@ -153,6 +154,8 @@ public final class BrightnessThresholds {
             r8.<init>(r0)
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.config.BrightnessThresholds.read(org.xmlpull.v1.XmlPullParser):com.android.server.display.config.BrightnessThresholds");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.config.BrightnessThresholds.read(org.xmlpull.v1.XmlPullParser):com.android.server.display.config.BrightnessThresholds");
     }
 }

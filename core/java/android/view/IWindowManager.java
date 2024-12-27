@@ -21,24 +21,6 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.text.TextUtils;
-import android.view.IAppTransitionAnimationSpecsFuture;
-import android.view.ICrossWindowBlurEnabledListener;
-import android.view.IDecorViewGestureListener;
-import android.view.IDisplayChangeWindowController;
-import android.view.IDisplayFoldListener;
-import android.view.IDisplayWindowInsetsController;
-import android.view.IDisplayWindowListener;
-import android.view.IInputFilter;
-import android.view.IOnKeyguardExitResult;
-import android.view.IPinnedTaskListener;
-import android.view.IRemoteAnimationRunner;
-import android.view.IRotationWatcher;
-import android.view.IScrollCaptureResponseListener;
-import android.view.ISystemGestureExclusionListener;
-import android.view.IWallpaperVisibilityListener;
-import android.view.IWindow;
-import android.view.IWindowSession;
-import android.view.IWindowSessionCallback;
 import android.view.displayhash.DisplayHash;
 import android.view.displayhash.VerifiedDisplayHash;
 import android.window.AddToSurfaceSyncGroupResult;
@@ -51,16 +33,19 @@ import android.window.InputTransferToken;
 import android.window.ScreenCapture;
 import android.window.TrustedPresentationThresholds;
 import android.window.WindowContextInfo;
+
 import com.android.internal.os.IResultReceiver;
 import com.android.internal.policy.IKeyguardDismissCallback;
 import com.android.internal.policy.IKeyguardLockedStateListener;
 import com.android.internal.policy.IShortcutService;
+
 import com.samsung.android.content.smartclip.SmartClipRemoteRequestInfo;
 import com.samsung.android.knox.zt.usertrust.IAuthTouchEventListener;
 import com.samsung.android.onehandop.IOneHandOpWatcher;
 import com.samsung.android.view.MultiResolutionChangeRequestInfo;
 import com.samsung.android.view.ScreenshotResult;
 import com.samsung.android.view.SemWindowManager;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -70,23 +55,40 @@ public interface IWindowManager extends IInterface {
     public static final int FIXED_TO_USER_ROTATION_ENABLED = 2;
     public static final int FIXED_TO_USER_ROTATION_IF_NO_AUTO_ROTATION = 3;
 
-    void addKeyguardLockedStateListener(IKeyguardLockedStateListener iKeyguardLockedStateListener) throws RemoteException;
+    void addKeyguardLockedStateListener(IKeyguardLockedStateListener iKeyguardLockedStateListener)
+            throws RemoteException;
 
     SurfaceControl addShellRoot(int i, IWindow iWindow, int i2) throws RemoteException;
 
-    boolean addToSurfaceSyncGroup(IBinder iBinder, boolean z, ISurfaceSyncGroupCompletedListener iSurfaceSyncGroupCompletedListener, AddToSurfaceSyncGroupResult addToSurfaceSyncGroupResult) throws RemoteException;
+    boolean addToSurfaceSyncGroup(
+            IBinder iBinder,
+            boolean z,
+            ISurfaceSyncGroupCompletedListener iSurfaceSyncGroupCompletedListener,
+            AddToSurfaceSyncGroupResult addToSurfaceSyncGroupResult)
+            throws RemoteException;
 
     void addWindowToken(IBinder iBinder, int i, int i2, Bundle bundle) throws RemoteException;
 
-    WindowContextInfo attachWindowContextToDisplayArea(IApplicationThread iApplicationThread, IBinder iBinder, int i, int i2, Bundle bundle) throws RemoteException;
+    WindowContextInfo attachWindowContextToDisplayArea(
+            IApplicationThread iApplicationThread, IBinder iBinder, int i, int i2, Bundle bundle)
+            throws RemoteException;
 
-    WindowContextInfo attachWindowContextToDisplayContent(IApplicationThread iApplicationThread, IBinder iBinder, int i) throws RemoteException;
+    WindowContextInfo attachWindowContextToDisplayContent(
+            IApplicationThread iApplicationThread, IBinder iBinder, int i) throws RemoteException;
 
-    WindowContextInfo attachWindowContextToWindowToken(IApplicationThread iApplicationThread, IBinder iBinder, IBinder iBinder2) throws RemoteException;
+    WindowContextInfo attachWindowContextToWindowToken(
+            IApplicationThread iApplicationThread, IBinder iBinder, IBinder iBinder2)
+            throws RemoteException;
 
-    void captureDisplay(int i, ScreenCapture.CaptureArgs captureArgs, ScreenCapture.ScreenCaptureListener screenCaptureListener) throws RemoteException;
+    void captureDisplay(
+            int i,
+            ScreenCapture.CaptureArgs captureArgs,
+            ScreenCapture.ScreenCaptureListener screenCaptureListener)
+            throws RemoteException;
 
-    void changeDisplayScale(MagnificationSpec magnificationSpec, boolean z, IInputFilter iInputFilter) throws RemoteException;
+    void changeDisplayScale(
+            MagnificationSpec magnificationSpec, boolean z, IInputFilter iInputFilter)
+            throws RemoteException;
 
     void clearForcedDisplayDensityForUser(int i, int i2) throws RemoteException;
 
@@ -104,7 +106,8 @@ public interface IWindowManager extends IInterface {
 
     void closeSystemDialogsInDisplay(String str, int i) throws RemoteException;
 
-    void createInputConsumer(IBinder iBinder, String str, int i, InputChannel inputChannel) throws RemoteException;
+    void createInputConsumer(IBinder iBinder, String str, int i, InputChannel inputChannel)
+            throws RemoteException;
 
     boolean destroyInputConsumer(IBinder iBinder, int i) throws RemoteException;
 
@@ -113,18 +116,24 @@ public interface IWindowManager extends IInterface {
     @Deprecated
     void disableKeyguard(IBinder iBinder, String str, int i) throws RemoteException;
 
-    void dismissKeyguard(IKeyguardDismissCallback iKeyguardDismissCallback, CharSequence charSequence) throws RemoteException;
+    void dismissKeyguard(
+            IKeyguardDismissCallback iKeyguardDismissCallback, CharSequence charSequence)
+            throws RemoteException;
 
-    void dispatchSPenGestureEvent(int i, int i2, InputEvent[] inputEventArr, IBinder iBinder) throws RemoteException;
+    void dispatchSPenGestureEvent(int i, int i2, InputEvent[] inputEventArr, IBinder iBinder)
+            throws RemoteException;
 
-    void dispatchSmartClipRemoteRequest(int i, int i2, SmartClipRemoteRequestInfo smartClipRemoteRequestInfo, IBinder iBinder) throws RemoteException;
+    void dispatchSmartClipRemoteRequest(
+            int i, int i2, SmartClipRemoteRequestInfo smartClipRemoteRequestInfo, IBinder iBinder)
+            throws RemoteException;
 
     @Deprecated
     void endProlongedAnimations() throws RemoteException;
 
     void exitKeyguardSecurely(IOnKeyguardExitResult iOnKeyguardExitResult) throws RemoteException;
 
-    boolean finishRemoteWallpaperAnimation(IRemoteAnimationRunner iRemoteAnimationRunner) throws RemoteException;
+    boolean finishRemoteWallpaperAnimation(IRemoteAnimationRunner iRemoteAnimationRunner)
+            throws RemoteException;
 
     void freezeDisplayRotation(int i, int i2, String str) throws RemoteException;
 
@@ -136,7 +145,8 @@ public interface IWindowManager extends IInterface {
 
     int getAppContinuityMode(int i, String str, ActivityInfo activityInfo) throws RemoteException;
 
-    List<SemWindowManager.KeyCustomizationInfo> getBackupKeyCustomizationInfoList() throws RemoteException;
+    List<SemWindowManager.KeyCustomizationInfo> getBackupKeyCustomizationInfoList()
+            throws RemoteException;
 
     int getBaseDisplayDensity(int i) throws RemoteException;
 
@@ -164,11 +174,14 @@ public interface IWindowManager extends IInterface {
 
     void getInitialDisplaySize(int i, Point point) throws RemoteException;
 
-    SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfo(int i, int i2, int i3) throws RemoteException;
+    SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfo(int i, int i2, int i3)
+            throws RemoteException;
 
-    SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfoByPackage(String str, int i, int i2) throws RemoteException;
+    SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfoByPackage(
+            String str, int i, int i2) throws RemoteException;
 
-    SemWindowManager.KeyCustomizationInfo getLastKeyCustomizationInfo(int i, int i2) throws RemoteException;
+    SemWindowManager.KeyCustomizationInfo getLastKeyCustomizationInfo(int i, int i2)
+            throws RemoteException;
 
     int getLetterboxBackgroundColorInArgb() throws RemoteException;
 
@@ -263,58 +276,86 @@ public interface IWindowManager extends IInterface {
 
     List<ComponentName> notifyScreenshotListeners(int i) throws RemoteException;
 
-    boolean omniRequestAssistScreenshot(IAssistDataReceiver iAssistDataReceiver, boolean z) throws RemoteException;
+    boolean omniRequestAssistScreenshot(IAssistDataReceiver iAssistDataReceiver, boolean z)
+            throws RemoteException;
 
-    IWindowSession openSession(IWindowSessionCallback iWindowSessionCallback) throws RemoteException;
+    IWindowSession openSession(IWindowSessionCallback iWindowSessionCallback)
+            throws RemoteException;
 
-    void overridePendingAppTransitionMultiThumbFuture(IAppTransitionAnimationSpecsFuture iAppTransitionAnimationSpecsFuture, IRemoteCallback iRemoteCallback, boolean z, int i) throws RemoteException;
+    void overridePendingAppTransitionMultiThumbFuture(
+            IAppTransitionAnimationSpecsFuture iAppTransitionAnimationSpecsFuture,
+            IRemoteCallback iRemoteCallback,
+            boolean z,
+            int i)
+            throws RemoteException;
 
-    void overridePendingAppTransitionRemote(RemoteAnimationAdapter remoteAnimationAdapter, int i) throws RemoteException;
+    void overridePendingAppTransitionRemote(RemoteAnimationAdapter remoteAnimationAdapter, int i)
+            throws RemoteException;
 
-    void putKeyCustomizationInfo(SemWindowManager.KeyCustomizationInfo keyCustomizationInfo) throws RemoteException;
+    void putKeyCustomizationInfo(SemWindowManager.KeyCustomizationInfo keyCustomizationInfo)
+            throws RemoteException;
 
     @Deprecated
     void reenableKeyguard(IBinder iBinder, int i) throws RemoteException;
 
     void refreshScreenCaptureDisabled() throws RemoteException;
 
-    void registerAuthTouchEventListener(IAuthTouchEventListener iAuthTouchEventListener) throws RemoteException;
+    void registerAuthTouchEventListener(IAuthTouchEventListener iAuthTouchEventListener)
+            throws RemoteException;
 
-    boolean registerCrossWindowBlurEnabledListener(ICrossWindowBlurEnabledListener iCrossWindowBlurEnabledListener) throws RemoteException;
+    boolean registerCrossWindowBlurEnabledListener(
+            ICrossWindowBlurEnabledListener iCrossWindowBlurEnabledListener) throws RemoteException;
 
-    void registerDecorViewGestureListener(IDecorViewGestureListener iDecorViewGestureListener, int i) throws RemoteException;
+    void registerDecorViewGestureListener(
+            IDecorViewGestureListener iDecorViewGestureListener, int i) throws RemoteException;
 
-    void registerDisplayFoldListener(IDisplayFoldListener iDisplayFoldListener) throws RemoteException;
+    void registerDisplayFoldListener(IDisplayFoldListener iDisplayFoldListener)
+            throws RemoteException;
 
-    int[] registerDisplayWindowListener(IDisplayWindowListener iDisplayWindowListener) throws RemoteException;
+    int[] registerDisplayWindowListener(IDisplayWindowListener iDisplayWindowListener)
+            throws RemoteException;
 
-    boolean registerKnoxRemoteScreenCallback(IScreenRecordingCallback iScreenRecordingCallback) throws RemoteException;
+    boolean registerKnoxRemoteScreenCallback(IScreenRecordingCallback iScreenRecordingCallback)
+            throws RemoteException;
 
     void registerOneHandOpWatcher(IOneHandOpWatcher iOneHandOpWatcher) throws RemoteException;
 
-    void registerPinnedTaskListener(int i, IPinnedTaskListener iPinnedTaskListener) throws RemoteException;
+    void registerPinnedTaskListener(int i, IPinnedTaskListener iPinnedTaskListener)
+            throws RemoteException;
 
-    int registerProposedRotationListener(IBinder iBinder, IRotationWatcher iRotationWatcher) throws RemoteException;
+    int registerProposedRotationListener(IBinder iBinder, IRotationWatcher iRotationWatcher)
+            throws RemoteException;
 
-    boolean registerScreenRecordingCallback(IScreenRecordingCallback iScreenRecordingCallback) throws RemoteException;
+    boolean registerScreenRecordingCallback(IScreenRecordingCallback iScreenRecordingCallback)
+            throws RemoteException;
 
     void registerShortcutKey(long j, IShortcutService iShortcutService) throws RemoteException;
 
-    void registerSystemGestureExclusionListener(ISystemGestureExclusionListener iSystemGestureExclusionListener, int i) throws RemoteException;
+    void registerSystemGestureExclusionListener(
+            ISystemGestureExclusionListener iSystemGestureExclusionListener, int i)
+            throws RemoteException;
 
     void registerSystemKeyEvent(int i, ComponentName componentName, int i2) throws RemoteException;
 
     void registerTaskFpsCallback(int i, ITaskFpsCallback iTaskFpsCallback) throws RemoteException;
 
-    void registerTrustedPresentationListener(IBinder iBinder, ITrustedPresentationListener iTrustedPresentationListener, TrustedPresentationThresholds trustedPresentationThresholds, int i) throws RemoteException;
+    void registerTrustedPresentationListener(
+            IBinder iBinder,
+            ITrustedPresentationListener iTrustedPresentationListener,
+            TrustedPresentationThresholds trustedPresentationThresholds,
+            int i)
+            throws RemoteException;
 
-    boolean registerWallpaperVisibilityListener(IWallpaperVisibilityListener iWallpaperVisibilityListener, int i) throws RemoteException;
+    boolean registerWallpaperVisibilityListener(
+            IWallpaperVisibilityListener iWallpaperVisibilityListener, int i)
+            throws RemoteException;
 
     void removeKeyCustomizationInfo(int i, int i2, int i3) throws RemoteException;
 
     void removeKeyCustomizationInfoByPackage(String str, int i, int i2) throws RemoteException;
 
-    void removeKeyguardLockedStateListener(IKeyguardLockedStateListener iKeyguardLockedStateListener) throws RemoteException;
+    void removeKeyguardLockedStateListener(
+            IKeyguardLockedStateListener iKeyguardLockedStateListener) throws RemoteException;
 
     void removeRotationWatcher(IRotationWatcher iRotationWatcher) throws RemoteException;
 
@@ -330,11 +371,18 @@ public interface IWindowManager extends IInterface {
 
     void requestMetaKeyEvent(ComponentName componentName, boolean z) throws RemoteException;
 
-    void requestScrollCapture(int i, IBinder iBinder, int i2, IScrollCaptureResponseListener iScrollCaptureResponseListener) throws RemoteException;
+    void requestScrollCapture(
+            int i,
+            IBinder iBinder,
+            int i2,
+            IScrollCaptureResponseListener iScrollCaptureResponseListener)
+            throws RemoteException;
 
-    boolean requestSystemKeyEvent(int i, ComponentName componentName, boolean z) throws RemoteException;
+    boolean requestSystemKeyEvent(int i, ComponentName componentName, boolean z)
+            throws RemoteException;
 
-    void restoreKeyCustomizationInfo(List<SemWindowManager.KeyCustomizationInfo> list) throws RemoteException;
+    void restoreKeyCustomizationInfo(List<SemWindowManager.KeyCustomizationInfo> list)
+            throws RemoteException;
 
     void saveWindowTraceToFile() throws RemoteException;
 
@@ -350,7 +398,8 @@ public interface IWindowManager extends IInterface {
 
     void setDeadzoneHole(Bundle bundle) throws RemoteException;
 
-    void setDisplayChangeWindowController(IDisplayChangeWindowController iDisplayChangeWindowController) throws RemoteException;
+    void setDisplayChangeWindowController(
+            IDisplayChangeWindowController iDisplayChangeWindowController) throws RemoteException;
 
     void setDisplayColorToSystemProperties(int i) throws RemoteException;
 
@@ -358,7 +407,9 @@ public interface IWindowManager extends IInterface {
 
     void setDisplayImePolicy(int i, int i2) throws RemoteException;
 
-    void setDisplayWindowInsetsController(int i, IDisplayWindowInsetsController iDisplayWindowInsetsController) throws RemoteException;
+    void setDisplayWindowInsetsController(
+            int i, IDisplayWindowInsetsController iDisplayWindowInsetsController)
+            throws RemoteException;
 
     void setDragSurfaceToOverlay(boolean z) throws RemoteException;
 
@@ -372,9 +423,12 @@ public interface IWindowManager extends IInterface {
 
     void setForcedDisplaySize(int i, int i2, int i3) throws RemoteException;
 
-    void setForcedDisplaySizeDensity(int i, int i2, int i3, int i4, boolean z, int i5) throws RemoteException;
+    void setForcedDisplaySizeDensity(int i, int i2, int i3, int i4, boolean z, int i5)
+            throws RemoteException;
 
-    void setForcedDisplaySizeDensityWithInfo(MultiResolutionChangeRequestInfo multiResolutionChangeRequestInfo) throws RemoteException;
+    void setForcedDisplaySizeDensityWithInfo(
+            MultiResolutionChangeRequestInfo multiResolutionChangeRequestInfo)
+            throws RemoteException;
 
     void setGlobalDragListener(IGlobalDragListener iGlobalDragListener) throws RemoteException;
 
@@ -393,7 +447,8 @@ public interface IWindowManager extends IInterface {
 
     void setNavBarVirtualKeyHapticFeedbackEnabled(boolean z) throws RemoteException;
 
-    void setPendingIntentAfterUnlock(PendingIntent pendingIntent, Intent intent) throws RemoteException;
+    void setPendingIntentAfterUnlock(PendingIntent pendingIntent, Intent intent)
+            throws RemoteException;
 
     void setRecentsAppBehindSystemBars(boolean z) throws RemoteException;
 
@@ -433,7 +488,8 @@ public interface IWindowManager extends IInterface {
 
     void startLockscreenFingerprintAuth() throws RemoteException;
 
-    boolean startRemoteWallpaperAnimation(IRemoteAnimationRunner iRemoteAnimationRunner, int i) throws RemoteException;
+    boolean startRemoteWallpaperAnimation(IRemoteAnimationRunner iRemoteAnimationRunner, int i)
+            throws RemoteException;
 
     void startSurfaceAnimation(IBinder iBinder, String str) throws RemoteException;
 
@@ -453,41 +509,60 @@ public interface IWindowManager extends IInterface {
 
     void syncInputTransactions(boolean z) throws RemoteException;
 
-    ScreenshotResult takeScreenshotToTargetWindow(int i, int i2, boolean z, Rect rect, int i3, int i4, boolean z2, boolean z3) throws RemoteException;
+    ScreenshotResult takeScreenshotToTargetWindow(
+            int i, int i2, boolean z, Rect rect, int i3, int i4, boolean z2, boolean z3)
+            throws RemoteException;
 
-    ScreenshotResult takeScreenshotToTargetWindowFromCapture(int i, int i2, boolean z, Rect rect, int i3, int i4, boolean z2, boolean z3, boolean z4) throws RemoteException;
+    ScreenshotResult takeScreenshotToTargetWindowFromCapture(
+            int i, int i2, boolean z, Rect rect, int i3, int i4, boolean z2, boolean z3, boolean z4)
+            throws RemoteException;
 
     void thawDisplayRotation(int i, String str) throws RemoteException;
 
     void thawRotation(String str) throws RemoteException;
 
-    boolean transferTouchGesture(InputTransferToken inputTransferToken, InputTransferToken inputTransferToken2) throws RemoteException;
+    boolean transferTouchGesture(
+            InputTransferToken inputTransferToken, InputTransferToken inputTransferToken2)
+            throws RemoteException;
 
-    void unregisterAuthTouchEventListener(IAuthTouchEventListener iAuthTouchEventListener) throws RemoteException;
+    void unregisterAuthTouchEventListener(IAuthTouchEventListener iAuthTouchEventListener)
+            throws RemoteException;
 
-    void unregisterCrossWindowBlurEnabledListener(ICrossWindowBlurEnabledListener iCrossWindowBlurEnabledListener) throws RemoteException;
+    void unregisterCrossWindowBlurEnabledListener(
+            ICrossWindowBlurEnabledListener iCrossWindowBlurEnabledListener) throws RemoteException;
 
-    void unregisterDecorViewGestureListener(IDecorViewGestureListener iDecorViewGestureListener, int i) throws RemoteException;
+    void unregisterDecorViewGestureListener(
+            IDecorViewGestureListener iDecorViewGestureListener, int i) throws RemoteException;
 
-    void unregisterDisplayFoldListener(IDisplayFoldListener iDisplayFoldListener) throws RemoteException;
+    void unregisterDisplayFoldListener(IDisplayFoldListener iDisplayFoldListener)
+            throws RemoteException;
 
-    void unregisterDisplayWindowListener(IDisplayWindowListener iDisplayWindowListener) throws RemoteException;
+    void unregisterDisplayWindowListener(IDisplayWindowListener iDisplayWindowListener)
+            throws RemoteException;
 
-    void unregisterKnoxRemoteScreenCallback(IScreenRecordingCallback iScreenRecordingCallback) throws RemoteException;
+    void unregisterKnoxRemoteScreenCallback(IScreenRecordingCallback iScreenRecordingCallback)
+            throws RemoteException;
 
     void unregisterOneHandOpWatcher(IOneHandOpWatcher iOneHandOpWatcher) throws RemoteException;
 
-    void unregisterScreenRecordingCallback(IScreenRecordingCallback iScreenRecordingCallback) throws RemoteException;
+    void unregisterScreenRecordingCallback(IScreenRecordingCallback iScreenRecordingCallback)
+            throws RemoteException;
 
-    void unregisterSystemGestureExclusionListener(ISystemGestureExclusionListener iSystemGestureExclusionListener, int i) throws RemoteException;
+    void unregisterSystemGestureExclusionListener(
+            ISystemGestureExclusionListener iSystemGestureExclusionListener, int i)
+            throws RemoteException;
 
     void unregisterSystemKeyEvent(int i, ComponentName componentName) throws RemoteException;
 
     void unregisterTaskFpsCallback(ITaskFpsCallback iTaskFpsCallback) throws RemoteException;
 
-    void unregisterTrustedPresentationListener(ITrustedPresentationListener iTrustedPresentationListener, int i) throws RemoteException;
+    void unregisterTrustedPresentationListener(
+            ITrustedPresentationListener iTrustedPresentationListener, int i)
+            throws RemoteException;
 
-    void unregisterWallpaperVisibilityListener(IWallpaperVisibilityListener iWallpaperVisibilityListener, int i) throws RemoteException;
+    void unregisterWallpaperVisibilityListener(
+            IWallpaperVisibilityListener iWallpaperVisibilityListener, int i)
+            throws RemoteException;
 
     void updateDisplayWindowRequestedVisibleTypes(int i, int i2) throws RemoteException;
 
@@ -519,20 +594,17 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void getInitialDisplaySize(int displayId, Point size) throws RemoteException {
-        }
+        public void getInitialDisplaySize(int displayId, Point size) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void getBaseDisplaySize(int displayId, Point size) throws RemoteException {
-        }
+        public void getBaseDisplaySize(int displayId, Point size) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setForcedDisplaySize(int displayId, int width, int height) throws RemoteException {
-        }
+        public void setForcedDisplaySize(int displayId, int width, int height)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void clearForcedDisplaySize(int displayId) throws RemoteException {
-        }
+        public void clearForcedDisplaySize(int displayId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public int getInitialDisplayDensity(int displayId) throws RemoteException {
@@ -550,20 +622,18 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setForcedDisplayDensityForUser(int displayId, int density, int userId) throws RemoteException {
-        }
+        public void setForcedDisplayDensityForUser(int displayId, int density, int userId)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void clearForcedDisplayDensityForUser(int displayId, int userId) throws RemoteException {
-        }
+        public void clearForcedDisplayDensityForUser(int displayId, int userId)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setForcedDisplayScalingMode(int displayId, int mode) throws RemoteException {
-        }
+        public void setForcedDisplayScalingMode(int displayId, int mode) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setEventDispatching(boolean enabled) throws RemoteException {
-        }
+        public void setEventDispatching(boolean enabled) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isWindowToken(IBinder binder) throws RemoteException {
@@ -571,57 +641,56 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void addWindowToken(IBinder token, int type, int displayId, Bundle options) throws RemoteException {
-        }
+        public void addWindowToken(IBinder token, int type, int displayId, Bundle options)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void removeWindowToken(IBinder token, int displayId) throws RemoteException {
-        }
+        public void removeWindowToken(IBinder token, int displayId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setDisplayChangeWindowController(IDisplayChangeWindowController controller) throws RemoteException {
-        }
+        public void setDisplayChangeWindowController(IDisplayChangeWindowController controller)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public SurfaceControl addShellRoot(int displayId, IWindow client, int shellRootLayer) throws RemoteException {
+        public SurfaceControl addShellRoot(int displayId, IWindow client, int shellRootLayer)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public void setShellRootAccessibilityWindow(int displayId, int shellRootLayer, IWindow target) throws RemoteException {
-        }
+        public void setShellRootAccessibilityWindow(
+                int displayId, int shellRootLayer, IWindow target) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void overridePendingAppTransitionMultiThumbFuture(IAppTransitionAnimationSpecsFuture specsFuture, IRemoteCallback startedCallback, boolean scaleUp, int displayId) throws RemoteException {
-        }
+        public void overridePendingAppTransitionMultiThumbFuture(
+                IAppTransitionAnimationSpecsFuture specsFuture,
+                IRemoteCallback startedCallback,
+                boolean scaleUp,
+                int displayId)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void overridePendingAppTransitionRemote(RemoteAnimationAdapter remoteAnimationAdapter, int displayId) throws RemoteException {
-        }
+        public void overridePendingAppTransitionRemote(
+                RemoteAnimationAdapter remoteAnimationAdapter, int displayId)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void endProlongedAnimations() throws RemoteException {
-        }
+        public void endProlongedAnimations() throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void startFreezingScreen(int exitAnim, int enterAnim) throws RemoteException {
-        }
+        public void startFreezingScreen(int exitAnim, int enterAnim) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void stopFreezingScreen() throws RemoteException {
-        }
+        public void stopFreezingScreen() throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void disableKeyguard(IBinder token, String tag, int userId) throws RemoteException {
-        }
+        public void disableKeyguard(IBinder token, String tag, int userId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void reenableKeyguard(IBinder token, int userId) throws RemoteException {
-        }
+        public void reenableKeyguard(IBinder token, int userId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void exitKeyguardSecurely(IOnKeyguardExitResult callback) throws RemoteException {
-        }
+        public void exitKeyguardSecurely(IOnKeyguardExitResult callback) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isKeyguardLocked() throws RemoteException {
@@ -634,28 +703,26 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void dismissKeyguard(IKeyguardDismissCallback callback, CharSequence message) throws RemoteException {
-        }
+        public void dismissKeyguard(IKeyguardDismissCallback callback, CharSequence message)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void addKeyguardLockedStateListener(IKeyguardLockedStateListener listener) throws RemoteException {
-        }
+        public void addKeyguardLockedStateListener(IKeyguardLockedStateListener listener)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void removeKeyguardLockedStateListener(IKeyguardLockedStateListener listener) throws RemoteException {
-        }
+        public void removeKeyguardLockedStateListener(IKeyguardLockedStateListener listener)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setSwitchingUser(boolean switching) throws RemoteException {
-        }
+        public void setSwitchingUser(boolean switching) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void closeSystemDialogs(String reason) throws RemoteException {
-        }
+        public void closeSystemDialogs(String reason) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void closeSystemDialogsInDisplay(String reason, int displayId) throws RemoteException {
-        }
+        public void closeSystemDialogsInDisplay(String reason, int displayId)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public float getAnimationScale(int which) throws RemoteException {
@@ -668,12 +735,10 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setAnimationScale(int which, float scale) throws RemoteException {
-        }
+        public void setAnimationScale(int which, float scale) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setAnimationScales(float[] scales) throws RemoteException {
-        }
+        public void setAnimationScales(float[] scales) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public float getCurrentAnimatorScale() throws RemoteException {
@@ -681,12 +746,10 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setInTouchMode(boolean inTouch, int displayId) throws RemoteException {
-        }
+        public void setInTouchMode(boolean inTouch, int displayId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setInTouchModeOnAllDisplays(boolean inTouch) throws RemoteException {
-        }
+        public void setInTouchModeOnAllDisplays(boolean inTouch) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isInTouchMode(int displayId) throws RemoteException {
@@ -694,16 +757,13 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void showStrictModeViolation(boolean on) throws RemoteException {
-        }
+        public void showStrictModeViolation(boolean on) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setStrictModeVisualIndicatorPreference(String enabled) throws RemoteException {
-        }
+        public void setStrictModeVisualIndicatorPreference(String enabled) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void refreshScreenCaptureDisabled() throws RemoteException {
-        }
+        public void refreshScreenCaptureDisabled() throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public int getDefaultDisplayRotation() throws RemoteException {
@@ -721,11 +781,11 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void removeRotationWatcher(IRotationWatcher watcher) throws RemoteException {
-        }
+        public void removeRotationWatcher(IRotationWatcher watcher) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public int registerProposedRotationListener(IBinder contextToken, IRotationWatcher listener) throws RemoteException {
+        public int registerProposedRotationListener(IBinder contextToken, IRotationWatcher listener)
+                throws RemoteException {
             return 0;
         }
 
@@ -735,12 +795,10 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void freezeRotation(int rotation, String caller) throws RemoteException {
-        }
+        public void freezeRotation(int rotation, String caller) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void thawRotation(String caller) throws RemoteException {
-        }
+        public void thawRotation(String caller) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isRotationFrozen() throws RemoteException {
@@ -748,12 +806,11 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void freezeDisplayRotation(int displayId, int rotation, String caller) throws RemoteException {
-        }
+        public void freezeDisplayRotation(int displayId, int rotation, String caller)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void thawDisplayRotation(int displayId, String caller) throws RemoteException {
-        }
+        public void thawDisplayRotation(int displayId, String caller) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isDisplayRotationFrozen(int displayId) throws RemoteException {
@@ -761,12 +818,12 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setFixedToUserRotation(int displayId, int fixedToUserRotation) throws RemoteException {
-        }
+        public void setFixedToUserRotation(int displayId, int fixedToUserRotation)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setIgnoreOrientationRequest(int displayId, boolean ignoreOrientationRequest) throws RemoteException {
-        }
+        public void setIgnoreOrientationRequest(int displayId, boolean ignoreOrientationRequest)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public Bitmap screenshotWallpaper() throws RemoteException {
@@ -779,42 +836,42 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public boolean registerWallpaperVisibilityListener(IWallpaperVisibilityListener listener, int displayId) throws RemoteException {
+        public boolean registerWallpaperVisibilityListener(
+                IWallpaperVisibilityListener listener, int displayId) throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public void unregisterWallpaperVisibilityListener(IWallpaperVisibilityListener listener, int displayId) throws RemoteException {
-        }
+        public void unregisterWallpaperVisibilityListener(
+                IWallpaperVisibilityListener listener, int displayId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void registerSystemGestureExclusionListener(ISystemGestureExclusionListener listener, int displayId) throws RemoteException {
-        }
+        public void registerSystemGestureExclusionListener(
+                ISystemGestureExclusionListener listener, int displayId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void unregisterSystemGestureExclusionListener(ISystemGestureExclusionListener listener, int displayId) throws RemoteException {
-        }
+        public void unregisterSystemGestureExclusionListener(
+                ISystemGestureExclusionListener listener, int displayId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public boolean requestAssistScreenshot(IAssistDataReceiver receiver) throws RemoteException {
+        public boolean requestAssistScreenshot(IAssistDataReceiver receiver)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public void hideTransientBars(int displayId) throws RemoteException {
-        }
+        public void hideTransientBars(int displayId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setRecentsVisibility(boolean visible) throws RemoteException {
-        }
+        public void setRecentsVisibility(boolean visible) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void updateStaticPrivacyIndicatorBounds(int displayId, Rect[] staticBounds) throws RemoteException {
-        }
+        public void updateStaticPrivacyIndicatorBounds(int displayId, Rect[] staticBounds)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setNavBarVirtualKeyHapticFeedbackEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setNavBarVirtualKeyHapticFeedbackEnabled(boolean enabled)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean hasNavigationBar(int displayId) throws RemoteException {
@@ -822,8 +879,7 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void lockNow(Bundle options) throws RemoteException {
-        }
+        public void lockNow(Bundle options) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isSafeModeEnabled() throws RemoteException {
@@ -836,7 +892,8 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public WindowContentFrameStats getWindowContentFrameStats(IBinder token) throws RemoteException {
+        public WindowContentFrameStats getWindowContentFrameStats(IBinder token)
+                throws RemoteException {
             return null;
         }
 
@@ -846,32 +903,31 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void registerPinnedTaskListener(int displayId, IPinnedTaskListener listener) throws RemoteException {
-        }
+        public void registerPinnedTaskListener(int displayId, IPinnedTaskListener listener)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void requestAppKeyboardShortcuts(IResultReceiver receiver, int deviceId) throws RemoteException {
-        }
+        public void requestAppKeyboardShortcuts(IResultReceiver receiver, int deviceId)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void requestImeKeyboardShortcuts(IResultReceiver receiver, int deviceId) throws RemoteException {
-        }
+        public void requestImeKeyboardShortcuts(IResultReceiver receiver, int deviceId)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void getStableInsets(int displayId, Rect outInsets) throws RemoteException {
-        }
+        public void getStableInsets(int displayId, Rect outInsets) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void getOverrideStableInsets(int displayId, Rect outInsets) throws RemoteException {
-        }
+        public void getOverrideStableInsets(int displayId, Rect outInsets) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void registerShortcutKey(long shortcutCode, IShortcutService keySubscriber) throws RemoteException {
-        }
+        public void registerShortcutKey(long shortcutCode, IShortcutService keySubscriber)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void createInputConsumer(IBinder token, String name, int displayId, InputChannel inputChannel) throws RemoteException {
-        }
+        public void createInputConsumer(
+                IBinder token, String name, int displayId, InputChannel inputChannel)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean destroyInputConsumer(IBinder token, int displayId) throws RemoteException {
@@ -884,33 +940,31 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void registerDisplayFoldListener(IDisplayFoldListener listener) throws RemoteException {
-        }
+        public void registerDisplayFoldListener(IDisplayFoldListener listener)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void unregisterDisplayFoldListener(IDisplayFoldListener listener) throws RemoteException {
-        }
+        public void unregisterDisplayFoldListener(IDisplayFoldListener listener)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public int[] registerDisplayWindowListener(IDisplayWindowListener listener) throws RemoteException {
+        public int[] registerDisplayWindowListener(IDisplayWindowListener listener)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public void unregisterDisplayWindowListener(IDisplayWindowListener listener) throws RemoteException {
-        }
+        public void unregisterDisplayWindowListener(IDisplayWindowListener listener)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void startWindowTrace() throws RemoteException {
-        }
+        public void startWindowTrace() throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void stopWindowTrace() throws RemoteException {
-        }
+        public void stopWindowTrace() throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void saveWindowTraceToFile() throws RemoteException {
-        }
+        public void saveWindowTraceToFile() throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isWindowTraceEnabled() throws RemoteException {
@@ -918,12 +972,10 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void startTransitionTrace() throws RemoteException {
-        }
+        public void startTransitionTrace() throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void stopTransitionTrace() throws RemoteException {
-        }
+        public void stopTransitionTrace() throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isTransitionTraceEnabled() throws RemoteException {
@@ -936,8 +988,7 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setWindowingMode(int displayId, int mode) throws RemoteException {
-        }
+        public void setWindowingMode(int displayId, int mode) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public int getRemoveContentMode(int displayId) throws RemoteException {
@@ -945,8 +996,7 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setRemoveContentMode(int displayId, int mode) throws RemoteException {
-        }
+        public void setRemoveContentMode(int displayId, int mode) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean shouldShowWithInsecureKeyguard(int displayId) throws RemoteException {
@@ -954,8 +1004,8 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setShouldShowWithInsecureKeyguard(int displayId, boolean shouldShow) throws RemoteException {
-        }
+        public void setShouldShowWithInsecureKeyguard(int displayId, boolean shouldShow)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean shouldShowSystemDecors(int displayId) throws RemoteException {
@@ -963,8 +1013,8 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setShouldShowSystemDecors(int displayId, boolean shouldShow) throws RemoteException {
-        }
+        public void setShouldShowSystemDecors(int displayId, boolean shouldShow)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public int getDisplayImePolicy(int displayId) throws RemoteException {
@@ -972,12 +1022,10 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setDisplayImePolicy(int displayId, int imePolicy) throws RemoteException {
-        }
+        public void setDisplayImePolicy(int displayId, int imePolicy) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void syncInputTransactions(boolean waitForAnimations) throws RemoteException {
-        }
+        public void syncInputTransactions(boolean waitForAnimations) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isLayerTracing() throws RemoteException {
@@ -985,24 +1033,26 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setLayerTracing(boolean enabled) throws RemoteException {
-        }
+        public void setLayerTracing(boolean enabled) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public boolean mirrorDisplay(int displayId, SurfaceControl outSurfaceControl) throws RemoteException {
+        public boolean mirrorDisplay(int displayId, SurfaceControl outSurfaceControl)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public void setDisplayWindowInsetsController(int displayId, IDisplayWindowInsetsController displayWindowInsetsController) throws RemoteException {
-        }
+        public void setDisplayWindowInsetsController(
+                int displayId, IDisplayWindowInsetsController displayWindowInsetsController)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void updateDisplayWindowRequestedVisibleTypes(int displayId, int requestedVisibleTypes) throws RemoteException {
-        }
+        public void updateDisplayWindowRequestedVisibleTypes(
+                int displayId, int requestedVisibleTypes) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public boolean getWindowInsets(int displayId, IBinder token, InsetsState outInsetsState) throws RemoteException {
+        public boolean getWindowInsets(int displayId, IBinder token, InsetsState outInsetsState)
+                throws RemoteException {
             return false;
         }
 
@@ -1012,28 +1062,32 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void showGlobalActions() throws RemoteException {
-        }
+        public void showGlobalActions() throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setLayerTracingFlags(int flags) throws RemoteException {
-        }
+        public void setLayerTracingFlags(int flags) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setActiveTransactionTracing(boolean active) throws RemoteException {
-        }
+        public void setActiveTransactionTracing(boolean active) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void requestScrollCapture(int displayId, IBinder behindClient, int taskId, IScrollCaptureResponseListener listener) throws RemoteException {
-        }
+        public void requestScrollCapture(
+                int displayId,
+                IBinder behindClient,
+                int taskId,
+                IScrollCaptureResponseListener listener)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void dispatchSmartClipRemoteRequest(int targetX, int targetY, SmartClipRemoteRequestInfo request, IBinder skipWindowToken) throws RemoteException {
-        }
+        public void dispatchSmartClipRemoteRequest(
+                int targetX,
+                int targetY,
+                SmartClipRemoteRequestInfo request,
+                IBinder skipWindowToken)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void holdLock(IBinder token, int durationMs) throws RemoteException {
-        }
+        public void holdLock(IBinder token, int durationMs) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public String[] getSupportedDisplayHashAlgorithms() throws RemoteException {
@@ -1041,41 +1095,51 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public VerifiedDisplayHash verifyDisplayHash(DisplayHash displayHash) throws RemoteException {
+        public VerifiedDisplayHash verifyDisplayHash(DisplayHash displayHash)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public void setDisplayHashThrottlingEnabled(boolean enable) throws RemoteException {
-        }
+        public void setDisplayHashThrottlingEnabled(boolean enable) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public WindowContextInfo attachWindowContextToDisplayArea(IApplicationThread appThread, IBinder clientToken, int type, int displayId, Bundle options) throws RemoteException {
+        public WindowContextInfo attachWindowContextToDisplayArea(
+                IApplicationThread appThread,
+                IBinder clientToken,
+                int type,
+                int displayId,
+                Bundle options)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public WindowContextInfo attachWindowContextToWindowToken(IApplicationThread appThread, IBinder clientToken, IBinder token) throws RemoteException {
+        public WindowContextInfo attachWindowContextToWindowToken(
+                IApplicationThread appThread, IBinder clientToken, IBinder token)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public WindowContextInfo attachWindowContextToDisplayContent(IApplicationThread appThread, IBinder clientToken, int displayId) throws RemoteException {
+        public WindowContextInfo attachWindowContextToDisplayContent(
+                IApplicationThread appThread, IBinder clientToken, int displayId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public void detachWindowContext(IBinder clientToken) throws RemoteException {
-        }
+        public void detachWindowContext(IBinder clientToken) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public boolean registerCrossWindowBlurEnabledListener(ICrossWindowBlurEnabledListener listener) throws RemoteException {
+        public boolean registerCrossWindowBlurEnabledListener(
+                ICrossWindowBlurEnabledListener listener) throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public void unregisterCrossWindowBlurEnabledListener(ICrossWindowBlurEnabledListener listener) throws RemoteException {
-        }
+        public void unregisterCrossWindowBlurEnabledListener(
+                ICrossWindowBlurEnabledListener listener) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isTaskSnapshotSupported() throws RemoteException {
@@ -1088,16 +1152,14 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setTaskSnapshotEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setTaskSnapshotEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void registerTaskFpsCallback(int taskId, ITaskFpsCallback callback) throws RemoteException {
-        }
+        public void registerTaskFpsCallback(int taskId, ITaskFpsCallback callback)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void unregisterTaskFpsCallback(ITaskFpsCallback listener) throws RemoteException {
-        }
+        public void unregisterTaskFpsCallback(ITaskFpsCallback listener) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public Bitmap snapshotTaskForRecents(int taskId) throws RemoteException {
@@ -1105,11 +1167,12 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setRecentsAppBehindSystemBars(boolean behindSystemBars) throws RemoteException {
-        }
+        public void setRecentsAppBehindSystemBars(boolean behindSystemBars)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public List<SemWindowManager.VisibleWindowInfo> getVisibleWindowInfoList() throws RemoteException {
+        public List<SemWindowManager.VisibleWindowInfo> getVisibleWindowInfoList()
+                throws RemoteException {
             return null;
         }
 
@@ -1124,8 +1187,11 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void captureDisplay(int displayId, ScreenCapture.CaptureArgs captureArgs, ScreenCapture.ScreenCaptureListener listener) throws RemoteException {
-        }
+        public void captureDisplay(
+                int displayId,
+                ScreenCapture.CaptureArgs captureArgs,
+                ScreenCapture.ScreenCaptureListener listener)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isGlobalKey(int keyCode) throws RemoteException {
@@ -1133,13 +1199,17 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public boolean addToSurfaceSyncGroup(IBinder syncGroupToken, boolean parentSyncGroupMerge, ISurfaceSyncGroupCompletedListener completedListener, AddToSurfaceSyncGroupResult addToSurfaceSyncGroupResult) throws RemoteException {
+        public boolean addToSurfaceSyncGroup(
+                IBinder syncGroupToken,
+                boolean parentSyncGroupMerge,
+                ISurfaceSyncGroupCompletedListener completedListener,
+                AddToSurfaceSyncGroupResult addToSurfaceSyncGroupResult)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public void markSurfaceSyncGroupReady(IBinder syncGroupToken) throws RemoteException {
-        }
+        public void markSurfaceSyncGroupReady(IBinder syncGroupToken) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public List<ComponentName> notifyScreenshotListeners(int displayId) throws RemoteException {
@@ -1147,56 +1217,63 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public boolean replaceContentOnDisplay(int displayId, SurfaceControl sc) throws RemoteException {
+        public boolean replaceContentOnDisplay(int displayId, SurfaceControl sc)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public void registerDecorViewGestureListener(IDecorViewGestureListener listener, int displayId) throws RemoteException {
-        }
+        public void registerDecorViewGestureListener(
+                IDecorViewGestureListener listener, int displayId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void unregisterDecorViewGestureListener(IDecorViewGestureListener listener, int displayId) throws RemoteException {
-        }
+        public void unregisterDecorViewGestureListener(
+                IDecorViewGestureListener listener, int displayId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void registerTrustedPresentationListener(IBinder window, ITrustedPresentationListener listener, TrustedPresentationThresholds thresholds, int id) throws RemoteException {
-        }
+        public void registerTrustedPresentationListener(
+                IBinder window,
+                ITrustedPresentationListener listener,
+                TrustedPresentationThresholds thresholds,
+                int id)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void unregisterTrustedPresentationListener(ITrustedPresentationListener listener, int id) throws RemoteException {
-        }
+        public void unregisterTrustedPresentationListener(
+                ITrustedPresentationListener listener, int id) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public boolean registerScreenRecordingCallback(IScreenRecordingCallback callback) throws RemoteException {
+        public boolean registerScreenRecordingCallback(IScreenRecordingCallback callback)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public void unregisterScreenRecordingCallback(IScreenRecordingCallback callback) throws RemoteException {
-        }
+        public void unregisterScreenRecordingCallback(IScreenRecordingCallback callback)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public boolean registerKnoxRemoteScreenCallback(IScreenRecordingCallback callback) throws RemoteException {
+        public boolean registerKnoxRemoteScreenCallback(IScreenRecordingCallback callback)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public void unregisterKnoxRemoteScreenCallback(IScreenRecordingCallback callback) throws RemoteException {
-        }
+        public void unregisterKnoxRemoteScreenCallback(IScreenRecordingCallback callback)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setGlobalDragListener(IGlobalDragListener listener) throws RemoteException {
-        }
+        public void setGlobalDragListener(IGlobalDragListener listener) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public boolean transferTouchGesture(InputTransferToken transferFromToken, InputTransferToken transferToToken) throws RemoteException {
+        public boolean transferTouchGesture(
+                InputTransferToken transferFromToken, InputTransferToken transferToToken)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public void setDeadzoneHole(Bundle deadzoneHole) throws RemoteException {
-        }
+        public void setDeadzoneHole(Bundle deadzoneHole) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public int getMaxAspectRatioPolicy(String pkg, int uid) throws RemoteException {
@@ -1204,22 +1281,40 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setMaxAspectRatioPolicy(String pkg, int uid, boolean enable, int restartTaskId) throws RemoteException {
-        }
+        public void setMaxAspectRatioPolicy(String pkg, int uid, boolean enable, int restartTaskId)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public ScreenshotResult takeScreenshotToTargetWindow(int displayId, int targetWindowType, boolean containsTarget, Rect sourceCrop, int width, int height, boolean useIdentityTransform, boolean ignorePolicy) throws RemoteException {
+        public ScreenshotResult takeScreenshotToTargetWindow(
+                int displayId,
+                int targetWindowType,
+                boolean containsTarget,
+                Rect sourceCrop,
+                int width,
+                int height,
+                boolean useIdentityTransform,
+                boolean ignorePolicy)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public ScreenshotResult takeScreenshotToTargetWindowFromCapture(int displayId, int targetWindowType, boolean containsTarget, Rect sourceCrop, int width, int height, boolean useIdentityTransform, boolean ignorePolicy, boolean fromCapture) throws RemoteException {
+        public ScreenshotResult takeScreenshotToTargetWindowFromCapture(
+                int displayId,
+                int targetWindowType,
+                boolean containsTarget,
+                Rect sourceCrop,
+                int width,
+                int height,
+                boolean useIdentityTransform,
+                boolean ignorePolicy,
+                boolean fromCapture)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public void getUserDisplaySize(Point point) throws RemoteException {
-        }
+        public void getUserDisplaySize(Point point) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public int getUserDisplayDensity() throws RemoteException {
@@ -1227,16 +1322,21 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void clearForcedDisplaySizeDensity(int displayId) throws RemoteException {
-        }
+        public void clearForcedDisplaySizeDensity(int displayId) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setForcedDisplaySizeDensity(int displayId, int width, int height, int density, boolean saveToSettings, int forcedHideCutout) throws RemoteException {
-        }
+        public void setForcedDisplaySizeDensity(
+                int displayId,
+                int width,
+                int height,
+                int density,
+                boolean saveToSettings,
+                int forcedHideCutout)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setForcedDisplaySizeDensityWithInfo(MultiResolutionChangeRequestInfo info) throws RemoteException {
-        }
+        public void setForcedDisplaySizeDensityWithInfo(MultiResolutionChangeRequestInfo info)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public int getSupportsFlexPanel(int userId, String packageName) throws RemoteException {
@@ -1244,8 +1344,9 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setSupportsFlexPanel(int userId, String packageName, boolean isSupportsFlexPanel) throws RemoteException {
-        }
+        public void setSupportsFlexPanel(
+                int userId, String packageName, boolean isSupportsFlexPanel)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public int getFullScreenAppsSupportMode() throws RemoteException {
@@ -1253,24 +1354,25 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void changeDisplayScale(MagnificationSpec spec, boolean registerInput, IInputFilter filter) throws RemoteException {
-        }
+        public void changeDisplayScale(
+                MagnificationSpec spec, boolean registerInput, IInputFilter filter)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void registerOneHandOpWatcher(IOneHandOpWatcher watcher) throws RemoteException {
-        }
+        public void registerOneHandOpWatcher(IOneHandOpWatcher watcher) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void unregisterOneHandOpWatcher(IOneHandOpWatcher watcher) throws RemoteException {
-        }
+        public void unregisterOneHandOpWatcher(IOneHandOpWatcher watcher) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public boolean startRemoteWallpaperAnimation(IRemoteAnimationRunner runner, int displayId) throws RemoteException {
+        public boolean startRemoteWallpaperAnimation(IRemoteAnimationRunner runner, int displayId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public boolean finishRemoteWallpaperAnimation(IRemoteAnimationRunner runner) throws RemoteException {
+        public boolean finishRemoteWallpaperAnimation(IRemoteAnimationRunner runner)
+                throws RemoteException {
             return false;
         }
 
@@ -1285,26 +1387,28 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public boolean requestSystemKeyEvent(int keyCode, ComponentName componentName, boolean request) throws RemoteException {
+        public boolean requestSystemKeyEvent(
+                int keyCode, ComponentName componentName, boolean request) throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public boolean isSystemKeyEventRequested(int keyCode, ComponentName componentName) throws RemoteException {
+        public boolean isSystemKeyEventRequested(int keyCode, ComponentName componentName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public void registerSystemKeyEvent(int keyCode, ComponentName componentName, int press) throws RemoteException {
-        }
+        public void registerSystemKeyEvent(int keyCode, ComponentName componentName, int press)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void unregisterSystemKeyEvent(int keyCode, ComponentName componentName) throws RemoteException {
-        }
+        public void unregisterSystemKeyEvent(int keyCode, ComponentName componentName)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void requestMetaKeyEvent(ComponentName componentName, boolean request) throws RemoteException {
-        }
+        public void requestMetaKeyEvent(ComponentName componentName, boolean request)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isMetaKeyEventRequested(ComponentName componentName) throws RemoteException {
@@ -1312,61 +1416,68 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void putKeyCustomizationInfo(SemWindowManager.KeyCustomizationInfo keyCustomizationInfo) throws RemoteException {
-        }
+        public void putKeyCustomizationInfo(
+                SemWindowManager.KeyCustomizationInfo keyCustomizationInfo)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfo(int id, int press, int keyCode) throws RemoteException {
+        public SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfo(
+                int id, int press, int keyCode) throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfoByPackage(String ownerPackage, int press, int keyCode) throws RemoteException {
+        public SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfoByPackage(
+                String ownerPackage, int press, int keyCode) throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public SemWindowManager.KeyCustomizationInfo getLastKeyCustomizationInfo(int press, int keyCode) throws RemoteException {
+        public SemWindowManager.KeyCustomizationInfo getLastKeyCustomizationInfo(
+                int press, int keyCode) throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public void removeKeyCustomizationInfo(int id, int press, int keyCode) throws RemoteException {
-        }
+        public void removeKeyCustomizationInfo(int id, int press, int keyCode)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void removeKeyCustomizationInfoByPackage(String ownerPackage, int press, int keyCode) throws RemoteException {
-        }
+        public void removeKeyCustomizationInfoByPackage(String ownerPackage, int press, int keyCode)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void clearKeyCustomizationInfoByKeyCode(int id, int keyCode) throws RemoteException {
-        }
+        public void clearKeyCustomizationInfoByKeyCode(int id, int keyCode)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void clearKeyCustomizationInfoByAction(int id, int keyCode, int action) throws RemoteException {
-        }
+        public void clearKeyCustomizationInfoByAction(int id, int keyCode, int action)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public List<SemWindowManager.KeyCustomizationInfo> getBackupKeyCustomizationInfoList() throws RemoteException {
+        public List<SemWindowManager.KeyCustomizationInfo> getBackupKeyCustomizationInfoList()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowManager
-        public void restoreKeyCustomizationInfo(List<SemWindowManager.KeyCustomizationInfo> keyInfoArray) throws RemoteException {
-        }
+        public void restoreKeyCustomizationInfo(
+                List<SemWindowManager.KeyCustomizationInfo> keyInfoArray) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public boolean omniRequestAssistScreenshot(IAssistDataReceiver receiver, boolean appWindowOnly) throws RemoteException {
+        public boolean omniRequestAssistScreenshot(
+                IAssistDataReceiver receiver, boolean appWindowOnly) throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowManager
-        public void dispatchSPenGestureEvent(int targetX, int targetY, InputEvent[] inputEvents, IBinder topToken) throws RemoteException {
-        }
+        public void dispatchSPenGestureEvent(
+                int targetX, int targetY, InputEvent[] inputEvents, IBinder topToken)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setPendingIntentAfterUnlock(PendingIntent pendingIntent, Intent fillInIntent) throws RemoteException {
-        }
+        public void setPendingIntentAfterUnlock(PendingIntent pendingIntent, Intent fillInIntent)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isKeyguardShowingAndNotOccluded() throws RemoteException {
@@ -1374,8 +1485,7 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void startLockscreenFingerprintAuth() throws RemoteException {
-        }
+        public void startLockscreenFingerprintAuth() throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public int getTopFocusedDisplayId() throws RemoteException {
@@ -1383,16 +1493,13 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void moveDisplayToTop(int displayId, String reason) throws RemoteException {
-        }
+        public void moveDisplayToTop(int displayId, String reason) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setDragSurfaceToOverlay(boolean toOverlay) throws RemoteException {
-        }
+        public void setDragSurfaceToOverlay(boolean toOverlay) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void startSurfaceAnimation(IBinder window, String args) throws RemoteException {
-        }
+        public void startSurfaceAnimation(IBinder window, String args) throws RemoteException {}
 
         @Override // android.view.IWindowManager
         public boolean isFolded() throws RemoteException {
@@ -1405,29 +1512,28 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.view.IWindowManager
-        public void setTableModeEnabled(boolean isTableModeEnabled) throws RemoteException {
-        }
+        public void setTableModeEnabled(boolean isTableModeEnabled) throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public int getAppContinuityMode(int userId, String packageName, ActivityInfo aInfo) throws RemoteException {
+        public int getAppContinuityMode(int userId, String packageName, ActivityInfo aInfo)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.view.IWindowManager
-        public void setAppContinuityMode(int userId, String packageName, boolean applied) throws RemoteException {
-        }
+        public void setAppContinuityMode(int userId, String packageName, boolean applied)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void registerAuthTouchEventListener(IAuthTouchEventListener listener) throws RemoteException {
-        }
+        public void registerAuthTouchEventListener(IAuthTouchEventListener listener)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void unregisterAuthTouchEventListener(IAuthTouchEventListener listener) throws RemoteException {
-        }
+        public void unregisterAuthTouchEventListener(IAuthTouchEventListener listener)
+                throws RemoteException {}
 
         @Override // android.view.IWindowManager
-        public void setDisplayColorToSystemProperties(int color) throws RemoteException {
-        }
+        public void setDisplayColorToSystemProperties(int color) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -1435,7 +1541,7 @@ public interface IWindowManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWindowManager {
+    public abstract static class Stub extends Binder implements IWindowManager {
         public static final String DESCRIPTOR = "android.view.IWindowManager";
         static final int TRANSACTION_addKeyguardLockedStateListener = 33;
         static final int TRANSACTION_addShellRoot = 20;
@@ -1660,7 +1766,9 @@ public interface IWindowManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IWindowManager asInterface(IBinder obj) {
@@ -2114,7 +2222,8 @@ public interface IWindowManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -2141,7 +2250,8 @@ public interface IWindowManager extends IInterface {
                     reply.writeBoolean(_result3);
                     return true;
                 case 4:
-                    IWindowSessionCallback _arg02 = IWindowSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    IWindowSessionCallback _arg02 =
+                            IWindowSessionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     IWindowSession _result4 = openSession(_arg02);
                     reply.writeNoException();
@@ -2250,7 +2360,9 @@ public interface IWindowManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 19:
-                    IDisplayChangeWindowController _arg017 = IDisplayChangeWindowController.Stub.asInterface(data.readStrongBinder());
+                    IDisplayChangeWindowController _arg017 =
+                            IDisplayChangeWindowController.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setDisplayChangeWindowController(_arg017);
                     reply.writeNoException();
@@ -2273,8 +2385,11 @@ public interface IWindowManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 22:
-                    IAppTransitionAnimationSpecsFuture _arg020 = IAppTransitionAnimationSpecsFuture.Stub.asInterface(data.readStrongBinder());
-                    IRemoteCallback _arg111 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppTransitionAnimationSpecsFuture _arg020 =
+                            IAppTransitionAnimationSpecsFuture.Stub.asInterface(
+                                    data.readStrongBinder());
+                    IRemoteCallback _arg111 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     boolean _arg26 = data.readBoolean();
                     int _arg32 = data.readInt();
                     data.enforceNoDataAvail();
@@ -2282,7 +2397,9 @@ public interface IWindowManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 23:
-                    RemoteAnimationAdapter _arg021 = (RemoteAnimationAdapter) data.readTypedObject(RemoteAnimationAdapter.CREATOR);
+                    RemoteAnimationAdapter _arg021 =
+                            (RemoteAnimationAdapter)
+                                    data.readTypedObject(RemoteAnimationAdapter.CREATOR);
                     int _arg112 = data.readInt();
                     data.enforceNoDataAvail();
                     overridePendingAppTransitionRemote(_arg021, _arg112);
@@ -2319,7 +2436,8 @@ public interface IWindowManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 29:
-                    IOnKeyguardExitResult _arg025 = IOnKeyguardExitResult.Stub.asInterface(data.readStrongBinder());
+                    IOnKeyguardExitResult _arg025 =
+                            IOnKeyguardExitResult.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     exitKeyguardSecurely(_arg025);
                     reply.writeNoException();
@@ -2337,20 +2455,24 @@ public interface IWindowManager extends IInterface {
                     reply.writeBoolean(_result11);
                     return true;
                 case 32:
-                    IKeyguardDismissCallback _arg027 = IKeyguardDismissCallback.Stub.asInterface(data.readStrongBinder());
-                    CharSequence _arg116 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    IKeyguardDismissCallback _arg027 =
+                            IKeyguardDismissCallback.Stub.asInterface(data.readStrongBinder());
+                    CharSequence _arg116 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     dismissKeyguard(_arg027, _arg116);
                     reply.writeNoException();
                     return true;
                 case 33:
-                    IKeyguardLockedStateListener _arg028 = IKeyguardLockedStateListener.Stub.asInterface(data.readStrongBinder());
+                    IKeyguardLockedStateListener _arg028 =
+                            IKeyguardLockedStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addKeyguardLockedStateListener(_arg028);
                     reply.writeNoException();
                     return true;
                 case 34:
-                    IKeyguardLockedStateListener _arg029 = IKeyguardLockedStateListener.Stub.asInterface(data.readStrongBinder());
+                    IKeyguardLockedStateListener _arg029 =
+                            IKeyguardLockedStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeKeyguardLockedStateListener(_arg029);
                     reply.writeNoException();
@@ -2453,7 +2575,8 @@ public interface IWindowManager extends IInterface {
                     reply.writeInt(_result17);
                     return true;
                 case 51:
-                    IRotationWatcher _arg042 = IRotationWatcher.Stub.asInterface(data.readStrongBinder());
+                    IRotationWatcher _arg042 =
+                            IRotationWatcher.Stub.asInterface(data.readStrongBinder());
                     int _arg120 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result18 = watchRotation(_arg042, _arg120);
@@ -2469,7 +2592,8 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 53:
                     IBinder _arg045 = data.readStrongBinder();
-                    IRotationWatcher _arg121 = IRotationWatcher.Stub.asInterface(data.readStrongBinder());
+                    IRotationWatcher _arg121 =
+                            IRotationWatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result19 = registerProposedRotationListener(_arg045, _arg121);
                     reply.writeNoException();
@@ -2549,7 +2673,8 @@ public interface IWindowManager extends IInterface {
                     reply.writeTypedObject(_result24, 1);
                     return true;
                 case 65:
-                    IWallpaperVisibilityListener _arg055 = IWallpaperVisibilityListener.Stub.asInterface(data.readStrongBinder());
+                    IWallpaperVisibilityListener _arg055 =
+                            IWallpaperVisibilityListener.Stub.asInterface(data.readStrongBinder());
                     int _arg127 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result25 = registerWallpaperVisibilityListener(_arg055, _arg127);
@@ -2557,28 +2682,34 @@ public interface IWindowManager extends IInterface {
                     reply.writeBoolean(_result25);
                     return true;
                 case 66:
-                    IWallpaperVisibilityListener _arg056 = IWallpaperVisibilityListener.Stub.asInterface(data.readStrongBinder());
+                    IWallpaperVisibilityListener _arg056 =
+                            IWallpaperVisibilityListener.Stub.asInterface(data.readStrongBinder());
                     int _arg128 = data.readInt();
                     data.enforceNoDataAvail();
                     unregisterWallpaperVisibilityListener(_arg056, _arg128);
                     reply.writeNoException();
                     return true;
                 case 67:
-                    ISystemGestureExclusionListener _arg057 = ISystemGestureExclusionListener.Stub.asInterface(data.readStrongBinder());
+                    ISystemGestureExclusionListener _arg057 =
+                            ISystemGestureExclusionListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg129 = data.readInt();
                     data.enforceNoDataAvail();
                     registerSystemGestureExclusionListener(_arg057, _arg129);
                     reply.writeNoException();
                     return true;
                 case 68:
-                    ISystemGestureExclusionListener _arg058 = ISystemGestureExclusionListener.Stub.asInterface(data.readStrongBinder());
+                    ISystemGestureExclusionListener _arg058 =
+                            ISystemGestureExclusionListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg130 = data.readInt();
                     data.enforceNoDataAvail();
                     unregisterSystemGestureExclusionListener(_arg058, _arg130);
                     reply.writeNoException();
                     return true;
                 case 69:
-                    IAssistDataReceiver _arg059 = IAssistDataReceiver.Stub.asInterface(data.readStrongBinder());
+                    IAssistDataReceiver _arg059 =
+                            IAssistDataReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result26 = requestAssistScreenshot(_arg059);
                     reply.writeNoException();
@@ -2645,20 +2776,23 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 80:
                     int _arg068 = data.readInt();
-                    IPinnedTaskListener _arg132 = IPinnedTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IPinnedTaskListener _arg132 =
+                            IPinnedTaskListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerPinnedTaskListener(_arg068, _arg132);
                     reply.writeNoException();
                     return true;
                 case 81:
-                    IResultReceiver _arg069 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg069 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     int _arg133 = data.readInt();
                     data.enforceNoDataAvail();
                     requestAppKeyboardShortcuts(_arg069, _arg133);
                     reply.writeNoException();
                     return true;
                 case 82:
-                    IResultReceiver _arg070 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg070 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     int _arg134 = data.readInt();
                     data.enforceNoDataAvail();
                     requestImeKeyboardShortcuts(_arg070, _arg134);
@@ -2682,7 +2816,8 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 85:
                     long _arg073 = data.readLong();
-                    IShortcutService _arg137 = IShortcutService.Stub.asInterface(data.readStrongBinder());
+                    IShortcutService _arg137 =
+                            IShortcutService.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerShortcutKey(_arg073, _arg137);
                     reply.writeNoException();
@@ -2711,26 +2846,30 @@ public interface IWindowManager extends IInterface {
                     reply.writeTypedObject(_result33, 1);
                     return true;
                 case 89:
-                    IDisplayFoldListener _arg076 = IDisplayFoldListener.Stub.asInterface(data.readStrongBinder());
+                    IDisplayFoldListener _arg076 =
+                            IDisplayFoldListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerDisplayFoldListener(_arg076);
                     reply.writeNoException();
                     return true;
                 case 90:
-                    IDisplayFoldListener _arg077 = IDisplayFoldListener.Stub.asInterface(data.readStrongBinder());
+                    IDisplayFoldListener _arg077 =
+                            IDisplayFoldListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterDisplayFoldListener(_arg077);
                     reply.writeNoException();
                     return true;
                 case 91:
-                    IDisplayWindowListener _arg078 = IDisplayWindowListener.Stub.asInterface(data.readStrongBinder());
+                    IDisplayWindowListener _arg078 =
+                            IDisplayWindowListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int[] _result34 = registerDisplayWindowListener(_arg078);
                     reply.writeNoException();
                     reply.writeIntArray(_result34);
                     return true;
                 case 92:
-                    IDisplayWindowListener _arg079 = IDisplayWindowListener.Stub.asInterface(data.readStrongBinder());
+                    IDisplayWindowListener _arg079 =
+                            IDisplayWindowListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterDisplayWindowListener(_arg079);
                     reply.writeNoException();
@@ -2863,7 +3002,9 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 114:
                     int _arg093 = data.readInt();
-                    IDisplayWindowInsetsController _arg146 = IDisplayWindowInsetsController.Stub.asInterface(data.readStrongBinder());
+                    IDisplayWindowInsetsController _arg146 =
+                            IDisplayWindowInsetsController.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setDisplayWindowInsetsController(_arg093, _arg146);
                     reply.writeNoException();
@@ -2912,7 +3053,9 @@ public interface IWindowManager extends IInterface {
                     int _arg099 = data.readInt();
                     IBinder _arg149 = data.readStrongBinder();
                     int _arg211 = data.readInt();
-                    IScrollCaptureResponseListener _arg34 = IScrollCaptureResponseListener.Stub.asInterface(data.readStrongBinder());
+                    IScrollCaptureResponseListener _arg34 =
+                            IScrollCaptureResponseListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestScrollCapture(_arg099, _arg149, _arg211, _arg34);
                     reply.writeNoException();
@@ -2920,7 +3063,9 @@ public interface IWindowManager extends IInterface {
                 case 122:
                     int _arg0100 = data.readInt();
                     int _arg150 = data.readInt();
-                    SmartClipRemoteRequestInfo _arg212 = (SmartClipRemoteRequestInfo) data.readTypedObject(SmartClipRemoteRequestInfo.CREATOR);
+                    SmartClipRemoteRequestInfo _arg212 =
+                            (SmartClipRemoteRequestInfo)
+                                    data.readTypedObject(SmartClipRemoteRequestInfo.CREATOR);
                     IBinder _arg35 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     dispatchSmartClipRemoteRequest(_arg0100, _arg150, _arg212, _arg35);
@@ -2952,22 +3097,27 @@ public interface IWindowManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 127:
-                    IApplicationThread _arg0104 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg0104 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg152 = data.readStrongBinder();
                     int _arg213 = data.readInt();
                     int _arg36 = data.readInt();
                     Bundle _arg4 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    WindowContextInfo _result48 = attachWindowContextToDisplayArea(_arg0104, _arg152, _arg213, _arg36, _arg4);
+                    WindowContextInfo _result48 =
+                            attachWindowContextToDisplayArea(
+                                    _arg0104, _arg152, _arg213, _arg36, _arg4);
                     reply.writeNoException();
                     reply.writeTypedObject(_result48, 1);
                     return true;
                 case 128:
-                    IApplicationThread _arg0105 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg0105 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg153 = data.readStrongBinder();
                     IBinder _arg214 = data.readStrongBinder();
                     data.enforceNoDataAvail();
-                    WindowContextInfo _result49 = attachWindowContextToWindowToken(_arg0105, _arg153, _arg214);
+                    WindowContextInfo _result49 =
+                            attachWindowContextToWindowToken(_arg0105, _arg153, _arg214);
                     reply.writeNoException();
                     reply.writeTypedObject(_result49, 1);
                     return true;
@@ -2977,7 +3127,8 @@ public interface IWindowManager extends IInterface {
                     IBinder _arg154 = data.readStrongBinder();
                     int _arg215 = data.readInt();
                     data.enforceNoDataAvail();
-                    WindowContextInfo _result50 = attachWindowContextToDisplayContent(_arg0107, _arg154, _arg215);
+                    WindowContextInfo _result50 =
+                            attachWindowContextToDisplayContent(_arg0107, _arg154, _arg215);
                     reply.writeNoException();
                     reply.writeTypedObject(_result50, 1);
                     return true;
@@ -2988,14 +3139,18 @@ public interface IWindowManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 131:
-                    ICrossWindowBlurEnabledListener _arg0109 = ICrossWindowBlurEnabledListener.Stub.asInterface(data.readStrongBinder());
+                    ICrossWindowBlurEnabledListener _arg0109 =
+                            ICrossWindowBlurEnabledListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result51 = registerCrossWindowBlurEnabledListener(_arg0109);
                     reply.writeNoException();
                     reply.writeBoolean(_result51);
                     return true;
                 case 132:
-                    ICrossWindowBlurEnabledListener _arg0110 = ICrossWindowBlurEnabledListener.Stub.asInterface(data.readStrongBinder());
+                    ICrossWindowBlurEnabledListener _arg0110 =
+                            ICrossWindowBlurEnabledListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCrossWindowBlurEnabledListener(_arg0110);
                     reply.writeNoException();
@@ -3018,13 +3173,15 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 136:
                     int _arg0112 = data.readInt();
-                    ITaskFpsCallback _arg155 = ITaskFpsCallback.Stub.asInterface(data.readStrongBinder());
+                    ITaskFpsCallback _arg155 =
+                            ITaskFpsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerTaskFpsCallback(_arg0112, _arg155);
                     reply.writeNoException();
                     return true;
                 case 137:
-                    ITaskFpsCallback _arg0113 = ITaskFpsCallback.Stub.asInterface(data.readStrongBinder());
+                    ITaskFpsCallback _arg0113 =
+                            ITaskFpsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterTaskFpsCallback(_arg0113);
                     reply.writeNoException();
@@ -3059,8 +3216,13 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 143:
                     int _arg0116 = data.readInt();
-                    ScreenCapture.CaptureArgs _arg156 = (ScreenCapture.CaptureArgs) data.readTypedObject(ScreenCapture.CaptureArgs.CREATOR);
-                    ScreenCapture.ScreenCaptureListener _arg216 = (ScreenCapture.ScreenCaptureListener) data.readTypedObject(ScreenCapture.ScreenCaptureListener.CREATOR);
+                    ScreenCapture.CaptureArgs _arg156 =
+                            (ScreenCapture.CaptureArgs)
+                                    data.readTypedObject(ScreenCapture.CaptureArgs.CREATOR);
+                    ScreenCapture.ScreenCaptureListener _arg216 =
+                            (ScreenCapture.ScreenCaptureListener)
+                                    data.readTypedObject(
+                                            ScreenCapture.ScreenCaptureListener.CREATOR);
                     data.enforceNoDataAvail();
                     captureDisplay(_arg0116, _arg156, _arg216);
                     return true;
@@ -3074,7 +3236,9 @@ public interface IWindowManager extends IInterface {
                 case 145:
                     IBinder _arg0118 = data.readStrongBinder();
                     boolean _arg157 = data.readBoolean();
-                    ISurfaceSyncGroupCompletedListener _arg217 = ISurfaceSyncGroupCompletedListener.Stub.asInterface(data.readStrongBinder());
+                    ISurfaceSyncGroupCompletedListener _arg217 =
+                            ISurfaceSyncGroupCompletedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     AddToSurfaceSyncGroupResult _arg37 = new AddToSurfaceSyncGroupResult();
                     data.enforceNoDataAvail();
                     boolean _result59 = addToSurfaceSyncGroup(_arg0118, _arg157, _arg217, _arg37);
@@ -3096,14 +3260,16 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 148:
                     int _arg0121 = data.readInt();
-                    SurfaceControl _arg158 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _arg158 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result61 = replaceContentOnDisplay(_arg0121, _arg158);
                     reply.writeNoException();
                     reply.writeBoolean(_result61);
                     return true;
                 case 149:
-                    IDecorViewGestureListener _arg0122 = IDecorViewGestureListener.Stub.asInterface(data.readStrongBinder());
+                    IDecorViewGestureListener _arg0122 =
+                            IDecorViewGestureListener.Stub.asInterface(data.readStrongBinder());
                     int _arg159 = data.readInt();
                     data.enforceNoDataAvail();
                     registerDecorViewGestureListener(_arg0122, _arg159);
@@ -3111,7 +3277,8 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 150:
                     IBinder _arg0123 = data.readStrongBinder();
-                    IDecorViewGestureListener _arg0124 = IDecorViewGestureListener.Stub.asInterface(_arg0123);
+                    IDecorViewGestureListener _arg0124 =
+                            IDecorViewGestureListener.Stub.asInterface(_arg0123);
                     int _arg160 = data.readInt();
                     data.enforceNoDataAvail();
                     unregisterDecorViewGestureListener(_arg0124, _arg160);
@@ -3119,55 +3286,66 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 151:
                     IBinder _arg0125 = data.readStrongBinder();
-                    ITrustedPresentationListener _arg161 = ITrustedPresentationListener.Stub.asInterface(data.readStrongBinder());
-                    TrustedPresentationThresholds _arg218 = (TrustedPresentationThresholds) data.readTypedObject(TrustedPresentationThresholds.CREATOR);
+                    ITrustedPresentationListener _arg161 =
+                            ITrustedPresentationListener.Stub.asInterface(data.readStrongBinder());
+                    TrustedPresentationThresholds _arg218 =
+                            (TrustedPresentationThresholds)
+                                    data.readTypedObject(TrustedPresentationThresholds.CREATOR);
                     int _arg38 = data.readInt();
                     data.enforceNoDataAvail();
                     registerTrustedPresentationListener(_arg0125, _arg161, _arg218, _arg38);
                     reply.writeNoException();
                     return true;
                 case 152:
-                    ITrustedPresentationListener _arg0126 = ITrustedPresentationListener.Stub.asInterface(data.readStrongBinder());
+                    ITrustedPresentationListener _arg0126 =
+                            ITrustedPresentationListener.Stub.asInterface(data.readStrongBinder());
                     int _arg162 = data.readInt();
                     data.enforceNoDataAvail();
                     unregisterTrustedPresentationListener(_arg0126, _arg162);
                     reply.writeNoException();
                     return true;
                 case 153:
-                    IScreenRecordingCallback _arg0127 = IScreenRecordingCallback.Stub.asInterface(data.readStrongBinder());
+                    IScreenRecordingCallback _arg0127 =
+                            IScreenRecordingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result62 = registerScreenRecordingCallback(_arg0127);
                     reply.writeNoException();
                     reply.writeBoolean(_result62);
                     return true;
                 case 154:
-                    IScreenRecordingCallback _arg0128 = IScreenRecordingCallback.Stub.asInterface(data.readStrongBinder());
+                    IScreenRecordingCallback _arg0128 =
+                            IScreenRecordingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterScreenRecordingCallback(_arg0128);
                     reply.writeNoException();
                     return true;
                 case 155:
-                    IScreenRecordingCallback _arg0129 = IScreenRecordingCallback.Stub.asInterface(data.readStrongBinder());
+                    IScreenRecordingCallback _arg0129 =
+                            IScreenRecordingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result63 = registerKnoxRemoteScreenCallback(_arg0129);
                     reply.writeNoException();
                     reply.writeBoolean(_result63);
                     return true;
                 case 156:
-                    IScreenRecordingCallback _arg0130 = IScreenRecordingCallback.Stub.asInterface(data.readStrongBinder());
+                    IScreenRecordingCallback _arg0130 =
+                            IScreenRecordingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterKnoxRemoteScreenCallback(_arg0130);
                     reply.writeNoException();
                     return true;
                 case 157:
-                    IGlobalDragListener _arg0131 = IGlobalDragListener.Stub.asInterface(data.readStrongBinder());
+                    IGlobalDragListener _arg0131 =
+                            IGlobalDragListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setGlobalDragListener(_arg0131);
                     reply.writeNoException();
                     return true;
                 case 158:
-                    InputTransferToken _arg0132 = (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
-                    InputTransferToken _arg163 = (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
+                    InputTransferToken _arg0132 =
+                            (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
+                    InputTransferToken _arg163 =
+                            (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result64 = transferTouchGesture(_arg0132, _arg163);
                     reply.writeNoException();
@@ -3206,7 +3384,10 @@ public interface IWindowManager extends IInterface {
                     boolean _arg6 = data.readBoolean();
                     boolean _arg7 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    ScreenshotResult _result66 = takeScreenshotToTargetWindow(_arg0136, _arg166, _arg220, _arg310, _arg42, _arg5, _arg6, _arg7);
+                    ScreenshotResult _result66 =
+                            takeScreenshotToTargetWindow(
+                                    _arg0136, _arg166, _arg220, _arg310, _arg42, _arg5, _arg6,
+                                    _arg7);
                     reply.writeNoException();
                     reply.writeTypedObject(_result66, 1);
                     return true;
@@ -3221,7 +3402,10 @@ public interface IWindowManager extends IInterface {
                     boolean _arg72 = data.readBoolean();
                     boolean _arg8 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    ScreenshotResult _result67 = takeScreenshotToTargetWindowFromCapture(_arg0137, _arg167, _arg221, _arg311, _arg43, _arg52, _arg62, _arg72, _arg8);
+                    ScreenshotResult _result67 =
+                            takeScreenshotToTargetWindowFromCapture(
+                                    _arg0137, _arg167, _arg221, _arg311, _arg43, _arg52, _arg62,
+                                    _arg72, _arg8);
                     reply.writeNoException();
                     reply.writeTypedObject(_result67, 1);
                     return true;
@@ -3251,11 +3435,14 @@ public interface IWindowManager extends IInterface {
                     boolean _arg44 = data.readBoolean();
                     int _arg53 = data.readInt();
                     data.enforceNoDataAvail();
-                    setForcedDisplaySizeDensity(_arg0140, _arg168, _arg222, _arg312, _arg44, _arg53);
+                    setForcedDisplaySizeDensity(
+                            _arg0140, _arg168, _arg222, _arg312, _arg44, _arg53);
                     reply.writeNoException();
                     return true;
                 case 168:
-                    MultiResolutionChangeRequestInfo _arg0141 = (MultiResolutionChangeRequestInfo) data.readTypedObject(MultiResolutionChangeRequestInfo.CREATOR);
+                    MultiResolutionChangeRequestInfo _arg0141 =
+                            (MultiResolutionChangeRequestInfo)
+                                    data.readTypedObject(MultiResolutionChangeRequestInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setForcedDisplaySizeDensityWithInfo(_arg0141);
                     reply.writeNoException();
@@ -3282,7 +3469,8 @@ public interface IWindowManager extends IInterface {
                     reply.writeInt(_result70);
                     return true;
                 case 172:
-                    MagnificationSpec _arg0144 = (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
+                    MagnificationSpec _arg0144 =
+                            (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
                     boolean _arg171 = data.readBoolean();
                     IInputFilter _arg224 = IInputFilter.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
@@ -3290,19 +3478,22 @@ public interface IWindowManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 173:
-                    IOneHandOpWatcher _arg0145 = IOneHandOpWatcher.Stub.asInterface(data.readStrongBinder());
+                    IOneHandOpWatcher _arg0145 =
+                            IOneHandOpWatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerOneHandOpWatcher(_arg0145);
                     reply.writeNoException();
                     return true;
                 case 174:
-                    IOneHandOpWatcher _arg0146 = IOneHandOpWatcher.Stub.asInterface(data.readStrongBinder());
+                    IOneHandOpWatcher _arg0146 =
+                            IOneHandOpWatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterOneHandOpWatcher(_arg0146);
                     reply.writeNoException();
                     return true;
                 case 175:
-                    IRemoteAnimationRunner _arg0147 = IRemoteAnimationRunner.Stub.asInterface(data.readStrongBinder());
+                    IRemoteAnimationRunner _arg0147 =
+                            IRemoteAnimationRunner.Stub.asInterface(data.readStrongBinder());
                     int _arg172 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result71 = startRemoteWallpaperAnimation(_arg0147, _arg172);
@@ -3310,7 +3501,8 @@ public interface IWindowManager extends IInterface {
                     reply.writeBoolean(_result71);
                     return true;
                 case 176:
-                    IRemoteAnimationRunner _arg0148 = IRemoteAnimationRunner.Stub.asInterface(data.readStrongBinder());
+                    IRemoteAnimationRunner _arg0148 =
+                            IRemoteAnimationRunner.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result72 = finishRemoteWallpaperAnimation(_arg0148);
                     reply.writeNoException();
@@ -3330,7 +3522,8 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 179:
                     int _arg0150 = data.readInt();
-                    ComponentName _arg173 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg173 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg225 = data.readBoolean();
                     data.enforceNoDataAvail();
                     boolean _result75 = requestSystemKeyEvent(_arg0150, _arg173, _arg225);
@@ -3339,7 +3532,8 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 180:
                     int _arg0151 = data.readInt();
-                    ComponentName _arg174 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg174 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result76 = isSystemKeyEventRequested(_arg0151, _arg174);
                     reply.writeNoException();
@@ -3347,7 +3541,8 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 181:
                     int _arg0152 = data.readInt();
-                    ComponentName _arg175 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg175 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg226 = data.readInt();
                     data.enforceNoDataAvail();
                     registerSystemKeyEvent(_arg0152, _arg175, _arg226);
@@ -3355,27 +3550,33 @@ public interface IWindowManager extends IInterface {
                     return true;
                 case 182:
                     int _arg0153 = data.readInt();
-                    ComponentName _arg176 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg176 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     unregisterSystemKeyEvent(_arg0153, _arg176);
                     reply.writeNoException();
                     return true;
                 case 183:
-                    ComponentName _arg0154 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0154 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg177 = data.readBoolean();
                     data.enforceNoDataAvail();
                     requestMetaKeyEvent(_arg0154, _arg177);
                     reply.writeNoException();
                     return true;
                 case 184:
-                    ComponentName _arg0155 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0155 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result77 = isMetaKeyEventRequested(_arg0155);
                     reply.writeNoException();
                     reply.writeBoolean(_result77);
                     return true;
                 case 185:
-                    SemWindowManager.KeyCustomizationInfo _arg0156 = (SemWindowManager.KeyCustomizationInfo) data.readTypedObject(SemWindowManager.KeyCustomizationInfo.CREATOR);
+                    SemWindowManager.KeyCustomizationInfo _arg0156 =
+                            (SemWindowManager.KeyCustomizationInfo)
+                                    data.readTypedObject(
+                                            SemWindowManager.KeyCustomizationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     putKeyCustomizationInfo(_arg0156);
                     reply.writeNoException();
@@ -3385,7 +3586,8 @@ public interface IWindowManager extends IInterface {
                     int _arg178 = data.readInt();
                     int _arg227 = data.readInt();
                     data.enforceNoDataAvail();
-                    SemWindowManager.KeyCustomizationInfo _result78 = getKeyCustomizationInfo(_arg0157, _arg178, _arg227);
+                    SemWindowManager.KeyCustomizationInfo _result78 =
+                            getKeyCustomizationInfo(_arg0157, _arg178, _arg227);
                     reply.writeNoException();
                     reply.writeTypedObject(_result78, 1);
                     return true;
@@ -3394,7 +3596,8 @@ public interface IWindowManager extends IInterface {
                     int _arg179 = data.readInt();
                     int _arg228 = data.readInt();
                     data.enforceNoDataAvail();
-                    SemWindowManager.KeyCustomizationInfo _result79 = getKeyCustomizationInfoByPackage(_arg0158, _arg179, _arg228);
+                    SemWindowManager.KeyCustomizationInfo _result79 =
+                            getKeyCustomizationInfoByPackage(_arg0158, _arg179, _arg228);
                     reply.writeNoException();
                     reply.writeTypedObject(_result79, 1);
                     return true;
@@ -3402,7 +3605,8 @@ public interface IWindowManager extends IInterface {
                     int _arg0159 = data.readInt();
                     int _arg180 = data.readInt();
                     data.enforceNoDataAvail();
-                    SemWindowManager.KeyCustomizationInfo _result80 = getLastKeyCustomizationInfo(_arg0159, _arg180);
+                    SemWindowManager.KeyCustomizationInfo _result80 =
+                            getLastKeyCustomizationInfo(_arg0159, _arg180);
                     reply.writeNoException();
                     reply.writeTypedObject(_result80, 1);
                     return true;
@@ -3438,18 +3642,22 @@ public interface IWindowManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 193:
-                    List<SemWindowManager.KeyCustomizationInfo> _result81 = getBackupKeyCustomizationInfoList();
+                    List<SemWindowManager.KeyCustomizationInfo> _result81 =
+                            getBackupKeyCustomizationInfoList();
                     reply.writeNoException();
                     reply.writeTypedList(_result81, 1);
                     return true;
                 case 194:
-                    List<SemWindowManager.KeyCustomizationInfo> _arg0164 = data.createTypedArrayList(SemWindowManager.KeyCustomizationInfo.CREATOR);
+                    List<SemWindowManager.KeyCustomizationInfo> _arg0164 =
+                            data.createTypedArrayList(
+                                    SemWindowManager.KeyCustomizationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     restoreKeyCustomizationInfo(_arg0164);
                     reply.writeNoException();
                     return true;
                 case 195:
-                    IAssistDataReceiver _arg0165 = IAssistDataReceiver.Stub.asInterface(data.readStrongBinder());
+                    IAssistDataReceiver _arg0165 =
+                            IAssistDataReceiver.Stub.asInterface(data.readStrongBinder());
                     boolean _arg185 = data.readBoolean();
                     data.enforceNoDataAvail();
                     boolean _result82 = omniRequestAssistScreenshot(_arg0165, _arg185);
@@ -3466,7 +3674,8 @@ public interface IWindowManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 197:
-                    PendingIntent _arg0167 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg0167 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     Intent _arg187 = (Intent) data.readTypedObject(Intent.CREATOR);
                     data.enforceNoDataAvail();
                     setPendingIntentAfterUnlock(_arg0167, _arg187);
@@ -3523,7 +3732,8 @@ public interface IWindowManager extends IInterface {
                 case 207:
                     int _arg0172 = data.readInt();
                     String _arg190 = data.readString();
-                    ActivityInfo _arg233 = (ActivityInfo) data.readTypedObject(ActivityInfo.CREATOR);
+                    ActivityInfo _arg233 =
+                            (ActivityInfo) data.readTypedObject(ActivityInfo.CREATOR);
                     data.enforceNoDataAvail();
                     int _result87 = getAppContinuityMode(_arg0172, _arg190, _arg233);
                     reply.writeNoException();
@@ -3538,13 +3748,15 @@ public interface IWindowManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 209:
-                    IAuthTouchEventListener _arg0174 = IAuthTouchEventListener.Stub.asInterface(data.readStrongBinder());
+                    IAuthTouchEventListener _arg0174 =
+                            IAuthTouchEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerAuthTouchEventListener(_arg0174);
                     reply.writeNoException();
                     return true;
                 case 210:
-                    IAuthTouchEventListener _arg0175 = IAuthTouchEventListener.Stub.asInterface(data.readStrongBinder());
+                    IAuthTouchEventListener _arg0175 =
+                            IAuthTouchEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterAuthTouchEventListener(_arg0175);
                     reply.writeNoException();
@@ -3626,7 +3838,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public IWindowSession openSession(IWindowSessionCallback callback) throws RemoteException {
+            public IWindowSession openSession(IWindowSessionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3634,7 +3847,8 @@ public interface IWindowManager extends IInterface {
                     _data.writeStrongInterface(callback);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    IWindowSession _result = IWindowSession.Stub.asInterface(_reply.readStrongBinder());
+                    IWindowSession _result =
+                            IWindowSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3679,7 +3893,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setForcedDisplaySize(int displayId, int width, int height) throws RemoteException {
+            public void setForcedDisplaySize(int displayId, int width, int height)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3762,7 +3977,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setForcedDisplayDensityForUser(int displayId, int density, int userId) throws RemoteException {
+            public void setForcedDisplayDensityForUser(int displayId, int density, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3779,7 +3995,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void clearForcedDisplayDensityForUser(int displayId, int userId) throws RemoteException {
+            public void clearForcedDisplayDensityForUser(int displayId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3795,7 +4012,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setForcedDisplayScalingMode(int displayId, int mode) throws RemoteException {
+            public void setForcedDisplayScalingMode(int displayId, int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3843,7 +4061,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void addWindowToken(IBinder token, int type, int displayId, Bundle options) throws RemoteException {
+            public void addWindowToken(IBinder token, int type, int displayId, Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3877,7 +4096,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setDisplayChangeWindowController(IDisplayChangeWindowController controller) throws RemoteException {
+            public void setDisplayChangeWindowController(IDisplayChangeWindowController controller)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3892,7 +4112,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public SurfaceControl addShellRoot(int displayId, IWindow client, int shellRootLayer) throws RemoteException {
+            public SurfaceControl addShellRoot(int displayId, IWindow client, int shellRootLayer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3902,7 +4123,8 @@ public interface IWindowManager extends IInterface {
                     _data.writeInt(shellRootLayer);
                     this.mRemote.transact(20, _data, _reply, 0);
                     _reply.readException();
-                    SurfaceControl _result = (SurfaceControl) _reply.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _result =
+                            (SurfaceControl) _reply.readTypedObject(SurfaceControl.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3911,7 +4133,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setShellRootAccessibilityWindow(int displayId, int shellRootLayer, IWindow target) throws RemoteException {
+            public void setShellRootAccessibilityWindow(
+                    int displayId, int shellRootLayer, IWindow target) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3928,7 +4151,12 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void overridePendingAppTransitionMultiThumbFuture(IAppTransitionAnimationSpecsFuture specsFuture, IRemoteCallback startedCallback, boolean scaleUp, int displayId) throws RemoteException {
+            public void overridePendingAppTransitionMultiThumbFuture(
+                    IAppTransitionAnimationSpecsFuture specsFuture,
+                    IRemoteCallback startedCallback,
+                    boolean scaleUp,
+                    int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3946,7 +4174,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void overridePendingAppTransitionRemote(RemoteAnimationAdapter remoteAnimationAdapter, int displayId) throws RemoteException {
+            public void overridePendingAppTransitionRemote(
+                    RemoteAnimationAdapter remoteAnimationAdapter, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4006,7 +4236,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void disableKeyguard(IBinder token, String tag, int userId) throws RemoteException {
+            public void disableKeyguard(IBinder token, String tag, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4039,7 +4270,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void exitKeyguardSecurely(IOnKeyguardExitResult callback) throws RemoteException {
+            public void exitKeyguardSecurely(IOnKeyguardExitResult callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4087,7 +4319,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void dismissKeyguard(IKeyguardDismissCallback callback, CharSequence message) throws RemoteException {
+            public void dismissKeyguard(IKeyguardDismissCallback callback, CharSequence message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4108,7 +4341,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void addKeyguardLockedStateListener(IKeyguardLockedStateListener listener) throws RemoteException {
+            public void addKeyguardLockedStateListener(IKeyguardLockedStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4123,7 +4357,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void removeKeyguardLockedStateListener(IKeyguardLockedStateListener listener) throws RemoteException {
+            public void removeKeyguardLockedStateListener(IKeyguardLockedStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4168,7 +4403,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void closeSystemDialogsInDisplay(String reason, int displayId) throws RemoteException {
+            public void closeSystemDialogsInDisplay(String reason, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4327,7 +4563,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setStrictModeVisualIndicatorPreference(String enabled) throws RemoteException {
+            public void setStrictModeVisualIndicatorPreference(String enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4389,7 +4626,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public int watchRotation(IRotationWatcher watcher, int displayId) throws RemoteException {
+            public int watchRotation(IRotationWatcher watcher, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4422,7 +4660,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public int registerProposedRotationListener(IBinder contextToken, IRotationWatcher listener) throws RemoteException {
+            public int registerProposedRotationListener(
+                    IBinder contextToken, IRotationWatcher listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4504,7 +4743,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void freezeDisplayRotation(int displayId, int rotation, String caller) throws RemoteException {
+            public void freezeDisplayRotation(int displayId, int rotation, String caller)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4554,7 +4794,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setFixedToUserRotation(int displayId, int fixedToUserRotation) throws RemoteException {
+            public void setFixedToUserRotation(int displayId, int fixedToUserRotation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4570,7 +4811,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setIgnoreOrientationRequest(int displayId, boolean ignoreOrientationRequest) throws RemoteException {
+            public void setIgnoreOrientationRequest(int displayId, boolean ignoreOrientationRequest)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4610,7 +4852,8 @@ public interface IWindowManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(64, _data, _reply, 0);
                     _reply.readException();
-                    SurfaceControl _result = (SurfaceControl) _reply.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _result =
+                            (SurfaceControl) _reply.readTypedObject(SurfaceControl.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4619,7 +4862,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean registerWallpaperVisibilityListener(IWallpaperVisibilityListener listener, int displayId) throws RemoteException {
+            public boolean registerWallpaperVisibilityListener(
+                    IWallpaperVisibilityListener listener, int displayId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4637,7 +4881,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterWallpaperVisibilityListener(IWallpaperVisibilityListener listener, int displayId) throws RemoteException {
+            public void unregisterWallpaperVisibilityListener(
+                    IWallpaperVisibilityListener listener, int displayId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4653,7 +4898,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void registerSystemGestureExclusionListener(ISystemGestureExclusionListener listener, int displayId) throws RemoteException {
+            public void registerSystemGestureExclusionListener(
+                    ISystemGestureExclusionListener listener, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4669,7 +4916,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterSystemGestureExclusionListener(ISystemGestureExclusionListener listener, int displayId) throws RemoteException {
+            public void unregisterSystemGestureExclusionListener(
+                    ISystemGestureExclusionListener listener, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4685,7 +4934,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean requestAssistScreenshot(IAssistDataReceiver receiver) throws RemoteException {
+            public boolean requestAssistScreenshot(IAssistDataReceiver receiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4726,7 +4976,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void updateStaticPrivacyIndicatorBounds(int displayId, Rect[] staticBounds) throws RemoteException {
+            public void updateStaticPrivacyIndicatorBounds(int displayId, Rect[] staticBounds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -4739,7 +4990,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setNavBarVirtualKeyHapticFeedbackEnabled(boolean enabled) throws RemoteException {
+            public void setNavBarVirtualKeyHapticFeedbackEnabled(boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4819,7 +5071,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public WindowContentFrameStats getWindowContentFrameStats(IBinder token) throws RemoteException {
+            public WindowContentFrameStats getWindowContentFrameStats(IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4827,7 +5080,9 @@ public interface IWindowManager extends IInterface {
                     _data.writeStrongBinder(token);
                     this.mRemote.transact(78, _data, _reply, 0);
                     _reply.readException();
-                    WindowContentFrameStats _result = (WindowContentFrameStats) _reply.readTypedObject(WindowContentFrameStats.CREATOR);
+                    WindowContentFrameStats _result =
+                            (WindowContentFrameStats)
+                                    _reply.readTypedObject(WindowContentFrameStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4852,7 +5107,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void registerPinnedTaskListener(int displayId, IPinnedTaskListener listener) throws RemoteException {
+            public void registerPinnedTaskListener(int displayId, IPinnedTaskListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4868,7 +5124,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void requestAppKeyboardShortcuts(IResultReceiver receiver, int deviceId) throws RemoteException {
+            public void requestAppKeyboardShortcuts(IResultReceiver receiver, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4884,7 +5141,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void requestImeKeyboardShortcuts(IResultReceiver receiver, int deviceId) throws RemoteException {
+            public void requestImeKeyboardShortcuts(IResultReceiver receiver, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4918,7 +5176,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void getOverrideStableInsets(int displayId, Rect outInsets) throws RemoteException {
+            public void getOverrideStableInsets(int displayId, Rect outInsets)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4936,7 +5195,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void registerShortcutKey(long shortcutCode, IShortcutService keySubscriber) throws RemoteException {
+            public void registerShortcutKey(long shortcutCode, IShortcutService keySubscriber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4952,7 +5212,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void createInputConsumer(IBinder token, String name, int displayId, InputChannel inputChannel) throws RemoteException {
+            public void createInputConsumer(
+                    IBinder token, String name, int displayId, InputChannel inputChannel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4972,7 +5234,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean destroyInputConsumer(IBinder token, int displayId) throws RemoteException {
+            public boolean destroyInputConsumer(IBinder token, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5006,7 +5269,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void registerDisplayFoldListener(IDisplayFoldListener listener) throws RemoteException {
+            public void registerDisplayFoldListener(IDisplayFoldListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5021,7 +5285,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterDisplayFoldListener(IDisplayFoldListener listener) throws RemoteException {
+            public void unregisterDisplayFoldListener(IDisplayFoldListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5036,7 +5301,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public int[] registerDisplayWindowListener(IDisplayWindowListener listener) throws RemoteException {
+            public int[] registerDisplayWindowListener(IDisplayWindowListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5053,7 +5319,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterDisplayWindowListener(IDisplayWindowListener listener) throws RemoteException {
+            public void unregisterDisplayWindowListener(IDisplayWindowListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5253,7 +5520,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setShouldShowWithInsecureKeyguard(int displayId, boolean shouldShow) throws RemoteException {
+            public void setShouldShowWithInsecureKeyguard(int displayId, boolean shouldShow)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5286,7 +5554,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setShouldShowSystemDecors(int displayId, boolean shouldShow) throws RemoteException {
+            public void setShouldShowSystemDecors(int displayId, boolean shouldShow)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5381,7 +5650,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean mirrorDisplay(int displayId, SurfaceControl outSurfaceControl) throws RemoteException {
+            public boolean mirrorDisplay(int displayId, SurfaceControl outSurfaceControl)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5401,7 +5671,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setDisplayWindowInsetsController(int displayId, IDisplayWindowInsetsController displayWindowInsetsController) throws RemoteException {
+            public void setDisplayWindowInsetsController(
+                    int displayId, IDisplayWindowInsetsController displayWindowInsetsController)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5417,7 +5689,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void updateDisplayWindowRequestedVisibleTypes(int displayId, int requestedVisibleTypes) throws RemoteException {
+            public void updateDisplayWindowRequestedVisibleTypes(
+                    int displayId, int requestedVisibleTypes) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5433,7 +5706,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean getWindowInsets(int displayId, IBinder token, InsetsState outInsetsState) throws RemoteException {
+            public boolean getWindowInsets(int displayId, IBinder token, InsetsState outInsetsState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5515,7 +5789,12 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void requestScrollCapture(int displayId, IBinder behindClient, int taskId, IScrollCaptureResponseListener listener) throws RemoteException {
+            public void requestScrollCapture(
+                    int displayId,
+                    IBinder behindClient,
+                    int taskId,
+                    IScrollCaptureResponseListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5533,7 +5812,12 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void dispatchSmartClipRemoteRequest(int targetX, int targetY, SmartClipRemoteRequestInfo request, IBinder skipWindowToken) throws RemoteException {
+            public void dispatchSmartClipRemoteRequest(
+                    int targetX,
+                    int targetY,
+                    SmartClipRemoteRequestInfo request,
+                    IBinder skipWindowToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5583,7 +5867,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public VerifiedDisplayHash verifyDisplayHash(DisplayHash displayHash) throws RemoteException {
+            public VerifiedDisplayHash verifyDisplayHash(DisplayHash displayHash)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5591,7 +5876,9 @@ public interface IWindowManager extends IInterface {
                     _data.writeTypedObject(displayHash, 0);
                     this.mRemote.transact(125, _data, _reply, 0);
                     _reply.readException();
-                    VerifiedDisplayHash _result = (VerifiedDisplayHash) _reply.readTypedObject(VerifiedDisplayHash.CREATOR);
+                    VerifiedDisplayHash _result =
+                            (VerifiedDisplayHash)
+                                    _reply.readTypedObject(VerifiedDisplayHash.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5615,7 +5902,13 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public WindowContextInfo attachWindowContextToDisplayArea(IApplicationThread appThread, IBinder clientToken, int type, int displayId, Bundle options) throws RemoteException {
+            public WindowContextInfo attachWindowContextToDisplayArea(
+                    IApplicationThread appThread,
+                    IBinder clientToken,
+                    int type,
+                    int displayId,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5627,7 +5920,8 @@ public interface IWindowManager extends IInterface {
                     _data.writeTypedObject(options, 0);
                     this.mRemote.transact(127, _data, _reply, 0);
                     _reply.readException();
-                    WindowContextInfo _result = (WindowContextInfo) _reply.readTypedObject(WindowContextInfo.CREATOR);
+                    WindowContextInfo _result =
+                            (WindowContextInfo) _reply.readTypedObject(WindowContextInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5636,7 +5930,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public WindowContextInfo attachWindowContextToWindowToken(IApplicationThread appThread, IBinder clientToken, IBinder token) throws RemoteException {
+            public WindowContextInfo attachWindowContextToWindowToken(
+                    IApplicationThread appThread, IBinder clientToken, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5646,7 +5942,8 @@ public interface IWindowManager extends IInterface {
                     _data.writeStrongBinder(token);
                     this.mRemote.transact(128, _data, _reply, 0);
                     _reply.readException();
-                    WindowContextInfo _result = (WindowContextInfo) _reply.readTypedObject(WindowContextInfo.CREATOR);
+                    WindowContextInfo _result =
+                            (WindowContextInfo) _reply.readTypedObject(WindowContextInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5655,7 +5952,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public WindowContextInfo attachWindowContextToDisplayContent(IApplicationThread appThread, IBinder clientToken, int displayId) throws RemoteException {
+            public WindowContextInfo attachWindowContextToDisplayContent(
+                    IApplicationThread appThread, IBinder clientToken, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5665,7 +5964,8 @@ public interface IWindowManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(129, _data, _reply, 0);
                     _reply.readException();
-                    WindowContextInfo _result = (WindowContextInfo) _reply.readTypedObject(WindowContextInfo.CREATOR);
+                    WindowContextInfo _result =
+                            (WindowContextInfo) _reply.readTypedObject(WindowContextInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5689,7 +5989,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean registerCrossWindowBlurEnabledListener(ICrossWindowBlurEnabledListener listener) throws RemoteException {
+            public boolean registerCrossWindowBlurEnabledListener(
+                    ICrossWindowBlurEnabledListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5706,7 +6007,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterCrossWindowBlurEnabledListener(ICrossWindowBlurEnabledListener listener) throws RemoteException {
+            public void unregisterCrossWindowBlurEnabledListener(
+                    ICrossWindowBlurEnabledListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5768,7 +6070,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void registerTaskFpsCallback(int taskId, ITaskFpsCallback callback) throws RemoteException {
+            public void registerTaskFpsCallback(int taskId, ITaskFpsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5784,7 +6087,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterTaskFpsCallback(ITaskFpsCallback listener) throws RemoteException {
+            public void unregisterTaskFpsCallback(ITaskFpsCallback listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5816,7 +6120,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setRecentsAppBehindSystemBars(boolean behindSystemBars) throws RemoteException {
+            public void setRecentsAppBehindSystemBars(boolean behindSystemBars)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5831,14 +6136,16 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public List<SemWindowManager.VisibleWindowInfo> getVisibleWindowInfoList() throws RemoteException {
+            public List<SemWindowManager.VisibleWindowInfo> getVisibleWindowInfoList()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(140, _data, _reply, 0);
                     _reply.readException();
-                    List<SemWindowManager.VisibleWindowInfo> _result = _reply.createTypedArrayList(SemWindowManager.VisibleWindowInfo.CREATOR);
+                    List<SemWindowManager.VisibleWindowInfo> _result =
+                            _reply.createTypedArrayList(SemWindowManager.VisibleWindowInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5879,7 +6186,11 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void captureDisplay(int displayId, ScreenCapture.CaptureArgs captureArgs, ScreenCapture.ScreenCaptureListener listener) throws RemoteException {
+            public void captureDisplay(
+                    int displayId,
+                    ScreenCapture.CaptureArgs captureArgs,
+                    ScreenCapture.ScreenCaptureListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -5910,7 +6221,12 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean addToSurfaceSyncGroup(IBinder syncGroupToken, boolean parentSyncGroupMerge, ISurfaceSyncGroupCompletedListener completedListener, AddToSurfaceSyncGroupResult addToSurfaceSyncGroupResult) throws RemoteException {
+            public boolean addToSurfaceSyncGroup(
+                    IBinder syncGroupToken,
+                    boolean parentSyncGroupMerge,
+                    ISurfaceSyncGroupCompletedListener completedListener,
+                    AddToSurfaceSyncGroupResult addToSurfaceSyncGroupResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5944,7 +6260,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public List<ComponentName> notifyScreenshotListeners(int displayId) throws RemoteException {
+            public List<ComponentName> notifyScreenshotListeners(int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5952,7 +6269,8 @@ public interface IWindowManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(147, _data, _reply, 0);
                     _reply.readException();
-                    List<ComponentName> _result = _reply.createTypedArrayList(ComponentName.CREATOR);
+                    List<ComponentName> _result =
+                            _reply.createTypedArrayList(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5961,7 +6279,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean replaceContentOnDisplay(int displayId, SurfaceControl sc) throws RemoteException {
+            public boolean replaceContentOnDisplay(int displayId, SurfaceControl sc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5979,7 +6298,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void registerDecorViewGestureListener(IDecorViewGestureListener listener, int displayId) throws RemoteException {
+            public void registerDecorViewGestureListener(
+                    IDecorViewGestureListener listener, int displayId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5995,7 +6315,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterDecorViewGestureListener(IDecorViewGestureListener listener, int displayId) throws RemoteException {
+            public void unregisterDecorViewGestureListener(
+                    IDecorViewGestureListener listener, int displayId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6011,7 +6332,12 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void registerTrustedPresentationListener(IBinder window, ITrustedPresentationListener listener, TrustedPresentationThresholds thresholds, int id) throws RemoteException {
+            public void registerTrustedPresentationListener(
+                    IBinder window,
+                    ITrustedPresentationListener listener,
+                    TrustedPresentationThresholds thresholds,
+                    int id)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6029,7 +6355,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterTrustedPresentationListener(ITrustedPresentationListener listener, int id) throws RemoteException {
+            public void unregisterTrustedPresentationListener(
+                    ITrustedPresentationListener listener, int id) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6045,7 +6372,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean registerScreenRecordingCallback(IScreenRecordingCallback callback) throws RemoteException {
+            public boolean registerScreenRecordingCallback(IScreenRecordingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6062,7 +6390,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterScreenRecordingCallback(IScreenRecordingCallback callback) throws RemoteException {
+            public void unregisterScreenRecordingCallback(IScreenRecordingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6077,7 +6406,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean registerKnoxRemoteScreenCallback(IScreenRecordingCallback callback) throws RemoteException {
+            public boolean registerKnoxRemoteScreenCallback(IScreenRecordingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6094,7 +6424,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterKnoxRemoteScreenCallback(IScreenRecordingCallback callback) throws RemoteException {
+            public void unregisterKnoxRemoteScreenCallback(IScreenRecordingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6124,7 +6455,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean transferTouchGesture(InputTransferToken transferFromToken, InputTransferToken transferToToken) throws RemoteException {
+            public boolean transferTouchGesture(
+                    InputTransferToken transferFromToken, InputTransferToken transferToToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6175,7 +6508,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setMaxAspectRatioPolicy(String pkg, int uid, boolean enable, int restartTaskId) throws RemoteException {
+            public void setMaxAspectRatioPolicy(
+                    String pkg, int uid, boolean enable, int restartTaskId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6193,7 +6527,16 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public ScreenshotResult takeScreenshotToTargetWindow(int displayId, int targetWindowType, boolean containsTarget, Rect sourceCrop, int width, int height, boolean useIdentityTransform, boolean ignorePolicy) throws RemoteException {
+            public ScreenshotResult takeScreenshotToTargetWindow(
+                    int displayId,
+                    int targetWindowType,
+                    boolean containsTarget,
+                    Rect sourceCrop,
+                    int width,
+                    int height,
+                    boolean useIdentityTransform,
+                    boolean ignorePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6208,7 +6551,8 @@ public interface IWindowManager extends IInterface {
                     _data.writeBoolean(ignorePolicy);
                     this.mRemote.transact(162, _data, _reply, 0);
                     _reply.readException();
-                    ScreenshotResult _result = (ScreenshotResult) _reply.readTypedObject(ScreenshotResult.CREATOR);
+                    ScreenshotResult _result =
+                            (ScreenshotResult) _reply.readTypedObject(ScreenshotResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6217,7 +6561,17 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public ScreenshotResult takeScreenshotToTargetWindowFromCapture(int displayId, int targetWindowType, boolean containsTarget, Rect sourceCrop, int width, int height, boolean useIdentityTransform, boolean ignorePolicy, boolean fromCapture) throws RemoteException {
+            public ScreenshotResult takeScreenshotToTargetWindowFromCapture(
+                    int displayId,
+                    int targetWindowType,
+                    boolean containsTarget,
+                    Rect sourceCrop,
+                    int width,
+                    int height,
+                    boolean useIdentityTransform,
+                    boolean ignorePolicy,
+                    boolean fromCapture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6233,7 +6587,8 @@ public interface IWindowManager extends IInterface {
                     _data.writeBoolean(fromCapture);
                     this.mRemote.transact(163, _data, _reply, 0);
                     _reply.readException();
-                    ScreenshotResult _result = (ScreenshotResult) _reply.readTypedObject(ScreenshotResult.CREATOR);
+                    ScreenshotResult _result =
+                            (ScreenshotResult) _reply.readTypedObject(ScreenshotResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6290,7 +6645,14 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setForcedDisplaySizeDensity(int displayId, int width, int height, int density, boolean saveToSettings, int forcedHideCutout) throws RemoteException {
+            public void setForcedDisplaySizeDensity(
+                    int displayId,
+                    int width,
+                    int height,
+                    int density,
+                    boolean saveToSettings,
+                    int forcedHideCutout)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6310,7 +6672,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setForcedDisplaySizeDensityWithInfo(MultiResolutionChangeRequestInfo info) throws RemoteException {
+            public void setForcedDisplaySizeDensityWithInfo(MultiResolutionChangeRequestInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6343,7 +6706,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setSupportsFlexPanel(int userId, String packageName, boolean isSupportsFlexPanel) throws RemoteException {
+            public void setSupportsFlexPanel(
+                    int userId, String packageName, boolean isSupportsFlexPanel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6376,7 +6741,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void changeDisplayScale(MagnificationSpec spec, boolean registerInput, IInputFilter filter) throws RemoteException {
+            public void changeDisplayScale(
+                    MagnificationSpec spec, boolean registerInput, IInputFilter filter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6408,7 +6775,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterOneHandOpWatcher(IOneHandOpWatcher watcher) throws RemoteException {
+            public void unregisterOneHandOpWatcher(IOneHandOpWatcher watcher)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6423,7 +6791,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean startRemoteWallpaperAnimation(IRemoteAnimationRunner runner, int displayId) throws RemoteException {
+            public boolean startRemoteWallpaperAnimation(
+                    IRemoteAnimationRunner runner, int displayId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6441,7 +6810,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean finishRemoteWallpaperAnimation(IRemoteAnimationRunner runner) throws RemoteException {
+            public boolean finishRemoteWallpaperAnimation(IRemoteAnimationRunner runner)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6491,7 +6861,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean requestSystemKeyEvent(int keyCode, ComponentName componentName, boolean request) throws RemoteException {
+            public boolean requestSystemKeyEvent(
+                    int keyCode, ComponentName componentName, boolean request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6510,7 +6882,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean isSystemKeyEventRequested(int keyCode, ComponentName componentName) throws RemoteException {
+            public boolean isSystemKeyEventRequested(int keyCode, ComponentName componentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6528,7 +6901,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void registerSystemKeyEvent(int keyCode, ComponentName componentName, int press) throws RemoteException {
+            public void registerSystemKeyEvent(int keyCode, ComponentName componentName, int press)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6545,7 +6919,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterSystemKeyEvent(int keyCode, ComponentName componentName) throws RemoteException {
+            public void unregisterSystemKeyEvent(int keyCode, ComponentName componentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6561,7 +6936,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void requestMetaKeyEvent(ComponentName componentName, boolean request) throws RemoteException {
+            public void requestMetaKeyEvent(ComponentName componentName, boolean request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6577,7 +6953,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean isMetaKeyEventRequested(ComponentName componentName) throws RemoteException {
+            public boolean isMetaKeyEventRequested(ComponentName componentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6594,7 +6971,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void putKeyCustomizationInfo(SemWindowManager.KeyCustomizationInfo keyCustomizationInfo) throws RemoteException {
+            public void putKeyCustomizationInfo(
+                    SemWindowManager.KeyCustomizationInfo keyCustomizationInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6609,7 +6988,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfo(int id, int press, int keyCode) throws RemoteException {
+            public SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfo(
+                    int id, int press, int keyCode) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6619,7 +6999,10 @@ public interface IWindowManager extends IInterface {
                     _data.writeInt(keyCode);
                     this.mRemote.transact(186, _data, _reply, 0);
                     _reply.readException();
-                    SemWindowManager.KeyCustomizationInfo _result = (SemWindowManager.KeyCustomizationInfo) _reply.readTypedObject(SemWindowManager.KeyCustomizationInfo.CREATOR);
+                    SemWindowManager.KeyCustomizationInfo _result =
+                            (SemWindowManager.KeyCustomizationInfo)
+                                    _reply.readTypedObject(
+                                            SemWindowManager.KeyCustomizationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6628,7 +7011,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfoByPackage(String ownerPackage, int press, int keyCode) throws RemoteException {
+            public SemWindowManager.KeyCustomizationInfo getKeyCustomizationInfoByPackage(
+                    String ownerPackage, int press, int keyCode) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6638,7 +7022,10 @@ public interface IWindowManager extends IInterface {
                     _data.writeInt(keyCode);
                     this.mRemote.transact(187, _data, _reply, 0);
                     _reply.readException();
-                    SemWindowManager.KeyCustomizationInfo _result = (SemWindowManager.KeyCustomizationInfo) _reply.readTypedObject(SemWindowManager.KeyCustomizationInfo.CREATOR);
+                    SemWindowManager.KeyCustomizationInfo _result =
+                            (SemWindowManager.KeyCustomizationInfo)
+                                    _reply.readTypedObject(
+                                            SemWindowManager.KeyCustomizationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6647,7 +7034,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public SemWindowManager.KeyCustomizationInfo getLastKeyCustomizationInfo(int press, int keyCode) throws RemoteException {
+            public SemWindowManager.KeyCustomizationInfo getLastKeyCustomizationInfo(
+                    int press, int keyCode) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6656,7 +7044,10 @@ public interface IWindowManager extends IInterface {
                     _data.writeInt(keyCode);
                     this.mRemote.transact(188, _data, _reply, 0);
                     _reply.readException();
-                    SemWindowManager.KeyCustomizationInfo _result = (SemWindowManager.KeyCustomizationInfo) _reply.readTypedObject(SemWindowManager.KeyCustomizationInfo.CREATOR);
+                    SemWindowManager.KeyCustomizationInfo _result =
+                            (SemWindowManager.KeyCustomizationInfo)
+                                    _reply.readTypedObject(
+                                            SemWindowManager.KeyCustomizationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6665,7 +7056,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void removeKeyCustomizationInfo(int id, int press, int keyCode) throws RemoteException {
+            public void removeKeyCustomizationInfo(int id, int press, int keyCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6682,7 +7074,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void removeKeyCustomizationInfoByPackage(String ownerPackage, int press, int keyCode) throws RemoteException {
+            public void removeKeyCustomizationInfoByPackage(
+                    String ownerPackage, int press, int keyCode) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6699,7 +7092,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void clearKeyCustomizationInfoByKeyCode(int id, int keyCode) throws RemoteException {
+            public void clearKeyCustomizationInfoByKeyCode(int id, int keyCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6715,7 +7109,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void clearKeyCustomizationInfoByAction(int id, int keyCode, int action) throws RemoteException {
+            public void clearKeyCustomizationInfoByAction(int id, int keyCode, int action)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6732,14 +7127,17 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public List<SemWindowManager.KeyCustomizationInfo> getBackupKeyCustomizationInfoList() throws RemoteException {
+            public List<SemWindowManager.KeyCustomizationInfo> getBackupKeyCustomizationInfoList()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(193, _data, _reply, 0);
                     _reply.readException();
-                    List<SemWindowManager.KeyCustomizationInfo> _result = _reply.createTypedArrayList(SemWindowManager.KeyCustomizationInfo.CREATOR);
+                    List<SemWindowManager.KeyCustomizationInfo> _result =
+                            _reply.createTypedArrayList(
+                                    SemWindowManager.KeyCustomizationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6748,7 +7146,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void restoreKeyCustomizationInfo(List<SemWindowManager.KeyCustomizationInfo> keyInfoArray) throws RemoteException {
+            public void restoreKeyCustomizationInfo(
+                    List<SemWindowManager.KeyCustomizationInfo> keyInfoArray)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6763,7 +7163,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public boolean omniRequestAssistScreenshot(IAssistDataReceiver receiver, boolean appWindowOnly) throws RemoteException {
+            public boolean omniRequestAssistScreenshot(
+                    IAssistDataReceiver receiver, boolean appWindowOnly) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6781,7 +7182,9 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void dispatchSPenGestureEvent(int targetX, int targetY, InputEvent[] inputEvents, IBinder topToken) throws RemoteException {
+            public void dispatchSPenGestureEvent(
+                    int targetX, int targetY, InputEvent[] inputEvents, IBinder topToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6799,7 +7202,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setPendingIntentAfterUnlock(PendingIntent pendingIntent, Intent fillInIntent) throws RemoteException {
+            public void setPendingIntentAfterUnlock(
+                    PendingIntent pendingIntent, Intent fillInIntent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6949,7 +7353,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public int getAppContinuityMode(int userId, String packageName, ActivityInfo aInfo) throws RemoteException {
+            public int getAppContinuityMode(int userId, String packageName, ActivityInfo aInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6968,7 +7373,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void setAppContinuityMode(int userId, String packageName, boolean applied) throws RemoteException {
+            public void setAppContinuityMode(int userId, String packageName, boolean applied)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6985,7 +7391,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void registerAuthTouchEventListener(IAuthTouchEventListener listener) throws RemoteException {
+            public void registerAuthTouchEventListener(IAuthTouchEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7000,7 +7407,8 @@ public interface IWindowManager extends IInterface {
             }
 
             @Override // android.view.IWindowManager
-            public void unregisterAuthTouchEventListener(IAuthTouchEventListener listener) throws RemoteException {
+            public void unregisterAuthTouchEventListener(IAuthTouchEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7031,67 +7439,92 @@ public interface IWindowManager extends IInterface {
         }
 
         protected void setForcedDisplaySize_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void clearForcedDisplaySize_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void setForcedDisplayDensityForUser_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
-        protected void clearForcedDisplayDensityForUser_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+        protected void clearForcedDisplayDensityForUser_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void setForcedDisplayScalingMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void addShellRoot_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_APP_TOKENS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_APP_TOKENS, getCallingPid(), getCallingUid());
         }
 
-        protected void setShellRootAccessibilityWindow_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_APP_TOKENS, getCallingPid(), getCallingUid());
+        protected void setShellRootAccessibilityWindow_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_APP_TOKENS, getCallingPid(), getCallingUid());
         }
 
         protected void exitKeyguardSecurely_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DISABLE_KEYGUARD, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DISABLE_KEYGUARD, getCallingPid(), getCallingUid());
         }
 
-        protected void setNavBarVirtualKeyHapticFeedbackEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.STATUS_BAR, getCallingPid(), getCallingUid());
+        protected void setNavBarVirtualKeyHapticFeedbackEnabled_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.STATUS_BAR, getCallingPid(), getCallingUid());
         }
 
         protected void getCurrentImeTouchRegion_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.RESTRICTED_VR_ACCESS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.RESTRICTED_VR_ACCESS, getCallingPid(), getCallingUid());
         }
 
-        protected void setDisplayWindowInsetsController_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_APP_TOKENS, getCallingPid(), getCallingUid());
+        protected void setDisplayWindowInsetsController_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_APP_TOKENS, getCallingPid(), getCallingUid());
         }
 
-        protected void updateDisplayWindowRequestedVisibleTypes_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_APP_TOKENS, getCallingPid(), getCallingUid());
+        protected void updateDisplayWindowRequestedVisibleTypes_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_APP_TOKENS, getCallingPid(), getCallingUid());
         }
 
-        protected void registerScreenRecordingCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DETECT_SCREEN_RECORDING, getCallingPid(), getCallingUid());
+        protected void registerScreenRecordingCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DETECT_SCREEN_RECORDING, getCallingPid(), getCallingUid());
         }
 
-        protected void unregisterScreenRecordingCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DETECT_SCREEN_RECORDING, getCallingPid(), getCallingUid());
+        protected void unregisterScreenRecordingCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DETECT_SCREEN_RECORDING, getCallingPid(), getCallingUid());
         }
 
-        protected void registerKnoxRemoteScreenCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DETECT_SCREEN_RECORDING, getCallingPid(), getCallingUid());
+        protected void registerKnoxRemoteScreenCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DETECT_SCREEN_RECORDING, getCallingPid(), getCallingUid());
         }
 
-        protected void unregisterKnoxRemoteScreenCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DETECT_SCREEN_RECORDING, getCallingPid(), getCallingUid());
+        protected void unregisterKnoxRemoteScreenCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DETECT_SCREEN_RECORDING, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

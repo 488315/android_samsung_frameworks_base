@@ -1,7 +1,9 @@
 package android.hardware.usb;
 
 import android.util.Log;
+
 import dalvik.system.CloseGuard;
+
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.util.Objects;
@@ -29,7 +31,8 @@ public class UsbRequest {
 
     private native int native_dequeue_direct();
 
-    private native boolean native_init(UsbDeviceConnection usbDeviceConnection, int i, int i2, int i3, int i4);
+    private native boolean native_init(
+            UsbDeviceConnection usbDeviceConnection, int i, int i2, int i3, int i4);
 
     private native boolean native_queue(ByteBuffer byteBuffer, int i, int i2);
 
@@ -40,7 +43,13 @@ public class UsbRequest {
     public boolean initialize(UsbDeviceConnection connection, UsbEndpoint endpoint) {
         this.mEndpoint = endpoint;
         this.mConnection = (UsbDeviceConnection) Objects.requireNonNull(connection, "connection");
-        boolean wasInitialized = native_init(connection, endpoint.getAddress(), endpoint.getAttributes(), endpoint.getMaxPacketSize(), endpoint.getInterval());
+        boolean wasInitialized =
+                native_init(
+                        connection,
+                        endpoint.getAddress(),
+                        endpoint.getAttributes(),
+                        endpoint.getMaxPacketSize(),
+                        endpoint.getInterval());
         if (wasInitialized) {
             this.mCloseGuard.open("UsbRequest.close");
         }
@@ -242,7 +251,9 @@ public class UsbRequest {
             r1.<init>(r2)
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.usb.UsbRequest.queueIfConnectionOpen(java.nio.ByteBuffer):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.hardware.usb.UsbRequest.queueIfConnectionOpen(java.nio.ByteBuffer):boolean");
     }
 
     void dequeue(boolean useBufferOverflowInsteadOfIllegalArg) {
@@ -276,7 +287,8 @@ public class UsbRequest {
                 if (this.mBuffer.isDirect()) {
                     bytesTransferred = native_dequeue_direct();
                 } else {
-                    bytesTransferred = native_dequeue_array(this.mBuffer.array(), this.mLength, isSend);
+                    bytesTransferred =
+                            native_dequeue_array(this.mBuffer.array(), this.mLength, isSend);
                 }
                 if (bytesTransferred >= 0) {
                     int bytesToStore = Math.min(bytesTransferred, this.mLength);
@@ -286,7 +298,14 @@ public class UsbRequest {
                         if (!useBufferOverflowInsteadOfIllegalArg) {
                             throw e;
                         }
-                        Log.e(TAG, "Buffer " + this.mBuffer + " does not have enough space to read " + bytesToStore + " bytes", e);
+                        Log.e(
+                                TAG,
+                                "Buffer "
+                                        + this.mBuffer
+                                        + " does not have enough space to read "
+                                        + bytesToStore
+                                        + " bytes",
+                                e);
                         throw new BufferOverflowException();
                     }
                 }

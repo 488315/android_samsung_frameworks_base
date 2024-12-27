@@ -5,13 +5,19 @@ import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.Environment;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageHidden;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.compat.PlatformCompat;
-import com.android.server.pm.Policy;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageStateInternal;
+
+import libcore.io.IoUtils;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,9 +26,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -34,37 +37,69 @@ public abstract class SELinuxMMAC {
     static {
         ArrayList arrayList = new ArrayList();
         sMacPermissions = arrayList;
-        arrayList.add(new File(Environment.getRootDirectory(), "/etc/selinux/plat_mac_permissions.xml"));
-        File file = new File(Environment.getSystemExtDirectory(), "/etc/selinux/system_ext_mac_permissions.xml");
+        arrayList.add(
+                new File(Environment.getRootDirectory(), "/etc/selinux/plat_mac_permissions.xml"));
+        File file =
+                new File(
+                        Environment.getSystemExtDirectory(),
+                        "/etc/selinux/system_ext_mac_permissions.xml");
         if (file.exists()) {
             arrayList.add(file);
         }
-        File file2 = new File(Environment.getProductDirectory(), "/etc/selinux/product_mac_permissions.xml");
+        File file2 =
+                new File(
+                        Environment.getProductDirectory(),
+                        "/etc/selinux/product_mac_permissions.xml");
         if (file2.exists()) {
             arrayList.add(file2);
         }
-        File file3 = new File(Environment.getVendorDirectory(), "/etc/selinux/vendor_mac_permissions.xml");
+        File file3 =
+                new File(
+                        Environment.getVendorDirectory(),
+                        "/etc/selinux/vendor_mac_permissions.xml");
         if (file3.exists()) {
             arrayList.add(file3);
         }
-        File file4 = new File(Environment.getOdmDirectory(), "/etc/selinux/odm_mac_permissions.xml");
+        File file4 =
+                new File(Environment.getOdmDirectory(), "/etc/selinux/odm_mac_permissions.xml");
         if (file4.exists()) {
             arrayList.add(file4);
         }
     }
 
-    public static String getSeInfo(PackageStateInternal packageStateInternal, AndroidPackage androidPackage, SharedUserSetting sharedUserSetting, PlatformCompat platformCompat) {
+    public static String getSeInfo(
+            PackageStateInternal packageStateInternal,
+            AndroidPackage androidPackage,
+            SharedUserSetting sharedUserSetting,
+            PlatformCompat platformCompat) {
         int max;
         if (sharedUserSetting == null || sharedUserSetting.getPackages().size() == 0) {
-            ApplicationInfo appInfoWithoutState = ((AndroidPackageHidden) androidPackage).toAppInfoWithoutState();
-            max = platformCompat.isChangeEnabledInternal(143539591L, appInfoWithoutState) ? Math.max(10000, androidPackage.getTargetSdkVersion()) : platformCompat.isChangeEnabledInternal(168782947L, appInfoWithoutState) ? Math.max(30, androidPackage.getTargetSdkVersion()) : androidPackage.getTargetSdkVersion();
+            ApplicationInfo appInfoWithoutState =
+                    ((AndroidPackageHidden) androidPackage).toAppInfoWithoutState();
+            max =
+                    platformCompat.isChangeEnabledInternal(143539591L, appInfoWithoutState)
+                            ? Math.max(10000, androidPackage.getTargetSdkVersion())
+                            : platformCompat.isChangeEnabledInternal(
+                                            168782947L, appInfoWithoutState)
+                                    ? Math.max(30, androidPackage.getTargetSdkVersion())
+                                    : androidPackage.getTargetSdkVersion();
         } else {
             max = sharedUserSetting.seInfoTargetSdkVersion;
         }
-        return getSeInfo(packageStateInternal, androidPackage, sharedUserSetting != null ? sharedUserSetting.isPrivileged() | packageStateInternal.isPrivileged() : packageStateInternal.isPrivileged(), max);
+        return getSeInfo(
+                packageStateInternal,
+                androidPackage,
+                sharedUserSetting != null
+                        ? sharedUserSetting.isPrivileged() | packageStateInternal.isPrivileged()
+                        : packageStateInternal.isPrivileged(),
+                max);
     }
 
-    public static String getSeInfo(PackageStateInternal packageStateInternal, AndroidPackage androidPackage, boolean z, int i) {
+    public static String getSeInfo(
+            PackageStateInternal packageStateInternal,
+            AndroidPackage androidPackage,
+            boolean z,
+            int i) {
         String str;
         List list = sPolicies;
         synchronized (list) {
@@ -72,8 +107,9 @@ public abstract class SELinuxMMAC {
                 str = null;
                 if (sPolicyRead) {
                     Iterator it = ((ArrayList) list).iterator();
-                    while (it.hasNext() && (str = ((Policy) it.next()).getMatchedSeInfo(androidPackage)) == null) {
-                    }
+                    while (it.hasNext()
+                            && (str = ((Policy) it.next()).getMatchedSeInfo(androidPackage))
+                                    == null) {}
                 }
             } catch (Throwable th) {
                 throw th;
@@ -86,8 +122,23 @@ public abstract class SELinuxMMAC {
             str = str.concat(":privapp");
         }
         String m = VpnManagerService$$ExternalSyntheticOutline0.m(i, str, ":targetSdkVersion=");
-        String str2 = packageStateInternal.isSystemExt() ? "system_ext" : packageStateInternal.isProduct() ? "product" : packageStateInternal.isVendor() ? "vendor" : packageStateInternal.isOem() ? "oem" : packageStateInternal.isOdm() ? "odm" : packageStateInternal.isSystem() ? "system" : "";
-        return !str2.isEmpty() ? AnyMotionDetector$$ExternalSyntheticOutline0.m(m, ":partition=", str2) : m;
+        String str2 =
+                packageStateInternal.isSystemExt()
+                        ? "system_ext"
+                        : packageStateInternal.isProduct()
+                                ? "product"
+                                : packageStateInternal.isVendor()
+                                        ? "vendor"
+                                        : packageStateInternal.isOem()
+                                                ? "oem"
+                                                : packageStateInternal.isOdm()
+                                                        ? "odm"
+                                                        : packageStateInternal.isSystem()
+                                                                ? "system"
+                                                                : "";
+        return !str2.isEmpty()
+                ? AnyMotionDetector$$ExternalSyntheticOutline0.m(m, ":partition=", str2)
+                : m;
     }
 
     public static void readInstallPolicy() {
@@ -114,7 +165,8 @@ public abstract class SELinuxMMAC {
                                 while (newPullParser.next() != 3) {
                                     if (newPullParser.getEventType() == 2) {
                                         String name = newPullParser.getName();
-                                        if (name.hashCode() == -902467798 && name.equals("signer")) {
+                                        if (name.hashCode() == -902467798
+                                                && name.equals("signer")) {
                                             arrayList.add(readSignerOrThrow(newPullParser));
                                         }
                                         skip(newPullParser);
@@ -129,10 +181,19 @@ public abstract class SELinuxMMAC {
                                 Slog.w("SELinuxMMAC", "Exception parsing " + file, e);
                                 IoUtils.closeQuietly(fileReader);
                                 return;
-                            } catch (IllegalArgumentException | IllegalStateException | XmlPullParserException e2) {
+                            } catch (IllegalArgumentException
+                                    | IllegalStateException
+                                    | XmlPullParserException e2) {
                                 e = e2;
                                 fileReader = fileReader2;
-                                Slog.w("SELinuxMMAC", "Exception @" + newPullParser.getPositionDescription() + " while parsing " + file + ":" + e);
+                                Slog.w(
+                                        "SELinuxMMAC",
+                                        "Exception @"
+                                                + newPullParser.getPositionDescription()
+                                                + " while parsing "
+                                                + file
+                                                + ":"
+                                                + e);
                                 IoUtils.closeQuietly(fileReader);
                                 return;
                             } catch (Throwable th) {
@@ -143,7 +204,9 @@ public abstract class SELinuxMMAC {
                             }
                         } catch (IOException e3) {
                             e = e3;
-                        } catch (IllegalArgumentException | IllegalStateException | XmlPullParserException e4) {
+                        } catch (IllegalArgumentException
+                                | IllegalStateException
+                                | XmlPullParserException e4) {
                             e = e4;
                         }
                     } catch (Throwable th2) {
@@ -154,7 +217,9 @@ public abstract class SELinuxMMAC {
                 policyComparator.duplicateFound = false;
                 Collections.sort(arrayList, policyComparator);
                 if (policyComparator.duplicateFound) {
-                    Slog.w("SELinuxMMAC", "ERROR! Duplicate entries found parsing mac_permissions.xml files");
+                    Slog.w(
+                            "SELinuxMMAC",
+                            "ERROR! Duplicate entries found parsing mac_permissions.xml files");
                     return;
                 }
                 List list = sPolicies;
@@ -181,7 +246,9 @@ public abstract class SELinuxMMAC {
                 if ("seinfo".equals(name)) {
                     String attributeValue2 = xmlPullParser.getAttributeValue(null, "value");
                     if (attributeValue2 == null || !attributeValue2.matches("\\A[\\.\\w]+\\z")) {
-                        throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Invalid seinfo value ", attributeValue2));
+                        throw new IllegalArgumentException(
+                                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                        "Invalid seinfo value ", attributeValue2));
                     }
                     String str = policyBuilder.mSeinfo;
                     if (str != null && !str.equals(attributeValue2)) {
@@ -196,18 +263,30 @@ public abstract class SELinuxMMAC {
                     while (xmlPullParser.next() != 3) {
                         if (xmlPullParser.getEventType() == 2) {
                             if ("seinfo".equals(xmlPullParser.getName())) {
-                                String attributeValue4 = xmlPullParser.getAttributeValue(null, "value");
-                                if (attributeValue3 == null || !attributeValue3.matches("\\A[\\.\\w]+\\z")) {
-                                    throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Invalid package name ", attributeValue3));
+                                String attributeValue4 =
+                                        xmlPullParser.getAttributeValue(null, "value");
+                                if (attributeValue3 == null
+                                        || !attributeValue3.matches("\\A[\\.\\w]+\\z")) {
+                                    throw new IllegalArgumentException(
+                                            ConnectivityModuleConnector$$ExternalSyntheticOutline0
+                                                    .m("Invalid package name ", attributeValue3));
                                 }
-                                if (attributeValue4 == null || !attributeValue4.matches("\\A[\\.\\w]+\\z")) {
-                                    throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Invalid seinfo value ", attributeValue4));
+                                if (attributeValue4 == null
+                                        || !attributeValue4.matches("\\A[\\.\\w]+\\z")) {
+                                    throw new IllegalArgumentException(
+                                            ConnectivityModuleConnector$$ExternalSyntheticOutline0
+                                                    .m("Invalid seinfo value ", attributeValue4));
                                 }
-                                String str2 = (String) ((HashMap) policyBuilder.mPkgMap).get(attributeValue3);
+                                String str2 =
+                                        (String)
+                                                ((HashMap) policyBuilder.mPkgMap)
+                                                        .get(attributeValue3);
                                 if (str2 != null && !str2.equals(attributeValue4)) {
-                                    throw new IllegalStateException("Conflicting seinfo value found");
+                                    throw new IllegalStateException(
+                                            "Conflicting seinfo value found");
                                 }
-                                ((HashMap) policyBuilder.mPkgMap).put(attributeValue3, attributeValue4);
+                                ((HashMap) policyBuilder.mPkgMap)
+                                        .put(attributeValue3, attributeValue4);
                                 xmlPullParser.require(2, null, "seinfo");
                                 xmlPullParser.nextTag();
                             } else {
@@ -226,12 +305,14 @@ public abstract class SELinuxMMAC {
         }
         Policy policy = new Policy(policyBuilder);
         if (policy.mCerts.isEmpty()) {
-            throw new IllegalStateException("Missing certs with signer tag. Expecting at least one.");
+            throw new IllegalStateException(
+                    "Missing certs with signer tag. Expecting at least one.");
         }
         if ((policy.mSeinfo == null) ^ policy.mPkgMap.isEmpty()) {
             return policy;
         }
-        throw new IllegalStateException("Only seinfo tag XOR package tags are allowed within a signer stanza.");
+        throw new IllegalStateException(
+                "Only seinfo tag XOR package tags are allowed within a signer stanza.");
     }
 
     public static void skip(XmlPullParser xmlPullParser) {

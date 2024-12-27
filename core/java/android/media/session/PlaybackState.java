@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.security.keystore.KeyProperties;
 import android.service.timezone.TimeZoneProviderService;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -34,19 +35,21 @@ public final class PlaybackState implements Parcelable {
     public static final long ACTION_SKIP_TO_PREVIOUS = 16;
     public static final long ACTION_SKIP_TO_QUEUE_ITEM = 4096;
     public static final long ACTION_STOP = 1;
-    public static final Parcelable.Creator<PlaybackState> CREATOR = new Parcelable.Creator<PlaybackState>() { // from class: android.media.session.PlaybackState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackState createFromParcel(Parcel in) {
-            return new PlaybackState(in);
-        }
+    public static final Parcelable.Creator<PlaybackState> CREATOR =
+            new Parcelable.Creator<
+                    PlaybackState>() { // from class: android.media.session.PlaybackState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackState createFromParcel(Parcel in) {
+                    return new PlaybackState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackState[] newArray(int size) {
-            return new PlaybackState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackState[] newArray(int size) {
+                    return new PlaybackState[size];
+                }
+            };
     public static final long PLAYBACK_POSITION_UNKNOWN = -1;
     public static final int STATE_BUFFERING = 6;
     public static final int STATE_CONNECTING = 8;
@@ -74,14 +77,22 @@ public final class PlaybackState implements Parcelable {
     private final long mUpdateTime;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Actions {
-    }
+    public @interface Actions {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-    }
+    public @interface State {}
 
-    private PlaybackState(int state, long position, long updateTime, float speed, long bufferedPosition, long transportControls, List<CustomAction> customActions, long activeItemId, CharSequence error, Bundle extras) {
+    private PlaybackState(
+            int state,
+            long position,
+            long updateTime,
+            float speed,
+            long bufferedPosition,
+            long transportControls,
+            List<CustomAction> customActions,
+            long activeItemId,
+            CharSequence error,
+            Bundle extras) {
         this.mState = state;
         this.mPosition = position;
         this.mSpeed = speed;
@@ -109,7 +120,11 @@ public final class PlaybackState implements Parcelable {
 
     public String toString() {
         StringBuilder bob = new StringBuilder("PlaybackState {");
-        bob.append("state=").append(getStringForStateInt(this.mState)).append(NavigationBarInflaterView.KEY_CODE_START).append(this.mState).append(NavigationBarInflaterView.KEY_CODE_END);
+        bob.append("state=")
+                .append(getStringForStateInt(this.mState))
+                .append(NavigationBarInflaterView.KEY_CODE_START)
+                .append(this.mState)
+                .append(NavigationBarInflaterView.KEY_CODE_END);
         bob.append(", position=").append(this.mPosition);
         bob.append(", buffered position=").append(this.mBufferedPosition);
         bob.append(", speed=").append(this.mSpeed);
@@ -233,19 +248,21 @@ public final class PlaybackState implements Parcelable {
     }
 
     public static final class CustomAction implements Parcelable {
-        public static final Parcelable.Creator<CustomAction> CREATOR = new Parcelable.Creator<CustomAction>() { // from class: android.media.session.PlaybackState.CustomAction.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public CustomAction createFromParcel(Parcel p) {
-                return new CustomAction(p);
-            }
+        public static final Parcelable.Creator<CustomAction> CREATOR =
+                new Parcelable.Creator<CustomAction>() { // from class:
+                    // android.media.session.PlaybackState.CustomAction.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public CustomAction createFromParcel(Parcel p) {
+                        return new CustomAction(p);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public CustomAction[] newArray(int size) {
-                return new CustomAction[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public CustomAction[] newArray(int size) {
+                        return new CustomAction[size];
+                    }
+                };
         private final String mAction;
         private final Bundle mExtras;
         private final int mIcon;
@@ -295,7 +312,12 @@ public final class PlaybackState implements Parcelable {
         }
 
         public String toString() {
-            return "Action:mName='" + ((Object) this.mName) + ", mIcon=" + this.mIcon + ", mExtras=" + this.mExtras;
+            return "Action:mName='"
+                    + ((Object) this.mName)
+                    + ", mIcon="
+                    + this.mIcon
+                    + ", mExtras="
+                    + this.mExtras;
         }
 
         public static final class Builder {
@@ -306,13 +328,16 @@ public final class PlaybackState implements Parcelable {
 
             public Builder(String action, CharSequence name, int icon) {
                 if (TextUtils.isEmpty(action)) {
-                    throw new IllegalArgumentException("You must specify an action to build a CustomAction.");
+                    throw new IllegalArgumentException(
+                            "You must specify an action to build a CustomAction.");
                 }
                 if (TextUtils.isEmpty(name)) {
-                    throw new IllegalArgumentException("You must specify a name to build a CustomAction.");
+                    throw new IllegalArgumentException(
+                            "You must specify a name to build a CustomAction.");
                 }
                 if (icon == 0) {
-                    throw new IllegalArgumentException("You must specify an icon resource id to build a CustomAction.");
+                    throw new IllegalArgumentException(
+                            "You must specify an icon resource id to build a CustomAction.");
                 }
                 this.mAction = action;
                 this.mName = name;
@@ -390,7 +415,8 @@ public final class PlaybackState implements Parcelable {
 
         public Builder addCustomAction(CustomAction customAction) {
             if (customAction == null) {
-                throw new IllegalArgumentException("You may not add a null CustomAction to PlaybackState.");
+                throw new IllegalArgumentException(
+                        "You may not add a null CustomAction to PlaybackState.");
             }
             this.mCustomActions.add(customAction);
             return this;
@@ -417,7 +443,17 @@ public final class PlaybackState implements Parcelable {
         }
 
         public PlaybackState build() {
-            return new PlaybackState(this.mState, this.mPosition, this.mUpdateTime, this.mSpeed, this.mBufferedPosition, this.mActions, this.mCustomActions, this.mActiveItemId, this.mErrorMessage, this.mExtras);
+            return new PlaybackState(
+                    this.mState,
+                    this.mPosition,
+                    this.mUpdateTime,
+                    this.mSpeed,
+                    this.mBufferedPosition,
+                    this.mActions,
+                    this.mCustomActions,
+                    this.mActiveItemId,
+                    this.mErrorMessage,
+                    this.mExtras);
         }
     }
 }

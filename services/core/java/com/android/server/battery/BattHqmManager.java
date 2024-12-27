@@ -3,8 +3,10 @@ package com.android.server.battery;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
 import com.android.server.BatteryService;
 import com.android.server.power.Slog;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -21,15 +23,20 @@ public abstract class BattHqmManager {
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             BatteryService.BattCallbackImpl battCallbackImpl = BattHqmManager.mBattCallback;
-            Slog.d("[SS]BattHqmManager", "[hqmEventReceiver_onReceive]intent:" + intent.getAction());
+            Slog.d(
+                    "[SS]BattHqmManager",
+                    "[hqmEventReceiver_onReceive]intent:" + intent.getAction());
             BatteryService.BattCallbackImpl battCallbackImpl2 = BattHqmManager.mBattCallback;
             if (battCallbackImpl2 == null) {
-                Slog.e("[SS]BattHqmManager", "[hqmEventReceiver_onReceive]fail - mBattCallback null");
+                Slog.e(
+                        "[SS]BattHqmManager",
+                        "[hqmEventReceiver_onReceive]fail - mBattCallback null");
                 return;
             }
             String str = BatteryService.TAG_SS;
             Slog.v("BatteryService", "[onHqmEventOccured]");
-            BatteryService.this.mHandler.post(new BatteryService.AnonymousClass31(3, battCallbackImpl2));
+            BatteryService.this.mHandler.post(
+                    new BatteryService.AnonymousClass31(3, battCallbackImpl2));
         }
     }
 

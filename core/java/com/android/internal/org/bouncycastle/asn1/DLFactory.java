@@ -5,8 +5,7 @@ class DLFactory {
     static final ASN1Sequence EMPTY_SEQUENCE = new DLSequence();
     static final ASN1Set EMPTY_SET = new DLSet();
 
-    DLFactory() {
-    }
+    DLFactory() {}
 
     static ASN1Sequence createSequence(ASN1EncodableVector v) {
         if (v.size() < 1) {

@@ -5,6 +5,7 @@ import android.app.compat.CompatChanges;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.BundleMerger;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -27,28 +28,39 @@ public class BroadcastOptions extends ComponentOptions {
     private static final int FLAG_REQUIRE_COMPAT_CHANGE_ENABLED = 4;
     private static final int FLAG_SHARE_IDENTITY = 16;
     private static final String KEY_DEFERRAL_POLICY = "android:broadcast.deferralPolicy";
-    private static final String KEY_DELIVERY_GROUP_EXTRAS_MERGER = "android:broadcast.deliveryGroupExtrasMerger";
-    private static final String KEY_DELIVERY_GROUP_KEY = "android:broadcast.deliveryGroupMatchingKey";
-    private static final String KEY_DELIVERY_GROUP_MATCHING_FILTER = "android:broadcast.deliveryGroupMatchingFilter";
-    private static final String KEY_DELIVERY_GROUP_NAMESPACE = "android:broadcast.deliveryGroupMatchingNamespace";
+    private static final String KEY_DELIVERY_GROUP_EXTRAS_MERGER =
+            "android:broadcast.deliveryGroupExtrasMerger";
+    private static final String KEY_DELIVERY_GROUP_KEY =
+            "android:broadcast.deliveryGroupMatchingKey";
+    private static final String KEY_DELIVERY_GROUP_MATCHING_FILTER =
+            "android:broadcast.deliveryGroupMatchingFilter";
+    private static final String KEY_DELIVERY_GROUP_NAMESPACE =
+            "android:broadcast.deliveryGroupMatchingNamespace";
     private static final String KEY_DELIVERY_GROUP_POLICY = "android:broadcast.deliveryGroupPolicy";
     private static final String KEY_FLAGS = "android:broadcast.flags";
     private static final String KEY_ID_FOR_RESPONSE_EVENT = "android:broadcast.idForResponseEvent";
-    private static final String KEY_MAX_MANIFEST_RECEIVER_API_LEVEL = "android:broadcast.maxManifestReceiverApiLevel";
-    private static final String KEY_MIN_MANIFEST_RECEIVER_API_LEVEL = "android:broadcast.minManifestReceiverApiLevel";
-    public static final String KEY_REQUIRE_ALL_OF_PERMISSIONS = "android:broadcast.requireAllOfPermissions";
-    private static final String KEY_REQUIRE_COMPAT_CHANGE_ID = "android:broadcast.requireCompatChangeId";
-    public static final String KEY_REQUIRE_NONE_OF_PERMISSIONS = "android:broadcast.requireNoneOfPermissions";
-    private static final String KEY_TEMPORARY_APP_ALLOWLIST_DURATION = "android:broadcast.temporaryAppAllowlistDuration";
-    private static final String KEY_TEMPORARY_APP_ALLOWLIST_REASON = "android:broadcast.temporaryAppAllowlistReason";
-    private static final String KEY_TEMPORARY_APP_ALLOWLIST_REASON_CODE = "android:broadcast.temporaryAppAllowlistReasonCode";
-    private static final String KEY_TEMPORARY_APP_ALLOWLIST_TYPE = "android:broadcast.temporaryAppAllowlistType";
+    private static final String KEY_MAX_MANIFEST_RECEIVER_API_LEVEL =
+            "android:broadcast.maxManifestReceiverApiLevel";
+    private static final String KEY_MIN_MANIFEST_RECEIVER_API_LEVEL =
+            "android:broadcast.minManifestReceiverApiLevel";
+    public static final String KEY_REQUIRE_ALL_OF_PERMISSIONS =
+            "android:broadcast.requireAllOfPermissions";
+    private static final String KEY_REQUIRE_COMPAT_CHANGE_ID =
+            "android:broadcast.requireCompatChangeId";
+    public static final String KEY_REQUIRE_NONE_OF_PERMISSIONS =
+            "android:broadcast.requireNoneOfPermissions";
+    private static final String KEY_TEMPORARY_APP_ALLOWLIST_DURATION =
+            "android:broadcast.temporaryAppAllowlistDuration";
+    private static final String KEY_TEMPORARY_APP_ALLOWLIST_REASON =
+            "android:broadcast.temporaryAppAllowlistReason";
+    private static final String KEY_TEMPORARY_APP_ALLOWLIST_REASON_CODE =
+            "android:broadcast.temporaryAppAllowlistReasonCode";
+    private static final String KEY_TEMPORARY_APP_ALLOWLIST_TYPE =
+            "android:broadcast.temporaryAppAllowlistType";
 
-    @Deprecated
-    public static final int TEMPORARY_WHITELIST_TYPE_FOREGROUND_SERVICE_ALLOWED = 0;
+    @Deprecated public static final int TEMPORARY_WHITELIST_TYPE_FOREGROUND_SERVICE_ALLOWED = 0;
 
-    @Deprecated
-    public static final int TEMPORARY_WHITELIST_TYPE_FOREGROUND_SERVICE_NOT_ALLOWED = 1;
+    @Deprecated public static final int TEMPORARY_WHITELIST_TYPE_FOREGROUND_SERVICE_NOT_ALLOWED = 1;
     private int mDeferralPolicy;
     private BundleMerger mDeliveryGroupExtrasMerger;
     private IntentFilter mDeliveryGroupMatchingFilter;
@@ -68,16 +80,13 @@ public class BroadcastOptions extends ComponentOptions {
     private int mTemporaryAppAllowlistType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeferralPolicy {
-    }
+    public @interface DeferralPolicy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeliveryGroupPolicy {
-    }
+    public @interface DeliveryGroupPolicy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Flags {
-    }
+    public @interface Flags {}
 
     public static BroadcastOptions makeBasic() {
         BroadcastOptions opts = new BroadcastOptions();
@@ -98,9 +107,11 @@ public class BroadcastOptions extends ComponentOptions {
         this.mRequireCompatChangeId = Long.MIN_VALUE;
         this.mFlags = opts.getInt(KEY_FLAGS, 0);
         if (opts.containsKey(KEY_TEMPORARY_APP_ALLOWLIST_DURATION)) {
-            this.mTemporaryAppAllowlistDuration = opts.getLong(KEY_TEMPORARY_APP_ALLOWLIST_DURATION);
+            this.mTemporaryAppAllowlistDuration =
+                    opts.getLong(KEY_TEMPORARY_APP_ALLOWLIST_DURATION);
             this.mTemporaryAppAllowlistType = opts.getInt(KEY_TEMPORARY_APP_ALLOWLIST_TYPE);
-            this.mTemporaryAppAllowlistReasonCode = opts.getInt(KEY_TEMPORARY_APP_ALLOWLIST_REASON_CODE, 0);
+            this.mTemporaryAppAllowlistReasonCode =
+                    opts.getInt(KEY_TEMPORARY_APP_ALLOWLIST_REASON_CODE, 0);
             this.mTemporaryAppAllowlistReason = opts.getString(KEY_TEMPORARY_APP_ALLOWLIST_REASON);
         } else {
             resetTemporaryAppAllowlist();
@@ -114,8 +125,12 @@ public class BroadcastOptions extends ComponentOptions {
         this.mDeliveryGroupPolicy = opts.getInt(KEY_DELIVERY_GROUP_POLICY, 0);
         this.mDeliveryGroupMatchingNamespaceFragment = opts.getString(KEY_DELIVERY_GROUP_NAMESPACE);
         this.mDeliveryGroupMatchingKeyFragment = opts.getString(KEY_DELIVERY_GROUP_KEY);
-        this.mDeliveryGroupExtrasMerger = (BundleMerger) opts.getParcelable(KEY_DELIVERY_GROUP_EXTRAS_MERGER, BundleMerger.class);
-        this.mDeliveryGroupMatchingFilter = (IntentFilter) opts.getParcelable(KEY_DELIVERY_GROUP_MATCHING_FILTER, IntentFilter.class);
+        this.mDeliveryGroupExtrasMerger =
+                (BundleMerger)
+                        opts.getParcelable(KEY_DELIVERY_GROUP_EXTRAS_MERGER, BundleMerger.class);
+        this.mDeliveryGroupMatchingFilter =
+                (IntentFilter)
+                        opts.getParcelable(KEY_DELIVERY_GROUP_MATCHING_FILTER, IntentFilter.class);
         this.mDeferralPolicy = opts.getInt(KEY_DEFERRAL_POLICY, 0);
     }
 
@@ -332,10 +347,14 @@ public class BroadcastOptions extends ComponentOptions {
     }
 
     public String getDeliveryGroupMatchingKey() {
-        if (this.mDeliveryGroupMatchingNamespaceFragment == null || this.mDeliveryGroupMatchingKeyFragment == null) {
+        if (this.mDeliveryGroupMatchingNamespaceFragment == null
+                || this.mDeliveryGroupMatchingKeyFragment == null) {
             return null;
         }
-        return String.join(":", this.mDeliveryGroupMatchingNamespaceFragment, this.mDeliveryGroupMatchingKeyFragment);
+        return String.join(
+                ":",
+                this.mDeliveryGroupMatchingNamespaceFragment,
+                this.mDeliveryGroupMatchingKeyFragment);
     }
 
     public String getDeliveryGroupMatchingNamespaceFragment() {
@@ -426,7 +445,8 @@ public class BroadcastOptions extends ComponentOptions {
         if (isTemporaryAppAllowlistSet()) {
             b.putLong(KEY_TEMPORARY_APP_ALLOWLIST_DURATION, this.mTemporaryAppAllowlistDuration);
             b.putInt(KEY_TEMPORARY_APP_ALLOWLIST_TYPE, this.mTemporaryAppAllowlistType);
-            b.putInt(KEY_TEMPORARY_APP_ALLOWLIST_REASON_CODE, this.mTemporaryAppAllowlistReasonCode);
+            b.putInt(
+                    KEY_TEMPORARY_APP_ALLOWLIST_REASON_CODE, this.mTemporaryAppAllowlistReasonCode);
             b.putString(KEY_TEMPORARY_APP_ALLOWLIST_REASON, this.mTemporaryAppAllowlistReason);
         }
         if (this.mMinManifestReceiverApiLevel != 0) {
@@ -460,7 +480,8 @@ public class BroadcastOptions extends ComponentOptions {
             if (this.mDeliveryGroupExtrasMerger != null) {
                 b.putParcelable(KEY_DELIVERY_GROUP_EXTRAS_MERGER, this.mDeliveryGroupExtrasMerger);
             } else {
-                throw new IllegalStateException("Extras merger cannot be empty when delivery group policy is 'MERGED'");
+                throw new IllegalStateException(
+                        "Extras merger cannot be empty when delivery group policy is 'MERGED'");
             }
         }
         if (this.mDeliveryGroupMatchingFilter != null) {

@@ -17,7 +17,8 @@ public class ExtCertPathBuilderException extends CertPathBuilderException implem
         this.cause = cause;
     }
 
-    @Override // java.lang.Throwable, com.android.internal.org.bouncycastle.jce.exception.ExtException
+    @Override // java.lang.Throwable,
+              // com.android.internal.org.bouncycastle.jce.exception.ExtException
     public Throwable getCause() {
         return this.cause;
     }

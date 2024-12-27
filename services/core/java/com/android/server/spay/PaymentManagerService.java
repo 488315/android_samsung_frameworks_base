@@ -12,13 +12,16 @@ import android.spay.IPaymentManager;
 import android.spay.PaymentTZServiceCommnInfo;
 import android.spay.PaymentTZServiceConfig;
 import android.util.Log;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.ServiceKeeper;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.EnterpriseDeviceManager;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -42,8 +45,7 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
         public final class ClientBinderDeathReceiver implements IBinder.DeathRecipient {
             public IBinder mReceiver;
 
-            public ClientBinderDeathReceiver() {
-            }
+            public ClientBinderDeathReceiver() {}
 
             @Override // android.os.IBinder.DeathRecipient
             public final void binderDied() {
@@ -52,9 +54,13 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
             }
 
             public final synchronized void deleteClient() {
-                Log.e("PaymentManagerService", "Error: Client stopped. Clearing Databstructures for " + FrameworkClient.this.mPackageName);
+                Log.e(
+                        "PaymentManagerService",
+                        "Error: Client stopped. Clearing Databstructures for "
+                                + FrameworkClient.this.mPackageName);
                 for (Integer num : FrameworkClient.this.mCommnInfo.mTAs.keySet()) {
-                    TAController tAController = (TAController) FrameworkClient.this.mCommnInfo.mTAs.get(num);
+                    TAController tAController =
+                            (TAController) FrameworkClient.this.mCommnInfo.mTAs.get(num);
                     try {
                         if (num.intValue() == 257 && tAController.SET_QSEE_SECURE_UI) {
                             Utils.sendSecureUIAbortIntent(PaymentManagerService.mContext);
@@ -71,7 +77,9 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
                                     try {
                                         Thread.sleep(100L);
                                     } catch (Exception unused) {
-                                        Log.e("PaymentManagerService", "Failed to put thread to sleep!");
+                                        Log.e(
+                                                "PaymentManagerService",
+                                                "Failed to put thread to sleep!");
                                     }
                                     i++;
                                 }
@@ -83,11 +91,16 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
                     }
                 }
                 FrameworkClient frameworkClient = FrameworkClient.this;
-                ((HashMap) PaymentManagerService.this.mRegisteredFWKClientMap).remove(frameworkClient.mPackageName);
+                ((HashMap) PaymentManagerService.this.mRegisteredFWKClientMap)
+                        .remove(frameworkClient.mPackageName);
             }
         }
 
-        public FrameworkClient(PaymentTZServiceConfig paymentTZServiceConfig, PaymentTZServiceCommnInfo paymentTZServiceCommnInfo, int i, String str) {
+        public FrameworkClient(
+                PaymentTZServiceConfig paymentTZServiceConfig,
+                PaymentTZServiceCommnInfo paymentTZServiceCommnInfo,
+                int i,
+                String str) {
             this.mCommnInfo = paymentTZServiceCommnInfo;
             this.mPid = i;
             this.mPackageName = str;
@@ -121,10 +134,19 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
         mContext.registerReceiver(new UpdateReceiver(), intentFilter);
         PackageManager packageManager = context.getPackageManager();
         try {
-            if (packageManager.getPackageInfo("com.samsung.android.app.stubupdater", 1) != null && packageManager.getPackageInfo("com.samsung.android.spay", 1) != null) {
-                int applicationEnabledSetting = packageManager.getApplicationEnabledSetting("com.samsung.android.spay");
-                int applicationEnabledSetting2 = packageManager.getApplicationEnabledSetting("com.samsung.android.app.stubupdater");
-                Log.d("PaymentManagerService", "spay state = " + applicationEnabledSetting + ", updater state = " + applicationEnabledSetting2);
+            if (packageManager.getPackageInfo("com.samsung.android.app.stubupdater", 1) != null
+                    && packageManager.getPackageInfo("com.samsung.android.spay", 1) != null) {
+                int applicationEnabledSetting =
+                        packageManager.getApplicationEnabledSetting("com.samsung.android.spay");
+                int applicationEnabledSetting2 =
+                        packageManager.getApplicationEnabledSetting(
+                                "com.samsung.android.app.stubupdater");
+                Log.d(
+                        "PaymentManagerService",
+                        "spay state = "
+                                + applicationEnabledSetting
+                                + ", updater state = "
+                                + applicationEnabledSetting2);
                 if (applicationEnabledSetting2 != 2 && applicationEnabledSetting != 2) {
                     packageManager.setApplicationEnabledSetting("com.samsung.android.spay", 2, 0);
                 }
@@ -142,11 +164,25 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
     }
 
     public static void checkCallerPermissionFor(String str) {
-        if (ServiceKeeper.isAuthorized(Binder.getCallingPid(), Binder.getCallingUid(), mContext, "PaymentManagerService", str) == 0) {
+        if (ServiceKeeper.isAuthorized(
+                        Binder.getCallingPid(),
+                        Binder.getCallingUid(),
+                        mContext,
+                        "PaymentManagerService",
+                        str)
+                == 0) {
             Log.d("PaymentManagerService", "PaymentManagerService() - Valid Caller");
             return;
         }
-        SecurityException securityException = new SecurityException("Security Exception Occurred while pid[" + Binder.getCallingPid() + "] with uid[" + Binder.getCallingUid() + "] trying to access methodName [" + str + "] in [PaymentManagerService] service");
+        SecurityException securityException =
+                new SecurityException(
+                        "Security Exception Occurred while pid["
+                                + Binder.getCallingPid()
+                                + "] with uid["
+                                + Binder.getCallingUid()
+                                + "] trying to access methodName ["
+                                + str
+                                + "] in [PaymentManagerService] service");
         Log.d("PaymentManagerService", "PaymentManagerService() - Invalid Caller");
         throw securityException;
     }
@@ -156,7 +192,8 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
         return Utils.readFile("/system/tima_measurement_info");
     }
 
-    public final PaymentTZServiceCommnInfo registerSPayFW(PaymentTZServiceConfig paymentTZServiceConfig) {
+    public final PaymentTZServiceCommnInfo registerSPayFW(
+            PaymentTZServiceConfig paymentTZServiceConfig) {
         String str;
         Iterator it;
         checkCallerPermissionFor("registerSPayFW");
@@ -165,7 +202,8 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
         ActivityManager activityManager = (ActivityManager) mContext.getSystemService("activity");
         String str2 = "PaymentManagerService";
         if (activityManager.getRunningAppProcesses() != null) {
-            for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : activityManager.getRunningAppProcesses()) {
+            for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo :
+                    activityManager.getRunningAppProcesses()) {
                 if (runningAppProcessInfo.pid == callingPid) {
                     str = runningAppProcessInfo.processName;
                     break;
@@ -180,11 +218,22 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
             str = Integer.toString(callingUid);
         }
         String str3 = str;
-        VpnManagerService$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(callingUid, callingPid, "Inside registerSPayFW, uid: ", ", pid: ", ", package: "), str3, "PaymentManagerService");
+        VpnManagerService$$ExternalSyntheticOutline0.m(
+                ArrayUtils$$ExternalSyntheticOutline0.m(
+                        callingUid,
+                        callingPid,
+                        "Inside registerSPayFW, uid: ",
+                        ", pid: ",
+                        ", package: "),
+                str3,
+                "PaymentManagerService");
         if (((HashMap) this.mRegisteredFWKClientMap).containsKey(str3)) {
-            FrameworkClient frameworkClient = (FrameworkClient) ((HashMap) this.mRegisteredFWKClientMap).get(str3);
+            FrameworkClient frameworkClient =
+                    (FrameworkClient) ((HashMap) this.mRegisteredFWKClientMap).get(str3);
             if (callingPid == frameworkClient.mPid) {
-                Log.e("PaymentManagerService", "Error: Framework App is already registered. Re-Registration not allowed");
+                Log.e(
+                        "PaymentManagerService",
+                        "Error: Framework App is already registered. Re-Registration not allowed");
                 return null;
             }
             Log.e("PaymentManagerService", "Registered Client Died. Need to Rebind");
@@ -197,11 +246,16 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
             Map.Entry entry = (Map.Entry) it2.next();
             Context context = mContext;
             int intValue = ((Integer) entry.getKey()).intValue();
-            PaymentTZServiceConfig.TAConfig tAConfig = (PaymentTZServiceConfig.TAConfig) entry.getValue();
+            PaymentTZServiceConfig.TAConfig tAConfig =
+                    (PaymentTZServiceConfig.TAConfig) entry.getValue();
             TAController tAController = new TAController();
             tAController.SET_QSEE_SECURE_UI = false;
             if (TAController.DEBUG) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(intValue, "TAController constructor: taId = ", "; maxSendCmdSize = ");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                intValue,
+                                "TAController constructor: taId = ",
+                                "; maxSendCmdSize = ");
                 m.append(tAConfig.maxSendCmdSize);
                 m.append("; maxRecvRespSize = ");
                 GestureWakeup$$ExternalSyntheticOutline0.m(m, tAConfig.maxRecvRespSize, str2);
@@ -216,7 +270,8 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
             PaymentTZNative paymentTZNative = new PaymentTZNative();
             if (PaymentTZNative.DEBUG) {
                 it = it2;
-                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(intValue, "PaymentTZNative constructor: taId = ", str2);
+                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                        intValue, "PaymentTZNative constructor: taId = ", str2);
             } else {
                 it = it2;
             }
@@ -236,11 +291,25 @@ public final class PaymentManagerService extends IPaymentManager.Stub {
         String str7 = str2;
         if (!"KR".equalsIgnoreCase(COUNTRYISO_CODE)) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
-            new EnterpriseDeviceManager(mContext).getApplicationPolicy().setApplicationUninstallationDisabled("com.samsung.android.spayfw");
+            new EnterpriseDeviceManager(mContext)
+                    .getApplicationPolicy()
+                    .setApplicationUninstallationDisabled("com.samsung.android.spayfw");
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
-        ((HashMap) this.mRegisteredFWKClientMap).put(str3, new FrameworkClient(paymentTZServiceConfig, paymentTZServiceCommnInfo, callingPid, str3));
-        Log.d(str7, "callingApp: " + str3 + " is registed, current size: " + ((HashMap) this.mRegisteredFWKClientMap).size());
+        ((HashMap) this.mRegisteredFWKClientMap)
+                .put(
+                        str3,
+                        new FrameworkClient(
+                                paymentTZServiceConfig,
+                                paymentTZServiceCommnInfo,
+                                callingPid,
+                                str3));
+        Log.d(
+                str7,
+                "callingApp: "
+                        + str3
+                        + " is registed, current size: "
+                        + ((HashMap) this.mRegisteredFWKClientMap).size());
         return paymentTZServiceCommnInfo;
     }
 }

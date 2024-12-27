@@ -2,27 +2,29 @@ package android.app.smartspace.uitemplatedata;
 
 import android.annotation.SystemApi;
 import android.app.smartspace.SmartspaceUtils;
-import android.app.smartspace.uitemplatedata.BaseTemplateData;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class SubCardTemplateData extends BaseTemplateData {
-    public static final Parcelable.Creator<SubCardTemplateData> CREATOR = new Parcelable.Creator<SubCardTemplateData>() { // from class: android.app.smartspace.uitemplatedata.SubCardTemplateData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SubCardTemplateData createFromParcel(Parcel in) {
-            return new SubCardTemplateData(in);
-        }
+    public static final Parcelable.Creator<SubCardTemplateData> CREATOR =
+            new Parcelable.Creator<SubCardTemplateData>() { // from class:
+                // android.app.smartspace.uitemplatedata.SubCardTemplateData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SubCardTemplateData createFromParcel(Parcel in) {
+                    return new SubCardTemplateData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SubCardTemplateData[] newArray(int size) {
-            return new SubCardTemplateData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SubCardTemplateData[] newArray(int size) {
+                    return new SubCardTemplateData[size];
+                }
+            };
     private final TapAction mSubCardAction;
     private final Icon mSubCardIcon;
     private final Text mSubCardText;
@@ -34,8 +36,25 @@ public final class SubCardTemplateData extends BaseTemplateData {
         this.mSubCardAction = (TapAction) in.readTypedObject(TapAction.CREATOR);
     }
 
-    private SubCardTemplateData(int templateType, BaseTemplateData.SubItemInfo primaryItem, BaseTemplateData.SubItemInfo subtitleItem, BaseTemplateData.SubItemInfo subtitleSupplementalItem, BaseTemplateData.SubItemInfo supplementalLineItem, BaseTemplateData.SubItemInfo supplementalAlarmItem, int layoutWeight, Icon subCardIcon, Text subCardText, TapAction subCardAction) {
-        super(templateType, primaryItem, subtitleItem, subtitleSupplementalItem, supplementalLineItem, supplementalAlarmItem, layoutWeight);
+    private SubCardTemplateData(
+            int templateType,
+            BaseTemplateData.SubItemInfo primaryItem,
+            BaseTemplateData.SubItemInfo subtitleItem,
+            BaseTemplateData.SubItemInfo subtitleSupplementalItem,
+            BaseTemplateData.SubItemInfo supplementalLineItem,
+            BaseTemplateData.SubItemInfo supplementalAlarmItem,
+            int layoutWeight,
+            Icon subCardIcon,
+            Text subCardText,
+            TapAction subCardAction) {
+        super(
+                templateType,
+                primaryItem,
+                subtitleItem,
+                subtitleSupplementalItem,
+                supplementalLineItem,
+                supplementalAlarmItem,
+                layoutWeight);
         this.mSubCardIcon = subCardIcon;
         this.mSubCardText = subCardText;
         this.mSubCardAction = subCardAction;
@@ -75,17 +94,30 @@ public final class SubCardTemplateData extends BaseTemplateData {
             return false;
         }
         SubCardTemplateData that = (SubCardTemplateData) o;
-        return this.mSubCardIcon.equals(that.mSubCardIcon) && SmartspaceUtils.isEqual(this.mSubCardText, that.mSubCardText) && Objects.equals(this.mSubCardAction, that.mSubCardAction);
+        return this.mSubCardIcon.equals(that.mSubCardIcon)
+                && SmartspaceUtils.isEqual(this.mSubCardText, that.mSubCardText)
+                && Objects.equals(this.mSubCardAction, that.mSubCardAction);
     }
 
     @Override // android.app.smartspace.uitemplatedata.BaseTemplateData
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(super.hashCode()), this.mSubCardIcon, this.mSubCardText, this.mSubCardAction);
+        return Objects.hash(
+                Integer.valueOf(super.hashCode()),
+                this.mSubCardIcon,
+                this.mSubCardText,
+                this.mSubCardAction);
     }
 
     @Override // android.app.smartspace.uitemplatedata.BaseTemplateData
     public String toString() {
-        return super.toString() + " + SmartspaceSubCardUiTemplateData{mSubCardIcon=" + this.mSubCardIcon + ", mSubCardText=" + this.mSubCardText + ", mSubCardAction=" + this.mSubCardAction + '}';
+        return super.toString()
+                + " + SmartspaceSubCardUiTemplateData{mSubCardIcon="
+                + this.mSubCardIcon
+                + ", mSubCardText="
+                + this.mSubCardText
+                + ", mSubCardAction="
+                + this.mSubCardAction
+                + '}';
     }
 
     @SystemApi
@@ -111,7 +143,17 @@ public final class SubCardTemplateData extends BaseTemplateData {
 
         @Override // android.app.smartspace.uitemplatedata.BaseTemplateData.Builder
         public SubCardTemplateData build() {
-            return new SubCardTemplateData(getTemplateType(), getPrimaryItem(), getSubtitleItem(), getSubtitleSupplemtnalItem(), getSupplementalLineItem(), getSupplementalAlarmItem(), getLayoutWeight(), this.mSubCardIcon, this.mSubCardText, this.mSubCardAction);
+            return new SubCardTemplateData(
+                    getTemplateType(),
+                    getPrimaryItem(),
+                    getSubtitleItem(),
+                    getSubtitleSupplemtnalItem(),
+                    getSupplementalLineItem(),
+                    getSupplementalAlarmItem(),
+                    getLayoutWeight(),
+                    this.mSubCardIcon,
+                    this.mSubCardText,
+                    this.mSubCardAction);
         }
     }
 }

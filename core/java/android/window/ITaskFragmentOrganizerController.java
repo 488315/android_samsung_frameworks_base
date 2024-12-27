@@ -6,44 +6,58 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.RemoteAnimationDefinition;
-import android.window.ITaskFragmentOrganizer;
 
 /* loaded from: classes4.dex */
 public interface ITaskFragmentOrganizerController extends IInterface {
     public static final String DESCRIPTOR = "android.window.ITaskFragmentOrganizerController";
 
-    void applyTransaction(WindowContainerTransaction windowContainerTransaction, int i, boolean z, RemoteTransition remoteTransition) throws RemoteException;
+    void applyTransaction(
+            WindowContainerTransaction windowContainerTransaction,
+            int i,
+            boolean z,
+            RemoteTransition remoteTransition)
+            throws RemoteException;
 
     boolean isActivityEmbedded(IBinder iBinder) throws RemoteException;
 
     boolean isSupportActivityEmbedded(String str) throws RemoteException;
 
-    void onTransactionHandled(IBinder iBinder, WindowContainerTransaction windowContainerTransaction, int i, boolean z) throws RemoteException;
+    void onTransactionHandled(
+            IBinder iBinder,
+            WindowContainerTransaction windowContainerTransaction,
+            int i,
+            boolean z)
+            throws RemoteException;
 
-    void registerOrganizer(ITaskFragmentOrganizer iTaskFragmentOrganizer, boolean z) throws RemoteException;
+    void registerOrganizer(ITaskFragmentOrganizer iTaskFragmentOrganizer, boolean z)
+            throws RemoteException;
 
-    void registerRemoteAnimations(ITaskFragmentOrganizer iTaskFragmentOrganizer, RemoteAnimationDefinition remoteAnimationDefinition) throws RemoteException;
+    void registerRemoteAnimations(
+            ITaskFragmentOrganizer iTaskFragmentOrganizer,
+            RemoteAnimationDefinition remoteAnimationDefinition)
+            throws RemoteException;
 
     void unregisterOrganizer(ITaskFragmentOrganizer iTaskFragmentOrganizer) throws RemoteException;
 
-    void unregisterRemoteAnimations(ITaskFragmentOrganizer iTaskFragmentOrganizer) throws RemoteException;
+    void unregisterRemoteAnimations(ITaskFragmentOrganizer iTaskFragmentOrganizer)
+            throws RemoteException;
 
     public static class Default implements ITaskFragmentOrganizerController {
         @Override // android.window.ITaskFragmentOrganizerController
-        public void registerOrganizer(ITaskFragmentOrganizer organizer, boolean isSystemOrganizer) throws RemoteException {
-        }
+        public void registerOrganizer(ITaskFragmentOrganizer organizer, boolean isSystemOrganizer)
+                throws RemoteException {}
 
         @Override // android.window.ITaskFragmentOrganizerController
-        public void unregisterOrganizer(ITaskFragmentOrganizer organizer) throws RemoteException {
-        }
+        public void unregisterOrganizer(ITaskFragmentOrganizer organizer) throws RemoteException {}
 
         @Override // android.window.ITaskFragmentOrganizerController
-        public void registerRemoteAnimations(ITaskFragmentOrganizer organizer, RemoteAnimationDefinition definition) throws RemoteException {
-        }
+        public void registerRemoteAnimations(
+                ITaskFragmentOrganizer organizer, RemoteAnimationDefinition definition)
+                throws RemoteException {}
 
         @Override // android.window.ITaskFragmentOrganizerController
-        public void unregisterRemoteAnimations(ITaskFragmentOrganizer organizer) throws RemoteException {
-        }
+        public void unregisterRemoteAnimations(ITaskFragmentOrganizer organizer)
+                throws RemoteException {}
 
         @Override // android.window.ITaskFragmentOrganizerController
         public boolean isActivityEmbedded(IBinder activityToken) throws RemoteException {
@@ -51,12 +65,20 @@ public interface ITaskFragmentOrganizerController extends IInterface {
         }
 
         @Override // android.window.ITaskFragmentOrganizerController
-        public void onTransactionHandled(IBinder transactionToken, WindowContainerTransaction wct, int transitionType, boolean shouldApplyIndependently) throws RemoteException {
-        }
+        public void onTransactionHandled(
+                IBinder transactionToken,
+                WindowContainerTransaction wct,
+                int transitionType,
+                boolean shouldApplyIndependently)
+                throws RemoteException {}
 
         @Override // android.window.ITaskFragmentOrganizerController
-        public void applyTransaction(WindowContainerTransaction wct, int transitionType, boolean shouldApplyIndependently, RemoteTransition remoteTransition) throws RemoteException {
-        }
+        public void applyTransaction(
+                WindowContainerTransaction wct,
+                int transitionType,
+                boolean shouldApplyIndependently,
+                RemoteTransition remoteTransition)
+                throws RemoteException {}
 
         @Override // android.window.ITaskFragmentOrganizerController
         public boolean isSupportActivityEmbedded(String packageName) throws RemoteException {
@@ -69,7 +91,7 @@ public interface ITaskFragmentOrganizerController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITaskFragmentOrganizerController {
+    public abstract static class Stub extends Binder implements ITaskFragmentOrganizerController {
         static final int TRANSACTION_applyTransaction = 7;
         static final int TRANSACTION_isActivityEmbedded = 5;
         static final int TRANSACTION_isSupportActivityEmbedded = 8;
@@ -128,7 +150,8 @@ public interface ITaskFragmentOrganizerController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITaskFragmentOrganizerController.DESCRIPTOR);
             }
@@ -138,21 +161,26 @@ public interface ITaskFragmentOrganizerController extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ITaskFragmentOrganizer _arg0 = ITaskFragmentOrganizer.Stub.asInterface(data.readStrongBinder());
+                    ITaskFragmentOrganizer _arg0 =
+                            ITaskFragmentOrganizer.Stub.asInterface(data.readStrongBinder());
                     boolean _arg1 = data.readBoolean();
                     data.enforceNoDataAvail();
                     registerOrganizer(_arg0, _arg1);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    ITaskFragmentOrganizer _arg02 = ITaskFragmentOrganizer.Stub.asInterface(data.readStrongBinder());
+                    ITaskFragmentOrganizer _arg02 =
+                            ITaskFragmentOrganizer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterOrganizer(_arg02);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    ITaskFragmentOrganizer _arg03 = ITaskFragmentOrganizer.Stub.asInterface(data.readStrongBinder());
-                    RemoteAnimationDefinition _arg12 = (RemoteAnimationDefinition) data.readTypedObject(RemoteAnimationDefinition.CREATOR);
+                    ITaskFragmentOrganizer _arg03 =
+                            ITaskFragmentOrganizer.Stub.asInterface(data.readStrongBinder());
+                    RemoteAnimationDefinition _arg12 =
+                            (RemoteAnimationDefinition)
+                                    data.readTypedObject(RemoteAnimationDefinition.CREATOR);
                     data.enforceNoDataAvail();
                     registerRemoteAnimations(_arg03, _arg12);
                     reply.writeNoException();
@@ -173,7 +201,9 @@ public interface ITaskFragmentOrganizerController extends IInterface {
                     return true;
                 case 6:
                     IBinder _arg07 = data.readStrongBinder();
-                    WindowContainerTransaction _arg13 = (WindowContainerTransaction) data.readTypedObject(WindowContainerTransaction.CREATOR);
+                    WindowContainerTransaction _arg13 =
+                            (WindowContainerTransaction)
+                                    data.readTypedObject(WindowContainerTransaction.CREATOR);
                     int _arg2 = data.readInt();
                     boolean _arg3 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -181,10 +211,13 @@ public interface ITaskFragmentOrganizerController extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 7:
-                    WindowContainerTransaction _arg08 = (WindowContainerTransaction) data.readTypedObject(WindowContainerTransaction.CREATOR);
+                    WindowContainerTransaction _arg08 =
+                            (WindowContainerTransaction)
+                                    data.readTypedObject(WindowContainerTransaction.CREATOR);
                     int _arg14 = data.readInt();
                     boolean _arg22 = data.readBoolean();
-                    RemoteTransition _arg32 = (RemoteTransition) data.readTypedObject(RemoteTransition.CREATOR);
+                    RemoteTransition _arg32 =
+                            (RemoteTransition) data.readTypedObject(RemoteTransition.CREATOR);
                     data.enforceNoDataAvail();
                     applyTransaction(_arg08, _arg14, _arg22, _arg32);
                     reply.writeNoException();
@@ -218,7 +251,9 @@ public interface ITaskFragmentOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
-            public void registerOrganizer(ITaskFragmentOrganizer organizer, boolean isSystemOrganizer) throws RemoteException {
+            public void registerOrganizer(
+                    ITaskFragmentOrganizer organizer, boolean isSystemOrganizer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -234,7 +269,8 @@ public interface ITaskFragmentOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
-            public void unregisterOrganizer(ITaskFragmentOrganizer organizer) throws RemoteException {
+            public void unregisterOrganizer(ITaskFragmentOrganizer organizer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -249,7 +285,9 @@ public interface ITaskFragmentOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
-            public void registerRemoteAnimations(ITaskFragmentOrganizer organizer, RemoteAnimationDefinition definition) throws RemoteException {
+            public void registerRemoteAnimations(
+                    ITaskFragmentOrganizer organizer, RemoteAnimationDefinition definition)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -265,7 +303,8 @@ public interface ITaskFragmentOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
-            public void unregisterRemoteAnimations(ITaskFragmentOrganizer organizer) throws RemoteException {
+            public void unregisterRemoteAnimations(ITaskFragmentOrganizer organizer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -297,7 +336,12 @@ public interface ITaskFragmentOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
-            public void onTransactionHandled(IBinder transactionToken, WindowContainerTransaction wct, int transitionType, boolean shouldApplyIndependently) throws RemoteException {
+            public void onTransactionHandled(
+                    IBinder transactionToken,
+                    WindowContainerTransaction wct,
+                    int transitionType,
+                    boolean shouldApplyIndependently)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -315,7 +359,12 @@ public interface ITaskFragmentOrganizerController extends IInterface {
             }
 
             @Override // android.window.ITaskFragmentOrganizerController
-            public void applyTransaction(WindowContainerTransaction wct, int transitionType, boolean shouldApplyIndependently, RemoteTransition remoteTransition) throws RemoteException {
+            public void applyTransaction(
+                    WindowContainerTransaction wct,
+                    int transitionType,
+                    boolean shouldApplyIndependently,
+                    RemoteTransition remoteTransition)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

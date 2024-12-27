@@ -4,8 +4,10 @@ import android.accessibilityservice.AccessibilityTrace;
 import android.os.Binder;
 import android.os.Build;
 import android.util.Slog;
+
 import com.android.server.wm.AccessibilityController;
 import com.android.server.wm.WindowManagerInternal;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +21,10 @@ public final class AccessibilityTraceManager implements AccessibilityTrace {
     public volatile long mEnabledLoggingFlags = 0;
     public final AccessibilityManagerService mService;
 
-    public AccessibilityTraceManager(WindowManagerInternal.AccessibilityControllerInternal accessibilityControllerInternal, AccessibilityManagerService accessibilityManagerService, Object obj) {
+    public AccessibilityTraceManager(
+            WindowManagerInternal.AccessibilityControllerInternal accessibilityControllerInternal,
+            AccessibilityManagerService accessibilityManagerService,
+            Object obj) {
         this.mA11yController = accessibilityControllerInternal;
         this.mService = accessibilityManagerService;
         this.mA11yMSLock = obj;
@@ -44,14 +49,37 @@ public final class AccessibilityTraceManager implements AccessibilityTrace {
         return (j & this.mEnabledLoggingFlags) != 0;
     }
 
-    public final void logTrace(long j, String str, long j2, String str2, int i, long j3, int i2, StackTraceElement[] stackTraceElementArr, Set set) {
+    public final void logTrace(
+            long j,
+            String str,
+            long j2,
+            String str2,
+            int i,
+            long j3,
+            int i2,
+            StackTraceElement[] stackTraceElementArr,
+            Set set) {
         if (isA11yTracingEnabledForTypes(j2)) {
-            WindowManagerInternal.AccessibilityControllerInternal accessibilityControllerInternal = this.mA11yController;
+            WindowManagerInternal.AccessibilityControllerInternal accessibilityControllerInternal =
+                    this.mA11yController;
             byte[] bytes = "".getBytes();
             Set hashSet = set == null ? new HashSet() : set;
-            AccessibilityController.AccessibilityTracing accessibilityTracing = ((AccessibilityController.AccessibilityControllerInternalImpl) accessibilityControllerInternal).mTracing;
+            AccessibilityController.AccessibilityTracing accessibilityTracing =
+                    ((AccessibilityController.AccessibilityControllerInternalImpl)
+                                    accessibilityControllerInternal)
+                            .mTracing;
             if (accessibilityTracing.mEnabled) {
-                accessibilityTracing.log(str, j2, str2, bytes, i2, stackTraceElementArr, j, String.valueOf(i), String.valueOf(j3), hashSet);
+                accessibilityTracing.log(
+                        str,
+                        j2,
+                        str2,
+                        bytes,
+                        i2,
+                        stackTraceElementArr,
+                        j,
+                        String.valueOf(i),
+                        String.valueOf(j3),
+                        hashSet);
             }
         }
     }
@@ -62,8 +90,18 @@ public final class AccessibilityTraceManager implements AccessibilityTrace {
 
     public final void logTrace(String str, long j, String str2) {
         if (isA11yTracingEnabledForTypes(j)) {
-            WindowManagerInternal.AccessibilityControllerInternal accessibilityControllerInternal = this.mA11yController;
-            ((AccessibilityController.AccessibilityControllerInternalImpl) accessibilityControllerInternal).mTracing.logState(str, j, str2, "".getBytes(), Binder.getCallingUid(), Thread.currentThread().getStackTrace(), new HashSet(Arrays.asList("logTrace")));
+            WindowManagerInternal.AccessibilityControllerInternal accessibilityControllerInternal =
+                    this.mA11yController;
+            ((AccessibilityController.AccessibilityControllerInternalImpl)
+                            accessibilityControllerInternal)
+                    .mTracing.logState(
+                            str,
+                            j,
+                            str2,
+                            "".getBytes(),
+                            Binder.getCallingUid(),
+                            Thread.currentThread().getStackTrace(),
+                            new HashSet(Arrays.asList("logTrace")));
         }
     }
 
@@ -76,12 +114,17 @@ public final class AccessibilityTraceManager implements AccessibilityTrace {
         if ((this.mEnabledLoggingFlags & 278576) != (j2 & 278576)) {
             synchronized (this.mA11yMSLock) {
                 AccessibilityManagerService accessibilityManagerService = this.mService;
-                accessibilityManagerService.scheduleUpdateClientsIfNeededLocked(accessibilityManagerService.getCurrentUserState(), false);
+                accessibilityManagerService.scheduleUpdateClientsIfNeededLocked(
+                        accessibilityManagerService.getCurrentUserState(), false);
             }
         }
-        AccessibilityController.AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = (AccessibilityController.AccessibilityControllerInternalImpl) this.mA11yController;
+        AccessibilityController.AccessibilityControllerInternalImpl
+                accessibilityControllerInternalImpl =
+                        (AccessibilityController.AccessibilityControllerInternalImpl)
+                                this.mA11yController;
         accessibilityControllerInternalImpl.mEnabledTracingFlags = j;
-        AccessibilityController.AccessibilityTracing accessibilityTracing = accessibilityControllerInternalImpl.mTracing;
+        AccessibilityController.AccessibilityTracing accessibilityTracing =
+                accessibilityControllerInternalImpl.mTracing;
         accessibilityTracing.getClass();
         if (Build.IS_USER) {
             Slog.e("AccessibilityTracing", "Error: Tracing is not supported on user builds.");
@@ -100,12 +143,17 @@ public final class AccessibilityTraceManager implements AccessibilityTrace {
         if ((this.mEnabledLoggingFlags & 278576) != (j & 278576)) {
             synchronized (this.mA11yMSLock) {
                 AccessibilityManagerService accessibilityManagerService = this.mService;
-                accessibilityManagerService.scheduleUpdateClientsIfNeededLocked(accessibilityManagerService.getCurrentUserState(), false);
+                accessibilityManagerService.scheduleUpdateClientsIfNeededLocked(
+                        accessibilityManagerService.getCurrentUserState(), false);
             }
         }
         if (isA11yTracingEnabled) {
-            AccessibilityController.AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = (AccessibilityController.AccessibilityControllerInternalImpl) this.mA11yController;
-            AccessibilityController.AccessibilityTracing accessibilityTracing = accessibilityControllerInternalImpl.mTracing;
+            AccessibilityController.AccessibilityControllerInternalImpl
+                    accessibilityControllerInternalImpl =
+                            (AccessibilityController.AccessibilityControllerInternalImpl)
+                                    this.mA11yController;
+            AccessibilityController.AccessibilityTracing accessibilityTracing =
+                    accessibilityControllerInternalImpl.mTracing;
             accessibilityTracing.getClass();
             if (Build.IS_USER) {
                 Slog.e("AccessibilityTracing", "Error: Tracing is not supported on user builds.");
@@ -114,7 +162,9 @@ public final class AccessibilityTraceManager implements AccessibilityTrace {
                     try {
                         accessibilityTracing.mEnabled = false;
                         if (accessibilityTracing.mEnabled) {
-                            Slog.e("AccessibilityTracing", "Error: tracing enabled while waiting for flush.");
+                            Slog.e(
+                                    "AccessibilityTracing",
+                                    "Error: tracing enabled while waiting for flush.");
                         } else {
                             accessibilityTracing.mHandler.sendEmptyMessage(2);
                         }

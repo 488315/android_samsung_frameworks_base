@@ -2,7 +2,7 @@ package android.service.autofill.augmented;
 
 import android.annotation.SystemApi;
 import android.graphics.Rect;
-import android.service.autofill.augmented.AugmentedAutofillService;
+
 import java.io.PrintWriter;
 
 @SystemApi
@@ -10,15 +10,14 @@ import java.io.PrintWriter;
 public abstract class PresentationParams {
     abstract void dump(String str, PrintWriter printWriter);
 
-    PresentationParams() {
-    }
+    PresentationParams() {}
 
     public Area getSuggestionArea() {
         return null;
     }
 
     @SystemApi
-    public static abstract class Area {
+    public abstract static class Area {
         private final Rect mBounds;
         public final AugmentedAutofillService.AutofillProxy proxy;
 
@@ -39,9 +38,14 @@ public abstract class PresentationParams {
     public static final class SystemPopupPresentationParams extends PresentationParams {
         private final Area mSuggestionArea;
 
-        public SystemPopupPresentationParams(AugmentedAutofillService.AutofillProxy proxy, Rect rect) {
-            this.mSuggestionArea = new Area(proxy, rect) { // from class: android.service.autofill.augmented.PresentationParams.SystemPopupPresentationParams.1
-            };
+        public SystemPopupPresentationParams(
+                AugmentedAutofillService.AutofillProxy proxy, Rect rect) {
+            this.mSuggestionArea =
+                    new Area(
+                            proxy,
+                            rect) { // from class:
+                                    // android.service.autofill.augmented.PresentationParams.SystemPopupPresentationParams.1
+                    };
         }
 
         @Override // android.service.autofill.augmented.PresentationParams

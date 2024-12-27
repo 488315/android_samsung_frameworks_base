@@ -8,25 +8,32 @@ import android.util.Range;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class AudioCodecAttributes implements Parcelable {
-    public static final Parcelable.Creator<AudioCodecAttributes> CREATOR = new Parcelable.Creator<AudioCodecAttributes>() { // from class: android.telephony.ims.AudioCodecAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioCodecAttributes createFromParcel(Parcel in) {
-            return new AudioCodecAttributes(in);
-        }
+    public static final Parcelable.Creator<AudioCodecAttributes> CREATOR =
+            new Parcelable.Creator<
+                    AudioCodecAttributes>() { // from class:
+                                              // android.telephony.ims.AudioCodecAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioCodecAttributes createFromParcel(Parcel in) {
+                    return new AudioCodecAttributes(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioCodecAttributes[] newArray(int size) {
-            return new AudioCodecAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioCodecAttributes[] newArray(int size) {
+                    return new AudioCodecAttributes[size];
+                }
+            };
     private float mBandwidthKhz;
     private Range<Float> mBandwidthRangeKhz;
     private float mBitrateKbps;
     private Range<Float> mBitrateRangeKbps;
 
-    public AudioCodecAttributes(float bitrateKbps, Range<Float> bitrateRangeKbps, float bandwidthKhz, Range<Float> bandwidthRangeKhz) {
+    public AudioCodecAttributes(
+            float bitrateKbps,
+            Range<Float> bitrateRangeKbps,
+            float bandwidthKhz,
+            Range<Float> bandwidthRangeKhz) {
         this.mBitrateKbps = bitrateKbps;
         this.mBitrateRangeKbps = bitrateRangeKbps;
         this.mBandwidthKhz = bandwidthKhz;
@@ -35,9 +42,11 @@ public final class AudioCodecAttributes implements Parcelable {
 
     private AudioCodecAttributes(Parcel in) {
         this.mBitrateKbps = in.readFloat();
-        this.mBitrateRangeKbps = new Range<>(Float.valueOf(in.readFloat()), Float.valueOf(in.readFloat()));
+        this.mBitrateRangeKbps =
+                new Range<>(Float.valueOf(in.readFloat()), Float.valueOf(in.readFloat()));
         this.mBandwidthKhz = in.readFloat();
-        this.mBandwidthRangeKhz = new Range<>(Float.valueOf(in.readFloat()), Float.valueOf(in.readFloat()));
+        this.mBandwidthRangeKhz =
+                new Range<>(Float.valueOf(in.readFloat()), Float.valueOf(in.readFloat()));
     }
 
     @Override // android.os.Parcelable
@@ -72,6 +81,14 @@ public final class AudioCodecAttributes implements Parcelable {
     }
 
     public String toString() {
-        return "{ bitrateKbps=" + this.mBitrateKbps + ", bitrateRangeKbps=" + this.mBitrateRangeKbps + ", bandwidthKhz=" + this.mBandwidthKhz + ", bandwidthRangeKhz=" + this.mBandwidthRangeKhz + " }";
+        return "{ bitrateKbps="
+                + this.mBitrateKbps
+                + ", bitrateRangeKbps="
+                + this.mBitrateRangeKbps
+                + ", bandwidthKhz="
+                + this.mBandwidthKhz
+                + ", bandwidthRangeKhz="
+                + this.mBandwidthRangeKhz
+                + " }";
     }
 }

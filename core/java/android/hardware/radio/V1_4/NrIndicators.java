@@ -3,6 +3,7 @@ package android.hardware.radio.V1_4;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -20,18 +21,29 @@ public final class NrIndicators {
             return false;
         }
         NrIndicators other = (NrIndicators) otherObject;
-        if (this.isEndcAvailable == other.isEndcAvailable && this.isDcNrRestricted == other.isDcNrRestricted && this.isNrAvailable == other.isNrAvailable) {
+        if (this.isEndcAvailable == other.isEndcAvailable
+                && this.isDcNrRestricted == other.isDcNrRestricted
+                && this.isNrAvailable == other.isNrAvailable) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isEndcAvailable))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isDcNrRestricted))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isNrAvailable))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isEndcAvailable))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isDcNrRestricted))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isNrAvailable))));
     }
 
     public final String toString() {
-        return "{.isEndcAvailable = " + this.isEndcAvailable + ", .isDcNrRestricted = " + this.isDcNrRestricted + ", .isNrAvailable = " + this.isNrAvailable + "}";
+        return "{.isEndcAvailable = "
+                + this.isEndcAvailable
+                + ", .isDcNrRestricted = "
+                + this.isDcNrRestricted
+                + ", .isNrAvailable = "
+                + this.isNrAvailable
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -43,7 +55,8 @@ public final class NrIndicators {
         ArrayList<NrIndicators> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 3, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 3, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             NrIndicators _hidl_vec_element = new NrIndicators();
@@ -53,7 +66,8 @@ public final class NrIndicators {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.isEndcAvailable = _hidl_blob.getBool(0 + _hidl_offset);
         this.isDcNrRestricted = _hidl_blob.getBool(1 + _hidl_offset);
         this.isNrAvailable = _hidl_blob.getBool(2 + _hidl_offset);
@@ -65,7 +79,8 @@ public final class NrIndicators {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<NrIndicators> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<NrIndicators> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

@@ -14,7 +14,14 @@ public final class IpFilterConfiguration extends FilterConfiguration {
     private final byte[] mSrcIpAddress;
     private final int mSrcPort;
 
-    private IpFilterConfiguration(Settings settings, byte[] srcAddr, byte[] dstAddr, int srcPort, int dstPort, boolean passthrough, int ipCid) {
+    private IpFilterConfiguration(
+            Settings settings,
+            byte[] srcAddr,
+            byte[] dstAddr,
+            int srcPort,
+            int dstPort,
+            boolean passthrough,
+            int ipCid) {
         super(settings);
         this.mSrcIpAddress = srcAddr;
         this.mDstIpAddress = dstAddr;
@@ -67,8 +74,8 @@ public final class IpFilterConfiguration extends FilterConfiguration {
         private int mSrcPort;
 
         private Builder() {
-            this.mSrcIpAddress = new byte[]{0, 0, 0, 0};
-            this.mDstIpAddress = new byte[]{0, 0, 0, 0};
+            this.mSrcIpAddress = new byte[] {0, 0, 0, 0};
+            this.mDstIpAddress = new byte[] {0, 0, 0, 0};
             this.mSrcPort = 0;
             this.mDstPort = 0;
             this.mPassthrough = false;
@@ -114,10 +121,23 @@ public final class IpFilterConfiguration extends FilterConfiguration {
 
         public IpFilterConfiguration build() {
             int ipAddrLength = this.mSrcIpAddress.length;
-            if (ipAddrLength != this.mDstIpAddress.length || (ipAddrLength != 4 && ipAddrLength != 16)) {
-                throw new IllegalArgumentException("The lengths of src and dst IP address must be 4 or 16 and must be the same.srcLength=" + ipAddrLength + ", dstLength=" + this.mDstIpAddress.length);
+            if (ipAddrLength != this.mDstIpAddress.length
+                    || (ipAddrLength != 4 && ipAddrLength != 16)) {
+                throw new IllegalArgumentException(
+                        "The lengths of src and dst IP address must be 4 or 16 and must be the"
+                            + " same.srcLength="
+                                + ipAddrLength
+                                + ", dstLength="
+                                + this.mDstIpAddress.length);
             }
-            return new IpFilterConfiguration(this.mSettings, this.mSrcIpAddress, this.mDstIpAddress, this.mSrcPort, this.mDstPort, this.mPassthrough, this.mIpCid);
+            return new IpFilterConfiguration(
+                    this.mSettings,
+                    this.mSrcIpAddress,
+                    this.mDstIpAddress,
+                    this.mSrcPort,
+                    this.mDstPort,
+                    this.mPassthrough,
+                    this.mIpCid);
         }
     }
 }

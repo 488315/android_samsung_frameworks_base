@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
 import android.util.proto.WireTypeMismatchException;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.regex.Matcher;
@@ -14,39 +15,39 @@ import java.util.regex.Pattern;
 
 /* loaded from: classes.dex */
 public final class Rect implements Parcelable {
-    public static final Parcelable.Creator<Rect> CREATOR = new Parcelable.Creator<Rect>() { // from class: android.graphics.Rect.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Rect createFromParcel(Parcel in) {
-            Rect r = new Rect();
-            r.readFromParcel(in);
-            return r;
-        }
+    public static final Parcelable.Creator<Rect> CREATOR =
+            new Parcelable.Creator<Rect>() { // from class: android.graphics.Rect.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Rect createFromParcel(Parcel in) {
+                    Rect r = new Rect();
+                    r.readFromParcel(in);
+                    return r;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Rect[] newArray(int size) {
-            return new Rect[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Rect[] newArray(int size) {
+                    return new Rect[size];
+                }
+            };
     public int bottom;
     public int left;
     public int right;
     public int top;
 
     private static final class UnflattenHelper {
-        private static final Pattern FLATTENED_PATTERN = Pattern.compile("(-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+)");
+        private static final Pattern FLATTENED_PATTERN =
+                Pattern.compile("(-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+)");
 
-        private UnflattenHelper() {
-        }
+        private UnflattenHelper() {}
 
         static Matcher getMatcher(String str) {
             return FLATTENED_PATTERN.matcher(str);
         }
     }
 
-    public Rect() {
-    }
+    public Rect() {}
 
     public Rect(int left, int top, int right, int bottom) {
         this.left = left;
@@ -98,7 +99,10 @@ public final class Rect implements Parcelable {
             return false;
         }
         Rect r = (Rect) o;
-        if (this.left == r.left && this.top == r.top && this.right == r.right && this.bottom == r.bottom) {
+        if (this.left == r.left
+                && this.top == r.top
+                && this.right == r.right
+                && this.bottom == r.bottom) {
             return true;
         }
         return false;
@@ -159,7 +163,11 @@ public final class Rect implements Parcelable {
         }
         Matcher matcher = UnflattenHelper.getMatcher(str);
         if (matcher.matches()) {
-            return new Rect(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)));
+            return new Rect(
+                    Integer.parseInt(matcher.group(1)),
+                    Integer.parseInt(matcher.group(2)),
+                    Integer.parseInt(matcher.group(3)),
+                    Integer.parseInt(matcher.group(4)));
         }
         return null;
     }
@@ -185,7 +193,8 @@ public final class Rect implements Parcelable {
         protoOutputStream.end(token);
     }
 
-    public void readFromProto(ProtoInputStream proto, long fieldId) throws IOException, WireTypeMismatchException {
+    public void readFromProto(ProtoInputStream proto, long fieldId)
+            throws IOException, WireTypeMismatchException {
         long token = proto.start(fieldId);
         while (proto.nextField() != -1) {
             try {
@@ -305,15 +314,30 @@ public final class Rect implements Parcelable {
     }
 
     public boolean contains(int x, int y) {
-        return this.left < this.right && this.top < this.bottom && x >= this.left && x < this.right && y >= this.top && y < this.bottom;
+        return this.left < this.right
+                && this.top < this.bottom
+                && x >= this.left
+                && x < this.right
+                && y >= this.top
+                && y < this.bottom;
     }
 
     public boolean contains(int left, int top, int right, int bottom) {
-        return this.left < this.right && this.top < this.bottom && this.left <= left && this.top <= top && this.right >= right && this.bottom >= bottom;
+        return this.left < this.right
+                && this.top < this.bottom
+                && this.left <= left
+                && this.top <= top
+                && this.right >= right
+                && this.bottom >= bottom;
     }
 
     public boolean contains(Rect r) {
-        return this.left < this.right && this.top < this.bottom && this.left <= r.left && this.top <= r.top && this.right >= r.right && this.bottom >= r.bottom;
+        return this.left < this.right
+                && this.top < this.bottom
+                && this.left <= r.left
+                && this.top <= r.top
+                && this.right >= r.right
+                && this.bottom >= r.bottom;
     }
 
     public boolean intersect(int left, int top, int right, int bottom) {

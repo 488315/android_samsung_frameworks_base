@@ -21,13 +21,13 @@ import android.view.ViewGroup;
 import android.view.ViewRootImpl;
 import android.view.WindowManagerGlobal;
 import android.view.autofill.AutofillId;
-import android.view.translation.TranslationContext;
-import android.view.translation.TranslationRequest;
 import android.widget.TextView;
 import android.widget.TextViewTranslationCallback;
+
 import com.android.internal.util.function.QuadConsumer;
 import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -51,25 +51,39 @@ public class UiTranslationController implements Dumpable {
     private final HandlerThread mWorkerThread;
     private final Object mLock = new Object();
     private final ArrayMap<AutofillId, WeakReference<View>> mViews = new ArrayMap<>();
-    private final ArrayMap<Pair<TranslationSpec, TranslationSpec>, Translator> mTranslators = new ArrayMap<>();
+    private final ArrayMap<Pair<TranslationSpec, TranslationSpec>, Translator> mTranslators =
+            new ArrayMap<>();
     private final ArraySet<AutofillId> mViewsToPadContent = new ArraySet<>();
 
     public UiTranslationController(Activity activity, Context context) {
         this.mActivity = activity;
         this.mContext = context;
-        this.mWorkerThread = new HandlerThread("UiTranslationController_" + this.mActivity.getComponentName(), -2);
+        this.mWorkerThread =
+                new HandlerThread(
+                        "UiTranslationController_" + this.mActivity.getComponentName(), -2);
         this.mWorkerThread.start();
         this.mWorkerHandler = this.mWorkerThread.getThreadHandler();
         activity.addDumpable(this);
     }
 
-    public void updateUiTranslationState(int state, TranslationSpec sourceSpec, TranslationSpec targetSpec, List<AutofillId> views, UiTranslationSpec uiTranslationSpec) {
+    public void updateUiTranslationState(
+            int state,
+            TranslationSpec sourceSpec,
+            TranslationSpec targetSpec,
+            List<AutofillId> views,
+            UiTranslationSpec uiTranslationSpec) {
         if (this.mActivity.isDestroyed()) {
-            Log.i("UiTranslationController", "Cannot update " + stateToString(state) + " for destroyed " + this.mActivity);
+            Log.i(
+                    "UiTranslationController",
+                    "Cannot update " + stateToString(state) + " for destroyed " + this.mActivity);
             return;
         }
         boolean isLoggable = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
-        Log.i("UiTranslationController", "updateUiTranslationState state: " + stateToString(state) + (isLoggable ? ", views: " + views + ", spec: " + uiTranslationSpec : ""));
+        Log.i(
+                "UiTranslationController",
+                "updateUiTranslationState state: "
+                        + stateToString(state)
+                        + (isLoggable ? ", views: " + views + ", spec: " + uiTranslationSpec : ""));
         synchronized (this.mLock) {
             this.mCurrentState = state;
             if (views != null) {
@@ -85,55 +99,77 @@ public class UiTranslationController implements Dumpable {
                 }
                 Pair<TranslationSpec, TranslationSpec> specs = new Pair<>(sourceSpec, targetSpec);
                 if (!this.mTranslators.containsKey(specs)) {
-                    this.mWorkerHandler.sendMessage(PooledLambda.obtainMessage(new QuadConsumer() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda3
-                        @Override // com.android.internal.util.function.QuadConsumer
-                        public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
-                            ((UiTranslationController) obj).createTranslatorAndStart((TranslationSpec) obj2, (TranslationSpec) obj3, (List) obj4);
-                        }
-                    }, this, sourceSpec, targetSpec, views));
+                    this.mWorkerHandler.sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new QuadConsumer() { // from class:
+                                                         // android.view.translation.UiTranslationController$$ExternalSyntheticLambda3
+                                        @Override // com.android.internal.util.function.QuadConsumer
+                                        public final void accept(
+                                                Object obj, Object obj2, Object obj3, Object obj4) {
+                                            ((UiTranslationController) obj)
+                                                    .createTranslatorAndStart(
+                                                            (TranslationSpec) obj2,
+                                                            (TranslationSpec) obj3,
+                                                            (List) obj4);
+                                        }
+                                    },
+                                    this,
+                                    sourceSpec,
+                                    targetSpec,
+                                    views));
                     return;
                 } else {
                     onUiTranslationStarted(this.mTranslators.get(specs), views);
                     return;
                 }
             case 1:
-                runForEachView(new BiConsumer() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda4
-                    @Override // java.util.function.BiConsumer
-                    public final void accept(Object obj, Object obj2) {
-                        ((ViewTranslationCallback) obj2).onHideTranslation((View) obj);
-                    }
-                });
+                runForEachView(
+                        new BiConsumer() { // from class:
+                                           // android.view.translation.UiTranslationController$$ExternalSyntheticLambda4
+                            @Override // java.util.function.BiConsumer
+                            public final void accept(Object obj, Object obj2) {
+                                ((ViewTranslationCallback) obj2).onHideTranslation((View) obj);
+                            }
+                        });
                 return;
             case 2:
-                runForEachView(new BiConsumer() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda5
-                    @Override // java.util.function.BiConsumer
-                    public final void accept(Object obj, Object obj2) {
-                        ((ViewTranslationCallback) obj2).onShowTranslation((View) obj);
-                    }
-                });
+                runForEachView(
+                        new BiConsumer() { // from class:
+                                           // android.view.translation.UiTranslationController$$ExternalSyntheticLambda5
+                            @Override // java.util.function.BiConsumer
+                            public final void accept(Object obj, Object obj2) {
+                                ((ViewTranslationCallback) obj2).onShowTranslation((View) obj);
+                            }
+                        });
                 return;
             case 3:
                 destroyTranslators();
-                runForEachView(new BiConsumer() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda6
-                    @Override // java.util.function.BiConsumer
-                    public final void accept(Object obj, Object obj2) {
-                        ((View) obj).clearTranslationState();
-                    }
-                });
+                runForEachView(
+                        new BiConsumer() { // from class:
+                                           // android.view.translation.UiTranslationController$$ExternalSyntheticLambda6
+                            @Override // java.util.function.BiConsumer
+                            public final void accept(Object obj, Object obj2) {
+                                ((View) obj).clearTranslationState();
+                            }
+                        });
                 notifyTranslationFinished(false);
                 synchronized (this.mLock) {
                     this.mViews.clear();
                 }
                 return;
             default:
-                Log.w("UiTranslationController", "onAutoTranslationStateChange(): unknown state: " + state);
+                Log.w(
+                        "UiTranslationController",
+                        "onAutoTranslationStateChange(): unknown state: " + state);
                 return;
         }
     }
 
     public void onActivityDestroyed() {
         synchronized (this.mLock) {
-            Log.i("UiTranslationController", "onActivityDestroyed(): mCurrentState is " + stateToString(this.mCurrentState));
+            Log.i(
+                    "UiTranslationController",
+                    "onActivityDestroyed(): mCurrentState is " + stateToString(this.mCurrentState));
             if (this.mCurrentState != 3) {
                 notifyTranslationFinished(true);
             }
@@ -144,9 +180,14 @@ public class UiTranslationController implements Dumpable {
     }
 
     private void notifyTranslationFinished(boolean activityDestroyed) {
-        UiTranslationManager manager = (UiTranslationManager) this.mContext.getSystemService(UiTranslationManager.class);
+        UiTranslationManager manager =
+                (UiTranslationManager) this.mContext.getSystemService(UiTranslationManager.class);
         if (manager != null) {
-            manager.onTranslationFinished(activityDestroyed, new ActivityId(this.mActivity.getTaskId(), this.mActivity.getShareableActivityToken()), this.mActivity.getComponentName());
+            manager.onTranslationFinished(
+                    activityDestroyed,
+                    new ActivityId(
+                            this.mActivity.getTaskId(), this.mActivity.getShareableActivityToken()),
+                    this.mActivity.getComponentName());
         }
     }
 
@@ -219,7 +260,8 @@ public class UiTranslationController implements Dumpable {
     }
 
     private void dumpViewByTraversal(String outerPrefix, PrintWriter pw) {
-        ArrayList<ViewRootImpl> roots = WindowManagerGlobal.getInstance().getRootViews(this.mActivity.getActivityToken());
+        ArrayList<ViewRootImpl> roots =
+                WindowManagerGlobal.getInstance().getRootViews(this.mActivity.getActivityToken());
         pw.print(outerPrefix);
         pw.println("Dump views:");
         for (int rootNum = 0; rootNum < roots.size(); rootNum++) {
@@ -281,7 +323,8 @@ public class UiTranslationController implements Dumpable {
     public void onTranslationCompleted(TranslationResponse response) {
         Object valueOf;
         if (response == null || response.getTranslationStatus() != 0) {
-            StringBuilder append = new StringBuilder().append("Fail result from TranslationService, status=");
+            StringBuilder append =
+                    new StringBuilder().append("Fail result from TranslationService, status=");
             if (response == null) {
                 valueOf = "null";
             } else {
@@ -290,9 +333,11 @@ public class UiTranslationController implements Dumpable {
             Log.w("UiTranslationController", append.append(valueOf).toString());
             return;
         }
-        SparseArray<ViewTranslationResponse> translatedResult = response.getViewTranslationResponses();
+        SparseArray<ViewTranslationResponse> translatedResult =
+                response.getViewTranslationResponses();
         SparseArray<ViewTranslationResponse> viewsResult = new SparseArray<>();
-        SparseArray<LongSparseArray<ViewTranslationResponse>> virtualViewsResult = new SparseArray<>();
+        SparseArray<LongSparseArray<ViewTranslationResponse>> virtualViewsResult =
+                new SparseArray<>();
         IntArray viewIds = new IntArray(1);
         for (int i = 0; i < translatedResult.size(); i++) {
             ViewTranslationResponse result = translatedResult.valueAt(i);
@@ -303,8 +348,12 @@ public class UiTranslationController implements Dumpable {
             if (autofillId.isNonVirtual()) {
                 viewsResult.put(translatedResult.keyAt(i), result);
             } else {
-                boolean isVirtualViewAdded = virtualViewsResult.indexOfKey(autofillId.getViewId()) >= 0;
-                LongSparseArray<ViewTranslationResponse> childIds = isVirtualViewAdded ? virtualViewsResult.get(autofillId.getViewId()) : new LongSparseArray<>();
+                boolean isVirtualViewAdded =
+                        virtualViewsResult.indexOfKey(autofillId.getViewId()) >= 0;
+                LongSparseArray<ViewTranslationResponse> childIds =
+                        isVirtualViewAdded
+                                ? virtualViewsResult.get(autofillId.getViewId())
+                                : new LongSparseArray<>();
                 childIds.put(autofillId.getVirtualChildLongId(), result);
                 if (!isVirtualViewAdded) {
                     virtualViewsResult.put(autofillId.getViewId(), childIds);
@@ -320,15 +369,21 @@ public class UiTranslationController implements Dumpable {
         }
     }
 
-    private void onVirtualViewTranslationCompleted(SparseArray<LongSparseArray<ViewTranslationResponse>> translatedResult) {
+    private void onVirtualViewTranslationCompleted(
+            SparseArray<LongSparseArray<ViewTranslationResponse>> translatedResult) {
         final boolean isLoggable = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
         if (this.mActivity.isDestroyed()) {
-            Log.v("UiTranslationController", "onTranslationCompleted:" + this.mActivity + "is destroyed.");
+            Log.v(
+                    "UiTranslationController",
+                    "onTranslationCompleted:" + this.mActivity + "is destroyed.");
             return;
         }
         synchronized (this.mLock) {
             if (this.mCurrentState == 3) {
-                Log.w("UiTranslationController", "onTranslationCompleted: the translation state is finished now. Skip to show the translated text.");
+                Log.w(
+                        "UiTranslationController",
+                        "onTranslationCompleted: the translation state is finished now. Skip to"
+                            + " show the translated text.");
                 return;
             }
             for (int i = 0; i < translatedResult.size(); i++) {
@@ -337,22 +392,35 @@ public class UiTranslationController implements Dumpable {
                 if (viewRef != null) {
                     final View view = viewRef.get();
                     if (view == null) {
-                        Log.w("UiTranslationController", "onTranslationCompleted: the view for autofill id " + autofillId + " may be gone.");
+                        Log.w(
+                                "UiTranslationController",
+                                "onTranslationCompleted: the view for autofill id "
+                                        + autofillId
+                                        + " may be gone.");
                     } else {
-                        LongSparseArray<ViewTranslationResponse> virtualChildResponse = translatedResult.valueAt(i);
+                        LongSparseArray<ViewTranslationResponse> virtualChildResponse =
+                                translatedResult.valueAt(i);
                         if (isLoggable) {
-                            Log.v("UiTranslationController", "onVirtualViewTranslationCompleted: received response for AutofillId " + autofillId);
+                            Log.v(
+                                    "UiTranslationController",
+                                    "onVirtualViewTranslationCompleted: received response for"
+                                        + " AutofillId "
+                                            + autofillId);
                         }
                         view.onVirtualViewTranslationResponses(virtualChildResponse);
                         if (this.mCurrentState == 1) {
                             return;
                         } else {
-                            this.mActivity.runOnUiThread(new Runnable() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda9
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    UiTranslationController.lambda$onVirtualViewTranslationCompleted$3(View.this, isLoggable);
-                                }
-                            });
+                            this.mActivity.runOnUiThread(
+                                    new Runnable() { // from class:
+                                                     // android.view.translation.UiTranslationController$$ExternalSyntheticLambda9
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            UiTranslationController
+                                                    .lambda$onVirtualViewTranslationCompleted$3(
+                                                            View.this, isLoggable);
+                                        }
+                                    });
                         }
                     }
                 }
@@ -360,10 +428,15 @@ public class UiTranslationController implements Dumpable {
         }
     }
 
-    static /* synthetic */ void lambda$onVirtualViewTranslationCompleted$3(View view, boolean isLoggable) {
+    static /* synthetic */ void lambda$onVirtualViewTranslationCompleted$3(
+            View view, boolean isLoggable) {
         if (view.getViewTranslationCallback() == null) {
             if (isLoggable) {
-                Log.d("UiTranslationController", view + " doesn't support showing translation because of null ViewTranslationCallback.");
+                Log.d(
+                        "UiTranslationController",
+                        view
+                                + " doesn't support showing translation because of null"
+                                + " ViewTranslationCallback.");
             }
         } else if (view.getViewTranslationCallback() != null) {
             view.getViewTranslationCallback().onShowTranslation(view);
@@ -375,12 +448,18 @@ public class UiTranslationController implements Dumpable {
         UiTranslationController uiTranslationController = this;
         boolean isLoggable2 = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
         if (uiTranslationController.mActivity.isDestroyed()) {
-            Log.v("UiTranslationController", "onTranslationCompleted:" + uiTranslationController.mActivity + "is destroyed.");
+            Log.v(
+                    "UiTranslationController",
+                    "onTranslationCompleted:"
+                            + uiTranslationController.mActivity
+                            + "is destroyed.");
             return;
         }
         int resultCount = translatedResult.size();
         if (isLoggable2) {
-            Log.v("UiTranslationController", "onTranslationCompleted: receive " + resultCount + " responses.");
+            Log.v(
+                    "UiTranslationController",
+                    "onTranslationCompleted: receive " + resultCount + " responses.");
         }
         synchronized (uiTranslationController.mLock) {
             try {
@@ -389,37 +468,59 @@ public class UiTranslationController implements Dumpable {
                         int i = 0;
                         while (i < resultCount) {
                             try {
-                                final ViewTranslationResponse response = translatedResult.valueAt(i);
+                                final ViewTranslationResponse response =
+                                        translatedResult.valueAt(i);
                                 if (isLoggable2) {
                                     try {
-                                        Log.v("UiTranslationController", "onTranslationCompleted: " + sanitizedViewTranslationResponse(response));
+                                        Log.v(
+                                                "UiTranslationController",
+                                                "onTranslationCompleted: "
+                                                        + sanitizedViewTranslationResponse(
+                                                                response));
                                     } catch (Throwable th) {
                                         th = th;
                                     }
                                 }
                                 final AutofillId autofillId = response.getAutofillId();
                                 if (autofillId == null) {
-                                    Log.w("UiTranslationController", "No AutofillId is set in ViewTranslationResponse");
+                                    Log.w(
+                                            "UiTranslationController",
+                                            "No AutofillId is set in ViewTranslationResponse");
                                     isLoggable = isLoggable2;
                                 } else {
-                                    WeakReference<View> viewRef = uiTranslationController.mViews.get(autofillId);
+                                    WeakReference<View> viewRef =
+                                            uiTranslationController.mViews.get(autofillId);
                                     if (viewRef == null) {
                                         isLoggable = isLoggable2;
                                     } else {
                                         final View view = viewRef.get();
                                         if (view == null) {
-                                            Log.w("UiTranslationController", "onTranslationCompleted: the view for autofill id " + autofillId + " may be gone.");
+                                            Log.w(
+                                                    "UiTranslationController",
+                                                    "onTranslationCompleted: the view for autofill"
+                                                        + " id "
+                                                            + autofillId
+                                                            + " may be gone.");
                                             isLoggable = isLoggable2;
                                         } else {
-                                            final int currentState = uiTranslationController.mCurrentState;
+                                            final int currentState =
+                                                    uiTranslationController.mCurrentState;
                                             final boolean z = isLoggable2;
                                             isLoggable = isLoggable2;
-                                            uiTranslationController.mActivity.runOnUiThread(new Runnable() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda2
-                                                @Override // java.lang.Runnable
-                                                public final void run() {
-                                                    UiTranslationController.this.lambda$onTranslationCompleted$4(view, response, z, autofillId, currentState);
-                                                }
-                                            });
+                                            uiTranslationController.mActivity.runOnUiThread(
+                                                    new Runnable() { // from class:
+                                                                     // android.view.translation.UiTranslationController$$ExternalSyntheticLambda2
+                                                        @Override // java.lang.Runnable
+                                                        public final void run() {
+                                                            UiTranslationController.this
+                                                                    .lambda$onTranslationCompleted$4(
+                                                                            view,
+                                                                            response,
+                                                                            z,
+                                                                            autofillId,
+                                                                            currentState);
+                                                        }
+                                                    });
                                         }
                                     }
                                 }
@@ -434,7 +535,10 @@ public class UiTranslationController implements Dumpable {
                         return;
                     }
                     try {
-                        Log.w("UiTranslationController", "onTranslationCompleted: the translation state is finished now. Skip to show the translated text.");
+                        Log.w(
+                                "UiTranslationController",
+                                "onTranslationCompleted: the translation state is finished now."
+                                    + " Skip to show the translated text.");
                         return;
                     } catch (Throwable th3) {
                         th = th3;
@@ -450,13 +554,22 @@ public class UiTranslationController implements Dumpable {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$onTranslationCompleted$4(View view, ViewTranslationResponse response, boolean isLoggable, AutofillId autofillId, int currentState) {
+    public /* synthetic */ void lambda$onTranslationCompleted$4(
+            View view,
+            ViewTranslationResponse response,
+            boolean isLoggable,
+            AutofillId autofillId,
+            int currentState) {
         ViewTranslationCallback callback = view.getViewTranslationCallback();
-        if (view.getViewTranslationResponse() != null && view.getViewTranslationResponse().equals(response) && (callback instanceof TextViewTranslationCallback)) {
+        if (view.getViewTranslationResponse() != null
+                && view.getViewTranslationResponse().equals(response)
+                && (callback instanceof TextViewTranslationCallback)) {
             TextViewTranslationCallback textViewCallback = (TextViewTranslationCallback) callback;
             if (textViewCallback.isShowingTranslation() || textViewCallback.isAnimationRunning()) {
                 if (isLoggable) {
-                    Log.d("UiTranslationController", "Duplicate ViewTranslationResponse for " + autofillId + ". Ignoring.");
+                    Log.d(
+                            "UiTranslationController",
+                            "Duplicate ViewTranslationResponse for " + autofillId + ". Ignoring.");
                     return;
                 }
                 return;
@@ -468,7 +581,11 @@ public class UiTranslationController implements Dumpable {
                 view.setViewTranslationCallback(callback);
             } else {
                 if (isLoggable) {
-                    Log.d("UiTranslationController", view + " doesn't support showing translation because of null ViewTranslationCallback.");
+                    Log.d(
+                            "UiTranslationController",
+                            view
+                                    + " doesn't support showing translation because of null"
+                                    + " ViewTranslationCallback.");
                     return;
                 }
                 return;
@@ -486,40 +603,56 @@ public class UiTranslationController implements Dumpable {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void createTranslatorAndStart(TranslationSpec sourceSpec, TranslationSpec targetSpec, List<AutofillId> views) {
+    public void createTranslatorAndStart(
+            TranslationSpec sourceSpec, TranslationSpec targetSpec, List<AutofillId> views) {
         Translator translator = createTranslatorIfNeeded(sourceSpec, targetSpec);
         if (translator == null) {
-            Log.w("UiTranslationController", "Can not create Translator for sourceSpec:" + sourceSpec + " targetSpec:" + targetSpec);
+            Log.w(
+                    "UiTranslationController",
+                    "Can not create Translator for sourceSpec:"
+                            + sourceSpec
+                            + " targetSpec:"
+                            + targetSpec);
         } else {
             onUiTranslationStarted(translator, views);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void sendTranslationRequest(Translator translator, List<ViewTranslationRequest> requests) {
+    public void sendTranslationRequest(
+            Translator translator, List<ViewTranslationRequest> requests) {
         if (requests.size() == 0) {
             Log.w("UiTranslationController", "No ViewTranslationRequest was collected.");
             return;
         }
-        TranslationRequest request = new TranslationRequest.Builder().setViewTranslationRequests(requests).build();
+        TranslationRequest request =
+                new TranslationRequest.Builder().setViewTranslationRequests(requests).build();
         if (Log.isLoggable(UiTranslationManager.LOG_TAG, 3)) {
             StringBuilder msg = new StringBuilder("sendTranslationRequest:{requests=[");
             for (ViewTranslationRequest viewRequest : requests) {
-                msg.append("{request=").append(sanitizedViewTranslationRequest(viewRequest)).append("}, ");
+                msg.append("{request=")
+                        .append(sanitizedViewTranslationRequest(viewRequest))
+                        .append("}, ");
             }
             Log.d("UiTranslationController", "sendTranslationRequest: " + msg.toString());
         }
-        translator.requestUiTranslate(request, new Executor() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda7
-            @Override // java.util.concurrent.Executor
-            public final void execute(Runnable runnable) {
-                runnable.run();
-            }
-        }, new Consumer() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda8
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                UiTranslationController.this.onTranslationCompleted((TranslationResponse) obj);
-            }
-        });
+        translator.requestUiTranslate(
+                request,
+                new Executor() { // from class:
+                                 // android.view.translation.UiTranslationController$$ExternalSyntheticLambda7
+                    @Override // java.util.concurrent.Executor
+                    public final void execute(Runnable runnable) {
+                        runnable.run();
+                    }
+                },
+                new Consumer() { // from class:
+                                 // android.view.translation.UiTranslationController$$ExternalSyntheticLambda8
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        UiTranslationController.this.onTranslationCompleted(
+                                (TranslationResponse) obj);
+                    }
+                });
     }
 
     private void onUiTranslationStarted(final Translator translator, List<AutofillId> views) {
@@ -553,29 +686,55 @@ public class UiTranslationController implements Dumpable {
             }
             final ArrayList<ViewTranslationRequest> requests = new ArrayList<>();
             final int[] supportedFormats = getSupportedFormatsLocked();
-            final ArrayList<ViewRootImpl> roots = WindowManagerGlobal.getInstance().getRootViews(this.mActivity.getActivityToken());
-            final TranslationCapability capability = getTranslationCapability(translator.getTranslationContext());
-            this.mActivity.runOnUiThread(new Runnable() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    UiTranslationController.this.lambda$onUiTranslationStarted$6(roots, viewIds, supportedFormats, capability, requests, translator);
-                }
-            });
+            final ArrayList<ViewRootImpl> roots =
+                    WindowManagerGlobal.getInstance()
+                            .getRootViews(this.mActivity.getActivityToken());
+            final TranslationCapability capability =
+                    getTranslationCapability(translator.getTranslationContext());
+            this.mActivity.runOnUiThread(
+                    new Runnable() { // from class:
+                                     // android.view.translation.UiTranslationController$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            UiTranslationController.this.lambda$onUiTranslationStarted$6(
+                                    roots,
+                                    viewIds,
+                                    supportedFormats,
+                                    capability,
+                                    requests,
+                                    translator);
+                        }
+                    });
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$onUiTranslationStarted$6(ArrayList roots, Map viewIds, int[] supportedFormats, TranslationCapability capability, ArrayList requests, Translator translator) {
+    public /* synthetic */ void lambda$onUiTranslationStarted$6(
+            ArrayList roots,
+            Map viewIds,
+            int[] supportedFormats,
+            TranslationCapability capability,
+            ArrayList requests,
+            Translator translator) {
         for (int rootNum = 0; rootNum < roots.size(); rootNum++) {
             View rootView = ((ViewRootImpl) roots.get(rootNum)).getView();
-            rootView.dispatchCreateViewTranslationRequest(viewIds, supportedFormats, capability, requests);
+            rootView.dispatchCreateViewTranslationRequest(
+                    viewIds, supportedFormats, capability, requests);
         }
-        this.mWorkerHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda10
-            @Override // com.android.internal.util.function.TriConsumer
-            public final void accept(Object obj, Object obj2, Object obj3) {
-                ((UiTranslationController) obj).sendTranslationRequest((Translator) obj2, (ArrayList) obj3);
-            }
-        }, this, translator, requests));
+        this.mWorkerHandler.sendMessage(
+                PooledLambda.obtainMessage(
+                        new TriConsumer() { // from class:
+                                            // android.view.translation.UiTranslationController$$ExternalSyntheticLambda10
+                            @Override // com.android.internal.util.function.TriConsumer
+                            public final void accept(Object obj, Object obj2, Object obj3) {
+                                ((UiTranslationController) obj)
+                                        .sendTranslationRequest(
+                                                (Translator) obj2, (ArrayList) obj3);
+                            }
+                        },
+                        this,
+                        translator,
+                        requests));
     }
 
     private SparseIntArray getRequestVirtualViewChildCount(List<AutofillId> views) {
@@ -595,15 +754,17 @@ public class UiTranslationController implements Dumpable {
     }
 
     private int[] getSupportedFormatsLocked() {
-        return new int[]{1};
+        return new int[] {1};
     }
 
     private TranslationCapability getTranslationCapability(TranslationContext translationContext) {
-        return new TranslationCapability(3, translationContext.getSourceSpec(), translationContext.getTargetSpec(), true, 0);
+        return new TranslationCapability(
+                3, translationContext.getSourceSpec(), translationContext.getTargetSpec(), true, 0);
     }
 
     private void findViewsTraversalByAutofillIds(IntArray sourceViewIds) {
-        ArrayList<ViewRootImpl> roots = WindowManagerGlobal.getInstance().getRootViews(this.mActivity.getActivityToken());
+        ArrayList<ViewRootImpl> roots =
+                WindowManagerGlobal.getInstance().getRootViews(this.mActivity.getActivityToken());
         for (int rootNum = 0; rootNum < roots.size(); rootNum++) {
             View rootView = roots.get(rootNum).getView();
             if (rootView instanceof ViewGroup) {
@@ -626,7 +787,9 @@ public class UiTranslationController implements Dumpable {
 
     private void addViewIfNeeded(IntArray sourceViewIds, View view) {
         AutofillId autofillId = view.getAutofillId();
-        if (autofillId != null && sourceViewIds.indexOf(autofillId.getViewId()) >= 0 && !this.mViews.containsKey(autofillId)) {
+        if (autofillId != null
+                && sourceViewIds.indexOf(autofillId.getViewId()) >= 0
+                && !this.mViews.containsKey(autofillId)) {
             this.mViews.put(autofillId, new WeakReference<>(view));
         }
     }
@@ -638,25 +801,35 @@ public class UiTranslationController implements Dumpable {
             if (views.size() == 0) {
                 Log.w("UiTranslationController", "No views can be excuted for runForEachView.");
             }
-            this.mActivity.runOnUiThread(new Runnable() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    UiTranslationController.lambda$runForEachView$7(ArrayMap.this, isLoggable, action);
-                }
-            });
+            this.mActivity.runOnUiThread(
+                    new Runnable() { // from class:
+                                     // android.view.translation.UiTranslationController$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            UiTranslationController.lambda$runForEachView$7(
+                                    ArrayMap.this, isLoggable, action);
+                        }
+                    });
         }
     }
 
-    static /* synthetic */ void lambda$runForEachView$7(ArrayMap views, boolean isLoggable, BiConsumer action) {
+    static /* synthetic */ void lambda$runForEachView$7(
+            ArrayMap views, boolean isLoggable, BiConsumer action) {
         int viewCounts = views.size();
         for (int i = 0; i < viewCounts; i++) {
             View view = (View) ((WeakReference) views.valueAt(i)).get();
             if (isLoggable) {
-                Log.d("UiTranslationController", "runForEachView for autofillId = " + (view != null ? view.getAutofillId() : " null"));
+                Log.d(
+                        "UiTranslationController",
+                        "runForEachView for autofillId = "
+                                + (view != null ? view.getAutofillId() : " null"));
             }
             if (view == null || view.getViewTranslationCallback() == null) {
                 if (isLoggable) {
-                    Log.d("UiTranslationController", "View was gone or ViewTranslationCallback for autofillId = " + views.keyAt(i));
+                    Log.d(
+                            "UiTranslationController",
+                            "View was gone or ViewTranslationCallback for autofillId = "
+                                    + views.keyAt(i));
                 }
             } else {
                 action.accept(view, view.getViewTranslationCallback());
@@ -664,13 +837,23 @@ public class UiTranslationController implements Dumpable {
         }
     }
 
-    private Translator createTranslatorIfNeeded(TranslationSpec sourceSpec, TranslationSpec targetSpec) {
-        TranslationManager tm = (TranslationManager) this.mContext.getSystemService(TranslationManager.class);
+    private Translator createTranslatorIfNeeded(
+            TranslationSpec sourceSpec, TranslationSpec targetSpec) {
+        TranslationManager tm =
+                (TranslationManager) this.mContext.getSystemService(TranslationManager.class);
         if (tm == null) {
-            Log.e("UiTranslationController", "Can not find TranslationManager when trying to create translator.");
+            Log.e(
+                    "UiTranslationController",
+                    "Can not find TranslationManager when trying to create translator.");
             return null;
         }
-        TranslationContext translationContext = new TranslationContext.Builder(sourceSpec, targetSpec).setActivityId(new ActivityId(this.mActivity.getTaskId(), this.mActivity.getShareableActivityToken())).build();
+        TranslationContext translationContext =
+                new TranslationContext.Builder(sourceSpec, targetSpec)
+                        .setActivityId(
+                                new ActivityId(
+                                        this.mActivity.getTaskId(),
+                                        this.mActivity.getShareableActivityToken()))
+                        .build();
         Translator translator = tm.createTranslator(translationContext);
         if (translator != null) {
             Pair<TranslationSpec, TranslationSpec> specs = new Pair<>(sourceSpec, targetSpec);
@@ -740,14 +923,16 @@ public class UiTranslationController implements Dumpable {
                 str = "string[" + value.getText().length() + "], ";
             }
             append.append(str);
-            Bundle definitions = (Bundle) value.getExtras().get(TranslationResponseValue.EXTRA_DEFINITIONS);
+            Bundle definitions =
+                    (Bundle) value.getExtras().get(TranslationResponseValue.EXTRA_DEFINITIONS);
             if (definitions == null) {
                 it = it3;
             } else {
                 msg.append("definitions={");
                 for (String partOfSpeech : definitions.keySet()) {
                     msg.append(partOfSpeech).append(":[");
-                    CharSequence[] charSequenceArray = definitions.getCharSequenceArray(partOfSpeech);
+                    CharSequence[] charSequenceArray =
+                            definitions.getCharSequenceArray(partOfSpeech);
                     int length = charSequenceArray.length;
                     int i = 0;
                     while (i < length) {

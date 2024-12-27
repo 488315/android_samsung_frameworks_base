@@ -8,7 +8,8 @@ public final /* synthetic */ class DisplayPolicy$$ExternalSyntheticLambda3 imple
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ GestureNavigationSettingsObserver f$0;
 
-    public /* synthetic */ DisplayPolicy$$ExternalSyntheticLambda3(GestureNavigationSettingsObserver gestureNavigationSettingsObserver, int i) {
+    public /* synthetic */ DisplayPolicy$$ExternalSyntheticLambda3(
+            GestureNavigationSettingsObserver gestureNavigationSettingsObserver, int i) {
         this.$r8$classId = i;
         this.f$0 = gestureNavigationSettingsObserver;
     }

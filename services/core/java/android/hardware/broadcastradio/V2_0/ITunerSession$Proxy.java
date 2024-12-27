@@ -11,7 +11,9 @@ import android.os.NativeHandle;
 import android.os.RemoteException;
 import android.util.MutableBoolean;
 import android.util.MutableInt;
+
 import com.android.server.broadcastradio.hal2.TunerSession$$ExternalSyntheticLambda0;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,7 +28,9 @@ public final class ITunerSession$Proxy implements IBase {
 
     @Override // android.hidl.base.V1_0.IBase
     public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        IBase.kInterfaceName, nativeHandle, arrayList);
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -68,7 +72,8 @@ public final class ITunerSession$Proxy implements IBase {
             ArrayList arrayList = new ArrayList();
             HwBlob readBuffer = hwParcel.readBuffer(16L);
             int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+            HwBlob readEmbeddedBuffer =
+                    hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 byte[] bArr = new byte[32];
@@ -113,8 +118,11 @@ public final class ITunerSession$Proxy implements IBase {
         }
     }
 
-    public final void isConfigFlagSet(int i, TunerSession$$ExternalSyntheticLambda0 tunerSession$$ExternalSyntheticLambda0) {
-        HwParcel m = ITunerSession$Proxy$$ExternalSyntheticOutline0.m(i, "android.hardware.broadcastradio@2.0::ITunerSession");
+    public final void isConfigFlagSet(
+            int i, TunerSession$$ExternalSyntheticLambda0 tunerSession$$ExternalSyntheticLambda0) {
+        HwParcel m =
+                ITunerSession$Proxy$$ExternalSyntheticOutline0.m(
+                        i, "android.hardware.broadcastradio@2.0::ITunerSession");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(7, m, hwParcel, 0);
@@ -123,7 +131,8 @@ public final class ITunerSession$Proxy implements IBase {
             int readInt32 = hwParcel.readInt32();
             boolean readBool = hwParcel.readBool();
             MutableInt mutableInt = (MutableInt) tunerSession$$ExternalSyntheticLambda0.f$0;
-            MutableBoolean mutableBoolean = (MutableBoolean) tunerSession$$ExternalSyntheticLambda0.f$1;
+            MutableBoolean mutableBoolean =
+                    (MutableBoolean) tunerSession$$ExternalSyntheticLambda0.f$1;
             mutableInt.value = readInt32;
             mutableBoolean.value = readBool;
         } finally {
@@ -206,7 +215,9 @@ public final class ITunerSession$Proxy implements IBase {
     }
 
     public final int startProgramListUpdates(ProgramFilter programFilter) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.broadcastradio@2.0::ITunerSession");
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        "android.hardware.broadcastradio@2.0::ITunerSession");
         HwBlob hwBlob = new HwBlob(40);
         int size = programFilter.identifierTypes.size();
         hwBlob.putInt32(8L, size);
@@ -221,7 +232,8 @@ public final class ITunerSession$Proxy implements IBase {
         hwBlob.putBool(28L, false);
         HwBlob hwBlob3 = new HwBlob(size2 * 16);
         for (int i2 = 0; i2 < size2; i2++) {
-            ProgramIdentifier programIdentifier = (ProgramIdentifier) programFilter.identifiers.get(i2);
+            ProgramIdentifier programIdentifier =
+                    (ProgramIdentifier) programFilter.identifiers.get(i2);
             long j = i2 * 16;
             hwBlob3.putInt32(j, programIdentifier.type);
             hwBlob3.putInt64(j + 8, programIdentifier.value);
@@ -260,12 +272,15 @@ public final class ITunerSession$Proxy implements IBase {
         try {
             return interfaceDescriptor() + "@Proxy";
         } catch (RemoteException unused) {
-            return "[class or subclass of android.hardware.broadcastradio@2.0::ITunerSession]@Proxy";
+            return "[class or subclass of"
+                       + " android.hardware.broadcastradio@2.0::ITunerSession]@Proxy";
         }
     }
 
     public final int tune(ProgramSelector programSelector) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.broadcastradio@2.0::ITunerSession");
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        "android.hardware.broadcastradio@2.0::ITunerSession");
         HwBlob hwBlob = new HwBlob(32);
         ProgramIdentifier programIdentifier = programSelector.primaryId;
         hwBlob.putInt32(0L, programIdentifier.type);
@@ -275,7 +290,8 @@ public final class ITunerSession$Proxy implements IBase {
         hwBlob.putBool(28L, false);
         HwBlob hwBlob2 = new HwBlob(size * 16);
         for (int i = 0; i < size; i++) {
-            ProgramIdentifier programIdentifier2 = (ProgramIdentifier) programSelector.secondaryIds.get(i);
+            ProgramIdentifier programIdentifier2 =
+                    (ProgramIdentifier) programSelector.secondaryIds.get(i);
             long j = i * 16;
             hwBlob2.putInt32(j, programIdentifier2.type);
             hwBlob2.putInt64(j + 8, programIdentifier2.value);

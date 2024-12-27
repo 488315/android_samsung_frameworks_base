@@ -10,9 +10,7 @@ public interface MessageSubscriber {
 
     void onMessageReceived(Message message);
 
-    default void addMessageConsumer(MessageConsumer messageConsumer) {
-    }
+    default void addMessageConsumer(MessageConsumer messageConsumer) {}
 
-    default void removeMessageConsumer(MessageConsumer messageConsumer) {
-    }
+    default void removeMessageConsumer(MessageConsumer messageConsumer) {}
 }

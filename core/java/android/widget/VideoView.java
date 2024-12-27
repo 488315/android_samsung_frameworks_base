@@ -25,7 +25,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.MediaController;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -33,7 +33,8 @@ import java.util.Map;
 import java.util.Vector;
 
 /* loaded from: classes4.dex */
-public class VideoView extends SurfaceView implements MediaController.MediaPlayerControl, SubtitleController.Anchor {
+public class VideoView extends SurfaceView
+        implements MediaController.MediaPlayerControl, SubtitleController.Anchor {
     private static final int STATE_ERROR = -1;
     private static final int STATE_IDLE = 0;
     private static final int STATE_PAUSED = 4;
@@ -97,161 +98,200 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
         this.mSurfaceHolder = null;
         this.mMediaPlayer = null;
         this.mAudioFocusType = 1;
-        this.mSizeChangedListener = new MediaPlayer.OnVideoSizeChangedListener() { // from class: android.widget.VideoView.1
-            @Override // android.media.MediaPlayer.OnVideoSizeChangedListener
-            public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-                VideoView.this.mVideoWidth = mp.getVideoWidth();
-                VideoView.this.mVideoHeight = mp.getVideoHeight();
-                if (VideoView.this.mVideoWidth != 0 && VideoView.this.mVideoHeight != 0) {
-                    VideoView.this.getHolder().setFixedSize(VideoView.this.mVideoWidth, VideoView.this.mVideoHeight);
-                    VideoView.this.requestLayout();
-                }
-            }
-        };
-        this.mPreparedListener = new MediaPlayer.OnPreparedListener() { // from class: android.widget.VideoView.2
-            @Override // android.media.MediaPlayer.OnPreparedListener
-            public void onPrepared(MediaPlayer mp) {
-                VideoView.this.mCurrentState = 2;
-                Metadata data = mp.getMetadata(false, false);
-                if (data != null) {
-                    VideoView.this.mCanPause = !data.has(1) || data.getBoolean(1);
-                    VideoView.this.mCanSeekBack = !data.has(2) || data.getBoolean(2);
-                    VideoView.this.mCanSeekForward = !data.has(3) || data.getBoolean(3);
-                } else {
-                    VideoView videoView = VideoView.this;
-                    VideoView videoView2 = VideoView.this;
-                    VideoView.this.mCanSeekForward = true;
-                    videoView2.mCanSeekBack = true;
-                    videoView.mCanPause = true;
-                }
-                if (VideoView.this.mOnPreparedListener != null) {
-                    VideoView.this.mOnPreparedListener.onPrepared(VideoView.this.mMediaPlayer);
-                }
-                if (VideoView.this.mMediaController != null) {
-                    VideoView.this.mMediaController.setEnabled(true);
-                }
-                VideoView.this.mVideoWidth = mp.getVideoWidth();
-                VideoView.this.mVideoHeight = mp.getVideoHeight();
-                int seekToPosition = VideoView.this.mSeekWhenPrepared;
-                if (seekToPosition != 0) {
-                    VideoView.this.seekTo(seekToPosition);
-                }
-                if (VideoView.this.mVideoWidth == 0 || VideoView.this.mVideoHeight == 0) {
-                    if (VideoView.this.mTargetState == 3) {
-                        VideoView.this.start();
-                        return;
+        this.mSizeChangedListener =
+                new MediaPlayer
+                        .OnVideoSizeChangedListener() { // from class: android.widget.VideoView.1
+                    @Override // android.media.MediaPlayer.OnVideoSizeChangedListener
+                    public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
+                        VideoView.this.mVideoWidth = mp.getVideoWidth();
+                        VideoView.this.mVideoHeight = mp.getVideoHeight();
+                        if (VideoView.this.mVideoWidth != 0 && VideoView.this.mVideoHeight != 0) {
+                            VideoView.this
+                                    .getHolder()
+                                    .setFixedSize(
+                                            VideoView.this.mVideoWidth,
+                                            VideoView.this.mVideoHeight);
+                            VideoView.this.requestLayout();
+                        }
                     }
-                    return;
-                }
-                VideoView.this.getHolder().setFixedSize(VideoView.this.mVideoWidth, VideoView.this.mVideoHeight);
-                if (VideoView.this.mSurfaceWidth == VideoView.this.mVideoWidth && VideoView.this.mSurfaceHeight == VideoView.this.mVideoHeight) {
-                    if (VideoView.this.mTargetState == 3) {
-                        VideoView.this.start();
+                };
+        this.mPreparedListener =
+                new MediaPlayer.OnPreparedListener() { // from class: android.widget.VideoView.2
+                    @Override // android.media.MediaPlayer.OnPreparedListener
+                    public void onPrepared(MediaPlayer mp) {
+                        VideoView.this.mCurrentState = 2;
+                        Metadata data = mp.getMetadata(false, false);
+                        if (data != null) {
+                            VideoView.this.mCanPause = !data.has(1) || data.getBoolean(1);
+                            VideoView.this.mCanSeekBack = !data.has(2) || data.getBoolean(2);
+                            VideoView.this.mCanSeekForward = !data.has(3) || data.getBoolean(3);
+                        } else {
+                            VideoView videoView = VideoView.this;
+                            VideoView videoView2 = VideoView.this;
+                            VideoView.this.mCanSeekForward = true;
+                            videoView2.mCanSeekBack = true;
+                            videoView.mCanPause = true;
+                        }
+                        if (VideoView.this.mOnPreparedListener != null) {
+                            VideoView.this.mOnPreparedListener.onPrepared(
+                                    VideoView.this.mMediaPlayer);
+                        }
                         if (VideoView.this.mMediaController != null) {
-                            VideoView.this.mMediaController.show();
+                            VideoView.this.mMediaController.setEnabled(true);
+                        }
+                        VideoView.this.mVideoWidth = mp.getVideoWidth();
+                        VideoView.this.mVideoHeight = mp.getVideoHeight();
+                        int seekToPosition = VideoView.this.mSeekWhenPrepared;
+                        if (seekToPosition != 0) {
+                            VideoView.this.seekTo(seekToPosition);
+                        }
+                        if (VideoView.this.mVideoWidth == 0 || VideoView.this.mVideoHeight == 0) {
+                            if (VideoView.this.mTargetState == 3) {
+                                VideoView.this.start();
+                                return;
+                            }
                             return;
                         }
-                        return;
-                    }
-                    if (!VideoView.this.isPlaying()) {
-                        if ((seekToPosition != 0 || VideoView.this.getCurrentPosition() > 0) && VideoView.this.mMediaController != null) {
-                            VideoView.this.mMediaController.show(0);
-                        }
-                    }
-                }
-            }
-        };
-        this.mCompletionListener = new MediaPlayer.OnCompletionListener() { // from class: android.widget.VideoView.3
-            @Override // android.media.MediaPlayer.OnCompletionListener
-            public void onCompletion(MediaPlayer mp) {
-                VideoView.this.mCurrentState = 5;
-                VideoView.this.mTargetState = 5;
-                if (VideoView.this.mMediaController != null) {
-                    VideoView.this.mMediaController.hide();
-                }
-                if (VideoView.this.mOnCompletionListener != null) {
-                    VideoView.this.mOnCompletionListener.onCompletion(VideoView.this.mMediaPlayer);
-                }
-                if (VideoView.this.mAudioFocusType != 0) {
-                    VideoView.this.mAudioManager.abandonAudioFocus(null);
-                }
-            }
-        };
-        this.mInfoListener = new MediaPlayer.OnInfoListener() { // from class: android.widget.VideoView.4
-            @Override // android.media.MediaPlayer.OnInfoListener
-            public boolean onInfo(MediaPlayer mp, int arg1, int arg2) {
-                if (VideoView.this.mOnInfoListener != null) {
-                    VideoView.this.mOnInfoListener.onInfo(mp, arg1, arg2);
-                    return true;
-                }
-                return true;
-            }
-        };
-        this.mErrorListener = new MediaPlayer.OnErrorListener() { // from class: android.widget.VideoView.5
-            @Override // android.media.MediaPlayer.OnErrorListener
-            public boolean onError(MediaPlayer mp, int framework_err, int impl_err) {
-                int messageId;
-                Log.d(VideoView.TAG, "Error: " + framework_err + "," + impl_err);
-                VideoView.this.mCurrentState = -1;
-                VideoView.this.mTargetState = -1;
-                if (VideoView.this.mMediaController != null) {
-                    VideoView.this.mMediaController.hide();
-                }
-                if ((VideoView.this.mOnErrorListener == null || !VideoView.this.mOnErrorListener.onError(VideoView.this.mMediaPlayer, framework_err, impl_err)) && VideoView.this.getWindowToken() != null) {
-                    VideoView.this.mContext.getResources();
-                    if (framework_err == 200) {
-                        messageId = 17039381;
-                    } else {
-                        messageId = 17039377;
-                    }
-                    new AlertDialog.Builder(VideoView.this.mContext).setMessage(messageId).setPositiveButton(17039376, new DialogInterface.OnClickListener() { // from class: android.widget.VideoView.5.1
-                        @Override // android.content.DialogInterface.OnClickListener
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            if (VideoView.this.mOnCompletionListener != null) {
-                                VideoView.this.mOnCompletionListener.onCompletion(VideoView.this.mMediaPlayer);
+                        VideoView.this
+                                .getHolder()
+                                .setFixedSize(
+                                        VideoView.this.mVideoWidth, VideoView.this.mVideoHeight);
+                        if (VideoView.this.mSurfaceWidth == VideoView.this.mVideoWidth
+                                && VideoView.this.mSurfaceHeight == VideoView.this.mVideoHeight) {
+                            if (VideoView.this.mTargetState == 3) {
+                                VideoView.this.start();
+                                if (VideoView.this.mMediaController != null) {
+                                    VideoView.this.mMediaController.show();
+                                    return;
+                                }
+                                return;
+                            }
+                            if (!VideoView.this.isPlaying()) {
+                                if ((seekToPosition != 0 || VideoView.this.getCurrentPosition() > 0)
+                                        && VideoView.this.mMediaController != null) {
+                                    VideoView.this.mMediaController.show(0);
+                                }
                             }
                         }
-                    }).setCancelable(false).show();
-                }
-                return true;
-            }
-        };
-        this.mBufferingUpdateListener = new MediaPlayer.OnBufferingUpdateListener() { // from class: android.widget.VideoView.6
-            @Override // android.media.MediaPlayer.OnBufferingUpdateListener
-            public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                VideoView.this.mCurrentBufferPercentage = percent;
-            }
-        };
-        this.mSHCallback = new SurfaceHolder.Callback() { // from class: android.widget.VideoView.7
-            @Override // android.view.SurfaceHolder.Callback
-            public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-                VideoView.this.mSurfaceWidth = w;
-                VideoView.this.mSurfaceHeight = h;
-                boolean isValidState = VideoView.this.mTargetState == 3;
-                boolean hasValidSize = VideoView.this.mVideoWidth == w && VideoView.this.mVideoHeight == h;
-                if (VideoView.this.mMediaPlayer != null && isValidState && hasValidSize) {
-                    if (VideoView.this.mSeekWhenPrepared != 0) {
-                        VideoView.this.seekTo(VideoView.this.mSeekWhenPrepared);
                     }
-                    VideoView.this.start();
-                }
-            }
+                };
+        this.mCompletionListener =
+                new MediaPlayer.OnCompletionListener() { // from class: android.widget.VideoView.3
+                    @Override // android.media.MediaPlayer.OnCompletionListener
+                    public void onCompletion(MediaPlayer mp) {
+                        VideoView.this.mCurrentState = 5;
+                        VideoView.this.mTargetState = 5;
+                        if (VideoView.this.mMediaController != null) {
+                            VideoView.this.mMediaController.hide();
+                        }
+                        if (VideoView.this.mOnCompletionListener != null) {
+                            VideoView.this.mOnCompletionListener.onCompletion(
+                                    VideoView.this.mMediaPlayer);
+                        }
+                        if (VideoView.this.mAudioFocusType != 0) {
+                            VideoView.this.mAudioManager.abandonAudioFocus(null);
+                        }
+                    }
+                };
+        this.mInfoListener =
+                new MediaPlayer.OnInfoListener() { // from class: android.widget.VideoView.4
+                    @Override // android.media.MediaPlayer.OnInfoListener
+                    public boolean onInfo(MediaPlayer mp, int arg1, int arg2) {
+                        if (VideoView.this.mOnInfoListener != null) {
+                            VideoView.this.mOnInfoListener.onInfo(mp, arg1, arg2);
+                            return true;
+                        }
+                        return true;
+                    }
+                };
+        this.mErrorListener =
+                new MediaPlayer.OnErrorListener() { // from class: android.widget.VideoView.5
+                    @Override // android.media.MediaPlayer.OnErrorListener
+                    public boolean onError(MediaPlayer mp, int framework_err, int impl_err) {
+                        int messageId;
+                        Log.d(VideoView.TAG, "Error: " + framework_err + "," + impl_err);
+                        VideoView.this.mCurrentState = -1;
+                        VideoView.this.mTargetState = -1;
+                        if (VideoView.this.mMediaController != null) {
+                            VideoView.this.mMediaController.hide();
+                        }
+                        if ((VideoView.this.mOnErrorListener == null
+                                        || !VideoView.this.mOnErrorListener.onError(
+                                                VideoView.this.mMediaPlayer,
+                                                framework_err,
+                                                impl_err))
+                                && VideoView.this.getWindowToken() != null) {
+                            VideoView.this.mContext.getResources();
+                            if (framework_err == 200) {
+                                messageId = 17039381;
+                            } else {
+                                messageId = 17039377;
+                            }
+                            new AlertDialog.Builder(VideoView.this.mContext)
+                                    .setMessage(messageId)
+                                    .setPositiveButton(
+                                            17039376,
+                                            new DialogInterface
+                                                    .OnClickListener() { // from class:
+                                                                         // android.widget.VideoView.5.1
+                                                @Override // android.content.DialogInterface.OnClickListener
+                                                public void onClick(
+                                                        DialogInterface dialog, int whichButton) {
+                                                    if (VideoView.this.mOnCompletionListener
+                                                            != null) {
+                                                        VideoView.this.mOnCompletionListener
+                                                                .onCompletion(
+                                                                        VideoView.this
+                                                                                .mMediaPlayer);
+                                                    }
+                                                }
+                                            })
+                                    .setCancelable(false)
+                                    .show();
+                        }
+                        return true;
+                    }
+                };
+        this.mBufferingUpdateListener =
+                new MediaPlayer
+                        .OnBufferingUpdateListener() { // from class: android.widget.VideoView.6
+                    @Override // android.media.MediaPlayer.OnBufferingUpdateListener
+                    public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                        VideoView.this.mCurrentBufferPercentage = percent;
+                    }
+                };
+        this.mSHCallback =
+                new SurfaceHolder.Callback() { // from class: android.widget.VideoView.7
+                    @Override // android.view.SurfaceHolder.Callback
+                    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+                        VideoView.this.mSurfaceWidth = w;
+                        VideoView.this.mSurfaceHeight = h;
+                        boolean isValidState = VideoView.this.mTargetState == 3;
+                        boolean hasValidSize =
+                                VideoView.this.mVideoWidth == w && VideoView.this.mVideoHeight == h;
+                        if (VideoView.this.mMediaPlayer != null && isValidState && hasValidSize) {
+                            if (VideoView.this.mSeekWhenPrepared != 0) {
+                                VideoView.this.seekTo(VideoView.this.mSeekWhenPrepared);
+                            }
+                            VideoView.this.start();
+                        }
+                    }
 
-            @Override // android.view.SurfaceHolder.Callback
-            public void surfaceCreated(SurfaceHolder holder) {
-                VideoView.this.mSurfaceHolder = holder;
-                VideoView.this.openVideo();
-            }
+                    @Override // android.view.SurfaceHolder.Callback
+                    public void surfaceCreated(SurfaceHolder holder) {
+                        VideoView.this.mSurfaceHolder = holder;
+                        VideoView.this.openVideo();
+                    }
 
-            @Override // android.view.SurfaceHolder.Callback
-            public void surfaceDestroyed(SurfaceHolder holder) {
-                VideoView.this.mSurfaceHolder = null;
-                if (VideoView.this.mMediaController != null) {
-                    VideoView.this.mMediaController.hide();
-                }
-                VideoView.this.release(true);
-            }
-        };
+                    @Override // android.view.SurfaceHolder.Callback
+                    public void surfaceDestroyed(SurfaceHolder holder) {
+                        VideoView.this.mSurfaceHolder = null;
+                        if (VideoView.this.mMediaController != null) {
+                            VideoView.this.mMediaController.hide();
+                        }
+                        VideoView.this.release(true);
+                    }
+                };
         this.mVideoWidth = 0;
         this.mVideoHeight = 0;
         this.mAudioManager = (AudioManager) this.mContext.getSystemService("audio");
@@ -339,7 +379,11 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
     }
 
     public void setAudioFocusRequest(int focusGain) {
-        if (focusGain != 0 && focusGain != 1 && focusGain != 2 && focusGain != 3 && focusGain != 4) {
+        if (focusGain != 0
+                && focusGain != 1
+                && focusGain != 2
+                && focusGain != 3
+                && focusGain != 4) {
             throw new IllegalArgumentException("Illegal audio focus type " + focusGain);
         }
         this.mAudioFocusType = focusGain;
@@ -382,12 +426,15 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
         }
         release(false);
         if (this.mAudioFocusType != 0) {
-            this.mAudioManager.requestAudioFocus(null, this.mAudioAttributes, this.mAudioFocusType, 0);
+            this.mAudioManager.requestAudioFocus(
+                    null, this.mAudioAttributes, this.mAudioFocusType, 0);
         }
         try {
             this.mMediaPlayer = new MediaPlayer();
             Context context = getContext();
-            SubtitleController controller = new SubtitleController(context, this.mMediaPlayer.getMediaTimeProvider(), this.mMediaPlayer);
+            SubtitleController controller =
+                    new SubtitleController(
+                            context, this.mMediaPlayer.getMediaTimeProvider(), this.mMediaPlayer);
             controller.registerRenderer(new WebVttRenderer(context));
             controller.registerRenderer(new TtmlRenderer(context));
             controller.registerRenderer(new Cea708CaptionRenderer(context));
@@ -504,7 +551,16 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
 
     @Override // android.view.View, android.view.KeyEvent.Callback
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        boolean isKeyCodeSupported = (keyCode == 4 || keyCode == 24 || keyCode == 25 || keyCode == 164 || keyCode == 82 || keyCode == 5 || keyCode == 6) ? false : true;
+        boolean isKeyCodeSupported =
+                (keyCode == 4
+                                || keyCode == 24
+                                || keyCode == 25
+                                || keyCode == 164
+                                || keyCode == 82
+                                || keyCode == 5
+                                || keyCode == 6)
+                        ? false
+                        : true;
         if (isInPlaybackState() && isKeyCodeSupported && this.mMediaController != null) {
             if (keyCode == 79 || keyCode == 85) {
                 if (this.mMediaPlayer.isPlaying()) {
@@ -609,7 +665,12 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
     }
 
     private boolean isInPlaybackState() {
-        return (this.mMediaPlayer == null || this.mCurrentState == -1 || this.mCurrentState == 0 || this.mCurrentState == 1) ? false : true;
+        return (this.mMediaPlayer == null
+                        || this.mCurrentState == -1
+                        || this.mCurrentState == 0
+                        || this.mCurrentState == 1)
+                ? false
+                : true;
     }
 
     @Override // android.widget.MediaController.MediaPlayerControl
@@ -693,12 +754,14 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
         this.mSubtitleWidget = subtitleWidget;
         if (subtitleWidget != null) {
             if (this.mSubtitlesChangedListener == null) {
-                this.mSubtitlesChangedListener = new SubtitleTrack.RenderingWidget.OnChangedListener() { // from class: android.widget.VideoView.8
-                    @Override // android.media.SubtitleTrack.RenderingWidget.OnChangedListener
-                    public void onChanged(SubtitleTrack.RenderingWidget renderingWidget) {
-                        VideoView.this.invalidate();
-                    }
-                };
+                this.mSubtitlesChangedListener =
+                        new SubtitleTrack.RenderingWidget
+                                .OnChangedListener() { // from class: android.widget.VideoView.8
+                            @Override // android.media.SubtitleTrack.RenderingWidget.OnChangedListener
+                            public void onChanged(SubtitleTrack.RenderingWidget renderingWidget) {
+                                VideoView.this.invalidate();
+                            }
+                        };
             }
             setWillNotDraw(false);
             subtitleWidget.setOnChangedListener(this.mSubtitlesChangedListener);

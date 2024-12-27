@@ -4,15 +4,17 @@ import android.hardware.ISensorPrivacyListener;
 import android.os.RemoteException;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlSerializer;
-import com.android.server.sensorprivacy.SensorPrivacyService;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class AllSensorStateController$$ExternalSyntheticLambda0 implements Consumer {
+public final /* synthetic */ class AllSensorStateController$$ExternalSyntheticLambda0
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -29,15 +31,23 @@ public final /* synthetic */ class AllSensorStateController$$ExternalSyntheticLa
         switch (i) {
             case 0:
                 boolean booleanValue = ((Boolean) obj).booleanValue();
-                SensorPrivacyService.SensorPrivacyHandler sensorPrivacyHandler = (SensorPrivacyService.SensorPrivacyHandler) ((SensorPrivacyService$SensorPrivacyServiceImpl$$ExternalSyntheticLambda1) obj2).f$0;
+                SensorPrivacyService.SensorPrivacyHandler sensorPrivacyHandler =
+                        (SensorPrivacyService.SensorPrivacyHandler)
+                                ((SensorPrivacyService$SensorPrivacyServiceImpl$$ExternalSyntheticLambda1)
+                                                obj2)
+                                        .f$0;
                 int beginBroadcast = sensorPrivacyHandler.mListeners.beginBroadcast();
                 for (int i2 = 0; i2 < beginBroadcast; i2++) {
-                    ISensorPrivacyListener broadcastItem = sensorPrivacyHandler.mListeners.getBroadcastItem(i2);
+                    ISensorPrivacyListener broadcastItem =
+                            sensorPrivacyHandler.mListeners.getBroadcastItem(i2);
                     try {
                         broadcastItem.onSensorPrivacyChanged(-1, -1, booleanValue);
                     } catch (RemoteException e) {
                         String str = SensorPrivacyService.ACTION_DISABLE_TOGGLE_SENSOR_PRIVACY;
-                        Log.e("SensorPrivacyService", "Caught an exception notifying listener " + broadcastItem + ": ", e);
+                        Log.e(
+                                "SensorPrivacyService",
+                                "Caught an exception notifying listener " + broadcastItem + ": ",
+                                e);
                     }
                 }
                 sensorPrivacyHandler.mListeners.finishBroadcast();
@@ -64,7 +74,10 @@ public final /* synthetic */ class AllSensorStateController$$ExternalSyntheticLa
                 } catch (IOException e3) {
                     e = e3;
                     fileOutputStream = startWrite;
-                    Log.e("AllSensorStateController", "Caught an exception persisting the sensor privacy state: ", e);
+                    Log.e(
+                            "AllSensorStateController",
+                            "Caught an exception persisting the sensor privacy state: ",
+                            e);
                     allSensorStateController.mAtomicFile.failWrite(fileOutputStream);
                 }
         }

@@ -13,6 +13,7 @@ import com.android.internal.org.bouncycastle.jcajce.spec.UserKeyingMaterialSpec;
 import com.android.internal.org.bouncycastle.jce.interfaces.ECPrivateKey;
 import com.android.internal.org.bouncycastle.jce.interfaces.ECPublicKey;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -30,7 +31,8 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
     private ECDomainParameters parameters;
     private byte[] result;
 
-    protected KeyAgreementSpi(String kaAlgorithm, BasicAgreement agreement, DerivationFunction kdf) {
+    protected KeyAgreementSpi(
+            String kaAlgorithm, BasicAgreement agreement, DerivationFunction kdf) {
         super(kaAlgorithm, kdf);
         this.kaAlgorithm = kaAlgorithm;
         this.agreement = agreement;
@@ -41,7 +43,8 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
     }
 
     @Override // javax.crypto.KeyAgreementSpi
-    protected Key engineDoPhase(Key key, boolean lastPhase) throws InvalidKeyException, IllegalStateException {
+    protected Key engineDoPhase(Key key, boolean lastPhase)
+            throws InvalidKeyException, IllegalStateException {
         if (this.parameters == null) {
             throw new IllegalStateException(this.kaAlgorithm + " not initialised.");
         }
@@ -49,14 +52,23 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
             throw new IllegalStateException(this.kaAlgorithm + " can only be between two parties.");
         }
         if (!(key instanceof PublicKey)) {
-            throw new InvalidKeyException(this.kaAlgorithm + " key agreement requires " + getSimpleName(ECPublicKey.class) + " for doPhase");
+            throw new InvalidKeyException(
+                    this.kaAlgorithm
+                            + " key agreement requires "
+                            + getSimpleName(ECPublicKey.class)
+                            + " for doPhase");
         }
         CipherParameters pubKey = ECUtils.generatePublicKeyParameter((PublicKey) key);
         try {
-            this.result = bigIntToBytes(((BasicAgreement) this.agreement).calculateAgreement(pubKey));
+            this.result =
+                    bigIntToBytes(((BasicAgreement) this.agreement).calculateAgreement(pubKey));
             return null;
         } catch (Exception e) {
-            throw new InvalidKeyException("calculation failed: " + e.getMessage()) { // from class: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.ec.KeyAgreementSpi.1
+            throw new InvalidKeyException(
+                    "calculation failed: "
+                            + e
+                                    .getMessage()) { // from class:
+                                                     // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.ec.KeyAgreementSpi.1
                 @Override // java.lang.Throwable
                 public Throwable getCause() {
                     return e;
@@ -66,7 +78,8 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
     }
 
     @Override // javax.crypto.KeyAgreementSpi
-    protected void engineInit(Key key, AlgorithmParameterSpec params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected void engineInit(Key key, AlgorithmParameterSpec params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         if (params != null && !(params instanceof UserKeyingMaterialSpec)) {
             throw new InvalidAlgorithmParameterException("No algorithm parameters supported");
         }
@@ -82,16 +95,26 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
         }
     }
 
-    private void initFromKey(Key key, AlgorithmParameterSpec parameterSpec) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    private void initFromKey(Key key, AlgorithmParameterSpec parameterSpec)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         if (!(key instanceof PrivateKey)) {
-            throw new InvalidKeyException(this.kaAlgorithm + " key agreement requires " + getSimpleName(ECPrivateKey.class) + " for initialisation");
+            throw new InvalidKeyException(
+                    this.kaAlgorithm
+                            + " key agreement requires "
+                            + getSimpleName(ECPrivateKey.class)
+                            + " for initialisation");
         }
         if (this.kdf == null && (parameterSpec instanceof UserKeyingMaterialSpec)) {
-            throw new InvalidAlgorithmParameterException("no KDF specified for UserKeyingMaterialSpec");
+            throw new InvalidAlgorithmParameterException(
+                    "no KDF specified for UserKeyingMaterialSpec");
         }
-        ECPrivateKeyParameters privKey = (ECPrivateKeyParameters) ECUtil.generatePrivateKeyParameter((PrivateKey) key);
+        ECPrivateKeyParameters privKey =
+                (ECPrivateKeyParameters) ECUtil.generatePrivateKeyParameter((PrivateKey) key);
         this.parameters = privKey.getParameters();
-        this.ukmParameters = parameterSpec instanceof UserKeyingMaterialSpec ? ((UserKeyingMaterialSpec) parameterSpec).getUserKeyingMaterial() : null;
+        this.ukmParameters =
+                parameterSpec instanceof UserKeyingMaterialSpec
+                        ? ((UserKeyingMaterialSpec) parameterSpec).getUserKeyingMaterial()
+                        : null;
         ((BasicAgreement) this.agreement).init(privKey);
     }
 

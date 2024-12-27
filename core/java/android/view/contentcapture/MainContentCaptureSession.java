@@ -20,13 +20,12 @@ import android.util.TimeUtils;
 import android.view.View;
 import android.view.ViewStructure;
 import android.view.autofill.AutofillId;
-import android.view.contentcapture.ContentCaptureManager;
-import android.view.contentcapture.IContentCaptureDirectManager;
-import android.view.contentcapture.ViewNode;
 import android.view.contentprotection.ContentProtectionEventProcessor;
 import android.view.inputmethod.BaseInputConnection;
+
 import com.android.internal.os.IResultReceiver;
 import com.android.modules.expresslog.Counter;
+
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -38,7 +37,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /* loaded from: classes4.dex */
 public final class MainContentCaptureSession extends ContentCaptureSession {
-    private static final String CONTENT_CAPTURE_WRONG_THREAD_METRIC_ID = "content_capture.value_content_capture_wrong_thread_count";
+    private static final String CONTENT_CAPTURE_WRONG_THREAD_METRIC_ID =
+            "content_capture.value_content_capture_wrong_thread_count";
     private static final boolean FORCE_FLUSH = true;
     private static final int MSG_FLUSH = 1;
     private static final String TAG = MainContentCaptureSession.class.getSimpleName();
@@ -87,28 +87,36 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                     binder = resultData.getBinder("binder");
                     if (binder == null) {
                         Log.wtf(MainContentCaptureSession.TAG, "No binder extra result");
-                        mainSession.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$SessionStateReceiver$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                MainContentCaptureSession.this.resetSession(260);
-                            }
-                        });
+                        mainSession.mHandler.post(
+                                new Runnable() { // from class:
+                                                 // android.view.contentcapture.MainContentCaptureSession$SessionStateReceiver$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        MainContentCaptureSession.this.resetSession(260);
+                                    }
+                                });
                         return;
                     }
                 }
             } else {
                 binder = null;
             }
-            mainSession.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$SessionStateReceiver$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    MainContentCaptureSession.this.onSessionStarted(resultCode, binder);
-                }
-            });
+            mainSession.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.contentcapture.MainContentCaptureSession$SessionStateReceiver$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            MainContentCaptureSession.this.onSessionStarted(resultCode, binder);
+                        }
+                    });
         }
     }
 
-    public MainContentCaptureSession(ContentCaptureManager.StrippedContext context, ContentCaptureManager manager, Handler handler, IContentCaptureManager systemServerInterface) {
+    public MainContentCaptureSession(
+            ContentCaptureManager.StrippedContext context,
+            ContentCaptureManager manager,
+            Handler handler,
+            IContentCaptureManager systemServerInterface) {
         this.mContext = context;
         this.mManager = manager;
         this.mHandler = handler;
@@ -135,11 +143,23 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
         checkOnUiThread();
         if (isContentCaptureEnabled()) {
             if (ContentCaptureHelper.sVerbose) {
-                Log.v(TAG, "start(): token=" + token + ", comp=" + ComponentName.flattenToShortString(component));
+                Log.v(
+                        TAG,
+                        "start(): token="
+                                + token
+                                + ", comp="
+                                + ComponentName.flattenToShortString(component));
             }
             if (hasStarted()) {
                 if (ContentCaptureHelper.sDebug) {
-                    Log.d(TAG, "ignoring handleStartSession(" + token + "/" + ComponentName.flattenToShortString(component) + " while on state " + getStateAsString(this.mState));
+                    Log.d(
+                            TAG,
+                            "ignoring handleStartSession("
+                                    + token
+                                    + "/"
+                                    + ComponentName.flattenToShortString(component)
+                                    + " while on state "
+                                    + getStateAsString(this.mState));
                     return;
                 }
                 return;
@@ -149,12 +169,30 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
             this.mShareableActivityToken = shareableActivityToken;
             this.mComponentName = component;
             if (ContentCaptureHelper.sVerbose) {
-                Log.v(TAG, "handleStartSession(): token=" + token + ", act=" + getDebugState() + ", id=" + this.mId);
+                Log.v(
+                        TAG,
+                        "handleStartSession(): token="
+                                + token
+                                + ", act="
+                                + getDebugState()
+                                + ", id="
+                                + this.mId);
             }
             try {
-                this.mSystemServerInterface.startSession(this.mApplicationToken, this.mShareableActivityToken, component, this.mId, flags, this.mSessionStateReceiver);
+                this.mSystemServerInterface.startSession(
+                        this.mApplicationToken,
+                        this.mShareableActivityToken,
+                        component,
+                        this.mId,
+                        flags,
+                        this.mSessionStateReceiver);
             } catch (RemoteException e) {
-                Log.w(TAG, "Error starting session for " + component.flattenToShortString() + ": " + e);
+                Log.w(
+                        TAG,
+                        "Error starting session for "
+                                + component.flattenToShortString()
+                                + ": "
+                                + e);
             }
         }
     }
@@ -162,12 +200,14 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
     @Override // android.view.contentcapture.ContentCaptureSession
     void onDestroy() {
         this.mHandler.removeMessages(1);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda5
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$onDestroy$0();
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda5
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$onDestroy$0();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -183,12 +223,15 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
         checkOnUiThread();
         if (binder != null) {
             this.mDirectServiceInterface = IContentCaptureDirectManager.Stub.asInterface(binder);
-            this.mDirectServiceVulture = new IBinder.DeathRecipient() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda13
-                @Override // android.os.IBinder.DeathRecipient
-                public final void binderDied() {
-                    MainContentCaptureSession.this.lambda$onSessionStarted$1();
-                }
-            };
+            this.mDirectServiceVulture =
+                    new IBinder
+                            .DeathRecipient() { // from class:
+                                                // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda13
+                        @Override // android.os.IBinder.DeathRecipient
+                        public final void binderDied() {
+                            MainContentCaptureSession.this.lambda$onSessionStarted$1();
+                        }
+                    };
             try {
                 binder.linkToDeath(this.mDirectServiceVulture, 0);
             } catch (RemoteException e) {
@@ -196,7 +239,13 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
             }
         }
         if (isContentProtectionEnabled()) {
-            this.mContentProtectionEventProcessor = new ContentProtectionEventProcessor(this.mManager.getContentProtectionEventBuffer(), this.mHandler, this.mSystemServerInterface, this.mComponentName.getPackageName(), this.mManager.mOptions.contentProtectionOptions);
+            this.mContentProtectionEventProcessor =
+                    new ContentProtectionEventProcessor(
+                            this.mManager.getContentProtectionEventBuffer(),
+                            this.mHandler,
+                            this.mSystemServerInterface,
+                            this.mComponentName.getPackageName(),
+                            this.mManager.mOptions.contentProtectionOptions);
         } else {
             this.mContentProtectionEventProcessor = null;
         }
@@ -208,7 +257,20 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
             lambda$scheduleFlush$2(7);
         }
         if (ContentCaptureHelper.sVerbose) {
-            Log.v(TAG, "handleSessionStarted() result: id=" + this.mId + " resultCode=" + resultCode + ", state=" + getStateAsString(this.mState) + ", disabled=" + this.mDisabled.get() + ", binder=" + binder + ", events=" + (this.mEvents != null ? this.mEvents.size() : 0));
+            Log.v(
+                    TAG,
+                    "handleSessionStarted() result: id="
+                            + this.mId
+                            + " resultCode="
+                            + resultCode
+                            + ", state="
+                            + getStateAsString(this.mState)
+                            + ", disabled="
+                            + this.mDisabled.get()
+                            + ", binder="
+                            + binder
+                            + ", events="
+                            + (this.mEvents != null ? this.mEvents.size() : 0));
         }
     }
 
@@ -232,7 +294,13 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
         }
         if (!hasStarted() && eventType != -1 && eventType != 6) {
             if (ContentCaptureHelper.sVerbose) {
-                Log.v(TAG, "handleSendEvent(" + getDebugState() + ", " + ContentCaptureEvent.getTypeAsString(eventType) + "): dropping because session not started yet");
+                Log.v(
+                        TAG,
+                        "handleSendEvent("
+                                + getDebugState()
+                                + ", "
+                                + ContentCaptureEvent.getTypeAsString(eventType)
+                                + "): dropping because session not started yet");
                 return;
             }
             return;
@@ -298,8 +366,12 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                 }
                 if (lastEvent != null && lastEvent.hasComposingSpan()) {
                     CharSequence lastText = lastEvent.getText();
-                    boolean bothNonEmpty = (TextUtils.isEmpty(lastText) || TextUtils.isEmpty(text)) ? false : true;
-                    boolean equalContent = TextUtils.equals(lastText, text) && lastEvent.hasSameComposingSpan(event) && lastEvent.hasSameSelectionSpan(event);
+                    boolean bothNonEmpty =
+                            (TextUtils.isEmpty(lastText) || TextUtils.isEmpty(text)) ? false : true;
+                    boolean equalContent =
+                            TextUtils.equals(lastText, text)
+                                    && lastEvent.hasSameComposingSpan(event)
+                                    && lastEvent.hasSameSelectionSpan(event);
                     if (equalContent) {
                         addEvent = false;
                     } else if (bothNonEmpty) {
@@ -307,7 +379,10 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                         addEvent = false;
                     }
                     if (!addEvent && ContentCaptureHelper.sVerbose) {
-                        Log.v(TAG, "Buffering VIEW_TEXT_CHANGED event, updated text=" + ContentCaptureHelper.getSanitizedString(text));
+                        Log.v(
+                                TAG,
+                                "Buffering VIEW_TEXT_CHANGED event, updated text="
+                                        + ContentCaptureHelper.getSanitizedString(text));
                     }
                 }
             }
@@ -316,7 +391,10 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
             ContentCaptureEvent lastEvent2 = this.mEvents.get(this.mEvents.size() - 1);
             if (lastEvent2.getType() == 2 && event.getSessionId() == lastEvent2.getSessionId()) {
                 if (ContentCaptureHelper.sVerbose) {
-                    Log.v(TAG, "Buffering TYPE_VIEW_DISAPPEARED events for session " + lastEvent2.getSessionId());
+                    Log.v(
+                            TAG,
+                            "Buffering TYPE_VIEW_DISAPPEARED events for session "
+                                    + lastEvent2.getSessionId());
                 }
                 lastEvent2.mergeEvent(event);
                 addEvent = false;
@@ -347,7 +425,13 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
         int flushReason3 = this.mState;
         if (flushReason3 != 2 && numberEvents >= maxBufferSize) {
             if (ContentCaptureHelper.sDebug) {
-                Log.d(TAG, "Closing session for " + getDebugState() + " after " + numberEvents + " delayed events");
+                Log.d(
+                        TAG,
+                        "Closing session for "
+                                + getDebugState()
+                                + " after "
+                                + numberEvents
+                                + " delayed events");
             }
             resetSession(132);
             return;
@@ -381,7 +465,12 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
         int flushFrequencyMs;
         checkOnUiThread();
         if (ContentCaptureHelper.sVerbose) {
-            Log.v(TAG, "handleScheduleFlush(" + getDebugState(reason) + ", checkExisting=" + checkExisting);
+            Log.v(
+                    TAG,
+                    "handleScheduleFlush("
+                            + getDebugState(reason)
+                            + ", checkExisting="
+                            + checkExisting);
         }
         if (!hasStarted()) {
             if (ContentCaptureHelper.sVerbose) {
@@ -391,7 +480,12 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
             return;
         }
         if (this.mDisabled.get()) {
-            Log.e(TAG, "handleScheduleFlush(" + getDebugState(reason) + "): should not be called when disabled. events=" + (this.mEvents == null ? null : Integer.valueOf(this.mEvents.size())));
+            Log.e(
+                    TAG,
+                    "handleScheduleFlush("
+                            + getDebugState(reason)
+                            + "): should not be called when disabled. events="
+                            + (this.mEvents == null ? null : Integer.valueOf(this.mEvents.size())));
             return;
         }
         if (checkExisting && this.mHandler.hasMessages(1)) {
@@ -401,20 +495,34 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
             flushFrequencyMs = this.mManager.mOptions.textChangeFlushingFrequencyMs;
         } else {
             if (reason != 5 && ContentCaptureHelper.sDebug) {
-                Log.d(TAG, "handleScheduleFlush(" + getDebugState(reason) + "): not a timeout reason because mDirectServiceInterface is not ready yet");
+                Log.d(
+                        TAG,
+                        "handleScheduleFlush("
+                                + getDebugState(reason)
+                                + "): not a timeout reason because mDirectServiceInterface is not"
+                                + " ready yet");
             }
             flushFrequencyMs = this.mManager.mOptions.idleFlushingFrequencyMs;
         }
         this.mNextFlush = System.currentTimeMillis() + flushFrequencyMs;
         if (ContentCaptureHelper.sVerbose) {
-            Log.v(TAG, "handleScheduleFlush(): scheduled to flush in " + flushFrequencyMs + "ms: " + TimeUtils.logTimeOfDay(this.mNextFlush));
+            Log.v(
+                    TAG,
+                    "handleScheduleFlush(): scheduled to flush in "
+                            + flushFrequencyMs
+                            + "ms: "
+                            + TimeUtils.logTimeOfDay(this.mNextFlush));
         }
-        this.mHandler.postDelayed(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$scheduleFlush$2(reason);
-            }
-        }, 1, flushFrequencyMs);
+        this.mHandler.postDelayed(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$scheduleFlush$2(reason);
+                    }
+                },
+                1,
+                flushFrequencyMs);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -442,7 +550,9 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
             return;
         }
         if (this.mDisabled.get()) {
-            Log.e(TAG, "handleForceFlush(" + getDebugState(reason) + "): should not be when disabled");
+            Log.e(
+                    TAG,
+                    "handleForceFlush(" + getDebugState(reason) + "): should not be when disabled");
             return;
         }
         if (!isContentCaptureReceiverEnabled()) {
@@ -450,7 +560,12 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
         }
         if (this.mDirectServiceInterface == null) {
             if (ContentCaptureHelper.sVerbose) {
-                Log.v(TAG, "handleForceFlush(" + getDebugState(reason) + "): hold your horses, client not ready: " + this.mEvents);
+                Log.v(
+                        TAG,
+                        "handleForceFlush("
+                                + getDebugState(reason)
+                                + "): hold your horses, client not ready: "
+                                + this.mEvents);
             }
             if (!this.mHandler.hasMessages(1)) {
                 scheduleFlush(reason, false);
@@ -463,11 +578,29 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
         String reasonString = getFlushReasonAsString(reason);
         if (ContentCaptureHelper.sVerbose) {
             ContentCaptureEvent event = this.mEvents.get(numberEvents - 1);
-            String forceString = reason == 8 ? ". The force flush event " + ContentCaptureEvent.getTypeAsString(event.getType()) : "";
-            Log.v(TAG, "Flushing " + numberEvents + " event(s) for " + getDebugState(reason) + forceString);
+            String forceString =
+                    reason == 8
+                            ? ". The force flush event "
+                                    + ContentCaptureEvent.getTypeAsString(event.getType())
+                            : "";
+            Log.v(
+                    TAG,
+                    "Flushing "
+                            + numberEvents
+                            + " event(s) for "
+                            + getDebugState(reason)
+                            + forceString);
         }
         if (this.mFlushHistory != null) {
-            String logRecord = "r=" + reasonString + " s=" + numberEvents + " m=" + this.mManager.mOptions.maxBufferSize + " i=" + this.mManager.mOptions.idleFlushingFrequencyMs;
+            String logRecord =
+                    "r="
+                            + reasonString
+                            + " s="
+                            + numberEvents
+                            + " m="
+                            + this.mManager.mOptions.maxBufferSize
+                            + " i="
+                            + this.mManager.mOptions.idleFlushingFrequencyMs;
             this.mFlushHistory.log(logRecord);
         }
         try {
@@ -497,13 +630,29 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
     public void destroySession() {
         checkOnUiThread();
         if (ContentCaptureHelper.sDebug) {
-            Log.d(TAG, "Destroying session (ctx=" + this.mContext + ", id=" + this.mId + ") with " + (this.mEvents == null ? 0 : this.mEvents.size()) + " event(s) for " + getDebugState());
+            Log.d(
+                    TAG,
+                    "Destroying session (ctx="
+                            + this.mContext
+                            + ", id="
+                            + this.mId
+                            + ") with "
+                            + (this.mEvents == null ? 0 : this.mEvents.size())
+                            + " event(s) for "
+                            + getDebugState());
         }
         reportWrongThreadMetric();
         try {
             this.mSystemServerInterface.finishSession(this.mId);
         } catch (RemoteException e) {
-            Log.e(TAG, "Error destroying system-service session " + this.mId + " for " + getDebugState() + ": " + e);
+            Log.e(
+                    TAG,
+                    "Error destroying system-service session "
+                            + this.mId
+                            + " for "
+                            + getDebugState()
+                            + ": "
+                            + e);
         }
         if (this.mDirectServiceInterface != null) {
             this.mDirectServiceInterface.asBinder().unlinkToDeath(this.mDirectServiceVulture, 0);
@@ -515,7 +664,14 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
     public void resetSession(int newState) {
         checkOnUiThread();
         if (ContentCaptureHelper.sVerbose) {
-            Log.v(TAG, "handleResetSession(" + getActivityName() + "): from " + getStateAsString(this.mState) + " to " + getStateAsString(newState));
+            Log.v(
+                    TAG,
+                    "handleResetSession("
+                            + getActivityName()
+                            + "): from "
+                            + getStateAsString(this.mState)
+                            + " to "
+                            + getStateAsString(newState));
         }
         this.mState = newState;
         this.mDisabled.set((newState & 4) != 0);
@@ -525,7 +681,9 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
         this.mEvents = null;
         if (this.mDirectServiceInterface != null) {
             try {
-                this.mDirectServiceInterface.asBinder().unlinkToDeath(this.mDirectServiceVulture, 0);
+                this.mDirectServiceInterface
+                        .asBinder()
+                        .unlinkToDeath(this.mDirectServiceVulture, 0);
             } catch (NoSuchElementException e) {
                 Log.w(TAG, "IContentCaptureDirectManager does not exist");
             }
@@ -537,24 +695,30 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
 
     @Override // android.view.contentcapture.ContentCaptureSession
     void internalNotifyViewAppeared(int sessionId, ViewNode.ViewStructureImpl node) {
-        final ContentCaptureEvent event = new ContentCaptureEvent(sessionId, 1).setViewNode(node.mNode);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda6
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$internalNotifyViewAppeared$3(event);
-            }
-        });
+        final ContentCaptureEvent event =
+                new ContentCaptureEvent(sessionId, 1).setViewNode(node.mNode);
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda6
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$internalNotifyViewAppeared$3(event);
+                    }
+                });
     }
 
     @Override // android.view.contentcapture.ContentCaptureSession
     void internalNotifyViewDisappeared(int sessionId, AutofillId id) {
         final ContentCaptureEvent event = new ContentCaptureEvent(sessionId, 2).setAutofillId(id);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda12
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$internalNotifyViewDisappeared$4(event);
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda12
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$internalNotifyViewDisappeared$4(
+                                event);
+                    }
+                });
     }
 
     @Override // android.view.contentcapture.ContentCaptureSession
@@ -577,39 +741,52 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
         }
         int startIndex = Selection.getSelectionStart(text);
         int endIndex = Selection.getSelectionEnd(text);
-        final ContentCaptureEvent event = new ContentCaptureEvent(sessionId, 3).setAutofillId(id).setText(eventText).setComposingIndex(composingStart, composingEnd).setSelectionIndex(startIndex, endIndex);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda8
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$internalNotifyViewTextChanged$5(event);
-            }
-        });
+        final ContentCaptureEvent event =
+                new ContentCaptureEvent(sessionId, 3)
+                        .setAutofillId(id)
+                        .setText(eventText)
+                        .setComposingIndex(composingStart, composingEnd)
+                        .setSelectionIndex(startIndex, endIndex);
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda8
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$internalNotifyViewTextChanged$5(
+                                event);
+                    }
+                });
     }
 
     @Override // android.view.contentcapture.ContentCaptureSession
     void internalNotifyViewInsetsChanged(int sessionId, Insets viewInsets) {
-        final ContentCaptureEvent event = new ContentCaptureEvent(sessionId, 9).setInsets(viewInsets);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda11
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$internalNotifyViewInsetsChanged$6(event);
-            }
-        });
+        final ContentCaptureEvent event =
+                new ContentCaptureEvent(sessionId, 9).setInsets(viewInsets);
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda11
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$internalNotifyViewInsetsChanged$6(
+                                event);
+                    }
+                });
     }
 
     @Override // android.view.contentcapture.ContentCaptureSession
     public void internalNotifyViewTreeEvent(int sessionId, boolean started) {
         int type = started ? 4 : 5;
         boolean disableFlush = this.mManager.getFlushViewTreeAppearingEventDisabled();
-        if (disableFlush && started) {
-        }
+        if (disableFlush && started) {}
         final ContentCaptureEvent event = new ContentCaptureEvent(sessionId, type);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda10
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$internalNotifyViewTreeEvent$7(event);
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda10
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$internalNotifyViewTreeEvent$7(event);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -620,12 +797,14 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
     @Override // android.view.contentcapture.ContentCaptureSession
     public void internalNotifySessionResumed() {
         final ContentCaptureEvent event = new ContentCaptureEvent(this.mId, 7);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda7
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$internalNotifySessionResumed$8(event);
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda7
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$internalNotifySessionResumed$8(event);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -636,12 +815,14 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
     @Override // android.view.contentcapture.ContentCaptureSession
     public void internalNotifySessionPaused() {
         final ContentCaptureEvent event = new ContentCaptureEvent(this.mId, 8);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda4
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$internalNotifySessionPaused$9(event);
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda4
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$internalNotifySessionPaused$9(event);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -665,46 +846,63 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
     }
 
     @Override // android.view.contentcapture.ContentCaptureSession
-    void internalNotifyChildSessionStarted(int parentSessionId, int childSessionId, ContentCaptureContext clientContext) {
-        final ContentCaptureEvent event = new ContentCaptureEvent(childSessionId, -1).setParentSessionId(parentSessionId).setClientContext(clientContext);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$internalNotifyChildSessionStarted$10(event);
-            }
-        });
+    void internalNotifyChildSessionStarted(
+            int parentSessionId, int childSessionId, ContentCaptureContext clientContext) {
+        final ContentCaptureEvent event =
+                new ContentCaptureEvent(childSessionId, -1)
+                        .setParentSessionId(parentSessionId)
+                        .setClientContext(clientContext);
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$internalNotifyChildSessionStarted$10(
+                                event);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$internalNotifyChildSessionStarted$10(ContentCaptureEvent event) {
+    public /* synthetic */ void lambda$internalNotifyChildSessionStarted$10(
+            ContentCaptureEvent event) {
         sendEvent(event, true);
     }
 
     @Override // android.view.contentcapture.ContentCaptureSession
     void internalNotifyChildSessionFinished(int parentSessionId, int childSessionId) {
-        final ContentCaptureEvent event = new ContentCaptureEvent(childSessionId, -2).setParentSessionId(parentSessionId);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda9
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$internalNotifyChildSessionFinished$11(event);
-            }
-        });
+        final ContentCaptureEvent event =
+                new ContentCaptureEvent(childSessionId, -2).setParentSessionId(parentSessionId);
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda9
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$internalNotifyChildSessionFinished$11(
+                                event);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$internalNotifyChildSessionFinished$11(ContentCaptureEvent event) {
+    public /* synthetic */ void lambda$internalNotifyChildSessionFinished$11(
+            ContentCaptureEvent event) {
         sendEvent(event, true);
     }
 
     @Override // android.view.contentcapture.ContentCaptureSession
     void internalNotifyContextUpdated(int sessionId, ContentCaptureContext context) {
-        final ContentCaptureEvent event = new ContentCaptureEvent(sessionId, 6).setClientContext(context);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$internalNotifyContextUpdated$12(event);
-            }
-        });
+        final ContentCaptureEvent event =
+                new ContentCaptureEvent(sessionId, 6).setClientContext(context);
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$internalNotifyContextUpdated$12(
+                                event);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -715,12 +913,14 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
     @Override // android.view.contentcapture.ContentCaptureSession
     public void notifyWindowBoundsChanged(int sessionId, Rect bounds) {
         final ContentCaptureEvent event = new ContentCaptureEvent(sessionId, 10).setBounds(bounds);
-        this.mHandler.post(new Runnable() { // from class: android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda3
-            @Override // java.lang.Runnable
-            public final void run() {
-                MainContentCaptureSession.this.lambda$notifyWindowBoundsChanged$13(event);
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.view.contentcapture.MainContentCaptureSession$$ExternalSyntheticLambda3
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MainContentCaptureSession.this.lambda$notifyWindowBoundsChanged$13(event);
+                    }
+                });
     }
 
     @Override // android.view.contentcapture.ContentCaptureSession
@@ -728,7 +928,8 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
         notifyContentCaptureEventsImpl(contentCaptureEvents);
     }
 
-    private void notifyContentCaptureEventsImpl(SparseArray<ArrayList<Object>> contentCaptureEvents) {
+    private void notifyContentCaptureEventsImpl(
+            SparseArray<ArrayList<Object>> contentCaptureEvents) {
         checkOnUiThread();
         try {
             if (Trace.isTagEnabled(8L)) {
@@ -750,7 +951,15 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
                         } else {
                             int actualId = session.getId();
                             if (actualId != sessionId) {
-                                Log.w(TAG, "content capture session mismatch for view (" + view + "): was " + sessionId + " before, it's " + actualId + " now");
+                                Log.w(
+                                        TAG,
+                                        "content capture session mismatch for view ("
+                                                + view
+                                                + "): was "
+                                                + sessionId
+                                                + " before, it's "
+                                                + actualId
+                                                + " now");
                             } else {
                                 ViewStructure structure = session.newViewStructure(view);
                                 view.onProvideContentCaptureStructure(structure, 0);
@@ -863,7 +1072,12 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
     }
 
     private String getDebugState() {
-        return getActivityName() + " [state=" + getStateAsString(this.mState) + ", disabled=" + this.mDisabled.get() + NavigationBarInflaterView.SIZE_MOD_END;
+        return getActivityName()
+                + " [state="
+                + getStateAsString(this.mState)
+                + ", disabled="
+                + this.mDisabled.get()
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     private String getDebugState(int reason) {
@@ -879,7 +1093,14 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
     }
 
     private boolean isContentProtectionEnabled() {
-        return (!this.mManager.mOptions.contentProtectionOptions.enableReceiver || this.mManager.getContentProtectionEventBuffer() == null || this.mComponentName == null || (this.mManager.mOptions.contentProtectionOptions.requiredGroups.isEmpty() && this.mManager.mOptions.contentProtectionOptions.optionalGroups.isEmpty())) ? false : true;
+        return (!this.mManager.mOptions.contentProtectionOptions.enableReceiver
+                        || this.mManager.getContentProtectionEventBuffer() == null
+                        || this.mComponentName == null
+                        || (this.mManager.mOptions.contentProtectionOptions.requiredGroups.isEmpty()
+                                && this.mManager.mOptions.contentProtectionOptions.optionalGroups
+                                        .isEmpty()))
+                ? false
+                : true;
     }
 
     private void checkOnUiThread() {
@@ -891,6 +1112,7 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
     }
 
     private void reportWrongThreadMetric() {
-        Counter.logIncrement(CONTENT_CAPTURE_WRONG_THREAD_METRIC_ID, this.mWrongThreadCount.getAndSet(0));
+        Counter.logIncrement(
+                CONTENT_CAPTURE_WRONG_THREAD_METRIC_ID, this.mWrongThreadCount.getAndSet(0));
     }
 }

@@ -10,7 +10,7 @@ import android.os.Message;
 import android.os.Parcel;
 import android.os.Process;
 import android.util.Log;
-import com.samsung.android.media.SemMediaResourceHelper;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -65,12 +65,16 @@ public class SemAsyncVideoFrameDecoder {
     }
 
     public interface OnVideoFrameListener {
-        void onVideoFrame(SemAsyncVideoFrameDecoder semAsyncVideoFrameDecoder, Bitmap bitmap, int i, int i2);
+        void onVideoFrame(
+                SemAsyncVideoFrameDecoder semAsyncVideoFrameDecoder, Bitmap bitmap, int i, int i2);
     }
 
-    private native void _init(IBinder iBinder, String str, String[] strArr, String[] strArr2, String str2) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException;
+    private native void _init(
+            IBinder iBinder, String str, String[] strArr, String[] strArr2, String str2)
+            throws IOException, IllegalArgumentException, SecurityException, IllegalStateException;
 
-    private native void _init(FileDescriptor fileDescriptor, long j, long j2) throws IOException, IllegalArgumentException, IllegalStateException;
+    private native void _init(FileDescriptor fileDescriptor, long j, long j2)
+            throws IOException, IllegalArgumentException, IllegalStateException;
 
     private native void _release();
 
@@ -119,19 +123,24 @@ public class SemAsyncVideoFrameDecoder {
         native_setup(new WeakReference(this));
     }
 
-    public void init(FileDescriptor fd) throws IOException, IllegalArgumentException, IllegalStateException {
+    public void init(FileDescriptor fd)
+            throws IOException, IllegalArgumentException, IllegalStateException {
         init(fd, 0L, 576460752303423487L);
     }
 
-    public void init(FileDescriptor fd, long offset, long length) throws IOException, IllegalArgumentException, IllegalStateException {
+    public void init(FileDescriptor fd, long offset, long length)
+            throws IOException, IllegalArgumentException, IllegalStateException {
         _init(fd, offset, length);
     }
 
-    public void init(String path) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    public void init(String path)
+            throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
         init(path, null, null, null);
     }
 
-    private void init(String path, Map<String, String> headers, List<HttpCookie> cookies, String cacheDir) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    private void init(
+            String path, Map<String, String> headers, List<HttpCookie> cookies, String cacheDir)
+            throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
         String[] keys = null;
         String[] values = null;
         if (headers != null) {
@@ -147,7 +156,9 @@ public class SemAsyncVideoFrameDecoder {
         init(path, keys, values, cookies, cacheDir);
     }
 
-    private void init(String path, String[] keys, String[] values, List<HttpCookie> cookies, String cacheDir) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    private void init(
+            String path, String[] keys, String[] values, List<HttpCookie> cookies, String cacheDir)
+            throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
         FileDescriptor fd;
         Uri uri = Uri.parse(path);
         String scheme = uri.getScheme();
@@ -182,7 +193,8 @@ public class SemAsyncVideoFrameDecoder {
         _setSeekOption(option);
     }
 
-    public void setOutputImageSize(int dstWidth, int dstHeight, boolean keepAspectRatio) throws IllegalStateException {
+    public void setOutputImageSize(int dstWidth, int dstHeight, boolean keepAspectRatio)
+            throws IllegalStateException {
         _setOutputImageSize(dstWidth, dstHeight, keepAspectRatio);
     }
 
@@ -201,7 +213,8 @@ public class SemAsyncVideoFrameDecoder {
             for (int i = 0; i < listSize; i++) {
                 Integer timeMs = timeMsList.get(i);
                 if (timeMs.intValue() < 0) {
-                    throw new IllegalArgumentException("abnormal frame time. timeMsList[" + i + "] = " + timeMs);
+                    throw new IllegalArgumentException(
+                            "abnormal frame time. timeMsList[" + i + "] = " + timeMs);
                 }
                 request.writeInt(timeMs.intValue());
             }
@@ -227,7 +240,8 @@ public class SemAsyncVideoFrameDecoder {
         int currentUsage = 0;
         int myPid = Process.myPid();
         if (myPid > 0) {
-            ArrayList<SemMediaResourceHelper.MediaResourceInfo> videoResourceInfo = this.mSemMediaResourceHelper.getMediaResourceInfo(2);
+            ArrayList<SemMediaResourceHelper.MediaResourceInfo> videoResourceInfo =
+                    this.mSemMediaResourceHelper.getMediaResourceInfo(2);
             Iterator<SemMediaResourceHelper.MediaResourceInfo> it = videoResourceInfo.iterator();
             while (it.hasNext()) {
                 SemMediaResourceHelper.MediaResourceInfo info = it.next();
@@ -241,7 +255,12 @@ public class SemAsyncVideoFrameDecoder {
                     } else if (frameRate <= 15) {
                         scale = 0.5f;
                     }
-                    currentUsage = (int) (currentUsage + (info.getVideoWidth() * info.getVideoHeight() * scale));
+                    currentUsage =
+                            (int)
+                                    (currentUsage
+                                            + (info.getVideoWidth()
+                                                    * info.getVideoHeight()
+                                                    * scale));
                 }
             }
         }
@@ -291,25 +310,42 @@ public class SemAsyncVideoFrameDecoder {
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
             if (this.mVideoFrameDecoder.mNativeContext == 0) {
-                Log.w(SemAsyncVideoFrameDecoder.TAG, "VideoFrameDecoder went away with unhandled events");
+                Log.w(
+                        SemAsyncVideoFrameDecoder.TAG,
+                        "VideoFrameDecoder went away with unhandled events");
             }
             switch (msg.what) {
                 case 1:
                     Log.i(SemAsyncVideoFrameDecoder.TAG, "VIDEO_FRAME");
                     if (SemAsyncVideoFrameDecoder.this.mOnVideoFrameListener != null) {
                         Bitmap outBitmap = (Bitmap) msg.obj;
-                        SemAsyncVideoFrameDecoder.this.mOnVideoFrameListener.onVideoFrame(this.mVideoFrameDecoder, outBitmap, msg.arg1, msg.arg2);
+                        SemAsyncVideoFrameDecoder.this.mOnVideoFrameListener.onVideoFrame(
+                                this.mVideoFrameDecoder, outBitmap, msg.arg1, msg.arg2);
                         break;
                     }
                     break;
                 case 100:
-                    Log.e(SemAsyncVideoFrameDecoder.TAG, "Error (" + msg.arg1 + "," + msg.arg2 + NavigationBarInflaterView.KEY_CODE_END);
+                    Log.e(
+                            SemAsyncVideoFrameDecoder.TAG,
+                            "Error ("
+                                    + msg.arg1
+                                    + ","
+                                    + msg.arg2
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                     boolean error_was_handled = false;
                     if (SemAsyncVideoFrameDecoder.this.mOnErrorListener != null) {
-                        error_was_handled = SemAsyncVideoFrameDecoder.this.mOnErrorListener.onError(this.mVideoFrameDecoder, msg.arg1, msg.arg2);
+                        error_was_handled =
+                                SemAsyncVideoFrameDecoder.this.mOnErrorListener.onError(
+                                        this.mVideoFrameDecoder, msg.arg1, msg.arg2);
                     }
                     if (!error_was_handled) {
-                        Log.i(SemAsyncVideoFrameDecoder.TAG, "Error is not handled(" + msg.arg1 + "," + msg.arg2 + NavigationBarInflaterView.KEY_CODE_END);
+                        Log.i(
+                                SemAsyncVideoFrameDecoder.TAG,
+                                "Error is not handled("
+                                        + msg.arg1
+                                        + ","
+                                        + msg.arg2
+                                        + NavigationBarInflaterView.KEY_CODE_END);
                         break;
                     }
                     break;
@@ -317,13 +353,15 @@ public class SemAsyncVideoFrameDecoder {
                     if (msg.arg1 == 201) {
                         Log.i(SemAsyncVideoFrameDecoder.TAG, "INIT_COMPLETED");
                         if (SemAsyncVideoFrameDecoder.this.mOnInitCompleteListener != null) {
-                            SemAsyncVideoFrameDecoder.this.mOnInitCompleteListener.onInitCompleted(this.mVideoFrameDecoder);
+                            SemAsyncVideoFrameDecoder.this.mOnInitCompleteListener.onInitCompleted(
+                                    this.mVideoFrameDecoder);
                             break;
                         }
                     } else if (msg.arg1 == 202) {
                         Log.i(SemAsyncVideoFrameDecoder.TAG, "DECODING_COMPLETED");
                         if (SemAsyncVideoFrameDecoder.this.mOnDecodingCompleteListener != null) {
-                            SemAsyncVideoFrameDecoder.this.mOnDecodingCompleteListener.onDecodingCompleted(this.mVideoFrameDecoder, msg.arg2);
+                            SemAsyncVideoFrameDecoder.this.mOnDecodingCompleteListener
+                                    .onDecodingCompleted(this.mVideoFrameDecoder, msg.arg2);
                             break;
                         }
                     }

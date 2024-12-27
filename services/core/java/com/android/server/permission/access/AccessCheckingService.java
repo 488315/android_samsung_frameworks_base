@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageManagerInternal;
 import android.os.SystemProperties;
 import android.permission.PermissionManager;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.LocalManagerRegistry;
 import com.android.server.LocalServices;
@@ -27,7 +28,9 @@ import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
 import com.android.server.pm.PackageManagerLocal;
 import com.android.server.pm.UserManagerService;
 import com.android.server.pm.permission.PermissionManagerServiceInterface;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -55,9 +58,13 @@ public final class AccessCheckingService extends SystemService {
     }
 
     private final Pair getAllPackageStates(PackageManagerLocal packageManagerLocal) {
-        PackageManagerLocal.UnfilteredSnapshot withUnfilteredSnapshot = packageManagerLocal.withUnfilteredSnapshot();
+        PackageManagerLocal.UnfilteredSnapshot withUnfilteredSnapshot =
+                packageManagerLocal.withUnfilteredSnapshot();
         try {
-            Pair pair = new Pair(withUnfilteredSnapshot.getPackageStates(), withUnfilteredSnapshot.getDisabledSystemPackageStates());
+            Pair pair =
+                    new Pair(
+                            withUnfilteredSnapshot.getPackageStates(),
+                            withUnfilteredSnapshot.getDisabledSystemPackageStates());
             AutoCloseableKt.closeFinally(withUnfilteredSnapshot, null);
             return pair;
         } finally {
@@ -68,7 +75,8 @@ public final class AccessCheckingService extends SystemService {
         MutableIndexedMap mutableIndexedMap = new MutableIndexedMap();
         Iterator it = systemConfig.mSplitPermissions.iterator();
         while (it.hasNext()) {
-            PermissionManager.SplitPermissionInfo splitPermissionInfo = (PermissionManager.SplitPermissionInfo) it.next();
+            PermissionManager.SplitPermissionInfo splitPermissionInfo =
+                    (PermissionManager.SplitPermissionInfo) it.next();
             String splitPermission = splitPermissionInfo.getSplitPermission();
             for (String str : splitPermissionInfo.getNewPermissions()) {
                 Object obj = mutableIndexedMap.map.get(str);
@@ -98,7 +106,8 @@ public final class AccessCheckingService extends SystemService {
         return mutableIntMap;
     }
 
-    private final IndexedListSet getPrivilegedPermissionAllowlistPackages(SystemConfig systemConfig) {
+    private final IndexedListSet getPrivilegedPermissionAllowlistPackages(
+            SystemConfig systemConfig) {
         MutableIndexedListSet mutableIndexedListSet = new MutableIndexedListSet();
         mutableIndexedListSet.add("android");
         if (systemConfig.mAvailableFeatures.containsKey("android.hardware.type.automotive")) {
@@ -114,19 +123,28 @@ public final class AccessCheckingService extends SystemService {
         return systemConfig.mAvailableFeatures.containsKey("android.software.leanback");
     }
 
-    public final SchemePolicy getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(String str, String str2) {
+    public final SchemePolicy
+            getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                    String str, String str2) {
         IndexedMap indexedMap = (IndexedMap) this.policy.schemePolicies.map.get(str);
-        SchemePolicy schemePolicy = indexedMap != null ? (SchemePolicy) indexedMap.map.get(str2) : null;
+        SchemePolicy schemePolicy =
+                indexedMap != null ? (SchemePolicy) indexedMap.map.get(str2) : null;
         if (schemePolicy != null) {
             return schemePolicy;
         }
-        throw new IllegalStateException(XmlUtils$$ExternalSyntheticOutline0.m("Scheme policy for ", str, " and ", str2, " does not exist").toString());
+        throw new IllegalStateException(
+                XmlUtils$$ExternalSyntheticOutline0.m(
+                                "Scheme policy for ", str, " and ", str2, " does not exist")
+                        .toString());
     }
 
-    public final Object getState$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(Function1 function1) {
+    public final Object
+            getState$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                    Function1 function1) {
         AccessState accessState = this.state;
         if (accessState == null) {
-            Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+            Intrinsics.throwUninitializedPropertyAccessException(
+                    LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
             throw null;
         }
         function1.invoke(new GetStateScope(accessState));
@@ -143,15 +161,20 @@ public final class AccessCheckingService extends SystemService {
             Method dump skipped, instructions count: 1405
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.permission.access.AccessCheckingService.initialize():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.permission.access.AccessCheckingService.initialize():void");
     }
 
-    public final void mutateState$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(Function1 function1) {
+    public final void
+            mutateState$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                    Function1 function1) {
         synchronized (this.stateLock) {
             try {
                 AccessState accessState = this.state;
                 if (accessState == null) {
-                    Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                    Intrinsics.throwUninitializedPropertyAccessException(
+                            LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                     throw null;
                 }
                 function1.invoke(new MutateStateScope(accessState, accessState.toMutable()));
@@ -162,7 +185,9 @@ public final class AccessCheckingService extends SystemService {
         }
     }
 
-    public final void onPackageAdded$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(String str) {
+    public final void
+            onPackageAdded$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                    String str) {
         PackageManagerLocal packageManagerLocal = this.packageManagerLocal;
         if (packageManagerLocal == null) {
             Intrinsics.throwUninitializedPropertyAccessException("packageManagerLocal");
@@ -180,11 +205,13 @@ public final class AccessCheckingService extends SystemService {
         synchronized (this.stateLock) {
             AccessState accessState = this.state;
             if (accessState == null) {
-                Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                Intrinsics.throwUninitializedPropertyAccessException(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 throw null;
             }
             MutableAccessState mutable = accessState.toMutable();
-            this.policy.onPackageAdded(new MutateStateScope(accessState, mutable), map, map2, knownPackages, str);
+            this.policy.onPackageAdded(
+                    new MutateStateScope(accessState, mutable), map, map2, knownPackages, str);
             this.persistence.write(mutable);
             this.state = mutable;
             IndexedMap indexedMap = this.policy.schemePolicies;
@@ -200,7 +227,9 @@ public final class AccessCheckingService extends SystemService {
         }
     }
 
-    public final void onPackageInstalled$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(String str, int i) {
+    public final void
+            onPackageInstalled$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                    String str, int i) {
         PackageManagerLocal packageManagerLocal = this.packageManagerLocal;
         if (packageManagerLocal == null) {
             Intrinsics.throwUninitializedPropertyAccessException("packageManagerLocal");
@@ -218,11 +247,13 @@ public final class AccessCheckingService extends SystemService {
         synchronized (this.stateLock) {
             AccessState accessState = this.state;
             if (accessState == null) {
-                Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                Intrinsics.throwUninitializedPropertyAccessException(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 throw null;
             }
             MutableAccessState mutable = accessState.toMutable();
-            this.policy.onPackageInstalled(new MutateStateScope(accessState, mutable), map, map2, knownPackages, str, i);
+            this.policy.onPackageInstalled(
+                    new MutateStateScope(accessState, mutable), map, map2, knownPackages, str, i);
             this.persistence.write(mutable);
             this.state = mutable;
             IndexedMap indexedMap = this.policy.schemePolicies;
@@ -238,7 +269,9 @@ public final class AccessCheckingService extends SystemService {
         }
     }
 
-    public final void onPackageRemoved$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(String str, int i) {
+    public final void
+            onPackageRemoved$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                    String str, int i) {
         PackageManagerLocal packageManagerLocal = this.packageManagerLocal;
         if (packageManagerLocal == null) {
             Intrinsics.throwUninitializedPropertyAccessException("packageManagerLocal");
@@ -256,11 +289,13 @@ public final class AccessCheckingService extends SystemService {
         synchronized (this.stateLock) {
             AccessState accessState = this.state;
             if (accessState == null) {
-                Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                Intrinsics.throwUninitializedPropertyAccessException(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 throw null;
             }
             MutableAccessState mutable = accessState.toMutable();
-            this.policy.onPackageRemoved(new MutateStateScope(accessState, mutable), map, map2, knownPackages, str, i);
+            this.policy.onPackageRemoved(
+                    new MutateStateScope(accessState, mutable), map, map2, knownPackages, str, i);
             this.persistence.write(mutable);
             this.state = mutable;
             IndexedMap indexedMap = this.policy.schemePolicies;
@@ -276,7 +311,9 @@ public final class AccessCheckingService extends SystemService {
         }
     }
 
-    public final void onPackageUninstalled$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(String str, int i, int i2) {
+    public final void
+            onPackageUninstalled$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                    String str, int i, int i2) {
         PackageManagerLocal packageManagerLocal = this.packageManagerLocal;
         if (packageManagerLocal == null) {
             Intrinsics.throwUninitializedPropertyAccessException("packageManagerLocal");
@@ -294,11 +331,19 @@ public final class AccessCheckingService extends SystemService {
         synchronized (this.stateLock) {
             AccessState accessState = this.state;
             if (accessState == null) {
-                Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                Intrinsics.throwUninitializedPropertyAccessException(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 throw null;
             }
             MutableAccessState mutable = accessState.toMutable();
-            this.policy.onPackageUninstalled(new MutateStateScope(accessState, mutable), map, map2, knownPackages, str, i, i2);
+            this.policy.onPackageUninstalled(
+                    new MutateStateScope(accessState, mutable),
+                    map,
+                    map2,
+                    knownPackages,
+                    str,
+                    i,
+                    i2);
             this.persistence.write(mutable);
             this.state = mutable;
             IndexedMap indexedMap = this.policy.schemePolicies;
@@ -330,10 +375,13 @@ public final class AccessCheckingService extends SystemService {
             throw null;
         }
         LocalServices.addService(PermissionManagerServiceInterface.class, permissionService);
-        LocalManagerRegistry.addManager(PermissionManagerLocal.class, new PermissionManagerLocalImpl(this));
+        LocalManagerRegistry.addManager(
+                PermissionManagerLocal.class, new PermissionManagerLocalImpl(this));
     }
 
-    public final void onStorageVolumeMounted$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(String str, List list, boolean z) {
+    public final void
+            onStorageVolumeMounted$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                    String str, List list, boolean z) {
         PackageManagerLocal packageManagerLocal = this.packageManagerLocal;
         if (packageManagerLocal == null) {
             Intrinsics.throwUninitializedPropertyAccessException("packageManagerLocal");
@@ -351,11 +399,19 @@ public final class AccessCheckingService extends SystemService {
         synchronized (this.stateLock) {
             AccessState accessState = this.state;
             if (accessState == null) {
-                Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                Intrinsics.throwUninitializedPropertyAccessException(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 throw null;
             }
             MutableAccessState mutable = accessState.toMutable();
-            this.policy.onStorageVolumeMounted(new MutateStateScope(accessState, mutable), map, map2, knownPackages, str, list, z);
+            this.policy.onStorageVolumeMounted(
+                    new MutateStateScope(accessState, mutable),
+                    map,
+                    map2,
+                    knownPackages,
+                    str,
+                    list,
+                    z);
             this.persistence.write(mutable);
             this.state = mutable;
             IndexedMap indexedMap = this.policy.schemePolicies;
@@ -371,11 +427,13 @@ public final class AccessCheckingService extends SystemService {
         }
     }
 
-    public final void onSystemReady$frameworks__base__services__permission__android_common__services_permission_pre_jarjar() {
+    public final void
+            onSystemReady$frameworks__base__services__permission__android_common__services_permission_pre_jarjar() {
         synchronized (this.stateLock) {
             AccessState accessState = this.state;
             if (accessState == null) {
-                Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                Intrinsics.throwUninitializedPropertyAccessException(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 throw null;
             }
             MutableAccessState mutable = accessState.toMutable();
@@ -407,11 +465,14 @@ public final class AccessCheckingService extends SystemService {
         }
     }
 
-    public final void onUserAdded$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(int i) {
+    public final void
+            onUserAdded$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                    int i) {
         synchronized (this.stateLock) {
             AccessState accessState = this.state;
             if (accessState == null) {
-                Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                Intrinsics.throwUninitializedPropertyAccessException(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 throw null;
             }
             MutableAccessState mutable = accessState.toMutable();
@@ -431,11 +492,14 @@ public final class AccessCheckingService extends SystemService {
         }
     }
 
-    public final void onUserRemoved$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(int i) {
+    public final void
+            onUserRemoved$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                    int i) {
         synchronized (this.stateLock) {
             AccessState accessState = this.state;
             if (accessState == null) {
-                Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                Intrinsics.throwUninitializedPropertyAccessException(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 throw null;
             }
             MutableAccessState mutable = accessState.toMutable();

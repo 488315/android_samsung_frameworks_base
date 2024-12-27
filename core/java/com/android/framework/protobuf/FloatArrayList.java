@@ -1,12 +1,12 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.Internal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.RandomAccess;
 
 /* loaded from: classes3.dex */
-final class FloatArrayList extends AbstractProtobufList<Float> implements Internal.FloatList, RandomAccess, PrimitiveNonBoxingCollection {
+final class FloatArrayList extends AbstractProtobufList<Float>
+        implements Internal.FloatList, RandomAccess, PrimitiveNonBoxingCollection {
     private static final FloatArrayList EMPTY_LIST = new FloatArrayList(new float[0], 0);
     private float[] array;
     private int size;
@@ -39,7 +39,8 @@ final class FloatArrayList extends AbstractProtobufList<Float> implements Intern
         this.modCount++;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.Collection, java.util.List
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -60,7 +61,8 @@ final class FloatArrayList extends AbstractProtobufList<Float> implements Intern
         return true;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.Collection, java.util.List
     public int hashCode() {
         int result = 1;
         for (int i = 0; i < this.size; i++) {
@@ -69,7 +71,8 @@ final class FloatArrayList extends AbstractProtobufList<Float> implements Intern
         return result;
     }
 
-    @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
+    @Override // com.android.framework.protobuf.Internal.ProtobufList,
+              // com.android.framework.protobuf.Internal.BooleanList
     /* renamed from: mutableCopyWithCapacity */
     public Internal.ProtobufList<Float> mutableCopyWithCapacity2(int capacity) {
         if (capacity < this.size) {
@@ -114,7 +117,8 @@ final class FloatArrayList extends AbstractProtobufList<Float> implements Intern
         return this.size;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public Float set(int index, Float element) {
         return Float.valueOf(setFloat(index, element.floatValue()));
     }
@@ -128,13 +132,15 @@ final class FloatArrayList extends AbstractProtobufList<Float> implements Intern
         return previousValue;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.AbstractCollection, java.util.Collection, java.util.List
     public boolean add(Float element) {
         addFloat(element.floatValue());
         return true;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public void add(int index, Float element) {
         addFloat(index, element.floatValue());
     }
@@ -173,7 +179,8 @@ final class FloatArrayList extends AbstractProtobufList<Float> implements Intern
         this.modCount++;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractCollection, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractCollection,
+              // java.util.Collection, java.util.List
     public boolean addAll(Collection<? extends Float> collection) {
         ensureIsMutable();
         Internal.checkNotNull(collection);
@@ -198,7 +205,8 @@ final class FloatArrayList extends AbstractProtobufList<Float> implements Intern
         return true;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public Float remove(int index) {
         ensureIsMutable();
         ensureIndexInRange(index);

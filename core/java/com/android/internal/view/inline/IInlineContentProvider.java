@@ -5,30 +5,29 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.view.inline.IInlineContentCallback;
 
 /* loaded from: classes5.dex */
 public interface IInlineContentProvider extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.view.inline.IInlineContentProvider";
+    public static final String DESCRIPTOR =
+            "com.android.internal.view.inline.IInlineContentProvider";
 
     void onSurfacePackageReleased() throws RemoteException;
 
-    void provideContent(int i, int i2, IInlineContentCallback iInlineContentCallback) throws RemoteException;
+    void provideContent(int i, int i2, IInlineContentCallback iInlineContentCallback)
+            throws RemoteException;
 
     void requestSurfacePackage() throws RemoteException;
 
     public static class Default implements IInlineContentProvider {
         @Override // com.android.internal.view.inline.IInlineContentProvider
-        public void provideContent(int width, int height, IInlineContentCallback callback) throws RemoteException {
-        }
+        public void provideContent(int width, int height, IInlineContentCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.inline.IInlineContentProvider
-        public void requestSurfacePackage() throws RemoteException {
-        }
+        public void requestSurfacePackage() throws RemoteException {}
 
         @Override // com.android.internal.view.inline.IInlineContentProvider
-        public void onSurfacePackageReleased() throws RemoteException {
-        }
+        public void onSurfacePackageReleased() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +35,7 @@ public interface IInlineContentProvider extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInlineContentProvider {
+    public abstract static class Stub extends Binder implements IInlineContentProvider {
         static final int TRANSACTION_onSurfacePackageReleased = 3;
         static final int TRANSACTION_provideContent = 1;
         static final int TRANSACTION_requestSurfacePackage = 2;
@@ -80,7 +79,8 @@ public interface IInlineContentProvider extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInlineContentProvider.DESCRIPTOR);
             }
@@ -92,7 +92,8 @@ public interface IInlineContentProvider extends IInterface {
                 case 1:
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
-                    IInlineContentCallback _arg2 = IInlineContentCallback.Stub.asInterface(data.readStrongBinder());
+                    IInlineContentCallback _arg2 =
+                            IInlineContentCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     provideContent(_arg0, _arg1, _arg2);
                     return true;
@@ -124,7 +125,8 @@ public interface IInlineContentProvider extends IInterface {
             }
 
             @Override // com.android.internal.view.inline.IInlineContentProvider
-            public void provideContent(int width, int height, IInlineContentCallback callback) throws RemoteException {
+            public void provideContent(int width, int height, IInlineContentCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInlineContentProvider.DESCRIPTOR);

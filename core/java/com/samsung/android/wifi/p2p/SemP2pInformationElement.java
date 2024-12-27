@@ -2,6 +2,7 @@ package com.samsung.android.wifi.p2p;
 
 import android.net.wifi.ScanResult;
 import android.util.Log;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.List;

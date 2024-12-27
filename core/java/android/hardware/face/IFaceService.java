@@ -9,8 +9,6 @@ import android.hardware.biometrics.IBiometricStateListener;
 import android.hardware.biometrics.IInvalidationCallback;
 import android.hardware.biometrics.ITestSession;
 import android.hardware.biometrics.ITestSessionCallback;
-import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
-import android.hardware.face.IFaceServiceReceiver;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -19,77 +17,146 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.view.Surface;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IFaceService extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.face.IFaceService";
 
-    void addAuthenticatorsRegisteredCallback(IFaceAuthenticatorsRegisteredCallback iFaceAuthenticatorsRegisteredCallback) throws RemoteException;
+    void addAuthenticatorsRegisteredCallback(
+            IFaceAuthenticatorsRegisteredCallback iFaceAuthenticatorsRegisteredCallback)
+            throws RemoteException;
 
-    void addLockoutResetCallback(IBiometricServiceLockoutResetCallback iBiometricServiceLockoutResetCallback, String str) throws RemoteException;
+    void addLockoutResetCallback(
+            IBiometricServiceLockoutResetCallback iBiometricServiceLockoutResetCallback, String str)
+            throws RemoteException;
 
-    long authenticate(IBinder iBinder, long j, IFaceServiceReceiver iFaceServiceReceiver, FaceAuthenticateOptions faceAuthenticateOptions) throws RemoteException;
+    long authenticate(
+            IBinder iBinder,
+            long j,
+            IFaceServiceReceiver iFaceServiceReceiver,
+            FaceAuthenticateOptions faceAuthenticateOptions)
+            throws RemoteException;
 
     void cancelAuthentication(IBinder iBinder, String str, long j) throws RemoteException;
 
-    void cancelAuthenticationFromService(int i, IBinder iBinder, String str, long j) throws RemoteException;
+    void cancelAuthenticationFromService(int i, IBinder iBinder, String str, long j)
+            throws RemoteException;
 
     void cancelEnrollment(IBinder iBinder, long j) throws RemoteException;
 
     void cancelFaceDetect(IBinder iBinder, String str, long j) throws RemoteException;
 
-    ITestSession createTestSession(int i, ITestSessionCallback iTestSessionCallback, String str) throws RemoteException;
+    ITestSession createTestSession(int i, ITestSessionCallback iTestSessionCallback, String str)
+            throws RemoteException;
 
-    long detectFace(IBinder iBinder, IFaceServiceReceiver iFaceServiceReceiver, FaceAuthenticateOptions faceAuthenticateOptions) throws RemoteException;
+    long detectFace(
+            IBinder iBinder,
+            IFaceServiceReceiver iFaceServiceReceiver,
+            FaceAuthenticateOptions faceAuthenticateOptions)
+            throws RemoteException;
 
     byte[] dumpSensorServiceStateProto(int i, boolean z) throws RemoteException;
 
-    long enroll(int i, IBinder iBinder, byte[] bArr, IFaceServiceReceiver iFaceServiceReceiver, String str, int[] iArr, Surface surface, boolean z, FaceEnrollOptions faceEnrollOptions) throws RemoteException;
+    long enroll(
+            int i,
+            IBinder iBinder,
+            byte[] bArr,
+            IFaceServiceReceiver iFaceServiceReceiver,
+            String str,
+            int[] iArr,
+            Surface surface,
+            boolean z,
+            FaceEnrollOptions faceEnrollOptions)
+            throws RemoteException;
 
-    long enrollRemotely(int i, IBinder iBinder, byte[] bArr, IFaceServiceReceiver iFaceServiceReceiver, String str, int[] iArr) throws RemoteException;
+    long enrollRemotely(
+            int i,
+            IBinder iBinder,
+            byte[] bArr,
+            IFaceServiceReceiver iFaceServiceReceiver,
+            String str,
+            int[] iArr)
+            throws RemoteException;
 
-    void generateChallenge(IBinder iBinder, int i, int i2, IFaceServiceReceiver iFaceServiceReceiver, String str) throws RemoteException;
+    void generateChallenge(
+            IBinder iBinder, int i, int i2, IFaceServiceReceiver iFaceServiceReceiver, String str)
+            throws RemoteException;
 
     long getAuthenticatorId(int i, int i2) throws RemoteException;
 
     List<Face> getEnrolledFaces(int i, int i2, String str) throws RemoteException;
 
-    void getFeature(IBinder iBinder, int i, int i2, IFaceServiceReceiver iFaceServiceReceiver, String str) throws RemoteException;
+    void getFeature(
+            IBinder iBinder, int i, int i2, IFaceServiceReceiver iFaceServiceReceiver, String str)
+            throws RemoteException;
 
     int getLockoutModeForUser(int i, int i2) throws RemoteException;
 
     FaceSensorPropertiesInternal getSensorProperties(int i, String str) throws RemoteException;
 
-    List<FaceSensorPropertiesInternal> getSensorPropertiesInternal(String str) throws RemoteException;
+    List<FaceSensorPropertiesInternal> getSensorPropertiesInternal(String str)
+            throws RemoteException;
 
     boolean hasEnrolledFaces(int i, int i2, String str) throws RemoteException;
 
-    void invalidateAuthenticatorId(int i, int i2, IInvalidationCallback iInvalidationCallback) throws RemoteException;
+    void invalidateAuthenticatorId(int i, int i2, IInvalidationCallback iInvalidationCallback)
+            throws RemoteException;
 
     boolean isHardwareDetected(int i, String str) throws RemoteException;
 
-    void prepareForAuthentication(boolean z, IBinder iBinder, long j, IBiometricSensorReceiver iBiometricSensorReceiver, FaceAuthenticateOptions faceAuthenticateOptions, long j2, int i, boolean z2) throws RemoteException;
+    void prepareForAuthentication(
+            boolean z,
+            IBinder iBinder,
+            long j,
+            IBiometricSensorReceiver iBiometricSensorReceiver,
+            FaceAuthenticateOptions faceAuthenticateOptions,
+            long j2,
+            int i,
+            boolean z2)
+            throws RemoteException;
 
-    void registerAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) throws RemoteException;
+    void registerAuthenticationStateListener(
+            AuthenticationStateListener authenticationStateListener) throws RemoteException;
 
-    void registerAuthenticators(FaceSensorConfigurations faceSensorConfigurations) throws RemoteException;
+    void registerAuthenticators(FaceSensorConfigurations faceSensorConfigurations)
+            throws RemoteException;
 
-    void registerBiometricStateListener(IBiometricStateListener iBiometricStateListener) throws RemoteException;
+    void registerBiometricStateListener(IBiometricStateListener iBiometricStateListener)
+            throws RemoteException;
 
-    void remove(IBinder iBinder, int i, int i2, IFaceServiceReceiver iFaceServiceReceiver, String str) throws RemoteException;
+    void remove(
+            IBinder iBinder, int i, int i2, IFaceServiceReceiver iFaceServiceReceiver, String str)
+            throws RemoteException;
 
-    void removeAll(IBinder iBinder, int i, IFaceServiceReceiver iFaceServiceReceiver, String str) throws RemoteException;
+    void removeAll(IBinder iBinder, int i, IFaceServiceReceiver iFaceServiceReceiver, String str)
+            throws RemoteException;
 
-    void resetLockout(IBinder iBinder, int i, int i2, byte[] bArr, String str) throws RemoteException;
+    void resetLockout(IBinder iBinder, int i, int i2, byte[] bArr, String str)
+            throws RemoteException;
 
     void revokeChallenge(IBinder iBinder, int i, int i2, String str, long j) throws RemoteException;
 
     void scheduleWatchdog() throws RemoteException;
 
-    long semAuthenticate(IBinder iBinder, long j, IFaceServiceReceiver iFaceServiceReceiver, FaceAuthenticateOptions faceAuthenticateOptions, Bundle bundle, byte[] bArr) throws RemoteException;
+    long semAuthenticate(
+            IBinder iBinder,
+            long j,
+            IFaceServiceReceiver iFaceServiceReceiver,
+            FaceAuthenticateOptions faceAuthenticateOptions,
+            Bundle bundle,
+            byte[] bArr)
+            throws RemoteException;
 
-    long semAuthenticateExt(IBinder iBinder, long j, IFaceServiceReceiver iFaceServiceReceiver, FaceAuthenticateOptions faceAuthenticateOptions, Surface surface, byte[] bArr) throws RemoteException;
+    long semAuthenticateExt(
+            IBinder iBinder,
+            long j,
+            IFaceServiceReceiver iFaceServiceReceiver,
+            FaceAuthenticateOptions faceAuthenticateOptions,
+            Surface surface,
+            byte[] bArr)
+            throws RemoteException;
 
     String semGetInfo(int i) throws RemoteException;
 
@@ -119,105 +186,165 @@ public interface IFaceService extends IInterface {
 
     boolean semShouldRemoveTemplate() throws RemoteException;
 
-    void setFeature(IBinder iBinder, int i, int i2, boolean z, byte[] bArr, IFaceServiceReceiver iFaceServiceReceiver, String str) throws RemoteException;
+    void setFeature(
+            IBinder iBinder,
+            int i,
+            int i2,
+            boolean z,
+            byte[] bArr,
+            IFaceServiceReceiver iFaceServiceReceiver,
+            String str)
+            throws RemoteException;
 
     void startPreparedClient(int i, int i2) throws RemoteException;
 
-    void unregisterAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) throws RemoteException;
+    void unregisterAuthenticationStateListener(
+            AuthenticationStateListener authenticationStateListener) throws RemoteException;
 
     public static class Default implements IFaceService {
         @Override // android.hardware.face.IFaceService
-        public ITestSession createTestSession(int sensorId, ITestSessionCallback callback, String opPackageName) throws RemoteException {
+        public ITestSession createTestSession(
+                int sensorId, ITestSessionCallback callback, String opPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.face.IFaceService
-        public byte[] dumpSensorServiceStateProto(int sensorId, boolean clearSchedulerBuffer) throws RemoteException {
+        public byte[] dumpSensorServiceStateProto(int sensorId, boolean clearSchedulerBuffer)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.face.IFaceService
-        public List<FaceSensorPropertiesInternal> getSensorPropertiesInternal(String opPackageName) throws RemoteException {
+        public List<FaceSensorPropertiesInternal> getSensorPropertiesInternal(String opPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.face.IFaceService
-        public FaceSensorPropertiesInternal getSensorProperties(int sensorId, String opPackageName) throws RemoteException {
+        public FaceSensorPropertiesInternal getSensorProperties(int sensorId, String opPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.face.IFaceService
-        public long authenticate(IBinder token, long operationId, IFaceServiceReceiver receiver, FaceAuthenticateOptions options) throws RemoteException {
+        public long authenticate(
+                IBinder token,
+                long operationId,
+                IFaceServiceReceiver receiver,
+                FaceAuthenticateOptions options)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.hardware.face.IFaceService
-        public long detectFace(IBinder token, IFaceServiceReceiver receiver, FaceAuthenticateOptions options) throws RemoteException {
+        public long detectFace(
+                IBinder token, IFaceServiceReceiver receiver, FaceAuthenticateOptions options)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.hardware.face.IFaceService
-        public void prepareForAuthentication(boolean requireConfirmation, IBinder token, long operationId, IBiometricSensorReceiver sensorReceiver, FaceAuthenticateOptions options, long requestId, int cookie, boolean allowBackgroundAuthentication) throws RemoteException {
-        }
+        public void prepareForAuthentication(
+                boolean requireConfirmation,
+                IBinder token,
+                long operationId,
+                IBiometricSensorReceiver sensorReceiver,
+                FaceAuthenticateOptions options,
+                long requestId,
+                int cookie,
+                boolean allowBackgroundAuthentication)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void startPreparedClient(int sensorId, int cookie) throws RemoteException {
-        }
+        public void startPreparedClient(int sensorId, int cookie) throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void cancelAuthentication(IBinder token, String opPackageName, long requestId) throws RemoteException {
-        }
+        public void cancelAuthentication(IBinder token, String opPackageName, long requestId)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void cancelFaceDetect(IBinder token, String opPackageName, long requestId) throws RemoteException {
-        }
+        public void cancelFaceDetect(IBinder token, String opPackageName, long requestId)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void cancelAuthenticationFromService(int sensorId, IBinder token, String opPackageName, long requestId) throws RemoteException {
-        }
+        public void cancelAuthenticationFromService(
+                int sensorId, IBinder token, String opPackageName, long requestId)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public long enroll(int userId, IBinder token, byte[] hardwareAuthToken, IFaceServiceReceiver receiver, String opPackageName, int[] disabledFeatures, Surface previewSurface, boolean debugConsent, FaceEnrollOptions options) throws RemoteException {
+        public long enroll(
+                int userId,
+                IBinder token,
+                byte[] hardwareAuthToken,
+                IFaceServiceReceiver receiver,
+                String opPackageName,
+                int[] disabledFeatures,
+                Surface previewSurface,
+                boolean debugConsent,
+                FaceEnrollOptions options)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.hardware.face.IFaceService
-        public long enrollRemotely(int userId, IBinder token, byte[] hardwareAuthToken, IFaceServiceReceiver receiver, String opPackageName, int[] disabledFeatures) throws RemoteException {
+        public long enrollRemotely(
+                int userId,
+                IBinder token,
+                byte[] hardwareAuthToken,
+                IFaceServiceReceiver receiver,
+                String opPackageName,
+                int[] disabledFeatures)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.hardware.face.IFaceService
-        public void cancelEnrollment(IBinder token, long requestId) throws RemoteException {
-        }
+        public void cancelEnrollment(IBinder token, long requestId) throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void remove(IBinder token, int faceId, int userId, IFaceServiceReceiver receiver, String opPackageName) throws RemoteException {
-        }
+        public void remove(
+                IBinder token,
+                int faceId,
+                int userId,
+                IFaceServiceReceiver receiver,
+                String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void removeAll(IBinder token, int userId, IFaceServiceReceiver receiver, String opPackageName) throws RemoteException {
-        }
+        public void removeAll(
+                IBinder token, int userId, IFaceServiceReceiver receiver, String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public List<Face> getEnrolledFaces(int sensorId, int userId, String opPackageName) throws RemoteException {
+        public List<Face> getEnrolledFaces(int sensorId, int userId, String opPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.face.IFaceService
-        public boolean isHardwareDetected(int sensorId, String opPackageName) throws RemoteException {
+        public boolean isHardwareDetected(int sensorId, String opPackageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.face.IFaceService
-        public void generateChallenge(IBinder token, int sensorId, int userId, IFaceServiceReceiver receiver, String opPackageName) throws RemoteException {
-        }
+        public void generateChallenge(
+                IBinder token,
+                int sensorId,
+                int userId,
+                IFaceServiceReceiver receiver,
+                String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void revokeChallenge(IBinder token, int sensorId, int userId, String opPackageName, long challenge) throws RemoteException {
-        }
+        public void revokeChallenge(
+                IBinder token, int sensorId, int userId, String opPackageName, long challenge)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public boolean hasEnrolledFaces(int sensorId, int userId, String opPackageName) throws RemoteException {
+        public boolean hasEnrolledFaces(int sensorId, int userId, String opPackageName)
+                throws RemoteException {
             return false;
         }
 
@@ -227,8 +354,8 @@ public interface IFaceService extends IInterface {
         }
 
         @Override // android.hardware.face.IFaceService
-        public void invalidateAuthenticatorId(int sensorId, int userId, IInvalidationCallback callback) throws RemoteException {
-        }
+        public void invalidateAuthenticatorId(
+                int sensorId, int userId, IInvalidationCallback callback) throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
         public long getAuthenticatorId(int sensorId, int callingUserId) throws RemoteException {
@@ -236,52 +363,83 @@ public interface IFaceService extends IInterface {
         }
 
         @Override // android.hardware.face.IFaceService
-        public void resetLockout(IBinder token, int sensorId, int userId, byte[] hardwareAuthToken, String opPackageName) throws RemoteException {
-        }
+        public void resetLockout(
+                IBinder token,
+                int sensorId,
+                int userId,
+                byte[] hardwareAuthToken,
+                String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void addLockoutResetCallback(IBiometricServiceLockoutResetCallback callback, String opPackageName) throws RemoteException {
-        }
+        public void addLockoutResetCallback(
+                IBiometricServiceLockoutResetCallback callback, String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void setFeature(IBinder token, int userId, int feature, boolean enabled, byte[] hardwareAuthToken, IFaceServiceReceiver receiver, String opPackageName) throws RemoteException {
-        }
+        public void setFeature(
+                IBinder token,
+                int userId,
+                int feature,
+                boolean enabled,
+                byte[] hardwareAuthToken,
+                IFaceServiceReceiver receiver,
+                String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void getFeature(IBinder token, int userId, int feature, IFaceServiceReceiver receiver, String opPackageName) throws RemoteException {
-        }
+        public void getFeature(
+                IBinder token,
+                int userId,
+                int feature,
+                IFaceServiceReceiver receiver,
+                String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void registerAuthenticators(FaceSensorConfigurations faceSensorConfigurations) throws RemoteException {
-        }
+        public void registerAuthenticators(FaceSensorConfigurations faceSensorConfigurations)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void addAuthenticatorsRegisteredCallback(IFaceAuthenticatorsRegisteredCallback callback) throws RemoteException {
-        }
+        public void addAuthenticatorsRegisteredCallback(
+                IFaceAuthenticatorsRegisteredCallback callback) throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void registerAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
-        }
+        public void registerAuthenticationStateListener(AuthenticationStateListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void unregisterAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
-        }
+        public void unregisterAuthenticationStateListener(AuthenticationStateListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void registerBiometricStateListener(IBiometricStateListener listener) throws RemoteException {
-        }
+        public void registerBiometricStateListener(IBiometricStateListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void scheduleWatchdog() throws RemoteException {
-        }
+        public void scheduleWatchdog() throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public long semAuthenticate(IBinder token, long operationId, IFaceServiceReceiver receiver, FaceAuthenticateOptions options, Bundle bundle, byte[] fidoRequestData) throws RemoteException {
+        public long semAuthenticate(
+                IBinder token,
+                long operationId,
+                IFaceServiceReceiver receiver,
+                FaceAuthenticateOptions options,
+                Bundle bundle,
+                byte[] fidoRequestData)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.hardware.face.IFaceService
-        public long semAuthenticateExt(IBinder token, long operationId, IFaceServiceReceiver receiver, FaceAuthenticateOptions options, Surface previewSurface, byte[] fidoRequestData) throws RemoteException {
+        public long semAuthenticateExt(
+                IBinder token,
+                long operationId,
+                IFaceServiceReceiver receiver,
+                FaceAuthenticateOptions options,
+                Surface previewSurface,
+                byte[] fidoRequestData)
+                throws RemoteException {
             return 0L;
         }
 
@@ -291,20 +449,16 @@ public interface IFaceService extends IInterface {
         }
 
         @Override // android.hardware.face.IFaceService
-        public void semPauseEnroll() throws RemoteException {
-        }
+        public void semPauseEnroll() throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void semResumeEnroll() throws RemoteException {
-        }
+        public void semResumeEnroll() throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void semPauseAuth() throws RemoteException {
-        }
+        public void semPauseAuth() throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void semResumeAuth() throws RemoteException {
-        }
+        public void semResumeAuth() throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
         public String semGetInfo(int type) throws RemoteException {
@@ -317,12 +471,10 @@ public interface IFaceService extends IInterface {
         }
 
         @Override // android.hardware.face.IFaceService
-        public void semSessionOpen() throws RemoteException {
-        }
+        public void semSessionOpen() throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
-        public void semSessionClose() throws RemoteException {
-        }
+        public void semSessionClose() throws RemoteException {}
 
         @Override // android.hardware.face.IFaceService
         public boolean semIsSessionClose() throws RemoteException {
@@ -355,7 +507,7 @@ public interface IFaceService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFaceService {
+    public abstract static class Stub extends Binder implements IFaceService {
         static final int TRANSACTION_addAuthenticatorsRegisteredCallback = 30;
         static final int TRANSACTION_addLockoutResetCallback = 26;
         static final int TRANSACTION_authenticate = 5;
@@ -418,7 +570,9 @@ public interface IFaceService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IFaceService asInterface(IBinder obj) {
@@ -550,7 +704,8 @@ public interface IFaceService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFaceService.DESCRIPTOR);
             }
@@ -561,7 +716,8 @@ public interface IFaceService extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    ITestSessionCallback _arg1 = ITestSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ITestSessionCallback _arg1 =
+                            ITestSessionCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg2 = data.readString();
                     data.enforceNoDataAvail();
                     ITestSession _result = createTestSession(_arg0, _arg1, _arg2);
@@ -579,7 +735,8 @@ public interface IFaceService extends IInterface {
                 case 3:
                     String _arg03 = data.readString();
                     data.enforceNoDataAvail();
-                    List<FaceSensorPropertiesInternal> _result3 = getSensorPropertiesInternal(_arg03);
+                    List<FaceSensorPropertiesInternal> _result3 =
+                            getSensorPropertiesInternal(_arg03);
                     reply.writeNoException();
                     reply.writeTypedList(_result3, 1);
                     return true;
@@ -594,8 +751,11 @@ public interface IFaceService extends IInterface {
                 case 5:
                     IBinder _arg05 = data.readStrongBinder();
                     long _arg14 = data.readLong();
-                    IFaceServiceReceiver _arg22 = IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
-                    FaceAuthenticateOptions _arg3 = (FaceAuthenticateOptions) data.readTypedObject(FaceAuthenticateOptions.CREATOR);
+                    IFaceServiceReceiver _arg22 =
+                            IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    FaceAuthenticateOptions _arg3 =
+                            (FaceAuthenticateOptions)
+                                    data.readTypedObject(FaceAuthenticateOptions.CREATOR);
                     data.enforceNoDataAvail();
                     long _result5 = authenticate(_arg05, _arg14, _arg22, _arg3);
                     reply.writeNoException();
@@ -603,8 +763,11 @@ public interface IFaceService extends IInterface {
                     return true;
                 case 6:
                     IBinder _arg06 = data.readStrongBinder();
-                    IFaceServiceReceiver _arg15 = IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
-                    FaceAuthenticateOptions _arg23 = (FaceAuthenticateOptions) data.readTypedObject(FaceAuthenticateOptions.CREATOR);
+                    IFaceServiceReceiver _arg15 =
+                            IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    FaceAuthenticateOptions _arg23 =
+                            (FaceAuthenticateOptions)
+                                    data.readTypedObject(FaceAuthenticateOptions.CREATOR);
                     data.enforceNoDataAvail();
                     long _result6 = detectFace(_arg06, _arg15, _arg23);
                     reply.writeNoException();
@@ -614,13 +777,17 @@ public interface IFaceService extends IInterface {
                     boolean _arg07 = data.readBoolean();
                     IBinder _arg16 = data.readStrongBinder();
                     long _arg24 = data.readLong();
-                    IBiometricSensorReceiver _arg32 = IBiometricSensorReceiver.Stub.asInterface(data.readStrongBinder());
-                    FaceAuthenticateOptions _arg4 = (FaceAuthenticateOptions) data.readTypedObject(FaceAuthenticateOptions.CREATOR);
+                    IBiometricSensorReceiver _arg32 =
+                            IBiometricSensorReceiver.Stub.asInterface(data.readStrongBinder());
+                    FaceAuthenticateOptions _arg4 =
+                            (FaceAuthenticateOptions)
+                                    data.readTypedObject(FaceAuthenticateOptions.CREATOR);
                     long _arg5 = data.readLong();
                     int _arg6 = data.readInt();
                     boolean _arg7 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    prepareForAuthentication(_arg07, _arg16, _arg24, _arg32, _arg4, _arg5, _arg6, _arg7);
+                    prepareForAuthentication(
+                            _arg07, _arg16, _arg24, _arg32, _arg4, _arg5, _arg6, _arg7);
                     reply.writeNoException();
                     return true;
                 case 8:
@@ -659,14 +826,19 @@ public interface IFaceService extends IInterface {
                     int _arg012 = data.readInt();
                     IBinder _arg111 = data.readStrongBinder();
                     byte[] _arg28 = data.createByteArray();
-                    IFaceServiceReceiver _arg34 = IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IFaceServiceReceiver _arg34 =
+                            IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg42 = data.readString();
                     int[] _arg52 = data.createIntArray();
                     Surface _arg62 = (Surface) data.readTypedObject(Surface.CREATOR);
                     boolean _arg72 = data.readBoolean();
-                    FaceEnrollOptions _arg8 = (FaceEnrollOptions) data.readTypedObject(FaceEnrollOptions.CREATOR);
+                    FaceEnrollOptions _arg8 =
+                            (FaceEnrollOptions) data.readTypedObject(FaceEnrollOptions.CREATOR);
                     data.enforceNoDataAvail();
-                    long _result7 = enroll(_arg012, _arg111, _arg28, _arg34, _arg42, _arg52, _arg62, _arg72, _arg8);
+                    long _result7 =
+                            enroll(
+                                    _arg012, _arg111, _arg28, _arg34, _arg42, _arg52, _arg62,
+                                    _arg72, _arg8);
                     reply.writeNoException();
                     reply.writeLong(_result7);
                     return true;
@@ -674,11 +846,13 @@ public interface IFaceService extends IInterface {
                     int _arg013 = data.readInt();
                     IBinder _arg112 = data.readStrongBinder();
                     byte[] _arg29 = data.createByteArray();
-                    IFaceServiceReceiver _arg35 = IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IFaceServiceReceiver _arg35 =
+                            IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg43 = data.readString();
                     int[] _arg53 = data.createIntArray();
                     data.enforceNoDataAvail();
-                    long _result8 = enrollRemotely(_arg013, _arg112, _arg29, _arg35, _arg43, _arg53);
+                    long _result8 =
+                            enrollRemotely(_arg013, _arg112, _arg29, _arg35, _arg43, _arg53);
                     reply.writeNoException();
                     reply.writeLong(_result8);
                     return true;
@@ -693,7 +867,8 @@ public interface IFaceService extends IInterface {
                     IBinder _arg015 = data.readStrongBinder();
                     int _arg114 = data.readInt();
                     int _arg210 = data.readInt();
-                    IFaceServiceReceiver _arg36 = IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IFaceServiceReceiver _arg36 =
+                            IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg44 = data.readString();
                     data.enforceNoDataAvail();
                     remove(_arg015, _arg114, _arg210, _arg36, _arg44);
@@ -702,7 +877,8 @@ public interface IFaceService extends IInterface {
                 case 16:
                     IBinder _arg016 = data.readStrongBinder();
                     int _arg115 = data.readInt();
-                    IFaceServiceReceiver _arg211 = IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IFaceServiceReceiver _arg211 =
+                            IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg37 = data.readString();
                     data.enforceNoDataAvail();
                     removeAll(_arg016, _arg115, _arg211, _arg37);
@@ -729,7 +905,8 @@ public interface IFaceService extends IInterface {
                     IBinder _arg019 = data.readStrongBinder();
                     int _arg118 = data.readInt();
                     int _arg213 = data.readInt();
-                    IFaceServiceReceiver _arg38 = IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IFaceServiceReceiver _arg38 =
+                            IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg45 = data.readString();
                     data.enforceNoDataAvail();
                     generateChallenge(_arg019, _arg118, _arg213, _arg38, _arg45);
@@ -765,7 +942,8 @@ public interface IFaceService extends IInterface {
                 case 23:
                     int _arg023 = data.readInt();
                     int _arg122 = data.readInt();
-                    IInvalidationCallback _arg216 = IInvalidationCallback.Stub.asInterface(data.readStrongBinder());
+                    IInvalidationCallback _arg216 =
+                            IInvalidationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     invalidateAuthenticatorId(_arg023, _arg122, _arg216);
                     reply.writeNoException();
@@ -789,7 +967,9 @@ public interface IFaceService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 26:
-                    IBiometricServiceLockoutResetCallback _arg026 = IBiometricServiceLockoutResetCallback.Stub.asInterface(data.readStrongBinder());
+                    IBiometricServiceLockoutResetCallback _arg026 =
+                            IBiometricServiceLockoutResetCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg125 = data.readString();
                     data.enforceNoDataAvail();
                     addLockoutResetCallback(_arg026, _arg125);
@@ -801,7 +981,8 @@ public interface IFaceService extends IInterface {
                     int _arg218 = data.readInt();
                     boolean _arg311 = data.readBoolean();
                     byte[] _arg48 = data.createByteArray();
-                    IFaceServiceReceiver _arg54 = IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IFaceServiceReceiver _arg54 =
+                            IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg63 = data.readString();
                     data.enforceNoDataAvail();
                     setFeature(_arg027, _arg126, _arg218, _arg311, _arg48, _arg54, _arg63);
@@ -811,38 +992,46 @@ public interface IFaceService extends IInterface {
                     IBinder _arg028 = data.readStrongBinder();
                     int _arg127 = data.readInt();
                     int _arg219 = data.readInt();
-                    IFaceServiceReceiver _arg312 = IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IFaceServiceReceiver _arg312 =
+                            IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg49 = data.readString();
                     data.enforceNoDataAvail();
                     getFeature(_arg028, _arg127, _arg219, _arg312, _arg49);
                     reply.writeNoException();
                     return true;
                 case 29:
-                    FaceSensorConfigurations _arg029 = (FaceSensorConfigurations) data.readTypedObject(FaceSensorConfigurations.CREATOR);
+                    FaceSensorConfigurations _arg029 =
+                            (FaceSensorConfigurations)
+                                    data.readTypedObject(FaceSensorConfigurations.CREATOR);
                     data.enforceNoDataAvail();
                     registerAuthenticators(_arg029);
                     reply.writeNoException();
                     return true;
                 case 30:
-                    IFaceAuthenticatorsRegisteredCallback _arg030 = IFaceAuthenticatorsRegisteredCallback.Stub.asInterface(data.readStrongBinder());
+                    IFaceAuthenticatorsRegisteredCallback _arg030 =
+                            IFaceAuthenticatorsRegisteredCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addAuthenticatorsRegisteredCallback(_arg030);
                     reply.writeNoException();
                     return true;
                 case 31:
-                    AuthenticationStateListener _arg031 = AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
+                    AuthenticationStateListener _arg031 =
+                            AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerAuthenticationStateListener(_arg031);
                     reply.writeNoException();
                     return true;
                 case 32:
-                    AuthenticationStateListener _arg032 = AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
+                    AuthenticationStateListener _arg032 =
+                            AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterAuthenticationStateListener(_arg032);
                     reply.writeNoException();
                     return true;
                 case 33:
-                    IBiometricStateListener _arg033 = IBiometricStateListener.Stub.asInterface(data.readStrongBinder());
+                    IBiometricStateListener _arg033 =
+                            IBiometricStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerBiometricStateListener(_arg033);
                     reply.writeNoException();
@@ -853,24 +1042,32 @@ public interface IFaceService extends IInterface {
                 case 35:
                     IBinder _arg034 = data.readStrongBinder();
                     long _arg128 = data.readLong();
-                    IFaceServiceReceiver _arg220 = IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
-                    FaceAuthenticateOptions _arg313 = (FaceAuthenticateOptions) data.readTypedObject(FaceAuthenticateOptions.CREATOR);
+                    IFaceServiceReceiver _arg220 =
+                            IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    FaceAuthenticateOptions _arg313 =
+                            (FaceAuthenticateOptions)
+                                    data.readTypedObject(FaceAuthenticateOptions.CREATOR);
                     Bundle _arg410 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     byte[] _arg55 = data.createByteArray();
                     data.enforceNoDataAvail();
-                    long _result14 = semAuthenticate(_arg034, _arg128, _arg220, _arg313, _arg410, _arg55);
+                    long _result14 =
+                            semAuthenticate(_arg034, _arg128, _arg220, _arg313, _arg410, _arg55);
                     reply.writeNoException();
                     reply.writeLong(_result14);
                     return true;
                 case 36:
                     IBinder _arg035 = data.readStrongBinder();
                     long _arg129 = data.readLong();
-                    IFaceServiceReceiver _arg221 = IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
-                    FaceAuthenticateOptions _arg314 = (FaceAuthenticateOptions) data.readTypedObject(FaceAuthenticateOptions.CREATOR);
+                    IFaceServiceReceiver _arg221 =
+                            IFaceServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    FaceAuthenticateOptions _arg314 =
+                            (FaceAuthenticateOptions)
+                                    data.readTypedObject(FaceAuthenticateOptions.CREATOR);
                     Surface _arg411 = (Surface) data.readTypedObject(Surface.CREATOR);
                     byte[] _arg56 = data.createByteArray();
                     data.enforceNoDataAvail();
-                    long _result15 = semAuthenticateExt(_arg035, _arg129, _arg221, _arg314, _arg411, _arg56);
+                    long _result15 =
+                            semAuthenticateExt(_arg035, _arg129, _arg221, _arg314, _arg411, _arg56);
                     reply.writeNoException();
                     reply.writeLong(_result15);
                     return true;
@@ -966,7 +1163,9 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public ITestSession createTestSession(int sensorId, ITestSessionCallback callback, String opPackageName) throws RemoteException {
+            public ITestSession createTestSession(
+                    int sensorId, ITestSessionCallback callback, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -985,7 +1184,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public byte[] dumpSensorServiceStateProto(int sensorId, boolean clearSchedulerBuffer) throws RemoteException {
+            public byte[] dumpSensorServiceStateProto(int sensorId, boolean clearSchedulerBuffer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1003,7 +1203,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public List<FaceSensorPropertiesInternal> getSensorPropertiesInternal(String opPackageName) throws RemoteException {
+            public List<FaceSensorPropertiesInternal> getSensorPropertiesInternal(
+                    String opPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1011,7 +1212,8 @@ public interface IFaceService extends IInterface {
                     _data.writeString(opPackageName);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    List<FaceSensorPropertiesInternal> _result = _reply.createTypedArrayList(FaceSensorPropertiesInternal.CREATOR);
+                    List<FaceSensorPropertiesInternal> _result =
+                            _reply.createTypedArrayList(FaceSensorPropertiesInternal.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1020,7 +1222,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public FaceSensorPropertiesInternal getSensorProperties(int sensorId, String opPackageName) throws RemoteException {
+            public FaceSensorPropertiesInternal getSensorProperties(
+                    int sensorId, String opPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1029,7 +1232,9 @@ public interface IFaceService extends IInterface {
                     _data.writeString(opPackageName);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    FaceSensorPropertiesInternal _result = (FaceSensorPropertiesInternal) _reply.readTypedObject(FaceSensorPropertiesInternal.CREATOR);
+                    FaceSensorPropertiesInternal _result =
+                            (FaceSensorPropertiesInternal)
+                                    _reply.readTypedObject(FaceSensorPropertiesInternal.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1038,7 +1243,12 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public long authenticate(IBinder token, long operationId, IFaceServiceReceiver receiver, FaceAuthenticateOptions options) throws RemoteException {
+            public long authenticate(
+                    IBinder token,
+                    long operationId,
+                    IFaceServiceReceiver receiver,
+                    FaceAuthenticateOptions options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1058,7 +1268,9 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public long detectFace(IBinder token, IFaceServiceReceiver receiver, FaceAuthenticateOptions options) throws RemoteException {
+            public long detectFace(
+                    IBinder token, IFaceServiceReceiver receiver, FaceAuthenticateOptions options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1077,7 +1289,16 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void prepareForAuthentication(boolean requireConfirmation, IBinder token, long operationId, IBiometricSensorReceiver sensorReceiver, FaceAuthenticateOptions options, long requestId, int cookie, boolean allowBackgroundAuthentication) throws RemoteException {
+            public void prepareForAuthentication(
+                    boolean requireConfirmation,
+                    IBinder token,
+                    long operationId,
+                    IBiometricSensorReceiver sensorReceiver,
+                    FaceAuthenticateOptions options,
+                    long requestId,
+                    int cookie,
+                    boolean allowBackgroundAuthentication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1115,7 +1336,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void cancelAuthentication(IBinder token, String opPackageName, long requestId) throws RemoteException {
+            public void cancelAuthentication(IBinder token, String opPackageName, long requestId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1132,7 +1354,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void cancelFaceDetect(IBinder token, String opPackageName, long requestId) throws RemoteException {
+            public void cancelFaceDetect(IBinder token, String opPackageName, long requestId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1149,7 +1372,9 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void cancelAuthenticationFromService(int sensorId, IBinder token, String opPackageName, long requestId) throws RemoteException {
+            public void cancelAuthenticationFromService(
+                    int sensorId, IBinder token, String opPackageName, long requestId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1167,7 +1392,17 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public long enroll(int userId, IBinder token, byte[] hardwareAuthToken, IFaceServiceReceiver receiver, String opPackageName, int[] disabledFeatures, Surface previewSurface, boolean debugConsent, FaceEnrollOptions options) throws RemoteException {
+            public long enroll(
+                    int userId,
+                    IBinder token,
+                    byte[] hardwareAuthToken,
+                    IFaceServiceReceiver receiver,
+                    String opPackageName,
+                    int[] disabledFeatures,
+                    Surface previewSurface,
+                    boolean debugConsent,
+                    FaceEnrollOptions options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1192,7 +1427,14 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public long enrollRemotely(int userId, IBinder token, byte[] hardwareAuthToken, IFaceServiceReceiver receiver, String opPackageName, int[] disabledFeatures) throws RemoteException {
+            public long enrollRemotely(
+                    int userId,
+                    IBinder token,
+                    byte[] hardwareAuthToken,
+                    IFaceServiceReceiver receiver,
+                    String opPackageName,
+                    int[] disabledFeatures)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1230,7 +1472,13 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void remove(IBinder token, int faceId, int userId, IFaceServiceReceiver receiver, String opPackageName) throws RemoteException {
+            public void remove(
+                    IBinder token,
+                    int faceId,
+                    int userId,
+                    IFaceServiceReceiver receiver,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1249,7 +1497,9 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void removeAll(IBinder token, int userId, IFaceServiceReceiver receiver, String opPackageName) throws RemoteException {
+            public void removeAll(
+                    IBinder token, int userId, IFaceServiceReceiver receiver, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1267,7 +1517,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public List<Face> getEnrolledFaces(int sensorId, int userId, String opPackageName) throws RemoteException {
+            public List<Face> getEnrolledFaces(int sensorId, int userId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1286,7 +1537,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public boolean isHardwareDetected(int sensorId, String opPackageName) throws RemoteException {
+            public boolean isHardwareDetected(int sensorId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1304,7 +1556,13 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void generateChallenge(IBinder token, int sensorId, int userId, IFaceServiceReceiver receiver, String opPackageName) throws RemoteException {
+            public void generateChallenge(
+                    IBinder token,
+                    int sensorId,
+                    int userId,
+                    IFaceServiceReceiver receiver,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1323,7 +1581,9 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void revokeChallenge(IBinder token, int sensorId, int userId, String opPackageName, long challenge) throws RemoteException {
+            public void revokeChallenge(
+                    IBinder token, int sensorId, int userId, String opPackageName, long challenge)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1342,7 +1602,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public boolean hasEnrolledFaces(int sensorId, int userId, String opPackageName) throws RemoteException {
+            public boolean hasEnrolledFaces(int sensorId, int userId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1379,7 +1640,9 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void invalidateAuthenticatorId(int sensorId, int userId, IInvalidationCallback callback) throws RemoteException {
+            public void invalidateAuthenticatorId(
+                    int sensorId, int userId, IInvalidationCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1414,7 +1677,13 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void resetLockout(IBinder token, int sensorId, int userId, byte[] hardwareAuthToken, String opPackageName) throws RemoteException {
+            public void resetLockout(
+                    IBinder token,
+                    int sensorId,
+                    int userId,
+                    byte[] hardwareAuthToken,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1433,7 +1702,9 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void addLockoutResetCallback(IBiometricServiceLockoutResetCallback callback, String opPackageName) throws RemoteException {
+            public void addLockoutResetCallback(
+                    IBiometricServiceLockoutResetCallback callback, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1449,7 +1720,15 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void setFeature(IBinder token, int userId, int feature, boolean enabled, byte[] hardwareAuthToken, IFaceServiceReceiver receiver, String opPackageName) throws RemoteException {
+            public void setFeature(
+                    IBinder token,
+                    int userId,
+                    int feature,
+                    boolean enabled,
+                    byte[] hardwareAuthToken,
+                    IFaceServiceReceiver receiver,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1470,7 +1749,13 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void getFeature(IBinder token, int userId, int feature, IFaceServiceReceiver receiver, String opPackageName) throws RemoteException {
+            public void getFeature(
+                    IBinder token,
+                    int userId,
+                    int feature,
+                    IFaceServiceReceiver receiver,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1489,7 +1774,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void registerAuthenticators(FaceSensorConfigurations faceSensorConfigurations) throws RemoteException {
+            public void registerAuthenticators(FaceSensorConfigurations faceSensorConfigurations)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1504,7 +1790,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void addAuthenticatorsRegisteredCallback(IFaceAuthenticatorsRegisteredCallback callback) throws RemoteException {
+            public void addAuthenticatorsRegisteredCallback(
+                    IFaceAuthenticatorsRegisteredCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1519,7 +1806,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void registerAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
+            public void registerAuthenticationStateListener(AuthenticationStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1534,7 +1822,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void unregisterAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
+            public void unregisterAuthenticationStateListener(AuthenticationStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1549,7 +1838,8 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public void registerBiometricStateListener(IBiometricStateListener listener) throws RemoteException {
+            public void registerBiometricStateListener(IBiometricStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1575,7 +1865,14 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public long semAuthenticate(IBinder token, long operationId, IFaceServiceReceiver receiver, FaceAuthenticateOptions options, Bundle bundle, byte[] fidoRequestData) throws RemoteException {
+            public long semAuthenticate(
+                    IBinder token,
+                    long operationId,
+                    IFaceServiceReceiver receiver,
+                    FaceAuthenticateOptions options,
+                    Bundle bundle,
+                    byte[] fidoRequestData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1597,7 +1894,14 @@ public interface IFaceService extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceService
-            public long semAuthenticateExt(IBinder token, long operationId, IFaceServiceReceiver receiver, FaceAuthenticateOptions options, Surface previewSurface, byte[] fidoRequestData) throws RemoteException {
+            public long semAuthenticateExt(
+                    IBinder token,
+                    long operationId,
+                    IFaceServiceReceiver receiver,
+                    FaceAuthenticateOptions options,
+                    Surface previewSurface,
+                    byte[] fidoRequestData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1835,187 +2139,236 @@ public interface IFaceService extends IInterface {
         }
 
         protected void createTestSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void dumpSensorServiceStateProto_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void getSensorPropertiesInternal_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void getSensorProperties_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void authenticate_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void detectFace_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void prepareForAuthentication_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void startPreparedClient_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void cancelAuthentication_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void cancelFaceDetect_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
-        protected void cancelAuthenticationFromService_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+        protected void cancelAuthenticationFromService_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void enroll_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void enrollRemotely_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void cancelEnrollment_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void remove_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void removeAll_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void getEnrolledFaces_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void isHardwareDetected_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void generateChallenge_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void revokeChallenge_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void hasEnrolledFaces_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void getLockoutModeForUser_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void invalidateAuthenticatorId_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void getAuthenticatorId_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void resetLockout_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void addLockoutResetCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void setFeature_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void getFeature_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void registerAuthenticators_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
-        protected void registerAuthenticationStateListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+        protected void registerAuthenticationStateListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
-        protected void unregisterAuthenticationStateListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+        protected void unregisterAuthenticationStateListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void scheduleWatchdog_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void semIsEnrollSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semPauseEnroll_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semResumeEnroll_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semPauseAuth_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semResumeAuth_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semGetInfo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semResetAuthenticationTimeout_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semSessionOpen_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semSessionClose_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semIsSessionClose_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semGetSecurityLevel_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semIsFrameworkHandleLockout_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semGetRemainingLockoutTime_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void semShouldRemoveTemplate_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

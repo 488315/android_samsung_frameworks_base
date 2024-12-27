@@ -6,6 +6,7 @@ import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes3.dex */
@@ -150,7 +151,9 @@ public interface CameraProtos {
                 size += CodedOutputByteBufferNano.computeInt64Size(7, this.errorCount);
             }
             if (this.firstCaptureLatencyMillis != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(8, this.firstCaptureLatencyMillis);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                8, this.firstCaptureLatencyMillis);
             }
             if (this.maxHalBuffers != 0) {
                 size += CodedOutputByteBufferNano.computeInt32Size(9, this.maxHalBuffers);
@@ -315,11 +318,13 @@ public interface CameraProtos {
             }
         }
 
-        public static CameraStreamProto parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static CameraStreamProto parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (CameraStreamProto) MessageNano.mergeFrom(new CameraStreamProto(), data);
         }
 
-        public static CameraStreamProto parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static CameraStreamProto parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new CameraStreamProto().mergeFrom(input);
         }
     }

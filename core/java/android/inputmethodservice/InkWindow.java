@@ -9,8 +9,11 @@ import android.view.ViewGroup;
 import android.view.ViewRootImpl;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+
 import com.android.internal.policy.PhoneWindow;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
@@ -109,7 +112,9 @@ final class InkWindow extends PhoneWindow {
     @Override // com.android.internal.policy.PhoneWindow, android.view.Window
     public void clearContentView() {
         if (this.mGlobalLayoutListener != null && this.mInkView != null) {
-            this.mInkView.getViewTreeObserver().removeOnGlobalLayoutListener(this.mGlobalLayoutListener);
+            this.mInkView
+                    .getViewTreeObserver()
+                    .removeOnGlobalLayoutListener(this.mGlobalLayoutListener);
         }
         this.mGlobalLayoutListener = null;
         this.mInkView = null;
@@ -122,26 +127,36 @@ final class InkWindow extends PhoneWindow {
     }
 
     void initInkViewVisibilityListener() {
-        if (this.mInkView == null || this.mInkViewVisibilityListener == null || this.mGlobalLayoutListener != null) {
+        if (this.mInkView == null
+                || this.mInkViewVisibilityListener == null
+                || this.mGlobalLayoutListener != null) {
             return;
         }
-        this.mGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: android.inputmethodservice.InkWindow.1
-            @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-            public void onGlobalLayout() {
-                if (InkWindow.this.mInkView != null && InkWindow.this.mInkView.isVisibleToUser()) {
-                    if (InkWindow.this.mInkViewVisibilityListener != null) {
-                        InkWindow.this.mInkViewVisibilityListener.onInkViewVisible();
+        this.mGlobalLayoutListener =
+                new ViewTreeObserver.OnGlobalLayoutListener() { // from class:
+                    // android.inputmethodservice.InkWindow.1
+                    @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
+                    public void onGlobalLayout() {
+                        if (InkWindow.this.mInkView != null
+                                && InkWindow.this.mInkView.isVisibleToUser()) {
+                            if (InkWindow.this.mInkViewVisibilityListener != null) {
+                                InkWindow.this.mInkViewVisibilityListener.onInkViewVisible();
+                            }
+                            InkWindow.this
+                                    .mInkView
+                                    .getViewTreeObserver()
+                                    .removeOnGlobalLayoutListener(this);
+                            InkWindow.this.mGlobalLayoutListener = null;
+                        }
                     }
-                    InkWindow.this.mInkView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    InkWindow.this.mGlobalLayoutListener = null;
-                }
-            }
-        };
+                };
         this.mInkView.getViewTreeObserver().addOnGlobalLayoutListener(this.mGlobalLayoutListener);
     }
 
     boolean isInkViewVisible() {
-        return getDecorView().getVisibility() == 0 && this.mInkView != null && this.mInkView.isVisibleToUser();
+        return getDecorView().getVisibility() == 0
+                && this.mInkView != null
+                && this.mInkView.isVisibleToUser();
     }
 
     void dispatchHandwritingEvent(MotionEvent event) {

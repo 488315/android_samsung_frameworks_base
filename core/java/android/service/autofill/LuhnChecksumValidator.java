@@ -7,29 +7,37 @@ import android.provider.Downloads;
 import android.util.Log;
 import android.view.autofill.AutofillId;
 import android.view.autofill.Helper;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 
 /* loaded from: classes3.dex */
-public final class LuhnChecksumValidator extends InternalValidator implements Validator, Parcelable {
-    public static final Parcelable.Creator<LuhnChecksumValidator> CREATOR = new Parcelable.Creator<LuhnChecksumValidator>() { // from class: android.service.autofill.LuhnChecksumValidator.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LuhnChecksumValidator createFromParcel(Parcel parcel) {
-            return new LuhnChecksumValidator((AutofillId[]) parcel.readParcelableArray(null, AutofillId.class));
-        }
+public final class LuhnChecksumValidator extends InternalValidator
+        implements Validator, Parcelable {
+    public static final Parcelable.Creator<LuhnChecksumValidator> CREATOR =
+            new Parcelable.Creator<
+                    LuhnChecksumValidator>() { // from class:
+                                               // android.service.autofill.LuhnChecksumValidator.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LuhnChecksumValidator createFromParcel(Parcel parcel) {
+                    return new LuhnChecksumValidator(
+                            (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class));
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LuhnChecksumValidator[] newArray(int size) {
-            return new LuhnChecksumValidator[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LuhnChecksumValidator[] newArray(int size) {
+                    return new LuhnChecksumValidator[size];
+                }
+            };
     private static final String TAG = "LuhnChecksumValidator";
     private final AutofillId[] mIds;
 
     public LuhnChecksumValidator(AutofillId... ids) {
-        this.mIds = (AutofillId[]) Preconditions.checkArrayElementsNotNull(ids, Downloads.EXTRA_IDS);
+        this.mIds =
+                (AutofillId[]) Preconditions.checkArrayElementsNotNull(ids, Downloads.EXTRA_IDS);
     }
 
     private static boolean isLuhnChecksumValid(String number) {
@@ -85,7 +93,11 @@ public final class LuhnChecksumValidator extends InternalValidator implements Va
     }
 
     public String toString() {
-        return !Helper.sDebug ? super.toString() : "LuhnChecksumValidator: [ids=" + Arrays.toString(this.mIds) + NavigationBarInflaterView.SIZE_MOD_END;
+        return !Helper.sDebug
+                ? super.toString()
+                : "LuhnChecksumValidator: [ids="
+                        + Arrays.toString(this.mIds)
+                        + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     @Override // android.os.Parcelable

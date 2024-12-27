@@ -14,8 +14,7 @@ public interface IMultiFingerGestureListener extends IInterface {
 
     public static class Default implements IMultiFingerGestureListener {
         @Override // android.hardware.input.IMultiFingerGestureListener
-        public void onMultiFingerGesture(int behavior, int reserved) throws RemoteException {
-        }
+        public void onMultiFingerGesture(int behavior, int reserved) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IMultiFingerGestureListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMultiFingerGestureListener {
+    public abstract static class Stub extends Binder implements IMultiFingerGestureListener {
         static final int TRANSACTION_onMultiFingerGesture = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IMultiFingerGestureListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMultiFingerGestureListener.DESCRIPTOR);
             }

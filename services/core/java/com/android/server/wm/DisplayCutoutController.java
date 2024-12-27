@@ -4,12 +4,15 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.WindowRelayoutResult;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.window.flags.Flags;
+
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.server.packagefeature.PackageFeatureUserChange;
 import com.samsung.android.server.packagefeature.PackageFeatureUserChangePersister;
 import com.samsung.android.server.util.FullScreenAppsSupportUtils;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +31,25 @@ public final class DisplayCutoutController extends PackagesChange {
     public DisplayCutoutController(ActivityTaskManagerService activityTaskManagerService) {
         super(activityTaskManagerService);
         ((ArrayList) PackagesChange.sAllPackagesChangeAsTask).add(this);
-        PackageFeatureUserChange packageFeatureUserChange = new PackageFeatureUserChange(128, PackageFeatureUserChangePersister.PACKAGE_SETTINGS_DIRECTORY, "DisplayCutoutPackageMap", new DisplayCutoutController$$ExternalSyntheticLambda0());
+        PackageFeatureUserChange packageFeatureUserChange =
+                new PackageFeatureUserChange(
+                        128,
+                        PackageFeatureUserChangePersister.PACKAGE_SETTINGS_DIRECTORY,
+                        "DisplayCutoutPackageMap",
+                        new DisplayCutoutController$$ExternalSyntheticLambda0());
         this.mUserChange = packageFeatureUserChange;
         this.mFullScreenUtils = FullScreenAppsSupportUtils.LazyHolder.sUtils;
         this.mRemoveCutoutOfConfiguration = true;
         this.mNonDecorInsetsWithoutCutout = new Rect();
         this.mTmpRect = new Rect();
-        this.mUserChanges = new PackageFeatureUserChange[]{packageFeatureUserChange};
+        this.mUserChanges = new PackageFeatureUserChange[] {packageFeatureUserChange};
     }
 
-    public static int adjustCutoutMode(WindowState windowState, int i, Bundle bundle, WindowRelayoutResult windowRelayoutResult) {
+    public static int adjustCutoutMode(
+            WindowState windowState,
+            int i,
+            Bundle bundle,
+            WindowRelayoutResult windowRelayoutResult) {
         DisplayContent displayContent;
         int i2;
         int i3;
@@ -62,7 +74,10 @@ public final class DisplayCutoutController extends PackagesChange {
             i3 = 2097152;
             return i3 | i;
         }
-        if (!CoreRune.FW_OVERLAPPING_WITH_CUTOUT_AS_DEFAULT || (displayContent = windowState.getDisplayContent()) == null || !displayContent.mIsOverlappingWithCutoutAsDefault || ((i2 = windowState.mOriginalLayoutInDisplayCutoutMode) != 0 && i2 != 1)) {
+        if (!CoreRune.FW_OVERLAPPING_WITH_CUTOUT_AS_DEFAULT
+                || (displayContent = windowState.getDisplayContent()) == null
+                || !displayContent.mIsOverlappingWithCutoutAsDefault
+                || ((i2 = windowState.mOriginalLayoutInDisplayCutoutMode) != 0 && i2 != 1)) {
             return i;
         }
         windowState.mAttrs.layoutInDisplayCutoutMode = 3;
@@ -78,7 +93,8 @@ public final class DisplayCutoutController extends PackagesChange {
         StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m(str, "mCutoutInset=");
         m.append(this.mCutoutInset);
         printWriter.println(m.toString());
-        printWriter.println(str + "mNonDecorInsetsWithoutCutout=" + this.mNonDecorInsetsWithoutCutout);
+        printWriter.println(
+                str + "mNonDecorInsetsWithoutCutout=" + this.mNonDecorInsetsWithoutCutout);
     }
 
     public final int getPolicy(int i, String str) {
@@ -88,7 +104,9 @@ public final class DisplayCutoutController extends PackagesChange {
             return num.intValue();
         }
         FullScreenAppsSupportUtils fullScreenAppsSupportUtils = this.mFullScreenUtils;
-        if ((2 & fullScreenAppsSupportUtils.getFullScreenAppsSupportMode()) == 0 || TextUtils.isEmpty(str) || !fullScreenAppsSupportUtils.mDefaultFullScreenList.contains(str)) {
+        if ((2 & fullScreenAppsSupportUtils.getFullScreenAppsSupportMode()) == 0
+                || TextUtils.isEmpty(str)
+                || !fullScreenAppsSupportUtils.mDefaultFullScreenList.contains(str)) {
             return 0;
         }
         setPolicy(adjustedUserId, 1, str, false);
@@ -99,9 +117,11 @@ public final class DisplayCutoutController extends PackagesChange {
         Integer num = (Integer) this.mUserChange.putValue(str, i, Integer.valueOf(i2));
         if (z) {
             if (num == null || num.intValue() != i2) {
-                MultiTaskingAppCompatController multiTaskingAppCompatController = this.mAtmService.mMultiTaskingAppCompatController;
+                MultiTaskingAppCompatController multiTaskingAppCompatController =
+                        this.mAtmService.mMultiTaskingAppCompatController;
                 multiTaskingAppCompatController.getClass();
-                multiTaskingAppCompatController.removeTaskWithoutRemoveFromRecents(i, "setCutoutPolicy", false, List.of(str));
+                multiTaskingAppCompatController.removeTaskWithoutRemoveFromRecents(
+                        i, "setCutoutPolicy", false, List.of(str));
             }
         }
     }

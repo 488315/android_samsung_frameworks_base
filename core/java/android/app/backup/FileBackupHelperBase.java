@@ -3,6 +3,7 @@ package android.app.backup;
 import android.content.Context;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+
 import java.io.File;
 import java.io.FileDescriptor;
 
@@ -17,7 +18,12 @@ class FileBackupHelperBase {
 
     private static native void dtor(long j);
 
-    private static native int performBackup_native(FileDescriptor fileDescriptor, long j, FileDescriptor fileDescriptor2, String[] strArr, String[] strArr2);
+    private static native int performBackup_native(
+            FileDescriptor fileDescriptor,
+            long j,
+            FileDescriptor fileDescriptor2,
+            String[] strArr,
+            String[] strArr2);
 
     private static native int writeFile_native(long j, String str, long j2);
 
@@ -35,7 +41,12 @@ class FileBackupHelperBase {
         }
     }
 
-    static void performBackup_checked(ParcelFileDescriptor oldState, BackupDataOutput data, ParcelFileDescriptor newState, String[] files, String[] keys) {
+    static void performBackup_checked(
+            ParcelFileDescriptor oldState,
+            BackupDataOutput data,
+            ParcelFileDescriptor newState,
+            String[] files,
+            String[] keys) {
         if (files.length == 0) {
             return;
         }
@@ -45,7 +56,8 @@ class FileBackupHelperBase {
             }
         }
         if (files.length != keys.length) {
-            throw new RuntimeException("files.length=" + files.length + " keys.length=" + keys.length);
+            throw new RuntimeException(
+                    "files.length=" + files.length + " keys.length=" + keys.length);
         }
         FileDescriptor oldStateFd = oldState != null ? oldState.getFileDescriptor() : null;
         FileDescriptor newStateFd = newState.getFileDescriptor();
@@ -63,7 +75,14 @@ class FileBackupHelperBase {
         parent.mkdirs();
         int result = writeFile_native(this.mPtr, f.getAbsolutePath(), in.mData.mBackupReader);
         if (result != 0 && !this.mExceptionLogged) {
-            Log.e(TAG, "Failed restoring file '" + f + "' for app '" + this.mContext.getPackageName() + "' result=0x" + Integer.toHexString(result));
+            Log.e(
+                    TAG,
+                    "Failed restoring file '"
+                            + f
+                            + "' for app '"
+                            + this.mContext.getPackageName()
+                            + "' result=0x"
+                            + Integer.toHexString(result));
             this.mExceptionLogged = true;
         }
         return result == 0;

@@ -1,7 +1,7 @@
 package com.android.server.wm;
 
 import android.util.Slog;
-import com.android.server.wm.CompatChangeableAppsCache;
+
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.server.packagefeature.PackageFeature;
 import com.samsung.android.server.packagefeature.PackageFeatureUserChange;
@@ -20,10 +20,19 @@ public final class MultiTaskingAppCompatOrientationOverrides {
     public final PackageFeatureUserChange mUserOverride;
 
     public MultiTaskingAppCompatOrientationOverrides() {
-        MultiTaskingAppCompatOrientationOverrides$$ExternalSyntheticLambda0 multiTaskingAppCompatOrientationOverrides$$ExternalSyntheticLambda0 = new MultiTaskingAppCompatOrientationOverrides$$ExternalSyntheticLambda0();
+        MultiTaskingAppCompatOrientationOverrides$$ExternalSyntheticLambda0
+                multiTaskingAppCompatOrientationOverrides$$ExternalSyntheticLambda0 =
+                        new MultiTaskingAppCompatOrientationOverrides$$ExternalSyntheticLambda0();
         String str = PackageFeatureUserChangePersister.PACKAGE_SETTINGS_DIRECTORY;
         boolean z = CoreRune.MT_APP_COMPAT_LANDSCAPE_VIEW_FOR_PORTRAIT_APPS;
-        this.mUserOverride = new PackageFeatureUserChange(64, str, "OrientationControlPackageMap", multiTaskingAppCompatOrientationOverrides$$ExternalSyntheticLambda0, z, null);
+        this.mUserOverride =
+                new PackageFeatureUserChange(
+                        64,
+                        str,
+                        "OrientationControlPackageMap",
+                        multiTaskingAppCompatOrientationOverrides$$ExternalSyntheticLambda0,
+                        z,
+                        null);
         if (z) {
             setDefaultEnabled(SUPPORTS_DEFAULT_ENABLED);
         }
@@ -32,7 +41,10 @@ public final class MultiTaskingAppCompatOrientationOverrides {
     public final int getRespectOrientationRequest(int i, String str) {
         int intValue;
         int adjustedUserId = MultiTaskingAppCompatUtils.getAdjustedUserId(i, 3, null);
-        if (str == null || CompatChangeableAppsCache.LazyHolder.sCache.query(new CompatChangeableAppsCache$$ExternalSyntheticLambda0(str, 0), adjustedUserId)) {
+        if (str == null
+                || CompatChangeableAppsCache.LazyHolder.sCache.query(
+                        new CompatChangeableAppsCache$$ExternalSyntheticLambda0(str, 0),
+                        adjustedUserId)) {
             return -1;
         }
         synchronized (this) {
@@ -46,17 +58,31 @@ public final class MultiTaskingAppCompatOrientationOverrides {
             synchronized (this) {
                 try {
                     if (this.mDefaultEnabled) {
-                        PackageSpecialManagementList packageSpecialManagementList = this.mDefaultDisabledList;
-                        if (packageSpecialManagementList == null || !packageSpecialManagementList.contains(str)) {
-                            CompatChangeableAppsCache compatChangeableAppsCache = CompatChangeableAppsCache.LazyHolder.sCache;
-                            if (compatChangeableAppsCache.query(new CompatChangeableAppsCache$$ExternalSyntheticLambda0(str, 1), adjustedUserId) && !compatChangeableAppsCache.query(new CompatChangeableAppsCache$$ExternalSyntheticLambda0(str, 3), adjustedUserId)) {
-                            }
+                        PackageSpecialManagementList packageSpecialManagementList =
+                                this.mDefaultDisabledList;
+                        if (packageSpecialManagementList == null
+                                || !packageSpecialManagementList.contains(str)) {
+                            CompatChangeableAppsCache compatChangeableAppsCache =
+                                    CompatChangeableAppsCache.LazyHolder.sCache;
+                            if (compatChangeableAppsCache.query(
+                                            new CompatChangeableAppsCache$$ExternalSyntheticLambda0(
+                                                    str, 1),
+                                            adjustedUserId)
+                                    && !compatChangeableAppsCache.query(
+                                            new CompatChangeableAppsCache$$ExternalSyntheticLambda0(
+                                                    str, 3),
+                                            adjustedUserId)) {}
                         } else {
                             intValue = 0;
                         }
                     }
-                    PackageSpecialManagementList packageSpecialManagementList2 = this.mDefaultEnabledList;
-                    intValue = (packageSpecialManagementList2 == null || !packageSpecialManagementList2.contains(str)) ? -1 : 31;
+                    PackageSpecialManagementList packageSpecialManagementList2 =
+                            this.mDefaultEnabledList;
+                    intValue =
+                            (packageSpecialManagementList2 == null
+                                            || !packageSpecialManagementList2.contains(str))
+                                    ? -1
+                                    : 31;
                 } finally {
                 }
             }
@@ -80,16 +106,24 @@ public final class MultiTaskingAppCompatOrientationOverrides {
     public final void setDefaultEnabled(boolean z) {
         synchronized (this) {
             try {
-                Slog.d("MultiTaskingAppCompat", "setDefaultEnabled: " + this.mDefaultEnabled + " to " + z);
+                Slog.d(
+                        "MultiTaskingAppCompat",
+                        "setDefaultEnabled: " + this.mDefaultEnabled + " to " + z);
                 this.mDefaultEnabled = z;
                 if (CoreRune.MT_APP_COMPAT_LANDSCAPE_VIEW_FOR_PORTRAIT_APPS) {
                     if (z) {
-                        this.mDefaultDisabledList = new PackageSpecialManagementList(PackageFeature.IGNORE_APP_ROTATION_DISABLED);
+                        this.mDefaultDisabledList =
+                                new PackageSpecialManagementList(
+                                        PackageFeature.IGNORE_APP_ROTATION_DISABLED);
                     } else {
-                        this.mDefaultEnabledList = new PackageSpecialManagementList(PackageFeature.IGNORE_APP_ROTATION);
+                        this.mDefaultEnabledList =
+                                new PackageSpecialManagementList(
+                                        PackageFeature.IGNORE_APP_ROTATION);
                     }
                     if (CoreRune.IS_TABLET_DEVICE) {
-                        this.mTabletRotationCompatList = new PackageSpecialManagementList(PackageFeature.TABLET_APP_ROTATION_COMPAT);
+                        this.mTabletRotationCompatList =
+                                new PackageSpecialManagementList(
+                                        PackageFeature.TABLET_APP_ROTATION_COMPAT);
                     }
                 }
             } catch (Throwable th) {

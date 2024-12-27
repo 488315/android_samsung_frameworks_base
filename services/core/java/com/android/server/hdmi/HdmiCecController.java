@@ -32,15 +32,17 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.ServiceSpecificException;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
-import com.android.server.hdmi.HdmiCecController;
-import com.android.server.hdmi.HdmiCecLocalDevice;
-import com.android.server.hdmi.HdmiControlService;
 import com.android.server.location.gnss.hal.GnssNative;
+
+import libcore.util.EmptyArray;
+
 import com.att.iqi.lib.metrics.hw.HwConstants;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +52,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.function.Predicate;
-import libcore.util.EmptyArray;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -61,14 +62,19 @@ public final class HdmiCecController {
     public Handler mIoHandler;
     public final NativeWrapper mNativeWrapperImpl;
     public final HdmiControlService mService;
-    public final AnonymousClass1 mRemoteDeviceAddressPredicate = new Predicate() { // from class: com.android.server.hdmi.HdmiCecController.1
-        @Override // java.util.function.Predicate
-        public final boolean test(Object obj) {
-            return !HdmiCecController.this.mService.mHdmiCecNetwork.isAllocatedLocalDeviceAddress(((Integer) obj).intValue());
-        }
-    };
+    public final AnonymousClass1 mRemoteDeviceAddressPredicate =
+            new Predicate() { // from class: com.android.server.hdmi.HdmiCecController.1
+                @Override // java.util.function.Predicate
+                public final boolean test(Object obj) {
+                    return !HdmiCecController.this.mService.mHdmiCecNetwork
+                            .isAllocatedLocalDeviceAddress(((Integer) obj).intValue());
+                }
+            };
     public final AnonymousClass2 mSystemAudioAddressPredicate = new AnonymousClass2();
-    public ArrayBlockingQueue mMessageHistory = new ArrayBlockingQueue(FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE);
+    public ArrayBlockingQueue mMessageHistory =
+            new ArrayBlockingQueue(
+                    FrameworkStatsLog
+                            .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE);
     public final Object mMessageHistoryLock = new Object();
     public long mLogicalAddressAllocationDelay = 0;
     public long mPollDevicesDelay = 0;
@@ -89,7 +95,10 @@ public final class HdmiCecController {
         public final /* synthetic */ HdmiCecMessage val$cecMessage;
         public final /* synthetic */ List val$sendResults;
 
-        public AnonymousClass7(HdmiCecMessage hdmiCecMessage, List list, HdmiControlService.SendMessageCallback sendMessageCallback) {
+        public AnonymousClass7(
+                HdmiCecMessage hdmiCecMessage,
+                List list,
+                HdmiControlService.SendMessageCallback sendMessageCallback) {
             this.val$cecMessage = hdmiCecMessage;
             this.val$sendResults = list;
             this.val$callback = sendMessageCallback;
@@ -109,7 +118,9 @@ public final class HdmiCecController {
             while (true) {
                 NativeWrapper nativeWrapper = HdmiCecController.this.mNativeWrapperImpl;
                 HdmiCecMessage hdmiCecMessage2 = this.val$cecMessage;
-                nativeSendCecCommand = nativeWrapper.nativeSendCecCommand(hdmiCecMessage2.mSource, hdmiCecMessage2.mDestination, bArr2);
+                nativeSendCecCommand =
+                        nativeWrapper.nativeSendCecCommand(
+                                hdmiCecMessage2.mSource, hdmiCecMessage2.mDestination, bArr2);
                 if (nativeSendCecCommand == 0) {
                     this.val$sendResults.add("ACK");
                 } else if (nativeSendCecCommand == 1) {
@@ -130,25 +141,34 @@ public final class HdmiCecController {
                 }
             }
             if (nativeSendCecCommand != 0) {
-                Slog.w("HdmiCecController", "Failed to send " + this.val$cecMessage + " with errorCode=" + nativeSendCecCommand);
+                Slog.w(
+                        "HdmiCecController",
+                        "Failed to send "
+                                + this.val$cecMessage
+                                + " with errorCode="
+                                + nativeSendCecCommand);
             }
-            HdmiCecController.this.runOnServiceThread(new Runnable() { // from class: com.android.server.hdmi.HdmiCecController.7.1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AnonymousClass7 anonymousClass7 = AnonymousClass7.this;
-                    HdmiCecAtomWriter hdmiCecAtomWriter = HdmiCecController.this.mHdmiCecAtomWriter;
-                    HdmiCecMessage hdmiCecMessage3 = anonymousClass7.val$cecMessage;
-                    int callingWorkSourceUid = Binder.getCallingWorkSourceUid();
-                    if (callingWorkSourceUid == -1) {
-                        callingWorkSourceUid = Binder.getCallingUid();
-                    }
-                    hdmiCecAtomWriter.messageReported(hdmiCecMessage3, 2, callingWorkSourceUid, nativeSendCecCommand);
-                    HdmiControlService.SendMessageCallback sendMessageCallback = AnonymousClass7.this.val$callback;
-                    if (sendMessageCallback != null) {
-                        sendMessageCallback.onSendCompleted(nativeSendCecCommand);
-                    }
-                }
-            });
+            HdmiCecController.this.runOnServiceThread(
+                    new Runnable() { // from class: com.android.server.hdmi.HdmiCecController.7.1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AnonymousClass7 anonymousClass7 = AnonymousClass7.this;
+                            HdmiCecAtomWriter hdmiCecAtomWriter =
+                                    HdmiCecController.this.mHdmiCecAtomWriter;
+                            HdmiCecMessage hdmiCecMessage3 = anonymousClass7.val$cecMessage;
+                            int callingWorkSourceUid = Binder.getCallingWorkSourceUid();
+                            if (callingWorkSourceUid == -1) {
+                                callingWorkSourceUid = Binder.getCallingUid();
+                            }
+                            hdmiCecAtomWriter.messageReported(
+                                    hdmiCecMessage3, 2, callingWorkSourceUid, nativeSendCecCommand);
+                            HdmiControlService.SendMessageCallback sendMessageCallback =
+                                    AnonymousClass7.this.val$callback;
+                            if (sendMessageCallback != null) {
+                                sendMessageCallback.onSendCompleted(nativeSendCecCommand);
+                            }
+                        }
+                    });
         }
     }
 
@@ -156,121 +176,168 @@ public final class HdmiCecController {
     public abstract class Dumpable {
         public final long mTime = System.currentTimeMillis();
 
-        public abstract void dump(IndentingPrintWriter indentingPrintWriter, SimpleDateFormat simpleDateFormat);
+        public abstract void dump(
+                IndentingPrintWriter indentingPrintWriter, SimpleDateFormat simpleDateFormat);
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HdmiCecCallback {
-        public HdmiCecCallback() {
-        }
+        public HdmiCecCallback() {}
 
         public void onCecMessage(final int i, final int i2, final byte[] bArr) {
-            HdmiCecController.this.runOnServiceThread(new Runnable() { // from class: com.android.server.hdmi.HdmiCecController$HdmiCecCallback$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    HdmiCecController.HdmiCecCallback hdmiCecCallback = HdmiCecController.HdmiCecCallback.this;
-                    int i3 = i;
-                    int i4 = i2;
-                    byte[] bArr2 = bArr;
-                    HdmiCecController hdmiCecController = HdmiCecController.this;
-                    hdmiCecController.assertRunOnServiceThread();
-                    if (bArr2.length == 0) {
-                        Slog.e("HdmiCecController", "Message with empty body received.");
-                        return;
-                    }
-                    boolean z = false;
-                    int i5 = 1;
-                    HdmiCecMessage build = HdmiCecMessage.build(i3, i4, bArr2[0], Arrays.copyOfRange(bArr2, 1, bArr2.length));
-                    if (build.mValidationResult != 0) {
-                        Slog.e("HdmiCecController", "Invalid message received: " + build);
-                    }
-                    HdmiLogger.debug("[R]:" + build, new Object[0]);
-                    hdmiCecController.assertRunOnServiceThread();
-                    hdmiCecController.addEventToHistory(new HdmiCecController.MessageHistoryRecord(true, build, null));
-                    boolean z2 = i4 == 15;
-                    Iterator it = ((ArrayList) hdmiCecController.mService.mHdmiCecNetwork.getLocalDeviceList()).iterator();
-                    while (it.hasNext()) {
-                        int logicalAddress = ((HdmiCecLocalDevice) it.next()).getDeviceInfo().getLogicalAddress();
-                        if (logicalAddress == i3) {
-                            z = true;
+            HdmiCecController.this.runOnServiceThread(
+                    new Runnable() { // from class:
+                                     // com.android.server.hdmi.HdmiCecController$HdmiCecCallback$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            HdmiCecController.HdmiCecCallback hdmiCecCallback =
+                                    HdmiCecController.HdmiCecCallback.this;
+                            int i3 = i;
+                            int i4 = i2;
+                            byte[] bArr2 = bArr;
+                            HdmiCecController hdmiCecController = HdmiCecController.this;
+                            hdmiCecController.assertRunOnServiceThread();
+                            if (bArr2.length == 0) {
+                                Slog.e("HdmiCecController", "Message with empty body received.");
+                                return;
+                            }
+                            boolean z = false;
+                            int i5 = 1;
+                            HdmiCecMessage build =
+                                    HdmiCecMessage.build(
+                                            i3,
+                                            i4,
+                                            bArr2[0],
+                                            Arrays.copyOfRange(bArr2, 1, bArr2.length));
+                            if (build.mValidationResult != 0) {
+                                Slog.e("HdmiCecController", "Invalid message received: " + build);
+                            }
+                            HdmiLogger.debug("[R]:" + build, new Object[0]);
+                            hdmiCecController.assertRunOnServiceThread();
+                            hdmiCecController.addEventToHistory(
+                                    new HdmiCecController.MessageHistoryRecord(true, build, null));
+                            boolean z2 = i4 == 15;
+                            Iterator it =
+                                    ((ArrayList)
+                                                    hdmiCecController.mService.mHdmiCecNetwork
+                                                            .getLocalDeviceList())
+                                            .iterator();
+                            while (it.hasNext()) {
+                                int logicalAddress =
+                                        ((HdmiCecLocalDevice) it.next())
+                                                .getDeviceInfo()
+                                                .getLogicalAddress();
+                                if (logicalAddress == i3) {
+                                    z = true;
+                                }
+                                if (logicalAddress == i4) {
+                                    z2 = true;
+                                }
+                            }
+                            if (!z && z2) {
+                                i5 = 3;
+                            } else if (z && z2) {
+                                i5 = 4;
+                            }
+                            int callingWorkSourceUid = Binder.getCallingWorkSourceUid();
+                            if (callingWorkSourceUid == -1) {
+                                callingWorkSourceUid = Binder.getCallingUid();
+                            }
+                            hdmiCecController.mHdmiCecAtomWriter.messageReported(
+                                    build, i5, callingWorkSourceUid, -1);
+                            hdmiCecController.onReceiveCommand(build);
                         }
-                        if (logicalAddress == i4) {
-                            z2 = true;
-                        }
-                    }
-                    if (!z && z2) {
-                        i5 = 3;
-                    } else if (z && z2) {
-                        i5 = 4;
-                    }
-                    int callingWorkSourceUid = Binder.getCallingWorkSourceUid();
-                    if (callingWorkSourceUid == -1) {
-                        callingWorkSourceUid = Binder.getCallingUid();
-                    }
-                    hdmiCecController.mHdmiCecAtomWriter.messageReported(build, i5, callingWorkSourceUid, -1);
-                    hdmiCecController.onReceiveCommand(build);
-                }
-            });
+                    });
         }
 
         public void onHotplugEvent(final int i, final boolean z) {
-            HdmiCecController.this.runOnServiceThread(new Runnable() { // from class: com.android.server.hdmi.HdmiCecController$HdmiCecCallback$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    HdmiCecController.HdmiCecCallback hdmiCecCallback = HdmiCecController.HdmiCecCallback.this;
-                    int i2 = i;
-                    boolean z2 = z;
-                    HdmiCecController hdmiCecController = HdmiCecController.this;
-                    hdmiCecController.assertRunOnServiceThread();
-                    HdmiLogger.debug("Hotplug event:[port:%d, connected:%b]", Integer.valueOf(i2), Boolean.valueOf(z2));
-                    hdmiCecController.assertRunOnServiceThread();
-                    hdmiCecController.addEventToHistory(new HdmiCecController.HotplugHistoryRecord(i2, z2));
-                    HdmiControlService hdmiControlService = hdmiCecController.mService;
-                    hdmiControlService.assertRunOnServiceThread();
-                    hdmiControlService.mHdmiCecNetwork.initPortInfo();
-                    HdmiPortInfo portInfo = hdmiControlService.mHdmiCecNetwork.getPortInfo(i2);
-                    if (z2 && !hdmiControlService.isTvDevice() && portInfo != null && portInfo.getType() == 1) {
-                        ArrayList arrayList = new ArrayList();
-                        Iterator it = ((ArrayList) hdmiControlService.getCecLocalDeviceTypes()).iterator();
-                        while (it.hasNext()) {
-                            int intValue = ((Integer) it.next()).intValue();
-                            HdmiCecLocalDevice localDevice = hdmiControlService.mHdmiCecNetwork.getLocalDevice(intValue);
-                            if (localDevice == null) {
-                                localDevice = HdmiCecLocalDevice.create(hdmiControlService, intValue);
-                                localDevice.assertRunOnServiceThread();
-                                localDevice.mPreferredAddress = localDevice.getPreferredAddress();
-                                HdmiCecLocalDevice.AnonymousClass1 anonymousClass1 = localDevice.mHandler;
-                                if (anonymousClass1.hasMessages(1)) {
-                                    anonymousClass1.removeMessages(1);
-                                    localDevice.handleDisableDeviceTimeout();
+            HdmiCecController.this.runOnServiceThread(
+                    new Runnable() { // from class:
+                                     // com.android.server.hdmi.HdmiCecController$HdmiCecCallback$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            HdmiCecController.HdmiCecCallback hdmiCecCallback =
+                                    HdmiCecController.HdmiCecCallback.this;
+                            int i2 = i;
+                            boolean z2 = z;
+                            HdmiCecController hdmiCecController = HdmiCecController.this;
+                            hdmiCecController.assertRunOnServiceThread();
+                            HdmiLogger.debug(
+                                    "Hotplug event:[port:%d, connected:%b]",
+                                    Integer.valueOf(i2), Boolean.valueOf(z2));
+                            hdmiCecController.assertRunOnServiceThread();
+                            hdmiCecController.addEventToHistory(
+                                    new HdmiCecController.HotplugHistoryRecord(i2, z2));
+                            HdmiControlService hdmiControlService = hdmiCecController.mService;
+                            hdmiControlService.assertRunOnServiceThread();
+                            hdmiControlService.mHdmiCecNetwork.initPortInfo();
+                            HdmiPortInfo portInfo =
+                                    hdmiControlService.mHdmiCecNetwork.getPortInfo(i2);
+                            if (z2
+                                    && !hdmiControlService.isTvDevice()
+                                    && portInfo != null
+                                    && portInfo.getType() == 1) {
+                                ArrayList arrayList = new ArrayList();
+                                Iterator it =
+                                        ((ArrayList) hdmiControlService.getCecLocalDeviceTypes())
+                                                .iterator();
+                                while (it.hasNext()) {
+                                    int intValue = ((Integer) it.next()).intValue();
+                                    HdmiCecLocalDevice localDevice =
+                                            hdmiControlService.mHdmiCecNetwork.getLocalDevice(
+                                                    intValue);
+                                    if (localDevice == null) {
+                                        localDevice =
+                                                HdmiCecLocalDevice.create(
+                                                        hdmiControlService, intValue);
+                                        localDevice.assertRunOnServiceThread();
+                                        localDevice.mPreferredAddress =
+                                                localDevice.getPreferredAddress();
+                                        HdmiCecLocalDevice.AnonymousClass1 anonymousClass1 =
+                                                localDevice.mHandler;
+                                        if (anonymousClass1.hasMessages(1)) {
+                                            anonymousClass1.removeMessages(1);
+                                            localDevice.handleDisableDeviceTimeout();
+                                        }
+                                        localDevice.mPendingActionClearedCallback = null;
+                                    }
+                                    arrayList.add(localDevice);
                                 }
-                                localDevice.mPendingActionClearedCallback = null;
+                                hdmiControlService.allocateLogicalAddress(arrayList, 4);
                             }
-                            arrayList.add(localDevice);
-                        }
-                        hdmiControlService.allocateLogicalAddress(arrayList, 4);
-                    }
-                    Iterator it2 = ((ArrayList) hdmiControlService.mHdmiCecNetwork.getLocalDeviceList()).iterator();
-                    while (it2.hasNext()) {
-                        ((HdmiCecLocalDevice) it2.next()).onHotplug(i2, z2);
-                    }
-                    HdmiHotplugEvent hdmiHotplugEvent = new HdmiHotplugEvent(i2, z2);
-                    synchronized (hdmiControlService.mLock) {
-                        try {
-                            Iterator it3 = hdmiControlService.mHotplugEventListenerRecords.iterator();
-                            while (it3.hasNext()) {
+                            Iterator it2 =
+                                    ((ArrayList)
+                                                    hdmiControlService.mHdmiCecNetwork
+                                                            .getLocalDeviceList())
+                                            .iterator();
+                            while (it2.hasNext()) {
+                                ((HdmiCecLocalDevice) it2.next()).onHotplug(i2, z2);
+                            }
+                            HdmiHotplugEvent hdmiHotplugEvent = new HdmiHotplugEvent(i2, z2);
+                            synchronized (hdmiControlService.mLock) {
                                 try {
-                                    ((HdmiControlService.HotplugEventListenerRecord) it3.next()).mListener.onReceived(hdmiHotplugEvent);
-                                } catch (RemoteException e) {
-                                    Slog.e("HdmiControlService", "Failed to report hotplug event:" + hdmiHotplugEvent.toString(), e);
+                                    Iterator it3 =
+                                            hdmiControlService.mHotplugEventListenerRecords
+                                                    .iterator();
+                                    while (it3.hasNext()) {
+                                        try {
+                                            ((HdmiControlService.HotplugEventListenerRecord)
+                                                            it3.next())
+                                                    .mListener.onReceived(hdmiHotplugEvent);
+                                        } catch (RemoteException e) {
+                                            Slog.e(
+                                                    "HdmiControlService",
+                                                    "Failed to report hotplug event:"
+                                                            + hdmiHotplugEvent.toString(),
+                                                    e);
+                                        }
+                                    }
+                                } catch (Throwable th) {
+                                    throw th;
                                 }
                             }
-                        } catch (Throwable th) {
-                            throw th;
                         }
-                    }
-                }
-            });
+                    });
         }
     }
 
@@ -284,23 +351,21 @@ public final class HdmiCecController {
             this.mHdmiCecCallback = hdmiCecCallback;
         }
 
-        private final void debug$com$android$server$hdmi$HdmiCecController$HdmiCecCallback10(NativeHandle nativeHandle, ArrayList arrayList) {
-        }
+        private final void debug$com$android$server$hdmi$HdmiCecController$HdmiCecCallback10(
+                NativeHandle nativeHandle, ArrayList arrayList) {}
 
-        private final void debug$com$android$server$hdmi$HdmiCecController$HdmiCecCallback11(NativeHandle nativeHandle, ArrayList arrayList) {
-        }
+        private final void debug$com$android$server$hdmi$HdmiCecController$HdmiCecCallback11(
+                NativeHandle nativeHandle, ArrayList arrayList) {}
 
-        private final void ping$com$android$server$hdmi$HdmiCecController$HdmiCecCallback10() {
-        }
+        private final void ping$com$android$server$hdmi$HdmiCecController$HdmiCecCallback10() {}
 
-        private final void ping$com$android$server$hdmi$HdmiCecController$HdmiCecCallback11() {
-        }
+        private final void ping$com$android$server$hdmi$HdmiCecController$HdmiCecCallback11() {}
 
-        private final void setHALInstrumentation$com$android$server$hdmi$HdmiCecController$HdmiCecCallback10() {
-        }
+        private final void
+                setHALInstrumentation$com$android$server$hdmi$HdmiCecController$HdmiCecCallback10() {}
 
-        private final void setHALInstrumentation$com$android$server$hdmi$HdmiCecController$HdmiCecCallback11() {
-        }
+        private final void
+                setHALInstrumentation$com$android$server$hdmi$HdmiCecController$HdmiCecCallback11() {}
 
         @Override // android.hidl.base.V1_0.IBase
         public final IHwBinder asBinder() {
@@ -335,9 +400,152 @@ public final class HdmiCecController {
         public final ArrayList getHashChain() {
             switch (this.$r8$classId) {
                 case 0:
-                    return new ArrayList(Arrays.asList(new byte[]{-25, 91, 110, -22, 113, 29, 54, -6, -58, 120, -68, -32, 114, -77, -50, -58, 84, 75, 39, -6, -97, 76, -39, 3, -103, -108, 4, -27, -63, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED, -54, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, -48, 45, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, 36, -13, -51, 105, 87, 19, -109, 36, -72, 59, 24, -54, 76}));
+                    return new ArrayList(
+                            Arrays.asList(
+                                    new byte[] {
+                                        -25,
+                                        91,
+                                        110,
+                                        -22,
+                                        113,
+                                        29,
+                                        54,
+                                        -6,
+                                        -58,
+                                        120,
+                                        -68,
+                                        -32,
+                                        114,
+                                        -77,
+                                        -50,
+                                        -58,
+                                        84,
+                                        75,
+                                        39,
+                                        -6,
+                                        -97,
+                                        76,
+                                        -39,
+                                        3,
+                                        -103,
+                                        -108,
+                                        4,
+                                        -27,
+                                        -63,
+                                        HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED,
+                                        -54,
+                                        HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED
+                                    },
+                                    new byte[] {
+                                        -20,
+                                        Byte.MAX_VALUE,
+                                        -41,
+                                        -98,
+                                        -48,
+                                        45,
+                                        -6,
+                                        -123,
+                                        -68,
+                                        73,
+                                        -108,
+                                        38,
+                                        -83,
+                                        -82,
+                                        62,
+                                        -66,
+                                        35,
+                                        -17,
+                                        5,
+                                        36,
+                                        -13,
+                                        -51,
+                                        105,
+                                        87,
+                                        19,
+                                        -109,
+                                        36,
+                                        -72,
+                                        59,
+                                        24,
+                                        -54,
+                                        76
+                                    }));
                 default:
-                    return new ArrayList(Arrays.asList(new byte[]{-71, 104, 37, -121, 103, 124, -23, -56, 114, -32, 79, 14, -97, -42, -55, -57, -118, 86, -82, 121, 92, 7, -53, -8, -59, 1, 0, -32, 53, 29, 76, 68}, new byte[]{-25, 91, 110, -22, 113, 29, 54, -6, -58, 120, -68, -32, 114, -77, -50, -58, 84, 75, 39, -6, -97, 76, -39, 3, -103, -108, 4, -27, -63, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED, -54, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, -48, 45, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, 36, -13, -51, 105, 87, 19, -109, 36, -72, 59, 24, -54, 76}));
+                    return new ArrayList(
+                            Arrays.asList(
+                                    new byte[] {
+                                        -71, 104, 37, -121, 103, 124, -23, -56, 114, -32, 79, 14,
+                                        -97, -42, -55, -57, -118, 86, -82, 121, 92, 7, -53, -8, -59,
+                                        1, 0, -32, 53, 29, 76, 68
+                                    },
+                                    new byte[] {
+                                        -25,
+                                        91,
+                                        110,
+                                        -22,
+                                        113,
+                                        29,
+                                        54,
+                                        -6,
+                                        -58,
+                                        120,
+                                        -68,
+                                        -32,
+                                        114,
+                                        -77,
+                                        -50,
+                                        -58,
+                                        84,
+                                        75,
+                                        39,
+                                        -6,
+                                        -97,
+                                        76,
+                                        -39,
+                                        3,
+                                        -103,
+                                        -108,
+                                        4,
+                                        -27,
+                                        -63,
+                                        HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED,
+                                        -54,
+                                        HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED
+                                    },
+                                    new byte[] {
+                                        -20,
+                                        Byte.MAX_VALUE,
+                                        -41,
+                                        -98,
+                                        -48,
+                                        45,
+                                        -6,
+                                        -123,
+                                        -68,
+                                        73,
+                                        -108,
+                                        38,
+                                        -83,
+                                        -82,
+                                        62,
+                                        -66,
+                                        35,
+                                        -17,
+                                        5,
+                                        36,
+                                        -13,
+                                        -51,
+                                        105,
+                                        87,
+                                        19,
+                                        -109,
+                                        36,
+                                        -72,
+                                        59,
+                                        24,
+                                        -54,
+                                        76
+                                    }));
             }
         }
 
@@ -345,9 +553,16 @@ public final class HdmiCecController {
         public final ArrayList interfaceChain() {
             switch (this.$r8$classId) {
                 case 0:
-                    return new ArrayList(Arrays.asList("android.hardware.tv.cec@1.0::IHdmiCecCallback", IBase.kInterfaceName));
+                    return new ArrayList(
+                            Arrays.asList(
+                                    "android.hardware.tv.cec@1.0::IHdmiCecCallback",
+                                    IBase.kInterfaceName));
                 default:
-                    return new ArrayList(Arrays.asList("android.hardware.tv.cec@1.1::IHdmiCecCallback", "android.hardware.tv.cec@1.0::IHdmiCecCallback", IBase.kInterfaceName));
+                    return new ArrayList(
+                            Arrays.asList(
+                                    "android.hardware.tv.cec@1.1::IHdmiCecCallback",
+                                    "android.hardware.tv.cec@1.0::IHdmiCecCallback",
+                                    IBase.kInterfaceName));
             }
         }
 
@@ -391,7 +606,8 @@ public final class HdmiCecController {
                         int int32 = readBuffer.getInt32(0L);
                         int int322 = readBuffer.getInt32(4L);
                         int int323 = readBuffer.getInt32(16L);
-                        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int323, readBuffer.handle(), 8L, true);
+                        HwBlob readEmbeddedBuffer =
+                                hwParcel.readEmbeddedBuffer(int323, readBuffer.handle(), 8L, true);
                         arrayList.clear();
                         for (int i4 = 0; i4 < int323; i4++) {
                             arrayList.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i4)));
@@ -407,7 +623,8 @@ public final class HdmiCecController {
                     if (i == 2) {
                         hwParcel.enforceInterface("android.hardware.tv.cec@1.0::IHdmiCecCallback");
                         HwBlob readBuffer2 = hwParcel.readBuffer(8L);
-                        this.mHdmiCecCallback.onHotplugEvent(readBuffer2.getInt32(4L), readBuffer2.getBool(0L));
+                        this.mHdmiCecCallback.onHotplugEvent(
+                                readBuffer2.getInt32(4L), readBuffer2.getBool(0L));
                         return;
                     }
                     switch (i) {
@@ -444,7 +661,8 @@ public final class HdmiCecController {
                                 long j = i3 * 32;
                                 byte[] bArr2 = (byte[]) hashChain.get(i3);
                                 if (bArr2 == null || bArr2.length != 32) {
-                                    throw new IllegalArgumentException("Array element is not of the expected length");
+                                    throw new IllegalArgumentException(
+                                            "Array element is not of the expected length");
                                 }
                                 hwBlob2.putInt8Array(j, bArr2);
                                 i3++;
@@ -484,7 +702,8 @@ public final class HdmiCecController {
                         int int324 = readBuffer3.getInt32(0L);
                         int int325 = readBuffer3.getInt32(4L);
                         int int326 = readBuffer3.getInt32(16L);
-                        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int326, readBuffer3.handle(), 8L, true);
+                        HwBlob readEmbeddedBuffer2 =
+                                hwParcel.readEmbeddedBuffer(int326, readBuffer3.handle(), 8L, true);
                         arrayList2.clear();
                         for (int i6 = 0; i6 < int326; i6++) {
                             arrayList2.add(Byte.valueOf(readEmbeddedBuffer2.getInt8(i6)));
@@ -500,7 +719,8 @@ public final class HdmiCecController {
                     if (i == 2) {
                         hwParcel.enforceInterface("android.hardware.tv.cec@1.0::IHdmiCecCallback");
                         HwBlob readBuffer4 = hwParcel.readBuffer(8L);
-                        this.mHdmiCecCallback.onHotplugEvent(readBuffer4.getInt32(4L), readBuffer4.getBool(0L));
+                        this.mHdmiCecCallback.onHotplugEvent(
+                                readBuffer4.getInt32(4L), readBuffer4.getBool(0L));
                         return;
                     }
                     if (i == 3) {
@@ -510,7 +730,8 @@ public final class HdmiCecController {
                         int int327 = readBuffer5.getInt32(0L);
                         int int328 = readBuffer5.getInt32(4L);
                         int int329 = readBuffer5.getInt32(16L);
-                        HwBlob readEmbeddedBuffer3 = hwParcel.readEmbeddedBuffer(int329, readBuffer5.handle(), 8L, true);
+                        HwBlob readEmbeddedBuffer3 =
+                                hwParcel.readEmbeddedBuffer(int329, readBuffer5.handle(), 8L, true);
                         arrayList3.clear();
                         for (int i7 = 0; i7 < int329; i7++) {
                             arrayList3.add(Byte.valueOf(readEmbeddedBuffer3.getInt8(i7)));
@@ -557,7 +778,8 @@ public final class HdmiCecController {
                                 long j2 = i5 * 32;
                                 byte[] bArr5 = (byte[]) hashChain2.get(i5);
                                 if (bArr5 == null || bArr5.length != 32) {
-                                    throw new IllegalArgumentException("Array element is not of the expected length");
+                                    throw new IllegalArgumentException(
+                                            "Array element is not of the expected length");
                                 }
                                 hwBlob4.putInt8Array(j2, bArr5);
                                 i5++;
@@ -599,12 +821,10 @@ public final class HdmiCecController {
         public final IHwInterface queryLocalInterface(String str) {
             switch (this.$r8$classId) {
                 case 0:
-                    if ("android.hardware.tv.cec@1.0::IHdmiCecCallback".equals(str)) {
-                    }
+                    if ("android.hardware.tv.cec@1.0::IHdmiCecCallback".equals(str)) {}
                     break;
                 default:
-                    if ("android.hardware.tv.cec@1.1::IHdmiCecCallback".equals(str)) {
-                    }
+                    if ("android.hardware.tv.cec@1.1::IHdmiCecCallback".equals(str)) {}
                     break;
             }
             return this;
@@ -674,13 +894,15 @@ public final class HdmiCecController {
             }
             CecMessage cecMessage = (CecMessage) parcel.readTypedObject(CecMessage.CREATOR);
             parcel.enforceNoDataAvail();
-            this.mHdmiCecCallback.onCecMessage(cecMessage.initiator, cecMessage.destination, cecMessage.body);
+            this.mHdmiCecCallback.onCecMessage(
+                    cecMessage.initiator, cecMessage.destination, cecMessage.body);
             return true;
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class HdmiConnectionCallbackAidl extends Binder implements IHdmiConnectionCallback {
+    public final class HdmiConnectionCallbackAidl extends Binder
+            implements IHdmiConnectionCallback {
         public final HdmiCecCallback mHdmiCecCallback;
 
         public HdmiConnectionCallbackAidl(HdmiCecCallback hdmiCecCallback) {
@@ -738,7 +960,8 @@ public final class HdmiCecController {
         }
 
         @Override // com.android.server.hdmi.HdmiCecController.Dumpable
-        public final void dump(IndentingPrintWriter indentingPrintWriter, SimpleDateFormat simpleDateFormat) {
+        public final void dump(
+                IndentingPrintWriter indentingPrintWriter, SimpleDateFormat simpleDateFormat) {
             indentingPrintWriter.print("[H]");
             indentingPrintWriter.print(" time=");
             indentingPrintWriter.print(simpleDateFormat.format(new Date(this.mTime)));
@@ -762,7 +985,8 @@ public final class HdmiCecController {
         }
 
         @Override // com.android.server.hdmi.HdmiCecController.Dumpable
-        public final void dump(IndentingPrintWriter indentingPrintWriter, SimpleDateFormat simpleDateFormat) {
+        public final void dump(
+                IndentingPrintWriter indentingPrintWriter, SimpleDateFormat simpleDateFormat) {
             boolean z = this.mIsReceived;
             indentingPrintWriter.print(z ? "[R]" : "[S]");
             indentingPrintWriter.print(" time=");
@@ -817,7 +1041,10 @@ public final class HdmiCecController {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class NativeWrapperImpl implements NativeWrapper, IHwBinder.DeathRecipient, IHdmiCec.getPhysicalAddressCallback {
+    public final class NativeWrapperImpl
+            implements NativeWrapper,
+                    IHwBinder.DeathRecipient,
+                    IHdmiCec.getPhysicalAddressCallback {
         public HdmiCecCallback mCallback;
         public IHdmiCec mHdmiCec;
         public final Object mLock = new Object();
@@ -916,8 +1143,18 @@ public final class HdmiCecController {
                 Iterator it = portInfo.iterator();
                 int i = 0;
                 while (it.hasNext()) {
-                    android.hardware.tv.cec.V1_0.HdmiPortInfo hdmiPortInfo = (android.hardware.tv.cec.V1_0.HdmiPortInfo) it.next();
-                    hdmiPortInfoArr[i] = new HdmiPortInfo.Builder(hdmiPortInfo.portId, hdmiPortInfo.type, Short.toUnsignedInt(hdmiPortInfo.physicalAddress)).setCecSupported(hdmiPortInfo.cecSupported).setMhlSupported(false).setArcSupported(hdmiPortInfo.arcSupported).setEarcSupported(false).build();
+                    android.hardware.tv.cec.V1_0.HdmiPortInfo hdmiPortInfo =
+                            (android.hardware.tv.cec.V1_0.HdmiPortInfo) it.next();
+                    hdmiPortInfoArr[i] =
+                            new HdmiPortInfo.Builder(
+                                            hdmiPortInfo.portId,
+                                            hdmiPortInfo.type,
+                                            Short.toUnsignedInt(hdmiPortInfo.physicalAddress))
+                                    .setCecSupported(hdmiPortInfo.cecSupported)
+                                    .setMhlSupported(false)
+                                    .setArcSupported(hdmiPortInfo.arcSupported)
+                                    .setEarcSupported(false)
+                                    .build();
                     i++;
                 }
                 return hdmiPortInfoArr;
@@ -967,7 +1204,8 @@ public final class HdmiCecController {
 
         @Override // com.android.server.hdmi.HdmiCecController.NativeWrapper
         public final int nativeSendCecCommand(int i, int i2, byte[] bArr) {
-            android.hardware.tv.cec.V1_0.CecMessage cecMessage = new android.hardware.tv.cec.V1_0.CecMessage();
+            android.hardware.tv.cec.V1_0.CecMessage cecMessage =
+                    new android.hardware.tv.cec.V1_0.CecMessage();
             cecMessage.initiator = 0;
             cecMessage.destination = 0;
             cecMessage.body = new ArrayList();
@@ -1031,7 +1269,10 @@ public final class HdmiCecController {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class NativeWrapperImpl11 implements NativeWrapper, IHwBinder.DeathRecipient, IHdmiCec.getPhysicalAddressCallback {
+    public final class NativeWrapperImpl11
+            implements NativeWrapper,
+                    IHwBinder.DeathRecipient,
+                    IHdmiCec.getPhysicalAddressCallback {
         public HdmiCecCallback mCallback;
         public android.hardware.tv.cec.V1_1.IHdmiCec mHdmiCec;
         public final Object mLock = new Object();
@@ -1039,7 +1280,8 @@ public final class HdmiCecController {
 
         public final boolean connectToHal() {
             try {
-                android.hardware.tv.cec.V1_1.IHdmiCec service = android.hardware.tv.cec.V1_1.IHdmiCec.getService();
+                android.hardware.tv.cec.V1_1.IHdmiCec service =
+                        android.hardware.tv.cec.V1_1.IHdmiCec.getService();
                 this.mHdmiCec = service;
                 try {
                     ((IHdmiCec.Proxy) service).linkToDeath(this, 353L);
@@ -1074,7 +1316,9 @@ public final class HdmiCecController {
             try {
                 IHdmiCec.Proxy proxy = (IHdmiCec.Proxy) this.mHdmiCec;
                 proxy.getClass();
-                HwParcel m = ITunerSession$Proxy$$ExternalSyntheticOutline0.m(i, "android.hardware.tv.cec@1.1::IHdmiCec");
+                HwParcel m =
+                        ITunerSession$Proxy$$ExternalSyntheticOutline0.m(
+                                i, "android.hardware.tv.cec@1.1::IHdmiCec");
                 HwParcel hwParcel = new HwParcel();
                 try {
                     proxy.mRemote.transact(13, m, hwParcel, 0);
@@ -1133,8 +1377,18 @@ public final class HdmiCecController {
                 Iterator it = portInfo.iterator();
                 int i = 0;
                 while (it.hasNext()) {
-                    android.hardware.tv.cec.V1_0.HdmiPortInfo hdmiPortInfo = (android.hardware.tv.cec.V1_0.HdmiPortInfo) it.next();
-                    hdmiPortInfoArr[i] = new HdmiPortInfo.Builder(hdmiPortInfo.portId, hdmiPortInfo.type, Short.toUnsignedInt(hdmiPortInfo.physicalAddress)).setCecSupported(hdmiPortInfo.cecSupported).setMhlSupported(false).setArcSupported(hdmiPortInfo.arcSupported).setEarcSupported(false).build();
+                    android.hardware.tv.cec.V1_0.HdmiPortInfo hdmiPortInfo =
+                            (android.hardware.tv.cec.V1_0.HdmiPortInfo) it.next();
+                    hdmiPortInfoArr[i] =
+                            new HdmiPortInfo.Builder(
+                                            hdmiPortInfo.portId,
+                                            hdmiPortInfo.type,
+                                            Short.toUnsignedInt(hdmiPortInfo.physicalAddress))
+                                    .setCecSupported(hdmiPortInfo.cecSupported)
+                                    .setMhlSupported(false)
+                                    .setArcSupported(hdmiPortInfo.arcSupported)
+                                    .setEarcSupported(false)
+                                    .build();
                     i++;
                 }
                 return hdmiPortInfoArr;
@@ -1184,7 +1438,8 @@ public final class HdmiCecController {
 
         @Override // com.android.server.hdmi.HdmiCecController.NativeWrapper
         public final int nativeSendCecCommand(int i, int i2, byte[] bArr) {
-            android.hardware.tv.cec.V1_1.CecMessage cecMessage = new android.hardware.tv.cec.V1_1.CecMessage();
+            android.hardware.tv.cec.V1_1.CecMessage cecMessage =
+                    new android.hardware.tv.cec.V1_1.CecMessage();
             cecMessage.initiator = 0;
             cecMessage.destination = 0;
             cecMessage.body = new ArrayList();
@@ -1248,7 +1503,8 @@ public final class HdmiCecController {
         public final void setCallback(HdmiCecCallback hdmiCecCallback) {
             this.mCallback = hdmiCecCallback;
             try {
-                ((IHdmiCec.Proxy) this.mHdmiCec).setCallback_1_1(new HdmiCecCallback10(hdmiCecCallback, 1));
+                ((IHdmiCec.Proxy) this.mHdmiCec)
+                        .setCallback_1_1(new HdmiCecCallback10(hdmiCecCallback, 1));
             } catch (RemoteException e) {
                 HdmiLogger.error(e, "Couldn't initialise tv.cec callback : ", new Object[0]);
             }
@@ -1289,7 +1545,9 @@ public final class HdmiCecController {
                 proxy = null;
             } else {
                 IInterface queryLocalInterface = service.queryLocalInterface(str);
-                if (queryLocalInterface == null || !(queryLocalInterface instanceof android.hardware.tv.hdmi.cec.IHdmiCec)) {
+                if (queryLocalInterface == null
+                        || !(queryLocalInterface
+                                instanceof android.hardware.tv.hdmi.cec.IHdmiCec)) {
                     IHdmiCec.Stub.Proxy proxy2 = new IHdmiCec.Stub.Proxy();
                     proxy2.mRemote = service;
                     proxy = proxy2;
@@ -1315,7 +1573,8 @@ public final class HdmiCecController {
             int i2 = IHdmiConnection.Stub.$r8$clinit;
             if (service2 != null) {
                 IInterface queryLocalInterface2 = service2.queryLocalInterface(str2);
-                if (queryLocalInterface2 == null || !(queryLocalInterface2 instanceof IHdmiConnection)) {
+                if (queryLocalInterface2 == null
+                        || !(queryLocalInterface2 instanceof IHdmiConnection)) {
                     IHdmiConnection.Stub.Proxy proxy3 = new IHdmiConnection.Stub.Proxy();
                     proxy3.mRemote = service2;
                     iHdmiConnection = proxy3;
@@ -1397,7 +1656,11 @@ public final class HdmiCecController {
             try {
                 return ((IHdmiConnection.Stub.Proxy) this.mHdmiConnection).getHpdSignal(i);
             } catch (RemoteException e) {
-                HdmiLogger.error(e, BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "Could not get HPD signal type for portId ", ". Exception: "), new Object[0]);
+                HdmiLogger.error(
+                        e,
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i, "Could not get HPD signal type for portId ", ". Exception: "),
+                        new Object[0]);
                 return 0;
             }
         }
@@ -1415,11 +1678,21 @@ public final class HdmiCecController {
         @Override // com.android.server.hdmi.HdmiCecController.NativeWrapper
         public final HdmiPortInfo[] nativeGetPortInfos() {
             try {
-                android.hardware.tv.hdmi.connection.HdmiPortInfo[] portInfo = ((IHdmiConnection.Stub.Proxy) this.mHdmiConnection).getPortInfo();
+                android.hardware.tv.hdmi.connection.HdmiPortInfo[] portInfo =
+                        ((IHdmiConnection.Stub.Proxy) this.mHdmiConnection).getPortInfo();
                 HdmiPortInfo[] hdmiPortInfoArr = new HdmiPortInfo[portInfo.length];
                 int i = 0;
                 for (android.hardware.tv.hdmi.connection.HdmiPortInfo hdmiPortInfo : portInfo) {
-                    hdmiPortInfoArr[i] = new HdmiPortInfo.Builder(hdmiPortInfo.portId, hdmiPortInfo.type, hdmiPortInfo.physicalAddress).setCecSupported(hdmiPortInfo.cecSupported).setMhlSupported(false).setArcSupported(hdmiPortInfo.arcSupported).setEarcSupported(hdmiPortInfo.eArcSupported).build();
+                    hdmiPortInfoArr[i] =
+                            new HdmiPortInfo.Builder(
+                                            hdmiPortInfo.portId,
+                                            hdmiPortInfo.type,
+                                            hdmiPortInfo.physicalAddress)
+                                    .setCecSupported(hdmiPortInfo.cecSupported)
+                                    .setMhlSupported(false)
+                                    .setArcSupported(hdmiPortInfo.arcSupported)
+                                    .setEarcSupported(hdmiPortInfo.eArcSupported)
+                                    .build();
                     i++;
                 }
                 return hdmiPortInfoArr;
@@ -1486,9 +1759,24 @@ public final class HdmiCecController {
             try {
                 ((IHdmiConnection.Stub.Proxy) this.mHdmiConnection).setHpdSignal((byte) i, i2);
             } catch (RemoteException e) {
-                HdmiLogger.error(e, DualAppManagerService$$ExternalSyntheticOutline0.m(i2, i, "Could not set HPD signal type for portId ", " to ", ". Exception: "), new Object[0]);
+                HdmiLogger.error(
+                        e,
+                        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                i2,
+                                i,
+                                "Could not set HPD signal type for portId ",
+                                " to ",
+                                ". Exception: "),
+                        new Object[0]);
             } catch (ServiceSpecificException e2) {
-                HdmiLogger.error(DualAppManagerService$$ExternalSyntheticOutline0.m(i2, i, "Could not set HPD signal type for portId ", " to ", ". Error: "), Integer.valueOf(e2.errorCode));
+                HdmiLogger.error(
+                        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                i2,
+                                i,
+                                "Could not set HPD signal type for portId ",
+                                " to ",
+                                ". Error: "),
+                        Integer.valueOf(e2.errorCode));
             }
         }
 
@@ -1505,12 +1793,14 @@ public final class HdmiCecController {
         public final void setCallback(HdmiCecCallback hdmiCecCallback) {
             this.mCallback = hdmiCecCallback;
             try {
-                ((IHdmiCec.Stub.Proxy) this.mHdmiCec).setCallback(new HdmiCecCallbackAidl(hdmiCecCallback));
+                ((IHdmiCec.Stub.Proxy) this.mHdmiCec)
+                        .setCallback(new HdmiCecCallbackAidl(hdmiCecCallback));
             } catch (RemoteException e) {
                 HdmiLogger.error(e, "Couldn't initialise tv.cec callback : ", new Object[0]);
             }
             try {
-                ((IHdmiConnection.Stub.Proxy) this.mHdmiConnection).setCallback(new HdmiConnectionCallbackAidl(hdmiCecCallback));
+                ((IHdmiConnection.Stub.Proxy) this.mHdmiConnection)
+                        .setCallback(new HdmiConnectionCallbackAidl(hdmiCecCallback));
             } catch (RemoteException e2) {
                 HdmiLogger.error(e2, "Couldn't initialise tv.hdmi callback : ", new Object[0]);
             }
@@ -1518,14 +1808,21 @@ public final class HdmiCecController {
     }
 
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.hdmi.HdmiCecController$1] */
-    public HdmiCecController(HdmiControlService hdmiControlService, NativeWrapper nativeWrapper, HdmiCecAtomWriter hdmiCecAtomWriter) {
+    public HdmiCecController(
+            HdmiControlService hdmiControlService,
+            NativeWrapper nativeWrapper,
+            HdmiCecAtomWriter hdmiCecAtomWriter) {
         this.mService = hdmiControlService;
         this.mNativeWrapperImpl = nativeWrapper;
         this.mHdmiCecAtomWriter = hdmiCecAtomWriter;
     }
 
-    public static HdmiCecController createWithNativeWrapper(HdmiControlService hdmiControlService, NativeWrapper nativeWrapper, HdmiCecAtomWriter hdmiCecAtomWriter) {
-        HdmiCecController hdmiCecController = new HdmiCecController(hdmiControlService, nativeWrapper, hdmiCecAtomWriter);
+    public static HdmiCecController createWithNativeWrapper(
+            HdmiControlService hdmiControlService,
+            NativeWrapper nativeWrapper,
+            HdmiCecAtomWriter hdmiCecAtomWriter) {
+        HdmiCecController hdmiCecController =
+                new HdmiCecController(hdmiControlService, nativeWrapper, hdmiCecAtomWriter);
         if (nativeWrapper.nativeInit() == null) {
             HdmiLogger.warning("Couldn't get tv.cec service.", new Object[0]);
             return null;
@@ -1587,7 +1884,21 @@ public final class HdmiCecController {
         if (i4 == 15 || (i2 = hdmiCecMessage.mSource) == 15 || (i3 = hdmiCecMessage.mOpcode) == 0) {
             return;
         }
-        HdmiCecMessage build = HdmiCecMessage.build(i4, i2, 0, new byte[]{(byte) (i3 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT), (byte) (i & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT)});
+        HdmiCecMessage build =
+                HdmiCecMessage.build(
+                        i4,
+                        i2,
+                        0,
+                        new byte[] {
+                            (byte)
+                                    (i3
+                                            & IDnsResolverUnsolicitedEventListener
+                                                    .DNS_HEALTH_RESULT_TIMEOUT),
+                            (byte)
+                                    (i
+                                            & IDnsResolverUnsolicitedEventListener
+                                                    .DNS_HEALTH_RESULT_TIMEOUT)
+                        });
         assertRunOnServiceThread();
         assertRunOnServiceThread();
         ArrayList arrayList = new ArrayList();
@@ -1600,12 +1911,18 @@ public final class HdmiCecController {
         int i;
         assertRunOnServiceThread();
         HdmiControlService hdmiControlService = this.mService;
-        if (!hdmiControlService.isCecControlEnabled() && (i = hdmiCecMessage.mOpcode) != 167 && i != 168 && i != 248) {
-            HdmiLogger.warning("Message " + hdmiCecMessage + " received when cec disabled", new Object[0]);
+        if (!hdmiControlService.isCecControlEnabled()
+                && (i = hdmiCecMessage.mOpcode) != 167
+                && i != 168
+                && i != 248) {
+            HdmiLogger.warning(
+                    "Message " + hdmiCecMessage + " received when cec disabled", new Object[0]);
         }
         if (hdmiControlService.mAddressAllocated) {
             int i2 = hdmiCecMessage.mDestination;
-            if (!(i2 == 15 ? true : hdmiControlService.mHdmiCecNetwork.isAllocatedLocalDeviceAddress(i2))) {
+            if (!(i2 == 15
+                    ? true
+                    : hdmiControlService.mHdmiCecNetwork.isAllocatedLocalDeviceAddress(i2))) {
                 return;
             }
         }
@@ -1617,33 +1934,53 @@ public final class HdmiCecController {
         }
     }
 
-    public final void runDevicePolling(final int i, final List list, final int i2, final HdmiControlService.DevicePollingCallback devicePollingCallback, final List list2, final long j, boolean z) {
+    public final void runDevicePolling(
+            final int i,
+            final List list,
+            final int i2,
+            final HdmiControlService.DevicePollingCallback devicePollingCallback,
+            final List list2,
+            final long j,
+            boolean z) {
         assertRunOnServiceThread();
         if (!list.isEmpty()) {
             final Integer num = (Integer) list.remove(0);
-            this.mIoHandler.postDelayed(new Runnable() { // from class: com.android.server.hdmi.HdmiCecController.5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    if (HdmiCecController.this.sendPollMessage(i, num.intValue(), i2)) {
-                        list2.add(num);
-                    }
-                    HdmiCecController.this.runOnServiceThread(new Runnable() { // from class: com.android.server.hdmi.HdmiCecController.5.1
+            this.mIoHandler.postDelayed(
+                    new Runnable() { // from class: com.android.server.hdmi.HdmiCecController.5
                         @Override // java.lang.Runnable
                         public final void run() {
-                            AnonymousClass5 anonymousClass5 = AnonymousClass5.this;
-                            HdmiCecController hdmiCecController = HdmiCecController.this;
-                            int i3 = i;
-                            List list3 = list;
-                            int i4 = i2;
-                            HdmiControlService.DevicePollingCallback devicePollingCallback2 = devicePollingCallback;
-                            List list4 = list2;
-                            long j2 = j;
-                            byte[] bArr = HdmiCecController.EMPTY_BODY;
-                            hdmiCecController.runDevicePolling(i3, list3, i4, devicePollingCallback2, list4, j2, true);
+                            if (HdmiCecController.this.sendPollMessage(i, num.intValue(), i2)) {
+                                list2.add(num);
+                            }
+                            HdmiCecController.this.runOnServiceThread(
+                                    new Runnable() { // from class:
+                                                     // com.android.server.hdmi.HdmiCecController.5.1
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            AnonymousClass5 anonymousClass5 = AnonymousClass5.this;
+                                            HdmiCecController hdmiCecController =
+                                                    HdmiCecController.this;
+                                            int i3 = i;
+                                            List list3 = list;
+                                            int i4 = i2;
+                                            HdmiControlService.DevicePollingCallback
+                                                    devicePollingCallback2 = devicePollingCallback;
+                                            List list4 = list2;
+                                            long j2 = j;
+                                            byte[] bArr = HdmiCecController.EMPTY_BODY;
+                                            hdmiCecController.runDevicePolling(
+                                                    i3,
+                                                    list3,
+                                                    i4,
+                                                    devicePollingCallback2,
+                                                    list4,
+                                                    j2,
+                                                    true);
+                                        }
+                                    });
                         }
-                    });
-                }
-            }, z ? j : 0L);
+                    },
+                    z ? j : 0L);
         } else if (devicePollingCallback != null) {
             HdmiLogger.debug("[P]:AllocatedAddress=%s", list2.toString());
             devicePollingCallback.onPollingFinished(list2);
@@ -1663,12 +2000,17 @@ public final class HdmiCecController {
             throw new IllegalStateException("Should run on io thread.");
         }
         for (int i4 = 0; i4 < i3; i4++) {
-            int nativeSendCecCommand = this.mNativeWrapperImpl.nativeSendCecCommand(i, i2, EMPTY_BODY);
+            int nativeSendCecCommand =
+                    this.mNativeWrapperImpl.nativeSendCecCommand(i, i2, EMPTY_BODY);
             if (nativeSendCecCommand == 0) {
                 return true;
             }
             if (nativeSendCecCommand != 1) {
-                HdmiLogger.warning("Failed to send a polling message(%d->%d) with return code %d", Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(nativeSendCecCommand));
+                HdmiLogger.warning(
+                        "Failed to send a polling message(%d->%d) with return code %d",
+                        Integer.valueOf(i),
+                        Integer.valueOf(i2),
+                        Integer.valueOf(nativeSendCecCommand));
             }
         }
         return false;

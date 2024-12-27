@@ -6,7 +6,11 @@ public final class DexController$Utils$TypedMetaDataValue {
     public int data;
     public int unit;
 
-    public static int getDimensionPixelSize(DexController$Utils$TypedMetaDataValue dexController$Utils$TypedMetaDataValue, int i, int i2, int i3) {
+    public static int getDimensionPixelSize(
+            DexController$Utils$TypedMetaDataValue dexController$Utils$TypedMetaDataValue,
+            int i,
+            int i2,
+            int i3) {
         int i4 = dexController$Utils$TypedMetaDataValue.data;
         if (i4 > 0) {
             i3 = i4;
@@ -23,7 +27,8 @@ public final class DexController$Utils$TypedMetaDataValue {
     }
 
     public static DexController$Utils$TypedMetaDataValue parseSizeMetaData(String str) {
-        DexController$Utils$TypedMetaDataValue dexController$Utils$TypedMetaDataValue = new DexController$Utils$TypedMetaDataValue();
+        DexController$Utils$TypedMetaDataValue dexController$Utils$TypedMetaDataValue =
+                new DexController$Utils$TypedMetaDataValue();
         String[] split = str.split("\\D");
         if (split[0].isEmpty()) {
             split[0] = "0";

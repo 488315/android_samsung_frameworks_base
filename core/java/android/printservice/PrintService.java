@@ -11,9 +11,10 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.print.PrintJobInfo;
 import android.print.PrinterId;
-import android.printservice.IPrintService;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,9 +22,11 @@ import java.util.List;
 /* loaded from: classes3.dex */
 public abstract class PrintService extends Service {
     private static final boolean DEBUG = false;
-    public static final String EXTRA_CAN_SELECT_PRINTER = "android.printservice.extra.CAN_SELECT_PRINTER";
+    public static final String EXTRA_CAN_SELECT_PRINTER =
+            "android.printservice.extra.CAN_SELECT_PRINTER";
     public static final String EXTRA_PRINTER_INFO = "android.intent.extra.print.EXTRA_PRINTER_INFO";
-    public static final String EXTRA_PRINT_DOCUMENT_INFO = "android.printservice.extra.PRINT_DOCUMENT_INFO";
+    public static final String EXTRA_PRINT_DOCUMENT_INFO =
+            "android.printservice.extra.PRINT_DOCUMENT_INFO";
     public static final String EXTRA_PRINT_JOB_INFO = "android.intent.extra.print.PRINT_JOB_INFO";
     public static final String EXTRA_SELECT_PRINTER = "android.printservice.extra.SELECT_PRINTER";
     private static final String LOG_TAG = "PrintService";
@@ -46,11 +49,9 @@ public abstract class PrintService extends Service {
         this.mHandler = new ServiceHandler(base.getMainLooper());
     }
 
-    protected void onConnected() {
-    }
+    protected void onConnected() {}
 
-    protected void onDisconnected() {
-    }
+    protected void onDisconnected() {}
 
     public final List<PrintJob> getActivePrintJobs() {
         throwIfNotCalledOnMainThread();
@@ -78,7 +79,9 @@ public abstract class PrintService extends Service {
 
     public final PrinterId generatePrinterId(String localId) {
         throwIfNotCalledOnMainThread();
-        return new PrinterId(new ComponentName(getPackageName(), getClass().getName()), (String) Preconditions.checkNotNull(localId, "localId cannot be null"));
+        return new PrinterId(
+                new ComponentName(getPackageName(), getClass().getName()),
+                (String) Preconditions.checkNotNull(localId, "localId cannot be null"));
     }
 
     static void throwIfNotCalledOnMainThread() {
@@ -169,7 +172,8 @@ public abstract class PrintService extends Service {
             int action = message.what;
             switch (action) {
                 case 1:
-                    PrinterDiscoverySession session = PrintService.this.onCreatePrinterDiscoverySession();
+                    PrinterDiscoverySession session =
+                            PrintService.this.onCreatePrinterDiscoverySession();
                     if (session == null) {
                         throw new NullPointerException("session cannot be null");
                     }
@@ -230,11 +234,15 @@ public abstract class PrintService extends Service {
                     return;
                 case 9:
                     PrintJobInfo printJobInfo = (PrintJobInfo) message.obj;
-                    PrintService.this.onPrintJobQueued(new PrintJob(PrintService.this, printJobInfo, PrintService.this.mClient));
+                    PrintService.this.onPrintJobQueued(
+                            new PrintJob(
+                                    PrintService.this, printJobInfo, PrintService.this.mClient));
                     return;
                 case 10:
                     PrintJobInfo printJobInfo2 = (PrintJobInfo) message.obj;
-                    PrintService.this.onRequestCancelPrintJob(new PrintJob(PrintService.this, printJobInfo2, PrintService.this.mClient));
+                    PrintService.this.onRequestCancelPrintJob(
+                            new PrintJob(
+                                    PrintService.this, printJobInfo2, PrintService.this.mClient));
                     return;
                 case 11:
                     PrintService.this.mClient = (IPrintServiceClient) message.obj;

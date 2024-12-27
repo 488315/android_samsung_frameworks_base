@@ -6,9 +6,9 @@ import android.os.UserHandle;
 import android.speech.tts.ITextToSpeechManager;
 import android.speech.tts.ITextToSpeechSessionCallback;
 import android.util.Slog;
+
 import com.android.server.infra.AbstractMasterSystemService;
 import com.android.server.infra.AbstractPerUserSystemService;
-import com.android.server.texttospeech.TextToSpeechManagerPerUserService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -16,28 +16,40 @@ public final class TextToSpeechManagerService extends AbstractMasterSystemServic
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TextToSpeechManagerServiceStub extends ITextToSpeechManager.Stub {
-        public TextToSpeechManagerServiceStub() {
-        }
+        public TextToSpeechManagerServiceStub() {}
 
-        public final void createSession(String str, ITextToSpeechSessionCallback iTextToSpeechSessionCallback) {
+        public final void createSession(
+                String str, ITextToSpeechSessionCallback iTextToSpeechSessionCallback) {
             synchronized (TextToSpeechManagerService.this.mLock) {
                 try {
                     if (str == null) {
                         try {
                             iTextToSpeechSessionCallback.onError("Engine cannot be null");
                         } catch (RemoteException e) {
-                            Slog.i("TextToSpeechManagerPerUserService", "Failed running callback method: " + e);
+                            Slog.i(
+                                    "TextToSpeechManagerPerUserService",
+                                    "Failed running callback method: " + e);
                         }
                         return;
                     }
-                    TextToSpeechManagerPerUserService textToSpeechManagerPerUserService = (TextToSpeechManagerPerUserService) TextToSpeechManagerService.this.getServiceForUserLocked(UserHandle.getCallingUserId());
+                    TextToSpeechManagerPerUserService textToSpeechManagerPerUserService =
+                            (TextToSpeechManagerPerUserService)
+                                    TextToSpeechManagerService.this.getServiceForUserLocked(
+                                            UserHandle.getCallingUserId());
                     if (textToSpeechManagerPerUserService != null) {
-                        TextToSpeechManagerPerUserService.TextToSpeechSessionConnection.start(textToSpeechManagerPerUserService.mMaster.getContext(), textToSpeechManagerPerUserService.mUserId, str, iTextToSpeechSessionCallback);
+                        TextToSpeechManagerPerUserService.TextToSpeechSessionConnection.start(
+                                textToSpeechManagerPerUserService.mMaster.getContext(),
+                                textToSpeechManagerPerUserService.mUserId,
+                                str,
+                                iTextToSpeechSessionCallback);
                     } else {
                         try {
-                            iTextToSpeechSessionCallback.onError("Service is not available for user");
+                            iTextToSpeechSessionCallback.onError(
+                                    "Service is not available for user");
                         } catch (RemoteException e2) {
-                            Slog.i("TextToSpeechManagerPerUserService", "Failed running callback method: " + e2);
+                            Slog.i(
+                                    "TextToSpeechManagerPerUserService",
+                                    "Failed running callback method: " + e2);
                         }
                     }
                     return;

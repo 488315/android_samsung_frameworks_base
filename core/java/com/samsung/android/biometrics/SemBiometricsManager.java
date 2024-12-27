@@ -5,9 +5,11 @@ import android.hardware.biometrics.BiometricPrompt;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Handler;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.security.Signature;
+
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 
@@ -56,8 +58,7 @@ public class SemBiometricsManager {
     public static final int TYPE_STRONG_SECURITY = 17;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SecurityLevel {
-    }
+    public @interface SecurityLevel {}
 
     public static final class CryptoObject {
         private BiometricPrompt.CryptoObject mBioCryptoObject;
@@ -133,39 +134,37 @@ public class SemBiometricsManager {
         }
     }
 
-    public static abstract class AuthenticationCallback {
-        public void onAuthenticationError(int errorCode, CharSequence errString) {
-        }
+    public abstract static class AuthenticationCallback {
+        public void onAuthenticationError(int errorCode, CharSequence errString) {}
 
-        public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
-        }
+        public void onAuthenticationHelp(int helpCode, CharSequence helpString) {}
 
-        public void onAuthenticationSucceeded(AuthenticationResult result) {
-        }
+        public void onAuthenticationSucceeded(AuthenticationResult result) {}
 
-        public void onAuthenticationFailed() {
-        }
+        public void onAuthenticationFailed() {}
 
-        public void onAuthenticationAcquired(int acquireInfo) {
-        }
+        public void onAuthenticationAcquired(int acquireInfo) {}
     }
 
     @Deprecated
-    public void authenticate(int type, CryptoObject crypto, CancellationSignal cancel, AuthenticationCallback callback, Handler handler, int userId, Bundle attr) {
-    }
+    public void authenticate(
+            int type,
+            CryptoObject crypto,
+            CancellationSignal cancel,
+            AuthenticationCallback callback,
+            Handler handler,
+            int userId,
+            Bundle attr) {}
 
-    public void requestSessionOpen() {
-    }
+    public void requestSessionOpen() {}
 
-    public void requestSessionClose() {
-    }
+    public void requestSessionClose() {}
 
     public long getAuthenticatorId() {
         return 0L;
     }
 
-    public void resetTimeout(byte[] token) {
-    }
+    public void resetTimeout(byte[] token) {}
 
     public static SemBiometricsManager getInstance(Context context) {
         return createInstance(context);
@@ -176,6 +175,5 @@ public class SemBiometricsManager {
         return null;
     }
 
-    private SemBiometricsManager(Context context) {
-    }
+    private SemBiometricsManager(Context context) {}
 }

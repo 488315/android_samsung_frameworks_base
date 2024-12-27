@@ -29,16 +29,21 @@ public class SICBlockCipher extends StreamBlockCipher implements SkippingStreamC
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BlockCipher
-    public void init(boolean forEncryption, CipherParameters params) throws IllegalArgumentException {
+    public void init(boolean forEncryption, CipherParameters params)
+            throws IllegalArgumentException {
         if (params instanceof ParametersWithIV) {
             ParametersWithIV ivParam = (ParametersWithIV) params;
             this.IV = Arrays.clone(ivParam.getIV());
             if (this.blockSize < this.IV.length) {
-                throw new IllegalArgumentException("CTR/SIC mode requires IV no greater than: " + this.blockSize + " bytes.");
+                throw new IllegalArgumentException(
+                        "CTR/SIC mode requires IV no greater than: " + this.blockSize + " bytes.");
             }
             int maxCounterSize = 8 > this.blockSize / 2 ? this.blockSize / 2 : 8;
             if (this.blockSize - this.IV.length > maxCounterSize) {
-                throw new IllegalArgumentException("CTR/SIC mode requires IV of at least: " + (this.blockSize - maxCounterSize) + " bytes.");
+                throw new IllegalArgumentException(
+                        "CTR/SIC mode requires IV of at least: "
+                                + (this.blockSize - maxCounterSize)
+                                + " bytes.");
             }
             if (ivParam.getParameters() != null) {
                 this.cipher.init(true, ivParam.getParameters());
@@ -60,7 +65,8 @@ public class SICBlockCipher extends StreamBlockCipher implements SkippingStreamC
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BlockCipher
-    public int processBlock(byte[] in, int inOff, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int processBlock(byte[] in, int inOff, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         processBytes(in, inOff, this.blockSize, out, outOff);
         return this.blockSize;
     }

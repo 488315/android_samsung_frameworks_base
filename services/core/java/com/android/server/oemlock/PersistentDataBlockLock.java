@@ -18,12 +18,15 @@ public final class PersistentDataBlockLock extends OemLock {
 
     @Override // com.android.server.oemlock.OemLock
     public final boolean isOemUnlockAllowedByCarrier() {
-        return !UserManager.get(this.mContext).hasUserRestriction("no_oem_unlock", UserHandle.SYSTEM);
+        return !UserManager.get(this.mContext)
+                .hasUserRestriction("no_oem_unlock", UserHandle.SYSTEM);
     }
 
     @Override // com.android.server.oemlock.OemLock
     public final boolean isOemUnlockAllowedByDevice() {
-        PersistentDataBlockManager persistentDataBlockManager = (PersistentDataBlockManager) this.mContext.getSystemService("persistent_data_block");
+        PersistentDataBlockManager persistentDataBlockManager =
+                (PersistentDataBlockManager)
+                        this.mContext.getSystemService("persistent_data_block");
         if (persistentDataBlockManager != null) {
             return persistentDataBlockManager.getOemUnlockEnabled();
         }
@@ -40,7 +43,9 @@ public final class PersistentDataBlockLock extends OemLock {
         if (z) {
             return;
         }
-        PersistentDataBlockManager persistentDataBlockManager = (PersistentDataBlockManager) this.mContext.getSystemService("persistent_data_block");
+        PersistentDataBlockManager persistentDataBlockManager =
+                (PersistentDataBlockManager)
+                        this.mContext.getSystemService("persistent_data_block");
         if (persistentDataBlockManager == null) {
             Slog.w("OemLock", "PersistentDataBlock is not supported on this device");
         } else if (persistentDataBlockManager.getFlashLockState() != 0) {
@@ -50,7 +55,9 @@ public final class PersistentDataBlockLock extends OemLock {
 
     @Override // com.android.server.oemlock.OemLock
     public final void setOemUnlockAllowedByDevice(boolean z) {
-        PersistentDataBlockManager persistentDataBlockManager = (PersistentDataBlockManager) this.mContext.getSystemService("persistent_data_block");
+        PersistentDataBlockManager persistentDataBlockManager =
+                (PersistentDataBlockManager)
+                        this.mContext.getSystemService("persistent_data_block");
         if (persistentDataBlockManager == null) {
             Slog.w("OemLock", "PersistentDataBlock is not supported on this device");
         } else {

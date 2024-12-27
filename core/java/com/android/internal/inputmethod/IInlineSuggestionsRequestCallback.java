@@ -7,13 +7,16 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.autofill.AutofillId;
 import android.view.inputmethod.InlineSuggestionsRequest;
-import com.android.internal.inputmethod.IInlineSuggestionsResponseCallback;
 
 /* loaded from: classes5.dex */
 public interface IInlineSuggestionsRequestCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.inputmethod.IInlineSuggestionsRequestCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.inputmethod.IInlineSuggestionsRequestCallback";
 
-    void onInlineSuggestionsRequest(InlineSuggestionsRequest inlineSuggestionsRequest, IInlineSuggestionsResponseCallback iInlineSuggestionsResponseCallback) throws RemoteException;
+    void onInlineSuggestionsRequest(
+            InlineSuggestionsRequest inlineSuggestionsRequest,
+            IInlineSuggestionsResponseCallback iInlineSuggestionsResponseCallback)
+            throws RemoteException;
 
     void onInlineSuggestionsSessionInvalidated() throws RemoteException;
 
@@ -31,36 +34,30 @@ public interface IInlineSuggestionsRequestCallback extends IInterface {
 
     public static class Default implements IInlineSuggestionsRequestCallback {
         @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
-        public void onInlineSuggestionsUnsupported() throws RemoteException {
-        }
+        public void onInlineSuggestionsUnsupported() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
-        public void onInlineSuggestionsRequest(InlineSuggestionsRequest request, IInlineSuggestionsResponseCallback callback) throws RemoteException {
-        }
+        public void onInlineSuggestionsRequest(
+                InlineSuggestionsRequest request, IInlineSuggestionsResponseCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
-        public void onInputMethodStartInput(AutofillId imeFieldId) throws RemoteException {
-        }
+        public void onInputMethodStartInput(AutofillId imeFieldId) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
-        public void onInputMethodShowInputRequested(boolean requestResult) throws RemoteException {
-        }
+        public void onInputMethodShowInputRequested(boolean requestResult) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
-        public void onInputMethodStartInputView() throws RemoteException {
-        }
+        public void onInputMethodStartInputView() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
-        public void onInputMethodFinishInputView() throws RemoteException {
-        }
+        public void onInputMethodFinishInputView() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
-        public void onInputMethodFinishInput() throws RemoteException {
-        }
+        public void onInputMethodFinishInput() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
-        public void onInlineSuggestionsSessionInvalidated() throws RemoteException {
-        }
+        public void onInlineSuggestionsSessionInvalidated() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -68,7 +65,7 @@ public interface IInlineSuggestionsRequestCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInlineSuggestionsRequestCallback {
+    public abstract static class Stub extends Binder implements IInlineSuggestionsRequestCallback {
         static final int TRANSACTION_onInlineSuggestionsRequest = 2;
         static final int TRANSACTION_onInlineSuggestionsSessionInvalidated = 8;
         static final int TRANSACTION_onInlineSuggestionsUnsupported = 1;
@@ -127,7 +124,8 @@ public interface IInlineSuggestionsRequestCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInlineSuggestionsRequestCallback.DESCRIPTOR);
             }
@@ -140,8 +138,12 @@ public interface IInlineSuggestionsRequestCallback extends IInterface {
                     onInlineSuggestionsUnsupported();
                     return true;
                 case 2:
-                    InlineSuggestionsRequest _arg0 = (InlineSuggestionsRequest) data.readTypedObject(InlineSuggestionsRequest.CREATOR);
-                    IInlineSuggestionsResponseCallback _arg1 = IInlineSuggestionsResponseCallback.Stub.asInterface(data.readStrongBinder());
+                    InlineSuggestionsRequest _arg0 =
+                            (InlineSuggestionsRequest)
+                                    data.readTypedObject(InlineSuggestionsRequest.CREATOR);
+                    IInlineSuggestionsResponseCallback _arg1 =
+                            IInlineSuggestionsResponseCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onInlineSuggestionsRequest(_arg0, _arg1);
                     return true;
@@ -200,7 +202,9 @@ public interface IInlineSuggestionsRequestCallback extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
-            public void onInlineSuggestionsRequest(InlineSuggestionsRequest request, IInlineSuggestionsResponseCallback callback) throws RemoteException {
+            public void onInlineSuggestionsRequest(
+                    InlineSuggestionsRequest request, IInlineSuggestionsResponseCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);
@@ -225,7 +229,8 @@ public interface IInlineSuggestionsRequestCallback extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsRequestCallback
-            public void onInputMethodShowInputRequested(boolean requestResult) throws RemoteException {
+            public void onInputMethodShowInputRequested(boolean requestResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInlineSuggestionsRequestCallback.DESCRIPTOR);

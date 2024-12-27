@@ -15,12 +15,10 @@ public interface ITransientNotification extends IInterface {
 
     public static class Default implements ITransientNotification {
         @Override // android.app.ITransientNotification
-        public void show(IBinder windowToken) throws RemoteException {
-        }
+        public void show(IBinder windowToken) throws RemoteException {}
 
         @Override // android.app.ITransientNotification
-        public void hide() throws RemoteException {
-        }
+        public void hide() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +26,7 @@ public interface ITransientNotification extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITransientNotification {
+    public abstract static class Stub extends Binder implements ITransientNotification {
         public static final String DESCRIPTOR = "android.app.ITransientNotification";
         static final int TRANSACTION_hide = 2;
         static final int TRANSACTION_show = 1;
@@ -70,7 +68,8 @@ public interface ITransientNotification extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

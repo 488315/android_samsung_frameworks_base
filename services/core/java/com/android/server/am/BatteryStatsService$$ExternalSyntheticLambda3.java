@@ -1,19 +1,27 @@
 package com.android.server.am;
 
 import android.os.WorkSource;
+
 import com.android.server.power.stats.BatteryStatsImpl;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda3 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda3
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ WorkSource f$1;
     public final /* synthetic */ long f$2;
     public final /* synthetic */ long f$3;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda3(BatteryStatsService batteryStatsService, WorkSource workSource, long j, long j2, int i) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda3(
+            BatteryStatsService batteryStatsService,
+            WorkSource workSource,
+            long j,
+            long j2,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = batteryStatsService;
         this.f$1 = workSource;
@@ -31,12 +39,18 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda3
             batteryStatsImpl.getClass();
             int size = workSource.size();
             for (int i = 0; i < size; i++) {
-                batteryStatsImpl.noteFullWifiLockReleasedLocked(batteryStatsImpl.mapUid(workSource.getUid(i)), j, j2);
+                batteryStatsImpl.noteFullWifiLockReleasedLocked(
+                        batteryStatsImpl.mapUid(workSource.getUid(i)), j, j2);
             }
             List workChains = workSource.getWorkChains();
             if (workChains != null) {
                 for (int i2 = 0; i2 < workChains.size(); i2++) {
-                    batteryStatsImpl.noteFullWifiLockReleasedLocked(batteryStatsImpl.mapUid(((WorkSource.WorkChain) workChains.get(i2)).getAttributionUid()), j, j2);
+                    batteryStatsImpl.noteFullWifiLockReleasedLocked(
+                            batteryStatsImpl.mapUid(
+                                    ((WorkSource.WorkChain) workChains.get(i2))
+                                            .getAttributionUid()),
+                            j,
+                            j2);
                 }
             }
         }
@@ -52,12 +66,18 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda3
             batteryStatsImpl.getClass();
             int size = workSource.size();
             for (int i = 0; i < size; i++) {
-                batteryStatsImpl.noteWifiScanStartedLocked(batteryStatsImpl.mapUid(workSource.getUid(i)), j, j2);
+                batteryStatsImpl.noteWifiScanStartedLocked(
+                        batteryStatsImpl.mapUid(workSource.getUid(i)), j, j2);
             }
             List workChains = workSource.getWorkChains();
             if (workChains != null) {
                 for (int i2 = 0; i2 < workChains.size(); i2++) {
-                    batteryStatsImpl.noteWifiScanStartedLocked(batteryStatsImpl.mapUid(((WorkSource.WorkChain) workChains.get(i2)).getAttributionUid()), j, j2);
+                    batteryStatsImpl.noteWifiScanStartedLocked(
+                            batteryStatsImpl.mapUid(
+                                    ((WorkSource.WorkChain) workChains.get(i2))
+                                            .getAttributionUid()),
+                            j,
+                            j2);
                 }
             }
         }
@@ -73,12 +93,18 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda3
             batteryStatsImpl.getClass();
             int size = workSource.size();
             for (int i = 0; i < size; i++) {
-                batteryStatsImpl.noteWifiScanStoppedLocked(batteryStatsImpl.mapUid(workSource.getUid(i)), j, j2);
+                batteryStatsImpl.noteWifiScanStoppedLocked(
+                        batteryStatsImpl.mapUid(workSource.getUid(i)), j, j2);
             }
             List workChains = workSource.getWorkChains();
             if (workChains != null) {
                 for (int i2 = 0; i2 < workChains.size(); i2++) {
-                    batteryStatsImpl.noteWifiScanStoppedLocked(batteryStatsImpl.mapUid(((WorkSource.WorkChain) workChains.get(i2)).getAttributionUid()), j, j2);
+                    batteryStatsImpl.noteWifiScanStoppedLocked(
+                            batteryStatsImpl.mapUid(
+                                    ((WorkSource.WorkChain) workChains.get(i2))
+                                            .getAttributionUid()),
+                            j,
+                            j2);
                 }
             }
         }
@@ -97,12 +123,22 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda3
                     batteryStatsImpl.getClass();
                     int size = workSource.size();
                     for (int i = 0; i < size; i++) {
-                        batteryStatsImpl.getUidStatsLocked(batteryStatsImpl.mapUid(workSource.getUid(i)), j, j2).noteWifiBatchedScanStoppedLocked(j);
+                        batteryStatsImpl
+                                .getUidStatsLocked(
+                                        batteryStatsImpl.mapUid(workSource.getUid(i)), j, j2)
+                                .noteWifiBatchedScanStoppedLocked(j);
                     }
                     List workChains = workSource.getWorkChains();
                     if (workChains != null) {
                         for (int i2 = 0; i2 < workChains.size(); i2++) {
-                            batteryStatsImpl.getUidStatsLocked(batteryStatsImpl.mapUid(((WorkSource.WorkChain) workChains.get(i2)).getAttributionUid()), j, j2).noteWifiBatchedScanStoppedLocked(j);
+                            batteryStatsImpl
+                                    .getUidStatsLocked(
+                                            batteryStatsImpl.mapUid(
+                                                    ((WorkSource.WorkChain) workChains.get(i2))
+                                                            .getAttributionUid()),
+                                            j,
+                                            j2)
+                                    .noteWifiBatchedScanStoppedLocked(j);
                         }
                     }
                 }
@@ -117,12 +153,18 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda3
                     batteryStatsImpl2.getClass();
                     int size2 = workSource2.size();
                     for (int i3 = 0; i3 < size2; i3++) {
-                        batteryStatsImpl2.noteFullWifiLockAcquiredLocked(batteryStatsImpl2.mapUid(workSource2.getUid(i3)), j3, j4);
+                        batteryStatsImpl2.noteFullWifiLockAcquiredLocked(
+                                batteryStatsImpl2.mapUid(workSource2.getUid(i3)), j3, j4);
                     }
                     List workChains2 = workSource2.getWorkChains();
                     if (workChains2 != null) {
                         for (int i4 = 0; i4 < workChains2.size(); i4++) {
-                            batteryStatsImpl2.noteFullWifiLockAcquiredLocked(batteryStatsImpl2.mapUid(((WorkSource.WorkChain) workChains2.get(i4)).getAttributionUid()), j3, j4);
+                            batteryStatsImpl2.noteFullWifiLockAcquiredLocked(
+                                    batteryStatsImpl2.mapUid(
+                                            ((WorkSource.WorkChain) workChains2.get(i4))
+                                                    .getAttributionUid()),
+                                    j3,
+                                    j4);
                         }
                     }
                 }

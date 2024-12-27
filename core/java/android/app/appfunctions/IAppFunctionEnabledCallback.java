@@ -17,12 +17,10 @@ public interface IAppFunctionEnabledCallback extends IInterface {
 
     public static class Default implements IAppFunctionEnabledCallback {
         @Override // android.app.appfunctions.IAppFunctionEnabledCallback
-        public void onSuccess() throws RemoteException {
-        }
+        public void onSuccess() throws RemoteException {}
 
         @Override // android.app.appfunctions.IAppFunctionEnabledCallback
-        public void onError(ParcelableException exception) throws RemoteException {
-        }
+        public void onError(ParcelableException exception) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +28,7 @@ public interface IAppFunctionEnabledCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppFunctionEnabledCallback {
+    public abstract static class Stub extends Binder implements IAppFunctionEnabledCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -71,7 +69,8 @@ public interface IAppFunctionEnabledCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAppFunctionEnabledCallback.DESCRIPTOR);
             }
@@ -84,7 +83,8 @@ public interface IAppFunctionEnabledCallback extends IInterface {
                     onSuccess();
                     return true;
                 case 2:
-                    ParcelableException _arg0 = (ParcelableException) data.readTypedObject(ParcelableException.CREATOR);
+                    ParcelableException _arg0 =
+                            (ParcelableException) data.readTypedObject(ParcelableException.CREATOR);
                     data.enforceNoDataAvail();
                     onError(_arg0);
                     return true;

@@ -17,11 +17,7 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
-import com.android.internal.app.IAppOpsActiveCallback;
-import com.android.internal.app.IAppOpsAsyncNotedCallback;
-import com.android.internal.app.IAppOpsCallback;
-import com.android.internal.app.IAppOpsNotedCallback;
-import com.android.internal.app.IAppOpsStartedCallback;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -36,35 +32,67 @@ public interface IAppOpsService extends IInterface {
 
     int checkOperationRaw(int i, int i2, String str, String str2) throws RemoteException;
 
-    int checkOperationRawForDevice(int i, int i2, String str, String str2, int i3) throws RemoteException;
+    int checkOperationRawForDevice(int i, int i2, String str, String str2, int i3)
+            throws RemoteException;
 
     int checkPackage(int i, String str) throws RemoteException;
 
     void clearHistory() throws RemoteException;
 
-    void collectNoteOpCallsForValidation(String str, int i, String str2, long j) throws RemoteException;
+    void collectNoteOpCallsForValidation(String str, int i, String str2, long j)
+            throws RemoteException;
 
     RuntimeAppOpAccessMessage collectRuntimeAppOpAccessMessage() throws RemoteException;
 
     List<AsyncNotedAppOp> extractAsyncOps(String str) throws RemoteException;
 
-    void finishOperation(IBinder iBinder, int i, int i2, String str, String str2) throws RemoteException;
+    void finishOperation(IBinder iBinder, int i, int i2, String str, String str2)
+            throws RemoteException;
 
-    void finishOperationForDevice(IBinder iBinder, int i, int i2, String str, String str2, int i3) throws RemoteException;
+    void finishOperationForDevice(IBinder iBinder, int i, int i2, String str, String str2, int i3)
+            throws RemoteException;
 
-    void finishProxyOperation(IBinder iBinder, int i, AttributionSource attributionSource, boolean z) throws RemoteException;
+    void finishProxyOperation(
+            IBinder iBinder, int i, AttributionSource attributionSource, boolean z)
+            throws RemoteException;
 
-    void finishProxyOperationWithState(IBinder iBinder, int i, AttributionSourceState attributionSourceState, boolean z) throws RemoteException;
+    void finishProxyOperationWithState(
+            IBinder iBinder, int i, AttributionSourceState attributionSourceState, boolean z)
+            throws RemoteException;
 
-    void getHistoricalOps(int i, String str, String str2, List<String> list, int i2, int i3, long j, long j2, int i4, RemoteCallback remoteCallback) throws RemoteException;
+    void getHistoricalOps(
+            int i,
+            String str,
+            String str2,
+            List<String> list,
+            int i2,
+            int i3,
+            long j,
+            long j2,
+            int i4,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void getHistoricalOpsFromDiskRaw(int i, String str, String str2, List<String> list, int i2, int i3, long j, long j2, int i4, RemoteCallback remoteCallback) throws RemoteException;
+    void getHistoricalOpsFromDiskRaw(
+            int i,
+            String str,
+            String str2,
+            List<String> list,
+            int i2,
+            int i3,
+            long j,
+            long j2,
+            int i4,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    List<AppOpsManager.PackageOps> getOpsForPackage(int i, String str, int[] iArr) throws RemoteException;
+    List<AppOpsManager.PackageOps> getOpsForPackage(int i, String str, int[] iArr)
+            throws RemoteException;
 
     List<AppOpsManager.PackageOps> getPackagesForOps(int[] iArr) throws RemoteException;
 
-    List<AppOpsManager.PackageOps> getPackagesForOpsForDevice(int[] iArr, String str) throws RemoteException;
+    List<AppOpsManager.PackageOps> getPackagesForOpsForDevice(int[] iArr, String str)
+            throws RemoteException;
 
     List<AppOpsManager.PackageOps> getUidOps(int i, int[] iArr) throws RemoteException;
 
@@ -72,13 +100,31 @@ public interface IAppOpsService extends IInterface {
 
     boolean isProxying(int i, String str, String str2, int i2, String str3) throws RemoteException;
 
-    SyncNotedAppOp noteOperation(int i, int i2, String str, String str2, boolean z, String str3, boolean z2) throws RemoteException;
+    SyncNotedAppOp noteOperation(
+            int i, int i2, String str, String str2, boolean z, String str3, boolean z2)
+            throws RemoteException;
 
-    SyncNotedAppOp noteOperationForDevice(int i, int i2, String str, String str2, int i3, boolean z, String str3, boolean z2) throws RemoteException;
+    SyncNotedAppOp noteOperationForDevice(
+            int i, int i2, String str, String str2, int i3, boolean z, String str3, boolean z2)
+            throws RemoteException;
 
-    SyncNotedAppOp noteProxyOperation(int i, AttributionSource attributionSource, boolean z, String str, boolean z2, boolean z3) throws RemoteException;
+    SyncNotedAppOp noteProxyOperation(
+            int i,
+            AttributionSource attributionSource,
+            boolean z,
+            String str,
+            boolean z2,
+            boolean z3)
+            throws RemoteException;
 
-    SyncNotedAppOp noteProxyOperationWithState(int i, AttributionSourceState attributionSourceState, boolean z, String str, boolean z2, boolean z3) throws RemoteException;
+    SyncNotedAppOp noteProxyOperationWithState(
+            int i,
+            AttributionSourceState attributionSourceState,
+            boolean z,
+            String str,
+            boolean z2,
+            boolean z3)
+            throws RemoteException;
 
     void offsetHistory(long j) throws RemoteException;
 
@@ -90,7 +136,8 @@ public interface IAppOpsService extends IInterface {
 
     void removeUser(int i) throws RemoteException;
 
-    MessageSamplingConfig reportRuntimeAppOpAccessMessageAndGetConfig(String str, SyncNotedAppOp syncNotedAppOp, String str2) throws RemoteException;
+    MessageSamplingConfig reportRuntimeAppOpAccessMessageAndGetConfig(
+            String str, SyncNotedAppOp syncNotedAppOp, String str2) throws RemoteException;
 
     void requestPermissionAccessInformation() throws RemoteException;
 
@@ -110,35 +157,93 @@ public interface IAppOpsService extends IInterface {
 
     void setUidMode(int i, int i2, int i3) throws RemoteException;
 
-    void setUserRestriction(int i, boolean z, IBinder iBinder, int i2, PackageTagsList packageTagsList) throws RemoteException;
+    void setUserRestriction(
+            int i, boolean z, IBinder iBinder, int i2, PackageTagsList packageTagsList)
+            throws RemoteException;
 
     void setUserRestrictions(Bundle bundle, IBinder iBinder, int i) throws RemoteException;
 
     boolean shouldCollectNotes(int i) throws RemoteException;
 
-    SyncNotedAppOp startOperation(IBinder iBinder, int i, int i2, String str, String str2, boolean z, boolean z2, String str3, boolean z3, int i3, int i4) throws RemoteException;
+    SyncNotedAppOp startOperation(
+            IBinder iBinder,
+            int i,
+            int i2,
+            String str,
+            String str2,
+            boolean z,
+            boolean z2,
+            String str3,
+            boolean z3,
+            int i3,
+            int i4)
+            throws RemoteException;
 
-    SyncNotedAppOp startOperationForDevice(IBinder iBinder, int i, int i2, String str, String str2, int i3, boolean z, boolean z2, String str3, boolean z3, int i4, int i5) throws RemoteException;
+    SyncNotedAppOp startOperationForDevice(
+            IBinder iBinder,
+            int i,
+            int i2,
+            String str,
+            String str2,
+            int i3,
+            boolean z,
+            boolean z2,
+            String str3,
+            boolean z3,
+            int i4,
+            int i5)
+            throws RemoteException;
 
-    SyncNotedAppOp startProxyOperation(IBinder iBinder, int i, AttributionSource attributionSource, boolean z, boolean z2, String str, boolean z3, boolean z4, int i2, int i3, int i4) throws RemoteException;
+    SyncNotedAppOp startProxyOperation(
+            IBinder iBinder,
+            int i,
+            AttributionSource attributionSource,
+            boolean z,
+            boolean z2,
+            String str,
+            boolean z3,
+            boolean z4,
+            int i2,
+            int i3,
+            int i4)
+            throws RemoteException;
 
-    SyncNotedAppOp startProxyOperationWithState(IBinder iBinder, int i, AttributionSourceState attributionSourceState, boolean z, boolean z2, String str, boolean z3, boolean z4, int i2, int i3, int i4) throws RemoteException;
+    SyncNotedAppOp startProxyOperationWithState(
+            IBinder iBinder,
+            int i,
+            AttributionSourceState attributionSourceState,
+            boolean z,
+            boolean z2,
+            String str,
+            boolean z3,
+            boolean z4,
+            int i2,
+            int i3,
+            int i4)
+            throws RemoteException;
 
-    void startWatchingActive(int[] iArr, IAppOpsActiveCallback iAppOpsActiveCallback) throws RemoteException;
+    void startWatchingActive(int[] iArr, IAppOpsActiveCallback iAppOpsActiveCallback)
+            throws RemoteException;
 
-    void startWatchingAsyncNoted(String str, IAppOpsAsyncNotedCallback iAppOpsAsyncNotedCallback) throws RemoteException;
+    void startWatchingAsyncNoted(String str, IAppOpsAsyncNotedCallback iAppOpsAsyncNotedCallback)
+            throws RemoteException;
 
-    void startWatchingMode(int i, String str, IAppOpsCallback iAppOpsCallback) throws RemoteException;
+    void startWatchingMode(int i, String str, IAppOpsCallback iAppOpsCallback)
+            throws RemoteException;
 
-    void startWatchingModeWithFlags(int i, String str, int i2, IAppOpsCallback iAppOpsCallback) throws RemoteException;
+    void startWatchingModeWithFlags(int i, String str, int i2, IAppOpsCallback iAppOpsCallback)
+            throws RemoteException;
 
-    void startWatchingNoted(int[] iArr, IAppOpsNotedCallback iAppOpsNotedCallback) throws RemoteException;
+    void startWatchingNoted(int[] iArr, IAppOpsNotedCallback iAppOpsNotedCallback)
+            throws RemoteException;
 
-    void startWatchingStarted(int[] iArr, IAppOpsStartedCallback iAppOpsStartedCallback) throws RemoteException;
+    void startWatchingStarted(int[] iArr, IAppOpsStartedCallback iAppOpsStartedCallback)
+            throws RemoteException;
 
     void stopWatchingActive(IAppOpsActiveCallback iAppOpsActiveCallback) throws RemoteException;
 
-    void stopWatchingAsyncNoted(String str, IAppOpsAsyncNotedCallback iAppOpsAsyncNotedCallback) throws RemoteException;
+    void stopWatchingAsyncNoted(String str, IAppOpsAsyncNotedCallback iAppOpsAsyncNotedCallback)
+            throws RemoteException;
 
     void stopWatchingMode(IAppOpsCallback iAppOpsCallback) throws RemoteException;
 
@@ -153,26 +258,46 @@ public interface IAppOpsService extends IInterface {
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public SyncNotedAppOp noteOperation(int code, int uid, String packageName, String attributionTag, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage) throws RemoteException {
+        public SyncNotedAppOp noteOperation(
+                int code,
+                int uid,
+                String packageName,
+                String attributionTag,
+                boolean shouldCollectAsyncNotedOp,
+                String message,
+                boolean shouldCollectMessage)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public SyncNotedAppOp startOperation(IBinder clientId, int code, int uid, String packageName, String attributionTag, boolean startIfModeDefault, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, int attributionFlags, int attributionChainId) throws RemoteException {
+        public SyncNotedAppOp startOperation(
+                IBinder clientId,
+                int code,
+                int uid,
+                String packageName,
+                String attributionTag,
+                boolean startIfModeDefault,
+                boolean shouldCollectAsyncNotedOp,
+                String message,
+                boolean shouldCollectMessage,
+                int attributionFlags,
+                int attributionChainId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public void finishOperation(IBinder clientId, int code, int uid, String packageName, String attributionTag) throws RemoteException {
-        }
+        public void finishOperation(
+                IBinder clientId, int code, int uid, String packageName, String attributionTag)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void startWatchingMode(int op, String packageName, IAppOpsCallback callback) throws RemoteException {
-        }
+        public void startWatchingMode(int op, String packageName, IAppOpsCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void stopWatchingMode(IAppOpsCallback callback) throws RemoteException {
-        }
+        public void stopWatchingMode(IAppOpsCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
         public int permissionToOpCode(String permission) throws RemoteException {
@@ -180,7 +305,8 @@ public interface IAppOpsService extends IInterface {
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public int checkAudioOperation(int code, int usage, int uid, String packageName) throws RemoteException {
+        public int checkAudioOperation(int code, int usage, int uid, String packageName)
+                throws RemoteException {
             return 0;
         }
 
@@ -190,26 +316,49 @@ public interface IAppOpsService extends IInterface {
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public void setCameraAudioRestriction(int mode) throws RemoteException {
-        }
+        public void setCameraAudioRestriction(int mode) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void startWatchingModeWithFlags(int op, String packageName, int flags, IAppOpsCallback callback) throws RemoteException {
-        }
+        public void startWatchingModeWithFlags(
+                int op, String packageName, int flags, IAppOpsCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public SyncNotedAppOp noteProxyOperation(int code, AttributionSource attributionSource, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, boolean skipProxyOperation) throws RemoteException {
+        public SyncNotedAppOp noteProxyOperation(
+                int code,
+                AttributionSource attributionSource,
+                boolean shouldCollectAsyncNotedOp,
+                String message,
+                boolean shouldCollectMessage,
+                boolean skipProxyOperation)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public SyncNotedAppOp startProxyOperation(IBinder clientId, int code, AttributionSource attributionSource, boolean startIfModeDefault, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, boolean skipProxyOperation, int proxyAttributionFlags, int proxiedAttributionFlags, int attributionChainId) throws RemoteException {
+        public SyncNotedAppOp startProxyOperation(
+                IBinder clientId,
+                int code,
+                AttributionSource attributionSource,
+                boolean startIfModeDefault,
+                boolean shouldCollectAsyncNotedOp,
+                String message,
+                boolean shouldCollectMessage,
+                boolean skipProxyOperation,
+                int proxyAttributionFlags,
+                int proxiedAttributionFlags,
+                int attributionChainId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public void finishProxyOperation(IBinder clientId, int code, AttributionSource attributionSource, boolean skipProxyOperation) throws RemoteException {
-        }
+        public void finishProxyOperation(
+                IBinder clientId,
+                int code,
+                AttributionSource attributionSource,
+                boolean skipProxyOperation)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
         public int checkPackage(int uid, String packageName) throws RemoteException {
@@ -222,7 +371,8 @@ public interface IAppOpsService extends IInterface {
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public MessageSamplingConfig reportRuntimeAppOpAccessMessageAndGetConfig(String packageName, SyncNotedAppOp appOp, String message) throws RemoteException {
+        public MessageSamplingConfig reportRuntimeAppOpAccessMessageAndGetConfig(
+                String packageName, SyncNotedAppOp appOp, String message) throws RemoteException {
             return null;
         }
 
@@ -232,45 +382,60 @@ public interface IAppOpsService extends IInterface {
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public List<AppOpsManager.PackageOps> getOpsForPackage(int uid, String packageName, int[] ops) throws RemoteException {
+        public List<AppOpsManager.PackageOps> getOpsForPackage(
+                int uid, String packageName, int[] ops) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public void getHistoricalOps(int uid, String packageName, String attributionTag, List<String> ops, int historyFlags, int filter, long beginTimeMillis, long endTimeMillis, int flags, RemoteCallback callback) throws RemoteException {
-        }
+        public void getHistoricalOps(
+                int uid,
+                String packageName,
+                String attributionTag,
+                List<String> ops,
+                int historyFlags,
+                int filter,
+                long beginTimeMillis,
+                long endTimeMillis,
+                int flags,
+                RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void getHistoricalOpsFromDiskRaw(int uid, String packageName, String attributionTag, List<String> ops, int historyFlags, int filter, long beginTimeMillis, long endTimeMillis, int flags, RemoteCallback callback) throws RemoteException {
-        }
+        public void getHistoricalOpsFromDiskRaw(
+                int uid,
+                String packageName,
+                String attributionTag,
+                List<String> ops,
+                int historyFlags,
+                int filter,
+                long beginTimeMillis,
+                long endTimeMillis,
+                int flags,
+                RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void offsetHistory(long duration) throws RemoteException {
-        }
+        public void offsetHistory(long duration) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void setHistoryParameters(int mode, long baseSnapshotInterval, int compressionStep) throws RemoteException {
-        }
+        public void setHistoryParameters(int mode, long baseSnapshotInterval, int compressionStep)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void addHistoricalOps(AppOpsManager.HistoricalOps ops) throws RemoteException {
-        }
+        public void addHistoricalOps(AppOpsManager.HistoricalOps ops) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void resetHistoryParameters() throws RemoteException {
-        }
+        public void resetHistoryParameters() throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void resetPackageOpsNoHistory(String packageName) throws RemoteException {
-        }
+        public void resetPackageOpsNoHistory(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void clearHistory() throws RemoteException {
-        }
+        public void clearHistory() throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void rebootHistory(long offlineDurationMillis) throws RemoteException {
-        }
+        public void rebootHistory(long offlineDurationMillis) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
         public List<AppOpsManager.PackageOps> getUidOps(int uid, int[] ops) throws RemoteException {
@@ -278,74 +443,81 @@ public interface IAppOpsService extends IInterface {
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public void setUidMode(int code, int uid, int mode) throws RemoteException {
-        }
+        public void setUidMode(int code, int uid, int mode) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void setMode(int code, int uid, String packageName, int mode) throws RemoteException {
-        }
+        public void setMode(int code, int uid, String packageName, int mode)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void resetAllModes(int reqUserId, String reqPackageName) throws RemoteException {
-        }
+        public void resetAllModes(int reqUserId, String reqPackageName) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void setAudioRestriction(int code, int usage, int uid, int mode, String[] exceptionPackages) throws RemoteException {
-        }
+        public void setAudioRestriction(
+                int code, int usage, int uid, int mode, String[] exceptionPackages)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void setUserRestrictions(Bundle restrictions, IBinder token, int userHandle) throws RemoteException {
-        }
+        public void setUserRestrictions(Bundle restrictions, IBinder token, int userHandle)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void setUserRestriction(int code, boolean restricted, IBinder token, int userHandle, PackageTagsList excludedPackageTags) throws RemoteException {
-        }
+        public void setUserRestriction(
+                int code,
+                boolean restricted,
+                IBinder token,
+                int userHandle,
+                PackageTagsList excludedPackageTags)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void removeUser(int userHandle) throws RemoteException {
-        }
+        public void removeUser(int userHandle) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void startWatchingActive(int[] ops, IAppOpsActiveCallback callback) throws RemoteException {
-        }
+        public void startWatchingActive(int[] ops, IAppOpsActiveCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void stopWatchingActive(IAppOpsActiveCallback callback) throws RemoteException {
-        }
+        public void stopWatchingActive(IAppOpsActiveCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public boolean isOperationActive(int code, int uid, String packageName) throws RemoteException {
+        public boolean isOperationActive(int code, int uid, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public boolean isProxying(int op, String proxyPackageName, String proxyAttributionTag, int proxiedUid, String proxiedPackageName) throws RemoteException {
+        public boolean isProxying(
+                int op,
+                String proxyPackageName,
+                String proxyAttributionTag,
+                int proxiedUid,
+                String proxiedPackageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public void startWatchingStarted(int[] ops, IAppOpsStartedCallback callback) throws RemoteException {
-        }
+        public void startWatchingStarted(int[] ops, IAppOpsStartedCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void stopWatchingStarted(IAppOpsStartedCallback callback) throws RemoteException {
-        }
+        public void stopWatchingStarted(IAppOpsStartedCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void startWatchingNoted(int[] ops, IAppOpsNotedCallback callback) throws RemoteException {
-        }
+        public void startWatchingNoted(int[] ops, IAppOpsNotedCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void stopWatchingNoted(IAppOpsNotedCallback callback) throws RemoteException {
-        }
+        public void stopWatchingNoted(IAppOpsNotedCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void startWatchingAsyncNoted(String packageName, IAppOpsAsyncNotedCallback callback) throws RemoteException {
-        }
+        public void startWatchingAsyncNoted(String packageName, IAppOpsAsyncNotedCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void stopWatchingAsyncNoted(String packageName, IAppOpsAsyncNotedCallback callback) throws RemoteException {
-        }
+        public void stopWatchingAsyncNoted(String packageName, IAppOpsAsyncNotedCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
         public List<AsyncNotedAppOp> extractAsyncOps(String packageName) throws RemoteException {
@@ -353,62 +525,117 @@ public interface IAppOpsService extends IInterface {
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public int checkOperationRaw(int code, int uid, String packageName, String attributionTag) throws RemoteException {
+        public int checkOperationRaw(int code, int uid, String packageName, String attributionTag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public void reloadNonHistoricalState() throws RemoteException {
-        }
+        public void reloadNonHistoricalState() throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void collectNoteOpCallsForValidation(String stackTrace, int op, String packageName, long version) throws RemoteException {
-        }
+        public void collectNoteOpCallsForValidation(
+                String stackTrace, int op, String packageName, long version)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public void requestPermissionAccessInformation() throws RemoteException {
-        }
+        public void requestPermissionAccessInformation() throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public SyncNotedAppOp noteProxyOperationWithState(int code, AttributionSourceState attributionSourceStateState, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, boolean skipProxyOperation) throws RemoteException {
+        public SyncNotedAppOp noteProxyOperationWithState(
+                int code,
+                AttributionSourceState attributionSourceStateState,
+                boolean shouldCollectAsyncNotedOp,
+                String message,
+                boolean shouldCollectMessage,
+                boolean skipProxyOperation)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public SyncNotedAppOp startProxyOperationWithState(IBinder clientId, int code, AttributionSourceState attributionSourceStateState, boolean startIfModeDefault, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, boolean skipProxyOperation, int proxyAttributionFlags, int proxiedAttributionFlags, int attributionChainId) throws RemoteException {
+        public SyncNotedAppOp startProxyOperationWithState(
+                IBinder clientId,
+                int code,
+                AttributionSourceState attributionSourceStateState,
+                boolean startIfModeDefault,
+                boolean shouldCollectAsyncNotedOp,
+                String message,
+                boolean shouldCollectMessage,
+                boolean skipProxyOperation,
+                int proxyAttributionFlags,
+                int proxiedAttributionFlags,
+                int attributionChainId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public void finishProxyOperationWithState(IBinder clientId, int code, AttributionSourceState attributionSourceStateState, boolean skipProxyOperation) throws RemoteException {
-        }
+        public void finishProxyOperationWithState(
+                IBinder clientId,
+                int code,
+                AttributionSourceState attributionSourceStateState,
+                boolean skipProxyOperation)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public int checkOperationRawForDevice(int code, int uid, String packageName, String attributionTag, int virtualDeviceId) throws RemoteException {
+        public int checkOperationRawForDevice(
+                int code, int uid, String packageName, String attributionTag, int virtualDeviceId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public int checkOperationForDevice(int code, int uid, String packageName, int virtualDeviceId) throws RemoteException {
+        public int checkOperationForDevice(
+                int code, int uid, String packageName, int virtualDeviceId) throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public SyncNotedAppOp noteOperationForDevice(int code, int uid, String packageName, String attributionTag, int virtualDeviceId, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage) throws RemoteException {
+        public SyncNotedAppOp noteOperationForDevice(
+                int code,
+                int uid,
+                String packageName,
+                String attributionTag,
+                int virtualDeviceId,
+                boolean shouldCollectAsyncNotedOp,
+                String message,
+                boolean shouldCollectMessage)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public SyncNotedAppOp startOperationForDevice(IBinder clientId, int code, int uid, String packageName, String attributionTag, int virtualDeviceId, boolean startIfModeDefault, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, int attributionFlags, int attributionChainId) throws RemoteException {
+        public SyncNotedAppOp startOperationForDevice(
+                IBinder clientId,
+                int code,
+                int uid,
+                String packageName,
+                String attributionTag,
+                int virtualDeviceId,
+                boolean startIfModeDefault,
+                boolean shouldCollectAsyncNotedOp,
+                String message,
+                boolean shouldCollectMessage,
+                int attributionFlags,
+                int attributionChainId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IAppOpsService
-        public void finishOperationForDevice(IBinder clientId, int code, int uid, String packageName, String attributionTag, int virtualDeviceId) throws RemoteException {
-        }
+        public void finishOperationForDevice(
+                IBinder clientId,
+                int code,
+                int uid,
+                String packageName,
+                String attributionTag,
+                int virtualDeviceId)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IAppOpsService
-        public List<AppOpsManager.PackageOps> getPackagesForOpsForDevice(int[] ops, String persistentDeviceId) throws RemoteException {
+        public List<AppOpsManager.PackageOps> getPackagesForOpsForDevice(
+                int[] ops, String persistentDeviceId) throws RemoteException {
             return null;
         }
 
@@ -418,7 +645,7 @@ public interface IAppOpsService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppOpsService {
+    public abstract static class Stub extends Binder implements IAppOpsService {
         public static final String DESCRIPTOR = "com.android.internal.app.IAppOpsService";
         static final int TRANSACTION_addHistoricalOps = 24;
         static final int TRANSACTION_checkAudioOperation = 8;
@@ -492,7 +719,9 @@ public interface IAppOpsService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IAppOpsService asInterface(IBinder obj) {
@@ -644,7 +873,8 @@ public interface IAppOpsService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -671,7 +901,8 @@ public interface IAppOpsService extends IInterface {
                     String _arg5 = data.readString();
                     boolean _arg6 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    SyncNotedAppOp _result2 = noteOperation(_arg02, _arg12, _arg22, _arg3, _arg4, _arg5, _arg6);
+                    SyncNotedAppOp _result2 =
+                            noteOperation(_arg02, _arg12, _arg22, _arg3, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeTypedObject(_result2, 1);
                     return true;
@@ -688,7 +919,10 @@ public interface IAppOpsService extends IInterface {
                     int _arg9 = data.readInt();
                     int _arg10 = data.readInt();
                     data.enforceNoDataAvail();
-                    SyncNotedAppOp _result3 = startOperation(_arg03, _arg13, _arg23, _arg32, _arg42, _arg52, _arg62, _arg7, _arg8, _arg9, _arg10);
+                    SyncNotedAppOp _result3 =
+                            startOperation(
+                                    _arg03, _arg13, _arg23, _arg32, _arg42, _arg52, _arg62, _arg7,
+                                    _arg8, _arg9, _arg10);
                     reply.writeNoException();
                     reply.writeTypedObject(_result3, 1);
                     return true;
@@ -705,13 +939,15 @@ public interface IAppOpsService extends IInterface {
                 case 5:
                     int _arg05 = data.readInt();
                     String _arg15 = data.readString();
-                    IAppOpsCallback _arg25 = IAppOpsCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppOpsCallback _arg25 =
+                            IAppOpsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startWatchingMode(_arg05, _arg15, _arg25);
                     reply.writeNoException();
                     return true;
                 case 6:
-                    IAppOpsCallback _arg06 = IAppOpsCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppOpsCallback _arg06 =
+                            IAppOpsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     stopWatchingMode(_arg06);
                     reply.writeNoException();
@@ -750,27 +986,31 @@ public interface IAppOpsService extends IInterface {
                     int _arg011 = data.readInt();
                     String _arg17 = data.readString();
                     int _arg27 = data.readInt();
-                    IAppOpsCallback _arg35 = IAppOpsCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppOpsCallback _arg35 =
+                            IAppOpsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startWatchingModeWithFlags(_arg011, _arg17, _arg27, _arg35);
                     reply.writeNoException();
                     return true;
                 case 12:
                     int _arg012 = data.readInt();
-                    AttributionSource _arg18 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+                    AttributionSource _arg18 =
+                            (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
                     boolean _arg28 = data.readBoolean();
                     String _arg36 = data.readString();
                     boolean _arg44 = data.readBoolean();
                     boolean _arg53 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    SyncNotedAppOp _result7 = noteProxyOperation(_arg012, _arg18, _arg28, _arg36, _arg44, _arg53);
+                    SyncNotedAppOp _result7 =
+                            noteProxyOperation(_arg012, _arg18, _arg28, _arg36, _arg44, _arg53);
                     reply.writeNoException();
                     reply.writeTypedObject(_result7, 1);
                     return true;
                 case 13:
                     IBinder _arg013 = data.readStrongBinder();
                     int _arg19 = data.readInt();
-                    AttributionSource _arg29 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+                    AttributionSource _arg29 =
+                            (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
                     boolean _arg37 = data.readBoolean();
                     boolean _arg45 = data.readBoolean();
                     String _arg54 = data.readString();
@@ -780,14 +1020,18 @@ public interface IAppOpsService extends IInterface {
                     int _arg92 = data.readInt();
                     int _arg102 = data.readInt();
                     data.enforceNoDataAvail();
-                    SyncNotedAppOp _result8 = startProxyOperation(_arg013, _arg19, _arg29, _arg37, _arg45, _arg54, _arg63, _arg72, _arg82, _arg92, _arg102);
+                    SyncNotedAppOp _result8 =
+                            startProxyOperation(
+                                    _arg013, _arg19, _arg29, _arg37, _arg45, _arg54, _arg63, _arg72,
+                                    _arg82, _arg92, _arg102);
                     reply.writeNoException();
                     reply.writeTypedObject(_result8, 1);
                     return true;
                 case 14:
                     IBinder _arg014 = data.readStrongBinder();
                     int _arg110 = data.readInt();
-                    AttributionSource _arg210 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+                    AttributionSource _arg210 =
+                            (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
                     boolean _arg38 = data.readBoolean();
                     data.enforceNoDataAvail();
                     finishProxyOperation(_arg014, _arg110, _arg210, _arg38);
@@ -808,10 +1052,12 @@ public interface IAppOpsService extends IInterface {
                     return true;
                 case 17:
                     String _arg016 = data.readString();
-                    SyncNotedAppOp _arg112 = (SyncNotedAppOp) data.readTypedObject(SyncNotedAppOp.CREATOR);
+                    SyncNotedAppOp _arg112 =
+                            (SyncNotedAppOp) data.readTypedObject(SyncNotedAppOp.CREATOR);
                     String _arg211 = data.readString();
                     data.enforceNoDataAvail();
-                    MessageSamplingConfig _result11 = reportRuntimeAppOpAccessMessageAndGetConfig(_arg016, _arg112, _arg211);
+                    MessageSamplingConfig _result11 =
+                            reportRuntimeAppOpAccessMessageAndGetConfig(_arg016, _arg112, _arg211);
                     reply.writeNoException();
                     reply.writeTypedObject(_result11, 1);
                     return true;
@@ -827,7 +1073,8 @@ public interface IAppOpsService extends IInterface {
                     String _arg113 = data.readString();
                     int[] _arg212 = data.createIntArray();
                     data.enforceNoDataAvail();
-                    List<AppOpsManager.PackageOps> _result13 = getOpsForPackage(_arg018, _arg113, _arg212);
+                    List<AppOpsManager.PackageOps> _result13 =
+                            getOpsForPackage(_arg018, _arg113, _arg212);
                     reply.writeNoException();
                     reply.writeTypedList(_result13, 1);
                     return true;
@@ -841,9 +1088,12 @@ public interface IAppOpsService extends IInterface {
                     long _arg64 = data.readLong();
                     long _arg73 = data.readLong();
                     int _arg83 = data.readInt();
-                    RemoteCallback _arg93 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg93 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
-                    getHistoricalOps(_arg019, _arg114, _arg213, _arg39, _arg46, _arg55, _arg64, _arg73, _arg83, _arg93);
+                    getHistoricalOps(
+                            _arg019, _arg114, _arg213, _arg39, _arg46, _arg55, _arg64, _arg73,
+                            _arg83, _arg93);
                     reply.writeNoException();
                     return true;
                 case 21:
@@ -856,9 +1106,12 @@ public interface IAppOpsService extends IInterface {
                     long _arg65 = data.readLong();
                     long _arg74 = data.readLong();
                     int _arg84 = data.readInt();
-                    RemoteCallback _arg94 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg94 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
-                    getHistoricalOpsFromDiskRaw(_arg020, _arg115, _arg214, _arg310, _arg47, _arg56, _arg65, _arg74, _arg84, _arg94);
+                    getHistoricalOpsFromDiskRaw(
+                            _arg020, _arg115, _arg214, _arg310, _arg47, _arg56, _arg65, _arg74,
+                            _arg84, _arg94);
                     reply.writeNoException();
                     return true;
                 case 22:
@@ -876,7 +1129,9 @@ public interface IAppOpsService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 24:
-                    AppOpsManager.HistoricalOps _arg023 = (AppOpsManager.HistoricalOps) data.readTypedObject(AppOpsManager.HistoricalOps.CREATOR);
+                    AppOpsManager.HistoricalOps _arg023 =
+                            (AppOpsManager.HistoricalOps)
+                                    data.readTypedObject(AppOpsManager.HistoricalOps.CREATOR);
                     data.enforceNoDataAvail();
                     addHistoricalOps(_arg023);
                     reply.writeNoException();
@@ -956,7 +1211,8 @@ public interface IAppOpsService extends IInterface {
                     boolean _arg123 = data.readBoolean();
                     IBinder _arg220 = data.readStrongBinder();
                     int _arg313 = data.readInt();
-                    PackageTagsList _arg49 = (PackageTagsList) data.readTypedObject(PackageTagsList.CREATOR);
+                    PackageTagsList _arg49 =
+                            (PackageTagsList) data.readTypedObject(PackageTagsList.CREATOR);
                     data.enforceNoDataAvail();
                     setUserRestriction(_arg032, _arg123, _arg220, _arg313, _arg49);
                     reply.writeNoException();
@@ -969,13 +1225,15 @@ public interface IAppOpsService extends IInterface {
                     return true;
                 case 37:
                     int[] _arg034 = data.createIntArray();
-                    IAppOpsActiveCallback _arg124 = IAppOpsActiveCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppOpsActiveCallback _arg124 =
+                            IAppOpsActiveCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startWatchingActive(_arg034, _arg124);
                     reply.writeNoException();
                     return true;
                 case 38:
-                    IAppOpsActiveCallback _arg035 = IAppOpsActiveCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppOpsActiveCallback _arg035 =
+                            IAppOpsActiveCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     stopWatchingActive(_arg035);
                     reply.writeNoException();
@@ -1002,40 +1260,46 @@ public interface IAppOpsService extends IInterface {
                     return true;
                 case 41:
                     int[] _arg038 = data.createIntArray();
-                    IAppOpsStartedCallback _arg127 = IAppOpsStartedCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppOpsStartedCallback _arg127 =
+                            IAppOpsStartedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startWatchingStarted(_arg038, _arg127);
                     reply.writeNoException();
                     return true;
                 case 42:
-                    IAppOpsStartedCallback _arg039 = IAppOpsStartedCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppOpsStartedCallback _arg039 =
+                            IAppOpsStartedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     stopWatchingStarted(_arg039);
                     reply.writeNoException();
                     return true;
                 case 43:
                     int[] _arg040 = data.createIntArray();
-                    IAppOpsNotedCallback _arg128 = IAppOpsNotedCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppOpsNotedCallback _arg128 =
+                            IAppOpsNotedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startWatchingNoted(_arg040, _arg128);
                     reply.writeNoException();
                     return true;
                 case 44:
-                    IAppOpsNotedCallback _arg041 = IAppOpsNotedCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppOpsNotedCallback _arg041 =
+                            IAppOpsNotedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     stopWatchingNoted(_arg041);
                     reply.writeNoException();
                     return true;
                 case 45:
                     String _arg042 = data.readString();
-                    IAppOpsAsyncNotedCallback _arg129 = IAppOpsAsyncNotedCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppOpsAsyncNotedCallback _arg129 =
+                            IAppOpsAsyncNotedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startWatchingAsyncNoted(_arg042, _arg129);
                     reply.writeNoException();
                     return true;
                 case 46:
                     String _arg043 = data.readString();
-                    IAppOpsAsyncNotedCallback _arg130 = IAppOpsAsyncNotedCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppOpsAsyncNotedCallback _arg130 =
+                            IAppOpsAsyncNotedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     stopWatchingAsyncNoted(_arg043, _arg130);
                     reply.writeNoException();
@@ -1076,20 +1340,26 @@ public interface IAppOpsService extends IInterface {
                     return true;
                 case 52:
                     int _arg047 = data.readInt();
-                    AttributionSourceState _arg133 = (AttributionSourceState) data.readTypedObject(AttributionSourceState.CREATOR);
+                    AttributionSourceState _arg133 =
+                            (AttributionSourceState)
+                                    data.readTypedObject(AttributionSourceState.CREATOR);
                     boolean _arg225 = data.readBoolean();
                     String _arg317 = data.readString();
                     boolean _arg411 = data.readBoolean();
                     boolean _arg57 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    SyncNotedAppOp _result19 = noteProxyOperationWithState(_arg047, _arg133, _arg225, _arg317, _arg411, _arg57);
+                    SyncNotedAppOp _result19 =
+                            noteProxyOperationWithState(
+                                    _arg047, _arg133, _arg225, _arg317, _arg411, _arg57);
                     reply.writeNoException();
                     reply.writeTypedObject(_result19, 1);
                     return true;
                 case 53:
                     IBinder _arg048 = data.readStrongBinder();
                     int _arg134 = data.readInt();
-                    AttributionSourceState _arg226 = (AttributionSourceState) data.readTypedObject(AttributionSourceState.CREATOR);
+                    AttributionSourceState _arg226 =
+                            (AttributionSourceState)
+                                    data.readTypedObject(AttributionSourceState.CREATOR);
                     boolean _arg318 = data.readBoolean();
                     boolean _arg412 = data.readBoolean();
                     String _arg58 = data.readString();
@@ -1099,14 +1369,19 @@ public interface IAppOpsService extends IInterface {
                     int _arg95 = data.readInt();
                     int _arg103 = data.readInt();
                     data.enforceNoDataAvail();
-                    SyncNotedAppOp _result20 = startProxyOperationWithState(_arg048, _arg134, _arg226, _arg318, _arg412, _arg58, _arg66, _arg75, _arg85, _arg95, _arg103);
+                    SyncNotedAppOp _result20 =
+                            startProxyOperationWithState(
+                                    _arg048, _arg134, _arg226, _arg318, _arg412, _arg58, _arg66,
+                                    _arg75, _arg85, _arg95, _arg103);
                     reply.writeNoException();
                     reply.writeTypedObject(_result20, 1);
                     return true;
                 case 54:
                     IBinder _arg049 = data.readStrongBinder();
                     int _arg135 = data.readInt();
-                    AttributionSourceState _arg227 = (AttributionSourceState) data.readTypedObject(AttributionSourceState.CREATOR);
+                    AttributionSourceState _arg227 =
+                            (AttributionSourceState)
+                                    data.readTypedObject(AttributionSourceState.CREATOR);
                     boolean _arg319 = data.readBoolean();
                     data.enforceNoDataAvail();
                     finishProxyOperationWithState(_arg049, _arg135, _arg227, _arg319);
@@ -1119,7 +1394,8 @@ public interface IAppOpsService extends IInterface {
                     String _arg320 = data.readString();
                     int _arg413 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result21 = checkOperationRawForDevice(_arg050, _arg136, _arg228, _arg320, _arg413);
+                    int _result21 =
+                            checkOperationRawForDevice(_arg050, _arg136, _arg228, _arg320, _arg413);
                     reply.writeNoException();
                     reply.writeInt(_result21);
                     return true;
@@ -1143,7 +1419,10 @@ public interface IAppOpsService extends IInterface {
                     String _arg67 = data.readString();
                     boolean _arg76 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    SyncNotedAppOp _result23 = noteOperationForDevice(_arg052, _arg138, _arg230, _arg322, _arg414, _arg59, _arg67, _arg76);
+                    SyncNotedAppOp _result23 =
+                            noteOperationForDevice(
+                                    _arg052, _arg138, _arg230, _arg322, _arg414, _arg59, _arg67,
+                                    _arg76);
                     reply.writeNoException();
                     reply.writeTypedObject(_result23, 1);
                     return true;
@@ -1161,7 +1440,10 @@ public interface IAppOpsService extends IInterface {
                     int _arg104 = data.readInt();
                     int _arg11 = data.readInt();
                     data.enforceNoDataAvail();
-                    SyncNotedAppOp _result24 = startOperationForDevice(_arg053, _arg139, _arg231, _arg323, _arg415, _arg510, _arg68, _arg77, _arg86, _arg96, _arg104, _arg11);
+                    SyncNotedAppOp _result24 =
+                            startOperationForDevice(
+                                    _arg053, _arg139, _arg231, _arg323, _arg415, _arg510, _arg68,
+                                    _arg77, _arg86, _arg96, _arg104, _arg11);
                     reply.writeNoException();
                     reply.writeTypedObject(_result24, 1);
                     return true;
@@ -1180,7 +1462,8 @@ public interface IAppOpsService extends IInterface {
                     int[] _arg055 = data.createIntArray();
                     String _arg141 = data.readString();
                     data.enforceNoDataAvail();
-                    List<AppOpsManager.PackageOps> _result25 = getPackagesForOpsForDevice(_arg055, _arg141);
+                    List<AppOpsManager.PackageOps> _result25 =
+                            getPackagesForOpsForDevice(_arg055, _arg141);
                     reply.writeNoException();
                     reply.writeTypedList(_result25, 1);
                     return true;
@@ -1206,7 +1489,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public int checkOperation(int code, int uid, String packageName) throws RemoteException {
+            public int checkOperation(int code, int uid, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1225,7 +1509,15 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public SyncNotedAppOp noteOperation(int code, int uid, String packageName, String attributionTag, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage) throws RemoteException {
+            public SyncNotedAppOp noteOperation(
+                    int code,
+                    int uid,
+                    String packageName,
+                    String attributionTag,
+                    boolean shouldCollectAsyncNotedOp,
+                    String message,
+                    boolean shouldCollectMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1239,7 +1531,8 @@ public interface IAppOpsService extends IInterface {
                     _data.writeBoolean(shouldCollectMessage);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    SyncNotedAppOp _result = (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
+                    SyncNotedAppOp _result =
+                            (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1248,7 +1541,19 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public SyncNotedAppOp startOperation(IBinder clientId, int code, int uid, String packageName, String attributionTag, boolean startIfModeDefault, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, int attributionFlags, int attributionChainId) throws RemoteException {
+            public SyncNotedAppOp startOperation(
+                    IBinder clientId,
+                    int code,
+                    int uid,
+                    String packageName,
+                    String attributionTag,
+                    boolean startIfModeDefault,
+                    boolean shouldCollectAsyncNotedOp,
+                    String message,
+                    boolean shouldCollectMessage,
+                    int attributionFlags,
+                    int attributionChainId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1331,7 +1636,8 @@ public interface IAppOpsService extends IInterface {
                     try {
                         this.mRemote.transact(3, _data, _reply, 0);
                         _reply.readException();
-                        SyncNotedAppOp _result = (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
+                        SyncNotedAppOp _result =
+                                (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
                         _reply.recycle();
                         _data.recycle();
                         return _result;
@@ -1350,7 +1656,9 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void finishOperation(IBinder clientId, int code, int uid, String packageName, String attributionTag) throws RemoteException {
+            public void finishOperation(
+                    IBinder clientId, int code, int uid, String packageName, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1369,7 +1677,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void startWatchingMode(int op, String packageName, IAppOpsCallback callback) throws RemoteException {
+            public void startWatchingMode(int op, String packageName, IAppOpsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1418,7 +1727,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public int checkAudioOperation(int code, int usage, int uid, String packageName) throws RemoteException {
+            public int checkAudioOperation(int code, int usage, int uid, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1470,7 +1780,9 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void startWatchingModeWithFlags(int op, String packageName, int flags, IAppOpsCallback callback) throws RemoteException {
+            public void startWatchingModeWithFlags(
+                    int op, String packageName, int flags, IAppOpsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1488,7 +1800,14 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public SyncNotedAppOp noteProxyOperation(int code, AttributionSource attributionSource, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, boolean skipProxyOperation) throws RemoteException {
+            public SyncNotedAppOp noteProxyOperation(
+                    int code,
+                    AttributionSource attributionSource,
+                    boolean shouldCollectAsyncNotedOp,
+                    String message,
+                    boolean shouldCollectMessage,
+                    boolean skipProxyOperation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1501,7 +1820,8 @@ public interface IAppOpsService extends IInterface {
                     _data.writeBoolean(skipProxyOperation);
                     this.mRemote.transact(12, _data, _reply, 0);
                     _reply.readException();
-                    SyncNotedAppOp _result = (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
+                    SyncNotedAppOp _result =
+                            (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1510,7 +1830,19 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public SyncNotedAppOp startProxyOperation(IBinder clientId, int code, AttributionSource attributionSource, boolean startIfModeDefault, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, boolean skipProxyOperation, int proxyAttributionFlags, int proxiedAttributionFlags, int attributionChainId) throws RemoteException {
+            public SyncNotedAppOp startProxyOperation(
+                    IBinder clientId,
+                    int code,
+                    AttributionSource attributionSource,
+                    boolean startIfModeDefault,
+                    boolean shouldCollectAsyncNotedOp,
+                    String message,
+                    boolean shouldCollectMessage,
+                    boolean skipProxyOperation,
+                    int proxyAttributionFlags,
+                    int proxiedAttributionFlags,
+                    int attributionChainId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1593,7 +1925,8 @@ public interface IAppOpsService extends IInterface {
                     try {
                         this.mRemote.transact(13, _data, _reply, 0);
                         _reply.readException();
-                        SyncNotedAppOp _result = (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
+                        SyncNotedAppOp _result =
+                                (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
                         _reply.recycle();
                         _data.recycle();
                         return _result;
@@ -1612,7 +1945,12 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void finishProxyOperation(IBinder clientId, int code, AttributionSource attributionSource, boolean skipProxyOperation) throws RemoteException {
+            public void finishProxyOperation(
+                    IBinder clientId,
+                    int code,
+                    AttributionSource attributionSource,
+                    boolean skipProxyOperation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1648,14 +1986,17 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public RuntimeAppOpAccessMessage collectRuntimeAppOpAccessMessage() throws RemoteException {
+            public RuntimeAppOpAccessMessage collectRuntimeAppOpAccessMessage()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    RuntimeAppOpAccessMessage _result = (RuntimeAppOpAccessMessage) _reply.readTypedObject(RuntimeAppOpAccessMessage.CREATOR);
+                    RuntimeAppOpAccessMessage _result =
+                            (RuntimeAppOpAccessMessage)
+                                    _reply.readTypedObject(RuntimeAppOpAccessMessage.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1664,7 +2005,9 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public MessageSamplingConfig reportRuntimeAppOpAccessMessageAndGetConfig(String packageName, SyncNotedAppOp appOp, String message) throws RemoteException {
+            public MessageSamplingConfig reportRuntimeAppOpAccessMessageAndGetConfig(
+                    String packageName, SyncNotedAppOp appOp, String message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1674,7 +2017,9 @@ public interface IAppOpsService extends IInterface {
                     _data.writeString(message);
                     this.mRemote.transact(17, _data, _reply, 0);
                     _reply.readException();
-                    MessageSamplingConfig _result = (MessageSamplingConfig) _reply.readTypedObject(MessageSamplingConfig.CREATOR);
+                    MessageSamplingConfig _result =
+                            (MessageSamplingConfig)
+                                    _reply.readTypedObject(MessageSamplingConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1683,7 +2028,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public List<AppOpsManager.PackageOps> getPackagesForOps(int[] ops) throws RemoteException {
+            public List<AppOpsManager.PackageOps> getPackagesForOps(int[] ops)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1691,7 +2037,8 @@ public interface IAppOpsService extends IInterface {
                     _data.writeIntArray(ops);
                     this.mRemote.transact(18, _data, _reply, 0);
                     _reply.readException();
-                    List<AppOpsManager.PackageOps> _result = _reply.createTypedArrayList(AppOpsManager.PackageOps.CREATOR);
+                    List<AppOpsManager.PackageOps> _result =
+                            _reply.createTypedArrayList(AppOpsManager.PackageOps.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1700,7 +2047,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public List<AppOpsManager.PackageOps> getOpsForPackage(int uid, String packageName, int[] ops) throws RemoteException {
+            public List<AppOpsManager.PackageOps> getOpsForPackage(
+                    int uid, String packageName, int[] ops) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1710,7 +2058,8 @@ public interface IAppOpsService extends IInterface {
                     _data.writeIntArray(ops);
                     this.mRemote.transact(19, _data, _reply, 0);
                     _reply.readException();
-                    List<AppOpsManager.PackageOps> _result = _reply.createTypedArrayList(AppOpsManager.PackageOps.CREATOR);
+                    List<AppOpsManager.PackageOps> _result =
+                            _reply.createTypedArrayList(AppOpsManager.PackageOps.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1719,7 +2068,18 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void getHistoricalOps(int uid, String packageName, String attributionTag, List<String> ops, int historyFlags, int filter, long beginTimeMillis, long endTimeMillis, int flags, RemoteCallback callback) throws RemoteException {
+            public void getHistoricalOps(
+                    int uid,
+                    String packageName,
+                    String attributionTag,
+                    List<String> ops,
+                    int historyFlags,
+                    int filter,
+                    long beginTimeMillis,
+                    long endTimeMillis,
+                    int flags,
+                    RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1804,7 +2164,18 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void getHistoricalOpsFromDiskRaw(int uid, String packageName, String attributionTag, List<String> ops, int historyFlags, int filter, long beginTimeMillis, long endTimeMillis, int flags, RemoteCallback callback) throws RemoteException {
+            public void getHistoricalOpsFromDiskRaw(
+                    int uid,
+                    String packageName,
+                    String attributionTag,
+                    List<String> ops,
+                    int historyFlags,
+                    int filter,
+                    long beginTimeMillis,
+                    long endTimeMillis,
+                    int flags,
+                    RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1904,7 +2275,9 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void setHistoryParameters(int mode, long baseSnapshotInterval, int compressionStep) throws RemoteException {
+            public void setHistoryParameters(
+                    int mode, long baseSnapshotInterval, int compressionStep)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1994,7 +2367,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public List<AppOpsManager.PackageOps> getUidOps(int uid, int[] ops) throws RemoteException {
+            public List<AppOpsManager.PackageOps> getUidOps(int uid, int[] ops)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2003,7 +2377,8 @@ public interface IAppOpsService extends IInterface {
                     _data.writeIntArray(ops);
                     this.mRemote.transact(29, _data, _reply, 0);
                     _reply.readException();
-                    List<AppOpsManager.PackageOps> _result = _reply.createTypedArrayList(AppOpsManager.PackageOps.CREATOR);
+                    List<AppOpsManager.PackageOps> _result =
+                            _reply.createTypedArrayList(AppOpsManager.PackageOps.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2029,7 +2404,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void setMode(int code, int uid, String packageName, int mode) throws RemoteException {
+            public void setMode(int code, int uid, String packageName, int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2063,7 +2439,9 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void setAudioRestriction(int code, int usage, int uid, int mode, String[] exceptionPackages) throws RemoteException {
+            public void setAudioRestriction(
+                    int code, int usage, int uid, int mode, String[] exceptionPackages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2082,7 +2460,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void setUserRestrictions(Bundle restrictions, IBinder token, int userHandle) throws RemoteException {
+            public void setUserRestrictions(Bundle restrictions, IBinder token, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2099,7 +2478,13 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void setUserRestriction(int code, boolean restricted, IBinder token, int userHandle, PackageTagsList excludedPackageTags) throws RemoteException {
+            public void setUserRestriction(
+                    int code,
+                    boolean restricted,
+                    IBinder token,
+                    int userHandle,
+                    PackageTagsList excludedPackageTags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2133,7 +2518,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void startWatchingActive(int[] ops, IAppOpsActiveCallback callback) throws RemoteException {
+            public void startWatchingActive(int[] ops, IAppOpsActiveCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2164,7 +2550,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public boolean isOperationActive(int code, int uid, String packageName) throws RemoteException {
+            public boolean isOperationActive(int code, int uid, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2183,7 +2570,13 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public boolean isProxying(int op, String proxyPackageName, String proxyAttributionTag, int proxiedUid, String proxiedPackageName) throws RemoteException {
+            public boolean isProxying(
+                    int op,
+                    String proxyPackageName,
+                    String proxyAttributionTag,
+                    int proxiedUid,
+                    String proxiedPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2204,7 +2597,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void startWatchingStarted(int[] ops, IAppOpsStartedCallback callback) throws RemoteException {
+            public void startWatchingStarted(int[] ops, IAppOpsStartedCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2220,7 +2614,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void stopWatchingStarted(IAppOpsStartedCallback callback) throws RemoteException {
+            public void stopWatchingStarted(IAppOpsStartedCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2235,7 +2630,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void startWatchingNoted(int[] ops, IAppOpsNotedCallback callback) throws RemoteException {
+            public void startWatchingNoted(int[] ops, IAppOpsNotedCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2266,7 +2662,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void startWatchingAsyncNoted(String packageName, IAppOpsAsyncNotedCallback callback) throws RemoteException {
+            public void startWatchingAsyncNoted(
+                    String packageName, IAppOpsAsyncNotedCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2282,7 +2679,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void stopWatchingAsyncNoted(String packageName, IAppOpsAsyncNotedCallback callback) throws RemoteException {
+            public void stopWatchingAsyncNoted(
+                    String packageName, IAppOpsAsyncNotedCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2298,7 +2696,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public List<AsyncNotedAppOp> extractAsyncOps(String packageName) throws RemoteException {
+            public List<AsyncNotedAppOp> extractAsyncOps(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2306,7 +2705,8 @@ public interface IAppOpsService extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(47, _data, _reply, 0);
                     _reply.readException();
-                    List<AsyncNotedAppOp> _result = _reply.createTypedArrayList(AsyncNotedAppOp.CREATOR);
+                    List<AsyncNotedAppOp> _result =
+                            _reply.createTypedArrayList(AsyncNotedAppOp.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2315,7 +2715,9 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public int checkOperationRaw(int code, int uid, String packageName, String attributionTag) throws RemoteException {
+            public int checkOperationRaw(
+                    int code, int uid, String packageName, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2349,7 +2751,9 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void collectNoteOpCallsForValidation(String stackTrace, int op, String packageName, long version) throws RemoteException {
+            public void collectNoteOpCallsForValidation(
+                    String stackTrace, int op, String packageName, long version)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2381,7 +2785,14 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public SyncNotedAppOp noteProxyOperationWithState(int code, AttributionSourceState attributionSourceStateState, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, boolean skipProxyOperation) throws RemoteException {
+            public SyncNotedAppOp noteProxyOperationWithState(
+                    int code,
+                    AttributionSourceState attributionSourceStateState,
+                    boolean shouldCollectAsyncNotedOp,
+                    String message,
+                    boolean shouldCollectMessage,
+                    boolean skipProxyOperation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2394,7 +2805,8 @@ public interface IAppOpsService extends IInterface {
                     _data.writeBoolean(skipProxyOperation);
                     this.mRemote.transact(52, _data, _reply, 0);
                     _reply.readException();
-                    SyncNotedAppOp _result = (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
+                    SyncNotedAppOp _result =
+                            (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2403,7 +2815,19 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public SyncNotedAppOp startProxyOperationWithState(IBinder clientId, int code, AttributionSourceState attributionSourceStateState, boolean startIfModeDefault, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, boolean skipProxyOperation, int proxyAttributionFlags, int proxiedAttributionFlags, int attributionChainId) throws RemoteException {
+            public SyncNotedAppOp startProxyOperationWithState(
+                    IBinder clientId,
+                    int code,
+                    AttributionSourceState attributionSourceStateState,
+                    boolean startIfModeDefault,
+                    boolean shouldCollectAsyncNotedOp,
+                    String message,
+                    boolean shouldCollectMessage,
+                    boolean skipProxyOperation,
+                    int proxyAttributionFlags,
+                    int proxiedAttributionFlags,
+                    int attributionChainId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2486,7 +2910,8 @@ public interface IAppOpsService extends IInterface {
                     try {
                         this.mRemote.transact(53, _data, _reply, 0);
                         _reply.readException();
-                        SyncNotedAppOp _result = (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
+                        SyncNotedAppOp _result =
+                                (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
                         _reply.recycle();
                         _data.recycle();
                         return _result;
@@ -2505,7 +2930,12 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void finishProxyOperationWithState(IBinder clientId, int code, AttributionSourceState attributionSourceStateState, boolean skipProxyOperation) throws RemoteException {
+            public void finishProxyOperationWithState(
+                    IBinder clientId,
+                    int code,
+                    AttributionSourceState attributionSourceStateState,
+                    boolean skipProxyOperation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2523,7 +2953,13 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public int checkOperationRawForDevice(int code, int uid, String packageName, String attributionTag, int virtualDeviceId) throws RemoteException {
+            public int checkOperationRawForDevice(
+                    int code,
+                    int uid,
+                    String packageName,
+                    String attributionTag,
+                    int virtualDeviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2544,7 +2980,9 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public int checkOperationForDevice(int code, int uid, String packageName, int virtualDeviceId) throws RemoteException {
+            public int checkOperationForDevice(
+                    int code, int uid, String packageName, int virtualDeviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2564,7 +3002,16 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public SyncNotedAppOp noteOperationForDevice(int code, int uid, String packageName, String attributionTag, int virtualDeviceId, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage) throws RemoteException {
+            public SyncNotedAppOp noteOperationForDevice(
+                    int code,
+                    int uid,
+                    String packageName,
+                    String attributionTag,
+                    int virtualDeviceId,
+                    boolean shouldCollectAsyncNotedOp,
+                    String message,
+                    boolean shouldCollectMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2579,7 +3026,8 @@ public interface IAppOpsService extends IInterface {
                     _data.writeBoolean(shouldCollectMessage);
                     this.mRemote.transact(57, _data, _reply, 0);
                     _reply.readException();
-                    SyncNotedAppOp _result = (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
+                    SyncNotedAppOp _result =
+                            (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2588,7 +3036,20 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public SyncNotedAppOp startOperationForDevice(IBinder clientId, int code, int uid, String packageName, String attributionTag, int virtualDeviceId, boolean startIfModeDefault, boolean shouldCollectAsyncNotedOp, String message, boolean shouldCollectMessage, int attributionFlags, int attributionChainId) throws RemoteException {
+            public SyncNotedAppOp startOperationForDevice(
+                    IBinder clientId,
+                    int code,
+                    int uid,
+                    String packageName,
+                    String attributionTag,
+                    int virtualDeviceId,
+                    boolean startIfModeDefault,
+                    boolean shouldCollectAsyncNotedOp,
+                    String message,
+                    boolean shouldCollectMessage,
+                    int attributionFlags,
+                    int attributionChainId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2672,7 +3133,8 @@ public interface IAppOpsService extends IInterface {
                     try {
                         this.mRemote.transact(58, _data, _reply, 0);
                         _reply.readException();
-                        SyncNotedAppOp _result = (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
+                        SyncNotedAppOp _result =
+                                (SyncNotedAppOp) _reply.readTypedObject(SyncNotedAppOp.CREATOR);
                         _reply.recycle();
                         _data.recycle();
                         return _result;
@@ -2691,7 +3153,14 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public void finishOperationForDevice(IBinder clientId, int code, int uid, String packageName, String attributionTag, int virtualDeviceId) throws RemoteException {
+            public void finishOperationForDevice(
+                    IBinder clientId,
+                    int code,
+                    int uid,
+                    String packageName,
+                    String attributionTag,
+                    int virtualDeviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2711,7 +3180,8 @@ public interface IAppOpsService extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsService
-            public List<AppOpsManager.PackageOps> getPackagesForOpsForDevice(int[] ops, String persistentDeviceId) throws RemoteException {
+            public List<AppOpsManager.PackageOps> getPackagesForOpsForDevice(
+                    int[] ops, String persistentDeviceId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2720,7 +3190,8 @@ public interface IAppOpsService extends IInterface {
                     _data.writeString(persistentDeviceId);
                     this.mRemote.transact(60, _data, _reply, 0);
                     _reply.readException();
-                    List<AppOpsManager.PackageOps> _result = _reply.createTypedArrayList(AppOpsManager.PackageOps.CREATOR);
+                    List<AppOpsManager.PackageOps> _result =
+                            _reply.createTypedArrayList(AppOpsManager.PackageOps.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2730,31 +3201,38 @@ public interface IAppOpsService extends IInterface {
         }
 
         protected void offsetHistory_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
         }
 
         protected void setHistoryParameters_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
         }
 
         protected void addHistoricalOps_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
         }
 
         protected void resetHistoryParameters_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
         }
 
         protected void resetPackageOpsNoHistory_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
         }
 
         protected void clearHistory_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
         }
 
         protected void rebootHistory_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_APPOPS, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

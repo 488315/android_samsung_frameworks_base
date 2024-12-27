@@ -1,6 +1,7 @@
 package android.sec.enterprise.certificate;
 
 import com.android.internal.midi.MidiConstants;
+
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 
@@ -16,11 +17,11 @@ public final class Base64 {
     private static final byte WHITESPACE_AS_BYTE = -2;
 
     private static byte[] initializeBase64Alphabet() {
-        return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".getBytes(StandardCharsets.US_ASCII);
+        return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+                .getBytes(StandardCharsets.US_ASCII);
     }
 
-    private Base64() {
-    }
+    private Base64() {}
 
     public static String encode(byte[] in) {
         int byteTripletAsInt;
@@ -41,16 +42,19 @@ public final class Base64 {
                 byteTripletAsInt = byteTripletAsInt2 << 4;
             }
             if (i + 2 < len) {
-                output[outputIndex] = BASE_64_ALPHABET[(FIRST_OUTPUT_BYTE_MASK & byteTripletAsInt) >>> 18];
+                output[outputIndex] =
+                        BASE_64_ALPHABET[(FIRST_OUTPUT_BYTE_MASK & byteTripletAsInt) >>> 18];
                 outputIndex++;
             }
             int outputIndex2 = i + 1;
             if (outputIndex2 < len) {
-                output[outputIndex] = BASE_64_ALPHABET[(SECOND_OUTPUT_BYTE_MASK & byteTripletAsInt) >>> 12];
+                output[outputIndex] =
+                        BASE_64_ALPHABET[(SECOND_OUTPUT_BYTE_MASK & byteTripletAsInt) >>> 12];
                 outputIndex++;
             }
             int outputIndex3 = outputIndex + 1;
-            output[outputIndex] = BASE_64_ALPHABET[(byteTripletAsInt & THIRD_OUTPUT_BYTE_MASK) >>> 6];
+            output[outputIndex] =
+                    BASE_64_ALPHABET[(byteTripletAsInt & THIRD_OUTPUT_BYTE_MASK) >>> 6];
             outputIndex = outputIndex3 + 1;
             output[outputIndex3] = BASE_64_ALPHABET[byteTripletAsInt & 63];
         }
@@ -136,11 +140,11 @@ public final class Base64 {
     }
 
     private static class InvalidBase64ByteException extends Exception {
-        private InvalidBase64ByteException() {
-        }
+        private InvalidBase64ByteException() {}
     }
 
-    private static byte getNextByte(byte[] in, int[] pos, int inLength) throws InvalidBase64ByteException {
+    private static byte getNextByte(byte[] in, int[] pos, int inLength)
+            throws InvalidBase64ByteException {
         while (pos[0] < inLength) {
             byte c = base64AlphabetToNumericalValue(in[pos[0]]);
             if (c != -2) {
@@ -151,7 +155,9 @@ public final class Base64 {
         return END_OF_INPUT;
     }
 
-    private static byte[] checkNoTrailingAndReturn(ByteArrayOutputStream output, byte[] in, int i, int inLength) throws InvalidBase64ByteException {
+    private static byte[] checkNoTrailingAndReturn(
+            ByteArrayOutputStream output, byte[] in, int i, int inLength)
+            throws InvalidBase64ByteException {
         while (i < inLength) {
             byte c = base64AlphabetToNumericalValue(in[i]);
             if (c != -2 && c != -1) {

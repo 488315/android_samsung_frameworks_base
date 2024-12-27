@@ -10,7 +10,8 @@ public final /* synthetic */ class ScreenOnKeeper$$ExternalSyntheticLambda0 impl
     public final /* synthetic */ ScreenOnKeeper f$0;
     public final /* synthetic */ Intent f$1;
 
-    public /* synthetic */ ScreenOnKeeper$$ExternalSyntheticLambda0(ScreenOnKeeper screenOnKeeper, Intent intent, int i) {
+    public /* synthetic */ ScreenOnKeeper$$ExternalSyntheticLambda0(
+            ScreenOnKeeper screenOnKeeper, Intent intent, int i) {
         this.$r8$classId = i;
         this.f$0 = screenOnKeeper;
         this.f$1 = intent;

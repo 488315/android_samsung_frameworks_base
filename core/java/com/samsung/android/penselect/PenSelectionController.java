@@ -17,8 +17,7 @@ public class PenSelectionController {
     static class PenSelectionContents {
         public String mContentStr;
 
-        PenSelectionContents() {
-        }
+        PenSelectionContents() {}
     }
 
     public static PenSelectionController getInstance() {
@@ -28,14 +27,17 @@ public class PenSelectionController {
         return sInstance;
     }
 
-    private PenSelectionController() {
-    }
+    private PenSelectionController() {}
 
     private boolean isVisibleView(View view) {
-        return view != null && view.getVisibility() == 0 && view.getWidth() > 0 && view.getHeight() > 0;
+        return view != null
+                && view.getVisibility() == 0
+                && view.getWidth() > 0
+                && view.getHeight() > 0;
     }
 
-    private boolean getPenSelectionContents(Context context, View view, PenSelectionContents contents) {
+    private boolean getPenSelectionContents(
+            Context context, View view, PenSelectionContents contents) {
         boolean haveContents = false;
         if (!isVisibleView(view)) {
             return false;
@@ -123,7 +125,9 @@ public class PenSelectionController {
                         return topMostView;
                     }
                     Drawable background = vg.getBackground();
-                    if (background != null && background.isVisible() && background.getOpacity() > -2) {
+                    if (background != null
+                            && background.isVisible()
+                            && background.getOpacity() > -2) {
                         return topMostView;
                     }
                 }
@@ -150,7 +154,12 @@ public class PenSelectionController {
         }
         int[] screenOffsetOfView = new int[2];
         view.getLocationOnScreen(screenOffsetOfView);
-        Rect rect = new Rect(screenOffsetOfView[0], screenOffsetOfView[1], screenOffsetOfView[0] + view.getWidth(), screenOffsetOfView[1] + view.getHeight());
+        Rect rect =
+                new Rect(
+                        screenOffsetOfView[0],
+                        screenOffsetOfView[1],
+                        screenOffsetOfView[0] + view.getWidth(),
+                        screenOffsetOfView[1] + view.getHeight());
         return rect.contains(rectSrc);
     }
 }

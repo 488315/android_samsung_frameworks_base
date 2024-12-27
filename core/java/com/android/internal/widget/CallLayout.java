@@ -12,7 +12,9 @@ import android.widget.FrameLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.flags.Flags;
+
 import com.android.internal.R;
+
 import java.util.function.Consumer;
 
 @RemoteViews.RemoteView
@@ -54,18 +56,22 @@ public class CallLayout extends FrameLayout {
         this.mConversationText = (TextView) findViewById(R.id.conversation_text);
         this.mConversationIconView = (CachingIconView) findViewById(R.id.conversation_icon);
         this.mIcon = (CachingIconView) findViewById(16908294);
-        this.mConversationIconBadgeBg = (CachingIconView) findViewById(R.id.conversation_icon_badge_bg);
-        this.mIcon.setOnForceHiddenChangedListener(new Consumer() { // from class: com.android.internal.widget.CallLayout$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                CallLayout.this.lambda$onFinishInflate$0((Boolean) obj);
-            }
-        });
+        this.mConversationIconBadgeBg =
+                (CachingIconView) findViewById(R.id.conversation_icon_badge_bg);
+        this.mIcon.setOnForceHiddenChangedListener(
+                new Consumer() { // from class:
+                                 // com.android.internal.widget.CallLayout$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        CallLayout.this.lambda$onFinishInflate$0((Boolean) obj);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$onFinishInflate$0(Boolean forceHidden) {
-        this.mPeopleHelper.animateViewForceHidden(this.mConversationIconBadgeBg, forceHidden.booleanValue());
+        this.mPeopleHelper.animateViewForceHidden(
+                this.mConversationIconBadgeBg, forceHidden.booleanValue());
     }
 
     private Icon getConversationIcon() {
@@ -81,7 +87,8 @@ public class CallLayout extends FrameLayout {
             icon = this.mLargeIcon;
         }
         if (icon == null) {
-            Icon icon2 = this.mPeopleHelper.createAvatarSymbol(callerName, symbol, this.mLayoutColor);
+            Icon icon2 =
+                    this.mPeopleHelper.createAvatarSymbol(callerName, symbol, this.mLayoutColor);
             return icon2;
         }
         return icon;
@@ -89,7 +96,8 @@ public class CallLayout extends FrameLayout {
 
     public Runnable setLayoutColorAsync(final int color) {
         if (!Flags.callStyleSetDataAsync()) {
-            return new Runnable() { // from class: com.android.internal.widget.CallLayout$$ExternalSyntheticLambda2
+            return new Runnable() { // from class:
+                                    // com.android.internal.widget.CallLayout$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
                     CallLayout.this.lambda$setLayoutColorAsync$1(color);
@@ -97,7 +105,8 @@ public class CallLayout extends FrameLayout {
             };
         }
         this.mLayoutColor = color;
-        return new Runnable() { // from class: com.android.internal.widget.CallLayout$$ExternalSyntheticLambda3
+        return new Runnable() { // from class:
+                                // com.android.internal.widget.CallLayout$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
                 CallLayout.lambda$setLayoutColorAsync$2();
@@ -105,8 +114,7 @@ public class CallLayout extends FrameLayout {
         };
     }
 
-    static /* synthetic */ void lambda$setLayoutColorAsync$2() {
-    }
+    static /* synthetic */ void lambda$setLayoutColorAsync$2() {}
 
     @RemotableViewMethod(asyncImpl = "setLayoutColorAsync")
     /* renamed from: setLayoutColor, reason: merged with bridge method [inline-methods] */
@@ -121,7 +129,8 @@ public class CallLayout extends FrameLayout {
 
     public Runnable setLargeIconAsync(final Icon largeIcon) {
         if (!Flags.callStyleSetDataAsync()) {
-            return new Runnable() { // from class: com.android.internal.widget.CallLayout$$ExternalSyntheticLambda4
+            return new Runnable() { // from class:
+                                    // com.android.internal.widget.CallLayout$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
                     CallLayout.this.lambda$setLargeIconAsync$3(largeIcon);
@@ -129,7 +138,8 @@ public class CallLayout extends FrameLayout {
             };
         }
         this.mLargeIcon = largeIcon;
-        return new Runnable() { // from class: com.android.internal.widget.CallLayout$$ExternalSyntheticLambda5
+        return new Runnable() { // from class:
+                                // com.android.internal.widget.CallLayout$$ExternalSyntheticLambda5
             @Override // java.lang.Runnable
             public final void run() {
                 CallLayout.lambda$setLargeIconAsync$4();
@@ -137,8 +147,7 @@ public class CallLayout extends FrameLayout {
         };
     }
 
-    static /* synthetic */ void lambda$setLargeIconAsync$4() {
-    }
+    static /* synthetic */ void lambda$setLargeIconAsync$4() {}
 
     @RemotableViewMethod(asyncImpl = "setLargeIconAsync")
     /* renamed from: setLargeIcon, reason: merged with bridge method [inline-methods] */
@@ -157,7 +166,8 @@ public class CallLayout extends FrameLayout {
 
     public Runnable setDataAsync(final Bundle extras) {
         if (!Flags.callStyleSetDataAsync()) {
-            return new Runnable() { // from class: com.android.internal.widget.CallLayout$$ExternalSyntheticLambda1
+            return new Runnable() { // from class:
+                                    // com.android.internal.widget.CallLayout$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
                     CallLayout.this.lambda$setDataAsync$5(extras);

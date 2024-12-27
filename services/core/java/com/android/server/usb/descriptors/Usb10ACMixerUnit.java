@@ -13,7 +13,8 @@ public final class Usb10ACMixerUnit extends UsbACMixerUnit implements UsbAudioCh
         return this.mNumOutputs;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbACMixerUnit, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbACMixerUnit,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public final int parseRawDescriptors(ByteStream byteStream) {
         super.parseRawDescriptors(byteStream);
         this.mChannelConfig = byteStream.unpackUsbShort();
@@ -27,7 +28,8 @@ public final class Usb10ACMixerUnit extends UsbACMixerUnit implements UsbAudioCh
         return this.mLength;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbACInterface, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbACInterface,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public final void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
         textReportCanvas.writeParagraph("Mixer Unit", false);
@@ -46,7 +48,8 @@ public final class Usb10ACMixerUnit extends UsbACMixerUnit implements UsbAudioCh
         textReportCanvas.write("]");
         textReportCanvas.closeListItem();
         textReportCanvas.writeListItem("Num Outputs: " + ((int) this.mNumOutputs));
-        textReportCanvas.writeListItem("Channel Config: " + TextReportCanvas.getHexString(this.mChannelConfig));
+        textReportCanvas.writeListItem(
+                "Channel Config: " + TextReportCanvas.getHexString(this.mChannelConfig));
         byte[] bArr2 = this.mControls;
         textReportCanvas.openListItem();
         textReportCanvas.write("Controls: " + bArr2.length + " [");

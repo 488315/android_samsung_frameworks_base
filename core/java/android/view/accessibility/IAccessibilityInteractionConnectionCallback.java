@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -13,38 +14,40 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
 
     void sendTakeScreenshotOfWindowError(int i, int i2) throws RemoteException;
 
-    void setFindAccessibilityNodeInfoResult(AccessibilityNodeInfo accessibilityNodeInfo, int i) throws RemoteException;
+    void setFindAccessibilityNodeInfoResult(AccessibilityNodeInfo accessibilityNodeInfo, int i)
+            throws RemoteException;
 
-    void setFindAccessibilityNodeInfosResult(List<AccessibilityNodeInfo> list, int i) throws RemoteException;
+    void setFindAccessibilityNodeInfosResult(List<AccessibilityNodeInfo> list, int i)
+            throws RemoteException;
 
     void setPerformAccessibilityActionResult(boolean z, int i) throws RemoteException;
 
-    void setPrefetchAccessibilityNodeInfoResult(List<AccessibilityNodeInfo> list, int i) throws RemoteException;
+    void setPrefetchAccessibilityNodeInfoResult(List<AccessibilityNodeInfo> list, int i)
+            throws RemoteException;
 
     public static class Default implements IAccessibilityInteractionConnectionCallback {
         @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-        public void setFindAccessibilityNodeInfoResult(AccessibilityNodeInfo info, int interactionId) throws RemoteException {
-        }
+        public void setFindAccessibilityNodeInfoResult(
+                AccessibilityNodeInfo info, int interactionId) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-        public void setFindAccessibilityNodeInfosResult(List<AccessibilityNodeInfo> infos, int interactionId) throws RemoteException {
-        }
+        public void setFindAccessibilityNodeInfosResult(
+                List<AccessibilityNodeInfo> infos, int interactionId) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-        public void setPrefetchAccessibilityNodeInfoResult(List<AccessibilityNodeInfo> infos, int interactionId) throws RemoteException {
-        }
+        public void setPrefetchAccessibilityNodeInfoResult(
+                List<AccessibilityNodeInfo> infos, int interactionId) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-        public void setPerformAccessibilityActionResult(boolean succeeded, int interactionId) throws RemoteException {
-        }
+        public void setPerformAccessibilityActionResult(boolean succeeded, int interactionId)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-        public void sendTakeScreenshotOfWindowError(int errorCode, int interactionId) throws RemoteException {
-        }
+        public void sendTakeScreenshotOfWindowError(int errorCode, int interactionId)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-        public void sendAttachOverlayResult(int result, int interactionId) throws RemoteException {
-        }
+        public void sendAttachOverlayResult(int result, int interactionId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -52,8 +55,10 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
         }
     }
 
-    public static abstract class Stub extends Binder implements IAccessibilityInteractionConnectionCallback {
-        public static final String DESCRIPTOR = "android.view.accessibility.IAccessibilityInteractionConnectionCallback";
+    public abstract static class Stub extends Binder
+            implements IAccessibilityInteractionConnectionCallback {
+        public static final String DESCRIPTOR =
+                "android.view.accessibility.IAccessibilityInteractionConnectionCallback";
         static final int TRANSACTION_sendAttachOverlayResult = 6;
         static final int TRANSACTION_sendTakeScreenshotOfWindowError = 5;
         static final int TRANSACTION_setFindAccessibilityNodeInfoResult = 1;
@@ -106,7 +111,8 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -116,19 +122,23 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
             }
             switch (code) {
                 case 1:
-                    AccessibilityNodeInfo _arg0 = (AccessibilityNodeInfo) data.readTypedObject(AccessibilityNodeInfo.CREATOR);
+                    AccessibilityNodeInfo _arg0 =
+                            (AccessibilityNodeInfo)
+                                    data.readTypedObject(AccessibilityNodeInfo.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     setFindAccessibilityNodeInfoResult(_arg0, _arg1);
                     return true;
                 case 2:
-                    List<AccessibilityNodeInfo> _arg02 = data.createTypedArrayList(AccessibilityNodeInfo.CREATOR);
+                    List<AccessibilityNodeInfo> _arg02 =
+                            data.createTypedArrayList(AccessibilityNodeInfo.CREATOR);
                     int _arg12 = data.readInt();
                     data.enforceNoDataAvail();
                     setFindAccessibilityNodeInfosResult(_arg02, _arg12);
                     return true;
                 case 3:
-                    List<AccessibilityNodeInfo> _arg03 = data.createTypedArrayList(AccessibilityNodeInfo.CREATOR);
+                    List<AccessibilityNodeInfo> _arg03 =
+                            data.createTypedArrayList(AccessibilityNodeInfo.CREATOR);
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     setPrefetchAccessibilityNodeInfoResult(_arg03, _arg13);
@@ -173,7 +183,8 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-            public void setFindAccessibilityNodeInfoResult(AccessibilityNodeInfo info, int interactionId) throws RemoteException {
+            public void setFindAccessibilityNodeInfoResult(
+                    AccessibilityNodeInfo info, int interactionId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -186,7 +197,8 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-            public void setFindAccessibilityNodeInfosResult(List<AccessibilityNodeInfo> infos, int interactionId) throws RemoteException {
+            public void setFindAccessibilityNodeInfosResult(
+                    List<AccessibilityNodeInfo> infos, int interactionId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -199,7 +211,8 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-            public void setPrefetchAccessibilityNodeInfoResult(List<AccessibilityNodeInfo> infos, int interactionId) throws RemoteException {
+            public void setPrefetchAccessibilityNodeInfoResult(
+                    List<AccessibilityNodeInfo> infos, int interactionId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -212,7 +225,8 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-            public void setPerformAccessibilityActionResult(boolean succeeded, int interactionId) throws RemoteException {
+            public void setPerformAccessibilityActionResult(boolean succeeded, int interactionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -225,7 +239,8 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-            public void sendTakeScreenshotOfWindowError(int errorCode, int interactionId) throws RemoteException {
+            public void sendTakeScreenshotOfWindowError(int errorCode, int interactionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -238,7 +253,8 @@ public interface IAccessibilityInteractionConnectionCallback extends IInterface 
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnectionCallback
-            public void sendAttachOverlayResult(int result, int interactionId) throws RemoteException {
+            public void sendAttachOverlayResult(int result, int interactionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

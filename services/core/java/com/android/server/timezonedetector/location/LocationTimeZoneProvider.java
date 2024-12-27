@@ -3,11 +3,13 @@ package com.android.server.timezonedetector.location;
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.os.SystemClock;
 import android.service.timezone.TimeZoneProviderEvent;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.timezonedetector.ConfigurationInternal;
 import com.android.server.timezonedetector.Dumpable;
 import com.android.server.timezonedetector.ReferenceWithHistory;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,12 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
         public final LocationTimeZoneProvider provider;
         public final int stateEnum;
 
-        public ProviderState(LocationTimeZoneProvider locationTimeZoneProvider, int i, TimeZoneProviderEvent timeZoneProviderEvent, ConfigurationInternal configurationInternal, String str) {
+        public ProviderState(
+                LocationTimeZoneProvider locationTimeZoneProvider,
+                int i,
+                TimeZoneProviderEvent timeZoneProviderEvent,
+                ConfigurationInternal configurationInternal,
+                String str) {
             Objects.requireNonNull(locationTimeZoneProvider);
             this.provider = locationTimeZoneProvider;
             this.stateEnum = i;
@@ -61,7 +68,8 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
                 case 6:
                     return "Destroyed (6)";
                 default:
-                    return BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "Unknown (", ")");
+                    return BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "Unknown (", ")");
             }
         }
 
@@ -73,7 +81,10 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
                 return false;
             }
             ProviderState providerState = (ProviderState) obj;
-            return this.stateEnum == providerState.stateEnum && Objects.equals(this.event, providerState.event) && Objects.equals(this.currentUserConfiguration, providerState.currentUserConfiguration);
+            return this.stateEnum == providerState.stateEnum
+                    && Objects.equals(this.event, providerState.event)
+                    && Objects.equals(
+                            this.currentUserConfiguration, providerState.currentUserConfiguration);
         }
 
         public final int getProviderStatus() {
@@ -91,12 +102,14 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
                 case 5:
                     return 1;
                 default:
-                    throw new IllegalStateException("Unknown state enum:" + prettyPrintStateEnum(i));
+                    throw new IllegalStateException(
+                            "Unknown state enum:" + prettyPrintStateEnum(i));
             }
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(this.stateEnum), this.event, this.currentUserConfiguration);
+            return Objects.hash(
+                    Integer.valueOf(this.stateEnum), this.event, this.currentUserConfiguration);
         }
 
         public final boolean isStarted() {
@@ -109,12 +122,20 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
             return i == 5 || i == 6;
         }
 
-        public final ProviderState newState(int i, TimeZoneProviderEvent timeZoneProviderEvent, ConfigurationInternal configurationInternal, String str) {
+        public final ProviderState newState(
+                int i,
+                TimeZoneProviderEvent timeZoneProviderEvent,
+                ConfigurationInternal configurationInternal,
+                String str) {
             int i2 = this.stateEnum;
             switch (i2) {
                 case 0:
                     if (i != 4) {
-                        throw new IllegalArgumentException("Must transition from " + prettyPrintStateEnum(0) + " to " + prettyPrintStateEnum(4));
+                        throw new IllegalArgumentException(
+                                "Must transition from "
+                                        + prettyPrintStateEnum(0)
+                                        + " to "
+                                        + prettyPrintStateEnum(4));
                     }
                     break;
                 case 1:
@@ -124,45 +145,80 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
                     break;
                 case 5:
                 case 6:
-                    throw new IllegalArgumentException("Illegal transition out of " + prettyPrintStateEnum(i2));
+                    throw new IllegalArgumentException(
+                            "Illegal transition out of " + prettyPrintStateEnum(i2));
                 default:
-                    throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "Invalid this.stateEnum="));
+                    throw new IllegalArgumentException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                    i2, "Invalid this.stateEnum="));
             }
             switch (i) {
                 case 0:
-                    throw new IllegalArgumentException("Cannot transition to " + prettyPrintStateEnum(0));
+                    throw new IllegalArgumentException(
+                            "Cannot transition to " + prettyPrintStateEnum(0));
                 case 1:
                 case 2:
                 case 3:
                     if (configurationInternal == null) {
-                        throw new IllegalArgumentException("Started state: currentUserConfig must not be null");
+                        throw new IllegalArgumentException(
+                                "Started state: currentUserConfig must not be null");
                     }
                     break;
                 case 4:
                     if (timeZoneProviderEvent != null || configurationInternal != null) {
-                        throw new IllegalArgumentException("Stopped state: event and currentUserConfig must be null, event=" + timeZoneProviderEvent + ", currentUserConfig=" + configurationInternal);
+                        throw new IllegalArgumentException(
+                                "Stopped state: event and currentUserConfig must be null, event="
+                                        + timeZoneProviderEvent
+                                        + ", currentUserConfig="
+                                        + configurationInternal);
                     }
                 case 5:
                 case 6:
                     if (timeZoneProviderEvent != null || configurationInternal != null) {
-                        throw new IllegalArgumentException("Terminal state: event and currentUserConfig must be null, newStateEnum=" + i + ", event=" + timeZoneProviderEvent + ", currentUserConfig=" + configurationInternal);
+                        throw new IllegalArgumentException(
+                                "Terminal state: event and currentUserConfig must be null,"
+                                    + " newStateEnum="
+                                        + i
+                                        + ", event="
+                                        + timeZoneProviderEvent
+                                        + ", currentUserConfig="
+                                        + configurationInternal);
                     }
                 default:
-                    throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown newStateEnum="));
+                    throw new IllegalArgumentException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                    i, "Unknown newStateEnum="));
             }
-            return new ProviderState(this.provider, i, timeZoneProviderEvent, configurationInternal, str);
+            return new ProviderState(
+                    this.provider, i, timeZoneProviderEvent, configurationInternal, str);
         }
 
         public final String toString() {
-            return "ProviderState{stateEnum=" + prettyPrintStateEnum(this.stateEnum) + ", event=" + this.event + ", currentUserConfiguration=" + this.currentUserConfiguration + ", mStateEntryTimeMillis=" + this.mStateEntryTimeMillis + ", mDebugInfo=" + this.mDebugInfo + '}';
+            return "ProviderState{stateEnum="
+                    + prettyPrintStateEnum(this.stateEnum)
+                    + ", event="
+                    + this.event
+                    + ", currentUserConfiguration="
+                    + this.currentUserConfiguration
+                    + ", mStateEntryTimeMillis="
+                    + this.mStateEntryTimeMillis
+                    + ", mDebugInfo="
+                    + this.mDebugInfo
+                    + '}';
         }
     }
 
-    public LocationTimeZoneProvider(RealProviderMetricsLogger realProviderMetricsLogger, HandlerThreadingDomain handlerThreadingDomain, String str, TimeZoneProviderEventPreProcessor timeZoneProviderEventPreProcessor, boolean z) {
+    public LocationTimeZoneProvider(
+            RealProviderMetricsLogger realProviderMetricsLogger,
+            HandlerThreadingDomain handlerThreadingDomain,
+            String str,
+            TimeZoneProviderEventPreProcessor timeZoneProviderEventPreProcessor,
+            boolean z) {
         Objects.requireNonNull(handlerThreadingDomain);
         this.mThreadingDomain = handlerThreadingDomain;
         this.mProviderMetricsLogger = realProviderMetricsLogger;
-        this.mInitializationTimeoutQueue = new ThreadingDomain$SingleRunnableQueue(handlerThreadingDomain);
+        this.mInitializationTimeoutQueue =
+                new ThreadingDomain$SingleRunnableQueue(handlerThreadingDomain);
         this.mSharedLock = handlerThreadingDomain.mLockObject;
         Objects.requireNonNull(str);
         this.mProviderName = str;
@@ -171,7 +227,8 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
     }
 
     public final void cancelInitializationTimeoutIfSet() {
-        ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue = this.mInitializationTimeoutQueue;
+        ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue =
+                this.mInitializationTimeoutQueue;
         threadingDomain$SingleRunnableQueue.this$0.assertCurrentThread();
         if (threadingDomain$SingleRunnableQueue.mIsQueued) {
             threadingDomain$SingleRunnableQueue.cancel();
@@ -214,7 +271,8 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
         Duration ofMillis;
         synchronized (this.mSharedLock) {
             try {
-                ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue = this.mInitializationTimeoutQueue;
+                ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue =
+                        this.mInitializationTimeoutQueue;
                 threadingDomain$SingleRunnableQueue.this$0.assertCurrentThread();
                 if (!threadingDomain$SingleRunnableQueue.mIsQueued) {
                     throw new IllegalStateException("No item queued");
@@ -236,7 +294,9 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
         return arrayList;
     }
 
-    public final void initialize(LocationTimeZoneProviderController$$ExternalSyntheticLambda0 locationTimeZoneProviderController$$ExternalSyntheticLambda0) {
+    public final void initialize(
+            LocationTimeZoneProviderController$$ExternalSyntheticLambda0
+                    locationTimeZoneProviderController$$ExternalSyntheticLambda0) {
         String str;
         this.mThreadingDomain.assertCurrentThread();
         synchronized (this.mSharedLock) {
@@ -244,18 +304,22 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
                 throw new IllegalStateException("initialize already called");
             }
             this.mProviderListener = locationTimeZoneProviderController$$ExternalSyntheticLambda0;
-            ProviderState newState = new ProviderState(this, 0, null, null, "Initial state").newState(4, null, null, "initialize");
+            ProviderState newState =
+                    new ProviderState(this, 0, null, null, "Initial state")
+                            .newState(4, null, null, "initialize");
             boolean z = false;
             setCurrentState(newState, false);
             try {
                 str = "onInitialize() returned false";
                 z = onInitialize();
             } catch (RuntimeException e) {
-                LocationTimeZoneManagerService.warnLog("Unable to initialize the provider due to exception", e);
+                LocationTimeZoneManagerService.warnLog(
+                        "Unable to initialize the provider due to exception", e);
                 str = "onInitialize() threw exception:" + e.getMessage();
             }
             if (!z) {
-                setCurrentState(newState.newState(5, null, null, "Failed to initialize: " + str), true);
+                setCurrentState(
+                        newState.newState(5, null, null, "Failed to initialize: " + str), true);
             }
         }
     }
@@ -263,7 +327,8 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
     public boolean isInitializationTimeoutSet() {
         boolean z;
         synchronized (this.mSharedLock) {
-            ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue = this.mInitializationTimeoutQueue;
+            ThreadingDomain$SingleRunnableQueue threadingDomain$SingleRunnableQueue =
+                    this.mInitializationTimeoutQueue;
             threadingDomain$SingleRunnableQueue.this$0.assertCurrentThread();
             z = threadingDomain$SingleRunnableQueue.mIsQueued;
         }
@@ -286,7 +351,8 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
                 ProviderState providerState2 = (ProviderState) this.mCurrentState.get();
                 this.mCurrentState.set(providerState);
                 if (!providerState.equals(providerState2)) {
-                    RealProviderMetricsLogger realProviderMetricsLogger = this.mProviderMetricsLogger;
+                    RealProviderMetricsLogger realProviderMetricsLogger =
+                            this.mProviderMetricsLogger;
                     int i2 = providerState.stateEnum;
                     realProviderMetricsLogger.getClass();
                     switch (i2) {
@@ -312,7 +378,10 @@ public abstract class LocationTimeZoneProvider implements Dumpable {
                             i = 0;
                             break;
                     }
-                    FrameworkStatsLog.write(FrameworkStatsLog.LOCATION_TIME_ZONE_PROVIDER_STATE_CHANGED, realProviderMetricsLogger.mProviderIndex, i);
+                    FrameworkStatsLog.write(
+                            FrameworkStatsLog.LOCATION_TIME_ZONE_PROVIDER_STATE_CHANGED,
+                            realProviderMetricsLogger.mProviderIndex,
+                            i);
                     if (this.mRecordStateChanges) {
                         this.mRecordedStates.add(providerState);
                     }

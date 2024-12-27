@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.GeneralNames;
 import com.android.internal.org.bouncycastle.asn1.x509.V2Form;
 import com.android.internal.org.bouncycastle.jce.X509Principal;
 import com.android.internal.org.bouncycastle.util.Selector;
+
 import java.io.IOException;
 import java.security.Principal;
 import java.security.cert.CertSelector;
@@ -15,6 +16,7 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes5.dex */
@@ -30,7 +32,8 @@ public class AttributeCertificateIssuer implements CertSelector, Selector {
     }
 
     public AttributeCertificateIssuer(X509Principal principal) {
-        this.form = new V2Form(GeneralNames.getInstance(new DERSequence(new GeneralName(principal))));
+        this.form =
+                new V2Form(GeneralNames.getInstance(new DERSequence(new GeneralName(principal))));
     }
 
     private Object[] getNames() {
@@ -73,7 +76,8 @@ public class AttributeCertificateIssuer implements CertSelector, Selector {
             GeneralName gn = names[i];
             if (gn.getTagNo() == 4) {
                 try {
-                    if (new X500Principal(gn.getName().toASN1Primitive().getEncoded()).equals(subject)) {
+                    if (new X500Principal(gn.getName().toASN1Primitive().getEncoded())
+                            .equals(subject)) {
                         return true;
                     }
                 } catch (IOException e) {
@@ -83,7 +87,8 @@ public class AttributeCertificateIssuer implements CertSelector, Selector {
         return false;
     }
 
-    @Override // java.security.cert.CertSelector, com.android.internal.org.bouncycastle.util.Selector
+    @Override // java.security.cert.CertSelector,
+              // com.android.internal.org.bouncycastle.util.Selector
     public Object clone() {
         return new AttributeCertificateIssuer(AttCertIssuer.getInstance(this.form));
     }
@@ -97,7 +102,12 @@ public class AttributeCertificateIssuer implements CertSelector, Selector {
         if (this.form instanceof V2Form) {
             V2Form issuer = (V2Form) this.form;
             if (issuer.getBaseCertificateID() != null) {
-                return issuer.getBaseCertificateID().getSerial().hasValue(x509Cert.getSerialNumber()) && matchesDN(x509Cert.getIssuerX500Principal(), issuer.getBaseCertificateID().getIssuer());
+                return issuer.getBaseCertificateID()
+                                .getSerial()
+                                .hasValue(x509Cert.getSerialNumber())
+                        && matchesDN(
+                                x509Cert.getIssuerX500Principal(),
+                                issuer.getBaseCertificateID().getIssuer());
             }
             GeneralNames name = issuer.getIssuerName();
             if (matchesDN(x509Cert.getSubjectX500Principal(), name)) {

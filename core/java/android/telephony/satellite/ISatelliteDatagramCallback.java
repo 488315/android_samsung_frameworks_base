@@ -5,18 +5,26 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.internal.telephony.IVoidConsumer;
 
 /* loaded from: classes4.dex */
 public interface ISatelliteDatagramCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.satellite.ISatelliteDatagramCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.satellite.ISatelliteDatagramCallback";
 
-    void onSatelliteDatagramReceived(long j, SatelliteDatagram satelliteDatagram, int i, IVoidConsumer iVoidConsumer) throws RemoteException;
+    void onSatelliteDatagramReceived(
+            long j, SatelliteDatagram satelliteDatagram, int i, IVoidConsumer iVoidConsumer)
+            throws RemoteException;
 
     public static class Default implements ISatelliteDatagramCallback {
         @Override // android.telephony.satellite.ISatelliteDatagramCallback
-        public void onSatelliteDatagramReceived(long datagramId, SatelliteDatagram datagram, int pendingCount, IVoidConsumer callback) throws RemoteException {
-        }
+        public void onSatelliteDatagramReceived(
+                long datagramId,
+                SatelliteDatagram datagram,
+                int pendingCount,
+                IVoidConsumer callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +32,7 @@ public interface ISatelliteDatagramCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatelliteDatagramCallback {
+    public abstract static class Stub extends Binder implements ISatelliteDatagramCallback {
         static final int TRANSACTION_onSatelliteDatagramReceived = 1;
 
         public Stub() {
@@ -62,7 +70,8 @@ public interface ISatelliteDatagramCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISatelliteDatagramCallback.DESCRIPTOR);
             }
@@ -73,7 +82,8 @@ public interface ISatelliteDatagramCallback extends IInterface {
             switch (code) {
                 case 1:
                     long _arg0 = data.readLong();
-                    SatelliteDatagram _arg1 = (SatelliteDatagram) data.readTypedObject(SatelliteDatagram.CREATOR);
+                    SatelliteDatagram _arg1 =
+                            (SatelliteDatagram) data.readTypedObject(SatelliteDatagram.CREATOR);
                     int _arg2 = data.readInt();
                     IVoidConsumer _arg3 = IVoidConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
@@ -101,7 +111,12 @@ public interface ISatelliteDatagramCallback extends IInterface {
             }
 
             @Override // android.telephony.satellite.ISatelliteDatagramCallback
-            public void onSatelliteDatagramReceived(long datagramId, SatelliteDatagram datagram, int pendingCount, IVoidConsumer callback) throws RemoteException {
+            public void onSatelliteDatagramReceived(
+                    long datagramId,
+                    SatelliteDatagram datagram,
+                    int pendingCount,
+                    IVoidConsumer callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteDatagramCallback.DESCRIPTOR);

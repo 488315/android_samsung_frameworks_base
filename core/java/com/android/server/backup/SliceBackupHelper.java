@@ -40,7 +40,8 @@ public class SliceBackupHelper extends BlobBackupHelper {
         }
         if (KEY_SLICES.equals(key)) {
             try {
-                ISliceManager sm = ISliceManager.Stub.asInterface(ServiceManager.getService("slice"));
+                ISliceManager sm =
+                        ISliceManager.Stub.asInterface(ServiceManager.getService("slice"));
                 sm.applyRestore(payload, 0);
             } catch (Exception e) {
                 Slog.e(TAG, "Couldn't communicate with slice manager", e);

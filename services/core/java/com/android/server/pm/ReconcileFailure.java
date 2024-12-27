@@ -6,6 +6,9 @@ import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 /* loaded from: classes2.dex */
 final class ReconcileFailure extends PackageManagerException {
     public ReconcileFailure(int i, String str) {
-        super(i, ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Reconcile failed: ", str));
+        super(
+                i,
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                        "Reconcile failed: ", str));
     }
 }

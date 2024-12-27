@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.ParcelUuid;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -12,23 +13,25 @@ import java.util.UUID;
 
 /* loaded from: classes3.dex */
 public final class CallEndpoint implements Parcelable {
-    private static final String CALLENDPOINT_NAME_ID_NULL_ERROR = "CallEndpoint name cannot be null.";
-    public static final Parcelable.Creator<CallEndpoint> CREATOR = new Parcelable.Creator<CallEndpoint>() { // from class: android.telecom.CallEndpoint.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CallEndpoint createFromParcel(Parcel source) {
-            CharSequence name = source.readCharSequence();
-            int type = source.readInt();
-            ParcelUuid id = ParcelUuid.CREATOR.createFromParcel(source);
-            return new CallEndpoint(name, type, id);
-        }
+    private static final String CALLENDPOINT_NAME_ID_NULL_ERROR =
+            "CallEndpoint name cannot be null.";
+    public static final Parcelable.Creator<CallEndpoint> CREATOR =
+            new Parcelable.Creator<CallEndpoint>() { // from class: android.telecom.CallEndpoint.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CallEndpoint createFromParcel(Parcel source) {
+                    CharSequence name = source.readCharSequence();
+                    int type = source.readInt();
+                    ParcelUuid id = ParcelUuid.CREATOR.createFromParcel(source);
+                    return new CallEndpoint(name, type, id);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CallEndpoint[] newArray(int size) {
-            return new CallEndpoint[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CallEndpoint[] newArray(int size) {
+                    return new CallEndpoint[size];
+                }
+            };
     public static final int ENDPOINT_OPERATION_FAILED = 1;
     public static final int ENDPOINT_OPERATION_SUCCESS = 0;
     public static final int TYPE_BLUETOOTH = 2;
@@ -42,8 +45,7 @@ public final class CallEndpoint implements Parcelable {
     private final int mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EndpointType {
-    }
+    public @interface EndpointType {}
 
     public CallEndpoint(CharSequence name, int type, ParcelUuid id) {
         if (name == null || id == null) {
@@ -72,7 +74,9 @@ public final class CallEndpoint implements Parcelable {
             return false;
         }
         CallEndpoint endpoint = (CallEndpoint) obj;
-        return Objects.equals(getEndpointName(), endpoint.getEndpointName()) && getEndpointType() == endpoint.getEndpointType() && getIdentifier().equals(endpoint.getIdentifier());
+        return Objects.equals(getEndpointName(), endpoint.getEndpointName())
+                && getEndpointType() == endpoint.getEndpointType()
+                && getIdentifier().equals(endpoint.getIdentifier());
     }
 
     public int hashCode() {
@@ -80,7 +84,11 @@ public final class CallEndpoint implements Parcelable {
     }
 
     public String toString() {
-        return TextUtils.formatSimple("[CallEndpoint Name: %s, Type: %s, Identifier: %s]", this.mName.toString(), endpointTypeToString(this.mType), this.mIdentifier.toString());
+        return TextUtils.formatSimple(
+                "[CallEndpoint Name: %s, Type: %s, Identifier: %s]",
+                this.mName.toString(),
+                endpointTypeToString(this.mType),
+                this.mIdentifier.toString());
     }
 
     public CharSequence getEndpointName() {

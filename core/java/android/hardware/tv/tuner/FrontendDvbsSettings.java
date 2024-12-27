@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class FrontendDvbsSettings implements Parcelable {
-    public static final Parcelable.Creator<FrontendDvbsSettings> CREATOR = new Parcelable.Creator<FrontendDvbsSettings>() { // from class: android.hardware.tv.tuner.FrontendDvbsSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendDvbsSettings createFromParcel(Parcel _aidl_source) {
-            FrontendDvbsSettings _aidl_out = new FrontendDvbsSettings();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FrontendDvbsSettings> CREATOR =
+            new Parcelable.Creator<FrontendDvbsSettings>() { // from class:
+                // android.hardware.tv.tuner.FrontendDvbsSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendDvbsSettings createFromParcel(Parcel _aidl_source) {
+                    FrontendDvbsSettings _aidl_out = new FrontendDvbsSettings();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendDvbsSettings[] newArray(int _aidl_size) {
-            return new FrontendDvbsSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendDvbsSettings[] newArray(int _aidl_size) {
+                    return new FrontendDvbsSettings[_aidl_size];
+                }
+            };
     public FrontendDvbsCodeRate coderate;
     public long frequency = 0;
     public long endFrequency = 0;
@@ -109,7 +111,9 @@ public class FrontendDvbsSettings implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.coderate = (FrontendDvbsCodeRate) _aidl_parcel.readTypedObject(FrontendDvbsCodeRate.CREATOR);
+            this.coderate =
+                    (FrontendDvbsCodeRate)
+                            _aidl_parcel.readTypedObject(FrontendDvbsCodeRate.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

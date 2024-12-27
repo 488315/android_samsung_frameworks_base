@@ -29,7 +29,12 @@ public final /* synthetic */ class RecentTasks$$ExternalSyntheticLambda4 impleme
                 RecentTasks recentTasks = (RecentTasks) obj2;
                 Task task = (Task) obj;
                 recentTasks.getClass();
-                task.mDedicatedTask = task.mHostProcessName != null && recentTasks.mUserToProcs.get(task.mUserId).containsKey(task.mHostProcessName);
+                task.mDedicatedTask =
+                        task.mHostProcessName != null
+                                && recentTasks
+                                        .mUserToProcs
+                                        .get(task.mUserId)
+                                        .containsKey(task.mHostProcessName);
                 break;
         }
     }

@@ -14,9 +14,7 @@ public class BiometricRequestConstants {
     public static final int REASON_UNKNOWN = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RequestReason {
-    }
+    public @interface RequestReason {}
 
-    private BiometricRequestConstants() {
-    }
+    private BiometricRequestConstants() {}
 }

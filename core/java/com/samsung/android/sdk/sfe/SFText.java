@@ -10,8 +10,10 @@ import android.graphics.fonts.SystemFonts;
 import android.text.Layout;
 import android.util.Log;
 import android.widget.TextView;
+
 import com.samsung.android.sdk.sfe.font.FontManager;
 import com.samsung.android.sdk.sfe.util.SFError;
+
 import java.io.File;
 
 /* loaded from: classes6.dex */
@@ -32,13 +34,16 @@ public class SFText {
     private boolean hasEffect = false;
     private boolean firstInitializedFlag = true;
 
-    private native int SFText_AddInnerShadowTextEffect(float f, float f2, float f3, int i, float f4);
+    private native int SFText_AddInnerShadowTextEffect(
+            float f, float f2, float f3, int i, float f4);
 
-    private native int SFText_AddLinearGradientTextEffect(float f, float f2, int[] iArr, float[] fArr, float[] fArr2, float f3);
+    private native int SFText_AddLinearGradientTextEffect(
+            float f, float f2, int[] iArr, float[] fArr, float[] fArr2, float f3);
 
     private native int SFText_AddOuterGlowTextEffect(float f, int i, float f2);
 
-    private native int SFText_AddOuterShadowTextEffect(float f, float f2, float f3, int i, float f4);
+    private native int SFText_AddOuterShadowTextEffect(
+            float f, float f2, float f3, int i, float f4);
 
     private native int SFText_AddStrokeTextEffect(float f, int i, float f2, int i2, int i3);
 
@@ -137,7 +142,8 @@ public class SFText {
                 int[] nativeSize = getDrawingBitmapSize();
                 int renderWidth = nativeSize[0];
                 int renderHeight = nativeSize[1];
-                Bitmap bitmap = Bitmap.createBitmap(renderWidth, renderHeight, Bitmap.Config.ARGB_8888);
+                Bitmap bitmap =
+                        Bitmap.createBitmap(renderWidth, renderHeight, Bitmap.Config.ARGB_8888);
                 bitmap.setPixels(buffer, 0, renderWidth, 0, 0, renderWidth, renderHeight);
                 canvas.save();
                 int offsetx = getEffectLeftOffset();
@@ -188,11 +194,19 @@ public class SFText {
         if (this.mFontFamily == null || this.mFontFamily.isEmpty()) {
             this.mFontFamily = Typeface.DEFAULT_FAMILY;
         }
-        String fontName = this.mFontManager.getSystemFontName(this.mFontFamily, this.isBoldStyle, this.isItalicStyle);
+        String fontName =
+                this.mFontManager.getSystemFontName(
+                        this.mFontFamily, this.isBoldStyle, this.isItalicStyle);
         if (fontName == null) {
-            Log.w(TAG, "System not support fontFamily = '" + this.mFontFamily + "' , change to default fontFamily");
+            Log.w(
+                    TAG,
+                    "System not support fontFamily = '"
+                            + this.mFontFamily
+                            + "' , change to default fontFamily");
             this.mFontFamily = Typeface.DEFAULT_FAMILY;
-            fontName = this.mFontManager.getSystemFontName(this.mFontFamily, this.isBoldStyle, this.isItalicStyle);
+            fontName =
+                    this.mFontManager.getSystemFontName(
+                            this.mFontFamily, this.isBoldStyle, this.isItalicStyle);
             if (fontName == null) {
                 Log.e(TAG, "System not support default fontFamily = '" + this.mFontFamily);
                 return;
@@ -226,7 +240,8 @@ public class SFText {
         return SFText_GetDrawingBitmapSize();
     }
 
-    public int addOuterShadowTextEffect(float angle, float offset, float softness, int color, float blendingOpacity) {
+    public int addOuterShadowTextEffect(
+            float angle, float offset, float softness, int color, float blendingOpacity) {
         Log.d(TAG, "addOuterShadowTextEffect");
         init();
         if (!SFEffect.isInitialized()) {
@@ -236,7 +251,8 @@ public class SFText {
         return SFText_AddOuterShadowTextEffect(angle, offset, softness, color, blendingOpacity);
     }
 
-    public int addInnerShadowTextEffect(float angle, float offset, float softness, int color, float blendingOpacity) {
+    public int addInnerShadowTextEffect(
+            float angle, float offset, float softness, int color, float blendingOpacity) {
         Log.d(TAG, "addInnerShadowTextEffect");
         init();
         if (!SFEffect.isInitialized()) {
@@ -266,14 +282,21 @@ public class SFText {
         return SFText_AddOuterGlowTextEffect(size, color, blendingOpacity);
     }
 
-    public int addLinearGradientTextEffect(float angle, float scale, int[] colors, float[] alphas, float[] positions, float blendingOpacity) {
+    public int addLinearGradientTextEffect(
+            float angle,
+            float scale,
+            int[] colors,
+            float[] alphas,
+            float[] positions,
+            float blendingOpacity) {
         Log.d(TAG, "addLinearGradientTextEffect");
         init();
         if (!SFEffect.isInitialized()) {
             return -1;
         }
         this.hasEffect = true;
-        return SFText_AddLinearGradientTextEffect(angle, scale, colors, alphas, positions, blendingOpacity);
+        return SFText_AddLinearGradientTextEffect(
+                angle, scale, colors, alphas, positions, blendingOpacity);
     }
 
     public void clearAllTextEffect() {

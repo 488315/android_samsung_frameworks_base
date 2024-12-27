@@ -4,6 +4,7 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Environment;
+
 import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -13,8 +14,21 @@ import java.util.Map;
 /* loaded from: classes3.dex */
 public class Font extends BaseObj {
     private static Map<String, FontFamily> sFontFamilyMap;
-    private static final String[] sSansNames = {Typeface.DEFAULT_FAMILY, "arial", "helvetica", "tahoma", "verdana"};
-    private static final String[] sSerifNames = {"serif", "times", "times new roman", "palatino", "georgia", "baskerville", "goudy", "fantasy", "cursive", "ITC Stone Serif"};
+    private static final String[] sSansNames = {
+        Typeface.DEFAULT_FAMILY, "arial", "helvetica", "tahoma", "verdana"
+    };
+    private static final String[] sSerifNames = {
+        "serif",
+        "times",
+        "times new roman",
+        "palatino",
+        "georgia",
+        "baskerville",
+        "goudy",
+        "fantasy",
+        "cursive",
+        "ITC Stone Serif"
+    };
     private static final String[] sMonoNames = {"monospace", "courier", "courier new", "monaco"};
 
     public enum Style {
@@ -35,8 +49,7 @@ public class Font extends BaseObj {
         String[] mNames;
         String mNormalFileName;
 
-        private FontFamily() {
-        }
+        private FontFamily() {}
     }
 
     private static void addFamilyToMap(FontFamily family) {
@@ -94,7 +107,8 @@ public class Font extends BaseObj {
         this.guard.open("destroy");
     }
 
-    public static Font createFromFile(RenderScript rs, Resources res, String path, float pointSize) {
+    public static Font createFromFile(
+            RenderScript rs, Resources res, String path, float pointSize) {
         rs.validate();
         int dpi = res.getDisplayMetrics().densityDpi;
         long fontId = rs.nFontCreateFromFile(path, pointSize, dpi);
@@ -109,7 +123,8 @@ public class Font extends BaseObj {
         return createFromFile(rs, res, path.getAbsolutePath(), pointSize);
     }
 
-    public static Font createFromAsset(RenderScript rs, Resources res, String path, float pointSize) {
+    public static Font createFromAsset(
+            RenderScript rs, Resources res, String path, float pointSize) {
         rs.validate();
         AssetManager mgr = res.getAssets();
         int dpi = res.getDisplayMetrics().densityDpi;
@@ -142,7 +157,8 @@ public class Font extends BaseObj {
         }
     }
 
-    public static Font create(RenderScript rs, Resources res, String familyName, Style fontStyle, float pointSize) {
+    public static Font create(
+            RenderScript rs, Resources res, String familyName, Style fontStyle, float pointSize) {
         String fileName = getFontFileName(familyName, fontStyle);
         String fontPath = Environment.getRootDirectory().getAbsolutePath();
         return createFromFile(rs, res, fontPath + "/fonts/" + fileName, pointSize);

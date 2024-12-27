@@ -11,19 +11,20 @@ import android.util.Log;
 
 /* loaded from: classes3.dex */
 public final class Tile implements Parcelable {
-    public static final Parcelable.Creator<Tile> CREATOR = new Parcelable.Creator<Tile>() { // from class: android.service.quicksettings.Tile.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Tile createFromParcel(Parcel source) {
-            return new Tile(source);
-        }
+    public static final Parcelable.Creator<Tile> CREATOR =
+            new Parcelable.Creator<Tile>() { // from class: android.service.quicksettings.Tile.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Tile createFromParcel(Parcel source) {
+                    return new Tile(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Tile[] newArray(int size) {
-            return new Tile[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Tile[] newArray(int size) {
+                    return new Tile[size];
+                }
+            };
     public static final int STATE_ACTIVE = 2;
     public static final int STATE_INACTIVE = 1;
     public static final int STATE_UNAVAILABLE = 0;
@@ -43,8 +44,7 @@ public final class Tile implements Parcelable {
         readFromParcel(source);
     }
 
-    public Tile() {
-    }
+    public Tile() {}
 
     public void setService(IQSService service, IBinder stub) {
         this.mService = service;

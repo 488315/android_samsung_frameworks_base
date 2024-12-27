@@ -1,6 +1,7 @@
 package android.view;
 
 import android.media.AudioManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Random;
@@ -20,15 +21,12 @@ public class SoundEffectConstants {
     private static int sLastNavigationRepeatSoundEffectId = -1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NavigationSoundEffect {
-    }
+    public @interface NavigationSoundEffect {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SoundEffect {
-    }
+    public @interface SoundEffect {}
 
-    private SoundEffectConstants() {
-    }
+    private SoundEffectConstants() {}
 
     public static int getContantForFocusDirection(int direction) {
         switch (direction) {
@@ -43,7 +41,9 @@ public class SoundEffectConstants {
             case 66:
                 return 3;
             default:
-                throw new IllegalArgumentException("direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, FOCUS_RIGHT, FOCUS_FORWARD, FOCUS_BACKWARD}.");
+                throw new IllegalArgumentException(
+                        "direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, FOCUS_RIGHT,"
+                            + " FOCUS_FORWARD, FOCUS_BACKWARD}.");
         }
     }
 
@@ -61,7 +61,9 @@ public class SoundEffectConstants {
                 case 66:
                     return 7;
                 default:
-                    throw new IllegalArgumentException("direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, FOCUS_RIGHT, FOCUS_FORWARD, FOCUS_BACKWARD}.");
+                    throw new IllegalArgumentException(
+                            "direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT,"
+                                + " FOCUS_RIGHT, FOCUS_FORWARD, FOCUS_BACKWARD}.");
             }
         }
         return getContantForFocusDirection(direction);

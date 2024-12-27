@@ -1,13 +1,13 @@
 package android.app;
 
 import android.annotation.SystemApi;
-import android.app.IGameManagerService;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -20,23 +20,30 @@ public final class GameManager {
     public static final int GAME_MODE_UNSUPPORTED = 0;
     private static final String TAG = "GameManager";
     private final Context mContext;
-    private final IGameManagerService mService = IGameManagerService.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.GAME_SERVICE));
+    private final IGameManagerService mService =
+            IGameManagerService.Stub.asInterface(
+                    ServiceManager.getServiceOrThrow(Context.GAME_SERVICE));
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GameMode {
-    }
+    public @interface GameMode {}
 
     GameManager(Context context, Handler handler) throws ServiceManager.ServiceNotFoundException {
         this.mContext = context;
     }
 
     public int getGameMode() {
-        return getGameModeImpl(this.mContext.getPackageName(), this.mContext.getApplicationInfo().targetSdkVersion);
+        return getGameModeImpl(
+                this.mContext.getPackageName(),
+                this.mContext.getApplicationInfo().targetSdkVersion);
     }
 
     public int getGameMode(String packageName) {
         try {
-            ApplicationInfo applicationInfo = this.mContext.getPackageManager().getApplicationInfo(packageName, PackageManager.ApplicationInfoFlags.of(0L));
+            ApplicationInfo applicationInfo =
+                    this.mContext
+                            .getPackageManager()
+                            .getApplicationInfo(
+                                    packageName, PackageManager.ApplicationInfoFlags.of(0L));
             int targetSdkVersion = applicationInfo.targetSdkVersion;
             return getGameModeImpl(packageName, targetSdkVersion);
         } catch (PackageManager.NameNotFoundException e) {
@@ -92,7 +99,8 @@ public final class GameManager {
 
     public void notifyGraphicsEnvironmentSetup() {
         try {
-            this.mService.notifyGraphicsEnvironmentSetup(this.mContext.getPackageName(), this.mContext.getUserId());
+            this.mService.notifyGraphicsEnvironmentSetup(
+                    this.mContext.getPackageName(), this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -100,7 +108,8 @@ public final class GameManager {
 
     public void setGameState(GameState gameState) {
         try {
-            this.mService.setGameState(this.mContext.getPackageName(), gameState, this.mContext.getUserId());
+            this.mService.setGameState(
+                    this.mContext.getPackageName(), gameState, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -115,9 +124,11 @@ public final class GameManager {
     }
 
     @SystemApi
-    public void updateCustomGameModeConfiguration(String packageName, GameModeConfiguration gameModeConfig) {
+    public void updateCustomGameModeConfiguration(
+            String packageName, GameModeConfiguration gameModeConfig) {
         try {
-            this.mService.updateCustomGameModeConfiguration(packageName, gameModeConfig, this.mContext.getUserId());
+            this.mService.updateCustomGameModeConfiguration(
+                    packageName, gameModeConfig, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

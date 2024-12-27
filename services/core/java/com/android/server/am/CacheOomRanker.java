@@ -2,6 +2,7 @@ package com.android.server.am;
 
 import android.provider.DeviceConfig;
 import android.util.Slog;
+
 import java.util.Comparator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -16,7 +17,8 @@ public final class CacheOomRanker {
     static final boolean DEFAULT_USE_FREQUENT_RSS = true;
     static final String KEY_OOM_RE_RANKING_LRU_WEIGHT = "oom_re_ranking_lru_weight";
     static final String KEY_OOM_RE_RANKING_NUMBER_TO_RE_RANK = "oom_re_ranking_number_to_re_rank";
-    static final String KEY_OOM_RE_RANKING_PRESERVE_TOP_N_APPS = "oom_re_ranking_preserve_top_n_apps";
+    static final String KEY_OOM_RE_RANKING_PRESERVE_TOP_N_APPS =
+            "oom_re_ranking_preserve_top_n_apps";
     static final String KEY_OOM_RE_RANKING_RSS_UPDATE_RATE_MS = "oom_re_ranking_rss_update_rate_ms";
     static final String KEY_OOM_RE_RANKING_RSS_WEIGHT = "oom_re_ranking_rss_weight";
     static final String KEY_OOM_RE_RANKING_USES_WEIGHT = "oom_re_ranking_uses_weight";
@@ -40,64 +42,109 @@ public final class CacheOomRanker {
     float mLruWeight = DEFAULT_OOM_RE_RANKING_LRU_WEIGHT;
     float mUsesWeight = DEFAULT_OOM_RE_RANKING_USES_WEIGHT;
     float mRssWeight = DEFAULT_OOM_RE_RANKING_RSS_WEIGHT;
-    public final AnonymousClass1 mOnFlagsChangedListener = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.server.am.CacheOomRanker.1
-        public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-            synchronized (CacheOomRanker.this.mPhenotypeFlagLock) {
-                try {
-                    for (String str : properties.getKeyset()) {
-                        if (CacheOomRanker.KEY_USE_OOM_RE_RANKING.equals(str)) {
-                            CacheOomRanker cacheOomRanker = CacheOomRanker.this;
-                            cacheOomRanker.getClass();
-                            cacheOomRanker.mUseOomReRanking = DeviceConfig.getBoolean("activity_manager", CacheOomRanker.KEY_USE_OOM_RE_RANKING, false);
-                        } else if (CacheOomRanker.KEY_OOM_RE_RANKING_NUMBER_TO_RE_RANK.equals(str)) {
-                            CacheOomRanker.this.updateNumberToReRank();
-                        } else if (CacheOomRanker.KEY_OOM_RE_RANKING_PRESERVE_TOP_N_APPS.equals(str)) {
-                            CacheOomRanker cacheOomRanker2 = CacheOomRanker.this;
-                            cacheOomRanker2.getClass();
-                            int i = 3;
-                            int i2 = DeviceConfig.getInt("activity_manager", CacheOomRanker.KEY_OOM_RE_RANKING_PRESERVE_TOP_N_APPS, 3);
-                            if (i2 < 0) {
-                                Slog.w("OomAdjuster", "Found negative value for preserveTopNApps, setting to default: " + i2);
-                            } else {
-                                i = i2;
+    public final AnonymousClass1 mOnFlagsChangedListener =
+            new DeviceConfig.OnPropertiesChangedListener() { // from class:
+                // com.android.server.am.CacheOomRanker.1
+                public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                    synchronized (CacheOomRanker.this.mPhenotypeFlagLock) {
+                        try {
+                            for (String str : properties.getKeyset()) {
+                                if (CacheOomRanker.KEY_USE_OOM_RE_RANKING.equals(str)) {
+                                    CacheOomRanker cacheOomRanker = CacheOomRanker.this;
+                                    cacheOomRanker.getClass();
+                                    cacheOomRanker.mUseOomReRanking =
+                                            DeviceConfig.getBoolean(
+                                                    "activity_manager",
+                                                    CacheOomRanker.KEY_USE_OOM_RE_RANKING,
+                                                    false);
+                                } else if (CacheOomRanker.KEY_OOM_RE_RANKING_NUMBER_TO_RE_RANK
+                                        .equals(str)) {
+                                    CacheOomRanker.this.updateNumberToReRank();
+                                } else if (CacheOomRanker.KEY_OOM_RE_RANKING_PRESERVE_TOP_N_APPS
+                                        .equals(str)) {
+                                    CacheOomRanker cacheOomRanker2 = CacheOomRanker.this;
+                                    cacheOomRanker2.getClass();
+                                    int i = 3;
+                                    int i2 =
+                                            DeviceConfig.getInt(
+                                                    "activity_manager",
+                                                    CacheOomRanker
+                                                            .KEY_OOM_RE_RANKING_PRESERVE_TOP_N_APPS,
+                                                    3);
+                                    if (i2 < 0) {
+                                        Slog.w(
+                                                "OomAdjuster",
+                                                "Found negative value for preserveTopNApps, setting"
+                                                    + " to default: "
+                                                        + i2);
+                                    } else {
+                                        i = i2;
+                                    }
+                                    cacheOomRanker2.mPreserveTopNApps = i;
+                                } else if (CacheOomRanker.KEY_OOM_RE_RANKING_USE_FREQUENT_RSS
+                                        .equals(str)) {
+                                    CacheOomRanker cacheOomRanker3 = CacheOomRanker.this;
+                                    cacheOomRanker3.getClass();
+                                    cacheOomRanker3.mUseFrequentRss =
+                                            DeviceConfig.getBoolean(
+                                                    "activity_manager",
+                                                    CacheOomRanker
+                                                            .KEY_OOM_RE_RANKING_USE_FREQUENT_RSS,
+                                                    true);
+                                } else if (CacheOomRanker.KEY_OOM_RE_RANKING_RSS_UPDATE_RATE_MS
+                                        .equals(str)) {
+                                    CacheOomRanker cacheOomRanker4 = CacheOomRanker.this;
+                                    cacheOomRanker4.getClass();
+                                    cacheOomRanker4.mRssUpdateRateMs =
+                                            DeviceConfig.getLong(
+                                                    "activity_manager",
+                                                    CacheOomRanker
+                                                            .KEY_OOM_RE_RANKING_RSS_UPDATE_RATE_MS,
+                                                    CacheOomRanker.DEFAULT_RSS_UPDATE_RATE_MS);
+                                } else if (CacheOomRanker.KEY_OOM_RE_RANKING_LRU_WEIGHT.equals(
+                                        str)) {
+                                    CacheOomRanker cacheOomRanker5 = CacheOomRanker.this;
+                                    cacheOomRanker5.getClass();
+                                    cacheOomRanker5.mLruWeight =
+                                            DeviceConfig.getFloat(
+                                                    "activity_manager",
+                                                    CacheOomRanker.KEY_OOM_RE_RANKING_LRU_WEIGHT,
+                                                    CacheOomRanker
+                                                            .DEFAULT_OOM_RE_RANKING_LRU_WEIGHT);
+                                } else if (CacheOomRanker.KEY_OOM_RE_RANKING_USES_WEIGHT.equals(
+                                        str)) {
+                                    CacheOomRanker cacheOomRanker6 = CacheOomRanker.this;
+                                    cacheOomRanker6.getClass();
+                                    cacheOomRanker6.mUsesWeight =
+                                            DeviceConfig.getFloat(
+                                                    "activity_manager",
+                                                    CacheOomRanker.KEY_OOM_RE_RANKING_USES_WEIGHT,
+                                                    CacheOomRanker
+                                                            .DEFAULT_OOM_RE_RANKING_USES_WEIGHT);
+                                } else if (CacheOomRanker.KEY_OOM_RE_RANKING_RSS_WEIGHT.equals(
+                                        str)) {
+                                    CacheOomRanker cacheOomRanker7 = CacheOomRanker.this;
+                                    cacheOomRanker7.getClass();
+                                    cacheOomRanker7.mRssWeight =
+                                            DeviceConfig.getFloat(
+                                                    "activity_manager",
+                                                    CacheOomRanker.KEY_OOM_RE_RANKING_RSS_WEIGHT,
+                                                    CacheOomRanker
+                                                            .DEFAULT_OOM_RE_RANKING_RSS_WEIGHT);
+                                }
                             }
-                            cacheOomRanker2.mPreserveTopNApps = i;
-                        } else if (CacheOomRanker.KEY_OOM_RE_RANKING_USE_FREQUENT_RSS.equals(str)) {
-                            CacheOomRanker cacheOomRanker3 = CacheOomRanker.this;
-                            cacheOomRanker3.getClass();
-                            cacheOomRanker3.mUseFrequentRss = DeviceConfig.getBoolean("activity_manager", CacheOomRanker.KEY_OOM_RE_RANKING_USE_FREQUENT_RSS, true);
-                        } else if (CacheOomRanker.KEY_OOM_RE_RANKING_RSS_UPDATE_RATE_MS.equals(str)) {
-                            CacheOomRanker cacheOomRanker4 = CacheOomRanker.this;
-                            cacheOomRanker4.getClass();
-                            cacheOomRanker4.mRssUpdateRateMs = DeviceConfig.getLong("activity_manager", CacheOomRanker.KEY_OOM_RE_RANKING_RSS_UPDATE_RATE_MS, CacheOomRanker.DEFAULT_RSS_UPDATE_RATE_MS);
-                        } else if (CacheOomRanker.KEY_OOM_RE_RANKING_LRU_WEIGHT.equals(str)) {
-                            CacheOomRanker cacheOomRanker5 = CacheOomRanker.this;
-                            cacheOomRanker5.getClass();
-                            cacheOomRanker5.mLruWeight = DeviceConfig.getFloat("activity_manager", CacheOomRanker.KEY_OOM_RE_RANKING_LRU_WEIGHT, CacheOomRanker.DEFAULT_OOM_RE_RANKING_LRU_WEIGHT);
-                        } else if (CacheOomRanker.KEY_OOM_RE_RANKING_USES_WEIGHT.equals(str)) {
-                            CacheOomRanker cacheOomRanker6 = CacheOomRanker.this;
-                            cacheOomRanker6.getClass();
-                            cacheOomRanker6.mUsesWeight = DeviceConfig.getFloat("activity_manager", CacheOomRanker.KEY_OOM_RE_RANKING_USES_WEIGHT, CacheOomRanker.DEFAULT_OOM_RE_RANKING_USES_WEIGHT);
-                        } else if (CacheOomRanker.KEY_OOM_RE_RANKING_RSS_WEIGHT.equals(str)) {
-                            CacheOomRanker cacheOomRanker7 = CacheOomRanker.this;
-                            cacheOomRanker7.getClass();
-                            cacheOomRanker7.mRssWeight = DeviceConfig.getFloat("activity_manager", CacheOomRanker.KEY_OOM_RE_RANKING_RSS_WEIGHT, CacheOomRanker.DEFAULT_OOM_RE_RANKING_RSS_WEIGHT);
+                        } catch (Throwable th) {
+                            throw th;
                         }
                     }
-                } catch (Throwable th) {
-                    throw th;
                 }
-            }
-        }
-    };
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface ProcessDependencies {
-    }
+    public interface ProcessDependencies {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class ProcessDependenciesImpl implements ProcessDependencies {
-    }
+    public final class ProcessDependenciesImpl implements ProcessDependencies {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RankedProcessRecord {
@@ -117,21 +164,32 @@ public final class CacheOomRanker {
         public final int compare(Object obj, Object obj2) {
             switch (this.$r8$classId) {
                 case 0:
-                    return Long.compare(((RankedProcessRecord) obj2).proc.mState.mCacheOomRankerRss, ((RankedProcessRecord) obj).proc.mState.mCacheOomRankerRss);
+                    return Long.compare(
+                            ((RankedProcessRecord) obj2).proc.mState.mCacheOomRankerRss,
+                            ((RankedProcessRecord) obj).proc.mState.mCacheOomRankerRss);
                 case 1:
-                    return Long.compare(((RankedProcessRecord) obj).proc.mState.mCacheOomRankerUseCount, ((RankedProcessRecord) obj2).proc.mState.mCacheOomRankerUseCount);
+                    return Long.compare(
+                            ((RankedProcessRecord) obj).proc.mState.mCacheOomRankerUseCount,
+                            ((RankedProcessRecord) obj2).proc.mState.mCacheOomRankerUseCount);
                 case 2:
-                    return Long.compare(((RankedProcessRecord) obj).proc.mLastActivityTime, ((RankedProcessRecord) obj2).proc.mLastActivityTime);
+                    return Long.compare(
+                            ((RankedProcessRecord) obj).proc.mLastActivityTime,
+                            ((RankedProcessRecord) obj2).proc.mLastActivityTime);
                 case 3:
-                    return Long.compare(((RankedProcessRecord) obj2).proc.mProfile.mLastRss, ((RankedProcessRecord) obj).proc.mProfile.mLastRss);
+                    return Long.compare(
+                            ((RankedProcessRecord) obj2).proc.mProfile.mLastRss,
+                            ((RankedProcessRecord) obj).proc.mProfile.mLastRss);
                 default:
-                    return Float.compare(((RankedProcessRecord) obj).score, ((RankedProcessRecord) obj2).score);
+                    return Float.compare(
+                            ((RankedProcessRecord) obj).score, ((RankedProcessRecord) obj2).score);
             }
         }
     }
 
     /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.am.CacheOomRanker$1] */
-    public CacheOomRanker(ActivityManagerService activityManagerService, ProcessDependencies processDependencies) {
+    public CacheOomRanker(
+            ActivityManagerService activityManagerService,
+            ProcessDependencies processDependencies) {
         this.mService = activityManagerService;
         ActivityManagerProcLock activityManagerProcLock = activityManagerService.mProcLock;
         this.mProfilerLock = activityManagerService.mAppProfiler.mProfilerLock;

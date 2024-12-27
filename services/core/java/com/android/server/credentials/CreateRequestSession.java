@@ -11,14 +11,13 @@ import android.os.CancellationSignal;
 import android.os.RemoteException;
 import android.service.credentials.CallingAppInfo;
 import android.util.Slog;
+
 import com.android.server.PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0;
-import com.android.server.credentials.CredentialManagerService;
-import com.android.server.credentials.CredentialManagerUi;
-import com.android.server.credentials.ProviderSession;
 import com.android.server.credentials.metrics.ChosenProviderFinalPhaseMetric;
 import com.android.server.credentials.metrics.InitialPhaseMetric;
 import com.android.server.credentials.metrics.ProviderStatusForMetrics;
 import com.android.server.credentials.metrics.RequestSessionMetric;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -26,20 +25,48 @@ import java.util.Set;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class CreateRequestSession extends RequestSession implements ProviderSession.ProviderInternalCallback {
+public final class CreateRequestSession extends RequestSession
+        implements ProviderSession.ProviderInternalCallback {
     public final Set mPrimaryProviders;
 
-    public CreateRequestSession(Context context, CredentialManagerService.SessionManager sessionManager, Object obj, int i, int i2, CreateCredentialRequest createCredentialRequest, ICreateCredentialCallback iCreateCredentialCallback, CallingAppInfo callingAppInfo, Set set, Set set2, CancellationSignal cancellationSignal, long j) {
-        super(context, sessionManager, obj, i, i2, createCredentialRequest, iCreateCredentialCallback, "android.credentials.selection.TYPE_CREATE", callingAppInfo, set, cancellationSignal, j, true);
+    public CreateRequestSession(
+            Context context,
+            CredentialManagerService.SessionManager sessionManager,
+            Object obj,
+            int i,
+            int i2,
+            CreateCredentialRequest createCredentialRequest,
+            ICreateCredentialCallback iCreateCredentialCallback,
+            CallingAppInfo callingAppInfo,
+            Set set,
+            Set set2,
+            CancellationSignal cancellationSignal,
+            long j) {
+        super(
+                context,
+                sessionManager,
+                obj,
+                i,
+                i2,
+                createCredentialRequest,
+                iCreateCredentialCallback,
+                "android.credentials.selection.TYPE_CREATE",
+                callingAppInfo,
+                set,
+                cancellationSignal,
+                j,
+                true);
         RequestSessionMetric requestSessionMetric = this.mRequestSessionMetric;
         boolean z = createCredentialRequest.getOrigin() != null;
         requestSessionMetric.getClass();
         try {
             InitialPhaseMetric initialPhaseMetric = requestSessionMetric.mInitialPhaseMetric;
             initialPhaseMetric.mOriginSpecified = z;
-            initialPhaseMetric.mRequestCounts = Map.of(createCredentialRequest.getType().substring(r2.length() - 20), 1);
+            initialPhaseMetric.mRequestCounts =
+                    Map.of(createCredentialRequest.getType().substring(r2.length() - 20), 1);
         } catch (Exception e) {
-            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(e, "Unexpected error collecting create flow metric: ", "RequestSessionMetric");
+            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(
+                    e, "Unexpected error collecting create flow metric: ", "RequestSessionMetric");
         }
         this.mPrimaryProviders = set2;
     }
@@ -52,7 +79,9 @@ public final class CreateRequestSession extends RequestSession implements Provid
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.credentials.ProviderSession initiateProviderSession(android.credentials.CredentialProviderInfo r12, com.android.server.credentials.RemoteCredentialService r13) {
+    public final com.android.server.credentials.ProviderSession initiateProviderSession(
+            android.credentials.CredentialProviderInfo r12,
+            com.android.server.credentials.RemoteCredentialService r13) {
         /*
             r11 = this;
             android.content.Context r1 = r11.mContext
@@ -129,7 +158,10 @@ public final class CreateRequestSession extends RequestSession implements Provid
         L98:
             return r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.credentials.CreateRequestSession.initiateProviderSession(android.credentials.CredentialProviderInfo, com.android.server.credentials.RemoteCredentialService):com.android.server.credentials.ProviderSession");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.credentials.CreateRequestSession.initiateProviderSession(android.credentials.CredentialProviderInfo,"
+                    + " com.android.server.credentials.RemoteCredentialService):com.android.server.credentials.ProviderSession");
     }
 
     @Override // com.android.server.credentials.RequestSession
@@ -139,7 +171,8 @@ public final class CreateRequestSession extends RequestSession implements Provid
 
     @Override // com.android.server.credentials.RequestSession
     public final void invokeClientCallbackSuccess(Object obj) {
-        ((ICreateCredentialCallback) this.mClientCallback).onResponse((CreateCredentialResponse) obj);
+        ((ICreateCredentialCallback) this.mClientCallback)
+                .onResponse((CreateCredentialResponse) obj);
     }
 
     @Override // com.android.server.credentials.RequestSession
@@ -147,11 +180,13 @@ public final class CreateRequestSession extends RequestSession implements Provid
         long nanoTime = System.nanoTime();
         RequestSessionMetric requestSessionMetric = this.mRequestSessionMetric;
         requestSessionMetric.getClass();
-        ChosenProviderFinalPhaseMetric chosenProviderFinalPhaseMetric = requestSessionMetric.mChosenProviderFinalPhaseMetric;
+        ChosenProviderFinalPhaseMetric chosenProviderFinalPhaseMetric =
+                requestSessionMetric.mChosenProviderFinalPhaseMetric;
         try {
             chosenProviderFinalPhaseMetric.mUiCallStartTimeNanoseconds = nanoTime;
         } catch (Exception e) {
-            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(e, "Unexpected error collecting ui start metric: ", "RequestSessionMetric");
+            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(
+                    e, "Unexpected error collecting ui start metric: ", "RequestSessionMetric");
         }
         CredentialManagerUi.UiStatus uiStatus = CredentialManagerUi.UiStatus.USER_INTERACTION;
         CredentialManagerUi credentialManagerUi = this.mCredentialManagerUi;
@@ -171,35 +206,58 @@ public final class CreateRequestSession extends RequestSession implements Provid
             while (it.hasNext()) {
                 arrayList2.add(((ComponentName) it.next()).flattenToString());
             }
-            PendingIntent createPendingIntent = credentialManagerUi.createPendingIntent(RequestInfo.newCreateRequestInfo(this.mRequestId, (CreateCredentialRequest) this.mClientRequest, this.mClientAppInfo.getPackageName(), false, arrayList2, false), arrayList, requestSessionMetric);
+            PendingIntent createPendingIntent =
+                    credentialManagerUi.createPendingIntent(
+                            RequestInfo.newCreateRequestInfo(
+                                    this.mRequestId,
+                                    (CreateCredentialRequest) this.mClientRequest,
+                                    this.mClientAppInfo.getPackageName(),
+                                    false,
+                                    arrayList2,
+                                    false),
+                            arrayList,
+                            requestSessionMetric);
             this.mPendingIntent = createPendingIntent;
             ((ICreateCredentialCallback) this.mClientCallback).onPendingIntent(createPendingIntent);
         } catch (RemoteException unused) {
             try {
                 chosenProviderFinalPhaseMetric.mUiReturned = false;
             } catch (Exception e3) {
-                PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(e3, "Unexpected error collecting ui end time metric: ", "RequestSessionMetric");
+                PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(
+                        e3,
+                        "Unexpected error collecting ui end time metric: ",
+                        "RequestSessionMetric");
             }
             credentialManagerUi.mStatus = CredentialManagerUi.UiStatus.TERMINATED;
-            respondToClientWithErrorAndFinish("android.credentials.CreateCredentialException.TYPE_UNKNOWN", "Unable to invoke selector");
+            respondToClientWithErrorAndFinish(
+                    "android.credentials.CreateCredentialException.TYPE_UNKNOWN",
+                    "Unable to invoke selector");
         }
     }
 
     @Override // com.android.server.credentials.ProviderSession.ProviderInternalCallback
     public final void onFinalResponseReceived(ComponentName componentName, Object obj) {
-        Slog.i("CredentialManager", "Final credential received from: " + componentName.flattenToString());
+        Slog.i(
+                "CredentialManager",
+                "Final credential received from: " + componentName.flattenToString());
         long nanoTime = System.nanoTime();
         RequestSessionMetric requestSessionMetric = this.mRequestSessionMetric;
         requestSessionMetric.collectUiResponseData(nanoTime);
         Map map = this.mProviders;
         requestSessionMetric.updateMetricsOnResponseReceived(map, componentName);
-        requestSessionMetric.collectChosenProviderStatus(ProviderStatusForMetrics.FINAL_SUCCESS.getMetricCode());
+        requestSessionMetric.collectChosenProviderStatus(
+                ProviderStatusForMetrics.FINAL_SUCCESS.getMetricCode());
         respondToClientWithResponseAndFinish((CreateCredentialResponse) obj);
     }
 
     @Override // com.android.server.credentials.ProviderSession.ProviderInternalCallback
-    public final void onProviderStatusChanged(ProviderSession.Status status, ComponentName componentName, ProviderSession.CredentialsSource credentialsSource) {
-        Slog.i("CredentialManager", "Provider status changed: " + status + ", and source: " + credentialsSource);
+    public final void onProviderStatusChanged(
+            ProviderSession.Status status,
+            ComponentName componentName,
+            ProviderSession.CredentialsSource credentialsSource) {
+        Slog.i(
+                "CredentialManager",
+                "Provider status changed: " + status + ", and source: " + credentialsSource);
         if (isAnyProviderPending()) {
             return;
         }
@@ -207,8 +265,11 @@ public final class CreateRequestSession extends RequestSession implements Provid
             Slog.i("CredentialManager", "Provider status changed - ui invocation is needed");
             getProviderDataAndInitiateUi();
         } else {
-            this.mRequestSessionMetric.collectFrameworkException("android.credentials.CreateCredentialException.TYPE_NO_CREATE_OPTIONS");
-            respondToClientWithErrorAndFinish("android.credentials.CreateCredentialException.TYPE_NO_CREATE_OPTIONS", "No create options available.");
+            this.mRequestSessionMetric.collectFrameworkException(
+                    "android.credentials.CreateCredentialException.TYPE_NO_CREATE_OPTIONS");
+            respondToClientWithErrorAndFinish(
+                    "android.credentials.CreateCredentialException.TYPE_NO_CREATE_OPTIONS",
+                    "No create options available.");
         }
     }
 
@@ -229,7 +290,10 @@ public final class CreateRequestSession extends RequestSession implements Provid
 
     @Override // com.android.server.credentials.RequestSession
     public final void onUiSelectorInvocationFailure() {
-        this.mRequestSessionMetric.collectFrameworkException("android.credentials.CreateCredentialException.TYPE_NO_CREATE_OPTIONS");
-        respondToClientWithErrorAndFinish("android.credentials.CreateCredentialException.TYPE_NO_CREATE_OPTIONS", "No create options available.");
+        this.mRequestSessionMetric.collectFrameworkException(
+                "android.credentials.CreateCredentialException.TYPE_NO_CREATE_OPTIONS");
+        respondToClientWithErrorAndFinish(
+                "android.credentials.CreateCredentialException.TYPE_NO_CREATE_OPTIONS",
+                "No create options available.");
     }
 }

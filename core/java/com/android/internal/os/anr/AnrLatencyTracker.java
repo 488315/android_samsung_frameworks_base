@@ -2,14 +2,17 @@ package com.android.internal.os.anr;
 
 import android.os.SystemClock;
 import android.os.Trace;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /* loaded from: classes5.dex */
 public class AnrLatencyTracker implements AutoCloseable {
-    private static final AtomicInteger sNextAnrRecordPlacedOnQueueCookieGenerator = new AtomicInteger();
+    private static final AtomicInteger sNextAnrRecordPlacedOnQueueCookieGenerator =
+            new AtomicInteger();
     private long mAMSLockLastTryAcquireStart;
     private long mAnrProcessingStartedUptime;
     private int mAnrQueueSize;
@@ -59,7 +62,8 @@ public class AnrLatencyTracker implements AutoCloseable {
     private long mPreDumpIfLockTooSlowDuration = 0;
     private long mNotifyAppUnresponsiveDuration = 0;
     private long mNotifyWindowUnresponsiveDuration = 0;
-    private final int mAnrRecordPlacedOnQueueCookie = sNextAnrRecordPlacedOnQueueCookieGenerator.incrementAndGet();
+    private final int mAnrRecordPlacedOnQueueCookie =
+            sNextAnrRecordPlacedOnQueueCookieGenerator.incrementAndGet();
 
     @Retention(RetentionPolicy.SOURCE)
     private @interface EarlyDumpStatus {
@@ -121,7 +125,8 @@ public class AnrLatencyTracker implements AutoCloseable {
     }
 
     public void updateCpuStatsNowReturned() {
-        this.mUpdateCpuStatsNowTotalLatency += getUptimeMillis() - this.mUpdateCpuStatsNowLastCallUptime;
+        this.mUpdateCpuStatsNowTotalLatency +=
+                getUptimeMillis() - this.mUpdateCpuStatsNowLastCallUptime;
         Trace.traceEnd(64L);
     }
 
@@ -131,7 +136,8 @@ public class AnrLatencyTracker implements AutoCloseable {
     }
 
     public void currentPsiStateReturned() {
-        this.mCurrentPsiStateTotalLatency += getUptimeMillis() - this.mCurrentPsiStateLastCallUptime;
+        this.mCurrentPsiStateTotalLatency +=
+                getUptimeMillis() - this.mCurrentPsiStateLastCallUptime;
         Trace.traceEnd(64L);
     }
 
@@ -141,7 +147,8 @@ public class AnrLatencyTracker implements AutoCloseable {
     }
 
     public void processCpuTrackerMethodsReturned() {
-        this.mProcessCpuTrackerMethodsTotalLatency += getUptimeMillis() - this.mProcessCpuTrackerMethodsLastCallUptime;
+        this.mProcessCpuTrackerMethodsTotalLatency +=
+                getUptimeMillis() - this.mProcessCpuTrackerMethodsLastCallUptime;
         Trace.traceEnd(64L);
     }
 
@@ -151,7 +158,8 @@ public class AnrLatencyTracker implements AutoCloseable {
     }
 
     public void criticalEventLogEnded() {
-        this.mCriticalEventLogTotalLatency += getUptimeMillis() - this.mCriticalEventLoglastCallUptime;
+        this.mCriticalEventLogTotalLatency +=
+                getUptimeMillis() - this.mCriticalEventLoglastCallUptime;
         Trace.traceEnd(64L);
     }
 
@@ -282,7 +290,8 @@ public class AnrLatencyTracker implements AutoCloseable {
     }
 
     public void waitingOnAnrRecordLockEnded() {
-        this.mAnrRecordLockTotalContention += getUptimeMillis() - this.mAnrRecordLastTryAcquireStart;
+        this.mAnrRecordLockTotalContention +=
+                getUptimeMillis() - this.mAnrRecordLastTryAcquireStart;
         Trace.traceEnd(64L);
     }
 
@@ -295,7 +304,8 @@ public class AnrLatencyTracker implements AutoCloseable {
     }
 
     public void preDumpIfLockTooSlowEnded() {
-        this.mPreDumpIfLockTooSlowDuration += getUptimeMillis() - this.mPreDumpIfLockTooSlowStartUptime;
+        this.mPreDumpIfLockTooSlowDuration +=
+                getUptimeMillis() - this.mPreDumpIfLockTooSlowStartUptime;
     }
 
     public void anrSkippedProcessErrorStateRecordAppNotResponding() {
@@ -312,7 +322,8 @@ public class AnrLatencyTracker implements AutoCloseable {
     }
 
     public void notifyAppUnresponsiveEnded() {
-        this.mNotifyAppUnresponsiveDuration = getUptimeMillis() - this.mNotifyAppUnresponsiveStartUptime;
+        this.mNotifyAppUnresponsiveDuration =
+                getUptimeMillis() - this.mNotifyAppUnresponsiveStartUptime;
         Trace.traceEnd(64L);
     }
 
@@ -322,12 +333,66 @@ public class AnrLatencyTracker implements AutoCloseable {
     }
 
     public void notifyWindowUnresponsiveEnded() {
-        this.mNotifyWindowUnresponsiveDuration = getUptimeMillis() - this.mNotifyWindowUnresponsiveStartUptime;
+        this.mNotifyWindowUnresponsiveDuration =
+                getUptimeMillis() - this.mNotifyWindowUnresponsiveStartUptime;
         Trace.traceEnd(64L);
     }
 
     public String dumpAsCommaSeparatedArrayWithHeader() {
-        return "DurationsV5: " + this.mAnrTriggerUptime + "," + (this.mAppNotRespondingStartUptime - this.mAnrTriggerUptime) + "," + (this.mAnrRecordPlacedOnQueueUptime - this.mAppNotRespondingStartUptime) + "," + (this.mAnrProcessingStartedUptime - this.mAnrRecordPlacedOnQueueUptime) + "," + (this.mDumpStackTracesStartUptime - this.mAnrProcessingStartedUptime) + "," + this.mUpdateCpuStatsNowTotalLatency + "," + this.mCurrentPsiStateTotalLatency + "," + this.mProcessCpuTrackerMethodsTotalLatency + "," + this.mCriticalEventLogTotalLatency + "," + this.mGlobalLockTotalContention + "," + this.mPidLockTotalContention + "," + this.mAMSLockTotalContention + "," + this.mProcLockTotalContention + "," + this.mAnrRecordLockTotalContention + "," + this.mAnrQueueSize + "," + ((this.mFirstPidsDumpingStartUptime > 0 ? this.mFirstPidsDumpingStartUptime : this.mCopyingFirstPidStartUptime) - this.mDumpStackTracesStartUptime) + "," + this.mTempFileDumpingDuration + "," + (this.mTempFileDumpingStartUptime - this.mEarlyDumpRequestSubmissionUptime) + "," + this.mEarlyDumpExecutorPidCount + "," + this.mCopyingFirstPidDuration + "," + this.mEarlyDumpStatus + "," + (this.mCopyingFirstPidSucceeded ? 1 : 0) + "," + this.mPreDumpIfLockTooSlowDuration + "," + this.mNotifyAppUnresponsiveDuration + "," + this.mNotifyWindowUnresponsiveDuration + "\n\n";
+        return "DurationsV5: "
+                + this.mAnrTriggerUptime
+                + ","
+                + (this.mAppNotRespondingStartUptime - this.mAnrTriggerUptime)
+                + ","
+                + (this.mAnrRecordPlacedOnQueueUptime - this.mAppNotRespondingStartUptime)
+                + ","
+                + (this.mAnrProcessingStartedUptime - this.mAnrRecordPlacedOnQueueUptime)
+                + ","
+                + (this.mDumpStackTracesStartUptime - this.mAnrProcessingStartedUptime)
+                + ","
+                + this.mUpdateCpuStatsNowTotalLatency
+                + ","
+                + this.mCurrentPsiStateTotalLatency
+                + ","
+                + this.mProcessCpuTrackerMethodsTotalLatency
+                + ","
+                + this.mCriticalEventLogTotalLatency
+                + ","
+                + this.mGlobalLockTotalContention
+                + ","
+                + this.mPidLockTotalContention
+                + ","
+                + this.mAMSLockTotalContention
+                + ","
+                + this.mProcLockTotalContention
+                + ","
+                + this.mAnrRecordLockTotalContention
+                + ","
+                + this.mAnrQueueSize
+                + ","
+                + ((this.mFirstPidsDumpingStartUptime > 0
+                                ? this.mFirstPidsDumpingStartUptime
+                                : this.mCopyingFirstPidStartUptime)
+                        - this.mDumpStackTracesStartUptime)
+                + ","
+                + this.mTempFileDumpingDuration
+                + ","
+                + (this.mTempFileDumpingStartUptime - this.mEarlyDumpRequestSubmissionUptime)
+                + ","
+                + this.mEarlyDumpExecutorPidCount
+                + ","
+                + this.mCopyingFirstPidDuration
+                + ","
+                + this.mEarlyDumpStatus
+                + ","
+                + (this.mCopyingFirstPidSucceeded ? 1 : 0)
+                + ","
+                + this.mPreDumpIfLockTooSlowDuration
+                + ","
+                + this.mNotifyAppUnresponsiveDuration
+                + ","
+                + this.mNotifyWindowUnresponsiveDuration
+                + "\n\n";
     }
 
     @Override // java.lang.AutoCloseable
@@ -368,7 +433,29 @@ public class AnrLatencyTracker implements AutoCloseable {
     }
 
     public void pushAtom() {
-        FrameworkStatsLog.write(516, this.mEndUptime - this.mAnrTriggerUptime, this.mFirstPidsDumpingStartUptime - this.mAnrTriggerUptime, this.mAppNotRespondingStartUptime - this.mAnrTriggerUptime, this.mAnrRecordPlacedOnQueueUptime - this.mAppNotRespondingStartUptime, this.mAnrProcessingStartedUptime - this.mAnrRecordPlacedOnQueueUptime, this.mDumpStackTracesStartUptime - this.mAnrProcessingStartedUptime, this.mFirstPidsDumpingDuration + this.mNativePidsDumpingDuration + this.mExtraPidsDumpingDuration, this.mUpdateCpuStatsNowTotalLatency, this.mCurrentPsiStateTotalLatency, this.mProcessCpuTrackerMethodsTotalLatency, this.mCriticalEventLogTotalLatency, this.mGlobalLockTotalContention, this.mPidLockTotalContention, this.mAMSLockTotalContention, this.mProcLockTotalContention, this.mAnrRecordLockTotalContention, this.mAnrQueueSize, this.mAnrType, this.mDumpedProcessesCount.get());
+        FrameworkStatsLog.write(
+                516,
+                this.mEndUptime - this.mAnrTriggerUptime,
+                this.mFirstPidsDumpingStartUptime - this.mAnrTriggerUptime,
+                this.mAppNotRespondingStartUptime - this.mAnrTriggerUptime,
+                this.mAnrRecordPlacedOnQueueUptime - this.mAppNotRespondingStartUptime,
+                this.mAnrProcessingStartedUptime - this.mAnrRecordPlacedOnQueueUptime,
+                this.mDumpStackTracesStartUptime - this.mAnrProcessingStartedUptime,
+                this.mFirstPidsDumpingDuration
+                        + this.mNativePidsDumpingDuration
+                        + this.mExtraPidsDumpingDuration,
+                this.mUpdateCpuStatsNowTotalLatency,
+                this.mCurrentPsiStateTotalLatency,
+                this.mProcessCpuTrackerMethodsTotalLatency,
+                this.mCriticalEventLogTotalLatency,
+                this.mGlobalLockTotalContention,
+                this.mPidLockTotalContention,
+                this.mAMSLockTotalContention,
+                this.mProcLockTotalContention,
+                this.mAnrRecordLockTotalContention,
+                this.mAnrQueueSize,
+                this.mAnrType,
+                this.mDumpedProcessesCount.get());
     }
 
     private void anrSkipped(String method) {

@@ -3,23 +3,25 @@ package android.print;
 import android.content.ComponentName;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes3.dex */
 public final class PrinterId implements Parcelable {
-    public static final Parcelable.Creator<PrinterId> CREATOR = new Parcelable.Creator<PrinterId>() { // from class: android.print.PrinterId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrinterId createFromParcel(Parcel parcel) {
-            return new PrinterId(parcel);
-        }
+    public static final Parcelable.Creator<PrinterId> CREATOR =
+            new Parcelable.Creator<PrinterId>() { // from class: android.print.PrinterId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrinterId createFromParcel(Parcel parcel) {
+                    return new PrinterId(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrinterId[] newArray(int size) {
-            return new PrinterId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrinterId[] newArray(int size) {
+                    return new PrinterId[size];
+                }
+            };
     private final String mLocalId;
     private final ComponentName mServiceName;
 
@@ -29,7 +31,10 @@ public final class PrinterId implements Parcelable {
     }
 
     private PrinterId(Parcel parcel) {
-        this.mServiceName = (ComponentName) Preconditions.checkNotNull((ComponentName) parcel.readParcelable(null, ComponentName.class));
+        this.mServiceName =
+                (ComponentName)
+                        Preconditions.checkNotNull(
+                                (ComponentName) parcel.readParcelable(null, ComponentName.class));
         this.mLocalId = (String) Preconditions.checkNotNull(parcel.readString());
     }
 

@@ -10,16 +10,16 @@ import android.os.RemoteException;
 public interface INetworkServiceCallback extends IInterface {
     void onNetworkStateChanged() throws RemoteException;
 
-    void onRequestNetworkRegistrationInfoComplete(int i, NetworkRegistrationInfo networkRegistrationInfo) throws RemoteException;
+    void onRequestNetworkRegistrationInfoComplete(
+            int i, NetworkRegistrationInfo networkRegistrationInfo) throws RemoteException;
 
     public static class Default implements INetworkServiceCallback {
         @Override // android.telephony.INetworkServiceCallback
-        public void onRequestNetworkRegistrationInfoComplete(int result, NetworkRegistrationInfo state) throws RemoteException {
-        }
+        public void onRequestNetworkRegistrationInfoComplete(
+                int result, NetworkRegistrationInfo state) throws RemoteException {}
 
         @Override // android.telephony.INetworkServiceCallback
-        public void onNetworkStateChanged() throws RemoteException {
-        }
+        public void onNetworkStateChanged() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +27,7 @@ public interface INetworkServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INetworkServiceCallback {
+    public abstract static class Stub extends Binder implements INetworkServiceCallback {
         public static final String DESCRIPTOR = "android.telephony.INetworkServiceCallback";
         static final int TRANSACTION_onNetworkStateChanged = 2;
         static final int TRANSACTION_onRequestNetworkRegistrationInfoComplete = 1;
@@ -69,7 +69,8 @@ public interface INetworkServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -80,7 +81,9 @@ public interface INetworkServiceCallback extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    NetworkRegistrationInfo _arg1 = (NetworkRegistrationInfo) data.readTypedObject(NetworkRegistrationInfo.CREATOR);
+                    NetworkRegistrationInfo _arg1 =
+                            (NetworkRegistrationInfo)
+                                    data.readTypedObject(NetworkRegistrationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onRequestNetworkRegistrationInfoComplete(_arg0, _arg1);
                     return true;
@@ -109,7 +112,8 @@ public interface INetworkServiceCallback extends IInterface {
             }
 
             @Override // android.telephony.INetworkServiceCallback
-            public void onRequestNetworkRegistrationInfoComplete(int result, NetworkRegistrationInfo state) throws RemoteException {
+            public void onRequestNetworkRegistrationInfoComplete(
+                    int result, NetworkRegistrationInfo state) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -2,23 +2,26 @@ package android.app.admin;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class BooleanPolicyValue extends PolicyValue<Boolean> {
-    public static final Parcelable.Creator<BooleanPolicyValue> CREATOR = new Parcelable.Creator<BooleanPolicyValue>() { // from class: android.app.admin.BooleanPolicyValue.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BooleanPolicyValue createFromParcel(Parcel source) {
-            return new BooleanPolicyValue(source);
-        }
+    public static final Parcelable.Creator<BooleanPolicyValue> CREATOR =
+            new Parcelable.Creator<
+                    BooleanPolicyValue>() { // from class: android.app.admin.BooleanPolicyValue.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BooleanPolicyValue createFromParcel(Parcel source) {
+                    return new BooleanPolicyValue(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BooleanPolicyValue[] newArray(int size) {
-            return new BooleanPolicyValue[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BooleanPolicyValue[] newArray(int size) {
+                    return new BooleanPolicyValue[size];
+                }
+            };
 
     public BooleanPolicyValue(boolean value) {
         super(Boolean.valueOf(value));

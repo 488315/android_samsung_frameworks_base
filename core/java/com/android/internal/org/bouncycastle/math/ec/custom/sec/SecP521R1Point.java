@@ -159,7 +159,7 @@ public class SecP521R1Point extends ECPoint.AbstractFp {
         if (!Z1IsOne) {
             SecP521R1Field.multiply(Z3.x, Z1.x, Z3.x);
         }
-        return new SecP521R1Point(curve, X3, Y3, new ECFieldElement[]{Z3});
+        return new SecP521R1Point(curve, X3, Y3, new ECFieldElement[] {Z3});
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECPoint
@@ -204,7 +204,8 @@ public class SecP521R1Point extends ECPoint.AbstractFp {
         return four(two(x));
     }
 
-    protected ECFieldElement doubleProductFromSquares(ECFieldElement a, ECFieldElement b, ECFieldElement aSquared, ECFieldElement bSquared) {
+    protected ECFieldElement doubleProductFromSquares(
+            ECFieldElement a, ECFieldElement b, ECFieldElement aSquared, ECFieldElement bSquared) {
         return a.add(b).square().subtract(aSquared).subtract(bSquared);
     }
 

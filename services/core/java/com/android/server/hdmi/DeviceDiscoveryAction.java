@@ -3,13 +3,13 @@ package com.android.server.hdmi;
 import android.hardware.hdmi.HdmiDeviceInfo;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.util.Preconditions;
 import com.android.server.HeapdumpWatcher$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 import com.android.server.am.PendingIntentController$$ExternalSyntheticOutline0;
-import com.android.server.hdmi.HdmiCecFeatureAction;
-import com.android.server.hdmi.HdmiControlService;
 import com.android.server.location.gnss.hal.GnssNative;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,7 +44,9 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
         }
     }
 
-    public DeviceDiscoveryAction(HdmiCecLocalDevice hdmiCecLocalDevice, DeviceDiscoveryCallback deviceDiscoveryCallback) {
+    public DeviceDiscoveryAction(
+            HdmiCecLocalDevice hdmiCecLocalDevice,
+            DeviceDiscoveryCallback deviceDiscoveryCallback) {
         super(hdmiCecLocalDevice);
         this.mDevices = new ArrayList();
         this.mProcessedDeviceCount = 0;
@@ -98,7 +100,8 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
             StringBuilder sb = new StringBuilder("Unmatched address[expected:");
             sb.append(deviceInfo.mLogicalAddress);
             sb.append(", actual:");
-            HeapdumpWatcher$$ExternalSyntheticOutline0.m(sb, hdmiCecMessage.mSource, "DeviceDiscoveryAction");
+            HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                    sb, hdmiCecMessage.mSource, "DeviceDiscoveryAction");
             return;
         }
         if (hdmiCecMessage.mOpcode != 0) {
@@ -115,7 +118,8 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
             StringBuilder sb = new StringBuilder("Unmatched address[expected:");
             sb.append(deviceInfo.mLogicalAddress);
             sb.append(", actual:");
-            HeapdumpWatcher$$ExternalSyntheticOutline0.m(sb, hdmiCecMessage.mSource, "DeviceDiscoveryAction");
+            HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                    sb, hdmiCecMessage.mSource, "DeviceDiscoveryAction");
             return;
         }
         String str = "";
@@ -124,7 +128,9 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
                 str = new String(hdmiCecMessage.mParams, "US-ASCII");
             }
         } catch (UnsupportedEncodingException unused) {
-            Slog.w("DeviceDiscoveryAction", "Failed to decode display name: " + hdmiCecMessage.toString());
+            Slog.w(
+                    "DeviceDiscoveryAction",
+                    "Failed to decode display name: " + hdmiCecMessage.toString());
         }
         deviceInfo.mDisplayName = str;
         increaseProcessedDeviceCount();
@@ -151,7 +157,8 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
         StringBuilder sb = new StringBuilder("Timeout[State=");
         sb.append(this.mState);
         sb.append(", Processed=");
-        GmsAlarmManager$$ExternalSyntheticOutline0.m(sb, this.mProcessedDeviceCount, "DeviceDiscoveryAction");
+        GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                sb, this.mProcessedDeviceCount, "DeviceDiscoveryAction");
         int i4 = this.mState;
         if (i4 == 6 || i4 == 3) {
             increaseProcessedDeviceCount();
@@ -168,7 +175,8 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
             StringBuilder sb = new StringBuilder("Unmatched address[expected:");
             sb.append(deviceInfo.mLogicalAddress);
             sb.append(", actual:");
-            HeapdumpWatcher$$ExternalSyntheticOutline0.m(sb, hdmiCecMessage.mSource, "DeviceDiscoveryAction");
+            HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                    sb, hdmiCecMessage.mSource, "DeviceDiscoveryAction");
             return;
         }
         if (hdmiCecMessage.mOpcode != 0) {
@@ -187,7 +195,8 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
         HdmiCecLocalDevice hdmiCecLocalDevice = this.mSource;
         hdmiCecLocalDevice.assertRunOnServiceThread();
         SparseArray sparseArray = (SparseArray) hdmiCecLocalDevice.mCecMessageCache.mCache.get(i);
-        HdmiCecMessage hdmiCecMessage = sparseArray == null ? null : (HdmiCecMessage) sparseArray.get(i2);
+        HdmiCecMessage hdmiCecMessage =
+                sparseArray == null ? null : (HdmiCecMessage) sparseArray.get(i2);
         if (hdmiCecMessage == null) {
             return false;
         }
@@ -207,19 +216,32 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
             int i2 = deviceInfo.mLogicalAddress;
             int i3 = hdmiCecMessage.mSource;
             if (i2 != i3) {
-                PendingIntentController$$ExternalSyntheticOutline0.m(i2, i3, "Unmatched address[expected:", ", actual:", "DeviceDiscoveryAction");
+                PendingIntentController$$ExternalSyntheticOutline0.m(
+                        i2,
+                        i3,
+                        "Unmatched address[expected:",
+                        ", actual:",
+                        "DeviceDiscoveryAction");
             } else {
                 byte[] bArr = hdmiCecMessage.mParams;
                 int twoBytesToInt = HdmiUtils.twoBytesToInt(bArr);
                 deviceInfo.mPhysicalAddress = twoBytesToInt;
                 boolean z = this.mIsTvDevice;
                 HdmiCecLocalDevice hdmiCecLocalDevice = this.mSource;
-                deviceInfo.mPortId = z ? ((HdmiCecLocalDeviceTv) hdmiCecLocalDevice).mService.mHdmiCecNetwork.physicalAddressToPortId(twoBytesToInt) : ((HdmiCecLocalDeviceSource) hdmiCecLocalDevice).mService.mHdmiCecNetwork.physicalAddressToPortId(twoBytesToInt);
+                deviceInfo.mPortId =
+                        z
+                                ? ((HdmiCecLocalDeviceTv) hdmiCecLocalDevice)
+                                        .mService.mHdmiCecNetwork.physicalAddressToPortId(
+                                                twoBytesToInt)
+                                : ((HdmiCecLocalDeviceSource) hdmiCecLocalDevice)
+                                        .mService.mHdmiCecNetwork.physicalAddressToPortId(
+                                                twoBytesToInt);
                 int i4 = bArr[2] & 255;
                 deviceInfo.mDeviceType = i4;
                 deviceInfo.mDisplayName = "";
                 if (z) {
-                    hdmiCecLocalDevice.mService.mHdmiCecNetwork.updateCecSwitchInfo(i2, i4, deviceInfo.mPhysicalAddress);
+                    hdmiCecLocalDevice.mService.mHdmiCecNetwork.updateCecSwitchInfo(
+                            i2, i4, deviceInfo.mPhysicalAddress);
                 }
                 increaseProcessedDeviceCount();
                 checkAndProceedStage();
@@ -278,7 +300,8 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
             if (mayProcessMessageIfCached(i, 132)) {
                 return;
             }
-            hdmiControlService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), i, 131), null);
+            hdmiControlService.sendCecCommand(
+                    HdmiCecMessage.build(getSourceAddress(), i, 131), null);
             addTimer(this.mState, 2000);
             return;
         }
@@ -291,7 +314,8 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
             if (mayProcessMessageIfCached(i, 71)) {
                 return;
             }
-            hdmiControlService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), i, 70), null);
+            hdmiControlService.sendCecCommand(
+                    HdmiCecMessage.build(getSourceAddress(), i, 70), null);
             addTimer(this.mState, 2000);
             return;
         }
@@ -304,7 +328,8 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
             if (mayProcessMessageIfCached(i, 135)) {
                 return;
             }
-            hdmiControlService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), i, 140), null);
+            hdmiControlService.sendCecCommand(
+                    HdmiCecMessage.build(getSourceAddress(), i, 140), null);
             addTimer(this.mState, 2000);
             return;
         }
@@ -332,29 +357,37 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
     public final void start() {
         this.mDevices.clear();
         this.mState = 1;
-        pollDevices(new HdmiControlService.DevicePollingCallback() { // from class: com.android.server.hdmi.DeviceDiscoveryAction.1
-            @Override // com.android.server.hdmi.HdmiControlService.DevicePollingCallback
-            public final void onPollingFinished(List list) {
-                boolean isEmpty = list.isEmpty();
-                DeviceDiscoveryAction deviceDiscoveryAction = DeviceDiscoveryAction.this;
-                if (isEmpty) {
-                    Slog.v("DeviceDiscoveryAction", "No device is detected.");
-                    deviceDiscoveryAction.wrapUpAndFinish();
-                    return;
-                }
-                if (deviceDiscoveryAction.mState == 0) {
-                    Slog.v("DeviceDiscoveryAction", "Action was already finished before the callback was called.");
-                    deviceDiscoveryAction.wrapUpAndFinish();
-                    return;
-                }
-                Slog.v("DeviceDiscoveryAction", "Device detected: " + list);
-                Iterator it = list.iterator();
-                while (it.hasNext()) {
-                    deviceDiscoveryAction.mDevices.add(new DeviceInfo(((Integer) it.next()).intValue()));
-                }
-                deviceDiscoveryAction.startPhysicalAddressStage();
-            }
-        }, 131073, 0L);
+        pollDevices(
+                new HdmiControlService
+                        .DevicePollingCallback() { // from class:
+                                                   // com.android.server.hdmi.DeviceDiscoveryAction.1
+                    @Override // com.android.server.hdmi.HdmiControlService.DevicePollingCallback
+                    public final void onPollingFinished(List list) {
+                        boolean isEmpty = list.isEmpty();
+                        DeviceDiscoveryAction deviceDiscoveryAction = DeviceDiscoveryAction.this;
+                        if (isEmpty) {
+                            Slog.v("DeviceDiscoveryAction", "No device is detected.");
+                            deviceDiscoveryAction.wrapUpAndFinish();
+                            return;
+                        }
+                        if (deviceDiscoveryAction.mState == 0) {
+                            Slog.v(
+                                    "DeviceDiscoveryAction",
+                                    "Action was already finished before the callback was called.");
+                            deviceDiscoveryAction.wrapUpAndFinish();
+                            return;
+                        }
+                        Slog.v("DeviceDiscoveryAction", "Device detected: " + list);
+                        Iterator it = list.iterator();
+                        while (it.hasNext()) {
+                            deviceDiscoveryAction.mDevices.add(
+                                    new DeviceInfo(((Integer) it.next()).intValue()));
+                        }
+                        deviceDiscoveryAction.startPhysicalAddressStage();
+                    }
+                },
+                131073,
+                0L);
     }
 
     public final void startPhysicalAddressStage() {
@@ -365,13 +398,24 @@ public final class DeviceDiscoveryAction extends HdmiCecFeatureAction {
     }
 
     public final void wrapUpAndFinish() {
-        Slog.v("DeviceDiscoveryAction", "---------Wrap up Device Discovery:[" + this.mDevices.size() + "]---------");
+        Slog.v(
+                "DeviceDiscoveryAction",
+                "---------Wrap up Device Discovery:[" + this.mDevices.size() + "]---------");
         ArrayList arrayList = new ArrayList();
         Iterator it = this.mDevices.iterator();
         while (it.hasNext()) {
             DeviceInfo deviceInfo = (DeviceInfo) it.next();
             deviceInfo.getClass();
-            HdmiDeviceInfo build = HdmiDeviceInfo.cecDeviceBuilder().setLogicalAddress(deviceInfo.mLogicalAddress).setPhysicalAddress(deviceInfo.mPhysicalAddress).setPortId(deviceInfo.mPortId).setVendorId(deviceInfo.mVendorId).setDeviceType(deviceInfo.mDeviceType).setDisplayName(deviceInfo.mDisplayName).setDevicePowerStatus(deviceInfo.mPowerStatus).build();
+            HdmiDeviceInfo build =
+                    HdmiDeviceInfo.cecDeviceBuilder()
+                            .setLogicalAddress(deviceInfo.mLogicalAddress)
+                            .setPhysicalAddress(deviceInfo.mPhysicalAddress)
+                            .setPortId(deviceInfo.mPortId)
+                            .setVendorId(deviceInfo.mVendorId)
+                            .setDeviceType(deviceInfo.mDeviceType)
+                            .setDisplayName(deviceInfo.mDisplayName)
+                            .setDevicePowerStatus(deviceInfo.mPowerStatus)
+                            .build();
             Slog.v("DeviceDiscoveryAction", " DeviceInfo: " + build);
             arrayList.add(build);
         }

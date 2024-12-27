@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class ResultEntryParcel implements Parcelable {
-    public static final Parcelable.Creator<ResultEntryParcel> CREATOR = new Parcelable.Creator<ResultEntryParcel>() { // from class: android.security.identity.ResultEntryParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResultEntryParcel createFromParcel(Parcel _aidl_source) {
-            ResultEntryParcel _aidl_out = new ResultEntryParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ResultEntryParcel> CREATOR =
+            new Parcelable.Creator<
+                    ResultEntryParcel>() { // from class:
+                                           // android.security.identity.ResultEntryParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResultEntryParcel createFromParcel(Parcel _aidl_source) {
+                    ResultEntryParcel _aidl_out = new ResultEntryParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResultEntryParcel[] newArray(int _aidl_size) {
-            return new ResultEntryParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResultEntryParcel[] newArray(int _aidl_size) {
+                    return new ResultEntryParcel[_aidl_size];
+                }
+            };
     public String name;
     public int status = 0;
     public byte[] value;

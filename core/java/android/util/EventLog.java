@@ -1,6 +1,7 @@
 package android.util;
 
 import android.annotation.SystemApi;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,10 +24,12 @@ public class EventLog {
     private static HashMap<String, Integer> sTagCodes = null;
     private static HashMap<Integer, String> sTagNames = null;
 
-    public static native void readEvents(int[] iArr, Collection<Event> collection) throws IOException;
+    public static native void readEvents(int[] iArr, Collection<Event> collection)
+            throws IOException;
 
     @SystemApi
-    public static native void readEventsOnWrapping(int[] iArr, long j, Collection<Event> collection) throws IOException;
+    public static native void readEventsOnWrapping(int[] iArr, long j, Collection<Event> collection)
+            throws IOException;
 
     public static native int writeEvent(int i, float f);
 
@@ -169,13 +172,25 @@ public class EventLog {
                 return new byte[0];
             }
             if (object instanceof Integer) {
-                return ByteBuffer.allocate(5).order(ByteOrder.nativeOrder()).put((byte) 0).putInt(((Integer) object).intValue()).array();
+                return ByteBuffer.allocate(5)
+                        .order(ByteOrder.nativeOrder())
+                        .put((byte) 0)
+                        .putInt(((Integer) object).intValue())
+                        .array();
             }
             if (object instanceof Long) {
-                return ByteBuffer.allocate(9).order(ByteOrder.nativeOrder()).put((byte) 1).putLong(((Long) object).longValue()).array();
+                return ByteBuffer.allocate(9)
+                        .order(ByteOrder.nativeOrder())
+                        .put((byte) 1)
+                        .putLong(((Long) object).longValue())
+                        .array();
             }
             if (object instanceof Float) {
-                return ByteBuffer.allocate(5).order(ByteOrder.nativeOrder()).put((byte) 4).putFloat(((Float) object).floatValue()).array();
+                return ByteBuffer.allocate(5)
+                        .order(ByteOrder.nativeOrder())
+                        .put((byte) 4)
+                        .putFloat(((Float) object).floatValue())
+                        .array();
             }
             if (object instanceof String) {
                 String string = (String) object;
@@ -184,7 +199,12 @@ public class EventLog {
                 } catch (UnsupportedEncodingException e) {
                     bytes = new byte[0];
                 }
-                return ByteBuffer.allocate(bytes.length + 5).order(ByteOrder.nativeOrder()).put((byte) 2).putInt(bytes.length).put(bytes).array();
+                return ByteBuffer.allocate(bytes.length + 5)
+                        .order(ByteOrder.nativeOrder())
+                        .put((byte) 2)
+                        .putInt(bytes.length)
+                        .put(bytes)
+                        .array();
             }
             if (object instanceof Object[]) {
                 Object[] objects = (Object[]) object;
@@ -198,7 +218,11 @@ public class EventLog {
                     totalLength += bytes2[i].length;
                 }
                 int i2 = totalLength + 2;
-                ByteBuffer buffer = ByteBuffer.allocate(i2).order(ByteOrder.nativeOrder()).put((byte) 3).put((byte) objects.length);
+                ByteBuffer buffer =
+                        ByteBuffer.allocate(i2)
+                                .order(ByteOrder.nativeOrder())
+                                .put((byte) 3)
+                                .put((byte) objects.length);
                 for (int i3 = 0; i3 < objects.length; i3++) {
                     buffer.put(bytes2[i3]);
                 }
@@ -280,10 +304,15 @@ public class EventLog {
                                         String name = m.group(2);
                                         registerTagLocked(num, name);
                                     } catch (NumberFormatException e2) {
-                                        Log.wtf(TAG, "Error in /system/etc/event-log-tags: " + line, e2);
+                                        Log.wtf(
+                                                TAG,
+                                                "Error in /system/etc/event-log-tags: " + line,
+                                                e2);
                                     }
                                 } else {
-                                    Log.wtf(TAG, "Bad entry in /system/etc/event-log-tags: " + line);
+                                    Log.wtf(
+                                            TAG,
+                                            "Bad entry in /system/etc/event-log-tags: " + line);
                                 }
                             }
                         }
@@ -321,7 +350,8 @@ public class EventLog {
             sTagNames = new HashMap<>();
             registerTagLocked(524288, "sysui_action");
             registerTagLocked(com.android.internal.logging.EventLogTags.SYSUI_COUNT, "sysui_count");
-            registerTagLocked(com.android.internal.logging.EventLogTags.SYSUI_HISTOGRAM, "sysui_histogram");
+            registerTagLocked(
+                    com.android.internal.logging.EventLogTags.SYSUI_HISTOGRAM, "sysui_histogram");
         }
     }
 }

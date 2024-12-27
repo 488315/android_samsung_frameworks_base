@@ -7,13 +7,14 @@ import android.graphics.Rect;
 import android.hardware.HardwareBuffer;
 import android.hardware.SyncFence;
 import android.hardware.camera2.MultiResolutionImageReader;
-import android.media.Image;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.ParcelFileDescriptor;
 import android.os.Trace;
 import android.view.Surface;
+
 import dalvik.system.VMRuntime;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
@@ -58,54 +59,80 @@ public class ImageReader implements AutoCloseable {
 
     private static native void nativeClassInit();
 
-    private native synchronized void nativeClose();
+    private synchronized native void nativeClose();
 
-    private static native synchronized ImagePlane[] nativeCreateImagePlanes(int i, GraphicBuffer graphicBuffer, int i2, int i3, int i4, int i5, int i6, int i7);
+    private static synchronized native ImagePlane[] nativeCreateImagePlanes(
+            int i, GraphicBuffer graphicBuffer, int i2, int i3, int i4, int i5, int i6, int i7);
 
-    private native synchronized int nativeDetachImage(Image image, boolean z);
+    private synchronized native int nativeDetachImage(Image image, boolean z);
 
-    private native synchronized void nativeDiscardFreeBuffers();
+    private synchronized native void nativeDiscardFreeBuffers();
 
-    private native synchronized Surface nativeGetSurface();
+    private synchronized native Surface nativeGetSurface();
 
-    private native synchronized int nativeImageSetup(Image image);
+    private synchronized native int nativeImageSetup(Image image);
 
-    private native synchronized void nativeInit(Object obj, int i, int i2, int i3, long j, int i4, int i5);
+    private synchronized native void nativeInit(
+            Object obj, int i, int i2, int i3, long j, int i4, int i5);
 
-    private native synchronized void nativeReleaseImage(Image image);
+    private synchronized native void nativeReleaseImage(Image image);
 
-    private static native synchronized void nativeUnlockGraphicBuffer(GraphicBuffer graphicBuffer);
+    private static synchronized native void nativeUnlockGraphicBuffer(GraphicBuffer graphicBuffer);
 
     public static ImageReader newInstance(int width, int height, int format, int maxImages) {
         return new ImageReader(width, height, format, maxImages, format == 34 ? 0L : 3L, null);
     }
 
-    public static ImageReader newInstance(int width, int height, int format, int maxImages, long usage) {
+    public static ImageReader newInstance(
+            int width, int height, int format, int maxImages, long usage) {
         return new ImageReader(width, height, format, maxImages, usage, null);
     }
 
-    public static ImageReader newInstance(int width, int height, int format, int maxImages, MultiResolutionImageReader parent) {
+    public static ImageReader newInstance(
+            int width, int height, int format, int maxImages, MultiResolutionImageReader parent) {
         return new ImageReader(width, height, format, maxImages, format == 34 ? 0L : 3L, parent);
     }
 
-    private void initializeImageReader(int width, int height, int imageFormat, int maxImages, long usage, int hardwareBufferFormat, int dataSpace) {
+    private void initializeImageReader(
+            int width,
+            int height,
+            int imageFormat,
+            int maxImages,
+            long usage,
+            int hardwareBufferFormat,
+            int dataSpace) {
         if (width < 1 || height < 1) {
             throw new IllegalArgumentException("The image dimensions must be positive");
         }
         if (maxImages < 1) {
-            throw new IllegalArgumentException("Maximum outstanding image count must be at least 1");
+            throw new IllegalArgumentException(
+                    "Maximum outstanding image count must be at least 1");
         }
         if (imageFormat == 17) {
             throw new IllegalArgumentException("NV21 format is not supported");
         }
-        nativeInit(new WeakReference(this), width, height, maxImages, usage, hardwareBufferFormat, dataSpace);
+        nativeInit(
+                new WeakReference(this),
+                width,
+                height,
+                maxImages,
+                usage,
+                hardwareBufferFormat,
+                dataSpace);
         this.mIsReaderValid = true;
         this.mSurface = nativeGetSurface();
-        this.mEstimatedNativeAllocBytes = ImageUtils.getEstimatedNativeAllocBytes(width, height, imageFormat, 1);
+        this.mEstimatedNativeAllocBytes =
+                ImageUtils.getEstimatedNativeAllocBytes(width, height, imageFormat, 1);
         VMRuntime.getRuntime().registerNativeAllocation(this.mEstimatedNativeAllocBytes);
     }
 
-    private ImageReader(int width, int height, int imageFormat, int maxImages, long usage, MultiResolutionImageReader parent) {
+    private ImageReader(
+            int width,
+            int height,
+            int imageFormat,
+            int maxImages,
+            long usage,
+            MultiResolutionImageReader parent) {
         this.mDetachThrowsIseOnly = CompatChanges.isChangeEnabled(DETACH_THROWS_ISE_ONLY);
         this.mListenerLock = new Object();
         this.mCloseLock = new Object();
@@ -120,10 +147,24 @@ public class ImageReader implements AutoCloseable {
         this.mHardwareBufferFormat = PublicFormatUtils.getHalFormat(this.mFormat);
         this.mDataSpace = PublicFormatUtils.getHalDataspace(this.mFormat);
         this.mNumPlanes = ImageUtils.getNumPlanesForFormat(this.mFormat);
-        initializeImageReader(width, height, imageFormat, maxImages, usage, this.mHardwareBufferFormat, this.mDataSpace);
+        initializeImageReader(
+                width,
+                height,
+                imageFormat,
+                maxImages,
+                usage,
+                this.mHardwareBufferFormat,
+                this.mDataSpace);
     }
 
-    private ImageReader(int width, int height, int maxImages, long usage, MultiResolutionImageReader parent, int hardwareBufferFormat, int dataSpace) {
+    private ImageReader(
+            int width,
+            int height,
+            int maxImages,
+            long usage,
+            MultiResolutionImageReader parent,
+            int hardwareBufferFormat,
+            int dataSpace) {
         this.mDetachThrowsIseOnly = CompatChanges.isChangeEnabled(DETACH_THROWS_ISE_ONLY);
         this.mListenerLock = new Object();
         this.mCloseLock = new Object();
@@ -136,9 +177,11 @@ public class ImageReader implements AutoCloseable {
         this.mParent = parent;
         this.mHardwareBufferFormat = hardwareBufferFormat;
         this.mDataSpace = dataSpace;
-        this.mNumPlanes = ImageUtils.getNumPlanesForHardwareBufferFormat(this.mHardwareBufferFormat);
+        this.mNumPlanes =
+                ImageUtils.getNumPlanesForHardwareBufferFormat(this.mHardwareBufferFormat);
         this.mFormat = PublicFormatUtils.getPublicFormat(hardwareBufferFormat, dataSpace);
-        initializeImageReader(width, height, this.mFormat, maxImages, usage, hardwareBufferFormat, dataSpace);
+        initializeImageReader(
+                width, height, this.mFormat, maxImages, usage, hardwareBufferFormat, dataSpace);
     }
 
     public int getWidth() {
@@ -241,7 +284,11 @@ public class ImageReader implements AutoCloseable {
             case 1:
                 return null;
             case 2:
-                throw new IllegalStateException(String.format("maxImages (%d) has already been acquired, call #close before acquiring more.", Integer.valueOf(this.mMaxImages)));
+                throw new IllegalStateException(
+                        String.format(
+                                "maxImages (%d) has already been acquired, call #close before"
+                                        + " acquiring more.",
+                                Integer.valueOf(this.mMaxImages)));
             default:
                 throw new AssertionError("Unknown nativeImageSetup return code " + status);
         }
@@ -270,7 +317,8 @@ public class ImageReader implements AutoCloseable {
             if (listener != null) {
                 Looper looper = handler != null ? handler.getLooper() : Looper.myLooper();
                 if (looper == null) {
-                    throw new IllegalArgumentException("handler is null but the current thread is not a looper");
+                    throw new IllegalArgumentException(
+                            "handler is null but the current thread is not a looper");
                 }
                 if (this.mListenerHandler == null || this.mListenerHandler.getLooper() != looper) {
                     this.mListenerHandler = new ListenerHandler(looper);
@@ -284,7 +332,8 @@ public class ImageReader implements AutoCloseable {
         }
     }
 
-    public void setOnImageAvailableListenerWithExecutor(OnImageAvailableListener listener, Executor executor) {
+    public void setOnImageAvailableListenerWithExecutor(
+            OnImageAvailableListener listener, Executor executor) {
         if (executor == null) {
             throw new IllegalArgumentException("executor must not be null");
         }
@@ -333,7 +382,8 @@ public class ImageReader implements AutoCloseable {
             throw new IllegalArgumentException("input image must not be null");
         }
         if (!isImageOwnedbyMe(image)) {
-            throw new IllegalArgumentException("Trying to detach an image that is not owned by this ImageReader");
+            throw new IllegalArgumentException(
+                    "Trying to detach an image that is not owned by this ImageReader");
         }
         SurfaceImage si = (SurfaceImage) image;
         si.throwISEIfImageIsInvalid();
@@ -372,12 +422,13 @@ public class ImageReader implements AutoCloseable {
             isReaderValid = ir.mIsReaderValid;
         }
         if (executor != null && listener != null && isReaderValid) {
-            executor.execute(new Runnable() { // from class: android.media.ImageReader.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    OnImageAvailableListener.this.onImageAvailable(ir);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class: android.media.ImageReader.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            OnImageAvailableListener.this.onImageAvailable(ir);
+                        }
+                    });
         }
         Trace.endSection();
     }
@@ -431,9 +482,22 @@ public class ImageReader implements AutoCloseable {
 
         public ImageReader build() {
             if (this.mUseLegacyImageFormat) {
-                return new ImageReader(this.mWidth, this.mHeight, this.mImageFormat, this.mMaxImages, this.mUsage, (MultiResolutionImageReader) null);
+                return new ImageReader(
+                        this.mWidth,
+                        this.mHeight,
+                        this.mImageFormat,
+                        this.mMaxImages,
+                        this.mUsage,
+                        (MultiResolutionImageReader) null);
             }
-            return new ImageReader(this.mWidth, this.mHeight, this.mMaxImages, this.mUsage, null, this.mHardwareBufferFormat, this.mDataSpace);
+            return new ImageReader(
+                    this.mWidth,
+                    this.mHeight,
+                    this.mMaxImages,
+                    this.mUsage,
+                    null,
+                    this.mHardwareBufferFormat,
+                    this.mDataSpace);
         }
     }
 
@@ -468,17 +532,17 @@ public class ImageReader implements AutoCloseable {
         private final Object mCloseLock = new Object();
         private AtomicBoolean mIsDetached = new AtomicBoolean(false);
 
-        private native synchronized SurfacePlane[] nativeCreatePlanes(int i, int i2, long j);
+        private synchronized native SurfacePlane[] nativeCreatePlanes(int i, int i2, long j);
 
-        private native synchronized int nativeGetFenceFd();
+        private synchronized native int nativeGetFenceFd();
 
-        private native synchronized int nativeGetFormat(int i);
+        private synchronized native int nativeGetFormat(int i);
 
-        private native synchronized HardwareBuffer nativeGetHardwareBuffer();
+        private synchronized native HardwareBuffer nativeGetHardwareBuffer();
 
-        private native synchronized int nativeGetHeight();
+        private synchronized native int nativeGetHeight();
 
-        private native synchronized int nativeGetWidth();
+        private synchronized native int nativeGetWidth();
 
         public SurfaceImage(int format) {
             this.mFormat = 0;
@@ -600,7 +664,11 @@ public class ImageReader implements AutoCloseable {
         public Image.Plane[] getPlanes() {
             throwISEIfImageIsInvalid();
             if (this.mPlanes == null) {
-                this.mPlanes = nativeCreatePlanes(ImageReader.this.mNumPlanes, ImageReader.this.mHardwareBufferFormat, ImageReader.this.mUsage);
+                this.mPlanes =
+                        nativeCreatePlanes(
+                                ImageReader.this.mNumPlanes,
+                                ImageReader.this.mHardwareBufferFormat,
+                                ImageReader.this.mUsage);
             }
             return (Image.Plane[]) this.mPlanes.clone();
         }
@@ -672,7 +740,8 @@ public class ImageReader implements AutoCloseable {
             public int getPixelStride() {
                 SurfaceImage.this.throwISEIfImageIsInvalid();
                 if (ImageReader.this.mFormat == 36) {
-                    throw new UnsupportedOperationException("getPixelStride is not supported for RAW_PRIVATE plane");
+                    throw new UnsupportedOperationException(
+                            "getPixelStride is not supported for RAW_PRIVATE plane");
                 }
                 return this.mPixelStride;
             }
@@ -681,7 +750,8 @@ public class ImageReader implements AutoCloseable {
             public int getRowStride() {
                 SurfaceImage.this.throwISEIfImageIsInvalid();
                 if (ImageReader.this.mFormat == 36) {
-                    throw new UnsupportedOperationException("getRowStride is not supported for RAW_PRIVATE plane");
+                    throw new UnsupportedOperationException(
+                            "getRowStride is not supported for RAW_PRIVATE plane");
                 }
                 return this.mRowStride;
             }
@@ -727,8 +797,17 @@ public class ImageReader implements AutoCloseable {
         }
     }
 
-    public static ImagePlane[] initializeImagePlanes(int numPlanes, GraphicBuffer buffer, int fenceFd, int format, long timestamp, int transform, int scalingMode, Rect crop) {
-        return nativeCreateImagePlanes(numPlanes, buffer, fenceFd, format, crop.left, crop.top, crop.right, crop.bottom);
+    public static ImagePlane[] initializeImagePlanes(
+            int numPlanes,
+            GraphicBuffer buffer,
+            int fenceFd,
+            int format,
+            long timestamp,
+            int transform,
+            int scalingMode,
+            Rect crop) {
+        return nativeCreateImagePlanes(
+                numPlanes, buffer, fenceFd, format, crop.left, crop.top, crop.right, crop.bottom);
     }
 
     public static void unlockGraphicBuffer(GraphicBuffer buffer) {

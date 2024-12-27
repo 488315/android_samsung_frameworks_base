@@ -1,6 +1,7 @@
 package android.filterfw.core;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.util.Arrays;
 import java.util.Map;
 
@@ -98,7 +99,14 @@ public class FrameFormat {
     public boolean hasMetaKey(String key, Class expectedClass) {
         if (this.mMetaData != null && this.mMetaData.containsKey(key)) {
             if (!expectedClass.isAssignableFrom(this.mMetaData.get(key).getClass())) {
-                throw new RuntimeException("FrameFormat meta-key '" + key + "' is of type " + this.mMetaData.get(key).getClass() + " but expected to be of type " + expectedClass + "!");
+                throw new RuntimeException(
+                        "FrameFormat meta-key '"
+                                + key
+                                + "' is of type "
+                                + this.mMetaData.get(key).getClass()
+                                + " but expected to be of type "
+                                + expectedClass
+                                + "!");
             }
             return true;
         }
@@ -174,7 +182,11 @@ public class FrameFormat {
             return false;
         }
         FrameFormat format = (FrameFormat) object;
-        return format.mBaseType == this.mBaseType && format.mTarget == this.mTarget && format.mBytesPerSample == this.mBytesPerSample && Arrays.equals(format.mDimensions, this.mDimensions) && format.mMetaData.equals(this.mMetaData);
+        return format.mBaseType == this.mBaseType
+                && format.mTarget == this.mTarget
+                && format.mBytesPerSample == this.mBytesPerSample
+                && Arrays.equals(format.mDimensions, this.mDimensions)
+                && format.mMetaData.equals(this.mMetaData);
     }
 
     public int hashCode() {
@@ -188,10 +200,12 @@ public class FrameFormat {
         if (specification.getTarget() != 0 && getTarget() != specification.getTarget()) {
             return false;
         }
-        if (specification.getBytesPerSample() != 1 && getBytesPerSample() != specification.getBytesPerSample()) {
+        if (specification.getBytesPerSample() != 1
+                && getBytesPerSample() != specification.getBytesPerSample()) {
             return false;
         }
-        if (specification.getDimensionCount() > 0 && getDimensionCount() != specification.getDimensionCount()) {
+        if (specification.getDimensionCount() > 0
+                && getDimensionCount() != specification.getDimensionCount()) {
             return false;
         }
         for (int i = 0; i < specification.getDimensionCount(); i++) {
@@ -200,12 +214,18 @@ public class FrameFormat {
                 return false;
             }
         }
-        if (specification.getObjectClass() != null && (getObjectClass() == null || !specification.getObjectClass().isAssignableFrom(getObjectClass()))) {
+        if (specification.getObjectClass() != null
+                && (getObjectClass() == null
+                        || !specification.getObjectClass().isAssignableFrom(getObjectClass()))) {
             return false;
         }
         if (specification.mMetaData != null) {
             for (String specKey : specification.mMetaData.keySet()) {
-                if (this.mMetaData == null || !this.mMetaData.containsKey(specKey) || !this.mMetaData.get(specKey).equals(specification.mMetaData.get(specKey))) {
+                if (this.mMetaData == null
+                        || !this.mMetaData.containsKey(specKey)
+                        || !this.mMetaData
+                                .get(specKey)
+                                .equals(specification.mMetaData.get(specKey))) {
                     return false;
                 }
             }
@@ -214,16 +234,24 @@ public class FrameFormat {
     }
 
     public boolean mayBeCompatibleWith(FrameFormat specification) {
-        if (specification.getBaseType() != 0 && getBaseType() != 0 && getBaseType() != specification.getBaseType()) {
+        if (specification.getBaseType() != 0
+                && getBaseType() != 0
+                && getBaseType() != specification.getBaseType()) {
             return false;
         }
-        if (specification.getTarget() != 0 && getTarget() != 0 && getTarget() != specification.getTarget()) {
+        if (specification.getTarget() != 0
+                && getTarget() != 0
+                && getTarget() != specification.getTarget()) {
             return false;
         }
-        if (specification.getBytesPerSample() != 1 && getBytesPerSample() != 1 && getBytesPerSample() != specification.getBytesPerSample()) {
+        if (specification.getBytesPerSample() != 1
+                && getBytesPerSample() != 1
+                && getBytesPerSample() != specification.getBytesPerSample()) {
             return false;
         }
-        if (specification.getDimensionCount() > 0 && getDimensionCount() > 0 && getDimensionCount() != specification.getDimensionCount()) {
+        if (specification.getDimensionCount() > 0
+                && getDimensionCount() > 0
+                && getDimensionCount() != specification.getDimensionCount()) {
             return false;
         }
         for (int i = 0; i < specification.getDimensionCount(); i++) {
@@ -232,12 +260,17 @@ public class FrameFormat {
                 return false;
             }
         }
-        if (specification.getObjectClass() != null && getObjectClass() != null && !specification.getObjectClass().isAssignableFrom(getObjectClass())) {
+        if (specification.getObjectClass() != null
+                && getObjectClass() != null
+                && !specification.getObjectClass().isAssignableFrom(getObjectClass())) {
             return false;
         }
         if (specification.mMetaData != null && this.mMetaData != null) {
             for (String specKey : specification.mMetaData.keySet()) {
-                if (this.mMetaData.containsKey(specKey) && !this.mMetaData.get(specKey).equals(specification.mMetaData.get(specKey))) {
+                if (this.mMetaData.containsKey(specKey)
+                        && !this.mMetaData
+                                .get(specKey)
+                                .equals(specification.mMetaData.get(specKey))) {
                     return false;
                 }
             }
@@ -259,7 +292,10 @@ public class FrameFormat {
                 if (dimensions[i] == 0) {
                     buffer.append("[]");
                 } else {
-                    buffer.append(NavigationBarInflaterView.SIZE_MOD_START + String.valueOf(dimensions[i]) + NavigationBarInflaterView.SIZE_MOD_END);
+                    buffer.append(
+                            NavigationBarInflaterView.SIZE_MOD_START
+                                    + String.valueOf(dimensions[i])
+                                    + NavigationBarInflaterView.SIZE_MOD_END);
                 }
             }
         }
@@ -327,8 +363,16 @@ public class FrameFormat {
         int valuesPerSample = getValuesPerSample();
         String sampleCountString = valuesPerSample == 1 ? "" : String.valueOf(valuesPerSample);
         String targetString = this.mTarget == 0 ? "" : targetToString(this.mTarget) + " ";
-        String classString = this.mObjectClass != null ? " class(" + this.mObjectClass.getSimpleName() + ") " : "";
-        return targetString + baseTypeToString(this.mBaseType) + sampleCountString + dimensionsToString(this.mDimensions) + classString + metaDataToString(this.mMetaData);
+        String classString =
+                this.mObjectClass != null
+                        ? " class(" + this.mObjectClass.getSimpleName() + ") "
+                        : "";
+        return targetString
+                + baseTypeToString(this.mBaseType)
+                + sampleCountString
+                + dimensionsToString(this.mDimensions)
+                + classString
+                + metaDataToString(this.mMetaData);
     }
 
     private void initDefaults() {
@@ -347,6 +391,8 @@ public class FrameFormat {
     }
 
     boolean isReplaceableBy(FrameFormat format) {
-        return this.mTarget == format.mTarget && getSize() == format.getSize() && Arrays.equals(format.mDimensions, this.mDimensions);
+        return this.mTarget == format.mTarget
+                && getSize() == format.getSize()
+                && Arrays.equals(format.mDimensions, this.mDimensions);
     }
 }

@@ -5,21 +5,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemExtractedInfo implements Parcelable {
-    public static final Parcelable.Creator<SemExtractedInfo> CREATOR = new Parcelable.Creator<SemExtractedInfo>() { // from class: com.samsung.android.infoextraction.SemExtractedInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemExtractedInfo createFromParcel(Parcel in) {
-            SemExtractedInfo data = new SemExtractedInfo();
-            data.readFromParcel(in);
-            return data;
-        }
+    public static final Parcelable.Creator<SemExtractedInfo> CREATOR =
+            new Parcelable.Creator<
+                    SemExtractedInfo>() { // from class:
+                                          // com.samsung.android.infoextraction.SemExtractedInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemExtractedInfo createFromParcel(Parcel in) {
+                    SemExtractedInfo data = new SemExtractedInfo();
+                    data.readFromParcel(in);
+                    return data;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemExtractedInfo[] newArray(int size) {
-            return new SemExtractedInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemExtractedInfo[] newArray(int size) {
+                    return new SemExtractedInfo[size];
+                }
+            };
     private static final int HIDE_HERMES_UI = 2;
     private static final int SUPPORT_HERMES_UI = 1;
     private static final int USE_EXTRA = 2;
@@ -34,10 +37,16 @@ public class SemExtractedInfo implements Parcelable {
     private int mUIState;
     private int mUsingData;
 
-    public SemExtractedInfo() {
-    }
+    public SemExtractedInfo() {}
 
-    public SemExtractedInfo(int resultType, String src, Object result, Object extraDatas, int startPos, int endPos, float accuracy) {
+    public SemExtractedInfo(
+            int resultType,
+            String src,
+            Object result,
+            Object extraDatas,
+            int startPos,
+            int endPos,
+            float accuracy) {
         this.mResultType = resultType;
         this.mSrc = src;
         this.mResult = result;
@@ -47,7 +56,16 @@ public class SemExtractedInfo implements Parcelable {
         this.mAccuracy = accuracy;
     }
 
-    public SemExtractedInfo(int resultType, String src, Object result, Object extraDatas, int startPos, int endPos, float accuracy, int uiState, int usingData) {
+    public SemExtractedInfo(
+            int resultType,
+            String src,
+            Object result,
+            Object extraDatas,
+            int startPos,
+            int endPos,
+            float accuracy,
+            int uiState,
+            int usingData) {
         this.mResultType = resultType;
         this.mSrc = src;
         this.mResult = result;

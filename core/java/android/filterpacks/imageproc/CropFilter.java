@@ -17,6 +17,7 @@ public class CropFilter extends Filter {
 
     @GenerateFieldPort(name = "fillblack")
     private boolean mFillBlack;
+
     private final String mFragShader;
     private FrameFormat mLastFormat;
 
@@ -25,6 +26,7 @@ public class CropFilter extends Filter {
 
     @GenerateFieldPort(name = "owidth")
     private int mOutputWidth;
+
     private Program mProgram;
 
     public CropFilter(String name) {
@@ -33,7 +35,23 @@ public class CropFilter extends Filter {
         this.mOutputWidth = -1;
         this.mOutputHeight = -1;
         this.mFillBlack = false;
-        this.mFragShader = "precision mediump float;\nuniform sampler2D tex_sampler_0;\nvarying vec2 v_texcoord;\nvoid main() {\n  const vec2 lo = vec2(0.0, 0.0);\n  const vec2 hi = vec2(1.0, 1.0);\n  const vec4 black = vec4(0.0, 0.0, 0.0, 1.0);\n  bool out_of_bounds =\n    any(lessThan(v_texcoord, lo)) ||\n    any(greaterThan(v_texcoord, hi));\n  if (out_of_bounds) {\n    gl_FragColor = black;\n  } else {\n    gl_FragColor = texture2D(tex_sampler_0, v_texcoord);\n  }\n}\n";
+        this.mFragShader =
+                "precision mediump float;\n"
+                        + "uniform sampler2D tex_sampler_0;\n"
+                        + "varying vec2 v_texcoord;\n"
+                        + "void main() {\n"
+                        + "  const vec2 lo = vec2(0.0, 0.0);\n"
+                        + "  const vec2 hi = vec2(1.0, 1.0);\n"
+                        + "  const vec4 black = vec4(0.0, 0.0, 0.0, 1.0);\n"
+                        + "  bool out_of_bounds =\n"
+                        + "    any(lessThan(v_texcoord, lo)) ||\n"
+                        + "    any(greaterThan(v_texcoord, hi));\n"
+                        + "  if (out_of_bounds) {\n"
+                        + "    gl_FragColor = black;\n"
+                        + "  } else {\n"
+                        + "    gl_FragColor = texture2D(tex_sampler_0, v_texcoord);\n"
+                        + "  }\n"
+                        + "}\n";
     }
 
     @Override // android.filterfw.core.Filter
@@ -57,7 +75,26 @@ public class CropFilter extends Filter {
             switch (format.getTarget()) {
                 case 3:
                     if (this.mFillBlack) {
-                        this.mProgram = new ShaderProgram(context, "precision mediump float;\nuniform sampler2D tex_sampler_0;\nvarying vec2 v_texcoord;\nvoid main() {\n  const vec2 lo = vec2(0.0, 0.0);\n  const vec2 hi = vec2(1.0, 1.0);\n  const vec4 black = vec4(0.0, 0.0, 0.0, 1.0);\n  bool out_of_bounds =\n    any(lessThan(v_texcoord, lo)) ||\n    any(greaterThan(v_texcoord, hi));\n  if (out_of_bounds) {\n    gl_FragColor = black;\n  } else {\n    gl_FragColor = texture2D(tex_sampler_0, v_texcoord);\n  }\n}\n");
+                        this.mProgram =
+                                new ShaderProgram(
+                                        context,
+                                        "precision mediump float;\n"
+                                                + "uniform sampler2D tex_sampler_0;\n"
+                                                + "varying vec2 v_texcoord;\n"
+                                                + "void main() {\n"
+                                                + "  const vec2 lo = vec2(0.0, 0.0);\n"
+                                                + "  const vec2 hi = vec2(1.0, 1.0);\n"
+                                                + "  const vec4 black = vec4(0.0, 0.0, 0.0, 1.0);\n"
+                                                + "  bool out_of_bounds =\n"
+                                                + "    any(lessThan(v_texcoord, lo)) ||\n"
+                                                + "    any(greaterThan(v_texcoord, hi));\n"
+                                                + "  if (out_of_bounds) {\n"
+                                                + "    gl_FragColor = black;\n"
+                                                + "  } else {\n"
+                                                + "    gl_FragColor = texture2D(tex_sampler_0,"
+                                                + " v_texcoord);\n"
+                                                + "  }\n"
+                                                + "}\n");
                         break;
                     } else {
                         this.mProgram = ShaderProgram.createIdentity(context);
@@ -65,7 +102,8 @@ public class CropFilter extends Filter {
                     }
             }
             if (this.mProgram == null) {
-                throw new RuntimeException("Could not create a program for crop filter " + this + "!");
+                throw new RuntimeException(
+                        "Could not create a program for crop filter " + this + "!");
             }
         }
     }
@@ -77,7 +115,9 @@ public class CropFilter extends Filter {
         createProgram(env, imageFrame.getFormat());
         Quad box = (Quad) boxFrame.getObjectValue();
         MutableFrameFormat outputFormat = imageFrame.getFormat().mutableCopy();
-        outputFormat.setDimensions(this.mOutputWidth == -1 ? outputFormat.getWidth() : this.mOutputWidth, this.mOutputHeight == -1 ? outputFormat.getHeight() : this.mOutputHeight);
+        outputFormat.setDimensions(
+                this.mOutputWidth == -1 ? outputFormat.getWidth() : this.mOutputWidth,
+                this.mOutputHeight == -1 ? outputFormat.getHeight() : this.mOutputHeight);
         Frame output = env.getFrameManager().newFrame(outputFormat);
         if (this.mProgram instanceof ShaderProgram) {
             ShaderProgram shaderProgram = (ShaderProgram) this.mProgram;

@@ -18,16 +18,13 @@ public interface IScanEvent extends IInterface {
 
     public static class Default implements IScanEvent {
         @Override // android.net.wifi.nl80211.IScanEvent
-        public void OnScanResultReady() throws RemoteException {
-        }
+        public void OnScanResultReady() throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IScanEvent
-        public void OnScanFailed() throws RemoteException {
-        }
+        public void OnScanFailed() throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IScanEvent
-        public void OnScanRequestFailed(int errorCode) throws RemoteException {
-        }
+        public void OnScanRequestFailed(int errorCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +32,7 @@ public interface IScanEvent extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IScanEvent {
+    public abstract static class Stub extends Binder implements IScanEvent {
         static final int TRANSACTION_OnScanFailed = 2;
         static final int TRANSACTION_OnScanRequestFailed = 3;
         static final int TRANSACTION_OnScanResultReady = 1;
@@ -79,7 +76,8 @@ public interface IScanEvent extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IScanEvent.DESCRIPTOR);
             }

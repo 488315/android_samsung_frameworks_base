@@ -16,9 +16,12 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -28,13 +31,16 @@ import java.util.Objects;
 public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
     public static final String kInterfaceName = "android.hardware.gnss@2.0::IGnss";
 
-    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss,
+    // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
     IHwBinder asBinder();
 
-    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss,
+    // android.internal.hidl.base.V1_0.IBase
     void debug(NativeHandle nativeHandle, ArrayList<String> arrayList) throws RemoteException;
 
-    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss,
+    // android.internal.hidl.base.V1_0.IBase
     DebugInfo getDebugInfo() throws RemoteException;
 
     IAGnssRil getExtensionAGnssRil_2_0() throws RemoteException;
@@ -53,32 +59,40 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
 
     IGnssVisibilityControl getExtensionVisibilityControl() throws RemoteException;
 
-    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss,
+    // android.internal.hidl.base.V1_0.IBase
     ArrayList<byte[]> getHashChain() throws RemoteException;
 
     boolean injectBestLocation_2_0(GnssLocation gnssLocation) throws RemoteException;
 
-    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss,
+    // android.internal.hidl.base.V1_0.IBase
     ArrayList<String> interfaceChain() throws RemoteException;
 
-    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss,
+    // android.internal.hidl.base.V1_0.IBase
     String interfaceDescriptor() throws RemoteException;
 
-    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss,
+    // android.internal.hidl.base.V1_0.IBase
     boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j) throws RemoteException;
 
-    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss,
+    // android.internal.hidl.base.V1_0.IBase
     void notifySyspropsChanged() throws RemoteException;
 
-    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss,
+    // android.internal.hidl.base.V1_0.IBase
     void ping() throws RemoteException;
 
     boolean setCallback_2_0(IGnssCallback iGnssCallback) throws RemoteException;
 
-    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss,
+    // android.internal.hidl.base.V1_0.IBase
     void setHALInstrumentation() throws RemoteException;
 
-    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss,
+    // android.internal.hidl.base.V1_0.IBase
     boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient) throws RemoteException;
 
     static IGnss asInterface(IHwBinder binder) {
@@ -135,7 +149,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase,
+        // android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -157,7 +173,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_0.IGnss
-        public boolean setCallback(android.hardware.gnss.V1_0.IGnssCallback callback) throws RemoteException {
+        public boolean setCallback(android.hardware.gnss.V1_0.IGnssCallback callback)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
             _hidl_request.writeStrongBinder(callback == null ? null : callback.asBinder());
@@ -220,7 +237,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_0.IGnss
-        public boolean injectTime(long timeMs, long timeReferenceMs, int uncertaintyMs) throws RemoteException {
+        public boolean injectTime(long timeMs, long timeReferenceMs, int uncertaintyMs)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
             _hidl_request.writeInt64(timeMs);
@@ -239,7 +257,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_0.IGnss
-        public boolean injectLocation(double latitudeDegrees, double longitudeDegrees, float accuracyMeters) throws RemoteException {
+        public boolean injectLocation(
+                double latitudeDegrees, double longitudeDegrees, float accuracyMeters)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
             _hidl_request.writeDouble(latitudeDegrees);
@@ -273,7 +293,13 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_0.IGnss
-        public boolean setPositionMode(byte mode, int recurrence, int minIntervalMs, int preferredAccuracyMeters, int preferredTimeMs) throws RemoteException {
+        public boolean setPositionMode(
+                byte mode,
+                int recurrence,
+                int minIntervalMs,
+                int preferredAccuracyMeters,
+                int preferredTimeMs)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
             _hidl_request.writeInt8(mode);
@@ -302,7 +328,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(9, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                android.hardware.gnss.V1_0.IAGnssRil _hidl_out_aGnssRilIface = android.hardware.gnss.V1_0.IAGnssRil.asInterface(_hidl_reply.readStrongBinder());
+                android.hardware.gnss.V1_0.IAGnssRil _hidl_out_aGnssRilIface =
+                        android.hardware.gnss.V1_0.IAGnssRil.asInterface(
+                                _hidl_reply.readStrongBinder());
                 return _hidl_out_aGnssRilIface;
             } finally {
                 _hidl_reply.release();
@@ -318,7 +346,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(10, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                IGnssGeofencing _hidl_out_gnssGeofencingIface = IGnssGeofencing.asInterface(_hidl_reply.readStrongBinder());
+                IGnssGeofencing _hidl_out_gnssGeofencingIface =
+                        IGnssGeofencing.asInterface(_hidl_reply.readStrongBinder());
                 return _hidl_out_gnssGeofencingIface;
             } finally {
                 _hidl_reply.release();
@@ -334,7 +363,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(11, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                android.hardware.gnss.V1_0.IAGnss _hidl_out_aGnssIface = android.hardware.gnss.V1_0.IAGnss.asInterface(_hidl_reply.readStrongBinder());
+                android.hardware.gnss.V1_0.IAGnss _hidl_out_aGnssIface =
+                        android.hardware.gnss.V1_0.IAGnss.asInterface(
+                                _hidl_reply.readStrongBinder());
                 return _hidl_out_aGnssIface;
             } finally {
                 _hidl_reply.release();
@@ -358,7 +389,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_0.IGnss
-        public android.hardware.gnss.V1_0.IGnssMeasurement getExtensionGnssMeasurement() throws RemoteException {
+        public android.hardware.gnss.V1_0.IGnssMeasurement getExtensionGnssMeasurement()
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
             HwParcel _hidl_reply = new HwParcel();
@@ -366,7 +398,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(13, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                android.hardware.gnss.V1_0.IGnssMeasurement _hidl_out_gnssMeasurementIface = android.hardware.gnss.V1_0.IGnssMeasurement.asInterface(_hidl_reply.readStrongBinder());
+                android.hardware.gnss.V1_0.IGnssMeasurement _hidl_out_gnssMeasurementIface =
+                        android.hardware.gnss.V1_0.IGnssMeasurement.asInterface(
+                                _hidl_reply.readStrongBinder());
                 return _hidl_out_gnssMeasurementIface;
             } finally {
                 _hidl_reply.release();
@@ -382,7 +416,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(14, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                IGnssNavigationMessage _hidl_out_gnssNavigationIface = IGnssNavigationMessage.asInterface(_hidl_reply.readStrongBinder());
+                IGnssNavigationMessage _hidl_out_gnssNavigationIface =
+                        IGnssNavigationMessage.asInterface(_hidl_reply.readStrongBinder());
                 return _hidl_out_gnssNavigationIface;
             } finally {
                 _hidl_reply.release();
@@ -398,7 +433,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(15, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                IGnssXtra _hidl_out_xtraIface = IGnssXtra.asInterface(_hidl_reply.readStrongBinder());
+                IGnssXtra _hidl_out_xtraIface =
+                        IGnssXtra.asInterface(_hidl_reply.readStrongBinder());
                 return _hidl_out_xtraIface;
             } finally {
                 _hidl_reply.release();
@@ -406,7 +442,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_0.IGnss
-        public android.hardware.gnss.V1_0.IGnssConfiguration getExtensionGnssConfiguration() throws RemoteException {
+        public android.hardware.gnss.V1_0.IGnssConfiguration getExtensionGnssConfiguration()
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
             HwParcel _hidl_reply = new HwParcel();
@@ -414,7 +451,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(16, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                android.hardware.gnss.V1_0.IGnssConfiguration _hidl_out_gnssConfigIface = android.hardware.gnss.V1_0.IGnssConfiguration.asInterface(_hidl_reply.readStrongBinder());
+                android.hardware.gnss.V1_0.IGnssConfiguration _hidl_out_gnssConfigIface =
+                        android.hardware.gnss.V1_0.IGnssConfiguration.asInterface(
+                                _hidl_reply.readStrongBinder());
                 return _hidl_out_gnssConfigIface;
             } finally {
                 _hidl_reply.release();
@@ -422,7 +461,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_0.IGnss
-        public android.hardware.gnss.V1_0.IGnssDebug getExtensionGnssDebug() throws RemoteException {
+        public android.hardware.gnss.V1_0.IGnssDebug getExtensionGnssDebug()
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
             HwParcel _hidl_reply = new HwParcel();
@@ -430,7 +470,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(17, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                android.hardware.gnss.V1_0.IGnssDebug _hidl_out_debugIface = android.hardware.gnss.V1_0.IGnssDebug.asInterface(_hidl_reply.readStrongBinder());
+                android.hardware.gnss.V1_0.IGnssDebug _hidl_out_debugIface =
+                        android.hardware.gnss.V1_0.IGnssDebug.asInterface(
+                                _hidl_reply.readStrongBinder());
                 return _hidl_out_debugIface;
             } finally {
                 _hidl_reply.release();
@@ -438,7 +480,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_0.IGnss
-        public android.hardware.gnss.V1_0.IGnssBatching getExtensionGnssBatching() throws RemoteException {
+        public android.hardware.gnss.V1_0.IGnssBatching getExtensionGnssBatching()
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
             HwParcel _hidl_reply = new HwParcel();
@@ -446,7 +489,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(18, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                android.hardware.gnss.V1_0.IGnssBatching _hidl_out_batchingIface = android.hardware.gnss.V1_0.IGnssBatching.asInterface(_hidl_reply.readStrongBinder());
+                android.hardware.gnss.V1_0.IGnssBatching _hidl_out_batchingIface =
+                        android.hardware.gnss.V1_0.IGnssBatching.asInterface(
+                                _hidl_reply.readStrongBinder());
                 return _hidl_out_batchingIface;
             } finally {
                 _hidl_reply.release();
@@ -454,7 +499,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_1.IGnss
-        public boolean setCallback_1_1(android.hardware.gnss.V1_1.IGnssCallback callback) throws RemoteException {
+        public boolean setCallback_1_1(android.hardware.gnss.V1_1.IGnssCallback callback)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_1.IGnss.kInterfaceName);
             _hidl_request.writeStrongBinder(callback == null ? null : callback.asBinder());
@@ -471,7 +517,14 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_1.IGnss
-        public boolean setPositionMode_1_1(byte mode, int recurrence, int minIntervalMs, int preferredAccuracyMeters, int preferredTimeMs, boolean lowPowerMode) throws RemoteException {
+        public boolean setPositionMode_1_1(
+                byte mode,
+                int recurrence,
+                int minIntervalMs,
+                int preferredAccuracyMeters,
+                int preferredTimeMs,
+                boolean lowPowerMode)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_1.IGnss.kInterfaceName);
             _hidl_request.writeInt8(mode);
@@ -493,7 +546,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_1.IGnss
-        public android.hardware.gnss.V1_1.IGnssConfiguration getExtensionGnssConfiguration_1_1() throws RemoteException {
+        public android.hardware.gnss.V1_1.IGnssConfiguration getExtensionGnssConfiguration_1_1()
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_1.IGnss.kInterfaceName);
             HwParcel _hidl_reply = new HwParcel();
@@ -501,7 +555,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(21, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                android.hardware.gnss.V1_1.IGnssConfiguration _hidl_out_gnssConfigurationIface = android.hardware.gnss.V1_1.IGnssConfiguration.asInterface(_hidl_reply.readStrongBinder());
+                android.hardware.gnss.V1_1.IGnssConfiguration _hidl_out_gnssConfigurationIface =
+                        android.hardware.gnss.V1_1.IGnssConfiguration.asInterface(
+                                _hidl_reply.readStrongBinder());
                 return _hidl_out_gnssConfigurationIface;
             } finally {
                 _hidl_reply.release();
@@ -509,7 +565,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_1.IGnss
-        public android.hardware.gnss.V1_1.IGnssMeasurement getExtensionGnssMeasurement_1_1() throws RemoteException {
+        public android.hardware.gnss.V1_1.IGnssMeasurement getExtensionGnssMeasurement_1_1()
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_1.IGnss.kInterfaceName);
             HwParcel _hidl_reply = new HwParcel();
@@ -517,7 +574,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(22, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                android.hardware.gnss.V1_1.IGnssMeasurement _hidl_out_gnssMeasurementIface = android.hardware.gnss.V1_1.IGnssMeasurement.asInterface(_hidl_reply.readStrongBinder());
+                android.hardware.gnss.V1_1.IGnssMeasurement _hidl_out_gnssMeasurementIface =
+                        android.hardware.gnss.V1_1.IGnssMeasurement.asInterface(
+                                _hidl_reply.readStrongBinder());
                 return _hidl_out_gnssMeasurementIface;
             } finally {
                 _hidl_reply.release();
@@ -525,7 +584,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.hardware.gnss.V1_1.IGnss
-        public boolean injectBestLocation(android.hardware.gnss.V1_0.GnssLocation location) throws RemoteException {
+        public boolean injectBestLocation(android.hardware.gnss.V1_0.GnssLocation location)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_1.IGnss.kInterfaceName);
             location.writeToParcel(_hidl_request);
@@ -567,7 +627,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(25, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                IGnssConfiguration _hidl_out_gnssConfigurationIface = IGnssConfiguration.asInterface(_hidl_reply.readStrongBinder());
+                IGnssConfiguration _hidl_out_gnssConfigurationIface =
+                        IGnssConfiguration.asInterface(_hidl_reply.readStrongBinder());
                 return _hidl_out_gnssConfigurationIface;
             } finally {
                 _hidl_reply.release();
@@ -583,7 +644,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(26, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                IGnssDebug _hidl_out_gnssDebugIface = IGnssDebug.asInterface(_hidl_reply.readStrongBinder());
+                IGnssDebug _hidl_out_gnssDebugIface =
+                        IGnssDebug.asInterface(_hidl_reply.readStrongBinder());
                 return _hidl_out_gnssDebugIface;
             } finally {
                 _hidl_reply.release();
@@ -615,7 +677,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(28, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                IAGnssRil _hidl_out_aGnssRilIface = IAGnssRil.asInterface(_hidl_reply.readStrongBinder());
+                IAGnssRil _hidl_out_aGnssRilIface =
+                        IAGnssRil.asInterface(_hidl_reply.readStrongBinder());
                 return _hidl_out_aGnssRilIface;
             } finally {
                 _hidl_reply.release();
@@ -631,7 +694,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(29, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                IGnssMeasurement _hidl_out_gnssMeasurementIface = IGnssMeasurement.asInterface(_hidl_reply.readStrongBinder());
+                IGnssMeasurement _hidl_out_gnssMeasurementIface =
+                        IGnssMeasurement.asInterface(_hidl_reply.readStrongBinder());
                 return _hidl_out_gnssMeasurementIface;
             } finally {
                 _hidl_reply.release();
@@ -647,7 +711,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(30, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                IMeasurementCorrections _hidl_out_measurementCorrectionsIface = IMeasurementCorrections.asInterface(_hidl_reply.readStrongBinder());
+                IMeasurementCorrections _hidl_out_measurementCorrectionsIface =
+                        IMeasurementCorrections.asInterface(_hidl_reply.readStrongBinder());
                 return _hidl_out_measurementCorrectionsIface;
             } finally {
                 _hidl_reply.release();
@@ -663,7 +728,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(31, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                IGnssVisibilityControl _hidl_out_visibilityControlIface = IGnssVisibilityControl.asInterface(_hidl_reply.readStrongBinder());
+                IGnssVisibilityControl _hidl_out_visibilityControlIface =
+                        IGnssVisibilityControl.asInterface(_hidl_reply.readStrongBinder());
                 return _hidl_out_visibilityControlIface;
             } finally {
                 _hidl_reply.release();
@@ -679,7 +745,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 this.mRemote.transact(32, _hidl_request, _hidl_reply, 0);
                 _hidl_reply.verifySuccess();
                 _hidl_request.releaseTemporaryStorage();
-                IGnssBatching _hidl_out_batchingIface = IGnssBatching.asInterface(_hidl_reply.readStrongBinder());
+                IGnssBatching _hidl_out_batchingIface =
+                        IGnssBatching.asInterface(_hidl_reply.readStrongBinder());
                 return _hidl_out_batchingIface;
             } finally {
                 _hidl_reply.release();
@@ -703,7 +770,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -719,7 +787,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -735,7 +804,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -751,7 +821,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -763,7 +834,9 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -777,7 +850,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -790,12 +864,15 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -809,7 +886,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -826,7 +904,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -839,51 +918,201 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements IGnss {
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements IGnss {
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase,
+        // android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(IGnss.kInterfaceName, android.hardware.gnss.V1_1.IGnss.kInterfaceName, android.hardware.gnss.V1_0.IGnss.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            IGnss.kInterfaceName,
+                            android.hardware.gnss.V1_1.IGnss.kInterfaceName,
+                            android.hardware.gnss.V1_0.IGnss.kInterfaceName,
+                            IBase.kInterfaceName));
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return IGnss.kInterfaceName;
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{-11, SprAttributeBase.TYPE_DURATION, 95, 72, -62, -5, -97, 35, 22, 21, -35, -109, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, -9, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, -82, -107, 64, -12, -7, -117, 91, 122, -30, -78, 105, -105, 95, 69, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, 109, 115}, new byte[]{-75, MidiConstants.STATUS_MIDI_TIME_CODE, -12, -63, -67, 109, -25, 26, -114, 113, -41, 15, 87, -51, -85, MidiConstants.STATUS_NOTE_ON, 74, MidiConstants.STATUS_PROGRAM_CHANGE, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -95, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, 61, -18, 62, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT, 115, 119, 10, 69, -125, -68, -62}, new byte[]{-19, -26, -105, 16, -61, -87, 92, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50, -66, -127, -114, 108, -117, -73, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50, 120, 22, -126, 63, -84, -27, -4, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT, -63, 119, SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33, -78, 111, 65, -39, 77, 101}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                -11,
+                                SprAttributeBase.TYPE_DURATION,
+                                95,
+                                72,
+                                -62,
+                                -5,
+                                -97,
+                                35,
+                                22,
+                                21,
+                                -35,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33,
+                                -9,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90,
+                                -82,
+                                -107,
+                                64,
+                                -12,
+                                -7,
+                                -117,
+                                91,
+                                122,
+                                -30,
+                                -78,
+                                105,
+                                -105,
+                                95,
+                                69,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80,
+                                109,
+                                115
+                            },
+                            new byte[] {
+                                -75,
+                                MidiConstants.STATUS_MIDI_TIME_CODE,
+                                -12,
+                                -63,
+                                -67,
+                                109,
+                                -25,
+                                26,
+                                -114,
+                                113,
+                                -41,
+                                15,
+                                87,
+                                -51,
+                                -85,
+                                MidiConstants.STATUS_NOTE_ON,
+                                74,
+                                MidiConstants.STATUS_PROGRAM_CHANGE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -95,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80,
+                                61,
+                                -18,
+                                62,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT,
+                                115,
+                                119,
+                                10,
+                                69,
+                                -125,
+                                -68,
+                                -62
+                            },
+                            new byte[] {
+                                -19,
+                                -26,
+                                -105,
+                                16,
+                                -61,
+                                -87,
+                                92,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50,
+                                -66,
+                                -127,
+                                -114,
+                                108,
+                                -117,
+                                -73,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50,
+                                120,
+                                22,
+                                -126,
+                                63,
+                                -84,
+                                -27,
+                                -4,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT,
+                                -63,
+                                119,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33,
+                                -78,
+                                111,
+                                65,
+                                -39,
+                                77,
+                                101
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -892,12 +1121,14 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
             return info;
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss, android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnss, android.hardware.gnss.V1_1.IGnss,
+        // android.hardware.gnss.V1_0.IGnss, android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -919,11 +1150,15 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
-                    android.hardware.gnss.V1_0.IGnssCallback callback = android.hardware.gnss.V1_0.IGnssCallback.asInterface(_hidl_request.readStrongBinder());
+                    android.hardware.gnss.V1_0.IGnssCallback callback =
+                            android.hardware.gnss.V1_0.IGnssCallback.asInterface(
+                                    _hidl_request.readStrongBinder());
                     boolean _hidl_out_success = setCallback(callback);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.writeBool(_hidl_out_success);
@@ -964,7 +1199,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                     double latitudeDegrees = _hidl_request.readDouble();
                     double longitudeDegrees = _hidl_request.readDouble();
                     float accuracyMeters = _hidl_request.readFloat();
-                    boolean _hidl_out_success5 = injectLocation(latitudeDegrees, longitudeDegrees, accuracyMeters);
+                    boolean _hidl_out_success5 =
+                            injectLocation(latitudeDegrees, longitudeDegrees, accuracyMeters);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.writeBool(_hidl_out_success5);
                     _hidl_reply.send();
@@ -983,84 +1219,122 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                     int minIntervalMs = _hidl_request.readInt32();
                     int preferredAccuracyMeters = _hidl_request.readInt32();
                     int preferredTimeMs = _hidl_request.readInt32();
-                    boolean _hidl_out_success6 = setPositionMode(mode, recurrence, minIntervalMs, preferredAccuracyMeters, preferredTimeMs);
+                    boolean _hidl_out_success6 =
+                            setPositionMode(
+                                    mode,
+                                    recurrence,
+                                    minIntervalMs,
+                                    preferredAccuracyMeters,
+                                    preferredTimeMs);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.writeBool(_hidl_out_success6);
                     _hidl_reply.send();
                     return;
                 case 9:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
-                    android.hardware.gnss.V1_0.IAGnssRil _hidl_out_aGnssRilIface = getExtensionAGnssRil();
+                    android.hardware.gnss.V1_0.IAGnssRil _hidl_out_aGnssRilIface =
+                            getExtensionAGnssRil();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_aGnssRilIface != null ? _hidl_out_aGnssRilIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_aGnssRilIface != null
+                                    ? _hidl_out_aGnssRilIface.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 10:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
                     IGnssGeofencing _hidl_out_gnssGeofencingIface = getExtensionGnssGeofencing();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_gnssGeofencingIface != null ? _hidl_out_gnssGeofencingIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_gnssGeofencingIface != null
+                                    ? _hidl_out_gnssGeofencingIface.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 11:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
                     android.hardware.gnss.V1_0.IAGnss _hidl_out_aGnssIface = getExtensionAGnss();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_aGnssIface != null ? _hidl_out_aGnssIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_aGnssIface != null ? _hidl_out_aGnssIface.asBinder() : null);
                     _hidl_reply.send();
                     return;
                 case 12:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
                     IGnssNi _hidl_out_gnssNiIface = getExtensionGnssNi();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_gnssNiIface != null ? _hidl_out_gnssNiIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_gnssNiIface != null
+                                    ? _hidl_out_gnssNiIface.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 13:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
-                    android.hardware.gnss.V1_0.IGnssMeasurement _hidl_out_gnssMeasurementIface = getExtensionGnssMeasurement();
+                    android.hardware.gnss.V1_0.IGnssMeasurement _hidl_out_gnssMeasurementIface =
+                            getExtensionGnssMeasurement();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_gnssMeasurementIface != null ? _hidl_out_gnssMeasurementIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_gnssMeasurementIface != null
+                                    ? _hidl_out_gnssMeasurementIface.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 14:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
-                    IGnssNavigationMessage _hidl_out_gnssNavigationIface = getExtensionGnssNavigationMessage();
+                    IGnssNavigationMessage _hidl_out_gnssNavigationIface =
+                            getExtensionGnssNavigationMessage();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_gnssNavigationIface != null ? _hidl_out_gnssNavigationIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_gnssNavigationIface != null
+                                    ? _hidl_out_gnssNavigationIface.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 15:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
                     IGnssXtra _hidl_out_xtraIface = getExtensionXtra();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_xtraIface != null ? _hidl_out_xtraIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_xtraIface != null ? _hidl_out_xtraIface.asBinder() : null);
                     _hidl_reply.send();
                     return;
                 case 16:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
-                    android.hardware.gnss.V1_0.IGnssConfiguration _hidl_out_gnssConfigIface = getExtensionGnssConfiguration();
+                    android.hardware.gnss.V1_0.IGnssConfiguration _hidl_out_gnssConfigIface =
+                            getExtensionGnssConfiguration();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_gnssConfigIface != null ? _hidl_out_gnssConfigIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_gnssConfigIface != null
+                                    ? _hidl_out_gnssConfigIface.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 17:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
-                    android.hardware.gnss.V1_0.IGnssDebug _hidl_out_debugIface = getExtensionGnssDebug();
+                    android.hardware.gnss.V1_0.IGnssDebug _hidl_out_debugIface =
+                            getExtensionGnssDebug();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_debugIface != null ? _hidl_out_debugIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_debugIface != null ? _hidl_out_debugIface.asBinder() : null);
                     _hidl_reply.send();
                     return;
                 case 18:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnss.kInterfaceName);
-                    android.hardware.gnss.V1_0.IGnssBatching _hidl_out_batchingIface = getExtensionGnssBatching();
+                    android.hardware.gnss.V1_0.IGnssBatching _hidl_out_batchingIface =
+                            getExtensionGnssBatching();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_batchingIface != null ? _hidl_out_batchingIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_batchingIface != null
+                                    ? _hidl_out_batchingIface.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 19:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_1.IGnss.kInterfaceName);
-                    android.hardware.gnss.V1_1.IGnssCallback callback2 = android.hardware.gnss.V1_1.IGnssCallback.asInterface(_hidl_request.readStrongBinder());
+                    android.hardware.gnss.V1_1.IGnssCallback callback2 =
+                            android.hardware.gnss.V1_1.IGnssCallback.asInterface(
+                                    _hidl_request.readStrongBinder());
                     boolean _hidl_out_success7 = setCallback_1_1(callback2);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.writeBool(_hidl_out_success7);
@@ -1074,28 +1348,44 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                     int preferredAccuracyMeters2 = _hidl_request.readInt32();
                     int preferredTimeMs2 = _hidl_request.readInt32();
                     boolean lowPowerMode = _hidl_request.readBool();
-                    boolean _hidl_out_success8 = setPositionMode_1_1(mode2, recurrence2, minIntervalMs2, preferredAccuracyMeters2, preferredTimeMs2, lowPowerMode);
+                    boolean _hidl_out_success8 =
+                            setPositionMode_1_1(
+                                    mode2,
+                                    recurrence2,
+                                    minIntervalMs2,
+                                    preferredAccuracyMeters2,
+                                    preferredTimeMs2,
+                                    lowPowerMode);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.writeBool(_hidl_out_success8);
                     _hidl_reply.send();
                     return;
                 case 21:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_1.IGnss.kInterfaceName);
-                    android.hardware.gnss.V1_1.IGnssConfiguration _hidl_out_gnssConfigurationIface = getExtensionGnssConfiguration_1_1();
+                    android.hardware.gnss.V1_1.IGnssConfiguration _hidl_out_gnssConfigurationIface =
+                            getExtensionGnssConfiguration_1_1();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_gnssConfigurationIface != null ? _hidl_out_gnssConfigurationIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_gnssConfigurationIface != null
+                                    ? _hidl_out_gnssConfigurationIface.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 22:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_1.IGnss.kInterfaceName);
-                    android.hardware.gnss.V1_1.IGnssMeasurement _hidl_out_gnssMeasurementIface2 = getExtensionGnssMeasurement_1_1();
+                    android.hardware.gnss.V1_1.IGnssMeasurement _hidl_out_gnssMeasurementIface2 =
+                            getExtensionGnssMeasurement_1_1();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_gnssMeasurementIface2 != null ? _hidl_out_gnssMeasurementIface2.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_gnssMeasurementIface2 != null
+                                    ? _hidl_out_gnssMeasurementIface2.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 23:
                     _hidl_request.enforceInterface(android.hardware.gnss.V1_1.IGnss.kInterfaceName);
-                    android.hardware.gnss.V1_0.GnssLocation location = new android.hardware.gnss.V1_0.GnssLocation();
+                    android.hardware.gnss.V1_0.GnssLocation location =
+                            new android.hardware.gnss.V1_0.GnssLocation();
                     location.readFromParcel(_hidl_request);
                     boolean _hidl_out_success9 = injectBestLocation(location);
                     _hidl_reply.writeStatus(0);
@@ -1104,7 +1394,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                     return;
                 case 24:
                     _hidl_request.enforceInterface(IGnss.kInterfaceName);
-                    IGnssCallback callback3 = IGnssCallback.asInterface(_hidl_request.readStrongBinder());
+                    IGnssCallback callback3 =
+                            IGnssCallback.asInterface(_hidl_request.readStrongBinder());
                     boolean _hidl_out_success10 = setCallback_2_0(callback3);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.writeBool(_hidl_out_success10);
@@ -1112,58 +1403,86 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                     return;
                 case 25:
                     _hidl_request.enforceInterface(IGnss.kInterfaceName);
-                    IGnssConfiguration _hidl_out_gnssConfigurationIface2 = getExtensionGnssConfiguration_2_0();
+                    IGnssConfiguration _hidl_out_gnssConfigurationIface2 =
+                            getExtensionGnssConfiguration_2_0();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_gnssConfigurationIface2 != null ? _hidl_out_gnssConfigurationIface2.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_gnssConfigurationIface2 != null
+                                    ? _hidl_out_gnssConfigurationIface2.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 26:
                     _hidl_request.enforceInterface(IGnss.kInterfaceName);
                     IGnssDebug _hidl_out_gnssDebugIface = getExtensionGnssDebug_2_0();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_gnssDebugIface != null ? _hidl_out_gnssDebugIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_gnssDebugIface != null
+                                    ? _hidl_out_gnssDebugIface.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 27:
                     _hidl_request.enforceInterface(IGnss.kInterfaceName);
                     IAGnss _hidl_out_aGnssIface2 = getExtensionAGnss_2_0();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_aGnssIface2 != null ? _hidl_out_aGnssIface2.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_aGnssIface2 != null
+                                    ? _hidl_out_aGnssIface2.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 28:
                     _hidl_request.enforceInterface(IGnss.kInterfaceName);
                     IAGnssRil _hidl_out_aGnssRilIface2 = getExtensionAGnssRil_2_0();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_aGnssRilIface2 != null ? _hidl_out_aGnssRilIface2.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_aGnssRilIface2 != null
+                                    ? _hidl_out_aGnssRilIface2.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 29:
                     _hidl_request.enforceInterface(IGnss.kInterfaceName);
-                    IGnssMeasurement _hidl_out_gnssMeasurementIface3 = getExtensionGnssMeasurement_2_0();
+                    IGnssMeasurement _hidl_out_gnssMeasurementIface3 =
+                            getExtensionGnssMeasurement_2_0();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_gnssMeasurementIface3 != null ? _hidl_out_gnssMeasurementIface3.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_gnssMeasurementIface3 != null
+                                    ? _hidl_out_gnssMeasurementIface3.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 30:
                     _hidl_request.enforceInterface(IGnss.kInterfaceName);
-                    IMeasurementCorrections _hidl_out_measurementCorrectionsIface = getExtensionMeasurementCorrections();
+                    IMeasurementCorrections _hidl_out_measurementCorrectionsIface =
+                            getExtensionMeasurementCorrections();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_measurementCorrectionsIface != null ? _hidl_out_measurementCorrectionsIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_measurementCorrectionsIface != null
+                                    ? _hidl_out_measurementCorrectionsIface.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 31:
                     _hidl_request.enforceInterface(IGnss.kInterfaceName);
-                    IGnssVisibilityControl _hidl_out_visibilityControlIface = getExtensionVisibilityControl();
+                    IGnssVisibilityControl _hidl_out_visibilityControlIface =
+                            getExtensionVisibilityControl();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_visibilityControlIface != null ? _hidl_out_visibilityControlIface.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_visibilityControlIface != null
+                                    ? _hidl_out_visibilityControlIface.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 32:
                     _hidl_request.enforceInterface(IGnss.kInterfaceName);
                     IGnssBatching _hidl_out_batchingIface2 = getExtensionGnssBatching_2_0();
                     _hidl_reply.writeStatus(0);
-                    _hidl_reply.writeStrongBinder(_hidl_out_batchingIface2 != null ? _hidl_out_batchingIface2.asBinder() : null);
+                    _hidl_reply.writeStrongBinder(
+                            _hidl_out_batchingIface2 != null
+                                    ? _hidl_out_batchingIface2.asBinder()
+                                    : null);
                     _hidl_reply.send();
                     return;
                 case 33:
@@ -1210,7 +1529,8 @@ public interface IGnss extends android.hardware.gnss.V1_1.IGnss {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

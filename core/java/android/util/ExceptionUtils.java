@@ -1,7 +1,9 @@
 package android.util;
 
 import android.os.ParcelableException;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.IOException;
 
 /* loaded from: classes4.dex */
@@ -37,13 +39,15 @@ public class ExceptionUtils {
         return getCompleteMessage(null, t);
     }
 
-    public static <E extends Throwable> void propagateIfInstanceOf(Throwable t, Class<E> c) throws Throwable {
+    public static <E extends Throwable> void propagateIfInstanceOf(Throwable t, Class<E> c)
+            throws Throwable {
         if (t != null && c.isInstance(t)) {
             throw c.cast(t);
         }
     }
 
-    public static <E extends Exception> RuntimeException propagate(Throwable t, Class<E> c) throws Exception {
+    public static <E extends Exception> RuntimeException propagate(Throwable t, Class<E> c)
+            throws Exception {
         propagateIfInstanceOf(t, c);
         return propagate(t);
     }

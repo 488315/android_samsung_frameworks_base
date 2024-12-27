@@ -44,10 +44,8 @@ public abstract class OrientationListener implements SensorListener {
     }
 
     @Override // android.hardware.SensorListener
-    public void onAccuracyChanged(int sensor, int accuracy) {
-    }
+    public void onAccuracyChanged(int sensor, int accuracy) {}
 
     @Override // android.hardware.SensorListener
-    public void onSensorChanged(int sensor, float[] values) {
-    }
+    public void onSensorChanged(int sensor, float[] values) {}
 }

@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -13,8 +14,7 @@ public interface IResolverRankerResult extends IInterface {
 
     public static class Default implements IResolverRankerResult {
         @Override // android.service.resolver.IResolverRankerResult
-        public void sendResult(List<ResolverTarget> results) throws RemoteException {
-        }
+        public void sendResult(List<ResolverTarget> results) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +22,7 @@ public interface IResolverRankerResult extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IResolverRankerResult {
+    public abstract static class Stub extends Binder implements IResolverRankerResult {
         public static final String DESCRIPTOR = "android.service.resolver.IResolverRankerResult";
         static final int TRANSACTION_sendResult = 1;
 
@@ -61,7 +61,8 @@ public interface IResolverRankerResult extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class DemuxFilterType implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterType> CREATOR = new Parcelable.Creator<DemuxFilterType>() { // from class: android.hardware.tv.tuner.DemuxFilterType.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterType createFromParcel(Parcel _aidl_source) {
-            DemuxFilterType _aidl_out = new DemuxFilterType();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DemuxFilterType> CREATOR =
+            new Parcelable.Creator<
+                    DemuxFilterType>() { // from class: android.hardware.tv.tuner.DemuxFilterType.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterType createFromParcel(Parcel _aidl_source) {
+                    DemuxFilterType _aidl_out = new DemuxFilterType();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterType[] newArray(int _aidl_size) {
-            return new DemuxFilterType[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterType[] newArray(int _aidl_size) {
+                    return new DemuxFilterType[_aidl_size];
+                }
+            };
     public int mainType = 0;
     public DemuxFilterSubType subType;
 
@@ -62,7 +64,9 @@ public class DemuxFilterType implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.subType = (DemuxFilterSubType) _aidl_parcel.readTypedObject(DemuxFilterSubType.CREATOR);
+                this.subType =
+                        (DemuxFilterSubType)
+                                _aidl_parcel.readTypedObject(DemuxFilterSubType.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

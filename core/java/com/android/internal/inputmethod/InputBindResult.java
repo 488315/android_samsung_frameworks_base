@@ -5,8 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseArray;
 import android.view.InputChannel;
-import com.android.internal.inputmethod.IAccessibilityInputMethodSession;
-import com.android.internal.inputmethod.IInputMethodSession;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -19,19 +18,22 @@ public final class InputBindResult implements Parcelable {
     public final IInputMethodSession method;
     public final int result;
     public final int sequence;
-    public static final Parcelable.Creator<InputBindResult> CREATOR = new Parcelable.Creator<InputBindResult>() { // from class: com.android.internal.inputmethod.InputBindResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputBindResult createFromParcel(Parcel source) {
-            return new InputBindResult(source);
-        }
+    public static final Parcelable.Creator<InputBindResult> CREATOR =
+            new Parcelable.Creator<
+                    InputBindResult>() { // from class:
+                                         // com.android.internal.inputmethod.InputBindResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputBindResult createFromParcel(Parcel source) {
+                    return new InputBindResult(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputBindResult[] newArray(int size) {
-            return new InputBindResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputBindResult[] newArray(int size) {
+                    return new InputBindResult[size];
+                }
+            };
     public static final InputBindResult NULL = error(5);
     public static final InputBindResult NO_IME = error(6);
     public static final InputBindResult NO_EDITOR = error(13);
@@ -65,7 +67,14 @@ public final class InputBindResult implements Parcelable {
         public static final int SUCCESS_WITH_IME_SESSION = 0;
     }
 
-    public InputBindResult(int result, IInputMethodSession method, SparseArray<IAccessibilityInputMethodSession> accessibilitySessions, InputChannel channel, String id, int sequence, boolean isInputMethodSuppressingSpellChecker) {
+    public InputBindResult(
+            int result,
+            IInputMethodSession method,
+            SparseArray<IAccessibilityInputMethodSession> accessibilitySessions,
+            InputChannel channel,
+            String id,
+            int sequence,
+            boolean isInputMethodSuppressingSpellChecker) {
         this.result = result;
         this.method = method;
         this.accessibilitySessions = accessibilitySessions;
@@ -85,7 +94,9 @@ public final class InputBindResult implements Parcelable {
             this.accessibilitySessions = new SparseArray<>(n);
             while (n > 0) {
                 int key = source.readInt();
-                IAccessibilityInputMethodSession value = IAccessibilityInputMethodSession.Stub.asInterface(source.readStrongBinder());
+                IAccessibilityInputMethodSession value =
+                        IAccessibilityInputMethodSession.Stub.asInterface(
+                                source.readStrongBinder());
                 this.accessibilitySessions.append(key, value);
                 n--;
             }
@@ -101,7 +112,19 @@ public final class InputBindResult implements Parcelable {
     }
 
     public String toString() {
-        return "InputBindResult{result=" + getResultString() + " method=" + this.method + " id=" + this.id + " sequence=" + this.sequence + " result=" + this.result + " isInputMethodSuppressingSpellChecker=" + this.isInputMethodSuppressingSpellChecker + "}";
+        return "InputBindResult{result="
+                + getResultString()
+                + " method="
+                + this.method
+                + " id="
+                + this.id
+                + " sequence="
+                + this.sequence
+                + " result="
+                + this.result
+                + " isInputMethodSuppressingSpellChecker="
+                + this.isInputMethodSuppressingSpellChecker
+                + "}";
     }
 
     @Override // android.os.Parcelable

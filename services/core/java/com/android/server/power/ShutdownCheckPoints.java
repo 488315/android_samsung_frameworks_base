@@ -5,8 +5,10 @@ import android.app.IActivityManager;
 import android.os.Process;
 import android.util.AtomicFile;
 import android.util.Log;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
@@ -23,8 +25,10 @@ import java.util.Iterator;
 public final class ShutdownCheckPoints {
     public final ArrayList mCheckPoints = new ArrayList();
     public final Injector mInjector;
-    public static final ShutdownCheckPoints INSTANCE = new ShutdownCheckPoints(new AnonymousClass1());
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS z");
+    public static final ShutdownCheckPoints INSTANCE =
+            new ShutdownCheckPoints(new AnonymousClass1());
+    public static final SimpleDateFormat DATE_FORMAT =
+            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS z");
     public static final File[] EMPTY_FILE_ARRAY = new File[0];
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -51,15 +55,17 @@ public final class ShutdownCheckPoints {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:15:0x0045, code lost:
-        
-            r2 = r0.processName;
-         */
-        @Override // com.android.server.power.ShutdownCheckPoints.SystemServerCheckPoint, com.android.server.power.ShutdownCheckPoints.CheckPoint
+
+           r2 = r0.processName;
+        */
+        @Override // com.android.server.power.ShutdownCheckPoints.SystemServerCheckPoint,
+                  // com.android.server.power.ShutdownCheckPoints.CheckPoint
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void dumpDetails(com.android.server.power.ShutdownCheckPoints.Injector r5, java.io.PrintWriter r6) {
+        public final void dumpDetails(
+                com.android.server.power.ShutdownCheckPoints.Injector r5, java.io.PrintWriter r6) {
             /*
                 r4 = this;
                 java.lang.String r0 = r4.findMethodName()
@@ -117,10 +123,14 @@ public final class ShutdownCheckPoints {
                 r6.println(r4)
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.ShutdownCheckPoints.BinderCheckPoint.dumpDetails(com.android.server.power.ShutdownCheckPoints$Injector, java.io.PrintWriter):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.power.ShutdownCheckPoints.BinderCheckPoint.dumpDetails(com.android.server.power.ShutdownCheckPoints$Injector,"
+                        + " java.io.PrintWriter):void");
         }
 
-        @Override // com.android.server.power.ShutdownCheckPoints.SystemServerCheckPoint, com.android.server.power.ShutdownCheckPoints.CheckPoint
+        @Override // com.android.server.power.ShutdownCheckPoints.SystemServerCheckPoint,
+                  // com.android.server.power.ShutdownCheckPoints.CheckPoint
         public final String getOrigin() {
             return "BINDER";
         }
@@ -157,21 +167,27 @@ public final class ShutdownCheckPoints {
         public final void run() {
             FileOutputStream fileOutputStream;
             this.mBaseFile.getParentFile().mkdirs();
-            final String str = this.mBaseFile.getName() + PackageManagerShellCommandDataLoader.STDIN_PATH;
-            File[] listFiles = this.mBaseFile.getParentFile().listFiles(new FilenameFilter() { // from class: com.android.server.power.ShutdownCheckPoints.FileDumperThread.1
-                @Override // java.io.FilenameFilter
-                public final boolean accept(File file, String str2) {
-                    if (!str2.startsWith(str)) {
-                        return false;
-                    }
-                    try {
-                        Long.valueOf(str2.substring(str.length()));
-                        return true;
-                    } catch (NumberFormatException unused) {
-                        return false;
-                    }
-                }
-            });
+            final String str =
+                    this.mBaseFile.getName() + PackageManagerShellCommandDataLoader.STDIN_PATH;
+            File[] listFiles =
+                    this.mBaseFile
+                            .getParentFile()
+                            .listFiles(
+                                    new FilenameFilter() { // from class:
+                                                           // com.android.server.power.ShutdownCheckPoints.FileDumperThread.1
+                                        @Override // java.io.FilenameFilter
+                                        public final boolean accept(File file, String str2) {
+                                            if (!str2.startsWith(str)) {
+                                                return false;
+                                            }
+                                            try {
+                                                Long.valueOf(str2.substring(str.length()));
+                                                return true;
+                                            } catch (NumberFormatException unused) {
+                                                return false;
+                                            }
+                                        }
+                                    });
             if (listFiles == null) {
                 listFiles = ShutdownCheckPoints.EMPTY_FILE_ARRAY;
             } else {
@@ -181,7 +197,12 @@ public final class ShutdownCheckPoints {
             for (int i = 0; i < length; i++) {
                 listFiles[i].delete();
             }
-            File file = new File(String.format("%s-%d", this.mBaseFile.getAbsolutePath(), Long.valueOf(System.currentTimeMillis())));
+            File file =
+                    new File(
+                            String.format(
+                                    "%s-%d",
+                                    this.mBaseFile.getAbsolutePath(),
+                                    Long.valueOf(System.currentTimeMillis())));
             AtomicFile atomicFile = new AtomicFile(this.mBaseFile);
             try {
                 fileOutputStream = atomicFile.startWrite();
@@ -270,14 +291,16 @@ public final class ShutdownCheckPoints {
             int i = 0;
             while (true) {
                 StackTraceElement[] stackTraceElementArr = this.mStackTraceElements;
-                if (i >= stackTraceElementArr.length || stackTraceElementArr[i].getClassName().equals(canonicalName)) {
+                if (i >= stackTraceElementArr.length
+                        || stackTraceElementArr[i].getClassName().equals(canonicalName)) {
                     break;
                 }
                 i++;
             }
             while (true) {
                 StackTraceElement[] stackTraceElementArr2 = this.mStackTraceElements;
-                if (i >= stackTraceElementArr2.length || !stackTraceElementArr2[i].getClassName().equals(canonicalName)) {
+                if (i >= stackTraceElementArr2.length
+                        || !stackTraceElementArr2[i].getClassName().equals(canonicalName)) {
                     break;
                 }
                 i++;
@@ -292,7 +315,8 @@ public final class ShutdownCheckPoints {
                 return null;
             }
             StackTraceElement stackTraceElement = stackTraceElementArr[findCallSiteIndex];
-            return AnyMotionDetector$$ExternalSyntheticOutline0.m(stackTraceElement.getClassName(), ".", stackTraceElement.getMethodName());
+            return AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    stackTraceElement.getClassName(), ".", stackTraceElement.getMethodName());
         }
 
         @Override // com.android.server.power.ShutdownCheckPoints.CheckPoint
@@ -343,8 +367,12 @@ public final class ShutdownCheckPoints {
 
     public void recordCheckPointInternal(int i, String str) {
         long currentTimeMillis = this.mInjector.currentTimeMillis();
-        recordCheckPointInternal(i == Process.myPid() ? new SystemServerCheckPoint(currentTimeMillis, str) : new BinderCheckPoint(i, str, currentTimeMillis));
-        android.util.Slog.v("ShutdownCheckPoints", "Binder shutdown checkpoint recorded with pid=" + i);
+        recordCheckPointInternal(
+                i == Process.myPid()
+                        ? new SystemServerCheckPoint(currentTimeMillis, str)
+                        : new BinderCheckPoint(i, str, currentTimeMillis));
+        android.util.Slog.v(
+                "ShutdownCheckPoints", "Binder shutdown checkpoint recorded with pid=" + i);
     }
 
     public final void recordCheckPointInternal(CheckPoint checkPoint) {
@@ -363,13 +391,19 @@ public final class ShutdownCheckPoints {
     }
 
     public void recordCheckPointInternal(String str) {
-        recordCheckPointInternal(new SystemServerCheckPoint(this.mInjector.currentTimeMillis(), str));
+        recordCheckPointInternal(
+                new SystemServerCheckPoint(this.mInjector.currentTimeMillis(), str));
         android.util.Slog.v("ShutdownCheckPoints", "System server shutdown checkpoint recorded");
     }
 
     public void recordCheckPointInternal(String str, String str2, String str3) {
         long currentTimeMillis = this.mInjector.currentTimeMillis();
-        recordCheckPointInternal("android".equals(str2) ? new SystemServerCheckPoint(currentTimeMillis, str3) : new IntentCheckPoint(str, currentTimeMillis, str2, str3));
-        android.util.Slog.v("ShutdownCheckPoints", "Shutdown intent checkpoint recorded intent=" + str + " from package=" + str2);
+        recordCheckPointInternal(
+                "android".equals(str2)
+                        ? new SystemServerCheckPoint(currentTimeMillis, str3)
+                        : new IntentCheckPoint(str, currentTimeMillis, str2, str3));
+        android.util.Slog.v(
+                "ShutdownCheckPoints",
+                "Shutdown intent checkpoint recorded intent=" + str + " from package=" + str2);
     }
 }

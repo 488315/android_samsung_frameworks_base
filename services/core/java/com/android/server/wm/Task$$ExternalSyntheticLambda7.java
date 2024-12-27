@@ -3,6 +3,7 @@ package com.android.server.wm;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.os.IBinder;
+
 import com.android.internal.util.function.TriPredicate;
 import com.android.modules.utils.TypedXmlSerializer;
 
@@ -21,8 +22,10 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda7 implements Tri
         switch (this.$r8$classId) {
             case 0:
                 ActivityRecord activityRecord2 = (ActivityRecord) obj2;
-                ActivityManager.TaskDescription taskDescription2 = (ActivityManager.TaskDescription) obj3;
-                if (!activityRecord.mTaskOverlay && (taskDescription = activityRecord.taskDescription) != null) {
+                ActivityManager.TaskDescription taskDescription2 =
+                        (ActivityManager.TaskDescription) obj3;
+                if (!activityRecord.mTaskOverlay
+                        && (taskDescription = activityRecord.taskDescription) != null) {
                     if (taskDescription2.getLabel() == null) {
                         taskDescription2.setLabel(taskDescription.getLabel());
                     }
@@ -37,24 +40,33 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda7 implements Tri
                             taskDescription2.setPrimaryColor(taskDescription.getPrimaryColor());
                         }
                         if (taskDescription2.getBackgroundColor() == 0) {
-                            taskDescription2.setBackgroundColor(taskDescription.getBackgroundColor());
+                            taskDescription2.setBackgroundColor(
+                                    taskDescription.getBackgroundColor());
                         }
                         if (taskDescription2.getStatusBarColor() == 0) {
                             taskDescription2.setStatusBarColor(taskDescription.getStatusBarColor());
-                            taskDescription2.setEnsureStatusBarContrastWhenTransparent(taskDescription.getEnsureStatusBarContrastWhenTransparent());
+                            taskDescription2.setEnsureStatusBarContrastWhenTransparent(
+                                    taskDescription.getEnsureStatusBarContrastWhenTransparent());
                         }
                         if (taskDescription2.getSystemBarsAppearance() == 0) {
-                            taskDescription2.setSystemBarsAppearance(taskDescription.getSystemBarsAppearance());
+                            taskDescription2.setSystemBarsAppearance(
+                                    taskDescription.getSystemBarsAppearance());
                         }
-                        if (taskDescription2.getTopOpaqueSystemBarsAppearance() == 0 && activityRecord.occludesParent(true)) {
-                            taskDescription2.setTopOpaqueSystemBarsAppearance(taskDescription.getSystemBarsAppearance());
+                        if (taskDescription2.getTopOpaqueSystemBarsAppearance() == 0
+                                && activityRecord.occludesParent(true)) {
+                            taskDescription2.setTopOpaqueSystemBarsAppearance(
+                                    taskDescription.getSystemBarsAppearance());
                         }
                         if (taskDescription2.getNavigationBarColor() == 0) {
-                            taskDescription2.setNavigationBarColor(taskDescription.getNavigationBarColor());
-                            taskDescription2.setEnsureNavigationBarContrastWhenTransparent(taskDescription.getEnsureNavigationBarContrastWhenTransparent());
+                            taskDescription2.setNavigationBarColor(
+                                    taskDescription.getNavigationBarColor());
+                            taskDescription2.setEnsureNavigationBarContrastWhenTransparent(
+                                    taskDescription
+                                            .getEnsureNavigationBarContrastWhenTransparent());
                         }
                         if (taskDescription2.getBackgroundColorFloating() == 0) {
-                            taskDescription2.setBackgroundColorFloating(taskDescription.getBackgroundColorFloating());
+                            taskDescription2.setBackgroundColorFloating(
+                                    taskDescription.getBackgroundColorFloating());
                         }
                         if (activityRecord.occludesParent(false)) {
                             taskDescription2.setColorsAreDetermined();
@@ -67,14 +79,16 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda7 implements Tri
                 break;
             case 1:
                 IBinder iBinder = (IBinder) obj3;
-                if (activityRecord.task.mTaskId == ((Integer) obj2).intValue() || activityRecord.token == iBinder || !activityRecord.canBeTopRunning()) {
-                }
+                if (activityRecord.task.mTaskId == ((Integer) obj2).intValue()
+                        || activityRecord.token == iBinder
+                        || !activityRecord.canBeTopRunning()) {}
                 break;
             case 2:
                 ActivityRecord activityRecord3 = (ActivityRecord) obj2;
                 TypedXmlSerializer typedXmlSerializer = (TypedXmlSerializer) obj3;
                 if (activityRecord.info.persistableMode != 0 && activityRecord.isPersistable()) {
-                    if (((activityRecord.intent.getFlags() & 524288) | 8192) != 524288 || activityRecord == activityRecord3) {
+                    if (((activityRecord.intent.getFlags() & 524288) | 8192) != 524288
+                            || activityRecord == activityRecord3) {
                         try {
                             typedXmlSerializer.startTag((String) null, "activity");
                             activityRecord.saveToXml(typedXmlSerializer);
@@ -90,8 +104,9 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda7 implements Tri
             default:
                 ComponentName componentName = (ComponentName) obj2;
                 int intValue = ((Integer) obj3).intValue();
-                if (activityRecord.finishing || !activityRecord.mActivityComponent.equals(componentName) || activityRecord.mUserId != intValue) {
-                }
+                if (activityRecord.finishing
+                        || !activityRecord.mActivityComponent.equals(componentName)
+                        || activityRecord.mUserId != intValue) {}
                 break;
         }
         return true;

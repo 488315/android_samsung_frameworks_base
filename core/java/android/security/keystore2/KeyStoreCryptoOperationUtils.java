@@ -11,20 +11,21 @@ import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.UserNotAuthenticatedException;
 import android.system.keystore2.Authorization;
 import android.util.Log;
+
+import libcore.util.EmptyArray;
+
 import java.security.GeneralSecurityException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import libcore.util.EmptyArray;
 
 /* loaded from: classes3.dex */
 abstract class KeyStoreCryptoOperationUtils {
     private static volatile SecureRandom sRng;
 
-    private KeyStoreCryptoOperationUtils() {
-    }
+    private KeyStoreCryptoOperationUtils() {}
 
     public static boolean canUserAuthorizationSucceed(AndroidKeyStoreKey key) {
         List<Long> keySids = new ArrayList<>();
@@ -42,7 +43,11 @@ abstract class KeyStoreCryptoOperationUtils {
         if (rootSid != 0 && keySids.contains(Long.valueOf(rootSid))) {
             return true;
         }
-        long[] biometricSids = ((BiometricManager) ActivityThread.currentApplication().getSystemService(BiometricManager.class)).getAuthenticatorIds();
+        long[] biometricSids =
+                ((BiometricManager)
+                                ActivityThread.currentApplication()
+                                        .getSystemService(BiometricManager.class))
+                        .getAuthenticatorIds();
         boolean canUnlockViaBiometrics = biometricSids.length > 0;
         int length = biometricSids.length;
         int i = 0;
@@ -59,7 +64,8 @@ abstract class KeyStoreCryptoOperationUtils {
         return canUnlockViaBiometrics;
     }
 
-    public static InvalidKeyException getInvalidKeyException(AndroidKeyStoreKey key, KeyStoreException e) {
+    public static InvalidKeyException getInvalidKeyException(
+            AndroidKeyStoreKey key, KeyStoreException e) {
         switch (e.getErrorCode()) {
             case -26:
             case 2:
@@ -77,7 +83,8 @@ abstract class KeyStoreCryptoOperationUtils {
         }
     }
 
-    public static GeneralSecurityException getExceptionForCipherInit(AndroidKeyStoreKey key, KeyStoreException e) {
+    public static GeneralSecurityException getExceptionForCipherInit(
+            AndroidKeyStoreKey key, KeyStoreException e) {
         switch (e.getErrorCode()) {
             case -55:
                 return new InvalidAlgorithmParameterException("Caller-provided IV not permitted");
@@ -113,13 +120,17 @@ abstract class KeyStoreCryptoOperationUtils {
                 operation.abort();
             } catch (KeyStoreException e) {
                 if (e.getErrorCode() != -28) {
-                    Log.w("KeyStoreCryptoOperationUtils", "Encountered error trying to abort a keystore operation.", e);
+                    Log.w(
+                            "KeyStoreCryptoOperationUtils",
+                            "Encountered error trying to abort a keystore operation.",
+                            e);
                 }
             }
         }
     }
 
-    static long getOrMakeOperationChallenge(KeyStoreOperation operation, AndroidKeyStoreKey key) throws KeyPermanentlyInvalidatedException {
+    static long getOrMakeOperationChallenge(KeyStoreOperation operation, AndroidKeyStoreKey key)
+            throws KeyPermanentlyInvalidatedException {
         if (operation.getChallenge() != null) {
             if (!canUserAuthorizationSucceed(key)) {
                 throw new KeyPermanentlyInvalidatedException();

@@ -1,7 +1,9 @@
 package com.android.server.timezonedetector.location;
 
 import android.os.Handler;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
@@ -30,24 +32,26 @@ public final class HandlerThreadingDomain {
         final AtomicReference atomicReference = new AtomicReference();
         final AtomicReference atomicReference2 = new AtomicReference();
         final CountDownLatch countDownLatch = new CountDownLatch(1);
-        handler.post(new Runnable() { // from class: com.android.server.timezonedetector.location.HandlerThreadingDomain$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                AtomicReference atomicReference3 = atomicReference;
-                Callable callable2 = callable;
-                AtomicReference atomicReference4 = atomicReference2;
-                CountDownLatch countDownLatch2 = countDownLatch;
-                try {
-                    try {
-                        atomicReference3.set(callable2.call());
-                    } catch (Exception e) {
-                        atomicReference4.set(e);
+        handler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.timezonedetector.location.HandlerThreadingDomain$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        AtomicReference atomicReference3 = atomicReference;
+                        Callable callable2 = callable;
+                        AtomicReference atomicReference4 = atomicReference2;
+                        CountDownLatch countDownLatch2 = countDownLatch;
+                        try {
+                            try {
+                                atomicReference3.set(callable2.call());
+                            } catch (Exception e) {
+                                atomicReference4.set(e);
+                            }
+                        } finally {
+                            countDownLatch2.countDown();
+                        }
                     }
-                } finally {
-                    countDownLatch2.countDown();
-                }
-            }
-        });
+                });
         try {
             if (!countDownLatch.await(j, TimeUnit.MILLISECONDS)) {
                 throw new RuntimeException("Timed out");
@@ -63,13 +67,16 @@ public final class HandlerThreadingDomain {
 
     public final void postAndWait(final Runnable runnable, long j) {
         try {
-            postAndWait(new Callable() { // from class: com.android.server.timezonedetector.location.ThreadingDomain$$ExternalSyntheticLambda0
-                @Override // java.util.concurrent.Callable
-                public final Object call() {
-                    runnable.run();
-                    return null;
-                }
-            }, j);
+            postAndWait(
+                    new Callable() { // from class:
+                                     // com.android.server.timezonedetector.location.ThreadingDomain$$ExternalSyntheticLambda0
+                        @Override // java.util.concurrent.Callable
+                        public final Object call() {
+                            runnable.run();
+                            return null;
+                        }
+                    },
+                    j);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

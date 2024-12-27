@@ -2,6 +2,7 @@ package com.android.server.cocktailbar.watcher;
 
 import android.app.ActivityManager;
 import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -19,8 +20,7 @@ public final class CocktailBarUsageStateWatcher {
     public AnonymousClass1 mUsageStatsWatcher;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface OnCocktailBarWatcherListener {
-    }
+    public interface OnCocktailBarWatcherListener {}
 
     public final String dump() {
         StringBuffer stringBuffer = new StringBuffer("[UsageStateWatcher]: ");

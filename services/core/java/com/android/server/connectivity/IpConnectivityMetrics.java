@@ -24,13 +24,14 @@ import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.Base64;
 import android.util.Log;
+
 import com.android.internal.util.RingBuffer;
 import com.android.internal.util.TokenBucket;
 import com.android.server.LocalServices;
 import com.android.server.SystemService;
-import com.android.server.connectivity.NetdEventListenerService;
 import com.android.server.connectivity.NetdEventListenerService.DnsEventHandler;
 import com.android.server.connectivity.metrics.nano.IpConnectivityLogClass;
+
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -45,7 +46,8 @@ import java.util.function.ToIntFunction;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class IpConnectivityMetrics extends SystemService {
-    public static final IpConnectivityMetrics$$ExternalSyntheticLambda0 READ_BUFFER_SIZE = new IpConnectivityMetrics$$ExternalSyntheticLambda0();
+    public static final IpConnectivityMetrics$$ExternalSyntheticLambda0 READ_BUFFER_SIZE =
+            new IpConnectivityMetrics$$ExternalSyntheticLambda0();
     public final Impl impl;
     public final ArrayMap mBuckets;
     public ArrayList mBuffer;
@@ -59,16 +61,19 @@ public final class IpConnectivityMetrics extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Impl extends IIpConnectivityMetrics.Stub {
-        public Impl() {
-        }
+        public Impl() {}
 
         public final boolean addNetdEventCallback(int i, INetdEventCallback iNetdEventCallback) {
             boolean z = true;
             int callingUid = Binder.getCallingUid();
             if (callingUid != 1000) {
-                throw new SecurityException(String.format("Uid %d has no permission to listen for netd events.", Integer.valueOf(callingUid)));
+                throw new SecurityException(
+                        String.format(
+                                "Uid %d has no permission to listen for netd events.",
+                                Integer.valueOf(callingUid)));
             }
-            NetdEventListenerService netdEventListenerService = IpConnectivityMetrics.this.mNetdListener;
+            NetdEventListenerService netdEventListenerService =
+                    IpConnectivityMetrics.this.mNetdListener;
             if (netdEventListenerService == null) {
                 return false;
             }
@@ -92,10 +97,14 @@ public final class IpConnectivityMetrics extends SystemService {
         }
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        public final void dump(FileDescriptor fileDescriptor, final PrintWriter printWriter, String[] strArr) {
+        public final void dump(
+                FileDescriptor fileDescriptor, final PrintWriter printWriter, String[] strArr) {
             char c;
             int i;
-            IpConnectivityMetrics.this.getContext().enforceCallingOrSelfPermission("android.permission.DUMP", "IpConnectivityMetrics");
+            IpConnectivityMetrics.this
+                    .getContext()
+                    .enforceCallingOrSelfPermission(
+                            "android.permission.DUMP", "IpConnectivityMetrics");
             IpConnectivityMetrics.this.mNetdListener.writeMobileDataDnsFile();
             String str = strArr.length > 0 ? strArr[0] : "";
             switch (str.hashCode()) {
@@ -136,12 +145,17 @@ public final class IpConnectivityMetrics extends SystemService {
                 return;
             }
             if (c == 1) {
-                ((ArrayList) IpConnectivityMetrics.this.listEventsAsProtos()).forEach(new Consumer() { // from class: com.android.server.connectivity.IpConnectivityMetrics$$ExternalSyntheticLambda1
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        printWriter.print(((IpConnectivityLogClass.IpConnectivityEvent) obj).toString());
-                    }
-                });
+                ((ArrayList) IpConnectivityMetrics.this.listEventsAsProtos())
+                        .forEach(
+                                new Consumer() { // from class:
+                                                 // com.android.server.connectivity.IpConnectivityMetrics$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        printWriter.print(
+                                                ((IpConnectivityLogClass.IpConnectivityEvent) obj)
+                                                        .toString());
+                                    }
+                                });
                 return;
             }
             if (c == 2) {
@@ -151,7 +165,9 @@ public final class IpConnectivityMetrics extends SystemService {
                     i = ipConnectivityMetrics.mDropped;
                 }
                 try {
-                    fileOutputStream.write(IpConnectivityEventBuilder.serialize(i, ipConnectivityMetrics.listEventsAsProtos()));
+                    fileOutputStream.write(
+                            IpConnectivityEventBuilder.serialize(
+                                    i, ipConnectivityMetrics.listEventsAsProtos()));
                     fileOutputStream.flush();
                     return;
                 } catch (IOException e) {
@@ -167,25 +183,46 @@ public final class IpConnectivityMetrics extends SystemService {
                 printWriter.println(((ConnectivityMetricsEvent) it.next()).toString());
             }
             printWriter.println("");
-            NetdEventListenerService netdEventListenerService = ipConnectivityMetrics2.mNetdListener;
+            NetdEventListenerService netdEventListenerService =
+                    ipConnectivityMetrics2.mNetdListener;
             if (netdEventListenerService != null) {
                 synchronized (netdEventListenerService) {
                     try {
-                        NetdEventListenerService.NetworkMetricsSnapshot collect = NetdEventListenerService.NetworkMetricsSnapshot.collect(System.currentTimeMillis(), netdEventListenerService.mNetworkMetrics);
+                        NetdEventListenerService.NetworkMetricsSnapshot collect =
+                                NetdEventListenerService.NetworkMetricsSnapshot.collect(
+                                        System.currentTimeMillis(),
+                                        netdEventListenerService.mNetworkMetrics);
                         if (!((ArrayList) collect.stats).isEmpty()) {
                             netdEventListenerService.mNetworkMetricsSnapshots.append(collect);
                         }
                         printWriter.println("dns/connect events:");
-                        for (int i2 = 0; i2 < netdEventListenerService.mNetworkMetrics.size(); i2++) {
-                            printWriter.println(((NetworkMetrics) netdEventListenerService.mNetworkMetrics.valueAt(i2)).connectMetrics);
+                        for (int i2 = 0;
+                                i2 < netdEventListenerService.mNetworkMetrics.size();
+                                i2++) {
+                            printWriter.println(
+                                    ((NetworkMetrics)
+                                                    netdEventListenerService.mNetworkMetrics
+                                                            .valueAt(i2))
+                                            .connectMetrics);
                         }
-                        for (int i3 = 0; i3 < netdEventListenerService.mNetworkMetrics.size(); i3++) {
-                            printWriter.println(((NetworkMetrics) netdEventListenerService.mNetworkMetrics.valueAt(i3)).dnsMetrics);
+                        for (int i3 = 0;
+                                i3 < netdEventListenerService.mNetworkMetrics.size();
+                                i3++) {
+                            printWriter.println(
+                                    ((NetworkMetrics)
+                                                    netdEventListenerService.mNetworkMetrics
+                                                            .valueAt(i3))
+                                            .dnsMetrics);
                         }
                         printWriter.println("");
                         printWriter.println("network statistics:");
-                        netdEventListenerService.collectPendingMetricsSnapshot(System.currentTimeMillis(), false);
-                        for (NetdEventListenerService.NetworkMetricsSnapshot networkMetricsSnapshot : (NetdEventListenerService.NetworkMetricsSnapshot[]) netdEventListenerService.mNetworkMetricsSnapshots.toArray()) {
+                        netdEventListenerService.collectPendingMetricsSnapshot(
+                                System.currentTimeMillis(), false);
+                        for (NetdEventListenerService.NetworkMetricsSnapshot
+                                networkMetricsSnapshot :
+                                        (NetdEventListenerService.NetworkMetricsSnapshot[])
+                                                netdEventListenerService.mNetworkMetricsSnapshots
+                                                        .toArray()) {
                             printWriter.println(networkMetricsSnapshot);
                         }
                         printWriter.println("");
@@ -193,7 +230,8 @@ public final class IpConnectivityMetrics extends SystemService {
                         for (int i4 = 0; i4 < netdEventListenerService.mWakeupStats.size(); i4++) {
                             printWriter.println(netdEventListenerService.mWakeupStats.valueAt(i4));
                         }
-                        for (WakeupEvent wakeupEvent : (WakeupEvent[]) netdEventListenerService.mWakeupEvents.toArray()) {
+                        for (WakeupEvent wakeupEvent :
+                                (WakeupEvent[]) netdEventListenerService.mWakeupEvents.toArray()) {
                             printWriter.println(wakeupEvent);
                         }
                     } catch (Throwable th) {
@@ -202,41 +240,65 @@ public final class IpConnectivityMetrics extends SystemService {
                 }
             }
             printWriter.println("");
-            DefaultNetworkMetrics defaultNetworkMetrics = ipConnectivityMetrics2.mDefaultNetworkMetrics;
+            DefaultNetworkMetrics defaultNetworkMetrics =
+                    ipConnectivityMetrics2.mDefaultNetworkMetrics;
             synchronized (defaultNetworkMetrics) {
                 try {
                     printWriter.println("default network events:");
                     long currentTimeMillis = System.currentTimeMillis();
                     long elapsedRealtime = SystemClock.elapsedRealtime();
-                    for (DefaultNetworkEvent defaultNetworkEvent : (DefaultNetworkEvent[]) defaultNetworkMetrics.mEventsLog.toArray()) {
+                    for (DefaultNetworkEvent defaultNetworkEvent :
+                            (DefaultNetworkEvent[]) defaultNetworkMetrics.mEventsLog.toArray()) {
                         long j = currentTimeMillis - defaultNetworkEvent.durationMs;
-                        printWriter.println(String.format("%tT.%tL: %s", Long.valueOf(j), Long.valueOf(j), defaultNetworkEvent));
+                        printWriter.println(
+                                String.format(
+                                        "%tT.%tL: %s",
+                                        Long.valueOf(j), Long.valueOf(j), defaultNetworkEvent));
                     }
                     defaultNetworkMetrics.mCurrentDefaultNetwork.updateDuration(elapsedRealtime);
                     if (defaultNetworkMetrics.mIsCurrentlyValid) {
-                        DefaultNetworkEvent defaultNetworkEvent2 = defaultNetworkMetrics.mCurrentDefaultNetwork;
-                        defaultNetworkEvent2.validatedMs = (elapsedRealtime - defaultNetworkMetrics.mLastValidationTimeMs) + defaultNetworkEvent2.validatedMs;
+                        DefaultNetworkEvent defaultNetworkEvent2 =
+                                defaultNetworkMetrics.mCurrentDefaultNetwork;
+                        defaultNetworkEvent2.validatedMs =
+                                (elapsedRealtime - defaultNetworkMetrics.mLastValidationTimeMs)
+                                        + defaultNetworkEvent2.validatedMs;
                         defaultNetworkMetrics.mLastValidationTimeMs = elapsedRealtime;
                     }
-                    DefaultNetworkEvent defaultNetworkEvent3 = defaultNetworkMetrics.mCurrentDefaultNetwork;
+                    DefaultNetworkEvent defaultNetworkEvent3 =
+                            defaultNetworkMetrics.mCurrentDefaultNetwork;
                     long j2 = currentTimeMillis - defaultNetworkEvent3.durationMs;
-                    printWriter.println(String.format("%tT.%tL: %s", Long.valueOf(j2), Long.valueOf(j2), defaultNetworkEvent3));
+                    printWriter.println(
+                            String.format(
+                                    "%tT.%tL: %s",
+                                    Long.valueOf(j2), Long.valueOf(j2), defaultNetworkEvent3));
                 } catch (Throwable th2) {
                     throw th2;
                 }
             }
         }
 
-        public final void logDefaultNetworkEvent(Network network, int i, boolean z, LinkProperties linkProperties, NetworkCapabilities networkCapabilities, Network network2, int i2, LinkProperties linkProperties2, NetworkCapabilities networkCapabilities2) {
+        public final void logDefaultNetworkEvent(
+                Network network,
+                int i,
+                boolean z,
+                LinkProperties linkProperties,
+                NetworkCapabilities networkCapabilities,
+                Network network2,
+                int i2,
+                LinkProperties linkProperties2,
+                NetworkCapabilities networkCapabilities2) {
             NetworkStack.checkNetworkStackPermission(IpConnectivityMetrics.this.getContext());
             long elapsedRealtime = SystemClock.elapsedRealtime();
-            DefaultNetworkMetrics defaultNetworkMetrics = IpConnectivityMetrics.this.mDefaultNetworkMetrics;
+            DefaultNetworkMetrics defaultNetworkMetrics =
+                    IpConnectivityMetrics.this.mDefaultNetworkMetrics;
             synchronized (defaultNetworkMetrics) {
-                defaultNetworkMetrics.logCurrentDefaultNetwork(elapsedRealtime, network2, i2, linkProperties2, networkCapabilities2);
+                defaultNetworkMetrics.logCurrentDefaultNetwork(
+                        elapsedRealtime, network2, i2, linkProperties2, networkCapabilities2);
                 DefaultNetworkEvent defaultNetworkEvent = new DefaultNetworkEvent(elapsedRealtime);
                 defaultNetworkEvent.durationMs = elapsedRealtime;
                 if (network != null) {
-                    DefaultNetworkMetrics.fillLinkInfo(defaultNetworkEvent, network, linkProperties, networkCapabilities);
+                    DefaultNetworkMetrics.fillLinkInfo(
+                            defaultNetworkEvent, network, linkProperties, networkCapabilities);
                     defaultNetworkEvent.initialScore = i;
                     if (z) {
                         defaultNetworkMetrics.mIsCurrentlyValid = true;
@@ -251,15 +313,19 @@ public final class IpConnectivityMetrics extends SystemService {
 
         public final void logDefaultNetworkValidity(boolean z) {
             NetworkStack.checkNetworkStackPermission(IpConnectivityMetrics.this.getContext());
-            DefaultNetworkMetrics defaultNetworkMetrics = IpConnectivityMetrics.this.mDefaultNetworkMetrics;
+            DefaultNetworkMetrics defaultNetworkMetrics =
+                    IpConnectivityMetrics.this.mDefaultNetworkMetrics;
             long elapsedRealtime = SystemClock.elapsedRealtime();
             synchronized (defaultNetworkMetrics) {
                 if (!z) {
                     try {
                         if (defaultNetworkMetrics.mIsCurrentlyValid) {
                             defaultNetworkMetrics.mIsCurrentlyValid = false;
-                            DefaultNetworkEvent defaultNetworkEvent = defaultNetworkMetrics.mCurrentDefaultNetwork;
-                            defaultNetworkEvent.validatedMs = (elapsedRealtime - defaultNetworkMetrics.mLastValidationTimeMs) + defaultNetworkEvent.validatedMs;
+                            DefaultNetworkEvent defaultNetworkEvent =
+                                    defaultNetworkMetrics.mCurrentDefaultNetwork;
+                            defaultNetworkEvent.validatedMs =
+                                    (elapsedRealtime - defaultNetworkMetrics.mLastValidationTimeMs)
+                                            + defaultNetworkEvent.validatedMs;
                         }
                     } catch (Throwable th) {
                         throw th;
@@ -278,11 +344,15 @@ public final class IpConnectivityMetrics extends SystemService {
             synchronized (ipConnectivityMetrics.mLock) {
                 try {
                     ipConnectivityMetrics.mEventLog.append(connectivityMetricsEvent);
-                    int size = ipConnectivityMetrics.mCapacity - ipConnectivityMetrics.mBuffer.size();
+                    int size =
+                            ipConnectivityMetrics.mCapacity - ipConnectivityMetrics.mBuffer.size();
                     if (connectivityMetricsEvent == null) {
                         return size;
                     }
-                    TokenBucket tokenBucket = (TokenBucket) ipConnectivityMetrics.mBuckets.get(connectivityMetricsEvent.data.getClass());
+                    TokenBucket tokenBucket =
+                            (TokenBucket)
+                                    ipConnectivityMetrics.mBuckets.get(
+                                            connectivityMetricsEvent.data.getClass());
                     if (tokenBucket != null && !tokenBucket.get()) {
                         return -1;
                     }
@@ -301,9 +371,13 @@ public final class IpConnectivityMetrics extends SystemService {
             boolean z = true;
             int callingUid = Binder.getCallingUid();
             if (callingUid != 1000) {
-                throw new SecurityException(String.format("Uid %d has no permission to listen for netd events.", Integer.valueOf(callingUid)));
+                throw new SecurityException(
+                        String.format(
+                                "Uid %d has no permission to listen for netd events.",
+                                Integer.valueOf(callingUid)));
             }
-            NetdEventListenerService netdEventListenerService = IpConnectivityMetrics.this.mNetdListener;
+            NetdEventListenerService netdEventListenerService =
+                    IpConnectivityMetrics.this.mNetdListener;
             if (netdEventListenerService == null) {
                 return true;
             }
@@ -328,11 +402,11 @@ public final class IpConnectivityMetrics extends SystemService {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class LoggerImpl {
-    }
+    public final class LoggerImpl {}
 
     /* renamed from: -$$Nest$mcmdFlush, reason: not valid java name */
-    public static void m367$$Nest$mcmdFlush(IpConnectivityMetrics ipConnectivityMetrics, PrintWriter printWriter) {
+    public static void m367$$Nest$mcmdFlush(
+            IpConnectivityMetrics ipConnectivityMetrics, PrintWriter printWriter) {
         ArrayList arrayList;
         int i;
         String str;
@@ -347,7 +421,10 @@ public final class IpConnectivityMetrics extends SystemService {
             try {
                 Iterator it = ((ArrayList) defaultNetworkMetrics.mEvents).iterator();
                 while (it.hasNext()) {
-                    ((ArrayList) proto).add(IpConnectivityEventBuilder.toProto((DefaultNetworkEvent) it.next()));
+                    ((ArrayList) proto)
+                            .add(
+                                    IpConnectivityEventBuilder.toProto(
+                                            (DefaultNetworkEvent) it.next()));
                 }
                 ((ArrayList) defaultNetworkMetrics.mEvents).clear();
             } catch (Throwable th) {
@@ -359,22 +436,34 @@ public final class IpConnectivityMetrics extends SystemService {
             synchronized (netdEventListenerService) {
                 for (int i2 = 0; i2 < netdEventListenerService.mNetworkMetrics.size(); i2++) {
                     try {
-                        ConnectStats connectStats = ((NetworkMetrics) netdEventListenerService.mNetworkMetrics.valueAt(i2)).connectMetrics;
+                        ConnectStats connectStats =
+                                ((NetworkMetrics)
+                                                netdEventListenerService.mNetworkMetrics.valueAt(
+                                                        i2))
+                                        .connectMetrics;
                         if (connectStats.eventCount != 0) {
-                            ((ArrayList) proto).add(IpConnectivityEventBuilder.toProto(connectStats));
+                            ((ArrayList) proto)
+                                    .add(IpConnectivityEventBuilder.toProto(connectStats));
                         }
                     } catch (Throwable th2) {
                         throw th2;
                     }
                 }
                 for (int i3 = 0; i3 < netdEventListenerService.mNetworkMetrics.size(); i3++) {
-                    DnsEvent dnsEvent = ((NetworkMetrics) netdEventListenerService.mNetworkMetrics.valueAt(i3)).dnsMetrics;
+                    DnsEvent dnsEvent =
+                            ((NetworkMetrics) netdEventListenerService.mNetworkMetrics.valueAt(i3))
+                                    .dnsMetrics;
                     if (dnsEvent.eventCount != 0) {
                         ((ArrayList) proto).add(IpConnectivityEventBuilder.toProto(dnsEvent));
                     }
                 }
                 for (int i4 = 0; i4 < netdEventListenerService.mWakeupStats.size(); i4++) {
-                    ((ArrayList) proto).add(IpConnectivityEventBuilder.toProto((WakeupStats) netdEventListenerService.mWakeupStats.valueAt(i4)));
+                    ((ArrayList) proto)
+                            .add(
+                                    IpConnectivityEventBuilder.toProto(
+                                            (WakeupStats)
+                                                    netdEventListenerService.mWakeupStats.valueAt(
+                                                            i4)));
                 }
                 netdEventListenerService.mNetworkMetrics.clear();
                 netdEventListenerService.mWakeupStats.clear();
@@ -392,7 +481,8 @@ public final class IpConnectivityMetrics extends SystemService {
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public IpConnectivityMetrics(Context context) {
         super(context);
-        IpConnectivityMetrics$$ExternalSyntheticLambda0 ipConnectivityMetrics$$ExternalSyntheticLambda0 = READ_BUFFER_SIZE;
+        IpConnectivityMetrics$$ExternalSyntheticLambda0
+                ipConnectivityMetrics$$ExternalSyntheticLambda0 = READ_BUFFER_SIZE;
         this.mLock = new Object();
         this.impl = new Impl();
         this.mEventLog = new RingBuffer(ConnectivityMetricsEvent.class, 500);
@@ -434,13 +524,26 @@ public final class IpConnectivityMetrics extends SystemService {
                 try {
                     arrayList2 = new ArrayList();
                     for (int i = 0; i < netdEventListenerService.mNetworkMetrics.size(); i++) {
-                        arrayList2.add(IpConnectivityEventBuilder.toProto(((NetworkMetrics) netdEventListenerService.mNetworkMetrics.valueAt(i)).connectMetrics));
+                        arrayList2.add(
+                                IpConnectivityEventBuilder.toProto(
+                                        ((NetworkMetrics)
+                                                        netdEventListenerService.mNetworkMetrics
+                                                                .valueAt(i))
+                                                .connectMetrics));
                     }
                     for (int i2 = 0; i2 < netdEventListenerService.mNetworkMetrics.size(); i2++) {
-                        arrayList2.add(IpConnectivityEventBuilder.toProto(((NetworkMetrics) netdEventListenerService.mNetworkMetrics.valueAt(i2)).dnsMetrics));
+                        arrayList2.add(
+                                IpConnectivityEventBuilder.toProto(
+                                        ((NetworkMetrics)
+                                                        netdEventListenerService.mNetworkMetrics
+                                                                .valueAt(i2))
+                                                .dnsMetrics));
                     }
                     for (int i3 = 0; i3 < netdEventListenerService.mWakeupStats.size(); i3++) {
-                        arrayList2.add(IpConnectivityEventBuilder.toProto((WakeupStats) netdEventListenerService.mWakeupStats.valueAt(i3)));
+                        arrayList2.add(
+                                IpConnectivityEventBuilder.toProto(
+                                        (WakeupStats)
+                                                netdEventListenerService.mWakeupStats.valueAt(i3)));
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -451,7 +554,8 @@ public final class IpConnectivityMetrics extends SystemService {
         DefaultNetworkMetrics defaultNetworkMetrics = this.mDefaultNetworkMetrics;
         synchronized (defaultNetworkMetrics) {
             arrayList = new ArrayList();
-            for (DefaultNetworkEvent defaultNetworkEvent : (DefaultNetworkEvent[]) defaultNetworkMetrics.mEventsLog.toArray()) {
+            for (DefaultNetworkEvent defaultNetworkEvent :
+                    (DefaultNetworkEvent[]) defaultNetworkMetrics.mEventsLog.toArray()) {
                 arrayList.add(IpConnectivityEventBuilder.toProto(defaultNetworkEvent));
             }
         }
@@ -463,21 +567,30 @@ public final class IpConnectivityMetrics extends SystemService {
     public final void onBootPhase(int i) {
         if (i == 500) {
             Context context = getContext();
-            NetdEventListenerService netdEventListenerService = new NetdEventListenerService((ConnectivityManager) context.getSystemService(ConnectivityManager.class));
+            NetdEventListenerService netdEventListenerService =
+                    new NetdEventListenerService(
+                            (ConnectivityManager)
+                                    context.getSystemService(ConnectivityManager.class));
             netdEventListenerService.mContext = context;
-            netdEventListenerService.filter.addAction("com.samsung.android.mobiledoctor.GETMOBILEDATAFILES");
-            netdEventListenerService.filter.addAction("com.samsung.android.mobiledoctor.DELETEMOBILEDATAFILES");
-            netdEventListenerService.filter.addAction("com.samsung.android.action.ACTION_REQUEST_INTERNET_LOG");
-            context.registerReceiver(netdEventListenerService.receiver, netdEventListenerService.filter, 2);
+            netdEventListenerService.filter.addAction(
+                    "com.samsung.android.mobiledoctor.GETMOBILEDATAFILES");
+            netdEventListenerService.filter.addAction(
+                    "com.samsung.android.mobiledoctor.DELETEMOBILEDATAFILES");
+            netdEventListenerService.filter.addAction(
+                    "com.samsung.android.action.ACTION_REQUEST_INTERNET_LOG");
+            context.registerReceiver(
+                    netdEventListenerService.receiver, netdEventListenerService.filter, 2);
             HandlerThread handlerThread = new HandlerThread("NetdEventListenerService");
             handlerThread.start();
             Looper looper = handlerThread.getLooper();
             if (looper != null) {
-                netdEventListenerService.mDnsHandler = netdEventListenerService.new DnsEventHandler(looper);
+                netdEventListenerService.mDnsHandler =
+                        netdEventListenerService.new DnsEventHandler(looper);
             } else {
                 Log.e("NetdEventListenerService", "handlerThread.getLooper() returned null");
             }
-            netdEventListenerService.mPolicyManager = (NetworkPolicyManager) context.getSystemService(NetworkPolicyManager.class);
+            netdEventListenerService.mPolicyManager =
+                    (NetworkPolicyManager) context.getSystemService(NetworkPolicyManager.class);
             this.mNetdListener = netdEventListenerService;
             publishBinderService("connmetrics", this.impl);
             publishBinderService("netd_listener", this.mNetdListener);
@@ -486,6 +599,5 @@ public final class IpConnectivityMetrics extends SystemService {
     }
 
     @Override // com.android.server.SystemService
-    public final void onStart() {
-    }
+    public final void onStart() {}
 }

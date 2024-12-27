@@ -12,27 +12,39 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISession extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$biometrics$face$ISession".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$biometrics$face$ISession".replace('$', '.');
     public static final String HASH = "c43fbb9be4a662cc9ace640dba21cccdb84c6c21";
     public static final int VERSION = 4;
 
     ICancellationSignal authenticate(long j) throws RemoteException;
 
-    ICancellationSignal authenticateWithContext(long j, OperationContext operationContext) throws RemoteException;
+    ICancellationSignal authenticateWithContext(long j, OperationContext operationContext)
+            throws RemoteException;
 
     void close() throws RemoteException;
 
     ICancellationSignal detectInteraction() throws RemoteException;
 
-    ICancellationSignal detectInteractionWithContext(OperationContext operationContext) throws RemoteException;
+    ICancellationSignal detectInteractionWithContext(OperationContext operationContext)
+            throws RemoteException;
 
     @Deprecated
-    ICancellationSignal enroll(HardwareAuthToken hardwareAuthToken, byte b, byte[] bArr, NativeHandle nativeHandle) throws RemoteException;
+    ICancellationSignal enroll(
+            HardwareAuthToken hardwareAuthToken, byte b, byte[] bArr, NativeHandle nativeHandle)
+            throws RemoteException;
 
     @Deprecated
-    ICancellationSignal enrollWithContext(HardwareAuthToken hardwareAuthToken, byte b, byte[] bArr, NativeHandle nativeHandle, OperationContext operationContext) throws RemoteException;
+    ICancellationSignal enrollWithContext(
+            HardwareAuthToken hardwareAuthToken,
+            byte b,
+            byte[] bArr,
+            NativeHandle nativeHandle,
+            OperationContext operationContext)
+            throws RemoteException;
 
-    ICancellationSignal enrollWithOptions(FaceEnrollOptions faceEnrollOptions) throws RemoteException;
+    ICancellationSignal enrollWithOptions(FaceEnrollOptions faceEnrollOptions)
+            throws RemoteException;
 
     void enumerateEnrollments() throws RemoteException;
 
@@ -62,20 +74,21 @@ public interface ISession extends IInterface {
 
     public static class Default implements ISession {
         @Override // android.hardware.biometrics.face.ISession
-        public void generateChallenge() throws RemoteException {
-        }
+        public void generateChallenge() throws RemoteException {}
 
         @Override // android.hardware.biometrics.face.ISession
-        public void revokeChallenge(long challenge) throws RemoteException {
-        }
+        public void revokeChallenge(long challenge) throws RemoteException {}
 
         @Override // android.hardware.biometrics.face.ISession
-        public EnrollmentStageConfig[] getEnrollmentConfig(byte enrollmentType) throws RemoteException {
+        public EnrollmentStageConfig[] getEnrollmentConfig(byte enrollmentType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.face.ISession
-        public ICancellationSignal enroll(HardwareAuthToken hat, byte type, byte[] features, NativeHandle previewSurface) throws RemoteException {
+        public ICancellationSignal enroll(
+                HardwareAuthToken hat, byte type, byte[] features, NativeHandle previewSurface)
+                throws RemoteException {
             return null;
         }
 
@@ -90,58 +103,59 @@ public interface ISession extends IInterface {
         }
 
         @Override // android.hardware.biometrics.face.ISession
-        public void enumerateEnrollments() throws RemoteException {
-        }
+        public void enumerateEnrollments() throws RemoteException {}
 
         @Override // android.hardware.biometrics.face.ISession
-        public void removeEnrollments(int[] enrollmentIds) throws RemoteException {
-        }
+        public void removeEnrollments(int[] enrollmentIds) throws RemoteException {}
 
         @Override // android.hardware.biometrics.face.ISession
-        public void getFeatures() throws RemoteException {
-        }
+        public void getFeatures() throws RemoteException {}
 
         @Override // android.hardware.biometrics.face.ISession
-        public void setFeature(HardwareAuthToken hat, byte feature, boolean enabled) throws RemoteException {
-        }
+        public void setFeature(HardwareAuthToken hat, byte feature, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.face.ISession
-        public void getAuthenticatorId() throws RemoteException {
-        }
+        public void getAuthenticatorId() throws RemoteException {}
 
         @Override // android.hardware.biometrics.face.ISession
-        public void invalidateAuthenticatorId() throws RemoteException {
-        }
+        public void invalidateAuthenticatorId() throws RemoteException {}
 
         @Override // android.hardware.biometrics.face.ISession
-        public void resetLockout(HardwareAuthToken hat) throws RemoteException {
-        }
+        public void resetLockout(HardwareAuthToken hat) throws RemoteException {}
 
         @Override // android.hardware.biometrics.face.ISession
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.biometrics.face.ISession
-        public ICancellationSignal authenticateWithContext(long operationId, OperationContext context) throws RemoteException {
+        public ICancellationSignal authenticateWithContext(
+                long operationId, OperationContext context) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.face.ISession
-        public ICancellationSignal enrollWithContext(HardwareAuthToken hat, byte type, byte[] features, NativeHandle previewSurface, OperationContext context) throws RemoteException {
+        public ICancellationSignal enrollWithContext(
+                HardwareAuthToken hat,
+                byte type,
+                byte[] features,
+                NativeHandle previewSurface,
+                OperationContext context)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.face.ISession
-        public ICancellationSignal detectInteractionWithContext(OperationContext context) throws RemoteException {
+        public ICancellationSignal detectInteractionWithContext(OperationContext context)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.face.ISession
-        public void onContextChanged(OperationContext context) throws RemoteException {
-        }
+        public void onContextChanged(OperationContext context) throws RemoteException {}
 
         @Override // android.hardware.biometrics.face.ISession
-        public ICancellationSignal enrollWithOptions(FaceEnrollOptions options) throws RemoteException {
+        public ICancellationSignal enrollWithOptions(FaceEnrollOptions options)
+                throws RemoteException {
             return null;
         }
 
@@ -161,7 +175,7 @@ public interface ISession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISession {
+    public abstract static class Stub extends Binder implements ISession {
         static final int TRANSACTION_authenticate = 5;
         static final int TRANSACTION_authenticateWithContext = 15;
         static final int TRANSACTION_close = 14;
@@ -260,7 +274,8 @@ public interface ISession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -298,7 +313,8 @@ public interface ISession extends IInterface {
                     reply.writeTypedArray(_result, 1);
                     return true;
                 case 4:
-                    HardwareAuthToken _arg03 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    HardwareAuthToken _arg03 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
                     byte _arg1 = data.readByte();
                     byte[] _arg2 = data.createByteArray();
                     NativeHandle _arg3 = (NativeHandle) data.readTypedObject(NativeHandle.CREATOR);
@@ -334,7 +350,8 @@ public interface ISession extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 10:
-                    HardwareAuthToken _arg06 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    HardwareAuthToken _arg06 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
                     byte _arg12 = data.readByte();
                     boolean _arg22 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -350,7 +367,8 @@ public interface ISession extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 13:
-                    HardwareAuthToken _arg07 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    HardwareAuthToken _arg07 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
                     data.enforceNoDataAvail();
                     resetLockout(_arg07);
                     reply.writeNoException();
@@ -361,38 +379,45 @@ public interface ISession extends IInterface {
                     return true;
                 case 15:
                     long _arg08 = data.readLong();
-                    OperationContext _arg13 = (OperationContext) data.readTypedObject(OperationContext.CREATOR);
+                    OperationContext _arg13 =
+                            (OperationContext) data.readTypedObject(OperationContext.CREATOR);
                     data.enforceNoDataAvail();
                     ICancellationSignal _result5 = authenticateWithContext(_arg08, _arg13);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result5);
                     return true;
                 case 16:
-                    HardwareAuthToken _arg09 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    HardwareAuthToken _arg09 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
                     byte _arg14 = data.readByte();
                     byte[] _arg23 = data.createByteArray();
                     NativeHandle _arg32 = (NativeHandle) data.readTypedObject(NativeHandle.CREATOR);
-                    OperationContext _arg4 = (OperationContext) data.readTypedObject(OperationContext.CREATOR);
+                    OperationContext _arg4 =
+                            (OperationContext) data.readTypedObject(OperationContext.CREATOR);
                     data.enforceNoDataAvail();
-                    ICancellationSignal _result6 = enrollWithContext(_arg09, _arg14, _arg23, _arg32, _arg4);
+                    ICancellationSignal _result6 =
+                            enrollWithContext(_arg09, _arg14, _arg23, _arg32, _arg4);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result6);
                     return true;
                 case 17:
-                    OperationContext _arg010 = (OperationContext) data.readTypedObject(OperationContext.CREATOR);
+                    OperationContext _arg010 =
+                            (OperationContext) data.readTypedObject(OperationContext.CREATOR);
                     data.enforceNoDataAvail();
                     ICancellationSignal _result7 = detectInteractionWithContext(_arg010);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result7);
                     return true;
                 case 18:
-                    OperationContext _arg011 = (OperationContext) data.readTypedObject(OperationContext.CREATOR);
+                    OperationContext _arg011 =
+                            (OperationContext) data.readTypedObject(OperationContext.CREATOR);
                     data.enforceNoDataAvail();
                     onContextChanged(_arg011);
                     reply.writeNoException();
                     return true;
                 case 19:
-                    FaceEnrollOptions _arg012 = (FaceEnrollOptions) data.readTypedObject(FaceEnrollOptions.CREATOR);
+                    FaceEnrollOptions _arg012 =
+                            (FaceEnrollOptions) data.readTypedObject(FaceEnrollOptions.CREATOR);
                     data.enforceNoDataAvail();
                     ICancellationSignal _result8 = enrollWithOptions(_arg012);
                     reply.writeNoException();
@@ -457,7 +482,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.face.ISession
-            public EnrollmentStageConfig[] getEnrollmentConfig(byte enrollmentType) throws RemoteException {
+            public EnrollmentStageConfig[] getEnrollmentConfig(byte enrollmentType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -468,7 +494,9 @@ public interface ISession extends IInterface {
                         throw new RemoteException("Method getEnrollmentConfig is unimplemented.");
                     }
                     _reply.readException();
-                    EnrollmentStageConfig[] _result = (EnrollmentStageConfig[]) _reply.createTypedArray(EnrollmentStageConfig.CREATOR);
+                    EnrollmentStageConfig[] _result =
+                            (EnrollmentStageConfig[])
+                                    _reply.createTypedArray(EnrollmentStageConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -477,7 +505,9 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.face.ISession
-            public ICancellationSignal enroll(HardwareAuthToken hat, byte type, byte[] features, NativeHandle previewSurface) throws RemoteException {
+            public ICancellationSignal enroll(
+                    HardwareAuthToken hat, byte type, byte[] features, NativeHandle previewSurface)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -491,7 +521,8 @@ public interface ISession extends IInterface {
                         throw new RemoteException("Method enroll is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -511,7 +542,8 @@ public interface ISession extends IInterface {
                         throw new RemoteException("Method authenticate is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -530,7 +562,8 @@ public interface ISession extends IInterface {
                         throw new RemoteException("Method detectInteraction is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -591,7 +624,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.face.ISession
-            public void setFeature(HardwareAuthToken hat, byte feature, boolean enabled) throws RemoteException {
+            public void setFeature(HardwareAuthToken hat, byte feature, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -635,7 +669,8 @@ public interface ISession extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(12, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method invalidateAuthenticatorId is unimplemented.");
+                        throw new RemoteException(
+                                "Method invalidateAuthenticatorId is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -680,7 +715,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.face.ISession
-            public ICancellationSignal authenticateWithContext(long operationId, OperationContext context) throws RemoteException {
+            public ICancellationSignal authenticateWithContext(
+                    long operationId, OperationContext context) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -689,10 +725,12 @@ public interface ISession extends IInterface {
                     _data.writeTypedObject(context, 0);
                     boolean _status = this.mRemote.transact(15, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method authenticateWithContext is unimplemented.");
+                        throw new RemoteException(
+                                "Method authenticateWithContext is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -701,7 +739,13 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.face.ISession
-            public ICancellationSignal enrollWithContext(HardwareAuthToken hat, byte type, byte[] features, NativeHandle previewSurface, OperationContext context) throws RemoteException {
+            public ICancellationSignal enrollWithContext(
+                    HardwareAuthToken hat,
+                    byte type,
+                    byte[] features,
+                    NativeHandle previewSurface,
+                    OperationContext context)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -716,7 +760,8 @@ public interface ISession extends IInterface {
                         throw new RemoteException("Method enrollWithContext is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -725,7 +770,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.face.ISession
-            public ICancellationSignal detectInteractionWithContext(OperationContext context) throws RemoteException {
+            public ICancellationSignal detectInteractionWithContext(OperationContext context)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -733,10 +779,12 @@ public interface ISession extends IInterface {
                     _data.writeTypedObject(context, 0);
                     boolean _status = this.mRemote.transact(17, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method detectInteractionWithContext is unimplemented.");
+                        throw new RemoteException(
+                                "Method detectInteractionWithContext is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -763,7 +811,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.face.ISession
-            public ICancellationSignal enrollWithOptions(FaceEnrollOptions options) throws RemoteException {
+            public ICancellationSignal enrollWithOptions(FaceEnrollOptions options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -774,7 +823,8 @@ public interface ISession extends IInterface {
                         throw new RemoteException("Method enrollWithOptions is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

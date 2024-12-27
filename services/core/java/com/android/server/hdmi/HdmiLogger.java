@@ -4,6 +4,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.util.Pair;
 import android.util.Slog;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -68,7 +69,11 @@ public final class HdmiLogger {
             if (pair2 == null) {
                 return "";
             }
-            hashMap.put(str, new Pair((Long) pair2.first, Integer.valueOf(((Integer) pair2.second).intValue() + 1)));
+            hashMap.put(
+                    str,
+                    new Pair(
+                            (Long) pair2.first,
+                            Integer.valueOf(((Integer) pair2.second).intValue() + 1)));
             return "";
         }
         StringBuilder sb = new StringBuilder("[");

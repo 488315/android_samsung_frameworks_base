@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
-import com.android.internal.telephony.HbpcdLookup;
 
 /* loaded from: classes5.dex */
 public final class HbpcdUtils {
@@ -19,7 +18,13 @@ public final class HbpcdUtils {
 
     public int getMcc(int sid, int tz, int DSTflag, boolean isNitzTimeZone) {
         String[] projection2 = {"MCC"};
-        Cursor c2 = this.resolver.query(HbpcdLookup.ArbitraryMccSidMatch.CONTENT_URI, projection2, "SID=" + sid, null, null);
+        Cursor c2 =
+                this.resolver.query(
+                        HbpcdLookup.ArbitraryMccSidMatch.CONTENT_URI,
+                        projection2,
+                        "SID=" + sid,
+                        null,
+                        null);
         if (c2 != null) {
             int c2Counter = c2.getCount();
             if (c2Counter == 1) {
@@ -31,7 +36,35 @@ public final class HbpcdUtils {
             c2.close();
         }
         String[] projection3 = {"MCC"};
-        Cursor c3 = this.resolver.query(HbpcdLookup.MccSidConflicts.CONTENT_URI, projection3, "SID_Conflict=" + sid + " and (((" + HbpcdLookup.MccLookup.GMT_OFFSET_LOW + "<=" + tz + ") and (" + tz + "<=" + HbpcdLookup.MccLookup.GMT_OFFSET_HIGH + ") and (0=" + DSTflag + ")) or ((" + HbpcdLookup.MccLookup.GMT_DST_LOW + "<=" + tz + ") and (" + tz + "<=" + HbpcdLookup.MccLookup.GMT_DST_HIGH + ") and (1=" + DSTflag + ")))", null, null);
+        Cursor c3 =
+                this.resolver.query(
+                        HbpcdLookup.MccSidConflicts.CONTENT_URI,
+                        projection3,
+                        "SID_Conflict="
+                                + sid
+                                + " and ((("
+                                + HbpcdLookup.MccLookup.GMT_OFFSET_LOW
+                                + "<="
+                                + tz
+                                + ") and ("
+                                + tz
+                                + "<="
+                                + HbpcdLookup.MccLookup.GMT_OFFSET_HIGH
+                                + ") and (0="
+                                + DSTflag
+                                + ")) or (("
+                                + HbpcdLookup.MccLookup.GMT_DST_LOW
+                                + "<="
+                                + tz
+                                + ") and ("
+                                + tz
+                                + "<="
+                                + HbpcdLookup.MccLookup.GMT_DST_HIGH
+                                + ") and (1="
+                                + DSTflag
+                                + ")))",
+                        null,
+                        null);
         if (c3 != null) {
             int c3Counter = c3.getCount();
             if (c3Counter > 0) {
@@ -49,7 +82,18 @@ public final class HbpcdUtils {
             c3.close();
         }
         String[] projection5 = {"MCC"};
-        Cursor c5 = this.resolver.query(HbpcdLookup.MccSidRange.CONTENT_URI, projection5, "SID_Range_Low<=" + sid + " and " + HbpcdLookup.MccSidRange.RANGE_HIGH + ">=" + sid, null, null);
+        Cursor c5 =
+                this.resolver.query(
+                        HbpcdLookup.MccSidRange.CONTENT_URI,
+                        projection5,
+                        "SID_Range_Low<="
+                                + sid
+                                + " and "
+                                + HbpcdLookup.MccSidRange.RANGE_HIGH
+                                + ">="
+                                + sid,
+                        null,
+                        null);
         if (c5 != null) {
             if (c5.getCount() > 0) {
                 c5.moveToFirst();
@@ -66,7 +110,9 @@ public final class HbpcdUtils {
         String idd = "";
         Cursor c = null;
         String[] projection = {HbpcdLookup.MccIdd.IDD};
-        Cursor cur = this.resolver.query(HbpcdLookup.MccIdd.CONTENT_URI, projection, "MCC=" + mcc, null, null);
+        Cursor cur =
+                this.resolver.query(
+                        HbpcdLookup.MccIdd.CONTENT_URI, projection, "MCC=" + mcc, null, null);
         if (cur != null) {
             if (cur.getCount() > 0) {
                 cur.moveToFirst();

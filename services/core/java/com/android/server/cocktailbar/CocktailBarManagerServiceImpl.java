@@ -39,6 +39,7 @@ import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.widget.RemoteViews;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.FastXmlSerializer;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
@@ -56,6 +57,7 @@ import com.android.server.cocktailbar.utils.CocktailBarConfig;
 import com.android.server.cocktailbar.utils.CocktailBarHistory;
 import com.android.server.cocktailbar.utils.CocktailBarUtils$CocktailBarWhiteList;
 import com.android.server.cocktailbar.utils.ServiceImplCommandLogger;
+
 import com.samsung.android.cocktailbar.Cocktail;
 import com.samsung.android.cocktailbar.CocktailInfo;
 import com.samsung.android.cocktailbar.CocktailProviderInfo;
@@ -64,6 +66,7 @@ import com.samsung.android.emergencymode.SemEmergencyManager;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.knox.analytics.util.KnoxAnalyticsDataConverter;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -120,7 +123,10 @@ public final class CocktailBarManagerServiceImpl {
         public final /* synthetic */ CocktailBarManagerServiceImpl this$0;
         public final /* synthetic */ ArrayList val$enabledCocktailList;
 
-        public /* synthetic */ AnonymousClass4(CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl, ArrayList arrayList, int i) {
+        public /* synthetic */ AnonymousClass4(
+                CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl,
+                ArrayList arrayList,
+                int i) {
             this.$r8$classId = i;
             this.this$0 = cocktailBarManagerServiceImpl;
             this.val$enabledCocktailList = arrayList;
@@ -146,25 +152,39 @@ public final class CocktailBarManagerServiceImpl {
         public CocktailBarSettingsObserver(Handler handler) {
             super(handler);
             this.mLastEnabled = "";
-            CocktailBarManagerServiceImpl.this.mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor("cocktail_bar_enabled_cocktails"), false, this, CocktailBarManagerServiceImpl.this.mUserId);
+            CocktailBarManagerServiceImpl.this
+                    .mContext
+                    .getContentResolver()
+                    .registerContentObserver(
+                            Settings.System.getUriFor("cocktail_bar_enabled_cocktails"),
+                            false,
+                            this,
+                            CocktailBarManagerServiceImpl.this.mUserId);
         }
 
         @Override // android.database.ContentObserver
         public final void onChange(boolean z) {
             String str;
-            CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl = CocktailBarManagerServiceImpl.this;
+            CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl =
+                    CocktailBarManagerServiceImpl.this;
             String str2 = this.mLastEnabled;
             synchronized (cocktailBarManagerServiceImpl.mCocktailArr) {
                 try {
                     if (cocktailBarManagerServiceImpl.ensureStateLoadedLocked()) {
-                        String enabledCocktailsStr = cocktailBarManagerServiceImpl.mSettings.getEnabledCocktailsStr();
+                        String enabledCocktailsStr =
+                                cocktailBarManagerServiceImpl.mSettings.getEnabledCocktailsStr();
                         if (enabledCocktailsStr != null && !str2.equals(enabledCocktailsStr)) {
                             cocktailBarManagerServiceImpl.updateFromSettingsLocked();
                             str2 = enabledCocktailsStr;
                         }
                         str = str2;
                     } else {
-                        Slog.i("CocktailBarManagerServiceImpl", "updateCocktailBarSetting : not loaded u=" + cocktailBarManagerServiceImpl.mUserId + " lastEnabled=" + str2);
+                        Slog.i(
+                                "CocktailBarManagerServiceImpl",
+                                "updateCocktailBarSetting : not loaded u="
+                                        + cocktailBarManagerServiceImpl.mUserId
+                                        + " lastEnabled="
+                                        + str2);
                         str = "";
                     }
                 } finally {
@@ -186,11 +206,14 @@ public final class CocktailBarManagerServiceImpl {
             this.token = iCocktailHost.asBinder();
             this.category = i;
             this.mPackageName = str;
-            ServiceImplCommandLogger serviceImplCommandLogger = CocktailBarManagerServiceImpl.this.mCommandLogger;
+            ServiceImplCommandLogger serviceImplCommandLogger =
+                    CocktailBarManagerServiceImpl.this.mCommandLogger;
             serviceImplCommandLogger.getClass();
-            ServiceImplCommandLogger.HostDumpInfo hostDumpInfo = new ServiceImplCommandLogger.HostDumpInfo();
+            ServiceImplCommandLogger.HostDumpInfo hostDumpInfo =
+                    new ServiceImplCommandLogger.HostDumpInfo();
             try {
-                hostDumpInfo.mStratTime = new SimpleDateFormat("MM-dd HH:mm:ss.SSS").format(new Date());
+                hostDumpInfo.mStratTime =
+                        new SimpleDateFormat("MM-dd HH:mm:ss.SSS").format(new Date());
             } catch (Exception e) {
                 e.printStackTrace();
                 hostDumpInfo.mStratTime = String.valueOf(System.currentTimeMillis());
@@ -210,13 +233,19 @@ public final class CocktailBarManagerServiceImpl {
         public final void binderDied() {
             boolean z = CocktailBarManagerServiceImpl.DEBUG;
             Slog.v("CocktailBarManagerServiceImpl", "binderDied : binder = " + this.token);
-            if (Settings.Secure.getInt(CocktailBarManagerServiceImpl.this.mContext.getContentResolver(), "edge_enable", 1) == 1) {
+            if (Settings.Secure.getInt(
+                            CocktailBarManagerServiceImpl.this.mContext.getContentResolver(),
+                            "edge_enable",
+                            1)
+                    == 1) {
                 CocktailBarManagerServiceImpl.this.mEdgeStartHandler.removeMessages(1);
-                CocktailBarManagerServiceImpl.this.mEdgeStartHandler.sendEmptyMessageDelayed(1, 5000L);
+                CocktailBarManagerServiceImpl.this.mEdgeStartHandler.sendEmptyMessageDelayed(
+                        1, 5000L);
             }
             synchronized (CocktailBarManagerServiceImpl.this.mHost) {
                 try {
-                    CocktailBarManagerServiceImpl.this.mCommandLogger.recordHostEnd(this.mPackageName);
+                    CocktailBarManagerServiceImpl.this.mCommandLogger.recordHostEnd(
+                            this.mPackageName);
                     if (equals(CocktailBarManagerServiceImpl.this.mHost.get(this.mPackageName))) {
                         CocktailBarManagerServiceImpl.this.mHost.remove(this.mPackageName);
                     }
@@ -249,7 +278,8 @@ public final class CocktailBarManagerServiceImpl {
 
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
-            CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl = CocktailBarManagerServiceImpl.this;
+            CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl =
+                    CocktailBarManagerServiceImpl.this;
             int i = cocktailBarManagerServiceImpl.mUserId;
             int i2 = cocktailBarManagerServiceImpl.mNextUserId;
             if (i2 != -10) {
@@ -257,10 +287,16 @@ public final class CocktailBarManagerServiceImpl {
             }
             boolean z = CocktailBarManagerServiceImpl.DEBUG;
             StringBuilder sb = new StringBuilder("EdgeStartHandler userId : ");
-            ServiceKeeper$$ExternalSyntheticOutline0.m(cocktailBarManagerServiceImpl.mUserId, i, ", currentUserId : ", ", nextUserId : ", sb);
+            ServiceKeeper$$ExternalSyntheticOutline0.m(
+                    cocktailBarManagerServiceImpl.mUserId,
+                    i,
+                    ", currentUserId : ",
+                    ", nextUserId : ",
+                    sb);
             sb.append(cocktailBarManagerServiceImpl.mNextUserId);
             Slog.i("CocktailBarManagerServiceImpl", sb.toString());
-            Intent intent = new Intent("com.samsung.android.cocktailbar.intent.action.EDGE_APP_START");
+            Intent intent =
+                    new Intent("com.samsung.android.cocktailbar.intent.action.EDGE_APP_START");
             intent.addFlags(16777248);
             cocktailBarManagerServiceImpl.mContext.sendBroadcastAsUser(intent, new UserHandle(i));
             cocktailBarManagerServiceImpl.mNextUserId = cocktailBarManagerServiceImpl.mUserId;
@@ -313,11 +349,24 @@ public final class CocktailBarManagerServiceImpl {
 
     static {
         MIN_UPDATE_PERIOD = Debug.semIsProductDev() ? 1800000 : 0;
-        EMERGENCY_MODE_ENABLED = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE") || SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_ULTRA_POWER_SAVING") || SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_BATTERY_CONVERSING");
+        EMERGENCY_MODE_ENABLED =
+                SemFloatingFeature.getInstance()
+                                .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE")
+                        || SemFloatingFeature.getInstance()
+                                .getBoolean(
+                                        "SEC_FLOATING_FEATURE_COMMON_SUPPORT_ULTRA_POWER_SAVING")
+                        || SemFloatingFeature.getInstance()
+                                .getBoolean(
+                                        "SEC_FLOATING_FEATURE_COMMON_SUPPORT_BATTERY_CONVERSING");
     }
 
     /* JADX WARN: Type inference failed for: r1v6, types: [com.android.server.cocktailbar.CocktailBarManagerServiceImpl$1] */
-    public CocktailBarManagerServiceImpl(Context context, Handler handler, CocktailBarModeManager cocktailBarModeManager, CocktailPolicyManager cocktailPolicyManager, int i) {
+    public CocktailBarManagerServiceImpl(
+            Context context,
+            Handler handler,
+            CocktailBarModeManager cocktailBarModeManager,
+            CocktailPolicyManager cocktailPolicyManager,
+            int i) {
         SparseArray sparseArray = new SparseArray();
         this.mCocktailArr = sparseArray;
         this.mRemoteViewsServicesCocktails = new HashMap();
@@ -329,45 +378,61 @@ public final class CocktailBarManagerServiceImpl {
         enabledPackageMap.mEnabledPackage = new ArrayMap();
         this.mEnabledCocktailPackages = enabledPackageMap;
         ServiceImplCommandLogger serviceImplCommandLogger = new ServiceImplCommandLogger();
-        serviceImplCommandLogger.mHostDumpInfoCache = new ServiceImplCommandLogger.AnonymousClass1(10);
+        serviceImplCommandLogger.mHostDumpInfoCache =
+                new ServiceImplCommandLogger.AnonymousClass1(10);
         this.mCommandLogger = serviceImplCommandLogger;
         final int i2 = 1;
-        this.mSaveStateRunnable = new Runnable(this) { // from class: com.android.server.cocktailbar.CocktailBarManagerServiceImpl.1
-            public final /* synthetic */ CocktailBarManagerServiceImpl this$0;
+        this.mSaveStateRunnable =
+                new Runnable(
+                        this) { // from class:
+                                // com.android.server.cocktailbar.CocktailBarManagerServiceImpl.1
+                    public final /* synthetic */ CocktailBarManagerServiceImpl this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                switch (i2) {
-                    case 0:
-                        CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl = this.this$0;
-                        CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl2 = this.this$0;
-                        cocktailBarManagerServiceImpl.mCocktailSettingsObserver = cocktailBarManagerServiceImpl2.new CocktailBarSettingsObserver(cocktailBarManagerServiceImpl2.mHandler);
-                        return;
-                    default:
-                        synchronized (this.this$0.mCocktailArr) {
-                            this.this$0.ensureStateLoadedLocked();
-                            CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl3 = this.this$0;
-                            AtomicFile savedStateFile = cocktailBarManagerServiceImpl3.savedStateFile();
-                            try {
-                                FileOutputStream startWrite = savedStateFile.startWrite();
-                                if (cocktailBarManagerServiceImpl3.writeStateToFileLocked(startWrite)) {
-                                    savedStateFile.finishWrite(startWrite);
-                                } else {
-                                    savedStateFile.failWrite(startWrite);
-                                    Slog.w("CocktailBarManagerServiceImpl", "Failed to save state, restoring backup.");
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        switch (i2) {
+                            case 0:
+                                CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl =
+                                        this.this$0;
+                                CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl2 =
+                                        this.this$0;
+                                cocktailBarManagerServiceImpl.mCocktailSettingsObserver =
+                                        cocktailBarManagerServiceImpl2
+                                        .new CocktailBarSettingsObserver(
+                                                cocktailBarManagerServiceImpl2.mHandler);
+                                return;
+                            default:
+                                synchronized (this.this$0.mCocktailArr) {
+                                    this.this$0.ensureStateLoadedLocked();
+                                    CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl3 =
+                                            this.this$0;
+                                    AtomicFile savedStateFile =
+                                            cocktailBarManagerServiceImpl3.savedStateFile();
+                                    try {
+                                        FileOutputStream startWrite = savedStateFile.startWrite();
+                                        if (cocktailBarManagerServiceImpl3.writeStateToFileLocked(
+                                                startWrite)) {
+                                            savedStateFile.finishWrite(startWrite);
+                                        } else {
+                                            savedStateFile.failWrite(startWrite);
+                                            Slog.w(
+                                                    "CocktailBarManagerServiceImpl",
+                                                    "Failed to save state, restoring backup.");
+                                        }
+                                    } catch (IOException e) {
+                                        Slog.w(
+                                                "CocktailBarManagerServiceImpl",
+                                                "Failed open state file for write: " + e);
+                                    }
                                 }
-                            } catch (IOException e) {
-                                Slog.w("CocktailBarManagerServiceImpl", "Failed open state file for write: " + e);
-                            }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         this.mContext = context;
         this.mUserId = i;
         this.mNextCocktailId = (i << 16) | this.mNextCocktailId;
@@ -379,48 +444,65 @@ public final class CocktailBarManagerServiceImpl {
         this.mEdgeStartHandler = new EdgeStartHandler(Looper.getMainLooper());
         this.mAlarmManager = (AlarmManager) context.getSystemService("alarm");
         this.mUserManager = (UserManager) context.getSystemService("user");
-        this.mLocalDeviceIdleController = IDeviceIdleController.Stub.asInterface(ServiceManager.getService("deviceidle"));
+        this.mLocalDeviceIdleController =
+                IDeviceIdleController.Stub.asInterface(ServiceManager.getService("deviceidle"));
         this.mLocale = Locale.getDefault();
         if (Process.myPid() == Binder.getCallingPid()) {
             this.mCocktailSettingsObserver = new CocktailBarSettingsObserver(handler);
         } else {
             final int i3 = 0;
-            handler.post(new Runnable(this) { // from class: com.android.server.cocktailbar.CocktailBarManagerServiceImpl.1
-                public final /* synthetic */ CocktailBarManagerServiceImpl this$0;
+            handler.post(
+                    new Runnable(
+                            this) { // from class:
+                                    // com.android.server.cocktailbar.CocktailBarManagerServiceImpl.1
+                        public final /* synthetic */ CocktailBarManagerServiceImpl this$0;
 
-                {
-                    this.this$0 = this;
-                }
+                        {
+                            this.this$0 = this;
+                        }
 
-                @Override // java.lang.Runnable
-                public final void run() {
-                    switch (i3) {
-                        case 0:
-                            CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl = this.this$0;
-                            CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl2 = this.this$0;
-                            cocktailBarManagerServiceImpl.mCocktailSettingsObserver = cocktailBarManagerServiceImpl2.new CocktailBarSettingsObserver(cocktailBarManagerServiceImpl2.mHandler);
-                            return;
-                        default:
-                            synchronized (this.this$0.mCocktailArr) {
-                                this.this$0.ensureStateLoadedLocked();
-                                CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl3 = this.this$0;
-                                AtomicFile savedStateFile = cocktailBarManagerServiceImpl3.savedStateFile();
-                                try {
-                                    FileOutputStream startWrite = savedStateFile.startWrite();
-                                    if (cocktailBarManagerServiceImpl3.writeStateToFileLocked(startWrite)) {
-                                        savedStateFile.finishWrite(startWrite);
-                                    } else {
-                                        savedStateFile.failWrite(startWrite);
-                                        Slog.w("CocktailBarManagerServiceImpl", "Failed to save state, restoring backup.");
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            switch (i3) {
+                                case 0:
+                                    CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl =
+                                            this.this$0;
+                                    CocktailBarManagerServiceImpl cocktailBarManagerServiceImpl2 =
+                                            this.this$0;
+                                    cocktailBarManagerServiceImpl.mCocktailSettingsObserver =
+                                            cocktailBarManagerServiceImpl2
+                                            .new CocktailBarSettingsObserver(
+                                                    cocktailBarManagerServiceImpl2.mHandler);
+                                    return;
+                                default:
+                                    synchronized (this.this$0.mCocktailArr) {
+                                        this.this$0.ensureStateLoadedLocked();
+                                        CocktailBarManagerServiceImpl
+                                                cocktailBarManagerServiceImpl3 = this.this$0;
+                                        AtomicFile savedStateFile =
+                                                cocktailBarManagerServiceImpl3.savedStateFile();
+                                        try {
+                                            FileOutputStream startWrite =
+                                                    savedStateFile.startWrite();
+                                            if (cocktailBarManagerServiceImpl3
+                                                    .writeStateToFileLocked(startWrite)) {
+                                                savedStateFile.finishWrite(startWrite);
+                                            } else {
+                                                savedStateFile.failWrite(startWrite);
+                                                Slog.w(
+                                                        "CocktailBarManagerServiceImpl",
+                                                        "Failed to save state, restoring backup.");
+                                            }
+                                        } catch (IOException e) {
+                                            Slog.w(
+                                                    "CocktailBarManagerServiceImpl",
+                                                    "Failed open state file for write: " + e);
+                                        }
                                     }
-                                } catch (IOException e) {
-                                    Slog.w("CocktailBarManagerServiceImpl", "Failed open state file for write: " + e);
-                                }
+                                    return;
                             }
-                            return;
-                    }
-                }
-            });
+                        }
+                    });
         }
         this.mDefaultDisplayDensity = context.getResources().getConfiguration().densityDpi;
         synchronized (sparseArray) {
@@ -436,7 +518,9 @@ public final class CocktailBarManagerServiceImpl {
         if (remoteViews == null || remoteViews.estimateMemoryUsage() <= 10000000) {
             return true;
         }
-        Slog.w("CocktailBarManagerServiceImpl", "checkSize : size =" + remoteViews.estimateMemoryUsage());
+        Slog.w(
+                "CocktailBarManagerServiceImpl",
+                "checkSize : size =" + remoteViews.estimateMemoryUsage());
         return false;
     }
 
@@ -486,14 +570,24 @@ public final class CocktailBarManagerServiceImpl {
         boolean z = DEBUG;
         if (i3 != 0) {
             if (z) {
-                Slog.i("CocktailBarManagerServiceImpl", "addProviderLocked : Application FLAG_EXTERNAL_STORAGE");
+                Slog.i(
+                        "CocktailBarManagerServiceImpl",
+                        "addProviderLocked : Application FLAG_EXTERNAL_STORAGE");
             }
             return null;
         }
-        if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE") || SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_ULTRA_POWER_SAVING") || SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_BATTERY_CONVERSING")) {
+        if (SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE")
+                || SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_ULTRA_POWER_SAVING")
+                || SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_BATTERY_CONVERSING")) {
             if (SemEmergencyManager.isEmergencyMode(this.mContext)) {
                 if (z) {
-                    Slog.i("CocktailBarManagerServiceImpl", "addProviderLocked : even if the package is disable in emergency mode, allow creating cocktail");
+                    Slog.i(
+                            "CocktailBarManagerServiceImpl",
+                            "addProviderLocked : even if the package is disable in emergency mode,"
+                                + " allow creating cocktail");
                 }
             } else if (!resolveInfo.activityInfo.isEnabled()) {
                 if (z) {
@@ -508,9 +602,12 @@ public final class CocktailBarManagerServiceImpl {
             return null;
         }
         ActivityInfo activityInfo = resolveInfo.activityInfo;
-        ComponentName componentName = new ComponentName(activityInfo.packageName, activityInfo.name);
+        ComponentName componentName =
+                new ComponentName(activityInfo.packageName, activityInfo.name);
         if (lookupProviderLocked(componentName) != null) {
-            Slog.e("CocktailBarManagerServiceImpl", "addProviderLocked : already existed(" + componentName.toString() + ")");
+            Slog.e(
+                    "CocktailBarManagerServiceImpl",
+                    "addProviderLocked : already existed(" + componentName.toString() + ")");
             return null;
         }
         int i4 = this.mNextCocktailId + 1;
@@ -523,7 +620,10 @@ public final class CocktailBarManagerServiceImpl {
             cocktail = null;
         }
         if (cocktail == null) {
-            Slog.e("CocktailBarManagerServiceImpl", "addProviderLocked : parseProviderInfoXmlLocked cocktail is null" + componentName.toString());
+            Slog.e(
+                    "CocktailBarManagerServiceImpl",
+                    "addProviderLocked : parseProviderInfoXmlLocked cocktail is null"
+                            + componentName.toString());
             return null;
         }
         cocktail.setVersion(i2);
@@ -540,13 +640,22 @@ public final class CocktailBarManagerServiceImpl {
     public final boolean addProvidersForPackageLocked(int i, String str) {
         boolean z = DEBUG;
         if (z) {
-            Slog.i("CocktailBarManagerServiceImpl", "addProvidersForPackageLocked : pkgName = " + str + " v=" + i);
+            Slog.i(
+                    "CocktailBarManagerServiceImpl",
+                    "addProvidersForPackageLocked : pkgName = " + str + " v=" + i);
         }
         String updateIntentName = Cocktail.getUpdateIntentName(i);
-        List queryIntentReceivers = queryIntentReceivers(this.mUserId, ExplicitHealthCheckController$$ExternalSyntheticOutline0.m(updateIntentName, str));
+        List queryIntentReceivers =
+                queryIntentReceivers(
+                        this.mUserId,
+                        ExplicitHealthCheckController$$ExternalSyntheticOutline0.m(
+                                updateIntentName, str));
         int size = queryIntentReceivers == null ? 0 : queryIntentReceivers.size();
         if (z) {
-            HermesService$3$$ExternalSyntheticOutline0.m(size, "addProvidersForPackageLocked : queryIntentReceivers=", "CocktailBarManagerServiceImpl");
+            HermesService$3$$ExternalSyntheticOutline0.m(
+                    size,
+                    "addProvidersForPackageLocked : queryIntentReceivers=",
+                    "CocktailBarManagerServiceImpl");
         }
         int categoryIds = CocktailProviderInfo.getCategoryIds(this.mConfig.getCategoryFilter());
         boolean z2 = false;
@@ -555,11 +664,20 @@ public final class CocktailBarManagerServiceImpl {
             ResolveInfo resolveInfo = (ResolveInfo) queryIntentReceivers.get(i2);
             ActivityInfo activityInfo = resolveInfo.activityInfo;
             if (z) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("addProvidersForPackageLocked : ", str, " ai="), activityInfo.packageName, "CocktailBarManagerServiceImpl");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "addProvidersForPackageLocked : ", str, " ai="),
+                        activityInfo.packageName,
+                        "CocktailBarManagerServiceImpl");
             }
             if ((activityInfo.applicationInfo.flags & 262144) != 0) {
                 if (z) {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("addProvidersForPackageLocked : application FLAG_EXTERNAL_STORAGE"), activityInfo.packageName, "CocktailBarManagerServiceImpl");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            new StringBuilder(
+                                    "addProvidersForPackageLocked : application"
+                                        + " FLAG_EXTERNAL_STORAGE"),
+                            activityInfo.packageName,
+                            "CocktailBarManagerServiceImpl");
                 }
             } else if (TextUtils.equals(str, activityInfo.packageName)) {
                 Cocktail addProviderLocked = addProviderLocked(resolveInfo, categoryIds, i);
@@ -570,7 +688,9 @@ public final class CocktailBarManagerServiceImpl {
                     sendUpdateIntentLocked(addProviderLocked, updateIntentName, false);
                     z2 = true;
                 } else if (z) {
-                    Slog.i("CocktailBarManagerServiceImpl", "addProvidersForPackageLocked : Cocktail is null for " + str);
+                    Slog.i(
+                            "CocktailBarManagerServiceImpl",
+                            "addProvidersForPackageLocked : Cocktail is null for " + str);
                 }
             }
         }
@@ -600,33 +720,40 @@ public final class CocktailBarManagerServiceImpl {
             HashSet hashSet = (HashSet) entry.getValue();
             if (hashSet.remove(Integer.valueOf(cocktail.getCocktailId())) && hashSet.isEmpty()) {
                 final Intent intent = filterComparison.getIntent();
-                ServiceConnection serviceConnection = new ServiceConnection() { // from class: com.android.server.cocktailbar.CocktailBarManagerServiceImpl.6
-                    @Override // android.content.ServiceConnection
-                    public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                        IRemoteViewsFactory asInterface = IRemoteViewsFactory.Stub.asInterface(iBinder);
-                        try {
-                            if (asInterface != null) {
-                                asInterface.onDestroy(intent);
-                            } else {
-                                boolean z = CocktailBarManagerServiceImpl.DEBUG;
-                                Slog.d("CocktailBarManagerServiceImpl", "destroyRemoteViewsService: IRemoteViewsFactory is null for " + componentName);
+                ServiceConnection serviceConnection = new ServiceConnection() { // from class:
+                            // com.android.server.cocktailbar.CocktailBarManagerServiceImpl.6
+                            @Override // android.content.ServiceConnection
+                            public final void onServiceConnected(
+                                    ComponentName componentName, IBinder iBinder) {
+                                IRemoteViewsFactory asInterface =
+                                        IRemoteViewsFactory.Stub.asInterface(iBinder);
+                                try {
+                                    if (asInterface != null) {
+                                        asInterface.onDestroy(intent);
+                                    } else {
+                                        boolean z = CocktailBarManagerServiceImpl.DEBUG;
+                                        Slog.d(
+                                                "CocktailBarManagerServiceImpl",
+                                                "destroyRemoteViewsService: IRemoteViewsFactory is"
+                                                    + " null for "
+                                                        + componentName);
+                                    }
+                                } catch (RemoteException e) {
+                                    e.printStackTrace();
+                                } catch (RuntimeException e2) {
+                                    e2.printStackTrace();
+                                }
+                                CocktailBarManagerServiceImpl.this.mContext.unbindService(this);
                             }
-                        } catch (RemoteException e) {
-                            e.printStackTrace();
-                        } catch (RuntimeException e2) {
-                            e2.printStackTrace();
-                        }
-                        CocktailBarManagerServiceImpl.this.mContext.unbindService(this);
-                    }
 
-                    @Override // android.content.ServiceConnection
-                    public final void onServiceDisconnected(ComponentName componentName) {
-                    }
-                };
+                            @Override // android.content.ServiceConnection
+                            public final void onServiceDisconnected(ComponentName componentName) {}
+                        };
                 int userId = UserHandle.getUserId(cocktail.getUid());
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    this.mContext.bindServiceAsUser(intent, serviceConnection, 1, new UserHandle(userId));
+                    this.mContext.bindServiceAsUser(
+                            intent, serviceConnection, 1, new UserHandle(userId));
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     it.remove();
                 } catch (Throwable th) {
@@ -651,7 +778,9 @@ public final class CocktailBarManagerServiceImpl {
                         }
                         this.mHost.remove(str);
                     } else {
-                        Slog.d("CocktailBarManagerServiceImpl", "unlinkHost: no registered host for " + str);
+                        Slog.d(
+                                "CocktailBarManagerServiceImpl",
+                                "unlinkHost: no registered host for " + str);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -673,7 +802,11 @@ public final class CocktailBarManagerServiceImpl {
 
     public final void dump(PrintWriter printWriter) {
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
-            printWriter.println("Permission Denial: can't dump from from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid());
+            printWriter.println(
+                    "Permission Denial: can't dump from from pid="
+                            + Binder.getCallingPid()
+                            + ", uid="
+                            + Binder.getCallingUid());
             return;
         }
         synchronized (this.mCocktailArr) {
@@ -687,7 +820,8 @@ public final class CocktailBarManagerServiceImpl {
         }
         CocktailBarSettings cocktailBarSettings = this.mSettings;
         if (cocktailBarSettings != null) {
-            printWriter.println("EnabledCocktails : " + cocktailBarSettings.getEnableCocktailIds().toString());
+            printWriter.println(
+                    "EnabledCocktails : " + cocktailBarSettings.getEnableCocktailIds().toString());
             printWriter.println("");
         }
         HashMap hashMap = this.mHost;
@@ -698,7 +832,9 @@ public final class CocktailBarManagerServiceImpl {
                     for (Map.Entry entry : this.mHost.entrySet()) {
                         stringBuffer.append((String) entry.getKey());
                         stringBuffer.append(" category=");
-                        stringBuffer.append(Integer.toHexString(((CocktailHostInfo) entry.getValue()).category));
+                        stringBuffer.append(
+                                Integer.toHexString(
+                                        ((CocktailHostInfo) entry.getValue()).category));
                     }
                     printWriter.println(stringBuffer.toString());
                     ServiceImplCommandLogger serviceImplCommandLogger = this.mCommandLogger;
@@ -713,9 +849,9 @@ public final class CocktailBarManagerServiceImpl {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0057, code lost:
-    
-        if (android.os.storage.StorageManager.isCeStorageUnlocked(r0) != false) goto L31;
-     */
+
+       if (android.os.storage.StorageManager.isCeStorageUnlocked(r0) != false) goto L31;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -725,7 +861,9 @@ public final class CocktailBarManagerServiceImpl {
             Method dump skipped, instructions count: 320
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.cocktailbar.CocktailBarManagerServiceImpl.ensureStateLoadedLocked():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.cocktailbar.CocktailBarManagerServiceImpl.ensureStateLoadedLocked():boolean");
     }
 
     public final ArrayList findCocktailsByPrivateModeLocked(String str) {
@@ -755,7 +893,8 @@ public final class CocktailBarManagerServiceImpl {
         return applicationInfo.uid;
     }
 
-    public final void incrementCocktailServiceRefCount(int i, Intent.FilterComparison filterComparison) {
+    public final void incrementCocktailServiceRefCount(
+            int i, Intent.FilterComparison filterComparison) {
         HashSet hashSet;
         if (this.mRemoteViewsServicesCocktails.containsKey(filterComparison)) {
             hashSet = (HashSet) this.mRemoteViewsServicesCocktails.get(filterComparison);
@@ -770,12 +909,18 @@ public final class CocktailBarManagerServiceImpl {
     public final boolean isProfileWithUnlockedParent(int i) {
         UserInfo profileParent;
         UserInfo userInfo = this.mUserManager.getUserInfo(i);
-        return userInfo != null && userInfo.isManagedProfile() && (profileParent = this.mUserManager.getProfileParent(i)) != null && this.mUserManager.isUserUnlockingOrUnlocked(profileParent.getUserHandle());
+        return userInfo != null
+                && userInfo.isManagedProfile()
+                && (profileParent = this.mUserManager.getProfileParent(i)) != null
+                && this.mUserManager.isUserUnlockingOrUnlocked(profileParent.getUserHandle());
     }
 
     public final Cocktail lookupCocktailLocked(int i, int i2, String str) {
         Cocktail cocktail;
-        if (str != null && (cocktail = (Cocktail) this.mCocktailArr.get(i)) != null && cocktail.getUid() == i2 && TextUtils.equals(str, getPackageNameFromCocktail(cocktail))) {
+        if (str != null
+                && (cocktail = (Cocktail) this.mCocktailArr.get(i)) != null
+                && cocktail.getUid() == i2
+                && TextUtils.equals(str, getPackageNameFromCocktail(cocktail))) {
             return cocktail;
         }
         return null;
@@ -788,7 +933,8 @@ public final class CocktailBarManagerServiceImpl {
         int size = this.mCocktailArr.size();
         for (int i = 0; i < size; i++) {
             Cocktail cocktail = (Cocktail) this.mCocktailArr.valueAt(i);
-            if (componentName.equals(cocktail.getProvider() != null ? cocktail.getProvider() : null)) {
+            if (componentName.equals(
+                    cocktail.getProvider() != null ? cocktail.getProvider() : null)) {
                 return cocktail;
             }
         }
@@ -802,8 +948,13 @@ public final class CocktailBarManagerServiceImpl {
                 synchronized (this.mHost) {
                     try {
                         for (Map.Entry entry : this.mHost.entrySet()) {
-                            this.mCommandLogger.recordHostCommand(cocktail.getCocktailId(), ((CocktailHostInfo) entry.getValue()).mPackageName, "notifyCocktailViewDataChangedInstanceLocked id=");
-                            ((CocktailHostInfo) entry.getValue()).callbackHost.viewDataChanged(cocktail.getCocktailId(), i, this.mUserId);
+                            this.mCommandLogger.recordHostCommand(
+                                    cocktail.getCocktailId(),
+                                    ((CocktailHostInfo) entry.getValue()).mPackageName,
+                                    "notifyCocktailViewDataChangedInstanceLocked id=");
+                            ((CocktailHostInfo) entry.getValue())
+                                    .callbackHost.viewDataChanged(
+                                            cocktail.getCocktailId(), i, this.mUserId);
                         }
                     } finally {
                     }
@@ -813,35 +964,44 @@ public final class CocktailBarManagerServiceImpl {
         }
         if (this.mHost == null) {
             for (Map.Entry entry2 : this.mRemoteViewsServicesCocktails.entrySet()) {
-                if (((HashSet) entry2.getValue()).contains(Integer.valueOf(cocktail.getCocktailId()))) {
+                if (((HashSet) entry2.getValue())
+                        .contains(Integer.valueOf(cocktail.getCocktailId()))) {
                     Intent intent = ((Intent.FilterComparison) entry2.getKey()).getIntent();
-                    ServiceConnection serviceConnection = new ServiceConnection() { // from class: com.android.server.cocktailbar.CocktailBarManagerServiceImpl.3
-                        @Override // android.content.ServiceConnection
-                        public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                            IRemoteViewsFactory asInterface = IRemoteViewsFactory.Stub.asInterface(iBinder);
-                            try {
-                                if (asInterface != null) {
-                                    asInterface.onDataSetChangedAsync();
-                                } else {
-                                    boolean z = CocktailBarManagerServiceImpl.DEBUG;
-                                    Slog.d("CocktailBarManagerServiceImpl", "notifyCocktailViewDataChangedInstanceLocked: IRemoteViewsFactory is null for " + componentName);
+                    ServiceConnection serviceConnection = new ServiceConnection() { // from class:
+                                // com.android.server.cocktailbar.CocktailBarManagerServiceImpl.3
+                                @Override // android.content.ServiceConnection
+                                public final void onServiceConnected(
+                                        ComponentName componentName, IBinder iBinder) {
+                                    IRemoteViewsFactory asInterface =
+                                            IRemoteViewsFactory.Stub.asInterface(iBinder);
+                                    try {
+                                        if (asInterface != null) {
+                                            asInterface.onDataSetChangedAsync();
+                                        } else {
+                                            boolean z = CocktailBarManagerServiceImpl.DEBUG;
+                                            Slog.d(
+                                                    "CocktailBarManagerServiceImpl",
+                                                    "notifyCocktailViewDataChangedInstanceLocked:"
+                                                        + " IRemoteViewsFactory is null for "
+                                                            + componentName);
+                                        }
+                                    } catch (RemoteException e) {
+                                        e.printStackTrace();
+                                    } catch (RuntimeException e2) {
+                                        e2.printStackTrace();
+                                    }
+                                    CocktailBarManagerServiceImpl.this.mContext.unbindService(this);
                                 }
-                            } catch (RemoteException e) {
-                                e.printStackTrace();
-                            } catch (RuntimeException e2) {
-                                e2.printStackTrace();
-                            }
-                            CocktailBarManagerServiceImpl.this.mContext.unbindService(this);
-                        }
 
-                        @Override // android.content.ServiceConnection
-                        public final void onServiceDisconnected(ComponentName componentName) {
-                        }
-                    };
+                                @Override // android.content.ServiceConnection
+                                public final void onServiceDisconnected(
+                                        ComponentName componentName) {}
+                            };
                     int userId = UserHandle.getUserId(cocktail.getUid());
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        this.mContext.bindServiceAsUser(intent, serviceConnection, 1, new UserHandle(userId));
+                        this.mContext.bindServiceAsUser(
+                                intent, serviceConnection, 1, new UserHandle(userId));
                     } finally {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     }
@@ -861,26 +1021,35 @@ public final class CocktailBarManagerServiceImpl {
             Method dump skipped, instructions count: 387
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.cocktailbar.CocktailBarManagerServiceImpl.onBroadcastReceived(android.content.Intent):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.cocktailbar.CocktailBarManagerServiceImpl.onBroadcastReceived(android.content.Intent):void");
     }
 
     public final void onConfigurationChanged() {
         Locale locale;
         Locale locale2 = Locale.getDefault();
         int i = this.mContext.getResources().getConfiguration().densityDpi;
-        if (locale2 == null || (locale = this.mLocale) == null || !locale2.equals(locale) || i != this.mDefaultDisplayDensity) {
+        if (locale2 == null
+                || (locale = this.mLocale) == null
+                || !locale2.equals(locale)
+                || i != this.mDefaultDisplayDensity) {
             this.mLocale = locale2;
             this.mDefaultDisplayDensity = i;
             synchronized (this.mCocktailArr) {
                 try {
                     if (!ensureStateLoadedLocked()) {
-                        Slog.i("CocktailBarManagerServiceImpl", "onConfigurationChanged : not loaded u=" + this.mUserId);
+                        Slog.i(
+                                "CocktailBarManagerServiceImpl",
+                                "onConfigurationChanged : not loaded u=" + this.mUserId);
                         return;
                     }
                     for (int size = this.mCocktailArr.size() - 1; size >= 0; size--) {
                         Cocktail cocktail = (Cocktail) this.mCocktailArr.valueAt(size);
                         ComponentName provider = cocktail.getProvider();
-                        updateProvidersInfoForPackageLocked(cocktail.getVersion(), provider != null ? provider.getPackageName() : null);
+                        updateProvidersInfoForPackageLocked(
+                                cocktail.getVersion(),
+                                provider != null ? provider.getPackageName() : null);
                     }
                     BackgroundThread.getHandler().post(this.mSaveStateRunnable);
                 } catch (Throwable th) {
@@ -894,7 +1063,12 @@ public final class CocktailBarManagerServiceImpl {
         synchronized (this.mCocktailArr) {
             try {
                 if (!ensureStateLoadedLocked()) {
-                    Slog.i("CocktailBarManagerServiceImpl", "onPackageAdded : not loaded u = " + this.mUserId + " pkgName = " + str);
+                    Slog.i(
+                            "CocktailBarManagerServiceImpl",
+                            "onPackageAdded : not loaded u = "
+                                    + this.mUserId
+                                    + " pkgName = "
+                                    + str);
                     return;
                 }
                 this.mConfig.getClass();
@@ -918,7 +1092,9 @@ public final class CocktailBarManagerServiceImpl {
         synchronized (this.mCocktailArr) {
             try {
                 if (!ensureStateLoadedLocked()) {
-                    Slog.i("CocktailBarManagerServiceImpl", "onPackageChanged : not loaded u=" + this.mUserId + " pkgName=" + str);
+                    Slog.i(
+                            "CocktailBarManagerServiceImpl",
+                            "onPackageChanged : not loaded u=" + this.mUserId + " pkgName=" + str);
                     return;
                 }
                 clearCocktailInfoLocked(str);
@@ -942,7 +1118,12 @@ public final class CocktailBarManagerServiceImpl {
         synchronized (this.mCocktailArr) {
             try {
                 if (!ensureStateLoadedLocked()) {
-                    Slog.i("CocktailBarManagerServiceImpl", "onPackageRemoved : not loaded u = " + this.mUserId + " pkgName = " + str);
+                    Slog.i(
+                            "CocktailBarManagerServiceImpl",
+                            "onPackageRemoved : not loaded u = "
+                                    + this.mUserId
+                                    + " pkgName = "
+                                    + str);
                     return;
                 }
                 boolean removeProvidersForPackageLocked = removeProvidersForPackageLocked(str);
@@ -962,7 +1143,14 @@ public final class CocktailBarManagerServiceImpl {
         synchronized (this.mCocktailArr) {
             try {
                 if (!ensureStateLoadedLocked()) {
-                    Slog.i("CocktailBarManagerServiceImpl", "onPackagesSuspended : " + z + "not loaded u=" + this.mUserId + " pkgName=" + Arrays.toString(strArr));
+                    Slog.i(
+                            "CocktailBarManagerServiceImpl",
+                            "onPackagesSuspended : "
+                                    + z
+                                    + "not loaded u="
+                                    + this.mUserId
+                                    + " pkgName="
+                                    + Arrays.toString(strArr));
                     return;
                 }
                 HashMap hashMap = this.mHost;
@@ -970,24 +1158,39 @@ public final class CocktailBarManagerServiceImpl {
                     processPackageSuspended(strArr, z);
                     return;
                 }
-                Slog.i("CocktailBarManagerServiceImpl", "onPackagesSuspended : " + z + " no active host");
+                Slog.i(
+                        "CocktailBarManagerServiceImpl",
+                        "onPackagesSuspended : " + z + " no active host");
             } catch (Throwable th) {
                 throw th;
             }
         }
     }
 
-    public final boolean parseAndUpdateProviderInfoXml(Cocktail cocktail, ComponentName componentName, ResolveInfo resolveInfo, int i, int i2) {
+    public final boolean parseAndUpdateProviderInfoXml(
+            Cocktail cocktail,
+            ComponentName componentName,
+            ResolveInfo resolveInfo,
+            int i,
+            int i2) {
         int next;
         ActivityInfo activityInfo = resolveInfo.activityInfo;
         boolean z = false;
         XmlResourceParser xmlResourceParser = null;
         try {
             try {
-                XmlResourceParser loadXmlMetaData = activityInfo.loadXmlMetaData(this.mContext.getPackageManager(), "com.samsung.android.cocktail.provider");
+                XmlResourceParser loadXmlMetaData =
+                        activityInfo.loadXmlMetaData(
+                                this.mContext.getPackageManager(),
+                                "com.samsung.android.cocktail.provider");
                 try {
                     if (loadXmlMetaData == null) {
-                        Slog.w("CocktailBarManagerServiceImpl", "No com.samsung.android.cocktail.provider meta-data for CocktailBar provider '" + componentName + '\'');
+                        Slog.w(
+                                "CocktailBarManagerServiceImpl",
+                                "No com.samsung.android.cocktail.provider meta-data for CocktailBar"
+                                    + " provider '"
+                                        + componentName
+                                        + '\'');
                         if (loadXmlMetaData != null) {
                             loadXmlMetaData.close();
                         }
@@ -1000,15 +1203,30 @@ public final class CocktailBarManagerServiceImpl {
                         }
                     } while (next != 2);
                     if (!"cocktail-provider".equals(loadXmlMetaData.getName())) {
-                        Slog.w("CocktailBarManagerServiceImpl", "Meta-data does not start with cocktail-provider tag for CocktailBar provider '" + componentName + '\'');
+                        Slog.w(
+                                "CocktailBarManagerServiceImpl",
+                                "Meta-data does not start with cocktail-provider tag for"
+                                    + " CocktailBar provider '"
+                                        + componentName
+                                        + '\'');
                         loadXmlMetaData.close();
                         return false;
                     }
-                    CocktailProviderInfo create = CocktailProviderInfo.create(this.mContext, resolveInfo, componentName, loadXmlMetaData, i, i2);
+                    CocktailProviderInfo create =
+                            CocktailProviderInfo.create(
+                                    this.mContext,
+                                    resolveInfo,
+                                    componentName,
+                                    loadXmlMetaData,
+                                    i,
+                                    i2);
                     if (create != null) {
                         int i3 = this.mUserId;
                         int i4 = create.category;
-                        if ((i4 == 32 || i4 == 128) ? CocktailBarUtils$CocktailBarWhiteList.isSystemApplication(i3, create.provider.getPackageName()) : true) {
+                        if ((i4 == 32 || i4 == 128)
+                                ? CocktailBarUtils$CocktailBarWhiteList.isSystemApplication(
+                                        i3, create.provider.getPackageName())
+                                : true) {
                             cocktail.setProviderInfo(create);
                             cocktail.setUid(activityInfo.applicationInfo.uid);
                             z = true;
@@ -1019,7 +1237,10 @@ public final class CocktailBarManagerServiceImpl {
                 } catch (Exception e) {
                     e = e;
                     xmlResourceParser = loadXmlMetaData;
-                    Slog.w("CocktailBarManagerServiceImpl", "XML parsing failed for CocktailBar provider '" + componentName + '\'', e);
+                    Slog.w(
+                            "CocktailBarManagerServiceImpl",
+                            "XML parsing failed for CocktailBar provider '" + componentName + '\'',
+                            e);
                     if (xmlResourceParser != null) {
                         xmlResourceParser.close();
                     }
@@ -1044,15 +1265,26 @@ public final class CocktailBarManagerServiceImpl {
         for (String str : strArr) {
             for (int i = 0; i < this.mCocktailArr.size(); i++) {
                 Cocktail cocktail = (Cocktail) this.mCocktailArr.valueAt(i);
-                if (TextUtils.equals(str, getPackageNameFromCocktail(cocktail)) && this.mCocktailPolicyManager.canUpdateCocktail(cocktail, this.mSettings, this.mUserId, this.mModeManager)) {
+                if (TextUtils.equals(str, getPackageNameFromCocktail(cocktail))
+                        && this.mCocktailPolicyManager.canUpdateCocktail(
+                                cocktail, this.mSettings, this.mUserId, this.mModeManager)) {
                     synchronized (this.mHost) {
                         Iterator it = this.mHost.entrySet().iterator();
                         while (it.hasNext()) {
-                            CocktailHostInfo cocktailHostInfo = (CocktailHostInfo) ((Map.Entry) it.next()).getValue();
+                            CocktailHostInfo cocktailHostInfo =
+                                    (CocktailHostInfo) ((Map.Entry) it.next()).getValue();
                             try {
-                                if ((cocktailHostInfo.category & cocktail.getProviderInfo().category) != 0) {
-                                    CocktailBarHistory.getInstance().recordPanelUpdateHistory(cocktail.getCocktailId(), "packageSuspended " + z);
-                                    this.mCommandLogger.recordHostCommand(cocktail.getCocktailId(), cocktailHostInfo.mPackageName, "packageSuspended " + z + " id=");
+                                if ((cocktailHostInfo.category
+                                                & cocktail.getProviderInfo().category)
+                                        != 0) {
+                                    CocktailBarHistory.getInstance()
+                                            .recordPanelUpdateHistory(
+                                                    cocktail.getCocktailId(),
+                                                    "packageSuspended " + z);
+                                    this.mCommandLogger.recordHostCommand(
+                                            cocktail.getCocktailId(),
+                                            cocktailHostInfo.mPackageName,
+                                            "packageSuspended " + z + " id=");
                                     cocktail.setPackageSuspended(z);
                                     cocktailHostInfo.callbackHost.packageSuspendChanged(cocktail);
                                 }
@@ -1069,7 +1301,21 @@ public final class CocktailBarManagerServiceImpl {
     public final List queryIntentReceivers(int i, Intent intent) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            return (EMERGENCY_MODE_ENABLED && SemEmergencyManager.isEmergencyMode(this.mContext)) ? this.mPm.queryIntentReceivers(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), 640L, i).getList() : this.mPm.queryIntentReceivers(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), (isProfileWithUnlockedParent(i) ? 269222016 : 268435584) | 1024, i).getList();
+            return (EMERGENCY_MODE_ENABLED && SemEmergencyManager.isEmergencyMode(this.mContext))
+                    ? this.mPm
+                            .queryIntentReceivers(
+                                    intent,
+                                    intent.resolveTypeIfNeeded(this.mContext.getContentResolver()),
+                                    640L,
+                                    i)
+                            .getList()
+                    : this.mPm
+                            .queryIntentReceivers(
+                                    intent,
+                                    intent.resolveTypeIfNeeded(this.mContext.getContentResolver()),
+                                    (isProfileWithUnlockedParent(i) ? 269222016 : 268435584) | 1024,
+                                    i)
+                            .getList();
         } catch (RemoteException unused) {
             return Collections.emptyList();
         } finally {
@@ -1107,14 +1353,17 @@ public final class CocktailBarManagerServiceImpl {
             Method dump skipped, instructions count: 1017
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.cocktailbar.CocktailBarManagerServiceImpl.readStateFromFileLocked(java.io.FileInputStream):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.cocktailbar.CocktailBarManagerServiceImpl.readStateFromFileLocked(java.io.FileInputStream):void");
     }
 
     public final void removeAllUpdatedCocktailsLocked() {
         int size = this.mCocktailArr.size();
         for (int i = 0; i < size; i++) {
             Cocktail cocktail = (Cocktail) this.mCocktailArr.valueAt(i);
-            if (this.mCocktailPolicyManager.isUpdatedCocktail(cocktail.getCocktailId(), this.mUserId)) {
+            if (this.mCocktailPolicyManager.isUpdatedCocktail(
+                    cocktail.getCocktailId(), this.mUserId)) {
                 removeCocktailLocked(cocktail);
             }
         }
@@ -1129,8 +1378,10 @@ public final class CocktailBarManagerServiceImpl {
         synchronized (this.mHost) {
             Iterator it = this.mHost.entrySet().iterator();
             while (it.hasNext()) {
-                CocktailHostInfo cocktailHostInfo = (CocktailHostInfo) ((Map.Entry) it.next()).getValue();
-                this.mCommandLogger.recordHostCommand(i, cocktailHostInfo.mPackageName, "removeCocktailInHostLocked id=");
+                CocktailHostInfo cocktailHostInfo =
+                        (CocktailHostInfo) ((Map.Entry) it.next()).getValue();
+                this.mCommandLogger.recordHostCommand(
+                        i, cocktailHostInfo.mPackageName, "removeCocktailInHostLocked id=");
                 try {
                     cocktailHostInfo.callbackHost.removeCocktail(i, this.mUserId);
                 } catch (RemoteException unused) {
@@ -1142,11 +1393,13 @@ public final class CocktailBarManagerServiceImpl {
 
     public final void removeCocktailLocked(int i) {
         if (DEBUG) {
-            HermesService$3$$ExternalSyntheticOutline0.m(i, "removeCocktailLocked : cocktailId = ", "CocktailBarManagerServiceImpl");
+            HermesService$3$$ExternalSyntheticOutline0.m(
+                    i, "removeCocktailLocked : cocktailId = ", "CocktailBarManagerServiceImpl");
         }
         Cocktail cocktail = (Cocktail) this.mCocktailArr.get(i);
         if (cocktail != null) {
-            this.mCocktailPolicyManager.disableUpdatableCocktail(cocktail.getCocktailId(), this.mUserId);
+            this.mCocktailPolicyManager.disableUpdatableCocktail(
+                    cocktail.getCocktailId(), this.mUserId);
             decrementCocktailServiceRefCount(cocktail);
             cocktail.updateCocktailInfo((CocktailInfo) null);
             removeCocktailInHostLocked(i);
@@ -1157,7 +1410,9 @@ public final class CocktailBarManagerServiceImpl {
         long clearCallingIdentity;
         boolean z = DEBUG;
         if (z) {
-            Slog.i("CocktailBarManagerServiceImpl", "removeCocktailLocked : cocktailId = " + cocktail.getCocktailId());
+            Slog.i(
+                    "CocktailBarManagerServiceImpl",
+                    "removeCocktailLocked : cocktailId = " + cocktail.getCocktailId());
         }
         int cocktailId = cocktail.getCocktailId();
         CocktailPolicyManager cocktailPolicyManager = this.mCocktailPolicyManager;
@@ -1168,10 +1423,15 @@ public final class CocktailBarManagerServiceImpl {
         removeCocktailInHostLocked(cocktail.getCocktailId());
         EnabledPackageMap enabledPackageMap = this.mEnabledCocktailPackages;
         if (z) {
-            Slog.i("CocktailBarManagerServiceImpl", "sendDisableIntentLocked : cocktailId = " + cocktail.getCocktailId());
+            Slog.i(
+                    "CocktailBarManagerServiceImpl",
+                    "sendDisableIntentLocked : cocktailId = " + cocktail.getCocktailId());
         }
         if (cocktail.getProvider() == null) {
-            Slog.i("CocktailBarManagerServiceImpl", "sendDisableIntentLocked : invalied provider info cocktailId = " + cocktail.getCocktailId());
+            Slog.i(
+                    "CocktailBarManagerServiceImpl",
+                    "sendDisableIntentLocked : invalied provider info cocktailId = "
+                            + cocktail.getCocktailId());
             return;
         }
         PendingIntent broadcast = cocktail.getBroadcast();
@@ -1186,7 +1446,9 @@ public final class CocktailBarManagerServiceImpl {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         }
-        Intent m = BatteryService$$ExternalSyntheticOutline0.m(268435456, "com.samsung.android.cocktail.action.COCKTAIL_DISABLED");
+        Intent m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        268435456, "com.samsung.android.cocktail.action.COCKTAIL_DISABLED");
         m.setComponent(cocktail.getProvider());
         clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -1195,20 +1457,36 @@ public final class CocktailBarManagerServiceImpl {
                 cocktail.setState(0);
             }
             String packageName = cocktail.getProvider().getPackageName();
-            CocktailBarHistory.getInstance().recordSemCocktailProviderBr("sendDisableIntentLocked : PackageName - " + packageName + ", " + cocktail.dump());
+            CocktailBarHistory.getInstance()
+                    .recordSemCocktailProviderBr(
+                            "sendDisableIntentLocked : PackageName - "
+                                    + packageName
+                                    + ", "
+                                    + cocktail.dump());
             int enabledCount = enabledPackageMap.getEnabledCount(packageName);
             enabledPackageMap.removeEnabledProvider(cocktail.getProvider());
             int enabledCount2 = enabledPackageMap.getEnabledCount(packageName);
             if (enabledCount >= 1 && enabledCount2 == 0) {
                 if (z) {
                     try {
-                        Slog.i("CocktailBarManagerServiceImpl", "sendDisableIntentLocked : removePowerSaveWhitelistApp cocktailId = " + cocktail.getCocktailId() + packageName);
+                        Slog.i(
+                                "CocktailBarManagerServiceImpl",
+                                "sendDisableIntentLocked : removePowerSaveWhitelistApp cocktailId ="
+                                    + " "
+                                        + cocktail.getCocktailId()
+                                        + packageName);
                     } catch (RemoteException | UnsupportedOperationException e) {
-                        Slog.d("CocktailBarManagerServiceImpl", "sendDisableIntentLocked: fail to remove pm white list " + packageName);
+                        Slog.d(
+                                "CocktailBarManagerServiceImpl",
+                                "sendDisableIntentLocked: fail to remove pm white list "
+                                        + packageName);
                         e.printStackTrace();
                     }
                 }
-                CocktailBarHistory.getInstance().recordPowerWhitelistHistory(cocktail.getCocktailId(), "sendDisableIntentLocked removePowerSaveWhitelistApp");
+                CocktailBarHistory.getInstance()
+                        .recordPowerWhitelistHistory(
+                                cocktail.getCocktailId(),
+                                "sendDisableIntentLocked removePowerSaveWhitelistApp");
                 this.mLocalDeviceIdleController.removePowerSaveWhitelistApp(packageName);
             }
         } catch (Throwable th) {
@@ -1221,7 +1499,9 @@ public final class CocktailBarManagerServiceImpl {
         if (cocktail.getProviderInfo().category == 512) {
             this.mCocktailPolicyManager.establishPolicy(cocktail, 3);
         }
-        if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE") && SemEmergencyManager.isEmergencyMode(this.mContext)) {
+        if (SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE")
+                && SemEmergencyManager.isEmergencyMode(this.mContext)) {
             return false;
         }
         this.mEnabledCocktailPackages.removeEnabledProvider(cocktail.getProvider());
@@ -1231,7 +1511,9 @@ public final class CocktailBarManagerServiceImpl {
 
     public final boolean removeProvidersForPackageLocked(String str) {
         if (DEBUG) {
-            Slog.i("CocktailBarManagerServiceImpl", "removeProvidersForPackageLocked : pkgName = " + str);
+            Slog.i(
+                    "CocktailBarManagerServiceImpl",
+                    "removeProvidersForPackageLocked : pkgName = " + str);
         }
         boolean z = false;
         boolean z2 = false;
@@ -1248,7 +1530,9 @@ public final class CocktailBarManagerServiceImpl {
             if (z2) {
                 updateToolLauncher();
             }
-            Intent intent = new Intent("com.samsung.android.app.cocktailbarservice.action.COCKTAIL_BAR_COCKTAIL_UNINSTALLED");
+            Intent intent =
+                    new Intent(
+                            "com.samsung.android.app.cocktailbarservice.action.COCKTAIL_BAR_COCKTAIL_UNINSTALLED");
             intent.addFlags(268435456);
             intent.setPackage(KnoxCustomManagerService.LAUNCHER_PACKAGE);
             long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -1268,7 +1552,8 @@ public final class CocktailBarManagerServiceImpl {
         }
         CocktailProviderInfo providerInfo = cocktail.getProviderInfo();
         if (providerInfo != null && ((i = providerInfo.category) == 4 || i == 32 || i == 128)) {
-            if (!this.mCocktailPolicyManager.isUpdatedCocktail(cocktail.getCocktailId(), this.mUserId)) {
+            if (!this.mCocktailPolicyManager.isUpdatedCocktail(
+                    cocktail.getCocktailId(), this.mUserId)) {
                 return false;
             }
         }
@@ -1283,7 +1568,8 @@ public final class CocktailBarManagerServiceImpl {
         }
         CocktailProviderInfo providerInfo = cocktail.getProviderInfo();
         if (providerInfo != null && ((i = providerInfo.category) == 4 || i == 32 || i == 128)) {
-            this.mCocktailPolicyManager.enableUpdatableCocktail(cocktail.getCocktailId(), this.mUserId);
+            this.mCocktailPolicyManager.enableUpdatableCocktail(
+                    cocktail.getCocktailId(), this.mUserId);
         }
         sendEnableAndUpdateBroadcastLocked(cocktail);
         return true;
@@ -1298,7 +1584,9 @@ public final class CocktailBarManagerServiceImpl {
                 Slog.w("CocktailBarManagerServiceImpl", "savedStateFile Failed mkdirs");
             }
             if (!new File("/data/system/cocktails.xml").renameTo(file)) {
-                Slog.w("CocktailBarManagerServiceImpl", "savedStateFile Failed rename to setting file.");
+                Slog.w(
+                        "CocktailBarManagerServiceImpl",
+                        "savedStateFile Failed rename to setting file.");
             }
         }
         return new AtomicFile(file);
@@ -1308,7 +1596,8 @@ public final class CocktailBarManagerServiceImpl {
         if (DEBUG) {
             Slog.i("CocktailBarManagerServiceImpl", "sendCocktailChangedVisibilityIntentLocked");
         }
-        Intent intent = new Intent("com.samsung.android.cocktail.action.COCKTAIL_VISIBILITY_CHANGED");
+        Intent intent =
+                new Intent("com.samsung.android.cocktail.action.COCKTAIL_VISIBILITY_CHANGED");
         intent.putExtra("cocktailId", cocktail.getCocktailId());
         intent.putExtra("cocktailVisibility", i);
         intent.addFlags(268435456);
@@ -1317,8 +1606,10 @@ public final class CocktailBarManagerServiceImpl {
         try {
             this.mContext.sendBroadcastAsUser(intent, new UserHandle(this.mUserId));
             CocktailBarHistory cocktailBarHistory = CocktailBarHistory.getInstance();
-            StringBuilder sb = new StringBuilder("sendCocktailChangedVisibilityIntentLocked : PackageName - ");
-            sb.append(cocktail.getProvider() != null ? cocktail.getProvider().getClassName() : null);
+            StringBuilder sb =
+                    new StringBuilder("sendCocktailChangedVisibilityIntentLocked : PackageName - ");
+            sb.append(
+                    cocktail.getProvider() != null ? cocktail.getProvider().getClassName() : null);
             sb.append(", ");
             sb.append(cocktail.dump());
             cocktailBarHistory.recordSemCocktailProviderBr(sb.toString());
@@ -1337,23 +1628,43 @@ public final class CocktailBarManagerServiceImpl {
         boolean ensureStateLoadedLocked = ensureStateLoadedLocked();
         int i = this.mUserId;
         if (!ensureStateLoadedLocked) {
-            Slog.i("CocktailBarManagerServiceImpl", "sendEnableAndUpdateBroadcastLocked : not loaded u=" + i + " cocktail=" + cocktail);
+            Slog.i(
+                    "CocktailBarManagerServiceImpl",
+                    "sendEnableAndUpdateBroadcastLocked : not loaded u="
+                            + i
+                            + " cocktail="
+                            + cocktail);
             return;
         }
         if (cocktail != null) {
             if (cocktail.getState() == 2) {
-                Slog.i("CocktailBarManagerServiceImpl", "sendEnableAndUpdateBroadcastLocked : cocktail(" + cocktail.getCocktailId() + ") is disabled");
+                Slog.i(
+                        "CocktailBarManagerServiceImpl",
+                        "sendEnableAndUpdateBroadcastLocked : cocktail("
+                                + cocktail.getCocktailId()
+                                + ") is disabled");
                 return;
             }
             EnabledPackageMap enabledPackageMap = this.mEnabledCocktailPackages;
             boolean z = DEBUG;
             if (z) {
-                Slog.i("CocktailBarManagerServiceImpl", "sendEnableIntentLocked : cocktailId = " + cocktail.getCocktailId());
+                Slog.i(
+                        "CocktailBarManagerServiceImpl",
+                        "sendEnableIntentLocked : cocktailId = " + cocktail.getCocktailId());
             }
             if (cocktail.getState() != 0) {
-                Slog.i("CocktailBarManagerServiceImpl", "sendEnableIntentLocked : cocktail(" + cocktail.getCocktailId() + ") has state(" + cocktail.getState() + ")");
+                Slog.i(
+                        "CocktailBarManagerServiceImpl",
+                        "sendEnableIntentLocked : cocktail("
+                                + cocktail.getCocktailId()
+                                + ") has state("
+                                + cocktail.getState()
+                                + ")");
             } else if (cocktail.getProvider() == null) {
-                Slog.i("CocktailBarManagerServiceImpl", "sendEnableIntentLocked : invalid provider info cocktailId = " + cocktail.getCocktailId());
+                Slog.i(
+                        "CocktailBarManagerServiceImpl",
+                        "sendEnableIntentLocked : invalid provider info cocktailId = "
+                                + cocktail.getCocktailId());
             } else {
                 if (z) {
                     Slog.i("CocktailBarManagerServiceImpl", "registerForBroadcastsLocked");
@@ -1365,13 +1676,15 @@ public final class CocktailBarManagerServiceImpl {
                 } else {
                     boolean z2 = cocktail.getBroadcast() != null;
                     Intent intent = new Intent(cocktail.getUpdateIntentName());
-                    intent.putExtra("cocktailIds", new int[]{cocktail.getCocktailId()});
+                    intent.putExtra("cocktailIds", new int[] {cocktail.getCocktailId()});
                     intent.setComponent(providerInfo.provider);
                     clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         str2 = "sendEnableIntentLocked: fail to add power save whitelist ";
                         str = "CocktailBarManagerServiceImpl";
-                        PendingIntent broadcastAsUser = PendingIntent.getBroadcastAsUser(this.mContext, 1, intent, 201326592, new UserHandle(i));
+                        PendingIntent broadcastAsUser =
+                                PendingIntent.getBroadcastAsUser(
+                                        this.mContext, 1, intent, 201326592, new UserHandle(i));
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         if (!z2) {
                             cocktail.setBroadcast(broadcastAsUser);
@@ -1380,7 +1693,8 @@ public final class CocktailBarManagerServiceImpl {
                             long j3 = j < j2 ? j2 : j;
                             clearCallingIdentity = Binder.clearCallingIdentity();
                             try {
-                                this.mAlarmManager.setInexactRepeating(2, SystemClock.elapsedRealtime() + j3, j3, broadcastAsUser);
+                                this.mAlarmManager.setInexactRepeating(
+                                        2, SystemClock.elapsedRealtime() + j3, j3, broadcastAsUser);
                                 Binder.restoreCallingIdentity(clearCallingIdentity);
                             } finally {
                             }
@@ -1388,38 +1702,55 @@ public final class CocktailBarManagerServiceImpl {
                     } finally {
                     }
                 }
-                Intent m = BatteryService$$ExternalSyntheticOutline0.m(268435456, "com.samsung.android.cocktail.action.COCKTAIL_ENABLED");
+                Intent m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                268435456, "com.samsung.android.cocktail.action.COCKTAIL_ENABLED");
                 m.setComponent(cocktail.getProvider());
                 clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mContext.sendBroadcastAsUser(m, new UserHandle(i));
                     cocktail.setState(1);
                     String packageName = cocktail.getProvider().getPackageName();
-                    CocktailBarHistory.getInstance().recordSemCocktailProviderBr("sendEnableIntentLocked : PackageName - " + packageName + ", " + cocktail.dump());
+                    CocktailBarHistory.getInstance()
+                            .recordSemCocktailProviderBr(
+                                    "sendEnableIntentLocked : PackageName - "
+                                            + packageName
+                                            + ", "
+                                            + cocktail.dump());
                     if (enabledPackageMap.getEnabledCount(packageName) == 0) {
                         enabledPackageMap.putEnabledProvider(cocktail.getProvider());
                         if (z) {
                             try {
                                 str3 = str;
                                 try {
-                                    Slog.i(str3, "sendEnableIntentLocked : addPowerSaveWhitelistApp cocktailId = " + cocktail.getCocktailId() + packageName);
+                                    Slog.i(
+                                            str3,
+                                            "sendEnableIntentLocked : addPowerSaveWhitelistApp"
+                                                + " cocktailId = "
+                                                    + cocktail.getCocktailId()
+                                                    + packageName);
                                 } catch (RemoteException e) {
                                     e = e;
                                     Slog.d(str3, str2 + packageName);
                                     e.printStackTrace();
-                                    sendUpdateIntentLocked(cocktail, cocktail.getUpdateIntentName(), true);
+                                    sendUpdateIntentLocked(
+                                            cocktail, cocktail.getUpdateIntentName(), true);
                                 }
                             } catch (RemoteException e2) {
                                 e = e2;
                                 str3 = str;
                                 Slog.d(str3, str2 + packageName);
                                 e.printStackTrace();
-                                sendUpdateIntentLocked(cocktail, cocktail.getUpdateIntentName(), true);
+                                sendUpdateIntentLocked(
+                                        cocktail, cocktail.getUpdateIntentName(), true);
                             }
                         } else {
                             str3 = str;
                         }
-                        CocktailBarHistory.getInstance().recordPowerWhitelistHistory(cocktail.getCocktailId(), "sendEnableIntentLocked addPowerSaveWhitelistApp");
+                        CocktailBarHistory.getInstance()
+                                .recordPowerWhitelistHistory(
+                                        cocktail.getCocktailId(),
+                                        "sendEnableIntentLocked addPowerSaveWhitelistApp");
                         this.mLocalDeviceIdleController.addPowerSaveWhitelistApp(packageName);
                     } else {
                         enabledPackageMap.putEnabledProvider(cocktail.getProvider());
@@ -1437,7 +1768,8 @@ public final class CocktailBarManagerServiceImpl {
             try {
                 int size = this.mCocktailArr.size();
                 for (int i = 0; i < size; i++) {
-                    checkCocktailAttributeLocked((Cocktail) this.mCocktailArr.valueAt(i), this.mHostCategory);
+                    checkCocktailAttributeLocked(
+                            (Cocktail) this.mCocktailArr.valueAt(i), this.mHostCategory);
                 }
                 sendInitialBroadcastsLocked();
             } catch (Throwable th) {
@@ -1448,7 +1780,10 @@ public final class CocktailBarManagerServiceImpl {
 
     public final void sendInitialBroadcastsLocked() {
         if (!ensureStateLoadedLocked()) {
-            SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("sendInitialBroadcastsLocked : not loaded u="), this.mUserId, "CocktailBarManagerServiceImpl");
+            SystemServiceManager$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("sendInitialBroadcastsLocked : not loaded u="),
+                    this.mUserId,
+                    "CocktailBarManagerServiceImpl");
             return;
         }
         ArrayList enableCocktailIds = this.mSettings.getEnableCocktailIds();
@@ -1458,7 +1793,8 @@ public final class CocktailBarManagerServiceImpl {
             int intValue = ((Integer) it.next()).intValue();
             Cocktail cocktail = (Cocktail) this.mCocktailArr.get(intValue);
             if (cocktail == null || cocktail.getState() != 0 || cocktail.getProvider() == null) {
-                StringBuffer stringBuffer = new StringBuffer("sendInitialBroadcastsLocked : invalid cocktail ");
+                StringBuffer stringBuffer =
+                        new StringBuffer("sendInitialBroadcastsLocked : invalid cocktail ");
                 stringBuffer.append(intValue);
                 stringBuffer.append(" c=");
                 stringBuffer.append(cocktail);
@@ -1477,11 +1813,19 @@ public final class CocktailBarManagerServiceImpl {
                     arrayList.add(cocktail.getProvider().getPackageName());
                     try {
                         if (DEBUG) {
-                            Slog.i("CocktailBarManagerServiceImpl", "sendInitialBroadcastsLocked : addPowerSaveWhitelistApp cocktailId = " + intValue + packageName);
+                            Slog.i(
+                                    "CocktailBarManagerServiceImpl",
+                                    "sendInitialBroadcastsLocked : addPowerSaveWhitelistApp"
+                                        + " cocktailId = "
+                                            + intValue
+                                            + packageName);
                         }
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            CocktailBarHistory.getInstance().recordPowerWhitelistHistory(cocktail.getCocktailId(), "sendInitialBroadcastsLocked addPowerSaveWhitelistApp");
+                            CocktailBarHistory.getInstance()
+                                    .recordPowerWhitelistHistory(
+                                            cocktail.getCocktailId(),
+                                            "sendInitialBroadcastsLocked addPowerSaveWhitelistApp");
                             this.mLocalDeviceIdleController.addPowerSaveWhitelistApp(packageName);
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         } catch (Throwable th) {
@@ -1489,7 +1833,10 @@ public final class CocktailBarManagerServiceImpl {
                             throw th;
                         }
                     } catch (RemoteException e) {
-                        Slog.d("CocktailBarManagerServiceImpl", "sendInitialBroadcastsLocked: fail to add pm white list " + packageName);
+                        Slog.d(
+                                "CocktailBarManagerServiceImpl",
+                                "sendInitialBroadcastsLocked: fail to add pm white list "
+                                        + packageName);
                         e.printStackTrace();
                     }
                 } else {
@@ -1503,7 +1850,11 @@ public final class CocktailBarManagerServiceImpl {
     public final void sendUpdateIntentLocked(Cocktail cocktail, String str, boolean z) {
         int i = this.mUserId;
         if (cocktail.getState() == 2) {
-            Slog.i("CocktailBarManagerServiceImpl", "sendUpdateIntentLocked : cocktail(" + cocktail.getCocktailId() + ") is disabled");
+            Slog.i(
+                    "CocktailBarManagerServiceImpl",
+                    "sendUpdateIntentLocked : cocktail("
+                            + cocktail.getCocktailId()
+                            + ") is disabled");
             return;
         }
         CocktailPolicyManager cocktailPolicyManager = this.mCocktailPolicyManager;
@@ -1515,17 +1866,20 @@ public final class CocktailBarManagerServiceImpl {
             }
         }
         if (DEBUG) {
-            Slog.i("CocktailBarManagerServiceImpl", "sendUpdateIntentLocked : cocktailId = " + cocktail.getCocktailId());
+            Slog.i(
+                    "CocktailBarManagerServiceImpl",
+                    "sendUpdateIntentLocked : cocktailId = " + cocktail.getCocktailId());
         }
         Intent m = BatteryService$$ExternalSyntheticOutline0.m(268435456, str);
-        m.putExtra("cocktailIds", new int[]{cocktail.getCocktailId()});
+        m.putExtra("cocktailIds", new int[] {cocktail.getCocktailId()});
         m.setComponent(cocktail.getProvider());
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mContext.sendBroadcastAsUser(m, new UserHandle(i));
             CocktailBarHistory cocktailBarHistory = CocktailBarHistory.getInstance();
             StringBuilder sb = new StringBuilder("sendUpdateIntentLocked : PackageName - ");
-            sb.append(cocktail.getProvider() != null ? cocktail.getProvider().getClassName() : null);
+            sb.append(
+                    cocktail.getProvider() != null ? cocktail.getProvider().getClassName() : null);
             sb.append(", ");
             sb.append(cocktail.dump());
             cocktailBarHistory.recordSemCocktailProviderBr(sb.toString());
@@ -1550,9 +1904,15 @@ public final class CocktailBarManagerServiceImpl {
                     ICocktailHost iCocktailHost = (ICocktailHost) hashMap.get(entry.getKey());
                     if (iCocktailHost != null) {
                         CocktailHostInfo cocktailHostInfo = (CocktailHostInfo) this.mHost.get(str);
-                        if (cocktailHostInfo != null && !cocktailHostInfo.token.equals(iCocktailHost.asBinder())) {
+                        if (cocktailHostInfo != null
+                                && !cocktailHostInfo.token.equals(iCocktailHost.asBinder())) {
                             cocktailHostInfo.unlinkBinder();
-                            this.mHost.put(str, new CocktailHostInfo(str, iCocktailHost, ((Integer) hashMap2.get(str)).intValue()));
+                            this.mHost.put(
+                                    str,
+                                    new CocktailHostInfo(
+                                            str,
+                                            iCocktailHost,
+                                            ((Integer) hashMap2.get(str)).intValue()));
                         }
                     } else {
                         CocktailHostInfo cocktailHostInfo2 = (CocktailHostInfo) this.mHost.get(str);
@@ -1564,13 +1924,19 @@ public final class CocktailBarManagerServiceImpl {
                 }
                 for (Map.Entry entry2 : hashMap.entrySet()) {
                     if (this.mHost.get(entry2.getKey()) == null) {
-                        this.mHost.put((String) entry2.getKey(), new CocktailHostInfo((String) entry2.getKey(), (ICocktailHost) entry2.getValue(), ((Integer) hashMap2.get(entry2.getKey())).intValue()));
+                        this.mHost.put(
+                                (String) entry2.getKey(),
+                                new CocktailHostInfo(
+                                        (String) entry2.getKey(),
+                                        (ICocktailHost) entry2.getValue(),
+                                        ((Integer) hashMap2.get(entry2.getKey())).intValue()));
                     }
                 }
                 boolean z2 = false;
                 this.mHostCategory = 0;
                 for (Map.Entry entry3 : this.mHost.entrySet()) {
-                    this.mHostCategory = ((CocktailHostInfo) entry3.getValue()).category | this.mHostCategory;
+                    this.mHostCategory =
+                            ((CocktailHostInfo) entry3.getValue()).category | this.mHostCategory;
                 }
                 if (this.mInitialzed && !z) {
                     z2 = true;
@@ -1621,7 +1987,10 @@ public final class CocktailBarManagerServiceImpl {
 
     public final void systemDestroy() {
         CocktailBarSettingsObserver cocktailBarSettingsObserver = this.mCocktailSettingsObserver;
-        CocktailBarManagerServiceImpl.this.mContext.getContentResolver().unregisterContentObserver(cocktailBarSettingsObserver);
+        CocktailBarManagerServiceImpl.this
+                .mContext
+                .getContentResolver()
+                .unregisterContentObserver(cocktailBarSettingsObserver);
         this.mCocktailSettingsObserver = null;
         synchronized (this.mCocktailArr) {
             removeAllUpdatedCocktailsLocked();
@@ -1633,7 +2002,9 @@ public final class CocktailBarManagerServiceImpl {
             synchronized (hashMap) {
                 try {
                     if (this.mHost.isEmpty()) {
-                        Slog.d("CocktailBarManagerServiceImpl", "unlinkAllHost: no registered host");
+                        Slog.d(
+                                "CocktailBarManagerServiceImpl",
+                                "unlinkAllHost: no registered host");
                     } else {
                         Iterator it = this.mHost.entrySet().iterator();
                         while (it.hasNext()) {
@@ -1660,10 +2031,13 @@ public final class CocktailBarManagerServiceImpl {
         String enabledCocktailsStr = cocktailBarSettings.getEnabledCocktailsStr();
         cocktailBarSettings.mEnabledCocktailsStrCache = enabledCocktailsStr;
         if (!TextUtils.isEmpty(enabledCocktailsStr)) {
-            cocktailBarSettings.mEnabledCocktailsSplitter.setString(cocktailBarSettings.mEnabledCocktailsStrCache);
+            cocktailBarSettings.mEnabledCocktailsSplitter.setString(
+                    cocktailBarSettings.mEnabledCocktailsStrCache);
             while (cocktailBarSettings.mEnabledCocktailsSplitter.hasNext()) {
                 String next = cocktailBarSettings.mEnabledCocktailsSplitter.next();
-                CocktailBarSettings.CocktailInfo cocktailInfo = (CocktailBarSettings.CocktailInfo) cocktailBarSettings.mCocktailMap.get(next);
+                CocktailBarSettings.CocktailInfo cocktailInfo =
+                        (CocktailBarSettings.CocktailInfo)
+                                cocktailBarSettings.mCocktailMap.get(next);
                 if (cocktailInfo != null) {
                     arrayList4.add(next);
                     if (!arrayList3.contains(next)) {
@@ -1675,7 +2049,8 @@ public final class CocktailBarManagerServiceImpl {
         Iterator it = arrayList3.iterator();
         while (it.hasNext()) {
             String str = (String) it.next();
-            CocktailBarSettings.CocktailInfo cocktailInfo2 = (CocktailBarSettings.CocktailInfo) cocktailBarSettings.mCocktailMap.get(str);
+            CocktailBarSettings.CocktailInfo cocktailInfo2 =
+                    (CocktailBarSettings.CocktailInfo) cocktailBarSettings.mCocktailMap.get(str);
             if (cocktailInfo2 != null && !arrayList4.contains(str)) {
                 arrayList2.add(Integer.valueOf(cocktailInfo2.cocktailId));
             }
@@ -1690,7 +2065,8 @@ public final class CocktailBarManagerServiceImpl {
         }
         Iterator it3 = arrayList.iterator();
         while (it3.hasNext()) {
-            Cocktail cocktail2 = (Cocktail) this.mCocktailArr.get(((Integer) it3.next()).intValue());
+            Cocktail cocktail2 =
+                    (Cocktail) this.mCocktailArr.get(((Integer) it3.next()).intValue());
             if (cocktail2 != null) {
                 sendEnableAndUpdateBroadcastLocked(cocktail2);
             }
@@ -1711,15 +2087,24 @@ public final class CocktailBarManagerServiceImpl {
             Slog.i("CocktailBarManagerServiceImpl", "updateProvidersForPackageLocked : " + str);
         }
         if (str == null) {
-            Slog.i("CocktailBarManagerServiceImpl", "updateProvidersForPackageLocked : invalide packageName");
+            Slog.i(
+                    "CocktailBarManagerServiceImpl",
+                    "updateProvidersForPackageLocked : invalide packageName");
             return false;
         }
         HashSet hashSet = new HashSet();
         String updateIntentName = Cocktail.getUpdateIntentName(i);
-        List queryIntentReceivers = queryIntentReceivers(this.mUserId, ExplicitHealthCheckController$$ExternalSyntheticOutline0.m(updateIntentName, str));
+        List queryIntentReceivers =
+                queryIntentReceivers(
+                        this.mUserId,
+                        ExplicitHealthCheckController$$ExternalSyntheticOutline0.m(
+                                updateIntentName, str));
         int size = queryIntentReceivers == null ? 0 : queryIntentReceivers.size();
         if (z3) {
-            HermesService$3$$ExternalSyntheticOutline0.m(size, "updateProvidersForPackageLocked : queryIntentReceivers=", "CocktailBarManagerServiceImpl");
+            HermesService$3$$ExternalSyntheticOutline0.m(
+                    size,
+                    "updateProvidersForPackageLocked : queryIntentReceivers=",
+                    "CocktailBarManagerServiceImpl");
         }
         int categoryIds = CocktailProviderInfo.getCategoryIds(this.mConfig.getCategoryFilter());
         boolean z4 = false;
@@ -1730,13 +2115,18 @@ public final class CocktailBarManagerServiceImpl {
             ActivityInfo activityInfo = resolveInfo.activityInfo;
             if (z3) {
                 z = z4;
-                DeviceIdleController$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m(str3, str, " ai="), activityInfo.packageName, "CocktailBarManagerServiceImpl");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        DumpUtils$$ExternalSyntheticOutline0.m(str3, str, " ai="),
+                        activityInfo.packageName,
+                        "CocktailBarManagerServiceImpl");
             } else {
                 z = z4;
             }
-            if ((activityInfo.applicationInfo.flags & 262144) == 0 && TextUtils.equals(str, activityInfo.packageName)) {
+            if ((activityInfo.applicationInfo.flags & 262144) == 0
+                    && TextUtils.equals(str, activityInfo.packageName)) {
                 int i6 = i5;
-                ComponentName componentName = new ComponentName(activityInfo.packageName, activityInfo.name);
+                ComponentName componentName =
+                        new ComponentName(activityInfo.packageName, activityInfo.name);
                 Cocktail lookupProviderLocked = lookupProviderLocked(componentName);
                 if (lookupProviderLocked == null) {
                     Cocktail addProviderLocked = addProviderLocked(resolveInfo, categoryIds, i);
@@ -1774,7 +2164,8 @@ public final class CocktailBarManagerServiceImpl {
                     i3 = i6;
                     i2 = categoryIds;
                     i4 = size;
-                    parseAndUpdateProviderInfoXml(lookupProviderLocked, componentName, resolveInfo, categoryIds, i);
+                    parseAndUpdateProviderInfoXml(
+                            lookupProviderLocked, componentName, resolveInfo, categoryIds, i);
                     hashSet.add(activityInfo.name);
                     if (lookupProviderLocked.getProviderInfo().category == 4) {
                         z5 = true;
@@ -1805,7 +2196,9 @@ public final class CocktailBarManagerServiceImpl {
                     z2 = z3;
                     i3 = i6;
                     i4 = size;
-                    Slog.i("CocktailBarManagerServiceImpl", "updateProvidersForPackageLocked : can not get right cocktail");
+                    Slog.i(
+                            "CocktailBarManagerServiceImpl",
+                            "updateProvidersForPackageLocked : can not get right cocktail");
                 }
             } else {
                 i3 = i5;
@@ -1824,8 +2217,12 @@ public final class CocktailBarManagerServiceImpl {
         boolean z6 = z4;
         for (int size2 = this.mCocktailArr.size() - 1; size2 >= 0; size2--) {
             Cocktail cocktail2 = (Cocktail) this.mCocktailArr.valueAt(size2);
-            if (cocktail2.getVersion() == i && TextUtils.equals(str, getPackageNameFromCocktail(cocktail2))) {
-                if (!hashSet.contains(cocktail2.getProvider() != null ? cocktail2.getProvider().getClassName() : null)) {
+            if (cocktail2.getVersion() == i
+                    && TextUtils.equals(str, getPackageNameFromCocktail(cocktail2))) {
+                if (!hashSet.contains(
+                        cocktail2.getProvider() != null
+                                ? cocktail2.getProvider().getClassName()
+                                : null)) {
                     boolean z7 = cocktail2.getProviderInfo().category == 4 ? true : z5;
                     z6 = removeProviderLocked(cocktail2);
                     z5 = z7;
@@ -1836,7 +2233,9 @@ public final class CocktailBarManagerServiceImpl {
             if (z5) {
                 updateToolLauncher();
             }
-            if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE") && SemEmergencyManager.isEmergencyMode(this.mContext)) {
+            if (SemFloatingFeature.getInstance()
+                            .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE")
+                    && SemEmergencyManager.isEmergencyMode(this.mContext)) {
                 return false;
             }
         }
@@ -1851,15 +2250,24 @@ public final class CocktailBarManagerServiceImpl {
         String str2 = str;
         boolean z = DEBUG;
         if (z) {
-            Slog.i("CocktailBarManagerServiceImpl", "updateProvidersInfoForPackageLocked : " + str2 + " version=" + i5);
+            Slog.i(
+                    "CocktailBarManagerServiceImpl",
+                    "updateProvidersInfoForPackageLocked : " + str2 + " version=" + i5);
         }
         if (str2 == null) {
-            HermesService$3$$ExternalSyntheticOutline0.m(i5, "updateProvidersInfoForPackageLocked invalid packageName version=", "CocktailBarManagerServiceImpl");
+            HermesService$3$$ExternalSyntheticOutline0.m(
+                    i5,
+                    "updateProvidersInfoForPackageLocked invalid packageName version=",
+                    "CocktailBarManagerServiceImpl");
             return;
         }
         HashSet hashSet = new HashSet();
         String updateIntentName = Cocktail.getUpdateIntentName(i);
-        List queryIntentReceivers = queryIntentReceivers(this.mUserId, ExplicitHealthCheckController$$ExternalSyntheticOutline0.m(updateIntentName, str2));
+        List queryIntentReceivers =
+                queryIntentReceivers(
+                        this.mUserId,
+                        ExplicitHealthCheckController$$ExternalSyntheticOutline0.m(
+                                updateIntentName, str2));
         int size = queryIntentReceivers == null ? 0 : queryIntentReceivers.size();
         int categoryIds = CocktailProviderInfo.getCategoryIds(this.mConfig.getCategoryFilter());
         boolean z2 = false;
@@ -1870,13 +2278,19 @@ public final class CocktailBarManagerServiceImpl {
             ActivityInfo activityInfo = resolveInfo.activityInfo;
             if (z) {
                 i2 = i6;
-                DeviceIdleController$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("updateProvidersInfoForPackageLocked : ", str2, " ai="), activityInfo.packageName, "CocktailBarManagerServiceImpl");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "updateProvidersInfoForPackageLocked : ", str2, " ai="),
+                        activityInfo.packageName,
+                        "CocktailBarManagerServiceImpl");
             } else {
                 i2 = i6;
             }
-            if ((activityInfo.applicationInfo.flags & 262144) == 0 && TextUtils.equals(str2, activityInfo.packageName)) {
+            if ((activityInfo.applicationInfo.flags & 262144) == 0
+                    && TextUtils.equals(str2, activityInfo.packageName)) {
                 i3 = size;
-                ComponentName componentName = new ComponentName(activityInfo.packageName, activityInfo.name);
+                ComponentName componentName =
+                        new ComponentName(activityInfo.packageName, activityInfo.name);
                 Cocktail lookupProviderLocked = lookupProviderLocked(componentName);
                 if (lookupProviderLocked == null) {
                     Cocktail addProviderLocked = addProviderLocked(resolveInfo, categoryIds, i5);
@@ -1898,7 +2312,8 @@ public final class CocktailBarManagerServiceImpl {
                 } else {
                     if (lookupProviderLocked.getVersion() == i5) {
                         i4 = categoryIds;
-                        parseAndUpdateProviderInfoXml(lookupProviderLocked, componentName, resolveInfo, categoryIds, i);
+                        parseAndUpdateProviderInfoXml(
+                                lookupProviderLocked, componentName, resolveInfo, categoryIds, i);
                         hashSet.add(activityInfo.name);
                         if (lookupProviderLocked.getProviderInfo().category == 4) {
                             z3 = true;
@@ -1909,7 +2324,9 @@ public final class CocktailBarManagerServiceImpl {
                         z2 = true;
                     } else {
                         i4 = categoryIds;
-                        Slog.i("CocktailBarManagerServiceImpl", "updateProvidersInfoForPackageLocked : can not get right cocktail");
+                        Slog.i(
+                                "CocktailBarManagerServiceImpl",
+                                "updateProvidersInfoForPackageLocked : can not get right cocktail");
                     }
                     i6 = i2 + 1;
                     i5 = i;
@@ -1931,7 +2348,8 @@ public final class CocktailBarManagerServiceImpl {
             if (z3) {
                 updateToolLauncher();
             }
-            if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE")) {
+            if (SemFloatingFeature.getInstance()
+                    .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE")) {
                 SemEmergencyManager.isEmergencyMode(this.mContext);
             }
         }
@@ -1946,8 +2364,10 @@ public final class CocktailBarManagerServiceImpl {
         synchronized (this.mHost) {
             Iterator it = this.mHost.entrySet().iterator();
             while (it.hasNext()) {
-                CocktailHostInfo cocktailHostInfo = (CocktailHostInfo) ((Map.Entry) it.next()).getValue();
-                this.mCommandLogger.recordHostCommand(this.mUserId, cocktailHostInfo.mPackageName, "updateToolLauncher uid=");
+                CocktailHostInfo cocktailHostInfo =
+                        (CocktailHostInfo) ((Map.Entry) it.next()).getValue();
+                this.mCommandLogger.recordHostCommand(
+                        this.mUserId, cocktailHostInfo.mPackageName, "updateToolLauncher uid=");
                 try {
                     cocktailHostInfo.callbackHost.updateToolLauncher(this.mUserId);
                 } catch (RemoteException unused) {
@@ -1965,11 +2385,14 @@ public final class CocktailBarManagerServiceImpl {
             fastXmlSerializer.startTag((String) null, "gs");
             int size = this.mCocktailArr.size();
             for (int i = 0; i < size; i++) {
-                CocktailProviderInfo providerInfo = ((Cocktail) this.mCocktailArr.valueAt(i)).getProviderInfo();
+                CocktailProviderInfo providerInfo =
+                        ((Cocktail) this.mCocktailArr.valueAt(i)).getProviderInfo();
                 if (providerInfo != null) {
                     fastXmlSerializer.startTag((String) null, KnoxAnalyticsDataConverter.PAYLOAD);
-                    fastXmlSerializer.attribute((String) null, "pkg", providerInfo.provider.getPackageName());
-                    fastXmlSerializer.attribute((String) null, "cl", providerInfo.provider.getClassName());
+                    fastXmlSerializer.attribute(
+                            (String) null, "pkg", providerInfo.provider.getPackageName());
+                    fastXmlSerializer.attribute(
+                            (String) null, "cl", providerInfo.provider.getClassName());
                     fastXmlSerializer.endTag((String) null, KnoxAnalyticsDataConverter.PAYLOAD);
                 }
             }
@@ -1977,7 +2400,8 @@ public final class CocktailBarManagerServiceImpl {
             fastXmlSerializer.endDocument();
             return true;
         } catch (IOException e) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m("Failed to write state: ", e, "CocktailBarManagerServiceImpl");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    "Failed to write state: ", e, "CocktailBarManagerServiceImpl");
             return false;
         }
     }

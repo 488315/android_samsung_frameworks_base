@@ -11,16 +11,20 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.server.audio.PlaybackActivityMonitor;
+
 import com.samsung.android.audio.Rune;
 import com.samsung.android.media.audiofx.SemVolumeMonitor;
 import com.samsung.android.server.audio.utils.PlaybackUtils;
+
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class VolumeMonitorService {
-    public static final Uri authority = Uri.parse("content://com.sec.android.app.volumemonitorprovider.VolumeMonitorProvider");
+    public static final Uri authority =
+            Uri.parse("content://com.sec.android.app.volumemonitorprovider.VolumeMonitorProvider");
     public static VolumeMonitorService sInstance;
     public final Context mContext;
     public SemVolumeMonitor mSemVolumeMonitor;
@@ -38,8 +42,7 @@ public final class VolumeMonitorService {
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class VolumeMonitorHandler extends Handler {
-            public VolumeMonitorHandler() {
-            }
+            public VolumeMonitorHandler() {}
 
             @Override // android.os.Handler
             public final void handleMessage(Message message) {
@@ -122,7 +125,8 @@ public final class VolumeMonitorService {
     public final Context getUserContext() {
         try {
             Context context = this.mContext;
-            return context.createPackageContextAsUser(context.getPackageName(), 0, new UserHandle(ActivityManager.getCurrentUser()));
+            return context.createPackageContextAsUser(
+                    context.getPackageName(), 0, new UserHandle(ActivityManager.getCurrentUser()));
         } catch (PackageManager.NameNotFoundException unused) {
             return this.mContext;
         }

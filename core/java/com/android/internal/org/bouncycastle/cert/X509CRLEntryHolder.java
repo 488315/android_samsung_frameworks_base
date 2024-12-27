@@ -5,6 +5,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.Extension;
 import com.android.internal.org.bouncycastle.asn1.x509.Extensions;
 import com.android.internal.org.bouncycastle.asn1.x509.GeneralNames;
 import com.android.internal.org.bouncycastle.asn1.x509.TBSCertList;
+
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,10 @@ public class X509CRLEntryHolder {
         Extension currentCaName;
         this.entry = entry;
         this.ca = previousCA;
-        if (isIndirect && entry.hasExtensions() && (currentCaName = entry.getExtensions().getExtension(Extension.certificateIssuer)) != null) {
+        if (isIndirect
+                && entry.hasExtensions()
+                && (currentCaName = entry.getExtensions().getExtension(Extension.certificateIssuer))
+                        != null) {
             this.ca = GeneralNames.getInstance(currentCaName.getParsedValue());
         }
     }

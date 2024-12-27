@@ -8,8 +8,9 @@ import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.Display;
 import android.view.DisplayInfo;
+
 import com.android.server.UiThread;
-import com.android.server.input.NativeInputManagerService;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -31,8 +32,7 @@ public final class PointerIconCache {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.input.PointerIconCache$1, reason: invalid class name */
     public final class AnonymousClass1 implements DisplayManager.DisplayListener {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // android.hardware.display.DisplayManager.DisplayListener
         public final void onDisplayAdded(int i) {
@@ -47,8 +47,12 @@ public final class PointerIconCache {
             synchronized (pointerIconCache.mLoadedPointerIconsByDisplayAndType) {
                 try {
                     if (pointerIconCache.updateDisplayDensityLocked(i)) {
-                        Slog.i("PointerIconCache", "Reloading pointer icons due to density change on display: " + i);
-                        SparseArray sparseArray = (SparseArray) pointerIconCache.mLoadedPointerIconsByDisplayAndType.get(i);
+                        Slog.i(
+                                "PointerIconCache",
+                                "Reloading pointer icons due to density change on display: " + i);
+                        SparseArray sparseArray =
+                                (SparseArray)
+                                        pointerIconCache.mLoadedPointerIconsByDisplayAndType.get(i);
                         if (sparseArray == null) {
                             return;
                         }
@@ -82,7 +86,8 @@ public final class PointerIconCache {
             if (context != null) {
                 return context;
             }
-            DisplayManager displayManager = (DisplayManager) this.mContext.getSystemService(DisplayManager.class);
+            DisplayManager displayManager =
+                    (DisplayManager) this.mContext.getSystemService(DisplayManager.class);
             Objects.requireNonNull(displayManager);
             Display display = displayManager.getDisplay(i);
             if (display == null) {
@@ -101,7 +106,8 @@ public final class PointerIconCache {
     }
 
     public final boolean updateDisplayDensityLocked(int i) {
-        DisplayManager displayManager = (DisplayManager) this.mContext.getSystemService(DisplayManager.class);
+        DisplayManager displayManager =
+                (DisplayManager) this.mContext.getSystemService(DisplayManager.class);
         Objects.requireNonNull(displayManager);
         Display display = displayManager.getDisplay(i);
         if (display == null) {

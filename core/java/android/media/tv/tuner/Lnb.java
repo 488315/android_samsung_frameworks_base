@@ -3,6 +3,7 @@ package android.media.tv.tuner;
 import android.annotation.SystemApi;
 import android.media.tv.tunerresourcemanager.TunerResourceManager;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
@@ -43,20 +44,16 @@ public class Lnb implements AutoCloseable {
     private final Object mLock = new Object();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EventType {
-    }
+    public @interface EventType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Position {
-    }
+    public @interface Position {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Tone {
-    }
+    public @interface Tone {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Voltage {
-    }
+    public @interface Voltage {}
 
     private native int nativeClose();
 
@@ -68,8 +65,7 @@ public class Lnb implements AutoCloseable {
 
     private native int nativeSetVoltage(int i);
 
-    private Lnb() {
-    }
+    private Lnb() {}
 
     void setCallbackAndOwner(Tuner tuner, Executor executor, LnbCallback callback) {
         synchronized (this.mCallbackLock) {
@@ -115,12 +111,14 @@ public class Lnb implements AutoCloseable {
             for (final LnbCallback callback : this.mCallbackMap.keySet()) {
                 Executor executor = this.mCallbackMap.get(callback);
                 if (callback != null && executor != null) {
-                    executor.execute(new Runnable() { // from class: android.media.tv.tuner.Lnb$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            Lnb.this.lambda$onEvent$0(callback, eventType);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.tuner.Lnb$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    Lnb.this.lambda$onEvent$0(callback, eventType);
+                                }
+                            });
                 }
             }
         }
@@ -140,19 +138,22 @@ public class Lnb implements AutoCloseable {
             for (final LnbCallback callback : this.mCallbackMap.keySet()) {
                 Executor executor = this.mCallbackMap.get(callback);
                 if (callback != null && executor != null) {
-                    executor.execute(new Runnable() { // from class: android.media.tv.tuner.Lnb$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            Lnb.this.lambda$onDiseqcMessage$1(callback, diseqcMessage);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.tuner.Lnb$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    Lnb.this.lambda$onDiseqcMessage$1(callback, diseqcMessage);
+                                }
+                            });
                 }
             }
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$onDiseqcMessage$1(LnbCallback callback, byte[] diseqcMessage) {
+    public /* synthetic */ void lambda$onDiseqcMessage$1(
+            LnbCallback callback, byte[] diseqcMessage) {
         synchronized (this.mCallbackLock) {
             if (callback != null) {
                 callback.onDiseqcMessage(diseqcMessage);
@@ -235,10 +236,22 @@ public class Lnb implements AutoCloseable {
 
     private void acquireTRMSLock(String functionNameForLog) {
         if (DEBUG) {
-            Log.d(TAG, "ATTEMPT:acquireLock() in " + functionNameForLog + "for clientId:" + this.mClientId);
+            Log.d(
+                    TAG,
+                    "ATTEMPT:acquireLock() in "
+                            + functionNameForLog
+                            + "for clientId:"
+                            + this.mClientId);
         }
         if (!this.mTunerResourceManager.acquireLock(this.mClientId)) {
-            Log.e(TAG, "FAILED:acquireLock() in " + functionNameForLog + " for clientId:" + this.mClientId + " - this can cause deadlock between Tuner API calls and onReclaimResources()");
+            Log.e(
+                    TAG,
+                    "FAILED:acquireLock() in "
+                            + functionNameForLog
+                            + " for clientId:"
+                            + this.mClientId
+                            + " - this can cause deadlock between Tuner API calls and"
+                            + " onReclaimResources()");
         }
     }
 

@@ -1,7 +1,5 @@
 package android.net.wifi.nl80211;
 
-import android.net.wifi.nl80211.IPnoScanEvent;
-import android.net.wifi.nl80211.IScanEvent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -75,20 +73,16 @@ public interface IWifiScannerImpl extends IInterface {
         }
 
         @Override // android.net.wifi.nl80211.IWifiScannerImpl
-        public void subscribeScanEvents(IScanEvent handler) throws RemoteException {
-        }
+        public void subscribeScanEvents(IScanEvent handler) throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IWifiScannerImpl
-        public void unsubscribeScanEvents() throws RemoteException {
-        }
+        public void unsubscribeScanEvents() throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IWifiScannerImpl
-        public void subscribePnoScanEvents(IPnoScanEvent handler) throws RemoteException {
-        }
+        public void subscribePnoScanEvents(IPnoScanEvent handler) throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IWifiScannerImpl
-        public void unsubscribePnoScanEvents() throws RemoteException {
-        }
+        public void unsubscribePnoScanEvents() throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IWifiScannerImpl
         public boolean startPnoScan(PnoSettings pnoSettings) throws RemoteException {
@@ -101,12 +95,10 @@ public interface IWifiScannerImpl extends IInterface {
         }
 
         @Override // android.net.wifi.nl80211.IWifiScannerImpl
-        public void abortScan() throws RemoteException {
-        }
+        public void abortScan() throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IWifiScannerImpl
-        public void disableRandomMac() throws RemoteException {
-        }
+        public void disableRandomMac() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -114,7 +106,7 @@ public interface IWifiScannerImpl extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWifiScannerImpl {
+    public abstract static class Stub extends Binder implements IWifiScannerImpl {
         static final int TRANSACTION_abortScan = 12;
         static final int TRANSACTION_disableRandomMac = 13;
         static final int TRANSACTION_getMaxSsidsPerScan = 3;
@@ -188,7 +180,8 @@ public interface IWifiScannerImpl extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWifiScannerImpl.DESCRIPTOR);
             }
@@ -213,14 +206,16 @@ public interface IWifiScannerImpl extends IInterface {
                     reply.writeInt(_result3);
                     return true;
                 case 4:
-                    SingleScanSettings _arg0 = (SingleScanSettings) data.readTypedObject(SingleScanSettings.CREATOR);
+                    SingleScanSettings _arg0 =
+                            (SingleScanSettings) data.readTypedObject(SingleScanSettings.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result4 = scan(_arg0);
                     reply.writeNoException();
                     reply.writeBoolean(_result4);
                     return true;
                 case 5:
-                    SingleScanSettings _arg02 = (SingleScanSettings) data.readTypedObject(SingleScanSettings.CREATOR);
+                    SingleScanSettings _arg02 =
+                            (SingleScanSettings) data.readTypedObject(SingleScanSettings.CREATOR);
                     data.enforceNoDataAvail();
                     int _result5 = scanRequest(_arg02);
                     reply.writeNoException();
@@ -291,7 +286,8 @@ public interface IWifiScannerImpl extends IInterface {
                     _data.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    NativeScanResult[] _result = (NativeScanResult[]) _reply.createTypedArray(NativeScanResult.CREATOR);
+                    NativeScanResult[] _result =
+                            (NativeScanResult[]) _reply.createTypedArray(NativeScanResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -307,7 +303,8 @@ public interface IWifiScannerImpl extends IInterface {
                     _data.writeInterfaceToken(IWifiScannerImpl.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    NativeScanResult[] _result = (NativeScanResult[]) _reply.createTypedArray(NativeScanResult.CREATOR);
+                    NativeScanResult[] _result =
+                            (NativeScanResult[]) _reply.createTypedArray(NativeScanResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

@@ -20,8 +20,9 @@ import android.view.ViewHierarchyEncoder;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -52,19 +53,44 @@ public class LinearLayout extends ViewGroup {
 
     @ViewDebug.ExportedProperty(category = "measurement")
     private int mBaselineChildTop;
+
     private Drawable mDivider;
     private int mDividerHeight;
     private int mDividerPadding;
     private int mDividerWidth;
 
-    @ViewDebug.ExportedProperty(category = "measurement", flagMapping = {@ViewDebug.FlagToString(equals = -1, mask = -1, name = KeyProperties.DIGEST_NONE), @ViewDebug.FlagToString(equals = 0, mask = 0, name = KeyProperties.DIGEST_NONE), @ViewDebug.FlagToString(equals = 48, mask = 48, name = "TOP"), @ViewDebug.FlagToString(equals = 80, mask = 80, name = "BOTTOM"), @ViewDebug.FlagToString(equals = 3, mask = 3, name = "LEFT"), @ViewDebug.FlagToString(equals = 5, mask = 5, name = "RIGHT"), @ViewDebug.FlagToString(equals = Gravity.START, mask = Gravity.START, name = "START"), @ViewDebug.FlagToString(equals = Gravity.END, mask = Gravity.END, name = "END"), @ViewDebug.FlagToString(equals = 16, mask = 16, name = "CENTER_VERTICAL"), @ViewDebug.FlagToString(equals = 112, mask = 112, name = "FILL_VERTICAL"), @ViewDebug.FlagToString(equals = 1, mask = 1, name = "CENTER_HORIZONTAL"), @ViewDebug.FlagToString(equals = 7, mask = 7, name = "FILL_HORIZONTAL"), @ViewDebug.FlagToString(equals = 17, mask = 17, name = "CENTER"), @ViewDebug.FlagToString(equals = 119, mask = 119, name = "FILL"), @ViewDebug.FlagToString(equals = 8388608, mask = 8388608, name = "RELATIVE")}, formatToHexString = true)
+    @ViewDebug.ExportedProperty(
+            category = "measurement",
+            flagMapping = {
+                @ViewDebug.FlagToString(equals = -1, mask = -1, name = KeyProperties.DIGEST_NONE),
+                @ViewDebug.FlagToString(equals = 0, mask = 0, name = KeyProperties.DIGEST_NONE),
+                @ViewDebug.FlagToString(equals = 48, mask = 48, name = "TOP"),
+                @ViewDebug.FlagToString(equals = 80, mask = 80, name = "BOTTOM"),
+                @ViewDebug.FlagToString(equals = 3, mask = 3, name = "LEFT"),
+                @ViewDebug.FlagToString(equals = 5, mask = 5, name = "RIGHT"),
+                @ViewDebug.FlagToString(
+                        equals = Gravity.START,
+                        mask = Gravity.START,
+                        name = "START"),
+                @ViewDebug.FlagToString(equals = Gravity.END, mask = Gravity.END, name = "END"),
+                @ViewDebug.FlagToString(equals = 16, mask = 16, name = "CENTER_VERTICAL"),
+                @ViewDebug.FlagToString(equals = 112, mask = 112, name = "FILL_VERTICAL"),
+                @ViewDebug.FlagToString(equals = 1, mask = 1, name = "CENTER_HORIZONTAL"),
+                @ViewDebug.FlagToString(equals = 7, mask = 7, name = "FILL_HORIZONTAL"),
+                @ViewDebug.FlagToString(equals = 17, mask = 17, name = "CENTER"),
+                @ViewDebug.FlagToString(equals = 119, mask = 119, name = "FILL"),
+                @ViewDebug.FlagToString(equals = 8388608, mask = 8388608, name = "RELATIVE")
+            },
+            formatToHexString = true)
     private int mGravity;
+
     private int mLayoutDirection;
     private int[] mMaxAscent;
     private int[] mMaxDescent;
 
     @ViewDebug.ExportedProperty(category = "measurement")
     private int mOrientation;
+
     private int mShowDividers;
 
     @ViewDebug.ExportedProperty(category = "measurement")
@@ -77,22 +103,38 @@ public class LinearLayout extends ViewGroup {
     private float mWeightSum;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DividerMode {
-    }
+    public @interface DividerMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OrientationMode {
-    }
+    public @interface OrientationMode {}
 
     public static class LayoutParams extends ViewGroup.MarginLayoutParams {
 
-        @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT, mapping = {@ViewDebug.IntToString(from = -1, to = KeyProperties.DIGEST_NONE), @ViewDebug.IntToString(from = 0, to = KeyProperties.DIGEST_NONE), @ViewDebug.IntToString(from = 48, to = "TOP"), @ViewDebug.IntToString(from = 80, to = "BOTTOM"), @ViewDebug.IntToString(from = 3, to = "LEFT"), @ViewDebug.IntToString(from = 5, to = "RIGHT"), @ViewDebug.IntToString(from = Gravity.START, to = "START"), @ViewDebug.IntToString(from = Gravity.END, to = "END"), @ViewDebug.IntToString(from = 16, to = "CENTER_VERTICAL"), @ViewDebug.IntToString(from = 112, to = "FILL_VERTICAL"), @ViewDebug.IntToString(from = 1, to = "CENTER_HORIZONTAL"), @ViewDebug.IntToString(from = 7, to = "FILL_HORIZONTAL"), @ViewDebug.IntToString(from = 17, to = "CENTER"), @ViewDebug.IntToString(from = 119, to = "FILL")})
+        @ViewDebug.ExportedProperty(
+                category = TtmlUtils.TAG_LAYOUT,
+                mapping = {
+                    @ViewDebug.IntToString(from = -1, to = KeyProperties.DIGEST_NONE),
+                    @ViewDebug.IntToString(from = 0, to = KeyProperties.DIGEST_NONE),
+                    @ViewDebug.IntToString(from = 48, to = "TOP"),
+                    @ViewDebug.IntToString(from = 80, to = "BOTTOM"),
+                    @ViewDebug.IntToString(from = 3, to = "LEFT"),
+                    @ViewDebug.IntToString(from = 5, to = "RIGHT"),
+                    @ViewDebug.IntToString(from = Gravity.START, to = "START"),
+                    @ViewDebug.IntToString(from = Gravity.END, to = "END"),
+                    @ViewDebug.IntToString(from = 16, to = "CENTER_VERTICAL"),
+                    @ViewDebug.IntToString(from = 112, to = "FILL_VERTICAL"),
+                    @ViewDebug.IntToString(from = 1, to = "CENTER_HORIZONTAL"),
+                    @ViewDebug.IntToString(from = 7, to = "FILL_HORIZONTAL"),
+                    @ViewDebug.IntToString(from = 17, to = "CENTER"),
+                    @ViewDebug.IntToString(from = 119, to = "FILL")
+                })
         public int gravity;
 
         @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT)
         public float weight;
 
-        public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<LayoutParams> {
+        public final class InspectionCompanion
+                implements android.view.inspector.InspectionCompanion<LayoutParams> {
             private int mLayout_gravityId;
             private int mLayout_weightId;
             private boolean mPropertiesMapped = false;
@@ -154,7 +196,14 @@ public class LinearLayout extends ViewGroup {
 
         @Override // android.view.ViewGroup.LayoutParams
         public String debug(String output) {
-            return output + "LinearLayout.LayoutParams={width=" + sizeToString(this.width) + ", height=" + sizeToString(this.height) + " weight=" + this.weight + "}";
+            return output
+                    + "LinearLayout.LayoutParams={width="
+                    + sizeToString(this.width)
+                    + ", height="
+                    + sizeToString(this.height)
+                    + " weight="
+                    + this.weight
+                    + "}";
         }
 
         @Override // android.view.ViewGroup.MarginLayoutParams, android.view.ViewGroup.LayoutParams
@@ -165,7 +214,8 @@ public class LinearLayout extends ViewGroup {
         }
     }
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<LinearLayout> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<LinearLayout> {
         private int mBaselineAlignedChildIndexId;
         private int mBaselineAlignedId;
         private int mDividerId;
@@ -178,15 +228,22 @@ public class LinearLayout extends ViewGroup {
         @Override // android.view.inspector.InspectionCompanion
         public void mapProperties(PropertyMapper propertyMapper) {
             this.mBaselineAlignedId = propertyMapper.mapBoolean("baselineAligned", 16843046);
-            this.mBaselineAlignedChildIndexId = propertyMapper.mapInt("baselineAlignedChildIndex", 16843047);
+            this.mBaselineAlignedChildIndexId =
+                    propertyMapper.mapInt("baselineAlignedChildIndex", 16843047);
             this.mDividerId = propertyMapper.mapObject("divider", 16843049);
             this.mGravityId = propertyMapper.mapGravity("gravity", 16842927);
-            this.mMeasureWithLargestChildId = propertyMapper.mapBoolean("measureWithLargestChild", 16843476);
+            this.mMeasureWithLargestChildId =
+                    propertyMapper.mapBoolean("measureWithLargestChild", 16843476);
             SparseArray<String> orientationEnumMapping = new SparseArray<>();
             orientationEnumMapping.put(0, Slice.HINT_HORIZONTAL);
             orientationEnumMapping.put(1, "vertical");
             Objects.requireNonNull(orientationEnumMapping);
-            this.mOrientationId = propertyMapper.mapIntEnum("orientation", 16842948, new View$InspectionCompanion$$ExternalSyntheticLambda0(orientationEnumMapping));
+            this.mOrientationId =
+                    propertyMapper.mapIntEnum(
+                            "orientation",
+                            16842948,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    orientationEnumMapping));
             this.mWeightSumId = propertyMapper.mapFloat("weightSum", 16843048);
             this.mPropertiesMapped = true;
         }
@@ -197,10 +254,12 @@ public class LinearLayout extends ViewGroup {
                 throw new InspectionCompanion.UninitializedPropertyMapException();
             }
             propertyReader.readBoolean(this.mBaselineAlignedId, node.isBaselineAligned());
-            propertyReader.readInt(this.mBaselineAlignedChildIndexId, node.getBaselineAlignedChildIndex());
+            propertyReader.readInt(
+                    this.mBaselineAlignedChildIndexId, node.getBaselineAlignedChildIndex());
             propertyReader.readObject(this.mDividerId, node.getDividerDrawable());
             propertyReader.readGravity(this.mGravityId, node.getGravity());
-            propertyReader.readBoolean(this.mMeasureWithLargestChildId, node.isMeasureWithLargestChildEnabled());
+            propertyReader.readBoolean(
+                    this.mMeasureWithLargestChildId, node.isMeasureWithLargestChildEnabled());
             propertyReader.readIntEnum(this.mOrientationId, node.getOrientation());
             propertyReader.readFloat(this.mWeightSumId, node.getWeightSum());
         }
@@ -236,8 +295,11 @@ public class LinearLayout extends ViewGroup {
             sRemeasureWeightedChildren = z;
             sCompatibilityDone = true;
         }
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LinearLayout, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.LinearLayout, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.LinearLayout, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.LinearLayout, attrs, a, defStyleAttr, defStyleRes);
         int index = a.getInt(1, -1);
         if (index >= 0) {
             setOrientation(index);
@@ -409,12 +471,20 @@ public class LinearLayout extends ViewGroup {
     }
 
     void drawHorizontalDivider(Canvas canvas, int top) {
-        this.mDivider.setBounds(getPaddingLeft() + this.mDividerPadding, top, (getWidth() - getPaddingRight()) - this.mDividerPadding, this.mDividerHeight + top);
+        this.mDivider.setBounds(
+                getPaddingLeft() + this.mDividerPadding,
+                top,
+                (getWidth() - getPaddingRight()) - this.mDividerPadding,
+                this.mDividerHeight + top);
         this.mDivider.draw(canvas);
     }
 
     void drawVerticalDivider(Canvas canvas, int left) {
-        this.mDivider.setBounds(left, getPaddingTop() + this.mDividerPadding, this.mDividerWidth + left, (getHeight() - getPaddingBottom()) - this.mDividerPadding);
+        this.mDivider.setBounds(
+                left,
+                getPaddingTop() + this.mDividerPadding,
+                this.mDividerWidth + left,
+                (getHeight() - getPaddingBottom()) - this.mDividerPadding);
         this.mDivider.draw(canvas);
     }
 
@@ -443,7 +513,9 @@ public class LinearLayout extends ViewGroup {
             return super.getBaseline();
         }
         if (getChildCount() <= this.mBaselineAlignedChildIndex) {
-            throw new RuntimeException("mBaselineAlignedChildIndex of LinearLayout set to an index that is out of bounds.");
+            throw new RuntimeException(
+                    "mBaselineAlignedChildIndex of LinearLayout set to an index that is out of"
+                        + " bounds.");
         }
         View child = getChildAt(this.mBaselineAlignedChildIndex);
         int childBaseline = child.getBaseline();
@@ -451,16 +523,22 @@ public class LinearLayout extends ViewGroup {
             if (this.mBaselineAlignedChildIndex == 0) {
                 return -1;
             }
-            throw new RuntimeException("mBaselineAlignedChildIndex of LinearLayout points to a View that doesn't know how to get its baseline.");
+            throw new RuntimeException(
+                    "mBaselineAlignedChildIndex of LinearLayout points to a View that doesn't know"
+                        + " how to get its baseline.");
         }
         int childTop = this.mBaselineChildTop;
         if (this.mOrientation == 1 && (majorGravity = this.mGravity & 112) != 48) {
             switch (majorGravity) {
                 case 16:
-                    childTop += ((((this.mBottom - this.mTop) - this.mPaddingTop) - this.mPaddingBottom) - this.mTotalLength) / 2;
+                    childTop +=
+                            ((((this.mBottom - this.mTop) - this.mPaddingTop) - this.mPaddingBottom)
+                                            - this.mTotalLength)
+                                    / 2;
                     break;
                 case 80:
-                    childTop = ((this.mBottom - this.mTop) - this.mPaddingBottom) - this.mTotalLength;
+                    childTop =
+                            ((this.mBottom - this.mTop) - this.mPaddingBottom) - this.mTotalLength;
                     break;
             }
         }
@@ -475,7 +553,10 @@ public class LinearLayout extends ViewGroup {
     @RemotableViewMethod
     public void setBaselineAlignedChildIndex(int i) {
         if (i < 0 || i >= getChildCount()) {
-            throw new IllegalArgumentException("base aligned child index out of range (0, " + getChildCount() + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "base aligned child index out of range (0, "
+                            + getChildCount()
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mBaselineAlignedChildIndex = i;
     }
@@ -514,14 +595,18 @@ public class LinearLayout extends ViewGroup {
             return (this.mShowDividers & 4) != 0;
         }
         boolean allViewsAreGoneBefore = allViewsAreGoneBefore(childIndex);
-        return allViewsAreGoneBefore ? (this.mShowDividers & 1) != 0 : (this.mShowDividers & 2) != 0;
+        return allViewsAreGoneBefore
+                ? (this.mShowDividers & 1) != 0
+                : (this.mShowDividers & 2) != 0;
     }
 
     private boolean hasDividerAfterChildAt(int childIndex) {
         if (this.mShowDividers == 0) {
             return false;
         }
-        return allViewsAreGoneAfter(childIndex) ? (this.mShowDividers & 4) != 0 : (this.mShowDividers & 2) != 0;
+        return allViewsAreGoneAfter(childIndex)
+                ? (this.mShowDividers & 4) != 0
+                : (this.mShowDividers & 2) != 0;
     }
 
     private boolean allViewsAreGoneBefore(int childIndex) {
@@ -560,7 +645,9 @@ public class LinearLayout extends ViewGroup {
             Method dump skipped, instructions count: 1140
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.LinearLayout.measureVertical(int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.widget.LinearLayout.measureVertical(int,"
+                    + " int):void");
     }
 
     private void forceUniformWidth(int count, int heightMeasureSpec) {
@@ -592,7 +679,9 @@ public class LinearLayout extends ViewGroup {
             Method dump skipped, instructions count: 1676
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.LinearLayout.measureHorizontal(int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.widget.LinearLayout.measureHorizontal(int,"
+                    + " int):void");
     }
 
     private void forceUniformHeight(int count, int widthMeasureSpec) {
@@ -619,8 +708,15 @@ public class LinearLayout extends ViewGroup {
         return 0;
     }
 
-    void measureChildBeforeLayout(View child, int childIndex, int widthMeasureSpec, int totalWidth, int heightMeasureSpec, int totalHeight) {
-        measureChildWithMargins(child, widthMeasureSpec, totalWidth, heightMeasureSpec, totalHeight);
+    void measureChildBeforeLayout(
+            View child,
+            int childIndex,
+            int widthMeasureSpec,
+            int totalWidth,
+            int heightMeasureSpec,
+            int totalHeight) {
+        measureChildWithMargins(
+                child, widthMeasureSpec, totalWidth, heightMeasureSpec, totalHeight);
     }
 
     int getLocationOffset(View child) {
@@ -688,7 +784,9 @@ public class LinearLayout extends ViewGroup {
                 switch (absoluteGravity & 7) {
                     case 1:
                         int childLeft2 = childSpace - childWidth;
-                        childLeft = (((childLeft2 / 2) + paddingLeft2) + lp.leftMargin) - lp.rightMargin;
+                        childLeft =
+                                (((childLeft2 / 2) + paddingLeft2) + lp.leftMargin)
+                                        - lp.rightMargin;
                         break;
                     case 5:
                         int childLeft3 = childRight - childWidth;
@@ -705,7 +803,8 @@ public class LinearLayout extends ViewGroup {
                 int childTop5 = getLocationOffset(child);
                 paddingLeft = paddingLeft2;
                 setChildFrame(child, childLeft, childTop4 + childTop5, childWidth, childHeight);
-                int childTop6 = childTop4 + childHeight + lp.bottomMargin + getNextLocationOffset(child);
+                int childTop6 =
+                        childTop4 + childHeight + lp.bottomMargin + getNextLocationOffset(child);
                 i += getChildrenSkipCount(child, i);
                 childTop = childTop6;
             }
@@ -742,7 +841,9 @@ public class LinearLayout extends ViewGroup {
             Method dump skipped, instructions count: 390
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.LinearLayout.layoutHorizontal(int, int, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.widget.LinearLayout.layoutHorizontal(int, int, int,"
+                    + " int):void");
     }
 
     private void setChildFrame(View child, int left, int top, int width, int height) {

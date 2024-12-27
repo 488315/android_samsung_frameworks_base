@@ -21,7 +21,7 @@ public interface IDeviceProductInfoConstants extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDeviceProductInfoConstants {
+    public abstract static class Stub extends Binder implements IDeviceProductInfoConstants {
         public Stub() {
             attachInterface(this, IDeviceProductInfoConstants.DESCRIPTOR);
         }
@@ -52,7 +52,8 @@ public interface IDeviceProductInfoConstants extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code == 1598968902) {
                 reply.writeString(IDeviceProductInfoConstants.DESCRIPTOR);
                 return true;

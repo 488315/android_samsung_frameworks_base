@@ -13,7 +13,9 @@ public final class SelectionSessionLogger {
     public static final class SignatureParser {
         static String getClassifierId(String signature) {
             int end;
-            if (signature == null || (end = signature.indexOf(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)) < 0) {
+            if (signature == null
+                    || (end = signature.indexOf(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER))
+                            < 0) {
                 return "";
             }
             return signature.substring(0, end);

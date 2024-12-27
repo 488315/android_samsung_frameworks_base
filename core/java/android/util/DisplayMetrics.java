@@ -2,6 +2,7 @@ package android.util;
 
 import android.content.res.FontScaleConverter;
 import android.os.SystemProperties;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -27,8 +28,7 @@ public class DisplayMetrics {
     public static final int DENSITY_DEFAULT = 160;
     public static final float DENSITY_DEFAULT_SCALE = 0.00625f;
 
-    @Deprecated
-    public static int DENSITY_DEVICE = getDeviceDensity();
+    @Deprecated public static int DENSITY_DEVICE = getDeviceDensity();
     public static final int DENSITY_DEVICE_STABLE = getDeviceDensity();
     public static final int DENSITY_HIGH = 240;
     public static final int DENSITY_LOW = 120;
@@ -49,15 +49,13 @@ public class DisplayMetrics {
     public float noncompatXdpi;
     public float noncompatYdpi;
 
-    @Deprecated
-    public float scaledDensity;
+    @Deprecated public float scaledDensity;
     public int widthPixels;
     public float xdpi;
     public float ydpi;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface DensityDpi {
-    }
+    @interface DensityDpi {}
 
     public void setTo(DisplayMetrics o) {
         if (this == o) {
@@ -103,11 +101,25 @@ public class DisplayMetrics {
     }
 
     public boolean equals(DisplayMetrics other) {
-        return equalsPhysical(other) && this.scaledDensity == other.scaledDensity && this.noncompatScaledDensity == other.noncompatScaledDensity;
+        return equalsPhysical(other)
+                && this.scaledDensity == other.scaledDensity
+                && this.noncompatScaledDensity == other.noncompatScaledDensity;
     }
 
     public boolean equalsPhysical(DisplayMetrics other) {
-        return other != null && this.widthPixels == other.widthPixels && this.heightPixels == other.heightPixels && this.density == other.density && this.densityDpi == other.densityDpi && this.xdpi == other.xdpi && this.ydpi == other.ydpi && this.noncompatWidthPixels == other.noncompatWidthPixels && this.noncompatHeightPixels == other.noncompatHeightPixels && this.noncompatDensity == other.noncompatDensity && this.noncompatDensityDpi == other.noncompatDensityDpi && this.noncompatXdpi == other.noncompatXdpi && this.noncompatYdpi == other.noncompatYdpi;
+        return other != null
+                && this.widthPixels == other.widthPixels
+                && this.heightPixels == other.heightPixels
+                && this.density == other.density
+                && this.densityDpi == other.densityDpi
+                && this.xdpi == other.xdpi
+                && this.ydpi == other.ydpi
+                && this.noncompatWidthPixels == other.noncompatWidthPixels
+                && this.noncompatHeightPixels == other.noncompatHeightPixels
+                && this.noncompatDensity == other.noncompatDensity
+                && this.noncompatDensityDpi == other.noncompatDensityDpi
+                && this.noncompatXdpi == other.noncompatXdpi
+                && this.noncompatYdpi == other.noncompatYdpi;
     }
 
     public int hashCode() {
@@ -115,10 +127,23 @@ public class DisplayMetrics {
     }
 
     public String toString() {
-        return "DisplayMetrics{density=" + this.density + ", width=" + this.widthPixels + ", height=" + this.heightPixels + ", scaledDensity=" + this.scaledDensity + ", xdpi=" + this.xdpi + ", ydpi=" + this.ydpi + "}";
+        return "DisplayMetrics{density="
+                + this.density
+                + ", width="
+                + this.widthPixels
+                + ", height="
+                + this.heightPixels
+                + ", scaledDensity="
+                + this.scaledDensity
+                + ", xdpi="
+                + this.xdpi
+                + ", ydpi="
+                + this.ydpi
+                + "}";
     }
 
     private static int getDeviceDensity() {
-        return SystemProperties.getInt("qemu.sf.lcd_density", SystemProperties.getInt("ro.sf.lcd_density", 160));
+        return SystemProperties.getInt(
+                "qemu.sf.lcd_density", SystemProperties.getInt("ro.sf.lcd_density", 160));
     }
 }

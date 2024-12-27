@@ -17,12 +17,12 @@ public interface ICallNotificationEventCallback extends IInterface {
 
     public static class Default implements ICallNotificationEventCallback {
         @Override // android.app.ICallNotificationEventCallback
-        public void onCallNotificationPosted(String packageName, UserHandle userHandle) throws RemoteException {
-        }
+        public void onCallNotificationPosted(String packageName, UserHandle userHandle)
+                throws RemoteException {}
 
         @Override // android.app.ICallNotificationEventCallback
-        public void onCallNotificationRemoved(String packageName, UserHandle userHandle) throws RemoteException {
-        }
+        public void onCallNotificationRemoved(String packageName, UserHandle userHandle)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface ICallNotificationEventCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICallNotificationEventCallback {
+    public abstract static class Stub extends Binder implements ICallNotificationEventCallback {
         static final int TRANSACTION_onCallNotificationPosted = 1;
         static final int TRANSACTION_onCallNotificationRemoved = 2;
 
@@ -71,7 +71,8 @@ public interface ICallNotificationEventCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICallNotificationEventCallback.DESCRIPTOR);
             }
@@ -114,7 +115,8 @@ public interface ICallNotificationEventCallback extends IInterface {
             }
 
             @Override // android.app.ICallNotificationEventCallback
-            public void onCallNotificationPosted(String packageName, UserHandle userHandle) throws RemoteException {
+            public void onCallNotificationPosted(String packageName, UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallNotificationEventCallback.DESCRIPTOR);
@@ -127,7 +129,8 @@ public interface ICallNotificationEventCallback extends IInterface {
             }
 
             @Override // android.app.ICallNotificationEventCallback
-            public void onCallNotificationRemoved(String packageName, UserHandle userHandle) throws RemoteException {
+            public void onCallNotificationRemoved(String packageName, UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallNotificationEventCallback.DESCRIPTOR);

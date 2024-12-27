@@ -16,16 +16,13 @@ public interface IKeyguardDismissCallback extends IInterface {
 
     public static class Default implements IKeyguardDismissCallback {
         @Override // com.android.internal.policy.IKeyguardDismissCallback
-        public void onDismissError() throws RemoteException {
-        }
+        public void onDismissError() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardDismissCallback
-        public void onDismissSucceeded() throws RemoteException {
-        }
+        public void onDismissSucceeded() throws RemoteException {}
 
         @Override // com.android.internal.policy.IKeyguardDismissCallback
-        public void onDismissCancelled() throws RemoteException {
-        }
+        public void onDismissCancelled() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,8 +30,9 @@ public interface IKeyguardDismissCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyguardDismissCallback {
-        public static final String DESCRIPTOR = "com.android.internal.policy.IKeyguardDismissCallback";
+    public abstract static class Stub extends Binder implements IKeyguardDismissCallback {
+        public static final String DESCRIPTOR =
+                "com.android.internal.policy.IKeyguardDismissCallback";
         static final int TRANSACTION_onDismissCancelled = 3;
         static final int TRANSACTION_onDismissError = 1;
         static final int TRANSACTION_onDismissSucceeded = 2;
@@ -78,7 +76,8 @@ public interface IKeyguardDismissCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

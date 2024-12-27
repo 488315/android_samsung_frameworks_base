@@ -4,6 +4,7 @@ import android.icu.util.ULocale;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -15,35 +16,38 @@ public abstract class TextClassifierEvent implements Parcelable {
     public static final int CATEGORY_LANGUAGE_DETECTION = 4;
     public static final int CATEGORY_LINKIFY = 2;
     public static final int CATEGORY_SELECTION = 1;
-    public static final Parcelable.Creator<TextClassifierEvent> CREATOR = new Parcelable.Creator<TextClassifierEvent>() { // from class: android.view.textclassifier.TextClassifierEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextClassifierEvent createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            byte b = 0;
-            byte b2 = 0;
-            byte b3 = 0;
-            if (readInt == 1) {
-                return new TextSelectionEvent(parcel);
-            }
-            if (readInt == 2) {
-                return new TextLinkifyEvent(parcel);
-            }
-            if (readInt == 4) {
-                return new LanguageDetectionEvent(parcel);
-            }
-            if (readInt == 3) {
-                return new ConversationActionsEvent(parcel);
-            }
-            throw new IllegalStateException("Unexpected input event type token in parcel.");
-        }
+    public static final Parcelable.Creator<TextClassifierEvent> CREATOR =
+            new Parcelable.Creator<
+                    TextClassifierEvent>() { // from class:
+                                             // android.view.textclassifier.TextClassifierEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextClassifierEvent createFromParcel(Parcel parcel) {
+                    int readInt = parcel.readInt();
+                    byte b = 0;
+                    byte b2 = 0;
+                    byte b3 = 0;
+                    if (readInt == 1) {
+                        return new TextSelectionEvent(parcel);
+                    }
+                    if (readInt == 2) {
+                        return new TextLinkifyEvent(parcel);
+                    }
+                    if (readInt == 4) {
+                        return new LanguageDetectionEvent(parcel);
+                    }
+                    if (readInt == 3) {
+                        return new ConversationActionsEvent(parcel);
+                    }
+                    throw new IllegalStateException("Unexpected input event type token in parcel.");
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextClassifierEvent[] newArray(int size) {
-            return new TextClassifierEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextClassifierEvent[] newArray(int size) {
+                    return new TextClassifierEvent[size];
+                }
+            };
     private static final int PARCEL_TOKEN_CONVERSATION_ACTION_EVENT = 3;
     private static final int PARCEL_TOKEN_LANGUAGE_DETECTION_EVENT = 4;
     private static final int PARCEL_TOKEN_TEXT_LINKIFY_EVENT = 2;
@@ -84,12 +88,10 @@ public abstract class TextClassifierEvent implements Parcelable {
     private final float[] mScores;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Category {
-    }
+    public @interface Category {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     private TextClassifierEvent(Builder builder) {
         this.mEventCategory = builder.mEventCategory;
@@ -109,7 +111,9 @@ public abstract class TextClassifierEvent implements Parcelable {
         this.mEventCategory = in.readInt();
         this.mEventType = in.readInt();
         this.mEntityTypes = in.readStringArray();
-        this.mEventContext = (TextClassificationContext) in.readParcelable(null, TextClassificationContext.class);
+        this.mEventContext =
+                (TextClassificationContext)
+                        in.readParcelable(null, TextClassificationContext.class);
         this.mResultId = in.readString();
         this.mEventIndex = in.readInt();
         int scoresLength = in.readInt();
@@ -227,8 +231,7 @@ public abstract class TextClassifierEvent implements Parcelable {
         return out.toString();
     }
 
-    void toString(StringBuilder out) {
-    }
+    void toString(StringBuilder out) {}
 
     public final SelectionEvent toSelectionEvent() {
         int invocationMethod;
@@ -320,7 +323,7 @@ public abstract class TextClassifierEvent implements Parcelable {
         return out;
     }
 
-    public static abstract class Builder<T extends Builder<T>> {
+    public abstract static class Builder<T extends Builder<T>> {
         private int[] mActionIndices;
         private String[] mEntityTypes;
         private final int mEventCategory;
@@ -395,20 +398,23 @@ public abstract class TextClassifierEvent implements Parcelable {
     }
 
     public static final class TextSelectionEvent extends TextClassifierEvent implements Parcelable {
-        public static final Parcelable.Creator<TextSelectionEvent> CREATOR = new Parcelable.Creator<TextSelectionEvent>() { // from class: android.view.textclassifier.TextClassifierEvent.TextSelectionEvent.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TextSelectionEvent createFromParcel(Parcel in) {
-                in.readInt();
-                return new TextSelectionEvent(in);
-            }
+        public static final Parcelable.Creator<TextSelectionEvent> CREATOR =
+                new Parcelable.Creator<
+                        TextSelectionEvent>() { // from class:
+                                                // android.view.textclassifier.TextClassifierEvent.TextSelectionEvent.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TextSelectionEvent createFromParcel(Parcel in) {
+                        in.readInt();
+                        return new TextSelectionEvent(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TextSelectionEvent[] newArray(int size) {
-                return new TextSelectionEvent[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TextSelectionEvent[] newArray(int size) {
+                        return new TextSelectionEvent[size];
+                    }
+                };
         final int mRelativeSuggestedWordEndIndex;
         final int mRelativeSuggestedWordStartIndex;
         final int mRelativeWordEndIndex;
@@ -459,8 +465,10 @@ public abstract class TextClassifierEvent implements Parcelable {
         void toString(StringBuilder out) {
             out.append(", getRelativeWordStartIndex=").append(this.mRelativeWordStartIndex);
             out.append(", getRelativeWordEndIndex=").append(this.mRelativeWordEndIndex);
-            out.append(", getRelativeSuggestedWordStartIndex=").append(this.mRelativeSuggestedWordStartIndex);
-            out.append(", getRelativeSuggestedWordEndIndex=").append(this.mRelativeSuggestedWordEndIndex);
+            out.append(", getRelativeSuggestedWordStartIndex=")
+                    .append(this.mRelativeSuggestedWordStartIndex);
+            out.append(", getRelativeSuggestedWordEndIndex=")
+                    .append(this.mRelativeSuggestedWordEndIndex);
         }
 
         public static final class Builder extends Builder<Builder> {
@@ -506,20 +514,23 @@ public abstract class TextClassifierEvent implements Parcelable {
     }
 
     public static final class TextLinkifyEvent extends TextClassifierEvent implements Parcelable {
-        public static final Parcelable.Creator<TextLinkifyEvent> CREATOR = new Parcelable.Creator<TextLinkifyEvent>() { // from class: android.view.textclassifier.TextClassifierEvent.TextLinkifyEvent.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TextLinkifyEvent createFromParcel(Parcel in) {
-                in.readInt();
-                return new TextLinkifyEvent(in);
-            }
+        public static final Parcelable.Creator<TextLinkifyEvent> CREATOR =
+                new Parcelable.Creator<
+                        TextLinkifyEvent>() { // from class:
+                                              // android.view.textclassifier.TextClassifierEvent.TextLinkifyEvent.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TextLinkifyEvent createFromParcel(Parcel in) {
+                        in.readInt();
+                        return new TextLinkifyEvent(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TextLinkifyEvent[] newArray(int size) {
-                return new TextLinkifyEvent[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TextLinkifyEvent[] newArray(int size) {
+                        return new TextLinkifyEvent[size];
+                    }
+                };
 
         private TextLinkifyEvent(Parcel in) {
             super(in);
@@ -546,21 +557,25 @@ public abstract class TextClassifierEvent implements Parcelable {
         }
     }
 
-    public static final class LanguageDetectionEvent extends TextClassifierEvent implements Parcelable {
-        public static final Parcelable.Creator<LanguageDetectionEvent> CREATOR = new Parcelable.Creator<LanguageDetectionEvent>() { // from class: android.view.textclassifier.TextClassifierEvent.LanguageDetectionEvent.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public LanguageDetectionEvent createFromParcel(Parcel in) {
-                in.readInt();
-                return new LanguageDetectionEvent(in);
-            }
+    public static final class LanguageDetectionEvent extends TextClassifierEvent
+            implements Parcelable {
+        public static final Parcelable.Creator<LanguageDetectionEvent> CREATOR =
+                new Parcelable.Creator<
+                        LanguageDetectionEvent>() { // from class:
+                                                    // android.view.textclassifier.TextClassifierEvent.LanguageDetectionEvent.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public LanguageDetectionEvent createFromParcel(Parcel in) {
+                        in.readInt();
+                        return new LanguageDetectionEvent(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public LanguageDetectionEvent[] newArray(int size) {
-                return new LanguageDetectionEvent[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public LanguageDetectionEvent[] newArray(int size) {
+                        return new LanguageDetectionEvent[size];
+                    }
+                };
 
         private LanguageDetectionEvent(Parcel in) {
             super(in);
@@ -587,21 +602,25 @@ public abstract class TextClassifierEvent implements Parcelable {
         }
     }
 
-    public static final class ConversationActionsEvent extends TextClassifierEvent implements Parcelable {
-        public static final Parcelable.Creator<ConversationActionsEvent> CREATOR = new Parcelable.Creator<ConversationActionsEvent>() { // from class: android.view.textclassifier.TextClassifierEvent.ConversationActionsEvent.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ConversationActionsEvent createFromParcel(Parcel in) {
-                in.readInt();
-                return new ConversationActionsEvent(in);
-            }
+    public static final class ConversationActionsEvent extends TextClassifierEvent
+            implements Parcelable {
+        public static final Parcelable.Creator<ConversationActionsEvent> CREATOR =
+                new Parcelable.Creator<
+                        ConversationActionsEvent>() { // from class:
+                                                      // android.view.textclassifier.TextClassifierEvent.ConversationActionsEvent.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ConversationActionsEvent createFromParcel(Parcel in) {
+                        in.readInt();
+                        return new ConversationActionsEvent(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ConversationActionsEvent[] newArray(int size) {
-                return new ConversationActionsEvent[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ConversationActionsEvent[] newArray(int size) {
+                        return new ConversationActionsEvent[size];
+                    }
+                };
 
         private ConversationActionsEvent(Parcel in) {
             super(in);

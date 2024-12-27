@@ -1,6 +1,7 @@
 package android.util;
 
 import com.android.internal.util.StringPool;
+
 import java.io.Closeable;
 import java.io.EOFException;
 import java.io.IOException;
@@ -71,7 +72,9 @@ public final class JsonReader implements Closeable {
 
     public boolean hasNext() throws IOException {
         peek();
-        return (this.token == JsonToken.END_OBJECT || this.token == JsonToken.END_ARRAY) ? false : true;
+        return (this.token == JsonToken.END_OBJECT || this.token == JsonToken.END_ARRAY)
+                ? false
+                : true;
     }
 
     public JsonToken peek() throws IOException {
@@ -82,8 +85,12 @@ public final class JsonReader implements Closeable {
             case EMPTY_DOCUMENT:
                 replaceTop(JsonScope.NONEMPTY_DOCUMENT);
                 JsonToken firstToken = nextValue();
-                if (!this.lenient && this.token != JsonToken.BEGIN_ARRAY && this.token != JsonToken.BEGIN_OBJECT) {
-                    throw new IOException("Expected JSON document to start with '[' or '{' but was " + this.token);
+                if (!this.lenient
+                        && this.token != JsonToken.BEGIN_ARRAY
+                        && this.token != JsonToken.BEGIN_OBJECT) {
+                    throw new IOException(
+                            "Expected JSON document to start with '[' or '{' but was "
+                                    + this.token);
                 }
                 return firstToken;
             case EMPTY_ARRAY:
@@ -420,7 +427,10 @@ public final class JsonReader implements Closeable {
                 return false;
             }
             this.limit += total;
-            if (this.bufferStartLine == 1 && this.bufferStartColumn == 1 && this.limit > 0 && this.buffer[0] == 65279) {
+            if (this.bufferStartLine == 1
+                    && this.bufferStartColumn == 1
+                    && this.limit > 0
+                    && this.buffer[0] == 65279) {
                 this.pos++;
                 this.bufferStartColumn--;
             }
@@ -616,8 +626,7 @@ public final class JsonReader implements Closeable {
                 this.valueLength += i;
                 this.pos += i;
                 i = 0;
-                if (!fillBuffer(1)) {
-                }
+                if (!fillBuffer(1)) {}
             }
         }
         if (assignOffsetsOnly && builder == null) {
@@ -687,15 +696,40 @@ public final class JsonReader implements Closeable {
         if (this.valuePos == -1) {
             return JsonToken.STRING;
         }
-        if (this.valueLength == 4 && (('n' == this.buffer[this.valuePos] || 'N' == this.buffer[this.valuePos]) && (('u' == this.buffer[this.valuePos + 1] || 'U' == this.buffer[this.valuePos + 1]) && (('l' == this.buffer[this.valuePos + 2] || 'L' == this.buffer[this.valuePos + 2]) && ('l' == this.buffer[this.valuePos + 3] || 'L' == this.buffer[this.valuePos + 3]))))) {
+        if (this.valueLength == 4
+                && (('n' == this.buffer[this.valuePos] || 'N' == this.buffer[this.valuePos])
+                        && (('u' == this.buffer[this.valuePos + 1]
+                                        || 'U' == this.buffer[this.valuePos + 1])
+                                && (('l' == this.buffer[this.valuePos + 2]
+                                                || 'L' == this.buffer[this.valuePos + 2])
+                                        && ('l' == this.buffer[this.valuePos + 3]
+                                                || 'L' == this.buffer[this.valuePos + 3]))))) {
             this.value = "null";
             return JsonToken.NULL;
         }
-        if (this.valueLength == 4 && (('t' == this.buffer[this.valuePos] || 'T' == this.buffer[this.valuePos]) && (('r' == this.buffer[this.valuePos + 1] || 'R' == this.buffer[this.valuePos + 1]) && (('u' == this.buffer[this.valuePos + 2] || 'U' == this.buffer[this.valuePos + 2]) && ('e' == this.buffer[this.valuePos + 3] || 'E' == this.buffer[this.valuePos + 3]))))) {
+        if (this.valueLength == 4
+                && (('t' == this.buffer[this.valuePos] || 'T' == this.buffer[this.valuePos])
+                        && (('r' == this.buffer[this.valuePos + 1]
+                                        || 'R' == this.buffer[this.valuePos + 1])
+                                && (('u' == this.buffer[this.valuePos + 2]
+                                                || 'U' == this.buffer[this.valuePos + 2])
+                                        && ('e' == this.buffer[this.valuePos + 3]
+                                                || 'E' == this.buffer[this.valuePos + 3]))))) {
             this.value = "true";
             return JsonToken.BOOLEAN;
         }
-        if (this.valueLength == 5 && (('f' == this.buffer[this.valuePos] || 'F' == this.buffer[this.valuePos]) && (('a' == this.buffer[this.valuePos + 1] || 'A' == this.buffer[this.valuePos + 1]) && (('l' == this.buffer[this.valuePos + 2] || 'L' == this.buffer[this.valuePos + 2]) && (('s' == this.buffer[this.valuePos + 3] || 'S' == this.buffer[this.valuePos + 3]) && ('e' == this.buffer[this.valuePos + 4] || 'E' == this.buffer[this.valuePos + 4])))))) {
+        if (this.valueLength == 5
+                && (('f' == this.buffer[this.valuePos] || 'F' == this.buffer[this.valuePos])
+                        && (('a' == this.buffer[this.valuePos + 1]
+                                        || 'A' == this.buffer[this.valuePos + 1])
+                                && (('l' == this.buffer[this.valuePos + 2]
+                                                || 'L' == this.buffer[this.valuePos + 2])
+                                        && (('s' == this.buffer[this.valuePos + 3]
+                                                        || 'S' == this.buffer[this.valuePos + 3])
+                                                && ('e' == this.buffer[this.valuePos + 4]
+                                                        || 'E'
+                                                                == this.buffer[
+                                                                        this.valuePos + 4])))))) {
             this.value = "false";
             return JsonToken.BOOLEAN;
         }
@@ -758,7 +792,8 @@ public final class JsonReader implements Closeable {
     }
 
     private IOException syntaxError(String message) throws IOException {
-        throw new MalformedJsonException(message + " at line " + getLineNumber() + " column " + getColumnNumber());
+        throw new MalformedJsonException(
+                message + " at line " + getLineNumber() + " column " + getColumnNumber());
     }
 
     private CharSequence getSnippet() {

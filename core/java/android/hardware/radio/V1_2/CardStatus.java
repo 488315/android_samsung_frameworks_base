@@ -3,12 +3,14 @@ package android.hardware.radio.V1_2;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class CardStatus {
-    public android.hardware.radio.V1_0.CardStatus base = new android.hardware.radio.V1_0.CardStatus();
+    public android.hardware.radio.V1_0.CardStatus base =
+            new android.hardware.radio.V1_0.CardStatus();
     public int physicalSlotId = 0;
     public String atr = new String();
     public String iccid = new String();
@@ -21,18 +23,33 @@ public final class CardStatus {
             return false;
         }
         CardStatus other = (CardStatus) otherObject;
-        if (HidlSupport.deepEquals(this.base, other.base) && this.physicalSlotId == other.physicalSlotId && HidlSupport.deepEquals(this.atr, other.atr) && HidlSupport.deepEquals(this.iccid, other.iccid)) {
+        if (HidlSupport.deepEquals(this.base, other.base)
+                && this.physicalSlotId == other.physicalSlotId
+                && HidlSupport.deepEquals(this.atr, other.atr)
+                && HidlSupport.deepEquals(this.iccid, other.iccid)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.base)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.physicalSlotId))), Integer.valueOf(HidlSupport.deepHashCode(this.atr)), Integer.valueOf(HidlSupport.deepHashCode(this.iccid)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.base)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.physicalSlotId))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.atr)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.iccid)));
     }
 
     public final String toString() {
-        return "{.base = " + this.base + ", .physicalSlotId = " + this.physicalSlotId + ", .atr = " + this.atr + ", .iccid = " + this.iccid + "}";
+        return "{.base = "
+                + this.base
+                + ", .physicalSlotId = "
+                + this.physicalSlotId
+                + ", .atr = "
+                + this.atr
+                + ", .iccid = "
+                + this.iccid
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -44,7 +61,8 @@ public final class CardStatus {
         ArrayList<CardStatus> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 80, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 80, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CardStatus _hidl_vec_element = new CardStatus();
@@ -54,13 +72,19 @@ public final class CardStatus {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.base.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 0);
         this.physicalSlotId = _hidl_blob.getInt32(_hidl_offset + 40);
         this.atr = _hidl_blob.getString(_hidl_offset + 48);
-        parcel.readEmbeddedBuffer(this.atr.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 48 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.atr.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 48 + 0, false);
         this.iccid = _hidl_blob.getString(_hidl_offset + 64);
-        parcel.readEmbeddedBuffer(this.iccid.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 64 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.iccid.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 64 + 0,
+                false);
     }
 
     public final void writeToParcel(HwParcel parcel) {

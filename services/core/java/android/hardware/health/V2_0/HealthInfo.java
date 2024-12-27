@@ -4,6 +4,7 @@ import android.hardware.audio.common.V2_0.AudioConfig$$ExternalSyntheticOutline0
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -16,7 +17,8 @@ public final class HealthInfo {
     public final ArrayList storageInfos;
 
     public HealthInfo() {
-        android.hardware.health.V1_0.HealthInfo healthInfo = new android.hardware.health.V1_0.HealthInfo();
+        android.hardware.health.V1_0.HealthInfo healthInfo =
+                new android.hardware.health.V1_0.HealthInfo();
         healthInfo.chargerAcOnline = false;
         healthInfo.chargerUsbOnline = false;
         healthInfo.chargerWirelessOnline = false;
@@ -47,11 +49,18 @@ public final class HealthInfo {
             return false;
         }
         HealthInfo healthInfo = (HealthInfo) obj;
-        return HidlSupport.deepEquals(this.legacy, healthInfo.legacy) && this.batteryCurrentAverage == healthInfo.batteryCurrentAverage && HidlSupport.deepEquals(this.diskStats, healthInfo.diskStats) && HidlSupport.deepEquals(this.storageInfos, healthInfo.storageInfos);
+        return HidlSupport.deepEquals(this.legacy, healthInfo.legacy)
+                && this.batteryCurrentAverage == healthInfo.batteryCurrentAverage
+                && HidlSupport.deepEquals(this.diskStats, healthInfo.diskStats)
+                && HidlSupport.deepEquals(this.storageInfos, healthInfo.storageInfos);
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.legacy)), AudioConfig$$ExternalSyntheticOutline0.m(this.batteryCurrentAverage), Integer.valueOf(HidlSupport.deepHashCode(this.diskStats)), Integer.valueOf(HidlSupport.deepHashCode(this.storageInfos)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.legacy)),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.batteryCurrentAverage),
+                Integer.valueOf(HidlSupport.deepHashCode(this.diskStats)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.storageInfos)));
     }
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob) {
@@ -78,7 +87,8 @@ public final class HealthInfo {
         hwParcel.readEmbeddedBuffer(r8.getBytes().length + 1, hwBlob.handle(), 56L, false);
         this.batteryCurrentAverage = hwBlob.getInt32(72L);
         int int32 = hwBlob.getInt32(88L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 112, hwBlob.handle(), 80L, true);
+        HwBlob readEmbeddedBuffer =
+                hwParcel.readEmbeddedBuffer(int32 * 112, hwBlob.handle(), 80L, true);
         this.diskStats.clear();
         int i = 0;
         while (i < int32) {
@@ -116,7 +126,8 @@ public final class HealthInfo {
         }
         int int322 = hwBlob.getInt32(104L);
         short s = 0;
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 48, hwBlob.handle(), 96L, true);
+        HwBlob readEmbeddedBuffer2 =
+                hwParcel.readEmbeddedBuffer(int322 * 48, hwBlob.handle(), 96L, true);
         this.storageInfos.clear();
         int i2 = 0;
         while (i2 < int322) {
@@ -134,7 +145,8 @@ public final class HealthInfo {
             storageInfo.lifetimeB = readEmbeddedBuffer2.getInt16(j3 + 28);
             long j4 = j3 + 32;
             storageInfo.version = readEmbeddedBuffer2.getString(j4);
-            hwParcel.readEmbeddedBuffer(r1.getBytes().length + 1, readEmbeddedBuffer2.handle(), j4, false);
+            hwParcel.readEmbeddedBuffer(
+                    r1.getBytes().length + 1, readEmbeddedBuffer2.handle(), j4, false);
             this.storageInfos.add(storageInfo);
             i2++;
             s = 0;
@@ -142,6 +154,14 @@ public final class HealthInfo {
     }
 
     public final String toString() {
-        return "{.legacy = " + this.legacy + ", .batteryCurrentAverage = " + this.batteryCurrentAverage + ", .diskStats = " + this.diskStats + ", .storageInfos = " + this.storageInfos + "}";
+        return "{.legacy = "
+                + this.legacy
+                + ", .batteryCurrentAverage = "
+                + this.batteryCurrentAverage
+                + ", .diskStats = "
+                + this.diskStats
+                + ", .storageInfos = "
+                + this.storageInfos
+                + "}";
     }
 }

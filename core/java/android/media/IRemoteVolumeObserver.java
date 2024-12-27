@@ -12,8 +12,7 @@ public interface IRemoteVolumeObserver extends IInterface {
 
     public static class Default implements IRemoteVolumeObserver {
         @Override // android.media.IRemoteVolumeObserver
-        public void dispatchRemoteVolumeUpdate(int direction, int value) throws RemoteException {
-        }
+        public void dispatchRemoteVolumeUpdate(int direction, int value) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IRemoteVolumeObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteVolumeObserver {
+    public abstract static class Stub extends Binder implements IRemoteVolumeObserver {
         public static final String DESCRIPTOR = "android.media.IRemoteVolumeObserver";
         static final int TRANSACTION_dispatchRemoteVolumeUpdate = 1;
 
@@ -60,7 +59,8 @@ public interface IRemoteVolumeObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -97,7 +97,8 @@ public interface IRemoteVolumeObserver extends IInterface {
             }
 
             @Override // android.media.IRemoteVolumeObserver
-            public void dispatchRemoteVolumeUpdate(int direction, int value) throws RemoteException {
+            public void dispatchRemoteVolumeUpdate(int direction, int value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

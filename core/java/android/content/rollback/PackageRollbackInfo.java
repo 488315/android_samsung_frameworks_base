@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.content.pm.VersionedPackage;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,19 +12,21 @@ import java.util.List;
 @SystemApi
 /* loaded from: classes.dex */
 public final class PackageRollbackInfo implements Parcelable {
-    public static final Parcelable.Creator<PackageRollbackInfo> CREATOR = new Parcelable.Creator<PackageRollbackInfo>() { // from class: android.content.rollback.PackageRollbackInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageRollbackInfo createFromParcel(Parcel in) {
-            return new PackageRollbackInfo(in);
-        }
+    public static final Parcelable.Creator<PackageRollbackInfo> CREATOR =
+            new Parcelable.Creator<PackageRollbackInfo>() { // from class:
+                // android.content.rollback.PackageRollbackInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageRollbackInfo createFromParcel(Parcel in) {
+                    return new PackageRollbackInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageRollbackInfo[] newArray(int size) {
-            return new PackageRollbackInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageRollbackInfo[] newArray(int size) {
+                    return new PackageRollbackInfo[size];
+                }
+            };
     private final boolean mIsApex;
     private final boolean mIsApkInApex;
     private final List<Integer> mPendingBackups;
@@ -108,11 +111,34 @@ public final class PackageRollbackInfo implements Parcelable {
         removeRestoreInfo(getRestoreInfo(userId));
     }
 
-    public PackageRollbackInfo(VersionedPackage packageRolledBackFrom, VersionedPackage packageRolledBackTo, List<Integer> pendingBackups, ArrayList<RestoreInfo> pendingRestores, boolean isApex, boolean isApkInApex, List<Integer> snapshottedUsers) {
-        this(packageRolledBackFrom, packageRolledBackTo, pendingBackups, pendingRestores, isApex, isApkInApex, snapshottedUsers, 0);
+    public PackageRollbackInfo(
+            VersionedPackage packageRolledBackFrom,
+            VersionedPackage packageRolledBackTo,
+            List<Integer> pendingBackups,
+            ArrayList<RestoreInfo> pendingRestores,
+            boolean isApex,
+            boolean isApkInApex,
+            List<Integer> snapshottedUsers) {
+        this(
+                packageRolledBackFrom,
+                packageRolledBackTo,
+                pendingBackups,
+                pendingRestores,
+                isApex,
+                isApkInApex,
+                snapshottedUsers,
+                0);
     }
 
-    public PackageRollbackInfo(VersionedPackage packageRolledBackFrom, VersionedPackage packageRolledBackTo, List<Integer> pendingBackups, ArrayList<RestoreInfo> pendingRestores, boolean isApex, boolean isApkInApex, List<Integer> snapshottedUsers, int rollbackDataPolicy) {
+    public PackageRollbackInfo(
+            VersionedPackage packageRolledBackFrom,
+            VersionedPackage packageRolledBackTo,
+            List<Integer> pendingBackups,
+            ArrayList<RestoreInfo> pendingRestores,
+            boolean isApex,
+            boolean isApkInApex,
+            List<Integer> snapshottedUsers,
+            int rollbackDataPolicy) {
         this.mVersionRolledBackFrom = packageRolledBackFrom;
         this.mVersionRolledBackTo = packageRolledBackTo;
         this.mPendingBackups = pendingBackups;

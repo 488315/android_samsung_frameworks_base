@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.telecom.PhoneAccountHandle;
-import com.android.internal.telecom.ICallRedirectionAdapter;
 
 /* loaded from: classes5.dex */
 public interface ICallRedirectionService extends IInterface {
@@ -15,16 +14,24 @@ public interface ICallRedirectionService extends IInterface {
 
     void notifyTimeout() throws RemoteException;
 
-    void placeCall(ICallRedirectionAdapter iCallRedirectionAdapter, Uri uri, PhoneAccountHandle phoneAccountHandle, boolean z) throws RemoteException;
+    void placeCall(
+            ICallRedirectionAdapter iCallRedirectionAdapter,
+            Uri uri,
+            PhoneAccountHandle phoneAccountHandle,
+            boolean z)
+            throws RemoteException;
 
     public static class Default implements ICallRedirectionService {
         @Override // com.android.internal.telecom.ICallRedirectionService
-        public void placeCall(ICallRedirectionAdapter adapter, Uri handle, PhoneAccountHandle initialPhoneAccount, boolean allowInteractiveResponse) throws RemoteException {
-        }
+        public void placeCall(
+                ICallRedirectionAdapter adapter,
+                Uri handle,
+                PhoneAccountHandle initialPhoneAccount,
+                boolean allowInteractiveResponse)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallRedirectionService
-        public void notifyTimeout() throws RemoteException {
-        }
+        public void notifyTimeout() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -32,7 +39,7 @@ public interface ICallRedirectionService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICallRedirectionService {
+    public abstract static class Stub extends Binder implements ICallRedirectionService {
         static final int TRANSACTION_notifyTimeout = 2;
         static final int TRANSACTION_placeCall = 1;
 
@@ -73,7 +80,8 @@ public interface ICallRedirectionService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICallRedirectionService.DESCRIPTOR);
             }
@@ -83,9 +91,11 @@ public interface ICallRedirectionService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ICallRedirectionAdapter _arg0 = ICallRedirectionAdapter.Stub.asInterface(data.readStrongBinder());
+                    ICallRedirectionAdapter _arg0 =
+                            ICallRedirectionAdapter.Stub.asInterface(data.readStrongBinder());
                     Uri _arg1 = (Uri) data.readTypedObject(Uri.CREATOR);
-                    PhoneAccountHandle _arg2 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg2 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     boolean _arg3 = data.readBoolean();
                     data.enforceNoDataAvail();
                     placeCall(_arg0, _arg1, _arg2, _arg3);
@@ -115,7 +125,12 @@ public interface ICallRedirectionService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallRedirectionService
-            public void placeCall(ICallRedirectionAdapter adapter, Uri handle, PhoneAccountHandle initialPhoneAccount, boolean allowInteractiveResponse) throws RemoteException {
+            public void placeCall(
+                    ICallRedirectionAdapter adapter,
+                    Uri handle,
+                    PhoneAccountHandle initialPhoneAccount,
+                    boolean allowInteractiveResponse)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallRedirectionService.DESCRIPTOR);

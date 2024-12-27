@@ -24,7 +24,11 @@ public final class ADPContainer {
                 return ADPOperation.isGreaterOrEqual(i, this.hashCode, aDPPolicy.hashCode) ? -1 : 1;
             }
             String str = this.format;
-            return (str != null && ADPOperation.isGreaterOrEqual(Pattern.compile(str), this.hashCode, aDPPolicy.hashCode)) ? -1 : 1;
+            return (str != null
+                            && ADPOperation.isGreaterOrEqual(
+                                    Pattern.compile(str), this.hashCode, aDPPolicy.hashCode))
+                    ? -1
+                    : 1;
         }
 
         public final boolean equals(Object obj) {

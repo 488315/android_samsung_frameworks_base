@@ -3,6 +3,7 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,19 +12,21 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class PublishAttributes implements Parcelable {
-    public static final Parcelable.Creator<PublishAttributes> CREATOR = new Parcelable.Creator<PublishAttributes>() { // from class: android.telephony.ims.PublishAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PublishAttributes createFromParcel(Parcel source) {
-            return new PublishAttributes(source);
-        }
+    public static final Parcelable.Creator<PublishAttributes> CREATOR =
+            new Parcelable.Creator<
+                    PublishAttributes>() { // from class: android.telephony.ims.PublishAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PublishAttributes createFromParcel(Parcel source) {
+                    return new PublishAttributes(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PublishAttributes[] newArray(int size) {
-            return new PublishAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PublishAttributes[] newArray(int size) {
+                    return new PublishAttributes[size];
+                }
+            };
     private List<RcsContactPresenceTuple> mPresenceTuples;
     private final int mPublishState;
     private SipDetails mSipDetails;
@@ -85,7 +88,8 @@ public final class PublishAttributes implements Parcelable {
         this.mPublishState = in.readInt();
         this.mPresenceTuples = new ArrayList();
         in.readList(this.mPresenceTuples, null, RcsContactPresenceTuple.class);
-        this.mSipDetails = (SipDetails) in.readParcelable(SipDetails.class.getClassLoader(), SipDetails.class);
+        this.mSipDetails =
+                (SipDetails) in.readParcelable(SipDetails.class.getClassLoader(), SipDetails.class);
     }
 
     public boolean equals(Object o) {
@@ -96,17 +100,26 @@ public final class PublishAttributes implements Parcelable {
             return false;
         }
         PublishAttributes that = (PublishAttributes) o;
-        if (this.mPublishState == that.mPublishState && Objects.equals(this.mPresenceTuples, that.mPresenceTuples) && Objects.equals(this.mSipDetails, that.mSipDetails)) {
+        if (this.mPublishState == that.mPublishState
+                && Objects.equals(this.mPresenceTuples, that.mPresenceTuples)
+                && Objects.equals(this.mSipDetails, that.mSipDetails)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mPublishState), this.mPresenceTuples, this.mSipDetails);
+        return Objects.hash(
+                Integer.valueOf(this.mPublishState), this.mPresenceTuples, this.mSipDetails);
     }
 
     public String toString() {
-        return "PublishAttributes { publishState= " + this.mPublishState + ", presenceTuples=[" + this.mPresenceTuples + "]SipDetails=" + this.mSipDetails + "}";
+        return "PublishAttributes { publishState= "
+                + this.mPublishState
+                + ", presenceTuples=["
+                + this.mPresenceTuples
+                + "]SipDetails="
+                + this.mSipDetails
+                + "}";
     }
 }

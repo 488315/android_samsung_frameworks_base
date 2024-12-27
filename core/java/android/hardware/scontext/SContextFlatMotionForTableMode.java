@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextFlatMotionForTableMode extends SContextEventContext {
-    public static final Parcelable.Creator<SContextFlatMotionForTableMode> CREATOR = new Parcelable.Creator<SContextFlatMotionForTableMode>() { // from class: android.hardware.scontext.SContextFlatMotionForTableMode.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextFlatMotionForTableMode createFromParcel(Parcel in) {
-            return new SContextFlatMotionForTableMode(in);
-        }
+    public static final Parcelable.Creator<SContextFlatMotionForTableMode> CREATOR =
+            new Parcelable.Creator<SContextFlatMotionForTableMode>() { // from class:
+                // android.hardware.scontext.SContextFlatMotionForTableMode.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextFlatMotionForTableMode createFromParcel(Parcel in) {
+                    return new SContextFlatMotionForTableMode(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextFlatMotionForTableMode[] newArray(int size) {
-            return new SContextFlatMotionForTableMode[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextFlatMotionForTableMode[] newArray(int size) {
+                    return new SContextFlatMotionForTableMode[size];
+                }
+            };
     private Bundle mContext;
 
     SContextFlatMotionForTableMode() {
@@ -34,7 +36,8 @@ public class SContextFlatMotionForTableMode extends SContextEventContext {
         return this.mContext.getInt("Action");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

@@ -3,19 +3,25 @@ package com.samsung.android.hardware.secinputdev;
 import android.content.Context;
 import android.os.IBinder;
 import android.util.Slog;
+
 import dalvik.system.PathClassLoader;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 /* loaded from: classes6.dex */
 public class SemInputDeviceManagerLoader {
-    private static final String SECINPUTDEV_SERVICE_CLASS = "com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService";
-    private static final String SECINPUTDEV_SERVICE_JAR_PATH = "/system/framework/secinputdev-service.jar";
+    private static final String SECINPUTDEV_SERVICE_CLASS =
+            "com.samsung.android.hardware.secinputdev.SemInputDeviceManagerService";
+    private static final String SECINPUTDEV_SERVICE_JAR_PATH =
+            "/system/framework/secinputdev-service.jar";
     private static final String TAG = "SemInputDeviceManagerLoader";
     private static Class secinputdevClass = null;
 
     public static void classLoadFromJar() throws Throwable {
-        PathClassLoader classLoader = new PathClassLoader(SECINPUTDEV_SERVICE_JAR_PATH, ClassLoader.getSystemClassLoader());
+        PathClassLoader classLoader =
+                new PathClassLoader(
+                        SECINPUTDEV_SERVICE_JAR_PATH, ClassLoader.getSystemClassLoader());
         secinputdevClass = classLoader.loadClass(SECINPUTDEV_SERVICE_CLASS);
     }
 

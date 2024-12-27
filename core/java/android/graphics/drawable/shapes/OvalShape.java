@@ -15,7 +15,11 @@ public class OvalShape extends RectShape {
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape
     public void getOutline(Outline outline) {
         RectF rect = rect();
-        outline.setOval((int) Math.ceil(rect.left), (int) Math.ceil(rect.top), (int) Math.floor(rect.right), (int) Math.floor(rect.bottom));
+        outline.setOval(
+                (int) Math.ceil(rect.left),
+                (int) Math.ceil(rect.top),
+                (int) Math.floor(rect.right),
+                (int) Math.floor(rect.bottom));
     }
 
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape

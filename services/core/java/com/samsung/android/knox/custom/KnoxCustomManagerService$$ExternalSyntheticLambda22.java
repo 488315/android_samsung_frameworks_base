@@ -1,32 +1,40 @@
 package com.samsung.android.knox.custom;
 
 import android.net.EthernetManager;
+
 import com.android.internal.util.FunctionalUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLambda22 implements FunctionalUtils.ThrowingSupplier {
+public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLambda22
+        implements FunctionalUtils.ThrowingSupplier {
     public final /* synthetic */ int $r8$classId = 1;
     public final /* synthetic */ KnoxCustomManagerService f$0;
     public final /* synthetic */ boolean f$1;
     public final /* synthetic */ Object f$2;
     public final /* synthetic */ int f$3;
 
-    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda22(KnoxCustomManagerService knoxCustomManagerService, int i, boolean z, String str) {
+    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda22(
+            KnoxCustomManagerService knoxCustomManagerService, int i, boolean z, String str) {
         this.f$0 = knoxCustomManagerService;
         this.f$3 = i;
         this.f$1 = z;
         this.f$2 = str;
     }
 
-    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda22(KnoxCustomManagerService knoxCustomManagerService, EthernetManager ethernetManager, boolean z, int i) {
+    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda22(
+            KnoxCustomManagerService knoxCustomManagerService,
+            EthernetManager ethernetManager,
+            boolean z,
+            int i) {
         this.f$0 = knoxCustomManagerService;
         this.f$2 = ethernetManager;
         this.f$1 = z;
         this.f$3 = i;
     }
 
-    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda22(KnoxCustomManagerService knoxCustomManagerService, boolean z, String str, int i) {
+    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda22(
+            KnoxCustomManagerService knoxCustomManagerService, boolean z, String str, int i) {
         this.f$0 = knoxCustomManagerService;
         this.f$1 = z;
         this.f$2 = str;
@@ -55,7 +63,8 @@ public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLa
                 boolean z3 = this.f$1;
                 int i3 = this.f$3;
                 String str5 = KnoxCustomManagerService.TAG;
-                return knoxCustomManagerService3.lambda$setEthernetState$63(ethernetManager, z3, i3);
+                return knoxCustomManagerService3.lambda$setEthernetState$63(
+                        ethernetManager, z3, i3);
         }
     }
 }

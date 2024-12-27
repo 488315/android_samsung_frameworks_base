@@ -1,24 +1,24 @@
 package android.os;
 
-import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public final class PowerMonitor implements Parcelable {
-    public static final Parcelable.Creator<PowerMonitor> CREATOR = new Parcelable.Creator<PowerMonitor>() { // from class: android.os.PowerMonitor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PowerMonitor createFromParcel(Parcel in) {
-            return new PowerMonitor(in);
-        }
+    public static final Parcelable.Creator<PowerMonitor> CREATOR =
+            new Parcelable.Creator<PowerMonitor>() { // from class: android.os.PowerMonitor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PowerMonitor createFromParcel(Parcel in) {
+                    return new PowerMonitor(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PowerMonitor[] newArray(int size) {
-            return new PowerMonitor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PowerMonitor[] newArray(int size) {
+                    return new PowerMonitor[size];
+                }
+            };
     public static final int POWER_MONITOR_TYPE_CONSUMER = 0;
     public static final int POWER_MONITOR_TYPE_MEASUREMENT = 1;
     public final int index;
@@ -26,8 +26,7 @@ public final class PowerMonitor implements Parcelable {
     private final int mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PowerMonitorType {
-    }
+    public @interface PowerMonitorType {}
 
     public PowerMonitor(int index, int type, String name) {
         this.index = index;

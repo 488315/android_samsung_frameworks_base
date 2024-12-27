@@ -4,23 +4,26 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes5.dex */
 public class ReferrerIntent extends Intent {
-    public static final Parcelable.Creator<ReferrerIntent> CREATOR = new Parcelable.Creator<ReferrerIntent>() { // from class: com.android.internal.content.ReferrerIntent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ReferrerIntent createFromParcel(Parcel source) {
-            return new ReferrerIntent(source);
-        }
+    public static final Parcelable.Creator<ReferrerIntent> CREATOR =
+            new Parcelable.Creator<
+                    ReferrerIntent>() { // from class: com.android.internal.content.ReferrerIntent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ReferrerIntent createFromParcel(Parcel source) {
+                    return new ReferrerIntent(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ReferrerIntent[] newArray(int size) {
-            return new ReferrerIntent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ReferrerIntent[] newArray(int size) {
+                    return new ReferrerIntent[size];
+                }
+            };
     public final IBinder mCallerToken;
     public final String mReferrer;
 
@@ -52,11 +55,14 @@ public class ReferrerIntent extends Intent {
             return false;
         }
         ReferrerIntent other = (ReferrerIntent) obj;
-        return filterEquals(other) && Objects.equals(this.mReferrer, other.mReferrer) && Objects.equals(this.mCallerToken, other.mCallerToken);
+        return filterEquals(other)
+                && Objects.equals(this.mReferrer, other.mReferrer)
+                && Objects.equals(this.mCallerToken, other.mCallerToken);
     }
 
     public int hashCode() {
         int result = (17 * 31) + filterHashCode();
-        return (((result * 31) + Objects.hashCode(this.mReferrer)) * 31) + Objects.hashCode(this.mCallerToken);
+        return (((result * 31) + Objects.hashCode(this.mReferrer)) * 31)
+                + Objects.hashCode(this.mCallerToken);
     }
 }

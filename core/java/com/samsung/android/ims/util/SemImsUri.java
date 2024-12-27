@@ -5,8 +5,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.telecom.PhoneAccount;
 import android.util.Log;
+
 import gov.nist.javax.sip.address.SipUri;
 import gov.nist.javax.sip.parser.URLParser;
+
 import java.util.regex.Pattern;
 
 /* loaded from: classes6.dex */
@@ -22,19 +24,21 @@ public class SemImsUri implements Parcelable {
     private String mUser;
     private static final boolean DBG = "eng".equals(Build.TYPE);
     private static final Pattern PATTERN_WHITE_SPACES = Pattern.compile("\\s+");
-    public static final Parcelable.Creator<SemImsUri> CREATOR = new Parcelable.Creator<SemImsUri>() { // from class: com.samsung.android.ims.util.SemImsUri.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemImsUri createFromParcel(Parcel in) {
-            return new SemImsUri(in);
-        }
+    public static final Parcelable.Creator<SemImsUri> CREATOR =
+            new Parcelable.Creator<
+                    SemImsUri>() { // from class: com.samsung.android.ims.util.SemImsUri.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemImsUri createFromParcel(Parcel in) {
+                    return new SemImsUri(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemImsUri[] newArray(int size) {
-            return new SemImsUri[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemImsUri[] newArray(int size) {
+                    return new SemImsUri[size];
+                }
+            };
 
     public enum UriType {
         TEL_URI,

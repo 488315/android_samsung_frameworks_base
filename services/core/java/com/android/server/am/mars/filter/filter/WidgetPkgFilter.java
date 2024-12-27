@@ -6,10 +6,13 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArrayMap;
+
 import com.android.server.am.MARsPolicyManager;
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.filter.IFilter;
+
 import com.samsung.android.app.SemDualAppManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,10 +59,16 @@ public final class WidgetPkgFilter implements IFilter {
         }
         boolean z = MARsUtils.IS_SUPPORT_FREEZE_FG_SERVICE_FEATURE;
         boolean z2 = MARsPolicyManager.MARs_ENABLE;
-        if (MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.isFirstTimeTriggerAutorun() && i3 == 3) {
+        if (MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.isFirstTimeTriggerAutorun()
+                && i3 == 3) {
             synchronized (this.mBoundedWidgetPkgs) {
                 try {
-                    if (this.mBoundedWidgetPkgs.size() > 0 && (arrayList = (ArrayList) this.mBoundedWidgetPkgs.get(Integer.valueOf(i))) != null && arrayList.contains(str)) {
+                    if (this.mBoundedWidgetPkgs.size() > 0
+                            && (arrayList =
+                                            (ArrayList)
+                                                    this.mBoundedWidgetPkgs.get(Integer.valueOf(i)))
+                                    != null
+                            && arrayList.contains(str)) {
                         return 4;
                     }
                 } finally {
@@ -68,7 +77,8 @@ public final class WidgetPkgFilter implements IFilter {
         }
         synchronized (this.mRunningWidgets) {
             try {
-                WidgetPackages widgetPackages = (WidgetPackages) this.mRunningWidgets.get(Integer.valueOf(i));
+                WidgetPackages widgetPackages =
+                        (WidgetPackages) this.mRunningWidgets.get(Integer.valueOf(i));
                 return (widgetPackages == null || widgetPackages.mMap.get(str) == null) ? 0 : 4;
             } finally {
             }
@@ -77,23 +87,35 @@ public final class WidgetPkgFilter implements IFilter {
 
     public final void getBoundAppWidgetPackages() {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this.mContext);
-        for (UserHandle userHandle : ((UserManager) this.mContext.getSystemService(UserManager.class)).getUserProfiles()) {
+        for (UserHandle userHandle :
+                ((UserManager) this.mContext.getSystemService(UserManager.class))
+                        .getUserProfiles()) {
             int identifier = userHandle.getIdentifier();
             int i = this.mContextUserId;
-            if (identifier == i || (i == 0 && ((identifier >= 150 && identifier <= 160) || SemDualAppManager.isDualAppId(identifier)))) {
-                List installedProvidersForProfile = appWidgetManager.getInstalledProvidersForProfile(3, userHandle);
+            if (identifier == i
+                    || (i == 0
+                            && ((identifier >= 150 && identifier <= 160)
+                                    || SemDualAppManager.isDualAppId(identifier)))) {
+                List installedProvidersForProfile =
+                        appWidgetManager.getInstalledProvidersForProfile(3, userHandle);
                 for (int i2 = 0; i2 < installedProvidersForProfile.size(); i2++) {
-                    String packageName = ((AppWidgetProviderInfo) installedProvidersForProfile.get(i2)).provider.getPackageName();
+                    String packageName =
+                            ((AppWidgetProviderInfo) installedProvidersForProfile.get(i2))
+                                    .provider.getPackageName();
                     if (appWidgetManager.isBoundWidgetPackage(packageName, identifier)) {
                         synchronized (this.mBoundedWidgetPkgs) {
                             try {
-                                ArrayList arrayList = (ArrayList) this.mBoundedWidgetPkgs.get(Integer.valueOf(identifier));
+                                ArrayList arrayList =
+                                        (ArrayList)
+                                                this.mBoundedWidgetPkgs.get(
+                                                        Integer.valueOf(identifier));
                                 if (arrayList == null) {
                                     arrayList = new ArrayList();
                                 }
                                 if (!arrayList.contains(packageName)) {
                                     arrayList.add(packageName);
-                                    MARsUtils.addFilterDebugInfoToHistory("FILTER 4 bound", packageName);
+                                    MARsUtils.addFilterDebugInfoToHistory(
+                                            "FILTER 4 bound", packageName);
                                 }
                                 this.mBoundedWidgetPkgs.put(Integer.valueOf(identifier), arrayList);
                             } finally {
@@ -114,7 +136,8 @@ public final class WidgetPkgFilter implements IFilter {
     public final void onAppWidgetDisabled(int i, String str) {
         synchronized (this.mRunningWidgets) {
             try {
-                WidgetPackages widgetPackages = (WidgetPackages) this.mRunningWidgets.get(Integer.valueOf(i));
+                WidgetPackages widgetPackages =
+                        (WidgetPackages) this.mRunningWidgets.get(Integer.valueOf(i));
                 if (widgetPackages != null && widgetPackages.mMap.get(str) != null) {
                     Integer num = (Integer) widgetPackages.mMap.get(str);
                     if (num != null) {
@@ -138,7 +161,8 @@ public final class WidgetPkgFilter implements IFilter {
     public final void onAppWidgetEnabled(int i, String str) {
         synchronized (this.mRunningWidgets) {
             try {
-                WidgetPackages widgetPackages = (WidgetPackages) this.mRunningWidgets.get(Integer.valueOf(i));
+                WidgetPackages widgetPackages =
+                        (WidgetPackages) this.mRunningWidgets.get(Integer.valueOf(i));
                 if (widgetPackages == null) {
                     widgetPackages = new WidgetPackages();
                     widgetPackages.mMap = new ArrayMap();

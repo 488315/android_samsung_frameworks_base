@@ -1,6 +1,5 @@
 package android.accessibilityservice;
 
-import android.accessibilityservice.FingerprintGestureController;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.util.ArrayMap;
@@ -15,7 +14,8 @@ public final class FingerprintGestureController {
     private static final String LOG_TAG = "FingerprintGestureController";
     private final IAccessibilityServiceConnection mAccessibilityServiceConnection;
     private final Object mLock = new Object();
-    private final ArrayMap<FingerprintGestureCallback, Handler> mCallbackHandlerMap = new ArrayMap<>(1);
+    private final ArrayMap<FingerprintGestureCallback, Handler> mCallbackHandlerMap =
+            new ArrayMap<>(1);
 
     public FingerprintGestureController(IAccessibilityServiceConnection connection) {
         this.mAccessibilityServiceConnection = connection;
@@ -31,7 +31,8 @@ public final class FingerprintGestureController {
         }
     }
 
-    public void registerFingerprintGestureCallback(FingerprintGestureCallback callback, Handler handler) {
+    public void registerFingerprintGestureCallback(
+            FingerprintGestureCallback callback, Handler handler) {
         synchronized (this.mLock) {
             this.mCallbackHandlerMap.put(callback, handler);
         }
@@ -53,12 +54,15 @@ public final class FingerprintGestureController {
             final FingerprintGestureCallback callback = handlerMap.keyAt(i);
             Handler handler = handlerMap.valueAt(i);
             if (handler != null) {
-                handler.post(new Runnable() { // from class: android.accessibilityservice.FingerprintGestureController$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        FingerprintGestureController.FingerprintGestureCallback.this.onGestureDetectionAvailabilityChanged(active);
-                    }
-                });
+                handler.post(
+                        new Runnable() { // from class:
+                            // android.accessibilityservice.FingerprintGestureController$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                FingerprintGestureController.FingerprintGestureCallback.this
+                                        .onGestureDetectionAvailabilityChanged(active);
+                            }
+                        });
             } else {
                 callback.onGestureDetectionAvailabilityChanged(active);
             }
@@ -75,23 +79,24 @@ public final class FingerprintGestureController {
             final FingerprintGestureCallback callback = handlerMap.keyAt(i);
             Handler handler = handlerMap.valueAt(i);
             if (handler != null) {
-                handler.post(new Runnable() { // from class: android.accessibilityservice.FingerprintGestureController$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        FingerprintGestureController.FingerprintGestureCallback.this.onGestureDetected(gesture);
-                    }
-                });
+                handler.post(
+                        new Runnable() { // from class:
+                            // android.accessibilityservice.FingerprintGestureController$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                FingerprintGestureController.FingerprintGestureCallback.this
+                                        .onGestureDetected(gesture);
+                            }
+                        });
             } else {
                 callback.onGestureDetected(gesture);
             }
         }
     }
 
-    public static abstract class FingerprintGestureCallback {
-        public void onGestureDetectionAvailabilityChanged(boolean available) {
-        }
+    public abstract static class FingerprintGestureCallback {
+        public void onGestureDetectionAvailabilityChanged(boolean available) {}
 
-        public void onGestureDetected(int gesture) {
-        }
+        public void onGestureDetected(int gesture) {}
     }
 }

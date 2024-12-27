@@ -3,18 +3,23 @@ package com.android.server.biometrics.sensors.fingerprint.aidl;
 import android.hardware.biometrics.fingerprint.ISessionCallback;
 import android.os.CancellationSignal;
 import android.os.Handler;
-import com.android.server.biometrics.sensors.fingerprint.aidl.SemTpaTestHal;
+
 import java.util.concurrent.CountDownLatch;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class SemTpaTestHal$1$$ExternalSyntheticLambda3 implements CancellationSignal.OnCancelListener {
+public final /* synthetic */ class SemTpaTestHal$1$$ExternalSyntheticLambda3
+        implements CancellationSignal.OnCancelListener {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ SemTpaTestHal.AnonymousClass1 f$0;
     public final /* synthetic */ Handler f$1;
     public final /* synthetic */ ISessionCallback f$2;
 
-    public /* synthetic */ SemTpaTestHal$1$$ExternalSyntheticLambda3(SemTpaTestHal.AnonymousClass1 anonymousClass1, Handler handler, ISessionCallback iSessionCallback, int i) {
+    public /* synthetic */ SemTpaTestHal$1$$ExternalSyntheticLambda3(
+            SemTpaTestHal.AnonymousClass1 anonymousClass1,
+            Handler handler,
+            ISessionCallback iSessionCallback,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = anonymousClass1;
         this.f$1 = handler;

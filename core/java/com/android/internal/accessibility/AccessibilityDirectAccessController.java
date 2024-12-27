@@ -27,14 +27,15 @@ import android.view.ContextThemeWrapper;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
+
 import com.android.internal.R;
-import com.android.internal.accessibility.AccessibilityDirectAccessController;
 import com.android.internal.accessibility.dialog.AccessibilityTarget;
 import com.android.internal.accessibility.dialog.AccessibilityTargetHelper;
 import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -44,18 +45,32 @@ import java.util.function.Consumer;
 /* loaded from: classes5.dex */
 public class AccessibilityDirectAccessController {
     private static final String TAG = "AccessibilityDirectAccessController";
-    private static final AudioAttributes VIBRATION_ATTRIBUTES = new AudioAttributes.Builder().setContentType(4).setUsage(11).build();
+    private static final AudioAttributes VIBRATION_ATTRIBUTES =
+            new AudioAttributes.Builder().setContentType(4).setUsage(11).build();
     private static Map<ComponentName, ToggleableFrameworkFeatureInfo> sFrameworkShortcutFeaturesMap;
     private AlertDialog mAlertDialog;
     private final Context mContext;
     public FrameworkObjectProvider mFrameworkObjectProvider = new FrameworkObjectProvider();
     private final Handler mHandler = new Handler(Looper.getMainLooper());
 
-    public static Map<ComponentName, ToggleableFrameworkFeatureInfo> getFrameworkShortcutFeaturesMap() {
+    public static Map<ComponentName, ToggleableFrameworkFeatureInfo>
+            getFrameworkShortcutFeaturesMap() {
         if (sFrameworkShortcutFeaturesMap == null) {
             Map<ComponentName, ToggleableFrameworkFeatureInfo> featuresMap = new ArrayMap<>(2);
-            featuresMap.put(AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME, new ToggleableFrameworkFeatureInfo(Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, "1", "0", R.string.color_inversion_feature_name));
-            featuresMap.put(AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME, new ToggleableFrameworkFeatureInfo(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, "1", "0", R.string.color_correction_feature_name));
+            featuresMap.put(
+                    AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME,
+                    new ToggleableFrameworkFeatureInfo(
+                            Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED,
+                            "1",
+                            "0",
+                            R.string.color_inversion_feature_name));
+            featuresMap.put(
+                    AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME,
+                    new ToggleableFrameworkFeatureInfo(
+                            Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
+                            "1",
+                            "0",
+                            R.string.color_correction_feature_name));
             sFrameworkShortcutFeaturesMap = Collections.unmodifiableMap(featuresMap);
         }
         return sFrameworkShortcutFeaturesMap;
@@ -69,14 +84,23 @@ public class AccessibilityDirectAccessController {
         Slog.d(TAG, "Accessibility direct access activated");
         final ContentResolver cr = this.mContext.getContentResolver();
         final int userId = ActivityManager.getCurrentUser();
-        int dialogAlreadyShown = Settings.Secure.getIntForUser(cr, "accessibility_direct_access_dialog_shown", 0, userId);
-        String directAccessTargetService = Settings.Secure.getStringForUser(cr, Settings.Secure.ACCESSIBILITY_DIRECT_ACCESS_TARGET_SERVICE, userId);
+        int dialogAlreadyShown =
+                Settings.Secure.getIntForUser(
+                        cr, "accessibility_direct_access_dialog_shown", 0, userId);
+        String directAccessTargetService =
+                Settings.Secure.getStringForUser(
+                        cr, Settings.Secure.ACCESSIBILITY_DIRECT_ACCESS_TARGET_SERVICE, userId);
         if (directAccessTargetService == null && AccessibilityUtils.isSetupWizard(this.mContext)) {
             Slog.d(TAG, "Accessibility directAccessTargetService == null");
-            Settings.Secure.putStringForUser(cr, Settings.Secure.ACCESSIBILITY_DIRECT_ACCESS_TARGET_SERVICE, AccessibilityShortcutController.TALKBACK_SE, userId);
+            Settings.Secure.putStringForUser(
+                    cr,
+                    Settings.Secure.ACCESSIBILITY_DIRECT_ACCESS_TARGET_SERVICE,
+                    AccessibilityShortcutController.TALKBACK_SE,
+                    userId);
             directAccessTargetService = AccessibilityShortcutController.TALKBACK_SE;
         }
-        if (TextUtils.isEmpty(directAccessTargetService) || (isKeyguardLocked() && dialogAlreadyShown == 0)) {
+        if (TextUtils.isEmpty(directAccessTargetService)
+                || (isKeyguardLocked() && dialogAlreadyShown == 0)) {
             Slog.d(TAG, "Accessibility direct access isEmpty");
             return;
         }
@@ -85,36 +109,60 @@ public class AccessibilityDirectAccessController {
             if (ShortcutUtils.isSupportDCMotorHapticFeedback(vibrator)) {
                 ShortcutUtils.vibrateDCMotorHapticFeedback(this.mContext, vibrator);
             } else {
-                long[] vibePattern = ArrayUtils.convertToLongArray(this.mContext.getResources().getIntArray(R.array.config_longPressVibePattern));
+                long[] vibePattern =
+                        ArrayUtils.convertToLongArray(
+                                this.mContext
+                                        .getResources()
+                                        .getIntArray(R.array.config_longPressVibePattern));
                 vibrator.vibrate(vibePattern, -1, VIBRATION_ATTRIBUTES);
             }
         }
         if (dialogAlreadyShown == 0) {
-            this.mHandler.postDelayed(new Runnable() { // from class: com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityDirectAccessController.this.lambda$performAccessibilityDirectAccess$0(userId, cr);
-                }
-            }, 0L);
+            this.mHandler.postDelayed(
+                    new Runnable() { // from class:
+                                     // com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityDirectAccessController.this
+                                    .lambda$performAccessibilityDirectAccess$0(userId, cr);
+                        }
+                    },
+                    0L);
             return;
         }
-        if (directAccessTargetService != null && directAccessTargetService.contains("com.samsung.accessibility/com.samsung.accessibility.shortcut.InteractionControlShortcut") && AccessibilityUtils.isAccessControlEnabled(this.mContext)) {
+        if (directAccessTargetService != null
+                && directAccessTargetService.contains(
+                        "com.samsung.accessibility/com.samsung.accessibility.shortcut.InteractionControlShortcut")
+                && AccessibilityUtils.isAccessControlEnabled(this.mContext)) {
             Slog.d(TAG, "Interaction Control is activated");
             AccessibilityUtils.turnOffAccessControl(this.mContext);
-        } else if (directAccessTargetService != null && directAccessTargetService.contains("com.samsung.accessibility/com.samsung.accessibility.universalswitch.UniversalSwitchService") && AccessibilityUtils.isAccessibilityServiceEnabled(this.mContext, "com.samsung.accessibility/com.samsung.accessibility.universalswitch.UniversalSwitchService")) {
+        } else if (directAccessTargetService != null
+                && directAccessTargetService.contains(
+                        "com.samsung.accessibility/com.samsung.accessibility.universalswitch.UniversalSwitchService")
+                && AccessibilityUtils.isAccessibilityServiceEnabled(
+                        this.mContext,
+                        "com.samsung.accessibility/com.samsung.accessibility.universalswitch.UniversalSwitchService")) {
             Slog.d(TAG, "Universal switch is activated");
-            AccessibilityUtils.setAccessibilityServiceState(this.mContext, ComponentName.unflattenFromString("com.samsung.accessibility/com.samsung.accessibility.universalswitch.UniversalSwitchService"), false, userId);
+            AccessibilityUtils.setAccessibilityServiceState(
+                    this.mContext,
+                    ComponentName.unflattenFromString(
+                            "com.samsung.accessibility/com.samsung.accessibility.universalswitch.UniversalSwitchService"),
+                    false,
+                    userId);
         } else {
             if (this.mAlertDialog != null) {
                 this.mAlertDialog.dismiss();
                 this.mAlertDialog = null;
             }
-            this.mFrameworkObjectProvider.getAccessibilityManagerInstance(this.mContext).performAccessibilityDirectAccess();
+            this.mFrameworkObjectProvider
+                    .getAccessibilityManagerInstance(this.mContext)
+                    .performAccessibilityDirectAccess();
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$performAccessibilityDirectAccess$0(int userId, ContentResolver cr) {
+    public /* synthetic */ void lambda$performAccessibilityDirectAccess$0(
+            int userId, ContentResolver cr) {
         this.mAlertDialog = createShortcutWarningDialog(userId);
         if (this.mAlertDialog == null) {
             return;
@@ -131,44 +179,89 @@ public class AccessibilityDirectAccessController {
     }
 
     private AlertDialog createShortcutWarningDialog(final int userId) {
-        List<AccessibilityTarget> targets = AccessibilityTargetHelper.getTargets(this.mContext, 512);
+        List<AccessibilityTarget> targets =
+                AccessibilityTargetHelper.getTargets(this.mContext, 512);
         if (targets.size() == 0) {
             return null;
         }
-        AlertDialog alertDialog = this.mFrameworkObjectProvider.getAlertDialogBuilder(this.mFrameworkObjectProvider.getSystemUiContext()).setTitle(getShortcutWarningTitle(targets)).setMessage(getShortcutWarningMessage(targets)).setCancelable(false).setPositiveButton(R.string.accessibility_shortcut_use, (DialogInterface.OnClickListener) null).setNegativeButton(R.string.accessibility_shortcut_dont_use, new DialogInterface.OnClickListener() { // from class: com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda1
-            @Override // android.content.DialogInterface.OnClickListener
-            public final void onClick(DialogInterface dialogInterface, int i) {
-                AccessibilityDirectAccessController.this.lambda$createShortcutWarningDialog$1(userId, dialogInterface, i);
-            }
-        }).setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda2
-            @Override // android.content.DialogInterface.OnCancelListener
-            public final void onCancel(DialogInterface dialogInterface) {
-                AccessibilityDirectAccessController.this.lambda$createShortcutWarningDialog$2(userId, dialogInterface);
-            }
-        }).create();
+        AlertDialog alertDialog =
+                this.mFrameworkObjectProvider
+                        .getAlertDialogBuilder(this.mFrameworkObjectProvider.getSystemUiContext())
+                        .setTitle(getShortcutWarningTitle(targets))
+                        .setMessage(getShortcutWarningMessage(targets))
+                        .setCancelable(false)
+                        .setPositiveButton(
+                                R.string.accessibility_shortcut_use,
+                                (DialogInterface.OnClickListener) null)
+                        .setNegativeButton(
+                                R.string.accessibility_shortcut_dont_use,
+                                new DialogInterface
+                                        .OnClickListener() { // from class:
+                                                             // com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda1
+                                    @Override // android.content.DialogInterface.OnClickListener
+                                    public final void onClick(
+                                            DialogInterface dialogInterface, int i) {
+                                        AccessibilityDirectAccessController.this
+                                                .lambda$createShortcutWarningDialog$1(
+                                                        userId, dialogInterface, i);
+                                    }
+                                })
+                        .setOnCancelListener(
+                                new DialogInterface
+                                        .OnCancelListener() { // from class:
+                                                              // com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda2
+                                    @Override // android.content.DialogInterface.OnCancelListener
+                                    public final void onCancel(DialogInterface dialogInterface) {
+                                        AccessibilityDirectAccessController.this
+                                                .lambda$createShortcutWarningDialog$2(
+                                                        userId, dialogInterface);
+                                    }
+                                })
+                        .create();
         return alertDialog;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$createShortcutWarningDialog$1(int userId, DialogInterface d, int which) {
-        Settings.Secure.putStringForUser(this.mContext.getContentResolver(), Settings.Secure.ACCESSIBILITY_DIRECT_ACCESS_TARGET_SERVICE, "", userId);
-        Settings.Secure.putIntForUser(this.mContext.getContentResolver(), "accessibility_direct_access_dialog_shown", 0, userId);
+    public /* synthetic */ void lambda$createShortcutWarningDialog$1(
+            int userId, DialogInterface d, int which) {
+        Settings.Secure.putStringForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DIRECT_ACCESS_TARGET_SERVICE,
+                "",
+                userId);
+        Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                "accessibility_direct_access_dialog_shown",
+                0,
+                userId);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$createShortcutWarningDialog$2(int userId, DialogInterface d) {
-        Settings.Secure.putIntForUser(this.mContext.getContentResolver(), "accessibility_direct_access_dialog_shown", 0, userId);
+    public /* synthetic */ void lambda$createShortcutWarningDialog$2(
+            int userId, DialogInterface d) {
+        Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                "accessibility_direct_access_dialog_shown",
+                0,
+                userId);
     }
 
     private String getShortcutWarningTitle(List<AccessibilityTarget> targets) {
-        if (targets.size() == 1 && AccessibilityShortcutController.TALKBACK_SE.equals(targets.get(0).getId())) {
+        if (targets.size() == 1
+                && AccessibilityShortcutController.TALKBACK_SE.equals(targets.get(0).getId())) {
             if (AccessibilityUtils.isSideKeySupported()) {
-                return this.mContext.getString(R.string.accessibility_direct_access_warning_title_samsung_side_key_talkback, targets.get(0).getLabel());
+                return this.mContext.getString(
+                        R.string
+                                .accessibility_direct_access_warning_title_samsung_side_key_talkback,
+                        targets.get(0).getLabel());
             }
-            return this.mContext.getString(R.string.accessibility_direct_access_warning_title_samsung_talkback, targets.get(0).getLabel());
+            return this.mContext.getString(
+                    R.string.accessibility_direct_access_warning_title_samsung_talkback,
+                    targets.get(0).getLabel());
         }
         if (AccessibilityUtils.isSideKeySupported()) {
-            return this.mContext.getString(R.string.accessibility_direct_access_warning_title_samsung_side_key);
+            return this.mContext.getString(
+                    R.string.accessibility_direct_access_warning_title_samsung_side_key);
         }
         return this.mContext.getString(R.string.accessibility_direct_access_warning_title_samsung);
     }
@@ -176,18 +269,41 @@ public class AccessibilityDirectAccessController {
     private String getShortcutWarningMessage(List<AccessibilityTarget> targets) {
         if (targets.size() == 1) {
             if (AccessibilityUtils.isSideKeySupported()) {
-                return this.mContext.getString(R.string.accessibility_direct_access_single_service_warning_samsung_side_key, targets.get(0).getLabel()) + " " + this.mContext.getString(R.string.accessibility_select_different_function);
+                return this.mContext.getString(
+                                R.string
+                                        .accessibility_direct_access_single_service_warning_samsung_side_key,
+                                targets.get(0).getLabel())
+                        + " "
+                        + this.mContext.getString(R.string.accessibility_select_different_function);
             }
-            return this.mContext.getString(R.string.accessibility_direct_access_single_service_warning_samsung, targets.get(0).getLabel()) + " " + this.mContext.getString(R.string.accessibility_select_different_function);
+            return this.mContext.getString(
+                            R.string.accessibility_direct_access_single_service_warning_samsung,
+                            targets.get(0).getLabel())
+                    + " "
+                    + this.mContext.getString(R.string.accessibility_select_different_function);
         }
         StringBuilder sb = new StringBuilder();
         for (AccessibilityTarget target : targets) {
-            sb.append(this.mContext.getString(R.string.accessibility_shortcut_multiple_service_list, target.getLabel()));
+            sb.append(
+                    this.mContext.getString(
+                            R.string.accessibility_shortcut_multiple_service_list,
+                            target.getLabel()));
         }
         if (AccessibilityUtils.isSideKeySupported()) {
-            return this.mContext.getString(R.string.accessibility_direct_access_multiple_service_warning_samsung_side_key) + "\n" + sb.toString() + "\n" + this.mContext.getString(R.string.accessibility_select_different_function);
+            return this.mContext.getString(
+                            R.string
+                                    .accessibility_direct_access_multiple_service_warning_samsung_side_key)
+                    + "\n"
+                    + sb.toString()
+                    + "\n"
+                    + this.mContext.getString(R.string.accessibility_select_different_function);
         }
-        return this.mContext.getString(R.string.accessibility_direct_access_multiple_service_warning_samsung) + "\n" + sb.toString() + "\n" + this.mContext.getString(R.string.accessibility_select_different_function);
+        return this.mContext.getString(
+                        R.string.accessibility_direct_access_multiple_service_warning_samsung)
+                + "\n"
+                + sb.toString()
+                + "\n"
+                + this.mContext.getString(R.string.accessibility_select_different_function);
     }
 
     private AccessibilityServiceInfo getInfoForTargetService() {
@@ -195,7 +311,8 @@ public class AccessibilityDirectAccessController {
         if (targetComponentName == null) {
             return null;
         }
-        AccessibilityManager accessibilityManager = this.mFrameworkObjectProvider.getAccessibilityManagerInstance(this.mContext);
+        AccessibilityManager accessibilityManager =
+                this.mFrameworkObjectProvider.getAccessibilityManagerInstance(this.mContext);
         return accessibilityManager.getInstalledServiceInfoWithComponentName(targetComponentName);
     }
 
@@ -204,11 +321,15 @@ public class AccessibilityDirectAccessController {
         if (targetComponentName == null) {
             return null;
         }
-        ToggleableFrameworkFeatureInfo frameworkFeatureInfo = getFrameworkShortcutFeaturesMap().get(targetComponentName);
+        ToggleableFrameworkFeatureInfo frameworkFeatureInfo =
+                getFrameworkShortcutFeaturesMap().get(targetComponentName);
         if (frameworkFeatureInfo != null) {
             return frameworkFeatureInfo.getLabel(this.mContext);
         }
-        AccessibilityServiceInfo serviceInfo = this.mFrameworkObjectProvider.getAccessibilityManagerInstance(this.mContext).getInstalledServiceInfoWithComponentName(targetComponentName);
+        AccessibilityServiceInfo serviceInfo =
+                this.mFrameworkObjectProvider
+                        .getAccessibilityManagerInstance(this.mContext)
+                        .getInstalledServiceInfoWithComponentName(targetComponentName);
         if (serviceInfo == null) {
             return null;
         }
@@ -233,9 +354,12 @@ public class AccessibilityDirectAccessController {
         } else {
             audioAttributesUsage = 10;
         }
-        Ringtone tone = this.mFrameworkObjectProvider.getRingtone(this.mContext, Settings.System.DEFAULT_NOTIFICATION_URI);
+        Ringtone tone =
+                this.mFrameworkObjectProvider.getRingtone(
+                        this.mContext, Settings.System.DEFAULT_NOTIFICATION_URI);
         if (tone != null) {
-            tone.setAudioAttributes(new AudioAttributes.Builder().setUsage(audioAttributesUsage).build());
+            tone.setAudioAttributes(
+                    new AudioAttributes.Builder().setUsage(audioAttributesUsage).build());
             tone.play();
         }
     }
@@ -243,21 +367,29 @@ public class AccessibilityDirectAccessController {
     private boolean performTtsPrompt(AlertDialog alertDialog) {
         String serviceName = getShortcutFeatureDescription();
         AccessibilityServiceInfo serviceInfo = getInfoForTargetService();
-        if (TextUtils.isEmpty(serviceName) || serviceInfo == null || (serviceInfo.flags & 1024) == 0) {
+        if (TextUtils.isEmpty(serviceName)
+                || serviceInfo == null
+                || (serviceInfo.flags & 1024) == 0) {
             return false;
         }
         final TtsPrompt tts = new TtsPrompt(serviceName);
-        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda3
-            @Override // android.content.DialogInterface.OnDismissListener
-            public final void onDismiss(DialogInterface dialogInterface) {
-                AccessibilityDirectAccessController.TtsPrompt.this.dismiss();
-            }
-        });
+        alertDialog.setOnDismissListener(
+                new DialogInterface
+                        .OnDismissListener() { // from class:
+                                               // com.android.internal.accessibility.AccessibilityDirectAccessController$$ExternalSyntheticLambda3
+                    @Override // android.content.DialogInterface.OnDismissListener
+                    public final void onDismiss(DialogInterface dialogInterface) {
+                        AccessibilityDirectAccessController.TtsPrompt.this.dismiss();
+                    }
+                });
         return true;
     }
 
     private ComponentName getShortcutTargetComponentName() {
-        List<String> shortcutTargets = this.mFrameworkObjectProvider.getAccessibilityManagerInstance(this.mContext).getAccessibilityShortcutTargets(512);
+        List<String> shortcutTargets =
+                this.mFrameworkObjectProvider
+                        .getAccessibilityManagerInstance(this.mContext)
+                        .getAccessibilityShortcutTargets(512);
         if (shortcutTargets.size() != 1) {
             return null;
         }
@@ -276,25 +408,41 @@ public class AccessibilityDirectAccessController {
 
         TtsPrompt(String serviceName) {
             if (AccessibilityUtils.isSideKeySupported()) {
-                this.mText = AccessibilityDirectAccessController.this.mContext.getString(R.string.accessibility_direct_access_spoken_feedback_side_key, serviceName);
+                this.mText =
+                        AccessibilityDirectAccessController.this.mContext.getString(
+                                R.string.accessibility_direct_access_spoken_feedback_side_key,
+                                serviceName);
             } else {
-                this.mText = AccessibilityDirectAccessController.this.mContext.getString(R.string.accessibility_direct_access_spoken_feedback, serviceName);
+                this.mText =
+                        AccessibilityDirectAccessController.this.mContext.getString(
+                                R.string.accessibility_direct_access_spoken_feedback, serviceName);
             }
-            this.mTts = AccessibilityDirectAccessController.this.mFrameworkObjectProvider.getTextToSpeech(AccessibilityDirectAccessController.this.mContext, this);
+            this.mTts =
+                    AccessibilityDirectAccessController.this.mFrameworkObjectProvider
+                            .getTextToSpeech(
+                                    AccessibilityDirectAccessController.this.mContext, this);
         }
 
         public void dismiss() {
             this.mDismiss = true;
-            AccessibilityDirectAccessController.this.mHandler.sendMessage(PooledLambda.obtainMessage(new AccessibilityDirectAccessController$TtsPrompt$$ExternalSyntheticLambda2(), this.mTts));
+            AccessibilityDirectAccessController.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new AccessibilityDirectAccessController$TtsPrompt$$ExternalSyntheticLambda2(),
+                            this.mTts));
         }
 
         @Override // android.speech.tts.TextToSpeech.OnInitListener
         public void onInit(int status) {
             if (status != 0) {
-                Slog.d(AccessibilityDirectAccessController.TAG, "Tts init fail, status=" + Integer.toString(status));
+                Slog.d(
+                        AccessibilityDirectAccessController.TAG,
+                        "Tts init fail, status=" + Integer.toString(status));
                 AccessibilityDirectAccessController.this.playNotificationTone();
             } else {
-                AccessibilityDirectAccessController.this.mHandler.sendMessage(PooledLambda.obtainMessage(new AccessibilityDirectAccessController$TtsPrompt$$ExternalSyntheticLambda1(), this));
+                AccessibilityDirectAccessController.this.mHandler.sendMessage(
+                        PooledLambda.obtainMessage(
+                                new AccessibilityDirectAccessController$TtsPrompt$$ExternalSyntheticLambda1(),
+                                this));
             }
         }
 
@@ -322,16 +470,24 @@ public class AccessibilityDirectAccessController {
             }
             if (this.mLanguageReady) {
                 Voice voice = this.mTts.getVoice();
-                if (voice != null && voice.getFeatures() != null && !voice.getFeatures().contains(TextToSpeech.Engine.KEY_FEATURE_NOT_INSTALLED)) {
+                if (voice != null
+                        && voice.getFeatures() != null
+                        && !voice.getFeatures()
+                                .contains(TextToSpeech.Engine.KEY_FEATURE_NOT_INSTALLED)) {
                     voiceDataInstalled = true;
                 }
                 if (voiceDataInstalled) {
-                    AccessibilityDirectAccessController.this.mHandler.sendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: com.android.internal.accessibility.AccessibilityDirectAccessController$TtsPrompt$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            ((AccessibilityDirectAccessController.TtsPrompt) obj).play();
-                        }
-                    }, this));
+                    AccessibilityDirectAccessController.this.mHandler.sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new Consumer() { // from class:
+                                                     // com.android.internal.accessibility.AccessibilityDirectAccessController$TtsPrompt$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            ((AccessibilityDirectAccessController.TtsPrompt) obj)
+                                                    .play();
+                                        }
+                                    },
+                                    this));
                     return;
                 }
             }
@@ -340,7 +496,11 @@ public class AccessibilityDirectAccessController {
                 AccessibilityDirectAccessController.this.playNotificationTone();
             } else {
                 this.mRetryCount--;
-                AccessibilityDirectAccessController.this.mHandler.sendMessageDelayed(PooledLambda.obtainMessage(new AccessibilityDirectAccessController$TtsPrompt$$ExternalSyntheticLambda1(), this), 1000L);
+                AccessibilityDirectAccessController.this.mHandler.sendMessageDelayed(
+                        PooledLambda.obtainMessage(
+                                new AccessibilityDirectAccessController$TtsPrompt$$ExternalSyntheticLambda1(),
+                                this),
+                        1000L);
             }
         }
     }
@@ -351,7 +511,11 @@ public class AccessibilityDirectAccessController {
         private final String mSettingOffValue;
         private final String mSettingOnValue;
 
-        ToggleableFrameworkFeatureInfo(String settingKey, String settingOnValue, String settingOffValue, int labelStringResourceId) {
+        ToggleableFrameworkFeatureInfo(
+                String settingKey,
+                String settingOnValue,
+                String settingOffValue,
+                int labelStringResourceId) {
             this.mSettingKey = settingKey;
             this.mSettingOnValue = settingOnValue;
             this.mSettingOffValue = settingOffValue;
@@ -382,7 +546,8 @@ public class AccessibilityDirectAccessController {
 
         public AlertDialog.Builder getAlertDialogBuilder(Context context) {
             boolean isNight = (context.getResources().getConfiguration().uiMode & 48) == 32;
-            return new AlertDialog.Builder(isNight ? new ContextThemeWrapper(context, 16974120) : context);
+            return new AlertDialog.Builder(
+                    isNight ? new ContextThemeWrapper(context, 16974120) : context);
         }
 
         public Context getSystemUiContext() {
@@ -399,7 +564,8 @@ public class AccessibilityDirectAccessController {
     }
 
     private boolean isKeyguardLocked() {
-        KeyguardManager keyguardManager = (KeyguardManager) this.mContext.getSystemService(KeyguardManager.class);
+        KeyguardManager keyguardManager =
+                (KeyguardManager) this.mContext.getSystemService(KeyguardManager.class);
         return keyguardManager != null && keyguardManager.isKeyguardLocked();
     }
 }

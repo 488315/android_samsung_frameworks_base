@@ -2,6 +2,7 @@ package android.app.backup;
 
 import android.content.Context;
 import android.os.ParcelFileDescriptor;
+
 import java.io.File;
 
 /* loaded from: classes.dex */
@@ -13,7 +14,8 @@ public class FileBackupHelper extends FileBackupHelperBase implements BackupHelp
     File mFilesDir;
 
     @Override // android.app.backup.FileBackupHelperBase, android.app.backup.BackupHelper
-    public /* bridge */ /* synthetic */ void writeNewStateDescription(ParcelFileDescriptor parcelFileDescriptor) {
+    public /* bridge */ /* synthetic */ void writeNewStateDescription(
+            ParcelFileDescriptor parcelFileDescriptor) {
         super.writeNewStateDescription(parcelFileDescriptor);
     }
 
@@ -25,7 +27,8 @@ public class FileBackupHelper extends FileBackupHelperBase implements BackupHelp
     }
 
     @Override // android.app.backup.BackupHelper
-    public void performBackup(ParcelFileDescriptor oldState, BackupDataOutput data, ParcelFileDescriptor newState) {
+    public void performBackup(
+            ParcelFileDescriptor oldState, BackupDataOutput data, ParcelFileDescriptor newState) {
         String[] files = this.mFiles;
         File base = this.mContext.getFilesDir();
         int N = files.length;

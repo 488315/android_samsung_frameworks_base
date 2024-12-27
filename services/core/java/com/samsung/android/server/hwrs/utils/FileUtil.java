@@ -1,6 +1,7 @@
 package com.samsung.android.server.hwrs.utils;
 
 import android.util.Log;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

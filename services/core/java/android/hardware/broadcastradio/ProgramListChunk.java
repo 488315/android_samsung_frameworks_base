@@ -3,6 +3,7 @@ package android.hardware.broadcastradio;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -35,14 +36,19 @@ public final class ProgramListChunk implements Parcelable {
                     if (parcel.dataPosition() - dataPosition < readInt) {
                         programListChunk.complete = parcel.readBoolean();
                         if (parcel.dataPosition() - dataPosition < readInt) {
-                            programListChunk.modified = (ProgramInfo[]) parcel.createTypedArray(ProgramInfo.CREATOR);
+                            programListChunk.modified =
+                                    (ProgramInfo[]) parcel.createTypedArray(ProgramInfo.CREATOR);
                             if (parcel.dataPosition() - dataPosition < readInt) {
-                                programListChunk.removed = (ProgramIdentifier[]) parcel.createTypedArray(ProgramIdentifier.CREATOR);
+                                programListChunk.removed =
+                                        (ProgramIdentifier[])
+                                                parcel.createTypedArray(ProgramIdentifier.CREATOR);
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -100,7 +106,12 @@ public final class ProgramListChunk implements Parcelable {
             return false;
         }
         ProgramListChunk programListChunk = (ProgramListChunk) obj;
-        return Objects.deepEquals(Boolean.valueOf(this.purge), Boolean.valueOf(programListChunk.purge)) && Objects.deepEquals(Boolean.valueOf(this.complete), Boolean.valueOf(programListChunk.complete)) && Objects.deepEquals(this.modified, programListChunk.modified) && Objects.deepEquals(this.removed, programListChunk.removed);
+        return Objects.deepEquals(
+                        Boolean.valueOf(this.purge), Boolean.valueOf(programListChunk.purge))
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.complete), Boolean.valueOf(programListChunk.complete))
+                && Objects.deepEquals(this.modified, programListChunk.modified)
+                && Objects.deepEquals(this.removed, programListChunk.removed);
     }
 
     public final int getStability() {
@@ -109,14 +120,30 @@ public final class ProgramListChunk implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public final int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Boolean.valueOf(this.purge), Boolean.valueOf(this.complete), this.modified, this.removed).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Boolean.valueOf(this.purge),
+                                Boolean.valueOf(this.complete),
+                                this.modified,
+                                this.removed)
+                        .toArray());
     }
 
     public final String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         stringJoiner.add("purge: " + this.purge);
         stringJoiner.add("complete: " + this.complete);
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.removed), "ProgramListChunk", AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.modified), "removed: ", new StringBuilder("modified: "), stringJoiner), stringJoiner));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                        Arrays.toString(this.removed),
+                        "ProgramListChunk",
+                        AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                                Arrays.toString(this.modified),
+                                "removed: ",
+                                new StringBuilder("modified: "),
+                                stringJoiner),
+                        stringJoiner));
     }
 
     @Override // android.os.Parcelable

@@ -18,15 +18,13 @@ public final class ApduServiceInfoProto {
         public static final long AID = 1138166333441L;
         public static final long SHOULD_AUTO_TRANSACT = 1133871366146L;
 
-        public AutoTransactMapping() {
-        }
+        public AutoTransactMapping() {}
     }
 
     public final class AutoTransactPattern {
         public static final long REGEXP_PATTERN = 1138166333441L;
         public static final long SHOULD_AUTO_TRANSACT = 1133871366146L;
 
-        public AutoTransactPattern() {
-        }
+        public AutoTransactPattern() {}
     }
 }

@@ -11,7 +11,8 @@ import android.os.RemoteException;
 public interface IProxyAgent extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.dar.ddar.proxy.IProxyAgent";
 
-    String initializeSecureSession(int i, String str, String str2, String str3) throws RemoteException;
+    String initializeSecureSession(int i, String str, String str2, String str3)
+            throws RemoteException;
 
     void onAgentReconnected() throws RemoteException;
 
@@ -21,23 +22,26 @@ public interface IProxyAgent extends IInterface {
 
     public static class Default implements IProxyAgent {
         @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyAgent
-        public Bundle onMessage(int callingUid, String svcName, String msgName, Bundle args) throws RemoteException {
+        public Bundle onMessage(int callingUid, String svcName, String msgName, Bundle args)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyAgent
-        public String initializeSecureSession(int callingUid, String svcName, String secureClientId, String secureClientPubKey) throws RemoteException {
+        public String initializeSecureSession(
+                int callingUid, String svcName, String secureClientId, String secureClientPubKey)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyAgent
-        public boolean terminateSecureSession(int callingUid, String svcName, String secureClientId) throws RemoteException {
+        public boolean terminateSecureSession(int callingUid, String svcName, String secureClientId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyAgent
-        public void onAgentReconnected() throws RemoteException {
-        }
+        public void onAgentReconnected() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -45,7 +49,7 @@ public interface IProxyAgent extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProxyAgent {
+    public abstract static class Stub extends Binder implements IProxyAgent {
         static final int TRANSACTION_initializeSecureSession = 2;
         static final int TRANSACTION_onAgentReconnected = 4;
         static final int TRANSACTION_onMessage = 1;
@@ -92,7 +96,8 @@ public interface IProxyAgent extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IProxyAgent.DESCRIPTOR);
             }
@@ -156,7 +161,8 @@ public interface IProxyAgent extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyAgent
-            public Bundle onMessage(int callingUid, String svcName, String msgName, Bundle args) throws RemoteException {
+            public Bundle onMessage(int callingUid, String svcName, String msgName, Bundle args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -176,7 +182,12 @@ public interface IProxyAgent extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyAgent
-            public String initializeSecureSession(int callingUid, String svcName, String secureClientId, String secureClientPubKey) throws RemoteException {
+            public String initializeSecureSession(
+                    int callingUid,
+                    String svcName,
+                    String secureClientId,
+                    String secureClientPubKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -196,7 +207,8 @@ public interface IProxyAgent extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyAgent
-            public boolean terminateSecureSession(int callingUid, String svcName, String secureClientId) throws RemoteException {
+            public boolean terminateSecureSession(
+                    int callingUid, String svcName, String secureClientId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

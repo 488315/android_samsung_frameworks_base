@@ -3,11 +3,13 @@ package com.android.internal.widget.remotecompose.core.operations;
 import android.hardware.gnss.GnssSignalType;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
+
 import com.android.internal.widget.remotecompose.core.CompanionOperation;
 import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.VariableSupport;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,8 +76,7 @@ public class PathData implements Operation, VariableSupport {
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public String name() {
@@ -143,11 +144,17 @@ public class PathData implements Operation, VariableSupport {
                             str.append(MediaMetrics.SEPARATOR);
                             break;
                         default:
-                            str.append(NavigationBarInflaterView.SIZE_MOD_START + id + NavigationBarInflaterView.SIZE_MOD_END);
+                            str.append(
+                                    NavigationBarInflaterView.SIZE_MOD_START
+                                            + id
+                                            + NavigationBarInflaterView.SIZE_MOD_END);
                             break;
                     }
                 } else {
-                    str.append(NavigationBarInflaterView.KEY_CODE_START + id + NavigationBarInflaterView.KEY_CODE_END);
+                    str.append(
+                            NavigationBarInflaterView.KEY_CODE_START
+                                    + id
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                 }
             } else {
                 str.append(path[i]);

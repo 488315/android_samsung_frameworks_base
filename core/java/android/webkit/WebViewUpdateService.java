@@ -6,8 +6,7 @@ import android.os.RemoteException;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class WebViewUpdateService {
-    private WebViewUpdateService() {
-    }
+    private WebViewUpdateService() {}
 
     public static WebViewProviderInfo[] getAllWebViewPackages() {
         if (Flags.updateServiceIpcWrapper()) {

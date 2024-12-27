@@ -5,11 +5,13 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public interface INetworkFilterProxy extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.knox.app.networkfilter.INetworkFilterProxy";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.knox.app.networkfilter.INetworkFilterProxy";
 
     String[] getBrowserAppList() throws RemoteException;
 
@@ -61,7 +63,8 @@ public interface INetworkFilterProxy extends IInterface {
 
     int stopV6ProxyServer() throws RemoteException;
 
-    void updateApplicationInfo(String str, int i, String str2, String str3, int i2) throws RemoteException;
+    void updateApplicationInfo(String str, int i, String str2, String str3, int i2)
+            throws RemoteException;
 
     void vpnMessengerForDnsQuery(IBinder iBinder) throws RemoteException;
 
@@ -72,7 +75,8 @@ public interface INetworkFilterProxy extends IInterface {
         }
 
         @Override // com.samsung.android.knox.app.networkfilter.INetworkFilterProxy
-        public int registerRemoteProxyAddr(String profileName, String ipConfig) throws RemoteException {
+        public int registerRemoteProxyAddr(String profileName, String ipConfig)
+                throws RemoteException {
             return 0;
         }
 
@@ -192,12 +196,12 @@ public interface INetworkFilterProxy extends IInterface {
         }
 
         @Override // com.samsung.android.knox.app.networkfilter.INetworkFilterProxy
-        public void vpnMessengerForDnsQuery(IBinder binder) throws RemoteException {
-        }
+        public void vpnMessengerForDnsQuery(IBinder binder) throws RemoteException {}
 
         @Override // com.samsung.android.knox.app.networkfilter.INetworkFilterProxy
-        public void updateApplicationInfo(String packageName, int uid, String signature, String versionName, int versionCode) throws RemoteException {
-        }
+        public void updateApplicationInfo(
+                String packageName, int uid, String signature, String versionName, int versionCode)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -205,7 +209,7 @@ public interface INetworkFilterProxy extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INetworkFilterProxy {
+    public abstract static class Stub extends Binder implements INetworkFilterProxy {
         static final int TRANSACTION_getBrowserAppList = 25;
         static final int TRANSACTION_getHttpLocalProxyAddress = 23;
         static final int TRANSACTION_getHttpLocalProxyPort = 24;
@@ -321,7 +325,8 @@ public interface INetworkFilterProxy extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(INetworkFilterProxy.DESCRIPTOR);
             }
@@ -517,7 +522,8 @@ public interface INetworkFilterProxy extends IInterface {
             }
 
             @Override // com.samsung.android.knox.app.networkfilter.INetworkFilterProxy
-            public int registerRemoteProxyAddr(String profileName, String ipConfig) throws RemoteException {
+            public int registerRemoteProxyAddr(String profileName, String ipConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -916,7 +922,13 @@ public interface INetworkFilterProxy extends IInterface {
             }
 
             @Override // com.samsung.android.knox.app.networkfilter.INetworkFilterProxy
-            public void updateApplicationInfo(String packageName, int uid, String signature, String versionName, int versionCode) throws RemoteException {
+            public void updateApplicationInfo(
+                    String packageName,
+                    int uid,
+                    String signature,
+                    String versionName,
+                    int versionCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(INetworkFilterProxy.DESCRIPTOR);

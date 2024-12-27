@@ -1,6 +1,5 @@
 package android.hardware.camera2.extension;
 
-import android.hardware.camera2.extension.IProcessResultImpl;
 import android.hardware.camera2.impl.CameraMetadataNative;
 import android.os.Binder;
 import android.os.IBinder;
@@ -11,7 +10,8 @@ import android.view.Surface;
 
 /* loaded from: classes2.dex */
 public interface IPreviewImageProcessorImpl extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.camera2.extension.IPreviewImageProcessorImpl";
+    public static final String DESCRIPTOR =
+            "android.hardware.camera2.extension.IPreviewImageProcessorImpl";
 
     void onImageFormatUpdate(int i) throws RemoteException;
 
@@ -19,24 +19,30 @@ public interface IPreviewImageProcessorImpl extends IInterface {
 
     void onResolutionUpdate(Size size) throws RemoteException;
 
-    void process(ParcelImage parcelImage, CameraMetadataNative cameraMetadataNative, int i, IProcessResultImpl iProcessResultImpl) throws RemoteException;
+    void process(
+            ParcelImage parcelImage,
+            CameraMetadataNative cameraMetadataNative,
+            int i,
+            IProcessResultImpl iProcessResultImpl)
+            throws RemoteException;
 
     public static class Default implements IPreviewImageProcessorImpl {
         @Override // android.hardware.camera2.extension.IPreviewImageProcessorImpl
-        public void onOutputSurface(Surface surface, int imageFormat) throws RemoteException {
-        }
+        public void onOutputSurface(Surface surface, int imageFormat) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IPreviewImageProcessorImpl
-        public void onResolutionUpdate(Size size) throws RemoteException {
-        }
+        public void onResolutionUpdate(Size size) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IPreviewImageProcessorImpl
-        public void onImageFormatUpdate(int imageFormat) throws RemoteException {
-        }
+        public void onImageFormatUpdate(int imageFormat) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IPreviewImageProcessorImpl
-        public void process(ParcelImage image, CameraMetadataNative result, int sequenceId, IProcessResultImpl resultCallback) throws RemoteException {
-        }
+        public void process(
+                ParcelImage image,
+                CameraMetadataNative result,
+                int sequenceId,
+                IProcessResultImpl resultCallback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -44,7 +50,7 @@ public interface IPreviewImageProcessorImpl extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPreviewImageProcessorImpl {
+    public abstract static class Stub extends Binder implements IPreviewImageProcessorImpl {
         static final int TRANSACTION_onImageFormatUpdate = 3;
         static final int TRANSACTION_onOutputSurface = 1;
         static final int TRANSACTION_onResolutionUpdate = 2;
@@ -91,7 +97,8 @@ public interface IPreviewImageProcessorImpl extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPreviewImageProcessorImpl.DESCRIPTOR);
             }
@@ -121,9 +128,12 @@ public interface IPreviewImageProcessorImpl extends IInterface {
                     return true;
                 case 4:
                     ParcelImage _arg04 = (ParcelImage) data.readTypedObject(ParcelImage.CREATOR);
-                    CameraMetadataNative _arg12 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg12 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     int _arg2 = data.readInt();
-                    IProcessResultImpl _arg3 = IProcessResultImpl.Stub.asInterface(data.readStrongBinder());
+                    IProcessResultImpl _arg3 =
+                            IProcessResultImpl.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     process(_arg04, _arg12, _arg2, _arg3);
                     reply.writeNoException();
@@ -196,7 +206,12 @@ public interface IPreviewImageProcessorImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IPreviewImageProcessorImpl
-            public void process(ParcelImage image, CameraMetadataNative result, int sequenceId, IProcessResultImpl resultCallback) throws RemoteException {
+            public void process(
+                    ParcelImage image,
+                    CameraMetadataNative result,
+                    int sequenceId,
+                    IProcessResultImpl resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

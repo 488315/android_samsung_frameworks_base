@@ -6,11 +6,13 @@ import android.os.RemoteException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class SamsungTapDurationProgressUI$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class SamsungTapDurationProgressUI$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ SamsungTapDurationProgressUI f$0;
 
-    public /* synthetic */ SamsungTapDurationProgressUI$$ExternalSyntheticLambda0(SamsungTapDurationProgressUI samsungTapDurationProgressUI, int i) {
+    public /* synthetic */ SamsungTapDurationProgressUI$$ExternalSyntheticLambda0(
+            SamsungTapDurationProgressUI samsungTapDurationProgressUI, int i) {
         this.$r8$classId = i;
         this.f$0 = samsungTapDurationProgressUI;
     }
@@ -26,12 +28,21 @@ public final /* synthetic */ class SamsungTapDurationProgressUI$$ExternalSynthet
                     Configuration configuration = ActivityManager.getService().getConfiguration();
                     int i2 = samsungTapDurationProgressUI.mUiMode;
                     int i3 = configuration.uiMode;
-                    if (i2 != i3 || samsungTapDurationProgressUI.mDensityDpi != configuration.densityDpi) {
+                    if (i2 != i3
+                            || samsungTapDurationProgressUI.mDensityDpi
+                                    != configuration.densityDpi) {
                         samsungTapDurationProgressUI.mUiMode = i3;
                         samsungTapDurationProgressUI.mDensityDpi = configuration.densityDpi;
-                        samsungTapDurationProgressUI.mContext = samsungTapDurationProgressUI.mContext.createConfigurationContext(configuration);
-                        samsungTapDurationProgressUI.mWindowManager.removeView(samsungTapDurationProgressUI.mView);
-                        samsungTapDurationProgressUI.mSize = samsungTapDurationProgressUI.mContext.getResources().getDimensionPixelSize(17106301);
+                        samsungTapDurationProgressUI.mContext =
+                                samsungTapDurationProgressUI.mContext.createConfigurationContext(
+                                        configuration);
+                        samsungTapDurationProgressUI.mWindowManager.removeView(
+                                samsungTapDurationProgressUI.mView);
+                        samsungTapDurationProgressUI.mSize =
+                                samsungTapDurationProgressUI
+                                        .mContext
+                                        .getResources()
+                                        .getDimensionPixelSize(17106301);
                         samsungTapDurationProgressUI.makeView();
                         samsungTapDurationProgressUI.makeAnimation();
                     }
@@ -40,7 +51,8 @@ public final /* synthetic */ class SamsungTapDurationProgressUI$$ExternalSynthet
                 if (samsungTapDurationProgressUI.mFadeOutAnimator.isRunning()) {
                     samsungTapDurationProgressUI.mFadeOutAnimator.end();
                 }
-                samsungTapDurationProgressUI.mRotationSet.setDuration(samsungTapDurationProgressUI.mDuration);
+                samsungTapDurationProgressUI.mRotationSet.setDuration(
+                        samsungTapDurationProgressUI.mDuration);
                 samsungTapDurationProgressUI.mScaleSet.start();
                 break;
             case 1:
@@ -53,13 +65,15 @@ public final /* synthetic */ class SamsungTapDurationProgressUI$$ExternalSynthet
                 samsungTapDurationProgressUI.mFadeOutAnimator.start();
                 break;
             case 2:
-                samsungTapDurationProgressUI.mWindowManager.updateViewLayout(samsungTapDurationProgressUI.mView, samsungTapDurationProgressUI.mParams);
+                samsungTapDurationProgressUI.mWindowManager.updateViewLayout(
+                        samsungTapDurationProgressUI.mView, samsungTapDurationProgressUI.mParams);
                 break;
             default:
                 if (samsungTapDurationProgressUI.mRotationSet.isRunning()) {
                     samsungTapDurationProgressUI.mRotationSet.end();
                 }
-                if (!samsungTapDurationProgressUI.mIsRemoveAnimationEnabled && !samsungTapDurationProgressUI.mIsShortThreshold) {
+                if (!samsungTapDurationProgressUI.mIsRemoveAnimationEnabled
+                        && !samsungTapDurationProgressUI.mIsShortThreshold) {
                     samsungTapDurationProgressUI.mFadeOutAnimator.start();
                     break;
                 } else {

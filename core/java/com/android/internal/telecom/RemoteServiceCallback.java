@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -16,12 +17,11 @@ public interface RemoteServiceCallback extends IInterface {
 
     public static class Default implements RemoteServiceCallback {
         @Override // com.android.internal.telecom.RemoteServiceCallback
-        public void onError() throws RemoteException {
-        }
+        public void onError() throws RemoteException {}
 
         @Override // com.android.internal.telecom.RemoteServiceCallback
-        public void onResult(List<ComponentName> components, List<IBinder> callServices) throws RemoteException {
-        }
+        public void onResult(List<ComponentName> components, List<IBinder> callServices)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,8 +29,9 @@ public interface RemoteServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements RemoteServiceCallback {
-        public static final String DESCRIPTOR = "com.android.internal.telecom.RemoteServiceCallback";
+    public abstract static class Stub extends Binder implements RemoteServiceCallback {
+        public static final String DESCRIPTOR =
+                "com.android.internal.telecom.RemoteServiceCallback";
         static final int TRANSACTION_onError = 1;
         static final int TRANSACTION_onResult = 2;
 
@@ -71,7 +72,8 @@ public interface RemoteServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -122,7 +124,8 @@ public interface RemoteServiceCallback extends IInterface {
             }
 
             @Override // com.android.internal.telecom.RemoteServiceCallback
-            public void onResult(List<ComponentName> components, List<IBinder> callServices) throws RemoteException {
+            public void onResult(List<ComponentName> components, List<IBinder> callServices)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

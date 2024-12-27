@@ -5,12 +5,14 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.server.hdmi.HdmiCecController;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public interface IHdmiCec extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$tv$hdmi$cec$IHdmiCec".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$tv$hdmi$cec$IHdmiCec".replace('$', '.');
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IHdmiCec {
@@ -65,7 +67,8 @@ public interface IHdmiCec extends IInterface {
                     obtain.writeInt(i);
                     obtain.writeBoolean(z);
                     if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method enableAudioReturnChannel is unimplemented.");
+                        throw new RemoteException(
+                                "Method enableAudioReturnChannel is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -97,7 +100,8 @@ public interface IHdmiCec extends IInterface {
                     obtain.writeInterfaceToken(IHdmiCec.DESCRIPTOR);
                     obtain.writeBoolean(z);
                     if (!this.mRemote.transact(12, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method enableSystemCecControl is unimplemented.");
+                        throw new RemoteException(
+                                "Method enableSystemCecControl is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -187,7 +191,8 @@ public interface IHdmiCec extends IInterface {
                 }
             }
 
-            public final void setCallback(HdmiCecController.HdmiCecCallbackAidl hdmiCecCallbackAidl) {
+            public final void setCallback(
+                    HdmiCecController.HdmiCecCallbackAidl hdmiCecCallbackAidl) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {

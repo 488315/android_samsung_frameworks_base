@@ -4,8 +4,10 @@ import android.content.pm.PermissionGroupInfo;
 import android.content.pm.PermissionInfo;
 import android.permission.IOnPermissionsChangeListener;
 import android.permission.PermissionManagerInternal;
+
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageState;
+
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
@@ -80,11 +82,21 @@ public interface PermissionManagerServiceInterface extends PermissionManagerInte
 
     void onPackageAdded(PackageState packageState, boolean z, AndroidPackage androidPackage);
 
-    void onPackageInstalled(AndroidPackage androidPackage, PermissionManagerServiceInternal$PackageInstalledParams permissionManagerServiceInternal$PackageInstalledParams, int i);
+    void onPackageInstalled(
+            AndroidPackage androidPackage,
+            PermissionManagerServiceInternal$PackageInstalledParams
+                    permissionManagerServiceInternal$PackageInstalledParams,
+            int i);
 
     void onPackageRemoved(AndroidPackage androidPackage);
 
-    void onPackageUninstalled(String str, int i, PackageState packageState, AndroidPackage androidPackage, List list, int i2);
+    void onPackageUninstalled(
+            String str,
+            int i,
+            PackageState packageState,
+            AndroidPackage androidPackage,
+            List list,
+            int i2);
 
     void onStorageVolumeMounted(String str, boolean z);
 
@@ -102,7 +114,8 @@ public interface PermissionManagerServiceInterface extends PermissionManagerInte
 
     boolean removeAllowlistedRestrictedPermission(String str, String str2, int i, int i2);
 
-    void removeOnPermissionsChangeListener(IOnPermissionsChangeListener iOnPermissionsChangeListener);
+    void removeOnPermissionsChangeListener(
+            IOnPermissionsChangeListener iOnPermissionsChangeListener);
 
     void removePackageGrantedPermissionsForMDM(String str);
 
@@ -122,7 +135,8 @@ public interface PermissionManagerServiceInterface extends PermissionManagerInte
 
     boolean shouldShowRequestPermissionRationale(int i, String str, String str2, String str3);
 
-    void updatePermissionFlags(String str, String str2, int i, int i2, boolean z, String str3, int i3);
+    void updatePermissionFlags(
+            String str, String str2, int i, int i2, boolean z, String str3, int i3);
 
     void updatePermissionFlagsForAllApps(int i, int i2, int i3);
 

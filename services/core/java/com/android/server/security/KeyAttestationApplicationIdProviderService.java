@@ -32,7 +32,8 @@ public final class KeyAttestationApplicationIdProviderService extends Binder imp
     @Override // android.os.Binder
     public final boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) {
         if (i >= 1 && i <= 16777215) {
-            parcel.enforceInterface("android.security.keystore.IKeyAttestationApplicationIdProvider");
+            parcel.enforceInterface(
+                    "android.security.keystore.IKeyAttestationApplicationIdProvider");
         }
         if (i == 1598968902) {
             parcel2.writeString("android.security.keystore.IKeyAttestationApplicationIdProvider");
@@ -55,13 +56,18 @@ public final class KeyAttestationApplicationIdProviderService extends Binder imp
                     throw new ServiceSpecificException(1, "No package for uid: " + readInt);
                 }
                 int userId = UserHandle.getUserId(readInt);
-                KeyAttestationPackageInfo[] keyAttestationPackageInfoArr = new KeyAttestationPackageInfo[packagesForUid.length];
+                KeyAttestationPackageInfo[] keyAttestationPackageInfoArr =
+                        new KeyAttestationPackageInfo[packagesForUid.length];
                 for (int i3 = 0; i3 < packagesForUid.length; i3++) {
-                    PackageInfo packageInfoAsUser = this.mPackageManager.getPackageInfoAsUser(packagesForUid[i3], 64, userId);
-                    KeyAttestationPackageInfo keyAttestationPackageInfo = new KeyAttestationPackageInfo();
+                    PackageInfo packageInfoAsUser =
+                            this.mPackageManager.getPackageInfoAsUser(
+                                    packagesForUid[i3], 64, userId);
+                    KeyAttestationPackageInfo keyAttestationPackageInfo =
+                            new KeyAttestationPackageInfo();
                     keyAttestationPackageInfo.packageName = new String(packagesForUid[i3]);
                     keyAttestationPackageInfo.versionCode = packageInfoAsUser.getLongVersionCode();
-                    keyAttestationPackageInfo.signatures = new Signature[packageInfoAsUser.signatures.length];
+                    keyAttestationPackageInfo.signatures =
+                            new Signature[packageInfoAsUser.signatures.length];
                     for (int i4 = 0; i4 < packageInfoAsUser.signatures.length; i4++) {
                         Signature signature = new Signature();
                         signature.data = packageInfoAsUser.signatures[i4].toByteArray();
@@ -70,7 +76,8 @@ public final class KeyAttestationApplicationIdProviderService extends Binder imp
                     keyAttestationPackageInfoArr[i3] = keyAttestationPackageInfo;
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
-                KeyAttestationApplicationId keyAttestationApplicationId = new KeyAttestationApplicationId();
+                KeyAttestationApplicationId keyAttestationApplicationId =
+                        new KeyAttestationApplicationId();
                 keyAttestationApplicationId.packageInfos = keyAttestationPackageInfoArr;
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(keyAttestationApplicationId, 1);

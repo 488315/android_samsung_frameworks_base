@@ -6,26 +6,26 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class Point implements Parcelable {
-    public static final Parcelable.Creator<Point> CREATOR = new Parcelable.Creator<Point>() { // from class: android.graphics.Point.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Point createFromParcel(Parcel in) {
-            Point r = new Point();
-            r.readFromParcel(in);
-            return r;
-        }
+    public static final Parcelable.Creator<Point> CREATOR =
+            new Parcelable.Creator<Point>() { // from class: android.graphics.Point.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Point createFromParcel(Parcel in) {
+                    Point r = new Point();
+                    r.readFromParcel(in);
+                    return r;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Point[] newArray(int size) {
-            return new Point[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Point[] newArray(int size) {
+                    return new Point[size];
+                }
+            };
     public int x;
     public int y;
 
-    public Point() {
-    }
+    public Point() {}
 
     public Point(int x, int y) {
         this.x = x;
@@ -89,7 +89,9 @@ public class Point implements Parcelable {
 
     public static Point unflattenFromString(String s) throws NumberFormatException {
         int sep_ix = s.indexOf("x");
-        return new Point(Integer.parseInt(s.substring(0, sep_ix)), Integer.parseInt(s.substring(sep_ix + 1)));
+        return new Point(
+                Integer.parseInt(s.substring(0, sep_ix)),
+                Integer.parseInt(s.substring(sep_ix + 1)));
     }
 
     @Override // android.os.Parcelable

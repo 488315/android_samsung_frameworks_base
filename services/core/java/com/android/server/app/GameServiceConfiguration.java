@@ -3,6 +3,7 @@ package com.android.server.app;
 import android.content.ComponentName;
 import android.os.UserHandle;
 import android.text.TextUtils;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,7 +18,8 @@ public final class GameServiceConfiguration {
         public final ComponentName mGameSessionServiceComponentName;
         public final UserHandle mUserHandle;
 
-        public GameServiceComponentConfiguration(UserHandle userHandle, ComponentName componentName, ComponentName componentName2) {
+        public GameServiceComponentConfiguration(
+                UserHandle userHandle, ComponentName componentName, ComponentName componentName2) {
             Objects.requireNonNull(componentName);
             this.mUserHandle = userHandle;
             this.mGameServiceComponentName = componentName;
@@ -31,20 +33,35 @@ public final class GameServiceConfiguration {
             if (!(obj instanceof GameServiceComponentConfiguration)) {
                 return false;
             }
-            GameServiceComponentConfiguration gameServiceComponentConfiguration = (GameServiceComponentConfiguration) obj;
-            return this.mUserHandle.equals(gameServiceComponentConfiguration.mUserHandle) && this.mGameServiceComponentName.equals(gameServiceComponentConfiguration.mGameServiceComponentName) && this.mGameSessionServiceComponentName.equals(gameServiceComponentConfiguration.mGameSessionServiceComponentName);
+            GameServiceComponentConfiguration gameServiceComponentConfiguration =
+                    (GameServiceComponentConfiguration) obj;
+            return this.mUserHandle.equals(gameServiceComponentConfiguration.mUserHandle)
+                    && this.mGameServiceComponentName.equals(
+                            gameServiceComponentConfiguration.mGameServiceComponentName)
+                    && this.mGameSessionServiceComponentName.equals(
+                            gameServiceComponentConfiguration.mGameSessionServiceComponentName);
         }
 
         public final int hashCode() {
-            return Objects.hash(this.mUserHandle, this.mGameServiceComponentName, this.mGameSessionServiceComponentName);
+            return Objects.hash(
+                    this.mUserHandle,
+                    this.mGameServiceComponentName,
+                    this.mGameSessionServiceComponentName);
         }
 
         public final String toString() {
-            return "GameServiceComponentConfiguration{userHandle=" + this.mUserHandle + ", gameServiceComponentName=" + this.mGameServiceComponentName + ", gameSessionServiceComponentName=" + this.mGameSessionServiceComponentName + "}";
+            return "GameServiceComponentConfiguration{userHandle="
+                    + this.mUserHandle
+                    + ", gameServiceComponentName="
+                    + this.mGameServiceComponentName
+                    + ", gameSessionServiceComponentName="
+                    + this.mGameSessionServiceComponentName
+                    + "}";
         }
     }
 
-    public GameServiceConfiguration(String str, GameServiceComponentConfiguration gameServiceComponentConfiguration) {
+    public GameServiceConfiguration(
+            String str, GameServiceComponentConfiguration gameServiceComponentConfiguration) {
         Objects.requireNonNull(str);
         this.mPackageName = str;
         this.mGameServiceComponentConfiguration = gameServiceComponentConfiguration;
@@ -58,7 +75,10 @@ public final class GameServiceConfiguration {
             return false;
         }
         GameServiceConfiguration gameServiceConfiguration = (GameServiceConfiguration) obj;
-        return TextUtils.equals(this.mPackageName, gameServiceConfiguration.mPackageName) && Objects.equals(this.mGameServiceComponentConfiguration, gameServiceConfiguration.mGameServiceComponentConfiguration);
+        return TextUtils.equals(this.mPackageName, gameServiceConfiguration.mPackageName)
+                && Objects.equals(
+                        this.mGameServiceComponentConfiguration,
+                        gameServiceConfiguration.mGameServiceComponentConfiguration);
     }
 
     public final int hashCode() {
@@ -66,6 +86,10 @@ public final class GameServiceConfiguration {
     }
 
     public final String toString() {
-        return "GameServiceConfiguration{packageName=" + this.mPackageName + ", gameServiceComponentConfiguration=" + this.mGameServiceComponentConfiguration + '}';
+        return "GameServiceConfiguration{packageName="
+                + this.mPackageName
+                + ", gameServiceComponentConfiguration="
+                + this.mGameServiceComponentConfiguration
+                + '}';
     }
 }

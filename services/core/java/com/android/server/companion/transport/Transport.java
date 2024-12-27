@@ -6,7 +6,11 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
+import libcore.util.EmptyArray;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -15,7 +19,6 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
-import libcore.util.EmptyArray;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -39,8 +42,17 @@ public abstract class Transport {
         int i2 = this.mAssociationId;
         if (((HashMap) this.mListeners).containsKey(Integer.valueOf(i))) {
             try {
-                ((IOnMessageReceivedListener) ((HashMap) this.mListeners).get(Integer.valueOf(i))).onMessageReceived(i2, bArr);
-                Slog.d("CDM_CompanionTransport", "Message 0x" + Integer.toHexString(i) + " is received from associationId " + i2 + ", sending data length " + bArr.length + " to the listener.");
+                ((IOnMessageReceivedListener) ((HashMap) this.mListeners).get(Integer.valueOf(i)))
+                        .onMessageReceived(i2, bArr);
+                Slog.d(
+                        "CDM_CompanionTransport",
+                        "Message 0x"
+                                + Integer.toHexString(i)
+                                + " is received from associationId "
+                                + i2
+                                + ", sending data length "
+                                + bArr.length
+                                + " to the listener.");
             } catch (RemoteException unused) {
             }
         }
@@ -56,7 +68,8 @@ public abstract class Transport {
             sb.append(" length ");
             sb.append(bArr.length);
             sb.append(" from association ");
-            DeviceIdleController$$ExternalSyntheticOutline0.m(sb, this.mAssociationId, "CDM_CompanionTransport");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    sb, this.mAssociationId, "CDM_CompanionTransport");
         }
         int i3 = (-16777216) & i;
         if (i3 == 1124073472) {
@@ -64,7 +77,9 @@ public abstract class Transport {
                 callback(i, bArr);
                 return;
             }
-            Slog.w("CDM_CompanionTransport", "Ignoring unknown message 0x" + Integer.toHexString(i));
+            Slog.w(
+                    "CDM_CompanionTransport",
+                    "Ignoring unknown message 0x" + Integer.toHexString(i));
             return;
         }
         if (i3 == 1660944384) {
@@ -72,7 +87,10 @@ public abstract class Transport {
                 processRequest(i, i2, bArr);
                 return;
             } catch (IOException e) {
-                Slog.w("CDM_CompanionTransport", "Failed to respond to 0x" + Integer.toHexString(i), e);
+                Slog.w(
+                        "CDM_CompanionTransport",
+                        "Failed to respond to 0x" + Integer.toHexString(i),
+                        e);
                 return;
             }
         }
@@ -84,7 +102,8 @@ public abstract class Transport {
             completableFuture = (CompletableFuture) this.mPendingRequests.removeReturnOld(i2);
         }
         if (completableFuture == null) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i2, "Ignoring unknown sequence ", "CDM_CompanionTransport");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i2, "Ignoring unknown sequence ", "CDM_CompanionTransport");
             return;
         }
         if (i == 863004019) {
@@ -94,7 +113,9 @@ public abstract class Transport {
                 completableFuture.complete(bArr);
                 return;
             }
-            Slog.w("CDM_CompanionTransport", "Ignoring unknown response 0x" + Integer.toHexString(i));
+            Slog.w(
+                    "CDM_CompanionTransport",
+                    "Ignoring unknown response 0x" + Integer.toHexString(i));
         }
     }
 
@@ -143,7 +164,9 @@ public abstract class Transport {
         }
         if (i2 != 1660944384) {
             Slog.w("CDM_CompanionTransport", "Failed to send message 0x" + Integer.toHexString(i));
-            completableFuture.completeExceptionally(new IllegalArgumentException("The message being sent must be either a one-way or a request."));
+            completableFuture.completeExceptionally(
+                    new IllegalArgumentException(
+                            "The message being sent must be either a one-way or a request."));
             return completableFuture;
         }
         if (DEBUG) {

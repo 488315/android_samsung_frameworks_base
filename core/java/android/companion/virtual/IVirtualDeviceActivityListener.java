@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IVirtualDeviceActivityListener extends IInterface {
-    public static final String DESCRIPTOR = "android.companion.virtual.IVirtualDeviceActivityListener";
+    public static final String DESCRIPTOR =
+            "android.companion.virtual.IVirtualDeviceActivityListener";
 
     void onDisplayEmpty(int i) throws RemoteException;
 
@@ -17,12 +18,11 @@ public interface IVirtualDeviceActivityListener extends IInterface {
 
     public static class Default implements IVirtualDeviceActivityListener {
         @Override // android.companion.virtual.IVirtualDeviceActivityListener
-        public void onTopActivityChanged(int displayId, ComponentName topActivity, int userId) throws RemoteException {
-        }
+        public void onTopActivityChanged(int displayId, ComponentName topActivity, int userId)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDeviceActivityListener
-        public void onDisplayEmpty(int displayId) throws RemoteException {
-        }
+        public void onDisplayEmpty(int displayId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface IVirtualDeviceActivityListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualDeviceActivityListener {
+    public abstract static class Stub extends Binder implements IVirtualDeviceActivityListener {
         static final int TRANSACTION_onDisplayEmpty = 2;
         static final int TRANSACTION_onTopActivityChanged = 1;
 
@@ -71,7 +71,8 @@ public interface IVirtualDeviceActivityListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVirtualDeviceActivityListener.DESCRIPTOR);
             }
@@ -82,7 +83,8 @@ public interface IVirtualDeviceActivityListener extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    ComponentName _arg1 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg1 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     onTopActivityChanged(_arg0, _arg1, _arg2);
@@ -114,7 +116,8 @@ public interface IVirtualDeviceActivityListener extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDeviceActivityListener
-            public void onTopActivityChanged(int displayId, ComponentName topActivity, int userId) throws RemoteException {
+            public void onTopActivityChanged(int displayId, ComponentName topActivity, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IVirtualDeviceActivityListener.DESCRIPTOR);

@@ -4,11 +4,12 @@ import java.util.Comparator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class JobConcurrencyManager$$ExternalSyntheticLambda2 implements Comparator {
+public final /* synthetic */ class JobConcurrencyManager$$ExternalSyntheticLambda2
+        implements Comparator {
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0029, code lost:
-    
-        if (r1.lastEvaluatedBias == 40) goto L9;
-     */
+
+       if (r1.lastEvaluatedBias == 40) goto L9;
+    */
     @Override // java.util.Comparator
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -56,6 +57,9 @@ public final /* synthetic */ class JobConcurrencyManager$$ExternalSyntheticLambd
         L34:
             return r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.JobConcurrencyManager$$ExternalSyntheticLambda2.compare(java.lang.Object, java.lang.Object):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.job.JobConcurrencyManager$$ExternalSyntheticLambda2.compare(java.lang.Object,"
+                    + " java.lang.Object):int");
     }
 }

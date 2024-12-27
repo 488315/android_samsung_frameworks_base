@@ -3,23 +3,27 @@ package android.view.inputmethod;
 import android.graphics.PointF;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class JoinOrSplitGesture extends HandwritingGesture implements Parcelable {
-    public static final Parcelable.Creator<JoinOrSplitGesture> CREATOR = new Parcelable.Creator<JoinOrSplitGesture>() { // from class: android.view.inputmethod.JoinOrSplitGesture.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public JoinOrSplitGesture createFromParcel(Parcel source) {
-            return new JoinOrSplitGesture(source);
-        }
+    public static final Parcelable.Creator<JoinOrSplitGesture> CREATOR =
+            new Parcelable.Creator<
+                    JoinOrSplitGesture>() { // from class:
+                                            // android.view.inputmethod.JoinOrSplitGesture.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public JoinOrSplitGesture createFromParcel(Parcel source) {
+                    return new JoinOrSplitGesture(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public JoinOrSplitGesture[] newArray(int size) {
-            return new JoinOrSplitGesture[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public JoinOrSplitGesture[] newArray(int size) {
+                    return new JoinOrSplitGesture[size];
+                }
+            };
     private final PointF mPoint;
 
     private JoinOrSplitGesture(PointF point, String fallbackText) {
@@ -69,7 +73,8 @@ public final class JoinOrSplitGesture extends HandwritingGesture implements Parc
             return false;
         }
         JoinOrSplitGesture that = (JoinOrSplitGesture) o;
-        return Objects.equals(this.mPoint, that.mPoint) && Objects.equals(this.mFallbackText, that.mFallbackText);
+        return Objects.equals(this.mPoint, that.mPoint)
+                && Objects.equals(this.mFallbackText, that.mFallbackText);
     }
 
     @Override // android.os.Parcelable

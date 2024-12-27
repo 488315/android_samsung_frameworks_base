@@ -29,10 +29,21 @@ public final class SubInfo {
             return false;
         }
         SubInfo subInfo = (SubInfo) obj;
-        return this.subId == subInfo.subId && this.carrierId == subInfo.carrierId && this.isOpportunistic == subInfo.isOpportunistic && this.mcc.equals(subInfo.mcc) && this.mnc.equals(subInfo.mnc) && this.subscriberId.equals(subInfo.subscriberId);
+        return this.subId == subInfo.subId
+                && this.carrierId == subInfo.carrierId
+                && this.isOpportunistic == subInfo.isOpportunistic
+                && this.mcc.equals(subInfo.mcc)
+                && this.mnc.equals(subInfo.mnc)
+                && this.subscriberId.equals(subInfo.subscriberId);
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(this.subId), this.mcc, this.mnc, Integer.valueOf(this.carrierId), this.subscriberId, Boolean.valueOf(this.isOpportunistic));
+        return Objects.hash(
+                Integer.valueOf(this.subId),
+                this.mcc,
+                this.mnc,
+                Integer.valueOf(this.carrierId),
+                this.subscriberId,
+                Boolean.valueOf(this.isOpportunistic));
     }
 }

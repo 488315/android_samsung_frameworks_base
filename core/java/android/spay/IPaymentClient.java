@@ -17,7 +17,7 @@ public interface IPaymentClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPaymentClient {
+    public abstract static class Stub extends Binder implements IPaymentClient {
         public Stub() {
             attachInterface(this, IPaymentClient.DESCRIPTOR);
         }
@@ -48,7 +48,8 @@ public interface IPaymentClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code == 1598968902) {
                 reply.writeString(IPaymentClient.DESCRIPTOR);
                 return true;

@@ -1,8 +1,11 @@
 package com.android.internal.util;
 
 import android.util.CharsetUtils;
+
 import com.android.modules.utils.FastDataInput;
+
 import dalvik.system.VMRuntime;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicReference;

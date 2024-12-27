@@ -5,8 +5,11 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;
+
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.EOFException;
@@ -140,7 +143,10 @@ public final class ConversationInfo {
             conversationInfo.mCurrStatuses = hashMap;
             return conversationInfo;
         } catch (IOException e) {
-            Slog.e("ConversationInfo", "Failed to read conversation info fields from backup payload.", e);
+            Slog.e(
+                    "ConversationInfo",
+                    "Failed to read conversation info fields from backup payload.",
+                    e);
             return null;
         }
     }
@@ -219,7 +225,9 @@ public final class ConversationInfo {
                     j = protoInputStream.readLong(1112396529674L);
                     break;
                 default:
-                    Slog.w("ConversationInfo", "Could not read undefined field: " + protoInputStream.getFieldNumber());
+                    Slog.w(
+                            "ConversationInfo",
+                            "Could not read undefined field: " + protoInputStream.getFieldNumber());
                     break;
             }
             hashMap = hashMap2;
@@ -235,7 +243,21 @@ public final class ConversationInfo {
             return false;
         }
         ConversationInfo conversationInfo = (ConversationInfo) obj;
-        return Objects.equals(this.mShortcutId, conversationInfo.mShortcutId) && Objects.equals(this.mLocusId, conversationInfo.mLocusId) && Objects.equals(this.mContactUri, conversationInfo.mContactUri) && Objects.equals(this.mContactPhoneNumber, conversationInfo.mContactPhoneNumber) && Objects.equals(this.mNotificationChannelId, conversationInfo.mNotificationChannelId) && Objects.equals(this.mParentNotificationChannelId, conversationInfo.mParentNotificationChannelId) && Long.valueOf(this.mLastEventTimestamp).equals(Long.valueOf(conversationInfo.mLastEventTimestamp)) && this.mCreationTimestamp == conversationInfo.mCreationTimestamp && this.mShortcutFlags == conversationInfo.mShortcutFlags && this.mConversationFlags == conversationInfo.mConversationFlags && Objects.equals(this.mCurrStatuses, conversationInfo.mCurrStatuses);
+        return Objects.equals(this.mShortcutId, conversationInfo.mShortcutId)
+                && Objects.equals(this.mLocusId, conversationInfo.mLocusId)
+                && Objects.equals(this.mContactUri, conversationInfo.mContactUri)
+                && Objects.equals(this.mContactPhoneNumber, conversationInfo.mContactPhoneNumber)
+                && Objects.equals(
+                        this.mNotificationChannelId, conversationInfo.mNotificationChannelId)
+                && Objects.equals(
+                        this.mParentNotificationChannelId,
+                        conversationInfo.mParentNotificationChannelId)
+                && Long.valueOf(this.mLastEventTimestamp)
+                        .equals(Long.valueOf(conversationInfo.mLastEventTimestamp))
+                && this.mCreationTimestamp == conversationInfo.mCreationTimestamp
+                && this.mShortcutFlags == conversationInfo.mShortcutFlags
+                && this.mConversationFlags == conversationInfo.mConversationFlags
+                && Objects.equals(this.mCurrStatuses, conversationInfo.mCurrStatuses);
     }
 
     public final boolean hasConversationFlags(int i) {
@@ -247,7 +269,18 @@ public final class ConversationInfo {
     }
 
     public final int hashCode() {
-        return Objects.hash(this.mShortcutId, this.mLocusId, this.mContactUri, this.mContactPhoneNumber, this.mNotificationChannelId, this.mParentNotificationChannelId, Long.valueOf(this.mLastEventTimestamp), Long.valueOf(this.mCreationTimestamp), Integer.valueOf(this.mShortcutFlags), Integer.valueOf(this.mConversationFlags), this.mCurrStatuses);
+        return Objects.hash(
+                this.mShortcutId,
+                this.mLocusId,
+                this.mContactUri,
+                this.mContactPhoneNumber,
+                this.mNotificationChannelId,
+                this.mParentNotificationChannelId,
+                Long.valueOf(this.mLastEventTimestamp),
+                Long.valueOf(this.mCreationTimestamp),
+                Integer.valueOf(this.mShortcutFlags),
+                Integer.valueOf(this.mConversationFlags),
+                this.mCurrStatuses);
     }
 
     public final String toString() {

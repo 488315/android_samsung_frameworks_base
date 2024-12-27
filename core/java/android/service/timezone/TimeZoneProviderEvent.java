@@ -2,6 +2,7 @@ package android.service.timezone;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -11,24 +12,36 @@ import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class TimeZoneProviderEvent implements Parcelable {
-    public static final Parcelable.Creator<TimeZoneProviderEvent> CREATOR = new Parcelable.Creator<TimeZoneProviderEvent>() { // from class: android.service.timezone.TimeZoneProviderEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneProviderEvent createFromParcel(Parcel in) {
-            int type = in.readInt();
-            long creationElapsedMillis = in.readLong();
-            TimeZoneProviderSuggestion suggestion = (TimeZoneProviderSuggestion) in.readParcelable(getClass().getClassLoader(), TimeZoneProviderSuggestion.class);
-            String failureCause = in.readString8();
-            TimeZoneProviderStatus status = (TimeZoneProviderStatus) in.readParcelable(getClass().getClassLoader(), TimeZoneProviderStatus.class);
-            return new TimeZoneProviderEvent(type, creationElapsedMillis, suggestion, failureCause, status);
-        }
+    public static final Parcelable.Creator<TimeZoneProviderEvent> CREATOR =
+            new Parcelable.Creator<
+                    TimeZoneProviderEvent>() { // from class:
+                                               // android.service.timezone.TimeZoneProviderEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneProviderEvent createFromParcel(Parcel in) {
+                    int type = in.readInt();
+                    long creationElapsedMillis = in.readLong();
+                    TimeZoneProviderSuggestion suggestion =
+                            (TimeZoneProviderSuggestion)
+                                    in.readParcelable(
+                                            getClass().getClassLoader(),
+                                            TimeZoneProviderSuggestion.class);
+                    String failureCause = in.readString8();
+                    TimeZoneProviderStatus status =
+                            (TimeZoneProviderStatus)
+                                    in.readParcelable(
+                                            getClass().getClassLoader(),
+                                            TimeZoneProviderStatus.class);
+                    return new TimeZoneProviderEvent(
+                            type, creationElapsedMillis, suggestion, failureCause, status);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneProviderEvent[] newArray(int size) {
-            return new TimeZoneProviderEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneProviderEvent[] newArray(int size) {
+                    return new TimeZoneProviderEvent[size];
+                }
+            };
     public static final int EVENT_TYPE_PERMANENT_FAILURE = 1;
     public static final int EVENT_TYPE_SUGGESTION = 2;
     public static final int EVENT_TYPE_UNCERTAIN = 3;
@@ -40,17 +53,25 @@ public final class TimeZoneProviderEvent implements Parcelable {
 
     @Target({ElementType.TYPE_USE, ElementType.TYPE_PARAMETER})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EventType {
-    }
+    public @interface EventType {}
 
-    private TimeZoneProviderEvent(int type, long creationElapsedMillis, TimeZoneProviderSuggestion suggestion, String failureCause, TimeZoneProviderStatus timeZoneProviderStatus) {
+    private TimeZoneProviderEvent(
+            int type,
+            long creationElapsedMillis,
+            TimeZoneProviderSuggestion suggestion,
+            String failureCause,
+            TimeZoneProviderStatus timeZoneProviderStatus) {
         this.mType = validateEventType(type);
         this.mCreationElapsedMillis = creationElapsedMillis;
         this.mSuggestion = suggestion;
         this.mFailureCause = failureCause;
         this.mTimeZoneProviderStatus = timeZoneProviderStatus;
         if (this.mType == 1 && this.mTimeZoneProviderStatus != null) {
-            throw new IllegalArgumentException("Unexpected status: mType=" + this.mType + ", mTimeZoneProviderStatus=" + this.mTimeZoneProviderStatus);
+            throw new IllegalArgumentException(
+                    "Unexpected status: mType="
+                            + this.mType
+                            + ", mTimeZoneProviderStatus="
+                            + this.mTimeZoneProviderStatus);
         }
     }
 
@@ -61,16 +82,28 @@ public final class TimeZoneProviderEvent implements Parcelable {
         return eventType;
     }
 
-    public static TimeZoneProviderEvent createSuggestionEvent(long creationElapsedMillis, TimeZoneProviderSuggestion suggestion, TimeZoneProviderStatus providerStatus) {
-        return new TimeZoneProviderEvent(2, creationElapsedMillis, (TimeZoneProviderSuggestion) Objects.requireNonNull(suggestion), null, providerStatus);
+    public static TimeZoneProviderEvent createSuggestionEvent(
+            long creationElapsedMillis,
+            TimeZoneProviderSuggestion suggestion,
+            TimeZoneProviderStatus providerStatus) {
+        return new TimeZoneProviderEvent(
+                2,
+                creationElapsedMillis,
+                (TimeZoneProviderSuggestion) Objects.requireNonNull(suggestion),
+                null,
+                providerStatus);
     }
 
-    public static TimeZoneProviderEvent createUncertainEvent(long creationElapsedMillis, TimeZoneProviderStatus timeZoneProviderStatus) {
-        return new TimeZoneProviderEvent(3, creationElapsedMillis, null, null, timeZoneProviderStatus);
+    public static TimeZoneProviderEvent createUncertainEvent(
+            long creationElapsedMillis, TimeZoneProviderStatus timeZoneProviderStatus) {
+        return new TimeZoneProviderEvent(
+                3, creationElapsedMillis, null, null, timeZoneProviderStatus);
     }
 
-    public static TimeZoneProviderEvent createPermanentFailureEvent(long creationElapsedMillis, String cause) {
-        return new TimeZoneProviderEvent(1, creationElapsedMillis, null, (String) Objects.requireNonNull(cause), null);
+    public static TimeZoneProviderEvent createPermanentFailureEvent(
+            long creationElapsedMillis, String cause) {
+        return new TimeZoneProviderEvent(
+                1, creationElapsedMillis, null, (String) Objects.requireNonNull(cause), null);
     }
 
     public int getType() {
@@ -108,7 +141,17 @@ public final class TimeZoneProviderEvent implements Parcelable {
     }
 
     public String toString() {
-        return "TimeZoneProviderEvent{mType=" + this.mType + ", mCreationElapsedMillis=" + Duration.ofMillis(this.mCreationElapsedMillis).toString() + ", mSuggestion=" + this.mSuggestion + ", mFailureCause=" + this.mFailureCause + ", mTimeZoneProviderStatus=" + this.mTimeZoneProviderStatus + '}';
+        return "TimeZoneProviderEvent{mType="
+                + this.mType
+                + ", mCreationElapsedMillis="
+                + Duration.ofMillis(this.mCreationElapsedMillis).toString()
+                + ", mSuggestion="
+                + this.mSuggestion
+                + ", mFailureCause="
+                + this.mFailureCause
+                + ", mTimeZoneProviderStatus="
+                + this.mTimeZoneProviderStatus
+                + '}';
     }
 
     public boolean isEquivalentTo(TimeZoneProviderEvent other) {
@@ -119,7 +162,9 @@ public final class TimeZoneProviderEvent implements Parcelable {
             return false;
         }
         if (this.mType == 2) {
-            if (this.mSuggestion.isEquivalentTo(other.mSuggestion) && Objects.equals(this.mTimeZoneProviderStatus, other.mTimeZoneProviderStatus)) {
+            if (this.mSuggestion.isEquivalentTo(other.mSuggestion)
+                    && Objects.equals(
+                            this.mTimeZoneProviderStatus, other.mTimeZoneProviderStatus)) {
                 return true;
             }
             return false;
@@ -135,13 +180,22 @@ public final class TimeZoneProviderEvent implements Parcelable {
             return false;
         }
         TimeZoneProviderEvent that = (TimeZoneProviderEvent) o;
-        if (this.mType == that.mType && this.mCreationElapsedMillis == that.mCreationElapsedMillis && Objects.equals(this.mSuggestion, that.mSuggestion) && Objects.equals(this.mFailureCause, that.mFailureCause) && Objects.equals(this.mTimeZoneProviderStatus, that.mTimeZoneProviderStatus)) {
+        if (this.mType == that.mType
+                && this.mCreationElapsedMillis == that.mCreationElapsedMillis
+                && Objects.equals(this.mSuggestion, that.mSuggestion)
+                && Objects.equals(this.mFailureCause, that.mFailureCause)
+                && Objects.equals(this.mTimeZoneProviderStatus, that.mTimeZoneProviderStatus)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mType), Long.valueOf(this.mCreationElapsedMillis), this.mSuggestion, this.mFailureCause, this.mTimeZoneProviderStatus);
+        return Objects.hash(
+                Integer.valueOf(this.mType),
+                Long.valueOf(this.mCreationElapsedMillis),
+                this.mSuggestion,
+                this.mFailureCause,
+                this.mTimeZoneProviderStatus);
     }
 }

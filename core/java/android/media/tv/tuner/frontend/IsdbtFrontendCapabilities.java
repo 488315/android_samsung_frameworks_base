@@ -14,7 +14,15 @@ public class IsdbtFrontendCapabilities extends FrontendCapabilities {
     private final int mModulationCap;
     private final int mTimeInterleaveCap;
 
-    private IsdbtFrontendCapabilities(int modeCap, int bandwidthCap, int modulationCap, int codeRateCap, int guardIntervalCap, int timeInterleaveCap, boolean isSegmentAutoSupported, boolean isFullSegmentSupported) {
+    private IsdbtFrontendCapabilities(
+            int modeCap,
+            int bandwidthCap,
+            int modulationCap,
+            int codeRateCap,
+            int guardIntervalCap,
+            int timeInterleaveCap,
+            boolean isSegmentAutoSupported,
+            boolean isFullSegmentSupported) {
         this.mModeCap = modeCap;
         this.mBandwidthCap = bandwidthCap;
         this.mModulationCap = modulationCap;

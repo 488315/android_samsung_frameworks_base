@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class FrontendScanAtsc3PlpInfo implements Parcelable {
-    public static final Parcelable.Creator<FrontendScanAtsc3PlpInfo> CREATOR = new Parcelable.Creator<FrontendScanAtsc3PlpInfo>() { // from class: android.hardware.tv.tuner.FrontendScanAtsc3PlpInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendScanAtsc3PlpInfo createFromParcel(Parcel _aidl_source) {
-            FrontendScanAtsc3PlpInfo _aidl_out = new FrontendScanAtsc3PlpInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FrontendScanAtsc3PlpInfo> CREATOR =
+            new Parcelable.Creator<FrontendScanAtsc3PlpInfo>() { // from class:
+                // android.hardware.tv.tuner.FrontendScanAtsc3PlpInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendScanAtsc3PlpInfo createFromParcel(Parcel _aidl_source) {
+                    FrontendScanAtsc3PlpInfo _aidl_out = new FrontendScanAtsc3PlpInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendScanAtsc3PlpInfo[] newArray(int _aidl_size) {
-            return new FrontendScanAtsc3PlpInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendScanAtsc3PlpInfo[] newArray(int _aidl_size) {
+                    return new FrontendScanAtsc3PlpInfo[_aidl_size];
+                }
+            };
     public int plpId = 0;
     public boolean bLlsFlag = false;
 

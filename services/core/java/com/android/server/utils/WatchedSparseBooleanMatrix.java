@@ -1,9 +1,11 @@
 package com.android.server.utils;
 
 import android.hardware.broadcastradio.V2_0.AmFmBandRange$$ExternalSyntheticOutline0;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,7 +26,9 @@ public final class WatchedSparseBooleanMatrix extends WatchableImpl implements S
         }
         int i = this.mOrder;
         if (i < 64 || i % 64 != 0) {
-            throw new RuntimeException(AmFmBandRange$$ExternalSyntheticOutline0.m(this.mOrder, new StringBuilder("mOrder is "), " initCap is 64"));
+            throw new RuntimeException(
+                    AmFmBandRange$$ExternalSyntheticOutline0.m(
+                            this.mOrder, new StringBuilder("mOrder is "), " initCap is 64"));
         }
         this.mInUse = ArrayUtils.newUnpaddedBooleanArray(i);
         this.mKeys = ArrayUtils.newUnpaddedIntArray(this.mOrder);
@@ -124,7 +128,8 @@ public final class WatchedSparseBooleanMatrix extends WatchableImpl implements S
             return false;
         }
         WatchedSparseBooleanMatrix watchedSparseBooleanMatrix = (WatchedSparseBooleanMatrix) obj;
-        if (this.mSize != watchedSparseBooleanMatrix.mSize || !Arrays.equals(this.mKeys, watchedSparseBooleanMatrix.mKeys)) {
+        if (this.mSize != watchedSparseBooleanMatrix.mSize
+                || !Arrays.equals(this.mKeys, watchedSparseBooleanMatrix.mKeys)) {
             return false;
         }
         for (int i = 0; i < this.mSize; i++) {
@@ -140,7 +145,9 @@ public final class WatchedSparseBooleanMatrix extends WatchableImpl implements S
     }
 
     public final int hashCode() {
-        int hashCode = Arrays.hashCode(this.mMap) + ((Arrays.hashCode(this.mKeys) + (this.mSize * 31)) * 31);
+        int hashCode =
+                Arrays.hashCode(this.mMap)
+                        + ((Arrays.hashCode(this.mKeys) + (this.mSize * 31)) * 31);
         for (int i = 0; i < this.mSize; i++) {
             int i2 = this.mMap[i];
             for (int i3 = 0; i3 < this.mSize; i3++) {
@@ -219,7 +226,7 @@ public final class WatchedSparseBooleanMatrix extends WatchableImpl implements S
         for (int i3 = 0; i3 < this.mOrder; i3++) {
             sb3.append(this.mInUse[i3] ? "1" : "0");
         }
-        return new String[]{substring, substring2, sb3.substring(0)};
+        return new String[] {substring, substring2, sb3.substring(0)};
     }
 
     public String[] matrixToStringRaw() {
@@ -339,7 +346,9 @@ public final class WatchedSparseBooleanMatrix extends WatchableImpl implements S
 
     public final void resizeMatrix(int i) {
         if (i % 64 != 0) {
-            throw new IllegalArgumentException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "matrix order ", " is not a multiple of 64"));
+            throw new IllegalArgumentException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "matrix order ", " is not a multiple of 64"));
         }
         int min = Math.min(this.mOrder, i);
         boolean[] newUnpaddedBooleanArray = ArrayUtils.newUnpaddedBooleanArray(i);
@@ -350,7 +359,12 @@ public final class WatchedSparseBooleanMatrix extends WatchableImpl implements S
         System.arraycopy(this.mKeys, 0, newUnpaddedIntArray2, 0, min);
         int[] newUnpaddedIntArray3 = ArrayUtils.newUnpaddedIntArray((i * i) / 32);
         for (int i2 = 0; i2 < min; i2++) {
-            System.arraycopy(this.mValues, (this.mOrder * i2) / 32, newUnpaddedIntArray3, (i * i2) / 32, min / 32);
+            System.arraycopy(
+                    this.mValues,
+                    (this.mOrder * i2) / 32,
+                    newUnpaddedIntArray3,
+                    (i * i2) / 32,
+                    min / 32);
         }
         this.mInUse = newUnpaddedBooleanArray;
         this.mMap = newUnpaddedIntArray;

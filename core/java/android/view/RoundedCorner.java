@@ -3,24 +3,27 @@ package android.view;
 import android.graphics.Point;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes4.dex */
 public final class RoundedCorner implements Parcelable {
-    public static final Parcelable.Creator<RoundedCorner> CREATOR = new Parcelable.Creator<RoundedCorner>() { // from class: android.view.RoundedCorner.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RoundedCorner createFromParcel(Parcel in) {
-            return new RoundedCorner(in.readInt(), in.readInt(), in.readInt(), in.readInt());
-        }
+    public static final Parcelable.Creator<RoundedCorner> CREATOR =
+            new Parcelable.Creator<RoundedCorner>() { // from class: android.view.RoundedCorner.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RoundedCorner createFromParcel(Parcel in) {
+                    return new RoundedCorner(
+                            in.readInt(), in.readInt(), in.readInt(), in.readInt());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RoundedCorner[] newArray(int size) {
-            return new RoundedCorner[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RoundedCorner[] newArray(int size) {
+                    return new RoundedCorner[size];
+                }
+            };
     public static final int POSITION_BOTTOM_LEFT = 3;
     public static final int POSITION_BOTTOM_RIGHT = 2;
     public static final int POSITION_TOP_LEFT = 0;
@@ -30,8 +33,7 @@ public final class RoundedCorner implements Parcelable {
     private final int mRadius;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Position {
-    }
+    public @interface Position {}
 
     public RoundedCorner(int position) {
         this.mPosition = position;
@@ -90,7 +92,9 @@ public final class RoundedCorner implements Parcelable {
             return false;
         }
         RoundedCorner r = (RoundedCorner) o;
-        return this.mPosition == r.mPosition && this.mRadius == r.mRadius && this.mCenter.equals(r.mCenter);
+        return this.mPosition == r.mPosition
+                && this.mRadius == r.mRadius
+                && this.mCenter.equals(r.mCenter);
     }
 
     public int hashCode() {
@@ -99,7 +103,13 @@ public final class RoundedCorner implements Parcelable {
     }
 
     public String toString() {
-        return "RoundedCorner{position=" + getPositionString(this.mPosition) + ", radius=" + this.mRadius + ", center=" + this.mCenter + '}';
+        return "RoundedCorner{position="
+                + getPositionString(this.mPosition)
+                + ", radius="
+                + this.mRadius
+                + ", center="
+                + this.mCenter
+                + '}';
     }
 
     @Override // android.os.Parcelable

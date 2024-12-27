@@ -22,8 +22,7 @@ public class VintfRuntimeInfo {
 
     public static native String getOsVersion();
 
-    private VintfRuntimeInfo() {
-    }
+    private VintfRuntimeInfo() {}
 
     static {
         System.loadLibrary("vintf_jni");

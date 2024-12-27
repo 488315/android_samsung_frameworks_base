@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto.digests;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.util.Memoable;
 import com.android.internal.org.bouncycastle.util.Pack;
 
@@ -8,8 +9,7 @@ import com.android.internal.org.bouncycastle.util.Pack;
 public class SHA512Digest extends LongDigest {
     private static final int DIGEST_LENGTH = 64;
 
-    public SHA512Digest() {
-    }
+    public SHA512Digest() {}
 
     public SHA512Digest(SHA512Digest t) {
         super(t);
@@ -44,7 +44,8 @@ public class SHA512Digest extends LongDigest {
         return 64;
     }
 
-    @Override // com.android.internal.org.bouncycastle.crypto.digests.LongDigest, com.android.internal.org.bouncycastle.crypto.Digest
+    @Override // com.android.internal.org.bouncycastle.crypto.digests.LongDigest,
+              // com.android.internal.org.bouncycastle.crypto.Digest
     public void reset() {
         super.reset();
         this.H1 = 7640891576956012808L;

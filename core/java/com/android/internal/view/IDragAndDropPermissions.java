@@ -18,16 +18,13 @@ public interface IDragAndDropPermissions extends IInterface {
 
     public static class Default implements IDragAndDropPermissions {
         @Override // com.android.internal.view.IDragAndDropPermissions
-        public void take(IBinder activityToken) throws RemoteException {
-        }
+        public void take(IBinder activityToken) throws RemoteException {}
 
         @Override // com.android.internal.view.IDragAndDropPermissions
-        public void takeTransient() throws RemoteException {
-        }
+        public void takeTransient() throws RemoteException {}
 
         @Override // com.android.internal.view.IDragAndDropPermissions
-        public void release() throws RemoteException {
-        }
+        public void release() throws RemoteException {}
 
         @Override // com.android.internal.view.IDragAndDropPermissions
         public int getFlags() throws RemoteException {
@@ -40,7 +37,7 @@ public interface IDragAndDropPermissions extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDragAndDropPermissions {
+    public abstract static class Stub extends Binder implements IDragAndDropPermissions {
         public static final String DESCRIPTOR = "com.android.internal.view.IDragAndDropPermissions";
         static final int TRANSACTION_getFlags = 4;
         static final int TRANSACTION_release = 3;
@@ -88,7 +85,8 @@ public interface IDragAndDropPermissions extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

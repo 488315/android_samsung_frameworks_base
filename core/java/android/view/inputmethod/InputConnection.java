@@ -6,7 +6,9 @@ import android.os.CancellationSignal;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -34,20 +36,16 @@ public interface InputConnection {
     public static final int INPUT_CONTENT_GRANT_READ_URI_PERMISSION = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CursorUpdateFilter {
-    }
+    public @interface CursorUpdateFilter {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CursorUpdateMode {
-    }
+    public @interface CursorUpdateMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GetTextType {
-    }
+    public @interface GetTextType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface HandwritingGestureResult {
-    }
+    public @interface HandwritingGestureResult {}
 
     boolean beginBatchEdit();
 
@@ -106,18 +104,25 @@ public interface InputConnection {
         Preconditions.checkArgumentNonnegative(beforeLength);
         Preconditions.checkArgumentNonnegative(afterLength);
         CharSequence textBeforeCursor = getTextBeforeCursor(beforeLength, flags);
-        if (textBeforeCursor == null || (textAfterCursor = getTextAfterCursor(afterLength, flags)) == null) {
+        if (textBeforeCursor == null
+                || (textAfterCursor = getTextAfterCursor(afterLength, flags)) == null) {
             return null;
         }
         CharSequence selectedText = getSelectedText(flags);
         if (selectedText == null) {
             selectedText = "";
         }
-        CharSequence surroundingText = TextUtils.concat(textBeforeCursor, selectedText, textAfterCursor);
-        return new SurroundingText(surroundingText, textBeforeCursor.length(), textBeforeCursor.length() + selectedText.length(), -1);
+        CharSequence surroundingText =
+                TextUtils.concat(textBeforeCursor, selectedText, textAfterCursor);
+        return new SurroundingText(
+                surroundingText,
+                textBeforeCursor.length(),
+                textBeforeCursor.length() + selectedText.length(),
+                -1);
     }
 
-    default boolean setComposingText(CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
+    default boolean setComposingText(
+            CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
         return setComposingText(text, newCursorPosition);
     }
 
@@ -125,7 +130,8 @@ public interface InputConnection {
         return setComposingRegion(start, end);
     }
 
-    default boolean commitText(CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
+    default boolean commitText(
+            CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
         return commitText(text, newCursorPosition);
     }
 
@@ -133,18 +139,22 @@ public interface InputConnection {
         return false;
     }
 
-    default void performHandwritingGesture(HandwritingGesture gesture, Executor executor, final IntConsumer consumer) {
+    default void performHandwritingGesture(
+            HandwritingGesture gesture, Executor executor, final IntConsumer consumer) {
         if (executor != null && consumer != null) {
-            executor.execute(new Runnable() { // from class: android.view.inputmethod.InputConnection$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    consumer.accept(2);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                                     // android.view.inputmethod.InputConnection$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            consumer.accept(2);
+                        }
+                    });
         }
     }
 
-    default boolean previewHandwritingGesture(PreviewableHandwritingGesture gesture, CancellationSignal cancellationSignal) {
+    default boolean previewHandwritingGesture(
+            PreviewableHandwritingGesture gesture, CancellationSignal cancellationSignal) {
         return false;
     }
 
@@ -155,15 +165,18 @@ public interface InputConnection {
         return false;
     }
 
-    default void requestTextBoundsInfo(RectF bounds, Executor executor, final Consumer<TextBoundsInfoResult> consumer) {
+    default void requestTextBoundsInfo(
+            RectF bounds, Executor executor, final Consumer<TextBoundsInfoResult> consumer) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(consumer);
-        executor.execute(new Runnable() { // from class: android.view.inputmethod.InputConnection$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                consumer.accept(new TextBoundsInfoResult(0));
-            }
-        });
+        executor.execute(
+                new Runnable() { // from class:
+                                 // android.view.inputmethod.InputConnection$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        consumer.accept(new TextBoundsInfoResult(0));
+                    }
+                });
     }
 
     default boolean setImeConsumesInput(boolean imeConsumesInput) {
@@ -174,7 +187,12 @@ public interface InputConnection {
         return null;
     }
 
-    default boolean replaceText(int start, int end, CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
+    default boolean replaceText(
+            int start,
+            int end,
+            CharSequence text,
+            int newCursorPosition,
+            TextAttribute textAttribute) {
         Preconditions.checkArgumentNonnegative(start);
         Preconditions.checkArgumentNonnegative(end);
         beginBatchEdit();

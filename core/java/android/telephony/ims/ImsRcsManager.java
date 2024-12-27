@@ -8,13 +8,13 @@ import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.telephony.BinderCacheManager;
 import android.telephony.TelephonyFrameworkInitializer;
-import android.telephony.ims.ImsRcsManager;
-import android.telephony.ims.RegistrationManager;
 import android.telephony.ims.aidl.IImsCapabilityCallback;
 import android.telephony.ims.aidl.IImsRcsController;
 import android.util.Log;
+
 import com.android.internal.telephony.IIntegerConsumer;
 import com.android.internal.telephony.ITelephony;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
@@ -25,13 +25,15 @@ import java.util.function.Consumer;
 
 /* loaded from: classes4.dex */
 public class ImsRcsManager {
-    public static final String ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN = "android.telephony.ims.action.SHOW_CAPABILITY_DISCOVERY_OPT_IN";
+    public static final String ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN =
+            "android.telephony.ims.action.SHOW_CAPABILITY_DISCOVERY_OPT_IN";
     public static final int CAPABILITY_TYPE_MAX = 3;
     public static final int CAPABILITY_TYPE_NONE = 0;
     public static final int CAPABILITY_TYPE_OPTIONS_UCE = 1;
     public static final int CAPABILITY_TYPE_PRESENCE_UCE = 2;
     private static final String TAG = "ImsRcsManager";
-    private final Map<OnAvailabilityChangedListener, AvailabilityCallbackAdapter> mAvailabilityChangedCallbacks = new HashMap();
+    private final Map<OnAvailabilityChangedListener, AvailabilityCallbackAdapter>
+            mAvailabilityChangedCallbacks = new HashMap();
     private final BinderCacheManager<IImsRcsController> mBinderCache;
     private final Context mContext;
     private final int mSubId;
@@ -43,8 +45,7 @@ public class ImsRcsManager {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RcsImsCapabilityFlag {
-    }
+    public @interface RcsImsCapabilityFlag {}
 
     /* JADX INFO: Access modifiers changed from: private */
     static class AvailabilityCallbackAdapter {
@@ -67,12 +68,15 @@ public class ImsRcsManager {
                 }
                 long callingIdentity = Binder.clearCallingIdentity();
                 try {
-                    this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ImsRcsManager$AvailabilityCallbackAdapter$CapabilityBinder$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ImsRcsManager.AvailabilityCallbackAdapter.CapabilityBinder.this.lambda$onCapabilitiesStatusChanged$0(config);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ImsRcsManager$AvailabilityCallbackAdapter$CapabilityBinder$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ImsRcsManager.AvailabilityCallbackAdapter.CapabilityBinder.this
+                                            .lambda$onCapabilitiesStatusChanged$0(config);
+                                }
+                            });
                 } finally {
                     restoreCallingIdentity(callingIdentity);
                 }
@@ -84,12 +88,12 @@ public class ImsRcsManager {
             }
 
             @Override // android.telephony.ims.aidl.IImsCapabilityCallback
-            public void onQueryCapabilityConfiguration(int capability, int radioTech, boolean isEnabled) {
-            }
+            public void onQueryCapabilityConfiguration(
+                    int capability, int radioTech, boolean isEnabled) {}
 
             @Override // android.telephony.ims.aidl.IImsCapabilityCallback
-            public void onChangeCapabilityConfigurationError(int capability, int radioTech, int reason) {
-            }
+            public void onChangeCapabilityConfigurationError(
+                    int capability, int radioTech, int reason) {}
         }
 
         AvailabilityCallbackAdapter(Executor executor, OnAvailabilityChangedListener listener) {
@@ -101,7 +105,11 @@ public class ImsRcsManager {
         }
     }
 
-    public ImsRcsManager(Context context, int subId, BinderCacheManager<IImsRcsController> binderCache, BinderCacheManager<ITelephony> telephonyBinderCache) {
+    public ImsRcsManager(
+            Context context,
+            int subId,
+            BinderCacheManager<IImsRcsController> binderCache,
+            BinderCacheManager<ITelephony> telephonyBinderCache) {
         this.mSubId = subId;
         this.mContext = context;
         this.mBinderCache = binderCache;
@@ -112,7 +120,8 @@ public class ImsRcsManager {
         return new RcsUceAdapter(this.mContext, this.mSubId);
     }
 
-    public void registerImsRegistrationCallback(Executor executor, RegistrationManager.RegistrationCallback c) throws ImsException {
+    public void registerImsRegistrationCallback(
+            Executor executor, RegistrationManager.RegistrationCallback c) throws ImsException {
         if (c == null) {
             throw new IllegalArgumentException("Must include a non-null RegistrationCallback.");
         }
@@ -163,15 +172,18 @@ public class ImsRcsManager {
             throw new IllegalStateException("Cannot find remote IMS service");
         }
         try {
-            imsRcsController.getImsRcsRegistrationState(this.mSubId, new AnonymousClass1(executor, stateCallback));
+            imsRcsController.getImsRcsRegistrationState(
+                    this.mSubId, new AnonymousClass1(executor, stateCallback));
         } catch (RemoteException | ServiceSpecificException e) {
             Log.w(TAG, "Get registration state error: " + e);
-            executor.execute(new Runnable() { // from class: android.telephony.ims.ImsRcsManager$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    stateCallback.accept(0);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsRcsManager$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            stateCallback.accept(0);
+                        }
+                    });
         }
     }
 
@@ -191,19 +203,22 @@ public class ImsRcsManager {
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$stateCallback;
-                executor.execute(new Runnable() { // from class: android.telephony.ims.ImsRcsManager$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        consumer.accept(Integer.valueOf(result));
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.ImsRcsManager$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                consumer.accept(Integer.valueOf(result));
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
         }
     }
 
-    public void getRegistrationTransportType(Executor executor, final Consumer<Integer> transportTypeCallback) {
+    public void getRegistrationTransportType(
+            Executor executor, final Consumer<Integer> transportTypeCallback) {
         if (transportTypeCallback == null) {
             throw new IllegalArgumentException("Must include a non-null transportTypeCallback.");
         }
@@ -216,15 +231,18 @@ public class ImsRcsManager {
             throw new IllegalStateException("Cannot find remote IMS service");
         }
         try {
-            imsRcsController.getImsRcsRegistrationTransportType(this.mSubId, new AnonymousClass2(executor, transportTypeCallback));
+            imsRcsController.getImsRcsRegistrationTransportType(
+                    this.mSubId, new AnonymousClass2(executor, transportTypeCallback));
         } catch (RemoteException | ServiceSpecificException e) {
             Log.w(TAG, "Get registration transport type error: " + e);
-            executor.execute(new Runnable() { // from class: android.telephony.ims.ImsRcsManager$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    transportTypeCallback.accept(-1);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsRcsManager$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            transportTypeCallback.accept(-1);
+                        }
+                    });
         }
     }
 
@@ -244,12 +262,14 @@ public class ImsRcsManager {
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$transportTypeCallback;
-                executor.execute(new Runnable() { // from class: android.telephony.ims.ImsRcsManager$2$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        consumer.accept(Integer.valueOf(result));
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.ImsRcsManager$2$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                consumer.accept(Integer.valueOf(result));
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
@@ -257,9 +277,11 @@ public class ImsRcsManager {
     }
 
     @SystemApi
-    public void addOnAvailabilityChangedListener(Executor executor, OnAvailabilityChangedListener listener) throws ImsException {
+    public void addOnAvailabilityChangedListener(
+            Executor executor, OnAvailabilityChangedListener listener) throws ImsException {
         if (listener == null) {
-            throw new IllegalArgumentException("Must include a non-nullOnAvailabilityChangedListener.");
+            throw new IllegalArgumentException(
+                    "Must include a non-nullOnAvailabilityChangedListener.");
         }
         if (executor == null) {
             throw new IllegalArgumentException("Must include a non-null Executor.");
@@ -269,7 +291,8 @@ public class ImsRcsManager {
             Log.w(TAG, "Add availability changed listener: IImsRcsController is null");
             throw new ImsException("Cannot find remote IMS service", 1);
         }
-        AvailabilityCallbackAdapter adapter = addAvailabilityChangedListenerToCollection(executor, listener);
+        AvailabilityCallbackAdapter adapter =
+                addAvailabilityChangedListenerToCollection(executor, listener);
         try {
             imsRcsController.registerRcsAvailabilityCallback(this.mSubId, adapter.getBinder());
         } catch (RemoteException e) {
@@ -283,14 +306,16 @@ public class ImsRcsManager {
     @SystemApi
     public void removeOnAvailabilityChangedListener(OnAvailabilityChangedListener listener) {
         if (listener == null) {
-            throw new IllegalArgumentException("Must include a non-nullOnAvailabilityChangedListener.");
+            throw new IllegalArgumentException(
+                    "Must include a non-nullOnAvailabilityChangedListener.");
         }
         IImsRcsController imsRcsController = getIImsRcsController();
         if (imsRcsController == null) {
             Log.w(TAG, "Remove availability changed listener: IImsRcsController is null");
             return;
         }
-        AvailabilityCallbackAdapter callback = removeAvailabilityChangedListenerFromCollection(listener);
+        AvailabilityCallbackAdapter callback =
+                removeAvailabilityChangedListenerFromCollection(listener);
         if (callback == null) {
             return;
         }
@@ -335,18 +360,22 @@ public class ImsRcsManager {
         }
     }
 
-    public void registerImsStateCallback(Executor executor, ImsStateCallback callback) throws ImsException {
+    public void registerImsStateCallback(Executor executor, ImsStateCallback callback)
+            throws ImsException {
         Objects.requireNonNull(callback, "Must include a non-null ImsStateCallback.");
         Objects.requireNonNull(executor, "Must include a non-null Executor.");
         callback.init(executor);
         BinderCacheManager<ITelephony> binderCacheManager = this.mTelephonyBinderCache;
         Objects.requireNonNull(callback);
-        ITelephony telephony = binderCacheManager.listenOnBinder(callback, new ImsMmTelManager$$ExternalSyntheticLambda3(callback));
+        ITelephony telephony =
+                binderCacheManager.listenOnBinder(
+                        callback, new ImsMmTelManager$$ExternalSyntheticLambda3(callback));
         if (telephony == null) {
             throw new ImsException("Telephony server is down", 1);
         }
         try {
-            telephony.registerImsStateCallback(this.mSubId, 2, callback.getCallbackBinder(), this.mContext.getOpPackageName());
+            telephony.registerImsStateCallback(
+                    this.mSubId, 2, callback.getCallbackBinder(), this.mContext.getOpPackageName());
         } catch (RemoteException | IllegalStateException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -365,7 +394,8 @@ public class ImsRcsManager {
         }
     }
 
-    private AvailabilityCallbackAdapter addAvailabilityChangedListenerToCollection(Executor executor, OnAvailabilityChangedListener listener) {
+    private AvailabilityCallbackAdapter addAvailabilityChangedListenerToCollection(
+            Executor executor, OnAvailabilityChangedListener listener) {
         AvailabilityCallbackAdapter adapter = new AvailabilityCallbackAdapter(executor, listener);
         synchronized (this.mAvailabilityChangedCallbacks) {
             this.mAvailabilityChangedCallbacks.put(listener, adapter);
@@ -373,7 +403,8 @@ public class ImsRcsManager {
         return adapter;
     }
 
-    private AvailabilityCallbackAdapter removeAvailabilityChangedListenerFromCollection(OnAvailabilityChangedListener listener) {
+    private AvailabilityCallbackAdapter removeAvailabilityChangedListenerFromCollection(
+            OnAvailabilityChangedListener listener) {
         AvailabilityCallbackAdapter remove;
         synchronized (this.mAvailabilityChangedCallbacks) {
             remove = this.mAvailabilityChangedCallbacks.remove(listener);
@@ -382,7 +413,10 @@ public class ImsRcsManager {
     }
 
     private IImsRcsController getIImsRcsController() {
-        IBinder binder = TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyImsServiceRegisterer().get();
+        IBinder binder =
+                TelephonyFrameworkInitializer.getTelephonyServiceManager()
+                        .getTelephonyImsServiceRegisterer()
+                        .get();
         return IImsRcsController.Stub.asInterface(binder);
     }
 }

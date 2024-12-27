@@ -2,6 +2,7 @@ package android.view;
 
 import android.graphics.Insets;
 import android.view.animation.Interpolator;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -73,7 +74,15 @@ public final class WindowInsetsAnimation {
         }
 
         public Bounds inset(Insets insets) {
-            return new Bounds(WindowInsets.insetInsets(this.mLowerBound, insets.left, insets.top, insets.right, insets.bottom), WindowInsets.insetInsets(this.mUpperBound, insets.left, insets.top, insets.right, insets.bottom));
+            return new Bounds(
+                    WindowInsets.insetInsets(
+                            this.mLowerBound, insets.left, insets.top, insets.right, insets.bottom),
+                    WindowInsets.insetInsets(
+                            this.mUpperBound,
+                            insets.left,
+                            insets.top,
+                            insets.right,
+                            insets.bottom));
         }
 
         public String toString() {
@@ -81,16 +90,16 @@ public final class WindowInsetsAnimation {
         }
     }
 
-    public static abstract class Callback {
+    public abstract static class Callback {
         public static final int DISPATCH_MODE_CONTINUE_ON_SUBTREE = 1;
         public static final int DISPATCH_MODE_STOP = 0;
         private final int mDispatchMode;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface DispatchMode {
-        }
+        public @interface DispatchMode {}
 
-        public abstract WindowInsets onProgress(WindowInsets windowInsets, List<WindowInsetsAnimation> list);
+        public abstract WindowInsets onProgress(
+                WindowInsets windowInsets, List<WindowInsetsAnimation> list);
 
         public Callback(int dispatchMode) {
             this.mDispatchMode = dispatchMode;
@@ -100,14 +109,12 @@ public final class WindowInsetsAnimation {
             return this.mDispatchMode;
         }
 
-        public void onPrepare(WindowInsetsAnimation animation) {
-        }
+        public void onPrepare(WindowInsetsAnimation animation) {}
 
         public Bounds onStart(WindowInsetsAnimation animation, Bounds bounds) {
             return bounds;
         }
 
-        public void onEnd(WindowInsetsAnimation animation) {
-        }
+        public void onEnd(WindowInsetsAnimation animation) {}
     }
 }

@@ -17,7 +17,10 @@ public class CMSAlgorithmProtection extends ASN1Object {
     private final AlgorithmIdentifier macAlgorithm;
     private final AlgorithmIdentifier signatureAlgorithm;
 
-    public CMSAlgorithmProtection(AlgorithmIdentifier digestAlgorithm, int type, AlgorithmIdentifier algorithmIdentifier) {
+    public CMSAlgorithmProtection(
+            AlgorithmIdentifier digestAlgorithm,
+            int type,
+            AlgorithmIdentifier algorithmIdentifier) {
         if (digestAlgorithm == null || algorithmIdentifier == null) {
             throw new NullPointerException("AlgorithmIdentifiers cannot be null");
         }
@@ -37,7 +40,9 @@ public class CMSAlgorithmProtection extends ASN1Object {
 
     private CMSAlgorithmProtection(ASN1Sequence sequence) {
         if (sequence.size() != 2) {
-            throw new IllegalArgumentException("Sequence wrong size: One of signatureAlgorithm or macAlgorithm must be present");
+            throw new IllegalArgumentException(
+                    "Sequence wrong size: One of signatureAlgorithm or macAlgorithm must be"
+                        + " present");
         }
         this.digestAlgorithm = AlgorithmIdentifier.getInstance(sequence.getObjectAt(0));
         ASN1TaggedObject tagged = ASN1TaggedObject.getInstance(sequence.getObjectAt(1));
@@ -76,7 +81,8 @@ public class CMSAlgorithmProtection extends ASN1Object {
         return this.signatureAlgorithm;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(3);
         v.add(this.digestAlgorithm);

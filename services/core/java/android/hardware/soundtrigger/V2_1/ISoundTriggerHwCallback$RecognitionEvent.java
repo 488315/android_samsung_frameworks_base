@@ -3,6 +3,7 @@ package android.hardware.soundtrigger.V2_1;
 import android.os.HidlMemory;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,16 +22,22 @@ public final class ISoundTriggerHwCallback$RecognitionEvent {
                 this.data = new ArrayList();
                 break;
             default:
-                this.header = new android.hardware.soundtrigger.V2_0.ISoundTriggerHwCallback$RecognitionEvent();
+                this.header =
+                        new android.hardware.soundtrigger.V2_0
+                                .ISoundTriggerHwCallback$RecognitionEvent();
                 this.data = null;
                 break;
         }
     }
 
     public void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob) {
-        ((android.hardware.soundtrigger.V2_0.ISoundTriggerHwCallback$RecognitionEvent) this.header).readEmbeddedFromParcel(hwParcel, hwBlob);
+        ((android.hardware.soundtrigger.V2_0.ISoundTriggerHwCallback$RecognitionEvent) this.header)
+                .readEmbeddedFromParcel(hwParcel, hwBlob);
         try {
-            this.data = hwParcel.readEmbeddedHidlMemory(hwBlob.getFieldHandle(120L), hwBlob.handle(), 120L).dup();
+            this.data =
+                    hwParcel.readEmbeddedHidlMemory(
+                                    hwBlob.getFieldHandle(120L), hwBlob.handle(), 120L)
+                            .dup();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -39,9 +46,19 @@ public final class ISoundTriggerHwCallback$RecognitionEvent {
     public final String toString() {
         switch (this.$r8$classId) {
             case 0:
-                return "{.header = " + ((android.hardware.soundtrigger.V2_0.ISoundTriggerHwCallback$RecognitionEvent) this.header) + ", .data = " + ((HidlMemory) this.data) + "}";
+                return "{.header = "
+                        + ((android.hardware.soundtrigger.V2_0
+                                        .ISoundTriggerHwCallback$RecognitionEvent)
+                                this.header)
+                        + ", .data = "
+                        + ((HidlMemory) this.data)
+                        + "}";
             default:
-                return "{.common = " + ((ISoundTriggerHwCallback$RecognitionEvent) this.header) + ", .phraseExtras = " + ((ArrayList) this.data) + "}";
+                return "{.common = "
+                        + ((ISoundTriggerHwCallback$RecognitionEvent) this.header)
+                        + ", .phraseExtras = "
+                        + ((ArrayList) this.data)
+                        + "}";
         }
     }
 }

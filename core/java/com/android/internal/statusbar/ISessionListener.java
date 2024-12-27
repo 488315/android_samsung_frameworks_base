@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.internal.logging.InstanceId;
 
 /* loaded from: classes5.dex */
@@ -17,12 +18,10 @@ public interface ISessionListener extends IInterface {
 
     public static class Default implements ISessionListener {
         @Override // com.android.internal.statusbar.ISessionListener
-        public void onSessionStarted(int sessionType, InstanceId instance) throws RemoteException {
-        }
+        public void onSessionStarted(int sessionType, InstanceId instance) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.ISessionListener
-        public void onSessionEnded(int sessionType, InstanceId instance) throws RemoteException {
-        }
+        public void onSessionEnded(int sessionType, InstanceId instance) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface ISessionListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISessionListener {
+    public abstract static class Stub extends Binder implements ISessionListener {
         static final int TRANSACTION_onSessionEnded = 2;
         static final int TRANSACTION_onSessionStarted = 1;
 
@@ -71,7 +70,8 @@ public interface ISessionListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISessionListener.DESCRIPTOR);
             }
@@ -114,7 +114,8 @@ public interface ISessionListener extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.ISessionListener
-            public void onSessionStarted(int sessionType, InstanceId instance) throws RemoteException {
+            public void onSessionStarted(int sessionType, InstanceId instance)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISessionListener.DESCRIPTOR);
@@ -127,7 +128,8 @@ public interface ISessionListener extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.ISessionListener
-            public void onSessionEnded(int sessionType, InstanceId instance) throws RemoteException {
+            public void onSessionEnded(int sessionType, InstanceId instance)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISessionListener.DESCRIPTOR);

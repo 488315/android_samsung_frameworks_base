@@ -8,6 +8,7 @@ import android.os.UserHandle;
 import android.speech.IRecognitionServiceManager;
 import android.speech.IRecognitionServiceManagerCallback;
 import android.util.Slog;
+
 import com.android.server.infra.AbstractMasterSystemService;
 import com.android.server.infra.AbstractPerUserSystemService;
 import com.android.server.infra.FrameworkResourcesServiceNameResolver;
@@ -18,13 +19,20 @@ public final class SpeechRecognitionManagerService extends AbstractMasterSystemS
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SpeechRecognitionManagerServiceStub extends IRecognitionServiceManager.Stub {
-        public SpeechRecognitionManagerServiceStub() {
-        }
+        public SpeechRecognitionManagerServiceStub() {}
 
-        public final void createSession(ComponentName componentName, IBinder iBinder, boolean z, IRecognitionServiceManagerCallback iRecognitionServiceManagerCallback) {
+        public final void createSession(
+                ComponentName componentName,
+                IBinder iBinder,
+                boolean z,
+                IRecognitionServiceManagerCallback iRecognitionServiceManagerCallback) {
             int callingUserId = UserHandle.getCallingUserId();
             synchronized (SpeechRecognitionManagerService.this.mLock) {
-                ((SpeechRecognitionManagerServiceImpl) SpeechRecognitionManagerService.this.getServiceForUserLocked(callingUserId)).createSessionLocked(componentName, iBinder, z, iRecognitionServiceManagerCallback);
+                ((SpeechRecognitionManagerServiceImpl)
+                                SpeechRecognitionManagerService.this.getServiceForUserLocked(
+                                        callingUserId))
+                        .createSessionLocked(
+                                componentName, iBinder, z, iRecognitionServiceManagerCallback);
             }
         }
 
@@ -32,21 +40,33 @@ public final class SpeechRecognitionManagerService extends AbstractMasterSystemS
             int callingUserId = UserHandle.getCallingUserId();
             if (componentName == null) {
                 SpeechRecognitionManagerService.this.resetTemporaryService(callingUserId);
-                Slog.i("SpeechRecognitionManagerService", "Reset temporary service for user " + callingUserId);
+                Slog.i(
+                        "SpeechRecognitionManagerService",
+                        "Reset temporary service for user " + callingUserId);
                 return;
             }
-            SpeechRecognitionManagerService.this.setTemporaryService(callingUserId, componentName.flattenToString(), 60000);
-            Slog.i("SpeechRecognitionManagerService", "SpeechRecognition temporarily set to " + componentName + " for 60000ms");
+            SpeechRecognitionManagerService.this.setTemporaryService(
+                    callingUserId, componentName.flattenToString(), 60000);
+            Slog.i(
+                    "SpeechRecognitionManagerService",
+                    "SpeechRecognition temporarily set to " + componentName + " for 60000ms");
         }
     }
 
     public SpeechRecognitionManagerService(Context context) {
-        super(context, new FrameworkResourcesServiceNameResolver(context, R.string.default_sms_application), null);
+        super(
+                context,
+                new FrameworkResourcesServiceNameResolver(
+                        context, R.string.default_sms_application),
+                null);
     }
 
     @Override // com.android.server.infra.AbstractMasterSystemService
     public final void enforceCallingPermissionForManagement() {
-        getContext().enforceCallingPermission("android.permission.MANAGE_SPEECH_RECOGNITION", "SpeechRecognitionManagerService");
+        getContext()
+                .enforceCallingPermission(
+                        "android.permission.MANAGE_SPEECH_RECOGNITION",
+                        "SpeechRecognitionManagerService");
     }
 
     @Override // com.android.server.infra.AbstractMasterSystemService

@@ -11,15 +11,13 @@ public final class CountQuotaTrackerProto {
         public static final long LIMIT = 1120986464258L;
         public static final long WINDOW_SIZE_MS = 1112396529667L;
 
-        public CountLimit() {
-        }
+        public CountLimit() {}
     }
 
     public final class Event {
         public static final long TIMESTAMP_ELAPSED = 1112396529665L;
 
-        public Event() {
-        }
+        public Event() {}
     }
 
     public final class ExecutionStats {
@@ -29,8 +27,7 @@ public final class CountQuotaTrackerProto {
         public static final long IN_QUOTA_TIME_ELAPSED = 1112396529669L;
         public static final long WINDOW_SIZE_MS = 1112396529666L;
 
-        public ExecutionStats() {
-        }
+        public ExecutionStats() {}
     }
 
     public final class UptcStats {
@@ -39,7 +36,6 @@ public final class CountQuotaTrackerProto {
         public static final long IS_QUOTA_FREE = 1133871366146L;
         public static final long UPTC = 1146756268033L;
 
-        public UptcStats() {
-        }
+        public UptcStats() {}
     }
 }

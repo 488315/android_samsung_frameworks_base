@@ -10,7 +10,8 @@ public interface IHardwarePropertiesManager extends IInterface {
 
     public static class Default implements IHardwarePropertiesManager {
         @Override // android.os.IHardwarePropertiesManager
-        public float[] getDeviceTemperatures(String callingPackage, int type, int source) throws RemoteException {
+        public float[] getDeviceTemperatures(String callingPackage, int type, int source)
+                throws RemoteException {
             return null;
         }
 
@@ -30,7 +31,7 @@ public interface IHardwarePropertiesManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHardwarePropertiesManager {
+    public abstract static class Stub extends Binder implements IHardwarePropertiesManager {
         public static final String DESCRIPTOR = "android.os.IHardwarePropertiesManager";
         static final int TRANSACTION_getCpuUsages = 2;
         static final int TRANSACTION_getDeviceTemperatures = 1;
@@ -75,7 +76,8 @@ public interface IHardwarePropertiesManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -129,7 +131,8 @@ public interface IHardwarePropertiesManager extends IInterface {
             }
 
             @Override // android.os.IHardwarePropertiesManager
-            public float[] getDeviceTemperatures(String callingPackage, int type, int source) throws RemoteException {
+            public float[] getDeviceTemperatures(String callingPackage, int type, int source)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -156,7 +159,8 @@ public interface IHardwarePropertiesManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    CpuUsageInfo[] _result = (CpuUsageInfo[]) _reply.createTypedArray(CpuUsageInfo.CREATOR);
+                    CpuUsageInfo[] _result =
+                            (CpuUsageInfo[]) _reply.createTypedArray(CpuUsageInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

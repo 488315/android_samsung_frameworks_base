@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.server.companion.virtual.camera.VirtualCameraConversionUtil$1;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,7 +23,8 @@ public final class VirtualCameraConfiguration implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
             IVirtualCameraCallback iVirtualCameraCallback;
-            VirtualCameraConfiguration virtualCameraConfiguration = new VirtualCameraConfiguration();
+            VirtualCameraConfiguration virtualCameraConfiguration =
+                    new VirtualCameraConfiguration();
             int dataPosition = parcel.dataPosition();
             int readInt = parcel.readInt();
             try {
@@ -30,20 +32,28 @@ public final class VirtualCameraConfiguration implements Parcelable {
                     throw new BadParcelableException("Parcelable too small");
                 }
                 if (parcel.dataPosition() - dataPosition < readInt) {
-                    virtualCameraConfiguration.supportedStreamConfigs = (SupportedStreamConfiguration[]) parcel.createTypedArray(SupportedStreamConfiguration.CREATOR);
+                    virtualCameraConfiguration.supportedStreamConfigs =
+                            (SupportedStreamConfiguration[])
+                                    parcel.createTypedArray(SupportedStreamConfiguration.CREATOR);
                     if (parcel.dataPosition() - dataPosition < readInt) {
                         IBinder readStrongBinder = parcel.readStrongBinder();
                         int i = VirtualCameraConversionUtil$1.$r8$clinit;
                         if (readStrongBinder == null) {
                             iVirtualCameraCallback = null;
                         } else {
-                            IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("android.companion.virtualcamera.IVirtualCameraCallback");
-                            if (queryLocalInterface == null || !(queryLocalInterface instanceof IVirtualCameraCallback)) {
-                                IVirtualCameraCallback$Stub$Proxy iVirtualCameraCallback$Stub$Proxy = new IVirtualCameraCallback$Stub$Proxy();
+                            IInterface queryLocalInterface =
+                                    readStrongBinder.queryLocalInterface(
+                                            "android.companion.virtualcamera.IVirtualCameraCallback");
+                            if (queryLocalInterface == null
+                                    || !(queryLocalInterface instanceof IVirtualCameraCallback)) {
+                                IVirtualCameraCallback$Stub$Proxy
+                                        iVirtualCameraCallback$Stub$Proxy =
+                                                new IVirtualCameraCallback$Stub$Proxy();
                                 iVirtualCameraCallback$Stub$Proxy.mRemote = readStrongBinder;
                                 iVirtualCameraCallback = iVirtualCameraCallback$Stub$Proxy;
                             } else {
-                                iVirtualCameraCallback = (IVirtualCameraCallback) queryLocalInterface;
+                                iVirtualCameraCallback =
+                                        (IVirtualCameraCallback) queryLocalInterface;
                             }
                         }
                         virtualCameraConfiguration.virtualCameraCallback = iVirtualCameraCallback;
@@ -52,10 +62,12 @@ public final class VirtualCameraConfiguration implements Parcelable {
                             if (parcel.dataPosition() - dataPosition < readInt) {
                                 virtualCameraConfiguration.lensFacing = parcel.readInt();
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -112,7 +124,9 @@ public final class VirtualCameraConfiguration implements Parcelable {
         parcel.writeTypedArray(this.supportedStreamConfigs, i);
         parcel.writeStrongInterface(this.virtualCameraCallback);
         parcel.writeInt(this.sensorOrientation);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.lensFacing, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.lensFacing, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

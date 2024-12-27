@@ -1,6 +1,7 @@
 package com.android.server.permission.access.permission;
 
 import android.util.ArraySet;
+
 import com.android.modules.utils.BinaryXmlSerializer;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.permission.access.AccessState;
@@ -23,6 +24,7 @@ import com.android.server.permission.access.util.IntExtensionsKt;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageState;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -41,12 +43,20 @@ public final class DevicePermissionPolicy extends SchemePolicy {
         void onStateMutated();
     }
 
-    public static int getPermissionFlags(int i, int i2, GetStateScope getStateScope, String str, String str2) {
+    public static int getPermissionFlags(
+            int i, int i2, GetStateScope getStateScope, String str, String str2) {
         MutableIntReferenceMap appIdDevicePermissionFlags;
         MutableIndexedReferenceMap mutableIndexedReferenceMap;
         IndexedMap indexedMap;
-        MutableUserState mutableUserState = (MutableUserState) getStateScope.state.getUserStates().get(i2);
-        if (mutableUserState == null || (appIdDevicePermissionFlags = mutableUserState.getAppIdDevicePermissionFlags()) == null || (mutableIndexedReferenceMap = (MutableIndexedReferenceMap) appIdDevicePermissionFlags.get(i)) == null || (indexedMap = (IndexedMap) mutableIndexedReferenceMap.get(str)) == null) {
+        MutableUserState mutableUserState =
+                (MutableUserState) getStateScope.state.getUserStates().get(i2);
+        if (mutableUserState == null
+                || (appIdDevicePermissionFlags = mutableUserState.getAppIdDevicePermissionFlags())
+                        == null
+                || (mutableIndexedReferenceMap =
+                                (MutableIndexedReferenceMap) appIdDevicePermissionFlags.get(i))
+                        == null
+                || (indexedMap = (IndexedMap) mutableIndexedReferenceMap.get(str)) == null) {
             return 0;
         }
         return ((Number) IndexedMapExtensionsKt.getWithDefault(indexedMap, str2, 0)).intValue();
@@ -58,12 +68,18 @@ public final class DevicePermissionPolicy extends SchemePolicy {
         int size = userStates.array.size();
         for (int i = 0; i < size; i++) {
             int keyAt = userStates.array.keyAt(i);
-            MutableIntReferenceMap appIdDevicePermissionFlags = ((MutableUserState) userStates.valueAt(i)).getAppIdDevicePermissionFlags();
+            MutableIntReferenceMap appIdDevicePermissionFlags =
+                    ((MutableUserState) userStates.valueAt(i)).getAppIdDevicePermissionFlags();
             for (int size2 = appIdDevicePermissionFlags.array.size() - 1; -1 < size2; size2--) {
                 int keyAt2 = appIdDevicePermissionFlags.array.keyAt(size2);
                 MutableUserState mutateUserState = mutableAccessState.mutateUserState(keyAt, 1);
                 Intrinsics.checkNotNull(mutateUserState);
-                MutableIndexedReferenceMap mutableIndexedReferenceMap = (MutableIndexedReferenceMap) ((MutableIntReferenceMap) mutateUserState.appIdDevicePermissionFlagsReference.mutate()).mutate(keyAt2);
+                MutableIndexedReferenceMap mutableIndexedReferenceMap =
+                        (MutableIndexedReferenceMap)
+                                ((MutableIntReferenceMap)
+                                                mutateUserState.appIdDevicePermissionFlagsReference
+                                                        .mutate())
+                                        .mutate(keyAt2);
                 if (mutableIndexedReferenceMap != null) {
                     mutableIndexedReferenceMap.remove$1(str);
                 }
@@ -77,14 +93,22 @@ public final class DevicePermissionPolicy extends SchemePolicy {
         int size = userStates.array.size();
         for (int i = 0; i < size; i++) {
             int keyAt = userStates.array.keyAt(i);
-            MutableIntReferenceMap appIdDevicePermissionFlags = ((MutableUserState) userStates.valueAt(i)).getAppIdDevicePermissionFlags();
+            MutableIntReferenceMap appIdDevicePermissionFlags =
+                    ((MutableUserState) userStates.valueAt(i)).getAppIdDevicePermissionFlags();
             for (int size2 = appIdDevicePermissionFlags.array.size() - 1; -1 < size2; size2--) {
                 int keyAt2 = appIdDevicePermissionFlags.array.keyAt(size2);
                 MutableUserState mutateUserState = mutableAccessState.mutateUserState(keyAt, 1);
                 Intrinsics.checkNotNull(mutateUserState);
-                MutableIndexedReferenceMap mutableIndexedReferenceMap = (MutableIndexedReferenceMap) ((MutableIntReferenceMap) mutateUserState.appIdDevicePermissionFlagsReference.mutate()).mutate(keyAt2);
+                MutableIndexedReferenceMap mutableIndexedReferenceMap =
+                        (MutableIndexedReferenceMap)
+                                ((MutableIntReferenceMap)
+                                                mutateUserState.appIdDevicePermissionFlagsReference
+                                                        .mutate())
+                                        .mutate(keyAt2);
                 if (mutableIndexedReferenceMap != null) {
-                    for (int size3 = mutableIndexedReferenceMap.map.size() - 1; -1 < size3; size3--) {
+                    for (int size3 = mutableIndexedReferenceMap.map.size() - 1;
+                            -1 < size3;
+                            size3--) {
                         Object keyAt3 = mutableIndexedReferenceMap.map.keyAt(size3);
                         String str = (String) keyAt3;
                         if (!set.contains(str)) {
@@ -113,8 +137,16 @@ public final class DevicePermissionPolicy extends SchemePolicy {
         int size = userStates.array.size();
         for (int i2 = 0; i2 < size; i2++) {
             userStates.keyAt(i2);
-            if (((MutableUserState) userStates.valueAt(i2)).getAppIdDevicePermissionFlags().array.contains(i)) {
-                IntReferenceMapExtensionsKt.minusAssign((MutableIntReferenceMap) MutableAccessState.mutateUserStateAt$default(mutableAccessState, i2).appIdDevicePermissionFlagsReference.mutate(), i);
+            if (((MutableUserState) userStates.valueAt(i2))
+                    .getAppIdDevicePermissionFlags()
+                    .array
+                    .contains(i)) {
+                IntReferenceMapExtensionsKt.minusAssign(
+                        (MutableIntReferenceMap)
+                                MutableAccessState.mutateUserStateAt$default(mutableAccessState, i2)
+                                        .appIdDevicePermissionFlagsReference
+                                        .mutate(),
+                        i);
             }
         }
     }
@@ -141,15 +173,23 @@ public final class DevicePermissionPolicy extends SchemePolicy {
         MutableIndexedListSet mutableIndexedListSet = this.listeners;
         int size = mutableIndexedListSet.list.size();
         for (int i = 0; i < size; i++) {
-            ((OnDevicePermissionFlagsChangedListener) mutableIndexedListSet.list.get(i)).onStateMutated();
+            ((OnDevicePermissionFlagsChangedListener) mutableIndexedListSet.list.get(i))
+                    .onStateMutated();
         }
     }
 
     @Override // com.android.server.permission.access.SchemePolicy
-    public final void onStorageVolumeMounted(MutateStateScope mutateStateScope, List list, boolean z) {
+    public final void onStorageVolumeMounted(
+            MutateStateScope mutateStateScope, List list, boolean z) {
         int size = list.size();
         for (int i = 0; i < size; i++) {
-            PackageState packageState = (PackageState) mutateStateScope.newState.getExternalState().packageStates.get((String) list.get(i));
+            PackageState packageState =
+                    (PackageState)
+                            mutateStateScope
+                                    .newState
+                                    .getExternalState()
+                                    .packageStates
+                                    .get((String) list.get(i));
             if (packageState != null) {
                 trimPermissionStates$1(mutateStateScope, packageState.getAppId());
             }
@@ -157,138 +197,157 @@ public final class DevicePermissionPolicy extends SchemePolicy {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:115:0x0116, code lost:
-    
-        r17 = r15;
-     */
+
+       r17 = r15;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:146:0x01f0, code lost:
-    
-        r2 = r19.next();
-     */
+
+       r2 = r19.next();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:147:0x01f5, code lost:
-    
-        if (r2 == 1) goto L205;
-     */
+
+       if (r2 == 1) goto L205;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:148:0x01f7, code lost:
-    
-        if (r2 == r7) goto L206;
-     */
+
+       if (r2 == r7) goto L206;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:149:0x01f9, code lost:
-    
-        if (r2 == 3) goto L207;
-     */
+
+       if (r2 == 3) goto L207;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:150:0x01fb, code lost:
-    
-        r7 = 2;
-     */
+
+       r7 = 2;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:202:0x0252, code lost:
-    
-        r2 = r19.next();
-     */
+
+       r2 = r19.next();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:203:0x0257, code lost:
-    
-        if (r2 == 1) goto L195;
-     */
+
+       if (r2 == 1) goto L195;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:204:0x0259, code lost:
-    
-        if (r2 == r6) goto L196;
-     */
+
+       if (r2 == r6) goto L196;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:205:0x025b, code lost:
-    
-        if (r2 == 3) goto L197;
-     */
+
+       if (r2 == 3) goto L197;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:206:0x025d, code lost:
-    
-        r6 = 2;
-     */
+
+       r6 = 2;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:222:0x00ab, code lost:
-    
-        r6 = 3;
-     */
+
+       r6 = 3;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:229:0x028b, code lost:
-    
-        r0 = r3.array.size() - 1;
-     */
+
+       r0 = r3.array.size() - 1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:231:0x0294, code lost:
-    
-        if ((-1) >= r0) goto L254;
-     */
+
+       if ((-1) >= r0) goto L254;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:232:0x0296, code lost:
-    
-        r2 = r3.array.keyAt(r0);
-        r4 = (com.android.server.permission.access.immutable.MutableIndexedReferenceMap) r3.valueAt(r0);
-     */
+
+       r2 = r3.array.keyAt(r0);
+       r4 = (com.android.server.permission.access.immutable.MutableIndexedReferenceMap) r3.valueAt(r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:233:0x02b0, code lost:
-    
-        if (r20.getExternalState().getAppIdPackageNames().array.contains(r2) != false) goto L175;
-     */
+
+       if (r20.getExternalState().getAppIdPackageNames().array.contains(r2) != false) goto L175;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:234:0x02b2, code lost:
-    
-        com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticOutline0.m(r2, "Dropping unknown app ID ", " when parsing permission state", "DevicePermissionPersistence");
-        r3.removeAt$1(r0);
-        r1.requestWriteMode(1);
-     */
+
+       com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticOutline0.m(r2, "Dropping unknown app ID ", " when parsing permission state", "DevicePermissionPersistence");
+       r3.removeAt$1(r0);
+       r1.requestWriteMode(1);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:236:0x02c0, code lost:
-    
-        r0 = r0 - 1;
-     */
+
+       r0 = r0 - 1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:240:?, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:86:0x018e, code lost:
-    
-        r2 = r19.next();
-     */
+
+       r2 = r19.next();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:87:0x0193, code lost:
-    
-        if (r2 == 1) goto L215;
-     */
+
+       if (r2 == 1) goto L215;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:89:0x0196, code lost:
-    
-        if (r2 == 2) goto L216;
-     */
+
+       if (r2 == 2) goto L216;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:90:0x0198, code lost:
-    
-        if (r2 == 3) goto L217;
-     */
+
+       if (r2 == 3) goto L217;
+    */
     @Override // com.android.server.permission.access.SchemePolicy
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void parseUserState(com.android.modules.utils.BinaryXmlPullParser r19, com.android.server.permission.access.MutableAccessState r20, int r21) {
+    public final void parseUserState(
+            com.android.modules.utils.BinaryXmlPullParser r19,
+            com.android.server.permission.access.MutableAccessState r20,
+            int r21) {
         /*
             Method dump skipped, instructions count: 708
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.permission.access.permission.DevicePermissionPolicy.parseUserState(com.android.modules.utils.BinaryXmlPullParser, com.android.server.permission.access.MutableAccessState, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.permission.access.permission.DevicePermissionPolicy.parseUserState(com.android.modules.utils.BinaryXmlPullParser,"
+                    + " com.android.server.permission.access.MutableAccessState, int):void");
     }
 
-    public final void resetRuntimePermissions(MutateStateScope mutateStateScope, String str, int i) {
+    public final void resetRuntimePermissions(
+            MutateStateScope mutateStateScope, String str, int i) {
         AndroidPackage androidPackage;
         MutableIndexedReferenceMap mutableIndexedReferenceMap;
         MutableAccessState mutableAccessState = mutateStateScope.newState;
-        PackageState packageState = (PackageState) mutableAccessState.getExternalState().packageStates.get(str);
+        PackageState packageState =
+                (PackageState) mutableAccessState.getExternalState().packageStates.get(str);
         if (packageState == null || (androidPackage = packageState.getAndroidPackage()) == null) {
             return;
         }
         int appId = packageState.getAppId();
-        MutableUserState mutableUserState = (MutableUserState) mutableAccessState.getUserStates().get(i);
-        if (mutableUserState == null || (mutableIndexedReferenceMap = (MutableIndexedReferenceMap) mutableUserState.getAppIdDevicePermissionFlags().get(appId)) == null) {
+        MutableUserState mutableUserState =
+                (MutableUserState) mutableAccessState.getUserStates().get(i);
+        if (mutableUserState == null
+                || (mutableIndexedReferenceMap =
+                                (MutableIndexedReferenceMap)
+                                        mutableUserState.getAppIdDevicePermissionFlags().get(appId))
+                        == null) {
             return;
         }
         for (String str2 : androidPackage.getRequestedPermissions()) {
-            Immutable immutable = mutableAccessState.getExternalState().getAppIdPackageNames().get(appId);
+            Immutable immutable =
+                    mutableAccessState.getExternalState().getAppIdPackageNames().get(appId);
             Intrinsics.checkNotNull(immutable);
             IndexedListSet indexedListSet = (IndexedListSet) immutable;
             int size = indexedListSet.list.size();
             int i2 = 0;
             while (true) {
                 if (i2 < size) {
-                    Object obj = mutableAccessState.getExternalState().packageStates.get((String) indexedListSet.list.get(i2));
+                    Object obj =
+                            mutableAccessState
+                                    .getExternalState()
+                                    .packageStates
+                                    .get((String) indexedListSet.list.get(i2));
                     Intrinsics.checkNotNull(obj);
                     PackageState packageState2 = (PackageState) obj;
-                    if (packageState2.getAndroidPackage() != null && !Intrinsics.areEqual(packageState2.getPackageName(), str)) {
+                    if (packageState2.getAndroidPackage() != null
+                            && !Intrinsics.areEqual(packageState2.getPackageName(), str)) {
                         AndroidPackage androidPackage2 = packageState2.getAndroidPackage();
                         Intrinsics.checkNotNull(androidPackage2);
                         if (androidPackage2.getRequestedPermissions().contains(str2)) {
@@ -308,18 +367,21 @@ public final class DevicePermissionPolicy extends SchemePolicy {
     }
 
     @Override // com.android.server.permission.access.SchemePolicy
-    public final void serializeUserState(BinaryXmlSerializer binaryXmlSerializer, AccessState accessState, int i) {
+    public final void serializeUserState(
+            BinaryXmlSerializer binaryXmlSerializer, AccessState accessState, int i) {
         this.persistence.getClass();
         Immutable immutable = accessState.getUserStates().get(i);
         Intrinsics.checkNotNull(immutable);
-        MutableIntReferenceMap appIdDevicePermissionFlags = ((MutableUserState) immutable).getAppIdDevicePermissionFlags();
+        MutableIntReferenceMap appIdDevicePermissionFlags =
+                ((MutableUserState) immutable).getAppIdDevicePermissionFlags();
         String str = null;
         binaryXmlSerializer.startTag((String) null, "app-id-device-permissions");
         int size = appIdDevicePermissionFlags.array.size();
         int i2 = 0;
         while (i2 < size) {
             int keyAt = appIdDevicePermissionFlags.array.keyAt(i2);
-            MutableIndexedReferenceMap mutableIndexedReferenceMap = (MutableIndexedReferenceMap) appIdDevicePermissionFlags.valueAt(i2);
+            MutableIndexedReferenceMap mutableIndexedReferenceMap =
+                    (MutableIndexedReferenceMap) appIdDevicePermissionFlags.valueAt(i2);
             binaryXmlSerializer.startTag(str, "app-id");
             binaryXmlSerializer.attributeInt(str, "id", keyAt);
             int size2 = mutableIndexedReferenceMap.map.size();
@@ -372,28 +434,46 @@ public final class DevicePermissionPolicy extends SchemePolicy {
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r3v8, types: [com.android.server.permission.access.immutable.Immutable] */
-    public final boolean setPermissionFlags(int i, int i2, int i3, MutateStateScope mutateStateScope, String str, String str2) {
+    public final boolean setPermissionFlags(
+            int i, int i2, int i3, MutateStateScope mutateStateScope, String str, String str2) {
         if (!mutateStateScope.newState.getUserStates().array.contains(i2)) {
-            NandswapManager$$ExternalSyntheticOutline0.m(i2, "Unable to update permission flags for missing user ", "DevicePermissionPolicy");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    i2,
+                    "Unable to update permission flags for missing user ",
+                    "DevicePermissionPolicy");
             return false;
         }
         Immutable immutable = mutateStateScope.newState.getUserStates().get(i2);
         Intrinsics.checkNotNull(immutable);
-        MutableIndexedReferenceMap mutableIndexedReferenceMap = (MutableIndexedReferenceMap) ((MutableUserState) immutable).getAppIdDevicePermissionFlags().get(i);
-        int intValue = ((Number) IndexedMapExtensionsKt.getWithDefault(mutableIndexedReferenceMap != null ? (IndexedMap) mutableIndexedReferenceMap.get(str) : null, str2, 0)).intValue();
+        MutableIndexedReferenceMap mutableIndexedReferenceMap =
+                (MutableIndexedReferenceMap)
+                        ((MutableUserState) immutable).getAppIdDevicePermissionFlags().get(i);
+        int intValue =
+                ((Number)
+                                IndexedMapExtensionsKt.getWithDefault(
+                                        mutableIndexedReferenceMap != null
+                                                ? (IndexedMap) mutableIndexedReferenceMap.get(str)
+                                                : null,
+                                        str2,
+                                        0))
+                        .intValue();
         if (intValue == i3) {
             return false;
         }
         MutableUserState mutateUserState = mutateStateScope.newState.mutateUserState(i2, 1);
         Intrinsics.checkNotNull(mutateUserState);
-        MutableIntReferenceMap mutableIntReferenceMap = (MutableIntReferenceMap) mutateUserState.appIdDevicePermissionFlagsReference.mutate();
+        MutableIntReferenceMap mutableIntReferenceMap =
+                (MutableIntReferenceMap)
+                        mutateUserState.appIdDevicePermissionFlagsReference.mutate();
         Immutable mutate = mutableIntReferenceMap.mutate(i);
         if (mutate == null) {
             mutate = new MutableIndexedReferenceMap();
             mutableIntReferenceMap.put(i, mutate);
         }
-        MutableIndexedReferenceMap mutableIndexedReferenceMap2 = (MutableIndexedReferenceMap) mutate;
-        MutableReference mutableReference = (MutableReference) mutableIndexedReferenceMap2.map.get(str);
+        MutableIndexedReferenceMap mutableIndexedReferenceMap2 =
+                (MutableIndexedReferenceMap) mutate;
+        MutableReference mutableReference =
+                (MutableReference) mutableIndexedReferenceMap2.map.get(str);
         MutableIndexedMap mutate2 = mutableReference != null ? mutableReference.mutate() : null;
         if (mutate2 == null) {
             mutate2 = new MutableIndexedMap();
@@ -410,7 +490,8 @@ public final class DevicePermissionPolicy extends SchemePolicy {
         MutableIndexedListSet mutableIndexedListSet = this.listeners;
         int size = mutableIndexedListSet.list.size();
         for (int i4 = 0; i4 < size; i4++) {
-            ((OnDevicePermissionFlagsChangedListener) mutableIndexedListSet.list.get(i4)).onDevicePermissionFlagsChanged(i, i2, intValue, str, str2, i3);
+            ((OnDevicePermissionFlagsChangedListener) mutableIndexedListSet.list.get(i4))
+                    .onDevicePermissionFlagsChanged(i, i2, intValue, str, str2, i3);
         }
         return true;
     }
@@ -426,7 +507,11 @@ public final class DevicePermissionPolicy extends SchemePolicy {
         IndexedListSet indexedListSet = (IndexedListSet) immutable;
         int size = indexedListSet.list.size();
         for (int i4 = 0; i4 < size; i4++) {
-            Object obj = mutableAccessState.getExternalState().packageStates.get((String) indexedListSet.list.get(i4));
+            Object obj =
+                    mutableAccessState
+                            .getExternalState()
+                            .packageStates
+                            .get((String) indexedListSet.list.get(i4));
             Intrinsics.checkNotNull(obj);
             PackageState packageState = (PackageState) obj;
             if (packageState.getAndroidPackage() != null) {
@@ -442,14 +527,19 @@ public final class DevicePermissionPolicy extends SchemePolicy {
         int size2 = userStates.array.size();
         for (int i5 = 0; i5 < size2; i5++) {
             int keyAt = userStates.array.keyAt(i5);
-            MutableIndexedReferenceMap mutableIndexedReferenceMap = (MutableIndexedReferenceMap) ((MutableUserState) userStates.valueAt(i5)).getAppIdDevicePermissionFlags().get(i);
+            MutableIndexedReferenceMap mutableIndexedReferenceMap =
+                    (MutableIndexedReferenceMap)
+                            ((MutableUserState) userStates.valueAt(i5))
+                                    .getAppIdDevicePermissionFlags()
+                                    .get(i);
             if (mutableIndexedReferenceMap != null) {
                 int size3 = mutableIndexedReferenceMap.map.size() - 1;
                 while (true) {
                     int i6 = -1;
                     if (-1 < size3) {
                         Object keyAt2 = mutableIndexedReferenceMap.map.keyAt(size3);
-                        IndexedMap indexedMap2 = (IndexedMap) mutableIndexedReferenceMap.valueAt(size3);
+                        IndexedMap indexedMap2 =
+                                (IndexedMap) mutableIndexedReferenceMap.valueAt(size3);
                         String str = (String) keyAt2;
                         int size4 = indexedMap2.map.size() - 1;
                         while (i6 < size4) {

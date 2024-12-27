@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextShakeMotionAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextShakeMotionAttribute> CREATOR = new Parcelable.Creator<SemContextShakeMotionAttribute>() { // from class: com.samsung.android.hardware.context.SemContextShakeMotionAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextShakeMotionAttribute createFromParcel(Parcel in) {
-            return new SemContextShakeMotionAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextShakeMotionAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextShakeMotionAttribute>() { // from class:
+                                                        // com.samsung.android.hardware.context.SemContextShakeMotionAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextShakeMotionAttribute createFromParcel(Parcel in) {
+                    return new SemContextShakeMotionAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextShakeMotionAttribute[] newArray(int size) {
-            return new SemContextShakeMotionAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextShakeMotionAttribute[] newArray(int size) {
+                    return new SemContextShakeMotionAttribute[size];
+                }
+            };
     private static final String TAG = "SemContextShakeMotionAttribute";
     private int mDuration;
     private int mStrength;

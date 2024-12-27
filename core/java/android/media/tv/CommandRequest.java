@@ -7,20 +7,22 @@ import android.os.Parcelable;
 public final class CommandRequest extends BroadcastInfoRequest implements Parcelable {
     public static final String ARGUMENT_TYPE_JSON = "json";
     public static final String ARGUMENT_TYPE_XML = "xml";
-    public static final Parcelable.Creator<CommandRequest> CREATOR = new Parcelable.Creator<CommandRequest>() { // from class: android.media.tv.CommandRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CommandRequest createFromParcel(Parcel source) {
-            source.readInt();
-            return CommandRequest.createFromParcelBody(source);
-        }
+    public static final Parcelable.Creator<CommandRequest> CREATOR =
+            new Parcelable.Creator<
+                    CommandRequest>() { // from class: android.media.tv.CommandRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CommandRequest createFromParcel(Parcel source) {
+                    source.readInt();
+                    return CommandRequest.createFromParcelBody(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CommandRequest[] newArray(int size) {
-            return new CommandRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CommandRequest[] newArray(int size) {
+                    return new CommandRequest[size];
+                }
+            };
     private static final int REQUEST_TYPE = 7;
     private final String mArgumentType;
     private final String mArguments;
@@ -31,7 +33,13 @@ public final class CommandRequest extends BroadcastInfoRequest implements Parcel
         return new CommandRequest(in);
     }
 
-    public CommandRequest(int requestId, int option, String namespace, String name, String arguments, String argumentType) {
+    public CommandRequest(
+            int requestId,
+            int option,
+            String namespace,
+            String name,
+            String arguments,
+            String argumentType) {
         super(7, requestId, option);
         this.mNamespace = namespace;
         this.mName = name;

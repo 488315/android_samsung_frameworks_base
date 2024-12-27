@@ -1,9 +1,11 @@
 package com.samsung.android.sume.core.channel;
 
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer$$ExternalSyntheticLambda3;
+
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -57,11 +59,16 @@ public class BufferSupplyChannel implements BufferChannel, Supplier<MediaBuffer>
     /* JADX WARN: Can't rename method to resolve collision */
     @Override // java.util.function.Supplier
     public MediaBuffer get() {
-        return (MediaBuffer) Optional.ofNullable(this.supplier).map(new Function() { // from class: com.samsung.android.sume.core.channel.BufferSupplyChannel$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return (MediaBuffer) ((Supplier) obj).get();
-            }
-        }).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
+        return (MediaBuffer)
+                Optional.ofNullable(this.supplier)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.channel.BufferSupplyChannel$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return (MediaBuffer) ((Supplier) obj).get();
+                                    }
+                                })
+                        .orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
     }
 }

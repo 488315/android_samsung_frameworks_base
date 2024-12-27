@@ -26,8 +26,7 @@ public class CompatSandbox {
     private static class LazyHolder {
         private static final Rect EMPTY_RECT = new Rect();
 
-        private LazyHolder() {
-        }
+        private LazyHolder() {}
     }
 
     public static Rect getEmptyRect() {
@@ -52,7 +51,8 @@ public class CompatSandbox {
         info.logicalHeight = maxBounds.height();
     }
 
-    public static boolean applyViewBoundsSandboxingIfNeeded(Configuration config, Rect inOutRect, boolean inverse) {
+    public static boolean applyViewBoundsSandboxingIfNeeded(
+            Configuration config, Rect inOutRect, boolean inverse) {
         if (!hasCompatSandboxFlags(config, 4)) {
             return false;
         }
@@ -69,7 +69,8 @@ public class CompatSandbox {
         return true;
     }
 
-    public static boolean applyViewLocationSandboxingIfNeeded(Configuration config, int[] outLocation) {
+    public static boolean applyViewLocationSandboxingIfNeeded(
+            Configuration config, int[] outLocation) {
         if (!hasCompatSandboxFlags(config, 4)) {
             return false;
         }
@@ -91,7 +92,8 @@ public class CompatSandbox {
         event.setCompatSandboxScale(xOffset, yOffset, invScale * overrideInvertedScale);
     }
 
-    public static void applyInsetsHintSandboxingIfNeeded(Configuration config, InsetsSourceControl[] controls) {
+    public static void applyInsetsHintSandboxingIfNeeded(
+            Configuration config, InsetsSourceControl[] controls) {
         if (!hasCompatSandboxFlags(config, 32)) {
             return;
         }
@@ -102,7 +104,11 @@ public class CompatSandbox {
         for (InsetsSourceControl control : controls) {
             if (control != null) {
                 Insets hint = control.getInsetsHint();
-                control.setInsetsHint((int) (hint.left * scale), (int) (hint.top * scale), (int) (hint.right * scale), (int) (hint.bottom * scale));
+                control.setInsetsHint(
+                        (int) (hint.left * scale),
+                        (int) (hint.top * scale),
+                        (int) (hint.right * scale),
+                        (int) (hint.bottom * scale));
             }
         }
     }
@@ -114,7 +120,8 @@ public class CompatSandbox {
         return 1;
     }
 
-    public static boolean updateConfigWithoutWindowConfigurationIfNeeded(Configuration newConfig, Configuration base, Configuration override) {
+    public static boolean updateConfigWithoutWindowConfigurationIfNeeded(
+            Configuration newConfig, Configuration base, Configuration override) {
         int flags = base.windowConfiguration.getCompatSandboxFlags();
         if (flags != 0 || flags != override.windowConfiguration.getCompatSandboxFlags()) {
             newConfig.updateFrom(override, true);
@@ -123,8 +130,10 @@ public class CompatSandbox {
         return false;
     }
 
-    public static void resetCompatSandBoxValuesIfNeeded(Configuration config, Configuration overrideConfig) {
-        if (config.windowConfiguration.getCompatSandboxFlags() != 0 && overrideConfig.windowConfiguration.getCompatSandboxFlags() == 0) {
+    public static void resetCompatSandBoxValuesIfNeeded(
+            Configuration config, Configuration overrideConfig) {
+        if (config.windowConfiguration.getCompatSandboxFlags() != 0
+                && overrideConfig.windowConfiguration.getCompatSandboxFlags() == 0) {
             config.windowConfiguration.setCompatSandboxValues(0, -1.0f, null);
         }
     }

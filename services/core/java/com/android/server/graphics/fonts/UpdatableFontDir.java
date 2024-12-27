@@ -12,13 +12,15 @@ import android.util.ArraySet;
 import android.util.AtomicFile;
 import android.util.Base64;
 import android.util.Slog;
+
 import com.android.internal.security.VerityUtils;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
-import com.android.server.graphics.fonts.FontManagerService;
-import com.android.server.graphics.fonts.PersistentSystemFontConfig;
 import com.android.text.flags.Flags;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -37,7 +39,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -65,13 +66,25 @@ public final class UpdatableFontDir {
         }
 
         public final String toString() {
-            return "FontFileInfo{mFile=" + this.mFile + ", psName=" + this.mPsName + ", mRevision=" + this.mRevision + '}';
+            return "FontFileInfo{mFile="
+                    + this.mFile
+                    + ", psName="
+                    + this.mPsName
+                    + ", mRevision="
+                    + this.mRevision
+                    + '}';
         }
     }
 
-    public UpdatableFontDir(File file, OtfFontFileParser otfFontFileParser, FontManagerService.FsverityUtilImpl fsverityUtilImpl, File file2) {
-        UpdatableFontDir$$ExternalSyntheticLambda0 updatableFontDir$$ExternalSyntheticLambda0 = new UpdatableFontDir$$ExternalSyntheticLambda0();
-        UpdatableFontDir$$ExternalSyntheticLambda1 updatableFontDir$$ExternalSyntheticLambda1 = new UpdatableFontDir$$ExternalSyntheticLambda1();
+    public UpdatableFontDir(
+            File file,
+            OtfFontFileParser otfFontFileParser,
+            FontManagerService.FsverityUtilImpl fsverityUtilImpl,
+            File file2) {
+        UpdatableFontDir$$ExternalSyntheticLambda0 updatableFontDir$$ExternalSyntheticLambda0 =
+                new UpdatableFontDir$$ExternalSyntheticLambda0();
+        UpdatableFontDir$$ExternalSyntheticLambda1 updatableFontDir$$ExternalSyntheticLambda1 =
+                new UpdatableFontDir$$ExternalSyntheticLambda1();
         this.mFontFileInfoMap = new ArrayMap();
         this.mFilesDir = file;
         this.mParser = otfFontFileParser;
@@ -97,7 +110,8 @@ public final class UpdatableFontDir {
     public static FontConfig.Font getFontByPostScriptName(String str, FontConfig fontConfig) {
         FontConfig.Font font = null;
         for (int i = 0; i < fontConfig.getFontFamilies().size(); i++) {
-            FontConfig.FontFamily fontFamily = (FontConfig.FontFamily) fontConfig.getFontFamilies().get(i);
+            FontConfig.FontFamily fontFamily =
+                    (FontConfig.FontFamily) fontConfig.getFontFamilies().get(i);
             int i2 = 0;
             while (true) {
                 if (i2 < fontFamily.getFontList().size()) {
@@ -111,9 +125,11 @@ public final class UpdatableFontDir {
             }
         }
         for (int i3 = 0; i3 < fontConfig.getNamedFamilyLists().size(); i3++) {
-            FontConfig.NamedFamilyList namedFamilyList = (FontConfig.NamedFamilyList) fontConfig.getNamedFamilyLists().get(i3);
+            FontConfig.NamedFamilyList namedFamilyList =
+                    (FontConfig.NamedFamilyList) fontConfig.getNamedFamilyLists().get(i3);
             for (int i4 = 0; i4 < namedFamilyList.getFamilies().size(); i4++) {
-                FontConfig.FontFamily fontFamily2 = (FontConfig.FontFamily) namedFamilyList.getFamilies().get(i4);
+                FontConfig.FontFamily fontFamily2 =
+                        (FontConfig.FontFamily) namedFamilyList.getFamilies().get(i4);
                 int i5 = 0;
                 while (true) {
                     if (i5 < fontFamily2.getFontList().size()) {
@@ -131,22 +147,25 @@ public final class UpdatableFontDir {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:16:0x0041, code lost:
-    
-        if (r6 <= r4) goto L20;
-     */
+
+       if (r6 <= r4) goto L20;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0043, code lost:
-    
-        r2 = true;
-     */
+
+       r2 = true;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0049, code lost:
-    
-        if (r0.mRevision <= r4) goto L20;
-     */
+
+       if (r0.mRevision <= r4) goto L20;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean addFileToMapIfSameOrNewer(com.android.server.graphics.fonts.UpdatableFontDir.FontFileInfo r11, android.text.FontConfig r12, boolean r13) {
+    public final boolean addFileToMapIfSameOrNewer(
+            com.android.server.graphics.fonts.UpdatableFontDir.FontFileInfo r11,
+            android.text.FontConfig r12,
+            boolean r13) {
         /*
             r10 = this;
             android.util.ArrayMap r0 = r10.mFontFileInfoMap
@@ -211,7 +230,10 @@ public final class UpdatableFontDir {
         L6c:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.graphics.fonts.UpdatableFontDir.addFileToMapIfSameOrNewer(com.android.server.graphics.fonts.UpdatableFontDir$FontFileInfo, android.text.FontConfig, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.graphics.fonts.UpdatableFontDir.addFileToMapIfSameOrNewer(com.android.server.graphics.fonts.UpdatableFontDir$FontFileInfo,"
+                    + " android.text.FontConfig, boolean):boolean");
     }
 
     public final long getFontRevision(File file) {
@@ -242,15 +264,23 @@ public final class UpdatableFontDir {
         FontConfig fontConfig = (FontConfig) this.mConfigSupplier.apply(getPostScriptMap());
         List list = readPersistentConfig().fontFamilies;
         ArrayList arrayList = (ArrayList) list;
-        ArrayList arrayList2 = new ArrayList(arrayList.size() + fontConfig.getNamedFamilyLists().size());
+        ArrayList arrayList2 =
+                new ArrayList(arrayList.size() + fontConfig.getNamedFamilyLists().size());
         arrayList2.addAll(fontConfig.getNamedFamilyLists());
         for (int i = 0; i < arrayList.size(); i++) {
-            FontConfig.NamedFamilyList resolveFontFilesForNamedFamily = resolveFontFilesForNamedFamily((FontUpdateRequest.Family) arrayList.get(i));
+            FontConfig.NamedFamilyList resolveFontFilesForNamedFamily =
+                    resolveFontFilesForNamedFamily((FontUpdateRequest.Family) arrayList.get(i));
             if (resolveFontFilesForNamedFamily != null) {
                 arrayList2.add(resolveFontFilesForNamedFamily);
             }
         }
-        return new FontConfig(fontConfig.getFontFamilies(), fontConfig.getAliases(), arrayList2, fontConfig.getLocaleFallbackCustomizations(), this.mLastModifiedMillis, this.mConfigVersion);
+        return new FontConfig(
+                fontConfig.getFontFamilies(),
+                fontConfig.getAliases(),
+                arrayList2,
+                fontConfig.getLocaleFallbackCustomizations(),
+                this.mLastModifiedMillis,
+                this.mConfigVersion);
     }
 
     public final void installFontFile(FileDescriptor fileDescriptor, byte[] bArr) {
@@ -265,7 +295,8 @@ public final class UpdatableFontDir {
             file = new File(file2, "~~" + Base64.encodeToString(bArr2, 10));
         } while (file.exists());
         if (!file.mkdir()) {
-            throw new FontManagerService.SystemFontException(-1, "Failed to create font directory.");
+            throw new FontManagerService.SystemFontException(
+                    -1, "Failed to create font directory.");
         }
         try {
             Os.chmod(file.getAbsolutePath(), 457);
@@ -282,35 +313,61 @@ public final class UpdatableFontDir {
                             VerityUtils.setUpFsverity(absolutePath);
                             try {
                                 otfFontFileParser.getClass();
-                                String buildFontFileName = OtfFontFileParser.buildFontFileName(file3);
+                                String buildFontFileName =
+                                        OtfFontFileParser.buildFontFileName(file3);
                                 if (buildFontFileName == null) {
-                                    throw new FontManagerService.SystemFontException(-4, "Failed to read PostScript name from font file");
+                                    throw new FontManagerService.SystemFontException(
+                                            -4, "Failed to read PostScript name from font file");
                                 }
                                 File file4 = new File(file, buildFontFileName);
                                 if (!file3.renameTo(file4)) {
-                                    throw new FontManagerService.SystemFontException(-1, "Failed to move verified font file.");
+                                    throw new FontManagerService.SystemFontException(
+                                            -1, "Failed to move verified font file.");
                                 }
                                 try {
-                                    Os.chmod(file4.getAbsolutePath(), FrameworkStatsLog.VBMETA_DIGEST_REPORTED);
+                                    Os.chmod(
+                                            file4.getAbsolutePath(),
+                                            FrameworkStatsLog.VBMETA_DIGEST_REPORTED);
                                     File file5 = new File(file, "font.fsv_sig");
                                     try {
-                                        FileOutputStream fileOutputStream2 = new FileOutputStream(file5);
+                                        FileOutputStream fileOutputStream2 =
+                                                new FileOutputStream(file5);
                                         try {
                                             fileOutputStream2.write(bArr);
                                             fileOutputStream2.close();
                                             try {
-                                                Os.chmod(file5.getAbsolutePath(), FrameworkStatsLog.NON_A11Y_TOOL_SERVICE_WARNING_REPORT);
-                                                FontFileInfo validateFontFile = validateFontFile(file4, bArr);
+                                                Os.chmod(
+                                                        file5.getAbsolutePath(),
+                                                        FrameworkStatsLog
+                                                                .NON_A11Y_TOOL_SERVICE_WARNING_REPORT);
+                                                FontFileInfo validateFontFile =
+                                                        validateFontFile(file4, bArr);
                                                 try {
-                                                    OtfFontFileParser.tryToCreateTypeface(validateFontFile.mFile);
-                                                    if (!addFileToMapIfSameOrNewer(validateFontFile, getSystemFontConfig(), false)) {
-                                                        throw new FontManagerService.SystemFontException(-5, "Downgrading font file is forbidden.");
+                                                    OtfFontFileParser.tryToCreateTypeface(
+                                                            validateFontFile.mFile);
+                                                    if (!addFileToMapIfSameOrNewer(
+                                                            validateFontFile,
+                                                            getSystemFontConfig(),
+                                                            false)) {
+                                                        throw new FontManagerService
+                                                                .SystemFontException(
+                                                                -5,
+                                                                "Downgrading font file is"
+                                                                    + " forbidden.");
                                                     }
                                                 } catch (Throwable th) {
-                                                    throw new FontManagerService.SystemFontException(-3, "Failed to create Typeface from file", th);
+                                                    throw new FontManagerService
+                                                            .SystemFontException(
+                                                            -3,
+                                                            "Failed to create Typeface from file",
+                                                            th);
                                                 }
                                             } catch (ErrnoException e) {
-                                                throw new FontManagerService.SystemFontException(-1, "Failed to change the signature file mode to 600", e);
+                                                throw new FontManagerService.SystemFontException(
+                                                        -1,
+                                                        "Failed to change the signature file mode"
+                                                            + " to 600",
+                                                        e);
                                             }
                                         } catch (Throwable th2) {
                                             try {
@@ -321,16 +378,22 @@ public final class UpdatableFontDir {
                                             throw th2;
                                         }
                                     } catch (IOException e2) {
-                                        throw new FontManagerService.SystemFontException(-1, "Failed to write font signature file to storage.", e2);
+                                        throw new FontManagerService.SystemFontException(
+                                                -1,
+                                                "Failed to write font signature file to storage.",
+                                                e2);
                                     }
                                 } catch (ErrnoException e3) {
-                                    throw new FontManagerService.SystemFontException(-1, "Failed to change font file mode to 644", e3);
+                                    throw new FontManagerService.SystemFontException(
+                                            -1, "Failed to change font file mode to 644", e3);
                                 }
                             } catch (IOException e4) {
-                                throw new FontManagerService.SystemFontException(-3, "Failed to read PostScript name from font file", e4);
+                                throw new FontManagerService.SystemFontException(
+                                        -3, "Failed to read PostScript name from font file", e4);
                             }
                         } catch (IOException e5) {
-                            throw new FontManagerService.SystemFontException(-2, "Failed to setup fs-verity.", e5);
+                            throw new FontManagerService.SystemFontException(
+                                    -2, "Failed to setup fs-verity.", e5);
                         }
                     } catch (Throwable th4) {
                         try {
@@ -341,14 +404,16 @@ public final class UpdatableFontDir {
                         throw th4;
                     }
                 } catch (IOException e6) {
-                    throw new FontManagerService.SystemFontException(-1, "Failed to write font file to storage.", e6);
+                    throw new FontManagerService.SystemFontException(
+                            -1, "Failed to write font file to storage.", e6);
                 }
             } catch (Throwable th6) {
                 FileUtils.deleteContentsAndDir(file);
                 throw th6;
             }
         } catch (ErrnoException e7) {
-            throw new FontManagerService.SystemFontException(-1, "Failed to change mode to 711", e7);
+            throw new FontManagerService.SystemFontException(
+                    -1, "Failed to change mode to 711", e7);
         }
     }
 
@@ -393,12 +458,24 @@ public final class UpdatableFontDir {
                     File file2 = new File(file, "font.fsv_sig");
                     if (file2.exists()) {
                         try {
-                            byte[] readAllBytes = Files.readAllBytes(Paths.get(file2.getAbsolutePath(), new String[0]));
+                            byte[] readAllBytes =
+                                    Files.readAllBytes(
+                                            Paths.get(file2.getAbsolutePath(), new String[0]));
                             File[] listFiles2 = file.listFiles();
                             if (listFiles2 != null && listFiles2.length == 2) {
-                                FontFileInfo validateFontFile = validateFontFile(listFiles2[0].equals(file2) ? listFiles2[1] : listFiles2[0], readAllBytes);
+                                FontFileInfo validateFontFile =
+                                        validateFontFile(
+                                                listFiles2[0].equals(file2)
+                                                        ? listFiles2[1]
+                                                        : listFiles2[0],
+                                                readAllBytes);
                                 if (fontConfig == null) {
-                                    fontConfig = Flags.fixFontUpdateFailure() ? (FontConfig) this.mConfigSupplier.apply(Collections.emptyMap()) : getSystemFontConfig();
+                                    fontConfig =
+                                            Flags.fixFontUpdateFailure()
+                                                    ? (FontConfig)
+                                                            this.mConfigSupplier.apply(
+                                                                    Collections.emptyMap())
+                                                    : getSystemFontConfig();
                                 }
                                 addFileToMapIfSameOrNewer(validateFontFile, fontConfig, true);
                             }
@@ -440,16 +517,29 @@ public final class UpdatableFontDir {
                 j = 0;
             }
             if (Flags.fixFontUpdateFailure()) {
-                for (int i2 = 0; i2 < ((ArrayList) readPersistentConfig.fontFamilies).size(); i2++) {
-                    FontUpdateRequest.Family family = (FontUpdateRequest.Family) ((ArrayList) readPersistentConfig.fontFamilies).get(i2);
+                for (int i2 = 0;
+                        i2 < ((ArrayList) readPersistentConfig.fontFamilies).size();
+                        i2++) {
+                    FontUpdateRequest.Family family =
+                            (FontUpdateRequest.Family)
+                                    ((ArrayList) readPersistentConfig.fontFamilies).get(i2);
                     for (int i3 = 0; i3 < family.getFonts().size(); i3++) {
-                        FontUpdateRequest.Font font = (FontUpdateRequest.Font) family.getFonts().get(i3);
+                        FontUpdateRequest.Font font =
+                                (FontUpdateRequest.Font) family.getFonts().get(i3);
                         if (!this.mFontFileInfoMap.containsKey(font.getPostScriptName())) {
                             if (fontConfig == null) {
-                                fontConfig = (FontConfig) this.mConfigSupplier.apply(Collections.emptyMap());
+                                fontConfig =
+                                        (FontConfig)
+                                                this.mConfigSupplier.apply(Collections.emptyMap());
                             }
-                            if (getFontByPostScriptName(font.getPostScriptName(), fontConfig) == null) {
-                                Slog.e("UpdatableFontDir", "Unknown font that has PostScript name " + font.getPostScriptName() + " is requested in FontFamily " + family.getName());
+                            if (getFontByPostScriptName(font.getPostScriptName(), fontConfig)
+                                    == null) {
+                                Slog.e(
+                                        "UpdatableFontDir",
+                                        "Unknown font that has PostScript name "
+                                                + font.getPostScriptName()
+                                                + " is requested in FontFamily "
+                                                + family.getName());
                                 this.mFontFileInfoMap.clear();
                                 this.mLastModifiedMillis = 0L;
                                 FileUtils.deleteContents(this.mFilesDir);
@@ -508,19 +598,35 @@ public final class UpdatableFontDir {
         }
     }
 
-    public final FontConfig.NamedFamilyList resolveFontFilesForNamedFamily(FontUpdateRequest.Family family) {
+    public final FontConfig.NamedFamilyList resolveFontFilesForNamedFamily(
+            FontUpdateRequest.Family family) {
         List fonts = family.getFonts();
         ArrayList arrayList = new ArrayList(fonts.size());
         for (int i = 0; i < fonts.size(); i++) {
             FontUpdateRequest.Font font = (FontUpdateRequest.Font) fonts.get(i);
-            FontFileInfo fontFileInfo = (FontFileInfo) this.mFontFileInfoMap.get(font.getPostScriptName());
+            FontFileInfo fontFileInfo =
+                    (FontFileInfo) this.mFontFileInfoMap.get(font.getPostScriptName());
             if (fontFileInfo == null) {
-                Slog.e("UpdatableFontDir", "Failed to lookup font file that has " + font.getPostScriptName());
+                Slog.e(
+                        "UpdatableFontDir",
+                        "Failed to lookup font file that has " + font.getPostScriptName());
                 return null;
             }
-            arrayList.add(new FontConfig.Font(fontFileInfo.mFile, (File) null, fontFileInfo.mPsName, font.getFontStyle(), font.getIndex(), font.getFontVariationSettings(), (String) null, 0));
+            arrayList.add(
+                    new FontConfig.Font(
+                            fontFileInfo.mFile,
+                            (File) null,
+                            fontFileInfo.mPsName,
+                            font.getFontStyle(),
+                            font.getIndex(),
+                            font.getFontVariationSettings(),
+                            (String) null,
+                            0));
         }
-        return new FontConfig.NamedFamilyList(Collections.singletonList(new FontConfig.FontFamily(arrayList, LocaleList.getEmptyLocaleList(), 0)), family.getName());
+        return new FontConfig.NamedFamilyList(
+                Collections.singletonList(
+                        new FontConfig.FontFamily(arrayList, LocaleList.getEmptyLocaleList(), 0)),
+                family.getName());
     }
 
     public final void update(List list) {
@@ -540,7 +646,9 @@ public final class UpdatableFontDir {
         PersistentSystemFontConfig.Config readPersistentConfig = readPersistentConfig();
         HashMap hashMap = new HashMap();
         for (int i = 0; i < ((ArrayList) readPersistentConfig.fontFamilies).size(); i++) {
-            FontUpdateRequest.Family family = (FontUpdateRequest.Family) ((ArrayList) readPersistentConfig.fontFamilies).get(i);
+            FontUpdateRequest.Family family =
+                    (FontUpdateRequest.Family)
+                            ((ArrayList) readPersistentConfig.fontFamilies).get(i);
             hashMap.put(family.getName(), family);
         }
         long j = this.mLastModifiedMillis;
@@ -550,7 +658,9 @@ public final class UpdatableFontDir {
                 FontUpdateRequest fontUpdateRequest2 = (FontUpdateRequest) it2.next();
                 int type2 = fontUpdateRequest2.getType();
                 if (type2 == 0) {
-                    installFontFile(fontUpdateRequest2.getFd().getFileDescriptor(), fontUpdateRequest2.getSignature());
+                    installFontFile(
+                            fontUpdateRequest2.getFd().getFileDescriptor(),
+                            fontUpdateRequest2.getSignature());
                 } else if (type2 == 1) {
                     FontUpdateRequest.Family fontFamily = fontUpdateRequest2.getFontFamily();
                     hashMap.put(fontFamily.getName(), fontFamily);
@@ -559,7 +669,8 @@ public final class UpdatableFontDir {
             Iterator it3 = hashMap.values().iterator();
             while (it3.hasNext()) {
                 if (resolveFontFilesForNamedFamily((FontUpdateRequest.Family) it3.next()) == null) {
-                    throw new FontManagerService.SystemFontException(-9, "Required fonts are not available");
+                    throw new FontManagerService.SystemFontException(
+                            -9, "Required fonts are not available");
                 }
             }
             this.mLastModifiedMillis = ((Long) this.mCurrentTimeSupplier.get()).longValue();
@@ -567,7 +678,8 @@ public final class UpdatableFontDir {
             config.lastModifiedMillis = this.mLastModifiedMillis;
             Iterator it4 = this.mFontFileInfoMap.values().iterator();
             while (it4.hasNext()) {
-                ((ArraySet) config.updatedFontDirs).add(((FontFileInfo) it4.next()).mFile.getParentFile().getName());
+                ((ArraySet) config.updatedFontDirs)
+                        .add(((FontFileInfo) it4.next()).mFile.getParentFile().getName());
             }
             ((ArrayList) config.fontFamilies).addAll(hashMap.values());
             FileOutputStream fileOutputStream = null;
@@ -580,7 +692,8 @@ public final class UpdatableFontDir {
                 if (fileOutputStream != null) {
                     this.mConfigFile.failWrite(fileOutputStream);
                 }
-                throw new FontManagerService.SystemFontException(-6, "Failed to write config XML.", e);
+                throw new FontManagerService.SystemFontException(
+                        -6, "Failed to write config XML.", e);
             }
         } catch (Throwable th) {
             this.mFontFileInfoMap.clear();
@@ -604,9 +717,11 @@ public final class UpdatableFontDir {
                     } finally {
                     }
                 } catch (IOException unused) {
-                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m("Failed to read certificate file: ", str, "FontManagerService");
+                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                            "Failed to read certificate file: ", str, "FontManagerService");
                 }
-                if (VerityUtils.verifyPkcs7DetachedSignature(bArr, fsverityDigest, fileInputStream)) {
+                if (VerityUtils.verifyPkcs7DetachedSignature(
+                        bArr, fsverityDigest, fileInputStream)) {
                     fileInputStream.close();
                     try {
                         this.mParser.getClass();
@@ -617,19 +732,33 @@ public final class UpdatableFontDir {
                             if (fontRevision != -1) {
                                 return new FontFileInfo(file, postScriptName, fontRevision);
                             }
-                            throw new FontManagerService.SystemFontException(-3, AccountManagerService$$ExternalSyntheticOutline0.m(file, "Font validation failed. Could not read font revision: "));
+                            throw new FontManagerService.SystemFontException(
+                                    -3,
+                                    AccountManagerService$$ExternalSyntheticOutline0.m(
+                                            file,
+                                            "Font validation failed. Could not read font"
+                                                + " revision: "));
                         } finally {
                             OtfFontFileParser.unmap(mmap);
                         }
                     } catch (IOException unused2) {
-                        throw new FontManagerService.SystemFontException(-4, AccountManagerService$$ExternalSyntheticOutline0.m(file, "Font validation failed. Could not read PostScript name name: "));
+                        throw new FontManagerService.SystemFontException(
+                                -4,
+                                AccountManagerService$$ExternalSyntheticOutline0.m(
+                                        file,
+                                        "Font validation failed. Could not read PostScript name"
+                                            + " name: "));
                     }
                 }
                 fileInputStream.close();
             }
         } else {
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m("Failed to get fs-verity digest for ", absolutePath, "FontManagerService");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    "Failed to get fs-verity digest for ", absolutePath, "FontManagerService");
         }
-        throw new FontManagerService.SystemFontException(-2, AccountManagerService$$ExternalSyntheticOutline0.m(file, "Font validation failed. Fs-verity is not enabled: "));
+        throw new FontManagerService.SystemFontException(
+                -2,
+                AccountManagerService$$ExternalSyntheticOutline0.m(
+                        file, "Font validation failed. Fs-verity is not enabled: "));
     }
 }

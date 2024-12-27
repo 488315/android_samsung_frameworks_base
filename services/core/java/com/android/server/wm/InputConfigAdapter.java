@@ -24,14 +24,25 @@ public abstract class InputConfigAdapter {
     }
 
     static {
-        FlagMapping[] flagMappingArr = {new FlagMapping(1, 1, false), new FlagMapping(2, 2048, false), new FlagMapping(4, EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION, false), new FlagMapping(8, 262144, false)};
+        FlagMapping[] flagMappingArr = {
+            new FlagMapping(1, 1, false),
+            new FlagMapping(2, 2048, false),
+            new FlagMapping(
+                    4, EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION, false),
+            new FlagMapping(8, 262144, false)
+        };
         INPUT_FEATURE_TO_CONFIG_MAP = flagMappingArr;
         int i = 0;
         for (int i2 = 0; i2 < 4; i2++) {
             i |= flagMappingArr[i2].mInputConfig;
         }
         INPUT_FEATURE_TO_CONFIG_MASK = i;
-        FlagMapping[] flagMappingArr2 = {new FlagMapping(16, 8, false), new FlagMapping(8388608, 16, true), new FlagMapping(262144, 512, false), new FlagMapping(536870912, 1024, false)};
+        FlagMapping[] flagMappingArr2 = {
+            new FlagMapping(16, 8, false),
+            new FlagMapping(8388608, 16, true),
+            new FlagMapping(262144, 512, false),
+            new FlagMapping(536870912, 1024, false)
+        };
         LAYOUT_PARAM_FLAG_TO_CONFIG_MAP = flagMappingArr2;
         int i3 = 0;
         for (int i4 = 0; i4 < 4; i4++) {
@@ -51,6 +62,8 @@ public abstract class InputConfigAdapter {
     }
 
     public static int getInputConfigFromWindowParams(int i, int i2, int i3) {
-        return (i == 2013 ? 64 : 0) | applyMapping(i2, LAYOUT_PARAM_FLAG_TO_CONFIG_MAP) | applyMapping(i3, INPUT_FEATURE_TO_CONFIG_MAP);
+        return (i == 2013 ? 64 : 0)
+                | applyMapping(i2, LAYOUT_PARAM_FLAG_TO_CONFIG_MAP)
+                | applyMapping(i3, INPUT_FEATURE_TO_CONFIG_MAP);
     }
 }

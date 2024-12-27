@@ -3,6 +3,7 @@ package android.util;
 import android.os.SystemProperties;
 import android.system.ErrnoException;
 import android.system.Os;
+
 import com.android.internal.util.ArtBinaryXmlPullParser;
 import com.android.internal.util.ArtBinaryXmlSerializer;
 import com.android.internal.util.FastXmlSerializer;
@@ -11,6 +12,18 @@ import com.android.modules.utils.BinaryXmlPullParser;
 import com.android.modules.utils.BinaryXmlSerializer;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import libcore.util.XmlObjectFactory;
+
+import org.xml.sax.ContentHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,16 +34,8 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+
 import javax.xml.parsers.SAXParserFactory;
-import libcore.util.XmlObjectFactory;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-import org.xmlpull.v1.XmlSerializer;
 
 /* loaded from: classes4.dex */
 public class Xml {
@@ -38,8 +43,7 @@ public class Xml {
     public static final boolean ENABLE_BINARY_DEFAULT = shouldEnableBinaryDefault();
     public static final boolean ENABLE_RESOLVE_OPTIMIZATIONS = shouldEnableResolveOptimizations();
 
-    private Xml() {
-    }
+    private Xml() {}
 
     private static boolean shouldEnableBinaryDefault() {
         return SystemProperties.getBoolean("persist.sys.binary_xml", true);
@@ -67,13 +71,15 @@ public class Xml {
         }
     }
 
-    public static void parse(Reader in, ContentHandler contentHandler) throws IOException, SAXException {
+    public static void parse(Reader in, ContentHandler contentHandler)
+            throws IOException, SAXException {
         XMLReader reader = newXMLReader();
         reader.setContentHandler(contentHandler);
         reader.parse(new InputSource(in));
     }
 
-    public static void parse(InputStream in, Encoding encoding, ContentHandler contentHandler) throws IOException, SAXException {
+    public static void parse(InputStream in, Encoding encoding, ContentHandler contentHandler)
+            throws IOException, SAXException {
         XMLReader reader = newXMLReader();
         reader.setContentHandler(contentHandler);
         InputSource source = new InputSource(in);
@@ -171,13 +177,15 @@ public class Xml {
         return xml;
     }
 
-    public static TypedXmlSerializer resolveSerializer$ravenwood(OutputStream out) throws IOException {
+    public static TypedXmlSerializer resolveSerializer$ravenwood(OutputStream out)
+            throws IOException {
         TypedXmlSerializer xml = new BinaryXmlSerializer();
         xml.setOutput(out, StandardCharsets.UTF_8.name());
         return xml;
     }
 
-    public static void copy(XmlPullParser in, XmlSerializer out) throws XmlPullParserException, IOException {
+    public static void copy(XmlPullParser in, XmlSerializer out)
+            throws XmlPullParserException, IOException {
         if (in.getEventType() == 0) {
             out.startDocument(in.getInputEncoding(), true);
         }
@@ -193,7 +201,10 @@ public class Xml {
                 case 2:
                     out.startTag(normalizeNamespace(in.getNamespace()), in.getName());
                     for (int i = 0; i < in.getAttributeCount(); i++) {
-                        out.attribute(normalizeNamespace(in.getAttributeNamespace(i)), in.getAttributeName(i), in.getAttributeValue(i));
+                        out.attribute(
+                                normalizeNamespace(in.getAttributeNamespace(i)),
+                                in.getAttributeName(i),
+                                in.getAttributeValue(i));
                     }
                     break;
                 case 3:
@@ -246,7 +257,8 @@ public class Xml {
         }
     }
 
-    public static Encoding findEncodingByName(String encodingName) throws UnsupportedEncodingException {
+    public static Encoding findEncodingByName(String encodingName)
+            throws UnsupportedEncodingException {
         if (encodingName == null) {
             return Encoding.UTF_8;
         }

@@ -9,19 +9,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SurfaceFreezerSnapshot implements Parcelable {
-    public static final Parcelable.Creator<SurfaceFreezerSnapshot> CREATOR = new Parcelable.Creator<SurfaceFreezerSnapshot>() { // from class: com.samsung.android.multiwindow.SurfaceFreezerSnapshot.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SurfaceFreezerSnapshot createFromParcel(Parcel source) {
-            return new SurfaceFreezerSnapshot(source);
-        }
+    public static final Parcelable.Creator<SurfaceFreezerSnapshot> CREATOR =
+            new Parcelable.Creator<
+                    SurfaceFreezerSnapshot>() { // from class:
+                                                // com.samsung.android.multiwindow.SurfaceFreezerSnapshot.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SurfaceFreezerSnapshot createFromParcel(Parcel source) {
+                    return new SurfaceFreezerSnapshot(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SurfaceFreezerSnapshot[] newArray(int size) {
-            return new SurfaceFreezerSnapshot[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SurfaceFreezerSnapshot[] newArray(int size) {
+                    return new SurfaceFreezerSnapshot[size];
+                }
+            };
     private static final String TAG = "SurfaceFreezerSnapshot";
     private final boolean mContainsSecureLayer;
     private final int mFreeformHeaderColor;
@@ -31,11 +34,30 @@ public class SurfaceFreezerSnapshot implements Parcelable {
     private final int mTaskId;
     private final Bitmap mWallpaperBitmap;
 
-    public SurfaceFreezerSnapshot(Bitmap snapshotBitmap, int taskId, boolean containsSecureLayer, boolean hasProtectedContent, Bitmap wallpaperBitmap) {
-        this(snapshotBitmap, taskId, containsSecureLayer, hasProtectedContent, wallpaperBitmap, 0, 0);
+    public SurfaceFreezerSnapshot(
+            Bitmap snapshotBitmap,
+            int taskId,
+            boolean containsSecureLayer,
+            boolean hasProtectedContent,
+            Bitmap wallpaperBitmap) {
+        this(
+                snapshotBitmap,
+                taskId,
+                containsSecureLayer,
+                hasProtectedContent,
+                wallpaperBitmap,
+                0,
+                0);
     }
 
-    public SurfaceFreezerSnapshot(Bitmap snapshotBitmap, int taskId, boolean containsSecureLayer, boolean hasProtectedContent, Bitmap wallpaperBitmap, int headerHeight, int headerColor) {
+    public SurfaceFreezerSnapshot(
+            Bitmap snapshotBitmap,
+            int taskId,
+            boolean containsSecureLayer,
+            boolean hasProtectedContent,
+            Bitmap wallpaperBitmap,
+            int headerHeight,
+            int headerColor) {
         this.mSnapshotBitmap = snapshotBitmap;
         this.mWallpaperBitmap = wallpaperBitmap;
         this.mTaskId = taskId;
@@ -85,10 +107,19 @@ public class SurfaceFreezerSnapshot implements Parcelable {
 
     public Bitmap createSnapshotBitmapWithWallpaper(int splitBackgroundColor) {
         if (this.mSnapshotBitmap == null || this.mWallpaperBitmap == null) {
-            Log.e(TAG, "createSnapshotBitmapWithWallpaper: failed, snapshot=" + this.mSnapshotBitmap + ", wallpaper=" + this.mWallpaperBitmap);
+            Log.e(
+                    TAG,
+                    "createSnapshotBitmapWithWallpaper: failed, snapshot="
+                            + this.mSnapshotBitmap
+                            + ", wallpaper="
+                            + this.mWallpaperBitmap);
             return null;
         }
-        Bitmap bitmap = Bitmap.createBitmap(this.mSnapshotBitmap.getWidth(), this.mSnapshotBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap bitmap =
+                Bitmap.createBitmap(
+                        this.mSnapshotBitmap.getWidth(),
+                        this.mSnapshotBitmap.getHeight(),
+                        Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawBitmap(this.mWallpaperBitmap, 0.0f, 0.0f, (Paint) null);
         canvas.drawColor(splitBackgroundColor);

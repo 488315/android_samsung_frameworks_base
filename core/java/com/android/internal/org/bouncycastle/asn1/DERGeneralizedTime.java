@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.IOException;
 import java.util.Date;
 
@@ -53,23 +54,27 @@ public class DERGeneralizedTime extends ASN1GeneralizedTime {
         return this.time;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1GeneralizedTime, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1GeneralizedTime,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     int encodedLength() {
         int length = getDERTime().length;
         return StreamUtil.calculateBodyLength(length) + 1 + length;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1GeneralizedTime, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1GeneralizedTime,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     void encode(ASN1OutputStream out, boolean withTag) throws IOException {
         out.writeEncoded(withTag, 24, getDERTime());
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1GeneralizedTime, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1GeneralizedTime,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDERObject() {
         return this;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1GeneralizedTime, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1GeneralizedTime,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDLObject() {
         return this;
     }

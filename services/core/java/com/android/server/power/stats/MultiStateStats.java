@@ -2,10 +2,12 @@ package com.android.server.power.stats;
 
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOutline0;
+
 import com.android.internal.os.LongArrayMultiStateCounter;
 import com.android.internal.util.Preconditions;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -46,7 +48,12 @@ public final class MultiStateStats {
                 States[] statesArr3 = this.mStates;
                 if (i3 >= statesArr3.length) {
                     if (i4 >= 31) {
-                        throw new IllegalArgumentException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i4, "Too many states: ", " bits are required to represent the composite state, but only 31 are available"));
+                        throw new IllegalArgumentException(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        i4,
+                                        "Too many states: ",
+                                        " bits are required to represent the composite state, but"
+                                            + " only 31 are available"));
                     }
                     int i5 = -1;
                     int i6 = 0;
@@ -77,7 +84,9 @@ public final class MultiStateStats {
                                     iArr2[i8] = i7;
                                     i7++;
                                 }
-                            } else if (((this.mStateBitFieldMasks[i9] & i8) >>> this.mStateBitFieldShifts[i9]) >= statesArr5[i9].mLabels.length) {
+                            } else if (((this.mStateBitFieldMasks[i9] & i8)
+                                            >>> this.mStateBitFieldShifts[i9])
+                                    >= statesArr5[i9].mLabels.length) {
                                 break;
                             } else {
                                 i9++;
@@ -89,7 +98,11 @@ public final class MultiStateStats {
                 this.mStateBitFieldShifts[i3] = (short) i4;
                 String[] strArr = statesArr3[i3].mLabels;
                 if (strArr.length < 2) {
-                    throw new IllegalArgumentException(AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder("Invalid state: "), Arrays.toString(this.mStates[i3].mLabels), ". Should have at least two values."));
+                    throw new IllegalArgumentException(
+                            AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("Invalid state: "),
+                                    Arrays.toString(this.mStates[i3].mLabels),
+                                    ". Should have at least two values."));
                 }
                 int numberOfLeadingZeros = 32 - Integer.numberOfLeadingZeros(strArr.length - 1);
                 this.mStateBitFieldMasks[i3] = ((1 << numberOfLeadingZeros) - 1) << i4;
@@ -102,13 +115,16 @@ public final class MultiStateStats {
             Preconditions.checkArgument(iArr.length == this.mStates.length);
             int i = 0;
             for (int i2 = 0; i2 < iArr.length; i2++) {
-                i = (i & (~this.mStateBitFieldMasks[i2])) | (iArr[i2] << this.mStateBitFieldShifts[i2]);
+                i =
+                        (i & (~this.mStateBitFieldMasks[i2]))
+                                | (iArr[i2] << this.mStateBitFieldShifts[i2]);
             }
             int i3 = this.mCompositeToSerialState[i];
             if (i3 != -1) {
                 return i3;
             }
-            throw new IllegalArgumentException("State values out of bounds: " + Arrays.toString(iArr));
+            throw new IllegalArgumentException(
+                    "State values out of bounds: " + Arrays.toString(iArr));
         }
 
         public int getSerialStateCount() {
@@ -137,7 +153,8 @@ public final class MultiStateStats {
             return -1;
         }
 
-        public static void forEachTrackedStateCombination(Consumer consumer, States[] statesArr, int[] iArr, int i) {
+        public static void forEachTrackedStateCombination(
+                Consumer consumer, States[] statesArr, int[] iArr, int i) {
             if (i >= iArr.length) {
                 consumer.accept(iArr);
                 return;
@@ -159,17 +176,17 @@ public final class MultiStateStats {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0115, code lost:
-    
-        return true;
-     */
+
+       return true;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:54:0x006c, code lost:
-    
-        android.util.Slog.e("MultiStateStats", "State index out of bounds: " + r10 + " length: " + r3);
-     */
+
+       android.util.Slog.e("MultiStateStats", "State index out of bounds: " + r10 + " length: " + r3);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:55:0x0085, code lost:
-    
-        return r7;
-     */
+
+       return r7;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r14v0 */
     /* JADX WARN: Type inference failed for: r14v1, types: [int] */
@@ -183,13 +200,16 @@ public final class MultiStateStats {
             Method dump skipped, instructions count: 278
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.MultiStateStats.readFromXml(com.android.modules.utils.TypedXmlPullParser):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.stats.MultiStateStats.readFromXml(com.android.modules.utils.TypedXmlPullParser):boolean");
     }
 
     public final void setState(int i, int i2, long j) {
         if (!this.mTracking) {
             LongArrayMultiStateCounter longArrayMultiStateCounter = this.mCounter;
-            longArrayMultiStateCounter.updateValues(new long[longArrayMultiStateCounter.getArrayLength()], j);
+            longArrayMultiStateCounter.updateValues(
+                    new long[longArrayMultiStateCounter.getArrayLength()], j);
             this.mTracking = true;
         }
         int i3 = this.mCompositeState;
@@ -203,7 +223,11 @@ public final class MultiStateStats {
         StringBuilder sb = new StringBuilder();
         long[] jArr = new long[this.mCounter.getArrayLength()];
         States[] statesArr = this.mFactory.mStates;
-        States.forEachTrackedStateCombination(new MultiStateStats$$ExternalSyntheticLambda0(this, jArr, sb), statesArr, new int[statesArr.length], 0);
+        States.forEachTrackedStateCombination(
+                new MultiStateStats$$ExternalSyntheticLambda0(this, jArr, sb),
+                statesArr,
+                new int[statesArr.length],
+                0);
         return sb.toString();
     }
 
@@ -211,7 +235,11 @@ public final class MultiStateStats {
         long[] jArr = new long[this.mCounter.getArrayLength()];
         try {
             States[] statesArr = this.mFactory.mStates;
-            States.forEachTrackedStateCombination(new MultiStateStats$$ExternalSyntheticLambda0(this, typedXmlSerializer, jArr), statesArr, new int[statesArr.length], 0);
+            States.forEachTrackedStateCombination(
+                    new MultiStateStats$$ExternalSyntheticLambda0(this, typedXmlSerializer, jArr),
+                    statesArr,
+                    new int[statesArr.length],
+                    0);
         } catch (RuntimeException e) {
             if (!(e.getCause() instanceof IOException)) {
                 throw e;
@@ -220,7 +248,8 @@ public final class MultiStateStats {
         }
     }
 
-    public final void writeXmlForStates(TypedXmlSerializer typedXmlSerializer, int[] iArr, long[] jArr) {
+    public final void writeXmlForStates(
+            TypedXmlSerializer typedXmlSerializer, int[] iArr, long[] jArr) {
         int i;
         LongArrayMultiStateCounter longArrayMultiStateCounter = this.mCounter;
         Factory factory = this.mFactory;
@@ -231,12 +260,16 @@ public final class MultiStateStats {
                 for (int i2 = 0; i2 < iArr.length; i2++) {
                     States states = factory.mStates[i2];
                     if (states.mTracked && (i = iArr[i2]) != 0) {
-                        typedXmlSerializer.attribute((String) null, states.mName, states.mLabels[i]);
+                        typedXmlSerializer.attribute(
+                                (String) null, states.mName, states.mLabels[i]);
                     }
                 }
                 for (int i3 = 0; i3 < jArr.length; i3++) {
                     if (jArr[i3] != 0) {
-                        typedXmlSerializer.attributeLong((String) null, VibrationParam$1$$ExternalSyntheticOutline0.m(i3, "_"), jArr[i3]);
+                        typedXmlSerializer.attributeLong(
+                                (String) null,
+                                VibrationParam$1$$ExternalSyntheticOutline0.m(i3, "_"),
+                                jArr[i3]);
                     }
                 }
                 typedXmlSerializer.endTag((String) null, "stats");

@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.ims.RcsContactUceCapability;
 import android.telephony.ims.SipDetails;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -21,16 +22,15 @@ public interface IRcsUceControllerCallback extends IInterface {
 
     public static class Default implements IRcsUceControllerCallback {
         @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
-        public void onCapabilitiesReceived(List<RcsContactUceCapability> contactCapabilities) throws RemoteException {
-        }
+        public void onCapabilitiesReceived(List<RcsContactUceCapability> contactCapabilities)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
-        public void onComplete(SipDetails details) throws RemoteException {
-        }
+        public void onComplete(SipDetails details) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
-        public void onError(int errorCode, long retryAfterMilliseconds, SipDetails details) throws RemoteException {
-        }
+        public void onError(int errorCode, long retryAfterMilliseconds, SipDetails details)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -38,7 +38,7 @@ public interface IRcsUceControllerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRcsUceControllerCallback {
+    public abstract static class Stub extends Binder implements IRcsUceControllerCallback {
         static final int TRANSACTION_onCapabilitiesReceived = 1;
         static final int TRANSACTION_onComplete = 2;
         static final int TRANSACTION_onError = 3;
@@ -82,7 +82,8 @@ public interface IRcsUceControllerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRcsUceControllerCallback.DESCRIPTOR);
             }
@@ -92,7 +93,8 @@ public interface IRcsUceControllerCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<RcsContactUceCapability> _arg0 = data.createTypedArrayList(RcsContactUceCapability.CREATOR);
+                    List<RcsContactUceCapability> _arg0 =
+                            data.createTypedArrayList(RcsContactUceCapability.CREATOR);
                     data.enforceNoDataAvail();
                     onCapabilitiesReceived(_arg0);
                     return true;
@@ -130,7 +132,8 @@ public interface IRcsUceControllerCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
-            public void onCapabilitiesReceived(List<RcsContactUceCapability> contactCapabilities) throws RemoteException {
+            public void onCapabilitiesReceived(List<RcsContactUceCapability> contactCapabilities)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRcsUceControllerCallback.DESCRIPTOR);
@@ -154,7 +157,8 @@ public interface IRcsUceControllerCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
-            public void onError(int errorCode, long retryAfterMilliseconds, SipDetails details) throws RemoteException {
+            public void onError(int errorCode, long retryAfterMilliseconds, SipDetails details)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRcsUceControllerCallback.DESCRIPTOR);

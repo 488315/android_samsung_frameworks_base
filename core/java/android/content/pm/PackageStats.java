@@ -4,24 +4,27 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
 import android.text.TextUtils;
+
 import java.util.Objects;
 
 @Deprecated
 /* loaded from: classes.dex */
 public class PackageStats implements Parcelable {
-    public static final Parcelable.Creator<PackageStats> CREATOR = new Parcelable.Creator<PackageStats>() { // from class: android.content.pm.PackageStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageStats createFromParcel(Parcel in) {
-            return new PackageStats(in);
-        }
+    public static final Parcelable.Creator<PackageStats> CREATOR =
+            new Parcelable.Creator<
+                    PackageStats>() { // from class: android.content.pm.PackageStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageStats createFromParcel(Parcel in) {
+                    return new PackageStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageStats[] newArray(int size) {
-            return new PackageStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageStats[] newArray(int size) {
+                    return new PackageStats[size];
+                }
+            };
     public long apkSize;
     public long cacheSize;
     public long codeSize;
@@ -182,10 +185,41 @@ public class PackageStats implements Parcelable {
             return false;
         }
         PackageStats otherStats = (PackageStats) obj;
-        return TextUtils.equals(this.packageName, otherStats.packageName) && this.userHandle == otherStats.userHandle && this.codeSize == otherStats.codeSize && this.dataSize == otherStats.dataSize && this.cacheSize == otherStats.cacheSize && this.apkSize == otherStats.apkSize && this.libSize == otherStats.libSize && this.dmSize == otherStats.dmSize && this.dexoptSize == otherStats.dexoptSize && this.curProfSize == otherStats.curProfSize && this.refProfSize == otherStats.refProfSize && this.externalCodeSize == otherStats.externalCodeSize && this.externalDataSize == otherStats.externalDataSize && this.externalCacheSize == otherStats.externalCacheSize && this.externalMediaSize == otherStats.externalMediaSize && this.externalObbSize == otherStats.externalObbSize;
+        return TextUtils.equals(this.packageName, otherStats.packageName)
+                && this.userHandle == otherStats.userHandle
+                && this.codeSize == otherStats.codeSize
+                && this.dataSize == otherStats.dataSize
+                && this.cacheSize == otherStats.cacheSize
+                && this.apkSize == otherStats.apkSize
+                && this.libSize == otherStats.libSize
+                && this.dmSize == otherStats.dmSize
+                && this.dexoptSize == otherStats.dexoptSize
+                && this.curProfSize == otherStats.curProfSize
+                && this.refProfSize == otherStats.refProfSize
+                && this.externalCodeSize == otherStats.externalCodeSize
+                && this.externalDataSize == otherStats.externalDataSize
+                && this.externalCacheSize == otherStats.externalCacheSize
+                && this.externalMediaSize == otherStats.externalMediaSize
+                && this.externalObbSize == otherStats.externalObbSize;
     }
 
     public int hashCode() {
-        return Objects.hash(this.packageName, Integer.valueOf(this.userHandle), Long.valueOf(this.codeSize), Long.valueOf(this.dataSize), Long.valueOf(this.apkSize), Long.valueOf(this.libSize), Long.valueOf(this.dmSize), Long.valueOf(this.dexoptSize), Long.valueOf(this.curProfSize), Long.valueOf(this.refProfSize), Long.valueOf(this.cacheSize), Long.valueOf(this.externalCodeSize), Long.valueOf(this.externalDataSize), Long.valueOf(this.externalCacheSize), Long.valueOf(this.externalMediaSize), Long.valueOf(this.externalObbSize));
+        return Objects.hash(
+                this.packageName,
+                Integer.valueOf(this.userHandle),
+                Long.valueOf(this.codeSize),
+                Long.valueOf(this.dataSize),
+                Long.valueOf(this.apkSize),
+                Long.valueOf(this.libSize),
+                Long.valueOf(this.dmSize),
+                Long.valueOf(this.dexoptSize),
+                Long.valueOf(this.curProfSize),
+                Long.valueOf(this.refProfSize),
+                Long.valueOf(this.cacheSize),
+                Long.valueOf(this.externalCodeSize),
+                Long.valueOf(this.externalDataSize),
+                Long.valueOf(this.externalCacheSize),
+                Long.valueOf(this.externalMediaSize),
+                Long.valueOf(this.externalObbSize));
     }
 }

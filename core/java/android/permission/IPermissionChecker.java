@@ -14,24 +14,50 @@ public interface IPermissionChecker extends IInterface {
     public static final int PERMISSION_HARD_DENIED = 2;
     public static final int PERMISSION_SOFT_DENIED = 1;
 
-    int checkOp(int i, AttributionSourceState attributionSourceState, String str, boolean z, boolean z2) throws RemoteException;
+    int checkOp(
+            int i, AttributionSourceState attributionSourceState, String str, boolean z, boolean z2)
+            throws RemoteException;
 
-    int checkPermission(String str, AttributionSourceState attributionSourceState, String str2, boolean z, boolean z2, boolean z3, int i) throws RemoteException;
+    int checkPermission(
+            String str,
+            AttributionSourceState attributionSourceState,
+            String str2,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            int i)
+            throws RemoteException;
 
-    void finishDataDelivery(int i, AttributionSourceState attributionSourceState, boolean z) throws RemoteException;
+    void finishDataDelivery(int i, AttributionSourceState attributionSourceState, boolean z)
+            throws RemoteException;
 
     public static class Default implements IPermissionChecker {
         @Override // android.permission.IPermissionChecker
-        public int checkPermission(String permission, AttributionSourceState attributionSource, String message, boolean forDataDelivery, boolean startDataDelivery, boolean fromDatasource, int attributedOp) throws RemoteException {
+        public int checkPermission(
+                String permission,
+                AttributionSourceState attributionSource,
+                String message,
+                boolean forDataDelivery,
+                boolean startDataDelivery,
+                boolean fromDatasource,
+                int attributedOp)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.permission.IPermissionChecker
-        public void finishDataDelivery(int op, AttributionSourceState attributionSource, boolean fromDatasource) throws RemoteException {
-        }
+        public void finishDataDelivery(
+                int op, AttributionSourceState attributionSource, boolean fromDatasource)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionChecker
-        public int checkOp(int op, AttributionSourceState attributionSource, String message, boolean forDataDelivery, boolean startDataDelivery) throws RemoteException {
+        public int checkOp(
+                int op,
+                AttributionSourceState attributionSource,
+                String message,
+                boolean forDataDelivery,
+                boolean startDataDelivery)
+                throws RemoteException {
             return 0;
         }
 
@@ -41,7 +67,7 @@ public interface IPermissionChecker extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPermissionChecker {
+    public abstract static class Stub extends Binder implements IPermissionChecker {
         static final int TRANSACTION_checkOp = 3;
         static final int TRANSACTION_checkPermission = 1;
         static final int TRANSACTION_finishDataDelivery = 2;
@@ -67,7 +93,8 @@ public interface IPermissionChecker extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPermissionChecker.DESCRIPTOR);
             }
@@ -78,7 +105,9 @@ public interface IPermissionChecker extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    AttributionSourceState _arg1 = (AttributionSourceState) data.readTypedObject(AttributionSourceState.CREATOR);
+                    AttributionSourceState _arg1 =
+                            (AttributionSourceState)
+                                    data.readTypedObject(AttributionSourceState.CREATOR);
                     String _arg2 = data.readString();
                     boolean _arg3 = data.readBoolean();
                     boolean _arg4 = data.readBoolean();
@@ -91,7 +120,9 @@ public interface IPermissionChecker extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    AttributionSourceState _arg12 = (AttributionSourceState) data.readTypedObject(AttributionSourceState.CREATOR);
+                    AttributionSourceState _arg12 =
+                            (AttributionSourceState)
+                                    data.readTypedObject(AttributionSourceState.CREATOR);
                     boolean _arg22 = data.readBoolean();
                     data.enforceNoDataAvail();
                     finishDataDelivery(_arg02, _arg12, _arg22);
@@ -99,7 +130,9 @@ public interface IPermissionChecker extends IInterface {
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    AttributionSourceState _arg13 = (AttributionSourceState) data.readTypedObject(AttributionSourceState.CREATOR);
+                    AttributionSourceState _arg13 =
+                            (AttributionSourceState)
+                                    data.readTypedObject(AttributionSourceState.CREATOR);
                     String _arg23 = data.readString();
                     boolean _arg32 = data.readBoolean();
                     boolean _arg42 = data.readBoolean();
@@ -130,7 +163,15 @@ public interface IPermissionChecker extends IInterface {
             }
 
             @Override // android.permission.IPermissionChecker
-            public int checkPermission(String permission, AttributionSourceState attributionSource, String message, boolean forDataDelivery, boolean startDataDelivery, boolean fromDatasource, int attributedOp) throws RemoteException {
+            public int checkPermission(
+                    String permission,
+                    AttributionSourceState attributionSource,
+                    String message,
+                    boolean forDataDelivery,
+                    boolean startDataDelivery,
+                    boolean fromDatasource,
+                    int attributedOp)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -153,7 +194,9 @@ public interface IPermissionChecker extends IInterface {
             }
 
             @Override // android.permission.IPermissionChecker
-            public void finishDataDelivery(int op, AttributionSourceState attributionSource, boolean fromDatasource) throws RemoteException {
+            public void finishDataDelivery(
+                    int op, AttributionSourceState attributionSource, boolean fromDatasource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -170,7 +213,13 @@ public interface IPermissionChecker extends IInterface {
             }
 
             @Override // android.permission.IPermissionChecker
-            public int checkOp(int op, AttributionSourceState attributionSource, String message, boolean forDataDelivery, boolean startDataDelivery) throws RemoteException {
+            public int checkOp(
+                    int op,
+                    AttributionSourceState attributionSource,
+                    String message,
+                    boolean forDataDelivery,
+                    boolean startDataDelivery)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

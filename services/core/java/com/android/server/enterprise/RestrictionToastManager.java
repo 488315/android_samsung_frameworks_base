@@ -9,6 +9,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,16 +27,27 @@ public abstract class RestrictionToastManager {
             int i = message.what;
             if (i == 1) {
                 RestrictionToastManager.mRecentlyDisplayedMsgQueue.remove(message.obj);
-                Log.d("RestrictionToastManager", "Removed message from recently displayed queue: " + message);
+                Log.d(
+                        "RestrictionToastManager",
+                        "Removed message from recently displayed queue: " + message);
                 return;
             }
-            if (i != 2 || (string = message.getData().getString("message")) == null || RestrictionToastManager.mContext == null) {
+            if (i != 2
+                    || (string = message.getData().getString("message")) == null
+                    || RestrictionToastManager.mContext == null) {
                 return;
             }
             try {
-                Toast.makeText(new ContextThemeWrapper(RestrictionToastManager.mContext, R.style.Theme.DeviceDefault.Light), string, 1).show();
+                Toast.makeText(
+                                new ContextThemeWrapper(
+                                        RestrictionToastManager.mContext,
+                                        R.style.Theme.DeviceDefault.Light),
+                                string,
+                                1)
+                        .show();
             } catch (Exception e) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("displayToast fail : "), "RestrictionToastManager");
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("displayToast fail : "), "RestrictionToastManager");
             }
         }
     }
@@ -48,7 +60,9 @@ public abstract class RestrictionToastManager {
         try {
             show(context.getString(i));
         } catch (Resources.NotFoundException unused) {
-            Log.e("RestrictionToastManager", "Resource Id not found: will not display any restriction message toast");
+            Log.e(
+                    "RestrictionToastManager",
+                    "Resource Id not found: will not display any restriction message toast");
         }
     }
 
@@ -67,8 +81,11 @@ public abstract class RestrictionToastManager {
                     message.what = 2;
                     mRestrictionToastHandler.sendMessage(message);
                     arrayList.add(str);
-                    Log.d("RestrictionToastManager", "Added message to recently displayed queue: ".concat(str));
-                    mRestrictionToastHandler.sendMessageDelayed(Message.obtain(mRestrictionToastHandler, 1, str), 3500L);
+                    Log.d(
+                            "RestrictionToastManager",
+                            "Added message to recently displayed queue: ".concat(str));
+                    mRestrictionToastHandler.sendMessageDelayed(
+                            Message.obtain(mRestrictionToastHandler, 1, str), 3500L);
                 }
             }
         }

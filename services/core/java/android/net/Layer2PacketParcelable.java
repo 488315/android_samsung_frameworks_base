@@ -5,6 +5,7 @@ import android.hardware.broadcastradio.AmFmBandRange$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -81,7 +82,8 @@ public class Layer2PacketParcelable implements Parcelable {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         stringJoiner.add("dstMacAddress: " + Objects.toString(this.dstMacAddress));
         stringJoiner.add("payload: " + Arrays.toString(this.payload));
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, new StringBuilder("Layer2PacketParcelable"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner, new StringBuilder("Layer2PacketParcelable"));
     }
 
     @Override // android.os.Parcelable
@@ -92,6 +94,7 @@ public class Layer2PacketParcelable implements Parcelable {
         parcel.writeByteArray(this.payload);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

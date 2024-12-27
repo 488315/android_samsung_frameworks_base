@@ -5,13 +5,15 @@ import com.android.internal.org.bouncycastle.asn1.x509.X509ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.crypto.DSAExt;
 import com.android.internal.org.bouncycastle.crypto.Digest;
 import com.android.internal.org.bouncycastle.crypto.signers.DSAEncoding;
+
 import java.math.BigInteger;
 import java.security.SignatureException;
 import java.security.SignatureSpi;
 import java.security.spec.AlgorithmParameterSpec;
 
 /* loaded from: classes5.dex */
-public abstract class DSABase extends SignatureSpi implements PKCSObjectIdentifiers, X509ObjectIdentifiers {
+public abstract class DSABase extends SignatureSpi
+        implements PKCSObjectIdentifiers, X509ObjectIdentifiers {
     protected Digest digest;
     protected DSAEncoding encoding;
     protected DSAExt signer;

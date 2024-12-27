@@ -4,12 +4,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.NtpTrustedTime;
 import android.view.View;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes5.dex */
 public final class InputMethodDebug {
-    private InputMethodDebug() {
-    }
+    private InputMethodDebug() {}
 
     public static String startInputReasonToString(int reason) {
         switch (reason) {

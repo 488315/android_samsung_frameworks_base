@@ -4,9 +4,11 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.desktopmode.DockManager;
+
 import com.att.iqi.lib.metrics.hw.HwConstants;
 import com.samsung.android.lib.dexcontrol.fancontrol.DexFanControlManager;
 import com.samsung.android.lib.dexcontrol.model.common.FanControlModel;
@@ -18,6 +20,7 @@ import com.samsung.android.lib.dexcontrol.uvdm.response.IResponseListener;
 import com.samsung.android.lib.dexcontrol.uvdm.response.ResponseResult;
 import com.samsung.android.lib.dexcontrol.uvdm.sender.UvdmLongTypeSender;
 import com.samsung.android.lib.dexcontrol.uvdm.sender.UvdmSendExecutor;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Locale;
@@ -54,47 +57,49 @@ public final class DexPad extends FanControlModel {
         this.mCurrentFanLevel = 0;
         this.mFanRetryCnt = 0;
         this.reTryPowerChargerInfoRequestCount = 1;
-        IResponseListener iResponseListener = new IResponseListener() { // from class: com.samsung.android.lib.dexcontrol.model.dexpad.DexPad.1
-            @Override // com.samsung.android.lib.dexcontrol.uvdm.response.IResponseListener
-            public final void onFail(int i, ResponseResult responseResult) {
-                SLog.e("DexPad", "onFail : " + i);
-                DexPad dexPad = DexPad.this;
-                AnonymousClass2 anonymousClass2 = dexPad.mInternalHandler;
-                if (anonymousClass2 != null) {
-                    Message obtainMessage = anonymousClass2.obtainMessage(1);
-                    obtainMessage.obj = responseResult.mData.clone();
-                    obtainMessage.arg1 = i;
-                    dexPad.mInternalHandler.sendMessage(obtainMessage);
-                    responseResult.mData = null;
-                    if (dexPad.DexUNNumber == null) {
-                        dexPad.mError.count(i);
-                        return;
-                    }
-                    if (i == -3) {
-                        String.valueOf(true);
-                    } else if (i == -2) {
-                        String.valueOf(true);
-                    } else {
-                        if (i != -1) {
-                            return;
+        IResponseListener iResponseListener =
+                new IResponseListener() { // from class:
+                                          // com.samsung.android.lib.dexcontrol.model.dexpad.DexPad.1
+                    @Override // com.samsung.android.lib.dexcontrol.uvdm.response.IResponseListener
+                    public final void onFail(int i, ResponseResult responseResult) {
+                        SLog.e("DexPad", "onFail : " + i);
+                        DexPad dexPad = DexPad.this;
+                        AnonymousClass2 anonymousClass2 = dexPad.mInternalHandler;
+                        if (anonymousClass2 != null) {
+                            Message obtainMessage = anonymousClass2.obtainMessage(1);
+                            obtainMessage.obj = responseResult.mData.clone();
+                            obtainMessage.arg1 = i;
+                            dexPad.mInternalHandler.sendMessage(obtainMessage);
+                            responseResult.mData = null;
+                            if (dexPad.DexUNNumber == null) {
+                                dexPad.mError.count(i);
+                                return;
+                            }
+                            if (i == -3) {
+                                String.valueOf(true);
+                            } else if (i == -2) {
+                                String.valueOf(true);
+                            } else {
+                                if (i != -1) {
+                                    return;
+                                }
+                                String.valueOf(true);
+                            }
                         }
-                        String.valueOf(true);
                     }
-                }
-            }
 
-            @Override // com.samsung.android.lib.dexcontrol.uvdm.response.IResponseListener
-            public final void onSuccess(ResponseResult responseResult) {
-                DexPad dexPad = DexPad.this;
-                AnonymousClass2 anonymousClass2 = dexPad.mInternalHandler;
-                if (anonymousClass2 != null) {
-                    Message obtainMessage = anonymousClass2.obtainMessage(0);
-                    obtainMessage.obj = responseResult.mData.clone();
-                    dexPad.mInternalHandler.sendMessage(obtainMessage);
-                    responseResult.mData = null;
-                }
-            }
-        };
+                    @Override // com.samsung.android.lib.dexcontrol.uvdm.response.IResponseListener
+                    public final void onSuccess(ResponseResult responseResult) {
+                        DexPad dexPad = DexPad.this;
+                        AnonymousClass2 anonymousClass2 = dexPad.mInternalHandler;
+                        if (anonymousClass2 != null) {
+                            Message obtainMessage = anonymousClass2.obtainMessage(0);
+                            obtainMessage.obj = responseResult.mData.clone();
+                            dexPad.mInternalHandler.sendMessage(obtainMessage);
+                            responseResult.mData = null;
+                        }
+                    }
+                };
         this.mFastChargingStatus = false;
         this.mFastChargingRetryCnt = 0;
         this.mControlResponseListener = anonymousClass3;
@@ -112,124 +117,150 @@ public final class DexPad extends FanControlModel {
             anonymousClass2.removeCallbacksAndMessages(null);
             this.mInternalHandler = null;
         }
-        this.mInternalHandler = new Handler(this.mHandlerThread.getLooper()) { // from class: com.samsung.android.lib.dexcontrol.model.dexpad.DexPad.2
-            @Override // android.os.Handler
-            public final void handleMessage(Message message) {
-                if (message != null) {
-                    SLog.d("DexPad", "handleMessage : " + message.what);
-                    int i = message.what;
-                    DexPad dexPad = DexPad.this;
-                    switch (i) {
-                        case 0:
-                            byte[] bArr = (byte[]) message.obj;
-                            SLog.i("DexPad", Util.byteArrayToHex(bArr));
-                            try {
-                                DexPad.access$700(dexPad, bArr);
-                                break;
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        case 1:
-                            byte[] bArr2 = (byte[]) message.obj;
-                            dexPad.getClass();
-                            SLog.e("DexPad", "handleOnFailResult : " + Util.byteArrayToHex(bArr2));
-                            if (bArr2.length > 1) {
-                                byte b = bArr2[0];
-                                if (b == -80) {
-                                    if (bArr2[1] == 16) {
-                                        SLog.e("DexPad", "TYPE_CHARGING_CONTROL - COMMAND_CHARGER_TYPE_REQUEST");
-                                        dexPad.notifyFailedError(-3);
+        this.mInternalHandler =
+                new Handler(this.mHandlerThread.getLooper()) { // from class:
+                    // com.samsung.android.lib.dexcontrol.model.dexpad.DexPad.2
+                    @Override // android.os.Handler
+                    public final void handleMessage(Message message) {
+                        if (message != null) {
+                            SLog.d("DexPad", "handleMessage : " + message.what);
+                            int i = message.what;
+                            DexPad dexPad = DexPad.this;
+                            switch (i) {
+                                case 0:
+                                    byte[] bArr = (byte[]) message.obj;
+                                    SLog.i("DexPad", Util.byteArrayToHex(bArr));
+                                    try {
+                                        DexPad.access$700(dexPad, bArr);
                                         break;
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                case 1:
+                                    byte[] bArr2 = (byte[]) message.obj;
+                                    dexPad.getClass();
+                                    SLog.e(
+                                            "DexPad",
+                                            "handleOnFailResult : " + Util.byteArrayToHex(bArr2));
+                                    if (bArr2.length > 1) {
+                                        byte b = bArr2[0];
+                                        if (b == -80) {
+                                            if (bArr2[1] == 16) {
+                                                SLog.e(
+                                                        "DexPad",
+                                                        "TYPE_CHARGING_CONTROL -"
+                                                            + " COMMAND_CHARGER_TYPE_REQUEST");
+                                                dexPad.notifyFailedError(-3);
+                                                break;
+                                            } else {
+                                                SLog.e(
+                                                        "DexPad",
+                                                        "TYPE_CHARGING_CONTROL - Not in Case");
+                                                break;
+                                            }
+                                        } else if (b == 2) {
+                                            SLog.e("DexPad", "TYPE_FAN_CONTROL");
+                                            break;
+                                        } else if (b == 3) {
+                                            byte b2 = bArr2[1];
+                                            if (b2 == 1) {
+                                                SLog.e(
+                                                        "DexPad",
+                                                        "TYPE_CHARGING_CONTROL -"
+                                                            + " COMMAND_CHARGING_CONTROL_REQUEST");
+                                                dexPad.notifyFailedError(-1);
+                                                break;
+                                            } else if (b2 == 16) {
+                                                SLog.e(
+                                                        "DexPad",
+                                                        "TYPE_CHARGING_CONTROL -"
+                                                            + " COMMAND_CURRENT_CHARGING_MODE_REQUEST");
+                                                dexPad.notifyFailedError(-2);
+                                                break;
+                                            } else {
+                                                SLog.e(
+                                                        "DexPad",
+                                                        "TYPE_CHARGING_CONTROL - Not in Case");
+                                                break;
+                                            }
+                                        } else {
+                                            SLog.e("DexPad", "Not in Case");
+                                            break;
+                                        }
                                     } else {
-                                        SLog.e("DexPad", "TYPE_CHARGING_CONTROL - Not in Case");
+                                        SLog.e(
+                                                "DexPad",
+                                                "message is wrong format : "
+                                                        + Util.byteArrayToHex(bArr2));
                                         break;
                                     }
-                                } else if (b == 2) {
-                                    SLog.e("DexPad", "TYPE_FAN_CONTROL");
+                                case 2:
+                                    dexPad.requestConnectedPowerChargerInfoUpdate();
                                     break;
-                                } else if (b == 3) {
-                                    byte b2 = bArr2[1];
-                                    if (b2 == 1) {
-                                        SLog.e("DexPad", "TYPE_CHARGING_CONTROL - COMMAND_CHARGING_CONTROL_REQUEST");
-                                        dexPad.notifyFailedError(-1);
-                                        break;
-                                    } else if (b2 == 16) {
-                                        SLog.e("DexPad", "TYPE_CHARGING_CONTROL - COMMAND_CURRENT_CHARGING_MODE_REQUEST");
-                                        dexPad.notifyFailedError(-2);
+                                case 3:
+                                    boolean z = dexPad.mFastChargingStatus;
+                                    SLog.d("DexPad", "setFastChargingEnable - " + z);
+                                    dexPad.mFastChargingStatus = z;
+                                    UvdmSendExecutor uvdmSendExecutor = dexPad.mMessageSender;
+                                    if (uvdmSendExecutor == null) {
+                                        SLog.d("DexPad", "mMessageSender null");
+                                        dexPad.notifyFailedError(-7);
                                         break;
                                     } else {
-                                        SLog.e("DexPad", "TYPE_CHARGING_CONTROL - Not in Case");
+                                        uvdmSendExecutor.send(
+                                                700, new byte[] {3, 1, z ? (byte) 1 : (byte) 0});
                                         break;
                                     }
-                                } else {
-                                    SLog.e("DexPad", "Not in Case");
+                                case 4:
+                                    int i2 = dexPad.mCurrentFanLevel;
+                                    SLog.d("DexPad", "controlDexFanLevel " + i2);
+                                    if (i2 >= 0 && dexPad.mFanLevel4Gsim != i2) {
+                                        GsimcLogger.insertLog(
+                                                dexPad.mContext, "2FAN", String.valueOf(i2));
+                                        dexPad.mFanLevel4Gsim = i2;
+                                    }
+                                    UvdmSendExecutor uvdmSendExecutor2 = dexPad.mMessageSender;
+                                    if (uvdmSendExecutor2 == null) {
+                                        SLog.d("DexPad", "mMessageSender null");
+                                        dexPad.notifyFailedError(-7);
+                                        break;
+                                    } else {
+                                        uvdmSendExecutor2.send(700, new byte[] {2, 1, (byte) i2});
+                                        break;
+                                    }
                                     break;
-                                }
-                            } else {
-                                SLog.e("DexPad", "message is wrong format : " + Util.byteArrayToHex(bArr2));
-                                break;
+                                case 5:
+                                    dexPad.getClass();
+                                    SLog.d("DexPad", "requestCurrentFanLevelUpdate");
+                                    UvdmSendExecutor uvdmSendExecutor3 = dexPad.mMessageSender;
+                                    if (uvdmSendExecutor3 == null) {
+                                        SLog.d("DexPad", "mMessageSender null");
+                                        dexPad.notifyFailedError(-7);
+                                        break;
+                                    } else {
+                                        uvdmSendExecutor3.send(
+                                                500,
+                                                new byte[] {
+                                                    2, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED
+                                                });
+                                        break;
+                                    }
+                                case 6:
+                                    dexPad.getClass();
+                                    SLog.d("DexPad", "requestUniqueNumber");
+                                    UvdmSendExecutor uvdmSendExecutor4 = dexPad.mMessageSender;
+                                    if (uvdmSendExecutor4 == null) {
+                                        SLog.d("DexPad", "mMessageSender null");
+                                        dexPad.notifyFailedError(-7);
+                                        break;
+                                    } else {
+                                        uvdmSendExecutor4.send(500, new byte[] {-80, 0});
+                                        break;
+                                    }
                             }
-                        case 2:
-                            dexPad.requestConnectedPowerChargerInfoUpdate();
-                            break;
-                        case 3:
-                            boolean z = dexPad.mFastChargingStatus;
-                            SLog.d("DexPad", "setFastChargingEnable - " + z);
-                            dexPad.mFastChargingStatus = z;
-                            UvdmSendExecutor uvdmSendExecutor = dexPad.mMessageSender;
-                            if (uvdmSendExecutor == null) {
-                                SLog.d("DexPad", "mMessageSender null");
-                                dexPad.notifyFailedError(-7);
-                                break;
-                            } else {
-                                uvdmSendExecutor.send(700, new byte[]{3, 1, z ? (byte) 1 : (byte) 0});
-                                break;
-                            }
-                        case 4:
-                            int i2 = dexPad.mCurrentFanLevel;
-                            SLog.d("DexPad", "controlDexFanLevel " + i2);
-                            if (i2 >= 0 && dexPad.mFanLevel4Gsim != i2) {
-                                GsimcLogger.insertLog(dexPad.mContext, "2FAN", String.valueOf(i2));
-                                dexPad.mFanLevel4Gsim = i2;
-                            }
-                            UvdmSendExecutor uvdmSendExecutor2 = dexPad.mMessageSender;
-                            if (uvdmSendExecutor2 == null) {
-                                SLog.d("DexPad", "mMessageSender null");
-                                dexPad.notifyFailedError(-7);
-                                break;
-                            } else {
-                                uvdmSendExecutor2.send(700, new byte[]{2, 1, (byte) i2});
-                                break;
-                            }
-                            break;
-                        case 5:
-                            dexPad.getClass();
-                            SLog.d("DexPad", "requestCurrentFanLevelUpdate");
-                            UvdmSendExecutor uvdmSendExecutor3 = dexPad.mMessageSender;
-                            if (uvdmSendExecutor3 == null) {
-                                SLog.d("DexPad", "mMessageSender null");
-                                dexPad.notifyFailedError(-7);
-                                break;
-                            } else {
-                                uvdmSendExecutor3.send(500, new byte[]{2, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED});
-                                break;
-                            }
-                        case 6:
-                            dexPad.getClass();
-                            SLog.d("DexPad", "requestUniqueNumber");
-                            UvdmSendExecutor uvdmSendExecutor4 = dexPad.mMessageSender;
-                            if (uvdmSendExecutor4 == null) {
-                                SLog.d("DexPad", "mMessageSender null");
-                                dexPad.notifyFailedError(-7);
-                                break;
-                            } else {
-                                uvdmSendExecutor4.send(500, new byte[]{-80, 0});
-                                break;
-                            }
+                        }
                     }
-                }
-            }
-        };
+                };
         SLog.d("DexPad", "destroyMessageSender : " + this.mMessageSender);
         UvdmSendExecutor uvdmSendExecutor = this.mMessageSender;
         if (uvdmSendExecutor != null) {
@@ -267,7 +298,9 @@ public final class DexPad extends FanControlModel {
                         dexPad.mIsFastChargingEnabled = bArr[3] != 0;
                         return;
                     } else {
-                        SLog.e("DexPad", "COMMAND_CURRENT_CHARGING_MODE_REPONSE NAK : " + ((int) bArr[3]));
+                        SLog.e(
+                                "DexPad",
+                                "COMMAND_CURRENT_CHARGING_MODE_REPONSE NAK : " + ((int) bArr[3]));
                         return;
                     }
                 }
@@ -292,14 +325,18 @@ public final class DexPad extends FanControlModel {
                     SLog.d("DexPad", "requestChargingModeUpdate");
                     UvdmSendExecutor uvdmSendExecutor = dexPad.mMessageSender;
                     if (uvdmSendExecutor != null) {
-                        uvdmSendExecutor.send(500, new byte[]{3, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED});
+                        uvdmSendExecutor.send(
+                                500, new byte[] {3, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED});
                     } else {
                         SLog.d("DexPad", "mMessageSender null");
                         dexPad.notifyFailedError(-7);
                     }
                 } else {
                     dexPad.mIsFastChargingEnabled = bArr[3] != 0;
-                    SLog.d("DexPad", "COMMAND_CHARGING_CONTROL_RESPONSE ACK - enable = " + dexPad.mIsFastChargingEnabled);
+                    SLog.d(
+                            "DexPad",
+                            "COMMAND_CHARGING_CONTROL_RESPONSE ACK - enable = "
+                                    + dexPad.mIsFastChargingEnabled);
                 }
                 dexPad.mFastChargingRetryCnt = 0;
                 return;
@@ -315,7 +352,9 @@ public final class DexPad extends FanControlModel {
                     dexPad.updateResponsedFanLevel(bArr[3]);
                     return;
                 } else {
-                    SLog.e("DexPad", "COMMAND_CURRENT_FAN_STATUS_RESPONSE NAK : " + ((int) bArr[3]));
+                    SLog.e(
+                            "DexPad",
+                            "COMMAND_CURRENT_FAN_STATUS_RESPONSE NAK : " + ((int) bArr[3]));
                     return;
                 }
             }
@@ -360,14 +399,19 @@ public final class DexPad extends FanControlModel {
         byte b6 = bArr[1];
         if (b6 == 0) {
             if (bArr[2] != 0) {
-                SLog.e("DexPad", "handleBigDataResponse - COMMAND_UN_NUMBER_RESPONSE NAK : " + ((int) bArr[3]));
+                SLog.e(
+                        "DexPad",
+                        "handleBigDataResponse - COMMAND_UN_NUMBER_RESPONSE NAK : "
+                                + ((int) bArr[3]));
                 return;
             }
             try {
                 dexPad.DexUNNumber = new String(Arrays.copyOfRange(bArr, 3, bArr.length), "UTF-8");
-                SLog.d("DexPad", "handleBigDataResponse - COMMAND_UN_NUMBER_RESPONSE ACK : " + dexPad.DexUNNumber);
-                if (dexPad.mCharger_Power_Value > 0) {
-                }
+                SLog.d(
+                        "DexPad",
+                        "handleBigDataResponse - COMMAND_UN_NUMBER_RESPONSE ACK : "
+                                + dexPad.DexUNNumber);
+                if (dexPad.mCharger_Power_Value > 0) {}
                 ErrorData errorData = dexPad.mError;
                 if (errorData != null) {
                     if (errorData.mDexFanErrorCntr > 0) {
@@ -411,22 +455,32 @@ public final class DexPad extends FanControlModel {
                 dexPad.mCharger_Power_Value = b7;
                 byte b8 = bArr[3];
                 dexPad.mCharger_Type_Value = b8;
-                String str = b7 <= 10 ? "1" : b7 <= 15 ? "2" : b7 <= 24 ? "3" : b7 <= 100 ? "4" : null;
+                String str =
+                        b7 <= 10 ? "1" : b7 <= 15 ? "2" : b7 <= 24 ? "3" : b7 <= 100 ? "4" : null;
                 if (b8 == 0) {
                     dexPad.mCharger_Power_Value = 0;
                 } else {
                     Context context = dexPad.mContext;
                     StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m(str);
-                    m.append((String) dexPad.mTATypeMap.get(Integer.valueOf(dexPad.mCharger_Type_Value)));
+                    m.append(
+                            (String)
+                                    dexPad.mTATypeMap.get(
+                                            Integer.valueOf(dexPad.mCharger_Type_Value)));
                     GsimcLogger.insertLog(context, "2TAT", m.toString());
-                    if (dexPad.DexUNNumber != null) {
-                    }
+                    if (dexPad.DexUNNumber != null) {}
                     int i5 = dexPad.mCharger_Type_Value;
                     i = (i5 == 1 ? dexPad.mCharger_Power_Value < 15 : i5 != 5) ? 1 : 2;
                     dexPad.sendFanControlCheckChargerFastCharging();
                 }
             }
-            SLog.d("DexPad", "handleChargerType -  Power : " + dexPad.mCharger_Power_Value + "  Type : " + dexPad.mCharger_Type_Value + "  FastCharging Support : " + i);
+            SLog.d(
+                    "DexPad",
+                    "handleChargerType -  Power : "
+                            + dexPad.mCharger_Power_Value
+                            + "  Type : "
+                            + dexPad.mCharger_Type_Value
+                            + "  FastCharging Support : "
+                            + i);
             DockManager.AnonymousClass3 anonymousClass3 = dexPad.mControlResponseListener;
             if (anonymousClass3 != null) {
                 int i6 = dexPad.mCharger_Power_Value;
@@ -436,7 +490,10 @@ public final class DexPad extends FanControlModel {
             }
             dexPad.reTryPowerChargerInfoRequestCount = 1;
         } else {
-            SLog.e("DexPad", "handleBigDataResponse - COMMAND_CHARGER_TYPE_RESPONSE NAK : " + ((int) bArr[3]));
+            SLog.e(
+                    "DexPad",
+                    "handleBigDataResponse - COMMAND_CHARGER_TYPE_RESPONSE NAK : "
+                            + ((int) bArr[3]));
             if (bArr[3] == -16) {
                 int i7 = dexPad.reTryPowerChargerInfoRequestCount;
                 dexPad.reTryPowerChargerInfoRequestCount = i7 + 1;
@@ -453,7 +510,10 @@ public final class DexPad extends FanControlModel {
             return;
         }
         if ((bArr.length == 10 || bArr.length == 11) && dexPad.mControlResponseListener != null) {
-            StringBuilder sb = new StringBuilder(Util.byteArrayToHex(Arrays.copyOfRange(bArr, bArr.length - 3, bArr.length)));
+            StringBuilder sb =
+                    new StringBuilder(
+                            Util.byteArrayToHex(
+                                    Arrays.copyOfRange(bArr, bArr.length - 3, bArr.length)));
             sb.deleteCharAt(2);
             sb.deleteCharAt(3);
             String sb2 = sb.toString();
@@ -512,7 +572,7 @@ public final class DexPad extends FanControlModel {
         SLog.d("DexPad", "requestConnectedPowerChargerInfoUpdate");
         UvdmSendExecutor uvdmSendExecutor = this.mMessageSender;
         if (uvdmSendExecutor != null) {
-            uvdmSendExecutor.send(500, new byte[]{-80, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED});
+            uvdmSendExecutor.send(500, new byte[] {-80, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED});
         } else {
             SLog.d("DexPad", "mMessageSender null");
             notifyFailedError(-7);
@@ -520,8 +580,17 @@ public final class DexPad extends FanControlModel {
     }
 
     public final void sendFanControlCheckChargerFastCharging() {
-        SLog.d("DexPad", "sendFanControlCheckChargerFastCharging - type : " + this.mCharger_Type_Value + "  power : " + this.mCharger_Power_Value + "  fastcharging : " + this.mIsFastChargingEnabled);
-        if (this.mCharger_Type_Value == 0 || this.mCharger_Power_Value == 0 || this.mIsFastChargingEnabled) {
+        SLog.d(
+                "DexPad",
+                "sendFanControlCheckChargerFastCharging - type : "
+                        + this.mCharger_Type_Value
+                        + "  power : "
+                        + this.mCharger_Power_Value
+                        + "  fastcharging : "
+                        + this.mIsFastChargingEnabled);
+        if (this.mCharger_Type_Value == 0
+                || this.mCharger_Power_Value == 0
+                || this.mIsFastChargingEnabled) {
             return;
         }
         sendRequestToHandler(4, 0);
@@ -556,7 +625,9 @@ public final class DexPad extends FanControlModel {
         if (fan_level == null || fan_level.getFanLevel() == i) {
             return;
         }
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Received Fan Level(", ") is not matched with ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        i, "Received Fan Level(", ") is not matched with ");
         m.append(dexFanControlManager.mCurrentFanLevel.getFanLevel());
         m.append(" level.");
         SLog.e("DexFanControlManager", m.toString());

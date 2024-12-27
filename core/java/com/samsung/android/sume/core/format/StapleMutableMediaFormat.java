@@ -5,6 +5,7 @@ import android.content.om.OverlayManagerExt$$ExternalSyntheticLambda4;
 import android.graphics.Rect;
 import android.util.Log;
 import android.util.Pair;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.filter.MediaFilter;
 import com.samsung.android.sume.core.types.CodecType;
@@ -15,6 +16,7 @@ import com.samsung.android.sume.core.types.FlipType;
 import com.samsung.android.sume.core.types.MediaType;
 import com.samsung.android.sume.core.types.SplitType;
 import com.samsung.android.wallpaperbackup.GenerateXML;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -40,8 +42,7 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
     private ColorSpace colorSpace = ColorSpace.NONE;
     protected Map<String, Object> attributes = new HashMap();
 
-    public StapleMutableMediaFormat() {
-    }
+    public StapleMutableMediaFormat() {}
 
     public StapleMutableMediaFormat(MediaType mediaType, Object... args) {
         this.mediaType = mediaType;
@@ -63,12 +64,19 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
     }
 
     protected List<Object> config(Object... args) {
-        Map<Boolean, List<Object>> result = (Map) Arrays.stream(args).collect(Collectors.partitioningBy(new Predicate() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda12
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return StapleMutableMediaFormat.lambda$config$0(obj);
-            }
-        }));
+        Map<Boolean, List<Object>> result =
+                (Map)
+                        Arrays.stream(args)
+                                .collect(
+                                        Collectors.partitioningBy(
+                                                new Predicate() { // from class:
+                                                                  // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda12
+                                                    @Override // java.util.function.Predicate
+                                                    public final boolean test(Object obj) {
+                                                        return StapleMutableMediaFormat
+                                                                .lambda$config$0(obj);
+                                                    }
+                                                }));
         if (result.containsKey(true)) {
             for (Object arg : result.get(true)) {
                 if (arg instanceof DataType) {
@@ -93,7 +101,9 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
                 }
             }
         }
-        return (List) Optional.ofNullable(result.get(false)).orElseGet(new PendingIntent$$ExternalSyntheticLambda2());
+        return (List)
+                Optional.ofNullable(result.get(false))
+                        .orElseGet(new PendingIntent$$ExternalSyntheticLambda2());
     }
 
     static /* synthetic */ boolean lambda$config$0(Object it) {
@@ -131,8 +141,7 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
         }
     }
 
-    private void configVideo(Object... args) {
-    }
+    private void configVideo(Object... args) {}
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public List<? extends MediaFormat> getPlanesFormat() {
@@ -143,16 +152,26 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
         if (getColorFormat().isPlanar()) {
             if (getColorFormat().isYuv()) {
                 final DataType depth = getDataType().depth();
-                final Shape chromaShape = getShape().toMutableShape().setRows(getRows() >> 1).setCols(getCols() >> 1).setChannels(getColorFormat().numberOfChromaChannels()).toShape();
+                final Shape chromaShape =
+                        getShape()
+                                .toMutableShape()
+                                .setRows(getRows() >> 1)
+                                .setCols(getCols() >> 1)
+                                .setChannels(getColorFormat().numberOfChromaChannels())
+                                .toShape();
                 planes.add(MediaFormat.mutableImageOf(DataType.of(depth, 1), getShape()));
-                IntStream.range(1, getColorFormat().numberOfPlanes()).forEach(new IntConsumer() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda13
-                    @Override // java.util.function.IntConsumer
-                    public final void accept(int i) {
-                        planes.add(MediaFormat.mutableImageOf(depth, chromaShape));
-                    }
-                });
+                IntStream.range(1, getColorFormat().numberOfPlanes())
+                        .forEach(
+                                new IntConsumer() { // from class:
+                                                    // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda13
+                                    @Override // java.util.function.IntConsumer
+                                    public final void accept(int i) {
+                                        planes.add(MediaFormat.mutableImageOf(depth, chromaShape));
+                                    }
+                                });
             } else {
-                throw new UnsupportedOperationException("not support yet for planar except yuv format");
+                throw new UnsupportedOperationException(
+                        "not support yet for planar except yuv format");
             }
         } else {
             planes.add(this);
@@ -172,47 +191,77 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public Shape getShape() {
-        return (Shape) Optional.ofNullable(this.shape).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((MutableShape) obj).toShape();
-            }
-        }).orElse(null);
+        return (Shape)
+                Optional.ofNullable(this.shape)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return ((MutableShape) obj).toShape();
+                                    }
+                                })
+                        .orElse(null);
     }
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public int getBatch() {
-        return ((Integer) Optional.ofNullable(this.shape).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda8
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Integer.valueOf(((MutableShape) obj).getBatch());
-            }
-        }).orElse(-1)).intValue();
+        return ((Integer)
+                        Optional.ofNullable(this.shape)
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda8
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return Integer.valueOf(
+                                                        ((MutableShape) obj).getBatch());
+                                            }
+                                        })
+                                .orElse(-1))
+                .intValue();
     }
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public int getRows() {
-        return ((Integer) Optional.ofNullable(this.shape).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Integer.valueOf(((MutableShape) obj).getRows());
-            }
-        }).orElse(-1)).intValue();
+        return ((Integer)
+                        Optional.ofNullable(this.shape)
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return Integer.valueOf(
+                                                        ((MutableShape) obj).getRows());
+                                            }
+                                        })
+                                .orElse(-1))
+                .intValue();
     }
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public int getCols() {
-        return ((Integer) Optional.ofNullable(this.shape).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda5
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Integer.valueOf(((MutableShape) obj).getCols());
-            }
-        }).orElse(-1)).intValue();
+        return ((Integer)
+                        Optional.ofNullable(this.shape)
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda5
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return Integer.valueOf(
+                                                        ((MutableShape) obj).getCols());
+                                            }
+                                        })
+                                .orElse(-1))
+                .intValue();
     }
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public int getChannels() {
-        return ((Integer) Optional.ofNullable(this.shape).map(new StapleMutableMediaFormat$$ExternalSyntheticLambda2()).orElse(-1)).intValue();
+        return ((Integer)
+                        Optional.ofNullable(this.shape)
+                                .map(new StapleMutableMediaFormat$$ExternalSyntheticLambda2())
+                                .orElse(-1))
+                .intValue();
     }
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
@@ -227,7 +276,8 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public SplitType getSplitType() {
-        return (SplitType) Optional.ofNullable((SplitType) get("split-type")).orElse(SplitType.NONE);
+        return (SplitType)
+                Optional.ofNullable((SplitType) get("split-type")).orElse(SplitType.NONE);
     }
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
@@ -237,7 +287,8 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public CodecType getCodecType() {
-        return (CodecType) Optional.ofNullable((CodecType) get("codec-type")).orElse(CodecType.NONE);
+        return (CodecType)
+                Optional.ofNullable((CodecType) get("codec-type")).orElse(CodecType.NONE);
     }
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
@@ -265,55 +316,119 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public float bytePerSample() {
-        float bppOfColor = ((Float) Optional.ofNullable((ColorFormat) get(android.media.MediaFormat.KEY_COLOR_FORMAT)).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda14
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Float valueOf;
-                valueOf = Float.valueOf(e.isPlanar() ? ((ColorFormat) obj).bytePerPixel() : 1.0f);
-                return valueOf;
-            }
-        }).orElse(Float.valueOf(1.0f))).floatValue();
-        float bppOfDataType = ((Float) Optional.ofNullable(getDataType()).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda15
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Float valueOf;
-                DataType dataType = (DataType) obj;
-                valueOf = Float.valueOf(dataType.size() * dataType.channels());
-                return valueOf;
-            }
-        }).orElse(Float.valueOf(0.0f))).floatValue();
+        float bppOfColor =
+                ((Float)
+                                Optional.ofNullable(
+                                                (ColorFormat)
+                                                        get(
+                                                                android.media.MediaFormat
+                                                                        .KEY_COLOR_FORMAT))
+                                        .map(
+                                                new Function() { // from class:
+                                                                 // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda14
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        Float valueOf;
+                                                        valueOf =
+                                                                Float.valueOf(
+                                                                        e.isPlanar()
+                                                                                ? ((ColorFormat)
+                                                                                                obj)
+                                                                                        .bytePerPixel()
+                                                                                : 1.0f);
+                                                        return valueOf;
+                                                    }
+                                                })
+                                        .orElse(Float.valueOf(1.0f)))
+                        .floatValue();
+        float bppOfDataType =
+                ((Float)
+                                Optional.ofNullable(getDataType())
+                                        .map(
+                                                new Function() { // from class:
+                                                                 // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda15
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        Float valueOf;
+                                                        DataType dataType = (DataType) obj;
+                                                        valueOf =
+                                                                Float.valueOf(
+                                                                        dataType.size()
+                                                                                * dataType
+                                                                                        .channels());
+                                                        return valueOf;
+                                                    }
+                                                })
+                                        .orElse(Float.valueOf(0.0f)))
+                        .floatValue();
         return bppOfColor * bppOfDataType;
     }
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public float bytePerPixel() {
-        float bppOfColor = ((Float) Optional.ofNullable((ColorFormat) get(android.media.MediaFormat.KEY_COLOR_FORMAT)).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda16
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Float valueOf;
-                valueOf = Float.valueOf(e.isPlanar() ? ((ColorFormat) obj).bytePerPixel() : 1.0f);
-                return valueOf;
-            }
-        }).orElse(Float.valueOf(1.0f))).floatValue();
-        float dataTypeSize = ((Float) Optional.ofNullable(getDataType()).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda17
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Float valueOf;
-                valueOf = Float.valueOf(((DataType) obj).size());
-                return valueOf;
-            }
-        }).orElse(Float.valueOf(0.0f))).floatValue();
+        float bppOfColor =
+                ((Float)
+                                Optional.ofNullable(
+                                                (ColorFormat)
+                                                        get(
+                                                                android.media.MediaFormat
+                                                                        .KEY_COLOR_FORMAT))
+                                        .map(
+                                                new Function() { // from class:
+                                                                 // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda16
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        Float valueOf;
+                                                        valueOf =
+                                                                Float.valueOf(
+                                                                        e.isPlanar()
+                                                                                ? ((ColorFormat)
+                                                                                                obj)
+                                                                                        .bytePerPixel()
+                                                                                : 1.0f);
+                                                        return valueOf;
+                                                    }
+                                                })
+                                        .orElse(Float.valueOf(1.0f)))
+                        .floatValue();
+        float dataTypeSize =
+                ((Float)
+                                Optional.ofNullable(getDataType())
+                                        .map(
+                                                new Function() { // from class:
+                                                                 // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda17
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        Float valueOf;
+                                                        valueOf =
+                                                                Float.valueOf(
+                                                                        ((DataType) obj).size());
+                                                        return valueOf;
+                                                    }
+                                                })
+                                        .orElse(Float.valueOf(0.0f)))
+                        .floatValue();
         return bppOfColor * dataTypeSize;
     }
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public long size() {
-        return (int) (bytePerSample() * ((Integer) Optional.ofNullable(this.shape).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda18
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Integer.valueOf(((MutableShape) obj).getDimension());
-            }
-        }).orElse(0)).intValue());
+        return (int)
+                (bytePerSample()
+                        * ((Integer)
+                                        Optional.ofNullable(this.shape)
+                                                .map(
+                                                        new Function() { // from class:
+                                                                         // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda18
+                                                            @Override // java.util.function.Function
+                                                            public final Object apply(Object obj) {
+                                                                return Integer.valueOf(
+                                                                        ((MutableShape) obj)
+                                                                                .getDimension());
+                                                            }
+                                                        })
+                                                .orElse(0))
+                                .intValue());
     }
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
@@ -323,12 +438,15 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public boolean containsAnyOf(String... keys) {
-        return Arrays.stream(keys).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda11
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return StapleMutableMediaFormat.this.m9167x64af6031((String) obj);
-            }
-        });
+        return Arrays.stream(keys)
+                .anyMatch(
+                        new Predicate() { // from class:
+                                          // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda11
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return StapleMutableMediaFormat.this.m9167x64af6031((String) obj);
+                            }
+                        });
     }
 
     /* renamed from: lambda$containsAnyOf$6$com-samsung-android-sume-core-format-StapleMutableMediaFormat, reason: not valid java name */
@@ -340,12 +458,15 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public boolean containsAllOf(String... keys) {
-        return Arrays.stream(keys).allMatch(new Predicate() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda4
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return StapleMutableMediaFormat.this.m9166xf68fa2e7((String) obj);
-            }
-        });
+        return Arrays.stream(keys)
+                .allMatch(
+                        new Predicate() { // from class:
+                                          // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda4
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return StapleMutableMediaFormat.this.m9166xf68fa2e7((String) obj);
+                            }
+                        });
     }
 
     /* renamed from: lambda$containsAllOf$7$com-samsung-android-sume-core-format-StapleMutableMediaFormat, reason: not valid java name */
@@ -357,7 +478,9 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public boolean checkTypeOf(String key, Class<?> clazz) {
-        return this.attributes.containsKey(key) && clazz.isAssignableFrom(Objects.requireNonNull(this.attributes.get(key)).getClass());
+        return this.attributes.containsKey(key)
+                && clazz.isAssignableFrom(
+                        Objects.requireNonNull(this.attributes.get(key)).getClass());
     }
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
@@ -400,21 +523,33 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
 
     @Override // com.samsung.android.sume.core.format.MutableMediaFormat
     public MutableMediaFormat setRows(int rows) {
-        this.shape = ((MutableShape) Optional.ofNullable(this.shape).orElse(Shape.mutableOf())).setRows(rows);
+        this.shape =
+                ((MutableShape) Optional.ofNullable(this.shape).orElse(Shape.mutableOf()))
+                        .setRows(rows);
         adjustChannels(ColorFormat.class, Shape.class, DataType.class);
         return this;
     }
 
     @Override // com.samsung.android.sume.core.format.MutableMediaFormat
     public MutableMediaFormat setCols(int cols) {
-        this.shape = ((MutableShape) Optional.ofNullable(this.shape).orElseGet(new StapleMutableMediaFormat$$ExternalSyntheticLambda3())).setCols(cols);
+        this.shape =
+                ((MutableShape)
+                                Optional.ofNullable(this.shape)
+                                        .orElseGet(
+                                                new StapleMutableMediaFormat$$ExternalSyntheticLambda3()))
+                        .setCols(cols);
         adjustChannels(ColorFormat.class, Shape.class, DataType.class);
         return this;
     }
 
     @Override // com.samsung.android.sume.core.format.MutableMediaFormat
     public MutableMediaFormat setChannels(int channels) {
-        this.shape = ((MutableShape) Optional.ofNullable(this.shape).orElseGet(new StapleMutableMediaFormat$$ExternalSyntheticLambda3())).setChannels(channels);
+        this.shape =
+                ((MutableShape)
+                                Optional.ofNullable(this.shape)
+                                        .orElseGet(
+                                                new StapleMutableMediaFormat$$ExternalSyntheticLambda3()))
+                        .setChannels(channels);
         adjustChannels(ColorFormat.class, Shape.class, DataType.class);
         return this;
     }
@@ -450,17 +585,31 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
     }
 
     public void adjustChannels(Class<?>... channelSuppliers) {
-        int channel = ((Integer) Stream.of((Object[]) channelSuppliers).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda6
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return StapleMutableMediaFormat.this.m9165x676c63c8((Class) obj);
-            }
-        }).filter(new Predicate() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda7
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return StapleMutableMediaFormat.lambda$adjustChannels$9((Integer) obj);
-            }
-        }).findFirst().orElse(-1)).intValue();
+        int channel =
+                ((Integer)
+                                Stream.of((Object[]) channelSuppliers)
+                                        .map(
+                                                new Function() { // from class:
+                                                                 // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda6
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        return StapleMutableMediaFormat.this
+                                                                .m9165x676c63c8((Class) obj);
+                                                    }
+                                                })
+                                        .filter(
+                                                new Predicate() { // from class:
+                                                                  // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda7
+                                                    @Override // java.util.function.Predicate
+                                                    public final boolean test(Object obj) {
+                                                        return StapleMutableMediaFormat
+                                                                .lambda$adjustChannels$9(
+                                                                        (Integer) obj);
+                                                    }
+                                                })
+                                        .findFirst()
+                                        .orElse(-1))
+                        .intValue();
         if (channel != -1) {
             if (this.dataType != null && channel != this.dataType.channels()) {
                 this.dataType = DataType.of(this.dataType.depth(), channel);
@@ -477,24 +626,38 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
     /* renamed from: lambda$adjustChannels$8$com-samsung-android-sume-core-format-StapleMutableMediaFormat, reason: not valid java name */
     /* synthetic */ Integer m9165x676c63c8(Class it) {
         if (it == MutableShape.class || it == Shape.class) {
-            return (Integer) Optional.ofNullable(this.shape).map(new StapleMutableMediaFormat$$ExternalSyntheticLambda2()).orElse(-1);
+            return (Integer)
+                    Optional.ofNullable(this.shape)
+                            .map(new StapleMutableMediaFormat$$ExternalSyntheticLambda2())
+                            .orElse(-1);
         }
         if (it == DataType.class) {
-            return (Integer) Optional.ofNullable(this.dataType).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda9
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return Integer.valueOf(((DataType) obj).channels());
-                }
-            }).orElse(-1);
+            return (Integer)
+                    Optional.ofNullable(this.dataType)
+                            .map(
+                                    new Function() { // from class:
+                                                     // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda9
+                                        @Override // java.util.function.Function
+                                        public final Object apply(Object obj) {
+                                            return Integer.valueOf(((DataType) obj).channels());
+                                        }
+                                    })
+                            .orElse(-1);
         }
         if (it == ColorFormat.class) {
             try {
-                return (Integer) Optional.ofNullable(getColorFormat()).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda10
-                    @Override // java.util.function.Function
-                    public final Object apply(Object obj) {
-                        return Integer.valueOf(((ColorFormat) obj).getChannels());
-                    }
-                }).orElse(-1);
+                return (Integer)
+                        Optional.ofNullable(getColorFormat())
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda10
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return Integer.valueOf(
+                                                        ((ColorFormat) obj).getChannels());
+                                            }
+                                        })
+                                .orElse(-1);
             } catch (UnsupportedOperationException e) {
                 return -1;
             }
@@ -590,7 +753,15 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
 
     @Override // com.samsung.android.sume.core.format.MediaFormat
     public String contentToString(Object obj) {
-        return Def.taglnOf(obj) + Def.contentToString("mediaType=" + this.mediaType, "dataType=" + this.dataType, getColorString(), "shape=" + this.shape, "colorspace=" + this.colorSpace) + "\nattributes=" + Collections.singletonList(this.attributes);
+        return Def.taglnOf(obj)
+                + Def.contentToString(
+                        "mediaType=" + this.mediaType,
+                        "dataType=" + this.dataType,
+                        getColorString(),
+                        "shape=" + this.shape,
+                        "colorspace=" + this.colorSpace)
+                + "\nattributes="
+                + Collections.singletonList(this.attributes);
     }
 
     /* JADX WARN: Can't rename method to resolve collision */

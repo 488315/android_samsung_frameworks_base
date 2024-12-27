@@ -13,6 +13,7 @@ import android.sec.enterprise.EnterpriseDeviceManager;
 import android.text.TextUtils;
 import android.util.Printer;
 import android.util.proto.ProtoOutputStream;
+
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.Objects;
@@ -25,17 +26,11 @@ public class PackageItemInfo {
     public static final int DUMP_FLAG_DETAILS = 1;
     public static final int MAX_SAFE_LABEL_LENGTH = 1000;
 
-    @SystemApi
-    @Deprecated
-    public static final int SAFE_LABEL_FLAG_FIRST_LINE = 4;
+    @SystemApi @Deprecated public static final int SAFE_LABEL_FLAG_FIRST_LINE = 4;
 
-    @SystemApi
-    @Deprecated
-    public static final int SAFE_LABEL_FLAG_SINGLE_LINE = 2;
+    @SystemApi @Deprecated public static final int SAFE_LABEL_FLAG_SINGLE_LINE = 2;
 
-    @SystemApi
-    @Deprecated
-    public static final int SAFE_LABEL_FLAG_TRIM = 1;
+    @SystemApi @Deprecated public static final int SAFE_LABEL_FLAG_TRIM = 1;
     private static volatile boolean sForceSafeLabels = false;
     public int banner;
     public int icon;
@@ -77,7 +72,8 @@ public class PackageItemInfo {
     }
 
     public CharSequence loadLabel(PackageManager pm) {
-        if (sForceSafeLabels && !Objects.equals(this.packageName, ActivityThread.currentPackageName())) {
+        if (sForceSafeLabels
+                && !Objects.equals(this.packageName, ActivityThread.currentPackageName())) {
             return loadSafeLabel(pm, 1000.0f, 5);
         }
         return TextUtils.trimToSize(loadUnsafeLabel(pm), 1000);
@@ -87,7 +83,8 @@ public class PackageItemInfo {
         CharSequence label;
         boolean check = SystemProperties.getBoolean("sys.knox.app_name_change", false);
         if (check) {
-            ApplicationPolicy appPolicy = EnterpriseDeviceManager.getInstance().getApplicationPolicy();
+            ApplicationPolicy appPolicy =
+                    EnterpriseDeviceManager.getInstance().getApplicationPolicy();
             int userId = 0;
             ApplicationInfo ai = getApplicationInfo();
             if (ai != null) {
@@ -101,7 +98,9 @@ public class PackageItemInfo {
         if (this.nonLocalizedLabel != null) {
             return this.nonLocalizedLabel;
         }
-        if (this.labelRes != 0 && (label = pm.getText(this.packageName, this.labelRes, getApplicationInfo())) != null) {
+        if (this.labelRes != 0
+                && (label = pm.getText(this.packageName, this.labelRes, getApplicationInfo()))
+                        != null) {
             return label.toString().trim();
         }
         if (this.name != null) {
@@ -119,7 +118,8 @@ public class PackageItemInfo {
     @SystemApi
     public CharSequence loadSafeLabel(PackageManager pm, float ellipsizeDip, int flags) {
         Objects.requireNonNull(pm);
-        return TextUtils.makeSafeForPresentation(loadUnsafeLabel(pm).toString(), 1000, ellipsizeDip, flags);
+        return TextUtils.makeSafeForPresentation(
+                loadUnsafeLabel(pm).toString(), 1000, ellipsizeDip, flags);
     }
 
     public Drawable loadIcon(PackageManager pm) {
@@ -136,7 +136,9 @@ public class PackageItemInfo {
 
     public Drawable loadBanner(PackageManager pm) {
         Drawable dr;
-        if (this.banner != 0 && (dr = pm.getDrawable(this.packageName, this.banner, getApplicationInfo())) != null) {
+        if (this.banner != 0
+                && (dr = pm.getDrawable(this.packageName, this.banner, getApplicationInfo()))
+                        != null) {
             return dr;
         }
         return loadDefaultBanner(pm);
@@ -152,7 +154,9 @@ public class PackageItemInfo {
 
     public Drawable loadLogo(PackageManager pm) {
         Drawable d;
-        if (this.logo != 0 && (d = pm.getDrawable(this.packageName, this.logo, getApplicationInfo())) != null) {
+        if (this.logo != 0
+                && (d = pm.getDrawable(this.packageName, this.logo, getApplicationInfo()))
+                        != null) {
             return d;
         }
         return loadDefaultLogo(pm);
@@ -175,13 +179,24 @@ public class PackageItemInfo {
             pw.println(prefix + "name=" + this.name);
         }
         pw.println(prefix + "packageName=" + this.packageName);
-        if (this.labelRes != 0 || this.nonLocalizedLabel != null || this.icon != 0 || this.banner != 0) {
-            pw.println(prefix + "labelRes=0x" + Integer.toHexString(this.labelRes) + " nonLocalizedLabel=" + ((Object) this.nonLocalizedLabel) + " icon=0x" + Integer.toHexString(this.icon) + " banner=0x" + Integer.toHexString(this.banner));
+        if (this.labelRes != 0
+                || this.nonLocalizedLabel != null
+                || this.icon != 0
+                || this.banner != 0) {
+            pw.println(
+                    prefix
+                            + "labelRes=0x"
+                            + Integer.toHexString(this.labelRes)
+                            + " nonLocalizedLabel="
+                            + ((Object) this.nonLocalizedLabel)
+                            + " icon=0x"
+                            + Integer.toHexString(this.icon)
+                            + " banner=0x"
+                            + Integer.toHexString(this.banner));
         }
     }
 
-    protected void dumpBack(Printer pw, String prefix) {
-    }
+    protected void dumpBack(Printer pw, String prefix) {}
 
     public void writeToParcel(Parcel dest, int parcelableFlags) {
         dest.writeString8(this.name);

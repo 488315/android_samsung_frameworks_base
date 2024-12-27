@@ -2,6 +2,7 @@ package com.google.android.mms.pdu;
 
 import android.net.Uri;
 import android.speech.RecognizerResultsIntent;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -100,7 +101,9 @@ public class PduPart {
         if (contentId == null || contentId.length == 0) {
             throw new IllegalArgumentException("Content-Id may not be null or empty.");
         }
-        if (contentId.length > 1 && ((char) contentId[0]) == '<' && ((char) contentId[contentId.length - 1]) == '>') {
+        if (contentId.length > 1
+                && ((char) contentId[0]) == '<'
+                && ((char) contentId[contentId.length - 1]) == '>') {
             this.mPartHeader.put(192, contentId);
             return;
         }

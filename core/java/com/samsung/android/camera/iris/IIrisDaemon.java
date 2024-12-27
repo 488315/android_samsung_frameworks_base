@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
-import com.samsung.android.camera.iris.IIrisDaemonCallback;
 
 /* loaded from: classes5.dex */
 public interface IIrisDaemon extends IInterface {
@@ -38,9 +37,11 @@ public interface IIrisDaemon extends IInterface {
 
     long preEnroll() throws RemoteException;
 
-    void processFrontImage(ParcelFileDescriptor parcelFileDescriptor, int i, int i2, int i3) throws RemoteException;
+    void processFrontImage(ParcelFileDescriptor parcelFileDescriptor, int i, int i2, int i3)
+            throws RemoteException;
 
-    void processIRImage(ParcelFileDescriptor parcelFileDescriptor, int i, int i2, int i3) throws RemoteException;
+    void processIRImage(ParcelFileDescriptor parcelFileDescriptor, int i, int i2, int i3)
+            throws RemoteException;
 
     int release(int i) throws RemoteException;
 
@@ -58,7 +59,8 @@ public interface IIrisDaemon extends IInterface {
 
     public static class Default implements IIrisDaemon {
         @Override // com.samsung.android.camera.iris.IIrisDaemon
-        public int authenticate(long sessionId, int groupId, byte[] fidoRequestData) throws RemoteException {
+        public int authenticate(long sessionId, int groupId, byte[] fidoRequestData)
+                throws RemoteException {
             return 0;
         }
 
@@ -108,8 +110,7 @@ public interface IIrisDaemon extends IInterface {
         }
 
         @Override // com.samsung.android.camera.iris.IIrisDaemon
-        public void init(IIrisDaemonCallback callback) throws RemoteException {
-        }
+        public void init(IIrisDaemonCallback callback) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemon
         public int postEnroll() throws RemoteException {
@@ -117,17 +118,19 @@ public interface IIrisDaemon extends IInterface {
         }
 
         @Override // com.samsung.android.camera.iris.IIrisDaemon
-        public int request(int cmd, byte[] inputBuf, byte[] outputBuf, int inParam) throws RemoteException {
+        public int request(int cmd, byte[] inputBuf, byte[] outputBuf, int inParam)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.camera.iris.IIrisDaemon
-        public void processIRImage(ParcelFileDescriptor fd, int width, int height, int rotation) throws RemoteException {
-        }
+        public void processIRImage(ParcelFileDescriptor fd, int width, int height, int rotation)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemon
-        public void sendIRProperty(String key, String currentValue, String minValue, String maxValue) throws RemoteException {
-        }
+        public void sendIRProperty(
+                String key, String currentValue, String minValue, String maxValue)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemon
         public int enumerate() throws RemoteException {
@@ -140,8 +143,9 @@ public interface IIrisDaemon extends IInterface {
         }
 
         @Override // com.samsung.android.camera.iris.IIrisDaemon
-        public void processFrontImage(ParcelFileDescriptor frontFd, int width, int height, int rotation) throws RemoteException {
-        }
+        public void processFrontImage(
+                ParcelFileDescriptor frontFd, int width, int height, int rotation)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisDaemon
         public int setPreviewTarget(IBinder binder) throws RemoteException {
@@ -169,7 +173,7 @@ public interface IIrisDaemon extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIrisDaemon {
+    public abstract static class Stub extends Binder implements IIrisDaemon {
         static final int TRANSACTION_authenticate = 1;
         static final int TRANSACTION_cancelAuthentication = 2;
         static final int TRANSACTION_cancelEnrollment = 4;
@@ -270,7 +274,8 @@ public interface IIrisDaemon extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             byte[] _arg2;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIrisDaemon.DESCRIPTOR);
@@ -345,7 +350,8 @@ public interface IIrisDaemon extends IInterface {
                     reply.writeInt(_result10);
                     return true;
                 case 11:
-                    IIrisDaemonCallback _arg05 = IIrisDaemonCallback.Stub.asInterface(data.readStrongBinder());
+                    IIrisDaemonCallback _arg05 =
+                            IIrisDaemonCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     init(_arg05);
                     reply.writeNoException();
@@ -372,7 +378,9 @@ public interface IIrisDaemon extends IInterface {
                     reply.writeByteArray(_arg2);
                     return true;
                 case 14:
-                    ParcelFileDescriptor _arg07 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg07 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     int _arg16 = data.readInt();
                     int _arg24 = data.readInt();
                     int _arg32 = data.readInt();
@@ -400,7 +408,9 @@ public interface IIrisDaemon extends IInterface {
                     reply.writeInt(_result14);
                     return true;
                 case 18:
-                    ParcelFileDescriptor _arg09 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg09 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     int _arg18 = data.readInt();
                     int _arg26 = data.readInt();
                     int _arg34 = data.readInt();
@@ -458,7 +468,8 @@ public interface IIrisDaemon extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemon
-            public int authenticate(long sessionId, int groupId, byte[] fidoRequestData) throws RemoteException {
+            public int authenticate(long sessionId, int groupId, byte[] fidoRequestData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -659,7 +670,8 @@ public interface IIrisDaemon extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemon
-            public int request(int cmd, byte[] inputBuf, byte[] outputBuf, int inParam) throws RemoteException {
+            public int request(int cmd, byte[] inputBuf, byte[] outputBuf, int inParam)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -680,7 +692,8 @@ public interface IIrisDaemon extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemon
-            public void processIRImage(ParcelFileDescriptor fd, int width, int height, int rotation) throws RemoteException {
+            public void processIRImage(ParcelFileDescriptor fd, int width, int height, int rotation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -698,7 +711,9 @@ public interface IIrisDaemon extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemon
-            public void sendIRProperty(String key, String currentValue, String minValue, String maxValue) throws RemoteException {
+            public void sendIRProperty(
+                    String key, String currentValue, String minValue, String maxValue)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -748,7 +763,9 @@ public interface IIrisDaemon extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemon
-            public void processFrontImage(ParcelFileDescriptor frontFd, int width, int height, int rotation) throws RemoteException {
+            public void processFrontImage(
+                    ParcelFileDescriptor frontFd, int width, int height, int rotation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -783,7 +800,8 @@ public interface IIrisDaemon extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisDaemon
-            public IBinder createInputSurface(int type, int width, int height) throws RemoteException {
+            public IBinder createInputSurface(int type, int width, int height)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

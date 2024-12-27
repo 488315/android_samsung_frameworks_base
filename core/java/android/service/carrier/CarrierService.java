@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PersistableBundle;
 import android.os.ResultReceiver;
-import android.service.carrier.ICarrierService;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyRegistryManager;
 import android.util.Log;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
@@ -29,14 +29,16 @@ public abstract class CarrierService extends Service {
 
     @Deprecated
     public final void notifyCarrierNetworkChange(boolean active) {
-        TelephonyRegistryManager telephonyRegistryMgr = (TelephonyRegistryManager) getSystemService(Context.TELEPHONY_REGISTRY_SERVICE);
+        TelephonyRegistryManager telephonyRegistryMgr =
+                (TelephonyRegistryManager) getSystemService(Context.TELEPHONY_REGISTRY_SERVICE);
         if (telephonyRegistryMgr != null) {
             telephonyRegistryMgr.notifyCarrierNetworkChange(active);
         }
     }
 
     public final void notifyCarrierNetworkChange(int subscriptionId, boolean active) {
-        TelephonyRegistryManager telephonyRegistryMgr = (TelephonyRegistryManager) getSystemService(TelephonyRegistryManager.class);
+        TelephonyRegistryManager telephonyRegistryMgr =
+                (TelephonyRegistryManager) getSystemService(TelephonyRegistryManager.class);
         if (telephonyRegistryMgr != null) {
             telephonyRegistryMgr.notifyCarrierNetworkChange(subscriptionId, active);
         }
@@ -52,8 +54,7 @@ public abstract class CarrierService extends Service {
         public static final int RESULT_ERROR = 1;
         public static final int RESULT_OK = 0;
 
-        public ICarrierServiceWrapper() {
-        }
+        public ICarrierServiceWrapper() {}
 
         @Override // android.service.carrier.ICarrierService
         public void getCarrierConfig(int phoneId, CarrierIdentifier id, ResultReceiver result) {

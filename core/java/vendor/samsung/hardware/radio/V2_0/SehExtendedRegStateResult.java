@@ -4,6 +4,7 @@ import android.hardware.radio.V1_0.RegState;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -26,18 +27,52 @@ public final class SehExtendedRegStateResult {
             return false;
         }
         SehExtendedRegStateResult other = (SehExtendedRegStateResult) otherObject;
-        if (this.isValid == other.isValid && this.snapshotStatus == other.snapshotStatus && this.unprocessedDataRegState == other.unprocessedDataRegState && this.unprocessedDataRat == other.unprocessedDataRat && this.mobileOptionalRat == other.mobileOptionalRat && this.imsEmergencyCallBarring == other.imsEmergencyCallBarring && this.unprocessedVoiceRegState == other.unprocessedVoiceRegState && this.isPsOnlyReg == other.isPsOnlyReg) {
+        if (this.isValid == other.isValid
+                && this.snapshotStatus == other.snapshotStatus
+                && this.unprocessedDataRegState == other.unprocessedDataRegState
+                && this.unprocessedDataRat == other.unprocessedDataRat
+                && this.mobileOptionalRat == other.mobileOptionalRat
+                && this.imsEmergencyCallBarring == other.imsEmergencyCallBarring
+                && this.unprocessedVoiceRegState == other.unprocessedVoiceRegState
+                && this.isPsOnlyReg == other.isPsOnlyReg) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isValid))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.snapshotStatus))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.unprocessedDataRegState))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.unprocessedDataRat))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mobileOptionalRat))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.imsEmergencyCallBarring))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.unprocessedVoiceRegState))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isPsOnlyReg))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isValid))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.snapshotStatus))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.unprocessedDataRegState))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.unprocessedDataRat))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mobileOptionalRat))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.imsEmergencyCallBarring))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.unprocessedVoiceRegState))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isPsOnlyReg))));
     }
 
     public final String toString() {
-        return "{.isValid = " + this.isValid + ", .snapshotStatus = " + this.snapshotStatus + ", .unprocessedDataRegState = " + RegState.toString(this.unprocessedDataRegState) + ", .unprocessedDataRat = " + this.unprocessedDataRat + ", .mobileOptionalRat = " + this.mobileOptionalRat + ", .imsEmergencyCallBarring = " + this.imsEmergencyCallBarring + ", .unprocessedVoiceRegState = " + RegState.toString(this.unprocessedVoiceRegState) + ", .isPsOnlyReg = " + this.isPsOnlyReg + "}";
+        return "{.isValid = "
+                + this.isValid
+                + ", .snapshotStatus = "
+                + this.snapshotStatus
+                + ", .unprocessedDataRegState = "
+                + RegState.toString(this.unprocessedDataRegState)
+                + ", .unprocessedDataRat = "
+                + this.unprocessedDataRat
+                + ", .mobileOptionalRat = "
+                + this.mobileOptionalRat
+                + ", .imsEmergencyCallBarring = "
+                + this.imsEmergencyCallBarring
+                + ", .unprocessedVoiceRegState = "
+                + RegState.toString(this.unprocessedVoiceRegState)
+                + ", .isPsOnlyReg = "
+                + this.isPsOnlyReg
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -49,7 +84,8 @@ public final class SehExtendedRegStateResult {
         ArrayList<SehExtendedRegStateResult> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SehExtendedRegStateResult _hidl_vec_element = new SehExtendedRegStateResult();
@@ -59,7 +95,8 @@ public final class SehExtendedRegStateResult {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.isValid = _hidl_blob.getBool(0 + _hidl_offset);
         this.snapshotStatus = _hidl_blob.getInt32(4 + _hidl_offset);
         this.unprocessedDataRegState = _hidl_blob.getInt32(8 + _hidl_offset);
@@ -76,7 +113,8 @@ public final class SehExtendedRegStateResult {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<SehExtendedRegStateResult> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<SehExtendedRegStateResult> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

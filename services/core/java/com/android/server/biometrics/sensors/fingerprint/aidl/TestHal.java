@@ -15,7 +15,9 @@ import android.util.Slog;
 public class TestHal extends IFingerprint.Stub {
     public ISession createSession(int i, int i2, final ISessionCallback iSessionCallback) {
         Slog.w("fingerprint.aidl.TestHal", "createSession, sensorId: " + i + " userId: " + i2);
-        return new ISession.Stub() { // from class: com.android.server.biometrics.sensors.fingerprint.aidl.TestHal.1
+        return new ISession
+                .Stub() { // from class:
+                          // com.android.server.biometrics.sensors.fingerprint.aidl.TestHal.1
 
             /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
             /* renamed from: com.android.server.biometrics.sensors.fingerprint.aidl.TestHal$1$1, reason: invalid class name and collision with other inner class name */
@@ -60,7 +62,8 @@ public class TestHal extends IFingerprint.Stub {
                 return new C00141(this, 1);
             }
 
-            public final ICancellationSignal authenticateWithContext(long j, OperationContext operationContext) {
+            public final ICancellationSignal authenticateWithContext(
+                    long j, OperationContext operationContext) {
                 return authenticate(j);
             }
 
@@ -74,7 +77,8 @@ public class TestHal extends IFingerprint.Stub {
                 return new C00141(this, 2);
             }
 
-            public final ICancellationSignal detectInteractionWithContext(OperationContext operationContext) {
+            public final ICancellationSignal detectInteractionWithContext(
+                    OperationContext operationContext) {
                 return detectInteraction();
             }
 
@@ -83,7 +87,8 @@ public class TestHal extends IFingerprint.Stub {
                 return new C00141(this, 0);
             }
 
-            public final ICancellationSignal enrollWithContext(HardwareAuthToken hardwareAuthToken, OperationContext operationContext) {
+            public final ICancellationSignal enrollWithContext(
+                    HardwareAuthToken hardwareAuthToken, OperationContext operationContext) {
                 return enroll(hardwareAuthToken);
             }
 
@@ -128,7 +133,12 @@ public class TestHal extends IFingerprint.Stub {
             }
 
             public final void onPointerDownWithContext(PointerContext pointerContext) {
-                onPointerDown(pointerContext.pointerId, (int) pointerContext.x, (int) pointerContext.y, pointerContext.minor, pointerContext.major);
+                onPointerDown(
+                        pointerContext.pointerId,
+                        (int) pointerContext.x,
+                        (int) pointerContext.y,
+                        pointerContext.minor,
+                        pointerContext.major);
             }
 
             public final void onPointerUp(int i3) {

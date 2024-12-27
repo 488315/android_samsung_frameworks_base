@@ -25,7 +25,6 @@ public final class EventLogTag {
         public static final int UNKNOWN = 0;
         public static final int UNSET = 0;
 
-        public ValueDescriptor() {
-        }
+        public ValueDescriptor() {}
     }
 }

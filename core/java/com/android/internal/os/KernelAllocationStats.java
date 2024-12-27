@@ -6,8 +6,7 @@ public final class KernelAllocationStats {
 
     public static native ProcessGpuMem[] getGpuAllocations();
 
-    private KernelAllocationStats() {
-    }
+    private KernelAllocationStats() {}
 
     public static final class ProcessDmabuf {
         public final int oomScore;
@@ -18,7 +17,14 @@ public final class KernelAllocationStats {
         public final int surfaceFlingerSizeKb;
         public final int uid;
 
-        ProcessDmabuf(int uid, String processName, int oomScore, int retainedSizeKb, int retainedBuffersCount, int surfaceFlingerSizeKb, int surfaceFlingerCount) {
+        ProcessDmabuf(
+                int uid,
+                String processName,
+                int oomScore,
+                int retainedSizeKb,
+                int retainedBuffersCount,
+                int surfaceFlingerSizeKb,
+                int surfaceFlingerCount) {
             this.uid = uid;
             this.processName = processName;
             this.oomScore = oomScore;

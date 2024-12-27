@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -28,12 +29,14 @@ public class RemeasuringLinearLayout extends NotificationOptimizedLinearLayout {
         this.mMatchParentViews = new ArrayList<>();
     }
 
-    public RemeasuringLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public RemeasuringLinearLayout(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mMatchParentViews = new ArrayList<>();
     }
 
-    @Override // com.android.internal.widget.NotificationOptimizedLinearLayout, android.widget.LinearLayout, android.view.View
+    @Override // com.android.internal.widget.NotificationOptimizedLinearLayout,
+              // android.widget.LinearLayout, android.view.View
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int count = getChildCount();
@@ -57,7 +60,12 @@ public class RemeasuringLinearLayout extends NotificationOptimizedLinearLayout {
             Iterator<View> it = this.mMatchParentViews.iterator();
             while (it.hasNext()) {
                 View child2 = it.next();
-                child2.measure(getChildMeasureSpec(widthMeasureSpec, getPaddingStart() + getPaddingEnd(), child2.getLayoutParams().width), exactHeightSpec);
+                child2.measure(
+                        getChildMeasureSpec(
+                                widthMeasureSpec,
+                                getPaddingStart() + getPaddingEnd(),
+                                child2.getLayoutParams().width),
+                        exactHeightSpec);
             }
         }
         this.mMatchParentViews.clear();

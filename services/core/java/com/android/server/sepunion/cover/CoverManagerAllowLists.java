@@ -10,7 +10,9 @@ import android.os.Build;
 import android.os.UserHandle;
 import android.util.Base64;
 import android.util.SparseArray;
+
 import com.samsung.android.sepunion.Log;
+
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +27,8 @@ public final class CoverManagerAllowLists {
     public SparseArray mSignaturesMap;
 
     public static String getPackageForPid(Context context, int i) {
-        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = ((ActivityManager) context.getSystemService("activity")).getRunningAppProcesses();
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses =
+                ((ActivityManager) context.getSystemService("activity")).getRunningAppProcesses();
         if (runningAppProcesses == null) {
             return null;
         }
@@ -47,7 +50,9 @@ public final class CoverManagerAllowLists {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         UserHandle userHandleForUid = UserHandle.getUserHandleForUid(i);
         try {
-            context = context.createPackageContextAsUser(context.getPackageName(), 4, userHandleForUid);
+            context =
+                    context.createPackageContextAsUser(
+                            context.getPackageName(), 4, userHandleForUid);
         } catch (PackageManager.NameNotFoundException e) {
             Log.e("CoverManager_CoverManagerAllowLists", "Error creating user context", e);
         }
@@ -55,9 +60,13 @@ public final class CoverManagerAllowLists {
         try {
             PackageManager packageManager = context.getPackageManager();
             packageInfo = packageManager.getPackageInfo(packageForPid, 64);
-            i3 = packageManager.getPackageUidAsUser(packageForPid, userHandleForUid.getIdentifier());
+            i3 =
+                    packageManager.getPackageUidAsUser(
+                            packageForPid, userHandleForUid.getIdentifier());
         } catch (PackageManager.NameNotFoundException unused) {
-            Log.d("CoverManager_CoverManagerAllowLists", "Package " + packageForPid + " not found for user!");
+            Log.d(
+                    "CoverManager_CoverManagerAllowLists",
+                    "Package " + packageForPid + " not found for user!");
             i3 = -1;
         }
         Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -78,7 +87,8 @@ public final class CoverManagerAllowLists {
         }
         if (packageForPid != null) {
             try {
-                packageForPid = Base64.encodeToString(packageForPid.getBytes(StandardCharsets.UTF_8), 2);
+                packageForPid =
+                        Base64.encodeToString(packageForPid.getBytes(StandardCharsets.UTF_8), 2);
                 Iterator it = this.mPrefixPackage.iterator();
                 while (it.hasNext()) {
                     str = (String) it.next();
@@ -95,7 +105,9 @@ public final class CoverManagerAllowLists {
         if (num != null) {
             return isMatchedSignature(signatureArr, num.intValue());
         }
-        Log.d("CoverManager_CoverManagerAllowLists", "isAllowedToUse : cover manager allow lists does not include this App : " + str);
+        Log.d(
+                "CoverManager_CoverManagerAllowLists",
+                "isAllowedToUse : cover manager allow lists does not include this App : " + str);
         return false;
     }
 

@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.widget.Toast;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
 public class FrozenAppActivity extends AlertActivity {
-    private static final String EXTRA_FROZEN_PACKAGE = "com.android.internal.app.extra.FROZEN_PACKAGE";
+    private static final String EXTRA_FROZEN_PACKAGE =
+            "com.android.internal.app.extra.FROZEN_PACKAGE";
     private static final String PACKAGE_NAME = "com.android.internal.app";
     private static final String TAG = "FrozenAppActivity";
 
@@ -49,6 +51,10 @@ public class FrozenAppActivity extends AlertActivity {
     }
 
     public static Intent createIntent(int userId, String packageName) {
-        return new Intent().setClassName("android", FrozenAppActivity.class.getName()).putExtra("android.intent.extra.USER_ID", userId).putExtra(EXTRA_FROZEN_PACKAGE, packageName).setFlags(276824064);
+        return new Intent()
+                .setClassName("android", FrozenAppActivity.class.getName())
+                .putExtra("android.intent.extra.USER_ID", userId)
+                .putExtra(EXTRA_FROZEN_PACKAGE, packageName)
+                .setFlags(276824064);
     }
 }

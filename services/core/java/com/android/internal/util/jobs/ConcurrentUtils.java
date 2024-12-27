@@ -3,6 +3,7 @@ package com.android.internal.util.jobs;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.Process;
 import android.util.Slog;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -30,27 +31,34 @@ public class ConcurrentUtils {
         }
     }
 
-    private ConcurrentUtils() {
-    }
+    private ConcurrentUtils() {}
 
     public static ExecutorService newFixedThreadPool(int i, final String str, final int i2) {
-        return Executors.newFixedThreadPool(i, new ThreadFactory() { // from class: com.android.internal.util.jobs.ConcurrentUtils.1
-            public final AtomicInteger threadNum = new AtomicInteger(0);
+        return Executors.newFixedThreadPool(
+                i,
+                new ThreadFactory() { // from class:
+                                      // com.android.internal.util.jobs.ConcurrentUtils.1
+                    public final AtomicInteger threadNum = new AtomicInteger(0);
 
-            @Override // java.util.concurrent.ThreadFactory
-            public final Thread newThread(final Runnable runnable) {
-                return new Thread(str + this.threadNum.incrementAndGet()) { // from class: com.android.internal.util.jobs.ConcurrentUtils.1.1
-                    @Override // java.lang.Thread, java.lang.Runnable
-                    public final void run() {
-                        Process.setThreadPriority(i2);
-                        runnable.run();
+                    @Override // java.util.concurrent.ThreadFactory
+                    public final Thread newThread(final Runnable runnable) {
+                        return new Thread(
+                                str
+                                        + this.threadNum
+                                                .incrementAndGet()) { // from class:
+                                                                      // com.android.internal.util.jobs.ConcurrentUtils.1.1
+                            @Override // java.lang.Thread, java.lang.Runnable
+                            public final void run() {
+                                Process.setThreadPriority(i2);
+                                runnable.run();
+                            }
+                        };
                     }
-                };
-            }
-        });
+                });
     }
 
-    public static void waitForCountDownNoInterrupt(CountDownLatch countDownLatch, long j, String str) {
+    public static void waitForCountDownNoInterrupt(
+            CountDownLatch countDownLatch, long j, String str) {
         try {
             if (countDownLatch.await(j, TimeUnit.MILLISECONDS)) {
                 return;
@@ -58,7 +66,9 @@ public class ConcurrentUtils {
             throw new IllegalStateException(str + " timed out.");
         } catch (InterruptedException unused) {
             Thread.currentThread().interrupt();
-            throw new IllegalStateException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, " interrupted."));
+            throw new IllegalStateException(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                            str, " interrupted."));
         }
     }
 
@@ -67,9 +77,12 @@ public class ConcurrentUtils {
             return future.get();
         } catch (InterruptedException unused) {
             Thread.currentThread().interrupt();
-            throw new IllegalStateException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, " interrupted"));
+            throw new IllegalStateException(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                            str, " interrupted"));
         } catch (ExecutionException e) {
-            throw new RuntimeException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, " failed"), e);
+            throw new RuntimeException(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, " failed"), e);
         }
     }
 

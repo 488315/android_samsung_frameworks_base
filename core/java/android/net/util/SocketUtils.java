@@ -6,16 +6,20 @@ import android.system.NetlinkSocketAddress;
 import android.system.Os;
 import android.system.OsConstants;
 import android.system.PacketSocketAddress;
+
 import com.android.internal.net.NetworkUtilsInternal;
+
+import libcore.io.IoBridge;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.net.SocketAddress;
-import libcore.io.IoBridge;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class SocketUtils {
-    public static void bindSocketToInterface(FileDescriptor socket, String iface) throws ErrnoException {
+    public static void bindSocketToInterface(FileDescriptor socket, String iface)
+            throws ErrnoException {
         Os.setsockoptIfreq(socket, OsConstants.SOL_SOCKET, OsConstants.SO_BINDTODEVICE, iface);
         NetworkUtilsInternal.protectFromVpn(socket);
     }
@@ -41,6 +45,5 @@ public final class SocketUtils {
         IoBridge.closeAndSignalBlockedThreads(fd);
     }
 
-    private SocketUtils() {
-    }
+    private SocketUtils() {}
 }

@@ -1,6 +1,7 @@
 package com.android.server.voiceinteraction;
 
 import android.os.ParcelFileDescriptor;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +14,8 @@ public final /* synthetic */ class DetectorSession$3$$ExternalSyntheticLambda0 i
     public final /* synthetic */ ParcelFileDescriptor f$0;
     public final /* synthetic */ InputStream f$1;
 
-    public /* synthetic */ DetectorSession$3$$ExternalSyntheticLambda0(ParcelFileDescriptor parcelFileDescriptor, InputStream inputStream, int i) {
+    public /* synthetic */ DetectorSession$3$$ExternalSyntheticLambda0(
+            ParcelFileDescriptor parcelFileDescriptor, InputStream inputStream, int i) {
         this.$r8$classId = i;
         this.f$0 = parcelFileDescriptor;
         this.f$1 = inputStream;

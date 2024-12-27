@@ -8,18 +8,14 @@ import java.util.List;
 public interface MbmsGroupCallSessionCallback {
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GroupCallError {
-    }
+    public @interface GroupCallError {}
 
-    default void onError(int errorCode, String message) {
-    }
+    default void onError(int errorCode, String message) {}
 
-    default void onAvailableSaisUpdated(List<Integer> currentSais, List<List<Integer>> availableSais) {
-    }
+    default void onAvailableSaisUpdated(
+            List<Integer> currentSais, List<List<Integer>> availableSais) {}
 
-    default void onServiceInterfaceAvailable(String interfaceName, int index) {
-    }
+    default void onServiceInterfaceAvailable(String interfaceName, int index) {}
 
-    default void onMiddlewareReady() {
-    }
+    default void onMiddlewareReady() {}
 }

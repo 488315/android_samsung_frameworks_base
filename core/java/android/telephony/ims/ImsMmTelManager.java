@@ -9,13 +9,13 @@ import android.os.ServiceSpecificException;
 import android.telephony.BinderCacheManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyFrameworkInitializer;
-import android.telephony.ims.ImsMmTelManager;
-import android.telephony.ims.RegistrationManager;
 import android.telephony.ims.aidl.IImsCapabilityCallback;
 import android.telephony.ims.feature.MmTelFeature;
 import android.util.Log;
+
 import com.android.internal.telephony.IIntegerConsumer;
 import com.android.internal.telephony.ITelephony;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -29,40 +29,39 @@ public class ImsMmTelManager implements RegistrationManager {
     public static final int WIFI_MODE_UNKNOWN = -1;
     public static final int WIFI_MODE_WIFI_ONLY = 0;
     public static final int WIFI_MODE_WIFI_PREFERRED = 2;
-    private static final BinderCacheManager<ITelephony> sTelephonyCache = new BinderCacheManager<>(new BinderCacheManager.BinderInterfaceFactory() { // from class: android.telephony.ims.ImsMmTelManager$$ExternalSyntheticLambda0
-        @Override // android.telephony.BinderCacheManager.BinderInterfaceFactory
-        public final Object create() {
-            ITelephony iTelephonyInterface;
-            iTelephonyInterface = ImsMmTelManager.getITelephonyInterface();
-            return iTelephonyInterface;
-        }
-    });
+    private static final BinderCacheManager<ITelephony> sTelephonyCache =
+            new BinderCacheManager<>(
+                    new BinderCacheManager
+                            .BinderInterfaceFactory() { // from class:
+                                                        // android.telephony.ims.ImsMmTelManager$$ExternalSyntheticLambda0
+                        @Override // android.telephony.BinderCacheManager.BinderInterfaceFactory
+                        public final Object create() {
+                            ITelephony iTelephonyInterface;
+                            iTelephonyInterface = ImsMmTelManager.getITelephonyInterface();
+                            return iTelephonyInterface;
+                        }
+                    });
     private final BinderCacheManager<ITelephony> mBinderCache;
     private final Context mContext;
     private final int mSubId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WiFiCallingMode {
-    }
+    public @interface WiFiCallingMode {}
 
     @SystemApi
     @Deprecated
     public static class RegistrationCallback extends RegistrationManager.RegistrationCallback {
         @Override // android.telephony.ims.RegistrationManager.RegistrationCallback
-        public void onRegistered(int imsTransportType) {
-        }
+        public void onRegistered(int imsTransportType) {}
 
         @Override // android.telephony.ims.RegistrationManager.RegistrationCallback
-        public void onRegistering(int imsTransportType) {
-        }
+        public void onRegistering(int imsTransportType) {}
 
         @Override // android.telephony.ims.RegistrationManager.RegistrationCallback
-        public void onUnregistered(ImsReasonInfo info) {
-        }
+        public void onUnregistered(ImsReasonInfo info) {}
 
         @Override // android.telephony.ims.RegistrationManager.RegistrationCallback
-        public void onTechnologyChangeFailed(int imsTransportType, ImsReasonInfo info) {
-        }
+        public void onTechnologyChangeFailed(int imsTransportType, ImsReasonInfo info) {}
     }
 
     public static class CapabilityCallback {
@@ -85,12 +84,15 @@ public class ImsMmTelManager implements RegistrationManager {
                 }
                 long callingIdentity = Binder.clearCallingIdentity();
                 try {
-                    this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ImsMmTelManager$CapabilityCallback$CapabilityBinder$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ImsMmTelManager.CapabilityCallback.CapabilityBinder.this.lambda$onCapabilitiesStatusChanged$0(config);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ImsMmTelManager$CapabilityCallback$CapabilityBinder$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ImsMmTelManager.CapabilityCallback.CapabilityBinder.this
+                                            .lambda$onCapabilitiesStatusChanged$0(config);
+                                }
+                            });
                 } finally {
                     restoreCallingIdentity(callingIdentity);
                 }
@@ -98,16 +100,17 @@ public class ImsMmTelManager implements RegistrationManager {
 
             /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onCapabilitiesStatusChanged$0(int config) {
-                this.mLocalCallback.onCapabilitiesStatusChanged(new MmTelFeature.MmTelCapabilities(config));
+                this.mLocalCallback.onCapabilitiesStatusChanged(
+                        new MmTelFeature.MmTelCapabilities(config));
             }
 
             @Override // android.telephony.ims.aidl.IImsCapabilityCallback
-            public void onQueryCapabilityConfiguration(int capability, int radioTech, boolean isEnabled) {
-            }
+            public void onQueryCapabilityConfiguration(
+                    int capability, int radioTech, boolean isEnabled) {}
 
             @Override // android.telephony.ims.aidl.IImsCapabilityCallback
-            public void onChangeCapabilityConfigurationError(int capability, int radioTech, int reason) {
-            }
+            public void onChangeCapabilityConfigurationError(
+                    int capability, int radioTech, int reason) {}
 
             /* JADX INFO: Access modifiers changed from: private */
             public void setExecutor(Executor executor) {
@@ -115,8 +118,7 @@ public class ImsMmTelManager implements RegistrationManager {
             }
         }
 
-        public void onCapabilitiesStatusChanged(MmTelFeature.MmTelCapabilities capabilities) {
-        }
+        public void onCapabilitiesStatusChanged(MmTelFeature.MmTelCapabilities capabilities) {}
 
         public final IImsCapabilityCallback getBinder() {
             return this.mBinder;
@@ -148,7 +150,8 @@ public class ImsMmTelManager implements RegistrationManager {
 
     @SystemApi
     @Deprecated
-    public void registerImsRegistrationCallback(Executor executor, RegistrationCallback c) throws ImsException {
+    public void registerImsRegistrationCallback(Executor executor, RegistrationCallback c)
+            throws ImsException {
         if (c == null) {
             throw new IllegalArgumentException("Must include a non-null RegistrationCallback.");
         }
@@ -173,7 +176,8 @@ public class ImsMmTelManager implements RegistrationManager {
     }
 
     @Override // android.telephony.ims.RegistrationManager
-    public void registerImsRegistrationCallback(Executor executor, RegistrationManager.RegistrationCallback c) throws ImsException {
+    public void registerImsRegistrationCallback(
+            Executor executor, RegistrationManager.RegistrationCallback c) throws ImsException {
         if (c == null) {
             throw new IllegalArgumentException("Must include a non-null RegistrationCallback.");
         }
@@ -228,7 +232,8 @@ public class ImsMmTelManager implements RegistrationManager {
     }
 
     @SystemApi
-    public void registerImsEmergencyRegistrationCallback(Executor executor, RegistrationManager.RegistrationCallback c) throws ImsException {
+    public void registerImsEmergencyRegistrationCallback(
+            Executor executor, RegistrationManager.RegistrationCallback c) throws ImsException {
         if (c == null) {
             throw new IllegalArgumentException("Must include a non-null RegistrationCallback.");
         }
@@ -252,7 +257,8 @@ public class ImsMmTelManager implements RegistrationManager {
     }
 
     @SystemApi
-    public void unregisterImsEmergencyRegistrationCallback(RegistrationManager.RegistrationCallback c) {
+    public void unregisterImsEmergencyRegistrationCallback(
+            RegistrationManager.RegistrationCallback c) {
         if (c == null) {
             throw new IllegalArgumentException("Must include a non-null RegistrationCallback.");
         }
@@ -282,15 +288,18 @@ public class ImsMmTelManager implements RegistrationManager {
             throw new RuntimeException("Could not find Telephony Service.");
         }
         try {
-            iTelephony.getImsMmTelRegistrationState(this.mSubId, new AnonymousClass1(executor, stateCallback));
+            iTelephony.getImsMmTelRegistrationState(
+                    this.mSubId, new AnonymousClass1(executor, stateCallback));
         } catch (RemoteException | ServiceSpecificException e) {
             Log.w(TAG, "Error getting registration state: " + e);
-            executor.execute(new Runnable() { // from class: android.telephony.ims.ImsMmTelManager$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    stateCallback.accept(0);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsMmTelManager$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            stateCallback.accept(0);
+                        }
+                    });
         }
     }
 
@@ -310,12 +319,14 @@ public class ImsMmTelManager implements RegistrationManager {
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$stateCallback;
-                executor.execute(new Runnable() { // from class: android.telephony.ims.ImsMmTelManager$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        consumer.accept(Integer.valueOf(result));
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.ImsMmTelManager$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                consumer.accept(Integer.valueOf(result));
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
@@ -323,7 +334,8 @@ public class ImsMmTelManager implements RegistrationManager {
     }
 
     @Override // android.telephony.ims.RegistrationManager
-    public void getRegistrationTransportType(Executor executor, final Consumer<Integer> transportTypeCallback) {
+    public void getRegistrationTransportType(
+            Executor executor, final Consumer<Integer> transportTypeCallback) {
         if (transportTypeCallback == null) {
             throw new IllegalArgumentException("Must include a non-null callback.");
         }
@@ -335,15 +347,18 @@ public class ImsMmTelManager implements RegistrationManager {
             throw new RuntimeException("Could not find Telephony Service.");
         }
         try {
-            iTelephony.getImsMmTelRegistrationTransportType(this.mSubId, new AnonymousClass2(executor, transportTypeCallback));
+            iTelephony.getImsMmTelRegistrationTransportType(
+                    this.mSubId, new AnonymousClass2(executor, transportTypeCallback));
         } catch (RemoteException | ServiceSpecificException e) {
             Log.w(TAG, "Error getting transport type: " + e);
-            executor.execute(new Runnable() { // from class: android.telephony.ims.ImsMmTelManager$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    transportTypeCallback.accept(-1);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsMmTelManager$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            transportTypeCallback.accept(-1);
+                        }
+                    });
         }
     }
 
@@ -363,19 +378,22 @@ public class ImsMmTelManager implements RegistrationManager {
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$transportTypeCallback;
-                executor.execute(new Runnable() { // from class: android.telephony.ims.ImsMmTelManager$2$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        consumer.accept(Integer.valueOf(result));
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.ImsMmTelManager$2$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                consumer.accept(Integer.valueOf(result));
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
         }
     }
 
-    public void registerMmTelCapabilityCallback(Executor executor, CapabilityCallback c) throws ImsException {
+    public void registerMmTelCapabilityCallback(Executor executor, CapabilityCallback c)
+            throws ImsException {
         if (c == null) {
             throw new IllegalArgumentException("Must include a non-null RegistrationCallback.");
         }
@@ -476,7 +494,9 @@ public class ImsMmTelManager implements RegistrationManager {
     }
 
     @SystemApi
-    public void isSupported(int capability, int transportType, Executor executor, Consumer<Boolean> callback) throws ImsException {
+    public void isSupported(
+            int capability, int transportType, Executor executor, Consumer<Boolean> callback)
+            throws ImsException {
         if (callback == null) {
             throw new IllegalArgumentException("Must include a non-null Consumer.");
         }
@@ -488,7 +508,11 @@ public class ImsMmTelManager implements RegistrationManager {
             throw new ImsException("Could not find Telephony Service.", 1);
         }
         try {
-            iTelephony.isMmTelCapabilitySupported(this.mSubId, new AnonymousClass3(executor, callback), capability, transportType);
+            iTelephony.isMmTelCapabilitySupported(
+                    this.mSubId,
+                    new AnonymousClass3(executor, callback),
+                    capability,
+                    transportType);
         } catch (RemoteException e) {
             e.rethrowAsRuntimeException();
         } catch (ServiceSpecificException sse) {
@@ -512,14 +536,16 @@ public class ImsMmTelManager implements RegistrationManager {
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.ims.ImsMmTelManager$3$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        Consumer consumer2 = consumer;
-                        int i = result;
-                        consumer2.accept(Boolean.valueOf(result == 1));
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.ImsMmTelManager$3$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                Consumer consumer2 = consumer;
+                                int i = result;
+                                consumer2.accept(Boolean.valueOf(result == 1));
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
@@ -798,7 +824,8 @@ public class ImsMmTelManager implements RegistrationManager {
             throw new ImsException("Could not find Telephony Service.", 1);
         }
         try {
-            iTelephony.getImsMmTelFeatureState(this.mSubId, new AnonymousClass4(executor, callback));
+            iTelephony.getImsMmTelFeatureState(
+                    this.mSubId, new AnonymousClass4(executor, callback));
         } catch (RemoteException e) {
             e.rethrowAsRuntimeException();
         } catch (ServiceSpecificException sse) {
@@ -822,30 +849,36 @@ public class ImsMmTelManager implements RegistrationManager {
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.ims.ImsMmTelManager$4$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        consumer.accept(Integer.valueOf(result));
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.ImsMmTelManager$4$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                consumer.accept(Integer.valueOf(result));
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
         }
     }
 
-    public void registerImsStateCallback(Executor executor, ImsStateCallback callback) throws ImsException {
+    public void registerImsStateCallback(Executor executor, ImsStateCallback callback)
+            throws ImsException {
         Objects.requireNonNull(callback, "Must include a non-null ImsStateCallback.");
         Objects.requireNonNull(executor, "Must include a non-null Executor.");
         callback.init(executor);
         BinderCacheManager<ITelephony> binderCacheManager = this.mBinderCache;
         Objects.requireNonNull(callback);
-        ITelephony telephony = binderCacheManager.listenOnBinder(callback, new ImsMmTelManager$$ExternalSyntheticLambda3(callback));
+        ITelephony telephony =
+                binderCacheManager.listenOnBinder(
+                        callback, new ImsMmTelManager$$ExternalSyntheticLambda3(callback));
         if (telephony == null) {
             throw new ImsException("Telephony server is down", 1);
         }
         try {
-            telephony.registerImsStateCallback(this.mSubId, 1, callback.getCallbackBinder(), getOpPackageName());
+            telephony.registerImsStateCallback(
+                    this.mSubId, 1, callback.getCallbackBinder(), getOpPackageName());
         } catch (RemoteException | IllegalStateException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -877,7 +910,11 @@ public class ImsMmTelManager implements RegistrationManager {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static ITelephony getITelephonyInterface() {
-        ITelephony binder = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+        ITelephony binder =
+                ITelephony.Stub.asInterface(
+                        TelephonyFrameworkInitializer.getTelephonyServiceManager()
+                                .getTelephonyServiceRegisterer()
+                                .get());
         return binder;
     }
 

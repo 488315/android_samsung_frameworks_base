@@ -3,9 +3,10 @@ package com.android.server.am;
 import android.app.IApplicationThread;
 import android.os.Debug;
 import android.os.SystemClock;
+
 import com.android.internal.app.procstats.ProcessState;
-import com.android.server.am.ProcessList;
 import com.android.server.power.stats.BatteryStatsImpl;
+
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -40,7 +41,8 @@ public final class ProcessProfileRecord {
     public int mSetProcState;
     public IApplicationThread mThread;
     public int mTrimMemoryLevel;
-    public final ProcessList.ProcStateMemTracker mProcStateMemTracker = new ProcessList.ProcStateMemTracker();
+    public final ProcessList.ProcStateMemTracker mProcStateMemTracker =
+            new ProcessList.ProcStateMemTracker();
     public int mPssProcState = 20;
     public final AtomicLong mLastCpuTime = new AtomicLong(0);
     public final AtomicLong mCurCpuTime = new AtomicLong(0);

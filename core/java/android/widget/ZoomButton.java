@@ -27,15 +27,18 @@ public class ZoomButton extends ImageButton implements View.OnLongClickListener 
 
     public ZoomButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        this.mRunnable = new Runnable() { // from class: android.widget.ZoomButton.1
-            @Override // java.lang.Runnable
-            public void run() {
-                if (ZoomButton.this.hasOnClickListeners() && ZoomButton.this.mIsInLongpress && ZoomButton.this.isEnabled()) {
-                    ZoomButton.this.callOnClick();
-                    ZoomButton.this.postDelayed(this, ZoomButton.this.mZoomSpeed);
-                }
-            }
-        };
+        this.mRunnable =
+                new Runnable() { // from class: android.widget.ZoomButton.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        if (ZoomButton.this.hasOnClickListeners()
+                                && ZoomButton.this.mIsInLongpress
+                                && ZoomButton.this.isEnabled()) {
+                            ZoomButton.this.callOnClick();
+                            ZoomButton.this.postDelayed(this, ZoomButton.this.mZoomSpeed);
+                        }
+                    }
+                };
         this.mZoomSpeed = 1000L;
         setOnLongClickListener(this);
     }

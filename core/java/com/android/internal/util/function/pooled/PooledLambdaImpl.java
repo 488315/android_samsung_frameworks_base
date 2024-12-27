@@ -4,6 +4,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Pools;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.BitUtils;
 import com.android.internal.util.FunctionalUtils;
@@ -37,6 +38,7 @@ import com.android.internal.util.function.TriPredicate;
 import com.android.internal.util.function.UndecConsumer;
 import com.android.internal.util.function.UndecFunction;
 import com.android.internal.util.function.UndecPredicate;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -48,7 +50,20 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /* loaded from: classes5.dex */
-final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, R> {
+final class PooledLambdaImpl<R>
+        extends OmniFunction<
+                Object,
+                Object,
+                Object,
+                Object,
+                Object,
+                Object,
+                Object,
+                Object,
+                Object,
+                Object,
+                Object,
+                R> {
     private static final boolean DEBUG = false;
     private static final int FLAG_ACQUIRED_FROM_MESSAGE_CALLBACKS_POOL = 8192;
     private static final int FLAG_RECYCLED = 2048;
@@ -71,8 +86,7 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
         }
     }
 
-    private PooledLambdaImpl() {
-    }
+    private PooledLambdaImpl() {}
 
     @Override // com.android.internal.util.function.pooled.PooledLambda
     public void recycle() {
@@ -105,12 +119,28 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    R invoke(java.lang.Object r17, java.lang.Object r18, java.lang.Object r19, java.lang.Object r20, java.lang.Object r21, java.lang.Object r22, java.lang.Object r23, java.lang.Object r24, java.lang.Object r25, java.lang.Object r26, java.lang.Object r27) {
+    R invoke(
+            java.lang.Object r17,
+            java.lang.Object r18,
+            java.lang.Object r19,
+            java.lang.Object r20,
+            java.lang.Object r21,
+            java.lang.Object r22,
+            java.lang.Object r23,
+            java.lang.Object r24,
+            java.lang.Object r25,
+            java.lang.Object r26,
+            java.lang.Object r27) {
         /*
             Method dump skipped, instructions count: 271
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.util.function.pooled.PooledLambdaImpl.invoke(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object):java.lang.Object");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.util.function.pooled.PooledLambdaImpl.invoke(java.lang.Object,"
+                    + " java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object,"
+                    + " java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object,"
+                    + " java.lang.Object, java.lang.Object):java.lang.Object");
     }
 
     private boolean fillInArg(Object invocationArg) {
@@ -123,7 +153,11 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
             }
         }
         if (invocationArg != null && invocationArg != ArgumentPlaceholder.INSTANCE) {
-            throw new IllegalStateException("No more arguments expected for provided arg " + invocationArg + " among " + Arrays.toString(this.mArgs));
+            throw new IllegalStateException(
+                    "No more arguments expected for provided arg "
+                            + invocationArg
+                            + " among "
+                            + Arrays.toString(this.mArgs));
         }
         return false;
     }
@@ -164,7 +198,9 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
                         ((BiConsumer) this.mFunc).accept(popArg(0), popArg(1));
                         return null;
                     case 2:
-                        return (R) Boolean.valueOf(((BiPredicate) this.mFunc).test(popArg(0), popArg(1)));
+                        return (R)
+                                Boolean.valueOf(
+                                        ((BiPredicate) this.mFunc).test(popArg(0), popArg(1)));
                     case 3:
                         return (R) ((BiFunction) this.mFunc).apply(popArg(0), popArg(1));
                 }
@@ -174,99 +210,265 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
                         ((TriConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2));
                         return null;
                     case 2:
-                        return (R) Boolean.valueOf(((TriPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2)));
+                        return (R)
+                                Boolean.valueOf(
+                                        ((TriPredicate) this.mFunc)
+                                                .test(popArg(0), popArg(1), popArg(2)));
                     case 3:
-                        return (R) ((TriFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2));
+                        return (R)
+                                ((TriFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2));
                 }
             case 4:
                 switch (decodeReturnType) {
                     case 1:
-                        ((QuadConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3));
+                        ((QuadConsumer) this.mFunc)
+                                .accept(popArg(0), popArg(1), popArg(2), popArg(3));
                         return null;
                     case 2:
-                        return (R) Boolean.valueOf(((QuadPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3)));
+                        return (R)
+                                Boolean.valueOf(
+                                        ((QuadPredicate) this.mFunc)
+                                                .test(popArg(0), popArg(1), popArg(2), popArg(3)));
                     case 3:
-                        return (R) ((QuadFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3));
+                        return (R)
+                                ((QuadFunction) this.mFunc)
+                                        .apply(popArg(0), popArg(1), popArg(2), popArg(3));
                 }
             case 5:
                 switch (decodeReturnType) {
                     case 1:
-                        ((QuintConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4));
+                        ((QuintConsumer) this.mFunc)
+                                .accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4));
                         return null;
                     case 2:
-                        return (R) Boolean.valueOf(((QuintPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4)));
+                        return (R)
+                                Boolean.valueOf(
+                                        ((QuintPredicate) this.mFunc)
+                                                .test(
+                                                        popArg(0), popArg(1), popArg(2), popArg(3),
+                                                        popArg(4)));
                     case 3:
-                        return (R) ((QuintFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4));
+                        return (R)
+                                ((QuintFunction) this.mFunc)
+                                        .apply(
+                                                popArg(0), popArg(1), popArg(2), popArg(3),
+                                                popArg(4));
                 }
             case 6:
                 switch (decodeReturnType) {
                     case 1:
-                        ((HexConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5));
+                        ((HexConsumer) this.mFunc)
+                                .accept(
+                                        popArg(0), popArg(1), popArg(2), popArg(3), popArg(4),
+                                        popArg(5));
                         return null;
                     case 2:
-                        return (R) Boolean.valueOf(((HexPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5)));
+                        return (R)
+                                Boolean.valueOf(
+                                        ((HexPredicate) this.mFunc)
+                                                .test(
+                                                        popArg(0), popArg(1), popArg(2), popArg(3),
+                                                        popArg(4), popArg(5)));
                     case 3:
-                        return (R) ((HexFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5));
+                        return (R)
+                                ((HexFunction) this.mFunc)
+                                        .apply(
+                                                popArg(0), popArg(1), popArg(2), popArg(3),
+                                                popArg(4), popArg(5));
                 }
             case 7:
                 switch (decodeReturnType) {
                     case 1:
-                        ((HeptConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6));
+                        ((HeptConsumer) this.mFunc)
+                                .accept(
+                                        popArg(0), popArg(1), popArg(2), popArg(3), popArg(4),
+                                        popArg(5), popArg(6));
                         return null;
                     case 2:
-                        return (R) Boolean.valueOf(((HeptPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6)));
+                        return (R)
+                                Boolean.valueOf(
+                                        ((HeptPredicate) this.mFunc)
+                                                .test(
+                                                        popArg(0), popArg(1), popArg(2), popArg(3),
+                                                        popArg(4), popArg(5), popArg(6)));
                     case 3:
-                        return (R) ((HeptFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6));
+                        return (R)
+                                ((HeptFunction) this.mFunc)
+                                        .apply(
+                                                popArg(0), popArg(1), popArg(2), popArg(3),
+                                                popArg(4), popArg(5), popArg(6));
                 }
             case 8:
                 switch (decodeReturnType) {
                     case 1:
-                        ((OctConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7));
+                        ((OctConsumer) this.mFunc)
+                                .accept(
+                                        popArg(0), popArg(1), popArg(2), popArg(3), popArg(4),
+                                        popArg(5), popArg(6), popArg(7));
                         return null;
                     case 2:
-                        return (R) Boolean.valueOf(((OctPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7)));
+                        return (R)
+                                Boolean.valueOf(
+                                        ((OctPredicate) this.mFunc)
+                                                .test(
+                                                        popArg(0), popArg(1), popArg(2), popArg(3),
+                                                        popArg(4), popArg(5), popArg(6),
+                                                        popArg(7)));
                     case 3:
-                        return (R) ((OctFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7));
+                        return (R)
+                                ((OctFunction) this.mFunc)
+                                        .apply(
+                                                popArg(0), popArg(1), popArg(2), popArg(3),
+                                                popArg(4), popArg(5), popArg(6), popArg(7));
                 }
             case 9:
                 switch (decodeReturnType) {
                     case 1:
-                        ((NonaConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8));
+                        ((NonaConsumer) this.mFunc)
+                                .accept(
+                                        popArg(0), popArg(1), popArg(2), popArg(3), popArg(4),
+                                        popArg(5), popArg(6), popArg(7), popArg(8));
                         return null;
                     case 2:
-                        return (R) Boolean.valueOf(((NonaPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8)));
+                        return (R)
+                                Boolean.valueOf(
+                                        ((NonaPredicate) this.mFunc)
+                                                .test(
+                                                        popArg(0), popArg(1), popArg(2), popArg(3),
+                                                        popArg(4), popArg(5), popArg(6), popArg(7),
+                                                        popArg(8)));
                     case 3:
-                        return (R) ((NonaFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8));
+                        return (R)
+                                ((NonaFunction) this.mFunc)
+                                        .apply(
+                                                popArg(0), popArg(1), popArg(2), popArg(3),
+                                                popArg(4), popArg(5), popArg(6), popArg(7),
+                                                popArg(8));
                 }
             case 10:
                 switch (decodeReturnType) {
                     case 1:
-                        ((DecConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9));
+                        ((DecConsumer) this.mFunc)
+                                .accept(
+                                        popArg(0), popArg(1), popArg(2), popArg(3), popArg(4),
+                                        popArg(5), popArg(6), popArg(7), popArg(8), popArg(9));
                         return null;
                     case 2:
-                        return (R) Boolean.valueOf(((DecPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9)));
+                        return (R)
+                                Boolean.valueOf(
+                                        ((DecPredicate) this.mFunc)
+                                                .test(
+                                                        popArg(0), popArg(1), popArg(2), popArg(3),
+                                                        popArg(4), popArg(5), popArg(6), popArg(7),
+                                                        popArg(8), popArg(9)));
                     case 3:
-                        return (R) ((DecFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9));
+                        return (R)
+                                ((DecFunction) this.mFunc)
+                                        .apply(
+                                                popArg(0), popArg(1), popArg(2), popArg(3),
+                                                popArg(4), popArg(5), popArg(6), popArg(7),
+                                                popArg(8), popArg(9));
                 }
             case 11:
                 switch (decodeReturnType) {
                     case 1:
-                        ((UndecConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10));
+                        ((UndecConsumer) this.mFunc)
+                                .accept(
+                                        popArg(0),
+                                        popArg(1),
+                                        popArg(2),
+                                        popArg(3),
+                                        popArg(4),
+                                        popArg(5),
+                                        popArg(6),
+                                        popArg(7),
+                                        popArg(8),
+                                        popArg(9),
+                                        popArg(10));
                         return null;
                     case 2:
-                        return (R) Boolean.valueOf(((UndecPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10)));
+                        return (R)
+                                Boolean.valueOf(
+                                        ((UndecPredicate) this.mFunc)
+                                                .test(
+                                                        popArg(0),
+                                                        popArg(1),
+                                                        popArg(2),
+                                                        popArg(3),
+                                                        popArg(4),
+                                                        popArg(5),
+                                                        popArg(6),
+                                                        popArg(7),
+                                                        popArg(8),
+                                                        popArg(9),
+                                                        popArg(10)));
                     case 3:
-                        return (R) ((UndecFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10));
+                        return (R)
+                                ((UndecFunction) this.mFunc)
+                                        .apply(
+                                                popArg(0),
+                                                popArg(1),
+                                                popArg(2),
+                                                popArg(3),
+                                                popArg(4),
+                                                popArg(5),
+                                                popArg(6),
+                                                popArg(7),
+                                                popArg(8),
+                                                popArg(9),
+                                                popArg(10));
                 }
             case 12:
                 switch (decodeReturnType) {
                     case 1:
-                        ((DodecConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10), popArg(11));
+                        ((DodecConsumer) this.mFunc)
+                                .accept(
+                                        popArg(0),
+                                        popArg(1),
+                                        popArg(2),
+                                        popArg(3),
+                                        popArg(4),
+                                        popArg(5),
+                                        popArg(6),
+                                        popArg(7),
+                                        popArg(8),
+                                        popArg(9),
+                                        popArg(10),
+                                        popArg(11));
                         return null;
                     case 2:
-                        return (R) Boolean.valueOf(((DodecPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10), popArg(11)));
+                        return (R)
+                                Boolean.valueOf(
+                                        ((DodecPredicate) this.mFunc)
+                                                .test(
+                                                        popArg(0),
+                                                        popArg(1),
+                                                        popArg(2),
+                                                        popArg(3),
+                                                        popArg(4),
+                                                        popArg(5),
+                                                        popArg(6),
+                                                        popArg(7),
+                                                        popArg(8),
+                                                        popArg(9),
+                                                        popArg(10),
+                                                        popArg(11)));
                     case 3:
-                        return (R) ((DodecFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10), popArg(11));
+                        return (R)
+                                ((DodecFunction) this.mFunc)
+                                        .apply(
+                                                popArg(0),
+                                                popArg(1),
+                                                popArg(2),
+                                                popArg(3),
+                                                popArg(4),
+                                                popArg(5),
+                                                popArg(6),
+                                                popArg(7),
+                                                popArg(8),
+                                                popArg(9),
+                                                popArg(10),
+                                                popArg(11));
                 }
             case 15:
                 switch (decodeReturnType) {
@@ -302,7 +504,10 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
         }
         StringBuilder sb = new StringBuilder();
         if (isConstSupplier()) {
-            sb.append(getFuncTypeAsString()).append(NavigationBarInflaterView.KEY_CODE_START).append(doInvoke()).append(NavigationBarInflaterView.KEY_CODE_END);
+            sb.append(getFuncTypeAsString())
+                    .append(NavigationBarInflaterView.KEY_CODE_START)
+                    .append(doInvoke())
+                    .append(NavigationBarInflaterView.KEY_CODE_END);
         } else {
             Object func = this.mFunc;
             if (func instanceof PooledLambdaImpl) {
@@ -311,7 +516,9 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
                 sb.append(getFuncTypeAsString()).append("@").append(hashCodeHex(func));
             }
             sb.append(NavigationBarInflaterView.KEY_CODE_START);
-            sb.append(commaSeparateFirstN(this.mArgs, LambdaType.decodeArgCount(getFlags(MASK_FUNC_TYPE))));
+            sb.append(
+                    commaSeparateFirstN(
+                            this.mArgs, LambdaType.decodeArgCount(getFlags(MASK_FUNC_TYPE))));
             sb.append(NavigationBarInflaterView.KEY_CODE_END);
         }
         return sb.toString();
@@ -333,10 +540,35 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
             return "supplier";
         }
         String name = LambdaType.toString(getFlags(MASK_EXPOSED_AS));
-        return name.endsWith("Consumer") ? "consumer" : name.endsWith("Function") ? "function" : name.endsWith("Predicate") ? "predicate" : name.endsWith("Supplier") ? "supplier" : name.endsWith("Runnable") ? "runnable" : name;
+        return name.endsWith("Consumer")
+                ? "consumer"
+                : name.endsWith("Function")
+                        ? "function"
+                        : name.endsWith("Predicate")
+                                ? "predicate"
+                                : name.endsWith("Supplier")
+                                        ? "supplier"
+                                        : name.endsWith("Runnable") ? "runnable" : name;
     }
 
-    static <E extends PooledLambda> E acquire(Pool pool, Object func, int fNumArgs, int numPlaceholders, int fReturnType, Object a, Object b, Object c, Object d, Object e, Object f, Object g, Object h, Object i, Object j, Object k, Object l) {
+    static <E extends PooledLambda> E acquire(
+            Pool pool,
+            Object func,
+            int fNumArgs,
+            int numPlaceholders,
+            int fReturnType,
+            Object a,
+            Object b,
+            Object c,
+            Object d,
+            Object e,
+            Object f,
+            Object g,
+            Object h,
+            Object i,
+            Object j,
+            Object k,
+            Object l) {
         PooledLambdaImpl r = acquire(pool);
         r.mFunc = Objects.requireNonNull(func);
         r.setFlags(MASK_FUNC_TYPE, LambdaType.encode(fNumArgs, fReturnType));
@@ -383,13 +615,42 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
         }
     }
 
-    @Override // com.android.internal.util.function.pooled.OmniFunction, java.util.function.Predicate, java.util.function.BiPredicate
-    public OmniFunction<Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, R> negate() {
+    @Override // com.android.internal.util.function.pooled.OmniFunction,
+              // java.util.function.Predicate, java.util.function.BiPredicate
+    public OmniFunction<
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    R>
+            negate() {
         throw new UnsupportedOperationException();
     }
 
-    @Override // com.android.internal.util.function.pooled.OmniFunction, java.util.function.BiFunction
-    public <V> OmniFunction<Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, V> andThen(Function<? super R, ? extends V> after) {
+    @Override // com.android.internal.util.function.pooled.OmniFunction,
+              // java.util.function.BiFunction
+    public <V>
+            OmniFunction<
+                            Object,
+                            Object,
+                            Object,
+                            Object,
+                            Object,
+                            Object,
+                            Object,
+                            Object,
+                            Object,
+                            Object,
+                            Object,
+                            V>
+                    andThen(Function<? super R, ? extends V> after) {
         throw new UnsupportedOperationException();
     }
 
@@ -408,8 +669,28 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
         return this.mConstValue;
     }
 
-    @Override // com.android.internal.util.function.pooled.OmniFunction, com.android.internal.util.function.pooled.PooledPredicate, com.android.internal.util.function.pooled.PooledLambda, com.android.internal.util.function.pooled.PooledSupplier, com.android.internal.util.function.pooled.PooledRunnable, com.android.internal.util.function.pooled.PooledSupplier.OfInt, com.android.internal.util.function.pooled.PooledSupplier.OfLong, com.android.internal.util.function.pooled.PooledSupplier.OfDouble
-    public OmniFunction<Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, R> recycleOnUse() {
+    @Override // com.android.internal.util.function.pooled.OmniFunction,
+              // com.android.internal.util.function.pooled.PooledPredicate,
+              // com.android.internal.util.function.pooled.PooledLambda,
+              // com.android.internal.util.function.pooled.PooledSupplier,
+              // com.android.internal.util.function.pooled.PooledRunnable,
+              // com.android.internal.util.function.pooled.PooledSupplier.OfInt,
+              // com.android.internal.util.function.pooled.PooledSupplier.OfLong,
+              // com.android.internal.util.function.pooled.PooledSupplier.OfDouble
+    public OmniFunction<
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    Object,
+                    R>
+            recycleOnUse() {
         this.mFlags |= 4096;
         return this;
     }
@@ -456,8 +737,7 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
         public static final int MASK_BIT_COUNT = 7;
         public static final int MASK_RETURN_TYPE = 112;
 
-        LambdaType() {
-        }
+        LambdaType() {}
 
         static int encode(int argCount, int returnType) {
             return PooledLambdaImpl.mask(15, argCount) | PooledLambdaImpl.mask(112, returnType);
@@ -529,8 +809,7 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
             public static final int OBJECT = 3;
             public static final int VOID = 1;
 
-            ReturnType() {
-            }
+            ReturnType() {}
 
             static String toString(int returnType) {
                 switch (returnType) {

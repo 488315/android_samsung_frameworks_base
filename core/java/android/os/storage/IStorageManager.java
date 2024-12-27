@@ -14,11 +14,10 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
-import android.os.storage.IObbActionListener;
-import android.os.storage.IStorageEventListener;
-import android.os.storage.IStorageShutdownObserver;
 import android.provider.Telephony;
+
 import com.android.internal.os.AppFuseMount;
+
 import com.samsung.android.media.AudioParameter;
 
 /* loaded from: classes3.dex */
@@ -37,7 +36,8 @@ public interface IStorageManager extends IInterface {
 
     int createPassStorage() throws RemoteException;
 
-    int createSecureContainer(String str, int i, String str2, String str3, int i2, boolean z) throws RemoteException;
+    int createSecureContainer(String str, int i, String str2, String str3, int i2, boolean z)
+            throws RemoteException;
 
     void createUserStorageKeys(int i, boolean z) throws RemoteException;
 
@@ -137,7 +137,9 @@ public interface IStorageManager extends IInterface {
 
     void mountBySecApp(String str, String str2) throws RemoteException;
 
-    void mountObb(String str, String str2, IObbActionListener iObbActionListener, int i, ObbInfo obbInfo) throws RemoteException;
+    void mountObb(
+            String str, String str2, IObbActionListener iObbActionListener, int i, ObbInfo obbInfo)
+            throws RemoteException;
 
     AppFuseMount mountProxyFileDescriptorBridge() throws RemoteException;
 
@@ -189,7 +191,8 @@ public interface IStorageManager extends IInterface {
 
     boolean setDualDARPolicyCmd(int i, int i2) throws RemoteException;
 
-    void setPrimaryStorageUuid(String str, IPackageMoveObserver iPackageMoveObserver) throws RemoteException;
+    void setPrimaryStorageUuid(String str, IPackageMoveObserver iPackageMoveObserver)
+            throws RemoteException;
 
     boolean setSdpPolicyCmd(int i) throws RemoteException;
 
@@ -219,7 +222,8 @@ public interface IStorageManager extends IInterface {
 
     void unmountBySecApp(String str, String str2) throws RemoteException;
 
-    void unmountObb(String str, boolean z, IObbActionListener iObbActionListener, int i) throws RemoteException;
+    void unmountObb(String str, boolean z, IObbActionListener iObbActionListener, int i)
+            throws RemoteException;
 
     int unmountSecureContainer(String str, boolean z) throws RemoteException;
 
@@ -231,12 +235,10 @@ public interface IStorageManager extends IInterface {
 
     public static class Default implements IStorageManager {
         @Override // android.os.storage.IStorageManager
-        public void registerListener(IStorageEventListener listener) throws RemoteException {
-        }
+        public void registerListener(IStorageEventListener listener) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void unregisterListener(IStorageEventListener listener) throws RemoteException {
-        }
+        public void unregisterListener(IStorageEventListener listener) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public int mountVolume(String mountPoint) throws RemoteException {
@@ -244,20 +246,24 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public void unmountVolume(String mountPoint, boolean force, boolean removeEncryption) throws RemoteException {
-        }
+        public void unmountVolume(String mountPoint, boolean force, boolean removeEncryption)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void shutdown(IStorageShutdownObserver observer) throws RemoteException {
-        }
+        public void shutdown(IStorageShutdownObserver observer) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void mountObb(String rawPath, String canonicalPath, IObbActionListener token, int nonce, ObbInfo obbInfo) throws RemoteException {
-        }
+        public void mountObb(
+                String rawPath,
+                String canonicalPath,
+                IObbActionListener token,
+                int nonce,
+                ObbInfo obbInfo)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void unmountObb(String rawPath, boolean force, IObbActionListener token, int nonce) throws RemoteException {
-        }
+        public void unmountObb(String rawPath, boolean force, IObbActionListener token, int nonce)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public boolean isObbMounted(String rawPath) throws RemoteException {
@@ -270,13 +276,13 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public StorageVolume[] getVolumeList(int userId, String callingPackage, int flags) throws RemoteException {
+        public StorageVolume[] getVolumeList(int userId, String callingPackage, int flags)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.storage.IStorageManager
-        public void mkdirs(String callingPkg, String path) throws RemoteException {
-        }
+        public void mkdirs(String callingPkg, String path) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public long lastMaintenance() throws RemoteException {
@@ -284,8 +290,7 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public void runMaintenance() throws RemoteException {
-        }
+        public void runMaintenance() throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public DiskInfo[] getDisks() throws RemoteException {
@@ -303,44 +308,34 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public void mount(String volId) throws RemoteException {
-        }
+        public void mount(String volId) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void unmount(String volId) throws RemoteException {
-        }
+        public void unmount(String volId) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void format(String volId) throws RemoteException {
-        }
+        public void format(String volId) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void partitionPublic(String diskId) throws RemoteException {
-        }
+        public void partitionPublic(String diskId) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void partitionPrivate(String diskId) throws RemoteException {
-        }
+        public void partitionPrivate(String diskId) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void partitionMixed(String diskId, int ratio) throws RemoteException {
-        }
+        public void partitionMixed(String diskId, int ratio) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void setVolumeNickname(String fsUuid, String nickname) throws RemoteException {
-        }
+        public void setVolumeNickname(String fsUuid, String nickname) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void setVolumeUserFlags(String fsUuid, int flags, int mask) throws RemoteException {
-        }
+        public void setVolumeUserFlags(String fsUuid, int flags, int mask) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void forgetVolume(String fsUuid) throws RemoteException {
-        }
+        public void forgetVolume(String fsUuid) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void forgetAllVolumes() throws RemoteException {
-        }
+        public void forgetAllVolumes() throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public String getPrimaryStorageUuid() throws RemoteException {
@@ -348,32 +343,26 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public void setPrimaryStorageUuid(String volumeUuid, IPackageMoveObserver callback) throws RemoteException {
-        }
+        public void setPrimaryStorageUuid(String volumeUuid, IPackageMoveObserver callback)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void benchmark(String volId, IVoldTaskListener listener) throws RemoteException {
-        }
+        public void benchmark(String volId, IVoldTaskListener listener) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void setDebugFlags(int flags, int mask) throws RemoteException {
-        }
+        public void setDebugFlags(int flags, int mask) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void createUserStorageKeys(int userId, boolean ephemeral) throws RemoteException {
-        }
+        public void createUserStorageKeys(int userId, boolean ephemeral) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void destroyUserStorageKeys(int userId) throws RemoteException {
-        }
+        public void destroyUserStorageKeys(int userId) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void unlockCeStorage(int userId, byte[] secret) throws RemoteException {
-        }
+        public void unlockCeStorage(int userId, byte[] secret) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void lockCeStorage(int userId) throws RemoteException {
-        }
+        public void lockCeStorage(int userId) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public boolean isCeStorageUnlocked(int userId) throws RemoteException {
@@ -381,20 +370,18 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public void prepareUserStorage(String volumeUuid, int userId, int flags) throws RemoteException {
-        }
+        public void prepareUserStorage(String volumeUuid, int userId, int flags)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void destroyUserStorage(String volumeUuid, int userId, int flags) throws RemoteException {
-        }
+        public void destroyUserStorage(String volumeUuid, int userId, int flags)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void setCeStorageProtection(int userId, byte[] secret) throws RemoteException {
-        }
+        public void setCeStorageProtection(int userId, byte[] secret) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void fstrim(int flags, IVoldTaskListener listener) throws RemoteException {
-        }
+        public void fstrim(int flags, IVoldTaskListener listener) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public AppFuseMount mountProxyFileDescriptorBridge() throws RemoteException {
@@ -402,7 +389,8 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public ParcelFileDescriptor openProxyFileDescriptor(int mountPointId, int fileId, int mode) throws RemoteException {
+        public ParcelFileDescriptor openProxyFileDescriptor(int mountPointId, int fileId, int mode)
+                throws RemoteException {
             return null;
         }
 
@@ -417,25 +405,23 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public long getAllocatableBytes(String volumeUuid, int flags, String callingPackage) throws RemoteException {
+        public long getAllocatableBytes(String volumeUuid, int flags, String callingPackage)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.os.storage.IStorageManager
-        public void allocateBytes(String volumeUuid, long bytes, int flags, String callingPackage) throws RemoteException {
-        }
+        public void allocateBytes(String volumeUuid, long bytes, int flags, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void runIdleMaintenance() throws RemoteException {
-        }
+        public void runIdleMaintenance() throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void abortIdleMaintenance() throws RemoteException {
-        }
+        public void abortIdleMaintenance() throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void commitChanges() throws RemoteException {
-        }
+        public void commitChanges() throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public boolean supportsCheckpoint() throws RemoteException {
@@ -443,8 +429,7 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public void startCheckpoint(int numTries) throws RemoteException {
-        }
+        public void startCheckpoint(int numTries) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public boolean needsCheckpoint() throws RemoteException {
@@ -452,29 +437,28 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public void abortChanges(String message, boolean retry) throws RemoteException {
-        }
+        public void abortChanges(String message, boolean retry) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void fixupAppDir(String path) throws RemoteException {
-        }
+        public void fixupAppDir(String path) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void disableAppDataIsolation(String pkgName, int pid, int userId) throws RemoteException {
-        }
+        public void disableAppDataIsolation(String pkgName, int pid, int userId)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public PendingIntent getManageSpaceActivityIntent(String packageName, int requestCode) throws RemoteException {
+        public PendingIntent getManageSpaceActivityIntent(String packageName, int requestCode)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.storage.IStorageManager
-        public void notifyAppIoBlocked(String volumeUuid, int uid, int tid, int reason) throws RemoteException {
-        }
+        public void notifyAppIoBlocked(String volumeUuid, int uid, int tid, int reason)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void notifyAppIoResumed(String volumeUuid, int uid, int tid, int reason) throws RemoteException {
-        }
+        public void notifyAppIoResumed(String volumeUuid, int uid, int tid, int reason)
+                throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public int getExternalStorageMountMode(int uid, String packageName) throws RemoteException {
@@ -482,13 +466,13 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public boolean isAppIoBlocked(String volumeUuid, int uid, int tid, int reason) throws RemoteException {
+        public boolean isAppIoBlocked(String volumeUuid, int uid, int tid, int reason)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.storage.IStorageManager
-        public void setCloudMediaProvider(String authority) throws RemoteException {
-        }
+        public void setCloudMediaProvider(String authority) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public String getCloudMediaProvider() throws RemoteException {
@@ -561,16 +545,13 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public void mountBySecApp(String volId, String callerPackage) throws RemoteException {
-        }
+        public void mountBySecApp(String volId, String callerPackage) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void unmountBySecApp(String volId, String callerPackage) throws RemoteException {
-        }
+        public void unmountBySecApp(String volId, String callerPackage) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
-        public void formatBySecApp(String volId, String callerPackage) throws RemoteException {
-        }
+        public void formatBySecApp(String volId, String callerPackage) throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public int encryptExternalStorage(boolean state) throws RemoteException {
@@ -583,7 +564,9 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public int createSecureContainer(String id, int sizeMb, String fstype, String key, int ownerUid, boolean external) throws RemoteException {
+        public int createSecureContainer(
+                String id, int sizeMb, String fstype, String key, int ownerUid, boolean external)
+                throws RemoteException {
             return 0;
         }
 
@@ -598,7 +581,8 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public int mountSecureContainer(String id, String key, int ownerUid, boolean readOnly) throws RemoteException {
+        public int mountSecureContainer(String id, String key, int ownerUid, boolean readOnly)
+                throws RemoteException {
             return 0;
         }
 
@@ -628,8 +612,7 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public void finishMediaUpdate() throws RemoteException {
-        }
+        public void finishMediaUpdate() throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public String getSecureContainerFilesystemPath(String cid) throws RemoteException {
@@ -637,7 +620,8 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public int fixPermissionsSecureContainer(String id, int gid, String filename) throws RemoteException {
+        public int fixPermissionsSecureContainer(String id, int gid, String filename)
+                throws RemoteException {
             return 0;
         }
 
@@ -647,8 +631,7 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.storage.IStorageManager
-        public void waitForAsecScan() throws RemoteException {
-        }
+        public void waitForAsecScan() throws RemoteException {}
 
         @Override // android.os.storage.IStorageManager
         public int trimSecureContainer(String id, int sizeMb, String key) throws RemoteException {
@@ -706,7 +689,7 @@ public interface IStorageManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStorageManager {
+    public abstract static class Stub extends Binder implements IStorageManager {
         public static final String DESCRIPTOR = "android.os.storage.IStorageManager";
         static final int TRANSACTION_abortChanges = 88;
         static final int TRANSACTION_abortIdleMaintenance = 81;
@@ -823,7 +806,9 @@ public interface IStorageManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IStorageManager asInterface(IBinder obj) {
@@ -1061,7 +1046,8 @@ public interface IStorageManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -1071,13 +1057,15 @@ public interface IStorageManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IStorageEventListener _arg0 = IStorageEventListener.Stub.asInterface(data.readStrongBinder());
+                    IStorageEventListener _arg0 =
+                            IStorageEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerListener(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IStorageEventListener _arg02 = IStorageEventListener.Stub.asInterface(data.readStrongBinder());
+                    IStorageEventListener _arg02 =
+                            IStorageEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterListener(_arg02);
                     reply.writeNoException();
@@ -1098,7 +1086,8 @@ public interface IStorageManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 20:
-                    IStorageShutdownObserver _arg05 = IStorageShutdownObserver.Stub.asInterface(data.readStrongBinder());
+                    IStorageShutdownObserver _arg05 =
+                            IStorageShutdownObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     shutdown(_arg05);
                     reply.writeNoException();
@@ -1106,7 +1095,8 @@ public interface IStorageManager extends IInterface {
                 case 22:
                     String _arg06 = data.readString();
                     String _arg12 = data.readString();
-                    IObbActionListener _arg22 = IObbActionListener.Stub.asInterface(data.readStrongBinder());
+                    IObbActionListener _arg22 =
+                            IObbActionListener.Stub.asInterface(data.readStrongBinder());
                     int _arg3 = data.readInt();
                     ObbInfo _arg4 = (ObbInfo) data.readTypedObject(ObbInfo.CREATOR);
                     data.enforceNoDataAvail();
@@ -1116,7 +1106,8 @@ public interface IStorageManager extends IInterface {
                 case 23:
                     String _arg07 = data.readString();
                     boolean _arg13 = data.readBoolean();
-                    IObbActionListener _arg23 = IObbActionListener.Stub.asInterface(data.readStrongBinder());
+                    IObbActionListener _arg23 =
+                            IObbActionListener.Stub.asInterface(data.readStrongBinder());
                     int _arg32 = data.readInt();
                     data.enforceNoDataAvail();
                     unmountObb(_arg07, _arg13, _arg23, _arg32);
@@ -1249,14 +1240,16 @@ public interface IStorageManager extends IInterface {
                     return true;
                 case 59:
                     String _arg023 = data.readString();
-                    IPackageMoveObserver _arg19 = IPackageMoveObserver.Stub.asInterface(data.readStrongBinder());
+                    IPackageMoveObserver _arg19 =
+                            IPackageMoveObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setPrimaryStorageUuid(_arg023, _arg19);
                     reply.writeNoException();
                     return true;
                 case 60:
                     String _arg024 = data.readString();
-                    IVoldTaskListener _arg110 = IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IVoldTaskListener _arg110 =
+                            IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     benchmark(_arg024, _arg110);
                     reply.writeNoException();
@@ -1326,7 +1319,8 @@ public interface IStorageManager extends IInterface {
                     return true;
                 case 73:
                     int _arg034 = data.readInt();
-                    IVoldTaskListener _arg117 = IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IVoldTaskListener _arg117 =
+                            IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     fstrim(_arg034, _arg117);
                     reply.writeNoException();
@@ -1341,7 +1335,8 @@ public interface IStorageManager extends IInterface {
                     int _arg118 = data.readInt();
                     int _arg28 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result12 = openProxyFileDescriptor(_arg035, _arg118, _arg28);
+                    ParcelFileDescriptor _result12 =
+                            openProxyFileDescriptor(_arg035, _arg118, _arg28);
                     reply.writeNoException();
                     reply.writeTypedObject(_result12, 1);
                     return true;
@@ -1612,7 +1607,8 @@ public interface IStorageManager extends IInterface {
                     int _arg42 = data.readInt();
                     boolean _arg5 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    int _result37 = createSecureContainer(_arg063, _arg138, _arg215, _arg37, _arg42, _arg5);
+                    int _result37 =
+                            createSecureContainer(_arg063, _arg138, _arg215, _arg37, _arg42, _arg5);
                     reply.writeNoException();
                     reply.writeInt(_result37);
                     return true;
@@ -1838,7 +1834,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void unmountVolume(String mountPoint, boolean force, boolean removeEncryption) throws RemoteException {
+            public void unmountVolume(String mountPoint, boolean force, boolean removeEncryption)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1870,7 +1867,13 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void mountObb(String rawPath, String canonicalPath, IObbActionListener token, int nonce, ObbInfo obbInfo) throws RemoteException {
+            public void mountObb(
+                    String rawPath,
+                    String canonicalPath,
+                    IObbActionListener token,
+                    int nonce,
+                    ObbInfo obbInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1889,7 +1892,9 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void unmountObb(String rawPath, boolean force, IObbActionListener token, int nonce) throws RemoteException {
+            public void unmountObb(
+                    String rawPath, boolean force, IObbActionListener token, int nonce)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1941,7 +1946,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public StorageVolume[] getVolumeList(int userId, String callingPackage, int flags) throws RemoteException {
+            public StorageVolume[] getVolumeList(int userId, String callingPackage, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1951,7 +1957,8 @@ public interface IStorageManager extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(30, _data, _reply, 0);
                     _reply.readException();
-                    StorageVolume[] _result = (StorageVolume[]) _reply.createTypedArray(StorageVolume.CREATOR);
+                    StorageVolume[] _result =
+                            (StorageVolume[]) _reply.createTypedArray(StorageVolume.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2030,7 +2037,8 @@ public interface IStorageManager extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(46, _data, _reply, 0);
                     _reply.readException();
-                    VolumeInfo[] _result = (VolumeInfo[]) _reply.createTypedArray(VolumeInfo.CREATOR);
+                    VolumeInfo[] _result =
+                            (VolumeInfo[]) _reply.createTypedArray(VolumeInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2047,7 +2055,8 @@ public interface IStorageManager extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(47, _data, _reply, 0);
                     _reply.readException();
-                    VolumeRecord[] _result = (VolumeRecord[]) _reply.createTypedArray(VolumeRecord.CREATOR);
+                    VolumeRecord[] _result =
+                            (VolumeRecord[]) _reply.createTypedArray(VolumeRecord.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2163,7 +2172,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void setVolumeUserFlags(String fsUuid, int flags, int mask) throws RemoteException {
+            public void setVolumeUserFlags(String fsUuid, int flags, int mask)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2225,7 +2235,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void setPrimaryStorageUuid(String volumeUuid, IPackageMoveObserver callback) throws RemoteException {
+            public void setPrimaryStorageUuid(String volumeUuid, IPackageMoveObserver callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2273,7 +2284,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void createUserStorageKeys(int userId, boolean ephemeral) throws RemoteException {
+            public void createUserStorageKeys(int userId, boolean ephemeral)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2352,7 +2364,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void prepareUserStorage(String volumeUuid, int userId, int flags) throws RemoteException {
+            public void prepareUserStorage(String volumeUuid, int userId, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2369,7 +2382,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void destroyUserStorage(String volumeUuid, int userId, int flags) throws RemoteException {
+            public void destroyUserStorage(String volumeUuid, int userId, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2425,7 +2439,8 @@ public interface IStorageManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(74, _data, _reply, 0);
                     _reply.readException();
-                    AppFuseMount _result = (AppFuseMount) _reply.readTypedObject(AppFuseMount.CREATOR);
+                    AppFuseMount _result =
+                            (AppFuseMount) _reply.readTypedObject(AppFuseMount.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2434,7 +2449,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public ParcelFileDescriptor openProxyFileDescriptor(int mountPointId, int fileId, int mode) throws RemoteException {
+            public ParcelFileDescriptor openProxyFileDescriptor(
+                    int mountPointId, int fileId, int mode) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2444,7 +2460,9 @@ public interface IStorageManager extends IInterface {
                     _data.writeInt(mode);
                     this.mRemote.transact(75, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2489,7 +2507,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public long getAllocatableBytes(String volumeUuid, int flags, String callingPackage) throws RemoteException {
+            public long getAllocatableBytes(String volumeUuid, int flags, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2508,7 +2527,9 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void allocateBytes(String volumeUuid, long bytes, int flags, String callingPackage) throws RemoteException {
+            public void allocateBytes(
+                    String volumeUuid, long bytes, int flags, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2646,7 +2667,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void disableAppDataIsolation(String pkgName, int pid, int userId) throws RemoteException {
+            public void disableAppDataIsolation(String pkgName, int pid, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2663,7 +2685,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public PendingIntent getManageSpaceActivityIntent(String packageName, int requestCode) throws RemoteException {
+            public PendingIntent getManageSpaceActivityIntent(String packageName, int requestCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2672,7 +2695,8 @@ public interface IStorageManager extends IInterface {
                     _data.writeInt(requestCode);
                     this.mRemote.transact(92, _data, _reply, 0);
                     _reply.readException();
-                    PendingIntent _result = (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _result =
+                            (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2681,7 +2705,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void notifyAppIoBlocked(String volumeUuid, int uid, int tid, int reason) throws RemoteException {
+            public void notifyAppIoBlocked(String volumeUuid, int uid, int tid, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2699,7 +2724,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public void notifyAppIoResumed(String volumeUuid, int uid, int tid, int reason) throws RemoteException {
+            public void notifyAppIoResumed(String volumeUuid, int uid, int tid, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2717,7 +2743,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public int getExternalStorageMountMode(int uid, String packageName) throws RemoteException {
+            public int getExternalStorageMountMode(int uid, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2735,7 +2762,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public boolean isAppIoBlocked(String volumeUuid, int uid, int tid, int reason) throws RemoteException {
+            public boolean isAppIoBlocked(String volumeUuid, int uid, int tid, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3089,7 +3117,14 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public int createSecureContainer(String id, int sizeMb, String fstype, String key, int ownerUid, boolean external) throws RemoteException {
+            public int createSecureContainer(
+                    String id,
+                    int sizeMb,
+                    String fstype,
+                    String key,
+                    int ownerUid,
+                    boolean external)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3146,7 +3181,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public int mountSecureContainer(String id, String key, int ownerUid, boolean readOnly) throws RemoteException {
+            public int mountSecureContainer(String id, String key, int ownerUid, boolean readOnly)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3283,7 +3319,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public int fixPermissionsSecureContainer(String id, int gid, String filename) throws RemoteException {
+            public int fixPermissionsSecureContainer(String id, int gid, String filename)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3302,7 +3339,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public int resizeSecureContainer(String id, int sizeMb, String key) throws RemoteException {
+            public int resizeSecureContainer(String id, int sizeMb, String key)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3335,7 +3373,8 @@ public interface IStorageManager extends IInterface {
             }
 
             @Override // android.os.storage.IStorageManager
-            public int trimSecureContainer(String id, int sizeMb, String key) throws RemoteException {
+            public int trimSecureContainer(String id, int sizeMb, String key)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3502,107 +3541,154 @@ public interface IStorageManager extends IInterface {
         }
 
         protected void shutdown_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SHUTDOWN, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SHUTDOWN, getCallingPid(), getCallingUid());
         }
 
         protected void runMaintenance_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void mount_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void unmount_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void format_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
         }
 
         protected void partitionPublic_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
         }
 
         protected void partitionPrivate_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
         }
 
         protected void partitionMixed_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
         }
 
         protected void setVolumeNickname_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setVolumeUserFlags_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void forgetVolume_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void forgetAllVolumes_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setPrimaryStorageUuid_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void benchmark_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
         }
 
         protected void setDebugFlags_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void createUserStorageKeys_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void destroyUserStorageKeys_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void unlockCeStorage_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void lockCeStorage_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void prepareUserStorage_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void destroyUserStorage_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void setCeStorageProtection_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.STORAGE_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void fstrim_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
         }
 
         protected void needsCheckpoint_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_FORMAT_FILESYSTEMS, getCallingPid(), getCallingUid());
         }
 
         protected void getExternalStorageMountMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_MEDIA_STORAGE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_MEDIA_STORAGE, getCallingPid(), getCallingUid());
         }
 
-        protected void getInternalStorageRemainingLifetime_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.READ_PRIVILEGED_PHONE_STATE, getCallingPid(), getCallingUid());
+        protected void getInternalStorageRemainingLifetime_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.READ_PRIVILEGED_PHONE_STATE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         @Override // android.os.Binder

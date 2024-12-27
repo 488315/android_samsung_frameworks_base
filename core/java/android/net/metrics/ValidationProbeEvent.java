@@ -1,11 +1,12 @@
 package android.net.metrics;
 
 import android.annotation.SystemApi;
-import android.net.metrics.IpConnectivityLog;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseArray;
+
 import com.android.internal.util.MessageUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -13,19 +14,22 @@ import java.lang.annotation.RetentionPolicy;
 @Deprecated
 /* loaded from: classes3.dex */
 public final class ValidationProbeEvent implements IpConnectivityLog.Event {
-    public static final Parcelable.Creator<ValidationProbeEvent> CREATOR = new Parcelable.Creator<ValidationProbeEvent>() { // from class: android.net.metrics.ValidationProbeEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ValidationProbeEvent createFromParcel(Parcel in) {
-            return new ValidationProbeEvent(in);
-        }
+    public static final Parcelable.Creator<ValidationProbeEvent> CREATOR =
+            new Parcelable.Creator<
+                    ValidationProbeEvent>() { // from class:
+                                              // android.net.metrics.ValidationProbeEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ValidationProbeEvent createFromParcel(Parcel in) {
+                    return new ValidationProbeEvent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ValidationProbeEvent[] newArray(int size) {
-            return new ValidationProbeEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ValidationProbeEvent[] newArray(int size) {
+                    return new ValidationProbeEvent[size];
+                }
+            };
     public static final int DNS_FAILURE = 0;
     public static final int DNS_SUCCESS = 1;
     private static final int FIRST_VALIDATION = 256;
@@ -41,8 +45,7 @@ public final class ValidationProbeEvent implements IpConnectivityLog.Event {
     public final int returnCode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ReturnCode {
-    }
+    public @interface ReturnCode {}
 
     private ValidationProbeEvent(long durationMs, int probeType, int returnCode) {
         this.durationMs = durationMs;
@@ -107,7 +110,12 @@ public final class ValidationProbeEvent implements IpConnectivityLog.Event {
     }
 
     public String toString() {
-        return String.format("ValidationProbeEvent(%s:%d %s, %dms)", getProbeName(this.probeType), Integer.valueOf(this.returnCode), getValidationStage(this.probeType), Long.valueOf(this.durationMs));
+        return String.format(
+                "ValidationProbeEvent(%s:%d %s, %dms)",
+                getProbeName(this.probeType),
+                Integer.valueOf(this.returnCode),
+                getValidationStage(this.probeType),
+                Long.valueOf(this.durationMs));
     }
 
     public boolean equals(Object obj) {
@@ -115,13 +123,17 @@ public final class ValidationProbeEvent implements IpConnectivityLog.Event {
             return false;
         }
         ValidationProbeEvent other = (ValidationProbeEvent) obj;
-        return this.durationMs == other.durationMs && this.probeType == other.probeType && this.returnCode == other.returnCode;
+        return this.durationMs == other.durationMs
+                && this.probeType == other.probeType
+                && this.returnCode == other.returnCode;
     }
 
     static final class Decoder {
-        static final SparseArray<String> constants = MessageUtils.findMessageNames(new Class[]{ValidationProbeEvent.class}, new String[]{"PROBE_", "FIRST_", "REVALIDATION"});
+        static final SparseArray<String> constants =
+                MessageUtils.findMessageNames(
+                        new Class[] {ValidationProbeEvent.class},
+                        new String[] {"PROBE_", "FIRST_", "REVALIDATION"});
 
-        Decoder() {
-        }
+        Decoder() {}
     }
 }

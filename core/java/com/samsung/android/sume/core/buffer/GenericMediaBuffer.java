@@ -7,13 +7,14 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
-import com.samsung.android.sume.core.buffer.MediaBufferAllocator;
 import com.samsung.android.sume.core.format.MediaFormat;
 import com.samsung.android.sume.core.format.MutableMediaFormat;
 import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.DataType;
 import com.samsung.android.sume.core.types.MediaType;
+
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.Collections;
@@ -29,51 +30,62 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
     private final Class<T> dataClass;
     private volatile List<MediaFormat> planes;
     private static final String TAG = Def.tagOf((Class<?>) GenericMediaBuffer.class);
-    public static final Parcelable.Creator<GenericMediaBuffer<?>> CREATOR = new Parcelable.Creator<GenericMediaBuffer<?>>() { // from class: com.samsung.android.sume.core.buffer.GenericMediaBuffer.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GenericMediaBuffer<?> createFromParcel(Parcel in) {
-            return new GenericMediaBuffer<>(in);
-        }
+    public static final Parcelable.Creator<GenericMediaBuffer<?>> CREATOR =
+            new Parcelable.Creator<
+                    GenericMediaBuffer<
+                            ?>>() { // from class:
+                                    // com.samsung.android.sume.core.buffer.GenericMediaBuffer.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GenericMediaBuffer<?> createFromParcel(Parcel in) {
+                    return new GenericMediaBuffer<>(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GenericMediaBuffer<?>[] newArray(int size) {
-            return new GenericMediaBuffer[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GenericMediaBuffer<?>[] newArray(int size) {
+                    return new GenericMediaBuffer[size];
+                }
+            };
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ void addExtra(Map map) {
         super.addExtra(map);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ boolean containFlags(int[] iArr) {
         return super.containFlags(iArr);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ boolean containsAllExtra(String[] strArr) {
         return super.containsAllExtra(strArr);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ boolean containsAnyExtra(String[] strArr) {
         return super.containsAnyExtra(strArr);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ boolean containsExtra(String str) {
         return super.containsExtra(str);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.format.Copyable
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.format.Copyable
     public /* bridge */ /* synthetic */ MediaBuffer copy() {
         return super.copy();
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.format.Copyable
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.format.Copyable
     /* renamed from: deepCopy */
     public /* bridge */ /* synthetic */ MediaBuffer deepCopy2() {
         return super.deepCopy2();
@@ -84,88 +96,105 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
         return super.describeContents();
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ Align getAlign() {
         return super.getAlign();
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ int getChannels() {
         return super.getChannels();
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ int getCols() {
         return super.getCols();
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ Object getExtra(String str) {
         return super.getExtra(str);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ Object getExtra(String str, Object obj) {
         return super.getExtra(str, obj);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ Map getExtra() {
         return super.getExtra();
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ MediaFormat getFormat() {
         return super.getFormat();
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ int getRows() {
         return super.getRows();
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ int getScanline() {
         return super.getScanline();
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ int getStride() {
         return super.getStride();
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ Object getTypedDataOr(Class cls, Object obj) {
         return super.getTypedDataOr(cls, obj);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ Object removeExtra(String str) {
         return super.removeExtra(str);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ void setExtra(String str, Object obj) {
         super.setExtra(str, obj);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ void setExtra(Map map) {
         super.setExtra(map);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ MediaBuffer setFlags(int[] iArr) {
         return super.setFlags(iArr);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ MediaBuffer setScanline(int i) {
         return super.setScanline(i);
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public /* bridge */ /* synthetic */ MediaBuffer setStride(int i) {
         return super.setStride(i);
     }
@@ -224,9 +253,15 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
             parcel.writeSerializable((Number) this.data);
         } else {
             try {
-                hardwareBuffer = (HardwareBuffer) BufferExtension.transform(getFormat(), this.data, HardwareBuffer.class);
+                hardwareBuffer =
+                        (HardwareBuffer)
+                                BufferExtension.transform(
+                                        getFormat(), this.data, HardwareBuffer.class);
             } catch (UnsupportedOperationException e) {
-                hardwareBuffer = (HardwareBuffer) BufferExtension.transform(getFormat(), this.data, HardwareBuffer.class);
+                hardwareBuffer =
+                        (HardwareBuffer)
+                                BufferExtension.transform(
+                                        getFormat(), this.data, HardwareBuffer.class);
             }
             parcel.writeInt(2);
             parcel.writeParcelable(hardwareBuffer, i);
@@ -237,14 +272,27 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public MediaBuffer asRef() {
         int useCount = this.sharedCount.incrementAndGet();
-        Log.d(TAG, "inc ref count now: " + useCount + NavigationBarInflaterView.KEY_CODE_START + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
+        Log.d(
+                TAG,
+                "inc ref count now: "
+                        + useCount
+                        + NavigationBarInflaterView.KEY_CODE_START
+                        + hashCode()
+                        + NavigationBarInflaterView.KEY_CODE_END);
         return this;
     }
 
-    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
+    @Override // com.samsung.android.sume.core.buffer.MediaBufferBase,
+              // com.samsung.android.sume.core.buffer.MediaBuffer
     public void release() {
         int useCount = this.sharedCount.decrementAndGet();
-        Log.d(TAG, "dec ref count now: " + useCount + NavigationBarInflaterView.KEY_CODE_START + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
+        Log.d(
+                TAG,
+                "dec ref count now: "
+                        + useCount
+                        + NavigationBarInflaterView.KEY_CODE_START
+                        + hashCode()
+                        + NavigationBarInflaterView.KEY_CODE_END);
         if (useCount > 0) {
             Log.d(TAG, "release skipped(" + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
             return;
@@ -282,7 +330,9 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
         if (this.data == null) {
             throw new NullPointerException();
         }
-        if (cls.isAssignableFrom(this.dataClass) || ((cls.isPrimitive() && Number.class.isAssignableFrom(this.dataClass)) || (this.dataClass.isPrimitive() && Number.class.isAssignableFrom(cls)))) {
+        if (cls.isAssignableFrom(this.dataClass)
+                || ((cls.isPrimitive() && Number.class.isAssignableFrom(this.dataClass))
+                        || (this.dataClass.isPrimitive() && Number.class.isAssignableFrom(cls)))) {
             return this.data;
         }
         return (V) transformDataTo(this.data, cls);
@@ -332,7 +382,10 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
             }
         }
         ColorFormat colorFormat = this.format.getColorFormat();
-        if (colorFormat == ColorFormat.NONE || colorFormat == ColorFormat.OPAQUE || colorFormat == ColorFormat.P010 || colorFormat == ColorFormat.P010_ZIPPED) {
+        if (colorFormat == ColorFormat.NONE
+                || colorFormat == ColorFormat.OPAQUE
+                || colorFormat == ColorFormat.P010
+                || colorFormat == ColorFormat.P010_ZIPPED) {
             return;
         }
         MutableMediaFormat mutableFormat = this.format.toMutableFormat();
@@ -349,7 +402,13 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
                 } else if (dimension == 4.0f) {
                     mutableFormat.setDataType(DataType.of(DataType.F64, channels));
                 } else {
-                    throw new IllegalArgumentException("data-size and align(shape) doesn't match" + i + " vs " + this.format + " & " + this.align);
+                    throw new IllegalArgumentException(
+                            "data-size and align(shape) doesn't match"
+                                    + i
+                                    + " vs "
+                                    + this.format
+                                    + " & "
+                                    + this.align);
                 }
                 this.format = mutableFormat.toMediaFormat();
             }
@@ -361,12 +420,17 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
     }
 
     private String dataToString(Object data) {
-        return (String) Optional.ofNullable(data).map(new Function() { // from class: com.samsung.android.sume.core.buffer.GenericMediaBuffer$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return GenericMediaBuffer.lambda$dataToString$0(obj);
-            }
-        }).orElse("n/a");
+        return (String)
+                Optional.ofNullable(data)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.buffer.GenericMediaBuffer$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return GenericMediaBuffer.lambda$dataToString$0(obj);
+                                    }
+                                })
+                        .orElse("n/a");
     }
 
     static /* synthetic */ String lambda$dataToString$0(Object it) {
@@ -382,12 +446,30 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public String contentToString(Object obj) {
-        return Def.taglnOf(obj) + Def.contentToStringln("    ", "format=" + ((String) Optional.ofNullable(this.format).map(new GenericMediaBuffer$$ExternalSyntheticLambda1()).orElse("n/a")), "alignShape=" + ((String) Optional.ofNullable(this.align).map(new Function() { // from class: com.samsung.android.sume.core.buffer.GenericMediaBuffer$$ExternalSyntheticLambda2
-            @Override // java.util.function.Function
-            public final Object apply(Object obj2) {
-                return ((Align) obj2).contentToString();
-            }
-        }).orElse("n/a")), "extra=" + Collections.singletonList(this.extra), "data=" + dataToString(this.data));
+        return Def.taglnOf(obj)
+                + Def.contentToStringln(
+                        "    ",
+                        "format="
+                                + ((String)
+                                        Optional.ofNullable(this.format)
+                                                .map(
+                                                        new GenericMediaBuffer$$ExternalSyntheticLambda1())
+                                                .orElse("n/a")),
+                        "alignShape="
+                                + ((String)
+                                        Optional.ofNullable(this.align)
+                                                .map(
+                                                        new Function() { // from class:
+                                                                         // com.samsung.android.sume.core.buffer.GenericMediaBuffer$$ExternalSyntheticLambda2
+                                                            @Override // java.util.function.Function
+                                                            public final Object apply(Object obj2) {
+                                                                return ((Align) obj2)
+                                                                        .contentToString();
+                                                            }
+                                                        })
+                                                .orElse("n/a")),
+                        "extra=" + Collections.singletonList(this.extra),
+                        "data=" + dataToString(this.data));
     }
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer

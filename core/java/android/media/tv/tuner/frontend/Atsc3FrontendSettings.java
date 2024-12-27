@@ -1,6 +1,7 @@
 package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -54,30 +55,25 @@ public class Atsc3FrontendSettings extends FrontendSettings {
     private final Atsc3PlpSettings[] mPlpSettings;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Bandwidth {
-    }
+    public @interface Bandwidth {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CodeRate {
-    }
+    public @interface CodeRate {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DemodOutputFormat {
-    }
+    public @interface DemodOutputFormat {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Fec {
-    }
+    public @interface Fec {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Modulation {
-    }
+    public @interface Modulation {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TimeInterleaveMode {
-    }
+    public @interface TimeInterleaveMode {}
 
-    private Atsc3FrontendSettings(long frequency, int bandwidth, int demodOutputFormat, Atsc3PlpSettings[] plpSettings) {
+    private Atsc3FrontendSettings(
+            long frequency, int bandwidth, int demodOutputFormat, Atsc3PlpSettings[] plpSettings) {
         super(frequency);
         this.mBandwidth = bandwidth;
         this.mDemodOutputFormat = demodOutputFormat;
@@ -139,7 +135,8 @@ public class Atsc3FrontendSettings extends FrontendSettings {
         }
 
         public Atsc3FrontendSettings build() {
-            return new Atsc3FrontendSettings(this.mFrequency, this.mBandwidth, this.mDemodOutputFormat, this.mPlpSettings);
+            return new Atsc3FrontendSettings(
+                    this.mFrequency, this.mBandwidth, this.mDemodOutputFormat, this.mPlpSettings);
         }
     }
 

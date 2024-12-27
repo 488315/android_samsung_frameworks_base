@@ -4,8 +4,6 @@ import android.app.PendingIntent;
 import android.content.pm.ParceledListSlice;
 import android.media.MediaMetadata;
 import android.media.Rating;
-import android.media.session.ISessionControllerCallback;
-import android.media.session.MediaController;
 import android.media.tv.interactive.TvInteractiveAppService;
 import android.net.Uri;
 import android.os.Binder;
@@ -73,13 +71,15 @@ public interface ISessionController extends IInterface {
 
     void rate(String str, Rating rating) throws RemoteException;
 
-    void registerCallback(String str, ISessionControllerCallback iSessionControllerCallback) throws RemoteException;
+    void registerCallback(String str, ISessionControllerCallback iSessionControllerCallback)
+            throws RemoteException;
 
     void rewind(String str) throws RemoteException;
 
     void seekTo(String str, long j) throws RemoteException;
 
-    void sendCommand(String str, String str2, Bundle bundle, ResultReceiver resultReceiver) throws RemoteException;
+    void sendCommand(String str, String str2, Bundle bundle, ResultReceiver resultReceiver)
+            throws RemoteException;
 
     void sendCustomAction(String str, String str2, Bundle bundle) throws RemoteException;
 
@@ -93,25 +93,26 @@ public interface ISessionController extends IInterface {
 
     void stop(String str) throws RemoteException;
 
-    void unregisterCallback(ISessionControllerCallback iSessionControllerCallback) throws RemoteException;
+    void unregisterCallback(ISessionControllerCallback iSessionControllerCallback)
+            throws RemoteException;
 
     public static class Default implements ISessionController {
         @Override // android.media.session.ISessionController
-        public void sendCommand(String packageName, String command, Bundle args, ResultReceiver cb) throws RemoteException {
-        }
+        public void sendCommand(String packageName, String command, Bundle args, ResultReceiver cb)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public boolean sendMediaButton(String packageName, KeyEvent mediaButton) throws RemoteException {
+        public boolean sendMediaButton(String packageName, KeyEvent mediaButton)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.session.ISessionController
-        public void registerCallback(String packageName, ISessionControllerCallback cb) throws RemoteException {
-        }
+        public void registerCallback(String packageName, ISessionControllerCallback cb)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void unregisterCallback(ISessionControllerCallback cb) throws RemoteException {
-        }
+        public void unregisterCallback(ISessionControllerCallback cb) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
         public String getPackageName() throws RemoteException {
@@ -144,88 +145,76 @@ public interface ISessionController extends IInterface {
         }
 
         @Override // android.media.session.ISessionController
-        public void adjustVolume(String packageName, String opPackageName, int direction, int flags) throws RemoteException {
-        }
+        public void adjustVolume(String packageName, String opPackageName, int direction, int flags)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void setVolumeTo(String packageName, String opPackageName, int value, int flags) throws RemoteException {
-        }
+        public void setVolumeTo(String packageName, String opPackageName, int value, int flags)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void prepare(String packageName) throws RemoteException {
-        }
+        public void prepare(String packageName) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void prepareFromMediaId(String packageName, String mediaId, Bundle extras) throws RemoteException {
-        }
+        public void prepareFromMediaId(String packageName, String mediaId, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void prepareFromSearch(String packageName, String string, Bundle extras) throws RemoteException {
-        }
+        public void prepareFromSearch(String packageName, String string, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void prepareFromUri(String packageName, Uri uri, Bundle extras) throws RemoteException {
-        }
+        public void prepareFromUri(String packageName, Uri uri, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void play(String packageName) throws RemoteException {
-        }
+        public void play(String packageName) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void playFromMediaId(String packageName, String mediaId, Bundle extras) throws RemoteException {
-        }
+        public void playFromMediaId(String packageName, String mediaId, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void playFromSearch(String packageName, String string, Bundle extras) throws RemoteException {
-        }
+        public void playFromSearch(String packageName, String string, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void playFromUri(String packageName, Uri uri, Bundle extras) throws RemoteException {
-        }
+        public void playFromUri(String packageName, Uri uri, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void skipToQueueItem(String packageName, long id) throws RemoteException {
-        }
+        public void skipToQueueItem(String packageName, long id) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void pause(String packageName) throws RemoteException {
-        }
+        public void pause(String packageName) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void stop(String packageName) throws RemoteException {
-        }
+        public void stop(String packageName) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void next(String packageName) throws RemoteException {
-        }
+        public void next(String packageName) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void previous(String packageName) throws RemoteException {
-        }
+        public void previous(String packageName) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void fastForward(String packageName) throws RemoteException {
-        }
+        public void fastForward(String packageName) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void rewind(String packageName) throws RemoteException {
-        }
+        public void rewind(String packageName) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void seekTo(String packageName, long pos) throws RemoteException {
-        }
+        public void seekTo(String packageName, long pos) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void rate(String packageName, Rating rating) throws RemoteException {
-        }
+        public void rate(String packageName, Rating rating) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void setPlaybackSpeed(String packageName, float speed) throws RemoteException {
-        }
+        public void setPlaybackSpeed(String packageName, float speed) throws RemoteException {}
 
         @Override // android.media.session.ISessionController
-        public void sendCustomAction(String packageName, String action, Bundle args) throws RemoteException {
-        }
+        public void sendCustomAction(String packageName, String action, Bundle args)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionController
         public MediaMetadata getMetadata() throws RemoteException {
@@ -263,7 +252,7 @@ public interface ISessionController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISessionController {
+    public abstract static class Stub extends Binder implements ISessionController {
         public static final String DESCRIPTOR = "android.media.session.ISessionController";
         static final int TRANSACTION_adjustVolume = 11;
         static final int TRANSACTION_fastForward = 26;
@@ -410,7 +399,8 @@ public interface ISessionController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -423,7 +413,8 @@ public interface ISessionController extends IInterface {
                     String _arg0 = data.readString();
                     String _arg1 = data.readString();
                     Bundle _arg2 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    ResultReceiver _arg3 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg3 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     sendCommand(_arg0, _arg1, _arg2, _arg3);
                     reply.writeNoException();
@@ -438,13 +429,15 @@ public interface ISessionController extends IInterface {
                     return true;
                 case 3:
                     String _arg03 = data.readString();
-                    ISessionControllerCallback _arg13 = ISessionControllerCallback.Stub.asInterface(data.readStrongBinder());
+                    ISessionControllerCallback _arg13 =
+                            ISessionControllerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallback(_arg03, _arg13);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    ISessionControllerCallback _arg04 = ISessionControllerCallback.Stub.asInterface(data.readStrongBinder());
+                    ISessionControllerCallback _arg04 =
+                            ISessionControllerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCallback(_arg04);
                     reply.writeNoException();
@@ -686,7 +679,9 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public void sendCommand(String packageName, String command, Bundle args, ResultReceiver cb) throws RemoteException {
+            public void sendCommand(
+                    String packageName, String command, Bundle args, ResultReceiver cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -704,7 +699,8 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public boolean sendMediaButton(String packageName, KeyEvent mediaButton) throws RemoteException {
+            public boolean sendMediaButton(String packageName, KeyEvent mediaButton)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -722,7 +718,8 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public void registerCallback(String packageName, ISessionControllerCallback cb) throws RemoteException {
+            public void registerCallback(String packageName, ISessionControllerCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -808,7 +805,8 @@ public interface ISessionController extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    PendingIntent _result = (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _result =
+                            (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -840,7 +838,9 @@ public interface ISessionController extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    MediaController.PlaybackInfo _result = (MediaController.PlaybackInfo) _reply.readTypedObject(MediaController.PlaybackInfo.CREATOR);
+                    MediaController.PlaybackInfo _result =
+                            (MediaController.PlaybackInfo)
+                                    _reply.readTypedObject(MediaController.PlaybackInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -849,7 +849,9 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public void adjustVolume(String packageName, String opPackageName, int direction, int flags) throws RemoteException {
+            public void adjustVolume(
+                    String packageName, String opPackageName, int direction, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -867,7 +869,8 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public void setVolumeTo(String packageName, String opPackageName, int value, int flags) throws RemoteException {
+            public void setVolumeTo(String packageName, String opPackageName, int value, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -900,7 +903,8 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public void prepareFromMediaId(String packageName, String mediaId, Bundle extras) throws RemoteException {
+            public void prepareFromMediaId(String packageName, String mediaId, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -917,7 +921,8 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public void prepareFromSearch(String packageName, String string, Bundle extras) throws RemoteException {
+            public void prepareFromSearch(String packageName, String string, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -934,7 +939,8 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public void prepareFromUri(String packageName, Uri uri, Bundle extras) throws RemoteException {
+            public void prepareFromUri(String packageName, Uri uri, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -966,7 +972,8 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public void playFromMediaId(String packageName, String mediaId, Bundle extras) throws RemoteException {
+            public void playFromMediaId(String packageName, String mediaId, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -983,7 +990,8 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public void playFromSearch(String packageName, String string, Bundle extras) throws RemoteException {
+            public void playFromSearch(String packageName, String string, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1000,7 +1008,8 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public void playFromUri(String packageName, Uri uri, Bundle extras) throws RemoteException {
+            public void playFromUri(String packageName, Uri uri, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1171,7 +1180,8 @@ public interface ISessionController extends IInterface {
             }
 
             @Override // android.media.session.ISessionController
-            public void sendCustomAction(String packageName, String action, Bundle args) throws RemoteException {
+            public void sendCustomAction(String packageName, String action, Bundle args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1195,7 +1205,8 @@ public interface ISessionController extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(32, _data, _reply, 0);
                     _reply.readException();
-                    MediaMetadata _result = (MediaMetadata) _reply.readTypedObject(MediaMetadata.CREATOR);
+                    MediaMetadata _result =
+                            (MediaMetadata) _reply.readTypedObject(MediaMetadata.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1211,7 +1222,8 @@ public interface ISessionController extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(33, _data, _reply, 0);
                     _reply.readException();
-                    PlaybackState _result = (PlaybackState) _reply.readTypedObject(PlaybackState.CREATOR);
+                    PlaybackState _result =
+                            (PlaybackState) _reply.readTypedObject(PlaybackState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1227,7 +1239,8 @@ public interface ISessionController extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(34, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1243,7 +1256,8 @@ public interface ISessionController extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(35, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

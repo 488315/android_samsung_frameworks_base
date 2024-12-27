@@ -38,6 +38,7 @@ import android.util.Slog;
 import android.view.RemoteAnimationDefinition;
 import android.window.SizeConfigurationBuckets;
 import android.window.TransitionInfo;
+
 import com.android.internal.app.AssistUtils;
 import com.android.internal.app.IVoiceInteractionSessionShowCallback;
 import com.android.internal.policy.IKeyguardDismissCallback;
@@ -58,15 +59,13 @@ import com.android.server.utils.quota.Categorizer;
 import com.android.server.utils.quota.Category;
 import com.android.server.utils.quota.CountQuotaTracker;
 import com.android.server.vr.VrManagerService;
-import com.android.server.wm.ActivityCallerState;
-import com.android.server.wm.ActivityRecord;
-import com.android.server.wm.DexSizeCompatController;
-import com.android.server.wm.TransitionController;
 import com.android.window.flags.Flags;
+
 import com.samsung.android.feature.SemGateConfig;
 import com.samsung.android.knox.ISemPersonaManager;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.rune.CoreRune;
+
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -87,20 +86,27 @@ public final class ActivityClientController extends IActivityClientController.St
         this.mContext = activityTaskManagerService.mContext;
     }
 
-    public static boolean canGetLaunchedFromLocked(int i, ActivityRecord activityRecord, IBinder iBinder, boolean z) {
+    public static boolean canGetLaunchedFromLocked(
+            int i, ActivityRecord activityRecord, IBinder iBinder, boolean z) {
         boolean z2;
         int i2;
         if (!CompatChanges.isChangeEnabled(259743961L, i)) {
             return false;
         }
         if (z) {
-            ActivityCallerState.CallerInfo callerInfo = (ActivityCallerState.CallerInfo) activityRecord.mCallerState.mCallerTokenInfoMap.getOrDefault(iBinder, null);
+            ActivityCallerState.CallerInfo callerInfo =
+                    (ActivityCallerState.CallerInfo)
+                            activityRecord.mCallerState.mCallerTokenInfoMap.getOrDefault(
+                                    iBinder, null);
             z2 = callerInfo != null ? callerInfo.mIsShareIdentityEnabled : false;
         } else {
             z2 = activityRecord.mShareIdentity;
         }
         if (z) {
-            ActivityCallerState.CallerInfo callerInfo2 = (ActivityCallerState.CallerInfo) activityRecord.mCallerState.mCallerTokenInfoMap.getOrDefault(iBinder, null);
+            ActivityCallerState.CallerInfo callerInfo2 =
+                    (ActivityCallerState.CallerInfo)
+                            activityRecord.mCallerState.mCallerTokenInfoMap.getOrDefault(
+                                    iBinder, null);
             i2 = callerInfo2 != null ? callerInfo2.mUid : -1;
         } else {
             i2 = activityRecord.launchedFromUid;
@@ -119,8 +125,13 @@ public final class ActivityClientController extends IActivityClientController.St
         } else {
             i2 = task.mMultiWindowRestoreWindowingMode;
             if (i2 != -1) {
-                if (!task.getParent().mRemoteToken.toWindowContainerToken().equals(task.mMultiWindowRestoreParent)) {
-                    task.reparent(Task.fromWindowContainerToken(task.mMultiWindowRestoreParent), Integer.MAX_VALUE);
+                if (!task.getParent()
+                        .mRemoteToken
+                        .toWindowContainerToken()
+                        .equals(task.mMultiWindowRestoreParent)) {
+                    task.reparent(
+                            Task.fromWindowContainerToken(task.mMultiWindowRestoreParent),
+                            Integer.MAX_VALUE);
                 }
                 task.setWindowingMode(task.mMultiWindowRestoreWindowingMode);
             }
@@ -130,25 +141,42 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    public static boolean shouldMoveTaskToBack(ActivityRecord activityRecord, ActivityRecord activityRecord2) {
+    public static boolean shouldMoveTaskToBack(
+            ActivityRecord activityRecord, ActivityRecord activityRecord2) {
         if (activityRecord != activityRecord2) {
             TaskFragment taskFragment = activityRecord.getTaskFragment();
-            if (activityRecord != taskFragment.getActivity(new ActivityClientController$$ExternalSyntheticLambda0(0, activityRecord), false) || activityRecord2.getTaskFragment().mCompanionTaskFragment != taskFragment) {
+            if (activityRecord
+                            != taskFragment.getActivity(
+                                    new ActivityClientController$$ExternalSyntheticLambda0(
+                                            0, activityRecord),
+                                    false)
+                    || activityRecord2.getTaskFragment().mCompanionTaskFragment != taskFragment) {
                 return false;
             }
         }
-        Intent intent = activityRecord2.mActivityComponent.equals(activityRecord.task.realActivity) ? activityRecord2.intent : null;
-        return intent != null && activityRecord.getTaskFragment().topRunningActivity(false) == activityRecord && activityRecord2.mLaunchSourceType == 2 && ActivityRecord.isMainIntent(intent);
+        Intent intent =
+                activityRecord2.mActivityComponent.equals(activityRecord.task.realActivity)
+                        ? activityRecord2.intent
+                        : null;
+        return intent != null
+                && activityRecord.getTaskFragment().topRunningActivity(false) == activityRecord
+                && activityRecord2.mLaunchSourceType == 2
+                && ActivityRecord.isMainIntent(intent);
     }
 
-    public static int validateMultiwindowFullscreenRequestLocked(int i, ActivityRecord activityRecord, Task task) {
+    public static int validateMultiwindowFullscreenRequestLocked(
+            int i, ActivityRecord activityRecord, Task task) {
         if (activityRecord.getWindowingMode() == 2) {
             return 0;
         }
         if (activityRecord != task.getTopMostActivity()) {
             return 2;
         }
-        return (i != 0 || (task.getWindowingMode() == 1 && task.mMultiWindowRestoreWindowingMode != -1)) ? 0 : 1;
+        return (i != 0
+                        || (task.getWindowingMode() == 1
+                                && task.mMultiWindowRestoreWindowingMode != -1))
+                ? 0
+                : 1;
     }
 
     public final void activityDestroyed(IBinder iBinder) {
@@ -190,11 +218,19 @@ public final class ActivityClientController extends IActivityClientController.St
                     }
                     int i = forTokenLocked.mUserId;
                     int identityHashCode = System.identityHashCode(forTokenLocked);
-                    EventLog.writeEvent(1000203, Integer.valueOf(i), Integer.valueOf(identityHashCode), forTokenLocked.shortComponentName);
-                    this.mTaskSupervisor.activityIdleInternal(forTokenLocked, false, false, configuration);
+                    EventLog.writeEvent(
+                            1000203,
+                            Integer.valueOf(i),
+                            Integer.valueOf(identityHashCode),
+                            forTokenLocked.shortComponentName);
+                    this.mTaskSupervisor.activityIdleInternal(
+                            forTokenLocked, false, false, configuration);
                     if (z && forTokenLocked.hasProcess()) {
                         WindowProcessController windowProcessController = forTokenLocked.app;
-                        windowProcessController.mAtm.mH.sendMessage(PooledLambda.obtainMessage(new WindowProcessController$$ExternalSyntheticLambda6(1), windowProcessController.mListener));
+                        windowProcessController.mAtm.mH.sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new WindowProcessController$$ExternalSyntheticLambda6(1),
+                                        windowProcessController.mListener));
                     }
                     WindowManagerService.resetPriorityAfterLockedSection();
                 } catch (Throwable th) {
@@ -218,7 +254,8 @@ public final class ActivityClientController extends IActivityClientController.St
                 if (forTokenLocked != null) {
                     forTokenLocked.startRelaunching();
                     if (CoreRune.MW_SHELL_CHANGE_TRANSITION) {
-                        this.mService.mChangeTransitController.onActivityLocalRelaunched(forTokenLocked);
+                        this.mService.mChangeTransitController.onActivityLocalRelaunched(
+                                forTokenLocked);
                     }
                 }
             } catch (Throwable th) {
@@ -259,10 +296,23 @@ public final class ActivityClientController extends IActivityClientController.St
             try {
                 ActivityRecord forTokenLocked = ActivityRecord.forTokenLocked(iBinder);
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_STATES_enabled[2]) {
-                    ProtoLogImpl_54989576.i(ProtoLogGroup.WM_DEBUG_STATES, -69666241054231397L, 0, null, String.valueOf(forTokenLocked));
+                    ProtoLogImpl_54989576.i(
+                            ProtoLogGroup.WM_DEBUG_STATES,
+                            -69666241054231397L,
+                            0,
+                            null,
+                            String.valueOf(forTokenLocked));
                 }
-                if (forTokenLocked != null && forTokenLocked.mDisplayContent.mAppCompatCameraPolicy.mActivityRefresher != null) {
-                    forTokenLocked.mAppCompatController.mAppCompatOverrides.mAppCompatCameraOverrides.mAppCompatCameraOverridesState.mIsRefreshRequested = false;
+                if (forTokenLocked != null
+                        && forTokenLocked.mDisplayContent.mAppCompatCameraPolicy.mActivityRefresher
+                                != null) {
+                    forTokenLocked
+                                    .mAppCompatController
+                                    .mAppCompatOverrides
+                                    .mAppCompatCameraOverrides
+                                    .mAppCompatCameraOverridesState
+                                    .mIsRefreshRequested =
+                            false;
                 }
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
@@ -301,16 +351,26 @@ public final class ActivityClientController extends IActivityClientController.St
         synchronized (windowManagerGlobalLock) {
             try {
                 ActivityRecord forTokenLocked = ActivityRecord.forTokenLocked(iBinder);
-                if (forTokenLocked != null && (activityTaskManagerService = this.mService) != null && (personaActivityHelper = activityTaskManagerService.mPersonaActivityHelper) != null) {
+                if (forTokenLocked != null
+                        && (activityTaskManagerService = this.mService) != null
+                        && (personaActivityHelper =
+                                        activityTaskManagerService.mPersonaActivityHelper)
+                                != null) {
                     if (personaActivityHelper.mPersonaManager == null) {
-                        personaActivityHelper.mPersonaManager = ISemPersonaManager.Stub.asInterface(ServiceManager.getService("persona"));
+                        personaActivityHelper.mPersonaManager =
+                                ISemPersonaManager.Stub.asInterface(
+                                        ServiceManager.getService("persona"));
                     }
                     if (personaActivityHelper.mPersonaManager != null) {
-                        this.mService.mPersonaActivityHelper.notifyActivityResumedLocked(isTopOfTask(iBinder), forTokenLocked);
+                        this.mService.mPersonaActivityHelper.notifyActivityResumedLocked(
+                                isTopOfTask(iBinder), forTokenLocked);
                     }
                 }
-                if (forTokenLocked != null && forTokenLocked.isState(ActivityRecord.State.RESUMED) && !forTokenLocked.noDisplay) {
-                    DualAppManagerService.notifyActivityResumedLocked(forTokenLocked.shortComponentName);
+                if (forTokenLocked != null
+                        && forTokenLocked.isState(ActivityRecord.State.RESUMED)
+                        && !forTokenLocked.noDisplay) {
+                    DualAppManagerService.notifyActivityResumedLocked(
+                            forTokenLocked.shortComponentName);
                 }
                 ActivityRecord.activityResumedLocked(iBinder, z);
             } catch (Throwable th) {
@@ -322,7 +382,11 @@ public final class ActivityClientController extends IActivityClientController.St
         Binder.restoreCallingIdentity(clearCallingIdentity);
     }
 
-    public final void activityStopped(IBinder iBinder, Bundle bundle, PersistableBundle persistableBundle, CharSequence charSequence) {
+    public final void activityStopped(
+            IBinder iBinder,
+            Bundle bundle,
+            PersistableBundle persistableBundle,
+            CharSequence charSequence) {
         ActivityRecord isInRootTaskLocked;
         String str;
         int i;
@@ -341,10 +405,12 @@ public final class ActivityClientController extends IActivityClientController.St
                 if (isInRootTaskLocked != null) {
                     ActivityRecord.State state = ActivityRecord.State.STOPPING;
                     ActivityRecord.State state2 = ActivityRecord.State.RESTARTING_PROCESS;
-                    if (!isInRootTaskLocked.isState(state, state2) && this.mTaskSupervisor.mHandler.hasMessages(213, isInRootTaskLocked)) {
+                    if (!isInRootTaskLocked.isState(state, state2)
+                            && this.mTaskSupervisor.mHandler.hasMessages(213, isInRootTaskLocked)) {
                         isInRootTaskLocked.setState(state2, "continue-restart");
                     }
-                    if (isInRootTaskLocked.attachedToProcess() && isInRootTaskLocked.isState(state2)) {
+                    if (isInRootTaskLocked.attachedToProcess()
+                            && isInRootTaskLocked.isState(state2)) {
                         WindowProcessController windowProcessController = isInRootTaskLocked.app;
                         String str2 = windowProcessController.mName;
                         i = windowProcessController.mUid;
@@ -365,11 +431,19 @@ public final class ActivityClientController extends IActivityClientController.St
                 try {
                     if (!dexController.mPendingActivityInfo.mWaitingStoppedTasks.isEmpty()) {
                         Task task = isInRootTaskLocked.task;
-                        if (task != null && task.getActivity(new DexController$$ExternalSyntheticLambda8()) == null) {
-                            dexController.mPendingActivityInfo.removeWaitingStoppedTask("activityStopped", task);
+                        if (task != null
+                                && task.getActivity(new DexController$$ExternalSyntheticLambda8())
+                                        == null) {
+                            dexController.mPendingActivityInfo.removeWaitingStoppedTask(
+                                    "activityStopped", task);
                         }
-                        if (dexController.mPendingActivityInfo.mWaitingStoppedTasks.isEmpty() && dexController.mPendingActivityInfo.mWaitingTransitionFinishedTokens.isEmpty()) {
-                            Slog.d("DexController", "reparentToDisplayAndStartPendingActivity from activityStopped");
+                        if (dexController.mPendingActivityInfo.mWaitingStoppedTasks.isEmpty()
+                                && dexController.mPendingActivityInfo
+                                        .mWaitingTransitionFinishedTokens.isEmpty()) {
+                            Slog.d(
+                                    "DexController",
+                                    "reparentToDisplayAndStartPendingActivity from"
+                                        + " activityStopped");
                             dexController.scheduleReparentToDisplayAndStartPendingActivity(true);
                         }
                     }
@@ -380,15 +454,21 @@ public final class ActivityClientController extends IActivityClientController.St
         }
         if (CoreRune.MW_EMBED_ACTIVITY_PACKAGE_ENABLED && isInRootTaskLocked != null) {
             MultiTaskingController multiTaskingController = this.mService.mMultiTaskingController;
-            WindowManagerGlobalLock windowManagerGlobalLock3 = multiTaskingController.mAtm.mGlobalLock;
+            WindowManagerGlobalLock windowManagerGlobalLock3 =
+                    multiTaskingController.mAtm.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock3) {
                 try {
                     Task rootTask = isInRootTaskLocked.getRootTask();
                     if (rootTask != null && rootTask.mIsWaitingRemoveEmbedActivityTask) {
                         WindowProcessController windowProcessController2 = rootTask.mRootProcess;
-                        if (windowProcessController2 != null && windowProcessController2.mPid != ActivityManagerService.MY_PID) {
-                            multiTaskingController.mH.post(new MultiTaskingController$$ExternalSyntheticLambda14(multiTaskingController, rootTask, windowProcessController2));
+                        if (windowProcessController2 != null
+                                && windowProcessController2.mPid != ActivityManagerService.MY_PID) {
+                            multiTaskingController.mH.post(
+                                    new MultiTaskingController$$ExternalSyntheticLambda14(
+                                            multiTaskingController,
+                                            rootTask,
+                                            windowProcessController2));
                         }
                         WindowManagerService.resetPriorityAfterLockedSection();
                     }
@@ -422,7 +502,8 @@ public final class ActivityClientController extends IActivityClientController.St
         Binder.restoreCallingIdentity(clearCallingIdentity);
     }
 
-    public final void adjustPopOverOptions(IBinder iBinder, int[] iArr, int[] iArr2, Point[] pointArr, int[] iArr3) {
+    public final void adjustPopOverOptions(
+            IBinder iBinder, int[] iArr, int[] iArr2, Point[] pointArr, int[] iArr3) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
@@ -431,7 +512,8 @@ public final class ActivityClientController extends IActivityClientController.St
                 try {
                     ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
                     if (isInRootTaskLocked != null) {
-                        isInRootTaskLocked.mPopOverState.adjustOptions(iArr, iArr2, pointArr, iArr3);
+                        isInRootTaskLocked.mPopOverState.adjustOptions(
+                                iArr, iArr2, pointArr, iArr3);
                     }
                 } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
@@ -444,10 +526,15 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    public final int checkActivityCallerContentUriPermission(IBinder iBinder, IBinder iBinder2, Uri uri, int i, int i2) {
+    public final int checkActivityCallerContentUriPermission(
+            IBinder iBinder, IBinder iBinder2, Uri uri, int i, int i2) {
         GrantUri grantUri = new GrantUri(i2, i, uri);
-        if (!((UriGrantsManagerService.LocalService) this.mService.mUgmInternal).checkUriPermission(grantUri, Binder.getCallingUid(), i, true)) {
-            throw new SecurityException("You don't have access to the content URI, hence can't check if the caller has access to it: " + uri);
+        if (!((UriGrantsManagerService.LocalService) this.mService.mUgmInternal)
+                .checkUriPermission(grantUri, Binder.getCallingUid(), i, true)) {
+            throw new SecurityException(
+                    "You don't have access to the content URI, hence can't check if the caller has"
+                        + " access to it: "
+                            + uri);
         }
         WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
@@ -507,13 +594,25 @@ public final class ActivityClientController extends IActivityClientController.St
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return false;
                     }
-                    Transition createTransition = (!isInRootTaskLocked.mTransitionController.isShellTransitionsEnabled() || isInRootTaskLocked.mTransitionController.isCollecting()) ? null : isInRootTaskLocked.mTransitionController.createTransition(4, 0);
+                    Transition createTransition =
+                            (!isInRootTaskLocked.mTransitionController.isShellTransitionsEnabled()
+                                            || isInRootTaskLocked.mTransitionController
+                                                    .isCollecting())
+                                    ? null
+                                    : isInRootTaskLocked.mTransitionController.createTransition(
+                                            4, 0);
                     boolean occludesParent = isInRootTaskLocked.setOccludesParent(true, z);
                     if (createTransition != null) {
                         if (occludesParent) {
-                            createTransition.setOverrideAnimation(TransitionInfo.AnimationOptions.makeSceneTransitionAnimOptions(), null, null);
-                            isInRootTaskLocked.mTransitionController.requestStartTransition(createTransition, null, null, null);
-                            isInRootTaskLocked.mTransitionController.setReady(isInRootTaskLocked.getDisplayContent(), true);
+                            createTransition.setOverrideAnimation(
+                                    TransitionInfo.AnimationOptions
+                                            .makeSceneTransitionAnimOptions(),
+                                    null,
+                                    null);
+                            isInRootTaskLocked.mTransitionController.requestStartTransition(
+                                    createTransition, null, null, null);
+                            isInRootTaskLocked.mTransitionController.setReady(
+                                    isInRootTaskLocked.getDisplayContent(), true);
                         } else {
                             createTransition.abort();
                         }
@@ -544,19 +643,52 @@ public final class ActivityClientController extends IActivityClientController.St
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return false;
                     }
-                    ActivityRecord activityBelow = isInRootTaskLocked.task.getActivityBelow(isInRootTaskLocked);
+                    ActivityRecord activityBelow =
+                            isInRootTaskLocked.task.getActivityBelow(isInRootTaskLocked);
                     if (activityBelow != null) {
-                        activityBelow.returningOptions = fromBundle != null ? fromBundle.getOptions(isInRootTaskLocked.intent, isInRootTaskLocked.info, isInRootTaskLocked.app, isInRootTaskLocked.mTaskSupervisor) : null;
-                        Slog.d("ActivityTaskManager", "convertToTranslucent, r=" + isInRootTaskLocked + ", under=" + activityBelow + ", under.returningOptions=" + activityBelow.returningOptions + ", caller=" + Debug.getCallers(3));
+                        activityBelow.returningOptions =
+                                fromBundle != null
+                                        ? fromBundle.getOptions(
+                                                isInRootTaskLocked.intent,
+                                                isInRootTaskLocked.info,
+                                                isInRootTaskLocked.app,
+                                                isInRootTaskLocked.mTaskSupervisor)
+                                        : null;
+                        Slog.d(
+                                "ActivityTaskManager",
+                                "convertToTranslucent, r="
+                                        + isInRootTaskLocked
+                                        + ", under="
+                                        + activityBelow
+                                        + ", under.returningOptions="
+                                        + activityBelow.returningOptions
+                                        + ", caller="
+                                        + Debug.getCallers(3));
                     }
-                    Transition createTransition = (!isInRootTaskLocked.mTransitionController.isShellTransitionsEnabled() || isInRootTaskLocked.mTransitionController.isCollecting()) ? null : isInRootTaskLocked.mTransitionController.createTransition(3, 0);
+                    Transition createTransition =
+                            (!isInRootTaskLocked.mTransitionController.isShellTransitionsEnabled()
+                                            || isInRootTaskLocked.mTransitionController
+                                                    .isCollecting())
+                                    ? null
+                                    : isInRootTaskLocked.mTransitionController.createTransition(
+                                            3, 0);
                     boolean occludesParent = isInRootTaskLocked.setOccludesParent(false, false);
                     if (createTransition != null) {
                         if (occludesParent) {
-                            isInRootTaskLocked.mTransitionController.requestStartTransition(createTransition, null, null, null);
-                            isInRootTaskLocked.mTransitionController.setReady(isInRootTaskLocked.getDisplayContent(), true);
-                            if ((activityBelow != null && (activityOptions = activityBelow.returningOptions) != null && activityOptions.getAnimationType() == 5) || CoreRune.FW_SHELL_TRANSITION) {
-                                createTransition.setOverrideAnimation(TransitionInfo.AnimationOptions.makeSceneTransitionAnimOptions(), null, null);
+                            isInRootTaskLocked.mTransitionController.requestStartTransition(
+                                    createTransition, null, null, null);
+                            isInRootTaskLocked.mTransitionController.setReady(
+                                    isInRootTaskLocked.getDisplayContent(), true);
+                            if ((activityBelow != null
+                                            && (activityOptions = activityBelow.returningOptions)
+                                                    != null
+                                            && activityOptions.getAnimationType() == 5)
+                                    || CoreRune.FW_SHELL_TRANSITION) {
+                                createTransition.setOverrideAnimation(
+                                        TransitionInfo.AnimationOptions
+                                                .makeSceneTransitionAnimOptions(),
+                                        null,
+                                        null);
                             }
                         } else {
                             createTransition.abort();
@@ -574,9 +706,13 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    public final void dismissKeyguard(IBinder iBinder, IKeyguardDismissCallback iKeyguardDismissCallback, CharSequence charSequence) {
+    public final void dismissKeyguard(
+            IBinder iBinder,
+            IKeyguardDismissCallback iKeyguardDismissCallback,
+            CharSequence charSequence) {
         if (charSequence != null) {
-            this.mService.mAmInternal.enforceCallingPermission("android.permission.SHOW_KEYGUARD_MESSAGE", "dismissKeyguard");
+            this.mService.mAmInternal.enforceCallingPermission(
+                    "android.permission.SHOW_KEYGUARD_MESSAGE", "dismissKeyguard");
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -584,7 +720,8 @@ public final class ActivityClientController extends IActivityClientController.St
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    this.mService.mKeyguardController.dismissKeyguard(iBinder, iKeyguardDismissCallback, charSequence);
+                    this.mService.mKeyguardController.dismissKeyguard(
+                            iBinder, iKeyguardDismissCallback, charSequence);
                 } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
                     throw th;
@@ -616,55 +753,90 @@ public final class ActivityClientController extends IActivityClientController.St
         WindowManagerService.resetPriorityAfterLockedSection();
     }
 
-    public final ActivityRecord ensureValidPictureInPictureActivityParams(String str, IBinder iBinder, PictureInPictureParams pictureInPictureParams) {
+    public final ActivityRecord ensureValidPictureInPictureActivityParams(
+            String str, IBinder iBinder, PictureInPictureParams pictureInPictureParams) {
         if (!this.mService.mSupportsPictureInPicture) {
-            throw new IllegalStateException(str.concat(": Device doesn't support picture-in-picture mode."));
+            throw new IllegalStateException(
+                    str.concat(": Device doesn't support picture-in-picture mode."));
         }
         ActivityRecord forTokenLocked = ActivityRecord.forTokenLocked(iBinder);
         if (forTokenLocked == null) {
             throw new IllegalStateException(str + ": Can't find activity for token=" + iBinder);
         }
         if (!forTokenLocked.supportsPictureInPicture()) {
-            throw new IllegalStateException(str.concat(": Current activity does not support picture-in-picture."));
+            throw new IllegalStateException(
+                    str.concat(": Current activity does not support picture-in-picture."));
         }
         int callingUserId = UserHandle.getCallingUserId();
-        if (forTokenLocked.pictureInPictureArgs.hasSetAspectRatio() && pictureInPictureParams.hasSetAspectRatio() && !forTokenLocked.pictureInPictureArgs.getAspectRatio().equals(pictureInPictureParams.getAspectRatio()) && !this.mSetPipAspectRatioQuotaTracker.noteEvent(callingUserId, forTokenLocked.packageName, "setPipAspectRatio")) {
-            StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m(str, ": Too many PiP aspect ratio change requests from ");
+        if (forTokenLocked.pictureInPictureArgs.hasSetAspectRatio()
+                && pictureInPictureParams.hasSetAspectRatio()
+                && !forTokenLocked
+                        .pictureInPictureArgs
+                        .getAspectRatio()
+                        .equals(pictureInPictureParams.getAspectRatio())
+                && !this.mSetPipAspectRatioQuotaTracker.noteEvent(
+                        callingUserId, forTokenLocked.packageName, "setPipAspectRatio")) {
+            StringBuilder m =
+                    Preconditions$$ExternalSyntheticOutline0.m(
+                            str, ": Too many PiP aspect ratio change requests from ");
             m.append(forTokenLocked.packageName);
             throw new IllegalStateException(m.toString());
         }
         float f = this.mContext.getResources().getFloat(R.dimen.config_viewMinFlingVelocity);
-        float f2 = this.mContext.getResources().getFloat(R.dimen.config_viewMaxRotaryEncoderFlingVelocity);
+        float f2 =
+                this.mContext
+                        .getResources()
+                        .getFloat(R.dimen.config_viewMaxRotaryEncoderFlingVelocity);
         if (pictureInPictureParams.hasSetAspectRatio()) {
             WindowManagerService windowManagerService = this.mService.mWindowManager;
             DisplayContent displayContent = forTokenLocked.mDisplayContent;
             float aspectRatioFloat = pictureInPictureParams.getAspectRatioFloat();
             windowManagerService.getClass();
             PinnedTaskController pinnedTaskController = displayContent.mPinnedTaskController;
-            if (Float.compare(pinnedTaskController.mMinAspectRatio, aspectRatioFloat) > 0 || Float.compare(aspectRatioFloat, pinnedTaskController.mMaxAspectRatio) > 0) {
-                throw new IllegalArgumentException(String.format(str.concat(": Aspect ratio is too extreme (must be between %f and %f)."), Float.valueOf(f), Float.valueOf(f2)));
+            if (Float.compare(pinnedTaskController.mMinAspectRatio, aspectRatioFloat) > 0
+                    || Float.compare(aspectRatioFloat, pinnedTaskController.mMaxAspectRatio) > 0) {
+                throw new IllegalArgumentException(
+                        String.format(
+                                str.concat(
+                                        ": Aspect ratio is too extreme (must be between %f and"
+                                            + " %f)."),
+                                Float.valueOf(f),
+                                Float.valueOf(f2)));
             }
         }
-        if (this.mService.mSupportsExpandedPictureInPicture && pictureInPictureParams.hasSetExpandedAspectRatio()) {
+        if (this.mService.mSupportsExpandedPictureInPicture
+                && pictureInPictureParams.hasSetExpandedAspectRatio()) {
             WindowManagerService windowManagerService2 = this.mService.mWindowManager;
             DisplayContent displayContent2 = forTokenLocked.mDisplayContent;
             float expandedAspectRatioFloat = pictureInPictureParams.getExpandedAspectRatioFloat();
             windowManagerService2.getClass();
             PinnedTaskController pinnedTaskController2 = displayContent2.mPinnedTaskController;
-            if (Float.compare(pinnedTaskController2.mMinAspectRatio, expandedAspectRatioFloat) <= 0 && Float.compare(expandedAspectRatioFloat, pinnedTaskController2.mMaxAspectRatio) <= 0) {
-                throw new IllegalArgumentException(String.format(str.concat(": Expanded aspect ratio is not extreme enough (must not be between %f and %f)."), Float.valueOf(f), Float.valueOf(f2)));
+            if (Float.compare(pinnedTaskController2.mMinAspectRatio, expandedAspectRatioFloat) <= 0
+                    && Float.compare(
+                                    expandedAspectRatioFloat, pinnedTaskController2.mMaxAspectRatio)
+                            <= 0) {
+                throw new IllegalArgumentException(
+                        String.format(
+                                str.concat(
+                                        ": Expanded aspect ratio is not extreme enough (must not be"
+                                            + " between %f and %f)."),
+                                Float.valueOf(f),
+                                Float.valueOf(f2)));
             }
         }
-        pictureInPictureParams.truncateActions(ActivityTaskManager.getMaxNumPictureInPictureActions(this.mContext));
+        pictureInPictureParams.truncateActions(
+                ActivityTaskManager.getMaxNumPictureInPictureActions(this.mContext));
         return forTokenLocked;
     }
 
-    public final boolean enterPictureInPictureMode(IBinder iBinder, PictureInPictureParams pictureInPictureParams) {
+    public final boolean enterPictureInPictureMode(
+            IBinder iBinder, PictureInPictureParams pictureInPictureParams) {
         boolean enterPictureInPictureMode;
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (this.mSetPipAspectRatioQuotaTracker == null) {
-                CountQuotaTracker countQuotaTracker = new CountQuotaTracker(this.mContext, Categorizer.SINGLE_CATEGORIZER);
+                CountQuotaTracker countQuotaTracker =
+                        new CountQuotaTracker(this.mContext, Categorizer.SINGLE_CATEGORIZER);
                 this.mSetPipAspectRatioQuotaTracker = countQuotaTracker;
                 countQuotaTracker.setCountLimit(Category.SINGLE_CATEGORY, 60, 60000L);
             }
@@ -672,7 +844,15 @@ public final class ActivityClientController extends IActivityClientController.St
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    enterPictureInPictureMode = this.mService.enterPictureInPictureMode(ensureValidPictureInPictureActivityParams("enterPictureInPictureMode", iBinder, pictureInPictureParams), pictureInPictureParams, true, false);
+                    enterPictureInPictureMode =
+                            this.mService.enterPictureInPictureMode(
+                                    ensureValidPictureInPictureActivityParams(
+                                            "enterPictureInPictureMode",
+                                            iBinder,
+                                            pictureInPictureParams),
+                                    pictureInPictureParams,
+                                    true,
+                                    false);
                 } finally {
                 }
             }
@@ -702,7 +882,8 @@ public final class ActivityClientController extends IActivityClientController.St
                     return true;
                 }
                 WindowManagerService.resetPriorityAfterLockedSection();
-                NeededUriGrants collectGrants = this.mService.collectGrants(intent, isInRootTaskLocked.resultTo);
+                NeededUriGrants collectGrants =
+                        this.mService.collectGrants(intent, isInRootTaskLocked.resultTo);
                 WindowManagerGlobalLock windowManagerGlobalLock2 = this.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock2) {
@@ -713,22 +894,34 @@ public final class ActivityClientController extends IActivityClientController.St
                         Task task = isInRootTaskLocked.task;
                         ActivityRecord rootActivity = task.getRootActivity(true, false);
                         if (rootActivity == null) {
-                            Slog.w("ActivityTaskManager", "Finishing task with all activities already finished");
+                            Slog.w(
+                                    "ActivityTaskManager",
+                                    "Finishing task with all activities already finished");
                         }
-                        if (this.mService.mLockTaskController.activityBlockedFromFinish(isInRootTaskLocked)) {
+                        if (this.mService.mLockTaskController.activityBlockedFromFinish(
+                                isInRootTaskLocked)) {
                             WindowManagerService.resetPriorityAfterLockedSection();
                             return false;
                         }
-                        if (this.mService.mController != null && (activityRecord = isInRootTaskLocked.getRootTask().topRunningActivity(-1, iBinder)) != null) {
+                        if (this.mService.mController != null
+                                && (activityRecord =
+                                                isInRootTaskLocked
+                                                        .getRootTask()
+                                                        .topRunningActivity(-1, iBinder))
+                                        != null) {
                             try {
-                                z = this.mService.mController.activityResuming(activityRecord.packageName);
+                                z =
+                                        this.mService.mController.activityResuming(
+                                                activityRecord.packageName);
                             } catch (RemoteException unused) {
                                 this.mService.mController = null;
                                 Watchdog.getInstance().setActivityController(null);
                                 z = true;
                             }
                             if (!z) {
-                                Slog.i("ActivityTaskManager", "Not finishing activity because controller resumed");
+                                Slog.i(
+                                        "ActivityTaskManager",
+                                        "Not finishing activity because controller resumed");
                                 WindowManagerService.resetPriorityAfterLockedSection();
                                 return false;
                             }
@@ -736,7 +929,8 @@ public final class ActivityClientController extends IActivityClientController.St
                         WindowProcessController windowProcessController = isInRootTaskLocked.app;
                         if (windowProcessController != null) {
                             long uptimeMillis = SystemClock.uptimeMillis();
-                            if (uptimeMillis > windowProcessController.mLastActivityFinishTime && windowProcessController.hasActivityInVisibleTask()) {
+                            if (uptimeMillis > windowProcessController.mLastActivityFinishTime
+                                    && windowProcessController.hasActivityInVisibleTask()) {
                                 windowProcessController.mLastActivityFinishTime = uptimeMillis;
                             }
                         }
@@ -744,17 +938,21 @@ public final class ActivityClientController extends IActivityClientController.St
                         Trace.traceBegin(32L, "finishActivity");
                         boolean z3 = i2 == 1;
                         try {
-                            this.mTaskSupervisor.mBalController.onActivityRequestedFinishing(isInRootTaskLocked);
+                            this.mTaskSupervisor.mBalController.onActivityRequestedFinishing(
+                                    isInRootTaskLocked);
                         } catch (Throwable th) {
                             th = th;
                             j = 32;
                         }
                         try {
                             if (i2 != 2 && (!z3 || isInRootTaskLocked != rootActivity)) {
-                                isInRootTaskLocked.finishIfPossible(i, intent, collectGrants, "app-request", true);
+                                isInRootTaskLocked.finishIfPossible(
+                                        i, intent, collectGrants, "app-request", true);
                                 z2 = isInRootTaskLocked.finishing;
                                 if (!z2) {
-                                    Slog.i("ActivityTaskManager", "Failed to finish by app-request");
+                                    Slog.i(
+                                            "ActivityTaskManager",
+                                            "Failed to finish by app-request");
                                 }
                                 j = 32;
                                 Trace.traceEnd(j);
@@ -762,7 +960,8 @@ public final class ActivityClientController extends IActivityClientController.St
                                 WindowManagerService.resetPriorityAfterLockedSection();
                                 return z2;
                             }
-                            activityTaskSupervisor.removeTask(task, false, z3, "finish-activity", false, 1000, pid);
+                            activityTaskSupervisor.removeTask(
+                                    task, false, z3, "finish-activity", false, 1000, pid);
                             isInRootTaskLocked.mRelaunchReason = 0;
                             Trace.traceEnd(j);
                             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -799,8 +998,14 @@ public final class ActivityClientController extends IActivityClientController.St
                 try {
                     ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
                     if (isInRootTaskLocked != null) {
-                        if (!this.mService.mLockTaskController.activityBlockedFromFinish(isInRootTaskLocked)) {
-                            isInRootTaskLocked.task.forAllActivities(new ActivityClientController$$ExternalSyntheticLambda0(1, isInRootTaskLocked), isInRootTaskLocked, true, true);
+                        if (!this.mService.mLockTaskController.activityBlockedFromFinish(
+                                isInRootTaskLocked)) {
+                            isInRootTaskLocked.task.forAllActivities(
+                                    new ActivityClientController$$ExternalSyntheticLambda0(
+                                            1, isInRootTaskLocked),
+                                    isInRootTaskLocked,
+                                    true,
+                                    true);
                             WindowManagerService.resetPriorityAfterLockedSection();
                             return true;
                         }
@@ -824,23 +1029,33 @@ public final class ActivityClientController extends IActivityClientController.St
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    final ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
+                    final ActivityRecord isInRootTaskLocked =
+                            ActivityRecord.isInRootTaskLocked(iBinder);
                     if (isInRootTaskLocked == null) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return;
                     }
-                    isInRootTaskLocked.getRootTask().forAllActivities(new Consumer() { // from class: com.android.server.wm.ActivityClientController$$ExternalSyntheticLambda3
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            ActivityRecord activityRecord = ActivityRecord.this;
-                            String str2 = str;
-                            int i2 = i;
-                            ActivityRecord activityRecord2 = (ActivityRecord) obj;
-                            if (activityRecord2.resultTo == activityRecord && activityRecord2.requestCode == i2 && Objects.equals(activityRecord2.resultWho, str2)) {
-                                activityRecord2.finishIfPossible("request-sub", false);
-                            }
-                        }
-                    }, true);
+                    isInRootTaskLocked
+                            .getRootTask()
+                            .forAllActivities(
+                                    new Consumer() { // from class:
+                                                     // com.android.server.wm.ActivityClientController$$ExternalSyntheticLambda3
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            ActivityRecord activityRecord = ActivityRecord.this;
+                                            String str2 = str;
+                                            int i2 = i;
+                                            ActivityRecord activityRecord2 = (ActivityRecord) obj;
+                                            if (activityRecord2.resultTo == activityRecord
+                                                    && activityRecord2.requestCode == i2
+                                                    && Objects.equals(
+                                                            activityRecord2.resultWho, str2)) {
+                                                activityRecord2.finishIfPossible(
+                                                        "request-sub", false);
+                                            }
+                                        }
+                                    },
+                                    true);
                     this.mService.updateOomAdj();
                     WindowManagerService.resetPriorityAfterLockedSection();
                 } catch (Throwable th) {
@@ -873,7 +1088,12 @@ public final class ActivityClientController extends IActivityClientController.St
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return null;
                     }
-                    ActivityRecord activity = isInAnyTask.task.getActivity(new ActivityClientController$$ExternalSyntheticLambda2(), isInAnyTask, false, true);
+                    ActivityRecord activity =
+                            isInAnyTask.task.getActivity(
+                                    new ActivityClientController$$ExternalSyntheticLambda2(),
+                                    isInAnyTask,
+                                    false,
+                                    true);
                     if (activity == null || activity.getUid() != isInAnyTask.getUid()) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return null;
@@ -898,7 +1118,8 @@ public final class ActivityClientController extends IActivityClientController.St
         synchronized (windowManagerGlobalLock) {
             try {
                 ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
-                ActivityRecord activityRecord = isInRootTaskLocked != null ? isInRootTaskLocked.resultTo : null;
+                ActivityRecord activityRecord =
+                        isInRootTaskLocked != null ? isInRootTaskLocked.resultTo : null;
                 component = activityRecord != null ? activityRecord.intent.getComponent() : null;
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
@@ -916,7 +1137,8 @@ public final class ActivityClientController extends IActivityClientController.St
         synchronized (windowManagerGlobalLock) {
             try {
                 ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
-                ActivityRecord activityRecord = isInRootTaskLocked != null ? isInRootTaskLocked.resultTo : null;
+                ActivityRecord activityRecord =
+                        isInRootTaskLocked != null ? isInRootTaskLocked.resultTo : null;
                 str = activityRecord != null ? activityRecord.info.packageName : null;
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
@@ -933,7 +1155,8 @@ public final class ActivityClientController extends IActivityClientController.St
         synchronized (windowManagerGlobalLock) {
             try {
                 ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
-                Task rootTask = isInRootTaskLocked != null ? isInRootTaskLocked.getRootTask() : null;
+                Task rootTask =
+                        isInRootTaskLocked != null ? isInRootTaskLocked.getRootTask() : null;
                 if (rootTask == null) {
                     WindowManagerService.resetPriorityAfterLockedSection();
                     return 0;
@@ -958,14 +1181,15 @@ public final class ActivityClientController extends IActivityClientController.St
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:23:0x002f, code lost:
-    
-        if (r5 == null) goto L17;
-     */
+
+       if (r5 == null) goto L17;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.String getPackage(android.os.IBinder r4, android.os.IBinder r5, boolean r6) {
+    public final java.lang.String getPackage(
+            android.os.IBinder r4, android.os.IBinder r5, boolean r6) {
         /*
             r3 = this;
             int r0 = android.os.Binder.getCallingUid()
@@ -1017,7 +1241,10 @@ public final class ActivityClientController extends IActivityClientController.St
             com.android.server.wm.WindowManagerService.resetPriorityAfterLockedSection()
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.ActivityClientController.getPackage(android.os.IBinder, android.os.IBinder, boolean):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.ActivityClientController.getPackage(android.os.IBinder,"
+                    + " android.os.IBinder, boolean):java.lang.String");
     }
 
     public final int getRequestedOrientation(IBinder iBinder) {
@@ -1027,7 +1254,10 @@ public final class ActivityClientController extends IActivityClientController.St
         synchronized (windowManagerGlobalLock) {
             try {
                 ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
-                overrideOrientation = isInRootTaskLocked != null ? isInRootTaskLocked.getOverrideOrientation() : -1;
+                overrideOrientation =
+                        isInRootTaskLocked != null
+                                ? isInRootTaskLocked.getOverrideOrientation()
+                                : -1;
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
                 throw th;
@@ -1084,9 +1314,9 @@ public final class ActivityClientController extends IActivityClientController.St
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0030, code lost:
-    
-        if (r5 == null) goto L18;
-     */
+
+       if (r5 == null) goto L18;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1144,7 +1374,10 @@ public final class ActivityClientController extends IActivityClientController.St
             com.android.server.wm.WindowManagerService.resetPriorityAfterLockedSection()
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.ActivityClientController.getUid(android.os.IBinder, android.os.IBinder, boolean):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.ActivityClientController.getUid(android.os.IBinder,"
+                    + " android.os.IBinder, boolean):int");
     }
 
     public final void invalidateHomeTaskSnapshot(IBinder iBinder) {
@@ -1157,13 +1390,18 @@ public final class ActivityClientController extends IActivityClientController.St
         synchronized (windowManagerGlobalLock) {
             try {
                 if (iBinder == null) {
-                    Task task = this.mService.mRootWindowContainer.mDefaultDisplay.getDefaultTaskDisplayArea().mRootHomeTask;
+                    Task task =
+                            this.mService.mRootWindowContainer.mDefaultDisplay
+                                    .getDefaultTaskDisplayArea()
+                                    .mRootHomeTask;
                     isInRootTaskLocked = task != null ? task.topRunningActivity(false) : null;
                 } else {
                     isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
                 }
                 if (isInRootTaskLocked != null && isInRootTaskLocked.isActivityTypeHome()) {
-                    ((TaskSnapshotCache) this.mService.mWindowManager.mTaskSnapshotController.mCache).removeRunningEntry(Integer.valueOf(isInRootTaskLocked.task.mTaskId));
+                    ((TaskSnapshotCache)
+                                    this.mService.mWindowManager.mTaskSnapshotController.mCache)
+                            .removeRunningEntry(Integer.valueOf(isInRootTaskLocked.task.mTaskId));
                 }
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
@@ -1205,8 +1443,10 @@ public final class ActivityClientController extends IActivityClientController.St
         if (androidPackage.isSignedWithPlatformKey()) {
             return true;
         }
-        String[] knownPackageNames = packageManagerInternal.getKnownPackageNames(2, UserHandle.getUserId(i));
-        return knownPackageNames.length > 0 && androidPackage.getPackageName().equals(knownPackageNames[0]);
+        String[] knownPackageNames =
+                packageManagerInternal.getKnownPackageNames(2, UserHandle.getUserId(i));
+        return knownPackageNames.length > 0
+                && androidPackage.getPackageName().equals(knownPackageNames[0]);
     }
 
     public final boolean isRequestedToLaunchInTaskFragment(IBinder iBinder, IBinder iBinder2) {
@@ -1255,8 +1495,8 @@ public final class ActivityClientController extends IActivityClientController.St
                 ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
                 if (isInRootTaskLocked != null) {
                     z = true;
-                    if (isInRootTaskLocked.task.getTopNonFinishingActivity(true, true) == isInRootTaskLocked) {
-                    }
+                    if (isInRootTaskLocked.task.getTopNonFinishingActivity(true, true)
+                            == isInRootTaskLocked) {}
                 }
                 z = false;
             } catch (Throwable th) {
@@ -1281,7 +1521,10 @@ public final class ActivityClientController extends IActivityClientController.St
                     int i = -1;
                     if (forTokenLocked != null && forTokenLocked.getParent() != null) {
                         Task task = forTokenLocked.task;
-                        if (!z2 || forTokenLocked.compareTo((WindowContainer) task.getRootActivity(false, true)) <= 0) {
+                        if (!z2
+                                || forTokenLocked.compareTo(
+                                                (WindowContainer) task.getRootActivity(false, true))
+                                        <= 0) {
                             i = task.mTaskId;
                         }
                     }
@@ -1291,7 +1534,9 @@ public final class ActivityClientController extends IActivityClientController.St
                         return false;
                     }
                     ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
-                    boolean moveTaskToBack = (isInRootTaskLocked != null ? isInRootTaskLocked.getRootTask() : null).moveTaskToBack(anyTaskForId, null);
+                    boolean moveTaskToBack =
+                            (isInRootTaskLocked != null ? isInRootTaskLocked.getRootTask() : null)
+                                    .moveTaskToBack(anyTaskForId, null);
                     WindowManagerService.resetPriorityAfterLockedSection();
                     return moveTaskToBack;
                 } catch (Throwable th) {
@@ -1305,7 +1550,8 @@ public final class ActivityClientController extends IActivityClientController.St
     }
 
     /* JADX WARN: Finally extract failed */
-    public final boolean navigateUpTo(IBinder iBinder, Intent intent, String str, int i, Intent intent2) {
+    public final boolean navigateUpTo(
+            IBinder iBinder, Intent intent, String str, int i, Intent intent2) {
         boolean navigateUpTo;
         WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
@@ -1317,13 +1563,25 @@ public final class ActivityClientController extends IActivityClientController.St
                     return false;
                 }
                 WindowManagerService.resetPriorityAfterLockedSection();
-                NeededUriGrants collectGrants = this.mService.collectGrants(intent, isInRootTaskLocked);
-                NeededUriGrants collectGrants2 = this.mService.collectGrants(intent2, isInRootTaskLocked.resultTo);
+                NeededUriGrants collectGrants =
+                        this.mService.collectGrants(intent, isInRootTaskLocked);
+                NeededUriGrants collectGrants2 =
+                        this.mService.collectGrants(intent2, isInRootTaskLocked.resultTo);
                 WindowManagerGlobalLock windowManagerGlobalLock2 = this.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock2) {
                     try {
-                        navigateUpTo = isInRootTaskLocked.getRootTask().navigateUpTo(isInRootTaskLocked, intent, str, collectGrants, i, intent2, collectGrants2);
+                        navigateUpTo =
+                                isInRootTaskLocked
+                                        .getRootTask()
+                                        .navigateUpTo(
+                                                isInRootTaskLocked,
+                                                intent,
+                                                str,
+                                                collectGrants,
+                                                i,
+                                                intent2,
+                                                collectGrants2);
                     } catch (Throwable th) {
                         throw th;
                     }
@@ -1337,7 +1595,8 @@ public final class ActivityClientController extends IActivityClientController.St
     }
 
     /* JADX WARN: Finally extract failed */
-    public final void onBackPressed(IBinder iBinder, IRequestFinishCallback iRequestFinishCallback) {
+    public final void onBackPressed(
+            IBinder iBinder, IRequestFinishCallback iRequestFinishCallback) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
@@ -1346,14 +1605,22 @@ public final class ActivityClientController extends IActivityClientController.St
                 try {
                     ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
                     if (isInRootTaskLocked != null) {
-                        ActivityRecord rootActivity = isInRootTaskLocked.task.getRootActivity(false, true);
-                        if (isInRootTaskLocked != rootActivity || !this.mService.mWindowOrganizerController.mTaskOrganizerController.handleInterceptBackPressedOnTaskRoot(isInRootTaskLocked.getRootTask())) {
+                        ActivityRecord rootActivity =
+                                isInRootTaskLocked.task.getRootActivity(false, true);
+                        if (isInRootTaskLocked != rootActivity
+                                || !this.mService.mWindowOrganizerController
+                                        .mTaskOrganizerController
+                                        .handleInterceptBackPressedOnTaskRoot(
+                                                isInRootTaskLocked.getRootTask())) {
                             if (!shouldMoveTaskToBack(isInRootTaskLocked, rootActivity)) {
                                 WindowManagerService.resetPriorityAfterLockedSection();
                                 try {
                                     iRequestFinishCallback.requestFinish();
                                 } catch (RemoteException e) {
-                                    Slog.e("ActivityTaskManager", "Failed to invoke request finish callback", e);
+                                    Slog.e(
+                                            "ActivityTaskManager",
+                                            "Failed to invoke request finish callback",
+                                            e);
                                 }
                                 return;
                             }
@@ -1371,11 +1638,18 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    public final void onPictureInPictureUiStateChanged(ActivityRecord activityRecord, PictureInPictureUiState pictureInPictureUiState) {
+    public final void onPictureInPictureUiStateChanged(
+            ActivityRecord activityRecord, PictureInPictureUiState pictureInPictureUiState) {
         try {
-            this.mService.mLifecycleManager.scheduleTransactionItem(activityRecord.app.mThread, PipStateTransactionItem.obtain(activityRecord.token, pictureInPictureUiState));
+            this.mService.mLifecycleManager.scheduleTransactionItem(
+                    activityRecord.app.mThread,
+                    PipStateTransactionItem.obtain(activityRecord.token, pictureInPictureUiState));
         } catch (Exception e) {
-            Slog.w("ActivityTaskManager", "Failed to send pip state transaction item: " + activityRecord.intent.getComponent(), e);
+            Slog.w(
+                    "ActivityTaskManager",
+                    "Failed to send pip state transaction item: "
+                            + activityRecord.intent.getComponent(),
+                    e);
         }
     }
 
@@ -1383,12 +1657,14 @@ public final class ActivityClientController extends IActivityClientController.St
         try {
             return super.onTransact(i, parcel, parcel2, i2);
         } catch (RuntimeException e) {
-            ActivityTaskManagerService.logAndRethrowRuntimeExceptionOnTransact(e, "ActivityClientController");
+            ActivityTaskManagerService.logAndRethrowRuntimeExceptionOnTransact(
+                    e, "ActivityClientController");
             throw null;
         }
     }
 
-    public final void overrideActivityTransition(IBinder iBinder, boolean z, int i, int i2, int i3) {
+    public final void overrideActivityTransition(
+            IBinder iBinder, boolean z, int i, int i2, int i3) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
@@ -1396,7 +1672,10 @@ public final class ActivityClientController extends IActivityClientController.St
             try {
                 ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
                 if (isInRootTaskLocked != null) {
-                    ActivityRecord.CustomAppTransition customAppTransition = z ? isInRootTaskLocked.mCustomOpenTransition : isInRootTaskLocked.mCustomCloseTransition;
+                    ActivityRecord.CustomAppTransition customAppTransition =
+                            z
+                                    ? isInRootTaskLocked.mCustomOpenTransition
+                                    : isInRootTaskLocked.mCustomCloseTransition;
                     if (customAppTransition == null) {
                         customAppTransition = new ActivityRecord.CustomAppTransition();
                         if (z) {
@@ -1425,10 +1704,16 @@ public final class ActivityClientController extends IActivityClientController.St
         synchronized (windowManagerGlobalLock) {
             try {
                 ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
-                if (isInRootTaskLocked != null && isInRootTaskLocked.isState(ActivityRecord.State.RESUMED, ActivityRecord.State.PAUSING)) {
-                    isInRootTaskLocked.mDisplayContent.mAppTransition.overridePendingAppTransition(str, i, i2, 0, null, null, true);
-                    TransitionController transitionController = isInRootTaskLocked.mTransitionController;
-                    TransitionInfo.AnimationOptions makeCustomAnimOptions = TransitionInfo.AnimationOptions.makeCustomAnimOptions(str, i, i2, 0, true);
+                if (isInRootTaskLocked != null
+                        && isInRootTaskLocked.isState(
+                                ActivityRecord.State.RESUMED, ActivityRecord.State.PAUSING)) {
+                    isInRootTaskLocked.mDisplayContent.mAppTransition.overridePendingAppTransition(
+                            str, i, i2, 0, null, null, true);
+                    TransitionController transitionController =
+                            isInRootTaskLocked.mTransitionController;
+                    TransitionInfo.AnimationOptions makeCustomAnimOptions =
+                            TransitionInfo.AnimationOptions.makeCustomAnimOptions(
+                                    str, i, i2, 0, true);
                     Transition transition = transitionController.mCollectingTransition;
                     if (transition != null) {
                         transition.setOverrideAnimation(makeCustomAnimOptions, null, null);
@@ -1443,19 +1728,31 @@ public final class ActivityClientController extends IActivityClientController.St
         Binder.restoreCallingIdentity(clearCallingIdentity);
     }
 
-    public final void overridePendingTransition(IBinder iBinder, String str, int i, int i2, int i3) {
+    public final void overridePendingTransition(
+            IBinder iBinder, String str, int i, int i2, int i3) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
                 ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
-                if (CoreRune.MT_APP_COMPAT_CONFIGURATION && MultiTaskingAppCompatConfiguration.isPresetLetterboxed(isInRootTaskLocked)) {
-                    Slog.d("MultiTaskingAppCompat", "OverrideAnimation is not allowed by Letterbox. r=" + isInRootTaskLocked);
-                } else if (isInRootTaskLocked != null && isInRootTaskLocked.isState(ActivityRecord.State.RESUMED, ActivityRecord.State.PAUSING)) {
-                    isInRootTaskLocked.mDisplayContent.mAppTransition.overridePendingAppTransition(str, i, i2, i3, null, null, isInRootTaskLocked.mOverrideTaskTransition);
-                    TransitionController transitionController = isInRootTaskLocked.mTransitionController;
-                    TransitionInfo.AnimationOptions makeCustomAnimOptions = TransitionInfo.AnimationOptions.makeCustomAnimOptions(str, i, i2, i3, isInRootTaskLocked.mOverrideTaskTransition);
+                if (CoreRune.MT_APP_COMPAT_CONFIGURATION
+                        && MultiTaskingAppCompatConfiguration.isPresetLetterboxed(
+                                isInRootTaskLocked)) {
+                    Slog.d(
+                            "MultiTaskingAppCompat",
+                            "OverrideAnimation is not allowed by Letterbox. r="
+                                    + isInRootTaskLocked);
+                } else if (isInRootTaskLocked != null
+                        && isInRootTaskLocked.isState(
+                                ActivityRecord.State.RESUMED, ActivityRecord.State.PAUSING)) {
+                    isInRootTaskLocked.mDisplayContent.mAppTransition.overridePendingAppTransition(
+                            str, i, i2, i3, null, null, isInRootTaskLocked.mOverrideTaskTransition);
+                    TransitionController transitionController =
+                            isInRootTaskLocked.mTransitionController;
+                    TransitionInfo.AnimationOptions makeCustomAnimOptions =
+                            TransitionInfo.AnimationOptions.makeCustomAnimOptions(
+                                    str, i, i2, i3, isInRootTaskLocked.mOverrideTaskTransition);
                     Transition transition = transitionController.mCollectingTransition;
                     if (transition != null) {
                         transition.setOverrideAnimation(makeCustomAnimOptions, null, null);
@@ -1470,8 +1767,11 @@ public final class ActivityClientController extends IActivityClientController.St
         Binder.restoreCallingIdentity(clearCallingIdentity);
     }
 
-    public final void registerRemoteAnimations(IBinder iBinder, RemoteAnimationDefinition remoteAnimationDefinition) {
-        this.mService.mAmInternal.enforceCallingPermission("android.permission.CONTROL_REMOTE_APP_TRANSITION_ANIMATIONS", "registerRemoteAnimations");
+    public final void registerRemoteAnimations(
+            IBinder iBinder, RemoteAnimationDefinition remoteAnimationDefinition) {
+        this.mService.mAmInternal.enforceCallingPermission(
+                "android.permission.CONTROL_REMOTE_APP_TRANSITION_ANIMATIONS",
+                "registerRemoteAnimations");
         remoteAnimationDefinition.setCallingPidUid(Binder.getCallingPid(), Binder.getCallingUid());
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -1479,15 +1779,19 @@ public final class ActivityClientController extends IActivityClientController.St
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    final ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
+                    final ActivityRecord isInRootTaskLocked =
+                            ActivityRecord.isInRootTaskLocked(iBinder);
                     if (isInRootTaskLocked != null) {
                         isInRootTaskLocked.mRemoteAnimationDefinition = remoteAnimationDefinition;
-                        remoteAnimationDefinition.linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.server.wm.ActivityRecord$$ExternalSyntheticLambda9
-                            @Override // android.os.IBinder.DeathRecipient
-                            public final void binderDied() {
-                                ActivityRecord.this.mRemoteAnimationDefinition = null;
-                            }
-                        });
+                        remoteAnimationDefinition.linkToDeath(
+                                new IBinder
+                                        .DeathRecipient() { // from class:
+                                                            // com.android.server.wm.ActivityRecord$$ExternalSyntheticLambda9
+                                    @Override // android.os.IBinder.DeathRecipient
+                                    public final void binderDied() {
+                                        ActivityRecord.this.mRemoteAnimationDefinition = null;
+                                    }
+                                });
                     }
                 } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
@@ -1510,7 +1814,10 @@ public final class ActivityClientController extends IActivityClientController.St
                     ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
                     if (isInRootTaskLocked != null && isInRootTaskLocked.isDestroyable()) {
                         isInRootTaskLocked.destroyImmediately("app-req");
-                        boolean isState = isInRootTaskLocked.isState(ActivityRecord.State.DESTROYING, ActivityRecord.State.DESTROYED);
+                        boolean isState =
+                                isInRootTaskLocked.isState(
+                                        ActivityRecord.State.DESTROYING,
+                                        ActivityRecord.State.DESTROYED);
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return isState;
                     }
@@ -1536,9 +1843,14 @@ public final class ActivityClientController extends IActivityClientController.St
                 try {
                     ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
                     if (isInRootTaskLocked != null) {
-                        this.mTaskSupervisor.mActivityMetricsLogger.notifyFullyDrawn(z, isInRootTaskLocked);
+                        this.mTaskSupervisor.mActivityMetricsLogger.notifyFullyDrawn(
+                                z, isInRootTaskLocked);
                         if (SemGateConfig.isGateEnabled()) {
-                            Log.i("GATE", "<GATE-M>APP_FULLY_LOADED_" + isInRootTaskLocked.packageName + "</GATE-M>");
+                            Log.i(
+                                    "GATE",
+                                    "<GATE-M>APP_FULLY_LOADED_"
+                                            + isInRootTaskLocked.packageName
+                                            + "</GATE-M>");
                         }
                     }
                 } catch (Throwable th) {
@@ -1552,9 +1864,16 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    public final void reportSizeConfigurations(IBinder iBinder, SizeConfigurationBuckets sizeConfigurationBuckets) {
+    public final void reportSizeConfigurations(
+            IBinder iBinder, SizeConfigurationBuckets sizeConfigurationBuckets) {
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_CONFIGURATION_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_CONFIGURATION, -4921282642721622589L, 0, null, String.valueOf(iBinder), String.valueOf(sizeConfigurationBuckets));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_CONFIGURATION,
+                    -4921282642721622589L,
+                    0,
+                    null,
+                    String.valueOf(iBinder),
+                    String.valueOf(sizeConfigurationBuckets));
         }
         WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
@@ -1572,7 +1891,8 @@ public final class ActivityClientController extends IActivityClientController.St
         WindowManagerService.resetPriorityAfterLockedSection();
     }
 
-    public final void requestMultiwindowFullscreen(IBinder iBinder, int i, IRemoteCallback iRemoteCallback) {
+    public final void requestMultiwindowFullscreen(
+            IBinder iBinder, int i, IRemoteCallback iRemoteCallback) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
@@ -1591,50 +1911,76 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    public final void requestMultiwindowFullscreenLocked(IBinder iBinder, final int i, final IRemoteCallback iRemoteCallback) {
+    public final void requestMultiwindowFullscreenLocked(
+            IBinder iBinder, final int i, final IRemoteCallback iRemoteCallback) {
         final ActivityRecord forTokenLocked = ActivityRecord.forTokenLocked(iBinder);
         if (forTokenLocked == null) {
             return;
         }
         TransitionController transitionController = forTokenLocked.mTransitionController;
         if (transitionController.isShellTransitionsEnabled()) {
-            final Transition transition = new Transition(6, 0, transitionController, this.mService.mWindowManager.mSyncEngine);
-            forTokenLocked.mTransitionController.startCollectOrQueue(transition, new TransitionController.OnStartCollect() { // from class: com.android.server.wm.ActivityClientController$$ExternalSyntheticLambda4
-                @Override // com.android.server.wm.TransitionController.OnStartCollect
-                public final void onCollectStarted(boolean z) {
-                    IRemoteCallback iRemoteCallback2 = iRemoteCallback;
-                    Task topDisplayFocusedRootTask = ActivityClientController.this.mService.mRootWindowContainer.getTopDisplayFocusedRootTask();
-                    int i2 = i;
-                    ActivityRecord activityRecord = forTokenLocked;
-                    int validateMultiwindowFullscreenRequestLocked = ActivityClientController.validateMultiwindowFullscreenRequestLocked(i2, activityRecord, topDisplayFocusedRootTask);
-                    if (iRemoteCallback2 != null) {
-                        try {
-                            iRemoteCallback2.sendResult(SystemUpdateManagerService$$ExternalSyntheticOutline0.m(validateMultiwindowFullscreenRequestLocked, KnoxCustomManagerService.SPCM_KEY_RESULT));
-                        } catch (RemoteException unused) {
-                            Slog.w("ActivityTaskManager", "client throws an exception back to the server, ignore it");
+            final Transition transition =
+                    new Transition(
+                            6, 0, transitionController, this.mService.mWindowManager.mSyncEngine);
+            forTokenLocked.mTransitionController.startCollectOrQueue(
+                    transition,
+                    new TransitionController.OnStartCollect() { // from class:
+                        // com.android.server.wm.ActivityClientController$$ExternalSyntheticLambda4
+                        @Override // com.android.server.wm.TransitionController.OnStartCollect
+                        public final void onCollectStarted(boolean z) {
+                            IRemoteCallback iRemoteCallback2 = iRemoteCallback;
+                            Task topDisplayFocusedRootTask =
+                                    ActivityClientController.this.mService.mRootWindowContainer
+                                            .getTopDisplayFocusedRootTask();
+                            int i2 = i;
+                            ActivityRecord activityRecord = forTokenLocked;
+                            int validateMultiwindowFullscreenRequestLocked =
+                                    ActivityClientController
+                                            .validateMultiwindowFullscreenRequestLocked(
+                                                    i2, activityRecord, topDisplayFocusedRootTask);
+                            if (iRemoteCallback2 != null) {
+                                try {
+                                    iRemoteCallback2.sendResult(
+                                            SystemUpdateManagerService$$ExternalSyntheticOutline0.m(
+                                                    validateMultiwindowFullscreenRequestLocked,
+                                                    KnoxCustomManagerService.SPCM_KEY_RESULT));
+                                } catch (RemoteException unused) {
+                                    Slog.w(
+                                            "ActivityTaskManager",
+                                            "client throws an exception back to the server, ignore"
+                                                + " it");
+                                }
+                            }
+                            Transition transition2 = transition;
+                            if (validateMultiwindowFullscreenRequestLocked != 0) {
+                                transition2.abort();
+                                return;
+                            }
+                            Task task = activityRecord.task;
+                            transition2.collect(task, false);
+                            ActivityClientController.executeMultiWindowFullscreenRequest(i2, task);
+                            activityRecord.mTransitionController.requestStartTransition(
+                                    transition2, task, null, null);
+                            transition2.setReady(task, true);
                         }
-                    }
-                    Transition transition2 = transition;
-                    if (validateMultiwindowFullscreenRequestLocked != 0) {
-                        transition2.abort();
-                        return;
-                    }
-                    Task task = activityRecord.task;
-                    transition2.collect(task, false);
-                    ActivityClientController.executeMultiWindowFullscreenRequest(i2, task);
-                    activityRecord.mTransitionController.requestStartTransition(transition2, task, null, null);
-                    transition2.setReady(task, true);
-                }
-            });
+                    });
             return;
         }
-        Task topDisplayFocusedRootTask = this.mService.mRootWindowContainer.getTopDisplayFocusedRootTask();
-        int validateMultiwindowFullscreenRequestLocked = validateMultiwindowFullscreenRequestLocked(i, forTokenLocked, topDisplayFocusedRootTask);
+        Task topDisplayFocusedRootTask =
+                this.mService.mRootWindowContainer.getTopDisplayFocusedRootTask();
+        int validateMultiwindowFullscreenRequestLocked =
+                validateMultiwindowFullscreenRequestLocked(
+                        i, forTokenLocked, topDisplayFocusedRootTask);
         if (iRemoteCallback != null) {
             try {
-                iRemoteCallback.sendResult(SystemUpdateManagerService$$ExternalSyntheticOutline0.m(validateMultiwindowFullscreenRequestLocked, KnoxCustomManagerService.SPCM_KEY_RESULT));
+                iRemoteCallback.sendResult(
+                        SystemUpdateManagerService$$ExternalSyntheticOutline0.m(
+                                validateMultiwindowFullscreenRequestLocked,
+                                KnoxCustomManagerService.SPCM_KEY_RESULT));
             } catch (RemoteException unused) {
-                Slog.w("ActivityTaskManager", "client throws an exception back to the server, ignore it");
+                Slog.w(
+                        "ActivityTaskManager",
+                        "client throws an exception back to the server, ignore it");
             }
         }
         if (validateMultiwindowFullscreenRequestLocked == 0) {
@@ -1643,24 +1989,34 @@ public final class ActivityClientController extends IActivityClientController.St
     }
 
     public final boolean requestPictureInPictureMode(ActivityRecord activityRecord) {
-        if (activityRecord.inPinnedWindowingMode() || !activityRecord.checkEnterPictureInPictureState("requestPictureInPictureMode", false, false)) {
+        if (activityRecord.inPinnedWindowingMode()
+                || !activityRecord.checkEnterPictureInPictureState(
+                        "requestPictureInPictureMode", false, false)) {
             return false;
         }
         if (activityRecord.pictureInPictureArgs.isAutoEnterEnabled()) {
-            return this.mService.enterPictureInPictureMode(activityRecord, activityRecord.pictureInPictureArgs, false, false);
+            return this.mService.enterPictureInPictureMode(
+                    activityRecord, activityRecord.pictureInPictureArgs, false, false);
         }
         try {
-            this.mService.mLifecycleManager.scheduleTransactionItem(activityRecord.app.mThread, EnterPipRequestedItem.obtain(activityRecord.token));
+            this.mService.mLifecycleManager.scheduleTransactionItem(
+                    activityRecord.app.mThread, EnterPipRequestedItem.obtain(activityRecord.token));
             return true;
         } catch (Exception e) {
-            Slog.w("ActivityTaskManager", "Failed to send enter pip requested item: " + activityRecord.intent.getComponent(), e);
+            Slog.w(
+                    "ActivityTaskManager",
+                    "Failed to send enter pip requested item: "
+                            + activityRecord.intent.getComponent(),
+                    e);
             return false;
         }
     }
 
     public final void setActivityRecordInputSinkEnabled(IBinder iBinder, boolean z) {
         if (Flags.allowDisableActivityRecordInputSink()) {
-            this.mService.mAmInternal.enforceCallingPermission("android.permission.INTERNAL_SYSTEM_WINDOW", "setActivityRecordInputSinkEnabled");
+            this.mService.mAmInternal.enforceCallingPermission(
+                    "android.permission.INTERNAL_SYSTEM_WINDOW",
+                    "setActivityRecordInputSinkEnabled");
             WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
@@ -1701,7 +2057,9 @@ public final class ActivityClientController extends IActivityClientController.St
     }
 
     public final void setForceSendResultForMediaProjection(IBinder iBinder) {
-        this.mService.mAmInternal.enforceCallingPermission("android.permission.MANAGE_MEDIA_PROJECTION", "setForceSendResultForMediaProjection");
+        this.mService.mAmInternal.enforceCallingPermission(
+                "android.permission.MANAGE_MEDIA_PROJECTION",
+                "setForceSendResultForMediaProjection");
         WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
@@ -1730,13 +2088,23 @@ public final class ActivityClientController extends IActivityClientController.St
                     throw new IllegalArgumentException();
                 }
                 isInRootTaskLocked.immersive = z;
-                if (isInRootTaskLocked.mDisplayContent.forAllTaskDisplayAreas(new ActivityRecord$$ExternalSyntheticLambda1(5, isInRootTaskLocked))) {
+                if (isInRootTaskLocked.mDisplayContent.forAllTaskDisplayAreas(
+                        new ActivityRecord$$ExternalSyntheticLambda1(5, isInRootTaskLocked))) {
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_IMMERSIVE_enabled[0]) {
-                        ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_IMMERSIVE, -1597980207704427048L, 0, null, String.valueOf(isInRootTaskLocked));
+                        ProtoLogImpl_54989576.d(
+                                ProtoLogGroup.WM_DEBUG_IMMERSIVE,
+                                -1597980207704427048L,
+                                0,
+                                null,
+                                String.valueOf(isInRootTaskLocked));
                     }
                     ActivityTaskManagerService activityTaskManagerService = this.mService;
                     activityTaskManagerService.getClass();
-                    activityTaskManagerService.mH.post(new ActivityTaskManagerService$$ExternalSyntheticLambda16(activityTaskManagerService, isInRootTaskLocked.immersive, isInRootTaskLocked));
+                    activityTaskManagerService.mH.post(
+                            new ActivityTaskManagerService$$ExternalSyntheticLambda16(
+                                    activityTaskManagerService,
+                                    isInRootTaskLocked.immersive,
+                                    isInRootTaskLocked));
                 }
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
@@ -1756,7 +2124,8 @@ public final class ActivityClientController extends IActivityClientController.St
                     ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
                     if (isInRootTaskLocked != null) {
                         isInRootTaskLocked.mInheritShownWhenLocked = z;
-                        isInRootTaskLocked.mAtmService.mRootWindowContainer.ensureActivitiesVisible();
+                        isInRootTaskLocked.mAtmService.mRootWindowContainer
+                                .ensureActivitiesVisible();
                     }
                 } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
@@ -1769,11 +2138,13 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    public final void setPictureInPictureParams(IBinder iBinder, PictureInPictureParams pictureInPictureParams) {
+    public final void setPictureInPictureParams(
+            IBinder iBinder, PictureInPictureParams pictureInPictureParams) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (this.mSetPipAspectRatioQuotaTracker == null) {
-                CountQuotaTracker countQuotaTracker = new CountQuotaTracker(this.mContext, Categorizer.SINGLE_CATEGORIZER);
+                CountQuotaTracker countQuotaTracker =
+                        new CountQuotaTracker(this.mContext, Categorizer.SINGLE_CATEGORIZER);
                 this.mSetPipAspectRatioQuotaTracker = countQuotaTracker;
                 countQuotaTracker.setCountLimit(Category.SINGLE_CATEGORY, 60, 60000L);
             }
@@ -1781,12 +2152,20 @@ public final class ActivityClientController extends IActivityClientController.St
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    ActivityRecord ensureValidPictureInPictureActivityParams = ensureValidPictureInPictureActivityParams("setPictureInPictureParams", iBinder, pictureInPictureParams);
-                    ensureValidPictureInPictureActivityParams.pictureInPictureArgs.copyOnlySet(pictureInPictureParams);
+                    ActivityRecord ensureValidPictureInPictureActivityParams =
+                            ensureValidPictureInPictureActivityParams(
+                                    "setPictureInPictureParams", iBinder, pictureInPictureParams);
+                    ensureValidPictureInPictureActivityParams.pictureInPictureArgs.copyOnlySet(
+                            pictureInPictureParams);
                     Rect bounds = ensureValidPictureInPictureActivityParams.getBounds();
-                    PictureInPictureParams pictureInPictureParams2 = ensureValidPictureInPictureActivityParams.pictureInPictureArgs;
-                    if (pictureInPictureParams2 != null && pictureInPictureParams2.hasSourceBoundsHint()) {
-                        ensureValidPictureInPictureActivityParams.pictureInPictureArgs.getSourceRectHint().offset(bounds.left, bounds.top);
+                    PictureInPictureParams pictureInPictureParams2 =
+                            ensureValidPictureInPictureActivityParams.pictureInPictureArgs;
+                    if (pictureInPictureParams2 != null
+                            && pictureInPictureParams2.hasSourceBoundsHint()) {
+                        ensureValidPictureInPictureActivityParams
+                                .pictureInPictureArgs
+                                .getSourceRectHint()
+                                .offset(bounds.left, bounds.top);
                     }
                     Task rootTask = ensureValidPictureInPictureActivityParams.task.getRootTask();
                     if (rootTask.inPinnedWindowingMode()) {
@@ -1834,7 +2213,8 @@ public final class ActivityClientController extends IActivityClientController.St
                 try {
                     ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
                     if (isInRootTaskLocked != null) {
-                        EventLog.writeEvent(31006, Integer.valueOf(i), isInRootTaskLocked.shortComponentName);
+                        EventLog.writeEvent(
+                                31006, Integer.valueOf(i), isInRootTaskLocked.shortComponentName);
                         isInRootTaskLocked.setRequestedOrientation(i);
                     }
                 } catch (Throwable th) {
@@ -1880,9 +2260,15 @@ public final class ActivityClientController extends IActivityClientController.St
                     if (isInRootTaskLocked != null) {
                         int i = isInRootTaskLocked.mUserId;
                         int identityHashCode = System.identityHashCode(isInRootTaskLocked);
-                        EventLog.writeEvent(1000205, Integer.valueOf(i), Integer.valueOf(identityHashCode), isInRootTaskLocked.shortComponentName, Integer.valueOf(z ? 1 : 0));
+                        EventLog.writeEvent(
+                                1000205,
+                                Integer.valueOf(i),
+                                Integer.valueOf(identityHashCode),
+                                isInRootTaskLocked.shortComponentName,
+                                Integer.valueOf(z ? 1 : 0));
                         isInRootTaskLocked.mShowWhenLocked = z;
-                        isInRootTaskLocked.mAtmService.mRootWindowContainer.ensureActivitiesVisible();
+                        isInRootTaskLocked.mAtmService.mRootWindowContainer
+                                .ensureActivitiesVisible();
                     }
                 } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
@@ -1895,7 +2281,8 @@ public final class ActivityClientController extends IActivityClientController.St
         }
     }
 
-    public final void setTaskDescription(IBinder iBinder, ActivityManager.TaskDescription taskDescription) {
+    public final void setTaskDescription(
+            IBinder iBinder, ActivityManager.TaskDescription taskDescription) {
         WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
@@ -1939,7 +2326,9 @@ public final class ActivityClientController extends IActivityClientController.St
         ActivityRecord isInRootTaskLocked;
         int isValid;
         this.mService.enforceSystemHasVrFeature();
-        VrManagerService.LocalService localService = (VrManagerService.LocalService) LocalServices.getService(VrManagerService.LocalService.class);
+        VrManagerService.LocalService localService =
+                (VrManagerService.LocalService)
+                        LocalServices.getService(VrManagerService.LocalService.class);
         WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
@@ -1971,7 +2360,8 @@ public final class ActivityClientController extends IActivityClientController.St
                 }
                 try {
                     isInRootTaskLocked.requestedVrComponent = componentName;
-                    if (isInRootTaskLocked.mDisplayContent.forAllTaskDisplayAreas(new ActivityRecord$$ExternalSyntheticLambda1(5, isInRootTaskLocked))) {
+                    if (isInRootTaskLocked.mDisplayContent.forAllTaskDisplayAreas(
+                            new ActivityRecord$$ExternalSyntheticLambda1(5, isInRootTaskLocked))) {
                         this.mService.applyUpdateVrModeLocked(isInRootTaskLocked);
                     }
                 } finally {
@@ -1996,7 +2386,10 @@ public final class ActivityClientController extends IActivityClientController.St
                     WindowManagerService.resetPriorityAfterLockedSection();
                     return false;
                 }
-                boolean shouldUpRecreateTaskLocked = forTokenLocked.getRootTask().shouldUpRecreateTaskLocked(forTokenLocked, str);
+                boolean shouldUpRecreateTaskLocked =
+                        forTokenLocked
+                                .getRootTask()
+                                .shouldUpRecreateTaskLocked(forTokenLocked, str);
                 WindowManagerService.resetPriorityAfterLockedSection();
                 return shouldUpRecreateTaskLocked;
             } catch (Throwable th) {
@@ -2015,17 +2408,36 @@ public final class ActivityClientController extends IActivityClientController.St
             synchronized (windowManagerGlobalLock) {
                 try {
                     ActivityRecord forTokenLocked = ActivityRecord.forTokenLocked(iBinder);
-                    Task topDisplayFocusedRootTask = this.mService.mRootWindowContainer.getTopDisplayFocusedRootTask();
-                    ActivityRecord topNonFinishingActivity = topDisplayFocusedRootTask != null ? topDisplayFocusedRootTask.getTopNonFinishingActivity(true, true) : null;
+                    Task topDisplayFocusedRootTask =
+                            this.mService.mRootWindowContainer.getTopDisplayFocusedRootTask();
+                    ActivityRecord topNonFinishingActivity =
+                            topDisplayFocusedRootTask != null
+                                    ? topDisplayFocusedRootTask.getTopNonFinishingActivity(
+                                            true, true)
+                                    : null;
                     if (topNonFinishingActivity != forTokenLocked) {
-                        Slog.w("ActivityTaskManager", "showAssistFromActivity failed: caller " + forTokenLocked + " is not current top " + topNonFinishingActivity);
+                        Slog.w(
+                                "ActivityTaskManager",
+                                "showAssistFromActivity failed: caller "
+                                        + forTokenLocked
+                                        + " is not current top "
+                                        + topNonFinishingActivity);
                     } else {
                         if (topNonFinishingActivity.nowVisible) {
                             String str = topNonFinishingActivity.launchedFromFeatureId;
                             WindowManagerService.resetPriorityAfterLockedSection();
-                            return this.mAssistUtils.showSessionForActiveService(bundle, 8, str, (IVoiceInteractionSessionShowCallback) null, iBinder);
+                            return this.mAssistUtils.showSessionForActiveService(
+                                    bundle,
+                                    8,
+                                    str,
+                                    (IVoiceInteractionSessionShowCallback) null,
+                                    iBinder);
                         }
-                        Slog.w("ActivityTaskManager", "showAssistFromActivity failed: caller " + forTokenLocked + " is not visible");
+                        Slog.w(
+                                "ActivityTaskManager",
+                                "showAssistFromActivity failed: caller "
+                                        + forTokenLocked
+                                        + " is not visible");
                     }
                     WindowManagerService.resetPriorityAfterLockedSection();
                     return false;
@@ -2063,9 +2475,12 @@ public final class ActivityClientController extends IActivityClientController.St
             try {
                 ActivityRecord forTokenLocked = ActivityRecord.forTokenLocked(iBinder);
                 if (forTokenLocked == null) {
-                    Slog.w("ActivityTaskManager", "splashScreenTransferredLocked cannot find activity");
+                    Slog.w(
+                            "ActivityTaskManager",
+                            "splashScreenTransferredLocked cannot find activity");
                 } else {
-                    forTokenLocked.mAtmService.mH.removeCallbacks(forTokenLocked.mTransferSplashScreenTimeoutRunnable);
+                    forTokenLocked.mAtmService.mH.removeCallbacks(
+                            forTokenLocked.mTransferSplashScreenTimeoutRunnable);
                     WindowState windowState = forTokenLocked.mStartingWindow;
                     if (windowState != null) {
                         windowState.cancelAnimation();
@@ -2089,25 +2504,39 @@ public final class ActivityClientController extends IActivityClientController.St
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                Task topDisplayFocusedRootTask = this.mService.mRootWindowContainer.getTopDisplayFocusedRootTask();
-                ActivityRecord topNonFinishingActivity = topDisplayFocusedRootTask != null ? topDisplayFocusedRootTask.getTopNonFinishingActivity(true, true) : null;
+                Task topDisplayFocusedRootTask =
+                        this.mService.mRootWindowContainer.getTopDisplayFocusedRootTask();
+                ActivityRecord topNonFinishingActivity =
+                        topDisplayFocusedRootTask != null
+                                ? topDisplayFocusedRootTask.getTopNonFinishingActivity(true, true)
+                                : null;
                 if (ActivityRecord.forTokenLocked(iBinder) != topNonFinishingActivity) {
-                    throw new SecurityException("Only focused activity can call startVoiceInteraction");
+                    throw new SecurityException(
+                            "Only focused activity can call startVoiceInteraction");
                 }
-                if (this.mService.mRunningVoice == null && topNonFinishingActivity.task.voiceSession == null && topNonFinishingActivity.voiceSession == null) {
+                if (this.mService.mRunningVoice == null
+                        && topNonFinishingActivity.task.voiceSession == null
+                        && topNonFinishingActivity.voiceSession == null) {
                     if (topNonFinishingActivity.pendingVoiceInteractionStart) {
-                        Slog.w("ActivityTaskManager", "Pending start of voice interaction already.");
+                        Slog.w(
+                                "ActivityTaskManager",
+                                "Pending start of voice interaction already.");
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return;
                     } else {
                         topNonFinishingActivity.pendingVoiceInteractionStart = true;
                         String str = topNonFinishingActivity.launchedFromFeatureId;
                         WindowManagerService.resetPriorityAfterLockedSection();
-                        ((VoiceInteractionManagerInternal) LocalServices.getService(VoiceInteractionManagerInternal.class)).startLocalVoiceInteraction(iBinder, str, bundle);
+                        ((VoiceInteractionManagerInternal)
+                                        LocalServices.getService(
+                                                VoiceInteractionManagerInternal.class))
+                                .startLocalVoiceInteraction(iBinder, str, bundle);
                         return;
                     }
                 }
-                Slog.w("ActivityTaskManager", "Already in a voice interaction, cannot start new voice interaction");
+                Slog.w(
+                        "ActivityTaskManager",
+                        "Already in a voice interaction, cannot start new voice interaction");
                 WindowManagerService.resetPriorityAfterLockedSection();
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
@@ -2134,7 +2563,9 @@ public final class ActivityClientController extends IActivityClientController.St
     }
 
     public final void stopLocalVoiceInteraction(IBinder iBinder) {
-        ((VoiceInteractionManagerInternal) LocalServices.getService(VoiceInteractionManagerInternal.class)).stopLocalVoiceInteraction(iBinder);
+        ((VoiceInteractionManagerInternal)
+                        LocalServices.getService(VoiceInteractionManagerInternal.class))
+                .stopLocalVoiceInteraction(iBinder);
     }
 
     public final void stopLockTaskModeByToken(IBinder iBinder) {
@@ -2151,19 +2582,30 @@ public final class ActivityClientController extends IActivityClientController.St
                 try {
                     ActivityRecord forTokenLocked = ActivityRecord.forTokenLocked(iBinder);
                     if (forTokenLocked == null) {
-                        throw new IllegalArgumentException("toggleFreeformWindowingMode: No activity record matching token=" + iBinder);
+                        throw new IllegalArgumentException(
+                                "toggleFreeformWindowingMode: No activity record matching token="
+                                        + iBinder);
                     }
                     Task rootTask = forTokenLocked.getRootTask();
                     if (rootTask == null) {
-                        throw new IllegalStateException("toggleFreeformWindowingMode: the activity doesn't have a root task");
+                        throw new IllegalStateException(
+                                "toggleFreeformWindowingMode: the activity doesn't have a root"
+                                    + " task");
                     }
                     if (!rootTask.inFreeformWindowingMode() && rootTask.getWindowingMode() != 1) {
-                        throw new IllegalStateException("toggleFreeformWindowingMode: You can only toggle between fullscreen and freeform.");
+                        throw new IllegalStateException(
+                                "toggleFreeformWindowingMode: You can only toggle between"
+                                    + " fullscreen and freeform.");
                     }
                     if (rootTask.isDexCompatEnabled()) {
-                        DexCompatController dexCompatController = this.mService.mDexCompatController;
+                        DexCompatController dexCompatController =
+                                this.mService.mDexCompatController;
                         dexCompatController.getClass();
-                        dexCompatController.scheduleStartActivityAsToggleFreeform(rootTask, new DexCompatController$$ExternalSyntheticLambda0(rootTask), new DexCompatController$$ExternalSyntheticLambda1(0, rootTask), new DexCompatController$$ExternalSyntheticLambda2(0));
+                        dexCompatController.scheduleStartActivityAsToggleFreeform(
+                                rootTask,
+                                new DexCompatController$$ExternalSyntheticLambda0(rootTask),
+                                new DexCompatController$$ExternalSyntheticLambda1(0, rootTask),
+                                new DexCompatController$$ExternalSyntheticLambda2(0));
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return;
                     }
@@ -2174,20 +2616,32 @@ public final class ActivityClientController extends IActivityClientController.St
                             forTokenLocked.task.mLastNonFullscreenBounds = null;
                         }
                     } else {
-                        if (!forTokenLocked.supportsFreeform() && ((!CoreRune.MT_NEW_DEX_BOUNDS_POLICY || !rootTask.isNewDexMode() || !rootTask.inFullscreenWindowingMode()) && !rootTask.isResizeable(true))) {
+                        if (!forTokenLocked.supportsFreeform()
+                                && ((!CoreRune.MT_NEW_DEX_BOUNDS_POLICY
+                                                || !rootTask.isNewDexMode()
+                                                || !rootTask.inFullscreenWindowingMode())
+                                        && !rootTask.isResizeable(true))) {
                             if (CoreRune.MT_DEX_SIZE_COMPAT_MODE && rootTask.isNewDexMode()) {
                                 DexSizeCompatController.LazyHolder.sInstance.getClass();
-                                if (DexSizeCompatController.getCompatPolicy(rootTask) != null) {
-                                }
+                                if (DexSizeCompatController.getCompatPolicy(rootTask) != null) {}
                             }
-                            throw new IllegalStateException("This activity is currently not freeform-enabled");
+                            throw new IllegalStateException(
+                                    "This activity is currently not freeform-enabled");
                         }
                         if (rootTask.getParent().inFreeformWindowingMode()) {
                             rootTask.setWindowingMode(0);
                             Task task = forTokenLocked.task;
-                            if (task.isDesktopModeEnabled() && ((rect = task.mLastNonFullscreenBounds) == null || rect.isEmpty())) {
+                            if (task.isDesktopModeEnabled()
+                                    && ((rect = task.mLastNonFullscreenBounds) == null
+                                            || rect.isEmpty())) {
                                 task.mTakeInitBounds = true;
-                                this.mTaskSupervisor.mLaunchParamsController.layoutTask(task, forTokenLocked.info.windowLayout, null, null, null, -1);
+                                this.mTaskSupervisor.mLaunchParamsController.layoutTask(
+                                        task,
+                                        forTokenLocked.info.windowLayout,
+                                        null,
+                                        null,
+                                        null,
+                                        -1);
                                 this.mService.mRootWindowContainer.ensureActivitiesVisible();
                             }
                         } else {
@@ -2206,7 +2660,9 @@ public final class ActivityClientController extends IActivityClientController.St
     }
 
     public final void unregisterRemoteAnimations(IBinder iBinder) {
-        this.mService.mAmInternal.enforceCallingPermission("android.permission.CONTROL_REMOTE_APP_TRANSITION_ANIMATIONS", "unregisterRemoteAnimations");
+        this.mService.mAmInternal.enforceCallingPermission(
+                "android.permission.CONTROL_REMOTE_APP_TRANSITION_ANIMATIONS",
+                "unregisterRemoteAnimations");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
@@ -2284,6 +2740,8 @@ public final class ActivityClientController extends IActivityClientController.St
             com.android.server.wm.WindowManagerService.resetPriorityAfterLockedSection()
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.ActivityClientController.willActivityBeVisible(android.os.IBinder):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.ActivityClientController.willActivityBeVisible(android.os.IBinder):boolean");
     }
 }

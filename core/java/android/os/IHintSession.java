@@ -8,7 +8,8 @@ public interface IHintSession extends IInterface {
 
     void reportActualWorkDuration(long[] jArr, long[] jArr2) throws RemoteException;
 
-    void reportActualWorkDuration2(android.hardware.power.WorkDuration[] workDurationArr) throws RemoteException;
+    void reportActualWorkDuration2(android.hardware.power.WorkDuration[] workDurationArr)
+            throws RemoteException;
 
     void sendHint(int i) throws RemoteException;
 
@@ -18,28 +19,24 @@ public interface IHintSession extends IInterface {
 
     public static class Default implements IHintSession {
         @Override // android.os.IHintSession
-        public void updateTargetWorkDuration(long targetDurationNanos) throws RemoteException {
-        }
+        public void updateTargetWorkDuration(long targetDurationNanos) throws RemoteException {}
 
         @Override // android.os.IHintSession
-        public void reportActualWorkDuration(long[] actualDurationNanos, long[] timeStampNanos) throws RemoteException {
-        }
+        public void reportActualWorkDuration(long[] actualDurationNanos, long[] timeStampNanos)
+                throws RemoteException {}
 
         @Override // android.os.IHintSession
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.os.IHintSession
-        public void sendHint(int hint) throws RemoteException {
-        }
+        public void sendHint(int hint) throws RemoteException {}
 
         @Override // android.os.IHintSession
-        public void setMode(int mode, boolean enabled) throws RemoteException {
-        }
+        public void setMode(int mode, boolean enabled) throws RemoteException {}
 
         @Override // android.os.IHintSession
-        public void reportActualWorkDuration2(android.hardware.power.WorkDuration[] workDurations) throws RemoteException {
-        }
+        public void reportActualWorkDuration2(android.hardware.power.WorkDuration[] workDurations)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +44,7 @@ public interface IHintSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHintSession {
+    public abstract static class Stub extends Binder implements IHintSession {
         static final int TRANSACTION_close = 3;
         static final int TRANSACTION_reportActualWorkDuration = 2;
         static final int TRANSACTION_reportActualWorkDuration2 = 6;
@@ -100,7 +97,8 @@ public interface IHintSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IHintSession.DESCRIPTOR);
             }
@@ -135,7 +133,10 @@ public interface IHintSession extends IInterface {
                     setMode(_arg04, _arg12);
                     return true;
                 case 6:
-                    android.hardware.power.WorkDuration[] _arg05 = (android.hardware.power.WorkDuration[]) data.createTypedArray(android.hardware.power.WorkDuration.CREATOR);
+                    android.hardware.power.WorkDuration[] _arg05 =
+                            (android.hardware.power.WorkDuration[])
+                                    data.createTypedArray(
+                                            android.hardware.power.WorkDuration.CREATOR);
                     data.enforceNoDataAvail();
                     reportActualWorkDuration2(_arg05);
                     return true;
@@ -173,7 +174,8 @@ public interface IHintSession extends IInterface {
             }
 
             @Override // android.os.IHintSession
-            public void reportActualWorkDuration(long[] actualDurationNanos, long[] timeStampNanos) throws RemoteException {
+            public void reportActualWorkDuration(long[] actualDurationNanos, long[] timeStampNanos)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IHintSession.DESCRIPTOR);
@@ -222,7 +224,8 @@ public interface IHintSession extends IInterface {
             }
 
             @Override // android.os.IHintSession
-            public void reportActualWorkDuration2(android.hardware.power.WorkDuration[] workDurations) throws RemoteException {
+            public void reportActualWorkDuration2(
+                    android.hardware.power.WorkDuration[] workDurations) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IHintSession.DESCRIPTOR);

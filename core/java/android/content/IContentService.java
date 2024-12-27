@@ -3,7 +3,6 @@ package android.content;
 import android.Manifest;
 import android.accounts.Account;
 import android.app.ActivityThread;
-import android.content.ISyncStatusObserver;
 import android.database.IContentObserver;
 import android.net.Uri;
 import android.os.Binder;
@@ -13,19 +12,23 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface IContentService extends IInterface {
     void addPeriodicSync(Account account, String str, Bundle bundle, long j) throws RemoteException;
 
-    void addStatusChangeListener(int i, ISyncStatusObserver iSyncStatusObserver) throws RemoteException;
+    void addStatusChangeListener(int i, ISyncStatusObserver iSyncStatusObserver)
+            throws RemoteException;
 
     void cancelRequest(SyncRequest syncRequest) throws RemoteException;
 
-    void cancelSync(Account account, String str, ComponentName componentName) throws RemoteException;
+    void cancelSync(Account account, String str, ComponentName componentName)
+            throws RemoteException;
 
-    void cancelSyncAsUser(Account account, String str, ComponentName componentName, int i) throws RemoteException;
+    void cancelSyncAsUser(Account account, String str, ComponentName componentName, int i)
+            throws RemoteException;
 
     Bundle getCache(String str, Uri uri, int i) throws RemoteException;
 
@@ -41,7 +44,8 @@ public interface IContentService extends IInterface {
 
     boolean getMasterSyncAutomaticallyAsUser(int i) throws RemoteException;
 
-    List<PeriodicSync> getPeriodicSyncs(Account account, String str, ComponentName componentName) throws RemoteException;
+    List<PeriodicSync> getPeriodicSyncs(Account account, String str, ComponentName componentName)
+            throws RemoteException;
 
     String getSyncAdapterPackageAsUser(String str, String str2, int i) throws RemoteException;
 
@@ -55,29 +59,45 @@ public interface IContentService extends IInterface {
 
     boolean getSyncAutomaticallyAsUser(Account account, String str, int i) throws RemoteException;
 
-    SyncStatusInfo getSyncStatus(Account account, String str, ComponentName componentName) throws RemoteException;
+    SyncStatusInfo getSyncStatus(Account account, String str, ComponentName componentName)
+            throws RemoteException;
 
-    SyncStatusInfo getSyncStatusAsUser(Account account, String str, ComponentName componentName, int i) throws RemoteException;
+    SyncStatusInfo getSyncStatusAsUser(
+            Account account, String str, ComponentName componentName, int i) throws RemoteException;
 
-    boolean isSyncActive(Account account, String str, ComponentName componentName) throws RemoteException;
+    boolean isSyncActive(Account account, String str, ComponentName componentName)
+            throws RemoteException;
 
-    boolean isSyncPending(Account account, String str, ComponentName componentName) throws RemoteException;
+    boolean isSyncPending(Account account, String str, ComponentName componentName)
+            throws RemoteException;
 
-    boolean isSyncPendingAsUser(Account account, String str, ComponentName componentName, int i) throws RemoteException;
+    boolean isSyncPendingAsUser(Account account, String str, ComponentName componentName, int i)
+            throws RemoteException;
 
-    void notifyChange(Uri[] uriArr, IContentObserver iContentObserver, boolean z, int i, int i2, int i3, String str) throws RemoteException;
+    void notifyChange(
+            Uri[] uriArr,
+            IContentObserver iContentObserver,
+            boolean z,
+            int i,
+            int i2,
+            int i3,
+            String str)
+            throws RemoteException;
 
     void onDbCorruption(String str, String str2, String str3) throws RemoteException;
 
     void putCache(String str, Uri uri, Bundle bundle, int i) throws RemoteException;
 
-    void registerContentObserver(Uri uri, boolean z, IContentObserver iContentObserver, int i, int i2) throws RemoteException;
+    void registerContentObserver(
+            Uri uri, boolean z, IContentObserver iContentObserver, int i, int i2)
+            throws RemoteException;
 
     void removePeriodicSync(Account account, String str, Bundle bundle) throws RemoteException;
 
     void removeStatusChangeListener(ISyncStatusObserver iSyncStatusObserver) throws RemoteException;
 
-    void requestSync(Account account, String str, Bundle bundle, String str2) throws RemoteException;
+    void requestSync(Account account, String str, Bundle bundle, String str2)
+            throws RemoteException;
 
     void resetTodayStats() throws RemoteException;
 
@@ -91,7 +111,8 @@ public interface IContentService extends IInterface {
 
     void setSyncAutomatically(Account account, String str, boolean z) throws RemoteException;
 
-    void setSyncAutomaticallyAsUser(Account account, String str, boolean z, int i) throws RemoteException;
+    void setSyncAutomaticallyAsUser(Account account, String str, boolean z, int i)
+            throws RemoteException;
 
     void sync(SyncRequest syncRequest, String str) throws RemoteException;
 
@@ -101,71 +122,87 @@ public interface IContentService extends IInterface {
 
     public static class Default implements IContentService {
         @Override // android.content.IContentService
-        public void unregisterContentObserver(IContentObserver observer) throws RemoteException {
-        }
+        public void unregisterContentObserver(IContentObserver observer) throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void registerContentObserver(Uri uri, boolean notifyForDescendants, IContentObserver observer, int userHandle, int targetSdkVersion) throws RemoteException {
-        }
+        public void registerContentObserver(
+                Uri uri,
+                boolean notifyForDescendants,
+                IContentObserver observer,
+                int userHandle,
+                int targetSdkVersion)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void notifyChange(Uri[] uris, IContentObserver observer, boolean observerWantsSelfNotifications, int flags, int userHandle, int targetSdkVersion, String callingPackage) throws RemoteException {
-        }
+        public void notifyChange(
+                Uri[] uris,
+                IContentObserver observer,
+                boolean observerWantsSelfNotifications,
+                int flags,
+                int userHandle,
+                int targetSdkVersion,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void requestSync(Account account, String authority, Bundle extras, String callingPackage) throws RemoteException {
-        }
+        public void requestSync(
+                Account account, String authority, Bundle extras, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void sync(SyncRequest request, String callingPackage) throws RemoteException {
-        }
+        public void sync(SyncRequest request, String callingPackage) throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void syncAsUser(SyncRequest request, int userId, String callingPackage) throws RemoteException {
-        }
+        public void syncAsUser(SyncRequest request, int userId, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void cancelSync(Account account, String authority, ComponentName cname) throws RemoteException {
-        }
+        public void cancelSync(Account account, String authority, ComponentName cname)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void cancelSyncAsUser(Account account, String authority, ComponentName cname, int userId) throws RemoteException {
-        }
+        public void cancelSyncAsUser(
+                Account account, String authority, ComponentName cname, int userId)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void cancelRequest(SyncRequest request) throws RemoteException {
-        }
+        public void cancelRequest(SyncRequest request) throws RemoteException {}
 
         @Override // android.content.IContentService
-        public boolean getSyncAutomatically(Account account, String providerName) throws RemoteException {
+        public boolean getSyncAutomatically(Account account, String providerName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.IContentService
-        public boolean getSyncAutomaticallyAsUser(Account account, String providerName, int userId) throws RemoteException {
+        public boolean getSyncAutomaticallyAsUser(Account account, String providerName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.IContentService
-        public void setSyncAutomatically(Account account, String providerName, boolean sync) throws RemoteException {
-        }
+        public void setSyncAutomatically(Account account, String providerName, boolean sync)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void setSyncAutomaticallyAsUser(Account account, String providerName, boolean sync, int userId) throws RemoteException {
-        }
+        public void setSyncAutomaticallyAsUser(
+                Account account, String providerName, boolean sync, int userId)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public List<PeriodicSync> getPeriodicSyncs(Account account, String providerName, ComponentName cname) throws RemoteException {
+        public List<PeriodicSync> getPeriodicSyncs(
+                Account account, String providerName, ComponentName cname) throws RemoteException {
             return null;
         }
 
         @Override // android.content.IContentService
-        public void addPeriodicSync(Account account, String providerName, Bundle extras, long pollFrequency) throws RemoteException {
-        }
+        public void addPeriodicSync(
+                Account account, String providerName, Bundle extras, long pollFrequency)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void removePeriodicSync(Account account, String providerName, Bundle extras) throws RemoteException {
-        }
+        public void removePeriodicSync(Account account, String providerName, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
         public int getIsSyncable(Account account, String providerName) throws RemoteException {
@@ -173,25 +210,26 @@ public interface IContentService extends IInterface {
         }
 
         @Override // android.content.IContentService
-        public int getIsSyncableAsUser(Account account, String providerName, int userId) throws RemoteException {
+        public int getIsSyncableAsUser(Account account, String providerName, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.IContentService
-        public void setIsSyncable(Account account, String providerName, int syncable) throws RemoteException {
-        }
+        public void setIsSyncable(Account account, String providerName, int syncable)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void setIsSyncableAsUser(Account account, String providerName, int syncable, int userId) throws RemoteException {
-        }
+        public void setIsSyncableAsUser(
+                Account account, String providerName, int syncable, int userId)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void setMasterSyncAutomatically(boolean flag) throws RemoteException {
-        }
+        public void setMasterSyncAutomatically(boolean flag) throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void setMasterSyncAutomaticallyAsUser(boolean flag, int userId) throws RemoteException {
-        }
+        public void setMasterSyncAutomaticallyAsUser(boolean flag, int userId)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
         public boolean getMasterSyncAutomatically() throws RemoteException {
@@ -224,51 +262,60 @@ public interface IContentService extends IInterface {
         }
 
         @Override // android.content.IContentService
-        public String[] getSyncAdapterPackagesForAuthorityAsUser(String authority, int userId) throws RemoteException {
+        public String[] getSyncAdapterPackagesForAuthorityAsUser(String authority, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.IContentService
-        public String getSyncAdapterPackageAsUser(String accountType, String authority, int userId) throws RemoteException {
+        public String getSyncAdapterPackageAsUser(String accountType, String authority, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.IContentService
-        public boolean isSyncActive(Account account, String authority, ComponentName cname) throws RemoteException {
+        public boolean isSyncActive(Account account, String authority, ComponentName cname)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.IContentService
-        public SyncStatusInfo getSyncStatus(Account account, String authority, ComponentName cname) throws RemoteException {
+        public SyncStatusInfo getSyncStatus(Account account, String authority, ComponentName cname)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.IContentService
-        public SyncStatusInfo getSyncStatusAsUser(Account account, String authority, ComponentName cname, int userId) throws RemoteException {
+        public SyncStatusInfo getSyncStatusAsUser(
+                Account account, String authority, ComponentName cname, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.IContentService
-        public boolean isSyncPending(Account account, String authority, ComponentName cname) throws RemoteException {
+        public boolean isSyncPending(Account account, String authority, ComponentName cname)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.IContentService
-        public boolean isSyncPendingAsUser(Account account, String authority, ComponentName cname, int userId) throws RemoteException {
+        public boolean isSyncPendingAsUser(
+                Account account, String authority, ComponentName cname, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.IContentService
-        public void addStatusChangeListener(int mask, ISyncStatusObserver callback) throws RemoteException {
-        }
+        public void addStatusChangeListener(int mask, ISyncStatusObserver callback)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void removeStatusChangeListener(ISyncStatusObserver callback) throws RemoteException {
-        }
+        public void removeStatusChangeListener(ISyncStatusObserver callback)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void putCache(String packageName, Uri key, Bundle value, int userId) throws RemoteException {
-        }
+        public void putCache(String packageName, Uri key, Bundle value, int userId)
+                throws RemoteException {}
 
         @Override // android.content.IContentService
         public Bundle getCache(String packageName, Uri key, int userId) throws RemoteException {
@@ -276,12 +323,11 @@ public interface IContentService extends IInterface {
         }
 
         @Override // android.content.IContentService
-        public void resetTodayStats() throws RemoteException {
-        }
+        public void resetTodayStats() throws RemoteException {}
 
         @Override // android.content.IContentService
-        public void onDbCorruption(String tag, String message, String stacktrace) throws RemoteException {
-        }
+        public void onDbCorruption(String tag, String message, String stacktrace)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -289,7 +335,7 @@ public interface IContentService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContentService {
+    public abstract static class Stub extends Binder implements IContentService {
         public static final String DESCRIPTOR = "android.content.IContentService";
         static final int TRANSACTION_addPeriodicSync = 15;
         static final int TRANSACTION_addStatusChangeListener = 36;
@@ -344,7 +390,9 @@ public interface IContentService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IContentService asInterface(IBinder obj) {
@@ -458,7 +506,8 @@ public interface IContentService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -468,7 +517,8 @@ public interface IContentService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IContentObserver _arg0 = IContentObserver.Stub.asInterface(data.readStrongBinder());
+                    IContentObserver _arg0 =
+                            IContentObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterContentObserver(_arg0);
                     reply.writeNoException();
@@ -476,7 +526,8 @@ public interface IContentService extends IInterface {
                 case 2:
                     Uri _arg02 = (Uri) data.readTypedObject(Uri.CREATOR);
                     boolean _arg1 = data.readBoolean();
-                    IContentObserver _arg2 = IContentObserver.Stub.asInterface(data.readStrongBinder());
+                    IContentObserver _arg2 =
+                            IContentObserver.Stub.asInterface(data.readStrongBinder());
                     int _arg3 = data.readInt();
                     int _arg4 = data.readInt();
                     data.enforceNoDataAvail();
@@ -485,7 +536,8 @@ public interface IContentService extends IInterface {
                     return true;
                 case 3:
                     Uri[] _arg03 = (Uri[]) data.createTypedArray(Uri.CREATOR);
-                    IContentObserver _arg12 = IContentObserver.Stub.asInterface(data.readStrongBinder());
+                    IContentObserver _arg12 =
+                            IContentObserver.Stub.asInterface(data.readStrongBinder());
                     boolean _arg22 = data.readBoolean();
                     int _arg32 = data.readInt();
                     int _arg42 = data.readInt();
@@ -522,7 +574,8 @@ public interface IContentService extends IInterface {
                 case 7:
                     Account _arg07 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg16 = data.readString();
-                    ComponentName _arg25 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg25 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     cancelSync(_arg07, _arg16, _arg25);
                     reply.writeNoException();
@@ -530,7 +583,8 @@ public interface IContentService extends IInterface {
                 case 8:
                     Account _arg08 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg17 = data.readString();
-                    ComponentName _arg26 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg26 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg34 = data.readInt();
                     data.enforceNoDataAvail();
                     cancelSyncAsUser(_arg08, _arg17, _arg26, _arg34);
@@ -579,7 +633,8 @@ public interface IContentService extends IInterface {
                 case 14:
                     Account _arg014 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg112 = data.readString();
-                    ComponentName _arg210 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg210 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     List<PeriodicSync> _result3 = getPeriodicSyncs(_arg014, _arg112, _arg210);
                     reply.writeNoException();
@@ -705,7 +760,8 @@ public interface IContentService extends IInterface {
                 case 31:
                     Account _arg028 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg122 = data.readString();
-                    ComponentName _arg217 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg217 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result14 = isSyncActive(_arg028, _arg122, _arg217);
                     reply.writeNoException();
@@ -714,7 +770,8 @@ public interface IContentService extends IInterface {
                 case 32:
                     Account _arg029 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg123 = data.readString();
-                    ComponentName _arg218 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg218 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     SyncStatusInfo _result15 = getSyncStatus(_arg029, _arg123, _arg218);
                     reply.writeNoException();
@@ -723,17 +780,20 @@ public interface IContentService extends IInterface {
                 case 33:
                     Account _arg030 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg124 = data.readString();
-                    ComponentName _arg219 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg219 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg38 = data.readInt();
                     data.enforceNoDataAvail();
-                    SyncStatusInfo _result16 = getSyncStatusAsUser(_arg030, _arg124, _arg219, _arg38);
+                    SyncStatusInfo _result16 =
+                            getSyncStatusAsUser(_arg030, _arg124, _arg219, _arg38);
                     reply.writeNoException();
                     reply.writeTypedObject(_result16, 1);
                     return true;
                 case 34:
                     Account _arg031 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg125 = data.readString();
-                    ComponentName _arg220 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg220 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result17 = isSyncPending(_arg031, _arg125, _arg220);
                     reply.writeNoException();
@@ -742,7 +802,8 @@ public interface IContentService extends IInterface {
                 case 35:
                     Account _arg032 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg126 = data.readString();
-                    ComponentName _arg221 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg221 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg39 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result18 = isSyncPendingAsUser(_arg032, _arg126, _arg221, _arg39);
@@ -751,13 +812,15 @@ public interface IContentService extends IInterface {
                     return true;
                 case 36:
                     int _arg033 = data.readInt();
-                    ISyncStatusObserver _arg127 = ISyncStatusObserver.Stub.asInterface(data.readStrongBinder());
+                    ISyncStatusObserver _arg127 =
+                            ISyncStatusObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addStatusChangeListener(_arg033, _arg127);
                     reply.writeNoException();
                     return true;
                 case 37:
-                    ISyncStatusObserver _arg034 = ISyncStatusObserver.Stub.asInterface(data.readStrongBinder());
+                    ISyncStatusObserver _arg034 =
+                            ISyncStatusObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeStatusChangeListener(_arg034);
                     reply.writeNoException();
@@ -814,7 +877,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void unregisterContentObserver(IContentObserver observer) throws RemoteException {
+            public void unregisterContentObserver(IContentObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -829,7 +893,13 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void registerContentObserver(Uri uri, boolean notifyForDescendants, IContentObserver observer, int userHandle, int targetSdkVersion) throws RemoteException {
+            public void registerContentObserver(
+                    Uri uri,
+                    boolean notifyForDescendants,
+                    IContentObserver observer,
+                    int userHandle,
+                    int targetSdkVersion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -848,7 +918,15 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void notifyChange(Uri[] uris, IContentObserver observer, boolean observerWantsSelfNotifications, int flags, int userHandle, int targetSdkVersion, String callingPackage) throws RemoteException {
+            public void notifyChange(
+                    Uri[] uris,
+                    IContentObserver observer,
+                    boolean observerWantsSelfNotifications,
+                    int flags,
+                    int userHandle,
+                    int targetSdkVersion,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -869,7 +947,9 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void requestSync(Account account, String authority, Bundle extras, String callingPackage) throws RemoteException {
+            public void requestSync(
+                    Account account, String authority, Bundle extras, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -903,7 +983,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void syncAsUser(SyncRequest request, int userId, String callingPackage) throws RemoteException {
+            public void syncAsUser(SyncRequest request, int userId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -920,7 +1001,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void cancelSync(Account account, String authority, ComponentName cname) throws RemoteException {
+            public void cancelSync(Account account, String authority, ComponentName cname)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -937,7 +1019,9 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void cancelSyncAsUser(Account account, String authority, ComponentName cname, int userId) throws RemoteException {
+            public void cancelSyncAsUser(
+                    Account account, String authority, ComponentName cname, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -970,7 +1054,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public boolean getSyncAutomatically(Account account, String providerName) throws RemoteException {
+            public boolean getSyncAutomatically(Account account, String providerName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -988,7 +1073,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public boolean getSyncAutomaticallyAsUser(Account account, String providerName, int userId) throws RemoteException {
+            public boolean getSyncAutomaticallyAsUser(
+                    Account account, String providerName, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1007,7 +1093,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void setSyncAutomatically(Account account, String providerName, boolean sync) throws RemoteException {
+            public void setSyncAutomatically(Account account, String providerName, boolean sync)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1024,7 +1111,9 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void setSyncAutomaticallyAsUser(Account account, String providerName, boolean sync, int userId) throws RemoteException {
+            public void setSyncAutomaticallyAsUser(
+                    Account account, String providerName, boolean sync, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1042,7 +1131,9 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public List<PeriodicSync> getPeriodicSyncs(Account account, String providerName, ComponentName cname) throws RemoteException {
+            public List<PeriodicSync> getPeriodicSyncs(
+                    Account account, String providerName, ComponentName cname)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1061,7 +1152,9 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void addPeriodicSync(Account account, String providerName, Bundle extras, long pollFrequency) throws RemoteException {
+            public void addPeriodicSync(
+                    Account account, String providerName, Bundle extras, long pollFrequency)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1079,7 +1172,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void removePeriodicSync(Account account, String providerName, Bundle extras) throws RemoteException {
+            public void removePeriodicSync(Account account, String providerName, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1114,7 +1208,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public int getIsSyncableAsUser(Account account, String providerName, int userId) throws RemoteException {
+            public int getIsSyncableAsUser(Account account, String providerName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1133,7 +1228,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void setIsSyncable(Account account, String providerName, int syncable) throws RemoteException {
+            public void setIsSyncable(Account account, String providerName, int syncable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1150,7 +1246,9 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void setIsSyncableAsUser(Account account, String providerName, int syncable, int userId) throws RemoteException {
+            public void setIsSyncableAsUser(
+                    Account account, String providerName, int syncable, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1183,7 +1281,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void setMasterSyncAutomaticallyAsUser(boolean flag, int userId) throws RemoteException {
+            public void setMasterSyncAutomaticallyAsUser(boolean flag, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1272,7 +1371,8 @@ public interface IContentService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(27, _data, _reply, 0);
                     _reply.readException();
-                    SyncAdapterType[] _result = (SyncAdapterType[]) _reply.createTypedArray(SyncAdapterType.CREATOR);
+                    SyncAdapterType[] _result =
+                            (SyncAdapterType[]) _reply.createTypedArray(SyncAdapterType.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1289,7 +1389,8 @@ public interface IContentService extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(28, _data, _reply, 0);
                     _reply.readException();
-                    SyncAdapterType[] _result = (SyncAdapterType[]) _reply.createTypedArray(SyncAdapterType.CREATOR);
+                    SyncAdapterType[] _result =
+                            (SyncAdapterType[]) _reply.createTypedArray(SyncAdapterType.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1298,7 +1399,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public String[] getSyncAdapterPackagesForAuthorityAsUser(String authority, int userId) throws RemoteException {
+            public String[] getSyncAdapterPackagesForAuthorityAsUser(String authority, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1316,7 +1418,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public String getSyncAdapterPackageAsUser(String accountType, String authority, int userId) throws RemoteException {
+            public String getSyncAdapterPackageAsUser(
+                    String accountType, String authority, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1335,7 +1438,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public boolean isSyncActive(Account account, String authority, ComponentName cname) throws RemoteException {
+            public boolean isSyncActive(Account account, String authority, ComponentName cname)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1354,7 +1458,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public SyncStatusInfo getSyncStatus(Account account, String authority, ComponentName cname) throws RemoteException {
+            public SyncStatusInfo getSyncStatus(
+                    Account account, String authority, ComponentName cname) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1364,7 +1469,8 @@ public interface IContentService extends IInterface {
                     _data.writeTypedObject(cname, 0);
                     this.mRemote.transact(32, _data, _reply, 0);
                     _reply.readException();
-                    SyncStatusInfo _result = (SyncStatusInfo) _reply.readTypedObject(SyncStatusInfo.CREATOR);
+                    SyncStatusInfo _result =
+                            (SyncStatusInfo) _reply.readTypedObject(SyncStatusInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1373,7 +1479,9 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public SyncStatusInfo getSyncStatusAsUser(Account account, String authority, ComponentName cname, int userId) throws RemoteException {
+            public SyncStatusInfo getSyncStatusAsUser(
+                    Account account, String authority, ComponentName cname, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1384,7 +1492,8 @@ public interface IContentService extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(33, _data, _reply, 0);
                     _reply.readException();
-                    SyncStatusInfo _result = (SyncStatusInfo) _reply.readTypedObject(SyncStatusInfo.CREATOR);
+                    SyncStatusInfo _result =
+                            (SyncStatusInfo) _reply.readTypedObject(SyncStatusInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1393,7 +1502,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public boolean isSyncPending(Account account, String authority, ComponentName cname) throws RemoteException {
+            public boolean isSyncPending(Account account, String authority, ComponentName cname)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1412,7 +1522,9 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public boolean isSyncPendingAsUser(Account account, String authority, ComponentName cname, int userId) throws RemoteException {
+            public boolean isSyncPendingAsUser(
+                    Account account, String authority, ComponentName cname, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1432,7 +1544,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void addStatusChangeListener(int mask, ISyncStatusObserver callback) throws RemoteException {
+            public void addStatusChangeListener(int mask, ISyncStatusObserver callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1448,7 +1561,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void removeStatusChangeListener(ISyncStatusObserver callback) throws RemoteException {
+            public void removeStatusChangeListener(ISyncStatusObserver callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1463,7 +1577,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void putCache(String packageName, Uri key, Bundle value, int userId) throws RemoteException {
+            public void putCache(String packageName, Uri key, Bundle value, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1514,7 +1629,8 @@ public interface IContentService extends IInterface {
             }
 
             @Override // android.content.IContentService
-            public void onDbCorruption(String tag, String message, String stacktrace) throws RemoteException {
+            public void onDbCorruption(String tag, String message, String stacktrace)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1532,11 +1648,13 @@ public interface IContentService extends IInterface {
         }
 
         protected void isSyncActive_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.READ_SYNC_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.READ_SYNC_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void isSyncPendingAsUser_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.READ_SYNC_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.READ_SYNC_STATS, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

@@ -3,6 +3,7 @@ package com.android.server.accessibility.gestures;
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.util.Slog;
 import android.view.MotionEvent;
+
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.server.accessibility.AccessibilityManagerService;
 import com.android.server.accessibility.AccessibilityServiceConnection;
@@ -126,7 +127,20 @@ public final class TouchState {
     }
 
     public static String getStateSymbolicName(int i) {
-        return i != 0 ? i != 1 ? i != 2 ? i != 3 ? i != 4 ? i != 5 ? VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown state: ") : "STATE_GESTURE_DETECTING" : "STATE_DELEGATING" : "STATE_DRAGGING" : "STATE_TOUCH_EXPLORING" : "STATE_TOUCH_INTERACTING" : "STATE_CLEAR";
+        return i != 0
+                ? i != 1
+                        ? i != 2
+                                ? i != 3
+                                        ? i != 4
+                                                ? i != 5
+                                                        ? VibrationParam$1$$ExternalSyntheticOutline0
+                                                                .m(i, "Unknown state: ")
+                                                        : "STATE_GESTURE_DETECTING"
+                                                : "STATE_DELEGATING"
+                                        : "STATE_DRAGGING"
+                                : "STATE_TOUCH_EXPLORING"
+                        : "STATE_TOUCH_INTERACTING"
+                : "STATE_CLEAR";
     }
 
     public final void clear() {
@@ -159,7 +173,9 @@ public final class TouchState {
             return;
         }
         if (TouchExplorer.DEBUG) {
-            Slog.i("TouchState", getStateSymbolicName(this.mState) + "->" + getStateSymbolicName(i));
+            Slog.i(
+                    "TouchState",
+                    getStateSymbolicName(this.mState) + "->" + getStateSymbolicName(i));
         }
         this.mState = i;
         if (this.mServiceDetectsGestures) {
@@ -167,11 +183,20 @@ public final class TouchState {
             int i2 = this.mDisplayId;
             synchronized (accessibilityManagerService.mLock) {
                 try {
-                    AccessibilityUserState userStateLocked = accessibilityManagerService.getUserStateLocked(accessibilityManagerService.mCurrentUserId);
+                    AccessibilityUserState userStateLocked =
+                            accessibilityManagerService.getUserStateLocked(
+                                    accessibilityManagerService.mCurrentUserId);
                     for (int size = userStateLocked.mBoundServices.size() - 1; size >= 0; size--) {
-                        AccessibilityServiceConnection accessibilityServiceConnection = (AccessibilityServiceConnection) userStateLocked.mBoundServices.get(size);
+                        AccessibilityServiceConnection accessibilityServiceConnection =
+                                (AccessibilityServiceConnection)
+                                        userStateLocked.mBoundServices.get(size);
                         if (accessibilityServiceConnection.isServiceDetectsGesturesEnabled(i2)) {
-                            accessibilityServiceConnection.mMainHandler.sendMessage(PooledLambda.obtainMessage(new AccessibilityServiceConnection$$ExternalSyntheticLambda4(), accessibilityServiceConnection, Integer.valueOf(i2), Integer.valueOf(i)));
+                            accessibilityServiceConnection.mMainHandler.sendMessage(
+                                    PooledLambda.obtainMessage(
+                                            new AccessibilityServiceConnection$$ExternalSyntheticLambda4(),
+                                            accessibilityServiceConnection,
+                                            Integer.valueOf(i2),
+                                            Integer.valueOf(i)));
                         }
                     }
                 } finally {

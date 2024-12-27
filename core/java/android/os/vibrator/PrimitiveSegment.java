@@ -4,25 +4,29 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.VibrationEffect;
 import android.os.VibratorInfo;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class PrimitiveSegment extends VibrationEffectSegment {
-    public static final Parcelable.Creator<PrimitiveSegment> CREATOR = new Parcelable.Creator<PrimitiveSegment>() { // from class: android.os.vibrator.PrimitiveSegment.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrimitiveSegment createFromParcel(Parcel in) {
-            in.readInt();
-            return new PrimitiveSegment(in);
-        }
+    public static final Parcelable.Creator<PrimitiveSegment> CREATOR =
+            new Parcelable.Creator<
+                    PrimitiveSegment>() { // from class: android.os.vibrator.PrimitiveSegment.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrimitiveSegment createFromParcel(Parcel in) {
+                    in.readInt();
+                    return new PrimitiveSegment(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrimitiveSegment[] newArray(int size) {
-            return new PrimitiveSegment[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrimitiveSegment[] newArray(int size) {
+                    return new PrimitiveSegment[size];
+                }
+            };
     public static final int DEFAULT_DELAY_MILLIS = 0;
     public static final float DEFAULT_SCALE = 1.0f;
     private final int mDelay;
@@ -115,12 +119,22 @@ public final class PrimitiveSegment extends VibrationEffectSegment {
     }
 
     public String toString() {
-        return "Primitive{primitive=" + VibrationEffect.Composition.primitiveToString(this.mPrimitiveId) + ", scale=" + this.mScale + ", delay=" + this.mDelay + '}';
+        return "Primitive{primitive="
+                + VibrationEffect.Composition.primitiveToString(this.mPrimitiveId)
+                + ", scale="
+                + this.mScale
+                + ", delay="
+                + this.mDelay
+                + '}';
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public String toDebugString() {
-        return String.format("Primitive=%s(scale=%.2f, delay=%dms)", VibrationEffect.Composition.primitiveToString(this.mPrimitiveId), Float.valueOf(this.mScale), Integer.valueOf(this.mDelay));
+        return String.format(
+                "Primitive=%s(scale=%.2f, delay=%dms)",
+                VibrationEffect.Composition.primitiveToString(this.mPrimitiveId),
+                Float.valueOf(this.mScale),
+                Integer.valueOf(this.mDelay));
     }
 
     public boolean equals(Object o) {
@@ -131,13 +145,18 @@ public final class PrimitiveSegment extends VibrationEffectSegment {
             return false;
         }
         PrimitiveSegment that = (PrimitiveSegment) o;
-        if (this.mPrimitiveId == that.mPrimitiveId && Float.compare(that.mScale, this.mScale) == 0 && this.mDelay == that.mDelay) {
+        if (this.mPrimitiveId == that.mPrimitiveId
+                && Float.compare(that.mScale, this.mScale) == 0
+                && this.mDelay == that.mDelay) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mPrimitiveId), Float.valueOf(this.mScale), Integer.valueOf(this.mDelay));
+        return Objects.hash(
+                Integer.valueOf(this.mPrimitiveId),
+                Float.valueOf(this.mScale),
+                Integer.valueOf(this.mDelay));
     }
 }

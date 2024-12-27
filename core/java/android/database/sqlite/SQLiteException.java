@@ -6,8 +6,7 @@ import android.util.Log;
 
 /* loaded from: classes.dex */
 public class SQLiteException extends SQLException {
-    public SQLiteException() {
-    }
+    public SQLiteException() {}
 
     public SQLiteException(String error) {
         super(error);
@@ -21,7 +20,9 @@ public class SQLiteException extends SQLException {
         for (int i = 0; i < 2; i++) {
             if (SQLiteGlobal.isDeviceOnShutdown()) {
                 try {
-                    Log.d("waitIfOnShutdown", "shutdown process is ongoing...freezing for a second.");
+                    Log.d(
+                            "waitIfOnShutdown",
+                            "shutdown process is ongoing...freezing for a second.");
                     Thread.sleep(1000L);
                 } catch (InterruptedException e) {
                 }

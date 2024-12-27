@@ -4,6 +4,7 @@ import android.content.Context;
 import android.hardware.biometrics.face.ISession;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.HardwareAuthTokenUtils;
 import com.android.server.biometrics.log.BiometricContext;
@@ -14,6 +15,7 @@ import com.android.server.biometrics.sensors.HalClientMonitor;
 import com.android.server.biometrics.sensors.LockoutResetDispatcher;
 import com.android.server.biometrics.sensors.LockoutTracker;
 import com.android.server.biometrics.sensors.face.hidl.HidlToAidlSessionAdapter;
+
 import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -23,8 +25,30 @@ public final class FaceResetLockoutClient extends HalClientMonitor implements Er
     public final LockoutResetDispatcher mLockoutResetDispatcher;
     public final LockoutTracker mLockoutTracker;
 
-    public FaceResetLockoutClient(Context context, Supplier supplier, int i, String str, int i2, BiometricLogger biometricLogger, BiometricContext biometricContext, byte[] bArr, LockoutTracker lockoutTracker, LockoutResetDispatcher lockoutResetDispatcher, int i3) {
-        super(context, supplier, null, null, i, str, 0, i2, biometricLogger, biometricContext, false);
+    public FaceResetLockoutClient(
+            Context context,
+            Supplier supplier,
+            int i,
+            String str,
+            int i2,
+            BiometricLogger biometricLogger,
+            BiometricContext biometricContext,
+            byte[] bArr,
+            LockoutTracker lockoutTracker,
+            LockoutResetDispatcher lockoutResetDispatcher,
+            int i3) {
+        super(
+                context,
+                supplier,
+                null,
+                null,
+                i,
+                str,
+                0,
+                i2,
+                biometricLogger,
+                biometricContext,
+                false);
         if (bArr != null) {
             HardwareAuthTokenUtils.toHardwareAuthToken(bArr);
         }
@@ -45,7 +69,8 @@ public final class FaceResetLockoutClient extends HalClientMonitor implements Er
 
     @Override // com.android.server.biometrics.sensors.ErrorConsumer
     public final void onError(int i, int i2) {
-        NandswapManager$$ExternalSyntheticOutline0.m(i, "Error during resetLockout: ", "FaceResetLockoutClient");
+        NandswapManager$$ExternalSyntheticOutline0.m(
+                i, "Error during resetLockout: ", "FaceResetLockoutClient");
         this.mCallback.onClientFinished(this, false);
     }
 
@@ -59,7 +84,8 @@ public final class FaceResetLockoutClient extends HalClientMonitor implements Er
     public final void startHalOperation() {
         try {
             ISession iSession = ((AidlSession) this.mLazyDaemon.get()).mSession;
-            AidlResponseHandler aidlResponseHandler = ((AidlSession) this.mLazyDaemon.get()).mAidlResponseHandler;
+            AidlResponseHandler aidlResponseHandler =
+                    ((AidlSession) this.mLazyDaemon.get()).mAidlResponseHandler;
             if (aidlResponseHandler != null) {
                 aidlResponseHandler.onLockoutCleared();
             }
@@ -73,6 +99,5 @@ public final class FaceResetLockoutClient extends HalClientMonitor implements Er
     }
 
     @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public final void unableToStart() {
-    }
+    public final void unableToStart() {}
 }

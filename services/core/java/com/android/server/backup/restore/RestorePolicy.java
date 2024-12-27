@@ -17,7 +17,7 @@ public final class RestorePolicy {
         ACCEPT = restorePolicy2;
         RestorePolicy restorePolicy3 = new RestorePolicy("ACCEPT_IF_APK", 2);
         ACCEPT_IF_APK = restorePolicy3;
-        $VALUES = new RestorePolicy[]{restorePolicy, restorePolicy2, restorePolicy3};
+        $VALUES = new RestorePolicy[] {restorePolicy, restorePolicy2, restorePolicy3};
     }
 
     public static RestorePolicy valueOf(String str) {

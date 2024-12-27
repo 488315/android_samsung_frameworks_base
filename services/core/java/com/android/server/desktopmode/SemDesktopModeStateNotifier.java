@@ -8,10 +8,13 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.ArrayMap;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.IDesktopModeListener;
 import com.samsung.android.desktopmode.SemDesktopModeState;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -45,7 +48,8 @@ public final class SemDesktopModeStateNotifier {
                 Log.v("[DMS]SemDesktopModeStateNotifier", "binderDied(): " + this);
             }
             synchronized (SemDesktopModeStateNotifier.this.mInnerLock) {
-                ((ArrayMap) SemDesktopModeStateNotifier.this.mListeners).remove(this.listener.asBinder());
+                ((ArrayMap) SemDesktopModeStateNotifier.this.mListeners)
+                        .remove(this.listener.asBinder());
             }
             this.listener.asBinder().unlinkToDeath(this, 0);
         }
@@ -73,8 +77,12 @@ public final class SemDesktopModeStateNotifier {
         }
         int i = 0;
         for (ListenerInfo listenerInfo2 : ((ArrayMap) map).values()) {
-            if (listenerInfo2.pid == listenerInfo.pid && listenerInfo2.uid == listenerInfo.uid && (i = i + 1) == 20) {
-                throw new SecurityException(XmlUtils$$ExternalSyntheticOutline0.m("Only 20 listener", "s", " per pid/uid is allowed"));
+            if (listenerInfo2.pid == listenerInfo.pid
+                    && listenerInfo2.uid == listenerInfo.uid
+                    && (i = i + 1) == 20) {
+                throw new SecurityException(
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "Only 20 listener", "s", " per pid/uid is allowed"));
             }
         }
     }
@@ -89,16 +97,36 @@ public final class SemDesktopModeStateNotifier {
             try {
                 ((ListenerInfo) it.next()).listener.onDesktopModeStateChanged(semDesktopModeState);
             } catch (RemoteException e) {
-                Log.e("[DMS]SemDesktopModeStateNotifier", "Failed to notify DesktopModeListener", e);
+                Log.e(
+                        "[DMS]SemDesktopModeStateNotifier",
+                        "Failed to notify DesktopModeListener",
+                        e);
             }
         }
         if (semDesktopModeState.state == 40) {
             boolean z = semDesktopModeState.enabled == 4;
             Context context = this.mContext;
-            Intent addFlags = new Intent(z ? UiModeManager.SEM_ACTION_ENTER_DESKTOP_MODE : UiModeManager.SEM_ACTION_EXIT_DESKTOP_MODE).putExtra("android.app.extra.DISPLAY_TYPE", semDesktopModeState.getDisplayType()).addFlags(16777216);
+            Intent addFlags =
+                    new Intent(
+                                    z
+                                            ? UiModeManager.SEM_ACTION_ENTER_DESKTOP_MODE
+                                            : UiModeManager.SEM_ACTION_EXIT_DESKTOP_MODE)
+                            .putExtra(
+                                    "android.app.extra.DISPLAY_TYPE",
+                                    semDesktopModeState.getDisplayType())
+                            .addFlags(16777216);
             UserHandle userHandle = UserHandle.ALL;
             context.sendBroadcastAsUser(addFlags, userHandle);
-            this.mContext.sendBroadcastAsUser(new Intent(z ? "android.app.action.ENTER_KNOX_DESKTOP_MODE" : "android.app.action.EXIT_KNOX_DESKTOP_MODE").putExtra("android.app.extra.DISPLAY_TYPE", semDesktopModeState.getDisplayType()).addFlags(16777216), userHandle);
+            this.mContext.sendBroadcastAsUser(
+                    new Intent(
+                                    z
+                                            ? "android.app.action.ENTER_KNOX_DESKTOP_MODE"
+                                            : "android.app.action.EXIT_KNOX_DESKTOP_MODE")
+                            .putExtra(
+                                    "android.app.extra.DISPLAY_TYPE",
+                                    semDesktopModeState.getDisplayType())
+                            .addFlags(16777216),
+                    userHandle);
         }
     }
 }

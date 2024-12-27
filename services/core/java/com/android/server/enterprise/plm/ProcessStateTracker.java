@@ -9,18 +9,20 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.EnterpriseService;
 import com.android.server.enterprise.license.EnterpriseLicenseService;
-import com.android.server.enterprise.plm.SystemStateTracker;
 import com.android.server.enterprise.plm.SystemStateTracker.LicenseStateListener;
 import com.android.server.enterprise.plm.SystemStateTracker.LockStateListener;
 import com.android.server.enterprise.plm.common.HandlerObserver;
 import com.android.server.enterprise.plm.common.PlmMessage;
 import com.android.server.enterprise.plm.impl.BindServiceImpl;
+
 import com.samsung.android.knox.analytics.activation.ActivationMonitor;
 import com.samsung.android.knox.analytics.activation.DevicePolicyListener;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -44,13 +46,17 @@ public final class ProcessStateTracker extends Handler implements IStateDelegate
         while (it.hasNext()) {
             ProcessAdapter processAdapter = (ProcessAdapter) it.next();
             processAdapter.mStateDelegate = this;
-            ((HashMap) this.mAdapters).put(processAdapter.mKeepAliveImpl.mProcessContext.getPackageName(), processAdapter);
+            ((HashMap) this.mAdapters)
+                    .put(
+                            processAdapter.mKeepAliveImpl.mProcessContext.getPackageName(),
+                            processAdapter);
         }
     }
 
     @Override // android.os.Handler
     public final void handleMessage(Message message) {
-        GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("handleMessage : "), message.what, "ProcessStateTracker");
+        GestureWakeup$$ExternalSyntheticOutline0.m(
+                new StringBuilder("handleMessage : "), message.what, "ProcessStateTracker");
         try {
             switch (message.what) {
                 case 1:
@@ -134,7 +140,12 @@ public final class ProcessStateTracker extends Handler implements IStateDelegate
         SystemStateTracker systemStateTracker = this.mSystemStateTracker;
         systemStateTracker.getClass();
         try {
-            r2 = Settings.Secure.getInt(systemStateTracker.mContext.getContentResolver(), ActivationMonitor.SETTINGS_KEY_KLM_STATUS, 0) > 0;
+            r2 =
+                    Settings.Secure.getInt(
+                                    systemStateTracker.mContext.getContentResolver(),
+                                    ActivationMonitor.SETTINGS_KEY_KLM_STATUS,
+                                    0)
+                            > 0;
             Log.d("SystemStateTracker", "isKlmActive : " + r2);
         } catch (Throwable th) {
             Log.e("SystemStateTracker", th.toString());
@@ -143,15 +154,23 @@ public final class ProcessStateTracker extends Handler implements IStateDelegate
     }
 
     public final void notifyUpdateToAdapters(String str) {
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(new StringBuilder("notify update for "), TextUtils.isEmpty(str) ? "all" : str, "ProcessStateTracker");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                new StringBuilder("notify update for "),
+                TextUtils.isEmpty(str) ? "all" : str,
+                "ProcessStateTracker");
         Iterator it = ((HashMap) this.mAdapters).entrySet().iterator();
         while (it.hasNext()) {
             ProcessAdapter processAdapter = (ProcessAdapter) ((Map.Entry) it.next()).getValue();
             if (processAdapter != null) {
                 boolean isEmpty = TextUtils.isEmpty(str);
                 BindServiceImpl bindServiceImpl = processAdapter.mKeepAliveImpl;
-                if (isEmpty || TextUtils.equals(bindServiceImpl.mProcessContext.getPackageName(), str)) {
-                    Log.d("ProcessStateTracker", "notify update to ".concat(bindServiceImpl.mProcessContext.getPackageName()));
+                if (isEmpty
+                        || TextUtils.equals(
+                                bindServiceImpl.mProcessContext.getPackageName(), str)) {
+                    Log.d(
+                            "ProcessStateTracker",
+                            "notify update to "
+                                    .concat(bindServiceImpl.mProcessContext.getPackageName()));
                     if (!processAdapter.hasMessages(5)) {
                         processAdapter.sendEmptyMessage(5);
                     }
@@ -216,14 +235,18 @@ public final class ProcessStateTracker extends Handler implements IStateDelegate
         SystemStateTracker systemStateTracker = this.mSystemStateTracker;
         if (!z) {
             systemStateTracker.stopLicenseStateListener();
-            EnterpriseLicenseService enterpriseLicenseService = (EnterpriseLicenseService) EnterpriseService.getPolicyService("enterprise_license_policy");
+            EnterpriseLicenseService enterpriseLicenseService =
+                    (EnterpriseLicenseService)
+                            EnterpriseService.getPolicyService("enterprise_license_policy");
             if (enterpriseLicenseService != null) {
-                SystemStateTracker.LicenseStateListener licenseStateListener = systemStateTracker.new LicenseStateListener();
+                SystemStateTracker.LicenseStateListener licenseStateListener =
+                        systemStateTracker.new LicenseStateListener();
                 systemStateTracker.mLicenseStateListener = licenseStateListener;
                 enterpriseLicenseService.enforcePermission$1();
                 ((ArrayList) enterpriseLicenseService.mKlmElmChangeList).add(licenseStateListener);
             }
-            SystemStateTracker.BootStateListener bootStateListener = systemStateTracker.mPackageStateListener;
+            SystemStateTracker.BootStateListener bootStateListener =
+                    systemStateTracker.mPackageStateListener;
             if (bootStateListener != null) {
                 systemStateTracker.mContext.unregisterReceiver(bootStateListener);
                 systemStateTracker.mPackageStateListener = null;
@@ -237,11 +260,14 @@ public final class ProcessStateTracker extends Handler implements IStateDelegate
                 intentFilter.addDataSchemeSpecificPart((String) it.next(), 0);
             }
             if (intentFilter.countActions() != 0) {
-                SystemStateTracker.BootStateListener bootStateListener2 = new SystemStateTracker.BootStateListener(systemStateTracker, 1);
+                SystemStateTracker.BootStateListener bootStateListener2 =
+                        new SystemStateTracker.BootStateListener(systemStateTracker, 1);
                 systemStateTracker.mPackageStateListener = bootStateListener2;
-                systemStateTracker.mContext.semRegisterReceiverAsUser(bootStateListener2, UserHandle.SEM_ALL, intentFilter, null, null);
+                systemStateTracker.mContext.semRegisterReceiverAsUser(
+                        bootStateListener2, UserHandle.SEM_ALL, intentFilter, null, null);
             }
-            SystemStateTracker.BootStateListener bootStateListener3 = systemStateTracker.mUserStateListener;
+            SystemStateTracker.BootStateListener bootStateListener3 =
+                    systemStateTracker.mUserStateListener;
             if (bootStateListener3 != null) {
                 systemStateTracker.mContext.unregisterReceiver(bootStateListener3);
                 systemStateTracker.mUserStateListener = null;
@@ -253,11 +279,13 @@ public final class ProcessStateTracker extends Handler implements IStateDelegate
             intentFilter2.addAction(DevicePolicyListener.ACTION_PROFILE_OWNER_REMOVED);
             intentFilter2.addAction("android.intent.action.USER_UNLOCKED");
             if (intentFilter2.countActions() != 0) {
-                SystemStateTracker.BootStateListener bootStateListener4 = new SystemStateTracker.BootStateListener(systemStateTracker, 2);
+                SystemStateTracker.BootStateListener bootStateListener4 =
+                        new SystemStateTracker.BootStateListener(systemStateTracker, 2);
                 systemStateTracker.mUserStateListener = bootStateListener4;
                 systemStateTracker.mContext.registerReceiver(bootStateListener4, intentFilter2, 2);
             }
-            SystemStateTracker.BootStateListener bootStateListener5 = systemStateTracker.mBootStateListener;
+            SystemStateTracker.BootStateListener bootStateListener5 =
+                    systemStateTracker.mBootStateListener;
             if (bootStateListener5 != null) {
                 systemStateTracker.mContext.unregisterReceiver(bootStateListener5);
                 systemStateTracker.mBootStateListener = null;
@@ -265,23 +293,29 @@ public final class ProcessStateTracker extends Handler implements IStateDelegate
             ((ArrayList) systemStateTracker.mBootStateObservers).clear();
             IntentFilter intentFilter3 = new IntentFilter();
             if (intentFilter3.countActions() != 0) {
-                SystemStateTracker.BootStateListener bootStateListener6 = new SystemStateTracker.BootStateListener(systemStateTracker, 0);
+                SystemStateTracker.BootStateListener bootStateListener6 =
+                        new SystemStateTracker.BootStateListener(systemStateTracker, 0);
                 systemStateTracker.mBootStateListener = bootStateListener6;
                 systemStateTracker.mContext.registerReceiver(bootStateListener6, intentFilter3);
             }
             systemStateTracker.stopLockStateListener();
-            SystemStateTracker.LockStateListener lockStateListener = systemStateTracker.new LockStateListener();
+            SystemStateTracker.LockStateListener lockStateListener =
+                    systemStateTracker.new LockStateListener();
             systemStateTracker.mLockStateListener = lockStateListener;
-            ((ArrayList) systemStateTracker.mLockDetectionTracker.mLockDetectionEventCallbacks).add(lockStateListener);
-            ((ArrayList) systemStateTracker.mLicenseStateObservers).add(new HandlerObserver(3, this));
-            ((ArrayList) systemStateTracker.mPackageStateObservers).add(new HandlerObserver(4, this));
+            ((ArrayList) systemStateTracker.mLockDetectionTracker.mLockDetectionEventCallbacks)
+                    .add(lockStateListener);
+            ((ArrayList) systemStateTracker.mLicenseStateObservers)
+                    .add(new HandlerObserver(3, this));
+            ((ArrayList) systemStateTracker.mPackageStateObservers)
+                    .add(new HandlerObserver(4, this));
             ((ArrayList) systemStateTracker.mUserStateObservers).add(new HandlerObserver(5, this));
             ((ArrayList) systemStateTracker.mBootStateObservers).add(new HandlerObserver(6, this));
             ((ArrayList) systemStateTracker.mEdmStateObservers).add(new HandlerObserver(7, this));
             ((ArrayList) systemStateTracker.mLockStateObservers).add(new HandlerObserver(8, this));
             Iterator it2 = ((HashMap) this.mAdapters).entrySet().iterator();
             while (it2.hasNext()) {
-                ProcessAdapter processAdapter = (ProcessAdapter) ((Map.Entry) it2.next()).getValue();
+                ProcessAdapter processAdapter =
+                        (ProcessAdapter) ((Map.Entry) it2.next()).getValue();
                 if (processAdapter != null) {
                     processAdapter.sendEmptyMessage(1);
                 }
@@ -362,19 +396,22 @@ public final class ProcessStateTracker extends Handler implements IStateDelegate
                 }
             }
             systemStateTracker.stopLockStateListener();
-            SystemStateTracker.BootStateListener bootStateListener = systemStateTracker.mBootStateListener;
+            SystemStateTracker.BootStateListener bootStateListener =
+                    systemStateTracker.mBootStateListener;
             if (bootStateListener != null) {
                 systemStateTracker.mContext.unregisterReceiver(bootStateListener);
                 systemStateTracker.mBootStateListener = null;
             }
             ((ArrayList) systemStateTracker.mBootStateObservers).clear();
-            SystemStateTracker.BootStateListener bootStateListener2 = systemStateTracker.mUserStateListener;
+            SystemStateTracker.BootStateListener bootStateListener2 =
+                    systemStateTracker.mUserStateListener;
             if (bootStateListener2 != null) {
                 systemStateTracker.mContext.unregisterReceiver(bootStateListener2);
                 systemStateTracker.mUserStateListener = null;
             }
             ((ArrayList) systemStateTracker.mUserStateObservers).clear();
-            SystemStateTracker.BootStateListener bootStateListener3 = systemStateTracker.mPackageStateListener;
+            SystemStateTracker.BootStateListener bootStateListener3 =
+                    systemStateTracker.mPackageStateListener;
             if (bootStateListener3 != null) {
                 systemStateTracker.mContext.unregisterReceiver(bootStateListener3);
                 systemStateTracker.mPackageStateListener = null;

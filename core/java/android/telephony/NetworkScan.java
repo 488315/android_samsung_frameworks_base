@@ -1,7 +1,9 @@
 package android.telephony;
 
 import android.os.RemoteException;
+
 import com.android.internal.telephony.ITelephony;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -20,8 +22,7 @@ public class NetworkScan {
     private final int mSubId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScanErrorCode {
-    }
+    public @interface ScanErrorCode {}
 
     public void stopScan() {
         ITelephony telephony = getITelephony();
@@ -33,7 +34,8 @@ public class NetworkScan {
         } catch (RemoteException ex) {
             com.android.telephony.Rlog.e(TAG, "stopNetworkScan  RemoteException", ex);
         } catch (IllegalArgumentException e) {
-            com.android.telephony.Rlog.d(TAG, "stopNetworkScan - no active scan for ScanID=" + this.mScanId);
+            com.android.telephony.Rlog.d(
+                    TAG, "stopNetworkScan - no active scan for ScanID=" + this.mScanId);
         } catch (RuntimeException ex2) {
             com.android.telephony.Rlog.e(TAG, "stopNetworkScan  RuntimeException", ex2);
         }
@@ -54,6 +56,9 @@ public class NetworkScan {
     }
 
     private ITelephony getITelephony() {
-        return ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+        return ITelephony.Stub.asInterface(
+                TelephonyFrameworkInitializer.getTelephonyServiceManager()
+                        .getTelephonyServiceRegisterer()
+                        .get());
     }
 }

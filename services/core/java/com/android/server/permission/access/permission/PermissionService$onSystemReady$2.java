@@ -7,7 +7,9 @@ import com.android.server.permission.access.MutateStateScope;
 import com.android.server.permission.access.SchemePolicy;
 import com.android.server.permission.access.immutable.IndexedMap;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
@@ -32,7 +34,8 @@ public final class PermissionService$onSystemReady$2 implements Consumer {
                 synchronized (accessCheckingService.stateLock) {
                     AccessState accessState = accessCheckingService.state;
                     if (accessState == null) {
-                        Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                        Intrinsics.throwUninitializedPropertyAccessException(
+                                LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                         throw null;
                     }
                     MutableAccessState mutable = accessState.toMutable();

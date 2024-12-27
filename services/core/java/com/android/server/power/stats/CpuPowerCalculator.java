@@ -2,6 +2,7 @@ package com.android.server.power.stats;
 
 import android.os.BatteryConsumer;
 import android.os.BatteryStats;
+
 import com.android.internal.os.CpuScalingPolicies;
 import com.android.internal.os.PowerProfile;
 import com.android.server.audio.AudioService$$ExternalSyntheticOutline0;
@@ -21,21 +22,29 @@ public final class CpuPowerCalculator extends PowerCalculator {
         this.mCpuScalingPolicies = cpuScalingPolicies;
         int[] policies = cpuScalingPolicies.getPolicies();
         this.mNumCpuClusters = policies.length;
-        this.mCpuActivePowerEstimator = new UsageBasedPowerEstimator(powerProfile.getAveragePower("cpu.active"));
+        this.mCpuActivePowerEstimator =
+                new UsageBasedPowerEstimator(powerProfile.getAveragePower("cpu.active"));
         this.mPerClusterPowerEstimators = new UsageBasedPowerEstimator[policies.length];
         for (int i = 0; i < policies.length; i++) {
-            this.mPerClusterPowerEstimators[i] = new UsageBasedPowerEstimator(powerProfile.getAveragePowerForCpuScalingPolicy(policies[i]));
+            this.mPerClusterPowerEstimators[i] =
+                    new UsageBasedPowerEstimator(
+                            powerProfile.getAveragePowerForCpuScalingPolicy(policies[i]));
         }
-        this.mPerCpuFreqPowerEstimators = new UsageBasedPowerEstimator[cpuScalingPolicies.getScalingStepCount()];
-        this.mPerCpuFreqPowerEstimatorsByCluster = new UsageBasedPowerEstimator[this.mNumCpuClusters][];
+        this.mPerCpuFreqPowerEstimators =
+                new UsageBasedPowerEstimator[cpuScalingPolicies.getScalingStepCount()];
+        this.mPerCpuFreqPowerEstimatorsByCluster =
+                new UsageBasedPowerEstimator[this.mNumCpuClusters][];
         int i2 = 0;
         for (int i3 = 0; i3 < policies.length; i3++) {
             int i4 = policies[i3];
             int[] frequencies = cpuScalingPolicies.getFrequencies(i4);
-            this.mPerCpuFreqPowerEstimatorsByCluster[i3] = new UsageBasedPowerEstimator[frequencies.length];
+            this.mPerCpuFreqPowerEstimatorsByCluster[i3] =
+                    new UsageBasedPowerEstimator[frequencies.length];
             int i5 = 0;
             while (i5 < frequencies.length) {
-                UsageBasedPowerEstimator usageBasedPowerEstimator = new UsageBasedPowerEstimator(powerProfile.getAveragePowerForCpuScalingStep(i4, i5));
+                UsageBasedPowerEstimator usageBasedPowerEstimator =
+                        new UsageBasedPowerEstimator(
+                                powerProfile.getAveragePowerForCpuScalingStep(i4, i5));
                 this.mPerCpuFreqPowerEstimatorsByCluster[i3][i5] = usageBasedPowerEstimator;
                 this.mPerCpuFreqPowerEstimators[i2] = usageBasedPowerEstimator;
                 i5++;
@@ -56,15 +65,25 @@ public final class CpuPowerCalculator extends PowerCalculator {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void calculate(android.os.BatteryUsageStats.Builder r40, android.os.BatteryStats r41, long r42, long r44, android.os.BatteryUsageStatsQuery r46) {
+    public final void calculate(
+            android.os.BatteryUsageStats.Builder r40,
+            android.os.BatteryStats r41,
+            long r42,
+            long r44,
+            android.os.BatteryUsageStatsQuery r46) {
         /*
             Method dump skipped, instructions count: 564
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.CpuPowerCalculator.calculate(android.os.BatteryUsageStats$Builder, android.os.BatteryStats, long, long, android.os.BatteryUsageStatsQuery):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.stats.CpuPowerCalculator.calculate(android.os.BatteryUsageStats$Builder,"
+                    + " android.os.BatteryStats, long, long,"
+                    + " android.os.BatteryUsageStatsQuery):void");
     }
 
-    public final double calculateUidModeledPowerMah(BatteryStats.Uid uid, long j, long[] jArr, long[] jArr2) {
+    public final double calculateUidModeledPowerMah(
+            BatteryStats.Uid uid, long j, long[] jArr, long[] jArr2) {
         double d = this.mCpuActivePowerEstimator.mAveragePowerMahPerMs * j;
         if (jArr != null) {
             int length = jArr.length;
@@ -84,7 +103,8 @@ public final class CpuPowerCalculator extends PowerCalculator {
         }
         if (jArr2 != null) {
             int length2 = jArr2.length;
-            UsageBasedPowerEstimator[] usageBasedPowerEstimatorArr = this.mPerCpuFreqPowerEstimators;
+            UsageBasedPowerEstimator[] usageBasedPowerEstimatorArr =
+                    this.mPerCpuFreqPowerEstimators;
             if (length2 == usageBasedPowerEstimatorArr.length) {
                 for (int i3 = 0; i3 < jArr2.length; i3++) {
                     d += usageBasedPowerEstimatorArr[i3].mAveragePowerMahPerMs * jArr2[i3];

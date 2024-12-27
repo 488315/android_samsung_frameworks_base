@@ -6,7 +6,6 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.IAccessibilityServiceClient;
 import android.accessibilityservice.IAccessibilityServiceConnection;
 import android.accessibilityservice.MagnificationConfig;
-import android.app.UiAutomation;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
@@ -46,10 +45,14 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityWindowInfo;
 import android.view.inputmethod.EditorInfo;
 import android.window.ScreenCapture;
+
 import com.android.internal.inputmethod.IAccessibilityInputMethodSessionCallback;
 import com.android.internal.inputmethod.RemoteAccessibilityInputConnection;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.function.pooled.PooledLambda;
+
+import libcore.io.IoUtils;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -58,7 +61,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
 import java.util.function.BiConsumer;
-import libcore.io.IoUtils;
 
 /* loaded from: classes.dex */
 public final class UiAutomation {
@@ -136,7 +138,12 @@ public final class UiAutomation {
         this.mLocalCallbackHandler = new Handler(looper);
         this.mUiAutomationConnection = connection;
         this.mDisplayId = displayId;
-        Log.i(LOG_TAG, "Initialized for user " + Process.myUserHandle().getIdentifier() + " on display " + this.mDisplayId);
+        Log.i(
+                LOG_TAG,
+                "Initialized for user "
+                        + Process.myUserHandle().getIdentifier()
+                        + " on display "
+                        + this.mDisplayId);
     }
 
     public void connect() {
@@ -203,7 +210,8 @@ public final class UiAutomation {
     public void disconnect() {
         synchronized (this.mLock) {
             if (this.mConnectionState == 1) {
-                throw new IllegalStateException("Cannot call disconnect() while connecting " + this);
+                throw new IllegalStateException(
+                        "Cannot call disconnect() while connecting " + this);
             }
             if (useAccessibility() && this.mConnectionState == 0) {
                 return;
@@ -374,7 +382,8 @@ public final class UiAutomation {
         synchronized (this.mLock) {
             throwIfNotConnectedLocked();
         }
-        return AccessibilityInteractionClient.getInstance().findFocus(this.mConnectionId, -2, AccessibilityNodeInfo.ROOT_NODE_ID, focus);
+        return AccessibilityInteractionClient.getInstance()
+                .findFocus(this.mConnectionId, -2, AccessibilityNodeInfo.ROOT_NODE_ID, focus);
     }
 
     public final AccessibilityServiceInfo getServiceInfo() {
@@ -418,7 +427,8 @@ public final class UiAutomation {
             throwIfNotConnectedLocked();
             connectionId = this.mConnectionId;
         }
-        return AccessibilityInteractionClient.getInstance().getWindowsOnDisplay(connectionId, this.mDisplayId);
+        return AccessibilityInteractionClient.getInstance()
+                .getWindowsOnDisplay(connectionId, this.mDisplayId);
     }
 
     public SparseArray<List<AccessibilityWindowInfo>> getWindowsOnAllDisplays() {
@@ -440,7 +450,8 @@ public final class UiAutomation {
             throwIfNotConnectedLocked();
             connectionId = this.mConnectionId;
         }
-        return AccessibilityInteractionClient.getInstance().getRootInActiveWindow(connectionId, prefetchingStrategy);
+        return AccessibilityInteractionClient.getInstance()
+                .getRootInActiveWindow(connectionId, prefetchingStrategy);
     }
 
     public boolean injectInputEvent(InputEvent event, boolean sync) {
@@ -466,7 +477,8 @@ public final class UiAutomation {
 
     public void setAnimationScale(float scale) {
         AccessibilityInteractionClient.getInstance();
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (connection != null) {
             try {
                 connection.setAnimationScale(scale);
@@ -522,15 +534,22 @@ public final class UiAutomation {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.view.accessibility.AccessibilityEvent executeAndWaitForEvent(java.lang.Runnable r20, android.app.UiAutomation.AccessibilityEventFilter r21, long r22) throws java.util.concurrent.TimeoutException {
+    public android.view.accessibility.AccessibilityEvent executeAndWaitForEvent(
+            java.lang.Runnable r20, android.app.UiAutomation.AccessibilityEventFilter r21, long r22)
+            throws java.util.concurrent.TimeoutException {
         /*
             Method dump skipped, instructions count: 279
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.UiAutomation.executeAndWaitForEvent(java.lang.Runnable, android.app.UiAutomation$AccessibilityEventFilter, long):android.view.accessibility.AccessibilityEvent");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                        + " android.app.UiAutomation.executeAndWaitForEvent(java.lang.Runnable,"
+                        + " android.app.UiAutomation$AccessibilityEventFilter,"
+                        + " long):android.view.accessibility.AccessibilityEvent");
     }
 
-    public void waitForIdle(long idleTimeoutMillis, long globalTimeoutMillis) throws TimeoutException {
+    public void waitForIdle(long idleTimeoutMillis, long globalTimeoutMillis)
+            throws TimeoutException {
         synchronized (this.mLock) {
             throwIfNotConnectedLocked();
             long startTimeMillis = SystemClock.uptimeMillis();
@@ -543,7 +562,11 @@ public final class UiAutomation {
                 long elapsedGlobalTimeMillis = currentTimeMillis - startTimeMillis;
                 long remainingGlobalTimeMillis = globalTimeoutMillis - elapsedGlobalTimeMillis;
                 if (remainingGlobalTimeMillis <= elapsedIdleTimeMillis) {
-                    throw new TimeoutException("No idle state with idle timeout: " + idleTimeoutMillis + " within global timeout: " + globalTimeoutMillis);
+                    throw new TimeoutException(
+                            "No idle state with idle timeout: "
+                                    + idleTimeoutMillis
+                                    + " within global timeout: "
+                                    + globalTimeoutMillis);
                 }
                 long elapsedIdleTimeMillis2 = currentTimeMillis - this.mLastEventTimeMillis;
                 long startTimeMillis2 = startTimeMillis;
@@ -564,9 +587,11 @@ public final class UiAutomation {
         Display display = DisplayManagerGlobal.getInstance().getRealDisplay(this.mDisplayId);
         Point displaySize = new Point();
         display.getRealSize(displaySize);
-        ScreenCapture.SynchronousScreenCaptureListener syncScreenCapture = ScreenCapture.createSyncCaptureListener();
+        ScreenCapture.SynchronousScreenCaptureListener syncScreenCapture =
+                ScreenCapture.createSyncCaptureListener();
         try {
-            if (!this.mUiAutomationConnection.takeScreenshot(new Rect(0, 0, displaySize.x, displaySize.y), syncScreenCapture)) {
+            if (!this.mUiAutomationConnection.takeScreenshot(
+                    new Rect(0, 0, displaySize.x, displaySize.y), syncScreenCapture)) {
                 return null;
             }
             ScreenCapture.ScreenshotHardwareBuffer screenshotBuffer = syncScreenCapture.getBuffer();
@@ -607,7 +632,9 @@ public final class UiAutomation {
     public Bitmap takeScreenshot(Window window) {
         View decorView;
         ViewRootImpl viewRoot;
-        if (window == null || (decorView = window.peekDecorView()) == null || (viewRoot = decorView.getViewRootImpl()) == null) {
+        if (window == null
+                || (decorView = window.peekDecorView()) == null
+                || (viewRoot = decorView.getViewRootImpl()) == null) {
             return null;
         }
         SurfaceControl sc = viewRoot.getSurfaceControl();
@@ -615,7 +642,8 @@ public final class UiAutomation {
             return null;
         }
         new SurfaceControl.Transaction().apply(true);
-        ScreenCapture.SynchronousScreenCaptureListener syncScreenCapture = ScreenCapture.createSyncCaptureListener();
+        ScreenCapture.SynchronousScreenCaptureListener syncScreenCapture =
+                ScreenCapture.createSyncCaptureListener();
         try {
             if (!this.mUiAutomationConnection.takeSurfaceControlScreenshot(sc, syncScreenCapture)) {
                 Log.e(LOG_TAG, "Failed to take screenshot for window=" + window);
@@ -711,14 +739,17 @@ public final class UiAutomation {
     }
 
     @Deprecated
-    public boolean grantRuntimePermission(String packageName, String permission, UserHandle userHandle) {
+    public boolean grantRuntimePermission(
+            String packageName, String permission, UserHandle userHandle) {
         grantRuntimePermissionAsUser(packageName, permission, userHandle);
         return true;
     }
 
-    public void grantRuntimePermissionAsUser(String packageName, String permission, UserHandle userHandle) {
+    public void grantRuntimePermissionAsUser(
+            String packageName, String permission, UserHandle userHandle) {
         try {
-            this.mUiAutomationConnection.grantRuntimePermission(packageName, permission, userHandle.getIdentifier());
+            this.mUiAutomationConnection.grantRuntimePermission(
+                    packageName, permission, userHandle.getIdentifier());
         } catch (Exception e) {
             throw new SecurityException("Error granting runtime permission", e);
         }
@@ -729,14 +760,17 @@ public final class UiAutomation {
     }
 
     @Deprecated
-    public boolean revokeRuntimePermission(String packageName, String permission, UserHandle userHandle) {
+    public boolean revokeRuntimePermission(
+            String packageName, String permission, UserHandle userHandle) {
         revokeRuntimePermissionAsUser(packageName, permission, userHandle);
         return true;
     }
 
-    public void revokeRuntimePermissionAsUser(String packageName, String permission, UserHandle userHandle) {
+    public void revokeRuntimePermissionAsUser(
+            String packageName, String permission, UserHandle userHandle) {
         try {
-            this.mUiAutomationConnection.revokeRuntimePermission(packageName, permission, userHandle.getIdentifier());
+            this.mUiAutomationConnection.revokeRuntimePermission(
+                    packageName, permission, userHandle.getIdentifier());
         } catch (Exception e) {
             throw new SecurityException("Error granting runtime permission", e);
         }
@@ -775,7 +809,8 @@ public final class UiAutomation {
         return this.mDisplayId;
     }
 
-    private ParcelFileDescriptor[] executeShellCommandInternal(String command, boolean includeStderr) {
+    private ParcelFileDescriptor[] executeShellCommandInternal(
+            String command, boolean includeStderr) {
         warnIfBetterCommand(command);
         ParcelFileDescriptor source_read = null;
         ParcelFileDescriptor sink_read = null;
@@ -797,7 +832,8 @@ public final class UiAutomation {
                         stderr_source_read = stderr_read[0];
                         stderr_sink_read = stderr_read[1];
                     }
-                    this.mUiAutomationConnection.executeShellCommandWithStderr(command, sink_read, source_write, stderr_sink_read);
+                    this.mUiAutomationConnection.executeShellCommandWithStderr(
+                            command, sink_read, source_write, stderr_sink_read);
                 } catch (RemoteException re) {
                     Log.e(LOG_TAG, "Error executing shell command!", re);
                 }
@@ -844,7 +880,9 @@ public final class UiAutomation {
             if (useAccessibility()) {
                 msg = "UiAutomation not connected, ";
             } else {
-                msg = "UiAutomation not connected: Accessibility-dependent method called with FLAG_DONT_USE_ACCESSIBILITY set, ";
+                msg =
+                        "UiAutomation not connected: Accessibility-dependent method called with"
+                                + " FLAG_DONT_USE_ACCESSIBILITY set, ";
             }
             throw new IllegalStateException(msg + this);
         }
@@ -852,9 +890,15 @@ public final class UiAutomation {
 
     private void warnIfBetterCommand(String cmd) {
         if (cmd.startsWith("pm grant ")) {
-            Log.w(LOG_TAG, "UiAutomation.grantRuntimePermission() is more robust and should be used instead of 'pm grant'");
+            Log.w(
+                    LOG_TAG,
+                    "UiAutomation.grantRuntimePermission() is more robust and should be used"
+                            + " instead of 'pm grant'");
         } else if (cmd.startsWith("pm revoke ")) {
-            Log.w(LOG_TAG, "UiAutomation.revokeRuntimePermission() is more robust and should be used instead of 'pm revoke'");
+            Log.w(
+                    LOG_TAG,
+                    "UiAutomation.revokeRuntimePermission() is more robust and should be used"
+                            + " instead of 'pm revoke'");
         }
     }
 
@@ -870,7 +914,10 @@ public final class UiAutomation {
         }
         int displayId = context.getDisplayId();
         if (displayId == -1) {
-            Log.e(LOG_TAG, "UiAutomation created UI context with invalid display id, assuming it's running in the display assigned to the user");
+            Log.e(
+                    LOG_TAG,
+                    "UiAutomation created UI context with invalid display id, assuming it's running"
+                            + " in the display assigned to the user");
             return getMainDisplayIdAssignedToUser(context, userManager);
         }
         if (displayId != 0) {
@@ -882,129 +929,144 @@ public final class UiAutomation {
 
     private static int getMainDisplayIdAssignedToUser(Context context, UserManager userManager) {
         if (!userManager.isUserVisible()) {
-            Log.e(LOG_TAG, "User (" + context.getUserId() + ") is not visible, using DEFAULT_DISPLAY");
+            Log.e(
+                    LOG_TAG,
+                    "User (" + context.getUserId() + ") is not visible, using DEFAULT_DISPLAY");
             return 0;
         }
         return userManager.getMainDisplayIdAssignedToUser();
     }
 
-    private class IAccessibilityServiceClientImpl extends AccessibilityService.IAccessibilityServiceClientWrapper {
+    private class IAccessibilityServiceClientImpl
+            extends AccessibilityService.IAccessibilityServiceClientWrapper {
         public IAccessibilityServiceClientImpl(Looper looper, final int generationId) {
-            super((Context) null, looper, new AccessibilityService.Callbacks() { // from class: android.app.UiAutomation.IAccessibilityServiceClientImpl.1
-                private final int mGenerationId;
+            super(
+                    (Context) null,
+                    looper,
+                    new AccessibilityService.Callbacks() { // from class:
+                        // android.app.UiAutomation.IAccessibilityServiceClientImpl.1
+                        private final int mGenerationId;
 
-                {
-                    this.mGenerationId = generationId;
-                }
-
-                private boolean isGenerationChangedLocked() {
-                    return this.mGenerationId != UiAutomation.this.mGenerationId;
-                }
-
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void init(int connectionId, IBinder windowToken) {
-                    synchronized (UiAutomation.this.mLock) {
-                        if (isGenerationChangedLocked()) {
-                            return;
+                        {
+                            this.mGenerationId = generationId;
                         }
-                        UiAutomation.this.mConnectionState = 2;
-                        UiAutomation.this.mConnectionId = connectionId;
-                        UiAutomation.this.mLock.notifyAll();
-                        if (Build.IS_DEBUGGABLE) {
-                            Log.v(UiAutomation.LOG_TAG, "Init " + UiAutomation.this);
+
+                        private boolean isGenerationChangedLocked() {
+                            return this.mGenerationId != UiAutomation.this.mGenerationId;
                         }
-                    }
-                }
 
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onServiceConnected() {
-                }
-
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onInterrupt() {
-                }
-
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onSystemActionsChanged() {
-                }
-
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void createImeSession(IAccessibilityInputMethodSessionCallback callback) {
-                }
-
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void startInput(RemoteAccessibilityInputConnection inputConnection, EditorInfo editorInfo, boolean restarting) {
-                }
-
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public boolean onGesture(AccessibilityGestureEvent gestureEvent) {
-                    return false;
-                }
-
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onMotionEvent(MotionEvent event) {
-                }
-
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onTouchStateChanged(int displayId, int state) {
-                }
-
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onAccessibilityEvent(AccessibilityEvent event) {
-                    synchronized (UiAutomation.this.mLock) {
-                        if (isGenerationChangedLocked()) {
-                            return;
-                        }
-                        UiAutomation.this.mLastEventTimeMillis = Math.max(UiAutomation.this.mLastEventTimeMillis, event.getEventTime());
-                        if (UiAutomation.this.mWaitingForEventDelivery) {
-                            UiAutomation.this.mEventQueue.add(AccessibilityEvent.obtain(event));
-                        }
-                        UiAutomation.this.mLock.notifyAll();
-                        OnAccessibilityEventListener listener = UiAutomation.this.mOnAccessibilityEventListener;
-                        if (listener != null) {
-                            UiAutomation.this.mLocalCallbackHandler.sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.app.UiAutomation$IAccessibilityServiceClientImpl$1$$ExternalSyntheticLambda0
-                                @Override // java.util.function.BiConsumer
-                                public final void accept(Object obj, Object obj2) {
-                                    ((UiAutomation.OnAccessibilityEventListener) obj).onAccessibilityEvent((AccessibilityEvent) obj2);
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void init(int connectionId, IBinder windowToken) {
+                            synchronized (UiAutomation.this.mLock) {
+                                if (isGenerationChangedLocked()) {
+                                    return;
                                 }
-                            }, listener, AccessibilityEvent.obtain(event)));
+                                UiAutomation.this.mConnectionState = 2;
+                                UiAutomation.this.mConnectionId = connectionId;
+                                UiAutomation.this.mLock.notifyAll();
+                                if (Build.IS_DEBUGGABLE) {
+                                    Log.v(UiAutomation.LOG_TAG, "Init " + UiAutomation.this);
+                                }
+                            }
                         }
-                    }
-                }
 
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public boolean onKeyEvent(KeyEvent event) {
-                    return false;
-                }
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onServiceConnected() {}
 
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onMagnificationChanged(int displayId, Region region, MagnificationConfig config) {
-                }
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onInterrupt() {}
 
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onSoftKeyboardShowModeChanged(int showMode) {
-                }
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onSystemActionsChanged() {}
 
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onPerformGestureResult(int sequence, boolean completedSuccessfully) {
-                }
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void createImeSession(
+                                IAccessibilityInputMethodSessionCallback callback) {}
 
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onFingerprintCapturingGesturesChanged(boolean active) {
-                }
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void startInput(
+                                RemoteAccessibilityInputConnection inputConnection,
+                                EditorInfo editorInfo,
+                                boolean restarting) {}
 
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onFingerprintGesture(int gesture) {
-                }
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public boolean onGesture(AccessibilityGestureEvent gestureEvent) {
+                            return false;
+                        }
 
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onAccessibilityButtonClicked(int displayId) {
-                }
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onMotionEvent(MotionEvent event) {}
 
-                @Override // android.accessibilityservice.AccessibilityService.Callbacks
-                public void onAccessibilityButtonAvailabilityChanged(boolean available) {
-                }
-            });
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onTouchStateChanged(int displayId, int state) {}
+
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onAccessibilityEvent(AccessibilityEvent event) {
+                            synchronized (UiAutomation.this.mLock) {
+                                if (isGenerationChangedLocked()) {
+                                    return;
+                                }
+                                UiAutomation.this.mLastEventTimeMillis =
+                                        Math.max(
+                                                UiAutomation.this.mLastEventTimeMillis,
+                                                event.getEventTime());
+                                if (UiAutomation.this.mWaitingForEventDelivery) {
+                                    UiAutomation.this.mEventQueue.add(
+                                            AccessibilityEvent.obtain(event));
+                                }
+                                UiAutomation.this.mLock.notifyAll();
+                                OnAccessibilityEventListener listener =
+                                        UiAutomation.this.mOnAccessibilityEventListener;
+                                if (listener != null) {
+                                    UiAutomation.this.mLocalCallbackHandler.sendMessage(
+                                            PooledLambda.obtainMessage(
+                                                    new BiConsumer() { // from class:
+                                                        // android.app.UiAutomation$IAccessibilityServiceClientImpl$1$$ExternalSyntheticLambda0
+                                                        @Override // java.util.function.BiConsumer
+                                                        public final void accept(
+                                                                Object obj, Object obj2) {
+                                                            ((UiAutomation
+                                                                                    .OnAccessibilityEventListener)
+                                                                            obj)
+                                                                    .onAccessibilityEvent(
+                                                                            (AccessibilityEvent)
+                                                                                    obj2);
+                                                        }
+                                                    },
+                                                    listener,
+                                                    AccessibilityEvent.obtain(event)));
+                                }
+                            }
+                        }
+
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public boolean onKeyEvent(KeyEvent event) {
+                            return false;
+                        }
+
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onMagnificationChanged(
+                                int displayId, Region region, MagnificationConfig config) {}
+
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onSoftKeyboardShowModeChanged(int showMode) {}
+
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onPerformGestureResult(
+                                int sequence, boolean completedSuccessfully) {}
+
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onFingerprintCapturingGesturesChanged(boolean active) {}
+
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onFingerprintGesture(int gesture) {}
+
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onAccessibilityButtonClicked(int displayId) {}
+
+                        @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                        public void onAccessibilityButtonAvailabilityChanged(boolean available) {}
+                    });
         }
     }
 }

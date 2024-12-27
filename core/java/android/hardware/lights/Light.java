@@ -3,29 +3,30 @@ package android.hardware.lights;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes2.dex */
 public final class Light implements Parcelable {
-    public static final Parcelable.Creator<Light> CREATOR = new Parcelable.Creator<Light>() { // from class: android.hardware.lights.Light.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Light createFromParcel(Parcel in) {
-            return new Light(in);
-        }
+    public static final Parcelable.Creator<Light> CREATOR =
+            new Parcelable.Creator<Light>() { // from class: android.hardware.lights.Light.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Light createFromParcel(Parcel in) {
+                    return new Light(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Light[] newArray(int size) {
-            return new Light[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Light[] newArray(int size) {
+                    return new Light[size];
+                }
+            };
     public static final int LIGHT_CAPABILITY_BRIGHTNESS = 1;
     public static final int LIGHT_CAPABILITY_COLOR_RGB = 2;
 
-    @Deprecated
-    public static final int LIGHT_CAPABILITY_RGB = 0;
+    @Deprecated public static final int LIGHT_CAPABILITY_RGB = 0;
     public static final int LIGHT_TYPE_CAMERA = 9;
     public static final int LIGHT_TYPE_INPUT = 10001;
     public static final int LIGHT_TYPE_KEYBOARD_BACKLIGHT = 10003;
@@ -40,12 +41,10 @@ public final class Light implements Parcelable {
     private final int mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LightCapability {
-    }
+    public @interface LightCapability {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LightType {
-    }
+    public @interface LightType {}
 
     public Light(int id, int ordinal, int type) {
         this(id, "Light", ordinal, type, 0, null);
@@ -55,7 +54,13 @@ public final class Light implements Parcelable {
         this(id, name, ordinal, type, capabilities, null);
     }
 
-    public Light(int id, String name, int ordinal, int type, int capabilities, int[] preferredBrightnessLevels) {
+    public Light(
+            int id,
+            String name,
+            int ordinal,
+            int type,
+            int capabilities,
+            int[] preferredBrightnessLevels) {
         this.mId = id;
         this.mName = name;
         this.mOrdinal = ordinal;
@@ -93,7 +98,10 @@ public final class Light implements Parcelable {
             return false;
         }
         Light light = (Light) obj;
-        return this.mId == light.mId && this.mOrdinal == light.mOrdinal && this.mType == light.mType && this.mCapabilities == light.mCapabilities;
+        return this.mId == light.mId
+                && this.mOrdinal == light.mOrdinal
+                && this.mType == light.mType
+                && this.mCapabilities == light.mCapabilities;
     }
 
     public int hashCode() {
@@ -101,7 +109,17 @@ public final class Light implements Parcelable {
     }
 
     public String toString() {
-        return "[Name=" + this.mName + " Id=" + this.mId + " Type=" + this.mType + " Capabilities=" + this.mCapabilities + " Ordinal=" + this.mOrdinal + NavigationBarInflaterView.SIZE_MOD_END;
+        return "[Name="
+                + this.mName
+                + " Id="
+                + this.mId
+                + " Type="
+                + this.mType
+                + " Capabilities="
+                + this.mCapabilities
+                + " Ordinal="
+                + this.mOrdinal
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public int getId() {

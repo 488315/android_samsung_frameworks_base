@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SehSimPhonebookResponse implements Parcelable {
-    public static final Parcelable.Creator<SehSimPhonebookResponse> CREATOR = new Parcelable.Creator<SehSimPhonebookResponse>() { // from class: vendor.samsung.hardware.radio.sim.SehSimPhonebookResponse.1
-        @Override // android.os.Parcelable.Creator
-        public SehSimPhonebookResponse createFromParcel(Parcel _aidl_source) {
-            SehSimPhonebookResponse _aidl_out = new SehSimPhonebookResponse();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehSimPhonebookResponse> CREATOR =
+            new Parcelable.Creator<
+                    SehSimPhonebookResponse>() { // from class:
+                                                 // vendor.samsung.hardware.radio.sim.SehSimPhonebookResponse.1
+                @Override // android.os.Parcelable.Creator
+                public SehSimPhonebookResponse createFromParcel(Parcel _aidl_source) {
+                    SehSimPhonebookResponse _aidl_out = new SehSimPhonebookResponse();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehSimPhonebookResponse[] newArray(int _aidl_size) {
-            return new SehSimPhonebookResponse[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehSimPhonebookResponse[] newArray(int _aidl_size) {
+                    return new SehSimPhonebookResponse[_aidl_size];
+                }
+            };
     public String[] alphaTags;
     public int[] dataTypeAlphas;
     public int[] dataTypeNumbers;

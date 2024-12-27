@@ -2,10 +2,9 @@ package com.android.server.am.mars.filter;
 
 import android.content.Context;
 import android.net.Uri;
+
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.database.MARsVersionManager;
-import com.android.server.am.mars.filter.FilterChainFactory;
-import com.android.server.am.mars.filter.FilterFactory;
 import com.android.server.am.mars.filter.filter.AODClockFilter;
 import com.android.server.am.mars.filter.filter.AccessibilityAppFilter;
 import com.android.server.am.mars.filter.filter.ActiveMusicRecordFilter;
@@ -39,6 +38,7 @@ import com.android.server.am.mars.filter.filter.TopPackageFilter;
 import com.android.server.am.mars.filter.filter.VPNPackageFilter;
 import com.android.server.am.mars.filter.filter.WallPaperFilter;
 import com.android.server.am.mars.filter.filter.WidgetPkgFilter;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -55,11 +55,15 @@ public final class FilterManager {
     public static int filterForSpecificPolicy(int i, int i2, int i3, String str) {
         if (MARsUtils.isChinaPolicyEnabled() && i == 1) {
             String[][] strArr = MARsVersionManager.mMARsSettingsInfoDefault;
-            if (MARsVersionManager.MARsVersionManagerHolder.INSTANCE.isAdjustRestrictionMatch(10, str, null, null)) {
+            if (MARsVersionManager.MARsVersionManagerHolder.INSTANCE.isAdjustRestrictionMatch(
+                    10, str, null, null)) {
                 return 0;
             }
         }
-        FilterChain filterChain = (FilterChain) FilterChainFactory.FilterChainFactoryHolder.INSTANCE.filterHashMap.get(Integer.valueOf(i));
+        FilterChain filterChain =
+                (FilterChain)
+                        FilterChainFactory.FilterChainFactoryHolder.INSTANCE.filterHashMap.get(
+                                Integer.valueOf(i));
         if (filterChain != null) {
             return filterChain.filter(i2, i3, i, str);
         }
@@ -69,27 +73,37 @@ public final class FilterManager {
     public final void init(Context context) {
         FilterFactory filterFactory = this.mFF;
         filterFactory.mContext = context;
-        filterFactory.filterHashMap.put(1, RecentUsedPackageFilter.RecentUsedPackageFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(2, LatestProtectedPackageFilter.LatestProtectedPackageFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(3, OngoingNotiPackageFilter.OngoingNotiPackageFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                1, RecentUsedPackageFilter.RecentUsedPackageFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                2, LatestProtectedPackageFilter.LatestProtectedPackageFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                3, OngoingNotiPackageFilter.OngoingNotiPackageFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(4, WidgetPkgFilter.WidgetPkgFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(5, NoAppIconFilter.NoAppIconFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(6, VPNPackageFilter.VPNPackageFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(7, ActiveMusicRecordFilter.ActiveMusicRecordFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                7, ActiveMusicRecordFilter.ActiveMusicRecordFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(8, ActiveTrafficFilter.ActiveTrafficFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(9, DeviceAdminPackageFilter.DeviceAdminPackageFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                9, DeviceAdminPackageFilter.DeviceAdminPackageFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(10, WallPaperFilter.WallPaperFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(11, DefaultAppFilter.DefaultAppFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(12, TopPackageFilter.TopPackageFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(13, LockScreenFilter.LockScreenFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(14, SystemFilter.SystemFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(15, RunningLocationFilter.RunningLocationFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(16, DisableForceStopFilter.DisableForceStopFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                15, RunningLocationFilter.RunningLocationFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                16, DisableForceStopFilter.DisableForceStopFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(17, EdgeAppFilter.EdgeAppFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(18, JobSchedulerPackageFilter.JobSchedulerPackageFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(19, AccessibilityAppFilter.AccessibilityAppFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                18, JobSchedulerPackageFilter.JobSchedulerPackageFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                19, AccessibilityAppFilter.AccessibilityAppFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(20, AllowListFilter.AllowListFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(21, QuickTilePackageFilter.QuickTilePackageFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                21, QuickTilePackageFilter.QuickTilePackageFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(22, ImportantRoleFilter.ImportantRoleFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(23, ActiveSensorFilter.ActiveSensorFilterHolder.INSTANCE);
         HashMap hashMap = filterFactory.filterHashMap;
@@ -97,15 +111,19 @@ public final class FilterManager {
         hashMap.put(24, AppCastFilter.AppCastFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(25, AODClockFilter.AODClockFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(26, BackupServiceFilter.BackupServiceFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(27, BlueToothConnectedFilter.BlueToothConnectedFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                27, BlueToothConnectedFilter.BlueToothConnectedFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(28, PredownloadFilter.PredownloadFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(29, CameraInFgsFilter.CameraInFgsFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(30, ProtectedPackagesFilter.ProtectedPackagesFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                30, ProtectedPackagesFilter.ProtectedPackagesFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(31, NFCPackageFilter.NFCPackageFilterHolder.INSTANCE);
         filterFactory.filterHashMap.put(32, CarConnectedFilter.AndroidAutoFilterHolder.INSTANCE);
-        filterFactory.filterHashMap.put(33, RunningBroadcastFilter.RunningBroadcastFilterHolder.INSTANCE);
+        filterFactory.filterHashMap.put(
+                33, RunningBroadcastFilter.RunningBroadcastFilterHolder.INSTANCE);
         for (int i = 1; i < 34; i++) {
-            ((IFilter) filterFactory.filterHashMap.get(Integer.valueOf(i))).init(filterFactory.mContext);
+            ((IFilter) filterFactory.filterHashMap.get(Integer.valueOf(i)))
+                    .init(filterFactory.mContext);
         }
         FilterChainFactory filterChainFactory = this.mFCF;
         HashMap hashMap2 = filterChainFactory.filterHashMap;
@@ -276,10 +294,14 @@ public final class FilterManager {
         FilterChainBuilder filterChainBuilder11 = new FilterChainBuilder();
         FilterManager$$ExternalSyntheticOutline0.m(filterFactory2, 2, filterChainBuilder11, 8, 6);
         FilterManager$$ExternalSyntheticOutline0.m(filterFactory2, 7, filterChainBuilder11, 9, 11);
-        FilterManager$$ExternalSyntheticOutline0.m(filterFactory2, 12, filterChainBuilder11, 14, 15);
-        FilterManager$$ExternalSyntheticOutline0.m(filterFactory2, 17, filterChainBuilder11, 18, 23);
-        FilterManager$$ExternalSyntheticOutline0.m(filterFactory2, 26, filterChainBuilder11, 27, 10);
-        FilterManager$$ExternalSyntheticOutline0.m(filterFactory2, 28, filterChainBuilder11, 29, 31);
+        FilterManager$$ExternalSyntheticOutline0.m(
+                filterFactory2, 12, filterChainBuilder11, 14, 15);
+        FilterManager$$ExternalSyntheticOutline0.m(
+                filterFactory2, 17, filterChainBuilder11, 18, 23);
+        FilterManager$$ExternalSyntheticOutline0.m(
+                filterFactory2, 26, filterChainBuilder11, 27, 10);
+        FilterManager$$ExternalSyntheticOutline0.m(
+                filterFactory2, 28, filterChainBuilder11, 29, 31);
         filterChainBuilder11.add(filterFactory2.getFilter(32));
         filterChainBuilder11.add(filterFactory2.getFilter(33));
         hashMap17.put(15, filterChainBuilder11.filterChain);

@@ -1,6 +1,7 @@
 package com.android.server.knox.dar.ddar.proxy;
 
 import android.content.Context;
+
 import com.samsung.android.knox.dar.ddar.proxy.KnoxProxyAgent;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,7 +35,8 @@ public final class SystemProxyAgent extends KnoxProxyAgent {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.os.Bundle relay(int r7, java.lang.String r8, java.lang.String r9, android.os.Bundle r10) {
+    public final android.os.Bundle relay(
+            int r7, java.lang.String r8, java.lang.String r9, android.os.Bundle r10) {
         /*
             r6 = this;
             java.lang.String r0 = "relay to Service : "
@@ -104,6 +106,9 @@ public final class SystemProxyAgent extends KnoxProxyAgent {
             r6 = 0
             return r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.dar.ddar.proxy.SystemProxyAgent.relay(int, java.lang.String, java.lang.String, android.os.Bundle):android.os.Bundle");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.knox.dar.ddar.proxy.SystemProxyAgent.relay(int,"
+                    + " java.lang.String, java.lang.String, android.os.Bundle):android.os.Bundle");
     }
 }

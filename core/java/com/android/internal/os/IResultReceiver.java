@@ -13,8 +13,7 @@ public interface IResultReceiver extends IInterface {
 
     public static class Default implements IResultReceiver {
         @Override // com.android.internal.os.IResultReceiver
-        public void send(int resultCode, Bundle resultData) throws RemoteException {
-        }
+        public void send(int resultCode, Bundle resultData) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +21,7 @@ public interface IResultReceiver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IResultReceiver {
+    public abstract static class Stub extends Binder implements IResultReceiver {
         public static final String DESCRIPTOR = "com.android.internal.os.IResultReceiver";
         static final int TRANSACTION_send = 1;
 
@@ -61,7 +60,8 @@ public interface IResultReceiver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

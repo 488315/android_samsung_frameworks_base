@@ -6,12 +6,14 @@ import android.os.SystemClock;
 import android.util.Pools;
 import android.util.Slog;
 import android.view.KeyEvent;
+
 import com.android.server.policy.PhoneWindowManager;
 import com.android.server.policy.WindowManagerPolicy;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class KeyboardInterceptor extends BaseEventStreamTransformation implements Handler.Callback {
+public final class KeyboardInterceptor extends BaseEventStreamTransformation
+        implements Handler.Callback {
     public final AccessibilityManagerService mAms;
     public KeyEventHolder mEventQueueEnd;
     public KeyEventHolder mEventQueueStart;
@@ -27,7 +29,9 @@ public final class KeyboardInterceptor extends BaseEventStreamTransformation imp
         public KeyEventHolder previous;
     }
 
-    public KeyboardInterceptor(AccessibilityManagerService accessibilityManagerService, WindowManagerPolicy windowManagerPolicy) {
+    public KeyboardInterceptor(
+            AccessibilityManagerService accessibilityManagerService,
+            WindowManagerPolicy windowManagerPolicy) {
         this.mAms = accessibilityManagerService;
         this.mPolicy = windowManagerPolicy;
     }
@@ -47,7 +51,11 @@ public final class KeyboardInterceptor extends BaseEventStreamTransformation imp
             KeyEvent keyEvent = keyEventHolder.event;
             int i = keyEventHolder.policyFlags;
             int keyCode = keyEvent.getKeyCode();
-            long interceptKeyBeforeDispatching = (keyCode == 25 || keyCode == 24) ? ((PhoneWindowManager) this.mPolicy).interceptKeyBeforeDispatching(null, keyEvent, i) : 0L;
+            long interceptKeyBeforeDispatching =
+                    (keyCode == 25 || keyCode == 24)
+                            ? ((PhoneWindowManager) this.mPolicy)
+                                    .interceptKeyBeforeDispatching(null, keyEvent, i)
+                            : 0L;
             if (interceptKeyBeforeDispatching > 0) {
                 this.mEventQueueEnd.dispatchTime = uptimeMillis + interceptKeyBeforeDispatching;
                 break;
@@ -55,7 +63,8 @@ public final class KeyboardInterceptor extends BaseEventStreamTransformation imp
             if (interceptKeyBeforeDispatching == 0) {
                 AccessibilityManagerService accessibilityManagerService = this.mAms;
                 KeyEventHolder keyEventHolder2 = this.mEventQueueEnd;
-                accessibilityManagerService.notifyKeyEvent(keyEventHolder2.event, keyEventHolder2.policyFlags);
+                accessibilityManagerService.notifyKeyEvent(
+                        keyEventHolder2.event, keyEventHolder2.policyFlags);
             }
             KeyEventHolder keyEventHolder3 = this.mEventQueueEnd;
             this.mEventQueueEnd = keyEventHolder3.previous;
@@ -69,7 +78,8 @@ public final class KeyboardInterceptor extends BaseEventStreamTransformation imp
                 this.mEventQueueStart = null;
             }
         }
-        if (this.mEventQueueStart != null && !this.mHandler.sendEmptyMessageAtTime(1, this.mEventQueueEnd.dispatchTime)) {
+        if (this.mEventQueueStart != null
+                && !this.mHandler.sendEmptyMessageAtTime(1, this.mEventQueueEnd.dispatchTime)) {
             Slog.e("KeyboardInterceptor", "Failed to schedule key event");
         }
         return true;
@@ -78,10 +88,17 @@ public final class KeyboardInterceptor extends BaseEventStreamTransformation imp
     @Override // com.android.server.accessibility.EventStreamTransformation
     public final void onKeyEvent(KeyEvent keyEvent, int i) {
         if (this.mAms.mTraceManager.isA11yTracingEnabledForTypes(4096L)) {
-            this.mAms.mTraceManager.logTrace("KeyboardInterceptor.onKeyEvent", 4096L, "event=" + keyEvent + ";policyFlags=" + i);
+            this.mAms.mTraceManager.logTrace(
+                    "KeyboardInterceptor.onKeyEvent",
+                    4096L,
+                    "event=" + keyEvent + ";policyFlags=" + i);
         }
         int keyCode = keyEvent.getKeyCode();
-        long interceptKeyBeforeDispatching = (keyCode == 25 || keyCode == 24) ? ((PhoneWindowManager) this.mPolicy).interceptKeyBeforeDispatching(null, keyEvent, i) : 0L;
+        long interceptKeyBeforeDispatching =
+                (keyCode == 25 || keyCode == 24)
+                        ? ((PhoneWindowManager) this.mPolicy)
+                                .interceptKeyBeforeDispatching(null, keyEvent, i)
+                        : 0L;
         if (interceptKeyBeforeDispatching < 0) {
             return;
         }

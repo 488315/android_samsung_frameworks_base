@@ -23,15 +23,14 @@ import android.window.StartingWindowInfo;
 import android.window.StartingWindowRemovalInfo;
 import android.window.TaskSnapshot;
 import android.window.WindowContainerToken;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.internal.util.ArrayUtils;
-import com.android.server.wm.BLASTSyncEngine;
-import com.android.server.wm.SurfaceAnimator;
-import com.android.server.wm.Task;
-import com.android.server.wm.TaskOrganizerController;
 import com.android.server.wm.TaskOrganizerController.TaskOrganizerState;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -58,11 +57,15 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
-            WindowManagerGlobalLock windowManagerGlobalLock = TaskOrganizerController.this.mGlobalLock;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    TaskOrganizerController.this.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    TaskOrganizerState taskOrganizerState = (TaskOrganizerState) TaskOrganizerController.this.mTaskOrganizerStates.get(this.mTaskOrganizer.asBinder());
+                    TaskOrganizerState taskOrganizerState =
+                            (TaskOrganizerState)
+                                    TaskOrganizerController.this.mTaskOrganizerStates.get(
+                                            this.mTaskOrganizer.asBinder());
                     if (taskOrganizerState != null) {
                         taskOrganizerState.dispose();
                     }
@@ -91,12 +94,10 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StartingWindowAnimationAdaptor implements AnimationAdapter {
         @Override // com.android.server.wm.AnimationAdapter
-        public final void dump(PrintWriter printWriter, String str) {
-        }
+        public final void dump(PrintWriter printWriter, String str) {}
 
         @Override // com.android.server.wm.AnimationAdapter
-        public final void dumpDebug$1(ProtoOutputStream protoOutputStream) {
-        }
+        public final void dumpDebug$1(ProtoOutputStream protoOutputStream) {}
 
         @Override // com.android.server.wm.AnimationAdapter
         public final long getDurationHint() {
@@ -114,12 +115,14 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
 
         @Override // com.android.server.wm.AnimationAdapter
-        public final void onAnimationCancelled(SurfaceControl surfaceControl) {
-        }
+        public final void onAnimationCancelled(SurfaceControl surfaceControl) {}
 
         @Override // com.android.server.wm.AnimationAdapter
-        public final void startAnimation(SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, int i, SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback) {
-        }
+        public final void startAnimation(
+                SurfaceControl surfaceControl,
+                SurfaceControl.Transaction transaction,
+                int i,
+                SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback) {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -139,10 +142,16 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         public final ArrayList mPendingTaskEvents = new ArrayList();
 
         /* renamed from: -$$Nest$mgetPendingTaskEvent, reason: not valid java name */
-        public static PendingTaskEvent m1070$$Nest$mgetPendingTaskEvent(TaskOrganizerPendingEventsQueue taskOrganizerPendingEventsQueue, Task task, int i) {
-            for (int size = taskOrganizerPendingEventsQueue.mPendingTaskEvents.size() - 1; size >= 0; size--) {
-                PendingTaskEvent pendingTaskEvent = (PendingTaskEvent) taskOrganizerPendingEventsQueue.mPendingTaskEvents.get(size);
-                if (task.mTaskId == pendingTaskEvent.mTask.mTaskId && i == pendingTaskEvent.mEventType) {
+        public static PendingTaskEvent m1070$$Nest$mgetPendingTaskEvent(
+                TaskOrganizerPendingEventsQueue taskOrganizerPendingEventsQueue, Task task, int i) {
+            for (int size = taskOrganizerPendingEventsQueue.mPendingTaskEvents.size() - 1;
+                    size >= 0;
+                    size--) {
+                PendingTaskEvent pendingTaskEvent =
+                        (PendingTaskEvent)
+                                taskOrganizerPendingEventsQueue.mPendingTaskEvents.get(size);
+                if (task.mTaskId == pendingTaskEvent.mTask.mTaskId
+                        && i == pendingTaskEvent.mEventType) {
                     return pendingTaskEvent;
                 }
             }
@@ -154,20 +163,30 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
 
         public final void dispatchTaskInfoChanged(Task task, boolean z) {
-            ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) this.mLastSentTaskInfos.get(task);
+            ActivityManager.RunningTaskInfo runningTaskInfo =
+                    (ActivityManager.RunningTaskInfo) this.mLastSentTaskInfos.get(task);
             if (this.mTmpTaskInfo == null) {
                 this.mTmpTaskInfo = new ActivityManager.RunningTaskInfo();
             }
             this.mTmpTaskInfo.configuration.unset();
             task.fillTaskInfo(this.mTmpTaskInfo, true);
-            if (this.mTmpTaskInfo.equalsForTaskOrganizer(runningTaskInfo) && WindowOrganizerController.configurationsAreEqualForOrganizer(this.mTmpTaskInfo.configuration, runningTaskInfo.configuration) && !z) {
+            if (this.mTmpTaskInfo.equalsForTaskOrganizer(runningTaskInfo)
+                    && WindowOrganizerController.configurationsAreEqualForOrganizer(
+                            this.mTmpTaskInfo.configuration, runningTaskInfo.configuration)
+                    && !z) {
                 return;
             }
             ActivityManager.RunningTaskInfo runningTaskInfo2 = this.mTmpTaskInfo;
-            if (task.inSplitScreenWindowingMode() && task.isLeafTask() && task.getParent() != null && task.getParent().getTopMostTask() == task) {
+            if (task.inSplitScreenWindowingMode()
+                    && task.isLeafTask()
+                    && task.getParent() != null
+                    && task.getParent().getTopMostTask() == task) {
                 runningTaskInfo2.isTopTaskInStage = true;
             }
-            runningTaskInfo2.hasConfigChanged = runningTaskInfo == null || !WindowOrganizerController.configurationsAreEqualForOrganizer(this.mTmpTaskInfo.configuration, runningTaskInfo.configuration);
+            runningTaskInfo2.hasConfigChanged =
+                    runningTaskInfo == null
+                            || !WindowOrganizerController.configurationsAreEqualForOrganizer(
+                                    this.mTmpTaskInfo.configuration, runningTaskInfo.configuration);
             this.mLastSentTaskInfos.put(task, this.mTmpTaskInfo);
             this.mTmpTaskInfo = null;
             if (task.isOrganized()) {
@@ -175,13 +194,22 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
                 taskOrganizerCallbacks.getClass();
                 if (task.mTaskAppearedSent) {
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, -6638141753476761854L, 1, null, Long.valueOf(task.mTaskId));
+                        ProtoLogImpl_54989576.v(
+                                ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                -6638141753476761854L,
+                                1,
+                                null,
+                                Long.valueOf(task.mTaskId));
                     }
                     if (task.isOrganized()) {
                         try {
-                            taskOrganizerCallbacks.mTaskOrganizer.onTaskInfoChanged(runningTaskInfo2);
+                            taskOrganizerCallbacks.mTaskOrganizer.onTaskInfoChanged(
+                                    runningTaskInfo2);
                         } catch (RemoteException e) {
-                            Slog.e("TaskOrganizerController", "Exception sending onTaskInfoChanged callback", e);
+                            Slog.e(
+                                    "TaskOrganizerController",
+                                    "Exception sending onTaskInfoChanged callback",
+                                    e);
                         }
                     }
                 }
@@ -195,8 +223,10 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         public PendingTaskEvent getPendingLifecycleTaskEvent(Task task) {
             int i;
             for (int size = this.mPendingTaskEvents.size() - 1; size >= 0; size--) {
-                PendingTaskEvent pendingTaskEvent = (PendingTaskEvent) this.mPendingTaskEvents.get(size);
-                if (task.mTaskId == pendingTaskEvent.mTask.mTaskId && ((i = pendingTaskEvent.mEventType) == 0 || i == 1 || i == 2)) {
+                PendingTaskEvent pendingTaskEvent =
+                        (PendingTaskEvent) this.mPendingTaskEvents.get(size);
+                if (task.mTaskId == pendingTaskEvent.mTask.mTaskId
+                        && ((i = pendingTaskEvent.mEventType) == 0 || i == 1 || i == 2)) {
                     return pendingTaskEvent;
                 }
             }
@@ -214,13 +244,16 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
 
         public TaskOrganizerState(ITaskOrganizer iTaskOrganizer, int i) {
             this.mOrganizer = new TaskOrganizerCallbacks(iTaskOrganizer);
-            DeathRecipient deathRecipient = TaskOrganizerController.this.new DeathRecipient(iTaskOrganizer);
+            DeathRecipient deathRecipient =
+                    TaskOrganizerController.this.new DeathRecipient(iTaskOrganizer);
             this.mDeathRecipient = deathRecipient;
             this.mPendingEventsQueue = new TaskOrganizerPendingEventsQueue(this);
             try {
                 iTaskOrganizer.asBinder().linkToDeath(deathRecipient, 0);
             } catch (RemoteException unused) {
-                Slog.e("TaskOrganizerController", "TaskOrganizer failed to register death recipient");
+                Slog.e(
+                        "TaskOrganizerController",
+                        "TaskOrganizer failed to register death recipient");
             }
             this.mUid = i;
         }
@@ -237,15 +270,20 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
                 } else {
                     task.updateTaskOrganizerState(false);
                 }
-                if (this.mOrganizedTasks.contains(task) && removeTask(task, task.mRemoveWithTaskOrganizer)) {
+                if (this.mOrganizedTasks.contains(task)
+                        && removeTask(task, task.mRemoveWithTaskOrganizer)) {
                     TaskOrganizerController.onTaskVanishedInternal(this, task);
                 }
-                if (taskOrganizerController.mService.mWindowOrganizerController.mTransitionController.isShellTransitionsEnabled() && task.mTaskOrganizer != null && task.mSurfaceControl != null) {
+                if (taskOrganizerController.mService.mWindowOrganizerController
+                                .mTransitionController.isShellTransitionsEnabled()
+                        && task.mTaskOrganizer != null
+                        && task.mSurfaceControl != null) {
                     task.getSyncTransaction().show(task.mSurfaceControl);
                 }
             }
             this.mPendingEventsQueue.mPendingTaskEvents.clear();
-            taskOrganizerController.mTaskOrganizerStates.remove(taskOrganizerCallbacks.mTaskOrganizer.asBinder());
+            taskOrganizerController.mTaskOrganizerStates.remove(
+                    taskOrganizerCallbacks.mTaskOrganizer.asBinder());
         }
 
         public DeathRecipient getDeathRecipient() {
@@ -260,11 +298,17 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             BLASTSyncEngine.SyncGroup syncGroup;
             this.mOrganizedTasks.remove(task);
             TaskOrganizerController taskOrganizerController = TaskOrganizerController.this;
-            taskOrganizerController.mInterceptBackPressedOnRootTasks.remove(Integer.valueOf(task.mTaskId));
+            taskOrganizerController.mInterceptBackPressedOnRootTasks.remove(
+                    Integer.valueOf(task.mTaskId));
             boolean z2 = task.mTaskAppearedSent;
             if (z2) {
                 if (task.mSurfaceControl != null) {
-                    if (task.mRemoving && task.syncNextBuffer() && (task.mIsPipReparetingToLastParent || ((syncGroup = task.mSyncGroup) != null && syncGroup.mSyncId == task.mSyncIdForReparentSurfaceControl))) {
+                    if (task.mRemoving
+                            && task.syncNextBuffer()
+                            && (task.mIsPipReparetingToLastParent
+                                    || ((syncGroup = task.mSyncGroup) != null
+                                            && syncGroup.mSyncId
+                                                    == task.mSyncIdForReparentSurfaceControl))) {
                         Slog.w("TaskOrganizerController", "removeTask: skip to migrate, t=" + task);
                     } else {
                         task.migrateToNewSurfaceControl(task.getSyncTransaction());
@@ -285,28 +329,45 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
     }
 
     public static SurfaceControl applyStartingWindowAnimation(WindowState windowState) {
-        Slog.d("TaskOrganizerController", "applyStartingWindowAnimation, window=" + windowState + ", caller=" + Debug.getCallers(3));
+        Slog.d(
+                "TaskOrganizerController",
+                "applyStartingWindowAnimation, window="
+                        + windowState
+                        + ", caller="
+                        + Debug.getCallers(3));
         SurfaceControl.Transaction pendingTransaction = windowState.getPendingTransaction();
-        windowState.startAnimation(pendingTransaction, new StartingWindowAnimationAdaptor(), false, 128);
+        windowState.startAnimation(
+                pendingTransaction, new StartingWindowAnimationAdaptor(), false, 128);
         SurfaceControl animationLeash = windowState.getAnimationLeash();
         if (animationLeash != null) {
             Point point = windowState.mSurfacePosition;
             pendingTransaction.setPosition(animationLeash, point.x, point.y);
             return animationLeash;
         }
-        Slog.e("TaskOrganizerController", "Cannot start starting window animation, the window " + windowState + " was removed");
+        Slog.e(
+                "TaskOrganizerController",
+                "Cannot start starting window animation, the window "
+                        + windowState
+                        + " was removed");
         return null;
     }
 
     public static void onTaskVanishedInternal(TaskOrganizerState taskOrganizerState, Task task) {
         if (taskOrganizerState == null) {
-            Slog.i("TaskOrganizerController", "cannot send onTaskVanished because organizer state is not present for this organizer");
+            Slog.i(
+                    "TaskOrganizerController",
+                    "cannot send onTaskVanished because organizer state is not present for this"
+                        + " organizer");
             return;
         }
-        TaskOrganizerPendingEventsQueue taskOrganizerPendingEventsQueue = taskOrganizerState.mPendingEventsQueue;
+        TaskOrganizerPendingEventsQueue taskOrganizerPendingEventsQueue =
+                taskOrganizerState.mPendingEventsQueue;
         boolean z = false;
-        for (int size = taskOrganizerPendingEventsQueue.mPendingTaskEvents.size() - 1; size >= 0; size--) {
-            PendingTaskEvent pendingTaskEvent = (PendingTaskEvent) taskOrganizerPendingEventsQueue.mPendingTaskEvents.get(size);
+        for (int size = taskOrganizerPendingEventsQueue.mPendingTaskEvents.size() - 1;
+                size >= 0;
+                size--) {
+            PendingTaskEvent pendingTaskEvent =
+                    (PendingTaskEvent) taskOrganizerPendingEventsQueue.mPendingTaskEvents.get(size);
             if (task.mTaskId == pendingTaskEvent.mTask.mTaskId) {
                 taskOrganizerPendingEventsQueue.mPendingTaskEvents.remove(size);
                 if (pendingTaskEvent.mEventType == 0) {
@@ -337,9 +398,12 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    public final boolean addStartingWindow(Task task, ActivityRecord activityRecord, int i, TaskSnapshot taskSnapshot) {
+    public final boolean addStartingWindow(
+            Task task, ActivityRecord activityRecord, int i, TaskSnapshot taskSnapshot) {
         ITaskOrganizer taskOrganizer;
-        if (task.getRootTask() == null || activityRecord.mStartingData == null || (taskOrganizer = getTaskOrganizer()) == null) {
+        if (task.getRootTask() == null
+                || activityRecord.mStartingData == null
+                || (taskOrganizer = getTaskOrganizer()) == null) {
             return false;
         }
         StartingWindowInfo startingWindowInfo = task.getStartingWindowInfo(activityRecord);
@@ -361,9 +425,16 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         return createRootTask(displayContent, i, iBinder, false, 0);
     }
 
-    public final Task createRootTask(DisplayContent displayContent, int i, IBinder iBinder, boolean z, int i2) {
+    public final Task createRootTask(
+            DisplayContent displayContent, int i, IBinder iBinder, boolean z, int i2) {
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, 8466395828406204368L, 5, null, Long.valueOf(displayContent.mDisplayId), Long.valueOf(i));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                    8466395828406204368L,
+                    5,
+                    null,
+                    Long.valueOf(displayContent.mDisplayId),
+                    Long.valueOf(i));
         }
         Task.Builder builder = new Task.Builder(this.mService);
         builder.mWindowingMode = i;
@@ -387,13 +458,19 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    DisplayContent displayContent = this.mService.mRootWindowContainer.getDisplayContent(i);
+                    DisplayContent displayContent =
+                            this.mService.mRootWindowContainer.getDisplayContent(i);
                     if (displayContent != null) {
                         createRootTask(displayContent, i2, iBinder, z, 0);
                         WindowManagerService.resetPriorityAfterLockedSection();
                     } else {
                         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[4]) {
-                            ProtoLogImpl_54989576.e(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, -2286607251115721394L, 1, null, Long.valueOf(i));
+                            ProtoLogImpl_54989576.e(
+                                    ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                    -2286607251115721394L,
+                                    1,
+                                    null,
+                                    Long.valueOf(i));
                         }
                         WindowManagerService.resetPriorityAfterLockedSection();
                     }
@@ -415,13 +492,19 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    DisplayContent displayContent = this.mService.mRootWindowContainer.getDisplayContent(i);
+                    DisplayContent displayContent =
+                            this.mService.mRootWindowContainer.getDisplayContent(i);
                     if (displayContent != null) {
                         createRootTask(displayContent, i2, iBinder, false, i3);
                         WindowManagerService.resetPriorityAfterLockedSection();
                     } else {
                         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[4]) {
-                            ProtoLogImpl_54989576.e(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, -4327662970496992015L, 1, null, Long.valueOf(i));
+                            ProtoLogImpl_54989576.e(
+                                    ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                    -4327662970496992015L,
+                                    1,
+                                    null,
+                                    Long.valueOf(i));
                         }
                         WindowManagerService.resetPriorityAfterLockedSection();
                     }
@@ -445,17 +528,26 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    WindowContainer fromBinder = WindowContainer.fromBinder(windowContainerToken.asBinder());
+                    WindowContainer fromBinder =
+                            WindowContainer.fromBinder(windowContainerToken.asBinder());
                     z = false;
                     if (fromBinder != null) {
                         Task asTask = fromBinder.asTask();
                         if (asTask != null) {
                             if (!asTask.mCreatedByOrganizer) {
-                                throw new IllegalArgumentException("Attempt to delete task not created by organizer task=" + asTask);
+                                throw new IllegalArgumentException(
+                                        "Attempt to delete task not created by organizer task="
+                                                + asTask);
                             }
                             z = true;
                             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
-                                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, 6867170298997192615L, 5, null, Long.valueOf(asTask.getDisplayId()), Long.valueOf(asTask.getWindowingMode()));
+                                ProtoLogImpl_54989576.v(
+                                        ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                        6867170298997192615L,
+                                        5,
+                                        null,
+                                        Long.valueOf(asTask.getDisplayId()),
+                                        Long.valueOf(asTask.getWindowingMode()));
                             }
                             asTask.remove("deleteRootTask", true);
                         }
@@ -477,65 +569,111 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             return;
         }
         for (int i = 0; i < this.mTaskOrganizerStates.size(); i++) {
-            TaskOrganizerPendingEventsQueue taskOrganizerPendingEventsQueue = ((TaskOrganizerState) this.mTaskOrganizerStates.valueAt(i)).mPendingEventsQueue;
+            TaskOrganizerPendingEventsQueue taskOrganizerPendingEventsQueue =
+                    ((TaskOrganizerState) this.mTaskOrganizerStates.valueAt(i)).mPendingEventsQueue;
             if (!taskOrganizerPendingEventsQueue.mPendingTaskEvents.isEmpty()) {
                 int size = taskOrganizerPendingEventsQueue.mPendingTaskEvents.size();
                 for (int i2 = 0; i2 < size; i2++) {
-                    PendingTaskEvent pendingTaskEvent = (PendingTaskEvent) taskOrganizerPendingEventsQueue.mPendingTaskEvents.get(i2);
+                    PendingTaskEvent pendingTaskEvent =
+                            (PendingTaskEvent)
+                                    taskOrganizerPendingEventsQueue.mPendingTaskEvents.get(i2);
                     Task task = pendingTaskEvent.mTask;
                     boolean[] zArr = ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled;
-                    TaskOrganizerState taskOrganizerState = taskOrganizerPendingEventsQueue.mOrganizerState;
+                    TaskOrganizerState taskOrganizerState =
+                            taskOrganizerPendingEventsQueue.mOrganizerState;
                     int i3 = pendingTaskEvent.mEventType;
                     if (i3 != 0) {
                         if (i3 == 1) {
-                            TaskOrganizerCallbacks taskOrganizerCallbacks = taskOrganizerState.mOrganizer;
+                            TaskOrganizerCallbacks taskOrganizerCallbacks =
+                                    taskOrganizerState.mOrganizer;
                             taskOrganizerCallbacks.getClass();
                             if (zArr[1]) {
-                                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, 6535296991997214354L, 1, null, Long.valueOf(task.mTaskId));
+                                ProtoLogImpl_54989576.v(
+                                        ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                        6535296991997214354L,
+                                        1,
+                                        null,
+                                        Long.valueOf(task.mTaskId));
                             }
                             try {
-                                taskOrganizerCallbacks.mTaskOrganizer.onTaskVanished(task.getTaskInfo());
+                                taskOrganizerCallbacks.mTaskOrganizer.onTaskVanished(
+                                        task.getTaskInfo());
                             } catch (RemoteException e) {
-                                Slog.e("TaskOrganizerController", "Exception sending onTaskVanished callback", e);
+                                Slog.e(
+                                        "TaskOrganizerController",
+                                        "Exception sending onTaskVanished callback",
+                                        e);
                             }
                             taskOrganizerPendingEventsQueue.mLastSentTaskInfos.remove(task);
                         } else if (i3 == 2) {
-                            taskOrganizerPendingEventsQueue.dispatchTaskInfoChanged(task, pendingTaskEvent.mForce);
+                            taskOrganizerPendingEventsQueue.dispatchTaskInfoChanged(
+                                    task, pendingTaskEvent.mForce);
                         } else if (i3 == 3) {
-                            TaskOrganizerCallbacks taskOrganizerCallbacks2 = taskOrganizerState.mOrganizer;
+                            TaskOrganizerCallbacks taskOrganizerCallbacks2 =
+                                    taskOrganizerState.mOrganizer;
                             taskOrganizerCallbacks2.getClass();
                             if (zArr[1]) {
-                                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, -8100069665346602959L, 1, null, Long.valueOf(task.mTaskId));
+                                ProtoLogImpl_54989576.v(
+                                        ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                        -8100069665346602959L,
+                                        1,
+                                        null,
+                                        Long.valueOf(task.mTaskId));
                             }
                             if (task.mTaskAppearedSent && task.isOrganized()) {
                                 try {
-                                    taskOrganizerCallbacks2.mTaskOrganizer.onBackPressedOnTaskRoot(task.getTaskInfo());
+                                    taskOrganizerCallbacks2.mTaskOrganizer.onBackPressedOnTaskRoot(
+                                            task.getTaskInfo());
                                 } catch (Exception e2) {
-                                    Slog.e("TaskOrganizerController", "Exception sending onBackPressedOnTaskRoot callback", e2);
+                                    Slog.e(
+                                            "TaskOrganizerController",
+                                            "Exception sending onBackPressedOnTaskRoot callback",
+                                            e2);
                                 }
                             }
                         } else if (i3 == 4) {
-                            TaskOrganizerCallbacks taskOrganizerCallbacks3 = taskOrganizerState.mOrganizer;
+                            TaskOrganizerCallbacks taskOrganizerCallbacks3 =
+                                    taskOrganizerState.mOrganizer;
                             int i4 = pendingTaskEvent.mGestureFrom;
                             taskOrganizerCallbacks3.getClass();
                             if (task.mTaskAppearedSent && task.isOrganized()) {
                                 try {
-                                    taskOrganizerCallbacks3.mTaskOrganizer.requestAffordanceAnim(task.getTaskInfo(), i4);
+                                    taskOrganizerCallbacks3.mTaskOrganizer.requestAffordanceAnim(
+                                            task.getTaskInfo(), i4);
                                 } catch (Exception e3) {
-                                    Slog.e("TaskOrganizerController", "Exception sending onAffordanceAnim callback", e3);
+                                    Slog.e(
+                                            "TaskOrganizerController",
+                                            "Exception sending onAffordanceAnim callback",
+                                            e3);
                                 }
                             }
                         }
-                    } else if (task.mTaskOrganizer != null && !task.mDeferTaskAppear && (task.mCreatedByOrganizer || (task.mSurfaceControl != null && task.mHasBeenVisible))) {
-                        TaskOrganizerCallbacks taskOrganizerCallbacks4 = taskOrganizerState.mOrganizer;
+                    } else if (task.mTaskOrganizer != null
+                            && !task.mDeferTaskAppear
+                            && (task.mCreatedByOrganizer
+                                    || (task.mSurfaceControl != null && task.mHasBeenVisible))) {
+                        TaskOrganizerCallbacks taskOrganizerCallbacks4 =
+                                taskOrganizerState.mOrganizer;
                         taskOrganizerCallbacks4.getClass();
                         if (zArr[1]) {
-                            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, -6181189296332065162L, 1, null, Long.valueOf(task.mTaskId));
+                            ProtoLogImpl_54989576.v(
+                                    ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                    -6181189296332065162L,
+                                    1,
+                                    null,
+                                    Long.valueOf(task.mTaskId));
                         }
                         try {
-                            taskOrganizerCallbacks4.mTaskOrganizer.onTaskAppeared(task.getTaskInfo(), new SurfaceControl(task.mSurfaceControl, "TaskOrganizerController.onTaskAppeared"));
+                            taskOrganizerCallbacks4.mTaskOrganizer.onTaskAppeared(
+                                    task.getTaskInfo(),
+                                    new SurfaceControl(
+                                            task.mSurfaceControl,
+                                            "TaskOrganizerController.onTaskAppeared"));
                         } catch (RemoteException e4) {
-                            Slog.e("TaskOrganizerController", "Exception sending onTaskAppeared callback", e4);
+                            Slog.e(
+                                    "TaskOrganizerController",
+                                    "Exception sending onTaskAppeared callback",
+                                    e4);
                         }
                     }
                 }
@@ -556,9 +694,14 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
                     if (windowContainerToken == null) {
                         throw new IllegalArgumentException("Can't get children of null parent");
                     }
-                    WindowContainer fromBinder = WindowContainer.fromBinder(windowContainerToken.asBinder());
+                    WindowContainer fromBinder =
+                            WindowContainer.fromBinder(windowContainerToken.asBinder());
                     if (fromBinder == null) {
-                        Slog.e("TaskOrganizerController", "Can't get children of " + windowContainerToken + " because it is not valid.");
+                        Slog.e(
+                                "TaskOrganizerController",
+                                "Can't get children of "
+                                        + windowContainerToken
+                                        + " because it is not valid.");
                     } else {
                         Task asTask = fromBinder.asTask();
                         if (asTask == null) {
@@ -566,16 +709,24 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
                         } else {
                             if (asTask.mCreatedByOrganizer) {
                                 ArrayList arrayList = new ArrayList();
-                                for (int childCount = asTask.getChildCount() - 1; childCount >= 0; childCount--) {
+                                for (int childCount = asTask.getChildCount() - 1;
+                                        childCount >= 0;
+                                        childCount--) {
                                     Task asTask2 = asTask.getChildAt(childCount).asTask();
-                                    if (asTask2 != null && (iArr == null || ArrayUtils.contains(iArr, asTask2.getActivityType()))) {
+                                    if (asTask2 != null
+                                            && (iArr == null
+                                                    || ArrayUtils.contains(
+                                                            iArr, asTask2.getActivityType()))) {
                                         arrayList.add(asTask2.getTaskInfo());
                                     }
                                 }
                                 WindowManagerService.resetPriorityAfterLockedSection();
                                 return arrayList;
                             }
-                            Slog.w("TaskOrganizerController", "Can only get children of root tasks created via createRootTask");
+                            Slog.w(
+                                    "TaskOrganizerController",
+                                    "Can only get children of root tasks created via"
+                                        + " createRootTask");
                         }
                     }
                     WindowManagerService.resetPriorityAfterLockedSection();
@@ -599,7 +750,8 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    Task anyTaskForId = this.mService.mRootWindowContainer.anyTaskForId(i, 0, null, false);
+                    Task anyTaskForId =
+                            this.mService.mRootWindowContainer.anyTaskForId(i, 0, null, false);
                     if (anyTaskForId != null) {
                         float f = anyTaskForId.mFreeformAlpha;
                         WindowManagerService.resetPriorityAfterLockedSection();
@@ -631,7 +783,8 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    DisplayContent displayContent = this.mService.mWindowManager.mRoot.getDisplayContent(i);
+                    DisplayContent displayContent =
+                            this.mService.mWindowManager.mRoot.getDisplayContent(i);
                     if (displayContent != null) {
                         InsetsControlTarget imeTarget = displayContent.getImeTarget(0);
                         if (imeTarget != null && imeTarget.getWindow() != null) {
@@ -639,10 +792,14 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
                             if (task != null) {
                                 if (task.inFreeformWindowingMode()) {
                                     InputTarget inputTarget = displayContent.mImeInputTarget;
-                                    WindowState windowState = inputTarget != null ? inputTarget.getWindowState() : null;
+                                    WindowState windowState =
+                                            inputTarget != null
+                                                    ? inputTarget.getWindowState()
+                                                    : null;
                                     Task task2 = windowState != null ? windowState.getTask() : null;
                                     if (task2 != null && task2 != task) {
-                                        windowContainerToken = task2.mRemoteToken.toWindowContainerToken();
+                                        windowContainerToken =
+                                                task2.mRemoteToken.toWindowContainerToken();
                                         WindowManagerService.resetPriorityAfterLockedSection();
                                         return windowContainerToken;
                                     }
@@ -674,12 +831,15 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    DisplayContent displayContent = this.mService.mRootWindowContainer.getDisplayContent(i);
+                    DisplayContent displayContent =
+                            this.mService.mRootWindowContainer.getDisplayContent(i);
                     if (displayContent == null) {
                         throw new IllegalArgumentException("Display " + i + " doesn't exist");
                     }
                     arrayList = new ArrayList();
-                    displayContent.forAllRootTasks(new TaskOrganizerController$$ExternalSyntheticLambda3(arrayList, 1, iArr));
+                    displayContent.forAllRootTasks(
+                            new TaskOrganizerController$$ExternalSyntheticLambda3(
+                                    arrayList, 1, iArr));
                 } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
                     throw th;
@@ -705,22 +865,34 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
     }
 
     public final boolean handleInterceptBackPressedOnTaskRoot(Task task) {
-        if (!(task != null && task.isOrganized() && this.mInterceptBackPressedOnRootTasks.contains(Integer.valueOf(task.mTaskId)))) {
+        if (!(task != null
+                && task.isOrganized()
+                && this.mInterceptBackPressedOnRootTasks.contains(Integer.valueOf(task.mTaskId)))) {
             return false;
         }
-        TaskOrganizerPendingEventsQueue taskOrganizerPendingEventsQueue = ((TaskOrganizerState) this.mTaskOrganizerStates.get(task.mTaskOrganizer.asBinder())).mPendingEventsQueue;
+        TaskOrganizerPendingEventsQueue taskOrganizerPendingEventsQueue =
+                ((TaskOrganizerState) this.mTaskOrganizerStates.get(task.mTaskOrganizer.asBinder()))
+                        .mPendingEventsQueue;
         if (taskOrganizerPendingEventsQueue == null) {
-            Slog.w("TaskOrganizerController", "cannot get handle BackPressedOnTaskRoot because organizerState is not present");
+            Slog.w(
+                    "TaskOrganizerController",
+                    "cannot get handle BackPressedOnTaskRoot because organizerState is not"
+                        + " present");
             return false;
         }
-        if (TaskOrganizerPendingEventsQueue.m1070$$Nest$mgetPendingTaskEvent(taskOrganizerPendingEventsQueue, task, 1) != null) {
+        if (TaskOrganizerPendingEventsQueue.m1070$$Nest$mgetPendingTaskEvent(
+                        taskOrganizerPendingEventsQueue, task, 1)
+                != null) {
             return false;
         }
-        PendingTaskEvent m1070$$Nest$mgetPendingTaskEvent = TaskOrganizerPendingEventsQueue.m1070$$Nest$mgetPendingTaskEvent(taskOrganizerPendingEventsQueue, task, 3);
+        PendingTaskEvent m1070$$Nest$mgetPendingTaskEvent =
+                TaskOrganizerPendingEventsQueue.m1070$$Nest$mgetPendingTaskEvent(
+                        taskOrganizerPendingEventsQueue, task, 3);
         if (m1070$$Nest$mgetPendingTaskEvent == null) {
             m1070$$Nest$mgetPendingTaskEvent = new PendingTaskEvent(3, task);
         } else {
-            taskOrganizerPendingEventsQueue.mPendingTaskEvents.remove(m1070$$Nest$mgetPendingTaskEvent);
+            taskOrganizerPendingEventsQueue.mPendingTaskEvents.remove(
+                    m1070$$Nest$mgetPendingTaskEvent);
         }
         taskOrganizerPendingEventsQueue.mPendingTaskEvents.add(m1070$$Nest$mgetPendingTaskEvent);
         this.mService.mWindowManager.mWindowPlacerLocked.requestTraversal();
@@ -736,16 +908,21 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             synchronized (windowManagerGlobalLock) {
                 try {
                     boolean z = false;
-                    Task anyTaskForId = this.mService.mRootWindowContainer.anyTaskForId(i, 0, null, false);
+                    Task anyTaskForId =
+                            this.mService.mRootWindowContainer.anyTaskForId(i, 0, null, false);
                     if (anyTaskForId == null) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return false;
                     }
                     TaskDisplayArea displayArea = anyTaskForId.getDisplayArea();
                     if (displayArea != null) {
-                        FreeformTaskPinningController freeformTaskPinningController = displayArea.mFreeformTaskPinningController;
+                        FreeformTaskPinningController freeformTaskPinningController =
+                                displayArea.mFreeformTaskPinningController;
                         freeformTaskPinningController.getClass();
-                        if ((!CoreRune.MT_NEW_DEX_TASK_PINNING || !freeformTaskPinningController.mTaskDisplayArea.isNewDexMode()) && freeformTaskPinningController.mPinnedTask != null) {
+                        if ((!CoreRune.MT_NEW_DEX_TASK_PINNING
+                                        || !freeformTaskPinningController.mTaskDisplayArea
+                                                .isNewDexMode())
+                                && freeformTaskPinningController.mPinnedTask != null) {
                             z = true;
                         }
                     }
@@ -763,7 +940,9 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
     }
 
     public final void onSplitLayoutChangeRequested(Bundle bundle) {
-        Task task = this.mService.mRootWindowContainer.mDefaultDisplay.getDefaultTaskDisplayArea().mRootMainStageTask;
+        Task task =
+                this.mService.mRootWindowContainer.mDefaultDisplay.getDefaultTaskDisplayArea()
+                        .mRootMainStageTask;
         if (task == null) {
             return;
         }
@@ -772,7 +951,10 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         try {
             task.mTaskOrganizer.onSplitLayoutChangeRequested(runningTaskInfo, bundle);
         } catch (RemoteException e) {
-            Slog.e("TaskOrganizerController", "Exception sending onSplitLayoutChangeRequested callback", e);
+            Slog.e(
+                    "TaskOrganizerController",
+                    "Exception sending onSplitLayoutChangeRequested callback",
+                    e);
         }
     }
 
@@ -780,12 +962,14 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         try {
             return super.onTransact(i, parcel, parcel2, i2);
         } catch (RuntimeException e) {
-            ActivityTaskManagerService.logAndRethrowRuntimeExceptionOnTransact(e, "TaskOrganizerController");
+            ActivityTaskManagerService.logAndRethrowRuntimeExceptionOnTransact(
+                    e, "TaskOrganizerController");
             throw null;
         }
     }
 
-    public final void preloadSplashScreenAppIcon(ActivityInfo activityInfo, int i, Configuration configuration) {
+    public final void preloadSplashScreenAppIcon(
+            ActivityInfo activityInfo, int i, Configuration configuration) {
         ITaskOrganizer iTaskOrganizer = (ITaskOrganizer) this.mTaskOrganizers.peekLast();
         if (iTaskOrganizer == null) {
             return;
@@ -793,7 +977,10 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         try {
             iTaskOrganizer.preloadSplashScreenAppIcon(activityInfo, i, configuration);
         } catch (RemoteException e) {
-            Slog.e("TaskOrganizerController", "Exception sending preloadSplashScreenAppInfo callback", e);
+            Slog.e(
+                    "TaskOrganizerController",
+                    "Exception sending preloadSplashScreenAppInfo callback",
+                    e);
         }
     }
 
@@ -803,26 +990,47 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             final ArrayList arrayList = new ArrayList();
-            Runnable runnable = new Runnable() { // from class: com.android.server.wm.TaskOrganizerController$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    TaskOrganizerController taskOrganizerController = TaskOrganizerController.this;
-                    ITaskOrganizer iTaskOrganizer2 = iTaskOrganizer;
-                    int i = callingUid;
-                    ArrayList arrayList2 = arrayList;
-                    if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
-                        taskOrganizerController.getClass();
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, -610138383571469481L, 4, null, String.valueOf(iTaskOrganizer2.asBinder()), Long.valueOf(i));
-                    }
-                    if (!taskOrganizerController.mTaskOrganizerStates.containsKey(iTaskOrganizer2.asBinder())) {
-                        taskOrganizerController.mTaskOrganizers.add(iTaskOrganizer2);
-                        taskOrganizerController.mTaskOrganizerStates.put(iTaskOrganizer2.asBinder(), taskOrganizerController.new TaskOrganizerState(iTaskOrganizer2, i));
-                    }
-                    taskOrganizerController.mService.mRootWindowContainer.forAllTasks(new TaskOrganizerController$$ExternalSyntheticLambda3(arrayList2, 0, (TaskOrganizerController.TaskOrganizerState) taskOrganizerController.mTaskOrganizerStates.get(iTaskOrganizer2.asBinder())));
-                }
-            };
-            if (this.mService.mWindowOrganizerController.mTransitionController.isShellTransitionsEnabled()) {
-                this.mService.mWindowOrganizerController.mTransitionController.mRunningLock.runWhenIdle(runnable);
+            Runnable runnable =
+                    new Runnable() { // from class:
+                                     // com.android.server.wm.TaskOrganizerController$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            TaskOrganizerController taskOrganizerController =
+                                    TaskOrganizerController.this;
+                            ITaskOrganizer iTaskOrganizer2 = iTaskOrganizer;
+                            int i = callingUid;
+                            ArrayList arrayList2 = arrayList;
+                            if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
+                                taskOrganizerController.getClass();
+                                ProtoLogImpl_54989576.v(
+                                        ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                        -610138383571469481L,
+                                        4,
+                                        null,
+                                        String.valueOf(iTaskOrganizer2.asBinder()),
+                                        Long.valueOf(i));
+                            }
+                            if (!taskOrganizerController.mTaskOrganizerStates.containsKey(
+                                    iTaskOrganizer2.asBinder())) {
+                                taskOrganizerController.mTaskOrganizers.add(iTaskOrganizer2);
+                                taskOrganizerController.mTaskOrganizerStates.put(
+                                        iTaskOrganizer2.asBinder(),
+                                        taskOrganizerController
+                                        .new TaskOrganizerState(iTaskOrganizer2, i));
+                            }
+                            taskOrganizerController.mService.mRootWindowContainer.forAllTasks(
+                                    new TaskOrganizerController$$ExternalSyntheticLambda3(
+                                            arrayList2,
+                                            0,
+                                            (TaskOrganizerController.TaskOrganizerState)
+                                                    taskOrganizerController.mTaskOrganizerStates
+                                                            .get(iTaskOrganizer2.asBinder())));
+                        }
+                    };
+            if (this.mService.mWindowOrganizerController.mTransitionController
+                    .isShellTransitionsEnabled()) {
+                this.mService.mWindowOrganizerController.mTransitionController.mRunningLock
+                        .runWhenIdle(runnable);
             } else {
                 WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
@@ -845,7 +1053,8 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    public final void removeStartingWindow(Task task, ITaskOrganizer iTaskOrganizer, boolean z, boolean z2) {
+    public final void removeStartingWindow(
+            Task task, ITaskOrganizer iTaskOrganizer, boolean z, boolean z2) {
         if (task.getRootTask() == null) {
             return;
         }
@@ -857,14 +1066,19 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
         StartingWindowRemovalInfo startingWindowRemovalInfo = new StartingWindowRemovalInfo();
         startingWindowRemovalInfo.taskId = task.mTaskId;
-        startingWindowRemovalInfo.playRevealAnimation = z && task.getDisplayContent() != null && task.mDisplayContent.mDisplayInfo.state == 2;
+        startingWindowRemovalInfo.playRevealAnimation =
+                z
+                        && task.getDisplayContent() != null
+                        && task.mDisplayContent.mDisplayInfo.state == 2;
         boolean z3 = !task.inMultiWindowMode();
         WindowState window = task.getWindow(new Task$$ExternalSyntheticLambda0(6));
         ActivityRecord activityRecord = window != null ? window.mActivityRecord : null;
         if (activityRecord != null) {
             DisplayContent displayContent = activityRecord.getDisplayContent();
             if (z2) {
-                if (activityRecord.isVisibleRequested() && displayContent.mInputMethodWindow != null && displayContent.isFixedRotationLaunchingApp(activityRecord)) {
+                if (activityRecord.isVisibleRequested()
+                        && displayContent.mInputMethodWindow != null
+                        && displayContent.isFixedRotationLaunchingApp(activityRecord)) {
                     startingWindowRemovalInfo.deferRemoveMode = 2;
                 } else {
                     startingWindowRemovalInfo.deferRemoveMode = 1;
@@ -874,8 +1088,11 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             if (findMainWindow == null || findMainWindow.mRemoved) {
                 startingWindowRemovalInfo.playRevealAnimation = false;
             } else if (startingWindowRemovalInfo.playRevealAnimation && z3) {
-                startingWindowRemovalInfo.roundedCornerRadius = activityRecord.mAppCompatController.mAppCompatLetterboxPolicy.mAppCompatRoundedCorners.getRoundedCornersRadius(findMainWindow);
-                startingWindowRemovalInfo.windowAnimationLeash = applyStartingWindowAnimation(findMainWindow);
+                startingWindowRemovalInfo.roundedCornerRadius =
+                        activityRecord.mAppCompatController.mAppCompatLetterboxPolicy
+                                .mAppCompatRoundedCorners.getRoundedCornersRadius(findMainWindow);
+                startingWindowRemovalInfo.windowAnimationLeash =
+                        applyStartingWindowAnimation(findMainWindow);
                 Rect rect = new Rect(findMainWindow.mWindowFrames.mFrame);
                 startingWindowRemovalInfo.mainFrame = rect;
                 Point point = findMainWindow.mSurfacePosition;
@@ -890,7 +1107,8 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
     }
 
     /* JADX WARN: Finally extract failed */
-    public final void restartTaskTopActivityProcessIfVisible(WindowContainerToken windowContainerToken) {
+    public final void restartTaskTopActivityProcessIfVisible(
+            WindowContainerToken windowContainerToken) {
         ActivityTaskManagerService.enforceTaskPermission("restartTopActivityProcessIfVisible()");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -898,16 +1116,23 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    WindowContainer fromBinder = WindowContainer.fromBinder(windowContainerToken.asBinder());
+                    WindowContainer fromBinder =
+                            WindowContainer.fromBinder(windowContainerToken.asBinder());
                     if (fromBinder == null) {
                         Slog.w("TaskOrganizerController", "Could not resolve window from token");
                     } else {
                         Task asTask = fromBinder.asTask();
                         if (asTask != null) {
                             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
-                                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, -558727273888268534L, 1, null, Long.valueOf(asTask.mTaskId));
+                                ProtoLogImpl_54989576.v(
+                                        ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                        -558727273888268534L,
+                                        1,
+                                        null,
+                                        Long.valueOf(asTask.mTaskId));
                             }
-                            ActivityRecord topNonFinishingActivity = asTask.getTopNonFinishingActivity(true, true);
+                            ActivityRecord topNonFinishingActivity =
+                                    asTask.getTopNonFinishingActivity(true, true);
                             if (topNonFinishingActivity != null) {
                                 topNonFinishingActivity.restartProcessIfVisible();
                             }
@@ -935,7 +1160,8 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    Task anyTaskForId = this.mService.mRootWindowContainer.anyTaskForId(i, 0, null, false);
+                    Task anyTaskForId =
+                            this.mService.mRootWindowContainer.anyTaskForId(i, 0, null, false);
                     if (anyTaskForId == null) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return;
@@ -953,15 +1179,18 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    public final void setFreeformTaskSurfaceOverlappedWithNavi(WindowContainerToken windowContainerToken, boolean z) {
-        ActivityTaskManagerService.enforceTaskPermission("setFreeformTaskSurfaceOverlappedWithNavi()");
+    public final void setFreeformTaskSurfaceOverlappedWithNavi(
+            WindowContainerToken windowContainerToken, boolean z) {
+        ActivityTaskManagerService.enforceTaskPermission(
+                "setFreeformTaskSurfaceOverlappedWithNavi()");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    WindowContainer fromBinder = WindowContainer.fromBinder(windowContainerToken.asBinder());
+                    WindowContainer fromBinder =
+                            WindowContainer.fromBinder(windowContainerToken.asBinder());
                     if (fromBinder == null) {
                         Slog.w("TaskOrganizerController", "Could not resolve window from token");
                         WindowManagerService.resetPriorityAfterLockedSection();
@@ -988,7 +1217,8 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         }
     }
 
-    public final void setInterceptBackPressedOnTaskRoot(WindowContainerToken windowContainerToken, boolean z) {
+    public final void setInterceptBackPressedOnTaskRoot(
+            WindowContainerToken windowContainerToken, boolean z) {
         ActivityTaskManagerService.enforceTaskPermission("setInterceptBackPressedOnTaskRoot()");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -997,18 +1227,26 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             synchronized (windowManagerGlobalLock) {
                 try {
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, -4296644831871159510L, 3, null, Boolean.valueOf(z));
+                        ProtoLogImpl_54989576.v(
+                                ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                -4296644831871159510L,
+                                3,
+                                null,
+                                Boolean.valueOf(z));
                     }
-                    WindowContainer fromBinder = WindowContainer.fromBinder(windowContainerToken.asBinder());
+                    WindowContainer fromBinder =
+                            WindowContainer.fromBinder(windowContainerToken.asBinder());
                     if (fromBinder == null) {
                         Slog.w("TaskOrganizerController", "Could not resolve window from token");
                     } else {
                         Task asTask = fromBinder.asTask();
                         if (asTask != null) {
                             if (z) {
-                                this.mInterceptBackPressedOnRootTasks.add(Integer.valueOf(asTask.mTaskId));
+                                this.mInterceptBackPressedOnRootTasks.add(
+                                        Integer.valueOf(asTask.mTaskId));
                             } else {
-                                this.mInterceptBackPressedOnRootTasks.remove(Integer.valueOf(asTask.mTaskId));
+                                this.mInterceptBackPressedOnRootTasks.remove(
+                                        Integer.valueOf(asTask.mTaskId));
                             }
                             WindowManagerService.resetPriorityAfterLockedSection();
                             return;
@@ -1034,7 +1272,8 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    Task anyTaskForId = this.mService.mRootWindowContainer.anyTaskForId(i, 0, null, false);
+                    Task anyTaskForId =
+                            this.mService.mRootWindowContainer.anyTaskForId(i, 0, null, false);
                     if (anyTaskForId == null) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return false;
@@ -1066,25 +1305,43 @@ public final class TaskOrganizerController extends ITaskOrganizerController.Stub
         final int callingUid = Binder.getCallingUid();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            Runnable runnable = new Runnable() { // from class: com.android.server.wm.TaskOrganizerController$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    TaskOrganizerController taskOrganizerController = TaskOrganizerController.this;
-                    ITaskOrganizer iTaskOrganizer2 = iTaskOrganizer;
-                    int i = callingUid;
-                    TaskOrganizerController.TaskOrganizerState taskOrganizerState = (TaskOrganizerController.TaskOrganizerState) taskOrganizerController.mTaskOrganizerStates.get(iTaskOrganizer2.asBinder());
-                    if (taskOrganizerState == null) {
-                        return;
-                    }
-                    if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, 1705860547080436016L, 4, null, String.valueOf(iTaskOrganizer2.asBinder()), Long.valueOf(i));
-                    }
-                    taskOrganizerState.mOrganizer.mTaskOrganizer.asBinder().unlinkToDeath(taskOrganizerState.mDeathRecipient, 0);
-                    taskOrganizerState.dispose();
-                }
-            };
-            if (this.mService.mWindowOrganizerController.mTransitionController.isShellTransitionsEnabled()) {
-                this.mService.mWindowOrganizerController.mTransitionController.mRunningLock.runWhenIdle(runnable);
+            Runnable runnable =
+                    new Runnable() { // from class:
+                                     // com.android.server.wm.TaskOrganizerController$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            TaskOrganizerController taskOrganizerController =
+                                    TaskOrganizerController.this;
+                            ITaskOrganizer iTaskOrganizer2 = iTaskOrganizer;
+                            int i = callingUid;
+                            TaskOrganizerController.TaskOrganizerState taskOrganizerState =
+                                    (TaskOrganizerController.TaskOrganizerState)
+                                            taskOrganizerController.mTaskOrganizerStates.get(
+                                                    iTaskOrganizer2.asBinder());
+                            if (taskOrganizerState == null) {
+                                return;
+                            }
+                            if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
+                                ProtoLogImpl_54989576.v(
+                                        ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                        1705860547080436016L,
+                                        4,
+                                        null,
+                                        String.valueOf(iTaskOrganizer2.asBinder()),
+                                        Long.valueOf(i));
+                            }
+                            taskOrganizerState
+                                    .mOrganizer
+                                    .mTaskOrganizer
+                                    .asBinder()
+                                    .unlinkToDeath(taskOrganizerState.mDeathRecipient, 0);
+                            taskOrganizerState.dispose();
+                        }
+                    };
+            if (this.mService.mWindowOrganizerController.mTransitionController
+                    .isShellTransitionsEnabled()) {
+                this.mService.mWindowOrganizerController.mTransitionController.mRunningLock
+                        .runWhenIdle(runnable);
             } else {
                 WindowManagerGlobalLock windowManagerGlobalLock = this.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();

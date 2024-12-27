@@ -2,9 +2,9 @@ package android.database.sqlite.trace;
 
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteUtils;
-import android.database.sqlite.trace.SQLiteTrace;
 import android.util.JsonWriter;
 import android.widget.SemRemoteViewsValueAnimation;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -16,7 +16,8 @@ public class SQLiteTraceJsonExporter extends SQLiteTraceExporter {
     private FileOutputStream mFileOutputStream;
     private JsonWriter mWriter;
 
-    public SQLiteTraceJsonExporter(SQLiteTrace.TraceConfiguration configuration) throws IOException {
+    public SQLiteTraceJsonExporter(SQLiteTrace.TraceConfiguration configuration)
+            throws IOException {
         super(configuration);
     }
 
@@ -76,7 +77,9 @@ public class SQLiteTraceJsonExporter extends SQLiteTraceExporter {
                         this.mWriter.name("value").value(((Number) arg).longValue());
                         break;
                     case 2:
-                        this.mWriter.name("type").value(SemRemoteViewsValueAnimation.VALUE_TYPE_FLOAT);
+                        this.mWriter
+                                .name("type")
+                                .value(SemRemoteViewsValueAnimation.VALUE_TYPE_FLOAT);
                         this.mWriter.name("value").value(((Number) arg).doubleValue());
                         break;
                     case 3:

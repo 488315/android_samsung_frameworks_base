@@ -11,7 +11,8 @@ public final /* synthetic */ class ConnectionHelper$$ExternalSyntheticLambda0 im
     public final /* synthetic */ ConnectionHelper f$0;
     public final /* synthetic */ boolean f$1;
 
-    public /* synthetic */ ConnectionHelper$$ExternalSyntheticLambda0(ConnectionHelper connectionHelper, boolean z) {
+    public /* synthetic */ ConnectionHelper$$ExternalSyntheticLambda0(
+            ConnectionHelper connectionHelper, boolean z) {
         this.f$0 = connectionHelper;
         this.f$1 = z;
     }
@@ -32,7 +33,8 @@ public final /* synthetic */ class ConnectionHelper$$ExternalSyntheticLambda0 im
                 intent.setClassName(connectionHelper.mPackageName, str);
                 intent.putExtras(bundle);
                 Log.i("ConnectionHelper", "(*) bind to service " + str);
-                if (connectionHelper.mContext.bindService(intent, connectionHelper.mConnection, 1)) {
+                if (connectionHelper.mContext.bindService(
+                        intent, connectionHelper.mConnection, 1)) {
                     connectionHelper.resetBindTimer(z);
                     Log.i("ConnectionHelper", "schedule bind timer for 30000 secs");
                     connectionHelper.postDelayed(connectionHelper.mBindRetryRunnable, 30000L);

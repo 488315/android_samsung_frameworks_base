@@ -3,6 +3,7 @@ package com.android.server.pm;
 import android.content.ComponentName;
 import android.content.IntentFilter;
 import android.hardware.biometrics.face.V1_0.OptionalBool$$ExternalSyntheticOutline0;
+
 import com.android.internal.util.XmlUtils;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.modules.utils.TypedXmlPullParser;
@@ -20,7 +21,8 @@ public final class PersistentPreferredActivity extends WatchedIntentFilter {
     public final class AnonymousClass1 extends SnapshotCache {
         @Override // com.android.server.utils.SnapshotCache
         public final Object createSnapshot() {
-            PersistentPreferredActivity persistentPreferredActivity = new PersistentPreferredActivity((PersistentPreferredActivity) this.mSource);
+            PersistentPreferredActivity persistentPreferredActivity =
+                    new PersistentPreferredActivity((PersistentPreferredActivity) this.mSource);
             persistentPreferredActivity.seal();
             return persistentPreferredActivity;
         }
@@ -31,11 +33,18 @@ public final class PersistentPreferredActivity extends WatchedIntentFilter {
         ComponentName unflattenFromString = ComponentName.unflattenFromString(attributeValue);
         this.mComponent = unflattenFromString;
         if (unflattenFromString == null) {
-            String m = CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(typedXmlPullParser, DumpUtils$$ExternalSyntheticOutline0.m("Error in package manager settings: Bad activity name ", attributeValue, " at "));
+            String m =
+                    CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(
+                            typedXmlPullParser,
+                            DumpUtils$$ExternalSyntheticOutline0.m(
+                                    "Error in package manager settings: Bad activity name ",
+                                    attributeValue,
+                                    " at "));
             boolean z = PackageManagerService.DEBUG_COMPRESSION;
             PackageManagerServiceUtils.logCriticalInfo(5, m);
         }
-        this.mIsSetByDpm = typedXmlPullParser.getAttributeBoolean((String) null, "set-by-dpm", false);
+        this.mIsSetByDpm =
+                typedXmlPullParser.getAttributeBoolean((String) null, "set-by-dpm", false);
         int depth = typedXmlPullParser.getDepth();
         String name = typedXmlPullParser.getName();
         while (true) {
@@ -48,7 +57,11 @@ public final class PersistentPreferredActivity extends WatchedIntentFilter {
                 if (name.equals("filter")) {
                     break;
                 }
-                String m2 = CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(typedXmlPullParser, DumpUtils$$ExternalSyntheticOutline0.m("Unknown element: ", name, " at "));
+                String m2 =
+                        CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(
+                                typedXmlPullParser,
+                                DumpUtils$$ExternalSyntheticOutline0.m(
+                                        "Unknown element: ", name, " at "));
                 boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
                 PackageManagerServiceUtils.logCriticalInfo(5, m2);
                 XmlUtils.skipCurrentTag(typedXmlPullParser);
@@ -57,7 +70,9 @@ public final class PersistentPreferredActivity extends WatchedIntentFilter {
         if (name.equals("filter")) {
             this.mFilter.readFromXml(typedXmlPullParser);
         } else {
-            String m3 = CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(typedXmlPullParser, new StringBuilder("Missing element filter at "));
+            String m3 =
+                    CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(
+                            typedXmlPullParser, new StringBuilder("Missing element filter at "));
             boolean z3 = PackageManagerService.DEBUG_COMPRESSION;
             PackageManagerServiceUtils.logCriticalInfo(5, m3);
             XmlUtils.skipCurrentTag(typedXmlPullParser);
@@ -72,7 +87,8 @@ public final class PersistentPreferredActivity extends WatchedIntentFilter {
         this.mSnapshot = new SnapshotCache.Auto();
     }
 
-    public PersistentPreferredActivity(WatchedIntentFilter watchedIntentFilter, ComponentName componentName) {
+    public PersistentPreferredActivity(
+            WatchedIntentFilter watchedIntentFilter, ComponentName componentName) {
         super(watchedIntentFilter.mFilter);
         this.mComponent = componentName;
         this.mIsSetByDpm = true;

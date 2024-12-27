@@ -5,6 +5,7 @@ import android.content.pm.overlay.OverlayPaths;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Pair;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.CollectionUtils;
 import com.android.server.utils.Snappable;
@@ -13,6 +14,7 @@ import com.android.server.utils.Watchable;
 import com.android.server.utils.WatchableImpl;
 import com.android.server.utils.WatchedArrayMap;
 import com.android.server.utils.WatchedArraySet;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -21,7 +23,8 @@ import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class PackageUserStateImpl extends WatchableImpl implements PackageUserStateInternal, Snappable {
+public final class PackageUserStateImpl extends WatchableImpl
+        implements PackageUserStateInternal, Snappable {
     public ArchiveState mArchiveState;
     public int mBooleans;
     public long mCeDataInode;
@@ -50,12 +53,17 @@ public final class PackageUserStateImpl extends WatchableImpl implements Package
         this.mUninstallReason = 0;
         this.mMinAspectRatio = 0;
         this.mWatchable = watchable;
-        this.mSnapshot = new SnapshotCache(this, this) { // from class: com.android.server.pm.pkg.PackageUserStateImpl.1
-            @Override // com.android.server.utils.SnapshotCache
-            public final Object createSnapshot() {
-                return new PackageUserStateImpl(PackageUserStateImpl.this.mWatchable, (PackageUserStateImpl) this.mSource);
-            }
-        };
+        this.mSnapshot =
+                new SnapshotCache(
+                        this,
+                        this) { // from class: com.android.server.pm.pkg.PackageUserStateImpl.1
+                    @Override // com.android.server.utils.SnapshotCache
+                    public final Object createSnapshot() {
+                        return new PackageUserStateImpl(
+                                PackageUserStateImpl.this.mWatchable,
+                                (PackageUserStateImpl) this.mSource);
+                    }
+                };
         setBoolean$1(1, true);
     }
 
@@ -70,9 +78,11 @@ public final class PackageUserStateImpl extends WatchableImpl implements Package
         this.mBooleans = packageUserStateImpl.mBooleans;
         WatchedArraySet watchedArraySet = packageUserStateImpl.mDisabledComponentsWatched;
         WatchedArrayMap watchedArrayMap3 = null;
-        this.mDisabledComponentsWatched = watchedArraySet == null ? null : watchedArraySet.snapshot();
+        this.mDisabledComponentsWatched =
+                watchedArraySet == null ? null : watchedArraySet.snapshot();
         WatchedArraySet watchedArraySet2 = packageUserStateImpl.mEnabledComponentsWatched;
-        this.mEnabledComponentsWatched = watchedArraySet2 == null ? null : watchedArraySet2.snapshot();
+        this.mEnabledComponentsWatched =
+                watchedArraySet2 == null ? null : watchedArraySet2.snapshot();
         this.mOverlayPaths = packageUserStateImpl.mOverlayPaths;
         WatchedArrayMap watchedArrayMap4 = packageUserStateImpl.mSharedLibraryOverlayPaths;
         if (watchedArrayMap4 == null) {
@@ -124,7 +134,34 @@ public final class PackageUserStateImpl extends WatchableImpl implements Package
             return false;
         }
         PackageUserStateImpl packageUserStateImpl = (PackageUserStateImpl) obj;
-        return this.mBooleans == packageUserStateImpl.mBooleans && Objects.equals(this.mDisabledComponentsWatched, packageUserStateImpl.mDisabledComponentsWatched) && Objects.equals(this.mEnabledComponentsWatched, packageUserStateImpl.mEnabledComponentsWatched) && this.mCeDataInode == packageUserStateImpl.mCeDataInode && this.mDeDataInode == packageUserStateImpl.mDeDataInode && this.mDistractionFlags == packageUserStateImpl.mDistractionFlags && this.mEnabledState == packageUserStateImpl.mEnabledState && this.mInstallReason == packageUserStateImpl.mInstallReason && this.mUninstallReason == packageUserStateImpl.mUninstallReason && Objects.equals(this.mHarmfulAppWarning, packageUserStateImpl.mHarmfulAppWarning) && Objects.equals(this.mLastDisableAppCaller, packageUserStateImpl.mLastDisableAppCaller) && Objects.equals(this.mOverlayPaths, packageUserStateImpl.mOverlayPaths) && Objects.equals(this.mSharedLibraryOverlayPaths, packageUserStateImpl.mSharedLibraryOverlayPaths) && Objects.equals(this.mSplashScreenTheme, packageUserStateImpl.mSplashScreenTheme) && this.mMinAspectRatio == packageUserStateImpl.mMinAspectRatio && Objects.equals(this.mSuspendParams, packageUserStateImpl.mSuspendParams) && Objects.equals(this.mComponentLabelIconOverrideMap, packageUserStateImpl.mComponentLabelIconOverrideMap) && this.mFirstInstallTimeMillis == packageUserStateImpl.mFirstInstallTimeMillis && Objects.equals(this.mArchiveState, packageUserStateImpl.mArchiveState);
+        return this.mBooleans == packageUserStateImpl.mBooleans
+                && Objects.equals(
+                        this.mDisabledComponentsWatched,
+                        packageUserStateImpl.mDisabledComponentsWatched)
+                && Objects.equals(
+                        this.mEnabledComponentsWatched,
+                        packageUserStateImpl.mEnabledComponentsWatched)
+                && this.mCeDataInode == packageUserStateImpl.mCeDataInode
+                && this.mDeDataInode == packageUserStateImpl.mDeDataInode
+                && this.mDistractionFlags == packageUserStateImpl.mDistractionFlags
+                && this.mEnabledState == packageUserStateImpl.mEnabledState
+                && this.mInstallReason == packageUserStateImpl.mInstallReason
+                && this.mUninstallReason == packageUserStateImpl.mUninstallReason
+                && Objects.equals(this.mHarmfulAppWarning, packageUserStateImpl.mHarmfulAppWarning)
+                && Objects.equals(
+                        this.mLastDisableAppCaller, packageUserStateImpl.mLastDisableAppCaller)
+                && Objects.equals(this.mOverlayPaths, packageUserStateImpl.mOverlayPaths)
+                && Objects.equals(
+                        this.mSharedLibraryOverlayPaths,
+                        packageUserStateImpl.mSharedLibraryOverlayPaths)
+                && Objects.equals(this.mSplashScreenTheme, packageUserStateImpl.mSplashScreenTheme)
+                && this.mMinAspectRatio == packageUserStateImpl.mMinAspectRatio
+                && Objects.equals(this.mSuspendParams, packageUserStateImpl.mSuspendParams)
+                && Objects.equals(
+                        this.mComponentLabelIconOverrideMap,
+                        packageUserStateImpl.mComponentLabelIconOverrideMap)
+                && this.mFirstInstallTimeMillis == packageUserStateImpl.mFirstInstallTimeMillis
+                && Objects.equals(this.mArchiveState, packageUserStateImpl.mArchiveState);
     }
 
     @Override // com.android.server.pm.pkg.PackageUserState
@@ -257,7 +294,77 @@ public final class PackageUserStateImpl extends WatchableImpl implements Package
     }
 
     public final int hashCode() {
-        return (Objects.hashCode(this.mArchiveState) + ((Long.hashCode(this.mFirstInstallTimeMillis) + ((Objects.hashCode(this.mComponentLabelIconOverrideMap) + ((Objects.hashCode(this.mSuspendParams) + ((((Objects.hashCode(this.mSplashScreenTheme) + ((Objects.hashCode(this.mSharedLibraryOverlayPaths) + ((Objects.hashCode(this.mOverlayPaths) + ((Objects.hashCode(this.mLastDisableAppCaller) + ((Objects.hashCode(this.mHarmfulAppWarning) + ((((((((((Long.hashCode(this.mDeDataInode) + ((Long.hashCode(this.mCeDataInode) + ((Objects.hashCode(this.mEnabledComponentsWatched) + ((Objects.hashCode(this.mDisabledComponentsWatched) + ((this.mBooleans + 31) * 31)) * 31)) * 31)) * 31)) * 31) + this.mDistractionFlags) * 31) + this.mEnabledState) * 31) + this.mInstallReason) * 31) + this.mUninstallReason) * 31)) * 31)) * 31)) * 31)) * 31)) * 31) + this.mMinAspectRatio) * 31)) * 31)) * 31)) * 961)) * 31;
+        return (Objects.hashCode(this.mArchiveState)
+                        + ((Long.hashCode(this.mFirstInstallTimeMillis)
+                                        + ((Objects.hashCode(this.mComponentLabelIconOverrideMap)
+                                                        + ((Objects.hashCode(this.mSuspendParams)
+                                                                        + ((((Objects.hashCode(
+                                                                                                                this
+                                                                                                                        .mSplashScreenTheme)
+                                                                                                        + ((Objects
+                                                                                                                                .hashCode(
+                                                                                                                                        this
+                                                                                                                                                .mSharedLibraryOverlayPaths)
+                                                                                                                        + ((Objects
+                                                                                                                                                .hashCode(
+                                                                                                                                                        this
+                                                                                                                                                                .mOverlayPaths)
+                                                                                                                                        + ((Objects
+                                                                                                                                                                .hashCode(
+                                                                                                                                                                        this
+                                                                                                                                                                                .mLastDisableAppCaller)
+                                                                                                                                                        + ((Objects
+                                                                                                                                                                                .hashCode(
+                                                                                                                                                                                        this
+                                                                                                                                                                                                .mHarmfulAppWarning)
+                                                                                                                                                                        + ((((((((((Long
+                                                                                                                                                                                                                                                                .hashCode(
+                                                                                                                                                                                                                                                                        this
+                                                                                                                                                                                                                                                                                .mDeDataInode)
+                                                                                                                                                                                                                                                        + ((Long
+                                                                                                                                                                                                                                                                                .hashCode(
+                                                                                                                                                                                                                                                                                        this
+                                                                                                                                                                                                                                                                                                .mCeDataInode)
+                                                                                                                                                                                                                                                                        + ((Objects
+                                                                                                                                                                                                                                                                                                .hashCode(
+                                                                                                                                                                                                                                                                                                        this
+                                                                                                                                                                                                                                                                                                                .mEnabledComponentsWatched)
+                                                                                                                                                                                                                                                                                        + ((Objects
+                                                                                                                                                                                                                                                                                                                .hashCode(
+                                                                                                                                                                                                                                                                                                                        this
+                                                                                                                                                                                                                                                                                                                                .mDisabledComponentsWatched)
+                                                                                                                                                                                                                                                                                                        + ((this
+                                                                                                                                                                                                                                                                                                                                .mBooleans
+                                                                                                                                                                                                                                                                                                                        + 31)
+                                                                                                                                                                                                                                                                                                                * 31))
+                                                                                                                                                                                                                                                                                                * 31))
+                                                                                                                                                                                                                                                                                * 31))
+                                                                                                                                                                                                                                                                * 31))
+                                                                                                                                                                                                                                                * 31)
+                                                                                                                                                                                                                                        + this
+                                                                                                                                                                                                                                                .mDistractionFlags)
+                                                                                                                                                                                                                                * 31)
+                                                                                                                                                                                                                        + this
+                                                                                                                                                                                                                                .mEnabledState)
+                                                                                                                                                                                                                * 31)
+                                                                                                                                                                                                        + this
+                                                                                                                                                                                                                .mInstallReason)
+                                                                                                                                                                                                * 31)
+                                                                                                                                                                                        + this
+                                                                                                                                                                                                .mUninstallReason)
+                                                                                                                                                                                * 31))
+                                                                                                                                                                * 31))
+                                                                                                                                                * 31))
+                                                                                                                                * 31))
+                                                                                                                * 31))
+                                                                                                * 31)
+                                                                                        + this
+                                                                                                .mMinAspectRatio)
+                                                                                * 31))
+                                                                * 31))
+                                                * 31))
+                                * 961))
+                * 31;
     }
 
     @Override // com.android.server.pm.pkg.PackageUserState
@@ -335,7 +442,8 @@ public final class PackageUserStateImpl extends WatchableImpl implements Package
         String str2;
         Pair pair;
         WatchedArrayMap watchedArrayMap = this.mComponentLabelIconOverrideMap;
-        if (watchedArrayMap == null || (pair = (Pair) watchedArrayMap.mStorage.get(componentName)) == null) {
+        if (watchedArrayMap == null
+                || (pair = (Pair) watchedArrayMap.mStorage.get(componentName)) == null) {
             num2 = null;
             str2 = null;
         } else {
@@ -406,7 +514,8 @@ public final class PackageUserStateImpl extends WatchableImpl implements Package
             this.mSharedLibraryOverlayPaths = watchedArrayMap;
             watchedArrayMap.registerObserver(this.mSnapshot);
         }
-        if (Objects.equals(overlayPaths, (OverlayPaths) this.mSharedLibraryOverlayPaths.mStorage.get(str))) {
+        if (Objects.equals(
+                overlayPaths, (OverlayPaths) this.mSharedLibraryOverlayPaths.mStorage.get(str))) {
             return false;
         }
         if (overlayPaths == null || overlayPaths.isEmpty()) {

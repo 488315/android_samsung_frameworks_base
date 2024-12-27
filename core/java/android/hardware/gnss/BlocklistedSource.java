@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class BlocklistedSource implements Parcelable {
-    public static final Parcelable.Creator<BlocklistedSource> CREATOR = new Parcelable.Creator<BlocklistedSource>() { // from class: android.hardware.gnss.BlocklistedSource.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BlocklistedSource createFromParcel(Parcel _aidl_source) {
-            BlocklistedSource _aidl_out = new BlocklistedSource();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<BlocklistedSource> CREATOR =
+            new Parcelable.Creator<
+                    BlocklistedSource>() { // from class: android.hardware.gnss.BlocklistedSource.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BlocklistedSource createFromParcel(Parcel _aidl_source) {
+                    BlocklistedSource _aidl_out = new BlocklistedSource();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BlocklistedSource[] newArray(int _aidl_size) {
-            return new BlocklistedSource[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BlocklistedSource[] newArray(int _aidl_size) {
+                    return new BlocklistedSource[_aidl_size];
+                }
+            };
     public int constellation = 0;
     public int svid = 0;
 

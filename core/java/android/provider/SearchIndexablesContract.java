@@ -37,15 +37,46 @@ public class SearchIndexablesContract {
     public static final String INDEXABLES_XML_RES_PATH = "settings/indexables_xml_res";
     public static final String NON_INDEXABLES_KEYS = "non_indexables_key";
     public static final String NON_INDEXABLES_KEYS_PATH = "settings/non_indexables_key";
-    public static final String PROVIDER_INTERFACE = "android.content.action.SEARCH_INDEXABLES_PROVIDER";
+    public static final String PROVIDER_INTERFACE =
+            "android.content.action.SEARCH_INDEXABLES_PROVIDER";
     private static final String SETTINGS = "settings";
     public static final String SITE_MAP_PAIRS_KEYS = "site_map_pairs";
     public static final String SITE_MAP_PAIRS_PATH = "settings/site_map_pairs";
     public static final String SLICE_URI_PAIRS = "slice_uri_pairs";
     public static final String SLICE_URI_PAIRS_PATH = "settings/slice_uri_pairs";
-    public static final String[] INDEXABLES_XML_RES_COLUMNS = {BaseColumns.COLUMN_RANK, XmlResource.COLUMN_XML_RESID, BaseColumns.COLUMN_CLASS_NAME, "iconResId", BaseColumns.COLUMN_INTENT_ACTION, BaseColumns.COLUMN_INTENT_TARGET_PACKAGE, BaseColumns.COLUMN_INTENT_TARGET_CLASS};
-    public static final String[] INDEXABLES_RAW_COLUMNS = {BaseColumns.COLUMN_RANK, "title", RawData.COLUMN_SUMMARY_ON, RawData.COLUMN_SUMMARY_OFF, RawData.COLUMN_ENTRIES, "keywords", RawData.COLUMN_SCREEN_TITLE, BaseColumns.COLUMN_CLASS_NAME, "iconResId", BaseColumns.COLUMN_INTENT_ACTION, BaseColumns.COLUMN_INTENT_TARGET_PACKAGE, BaseColumns.COLUMN_INTENT_TARGET_CLASS, "key", "user_id", RawData.PAYLOAD_TYPE, RawData.PAYLOAD};
-    public static final String[] SITE_MAP_COLUMNS = {SiteMapColumns.PARENT_CLASS, SiteMapColumns.PARENT_TITLE, SiteMapColumns.CHILD_CLASS, SiteMapColumns.CHILD_TITLE};
+    public static final String[] INDEXABLES_XML_RES_COLUMNS = {
+        BaseColumns.COLUMN_RANK,
+        XmlResource.COLUMN_XML_RESID,
+        BaseColumns.COLUMN_CLASS_NAME,
+        "iconResId",
+        BaseColumns.COLUMN_INTENT_ACTION,
+        BaseColumns.COLUMN_INTENT_TARGET_PACKAGE,
+        BaseColumns.COLUMN_INTENT_TARGET_CLASS
+    };
+    public static final String[] INDEXABLES_RAW_COLUMNS = {
+        BaseColumns.COLUMN_RANK,
+        "title",
+        RawData.COLUMN_SUMMARY_ON,
+        RawData.COLUMN_SUMMARY_OFF,
+        RawData.COLUMN_ENTRIES,
+        "keywords",
+        RawData.COLUMN_SCREEN_TITLE,
+        BaseColumns.COLUMN_CLASS_NAME,
+        "iconResId",
+        BaseColumns.COLUMN_INTENT_ACTION,
+        BaseColumns.COLUMN_INTENT_TARGET_PACKAGE,
+        BaseColumns.COLUMN_INTENT_TARGET_CLASS,
+        "key",
+        "user_id",
+        RawData.PAYLOAD_TYPE,
+        RawData.PAYLOAD
+    };
+    public static final String[] SITE_MAP_COLUMNS = {
+        SiteMapColumns.PARENT_CLASS,
+        SiteMapColumns.PARENT_TITLE,
+        SiteMapColumns.CHILD_CLASS,
+        SiteMapColumns.CHILD_TITLE
+    };
     public static final String[] NON_INDEXABLES_KEYS_COLUMNS = {"key"};
     public static final String[] SLICE_URI_PAIRS_COLUMNS = {"key", "slice_uri"};
 
@@ -60,8 +91,7 @@ public class SearchIndexablesContract {
         public static final String KEY = "key";
         public static final String SLICE_URI = "slice_uri";
 
-        private SliceUriPairColumns() {
-        }
+        private SliceUriPairColumns() {}
     }
 
     public static final class XmlResource extends BaseColumns {
@@ -108,7 +138,6 @@ public class SearchIndexablesContract {
         public static final String COLUMN_INTENT_TARGET_PACKAGE = "intentTargetPackage";
         public static final String COLUMN_RANK = "rank";
 
-        private BaseColumns() {
-        }
+        private BaseColumns() {}
     }
 }

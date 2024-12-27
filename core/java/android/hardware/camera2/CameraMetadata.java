@@ -1,13 +1,11 @@
 package android.hardware.camera2;
 
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CaptureRequest;
-import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.impl.CameraMetadataNative;
 import android.hardware.camera2.impl.ExtensionKey;
 import android.hardware.camera2.impl.PublicKey;
 import android.hardware.camera2.impl.SyntheticKey;
 import android.sec.enterprise.proxy.EnterpriseProxyConstants;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -146,8 +144,7 @@ public abstract class CameraMetadata<TKey> {
     public static final int CONTROL_SCENE_MODE_FIREWORKS = 12;
     public static final int CONTROL_SCENE_MODE_HDR = 18;
 
-    @Deprecated
-    public static final int CONTROL_SCENE_MODE_HIGH_SPEED_VIDEO = 17;
+    @Deprecated public static final int CONTROL_SCENE_MODE_HIGH_SPEED_VIDEO = 17;
     public static final int CONTROL_SCENE_MODE_LANDSCAPE = 4;
     public static final int CONTROL_SCENE_MODE_NIGHT = 5;
     public static final int CONTROL_SCENE_MODE_NIGHT_PORTRAIT = 6;
@@ -235,14 +232,22 @@ public abstract class CameraMetadata<TKey> {
     public static final int REQUEST_AVAILABLE_CAPABILITIES_ULTRA_HIGH_RESOLUTION_SENSOR = 16;
     public static final int REQUEST_AVAILABLE_CAPABILITIES_YUV_REPROCESSING = 7;
     public static final int REQUEST_AVAILABLE_COLOR_SPACE_PROFILES_MAP_UNSPECIFIED = -1;
-    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_10B_HDR_OEM = 64;
-    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_10B_HDR_OEM_PO = 128;
-    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_10B_HDR_REF = 16;
-    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_10B_HDR_REF_PO = 32;
-    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_8B_HDR_OEM = 1024;
-    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_8B_HDR_OEM_PO = 2048;
-    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_8B_HDR_REF = 256;
-    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_8B_HDR_REF_PO = 512;
+    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_10B_HDR_OEM =
+            64;
+    public static final int
+            REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_10B_HDR_OEM_PO = 128;
+    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_10B_HDR_REF =
+            16;
+    public static final int
+            REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_10B_HDR_REF_PO = 32;
+    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_8B_HDR_OEM =
+            1024;
+    public static final int
+            REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_8B_HDR_OEM_PO = 2048;
+    public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_8B_HDR_REF =
+            256;
+    public static final int
+            REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_DOLBY_VISION_8B_HDR_REF_PO = 512;
     public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_HDR10 = 4;
     public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_HDR10_PLUS = 8;
     public static final int REQUEST_AVAILABLE_DYNAMIC_RANGE_PROFILES_MAP_HLG10 = 2;
@@ -334,8 +339,7 @@ public abstract class CameraMetadata<TKey> {
 
     protected abstract <T> T getProtected(TKey tkey);
 
-    protected CameraMetadata() {
-    }
+    protected CameraMetadata() {}
 
     protected void setNativeInstance(CameraMetadataNative nativeInstance) {
         this.mNativeInstance = nativeInstance;
@@ -357,7 +361,12 @@ public abstract class CameraMetadata<TKey> {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    <TKey> ArrayList<TKey> getKeys(Class<?> cls, Class<TKey> cls2, CameraMetadata<TKey> cameraMetadata, int[] iArr, boolean z) {
+    <TKey> ArrayList<TKey> getKeys(
+            Class<?> cls,
+            Class<TKey> cls2,
+            CameraMetadata<TKey> cameraMetadata,
+            int[] iArr,
+            boolean z) {
         String name;
         long vendorId;
         if (cls.equals(TotalCaptureResult.class)) {
@@ -366,12 +375,14 @@ public abstract class CameraMetadata<TKey> {
         if (iArr != null) {
             Arrays.sort(iArr);
         }
-        EnterpriseProxyConstants.AnonymousClass1 anonymousClass1 = (ArrayList<TKey>) new ArrayList();
+        EnterpriseProxyConstants.AnonymousClass1 anonymousClass1 =
+                (ArrayList<TKey>) new ArrayList();
         for (Field field : cls.getDeclaredFields()) {
             if (field.getType().isAssignableFrom(cls2) && (field.getModifiers() & 1) != 0) {
                 try {
                     Object obj = field.get(cameraMetadata);
-                    if ((cameraMetadata == 0 || cameraMetadata.getProtected(obj) != null) && shouldKeyBeAdded(obj, field, iArr, z)) {
+                    if ((cameraMetadata == 0 || cameraMetadata.getProtected(obj) != null)
+                            && shouldKeyBeAdded(obj, field, iArr, z)) {
                         anonymousClass1.add(obj);
                     }
                 } catch (IllegalAccessException e) {
@@ -399,7 +410,9 @@ public abstract class CameraMetadata<TKey> {
                     name = ((CameraCharacteristics.Key) next).getName();
                     vendorId = ((CameraCharacteristics.Key) next).getVendorId();
                 }
-                if (iArr == null || Arrays.binarySearch(iArr, CameraMetadataNative.getTag(name, vendorId)) >= 0) {
+                if (iArr == null
+                        || Arrays.binarySearch(iArr, CameraMetadataNative.getTag(name, vendorId))
+                                >= 0) {
                     if (cameraMetadata == 0 || cameraMetadata.getProtected(next) != null) {
                         anonymousClass1.add(next);
                     }
@@ -410,7 +423,8 @@ public abstract class CameraMetadata<TKey> {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private static <TKey> boolean shouldKeyBeAdded(TKey tkey, Field field, int[] filterTags, boolean includeSynthetic) {
+    private static <TKey> boolean shouldKeyBeAdded(
+            TKey tkey, Field field, int[] filterTags, boolean includeSynthetic) {
         CameraMetadataNative.Key nativeKey;
         if (tkey == 0) {
             throw new NullPointerException("key must not be null");
@@ -424,7 +438,8 @@ public abstract class CameraMetadata<TKey> {
         } else {
             throw new IllegalArgumentException("key type must be that of a metadata key");
         }
-        if (field.getAnnotation(PublicKey.class) == null && field.getAnnotation(ExtensionKey.class) == null) {
+        if (field.getAnnotation(PublicKey.class) == null
+                && field.getAnnotation(ExtensionKey.class) == null) {
             return false;
         }
         if (filterTags == null) {

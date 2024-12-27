@@ -1,6 +1,5 @@
 package com.android.internal.dynamicanimation.animation;
 
-import com.android.internal.dynamicanimation.animation.DynamicAnimation;
 
 /* loaded from: classes5.dex */
 public final class FlingAnimation extends DynamicAnimation<FlingAnimation> {
@@ -44,7 +43,8 @@ public final class FlingAnimation extends DynamicAnimation<FlingAnimation> {
 
     @Override // com.android.internal.dynamicanimation.animation.DynamicAnimation
     boolean updateValueAndVelocity(long deltaT) {
-        DynamicAnimation.MassState state = this.mFlingForce.updateValueAndVelocity(this.mValue, this.mVelocity, deltaT);
+        DynamicAnimation.MassState state =
+                this.mFlingForce.updateValueAndVelocity(this.mValue, this.mVelocity, deltaT);
         this.mValue = state.mValue;
         this.mVelocity = state.mVelocity;
         if (this.mValue < this.mMinValue) {
@@ -65,7 +65,9 @@ public final class FlingAnimation extends DynamicAnimation<FlingAnimation> {
 
     @Override // com.android.internal.dynamicanimation.animation.DynamicAnimation
     boolean isAtEquilibrium(float value, float velocity) {
-        return value >= this.mMaxValue || value <= this.mMinValue || this.mFlingForce.isAtEquilibrium(value, velocity);
+        return value >= this.mMaxValue
+                || value <= this.mMinValue
+                || this.mFlingForce.isAtEquilibrium(value, velocity);
     }
 
     @Override // com.android.internal.dynamicanimation.animation.DynamicAnimation
@@ -93,9 +95,15 @@ public final class FlingAnimation extends DynamicAnimation<FlingAnimation> {
             return this.mFriction / DEFAULT_FRICTION;
         }
 
-        DynamicAnimation.MassState updateValueAndVelocity(float value, float velocity, long deltaT) {
-            this.mMassState.mVelocity = (float) (velocity * Math.exp((deltaT / 1000.0f) * this.mFriction));
-            this.mMassState.mValue = (float) ((value - (velocity / this.mFriction)) + ((velocity / this.mFriction) * Math.exp((this.mFriction * deltaT) / 1000.0f)));
+        DynamicAnimation.MassState updateValueAndVelocity(
+                float value, float velocity, long deltaT) {
+            this.mMassState.mVelocity =
+                    (float) (velocity * Math.exp((deltaT / 1000.0f) * this.mFriction));
+            this.mMassState.mValue =
+                    (float)
+                            ((value - (velocity / this.mFriction))
+                                    + ((velocity / this.mFriction)
+                                            * Math.exp((this.mFriction * deltaT) / 1000.0f)));
             if (isAtEquilibrium(this.mMassState.mValue, this.mMassState.mVelocity)) {
                 this.mMassState.mVelocity = 0.0f;
             }

@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioProfile implements Parcelable {
-    public static final Parcelable.Creator<AudioProfile> CREATOR = new Parcelable.Creator<AudioProfile>() { // from class: android.media.audio.common.AudioProfile.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioProfile createFromParcel(Parcel _aidl_source) {
-            AudioProfile _aidl_out = new AudioProfile();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioProfile> CREATOR =
+            new Parcelable.Creator<
+                    AudioProfile>() { // from class: android.media.audio.common.AudioProfile.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioProfile createFromParcel(Parcel _aidl_source) {
+                    AudioProfile _aidl_out = new AudioProfile();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioProfile[] newArray(int _aidl_size) {
-            return new AudioProfile[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioProfile[] newArray(int _aidl_size) {
+                    return new AudioProfile[_aidl_size];
+                }
+            };
     public AudioChannelLayout[] channelMasks;
     public int encapsulationType = 0;
     public AudioFormatDescription format;
@@ -72,7 +75,9 @@ public class AudioProfile implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.format = (AudioFormatDescription) _aidl_parcel.readTypedObject(AudioFormatDescription.CREATOR);
+            this.format =
+                    (AudioFormatDescription)
+                            _aidl_parcel.readTypedObject(AudioFormatDescription.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -80,7 +85,9 @@ public class AudioProfile implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.channelMasks = (AudioChannelLayout[]) _aidl_parcel.createTypedArray(AudioChannelLayout.CREATOR);
+            this.channelMasks =
+                    (AudioChannelLayout[])
+                            _aidl_parcel.createTypedArray(AudioChannelLayout.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -128,14 +135,27 @@ public class AudioProfile implements Parcelable {
             return false;
         }
         AudioProfile that = (AudioProfile) other;
-        if (Objects.deepEquals(this.name, that.name) && Objects.deepEquals(this.format, that.format) && Objects.deepEquals(this.channelMasks, that.channelMasks) && Objects.deepEquals(this.sampleRates, that.sampleRates) && Objects.deepEquals(Integer.valueOf(this.encapsulationType), Integer.valueOf(that.encapsulationType))) {
+        if (Objects.deepEquals(this.name, that.name)
+                && Objects.deepEquals(this.format, that.format)
+                && Objects.deepEquals(this.channelMasks, that.channelMasks)
+                && Objects.deepEquals(this.sampleRates, that.sampleRates)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.encapsulationType),
+                        Integer.valueOf(that.encapsulationType))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.name, this.format, this.channelMasks, this.sampleRates, Integer.valueOf(this.encapsulationType)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.name,
+                                this.format,
+                                this.channelMasks,
+                                this.sampleRates,
+                                Integer.valueOf(this.encapsulationType))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

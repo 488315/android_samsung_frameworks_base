@@ -7,25 +7,19 @@ import java.lang.annotation.RetentionPolicy;
 public interface ComponentCallbacks2 extends ComponentCallbacks {
     public static final int TRIM_MEMORY_BACKGROUND = 40;
 
-    @Deprecated
-    public static final int TRIM_MEMORY_COMPLETE = 80;
+    @Deprecated public static final int TRIM_MEMORY_COMPLETE = 80;
 
-    @Deprecated
-    public static final int TRIM_MEMORY_MODERATE = 60;
+    @Deprecated public static final int TRIM_MEMORY_MODERATE = 60;
 
-    @Deprecated
-    public static final int TRIM_MEMORY_RUNNING_CRITICAL = 15;
+    @Deprecated public static final int TRIM_MEMORY_RUNNING_CRITICAL = 15;
 
-    @Deprecated
-    public static final int TRIM_MEMORY_RUNNING_LOW = 10;
+    @Deprecated public static final int TRIM_MEMORY_RUNNING_LOW = 10;
 
-    @Deprecated
-    public static final int TRIM_MEMORY_RUNNING_MODERATE = 5;
+    @Deprecated public static final int TRIM_MEMORY_RUNNING_MODERATE = 5;
     public static final int TRIM_MEMORY_UI_HIDDEN = 20;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TrimMemoryLevel {
-    }
+    public @interface TrimMemoryLevel {}
 
     void onTrimMemory(int i);
 }

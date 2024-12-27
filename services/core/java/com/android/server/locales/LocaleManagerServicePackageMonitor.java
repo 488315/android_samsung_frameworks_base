@@ -12,7 +12,9 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.internal.content.PackageMonitor;
+
 import java.io.File;
 import java.util.HashSet;
 
@@ -29,9 +31,12 @@ public final class LocaleManagerServicePackageMonitor extends PackageMonitor {
         int userId = UserHandle.getUserId(i);
         if (bundle != null && bundle.getBoolean("android.intent.extra.ARCHIVAL", false)) {
             String num = Integer.toString(userId);
-            SharedPreferences archivedPackagesSp = localeManagerBackupHelper.getArchivedPackagesSp(localeManagerBackupHelper.getArchivedPackagesFile());
+            SharedPreferences archivedPackagesSp =
+                    localeManagerBackupHelper.getArchivedPackagesSp(
+                            localeManagerBackupHelper.getArchivedPackagesFile());
             ArraySet arraySet = new ArraySet(archivedPackagesSp.getStringSet(num, new ArraySet()));
-            if (arraySet.add(str) && !archivedPackagesSp.edit().putStringSet(num, arraySet).commit()) {
+            if (arraySet.add(str)
+                    && !archivedPackagesSp.edit().putStringSet(num, arraySet).commit()) {
                 Slog.e("LocaleManagerBkpHelper", "failed to add the package");
             }
         }
@@ -77,7 +82,8 @@ public final class LocaleManagerServicePackageMonitor extends PackageMonitor {
         String num = Integer.toString(userId);
         File archivedPackagesFile = localeManagerBackupHelper.getArchivedPackagesFile();
         if (archivedPackagesFile.exists()) {
-            SharedPreferences archivedPackagesSp = localeManagerBackupHelper.getArchivedPackagesSp(archivedPackagesFile);
+            SharedPreferences archivedPackagesSp =
+                    localeManagerBackupHelper.getArchivedPackagesSp(archivedPackagesFile);
             ArraySet arraySet = new ArraySet(archivedPackagesSp.getStringSet(num, new ArraySet()));
             if (arraySet.remove(str)) {
                 SharedPreferences.Editor edit = archivedPackagesSp.edit();
@@ -98,14 +104,26 @@ public final class LocaleManagerServicePackageMonitor extends PackageMonitor {
         if (localeManagerBackupHelper.mDelegateAppLocalePackages == null) {
             Slog.w("LocaleManagerBkpHelper", "Failed to persist data into the shared preference!");
         } else {
-            ArraySet arraySet2 = new ArraySet(localeManagerBackupHelper.mDelegateAppLocalePackages.getStringSet(Integer.toString(userId), new ArraySet()));
+            ArraySet arraySet2 =
+                    new ArraySet(
+                            localeManagerBackupHelper.mDelegateAppLocalePackages.getStringSet(
+                                    Integer.toString(userId), new ArraySet()));
             try {
                 if (!localeManagerService.getApplicationLocales(str, userId).isEmpty()) {
                     if (arraySet2.contains(str)) {
                         try {
-                            localeManagerService.removeUnsupportedAppLocales(str, userId, new LocaleConfig(localeManagerBackupHelper.mContext.createPackageContextAsUser(str, 0, UserHandle.of(userId))), 4);
+                            localeManagerService.removeUnsupportedAppLocales(
+                                    str,
+                                    userId,
+                                    new LocaleConfig(
+                                            localeManagerBackupHelper.mContext
+                                                    .createPackageContextAsUser(
+                                                            str, 0, UserHandle.of(userId))),
+                                    4);
                         } catch (PackageManager.NameNotFoundException e) {
-                            Slog.e("LocaleManagerBkpHelper", "Can not found the package name : " + str + " / " + e);
+                            Slog.e(
+                                    "LocaleManagerBkpHelper",
+                                    "Can not found the package name : " + str + " / " + e);
                         }
                     }
                 }
@@ -120,7 +138,12 @@ public final class LocaleManagerServicePackageMonitor extends PackageMonitor {
                 return;
             }
             try {
-                applicationInfo = systemAppUpdateTracker.mContext.getPackageManager().getApplicationInfo(str, PackageManager.ApplicationInfoFlags.of(1048576L));
+                applicationInfo =
+                        systemAppUpdateTracker
+                                .mContext
+                                .getPackageManager()
+                                .getApplicationInfo(
+                                        str, PackageManager.ApplicationInfoFlags.of(1048576L));
             } catch (PackageManager.NameNotFoundException unused) {
                 applicationInfo = null;
             }
@@ -132,11 +155,21 @@ public final class LocaleManagerServicePackageMonitor extends PackageMonitor {
                 return;
             }
             try {
-                LocaleList applicationLocales = localeManagerService2.getApplicationLocales(str, userId2);
-                if (!applicationLocales.isEmpty() && (installingPackageName = localeManagerService2.getInstallingPackageName(userId2, str)) != null) {
-                    Intent createBaseIntent = LocaleManagerService.createBaseIntent("android.intent.action.APPLICATION_LOCALE_CHANGED", str, applicationLocales);
+                LocaleList applicationLocales =
+                        localeManagerService2.getApplicationLocales(str, userId2);
+                if (!applicationLocales.isEmpty()
+                        && (installingPackageName =
+                                        localeManagerService2.getInstallingPackageName(
+                                                userId2, str))
+                                != null) {
+                    Intent createBaseIntent =
+                            LocaleManagerService.createBaseIntent(
+                                    "android.intent.action.APPLICATION_LOCALE_CHANGED",
+                                    str,
+                                    applicationLocales);
                     createBaseIntent.setPackage(installingPackageName);
-                    localeManagerService2.mContext.sendBroadcastAsUser(createBaseIntent, UserHandle.of(userId2));
+                    localeManagerService2.mContext.sendBroadcastAsUser(
+                            createBaseIntent, UserHandle.of(userId2));
                 }
             } catch (RemoteException unused2) {
             }

@@ -1,6 +1,7 @@
 package android.internal.framework.protobuf.nano;
 
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.io.IOException;
 
 /* loaded from: classes2.dex */
@@ -245,7 +246,14 @@ public final class CodedInputByteBufferNano {
         byte b6 = readRawByte();
         byte b7 = readRawByte();
         byte b8 = readRawByte();
-        return (b1 & 255) | ((b2 & 255) << 8) | ((b3 & 255) << 16) | ((b4 & 255) << 24) | ((b5 & 255) << 32) | ((b6 & 255) << 40) | ((b7 & 255) << 48) | ((255 & b8) << 56);
+        return (b1 & 255)
+                | ((b2 & 255) << 8)
+                | ((b3 & 255) << 16)
+                | ((b4 & 255) << 24)
+                | ((b5 & 255) << 32)
+                | ((b6 & 255) << 40)
+                | ((b7 & 255) << 48)
+                | ((255 & b8) << 56);
     }
 
     public static int decodeZigZag32(int n) {
@@ -281,8 +289,7 @@ public final class CodedInputByteBufferNano {
         return oldLimit;
     }
 
-    public void resetSizeCounter() {
-    }
+    public void resetSizeCounter() {}
 
     public int pushLimit(int byteLimit) throws InvalidProtocolBufferNanoException {
         if (byteLimit < 0) {
@@ -342,7 +349,11 @@ public final class CodedInputByteBufferNano {
 
     public void rewindToPosition(int position) {
         if (position > this.bufferPos - this.bufferStart) {
-            throw new IllegalArgumentException("Position " + position + " is beyond current " + (this.bufferPos - this.bufferStart));
+            throw new IllegalArgumentException(
+                    "Position "
+                            + position
+                            + " is beyond current "
+                            + (this.bufferPos - this.bufferStart));
         }
         if (position < 0) {
             throw new IllegalArgumentException("Bad position " + position);

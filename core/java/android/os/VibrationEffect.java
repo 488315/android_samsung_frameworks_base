@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.os.Parcelable;
 import android.os.vibrator.PrebakedSegment;
 import android.os.vibrator.PrimitiveSegment;
 import android.os.vibrator.RampSegment;
@@ -13,9 +12,12 @@ import android.os.vibrator.StepSegment;
 import android.os.vibrator.VibrationEffectSegment;
 import android.provider.TimeZoneRulesDataContract;
 import android.util.MathUtils;
+
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.vibrator.SemHapticFeedbackConstants;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.Duration;
@@ -47,23 +49,23 @@ public abstract class VibrationEffect implements Parcelable {
     protected int mMagnitude = -1;
     protected SemMagnitudeType mMagnitudeType = SemMagnitudeType.TYPE_EXTRA;
     public static final int[] RINGTONES = {6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
-    public static final Parcelable.Creator<VibrationEffect> CREATOR = new Parcelable.Creator<VibrationEffect>() { // from class: android.os.VibrationEffect.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VibrationEffect createFromParcel(Parcel in) {
-            return new Composed(in);
-        }
+    public static final Parcelable.Creator<VibrationEffect> CREATOR =
+            new Parcelable.Creator<VibrationEffect>() { // from class: android.os.VibrationEffect.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VibrationEffect createFromParcel(Parcel in) {
+                    return new Composed(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VibrationEffect[] newArray(int size) {
-            return new VibrationEffect[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VibrationEffect[] newArray(int size) {
+                    return new VibrationEffect[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EffectType {
-    }
+    public @interface EffectType {}
 
     public enum SemMagnitudeType {
         TYPE_TOUCH,
@@ -97,9 +99,13 @@ public abstract class VibrationEffect implements Parcelable {
 
     public static VibrationEffect createOneShot(long milliseconds, int amplitude) {
         if (amplitude != 0) {
-            return createWaveform(new long[]{milliseconds}, new int[]{amplitude}, -1);
+            return createWaveform(new long[] {milliseconds}, new int[] {amplitude}, -1);
         }
-        throw new IllegalArgumentException("amplitude must either be DEFAULT_AMPLITUDE, or between 1 and 255 inclusive (amplitude=" + amplitude + NavigationBarInflaterView.KEY_CODE_END);
+        throw new IllegalArgumentException(
+                "amplitude must either be DEFAULT_AMPLITUDE, or between 1 and 255 inclusive"
+                    + " (amplitude="
+                        + amplitude
+                        + NavigationBarInflaterView.KEY_CODE_END);
     }
 
     public static VibrationEffect createWaveform(long[] timings, int repeat) {
@@ -112,7 +118,12 @@ public abstract class VibrationEffect implements Parcelable {
 
     public static VibrationEffect createWaveform(long[] timings, int[] amplitudes, int repeat) {
         if (timings.length != amplitudes.length) {
-            throw new IllegalArgumentException("timing and amplitude arrays must be of equal length (timings.length=" + timings.length + ", amplitudes.length=" + amplitudes.length + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "timing and amplitude arrays must be of equal length (timings.length="
+                            + timings.length
+                            + ", amplitudes.length="
+                            + amplitudes.length
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         List<StepSegment> segments = new ArrayList<>();
         for (int i = 0; i < timings.length; i++) {
@@ -150,7 +161,9 @@ public abstract class VibrationEffect implements Parcelable {
             uncanonicalUri = uri;
         }
         for (int i = 0; i < uris.length && i < RINGTONES.length; i++) {
-            if (uris[i] != null && (mappedUri = cr.uncanonicalize(Uri.parse(uris[i]))) != null && mappedUri.equals(uncanonicalUri)) {
+            if (uris[i] != null
+                    && (mappedUri = cr.uncanonicalize(Uri.parse(uris[i]))) != null
+                    && mappedUri.equals(uncanonicalUri)) {
                 return get(RINGTONES[i]);
             }
         }
@@ -171,7 +184,8 @@ public abstract class VibrationEffect implements Parcelable {
         return builder;
     }
 
-    public static WaveformBuilder startWaveform(VibrationParameter initialParameter1, VibrationParameter initialParameter2) {
+    public static WaveformBuilder startWaveform(
+            VibrationParameter initialParameter1, VibrationParameter initialParameter2) {
         WaveformBuilder builder = startWaveform();
         builder.addTransition(Duration.ZERO, initialParameter1, initialParameter2);
         return builder;
@@ -240,24 +254,30 @@ public abstract class VibrationEffect implements Parcelable {
     }
 
     public static final class Composed extends VibrationEffect {
-        public static final Parcelable.Creator<Composed> CREATOR = new Parcelable.Creator<Composed>() { // from class: android.os.VibrationEffect.Composed.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Composed createFromParcel(Parcel in) {
-                return new Composed(in);
-            }
+        public static final Parcelable.Creator<Composed> CREATOR =
+                new Parcelable.Creator<
+                        Composed>() { // from class: android.os.VibrationEffect.Composed.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Composed createFromParcel(Parcel in) {
+                        return new Composed(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Composed[] newArray(int size) {
-                return new Composed[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Composed[] newArray(int size) {
+                        return new Composed[size];
+                    }
+                };
         private final int mRepeatIndex;
         private final ArrayList<VibrationEffectSegment> mSegments;
 
         Composed(Parcel in) {
-            this(in.readArrayList(VibrationEffectSegment.class.getClassLoader(), VibrationEffectSegment.class), in.readInt());
+            this(
+                    in.readArrayList(
+                            VibrationEffectSegment.class.getClassLoader(),
+                            VibrationEffectSegment.class),
+                    in.readInt());
             this.mMagnitude = in.readInt();
             this.mMagnitudeType = SemMagnitudeType.values()[in.readInt()];
         }
@@ -288,7 +308,8 @@ public abstract class VibrationEffect implements Parcelable {
             long[] patternBuffer = new long[segments.size() + 1];
             int patternIndex = 0;
             for (int i = 0; i < segments.size(); i++) {
-                StepSegment stepSegment = castToValidStepSegmentForOffOnTimingsOrNull(segments.get(i));
+                StepSegment stepSegment =
+                        castToValidStepSegmentForOffOnTimingsOrNull(segments.get(i));
                 if (stepSegment == null) {
                     return null;
                 }
@@ -297,7 +318,8 @@ public abstract class VibrationEffect implements Parcelable {
                 if (isSegmentOff != isCurrentPatternIndexOff) {
                     patternIndex++;
                 }
-                patternBuffer[patternIndex] = patternBuffer[patternIndex] + stepSegment.getDuration();
+                patternBuffer[patternIndex] =
+                        patternBuffer[patternIndex] + stepSegment.getDuration();
             }
             return Arrays.copyOf(patternBuffer, patternIndex + 1);
         }
@@ -321,10 +343,21 @@ public abstract class VibrationEffect implements Parcelable {
                 i++;
             }
             if (!hasNonZeroDuration) {
-                throw new IllegalArgumentException("at least one timing must be non-zero (segments=" + this.mSegments + NavigationBarInflaterView.KEY_CODE_END);
+                throw new IllegalArgumentException(
+                        "at least one timing must be non-zero (segments="
+                                + this.mSegments
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
             if (this.mRepeatIndex != -1) {
-                Preconditions.checkArgumentInRange(this.mRepeatIndex, 0, segmentCount - 1, "repeat index must be within the bounds of the segments (segments.length=" + segmentCount + ", index=" + this.mRepeatIndex + NavigationBarInflaterView.KEY_CODE_END);
+                Preconditions.checkArgumentInRange(
+                        this.mRepeatIndex,
+                        0,
+                        segmentCount - 1,
+                        "repeat index must be within the bounds of the segments (segments.length="
+                                + segmentCount
+                                + ", index="
+                                + this.mRepeatIndex
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
         }
 
@@ -422,7 +455,8 @@ public abstract class VibrationEffect implements Parcelable {
             if (loopDelayMs <= 0) {
                 return new Composed(this.mSegments, 0);
             }
-            ArrayList<VibrationEffectSegment> loopingSegments = new ArrayList<>(this.mSegments.size() + 1);
+            ArrayList<VibrationEffectSegment> loopingSegments =
+                    new ArrayList<>(this.mSegments.size() + 1);
             loopingSegments.addAll(this.mSegments);
             loopingSegments.add(new StepSegment(0.0f, 0.0f, loopDelayMs));
             return new Composed(loopingSegments, 0);
@@ -451,7 +485,8 @@ public abstract class VibrationEffect implements Parcelable {
                 return false;
             }
             Composed other = (Composed) o;
-            return this.mSegments.equals(other.mSegments) && this.mRepeatIndex == other.mRepeatIndex;
+            return this.mSegments.equals(other.mSegments)
+                    && this.mRepeatIndex == other.mRepeatIndex;
         }
 
         public int hashCode() {
@@ -459,7 +494,13 @@ public abstract class VibrationEffect implements Parcelable {
         }
 
         public String toString() {
-            return "Composed{segments=" + this.mSegments + ", repeat=" + this.mRepeatIndex + ", mMagnitudeType=" + this.mMagnitudeType.toString() + "}";
+            return "Composed{segments="
+                    + this.mSegments
+                    + ", repeat="
+                    + this.mRepeatIndex
+                    + ", mMagnitudeType="
+                    + this.mMagnitudeType.toString()
+                    + "}";
         }
 
         @Override // android.os.VibrationEffect
@@ -467,13 +508,18 @@ public abstract class VibrationEffect implements Parcelable {
             if (this.mSegments.size() == 1 && this.mRepeatIndex < 0) {
                 return this.mSegments.get(0).toDebugString();
             }
-            StringJoiner sj = new StringJoiner(",", NavigationBarInflaterView.SIZE_MOD_START, NavigationBarInflaterView.SIZE_MOD_END);
+            StringJoiner sj =
+                    new StringJoiner(
+                            ",",
+                            NavigationBarInflaterView.SIZE_MOD_START,
+                            NavigationBarInflaterView.SIZE_MOD_END);
             for (int i = 0; i < this.mSegments.size(); i++) {
                 sj.add(this.mSegments.get(i).toDebugString());
             }
             int i2 = this.mRepeatIndex;
             if (i2 >= 0) {
-                return String.format(Locale.ROOT, "%s, repeat=%d", sj, Integer.valueOf(this.mRepeatIndex));
+                return String.format(
+                        Locale.ROOT, "%s, repeat=%d", sj, Integer.valueOf(this.mRepeatIndex));
             }
             return sj.toString();
         }
@@ -491,7 +537,8 @@ public abstract class VibrationEffect implements Parcelable {
             out.writeInt(this.mMagnitudeType.ordinal());
         }
 
-        private static StepSegment castToValidStepSegmentForOffOnTimingsOrNull(VibrationEffectSegment segment) {
+        private static StepSegment castToValidStepSegmentForOffOnTimingsOrNull(
+                VibrationEffectSegment segment) {
             if (!(segment instanceof StepSegment)) {
                 return null;
             }
@@ -521,17 +568,16 @@ public abstract class VibrationEffect implements Parcelable {
         private int mRepeatIndex = -1;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface PrimitiveType {
-        }
+        public @interface PrimitiveType {}
 
-        public static final class UnreachableAfterRepeatingIndefinitelyException extends IllegalStateException {
+        public static final class UnreachableAfterRepeatingIndefinitelyException
+                extends IllegalStateException {
             UnreachableAfterRepeatingIndefinitelyException() {
                 super("Compositions ending in an indefinitely repeating effect can't be extended");
             }
         }
 
-        Composition() {
-        }
+        Composition() {}
 
         public Composition addOffDuration(Duration duration) {
             int durationMs = (int) duration.toMillis();
@@ -547,7 +593,9 @@ public abstract class VibrationEffect implements Parcelable {
         }
 
         public Composition repeatEffectIndefinitely(VibrationEffect effect) {
-            Preconditions.checkArgument(effect.getDuration() < Long.MAX_VALUE, "Can't repeat an indefinitely repeating effect. Consider addEffect instead.");
+            Preconditions.checkArgument(
+                    effect.getDuration() < Long.MAX_VALUE,
+                    "Can't repeat an indefinitely repeating effect. Consider addEffect instead.");
             int previousSegmentCount = this.mSegments.size();
             addSegments(effect);
             this.mRepeatIndex = previousSegmentCount;
@@ -590,7 +638,8 @@ public abstract class VibrationEffect implements Parcelable {
 
         public VibrationEffect compose() {
             if (this.mSegments.isEmpty()) {
-                throw new IllegalStateException("Composition must have at least one element to compose.");
+                throw new IllegalStateException(
+                        "Composition must have at least one element to compose.");
             }
             VibrationEffect effect = new Composed(this.mSegments, this.mRepeatIndex);
             effect.validate();
@@ -629,10 +678,10 @@ public abstract class VibrationEffect implements Parcelable {
         private float mLastAmplitude = 0.0f;
         private float mLastFrequencyHz = 0.0f;
 
-        WaveformBuilder() {
-        }
+        WaveformBuilder() {}
 
-        public WaveformBuilder addTransition(Duration duration, VibrationParameter targetParameter) {
+        public WaveformBuilder addTransition(
+                Duration duration, VibrationParameter targetParameter) {
             Preconditions.checkNotNull(duration, "Duration is null");
             checkVibrationParameter(targetParameter, "targetParameter");
             float amplitude = extractTargetAmplitude(targetParameter, null);
@@ -641,11 +690,16 @@ public abstract class VibrationEffect implements Parcelable {
             return this;
         }
 
-        public WaveformBuilder addTransition(Duration duration, VibrationParameter targetParameter1, VibrationParameter targetParameter2) {
+        public WaveformBuilder addTransition(
+                Duration duration,
+                VibrationParameter targetParameter1,
+                VibrationParameter targetParameter2) {
             Preconditions.checkNotNull(duration, "Duration is null");
             checkVibrationParameter(targetParameter1, "targetParameter1");
             checkVibrationParameter(targetParameter2, "targetParameter2");
-            Preconditions.checkArgument(!Objects.equals(targetParameter1.getClass(), targetParameter2.getClass()), "Parameter arguments must specify different parameter types");
+            Preconditions.checkArgument(
+                    !Objects.equals(targetParameter1.getClass(), targetParameter2.getClass()),
+                    "Parameter arguments must specify different parameter types");
             float amplitude = extractTargetAmplitude(targetParameter1, targetParameter2);
             float frequencyHz = extractTargetFrequency(targetParameter1, targetParameter2);
             addTransitionSegment(duration, amplitude, frequencyHz);
@@ -655,25 +709,33 @@ public abstract class VibrationEffect implements Parcelable {
         public WaveformBuilder addSustain(Duration duration) {
             int durationMs = (int) duration.toMillis();
             Preconditions.checkArgument(durationMs >= 1, "Sustain duration must be >= 1ms");
-            this.mSegments.add(new StepSegment(this.mLastAmplitude, this.mLastFrequencyHz, durationMs));
+            this.mSegments.add(
+                    new StepSegment(this.mLastAmplitude, this.mLastFrequencyHz, durationMs));
             return this;
         }
 
         public VibrationEffect build() {
             if (this.mSegments.isEmpty()) {
-                throw new IllegalStateException("WaveformBuilder must have at least one transition to build.");
+                throw new IllegalStateException(
+                        "WaveformBuilder must have at least one transition to build.");
             }
             VibrationEffect effect = new Composed(this.mSegments, -1);
             effect.validate();
             return effect;
         }
 
-        private void checkVibrationParameter(VibrationParameter vibrationParameter, String paramName) {
+        private void checkVibrationParameter(
+                VibrationParameter vibrationParameter, String paramName) {
             Preconditions.checkNotNull(vibrationParameter, "%s is null", paramName);
-            Preconditions.checkArgument((vibrationParameter instanceof AmplitudeVibrationParameter) || (vibrationParameter instanceof FrequencyVibrationParameter), "%s is a unknown parameter", paramName);
+            Preconditions.checkArgument(
+                    (vibrationParameter instanceof AmplitudeVibrationParameter)
+                            || (vibrationParameter instanceof FrequencyVibrationParameter),
+                    "%s is a unknown parameter",
+                    paramName);
         }
 
-        private float extractTargetAmplitude(VibrationParameter target1, VibrationParameter target2) {
+        private float extractTargetAmplitude(
+                VibrationParameter target1, VibrationParameter target2) {
             if (target2 instanceof AmplitudeVibrationParameter) {
                 return ((AmplitudeVibrationParameter) target2).amplitude;
             }
@@ -683,7 +745,8 @@ public abstract class VibrationEffect implements Parcelable {
             return this.mLastAmplitude;
         }
 
-        private float extractTargetFrequency(VibrationParameter target1, VibrationParameter target2) {
+        private float extractTargetFrequency(
+                VibrationParameter target1, VibrationParameter target2) {
             if (target2 instanceof FrequencyVibrationParameter) {
                 return ((FrequencyVibrationParameter) target2).frequencyHz;
             }
@@ -693,15 +756,25 @@ public abstract class VibrationEffect implements Parcelable {
             return this.mLastFrequencyHz;
         }
 
-        private void addTransitionSegment(Duration duration, float targetAmplitude, float targetFrequency) {
+        private void addTransitionSegment(
+                Duration duration, float targetAmplitude, float targetFrequency) {
             Preconditions.checkNotNull(duration, "Duration is null");
-            Preconditions.checkArgument(!duration.isNegative(), "Transition duration must be non-negative");
+            Preconditions.checkArgument(
+                    !duration.isNegative(), "Transition duration must be non-negative");
             int durationMs = (int) duration.toMillis();
             if (durationMs > 0) {
-                if (Math.abs(this.mLastAmplitude - targetAmplitude) < 1.0E-5f && Math.abs(this.mLastFrequencyHz - targetFrequency) < 1.0E-5f) {
-                    this.mSegments.add(new StepSegment(targetAmplitude, targetFrequency, durationMs));
+                if (Math.abs(this.mLastAmplitude - targetAmplitude) < 1.0E-5f
+                        && Math.abs(this.mLastFrequencyHz - targetFrequency) < 1.0E-5f) {
+                    this.mSegments.add(
+                            new StepSegment(targetAmplitude, targetFrequency, durationMs));
                 } else {
-                    this.mSegments.add(new RampSegment(this.mLastAmplitude, targetAmplitude, this.mLastFrequencyHz, targetFrequency, durationMs));
+                    this.mSegments.add(
+                            new RampSegment(
+                                    this.mLastAmplitude,
+                                    targetAmplitude,
+                                    this.mLastFrequencyHz,
+                                    targetFrequency,
+                                    durationMs));
                 }
             }
             this.mLastAmplitude = targetAmplitude;
@@ -710,8 +783,7 @@ public abstract class VibrationEffect implements Parcelable {
     }
 
     public static class VibrationParameter {
-        VibrationParameter() {
-        }
+        VibrationParameter() {}
 
         public static VibrationParameter targetAmplitude(float amplitude) {
             return new AmplitudeVibrationParameter(amplitude);
@@ -726,7 +798,8 @@ public abstract class VibrationEffect implements Parcelable {
         public final float amplitude;
 
         AmplitudeVibrationParameter(float amplitude) {
-            Preconditions.checkArgument(amplitude >= 0.0f && amplitude <= 1.0f, "Amplitude must be within [0,1]");
+            Preconditions.checkArgument(
+                    amplitude >= 0.0f && amplitude <= 1.0f, "Amplitude must be within [0,1]");
             this.amplitude = amplitude;
         }
     }
@@ -746,7 +819,8 @@ public abstract class VibrationEffect implements Parcelable {
         return this;
     }
 
-    public static VibrationEffect semCreateWaveform(int type, int repeat, SemMagnitudeType magnitudeType) {
+    public static VibrationEffect semCreateWaveform(
+            int type, int repeat, SemMagnitudeType magnitudeType) {
         return semCreateHaptic(type, repeat, magnitudeType);
     }
 
@@ -754,7 +828,8 @@ public abstract class VibrationEffect implements Parcelable {
         return semCreateHaptic(type, repeat);
     }
 
-    public static VibrationEffect semCreateHaptic(int type, int repeat, SemMagnitudeType magnitudeType) {
+    public static VibrationEffect semCreateHaptic(
+            int type, int repeat, SemMagnitudeType magnitudeType) {
         List<SemHapticSegment> segments = new ArrayList<>();
         segments.add(new SemHapticSegment(type));
         VibrationEffect effect = new Composed(segments, repeat);
@@ -799,9 +874,17 @@ public abstract class VibrationEffect implements Parcelable {
         return this.mMagnitude;
     }
 
-    public static VibrationEffect createWaveform(int[] timings, float[] amplitudes, float[] frequencies, int repeat) {
+    public static VibrationEffect createWaveform(
+            int[] timings, float[] amplitudes, float[] frequencies, int repeat) {
         if (timings.length != amplitudes.length || timings.length != frequencies.length) {
-            throw new IllegalArgumentException("timing and amplitude arrays must be of equal length (timings.length=" + timings.length + ", amplitudes.length=" + amplitudes.length + ", frequencies.length=" + frequencies.length + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "timing and amplitude arrays must be of equal length (timings.length="
+                            + timings.length
+                            + ", amplitudes.length="
+                            + amplitudes.length
+                            + ", frequencies.length="
+                            + frequencies.length
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         List<StepSegment> segments = new ArrayList<>();
         for (int i = 0; i < timings.length; i++) {

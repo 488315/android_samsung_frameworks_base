@@ -10,28 +10,29 @@ import android.view.Surface;
 
 /* loaded from: classes2.dex */
 public class FaceEnrollOptions implements Parcelable {
-    public static final Parcelable.Creator<FaceEnrollOptions> CREATOR = new Parcelable.Creator<FaceEnrollOptions>() { // from class: android.hardware.biometrics.face.FaceEnrollOptions.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceEnrollOptions createFromParcel(Parcel _aidl_source) {
-            FaceEnrollOptions _aidl_out = new FaceEnrollOptions();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FaceEnrollOptions> CREATOR =
+            new Parcelable.Creator<FaceEnrollOptions>() { // from class:
+                // android.hardware.biometrics.face.FaceEnrollOptions.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceEnrollOptions createFromParcel(Parcel _aidl_source) {
+                    FaceEnrollOptions _aidl_out = new FaceEnrollOptions();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceEnrollOptions[] newArray(int _aidl_size) {
-            return new FaceEnrollOptions[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceEnrollOptions[] newArray(int _aidl_size) {
+                    return new FaceEnrollOptions[_aidl_size];
+                }
+            };
     public OperationContext context;
     public byte enrollmentType;
     public byte[] features;
     public HardwareAuthToken hardwareAuthToken;
 
-    @Deprecated
-    public NativeHandle nativeHandlePreview;
+    @Deprecated public NativeHandle nativeHandlePreview;
     public Surface surfacePreview;
 
     @Override // android.os.Parcelable
@@ -69,7 +70,8 @@ public class FaceEnrollOptions implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.hardwareAuthToken = (HardwareAuthToken) _aidl_parcel.readTypedObject(HardwareAuthToken.CREATOR);
+            this.hardwareAuthToken =
+                    (HardwareAuthToken) _aidl_parcel.readTypedObject(HardwareAuthToken.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -93,7 +95,8 @@ public class FaceEnrollOptions implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.nativeHandlePreview = (NativeHandle) _aidl_parcel.readTypedObject(NativeHandle.CREATOR);
+            this.nativeHandlePreview =
+                    (NativeHandle) _aidl_parcel.readTypedObject(NativeHandle.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -108,7 +111,8 @@ public class FaceEnrollOptions implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.context = (OperationContext) _aidl_parcel.readTypedObject(OperationContext.CREATOR);
+                this.context =
+                        (OperationContext) _aidl_parcel.readTypedObject(OperationContext.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -126,7 +130,10 @@ public class FaceEnrollOptions implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.hardwareAuthToken);
-        return _mask | describeContents(this.nativeHandlePreview) | describeContents(this.surfacePreview) | describeContents(this.context);
+        return _mask
+                | describeContents(this.nativeHandlePreview)
+                | describeContents(this.surfacePreview)
+                | describeContents(this.context);
     }
 
     private int describeContents(Object _v) {

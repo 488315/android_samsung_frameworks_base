@@ -6,9 +6,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.CollectionUtils;
 import com.android.internal.util.Parcelling;
+
 import java.lang.annotation.Annotation;
 import java.util.Collections;
 import java.util.Set;
@@ -40,7 +42,10 @@ public class ParsedProcessImpl implements ParsedProcess, Parcelable {
         this.memtagMode = -1;
         this.nativeHeapZeroInitialized = -1;
         this.name = other.getName();
-        this.appClassNamesByPackage = other.getAppClassNamesByPackage().size() == 0 ? ArrayMap.EMPTY : new ArrayMap<>(other.getAppClassNamesByPackage());
+        this.appClassNamesByPackage =
+                other.getAppClassNamesByPackage().size() == 0
+                        ? ArrayMap.EMPTY
+                        : new ArrayMap<>(other.getAppClassNamesByPackage());
         this.deniedPermissions = new ArraySet(other.getDeniedPermissions());
         this.gwpAsanMode = other.getGwpAsanMode();
         this.memtagMode = other.getMemtagMode();
@@ -49,7 +54,8 @@ public class ParsedProcessImpl implements ParsedProcess, Parcelable {
     }
 
     public void addStateFrom(ParsedProcess other) {
-        this.deniedPermissions = CollectionUtils.addAll(this.deniedPermissions, other.getDeniedPermissions());
+        this.deniedPermissions =
+                CollectionUtils.addAll(this.deniedPermissions, other.getDeniedPermissions());
         this.gwpAsanMode = other.getGwpAsanMode();
         this.memtagMode = other.getMemtagMode();
         this.nativeHeapZeroInitialized = other.getNativeHeapZeroInitialized();
@@ -67,24 +73,43 @@ public class ParsedProcessImpl implements ParsedProcess, Parcelable {
         this.appClassNamesByPackage.put(packageName, className);
     }
 
-    public ParsedProcessImpl(String name, ArrayMap<String, String> appClassNamesByPackage, Set<String> deniedPermissions, int gwpAsanMode, int memtagMode, int nativeHeapZeroInitialized, boolean useEmbeddedDex) {
+    public ParsedProcessImpl(
+            String name,
+            ArrayMap<String, String> appClassNamesByPackage,
+            Set<String> deniedPermissions,
+            int gwpAsanMode,
+            int memtagMode,
+            int nativeHeapZeroInitialized,
+            boolean useEmbeddedDex) {
         this.appClassNamesByPackage = ArrayMap.EMPTY;
         this.deniedPermissions = Collections.emptySet();
         this.gwpAsanMode = -1;
         this.memtagMode = -1;
         this.nativeHeapZeroInitialized = -1;
         this.name = name;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) name);
         this.appClassNamesByPackage = appClassNamesByPackage;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) appClassNamesByPackage);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) appClassNamesByPackage);
         this.deniedPermissions = deniedPermissions;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) deniedPermissions);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) deniedPermissions);
         this.gwpAsanMode = gwpAsanMode;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class, (Annotation) null, gwpAsanMode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class,
+                (Annotation) null,
+                gwpAsanMode);
         this.memtagMode = memtagMode;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.MemtagMode.class, (Annotation) null, memtagMode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.MemtagMode.class,
+                (Annotation) null,
+                memtagMode);
         this.nativeHeapZeroInitialized = nativeHeapZeroInitialized;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class, (Annotation) null, nativeHeapZeroInitialized);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class,
+                (Annotation) null,
+                nativeHeapZeroInitialized);
         this.useEmbeddedDex = useEmbeddedDex;
     }
 
@@ -125,37 +150,51 @@ public class ParsedProcessImpl implements ParsedProcess, Parcelable {
 
     public ParsedProcessImpl setName(String value) {
         this.name = value;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
         return this;
     }
 
     public ParsedProcessImpl setAppClassNamesByPackage(ArrayMap<String, String> value) {
         this.appClassNamesByPackage = value;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.appClassNamesByPackage);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.appClassNamesByPackage);
         return this;
     }
 
     public ParsedProcessImpl setDeniedPermissions(Set<String> value) {
         this.deniedPermissions = value;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.deniedPermissions);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.deniedPermissions);
         return this;
     }
 
     public ParsedProcessImpl setGwpAsanMode(int value) {
         this.gwpAsanMode = value;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class, (Annotation) null, this.gwpAsanMode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class,
+                (Annotation) null,
+                this.gwpAsanMode);
         return this;
     }
 
     public ParsedProcessImpl setMemtagMode(int value) {
         this.memtagMode = value;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.MemtagMode.class, (Annotation) null, this.memtagMode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.MemtagMode.class,
+                (Annotation) null,
+                this.memtagMode);
         return this;
     }
 
     public ParsedProcessImpl setNativeHeapZeroInitialized(int value) {
         this.nativeHeapZeroInitialized = value;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class, (Annotation) null, this.nativeHeapZeroInitialized);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class,
+                (Annotation) null,
+                this.nativeHeapZeroInitialized);
         return this;
     }
 
@@ -165,23 +204,28 @@ public class ParsedProcessImpl implements ParsedProcess, Parcelable {
     }
 
     static {
-        sParcellingForDeniedPermissions = Parcelling.Cache.get(Parcelling.BuiltIn.ForInternedStringSet.class);
+        sParcellingForDeniedPermissions =
+                Parcelling.Cache.get(Parcelling.BuiltIn.ForInternedStringSet.class);
         if (sParcellingForDeniedPermissions == null) {
-            sParcellingForDeniedPermissions = Parcelling.Cache.put(new Parcelling.BuiltIn.ForInternedStringSet());
+            sParcellingForDeniedPermissions =
+                    Parcelling.Cache.put(new Parcelling.BuiltIn.ForInternedStringSet());
         }
-        CREATOR = new Parcelable.Creator<ParsedProcessImpl>() { // from class: com.android.internal.pm.pkg.component.ParsedProcessImpl.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ParsedProcessImpl[] newArray(int size) {
-                return new ParsedProcessImpl[size];
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        ParsedProcessImpl>() { // from class:
+                                               // com.android.internal.pm.pkg.component.ParsedProcessImpl.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ParsedProcessImpl[] newArray(int size) {
+                        return new ParsedProcessImpl[size];
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ParsedProcessImpl createFromParcel(Parcel in) {
-                return new ParsedProcessImpl(in);
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ParsedProcessImpl createFromParcel(Parcel in) {
+                        return new ParsedProcessImpl(in);
+                    }
+                };
     }
 
     @Override // android.os.Parcelable
@@ -217,21 +261,34 @@ public class ParsedProcessImpl implements ParsedProcess, Parcelable {
         int _memtagMode = in.readInt();
         int _nativeHeapZeroInitialized = in.readInt();
         this.name = _name;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
         this.appClassNamesByPackage = _appClassNamesByPackage;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.appClassNamesByPackage);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.appClassNamesByPackage);
         this.deniedPermissions = _deniedPermissions;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.deniedPermissions);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.deniedPermissions);
         this.gwpAsanMode = _gwpAsanMode;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class, (Annotation) null, this.gwpAsanMode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class,
+                (Annotation) null,
+                this.gwpAsanMode);
         this.memtagMode = _memtagMode;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.MemtagMode.class, (Annotation) null, this.memtagMode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.MemtagMode.class,
+                (Annotation) null,
+                this.memtagMode);
         this.nativeHeapZeroInitialized = _nativeHeapZeroInitialized;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class, (Annotation) null, this.nativeHeapZeroInitialized);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class,
+                (Annotation) null,
+                this.nativeHeapZeroInitialized);
         this.useEmbeddedDex = _useEmbeddedDex;
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

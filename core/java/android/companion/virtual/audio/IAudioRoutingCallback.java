@@ -14,8 +14,7 @@ public interface IAudioRoutingCallback extends IInterface {
 
     public static class Default implements IAudioRoutingCallback {
         @Override // android.companion.virtual.audio.IAudioRoutingCallback
-        public void onAppsNeedingAudioRoutingChanged(int[] appUids) throws RemoteException {
-        }
+        public void onAppsNeedingAudioRoutingChanged(int[] appUids) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IAudioRoutingCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAudioRoutingCallback {
+    public abstract static class Stub extends Binder implements IAudioRoutingCallback {
         static final int TRANSACTION_onAppsNeedingAudioRoutingChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IAudioRoutingCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAudioRoutingCallback.DESCRIPTOR);
             }

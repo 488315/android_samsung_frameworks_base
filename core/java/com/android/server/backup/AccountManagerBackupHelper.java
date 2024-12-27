@@ -3,6 +3,7 @@ package com.android.server.backup;
 import android.accounts.AccountManagerInternal;
 import android.app.backup.BlobBackupHelper;
 import android.util.Slog;
+
 import com.android.server.LocalServices;
 
 /* loaded from: classes5.dex */
@@ -21,7 +22,8 @@ public class AccountManagerBackupHelper extends BlobBackupHelper {
     @Override // android.app.backup.BlobBackupHelper
     protected byte[] getBackupPayload(String key) {
         char c;
-        AccountManagerInternal am = (AccountManagerInternal) LocalServices.getService(AccountManagerInternal.class);
+        AccountManagerInternal am =
+                (AccountManagerInternal) LocalServices.getService(AccountManagerInternal.class);
         try {
             switch (key.hashCode()) {
                 case 1544100736:
@@ -49,7 +51,8 @@ public class AccountManagerBackupHelper extends BlobBackupHelper {
     @Override // android.app.backup.BlobBackupHelper
     protected void applyRestoredPayload(String key, byte[] payload) {
         char c;
-        AccountManagerInternal am = (AccountManagerInternal) LocalServices.getService(AccountManagerInternal.class);
+        AccountManagerInternal am =
+                (AccountManagerInternal) LocalServices.getService(AccountManagerInternal.class);
         try {
             switch (key.hashCode()) {
                 case 1544100736:

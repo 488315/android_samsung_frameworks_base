@@ -12,8 +12,10 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.server.ServiceThread;
 import com.android.server.net.BaseNetdEventCallback;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -25,39 +27,61 @@ public final class NetworkLogger {
     public ServiceThread mHandlerThread;
     public IIpConnectivityMetrics mIpConnectivityMetrics;
     public final AtomicBoolean mIsLoggingEnabled = new AtomicBoolean(false);
-    public final AnonymousClass1 mNetdEventCallback = new BaseNetdEventCallback() { // from class: com.android.server.devicepolicy.NetworkLogger.1
-        public final void onConnectEvent(String str, int i, long j, int i2) {
-            if (NetworkLogger.this.mIsLoggingEnabled.get()) {
-                int i3 = NetworkLogger.this.mTargetUserId;
-                if (i3 == -1 || i3 == UserHandle.getUserId(i2)) {
-                    sendNetworkEvent(new ConnectEvent(str, i, NetworkLogger.this.mPm.getNameForUid(i2), j));
+    public final AnonymousClass1 mNetdEventCallback =
+            new BaseNetdEventCallback() { // from class:
+                                          // com.android.server.devicepolicy.NetworkLogger.1
+                public final void onConnectEvent(String str, int i, long j, int i2) {
+                    if (NetworkLogger.this.mIsLoggingEnabled.get()) {
+                        int i3 = NetworkLogger.this.mTargetUserId;
+                        if (i3 == -1 || i3 == UserHandle.getUserId(i2)) {
+                            sendNetworkEvent(
+                                    new ConnectEvent(
+                                            str, i, NetworkLogger.this.mPm.getNameForUid(i2), j));
+                        }
+                    }
                 }
-            }
-        }
 
-        public final void onDnsEvent(int i, int i2, int i3, String str, String[] strArr, int i4, long j, int i5) {
-            if (NetworkLogger.this.mIsLoggingEnabled.get()) {
-                int i6 = NetworkLogger.this.mTargetUserId;
-                if (i6 == -1 || i6 == UserHandle.getUserId(i5)) {
-                    sendNetworkEvent(new DnsEvent(str, strArr, i4, NetworkLogger.this.mPm.getNameForUid(i5), j));
+                public final void onDnsEvent(
+                        int i,
+                        int i2,
+                        int i3,
+                        String str,
+                        String[] strArr,
+                        int i4,
+                        long j,
+                        int i5) {
+                    if (NetworkLogger.this.mIsLoggingEnabled.get()) {
+                        int i6 = NetworkLogger.this.mTargetUserId;
+                        if (i6 == -1 || i6 == UserHandle.getUserId(i5)) {
+                            sendNetworkEvent(
+                                    new DnsEvent(
+                                            str,
+                                            strArr,
+                                            i4,
+                                            NetworkLogger.this.mPm.getNameForUid(i5),
+                                            j));
+                        }
+                    }
                 }
-            }
-        }
 
-        public final void sendNetworkEvent(NetworkEvent networkEvent) {
-            Message obtainMessage = NetworkLogger.this.mNetworkLoggingHandler.obtainMessage(1);
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("network_event", networkEvent);
-            obtainMessage.setData(bundle);
-            NetworkLogger.this.mNetworkLoggingHandler.sendMessage(obtainMessage);
-        }
-    };
+                public final void sendNetworkEvent(NetworkEvent networkEvent) {
+                    Message obtainMessage =
+                            NetworkLogger.this.mNetworkLoggingHandler.obtainMessage(1);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("network_event", networkEvent);
+                    obtainMessage.setData(bundle);
+                    NetworkLogger.this.mNetworkLoggingHandler.sendMessage(obtainMessage);
+                }
+            };
     public NetworkLoggingHandler mNetworkLoggingHandler;
     public final PackageManagerInternal mPm;
     public final int mTargetUserId;
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.devicepolicy.NetworkLogger$1] */
-    public NetworkLogger(DevicePolicyManagerService devicePolicyManagerService, PackageManagerInternal packageManagerInternal, int i) {
+    public NetworkLogger(
+            DevicePolicyManagerService devicePolicyManagerService,
+            PackageManagerInternal packageManagerInternal,
+            int i) {
         this.mDpm = devicePolicyManagerService;
         this.mPm = packageManagerInternal;
         this.mTargetUserId = i;
@@ -81,22 +105,27 @@ public final class NetworkLogger {
             if (indexOfKey < 0) {
                 return null;
             }
-            networkLoggingHandler.postDelayed(new Runnable() { // from class: com.android.server.devicepolicy.NetworkLoggingHandler$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    NetworkLoggingHandler networkLoggingHandler2 = NetworkLoggingHandler.this;
-                    long j2 = j;
-                    synchronized (networkLoggingHandler2) {
-                        while (networkLoggingHandler2.mBatches.size() > 0 && networkLoggingHandler2.mBatches.keyAt(0) <= j2) {
-                            try {
-                                networkLoggingHandler2.mBatches.removeAt(0);
-                            } catch (Throwable th) {
-                                throw th;
+            networkLoggingHandler.postDelayed(
+                    new Runnable() { // from class:
+                                     // com.android.server.devicepolicy.NetworkLoggingHandler$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            NetworkLoggingHandler networkLoggingHandler2 =
+                                    NetworkLoggingHandler.this;
+                            long j2 = j;
+                            synchronized (networkLoggingHandler2) {
+                                while (networkLoggingHandler2.mBatches.size() > 0
+                                        && networkLoggingHandler2.mBatches.keyAt(0) <= j2) {
+                                    try {
+                                        networkLoggingHandler2.mBatches.removeAt(0);
+                                    } catch (Throwable th) {
+                                        throw th;
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-            }, 300000L);
+                    },
+                    300000L);
             networkLoggingHandler.mLastRetrievedBatchToken = j;
             return (List) networkLoggingHandler.mBatches.valueAt(indexOfKey);
         }
@@ -172,7 +201,9 @@ public final class NetworkLogger {
             android.util.Slog.wtf(r0, r1, r11)
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.devicepolicy.NetworkLogger.startNetworkLogging():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.devicepolicy.NetworkLogger.startNetworkLogging():boolean");
     }
 
     public final boolean stopNetworkLogging() {
@@ -183,9 +214,13 @@ public final class NetworkLogger {
             try {
                 if (this.mIpConnectivityMetrics == null) {
                     this.mDpm.mInjector.getClass();
-                    IIpConnectivityMetrics asInterface = IIpConnectivityMetrics.Stub.asInterface(ServiceManager.getService("connmetrics"));
+                    IIpConnectivityMetrics asInterface =
+                            IIpConnectivityMetrics.Stub.asInterface(
+                                    ServiceManager.getService("connmetrics"));
                     if (asInterface == null) {
-                        Slog.wtf("NetworkLogger", "Failed to unregister callback with IIpConnectivityMetrics.");
+                        Slog.wtf(
+                                "NetworkLogger",
+                                "Failed to unregister callback with IIpConnectivityMetrics.");
                         ServiceThread serviceThread = this.mHandlerThread;
                         if (serviceThread != null) {
                             serviceThread.quitSafely();
@@ -194,14 +229,18 @@ public final class NetworkLogger {
                     }
                     this.mIpConnectivityMetrics = asInterface;
                 }
-                boolean removeNetdEventCallback = this.mIpConnectivityMetrics.removeNetdEventCallback(1);
+                boolean removeNetdEventCallback =
+                        this.mIpConnectivityMetrics.removeNetdEventCallback(1);
                 ServiceThread serviceThread2 = this.mHandlerThread;
                 if (serviceThread2 != null) {
                     serviceThread2.quitSafely();
                 }
                 return removeNetdEventCallback;
             } catch (RemoteException e) {
-                Slog.wtf("NetworkLogger", "Failed to make remote calls to unregister the callback", e);
+                Slog.wtf(
+                        "NetworkLogger",
+                        "Failed to make remote calls to unregister the callback",
+                        e);
                 ServiceThread serviceThread3 = this.mHandlerThread;
                 if (serviceThread3 != null) {
                     serviceThread3.quitSafely();

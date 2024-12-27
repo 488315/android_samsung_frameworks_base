@@ -1,7 +1,9 @@
 package com.android.server.pm;
 
 import android.content.res.Resources;
+
 import com.android.internal.util.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
@@ -24,10 +26,16 @@ public final /* synthetic */ class ShortcutUser$$ExternalSyntheticLambda0 implem
                     shortcutPackage.scheduleSave();
                 }
                 ShortcutService shortcutService = shortcutPackage.mShortcutUser.mService;
-                Resources injectGetResourcesForApplicationAsUser = shortcutService.injectGetResourcesForApplicationAsUser(shortcutPackage.mPackageUserId, shortcutPackage.mPackageName);
+                Resources injectGetResourcesForApplicationAsUser =
+                        shortcutService.injectGetResourcesForApplicationAsUser(
+                                shortcutPackage.mPackageUserId, shortcutPackage.mPackageName);
                 ArrayList arrayList = new ArrayList(1);
                 if (injectGetResourcesForApplicationAsUser != null) {
-                    shortcutPackage.forEachShortcutMutate(new ShortcutPackage$$ExternalSyntheticLambda2(injectGetResourcesForApplicationAsUser, shortcutService, arrayList));
+                    shortcutPackage.forEachShortcutMutate(
+                            new ShortcutPackage$$ExternalSyntheticLambda2(
+                                    injectGetResourcesForApplicationAsUser,
+                                    shortcutService,
+                                    arrayList));
                 }
                 if (!CollectionUtils.isEmpty(arrayList)) {
                     shortcutService.packageShortcutsChanged(shortcutPackage, arrayList, null);

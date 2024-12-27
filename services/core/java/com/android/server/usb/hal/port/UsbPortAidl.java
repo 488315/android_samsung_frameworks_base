@@ -16,9 +16,11 @@ import android.os.ServiceManager;
 import android.util.IntArray;
 import android.util.LongSparseArray;
 import android.util.sysfwutil.Slog;
+
 import com.android.internal.hidden_from_bootclasspath.android.hardware.usb.flags.Flags;
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.usb.UsbPortManager;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -76,12 +78,14 @@ public final class UsbPortAidl implements UsbPortHal {
             }
             switch (i) {
                 case 1:
-                    PortStatus[] portStatusArr = (PortStatus[]) parcel.createTypedArray(PortStatus.CREATOR);
+                    PortStatus[] portStatusArr =
+                            (PortStatus[]) parcel.createTypedArray(PortStatus.CREATOR);
                     int readInt = parcel.readInt();
                     parcel.enforceNoDataAvail();
                     if (hALCallback2.mUsbPortAidl.mSystemReady) {
                         if (readInt != 0) {
-                            UsbPortManager.logAndPrint(6, hALCallback2.mPw, "port status enquiry failed");
+                            UsbPortManager.logAndPrint(
+                                    6, hALCallback2.mPw, "port status enquiry failed");
                         } else {
                             ArrayList arrayList = new ArrayList();
                             int length = portStatusArr.length;
@@ -103,8 +107,11 @@ public final class UsbPortAidl implements UsbPortHal {
                                 boolean z2 = portStatus2.canChangePowerRole;
                                 byte b4 = portStatus2.currentDataRole;
                                 boolean z3 = portStatus2.canChangeDataRole;
-                                boolean z4 = portStatus2.supportsEnableContaminantPresenceProtection;
-                                int contaminantProtectionStatus = hALCallback2.toContaminantProtectionStatus(portStatus2.contaminantProtectionStatus);
+                                boolean z4 =
+                                        portStatus2.supportsEnableContaminantPresenceProtection;
+                                int contaminantProtectionStatus =
+                                        hALCallback2.toContaminantProtectionStatus(
+                                                portStatus2.contaminantProtectionStatus);
                                 boolean z5 = portStatus2.supportsEnableContaminantPresenceDetection;
                                 PortStatus[] portStatusArr2 = portStatusArr;
                                 byte b5 = portStatus2.contaminantDetectionStatus;
@@ -140,7 +147,8 @@ public final class UsbPortAidl implements UsbPortHal {
                                             break;
                                     }
                                 }
-                                UsbPortManager.logAndPrint(4, hALCallback2.mPw, "AIDL UsbDataStatus:" + i9);
+                                UsbPortManager.logAndPrint(
+                                        4, hALCallback2.mPw, "AIDL UsbDataStatus:" + i9);
                                 boolean z6 = portStatus2.powerTransferLimited;
                                 byte b7 = portStatus2.powerBrickStatus;
                                 boolean z7 = portStatus2.supportsComplianceWarnings;
@@ -190,7 +198,10 @@ public final class UsbPortAidl implements UsbPortHal {
                                         AltModeData altModeData2 = altModeDataArr[i17];
                                         AltModeData[] altModeDataArr2 = altModeDataArr;
                                         if (altModeData2._tag == 0) {
-                                            AltModeData.DisplayPortAltModeData displayPortAltModeData = altModeData2.getDisplayPortAltModeData();
+                                            AltModeData.DisplayPortAltModeData
+                                                    displayPortAltModeData =
+                                                            altModeData2
+                                                                    .getDisplayPortAltModeData();
                                             int i18 = displayPortAltModeData.partnerSinkStatus;
                                             int i19 = displayPortAltModeData.cableStatus;
                                             portStatus = portStatus2;
@@ -209,7 +220,14 @@ public final class UsbPortAidl implements UsbPortHal {
                                                     i3 = 0;
                                                     break;
                                             }
-                                            displayPortAltModeInfo = new DisplayPortAltModeInfo(i18, i19, i3, displayPortAltModeData.hpd, displayPortAltModeData.linkTrainingStatus);
+                                            displayPortAltModeInfo =
+                                                    new DisplayPortAltModeInfo(
+                                                            i18,
+                                                            i19,
+                                                            i3,
+                                                            displayPortAltModeData.hpd,
+                                                            displayPortAltModeData
+                                                                    .linkTrainingStatus);
                                         } else {
                                             i17++;
                                             altModeDataArr = altModeDataArr2;
@@ -219,7 +237,29 @@ public final class UsbPortAidl implements UsbPortHal {
                                         displayPortAltModeInfo = null;
                                     }
                                 }
-                                arrayList2.add(new RawPortInfo(str2, i5, i6, portMode, z, b3, z2, b4, z3, z4, contaminantProtectionStatus, z5, b5, i14, z6, b7, z7, array, i15, i16, displayPortAltModeInfo));
+                                arrayList2.add(
+                                        new RawPortInfo(
+                                                str2,
+                                                i5,
+                                                i6,
+                                                portMode,
+                                                z,
+                                                b3,
+                                                z2,
+                                                b4,
+                                                z3,
+                                                z4,
+                                                contaminantProtectionStatus,
+                                                z5,
+                                                b5,
+                                                i14,
+                                                z6,
+                                                b7,
+                                                z7,
+                                                array,
+                                                i15,
+                                                i16,
+                                                displayPortAltModeInfo));
                                 PortStatus portStatus3 = portStatus;
                                 byte b8 = portStatus3.currentDataRole;
                                 if (b8 == 1) {
@@ -228,7 +268,10 @@ public final class UsbPortAidl implements UsbPortHal {
                                     if (i20 == 0 || i20 == 2) {
                                         hALCallback.mPortManager.startBoost();
                                         hALCallback.preDataRole = b8;
-                                        UsbPortManager.logAndPrint(4, hALCallback.mPw, "ClientCallback AIDL V1: " + portStatus3.portName);
+                                        UsbPortManager.logAndPrint(
+                                                4,
+                                                hALCallback.mPw,
+                                                "ClientCallback AIDL V1: " + portStatus3.portName);
                                         arrayList = arrayList2;
                                         portStatusArr = portStatusArr2;
                                         i4 = i8 + 1;
@@ -242,7 +285,10 @@ public final class UsbPortAidl implements UsbPortHal {
                                     hALCallback.mPortManager.stopBoost();
                                 }
                                 hALCallback.preDataRole = b8;
-                                UsbPortManager.logAndPrint(4, hALCallback.mPw, "ClientCallback AIDL V1: " + portStatus3.portName);
+                                UsbPortManager.logAndPrint(
+                                        4,
+                                        hALCallback.mPw,
+                                        "ClientCallback AIDL V1: " + portStatus3.portName);
                                 arrayList = arrayList2;
                                 portStatusArr = portStatusArr2;
                                 i4 = i8 + 1;
@@ -259,10 +305,20 @@ public final class UsbPortAidl implements UsbPortHal {
                     long readLong = parcel.readLong();
                     parcel.enforceNoDataAvail();
                     if (readInt2 == 0) {
-                        UsbPortManager.logAndPrint(4, hALCallback2.mPw, readString + " role switch successful. opID:" + readLong);
+                        UsbPortManager.logAndPrint(
+                                4,
+                                hALCallback2.mPw,
+                                readString + " role switch successful. opID:" + readLong);
                         break;
                     } else {
-                        UsbPortManager.logAndPrint(6, hALCallback2.mPw, readString + " role switch failed. err:" + readInt2 + "opID:" + readLong);
+                        UsbPortManager.logAndPrint(
+                                6,
+                                hALCallback2.mPw,
+                                readString
+                                        + " role switch failed. err:"
+                                        + readInt2
+                                        + "opID:"
+                                        + readLong);
                         break;
                     }
                 case 3:
@@ -272,15 +328,34 @@ public final class UsbPortAidl implements UsbPortHal {
                     long readLong2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
                     if (readInt3 == 0) {
-                        UsbPortManager.logAndPrint(4, hALCallback2.mPw, "notifyEnableUsbDataStatus:" + readString2 + ": opID:" + readLong2 + " enable:" + readBoolean);
+                        UsbPortManager.logAndPrint(
+                                4,
+                                hALCallback2.mPw,
+                                "notifyEnableUsbDataStatus:"
+                                        + readString2
+                                        + ": opID:"
+                                        + readLong2
+                                        + " enable:"
+                                        + readBoolean);
                     } else {
-                        UsbPortManager.logAndPrint(6, hALCallback2.mPw, readString2 + "notifyEnableUsbDataStatus: opID:" + readLong2 + " failed. err:" + readInt3);
+                        UsbPortManager.logAndPrint(
+                                6,
+                                hALCallback2.mPw,
+                                readString2
+                                        + "notifyEnableUsbDataStatus: opID:"
+                                        + readLong2
+                                        + " failed. err:"
+                                        + readInt3);
                     }
                     try {
-                        ((IUsbOperationInternal) UsbPortAidl.sCallbacks.get(readLong2)).onOperationComplete(readInt3 == 0 ? 0 : 1);
+                        ((IUsbOperationInternal) UsbPortAidl.sCallbacks.get(readLong2))
+                                .onOperationComplete(readInt3 == 0 ? 0 : 1);
                         break;
                     } catch (RemoteException e) {
-                        UsbPortManager.logAndPrintException(hALCallback2.mPw, "notifyEnableUsbDataStatus: Failed to call onOperationComplete", e);
+                        UsbPortManager.logAndPrintException(
+                                hALCallback2.mPw,
+                                "notifyEnableUsbDataStatus: Failed to call onOperationComplete",
+                                e);
                         break;
                     }
                 case 4:
@@ -289,18 +364,33 @@ public final class UsbPortAidl implements UsbPortHal {
                     long readLong3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
                     if (readInt4 == 0) {
-                        UsbPortManager.logAndPrint(4, hALCallback2.mPw, readString3 + ": opID:" + readLong3 + " successful");
+                        UsbPortManager.logAndPrint(
+                                4,
+                                hALCallback2.mPw,
+                                readString3 + ": opID:" + readLong3 + " successful");
                     } else {
-                        UsbPortManager.logAndPrint(6, hALCallback2.mPw, readString3 + "notifyEnableUsbDataWhileDockedStatus: opID:" + readLong3 + " failed. err:" + readInt4);
+                        UsbPortManager.logAndPrint(
+                                6,
+                                hALCallback2.mPw,
+                                readString3
+                                        + "notifyEnableUsbDataWhileDockedStatus: opID:"
+                                        + readLong3
+                                        + " failed. err:"
+                                        + readInt4);
                     }
                     try {
                         LongSparseArray longSparseArray = UsbPortAidl.sCallbacks;
                         if (((IUsbOperationInternal) longSparseArray.get(readLong3)) != null) {
-                            ((IUsbOperationInternal) longSparseArray.get(readLong3)).onOperationComplete(readInt4 == 0 ? 0 : 1);
+                            ((IUsbOperationInternal) longSparseArray.get(readLong3))
+                                    .onOperationComplete(readInt4 == 0 ? 0 : 1);
                             break;
                         }
                     } catch (RemoteException e2) {
-                        UsbPortManager.logAndPrintException(hALCallback2.mPw, "notifyEnableUsbDataWhileDockedStatus: Failed to call onOperationComplete", e2);
+                        UsbPortManager.logAndPrintException(
+                                hALCallback2.mPw,
+                                "notifyEnableUsbDataWhileDockedStatus: Failed to call"
+                                    + " onOperationComplete",
+                                e2);
                         break;
                     }
                     break;
@@ -311,10 +401,25 @@ public final class UsbPortAidl implements UsbPortHal {
                     long readLong4 = parcel.readLong();
                     parcel.enforceNoDataAvail();
                     if (readInt5 == 0) {
-                        UsbPortManager.logAndPrint(4, hALCallback2.mPw, "notifyContaminantEnabledStatus:" + readString4 + ": opID:" + readLong4 + " enable:" + readBoolean2);
+                        UsbPortManager.logAndPrint(
+                                4,
+                                hALCallback2.mPw,
+                                "notifyContaminantEnabledStatus:"
+                                        + readString4
+                                        + ": opID:"
+                                        + readLong4
+                                        + " enable:"
+                                        + readBoolean2);
                         break;
                     } else {
-                        UsbPortManager.logAndPrint(6, hALCallback2.mPw, readString4 + "notifyContaminantEnabledStatus: opID:" + readLong4 + " failed. err:" + readInt5);
+                        UsbPortManager.logAndPrint(
+                                6,
+                                hALCallback2.mPw,
+                                readString4
+                                        + "notifyContaminantEnabledStatus: opID:"
+                                        + readLong4
+                                        + " failed. err:"
+                                        + readInt5);
                         break;
                     }
                 case 6:
@@ -323,10 +428,16 @@ public final class UsbPortAidl implements UsbPortHal {
                     long readLong5 = parcel.readLong();
                     parcel.enforceNoDataAvail();
                     if (readInt6 == 0) {
-                        UsbPortManager.logAndPrint(4, hALCallback2.mPw, readString5 + ": opID:" + readLong5 + " successful");
+                        UsbPortManager.logAndPrint(
+                                4,
+                                hALCallback2.mPw,
+                                readString5 + ": opID:" + readLong5 + " successful");
                         break;
                     } else {
-                        UsbPortManager.logAndPrint(6, hALCallback2.mPw, readString5 + ": opID:" + readLong5 + " failed. err:" + readInt6);
+                        UsbPortManager.logAndPrint(
+                                6,
+                                hALCallback2.mPw,
+                                readString5 + ": opID:" + readLong5 + " failed. err:" + readInt6);
                         break;
                     }
                 case 7:
@@ -336,18 +447,32 @@ public final class UsbPortAidl implements UsbPortHal {
                     long readLong6 = parcel.readLong();
                     parcel.enforceNoDataAvail();
                     if (readInt7 == 0) {
-                        UsbPortManager.logAndPrint(4, hALCallback2.mPw, readString6 + ": opID:" + readLong6 + " successful");
+                        UsbPortManager.logAndPrint(
+                                4,
+                                hALCallback2.mPw,
+                                readString6 + ": opID:" + readLong6 + " successful");
                     } else {
-                        UsbPortManager.logAndPrint(6, hALCallback2.mPw, readString6 + "notifyLimitPowerTransferStatus: opID:" + readLong6 + " failed. err:" + readInt7);
+                        UsbPortManager.logAndPrint(
+                                6,
+                                hALCallback2.mPw,
+                                readString6
+                                        + "notifyLimitPowerTransferStatus: opID:"
+                                        + readLong6
+                                        + " failed. err:"
+                                        + readInt7);
                     }
                     try {
                         LongSparseArray longSparseArray2 = UsbPortAidl.sCallbacks;
                         if (((IUsbOperationInternal) longSparseArray2.get(readLong6)) != null) {
-                            ((IUsbOperationInternal) longSparseArray2.get(readLong6)).onOperationComplete(readInt7 == 0 ? 0 : 1);
+                            ((IUsbOperationInternal) longSparseArray2.get(readLong6))
+                                    .onOperationComplete(readInt7 == 0 ? 0 : 1);
                             break;
                         }
                     } catch (RemoteException e3) {
-                        UsbPortManager.logAndPrintException(hALCallback2.mPw, "enableLimitPowerTransfer: Failed to call onOperationComplete", e3);
+                        UsbPortManager.logAndPrintException(
+                                hALCallback2.mPw,
+                                "enableLimitPowerTransfer: Failed to call onOperationComplete",
+                                e3);
                         break;
                     }
                     break;
@@ -357,15 +482,29 @@ public final class UsbPortAidl implements UsbPortHal {
                     long readLong7 = parcel.readLong();
                     parcel.enforceNoDataAvail();
                     if (readInt8 == 0) {
-                        UsbPortManager.logAndPrint(4, hALCallback2.mPw, "notifyResetUsbPortStatus:" + readString7 + ": opID:" + readLong7);
+                        UsbPortManager.logAndPrint(
+                                4,
+                                hALCallback2.mPw,
+                                "notifyResetUsbPortStatus:" + readString7 + ": opID:" + readLong7);
                     } else {
-                        UsbPortManager.logAndPrint(6, hALCallback2.mPw, readString7 + "notifyEnableUsbDataStatus: opID:" + readLong7 + " failed. err:" + readInt8);
+                        UsbPortManager.logAndPrint(
+                                6,
+                                hALCallback2.mPw,
+                                readString7
+                                        + "notifyEnableUsbDataStatus: opID:"
+                                        + readLong7
+                                        + " failed. err:"
+                                        + readInt8);
                     }
                     try {
-                        ((IUsbOperationInternal) UsbPortAidl.sCallbacks.get(readLong7)).onOperationComplete(readInt8 == 0 ? 0 : 1);
+                        ((IUsbOperationInternal) UsbPortAidl.sCallbacks.get(readLong7))
+                                .onOperationComplete(readInt8 == 0 ? 0 : 1);
                         break;
                     } catch (RemoteException e4) {
-                        UsbPortManager.logAndPrintException(hALCallback2.mPw, "notifyResetUsbPortStatus: Failed to call onOperationComplete", e4);
+                        UsbPortManager.logAndPrintException(
+                                hALCallback2.mPw,
+                                "notifyResetUsbPortStatus: Failed to call onOperationComplete",
+                                e4);
                         break;
                     }
                 default:
@@ -388,7 +527,8 @@ public final class UsbPortAidl implements UsbPortHal {
                     if (b == 4) {
                         return 8;
                     }
-                    UsbPortManager.logAndPrint(6, this.mPw, "Unrecognized aidlContaminantProtection:" + ((int) b));
+                    UsbPortManager.logAndPrint(
+                            6, this.mPw, "Unrecognized aidlContaminantProtection:" + ((int) b));
                     return 0;
                 }
             }
@@ -410,7 +550,8 @@ public final class UsbPortAidl implements UsbPortHal {
                             if (b == 5) {
                                 return 8;
                             }
-                            UsbPortManager.logAndPrint(6, this.mPw, "Unrecognized aidlPortMode:" + ((int) b));
+                            UsbPortManager.logAndPrint(
+                                    6, this.mPw, "Unrecognized aidlPortMode:" + ((int) b));
                             return 0;
                         }
                     }
@@ -440,20 +581,26 @@ public final class UsbPortAidl implements UsbPortHal {
                 return;
             }
             try {
-                IBinder waitForService = ServiceManager.waitForService("android.hardware.usb.IUsb/default");
+                IBinder waitForService =
+                        ServiceManager.waitForService("android.hardware.usb.IUsb/default");
                 this.mBinder = waitForService;
                 this.mProxy = IUsb.Stub.asInterface(waitForService);
-                this.mBinder.linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.server.usb.hal.port.UsbPortAidl$$ExternalSyntheticLambda0
-                    @Override // android.os.IBinder.DeathRecipient
-                    public final void binderDied() {
-                        UsbPortAidl usbPortAidl = UsbPortAidl.this;
-                        UsbPortManager.logAndPrint(6, usbPortAidl.mPw, "Usb AIDL hal service died");
-                        synchronized (usbPortAidl.mLock) {
-                            usbPortAidl.mProxy = null;
-                        }
-                        usbPortAidl.connectToProxy();
-                    }
-                }, 0);
+                this.mBinder.linkToDeath(
+                        new IBinder
+                                .DeathRecipient() { // from class:
+                                                    // com.android.server.usb.hal.port.UsbPortAidl$$ExternalSyntheticLambda0
+                            @Override // android.os.IBinder.DeathRecipient
+                            public final void binderDied() {
+                                UsbPortAidl usbPortAidl = UsbPortAidl.this;
+                                UsbPortManager.logAndPrint(
+                                        6, usbPortAidl.mPw, "Usb AIDL hal service died");
+                                synchronized (usbPortAidl.mLock) {
+                                    usbPortAidl.mProxy = null;
+                                }
+                                usbPortAidl.connectToProxy();
+                            }
+                        },
+                        0);
                 ((IUsb.Stub.Proxy) this.mProxy).setCallback(this.mHALCallback);
                 IUsb iUsb = this.mProxy;
                 long j = this.mTransactionId + 1;
@@ -464,7 +611,10 @@ public final class UsbPortAidl implements UsbPortHal {
                 Slog.e("UsbPortManager", "connectToProxy: usb hal service not responding", e);
             } catch (NoSuchElementException e2) {
                 int i2 = UsbPortManager.COMBO_SOURCE_HOST;
-                Slog.e("UsbPortManager", "connectToProxy: usb hal service not found. Did the service fail to start?", e2);
+                Slog.e(
+                        "UsbPortManager",
+                        "connectToProxy: usb hal service not found. Did the service fail to start?",
+                        e2);
             }
         }
     }
@@ -480,22 +630,31 @@ public final class UsbPortAidl implements UsbPortHal {
             try {
                 ((IUsb.Stub.Proxy) iUsb).enableContaminantPresenceDetection(str, j, z);
             } catch (RemoteException e) {
-                UsbPortManager.logAndPrintException(this.mPw, "Failed to set contaminant detection. opID:" + j, e);
+                UsbPortManager.logAndPrintException(
+                        this.mPw, "Failed to set contaminant detection. opID:" + j, e);
             }
         }
     }
 
     @Override // com.android.server.usb.hal.port.UsbPortHal
-    public final void enableLimitPowerTransfer(String str, boolean z, long j, IUsbOperationInternal iUsbOperationInternal) {
+    public final void enableLimitPowerTransfer(
+            String str, boolean z, long j, IUsbOperationInternal iUsbOperationInternal) {
         LongSparseArray longSparseArray;
         Objects.requireNonNull(str);
         synchronized (this.mLock) {
             try {
             } catch (RemoteException e) {
-                UsbPortManager.logAndPrintException(this.mPw, "enableLimitPowerTransfer: Failed to call onOperationComplete portID=" + str + " opID:" + j, e);
+                UsbPortManager.logAndPrintException(
+                        this.mPw,
+                        "enableLimitPowerTransfer: Failed to call onOperationComplete portID="
+                                + str
+                                + " opID:"
+                                + j,
+                        e);
             }
             if (this.mProxy == null) {
-                UsbPortManager.logAndPrint(6, this.mPw, "enableLimitPowerTransfer: Proxy is null. Retry !opID:" + j);
+                UsbPortManager.logAndPrint(
+                        6, this.mPw, "enableLimitPowerTransfer: Proxy is null. Retry !opID:" + j);
                 iUsbOperationInternal.onOperationComplete(1);
                 return;
             }
@@ -509,13 +668,22 @@ public final class UsbPortAidl implements UsbPortHal {
                 }
             }
             if (j2 != j) {
-                UsbPortManager.logAndPrint(4, this.mPw, "enableUsbData: operationID exists ! opID:" + j + " key:" + j2);
+                UsbPortManager.logAndPrint(
+                        4,
+                        this.mPw,
+                        "enableUsbData: operationID exists ! opID:" + j + " key:" + j2);
             }
             try {
                 longSparseArray.put(j2, iUsbOperationInternal);
                 ((IUsb.Stub.Proxy) this.mProxy).limitPowerTransfer(str, j2, z);
             } catch (RemoteException e2) {
-                UsbPortManager.logAndPrintException(this.mPw, "enableLimitPowerTransfer: Failed while invoking AIDL HAL portID=" + str + " opID:" + j, e2);
+                UsbPortManager.logAndPrintException(
+                        this.mPw,
+                        "enableLimitPowerTransfer: Failed while invoking AIDL HAL portID="
+                                + str
+                                + " opID:"
+                                + j,
+                        e2);
                 if (iUsbOperationInternal != null) {
                     iUsbOperationInternal.onOperationComplete(1);
                 }
@@ -525,7 +693,8 @@ public final class UsbPortAidl implements UsbPortHal {
     }
 
     @Override // com.android.server.usb.hal.port.UsbPortHal
-    public final boolean enableUsbData(String str, boolean z, long j, IUsbOperationInternal iUsbOperationInternal) {
+    public final boolean enableUsbData(
+            String str, boolean z, long j, IUsbOperationInternal iUsbOperationInternal) {
         long j2;
         LongSparseArray longSparseArray;
         Objects.requireNonNull(str);
@@ -533,7 +702,8 @@ public final class UsbPortAidl implements UsbPortHal {
         synchronized (this.mLock) {
             try {
                 if (this.mProxy == null) {
-                    UsbPortManager.logAndPrint(6, this.mPw, "enableUsbData: Proxy is null. Retry !opID:" + j);
+                    UsbPortManager.logAndPrint(
+                            6, this.mPw, "enableUsbData: Proxy is null. Retry !opID:" + j);
                     iUsbOperationInternal.onOperationComplete(1);
                     return false;
                 }
@@ -547,20 +717,35 @@ public final class UsbPortAidl implements UsbPortHal {
                         j2 = ThreadLocalRandom.current().nextInt();
                     } catch (RemoteException e) {
                         e = e;
-                        UsbPortManager.logAndPrintException(this.mPw, "enableUsbData: Failed to call onOperationComplete portID=" + str + "opID:" + j, e);
+                        UsbPortManager.logAndPrintException(
+                                this.mPw,
+                                "enableUsbData: Failed to call onOperationComplete portID="
+                                        + str
+                                        + "opID:"
+                                        + j,
+                                e);
                         sCallbacks.remove(j2);
                         return false;
                     }
                 }
                 if (j2 != j) {
-                    UsbPortManager.logAndPrint(4, this.mPw, "enableUsbData: operationID exists ! opID:" + j + " key:" + j2);
+                    UsbPortManager.logAndPrint(
+                            4,
+                            this.mPw,
+                            "enableUsbData: operationID exists ! opID:" + j + " key:" + j2);
                 }
                 try {
                     longSparseArray.put(j2, iUsbOperationInternal);
                     ((IUsb.Stub.Proxy) this.mProxy).enableUsbData(str, j2, z);
                     return true;
                 } catch (RemoteException e2) {
-                    UsbPortManager.logAndPrintException(this.mPw, "enableUsbData: Failed to invoke enableUsbData: portID=" + str + "opID:" + j, e2);
+                    UsbPortManager.logAndPrintException(
+                            this.mPw,
+                            "enableUsbData: Failed to invoke enableUsbData: portID="
+                                    + str
+                                    + "opID:"
+                                    + j,
+                            e2);
                     iUsbOperationInternal.onOperationComplete(1);
                     sCallbacks.remove(j2);
                     return false;
@@ -573,16 +758,24 @@ public final class UsbPortAidl implements UsbPortHal {
     }
 
     @Override // com.android.server.usb.hal.port.UsbPortHal
-    public final void enableUsbDataWhileDocked(String str, long j, IUsbOperationInternal iUsbOperationInternal) {
+    public final void enableUsbDataWhileDocked(
+            String str, long j, IUsbOperationInternal iUsbOperationInternal) {
         LongSparseArray longSparseArray;
         Objects.requireNonNull(str);
         synchronized (this.mLock) {
             try {
             } catch (RemoteException e) {
-                UsbPortManager.logAndPrintException(this.mPw, "enableUsbDataWhileDocked: Failed to call onOperationComplete portID=" + str + " opID:" + j, e);
+                UsbPortManager.logAndPrintException(
+                        this.mPw,
+                        "enableUsbDataWhileDocked: Failed to call onOperationComplete portID="
+                                + str
+                                + " opID:"
+                                + j,
+                        e);
             }
             if (this.mProxy == null) {
-                UsbPortManager.logAndPrint(6, this.mPw, "enableUsbDataWhileDocked: Proxy is null. Retry !opID:" + j);
+                UsbPortManager.logAndPrint(
+                        6, this.mPw, "enableUsbDataWhileDocked: Proxy is null. Retry !opID:" + j);
                 iUsbOperationInternal.onOperationComplete(1);
                 return;
             }
@@ -596,13 +789,22 @@ public final class UsbPortAidl implements UsbPortHal {
                 }
             }
             if (j2 != j) {
-                UsbPortManager.logAndPrint(4, this.mPw, "enableUsbDataWhileDocked: operationID exists ! opID:" + j + " key:" + j2);
+                UsbPortManager.logAndPrint(
+                        4,
+                        this.mPw,
+                        "enableUsbDataWhileDocked: operationID exists ! opID:" + j + " key:" + j2);
             }
             try {
                 longSparseArray.put(j2, iUsbOperationInternal);
                 ((IUsb.Stub.Proxy) this.mProxy).enableUsbDataWhileDocked(j2, str);
             } catch (RemoteException e2) {
-                UsbPortManager.logAndPrintException(this.mPw, "enableUsbDataWhileDocked: error while invoking halportID=" + str + " opID:" + j, e2);
+                UsbPortManager.logAndPrintException(
+                        this.mPw,
+                        "enableUsbDataWhileDocked: error while invoking halportID="
+                                + str
+                                + " opID:"
+                                + j,
+                        e2);
                 if (iUsbOperationInternal != null) {
                     iUsbOperationInternal.onOperationComplete(1);
                 }
@@ -641,7 +843,8 @@ public final class UsbPortAidl implements UsbPortHal {
     }
 
     @Override // com.android.server.usb.hal.port.UsbPortHal
-    public final void resetUsbPort(String str, long j, IUsbOperationInternal iUsbOperationInternal) {
+    public final void resetUsbPort(
+            String str, long j, IUsbOperationInternal iUsbOperationInternal) {
         long j2;
         LongSparseArray longSparseArray;
         Objects.requireNonNull(str);
@@ -649,7 +852,8 @@ public final class UsbPortAidl implements UsbPortHal {
         synchronized (this.mLock) {
             try {
                 if (this.mProxy == null) {
-                    UsbPortManager.logAndPrint(6, this.mPw, "resetUsbPort: Proxy is null. Retry !opID:" + j);
+                    UsbPortManager.logAndPrint(
+                            6, this.mPw, "resetUsbPort: Proxy is null. Retry !opID:" + j);
                     iUsbOperationInternal.onOperationComplete(1);
                 }
                 j2 = j;
@@ -663,12 +867,21 @@ public final class UsbPortAidl implements UsbPortHal {
                         }
                     } catch (RemoteException e) {
                         e = e;
-                        UsbPortManager.logAndPrintException(this.mPw, "resetUsbPort: Failed to call onOperationComplete portID=" + str + "opID:" + j, e);
+                        UsbPortManager.logAndPrintException(
+                                this.mPw,
+                                "resetUsbPort: Failed to call onOperationComplete portID="
+                                        + str
+                                        + "opID:"
+                                        + j,
+                                e);
                         sCallbacks.remove(j2);
                     }
                 }
                 if (j2 != j) {
-                    UsbPortManager.logAndPrint(4, this.mPw, "resetUsbPort: operationID exists ! opID:" + j + " key:" + j2);
+                    UsbPortManager.logAndPrint(
+                            4,
+                            this.mPw,
+                            "resetUsbPort: operationID exists ! opID:" + j + " key:" + j2);
                 }
                 try {
                     longSparseArray.put(j2, iUsbOperationInternal);
@@ -677,7 +890,10 @@ public final class UsbPortAidl implements UsbPortHal {
                         ((IUsb.Stub.Proxy) iUsb).resetUsbPort(j2, str);
                     }
                 } catch (RemoteException e2) {
-                    UsbPortManager.logAndPrintException(this.mPw, "resetUsbPort: Failed to resetUsbPort: portID=" + str + "opId:" + j, e2);
+                    UsbPortManager.logAndPrintException(
+                            this.mPw,
+                            "resetUsbPort: Failed to resetUsbPort: portID=" + str + "opId:" + j,
+                            e2);
                     iUsbOperationInternal.onOperationComplete(1);
                     sCallbacks.remove(j2);
                 }
@@ -703,7 +919,15 @@ public final class UsbPortAidl implements UsbPortHal {
                 try {
                     ((IUsb.Stub.Proxy) this.mProxy).switchRole(str, portRole, j);
                 } catch (RemoteException e) {
-                    UsbPortManager.logAndPrintException(this.mPw, "Failed to set the USB data role: portId=" + str + ", newDataRole=" + UsbPort.dataRoleToString(i) + "opID:" + j, e);
+                    UsbPortManager.logAndPrintException(
+                            this.mPw,
+                            "Failed to set the USB data role: portId="
+                                    + str
+                                    + ", newDataRole="
+                                    + UsbPort.dataRoleToString(i)
+                                    + "opID:"
+                                    + j,
+                            e);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -726,7 +950,15 @@ public final class UsbPortAidl implements UsbPortHal {
                 try {
                     ((IUsb.Stub.Proxy) this.mProxy).switchRole(str, portRole, j);
                 } catch (RemoteException e) {
-                    UsbPortManager.logAndPrintException(this.mPw, "Failed to set the USB port mode: portId=" + str + ", newMode=" + UsbPort.modeToString(i) + "opID:" + j, e);
+                    UsbPortManager.logAndPrintException(
+                            this.mPw,
+                            "Failed to set the USB port mode: portId="
+                                    + str
+                                    + ", newMode="
+                                    + UsbPort.modeToString(i)
+                                    + "opID:"
+                                    + j,
+                            e);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -749,7 +981,15 @@ public final class UsbPortAidl implements UsbPortHal {
                 try {
                     ((IUsb.Stub.Proxy) this.mProxy).switchRole(str, portRole, j);
                 } catch (RemoteException e) {
-                    UsbPortManager.logAndPrintException(this.mPw, "Failed to set the USB power role: portId=" + str + ", newPowerRole=" + UsbPort.powerRoleToString(i) + "opID:" + j, e);
+                    UsbPortManager.logAndPrintException(
+                            this.mPw,
+                            "Failed to set the USB power role: portId="
+                                    + str
+                                    + ", newPowerRole="
+                                    + UsbPort.powerRoleToString(i)
+                                    + "opID:"
+                                    + j,
+                            e);
                 }
             } catch (Throwable th) {
                 throw th;

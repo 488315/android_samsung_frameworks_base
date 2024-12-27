@@ -3,24 +3,27 @@ package android.media.audio.common;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class AudioPortExt implements Parcelable {
-    public static final Parcelable.Creator<AudioPortExt> CREATOR = new Parcelable.Creator<AudioPortExt>() { // from class: android.media.audio.common.AudioPortExt.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortExt createFromParcel(Parcel _aidl_source) {
-            return new AudioPortExt(_aidl_source);
-        }
+    public static final Parcelable.Creator<AudioPortExt> CREATOR =
+            new Parcelable.Creator<
+                    AudioPortExt>() { // from class: android.media.audio.common.AudioPortExt.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortExt createFromParcel(Parcel _aidl_source) {
+                    return new AudioPortExt(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortExt[] newArray(int _aidl_size) {
-            return new AudioPortExt[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortExt[] newArray(int _aidl_size) {
+                    return new AudioPortExt[_aidl_size];
+                }
+            };
     public static final int device = 1;
     public static final int mix = 2;
     public static final int session = 3;
@@ -137,11 +140,14 @@ public final class AudioPortExt implements Parcelable {
                 _set(_aidl_tag, java.lang.Boolean.valueOf(_aidl_value));
                 return;
             case 1:
-                AudioPortDeviceExt _aidl_value2 = (AudioPortDeviceExt) _aidl_parcel.readTypedObject(AudioPortDeviceExt.CREATOR);
+                AudioPortDeviceExt _aidl_value2 =
+                        (AudioPortDeviceExt)
+                                _aidl_parcel.readTypedObject(AudioPortDeviceExt.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
-                AudioPortMixExt _aidl_value3 = (AudioPortMixExt) _aidl_parcel.readTypedObject(AudioPortMixExt.CREATOR);
+                AudioPortMixExt _aidl_value3 =
+                        (AudioPortMixExt) _aidl_parcel.readTypedObject(AudioPortMixExt.CREATOR);
                 _set(_aidl_tag, _aidl_value3);
                 return;
             case 3:
@@ -177,13 +183,21 @@ public final class AudioPortExt implements Parcelable {
     public String toString() {
         switch (this._tag) {
             case 0:
-                return "AudioPortExt.unspecified(" + getUnspecified() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioPortExt.unspecified("
+                        + getUnspecified()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "AudioPortExt.device(" + Objects.toString(getDevice()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioPortExt.device("
+                        + Objects.toString(getDevice())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 2:
-                return "AudioPortExt.mix(" + Objects.toString(getMix()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioPortExt.mix("
+                        + Objects.toString(getMix())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 3:
-                return "AudioPortExt.session(" + getSession() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioPortExt.session("
+                        + getSession()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -204,12 +218,18 @@ public final class AudioPortExt implements Parcelable {
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
     }
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

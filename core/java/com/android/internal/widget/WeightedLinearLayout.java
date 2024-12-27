@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */

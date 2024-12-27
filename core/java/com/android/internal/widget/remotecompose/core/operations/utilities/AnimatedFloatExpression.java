@@ -2,6 +2,7 @@ package com.android.internal.widget.remotecompose.core.operations.utilities;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.provider.Telephony;
+
 import com.android.internal.content.NativeLibraryHelper;
 
 /* loaded from: classes5.dex */
@@ -13,245 +14,315 @@ public class AnimatedFloatExpression {
     static final int[] NO_OF_OPS;
     public static final int OFFSET = 256;
     float[] mLocalStack = new float[128];
-    Op[] mOps = {null, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda0
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$0;
-            lambda$new$0 = AnimatedFloatExpression.this.lambda$new$0(i);
-            return lambda$new$0;
+    Op[] mOps = {
+        null,
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda0
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$0;
+                lambda$new$0 = AnimatedFloatExpression.this.lambda$new$0(i);
+                return lambda$new$0;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda11
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$1;
+                lambda$new$1 = AnimatedFloatExpression.this.lambda$new$1(i);
+                return lambda$new$1;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda22
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$2;
+                lambda$new$2 = AnimatedFloatExpression.this.lambda$new$2(i);
+                return lambda$new$2;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda27
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$3;
+                lambda$new$3 = AnimatedFloatExpression.this.lambda$new$3(i);
+                return lambda$new$3;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda28
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$4;
+                lambda$new$4 = AnimatedFloatExpression.this.lambda$new$4(i);
+                return lambda$new$4;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda29
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$5;
+                lambda$new$5 = AnimatedFloatExpression.this.lambda$new$5(i);
+                return lambda$new$5;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda30
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$6;
+                lambda$new$6 = AnimatedFloatExpression.this.lambda$new$6(i);
+                return lambda$new$6;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda31
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$7;
+                lambda$new$7 = AnimatedFloatExpression.this.lambda$new$7(i);
+                return lambda$new$7;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda32
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$8;
+                lambda$new$8 = AnimatedFloatExpression.this.lambda$new$8(i);
+                return lambda$new$8;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda33
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$9;
+                lambda$new$9 = AnimatedFloatExpression.this.lambda$new$9(i);
+                return lambda$new$9;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda1
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$10;
+                lambda$new$10 = AnimatedFloatExpression.this.lambda$new$10(i);
+                return lambda$new$10;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda2
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$11;
+                lambda$new$11 = AnimatedFloatExpression.this.lambda$new$11(i);
+                return lambda$new$11;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda3
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$12;
+                lambda$new$12 = AnimatedFloatExpression.this.lambda$new$12(i);
+                return lambda$new$12;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda4
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$13;
+                lambda$new$13 = AnimatedFloatExpression.this.lambda$new$13(i);
+                return lambda$new$13;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda5
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$14;
+                lambda$new$14 = AnimatedFloatExpression.this.lambda$new$14(i);
+                return lambda$new$14;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda6
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$15;
+                lambda$new$15 = AnimatedFloatExpression.this.lambda$new$15(i);
+                return lambda$new$15;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda7
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$16;
+                lambda$new$16 = AnimatedFloatExpression.this.lambda$new$16(i);
+                return lambda$new$16;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda8
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$17;
+                lambda$new$17 = AnimatedFloatExpression.this.lambda$new$17(i);
+                return lambda$new$17;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda9
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$18;
+                lambda$new$18 = AnimatedFloatExpression.this.lambda$new$18(i);
+                return lambda$new$18;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda10
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$19;
+                lambda$new$19 = AnimatedFloatExpression.this.lambda$new$19(i);
+                return lambda$new$19;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda12
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$20;
+                lambda$new$20 = AnimatedFloatExpression.this.lambda$new$20(i);
+                return lambda$new$20;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda13
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$21;
+                lambda$new$21 = AnimatedFloatExpression.this.lambda$new$21(i);
+                return lambda$new$21;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda14
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$22;
+                lambda$new$22 = AnimatedFloatExpression.this.lambda$new$22(i);
+                return lambda$new$22;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda15
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$23;
+                lambda$new$23 = AnimatedFloatExpression.this.lambda$new$23(i);
+                return lambda$new$23;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda16
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$24;
+                lambda$new$24 = AnimatedFloatExpression.this.lambda$new$24(i);
+                return lambda$new$24;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda17
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$25;
+                lambda$new$25 = AnimatedFloatExpression.this.lambda$new$25(i);
+                return lambda$new$25;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda18
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$26;
+                lambda$new$26 = AnimatedFloatExpression.this.lambda$new$26(i);
+                return lambda$new$26;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda19
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$27;
+                lambda$new$27 = AnimatedFloatExpression.this.lambda$new$27(i);
+                return lambda$new$27;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda20
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$28;
+                lambda$new$28 = AnimatedFloatExpression.this.lambda$new$28(i);
+                return lambda$new$28;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda21
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$29;
+                lambda$new$29 = AnimatedFloatExpression.this.lambda$new$29(i);
+                return lambda$new$29;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda23
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$30;
+                lambda$new$30 = AnimatedFloatExpression.this.lambda$new$30(i);
+                return lambda$new$30;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda24
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$31;
+                lambda$new$31 = AnimatedFloatExpression.this.lambda$new$31(i);
+                return lambda$new$31;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda25
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$32;
+                lambda$new$32 = AnimatedFloatExpression.this.lambda$new$32(i);
+                return lambda$new$32;
+            }
+        },
+        new Op() { // from class:
+                   // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda26
+            @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
+            public final int eval(int i) {
+                int lambda$new$33;
+                lambda$new$33 = AnimatedFloatExpression.this.lambda$new$33(i);
+                return lambda$new$33;
+            }
         }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda11
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$1;
-            lambda$new$1 = AnimatedFloatExpression.this.lambda$new$1(i);
-            return lambda$new$1;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda22
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$2;
-            lambda$new$2 = AnimatedFloatExpression.this.lambda$new$2(i);
-            return lambda$new$2;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda27
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$3;
-            lambda$new$3 = AnimatedFloatExpression.this.lambda$new$3(i);
-            return lambda$new$3;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda28
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$4;
-            lambda$new$4 = AnimatedFloatExpression.this.lambda$new$4(i);
-            return lambda$new$4;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda29
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$5;
-            lambda$new$5 = AnimatedFloatExpression.this.lambda$new$5(i);
-            return lambda$new$5;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda30
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$6;
-            lambda$new$6 = AnimatedFloatExpression.this.lambda$new$6(i);
-            return lambda$new$6;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda31
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$7;
-            lambda$new$7 = AnimatedFloatExpression.this.lambda$new$7(i);
-            return lambda$new$7;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda32
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$8;
-            lambda$new$8 = AnimatedFloatExpression.this.lambda$new$8(i);
-            return lambda$new$8;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda33
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$9;
-            lambda$new$9 = AnimatedFloatExpression.this.lambda$new$9(i);
-            return lambda$new$9;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda1
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$10;
-            lambda$new$10 = AnimatedFloatExpression.this.lambda$new$10(i);
-            return lambda$new$10;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda2
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$11;
-            lambda$new$11 = AnimatedFloatExpression.this.lambda$new$11(i);
-            return lambda$new$11;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda3
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$12;
-            lambda$new$12 = AnimatedFloatExpression.this.lambda$new$12(i);
-            return lambda$new$12;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda4
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$13;
-            lambda$new$13 = AnimatedFloatExpression.this.lambda$new$13(i);
-            return lambda$new$13;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda5
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$14;
-            lambda$new$14 = AnimatedFloatExpression.this.lambda$new$14(i);
-            return lambda$new$14;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda6
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$15;
-            lambda$new$15 = AnimatedFloatExpression.this.lambda$new$15(i);
-            return lambda$new$15;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda7
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$16;
-            lambda$new$16 = AnimatedFloatExpression.this.lambda$new$16(i);
-            return lambda$new$16;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda8
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$17;
-            lambda$new$17 = AnimatedFloatExpression.this.lambda$new$17(i);
-            return lambda$new$17;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda9
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$18;
-            lambda$new$18 = AnimatedFloatExpression.this.lambda$new$18(i);
-            return lambda$new$18;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda10
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$19;
-            lambda$new$19 = AnimatedFloatExpression.this.lambda$new$19(i);
-            return lambda$new$19;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda12
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$20;
-            lambda$new$20 = AnimatedFloatExpression.this.lambda$new$20(i);
-            return lambda$new$20;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda13
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$21;
-            lambda$new$21 = AnimatedFloatExpression.this.lambda$new$21(i);
-            return lambda$new$21;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda14
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$22;
-            lambda$new$22 = AnimatedFloatExpression.this.lambda$new$22(i);
-            return lambda$new$22;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda15
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$23;
-            lambda$new$23 = AnimatedFloatExpression.this.lambda$new$23(i);
-            return lambda$new$23;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda16
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$24;
-            lambda$new$24 = AnimatedFloatExpression.this.lambda$new$24(i);
-            return lambda$new$24;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda17
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$25;
-            lambda$new$25 = AnimatedFloatExpression.this.lambda$new$25(i);
-            return lambda$new$25;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda18
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$26;
-            lambda$new$26 = AnimatedFloatExpression.this.lambda$new$26(i);
-            return lambda$new$26;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda19
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$27;
-            lambda$new$27 = AnimatedFloatExpression.this.lambda$new$27(i);
-            return lambda$new$27;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda20
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$28;
-            lambda$new$28 = AnimatedFloatExpression.this.lambda$new$28(i);
-            return lambda$new$28;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda21
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$29;
-            lambda$new$29 = AnimatedFloatExpression.this.lambda$new$29(i);
-            return lambda$new$29;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda23
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$30;
-            lambda$new$30 = AnimatedFloatExpression.this.lambda$new$30(i);
-            return lambda$new$30;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda24
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$31;
-            lambda$new$31 = AnimatedFloatExpression.this.lambda$new$31(i);
-            return lambda$new$31;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda25
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$32;
-            lambda$new$32 = AnimatedFloatExpression.this.lambda$new$32(i);
-            return lambda$new$32;
-        }
-    }, new Op() { // from class: com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression$$ExternalSyntheticLambda26
-        @Override // com.android.internal.widget.remotecompose.core.operations.utilities.AnimatedFloatExpression.Op
-        public final int eval(int i) {
-            int lambda$new$33;
-            lambda$new$33 = AnimatedFloatExpression.this.lambda$new$33(i);
-            return lambda$new$33;
-        }
-    }};
+    };
     float[] mStack;
     float[] mVar;
     static IntMap<String> sNames = new IntMap<>();
@@ -364,7 +435,11 @@ public class AnimatedFloatExpression {
         sNames.put(k33, "a[1]");
         int i = k34 + 1;
         sNames.put(k34, "a[2]");
-        NO_OF_OPS = new int[]{-1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0};
+        NO_OF_OPS =
+                new int[] {
+                    -1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3,
+                    3, 3, 1, 1, 1, 1, 0, 0, 0
+                };
     }
 
     public static boolean isMathOperator(float v) {
@@ -580,7 +655,8 @@ public class AnimatedFloatExpression {
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ int lambda$new$26(int sp) {
-        this.mStack[sp - 2] = Math.min(Math.max(this.mStack[sp - 2], this.mStack[sp]), this.mStack[sp - 1]);
+        this.mStack[sp - 2] =
+                Math.min(Math.max(this.mStack[sp - 2], this.mStack[sp]), this.mStack[sp - 1]);
         return sp - 2;
     }
 
@@ -662,17 +738,43 @@ public class AnimatedFloatExpression {
                 case -1:
                     return "nop";
                 case 1:
-                    return sNames.get(id) + NavigationBarInflaterView.KEY_CODE_START + toString(exp, sp + 1) + ") ";
+                    return sNames.get(id)
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + toString(exp, sp + 1)
+                            + ") ";
                 case 2:
                     if (infix(id)) {
-                        return NavigationBarInflaterView.KEY_CODE_START + toString(exp, sp + 1) + sNames.get(id) + " " + toString(exp, sp + 2) + ") ";
+                        return NavigationBarInflaterView.KEY_CODE_START
+                                + toString(exp, sp + 1)
+                                + sNames.get(id)
+                                + " "
+                                + toString(exp, sp + 2)
+                                + ") ";
                     }
-                    return sNames.get(id) + NavigationBarInflaterView.KEY_CODE_START + toString(exp, sp + 1) + ", " + toString(exp, sp + 2) + NavigationBarInflaterView.KEY_CODE_END;
+                    return sNames.get(id)
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + toString(exp, sp + 1)
+                            + ", "
+                            + toString(exp, sp + 2)
+                            + NavigationBarInflaterView.KEY_CODE_END;
                 case 3:
                     if (infix(id)) {
-                        return "((" + toString(exp, sp + 1) + ") ? " + toString(exp, sp + 2) + ":" + toString(exp, sp + 3) + NavigationBarInflaterView.KEY_CODE_END;
+                        return "(("
+                                + toString(exp, sp + 1)
+                                + ") ? "
+                                + toString(exp, sp + 2)
+                                + ":"
+                                + toString(exp, sp + 3)
+                                + NavigationBarInflaterView.KEY_CODE_END;
                     }
-                    return sNames.get(id) + NavigationBarInflaterView.KEY_CODE_START + toString(exp, sp + 1) + ", " + toString(exp, sp + 2) + ", " + toString(exp, sp + 3) + NavigationBarInflaterView.KEY_CODE_END;
+                    return sNames.get(id)
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + toString(exp, sp + 1)
+                            + ", "
+                            + toString(exp, sp + 2)
+                            + ", "
+                            + toString(exp, sp + 3)
+                            + NavigationBarInflaterView.KEY_CODE_END;
             }
         }
         return Float.toString(exp[sp]);

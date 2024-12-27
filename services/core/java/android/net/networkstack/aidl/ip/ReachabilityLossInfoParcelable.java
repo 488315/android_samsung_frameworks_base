@@ -6,6 +6,7 @@ import android.hardware.broadcastradio.DabTableEntry$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -64,7 +65,8 @@ public class ReachabilityLossInfoParcelable implements Parcelable {
         try {
         } finally {
             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                BadParcelableException badParcelableException = new BadParcelableException("Overflow in the size of parcelable");
+                BadParcelableException badParcelableException =
+                        new BadParcelableException("Overflow in the size of parcelable");
             }
             parcel.setDataPosition(dataPosition + readInt);
             return builder.build();
@@ -109,17 +111,32 @@ public class ReachabilityLossInfoParcelable implements Parcelable {
         if (obj == null || !(obj instanceof ReachabilityLossInfoParcelable)) {
             return false;
         }
-        ReachabilityLossInfoParcelable reachabilityLossInfoParcelable = (ReachabilityLossInfoParcelable) obj;
-        return Objects.deepEquals(this.message, reachabilityLossInfoParcelable.message) && Objects.deepEquals(Integer.valueOf(this.reason), Integer.valueOf(reachabilityLossInfoParcelable.reason));
+        ReachabilityLossInfoParcelable reachabilityLossInfoParcelable =
+                (ReachabilityLossInfoParcelable) obj;
+        return Objects.deepEquals(this.message, reachabilityLossInfoParcelable.message)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.reason),
+                        Integer.valueOf(reachabilityLossInfoParcelable.reason));
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.message, Integer.valueOf(this.reason)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(this.message, Integer.valueOf(this.reason)).toArray());
     }
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmBandRange$$ExternalSyntheticOutline0.m(DabTableEntry$$ExternalSyntheticOutline0.m(this.message, "reason: ", new StringBuilder("message: "), stringJoiner), this.reason, stringJoiner, "ReachabilityLossInfoParcelable"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                this.message,
+                                "reason: ",
+                                new StringBuilder("message: "),
+                                stringJoiner),
+                        this.reason,
+                        stringJoiner,
+                        "ReachabilityLossInfoParcelable"));
     }
 
     @Override // android.os.Parcelable
@@ -127,7 +144,9 @@ public class ReachabilityLossInfoParcelable implements Parcelable {
         int dataPosition = parcel.dataPosition();
         parcel.writeInt(0);
         parcel.writeString(this.message);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.reason, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.reason, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

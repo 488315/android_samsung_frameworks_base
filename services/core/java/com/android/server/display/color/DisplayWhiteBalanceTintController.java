@@ -6,6 +6,7 @@ import android.hardware.display.ColorDisplayManager;
 import android.hardware.display.DisplayManagerInternal;
 import android.opengl.Matrix;
 import android.util.Slog;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.display.feature.DisplayManagerFlags;
 
@@ -35,7 +36,9 @@ public final class DisplayWhiteBalanceTintController extends TintController {
     public final float[] mMatrixDisplayWhiteBalance = new float[16];
     public boolean mIsAllowed = true;
 
-    public DisplayWhiteBalanceTintController(DisplayManagerInternal displayManagerInternal, DisplayManagerFlags displayManagerFlags) {
+    public DisplayWhiteBalanceTintController(
+            DisplayManagerInternal displayManagerInternal,
+            DisplayManagerFlags displayManagerFlags) {
         this.mDisplayManagerInternal = displayManagerInternal;
         this.mDisplayManagerFlags = displayManagerFlags;
     }
@@ -66,13 +69,24 @@ public final class DisplayWhiteBalanceTintController extends TintController {
         float f23 = fArr2[7];
         float f24 = (f3 * f23) + (f * f22);
         float f25 = fArr2[8];
-        return new float[]{f7, f11, f15, f19, f20, f21, (f5 * f25) + f24, (f10 * f25) + (f9 * f23) + (f8 * f22), (f14 * f25) + (f13 * f23) + (f12 * f22)};
+        return new float[] {
+            f7,
+            f11,
+            f15,
+            f19,
+            f20,
+            f21,
+            (f5 * f25) + f24,
+            (f10 * f25) + (f9 * f23) + (f8 * f22),
+            (f14 * f25) + (f13 * f23) + (f12 * f22)
+        };
     }
 
     public final float[] computeMatrixForCct(int i) {
         float[] fArr;
         if (!this.mSetUp || i == 0) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Couldn't compute matrix for cct=", "ColorDisplayService");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i, "Couldn't compute matrix for cct=", "ColorDisplayService");
             return ColorDisplayService.MATRIX_IDENTITY;
         }
         synchronized (this.mLock) {
@@ -83,7 +97,13 @@ public final class DisplayWhiteBalanceTintController extends TintController {
                 } else {
                     Matrix.setIdentityM(this.mMatrixDisplayWhiteBalance, 0);
                 }
-                Slog.d("ColorDisplayService", "computeDisplayWhiteBalanceMatrix: cct =" + i + " matrix =" + TintController.matrixToString(16, this.mMatrixDisplayWhiteBalance));
+                Slog.d(
+                        "ColorDisplayService",
+                        "computeDisplayWhiteBalanceMatrix: cct ="
+                                + i
+                                + " matrix ="
+                                + TintController.matrixToString(
+                                        16, this.mMatrixDisplayWhiteBalance));
                 fArr = this.mMatrixDisplayWhiteBalance;
             } catch (Throwable th) {
                 throw th;
@@ -95,10 +115,20 @@ public final class DisplayWhiteBalanceTintController extends TintController {
     public final void computeMatrixForCctLocked(int i) {
         float[] cctToXyz = ColorSpace.cctToXyz(i);
         this.mCurrentColorTemperatureXYZ = cctToXyz;
-        float[] chromaticAdaptation = ColorSpace.chromaticAdaptation(ColorSpace.Adaptation.BRADFORD, this.mDisplayNominalWhiteXYZ, cctToXyz);
+        float[] chromaticAdaptation =
+                ColorSpace.chromaticAdaptation(
+                        ColorSpace.Adaptation.BRADFORD, this.mDisplayNominalWhiteXYZ, cctToXyz);
         this.mChromaticAdaptationMatrix = chromaticAdaptation;
-        float[] mul3x3 = mul3x3(this.mDisplayColorSpaceRGB.getInverseTransform(), mul3x3(chromaticAdaptation, this.mDisplayColorSpaceRGB.getTransform()));
-        float max = Math.max(Math.max(mul3x3[0] + mul3x3[3] + mul3x3[6], mul3x3[1] + mul3x3[4] + mul3x3[7]), mul3x3[2] + mul3x3[5] + mul3x3[8]);
+        float[] mul3x3 =
+                mul3x3(
+                        this.mDisplayColorSpaceRGB.getInverseTransform(),
+                        mul3x3(chromaticAdaptation, this.mDisplayColorSpaceRGB.getTransform()));
+        float max =
+                Math.max(
+                        Math.max(
+                                mul3x3[0] + mul3x3[3] + mul3x3[6],
+                                mul3x3[1] + mul3x3[4] + mul3x3[7]),
+                        mul3x3[2] + mul3x3[5] + mul3x3[8]);
         float[] fArr = this.mMatrixDisplayWhiteBalance;
         Matrix.setIdentityM(fArr, 0);
         for (int i2 = 0; i2 < 9; i2++) {
@@ -135,7 +165,8 @@ public final class DisplayWhiteBalanceTintController extends TintController {
 
     public final boolean isAvailable(Context context) {
         if (this.mIsAvailable == null) {
-            this.mIsAvailable = Boolean.valueOf(ColorDisplayManager.isDisplayWhiteBalanceAvailable(context));
+            this.mIsAvailable =
+                    Boolean.valueOf(ColorDisplayManager.isDisplayWhiteBalanceAvailable(context));
         }
         return this.mIsAvailable.booleanValue();
     }

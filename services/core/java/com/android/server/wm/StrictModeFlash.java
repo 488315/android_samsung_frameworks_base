@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.Surface;
 import android.view.SurfaceControl;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,17 +21,29 @@ public final class StrictModeFlash {
     public StrictModeFlash(DisplayContent displayContent, SurfaceControl.Transaction transaction) {
         SurfaceControl surfaceControl = null;
         try {
-            surfaceControl = displayContent.makeOverlay().setName("StrictModeFlash").setBLASTLayer().setFormat(-3).setCallsite("StrictModeFlash").build();
+            surfaceControl =
+                    displayContent
+                            .makeOverlay()
+                            .setName("StrictModeFlash")
+                            .setBLASTLayer()
+                            .setFormat(-3)
+                            .setCallsite("StrictModeFlash")
+                            .build();
             transaction.setLayer(surfaceControl, 1010000);
-            transaction.setPosition(surfaceControl, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE);
+            transaction.setPosition(
+                    surfaceControl,
+                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                    FullScreenMagnificationGestureHandler.MAX_SCALE);
             transaction.show(surfaceControl);
-            InputMonitor.setTrustedOverlayInputInfo(surfaceControl, transaction, displayContent.mDisplayId, "StrictModeFlash");
+            InputMonitor.setTrustedOverlayInputInfo(
+                    surfaceControl, transaction, displayContent.mDisplayId, "StrictModeFlash");
         } catch (Surface.OutOfResourcesException unused) {
         }
         SurfaceControl surfaceControl2 = surfaceControl;
         this.mSurfaceControl = surfaceControl2;
         this.mDrawNeeded = true;
-        BLASTBufferQueue bLASTBufferQueue = new BLASTBufferQueue("StrictModeFlash", surfaceControl2, 1, 1, 1);
+        BLASTBufferQueue bLASTBufferQueue =
+                new BLASTBufferQueue("StrictModeFlash", surfaceControl2, 1, 1, 1);
         this.mBlastBufferQueue = bLASTBufferQueue;
         this.mSurface = bLASTBufferQueue.createSurface();
     }

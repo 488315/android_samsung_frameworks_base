@@ -4,9 +4,9 @@ import android.accessibilityservice.AccessibilityGestureEvent;
 import android.content.Context;
 import android.util.Slog;
 import android.view.MotionEvent;
+
 import com.android.server.accessibility.AccessibilityManagerService;
-import com.android.server.accessibility.gestures.GestureMatcher;
-import com.android.server.accessibility.gestures.TouchExplorer;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -26,8 +26,7 @@ public final class GestureManifold implements GestureMatcher.StateChangeListener
     public final List mTwoFingerSwipes;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Listener {
-    }
+    public interface Listener {}
 
     public GestureManifold(Context context, Listener listener, TouchState touchState) {
         ArrayList arrayList = new ArrayList();
@@ -107,7 +106,8 @@ public final class GestureManifold implements GestureMatcher.StateChangeListener
     }
 
     @Override // com.android.server.accessibility.gestures.GestureMatcher.StateChangeListener
-    public final void onStateChanged(int i, int i2, int i3, MotionEvent motionEvent, MotionEvent motionEvent2) {
+    public final void onStateChanged(
+            int i, int i2, int i3, MotionEvent motionEvent, MotionEvent motionEvent2) {
         TouchState touchState = this.mState;
         Listener listener = this.mListener;
         if (i2 == 1 && touchState.mState != 5) {
@@ -125,14 +125,23 @@ public final class GestureManifold implements GestureMatcher.StateChangeListener
         if (i2 == 2) {
             if (i != 17) {
                 if (i != 18) {
-                    ((TouchExplorer) listener).onGestureCompleted(new AccessibilityGestureEvent(i, motionEvent.getDisplayId(), this.mEvents));
+                    ((TouchExplorer) listener)
+                            .onGestureCompleted(
+                                    new AccessibilityGestureEvent(
+                                            i, motionEvent.getDisplayId(), this.mEvents));
                 } else if (this.mServiceHandlesDoubleTap) {
-                    ((TouchExplorer) listener).onGestureCompleted(new AccessibilityGestureEvent(i, motionEvent.getDisplayId(), this.mEvents));
+                    ((TouchExplorer) listener)
+                            .onGestureCompleted(
+                                    new AccessibilityGestureEvent(
+                                            i, motionEvent.getDisplayId(), this.mEvents));
                 } else {
                     ((TouchExplorer) listener).onDoubleTapAndHold(motionEvent, motionEvent2, i3);
                 }
             } else if (this.mServiceHandlesDoubleTap) {
-                ((TouchExplorer) listener).onGestureCompleted(new AccessibilityGestureEvent(i, motionEvent.getDisplayId(), this.mEvents));
+                ((TouchExplorer) listener)
+                        .onGestureCompleted(
+                                new AccessibilityGestureEvent(
+                                        i, motionEvent.getDisplayId(), this.mEvents));
             } else {
                 ((TouchExplorer) listener).onDoubleTap(motionEvent, motionEvent2, i3);
             }
@@ -152,7 +161,15 @@ public final class GestureManifold implements GestureMatcher.StateChangeListener
             TouchExplorer touchExplorer = (TouchExplorer) listener;
             AccessibilityManagerService accessibilityManagerService = touchExplorer.mAms;
             if (accessibilityManagerService.mTraceManager.isA11yTracingEnabledForTypes(12288L)) {
-                accessibilityManagerService.mTraceManager.logTrace("TouchExplorer.onGestureCancelled", 12288L, "event=" + motionEvent + ";rawEvent=" + motionEvent2 + ";policyFlags=" + i3);
+                accessibilityManagerService.mTraceManager.logTrace(
+                        "TouchExplorer.onGestureCancelled",
+                        12288L,
+                        "event="
+                                + motionEvent
+                                + ";rawEvent="
+                                + motionEvent2
+                                + ";policyFlags="
+                                + i3);
             }
             TouchState touchState2 = touchExplorer.mState;
             if (touchState2.mState == 5) {
@@ -163,28 +180,33 @@ public final class GestureManifold implements GestureMatcher.StateChangeListener
                 if (z) {
                     eventDispatcher.sendAccessibilityEvent(2097152);
                 }
-                TouchExplorer.ExitGestureDetectionModeDelayed exitGestureDetectionModeDelayed = touchExplorer.mExitGestureDetectionModeDelayed;
+                TouchExplorer.ExitGestureDetectionModeDelayed exitGestureDetectionModeDelayed =
+                        touchExplorer.mExitGestureDetectionModeDelayed;
                 TouchExplorer.this.mHandler.removeCallbacks(exitGestureDetectionModeDelayed);
                 return;
             }
             if (!touchState2.isTouchExploring() || motionEvent.getActionMasked() != 2) {
                 GestureManifold gestureManifold = touchExplorer.mGestureDetector;
                 if (gestureManifold.mSendMotionEventsEnabled) {
-                    touchExplorer.dispatchGesture(new AccessibilityGestureEvent(0, touchExplorer.mDisplayId, gestureManifold.mEvents));
+                    touchExplorer.dispatchGesture(
+                            new AccessibilityGestureEvent(
+                                    0, touchExplorer.mDisplayId, gestureManifold.mEvents));
                     return;
                 }
                 return;
             }
             int primaryPointerId = 1 << touchExplorer.mReceivedPointerTracker.getPrimaryPointerId();
             MotionEvent motionEvent3 = touchState2.mLastReceivedEvent;
-            TouchExplorer.SendHoverExitDelayed sendHoverExitDelayed = touchExplorer.mSendHoverEnterAndMoveDelayed;
+            TouchExplorer.SendHoverExitDelayed sendHoverExitDelayed =
+                    touchExplorer.mSendHoverEnterAndMoveDelayed;
             sendHoverExitDelayed.addEvent(motionEvent, motionEvent3);
             if (sendHoverExitDelayed.isPending()) {
                 sendHoverExitDelayed.run();
                 sendHoverExitDelayed.cancel();
             }
             touchExplorer.mSendHoverExitDelayed.cancel();
-            touchExplorer.mDispatcher.sendMotionEvent(7, primaryPointerId, i3, motionEvent, motionEvent);
+            touchExplorer.mDispatcher.sendMotionEvent(
+                    7, primaryPointerId, i3, motionEvent, motionEvent);
         }
     }
 }

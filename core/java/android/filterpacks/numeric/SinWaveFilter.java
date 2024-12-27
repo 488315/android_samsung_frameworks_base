@@ -13,6 +13,7 @@ public class SinWaveFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "stepSize")
     private float mStepSize;
+
     private float mValue;
 
     public SinWaveFilter(String name) {

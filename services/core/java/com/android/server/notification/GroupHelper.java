@@ -10,8 +10,9 @@ import android.service.notification.StatusBarNotification;
 import android.util.ArrayMap;
 import android.util.EventLog;
 import android.util.Slog;
+
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
-import com.android.server.notification.NotificationManagerService;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -48,15 +49,26 @@ public final class GroupHelper {
                 return false;
             }
             NotificationAttributes notificationAttributes = (NotificationAttributes) obj;
-            return this.flags == notificationAttributes.flags && this.iconColor == notificationAttributes.iconColor && this.icon.sameAs(notificationAttributes.icon) && this.visibility == notificationAttributes.visibility;
+            return this.flags == notificationAttributes.flags
+                    && this.iconColor == notificationAttributes.iconColor
+                    && this.icon.sameAs(notificationAttributes.icon)
+                    && this.visibility == notificationAttributes.visibility;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(this.flags), Integer.valueOf(this.iconColor), this.icon, Integer.valueOf(this.visibility));
+            return Objects.hash(
+                    Integer.valueOf(this.flags),
+                    Integer.valueOf(this.iconColor),
+                    this.icon,
+                    Integer.valueOf(this.visibility));
         }
     }
 
-    public GroupHelper(Context context, PackageManager packageManager, int i, NotificationManagerService.AnonymousClass2 anonymousClass2) {
+    public GroupHelper(
+            Context context,
+            PackageManager packageManager,
+            int i,
+            NotificationManagerService.AnonymousClass2 anonymousClass2) {
         this.mAutoGroupAtCount = i;
         this.mCallback = anonymousClass2;
         this.mContext = context;
@@ -94,13 +106,26 @@ public final class GroupHelper {
         if (!z) {
             try {
                 Drawable applicationIcon = this.mPackageManager.getApplicationIcon(str);
-                if ((applicationIcon instanceof AdaptiveIconDrawable) && ((AdaptiveIconDrawable) applicationIcon).getMonochrome() != null) {
-                    icon = Icon.createWithResourceAdaptiveDrawable(str, ((AdaptiveIconDrawable) applicationIcon).getSourceDrawableResId(), true, AdaptiveIconDrawable.getExtraInsetFraction() * (-2.0f));
+                if ((applicationIcon instanceof AdaptiveIconDrawable)
+                        && ((AdaptiveIconDrawable) applicationIcon).getMonochrome() != null) {
+                    icon =
+                            Icon.createWithResourceAdaptiveDrawable(
+                                    str,
+                                    ((AdaptiveIconDrawable) applicationIcon)
+                                            .getSourceDrawableResId(),
+                                    true,
+                                    AdaptiveIconDrawable.getExtraInsetFraction() * (-2.0f));
                 }
             } catch (PackageManager.NameNotFoundException e) {
-                Slog.e("GroupHelper", "Failed to getApplicationIcon() in getMonochromeAppIcon()", e);
+                Slog.e(
+                        "GroupHelper",
+                        "Failed to getApplicationIcon() in getMonochromeAppIcon()",
+                        e);
             }
-            icon2 = icon != null ? icon : Icon.createWithResource(this.mContext, R.drawable.ic_qs_auto_rotate);
+            icon2 =
+                    icon != null
+                            ? icon
+                            : Icon.createWithResource(this.mContext, R.drawable.ic_qs_auto_rotate);
         }
         if (!z2) {
             i = 0;
@@ -125,7 +150,11 @@ public final class GroupHelper {
     public int getNotGroupedByAppCount(int i, String str) {
         int size;
         synchronized (this.mUngroupedNotifications) {
-            size = ((ArrayMap) this.mUngroupedNotifications.getOrDefault(generatePackageKey(i, str), new ArrayMap())).size();
+            size =
+                    ((ArrayMap)
+                                    this.mUngroupedNotifications.getOrDefault(
+                                            generatePackageKey(i, str), new ArrayMap()))
+                            .size();
         }
         return size;
     }
@@ -144,12 +173,16 @@ public final class GroupHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean maybeGroup(android.service.notification.StatusBarNotification r37, boolean r38) {
+    public final boolean maybeGroup(
+            android.service.notification.StatusBarNotification r37, boolean r38) {
         /*
             Method dump skipped, instructions count: 698
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.GroupHelper.maybeGroup(android.service.notification.StatusBarNotification, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.GroupHelper.maybeGroup(android.service.notification.StatusBarNotification,"
+                    + " boolean):boolean");
     }
 
     public final void maybeUngroup(StatusBarNotification statusBarNotification, boolean z, int i) {
@@ -159,13 +192,22 @@ public final class GroupHelper {
         ArrayList arrayList = new ArrayList();
         synchronized (this.mUngroupedNotifications) {
             try {
-                ArrayMap arrayMap = (ArrayMap) this.mUngroupedNotifications.getOrDefault(generatePackageKey(statusBarNotification.getUserId(), statusBarNotification.getPackageName()), new ArrayMap());
+                ArrayMap arrayMap =
+                        (ArrayMap)
+                                this.mUngroupedNotifications.getOrDefault(
+                                        generatePackageKey(
+                                                statusBarNotification.getUserId(),
+                                                statusBarNotification.getPackageName()),
+                                        new ArrayMap());
                 if (arrayMap.size() == 0) {
                     return;
                 }
                 int i2 = -1;
                 if (arrayMap.containsKey(statusBarNotification.getKey())) {
-                    if ((((NotificationAttributes) arrayMap.remove(statusBarNotification.getKey())).flags & 34) != 0) {
+                    if ((((NotificationAttributes) arrayMap.remove(statusBarNotification.getKey()))
+                                            .flags
+                                    & 34)
+                            != 0) {
                         i2 = getAutogroupSummaryFlags(arrayMap);
                         z4 = true;
                     } else {
@@ -192,9 +234,12 @@ public final class GroupHelper {
                 } else {
                     Icon smallIcon = statusBarNotification.getNotification().getSmallIcon();
                     int i3 = statusBarNotification.getNotification().color;
-                    NotificationAttributes notificationAttributes = new NotificationAttributes(i2, smallIcon, i3, 0);
+                    NotificationAttributes notificationAttributes =
+                            new NotificationAttributes(i2, smallIcon, i3, 0);
                     Flags.autogroupSummaryIconUpdate();
-                    NotificationAttributes autobundledSummaryAttributes = getAutobundledSummaryAttributes(statusBarNotification.getPackageName(), arrayList);
+                    NotificationAttributes autobundledSummaryAttributes =
+                            getAutobundledSummaryAttributes(
+                                    statusBarNotification.getPackageName(), arrayList);
                     Icon icon = autobundledSummaryAttributes.icon;
                     if (icon != null) {
                         smallIcon = icon;
@@ -203,28 +248,38 @@ public final class GroupHelper {
                     if (i4 != 1) {
                         i3 = i4;
                     }
-                    NotificationAttributes notificationAttributes2 = new NotificationAttributes(i2, smallIcon, i3, autobundledSummaryAttributes.visibility);
+                    NotificationAttributes notificationAttributes2 =
+                            new NotificationAttributes(
+                                    i2, smallIcon, i3, autobundledSummaryAttributes.visibility);
                     boolean equals = notificationAttributes2.equals(notificationAttributes);
                     if (!equals) {
                         notificationAttributes = notificationAttributes2;
                     }
                     boolean z5 = !equals;
                     if (z4 || z5) {
-                        this.mCallback.updateAutogroupSummary(i, statusBarNotification.getPackageName(), notificationAttributes);
+                        this.mCallback.updateAutogroupSummary(
+                                i, statusBarNotification.getPackageName(), notificationAttributes);
                     }
                 }
                 if (z2) {
                     NotificationManagerService.AnonymousClass2 anonymousClass22 = this.mCallback;
                     String key = statusBarNotification.getKey();
                     synchronized (NotificationManagerService.this.mNotificationLock) {
-                        NotificationManagerService notificationManagerService = NotificationManagerService.this;
-                        NotificationRecord notificationRecord = (NotificationRecord) notificationManagerService.mNotificationsByKey.get(key);
+                        NotificationManagerService notificationManagerService =
+                                NotificationManagerService.this;
+                        NotificationRecord notificationRecord =
+                                (NotificationRecord)
+                                        notificationManagerService.mNotificationsByKey.get(key);
                         if (notificationRecord == null) {
-                            HeimdAllFsService$$ExternalSyntheticOutline0.m("Failed to remove autogroup ", key, "NotificationService");
+                            HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                                    "Failed to remove autogroup ", key, "NotificationService");
                         } else if (notificationRecord.sbn.getOverrideGroupKey() != null) {
-                            NotificationManagerService.addAutoGroupAdjustment(notificationRecord, null);
+                            NotificationManagerService.addAutoGroupAdjustment(
+                                    notificationRecord, null);
                             EventLog.writeEvent(275534, key);
-                            ((NotificationManagerService.RankingHandlerWorker) notificationManagerService.mRankingHandler).requestSort();
+                            ((NotificationManagerService.RankingHandlerWorker)
+                                            notificationManagerService.mRankingHandler)
+                                    .requestSort();
                         }
                     }
                 }
@@ -233,10 +288,15 @@ public final class GroupHelper {
         }
     }
 
-    public final boolean onNotificationPosted(StatusBarNotification statusBarNotification, boolean z) {
+    public final boolean onNotificationPosted(
+            StatusBarNotification statusBarNotification, boolean z) {
         boolean z2 = false;
         try {
-            if (statusBarNotification.getNotification().extras.getInt("android.ongoingActivityNoti.style", 0) != 0) {
+            if (statusBarNotification
+                            .getNotification()
+                            .extras
+                            .getInt("android.ongoingActivityNoti.style", 0)
+                    != 0) {
                 maybeUngroup(statusBarNotification, false, statusBarNotification.getUserId());
             } else if (statusBarNotification.isAppGroup()) {
                 maybeUngroup(statusBarNotification, false, statusBarNotification.getUserId());

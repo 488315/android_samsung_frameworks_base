@@ -5,10 +5,6 @@ import android.app.ActivityThread;
 import android.content.pm.ParceledListSlice;
 import android.graphics.Point;
 import android.hardware.OverlayProperties;
-import android.hardware.display.IDisplayManagerCallback;
-import android.hardware.display.IHbmBrightnessCallback;
-import android.hardware.display.IVirtualDisplayCallback;
-import android.hardware.display.IWifiDisplayConnectionCallback;
 import android.hardware.graphics.common.DisplayDecorationSupport;
 import android.media.projection.IMediaProjection;
 import android.os.Binder;
@@ -20,28 +16,41 @@ import android.os.RemoteException;
 import android.view.Display;
 import android.view.DisplayInfo;
 import android.view.Surface;
+
 import com.samsung.android.hardware.display.IRefreshRateToken;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IDisplayManager extends IInterface {
-    IRefreshRateToken acquireLowRefreshRateToken(IBinder iBinder, String str) throws RemoteException;
+    IRefreshRateToken acquireLowRefreshRateToken(IBinder iBinder, String str)
+            throws RemoteException;
 
     IRefreshRateToken acquirePassiveModeToken(IBinder iBinder, String str) throws RemoteException;
 
-    IRefreshRateToken acquireRefreshRateMaxLimitToken(IBinder iBinder, int i, String str) throws RemoteException;
+    IRefreshRateToken acquireRefreshRateMaxLimitToken(IBinder iBinder, int i, String str)
+            throws RemoteException;
 
-    IRefreshRateToken acquireRefreshRateMinLimitToken(IBinder iBinder, int i, String str) throws RemoteException;
+    IRefreshRateToken acquireRefreshRateMinLimitToken(IBinder iBinder, int i, String str)
+            throws RemoteException;
 
     boolean areUserDisabledHdrTypesAllowed() throws RemoteException;
 
     void connectWifiDisplay(String str) throws RemoteException;
 
-    void connectWifiDisplayWithConfig(SemWifiDisplayConfig semWifiDisplayConfig, IWifiDisplayConnectionCallback iWifiDisplayConnectionCallback) throws RemoteException;
+    void connectWifiDisplayWithConfig(
+            SemWifiDisplayConfig semWifiDisplayConfig,
+            IWifiDisplayConnectionCallback iWifiDisplayConnectionCallback)
+            throws RemoteException;
 
     int convertToBrightness(float f) throws RemoteException;
 
-    int createVirtualDisplay(VirtualDisplayConfig virtualDisplayConfig, IVirtualDisplayCallback iVirtualDisplayCallback, IMediaProjection iMediaProjection, String str) throws RemoteException;
+    int createVirtualDisplay(
+            VirtualDisplayConfig virtualDisplayConfig,
+            IVirtualDisplayCallback iVirtualDisplayCallback,
+            IMediaProjection iMediaProjection,
+            String str)
+            throws RemoteException;
 
     void disableConnectedDisplay(int i) throws RemoteException;
 
@@ -61,7 +70,8 @@ public interface IDisplayManager extends IInterface {
 
     float getBrightness(int i) throws RemoteException;
 
-    BrightnessConfiguration getBrightnessConfigurationForDisplay(String str, int i) throws RemoteException;
+    BrightnessConfiguration getBrightnessConfigurationForDisplay(String str, int i)
+            throws RemoteException;
 
     BrightnessConfiguration getBrightnessConfigurationForUser(int i) throws RemoteException;
 
@@ -129,11 +139,14 @@ public interface IDisplayManager extends IInterface {
 
     void registerCallback(IDisplayManagerCallback iDisplayManagerCallback) throws RemoteException;
 
-    void registerCallbackWithEventMask(IDisplayManagerCallback iDisplayManagerCallback, long j) throws RemoteException;
+    void registerCallbackWithEventMask(IDisplayManagerCallback iDisplayManagerCallback, long j)
+            throws RemoteException;
 
-    void registerHbmBrightnessCallback(IHbmBrightnessCallback iHbmBrightnessCallback) throws RemoteException;
+    void registerHbmBrightnessCallback(IHbmBrightnessCallback iHbmBrightnessCallback)
+            throws RemoteException;
 
-    void releaseVirtualDisplay(IVirtualDisplayCallback iVirtualDisplayCallback) throws RemoteException;
+    void releaseVirtualDisplay(IVirtualDisplayCallback iVirtualDisplayCallback)
+            throws RemoteException;
 
     void renameWifiDisplay(String str, String str2) throws RemoteException;
 
@@ -143,29 +156,47 @@ public interface IDisplayManager extends IInterface {
 
     boolean requestDisplayPower(int i, boolean z) throws RemoteException;
 
-    boolean requestSetWifiDisplayParameters(List<SemWifiDisplayParameter> list) throws RemoteException;
+    boolean requestSetWifiDisplayParameters(List<SemWifiDisplayParameter> list)
+            throws RemoteException;
 
-    boolean requestWifiDisplayParameter(String str, SemWifiDisplayParameter semWifiDisplayParameter) throws RemoteException;
+    boolean requestWifiDisplayParameter(String str, SemWifiDisplayParameter semWifiDisplayParameter)
+            throws RemoteException;
 
     void resetBrightnessConfigurationForUser(int i, String str) throws RemoteException;
 
-    void resizeVirtualDisplay(IVirtualDisplayCallback iVirtualDisplayCallback, int i, int i2, int i3) throws RemoteException;
+    void resizeVirtualDisplay(
+            IVirtualDisplayCallback iVirtualDisplayCallback, int i, int i2, int i3)
+            throws RemoteException;
 
     void resumeWifiDisplay() throws RemoteException;
 
-    void rotateVirtualDisplay(IVirtualDisplayCallback iVirtualDisplayCallback, int i) throws RemoteException;
+    void rotateVirtualDisplay(IVirtualDisplayCallback iVirtualDisplayCallback, int i)
+            throws RemoteException;
 
     void setAreUserDisabledHdrTypesAllowed(boolean z) throws RemoteException;
 
-    void setBackupBrightnessConfiguration(BrightnessConfiguration brightnessConfiguration, int i, String str) throws RemoteException;
+    void setBackupBrightnessConfiguration(
+            BrightnessConfiguration brightnessConfiguration, int i, String str)
+            throws RemoteException;
 
     void setBrightness(int i, float f) throws RemoteException;
 
-    void setBrightnessConfigurationForDisplay(BrightnessConfiguration brightnessConfiguration, String str, int i, String str2) throws RemoteException;
+    void setBrightnessConfigurationForDisplay(
+            BrightnessConfiguration brightnessConfiguration, String str, int i, String str2)
+            throws RemoteException;
 
-    void setBrightnessConfigurationForUser(BrightnessConfiguration brightnessConfiguration, int i, String str) throws RemoteException;
+    void setBrightnessConfigurationForUser(
+            BrightnessConfiguration brightnessConfiguration, int i, String str)
+            throws RemoteException;
 
-    void setBrightnessConfigurationForUserWithStats(BrightnessConfiguration brightnessConfiguration, int i, String str, List<String> list, List<String> list2, List<String> list3) throws RemoteException;
+    void setBrightnessConfigurationForUserWithStats(
+            BrightnessConfiguration brightnessConfiguration,
+            int i,
+            String str,
+            List<String> list,
+            List<String> list2,
+            List<String> list3)
+            throws RemoteException;
 
     void setDeviceVolume(int i) throws RemoteException;
 
@@ -175,7 +206,8 @@ public interface IDisplayManager extends IInterface {
 
     void setDisplayStateOverride(IBinder iBinder, int i) throws RemoteException;
 
-    void setDisplayStateOverrideWithDisplayId(IBinder iBinder, int i, int i2) throws RemoteException;
+    void setDisplayStateOverrideWithDisplayId(IBinder iBinder, int i, int i2)
+            throws RemoteException;
 
     void setDlnaDevice(SemDlnaDevice semDlnaDevice, IBinder iBinder) throws RemoteException;
 
@@ -197,9 +229,11 @@ public interface IDisplayManager extends IInterface {
 
     void setUserPreferredDisplayMode(int i, Display.Mode mode) throws RemoteException;
 
-    void setVirtualDisplayState(IVirtualDisplayCallback iVirtualDisplayCallback, boolean z) throws RemoteException;
+    void setVirtualDisplayState(IVirtualDisplayCallback iVirtualDisplayCallback, boolean z)
+            throws RemoteException;
 
-    void setVirtualDisplaySurface(IVirtualDisplayCallback iVirtualDisplayCallback, Surface surface) throws RemoteException;
+    void setVirtualDisplaySurface(IVirtualDisplayCallback iVirtualDisplayCallback, Surface surface)
+            throws RemoteException;
 
     void setVolumeKeyEvent(int i) throws RemoteException;
 
@@ -232,44 +266,35 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void registerCallback(IDisplayManagerCallback callback) throws RemoteException {
-        }
+        public void registerCallback(IDisplayManagerCallback callback) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void registerCallbackWithEventMask(IDisplayManagerCallback callback, long eventsMask) throws RemoteException {
-        }
+        public void registerCallbackWithEventMask(IDisplayManagerCallback callback, long eventsMask)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void startWifiDisplayScan() throws RemoteException {
-        }
+        public void startWifiDisplayScan() throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void stopWifiDisplayScan() throws RemoteException {
-        }
+        public void stopWifiDisplayScan() throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void connectWifiDisplay(String address) throws RemoteException {
-        }
+        public void connectWifiDisplay(String address) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void disconnectWifiDisplay() throws RemoteException {
-        }
+        public void disconnectWifiDisplay() throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void renameWifiDisplay(String address, String alias) throws RemoteException {
-        }
+        public void renameWifiDisplay(String address, String alias) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void forgetWifiDisplay(String address) throws RemoteException {
-        }
+        public void forgetWifiDisplay(String address) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void pauseWifiDisplay() throws RemoteException {
-        }
+        public void pauseWifiDisplay() throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void resumeWifiDisplay() throws RemoteException {
-        }
+        public void resumeWifiDisplay() throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public WifiDisplayStatus getWifiDisplayStatus() throws RemoteException {
@@ -277,12 +302,11 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setUserDisabledHdrTypes(int[] userDisabledTypes) throws RemoteException {
-        }
+        public void setUserDisabledHdrTypes(int[] userDisabledTypes) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void setAreUserDisabledHdrTypesAllowed(boolean areUserDisabledHdrTypesAllowed) throws RemoteException {
-        }
+        public void setAreUserDisabledHdrTypesAllowed(boolean areUserDisabledHdrTypesAllowed)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public boolean areUserDisabledHdrTypesAllowed() throws RemoteException {
@@ -295,49 +319,52 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void overrideHdrTypes(int displayId, int[] modes) throws RemoteException {
-        }
+        public void overrideHdrTypes(int displayId, int[] modes) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void requestColorMode(int displayId, int colorMode) throws RemoteException {
-        }
+        public void requestColorMode(int displayId, int colorMode) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public int createVirtualDisplay(VirtualDisplayConfig virtualDisplayConfig, IVirtualDisplayCallback callback, IMediaProjection projectionToken, String packageName) throws RemoteException {
+        public int createVirtualDisplay(
+                VirtualDisplayConfig virtualDisplayConfig,
+                IVirtualDisplayCallback callback,
+                IMediaProjection projectionToken,
+                String packageName)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void resizeVirtualDisplay(IVirtualDisplayCallback token, int width, int height, int densityDpi) throws RemoteException {
-        }
+        public void resizeVirtualDisplay(
+                IVirtualDisplayCallback token, int width, int height, int densityDpi)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void setVirtualDisplaySurface(IVirtualDisplayCallback token, Surface surface) throws RemoteException {
-        }
+        public void setVirtualDisplaySurface(IVirtualDisplayCallback token, Surface surface)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void releaseVirtualDisplay(IVirtualDisplayCallback token) throws RemoteException {
-        }
+        public void releaseVirtualDisplay(IVirtualDisplayCallback token) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void setVirtualDisplayState(IVirtualDisplayCallback token, boolean isOn) throws RemoteException {
-        }
+        public void setVirtualDisplayState(IVirtualDisplayCallback token, boolean isOn)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void rotateVirtualDisplay(IVirtualDisplayCallback token, int rotation) throws RemoteException {
-        }
+        public void rotateVirtualDisplay(IVirtualDisplayCallback token, int rotation)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void connectWifiDisplayWithConfig(SemWifiDisplayConfig wifidisplayConfig, IWifiDisplayConnectionCallback callback) throws RemoteException {
-        }
+        public void connectWifiDisplayWithConfig(
+                SemWifiDisplayConfig wifidisplayConfig, IWifiDisplayConnectionCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void startWifiDisplayChannelScan(int scanChannel) throws RemoteException {
-        }
+        public void startWifiDisplayChannelScan(int scanChannel) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void startWifiDisplayChannelScanAndInterval(int scanChannel, int interval) throws RemoteException {
-        }
+        public void startWifiDisplayChannelScanAndInterval(int scanChannel, int interval)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public int getScreenSharingStatus() throws RemoteException {
@@ -345,12 +372,11 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setScreenSharingStatus(int status) throws RemoteException {
-        }
+        public void setScreenSharingStatus(int status) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void setDlnaDevice(SemDlnaDevice dlnaDevice, IBinder appToken) throws RemoteException {
-        }
+        public void setDlnaDevice(SemDlnaDevice dlnaDevice, IBinder appToken)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public SemDlnaDevice getDlnaDevice() throws RemoteException {
@@ -358,16 +384,13 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setDeviceVolume(int volume) throws RemoteException {
-        }
+        public void setDeviceVolume(int volume) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void setDeviceVolumeMuted(boolean muted) throws RemoteException {
-        }
+        public void setDeviceVolumeMuted(boolean muted) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void setVolumeKeyEvent(int event) throws RemoteException {
-        }
+        public void setVolumeKeyEvent(int event) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public int getDeviceMinVolume() throws RemoteException {
@@ -390,8 +413,7 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void fitToActiveDisplay(boolean status) throws RemoteException {
-        }
+        public void fitToActiveDisplay(boolean status) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public boolean isFitToActiveDisplay() throws RemoteException {
@@ -404,16 +426,17 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setWifiDisplayParam(String key, String value) throws RemoteException {
-        }
+        public void setWifiDisplayParam(String key, String value) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public boolean requestSetWifiDisplayParameters(List<SemWifiDisplayParameter> parameters) throws RemoteException {
+        public boolean requestSetWifiDisplayParameters(List<SemWifiDisplayParameter> parameters)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public boolean requestWifiDisplayParameter(String parameterGroup, SemWifiDisplayParameter parameter) throws RemoteException {
+        public boolean requestWifiDisplayParameter(
+                String parameterGroup, SemWifiDisplayParameter parameter) throws RemoteException {
             return false;
         }
 
@@ -433,20 +456,23 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setBrightnessConfigurationForUser(BrightnessConfiguration c, int userId, String packageName) throws RemoteException {
-        }
+        public void setBrightnessConfigurationForUser(
+                BrightnessConfiguration c, int userId, String packageName) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void setBrightnessConfigurationForDisplay(BrightnessConfiguration c, String uniqueDisplayId, int userId, String packageName) throws RemoteException {
-        }
+        public void setBrightnessConfigurationForDisplay(
+                BrightnessConfiguration c, String uniqueDisplayId, int userId, String packageName)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public BrightnessConfiguration getBrightnessConfigurationForDisplay(String uniqueDisplayId, int userId) throws RemoteException {
+        public BrightnessConfiguration getBrightnessConfigurationForDisplay(
+                String uniqueDisplayId, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public BrightnessConfiguration getBrightnessConfigurationForUser(int userId) throws RemoteException {
+        public BrightnessConfiguration getBrightnessConfigurationForUser(int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -461,12 +487,11 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setTemporaryBrightness(int displayId, float brightness) throws RemoteException {
-        }
+        public void setTemporaryBrightness(int displayId, float brightness)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void setBrightness(int displayId, float brightness) throws RemoteException {
-        }
+        public void setBrightness(int displayId, float brightness) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public float getBrightness(int displayId) throws RemoteException {
@@ -474,8 +499,7 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setTemporaryAutoBrightnessAdjustment(float adjustment) throws RemoteException {
-        }
+        public void setTemporaryAutoBrightnessAdjustment(float adjustment) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public Curve getMinimumBrightnessCurve() throws RemoteException {
@@ -493,8 +517,8 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setUserPreferredDisplayMode(int displayId, Display.Mode mode) throws RemoteException {
-        }
+        public void setUserPreferredDisplayMode(int displayId, Display.Mode mode)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public Display.Mode getUserPreferredDisplayMode(int displayId) throws RemoteException {
@@ -507,8 +531,8 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setHdrConversionMode(HdrConversionMode hdrConversionMode) throws RemoteException {
-        }
+        public void setHdrConversionMode(HdrConversionMode hdrConversionMode)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public HdrConversionMode getHdrConversionModeSetting() throws RemoteException {
@@ -526,8 +550,8 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setShouldAlwaysRespectAppRequestedMode(boolean enabled) throws RemoteException {
-        }
+        public void setShouldAlwaysRespectAppRequestedMode(boolean enabled)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public boolean shouldAlwaysRespectAppRequestedMode() throws RemoteException {
@@ -535,8 +559,7 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setRefreshRateSwitchingType(int newValue) throws RemoteException {
-        }
+        public void setRefreshRateSwitchingType(int newValue) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public int getRefreshRateSwitchingType() throws RemoteException {
@@ -544,13 +567,13 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public DisplayDecorationSupport getDisplayDecorationSupport(int displayId) throws RemoteException {
+        public DisplayDecorationSupport getDisplayDecorationSupport(int displayId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setDisplayIdToMirror(IBinder token, int displayId) throws RemoteException {
-        }
+        public void setDisplayIdToMirror(IBinder token, int displayId) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public OverlayProperties getOverlaySupport() throws RemoteException {
@@ -558,23 +581,31 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setBrightnessConfigurationForUserWithStats(BrightnessConfiguration c, int userId, String packageName, List<String> weights, List<String> timeWeights, List<String> continuityWeights) throws RemoteException {
-        }
+        public void setBrightnessConfigurationForUserWithStats(
+                BrightnessConfiguration c,
+                int userId,
+                String packageName,
+                List<String> weights,
+                List<String> timeWeights,
+                List<String> continuityWeights)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void resetBrightnessConfigurationForUser(int userId, String packageName) throws RemoteException {
-        }
+        public void resetBrightnessConfigurationForUser(int userId, String packageName)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void setTemporaryBrightnessForSlowChange(int displayId, float brightness, boolean slowChange) throws RemoteException {
-        }
+        public void setTemporaryBrightnessForSlowChange(
+                int displayId, float brightness, boolean slowChange) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void setBackupBrightnessConfiguration(BrightnessConfiguration config, int userId, String packageName) throws RemoteException {
-        }
+        public void setBackupBrightnessConfiguration(
+                BrightnessConfiguration config, int userId, String packageName)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public BrightnessConfiguration getBackupBrightnessConfiguration(int userId) throws RemoteException {
+        public BrightnessConfiguration getBackupBrightnessConfiguration(int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -584,12 +615,12 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void setDisplayStateOverride(IBinder lock, int stateOverride) throws RemoteException {
-        }
+        public void setDisplayStateOverride(IBinder lock, int stateOverride)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void setDisplayStateOverrideWithDisplayId(IBinder lock, int stateOverride, int displayId) throws RemoteException {
-        }
+        public void setDisplayStateOverrideWithDisplayId(
+                IBinder lock, int stateOverride, int displayId) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public float getAdaptiveBrightness(int displayId, float lux) throws RemoteException {
@@ -597,12 +628,10 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void enableConnectedDisplay(int displayId) throws RemoteException {
-        }
+        public void enableConnectedDisplay(int displayId) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public void disableConnectedDisplay(int displayId) throws RemoteException {
-        }
+        public void disableConnectedDisplay(int displayId) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
         public boolean requestDisplayPower(int displayId, boolean on) throws RemoteException {
@@ -610,26 +639,30 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void requestDisplayModes(IBinder token, int displayId, int[] modeIds) throws RemoteException {
-        }
+        public void requestDisplayModes(IBinder token, int displayId, int[] modeIds)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManager
-        public IRefreshRateToken acquirePassiveModeToken(IBinder token, String tag) throws RemoteException {
+        public IRefreshRateToken acquirePassiveModeToken(IBinder token, String tag)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public IRefreshRateToken acquireLowRefreshRateToken(IBinder token, String tag) throws RemoteException {
+        public IRefreshRateToken acquireLowRefreshRateToken(IBinder token, String tag)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public IRefreshRateToken acquireRefreshRateMaxLimitToken(IBinder token, int refreshRate, String tag) throws RemoteException {
+        public IRefreshRateToken acquireRefreshRateMaxLimitToken(
+                IBinder token, int refreshRate, String tag) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public IRefreshRateToken acquireRefreshRateMinLimitToken(IBinder token, int refreshRate, String tag) throws RemoteException {
+        public IRefreshRateToken acquireRefreshRateMinLimitToken(
+                IBinder token, int refreshRate, String tag) throws RemoteException {
             return null;
         }
 
@@ -639,8 +672,8 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IDisplayManager
-        public void registerHbmBrightnessCallback(IHbmBrightnessCallback listener) throws RemoteException {
-        }
+        public void registerHbmBrightnessCallback(IHbmBrightnessCallback listener)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -648,7 +681,7 @@ public interface IDisplayManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDisplayManager {
+    public abstract static class Stub extends Binder implements IDisplayManager {
         public static final String DESCRIPTOR = "android.hardware.display.IDisplayManager";
         static final int TRANSACTION_acquireLowRefreshRateToken = 91;
         static final int TRANSACTION_acquirePassiveModeToken = 90;
@@ -757,7 +790,9 @@ public interface IDisplayManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IDisplayManager asInterface(IBinder obj) {
@@ -979,7 +1014,8 @@ public interface IDisplayManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -1011,13 +1047,15 @@ public interface IDisplayManager extends IInterface {
                     reply.writeBoolean(_result3);
                     return true;
                 case 4:
-                    IDisplayManagerCallback _arg04 = IDisplayManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IDisplayManagerCallback _arg04 =
+                            IDisplayManagerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallback(_arg04);
                     reply.writeNoException();
                     return true;
                 case 5:
-                    IDisplayManagerCallback _arg05 = IDisplayManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IDisplayManagerCallback _arg05 =
+                            IDisplayManagerCallback.Stub.asInterface(data.readStrongBinder());
                     long _arg12 = data.readLong();
                     data.enforceNoDataAvail();
                     registerCallbackWithEventMask(_arg05, _arg12);
@@ -1104,9 +1142,13 @@ public interface IDisplayManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 21:
-                    VirtualDisplayConfig _arg013 = (VirtualDisplayConfig) data.readTypedObject(VirtualDisplayConfig.CREATOR);
-                    IVirtualDisplayCallback _arg16 = IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
-                    IMediaProjection _arg2 = IMediaProjection.Stub.asInterface(data.readStrongBinder());
+                    VirtualDisplayConfig _arg013 =
+                            (VirtualDisplayConfig)
+                                    data.readTypedObject(VirtualDisplayConfig.CREATOR);
+                    IVirtualDisplayCallback _arg16 =
+                            IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
+                    IMediaProjection _arg2 =
+                            IMediaProjection.Stub.asInterface(data.readStrongBinder());
                     String _arg3 = data.readString();
                     data.enforceNoDataAvail();
                     int _result7 = createVirtualDisplay(_arg013, _arg16, _arg2, _arg3);
@@ -1114,7 +1156,8 @@ public interface IDisplayManager extends IInterface {
                     reply.writeInt(_result7);
                     return true;
                 case 22:
-                    IVirtualDisplayCallback _arg014 = IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
+                    IVirtualDisplayCallback _arg014 =
+                            IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg17 = data.readInt();
                     int _arg22 = data.readInt();
                     int _arg32 = data.readInt();
@@ -1123,35 +1166,43 @@ public interface IDisplayManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 23:
-                    IVirtualDisplayCallback _arg015 = IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
+                    IVirtualDisplayCallback _arg015 =
+                            IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
                     Surface _arg18 = (Surface) data.readTypedObject(Surface.CREATOR);
                     data.enforceNoDataAvail();
                     setVirtualDisplaySurface(_arg015, _arg18);
                     reply.writeNoException();
                     return true;
                 case 24:
-                    IVirtualDisplayCallback _arg016 = IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
+                    IVirtualDisplayCallback _arg016 =
+                            IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     releaseVirtualDisplay(_arg016);
                     reply.writeNoException();
                     return true;
                 case 25:
-                    IVirtualDisplayCallback _arg017 = IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
+                    IVirtualDisplayCallback _arg017 =
+                            IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
                     boolean _arg19 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setVirtualDisplayState(_arg017, _arg19);
                     reply.writeNoException();
                     return true;
                 case 26:
-                    IVirtualDisplayCallback _arg018 = IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
+                    IVirtualDisplayCallback _arg018 =
+                            IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg110 = data.readInt();
                     data.enforceNoDataAvail();
                     rotateVirtualDisplay(_arg018, _arg110);
                     reply.writeNoException();
                     return true;
                 case 27:
-                    SemWifiDisplayConfig _arg019 = (SemWifiDisplayConfig) data.readTypedObject(SemWifiDisplayConfig.CREATOR);
-                    IWifiDisplayConnectionCallback _arg111 = IWifiDisplayConnectionCallback.Stub.asInterface(data.readStrongBinder());
+                    SemWifiDisplayConfig _arg019 =
+                            (SemWifiDisplayConfig)
+                                    data.readTypedObject(SemWifiDisplayConfig.CREATOR);
+                    IWifiDisplayConnectionCallback _arg111 =
+                            IWifiDisplayConnectionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     connectWifiDisplayWithConfig(_arg019, _arg111);
                     reply.writeNoException();
@@ -1181,7 +1232,8 @@ public interface IDisplayManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 32:
-                    SemDlnaDevice _arg023 = (SemDlnaDevice) data.readTypedObject(SemDlnaDevice.CREATOR);
+                    SemDlnaDevice _arg023 =
+                            (SemDlnaDevice) data.readTypedObject(SemDlnaDevice.CREATOR);
                     IBinder _arg113 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     setDlnaDevice(_arg023, _arg113);
@@ -1258,7 +1310,8 @@ public interface IDisplayManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 45:
-                    List<SemWifiDisplayParameter> _arg031 = data.createTypedArrayList(SemWifiDisplayParameter.CREATOR);
+                    List<SemWifiDisplayParameter> _arg031 =
+                            data.createTypedArrayList(SemWifiDisplayParameter.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result16 = requestSetWifiDisplayParameters(_arg031);
                     reply.writeNoException();
@@ -1266,7 +1319,9 @@ public interface IDisplayManager extends IInterface {
                     return true;
                 case 46:
                     String _arg032 = data.readString();
-                    SemWifiDisplayParameter _arg115 = (SemWifiDisplayParameter) data.readTypedObject(SemWifiDisplayParameter.CREATOR);
+                    SemWifiDisplayParameter _arg115 =
+                            (SemWifiDisplayParameter)
+                                    data.readTypedObject(SemWifiDisplayParameter.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result17 = requestWifiDisplayParameter(_arg032, _arg115);
                     reply.writeNoException();
@@ -1290,7 +1345,9 @@ public interface IDisplayManager extends IInterface {
                     reply.writeTypedObject(_result20, 1);
                     return true;
                 case 50:
-                    BrightnessConfiguration _arg034 = (BrightnessConfiguration) data.readTypedObject(BrightnessConfiguration.CREATOR);
+                    BrightnessConfiguration _arg034 =
+                            (BrightnessConfiguration)
+                                    data.readTypedObject(BrightnessConfiguration.CREATOR);
                     int _arg116 = data.readInt();
                     String _arg23 = data.readString();
                     data.enforceNoDataAvail();
@@ -1298,7 +1355,9 @@ public interface IDisplayManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 51:
-                    BrightnessConfiguration _arg035 = (BrightnessConfiguration) data.readTypedObject(BrightnessConfiguration.CREATOR);
+                    BrightnessConfiguration _arg035 =
+                            (BrightnessConfiguration)
+                                    data.readTypedObject(BrightnessConfiguration.CREATOR);
                     String _arg117 = data.readString();
                     int _arg24 = data.readInt();
                     String _arg33 = data.readString();
@@ -1310,7 +1369,8 @@ public interface IDisplayManager extends IInterface {
                     String _arg036 = data.readString();
                     int _arg118 = data.readInt();
                     data.enforceNoDataAvail();
-                    BrightnessConfiguration _result21 = getBrightnessConfigurationForDisplay(_arg036, _arg118);
+                    BrightnessConfiguration _result21 =
+                            getBrightnessConfigurationForDisplay(_arg036, _arg118);
                     reply.writeNoException();
                     reply.writeTypedObject(_result21, 1);
                     return true;
@@ -1379,7 +1439,8 @@ public interface IDisplayManager extends IInterface {
                     return true;
                 case 63:
                     int _arg044 = data.readInt();
-                    Display.Mode _arg121 = (Display.Mode) data.readTypedObject(Display.Mode.CREATOR);
+                    Display.Mode _arg121 =
+                            (Display.Mode) data.readTypedObject(Display.Mode.CREATOR);
                     data.enforceNoDataAvail();
                     setUserPreferredDisplayMode(_arg044, _arg121);
                     reply.writeNoException();
@@ -1399,7 +1460,8 @@ public interface IDisplayManager extends IInterface {
                     reply.writeTypedObject(_result30, 1);
                     return true;
                 case 66:
-                    HdrConversionMode _arg047 = (HdrConversionMode) data.readTypedObject(HdrConversionMode.CREATOR);
+                    HdrConversionMode _arg047 =
+                            (HdrConversionMode) data.readTypedObject(HdrConversionMode.CREATOR);
                     data.enforceNoDataAvail();
                     setHdrConversionMode(_arg047);
                     reply.writeNoException();
@@ -1461,14 +1523,17 @@ public interface IDisplayManager extends IInterface {
                     reply.writeTypedObject(_result37, 1);
                     return true;
                 case 77:
-                    BrightnessConfiguration _arg052 = (BrightnessConfiguration) data.readTypedObject(BrightnessConfiguration.CREATOR);
+                    BrightnessConfiguration _arg052 =
+                            (BrightnessConfiguration)
+                                    data.readTypedObject(BrightnessConfiguration.CREATOR);
                     int _arg123 = data.readInt();
                     String _arg25 = data.readString();
                     List<String> _arg34 = data.createStringArrayList();
                     List<String> _arg4 = data.createStringArrayList();
                     List<String> _arg5 = data.createStringArrayList();
                     data.enforceNoDataAvail();
-                    setBrightnessConfigurationForUserWithStats(_arg052, _arg123, _arg25, _arg34, _arg4, _arg5);
+                    setBrightnessConfigurationForUserWithStats(
+                            _arg052, _arg123, _arg25, _arg34, _arg4, _arg5);
                     reply.writeNoException();
                     return true;
                 case 78:
@@ -1487,7 +1552,9 @@ public interface IDisplayManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 80:
-                    BrightnessConfiguration _arg055 = (BrightnessConfiguration) data.readTypedObject(BrightnessConfiguration.CREATOR);
+                    BrightnessConfiguration _arg055 =
+                            (BrightnessConfiguration)
+                                    data.readTypedObject(BrightnessConfiguration.CREATOR);
                     int _arg126 = data.readInt();
                     String _arg27 = data.readString();
                     data.enforceNoDataAvail();
@@ -1580,7 +1647,8 @@ public interface IDisplayManager extends IInterface {
                     int _arg134 = data.readInt();
                     String _arg210 = data.readString();
                     data.enforceNoDataAvail();
-                    IRefreshRateToken _result44 = acquireRefreshRateMaxLimitToken(_arg067, _arg134, _arg210);
+                    IRefreshRateToken _result44 =
+                            acquireRefreshRateMaxLimitToken(_arg067, _arg134, _arg210);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result44);
                     return true;
@@ -1589,7 +1657,8 @@ public interface IDisplayManager extends IInterface {
                     int _arg135 = data.readInt();
                     String _arg211 = data.readString();
                     data.enforceNoDataAvail();
-                    IRefreshRateToken _result45 = acquireRefreshRateMinLimitToken(_arg068, _arg135, _arg211);
+                    IRefreshRateToken _result45 =
+                            acquireRefreshRateMinLimitToken(_arg068, _arg135, _arg211);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result45);
                     return true;
@@ -1599,7 +1668,8 @@ public interface IDisplayManager extends IInterface {
                     reply.writeLong(_result46);
                     return true;
                 case 95:
-                    IHbmBrightnessCallback _arg069 = IHbmBrightnessCallback.Stub.asInterface(data.readStrongBinder());
+                    IHbmBrightnessCallback _arg069 =
+                            IHbmBrightnessCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerHbmBrightnessCallback(_arg069);
                     reply.writeNoException();
@@ -1693,7 +1763,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void registerCallbackWithEventMask(IDisplayManagerCallback callback, long eventsMask) throws RemoteException {
+            public void registerCallbackWithEventMask(
+                    IDisplayManagerCallback callback, long eventsMask) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1832,7 +1903,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(14, _data, _reply, 0);
                     _reply.readException();
-                    WifiDisplayStatus _result = (WifiDisplayStatus) _reply.readTypedObject(WifiDisplayStatus.CREATOR);
+                    WifiDisplayStatus _result =
+                            (WifiDisplayStatus) _reply.readTypedObject(WifiDisplayStatus.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1856,7 +1928,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setAreUserDisabledHdrTypesAllowed(boolean areUserDisabledHdrTypesAllowed) throws RemoteException {
+            public void setAreUserDisabledHdrTypesAllowed(boolean areUserDisabledHdrTypesAllowed)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1935,7 +2008,12 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public int createVirtualDisplay(VirtualDisplayConfig virtualDisplayConfig, IVirtualDisplayCallback callback, IMediaProjection projectionToken, String packageName) throws RemoteException {
+            public int createVirtualDisplay(
+                    VirtualDisplayConfig virtualDisplayConfig,
+                    IVirtualDisplayCallback callback,
+                    IMediaProjection projectionToken,
+                    String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1955,7 +2033,9 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void resizeVirtualDisplay(IVirtualDisplayCallback token, int width, int height, int densityDpi) throws RemoteException {
+            public void resizeVirtualDisplay(
+                    IVirtualDisplayCallback token, int width, int height, int densityDpi)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1973,7 +2053,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setVirtualDisplaySurface(IVirtualDisplayCallback token, Surface surface) throws RemoteException {
+            public void setVirtualDisplaySurface(IVirtualDisplayCallback token, Surface surface)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1989,7 +2070,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void releaseVirtualDisplay(IVirtualDisplayCallback token) throws RemoteException {
+            public void releaseVirtualDisplay(IVirtualDisplayCallback token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2004,7 +2086,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setVirtualDisplayState(IVirtualDisplayCallback token, boolean isOn) throws RemoteException {
+            public void setVirtualDisplayState(IVirtualDisplayCallback token, boolean isOn)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2020,7 +2103,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void rotateVirtualDisplay(IVirtualDisplayCallback token, int rotation) throws RemoteException {
+            public void rotateVirtualDisplay(IVirtualDisplayCallback token, int rotation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2036,7 +2120,9 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void connectWifiDisplayWithConfig(SemWifiDisplayConfig wifidisplayConfig, IWifiDisplayConnectionCallback callback) throws RemoteException {
+            public void connectWifiDisplayWithConfig(
+                    SemWifiDisplayConfig wifidisplayConfig, IWifiDisplayConnectionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2067,7 +2153,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void startWifiDisplayChannelScanAndInterval(int scanChannel, int interval) throws RemoteException {
+            public void startWifiDisplayChannelScanAndInterval(int scanChannel, int interval)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2114,7 +2201,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setDlnaDevice(SemDlnaDevice dlnaDevice, IBinder appToken) throws RemoteException {
+            public void setDlnaDevice(SemDlnaDevice dlnaDevice, IBinder appToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2137,7 +2225,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(33, _data, _reply, 0);
                     _reply.readException();
-                    SemDlnaDevice _result = (SemDlnaDevice) _reply.readTypedObject(SemDlnaDevice.CREATOR);
+                    SemDlnaDevice _result =
+                            (SemDlnaDevice) _reply.readTypedObject(SemDlnaDevice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2320,7 +2409,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public boolean requestSetWifiDisplayParameters(List<SemWifiDisplayParameter> parameters) throws RemoteException {
+            public boolean requestSetWifiDisplayParameters(List<SemWifiDisplayParameter> parameters)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2337,7 +2427,9 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public boolean requestWifiDisplayParameter(String parameterGroup, SemWifiDisplayParameter parameter) throws RemoteException {
+            public boolean requestWifiDisplayParameter(
+                    String parameterGroup, SemWifiDisplayParameter parameter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2371,7 +2463,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public ParceledListSlice getBrightnessEvents(String callingPackage) throws RemoteException {
+            public ParceledListSlice getBrightnessEvents(String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2379,7 +2472,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(48, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2395,7 +2489,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(49, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2404,7 +2499,9 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setBrightnessConfigurationForUser(BrightnessConfiguration c, int userId, String packageName) throws RemoteException {
+            public void setBrightnessConfigurationForUser(
+                    BrightnessConfiguration c, int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2421,7 +2518,12 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setBrightnessConfigurationForDisplay(BrightnessConfiguration c, String uniqueDisplayId, int userId, String packageName) throws RemoteException {
+            public void setBrightnessConfigurationForDisplay(
+                    BrightnessConfiguration c,
+                    String uniqueDisplayId,
+                    int userId,
+                    String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2439,7 +2541,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public BrightnessConfiguration getBrightnessConfigurationForDisplay(String uniqueDisplayId, int userId) throws RemoteException {
+            public BrightnessConfiguration getBrightnessConfigurationForDisplay(
+                    String uniqueDisplayId, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2448,7 +2551,9 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(52, _data, _reply, 0);
                     _reply.readException();
-                    BrightnessConfiguration _result = (BrightnessConfiguration) _reply.readTypedObject(BrightnessConfiguration.CREATOR);
+                    BrightnessConfiguration _result =
+                            (BrightnessConfiguration)
+                                    _reply.readTypedObject(BrightnessConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2457,7 +2562,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public BrightnessConfiguration getBrightnessConfigurationForUser(int userId) throws RemoteException {
+            public BrightnessConfiguration getBrightnessConfigurationForUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2465,7 +2571,9 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(53, _data, _reply, 0);
                     _reply.readException();
-                    BrightnessConfiguration _result = (BrightnessConfiguration) _reply.readTypedObject(BrightnessConfiguration.CREATOR);
+                    BrightnessConfiguration _result =
+                            (BrightnessConfiguration)
+                                    _reply.readTypedObject(BrightnessConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2474,14 +2582,17 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public BrightnessConfiguration getDefaultBrightnessConfiguration() throws RemoteException {
+            public BrightnessConfiguration getDefaultBrightnessConfiguration()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(54, _data, _reply, 0);
                     _reply.readException();
-                    BrightnessConfiguration _result = (BrightnessConfiguration) _reply.readTypedObject(BrightnessConfiguration.CREATOR);
+                    BrightnessConfiguration _result =
+                            (BrightnessConfiguration)
+                                    _reply.readTypedObject(BrightnessConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2507,7 +2618,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setTemporaryBrightness(int displayId, float brightness) throws RemoteException {
+            public void setTemporaryBrightness(int displayId, float brightness)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2556,7 +2668,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setTemporaryAutoBrightnessAdjustment(float adjustment) throws RemoteException {
+            public void setTemporaryAutoBrightnessAdjustment(float adjustment)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2595,7 +2708,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(61, _data, _reply, 0);
                     _reply.readException();
-                    BrightnessInfo _result = (BrightnessInfo) _reply.readTypedObject(BrightnessInfo.CREATOR);
+                    BrightnessInfo _result =
+                            (BrightnessInfo) _reply.readTypedObject(BrightnessInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2620,7 +2734,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setUserPreferredDisplayMode(int displayId, Display.Mode mode) throws RemoteException {
+            public void setUserPreferredDisplayMode(int displayId, Display.Mode mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2644,7 +2759,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(64, _data, _reply, 0);
                     _reply.readException();
-                    Display.Mode _result = (Display.Mode) _reply.readTypedObject(Display.Mode.CREATOR);
+                    Display.Mode _result =
+                            (Display.Mode) _reply.readTypedObject(Display.Mode.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2653,7 +2769,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public Display.Mode getSystemPreferredDisplayMode(int displayId) throws RemoteException {
+            public Display.Mode getSystemPreferredDisplayMode(int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2661,7 +2778,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(65, _data, _reply, 0);
                     _reply.readException();
-                    Display.Mode _result = (Display.Mode) _reply.readTypedObject(Display.Mode.CREATOR);
+                    Display.Mode _result =
+                            (Display.Mode) _reply.readTypedObject(Display.Mode.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2670,7 +2788,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setHdrConversionMode(HdrConversionMode hdrConversionMode) throws RemoteException {
+            public void setHdrConversionMode(HdrConversionMode hdrConversionMode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2692,7 +2811,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(67, _data, _reply, 0);
                     _reply.readException();
-                    HdrConversionMode _result = (HdrConversionMode) _reply.readTypedObject(HdrConversionMode.CREATOR);
+                    HdrConversionMode _result =
+                            (HdrConversionMode) _reply.readTypedObject(HdrConversionMode.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2708,7 +2828,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(68, _data, _reply, 0);
                     _reply.readException();
-                    HdrConversionMode _result = (HdrConversionMode) _reply.readTypedObject(HdrConversionMode.CREATOR);
+                    HdrConversionMode _result =
+                            (HdrConversionMode) _reply.readTypedObject(HdrConversionMode.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2733,7 +2854,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setShouldAlwaysRespectAppRequestedMode(boolean enabled) throws RemoteException {
+            public void setShouldAlwaysRespectAppRequestedMode(boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2795,7 +2917,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public DisplayDecorationSupport getDisplayDecorationSupport(int displayId) throws RemoteException {
+            public DisplayDecorationSupport getDisplayDecorationSupport(int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2803,7 +2926,9 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(74, _data, _reply, 0);
                     _reply.readException();
-                    DisplayDecorationSupport _result = (DisplayDecorationSupport) _reply.readTypedObject(DisplayDecorationSupport.CREATOR);
+                    DisplayDecorationSupport _result =
+                            (DisplayDecorationSupport)
+                                    _reply.readTypedObject(DisplayDecorationSupport.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2835,7 +2960,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(76, _data, _reply, 0);
                     _reply.readException();
-                    OverlayProperties _result = (OverlayProperties) _reply.readTypedObject(OverlayProperties.CREATOR);
+                    OverlayProperties _result =
+                            (OverlayProperties) _reply.readTypedObject(OverlayProperties.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2844,7 +2970,14 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setBrightnessConfigurationForUserWithStats(BrightnessConfiguration c, int userId, String packageName, List<String> weights, List<String> timeWeights, List<String> continuityWeights) throws RemoteException {
+            public void setBrightnessConfigurationForUserWithStats(
+                    BrightnessConfiguration c,
+                    int userId,
+                    String packageName,
+                    List<String> weights,
+                    List<String> timeWeights,
+                    List<String> continuityWeights)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2864,7 +2997,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void resetBrightnessConfigurationForUser(int userId, String packageName) throws RemoteException {
+            public void resetBrightnessConfigurationForUser(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2880,7 +3014,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setTemporaryBrightnessForSlowChange(int displayId, float brightness, boolean slowChange) throws RemoteException {
+            public void setTemporaryBrightnessForSlowChange(
+                    int displayId, float brightness, boolean slowChange) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2897,7 +3032,9 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setBackupBrightnessConfiguration(BrightnessConfiguration config, int userId, String packageName) throws RemoteException {
+            public void setBackupBrightnessConfiguration(
+                    BrightnessConfiguration config, int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2914,7 +3051,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public BrightnessConfiguration getBackupBrightnessConfiguration(int userId) throws RemoteException {
+            public BrightnessConfiguration getBackupBrightnessConfiguration(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2922,7 +3060,9 @@ public interface IDisplayManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(81, _data, _reply, 0);
                     _reply.readException();
-                    BrightnessConfiguration _result = (BrightnessConfiguration) _reply.readTypedObject(BrightnessConfiguration.CREATOR);
+                    BrightnessConfiguration _result =
+                            (BrightnessConfiguration)
+                                    _reply.readTypedObject(BrightnessConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2948,7 +3088,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setDisplayStateOverride(IBinder lock, int stateOverride) throws RemoteException {
+            public void setDisplayStateOverride(IBinder lock, int stateOverride)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2964,7 +3105,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void setDisplayStateOverrideWithDisplayId(IBinder lock, int stateOverride, int displayId) throws RemoteException {
+            public void setDisplayStateOverrideWithDisplayId(
+                    IBinder lock, int stateOverride, int displayId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3047,7 +3189,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void requestDisplayModes(IBinder token, int displayId, int[] modeIds) throws RemoteException {
+            public void requestDisplayModes(IBinder token, int displayId, int[] modeIds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3064,7 +3207,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public IRefreshRateToken acquirePassiveModeToken(IBinder token, String tag) throws RemoteException {
+            public IRefreshRateToken acquirePassiveModeToken(IBinder token, String tag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3073,7 +3217,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeString(tag);
                     this.mRemote.transact(90, _data, _reply, 0);
                     _reply.readException();
-                    IRefreshRateToken _result = IRefreshRateToken.Stub.asInterface(_reply.readStrongBinder());
+                    IRefreshRateToken _result =
+                            IRefreshRateToken.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3082,7 +3227,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public IRefreshRateToken acquireLowRefreshRateToken(IBinder token, String tag) throws RemoteException {
+            public IRefreshRateToken acquireLowRefreshRateToken(IBinder token, String tag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3091,7 +3237,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeString(tag);
                     this.mRemote.transact(91, _data, _reply, 0);
                     _reply.readException();
-                    IRefreshRateToken _result = IRefreshRateToken.Stub.asInterface(_reply.readStrongBinder());
+                    IRefreshRateToken _result =
+                            IRefreshRateToken.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3100,7 +3247,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public IRefreshRateToken acquireRefreshRateMaxLimitToken(IBinder token, int refreshRate, String tag) throws RemoteException {
+            public IRefreshRateToken acquireRefreshRateMaxLimitToken(
+                    IBinder token, int refreshRate, String tag) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3110,7 +3258,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeString(tag);
                     this.mRemote.transact(92, _data, _reply, 0);
                     _reply.readException();
-                    IRefreshRateToken _result = IRefreshRateToken.Stub.asInterface(_reply.readStrongBinder());
+                    IRefreshRateToken _result =
+                            IRefreshRateToken.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3119,7 +3268,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public IRefreshRateToken acquireRefreshRateMinLimitToken(IBinder token, int refreshRate, String tag) throws RemoteException {
+            public IRefreshRateToken acquireRefreshRateMinLimitToken(
+                    IBinder token, int refreshRate, String tag) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3129,7 +3279,8 @@ public interface IDisplayManager extends IInterface {
                     _data.writeString(tag);
                     this.mRemote.transact(93, _data, _reply, 0);
                     _reply.readException();
-                    IRefreshRateToken _result = IRefreshRateToken.Stub.asInterface(_reply.readStrongBinder());
+                    IRefreshRateToken _result =
+                            IRefreshRateToken.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3154,7 +3305,8 @@ public interface IDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManager
-            public void registerHbmBrightnessCallback(IHbmBrightnessCallback listener) throws RemoteException {
+            public void registerHbmBrightnessCallback(IHbmBrightnessCallback listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3170,103 +3322,164 @@ public interface IDisplayManager extends IInterface {
         }
 
         protected void startWifiDisplayScan_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONFIGURE_WIFI_DISPLAY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONFIGURE_WIFI_DISPLAY, getCallingPid(), getCallingUid());
         }
 
         protected void stopWifiDisplayScan_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONFIGURE_WIFI_DISPLAY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONFIGURE_WIFI_DISPLAY, getCallingPid(), getCallingUid());
         }
 
         protected void pauseWifiDisplay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONFIGURE_WIFI_DISPLAY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONFIGURE_WIFI_DISPLAY, getCallingPid(), getCallingUid());
         }
 
         protected void resumeWifiDisplay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONFIGURE_WIFI_DISPLAY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONFIGURE_WIFI_DISPLAY, getCallingPid(), getCallingUid());
         }
 
         protected void setUserDisabledHdrTypes_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
-        protected void setAreUserDisabledHdrTypesAllowed_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+        protected void setAreUserDisabledHdrTypesAllowed_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void requestColorMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONFIGURE_DISPLAY_COLOR_MODE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONFIGURE_DISPLAY_COLOR_MODE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getBrightnessEvents_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BRIGHTNESS_SLIDER_USAGE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BRIGHTNESS_SLIDER_USAGE, getCallingPid(), getCallingUid());
         }
 
         protected void getAmbientBrightnessStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_AMBIENT_LIGHT_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_AMBIENT_LIGHT_STATS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void setBrightnessConfigurationForUser_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONFIGURE_DISPLAY_BRIGHTNESS, getCallingPid(), getCallingUid());
+        protected void setBrightnessConfigurationForUser_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONFIGURE_DISPLAY_BRIGHTNESS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void setBrightnessConfigurationForDisplay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONFIGURE_DISPLAY_BRIGHTNESS, getCallingPid(), getCallingUid());
+        protected void setBrightnessConfigurationForDisplay_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONFIGURE_DISPLAY_BRIGHTNESS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void getBrightnessConfigurationForDisplay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONFIGURE_DISPLAY_BRIGHTNESS, getCallingPid(), getCallingUid());
+        protected void getBrightnessConfigurationForDisplay_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONFIGURE_DISPLAY_BRIGHTNESS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void getDefaultBrightnessConfiguration_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONFIGURE_DISPLAY_BRIGHTNESS, getCallingPid(), getCallingUid());
+        protected void getDefaultBrightnessConfiguration_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONFIGURE_DISPLAY_BRIGHTNESS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setTemporaryBrightness_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_BRIGHTNESS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_BRIGHTNESS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setBrightness_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_BRIGHTNESS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_BRIGHTNESS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void setTemporaryAutoBrightnessAdjustment_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_BRIGHTNESS, getCallingPid(), getCallingUid());
+        protected void setTemporaryAutoBrightnessAdjustment_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_BRIGHTNESS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getBrightnessInfo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_BRIGHTNESS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_BRIGHTNESS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setUserPreferredDisplayMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_USER_PREFERRED_DISPLAY_MODE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_USER_PREFERRED_DISPLAY_MODE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void setShouldAlwaysRespectAppRequestedMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_DISPLAY_MODE_REQUESTS, getCallingPid(), getCallingUid());
+        protected void setShouldAlwaysRespectAppRequestedMode_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_DISPLAY_MODE_REQUESTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void shouldAlwaysRespectAppRequestedMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OVERRIDE_DISPLAY_MODE_REQUESTS, getCallingPid(), getCallingUid());
+        protected void shouldAlwaysRespectAppRequestedMode_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OVERRIDE_DISPLAY_MODE_REQUESTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setRefreshRateSwitchingType_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_REFRESH_RATE_SWITCHING_TYPE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_REFRESH_RATE_SWITCHING_TYPE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void enableConnectedDisplay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_DISPLAYS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_DISPLAYS, getCallingPid(), getCallingUid());
         }
 
         protected void disableConnectedDisplay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_DISPLAYS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_DISPLAYS, getCallingPid(), getCallingUid());
         }
 
         protected void requestDisplayPower_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_DISPLAYS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_DISPLAYS, getCallingPid(), getCallingUid());
         }
 
         protected void requestDisplayModes_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.RESTRICT_DISPLAY_MODES, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.RESTRICT_DISPLAY_MODES, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

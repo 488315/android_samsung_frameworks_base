@@ -6,12 +6,14 @@ import android.os.Build;
 import android.os.SystemProperties;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 import com.samsung.android.service.DeviceIDProvisionService.DeviceIDProvisionManager;
 import com.samsung.android.service.DeviceRootKeyService.DeviceRootKeyServiceManager;
 import com.samsung.android.service.DeviceRootKeyService.Tlv;
 import com.samsung.android.service.EngineeringMode.EngineeringModeManager;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -66,7 +68,17 @@ public class DevRootKeyATCmd implements IWorkOnAt {
 
     protected native int installDeviceBoundCertificate(int i, byte[] bArr);
 
-    protected native int installDeviceID(int i, String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9);
+    protected native int installDeviceID(
+            int i,
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            String str6,
+            String str7,
+            String str8,
+            String str9);
 
     protected native int installDeviceUnboundKey(int i, byte[] bArr);
 
@@ -75,7 +87,8 @@ public class DevRootKeyATCmd implements IWorkOnAt {
     static {
         boolean z = false;
         isExceptionProduct = productName.contains("a36xq") || productName.contains("gtact5pro");
-        if (Integer.parseInt(SystemProperties.get("ro.product.first_api_level")) >= 35 && !isExceptionProduct) {
+        if (Integer.parseInt(SystemProperties.get("ro.product.first_api_level")) >= 35
+                && !isExceptionProduct) {
             z = true;
         }
         isSupportATCommandV2 = z;
@@ -86,8 +99,10 @@ public class DevRootKeyATCmd implements IWorkOnAt {
     public DevRootKeyATCmd(Context context) {
         this.mContext = context;
         initTlvKeyBlob();
-        this.mDeviceRootKeyServiceManager = new DeviceRootKeyServiceManager(context.getApplicationContext());
-        this.mDeviceIDProvisionManager = new DeviceIDProvisionManager(context.getApplicationContext());
+        this.mDeviceRootKeyServiceManager =
+                new DeviceRootKeyServiceManager(context.getApplicationContext());
+        this.mDeviceIDProvisionManager =
+                new DeviceIDProvisionManager(context.getApplicationContext());
         if (this.mDeviceIDProvisionManager.isAvailable()) {
             this.mDeviceIDProvisionManager.provisionForFirstBoot();
         }
@@ -99,9 +114,9 @@ public class DevRootKeyATCmd implements IWorkOnAt {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:212:0x005d, code lost:
-    
-        if (java.lang.Integer.parseInt(r6[0]) == 1) goto L16;
-     */
+
+       if (java.lang.Integer.parseInt(r6[0]) == 1) goto L16;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r4v0 */
     /* JADX WARN: Type inference failed for: r4v1 */
@@ -131,14 +146,69 @@ public class DevRootKeyATCmd implements IWorkOnAt {
             Method dump skipped, instructions count: 2038
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.DevRootKeyATCmd.processCmd(java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.DevRootKeyATCmd.processCmd(java.lang.String):java.lang.String");
     }
 
     public String generateCertWithTlv(boolean tlv) {
         byte[] tlvTestExponent = {2, 2, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT, -17};
         byte[] tlvTestKeyUsage = {3, 2, 2, -4};
-        byte[] tlvTestSubjectAlterName = {SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, -122, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70, 84, 104, 105, 115, 32, 105, 115, 32, 115, 117, 98, 106, 101, 99, 116, 32, SprAttributeBase.TYPE_ANIMATOR_SET, 108, 116, 101, 114, 110, SprAttributeBase.TYPE_ANIMATOR_SET, 116, 105, 118, 101, 32, 110, SprAttributeBase.TYPE_ANIMATOR_SET, 109, 101, 32, 102, 105, 101, 108, 100, 32, 116, 101, 115, 116, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, 95};
-        byte[] tlbTestHashAlgo = {6, 9, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, -122, 72, -122, -9, 13, 1, 1, 5};
+        byte[] tlvTestSubjectAlterName = {
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90,
+            -122,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70,
+            84,
+            104,
+            105,
+            115,
+            32,
+            105,
+            115,
+            32,
+            115,
+            117,
+            98,
+            106,
+            101,
+            99,
+            116,
+            32,
+            SprAttributeBase.TYPE_ANIMATOR_SET,
+            108,
+            116,
+            101,
+            114,
+            110,
+            SprAttributeBase.TYPE_ANIMATOR_SET,
+            116,
+            105,
+            118,
+            101,
+            32,
+            110,
+            SprAttributeBase.TYPE_ANIMATOR_SET,
+            109,
+            101,
+            32,
+            102,
+            105,
+            101,
+            108,
+            100,
+            32,
+            116,
+            101,
+            115,
+            116,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+            95
+        };
+        byte[] tlbTestHashAlgo = {
+            6, 9, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, -122, 72, -122, -9, 13, 1, 1, 5
+        };
         if (tlv) {
             this.mTlv = new Tlv();
             this.mTlv.setTlv(1, tlvTestExponent);
@@ -196,7 +266,8 @@ public class DevRootKeyATCmd implements IWorkOnAt {
                         break;
                     }
                 case 94:
-                    byte[] tmpResult = this.mDeviceRootKeyServiceManager.getDeviceRootKeyCertificate(1);
+                    byte[] tmpResult =
+                            this.mDeviceRootKeyServiceManager.getDeviceRootKeyCertificate(1);
                     if (tmpResult != null) {
                         result = SecureKeyConst.AT_RESPONSE_OK;
                         break;
@@ -210,7 +281,8 @@ public class DevRootKeyATCmd implements IWorkOnAt {
                     result = generateCertWithTlv(true);
                     break;
                 case 97:
-                    DeviceRootKeyServiceManager.DeviceInfo dInfo = this.mDeviceRootKeyServiceManager.getDeviceInfo(14);
+                    DeviceRootKeyServiceManager.DeviceInfo dInfo =
+                            this.mDeviceRootKeyServiceManager.getDeviceInfo(14);
                     if (dInfo != null) {
                         result = SecureKeyConst.AT_RESPONSE_OK;
                         break;
@@ -270,10 +342,17 @@ public class DevRootKeyATCmd implements IWorkOnAt {
     protected int checkKeyValidity(int keyType) {
         int ret = 0;
         boolean isSupportIDAttestation = false;
-        boolean isSystemFirstApiLevelMoreThanT = Integer.parseInt(SystemProperties.get("ro.product.first_api_level")) >= 33;
-        boolean isVendorFirstApiLevelMoreThanT = Integer.parseInt(SystemProperties.get("ro.vendor.build.version.sdk")) >= 33;
-        boolean isExceptionHandlingGrfSModules = SystemProperties.get("ro.build.flavor", "").contains("a14m") || SystemProperties.get("ro.build.flavor", "").contains("a14xm") || SystemProperties.get("ro.build.flavor", "").contains("a24") || SystemProperties.get("ro.build.flavor", "").contains("a34x");
-        if (isSystemFirstApiLevelMoreThanT && (isVendorFirstApiLevelMoreThanT || isExceptionHandlingGrfSModules)) {
+        boolean isSystemFirstApiLevelMoreThanT =
+                Integer.parseInt(SystemProperties.get("ro.product.first_api_level")) >= 33;
+        boolean isVendorFirstApiLevelMoreThanT =
+                Integer.parseInt(SystemProperties.get("ro.vendor.build.version.sdk")) >= 33;
+        boolean isExceptionHandlingGrfSModules =
+                SystemProperties.get("ro.build.flavor", "").contains("a14m")
+                        || SystemProperties.get("ro.build.flavor", "").contains("a14xm")
+                        || SystemProperties.get("ro.build.flavor", "").contains("a24")
+                        || SystemProperties.get("ro.build.flavor", "").contains("a34x");
+        if (isSystemFirstApiLevelMoreThanT
+                && (isVendorFirstApiLevelMoreThanT || isExceptionHandlingGrfSModules)) {
             isSupportIDAttestation = true;
         }
         if (1 != 0) {
@@ -294,7 +373,8 @@ public class DevRootKeyATCmd implements IWorkOnAt {
                 return ret;
             }
         }
-        if ((keyType == 1 || (keyType == 4 && 1 != 0)) && (ret = validateDeviceKeyFromKeystore(keyType, isSupportIDAttestation)) != 0) {
+        if ((keyType == 1 || (keyType == 4 && 1 != 0))
+                && (ret = validateDeviceKeyFromKeystore(keyType, isSupportIDAttestation)) != 0) {
             Log.e(TAG, "validateDeviceKeyFromKeystore failed");
             return ret;
         }
@@ -303,7 +383,8 @@ public class DevRootKeyATCmd implements IWorkOnAt {
 
     protected int installDeviceID(int keyType) {
         String meid;
-        TelephonyManager telephonyService = (TelephonyManager) this.mContext.getSystemService("phone");
+        TelephonyManager telephonyService =
+                (TelephonyManager) this.mContext.getSystemService("phone");
         String brand = Build.BRAND_FOR_ATTESTATION;
         String device = Build.DEVICE_FOR_ATTESTATION;
         String produt = Build.PRODUCT_FOR_ATTESTATION;
@@ -318,15 +399,18 @@ public class DevRootKeyATCmd implements IWorkOnAt {
             e.printStackTrace();
             meid = null;
         }
-        return installDeviceID(keyType, brand, device, produt, serial, imei1, imei2, meid, manufacturer, model);
+        return installDeviceID(
+                keyType, brand, device, produt, serial, imei1, imei2, meid, manufacturer, model);
     }
 
-    protected boolean isEqualsRootPubKey(Certificate rootCert, int keyType) throws CertificateException {
+    protected boolean isEqualsRootPubKey(Certificate rootCert, int keyType)
+            throws CertificateException {
         X509Certificate X509RootCert = (X509Certificate) rootCert;
         PublicKey pubkey = X509RootCert.getPublicKey();
         byte[] pubkeyEncoded = pubkey.getEncoded();
         if (keyType == 1 || keyType == 4) {
-            if (Arrays.equals(pubkeyEncoded, SecureKeyConst.GoogleRootPubKey) || Arrays.equals(pubkeyEncoded, SecureKeyConst.GoogleDevRootPubKey)) {
+            if (Arrays.equals(pubkeyEncoded, SecureKeyConst.GoogleRootPubKey)
+                    || Arrays.equals(pubkeyEncoded, SecureKeyConst.GoogleDevRootPubKey)) {
                 return true;
             }
             return false;
@@ -347,10 +431,18 @@ public class DevRootKeyATCmd implements IWorkOnAt {
             Method dump skipped, instructions count: 665
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.DevRootKeyATCmd.validateDeviceKeyFromKeystore(int, boolean):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.DevRootKeyATCmd.validateDeviceKeyFromKeystore(int,"
+                    + " boolean):int");
     }
 
-    protected boolean verifyCertChains(Certificate[] certs) throws CertificateException, NoSuchAlgorithmException, NoSuchProviderException, CertPathValidatorException, InvalidAlgorithmParameterException {
+    protected boolean verifyCertChains(Certificate[] certs)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    NoSuchProviderException,
+                    CertPathValidatorException,
+                    InvalidAlgorithmParameterException {
         List<X509Certificate> x509Certs = new ArrayList<>();
         int len = certs.length;
         for (int i = 1; i < len; i++) {
@@ -360,7 +452,12 @@ public class DevRootKeyATCmd implements IWorkOnAt {
         return verifyCertChains(x509Certs);
     }
 
-    protected boolean verifyCertChains(List<X509Certificate> certs) throws CertificateException, NoSuchAlgorithmException, NoSuchProviderException, CertPathValidatorException, InvalidAlgorithmParameterException {
+    protected boolean verifyCertChains(List<X509Certificate> certs)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    NoSuchProviderException,
+                    CertPathValidatorException,
+                    InvalidAlgorithmParameterException {
         int len = certs.size();
         if (len != 0) {
             X509Certificate rootCert = certs.get(len - 1);
@@ -382,7 +479,8 @@ public class DevRootKeyATCmd implements IWorkOnAt {
             param.addCertStore(store);
             param.setDate(validDate.getTime());
             param.setRevocationEnabled(false);
-            PKIXCertPathValidatorResult result = (PKIXCertPathValidatorResult) cpv.validate(cp, param);
+            PKIXCertPathValidatorResult result =
+                    (PKIXCertPathValidatorResult) cpv.validate(cp, param);
             PublicKey subjectPublicKey = result.getPublicKey();
             if (!subjectPublicKey.equals(finalCert.getPublicKey())) {
                 Log.e(TAG, "wrong public key returned");
@@ -403,7 +501,8 @@ public class DevRootKeyATCmd implements IWorkOnAt {
             Log.i(TAG, "It is not A User Product Device");
             return true;
         }
-        EngineeringModeManager EMMgr = new EngineeringModeManager(this.mContext.getApplicationContext());
+        EngineeringModeManager EMMgr =
+                new EngineeringModeManager(this.mContext.getApplicationContext());
         if (!EMMgr.isConnected()) {
             Log.e(TAG, "Failed to connect to em service");
             return false;
@@ -421,6 +520,8 @@ public class DevRootKeyATCmd implements IWorkOnAt {
         intent.putExtra("com.samsung.android.ese.test.extra.ID", 21);
         intent.putExtra("com.samsung.android.ese.test.extra.CMD", 19);
         intent.setPackage("com.sem.factoryapp");
-        this.mContext.getApplicationContext().sendBroadcast(intent, "com.samsung.permission.ESE_FACTORY");
+        this.mContext
+                .getApplicationContext()
+                .sendBroadcast(intent, "com.samsung.permission.ESE_FACTORY");
     }
 }

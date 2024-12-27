@@ -4,7 +4,9 @@ import android.annotation.SystemApi;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.security.cert.CertPath;
 import java.security.cert.CertificateException;
 import java.util.List;
@@ -13,19 +15,22 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class KeyChainSnapshot implements Parcelable {
-    public static final Parcelable.Creator<KeyChainSnapshot> CREATOR = new Parcelable.Creator<KeyChainSnapshot>() { // from class: android.security.keystore.recovery.KeyChainSnapshot.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyChainSnapshot createFromParcel(Parcel in) {
-            return new KeyChainSnapshot(in);
-        }
+    public static final Parcelable.Creator<KeyChainSnapshot> CREATOR =
+            new Parcelable.Creator<
+                    KeyChainSnapshot>() { // from class:
+                                          // android.security.keystore.recovery.KeyChainSnapshot.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyChainSnapshot createFromParcel(Parcel in) {
+                    return new KeyChainSnapshot(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyChainSnapshot[] newArray(int length) {
-            return new KeyChainSnapshot[length];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyChainSnapshot[] newArray(int length) {
+                    return new KeyChainSnapshot[length];
+                }
+            };
     private static final long DEFAULT_COUNTER_ID = 1;
     private static final int DEFAULT_MAX_ATTEMPTS = 10;
     private RecoveryCertPath mCertPath;
@@ -106,7 +111,8 @@ public final class KeyChainSnapshot implements Parcelable {
             return this;
         }
 
-        public Builder setKeyChainProtectionParams(List<KeyChainProtectionParams> keyChainProtectionParams) {
+        public Builder setKeyChainProtectionParams(
+                List<KeyChainProtectionParams> keyChainProtectionParams) {
             this.mInstance.mKeyChainProtectionParams = keyChainProtectionParams;
             return this;
         }
@@ -122,8 +128,10 @@ public final class KeyChainSnapshot implements Parcelable {
         }
 
         public KeyChainSnapshot build() {
-            Preconditions.checkCollectionElementsNotNull(this.mInstance.mKeyChainProtectionParams, "keyChainProtectionParams");
-            Preconditions.checkCollectionElementsNotNull(this.mInstance.mEntryRecoveryData, "entryRecoveryData");
+            Preconditions.checkCollectionElementsNotNull(
+                    this.mInstance.mKeyChainProtectionParams, "keyChainProtectionParams");
+            Preconditions.checkCollectionElementsNotNull(
+                    this.mInstance.mEntryRecoveryData, "entryRecoveryData");
             Objects.requireNonNull(this.mInstance.mEncryptedRecoveryKeyBlob);
             Objects.requireNonNull(this.mInstance.mServerParams);
             Objects.requireNonNull(this.mInstance.mCertPath);

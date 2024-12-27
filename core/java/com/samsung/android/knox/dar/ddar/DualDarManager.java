@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.samsung.android.knox.dar.IDarManagerService;
 import com.samsung.android.knox.dar.ddar.proxy.KnoxProxyManager;
+
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -86,12 +88,21 @@ public final class DualDarManager {
 
     public boolean isInnerAuthRequired(final int userId) {
         if (isOnDeviceOwner(userId)) {
-            return ((Boolean) getDarManagerService().map(new Function() { // from class: com.samsung.android.knox.dar.ddar.DualDarManager$$ExternalSyntheticLambda1
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return DualDarManager.lambda$isInnerAuthRequired$0(userId, (IDarManagerService) obj);
-                }
-            }).orElse(false)).booleanValue();
+            return ((Boolean)
+                            getDarManagerService()
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.knox.dar.ddar.DualDarManager$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return DualDarManager
+                                                            .lambda$isInnerAuthRequired$0(
+                                                                    userId,
+                                                                    (IDarManagerService) obj);
+                                                }
+                                            })
+                                    .orElse(false))
+                    .booleanValue();
         }
         return false;
     }
@@ -107,15 +118,23 @@ public final class DualDarManager {
     }
 
     public boolean setDualDarInfo(final int userId, final int flag) {
-        return ((Boolean) getDarManagerService().map(new Function() { // from class: com.samsung.android.knox.dar.ddar.DualDarManager$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return DualDarManager.lambda$setDualDarInfo$1(userId, flag, (IDarManagerService) obj);
-            }
-        }).orElse(false)).booleanValue();
+        return ((Boolean)
+                        getDarManagerService()
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.knox.dar.ddar.DualDarManager$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return DualDarManager.lambda$setDualDarInfo$1(
+                                                        userId, flag, (IDarManagerService) obj);
+                                            }
+                                        })
+                                .orElse(false))
+                .booleanValue();
     }
 
-    static /* synthetic */ Boolean lambda$setDualDarInfo$1(int userId, int flag, IDarManagerService s) {
+    static /* synthetic */ Boolean lambda$setDualDarInfo$1(
+            int userId, int flag, IDarManagerService s) {
         try {
             return Boolean.valueOf(s.setDualDarInfo(userId, flag));
         } catch (Exception e) {
@@ -156,16 +175,19 @@ public final class DualDarManager {
     }
 
     public String getClientPackage(int userId) {
-        return DualDarCache.getInstance(this.mContext).get(userId, DualDarCache.KEY_CLIENT_PACKAGE_NAME);
+        return DualDarCache.getInstance(this.mContext)
+                .get(userId, DualDarCache.KEY_CLIENT_PACKAGE_NAME);
     }
 
     private Bundle processCommand(String command, Bundle params) {
-        return KnoxProxyManager.getInstance(this.mContext).relayMessage("SYSTEM_PROXY_AGENT", DDAR_MANAGER_SERVICE, command, params);
+        return KnoxProxyManager.getInstance(this.mContext)
+                .relayMessage("SYSTEM_PROXY_AGENT", DDAR_MANAGER_SERVICE, command, params);
     }
 
     private Optional<IDarManagerService> getDarManagerService() {
         if (this.mDarManagerService == null) {
-            this.mDarManagerService = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+            this.mDarManagerService =
+                    IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
         }
         return Optional.ofNullable(this.mDarManagerService);
     }

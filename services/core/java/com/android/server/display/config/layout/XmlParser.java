@@ -6,37 +6,37 @@ import org.xmlpull.v1.XmlPullParser;
 /* loaded from: classes.dex */
 public abstract class XmlParser {
     /* JADX WARN: Code restructure failed: missing block: B:116:0x0180, code lost:
-    
-        if (r6 != 3) goto L90;
-     */
+
+       if (r6 != 3) goto L90;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:118:0x0184, code lost:
-    
-        if (r9.layout != null) goto L78;
-     */
+
+       if (r9.layout != null) goto L78;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:119:0x0186, code lost:
-    
-        r9.layout = new java.util.ArrayList();
-     */
+
+       r9.layout = new java.util.ArrayList();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:120:0x018d, code lost:
-    
-        ((java.util.ArrayList) r9.layout).add(r3);
-     */
+
+       ((java.util.ArrayList) r9.layout).add(r3);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:124:0x019d, code lost:
-    
-        throw new javax.xml.datatype.DatatypeConfigurationException("Layout is not closed");
-     */
+
+       throw new javax.xml.datatype.DatatypeConfigurationException("Layout is not closed");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:128:0x01a3, code lost:
-    
-        if (r3 != 3) goto L84;
-     */
+
+       if (r3 != 3) goto L84;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:129:0x01a5, code lost:
-    
-        return r9;
-     */
+
+       return r9;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:131:0x01ad, code lost:
-    
-        throw new javax.xml.datatype.DatatypeConfigurationException("Layouts is not closed");
-     */
+
+       throw new javax.xml.datatype.DatatypeConfigurationException("Layouts is not closed");
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -46,7 +46,9 @@ public abstract class XmlParser {
             Method dump skipped, instructions count: 431
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.config.layout.XmlParser.read(java.io.InputStream):com.android.server.display.config.layout.Layouts");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.config.layout.XmlParser.read(java.io.InputStream):com.android.server.display.config.layout.Layouts");
     }
 
     public static String readText(XmlPullParser xmlPullParser) {

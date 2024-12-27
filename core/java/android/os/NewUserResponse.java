@@ -26,6 +26,10 @@ public final class NewUserResponse {
     }
 
     public String toString() {
-        return "NewUserResponse{mUser=" + this.mUser + ", mOperationResult=" + this.mOperationResult + '}';
+        return "NewUserResponse{mUser="
+                + this.mUser
+                + ", mOperationResult="
+                + this.mOperationResult
+                + '}';
     }
 }

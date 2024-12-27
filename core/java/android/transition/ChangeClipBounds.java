@@ -17,8 +17,7 @@ public class ChangeClipBounds extends Transition {
     private static final String PROPNAME_CLIP = "android:clipBounds:clip";
     private static final String[] sTransitionProperties = {PROPNAME_CLIP};
 
-    public ChangeClipBounds() {
-    }
+    public ChangeClipBounds() {}
 
     public ChangeClipBounds(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -53,8 +52,12 @@ public class ChangeClipBounds extends Transition {
     }
 
     @Override // android.transition.Transition
-    public Animator createAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
-        if (startValues == null || endValues == null || !startValues.values.containsKey(PROPNAME_CLIP) || !endValues.values.containsKey(PROPNAME_CLIP)) {
+    public Animator createAnimator(
+            ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
+        if (startValues == null
+                || endValues == null
+                || !startValues.values.containsKey(PROPNAME_CLIP)
+                || !endValues.values.containsKey(PROPNAME_CLIP)) {
             return null;
         }
         Rect start = (Rect) startValues.values.get(PROPNAME_CLIP);
@@ -73,15 +76,19 @@ public class ChangeClipBounds extends Transition {
         }
         endValues.view.setClipBounds(start);
         RectEvaluator evaluator = new RectEvaluator(new Rect());
-        ObjectAnimator animator = ObjectAnimator.ofObject(endValues.view, "clipBounds", evaluator, start, end);
+        ObjectAnimator animator =
+                ObjectAnimator.ofObject(endValues.view, "clipBounds", evaluator, start, end);
         if (endIsNull) {
             final View endView = endValues.view;
-            animator.addListener(new AnimatorListenerAdapter() { // from class: android.transition.ChangeClipBounds.1
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    endView.setClipBounds(null);
-                }
-            });
+            animator.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // android.transition.ChangeClipBounds.1
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            endView.setClipBounds(null);
+                        }
+                    });
         }
         return animator;
     }

@@ -16,12 +16,13 @@ import android.view.InputWindowHandle;
 import android.window.ITrustedPresentationListener;
 import android.window.TrustedPresentationThresholds;
 import android.window.WindowInfosListener;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.wm.TrustedPresentationListenerController;
 import com.android.server.wm.utils.RegionUtils;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -40,17 +41,22 @@ public final class TrustedPresentationListenerController {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.TrustedPresentationListenerController$1, reason: invalid class name */
     public final class AnonymousClass1 extends WindowInfosListener {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
-        public final void onWindowInfosChanged(final InputWindowHandle[] inputWindowHandleArr, WindowInfosListener.DisplayInfo[] displayInfoArr) {
-            TrustedPresentationListenerController.this.mHandler.post(new Runnable() { // from class: com.android.server.wm.TrustedPresentationListenerController$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    TrustedPresentationListenerController.AnonymousClass1 anonymousClass1 = TrustedPresentationListenerController.AnonymousClass1.this;
-                    TrustedPresentationListenerController.this.computeTpl(inputWindowHandleArr);
-                }
-            });
+        public final void onWindowInfosChanged(
+                final InputWindowHandle[] inputWindowHandleArr,
+                WindowInfosListener.DisplayInfo[] displayInfoArr) {
+            TrustedPresentationListenerController.this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.wm.TrustedPresentationListenerController$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            TrustedPresentationListenerController.AnonymousClass1 anonymousClass1 =
+                                    TrustedPresentationListenerController.AnonymousClass1.this;
+                            TrustedPresentationListenerController.this.computeTpl(
+                                    inputWindowHandleArr);
+                        }
+                    });
         }
     }
 
@@ -74,22 +80,24 @@ public final class TrustedPresentationListenerController {
 
             @Override // android.os.IBinder.DeathRecipient
             public final void binderDied() {
-                TrustedPresentationListenerController.this.mHandler.post(new TrustedPresentationListenerController$$ExternalSyntheticLambda2(1, this));
+                TrustedPresentationListenerController.this.mHandler.post(
+                        new TrustedPresentationListenerController$$ExternalSyntheticLambda2(
+                                1, this));
             }
         }
 
-        public Listeners() {
-        }
+        public Listeners() {}
 
         public final void removeListeners(IBinder iBinder, Optional optional) {
             for (int size = this.mWindowToListeners.size() - 1; size >= 0; size--) {
                 ArrayList arrayList = (ArrayList) this.mWindowToListeners.valueAt(size);
                 for (int size2 = arrayList.size() - 1; size2 >= 0; size2--) {
-                    TrustedPresentationInfo trustedPresentationInfo = (TrustedPresentationInfo) arrayList.get(size2);
+                    TrustedPresentationInfo trustedPresentationInfo =
+                            (TrustedPresentationInfo) arrayList.get(size2);
                     if (trustedPresentationInfo.mListener.asBinder() == iBinder) {
                         if (!optional.isEmpty()) {
-                            if (trustedPresentationInfo.mId != ((Integer) optional.get()).intValue()) {
-                            }
+                            if (trustedPresentationInfo.mId
+                                    != ((Integer) optional.get()).intValue()) {}
                         }
                         arrayList.remove(size2);
                     }
@@ -110,14 +118,21 @@ public final class TrustedPresentationListenerController {
         public boolean mLastReportedTrustedPresentationState = false;
         public long mEnteredTrustedPresentationStateTime = -1;
 
-        public TrustedPresentationInfo(TrustedPresentationThresholds trustedPresentationThresholds, int i, ITrustedPresentationListener iTrustedPresentationListener) {
+        public TrustedPresentationInfo(
+                TrustedPresentationThresholds trustedPresentationThresholds,
+                int i,
+                ITrustedPresentationListener iTrustedPresentationListener) {
             this.mThresholds = trustedPresentationThresholds;
             this.mId = i;
             this.mListener = iTrustedPresentationListener;
         }
     }
 
-    public static void addListenerUpdate(ArrayMap arrayMap, ITrustedPresentationListener iTrustedPresentationListener, int i, boolean z) {
+    public static void addListenerUpdate(
+            ArrayMap arrayMap,
+            ITrustedPresentationListener iTrustedPresentationListener,
+            int i,
+            boolean z) {
         Pair pair = (Pair) arrayMap.get(iTrustedPresentationListener);
         if (pair == null) {
             pair = new Pair(new IntArray(), new IntArray());
@@ -168,7 +183,12 @@ public final class TrustedPresentationListenerController {
         boolean[] zArr = ProtoLogImpl_54989576.Cache.WM_DEBUG_TPL_enabled;
         char c2 = 1;
         if (zArr[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_TPL, 6408851516381868623L, 1, null, Long.valueOf(this.mLastWindowHandles.length));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_TPL,
+                    6408851516381868623L,
+                    1,
+                    null,
+                    Long.valueOf(this.mLastWindowHandles.length));
         }
         ArrayMap arrayMap3 = new ArrayMap();
         InputWindowHandle[] inputWindowHandleArr3 = this.mLastWindowHandles;
@@ -178,7 +198,10 @@ public final class TrustedPresentationListenerController {
             InputWindowHandle inputWindowHandle3 = inputWindowHandleArr3[i4];
             if (inputWindowHandle3.canOccludePresentation) {
                 rect3.set(inputWindowHandle3.frame);
-                ArrayList arrayList2 = (ArrayList) listeners2.mWindowToListeners.get(inputWindowHandle3.getWindowToken());
+                ArrayList arrayList2 =
+                        (ArrayList)
+                                listeners2.mWindowToListeners.get(
+                                        inputWindowHandle3.getWindowToken());
                 if (arrayList2 != null) {
                     Region region4 = new Region();
                     listeners = listeners2;
@@ -205,7 +228,16 @@ public final class TrustedPresentationListenerController {
                         arrayMap = arrayMap3;
                         region = region3;
                         j2 = currentTimeMillis;
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_TPL, -5162728346383863020L, 640, null, String.valueOf(region4), String.valueOf(rectF), String.valueOf(size), Double.valueOf(sqrt), Double.valueOf(sqrt2));
+                        ProtoLogImpl_54989576.v(
+                                ProtoLogGroup.WM_DEBUG_TPL,
+                                -5162728346383863020L,
+                                640,
+                                null,
+                                String.valueOf(region4),
+                                String.valueOf(rectF),
+                                String.valueOf(size),
+                                Double.valueOf(sqrt),
+                                Double.valueOf(sqrt2));
                     } else {
                         rect = rect3;
                         fArr = fArr2;
@@ -216,43 +248,88 @@ public final class TrustedPresentationListenerController {
                         i2 = i4;
                     }
                     float f7 = -1.0f;
-                    if (size.getWidth() != 0 && size.getHeight() != 0 && rectF.width() != FullScreenMagnificationGestureHandler.MAX_SCALE && rectF.height() != FullScreenMagnificationGestureHandler.MAX_SCALE) {
+                    if (size.getWidth() != 0
+                            && size.getHeight() != 0
+                            && rectF.width() != FullScreenMagnificationGestureHandler.MAX_SCALE
+                            && rectF.height() != FullScreenMagnificationGestureHandler.MAX_SCALE) {
                         float min = Math.min(sqrt * sqrt2, 1.0f);
                         if (zArr[1]) {
-                            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_TPL, 898769258643799441L, 2, null, Double.valueOf(min));
+                            ProtoLogImpl_54989576.v(
+                                    ProtoLogGroup.WM_DEBUG_TPL,
+                                    898769258643799441L,
+                                    2,
+                                    null,
+                                    Double.valueOf(min));
                         }
-                        float height = (rectF.height() / size.getHeight()) * (rectF.width() / size.getWidth()) * min;
+                        float height =
+                                (rectF.height() / size.getHeight())
+                                        * (rectF.width() / size.getWidth())
+                                        * min;
                         if (zArr[1]) {
-                            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_TPL, -455501334697331596L, 2, null, Double.valueOf(height));
+                            ProtoLogImpl_54989576.v(
+                                    ProtoLogGroup.WM_DEBUG_TPL,
+                                    -455501334697331596L,
+                                    2,
+                                    null,
+                                    Double.valueOf(height));
                         }
                         final float[] fArr3 = new float[1];
-                        RegionUtils.forEachRect(region4, new Consumer() { // from class: com.android.server.wm.TrustedPresentationListenerController$$ExternalSyntheticLambda3
-                            @Override // java.util.function.Consumer
-                            public final void accept(Object obj) {
-                                float[] fArr4 = fArr3;
-                                Rect rect4 = (Rect) obj;
-                                fArr4[0] = fArr4[0] + (rect4.height() * rect4.width());
-                            }
-                        });
+                        RegionUtils.forEachRect(
+                                region4,
+                                new Consumer() { // from class:
+                                                 // com.android.server.wm.TrustedPresentationListenerController$$ExternalSyntheticLambda3
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        float[] fArr4 = fArr3;
+                                        Rect rect4 = (Rect) obj;
+                                        fArr4[0] = fArr4[0] + (rect4.height() * rect4.width());
+                                    }
+                                });
                         f7 = height * (fArr3[0] / (rectF.height() * rectF.width()));
                     }
                     float f8 = inputWindowHandle3.alpha;
                     if (zArr[1]) {
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_TPL, 854487339271667012L, 26, null, Double.valueOf(f7), Double.valueOf(f8), Long.valueOf(j2));
+                        ProtoLogImpl_54989576.v(
+                                ProtoLogGroup.WM_DEBUG_TPL,
+                                854487339271667012L,
+                                26,
+                                null,
+                                Double.valueOf(f7),
+                                Double.valueOf(f8),
+                                Long.valueOf(j2));
                     }
                     int i5 = 0;
                     while (i5 < arrayList.size()) {
                         ArrayList arrayList3 = arrayList;
-                        TrustedPresentationInfo trustedPresentationInfo = (TrustedPresentationInfo) arrayList3.get(i5);
-                        ITrustedPresentationListener iTrustedPresentationListener = trustedPresentationInfo.mListener;
+                        TrustedPresentationInfo trustedPresentationInfo =
+                                (TrustedPresentationInfo) arrayList3.get(i5);
+                        ITrustedPresentationListener iTrustedPresentationListener =
+                                trustedPresentationInfo.mListener;
                         boolean z = trustedPresentationInfo.mLastComputedTrustedPresentationState;
-                        boolean z2 = f8 >= trustedPresentationInfo.mThresholds.getMinAlpha() && f7 >= trustedPresentationInfo.mThresholds.getMinFractionRendered();
+                        boolean z2 =
+                                f8 >= trustedPresentationInfo.mThresholds.getMinAlpha()
+                                        && f7
+                                                >= trustedPresentationInfo.mThresholds
+                                                        .getMinFractionRendered();
                         trustedPresentationInfo.mLastComputedTrustedPresentationState = z2;
                         if (zArr[1]) {
                             inputWindowHandle2 = inputWindowHandle3;
                             f = f8;
                             i3 = i5;
-                            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_TPL, -2248576188205088843L, 2720, null, String.valueOf(z), String.valueOf(z2), Double.valueOf(f8), Double.valueOf(trustedPresentationInfo.mThresholds.getMinAlpha()), Double.valueOf(f7), Double.valueOf(trustedPresentationInfo.mThresholds.getMinFractionRendered()));
+                            ProtoLogImpl_54989576.v(
+                                    ProtoLogGroup.WM_DEBUG_TPL,
+                                    -2248576188205088843L,
+                                    2720,
+                                    null,
+                                    String.valueOf(z),
+                                    String.valueOf(z2),
+                                    Double.valueOf(f8),
+                                    Double.valueOf(
+                                            trustedPresentationInfo.mThresholds.getMinAlpha()),
+                                    Double.valueOf(f7),
+                                    Double.valueOf(
+                                            trustedPresentationInfo.mThresholds
+                                                    .getMinFractionRendered()));
                         } else {
                             f = f8;
                             i3 = i5;
@@ -264,12 +341,32 @@ public final class TrustedPresentationListenerController {
                             if (!z && z2) {
                                 j3 = j2;
                                 trustedPresentationInfo.mEnteredTrustedPresentationStateTime = j3;
-                                this.mHandler.postDelayed(new TrustedPresentationListenerController$$ExternalSyntheticLambda2(0, this), (long) (trustedPresentationInfo.mThresholds.getStabilityRequirementMillis() * 1.5d));
-                                if (trustedPresentationInfo.mLastReportedTrustedPresentationState && z2 && j3 - trustedPresentationInfo.mEnteredTrustedPresentationStateTime > trustedPresentationInfo.mThresholds.getStabilityRequirementMillis()) {
-                                    trustedPresentationInfo.mLastReportedTrustedPresentationState = true;
-                                    addListenerUpdate(arrayMap2, iTrustedPresentationListener, i6, true);
+                                this.mHandler.postDelayed(
+                                        new TrustedPresentationListenerController$$ExternalSyntheticLambda2(
+                                                0, this),
+                                        (long)
+                                                (trustedPresentationInfo.mThresholds
+                                                                .getStabilityRequirementMillis()
+                                                        * 1.5d));
+                                if (trustedPresentationInfo.mLastReportedTrustedPresentationState
+                                        && z2
+                                        && j3
+                                                        - trustedPresentationInfo
+                                                                .mEnteredTrustedPresentationStateTime
+                                                > trustedPresentationInfo.mThresholds
+                                                        .getStabilityRequirementMillis()) {
+                                    trustedPresentationInfo.mLastReportedTrustedPresentationState =
+                                            true;
+                                    addListenerUpdate(
+                                            arrayMap2, iTrustedPresentationListener, i6, true);
                                     if (zArr[0]) {
-                                        ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_TPL, 5405816744363636527L, 4, null, String.valueOf(iTrustedPresentationListener), Long.valueOf(i6));
+                                        ProtoLogImpl_54989576.d(
+                                                ProtoLogGroup.WM_DEBUG_TPL,
+                                                5405816744363636527L,
+                                                4,
+                                                null,
+                                                String.valueOf(iTrustedPresentationListener),
+                                                Long.valueOf(i6));
                                     }
                                 }
                                 i5 = i3 + 1;
@@ -281,11 +378,19 @@ public final class TrustedPresentationListenerController {
                             }
                         } else {
                             if (trustedPresentationInfo.mLastReportedTrustedPresentationState) {
-                                trustedPresentationInfo.mLastReportedTrustedPresentationState = false;
+                                trustedPresentationInfo.mLastReportedTrustedPresentationState =
+                                        false;
                                 arrayMap2 = arrayMap;
-                                addListenerUpdate(arrayMap2, iTrustedPresentationListener, i6, false);
+                                addListenerUpdate(
+                                        arrayMap2, iTrustedPresentationListener, i6, false);
                                 if (zArr[0]) {
-                                    ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_TPL, 6236170793308011579L, 4, null, String.valueOf(iTrustedPresentationListener), Long.valueOf(i6));
+                                    ProtoLogImpl_54989576.d(
+                                            ProtoLogGroup.WM_DEBUG_TPL,
+                                            6236170793308011579L,
+                                            4,
+                                            null,
+                                            String.valueOf(iTrustedPresentationListener),
+                                            Long.valueOf(i6));
                                 }
                             } else {
                                 arrayMap2 = arrayMap;
@@ -293,8 +398,7 @@ public final class TrustedPresentationListenerController {
                             trustedPresentationInfo.mEnteredTrustedPresentationStateTime = -1L;
                         }
                         j3 = j2;
-                        if (trustedPresentationInfo.mLastReportedTrustedPresentationState) {
-                        }
+                        if (trustedPresentationInfo.mLastReportedTrustedPresentationState) {}
                         i5 = i3 + 1;
                         arrayMap = arrayMap2;
                         j2 = j3;
@@ -322,11 +426,23 @@ public final class TrustedPresentationListenerController {
                 region2.op(rect2, Region.Op.UNION);
                 c = 1;
                 if (zArr[1]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_TPL, -1135667737459933313L, 0, null, String.valueOf(inputWindowHandle.name), String.valueOf(rect2.toShortString()), String.valueOf(region2));
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_DEBUG_TPL,
+                            -1135667737459933313L,
+                            0,
+                            null,
+                            String.valueOf(inputWindowHandle.name),
+                            String.valueOf(rect2.toShortString()),
+                            String.valueOf(region2));
                 }
             } else {
                 if (zArr[c2]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_TPL, 7718187745767272532L, 0, null, String.valueOf(inputWindowHandle3.name));
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_DEBUG_TPL,
+                            7718187745767272532L,
+                            0,
+                            null,
+                            String.valueOf(inputWindowHandle3.name));
                 }
                 listeners = listeners2;
                 matrix = matrix2;
@@ -353,14 +469,21 @@ public final class TrustedPresentationListenerController {
         for (int i7 = 0; i7 < arrayMap3.size(); i7++) {
             Pair pair = (Pair) arrayMap3.valueAt(i7);
             try {
-                ((ITrustedPresentationListener) arrayMap3.keyAt(i7)).onTrustedPresentationChanged(((IntArray) pair.first).toArray(), ((IntArray) pair.second).toArray());
+                ((ITrustedPresentationListener) arrayMap3.keyAt(i7))
+                        .onTrustedPresentationChanged(
+                                ((IntArray) pair.first).toArray(),
+                                ((IntArray) pair.second).toArray());
             } catch (RemoteException unused) {
             }
         }
     }
 
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "TrustedPresentationListenerController:", "  Active unique listeners (");
+        StringBuilder m$1 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                        printWriter,
+                        "TrustedPresentationListenerController:",
+                        "  Active unique listeners (");
         Listeners listeners = this.mRegisteredListeners;
         m$1.append(listeners.mUniqueListeners.size());
         m$1.append("):");
@@ -369,8 +492,15 @@ public final class TrustedPresentationListenerController {
             printWriter.println("    window=" + listeners.mWindowToListeners.keyAt(i));
             ArrayList arrayList = (ArrayList) listeners.mWindowToListeners.valueAt(i);
             for (int i2 = 0; i2 < arrayList.size(); i2++) {
-                TrustedPresentationInfo trustedPresentationInfo = (TrustedPresentationInfo) arrayList.get(i2);
-                printWriter.println("      listener=" + trustedPresentationInfo.mListener.asBinder() + " id=" + trustedPresentationInfo.mId + " thresholds=" + trustedPresentationInfo.mThresholds);
+                TrustedPresentationInfo trustedPresentationInfo =
+                        (TrustedPresentationInfo) arrayList.get(i2);
+                printWriter.println(
+                        "      listener="
+                                + trustedPresentationInfo.mListener.asBinder()
+                                + " id="
+                                + trustedPresentationInfo.mId
+                                + " thresholds="
+                                + trustedPresentationInfo.mThresholds);
             }
         }
     }

@@ -7,19 +7,24 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.util.ArraySet;
+
 import com.android.internal.R;
 import com.android.internal.pm.pkg.component.flags.Flags;
 import com.android.internal.pm.pkg.parsing.ParsingPackage;
 import com.android.internal.pm.pkg.parsing.ParsingUtils;
 import com.android.internal.util.CollectionUtils;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.Set;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public class ParsedProcessUtils {
-    private static ParseResult<Set<String>> parseDenyPermission(Set<String> perms, Resources res, XmlResourceParser parser, ParseInput input) throws IOException, XmlPullParserException {
+    private static ParseResult<Set<String>> parseDenyPermission(
+            Set<String> perms, Resources res, XmlResourceParser parser, ParseInput input)
+            throws IOException, XmlPullParserException {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestDenyPermission);
         try {
             String perm = sa.getNonConfigurationString(0, 0);
@@ -35,7 +40,9 @@ public class ParsedProcessUtils {
         }
     }
 
-    private static ParseResult<Set<String>> parseAllowPermission(Set<String> perms, Resources res, XmlResourceParser parser, ParseInput input) throws IOException, XmlPullParserException {
+    private static ParseResult<Set<String>> parseAllowPermission(
+            Set<String> perms, Resources res, XmlResourceParser parser, ParseInput input)
+            throws IOException, XmlPullParserException {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestAllowPermission);
         try {
             String perm = sa.getNonConfigurationString(0, 0);
@@ -53,7 +60,15 @@ public class ParsedProcessUtils {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Failed to find 'out' block for switch in B:38:0x00bf. Please report as an issue. */
-    private static ParseResult<ParsedProcess> parseProcess(Set<String> perms, String[] separateProcesses, ParsingPackage pkg, Resources res, XmlResourceParser parser, int flags, ParseInput input) throws IOException, XmlPullParserException {
+    private static ParseResult<ParsedProcess> parseProcess(
+            Set<String> perms,
+            String[] separateProcesses,
+            ParsingPackage pkg,
+            Resources res,
+            XmlResourceParser parser,
+            int flags,
+            ParseInput input)
+            throws IOException, XmlPullParserException {
         char c;
         ParseResult<?> result;
         ParseResult<?> result2;
@@ -67,12 +82,20 @@ public class ParsedProcessUtils {
             }
         }
         String processName = sa.getNonConfigurationString(1, 0);
-        ParseResult<String> processNameResult = ComponentParseUtils.buildProcessName(pkg.getPackageName(), pkg.getPackageName(), processName, flags, separateProcesses, input);
+        ParseResult<String> processNameResult =
+                ComponentParseUtils.buildProcessName(
+                        pkg.getPackageName(),
+                        pkg.getPackageName(),
+                        processName,
+                        flags,
+                        separateProcesses,
+                        input);
         if (processNameResult.isError()) {
             return input.error(processNameResult);
         }
         String packageName = pkg.getPackageName();
-        String className = ParsingUtils.buildClassName(packageName, sa.getNonConfigurationString(0, 0));
+        String className =
+                ParsingUtils.buildClassName(packageName, sa.getNonConfigurationString(0, 0));
         proc.setName(processNameResult.getResult());
         proc.putAppClassNameForPackage(packageName, className);
         proc.setGwpAsanMode(sa.getInt(3, -1));
@@ -114,7 +137,9 @@ public class ParsedProcessUtils {
                     }
                     switch (c) {
                         case 0:
-                            ParseResult<?> denyResult = parseDenyPermission(proc.getDeniedPermissions(), res, parser, input);
+                            ParseResult<?> denyResult =
+                                    parseDenyPermission(
+                                            proc.getDeniedPermissions(), res, parser, input);
                             result = denyResult;
                             if (denyResult.isSuccess()) {
                                 proc.setDeniedPermissions(denyResult.getResult());
@@ -122,7 +147,9 @@ public class ParsedProcessUtils {
                             result2 = result;
                             break;
                         case 1:
-                            ParseResult<?> allowResult = parseAllowPermission(proc.getDeniedPermissions(), res, parser, input);
+                            ParseResult<?> allowResult =
+                                    parseAllowPermission(
+                                            proc.getDeniedPermissions(), res, parser, input);
                             result = allowResult;
                             if (allowResult.isSuccess()) {
                                 proc.setDeniedPermissions(allowResult.getResult());
@@ -144,22 +171,37 @@ public class ParsedProcessUtils {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:11:0x0102, code lost:
-    
-        return r20.success(r1);
-     */
+
+       return r20.success(r1);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:54:0x0057, code lost:
-    
-        if (r14.equals("allow-permission") != false) goto L28;
-     */
+
+       if (r14.equals("allow-permission") != false) goto L28;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.content.pm.parsing.result.ParseResult<android.util.ArrayMap<java.lang.String, com.android.internal.pm.pkg.component.ParsedProcess>> parseProcesses(java.lang.String[] r15, com.android.internal.pm.pkg.parsing.ParsingPackage r16, android.content.res.Resources r17, android.content.res.XmlResourceParser r18, int r19, android.content.pm.parsing.result.ParseInput r20) throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
+    public static android.content.pm.parsing.result.ParseResult<
+                    android.util.ArrayMap<
+                            java.lang.String, com.android.internal.pm.pkg.component.ParsedProcess>>
+            parseProcesses(
+                    java.lang.String[] r15,
+                    com.android.internal.pm.pkg.parsing.ParsingPackage r16,
+                    android.content.res.Resources r17,
+                    android.content.res.XmlResourceParser r18,
+                    int r19,
+                    android.content.pm.parsing.result.ParseInput r20)
+                    throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
         /*
             Method dump skipped, instructions count: 284
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.component.ParsedProcessUtils.parseProcesses(java.lang.String[], com.android.internal.pm.pkg.parsing.ParsingPackage, android.content.res.Resources, android.content.res.XmlResourceParser, int, android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.component.ParsedProcessUtils.parseProcesses(java.lang.String[],"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackage,"
+                    + " android.content.res.Resources, android.content.res.XmlResourceParser, int,"
+                    + " android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
     }
 }

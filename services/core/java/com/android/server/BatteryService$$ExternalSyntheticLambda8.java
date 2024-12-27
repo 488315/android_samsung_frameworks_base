@@ -11,7 +11,8 @@ public final /* synthetic */ class BatteryService$$ExternalSyntheticLambda8 impl
     public final /* synthetic */ BatteryService f$0;
     public final /* synthetic */ Intent f$1;
 
-    public /* synthetic */ BatteryService$$ExternalSyntheticLambda8(BatteryService batteryService, Intent intent, int i) {
+    public /* synthetic */ BatteryService$$ExternalSyntheticLambda8(
+            BatteryService batteryService, Intent intent, int i) {
         this.$r8$classId = i;
         this.f$0 = batteryService;
         this.f$1 = intent;
@@ -25,12 +26,17 @@ public final /* synthetic */ class BatteryService$$ExternalSyntheticLambda8 impl
                 Intent intent = this.f$1;
                 batteryService.getClass();
                 if (Build.IS_DEBUGGABLE) {
-                    BatteryService$$ExternalSyntheticOutline0.m(new StringBuilder("Sending ACTION_SEC_BATTERY_CURRENT_CHANGED: current_now:"), batteryService.mSehHealthInfo.batteryCurrentNow, "BatteryService");
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder(
+                                    "Sending ACTION_SEC_BATTERY_CURRENT_CHANGED: current_now:"),
+                            batteryService.mSehHealthInfo.batteryCurrentNow,
+                            "BatteryService");
                 }
                 ActivityManager.broadcastStickyIntent(intent, -1);
                 break;
             default:
-                ActivityManager.broadcastStickyIntent(this.f$1, -1, this.f$0.mBatteryChangedOptions, -1);
+                ActivityManager.broadcastStickyIntent(
+                        this.f$1, -1, this.f$0.mBatteryChangedOptions, -1);
                 break;
         }
     }

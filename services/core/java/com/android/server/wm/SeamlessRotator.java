@@ -5,7 +5,9 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.view.DisplayInfo;
 import android.view.SurfaceControl;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -42,7 +44,8 @@ public final class SeamlessRotator {
             matrix.preTranslate(-i5, -i4);
         } else {
             if (i != 3) {
-                throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown rotation: "));
+                throw new IllegalArgumentException(
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown rotation: "));
             }
             matrix.setRotate(270.0f);
             matrix.preTranslate(-i4, FullScreenMagnificationGestureHandler.MAX_SCALE);
@@ -57,7 +60,8 @@ public final class SeamlessRotator {
             matrix2.postTranslate(i5, i4);
         } else {
             if (i2 != 3) {
-                throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "Unknown rotation: "));
+                throw new IllegalArgumentException(
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "Unknown rotation: "));
             }
             matrix2.setRotate(90.0f);
             matrix2.postTranslate(i4, FullScreenMagnificationGestureHandler.MAX_SCALE);
@@ -65,12 +69,14 @@ public final class SeamlessRotator {
         matrix.postConcat(matrix2);
     }
 
-    public final void finish(SurfaceControl.Transaction transaction, WindowContainer windowContainer) {
+    public final void finish(
+            SurfaceControl.Transaction transaction, WindowContainer windowContainer) {
         SurfaceControl surfaceControl = windowContainer.mSurfaceControl;
         if (surfaceControl == null || !surfaceControl.isValid()) {
             return;
         }
-        transaction.setMatrix(windowContainer.mSurfaceControl, Matrix.IDENTITY_MATRIX, this.mFloat9);
+        transaction.setMatrix(
+                windowContainer.mSurfaceControl, Matrix.IDENTITY_MATRIX, this.mFloat9);
         SurfaceControl surfaceControl2 = windowContainer.mSurfaceControl;
         Point point = windowContainer.mLastSurfacePosition;
         transaction.setPosition(surfaceControl2, point.x, point.y);
@@ -90,14 +96,16 @@ public final class SeamlessRotator {
         return "ForcedSeamlessRotator" + stringWriter.toString();
     }
 
-    public final void unrotate(SurfaceControl.Transaction transaction, WindowContainer windowContainer) {
+    public final void unrotate(
+            SurfaceControl.Transaction transaction, WindowContainer windowContainer) {
         transaction.setMatrix(windowContainer.getSurfaceControl(), this.mTransform, this.mFloat9);
         Point point = windowContainer.mLastSurfacePosition;
         float[] fArr = {point.x, point.y};
         this.mTransform.mapPoints(fArr);
         transaction.setPosition(windowContainer.getSurfaceControl(), fArr[0], fArr[1]);
         if (this.mApplyFixedTransformHint) {
-            transaction.setFixedTransformHint(windowContainer.mSurfaceControl, this.mFixedTransformHint);
+            transaction.setFixedTransformHint(
+                    windowContainer.mSurfaceControl, this.mFixedTransformHint);
         }
     }
 }

@@ -5,21 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class CameraStatus implements Parcelable {
-    public static final Parcelable.Creator<CameraStatus> CREATOR = new Parcelable.Creator<CameraStatus>() { // from class: android.hardware.CameraStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraStatus createFromParcel(Parcel in) {
-            CameraStatus status = new CameraStatus();
-            status.readFromParcel(in);
-            return status;
-        }
+    public static final Parcelable.Creator<CameraStatus> CREATOR =
+            new Parcelable.Creator<CameraStatus>() { // from class: android.hardware.CameraStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraStatus createFromParcel(Parcel in) {
+                    CameraStatus status = new CameraStatus();
+                    status.readFromParcel(in);
+                    return status;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraStatus[] newArray(int size) {
-            return new CameraStatus[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraStatus[] newArray(int size) {
+                    return new CameraStatus[size];
+                }
+            };
     public String cameraId;
     public String clientPackage;
     public int deviceId;

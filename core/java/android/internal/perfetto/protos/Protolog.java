@@ -11,16 +11,14 @@ public final class Protolog {
         public static final long STACKTRACE_IID = 1155346202630L;
         public static final long STR_PARAM_IIDS = 2254857830402L;
 
-        public ProtoLogMessage() {
-        }
+        public ProtoLogMessage() {}
     }
 
     public final class ProtoLogViewerConfig {
         public static final long GROUPS = 2246267895810L;
         public static final long MESSAGES = 2246267895809L;
 
-        public ProtoLogViewerConfig() {
-        }
+        public ProtoLogViewerConfig() {}
 
         public final class MessageData {
             public static final long GROUP_ID = 1155346202628L;
@@ -28,8 +26,7 @@ public final class Protolog {
             public static final long MESSAGE = 1138166333442L;
             public static final long MESSAGE_ID = 1125281431553L;
 
-            public MessageData() {
-            }
+            public MessageData() {}
         }
 
         public final class Group {
@@ -37,8 +34,7 @@ public final class Protolog {
             public static final long NAME = 1138166333442L;
             public static final long TAG = 1138166333443L;
 
-            public Group() {
-            }
+            public Group() {}
         }
     }
 }

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.FileUtils;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -16,12 +17,14 @@ import java.util.concurrent.TimeUnit;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class ZramWriteback extends JobService {
-    public static final ComponentName sZramWriteback = new ComponentName("android", ZramWriteback.class.getName());
+    public static final ComponentName sZramWriteback =
+            new ComponentName("android", ZramWriteback.class.getName());
 
     public static int getWrittenPageCount() {
         String format = String.format("/sys/block/zram%d/bd_stat", 0);
         try {
-            return Integer.parseInt(FileUtils.readTextFile(new File(format), 128, "").trim().split("\\s+")[2], 10);
+            return Integer.parseInt(
+                    FileUtils.readTextFile(new File(format), 128, "").trim().split("\\s+")[2], 10);
         } catch (IOException unused) {
             Slog.e("ZramWriteback", "Failed to read writeback stats from ".concat(format));
             return -1;
@@ -46,7 +49,11 @@ public final class ZramWriteback extends JobService {
         JobInfo.Builder builder = new JobInfo.Builder(811, componentName);
         TimeUnit timeUnit = TimeUnit.MINUTES;
         jobScheduler.schedule(builder.setMinimumLatency(timeUnit.toMillis(i)).build());
-        jobScheduler.schedule(new JobInfo.Builder(812, componentName).setMinimumLatency(timeUnit.toMillis(i2)).setRequiresDeviceIdle(!z).build());
+        jobScheduler.schedule(
+                new JobInfo.Builder(812, componentName)
+                        .setMinimumLatency(timeUnit.toMillis(i2))
+                        .setRequiresDeviceIdle(!z)
+                        .build());
     }
 
     @Override // android.app.job.JobService
@@ -55,7 +62,13 @@ public final class ZramWriteback extends JobService {
         } catch (IOException unused) {
             Slog.w("ZramWriteback", "Writeback is not enabled on zram");
         }
-        if ("none".equals(FileUtils.readTextFile(new File(String.format("/sys/block/zram%d/backing_dev", 0)), 128, "").trim())) {
+        if ("none"
+                .equals(
+                        FileUtils.readTextFile(
+                                        new File(String.format("/sys/block/zram%d/backing_dev", 0)),
+                                        128,
+                                        "")
+                                .trim())) {
             Slog.w("ZramWriteback", "Writeback device is not set");
             jobFinished(jobParameters, false);
             return false;
@@ -81,9 +94,23 @@ public final class ZramWriteback extends JobService {
                     }
                     ZramWriteback.markPagesAsIdle();
                     if (writtenPageCount != -1) {
-                        Slog.i("ZramWriteback", "Total pages written to disk is " + (ZramWriteback.getWrittenPageCount() - writtenPageCount));
+                        Slog.i(
+                                "ZramWriteback",
+                                "Total pages written to disk is "
+                                        + (ZramWriteback.getWrittenPageCount() - writtenPageCount));
                     }
-                    ((JobScheduler) ZramWriteback.this.getSystemService("jobscheduler")).schedule(new JobInfo.Builder(812, ZramWriteback.sZramWriteback).setMinimumLatency(TimeUnit.HOURS.toMillis(SystemProperties.getInt("ro.zram.periodic_wb_delay_hours", 24))).setRequiresDeviceIdle(!SystemProperties.getBoolean("zram.force_writeback", false)).build());
+                    ((JobScheduler) ZramWriteback.this.getSystemService("jobscheduler"))
+                            .schedule(
+                                    new JobInfo.Builder(812, ZramWriteback.sZramWriteback)
+                                            .setMinimumLatency(
+                                                    TimeUnit.HOURS.toMillis(
+                                                            SystemProperties.getInt(
+                                                                    "ro.zram.periodic_wb_delay_hours",
+                                                                    24)))
+                                            .setRequiresDeviceIdle(
+                                                    !SystemProperties.getBoolean(
+                                                            "zram.force_writeback", false))
+                                            .build());
                     ZramWriteback.this.jobFinished(jobParameters, false);
                 }
             }.start();

@@ -7,6 +7,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserManager;
 import android.view.WindowManagerGlobal;
+
 import com.android.internal.widget.ILockSettings;
 import com.android.internal.widget.LockPatternUtils;
 
@@ -15,11 +16,13 @@ public class LockPatternUtilsWrapper {
     private static final String TAG = "LockPatternUtilsWrapper";
     private final Context mContext;
     private HandlerUtil mHandlerUtil;
-    private ILockSettings mILockSettings = ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
+    private ILockSettings mILockSettings =
+            ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
     private final LockPatternUtils mLockPatternUtils;
     private final LogWrapper mLogWrapper;
 
-    public LockPatternUtilsWrapper(Context context, LogWrapper logWrapper, HandlerUtil handlerUtil) {
+    public LockPatternUtilsWrapper(
+            Context context, LogWrapper logWrapper, HandlerUtil handlerUtil) {
         this.mContext = context;
         this.mLockPatternUtils = new LockPatternUtils(context);
         this.mLogWrapper = logWrapper;
@@ -57,12 +60,15 @@ public class LockPatternUtilsWrapper {
         this.mLockPatternUtils.requireStrongAuth(32, -1);
         try {
             WindowManagerGlobal.getWindowManagerService().lockNow(null);
-            new Thread(new Runnable() { // from class: com.samsung.android.globalactions.util.LockPatternUtilsWrapper$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    LockPatternUtilsWrapper.this.lambda$lockDown$0();
-                }
-            }).start();
+            new Thread(
+                            new Runnable() { // from class:
+                                             // com.samsung.android.globalactions.util.LockPatternUtilsWrapper$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    LockPatternUtilsWrapper.this.lambda$lockDown$0();
+                                }
+                            })
+                    .start();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -83,11 +89,14 @@ public class LockPatternUtilsWrapper {
     }
 
     public void lockDownDelayed(int delay) {
-        this.mHandlerUtil.postDelayed(new Runnable() { // from class: com.samsung.android.globalactions.util.LockPatternUtilsWrapper$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                LockPatternUtilsWrapper.this.lockDown();
-            }
-        }, delay);
+        this.mHandlerUtil.postDelayed(
+                new Runnable() { // from class:
+                                 // com.samsung.android.globalactions.util.LockPatternUtilsWrapper$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        LockPatternUtilsWrapper.this.lockDown();
+                    }
+                },
+                delay);
     }
 }

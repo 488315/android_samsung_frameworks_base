@@ -1,12 +1,15 @@
 package android.audio.policy.configuration.V7_0;
 
 import android.content.Context;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class MixPorts {
@@ -146,7 +149,8 @@ public class MixPorts {
             this.preferredUsage = preferredUsage;
         }
 
-        static MixPort read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static MixPort read(XmlPullParser _parser)
+                throws XmlPullParserException, IOException, DatatypeConfigurationException {
             int type;
             MixPort _instance = new MixPort();
             String _raw = _parser.getAttributeValue(null, "name");
@@ -217,7 +221,8 @@ public class MixPorts {
         return this.mixPort;
     }
 
-    static MixPorts read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static MixPorts read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         MixPorts _instance = new MixPorts();
         _parser.getDepth();

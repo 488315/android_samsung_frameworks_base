@@ -10,7 +10,9 @@ import android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper;
 import android.telephony.ims.stub.DelegateConnectionMessageCallback;
 import android.telephony.ims.stub.DelegateConnectionStateCallback;
 import android.util.ArrayMap;
+
 import com.android.internal.telephony.ITelephony;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -34,7 +36,8 @@ public class SipDelegateManager {
     public static final int MESSAGE_FAILURE_REASON_NETWORK_NOT_AVAILABLE = 8;
     public static final int MESSAGE_FAILURE_REASON_NOT_REGISTERED = 9;
     public static final int MESSAGE_FAILURE_REASON_STALE_IMS_CONFIGURATION = 10;
-    public static final ArrayMap<Integer, String> MESSAGE_FAILURE_REASON_STRING_MAP = new ArrayMap<>(11);
+    public static final ArrayMap<Integer, String> MESSAGE_FAILURE_REASON_STRING_MAP =
+            new ArrayMap<>(11);
     public static final int MESSAGE_FAILURE_REASON_TAG_NOT_ENABLED_FOR_DELEGATE = 7;
     public static final int MESSAGE_FAILURE_REASON_UNKNOWN = 0;
     public static final int SIP_DELEGATE_DESTROY_REASON_REQUESTED_BY_APP = 2;
@@ -48,16 +51,13 @@ public class SipDelegateManager {
     private final BinderCacheManager<ITelephony> mTelephonyBinderCache;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeniedReason {
-    }
+    public @interface DeniedReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MessageFailureReason {
-    }
+    public @interface MessageFailureReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SipDelegateDestroyReason {
-    }
+    public @interface SipDelegateDestroyReason {}
 
     static {
         MESSAGE_FAILURE_REASON_STRING_MAP.append(0, "MESSAGE_FAILURE_REASON_UNKNOWN");
@@ -66,14 +66,21 @@ public class SipDelegateManager {
         MESSAGE_FAILURE_REASON_STRING_MAP.append(4, "MESSAGE_FAILURE_REASON_INVALID_HEADER_FIELDS");
         MESSAGE_FAILURE_REASON_STRING_MAP.append(5, "MESSAGE_FAILURE_REASON_INVALID_BODY_CONTENT");
         MESSAGE_FAILURE_REASON_STRING_MAP.append(6, "MESSAGE_FAILURE_REASON_INVALID_FEATURE_TAG");
-        MESSAGE_FAILURE_REASON_STRING_MAP.append(7, "MESSAGE_FAILURE_REASON_TAG_NOT_ENABLED_FOR_DELEGATE");
+        MESSAGE_FAILURE_REASON_STRING_MAP.append(
+                7, "MESSAGE_FAILURE_REASON_TAG_NOT_ENABLED_FOR_DELEGATE");
         MESSAGE_FAILURE_REASON_STRING_MAP.append(8, "MESSAGE_FAILURE_REASON_NETWORK_NOT_AVAILABLE");
         MESSAGE_FAILURE_REASON_STRING_MAP.append(9, "MESSAGE_FAILURE_REASON_NOT_REGISTERED");
-        MESSAGE_FAILURE_REASON_STRING_MAP.append(10, "MESSAGE_FAILURE_REASON_STALE_IMS_CONFIGURATION");
-        MESSAGE_FAILURE_REASON_STRING_MAP.append(11, "MESSAGE_FAILURE_REASON_INTERNAL_DELEGATE_STATE_TRANSITION");
+        MESSAGE_FAILURE_REASON_STRING_MAP.append(
+                10, "MESSAGE_FAILURE_REASON_STALE_IMS_CONFIGURATION");
+        MESSAGE_FAILURE_REASON_STRING_MAP.append(
+                11, "MESSAGE_FAILURE_REASON_INTERNAL_DELEGATE_STATE_TRANSITION");
     }
 
-    public SipDelegateManager(Context context, int subId, BinderCacheManager<IImsRcsController> binderCache, BinderCacheManager<ITelephony> telephonyBinderCache) {
+    public SipDelegateManager(
+            Context context,
+            int subId,
+            BinderCacheManager<IImsRcsController> binderCache,
+            BinderCacheManager<ITelephony> telephonyBinderCache) {
         this.mContext = context;
         this.mSubId = subId;
         this.mBinderCache = binderCache;
@@ -94,25 +101,40 @@ public class SipDelegateManager {
         }
     }
 
-    public void createSipDelegate(DelegateRequest request, Executor executor, DelegateConnectionStateCallback dc, DelegateConnectionMessageCallback mc) throws ImsException {
+    public void createSipDelegate(
+            DelegateRequest request,
+            Executor executor,
+            DelegateConnectionStateCallback dc,
+            DelegateConnectionMessageCallback mc)
+            throws ImsException {
         Objects.requireNonNull(request, "The DelegateRequest must not be null.");
         Objects.requireNonNull(executor, "The Executor must not be null.");
         Objects.requireNonNull(dc, "The DelegateConnectionStateCallback must not be null.");
         Objects.requireNonNull(mc, "The DelegateConnectionMessageCallback must not be null.");
         try {
-            final SipDelegateConnectionAidlWrapper wrapper = new SipDelegateConnectionAidlWrapper(executor, dc, mc);
+            final SipDelegateConnectionAidlWrapper wrapper =
+                    new SipDelegateConnectionAidlWrapper(executor, dc, mc);
             BinderCacheManager<IImsRcsController> binderCacheManager = this.mBinderCache;
             Objects.requireNonNull(wrapper);
-            IImsRcsController controller = binderCacheManager.listenOnBinder(wrapper, new Runnable() { // from class: android.telephony.ims.SipDelegateManager$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SipDelegateConnectionAidlWrapper.this.binderDied();
-                }
-            });
+            IImsRcsController controller =
+                    binderCacheManager.listenOnBinder(
+                            wrapper,
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.SipDelegateManager$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    SipDelegateConnectionAidlWrapper.this.binderDied();
+                                }
+                            });
             if (controller == null) {
                 throw new ImsException("Telephony server is down", 1);
             }
-            controller.createSipDelegate(this.mSubId, request, this.mContext.getOpPackageName(), wrapper.getStateCallbackBinder(), wrapper.getMessageCallbackBinder());
+            controller.createSipDelegate(
+                    this.mSubId,
+                    request,
+                    this.mContext.getOpPackageName(),
+                    wrapper.getStateCallbackBinder(),
+                    wrapper.getMessageCallbackBinder());
         } catch (RemoteException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -123,7 +145,8 @@ public class SipDelegateManager {
     public void destroySipDelegate(SipDelegateConnection delegateConnection, int reason) {
         Objects.requireNonNull(delegateConnection, "SipDelegateConnection can not be null.");
         if (delegateConnection instanceof SipDelegateConnectionAidlWrapper) {
-            SipDelegateConnectionAidlWrapper w = (SipDelegateConnectionAidlWrapper) delegateConnection;
+            SipDelegateConnectionAidlWrapper w =
+                    (SipDelegateConnectionAidlWrapper) delegateConnection;
             try {
                 IImsRcsController c = this.mBinderCache.removeRunnable(w);
                 c.destroySipDelegate(this.mSubId, w.getSipDelegateBinder(), reason);
@@ -137,36 +160,44 @@ public class SipDelegateManager {
                 }
             }
         }
-        throw new IllegalArgumentException("Unknown SipDelegateConnection implementation passed into this method");
+        throw new IllegalArgumentException(
+                "Unknown SipDelegateConnection implementation passed into this method");
     }
 
-    public void triggerFullNetworkRegistration(SipDelegateConnection connection, int sipCode, String sipReason) {
+    public void triggerFullNetworkRegistration(
+            SipDelegateConnection connection, int sipCode, String sipReason) {
         Objects.requireNonNull(connection, "SipDelegateConnection can not be null.");
         if (connection instanceof SipDelegateConnectionAidlWrapper) {
             SipDelegateConnectionAidlWrapper w = (SipDelegateConnectionAidlWrapper) connection;
             try {
                 IImsRcsController controller = this.mBinderCache.getBinder();
-                controller.triggerNetworkRegistration(this.mSubId, w.getSipDelegateBinder(), sipCode, sipReason);
+                controller.triggerNetworkRegistration(
+                        this.mSubId, w.getSipDelegateBinder(), sipCode, sipReason);
                 return;
             } catch (RemoteException e) {
                 return;
             }
         }
-        throw new IllegalArgumentException("Unknown SipDelegateConnection implementation passed into this method");
+        throw new IllegalArgumentException(
+                "Unknown SipDelegateConnection implementation passed into this method");
     }
 
-    public void registerImsStateCallback(Executor executor, ImsStateCallback callback) throws ImsException {
+    public void registerImsStateCallback(Executor executor, ImsStateCallback callback)
+            throws ImsException {
         Objects.requireNonNull(callback, "Must include a non-null ImsStateCallback.");
         Objects.requireNonNull(executor, "Must include a non-null Executor.");
         callback.init(executor);
         BinderCacheManager<ITelephony> binderCacheManager = this.mTelephonyBinderCache;
         Objects.requireNonNull(callback);
-        ITelephony telephony = binderCacheManager.listenOnBinder(callback, new ImsMmTelManager$$ExternalSyntheticLambda3(callback));
+        ITelephony telephony =
+                binderCacheManager.listenOnBinder(
+                        callback, new ImsMmTelManager$$ExternalSyntheticLambda3(callback));
         if (telephony == null) {
             throw new ImsException("Telephony server is down", 1);
         }
         try {
-            telephony.registerImsStateCallback(this.mSubId, 2, callback.getCallbackBinder(), this.mContext.getOpPackageName());
+            telephony.registerImsStateCallback(
+                    this.mSubId, 2, callback.getCallbackBinder(), this.mContext.getOpPackageName());
         } catch (RemoteException | IllegalStateException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -185,19 +216,24 @@ public class SipDelegateManager {
         }
     }
 
-    public void registerSipDialogStateCallback(Executor executor, final SipDialogStateCallback callback) throws ImsException {
+    public void registerSipDialogStateCallback(
+            Executor executor, final SipDialogStateCallback callback) throws ImsException {
         Objects.requireNonNull(callback, "Must include a non-null SipDialogStateCallback.");
         Objects.requireNonNull(executor, "Must include a non-null Executor.");
         callback.attachExecutor(executor);
         try {
             BinderCacheManager<IImsRcsController> binderCacheManager = this.mBinderCache;
             Objects.requireNonNull(callback);
-            IImsRcsController controller = binderCacheManager.listenOnBinder(callback, new Runnable() { // from class: android.telephony.ims.SipDelegateManager$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SipDialogStateCallback.this.binderDied();
-                }
-            });
+            IImsRcsController controller =
+                    binderCacheManager.listenOnBinder(
+                            callback,
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.SipDelegateManager$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    SipDialogStateCallback.this.binderDied();
+                                }
+                            });
             if (controller == null) {
                 throw new ImsException("Telephony server is down", 1);
             }
@@ -211,7 +247,8 @@ public class SipDelegateManager {
         }
     }
 
-    public void unregisterSipDialogStateCallback(SipDialogStateCallback callback) throws ImsException {
+    public void unregisterSipDialogStateCallback(SipDialogStateCallback callback)
+            throws ImsException {
         Objects.requireNonNull(callback, "Must include a non-null SipDialogStateCallback.");
         IImsRcsController controller = this.mBinderCache.removeRunnable(callback);
         try {

@@ -1,6 +1,7 @@
 package android.text.util;
 
 import android.widget.MultiAutoCompleteTextView;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,7 +22,9 @@ public class Rfc822Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
                 }
                 crunch(name);
                 if (address.length() > 0) {
-                    out.add(new Rfc822Token(name.toString(), address.toString(), comment.toString()));
+                    out.add(
+                            new Rfc822Token(
+                                    name.toString(), address.toString(), comment.toString()));
                 } else if (name.length() > 0) {
                     out.add(new Rfc822Token(null, name.toString(), comment.toString()));
                 }
@@ -116,7 +119,12 @@ public class Rfc822Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
         while (i < len) {
             char c = sb.charAt(i);
             if (c == 0) {
-                if (i == 0 || i == len - 1 || sb.charAt(i - 1) == ' ' || sb.charAt(i - 1) == 0 || sb.charAt(i + 1) == ' ' || sb.charAt(i + 1) == 0) {
+                if (i == 0
+                        || i == len - 1
+                        || sb.charAt(i - 1) == ' '
+                        || sb.charAt(i - 1) == 0
+                        || sb.charAt(i + 1) == ' '
+                        || sb.charAt(i + 1) == 0) {
                     sb.deleteCharAt(i);
                     len--;
                 } else {

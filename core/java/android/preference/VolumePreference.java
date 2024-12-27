@@ -5,18 +5,19 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
-import android.preference.SeekBarVolumizer;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.SeekBar;
+
 import com.android.internal.R;
 
 @Deprecated
 /* loaded from: classes3.dex */
-public class VolumePreference extends SeekBarDialogPreference implements PreferenceManager.OnActivityStopListener, View.OnKeyListener, SeekBarVolumizer.Callback {
+public class VolumePreference extends SeekBarDialogPreference
+        implements PreferenceManager.OnActivityStopListener,
+                View.OnKeyListener,
+                SeekBarVolumizer.Callback {
     private SeekBarVolumizer mSeekBarVolumizer;
     private int mStreamType;
 
@@ -25,9 +26,12 @@ public class VolumePreference extends SeekBarDialogPreference implements Prefere
         public int originalVolume = -1;
     }
 
-    public VolumePreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public VolumePreference(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.VolumePreference, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.VolumePreference, defStyleAttr, defStyleRes);
         this.mStreamType = a.getInt(0, 0);
         a.recycle();
     }
@@ -128,16 +132,13 @@ public class VolumePreference extends SeekBarDialogPreference implements Prefere
     }
 
     @Override // android.preference.SeekBarVolumizer.Callback
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
-    }
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {}
 
     @Override // android.preference.SeekBarVolumizer.Callback
-    public void onMuted(boolean muted, boolean zenMuted) {
-    }
+    public void onMuted(boolean muted, boolean zenMuted) {}
 
     @Override // android.preference.SeekBarVolumizer.Callback
-    public void onStartTrackingTouch(SeekBarVolumizer sbv) {
-    }
+    public void onStartTrackingTouch(SeekBarVolumizer sbv) {}
 
     @Override // android.preference.DialogPreference, android.preference.Preference
     protected Parcelable onSaveInstanceState() {
@@ -166,19 +167,22 @@ public class VolumePreference extends SeekBarDialogPreference implements Prefere
     }
 
     private static class SavedState extends Preference.BaseSavedState {
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: android.preference.VolumePreference.SavedState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<
+                        SavedState>() { // from class:
+                                        // android.preference.VolumePreference.SavedState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
         VolumeStore mVolumeStore;
 
         public SavedState(Parcel source) {

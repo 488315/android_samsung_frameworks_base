@@ -21,10 +21,14 @@ public final class AudioServiceEvents$LoudnessEvent extends EventLogger.Event {
         int i2 = this.mIntValue2;
         int i3 = this.mEventType;
         if (i3 == 0) {
-            return String.format("Start loudness updates for piid %d for client pid %d", Integer.valueOf(i), Integer.valueOf(i2));
+            return String.format(
+                    "Start loudness updates for piid %d for client pid %d",
+                    Integer.valueOf(i), Integer.valueOf(i2));
         }
         if (i3 == 1) {
-            return String.format("Stop loudness updates for piid %d for client pid %d", Integer.valueOf(i), Integer.valueOf(i2));
+            return String.format(
+                    "Stop loudness updates for piid %d for client pid %d",
+                    Integer.valueOf(i), Integer.valueOf(i2));
         }
         if (i3 == 2) {
             return String.format("Loudness client with pid %d died", Integer.valueOf(i2));

@@ -12,7 +12,9 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
+
 import com.samsung.android.app.usage.IUsageStatsWatcher;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -45,9 +47,11 @@ public interface IUsageStatsManager extends IInterface {
 
     void onCarrierPrivilegedAppsChanged() throws RemoteException;
 
-    BroadcastResponseStatsList queryBroadcastResponseStats(String str, long j, String str2, int i) throws RemoteException;
+    BroadcastResponseStatsList queryBroadcastResponseStats(String str, long j, String str2, int i)
+            throws RemoteException;
 
-    ParceledListSlice queryConfigurationStats(int i, long j, long j2, String str) throws RemoteException;
+    ParceledListSlice queryConfigurationStats(int i, long j, long j2, String str)
+            throws RemoteException;
 
     ParceledListSlice queryEventStats(int i, long j, long j2, String str) throws RemoteException;
 
@@ -55,27 +59,45 @@ public interface IUsageStatsManager extends IInterface {
 
     UsageEvents queryEventsForPackage(long j, long j2, String str) throws RemoteException;
 
-    UsageEvents queryEventsForPackageForUser(long j, long j2, int i, String str, String str2) throws RemoteException;
+    UsageEvents queryEventsForPackageForUser(long j, long j2, int i, String str, String str2)
+            throws RemoteException;
 
     UsageEvents queryEventsForUser(long j, long j2, int i, String str) throws RemoteException;
 
-    UsageEvents queryEventsWithFilter(UsageEventsQuery usageEventsQuery, String str) throws RemoteException;
+    UsageEvents queryEventsWithFilter(UsageEventsQuery usageEventsQuery, String str)
+            throws RemoteException;
 
-    ParceledListSlice queryUsageStats(int i, long j, long j2, String str, int i2) throws RemoteException;
+    ParceledListSlice queryUsageStats(int i, long j, long j2, String str, int i2)
+            throws RemoteException;
 
-    void registerAppUsageLimitObserver(int i, String[] strArr, long j, long j2, PendingIntent pendingIntent, String str) throws RemoteException;
+    void registerAppUsageLimitObserver(
+            int i, String[] strArr, long j, long j2, PendingIntent pendingIntent, String str)
+            throws RemoteException;
 
-    void registerAppUsageObserver(int i, String[] strArr, long j, PendingIntent pendingIntent, String str) throws RemoteException;
+    void registerAppUsageObserver(
+            int i, String[] strArr, long j, PendingIntent pendingIntent, String str)
+            throws RemoteException;
 
-    void registerUsageSessionObserver(int i, String[] strArr, long j, long j2, PendingIntent pendingIntent, PendingIntent pendingIntent2, String str) throws RemoteException;
+    void registerUsageSessionObserver(
+            int i,
+            String[] strArr,
+            long j,
+            long j2,
+            PendingIntent pendingIntent,
+            PendingIntent pendingIntent2,
+            String str)
+            throws RemoteException;
 
     void registerUsageStatsWatcher(IUsageStatsWatcher iUsageStatsWatcher) throws RemoteException;
 
-    void registerUsageStatsWatcherWithComponent(IUsageStatsWatcher iUsageStatsWatcher, List<ComponentName> list) throws RemoteException;
+    void registerUsageStatsWatcherWithComponent(
+            IUsageStatsWatcher iUsageStatsWatcher, List<ComponentName> list) throws RemoteException;
 
-    void reportChooserSelection(String str, int i, String str2, String[] strArr, String str3) throws RemoteException;
+    void reportChooserSelection(String str, int i, String str2, String[] strArr, String str3)
+            throws RemoteException;
 
-    void reportPastUsageStart(IBinder iBinder, String str, long j, String str2) throws RemoteException;
+    void reportPastUsageStart(IBinder iBinder, String str, long j, String str2)
+            throws RemoteException;
 
     void reportUsageStart(IBinder iBinder, String str, String str2) throws RemoteException;
 
@@ -83,7 +105,8 @@ public interface IUsageStatsManager extends IInterface {
 
     void reportUserInteraction(String str, int i) throws RemoteException;
 
-    void reportUserInteractionWithBundle(String str, int i, PersistableBundle persistableBundle) throws RemoteException;
+    void reportUserInteractionWithBundle(String str, int i, PersistableBundle persistableBundle)
+            throws RemoteException;
 
     void setAppInactive(String str, boolean z, int i) throws RemoteException;
 
@@ -105,48 +128,61 @@ public interface IUsageStatsManager extends IInterface {
 
     public static class Default implements IUsageStatsManager {
         @Override // android.app.usage.IUsageStatsManager
-        public ParceledListSlice queryUsageStats(int bucketType, long beginTime, long endTime, String callingPackage, int userId) throws RemoteException {
+        public ParceledListSlice queryUsageStats(
+                int bucketType, long beginTime, long endTime, String callingPackage, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public ParceledListSlice queryConfigurationStats(int bucketType, long beginTime, long endTime, String callingPackage) throws RemoteException {
+        public ParceledListSlice queryConfigurationStats(
+                int bucketType, long beginTime, long endTime, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public ParceledListSlice queryEventStats(int bucketType, long beginTime, long endTime, String callingPackage) throws RemoteException {
+        public ParceledListSlice queryEventStats(
+                int bucketType, long beginTime, long endTime, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public UsageEvents queryEvents(long beginTime, long endTime, String callingPackage) throws RemoteException {
+        public UsageEvents queryEvents(long beginTime, long endTime, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public UsageEvents queryEventsForPackage(long beginTime, long endTime, String callingPackage) throws RemoteException {
+        public UsageEvents queryEventsForPackage(
+                long beginTime, long endTime, String callingPackage) throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public UsageEvents queryEventsForUser(long beginTime, long endTime, int userId, String callingPackage) throws RemoteException {
+        public UsageEvents queryEventsForUser(
+                long beginTime, long endTime, int userId, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public UsageEvents queryEventsForPackageForUser(long beginTime, long endTime, int userId, String pkg, String callingPackage) throws RemoteException {
+        public UsageEvents queryEventsForPackageForUser(
+                long beginTime, long endTime, int userId, String pkg, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public UsageEvents queryEventsWithFilter(UsageEventsQuery query, String callingPackage) throws RemoteException {
+        public UsageEvents queryEventsWithFilter(UsageEventsQuery query, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public void setAppInactive(String packageName, boolean inactive, int userId) throws RemoteException {
-        }
+        public void setAppInactive(String packageName, boolean inactive, int userId)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
         public boolean isAppStandbyEnabled() throws RemoteException {
@@ -154,92 +190,119 @@ public interface IUsageStatsManager extends IInterface {
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public boolean isAppInactive(String packageName, int userId, String callingPackage) throws RemoteException {
+        public boolean isAppInactive(String packageName, int userId, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public void onCarrierPrivilegedAppsChanged() throws RemoteException {
-        }
+        public void onCarrierPrivilegedAppsChanged() throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void reportChooserSelection(String packageName, int userId, String contentType, String[] annotations, String action) throws RemoteException {
-        }
+        public void reportChooserSelection(
+                String packageName,
+                int userId,
+                String contentType,
+                String[] annotations,
+                String action)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public int getAppStandbyBucket(String packageName, String callingPackage, int userId) throws RemoteException {
+        public int getAppStandbyBucket(String packageName, String callingPackage, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public void setAppStandbyBucket(String packageName, int bucket, int userId) throws RemoteException {
-        }
+        public void setAppStandbyBucket(String packageName, int bucket, int userId)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public ParceledListSlice getAppStandbyBuckets(String callingPackage, int userId) throws RemoteException {
+        public ParceledListSlice getAppStandbyBuckets(String callingPackage, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public void setAppStandbyBuckets(ParceledListSlice appBuckets, int userId) throws RemoteException {
-        }
+        public void setAppStandbyBuckets(ParceledListSlice appBuckets, int userId)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public int getAppMinStandbyBucket(String packageName, String callingPackage, int userId) throws RemoteException {
+        public int getAppMinStandbyBucket(String packageName, String callingPackage, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public void setEstimatedLaunchTime(String packageName, long estimatedLaunchTime, int userId) throws RemoteException {
-        }
+        public void setEstimatedLaunchTime(String packageName, long estimatedLaunchTime, int userId)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void setEstimatedLaunchTimes(ParceledListSlice appLaunchTimes, int userId) throws RemoteException {
-        }
+        public void setEstimatedLaunchTimes(ParceledListSlice appLaunchTimes, int userId)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void registerAppUsageObserver(int observerId, String[] packages, long timeLimitMs, PendingIntent callback, String callingPackage) throws RemoteException {
-        }
+        public void registerAppUsageObserver(
+                int observerId,
+                String[] packages,
+                long timeLimitMs,
+                PendingIntent callback,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void unregisterAppUsageObserver(int observerId, String callingPackage) throws RemoteException {
-        }
+        public void unregisterAppUsageObserver(int observerId, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void registerUsageSessionObserver(int sessionObserverId, String[] observed, long timeLimitMs, long sessionThresholdTimeMs, PendingIntent limitReachedCallbackIntent, PendingIntent sessionEndCallbackIntent, String callingPackage) throws RemoteException {
-        }
+        public void registerUsageSessionObserver(
+                int sessionObserverId,
+                String[] observed,
+                long timeLimitMs,
+                long sessionThresholdTimeMs,
+                PendingIntent limitReachedCallbackIntent,
+                PendingIntent sessionEndCallbackIntent,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void unregisterUsageSessionObserver(int sessionObserverId, String callingPackage) throws RemoteException {
-        }
+        public void unregisterUsageSessionObserver(int sessionObserverId, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void registerAppUsageLimitObserver(int observerId, String[] packages, long timeLimitMs, long timeUsedMs, PendingIntent callback, String callingPackage) throws RemoteException {
-        }
+        public void registerAppUsageLimitObserver(
+                int observerId,
+                String[] packages,
+                long timeLimitMs,
+                long timeUsedMs,
+                PendingIntent callback,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void unregisterAppUsageLimitObserver(int observerId, String callingPackage) throws RemoteException {
-        }
+        public void unregisterAppUsageLimitObserver(int observerId, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void reportUsageStart(IBinder activity, String token, String callingPackage) throws RemoteException {
-        }
+        public void reportUsageStart(IBinder activity, String token, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void reportPastUsageStart(IBinder activity, String token, long timeAgoMs, String callingPackage) throws RemoteException {
-        }
+        public void reportPastUsageStart(
+                IBinder activity, String token, long timeAgoMs, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void reportUsageStop(IBinder activity, String token, String callingPackage) throws RemoteException {
-        }
+        public void reportUsageStop(IBinder activity, String token, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void reportUserInteraction(String packageName, int userId) throws RemoteException {
-        }
+        public void reportUserInteraction(String packageName, int userId) throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void reportUserInteractionWithBundle(String packageName, int userId, PersistableBundle eventExtras) throws RemoteException {
-        }
+        public void reportUserInteractionWithBundle(
+                String packageName, int userId, PersistableBundle eventExtras)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
         public int getUsageSource() throws RemoteException {
@@ -247,29 +310,33 @@ public interface IUsageStatsManager extends IInterface {
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public void forceUsageSourceSettingRead() throws RemoteException {
-        }
+        public void forceUsageSourceSettingRead() throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public long getLastTimeAnyComponentUsed(String packageName, String callingPackage) throws RemoteException {
+        public long getLastTimeAnyComponentUsed(String packageName, String callingPackage)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public BroadcastResponseStatsList queryBroadcastResponseStats(String packageName, long id, String callingPackage, int userId) throws RemoteException {
+        public BroadcastResponseStatsList queryBroadcastResponseStats(
+                String packageName, long id, String callingPackage, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public void clearBroadcastResponseStats(String packageName, long id, String callingPackage, int userId) throws RemoteException {
-        }
+        public void clearBroadcastResponseStats(
+                String packageName, long id, String callingPackage, int userId)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void clearBroadcastEvents(String callingPackage, int userId) throws RemoteException {
-        }
+        public void clearBroadcastEvents(String callingPackage, int userId)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public boolean isPackageExemptedFromBroadcastResponseStats(String packageName, int userId) throws RemoteException {
+        public boolean isPackageExemptedFromBroadcastResponseStats(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -279,20 +346,19 @@ public interface IUsageStatsManager extends IInterface {
         }
 
         @Override // android.app.usage.IUsageStatsManager
-        public void registerUsageStatsWatcher(IUsageStatsWatcher watcher) throws RemoteException {
-        }
+        public void registerUsageStatsWatcher(IUsageStatsWatcher watcher) throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void registerUsageStatsWatcherWithComponent(IUsageStatsWatcher watcher, List<ComponentName> watchingComponents) throws RemoteException {
-        }
+        public void registerUsageStatsWatcherWithComponent(
+                IUsageStatsWatcher watcher, List<ComponentName> watchingComponents)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void unregisterUsageStatsWatcher(IUsageStatsWatcher watcher) throws RemoteException {
-        }
+        public void unregisterUsageStatsWatcher(IUsageStatsWatcher watcher)
+                throws RemoteException {}
 
         @Override // android.app.usage.IUsageStatsManager
-        public void deleteUsageStats() throws RemoteException {
-        }
+        public void deleteUsageStats() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -300,7 +366,7 @@ public interface IUsageStatsManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUsageStatsManager {
+    public abstract static class Stub extends Binder implements IUsageStatsManager {
         public static final String DESCRIPTOR = "android.app.usage.IUsageStatsManager";
         static final int TRANSACTION_clearBroadcastEvents = 37;
         static final int TRANSACTION_clearBroadcastResponseStats = 36;
@@ -357,7 +423,9 @@ public interface IUsageStatsManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IUsageStatsManager asInterface(IBinder obj) {
@@ -475,7 +543,8 @@ public interface IUsageStatsManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -501,7 +570,8 @@ public interface IUsageStatsManager extends IInterface {
                     long _arg22 = data.readLong();
                     String _arg32 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result2 = queryConfigurationStats(_arg02, _arg12, _arg22, _arg32);
+                    ParceledListSlice _result2 =
+                            queryConfigurationStats(_arg02, _arg12, _arg22, _arg32);
                     reply.writeNoException();
                     reply.writeTypedObject(_result2, 1);
                     return true;
@@ -550,12 +620,14 @@ public interface IUsageStatsManager extends IInterface {
                     String _arg35 = data.readString();
                     String _arg42 = data.readString();
                     data.enforceNoDataAvail();
-                    UsageEvents _result7 = queryEventsForPackageForUser(_arg07, _arg17, _arg27, _arg35, _arg42);
+                    UsageEvents _result7 =
+                            queryEventsForPackageForUser(_arg07, _arg17, _arg27, _arg35, _arg42);
                     reply.writeNoException();
                     reply.writeTypedObject(_result7, 1);
                     return true;
                 case 8:
-                    UsageEventsQuery _arg08 = (UsageEventsQuery) data.readTypedObject(UsageEventsQuery.CREATOR);
+                    UsageEventsQuery _arg08 =
+                            (UsageEventsQuery) data.readTypedObject(UsageEventsQuery.CREATOR);
                     String _arg18 = data.readString();
                     data.enforceNoDataAvail();
                     UsageEvents _result8 = queryEventsWithFilter(_arg08, _arg18);
@@ -624,7 +696,8 @@ public interface IUsageStatsManager extends IInterface {
                     reply.writeTypedObject(_result12, 1);
                     return true;
                 case 17:
-                    ParceledListSlice _arg015 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg015 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     int _arg115 = data.readInt();
                     data.enforceNoDataAvail();
                     setAppStandbyBuckets(_arg015, _arg115);
@@ -648,7 +721,8 @@ public interface IUsageStatsManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 20:
-                    ParceledListSlice _arg018 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg018 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     int _arg118 = data.readInt();
                     data.enforceNoDataAvail();
                     setEstimatedLaunchTimes(_arg018, _arg118);
@@ -658,7 +732,8 @@ public interface IUsageStatsManager extends IInterface {
                     int _arg019 = data.readInt();
                     String[] _arg119 = data.createStringArray();
                     long _arg215 = data.readLong();
-                    PendingIntent _arg37 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg37 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     String _arg44 = data.readString();
                     data.enforceNoDataAvail();
                     registerAppUsageObserver(_arg019, _arg119, _arg215, _arg37, _arg44);
@@ -676,11 +751,14 @@ public interface IUsageStatsManager extends IInterface {
                     String[] _arg121 = data.createStringArray();
                     long _arg216 = data.readLong();
                     long _arg38 = data.readLong();
-                    PendingIntent _arg45 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    PendingIntent _arg5 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg45 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg5 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     String _arg6 = data.readString();
                     data.enforceNoDataAvail();
-                    registerUsageSessionObserver(_arg021, _arg121, _arg216, _arg38, _arg45, _arg5, _arg6);
+                    registerUsageSessionObserver(
+                            _arg021, _arg121, _arg216, _arg38, _arg45, _arg5, _arg6);
                     reply.writeNoException();
                     return true;
                 case 24:
@@ -695,10 +773,12 @@ public interface IUsageStatsManager extends IInterface {
                     String[] _arg123 = data.createStringArray();
                     long _arg217 = data.readLong();
                     long _arg39 = data.readLong();
-                    PendingIntent _arg46 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg46 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     String _arg52 = data.readString();
                     data.enforceNoDataAvail();
-                    registerAppUsageLimitObserver(_arg023, _arg123, _arg217, _arg39, _arg46, _arg52);
+                    registerAppUsageLimitObserver(
+                            _arg023, _arg123, _arg217, _arg39, _arg46, _arg52);
                     reply.writeNoException();
                     return true;
                 case 26:
@@ -743,7 +823,8 @@ public interface IUsageStatsManager extends IInterface {
                 case 31:
                     String _arg029 = data.readString();
                     int _arg129 = data.readInt();
-                    PersistableBundle _arg221 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg221 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     reportUserInteractionWithBundle(_arg029, _arg129, _arg221);
                     reply.writeNoException();
@@ -771,7 +852,8 @@ public interface IUsageStatsManager extends IInterface {
                     String _arg222 = data.readString();
                     int _arg311 = data.readInt();
                     data.enforceNoDataAvail();
-                    BroadcastResponseStatsList _result16 = queryBroadcastResponseStats(_arg031, _arg131, _arg222, _arg311);
+                    BroadcastResponseStatsList _result16 =
+                            queryBroadcastResponseStats(_arg031, _arg131, _arg222, _arg311);
                     reply.writeNoException();
                     reply.writeTypedObject(_result16, 1);
                     return true;
@@ -795,7 +877,8 @@ public interface IUsageStatsManager extends IInterface {
                     String _arg034 = data.readString();
                     int _arg134 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result17 = isPackageExemptedFromBroadcastResponseStats(_arg034, _arg134);
+                    boolean _result17 =
+                            isPackageExemptedFromBroadcastResponseStats(_arg034, _arg134);
                     reply.writeNoException();
                     reply.writeBoolean(_result17);
                     return true;
@@ -807,20 +890,23 @@ public interface IUsageStatsManager extends IInterface {
                     reply.writeString(_result18);
                     return true;
                 case 40:
-                    IUsageStatsWatcher _arg036 = IUsageStatsWatcher.Stub.asInterface(data.readStrongBinder());
+                    IUsageStatsWatcher _arg036 =
+                            IUsageStatsWatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerUsageStatsWatcher(_arg036);
                     reply.writeNoException();
                     return true;
                 case 41:
-                    IUsageStatsWatcher _arg037 = IUsageStatsWatcher.Stub.asInterface(data.readStrongBinder());
+                    IUsageStatsWatcher _arg037 =
+                            IUsageStatsWatcher.Stub.asInterface(data.readStrongBinder());
                     List<ComponentName> _arg135 = data.createTypedArrayList(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     registerUsageStatsWatcherWithComponent(_arg037, _arg135);
                     reply.writeNoException();
                     return true;
                 case 42:
-                    IUsageStatsWatcher _arg038 = IUsageStatsWatcher.Stub.asInterface(data.readStrongBinder());
+                    IUsageStatsWatcher _arg038 =
+                            IUsageStatsWatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterUsageStatsWatcher(_arg038);
                     reply.writeNoException();
@@ -851,7 +937,9 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public ParceledListSlice queryUsageStats(int bucketType, long beginTime, long endTime, String callingPackage, int userId) throws RemoteException {
+            public ParceledListSlice queryUsageStats(
+                    int bucketType, long beginTime, long endTime, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -863,7 +951,8 @@ public interface IUsageStatsManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -872,7 +961,9 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public ParceledListSlice queryConfigurationStats(int bucketType, long beginTime, long endTime, String callingPackage) throws RemoteException {
+            public ParceledListSlice queryConfigurationStats(
+                    int bucketType, long beginTime, long endTime, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -883,7 +974,8 @@ public interface IUsageStatsManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -892,7 +984,9 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public ParceledListSlice queryEventStats(int bucketType, long beginTime, long endTime, String callingPackage) throws RemoteException {
+            public ParceledListSlice queryEventStats(
+                    int bucketType, long beginTime, long endTime, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -903,7 +997,8 @@ public interface IUsageStatsManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -912,7 +1007,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public UsageEvents queryEvents(long beginTime, long endTime, String callingPackage) throws RemoteException {
+            public UsageEvents queryEvents(long beginTime, long endTime, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -931,7 +1027,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public UsageEvents queryEventsForPackage(long beginTime, long endTime, String callingPackage) throws RemoteException {
+            public UsageEvents queryEventsForPackage(
+                    long beginTime, long endTime, String callingPackage) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -950,7 +1047,9 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public UsageEvents queryEventsForUser(long beginTime, long endTime, int userId, String callingPackage) throws RemoteException {
+            public UsageEvents queryEventsForUser(
+                    long beginTime, long endTime, int userId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -970,7 +1069,9 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public UsageEvents queryEventsForPackageForUser(long beginTime, long endTime, int userId, String pkg, String callingPackage) throws RemoteException {
+            public UsageEvents queryEventsForPackageForUser(
+                    long beginTime, long endTime, int userId, String pkg, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -991,7 +1092,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public UsageEvents queryEventsWithFilter(UsageEventsQuery query, String callingPackage) throws RemoteException {
+            public UsageEvents queryEventsWithFilter(UsageEventsQuery query, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1009,7 +1111,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void setAppInactive(String packageName, boolean inactive, int userId) throws RemoteException {
+            public void setAppInactive(String packageName, boolean inactive, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1042,7 +1145,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public boolean isAppInactive(String packageName, int userId, String callingPackage) throws RemoteException {
+            public boolean isAppInactive(String packageName, int userId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1075,7 +1179,13 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void reportChooserSelection(String packageName, int userId, String contentType, String[] annotations, String action) throws RemoteException {
+            public void reportChooserSelection(
+                    String packageName,
+                    int userId,
+                    String contentType,
+                    String[] annotations,
+                    String action)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1094,7 +1204,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public int getAppStandbyBucket(String packageName, String callingPackage, int userId) throws RemoteException {
+            public int getAppStandbyBucket(String packageName, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1113,7 +1224,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void setAppStandbyBucket(String packageName, int bucket, int userId) throws RemoteException {
+            public void setAppStandbyBucket(String packageName, int bucket, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1130,7 +1242,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public ParceledListSlice getAppStandbyBuckets(String callingPackage, int userId) throws RemoteException {
+            public ParceledListSlice getAppStandbyBuckets(String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1139,7 +1252,8 @@ public interface IUsageStatsManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1148,7 +1262,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void setAppStandbyBuckets(ParceledListSlice appBuckets, int userId) throws RemoteException {
+            public void setAppStandbyBuckets(ParceledListSlice appBuckets, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1164,7 +1279,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public int getAppMinStandbyBucket(String packageName, String callingPackage, int userId) throws RemoteException {
+            public int getAppMinStandbyBucket(String packageName, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1183,7 +1299,9 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void setEstimatedLaunchTime(String packageName, long estimatedLaunchTime, int userId) throws RemoteException {
+            public void setEstimatedLaunchTime(
+                    String packageName, long estimatedLaunchTime, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1200,7 +1318,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void setEstimatedLaunchTimes(ParceledListSlice appLaunchTimes, int userId) throws RemoteException {
+            public void setEstimatedLaunchTimes(ParceledListSlice appLaunchTimes, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1216,7 +1335,13 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void registerAppUsageObserver(int observerId, String[] packages, long timeLimitMs, PendingIntent callback, String callingPackage) throws RemoteException {
+            public void registerAppUsageObserver(
+                    int observerId,
+                    String[] packages,
+                    long timeLimitMs,
+                    PendingIntent callback,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1235,7 +1360,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void unregisterAppUsageObserver(int observerId, String callingPackage) throws RemoteException {
+            public void unregisterAppUsageObserver(int observerId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1251,7 +1377,15 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void registerUsageSessionObserver(int sessionObserverId, String[] observed, long timeLimitMs, long sessionThresholdTimeMs, PendingIntent limitReachedCallbackIntent, PendingIntent sessionEndCallbackIntent, String callingPackage) throws RemoteException {
+            public void registerUsageSessionObserver(
+                    int sessionObserverId,
+                    String[] observed,
+                    long timeLimitMs,
+                    long sessionThresholdTimeMs,
+                    PendingIntent limitReachedCallbackIntent,
+                    PendingIntent sessionEndCallbackIntent,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1272,7 +1406,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void unregisterUsageSessionObserver(int sessionObserverId, String callingPackage) throws RemoteException {
+            public void unregisterUsageSessionObserver(int sessionObserverId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1288,7 +1423,14 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void registerAppUsageLimitObserver(int observerId, String[] packages, long timeLimitMs, long timeUsedMs, PendingIntent callback, String callingPackage) throws RemoteException {
+            public void registerAppUsageLimitObserver(
+                    int observerId,
+                    String[] packages,
+                    long timeLimitMs,
+                    long timeUsedMs,
+                    PendingIntent callback,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1308,7 +1450,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void unregisterAppUsageLimitObserver(int observerId, String callingPackage) throws RemoteException {
+            public void unregisterAppUsageLimitObserver(int observerId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1324,7 +1467,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void reportUsageStart(IBinder activity, String token, String callingPackage) throws RemoteException {
+            public void reportUsageStart(IBinder activity, String token, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1341,7 +1485,9 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void reportPastUsageStart(IBinder activity, String token, long timeAgoMs, String callingPackage) throws RemoteException {
+            public void reportPastUsageStart(
+                    IBinder activity, String token, long timeAgoMs, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1359,7 +1505,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void reportUsageStop(IBinder activity, String token, String callingPackage) throws RemoteException {
+            public void reportUsageStop(IBinder activity, String token, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1376,7 +1523,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void reportUserInteraction(String packageName, int userId) throws RemoteException {
+            public void reportUserInteraction(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1392,7 +1540,9 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void reportUserInteractionWithBundle(String packageName, int userId, PersistableBundle eventExtras) throws RemoteException {
+            public void reportUserInteractionWithBundle(
+                    String packageName, int userId, PersistableBundle eventExtras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1439,7 +1589,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public long getLastTimeAnyComponentUsed(String packageName, String callingPackage) throws RemoteException {
+            public long getLastTimeAnyComponentUsed(String packageName, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1457,7 +1608,9 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public BroadcastResponseStatsList queryBroadcastResponseStats(String packageName, long id, String callingPackage, int userId) throws RemoteException {
+            public BroadcastResponseStatsList queryBroadcastResponseStats(
+                    String packageName, long id, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1468,7 +1621,9 @@ public interface IUsageStatsManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(35, _data, _reply, 0);
                     _reply.readException();
-                    BroadcastResponseStatsList _result = (BroadcastResponseStatsList) _reply.readTypedObject(BroadcastResponseStatsList.CREATOR);
+                    BroadcastResponseStatsList _result =
+                            (BroadcastResponseStatsList)
+                                    _reply.readTypedObject(BroadcastResponseStatsList.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1477,7 +1632,9 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void clearBroadcastResponseStats(String packageName, long id, String callingPackage, int userId) throws RemoteException {
+            public void clearBroadcastResponseStats(
+                    String packageName, long id, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1495,7 +1652,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void clearBroadcastEvents(String callingPackage, int userId) throws RemoteException {
+            public void clearBroadcastEvents(String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1511,7 +1669,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public boolean isPackageExemptedFromBroadcastResponseStats(String packageName, int userId) throws RemoteException {
+            public boolean isPackageExemptedFromBroadcastResponseStats(
+                    String packageName, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1546,7 +1705,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void registerUsageStatsWatcher(IUsageStatsWatcher watcher) throws RemoteException {
+            public void registerUsageStatsWatcher(IUsageStatsWatcher watcher)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1561,7 +1721,9 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void registerUsageStatsWatcherWithComponent(IUsageStatsWatcher watcher, List<ComponentName> watchingComponents) throws RemoteException {
+            public void registerUsageStatsWatcherWithComponent(
+                    IUsageStatsWatcher watcher, List<ComponentName> watchingComponents)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1577,7 +1739,8 @@ public interface IUsageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IUsageStatsManager
-            public void unregisterUsageStatsWatcher(IUsageStatsWatcher watcher) throws RemoteException {
+            public void unregisterUsageStatsWatcher(IUsageStatsWatcher watcher)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1607,19 +1770,27 @@ public interface IUsageStatsManager extends IInterface {
         }
 
         protected void setAppStandbyBucket_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CHANGE_APP_IDLE_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CHANGE_APP_IDLE_STATE, getCallingPid(), getCallingUid());
         }
 
         protected void setAppStandbyBuckets_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CHANGE_APP_IDLE_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CHANGE_APP_IDLE_STATE, getCallingPid(), getCallingUid());
         }
 
         protected void setEstimatedLaunchTime_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CHANGE_APP_LAUNCH_TIME_ESTIMATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CHANGE_APP_LAUNCH_TIME_ESTIMATE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setEstimatedLaunchTimes_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CHANGE_APP_LAUNCH_TIME_ESTIMATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CHANGE_APP_LAUNCH_TIME_ESTIMATE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         @Override // android.os.Binder

@@ -7,19 +7,22 @@ import android.os.Parcelable;
 /* loaded from: classes6.dex */
 public class SemContextAutoBrightness extends SemContextEventContext {
     public static final int CONFIG_DATA_DOWNLOADED = 1000;
-    public static final Parcelable.Creator<SemContextAutoBrightness> CREATOR = new Parcelable.Creator<SemContextAutoBrightness>() { // from class: com.samsung.android.hardware.context.SemContextAutoBrightness.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextAutoBrightness createFromParcel(Parcel in) {
-            return new SemContextAutoBrightness(in);
-        }
+    public static final Parcelable.Creator<SemContextAutoBrightness> CREATOR =
+            new Parcelable.Creator<
+                    SemContextAutoBrightness>() { // from class:
+                                                  // com.samsung.android.hardware.context.SemContextAutoBrightness.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextAutoBrightness createFromParcel(Parcel in) {
+                    return new SemContextAutoBrightness(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextAutoBrightness[] newArray(int size) {
-            return new SemContextAutoBrightness[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextAutoBrightness[] newArray(int size) {
+                    return new SemContextAutoBrightness[size];
+                }
+            };
     public static final int EBOOK_MODE = 1;
     public static final int NORMAL_MODE = 0;
     public static final int UPDATE_MODE = 2;

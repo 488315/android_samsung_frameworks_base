@@ -14,14 +14,17 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.HermesService$3$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knoxguard.service.KnoxGuardNative;
 import com.samsung.android.knoxguard.service.KnoxGuardSeService;
 import com.samsung.android.server.pm.mm.MaintenanceModeManager;
+
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
@@ -65,7 +68,8 @@ public final class IntegritySeUtil {
         return !Utils.isSingleOtpBitFusedAndStateIsNotCompleted(i) || isAPSerialValid();
     }
 
-    public static boolean checkComponentsAndEnableComponentWithFlag(Context context, IntegritySeResult integritySeResult, boolean z) {
+    public static boolean checkComponentsAndEnableComponentWithFlag(
+            Context context, IntegritySeResult integritySeResult, boolean z) {
         boolean isKGComponentsEnabled = isKGComponentsEnabled(context, integritySeResult);
         if (!z || isKGComponentsEnabled || !MaintenanceModeManager.isInMaintenanceMode()) {
             return isKGComponentsEnabled;
@@ -79,11 +83,13 @@ public final class IntegritySeUtil {
         return checkKGClientIntegrityAndEnableComponentsWithFlag(context, i, false);
     }
 
-    public static IntegritySeResult checkKGClientIntegrityAndEnableComponent(Context context, int i) {
+    public static IntegritySeResult checkKGClientIntegrityAndEnableComponent(
+            Context context, int i) {
         return checkKGClientIntegrityAndEnableComponentsWithFlag(context, i, true);
     }
 
-    public static IntegritySeResult checkKGClientIntegrityAndEnableComponentsWithFlag(Context context, int i, boolean z) {
+    public static IntegritySeResult checkKGClientIntegrityAndEnableComponentsWithFlag(
+            Context context, int i, boolean z) {
         String str = TAG;
         Slog.i(str, "checkKGClientIntegrity()");
         Slog.i(str, "kgState() : " + i);
@@ -105,13 +111,18 @@ public final class IntegritySeUtil {
             integritySeResult.validSignature = checkSignatures;
             integritySeResult.enabled = isEnabled;
             integritySeResult.validVersion = isValidVersion;
-            boolean checkComponentsAndEnableComponentWithFlag = checkComponentsAndEnableComponentWithFlag(context, integritySeResult, z);
+            boolean checkComponentsAndEnableComponentWithFlag =
+                    checkComponentsAndEnableComponentWithFlag(context, integritySeResult, z);
             Slog.d(str, "isComponentEnabled : " + checkComponentsAndEnableComponentWithFlag);
             if (!isValidVersion) {
                 Slog.d(str, "kgclient is invalid. makes client disable");
                 disableClient(context);
             }
-            integritySeResult.isOk = checkSignatures & isEnabled & isValidVersion & checkComponentsAndEnableComponentWithFlag;
+            integritySeResult.isOk =
+                    checkSignatures
+                            & isEnabled
+                            & isValidVersion
+                            & checkComponentsAndEnableComponentWithFlag;
             return integritySeResult;
         } catch (Exception e) {
             Slog.e(TAG, e.getMessage());
@@ -122,7 +133,8 @@ public final class IntegritySeUtil {
     public static boolean checkSignatures(Context context) {
         PackageManager packageManager = context.getPackageManager();
         try {
-            PackageInfo packageInfo = packageManager.getPackageInfo("com.samsung.android.kgclient", 64);
+            PackageInfo packageInfo =
+                    packageManager.getPackageInfo("com.samsung.android.kgclient", 64);
             String str = TAG;
             Slog.d(str, "pkgInfo : " + packageInfo.toString());
             if (packageManager.checkSignatures("android", "com.samsung.android.kgclient") != 0) {
@@ -151,7 +163,8 @@ public final class IntegritySeUtil {
         } catch (Exception e) {
             BootReceiver$$ExternalSyntheticOutline0.m(e, "checkTaIntegrity Exception. ", TAG);
         }
-        if (!Utils.isOtpBitFusedWithActive() && !Utils.isSingleOtpBitFusedAndStateIsNotCompleted(i)) {
+        if (!Utils.isOtpBitFusedWithActive()
+                && !Utils.isSingleOtpBitFusedAndStateIsNotCompleted(i)) {
             tAIntegrityResult.isOk = true;
             return tAIntegrityResult;
         }
@@ -174,14 +187,19 @@ public final class IntegritySeUtil {
             Slog.i(TAG, "disable kgclient");
             packageManager.setApplicationEnabledSetting("com.samsung.android.kgclient", 2, 0);
         } catch (Exception e) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("disable exception: "), TAG);
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("disable exception: "), TAG);
         }
     }
 
-    public static void enableAppOpIfNotAllowed(PackageInfo packageInfo, AppOpsManager appOpsManager, int i) {
-        if (appOpsManager.checkOpNoThrow(i, packageInfo.applicationInfo.uid, "com.samsung.android.kgclient") != 0) {
+    public static void enableAppOpIfNotAllowed(
+            PackageInfo packageInfo, AppOpsManager appOpsManager, int i) {
+        if (appOpsManager.checkOpNoThrow(
+                        i, packageInfo.applicationInfo.uid, "com.samsung.android.kgclient")
+                != 0) {
             HermesService$3$$ExternalSyntheticOutline0.m(i, "allow ", TAG);
-            appOpsManager.setMode(i, packageInfo.applicationInfo.uid, "com.samsung.android.kgclient", 0);
+            appOpsManager.setMode(
+                    i, packageInfo.applicationInfo.uid, "com.samsung.android.kgclient", 0);
         }
     }
 
@@ -194,7 +212,8 @@ public final class IntegritySeUtil {
                     Slog.w(TAG, "IPackageManager is null");
                     return;
                 } else {
-                    packageManager.setComponentEnabledSetting(componentName, 1, 1, i, (String) null);
+                    packageManager.setComponentEnabledSetting(
+                            componentName, 1, 1, i, (String) null);
                     return;
                 }
             }
@@ -212,10 +231,18 @@ public final class IntegritySeUtil {
     public static void enableComponents(Context context) {
         Slog.i(TAG, "enableComponents()");
         int activeUserId = getActiveUserId();
-        enableComponent(context, "com.samsung.android.kgclient.agent.KGDeviceAdminReceiver", activeUserId);
-        enableComponent(context, "com.samsung.android.kgclient.receiver.SystemIntentReceiver", activeUserId);
-        enableComponent(context, "com.samsung.android.kgclient.selfupdate.SelfupdateReceiver", activeUserId);
-        enableComponent(context, "com.samsung.android.kgclient.events.KGEventService", activeUserId);
+        enableComponent(
+                context, "com.samsung.android.kgclient.agent.KGDeviceAdminReceiver", activeUserId);
+        enableComponent(
+                context,
+                "com.samsung.android.kgclient.receiver.SystemIntentReceiver",
+                activeUserId);
+        enableComponent(
+                context,
+                "com.samsung.android.kgclient.selfupdate.SelfupdateReceiver",
+                activeUserId);
+        enableComponent(
+                context, "com.samsung.android.kgclient.events.KGEventService", activeUserId);
         enableComponent(context, "com.samsung.android.kgclient.alarm.AlarmService", activeUserId);
         enableComponent(context, "com.samsung.android.kgclient.provider.KGProvider", activeUserId);
     }
@@ -245,7 +272,8 @@ public final class IntegritySeUtil {
             return j;
         }
         try {
-            PackageInfo packageInfo = packageManager.getPackageInfo("com.samsung.android.kgclient", 0);
+            PackageInfo packageInfo =
+                    packageManager.getPackageInfo("com.samsung.android.kgclient", 0);
             if (packageInfo != null) {
                 return packageInfo.getLongVersionCode();
             }
@@ -301,7 +329,8 @@ public final class IntegritySeUtil {
         return "";
     }
 
-    public static boolean hasEnabledComponent(ComponentInfo[] componentInfoArr, String str, String str2) {
+    public static boolean hasEnabledComponent(
+            ComponentInfo[] componentInfoArr, String str, String str2) {
         if (componentInfoArr == null) {
             return false;
         }
@@ -315,21 +344,27 @@ public final class IntegritySeUtil {
 
     public static boolean isAPSerialValid() {
         String stringResult = KnoxGuardSeService.getStringResult(KnoxGuardNative.tz_getTAInfo(4));
-        boolean z = !TextUtils.isEmpty(stringResult) && stringResult.length() == 32 && Pattern.matches("[a-fA-F0-9]{32}", stringResult);
+        boolean z =
+                !TextUtils.isEmpty(stringResult)
+                        && stringResult.length() == 32
+                        && Pattern.matches("[a-fA-F0-9]{32}", stringResult);
         DeviceIdleController$$ExternalSyntheticOutline0.m("isAPSerialValid - ", TAG, z);
         return z;
     }
 
     public static boolean isEnabled(Context context) {
         try {
-            return context.getPackageManager().getApplicationInfo("com.samsung.android.kgclient", 0).enabled;
+            return context.getPackageManager()
+                    .getApplicationInfo("com.samsung.android.kgclient", 0)
+                    .enabled;
         } catch (PackageManager.NameNotFoundException e) {
             Slog.e(TAG, "isEnabled NameNotFoundException : " + e);
             return false;
         }
     }
 
-    public static boolean isKGComponentsEnabled(Context context, IntegritySeResult integritySeResult) {
+    public static boolean isKGComponentsEnabled(
+            Context context, IntegritySeResult integritySeResult) {
         PackageInfo packageInfo;
         try {
             if (MaintenanceModeManager.isInMaintenanceMode()) {
@@ -338,7 +373,9 @@ public final class IntegritySeUtil {
                     Slog.w(TAG, "IPackageManager is null");
                     return false;
                 }
-                packageInfo = packageManager.getPackageInfo("com.samsung.android.kgclient", 14L, getActiveUserId());
+                packageInfo =
+                        packageManager.getPackageInfo(
+                                "com.samsung.android.kgclient", 14L, getActiveUserId());
             } else {
                 PackageManager packageManager2 = context.getPackageManager();
                 if (packageManager2 == null) {
@@ -347,16 +384,45 @@ public final class IntegritySeUtil {
                 }
                 packageInfo = packageManager2.getPackageInfo("com.samsung.android.kgclient", 14);
             }
-            integritySeResult.enabledAdminReceiver = hasEnabledComponent(packageInfo.receivers, "com.samsung.android.kgclient", "com.samsung.android.kgclient.agent.KGDeviceAdminReceiver");
-            integritySeResult.enabledSystemIntentReceiver = hasEnabledComponent(packageInfo.receivers, "com.samsung.android.kgclient", "com.samsung.android.kgclient.receiver.SystemIntentReceiver");
-            integritySeResult.enabledSelfUpdateReceiver = hasEnabledComponent(packageInfo.receivers, "com.samsung.android.kgclient", "com.samsung.android.kgclient.selfupdate.SelfupdateReceiver");
-            integritySeResult.enabledKgEventService = hasEnabledComponent(packageInfo.services, "com.samsung.android.kgclient", "com.samsung.android.kgclient.events.KGEventService");
-            integritySeResult.enabledAlarmService = hasEnabledComponent(packageInfo.services, "com.samsung.android.kgclient", "com.samsung.android.kgclient.alarm.AlarmService");
-            integritySeResult.enabledKGProvider = hasEnabledComponent(packageInfo.providers, "com.samsung.android.kgclient", "com.samsung.android.kgclient.provider.KGProvider");
+            integritySeResult.enabledAdminReceiver =
+                    hasEnabledComponent(
+                            packageInfo.receivers,
+                            "com.samsung.android.kgclient",
+                            "com.samsung.android.kgclient.agent.KGDeviceAdminReceiver");
+            integritySeResult.enabledSystemIntentReceiver =
+                    hasEnabledComponent(
+                            packageInfo.receivers,
+                            "com.samsung.android.kgclient",
+                            "com.samsung.android.kgclient.receiver.SystemIntentReceiver");
+            integritySeResult.enabledSelfUpdateReceiver =
+                    hasEnabledComponent(
+                            packageInfo.receivers,
+                            "com.samsung.android.kgclient",
+                            "com.samsung.android.kgclient.selfupdate.SelfupdateReceiver");
+            integritySeResult.enabledKgEventService =
+                    hasEnabledComponent(
+                            packageInfo.services,
+                            "com.samsung.android.kgclient",
+                            "com.samsung.android.kgclient.events.KGEventService");
+            integritySeResult.enabledAlarmService =
+                    hasEnabledComponent(
+                            packageInfo.services,
+                            "com.samsung.android.kgclient",
+                            "com.samsung.android.kgclient.alarm.AlarmService");
+            integritySeResult.enabledKGProvider =
+                    hasEnabledComponent(
+                            packageInfo.providers,
+                            "com.samsung.android.kgclient",
+                            "com.samsung.android.kgclient.provider.KGProvider");
         } catch (PackageManager.NameNotFoundException | RemoteException e) {
             Slog.e(TAG, "isKGComponentsEnabled error: " + e.getMessage());
         }
-        return integritySeResult.enabledAdminReceiver && integritySeResult.enabledSystemIntentReceiver && integritySeResult.enabledSelfUpdateReceiver && integritySeResult.enabledKgEventService && integritySeResult.enabledAlarmService && integritySeResult.enabledKGProvider;
+        return integritySeResult.enabledAdminReceiver
+                && integritySeResult.enabledSystemIntentReceiver
+                && integritySeResult.enabledSelfUpdateReceiver
+                && integritySeResult.enabledKgEventService
+                && integritySeResult.enabledAlarmService
+                && integritySeResult.enabledKGProvider;
     }
 
     public static boolean isSystemApp(Context context) {
@@ -364,7 +430,11 @@ public final class IntegritySeUtil {
         } catch (PackageManager.NameNotFoundException e) {
             Slog.e(TAG, "isSystemApp NameNotFoundException : " + e);
         }
-        return (context.getPackageManager().getApplicationInfo("com.samsung.android.kgclient", 0).flags & 1) != 0;
+        return (context.getPackageManager()
+                                .getApplicationInfo("com.samsung.android.kgclient", 0)
+                                .flags
+                        & 1)
+                != 0;
     }
 
     public static boolean isTaErrorCode(int i) {
@@ -375,10 +445,14 @@ public final class IntegritySeUtil {
         return KG2_STARTED_VERSION_CODE <= getClientVersionCode(context, KG2_STARTED_VERSION_CODE);
     }
 
-    public static void setInitialState(Context context, int i, AppOpsManager.OnOpChangedInternalListener onOpChangedInternalListener) {
+    public static void setInitialState(
+            Context context,
+            int i,
+            AppOpsManager.OnOpChangedInternalListener onOpChangedInternalListener) {
         String str = TAG;
         Slog.i(str, "setInitialState, state : " + i);
-        DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService("device_policy");
+        DevicePolicyManager devicePolicyManager =
+                (DevicePolicyManager) context.getSystemService("device_policy");
         if (devicePolicyManager == null) {
             Slog.e(str, "DPM is not available");
             return;
@@ -390,24 +464,36 @@ public final class IntegritySeUtil {
                 Slog.e(str, "KGClient is malicious, it will be locked");
                 return;
             }
-            String stringSystemProperty = Utils.getStringSystemProperty(Constants.KG_OTP_BIT_SYSTEM_PROPERTY, Constants.OTP_BIT_KG_UNKNOWN);
+            String stringSystemProperty =
+                    Utils.getStringSystemProperty(
+                            Constants.KG_OTP_BIT_SYSTEM_PROPERTY, Constants.OTP_BIT_KG_UNKNOWN);
             boolean equals = Constants.OTP_BIT_KG_ENABLED.equals(stringSystemProperty);
-            boolean z = "1".equals(stringSystemProperty) || Constants.OTP_BIT_KG_COMPLETED.equals(stringSystemProperty);
+            boolean z =
+                    "1".equals(stringSystemProperty)
+                            || Constants.OTP_BIT_KG_COMPLETED.equals(stringSystemProperty);
             if (equals || (z && 4 != i)) {
                 try {
                     int callingUserId = UserHandle.getCallingUserId();
                     IPackageManager packageManager2 = AppGlobals.getPackageManager();
-                    if (packageManager2.getApplicationHiddenSettingAsUser("com.samsung.android.kgclient", callingUserId)) {
-                        packageManager2.setApplicationHiddenSettingAsUser("com.samsung.android.kgclient", false, callingUserId);
+                    if (packageManager2.getApplicationHiddenSettingAsUser(
+                            "com.samsung.android.kgclient", callingUserId)) {
+                        packageManager2.setApplicationHiddenSettingAsUser(
+                                "com.samsung.android.kgclient", false, callingUserId);
                     }
                 } catch (RemoteException e) {
                     Slog.e(TAG, "RemoteException " + e.getMessage());
                 }
-                ComponentName componentName = new ComponentName("com.samsung.android.kgclient", "com.samsung.android.kgclient.agent.KGDeviceAdminReceiver");
+                ComponentName componentName =
+                        new ComponentName(
+                                "com.samsung.android.kgclient",
+                                "com.samsung.android.kgclient.agent.KGDeviceAdminReceiver");
                 try {
                     if (2 == i || 3 == i) {
-                        Slog.d(TAG, "setInitialState call edm admin api for adding edm services!!!");
-                        EnterpriseDeviceManager enterpriseDeviceManager = EnterpriseDeviceManager.getInstance(context);
+                        Slog.d(
+                                TAG,
+                                "setInitialState call edm admin api for adding edm services!!!");
+                        EnterpriseDeviceManager enterpriseDeviceManager =
+                                EnterpriseDeviceManager.getInstance(context);
                         if (enterpriseDeviceManager != null) {
                             enterpriseDeviceManager.setActiveAdmin(componentName, false);
                         }
@@ -415,15 +501,22 @@ public final class IntegritySeUtil {
                         devicePolicyManager.setActiveAdmin(componentName, false);
                     }
                 } catch (Exception e2) {
-                    BootReceiver$$ExternalSyntheticOutline0.m(e2, "com.samsung.android.kgclientsetActiveAdmin", TAG);
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            e2, "com.samsung.android.kgclientsetActiveAdmin", TAG);
                 }
                 try {
-                    AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService("appops");
-                    appOpsManager.startWatchingMode(-1, "com.samsung.android.kgclient", (AppOpsManager.OnOpChangedListener) onOpChangedInternalListener);
-                    PackageInfo packageInfo = packageManager.getPackageInfo("com.samsung.android.kgclient", 0);
+                    AppOpsManager appOpsManager =
+                            (AppOpsManager) context.getSystemService("appops");
+                    appOpsManager.startWatchingMode(
+                            -1,
+                            "com.samsung.android.kgclient",
+                            (AppOpsManager.OnOpChangedListener) onOpChangedInternalListener);
+                    PackageInfo packageInfo =
+                            packageManager.getPackageInfo("com.samsung.android.kgclient", 0);
                     Iterator it = Constants.PROTECTED_APP_OPS_LIST.iterator();
                     while (it.hasNext()) {
-                        enableAppOpIfNotAllowed(packageInfo, appOpsManager, ((Integer) it.next()).intValue());
+                        enableAppOpIfNotAllowed(
+                                packageInfo, appOpsManager, ((Integer) it.next()).intValue());
                     }
                 } catch (Throwable th) {
                     Slog.e(TAG, "Error - appOps : " + th.getMessage());
@@ -498,13 +591,24 @@ public final class IntegritySeUtil {
             com.android.server.DeviceIdleController$$ExternalSyntheticOutline0.m(r8, r0, r9)
             return r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knoxguard.service.utils.IntegritySeUtil.testSystemUiCorrupted(android.content.Context):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.knoxguard.service.utils.IntegritySeUtil.testSystemUiCorrupted(android.content.Context):int");
     }
 
     public static int toErrorCode(IntegritySeResult integritySeResult) {
         if (integritySeResult == null) {
             return 0;
         }
-        return (integritySeResult.validSignature ? 0 : 2) | CLIENT_INTEGRITY_BASE2 | (integritySeResult.enabled ? 0 : 4) | (integritySeResult.validVersion ? 0 : 8) | (integritySeResult.enabledAdminReceiver ? 0 : 64) | (integritySeResult.enabledSystemIntentReceiver ? 0 : 128) | (integritySeResult.enabledSelfUpdateReceiver ? 0 : 256) | (integritySeResult.enabledKgEventService ? 0 : 512) | (integritySeResult.enabledAlarmService ? 0 : 1024) | (integritySeResult.enabledKGProvider ? 0 : 2048);
+        return (integritySeResult.validSignature ? 0 : 2)
+                | CLIENT_INTEGRITY_BASE2
+                | (integritySeResult.enabled ? 0 : 4)
+                | (integritySeResult.validVersion ? 0 : 8)
+                | (integritySeResult.enabledAdminReceiver ? 0 : 64)
+                | (integritySeResult.enabledSystemIntentReceiver ? 0 : 128)
+                | (integritySeResult.enabledSelfUpdateReceiver ? 0 : 256)
+                | (integritySeResult.enabledKgEventService ? 0 : 512)
+                | (integritySeResult.enabledAlarmService ? 0 : 1024)
+                | (integritySeResult.enabledKGProvider ? 0 : 2048);
     }
 }

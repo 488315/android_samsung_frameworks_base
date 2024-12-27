@@ -6,15 +6,19 @@ public interface SemRILConstants {
     public static final String CALL_DOMAIN_PS = "PS";
     public static final String EXTRA_CLEAR_FAKE_RADIO_ON_BEFORE_DIAL = "clearFakeRadioOnBeforeDial";
     public static final String EXTRA_EMERGENCY_CALL_ROUTING = "emergencyCallRoute";
-    public static final String EXTRA_IGNORE_ONGOING_IMS_CALL_IN_USE_IMS_FOR_CALL = "ignoreOngoingImsCallInUseImsForCall";
+    public static final String EXTRA_IGNORE_ONGOING_IMS_CALL_IN_USE_IMS_FOR_CALL =
+            "ignoreOngoingImsCallInUseImsForCall";
     public static final String EXTRA_LATEST_CALL_DOMAIN = "latestDomain";
-    public static final String EXTRA_TEST_CS_ECALL_CONVERTED_TO_NORMAL = "isTestCsECallConvertedToNormal";
+    public static final String EXTRA_TEST_CS_ECALL_CONVERTED_TO_NORMAL =
+            "isTestCsECallConvertedToNormal";
     public static final String EXTRA_TEST_EMERGENCY_NUMBER_URN = "test";
     public static final String SATELLITE_RADIOS_ALL = "bluetooth,uwb,wifi,nfc";
 
     public interface CarrierConfig {
-        public static final String SEM_KEY_SPN_DISPLAY_RULE_IN_HOME = "sem_spn_display_rule_in_home";
-        public static final String SEM_KEY_SPN_DISPLAY_RULE_IN_ROAMING = "sem_spn_display_rule_in_roaming";
+        public static final String SEM_KEY_SPN_DISPLAY_RULE_IN_HOME =
+                "sem_spn_display_rule_in_home";
+        public static final String SEM_KEY_SPN_DISPLAY_RULE_IN_ROAMING =
+                "sem_spn_display_rule_in_roaming";
         public static final String SEM_KEY_VOWIFI_OPNAME_STRING = "sem_vowifi_opname_string";
     }
 

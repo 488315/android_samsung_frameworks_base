@@ -12,7 +12,13 @@ public class MmtpRecordEvent extends FilterEvent {
     private final int mScHevcIndexMask;
     private final int mTsIndexMask;
 
-    private MmtpRecordEvent(int scHevcIndexMask, long dataLength, int mpuSequenceNumber, long pts, int firstMbInSlice, int tsIndexMask) {
+    private MmtpRecordEvent(
+            int scHevcIndexMask,
+            long dataLength,
+            int mpuSequenceNumber,
+            long pts,
+            int firstMbInSlice,
+            int tsIndexMask) {
         this.mScHevcIndexMask = scHevcIndexMask;
         this.mDataLength = dataLength;
         this.mMpuSequenceNumber = mpuSequenceNumber;

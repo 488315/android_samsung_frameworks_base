@@ -12,8 +12,11 @@ import android.os.SemSystemProperties;
 import android.provider.Settings;
 import android.telecom.Logging.Session;
 import android.text.TextUtils;
+
 import com.android.internal.R;
+
 import com.samsung.android.feature.SemFloatingFeature;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Locale;
@@ -30,12 +33,13 @@ public class CaptioningManager {
     private final Context mContext;
     private final Resources mResources;
     private final ArrayList<CaptioningChangeListener> mListeners = new ArrayList<>();
-    private final Runnable mStyleChangedRunnable = new Runnable() { // from class: android.view.accessibility.CaptioningManager.1
-        @Override // java.lang.Runnable
-        public void run() {
-            CaptioningManager.this.notifyUserStyleChanged();
-        }
-    };
+    private final Runnable mStyleChangedRunnable =
+            new Runnable() { // from class: android.view.accessibility.CaptioningManager.1
+                @Override // java.lang.Runnable
+                public void run() {
+                    CaptioningManager.this.notifyUserStyleChanged();
+                }
+            };
 
     public interface SystemAudioCaptioningAccessing {
         boolean isSystemAudioCaptioningUiEnabled(int i);
@@ -48,14 +52,16 @@ public class CaptioningManager {
     public CaptioningManager(Context context) {
         this.mContext = context;
         this.mContentResolver = context.getContentResolver();
-        this.mAccessibilityManager = (AccessibilityManager) this.mContext.getSystemService(AccessibilityManager.class);
+        this.mAccessibilityManager =
+                (AccessibilityManager) this.mContext.getSystemService(AccessibilityManager.class);
         Handler handler = new Handler(context.getMainLooper());
         this.mContentObserver = new MyContentObserver(handler);
         this.mResources = context.getResources();
     }
 
     public final boolean isEnabled() {
-        return Settings.Secure.getInt(this.mContentResolver, "accessibility_captioning_enabled", 0) == 1;
+        return Settings.Secure.getInt(this.mContentResolver, "accessibility_captioning_enabled", 0)
+                == 1;
     }
 
     public final String getRawLocale() {
@@ -81,7 +87,8 @@ public class CaptioningManager {
     }
 
     public final float getFontScale() {
-        return Settings.Secure.getFloat(this.mContentResolver, "accessibility_captioning_font_scale", 1.0f);
+        return Settings.Secure.getFloat(
+                this.mContentResolver, "accessibility_captioning_font_scale", 1.0f);
     }
 
     public int getRawUserStyle() {
@@ -97,24 +104,33 @@ public class CaptioningManager {
     }
 
     public final boolean isSystemAudioCaptioningEnabled() {
-        return Settings.Secure.getIntForUser(this.mContentResolver, Settings.Secure.ODI_CAPTIONS_ENABLED, 0, this.mContext.getUserId()) == 1;
+        return Settings.Secure.getIntForUser(
+                        this.mContentResolver,
+                        Settings.Secure.ODI_CAPTIONS_ENABLED,
+                        0,
+                        this.mContext.getUserId())
+                == 1;
     }
 
     @SystemApi
     public final void setSystemAudioCaptioningEnabled(boolean isEnabled) {
         if (this.mAccessibilityManager != null) {
-            this.mAccessibilityManager.setSystemAudioCaptioningEnabled(isEnabled, this.mContext.getUserId());
+            this.mAccessibilityManager.setSystemAudioCaptioningEnabled(
+                    isEnabled, this.mContext.getUserId());
         }
     }
 
     public final boolean isSystemAudioCaptioningUiEnabled() {
-        return this.mAccessibilityManager != null && this.mAccessibilityManager.isSystemAudioCaptioningUiEnabled(this.mContext.getUserId());
+        return this.mAccessibilityManager != null
+                && this.mAccessibilityManager.isSystemAudioCaptioningUiEnabled(
+                        this.mContext.getUserId());
     }
 
     @SystemApi
     public final void setSystemAudioCaptioningUiEnabled(boolean isEnabled) {
         if (this.mAccessibilityManager != null) {
-            this.mAccessibilityManager.setSystemAudioCaptioningUiEnabled(isEnabled, this.mContext.getUserId());
+            this.mAccessibilityManager.setSystemAudioCaptioningUiEnabled(
+                    isEnabled, this.mContext.getUserId());
         }
     }
 
@@ -139,7 +155,8 @@ public class CaptioningManager {
     }
 
     private void registerObserver(String key) {
-        this.mContentResolver.registerContentObserver(Settings.Secure.getUriFor(key), false, this.mContentObserver);
+        this.mContentResolver.registerContentObserver(
+                Settings.Secure.getUriFor(key), false, this.mContentObserver);
     }
 
     public void removeCaptioningChangeListener(CaptioningChangeListener listener) {
@@ -152,7 +169,13 @@ public class CaptioningManager {
     }
 
     public boolean isCallCaptioningEnabled() {
-        if (SemSystemProperties.getInt("ro.product.first_api_level", 0) >= 34 && this.mContext.getPackageManager().hasSystemFeature("com.google.android.feature.ASI") && !SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_AUDIO_SUPPORT_VOICE_TX_FOR_INCALL_MUSIC")) {
+        if (SemSystemProperties.getInt("ro.product.first_api_level", 0) >= 34
+                && this.mContext
+                        .getPackageManager()
+                        .hasSystemFeature("com.google.android.feature.ASI")
+                && !SemFloatingFeature.getInstance()
+                        .getBoolean(
+                                "SEC_FLOATING_FEATURE_AUDIO_SUPPORT_VOICE_TX_FOR_INCALL_MUSIC")) {
             return false;
         }
         try {
@@ -291,16 +314,29 @@ public class CaptioningManager {
         private Typeface mParsedTypeface;
         public final String mRawTypeface;
         public final int windowColor;
-        private static final CaptionStyle WHITE_ON_BLACK = new CaptionStyle(-1, -16777216, 0, -16777216, 255, null);
-        private static final CaptionStyle BLACK_ON_WHITE = new CaptionStyle(-16777216, -1, 0, -16777216, 255, null);
-        private static final CaptionStyle YELLOW_ON_BLACK = new CaptionStyle(-256, -16777216, 0, -16777216, 255, null);
-        private static final CaptionStyle YELLOW_ON_BLUE = new CaptionStyle(-256, -16776961, 0, -16777216, 255, null);
-        private static final CaptionStyle UNSPECIFIED = new CaptionStyle(16777215, 16777215, -1, 16777215, 16777215, null);
-        public static final CaptionStyle[] PRESETS = {WHITE_ON_BLACK, BLACK_ON_WHITE, YELLOW_ON_BLACK, YELLOW_ON_BLUE, UNSPECIFIED};
+        private static final CaptionStyle WHITE_ON_BLACK =
+                new CaptionStyle(-1, -16777216, 0, -16777216, 255, null);
+        private static final CaptionStyle BLACK_ON_WHITE =
+                new CaptionStyle(-16777216, -1, 0, -16777216, 255, null);
+        private static final CaptionStyle YELLOW_ON_BLACK =
+                new CaptionStyle(-256, -16777216, 0, -16777216, 255, null);
+        private static final CaptionStyle YELLOW_ON_BLUE =
+                new CaptionStyle(-256, -16776961, 0, -16777216, 255, null);
+        private static final CaptionStyle UNSPECIFIED =
+                new CaptionStyle(16777215, 16777215, -1, 16777215, 16777215, null);
+        public static final CaptionStyle[] PRESETS = {
+            WHITE_ON_BLACK, BLACK_ON_WHITE, YELLOW_ON_BLACK, YELLOW_ON_BLUE, UNSPECIFIED
+        };
         private static final CaptionStyle DEFAULT_CUSTOM = WHITE_ON_BLACK;
         public static final CaptionStyle DEFAULT = WHITE_ON_BLACK;
 
-        private CaptionStyle(int foregroundColor, int backgroundColor, int edgeType, int edgeColor, int windowColor, String rawTypeface) {
+        private CaptionStyle(
+                int foregroundColor,
+                int backgroundColor,
+                int edgeType,
+                int edgeColor,
+                int windowColor,
+                String rawTypeface) {
             this.mHasForegroundColor = hasColor(foregroundColor);
             this.mHasBackgroundColor = hasColor(backgroundColor);
             this.mHasEdgeType = edgeType != -1;
@@ -319,13 +355,22 @@ public class CaptioningManager {
         }
 
         public CaptionStyle applyStyle(CaptionStyle overlay) {
-            int newForegroundColor = overlay.hasForegroundColor() ? overlay.foregroundColor : this.foregroundColor;
-            int newBackgroundColor = overlay.hasBackgroundColor() ? overlay.backgroundColor : this.backgroundColor;
+            int newForegroundColor =
+                    overlay.hasForegroundColor() ? overlay.foregroundColor : this.foregroundColor;
+            int newBackgroundColor =
+                    overlay.hasBackgroundColor() ? overlay.backgroundColor : this.backgroundColor;
             int newEdgeType = overlay.hasEdgeType() ? overlay.edgeType : this.edgeType;
             int newEdgeColor = overlay.hasEdgeColor() ? overlay.edgeColor : this.edgeColor;
             int newWindowColor = overlay.hasWindowColor() ? overlay.windowColor : this.windowColor;
-            String newRawTypeface = overlay.mRawTypeface != null ? overlay.mRawTypeface : this.mRawTypeface;
-            return new CaptionStyle(newForegroundColor, newBackgroundColor, newEdgeType, newEdgeColor, newWindowColor, newRawTypeface);
+            String newRawTypeface =
+                    overlay.mRawTypeface != null ? overlay.mRawTypeface : this.mRawTypeface;
+            return new CaptionStyle(
+                    newForegroundColor,
+                    newBackgroundColor,
+                    newEdgeType,
+                    newEdgeColor,
+                    newWindowColor,
+                    newRawTypeface);
         }
 
         public boolean hasBackgroundColor() {
@@ -358,38 +403,53 @@ public class CaptioningManager {
         public static CaptionStyle getCustomStyle(ContentResolver cr) {
             String rawTypeface;
             CaptionStyle defStyle = DEFAULT_CUSTOM;
-            int foregroundColor = Settings.Secure.getInt(cr, "accessibility_captioning_foreground_color", defStyle.foregroundColor);
-            int backgroundColor = Settings.Secure.getInt(cr, "accessibility_captioning_background_color", defStyle.backgroundColor);
-            int edgeType = Settings.Secure.getInt(cr, "accessibility_captioning_edge_type", defStyle.edgeType);
-            int edgeColor = Settings.Secure.getInt(cr, "accessibility_captioning_edge_color", defStyle.edgeColor);
-            int windowColor = Settings.Secure.getInt(cr, "accessibility_captioning_window_color", defStyle.windowColor);
-            String rawTypeface2 = Settings.Secure.getString(cr, "accessibility_captioning_typeface");
+            int foregroundColor =
+                    Settings.Secure.getInt(
+                            cr,
+                            "accessibility_captioning_foreground_color",
+                            defStyle.foregroundColor);
+            int backgroundColor =
+                    Settings.Secure.getInt(
+                            cr,
+                            "accessibility_captioning_background_color",
+                            defStyle.backgroundColor);
+            int edgeType =
+                    Settings.Secure.getInt(
+                            cr, "accessibility_captioning_edge_type", defStyle.edgeType);
+            int edgeColor =
+                    Settings.Secure.getInt(
+                            cr, "accessibility_captioning_edge_color", defStyle.edgeColor);
+            int windowColor =
+                    Settings.Secure.getInt(
+                            cr, "accessibility_captioning_window_color", defStyle.windowColor);
+            String rawTypeface2 =
+                    Settings.Secure.getString(cr, "accessibility_captioning_typeface");
             if (rawTypeface2 != null) {
                 rawTypeface = rawTypeface2;
             } else {
                 rawTypeface = defStyle.mRawTypeface;
             }
-            return new CaptionStyle(foregroundColor, backgroundColor, edgeType, edgeColor, windowColor, rawTypeface);
+            return new CaptionStyle(
+                    foregroundColor,
+                    backgroundColor,
+                    edgeType,
+                    edgeColor,
+                    windowColor,
+                    rawTypeface);
         }
     }
 
-    public static abstract class CaptioningChangeListener {
-        public void onEnabledChanged(boolean enabled) {
-        }
+    public abstract static class CaptioningChangeListener {
+        public void onEnabledChanged(boolean enabled) {}
 
-        public void onUserStyleChanged(CaptionStyle userStyle) {
-        }
+        public void onUserStyleChanged(CaptionStyle userStyle) {}
 
-        public void onLocaleChanged(Locale locale) {
-        }
+        public void onLocaleChanged(Locale locale) {}
 
-        public void onFontScaleChanged(float fontScale) {
-        }
+        public void onFontScaleChanged(float fontScale) {}
 
-        public void onSystemAudioCaptioningChanged(boolean enabled) {
-        }
+        public void onSystemAudioCaptioningChanged(boolean enabled) {}
 
-        public void onSystemAudioCaptioningUiChanged(boolean enabled) {
-        }
+        public void onSystemAudioCaptioningUiChanged(boolean enabled) {}
     }
 }

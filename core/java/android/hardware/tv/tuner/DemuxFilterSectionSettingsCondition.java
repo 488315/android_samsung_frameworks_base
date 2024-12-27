@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class DemuxFilterSectionSettingsCondition implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterSectionSettingsCondition> CREATOR = new Parcelable.Creator<DemuxFilterSectionSettingsCondition>() { // from class: android.hardware.tv.tuner.DemuxFilterSectionSettingsCondition.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterSectionSettingsCondition createFromParcel(Parcel _aidl_source) {
-            return new DemuxFilterSectionSettingsCondition(_aidl_source);
-        }
+    public static final Parcelable.Creator<DemuxFilterSectionSettingsCondition> CREATOR =
+            new Parcelable.Creator<DemuxFilterSectionSettingsCondition>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterSectionSettingsCondition.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterSectionSettingsCondition createFromParcel(Parcel _aidl_source) {
+                    return new DemuxFilterSectionSettingsCondition(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterSectionSettingsCondition[] newArray(int _aidl_size) {
-            return new DemuxFilterSectionSettingsCondition[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterSectionSettingsCondition[] newArray(int _aidl_size) {
+                    return new DemuxFilterSectionSettingsCondition[_aidl_size];
+                }
+            };
     public static final int sectionBits = 0;
     public static final int tableInfo = 1;
     private int _tag;
@@ -59,7 +61,8 @@ public final class DemuxFilterSectionSettingsCondition implements Parcelable {
         _set(0, _value);
     }
 
-    public static DemuxFilterSectionSettingsCondition tableInfo(DemuxFilterSectionSettingsConditionTableInfo _value) {
+    public static DemuxFilterSectionSettingsCondition tableInfo(
+            DemuxFilterSectionSettingsConditionTableInfo _value) {
         return new DemuxFilterSectionSettingsCondition(1, _value);
     }
 
@@ -94,11 +97,16 @@ public final class DemuxFilterSectionSettingsCondition implements Parcelable {
         int _aidl_tag = _aidl_parcel.readInt();
         switch (_aidl_tag) {
             case 0:
-                DemuxFilterSectionBits _aidl_value = (DemuxFilterSectionBits) _aidl_parcel.readTypedObject(DemuxFilterSectionBits.CREATOR);
+                DemuxFilterSectionBits _aidl_value =
+                        (DemuxFilterSectionBits)
+                                _aidl_parcel.readTypedObject(DemuxFilterSectionBits.CREATOR);
                 _set(_aidl_tag, _aidl_value);
                 return;
             case 1:
-                DemuxFilterSectionSettingsConditionTableInfo _aidl_value2 = (DemuxFilterSectionSettingsConditionTableInfo) _aidl_parcel.readTypedObject(DemuxFilterSectionSettingsConditionTableInfo.CREATOR);
+                DemuxFilterSectionSettingsConditionTableInfo _aidl_value2 =
+                        (DemuxFilterSectionSettingsConditionTableInfo)
+                                _aidl_parcel.readTypedObject(
+                                        DemuxFilterSectionSettingsConditionTableInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             default:
@@ -129,7 +137,12 @@ public final class DemuxFilterSectionSettingsCondition implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

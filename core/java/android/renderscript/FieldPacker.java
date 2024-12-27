@@ -1,6 +1,7 @@
 package android.renderscript;
 
 import android.util.Log;
+
 import java.util.BitSet;
 
 @Deprecated
@@ -36,7 +37,8 @@ public class FieldPacker {
 
     public void align(int v) {
         if (v <= 0 || ((v - 1) & v) != 0) {
-            throw new RSIllegalArgumentException("argument must be a non-negative non-zero power of 2: " + v);
+            throw new RSIllegalArgumentException(
+                    "argument must be a non-negative non-zero power of 2: " + v);
         }
         while ((this.mPos & (v - 1)) != 0) {
             this.mAlignment.flip(this.mPos);
@@ -49,7 +51,8 @@ public class FieldPacker {
 
     public void subalign(int v) {
         if (((v - 1) & v) != 0) {
-            throw new RSIllegalArgumentException("argument must be a non-negative non-zero power of 2: " + v);
+            throw new RSIllegalArgumentException(
+                    "argument must be a non-negative non-zero power of 2: " + v);
         }
         while ((this.mPos & (v - 1)) != 0) {
             this.mPos--;

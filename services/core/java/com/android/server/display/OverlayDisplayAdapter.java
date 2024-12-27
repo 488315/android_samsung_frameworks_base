@@ -14,6 +14,7 @@ import android.view.Display;
 import android.view.DisplayShape;
 import android.view.Surface;
 import android.view.SurfaceControl;
+
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
@@ -21,10 +22,9 @@ import com.android.server.DirEncryptService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.display.DisplayAdapter;
-import com.android.server.display.DisplayManagerService;
 import com.android.server.display.feature.DisplayManagerFlags;
 import com.android.server.display.mode.DisplayModeDirector;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,37 +58,68 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
             OverlayDisplayWindow overlayDisplayWindow;
             switch (this.$r8$classId) {
                 case 0:
-                    ((OverlayDisplayAdapter) this.this$0).mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor("overlay_display_devices"), true, new ContentObserver(((OverlayDisplayAdapter) this.this$0).mHandler) { // from class: com.android.server.display.OverlayDisplayAdapter.1.1
-                        @Override // android.database.ContentObserver
-                        public final void onChange(boolean z) {
-                            OverlayDisplayAdapter overlayDisplayAdapter = (OverlayDisplayAdapter) AnonymousClass1.this.this$0;
-                            Pattern pattern = OverlayDisplayAdapter.DISPLAY_PATTERN;
-                            synchronized (overlayDisplayAdapter.mSyncRoot) {
-                                overlayDisplayAdapter.updateOverlayDisplayDevicesLocked();
-                            }
-                        }
-                    });
-                    OverlayDisplayAdapter overlayDisplayAdapter = (OverlayDisplayAdapter) this.this$0;
+                    ((OverlayDisplayAdapter) this.this$0)
+                            .mContext
+                            .getContentResolver()
+                            .registerContentObserver(
+                                    Settings.Global.getUriFor("overlay_display_devices"),
+                                    true,
+                                    new ContentObserver(
+                                            ((OverlayDisplayAdapter) this.this$0)
+                                                    .mHandler) { // from class:
+                                                                 // com.android.server.display.OverlayDisplayAdapter.1.1
+                                        @Override // android.database.ContentObserver
+                                        public final void onChange(boolean z) {
+                                            OverlayDisplayAdapter overlayDisplayAdapter =
+                                                    (OverlayDisplayAdapter)
+                                                            AnonymousClass1.this.this$0;
+                                            Pattern pattern = OverlayDisplayAdapter.DISPLAY_PATTERN;
+                                            synchronized (overlayDisplayAdapter.mSyncRoot) {
+                                                overlayDisplayAdapter
+                                                        .updateOverlayDisplayDevicesLocked();
+                                            }
+                                        }
+                                    });
+                    OverlayDisplayAdapter overlayDisplayAdapter =
+                            (OverlayDisplayAdapter) this.this$0;
                     synchronized (overlayDisplayAdapter.mSyncRoot) {
                         overlayDisplayAdapter.updateOverlayDisplayDevicesLocked();
                     }
                     return;
                 case 1:
                     OverlayDisplayHandle overlayDisplayHandle = (OverlayDisplayHandle) this.this$0;
-                    OverlayMode overlayMode = (OverlayMode) overlayDisplayHandle.mModes.get(overlayDisplayHandle.mActiveMode);
+                    OverlayMode overlayMode =
+                            (OverlayMode)
+                                    overlayDisplayHandle.mModes.get(
+                                            overlayDisplayHandle.mActiveMode);
                     OverlayDisplayHandle overlayDisplayHandle2 = (OverlayDisplayHandle) this.this$0;
-                    OverlayDisplayWindow overlayDisplayWindow2 = new OverlayDisplayWindow(OverlayDisplayAdapter.this.mContext, overlayDisplayHandle2.mName, overlayMode.mWidth, overlayMode.mHeight, overlayMode.mDensityDpi, overlayDisplayHandle2.mGravity, overlayDisplayHandle2.mFlags.mSecure, overlayDisplayHandle2);
+                    OverlayDisplayWindow overlayDisplayWindow2 =
+                            new OverlayDisplayWindow(
+                                    OverlayDisplayAdapter.this.mContext,
+                                    overlayDisplayHandle2.mName,
+                                    overlayMode.mWidth,
+                                    overlayMode.mHeight,
+                                    overlayMode.mDensityDpi,
+                                    overlayDisplayHandle2.mGravity,
+                                    overlayDisplayHandle2.mFlags.mSecure,
+                                    overlayDisplayHandle2);
                     if (!overlayDisplayWindow2.mWindowVisible) {
-                        overlayDisplayWindow2.mDisplayManager.registerDisplayListener(overlayDisplayWindow2.mDisplayListener, null);
+                        overlayDisplayWindow2.mDisplayManager.registerDisplayListener(
+                                overlayDisplayWindow2.mDisplayListener, null);
                         if (overlayDisplayWindow2.updateDefaultDisplayInfo()) {
-                            overlayDisplayWindow2.mLiveTranslationX = FullScreenMagnificationGestureHandler.MAX_SCALE;
-                            overlayDisplayWindow2.mLiveTranslationY = FullScreenMagnificationGestureHandler.MAX_SCALE;
+                            overlayDisplayWindow2.mLiveTranslationX =
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE;
+                            overlayDisplayWindow2.mLiveTranslationY =
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE;
                             overlayDisplayWindow2.mLiveScale = 1.0f;
                             overlayDisplayWindow2.updateWindowParams();
-                            overlayDisplayWindow2.mWindowManager.addView(overlayDisplayWindow2.mWindowContent, overlayDisplayWindow2.mWindowParams);
+                            overlayDisplayWindow2.mWindowManager.addView(
+                                    overlayDisplayWindow2.mWindowContent,
+                                    overlayDisplayWindow2.mWindowParams);
                             overlayDisplayWindow2.mWindowVisible = true;
                         } else {
-                            overlayDisplayWindow2.mDisplayManager.unregisterDisplayListener(overlayDisplayWindow2.mDisplayListener);
+                            overlayDisplayWindow2.mDisplayManager.unregisterDisplayListener(
+                                    overlayDisplayWindow2.mDisplayListener);
                         }
                     }
                     synchronized (OverlayDisplayAdapter.this.mSyncRoot) {
@@ -97,7 +128,8 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
                     return;
                 case 2:
                     synchronized (OverlayDisplayAdapter.this.mSyncRoot) {
-                        OverlayDisplayHandle overlayDisplayHandle3 = (OverlayDisplayHandle) this.this$0;
+                        OverlayDisplayHandle overlayDisplayHandle3 =
+                                (OverlayDisplayHandle) this.this$0;
                         overlayDisplayWindow = overlayDisplayHandle3.mWindow;
                         overlayDisplayHandle3.mWindow = null;
                     }
@@ -109,12 +141,21 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
                 default:
                     synchronized (OverlayDisplayAdapter.this.mSyncRoot) {
                         try {
-                            OverlayDisplayHandle overlayDisplayHandle4 = (OverlayDisplayHandle) this.this$0;
+                            OverlayDisplayHandle overlayDisplayHandle4 =
+                                    (OverlayDisplayHandle) this.this$0;
                             if (overlayDisplayHandle4.mWindow == null) {
                                 return;
                             }
-                            OverlayMode overlayMode2 = (OverlayMode) overlayDisplayHandle4.mModes.get(overlayDisplayHandle4.mActiveMode);
-                            ((OverlayDisplayHandle) this.this$0).mWindow.resize(overlayMode2.mWidth, overlayMode2.mHeight, overlayMode2.mDensityDpi, true);
+                            OverlayMode overlayMode2 =
+                                    (OverlayMode)
+                                            overlayDisplayHandle4.mModes.get(
+                                                    overlayDisplayHandle4.mActiveMode);
+                            ((OverlayDisplayHandle) this.this$0)
+                                    .mWindow.resize(
+                                            overlayMode2.mWidth,
+                                            overlayMode2.mHeight,
+                                            overlayMode2.mDensityDpi,
+                                            true);
                             return;
                         } finally {
                         }
@@ -159,7 +200,17 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
                 Code decompiled incorrectly, please refer to instructions dump.
                 To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public AnonymousClass1(android.os.IBinder r19, java.lang.String r20, java.util.List r21, int r22, float r23, long r24, com.android.server.display.OverlayDisplayAdapter.OverlayFlags r26, int r27, android.graphics.SurfaceTexture r28, int r29) {
+            public AnonymousClass1(
+                    android.os.IBinder r19,
+                    java.lang.String r20,
+                    java.util.List r21,
+                    int r22,
+                    float r23,
+                    long r24,
+                    com.android.server.display.OverlayDisplayAdapter.OverlayFlags r26,
+                    int r27,
+                    android.graphics.SurfaceTexture r28,
+                    int r29) {
                 /*
                     r17 = this;
                     r6 = r17
@@ -223,7 +274,13 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
                     r6.mDefaultMode = r2
                     return
                 */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.OverlayDisplayAdapter.OverlayDisplayHandle.AnonymousClass1.<init>(com.android.server.display.OverlayDisplayAdapter$OverlayDisplayHandle, android.os.IBinder, java.lang.String, java.util.List, int, float, long, com.android.server.display.OverlayDisplayAdapter$OverlayFlags, int, android.graphics.SurfaceTexture, int):void");
+                throw new UnsupportedOperationException(
+                        "Method not decompiled:"
+                            + " com.android.server.display.OverlayDisplayAdapter.OverlayDisplayHandle.AnonymousClass1.<init>(com.android.server.display.OverlayDisplayAdapter$OverlayDisplayHandle,"
+                            + " android.os.IBinder, java.lang.String, java.util.List, int, float,"
+                            + " long,"
+                            + " com.android.server.display.OverlayDisplayAdapter$OverlayFlags, int,"
+                            + " android.graphics.SurfaceTexture, int):void");
             }
 
             @Override // com.android.server.display.DisplayDevice
@@ -248,7 +305,9 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
                     displayDeviceInfo2.densityDpi = i2;
                     displayDeviceInfo2.xDpi = i2;
                     displayDeviceInfo2.yDpi = i2;
-                    displayDeviceInfo2.presentationDeadlineNanos = (1000000000 / ((int) this.mRefreshRate)) + this.mDisplayPresentationDeadlineNanos;
+                    displayDeviceInfo2.presentationDeadlineNanos =
+                            (1000000000 / ((int) this.mRefreshRate))
+                                    + this.mDisplayPresentationDeadlineNanos;
                     displayDeviceInfo2.flags = 64;
                     OverlayFlags overlayFlags = this.mFlags;
                     if (overlayFlags.mSecure) {
@@ -264,7 +323,9 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
                     displayDeviceInfo2.touch = 3;
                     displayDeviceInfo2.state = this.mState;
                     displayDeviceInfo2.flags |= 8192;
-                    displayDeviceInfo2.displayShape = DisplayShape.createDefaultDisplayShape(displayDeviceInfo2.width, displayDeviceInfo2.height, false);
+                    displayDeviceInfo2.displayShape =
+                            DisplayShape.createDefaultDisplayShape(
+                                    displayDeviceInfo2.width, displayDeviceInfo2.height, false);
                 }
                 return this.mInfo;
             }
@@ -289,7 +350,8 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
             }
 
             @Override // com.android.server.display.DisplayDevice
-            public final void setDesiredDisplayModeSpecsLocked(DisplayModeDirector.DesiredDisplayModeSpecs desiredDisplayModeSpecs) {
+            public final void setDesiredDisplayModeSpecsLocked(
+                    DisplayModeDirector.DesiredDisplayModeSpecs desiredDisplayModeSpecs) {
                 int i = desiredDisplayModeSpecs.baseModeId;
                 int i2 = 0;
                 if (i != 0) {
@@ -306,7 +368,11 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
                     }
                 }
                 if (i2 == -1) {
-                    BrailleDisplayConnection$$ExternalSyntheticOutline0.m(i, "Unable to locate mode ", ", reverting to default.", "OverlayDisplayAdapter");
+                    BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                            i,
+                            "Unable to locate mode ",
+                            ", reverting to default.",
+                            "OverlayDisplayAdapter");
                     i2 = this.mDefaultMode;
                 }
                 if (this.mActiveMode == i2) {
@@ -327,7 +393,8 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
             }
         }
 
-        public OverlayDisplayHandle(String str, List list, int i, OverlayFlags overlayFlags, int i2) {
+        public OverlayDisplayHandle(
+                String str, List list, int i, OverlayFlags overlayFlags, int i2) {
             AnonymousClass1 anonymousClass1 = new AnonymousClass1(1, this);
             this.mShowRunnable = anonymousClass1;
             this.mDismissRunnable = new AnonymousClass1(2, this);
@@ -360,7 +427,8 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
             sb.append(", ownContentOnly=");
             sb.append(this.mOwnContentOnly);
             sb.append(", shouldShowSystemDecorations=");
-            return OptionalBool$$ExternalSyntheticOutline0.m("}", sb, this.mShouldShowSystemDecorations);
+            return OptionalBool$$ExternalSyntheticOutline0.m(
+                    "}", sb, this.mShouldShowSystemDecorations);
         }
     }
 
@@ -386,7 +454,13 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
         }
     }
 
-    public OverlayDisplayAdapter(DisplayManagerService.SyncRoot syncRoot, Context context, Handler handler, DisplayAdapter.Listener listener, Handler handler2, DisplayManagerFlags displayManagerFlags) {
+    public OverlayDisplayAdapter(
+            DisplayManagerService.SyncRoot syncRoot,
+            Context context,
+            Handler handler,
+            DisplayAdapter.Listener listener,
+            Handler handler2,
+            DisplayManagerFlags displayManagerFlags) {
         super(syncRoot, context, handler, listener, "OverlayDisplayAdapter", displayManagerFlags);
         this.mOverlays = new ArrayList();
         this.mCurrentOverlaySetting = "";
@@ -395,7 +469,12 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
 
     @Override // com.android.server.display.DisplayAdapter
     public final void dumpLocked(PrintWriter printWriter) {
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, this.mCurrentOverlaySetting, "mOverlays: size=", new StringBuilder("mCurrentOverlaySetting="));
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        printWriter,
+                        this.mCurrentOverlaySetting,
+                        "mOverlays: size=",
+                        new StringBuilder("mCurrentOverlaySetting="));
         m.append(this.mOverlays.size());
         printWriter.println(m.toString());
         Iterator it = this.mOverlays.iterator();
@@ -405,14 +484,30 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
             StringBuilder sb = new StringBuilder("    mModes=");
             sb.append(Arrays.toString(overlayDisplayHandle.mModes.toArray()));
             printWriter.println(sb.toString());
-            StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("    mActiveMode="), overlayDisplayHandle.mActiveMode, printWriter, "    mGravity="), overlayDisplayHandle.mGravity, printWriter, "    mFlags=");
+            StringBuilder m2 =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("    mActiveMode="),
+                                    overlayDisplayHandle.mActiveMode,
+                                    printWriter,
+                                    "    mGravity="),
+                            overlayDisplayHandle.mGravity,
+                            printWriter,
+                            "    mFlags=");
             m2.append(overlayDisplayHandle.mFlags);
             printWriter.println(m2.toString());
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("    mNumber="), overlayDisplayHandle.mNumber, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("    mNumber="), overlayDisplayHandle.mNumber, printWriter);
             if (overlayDisplayHandle.mWindow != null) {
-                IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, "    ");
+                IndentingPrintWriter indentingPrintWriter =
+                        new IndentingPrintWriter(printWriter, "    ");
                 indentingPrintWriter.increaseIndent();
-                DumpUtils.dumpAsync(OverlayDisplayAdapter.this.mUiHandler, overlayDisplayHandle.mWindow, indentingPrintWriter, "", 200L);
+                DumpUtils.dumpAsync(
+                        OverlayDisplayAdapter.this.mUiHandler,
+                        overlayDisplayHandle.mWindow,
+                        indentingPrintWriter,
+                        "",
+                        200L);
             }
         }
     }
@@ -421,7 +516,9 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
         OverlayFlags overlayFlags;
         String[] strArr;
         int i;
-        String string = Settings.Global.getString(this.mContext.getContentResolver(), "overlay_display_devices");
+        String string =
+                Settings.Global.getString(
+                        this.mContext.getContentResolver(), "overlay_display_devices");
         if (string == null) {
             string = "";
         }
@@ -436,7 +533,8 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
             while (it.hasNext()) {
                 OverlayDisplayHandle overlayDisplayHandle = (OverlayDisplayHandle) it.next();
                 OverlayDisplayAdapter overlayDisplayAdapter = OverlayDisplayAdapter.this;
-                overlayDisplayAdapter.mUiHandler.removeCallbacks(overlayDisplayHandle.mShowRunnable);
+                overlayDisplayAdapter.mUiHandler.removeCallbacks(
+                        overlayDisplayHandle.mShowRunnable);
                 overlayDisplayAdapter.mUiHandler.post(overlayDisplayHandle.mDismissRunnable);
             }
             this.mOverlays.clear();
@@ -446,7 +544,9 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
             Matcher matcher = DISPLAY_PATTERN.matcher(str2);
             if (matcher.matches()) {
                 if (i2 >= 4) {
-                    Slog.w("OverlayDisplayAdapter", "Too many overlay display devices specified: ".concat(str));
+                    Slog.w(
+                            "OverlayDisplayAdapter",
+                            "Too many overlay display devices specified: ".concat(str));
                     return;
                 }
                 int i3 = 1;
@@ -467,11 +567,19 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
                                 int parseInt2 = Integer.parseInt(matcher2.group(2), 10);
                                 int parseInt3 = Integer.parseInt(matcher2.group(3), 10);
                                 i = length;
-                                if (parseInt < 100 || parseInt > 4096 || parseInt2 < 100 || parseInt2 > 4096 || parseInt3 < 120 || parseInt3 > 640) {
-                                    Slog.w("OverlayDisplayAdapter", "Ignoring out-of-range overlay display mode: " + str3);
+                                if (parseInt < 100
+                                        || parseInt > 4096
+                                        || parseInt2 < 100
+                                        || parseInt2 > 4096
+                                        || parseInt3 < 120
+                                        || parseInt3 > 640) {
+                                    Slog.w(
+                                            "OverlayDisplayAdapter",
+                                            "Ignoring out-of-range overlay display mode: " + str3);
                                 } else {
                                     try {
-                                        arrayList.add(new OverlayMode(parseInt, parseInt2, parseInt3));
+                                        arrayList.add(
+                                                new OverlayMode(parseInt, parseInt2, parseInt3));
                                     } catch (NumberFormatException unused) {
                                     }
                                 }
@@ -497,7 +605,10 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
                 }
                 if (!arrayList.isEmpty()) {
                     int i5 = i2 + 1;
-                    String string2 = this.mContext.getResources().getString(R.string.imTypeOther, Integer.valueOf(i5));
+                    String string2 =
+                            this.mContext
+                                    .getResources()
+                                    .getString(R.string.imTypeOther, Integer.valueOf(i5));
                     int i6 = i5 != 1 ? i5 != 2 ? i5 != 3 ? 83 : 53 : 85 : 51;
                     if (TextUtils.isEmpty(group2)) {
                         overlayFlags = new OverlayFlags(false, false, false);
@@ -527,16 +638,25 @@ public final class OverlayDisplayAdapter extends DisplayAdapter {
                         }
                         overlayFlags = new OverlayFlags(z3, z2, z);
                     }
-                    StringBuilder m = DirEncryptService$$ExternalSyntheticOutline0.m(i5, "Showing overlay display device #", ": name=", string2, ", modes=");
+                    StringBuilder m =
+                            DirEncryptService$$ExternalSyntheticOutline0.m(
+                                    i5,
+                                    "Showing overlay display device #",
+                                    ": name=",
+                                    string2,
+                                    ", modes=");
                     m.append(Arrays.toString(arrayList.toArray()));
                     m.append(", flags=");
                     m.append(overlayFlags);
                     Slog.i("OverlayDisplayAdapter", m.toString());
-                    this.mOverlays.add(new OverlayDisplayHandle(string2, arrayList, i6, overlayFlags, i5));
+                    this.mOverlays.add(
+                            new OverlayDisplayHandle(string2, arrayList, i6, overlayFlags, i5));
                     i2 = i5;
                 }
             }
-            Slog.w("OverlayDisplayAdapter", "Malformed overlay display devices setting: ".concat(str));
+            Slog.w(
+                    "OverlayDisplayAdapter",
+                    "Malformed overlay display devices setting: ".concat(str));
         }
     }
 }

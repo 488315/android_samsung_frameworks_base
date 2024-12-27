@@ -6,41 +6,63 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.Surface;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class RotationResolutionRequest implements Parcelable {
-    public static final Parcelable.Creator<RotationResolutionRequest> CREATOR = new Parcelable.Creator<RotationResolutionRequest>() { // from class: android.service.rotationresolver.RotationResolutionRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RotationResolutionRequest[] newArray(int size) {
-            return new RotationResolutionRequest[size];
-        }
+    public static final Parcelable.Creator<RotationResolutionRequest> CREATOR =
+            new Parcelable.Creator<
+                    RotationResolutionRequest>() { // from class:
+                                                   // android.service.rotationresolver.RotationResolutionRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RotationResolutionRequest[] newArray(int size) {
+                    return new RotationResolutionRequest[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RotationResolutionRequest createFromParcel(Parcel in) {
-            return new RotationResolutionRequest(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RotationResolutionRequest createFromParcel(Parcel in) {
+                    return new RotationResolutionRequest(in);
+                }
+            };
     private final int mCurrentRotation;
     private final String mForegroundPackageName;
     private final int mProposedRotation;
     private final boolean mShouldUseCamera;
     private final long mTimeoutMillis;
 
-    public RotationResolutionRequest(String foregroundPackageName, int currentRotation, int proposedRotation, boolean shouldUseCamera, long timeoutMillis) {
+    public RotationResolutionRequest(
+            String foregroundPackageName,
+            int currentRotation,
+            int proposedRotation,
+            boolean shouldUseCamera,
+            long timeoutMillis) {
         this.mForegroundPackageName = foregroundPackageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mForegroundPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mForegroundPackageName);
         this.mCurrentRotation = currentRotation;
-        AnnotationValidations.validate((Class<? extends Annotation>) Surface.Rotation.class, (Annotation) null, this.mCurrentRotation);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) Surface.Rotation.class,
+                (Annotation) null,
+                this.mCurrentRotation);
         this.mProposedRotation = proposedRotation;
-        AnnotationValidations.validate((Class<? extends Annotation>) Surface.Rotation.class, (Annotation) null, this.mProposedRotation);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) Surface.Rotation.class,
+                (Annotation) null,
+                this.mProposedRotation);
         this.mShouldUseCamera = shouldUseCamera;
         this.mTimeoutMillis = timeoutMillis;
-        AnnotationValidations.validate((Class<? extends Annotation>) DurationMillisLong.class, (Annotation) null, this.mTimeoutMillis);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) DurationMillisLong.class,
+                (Annotation) null,
+                this.mTimeoutMillis);
     }
 
     public String getForegroundPackageName() {
@@ -64,7 +86,17 @@ public final class RotationResolutionRequest implements Parcelable {
     }
 
     public String toString() {
-        return "RotationResolutionRequest { foregroundPackageName = " + this.mForegroundPackageName + ", currentRotation = " + this.mCurrentRotation + ", proposedRotation = " + this.mProposedRotation + ", shouldUseCamera = " + this.mShouldUseCamera + ", timeoutMillis = " + this.mTimeoutMillis + " }";
+        return "RotationResolutionRequest { foregroundPackageName = "
+                + this.mForegroundPackageName
+                + ", currentRotation = "
+                + this.mCurrentRotation
+                + ", proposedRotation = "
+                + this.mProposedRotation
+                + ", shouldUseCamera = "
+                + this.mShouldUseCamera
+                + ", timeoutMillis = "
+                + this.mTimeoutMillis
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -90,17 +122,28 @@ public final class RotationResolutionRequest implements Parcelable {
         int proposedRotation = in.readInt();
         long timeoutMillis = in.readLong();
         this.mForegroundPackageName = foregroundPackageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mForegroundPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mForegroundPackageName);
         this.mCurrentRotation = currentRotation;
-        AnnotationValidations.validate((Class<? extends Annotation>) Surface.Rotation.class, (Annotation) null, this.mCurrentRotation);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) Surface.Rotation.class,
+                (Annotation) null,
+                this.mCurrentRotation);
         this.mProposedRotation = proposedRotation;
-        AnnotationValidations.validate((Class<? extends Annotation>) Surface.Rotation.class, (Annotation) null, this.mProposedRotation);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) Surface.Rotation.class,
+                (Annotation) null,
+                this.mProposedRotation);
         this.mShouldUseCamera = shouldUseCamera;
         this.mTimeoutMillis = timeoutMillis;
-        AnnotationValidations.validate((Class<? extends Annotation>) DurationMillisLong.class, (Annotation) null, this.mTimeoutMillis);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) DurationMillisLong.class,
+                (Annotation) null,
+                this.mTimeoutMillis);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

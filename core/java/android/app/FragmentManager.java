@@ -1,9 +1,9 @@
 package android.app;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.List;
@@ -33,11 +33,13 @@ public abstract class FragmentManager {
         void onBackStackChanged();
     }
 
-    public abstract void addOnBackStackChangedListener(OnBackStackChangedListener onBackStackChangedListener);
+    public abstract void addOnBackStackChangedListener(
+            OnBackStackChangedListener onBackStackChangedListener);
 
     public abstract FragmentTransaction beginTransaction();
 
-    public abstract void dump(String str, FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr);
+    public abstract void dump(
+            String str, FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr);
 
     public abstract boolean executePendingTransactions();
 
@@ -73,13 +75,16 @@ public abstract class FragmentManager {
 
     public abstract void putFragment(Bundle bundle, String str, Fragment fragment);
 
-    public abstract void registerFragmentLifecycleCallbacks(FragmentLifecycleCallbacks fragmentLifecycleCallbacks, boolean z);
+    public abstract void registerFragmentLifecycleCallbacks(
+            FragmentLifecycleCallbacks fragmentLifecycleCallbacks, boolean z);
 
-    public abstract void removeOnBackStackChangedListener(OnBackStackChangedListener onBackStackChangedListener);
+    public abstract void removeOnBackStackChangedListener(
+            OnBackStackChangedListener onBackStackChangedListener);
 
     public abstract Fragment.SavedState saveFragmentInstanceState(Fragment fragment);
 
-    public abstract void unregisterFragmentLifecycleCallbacks(FragmentLifecycleCallbacks fragmentLifecycleCallbacks);
+    public abstract void unregisterFragmentLifecycleCallbacks(
+            FragmentLifecycleCallbacks fragmentLifecycleCallbacks);
 
     @Deprecated
     public FragmentTransaction openTransaction() {
@@ -90,51 +95,39 @@ public abstract class FragmentManager {
         FragmentManagerImpl.DEBUG = enabled;
     }
 
-    public void invalidateOptionsMenu() {
-    }
+    public void invalidateOptionsMenu() {}
 
     @Deprecated
-    public static abstract class FragmentLifecycleCallbacks {
-        public void onFragmentPreAttached(FragmentManager fm, Fragment f, Context context) {
-        }
+    public abstract static class FragmentLifecycleCallbacks {
+        public void onFragmentPreAttached(FragmentManager fm, Fragment f, Context context) {}
 
-        public void onFragmentAttached(FragmentManager fm, Fragment f, Context context) {
-        }
+        public void onFragmentAttached(FragmentManager fm, Fragment f, Context context) {}
 
-        public void onFragmentPreCreated(FragmentManager fm, Fragment f, Bundle savedInstanceState) {
-        }
+        public void onFragmentPreCreated(
+                FragmentManager fm, Fragment f, Bundle savedInstanceState) {}
 
-        public void onFragmentCreated(FragmentManager fm, Fragment f, Bundle savedInstanceState) {
-        }
+        public void onFragmentCreated(FragmentManager fm, Fragment f, Bundle savedInstanceState) {}
 
-        public void onFragmentActivityCreated(FragmentManager fm, Fragment f, Bundle savedInstanceState) {
-        }
+        public void onFragmentActivityCreated(
+                FragmentManager fm, Fragment f, Bundle savedInstanceState) {}
 
-        public void onFragmentViewCreated(FragmentManager fm, Fragment f, View v, Bundle savedInstanceState) {
-        }
+        public void onFragmentViewCreated(
+                FragmentManager fm, Fragment f, View v, Bundle savedInstanceState) {}
 
-        public void onFragmentStarted(FragmentManager fm, Fragment f) {
-        }
+        public void onFragmentStarted(FragmentManager fm, Fragment f) {}
 
-        public void onFragmentResumed(FragmentManager fm, Fragment f) {
-        }
+        public void onFragmentResumed(FragmentManager fm, Fragment f) {}
 
-        public void onFragmentPaused(FragmentManager fm, Fragment f) {
-        }
+        public void onFragmentPaused(FragmentManager fm, Fragment f) {}
 
-        public void onFragmentStopped(FragmentManager fm, Fragment f) {
-        }
+        public void onFragmentStopped(FragmentManager fm, Fragment f) {}
 
-        public void onFragmentSaveInstanceState(FragmentManager fm, Fragment f, Bundle outState) {
-        }
+        public void onFragmentSaveInstanceState(FragmentManager fm, Fragment f, Bundle outState) {}
 
-        public void onFragmentViewDestroyed(FragmentManager fm, Fragment f) {
-        }
+        public void onFragmentViewDestroyed(FragmentManager fm, Fragment f) {}
 
-        public void onFragmentDestroyed(FragmentManager fm, Fragment f) {
-        }
+        public void onFragmentDestroyed(FragmentManager fm, Fragment f) {}
 
-        public void onFragmentDetached(FragmentManager fm, Fragment f) {
-        }
+        public void onFragmentDetached(FragmentManager fm, Fragment f) {}
     }
 }

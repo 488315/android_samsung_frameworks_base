@@ -10,7 +10,6 @@ public final class ClientManagerProto {
         public static final long BROKER = 1138166333443L;
         public static final long TIMESTAMP_MS = 1112396529665L;
 
-        public RegistrationRecord() {
-        }
+        public RegistrationRecord() {}
     }
 }

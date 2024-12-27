@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,19 +14,21 @@ import java.util.Set;
 
 /* loaded from: classes.dex */
 public final class CapabilityParams implements Parcelable {
-    public static final Parcelable.Creator<CapabilityParams> CREATOR = new Parcelable.Creator<CapabilityParams>() { // from class: android.content.pm.CapabilityParams.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CapabilityParams[] newArray(int size) {
-            return new CapabilityParams[size];
-        }
+    public static final Parcelable.Creator<CapabilityParams> CREATOR =
+            new Parcelable.Creator<
+                    CapabilityParams>() { // from class: android.content.pm.CapabilityParams.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CapabilityParams[] newArray(int size) {
+                    return new CapabilityParams[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CapabilityParams createFromParcel(Parcel in) {
-            return new CapabilityParams(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CapabilityParams createFromParcel(Parcel in) {
+                    return new CapabilityParams(in);
+                }
+            };
     private final List<String> mAliases;
     private final String mName;
     private final String mPrimaryValue;
@@ -35,7 +38,10 @@ public final class CapabilityParams implements Parcelable {
         Objects.requireNonNull(primaryValue);
         this.mName = name;
         this.mPrimaryValue = primaryValue;
-        this.mAliases = aliases == null ? Collections.emptyList() : Collections.unmodifiableList(new ArrayList(aliases));
+        this.mAliases =
+                aliases == null
+                        ? Collections.emptyList()
+                        : Collections.unmodifiableList(new ArrayList(aliases));
     }
 
     CapabilityParams(CapabilityParams orig) {
@@ -81,7 +87,9 @@ public final class CapabilityParams implements Parcelable {
             return false;
         }
         CapabilityParams target = (CapabilityParams) obj;
-        return this.mName.equals(target.mName) && this.mPrimaryValue.equals(target.mPrimaryValue) && this.mAliases.equals(target.mAliases);
+        return this.mName.equals(target.mName)
+                && this.mPrimaryValue.equals(target.mPrimaryValue)
+                && this.mAliases.equals(target.mAliases);
     }
 
     public int hashCode() {

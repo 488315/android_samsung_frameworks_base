@@ -3,6 +3,7 @@ package com.samsung.android.rune;
 import android.os.Debug;
 import android.os.FactoryTest;
 import android.os.SystemProperties;
+
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 
@@ -74,8 +75,10 @@ public class InputRune {
     public static final boolean PWM_ACTIVE_KEY;
     public static final boolean PWM_ACTIVE_OR_XCOVER_KEY;
     public static final boolean PWM_B2B_DEDICATED_APP;
-    public static final String PWM_BIXBY_ONBOARDING_SERVICE_COMPONENT = "com.samsung.android.bixby.agent/com.samsung.android.bixby.BixbyKeyLService";
-    public static final String PWM_BIXBY_SERVICE_COMPONENT = "com.samsung.android.bixby.agent/com.samsung.android.bixby.WinkService";
+    public static final String PWM_BIXBY_ONBOARDING_SERVICE_COMPONENT =
+            "com.samsung.android.bixby.agent/com.samsung.android.bixby.BixbyKeyLService";
+    public static final String PWM_BIXBY_SERVICE_COMPONENT =
+            "com.samsung.android.bixby.agent/com.samsung.android.bixby.WinkService";
     public static final boolean PWM_BRIGHTNESS_KEY = true;
     public static final boolean PWM_COMMON = true;
     public static final boolean PWM_DOUBLE_TAP_PREMIUM_WATCH;
@@ -174,41 +177,76 @@ public class InputRune {
     public static final boolean PWM_XCOVER_TOP_KEY_B2B_DELTA;
     public static final boolean SEP = true;
     public static final boolean IFW_WIRELESS_KEYBOARD_SA_LOGGING = CoreRune.FW_SA_LOGGING;
-    public static final boolean IFW_KEY_COUNTER = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE");
+    public static final boolean IFW_KEY_COUNTER =
+            SemFloatingFeature.getInstance()
+                    .getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE");
     public static final boolean IS_FACTORY_BINARY = FactoryTest.isFactoryMode();
     public static final boolean PWM_KEY_FACTORY_MODE_POLICY = FactoryTest.isFactoryMode();
     public static boolean SAFE_DEBUG = Debug.semIsProductDev();
     public static final boolean PWM_KEY_SA_LOGGING = CoreRune.FW_SA_LOGGING;
-    public static final boolean PWM_SUPPORT_BIXBY_ONBOARDING_SERVICE = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_BIXBY_SUPPORT_LONG_KEY_SERVICE");
-    public static final boolean PWM_SUPPORT_BIXBY_TOUCH_CHN = "true".equals(SystemProperties.get("ro.bbt.support.circle2search"));
-    public static final boolean PWM_SUPPORT_SEARCLE = "bsxasm1".equals(SystemProperties.get("ro.com.google.cdb.spa1"));
-    public static final boolean PWM_POWER_KEY_DOUBLE_PRESS_ATT_TV_MODE = SemCscFeature.getInstance().getString("CscFeature_SystemUI_ConfigDefQuickSettingItem", "").contains("TvMode");
-    public static final boolean PWM_SIDE_KEY = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_SETTINGS_SUPPORT_FUNCTION_KEY_MENU");
+    public static final boolean PWM_SUPPORT_BIXBY_ONBOARDING_SERVICE =
+            SemFloatingFeature.getInstance()
+                    .getBoolean("SEC_FLOATING_FEATURE_BIXBY_SUPPORT_LONG_KEY_SERVICE");
+    public static final boolean PWM_SUPPORT_BIXBY_TOUCH_CHN =
+            "true".equals(SystemProperties.get("ro.bbt.support.circle2search"));
+    public static final boolean PWM_SUPPORT_SEARCLE =
+            "bsxasm1".equals(SystemProperties.get("ro.com.google.cdb.spa1"));
+    public static final boolean PWM_POWER_KEY_DOUBLE_PRESS_ATT_TV_MODE =
+            SemCscFeature.getInstance()
+                    .getString("CscFeature_SystemUI_ConfigDefQuickSettingItem", "")
+                    .contains("TvMode");
+    public static final boolean PWM_SIDE_KEY =
+            SemFloatingFeature.getInstance()
+                    .getBoolean("SEC_FLOATING_FEATURE_SETTINGS_SUPPORT_FUNCTION_KEY_MENU");
     public static final boolean PWM_SIDE_KEY_DOUBLE_PRESS = PWM_SIDE_KEY;
     public static final boolean PWM_SIDE_KEY_LONG_PRESS = PWM_SIDE_KEY;
 
     static {
-        PWM_SIDE_KEY_WAKE_UP_BIXBY = PWM_SIDE_KEY_LONG_PRESS && !SemCscFeature.getInstance().getBoolean("CscFeature_Common_DisableBixby", false);
-        PWM_SIDE_SUPPORT_AI_AGENT = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_AI_AGENT");
+        PWM_SIDE_KEY_WAKE_UP_BIXBY =
+                PWM_SIDE_KEY_LONG_PRESS
+                        && !SemCscFeature.getInstance()
+                                .getBoolean("CscFeature_Common_DisableBixby", false);
+        PWM_SIDE_SUPPORT_AI_AGENT =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_AI_AGENT");
         PWM_SIDE_KEY_DIGITAL_ASSISTANT = PWM_SIDE_KEY_LONG_PRESS && PWM_SIDE_SUPPORT_AI_AGENT;
         PWM_SIDE_KEY_TORCH = PWM_SIDE_KEY;
-        PWM_SIDE_KEY_DOUBLE_PRESS_SECURE_FOLDER = PWM_SIDE_KEY_DOUBLE_PRESS && SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportPrivateMode");
+        PWM_SIDE_KEY_DOUBLE_PRESS_SECURE_FOLDER =
+                PWM_SIDE_KEY_DOUBLE_PRESS
+                        && SemCscFeature.getInstance()
+                                .getBoolean("CscFeature_Common_SupportPrivateMode");
         PWM_KEY_COMBINATION_GLOBAL_ACTION = PWM_SIDE_KEY;
         PWM_KEY_COMBINATION_SCREENSHOT_SIDE_KEY = PWM_SIDE_KEY;
-        PWM_SUPPORT_DICTATION_SAMSUNG_KEYBOARD = PWM_SIDE_KEY_WAKE_UP_BIXBY || PWM_XCOVER_AND_TOP_KEY;
+        PWM_SUPPORT_DICTATION_SAMSUNG_KEYBOARD =
+                PWM_SIDE_KEY_WAKE_UP_BIXBY || PWM_XCOVER_AND_TOP_KEY;
         PWM_HOME_KEY_LONG_PRESS_SEARCLE = PWM_SUPPORT_SEARCLE || PWM_SUPPORT_BIXBY_TOUCH_CHN;
-        PWM_SKT_PHONE_RELAX_MODE = "tphone".equalsIgnoreCase(SemCscFeature.getInstance().getString("CscFeature_Setting_ConfigOperatorCallService"));
+        PWM_SKT_PHONE_RELAX_MODE =
+                "tphone"
+                        .equalsIgnoreCase(
+                                SemCscFeature.getInstance()
+                                        .getString("CscFeature_Setting_ConfigOperatorCallService"));
         PWM_FINGERPRINT_SIDE_TOUCH = "google_touch_display_ultrasonic".contains("touch_side");
-        PWM_SUPPORT_TOOLBAR_SHORTCUT = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_SIP_SUPPORT_EMOJI_SHORTCUT");
-        PWM_SPEN_USP_LEVEL = SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION", -1);
+        PWM_SUPPORT_TOOLBAR_SHORTCUT =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_SIP_SUPPORT_EMOJI_SHORTCUT");
+        PWM_SPEN_USP_LEVEL =
+                SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION", -1);
         PWM_SPEN = PWM_SPEN_USP_LEVEL > 0;
         PWM_SPEN_SCREEN_OFF_MEMO = PWM_SPEN;
         PWM_SPEN_HOVER = PWM_SPEN;
         PWM_SPEN_SMART_CLIP = PWM_SPEN;
         PWM_OMC_SPEN_SOUND = PWM_SPEN;
-        PWM_OMC_SPEN_VIBRATION = PWM_SPEN && SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportSpenEditionVibration");
-        PWM_HAPTIC_FEEDBACK_ON_DC_MOTOR = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_AUDIO_SUPPORT_DC_MOTOR_HAPTIC_FEEDBACK");
-        PWM_DOUBLE_TAP_PREMIUM_WATCH = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_CLOCK_SUPPORT_PREMIUM_WATCH");
+        PWM_OMC_SPEN_VIBRATION =
+                PWM_SPEN
+                        && SemCscFeature.getInstance()
+                                .getBoolean("CscFeature_Common_SupportSpenEditionVibration");
+        PWM_HAPTIC_FEEDBACK_ON_DC_MOTOR =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_AUDIO_SUPPORT_DC_MOTOR_HAPTIC_FEEDBACK");
+        PWM_DOUBLE_TAP_PREMIUM_WATCH =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_CLOCK_SUPPORT_PREMIUM_WATCH");
         PWM_ACTIVE_KEY = "".contains("active");
         PWM_XCOVER_KEY = "".contains("xcover");
         PWM_ACTIVE_OR_XCOVER_KEY = PWM_ACTIVE_KEY || PWM_XCOVER_KEY;
@@ -216,7 +254,12 @@ public class InputRune {
         PWM_XCOVER_TOP_KEY_B2B_DELTA = PWM_XCOVER_AND_TOP_KEY || PWM_ACTIVE_KEY;
         PWM_B2B_DEDICATED_APP = true;
         PWM_KODIAK_DEDICATED_PTT_APP = PWM_XCOVER_TOP_KEY_B2B_DELTA;
-        PWM_SIDE_KEY_TRIPLE_PRESS_PANIC_CALL = "PanicMode".equalsIgnoreCase(SemCscFeature.getInstance().getString("CscFeature_Framework_ConfigActionForMultiPowerPress"));
+        PWM_SIDE_KEY_TRIPLE_PRESS_PANIC_CALL =
+                "PanicMode"
+                        .equalsIgnoreCase(
+                                SemCscFeature.getInstance()
+                                        .getString(
+                                                "CscFeature_Framework_ConfigActionForMultiPowerPress"));
         PWM_SIDE_KEY_QUINTUPLE_PRESS_EMERGENCY_SOS = !PWM_SIDE_KEY_TRIPLE_PRESS_PANIC_CALL;
         PWM_QUICK_LAUNCH_CAMERA = !PWM_SIDE_KEY;
         PWM_SKIP_TOO_FAST_DOUBLE_PRESS = PWM_FINGERPRINT_SIDE_TOUCH;

@@ -15,16 +15,18 @@ import android.view.ThreadedRenderer;
 import android.view.View;
 import android.view.ViewRootImpl;
 import android.view.WindowCallbacks;
-import com.android.internal.jank.FrameTracker;
-import com.android.internal.jank.InteractionJankMonitor;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.TimeUnit;
 
 /* loaded from: classes5.dex */
-public class FrameTracker extends SurfaceControl.OnJankDataListener implements HardwareRendererObserver.OnFrameMetricsAvailableListener {
+public class FrameTracker extends SurfaceControl.OnJankDataListener
+        implements HardwareRendererObserver.OnFrameMetricsAvailableListener {
     private static final int FLUSH_DELAY_MILLISECOND = 60;
     private static final long INVALID_ID = -1;
     private static final int MAX_FLUSH_ATTEMPTS = 3;
@@ -70,8 +72,7 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Reasons {
-    }
+    public @interface Reasons {}
 
     private static class JankInfo {
         long frameVsyncId;
@@ -82,15 +83,24 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
         boolean surfaceControlCallbackFired;
         long totalDurationNanos;
 
-        static JankInfo createFromHwuiCallback(long frameVsyncId, long totalDurationNanos, boolean isFirstFrame) {
+        static JankInfo createFromHwuiCallback(
+                long frameVsyncId, long totalDurationNanos, boolean isFirstFrame) {
             return new JankInfo(frameVsyncId, true, false, 0, 0, totalDurationNanos, isFirstFrame);
         }
 
-        static JankInfo createFromSurfaceControlCallback(long frameVsyncId, int jankType, int refreshRate) {
+        static JankInfo createFromSurfaceControlCallback(
+                long frameVsyncId, int jankType, int refreshRate) {
             return new JankInfo(frameVsyncId, false, true, jankType, refreshRate, 0L, false);
         }
 
-        private JankInfo(long frameVsyncId, boolean hwuiCallbackFired, boolean surfaceControlCallbackFired, int jankType, int refreshRate, long totalDurationNanos, boolean isFirstFrame) {
+        private JankInfo(
+                long frameVsyncId,
+                boolean hwuiCallbackFired,
+                boolean surfaceControlCallbackFired,
+                int jankType,
+                int refreshRate,
+                long totalDurationNanos,
+                boolean isFirstFrame) {
             this.frameVsyncId = frameVsyncId;
             this.hwuiCallbackFired = hwuiCallbackFired;
             this.surfaceControlCallbackFired = surfaceControlCallbackFired;
@@ -134,7 +144,17 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
         }
     }
 
-    public FrameTracker(InteractionJankMonitor.Configuration config, ThreadedRendererWrapper renderer, ViewRootWrapper viewRootWrapper, SurfaceControlWrapper surfaceControlWrapper, ChoreographerWrapper choreographer, FrameMetricsWrapper metrics, StatsLogWrapper statsLog, int traceThresholdMissedFrames, int traceThresholdFrameTimeMillis, FrameTrackerListener listener) {
+    public FrameTracker(
+            InteractionJankMonitor.Configuration config,
+            ThreadedRendererWrapper renderer,
+            ViewRootWrapper viewRootWrapper,
+            SurfaceControlWrapper surfaceControlWrapper,
+            ChoreographerWrapper choreographer,
+            FrameMetricsWrapper metrics,
+            StatsLogWrapper statsLog,
+            int traceThresholdMissedFrames,
+            int traceThresholdFrameTimeMillis,
+            FrameTrackerListener listener) {
         HardwareRendererObserver hardwareRendererObserver;
         this.mSurfaceOnly = config.isSurfaceOnly();
         this.mConfig = config;
@@ -149,7 +169,9 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
         if (this.mSurfaceOnly) {
             hardwareRendererObserver = null;
         } else {
-            hardwareRendererObserver = new HardwareRendererObserver(this, this.mMetricsWrapper.getTiming(), this.mHandler, false);
+            hardwareRendererObserver =
+                    new HardwareRendererObserver(
+                            this, this.mMetricsWrapper.getTiming(), this.mHandler, false);
         }
         this.mObserver = hardwareRendererObserver;
         this.mTraceThresholdMissedFrames = traceThresholdMissedFrames;
@@ -170,17 +192,19 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
 
     /* renamed from: com.android.internal.jank.FrameTracker$1, reason: invalid class name */
     class AnonymousClass1 implements ViewRootImpl.SurfaceChangedCallback {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.view.ViewRootImpl.SurfaceChangedCallback
         public void surfaceCreated(SurfaceControl.Transaction t) {
-            FrameTracker.this.mHandler.runWithScissors(new Runnable() { // from class: com.android.internal.jank.FrameTracker$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FrameTracker.AnonymousClass1.this.lambda$surfaceCreated$0();
-                }
-            }, 500L);
+            FrameTracker.this.mHandler.runWithScissors(
+                    new Runnable() { // from class:
+                                     // com.android.internal.jank.FrameTracker$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FrameTracker.AnonymousClass1.this.lambda$surfaceCreated$0();
+                        }
+                    },
+                    500L);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -194,17 +218,19 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
         }
 
         @Override // android.view.ViewRootImpl.SurfaceChangedCallback
-        public void surfaceReplaced(SurfaceControl.Transaction t) {
-        }
+        public void surfaceReplaced(SurfaceControl.Transaction t) {}
 
         @Override // android.view.ViewRootImpl.SurfaceChangedCallback
         public void surfaceDestroyed() {
-            FrameTracker.this.mHandler.postDelayed(new Runnable() { // from class: com.android.internal.jank.FrameTracker$1$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    FrameTracker.AnonymousClass1.this.lambda$surfaceDestroyed$1();
-                }
-            }, 50L);
+            FrameTracker.this.mHandler.postDelayed(
+                    new Runnable() { // from class:
+                                     // com.android.internal.jank.FrameTracker$1$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            FrameTracker.AnonymousClass1.this.lambda$surfaceDestroyed$1();
+                        }
+                    },
+                    50L);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -224,12 +250,14 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
         if (this.mSurfaceControl != null) {
             if (this.mDeferMonitoring && currentVsync < this.mBeginVsyncId) {
                 markEvent("FT#deferMonitoring", 0L);
-                postTraceStartMarker(new Runnable() { // from class: com.android.internal.jank.FrameTracker$$ExternalSyntheticLambda2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        FrameTracker.this.beginInternal();
-                    }
-                });
+                postTraceStartMarker(
+                        new Runnable() { // from class:
+                                         // com.android.internal.jank.FrameTracker$$ExternalSyntheticLambda2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                FrameTracker.this.beginInternal();
+                            }
+                        });
             } else {
                 beginInternal();
             }
@@ -289,11 +317,14 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
         @Override // java.lang.Runnable
         public void run() {
             long delay;
-            if (FrameTracker.this.mWaitForFinishTimedOut == null || FrameTracker.this.mMetricsFinalized) {
+            if (FrameTracker.this.mWaitForFinishTimedOut == null
+                    || FrameTracker.this.mMetricsFinalized) {
                 return;
             }
-            if (FrameTracker.this.mSurfaceControl != null && FrameTracker.this.mSurfaceControl.isValid()) {
-                SurfaceControl.Transaction.sendSurfaceFlushJankData(FrameTracker.this.mSurfaceControl);
+            if (FrameTracker.this.mSurfaceControl != null
+                    && FrameTracker.this.mSurfaceControl.isValid()) {
+                SurfaceControl.Transaction.sendSurfaceFlushJankData(
+                        FrameTracker.this.mSurfaceControl);
             }
             if (this.mFlushAttempts < 3) {
                 delay = 60;
@@ -301,12 +332,14 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
             } else {
                 FrameTracker frameTracker = FrameTracker.this;
                 final String str = this.val$name;
-                frameTracker.mWaitForFinishTimedOut = new Runnable() { // from class: com.android.internal.jank.FrameTracker$2$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        FrameTracker.AnonymousClass2.this.lambda$run$0(str);
-                    }
-                };
+                frameTracker.mWaitForFinishTimedOut =
+                        new Runnable() { // from class:
+                                         // com.android.internal.jank.FrameTracker$2$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                FrameTracker.AnonymousClass2.this.lambda$run$0(str);
+                            }
+                        };
                 delay = TimeUnit.SECONDS.toMillis(10L);
             }
             FrameTracker.this.mHandler.postDelayed(FrameTracker.this.mWaitForFinishTimedOut, delay);
@@ -327,7 +360,8 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
         this.mCancelled = true;
         markEvent("FT#cancel", reason);
         if (this.mTracingStarted) {
-            Trace.asyncTraceForTrackEnd(4096L, this.mConfig.getSessionName(), (int) this.mBeginVsyncId);
+            Trace.asyncTraceForTrackEnd(
+                    4096L, this.mConfig.getSessionName(), (int) this.mBeginVsyncId);
         }
         removeObservers();
         notifyCujEvent(InteractionJankMonitor.ACTION_SESSION_CANCEL, reason);
@@ -341,7 +375,10 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
                 Trace.instantForTrack(4096L, this.mConfig.getSessionName(), event);
                 return;
             }
-            throw new IllegalArgumentException(TextUtils.formatSimple("The length of the trace event description <%s> exceeds %d", event, 127));
+            throw new IllegalArgumentException(
+                    TextUtils.formatSimple(
+                            "The length of the trace event description <%s> exceeds %d",
+                            event, 127));
         }
     }
 
@@ -354,12 +391,14 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
 
     @Override // android.view.SurfaceControl.OnJankDataListener
     public void onJankDataAvailable(final SurfaceControl.JankData[] jankData) {
-        postCallback(new Runnable() { // from class: com.android.internal.jank.FrameTracker$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                FrameTracker.this.lambda$onJankDataAvailable$0(jankData);
-            }
-        });
+        postCallback(
+                new Runnable() { // from class:
+                                 // com.android.internal.jank.FrameTracker$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        FrameTracker.this.lambda$onJankDataAvailable$0(jankData);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -376,7 +415,10 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
                     info.jankType = jankStat.jankType;
                     info.refreshRate = refreshRate;
                 } else {
-                    this.mJankInfos.put((int) jankStat.frameVsyncId, JankInfo.createFromSurfaceControlCallback(jankStat.frameVsyncId, jankStat.jankType, refreshRate));
+                    this.mJankInfos.put(
+                            (int) jankStat.frameVsyncId,
+                            JankInfo.createFromSurfaceControlCallback(
+                                    jankStat.frameVsyncId, jankStat.jankType, refreshRate));
                 }
             }
         }
@@ -397,12 +439,14 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
 
     @Override // android.graphics.HardwareRendererObserver.OnFrameMetricsAvailableListener
     public void onFrameMetricsAvailable(int dropCountSinceLastInvocation) {
-        postCallback(new Runnable() { // from class: com.android.internal.jank.FrameTracker$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                FrameTracker.this.lambda$onFrameMetricsAvailable$1();
-            }
-        });
+        postCallback(
+                new Runnable() { // from class:
+                                 // com.android.internal.jank.FrameTracker$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        FrameTracker.this.lambda$onFrameMetricsAvailable$1();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -422,7 +466,10 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
             info.totalDurationNanos = totalDurationNanos;
             info.isFirstFrame = isFirstFrame;
         } else {
-            this.mJankInfos.put((int) frameVsyncId, JankInfo.createFromHwuiCallback(frameVsyncId, totalDurationNanos, isFirstFrame));
+            this.mJankInfos.put(
+                    (int) frameVsyncId,
+                    JankInfo.createFromHwuiCallback(
+                            frameVsyncId, totalDurationNanos, isFirstFrame));
         }
         processJankInfos();
     }
@@ -431,7 +478,10 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
         if (this.mEndVsyncId == -1) {
             return false;
         }
-        JankInfo last = this.mJankInfos.size() == 0 ? null : this.mJankInfos.valueAt(this.mJankInfos.size() - 1);
+        JankInfo last =
+                this.mJankInfos.size() == 0
+                        ? null
+                        : this.mJankInfos.valueAt(this.mJankInfos.size() - 1);
         if (last == null || last.frameVsyncId < this.mEndVsyncId) {
             return false;
         }
@@ -534,7 +584,11 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
                     }
                     boolean missedFrame3 = missedFrame2;
                     z = true;
-                    if ((info.jankType & 1) == 0 && (info.jankType & 2) == 0 && (info.jankType & 4) == 0 && (info.jankType & 32) == 0 && (info.jankType & 16) == 0) {
+                    if ((info.jankType & 1) == 0
+                            && (info.jankType & 2) == 0
+                            && (info.jankType & 4) == 0
+                            && (info.jankType & 32) == 0
+                            && (info.jankType & 16) == 0) {
                         totalFramesCount = totalFramesCount3;
                         missedFrame = missedFrame3;
                     } else {
@@ -547,18 +601,28 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
                         missedAppFramesCount3++;
                         successiveMissedFramesCount++;
                     } else {
-                        int maxSuccessiveMissedFramesCount3 = Math.max(maxSuccessiveMissedFramesCount2, successiveMissedFramesCount);
+                        int maxSuccessiveMissedFramesCount3 =
+                                Math.max(
+                                        maxSuccessiveMissedFramesCount2,
+                                        successiveMissedFramesCount);
                         successiveMissedFramesCount = 0;
                         maxSuccessiveMissedFramesCount2 = maxSuccessiveMissedFramesCount3;
                     }
                     int maxSuccessiveMissedFramesCount4 = info.refreshRate;
-                    if (maxSuccessiveMissedFramesCount4 != 0 && info.refreshRate != successiveMissedFramesCount2) {
-                        successiveMissedFramesCount2 = successiveMissedFramesCount2 == 0 ? info.refreshRate : 1;
+                    if (maxSuccessiveMissedFramesCount4 != 0
+                            && info.refreshRate != successiveMissedFramesCount2) {
+                        successiveMissedFramesCount2 =
+                                successiveMissedFramesCount2 == 0 ? info.refreshRate : 1;
                     }
                     if (!this.mSurfaceOnly && !info.hwuiCallbackFired) {
                         missedFramesCount2 = missedAppFramesCount3;
                         markEvent("FT#MissedHWUICallback", info.frameVsyncId);
-                        Log.w(TAG, "Missing HWUI jank callback for vsyncId: " + info.frameVsyncId + ", CUJ=" + name3);
+                        Log.w(
+                                TAG,
+                                "Missing HWUI jank callback for vsyncId: "
+                                        + info.frameVsyncId
+                                        + ", CUJ="
+                                        + name3);
                     } else {
                         missedFramesCount2 = missedAppFramesCount3;
                     }
@@ -585,7 +649,12 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
                         maxFrameTimeNanos3 = maxFrameTimeNanos7;
                         long maxFrameTimeNanos8 = info.frameVsyncId;
                         markEvent("FT#MissedSFCallback", maxFrameTimeNanos8);
-                        Log.w(TAG, "Missing SF jank callback for vsyncId: " + info.frameVsyncId + ", CUJ=" + name3);
+                        Log.w(
+                                TAG,
+                                "Missing SF jank callback for vsyncId: "
+                                        + info.frameVsyncId
+                                        + ", CUJ="
+                                        + name3);
                     } else {
                         maxFrameTimeNanos3 = maxFrameTimeNanos7;
                     }
@@ -599,16 +668,20 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
             z2 = z;
             maxFrameTimeNanos4 = maxFrameTimeNanos3;
         }
-        int maxSuccessiveMissedFramesCount5 = Math.max(maxSuccessiveMissedFramesCount2, successiveMissedFramesCount);
+        int maxSuccessiveMissedFramesCount5 =
+                Math.max(maxSuccessiveMissedFramesCount2, successiveMissedFramesCount);
         Trace.traceCounter(4096L, name + "#missedFrames", missedAppFramesCount3);
         Trace.traceCounter(4096L, name + "#missedAppFrames", missedAppFramesCount2);
         Trace.traceCounter(4096L, name + "#missedSfFrames", missedSfFramesCount);
         Trace.traceCounter(4096L, name + "#totalFrames", totalFramesCount2);
         int missedSfFramesCount5 = missedSfFramesCount;
         int refreshRate5 = refreshRate;
-        Trace.traceCounter(4096L, name + "#maxFrameTimeMillis", (int) (maxFrameTimeNanos / 1000000));
-        Trace.traceCounter(4096L, name + "#maxSuccessiveMissedFrames", maxSuccessiveMissedFramesCount5);
-        if (this.mListener != null && shouldTriggerPerfetto(missedAppFramesCount3, (int) maxFrameTimeNanos)) {
+        Trace.traceCounter(
+                4096L, name + "#maxFrameTimeMillis", (int) (maxFrameTimeNanos / 1000000));
+        Trace.traceCounter(
+                4096L, name + "#maxSuccessiveMissedFrames", maxSuccessiveMissedFramesCount5);
+        if (this.mListener != null
+                && shouldTriggerPerfetto(missedAppFramesCount3, (int) maxFrameTimeNanos)) {
             this.mListener.triggerPerfetto(this.mConfig);
         }
         if (!this.mConfig.logToStatsd()) {
@@ -626,13 +699,36 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
             missedFramesCount = missedFramesCount5;
             maxSuccessiveMissedFramesCount = maxSuccessiveMissedFramesCount5;
             name2 = name;
-            this.mStatsLog.write(305, this.mDisplayId, refreshRate5, this.mConfig.getStatsdInteractionType(), totalFramesCount2, missedAppFramesCount3, maxFrameTimeNanos2, missedSfFramesCount2, missedAppFramesCount2, maxSuccessiveMissedFramesCount5);
+            this.mStatsLog.write(
+                    305,
+                    this.mDisplayId,
+                    refreshRate5,
+                    this.mConfig.getStatsdInteractionType(),
+                    totalFramesCount2,
+                    missedAppFramesCount3,
+                    maxFrameTimeNanos2,
+                    missedSfFramesCount2,
+                    missedAppFramesCount2,
+                    maxSuccessiveMissedFramesCount5);
         }
         try {
             StringBuilder LogStr = new StringBuilder();
             try {
                 try {
-                    LogStr.append("CUJ=").append(name2).append("/").append(totalFramesCount2).append("/").append(missedAppFramesCount).append("/").append(missedSfFramesCount2).append("/").append(missedFramesCount).append("/").append(maxFrameTimeNanos2 / 1000000).append("/").append(maxSuccessiveMissedFramesCount);
+                    LogStr.append("CUJ=")
+                            .append(name2)
+                            .append("/")
+                            .append(totalFramesCount2)
+                            .append("/")
+                            .append(missedAppFramesCount)
+                            .append("/")
+                            .append(missedSfFramesCount2)
+                            .append("/")
+                            .append(missedFramesCount)
+                            .append("/")
+                            .append(maxFrameTimeNanos2 / 1000000)
+                            .append("/")
+                            .append(maxSuccessiveMissedFramesCount);
                     PerfLog.d(27, LogStr.toString());
                 } catch (Exception e) {
                     e = e;
@@ -655,8 +751,16 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
     }
 
     private boolean shouldTriggerPerfetto(int missedFramesCount, int maxFrameTimeNanos) {
-        boolean overMissedFramesThreshold = this.mTraceThresholdMissedFrames != -1 && missedFramesCount >= this.mTraceThresholdMissedFrames;
-        boolean overFrameTimeThreshold = (this.mSurfaceOnly || this.mTraceThresholdFrameTimeMillis == -1 || maxFrameTimeNanos < this.mTraceThresholdFrameTimeMillis * 1000000) ? false : true;
+        boolean overMissedFramesThreshold =
+                this.mTraceThresholdMissedFrames != -1
+                        && missedFramesCount >= this.mTraceThresholdMissedFrames;
+        boolean overFrameTimeThreshold =
+                (this.mSurfaceOnly
+                                || this.mTraceThresholdFrameTimeMillis == -1
+                                || maxFrameTimeNanos
+                                        < this.mTraceThresholdFrameTimeMillis * 1000000)
+                        ? false
+                        : true;
         return overMissedFramesThreshold || overFrameTimeThreshold;
     }
 
@@ -740,13 +844,15 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
         }
 
         int dipToPx(int dip) {
-            DisplayMetrics displayMetrics = this.mViewRoot.mContext.getResources().getDisplayMetrics();
+            DisplayMetrics displayMetrics =
+                    this.mViewRoot.mContext.getResources().getDisplayMetrics();
             return (int) ((displayMetrics.density * dip) + 0.5f);
         }
     }
 
     public static class SurfaceControlWrapper {
-        public void addJankStatsListener(SurfaceControl.OnJankDataListener listener, SurfaceControl surfaceControl) {
+        public void addJankStatsListener(
+                SurfaceControl.OnJankDataListener listener, SurfaceControl surfaceControl) {
             SurfaceControl.addJankDataListener(listener, surfaceControl);
         }
 
@@ -774,8 +880,28 @@ public class FrameTracker extends SurfaceControl.OnJankDataListener implements H
             this.mDisplayResolutionTracker = displayResolutionTracker;
         }
 
-        public void write(int code, int displayId, int refreshRate, int arg1, long arg2, long arg3, long arg4, long arg5, long arg6, long arg7) {
-            FrameworkStatsLog.write(code, arg1, arg2, arg3, arg4, arg5, arg6, arg7, this.mDisplayResolutionTracker.getResolution(displayId), refreshRate);
+        public void write(
+                int code,
+                int displayId,
+                int refreshRate,
+                int arg1,
+                long arg2,
+                long arg3,
+                long arg4,
+                long arg5,
+                long arg6,
+                long arg7) {
+            FrameworkStatsLog.write(
+                    code,
+                    arg1,
+                    arg2,
+                    arg3,
+                    arg4,
+                    arg5,
+                    arg6,
+                    arg7,
+                    this.mDisplayResolutionTracker.getResolution(displayId),
+                    refreshRate);
         }
     }
 }

@@ -1,12 +1,10 @@
 package android.content.res;
 
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
 /* loaded from: classes.dex */
 class DrawableCache extends ThemedResourceCache<Drawable.ConstantState> {
-    DrawableCache() {
-    }
+    DrawableCache() {}
 
     public Drawable getInstance(long key, Resources resources, Resources.Theme theme) {
         Drawable.ConstantState entry = get(key, theme);

@@ -7,9 +7,8 @@ import android.location.Location;
 /* loaded from: classes2.dex */
 public abstract class GeofenceHardwareMonitorCallback {
     @Deprecated
-    public void onMonitoringSystemChange(int monitoringType, boolean available, Location location) {
-    }
+    public void onMonitoringSystemChange(
+            int monitoringType, boolean available, Location location) {}
 
-    public void onMonitoringSystemChange(GeofenceHardwareMonitorEvent event) {
-    }
+    public void onMonitoringSystemChange(GeofenceHardwareMonitorEvent event) {}
 }

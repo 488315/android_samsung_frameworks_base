@@ -37,13 +37,19 @@ public class FeatureFlagsFake extends FeatureFlags {
     }
 
     @Override // android.flags.FeatureFlags
-    protected void syncInternal(Set<Flag<?>> dirtyFlags) {
-    }
+    protected void syncInternal(Set<Flag<?>> dirtyFlags) {}
 
     /* JADX WARN: Multi-variable type inference failed */
     public void setFlagValue(BooleanFlagBase booleanFlagBase, boolean value) {
-        if (!(booleanFlagBase instanceof DynamicBooleanFlag) && this.mReadFlags.contains(booleanFlagBase)) {
-            throw new RuntimeException("You can not set the value of a flag after it has been read. Tried to set " + booleanFlagBase + " to " + value + " but it already " + this.mFlagValues.get(booleanFlagBase));
+        if (!(booleanFlagBase instanceof DynamicBooleanFlag)
+                && this.mReadFlags.contains(booleanFlagBase)) {
+            throw new RuntimeException(
+                    "You can not set the value of a flag after it has been read. Tried to set "
+                            + booleanFlagBase
+                            + " to "
+                            + value
+                            + " but it already "
+                            + this.mFlagValues.get(booleanFlagBase));
         }
         this.mFlagValues.put(booleanFlagBase, Boolean.valueOf(value));
         if (booleanFlagBase instanceof DynamicBooleanFlag) {
@@ -53,7 +59,11 @@ public class FeatureFlagsFake extends FeatureFlags {
 
     private boolean requireFlag(BooleanFlagBase flag) {
         if (!this.mFlagValues.containsKey(flag)) {
-            throw new IllegalStateException("Tried to access " + flag + " in test but no overrided specified. You must call #setFlagValue for each flag read in a test.");
+            throw new IllegalStateException(
+                    "Tried to access "
+                            + flag
+                            + " in test but no overrided specified. You must call #setFlagValue for"
+                            + " each flag read in a test.");
         }
         this.mReadFlags.add(flag);
         return this.mFlagValues.get(flag).booleanValue();

@@ -3,9 +3,12 @@ package com.samsung.android.server.audio;
 import android.content.Context;
 import android.media.AudioSystem;
 import android.util.Log;
+
 import com.android.server.audio.AudioSystemAdapter;
+
 import com.samsung.android.game.SemGameManager;
 import com.samsung.android.server.audio.utils.AudioUtils;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -28,7 +31,9 @@ public final class AudioGameManager {
             try {
                 Iterator it = AudioGameManager.this.mSemGameManager.getGameList().iterator();
                 while (it.hasNext()) {
-                    int uidForPackage = AudioUtils.getUidForPackage(AudioGameManager.this.mContext, (String) it.next());
+                    int uidForPackage =
+                            AudioUtils.getUidForPackage(
+                                    AudioGameManager.this.mContext, (String) it.next());
                     if (uidForPackage != 0) {
                         AudioGameManager.this.addGameUid(uidForPackage, false);
                         if (AudioGameManager.this.mUidList.size() >= 256) {

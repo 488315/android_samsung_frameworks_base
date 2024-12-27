@@ -18,7 +18,8 @@ public final /* synthetic */ class ShortcutService$$ExternalSyntheticLambda4 imp
                 ((ShortcutPackage) obj).refreshPinnedFlags();
                 break;
             case 1:
-                ((ShortcutUser) obj).forAllPackageItems(new ShortcutService$$ExternalSyntheticLambda4(8));
+                ((ShortcutUser) obj)
+                        .forAllPackageItems(new ShortcutService$$ExternalSyntheticLambda4(8));
                 break;
             case 2:
                 ((ShortcutPackageItem) obj).refreshPackageSignatureAndSave();
@@ -27,7 +28,8 @@ public final /* synthetic */ class ShortcutService$$ExternalSyntheticLambda4 imp
                 ((ShortcutLauncher) obj).ensurePackageInfo();
                 break;
             case 4:
-                ((ShortcutUser) obj).forAllPackageItems(new ShortcutService$$ExternalSyntheticLambda4(9));
+                ((ShortcutUser) obj)
+                        .forAllPackageItems(new ShortcutService$$ExternalSyntheticLambda4(9));
                 break;
             case 5:
                 ((ShortcutPackageItem) obj).refreshPackageSignatureAndSave();

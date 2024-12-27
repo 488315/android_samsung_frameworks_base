@@ -3,7 +3,7 @@ package com.android.server.desktopmode;
 import android.content.ComponentName;
 import android.os.IBinder;
 import android.os.RemoteException;
-import com.android.server.desktopmode.UiManager;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.IDesktopModeUiService;
 
@@ -14,7 +14,8 @@ public final /* synthetic */ class UiManager$1$$ExternalSyntheticLambda0 impleme
     public final /* synthetic */ UiManager.AnonymousClass1 f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ UiManager$1$$ExternalSyntheticLambda0(UiManager.AnonymousClass1 anonymousClass1, Object obj, int i) {
+    public /* synthetic */ UiManager$1$$ExternalSyntheticLambda0(
+            UiManager.AnonymousClass1 anonymousClass1, Object obj, int i) {
         this.$r8$classId = i;
         this.f$0 = anonymousClass1;
         this.f$1 = obj;
@@ -27,14 +28,18 @@ public final /* synthetic */ class UiManager$1$$ExternalSyntheticLambda0 impleme
                 UiManager.AnonymousClass1 anonymousClass1 = this.f$0;
                 ComponentName componentName = (ComponentName) this.f$1;
                 anonymousClass1.getClass();
-                Log.w("[DMS]UiManager", "Null binding of '" + componentName + "', try reconnecting");
+                Log.w(
+                        "[DMS]UiManager",
+                        "Null binding of '" + componentName + "', try reconnecting");
                 UiManager.this.retryConnectionWithBackoff();
                 break;
             case 1:
                 UiManager.AnonymousClass1 anonymousClass12 = this.f$0;
                 ComponentName componentName2 = (ComponentName) this.f$1;
                 anonymousClass12.getClass();
-                Log.w("[DMS]UiManager", "Binding died of '" + componentName2 + "', try reconnecting");
+                Log.w(
+                        "[DMS]UiManager",
+                        "Binding died of '" + componentName2 + "', try reconnecting");
                 UiManager.this.retryConnectionWithBackoff();
                 break;
             default:
@@ -50,7 +55,9 @@ public final /* synthetic */ class UiManager$1$$ExternalSyntheticLambda0 impleme
                         iBinder.linkToDeath(UiManager.this.mDeathRecipient, 0);
                         UiManager.this.mService = IDesktopModeUiService.Stub.asInterface(iBinder);
                         if (DesktopModeFeature.DEBUG) {
-                            Log.d("[DMS]UiManager", "onServiceConnected(), mService=" + UiManager.this.mService);
+                            Log.d(
+                                    "[DMS]UiManager",
+                                    "onServiceConnected(), mService=" + UiManager.this.mService);
                         }
                         UiManager.this.mPendingUiCommands.flushCommands();
                         break;

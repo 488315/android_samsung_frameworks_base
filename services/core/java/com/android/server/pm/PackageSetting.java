@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseArray;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageHidden;
 import com.android.internal.pm.parsing.pkg.AndroidPackageInternal;
 import com.android.internal.util.AnnotationValidations;
@@ -27,6 +28,9 @@ import com.android.server.utils.SnapshotCache;
 import com.android.server.utils.Watchable;
 import com.android.server.utils.WatchedArrayMap;
 import com.android.server.utils.WatchedArraySet;
+
+import libcore.util.EmptyArray;
+
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -38,7 +42,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import libcore.util.EmptyArray;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -166,7 +169,10 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
         this.pkg = packageSetting.pkg;
         this.mPath = packageSetting.mPath;
         this.mPathString = packageSetting.mPathString;
-        this.mOldPaths = packageSetting.mOldPaths == null ? null : new LinkedHashSet(packageSetting.mOldPaths);
+        this.mOldPaths =
+                packageSetting.mOldPaths == null
+                        ? null
+                        : new LinkedHashSet(packageSetting.mOldPaths);
         this.mPrimaryCpuAbi = packageSetting.mPrimaryCpuAbi;
         this.mSecondaryCpuAbi = packageSetting.mSecondaryCpuAbi;
         this.mCpuAbiOverride = packageSetting.mCpuAbiOverride;
@@ -190,21 +196,29 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
         int[] iArr = packageSetting.mSplitRevisionCodes;
         this.mSplitRevisionCodes = iArr != null ? Arrays.copyOf(iArr, iArr.length) : null;
         String[] strArr2 = packageSetting.usesSdkLibraries;
-        this.usesSdkLibraries = strArr2 != null ? (String[]) Arrays.copyOf(strArr2, strArr2.length) : null;
+        this.usesSdkLibraries =
+                strArr2 != null ? (String[]) Arrays.copyOf(strArr2, strArr2.length) : null;
         long[] jArr = packageSetting.usesSdkLibrariesVersionsMajor;
         this.usesSdkLibrariesVersionsMajor = jArr != null ? Arrays.copyOf(jArr, jArr.length) : null;
         boolean[] zArr = packageSetting.usesSdkLibrariesOptional;
         this.usesSdkLibrariesOptional = zArr != null ? Arrays.copyOf(zArr, zArr.length) : null;
         String[] strArr3 = packageSetting.usesStaticLibraries;
-        this.usesStaticLibraries = strArr3 != null ? (String[]) Arrays.copyOf(strArr3, strArr3.length) : null;
+        this.usesStaticLibraries =
+                strArr3 != null ? (String[]) Arrays.copyOf(strArr3, strArr3.length) : null;
         long[] jArr2 = packageSetting.usesStaticLibrariesVersions;
-        this.usesStaticLibrariesVersions = jArr2 != null ? Arrays.copyOf(jArr2, jArr2.length) : null;
+        this.usesStaticLibrariesVersions =
+                jArr2 != null ? Arrays.copyOf(jArr2, jArr2.length) : null;
         this.mUserStates.clear();
         for (int i = 0; i < packageSetting.mUserStates.size(); i++) {
             if (z) {
-                this.mUserStates.put(packageSetting.mUserStates.keyAt(i), (PackageUserStateImpl) ((PackageUserStateImpl) packageSetting.mUserStates.valueAt(i)).mSnapshot.snapshot());
+                this.mUserStates.put(
+                        packageSetting.mUserStates.keyAt(i),
+                        (PackageUserStateImpl)
+                                ((PackageUserStateImpl) packageSetting.mUserStates.valueAt(i))
+                                        .mSnapshot.snapshot());
             } else {
-                PackageUserStateImpl packageUserStateImpl = (PackageUserStateImpl) packageSetting.mUserStates.valueAt(i);
+                PackageUserStateImpl packageUserStateImpl =
+                        (PackageUserStateImpl) packageSetting.mUserStates.valueAt(i);
                 packageUserStateImpl.mWatchable = this;
                 this.mUserStates.put(packageSetting.mUserStates.keyAt(i), packageUserStateImpl);
             }
@@ -213,16 +227,20 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
         PackageStateUnserialized packageStateUnserialized = this.pkgState;
         PackageStateUnserialized packageStateUnserialized2 = packageSetting.pkgState;
         packageStateUnserialized.getClass();
-        packageStateUnserialized.hiddenUntilInstalled = packageStateUnserialized2.hiddenUntilInstalled;
+        packageStateUnserialized.hiddenUntilInstalled =
+                packageStateUnserialized2.hiddenUntilInstalled;
         if (!packageStateUnserialized2.usesLibraryInfos.isEmpty()) {
-            packageStateUnserialized.usesLibraryInfos = new ArrayList(packageStateUnserialized2.usesLibraryInfos);
+            packageStateUnserialized.usesLibraryInfos =
+                    new ArrayList(packageStateUnserialized2.usesLibraryInfos);
         }
         if (!packageStateUnserialized2.usesLibraryFiles.isEmpty()) {
-            packageStateUnserialized.usesLibraryFiles = new ArrayList(packageStateUnserialized2.usesLibraryFiles);
+            packageStateUnserialized.usesLibraryFiles =
+                    new ArrayList(packageStateUnserialized2.usesLibraryFiles);
         }
         packageStateUnserialized.updatedSystemApp = packageStateUnserialized2.updatedSystemApp;
         packageStateUnserialized.apkInUpdatedApex = packageStateUnserialized2.apkInUpdatedApex;
-        packageStateUnserialized.lastPackageUsageTimeInMills = packageStateUnserialized2.lastPackageUsageTimeInMills;
+        packageStateUnserialized.lastPackageUsageTimeInMills =
+                packageStateUnserialized2.lastPackageUsageTimeInMills;
         packageStateUnserialized.overrideSeInfo = packageStateUnserialized2.overrideSeInfo;
         packageStateUnserialized.seInfo = packageStateUnserialized2.seInfo;
         packageStateUnserialized.mApexModuleName = packageStateUnserialized2.mApexModuleName;
@@ -337,7 +355,9 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
 
     @Override // com.android.server.pm.pkg.PackageState
     public final Map getMimeGroups() {
-        return CollectionUtils.isEmpty(this.mimeGroups) ? Collections.emptyMap() : Collections.unmodifiableMap(this.mimeGroups);
+        return CollectionUtils.isEmpty(this.mimeGroups)
+                ? Collections.emptyMap()
+                : Collections.unmodifiableMap(this.mimeGroups);
     }
 
     public final int[] getNotInstalledUserIds() {
@@ -390,7 +410,10 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
     @Override // com.android.server.pm.pkg.PackageState
     public final String getPrimaryCpuAbi() {
         AndroidPackageHidden androidPackageHidden;
-        return (!TextUtils.isEmpty(this.mPrimaryCpuAbi) || (androidPackageHidden = this.pkg) == null) ? this.mPrimaryCpuAbi : androidPackageHidden.getPrimaryCpuAbi();
+        return (!TextUtils.isEmpty(this.mPrimaryCpuAbi)
+                        || (androidPackageHidden = this.pkg) == null)
+                ? this.mPrimaryCpuAbi
+                : androidPackageHidden.getPrimaryCpuAbi();
     }
 
     @Override // com.android.server.pm.pkg.PackageStateInternal
@@ -418,7 +441,10 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
     @Override // com.android.server.pm.pkg.PackageState
     public final String getSecondaryCpuAbi() {
         AndroidPackageHidden androidPackageHidden;
-        return (!TextUtils.isEmpty(this.mSecondaryCpuAbi) || (androidPackageHidden = this.pkg) == null) ? this.mSecondaryCpuAbi : androidPackageHidden.getSecondaryCpuAbi();
+        return (!TextUtils.isEmpty(this.mSecondaryCpuAbi)
+                        || (androidPackageHidden = this.pkg) == null)
+                ? this.mSecondaryCpuAbi
+                : androidPackageHidden.getSecondaryCpuAbi();
     }
 
     @Override // com.android.server.pm.pkg.PackageStateInternal
@@ -466,7 +492,8 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
 
     @Override // com.android.server.pm.pkg.PackageState
     public final PackageUserState getStateForUser(UserHandle userHandle) {
-        PackageUserState packageUserState = (PackageUserState) this.mUserStates.get(userHandle.getIdentifier());
+        PackageUserState packageUserState =
+                (PackageUserState) this.mUserStates.get(userHandle.getIdentifier());
         return packageUserState == null ? PackageUserState.DEFAULT : packageUserState;
     }
 
@@ -484,7 +511,8 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
         return readUserState(i).getUninstallReason();
     }
 
-    @Override // com.android.server.pm.pkg.PackageStateInternal, com.android.server.pm.pkg.PackageState
+    @Override // com.android.server.pm.pkg.PackageStateInternal,
+              // com.android.server.pm.pkg.PackageState
     public final SparseArray getUserStates() {
         return this.mUserStates;
     }
@@ -682,8 +710,10 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
         return modifyUserState;
     }
 
-    public boolean overrideNonLocalizedLabelAndIcon(ComponentName componentName, String str, Integer num, int i) {
-        boolean overrideLabelAndIcon = modifyUserState(i).overrideLabelAndIcon(componentName, str, num);
+    public boolean overrideNonLocalizedLabelAndIcon(
+            ComponentName componentName, String str, Integer num, int i) {
+        boolean overrideLabelAndIcon =
+                modifyUserState(i).overrideLabelAndIcon(componentName, str, num);
         onChanged$2();
         return overrideLabelAndIcon;
     }
@@ -725,13 +755,18 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
     }
 
     public final PackageUserStateInternal readUserState(int i) {
-        PackageUserStateInternal packageUserStateInternal = (PackageUserStateInternal) this.mUserStates.get(i);
-        return packageUserStateInternal == null ? PackageUserStateInternal.DEFAULT : packageUserStateInternal;
+        PackageUserStateInternal packageUserStateInternal =
+                (PackageUserStateInternal) this.mUserStates.get(i);
+        return packageUserStateInternal == null
+                ? PackageUserStateInternal.DEFAULT
+                : packageUserStateInternal;
     }
 
     public PackageSetting removeOldPath(File file) {
         LinkedHashSet linkedHashSet;
-        if (file != null && (linkedHashSet = this.mOldPaths) != null && linkedHashSet.remove(file)) {
+        if (file != null
+                && (linkedHashSet = this.mOldPaths) != null
+                && linkedHashSet.remove(file)) {
             onChanged$2();
         }
         return this;
@@ -742,7 +777,8 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
         WatchedArraySet watchedArraySet = modifyUserStateComponents.mDisabledComponentsWatched;
         boolean remove = watchedArraySet != null ? watchedArraySet.remove(str) : false;
         WatchedArraySet watchedArraySet2 = modifyUserStateComponents.mEnabledComponentsWatched;
-        boolean remove2 = remove | (watchedArraySet2 != null ? watchedArraySet2.remove(str) : false);
+        boolean remove2 =
+                remove | (watchedArraySet2 != null ? watchedArraySet2.remove(str) : false);
         if (remove2) {
             onChanged$2();
         }
@@ -755,9 +791,12 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
         WatchedArraySet watchedArraySet2 = modifyUserStateComponents.mDisabledComponentsWatched;
         boolean z = false;
         for (int size = watchedArraySet.mStorage.size() - 1; size >= 0; size--) {
-            if (!AndroidPackageUtils.hasComponentClassName(this.pkg, (String) watchedArraySet.mStorage.valueAt(size))) {
+            if (!AndroidPackageUtils.hasComponentClassName(
+                    this.pkg, (String) watchedArraySet.mStorage.valueAt(size))) {
                 Object removeAt = watchedArraySet.mStorage.removeAt(size);
-                if (watchedArraySet.mWatching && (removeAt instanceof Watchable) && !watchedArraySet.mStorage.contains(removeAt)) {
+                if (watchedArraySet.mWatching
+                        && (removeAt instanceof Watchable)
+                        && !watchedArraySet.mStorage.contains(removeAt)) {
                     ((Watchable) removeAt).unregisterObserver(watchedArraySet.mObserver);
                 }
                 watchedArraySet.dispatchChange(watchedArraySet);
@@ -765,9 +804,12 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
             }
         }
         for (int size2 = watchedArraySet2.mStorage.size() - 1; size2 >= 0; size2--) {
-            if (!AndroidPackageUtils.hasComponentClassName(this.pkg, (String) watchedArraySet2.mStorage.valueAt(size2))) {
+            if (!AndroidPackageUtils.hasComponentClassName(
+                    this.pkg, (String) watchedArraySet2.mStorage.valueAt(size2))) {
                 Object removeAt2 = watchedArraySet2.mStorage.removeAt(size2);
-                if (watchedArraySet2.mWatching && (removeAt2 instanceof Watchable) && !watchedArraySet2.mStorage.contains(removeAt2)) {
+                if (watchedArraySet2.mWatching
+                        && (removeAt2 instanceof Watchable)
+                        && !watchedArraySet2.mStorage.contains(removeAt2)) {
                     ((Watchable) removeAt2).unregisterObserver(watchedArraySet2.mObserver);
                 }
                 watchedArraySet2.dispatchChange(watchedArraySet2);
@@ -815,7 +857,8 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
         if (i == -1) {
             int size = this.mUserStates.size();
             for (int i2 = 0; i2 < size; i2++) {
-                PackageUserStateImpl packageUserStateImpl = (PackageUserStateImpl) this.mUserStates.valueAt(i2);
+                PackageUserStateImpl packageUserStateImpl =
+                        (PackageUserStateImpl) this.mUserStates.valueAt(i2);
                 packageUserStateImpl.mFirstInstallTimeMillis = j;
                 packageUserStateImpl.onChanged$4();
             }
@@ -864,7 +907,29 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
         onChanged$2();
     }
 
-    public final void setUserState(int i, long j, long j2, int i2, boolean z, boolean z2, boolean z3, boolean z4, int i3, ArrayMap arrayMap, boolean z5, boolean z6, String str, ArraySet arraySet, ArraySet arraySet2, int i4, int i5, String str2, String str3, long j3, int i6, ArchiveState archiveState) {
+    public final void setUserState(
+            int i,
+            long j,
+            long j2,
+            int i2,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            int i3,
+            ArrayMap arrayMap,
+            boolean z5,
+            boolean z6,
+            String str,
+            ArraySet arraySet,
+            ArraySet arraySet2,
+            int i4,
+            int i5,
+            String str2,
+            String str3,
+            long j3,
+            int i6,
+            ArchiveState archiveState) {
         PackageUserStateImpl modifyUserState = modifyUserState(i);
         if (arrayMap == null) {
             modifyUserState.getClass();
@@ -914,7 +979,8 @@ public final class PackageSetting extends SettingBase implements PackageStateInt
         modifyUserState.mFirstInstallTimeMillis = j3;
         modifyUserState.onChanged$4();
         modifyUserState.mMinAspectRatio = i6;
-        AnnotationValidations.validate(PackageManager.UserMinAspectRatio.class, (Annotation) null, i6);
+        AnnotationValidations.validate(
+                PackageManager.UserMinAspectRatio.class, (Annotation) null, i6);
         modifyUserState.onChanged$4();
         modifyUserState.mArchiveState = archiveState;
         modifyUserState.onChanged$4();

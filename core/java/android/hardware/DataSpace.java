@@ -54,27 +54,21 @@ public final class DataSpace {
     public static final int TRANSFER_UNSPECIFIED = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ColorDataSpace {
-    }
+    public @interface ColorDataSpace {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DataSpaceRange {
-    }
+    public @interface DataSpaceRange {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DataSpaceStandard {
-    }
+    public @interface DataSpaceStandard {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DataSpaceTransfer {
-    }
+    public @interface DataSpaceTransfer {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NamedDataSpace {
-    }
+    public @interface NamedDataSpace {}
 
-    private DataSpace() {
-    }
+    private DataSpace() {}
 
     public static int pack(int standard, int transfer, int range) {
         if ((4128768 & standard) != standard) {

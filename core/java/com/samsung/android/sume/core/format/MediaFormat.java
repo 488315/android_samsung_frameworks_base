@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.format;
 
 import android.graphics.Rect;
+
 import com.samsung.android.sume.core.types.CodecType;
 import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.ColorSpace;
@@ -8,6 +9,7 @@ import com.samsung.android.sume.core.types.DataType;
 import com.samsung.android.sume.core.types.FlipType;
 import com.samsung.android.sume.core.types.MediaType;
 import com.samsung.android.sume.core.types.SplitType;
+
 import java.io.Serializable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -27,8 +29,7 @@ public interface MediaFormat extends Serializable, Cloneable {
     public static final int ICC = 2;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MetadataKey {
-    }
+    public @interface MetadataKey {}
 
     float bytePerPixel();
 
@@ -127,7 +128,9 @@ public interface MediaFormat extends Serializable, Cloneable {
     }
 
     static MediaFormat metaOf(Object... args) {
-        return of(MediaType.META, Stream.concat(Stream.of(DataType.U8C1), Arrays.stream(args)).toArray());
+        return of(
+                MediaType.META,
+                Stream.concat(Stream.of(DataType.U8C1), Arrays.stream(args)).toArray());
     }
 
     static MediaFormat gainMapOf(Object... args) {
@@ -175,7 +178,9 @@ public interface MediaFormat extends Serializable, Cloneable {
     }
 
     static MutableMediaFormat mutableMetaOf(Object... args) {
-        return mutableOf(MediaType.META, Stream.concat(Stream.of(DataType.U8C1), Arrays.stream(args)).toArray());
+        return mutableOf(
+                MediaType.META,
+                Stream.concat(Stream.of(DataType.U8C1), Arrays.stream(args)).toArray());
     }
 
     static MutableMediaFormat mutableGainMapOf(Object... args) {
@@ -203,24 +208,45 @@ public interface MediaFormat extends Serializable, Cloneable {
                 final List<MutableMediaFormat> planes = new ArrayList<>();
                 if (mediaFormat.getColorFormat().isYuv()) {
                     final DataType depth = mediaFormat.getDataType().depth();
-                    final Shape chromaShape = mediaFormat.getShape().toMutableShape().setRows(mediaFormat.getRows() >> 1).setCols(mediaFormat.getCols() >> 1).setChannels(mediaFormat.getColorFormat().numberOfChromaChannels()).toShape();
+                    final Shape chromaShape =
+                            mediaFormat
+                                    .getShape()
+                                    .toMutableShape()
+                                    .setRows(mediaFormat.getRows() >> 1)
+                                    .setCols(mediaFormat.getCols() >> 1)
+                                    .setChannels(
+                                            mediaFormat.getColorFormat().numberOfChromaChannels())
+                                    .toShape();
                     planes.add(mutableImageOf(DataType.of(depth, 1), mediaFormat.getShape()));
-                    IntStream.range(1, mediaFormat.getColorFormat().numberOfPlanes()).forEach(new IntConsumer() { // from class: com.samsung.android.sume.core.format.MediaFormat$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            planes.add(MediaFormat.mutableImageOf(depth, chromaShape));
-                        }
-                    });
-                    return (List) planes.stream().map(new Function() { // from class: com.samsung.android.sume.core.format.MediaFormat$$ExternalSyntheticLambda1
-                        @Override // java.util.function.Function
-                        public final Object apply(Object obj) {
-                            return MediaFormat.lambda$getPlanes$1((MutableMediaFormat) obj);
-                        }
-                    }).collect(Collectors.toList());
+                    IntStream.range(1, mediaFormat.getColorFormat().numberOfPlanes())
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                                        // com.samsung.android.sume.core.format.MediaFormat$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            planes.add(
+                                                    MediaFormat.mutableImageOf(depth, chromaShape));
+                                        }
+                                    });
+                    return (List)
+                            planes.stream()
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.sume.core.format.MediaFormat$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return MediaFormat.lambda$getPlanes$1(
+                                                            (MutableMediaFormat) obj);
+                                                }
+                                            })
+                                    .collect(Collectors.toList());
                 }
-                throw new UnsupportedOperationException("not support yet for planar except yuv format");
+                throw new UnsupportedOperationException(
+                        "not support yet for planar except yuv format");
             }
-            return new ArrayList<MediaFormat>() { // from class: com.samsung.android.sume.core.format.MediaFormat.1
+            return new ArrayList<
+                    MediaFormat>() { // from class:
+                                     // com.samsung.android.sume.core.format.MediaFormat.1
                 {
                     add(MediaFormat.this);
                 }

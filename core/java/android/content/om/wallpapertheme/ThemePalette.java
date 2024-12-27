@@ -3,6 +3,7 @@ package android.content.om.wallpapertheme;
 import android.content.om.WallpaperThemeConstants;
 import android.os.FileUtils;
 import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,7 +42,8 @@ public class ThemePalette {
         return this.mMonetPaletteGG.get(index).intValue();
     }
 
-    public void setPalette(List<Integer> wallpaperColorSS, List<Integer> wallpaperColorGG, boolean isGray) {
+    public void setPalette(
+            List<Integer> wallpaperColorSS, List<Integer> wallpaperColorGG, boolean isGray) {
         this.mMonetPaletteSS = wallpaperColorSS;
         this.mMonetPaletteGG = wallpaperColorGG;
         this.mIsGray = isGray;

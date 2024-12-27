@@ -2,10 +2,6 @@ package android.companion.virtual;
 
 import android.Manifest;
 import android.app.ActivityThread;
-import android.companion.virtual.IVirtualDevice;
-import android.companion.virtual.IVirtualDeviceActivityListener;
-import android.companion.virtual.IVirtualDeviceListener;
-import android.companion.virtual.IVirtualDeviceSoundEffectListener;
 import android.content.AttributionSource;
 import android.hardware.display.IVirtualDisplayCallback;
 import android.hardware.display.VirtualDisplayConfig;
@@ -16,15 +12,28 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.text.TextUtils;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface IVirtualDeviceManager extends IInterface {
     public static final String DESCRIPTOR = "android.companion.virtual.IVirtualDeviceManager";
 
-    IVirtualDevice createVirtualDevice(IBinder iBinder, AttributionSource attributionSource, int i, VirtualDeviceParams virtualDeviceParams, IVirtualDeviceActivityListener iVirtualDeviceActivityListener, IVirtualDeviceSoundEffectListener iVirtualDeviceSoundEffectListener) throws RemoteException;
+    IVirtualDevice createVirtualDevice(
+            IBinder iBinder,
+            AttributionSource attributionSource,
+            int i,
+            VirtualDeviceParams virtualDeviceParams,
+            IVirtualDeviceActivityListener iVirtualDeviceActivityListener,
+            IVirtualDeviceSoundEffectListener iVirtualDeviceSoundEffectListener)
+            throws RemoteException;
 
-    int createVirtualDisplay(VirtualDisplayConfig virtualDisplayConfig, IVirtualDisplayCallback iVirtualDisplayCallback, IVirtualDevice iVirtualDevice, String str) throws RemoteException;
+    int createVirtualDisplay(
+            VirtualDisplayConfig virtualDisplayConfig,
+            IVirtualDisplayCallback iVirtualDisplayCallback,
+            IVirtualDevice iVirtualDevice,
+            String str)
+            throws RemoteException;
 
     List<String> getAllPersistentDeviceIds() throws RemoteException;
 
@@ -48,13 +57,22 @@ public interface IVirtualDeviceManager extends IInterface {
 
     void playSoundEffect(int i, int i2) throws RemoteException;
 
-    void registerVirtualDeviceListener(IVirtualDeviceListener iVirtualDeviceListener) throws RemoteException;
+    void registerVirtualDeviceListener(IVirtualDeviceListener iVirtualDeviceListener)
+            throws RemoteException;
 
-    void unregisterVirtualDeviceListener(IVirtualDeviceListener iVirtualDeviceListener) throws RemoteException;
+    void unregisterVirtualDeviceListener(IVirtualDeviceListener iVirtualDeviceListener)
+            throws RemoteException;
 
     public static class Default implements IVirtualDeviceManager {
         @Override // android.companion.virtual.IVirtualDeviceManager
-        public IVirtualDevice createVirtualDevice(IBinder token, AttributionSource attributionSource, int associationId, VirtualDeviceParams params, IVirtualDeviceActivityListener activityListener, IVirtualDeviceSoundEffectListener soundEffectListener) throws RemoteException {
+        public IVirtualDevice createVirtualDevice(
+                IBinder token,
+                AttributionSource attributionSource,
+                int associationId,
+                VirtualDeviceParams params,
+                IVirtualDeviceActivityListener activityListener,
+                IVirtualDeviceSoundEffectListener soundEffectListener)
+                throws RemoteException {
             return null;
         }
 
@@ -69,12 +87,12 @@ public interface IVirtualDeviceManager extends IInterface {
         }
 
         @Override // android.companion.virtual.IVirtualDeviceManager
-        public void registerVirtualDeviceListener(IVirtualDeviceListener listener) throws RemoteException {
-        }
+        public void registerVirtualDeviceListener(IVirtualDeviceListener listener)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDeviceManager
-        public void unregisterVirtualDeviceListener(IVirtualDeviceListener listener) throws RemoteException {
-        }
+        public void unregisterVirtualDeviceListener(IVirtualDeviceListener listener)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDeviceManager
         public int getDeviceIdForDisplayId(int displayId) throws RemoteException {
@@ -82,7 +100,8 @@ public interface IVirtualDeviceManager extends IInterface {
         }
 
         @Override // android.companion.virtual.IVirtualDeviceManager
-        public CharSequence getDisplayNameForPersistentDeviceId(String persistentDeviceId) throws RemoteException {
+        public CharSequence getDisplayNameForPersistentDeviceId(String persistentDeviceId)
+                throws RemoteException {
             return null;
         }
 
@@ -97,7 +116,12 @@ public interface IVirtualDeviceManager extends IInterface {
         }
 
         @Override // android.companion.virtual.IVirtualDeviceManager
-        public int createVirtualDisplay(VirtualDisplayConfig virtualDisplayConfig, IVirtualDisplayCallback callback, IVirtualDevice virtualDevice, String packageName) throws RemoteException {
+        public int createVirtualDisplay(
+                VirtualDisplayConfig virtualDisplayConfig,
+                IVirtualDisplayCallback callback,
+                IVirtualDevice virtualDevice,
+                String packageName)
+                throws RemoteException {
             return 0;
         }
 
@@ -112,8 +136,7 @@ public interface IVirtualDeviceManager extends IInterface {
         }
 
         @Override // android.companion.virtual.IVirtualDeviceManager
-        public void playSoundEffect(int deviceId, int effectType) throws RemoteException {
-        }
+        public void playSoundEffect(int deviceId, int effectType) throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDeviceManager
         public boolean isVirtualDeviceOwnedMirrorDisplay(int displayId) throws RemoteException {
@@ -131,7 +154,7 @@ public interface IVirtualDeviceManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualDeviceManager {
+    public abstract static class Stub extends Binder implements IVirtualDeviceManager {
         static final int TRANSACTION_createVirtualDevice = 1;
         static final int TRANSACTION_createVirtualDisplay = 10;
         static final int TRANSACTION_getAllPersistentDeviceIds = 15;
@@ -159,7 +182,9 @@ public interface IVirtualDeviceManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IVirtualDeviceManager asInterface(IBinder obj) {
@@ -221,7 +246,8 @@ public interface IVirtualDeviceManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVirtualDeviceManager.DESCRIPTOR);
             }
@@ -232,13 +258,20 @@ public interface IVirtualDeviceManager extends IInterface {
             switch (code) {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
-                    AttributionSource _arg1 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+                    AttributionSource _arg1 =
+                            (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
                     int _arg2 = data.readInt();
-                    VirtualDeviceParams _arg3 = (VirtualDeviceParams) data.readTypedObject(VirtualDeviceParams.CREATOR);
-                    IVirtualDeviceActivityListener _arg4 = IVirtualDeviceActivityListener.Stub.asInterface(data.readStrongBinder());
-                    IVirtualDeviceSoundEffectListener _arg5 = IVirtualDeviceSoundEffectListener.Stub.asInterface(data.readStrongBinder());
+                    VirtualDeviceParams _arg3 =
+                            (VirtualDeviceParams) data.readTypedObject(VirtualDeviceParams.CREATOR);
+                    IVirtualDeviceActivityListener _arg4 =
+                            IVirtualDeviceActivityListener.Stub.asInterface(
+                                    data.readStrongBinder());
+                    IVirtualDeviceSoundEffectListener _arg5 =
+                            IVirtualDeviceSoundEffectListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    IVirtualDevice _result = createVirtualDevice(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5);
+                    IVirtualDevice _result =
+                            createVirtualDevice(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result);
                     return true;
@@ -255,13 +288,15 @@ public interface IVirtualDeviceManager extends IInterface {
                     reply.writeTypedObject(_result3, 1);
                     return true;
                 case 4:
-                    IVirtualDeviceListener _arg03 = IVirtualDeviceListener.Stub.asInterface(data.readStrongBinder());
+                    IVirtualDeviceListener _arg03 =
+                            IVirtualDeviceListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerVirtualDeviceListener(_arg03);
                     reply.writeNoException();
                     return true;
                 case 5:
-                    IVirtualDeviceListener _arg04 = IVirtualDeviceListener.Stub.asInterface(data.readStrongBinder());
+                    IVirtualDeviceListener _arg04 =
+                            IVirtualDeviceListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterVirtualDeviceListener(_arg04);
                     reply.writeNoException();
@@ -301,9 +336,13 @@ public interface IVirtualDeviceManager extends IInterface {
                     reply.writeInt(_result7);
                     return true;
                 case 10:
-                    VirtualDisplayConfig _arg09 = (VirtualDisplayConfig) data.readTypedObject(VirtualDisplayConfig.CREATOR);
-                    IVirtualDisplayCallback _arg13 = IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
-                    IVirtualDevice _arg22 = IVirtualDevice.Stub.asInterface(data.readStrongBinder());
+                    VirtualDisplayConfig _arg09 =
+                            (VirtualDisplayConfig)
+                                    data.readTypedObject(VirtualDisplayConfig.CREATOR);
+                    IVirtualDisplayCallback _arg13 =
+                            IVirtualDisplayCallback.Stub.asInterface(data.readStrongBinder());
+                    IVirtualDevice _arg22 =
+                            IVirtualDevice.Stub.asInterface(data.readStrongBinder());
                     String _arg32 = data.readString();
                     data.enforceNoDataAvail();
                     int _result8 = createVirtualDisplay(_arg09, _arg13, _arg22, _arg32);
@@ -365,7 +404,14 @@ public interface IVirtualDeviceManager extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
-            public IVirtualDevice createVirtualDevice(IBinder token, AttributionSource attributionSource, int associationId, VirtualDeviceParams params, IVirtualDeviceActivityListener activityListener, IVirtualDeviceSoundEffectListener soundEffectListener) throws RemoteException {
+            public IVirtualDevice createVirtualDevice(
+                    IBinder token,
+                    AttributionSource attributionSource,
+                    int associationId,
+                    VirtualDeviceParams params,
+                    IVirtualDeviceActivityListener activityListener,
+                    IVirtualDeviceSoundEffectListener soundEffectListener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -378,7 +424,8 @@ public interface IVirtualDeviceManager extends IInterface {
                     _data.writeStrongInterface(soundEffectListener);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    IVirtualDevice _result = IVirtualDevice.Stub.asInterface(_reply.readStrongBinder());
+                    IVirtualDevice _result =
+                            IVirtualDevice.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -394,7 +441,8 @@ public interface IVirtualDeviceManager extends IInterface {
                     _data.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    List<VirtualDevice> _result = _reply.createTypedArrayList(VirtualDevice.CREATOR);
+                    List<VirtualDevice> _result =
+                            _reply.createTypedArrayList(VirtualDevice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -411,7 +459,8 @@ public interface IVirtualDeviceManager extends IInterface {
                     _data.writeInt(deviceId);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    VirtualDevice _result = (VirtualDevice) _reply.readTypedObject(VirtualDevice.CREATOR);
+                    VirtualDevice _result =
+                            (VirtualDevice) _reply.readTypedObject(VirtualDevice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -420,7 +469,8 @@ public interface IVirtualDeviceManager extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
-            public void registerVirtualDeviceListener(IVirtualDeviceListener listener) throws RemoteException {
+            public void registerVirtualDeviceListener(IVirtualDeviceListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -435,7 +485,8 @@ public interface IVirtualDeviceManager extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
-            public void unregisterVirtualDeviceListener(IVirtualDeviceListener listener) throws RemoteException {
+            public void unregisterVirtualDeviceListener(IVirtualDeviceListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -467,7 +518,8 @@ public interface IVirtualDeviceManager extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
-            public CharSequence getDisplayNameForPersistentDeviceId(String persistentDeviceId) throws RemoteException {
+            public CharSequence getDisplayNameForPersistentDeviceId(String persistentDeviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -475,7 +527,8 @@ public interface IVirtualDeviceManager extends IInterface {
                     _data.writeString(persistentDeviceId);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -519,7 +572,12 @@ public interface IVirtualDeviceManager extends IInterface {
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
-            public int createVirtualDisplay(VirtualDisplayConfig virtualDisplayConfig, IVirtualDisplayCallback callback, IVirtualDevice virtualDevice, String packageName) throws RemoteException {
+            public int createVirtualDisplay(
+                    VirtualDisplayConfig virtualDisplayConfig,
+                    IVirtualDisplayCallback callback,
+                    IVirtualDevice virtualDevice,
+                    String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -623,7 +681,8 @@ public interface IVirtualDeviceManager extends IInterface {
         }
 
         protected void createVirtualDevice_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

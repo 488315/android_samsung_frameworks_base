@@ -25,7 +25,7 @@ public final class NetworkConstants {
     static {
         byte asByte = asByte(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
         FF = asByte;
-        ETHER_ADDR_BROADCAST = new byte[]{asByte, asByte, asByte, asByte, asByte, asByte};
+        ETHER_ADDR_BROADCAST = new byte[] {asByte, asByte, asByte, asByte, asByte, asByte};
     }
 
     private NetworkConstants() {

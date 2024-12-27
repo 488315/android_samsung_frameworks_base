@@ -31,6 +31,7 @@ import android.util.AtomicFile;
 import android.util.Base64;
 import android.util.EventLog;
 import android.util.Slog;
+
 import com.android.internal.content.InstallLocationUtils;
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.util.ArrayUtils;
@@ -44,9 +45,11 @@ import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.LocalManagerRegistry;
 import com.android.server.SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0;
-import com.android.server.pm.Installer;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageStateInternal;
+
+import libcore.io.IoUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -69,7 +72,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.zip.GZIPInputStream;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -91,31 +93,35 @@ public abstract class PackageManagerServiceUtils {
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.pm.PackageManagerServiceUtils$$ExternalSyntheticLambda0] */
     static {
         final int i = 0;
-        REMOVE_IF_APEX_PKG = new Predicate() { // from class: com.android.server.pm.PackageManagerServiceUtils$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                PackageStateInternal packageStateInternal = (PackageStateInternal) obj;
-                switch (i) {
-                    case 0:
-                        return packageStateInternal.getPkg().isApex();
-                    default:
-                        return packageStateInternal.getPkg() == null;
-                }
-            }
-        };
+        REMOVE_IF_APEX_PKG =
+                new Predicate() { // from class:
+                                  // com.android.server.pm.PackageManagerServiceUtils$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        PackageStateInternal packageStateInternal = (PackageStateInternal) obj;
+                        switch (i) {
+                            case 0:
+                                return packageStateInternal.getPkg().isApex();
+                            default:
+                                return packageStateInternal.getPkg() == null;
+                        }
+                    }
+                };
         final int i2 = 1;
-        REMOVE_IF_NULL_PKG = new Predicate() { // from class: com.android.server.pm.PackageManagerServiceUtils$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                PackageStateInternal packageStateInternal = (PackageStateInternal) obj;
-                switch (i2) {
-                    case 0:
-                        return packageStateInternal.getPkg().isApex();
-                    default:
-                        return packageStateInternal.getPkg() == null;
-                }
-            }
-        };
+        REMOVE_IF_NULL_PKG =
+                new Predicate() { // from class:
+                                  // com.android.server.pm.PackageManagerServiceUtils$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        PackageStateInternal packageStateInternal = (PackageStateInternal) obj;
+                        switch (i2) {
+                            case 0:
+                                return packageStateInternal.getPkg().isApex();
+                            default:
+                                return packageStateInternal.getPkg() == null;
+                        }
+                    }
+                };
     }
 
     public static String buildVerificationRootHashString(String str, String[] strArr) {
@@ -147,9 +153,12 @@ public abstract class PackageManagerServiceUtils {
         return sb.toString();
     }
 
-    public static boolean canJoinSharedUserId(String str, SigningDetails signingDetails, SharedUserSetting sharedUserSetting, int i) {
+    public static boolean canJoinSharedUserId(
+            String str, SigningDetails signingDetails, SharedUserSetting sharedUserSetting, int i) {
         SigningDetails signingDetails2 = sharedUserSetting.signatures.mSigningDetails;
-        boolean z = signingDetails.checkCapability(signingDetails2, 2) || signingDetails2.checkCapability(signingDetails, 2);
+        boolean z =
+                signingDetails.checkCapability(signingDetails2, 2)
+                        || signingDetails2.checkCapability(signingDetails, 2);
         if (z && i != 0) {
             return true;
         }
@@ -168,8 +177,14 @@ public abstract class PackageManagerServiceUtils {
             while (it.hasNext()) {
                 PackageStateInternal packageStateInternal = (PackageStateInternal) it.next();
                 SigningDetails signingDetails3 = packageStateInternal.getSigningDetails();
-                if (signingDetails.hasAncestor(signingDetails3) && !signingDetails.checkCapability(signingDetails3, 2)) {
-                    StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str, " revoked the sharedUserId capability from the signing key used to sign ");
+                if (signingDetails.hasAncestor(signingDetails3)
+                        && !signingDetails.checkCapability(signingDetails3, 2)) {
+                    StringBuilder m =
+                            DumpUtils$$ExternalSyntheticOutline0.m(
+                                    "Package ",
+                                    str,
+                                    " revoked the sharedUserId capability from the signing key used"
+                                        + " to sign ");
                     m.append(packageStateInternal.getPackageName());
                     Slog.d("PackageManager", m.toString());
                     return false;
@@ -179,21 +194,35 @@ public abstract class PackageManagerServiceUtils {
         return true;
     }
 
-    public static void checkDowngrade(long j, int i, String[] strArr, int[] iArr, PackageInfoLite packageInfoLite) {
+    public static void checkDowngrade(
+            long j, int i, String[] strArr, int[] iArr, PackageInfoLite packageInfoLite) {
         if (packageInfoLite.getLongVersionCode() < j) {
-            throw new PackageManagerException(-25, "Update version code " + packageInfoLite.versionCode + " is older than current " + j);
+            throw new PackageManagerException(
+                    -25,
+                    "Update version code "
+                            + packageInfoLite.versionCode
+                            + " is older than current "
+                            + j);
         }
         if (packageInfoLite.getLongVersionCode() != j) {
             return;
         }
         if (packageInfoLite.baseRevisionCode < i) {
-            throw new PackageManagerException(-25, "Update base revision code " + packageInfoLite.baseRevisionCode + " is older than current " + i);
+            throw new PackageManagerException(
+                    -25,
+                    "Update base revision code "
+                            + packageInfoLite.baseRevisionCode
+                            + " is older than current "
+                            + i);
         }
         if (ArrayUtils.isEmpty(packageInfoLite.splitNames)) {
             return;
         }
         if (strArr.length != iArr.length) {
-            throw new PackageManagerException(-25, "Current split names and the split revision codes are not 1:1 mapping.This indicates that the package info data has been corrupted.");
+            throw new PackageManagerException(
+                    -25,
+                    "Current split names and the split revision codes are not 1:1 mapping.This"
+                        + " indicates that the package info data has been corrupted.");
         }
         int i2 = 0;
         while (true) {
@@ -204,7 +233,9 @@ public abstract class PackageManagerServiceUtils {
             String str = strArr2[i2];
             int indexOf = ArrayUtils.indexOf(strArr, str);
             if (indexOf != -1 && packageInfoLite.splitRevisionCodes[i2] < iArr[indexOf]) {
-                StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Update split ", str, " revision code ");
+                StringBuilder m =
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "Update split ", str, " revision code ");
                 m.append(packageInfoLite.splitRevisionCodes[i2]);
                 m.append(" is older than current ");
                 m.append(iArr[indexOf]);
@@ -214,9 +245,11 @@ public abstract class PackageManagerServiceUtils {
         }
     }
 
-    public static boolean comparePackageSignatures(PackageSetting packageSetting, SigningDetails signingDetails) {
+    public static boolean comparePackageSignatures(
+            PackageSetting packageSetting, SigningDetails signingDetails) {
         SigningDetails signingDetails2 = packageSetting.signatures.mSigningDetails;
-        return signingDetails2 == SigningDetails.UNKNOWN || compareSignatures(signingDetails2, signingDetails) == 0;
+        return signingDetails2 == SigningDetails.UNKNOWN
+                || compareSignatures(signingDetails2, signingDetails) == 0;
     }
 
     public static int compareSignatureArrays(Signature[] signatureArr, Signature[] signatureArr2) {
@@ -243,17 +276,25 @@ public abstract class PackageManagerServiceUtils {
         return arraySet.equals(arraySet2) ? 0 : -3;
     }
 
-    public static int compareSignatures(SigningDetails signingDetails, SigningDetails signingDetails2) {
-        return compareSignatureArrays(signingDetails.getSignatures(), signingDetails2.getSignatures());
+    public static int compareSignatures(
+            SigningDetails signingDetails, SigningDetails signingDetails2) {
+        return compareSignatureArrays(
+                signingDetails.getSignatures(), signingDetails2.getSignatures());
     }
 
     public static void copyFile(File file, String str, String str2) {
         if (!FileUtils.isValidExtFilename(str2)) {
-            throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Invalid filename: ", str2));
+            throw new IllegalArgumentException(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            "Invalid filename: ", str2));
         }
         Slog.d("PackageManager", "Copying " + str + " to " + str2);
         File file2 = new File(file, str2);
-        FileDescriptor open = Os.open(file2.getAbsolutePath(), OsConstants.O_RDWR | OsConstants.O_CREAT, FrameworkStatsLog.VBMETA_DIGEST_REPORTED);
+        FileDescriptor open =
+                Os.open(
+                        file2.getAbsolutePath(),
+                        OsConstants.O_RDWR | OsConstants.O_CREAT,
+                        FrameworkStatsLog.VBMETA_DIGEST_REPORTED);
         Os.chmod(file2.getAbsolutePath(), FrameworkStatsLog.VBMETA_DIGEST_REPORTED);
         FileInputStream fileInputStream = null;
         try {
@@ -277,7 +318,9 @@ public abstract class PackageManagerServiceUtils {
             return -3;
         }
         try {
-            ParseResult parsePackageLite = ApkLiteParseUtils.parsePackageLite(ParseTypeImpl.forDefaultParsing().reset(), new File(str), 0);
+            ParseResult parsePackageLite =
+                    ApkLiteParseUtils.parsePackageLite(
+                            ParseTypeImpl.forDefaultParsing().reset(), new File(str), 0);
             if (parsePackageLite.isError()) {
                 Slog.w("PackageManager", "Failed to parse package at ".concat(str));
                 return parsePackageLite.getErrorCode();
@@ -288,7 +331,10 @@ public abstract class PackageManagerServiceUtils {
                 return 1;
             }
             for (int i = 0; i < packageLite.getSplitNames().length; i++) {
-                copyFile(file, packageLite.getSplitApkPaths()[i], "split_" + packageLite.getSplitNames()[i] + ".apk");
+                copyFile(
+                        file,
+                        packageLite.getSplitApkPaths()[i],
+                        "split_" + packageLite.getSplitNames()[i] + ".apk");
             }
             return 1;
         } catch (ErrnoException | IOException e) {
@@ -299,7 +345,12 @@ public abstract class PackageManagerServiceUtils {
 
     public static int decompressFile(File file, File file2) {
         if (PackageManagerService.DEBUG_COMPRESSION) {
-            Slog.i("PackageManager", "Decompress file; src: " + file.getAbsolutePath() + ", dst: " + file2.getAbsolutePath());
+            Slog.i(
+                    "PackageManager",
+                    "Decompress file; src: "
+                            + file.getAbsolutePath()
+                            + ", dst: "
+                            + file2.getAbsolutePath());
         }
         AtomicFile atomicFile = new AtomicFile(file2);
         FileOutputStream fileOutputStream = null;
@@ -316,7 +367,12 @@ public abstract class PackageManagerServiceUtils {
             } finally {
             }
         } catch (IOException unused) {
-            logCriticalInfo(6, "Failed to decompress file; src: " + file.getAbsolutePath() + ", dst: " + file2.getAbsolutePath());
+            logCriticalInfo(
+                    6,
+                    "Failed to decompress file; src: "
+                            + file.getAbsolutePath()
+                            + ", dst: "
+                            + file2.getAbsolutePath());
             atomicFile.failWrite(fileOutputStream);
             return -110;
         }
@@ -349,13 +405,18 @@ public abstract class PackageManagerServiceUtils {
         }
     }
 
-    public static void enforceShellRestriction(UserManagerInternal userManagerInternal, int i, int i2) {
+    public static void enforceShellRestriction(
+            UserManagerInternal userManagerInternal, int i, int i2) {
         if (i == 2000) {
             if (i2 >= 0 && userManagerInternal.hasUserRestriction("no_debugging_features", i2)) {
-                throw new SecurityException(VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "Shell does not have permission to access user "));
+                throw new SecurityException(
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                i2, "Shell does not have permission to access user "));
             }
             if (i2 < 0) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i2, "Unable to check shell permission for user ", "\n\t");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                i2, "Unable to check shell permission for user ", "\n\t");
                 m.append(Debug.getCallers(3));
                 Slog.e("PackageManager", m.toString());
             }
@@ -364,7 +425,9 @@ public abstract class PackageManagerServiceUtils {
 
     public static void enforceSystemOrPhoneCaller(int i, String str) {
         if (i != 1001 && i != 1000) {
-            throw new SecurityException(SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0.m(i, "Cannot call ", str, " from UID "));
+            throw new SecurityException(
+                    SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0
+                            .m(i, "Cannot call ", str, " from UID "));
         }
     }
 
@@ -375,23 +438,27 @@ public abstract class PackageManagerServiceUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:52:0x0148, code lost:
-    
-        return !r9.get();
-     */
+
+       return !r9.get();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:80:0x0140, code lost:
-    
-        if (r9.get() == false) goto L72;
-     */
+
+       if (r9.get() == false) goto L72;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean extractAppMetadataFromApk(com.android.server.pm.pkg.AndroidPackage r9, java.lang.String r10, boolean r11) {
+    public static boolean extractAppMetadataFromApk(
+            com.android.server.pm.pkg.AndroidPackage r9, java.lang.String r10, boolean r11) {
         /*
             Method dump skipped, instructions count: 339
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.PackageManagerServiceUtils.extractAppMetadataFromApk(com.android.server.pm.pkg.AndroidPackage, java.lang.String, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.PackageManagerServiceUtils.extractAppMetadataFromApk(com.android.server.pm.pkg.AndroidPackage,"
+                    + " java.lang.String, boolean):boolean");
     }
 
     public static File[] getCompressedFiles(String str) {
@@ -403,12 +470,18 @@ public abstract class PackageManagerServiceUtils {
         }
         File parentFile = file.getParentFile();
         if (parentFile == null) {
-            BootReceiver$$ExternalSyntheticOutline0.m("Unable to determine stub parent dir for codePath: ", str, "PackageManager");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    "Unable to determine stub parent dir for codePath: ", str, "PackageManager");
             return null;
         }
-        File[] listFiles = new File(parentFile, name.substring(0, lastIndexOf)).listFiles(new AnonymousClass1());
+        File[] listFiles =
+                new File(parentFile, name.substring(0, lastIndexOf))
+                        .listFiles(new AnonymousClass1());
         if (PackageManagerService.DEBUG_COMPRESSION && listFiles != null && listFiles.length > 0) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("getCompressedFiles[", str, "]: "), Arrays.toString(listFiles), "PackageManager");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    DumpUtils$$ExternalSyntheticOutline0.m("getCompressedFiles[", str, "]: "),
+                    Arrays.toString(listFiles),
+                    "PackageManager");
         }
         return listFiles;
     }
@@ -420,12 +493,16 @@ public abstract class PackageManagerServiceUtils {
         }
         long lastModified = new File(androidPackage.getBaseApkPath()).lastModified();
         for (int length = androidPackage.getSplitCodePaths().length - 1; length >= 0; length--) {
-            lastModified = Math.max(lastModified, new File(androidPackage.getSplitCodePaths()[length]).lastModified());
+            lastModified =
+                    Math.max(
+                            lastModified,
+                            new File(androidPackage.getSplitCodePaths()[length]).lastModified());
         }
         return lastModified;
     }
 
-    public static PackageInfoLite getMinimalPackageInfo(Context context, PackageLite packageLite, String str, int i, String str2) {
+    public static PackageInfoLite getMinimalPackageInfo(
+            Context context, PackageLite packageLite, String str, int i, String str2) {
         long calculateInstalledSize;
         PackageInfoLite packageInfoLite = new PackageInfoLite();
         if (str == null || packageLite == null) {
@@ -439,7 +516,8 @@ public abstract class PackageManagerServiceUtils {
             calculateInstalledSize = 0;
         } else {
             try {
-                calculateInstalledSize = InstallLocationUtils.calculateInstalledSize(packageLite, str2);
+                calculateInstalledSize =
+                        InstallLocationUtils.calculateInstalledSize(packageLite, str2);
             } catch (IOException unused) {
                 if (file.exists()) {
                     packageInfoLite.recommendedInstallLocation = -2;
@@ -455,7 +533,8 @@ public abstract class PackageManagerServiceUtils {
         sessionParams.sizeBytes = calculateInstalledSize;
         sessionParams.installFlags = i;
         try {
-            int resolveInstallLocation = InstallLocationUtils.resolveInstallLocation(context, sessionParams);
+            int resolveInstallLocation =
+                    InstallLocationUtils.resolveInstallLocation(context, sessionParams);
             packageInfoLite.packageName = packageLite.getPackageName();
             packageInfoLite.splitNames = packageLite.getSplitNames();
             packageInfoLite.versionCode = packageLite.getVersionCode();
@@ -491,7 +570,8 @@ public abstract class PackageManagerServiceUtils {
                 throw new IllegalArgumentException("Not a valid package folder name");
             }
             if (!Objects.equals(name.substring(0, indexOf), str)) {
-                throw new RuntimeException("codepath is off: " + file3.getName() + " (" + str + ")");
+                throw new RuntimeException(
+                        "codepath is off: " + file3.getName() + " (" + str + ")");
             }
         }
         return file3;
@@ -499,7 +579,8 @@ public abstract class PackageManagerServiceUtils {
 
     public static PackageManagerLocal getPackageManagerLocal() {
         try {
-            return (PackageManagerLocal) LocalManagerRegistry.getManagerOrThrow(PackageManagerLocal.class);
+            return (PackageManagerLocal)
+                    LocalManagerRegistry.getManagerOrThrow(PackageManagerLocal.class);
         } catch (LocalManagerRegistry.ManagerNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -553,7 +634,8 @@ public abstract class PackageManagerServiceUtils {
         return i == 1000 || i == 0 || i == 2000;
     }
 
-    public static void linkFilesAndSetModes(Installer installer, String str, File file, File file2, File[] fileArr, int i) {
+    public static void linkFilesAndSetModes(
+            Installer installer, String str, File file, File file2, File[] fileArr, int i) {
         for (File file3 : fileArr) {
             String name = file3.getName();
             File file4 = new File(file, name);
@@ -574,18 +656,26 @@ public abstract class PackageManagerServiceUtils {
                         try {
                             Os.chmod(file5.getAbsolutePath(), i);
                             if (!SELinux.restorecon(file5)) {
-                                Slog.w("PackageManager", "Failed to restorecon for linked file <" + file5 + ">");
+                                Slog.w(
+                                        "PackageManager",
+                                        "Failed to restorecon for linked file <" + file5 + ">");
                             }
                         } catch (ErrnoException e2) {
                             e = e2;
-                            Slog.w("PackageManager", "Failed to set mode for linked file <" + file5 + ">", e);
+                            Slog.w(
+                                    "PackageManager",
+                                    "Failed to set mode for linked file <" + file5 + ">",
+                                    e);
                         }
                     } catch (ErrnoException e3) {
                         e = e3;
                     }
                 } catch (Installer.InstallerException e4) {
                     e = e4;
-                    Slog.w("PackageManager", "Failed to link native library <" + file4 + "> to <" + file5 + ">", e);
+                    Slog.w(
+                            "PackageManager",
+                            "Failed to link native library <" + file4 + "> to <" + file5 + ">",
+                            e);
                 }
             } else if (z) {
                 Slog.d("PackageManager", "Skipping existing linked file <" + file5 + ">");
@@ -595,7 +685,11 @@ public abstract class PackageManagerServiceUtils {
 
     public static void linkFilesToOldDirs(Installer installer, String str, File file, Set set) {
         File[] listFiles;
-        if (set == null || set.isEmpty() || IncrementalManager.isIncrementalPath(file.getPath()) || (listFiles = file.listFiles()) == null || listFiles.length == 0) {
+        if (set == null
+                || set.isEmpty()
+                || IncrementalManager.isIncrementalPath(file.getPath())
+                || (listFiles = file.listFiles()) == null
+                || listFiles.length == 0) {
             return;
         }
         ArrayList arrayList = new ArrayList();
@@ -612,14 +706,21 @@ public abstract class PackageManagerServiceUtils {
         while (it.hasNext()) {
             File file3 = (File) it.next();
             if (file3.exists()) {
-                linkFilesAndSetModes(installer, str, file, file3, fileArr, FrameworkStatsLog.VBMETA_DIGEST_REPORTED);
+                linkFilesAndSetModes(
+                        installer,
+                        str,
+                        file,
+                        file3,
+                        fileArr,
+                        FrameworkStatsLog.VBMETA_DIGEST_REPORTED);
                 linkNativeLibraries(installer, str, file, file3, "lib");
                 linkNativeLibraries(installer, str, file, file3, "lib64");
             }
         }
     }
 
-    public static void linkNativeLibraries(Installer installer, String str, File file, File file2, String str2) {
+    public static void linkNativeLibraries(
+            Installer installer, String str, File file, File file2, String str2) {
         File file3 = new File(file, str2);
         if (file3.exists()) {
             File file4 = new File(file2, str2);
@@ -627,7 +728,10 @@ public abstract class PackageManagerServiceUtils {
                 try {
                     NativeLibraryHelper.createNativeLibrarySubdir(file4);
                 } catch (IOException e) {
-                    Slog.w("PackageManager", "Failed to create native library dir at <" + file4 + ">", e);
+                    Slog.w(
+                            "PackageManager",
+                            "Failed to create native library dir at <" + file4 + ">",
+                            e);
                     return;
                 }
             }
@@ -641,7 +745,10 @@ public abstract class PackageManagerServiceUtils {
                     try {
                         NativeLibraryHelper.createNativeLibrarySubdir(file6);
                     } catch (IOException e2) {
-                        Slog.w("PackageManager", "Failed to create native library subdir at <" + file6 + ">", e2);
+                        Slog.w(
+                                "PackageManager",
+                                "Failed to create native library subdir at <" + file6 + ">",
+                                e2);
                     }
                 }
                 File file7 = new File(file3, file5.getName());
@@ -658,8 +765,12 @@ public abstract class PackageManagerServiceUtils {
         EventLog.writeEvent(3120, str);
         try {
             File settingsProblemFile = getSettingsProblemFile();
-            FastPrintWriter fastPrintWriter = new FastPrintWriter(new FileOutputStream(settingsProblemFile, true));
-            fastPrintWriter.println(new SimpleDateFormat().format(new Date(System.currentTimeMillis())) + ": " + str);
+            FastPrintWriter fastPrintWriter =
+                    new FastPrintWriter(new FileOutputStream(settingsProblemFile, true));
+            fastPrintWriter.println(
+                    new SimpleDateFormat().format(new Date(System.currentTimeMillis()))
+                            + ": "
+                            + str);
             fastPrintWriter.close();
             FileUtils.setPermissions(settingsProblemFile.toString(), 508, -1, -1);
         } catch (IOException unused) {
@@ -678,7 +789,8 @@ public abstract class PackageManagerServiceUtils {
         }
     }
 
-    public static boolean matchSignaturesCompat(String str, PackageSignatures packageSignatures, SigningDetails signingDetails) {
+    public static boolean matchSignaturesCompat(
+            String str, PackageSignatures packageSignatures, SigningDetails signingDetails) {
         ArraySet arraySet = new ArraySet();
         for (Signature signature : packageSignatures.mSigningDetails.getSignatures()) {
             arraySet.add(signature);
@@ -698,12 +810,18 @@ public abstract class PackageManagerServiceUtils {
             return true;
         }
         if (signingDetails.hasPastSigningCertificates()) {
-            logCriticalInfo(4, "Existing package " + str + " has flattened signing certificate chain. Unable to install newer version with rotated signing certificate.");
+            logCriticalInfo(
+                    4,
+                    "Existing package "
+                            + str
+                            + " has flattened signing certificate chain. Unable to install newer"
+                            + " version with rotated signing certificate.");
         }
         return false;
     }
 
-    public static boolean matchSignaturesRecover(String str, SigningDetails signingDetails, SigningDetails signingDetails2, int i) {
+    public static boolean matchSignaturesRecover(
+            String str, SigningDetails signingDetails, SigningDetails signingDetails2, int i) {
         String message;
         try {
         } catch (CertificateException e) {
@@ -741,7 +859,9 @@ public abstract class PackageManagerServiceUtils {
         }
         File createDir = FileUtils.createDir(packageCacheDirectory, str2);
         if (createDir == null) {
-            Slog.wtf("PackageManager", "Cache directory cannot be created - wiping base dir " + packageCacheDirectory);
+            Slog.wtf(
+                    "PackageManager",
+                    "Cache directory cannot be created - wiping base dir " + packageCacheDirectory);
             FileUtils.deleteContentsAndDir(packageCacheDirectory);
             return null;
         }
@@ -749,21 +869,38 @@ public abstract class PackageManagerServiceUtils {
             return createDir;
         }
         Slog.w("PackageManager", "Wiping cache directory because the system partition changed.");
-        if (createDir.lastModified() >= new File(Environment.getRootDirectory(), "framework").lastModified()) {
+        if (createDir.lastModified()
+                >= new File(Environment.getRootDirectory(), "framework").lastModified()) {
             return createDir;
         }
         FileUtils.deleteContents(packageCacheDirectory);
         return FileUtils.createDir(packageCacheDirectory, str2);
     }
 
-    public static boolean verifySignatures(PackageSetting packageSetting, SharedUserSetting sharedUserSetting, PackageSetting packageSetting2, SigningDetails signingDetails, boolean z, boolean z2, boolean z3) {
+    public static boolean verifySignatures(
+            PackageSetting packageSetting,
+            SharedUserSetting sharedUserSetting,
+            PackageSetting packageSetting2,
+            SigningDetails signingDetails,
+            boolean z,
+            boolean z2,
+            boolean z3) {
         boolean z4;
         SigningDetails signingDetails2;
         String str = packageSetting.mName;
         if (packageSetting.signatures.mSigningDetails.getSignatures() != null) {
-            boolean z5 = signingDetails.checkCapability(packageSetting.signatures.mSigningDetails, 1) || packageSetting.signatures.mSigningDetails.checkCapability(signingDetails, 8);
-            if (Flags.extendVbChainToUpdatedApk() && z5 && packageSetting2 != null && (signingDetails2 = packageSetting2.signatures.mSigningDetails) != SigningDetails.UNKNOWN) {
-                if (signingDetails.checkCapability(signingDetails2, 1) || packageSetting2.signatures.mSigningDetails.checkCapability(signingDetails, 8)) {
+            boolean z5 =
+                    signingDetails.checkCapability(packageSetting.signatures.mSigningDetails, 1)
+                            || packageSetting.signatures.mSigningDetails.checkCapability(
+                                    signingDetails, 8);
+            if (Flags.extendVbChainToUpdatedApk()
+                    && z5
+                    && packageSetting2 != null
+                    && (signingDetails2 = packageSetting2.signatures.mSigningDetails)
+                            != SigningDetails.UNKNOWN) {
+                if (signingDetails.checkCapability(signingDetails2, 1)
+                        || packageSetting2.signatures.mSigningDetails.checkCapability(
+                                signingDetails, 8)) {
                     z5 = true;
                 } else {
                     logCriticalInfo(6, "Updated system app mismatches cert on /system: " + str);
@@ -777,13 +914,28 @@ public abstract class PackageManagerServiceUtils {
                 z4 = z5;
             }
             if (!z5 && z2) {
-                z5 = matchSignaturesRecover(str, packageSetting.signatures.mSigningDetails, signingDetails, 1) || matchSignaturesRecover(str, signingDetails, packageSetting.signatures.mSigningDetails, 8);
+                z5 =
+                        matchSignaturesRecover(
+                                        str,
+                                        packageSetting.signatures.mSigningDetails,
+                                        signingDetails,
+                                        1)
+                                || matchSignaturesRecover(
+                                        str,
+                                        signingDetails,
+                                        packageSetting.signatures.mSigningDetails,
+                                        8);
             }
             if (!z5 && z3) {
                 z5 = packageSetting.signatures.mSigningDetails.hasAncestorOrSelf(signingDetails);
             }
             if (!z5) {
-                throw new PackageManagerException(-7, XmlUtils$$ExternalSyntheticOutline0.m("Existing package ", str, " signatures do not match newer version; ignoring!"));
+                throw new PackageManagerException(
+                        -7,
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "Existing package ",
+                                str,
+                                " signatures do not match newer version; ignoring!"));
             }
         } else {
             z4 = false;
@@ -791,20 +943,52 @@ public abstract class PackageManagerServiceUtils {
         if (sharedUserSetting != null) {
             PackageSignatures packageSignatures = sharedUserSetting.signatures;
             if (packageSignatures.mSigningDetails != SigningDetails.UNKNOWN) {
-                boolean canJoinSharedUserId = canJoinSharedUserId(str, signingDetails, sharedUserSetting, packageSetting.signatures.mSigningDetails.getSignatures() != null ? 1 : 0);
+                boolean canJoinSharedUserId =
+                        canJoinSharedUserId(
+                                str,
+                                signingDetails,
+                                sharedUserSetting,
+                                packageSetting.signatures.mSigningDetails.getSignatures() != null
+                                        ? 1
+                                        : 0);
                 if (!canJoinSharedUserId && z) {
-                    canJoinSharedUserId = matchSignaturesCompat(str, packageSignatures, signingDetails);
+                    canJoinSharedUserId =
+                            matchSignaturesCompat(str, packageSignatures, signingDetails);
                 }
                 if (!canJoinSharedUserId && z2) {
-                    boolean z6 = matchSignaturesRecover(str, packageSignatures.mSigningDetails, signingDetails, 2) || matchSignaturesRecover(str, signingDetails, packageSignatures.mSigningDetails, 2);
+                    boolean z6 =
+                            matchSignaturesRecover(
+                                            str,
+                                            packageSignatures.mSigningDetails,
+                                            signingDetails,
+                                            2)
+                                    || matchSignaturesRecover(
+                                            str,
+                                            signingDetails,
+                                            packageSignatures.mSigningDetails,
+                                            2);
                     z4 |= z6;
                     canJoinSharedUserId = z6;
                 }
                 if (!canJoinSharedUserId) {
-                    throw new PackageManagerException(-8, AudioOffloadInfo$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("Package ", str, " has no signatures that match those in shared user "), sharedUserSetting.name, "; ignoring!"));
+                    throw new PackageManagerException(
+                            -8,
+                            AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                    DumpUtils$$ExternalSyntheticOutline0.m(
+                                            "Package ",
+                                            str,
+                                            " has no signatures that match those in shared user "),
+                                    sharedUserSetting.name,
+                                    "; ignoring!"));
                 }
                 if (!signingDetails.hasCommonAncestor(packageSignatures.mSigningDetails)) {
-                    throw new PackageManagerException(-8, XmlUtils$$ExternalSyntheticOutline0.m("Package ", str, " has a signing lineage that diverges from the lineage of the sharedUserId"));
+                    throw new PackageManagerException(
+                            -8,
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    "Package ",
+                                    str,
+                                    " has a signing lineage that diverges from the lineage of the"
+                                        + " sharedUserId"));
                 }
             }
         }

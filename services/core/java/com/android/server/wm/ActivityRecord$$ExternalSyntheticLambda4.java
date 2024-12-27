@@ -1,6 +1,7 @@
 package com.android.server.wm;
 
 import android.view.WindowManager;
+
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,7 +18,8 @@ public final /* synthetic */ class ActivityRecord$$ExternalSyntheticLambda4 impl
         int overrideOrientation;
         switch (this.$r8$classId) {
             case 0:
-                return WindowManager.LayoutParams.mayUseInputMethod(((WindowState) obj).mAttrs.flags);
+                return WindowManager.LayoutParams.mayUseInputMethod(
+                        ((WindowState) obj).mAttrs.flags);
             case 1:
                 ActivityRecord activityRecord = (ActivityRecord) obj;
                 return activityRecord.isVisibleRequested() && !activityRecord.firstWindowDrawn;
@@ -28,7 +30,12 @@ public final /* synthetic */ class ActivityRecord$$ExternalSyntheticLambda4 impl
                 return task.isLeafTask() && task.isFocusable() && !task.inPinnedWindowingMode();
             case 4:
                 ActivityRecord activityRecord2 = (ActivityRecord) obj;
-                return (activityRecord2.finishing || (overrideOrientation = activityRecord2.getOverrideOrientation()) == -2 || overrideOrientation == 3) ? false : true;
+                return (activityRecord2.finishing
+                                || (overrideOrientation = activityRecord2.getOverrideOrientation())
+                                        == -2
+                                || overrideOrientation == 3)
+                        ? false
+                        : true;
             case 5:
                 return ((ActivityRecord) obj).attachedToProcess();
             default:

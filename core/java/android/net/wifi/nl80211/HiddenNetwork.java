@@ -2,25 +2,28 @@ package android.net.wifi.nl80211;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 
 /* loaded from: classes3.dex */
 public class HiddenNetwork implements Parcelable {
-    public static final Parcelable.Creator<HiddenNetwork> CREATOR = new Parcelable.Creator<HiddenNetwork>() { // from class: android.net.wifi.nl80211.HiddenNetwork.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HiddenNetwork createFromParcel(Parcel in) {
-            HiddenNetwork result = new HiddenNetwork();
-            result.ssid = in.createByteArray();
-            return result;
-        }
+    public static final Parcelable.Creator<HiddenNetwork> CREATOR =
+            new Parcelable.Creator<
+                    HiddenNetwork>() { // from class: android.net.wifi.nl80211.HiddenNetwork.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HiddenNetwork createFromParcel(Parcel in) {
+                    HiddenNetwork result = new HiddenNetwork();
+                    result.ssid = in.createByteArray();
+                    return result;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HiddenNetwork[] newArray(int size) {
-            return new HiddenNetwork[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HiddenNetwork[] newArray(int size) {
+                    return new HiddenNetwork[size];
+                }
+            };
     private static final String TAG = "HiddenNetwork";
     public byte[] ssid;
 

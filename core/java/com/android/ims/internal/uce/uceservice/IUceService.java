@@ -5,24 +5,29 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.ims.internal.uce.common.UceLong;
 import com.android.ims.internal.uce.options.IOptionsListener;
 import com.android.ims.internal.uce.options.IOptionsService;
 import com.android.ims.internal.uce.presence.IPresenceListener;
 import com.android.ims.internal.uce.presence.IPresenceService;
-import com.android.ims.internal.uce.uceservice.IUceListener;
 
 /* loaded from: classes5.dex */
 public interface IUceService extends IInterface {
     @Deprecated
-    int createOptionsService(IOptionsListener iOptionsListener, UceLong uceLong) throws RemoteException;
+    int createOptionsService(IOptionsListener iOptionsListener, UceLong uceLong)
+            throws RemoteException;
 
-    int createOptionsServiceForSubscription(IOptionsListener iOptionsListener, UceLong uceLong, String str) throws RemoteException;
+    int createOptionsServiceForSubscription(
+            IOptionsListener iOptionsListener, UceLong uceLong, String str) throws RemoteException;
 
     @Deprecated
-    int createPresenceService(IPresenceListener iPresenceListener, UceLong uceLong) throws RemoteException;
+    int createPresenceService(IPresenceListener iPresenceListener, UceLong uceLong)
+            throws RemoteException;
 
-    int createPresenceServiceForSubscription(IPresenceListener iPresenceListener, UceLong uceLong, String str) throws RemoteException;
+    int createPresenceServiceForSubscription(
+            IPresenceListener iPresenceListener, UceLong uceLong, String str)
+            throws RemoteException;
 
     void destroyOptionsService(int i) throws RemoteException;
 
@@ -63,32 +68,40 @@ public interface IUceService extends IInterface {
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public int createOptionsService(IOptionsListener optionsListener, UceLong optionsServiceListenerHdl) throws RemoteException {
+        public int createOptionsService(
+                IOptionsListener optionsListener, UceLong optionsServiceListenerHdl)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public int createOptionsServiceForSubscription(IOptionsListener optionsListener, UceLong optionsServiceListenerHdl, String iccId) throws RemoteException {
+        public int createOptionsServiceForSubscription(
+                IOptionsListener optionsListener, UceLong optionsServiceListenerHdl, String iccId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public void destroyOptionsService(int optionsServiceHandle) throws RemoteException {
-        }
+        public void destroyOptionsService(int optionsServiceHandle) throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public int createPresenceService(IPresenceListener presenceServiceListener, UceLong presenceServiceListenerHdl) throws RemoteException {
+        public int createPresenceService(
+                IPresenceListener presenceServiceListener, UceLong presenceServiceListenerHdl)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public int createPresenceServiceForSubscription(IPresenceListener presenceServiceListener, UceLong presenceServiceListenerHdl, String iccId) throws RemoteException {
+        public int createPresenceServiceForSubscription(
+                IPresenceListener presenceServiceListener,
+                UceLong presenceServiceListenerHdl,
+                String iccId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public void destroyPresenceService(int presenceServiceHdl) throws RemoteException {
-        }
+        public void destroyPresenceService(int presenceServiceHdl) throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
         public boolean getServiceStatus() throws RemoteException {
@@ -101,7 +114,8 @@ public interface IUceService extends IInterface {
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public IPresenceService getPresenceServiceForSubscription(String iccId) throws RemoteException {
+        public IPresenceService getPresenceServiceForSubscription(String iccId)
+                throws RemoteException {
             return null;
         }
 
@@ -111,7 +125,8 @@ public interface IUceService extends IInterface {
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public IOptionsService getOptionsServiceForSubscription(String iccId) throws RemoteException {
+        public IOptionsService getOptionsServiceForSubscription(String iccId)
+                throws RemoteException {
             return null;
         }
 
@@ -121,8 +136,9 @@ public interface IUceService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUceService {
-        public static final String DESCRIPTOR = "com.android.ims.internal.uce.uceservice.IUceService";
+    public abstract static class Stub extends Binder implements IUceService {
+        public static final String DESCRIPTOR =
+                "com.android.ims.internal.uce.uceservice.IUceService";
         static final int TRANSACTION_createOptionsService = 4;
         static final int TRANSACTION_createOptionsServiceForSubscription = 5;
         static final int TRANSACTION_createPresenceService = 7;
@@ -199,7 +215,8 @@ public interface IUceService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -226,7 +243,8 @@ public interface IUceService extends IInterface {
                     reply.writeBoolean(_result3);
                     return true;
                 case 4:
-                    IOptionsListener _arg02 = IOptionsListener.Stub.asInterface(data.readStrongBinder());
+                    IOptionsListener _arg02 =
+                            IOptionsListener.Stub.asInterface(data.readStrongBinder());
                     UceLong _arg1 = (UceLong) data.readTypedObject(UceLong.CREATOR);
                     data.enforceNoDataAvail();
                     int _result4 = createOptionsService(_arg02, _arg1);
@@ -235,7 +253,8 @@ public interface IUceService extends IInterface {
                     reply.writeTypedObject(_arg1, 1);
                     return true;
                 case 5:
-                    IOptionsListener _arg03 = IOptionsListener.Stub.asInterface(data.readStrongBinder());
+                    IOptionsListener _arg03 =
+                            IOptionsListener.Stub.asInterface(data.readStrongBinder());
                     UceLong _arg12 = (UceLong) data.readTypedObject(UceLong.CREATOR);
                     String _arg2 = data.readString();
                     data.enforceNoDataAvail();
@@ -251,7 +270,8 @@ public interface IUceService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 7:
-                    IPresenceListener _arg05 = IPresenceListener.Stub.asInterface(data.readStrongBinder());
+                    IPresenceListener _arg05 =
+                            IPresenceListener.Stub.asInterface(data.readStrongBinder());
                     UceLong _arg13 = (UceLong) data.readTypedObject(UceLong.CREATOR);
                     data.enforceNoDataAvail();
                     int _result6 = createPresenceService(_arg05, _arg13);
@@ -260,7 +280,8 @@ public interface IUceService extends IInterface {
                     reply.writeTypedObject(_arg13, 1);
                     return true;
                 case 8:
-                    IPresenceListener _arg06 = IPresenceListener.Stub.asInterface(data.readStrongBinder());
+                    IPresenceListener _arg06 =
+                            IPresenceListener.Stub.asInterface(data.readStrongBinder());
                     UceLong _arg14 = (UceLong) data.readTypedObject(UceLong.CREATOR);
                     String _arg22 = data.readString();
                     data.enforceNoDataAvail();
@@ -375,7 +396,9 @@ public interface IUceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
-            public int createOptionsService(IOptionsListener optionsListener, UceLong optionsServiceListenerHdl) throws RemoteException {
+            public int createOptionsService(
+                    IOptionsListener optionsListener, UceLong optionsServiceListenerHdl)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -396,7 +419,11 @@ public interface IUceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
-            public int createOptionsServiceForSubscription(IOptionsListener optionsListener, UceLong optionsServiceListenerHdl, String iccId) throws RemoteException {
+            public int createOptionsServiceForSubscription(
+                    IOptionsListener optionsListener,
+                    UceLong optionsServiceListenerHdl,
+                    String iccId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -433,7 +460,9 @@ public interface IUceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
-            public int createPresenceService(IPresenceListener presenceServiceListener, UceLong presenceServiceListenerHdl) throws RemoteException {
+            public int createPresenceService(
+                    IPresenceListener presenceServiceListener, UceLong presenceServiceListenerHdl)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -454,7 +483,11 @@ public interface IUceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
-            public int createPresenceServiceForSubscription(IPresenceListener presenceServiceListener, UceLong presenceServiceListenerHdl, String iccId) throws RemoteException {
+            public int createPresenceServiceForSubscription(
+                    IPresenceListener presenceServiceListener,
+                    UceLong presenceServiceListenerHdl,
+                    String iccId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -514,7 +547,8 @@ public interface IUceService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    IPresenceService _result = IPresenceService.Stub.asInterface(_reply.readStrongBinder());
+                    IPresenceService _result =
+                            IPresenceService.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -523,7 +557,8 @@ public interface IUceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
-            public IPresenceService getPresenceServiceForSubscription(String iccId) throws RemoteException {
+            public IPresenceService getPresenceServiceForSubscription(String iccId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -531,7 +566,8 @@ public interface IUceService extends IInterface {
                     _data.writeString(iccId);
                     this.mRemote.transact(12, _data, _reply, 0);
                     _reply.readException();
-                    IPresenceService _result = IPresenceService.Stub.asInterface(_reply.readStrongBinder());
+                    IPresenceService _result =
+                            IPresenceService.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -547,7 +583,8 @@ public interface IUceService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(13, _data, _reply, 0);
                     _reply.readException();
-                    IOptionsService _result = IOptionsService.Stub.asInterface(_reply.readStrongBinder());
+                    IOptionsService _result =
+                            IOptionsService.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -556,7 +593,8 @@ public interface IUceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
-            public IOptionsService getOptionsServiceForSubscription(String iccId) throws RemoteException {
+            public IOptionsService getOptionsServiceForSubscription(String iccId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -564,7 +602,8 @@ public interface IUceService extends IInterface {
                     _data.writeString(iccId);
                     this.mRemote.transact(14, _data, _reply, 0);
                     _reply.readException();
-                    IOptionsService _result = IOptionsService.Stub.asInterface(_reply.readStrongBinder());
+                    IOptionsService _result =
+                            IOptionsService.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

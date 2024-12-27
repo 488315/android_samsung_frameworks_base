@@ -11,8 +11,10 @@ public class ViewClippingUtil {
     private static final int CLIP_CLIPPING_SET = 16908905;
     private static final int CLIP_TO_PADDING = 16908908;
 
-    public static void setClippingDeactivated(View transformedView, boolean deactivated, ClippingParameters clippingParameters) {
-        if ((!deactivated && !clippingParameters.isClippingEnablingAllowed(transformedView)) || !(transformedView.getParent() instanceof ViewGroup)) {
+    public static void setClippingDeactivated(
+            View transformedView, boolean deactivated, ClippingParameters clippingParameters) {
+        if ((!deactivated && !clippingParameters.isClippingEnablingAllowed(transformedView))
+                || !(transformedView.getParent() instanceof ViewGroup)) {
             return;
         }
         ViewGroup parent = (ViewGroup) transformedView.getParent();
@@ -68,7 +70,6 @@ public class ViewClippingUtil {
             return !MessagingPropertyAnimator.isAnimatingTranslation(view);
         }
 
-        default void onClippingStateChanged(View view, boolean isClipping) {
-        }
+        default void onClippingStateChanged(View view, boolean isClipping) {}
     }
 }

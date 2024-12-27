@@ -5,7 +5,8 @@ import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
 
 /* loaded from: classes6.dex */
 public interface SecureConfirmStrategy {
-    boolean doActionBeforeSecureConfirm(ActionViewModel actionViewModel, SamsungGlobalActions samsungGlobalActions);
+    boolean doActionBeforeSecureConfirm(
+            ActionViewModel actionViewModel, SamsungGlobalActions samsungGlobalActions);
 
     default boolean isNeedSecureConfirm() {
         return true;

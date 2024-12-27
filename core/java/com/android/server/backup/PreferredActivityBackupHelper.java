@@ -14,13 +14,13 @@ public class PreferredActivityBackupHelper extends BlobBackupHelper {
     private static final String KEY_PREFERRED = "preferred-activity";
     private static final String KEY_DEFAULT_APPS = "default-apps";
 
-    @Deprecated
-    private static final String KEY_INTENT_VERIFICATION = "intent-verification";
+    @Deprecated private static final String KEY_INTENT_VERIFICATION = "intent-verification";
     private static final String KEY_DOMAIN_VERIFICATION = "domain-verification";
-    private static final String[] KEYS = {KEY_PREFERRED, KEY_DEFAULT_APPS, KEY_INTENT_VERIFICATION, KEY_DOMAIN_VERIFICATION};
+    private static final String[] KEYS = {
+        KEY_PREFERRED, KEY_DEFAULT_APPS, KEY_INTENT_VERIFICATION, KEY_DOMAIN_VERIFICATION
+    };
 
-    private @interface Key {
-    }
+    private @interface Key {}
 
     public PreferredActivityBackupHelper(int userId) {
         super(4, KEYS);

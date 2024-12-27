@@ -3,6 +3,7 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -15,8 +16,7 @@ public final class ImsException extends Exception {
     private int mCode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ImsErrorCode {
-    }
+    public @interface ImsErrorCode {}
 
     @SystemApi
     public ImsException(String message) {

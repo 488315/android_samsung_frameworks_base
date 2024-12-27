@@ -1,6 +1,7 @@
 package android.security.keymaster;
 
 import com.android.server.SecureKeyConst;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -217,8 +218,7 @@ public final class KeymasterDefs {
     public static final int KM_ULONG_REP = -1610612736;
     public static final Map<Integer, String> sErrorCodeToString = new HashMap();
 
-    private KeymasterDefs() {
-    }
+    private KeymasterDefs() {}
 
     static {
         sErrorCodeToString.put(0, SecureKeyConst.AT_RESPONSE_OK);
@@ -257,7 +257,8 @@ public final class KeymasterDefs {
         sErrorCodeToString.put(-55, "Caller-provided IV not permitted");
         sErrorCodeToString.put(-57, "Invalid MAC or authentication tag length");
         sErrorCodeToString.put(-66, "Unable to attest device ids");
-        sErrorCodeToString.put(-68, "Requested security level (likely Strongbox) is not available.");
+        sErrorCodeToString.put(
+                -68, "Requested security level (likely Strongbox) is not available.");
         sErrorCodeToString.put(-72, "Device locked");
         sErrorCodeToString.put(-100, "Not implemented");
         sErrorCodeToString.put(-1000, "Unknown error");

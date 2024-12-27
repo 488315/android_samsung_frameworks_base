@@ -76,7 +76,8 @@ public class OutputPort extends FilterPort {
     @Override // android.filterfw.core.FilterPort
     public void pushFrame(Frame frame) {
         if (this.mTargetPort == null) {
-            throw new RuntimeException("Attempting to push frame on unconnected port: " + this + "!");
+            throw new RuntimeException(
+                    "Attempting to push frame on unconnected port: " + this + "!");
         }
         this.mTargetPort.pushFrame(frame);
     }
@@ -85,7 +86,8 @@ public class OutputPort extends FilterPort {
     public void setFrame(Frame frame) {
         assertPortIsOpen();
         if (this.mTargetPort == null) {
-            throw new RuntimeException("Attempting to set frame on unconnected port: " + this + "!");
+            throw new RuntimeException(
+                    "Attempting to set frame on unconnected port: " + this + "!");
         }
         this.mTargetPort.setFrame(frame);
     }

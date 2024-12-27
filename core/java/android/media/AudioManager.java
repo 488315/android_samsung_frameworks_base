@@ -13,26 +13,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.media.AudioAttributes;
-import android.media.AudioFocusRequest;
-import android.media.AudioManager;
-import android.media.AudioRecord;
-import android.media.AudioTrack;
-import android.media.CallbackUtil;
-import android.media.IAudioFocusDispatcher;
-import android.media.IAudioModeDispatcher;
-import android.media.IAudioServerStateDispatcher;
-import android.media.IAudioService;
-import android.media.ICapturePresetDevicesRoleDispatcher;
-import android.media.ICommunicationDeviceDispatcher;
-import android.media.IDevicesForAttributesCallback;
-import android.media.IMuteAwaitConnectionCallback;
-import android.media.IPlaybackConfigDispatcher;
-import android.media.IPreferredMixerAttributesDispatcher;
-import android.media.IRecordingConfigDispatcher;
-import android.media.IStrategyNonDefaultDevicesDispatcher;
-import android.media.IStrategyPreferredDevicesDispatcher;
-import android.media.IStreamAliasingDispatcher;
 import android.media.audiopolicy.AudioPolicy;
 import android.media.audiopolicy.AudioVolumeGroupChangeHandler;
 import android.media.projection.MediaProjection;
@@ -55,13 +35,16 @@ import android.util.IntArray;
 import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
+
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.audio.AudioManagerHelper;
 import com.samsung.android.audio.Rune;
 import com.samsung.android.media.AudioFxHelper;
 import com.samsung.android.media.AudioParameter;
 import com.samsung.android.media.SemAudioSystem;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -89,15 +72,21 @@ public class AudioManager {
     public static final String ACTION_AUDIO_BECOMING_NOISY = "android.media.AUDIO_BECOMING_NOISY";
     public static final String ACTION_HDMI_AUDIO_PLUG = "android.media.action.HDMI_AUDIO_PLUG";
     public static final String ACTION_HEADSET_PLUG = "android.intent.action.HEADSET_PLUG";
-    public static final String ACTION_MICROPHONE_MUTE_CHANGED = "android.media.action.MICROPHONE_MUTE_CHANGED";
+    public static final String ACTION_MICROPHONE_MUTE_CHANGED =
+            "android.media.action.MICROPHONE_MUTE_CHANGED";
 
     @Deprecated
-    public static final String ACTION_SCO_AUDIO_STATE_CHANGED = "android.media.SCO_AUDIO_STATE_CHANGED";
-    public static final String ACTION_SCO_AUDIO_STATE_UPDATED = "android.media.ACTION_SCO_AUDIO_STATE_UPDATED";
-    public static final String ACTION_SPEAKERPHONE_STATE_CHANGED = "android.media.action.SPEAKERPHONE_STATE_CHANGED";
+    public static final String ACTION_SCO_AUDIO_STATE_CHANGED =
+            "android.media.SCO_AUDIO_STATE_CHANGED";
+
+    public static final String ACTION_SCO_AUDIO_STATE_UPDATED =
+            "android.media.ACTION_SCO_AUDIO_STATE_UPDATED";
+    public static final String ACTION_SPEAKERPHONE_STATE_CHANGED =
+            "android.media.action.SPEAKERPHONE_STATE_CHANGED";
 
     @SystemApi
     public static final String ACTION_VOLUME_CHANGED = "android.media.VOLUME_CHANGED_ACTION";
+
     public static final int ADJUST_LOWER = -1;
     public static final int ADJUST_MUTE = -100;
     public static final int ADJUST_RAISE = 1;
@@ -107,14 +96,11 @@ public class AudioManager {
     public static final int AUDIOFOCUS_FLAGS_APPS = 3;
     public static final int AUDIOFOCUS_FLAGS_SYSTEM = 7;
 
-    @SystemApi
-    public static final int AUDIOFOCUS_FLAG_DELAY_OK = 1;
+    @SystemApi public static final int AUDIOFOCUS_FLAG_DELAY_OK = 1;
 
-    @SystemApi
-    public static final int AUDIOFOCUS_FLAG_LOCK = 4;
+    @SystemApi public static final int AUDIOFOCUS_FLAG_LOCK = 4;
 
-    @SystemApi
-    public static final int AUDIOFOCUS_FLAG_PAUSES_ON_DUCKABLE_LOSS = 2;
+    @SystemApi public static final int AUDIOFOCUS_FLAG_PAUSES_ON_DUCKABLE_LOSS = 2;
     public static final int AUDIOFOCUS_FLAG_TEST = 8;
     public static final int AUDIOFOCUS_GAIN = 1;
     public static final int AUDIOFOCUS_GAIN_TRANSIENT = 2;
@@ -197,24 +183,18 @@ public class AudioManager {
     public static final int DEVICE_OUT_WIRED_HEADPHONE = 8;
     public static final int DEVICE_OUT_WIRED_HEADSET = 4;
 
-    @SystemApi
-    public static final int DEVICE_VOLUME_BEHAVIOR_ABSOLUTE = 3;
+    @SystemApi public static final int DEVICE_VOLUME_BEHAVIOR_ABSOLUTE = 3;
 
-    @SystemApi
-    public static final int DEVICE_VOLUME_BEHAVIOR_ABSOLUTE_ADJUST_ONLY = 5;
+    @SystemApi public static final int DEVICE_VOLUME_BEHAVIOR_ABSOLUTE_ADJUST_ONLY = 5;
 
-    @SystemApi
-    public static final int DEVICE_VOLUME_BEHAVIOR_ABSOLUTE_MULTI_MODE = 4;
+    @SystemApi public static final int DEVICE_VOLUME_BEHAVIOR_ABSOLUTE_MULTI_MODE = 4;
 
-    @SystemApi
-    public static final int DEVICE_VOLUME_BEHAVIOR_FIXED = 2;
+    @SystemApi public static final int DEVICE_VOLUME_BEHAVIOR_FIXED = 2;
 
-    @SystemApi
-    public static final int DEVICE_VOLUME_BEHAVIOR_FULL = 1;
+    @SystemApi public static final int DEVICE_VOLUME_BEHAVIOR_FULL = 1;
     public static final int DEVICE_VOLUME_BEHAVIOR_UNSET = -1;
 
-    @SystemApi
-    public static final int DEVICE_VOLUME_BEHAVIOR_VARIABLE = 0;
+    @SystemApi public static final int DEVICE_VOLUME_BEHAVIOR_VARIABLE = 0;
     public static final int DIRECT_PLAYBACK_BITSTREAM_SUPPORTED = 4;
     public static final int DIRECT_PLAYBACK_NOT_SUPPORTED = 0;
     public static final int DIRECT_PLAYBACK_OFFLOAD_GAPLESS_SUPPORTED = 3;
@@ -232,24 +212,34 @@ public class AudioManager {
     public static final int ERROR_PERMISSION_DENIED = -4;
     public static final String EXTRA_AUDIO_PLUG_STATE = "android.media.extra.AUDIO_PLUG_STATE";
     public static final String EXTRA_ENCODINGS = "android.media.extra.ENCODINGS";
-    public static final String EXTRA_MASTER_VOLUME_MUTED = "android.media.EXTRA_MASTER_VOLUME_MUTED";
+    public static final String EXTRA_MASTER_VOLUME_MUTED =
+            "android.media.EXTRA_MASTER_VOLUME_MUTED";
     public static final String EXTRA_MAX_CHANNEL_COUNT = "android.media.extra.MAX_CHANNEL_COUNT";
-    public static final String EXTRA_PREV_VOLUME_STREAM_DEVICES = "android.media.EXTRA_PREV_VOLUME_STREAM_DEVICES";
-    public static final String EXTRA_PREV_VOLUME_STREAM_VALUE = "android.media.EXTRA_PREV_VOLUME_STREAM_VALUE";
+    public static final String EXTRA_PREV_VOLUME_STREAM_DEVICES =
+            "android.media.EXTRA_PREV_VOLUME_STREAM_DEVICES";
+    public static final String EXTRA_PREV_VOLUME_STREAM_VALUE =
+            "android.media.EXTRA_PREV_VOLUME_STREAM_VALUE";
     public static final String EXTRA_RINGER_MODE = "android.media.EXTRA_RINGER_MODE";
-    public static final String EXTRA_SCO_AUDIO_PREVIOUS_STATE = "android.media.extra.SCO_AUDIO_PREVIOUS_STATE";
+    public static final String EXTRA_SCO_AUDIO_PREVIOUS_STATE =
+            "android.media.extra.SCO_AUDIO_PREVIOUS_STATE";
     public static final String EXTRA_SCO_AUDIO_STATE = "android.media.extra.SCO_AUDIO_STATE";
-    public static final String EXTRA_STREAM_VOLUME_MUTED = "android.media.EXTRA_STREAM_VOLUME_MUTED";
+    public static final String EXTRA_STREAM_VOLUME_MUTED =
+            "android.media.EXTRA_STREAM_VOLUME_MUTED";
     public static final String EXTRA_VIBRATE_SETTING = "android.media.EXTRA_VIBRATE_SETTING";
     public static final String EXTRA_VIBRATE_TYPE = "android.media.EXTRA_VIBRATE_TYPE";
-    public static final String EXTRA_VOLUME_STREAM_DEVICES = "android.media.EXTRA_VOLUME_STREAM_DEVICES";
+    public static final String EXTRA_VOLUME_STREAM_DEVICES =
+            "android.media.EXTRA_VOLUME_STREAM_DEVICES";
 
     @SystemApi
     public static final String EXTRA_VOLUME_STREAM_TYPE = "android.media.EXTRA_VOLUME_STREAM_TYPE";
-    public static final String EXTRA_VOLUME_STREAM_TYPE_ALIAS = "android.media.EXTRA_VOLUME_STREAM_TYPE_ALIAS";
+
+    public static final String EXTRA_VOLUME_STREAM_TYPE_ALIAS =
+            "android.media.EXTRA_VOLUME_STREAM_TYPE_ALIAS";
 
     @SystemApi
-    public static final String EXTRA_VOLUME_STREAM_VALUE = "android.media.EXTRA_VOLUME_STREAM_VALUE";
+    public static final String EXTRA_VOLUME_STREAM_VALUE =
+            "android.media.EXTRA_VOLUME_STREAM_VALUE";
+
     private static final int EXT_FOCUS_POLICY_TIMEOUT_MS = 250;
     public static final int FLAG_ABSOLUTE_VOLUME = 8192;
     public static final int FLAG_ACTIVE_MEDIA_ONLY = 512;
@@ -257,8 +247,7 @@ public class AudioManager {
     public static final int FLAG_ADJUST_RAISE = 131072;
     public static final int FLAG_ALLOW_RINGER_MODES = 2;
 
-    @SystemApi
-    public static final int FLAG_BLUETOOTH_ABS_VOLUME = 64;
+    @SystemApi public static final int FLAG_BLUETOOTH_ABS_VOLUME = 64;
     public static final int FLAG_DISMISS_UI_WARNINGS = 134217728;
     public static final int FLAG_DISPLAY_VOLUME_CONTROL = 4194304;
     public static final int FLAG_DUAL_A2DP_MODE = 524288;
@@ -268,6 +257,7 @@ public class AudioManager {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final int FLAG_FROM_KEY = 4096;
+
     public static final int FLAG_HDMI_SYSTEM_AUDIO_VOLUME = 256;
     public static final int FLAG_MULTI_AUDIO_FOCUS = 268435456;
     public static final int FLAG_MULTI_SOUND = 8388608;
@@ -304,8 +294,10 @@ public class AudioManager {
     public static final int GET_DEVICES_ALL = 3;
     public static final int GET_DEVICES_INPUTS = 1;
     public static final int GET_DEVICES_OUTPUTS = 2;
-    public static final String INTERNAL_RINGER_MODE_CHANGED_ACTION = "android.media.INTERNAL_RINGER_MODE_CHANGED_ACTION";
-    public static final String MASTER_MUTE_CHANGED_ACTION = "android.media.MASTER_MUTE_CHANGED_ACTION";
+    public static final String INTERNAL_RINGER_MODE_CHANGED_ACTION =
+            "android.media.INTERNAL_RINGER_MODE_CHANGED_ACTION";
+    public static final String MASTER_MUTE_CHANGED_ACTION =
+            "android.media.MASTER_MUTE_CHANGED_ACTION";
     public static final int MIC_INPUT_CONTROL_MODE_CALL_FOCUS_ON_VOICE = 4;
     public static final int MIC_INPUT_CONTROL_MODE_CALL_STANDARD = 3;
     public static final int MIC_INPUT_CONTROL_MODE_FOCUS_ON_ALL_SOUNDS = 2;
@@ -329,16 +321,20 @@ public class AudioManager {
     public static final int NUM_NAVIGATION_REPEAT_SOUND_EFFECTS = 4;
     public static final int NUM_SOUND_EFFECTS = 23;
 
-    @Deprecated
-    public static final int NUM_STREAMS = 5;
+    @Deprecated public static final int NUM_STREAMS = 5;
     public static final int PLAYBACK_OFFLOAD_GAPLESS_SUPPORTED = 2;
     public static final int PLAYBACK_OFFLOAD_NOT_SUPPORTED = 0;
     public static final int PLAYBACK_OFFLOAD_SUPPORTED = 1;
-    public static final String PROPERTY_OUTPUT_FRAMES_PER_BUFFER = "android.media.property.OUTPUT_FRAMES_PER_BUFFER";
-    public static final String PROPERTY_OUTPUT_SAMPLE_RATE = "android.media.property.OUTPUT_SAMPLE_RATE";
-    public static final String PROPERTY_SUPPORT_AUDIO_SOURCE_UNPROCESSED = "android.media.property.SUPPORT_AUDIO_SOURCE_UNPROCESSED";
-    public static final String PROPERTY_SUPPORT_MIC_NEAR_ULTRASOUND = "android.media.property.SUPPORT_MIC_NEAR_ULTRASOUND";
-    public static final String PROPERTY_SUPPORT_SPEAKER_NEAR_ULTRASOUND = "android.media.property.SUPPORT_SPEAKER_NEAR_ULTRASOUND";
+    public static final String PROPERTY_OUTPUT_FRAMES_PER_BUFFER =
+            "android.media.property.OUTPUT_FRAMES_PER_BUFFER";
+    public static final String PROPERTY_OUTPUT_SAMPLE_RATE =
+            "android.media.property.OUTPUT_SAMPLE_RATE";
+    public static final String PROPERTY_SUPPORT_AUDIO_SOURCE_UNPROCESSED =
+            "android.media.property.SUPPORT_AUDIO_SOURCE_UNPROCESSED";
+    public static final String PROPERTY_SUPPORT_MIC_NEAR_ULTRASOUND =
+            "android.media.property.SUPPORT_MIC_NEAR_ULTRASOUND";
+    public static final String PROPERTY_SUPPORT_SPEAKER_NEAR_ULTRASOUND =
+            "android.media.property.SUPPORT_SPEAKER_NEAR_ULTRASOUND";
     public static final int RECORDER_STATE_STARTED = 0;
     public static final int RECORDER_STATE_STOPPED = 1;
     public static final int RECORD_CONFIG_EVENT_NONE = -1;
@@ -355,41 +351,39 @@ public class AudioManager {
     public static final int RINGER_MODE_SILENT = 0;
     public static final int RINGER_MODE_VIBRATE = 1;
 
-    @Deprecated
-    public static final int ROUTE_ALL = -1;
+    @Deprecated public static final int ROUTE_ALL = -1;
 
-    @Deprecated
-    public static final int ROUTE_BLUETOOTH = 4;
+    @Deprecated public static final int ROUTE_BLUETOOTH = 4;
 
-    @Deprecated
-    public static final int ROUTE_BLUETOOTH_A2DP = 16;
+    @Deprecated public static final int ROUTE_BLUETOOTH_A2DP = 16;
 
-    @Deprecated
-    public static final int ROUTE_BLUETOOTH_SCO = 4;
+    @Deprecated public static final int ROUTE_BLUETOOTH_SCO = 4;
 
-    @Deprecated
-    public static final int ROUTE_EARPIECE = 1;
+    @Deprecated public static final int ROUTE_EARPIECE = 1;
 
-    @Deprecated
-    public static final int ROUTE_HEADSET = 8;
+    @Deprecated public static final int ROUTE_HEADSET = 8;
 
-    @Deprecated
-    public static final int ROUTE_SPEAKER = 2;
+    @Deprecated public static final int ROUTE_SPEAKER = 2;
     public static final int SCO_AUDIO_STATE_CONNECTED = 1;
     public static final int SCO_AUDIO_STATE_CONNECTING = 2;
     public static final int SCO_AUDIO_STATE_DISCONNECTED = 0;
     public static final int SCO_AUDIO_STATE_ERROR = -1;
-    public static final String SEM_ACTION_AUDIO_BECOMING_NOISY = "android.media.AUDIO_BECOMING_NOISY_SEC";
-    public static final String SEM_ACTION_AUDIO_MODE_CHANGED = "android.samsung.media.action.AUDIO_MODE";
+    public static final String SEM_ACTION_AUDIO_BECOMING_NOISY =
+            "android.media.AUDIO_BECOMING_NOISY_SEC";
+    public static final String SEM_ACTION_AUDIO_MODE_CHANGED =
+            "android.samsung.media.action.AUDIO_MODE";
     public static final int SEM_CONTROL_MODE_INVALID = -1;
     public static final int SEM_CONTROL_MODE_MUTE = 1;
     public static final int SEM_CONTROL_MODE_UNMUTE = 0;
     public static final int SEM_CONTROL_MODE_VOLUME_DOWN = 2;
     public static final String SEM_EXTRA_AUDIO_MODE = "android.samsung.media.extra.AUDIO_MODE";
     public static final String SEM_EXTRA_VOLUME_SHOW_UI = "android.media.EXTRA_VOLUME_SHOW_UI";
-    public static final String SEM_EXTRA_VOLUME_STREAM_DEVICES = "android.media.EXTRA_VOLUME_STREAM_DEVICES";
-    public static final String SEM_EXTRA_VOLUME_STREAM_TYPE = "android.media.EXTRA_VOLUME_STREAM_TYPE";
-    public static final String SEM_EXTRA_VOLUME_STREAM_VALUE = "android.media.EXTRA_VOLUME_STREAM_VALUE";
+    public static final String SEM_EXTRA_VOLUME_STREAM_DEVICES =
+            "android.media.EXTRA_VOLUME_STREAM_DEVICES";
+    public static final String SEM_EXTRA_VOLUME_STREAM_TYPE =
+            "android.media.EXTRA_VOLUME_STREAM_TYPE";
+    public static final String SEM_EXTRA_VOLUME_STREAM_VALUE =
+            "android.media.EXTRA_VOLUME_STREAM_VALUE";
     public static final int SEM_FLAG_UPDATE_STATE = 33554432;
     public static final String SEM_OUT_DEVICE = "audioParam;l_device_current_output";
     public static final int SEM_SITUATION_BURST_SHOT = 9;
@@ -414,7 +408,8 @@ public class AudioManager {
     public static final int SEM_SOUND_TOUCH = 100;
     public static final int SEM_STREAM_BIXBY = 6;
     public static final int SEM_STREAM_BLUETOOTH_SCO = 4;
-    public static final String SEM_STREAM_DEVICES_CHANGED_ACTION = "android.media.STREAM_DEVICES_CHANGED_ACTION";
+    public static final String SEM_STREAM_DEVICES_CHANGED_ACTION =
+            "android.media.STREAM_DEVICES_CHANGED_ACTION";
     public static final int SEM_STREAM_FM_RADIO = 1;
     public static final int SEM_STREAM_SYSTEM_ENFORCED = 5;
     public static final int SEM_STREAM_VIDEO_CALL = 2;
@@ -428,16 +423,16 @@ public class AudioManager {
     public static final int STREAM_ACCESSIBILITY = 10;
     public static final int STREAM_ALARM = 4;
 
-    @SystemApi
-    public static final int STREAM_ASSISTANT = 11;
+    @SystemApi public static final int STREAM_ASSISTANT = 11;
 
-    @SystemApi
-    public static final int STREAM_BLUETOOTH_SCO = 6;
-    public static final String STREAM_DEVICES_CHANGED_ACTION = "android.media.STREAM_DEVICES_CHANGED_ACTION";
+    @SystemApi public static final int STREAM_BLUETOOTH_SCO = 6;
+    public static final String STREAM_DEVICES_CHANGED_ACTION =
+            "android.media.STREAM_DEVICES_CHANGED_ACTION";
     public static final int STREAM_DTMF = 8;
     public static final int STREAM_FM_RADIO = 3;
     public static final int STREAM_MUSIC = 3;
-    public static final String STREAM_MUTE_CHANGED_ACTION = "android.media.STREAM_MUTE_CHANGED_ACTION";
+    public static final String STREAM_MUTE_CHANGED_ACTION =
+            "android.media.STREAM_MUTE_CHANGED_ACTION";
     public static final int STREAM_NOTIFICATION = 5;
     public static final int STREAM_RING = 2;
     public static final int STREAM_SEC_VOICE_COMMUNICATION = 0;
@@ -447,11 +442,11 @@ public class AudioManager {
     public static final int STREAM_VIDEO_CALL = 0;
     public static final int STREAM_VOICE_CALL = 0;
 
-    @SystemApi
-    public static final int SUCCESS = 0;
+    @SystemApi public static final int SUCCESS = 0;
     private static final String TAG = "AudioManager";
     public static final int USE_DEFAULT_STREAM_TYPE = Integer.MIN_VALUE;
-    public static final String VIBRATE_SETTING_CHANGED_ACTION = "android.media.VIBRATE_SETTING_CHANGED";
+    public static final String VIBRATE_SETTING_CHANGED_ACTION =
+            "android.media.VIBRATE_SETTING_CHANGED";
     public static final int VIBRATE_SETTING_OFF = 0;
     public static final int VIBRATE_SETTING_ON = 1;
     public static final int VIBRATE_SETTING_ONLY_SILENT = 2;
@@ -475,161 +470,189 @@ public class AudioManager {
     private CapturePresetDevicesRoleDispatcherStub mDevicesRoleForCapturePresetDispatcherStub;
     private HashMap<String, BlockingFocusResultReceiver> mFocusRequestsAwaitingResult;
     private MuteAwaitConnectionDispatcherStub mMuteAwaitConnDispatcherStub;
-    private ArrayList<CallbackUtil.ListenerInfo<MuteAwaitConnectionCallback>> mMuteAwaitConnectionListeners;
+    private ArrayList<CallbackUtil.ListenerInfo<MuteAwaitConnectionCallback>>
+            mMuteAwaitConnectionListeners;
     private Context mOriginalContext;
     private List<AudioPlaybackCallbackInfo> mPlaybackCallbackList;
     private List<AudioRecordingCallbackInfo> mRecordCallbackList;
     private VirtualDeviceManager mVirtualDeviceManager;
     private static final AudioPortEventHandler sAudioPortEventHandler = new AudioPortEventHandler();
-    private static final AudioVolumeGroupChangeHandler sAudioAudioVolumeGroupChangedHandler = new AudioVolumeGroupChangeHandler();
+    private static final AudioVolumeGroupChangeHandler sAudioAudioVolumeGroupChangedHandler =
+            new AudioVolumeGroupChangeHandler();
     private static final int[] PUBLIC_STREAM_TYPES = {0, 1, 2, 3, 4, 5, 8, 10};
     private static final TreeMap<Integer, String> FLAG_NAMES = new TreeMap<>();
     private int mOriginalContextDeviceId = 0;
-    private final CallbackUtil.LazyListenerManager<OnPreferredDevicesForStrategyChangedListener> mPrefDevListenerMgr = new CallbackUtil.LazyListenerManager<>();
-    private final CallbackUtil.LazyListenerManager<OnNonDefaultDevicesForStrategyChangedListener> mNonDefDevListenerMgr = new CallbackUtil.LazyListenerManager<>();
-    private final Map<Integer, Object> mDevRoleForCapturePresetListeners = Map.of(1, new DevRoleListeners());
+    private final CallbackUtil.LazyListenerManager<OnPreferredDevicesForStrategyChangedListener>
+            mPrefDevListenerMgr = new CallbackUtil.LazyListenerManager<>();
+    private final CallbackUtil.LazyListenerManager<OnNonDefaultDevicesForStrategyChangedListener>
+            mNonDefDevListenerMgr = new CallbackUtil.LazyListenerManager<>();
+    private final Map<Integer, Object> mDevRoleForCapturePresetListeners =
+            Map.of(1, new DevRoleListeners());
     private final Object mDevRoleForCapturePresetListenersLock = new Object();
     private int mDeviceRoleListenersStatus = 0;
-    private final CallbackUtil.LazyListenerManager<OnModeChangedListener> mModeChangedListenerMgr = new CallbackUtil.LazyListenerManager<>();
-    private final ConcurrentHashMap<String, FocusRequestInfo> mAudioFocusIdListenerMap = new ConcurrentHashMap<>();
-    private final ServiceEventHandlerDelegate mServiceEventHandlerDelegate = new ServiceEventHandlerDelegate(null);
-    private final IAudioFocusDispatcher mAudioFocusDispatcher = new IAudioFocusDispatcher.Stub() { // from class: android.media.AudioManager.1
-        @Override // android.media.IAudioFocusDispatcher
-        public void dispatchAudioFocusChange(int focusChange, String id) {
-            FocusRequestInfo fri = AudioManager.this.findFocusRequestInfo(id);
-            if (fri != null) {
-                OnAudioFocusChangeListener listener = fri.mRequest.getOnAudioFocusChangeListener();
-                if (listener != null) {
-                    Handler h = fri.mHandler == null ? AudioManager.this.mServiceEventHandlerDelegate.getHandler() : fri.mHandler;
-                    Message m = h.obtainMessage(0, focusChange, 0, id);
-                    h.sendMessage(m);
+    private final CallbackUtil.LazyListenerManager<OnModeChangedListener> mModeChangedListenerMgr =
+            new CallbackUtil.LazyListenerManager<>();
+    private final ConcurrentHashMap<String, FocusRequestInfo> mAudioFocusIdListenerMap =
+            new ConcurrentHashMap<>();
+    private final ServiceEventHandlerDelegate mServiceEventHandlerDelegate =
+            new ServiceEventHandlerDelegate(null);
+    private final IAudioFocusDispatcher mAudioFocusDispatcher =
+            new IAudioFocusDispatcher.Stub() { // from class: android.media.AudioManager.1
+                @Override // android.media.IAudioFocusDispatcher
+                public void dispatchAudioFocusChange(int focusChange, String id) {
+                    FocusRequestInfo fri = AudioManager.this.findFocusRequestInfo(id);
+                    if (fri != null) {
+                        OnAudioFocusChangeListener listener =
+                                fri.mRequest.getOnAudioFocusChangeListener();
+                        if (listener != null) {
+                            Handler h =
+                                    fri.mHandler == null
+                                            ? AudioManager.this.mServiceEventHandlerDelegate
+                                                    .getHandler()
+                                            : fri.mHandler;
+                            Message m = h.obtainMessage(0, focusChange, 0, id);
+                            h.sendMessage(m);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.IAudioFocusDispatcher
-        public void dispatchFocusResultFromExtPolicy(int requestResult, String clientId) {
-            synchronized (AudioManager.this.mFocusRequestsLock) {
-                BlockingFocusResultReceiver focusReceiver = (BlockingFocusResultReceiver) AudioManager.this.mFocusRequestsAwaitingResult.remove(clientId);
-                if (focusReceiver != null) {
-                    focusReceiver.notifyResult(requestResult);
-                } else {
-                    Log.e(AudioManager.TAG, "dispatchFocusResultFromExtPolicy found no result receiver");
+                @Override // android.media.IAudioFocusDispatcher
+                public void dispatchFocusResultFromExtPolicy(int requestResult, String clientId) {
+                    synchronized (AudioManager.this.mFocusRequestsLock) {
+                        BlockingFocusResultReceiver focusReceiver =
+                                (BlockingFocusResultReceiver)
+                                        AudioManager.this.mFocusRequestsAwaitingResult.remove(
+                                                clientId);
+                        if (focusReceiver != null) {
+                            focusReceiver.notifyResult(requestResult);
+                        } else {
+                            Log.e(
+                                    AudioManager.TAG,
+                                    "dispatchFocusResultFromExtPolicy found no result receiver");
+                        }
+                    }
                 }
-            }
-        }
-    };
+            };
     private final Object mFocusRequestsLock = new Object();
     private final Object mPlaybackCallbackLock = new Object();
-    private final IPlaybackConfigDispatcher mPlayCb = new IPlaybackConfigDispatcher.Stub() { // from class: android.media.AudioManager.2
-        @Override // android.media.IPlaybackConfigDispatcher
-        public void dispatchPlaybackConfigChange(List<AudioPlaybackConfiguration> configs, boolean flush) {
-            if (flush) {
-                Binder.flushPendingCommands();
-            }
-            synchronized (AudioManager.this.mPlaybackCallbackLock) {
-                if (AudioManager.this.mPlaybackCallbackList != null) {
-                    for (int i = 0; i < AudioManager.this.mPlaybackCallbackList.size(); i++) {
-                        AudioPlaybackCallbackInfo arci = (AudioPlaybackCallbackInfo) AudioManager.this.mPlaybackCallbackList.get(i);
-                        if (arci.mHandler != null) {
-                            Message m = arci.mHandler.obtainMessage(2, new PlaybackConfigChangeCallbackData(arci.mCb, configs));
-                            arci.mHandler.sendMessage(m);
+    private final IPlaybackConfigDispatcher mPlayCb =
+            new IPlaybackConfigDispatcher.Stub() { // from class: android.media.AudioManager.2
+                @Override // android.media.IPlaybackConfigDispatcher
+                public void dispatchPlaybackConfigChange(
+                        List<AudioPlaybackConfiguration> configs, boolean flush) {
+                    if (flush) {
+                        Binder.flushPendingCommands();
+                    }
+                    synchronized (AudioManager.this.mPlaybackCallbackLock) {
+                        if (AudioManager.this.mPlaybackCallbackList != null) {
+                            for (int i = 0;
+                                    i < AudioManager.this.mPlaybackCallbackList.size();
+                                    i++) {
+                                AudioPlaybackCallbackInfo arci =
+                                        (AudioPlaybackCallbackInfo)
+                                                AudioManager.this.mPlaybackCallbackList.get(i);
+                                if (arci.mHandler != null) {
+                                    Message m =
+                                            arci.mHandler.obtainMessage(
+                                                    2,
+                                                    new PlaybackConfigChangeCallbackData(
+                                                            arci.mCb, configs));
+                                    arci.mHandler.sendMessage(m);
+                                }
+                            }
                         }
                     }
                 }
-            }
-        }
-    };
+            };
     private final Object mRecordCallbackLock = new Object();
-    private final IRecordingConfigDispatcher mRecCb = new IRecordingConfigDispatcher.Stub() { // from class: android.media.AudioManager.3
-        @Override // android.media.IRecordingConfigDispatcher
-        public void dispatchRecordingConfigChange(List<AudioRecordingConfiguration> configs) {
-            synchronized (AudioManager.this.mRecordCallbackLock) {
-                if (AudioManager.this.mRecordCallbackList != null) {
-                    for (int i = 0; i < AudioManager.this.mRecordCallbackList.size(); i++) {
-                        AudioRecordingCallbackInfo arci = (AudioRecordingCallbackInfo) AudioManager.this.mRecordCallbackList.get(i);
-                        if (arci.mHandler != null) {
-                            Message m = arci.mHandler.obtainMessage(1, new RecordConfigChangeCallbackData(arci.mCb, configs));
-                            arci.mHandler.sendMessage(m);
+    private final IRecordingConfigDispatcher mRecCb =
+            new IRecordingConfigDispatcher.Stub() { // from class: android.media.AudioManager.3
+                @Override // android.media.IRecordingConfigDispatcher
+                public void dispatchRecordingConfigChange(
+                        List<AudioRecordingConfiguration> configs) {
+                    synchronized (AudioManager.this.mRecordCallbackLock) {
+                        if (AudioManager.this.mRecordCallbackList != null) {
+                            for (int i = 0; i < AudioManager.this.mRecordCallbackList.size(); i++) {
+                                AudioRecordingCallbackInfo arci =
+                                        (AudioRecordingCallbackInfo)
+                                                AudioManager.this.mRecordCallbackList.get(i);
+                                if (arci.mHandler != null) {
+                                    Message m =
+                                            arci.mHandler.obtainMessage(
+                                                    1,
+                                                    new RecordConfigChangeCallbackData(
+                                                            arci.mCb, configs));
+                                    arci.mHandler.sendMessage(m);
+                                }
+                            }
                         }
                     }
                 }
-            }
-        }
-    };
+            };
     private final IBinder mICallBack = new Binder();
-    private final ConcurrentHashMap<OnDevicesForAttributesChangedListener, IDevicesForAttributesCallbackStub> mDevicesForAttributesListenerToStub = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<
+                    OnDevicesForAttributesChangedListener, IDevicesForAttributesCallbackStub>
+            mDevicesForAttributesListenerToStub = new ConcurrentHashMap<>();
     private OnAmPortUpdateListener mPortListener = null;
-    private final ArrayMap<AudioDeviceCallback, NativeEventHandlerDelegate> mDeviceCallbacks = new ArrayMap<>();
+    private final ArrayMap<AudioDeviceCallback, NativeEventHandlerDelegate> mDeviceCallbacks =
+            new ArrayMap<>();
     private ArrayList<AudioDevicePort> mPreviousPorts = new ArrayList<>();
     private final Object mAudioServerStateCbLock = new Object();
     private final IAudioServerStateDispatcher mAudioServerStateDispatcher = new AnonymousClass4();
-    private final CallbackUtil.LazyListenerManager<OnCommunicationDeviceChangedListener> mCommDeviceChangedListenerMgr = new CallbackUtil.LazyListenerManager<>();
+    private final CallbackUtil.LazyListenerManager<OnCommunicationDeviceChangedListener>
+            mCommDeviceChangedListenerMgr = new CallbackUtil.LazyListenerManager<>();
     private Object mCallRedirectionLock = new Object();
-    private final CallbackUtil.LazyListenerManager<OnPreferredMixerAttributesChangedListener> mPrefMixerAttributesListenerMgr = new CallbackUtil.LazyListenerManager<>();
-    private final CallbackUtil.LazyListenerManager<Runnable> mStreamAliasingListenerMgr = new CallbackUtil.LazyListenerManager<>();
+    private final CallbackUtil.LazyListenerManager<OnPreferredMixerAttributesChangedListener>
+            mPrefMixerAttributesListenerMgr = new CallbackUtil.LazyListenerManager<>();
+    private final CallbackUtil.LazyListenerManager<Runnable> mStreamAliasingListenerMgr =
+            new CallbackUtil.LazyListenerManager<>();
     private final Object mMuteAwaitConnectionListenerLock = new Object();
     private boolean mIsAutomotive = false;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AbsoluteDeviceVolumeBehavior {
-    }
+    public @interface AbsoluteDeviceVolumeBehavior {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioDeviceCategory {
-    }
+    public @interface AudioDeviceCategory {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioDeviceRole {
-    }
+    public @interface AudioDeviceRole {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioDirectPlaybackMode {
-    }
+    public @interface AudioDirectPlaybackMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioMode {
-    }
+    public @interface AudioMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioOffloadMode {
-    }
+    public @interface AudioOffloadMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CallRedirectionMode {
-    }
+    public @interface CallRedirectionMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CsdWarning {
-    }
+    public @interface CsdWarning {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeviceVolumeBehavior {
-    }
+    public @interface DeviceVolumeBehavior {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeviceVolumeBehaviorState {
-    }
+    public @interface DeviceVolumeBehaviorState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EncodedSurroundOutputMode {
-    }
+    public @interface EncodedSurroundOutputMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FineStreamTypes {
-    }
+    public @interface FineStreamTypes {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Flags {
-    }
+    public @interface Flags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FocusRequestResult {
-    }
+    public @interface FocusRequestResult {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MicInputControlMode {
-    }
+    public @interface MicInputControlMode {}
 
     public interface OnAudioFocusChangeListener {
         void onAudioFocusChange(int i);
@@ -649,7 +672,8 @@ public class AudioManager {
 
     @SystemApi
     public interface OnDevicesForAttributesChangedListener {
-        void onDevicesForAttributesChanged(AudioAttributes audioAttributes, List<AudioDeviceAttributes> list);
+        void onDevicesForAttributesChanged(
+                AudioAttributes audioAttributes, List<AudioDeviceAttributes> list);
     }
 
     public interface OnModeChangedListener {
@@ -658,13 +682,17 @@ public class AudioManager {
 
     @SystemApi
     public interface OnNonDefaultDevicesForStrategyChangedListener {
-        void onNonDefaultDevicesForStrategyChanged(android.media.audiopolicy.AudioProductStrategy audioProductStrategy, List<AudioDeviceAttributes> list);
+        void onNonDefaultDevicesForStrategyChanged(
+                android.media.audiopolicy.AudioProductStrategy audioProductStrategy,
+                List<AudioDeviceAttributes> list);
     }
 
     @SystemApi
     @Deprecated
     public interface OnPreferredDeviceForStrategyChangedListener {
-        void onPreferredDeviceForStrategyChanged(android.media.audiopolicy.AudioProductStrategy audioProductStrategy, AudioDeviceAttributes audioDeviceAttributes);
+        void onPreferredDeviceForStrategyChanged(
+                android.media.audiopolicy.AudioProductStrategy audioProductStrategy,
+                AudioDeviceAttributes audioDeviceAttributes);
     }
 
     @SystemApi
@@ -674,36 +702,35 @@ public class AudioManager {
 
     @SystemApi
     public interface OnPreferredDevicesForStrategyChangedListener {
-        void onPreferredDevicesForStrategyChanged(android.media.audiopolicy.AudioProductStrategy audioProductStrategy, List<AudioDeviceAttributes> list);
+        void onPreferredDevicesForStrategyChanged(
+                android.media.audiopolicy.AudioProductStrategy audioProductStrategy,
+                List<AudioDeviceAttributes> list);
     }
 
     public interface OnPreferredMixerAttributesChangedListener {
-        void onPreferredMixerAttributesChanged(AudioAttributes audioAttributes, AudioDeviceInfo audioDeviceInfo, AudioMixerAttributes audioMixerAttributes);
+        void onPreferredMixerAttributesChanged(
+                AudioAttributes audioAttributes,
+                AudioDeviceInfo audioDeviceInfo,
+                AudioMixerAttributes audioMixerAttributes);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PublicStreamTypes {
-    }
+    public @interface PublicStreamTypes {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PublicVolumeFlags {
-    }
+    public @interface PublicVolumeFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SemControlMode {
-    }
+    public @interface SemControlMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SystemSoundEffect {
-    }
+    public @interface SystemSoundEffect {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SystemVolumeFlags {
-    }
+    public @interface SystemVolumeFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VolumeAdjustment {
-    }
+    public @interface VolumeAdjustment {}
 
     static {
         FLAG_NAMES.put(1, "FLAG_SHOW_UI");
@@ -786,8 +813,7 @@ public class AudioManager {
         return sb.toString();
     }
 
-    public AudioManager() {
-    }
+    public AudioManager() {}
 
     public AudioManager(Context context) {
         setContext(context);
@@ -831,7 +857,8 @@ public class AudioManager {
         if (this.mVirtualDeviceManager != null) {
             return this.mVirtualDeviceManager;
         }
-        this.mVirtualDeviceManager = (VirtualDeviceManager) getContext().getSystemService(VirtualDeviceManager.class);
+        this.mVirtualDeviceManager =
+                (VirtualDeviceManager) getContext().getSystemService(VirtualDeviceManager.class);
         return this.mVirtualDeviceManager;
     }
 
@@ -860,7 +887,12 @@ public class AudioManager {
     public void adjustStreamVolume(int streamType, int direction, int flags) {
         IAudioService service = getService();
         try {
-            service.adjustStreamVolumeWithAttribution(streamType, direction, flags, getContext().getOpPackageName(), getContext().getAttributionTag());
+            service.adjustStreamVolumeWithAttribution(
+                    streamType,
+                    direction,
+                    flags,
+                    getContext().getOpPackageName(),
+                    getContext().getAttributionTag());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -882,7 +914,9 @@ public class AudioManager {
 
     public void adjustSuggestedStreamVolume(int direction, int suggestedStreamType, int flags) {
         if (AudioManagerHelper.needToLogCaller(getContext().getOpPackageName())) {
-            AudioManagerHelper.logCaller("suggestedStreamType=%d, direction=%d", Integer.valueOf(suggestedStreamType), Integer.valueOf(direction));
+            AudioManagerHelper.logCaller(
+                    "suggestedStreamType=%d, direction=%d",
+                    Integer.valueOf(suggestedStreamType), Integer.valueOf(direction));
         }
         if (applyAutoHardening()) {
             IAudioService service = getService();
@@ -900,7 +934,12 @@ public class AudioManager {
     public void setMasterMute(boolean mute, int flags) {
         IAudioService service = getService();
         try {
-            service.setMasterMute(mute, flags, getContext().getOpPackageName(), UserHandle.getCallingUserId(), getContext().getAttributionTag());
+            service.setMasterMute(
+                    mute,
+                    flags,
+                    getContext().getOpPackageName(),
+                    UserHandle.getCallingUserId(),
+                    getContext().getAttributionTag());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -916,11 +955,13 @@ public class AudioManager {
     }
 
     public boolean isRampingRingerEnabled() {
-        return Settings.System.getInt(getContext().getContentResolver(), "apply_ramping_ringer", 0) != 0;
+        return Settings.System.getInt(getContext().getContentResolver(), "apply_ramping_ringer", 0)
+                != 0;
     }
 
     public void setRampingRingerEnabled(boolean z) {
-        Settings.System.putInt(getContext().getContentResolver(), "apply_ramping_ringer", z ? 1 : 0);
+        Settings.System.putInt(
+                getContext().getContentResolver(), "apply_ramping_ringer", z ? 1 : 0);
     }
 
     public static boolean isValidRingerMode(int ringerMode) {
@@ -979,7 +1020,11 @@ public class AudioManager {
         if (!AudioDeviceInfo.isValidAudioDeviceTypeOut(deviceType)) {
             throw new IllegalArgumentException("Invalid audio output device type " + deviceType);
         }
-        float gain = AudioSystem.getStreamVolumeDB(streamType, index, AudioDeviceInfo.convertDeviceTypeToInternalDevice(deviceType));
+        float gain =
+                AudioSystem.getStreamVolumeDB(
+                        streamType,
+                        index,
+                        AudioDeviceInfo.convertDeviceTypeToInternalDevice(deviceType));
         if (gain <= VOLUME_MIN_DB) {
             return Float.NEGATIVE_INFINITY;
         }
@@ -1038,11 +1083,17 @@ public class AudioManager {
 
     public void setStreamVolume(int streamType, int index, int flags) {
         if (AudioManagerHelper.needToLogCaller(getContext().getOpPackageName())) {
-            AudioManagerHelper.logCaller("streamType=%d, index=%d", Integer.valueOf(streamType), Integer.valueOf(index));
+            AudioManagerHelper.logCaller(
+                    "streamType=%d, index=%d", Integer.valueOf(streamType), Integer.valueOf(index));
         }
         IAudioService service = getService();
         try {
-            service.setStreamVolumeWithAttribution(streamType, index, flags, getContext().getOpPackageName(), getContext().getAttributionTag());
+            service.setStreamVolumeWithAttribution(
+                    streamType,
+                    index,
+                    flags,
+                    getContext().getOpPackageName(),
+                    getContext().getAttributionTag());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1082,14 +1133,20 @@ public class AudioManager {
 
     public int getVolumeGroupIdForAttributes(AudioAttributes attributes) {
         Preconditions.checkNotNull(attributes, "Audio Attributes must not be null");
-        return android.media.audiopolicy.AudioProductStrategy.getVolumeGroupIdForAudioAttributes(attributes, true);
+        return android.media.audiopolicy.AudioProductStrategy.getVolumeGroupIdForAudioAttributes(
+                attributes, true);
     }
 
     @SystemApi
     public void setVolumeGroupVolumeIndex(int groupId, int index, int flags) {
         IAudioService service = getService();
         try {
-            service.setVolumeGroupVolumeIndex(groupId, index, flags, getContext().getOpPackageName(), getContext().getAttributionTag());
+            service.setVolumeGroupVolumeIndex(
+                    groupId,
+                    index,
+                    flags,
+                    getContext().getOpPackageName(),
+                    getContext().getAttributionTag());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1128,7 +1185,8 @@ public class AudioManager {
     public void adjustVolumeGroupVolume(int groupId, int direction, int flags) {
         IAudioService service = getService();
         try {
-            service.adjustVolumeGroupVolume(groupId, direction, flags, getContext().getOpPackageName());
+            service.adjustVolumeGroupVolume(
+                    groupId, direction, flags, getContext().getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1287,12 +1345,14 @@ public class AudioManager {
     }
 
     @SystemApi
-    public boolean setPreferredDeviceForStrategy(android.media.audiopolicy.AudioProductStrategy strategy, AudioDeviceAttributes device) {
+    public boolean setPreferredDeviceForStrategy(
+            android.media.audiopolicy.AudioProductStrategy strategy, AudioDeviceAttributes device) {
         return setPreferredDevicesForStrategy(strategy, Arrays.asList(device));
     }
 
     @SystemApi
-    public boolean removePreferredDeviceForStrategy(android.media.audiopolicy.AudioProductStrategy strategy) {
+    public boolean removePreferredDeviceForStrategy(
+            android.media.audiopolicy.AudioProductStrategy strategy) {
         Objects.requireNonNull(strategy);
         try {
             int status = getService().removePreferredDevicesForStrategy(strategy.getId());
@@ -1303,7 +1363,8 @@ public class AudioManager {
     }
 
     @SystemApi
-    public AudioDeviceAttributes getPreferredDeviceForStrategy(android.media.audiopolicy.AudioProductStrategy strategy) {
+    public AudioDeviceAttributes getPreferredDeviceForStrategy(
+            android.media.audiopolicy.AudioProductStrategy strategy) {
         List<AudioDeviceAttributes> devices = getPreferredDevicesForStrategy(strategy);
         if (devices.isEmpty()) {
             return null;
@@ -1312,11 +1373,14 @@ public class AudioManager {
     }
 
     @SystemApi
-    public boolean setPreferredDevicesForStrategy(android.media.audiopolicy.AudioProductStrategy strategy, List<AudioDeviceAttributes> devices) {
+    public boolean setPreferredDevicesForStrategy(
+            android.media.audiopolicy.AudioProductStrategy strategy,
+            List<AudioDeviceAttributes> devices) {
         Objects.requireNonNull(strategy);
         Objects.requireNonNull(devices);
         if (devices.isEmpty()) {
-            throw new IllegalArgumentException("Tried to set preferred devices for strategy with a empty list");
+            throw new IllegalArgumentException(
+                    "Tried to set preferred devices for strategy with a empty list");
         }
         for (AudioDeviceAttributes device : devices) {
             Objects.requireNonNull(device);
@@ -1330,7 +1394,8 @@ public class AudioManager {
     }
 
     @SystemApi
-    public List<AudioDeviceAttributes> getPreferredDevicesForStrategy(android.media.audiopolicy.AudioProductStrategy strategy) {
+    public List<AudioDeviceAttributes> getPreferredDevicesForStrategy(
+            android.media.audiopolicy.AudioProductStrategy strategy) {
         Objects.requireNonNull(strategy);
         try {
             return getService().getPreferredDevicesForStrategy(strategy.getId());
@@ -1340,7 +1405,8 @@ public class AudioManager {
     }
 
     @SystemApi
-    public boolean setDeviceAsNonDefaultForStrategy(android.media.audiopolicy.AudioProductStrategy strategy, AudioDeviceAttributes device) {
+    public boolean setDeviceAsNonDefaultForStrategy(
+            android.media.audiopolicy.AudioProductStrategy strategy, AudioDeviceAttributes device) {
         Objects.requireNonNull(strategy);
         Objects.requireNonNull(device);
         try {
@@ -1352,7 +1418,8 @@ public class AudioManager {
     }
 
     @SystemApi
-    public boolean removeDeviceAsNonDefaultForStrategy(android.media.audiopolicy.AudioProductStrategy strategy, AudioDeviceAttributes device) {
+    public boolean removeDeviceAsNonDefaultForStrategy(
+            android.media.audiopolicy.AudioProductStrategy strategy, AudioDeviceAttributes device) {
         Objects.requireNonNull(strategy);
         Objects.requireNonNull(device);
         try {
@@ -1364,7 +1431,8 @@ public class AudioManager {
     }
 
     @SystemApi
-    public List<AudioDeviceAttributes> getNonDefaultDevicesForStrategy(android.media.audiopolicy.AudioProductStrategy strategy) {
+    public List<AudioDeviceAttributes> getNonDefaultDevicesForStrategy(
+            android.media.audiopolicy.AudioProductStrategy strategy) {
         Objects.requireNonNull(strategy);
         try {
             return getService().getNonDefaultDevicesForStrategy(strategy.getId());
@@ -1375,78 +1443,112 @@ public class AudioManager {
 
     @SystemApi
     @Deprecated
-    public void addOnPreferredDeviceForStrategyChangedListener(Executor executor, OnPreferredDeviceForStrategyChangedListener listener) throws SecurityException {
-    }
+    public void addOnPreferredDeviceForStrategyChangedListener(
+            Executor executor, OnPreferredDeviceForStrategyChangedListener listener)
+            throws SecurityException {}
 
     @SystemApi
     @Deprecated
-    public void removeOnPreferredDeviceForStrategyChangedListener(OnPreferredDeviceForStrategyChangedListener listener) {
-    }
+    public void removeOnPreferredDeviceForStrategyChangedListener(
+            OnPreferredDeviceForStrategyChangedListener listener) {}
 
     @SystemApi
-    public void addOnPreferredDevicesForStrategyChangedListener(Executor executor, OnPreferredDevicesForStrategyChangedListener listener) throws SecurityException {
+    public void addOnPreferredDevicesForStrategyChangedListener(
+            Executor executor, OnPreferredDevicesForStrategyChangedListener listener)
+            throws SecurityException {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(listener);
-        this.mPrefDevListenerMgr.addListener(executor, listener, "addOnPreferredDevicesForStrategyChangedListener", new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda4
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                CallbackUtil.DispatcherStub lambda$addOnPreferredDevicesForStrategyChangedListener$0;
-                lambda$addOnPreferredDevicesForStrategyChangedListener$0 = AudioManager.this.lambda$addOnPreferredDevicesForStrategyChangedListener$0();
-                return lambda$addOnPreferredDevicesForStrategyChangedListener$0;
-            }
-        });
+        this.mPrefDevListenerMgr.addListener(
+                executor,
+                listener,
+                "addOnPreferredDevicesForStrategyChangedListener",
+                new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda4
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        CallbackUtil.DispatcherStub
+                                lambda$addOnPreferredDevicesForStrategyChangedListener$0;
+                        lambda$addOnPreferredDevicesForStrategyChangedListener$0 =
+                                AudioManager.this
+                                        .lambda$addOnPreferredDevicesForStrategyChangedListener$0();
+                        return lambda$addOnPreferredDevicesForStrategyChangedListener$0;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ CallbackUtil.DispatcherStub lambda$addOnPreferredDevicesForStrategyChangedListener$0() {
+    public /* synthetic */ CallbackUtil.DispatcherStub
+            lambda$addOnPreferredDevicesForStrategyChangedListener$0() {
         return new StrategyPreferredDevicesDispatcherStub();
     }
 
     @SystemApi
-    public void removeOnPreferredDevicesForStrategyChangedListener(OnPreferredDevicesForStrategyChangedListener listener) {
+    public void removeOnPreferredDevicesForStrategyChangedListener(
+            OnPreferredDevicesForStrategyChangedListener listener) {
         Objects.requireNonNull(listener);
-        this.mPrefDevListenerMgr.removeListener(listener, "removeOnPreferredDevicesForStrategyChangedListener");
+        this.mPrefDevListenerMgr.removeListener(
+                listener, "removeOnPreferredDevicesForStrategyChangedListener");
     }
 
     @SystemApi
-    public void addOnNonDefaultDevicesForStrategyChangedListener(Executor executor, OnNonDefaultDevicesForStrategyChangedListener listener) throws SecurityException {
+    public void addOnNonDefaultDevicesForStrategyChangedListener(
+            Executor executor, OnNonDefaultDevicesForStrategyChangedListener listener)
+            throws SecurityException {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(listener);
-        this.mNonDefDevListenerMgr.addListener(executor, listener, "addOnNonDefaultDevicesForStrategyChangedListener", new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda7
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                CallbackUtil.DispatcherStub lambda$addOnNonDefaultDevicesForStrategyChangedListener$1;
-                lambda$addOnNonDefaultDevicesForStrategyChangedListener$1 = AudioManager.this.lambda$addOnNonDefaultDevicesForStrategyChangedListener$1();
-                return lambda$addOnNonDefaultDevicesForStrategyChangedListener$1;
-            }
-        });
+        this.mNonDefDevListenerMgr.addListener(
+                executor,
+                listener,
+                "addOnNonDefaultDevicesForStrategyChangedListener",
+                new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda7
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        CallbackUtil.DispatcherStub
+                                lambda$addOnNonDefaultDevicesForStrategyChangedListener$1;
+                        lambda$addOnNonDefaultDevicesForStrategyChangedListener$1 =
+                                AudioManager.this
+                                        .lambda$addOnNonDefaultDevicesForStrategyChangedListener$1();
+                        return lambda$addOnNonDefaultDevicesForStrategyChangedListener$1;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ CallbackUtil.DispatcherStub lambda$addOnNonDefaultDevicesForStrategyChangedListener$1() {
+    public /* synthetic */ CallbackUtil.DispatcherStub
+            lambda$addOnNonDefaultDevicesForStrategyChangedListener$1() {
         return new StrategyNonDefaultDevicesDispatcherStub();
     }
 
     @SystemApi
-    public void removeOnNonDefaultDevicesForStrategyChangedListener(OnNonDefaultDevicesForStrategyChangedListener listener) {
+    public void removeOnNonDefaultDevicesForStrategyChangedListener(
+            OnNonDefaultDevicesForStrategyChangedListener listener) {
         Objects.requireNonNull(listener);
-        this.mNonDefDevListenerMgr.removeListener(listener, "removeOnNonDefaultDevicesForStrategyChangedListener");
+        this.mNonDefDevListenerMgr.removeListener(
+                listener, "removeOnNonDefaultDevicesForStrategyChangedListener");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    final class StrategyPreferredDevicesDispatcherStub extends IStrategyPreferredDevicesDispatcher.Stub implements CallbackUtil.DispatcherStub {
-        private StrategyPreferredDevicesDispatcherStub() {
-        }
+    final class StrategyPreferredDevicesDispatcherStub
+            extends IStrategyPreferredDevicesDispatcher.Stub
+            implements CallbackUtil.DispatcherStub {
+        private StrategyPreferredDevicesDispatcherStub() {}
 
         @Override // android.media.IStrategyPreferredDevicesDispatcher
-        public void dispatchPrefDevicesChanged(int strategyId, final List<AudioDeviceAttributes> devices) {
-            final android.media.audiopolicy.AudioProductStrategy strategy = android.media.audiopolicy.AudioProductStrategy.getAudioProductStrategyWithId(strategyId);
-            AudioManager.this.mPrefDevListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.AudioManager$StrategyPreferredDevicesDispatcherStub$$ExternalSyntheticLambda0
-                @Override // android.media.CallbackUtil.CallbackMethod
-                public final void callbackMethod(Object obj) {
-                    ((AudioManager.OnPreferredDevicesForStrategyChangedListener) obj).onPreferredDevicesForStrategyChanged(android.media.audiopolicy.AudioProductStrategy.this, devices);
-                }
-            });
+        public void dispatchPrefDevicesChanged(
+                int strategyId, final List<AudioDeviceAttributes> devices) {
+            final android.media.audiopolicy.AudioProductStrategy strategy =
+                    android.media.audiopolicy.AudioProductStrategy.getAudioProductStrategyWithId(
+                            strategyId);
+            AudioManager.this.mPrefDevListenerMgr.callListeners(
+                    new CallbackUtil.CallbackMethod() { // from class:
+                        // android.media.AudioManager$StrategyPreferredDevicesDispatcherStub$$ExternalSyntheticLambda0
+                        @Override // android.media.CallbackUtil.CallbackMethod
+                        public final void callbackMethod(Object obj) {
+                            ((AudioManager.OnPreferredDevicesForStrategyChangedListener) obj)
+                                    .onPreferredDevicesForStrategyChanged(
+                                            android.media.audiopolicy.AudioProductStrategy.this,
+                                            devices);
+                        }
+                    });
         }
 
         @Override // android.media.CallbackUtil.DispatcherStub
@@ -1464,19 +1566,28 @@ public class AudioManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    final class StrategyNonDefaultDevicesDispatcherStub extends IStrategyNonDefaultDevicesDispatcher.Stub implements CallbackUtil.DispatcherStub {
-        private StrategyNonDefaultDevicesDispatcherStub() {
-        }
+    final class StrategyNonDefaultDevicesDispatcherStub
+            extends IStrategyNonDefaultDevicesDispatcher.Stub
+            implements CallbackUtil.DispatcherStub {
+        private StrategyNonDefaultDevicesDispatcherStub() {}
 
         @Override // android.media.IStrategyNonDefaultDevicesDispatcher
-        public void dispatchNonDefDevicesChanged(int strategyId, final List<AudioDeviceAttributes> devices) {
-            final android.media.audiopolicy.AudioProductStrategy strategy = android.media.audiopolicy.AudioProductStrategy.getAudioProductStrategyWithId(strategyId);
-            AudioManager.this.mNonDefDevListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.AudioManager$StrategyNonDefaultDevicesDispatcherStub$$ExternalSyntheticLambda0
-                @Override // android.media.CallbackUtil.CallbackMethod
-                public final void callbackMethod(Object obj) {
-                    ((AudioManager.OnNonDefaultDevicesForStrategyChangedListener) obj).onNonDefaultDevicesForStrategyChanged(android.media.audiopolicy.AudioProductStrategy.this, devices);
-                }
-            });
+        public void dispatchNonDefDevicesChanged(
+                int strategyId, final List<AudioDeviceAttributes> devices) {
+            final android.media.audiopolicy.AudioProductStrategy strategy =
+                    android.media.audiopolicy.AudioProductStrategy.getAudioProductStrategyWithId(
+                            strategyId);
+            AudioManager.this.mNonDefDevListenerMgr.callListeners(
+                    new CallbackUtil.CallbackMethod() { // from class:
+                        // android.media.AudioManager$StrategyNonDefaultDevicesDispatcherStub$$ExternalSyntheticLambda0
+                        @Override // android.media.CallbackUtil.CallbackMethod
+                        public final void callbackMethod(Object obj) {
+                            ((AudioManager.OnNonDefaultDevicesForStrategyChangedListener) obj)
+                                    .onNonDefaultDevicesForStrategyChanged(
+                                            android.media.audiopolicy.AudioProductStrategy.this,
+                                            devices);
+                        }
+                    });
         }
 
         @Override // android.media.CallbackUtil.DispatcherStub
@@ -1494,7 +1605,8 @@ public class AudioManager {
     }
 
     @SystemApi
-    public boolean setPreferredDeviceForCapturePreset(int capturePreset, AudioDeviceAttributes device) {
+    public boolean setPreferredDeviceForCapturePreset(
+            int capturePreset, AudioDeviceAttributes device) {
         return setPreferredDevicesForCapturePreset(capturePreset, Arrays.asList(device));
     }
 
@@ -1523,13 +1635,15 @@ public class AudioManager {
         }
     }
 
-    private boolean setPreferredDevicesForCapturePreset(int capturePreset, List<AudioDeviceAttributes> devices) {
+    private boolean setPreferredDevicesForCapturePreset(
+            int capturePreset, List<AudioDeviceAttributes> devices) {
         Objects.requireNonNull(devices);
         if (!MediaRecorder.isValidAudioSource(capturePreset)) {
             return false;
         }
         if (devices.size() != 1) {
-            throw new IllegalArgumentException("Only support setting one preferred devices for capture preset");
+            throw new IllegalArgumentException(
+                    "Only support setting one preferred devices for capture preset");
         }
         for (AudioDeviceAttributes device : devices) {
             Objects.requireNonNull(device);
@@ -1543,7 +1657,9 @@ public class AudioManager {
     }
 
     @SystemApi
-    public void addOnPreferredDevicesForCapturePresetChangedListener(Executor executor, OnPreferredDevicesForCapturePresetChangedListener listener) throws SecurityException {
+    public void addOnPreferredDevicesForCapturePresetChangedListener(
+            Executor executor, OnPreferredDevicesForCapturePresetChangedListener listener)
+            throws SecurityException {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(listener);
         int status = addOnDevRoleForCapturePresetChangedListener(executor, listener, 1);
@@ -1551,26 +1667,34 @@ public class AudioManager {
             throw new RuntimeException("Unknown error happened");
         }
         if (status == -2) {
-            throw new IllegalArgumentException("attempt to call addOnPreferredDevicesForCapturePresetChangedListener() on a previously registered listener");
+            throw new IllegalArgumentException(
+                    "attempt to call addOnPreferredDevicesForCapturePresetChangedListener() on a"
+                            + " previously registered listener");
         }
     }
 
     @SystemApi
-    public void removeOnPreferredDevicesForCapturePresetChangedListener(OnPreferredDevicesForCapturePresetChangedListener listener) {
+    public void removeOnPreferredDevicesForCapturePresetChangedListener(
+            OnPreferredDevicesForCapturePresetChangedListener listener) {
         Objects.requireNonNull(listener);
         int status = removeOnDevRoleForCapturePresetChangedListener(listener, 1);
         if (status == -1) {
             throw new RuntimeException("Unknown error happened");
         }
         if (status == -2) {
-            throw new IllegalArgumentException("attempt to call removeOnPreferredDevicesForCapturePresetChangedListener() on an unregistered listener");
+            throw new IllegalArgumentException(
+                    "attempt to call removeOnPreferredDevicesForCapturePresetChangedListener() on"
+                            + " an unregistered listener");
         }
     }
 
-    private <T> int addOnDevRoleForCapturePresetChangedListener(Executor executor, T listener, int deviceRole) {
+    private <T> int addOnDevRoleForCapturePresetChangedListener(
+            Executor executor, T listener, int deviceRole) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(listener);
-        DevRoleListeners<T> devRoleListeners = (DevRoleListeners) this.mDevRoleForCapturePresetListeners.get(Integer.valueOf(deviceRole));
+        DevRoleListeners<T> devRoleListeners =
+                (DevRoleListeners)
+                        this.mDevRoleForCapturePresetListeners.get(Integer.valueOf(deviceRole));
         if (devRoleListeners == null) {
             return -1;
         }
@@ -1582,8 +1706,10 @@ public class AudioManager {
                 ((DevRoleListeners) devRoleListeners).mListenerInfos = new ArrayList();
             }
             int oldCbCount = ((DevRoleListeners) devRoleListeners).mListenerInfos.size();
-            ((DevRoleListeners) devRoleListeners).mListenerInfos.add(new DevRoleListenerInfo(executor, listener));
-            if (oldCbCount == 0 && ((DevRoleListeners) devRoleListeners).mListenerInfos.size() > 0) {
+            ((DevRoleListeners) devRoleListeners)
+                    .mListenerInfos.add(new DevRoleListenerInfo(executor, listener));
+            if (oldCbCount == 0
+                    && ((DevRoleListeners) devRoleListeners).mListenerInfos.size() > 0) {
                 synchronized (this.mDevRoleForCapturePresetListenersLock) {
                     int deviceRoleListenerStatus = this.mDeviceRoleListenersStatus;
                     this.mDeviceRoleListenersStatus |= 1 << deviceRole;
@@ -1591,10 +1717,13 @@ public class AudioManager {
                         return 0;
                     }
                     if (this.mDevicesRoleForCapturePresetDispatcherStub == null) {
-                        this.mDevicesRoleForCapturePresetDispatcherStub = new CapturePresetDevicesRoleDispatcherStub();
+                        this.mDevicesRoleForCapturePresetDispatcherStub =
+                                new CapturePresetDevicesRoleDispatcherStub();
                     }
                     try {
-                        getService().registerCapturePresetDevicesRoleDispatcher(this.mDevicesRoleForCapturePresetDispatcherStub);
+                        getService()
+                                .registerCapturePresetDevicesRoleDispatcher(
+                                        this.mDevicesRoleForCapturePresetDispatcherStub);
                     } catch (RemoteException e) {
                         throw e.rethrowFromSystemServer();
                     }
@@ -1606,7 +1735,9 @@ public class AudioManager {
 
     private <T> int removeOnDevRoleForCapturePresetChangedListener(T listener, int deviceRole) {
         Objects.requireNonNull(listener);
-        DevRoleListeners<T> devRoleListeners = (DevRoleListeners) this.mDevRoleForCapturePresetListeners.get(Integer.valueOf(deviceRole));
+        DevRoleListeners<T> devRoleListeners =
+                (DevRoleListeners)
+                        this.mDevRoleForCapturePresetListeners.get(Integer.valueOf(deviceRole));
         if (devRoleListeners == null) {
             return -1;
         }
@@ -1621,7 +1752,9 @@ public class AudioManager {
                         return 0;
                     }
                     try {
-                        getService().unregisterCapturePresetDevicesRoleDispatcher(this.mDevicesRoleForCapturePresetDispatcherStub);
+                        getService()
+                                .unregisterCapturePresetDevicesRoleDispatcher(
+                                        this.mDevicesRoleForCapturePresetDispatcherStub);
                     } catch (RemoteException e) {
                         throw e.rethrowFromSystemServer();
                     }
@@ -1681,35 +1814,57 @@ public class AudioManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    final class CapturePresetDevicesRoleDispatcherStub extends ICapturePresetDevicesRoleDispatcher.Stub {
-        private CapturePresetDevicesRoleDispatcherStub() {
-        }
+    final class CapturePresetDevicesRoleDispatcherStub
+            extends ICapturePresetDevicesRoleDispatcher.Stub {
+        private CapturePresetDevicesRoleDispatcherStub() {}
 
         @Override // android.media.ICapturePresetDevicesRoleDispatcher
-        public void dispatchDevicesRoleChanged(final int capturePreset, int role, final List<AudioDeviceAttributes> devices) {
-            Object listenersObj = AudioManager.this.mDevRoleForCapturePresetListeners.get(Integer.valueOf(role));
+        public void dispatchDevicesRoleChanged(
+                final int capturePreset, int role, final List<AudioDeviceAttributes> devices) {
+            Object listenersObj =
+                    AudioManager.this.mDevRoleForCapturePresetListeners.get(Integer.valueOf(role));
             if (listenersObj == null) {
                 return;
             }
             switch (role) {
                 case 1:
-                    DevRoleListeners<OnPreferredDevicesForCapturePresetChangedListener> listeners = (DevRoleListeners) listenersObj;
+                    DevRoleListeners<OnPreferredDevicesForCapturePresetChangedListener> listeners =
+                            (DevRoleListeners) listenersObj;
                     synchronized (((DevRoleListeners) listeners).mDevRoleListenersLock) {
                         if (((DevRoleListeners) listeners).mListenerInfos.isEmpty()) {
                             return;
                         }
-                        ArrayList<DevRoleListenerInfo<OnPreferredDevicesForCapturePresetChangedListener>> prefDevListeners = (ArrayList) ((DevRoleListeners) listeners).mListenerInfos.clone();
+                        ArrayList<
+                                        DevRoleListenerInfo<
+                                                OnPreferredDevicesForCapturePresetChangedListener>>
+                                prefDevListeners =
+                                        (ArrayList)
+                                                ((DevRoleListeners) listeners)
+                                                        .mListenerInfos.clone();
                         long ident = Binder.clearCallingIdentity();
                         try {
-                            Iterator<DevRoleListenerInfo<OnPreferredDevicesForCapturePresetChangedListener>> it = prefDevListeners.iterator();
+                            Iterator<
+                                            DevRoleListenerInfo<
+                                                    OnPreferredDevicesForCapturePresetChangedListener>>
+                                    it = prefDevListeners.iterator();
                             while (it.hasNext()) {
-                                final DevRoleListenerInfo<OnPreferredDevicesForCapturePresetChangedListener> info = it.next();
-                                info.mExecutor.execute(new Runnable() { // from class: android.media.AudioManager$CapturePresetDevicesRoleDispatcherStub$$ExternalSyntheticLambda0
-                                    @Override // java.lang.Runnable
-                                    public final void run() {
-                                        ((AudioManager.OnPreferredDevicesForCapturePresetChangedListener) AudioManager.DevRoleListenerInfo.this.mListener).onPreferredDevicesForCapturePresetChanged(capturePreset, devices);
-                                    }
-                                });
+                                final DevRoleListenerInfo<
+                                                OnPreferredDevicesForCapturePresetChangedListener>
+                                        info = it.next();
+                                info.mExecutor.execute(
+                                        new Runnable() { // from class:
+                                            // android.media.AudioManager$CapturePresetDevicesRoleDispatcherStub$$ExternalSyntheticLambda0
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                ((AudioManager
+                                                                        .OnPreferredDevicesForCapturePresetChangedListener)
+                                                                AudioManager.DevRoleListenerInfo
+                                                                        .this
+                                                                        .mListener)
+                                                        .onPreferredDevicesForCapturePresetChanged(
+                                                                capturePreset, devices);
+                                            }
+                                        });
                             }
                             return;
                         } finally {
@@ -1728,7 +1883,8 @@ public class AudioManager {
         return AudioSystem.getDirectPlaybackSupport(format, attributes);
     }
 
-    public static boolean isOffloadedPlaybackSupported(AudioFormat format, AudioAttributes attributes) {
+    public static boolean isOffloadedPlaybackSupported(
+            AudioFormat format, AudioAttributes attributes) {
         if (format == null) {
             throw new NullPointerException("Illegal null AudioFormat");
         }
@@ -1761,7 +1917,8 @@ public class AudioManager {
     public void startBluetoothSco() {
         IAudioService service = getService();
         try {
-            service.startBluetoothSco(this.mICallBack, getContext().getApplicationInfo().targetSdkVersion);
+            service.startBluetoothSco(
+                    this.mICallBack, getContext().getApplicationInfo().targetSdkVersion);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1806,19 +1963,21 @@ public class AudioManager {
     }
 
     @Deprecated
-    public void setBluetoothA2dpOn(boolean on) {
-    }
+    public void setBluetoothA2dpOn(boolean on) {}
 
     public boolean isBluetoothA2dpOn() {
-        return AudioSystem.getDeviceConnectionState(128, "") == 1 || AudioSystem.getDeviceConnectionState(256, "") == 1 || AudioSystem.getDeviceConnectionState(512, "") == 1;
+        return AudioSystem.getDeviceConnectionState(128, "") == 1
+                || AudioSystem.getDeviceConnectionState(256, "") == 1
+                || AudioSystem.getDeviceConnectionState(512, "") == 1;
     }
 
     @Deprecated
-    public void setWiredHeadsetOn(boolean on) {
-    }
+    public void setWiredHeadsetOn(boolean on) {}
 
     public boolean isWiredHeadsetOn() {
-        if (AudioSystem.getDeviceConnectionState(4, "") == 0 && AudioSystem.getDeviceConnectionState(8, "") == 0 && AudioSystem.getDeviceConnectionState(67108864, "") == 0) {
+        if (AudioSystem.getDeviceConnectionState(4, "") == 0
+                && AudioSystem.getDeviceConnectionState(8, "") == 0
+                && AudioSystem.getDeviceConnectionState(67108864, "") == 0) {
             return false;
         }
         return true;
@@ -1827,7 +1986,11 @@ public class AudioManager {
     public void setMicrophoneMute(boolean on) {
         IAudioService service = getService();
         try {
-            service.setMicrophoneMute(on, getContext().getOpPackageName(), UserHandle.getCallingUserId(), getContext().getAttributionTag());
+            service.setMicrophoneMute(
+                    on,
+                    getContext().getOpPackageName(),
+                    UserHandle.getCallingUserId(),
+                    getContext().getAttributionTag());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1888,9 +2051,9 @@ public class AudioManager {
         }
     }
 
-    final class ModeDispatcherStub extends IAudioModeDispatcher.Stub implements CallbackUtil.DispatcherStub {
-        ModeDispatcherStub() {
-        }
+    final class ModeDispatcherStub extends IAudioModeDispatcher.Stub
+            implements CallbackUtil.DispatcherStub {
+        ModeDispatcherStub() {}
 
         @Override // android.media.CallbackUtil.DispatcherStub
         public void register(boolean register) {
@@ -1907,24 +2070,31 @@ public class AudioManager {
 
         @Override // android.media.IAudioModeDispatcher
         public void dispatchAudioModeChanged(final int mode) {
-            AudioManager.this.mModeChangedListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.AudioManager$ModeDispatcherStub$$ExternalSyntheticLambda0
-                @Override // android.media.CallbackUtil.CallbackMethod
-                public final void callbackMethod(Object obj) {
-                    ((AudioManager.OnModeChangedListener) obj).onModeChanged(mode);
-                }
-            });
+            AudioManager.this.mModeChangedListenerMgr.callListeners(
+                    new CallbackUtil.CallbackMethod() { // from class:
+                        // android.media.AudioManager$ModeDispatcherStub$$ExternalSyntheticLambda0
+                        @Override // android.media.CallbackUtil.CallbackMethod
+                        public final void callbackMethod(Object obj) {
+                            ((AudioManager.OnModeChangedListener) obj).onModeChanged(mode);
+                        }
+                    });
         }
     }
 
     public void addOnModeChangedListener(Executor executor, OnModeChangedListener listener) {
-        this.mModeChangedListenerMgr.addListener(executor, listener, "addOnModeChangedListener", new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda3
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                CallbackUtil.DispatcherStub lambda$addOnModeChangedListener$2;
-                lambda$addOnModeChangedListener$2 = AudioManager.this.lambda$addOnModeChangedListener$2();
-                return lambda$addOnModeChangedListener$2;
-            }
-        });
+        this.mModeChangedListenerMgr.addListener(
+                executor,
+                listener,
+                "addOnModeChangedListener",
+                new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda3
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        CallbackUtil.DispatcherStub lambda$addOnModeChangedListener$2;
+                        lambda$addOnModeChangedListener$2 =
+                                AudioManager.this.lambda$addOnModeChangedListener$2();
+                        return lambda$addOnModeChangedListener$2;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1946,8 +2116,7 @@ public class AudioManager {
     }
 
     @Deprecated
-    public void setRouting(int mode, int routes, int mask) {
-    }
+    public void setRouting(int mode, int routes, int mask) {}
 
     @Deprecated
     public int getRouting(int mode) {
@@ -2017,9 +2186,11 @@ public class AudioManager {
             setAudioServiceConfig(keyValuePairs);
             return;
         }
-        if (Rune.SEC_AUDIO_MIC_MODE_FOR_QUICK_PANEL_UI && keyValuePairs.contains(AudioParameter.SEC_LOCAL_CALL_TRANSLATION_MODE)) {
+        if (Rune.SEC_AUDIO_MIC_MODE_FOR_QUICK_PANEL_UI
+                && keyValuePairs.contains(AudioParameter.SEC_LOCAL_CALL_TRANSLATION_MODE)) {
             setAudioServiceConfig(keyValuePairs);
-        } else if (keyValuePairs.contains(AudioParameter.SEC_LOCAL_VOICE_RX_CONTROL_MODE) || keyValuePairs.contains(AudioParameter.SEC_LOCAL_VOICE_TX_CONTROL_MODE)) {
+        } else if (keyValuePairs.contains(AudioParameter.SEC_LOCAL_VOICE_RX_CONTROL_MODE)
+                || keyValuePairs.contains(AudioParameter.SEC_LOCAL_VOICE_TX_CONTROL_MODE)) {
             setAudioServiceConfig(keyValuePairs);
         } else {
             AudioSystem.setParameters(keyValuePairs);
@@ -2042,8 +2213,15 @@ public class AudioManager {
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public void setBluetoothHeadsetProperties(String name, boolean hasNrecEnabled, boolean hasWbsEnabled) {
-        AudioSystem.setParameters("bt_headset_name=" + name + ";bt_headset_nrec=" + (hasNrecEnabled ? "on" : "off") + ";bt_wbs=" + (hasWbsEnabled ? "on" : "off"));
+    public void setBluetoothHeadsetProperties(
+            String name, boolean hasNrecEnabled, boolean hasWbsEnabled) {
+        AudioSystem.setParameters(
+                "bt_headset_name="
+                        + name
+                        + ";bt_headset_nrec="
+                        + (hasNrecEnabled ? "on" : "off")
+                        + ";bt_wbs="
+                        + (hasWbsEnabled ? "on" : "off"));
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
@@ -2165,7 +2343,11 @@ public class AudioManager {
 
     private boolean hasCustomPolicyVirtualDeviceContext() {
         VirtualDeviceManager vdm;
-        return (this.mOriginalContextDeviceId == 0 || (vdm = getVirtualDeviceManager()) == null || vdm.getDevicePolicy(this.mOriginalContextDeviceId, 1) == 0) ? false : true;
+        return (this.mOriginalContextDeviceId == 0
+                        || (vdm = getVirtualDeviceManager()) == null
+                        || vdm.getDevicePolicy(this.mOriginalContextDeviceId, 1) == 0)
+                ? false
+                : true;
     }
 
     public void loadSoundEffects() {
@@ -2239,39 +2421,54 @@ public class AudioManager {
                 looper = handler.getLooper();
             }
             if (looper != null) {
-                this.mHandler = new Handler(looper) { // from class: android.media.AudioManager.ServiceEventHandlerDelegate.1
-                    @Override // android.os.Handler
-                    public void handleMessage(Message msg) {
-                        OnAudioFocusChangeListener listener;
-                        switch (msg.what) {
-                            case 0:
-                                FocusRequestInfo fri = AudioManager.this.findFocusRequestInfo((String) msg.obj);
-                                if (fri != null && (listener = fri.mRequest.getOnAudioFocusChangeListener()) != null) {
-                                    Log.d(AudioManager.TAG, "dispatching onAudioFocusChange(" + msg.arg1 + ") to " + msg.obj);
-                                    listener.onAudioFocusChange(msg.arg1);
-                                    break;
+                this.mHandler =
+                        new Handler(looper) { // from class:
+                            // android.media.AudioManager.ServiceEventHandlerDelegate.1
+                            @Override // android.os.Handler
+                            public void handleMessage(Message msg) {
+                                OnAudioFocusChangeListener listener;
+                                switch (msg.what) {
+                                    case 0:
+                                        FocusRequestInfo fri =
+                                                AudioManager.this.findFocusRequestInfo(
+                                                        (String) msg.obj);
+                                        if (fri != null
+                                                && (listener =
+                                                                fri.mRequest
+                                                                        .getOnAudioFocusChangeListener())
+                                                        != null) {
+                                            Log.d(
+                                                    AudioManager.TAG,
+                                                    "dispatching onAudioFocusChange("
+                                                            + msg.arg1
+                                                            + ") to "
+                                                            + msg.obj);
+                                            listener.onAudioFocusChange(msg.arg1);
+                                            break;
+                                        }
+                                        break;
+                                    case 1:
+                                        RecordConfigChangeCallbackData cbData =
+                                                (RecordConfigChangeCallbackData) msg.obj;
+                                        if (cbData.mCb != null) {
+                                            cbData.mCb.onRecordingConfigChanged(cbData.mConfigs);
+                                            break;
+                                        }
+                                        break;
+                                    case 2:
+                                        PlaybackConfigChangeCallbackData cbData2 =
+                                                (PlaybackConfigChangeCallbackData) msg.obj;
+                                        if (cbData2.mCb != null) {
+                                            cbData2.mCb.onPlaybackConfigChanged(cbData2.mConfigs);
+                                            break;
+                                        }
+                                        break;
+                                    default:
+                                        Log.e(AudioManager.TAG, "Unknown event " + msg.what);
+                                        break;
                                 }
-                                break;
-                            case 1:
-                                RecordConfigChangeCallbackData cbData = (RecordConfigChangeCallbackData) msg.obj;
-                                if (cbData.mCb != null) {
-                                    cbData.mCb.onRecordingConfigChanged(cbData.mConfigs);
-                                    break;
-                                }
-                                break;
-                            case 2:
-                                PlaybackConfigChangeCallbackData cbData2 = (PlaybackConfigChangeCallbackData) msg.obj;
-                                if (cbData2.mCb != null) {
-                                    cbData2.mCb.onPlaybackConfigChanged(cbData2.mConfigs);
-                                    break;
-                                }
-                                break;
-                            default:
-                                Log.e(AudioManager.TAG, "Unknown event " + msg.what);
-                                break;
-                        }
-                    }
-                };
+                            }
+                        };
             } else {
                 this.mHandler = null;
             }
@@ -2291,7 +2488,9 @@ public class AudioManager {
 
     public void registerAudioFocusRequest(AudioFocusRequest afr) {
         Handler h = afr.getOnAudioFocusChangeListenerHandler();
-        FocusRequestInfo fri = new FocusRequestInfo(afr, h == null ? null : new ServiceEventHandlerDelegate(h).getHandler());
+        FocusRequestInfo fri =
+                new FocusRequestInfo(
+                        afr, h == null ? null : new ServiceEventHandlerDelegate(h).getHandler());
         String key = getIdForAudioFocusListener(afr.getOnAudioFocusChangeListener());
         this.mAudioFocusIdListenerMap.put(key, fri);
     }
@@ -2303,7 +2502,14 @@ public class AudioManager {
     public int requestAudioFocus(OnAudioFocusChangeListener l, int streamType, int durationHint) {
         PlayerBase.deprecateStreamTypeForPlayback(streamType, TAG, "requestAudioFocus()");
         try {
-            int status = requestAudioFocus(l, new AudioAttributes.Builder().setInternalLegacyStreamType(streamType).build(), durationHint, 0);
+            int status =
+                    requestAudioFocus(
+                            l,
+                            new AudioAttributes.Builder()
+                                    .setInternalLegacyStreamType(streamType)
+                                    .build(),
+                            durationHint,
+                            0);
             return status;
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "Audio focus request denied due to ", e);
@@ -2319,19 +2525,32 @@ public class AudioManager {
         if (focusRequest == null) {
             throw new IllegalArgumentException("Illegal null AudioFocusRequest");
         }
-        return abandonAudioFocus(focusRequest.getOnAudioFocusChangeListener(), focusRequest.getAudioAttributes());
+        return abandonAudioFocus(
+                focusRequest.getOnAudioFocusChangeListener(), focusRequest.getAudioAttributes());
     }
 
     @SystemApi
-    public int requestAudioFocus(OnAudioFocusChangeListener l, AudioAttributes requestAttributes, int durationHint, int flags) throws IllegalArgumentException {
+    public int requestAudioFocus(
+            OnAudioFocusChangeListener l,
+            AudioAttributes requestAttributes,
+            int durationHint,
+            int flags)
+            throws IllegalArgumentException {
         if (flags != (flags & 3)) {
-            throw new IllegalArgumentException("Invalid flags 0x" + Integer.toHexString(flags).toUpperCase());
+            throw new IllegalArgumentException(
+                    "Invalid flags 0x" + Integer.toHexString(flags).toUpperCase());
         }
         return requestAudioFocus(l, requestAttributes, durationHint, flags & 3, null);
     }
 
     @SystemApi
-    public int requestAudioFocus(OnAudioFocusChangeListener l, AudioAttributes requestAttributes, int durationHint, int flags, AudioPolicy ap) throws IllegalArgumentException {
+    public int requestAudioFocus(
+            OnAudioFocusChangeListener l,
+            AudioAttributes requestAttributes,
+            int durationHint,
+            int flags,
+            AudioPolicy ap)
+            throws IllegalArgumentException {
         if (requestAttributes == null) {
             throw new IllegalArgumentException("Illegal null AudioAttributes argument");
         }
@@ -2339,31 +2558,55 @@ public class AudioManager {
             throw new IllegalArgumentException("Invalid duration hint");
         }
         if (flags != (flags & 7)) {
-            throw new IllegalArgumentException("Illegal flags 0x" + Integer.toHexString(flags).toUpperCase());
+            throw new IllegalArgumentException(
+                    "Illegal flags 0x" + Integer.toHexString(flags).toUpperCase());
         }
         if ((flags & 1) == 1 && l == null) {
-            throw new IllegalArgumentException("Illegal null focus listener when flagged as accepting delayed focus grant");
+            throw new IllegalArgumentException(
+                    "Illegal null focus listener when flagged as accepting delayed focus grant");
         }
         if ((flags & 2) == 2 && l == null) {
-            throw new IllegalArgumentException("Illegal null focus listener when flagged as pausing instead of ducking");
+            throw new IllegalArgumentException(
+                    "Illegal null focus listener when flagged as pausing instead of ducking");
         }
         if ((flags & 4) == 4 && ap == null) {
-            throw new IllegalArgumentException("Illegal null audio policy when locking audio focus");
+            throw new IllegalArgumentException(
+                    "Illegal null audio policy when locking audio focus");
         }
-        AudioFocusRequest afr = new AudioFocusRequest.Builder(durationHint).setOnAudioFocusChangeListenerInt(l, null).setAudioAttributes(requestAttributes).setAcceptsDelayedFocusGain((flags & 1) == 1).setWillPauseWhenDucked((flags & 2) == 2).setLocksFocus((flags & 4) == 4).build();
+        AudioFocusRequest afr =
+                new AudioFocusRequest.Builder(durationHint)
+                        .setOnAudioFocusChangeListenerInt(l, null)
+                        .setAudioAttributes(requestAttributes)
+                        .setAcceptsDelayedFocusGain((flags & 1) == 1)
+                        .setWillPauseWhenDucked((flags & 2) == 2)
+                        .setLocksFocus((flags & 4) == 4)
+                        .build();
         return requestAudioFocus(afr, ap);
     }
 
-    public int requestAudioFocusForTest(AudioFocusRequest afr, String clientFakeId, int clientFakeUid, int clientTargetSdk) {
+    public int requestAudioFocusForTest(
+            AudioFocusRequest afr, String clientFakeId, int clientFakeUid, int clientTargetSdk) {
         Objects.requireNonNull(afr);
         Objects.requireNonNull(clientFakeId);
         synchronized (this.mFocusRequestsLock) {
             try {
-                int status = getService().requestAudioFocusForTest(afr.getAudioAttributes(), afr.getFocusGain(), this.mICallBack, this.mAudioFocusDispatcher, clientFakeId, "com.android.test.fakeclient", afr.getFlags() | 8, clientFakeUid, clientTargetSdk);
+                int status =
+                        getService()
+                                .requestAudioFocusForTest(
+                                        afr.getAudioAttributes(),
+                                        afr.getFocusGain(),
+                                        this.mICallBack,
+                                        this.mAudioFocusDispatcher,
+                                        clientFakeId,
+                                        "com.android.test.fakeclient",
+                                        afr.getFlags() | 8,
+                                        clientFakeUid,
+                                        clientTargetSdk);
                 if (status != 100) {
                     return status;
                 }
-                BlockingFocusResultReceiver focusReceiver = addClientIdToFocusReceiverLocked(clientFakeId);
+                BlockingFocusResultReceiver focusReceiver =
+                        addClientIdToFocusReceiverLocked(clientFakeId);
                 return handleExternalAudioPolicyWaitIfNeeded(clientFakeId, focusReceiver);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
@@ -2375,7 +2618,12 @@ public class AudioManager {
         Objects.requireNonNull(afr);
         Objects.requireNonNull(clientFakeId);
         try {
-            return getService().abandonAudioFocusForTest(this.mAudioFocusDispatcher, clientFakeId, afr.getAudioAttributes(), "com.android.test.fakeclient");
+            return getService()
+                    .abandonAudioFocusForTest(
+                            this.mAudioFocusDispatcher,
+                            clientFakeId,
+                            afr.getAudioAttributes(),
+                            "com.android.test.fakeclient");
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -2417,7 +2665,11 @@ public class AudioManager {
     public boolean enterAudioFocusFreezeForTest(List<Integer> exemptedUids) {
         Objects.requireNonNull(exemptedUids);
         try {
-            int[] uids = exemptedUids.stream().mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2()).toArray();
+            int[] uids =
+                    exemptedUids.stream()
+                            .mapToInt(
+                                    new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2())
+                            .toArray();
             return getService().enterAudioFocusFreezeForTest(this.mICallBack, uids);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -2440,7 +2692,8 @@ public class AudioManager {
             throw new NullPointerException("Illegal null AudioFocusRequest");
         }
         if (afr.locksFocus() && ap == null) {
-            throw new IllegalArgumentException("Illegal null audio policy when locking audio focus");
+            throw new IllegalArgumentException(
+                    "Illegal null audio policy when locking audio focus");
         }
         if (hasCustomPolicyVirtualDeviceContext()) {
             return 1;
@@ -2457,7 +2710,8 @@ public class AudioManager {
         synchronized (this.mFocusRequestsLock) {
             try {
                 try {
-                    boolean isFmRadioAttribute = afr.getAudioAttributes().getTags().contains(FM_RADIO);
+                    boolean isFmRadioAttribute =
+                            afr.getAudioAttributes().getTags().contains(FM_RADIO);
                     if (Rune.SEC_AUDIO_FM_RADIO && isFmRadioAttribute) {
                         callingPackageName = AudioManagerHelper.getFmRadioPackageName(getContext());
                     } else {
@@ -2470,11 +2724,23 @@ public class AudioManager {
                     throw e;
                 }
                 try {
-                    int status = service.requestAudioFocus(afr.getAudioAttributes(), afr.getFocusGain(), this.mICallBack, this.mAudioFocusDispatcher, clientId, callingPackageName, getContext().getAttributionTag(), afr.getFlags(), ap != null ? ap.cb() : null, sdk);
+                    int status =
+                            service.requestAudioFocus(
+                                    afr.getAudioAttributes(),
+                                    afr.getFocusGain(),
+                                    this.mICallBack,
+                                    this.mAudioFocusDispatcher,
+                                    clientId,
+                                    callingPackageName,
+                                    getContext().getAttributionTag(),
+                                    afr.getFlags(),
+                                    ap != null ? ap.cb() : null,
+                                    sdk);
                     if (status != 100) {
                         return status;
                     }
-                    BlockingFocusResultReceiver focusReceiver = addClientIdToFocusReceiverLocked(clientId);
+                    BlockingFocusResultReceiver focusReceiver =
+                            addClientIdToFocusReceiverLocked(clientId);
                     return handleExternalAudioPolicyWaitIfNeeded(clientId, focusReceiver);
                 } catch (RemoteException e3) {
                     e = e3;
@@ -2496,7 +2762,8 @@ public class AudioManager {
         return focusReceiver;
     }
 
-    private int handleExternalAudioPolicyWaitIfNeeded(String clientId, BlockingFocusResultReceiver focusReceiver) {
+    private int handleExternalAudioPolicyWaitIfNeeded(
+            String clientId, BlockingFocusResultReceiver focusReceiver) {
         focusReceiver.waitForResult(250L);
         synchronized (this.mFocusRequestsLock) {
             this.mFocusRequestsAwaitingResult.remove(clientId);
@@ -2575,7 +2842,17 @@ public class AudioManager {
     public void requestAudioFocusForCall(int streamType, int durationHint) {
         IAudioService service = getService();
         try {
-            service.requestAudioFocus(new AudioAttributes.Builder().setInternalLegacyStreamType(streamType).build(), durationHint, this.mICallBack, null, AudioSystem.IN_VOICE_COMM_FOCUS_ID, getContext().getOpPackageName(), getContext().getAttributionTag(), 4, null, 0);
+            service.requestAudioFocus(
+                    new AudioAttributes.Builder().setInternalLegacyStreamType(streamType).build(),
+                    durationHint,
+                    this.mICallBack,
+                    null,
+                    AudioSystem.IN_VOICE_COMM_FOCUS_ID,
+                    getContext().getOpPackageName(),
+                    getContext().getAttributionTag(),
+                    4,
+                    null,
+                    0);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -2623,13 +2900,19 @@ public class AudioManager {
     }
 
     @SystemApi
-    public int dispatchAudioFocusChangeWithFade(AudioFocusInfo afi, int focusChange, AudioPolicy ap, List<AudioFocusInfo> otherActiveAfis, FadeManagerConfiguration transientFadeMgrConfig) {
+    public int dispatchAudioFocusChangeWithFade(
+            AudioFocusInfo afi,
+            int focusChange,
+            AudioPolicy ap,
+            List<AudioFocusInfo> otherActiveAfis,
+            FadeManagerConfiguration transientFadeMgrConfig) {
         Objects.requireNonNull(afi, "AudioFocusInfo cannot be null");
         Objects.requireNonNull(ap, "AudioPolicy cannot be null");
         Objects.requireNonNull(otherActiveAfis, "Other active AudioFocusInfo list cannot be null");
         IAudioService service = getService();
         try {
-            return service.dispatchFocusChangeWithFade(afi, focusChange, ap.cb(), otherActiveAfis, transientFadeMgrConfig);
+            return service.dispatchFocusChangeWithFade(
+                    afi, focusChange, ap.cb(), otherActiveAfis, transientFadeMgrConfig);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -2638,7 +2921,11 @@ public class AudioManager {
     public void abandonAudioFocusForCall() {
         IAudioService service = getService();
         try {
-            service.abandonAudioFocus(null, AudioSystem.IN_VOICE_COMM_FOCUS_ID, null, getContext().getOpPackageName());
+            service.abandonAudioFocus(
+                    null,
+                    AudioSystem.IN_VOICE_COMM_FOCUS_ID,
+                    null,
+                    getContext().getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -2656,7 +2943,11 @@ public class AudioManager {
         unregisterAudioFocusRequest(l);
         IAudioService service = getService();
         try {
-            return service.abandonAudioFocus(this.mAudioFocusDispatcher, getIdForAudioFocusListener(l), aa, getContext().getOpPackageName());
+            return service.abandonAudioFocus(
+                    this.mAudioFocusDispatcher,
+                    getIdForAudioFocusListener(l),
+                    aa,
+                    getContext().getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -2668,7 +2959,10 @@ public class AudioManager {
             return;
         }
         if (!eventReceiver.getPackageName().equals(getContext().getPackageName())) {
-            Log.e(TAG, "registerMediaButtonEventReceiver() error: receiver and context package names don't match");
+            Log.e(
+                    TAG,
+                    "registerMediaButtonEventReceiver() error: receiver and context package names"
+                            + " don't match");
             return;
         }
         Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
@@ -2763,7 +3057,16 @@ public class AudioManager {
         IAudioService service = getService();
         try {
             MediaProjection projection = policy.getMediaProjection();
-            String regId = service.registerAudioPolicy(policy.getConfig(), policy.cb(), policy.hasFocusListener(), policy.isFocusPolicy(), policy.isTestFocusPolicy(), policy.isVolumeController(), projection == null ? null : projection.getProjection(), policy.getAttributionSource());
+            String regId =
+                    service.registerAudioPolicy(
+                            policy.getConfig(),
+                            policy.cb(),
+                            policy.hasFocusListener(),
+                            policy.isFocusPolicy(),
+                            policy.isTestFocusPolicy(),
+                            policy.isVolumeController(),
+                            projection == null ? null : projection.getProjection(),
+                            policy.getAttributionSource());
             if (regId == null) {
                 return -1;
             }
@@ -2826,9 +3129,8 @@ public class AudioManager {
         }
     }
 
-    public static abstract class AudioPlaybackCallback {
-        public void onPlaybackConfigChanged(List<AudioPlaybackConfiguration> configs) {
-        }
+    public abstract static class AudioPlaybackCallback {
+        public void onPlaybackConfigChanged(List<AudioPlaybackConfiguration> configs) {}
     }
 
     private static class AudioPlaybackCallbackInfo {
@@ -2845,7 +3147,8 @@ public class AudioManager {
         final AudioPlaybackCallback mCb;
         final List<AudioPlaybackConfiguration> mConfigs;
 
-        PlaybackConfigChangeCallbackData(AudioPlaybackCallback cb, List<AudioPlaybackConfiguration> configs) {
+        PlaybackConfigChangeCallbackData(
+                AudioPlaybackCallback cb, List<AudioPlaybackConfiguration> configs) {
             this.mCb = cb;
             this.mConfigs = configs;
         }
@@ -2861,7 +3164,9 @@ public class AudioManager {
             }
             int oldCbCount = this.mPlaybackCallbackList.size();
             if (!hasPlaybackCallback_sync(cb)) {
-                this.mPlaybackCallbackList.add(new AudioPlaybackCallbackInfo(cb, new ServiceEventHandlerDelegate(handler).getHandler()));
+                this.mPlaybackCallbackList.add(
+                        new AudioPlaybackCallbackInfo(
+                                cb, new ServiceEventHandlerDelegate(handler).getHandler()));
                 int newCbCount = this.mPlaybackCallbackList.size();
                 if (oldCbCount == 0 && newCbCount > 0) {
                     try {
@@ -2871,7 +3176,10 @@ public class AudioManager {
                     }
                 }
             } else {
-                Log.w(TAG, "attempt to call registerAudioPlaybackCallback() on a previouslyregistered callback");
+                Log.w(
+                        TAG,
+                        "attempt to call registerAudioPlaybackCallback() on a previouslyregistered"
+                                + " callback");
             }
         }
     }
@@ -2882,7 +3190,10 @@ public class AudioManager {
         }
         synchronized (this.mPlaybackCallbackLock) {
             if (this.mPlaybackCallbackList == null) {
-                Log.w(TAG, "attempt to call unregisterAudioPlaybackCallback() on a callback that was never registered");
+                Log.w(
+                        TAG,
+                        "attempt to call unregisterAudioPlaybackCallback() on a callback that was"
+                                + " never registered");
                 return;
             }
             int oldCbCount = this.mPlaybackCallbackList.size();
@@ -2896,7 +3207,10 @@ public class AudioManager {
                     }
                 }
             } else {
-                Log.w(TAG, "attempt to call unregisterAudioPlaybackCallback() on a callback already unregistered or never registered");
+                Log.w(
+                        TAG,
+                        "attempt to call unregisterAudioPlaybackCallback() on a callback already"
+                                + " unregistered or never registered");
             }
         }
     }
@@ -2935,9 +3249,8 @@ public class AudioManager {
         return false;
     }
 
-    public static abstract class AudioRecordingCallback {
-        public void onRecordingConfigChanged(List<AudioRecordingConfiguration> configs) {
-        }
+    public abstract static class AudioRecordingCallback {
+        public void onRecordingConfigChanged(List<AudioRecordingConfiguration> configs) {}
     }
 
     private static class AudioRecordingCallbackInfo {
@@ -2954,7 +3267,8 @@ public class AudioManager {
         final AudioRecordingCallback mCb;
         final List<AudioRecordingConfiguration> mConfigs;
 
-        RecordConfigChangeCallbackData(AudioRecordingCallback cb, List<AudioRecordingConfiguration> configs) {
+        RecordConfigChangeCallbackData(
+                AudioRecordingCallback cb, List<AudioRecordingConfiguration> configs) {
             this.mCb = cb;
             this.mConfigs = configs;
         }
@@ -2970,7 +3284,9 @@ public class AudioManager {
             }
             int oldCbCount = this.mRecordCallbackList.size();
             if (!hasRecordCallback_sync(cb)) {
-                this.mRecordCallbackList.add(new AudioRecordingCallbackInfo(cb, new ServiceEventHandlerDelegate(handler).getHandler()));
+                this.mRecordCallbackList.add(
+                        new AudioRecordingCallbackInfo(
+                                cb, new ServiceEventHandlerDelegate(handler).getHandler()));
                 int newCbCount = this.mRecordCallbackList.size();
                 if (oldCbCount == 0 && newCbCount > 0) {
                     IAudioService service = getService();
@@ -2981,7 +3297,10 @@ public class AudioManager {
                     }
                 }
             } else {
-                Log.w(TAG, "attempt to call registerAudioRecordingCallback() on a previouslyregistered callback");
+                Log.w(
+                        TAG,
+                        "attempt to call registerAudioRecordingCallback() on a previouslyregistered"
+                                + " callback");
             }
         }
     }
@@ -3006,7 +3325,10 @@ public class AudioManager {
                     }
                 }
             } else {
-                Log.w(TAG, "attempt to call unregisterAudioRecordingCallback() on a callback already unregistered or never registered");
+                Log.w(
+                        TAG,
+                        "attempt to call unregisterAudioRecordingCallback() on a callback already"
+                                + " unregistered or never registered");
             }
         }
     }
@@ -3104,17 +3426,20 @@ public class AudioManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    static final class IDevicesForAttributesCallbackStub extends IDevicesForAttributesCallback.Stub {
+    static final class IDevicesForAttributesCallbackStub
+            extends IDevicesForAttributesCallback.Stub {
         CallbackUtil.ListenerInfo<OnDevicesForAttributesChangedListener> mInfo;
 
-        IDevicesForAttributesCallbackStub(OnDevicesForAttributesChangedListener listener, Executor executor) {
+        IDevicesForAttributesCallbackStub(
+                OnDevicesForAttributesChangedListener listener, Executor executor) {
             this.mInfo = new CallbackUtil.ListenerInfo<>(listener, executor);
         }
 
         public void register(boolean register, AudioAttributes attributes) {
             try {
                 if (register) {
-                    AudioManager.getService().addOnDevicesForAttributesChangedListener(attributes, this);
+                    AudioManager.getService()
+                            .addOnDevicesForAttributesChangedListener(attributes, this);
                 } else {
                     AudioManager.getService().removeOnDevicesForAttributesChangedListener(this);
                 }
@@ -3124,28 +3449,39 @@ public class AudioManager {
         }
 
         @Override // android.media.IDevicesForAttributesCallback
-        public void onDevicesForAttributesChanged(final AudioAttributes attributes, boolean forVolume, final List<AudioDeviceAttributes> devices) {
-            this.mInfo.mExecutor.execute(new Runnable() { // from class: android.media.AudioManager$IDevicesForAttributesCallbackStub$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AudioManager.IDevicesForAttributesCallbackStub.this.lambda$onDevicesForAttributesChanged$0(attributes, devices);
-                }
-            });
+        public void onDevicesForAttributesChanged(
+                final AudioAttributes attributes,
+                boolean forVolume,
+                final List<AudioDeviceAttributes> devices) {
+            this.mInfo.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.media.AudioManager$IDevicesForAttributesCallbackStub$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AudioManager.IDevicesForAttributesCallbackStub.this
+                                    .lambda$onDevicesForAttributesChanged$0(attributes, devices);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onDevicesForAttributesChanged$0(AudioAttributes attributes, List devices) {
+        public /* synthetic */ void lambda$onDevicesForAttributesChanged$0(
+                AudioAttributes attributes, List devices) {
             this.mInfo.mListener.onDevicesForAttributesChanged(attributes, devices);
         }
     }
 
     @SystemApi
-    public void addOnDevicesForAttributesChangedListener(AudioAttributes attributes, Executor executor, OnDevicesForAttributesChangedListener listener) {
+    public void addOnDevicesForAttributesChangedListener(
+            AudioAttributes attributes,
+            Executor executor,
+            OnDevicesForAttributesChangedListener listener) {
         Objects.requireNonNull(attributes);
         Objects.requireNonNull(executor);
         Objects.requireNonNull(listener);
         synchronized (this.mDevicesForAttributesListenerToStub) {
-            IDevicesForAttributesCallbackStub callbackStub = this.mDevicesForAttributesListenerToStub.get(listener);
+            IDevicesForAttributesCallbackStub callbackStub =
+                    this.mDevicesForAttributesListenerToStub.get(listener);
             if (callbackStub == null) {
                 callbackStub = new IDevicesForAttributesCallbackStub(listener, executor);
                 this.mDevicesForAttributesListenerToStub.put(listener, callbackStub);
@@ -3155,10 +3491,12 @@ public class AudioManager {
     }
 
     @SystemApi
-    public void removeOnDevicesForAttributesChangedListener(OnDevicesForAttributesChangedListener listener) {
+    public void removeOnDevicesForAttributesChangedListener(
+            OnDevicesForAttributesChangedListener listener) {
         Objects.requireNonNull(listener);
         synchronized (this.mDevicesForAttributesListenerToStub) {
-            IDevicesForAttributesCallbackStub callbackStub = this.mDevicesForAttributesListenerToStub.get(listener);
+            IDevicesForAttributesCallbackStub callbackStub =
+                    this.mDevicesForAttributesListenerToStub.get(listener);
             if (callbackStub != null) {
                 callbackStub.register(false, null);
             }
@@ -3170,12 +3508,15 @@ public class AudioManager {
         try {
             Objects.requireNonNull(attributes);
             IAudioService service = getService();
-            List<AudioDeviceAttributes> devicesForAttributes = service.getDevicesForAttributesUnprotected(attributes);
+            List<AudioDeviceAttributes> devicesForAttributes =
+                    service.getDevicesForAttributesUnprotected(attributes);
             AudioDeviceInfo[] outputDeviceInfos = getDevicesStatic(2);
             List<AudioDeviceInfo> deviceInfosForAttributes = new ArrayList<>();
             for (AudioDeviceAttributes deviceForAttributes : devicesForAttributes) {
                 for (AudioDeviceInfo deviceInfo : outputDeviceInfos) {
-                    if (deviceForAttributes.getType() == deviceInfo.getType() && TextUtils.equals(deviceForAttributes.getAddress(), deviceInfo.getAddress())) {
+                    if (deviceForAttributes.getType() == deviceInfo.getType()
+                            && TextUtils.equals(
+                                    deviceForAttributes.getAddress(), deviceInfo.getAddress())) {
                         deviceInfosForAttributes.add(deviceInfo);
                     }
                 }
@@ -3207,7 +3548,8 @@ public class AudioManager {
         enforceValidVolumeBehavior(deviceVolumeBehavior);
         IAudioService service = getService();
         try {
-            service.setDeviceVolumeBehavior(device, deviceVolumeBehavior, this.mApplicationContext.getOpPackageName());
+            service.setDeviceVolumeBehavior(
+                    device, deviceVolumeBehavior, this.mApplicationContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -3219,7 +3561,8 @@ public class AudioManager {
         IAudioService service = getService();
         try {
             int behavior = service.getDeviceVolumeBehavior(device);
-            if (!CompatChanges.isChangeEnabled(RETURN_DEVICE_VOLUME_BEHAVIOR_ABSOLUTE_ADJUST_ONLY) && behavior == 5) {
+            if (!CompatChanges.isChangeEnabled(RETURN_DEVICE_VOLUME_BEHAVIOR_ABSOLUTE_ADJUST_ONLY)
+                    && behavior == 5) {
                 return 1;
             }
             return behavior;
@@ -3247,7 +3590,8 @@ public class AudioManager {
     public void setWiredDeviceConnectionState(AudioDeviceAttributes attributes, int state) {
         IAudioService service = getService();
         try {
-            service.setWiredDeviceConnectionState(attributes, state, this.mApplicationContext.getOpPackageName());
+            service.setWiredDeviceConnectionState(
+                    attributes, state, this.mApplicationContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -3262,8 +3606,16 @@ public class AudioManager {
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public void handleBluetoothActiveDeviceChanged(BluetoothDevice newDevice, BluetoothDevice previousDevice, BluetoothProfileConnectionInfo info) {
-        Log.d(TAG, "handleBluetoothActiveDeviceChanged newDevice = " + AudioManagerHelper.getAddressForLog(newDevice) + ", prevDevice = " + AudioManagerHelper.getAddressForLog(previousDevice));
+    public void handleBluetoothActiveDeviceChanged(
+            BluetoothDevice newDevice,
+            BluetoothDevice previousDevice,
+            BluetoothProfileConnectionInfo info) {
+        Log.d(
+                TAG,
+                "handleBluetoothActiveDeviceChanged newDevice = "
+                        + AudioManagerHelper.getAddressForLog(newDevice)
+                        + ", prevDevice = "
+                        + AudioManagerHelper.getAddressForLog(previousDevice));
         IAudioService service = getService();
         try {
             service.handleBluetoothActiveDeviceChanged(newDevice, previousDevice, info);
@@ -3296,13 +3648,20 @@ public class AudioManager {
             return null;
         }
         if (PROPERTY_SUPPORT_MIC_NEAR_ULTRASOUND.equals(key)) {
-            return String.valueOf(getContext().getResources().getBoolean(R.bool.config_supportMicNearUltrasound));
+            return String.valueOf(
+                    getContext().getResources().getBoolean(R.bool.config_supportMicNearUltrasound));
         }
         if (PROPERTY_SUPPORT_SPEAKER_NEAR_ULTRASOUND.equals(key)) {
-            return String.valueOf(getContext().getResources().getBoolean(R.bool.config_supportSpeakerNearUltrasound));
+            return String.valueOf(
+                    getContext()
+                            .getResources()
+                            .getBoolean(R.bool.config_supportSpeakerNearUltrasound));
         }
         if (PROPERTY_SUPPORT_AUDIO_SOURCE_UNPROCESSED.equals(key)) {
-            return String.valueOf(getContext().getResources().getBoolean(R.bool.config_supportAudioSourceUnprocessed));
+            return String.valueOf(
+                    getContext()
+                            .getResources()
+                            .getBoolean(R.bool.config_supportAudioSourceUnprocessed));
         }
         return null;
     }
@@ -3311,7 +3670,8 @@ public class AudioManager {
     public boolean setAdditionalOutputDeviceDelay(AudioDeviceInfo device, long delayMillis) {
         Objects.requireNonNull(device);
         try {
-            return getService().setAdditionalOutputDeviceDelay(new AudioDeviceAttributes(device), delayMillis);
+            return getService()
+                    .setAdditionalOutputDeviceDelay(new AudioDeviceAttributes(device), delayMillis);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -3331,7 +3691,8 @@ public class AudioManager {
     public long getMaxAdditionalOutputDeviceDelay(AudioDeviceInfo device) {
         Objects.requireNonNull(device);
         try {
-            return getService().getMaxAdditionalOutputDeviceDelay(new AudioDeviceAttributes(device));
+            return getService()
+                    .getMaxAdditionalOutputDeviceDelay(new AudioDeviceAttributes(device));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -3508,7 +3869,8 @@ public class AudioManager {
         }
     }
 
-    public void setBluetoothAudioDeviceCategory_legacy(String address, boolean isBle, int btAudioDeviceType) {
+    public void setBluetoothAudioDeviceCategory_legacy(
+            String address, boolean isBle, int btAudioDeviceType) {
         if (android.media.audio.Flags.automaticBtDeviceType()) {
             return;
         }
@@ -3636,7 +3998,8 @@ public class AudioManager {
         return status;
     }
 
-    private static void filterDevicePorts(ArrayList<AudioPort> ports, ArrayList<AudioDevicePort> devices) {
+    private static void filterDevicePorts(
+            ArrayList<AudioPort> ports, ArrayList<AudioDevicePort> devices) {
         devices.clear();
         for (int i = 0; i < ports.size(); i++) {
             if (ports.get(i) instanceof AudioDevicePort) {
@@ -3645,7 +4008,8 @@ public class AudioManager {
         }
     }
 
-    public static int createAudioPatch(AudioPatch[] patch, AudioPortConfig[] sources, AudioPortConfig[] sinks) {
+    public static int createAudioPatch(
+            AudioPatch[] patch, AudioPortConfig[] sources, AudioPortConfig[] sinks) {
         return AudioSystem.createAudioPatch(patch, sources, sinks);
     }
 
@@ -3662,7 +4026,13 @@ public class AudioManager {
             return -2;
         }
         AudioPortConfig activeConfig = port.activeConfig();
-        AudioPortConfig config = new AudioPortConfig(port, activeConfig.samplingRate(), activeConfig.channelMask(), activeConfig.format(), gain);
+        AudioPortConfig config =
+                new AudioPortConfig(
+                        port,
+                        activeConfig.samplingRate(),
+                        activeConfig.channelMask(),
+                        activeConfig.format(),
+                        gain);
         config.mConfigMask = 8;
         return AudioSystem.setAudioPortConfig(config);
     }
@@ -3685,7 +4055,10 @@ public class AudioManager {
         return generation;
     }
 
-    static int updateAudioPortCache(ArrayList<AudioPort> ports, ArrayList<AudioPatch> patches, ArrayList<AudioPort> previousPorts) {
+    static int updateAudioPortCache(
+            ArrayList<AudioPort> ports,
+            ArrayList<AudioPatch> patches,
+            ArrayList<AudioPort> previousPorts) {
         sAudioPortEventHandler.init();
         synchronized (sAudioPortGenerationLock) {
             if (sAudioPortGeneration == 0) {
@@ -3706,7 +4079,8 @@ public class AudioManager {
                         Log.w(TAG, "updateAudioPortCache: listAudioPatches failed");
                         return status2;
                     }
-                    if (patchGeneration[0] == portGeneration[0] || (ports != null && patches != null)) {
+                    if (patchGeneration[0] == portGeneration[0]
+                            || (ports != null && patches != null)) {
                         break;
                     }
                 }
@@ -3715,11 +4089,13 @@ public class AudioManager {
                 }
                 for (int i = 0; i < newPatches.size(); i++) {
                     for (int j = 0; j < newPatches.get(i).sources().length; j++) {
-                        AudioPortConfig portCfg = updatePortConfig(newPatches.get(i).sources()[j], newPorts);
+                        AudioPortConfig portCfg =
+                                updatePortConfig(newPatches.get(i).sources()[j], newPorts);
                         newPatches.get(i).sources()[j] = portCfg;
                     }
                     for (int j2 = 0; j2 < newPatches.get(i).sinks().length; j2++) {
-                        AudioPortConfig portCfg2 = updatePortConfig(newPatches.get(i).sinks()[j2], newPorts);
+                        AudioPortConfig portCfg2 =
+                                updatePortConfig(newPatches.get(i).sinks()[j2], newPorts);
                         newPatches.get(i).sinks()[j2] = portCfg2;
                     }
                 }
@@ -3802,9 +4178,15 @@ public class AudioManager {
         AudioGainConfig gainCfg = portCfg.gain();
         if (gainCfg != null) {
             AudioGain gain = port.gain(gainCfg.index());
-            gainCfg = gain.buildConfig(gainCfg.mode(), gainCfg.channelMask(), gainCfg.values(), gainCfg.rampDurationMs());
+            gainCfg =
+                    gain.buildConfig(
+                            gainCfg.mode(),
+                            gainCfg.channelMask(),
+                            gainCfg.values(),
+                            gainCfg.rampDurationMs());
         }
-        return port.buildConfig(portCfg.samplingRate(), portCfg.channelMask(), portCfg.format(), gainCfg);
+        return port.buildConfig(
+                portCfg.samplingRate(), portCfg.channelMask(), portCfg.format(), gainCfg);
     }
 
     private static boolean checkFlags(AudioDevicePort port, int flags) {
@@ -3820,16 +4202,27 @@ public class AudioManager {
 
     public Set<Integer> getSupportedDeviceTypes(int direction) {
         if (direction != 2 && direction != 1) {
-            throw new IllegalArgumentException("AudioManager.getSupportedDeviceTypes(0x" + Integer.toHexString(direction) + ") - Invalid.");
+            throw new IllegalArgumentException(
+                    "AudioManager.getSupportedDeviceTypes(0x"
+                            + Integer.toHexString(direction)
+                            + ") - Invalid.");
         }
         IntArray internalDeviceTypes = new IntArray();
         int status = AudioSystem.getSupportedDeviceTypes(direction, internalDeviceTypes);
         if (status != 0) {
-            Log.e(TAG, "AudioManager.getSupportedDeviceTypes(" + direction + ") failed. status:" + status);
+            Log.e(
+                    TAG,
+                    "AudioManager.getSupportedDeviceTypes("
+                            + direction
+                            + ") failed. status:"
+                            + status);
         }
         HashSet<Integer> externalDeviceTypes = new HashSet<>();
         for (int index = 0; index < internalDeviceTypes.size(); index++) {
-            externalDeviceTypes.add(Integer.valueOf(AudioDeviceInfo.convertInternalDeviceToDeviceType(internalDeviceTypes.get(index))));
+            externalDeviceTypes.add(
+                    Integer.valueOf(
+                            AudioDeviceInfo.convertInternalDeviceToDeviceType(
+                                    internalDeviceTypes.get(index))));
         }
         return externalDeviceTypes;
     }
@@ -3838,7 +4231,8 @@ public class AudioManager {
         return getDevicesStatic(flags);
     }
 
-    private static AudioDeviceInfo[] infoListFromPortList(ArrayList<AudioDevicePort> ports, int flags) {
+    private static AudioDeviceInfo[] infoListFromPortList(
+            ArrayList<AudioDevicePort> ports, int flags) {
         int numRecs = 0;
         Iterator<AudioDevicePort> it = ports.iterator();
         while (it.hasNext()) {
@@ -3860,7 +4254,8 @@ public class AudioManager {
         return deviceList;
     }
 
-    private static AudioDeviceInfo[] calcListDeltas(ArrayList<AudioDevicePort> ports_A, ArrayList<AudioDevicePort> ports_B, int flags) {
+    private static AudioDeviceInfo[] calcListDeltas(
+            ArrayList<AudioDevicePort> ports_A, ArrayList<AudioDevicePort> ports_B, int flags) {
         ArrayList<AudioDevicePort> delta_ports = new ArrayList<>();
         for (int cur_index = 0; cur_index < ports_B.size(); cur_index++) {
             boolean cur_port_found = false;
@@ -3907,7 +4302,8 @@ public class AudioManager {
                         }
                         registerAudioPortUpdateListener(this.mPortListener);
                     }
-                    NativeEventHandlerDelegate delegate = new NativeEventHandlerDelegate(callback, handler);
+                    NativeEventHandlerDelegate delegate =
+                            new NativeEventHandlerDelegate(callback, handler);
                     this.mDeviceCallbacks.put(callback, delegate);
                     broadcastDeviceListChange_sync(delegate.getHandler());
                 }
@@ -3937,7 +4333,9 @@ public class AudioManager {
                     break;
                 }
                 AudioDeviceInfo device = devices[i2];
-                if (device.getPort().type() != microphones.get(i).getInternalDeviceType() || !TextUtils.equals(device.getAddress(), microphones.get(i).getAddress())) {
+                if (device.getPort().type() != microphones.get(i).getInternalDeviceType()
+                        || !TextUtils.equals(
+                                device.getAddress(), microphones.get(i).getAddress())) {
                     i2++;
                 } else {
                     microphones.get(i).setId(device.getId());
@@ -3946,7 +4344,12 @@ public class AudioManager {
                 }
             }
             if (!foundPortId) {
-                Log.i(TAG, "Failed to find port id for device with type:" + microphones.get(i).getType() + " address:" + microphones.get(i).getAddress());
+                Log.i(
+                        TAG,
+                        "Failed to find port id for device with type:"
+                                + microphones.get(i).getType()
+                                + " address:"
+                                + microphones.get(i).getAddress());
                 microphones.remove(i);
             }
         }
@@ -3960,12 +4363,28 @@ public class AudioManager {
         } else {
             micLocation = deviceType == 0 ? 0 : 3;
         }
-        MicrophoneInfo microphone = new MicrophoneInfo(deviceInfo.getPort().name() + deviceInfo.getId(), deviceInfo.getPort().type(), deviceInfo.getAddress(), micLocation, -1, -1, MicrophoneInfo.POSITION_UNKNOWN, MicrophoneInfo.ORIENTATION_UNKNOWN, new ArrayList(), new ArrayList(), -3.4028235E38f, -3.4028235E38f, -3.4028235E38f, 0);
+        MicrophoneInfo microphone =
+                new MicrophoneInfo(
+                        deviceInfo.getPort().name() + deviceInfo.getId(),
+                        deviceInfo.getPort().type(),
+                        deviceInfo.getAddress(),
+                        micLocation,
+                        -1,
+                        -1,
+                        MicrophoneInfo.POSITION_UNKNOWN,
+                        MicrophoneInfo.ORIENTATION_UNKNOWN,
+                        new ArrayList(),
+                        new ArrayList(),
+                        -3.4028235E38f,
+                        -3.4028235E38f,
+                        -3.4028235E38f,
+                        0);
         microphone.setId(deviceInfo.getId());
         return microphone;
     }
 
-    private void addMicrophonesFromAudioDeviceInfo(ArrayList<MicrophoneInfo> microphones, HashSet<Integer> filterTypes) {
+    private void addMicrophonesFromAudioDeviceInfo(
+            ArrayList<MicrophoneInfo> microphones, HashSet<Integer> filterTypes) {
         AudioDeviceInfo[] devices = getDevicesStatic(1);
         for (AudioDeviceInfo device : devices) {
             if (!filterTypes.contains(Integer.valueOf(device.getType()))) {
@@ -4008,16 +4427,19 @@ public class AudioManager {
             Integer format = it.next();
             int btSourceCodec = AudioSystem.audioFormatToBluetoothSourceCodec(format.intValue());
             if (btSourceCodec != 1000000) {
-                codecConfigList.add(new BluetoothCodecConfig.Builder().setCodecType(btSourceCodec).build());
+                codecConfigList.add(
+                        new BluetoothCodecConfig.Builder().setCodecType(btSourceCodec).build());
             }
         }
         return codecConfigList;
     }
 
-    private List<BluetoothLeAudioCodecConfig> getHwOffloadFormatsSupportedForLeAudio(int deviceType) {
+    private List<BluetoothLeAudioCodecConfig> getHwOffloadFormatsSupportedForLeAudio(
+            int deviceType) {
         ArrayList<Integer> formatsList = new ArrayList<>();
         ArrayList<BluetoothLeAudioCodecConfig> leAudioCodecConfigList = new ArrayList<>();
-        int status = AudioSystem.getHwOffloadFormatsSupportedForBluetoothMedia(deviceType, formatsList);
+        int status =
+                AudioSystem.getHwOffloadFormatsSupportedForBluetoothMedia(deviceType, formatsList);
         if (status != 0) {
             Log.e(TAG, "getHwOffloadEncodingFormatsSupportedForLeAudio failed:" + status);
             return leAudioCodecConfigList;
@@ -4025,9 +4447,13 @@ public class AudioManager {
         Iterator<Integer> it = formatsList.iterator();
         while (it.hasNext()) {
             Integer format = it.next();
-            int btLeAudioCodec = AudioSystem.audioFormatToBluetoothLeAudioSourceCodec(format.intValue());
+            int btLeAudioCodec =
+                    AudioSystem.audioFormatToBluetoothLeAudioSourceCodec(format.intValue());
             if (btLeAudioCodec != 1000000) {
-                leAudioCodecConfigList.add(new BluetoothLeAudioCodecConfig.Builder().setCodecType(btLeAudioCodec).build());
+                leAudioCodecConfigList.add(
+                        new BluetoothLeAudioCodecConfig.Builder()
+                                .setCodecType(btLeAudioCodec)
+                                .build());
             }
         }
         return leAudioCodecConfigList;
@@ -4055,7 +4481,8 @@ public class AudioManager {
             handler.sendMessage(Message.obtain(handler, 0, deviceList));
         } else {
             AudioDeviceInfo[] added_devices = calcListDeltas(this.mPreviousPorts, current_ports, 3);
-            AudioDeviceInfo[] removed_devices = calcListDeltas(current_ports, this.mPreviousPorts, 3);
+            AudioDeviceInfo[] removed_devices =
+                    calcListDeltas(current_ports, this.mPreviousPorts, 3);
             if (added_devices.length != 0 || removed_devices.length != 0) {
                 for (int i = 0; i < this.mDeviceCallbacks.size(); i++) {
                     Handler handler2 = this.mDeviceCallbacks.valueAt(i).getHandler();
@@ -4076,8 +4503,7 @@ public class AudioManager {
     private class OnAmPortUpdateListener implements OnAudioPortUpdateListener {
         static final String TAG = "OnAmPortUpdateListener";
 
-        private OnAmPortUpdateListener() {
-        }
+        private OnAmPortUpdateListener() {}
 
         @Override // android.media.AudioManager.OnAudioPortUpdateListener
         public void onAudioPortListUpdate(AudioPort[] portList) {
@@ -4087,8 +4513,7 @@ public class AudioManager {
         }
 
         @Override // android.media.AudioManager.OnAudioPortUpdateListener
-        public void onAudioPatchListUpdate(AudioPatch[] patchList) {
-        }
+        public void onAudioPatchListUpdate(AudioPatch[] patchList) {}
 
         @Override // android.media.AudioManager.OnAudioPortUpdateListener
         public void onServiceDied() {
@@ -4099,18 +4524,15 @@ public class AudioManager {
     }
 
     @SystemApi
-    public static abstract class AudioServerStateCallback {
-        public void onAudioServerDown() {
-        }
+    public abstract static class AudioServerStateCallback {
+        public void onAudioServerDown() {}
 
-        public void onAudioServerUp() {
-        }
+        public void onAudioServerUp() {}
     }
 
     /* renamed from: android.media.AudioManager$4, reason: invalid class name */
     class AnonymousClass4 extends IAudioServerStateDispatcher.Stub {
-        AnonymousClass4() {
-        }
+        AnonymousClass4() {}
 
         @Override // android.media.IAudioServerStateDispatcher
         public void dispatchAudioServerStateChange(boolean state) {
@@ -4124,34 +4546,41 @@ public class AudioManager {
                 return;
             }
             if (state) {
-                exec.execute(new Runnable() { // from class: android.media.AudioManager$4$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        AudioManager.AudioServerStateCallback.this.onAudioServerUp();
-                    }
-                });
+                exec.execute(
+                        new Runnable() { // from class:
+                            // android.media.AudioManager$4$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                AudioManager.AudioServerStateCallback.this.onAudioServerUp();
+                            }
+                        });
             } else {
-                exec.execute(new Runnable() { // from class: android.media.AudioManager$4$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        AudioManager.AudioServerStateCallback.this.onAudioServerDown();
-                    }
-                });
+                exec.execute(
+                        new Runnable() { // from class:
+                            // android.media.AudioManager$4$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                AudioManager.AudioServerStateCallback.this.onAudioServerDown();
+                            }
+                        });
             }
         }
     }
 
     @SystemApi
-    public void setAudioServerStateCallback(Executor executor, AudioServerStateCallback stateCallback) {
+    public void setAudioServerStateCallback(
+            Executor executor, AudioServerStateCallback stateCallback) {
         if (stateCallback == null) {
             throw new IllegalArgumentException("Illegal null AudioServerStateCallback");
         }
         if (executor == null) {
-            throw new IllegalArgumentException("Illegal null Executor for the AudioServerStateCallback");
+            throw new IllegalArgumentException(
+                    "Illegal null Executor for the AudioServerStateCallback");
         }
         synchronized (this.mAudioServerStateCbLock) {
             if (this.mAudioServerStateCb != null) {
-                throw new IllegalStateException("setAudioServerStateCallback called with already registered callabck");
+                throw new IllegalStateException(
+                        "setAudioServerStateCallback called with already registered callabck");
             }
             IAudioService service = getService();
             try {
@@ -4200,7 +4629,8 @@ public class AudioManager {
 
     public int getEncodedSurroundMode() {
         try {
-            return getService().getEncodedSurroundMode(getContext().getApplicationInfo().targetSdkVersion);
+            return getService()
+                    .getEncodedSurroundMode(getContext().getApplicationInfo().targetSdkVersion);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -4281,9 +4711,8 @@ public class AudioManager {
     }
 
     @SystemApi
-    public static abstract class VolumeGroupCallback {
-        public void onAudioVolumeGroupChanged(int group, int flags) {
-        }
+    public abstract static class VolumeGroupCallback {
+        public void onAudioVolumeGroupChanged(int group, int flags) {}
     }
 
     @SystemApi
@@ -4306,7 +4735,8 @@ public class AudioManager {
             extractor.setDataSource(context, uri, (Map<String, String>) null);
             for (int i = 0; i < extractor.getTrackCount(); i++) {
                 MediaFormat format = extractor.getTrackFormat(i);
-                if (format.containsKey(MediaFormat.KEY_HAPTIC_CHANNEL_COUNT) && format.getInteger(MediaFormat.KEY_HAPTIC_CHANNEL_COUNT) > 0) {
+                if (format.containsKey(MediaFormat.KEY_HAPTIC_CHANNEL_COUNT)
+                        && format.getInteger(MediaFormat.KEY_HAPTIC_CHANNEL_COUNT) > 0) {
                     return true;
                 }
             }
@@ -4342,36 +4772,89 @@ public class AudioManager {
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public void adjustSuggestedStreamVolumeForUid(int suggestedStreamType, int direction, int flags, String packageName, int uid, int pid, int targetSdkVersion) {
+    public void adjustSuggestedStreamVolumeForUid(
+            int suggestedStreamType,
+            int direction,
+            int flags,
+            String packageName,
+            int uid,
+            int pid,
+            int targetSdkVersion) {
         if (AudioManagerHelper.needToLogCaller(getContext().getOpPackageName())) {
-            AudioManagerHelper.logCaller("suggestedStreamType=%d, direction=%d", Integer.valueOf(suggestedStreamType), Integer.valueOf(direction));
+            AudioManagerHelper.logCaller(
+                    "suggestedStreamType=%d, direction=%d",
+                    Integer.valueOf(suggestedStreamType), Integer.valueOf(direction));
         }
         try {
-            getService().adjustSuggestedStreamVolumeForUid(suggestedStreamType, direction, flags, packageName, uid, pid, UserHandle.getUserHandleForUid(uid), targetSdkVersion);
+            getService()
+                    .adjustSuggestedStreamVolumeForUid(
+                            suggestedStreamType,
+                            direction,
+                            flags,
+                            packageName,
+                            uid,
+                            pid,
+                            UserHandle.getUserHandleForUid(uid),
+                            targetSdkVersion);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public void adjustStreamVolumeForUid(int streamType, int direction, int flags, String packageName, int uid, int pid, int targetSdkVersion) {
+    public void adjustStreamVolumeForUid(
+            int streamType,
+            int direction,
+            int flags,
+            String packageName,
+            int uid,
+            int pid,
+            int targetSdkVersion) {
         if (AudioManagerHelper.needToLogCaller(getContext().getOpPackageName())) {
-            AudioManagerHelper.logCaller("suggestedStreamType=%d, direction=%d", Integer.valueOf(streamType), Integer.valueOf(direction));
+            AudioManagerHelper.logCaller(
+                    "suggestedStreamType=%d, direction=%d",
+                    Integer.valueOf(streamType), Integer.valueOf(direction));
         }
         try {
-            getService().adjustStreamVolumeForUid(streamType, direction, flags, packageName, uid, pid, UserHandle.getUserHandleForUid(uid), targetSdkVersion);
+            getService()
+                    .adjustStreamVolumeForUid(
+                            streamType,
+                            direction,
+                            flags,
+                            packageName,
+                            uid,
+                            pid,
+                            UserHandle.getUserHandleForUid(uid),
+                            targetSdkVersion);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public void setStreamVolumeForUid(int streamType, int index, int flags, String packageName, int uid, int pid, int targetSdkVersion) {
+    public void setStreamVolumeForUid(
+            int streamType,
+            int index,
+            int flags,
+            String packageName,
+            int uid,
+            int pid,
+            int targetSdkVersion) {
         if (AudioManagerHelper.needToLogCaller(getContext().getOpPackageName())) {
-            AudioManagerHelper.logCaller("streamType=%d, index=%d", Integer.valueOf(streamType), Integer.valueOf(index));
+            AudioManagerHelper.logCaller(
+                    "streamType=%d, index=%d", Integer.valueOf(streamType), Integer.valueOf(index));
         }
         try {
-            getService().setStreamVolumeForUid(streamType, index, flags, packageName, uid, pid, UserHandle.getUserHandleForUid(uid), targetSdkVersion);
+            getService()
+                    .setStreamVolumeForUid(
+                            streamType,
+                            index,
+                            flags,
+                            packageName,
+                            uid,
+                            pid,
+                            UserHandle.getUserHandleForUid(uid),
+                            targetSdkVersion);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -4467,30 +4950,41 @@ public class AudioManager {
         return deviceForType;
     }
 
-    public void addOnCommunicationDeviceChangedListener(Executor executor, OnCommunicationDeviceChangedListener listener) {
-        this.mCommDeviceChangedListenerMgr.addListener(executor, listener, "addOnCommunicationDeviceChangedListener", new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda8
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                CallbackUtil.DispatcherStub lambda$addOnCommunicationDeviceChangedListener$3;
-                lambda$addOnCommunicationDeviceChangedListener$3 = AudioManager.this.lambda$addOnCommunicationDeviceChangedListener$3();
-                return lambda$addOnCommunicationDeviceChangedListener$3;
-            }
-        });
+    public void addOnCommunicationDeviceChangedListener(
+            Executor executor, OnCommunicationDeviceChangedListener listener) {
+        this.mCommDeviceChangedListenerMgr.addListener(
+                executor,
+                listener,
+                "addOnCommunicationDeviceChangedListener",
+                new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda8
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        CallbackUtil.DispatcherStub
+                                lambda$addOnCommunicationDeviceChangedListener$3;
+                        lambda$addOnCommunicationDeviceChangedListener$3 =
+                                AudioManager.this
+                                        .lambda$addOnCommunicationDeviceChangedListener$3();
+                        return lambda$addOnCommunicationDeviceChangedListener$3;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ CallbackUtil.DispatcherStub lambda$addOnCommunicationDeviceChangedListener$3() {
+    public /* synthetic */ CallbackUtil.DispatcherStub
+            lambda$addOnCommunicationDeviceChangedListener$3() {
         return new CommunicationDeviceDispatcherStub();
     }
 
-    public void removeOnCommunicationDeviceChangedListener(OnCommunicationDeviceChangedListener listener) {
-        this.mCommDeviceChangedListenerMgr.removeListener(listener, "removeOnCommunicationDeviceChangedListener");
+    public void removeOnCommunicationDeviceChangedListener(
+            OnCommunicationDeviceChangedListener listener) {
+        this.mCommDeviceChangedListenerMgr.removeListener(
+                listener, "removeOnCommunicationDeviceChangedListener");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    final class CommunicationDeviceDispatcherStub extends ICommunicationDeviceDispatcher.Stub implements CallbackUtil.DispatcherStub {
-        private CommunicationDeviceDispatcherStub() {
-        }
+    final class CommunicationDeviceDispatcherStub extends ICommunicationDeviceDispatcher.Stub
+            implements CallbackUtil.DispatcherStub {
+        private CommunicationDeviceDispatcherStub() {}
 
         @Override // android.media.CallbackUtil.DispatcherStub
         public void register(boolean register) {
@@ -4508,12 +5002,15 @@ public class AudioManager {
         @Override // android.media.ICommunicationDeviceDispatcher
         public void dispatchCommunicationDeviceChanged(int portId) {
             final AudioDeviceInfo device = AudioManager.getDeviceForPortId(portId, 2);
-            AudioManager.this.mCommDeviceChangedListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.AudioManager$CommunicationDeviceDispatcherStub$$ExternalSyntheticLambda0
-                @Override // android.media.CallbackUtil.CallbackMethod
-                public final void callbackMethod(Object obj) {
-                    ((AudioManager.OnCommunicationDeviceChangedListener) obj).onCommunicationDeviceChanged(AudioDeviceInfo.this);
-                }
-            });
+            AudioManager.this.mCommDeviceChangedListenerMgr.callListeners(
+                    new CallbackUtil.CallbackMethod() { // from class:
+                        // android.media.AudioManager$CommunicationDeviceDispatcherStub$$ExternalSyntheticLambda0
+                        @Override // android.media.CallbackUtil.CallbackMethod
+                        public final void callbackMethod(Object obj) {
+                            ((AudioManager.OnCommunicationDeviceChangedListener) obj)
+                                    .onCommunicationDeviceChanged(AudioDeviceInfo.this);
+                        }
+                    });
         }
     }
 
@@ -4557,8 +5054,7 @@ public class AudioManager {
         public int redirectMode;
         public WeakReference trackOrRecord;
 
-        CallIRedirectionClientInfo() {
-        }
+        CallIRedirectionClientInfo() {}
     }
 
     @SystemApi
@@ -4567,18 +5063,30 @@ public class AudioManager {
         checkCallRedirectionFormat(format, true);
         int redirectMode = getCallRedirectMode();
         if (redirectMode == 0) {
-            throw new IllegalStateException(" not available in mode " + AudioSystem.modeToString(getMode()));
+            throw new IllegalStateException(
+                    " not available in mode " + AudioSystem.modeToString(getMode()));
         }
         if (redirectMode == 1 && !isPstnCallAudioInterceptable()) {
             throw new UnsupportedOperationException(" PSTN Call audio not accessible ");
         }
-        AudioTrack track = new AudioTrack.Builder().setAudioAttributes(new AudioAttributes.Builder().setSystemUsage(17).setContentType(1).build()).setAudioFormat(format).setCallRedirectionMode(redirectMode).build();
+        AudioTrack track =
+                new AudioTrack.Builder()
+                        .setAudioAttributes(
+                                new AudioAttributes.Builder()
+                                        .setSystemUsage(17)
+                                        .setContentType(1)
+                                        .build())
+                        .setAudioFormat(format)
+                        .setCallRedirectionMode(redirectMode)
+                        .build();
         if (track != null && track.getState() != 0) {
             synchronized (this.mCallRedirectionLock) {
                 if (this.mCallRedirectionModeListener == null) {
                     this.mCallRedirectionModeListener = new CallInjectionModeChangedListener();
                     try {
-                        addOnModeChangedListener(Executors.newSingleThreadExecutor(), this.mCallRedirectionModeListener);
+                        addOnModeChangedListener(
+                                Executors.newSingleThreadExecutor(),
+                                this.mCallRedirectionModeListener);
                         this.mCallIRedirectionClients = new ArrayList<>();
                     } catch (Exception e) {
                         Log.e(TAG, "addOnModeChangedListener failed with exception: " + e);
@@ -4602,18 +5110,27 @@ public class AudioManager {
         checkCallRedirectionFormat(format, false);
         int redirectMode = getCallRedirectMode();
         if (redirectMode == 0) {
-            throw new IllegalStateException(" not available in mode " + AudioSystem.modeToString(getMode()));
+            throw new IllegalStateException(
+                    " not available in mode " + AudioSystem.modeToString(getMode()));
         }
         if (redirectMode == 1 && !isPstnCallAudioInterceptable()) {
             throw new UnsupportedOperationException(" PSTN Call audio not accessible ");
         }
-        AudioRecord record = new AudioRecord.Builder().setAudioAttributes(new AudioAttributes.Builder().setInternalCapturePreset(3).build()).setAudioFormat(format).setCallRedirectionMode(redirectMode).build();
+        AudioRecord record =
+                new AudioRecord.Builder()
+                        .setAudioAttributes(
+                                new AudioAttributes.Builder().setInternalCapturePreset(3).build())
+                        .setAudioFormat(format)
+                        .setCallRedirectionMode(redirectMode)
+                        .build();
         if (record != null && record.getState() != 0) {
             synchronized (this.mCallRedirectionLock) {
                 if (this.mCallRedirectionModeListener == null) {
                     this.mCallRedirectionModeListener = new CallInjectionModeChangedListener();
                     try {
-                        addOnModeChangedListener(Executors.newSingleThreadExecutor(), this.mCallRedirectionModeListener);
+                        addOnModeChangedListener(
+                                Executors.newSingleThreadExecutor(),
+                                this.mCallRedirectionModeListener);
                         this.mCallIRedirectionClients = new ArrayList<>();
                     } catch (Exception e) {
                         Log.e(TAG, "addOnModeChangedListener failed with exception: " + e);
@@ -4632,19 +5149,21 @@ public class AudioManager {
     }
 
     class CallInjectionModeChangedListener implements OnModeChangedListener {
-        CallInjectionModeChangedListener() {
-        }
+        CallInjectionModeChangedListener() {}
 
         @Override // android.media.AudioManager.OnModeChangedListener
         public void onModeChanged(int mode) {
             AudioManager audioManager;
             synchronized (AudioManager.this.mCallRedirectionLock) {
-                ArrayList<CallIRedirectionClientInfo> clientInfos = (ArrayList) AudioManager.this.mCallIRedirectionClients.clone();
+                ArrayList<CallIRedirectionClientInfo> clientInfos =
+                        (ArrayList) AudioManager.this.mCallIRedirectionClients.clone();
                 Iterator<CallIRedirectionClientInfo> it = clientInfos.iterator();
                 while (it.hasNext()) {
                     CallIRedirectionClientInfo info = it.next();
                     Object trackOrRecord = info.trackOrRecord.get();
-                    if (trackOrRecord != null && ((info.redirectMode == 1 && mode != 2 && mode != 4 && mode != 5) || (info.redirectMode == 2 && mode != 3 && mode != 6))) {
+                    if (trackOrRecord != null
+                            && ((info.redirectMode == 1 && mode != 2 && mode != 4 && mode != 5)
+                                    || (info.redirectMode == 2 && mode != 3 && mode != 6))) {
                         if (trackOrRecord instanceof AudioTrack) {
                             AudioTrack track = (AudioTrack) trackOrRecord;
                             track.release();
@@ -4659,12 +5178,15 @@ public class AudioManager {
                     try {
                         try {
                             if (AudioManager.this.mCallRedirectionModeListener != null) {
-                                AudioManager.this.removeOnModeChangedListener(AudioManager.this.mCallRedirectionModeListener);
+                                AudioManager.this.removeOnModeChangedListener(
+                                        AudioManager.this.mCallRedirectionModeListener);
                             }
                             AudioManager.this.mCallRedirectionModeListener = null;
                             audioManager = AudioManager.this;
                         } catch (Exception e) {
-                            Log.e(AudioManager.TAG, "removeOnModeChangedListener failed with exception: " + e);
+                            Log.e(
+                                    AudioManager.TAG,
+                                    "removeOnModeChangedListener failed with exception: " + e);
                             AudioManager.this.mCallRedirectionModeListener = null;
                             audioManager = AudioManager.this;
                         }
@@ -4680,7 +5202,9 @@ public class AudioManager {
     }
 
     @SystemApi
-    public void muteAwaitConnection(int[] usagesToMute, AudioDeviceAttributes device, long timeout, TimeUnit timeUnit) throws IllegalStateException {
+    public void muteAwaitConnection(
+            int[] usagesToMute, AudioDeviceAttributes device, long timeout, TimeUnit timeUnit)
+            throws IllegalStateException {
         if (timeout <= 0) {
             throw new IllegalArgumentException("Timeout must be greater than 0");
         }
@@ -4707,7 +5231,8 @@ public class AudioManager {
     }
 
     @SystemApi
-    public void cancelMuteAwaitConnection(AudioDeviceAttributes device) throws IllegalStateException {
+    public void cancelMuteAwaitConnection(AudioDeviceAttributes device)
+            throws IllegalStateException {
         Objects.requireNonNull(device);
         try {
             getService().cancelMuteAwaitConnection(device);
@@ -4717,57 +5242,85 @@ public class AudioManager {
     }
 
     @SystemApi
-    public static abstract class MuteAwaitConnectionCallback {
+    public abstract static class MuteAwaitConnectionCallback {
         public static final int EVENT_CANCEL = 3;
         public static final int EVENT_CONNECTION = 1;
         public static final int EVENT_TIMEOUT = 2;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface UnmuteEvent {
-        }
+        public @interface UnmuteEvent {}
 
-        public void onMutedUntilConnection(AudioDeviceAttributes device, int[] mutedUsages) {
-        }
+        public void onMutedUntilConnection(AudioDeviceAttributes device, int[] mutedUsages) {}
 
-        public void onUnmutedEvent(int unmuteEvent, AudioDeviceAttributes device, int[] mutedUsages) {
-        }
+        public void onUnmutedEvent(
+                int unmuteEvent, AudioDeviceAttributes device, int[] mutedUsages) {}
     }
 
     @SystemApi
-    public void registerMuteAwaitConnectionCallback(Executor executor, MuteAwaitConnectionCallback callback) {
+    public void registerMuteAwaitConnectionCallback(
+            Executor executor, MuteAwaitConnectionCallback callback) {
         synchronized (this.mMuteAwaitConnectionListenerLock) {
-            Pair<ArrayList<CallbackUtil.ListenerInfo<MuteAwaitConnectionCallback>>, MuteAwaitConnectionDispatcherStub> res = CallbackUtil.addListener("registerMuteAwaitConnectionCallback", executor, callback, this.mMuteAwaitConnectionListeners, this.mMuteAwaitConnDispatcherStub, new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda1
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    AudioManager.MuteAwaitConnectionDispatcherStub lambda$registerMuteAwaitConnectionCallback$4;
-                    lambda$registerMuteAwaitConnectionCallback$4 = AudioManager.this.lambda$registerMuteAwaitConnectionCallback$4();
-                    return lambda$registerMuteAwaitConnectionCallback$4;
-                }
-            }, new Consumer() { // from class: android.media.AudioManager$$ExternalSyntheticLambda2
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((AudioManager.MuteAwaitConnectionDispatcherStub) obj).register(true);
-                }
-            });
+            Pair<
+                            ArrayList<CallbackUtil.ListenerInfo<MuteAwaitConnectionCallback>>,
+                            MuteAwaitConnectionDispatcherStub>
+                    res =
+                            CallbackUtil.addListener(
+                                    "registerMuteAwaitConnectionCallback",
+                                    executor,
+                                    callback,
+                                    this.mMuteAwaitConnectionListeners,
+                                    this.mMuteAwaitConnDispatcherStub,
+                                    new Supplier() { // from class:
+                                        // android.media.AudioManager$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            AudioManager.MuteAwaitConnectionDispatcherStub
+                                                    lambda$registerMuteAwaitConnectionCallback$4;
+                                            lambda$registerMuteAwaitConnectionCallback$4 =
+                                                    AudioManager.this
+                                                            .lambda$registerMuteAwaitConnectionCallback$4();
+                                            return lambda$registerMuteAwaitConnectionCallback$4;
+                                        }
+                                    },
+                                    new Consumer() { // from class:
+                                        // android.media.AudioManager$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            ((AudioManager.MuteAwaitConnectionDispatcherStub) obj)
+                                                    .register(true);
+                                        }
+                                    });
             this.mMuteAwaitConnectionListeners = res.first;
             this.mMuteAwaitConnDispatcherStub = res.second;
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ MuteAwaitConnectionDispatcherStub lambda$registerMuteAwaitConnectionCallback$4() {
+    public /* synthetic */ MuteAwaitConnectionDispatcherStub
+            lambda$registerMuteAwaitConnectionCallback$4() {
         return new MuteAwaitConnectionDispatcherStub();
     }
 
     @SystemApi
     public void unregisterMuteAwaitConnectionCallback(MuteAwaitConnectionCallback callback) {
         synchronized (this.mMuteAwaitConnectionListenerLock) {
-            Pair<ArrayList<CallbackUtil.ListenerInfo<MuteAwaitConnectionCallback>>, MuteAwaitConnectionDispatcherStub> res = CallbackUtil.removeListener("unregisterMuteAwaitConnectionCallback", callback, this.mMuteAwaitConnectionListeners, this.mMuteAwaitConnDispatcherStub, new Consumer() { // from class: android.media.AudioManager$$ExternalSyntheticLambda6
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((AudioManager.MuteAwaitConnectionDispatcherStub) obj).register(false);
-                }
-            });
+            Pair<
+                            ArrayList<CallbackUtil.ListenerInfo<MuteAwaitConnectionCallback>>,
+                            MuteAwaitConnectionDispatcherStub>
+                    res =
+                            CallbackUtil.removeListener(
+                                    "unregisterMuteAwaitConnectionCallback",
+                                    callback,
+                                    this.mMuteAwaitConnectionListeners,
+                                    this.mMuteAwaitConnDispatcherStub,
+                                    new Consumer() { // from class:
+                                        // android.media.AudioManager$$ExternalSyntheticLambda6
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            ((AudioManager.MuteAwaitConnectionDispatcherStub) obj)
+                                                    .register(false);
+                                        }
+                                    });
             this.mMuteAwaitConnectionListeners = res.first;
             this.mMuteAwaitConnDispatcherStub = res.second;
         }
@@ -4832,26 +5385,36 @@ public class AudioManager {
     public List<AudioMixerAttributes> getSupportedMixerAttributes(AudioDeviceInfo device) {
         Objects.requireNonNull(device);
         List<AudioMixerAttributes> mixerAttrs = new ArrayList<>();
-        return AudioSystem.getSupportedMixerAttributes(device.getId(), mixerAttrs) == 0 ? mixerAttrs : new ArrayList();
+        return AudioSystem.getSupportedMixerAttributes(device.getId(), mixerAttrs) == 0
+                ? mixerAttrs
+                : new ArrayList();
     }
 
-    public boolean setPreferredMixerAttributes(AudioAttributes attributes, AudioDeviceInfo device, AudioMixerAttributes mixerAttributes) {
+    public boolean setPreferredMixerAttributes(
+            AudioAttributes attributes,
+            AudioDeviceInfo device,
+            AudioMixerAttributes mixerAttributes) {
         Objects.requireNonNull(attributes);
         Objects.requireNonNull(device);
         Objects.requireNonNull(mixerAttributes);
         try {
-            int status = getService().setPreferredMixerAttributes(attributes, device.getId(), mixerAttributes);
+            int status =
+                    getService()
+                            .setPreferredMixerAttributes(
+                                    attributes, device.getId(), mixerAttributes);
             return status == 0;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public AudioMixerAttributes getPreferredMixerAttributes(AudioAttributes attributes, AudioDeviceInfo device) {
+    public AudioMixerAttributes getPreferredMixerAttributes(
+            AudioAttributes attributes, AudioDeviceInfo device) {
         Objects.requireNonNull(attributes);
         Objects.requireNonNull(device);
         List<AudioMixerAttributes> mixerAttrList = new ArrayList<>();
-        int ret = AudioSystem.getPreferredMixerAttributes(attributes, device.getId(), mixerAttrList);
+        int ret =
+                AudioSystem.getPreferredMixerAttributes(attributes, device.getId(), mixerAttrList);
         if (ret == 0) {
             if (mixerAttrList.isEmpty()) {
                 return null;
@@ -4862,7 +5425,8 @@ public class AudioManager {
         return null;
     }
 
-    public boolean clearPreferredMixerAttributes(AudioAttributes attributes, AudioDeviceInfo device) {
+    public boolean clearPreferredMixerAttributes(
+            AudioAttributes attributes, AudioDeviceInfo device) {
         Objects.requireNonNull(attributes);
         Objects.requireNonNull(device);
         try {
@@ -4873,33 +5437,45 @@ public class AudioManager {
         }
     }
 
-    public void addOnPreferredMixerAttributesChangedListener(Executor executor, OnPreferredMixerAttributesChangedListener listener) {
+    public void addOnPreferredMixerAttributesChangedListener(
+            Executor executor, OnPreferredMixerAttributesChangedListener listener) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(listener);
-        this.mPrefMixerAttributesListenerMgr.addListener(executor, listener, "addOnPreferredMixerAttributesChangedListener", new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                CallbackUtil.DispatcherStub lambda$addOnPreferredMixerAttributesChangedListener$7;
-                lambda$addOnPreferredMixerAttributesChangedListener$7 = AudioManager.this.lambda$addOnPreferredMixerAttributesChangedListener$7();
-                return lambda$addOnPreferredMixerAttributesChangedListener$7;
-            }
-        });
+        this.mPrefMixerAttributesListenerMgr.addListener(
+                executor,
+                listener,
+                "addOnPreferredMixerAttributesChangedListener",
+                new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        CallbackUtil.DispatcherStub
+                                lambda$addOnPreferredMixerAttributesChangedListener$7;
+                        lambda$addOnPreferredMixerAttributesChangedListener$7 =
+                                AudioManager.this
+                                        .lambda$addOnPreferredMixerAttributesChangedListener$7();
+                        return lambda$addOnPreferredMixerAttributesChangedListener$7;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ CallbackUtil.DispatcherStub lambda$addOnPreferredMixerAttributesChangedListener$7() {
+    public /* synthetic */ CallbackUtil.DispatcherStub
+            lambda$addOnPreferredMixerAttributesChangedListener$7() {
         return new PreferredMixerAttributesDispatcherStub();
     }
 
-    public void removeOnPreferredMixerAttributesChangedListener(OnPreferredMixerAttributesChangedListener listener) {
+    public void removeOnPreferredMixerAttributesChangedListener(
+            OnPreferredMixerAttributesChangedListener listener) {
         Objects.requireNonNull(listener);
-        this.mPrefMixerAttributesListenerMgr.removeListener(listener, "removeOnPreferredMixerAttributesChangedListener");
+        this.mPrefMixerAttributesListenerMgr.removeListener(
+                listener, "removeOnPreferredMixerAttributesChangedListener");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    final class PreferredMixerAttributesDispatcherStub extends IPreferredMixerAttributesDispatcher.Stub implements CallbackUtil.DispatcherStub {
-        private PreferredMixerAttributesDispatcherStub() {
-        }
+    final class PreferredMixerAttributesDispatcherStub
+            extends IPreferredMixerAttributesDispatcher.Stub
+            implements CallbackUtil.DispatcherStub {
+        private PreferredMixerAttributesDispatcherStub() {}
 
         @Override // android.media.CallbackUtil.DispatcherStub
         public void register(boolean register) {
@@ -4915,17 +5491,26 @@ public class AudioManager {
         }
 
         @Override // android.media.IPreferredMixerAttributesDispatcher
-        public void dispatchPrefMixerAttributesChanged(final AudioAttributes attr, int deviceId, final AudioMixerAttributes mixerAttr) {
+        public void dispatchPrefMixerAttributesChanged(
+                final AudioAttributes attr, int deviceId, final AudioMixerAttributes mixerAttr) {
             final AudioDeviceInfo device = AudioManager.getDeviceForPortId(deviceId, 2);
             if (device == null) {
-                Log.d(AudioManager.TAG, "Drop preferred mixer attributes changed as the device(" + deviceId + ") is disconnected");
+                Log.d(
+                        AudioManager.TAG,
+                        "Drop preferred mixer attributes changed as the device("
+                                + deviceId
+                                + ") is disconnected");
             } else {
-                AudioManager.this.mPrefMixerAttributesListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.AudioManager$PreferredMixerAttributesDispatcherStub$$ExternalSyntheticLambda0
-                    @Override // android.media.CallbackUtil.CallbackMethod
-                    public final void callbackMethod(Object obj) {
-                        ((AudioManager.OnPreferredMixerAttributesChangedListener) obj).onPreferredMixerAttributesChanged(AudioAttributes.this, device, mixerAttr);
-                    }
-                });
+                AudioManager.this.mPrefMixerAttributesListenerMgr.callListeners(
+                        new CallbackUtil.CallbackMethod() { // from class:
+                            // android.media.AudioManager$PreferredMixerAttributesDispatcherStub$$ExternalSyntheticLambda0
+                            @Override // android.media.CallbackUtil.CallbackMethod
+                            public final void callbackMethod(Object obj) {
+                                ((AudioManager.OnPreferredMixerAttributesChangedListener) obj)
+                                        .onPreferredMixerAttributesChanged(
+                                                AudioAttributes.this, device, mixerAttr);
+                            }
+                        });
             }
         }
     }
@@ -4957,9 +5542,9 @@ public class AudioManager {
         }
     }
 
-    final class StreamAliasingDispatcherStub extends IStreamAliasingDispatcher.Stub implements CallbackUtil.DispatcherStub {
-        StreamAliasingDispatcherStub() {
-        }
+    final class StreamAliasingDispatcherStub extends IStreamAliasingDispatcher.Stub
+            implements CallbackUtil.DispatcherStub {
+        StreamAliasingDispatcherStub() {}
 
         @Override // android.media.CallbackUtil.DispatcherStub
         public void register(boolean register) {
@@ -4972,35 +5557,45 @@ public class AudioManager {
 
         @Override // android.media.IStreamAliasingDispatcher
         public void dispatchStreamAliasingChanged() {
-            AudioManager.this.mStreamAliasingListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.AudioManager$StreamAliasingDispatcherStub$$ExternalSyntheticLambda0
-                @Override // android.media.CallbackUtil.CallbackMethod
-                public final void callbackMethod(Object obj) {
-                    ((Runnable) obj).run();
-                }
-            });
+            AudioManager.this.mStreamAliasingListenerMgr.callListeners(
+                    new CallbackUtil.CallbackMethod() { // from class:
+                        // android.media.AudioManager$StreamAliasingDispatcherStub$$ExternalSyntheticLambda0
+                        @Override // android.media.CallbackUtil.CallbackMethod
+                        public final void callbackMethod(Object obj) {
+                            ((Runnable) obj).run();
+                        }
+                    });
         }
     }
 
     @SystemApi
-    public void addOnStreamAliasingChangedListener(Executor executor, Runnable onStreamAliasingChangedListener) {
-        this.mStreamAliasingListenerMgr.addListener(executor, onStreamAliasingChangedListener, "addOnStreamAliasingChangedListener", new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda5
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                CallbackUtil.DispatcherStub lambda$addOnStreamAliasingChangedListener$8;
-                lambda$addOnStreamAliasingChangedListener$8 = AudioManager.this.lambda$addOnStreamAliasingChangedListener$8();
-                return lambda$addOnStreamAliasingChangedListener$8;
-            }
-        });
+    public void addOnStreamAliasingChangedListener(
+            Executor executor, Runnable onStreamAliasingChangedListener) {
+        this.mStreamAliasingListenerMgr.addListener(
+                executor,
+                onStreamAliasingChangedListener,
+                "addOnStreamAliasingChangedListener",
+                new Supplier() { // from class: android.media.AudioManager$$ExternalSyntheticLambda5
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        CallbackUtil.DispatcherStub lambda$addOnStreamAliasingChangedListener$8;
+                        lambda$addOnStreamAliasingChangedListener$8 =
+                                AudioManager.this.lambda$addOnStreamAliasingChangedListener$8();
+                        return lambda$addOnStreamAliasingChangedListener$8;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ CallbackUtil.DispatcherStub lambda$addOnStreamAliasingChangedListener$8() {
+    public /* synthetic */ CallbackUtil.DispatcherStub
+            lambda$addOnStreamAliasingChangedListener$8() {
         return new StreamAliasingDispatcherStub();
     }
 
     @SystemApi
     public void removeOnStreamAliasingChangedListener(Runnable onStreamAliasingChangedListener) {
-        this.mStreamAliasingListenerMgr.removeListener(onStreamAliasingChangedListener, "removeOnStreamAliasingChangedListener");
+        this.mStreamAliasingListenerMgr.removeListener(
+                onStreamAliasingChangedListener, "removeOnStreamAliasingChangedListener");
     }
 
     public void setNotifAliasRingForTest(boolean isAliased) {
@@ -5044,7 +5639,8 @@ public class AudioManager {
     public boolean shouldNotificationSoundPlay(AudioAttributes aa) {
         IAudioService service = getService();
         try {
-            return service.shouldNotificationSoundPlay((AudioAttributes) Objects.requireNonNull(aa));
+            return service.shouldNotificationSoundPlay(
+                    (AudioAttributes) Objects.requireNonNull(aa));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -5052,8 +5648,7 @@ public class AudioManager {
 
     /* JADX INFO: Access modifiers changed from: private */
     final class MuteAwaitConnectionDispatcherStub extends IMuteAwaitConnectionCallback.Stub {
-        private MuteAwaitConnectionDispatcherStub() {
-        }
+        private MuteAwaitConnectionDispatcherStub() {}
 
         public void register(boolean register) {
             try {
@@ -5064,23 +5659,36 @@ public class AudioManager {
         }
 
         @Override // android.media.IMuteAwaitConnectionCallback
-        public void dispatchOnMutedUntilConnection(final AudioDeviceAttributes device, final int[] mutedUsages) {
-            CallbackUtil.callListeners(AudioManager.this.mMuteAwaitConnectionListeners, AudioManager.this.mMuteAwaitConnectionListenerLock, new CallbackUtil.CallbackMethod() { // from class: android.media.AudioManager$MuteAwaitConnectionDispatcherStub$$ExternalSyntheticLambda1
-                @Override // android.media.CallbackUtil.CallbackMethod
-                public final void callbackMethod(Object obj) {
-                    ((AudioManager.MuteAwaitConnectionCallback) obj).onMutedUntilConnection(AudioDeviceAttributes.this, mutedUsages);
-                }
-            });
+        public void dispatchOnMutedUntilConnection(
+                final AudioDeviceAttributes device, final int[] mutedUsages) {
+            CallbackUtil.callListeners(
+                    AudioManager.this.mMuteAwaitConnectionListeners,
+                    AudioManager.this.mMuteAwaitConnectionListenerLock,
+                    new CallbackUtil.CallbackMethod() { // from class:
+                        // android.media.AudioManager$MuteAwaitConnectionDispatcherStub$$ExternalSyntheticLambda1
+                        @Override // android.media.CallbackUtil.CallbackMethod
+                        public final void callbackMethod(Object obj) {
+                            ((AudioManager.MuteAwaitConnectionCallback) obj)
+                                    .onMutedUntilConnection(
+                                            AudioDeviceAttributes.this, mutedUsages);
+                        }
+                    });
         }
 
         @Override // android.media.IMuteAwaitConnectionCallback
-        public void dispatchOnUnmutedEvent(final int event, final AudioDeviceAttributes device, final int[] mutedUsages) {
-            CallbackUtil.callListeners(AudioManager.this.mMuteAwaitConnectionListeners, AudioManager.this.mMuteAwaitConnectionListenerLock, new CallbackUtil.CallbackMethod() { // from class: android.media.AudioManager$MuteAwaitConnectionDispatcherStub$$ExternalSyntheticLambda0
-                @Override // android.media.CallbackUtil.CallbackMethod
-                public final void callbackMethod(Object obj) {
-                    ((AudioManager.MuteAwaitConnectionCallback) obj).onUnmutedEvent(event, device, mutedUsages);
-                }
-            });
+        public void dispatchOnUnmutedEvent(
+                final int event, final AudioDeviceAttributes device, final int[] mutedUsages) {
+            CallbackUtil.callListeners(
+                    AudioManager.this.mMuteAwaitConnectionListeners,
+                    AudioManager.this.mMuteAwaitConnectionListenerLock,
+                    new CallbackUtil.CallbackMethod() { // from class:
+                        // android.media.AudioManager$MuteAwaitConnectionDispatcherStub$$ExternalSyntheticLambda0
+                        @Override // android.media.CallbackUtil.CallbackMethod
+                        public final void callbackMethod(Object obj) {
+                            ((AudioManager.MuteAwaitConnectionCallback) obj)
+                                    .onUnmutedEvent(event, device, mutedUsages);
+                        }
+                    });
         }
     }
 
@@ -5088,7 +5696,9 @@ public class AudioManager {
         try {
             Context context = getContext();
             if (context != null) {
-                this.mIsAutomotive = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE);
+                this.mIsAutomotive =
+                        context.getPackageManager()
+                                .hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE);
             }
         } catch (Exception e) {
             Log.e(TAG, "Error querying system feature for AUTOMOTIVE", e);
@@ -5113,29 +5723,35 @@ public class AudioManager {
                 looper = Looper.getMainLooper();
             }
             if (looper != null) {
-                this.mHandler = new Handler(looper) { // from class: android.media.AudioManager.NativeEventHandlerDelegate.1
-                    @Override // android.os.Handler
-                    public void handleMessage(Message msg) {
-                        switch (msg.what) {
-                            case 0:
-                            case 1:
-                                if (callback != null) {
-                                    callback.onAudioDevicesAdded((AudioDeviceInfo[]) msg.obj);
-                                    break;
+                this.mHandler =
+                        new Handler(looper) { // from class:
+                            // android.media.AudioManager.NativeEventHandlerDelegate.1
+                            @Override // android.os.Handler
+                            public void handleMessage(Message msg) {
+                                switch (msg.what) {
+                                    case 0:
+                                    case 1:
+                                        if (callback != null) {
+                                            callback.onAudioDevicesAdded(
+                                                    (AudioDeviceInfo[]) msg.obj);
+                                            break;
+                                        }
+                                        break;
+                                    case 2:
+                                        if (callback != null) {
+                                            callback.onAudioDevicesRemoved(
+                                                    (AudioDeviceInfo[]) msg.obj);
+                                            break;
+                                        }
+                                        break;
+                                    default:
+                                        Log.e(
+                                                AudioManager.TAG,
+                                                "Unknown native event type: " + msg.what);
+                                        break;
                                 }
-                                break;
-                            case 2:
-                                if (callback != null) {
-                                    callback.onAudioDevicesRemoved((AudioDeviceInfo[]) msg.obj);
-                                    break;
-                                }
-                                break;
-                            default:
-                                Log.e(AudioManager.TAG, "Unknown native event type: " + msg.what);
-                                break;
-                        }
-                    }
-                };
+                            }
+                        };
             } else {
                 this.mHandler = null;
             }
@@ -5207,7 +5823,10 @@ public class AudioManager {
     }
 
     public boolean semIsVoiceCallActive() {
-        AudioParameter param = new AudioParameter.Builder().setParam(AudioParameter.SEC_LOCAL_STREAM_ACTIVE, 0).build();
+        AudioParameter param =
+                new AudioParameter.Builder()
+                        .setParam(AudioParameter.SEC_LOCAL_STREAM_ACTIVE, 0)
+                        .build();
         String ret = getAudioServiceConfig(param.toString());
         return "true".equalsIgnoreCase(ret);
     }
@@ -5236,7 +5855,8 @@ public class AudioManager {
     }
 
     public int getAvailableDeviceMaskForQuickSoundPath() {
-        String devices = getAudioServiceConfig(AudioParameter.SEC_GLOBAL_SOUND_PATH_AVAILABLE_DEVICES);
+        String devices =
+                getAudioServiceConfig(AudioParameter.SEC_GLOBAL_SOUND_PATH_AVAILABLE_DEVICES);
         if (devices != null) {
             return Integer.parseInt(devices, 16);
         }
@@ -5244,7 +5864,8 @@ public class AudioManager {
     }
 
     public boolean semIsSplitSoundOn() {
-        String value = getAudioServiceConfig(AudioParameter.SEC_LOCAL_SMART_VEIW_SPLIT_SOUND_ENABLE);
+        String value =
+                getAudioServiceConfig(AudioParameter.SEC_LOCAL_SMART_VEIW_SPLIT_SOUND_ENABLE);
         if ("true".equals(value)) {
             return true;
         }
@@ -5303,11 +5924,13 @@ public class AudioManager {
             throw new IllegalArgumentException("Bad stream type " + streamType);
         }
         if (AudioManagerHelper.needToLogCaller(getContext().getOpPackageName())) {
-            AudioManagerHelper.logCaller("streamType=%d, index=%d", Integer.valueOf(streamType), Integer.valueOf(index));
+            AudioManagerHelper.logCaller(
+                    "streamType=%d, index=%d", Integer.valueOf(streamType), Integer.valueOf(index));
         }
         IAudioService service = getService();
         try {
-            service.setFineVolume(streamType, index, flags | 1048576, device, getContext().getOpPackageName());
+            service.setFineVolume(
+                    streamType, index, flags | 1048576, device, getContext().getOpPackageName());
         } catch (RemoteException e) {
             Log.e(TAG, "Dead object in setFineVolume", e);
         }
@@ -5327,7 +5950,12 @@ public class AudioManager {
 
     public void setMaxLimitedSpkVolume(int uid, boolean state) {
         Log.d(TAG, "setMaxLimitedSpkVolume, uid=" + uid + ", state=" + state);
-        AudioParameter parameters = new AudioParameter.Builder().setParam(AudioParameter.SEC_LOCAL_VOLUME_PREVENT_OVERHEAT_KEY).setParam("uid", uid).setParam("state", state).build();
+        AudioParameter parameters =
+                new AudioParameter.Builder()
+                        .setParam(AudioParameter.SEC_LOCAL_VOLUME_PREVENT_OVERHEAT_KEY)
+                        .setParam("uid", uid)
+                        .setParam("state", state)
+                        .build();
         setAudioServiceConfig(parameters.toString());
     }
 
@@ -5417,7 +6045,14 @@ public class AudioManager {
             return 1.0f;
         }
         try {
-            float ret = Float.parseFloat(getParameters("g_volume_situation_key;type=" + situation + NavigationBarInflaterView.GRAVITY_SEPARATOR + "device=" + device));
+            float ret =
+                    Float.parseFloat(
+                            getParameters(
+                                    "g_volume_situation_key;type="
+                                            + situation
+                                            + NavigationBarInflaterView.GRAVITY_SEPARATOR
+                                            + "device="
+                                            + device));
             return ret;
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -5515,11 +6150,18 @@ public class AudioManager {
 
     public void setStreamVolume(int streamType, int index, int flags, int device) {
         if (AudioManagerHelper.needToLogCaller(getContext().getOpPackageName())) {
-            AudioManagerHelper.logCaller("streamType=%d, index=%d", Integer.valueOf(streamType), Integer.valueOf(index));
+            AudioManagerHelper.logCaller(
+                    "streamType=%d, index=%d", Integer.valueOf(streamType), Integer.valueOf(index));
         }
         IAudioService service = getService();
         try {
-            service.setStreamVolumeForDeviceWithAttribution(streamType, index, flags, getContext().getOpPackageName(), getContext().getAttributionTag(), device);
+            service.setStreamVolumeForDeviceWithAttribution(
+                    streamType,
+                    index,
+                    flags,
+                    getContext().getOpPackageName(),
+                    getContext().getAttributionTag(),
+                    device);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -5527,12 +6169,19 @@ public class AudioManager {
 
     public void semSetStreamVolume(int streamType, int index, int flags, int deviceType) {
         if (AudioManagerHelper.needToLogCaller(getContext().getOpPackageName())) {
-            AudioManagerHelper.logCaller("streamType=%d, index=%d", Integer.valueOf(streamType), Integer.valueOf(index));
+            AudioManagerHelper.logCaller(
+                    "streamType=%d, index=%d", Integer.valueOf(streamType), Integer.valueOf(index));
         }
         int internalDevice = AudioDeviceInfo.convertDeviceTypeToInternalDevice(deviceType);
         IAudioService service = getService();
         try {
-            service.setStreamVolumeForDeviceWithAttribution(streamType, index, flags, getContext().getOpPackageName(), getContext().getAttributionTag(), internalDevice);
+            service.setStreamVolumeForDeviceWithAttribution(
+                    streamType,
+                    index,
+                    flags,
+                    getContext().getOpPackageName(),
+                    getContext().getAttributionTag(),
+                    internalDevice);
         } catch (RemoteException e) {
             Log.e(TAG, "Dead object in semSetStreamVolume", e);
         }
@@ -5601,7 +6250,10 @@ public class AudioManager {
     }
 
     public boolean semIsRecordActive(int source) {
-        AudioParameter param = new AudioParameter.Builder().setParam(AudioParameter.SEC_LOCAL_RECORD_ACTIVE_ENABLE, source).build();
+        AudioParameter param =
+                new AudioParameter.Builder()
+                        .setParam(AudioParameter.SEC_LOCAL_RECORD_ACTIVE_ENABLE, source)
+                        .build();
         String isRecordActive = getAudioServiceConfig(param.toString());
         return "true".equalsIgnoreCase(isRecordActive);
     }
@@ -5698,13 +6350,23 @@ public class AudioManager {
 
     public void enableVolumeLimiter(boolean on) {
         String caller = getContext().getOpPackageName();
-        AudioParameter audioParameter = new AudioParameter.Builder().setParam(AudioParameter.SEC_LOCAL_VOLUME_LIMIT_KEY, "1").setParam("enable", "" + on).setParam("package", caller).build();
+        AudioParameter audioParameter =
+                new AudioParameter.Builder()
+                        .setParam(AudioParameter.SEC_LOCAL_VOLUME_LIMIT_KEY, "1")
+                        .setParam("enable", "" + on)
+                        .setParam("package", caller)
+                        .build();
         setAudioServiceConfig(audioParameter.toString());
     }
 
     public void setVolumeLimiterValue(int value) {
         String caller = getContext().getOpPackageName();
-        AudioParameter audioParameter = new AudioParameter.Builder().setParam(AudioParameter.SEC_LOCAL_VOLUME_LIMIT_KEY, "1").setParam("level", "" + value).setParam("package", caller).build();
+        AudioParameter audioParameter =
+                new AudioParameter.Builder()
+                        .setParam(AudioParameter.SEC_LOCAL_VOLUME_LIMIT_KEY, "1")
+                        .setParam("level", "" + value)
+                        .setParam("package", caller)
+                        .build();
         setAudioServiceConfig(audioParameter.toString());
     }
 
@@ -5714,7 +6376,8 @@ public class AudioManager {
         }
         IAudioService service = getService();
         try {
-            service.setA2dpDeviceVolume(device, streamType, index, flags | 1048576, getContext().getOpPackageName());
+            service.setA2dpDeviceVolume(
+                    device, streamType, index, flags | 1048576, getContext().getOpPackageName());
         } catch (RemoteException e) {
             Log.w(TAG, "semSetFineVolume error", e);
         }
@@ -5820,9 +6483,27 @@ public class AudioManager {
         }
     }
 
-    public void semSetCallTranslationEnabled(boolean enabled, int voiceTxControlMode, int voiceRxControlMode) {
-        Log.i(TAG, "txMuteMode = " + voiceTxControlMode + " rxMuteMode = " + voiceRxControlMode + " callTranslationMode = " + enabled);
-        setAudioServiceConfig("l_voice_tx_control_mode=" + voiceTxControlMode + NavigationBarInflaterView.GRAVITY_SEPARATOR + AudioParameter.SEC_LOCAL_VOICE_RX_CONTROL_MODE + "=" + voiceRxControlMode + NavigationBarInflaterView.GRAVITY_SEPARATOR + AudioParameter.SEC_LOCAL_CALL_TRANSLATION_MODE + "=" + (enabled ? "on" : "off"));
+    public void semSetCallTranslationEnabled(
+            boolean enabled, int voiceTxControlMode, int voiceRxControlMode) {
+        Log.i(
+                TAG,
+                "txMuteMode = "
+                        + voiceTxControlMode
+                        + " rxMuteMode = "
+                        + voiceRxControlMode
+                        + " callTranslationMode = "
+                        + enabled);
+        setAudioServiceConfig(
+                "l_voice_tx_control_mode="
+                        + voiceTxControlMode
+                        + NavigationBarInflaterView.GRAVITY_SEPARATOR
+                        + AudioParameter.SEC_LOCAL_VOICE_RX_CONTROL_MODE
+                        + "="
+                        + voiceRxControlMode
+                        + NavigationBarInflaterView.GRAVITY_SEPARATOR
+                        + AudioParameter.SEC_LOCAL_CALL_TRANSLATION_MODE
+                        + "="
+                        + (enabled ? "on" : "off"));
     }
 
     public boolean semIsCallTranslationEnabled() {

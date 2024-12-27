@@ -6,6 +6,7 @@ import android.graphics.RectF;
 import android.hardware.camera2.CaptureRequest;
 import android.util.Rational;
 import android.util.Size;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes2.dex */
@@ -71,7 +72,8 @@ public class ParamsUtils {
         destination.top = source.top;
     }
 
-    public static <T> T getOrDefault(CaptureRequest captureRequest, CaptureRequest.Key<T> key, T t) {
+    public static <T> T getOrDefault(
+            CaptureRequest captureRequest, CaptureRequest.Key<T> key, T t) {
         Preconditions.checkNotNull(captureRequest, "r must not be null");
         Preconditions.checkNotNull(key, "key must not be null");
         Preconditions.checkNotNull(t, "defaultValue must not be null");

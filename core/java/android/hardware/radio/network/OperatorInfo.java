@@ -3,26 +3,29 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class OperatorInfo implements Parcelable {
-    public static final Parcelable.Creator<OperatorInfo> CREATOR = new Parcelable.Creator<OperatorInfo>() { // from class: android.hardware.radio.network.OperatorInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OperatorInfo createFromParcel(Parcel _aidl_source) {
-            OperatorInfo _aidl_out = new OperatorInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<OperatorInfo> CREATOR =
+            new Parcelable.Creator<
+                    OperatorInfo>() { // from class: android.hardware.radio.network.OperatorInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OperatorInfo createFromParcel(Parcel _aidl_source) {
+                    OperatorInfo _aidl_out = new OperatorInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OperatorInfo[] newArray(int _aidl_size) {
-            return new OperatorInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OperatorInfo[] newArray(int _aidl_size) {
+                    return new OperatorInfo[_aidl_size];
+                }
+            };
     public static final int STATUS_AVAILABLE = 1;
     public static final int STATUS_CURRENT = 2;
     public static final int STATUS_FORBIDDEN = 3;

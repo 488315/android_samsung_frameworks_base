@@ -2,8 +2,11 @@ package com.android.server.notification.edgelighting.policy;
 
 import android.os.Debug;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.edge.EdgeLightingPolicyInfo;
+
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,12 +19,16 @@ public final class EdgeLightingPolicyRepository {
     public final HashMap mRepository = new HashMap();
 
     public final void dump(PrintWriter printWriter, String str) {
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "-EdgeLightingPolicyInfo(", str, ") start");
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                printWriter, "-EdgeLightingPolicyInfo(", str, ") start");
         synchronized (this.mRepository) {
             try {
                 Iterator it = this.mRepository.entrySet().iterator();
                 while (it.hasNext()) {
-                    printWriter.println("  " + ((EdgeLightingPolicyInfo) ((Map.Entry) it.next()).getValue()).toString());
+                    printWriter.println(
+                            "  "
+                                    + ((EdgeLightingPolicyInfo) ((Map.Entry) it.next()).getValue())
+                                            .toString());
                 }
                 printWriter.println("");
             } catch (Throwable th) {
@@ -48,7 +55,9 @@ public final class EdgeLightingPolicyRepository {
 
     public final void updatePolicy(EdgeLightingPolicyInfo edgeLightingPolicyInfo) {
         if (DEBUG) {
-            Slog.d("EdgeLightingPolicyRepository", "updatePolicy " + edgeLightingPolicyInfo.toString());
+            Slog.d(
+                    "EdgeLightingPolicyRepository",
+                    "updatePolicy " + edgeLightingPolicyInfo.toString());
         }
         synchronized (this.mRepository) {
             this.mRepository.put(edgeLightingPolicyInfo.packageName, edgeLightingPolicyInfo);

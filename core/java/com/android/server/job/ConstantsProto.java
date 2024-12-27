@@ -61,12 +61,10 @@ public final class ConstantsProto {
         public static final long TIMING_SESSION_COALESCING_DURATION_MS = 1112396529682L;
         public static final long WORKING_WINDOW_SIZE_MS = 1112396529668L;
 
-        public QuotaController() {
-        }
+        public QuotaController() {}
     }
 
     public final class TimeController {
-        public TimeController() {
-        }
+        public TimeController() {}
     }
 }

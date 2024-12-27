@@ -15,8 +15,7 @@ public final class CpuInfoProto {
         public static final long TOTAL = 1120986464257L;
         public static final long ZOMBIE = 1120986464261L;
 
-        public TaskStats() {
-        }
+        public TaskStats() {}
     }
 
     public final class MemStats {
@@ -26,8 +25,7 @@ public final class CpuInfoProto {
         public static final long TOTAL = 1120986464257L;
         public static final long USED = 1120986464258L;
 
-        public MemStats() {
-        }
+        public MemStats() {}
     }
 
     public final class CpuUsage {
@@ -41,8 +39,7 @@ public final class CpuInfoProto {
         public static final long SYS = 1120986464260L;
         public static final long USER = 1120986464258L;
 
-        public CpuUsage() {
-        }
+        public CpuUsage() {}
     }
 
     public final class Task {
@@ -69,7 +66,6 @@ public final class CpuInfoProto {
         public static final long USER = 1138166333443L;
         public static final long VIRT = 1138166333448L;
 
-        public Task() {
-        }
+        public Task() {}
     }
 }

@@ -1,7 +1,6 @@
 package android.net.metrics;
 
 import android.annotation.SystemApi;
-import android.net.metrics.IpConnectivityLog;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
@@ -10,19 +9,21 @@ import android.text.TextUtils;
 @Deprecated
 /* loaded from: classes3.dex */
 public final class DhcpClientEvent implements IpConnectivityLog.Event {
-    public static final Parcelable.Creator<DhcpClientEvent> CREATOR = new Parcelable.Creator<DhcpClientEvent>() { // from class: android.net.metrics.DhcpClientEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DhcpClientEvent createFromParcel(Parcel in) {
-            return new DhcpClientEvent(in);
-        }
+    public static final Parcelable.Creator<DhcpClientEvent> CREATOR =
+            new Parcelable.Creator<
+                    DhcpClientEvent>() { // from class: android.net.metrics.DhcpClientEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DhcpClientEvent createFromParcel(Parcel in) {
+                    return new DhcpClientEvent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DhcpClientEvent[] newArray(int size) {
-            return new DhcpClientEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DhcpClientEvent[] newArray(int size) {
+                    return new DhcpClientEvent[size];
+                }
+            };
     public final int durationMs;
     public final String msg;
 
@@ -67,7 +68,8 @@ public final class DhcpClientEvent implements IpConnectivityLog.Event {
     }
 
     public String toString() {
-        return String.format("DhcpClientEvent(%s, %dms)", this.msg, Integer.valueOf(this.durationMs));
+        return String.format(
+                "DhcpClientEvent(%s, %dms)", this.msg, Integer.valueOf(this.durationMs));
     }
 
     public boolean equals(Object obj) {

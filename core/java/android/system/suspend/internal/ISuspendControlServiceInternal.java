@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface ISuspendControlServiceInternal extends IInterface {
-    public static final String DESCRIPTOR = "android.system.suspend.internal.ISuspendControlServiceInternal";
+    public static final String DESCRIPTOR =
+            "android.system.suspend.internal.ISuspendControlServiceInternal";
 
     boolean enableAutosuspend(IBinder iBinder) throws RemoteException;
 
@@ -52,7 +53,7 @@ public interface ISuspendControlServiceInternal extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISuspendControlServiceInternal {
+    public abstract static class Stub extends Binder implements ISuspendControlServiceInternal {
         static final int TRANSACTION_enableAutosuspend = 1;
         static final int TRANSACTION_forceSuspend = 2;
         static final int TRANSACTION_getSuspendStats = 5;
@@ -80,7 +81,8 @@ public interface ISuspendControlServiceInternal extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(ISuspendControlServiceInternal.DESCRIPTOR);
             }
@@ -176,7 +178,8 @@ public interface ISuspendControlServiceInternal extends IInterface {
                     _data.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    WakeLockInfo[] _result = (WakeLockInfo[]) _reply.createTypedArray(WakeLockInfo.CREATOR);
+                    WakeLockInfo[] _result =
+                            (WakeLockInfo[]) _reply.createTypedArray(WakeLockInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -192,7 +195,8 @@ public interface ISuspendControlServiceInternal extends IInterface {
                     _data.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    WakeupInfo[] _result = (WakeupInfo[]) _reply.createTypedArray(WakeupInfo.CREATOR);
+                    WakeupInfo[] _result =
+                            (WakeupInfo[]) _reply.createTypedArray(WakeupInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

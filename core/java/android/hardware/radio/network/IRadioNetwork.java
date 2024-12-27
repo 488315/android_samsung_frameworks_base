@@ -1,7 +1,5 @@
 package android.hardware.radio.network;
 
-import android.hardware.radio.network.IRadioNetworkIndication;
-import android.hardware.radio.network.IRadioNetworkResponse;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioNetwork extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$network$IRadioNetwork".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$network$IRadioNetwork".replace('$', '.');
     public static final String HASH = "c45c122528c07c449ea08f6eacaace17bb7abc38";
     public static final int VERSION = 3;
 
@@ -81,7 +80,8 @@ public interface IRadioNetwork extends IInterface {
 
     void setIndicationFilter(int i, int i2) throws RemoteException;
 
-    void setLinkCapacityReportingCriteria(int i, int i2, int i3, int i4, int[] iArr, int[] iArr2, int i5) throws RemoteException;
+    void setLinkCapacityReportingCriteria(
+            int i, int i2, int i3, int i4, int[] iArr, int[] iArr2, int i5) throws RemoteException;
 
     void setLocationUpdates(int i, boolean z) throws RemoteException;
 
@@ -95,15 +95,21 @@ public interface IRadioNetwork extends IInterface {
 
     void setNullCipherAndIntegrityEnabled(int i, boolean z) throws RemoteException;
 
-    void setResponseFunctions(IRadioNetworkResponse iRadioNetworkResponse, IRadioNetworkIndication iRadioNetworkIndication) throws RemoteException;
+    void setResponseFunctions(
+            IRadioNetworkResponse iRadioNetworkResponse,
+            IRadioNetworkIndication iRadioNetworkIndication)
+            throws RemoteException;
 
     void setSecurityAlgorithmsUpdatedEnabled(int i, boolean z) throws RemoteException;
 
-    void setSignalStrengthReportingCriteria(int i, SignalThresholdInfo[] signalThresholdInfoArr) throws RemoteException;
+    void setSignalStrengthReportingCriteria(int i, SignalThresholdInfo[] signalThresholdInfoArr)
+            throws RemoteException;
 
     void setSuppServiceNotifications(int i, boolean z) throws RemoteException;
 
-    void setSystemSelectionChannels(int i, boolean z, RadioAccessSpecifier[] radioAccessSpecifierArr) throws RemoteException;
+    void setSystemSelectionChannels(
+            int i, boolean z, RadioAccessSpecifier[] radioAccessSpecifierArr)
+            throws RemoteException;
 
     void setUsageSetting(int i, int i2) throws RemoteException;
 
@@ -113,200 +119,180 @@ public interface IRadioNetwork extends IInterface {
 
     void supplyNetworkDepersonalization(int i, String str) throws RemoteException;
 
-    void triggerEmergencyNetworkScan(int i, EmergencyNetworkScanTrigger emergencyNetworkScanTrigger) throws RemoteException;
+    void triggerEmergencyNetworkScan(int i, EmergencyNetworkScanTrigger emergencyNetworkScanTrigger)
+            throws RemoteException;
 
     public static class Default implements IRadioNetwork {
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getAllowedNetworkTypesBitmap(int serial) throws RemoteException {
-        }
+        public void getAllowedNetworkTypesBitmap(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getAvailableBandModes(int serial) throws RemoteException {
-        }
+        public void getAvailableBandModes(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getAvailableNetworks(int serial) throws RemoteException {
-        }
+        public void getAvailableNetworks(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getBarringInfo(int serial) throws RemoteException {
-        }
+        public void getBarringInfo(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getCdmaRoamingPreference(int serial) throws RemoteException {
-        }
+        public void getCdmaRoamingPreference(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getCellInfoList(int serial) throws RemoteException {
-        }
+        public void getCellInfoList(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getDataRegistrationState(int serial) throws RemoteException {
-        }
+        public void getDataRegistrationState(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getImsRegistrationState(int serial) throws RemoteException {
-        }
+        public void getImsRegistrationState(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getNetworkSelectionMode(int serial) throws RemoteException {
-        }
+        public void getNetworkSelectionMode(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getOperator(int serial) throws RemoteException {
-        }
+        public void getOperator(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getSignalStrength(int serial) throws RemoteException {
-        }
+        public void getSignalStrength(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getSystemSelectionChannels(int serial) throws RemoteException {
-        }
+        public void getSystemSelectionChannels(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getVoiceRadioTechnology(int serial) throws RemoteException {
-        }
+        public void getVoiceRadioTechnology(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getVoiceRegistrationState(int serial) throws RemoteException {
-        }
+        public void getVoiceRegistrationState(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void isNrDualConnectivityEnabled(int serial) throws RemoteException {
-        }
+        public void isNrDualConnectivityEnabled(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void responseAcknowledgement() throws RemoteException {
-        }
+        public void responseAcknowledgement() throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setAllowedNetworkTypesBitmap(int serial, int networkTypeBitmap) throws RemoteException {
-        }
+        public void setAllowedNetworkTypesBitmap(int serial, int networkTypeBitmap)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setBandMode(int serial, int mode) throws RemoteException {
-        }
+        public void setBandMode(int serial, int mode) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setBarringPassword(int serial, String facility, String oldPassword, String newPassword) throws RemoteException {
-        }
+        public void setBarringPassword(
+                int serial, String facility, String oldPassword, String newPassword)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setCdmaRoamingPreference(int serial, int type) throws RemoteException {
-        }
+        public void setCdmaRoamingPreference(int serial, int type) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setCellInfoListRate(int serial, int rate) throws RemoteException {
-        }
+        public void setCellInfoListRate(int serial, int rate) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setIndicationFilter(int serial, int indicationFilter) throws RemoteException {
-        }
+        public void setIndicationFilter(int serial, int indicationFilter) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setLinkCapacityReportingCriteria(int serial, int hysteresisMs, int hysteresisDlKbps, int hysteresisUlKbps, int[] thresholdsDownlinkKbps, int[] thresholdsUplinkKbps, int accessNetwork) throws RemoteException {
-        }
+        public void setLinkCapacityReportingCriteria(
+                int serial,
+                int hysteresisMs,
+                int hysteresisDlKbps,
+                int hysteresisUlKbps,
+                int[] thresholdsDownlinkKbps,
+                int[] thresholdsUplinkKbps,
+                int accessNetwork)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setLocationUpdates(int serial, boolean enable) throws RemoteException {
-        }
+        public void setLocationUpdates(int serial, boolean enable) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setNetworkSelectionModeAutomatic(int serial) throws RemoteException {
-        }
+        public void setNetworkSelectionModeAutomatic(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setNetworkSelectionModeManual(int serial, String operatorNumeric, int ran) throws RemoteException {
-        }
+        public void setNetworkSelectionModeManual(int serial, String operatorNumeric, int ran)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setNrDualConnectivityState(int serial, byte nrDualConnectivityState) throws RemoteException {
-        }
+        public void setNrDualConnectivityState(int serial, byte nrDualConnectivityState)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setResponseFunctions(IRadioNetworkResponse radioNetworkResponse, IRadioNetworkIndication radioNetworkIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                IRadioNetworkResponse radioNetworkResponse,
+                IRadioNetworkIndication radioNetworkIndication)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setSignalStrengthReportingCriteria(int serial, SignalThresholdInfo[] signalThresholdInfos) throws RemoteException {
-        }
+        public void setSignalStrengthReportingCriteria(
+                int serial, SignalThresholdInfo[] signalThresholdInfos) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setSuppServiceNotifications(int serial, boolean enable) throws RemoteException {
-        }
+        public void setSuppServiceNotifications(int serial, boolean enable)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setSystemSelectionChannels(int serial, boolean specifyChannels, RadioAccessSpecifier[] specifiers) throws RemoteException {
-        }
+        public void setSystemSelectionChannels(
+                int serial, boolean specifyChannels, RadioAccessSpecifier[] specifiers)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void startNetworkScan(int serial, NetworkScanRequest request) throws RemoteException {
-        }
+        public void startNetworkScan(int serial, NetworkScanRequest request)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void stopNetworkScan(int serial) throws RemoteException {
-        }
+        public void stopNetworkScan(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void supplyNetworkDepersonalization(int serial, String netPin) throws RemoteException {
-        }
+        public void supplyNetworkDepersonalization(int serial, String netPin)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setUsageSetting(int serial, int usageSetting) throws RemoteException {
-        }
+        public void setUsageSetting(int serial, int usageSetting) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void getUsageSetting(int serial) throws RemoteException {
-        }
+        public void getUsageSetting(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setEmergencyMode(int serial, int emcModeType) throws RemoteException {
-        }
+        public void setEmergencyMode(int serial, int emcModeType) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void triggerEmergencyNetworkScan(int serial, EmergencyNetworkScanTrigger request) throws RemoteException {
-        }
+        public void triggerEmergencyNetworkScan(int serial, EmergencyNetworkScanTrigger request)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void cancelEmergencyNetworkScan(int serial, boolean resetScan) throws RemoteException {
-        }
+        public void cancelEmergencyNetworkScan(int serial, boolean resetScan)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void exitEmergencyMode(int serial) throws RemoteException {
-        }
+        public void exitEmergencyMode(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setNullCipherAndIntegrityEnabled(int serial, boolean enabled) throws RemoteException {
-        }
+        public void setNullCipherAndIntegrityEnabled(int serial, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void isNullCipherAndIntegrityEnabled(int serial) throws RemoteException {
-        }
+        public void isNullCipherAndIntegrityEnabled(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void isN1ModeEnabled(int serial) throws RemoteException {
-        }
+        public void isN1ModeEnabled(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setN1ModeEnabled(int serial, boolean enable) throws RemoteException {
-        }
+        public void setN1ModeEnabled(int serial, boolean enable) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void isCellularIdentifierTransparencyEnabled(int serial) throws RemoteException {
-        }
+        public void isCellularIdentifierTransparencyEnabled(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setCellularIdentifierTransparencyEnabled(int serial, boolean enabled) throws RemoteException {
-        }
+        public void setCellularIdentifierTransparencyEnabled(int serial, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void setSecurityAlgorithmsUpdatedEnabled(int serial, boolean enable) throws RemoteException {
-        }
+        public void setSecurityAlgorithmsUpdatedEnabled(int serial, boolean enable)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
-        public void isSecurityAlgorithmsUpdatedEnabled(int serial) throws RemoteException {
-        }
+        public void isSecurityAlgorithmsUpdatedEnabled(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetwork
         public int getInterfaceVersion() {
@@ -324,7 +310,7 @@ public interface IRadioNetwork extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioNetwork {
+    public abstract static class Stub extends Binder implements IRadioNetwork {
         static final int TRANSACTION_cancelEmergencyNetworkScan = 39;
         static final int TRANSACTION_exitEmergencyMode = 40;
         static final int TRANSACTION_getAllowedNetworkTypesBitmap = 1;
@@ -398,7 +384,8 @@ public interface IRadioNetwork extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -543,7 +530,8 @@ public interface IRadioNetwork extends IInterface {
                     int[] _arg5 = data.createIntArray();
                     int _arg6 = data.readInt();
                     data.enforceNoDataAvail();
-                    setLinkCapacityReportingCriteria(_arg022, _arg17, _arg22, _arg32, _arg4, _arg5, _arg6);
+                    setLinkCapacityReportingCriteria(
+                            _arg022, _arg17, _arg22, _arg32, _arg4, _arg5, _arg6);
                     return true;
                 case 24:
                     int _arg023 = data.readInt();
@@ -570,14 +558,18 @@ public interface IRadioNetwork extends IInterface {
                     setNrDualConnectivityState(_arg026, _arg110);
                     return true;
                 case 28:
-                    IRadioNetworkResponse _arg027 = IRadioNetworkResponse.Stub.asInterface(data.readStrongBinder());
-                    IRadioNetworkIndication _arg111 = IRadioNetworkIndication.Stub.asInterface(data.readStrongBinder());
+                    IRadioNetworkResponse _arg027 =
+                            IRadioNetworkResponse.Stub.asInterface(data.readStrongBinder());
+                    IRadioNetworkIndication _arg111 =
+                            IRadioNetworkIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg027, _arg111);
                     return true;
                 case 29:
                     int _arg028 = data.readInt();
-                    SignalThresholdInfo[] _arg112 = (SignalThresholdInfo[]) data.createTypedArray(SignalThresholdInfo.CREATOR);
+                    SignalThresholdInfo[] _arg112 =
+                            (SignalThresholdInfo[])
+                                    data.createTypedArray(SignalThresholdInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setSignalStrengthReportingCriteria(_arg028, _arg112);
                     return true;
@@ -590,13 +582,16 @@ public interface IRadioNetwork extends IInterface {
                 case 31:
                     int _arg030 = data.readInt();
                     boolean _arg114 = data.readBoolean();
-                    RadioAccessSpecifier[] _arg24 = (RadioAccessSpecifier[]) data.createTypedArray(RadioAccessSpecifier.CREATOR);
+                    RadioAccessSpecifier[] _arg24 =
+                            (RadioAccessSpecifier[])
+                                    data.createTypedArray(RadioAccessSpecifier.CREATOR);
                     data.enforceNoDataAvail();
                     setSystemSelectionChannels(_arg030, _arg114, _arg24);
                     return true;
                 case 32:
                     int _arg031 = data.readInt();
-                    NetworkScanRequest _arg115 = (NetworkScanRequest) data.readTypedObject(NetworkScanRequest.CREATOR);
+                    NetworkScanRequest _arg115 =
+                            (NetworkScanRequest) data.readTypedObject(NetworkScanRequest.CREATOR);
                     data.enforceNoDataAvail();
                     startNetworkScan(_arg031, _arg115);
                     return true;
@@ -630,7 +625,9 @@ public interface IRadioNetwork extends IInterface {
                     return true;
                 case 38:
                     int _arg037 = data.readInt();
-                    EmergencyNetworkScanTrigger _arg119 = (EmergencyNetworkScanTrigger) data.readTypedObject(EmergencyNetworkScanTrigger.CREATOR);
+                    EmergencyNetworkScanTrigger _arg119 =
+                            (EmergencyNetworkScanTrigger)
+                                    data.readTypedObject(EmergencyNetworkScanTrigger.CREATOR);
                     data.enforceNoDataAvail();
                     triggerEmergencyNetworkScan(_arg037, _arg119);
                     return true;
@@ -720,7 +717,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getAllowedNetworkTypesBitmap is unimplemented.");
+                        throw new RemoteException(
+                                "Method getAllowedNetworkTypesBitmap is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -780,7 +778,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(5, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getCdmaRoamingPreference is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCdmaRoamingPreference is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -810,7 +809,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(7, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getDataRegistrationState is unimplemented.");
+                        throw new RemoteException(
+                                "Method getDataRegistrationState is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -825,7 +825,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(8, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getImsRegistrationState is unimplemented.");
+                        throw new RemoteException(
+                                "Method getImsRegistrationState is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -840,7 +841,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(9, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getNetworkSelectionMode is unimplemented.");
+                        throw new RemoteException(
+                                "Method getNetworkSelectionMode is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -885,7 +887,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(12, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getSystemSelectionChannels is unimplemented.");
+                        throw new RemoteException(
+                                "Method getSystemSelectionChannels is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -900,7 +903,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(13, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getVoiceRadioTechnology is unimplemented.");
+                        throw new RemoteException(
+                                "Method getVoiceRadioTechnology is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -915,7 +919,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(14, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getVoiceRegistrationState is unimplemented.");
+                        throw new RemoteException(
+                                "Method getVoiceRegistrationState is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -930,7 +935,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(15, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method isNrDualConnectivityEnabled is unimplemented.");
+                        throw new RemoteException(
+                                "Method isNrDualConnectivityEnabled is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -944,7 +950,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(16, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method responseAcknowledgement is unimplemented.");
+                        throw new RemoteException(
+                                "Method responseAcknowledgement is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -952,7 +959,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setAllowedNetworkTypesBitmap(int serial, int networkTypeBitmap) throws RemoteException {
+            public void setAllowedNetworkTypesBitmap(int serial, int networkTypeBitmap)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -960,7 +968,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(networkTypeBitmap);
                     boolean _status = this.mRemote.transact(17, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setAllowedNetworkTypesBitmap is unimplemented.");
+                        throw new RemoteException(
+                                "Method setAllowedNetworkTypesBitmap is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -984,7 +993,9 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setBarringPassword(int serial, String facility, String oldPassword, String newPassword) throws RemoteException {
+            public void setBarringPassword(
+                    int serial, String facility, String oldPassword, String newPassword)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1010,7 +1021,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(20, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setCdmaRoamingPreference is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCdmaRoamingPreference is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1034,7 +1046,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setIndicationFilter(int serial, int indicationFilter) throws RemoteException {
+            public void setIndicationFilter(int serial, int indicationFilter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1050,7 +1063,15 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setLinkCapacityReportingCriteria(int serial, int hysteresisMs, int hysteresisDlKbps, int hysteresisUlKbps, int[] thresholdsDownlinkKbps, int[] thresholdsUplinkKbps, int accessNetwork) throws RemoteException {
+            public void setLinkCapacityReportingCriteria(
+                    int serial,
+                    int hysteresisMs,
+                    int hysteresisDlKbps,
+                    int hysteresisUlKbps,
+                    int[] thresholdsDownlinkKbps,
+                    int[] thresholdsUplinkKbps,
+                    int accessNetwork)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1063,7 +1084,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(accessNetwork);
                     boolean _status = this.mRemote.transact(23, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setLinkCapacityReportingCriteria is unimplemented.");
+                        throw new RemoteException(
+                                "Method setLinkCapacityReportingCriteria is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1094,7 +1116,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(25, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setNetworkSelectionModeAutomatic is unimplemented.");
+                        throw new RemoteException(
+                                "Method setNetworkSelectionModeAutomatic is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1102,7 +1125,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setNetworkSelectionModeManual(int serial, String operatorNumeric, int ran) throws RemoteException {
+            public void setNetworkSelectionModeManual(int serial, String operatorNumeric, int ran)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1111,7 +1135,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(ran);
                     boolean _status = this.mRemote.transact(26, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setNetworkSelectionModeManual is unimplemented.");
+                        throw new RemoteException(
+                                "Method setNetworkSelectionModeManual is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1119,7 +1144,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setNrDualConnectivityState(int serial, byte nrDualConnectivityState) throws RemoteException {
+            public void setNrDualConnectivityState(int serial, byte nrDualConnectivityState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1127,7 +1153,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeByte(nrDualConnectivityState);
                     boolean _status = this.mRemote.transact(27, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setNrDualConnectivityState is unimplemented.");
+                        throw new RemoteException(
+                                "Method setNrDualConnectivityState is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1135,7 +1162,10 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setResponseFunctions(IRadioNetworkResponse radioNetworkResponse, IRadioNetworkIndication radioNetworkIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    IRadioNetworkResponse radioNetworkResponse,
+                    IRadioNetworkIndication radioNetworkIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1151,7 +1181,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setSignalStrengthReportingCriteria(int serial, SignalThresholdInfo[] signalThresholdInfos) throws RemoteException {
+            public void setSignalStrengthReportingCriteria(
+                    int serial, SignalThresholdInfo[] signalThresholdInfos) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1159,7 +1190,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeTypedArray(signalThresholdInfos, 0);
                     boolean _status = this.mRemote.transact(29, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setSignalStrengthReportingCriteria is unimplemented.");
+                        throw new RemoteException(
+                                "Method setSignalStrengthReportingCriteria is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1167,7 +1199,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setSuppServiceNotifications(int serial, boolean enable) throws RemoteException {
+            public void setSuppServiceNotifications(int serial, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1175,7 +1208,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeBoolean(enable);
                     boolean _status = this.mRemote.transact(30, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setSuppServiceNotifications is unimplemented.");
+                        throw new RemoteException(
+                                "Method setSuppServiceNotifications is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1183,7 +1217,9 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setSystemSelectionChannels(int serial, boolean specifyChannels, RadioAccessSpecifier[] specifiers) throws RemoteException {
+            public void setSystemSelectionChannels(
+                    int serial, boolean specifyChannels, RadioAccessSpecifier[] specifiers)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1192,7 +1228,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeTypedArray(specifiers, 0);
                     boolean _status = this.mRemote.transact(31, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setSystemSelectionChannels is unimplemented.");
+                        throw new RemoteException(
+                                "Method setSystemSelectionChannels is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1200,7 +1237,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void startNetworkScan(int serial, NetworkScanRequest request) throws RemoteException {
+            public void startNetworkScan(int serial, NetworkScanRequest request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1231,7 +1269,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void supplyNetworkDepersonalization(int serial, String netPin) throws RemoteException {
+            public void supplyNetworkDepersonalization(int serial, String netPin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1239,7 +1278,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeString(netPin);
                     boolean _status = this.mRemote.transact(34, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method supplyNetworkDepersonalization is unimplemented.");
+                        throw new RemoteException(
+                                "Method supplyNetworkDepersonalization is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1294,7 +1334,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void triggerEmergencyNetworkScan(int serial, EmergencyNetworkScanTrigger request) throws RemoteException {
+            public void triggerEmergencyNetworkScan(int serial, EmergencyNetworkScanTrigger request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1302,7 +1343,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeTypedObject(request, 0);
                     boolean _status = this.mRemote.transact(38, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method triggerEmergencyNetworkScan is unimplemented.");
+                        throw new RemoteException(
+                                "Method triggerEmergencyNetworkScan is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1310,7 +1352,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void cancelEmergencyNetworkScan(int serial, boolean resetScan) throws RemoteException {
+            public void cancelEmergencyNetworkScan(int serial, boolean resetScan)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1318,7 +1361,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeBoolean(resetScan);
                     boolean _status = this.mRemote.transact(39, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method cancelEmergencyNetworkScan is unimplemented.");
+                        throw new RemoteException(
+                                "Method cancelEmergencyNetworkScan is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1341,7 +1385,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setNullCipherAndIntegrityEnabled(int serial, boolean enabled) throws RemoteException {
+            public void setNullCipherAndIntegrityEnabled(int serial, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1349,7 +1394,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeBoolean(enabled);
                     boolean _status = this.mRemote.transact(41, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setNullCipherAndIntegrityEnabled is unimplemented.");
+                        throw new RemoteException(
+                                "Method setNullCipherAndIntegrityEnabled is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1364,7 +1410,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(42, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method isNullCipherAndIntegrityEnabled is unimplemented.");
+                        throw new RemoteException(
+                                "Method isNullCipherAndIntegrityEnabled is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1410,7 +1457,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(45, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method isCellularIdentifierTransparencyEnabled is unimplemented.");
+                        throw new RemoteException(
+                                "Method isCellularIdentifierTransparencyEnabled is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1418,7 +1466,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setCellularIdentifierTransparencyEnabled(int serial, boolean enabled) throws RemoteException {
+            public void setCellularIdentifierTransparencyEnabled(int serial, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1426,7 +1475,9 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeBoolean(enabled);
                     boolean _status = this.mRemote.transact(46, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setCellularIdentifierTransparencyEnabled is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCellularIdentifierTransparencyEnabled is"
+                                        + " unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1434,7 +1485,8 @@ public interface IRadioNetwork extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
-            public void setSecurityAlgorithmsUpdatedEnabled(int serial, boolean enable) throws RemoteException {
+            public void setSecurityAlgorithmsUpdatedEnabled(int serial, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1442,7 +1494,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeBoolean(enable);
                     boolean _status = this.mRemote.transact(47, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setSecurityAlgorithmsUpdatedEnabled is unimplemented.");
+                        throw new RemoteException(
+                                "Method setSecurityAlgorithmsUpdatedEnabled is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1457,7 +1510,8 @@ public interface IRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(48, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method isSecurityAlgorithmsUpdatedEnabled is unimplemented.");
+                        throw new RemoteException(
+                                "Method isSecurityAlgorithmsUpdatedEnabled is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

@@ -1,10 +1,10 @@
 package com.android.server.desktopmode;
 
-import com.android.server.desktopmode.DesktopModeService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class DesktopModeService$$ExternalSyntheticLambda2 implements Runnable {
+public final /* synthetic */ class DesktopModeService$$ExternalSyntheticLambda2
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -20,10 +20,13 @@ public final /* synthetic */ class DesktopModeService$$ExternalSyntheticLambda2 
         switch (i) {
             case 0:
                 DesktopModeService desktopModeService = (DesktopModeService) obj;
-                desktopModeService.startHome(((StateManager) desktopModeService.mStateManager).getState());
+                desktopModeService.startHome(
+                        ((StateManager) desktopModeService.mStateManager).getState());
                 break;
             default:
-                ((DesktopModeService) ((DesktopModeService.AnonymousClass1) obj).this$0).mAllowPogoInitialDialog = true;
+                ((DesktopModeService) ((DesktopModeService.AnonymousClass1) obj).this$0)
+                                .mAllowPogoInitialDialog =
+                        true;
                 break;
         }
     }

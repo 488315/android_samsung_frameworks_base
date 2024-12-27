@@ -10,6 +10,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -21,8 +22,7 @@ public class SwitchPreference extends TwoStatePreference {
     private CharSequence mSwitchOn;
 
     private class Listener implements CompoundButton.OnCheckedChangeListener {
-        private Listener() {
-        }
+        private Listener() {}
 
         @Override // android.widget.CompoundButton.OnCheckedChangeListener
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -35,22 +35,24 @@ public class SwitchPreference extends TwoStatePreference {
     }
 
     private static class ClickListener implements View.OnClickListener {
-        private ClickListener() {
-        }
+        private ClickListener() {}
 
         @Override // android.view.View.OnClickListener
-        public void onClick(View v) {
-        }
+        public void onClick(View v) {}
     }
 
-    public SwitchPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public SwitchPreference(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mListener = new Listener();
         Configuration configuration = context.getResources().getConfiguration();
-        if ((configuration.screenWidthDp <= 320 && configuration.fontScale >= 1.1f) || (configuration.screenWidthDp < 411 && configuration.fontScale >= 1.3f)) {
+        if ((configuration.screenWidthDp <= 320 && configuration.fontScale >= 1.1f)
+                || (configuration.screenWidthDp < 411 && configuration.fontScale >= 1.3f)) {
             setLayoutResource(R.layout.tw_preference_switch_large);
         }
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SwitchPreference, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.SwitchPreference, defStyleAttr, defStyleRes);
         setSummaryOn(a.getString(0));
         setSummaryOff(a.getString(1));
         setSwitchTextOn(a.getString(3));
@@ -88,8 +90,12 @@ public class SwitchPreference extends TwoStatePreference {
                 if (switchView.isClickable()) {
                     switchView.setOnClickListener(mClickListener);
                 }
-                AccessibilityManager accessibilityManager = AccessibilityManager.getInstance(view.getContext());
-                boolean enable = accessibilityManager.semIsAccessibilityServiceEnabled(32) || accessibilityManager.semIsAccessibilityServiceEnabled(16) || accessibilityManager.semIsAccessibilityServiceEnabled(64);
+                AccessibilityManager accessibilityManager =
+                        AccessibilityManager.getInstance(view.getContext());
+                boolean enable =
+                        accessibilityManager.semIsAccessibilityServiceEnabled(32)
+                                || accessibilityManager.semIsAccessibilityServiceEnabled(16)
+                                || accessibilityManager.semIsAccessibilityServiceEnabled(64);
                 if (enable && !(this instanceof SemSwitchPreferenceScreen)) {
                     switchView.setBackground(null);
                     switchView.setClickable(false);

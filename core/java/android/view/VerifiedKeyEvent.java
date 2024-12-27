@@ -2,26 +2,30 @@ package android.view;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes4.dex */
 public final class VerifiedKeyEvent extends VerifiedInputEvent implements Parcelable {
-    public static final Parcelable.Creator<VerifiedKeyEvent> CREATOR = new Parcelable.Creator<VerifiedKeyEvent>() { // from class: android.view.VerifiedKeyEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerifiedKeyEvent[] newArray(int size) {
-            return new VerifiedKeyEvent[size];
-        }
+    public static final Parcelable.Creator<VerifiedKeyEvent> CREATOR =
+            new Parcelable.Creator<
+                    VerifiedKeyEvent>() { // from class: android.view.VerifiedKeyEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerifiedKeyEvent[] newArray(int size) {
+                    return new VerifiedKeyEvent[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerifiedKeyEvent createFromParcel(Parcel in) {
-            return new VerifiedKeyEvent(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerifiedKeyEvent createFromParcel(Parcel in) {
+                    return new VerifiedKeyEvent(in);
+                }
+            };
     private static final String TAG = "VerifiedKeyEvent";
     private int mAction;
     private long mDownTimeNanos;
@@ -32,8 +36,7 @@ public final class VerifiedKeyEvent extends VerifiedInputEvent implements Parcel
     private int mScanCode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface KeyEventAction {
-    }
+    public @interface KeyEventAction {}
 
     public Boolean getFlag(int flag) {
         switch (flag) {
@@ -45,10 +48,24 @@ public final class VerifiedKeyEvent extends VerifiedInputEvent implements Parcel
         }
     }
 
-    public VerifiedKeyEvent(int deviceId, long eventTimeNanos, int source, int displayId, int action, long downTimeNanos, int flags, int keyCode, int scanCode, int metaState, int repeatCount) {
+    public VerifiedKeyEvent(
+            int deviceId,
+            long eventTimeNanos,
+            int source,
+            int displayId,
+            int action,
+            long downTimeNanos,
+            int flags,
+            int keyCode,
+            int scanCode,
+            int metaState,
+            int repeatCount) {
         super(1, deviceId, eventTimeNanos, source, displayId);
         this.mAction = action;
-        AnnotationValidations.validate((Class<? extends Annotation>) KeyEventAction.class, (Annotation) null, this.mAction);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) KeyEventAction.class,
+                (Annotation) null,
+                this.mAction);
         this.mDownTimeNanos = downTimeNanos;
         this.mFlags = flags;
         this.mKeyCode = keyCode;
@@ -94,7 +111,14 @@ public final class VerifiedKeyEvent extends VerifiedInputEvent implements Parcel
             return false;
         }
         VerifiedKeyEvent that = (VerifiedKeyEvent) o;
-        if (super.equals(that) && this.mAction == that.mAction && this.mDownTimeNanos == that.mDownTimeNanos && this.mFlags == that.mFlags && this.mKeyCode == that.mKeyCode && this.mScanCode == that.mScanCode && this.mMetaState == that.mMetaState && this.mRepeatCount == that.mRepeatCount) {
+        if (super.equals(that)
+                && this.mAction == that.mAction
+                && this.mDownTimeNanos == that.mDownTimeNanos
+                && this.mFlags == that.mFlags
+                && this.mKeyCode == that.mKeyCode
+                && this.mScanCode == that.mScanCode
+                && this.mMetaState == that.mMetaState
+                && this.mRepeatCount == that.mRepeatCount) {
             return true;
         }
         return false;
@@ -103,7 +127,17 @@ public final class VerifiedKeyEvent extends VerifiedInputEvent implements Parcel
     @Override // android.view.VerifiedInputEvent
     public int hashCode() {
         int _hash = (1 * 31) + super.hashCode();
-        return (((((((((((((_hash * 31) + this.mAction) * 31) + Long.hashCode(this.mDownTimeNanos)) * 31) + this.mFlags) * 31) + this.mKeyCode) * 31) + this.mScanCode) * 31) + this.mMetaState) * 31) + this.mRepeatCount;
+        return (((((((((((((_hash * 31) + this.mAction) * 31) + Long.hashCode(this.mDownTimeNanos))
+                                                                                        * 31)
+                                                                                + this.mFlags)
+                                                                        * 31)
+                                                                + this.mKeyCode)
+                                                        * 31)
+                                                + this.mScanCode)
+                                        * 31)
+                                + this.mMetaState)
+                        * 31)
+                + this.mRepeatCount;
     }
 
     @Override // android.view.VerifiedInputEvent, android.os.Parcelable
@@ -133,7 +167,10 @@ public final class VerifiedKeyEvent extends VerifiedInputEvent implements Parcel
         int metaState = in.readInt();
         int repeatCount = in.readInt();
         this.mAction = action;
-        AnnotationValidations.validate((Class<? extends Annotation>) KeyEventAction.class, (Annotation) null, this.mAction);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) KeyEventAction.class,
+                (Annotation) null,
+                this.mAction);
         this.mDownTimeNanos = downTimeNanos;
         this.mFlags = flags;
         this.mKeyCode = keyCode;
@@ -143,6 +180,5 @@ public final class VerifiedKeyEvent extends VerifiedInputEvent implements Parcel
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

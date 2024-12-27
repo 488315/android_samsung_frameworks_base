@@ -1,6 +1,7 @@
 package com.android.internal.pm.pkg;
 
 import com.android.server.pm.pkg.AndroidPackageSplit;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +15,8 @@ public class AndroidPackageSplitImpl implements AndroidPackageSplit {
     private final String mPath;
     private final int mRevisionCode;
 
-    public AndroidPackageSplitImpl(String name, String path, int revisionCode, int flags, String classLoaderName) {
+    public AndroidPackageSplitImpl(
+            String name, String path, int revisionCode, int flags, String classLoaderName) {
         this.mName = name;
         this.mPath = path;
         this.mRevisionCode = revisionCode;
@@ -67,12 +69,19 @@ public class AndroidPackageSplitImpl implements AndroidPackageSplit {
             return false;
         }
         AndroidPackageSplitImpl that = (AndroidPackageSplitImpl) o;
-        boolean fieldsEqual = this.mRevisionCode == that.mRevisionCode && this.mFlags == that.mFlags && Objects.equals(this.mName, that.mName) && Objects.equals(this.mPath, that.mPath) && Objects.equals(this.mClassLoaderName, that.mClassLoaderName);
+        boolean fieldsEqual =
+                this.mRevisionCode == that.mRevisionCode
+                        && this.mFlags == that.mFlags
+                        && Objects.equals(this.mName, that.mName)
+                        && Objects.equals(this.mPath, that.mPath)
+                        && Objects.equals(this.mClassLoaderName, that.mClassLoaderName);
         if (!fieldsEqual || this.mDependencies.size() != that.mDependencies.size()) {
             return false;
         }
         for (int index = 0; index < this.mDependencies.size(); index++) {
-            if (!Objects.equals(this.mDependencies.get(index).getName(), that.mDependencies.get(index).getName())) {
+            if (!Objects.equals(
+                    this.mDependencies.get(index).getName(),
+                    that.mDependencies.get(index).getName())) {
                 return false;
             }
         }
@@ -80,7 +89,13 @@ public class AndroidPackageSplitImpl implements AndroidPackageSplit {
     }
 
     public int hashCode() {
-        int dependenciesHash = Objects.hash(this.mName, this.mPath, Integer.valueOf(this.mRevisionCode), Integer.valueOf(this.mFlags), this.mClassLoaderName);
+        int dependenciesHash =
+                Objects.hash(
+                        this.mName,
+                        this.mPath,
+                        Integer.valueOf(this.mRevisionCode),
+                        Integer.valueOf(this.mFlags),
+                        this.mClassLoaderName);
         for (int index = 0; index < this.mDependencies.size(); index++) {
             String name = this.mDependencies.get(index).getName();
             dependenciesHash = (dependenciesHash * 31) + (name == null ? 0 : name.hashCode());

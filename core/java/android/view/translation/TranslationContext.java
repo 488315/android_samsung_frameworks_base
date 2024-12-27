@@ -5,28 +5,33 @@ import android.annotation.SystemApi;
 import android.app.assist.ActivityId;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.BitUtils;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.function.IntFunction;
 
 /* loaded from: classes4.dex */
 public final class TranslationContext implements Parcelable {
-    public static final Parcelable.Creator<TranslationContext> CREATOR = new Parcelable.Creator<TranslationContext>() { // from class: android.view.translation.TranslationContext.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationContext[] newArray(int size) {
-            return new TranslationContext[size];
-        }
+    public static final Parcelable.Creator<TranslationContext> CREATOR =
+            new Parcelable.Creator<
+                    TranslationContext>() { // from class:
+                                            // android.view.translation.TranslationContext.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationContext[] newArray(int size) {
+                    return new TranslationContext[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationContext createFromParcel(Parcel in) {
-            return new TranslationContext(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationContext createFromParcel(Parcel in) {
+                    return new TranslationContext(in);
+                }
+            };
     public static final int FLAG_DEFINITIONS = 4;
     public static final int FLAG_LOW_LATENCY = 1;
     public static final int FLAG_TRANSLITERATION = 2;
@@ -36,8 +41,7 @@ public final class TranslationContext implements Parcelable {
     private final int mTranslationFlags;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TranslationFlag {
-    }
+    public @interface TranslationFlag {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int defaultTranslationFlags() {
@@ -69,18 +73,20 @@ public final class TranslationContext implements Parcelable {
         return this.mActivityId;
     }
 
-    static abstract class BaseBuilder {
-        BaseBuilder() {
-        }
+    abstract static class BaseBuilder {
+        BaseBuilder() {}
     }
 
     public static String translationFlagToString(int value) {
-        return BitUtils.flagsToString(value, new IntFunction() { // from class: android.view.translation.TranslationContext$$ExternalSyntheticLambda0
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i) {
-                return TranslationContext.singleTranslationFlagToString(i);
-            }
-        });
+        return BitUtils.flagsToString(
+                value,
+                new IntFunction() { // from class:
+                                    // android.view.translation.TranslationContext$$ExternalSyntheticLambda0
+                    @Override // java.util.function.IntFunction
+                    public final Object apply(int i) {
+                        return TranslationContext.singleTranslationFlagToString(i);
+                    }
+                });
     }
 
     static String singleTranslationFlagToString(int value) {
@@ -97,11 +103,17 @@ public final class TranslationContext implements Parcelable {
         }
     }
 
-    TranslationContext(TranslationSpec sourceSpec, TranslationSpec targetSpec, int translationFlags, ActivityId activityId) {
+    TranslationContext(
+            TranslationSpec sourceSpec,
+            TranslationSpec targetSpec,
+            int translationFlags,
+            ActivityId activityId) {
         this.mSourceSpec = sourceSpec;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSourceSpec);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSourceSpec);
         this.mTargetSpec = targetSpec;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTargetSpec);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTargetSpec);
         this.mTranslationFlags = translationFlags;
         Preconditions.checkFlagsArgument(this.mTranslationFlags, 7);
         this.mActivityId = activityId;
@@ -120,7 +132,15 @@ public final class TranslationContext implements Parcelable {
     }
 
     public String toString() {
-        return "TranslationContext { sourceSpec = " + this.mSourceSpec + ", targetSpec = " + this.mTargetSpec + ", translationFlags = " + translationFlagToString(this.mTranslationFlags) + ", activityId = " + this.mActivityId + " }";
+        return "TranslationContext { sourceSpec = "
+                + this.mSourceSpec
+                + ", targetSpec = "
+                + this.mTargetSpec
+                + ", translationFlags = "
+                + translationFlagToString(this.mTranslationFlags)
+                + ", activityId = "
+                + this.mActivityId
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -145,9 +165,11 @@ public final class TranslationContext implements Parcelable {
         int translationFlags = in.readInt();
         ActivityId activityId = unparcelActivityId(in);
         this.mSourceSpec = sourceSpec;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSourceSpec);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSourceSpec);
         this.mTargetSpec = targetSpec;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTargetSpec);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTargetSpec);
         this.mTranslationFlags = translationFlags;
         Preconditions.checkFlagsArgument(this.mTranslationFlags, 7);
         this.mActivityId = activityId;
@@ -162,9 +184,11 @@ public final class TranslationContext implements Parcelable {
 
         public Builder(TranslationSpec sourceSpec, TranslationSpec targetSpec) {
             this.mSourceSpec = sourceSpec;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSourceSpec);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSourceSpec);
             this.mTargetSpec = targetSpec;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTargetSpec);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTargetSpec);
         }
 
         public Builder setTranslationFlags(int value) {
@@ -190,18 +214,23 @@ public final class TranslationContext implements Parcelable {
             if ((this.mBuilderFieldsSet & 8) == 0) {
                 this.mActivityId = TranslationContext.defaultActivityId();
             }
-            TranslationContext o = new TranslationContext(this.mSourceSpec, this.mTargetSpec, this.mTranslationFlags, this.mActivityId);
+            TranslationContext o =
+                    new TranslationContext(
+                            this.mSourceSpec,
+                            this.mTargetSpec,
+                            this.mTranslationFlags,
+                            this.mActivityId);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 16) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

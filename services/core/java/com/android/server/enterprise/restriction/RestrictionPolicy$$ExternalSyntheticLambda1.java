@@ -12,7 +12,8 @@ public final /* synthetic */ class RestrictionPolicy$$ExternalSyntheticLambda1 i
     public final void run() {
         String[] strArr = RestrictionPolicy.excludedAdminList;
         try {
-            IWindowManager.Stub.asInterface(ServiceManager.getService("window")).refreshScreenCaptureDisabled();
+            IWindowManager.Stub.asInterface(ServiceManager.getService("window"))
+                    .refreshScreenCaptureDisabled();
         } catch (RemoteException e) {
             Log.e("RestrictionPolicy", "Unable to notify WindowManager.", e);
         }

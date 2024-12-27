@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.WindowManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -60,7 +61,16 @@ final class VoiceInteractionWindow extends Dialog {
         }
     }
 
-    VoiceInteractionWindow(Context context, String name, int theme, Callback callback, KeyEvent.Callback keyEventCallback, KeyEvent.DispatcherState dispatcherState, int windowType, int gravity, boolean takesFocus) {
+    VoiceInteractionWindow(
+            Context context,
+            String name,
+            int theme,
+            Callback callback,
+            KeyEvent.Callback keyEventCallback,
+            KeyEvent.DispatcherState dispatcherState,
+            int windowType,
+            int gravity,
+            boolean takesFocus) {
         super(context, theme);
         this.mBounds = new Rect();
         this.mWindowState = 0;
@@ -83,10 +93,19 @@ final class VoiceInteractionWindow extends Dialog {
     @Override // android.app.Dialog, android.view.Window.Callback
     public boolean dispatchTouchEvent(MotionEvent ev) {
         getWindow().getDecorView().getHitRect(this.mBounds);
-        if (ev.isWithinBoundsNoHistory(this.mBounds.left, this.mBounds.top, this.mBounds.right - 1, this.mBounds.bottom - 1)) {
+        if (ev.isWithinBoundsNoHistory(
+                this.mBounds.left,
+                this.mBounds.top,
+                this.mBounds.right - 1,
+                this.mBounds.bottom - 1)) {
             return super.dispatchTouchEvent(ev);
         }
-        MotionEvent temp = ev.clampNoHistory(this.mBounds.left, this.mBounds.top, this.mBounds.right - 1, this.mBounds.bottom - 1);
+        MotionEvent temp =
+                ev.clampNoHistory(
+                        this.mBounds.left,
+                        this.mBounds.top,
+                        this.mBounds.right - 1,
+                        this.mBounds.bottom - 1);
         boolean handled = super.dispatchTouchEvent(temp);
         temp.recycle();
         return handled;
@@ -112,7 +131,8 @@ final class VoiceInteractionWindow extends Dialog {
 
     @Override // android.app.Dialog, android.view.KeyEvent.Callback
     public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-        if (this.mKeyEventCallback != null && this.mKeyEventCallback.onKeyLongPress(keyCode, event)) {
+        if (this.mKeyEventCallback != null
+                && this.mKeyEventCallback.onKeyLongPress(keyCode, event)) {
             return true;
         }
         return super.onKeyLongPress(keyCode, event);
@@ -128,7 +148,8 @@ final class VoiceInteractionWindow extends Dialog {
 
     @Override // android.app.Dialog, android.view.KeyEvent.Callback
     public boolean onKeyMultiple(int keyCode, int count, KeyEvent event) {
-        if (this.mKeyEventCallback != null && this.mKeyEventCallback.onKeyMultiple(keyCode, count, event)) {
+        if (this.mKeyEventCallback != null
+                && this.mKeyEventCallback.onKeyMultiple(keyCode, count, event)) {
             return true;
         }
         return super.onKeyMultiple(keyCode, count, event);
@@ -173,7 +194,10 @@ final class VoiceInteractionWindow extends Dialog {
                     updateWindowState(2);
                     return;
                 } catch (WindowManager.BadTokenException e) {
-                    Log.i(TAG, "Probably the IME window token is already invalidated. show() does nothing.");
+                    Log.i(
+                            TAG,
+                            "Probably the IME window token is already invalidated. show() does"
+                                + " nothing.");
                     updateWindowState(3);
                     return;
                 }

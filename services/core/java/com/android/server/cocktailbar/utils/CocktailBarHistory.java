@@ -1,6 +1,7 @@
 package com.android.server.cocktailbar.utils;
 
 import android.icu.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -182,12 +183,22 @@ public final class CocktailBarHistory {
                 stringBuffer.append("\n");
                 stringBuffer.append("  [Panel update history] :\n");
                 for (Map.Entry entry : this.mPanelUpdateHistory.entrySet()) {
-                    stringBuffer.append("   Cocktail id : " + entry.getKey() + " - " + ((String) entry.getValue()) + "\n");
+                    stringBuffer.append(
+                            "   Cocktail id : "
+                                    + entry.getKey()
+                                    + " - "
+                                    + ((String) entry.getValue())
+                                    + "\n");
                 }
                 stringBuffer.append("\n");
                 stringBuffer.append("  [Power whitelist history] :\n");
                 for (Map.Entry entry2 : this.mPowerWhitelistHistory.entrySet()) {
-                    stringBuffer.append("   Cocktail id : " + entry2.getKey() + " - " + ((String) entry2.getValue()) + "\n");
+                    stringBuffer.append(
+                            "   Cocktail id : "
+                                    + entry2.getKey()
+                                    + " - "
+                                    + ((String) entry2.getValue())
+                                    + "\n");
                 }
                 stringBuffer.append("\n");
             } catch (Throwable th) {

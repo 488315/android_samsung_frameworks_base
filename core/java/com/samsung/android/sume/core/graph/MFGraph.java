@@ -5,6 +5,7 @@ import android.media.MediaMetadataRetriever;
 import android.media.tv.interactive.TvInteractiveAppService;
 import android.util.Log;
 import android.util.Pair;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.cache.DiskCache;
@@ -17,9 +18,9 @@ import com.samsung.android.sume.core.evaluate.Evaluator;
 import com.samsung.android.sume.core.filter.MediaFilter;
 import com.samsung.android.sume.core.filter.collection.BufferedConveyorFilter$$ExternalSyntheticLambda1;
 import com.samsung.android.sume.core.functional.BufferSupplier;
-import com.samsung.android.sume.core.graph.Graph;
 import com.samsung.android.sume.core.message.Event;
 import com.samsung.android.sume.core.message.Message;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,26 +42,44 @@ import java.util.stream.Stream;
 public class MFGraph extends GraphBase<MediaFilter> {
     private static final String TAG = Def.tagOf((Class<?>) MFGraph.class);
 
-    private MFGraph(List<GraphNode<MediaFilter>> graphNodes, final BufferChannel inputChannel, final BufferChannel outputChannel, final Graph.Option option) {
+    private MFGraph(
+            List<GraphNode<MediaFilter>> graphNodes,
+            final BufferChannel inputChannel,
+            final BufferChannel outputChannel,
+            final Graph.Option option) {
         super(graphNodes, option);
         this.inputChannel = inputChannel;
         this.outputChannel = outputChannel;
         final List<GraphNode<MediaFilter>> inputNodes = new ArrayList<>();
         final List<GraphNode<MediaFilter>> outputNodes = new ArrayList<>();
         Log.d(TAG, "prepare each node..." + graphNodes.size());
-        graphNodes.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda6
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                MFGraph.this.m9183lambda$new$0$comsamsungandroidsumecoregraphMFGraph(inputChannel, inputNodes, outputChannel, outputNodes, option, (GraphNode) obj);
-            }
-        });
+        graphNodes.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda6
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        MFGraph.this.m9183lambda$new$0$comsamsungandroidsumecoregraphMFGraph(
+                                inputChannel,
+                                inputNodes,
+                                outputChannel,
+                                outputNodes,
+                                option,
+                                (GraphNode) obj);
+                    }
+                });
         Def.check(!inputNodes.isEmpty(), "no input node given", new Object[0]);
         Def.check(!outputNodes.isEmpty(), "no input node given", new Object[0]);
         Log.i(TAG, "success to create MediaFilter graph");
     }
 
     /* renamed from: lambda$new$0$com-samsung-android-sume-core-graph-MFGraph, reason: not valid java name */
-    /* synthetic */ void m9183lambda$new$0$comsamsungandroidsumecoregraphMFGraph(BufferChannel inputChannel, List inputNodes, BufferChannel outputChannel, List outputNodes, Graph.Option option, GraphNode it) {
+    /* synthetic */ void m9183lambda$new$0$comsamsungandroidsumecoregraphMFGraph(
+            BufferChannel inputChannel,
+            List inputNodes,
+            BufferChannel outputChannel,
+            List outputNodes,
+            Graph.Option option,
+            GraphNode it) {
         if (!it.hasInputEdge()) {
             it.addInputEdge(new GraphEdge(inputChannel));
             inputNodes.add(it);
@@ -81,54 +100,83 @@ public class MFGraph extends GraphBase<MediaFilter> {
     public void run(final List<MediaBuffer> inBuffers, final List<MediaBuffer> outBuffers) {
         Log.d(TAG, "run E");
         if (this.option.getMaxDuration(TimeUnit.MICROSECONDS) != 0) {
-            inBuffers.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    MFGraph.this.m9184lambda$run$1$comsamsungandroidsumecoregraphMFGraph((MediaBuffer) obj);
-                }
-            });
+            inBuffers.forEach(
+                    new Consumer() { // from class:
+                                     // com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            MFGraph.this.m9184lambda$run$1$comsamsungandroidsumecoregraphMFGraph(
+                                    (MediaBuffer) obj);
+                        }
+                    });
         }
         if (this.option.isCacheable()) {
             final DiskCache diskCache = (DiskCache) this.option.get(1);
-            inBuffers.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda1
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    MFGraph.lambda$run$2(DiskCache.this, (MediaBuffer) obj);
-                }
-            });
-            this.messagePublisher.sendMessage(Event.of(6, new HashMap<String, Object>() { // from class: com.samsung.android.sume.core.graph.MFGraph.1
-                {
-                    boolean storeCache = MFGraph.this.option.contains(0);
-                    put("cache", new Pair(diskCache, Boolean.valueOf(storeCache)));
-                }
-            }));
+            inBuffers.forEach(
+                    new Consumer() { // from class:
+                                     // com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda1
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            MFGraph.lambda$run$2(DiskCache.this, (MediaBuffer) obj);
+                        }
+                    });
+            this.messagePublisher.sendMessage(
+                    Event.of(
+                            6,
+                            new HashMap<
+                                    String,
+                                    Object>() { // from class:
+                                                // com.samsung.android.sume.core.graph.MFGraph.1
+                                {
+                                    boolean storeCache = MFGraph.this.option.contains(0);
+                                    put("cache", new Pair(diskCache, Boolean.valueOf(storeCache)));
+                                }
+                            }));
         }
         if (this.option.isPackedIOBuffers()) {
             Def.require(inBuffers.size() == outBuffers.size());
-            List<MediaBuffer> bufferList = (List) IntStream.range(0, outBuffers.size()).mapToObj(new IntFunction() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda2
-                @Override // java.util.function.IntFunction
-                public final Object apply(int i) {
-                    return MFGraph.this.m9185lambda$run$3$comsamsungandroidsumecoregraphMFGraph(inBuffers, outBuffers, i);
-                }
-            }).collect(Collectors.toList());
+            List<MediaBuffer> bufferList =
+                    (List)
+                            IntStream.range(0, outBuffers.size())
+                                    .mapToObj(
+                                            new IntFunction() { // from class:
+                                                                // com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda2
+                                                @Override // java.util.function.IntFunction
+                                                public final Object apply(int i) {
+                                                    return MFGraph.this
+                                                            .m9185lambda$run$3$comsamsungandroidsumecoregraphMFGraph(
+                                                                    inBuffers, outBuffers, i);
+                                                }
+                                            })
+                                    .collect(Collectors.toList());
             inBuffers.clear();
             outBuffers.clear();
             inBuffers.addAll(bufferList);
         } else if (inBuffers.size() == outBuffers.size()) {
             Stream<Integer> boxed = IntStream.range(0, outBuffers.size()).boxed();
-            Function function = new Function() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda3
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return MFGraph.lambda$run$4(inBuffers, (Integer) obj);
-                }
-            };
+            Function function =
+                    new Function() { // from class:
+                                     // com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda3
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj) {
+                            return MFGraph.lambda$run$4(inBuffers, (Integer) obj);
+                        }
+                    };
             Objects.requireNonNull(outBuffers);
-            Map<Integer, MediaBuffer> outBufferMap = (Map) boxed.collect(Collectors.toMap(function, new Function() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda4
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return (MediaBuffer) outBuffers.get(((Integer) obj).intValue());
-                }
-            }));
+            Map<Integer, MediaBuffer> outBufferMap =
+                    (Map)
+                            boxed.collect(
+                                    Collectors.toMap(
+                                            function,
+                                            new Function() { // from class:
+                                                             // com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda4
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return (MediaBuffer)
+                                                            outBuffers.get(
+                                                                    ((Integer) obj).intValue());
+                                                }
+                                            }));
             this.outBufferMap.putAll(outBufferMap);
             outBufferMap.clear();
             outBuffers.clear();
@@ -139,19 +187,24 @@ public class MFGraph extends GraphBase<MediaFilter> {
             runBatch(inBuffers, outBuffers);
         }
         if (this.option.isRestoreMetadata()) {
-            IntStream.range(0, inBuffers.size()).forEach(new IntConsumer() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda5
-                @Override // java.util.function.IntConsumer
-                public final void accept(int i) {
-                    MFGraph.lambda$run$5(inBuffers, outBuffers, i);
-                }
-            });
+            IntStream.range(0, inBuffers.size())
+                    .forEach(
+                            new IntConsumer() { // from class:
+                                                // com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda5
+                                @Override // java.util.function.IntConsumer
+                                public final void accept(int i) {
+                                    MFGraph.lambda$run$5(inBuffers, outBuffers, i);
+                                }
+                            });
         }
         Log.d(TAG, "run X");
     }
 
     /* renamed from: lambda$run$1$com-samsung-android-sume-core-graph-MFGraph, reason: not valid java name */
     /* synthetic */ void m9184lambda$run$1$comsamsungandroidsumecoregraphMFGraph(MediaBuffer it) {
-        it.setExtra(Message.KEY_END_TIME_US, Long.valueOf(this.option.getMaxDuration(TimeUnit.MICROSECONDS)));
+        it.setExtra(
+                Message.KEY_END_TIME_US,
+                Long.valueOf(this.option.getMaxDuration(TimeUnit.MICROSECONDS)));
     }
 
     static /* synthetic */ void lambda$run$2(DiskCache diskCache, MediaBuffer it) {
@@ -163,7 +216,9 @@ public class MFGraph extends GraphBase<MediaFilter> {
                     MediaMetadataRetriever retriever = new MediaMetadataRetriever();
                     retriever.setDataSource(found.getAbsolutePath());
                     long duration = Long.parseLong(retriever.extractMetadata(9));
-                    it.setExtra(Message.KEY_START_TIME_US, Long.valueOf(TimeUnit.MILLISECONDS.toMicros(duration)));
+                    it.setExtra(
+                            Message.KEY_START_TIME_US,
+                            Long.valueOf(TimeUnit.MILLISECONDS.toMicros(duration)));
                     retriever.release();
                 }
             }
@@ -173,15 +228,20 @@ public class MFGraph extends GraphBase<MediaFilter> {
     }
 
     /* renamed from: lambda$run$3$com-samsung-android-sume-core-graph-MFGraph, reason: not valid java name */
-    /* synthetic */ MediaBuffer m9185lambda$run$3$comsamsungandroidsumecoregraphMFGraph(List inBuffers, List outBuffers, int it) {
+    /* synthetic */ MediaBuffer m9185lambda$run$3$comsamsungandroidsumecoregraphMFGraph(
+            List inBuffers, List outBuffers, int it) {
         final MediaBuffer inBuffer = (MediaBuffer) inBuffers.get(it);
         final MediaBuffer outBuffer = (MediaBuffer) outBuffers.get(it);
-        MediaBuffer buffer = MediaBuffer.groupOf(new ArrayList<MediaBuffer>() { // from class: com.samsung.android.sume.core.graph.MFGraph.2
-            {
-                add(inBuffer);
-                add(outBuffer);
-            }
-        });
+        MediaBuffer buffer =
+                MediaBuffer.groupOf(
+                        new ArrayList<
+                                MediaBuffer>() { // from class:
+                                                 // com.samsung.android.sume.core.graph.MFGraph.2
+                            {
+                                add(inBuffer);
+                                add(outBuffer);
+                            }
+                        });
         if (inBuffer.containsExtra(Message.KEY_CONTENTS_ID)) {
             buffer.setExtra(Message.KEY_CONTENTS_ID, inBuffer.getExtra(Message.KEY_CONTENTS_ID));
         }
@@ -196,7 +256,8 @@ public class MFGraph extends GraphBase<MediaFilter> {
     }
 
     static /* synthetic */ Integer lambda$run$4(List inBuffers, Integer it) {
-        return (Integer) ((MediaBuffer) inBuffers.get(it.intValue())).getExtra(Message.KEY_CONTENTS_ID);
+        return (Integer)
+                ((MediaBuffer) inBuffers.get(it.intValue())).getExtra(Message.KEY_CONTENTS_ID);
     }
 
     static /* synthetic */ void lambda$run$5(List inBuffers, List outBuffers, int index) {
@@ -209,23 +270,27 @@ public class MFGraph extends GraphBase<MediaFilter> {
     @Override // com.samsung.android.sume.core.graph.Graph
     public void pause() {
         Log.d(TAG, TvInteractiveAppService.TIME_SHIFT_COMMAND_TYPE_PAUSE);
-        this.nodes.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda8
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((GraphNode) obj).pause();
-            }
-        });
+        this.nodes.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda8
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        ((GraphNode) obj).pause();
+                    }
+                });
     }
 
     @Override // com.samsung.android.sume.core.graph.Graph
     public void resume() {
         Log.d(TAG, "resume");
-        this.nodes.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda7
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((GraphNode) obj).resume();
-            }
-        });
+        this.nodes.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.sume.core.graph.MFGraph$$ExternalSyntheticLambda7
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        ((GraphNode) obj).resume();
+                    }
+                });
     }
 
     public static class Builder extends GraphBuilderBase<MediaFilter> {
@@ -247,7 +312,8 @@ public class MFGraph extends GraphBase<MediaFilter> {
 
         public Builder(MFGraphUnitFactory mfGraphUnitFactory, Graph.Option option) {
             Objects.requireNonNull(mfGraphUnitFactory);
-            this.bufferChannelSupplier = new MFGraph$Builder$$ExternalSyntheticLambda0(mfGraphUnitFactory);
+            this.bufferChannelSupplier =
+                    new MFGraph$Builder$$ExternalSyntheticLambda0(mfGraphUnitFactory);
             this.option = option;
             if (option.isCacheable() && option.get(1) == null) {
                 option.set(1, mfGraphUnitFactory.newDiskCache());
@@ -255,7 +321,8 @@ public class MFGraph extends GraphBase<MediaFilter> {
         }
 
         @Override // com.samsung.android.sume.core.graph.GraphBuilder
-        public GraphBuilder<MediaFilter> addNode(GraphNode<? extends MediaFilter> from, GraphNode<? extends MediaFilter> to) {
+        public GraphBuilder<MediaFilter> addNode(
+                GraphNode<? extends MediaFilter> from, GraphNode<? extends MediaFilter> to) {
             GraphEdge edge = new GraphEdge(this.bufferChannelSupplier.get());
             from.addOutputEdge(edge);
             to.addInputEdge(edge);
@@ -265,17 +332,27 @@ public class MFGraph extends GraphBase<MediaFilter> {
         }
 
         @Override // com.samsung.android.sume.core.graph.GraphBuilder
-        public GraphBuilder<MediaFilter> addNode(GraphNode<? extends MediaFilter> from, GraphNode<? extends MediaFilter> to, Evaluator evaluator) {
+        public GraphBuilder<MediaFilter> addNode(
+                GraphNode<? extends MediaFilter> from,
+                GraphNode<? extends MediaFilter> to,
+                Evaluator evaluator) {
             return addNode(from, to, evaluator, new BufferChannelDescriptor());
         }
 
         @Override // com.samsung.android.sume.core.graph.GraphBuilder
-        public GraphBuilder<MediaFilter> addNode(GraphNode<? extends MediaFilter> from, GraphNode<? extends MediaFilter> to, BufferChannelDescriptor channelDescriptor) {
+        public GraphBuilder<MediaFilter> addNode(
+                GraphNode<? extends MediaFilter> from,
+                GraphNode<? extends MediaFilter> to,
+                BufferChannelDescriptor channelDescriptor) {
             return addNode(from, to, null, channelDescriptor);
         }
 
         @Override // com.samsung.android.sume.core.graph.GraphBuilder
-        public GraphBuilder<MediaFilter> addNode(GraphNode<? extends MediaFilter> from, GraphNode<? extends MediaFilter> to, Evaluator evaluator, BufferChannelDescriptor channelDescriptor) {
+        public GraphBuilder<MediaFilter> addNode(
+                GraphNode<? extends MediaFilter> from,
+                GraphNode<? extends MediaFilter> to,
+                Evaluator evaluator,
+                BufferChannelDescriptor channelDescriptor) {
             BufferChannel channel;
             switch (channelDescriptor.getType()) {
                 case 0:
@@ -285,15 +362,19 @@ public class MFGraph extends GraphBase<MediaFilter> {
                     channel = new BufferSupplyChannel(this.bufferChannelSupplier.get());
                     MediaFilter mediaFilter = to.get();
                     Def.require(mediaFilter instanceof BufferSupplier);
-                    ((BufferSupplyChannel) channel).configure(((BufferSupplier) mediaFilter).getBufferSupplier());
+                    ((BufferSupplyChannel) channel)
+                            .configure(((BufferSupplier) mediaFilter).getBufferSupplier());
                     break;
                 case 2:
                 case 3:
                 case 4:
-                    channel = SurfaceChannel.of(channelDescriptor.getType(), this.bufferChannelSupplier.get());
+                    channel =
+                            SurfaceChannel.of(
+                                    channelDescriptor.getType(), this.bufferChannelSupplier.get());
                     break;
                 default:
-                    throw new IllegalArgumentException("unknown BufferChannel.Type given: " + channelDescriptor);
+                    throw new IllegalArgumentException(
+                            "unknown BufferChannel.Type given: " + channelDescriptor);
             }
             if (channelDescriptor.getCapacity() != 0) {
                 channel.setCapacity(channelDescriptor.getCapacity());
@@ -311,7 +392,8 @@ public class MFGraph extends GraphBase<MediaFilter> {
         public Graph<MediaFilter> build() {
             BufferChannel inputChannel = this.bufferChannelSupplier.get();
             BufferChannel outputChannel = this.bufferChannelSupplier.get();
-            this.graphNodes = (List) this.graphNodes.stream().distinct().collect(Collectors.toList());
+            this.graphNodes =
+                    (List) this.graphNodes.stream().distinct().collect(Collectors.toList());
             return new MFGraph(this.graphNodes, inputChannel, outputChannel, this.option);
         }
     }

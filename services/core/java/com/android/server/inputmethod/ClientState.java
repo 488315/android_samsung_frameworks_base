@@ -4,8 +4,8 @@ import android.hardware.broadcastradio.V2_0.AmFmBandRange$$ExternalSyntheticOutl
 import android.os.IBinder;
 import android.util.SparseArray;
 import android.view.inputmethod.InputBinding;
+
 import com.android.internal.inputmethod.IRemoteInputConnection;
-import com.android.server.inputmethod.InputMethodManagerService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -22,7 +22,13 @@ public final class ClientState {
     public boolean mSessionRequestedForAccessibility;
     public final int mUid;
 
-    public ClientState(IInputMethodClientInvoker iInputMethodClientInvoker, IRemoteInputConnection iRemoteInputConnection, int i, int i2, int i3, ClientController$$ExternalSyntheticLambda0 clientController$$ExternalSyntheticLambda0) {
+    public ClientState(
+            IInputMethodClientInvoker iInputMethodClientInvoker,
+            IRemoteInputConnection iRemoteInputConnection,
+            int i,
+            int i2,
+            int i3,
+            ClientController$$ExternalSyntheticLambda0 clientController$$ExternalSyntheticLambda0) {
         this.mClient = iInputMethodClientInvoker;
         this.mFallbackInputConnection = iRemoteInputConnection;
         this.mUid = i;

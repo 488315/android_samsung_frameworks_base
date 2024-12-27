@@ -15,6 +15,7 @@ import com.android.internal.org.bouncycastle.crypto.digests.AndroidDigestFactory
 import com.android.internal.org.bouncycastle.crypto.encodings.PKCS1Encoding;
 import com.android.internal.org.bouncycastle.crypto.engines.RSABlindedEngine;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.IOException;
 import java.security.AlgorithmParameters;
 import java.security.InvalidKeyException;
@@ -38,7 +39,8 @@ public class DigestSignatureSpi extends SignatureSpi {
         this.algId = null;
     }
 
-    protected DigestSignatureSpi(ASN1ObjectIdentifier objId, Digest digest, AsymmetricBlockCipher cipher) {
+    protected DigestSignatureSpi(
+            ASN1ObjectIdentifier objId, Digest digest, AsymmetricBlockCipher cipher) {
         this.digest = digest;
         this.cipher = cipher;
         this.algId = new AlgorithmIdentifier(objId, DERNull.INSTANCE);
@@ -47,7 +49,8 @@ public class DigestSignatureSpi extends SignatureSpi {
     @Override // java.security.SignatureSpi
     protected void engineInitVerify(PublicKey publicKey) throws InvalidKeyException {
         if (!(publicKey instanceof RSAPublicKey)) {
-            throw new InvalidKeyException("Supplied key (" + getType(publicKey) + ") is not a RSAPublicKey instance");
+            throw new InvalidKeyException(
+                    "Supplied key (" + getType(publicKey) + ") is not a RSAPublicKey instance");
         }
         CipherParameters param = RSAUtil.generatePublicKeyParameter((RSAPublicKey) publicKey);
         this.digest.reset();
@@ -57,7 +60,8 @@ public class DigestSignatureSpi extends SignatureSpi {
     @Override // java.security.SignatureSpi
     protected void engineInitSign(PrivateKey privateKey) throws InvalidKeyException {
         if (!(privateKey instanceof RSAPrivateKey)) {
-            throw new InvalidKeyException("Supplied key (" + getType(privateKey) + ") is not a RSAPrivateKey instance");
+            throw new InvalidKeyException(
+                    "Supplied key (" + getType(privateKey) + ") is not a RSAPrivateKey instance");
         }
         CipherParameters param = RSAUtil.generatePrivateKeyParameter((RSAPrivateKey) privateKey);
         this.digest.reset();
@@ -156,37 +160,55 @@ public class DigestSignatureSpi extends SignatureSpi {
 
     public static class SHA1 extends DigestSignatureSpi {
         public SHA1() {
-            super(OIWObjectIdentifiers.idSHA1, AndroidDigestFactory.getSHA1(), new PKCS1Encoding(new RSABlindedEngine()));
+            super(
+                    OIWObjectIdentifiers.idSHA1,
+                    AndroidDigestFactory.getSHA1(),
+                    new PKCS1Encoding(new RSABlindedEngine()));
         }
     }
 
     public static class SHA224 extends DigestSignatureSpi {
         public SHA224() {
-            super(NISTObjectIdentifiers.id_sha224, AndroidDigestFactory.getSHA224(), new PKCS1Encoding(new RSABlindedEngine()));
+            super(
+                    NISTObjectIdentifiers.id_sha224,
+                    AndroidDigestFactory.getSHA224(),
+                    new PKCS1Encoding(new RSABlindedEngine()));
         }
     }
 
     public static class SHA256 extends DigestSignatureSpi {
         public SHA256() {
-            super(NISTObjectIdentifiers.id_sha256, AndroidDigestFactory.getSHA256(), new PKCS1Encoding(new RSABlindedEngine()));
+            super(
+                    NISTObjectIdentifiers.id_sha256,
+                    AndroidDigestFactory.getSHA256(),
+                    new PKCS1Encoding(new RSABlindedEngine()));
         }
     }
 
     public static class SHA384 extends DigestSignatureSpi {
         public SHA384() {
-            super(NISTObjectIdentifiers.id_sha384, AndroidDigestFactory.getSHA384(), new PKCS1Encoding(new RSABlindedEngine()));
+            super(
+                    NISTObjectIdentifiers.id_sha384,
+                    AndroidDigestFactory.getSHA384(),
+                    new PKCS1Encoding(new RSABlindedEngine()));
         }
     }
 
     public static class SHA512 extends DigestSignatureSpi {
         public SHA512() {
-            super(NISTObjectIdentifiers.id_sha512, AndroidDigestFactory.getSHA512(), new PKCS1Encoding(new RSABlindedEngine()));
+            super(
+                    NISTObjectIdentifiers.id_sha512,
+                    AndroidDigestFactory.getSHA512(),
+                    new PKCS1Encoding(new RSABlindedEngine()));
         }
     }
 
     public static class MD5 extends DigestSignatureSpi {
         public MD5() {
-            super(PKCSObjectIdentifiers.md5, AndroidDigestFactory.getMD5(), new PKCS1Encoding(new RSABlindedEngine()));
+            super(
+                    PKCSObjectIdentifiers.md5,
+                    AndroidDigestFactory.getMD5(),
+                    new PKCS1Encoding(new RSABlindedEngine()));
         }
     }
 }

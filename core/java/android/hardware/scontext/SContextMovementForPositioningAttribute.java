@@ -20,7 +20,11 @@ public class SContextMovementForPositioningAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    public SContextMovementForPositioningAttribute(int nomoveDurationThrs, int moveDurationThrs, double moveDistanceThrs, int moveMinDurationThrs) {
+    public SContextMovementForPositioningAttribute(
+            int nomoveDurationThrs,
+            int moveDurationThrs,
+            double moveDistanceThrs,
+            int moveMinDurationThrs) {
         this.mNomoveDurationThrs = 60;
         this.mMoveDurationThrs = 60;
         this.mMoveDistanceThrs = 100.0d;
@@ -32,7 +36,8 @@ public class SContextMovementForPositioningAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mNomoveDurationThrs < 0) {
             Log.e(TAG, "The nomove duration threshold is wrong.");

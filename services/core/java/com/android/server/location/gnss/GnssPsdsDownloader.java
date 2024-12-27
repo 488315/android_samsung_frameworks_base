@@ -1,6 +1,7 @@
 package com.android.server.location.gnss;
 
 import android.util.Log;
+
 import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -30,7 +31,9 @@ public final class GnssPsdsDownloader {
         i2 = property2 != null ? i2 + 1 : i2;
         i2 = property3 != null ? i2 + 1 : i2;
         if (i2 == 0) {
-            Log.e("GnssPsdsDownloader", "No Long-Term PSDS servers were specified in the GnssConfiguration");
+            Log.e(
+                    "GnssPsdsDownloader",
+                    "No Long-Term PSDS servers were specified in the GnssConfiguration");
             this.mLongTermPsdsServers = null;
         } else {
             String[] strArr = new String[i2];
@@ -173,6 +176,8 @@ public final class GnssPsdsDownloader {
         Lb7:
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.location.gnss.GnssPsdsDownloader.doDownload(java.lang.String):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.location.gnss.GnssPsdsDownloader.doDownload(java.lang.String):byte[]");
     }
 }

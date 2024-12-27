@@ -5,8 +5,14 @@ import android.os.Parcel;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.CollectionUtils;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -16,9 +22,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
 
 /* loaded from: classes.dex */
 public final class UriRelativeFilterGroup {
@@ -30,8 +33,7 @@ public final class UriRelativeFilterGroup {
     private final ArraySet<UriRelativeFilter> mUriRelativeFilters = new ArraySet<>();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Action {
-    }
+    public @interface Action {}
 
     public static boolean matchGroupsToUri(List<UriRelativeFilterGroup> groups, Uri uri) {
         for (int i = 0; i < groups.size(); i++) {
@@ -42,7 +44,8 @@ public final class UriRelativeFilterGroup {
         return false;
     }
 
-    public static List<UriRelativeFilterGroup> parcelsToGroups(List<UriRelativeFilterGroupParcel> parcels) {
+    public static List<UriRelativeFilterGroup> parcelsToGroups(
+            List<UriRelativeFilterGroupParcel> parcels) {
         List<UriRelativeFilterGroup> groups = new ArrayList<>();
         if (parcels != null) {
             for (int i = 0; i < parcels.size(); i++) {
@@ -52,7 +55,8 @@ public final class UriRelativeFilterGroup {
         return groups;
     }
 
-    public static List<UriRelativeFilterGroupParcel> groupsToParcels(List<UriRelativeFilterGroup> groups) {
+    public static List<UriRelativeFilterGroupParcel> groupsToParcels(
+            List<UriRelativeFilterGroup> groups) {
         List<UriRelativeFilterGroupParcel> parcels = new ArrayList<>();
         if (groups != null) {
             for (int i = 0; i < groups.size(); i++) {
@@ -142,7 +146,11 @@ public final class UriRelativeFilterGroup {
     }
 
     public String toString() {
-        return "UriRelativeFilterGroup { allow = " + this.mAction + ", uri_filters = " + this.mUriRelativeFilters + ",  }";
+        return "UriRelativeFilterGroup { allow = "
+                + this.mAction
+                + ", uri_filters = "
+                + this.mUriRelativeFilters
+                + ",  }";
     }
 
     public void writeToParcel(Parcel dest, int flags) {

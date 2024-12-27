@@ -20,8 +20,7 @@ public abstract class MidiReceiver {
         onFlush();
     }
 
-    public void onFlush() throws IOException {
-    }
+    public void onFlush() throws IOException {}
 
     public final int getMaxMessageSize() {
         return this.mMaxMessageSize;

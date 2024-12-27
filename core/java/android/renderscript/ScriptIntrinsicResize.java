@@ -1,6 +1,5 @@
 package android.renderscript;
 
-import android.renderscript.Script;
 
 @Deprecated
 /* loaded from: classes3.dex */
@@ -19,7 +18,14 @@ public final class ScriptIntrinsicResize extends ScriptIntrinsic {
 
     public void setInput(Allocation ain) {
         Element e = ain.getElement();
-        if (!e.isCompatible(Element.U8(this.mRS)) && !e.isCompatible(Element.U8_2(this.mRS)) && !e.isCompatible(Element.U8_3(this.mRS)) && !e.isCompatible(Element.U8_4(this.mRS)) && !e.isCompatible(Element.F32(this.mRS)) && !e.isCompatible(Element.F32_2(this.mRS)) && !e.isCompatible(Element.F32_3(this.mRS)) && !e.isCompatible(Element.F32_4(this.mRS))) {
+        if (!e.isCompatible(Element.U8(this.mRS))
+                && !e.isCompatible(Element.U8_2(this.mRS))
+                && !e.isCompatible(Element.U8_3(this.mRS))
+                && !e.isCompatible(Element.U8_4(this.mRS))
+                && !e.isCompatible(Element.F32(this.mRS))
+                && !e.isCompatible(Element.F32_2(this.mRS))
+                && !e.isCompatible(Element.F32_3(this.mRS))
+                && !e.isCompatible(Element.F32_4(this.mRS))) {
             throw new RSIllegalArgumentException("Unsupported element type.");
         }
         this.mInput = ain;

@@ -7,8 +7,10 @@ import android.net.shared.InitialConfiguration$$ExternalSyntheticOutline0;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -28,13 +30,22 @@ public abstract class SemWallpaperThemeUtils {
         String string = preferences.getString("stored_pda_version", null);
         String string2 = preferences.getString("stored_csc_version", null);
         String string3 = preferences.getString("stored_qbid_version", null);
-        StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("isFotaUpgrade : currentPDAVersion = ", str, ", currentCSCVersion = ", readCSCVersion, ", currentQBId = ");
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, str2, ", storedPDAVersion = ", string, ", storedCSCVersion = ");
+        StringBuilder m =
+                InitialConfiguration$$ExternalSyntheticOutline0.m(
+                        "isFotaUpgrade : currentPDAVersion = ",
+                        str,
+                        ", currentCSCVersion = ",
+                        readCSCVersion,
+                        ", currentQBId = ");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                m, str2, ", storedPDAVersion = ", string, ", storedCSCVersion = ");
         m.append(string2);
         m.append(", storedQBId = ");
         m.append(string3);
         Log.d("SWT_Utils", m.toString());
-        return (str2.equals(string3) && str.equals(string) && readCSCVersion.equals(string2)) ? false : true;
+        return (str2.equals(string3) && str.equals(string) && readCSCVersion.equals(string2))
+                ? false
+                : true;
     }
 
     public static String readCSCVersion() {
@@ -45,7 +56,11 @@ public abstract class SemWallpaperThemeUtils {
         }
         Log.i("SWT_Utils", "reading CSC Version from file");
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("system/CSCVersion.txt"), Charset.defaultCharset()));
+            BufferedReader bufferedReader =
+                    new BufferedReader(
+                            new InputStreamReader(
+                                    new FileInputStream("system/CSCVersion.txt"),
+                                    Charset.defaultCharset()));
             try {
                 String readLine = bufferedReader.readLine();
                 if (readLine != null && !readLine.isEmpty()) {
@@ -55,7 +70,8 @@ public abstract class SemWallpaperThemeUtils {
             } finally {
             }
         } catch (Exception e) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("readTextFromFile failed: "), "SWT_Utils");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("readTextFromFile failed: "), "SWT_Utils");
         }
         return str;
     }
@@ -70,6 +86,9 @@ public abstract class SemWallpaperThemeUtils {
         preferences.edit().putString("stored_qbid_version", str2).commit();
         StringBuilder sb = new StringBuilder("updateFotaUpgradeStatus : currentPDAVersion = ");
         sb.append(str);
-        Log.d("SWT_Utils", OptionalModelParameterRange$$ExternalSyntheticOutline0.m(sb, ", currentCSCVersion = ", readCSCVersion, ", currentQBId = ", str2));
+        Log.d(
+                "SWT_Utils",
+                OptionalModelParameterRange$$ExternalSyntheticOutline0.m(
+                        sb, ", currentCSCVersion = ", readCSCVersion, ", currentQBId = ", str2));
     }
 }

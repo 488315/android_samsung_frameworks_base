@@ -7,6 +7,7 @@ import android.net.UidRangeParcel;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -90,7 +91,8 @@ public class NativeUidRangeConfig implements Parcelable {
         try {
         } finally {
             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                BadParcelableException badParcelableException = new BadParcelableException("Overflow in the size of parcelable");
+                BadParcelableException badParcelableException =
+                        new BadParcelableException("Overflow in the size of parcelable");
             }
             parcel.setDataPosition(dataPosition + readInt);
             return builder.build();
@@ -113,7 +115,8 @@ public class NativeUidRangeConfig implements Parcelable {
                     throw new BadParcelableException(r4);
                 }
             } else {
-                builder.setUidRanges((UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR));
+                builder.setUidRanges(
+                        (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR));
                 if (parcel.dataPosition() - dataPosition >= readInt) {
                     builder.build();
                     if (dataPosition > Integer.MAX_VALUE - readInt) {
@@ -144,17 +147,41 @@ public class NativeUidRangeConfig implements Parcelable {
             return false;
         }
         NativeUidRangeConfig nativeUidRangeConfig = (NativeUidRangeConfig) obj;
-        return Objects.deepEquals(Integer.valueOf(this.netId), Integer.valueOf(nativeUidRangeConfig.netId)) && Objects.deepEquals(this.uidRanges, nativeUidRangeConfig.uidRanges) && Objects.deepEquals(Integer.valueOf(this.subPriority), Integer.valueOf(nativeUidRangeConfig.subPriority));
+        return Objects.deepEquals(
+                        Integer.valueOf(this.netId), Integer.valueOf(nativeUidRangeConfig.netId))
+                && Objects.deepEquals(this.uidRanges, nativeUidRangeConfig.uidRanges)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.subPriority),
+                        Integer.valueOf(nativeUidRangeConfig.subPriority));
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.netId), this.uidRanges, Integer.valueOf(this.subPriority)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.netId),
+                                this.uidRanges,
+                                Integer.valueOf(this.subPriority))
+                        .toArray());
     }
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.uidRanges), "subPriority: ", AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("netId: "), this.netId, stringJoiner, "uidRanges: "), stringJoiner), this.subPriority, stringJoiner, "NativeUidRangeConfig"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                                Arrays.toString(this.uidRanges),
+                                "subPriority: ",
+                                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("netId: "),
+                                        this.netId,
+                                        stringJoiner,
+                                        "uidRanges: "),
+                                stringJoiner),
+                        this.subPriority,
+                        stringJoiner,
+                        "NativeUidRangeConfig"));
     }
 
     @Override // android.os.Parcelable
@@ -163,7 +190,9 @@ public class NativeUidRangeConfig implements Parcelable {
         parcel.writeInt(0);
         parcel.writeInt(this.netId);
         parcel.writeTypedArray(this.uidRanges, i);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.subPriority, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.subPriority, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

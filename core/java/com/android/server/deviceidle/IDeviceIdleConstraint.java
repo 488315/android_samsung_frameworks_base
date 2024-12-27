@@ -9,8 +9,7 @@ public interface IDeviceIdleConstraint {
     public static final int SENSING_OR_ABOVE = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MinimumState {
-    }
+    public @interface MinimumState {}
 
     void startMonitoring();
 

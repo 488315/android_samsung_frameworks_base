@@ -4,9 +4,11 @@ import android.R;
 import android.content.ComponentName;
 import android.os.Bundle;
 import android.os.IBinder;
+
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.cover.ICoverManager;
 import com.samsung.android.sepunion.SemPluginManagerLocal;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
@@ -40,7 +42,8 @@ public final class CoverManagerServiceImpl extends ICoverManager.Stub {
         return semPluginManagerLocal.disableLcdOffByCover(iBinder, componentName);
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         SemPluginManagerLocal semPluginManagerLocal = this.mUnionLocal;
         if (semPluginManagerLocal == null) {
             return;
@@ -58,7 +61,9 @@ public final class CoverManagerServiceImpl extends ICoverManager.Stub {
 
     public final CoverState getCoverState() {
         SemPluginManagerLocal semPluginManagerLocal = this.mUnionLocal;
-        return semPluginManagerLocal == null ? new CoverState() : semPluginManagerLocal.getCoverState();
+        return semPluginManagerLocal == null
+                ? new CoverState()
+                : semPluginManagerLocal.getCoverState();
     }
 
     public final CoverState getCoverStateForExternal() {
@@ -79,7 +84,9 @@ public final class CoverManagerServiceImpl extends ICoverManager.Stub {
 
     public final int getVersion() {
         SemPluginManagerLocal semPluginManagerLocal = this.mUnionLocal;
-        return semPluginManagerLocal == null ? R.animator.fade_in : semPluginManagerLocal.getVersion();
+        return semPluginManagerLocal == null
+                ? R.animator.fade_in
+                : semPluginManagerLocal.getVersion();
     }
 
     public final boolean isCoverManagerDisabled() {
@@ -106,7 +113,8 @@ public final class CoverManagerServiceImpl extends ICoverManager.Stub {
         semPluginManagerLocal.registerCallback(iBinder, componentName);
     }
 
-    public final void registerListenerCallback(IBinder iBinder, ComponentName componentName, int i) {
+    public final void registerListenerCallback(
+            IBinder iBinder, ComponentName componentName, int i) {
         SemPluginManagerLocal semPluginManagerLocal = this.mUnionLocal;
         if (semPluginManagerLocal == null) {
             return;
@@ -114,7 +122,8 @@ public final class CoverManagerServiceImpl extends ICoverManager.Stub {
         semPluginManagerLocal.registerListenerCallback(iBinder, componentName, i);
     }
 
-    public final void registerListenerCallbackForExternal(IBinder iBinder, ComponentName componentName, int i) {
+    public final void registerListenerCallbackForExternal(
+            IBinder iBinder, ComponentName componentName, int i) {
         SemPluginManagerLocal semPluginManagerLocal = this.mUnionLocal;
         if (semPluginManagerLocal == null) {
             return;
@@ -122,7 +131,8 @@ public final class CoverManagerServiceImpl extends ICoverManager.Stub {
         semPluginManagerLocal.registerListenerCallbackForExternal(iBinder, componentName, i);
     }
 
-    public final void registerNfcTouchListenerCallback(int i, IBinder iBinder, ComponentName componentName) {
+    public final void registerNfcTouchListenerCallback(
+            int i, IBinder iBinder, ComponentName componentName) {
         SemPluginManagerLocal semPluginManagerLocal = this.mUnionLocal;
         if (semPluginManagerLocal == null) {
             return;
@@ -178,7 +188,8 @@ public final class CoverManagerServiceImpl extends ICoverManager.Stub {
         semPluginManagerLocal.sendSystemEvent(bundle);
     }
 
-    public final boolean setFotaInProgress(boolean z, IBinder iBinder, ComponentName componentName) {
+    public final boolean setFotaInProgress(
+            boolean z, IBinder iBinder, ComponentName componentName) {
         SemPluginManagerLocal semPluginManagerLocal = this.mUnionLocal;
         if (semPluginManagerLocal == null) {
             return false;

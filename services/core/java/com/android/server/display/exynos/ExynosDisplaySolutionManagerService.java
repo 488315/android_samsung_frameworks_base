@@ -14,7 +14,9 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -35,30 +37,33 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenBroadcastReceiver extends BroadcastReceiver {
-        public ScreenBroadcastReceiver() {
-        }
+        public ScreenBroadcastReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if ("android.intent.action.BOOT_COMPLETED".equals(action)) {
                 Log.d("ExynosDisplaySolutionManagerService", "ACTION_BOOT_COMPLETED");
-                ExynosDisplaySolutionManagerService exynosDisplaySolutionManagerService = ExynosDisplaySolutionManagerService.this;
+                ExynosDisplaySolutionManagerService exynosDisplaySolutionManagerService =
+                        ExynosDisplaySolutionManagerService.this;
                 exynosDisplaySolutionManagerService.mBootCompleted = true;
                 if (exynosDisplaySolutionManagerService.mTuneEnableSetting) {
                     exynosDisplaySolutionManagerService.mExynosDisplayTune.enableTuneTimer(true);
                 }
-                ExynosDisplaySolutionManagerService exynosDisplaySolutionManagerService2 = ExynosDisplaySolutionManagerService.this;
+                ExynosDisplaySolutionManagerService exynosDisplaySolutionManagerService2 =
+                        ExynosDisplaySolutionManagerService.this;
                 boolean z = exynosDisplaySolutionManagerService2.mAtcEnableSetting;
                 if (z) {
                     exynosDisplaySolutionManagerService2.mExynosDisplayATC.enableATC(z);
-                    ExynosDisplaySolutionManagerService.this.mExynosDisplayATC.enableLightSensor(true);
+                    ExynosDisplaySolutionManagerService.this.mExynosDisplayATC.enableLightSensor(
+                            true);
                     return;
                 }
                 return;
             }
             if ("android.intent.action.SCREEN_ON".equals(action)) {
-                ExynosDisplaySolutionManagerService exynosDisplaySolutionManagerService3 = ExynosDisplaySolutionManagerService.this;
+                ExynosDisplaySolutionManagerService exynosDisplaySolutionManagerService3 =
+                        ExynosDisplaySolutionManagerService.this;
                 if (exynosDisplaySolutionManagerService3.mAtcEnableSetting) {
                     exynosDisplaySolutionManagerService3.mExynosDisplayATC.enableLightSensor(true);
                     return;
@@ -69,7 +74,8 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
                 "android.intent.action.USER_PRESENT".equals(action);
                 return;
             }
-            ExynosDisplaySolutionManagerService exynosDisplaySolutionManagerService4 = ExynosDisplaySolutionManagerService.this;
+            ExynosDisplaySolutionManagerService exynosDisplaySolutionManagerService4 =
+                    ExynosDisplaySolutionManagerService.this;
             if (exynosDisplaySolutionManagerService4.mAtcEnableSetting) {
                 exynosDisplaySolutionManagerService4.mExynosDisplayATC.enableLightSensor(false);
             }
@@ -129,13 +135,18 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
         this.mExynosDisplayATC = new ExynosDisplayATC(context);
         this.mExynosDisplayFactory = new ExynosDisplayFactory(context);
         exynosDisplayColor.mExynosDisplayTune = exynosDisplayTune;
-        int integer = context.getResources().getInteger(R.integer.config_displayWhiteBalanceBrightnessSensorRate);
+        int integer =
+                context.getResources()
+                        .getInteger(R.integer.config_displayWhiteBalanceBrightnessSensorRate);
         this.mAtcEnableSetting = integer == 2 || integer == 3;
         SettingsObserver settingsObserver = new SettingsObserver(context.getMainThreadHandler());
         ContentResolver contentResolver = context.getContentResolver();
-        contentResolver.registerContentObserver(Settings.System.getUriFor("dqe_tune_enabled"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("atc_mode_enabled"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("display_color_mode"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("dqe_tune_enabled"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("atc_mode_enabled"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("display_color_mode"), false, settingsObserver, -1);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.BOOT_COMPLETED");
         intentFilter.addAction("android.intent.action.SCREEN_ON");
@@ -143,7 +154,9 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
         intentFilter.addAction("android.intent.action.USER_PRESENT");
         context.registerReceiver(new ScreenBroadcastReceiver(), intentFilter);
         settingChanged();
-        Log.d("ExynosDisplaySolutionManagerService", "ExynosDisplaySolutionManagerService created " + str);
+        Log.d(
+                "ExynosDisplaySolutionManagerService",
+                "ExynosDisplaySolutionManagerService created " + str);
     }
 
     public final String getColorEnhancementMode() {
@@ -151,7 +164,9 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
         synchronized (this.mLock) {
             this.mExynosDisplayColor.getClass();
             this.mColorModeName = "Off,NATIVE,DISPLAY_P3,SRGB";
-            Log.d("ExynosDisplaySolutionManagerService", "getColorEnhancementMode(): mColorModeName = " + this.mColorModeName);
+            Log.d(
+                    "ExynosDisplaySolutionManagerService",
+                    "getColorEnhancementMode(): mColorModeName = " + this.mColorModeName);
             str = this.mColorModeName;
         }
         return str;
@@ -159,11 +174,14 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
 
     public final void setColorEnhancementSettingValue(int i) {
         synchronized (this.mLock) {
-            Log.d("ExynosDisplaySolutionManagerService", "setColorEnhancementSettingValue(): value = " + i);
+            Log.d(
+                    "ExynosDisplaySolutionManagerService",
+                    "setColorEnhancementSettingValue(): value = " + i);
             ExynosDisplayColor exynosDisplayColor = this.mExynosDisplayColor;
             exynosDisplayColor.getClass();
             try {
-                exynosDisplayColor.setXMLColorModesImpl(i != 1 ? i != 2 ? i != 3 ? "bypass" : "SRGB" : "DISPLAY_P3" : "NATIVE");
+                exynosDisplayColor.setXMLColorModesImpl(
+                        i != 1 ? i != 2 ? i != 3 ? "bypass" : "SRGB" : "DISPLAY_P3" : "NATIVE");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -179,7 +197,9 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
 
     public final void setColorTempSettingValue(int i, int i2) {
         synchronized (this.mLock) {
-            Log.d("ExynosDisplaySolutionManagerService", "setColorTempSettingValue(): " + i + " -> " + i2);
+            Log.d(
+                    "ExynosDisplaySolutionManagerService",
+                    "setColorTempSettingValue(): " + i + " -> " + i2);
             this.mExynosDisplayColor.setColorTempValue(i, i2);
         }
     }
@@ -188,20 +208,29 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
         synchronized (this.mLock) {
             try {
                 if (this.DEBUG) {
-                    Log.d("ExynosDisplaySolutionManagerService", "setDisplayFeature(): " + str + "  " + i + "  " + i2 + "  " + str2);
+                    Log.d(
+                            "ExynosDisplaySolutionManagerService",
+                            "setDisplayFeature(): " + str + "  " + i + "  " + i2 + "  " + str2);
                 }
                 if (str.equals("setDisplayColorFeature")) {
                     int i3 = this.mExynosDisplayFactory.mCountDownTimerCount;
                     if (this.mBootCompleted && i3 <= 0) {
                         ExynosDisplayColor exynosDisplayColor = this.mExynosDisplayColor;
                         exynosDisplayColor.getClass();
-                        Log.d("ExynosDisplayColor", "setDisplayColorFeature(): " + i + "  " + i2 + "  " + str2);
+                        Log.d(
+                                "ExynosDisplayColor",
+                                "setDisplayColorFeature(): " + i + "  " + i2 + "  " + str2);
                         if (i == 0 && i2 == 0 && str2 != null) {
                             exynosDisplayColor.setXMLColorModesImpl(str2);
                         }
                         return;
                     }
-                    Log.e("ExynosDisplaySolutionManagerService", "setDisplayColorFeature is not ready: mBootCompleted=" + this.mBootCompleted + ", timer_count=" + i3);
+                    Log.e(
+                            "ExynosDisplaySolutionManagerService",
+                            "setDisplayColorFeature is not ready: mBootCompleted="
+                                    + this.mBootCompleted
+                                    + ", timer_count="
+                                    + i3);
                     return;
                 }
                 boolean z = false;
@@ -214,24 +243,39 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
                         exynosDisplayTune.getClass();
                         Log.d("ExynosDisplayTune", "enableTuneDQE: enable=" + z);
                         if (z) {
-                            exynosDisplayTune.setCalibrationDQE(ExynosDisplayUtils.getPathWithPanel(exynosDisplayTune.CALIB_DATA_XML_PATH), "tune");
+                            exynosDisplayTune.setCalibrationDQE(
+                                    ExynosDisplayUtils.getPathWithPanel(
+                                            exynosDisplayTune.CALIB_DATA_XML_PATH),
+                                    "tune");
                         }
                     }
                     return;
                 }
                 if (str.equals("hdr_tune")) {
                     if (str2 != null) {
-                        long parseUnsignedLong = Long.parseUnsignedLong(str2.replaceFirst("^0x", ""), str2.startsWith("0x") ? 16 : 10);
-                        Intent intent = new Intent("com.android.server.display.HDR_TUNE_PATTERN_CHANGED");
+                        long parseUnsignedLong =
+                                Long.parseUnsignedLong(
+                                        str2.replaceFirst("^0x", ""),
+                                        str2.startsWith("0x") ? 16 : 10);
+                        Intent intent =
+                                new Intent("com.android.server.display.HDR_TUNE_PATTERN_CHANGED");
                         intent.addFlags(1073741824);
                         intent.setPackage(KnoxCustomManagerService.SETTING_PKG_NAME);
                         intent.putExtra("com.android.server.display.hdr_tune_format", i);
                         intent.putExtra("com.android.server.display.hdr_tune_type", i2);
-                        intent.putExtra("com.android.server.display.hdr_tune_color", parseUnsignedLong);
+                        intent.putExtra(
+                                "com.android.server.display.hdr_tune_color", parseUnsignedLong);
                         this.mContext.sendBroadcastAsUser(intent, new UserHandle(-2));
                         intent.setPackage("com.android.exynos.hdrdisplaytune");
                         this.mContext.sendBroadcastAsUser(intent, new UserHandle(-2));
-                        Log.d("ExynosDisplaySolutionManagerService", "Send Pattern format: " + i + " pattern: " + i2 + " RGBA: " + Long.toHexString(parseUnsignedLong));
+                        Log.d(
+                                "ExynosDisplaySolutionManagerService",
+                                "Send Pattern format: "
+                                        + i
+                                        + " pattern: "
+                                        + i2
+                                        + " RGBA: "
+                                        + Long.toHexString(parseUnsignedLong));
                     }
                     return;
                 }
@@ -302,7 +346,9 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
 
     public final void setEdgeSharpnessSettingOn(int i) {
         synchronized (this.mLock) {
-            Log.d("ExynosDisplaySolutionManagerService", "setEdgeSharpnessSettingOn(): onoff = " + i);
+            Log.d(
+                    "ExynosDisplaySolutionManagerService",
+                    "setEdgeSharpnessSettingOn(): onoff = " + i);
             this.mExynosDisplayColor.setEdgeSharpnessOn(i);
         }
     }
@@ -311,7 +357,9 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
         String str;
         String[] strArr;
         synchronized (this.mLock) {
-            Log.d("ExynosDisplaySolutionManagerService", "setEdgeSharpnessSettingValue(): value=" + i);
+            Log.d(
+                    "ExynosDisplaySolutionManagerService",
+                    "setEdgeSharpnessSettingValue(): value=" + i);
             ExynosDisplayColor exynosDisplayColor = this.mExynosDisplayColor;
             exynosDisplayColor.getClass();
             try {
@@ -337,7 +385,9 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
             exynosDisplayColor.getClass();
             try {
                 if (i != 0) {
-                    exynosDisplayColor.eyetemp_array = ExynosDisplayUtils.parserXML(exynosDisplayColor.EYETEMP_XML_FILE_PATH, "eyetemp", "gamma");
+                    exynosDisplayColor.eyetemp_array =
+                            ExynosDisplayUtils.parserXML(
+                                    exynosDisplayColor.EYETEMP_XML_FILE_PATH, "eyetemp", "gamma");
                 } else {
                     exynosDisplayColor.eyetemp_array = null;
                     exynosDisplayColor.setGammaBypass();
@@ -366,7 +416,8 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
                         str = strArr[i];
                         if (str != null) {
                             Log.d("ExynosDisplayColor", "setGammaValue()");
-                            exynosDisplayColor.sysfsWriteGamma(str, exynosDisplayColor.EXTENSION_OFF);
+                            exynosDisplayColor.sysfsWriteGamma(
+                                    str, exynosDisplayColor.EXTENSION_OFF);
                         }
                     }
                 }
@@ -385,7 +436,9 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
 
     public final void setHsvGainSettingValue(int i, int i2, int i3) {
         synchronized (this.mLock) {
-            Log.d("ExynosDisplaySolutionManagerService", "setHsvGainSettingValue(): h=" + i + ", s=" + i2 + ", v=" + i3);
+            Log.d(
+                    "ExynosDisplaySolutionManagerService",
+                    "setHsvGainSettingValue(): h=" + i + ", s=" + i2 + ", v=" + i3);
             this.mExynosDisplayColor.setHsvGainValue(i, i2, i3);
         }
     }
@@ -399,7 +452,9 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
 
     public final void setRgbGainSettingValue(int i, int i2, int i3) {
         synchronized (this.mLock) {
-            Log.d("ExynosDisplaySolutionManagerService", "setRgbGainSettingValue(): r=" + i + ", g=" + i2 + ", b=" + i3);
+            Log.d(
+                    "ExynosDisplaySolutionManagerService",
+                    "setRgbGainSettingValue(): r=" + i + ", g=" + i2 + ", b=" + i3);
             this.mExynosDisplayColor.setRgbGainValue(i, i2, i3);
         }
     }
@@ -413,12 +468,33 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
 
     public final void setRgbWeightSettingValue(float f, float f2, float f3) {
         synchronized (this.mLock) {
-            Log.d("ExynosDisplaySolutionManagerService", "setRgbWeightSettingValue(): r=" + f + ", g=" + f2 + ", b=" + f3);
+            Log.d(
+                    "ExynosDisplaySolutionManagerService",
+                    "setRgbWeightSettingValue(): r=" + f + ", g=" + f2 + ", b=" + f3);
             ExynosDisplayColor exynosDisplayColor = this.mExynosDisplayColor;
             exynosDisplayColor.getClass();
             try {
                 if (exynosDisplayColor.bIsRgbWeightOn) {
-                    ExynosDisplayUtils.sysfsWriteSting(exynosDisplayColor.GAMMA_MATRIX_SYSFS_PATH, ExynosDisplayUtils.toString(new float[][]{new float[]{f, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE}, new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, f2, FullScreenMagnificationGestureHandler.MAX_SCALE}, new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, f3}}));
+                    ExynosDisplayUtils.sysfsWriteSting(
+                            exynosDisplayColor.GAMMA_MATRIX_SYSFS_PATH,
+                            ExynosDisplayUtils.toString(
+                                    new float[][] {
+                                        new float[] {
+                                            f,
+                                            FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                            FullScreenMagnificationGestureHandler.MAX_SCALE
+                                        },
+                                        new float[] {
+                                            FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                            f2,
+                                            FullScreenMagnificationGestureHandler.MAX_SCALE
+                                        },
+                                        new float[] {
+                                            FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                            FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                            f3
+                                        }
+                                    }));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -435,7 +511,9 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
 
     public final void setWhitePointColorSettingOn(int i) {
         synchronized (this.mLock) {
-            Log.d("ExynosDisplaySolutionManagerService", "setWhitePointColorSettingOn(): onoff = " + i);
+            Log.d(
+                    "ExynosDisplaySolutionManagerService",
+                    "setWhitePointColorSettingOn(): onoff = " + i);
             this.mExynosDisplayColor.setWhitePointColorOn(i);
         }
     }
@@ -443,14 +521,22 @@ public final class ExynosDisplaySolutionManagerService extends IExynosDisplaySol
     public final void settingChanged() {
         ContentResolver contentResolver = this.mContext.getContentResolver();
         boolean z = Settings.System.getIntForUser(contentResolver, "dqe_tune_enabled", 0, -2) != 0;
-        boolean z2 = Settings.System.getIntForUser(contentResolver, "atc_mode_enabled", this.mAtcEnableSetting ? 1 : 0, -2) != 0;
+        boolean z2 =
+                Settings.System.getIntForUser(
+                                contentResolver,
+                                "atc_mode_enabled",
+                                this.mAtcEnableSetting ? 1 : 0,
+                                -2)
+                        != 0;
         Settings.System.getIntForUser(contentResolver, "display_color_mode", 0, -2);
         if (this.mTuneEnableSetting != z && this.mBootCompleted) {
             this.mExynosDisplayTune.enableTuneTimer(z);
         }
         this.mTuneEnableSetting = z;
         if (this.mAtcEnableSetting != z2) {
-            Log.d("ExynosDisplaySolutionManagerService", "settingChanged: ATC " + this.mAtcEnableSetting + " -> " + z2);
+            Log.d(
+                    "ExynosDisplaySolutionManagerService",
+                    "settingChanged: ATC " + this.mAtcEnableSetting + " -> " + z2);
             if (this.mBootCompleted) {
                 this.mExynosDisplayATC.enableATC(z2);
                 this.mExynosDisplayATC.enableLightSensor(z2);

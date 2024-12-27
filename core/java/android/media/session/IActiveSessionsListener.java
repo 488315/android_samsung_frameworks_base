@@ -1,11 +1,11 @@
 package android.media.session;
 
-import android.media.session.MediaSession;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
@@ -14,8 +14,8 @@ public interface IActiveSessionsListener extends IInterface {
 
     public static class Default implements IActiveSessionsListener {
         @Override // android.media.session.IActiveSessionsListener
-        public void onActiveSessionsChanged(List<MediaSession.Token> sessions) throws RemoteException {
-        }
+        public void onActiveSessionsChanged(List<MediaSession.Token> sessions)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IActiveSessionsListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IActiveSessionsListener {
+    public abstract static class Stub extends Binder implements IActiveSessionsListener {
         public static final String DESCRIPTOR = "android.media.session.IActiveSessionsListener";
         static final int TRANSACTION_onActiveSessionsChanged = 1;
 
@@ -62,7 +62,8 @@ public interface IActiveSessionsListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -72,7 +73,8 @@ public interface IActiveSessionsListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<MediaSession.Token> _arg0 = data.createTypedArrayList(MediaSession.Token.CREATOR);
+                    List<MediaSession.Token> _arg0 =
+                            data.createTypedArrayList(MediaSession.Token.CREATOR);
                     data.enforceNoDataAvail();
                     onActiveSessionsChanged(_arg0);
                     return true;
@@ -98,7 +100,8 @@ public interface IActiveSessionsListener extends IInterface {
             }
 
             @Override // android.media.session.IActiveSessionsListener
-            public void onActiveSessionsChanged(List<MediaSession.Token> sessions) throws RemoteException {
+            public void onActiveSessionsChanged(List<MediaSession.Token> sessions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

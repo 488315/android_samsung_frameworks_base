@@ -12,13 +12,15 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.os.Handler;
 import android.util.SparseArray;
+
 import java.util.Locale;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class DeviceStateNotificationController extends BroadcastReceiver {
     static final String CHANNEL_ID = "DeviceStateManager";
-    static final String INTENT_ACTION_CANCEL_STATE = "com.android.server.devicestate.INTENT_ACTION_CANCEL_STATE";
+    static final String INTENT_ACTION_CANCEL_STATE =
+            "com.android.server.devicestate.INTENT_ACTION_CANCEL_STATE";
     static final int NOTIFICATION_ID = 1;
     static final String NOTIFICATION_TAG = "DeviceStateManager";
     public final Runnable mCancelStateRunnable;
@@ -38,7 +40,14 @@ public final class DeviceStateNotificationController extends BroadcastReceiver {
         public final String thermalCriticalNotificationContent;
         public final String thermalCriticalNotificationTitle;
 
-        public NotificationInfo(String str, String str2, String str3, String str4, String str5, String str6, String str7) {
+        public NotificationInfo(
+                String str,
+                String str2,
+                String str3,
+                String str4,
+                String str5,
+                String str6,
+                String str7) {
             this.name = str;
             this.activeNotificationTitle = str2;
             this.activeNotificationContent = str3;
@@ -78,13 +87,29 @@ public final class DeviceStateNotificationController extends BroadcastReceiver {
             String[] stringArray5 = this.mContext.getResources().getStringArray(17236442);
             String[] stringArray6 = this.mContext.getResources().getStringArray(17236440);
             String[] stringArray7 = this.mContext.getResources().getStringArray(17236439);
-            if (intArray.length != stringArray.length || intArray.length != stringArray2.length || intArray.length != stringArray3.length || intArray.length != stringArray4.length || intArray.length != stringArray5.length || intArray.length != stringArray6.length || intArray.length != stringArray7.length) {
-                throw new IllegalStateException("The length of state identifiers and notification texts must match!");
+            if (intArray.length != stringArray.length
+                    || intArray.length != stringArray2.length
+                    || intArray.length != stringArray3.length
+                    || intArray.length != stringArray4.length
+                    || intArray.length != stringArray5.length
+                    || intArray.length != stringArray6.length
+                    || intArray.length != stringArray7.length) {
+                throw new IllegalStateException(
+                        "The length of state identifiers and notification texts must match!");
             }
             for (int i = 0; i < intArray.length; i++) {
                 int i2 = intArray[i];
                 if (i2 != -1) {
-                    sparseArray.put(i2, new NotificationInfo(stringArray[i], stringArray2[i], stringArray3[i], stringArray4[i], stringArray5[i], stringArray6[i], stringArray7[i]));
+                    sparseArray.put(
+                            i2,
+                            new NotificationInfo(
+                                    stringArray[i],
+                                    stringArray2[i],
+                                    stringArray3[i],
+                                    stringArray4[i],
+                                    stringArray5[i],
+                                    stringArray6[i],
+                                    stringArray7[i]));
                 }
             }
             return sparseArray;
@@ -98,14 +123,25 @@ public final class DeviceStateNotificationController extends BroadcastReceiver {
         }
     }
 
-    public DeviceStateNotificationController(Context context, Handler handler, Runnable runnable, NotificationInfoProvider notificationInfoProvider, PackageManager packageManager, NotificationManager notificationManager) {
+    public DeviceStateNotificationController(
+            Context context,
+            Handler handler,
+            Runnable runnable,
+            NotificationInfoProvider notificationInfoProvider,
+            PackageManager packageManager,
+            NotificationManager notificationManager) {
         this.mContext = context;
         this.mHandler = handler;
         this.mCancelStateRunnable = runnable;
         this.mNotificationInfoProvider = notificationInfoProvider;
         this.mPackageManager = packageManager;
         this.mNotificationManager = notificationManager;
-        context.registerReceiver(this, new IntentFilter(INTENT_ACTION_CANCEL_STATE), "android.permission.CONTROL_DEVICE_STATE", handler, 4);
+        context.registerReceiver(
+                this,
+                new IntentFilter(INTENT_ACTION_CANCEL_STATE),
+                "android.permission.CONTROL_DEVICE_STATE",
+                handler,
+                4);
     }
 
     public final SparseArray getNotificationInfos() {
@@ -133,21 +169,43 @@ public final class DeviceStateNotificationController extends BroadcastReceiver {
         this.mCancelStateRunnable.run();
     }
 
-    public final void showNotification(String str, String str2, String str3, boolean z, int i, PendingIntent pendingIntent, String str4) {
-        final NotificationChannel notificationChannel = new NotificationChannel("DeviceStateManager", str, 4);
-        final Notification.Builder category = new Notification.Builder(this.mContext, "DeviceStateManager").setSmallIcon(i).setContentTitle(str2).setContentText(str3).setSubText(str).setLocalOnly(true).setOngoing(z).setCategory("sys");
+    public final void showNotification(
+            String str,
+            String str2,
+            String str3,
+            boolean z,
+            int i,
+            PendingIntent pendingIntent,
+            String str4) {
+        final NotificationChannel notificationChannel =
+                new NotificationChannel("DeviceStateManager", str, 4);
+        final Notification.Builder category =
+                new Notification.Builder(this.mContext, "DeviceStateManager")
+                        .setSmallIcon(i)
+                        .setContentTitle(str2)
+                        .setContentText(str3)
+                        .setSubText(str)
+                        .setLocalOnly(true)
+                        .setOngoing(z)
+                        .setCategory("sys");
         if (pendingIntent != null && str4 != null) {
-            category.addAction(new Notification.Action.Builder((Icon) null, str4, pendingIntent).build());
+            category.addAction(
+                    new Notification.Action.Builder((Icon) null, str4, pendingIntent).build());
         }
-        this.mHandler.post(new Runnable() { // from class: com.android.server.devicestate.DeviceStateNotificationController$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                DeviceStateNotificationController deviceStateNotificationController = DeviceStateNotificationController.this;
-                NotificationChannel notificationChannel2 = notificationChannel;
-                Notification.Builder builder = category;
-                deviceStateNotificationController.mNotificationManager.createNotificationChannel(notificationChannel2);
-                deviceStateNotificationController.mNotificationManager.notify("DeviceStateManager", 1, builder.build());
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.devicestate.DeviceStateNotificationController$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        DeviceStateNotificationController deviceStateNotificationController =
+                                DeviceStateNotificationController.this;
+                        NotificationChannel notificationChannel2 = notificationChannel;
+                        Notification.Builder builder = category;
+                        deviceStateNotificationController.mNotificationManager
+                                .createNotificationChannel(notificationChannel2);
+                        deviceStateNotificationController.mNotificationManager.notify(
+                                "DeviceStateManager", 1, builder.build());
+                    }
+                });
     }
 }

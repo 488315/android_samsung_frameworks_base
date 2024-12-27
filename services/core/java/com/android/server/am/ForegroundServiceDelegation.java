@@ -12,7 +12,9 @@ public final class ForegroundServiceDelegation {
     public final ServiceConnection mConnection;
     public final ForegroundServiceDelegationOptions mOptions;
 
-    public ForegroundServiceDelegation(ForegroundServiceDelegationOptions foregroundServiceDelegationOptions, ServiceConnection serviceConnection) {
+    public ForegroundServiceDelegation(
+            ForegroundServiceDelegationOptions foregroundServiceDelegationOptions,
+            ServiceConnection serviceConnection) {
         this.mOptions = foregroundServiceDelegationOptions;
         this.mConnection = serviceConnection;
     }

@@ -7,6 +7,7 @@ import android.os.StatsBootstrapAtomValue;
 import android.util.Slog;
 import android.util.StatsEvent;
 import android.util.StatsLog;
+
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.SystemService;
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
@@ -34,7 +35,11 @@ public final class StatsBootstrapAtomService extends IStatsBootstrapAtomService.
     public final void reportBootstrapAtom(StatsBootstrapAtom statsBootstrapAtom) {
         int i = statsBootstrapAtom.atomId;
         if (i < 1 || i >= 10000) {
-            NandswapManager$$ExternalSyntheticOutline0.m(new StringBuilder("Atom ID "), statsBootstrapAtom.atomId, " is not a valid atom ID", "StatsBootstrapAtomService");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Atom ID "),
+                    statsBootstrapAtom.atomId,
+                    " is not a valid atom ID",
+                    "StatsBootstrapAtomService");
             return;
         }
         StatsEvent.Builder atomId = StatsEvent.newBuilder().setAtomId(statsBootstrapAtom.atomId);
@@ -55,7 +60,8 @@ public final class StatsBootstrapAtomService extends IStatsBootstrapAtomService.
                     StringBuilder sb = new StringBuilder("Unexpected value type ");
                     sb.append(statsBootstrapAtomValue.getTag());
                     sb.append(" when logging atom ");
-                    VaultKeeperService$$ExternalSyntheticOutline0.m(sb, statsBootstrapAtom.atomId, "StatsBootstrapAtomService");
+                    VaultKeeperService$$ExternalSyntheticOutline0.m(
+                            sb, statsBootstrapAtom.atomId, "StatsBootstrapAtomService");
                     return;
                 }
                 atomId.writeByteArray(statsBootstrapAtomValue.getBytesValue());

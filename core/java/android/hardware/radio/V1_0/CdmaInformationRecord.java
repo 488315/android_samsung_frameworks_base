@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -25,18 +26,49 @@ public final class CdmaInformationRecord {
             return false;
         }
         CdmaInformationRecord other = (CdmaInformationRecord) otherObject;
-        if (this.name == other.name && HidlSupport.deepEquals(this.display, other.display) && HidlSupport.deepEquals(this.number, other.number) && HidlSupport.deepEquals(this.signal, other.signal) && HidlSupport.deepEquals(this.redir, other.redir) && HidlSupport.deepEquals(this.lineCtrl, other.lineCtrl) && HidlSupport.deepEquals(this.clir, other.clir) && HidlSupport.deepEquals(this.audioCtrl, other.audioCtrl)) {
+        if (this.name == other.name
+                && HidlSupport.deepEquals(this.display, other.display)
+                && HidlSupport.deepEquals(this.number, other.number)
+                && HidlSupport.deepEquals(this.signal, other.signal)
+                && HidlSupport.deepEquals(this.redir, other.redir)
+                && HidlSupport.deepEquals(this.lineCtrl, other.lineCtrl)
+                && HidlSupport.deepEquals(this.clir, other.clir)
+                && HidlSupport.deepEquals(this.audioCtrl, other.audioCtrl)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.name))), Integer.valueOf(HidlSupport.deepHashCode(this.display)), Integer.valueOf(HidlSupport.deepHashCode(this.number)), Integer.valueOf(HidlSupport.deepHashCode(this.signal)), Integer.valueOf(HidlSupport.deepHashCode(this.redir)), Integer.valueOf(HidlSupport.deepHashCode(this.lineCtrl)), Integer.valueOf(HidlSupport.deepHashCode(this.clir)), Integer.valueOf(HidlSupport.deepHashCode(this.audioCtrl)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.name))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.display)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.number)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.signal)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.redir)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.lineCtrl)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.clir)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.audioCtrl)));
     }
 
     public final String toString() {
-        return "{.name = " + CdmaInfoRecName.toString(this.name) + ", .display = " + this.display + ", .number = " + this.number + ", .signal = " + this.signal + ", .redir = " + this.redir + ", .lineCtrl = " + this.lineCtrl + ", .clir = " + this.clir + ", .audioCtrl = " + this.audioCtrl + "}";
+        return "{.name = "
+                + CdmaInfoRecName.toString(this.name)
+                + ", .display = "
+                + this.display
+                + ", .number = "
+                + this.number
+                + ", .signal = "
+                + this.signal
+                + ", .redir = "
+                + this.redir
+                + ", .lineCtrl = "
+                + this.lineCtrl
+                + ", .clir = "
+                + this.clir
+                + ", .audioCtrl = "
+                + this.audioCtrl
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -48,7 +80,8 @@ public final class CdmaInformationRecord {
         ArrayList<CdmaInformationRecord> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 120, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 120, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CdmaInformationRecord _hidl_vec_element = new CdmaInformationRecord();
@@ -58,10 +91,13 @@ public final class CdmaInformationRecord {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.name = _hidl_blob.getInt32(_hidl_offset + 0);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 8 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 8 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 8 + 0, true);
         this.display.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CdmaDisplayInfoRecord _hidl_vec_element = new CdmaDisplayInfoRecord();
@@ -69,7 +105,9 @@ public final class CdmaInformationRecord {
             this.display.add(_hidl_vec_element);
         }
         int _hidl_vec_size2 = _hidl_blob.getInt32(_hidl_offset + 24 + 8);
-        HwBlob childBlob2 = parcel.readEmbeddedBuffer(_hidl_vec_size2 * 24, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
+        HwBlob childBlob2 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size2 * 24, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
         this.number.clear();
         for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
             CdmaNumberInfoRecord _hidl_vec_element2 = new CdmaNumberInfoRecord();
@@ -77,7 +115,9 @@ public final class CdmaInformationRecord {
             this.number.add(_hidl_vec_element2);
         }
         int _hidl_vec_size3 = _hidl_blob.getInt32(_hidl_offset + 40 + 8);
-        HwBlob childBlob3 = parcel.readEmbeddedBuffer(_hidl_vec_size3 * 4, _hidl_blob.handle(), _hidl_offset + 40 + 0, true);
+        HwBlob childBlob3 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size3 * 4, _hidl_blob.handle(), _hidl_offset + 40 + 0, true);
         this.signal.clear();
         for (int _hidl_index_03 = 0; _hidl_index_03 < _hidl_vec_size3; _hidl_index_03++) {
             CdmaSignalInfoRecord _hidl_vec_element3 = new CdmaSignalInfoRecord();
@@ -85,15 +125,20 @@ public final class CdmaInformationRecord {
             this.signal.add(_hidl_vec_element3);
         }
         int _hidl_vec_size4 = _hidl_blob.getInt32(_hidl_offset + 56 + 8);
-        HwBlob childBlob4 = parcel.readEmbeddedBuffer(_hidl_vec_size4 * 32, _hidl_blob.handle(), _hidl_offset + 56 + 0, true);
+        HwBlob childBlob4 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size4 * 32, _hidl_blob.handle(), _hidl_offset + 56 + 0, true);
         this.redir.clear();
         for (int _hidl_index_04 = 0; _hidl_index_04 < _hidl_vec_size4; _hidl_index_04++) {
-            CdmaRedirectingNumberInfoRecord _hidl_vec_element4 = new CdmaRedirectingNumberInfoRecord();
+            CdmaRedirectingNumberInfoRecord _hidl_vec_element4 =
+                    new CdmaRedirectingNumberInfoRecord();
             _hidl_vec_element4.readEmbeddedFromParcel(parcel, childBlob4, _hidl_index_04 * 32);
             this.redir.add(_hidl_vec_element4);
         }
         int _hidl_vec_size5 = _hidl_blob.getInt32(_hidl_offset + 72 + 8);
-        HwBlob childBlob5 = parcel.readEmbeddedBuffer(_hidl_vec_size5 * 4, _hidl_blob.handle(), _hidl_offset + 72 + 0, true);
+        HwBlob childBlob5 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size5 * 4, _hidl_blob.handle(), _hidl_offset + 72 + 0, true);
         this.lineCtrl.clear();
         for (int _hidl_index_05 = 0; _hidl_index_05 < _hidl_vec_size5; _hidl_index_05++) {
             CdmaLineControlInfoRecord _hidl_vec_element5 = new CdmaLineControlInfoRecord();
@@ -101,7 +146,9 @@ public final class CdmaInformationRecord {
             this.lineCtrl.add(_hidl_vec_element5);
         }
         int _hidl_vec_size6 = _hidl_blob.getInt32(_hidl_offset + 88 + 8);
-        HwBlob childBlob6 = parcel.readEmbeddedBuffer(_hidl_vec_size6 * 1, _hidl_blob.handle(), _hidl_offset + 88 + 0, true);
+        HwBlob childBlob6 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size6 * 1, _hidl_blob.handle(), _hidl_offset + 88 + 0, true);
         this.clir.clear();
         for (int _hidl_index_06 = 0; _hidl_index_06 < _hidl_vec_size6; _hidl_index_06++) {
             CdmaT53ClirInfoRecord _hidl_vec_element6 = new CdmaT53ClirInfoRecord();
@@ -109,7 +156,9 @@ public final class CdmaInformationRecord {
             this.clir.add(_hidl_vec_element6);
         }
         int _hidl_vec_size7 = _hidl_blob.getInt32(_hidl_offset + 104 + 8);
-        HwBlob childBlob7 = parcel.readEmbeddedBuffer(_hidl_vec_size7 * 2, _hidl_blob.handle(), _hidl_offset + 104 + 0, true);
+        HwBlob childBlob7 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size7 * 2, _hidl_blob.handle(), _hidl_offset + 104 + 0, true);
         this.audioCtrl.clear();
         for (int _hidl_index_07 = 0; _hidl_index_07 < _hidl_vec_size7; _hidl_index_07++) {
             CdmaT53AudioControlInfoRecord _hidl_vec_element7 = new CdmaT53AudioControlInfoRecord();
@@ -124,7 +173,8 @@ public final class CdmaInformationRecord {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<CdmaInformationRecord> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<CdmaInformationRecord> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

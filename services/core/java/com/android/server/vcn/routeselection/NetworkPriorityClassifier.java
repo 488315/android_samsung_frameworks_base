@@ -11,10 +11,12 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.server.VcnManagementService;
 import com.android.server.vcn.TelephonySubscriptionTracker;
 import com.android.server.vcn.VcnContext;
 import com.android.server.vcn.util.PersistableBundleUtils;
+
 import java.util.Map;
 import java.util.Set;
 
@@ -25,25 +27,38 @@ public abstract class NetworkPriorityClassifier {
     static final int WIFI_ENTRY_RSSI_THRESHOLD_DEFAULT = -70;
     static final int WIFI_EXIT_RSSI_THRESHOLD_DEFAULT = -74;
 
-    public static boolean checkMatchesCellPriorityRule(VcnContext vcnContext, VcnCellUnderlyingNetworkTemplate vcnCellUnderlyingNetworkTemplate, UnderlyingNetworkRecord underlyingNetworkRecord, ParcelUuid parcelUuid, TelephonySubscriptionTracker.TelephonySubscriptionSnapshot telephonySubscriptionSnapshot) {
+    public static boolean checkMatchesCellPriorityRule(
+            VcnContext vcnContext,
+            VcnCellUnderlyingNetworkTemplate vcnCellUnderlyingNetworkTemplate,
+            UnderlyingNetworkRecord underlyingNetworkRecord,
+            ParcelUuid parcelUuid,
+            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot
+                    telephonySubscriptionSnapshot) {
         boolean z;
         NetworkCapabilities networkCapabilities = underlyingNetworkRecord.networkCapabilities;
         if (!networkCapabilities.hasTransport(0)) {
             return false;
         }
-        TelephonyNetworkSpecifier telephonyNetworkSpecifier = (TelephonyNetworkSpecifier) networkCapabilities.getNetworkSpecifier();
+        TelephonyNetworkSpecifier telephonyNetworkSpecifier =
+                (TelephonyNetworkSpecifier) networkCapabilities.getNetworkSpecifier();
         if (telephonyNetworkSpecifier == null) {
             logWtf("Got null NetworkSpecifier");
             return false;
         }
-        TelephonyManager createForSubscriptionId = ((TelephonyManager) vcnContext.mContext.getSystemService(TelephonyManager.class)).createForSubscriptionId(telephonyNetworkSpecifier.getSubscriptionId());
+        TelephonyManager createForSubscriptionId =
+                ((TelephonyManager) vcnContext.mContext.getSystemService(TelephonyManager.class))
+                        .createForSubscriptionId(telephonyNetworkSpecifier.getSubscriptionId());
         if (!vcnCellUnderlyingNetworkTemplate.getOperatorPlmnIds().isEmpty()) {
-            if (!vcnCellUnderlyingNetworkTemplate.getOperatorPlmnIds().contains(createForSubscriptionId.getNetworkOperator())) {
+            if (!vcnCellUnderlyingNetworkTemplate
+                    .getOperatorPlmnIds()
+                    .contains(createForSubscriptionId.getNetworkOperator())) {
                 return false;
             }
         }
         if (!vcnCellUnderlyingNetworkTemplate.getSimSpecificCarrierIds().isEmpty()) {
-            if (!vcnCellUnderlyingNetworkTemplate.getSimSpecificCarrierIds().contains(Integer.valueOf(createForSubscriptionId.getSimSpecificCarrierId()))) {
+            if (!vcnCellUnderlyingNetworkTemplate
+                    .getSimSpecificCarrierIds()
+                    .contains(Integer.valueOf(createForSubscriptionId.getSimSpecificCarrierId()))) {
                 return false;
             }
         }
@@ -57,7 +72,11 @@ public abstract class NetworkPriorityClassifier {
         if (telephonySubscriptionSnapshot != null) {
             for (Integer num : subscriptionIds) {
                 num.intValue();
-                if (telephonySubscriptionSnapshot.mSubIdToInfoMap.containsKey(num) ? ((SubscriptionInfo) telephonySubscriptionSnapshot.mSubIdToInfoMap.get(num)).isOpportunistic() : false) {
+                if (telephonySubscriptionSnapshot.mSubIdToInfoMap.containsKey(num)
+                        ? ((SubscriptionInfo)
+                                        telephonySubscriptionSnapshot.mSubIdToInfoMap.get(num))
+                                .isOpportunistic()
+                        : false) {
                     z = true;
                     break;
                 }
@@ -70,7 +89,15 @@ public abstract class NetworkPriorityClassifier {
             if (!z) {
                 return false;
             }
-            if (((ArraySet) telephonySubscriptionSnapshot.getAllSubIdsInGroup(parcelUuid)).contains(Integer.valueOf(SubscriptionManager.getActiveDataSubscriptionId())) && !networkCapabilities.getSubscriptionIds().contains(Integer.valueOf(SubscriptionManager.getActiveDataSubscriptionId()))) {
+            if (((ArraySet) telephonySubscriptionSnapshot.getAllSubIdsInGroup(parcelUuid))
+                            .contains(
+                                    Integer.valueOf(
+                                            SubscriptionManager.getActiveDataSubscriptionId()))
+                    && !networkCapabilities
+                            .getSubscriptionIds()
+                            .contains(
+                                    Integer.valueOf(
+                                            SubscriptionManager.getActiveDataSubscriptionId()))) {
                 return false;
             }
         } else if (opportunistic == 2 && !z) {
@@ -79,12 +106,35 @@ public abstract class NetworkPriorityClassifier {
         return true;
     }
 
-    public static boolean checkMatchesPriorityRule(VcnContext vcnContext, VcnUnderlyingNetworkTemplate vcnUnderlyingNetworkTemplate, UnderlyingNetworkRecord underlyingNetworkRecord, ParcelUuid parcelUuid, TelephonySubscriptionTracker.TelephonySubscriptionSnapshot telephonySubscriptionSnapshot, boolean z, PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper) {
+    public static boolean checkMatchesPriorityRule(
+            VcnContext vcnContext,
+            VcnUnderlyingNetworkTemplate vcnUnderlyingNetworkTemplate,
+            UnderlyingNetworkRecord underlyingNetworkRecord,
+            ParcelUuid parcelUuid,
+            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot
+                    telephonySubscriptionSnapshot,
+            boolean z,
+            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper) {
         NetworkCapabilities networkCapabilities = underlyingNetworkRecord.networkCapabilities;
         int metered = vcnUnderlyingNetworkTemplate.getMetered();
         boolean z2 = !networkCapabilities.hasCapability(11);
-        if ((metered != 1 || z2) && ((metered != 2 || !z2) && networkCapabilities.getLinkUpstreamBandwidthKbps() >= vcnUnderlyingNetworkTemplate.getMinExitUpstreamBandwidthKbps() && ((networkCapabilities.getLinkUpstreamBandwidthKbps() >= vcnUnderlyingNetworkTemplate.getMinEntryUpstreamBandwidthKbps() || z) && networkCapabilities.getLinkDownstreamBandwidthKbps() >= vcnUnderlyingNetworkTemplate.getMinExitDownstreamBandwidthKbps() && (networkCapabilities.getLinkDownstreamBandwidthKbps() >= vcnUnderlyingNetworkTemplate.getMinEntryDownstreamBandwidthKbps() || z)))) {
-            for (Map.Entry entry : vcnUnderlyingNetworkTemplate.getCapabilitiesMatchCriteria().entrySet()) {
+        if ((metered != 1 || z2)
+                && ((metered != 2 || !z2)
+                        && networkCapabilities.getLinkUpstreamBandwidthKbps()
+                                >= vcnUnderlyingNetworkTemplate.getMinExitUpstreamBandwidthKbps()
+                        && ((networkCapabilities.getLinkUpstreamBandwidthKbps()
+                                                >= vcnUnderlyingNetworkTemplate
+                                                        .getMinEntryUpstreamBandwidthKbps()
+                                        || z)
+                                && networkCapabilities.getLinkDownstreamBandwidthKbps()
+                                        >= vcnUnderlyingNetworkTemplate
+                                                .getMinExitDownstreamBandwidthKbps()
+                                && (networkCapabilities.getLinkDownstreamBandwidthKbps()
+                                                >= vcnUnderlyingNetworkTemplate
+                                                        .getMinEntryDownstreamBandwidthKbps()
+                                        || z)))) {
+            for (Map.Entry entry :
+                    vcnUnderlyingNetworkTemplate.getCapabilitiesMatchCriteria().entrySet()) {
                 int intValue = ((Integer) entry.getKey()).intValue();
                 int intValue2 = ((Integer) entry.getValue()).intValue();
                 if (intValue2 == 1 && !networkCapabilities.hasCapability(intValue)) {
@@ -98,25 +148,40 @@ public abstract class NetworkPriorityClassifier {
                 return true;
             }
             if (vcnUnderlyingNetworkTemplate instanceof VcnWifiUnderlyingNetworkTemplate) {
-                return checkMatchesWifiPriorityRule((VcnWifiUnderlyingNetworkTemplate) vcnUnderlyingNetworkTemplate, underlyingNetworkRecord, z, persistableBundleWrapper);
+                return checkMatchesWifiPriorityRule(
+                        (VcnWifiUnderlyingNetworkTemplate) vcnUnderlyingNetworkTemplate,
+                        underlyingNetworkRecord,
+                        z,
+                        persistableBundleWrapper);
             }
             if (vcnUnderlyingNetworkTemplate instanceof VcnCellUnderlyingNetworkTemplate) {
-                return checkMatchesCellPriorityRule(vcnContext, (VcnCellUnderlyingNetworkTemplate) vcnUnderlyingNetworkTemplate, underlyingNetworkRecord, parcelUuid, telephonySubscriptionSnapshot);
+                return checkMatchesCellPriorityRule(
+                        vcnContext,
+                        (VcnCellUnderlyingNetworkTemplate) vcnUnderlyingNetworkTemplate,
+                        underlyingNetworkRecord,
+                        parcelUuid,
+                        telephonySubscriptionSnapshot);
             }
-            logWtf("Got unknown VcnUnderlyingNetworkTemplate class: ".concat(vcnUnderlyingNetworkTemplate.getClass().getSimpleName()));
+            logWtf(
+                    "Got unknown VcnUnderlyingNetworkTemplate class: "
+                            .concat(vcnUnderlyingNetworkTemplate.getClass().getSimpleName()));
         }
         return false;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0020, code lost:
-    
-        if (r8 >= r2) goto L16;
-     */
+
+       if (r8 >= r2) goto L16;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean checkMatchesWifiPriorityRule(android.net.vcn.VcnWifiUnderlyingNetworkTemplate r6, com.android.server.vcn.routeselection.UnderlyingNetworkRecord r7, boolean r8, com.android.server.vcn.util.PersistableBundleUtils.PersistableBundleWrapper r9) {
+    public static boolean checkMatchesWifiPriorityRule(
+            android.net.vcn.VcnWifiUnderlyingNetworkTemplate r6,
+            com.android.server.vcn.routeselection.UnderlyingNetworkRecord r7,
+            boolean r8,
+            com.android.server.vcn.util.PersistableBundleUtils.PersistableBundleWrapper r9) {
         /*
             android.net.NetworkCapabilities r0 = r7.networkCapabilities
             r1 = 1
@@ -159,7 +224,11 @@ public abstract class NetworkPriorityClassifier {
         L50:
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.vcn.routeselection.NetworkPriorityClassifier.checkMatchesWifiPriorityRule(android.net.vcn.VcnWifiUnderlyingNetworkTemplate, com.android.server.vcn.routeselection.UnderlyingNetworkRecord, boolean, com.android.server.vcn.util.PersistableBundleUtils$PersistableBundleWrapper):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.vcn.routeselection.NetworkPriorityClassifier.checkMatchesWifiPriorityRule(android.net.vcn.VcnWifiUnderlyingNetworkTemplate,"
+                    + " com.android.server.vcn.routeselection.UnderlyingNetworkRecord, boolean,"
+                    + " com.android.server.vcn.util.PersistableBundleUtils$PersistableBundleWrapper):boolean");
     }
 
     public static void logWtf(String str) {

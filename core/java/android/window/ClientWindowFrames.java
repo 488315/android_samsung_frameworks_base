@@ -3,23 +3,26 @@ package android.window;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public class ClientWindowFrames implements Parcelable {
-    public static final Parcelable.Creator<ClientWindowFrames> CREATOR = new Parcelable.Creator<ClientWindowFrames>() { // from class: android.window.ClientWindowFrames.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClientWindowFrames createFromParcel(Parcel in) {
-            return new ClientWindowFrames(in);
-        }
+    public static final Parcelable.Creator<ClientWindowFrames> CREATOR =
+            new Parcelable.Creator<
+                    ClientWindowFrames>() { // from class: android.window.ClientWindowFrames.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClientWindowFrames createFromParcel(Parcel in) {
+                    return new ClientWindowFrames(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClientWindowFrames[] newArray(int size) {
-            return new ClientWindowFrames[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClientWindowFrames[] newArray(int size) {
+                    return new ClientWindowFrames[size];
+                }
+            };
     public Rect attachedFrame;
     public float compatScale;
     public final Rect displayFrame;
@@ -82,7 +85,18 @@ public class ClientWindowFrames implements Parcelable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder(32);
-        return "ClientWindowFrames{frame=" + this.frame.toShortString(sb) + " display=" + this.displayFrame.toShortString(sb) + " parentFrame=" + this.parentFrame.toShortString(sb) + (this.attachedFrame != null ? " attachedFrame=" + this.attachedFrame.toShortString() : "") + (this.isParentFrameClippedByDisplayCutout ? " parentClippedByDisplayCutout" : "") + (this.compatScale != 1.0f ? " sizeCompatScale=" + this.compatScale : "") + "}";
+        return "ClientWindowFrames{frame="
+                + this.frame.toShortString(sb)
+                + " display="
+                + this.displayFrame.toShortString(sb)
+                + " parentFrame="
+                + this.parentFrame.toShortString(sb)
+                + (this.attachedFrame != null
+                        ? " attachedFrame=" + this.attachedFrame.toShortString()
+                        : "")
+                + (this.isParentFrameClippedByDisplayCutout ? " parentClippedByDisplayCutout" : "")
+                + (this.compatScale != 1.0f ? " sizeCompatScale=" + this.compatScale : "")
+                + "}";
     }
 
     public boolean equals(Object o) {
@@ -93,14 +107,26 @@ public class ClientWindowFrames implements Parcelable {
             return false;
         }
         ClientWindowFrames other = (ClientWindowFrames) o;
-        if (this.frame.equals(other.frame) && this.displayFrame.equals(other.displayFrame) && this.parentFrame.equals(other.parentFrame) && Objects.equals(this.attachedFrame, other.attachedFrame) && this.isParentFrameClippedByDisplayCutout == other.isParentFrameClippedByDisplayCutout && this.compatScale == other.compatScale) {
+        if (this.frame.equals(other.frame)
+                && this.displayFrame.equals(other.displayFrame)
+                && this.parentFrame.equals(other.parentFrame)
+                && Objects.equals(this.attachedFrame, other.attachedFrame)
+                && this.isParentFrameClippedByDisplayCutout
+                        == other.isParentFrameClippedByDisplayCutout
+                && this.compatScale == other.compatScale) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.frame, this.displayFrame, this.parentFrame, this.attachedFrame, Boolean.valueOf(this.isParentFrameClippedByDisplayCutout), Float.valueOf(this.compatScale));
+        return Objects.hash(
+                this.frame,
+                this.displayFrame,
+                this.parentFrame,
+                this.attachedFrame,
+                Boolean.valueOf(this.isParentFrameClippedByDisplayCutout),
+                Float.valueOf(this.compatScale));
     }
 
     @Override // android.os.Parcelable

@@ -2,7 +2,7 @@ package com.android.internal.util;
 
 import android.util.SparseArray;
 import android.util.SparseIntArray;
-import com.android.internal.util.HeavyHitterSketch;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -133,14 +133,20 @@ public interface HeavyHitterSketch<T> {
             if (indexes == null) {
                 return null;
             }
-            Collections.sort(indexes, new Comparator() { // from class: com.android.internal.util.HeavyHitterSketch$HeavyHitterSketchImpl$$ExternalSyntheticLambda0
-                @Override // java.util.Comparator
-                public final int compare(Object obj, Object obj2) {
-                    int lambda$getTopHeavyHitters$0;
-                    lambda$getTopHeavyHitters$0 = HeavyHitterSketch.HeavyHitterSketchImpl.this.lambda$getTopHeavyHitters$0((Integer) obj, (Integer) obj2);
-                    return lambda$getTopHeavyHitters$0;
-                }
-            });
+            Collections.sort(
+                    indexes,
+                    new Comparator() { // from class:
+                                       // com.android.internal.util.HeavyHitterSketch$HeavyHitterSketchImpl$$ExternalSyntheticLambda0
+                        @Override // java.util.Comparator
+                        public final int compare(Object obj, Object obj2) {
+                            int lambda$getTopHeavyHitters$0;
+                            lambda$getTopHeavyHitters$0 =
+                                    HeavyHitterSketch.HeavyHitterSketchImpl.this
+                                            .lambda$getTopHeavyHitters$0(
+                                                    (Integer) obj, (Integer) obj2);
+                            return lambda$getTopHeavyHitters$0;
+                        }
+                    });
             List<T> result = holder != null ? holder : new ArrayList<>();
             int max = Math.min(k == 0 ? this.mCapacity - 1 : k, indexes.size());
             for (int i2 = 0; i2 < max; i2++) {
@@ -158,7 +164,8 @@ public interface HeavyHitterSketch<T> {
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ int lambda$getTopHeavyHitters$0(Integer a, Integer b) {
-            return this.mFrequencies.valueAt(b.intValue()) - this.mFrequencies.valueAt(a.intValue());
+            return this.mFrequencies.valueAt(b.intValue())
+                    - this.mFrequencies.valueAt(a.intValue());
         }
 
         @Override // com.android.internal.util.HeavyHitterSketch

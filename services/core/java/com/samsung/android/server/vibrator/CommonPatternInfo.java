@@ -18,6 +18,15 @@ public final class CommonPatternInfo {
     }
 
     public final String toString() {
-        return "CommonPatternInfo: type: " + this.type + " index: " + this.index + " scale: " + this.scale + " duration: " + this.duration + " frequency: " + this.frequency;
+        return "CommonPatternInfo: type: "
+                + this.type
+                + " index: "
+                + this.index
+                + " scale: "
+                + this.scale
+                + " duration: "
+                + this.duration
+                + " frequency: "
+                + this.frequency;
     }
 }

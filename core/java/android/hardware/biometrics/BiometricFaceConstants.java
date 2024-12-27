@@ -105,12 +105,10 @@ public class BiometricFaceConstants {
     public static final int FEATURE_REQUIRE_REQUIRE_DIVERSITY = 2;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FaceAcquired {
-    }
+    public @interface FaceAcquired {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FaceError {
-    }
+    public @interface FaceError {}
 
     public static int reasonToMetric(int reason) {
         switch (reason) {

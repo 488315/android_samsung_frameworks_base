@@ -3,6 +3,7 @@ package android.security.keystore.recovery;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -12,26 +13,28 @@ import java.util.Objects;
 public final class KeyDerivationParams implements Parcelable {
     public static final int ALGORITHM_SCRYPT = 2;
     public static final int ALGORITHM_SHA256 = 1;
-    public static final Parcelable.Creator<KeyDerivationParams> CREATOR = new Parcelable.Creator<KeyDerivationParams>() { // from class: android.security.keystore.recovery.KeyDerivationParams.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyDerivationParams createFromParcel(Parcel in) {
-            return new KeyDerivationParams(in);
-        }
+    public static final Parcelable.Creator<KeyDerivationParams> CREATOR =
+            new Parcelable.Creator<
+                    KeyDerivationParams>() { // from class:
+                                             // android.security.keystore.recovery.KeyDerivationParams.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyDerivationParams createFromParcel(Parcel in) {
+                    return new KeyDerivationParams(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyDerivationParams[] newArray(int length) {
-            return new KeyDerivationParams[length];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyDerivationParams[] newArray(int length) {
+                    return new KeyDerivationParams[length];
+                }
+            };
     private final int mAlgorithm;
     private final int mMemoryDifficulty;
     private final byte[] mSalt;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface KeyDerivationAlgorithm {
-    }
+    public @interface KeyDerivationAlgorithm {}
 
     public static KeyDerivationParams createSha256Params(byte[] salt) {
         return new KeyDerivationParams(1, salt);

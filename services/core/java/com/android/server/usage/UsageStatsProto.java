@@ -8,7 +8,7 @@ import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
-import com.android.server.usage.IntervalStats;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -71,7 +71,8 @@ public abstract class UsageStatsProto {
         }
     }
 
-    public static void loadConfigStats(ProtoInputStream protoInputStream, IntervalStats intervalStats) {
+    public static void loadConfigStats(
+            ProtoInputStream protoInputStream, IntervalStats intervalStats) {
         ConfigurationStats configurationStats;
         long start = protoInputStream.start(2246267895829L);
         Configuration configuration = new Configuration();
@@ -89,13 +90,15 @@ public abstract class UsageStatsProto {
             }
             if (nextField == 1) {
                 configuration.readFromProto(protoInputStream, 1146756268033L);
-                ConfigurationStats orCreateConfigurationStats = intervalStats.getOrCreateConfigurationStats(configuration);
+                ConfigurationStats orCreateConfigurationStats =
+                        intervalStats.getOrCreateConfigurationStats(configuration);
                 orCreateConfigurationStats.mLastTimeActive = configurationStats.mLastTimeActive;
                 orCreateConfigurationStats.mTotalTimeActive = configurationStats.mTotalTimeActive;
                 orCreateConfigurationStats.mActivationCount = configurationStats.mActivationCount;
                 configurationStats = orCreateConfigurationStats;
             } else if (nextField == 2) {
-                configurationStats.mLastTimeActive = protoInputStream.readLong(1112396529666L) + intervalStats.beginTime;
+                configurationStats.mLastTimeActive =
+                        protoInputStream.readLong(1112396529666L) + intervalStats.beginTime;
             } else if (nextField == 3) {
                 configurationStats.mTotalTimeActive = protoInputStream.readLong(1112396529667L);
             } else if (nextField == 4) {
@@ -110,7 +113,8 @@ public abstract class UsageStatsProto {
         protoInputStream.end(start);
     }
 
-    public static void loadCountAndTime(ProtoInputStream protoInputStream, long j, IntervalStats.EventTracker eventTracker) {
+    public static void loadCountAndTime(
+            ProtoInputStream protoInputStream, long j, IntervalStats.EventTracker eventTracker) {
         try {
             long start = protoInputStream.start(j);
             while (true) {
@@ -130,114 +134,137 @@ public abstract class UsageStatsProto {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:54:0x013b, code lost:
-    
-        r9 = r2.mEventType;
-     */
+
+       r9 = r2.mEventType;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:55:0x013e, code lost:
-    
-        if (r9 == 5) goto L40;
-     */
+
+       if (r9 == 5) goto L40;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:57:0x0144, code lost:
-    
-        if (r9 == 8) goto L37;
-     */
+
+       if (r9 == 8) goto L37;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:59:0x0148, code lost:
-    
-        if (r9 == 12) goto L34;
-     */
+
+       if (r9 == 12) goto L34;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:61:0x014c, code lost:
-    
-        if (r9 == 30) goto L31;
-     */
+
+       if (r9 == 30) goto L31;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:63:0x0151, code lost:
-    
-        if (r2.mLocusId != null) goto L43;
-     */
+
+       if (r2.mLocusId != null) goto L43;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:64:0x0153, code lost:
-    
-        r2.mLocusId = "";
-     */
+
+       r2.mLocusId = "";
+    */
     /* JADX WARN: Code restructure failed: missing block: B:65:0x016f, code lost:
-    
-        r7.end(r0);
-     */
+
+       r7.end(r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:66:0x0174, code lost:
-    
-        if (r2.mPackage == null) goto L47;
-     */
+
+       if (r2.mPackage == null) goto L47;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:67:0x0176, code lost:
-    
-        r8.events.insert(r2);
-     */
+
+       r8.events.insert(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:68:0x017b, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:71:0x0184, code lost:
-    
-        throw new java.net.ProtocolException("no package field present");
-     */
+
+       throw new java.net.ProtocolException("no package field present");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:73:0x0158, code lost:
-    
-        if (r2.mNotificationChannelId != null) goto L43;
-     */
+
+       if (r2.mNotificationChannelId != null) goto L43;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:74:0x015a, code lost:
-    
-        r2.mNotificationChannelId = "";
-     */
+
+       r2.mNotificationChannelId = "";
+    */
     /* JADX WARN: Code restructure failed: missing block: B:76:0x015f, code lost:
-    
-        if (r2.mShortcutId != null) goto L43;
-     */
+
+       if (r2.mShortcutId != null) goto L43;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:77:0x0161, code lost:
-    
-        r2.mShortcutId = "";
-     */
+
+       r2.mShortcutId = "";
+    */
     /* JADX WARN: Code restructure failed: missing block: B:79:0x0166, code lost:
-    
-        if (r2.mConfiguration != null) goto L43;
-     */
+
+       if (r2.mConfiguration != null) goto L43;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:80:0x0168, code lost:
-    
-        r2.mConfiguration = new android.content.res.Configuration();
-     */
+
+       r2.mConfiguration = new android.content.res.Configuration();
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void loadEvent(android.util.proto.ProtoInputStream r7, com.android.server.usage.IntervalStats r8, java.util.List r9) {
+    public static void loadEvent(
+            android.util.proto.ProtoInputStream r7,
+            com.android.server.usage.IntervalStats r8,
+            java.util.List r9) {
         /*
             Method dump skipped, instructions count: 432
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usage.UsageStatsProto.loadEvent(android.util.proto.ProtoInputStream, com.android.server.usage.IntervalStats, java.util.List):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usage.UsageStatsProto.loadEvent(android.util.proto.ProtoInputStream,"
+                    + " com.android.server.usage.IntervalStats, java.util.List):void");
     }
 
-    public static void loadUsageStats(ProtoInputStream protoInputStream, IntervalStats intervalStats, List list) {
+    public static void loadUsageStats(
+            ProtoInputStream protoInputStream, IntervalStats intervalStats, List list) {
         UsageStats orCreateUsageStats;
         long start = protoInputStream.start(2246267895828L);
-        UsageStats orCreateUsageStats2 = protoInputStream.nextField(1120986464258L) ? intervalStats.getOrCreateUsageStats((String) list.get(protoInputStream.readInt(1120986464258L) - 1)) : protoInputStream.nextField(1138166333441L) ? intervalStats.getOrCreateUsageStats(protoInputStream.readString(1138166333441L)) : new UsageStats();
+        UsageStats orCreateUsageStats2 =
+                protoInputStream.nextField(1120986464258L)
+                        ? intervalStats.getOrCreateUsageStats(
+                                (String) list.get(protoInputStream.readInt(1120986464258L) - 1))
+                        : protoInputStream.nextField(1138166333441L)
+                                ? intervalStats.getOrCreateUsageStats(
+                                        protoInputStream.readString(1138166333441L))
+                                : new UsageStats();
         while (protoInputStream.nextField() != -1) {
             switch (protoInputStream.getFieldNumber()) {
                 case 1:
-                    orCreateUsageStats = intervalStats.getOrCreateUsageStats(protoInputStream.readString(1138166333441L));
+                    orCreateUsageStats =
+                            intervalStats.getOrCreateUsageStats(
+                                    protoInputStream.readString(1138166333441L));
                     orCreateUsageStats.mLastTimeUsed = orCreateUsageStats2.mLastTimeUsed;
-                    orCreateUsageStats.mTotalTimeInForeground = orCreateUsageStats2.mTotalTimeInForeground;
+                    orCreateUsageStats.mTotalTimeInForeground =
+                            orCreateUsageStats2.mTotalTimeInForeground;
                     orCreateUsageStats.mLastEvent = orCreateUsageStats2.mLastEvent;
                     orCreateUsageStats.mAppLaunchCount = orCreateUsageStats2.mAppLaunchCount;
                     break;
                 case 2:
-                    orCreateUsageStats = intervalStats.getOrCreateUsageStats((String) list.get(protoInputStream.readInt(1120986464258L) - 1));
+                    orCreateUsageStats =
+                            intervalStats.getOrCreateUsageStats(
+                                    (String)
+                                            list.get(protoInputStream.readInt(1120986464258L) - 1));
                     orCreateUsageStats.mLastTimeUsed = orCreateUsageStats2.mLastTimeUsed;
-                    orCreateUsageStats.mTotalTimeInForeground = orCreateUsageStats2.mTotalTimeInForeground;
+                    orCreateUsageStats.mTotalTimeInForeground =
+                            orCreateUsageStats2.mTotalTimeInForeground;
                     orCreateUsageStats.mLastEvent = orCreateUsageStats2.mLastEvent;
                     orCreateUsageStats.mAppLaunchCount = orCreateUsageStats2.mAppLaunchCount;
                     break;
                 case 3:
-                    orCreateUsageStats2.mLastTimeUsed = protoInputStream.readLong(1112396529667L) + intervalStats.beginTime;
+                    orCreateUsageStats2.mLastTimeUsed =
+                            protoInputStream.readLong(1112396529667L) + intervalStats.beginTime;
                     continue;
                 case 4:
-                    orCreateUsageStats2.mTotalTimeInForeground = protoInputStream.readLong(1112396529668L);
+                    orCreateUsageStats2.mTotalTimeInForeground =
+                            protoInputStream.readLong(1112396529668L);
                     continue;
                 case 5:
                     orCreateUsageStats2.mLastEvent = protoInputStream.readInt(1120986464261L);
@@ -252,23 +279,32 @@ public abstract class UsageStatsProto {
                         protoInputStream.end(start2);
                         continue;
                     } catch (IOException e) {
-                        Slog.e("UsageStatsProto", "Unable to read chooser counts for " + orCreateUsageStats2.mPackageName, e);
+                        Slog.e(
+                                "UsageStatsProto",
+                                "Unable to read chooser counts for "
+                                        + orCreateUsageStats2.mPackageName,
+                                e);
                         break;
                     }
                 case 8:
-                    orCreateUsageStats2.mLastTimeForegroundServiceUsed = protoInputStream.readLong(1112396529672L) + intervalStats.beginTime;
+                    orCreateUsageStats2.mLastTimeForegroundServiceUsed =
+                            protoInputStream.readLong(1112396529672L) + intervalStats.beginTime;
                     continue;
                 case 9:
-                    orCreateUsageStats2.mTotalTimeForegroundServiceUsed = protoInputStream.readLong(1112396529673L);
+                    orCreateUsageStats2.mTotalTimeForegroundServiceUsed =
+                            protoInputStream.readLong(1112396529673L);
                     continue;
                 case 10:
-                    orCreateUsageStats2.mLastTimeVisible = protoInputStream.readLong(1112396529674L) + intervalStats.beginTime;
+                    orCreateUsageStats2.mLastTimeVisible =
+                            protoInputStream.readLong(1112396529674L) + intervalStats.beginTime;
                     continue;
                 case 11:
-                    orCreateUsageStats2.mTotalTimeVisible = protoInputStream.readLong(1112396529675L);
+                    orCreateUsageStats2.mTotalTimeVisible =
+                            protoInputStream.readLong(1112396529675L);
                     continue;
                 case 12:
-                    orCreateUsageStats2.mLastTimeComponentUsed = protoInputStream.readLong(1112396529676L) + intervalStats.beginTime;
+                    orCreateUsageStats2.mLastTimeComponentUsed =
+                            protoInputStream.readLong(1112396529676L) + intervalStats.beginTime;
                     continue;
             }
             orCreateUsageStats2 = orCreateUsageStats;
@@ -295,11 +331,15 @@ public abstract class UsageStatsProto {
                 return;
             }
             if (nextField == 1) {
-                intervalStats.endTime = protoInputStream.readLong(1112396529665L) + intervalStats.beginTime;
+                intervalStats.endTime =
+                        protoInputStream.readLong(1112396529665L) + intervalStats.beginTime;
             } else if (nextField == 2) {
                 try {
                     long start = protoInputStream.start(1146756268034L);
-                    arrayList = protoInputStream.nextField(1120986464257L) ? new ArrayList(protoInputStream.readInt(1120986464257L)) : new ArrayList();
+                    arrayList =
+                            protoInputStream.nextField(1120986464257L)
+                                    ? new ArrayList(protoInputStream.readInt(1120986464257L))
+                                    : new ArrayList();
                     while (protoInputStream.nextField() != -1) {
                         if (protoInputStream.getFieldNumber() == 2) {
                             arrayList.add(protoInputStream.readString(2237677961218L));
@@ -323,16 +363,26 @@ public abstract class UsageStatsProto {
             } else if (nextField != 4) {
                 switch (nextField) {
                     case 10:
-                        loadCountAndTime(protoInputStream, 1146756268042L, intervalStats.interactiveTracker);
+                        loadCountAndTime(
+                                protoInputStream, 1146756268042L, intervalStats.interactiveTracker);
                         break;
                     case 11:
-                        loadCountAndTime(protoInputStream, 1146756268043L, intervalStats.nonInteractiveTracker);
+                        loadCountAndTime(
+                                protoInputStream,
+                                1146756268043L,
+                                intervalStats.nonInteractiveTracker);
                         break;
                     case 12:
-                        loadCountAndTime(protoInputStream, 1146756268044L, intervalStats.keyguardShownTracker);
+                        loadCountAndTime(
+                                protoInputStream,
+                                1146756268044L,
+                                intervalStats.keyguardShownTracker);
                         break;
                     case 13:
-                        loadCountAndTime(protoInputStream, 1146756268045L, intervalStats.keyguardHiddenTracker);
+                        loadCountAndTime(
+                                protoInputStream,
+                                1146756268045L,
+                                intervalStats.keyguardHiddenTracker);
                         break;
                     default:
                         switch (nextField) {
@@ -341,7 +391,10 @@ public abstract class UsageStatsProto {
                                     loadUsageStats(protoInputStream, intervalStats, arrayList2);
                                     break;
                                 } catch (IOException e4) {
-                                    Slog.e("UsageStatsProto", "Unable to read some usage stats from proto.", e4);
+                                    Slog.e(
+                                            "UsageStatsProto",
+                                            "Unable to read some usage stats from proto.",
+                                            e4);
                                     break;
                                 }
                             case 21:
@@ -349,7 +402,10 @@ public abstract class UsageStatsProto {
                                     loadConfigStats(protoInputStream, intervalStats);
                                     break;
                                 } catch (IOException e5) {
-                                    Slog.e("UsageStatsProto", "Unable to read some configuration stats from proto.", e5);
+                                    Slog.e(
+                                            "UsageStatsProto",
+                                            "Unable to read some configuration stats from proto.",
+                                            e5);
                                     break;
                                 }
                             case 22:
@@ -357,7 +413,10 @@ public abstract class UsageStatsProto {
                                     loadEvent(protoInputStream, intervalStats, arrayList2);
                                     break;
                                 } catch (IOException e6) {
-                                    Slog.e("UsageStatsProto", "Unable to read some events from proto.", e6);
+                                    Slog.e(
+                                            "UsageStatsProto",
+                                            "Unable to read some events from proto.",
+                                            e6);
                                     break;
                                 }
                         }
@@ -388,7 +447,8 @@ public abstract class UsageStatsProto {
             int size = intervalStats.mStringCache.size();
             protoOutputStream.write(1120986464257L, size);
             for (int i3 = 0; i3 < size; i3++) {
-                protoOutputStream.write(2237677961218L, (String) intervalStats.mStringCache.valueAt(i3));
+                protoOutputStream.write(
+                        2237677961218L, (String) intervalStats.mStringCache.valueAt(i3));
             }
             protoOutputStream.end(start);
         } catch (IllegalArgumentException e) {
@@ -396,20 +456,27 @@ public abstract class UsageStatsProto {
         }
         try {
             IntervalStats.EventTracker eventTracker = intervalStats.interactiveTracker;
-            writeCountAndTime(eventTracker.count, 1146756268042L, eventTracker.duration, protoOutputStream);
+            writeCountAndTime(
+                    eventTracker.count, 1146756268042L, eventTracker.duration, protoOutputStream);
             IntervalStats.EventTracker eventTracker2 = intervalStats.nonInteractiveTracker;
-            writeCountAndTime(eventTracker2.count, 1146756268043L, eventTracker2.duration, protoOutputStream);
+            writeCountAndTime(
+                    eventTracker2.count, 1146756268043L, eventTracker2.duration, protoOutputStream);
             IntervalStats.EventTracker eventTracker3 = intervalStats.keyguardShownTracker;
-            writeCountAndTime(eventTracker3.count, 1146756268044L, eventTracker3.duration, protoOutputStream);
+            writeCountAndTime(
+                    eventTracker3.count, 1146756268044L, eventTracker3.duration, protoOutputStream);
             IntervalStats.EventTracker eventTracker4 = intervalStats.keyguardHiddenTracker;
-            writeCountAndTime(eventTracker4.count, 1146756268045L, eventTracker4.duration, protoOutputStream);
+            writeCountAndTime(
+                    eventTracker4.count, 1146756268045L, eventTracker4.duration, protoOutputStream);
         } catch (IllegalArgumentException e2) {
             Slog.e("UsageStatsProto", "Unable to write some interval stats trackers to proto.", e2);
         }
         int size2 = intervalStats.packageStats.size();
         for (int i4 = 0; i4 < size2; i4++) {
             try {
-                writeUsageStats(protoOutputStream, intervalStats, (UsageStats) intervalStats.packageStats.valueAt(i4));
+                writeUsageStats(
+                        protoOutputStream,
+                        intervalStats,
+                        (UsageStats) intervalStats.packageStats.valueAt(i4));
             } catch (IllegalArgumentException e3) {
                 Slog.e("UsageStatsProto", "Unable to write some usage stats to proto.", e3);
             }
@@ -417,24 +484,36 @@ public abstract class UsageStatsProto {
         int size3 = intervalStats.configurations.size();
         int i5 = 0;
         while (i5 < size3) {
-            boolean equals = intervalStats.activeConfiguration.equals((Configuration) intervalStats.configurations.keyAt(i5));
+            boolean equals =
+                    intervalStats.activeConfiguration.equals(
+                            (Configuration) intervalStats.configurations.keyAt(i5));
             try {
-                ConfigurationStats configurationStats = (ConfigurationStats) intervalStats.configurations.valueAt(i5);
+                ConfigurationStats configurationStats =
+                        (ConfigurationStats) intervalStats.configurations.valueAt(i5);
                 long start2 = protoOutputStream.start(2246267895829L);
                 configurationStats.mConfiguration.dumpDebug(protoOutputStream, 1146756268033L);
                 i = size3;
                 try {
                     try {
-                        UsageStatsProtoV2.writeOffsetTimestamp(protoOutputStream, 1112396529666L, configurationStats.mLastTimeActive, intervalStats.beginTime);
-                        protoOutputStream.write(1112396529667L, configurationStats.mTotalTimeActive);
+                        UsageStatsProtoV2.writeOffsetTimestamp(
+                                protoOutputStream,
+                                1112396529666L,
+                                configurationStats.mLastTimeActive,
+                                intervalStats.beginTime);
+                        protoOutputStream.write(
+                                1112396529667L, configurationStats.mTotalTimeActive);
                         j = 1120986464260L;
                         try {
-                            protoOutputStream.write(1120986464260L, configurationStats.mActivationCount);
+                            protoOutputStream.write(
+                                    1120986464260L, configurationStats.mActivationCount);
                             protoOutputStream.write(1133871366149L, equals);
                             protoOutputStream.end(start2);
                         } catch (IllegalArgumentException e4) {
                             e = e4;
-                            Slog.e("UsageStatsProto", "Unable to write some configuration stats to proto.", e);
+                            Slog.e(
+                                    "UsageStatsProto",
+                                    "Unable to write some configuration stats to proto.",
+                                    e);
                             i5++;
                             j5 = j;
                             size3 = i;
@@ -467,9 +546,12 @@ public abstract class UsageStatsProto {
         protoOutputStream.flush();
     }
 
-    public static void writeChooserCounts(ProtoOutputStream protoOutputStream, UsageStats usageStats) {
+    public static void writeChooserCounts(
+            ProtoOutputStream protoOutputStream, UsageStats usageStats) {
         ArrayMap arrayMap;
-        if (usageStats == null || (arrayMap = usageStats.mChooserCounts) == null || arrayMap.keySet().isEmpty()) {
+        if (usageStats == null
+                || (arrayMap = usageStats.mChooserCounts) == null
+                || arrayMap.keySet().isEmpty()) {
             return;
         }
         int size = usageStats.mChooserCounts.size();
@@ -499,14 +581,18 @@ public abstract class UsageStatsProto {
         }
     }
 
-    public static void writeCountAndTime(int i, long j, long j2, ProtoOutputStream protoOutputStream) {
+    public static void writeCountAndTime(
+            int i, long j, long j2, ProtoOutputStream protoOutputStream) {
         long start = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, i);
         protoOutputStream.write(1112396529666L, j2);
         protoOutputStream.end(start);
     }
 
-    public static void writeEvent(ProtoOutputStream protoOutputStream, IntervalStats intervalStats, UsageEvents.Event event) {
+    public static void writeEvent(
+            ProtoOutputStream protoOutputStream,
+            IntervalStats intervalStats,
+            UsageEvents.Event event) {
         int indexOf;
         String str;
         int indexOf2;
@@ -527,7 +613,8 @@ public abstract class UsageStatsProto {
                 protoOutputStream.write(1138166333443L, event.mClass);
             }
         }
-        UsageStatsProtoV2.writeOffsetTimestamp(protoOutputStream, 1112396529669L, event.mTimeStamp, intervalStats.beginTime);
+        UsageStatsProtoV2.writeOffsetTimestamp(
+                protoOutputStream, 1112396529669L, event.mTimeStamp, intervalStats.beginTime);
         protoOutputStream.write(1120986464262L, event.mFlags);
         protoOutputStream.write(1120986464263L, event.mEventType);
         protoOutputStream.write(1120986464270L, event.mInstanceId);
@@ -571,7 +658,10 @@ public abstract class UsageStatsProto {
         protoOutputStream.end(start);
     }
 
-    public static void writeUsageStats(ProtoOutputStream protoOutputStream, IntervalStats intervalStats, UsageStats usageStats) {
+    public static void writeUsageStats(
+            ProtoOutputStream protoOutputStream,
+            IntervalStats intervalStats,
+            UsageStats usageStats) {
         long start = protoOutputStream.start(2246267895828L);
         int indexOf = intervalStats.mStringCache.indexOf(usageStats.mPackageName);
         if (indexOf >= 0) {
@@ -579,19 +669,38 @@ public abstract class UsageStatsProto {
         } else {
             protoOutputStream.write(1138166333441L, usageStats.mPackageName);
         }
-        UsageStatsProtoV2.writeOffsetTimestamp(protoOutputStream, 1112396529667L, usageStats.mLastTimeUsed, intervalStats.beginTime);
+        UsageStatsProtoV2.writeOffsetTimestamp(
+                protoOutputStream,
+                1112396529667L,
+                usageStats.mLastTimeUsed,
+                intervalStats.beginTime);
         protoOutputStream.write(1112396529668L, usageStats.mTotalTimeInForeground);
         protoOutputStream.write(1120986464261L, usageStats.mLastEvent);
-        UsageStatsProtoV2.writeOffsetTimestamp(protoOutputStream, 1112396529672L, usageStats.mLastTimeForegroundServiceUsed, intervalStats.beginTime);
+        UsageStatsProtoV2.writeOffsetTimestamp(
+                protoOutputStream,
+                1112396529672L,
+                usageStats.mLastTimeForegroundServiceUsed,
+                intervalStats.beginTime);
         protoOutputStream.write(1112396529673L, usageStats.mTotalTimeForegroundServiceUsed);
-        UsageStatsProtoV2.writeOffsetTimestamp(protoOutputStream, 1112396529674L, usageStats.mLastTimeVisible, intervalStats.beginTime);
+        UsageStatsProtoV2.writeOffsetTimestamp(
+                protoOutputStream,
+                1112396529674L,
+                usageStats.mLastTimeVisible,
+                intervalStats.beginTime);
         protoOutputStream.write(1112396529675L, usageStats.mTotalTimeVisible);
-        UsageStatsProtoV2.writeOffsetTimestamp(protoOutputStream, 1112396529676L, usageStats.mLastTimeComponentUsed, intervalStats.beginTime);
+        UsageStatsProtoV2.writeOffsetTimestamp(
+                protoOutputStream,
+                1112396529676L,
+                usageStats.mLastTimeComponentUsed,
+                intervalStats.beginTime);
         protoOutputStream.write(1120986464262L, usageStats.mAppLaunchCount);
         try {
             writeChooserCounts(protoOutputStream, usageStats);
         } catch (IllegalArgumentException e) {
-            Slog.e("UsageStatsProto", "Unable to write chooser counts for " + usageStats.mPackageName, e);
+            Slog.e(
+                    "UsageStatsProto",
+                    "Unable to write chooser counts for " + usageStats.mPackageName,
+                    e);
         }
         protoOutputStream.end(start);
     }

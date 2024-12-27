@@ -17,16 +17,13 @@ public interface IConditionProvider extends IInterface {
 
     public static class Default implements IConditionProvider {
         @Override // android.service.notification.IConditionProvider
-        public void onConnected() throws RemoteException {
-        }
+        public void onConnected() throws RemoteException {}
 
         @Override // android.service.notification.IConditionProvider
-        public void onSubscribe(Uri conditionId) throws RemoteException {
-        }
+        public void onSubscribe(Uri conditionId) throws RemoteException {}
 
         @Override // android.service.notification.IConditionProvider
-        public void onUnsubscribe(Uri conditionId) throws RemoteException {
-        }
+        public void onUnsubscribe(Uri conditionId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -34,7 +31,7 @@ public interface IConditionProvider extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IConditionProvider {
+    public abstract static class Stub extends Binder implements IConditionProvider {
         public static final String DESCRIPTOR = "android.service.notification.IConditionProvider";
         static final int TRANSACTION_onConnected = 1;
         static final int TRANSACTION_onSubscribe = 2;
@@ -79,7 +76,8 @@ public interface IConditionProvider extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

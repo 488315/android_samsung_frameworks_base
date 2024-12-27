@@ -41,7 +41,9 @@ public abstract class IntentService extends Service {
     @Override // android.app.Service
     public void onCreate() {
         super.onCreate();
-        HandlerThread thread = new HandlerThread("IntentService[" + this.mName + NavigationBarInflaterView.SIZE_MOD_END);
+        HandlerThread thread =
+                new HandlerThread(
+                        "IntentService[" + this.mName + NavigationBarInflaterView.SIZE_MOD_END);
         thread.start();
         this.mServiceLooper = thread.getLooper();
         this.mServiceHandler = new ServiceHandler(this.mServiceLooper);

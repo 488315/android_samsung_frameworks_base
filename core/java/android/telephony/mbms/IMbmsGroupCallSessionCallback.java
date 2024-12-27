@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -21,20 +22,18 @@ public interface IMbmsGroupCallSessionCallback extends IInterface {
 
     public static class Default implements IMbmsGroupCallSessionCallback {
         @Override // android.telephony.mbms.IMbmsGroupCallSessionCallback
-        public void onError(int errorCode, String message) throws RemoteException {
-        }
+        public void onError(int errorCode, String message) throws RemoteException {}
 
         @Override // android.telephony.mbms.IMbmsGroupCallSessionCallback
-        public void onAvailableSaisUpdated(List currentSai, List availableSais) throws RemoteException {
-        }
+        public void onAvailableSaisUpdated(List currentSai, List availableSais)
+                throws RemoteException {}
 
         @Override // android.telephony.mbms.IMbmsGroupCallSessionCallback
-        public void onServiceInterfaceAvailable(String interfaceName, int index) throws RemoteException {
-        }
+        public void onServiceInterfaceAvailable(String interfaceName, int index)
+                throws RemoteException {}
 
         @Override // android.telephony.mbms.IMbmsGroupCallSessionCallback
-        public void onMiddlewareReady() throws RemoteException {
-        }
+        public void onMiddlewareReady() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +41,7 @@ public interface IMbmsGroupCallSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMbmsGroupCallSessionCallback {
+    public abstract static class Stub extends Binder implements IMbmsGroupCallSessionCallback {
         static final int TRANSACTION_onAvailableSaisUpdated = 2;
         static final int TRANSACTION_onError = 1;
         static final int TRANSACTION_onMiddlewareReady = 4;
@@ -89,7 +88,8 @@ public interface IMbmsGroupCallSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMbmsGroupCallSessionCallback.DESCRIPTOR);
             }
@@ -155,7 +155,8 @@ public interface IMbmsGroupCallSessionCallback extends IInterface {
             }
 
             @Override // android.telephony.mbms.IMbmsGroupCallSessionCallback
-            public void onAvailableSaisUpdated(List currentSai, List availableSais) throws RemoteException {
+            public void onAvailableSaisUpdated(List currentSai, List availableSais)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMbmsGroupCallSessionCallback.DESCRIPTOR);
@@ -168,7 +169,8 @@ public interface IMbmsGroupCallSessionCallback extends IInterface {
             }
 
             @Override // android.telephony.mbms.IMbmsGroupCallSessionCallback
-            public void onServiceInterfaceAvailable(String interfaceName, int index) throws RemoteException {
+            public void onServiceInterfaceAvailable(String interfaceName, int index)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMbmsGroupCallSessionCallback.DESCRIPTOR);

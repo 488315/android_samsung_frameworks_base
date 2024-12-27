@@ -8,8 +8,7 @@ public interface IServiceCallback extends IInterface {
 
     public static class Default implements IServiceCallback {
         @Override // android.os.IServiceCallback
-        public void onRegistration(String name, IBinder binder) throws RemoteException {
-        }
+        public void onRegistration(String name, IBinder binder) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -17,7 +16,7 @@ public interface IServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IServiceCallback {
+    public abstract static class Stub extends Binder implements IServiceCallback {
         static final int TRANSACTION_onRegistration = 1;
 
         public Stub() {
@@ -55,7 +54,8 @@ public interface IServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IServiceCallback.DESCRIPTOR);
             }

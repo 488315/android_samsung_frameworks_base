@@ -8,7 +8,6 @@ public class X509 {
 
     public static class Mappings extends AsymmetricAlgorithmProvider {
         @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider
-        public void configure(ConfigurableProvider provider) {
-        }
+        public void configure(ConfigurableProvider provider) {}
     }
 }

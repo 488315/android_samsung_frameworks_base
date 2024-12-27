@@ -3,7 +3,9 @@ package android.content.res;
 import android.content.om.OverlayableInfo;
 import android.content.res.loader.AssetsProvider;
 import android.text.TextUtils;
+
 import dalvik.annotation.optimization.CriticalNative;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,12 +31,10 @@ public final class ApkAssets {
     private final StringBlock mStringBlock;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FormatType {
-    }
+    public @interface FormatType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PropertyFlags {
-    }
+    public @interface PropertyFlags {}
 
     private static native boolean nativeDefinesOverlayable(long j) throws IOException;
 
@@ -44,20 +44,32 @@ public final class ApkAssets {
 
     private static native String nativeGetDebugName(long j);
 
-    private static native OverlayableInfo nativeGetOverlayableInfo(long j, String str) throws IOException;
+    private static native OverlayableInfo nativeGetOverlayableInfo(long j, String str)
+            throws IOException;
 
     private static native long nativeGetStringBlock(long j);
 
     @CriticalNative
     private static native boolean nativeIsUpToDate(long j);
 
-    private static native long nativeLoad(int i, String str, int i2, AssetsProvider assetsProvider) throws IOException;
+    private static native long nativeLoad(int i, String str, int i2, AssetsProvider assetsProvider)
+            throws IOException;
 
     private static native long nativeLoadEmpty(int i, AssetsProvider assetsProvider);
 
-    private static native long nativeLoadFd(int i, FileDescriptor fileDescriptor, String str, int i2, AssetsProvider assetsProvider) throws IOException;
+    private static native long nativeLoadFd(
+            int i, FileDescriptor fileDescriptor, String str, int i2, AssetsProvider assetsProvider)
+            throws IOException;
 
-    private static native long nativeLoadFdOffsets(int i, FileDescriptor fileDescriptor, String str, long j, long j2, int i2, AssetsProvider assetsProvider) throws IOException;
+    private static native long nativeLoadFdOffsets(
+            int i,
+            FileDescriptor fileDescriptor,
+            String str,
+            long j,
+            long j2,
+            int i2,
+            AssetsProvider assetsProvider)
+            throws IOException;
 
     private static native long nativeOpenXml(long j, String str) throws IOException;
 
@@ -69,15 +81,25 @@ public final class ApkAssets {
         return new ApkAssets(0, path, flags, null);
     }
 
-    public static ApkAssets loadFromPath(String path, int flags, AssetsProvider assets) throws IOException {
+    public static ApkAssets loadFromPath(String path, int flags, AssetsProvider assets)
+            throws IOException {
         return new ApkAssets(0, path, flags, assets);
     }
 
-    public static ApkAssets loadFromFd(FileDescriptor fd, String friendlyName, int flags, AssetsProvider assets) throws IOException {
+    public static ApkAssets loadFromFd(
+            FileDescriptor fd, String friendlyName, int flags, AssetsProvider assets)
+            throws IOException {
         return new ApkAssets(0, fd, friendlyName, flags, assets);
     }
 
-    public static ApkAssets loadFromFd(FileDescriptor fd, String friendlyName, long offset, long length, int flags, AssetsProvider assets) throws IOException {
+    public static ApkAssets loadFromFd(
+            FileDescriptor fd,
+            String friendlyName,
+            long offset,
+            long length,
+            int flags,
+            AssetsProvider assets)
+            throws IOException {
         return new ApkAssets(0, fd, friendlyName, offset, length, flags, assets);
     }
 
@@ -85,15 +107,25 @@ public final class ApkAssets {
         return new ApkAssets(1, idmapPath, flags, null);
     }
 
-    public static ApkAssets loadTableFromFd(FileDescriptor fd, String friendlyName, int flags, AssetsProvider assets) throws IOException {
+    public static ApkAssets loadTableFromFd(
+            FileDescriptor fd, String friendlyName, int flags, AssetsProvider assets)
+            throws IOException {
         return new ApkAssets(2, fd, friendlyName, flags, assets);
     }
 
-    public static ApkAssets loadTableFromFd(FileDescriptor fd, String friendlyName, long offset, long length, int flags, AssetsProvider assets) throws IOException {
+    public static ApkAssets loadTableFromFd(
+            FileDescriptor fd,
+            String friendlyName,
+            long offset,
+            long length,
+            int flags,
+            AssetsProvider assets)
+            throws IOException {
         return new ApkAssets(2, fd, friendlyName, offset, length, flags, assets);
     }
 
-    public static ApkAssets loadFromDir(String path, int flags, AssetsProvider assets) throws IOException {
+    public static ApkAssets loadFromDir(String path, int flags, AssetsProvider assets)
+            throws IOException {
         return new ApkAssets(3, path, flags, assets);
     }
 
@@ -101,7 +133,8 @@ public final class ApkAssets {
         return new ApkAssets(flags, assets);
     }
 
-    private ApkAssets(int format, String path, int flags, AssetsProvider assets) throws IOException {
+    private ApkAssets(int format, String path, int flags, AssetsProvider assets)
+            throws IOException {
         Objects.requireNonNull(path, "path");
         this.mFlags = flags;
         this.mNativePtr = nativeLoad(format, path, flags, assets);
@@ -109,7 +142,9 @@ public final class ApkAssets {
         this.mAssets = assets;
     }
 
-    private ApkAssets(int format, FileDescriptor fd, String friendlyName, int flags, AssetsProvider assets) throws IOException {
+    private ApkAssets(
+            int format, FileDescriptor fd, String friendlyName, int flags, AssetsProvider assets)
+            throws IOException {
         Objects.requireNonNull(fd, "fd");
         Objects.requireNonNull(friendlyName, "friendlyName");
         this.mFlags = flags;
@@ -118,11 +153,20 @@ public final class ApkAssets {
         this.mAssets = assets;
     }
 
-    private ApkAssets(int format, FileDescriptor fd, String friendlyName, long offset, long length, int flags, AssetsProvider assets) throws IOException {
+    private ApkAssets(
+            int format,
+            FileDescriptor fd,
+            String friendlyName,
+            long offset,
+            long length,
+            int flags,
+            AssetsProvider assets)
+            throws IOException {
         Objects.requireNonNull(fd, "fd");
         Objects.requireNonNull(friendlyName, "friendlyName");
         this.mFlags = flags;
-        this.mNativePtr = nativeLoadFdOffsets(format, fd, friendlyName, offset, length, flags, assets);
+        this.mNativePtr =
+                nativeLoadFdOffsets(format, fd, friendlyName, offset, length, flags, assets);
         this.mStringBlock = new StringBlock(nativeGetStringBlock(this.mNativePtr), true);
         this.mAssets = assets;
     }

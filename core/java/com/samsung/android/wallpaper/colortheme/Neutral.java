@@ -16,6 +16,5 @@ final class Neutral {
     static final float NEUTRAL2_SAT_DELTA = 0.0f;
     static final float NEUTRAL2_SAT_MAX = 0.0f;
 
-    Neutral() {
-    }
+    Neutral() {}
 }

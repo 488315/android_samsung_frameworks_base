@@ -17,7 +17,11 @@ public class BasicOCSPResponse extends ASN1Object {
     private AlgorithmIdentifier signatureAlgorithm;
     private ResponseData tbsResponseData;
 
-    public BasicOCSPResponse(ResponseData tbsResponseData, AlgorithmIdentifier signatureAlgorithm, DERBitString signature, ASN1Sequence certs) {
+    public BasicOCSPResponse(
+            ResponseData tbsResponseData,
+            AlgorithmIdentifier signatureAlgorithm,
+            DERBitString signature,
+            ASN1Sequence certs) {
         this.tbsResponseData = tbsResponseData;
         this.signatureAlgorithm = signatureAlgorithm;
         this.signature = signature;
@@ -63,7 +67,8 @@ public class BasicOCSPResponse extends ASN1Object {
         return this.certs;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(4);
         v.add(this.tbsResponseData);

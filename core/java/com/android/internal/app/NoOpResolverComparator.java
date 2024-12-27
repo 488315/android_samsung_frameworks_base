@@ -5,8 +5,9 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Message;
 import android.os.UserHandle;
-import com.android.internal.app.ResolverActivity;
+
 import com.android.internal.app.chooser.TargetInfo;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -16,7 +17,8 @@ import java.util.function.ToDoubleFunction;
 public class NoOpResolverComparator extends AbstractResolverComparator {
     private List<ResolveInfo> mOriginalTargetOrder;
 
-    public NoOpResolverComparator(Context launchedFromContext, Intent intent, List<UserHandle> targetUserSpaceList) {
+    public NoOpResolverComparator(
+            Context launchedFromContext, Intent intent, List<UserHandle> targetUserSpaceList) {
         super(launchedFromContext, intent, targetUserSpaceList);
         this.mOriginalTargetOrder = null;
     }
@@ -32,14 +34,19 @@ public class NoOpResolverComparator extends AbstractResolverComparator {
 
     @Override // com.android.internal.app.AbstractResolverComparator
     public int compare(ResolveInfo lhs, ResolveInfo rhs) {
-        Comparator<ResolveInfo> c = Comparator.comparingDouble(new ToDoubleFunction() { // from class: com.android.internal.app.NoOpResolverComparator$$ExternalSyntheticLambda0
-            @Override // java.util.function.ToDoubleFunction
-            public final double applyAsDouble(Object obj) {
-                double lambda$compare$0;
-                lambda$compare$0 = NoOpResolverComparator.this.lambda$compare$0((ResolveInfo) obj);
-                return lambda$compare$0;
-            }
-        });
+        Comparator<ResolveInfo> c =
+                Comparator.comparingDouble(
+                        new ToDoubleFunction() { // from class:
+                                                 // com.android.internal.app.NoOpResolverComparator$$ExternalSyntheticLambda0
+                            @Override // java.util.function.ToDoubleFunction
+                            public final double applyAsDouble(Object obj) {
+                                double lambda$compare$0;
+                                lambda$compare$0 =
+                                        NoOpResolverComparator.this.lambda$compare$0(
+                                                (ResolveInfo) obj);
+                                return lambda$compare$0;
+                            }
+                        });
         return c.reversed().compare(lhs, rhs);
     }
 
@@ -49,8 +56,7 @@ public class NoOpResolverComparator extends AbstractResolverComparator {
     }
 
     @Override // com.android.internal.app.AbstractResolverComparator
-    public void handleResultMessage(Message message) {
-    }
+    public void handleResultMessage(Message message) {}
 
     /* renamed from: getScore, reason: merged with bridge method [inline-methods] */
     public float lambda$compare$0(ResolveInfo resolveInfo) {

@@ -2,7 +2,9 @@ package android.view.textservice;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -19,29 +21,31 @@ public final class SuggestionsInfo implements Parcelable {
     private final int mSuggestionsAttributes;
     private final boolean mSuggestionsAvailable;
     private static final String[] EMPTY = (String[]) ArrayUtils.emptyArray(String.class);
-    public static final Parcelable.Creator<SuggestionsInfo> CREATOR = new Parcelable.Creator<SuggestionsInfo>() { // from class: android.view.textservice.SuggestionsInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SuggestionsInfo createFromParcel(Parcel source) {
-            return new SuggestionsInfo(source);
-        }
+    public static final Parcelable.Creator<SuggestionsInfo> CREATOR =
+            new Parcelable.Creator<
+                    SuggestionsInfo>() { // from class: android.view.textservice.SuggestionsInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SuggestionsInfo createFromParcel(Parcel source) {
+                    return new SuggestionsInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SuggestionsInfo[] newArray(int size) {
-            return new SuggestionsInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SuggestionsInfo[] newArray(int size) {
+                    return new SuggestionsInfo[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResultAttrs {
-    }
+    public @interface ResultAttrs {}
 
     public SuggestionsInfo(int suggestionsAttributes, String[] suggestions) {
         this(suggestionsAttributes, suggestions, 0, 0);
     }
 
-    public SuggestionsInfo(int suggestionsAttributes, String[] suggestions, int cookie, int sequence) {
+    public SuggestionsInfo(
+            int suggestionsAttributes, String[] suggestions, int cookie, int sequence) {
         if (suggestions == null) {
             this.mSuggestions = EMPTY;
             this.mSuggestionsAvailable = false;

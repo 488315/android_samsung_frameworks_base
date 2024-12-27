@@ -3,26 +3,29 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.telephony.AccessNetworkConstants;
 import android.text.TextUtils;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class EmergencyRegistrationResult implements Parcelable {
-    public static final Parcelable.Creator<EmergencyRegistrationResult> CREATOR = new Parcelable.Creator<EmergencyRegistrationResult>() { // from class: android.telephony.EmergencyRegistrationResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EmergencyRegistrationResult createFromParcel(Parcel in) {
-            return new EmergencyRegistrationResult(in);
-        }
+    public static final Parcelable.Creator<EmergencyRegistrationResult> CREATOR =
+            new Parcelable.Creator<
+                    EmergencyRegistrationResult>() { // from class:
+                                                     // android.telephony.EmergencyRegistrationResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EmergencyRegistrationResult createFromParcel(Parcel in) {
+                    return new EmergencyRegistrationResult(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EmergencyRegistrationResult[] newArray(int size) {
-            return new EmergencyRegistrationResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EmergencyRegistrationResult[] newArray(int size) {
+                    return new EmergencyRegistrationResult[size];
+                }
+            };
     private int mAccessNetworkType;
     private String mCountryIso;
     private int mDomain;
@@ -34,7 +37,17 @@ public final class EmergencyRegistrationResult implements Parcelable {
     private int mNwProvidedEmf;
     private int mRegState;
 
-    public EmergencyRegistrationResult(int accessNetwork, int regState, int domain, boolean isVopsSupported, boolean isEmcBearerSupported, int emc, int emf, String mcc, String mnc, String iso) {
+    public EmergencyRegistrationResult(
+            int accessNetwork,
+            int regState,
+            int domain,
+            boolean isVopsSupported,
+            boolean isEmcBearerSupported,
+            int emc,
+            int emf,
+            String mcc,
+            String mnc,
+            String iso) {
         this.mAccessNetworkType = accessNetwork;
         this.mRegState = regState;
         this.mDomain = domain;
@@ -105,7 +118,27 @@ public final class EmergencyRegistrationResult implements Parcelable {
     }
 
     public String toString() {
-        return "{ accessNetwork=" + AccessNetworkConstants.AccessNetworkType.toString(this.mAccessNetworkType) + ", regState=" + NetworkRegistrationInfo.registrationStateToString(this.mRegState) + ", domain=" + NetworkRegistrationInfo.domainToString(this.mDomain) + ", vops=" + this.mIsVopsSupported + ", emcBearer=" + this.mIsEmcBearerSupported + ", emc=" + this.mNwProvidedEmc + ", emf=" + this.mNwProvidedEmf + ", mcc=" + this.mMcc + ", mnc=" + this.mMnc + ", iso=" + this.mCountryIso + " }";
+        return "{ accessNetwork="
+                + AccessNetworkConstants.AccessNetworkType.toString(this.mAccessNetworkType)
+                + ", regState="
+                + NetworkRegistrationInfo.registrationStateToString(this.mRegState)
+                + ", domain="
+                + NetworkRegistrationInfo.domainToString(this.mDomain)
+                + ", vops="
+                + this.mIsVopsSupported
+                + ", emcBearer="
+                + this.mIsEmcBearerSupported
+                + ", emc="
+                + this.mNwProvidedEmc
+                + ", emf="
+                + this.mNwProvidedEmf
+                + ", mcc="
+                + this.mMcc
+                + ", mnc="
+                + this.mMnc
+                + ", iso="
+                + this.mCountryIso
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -116,14 +149,33 @@ public final class EmergencyRegistrationResult implements Parcelable {
             return false;
         }
         EmergencyRegistrationResult that = (EmergencyRegistrationResult) o;
-        if (this.mAccessNetworkType == that.mAccessNetworkType && this.mRegState == that.mRegState && this.mDomain == that.mDomain && this.mIsVopsSupported == that.mIsVopsSupported && this.mIsEmcBearerSupported == that.mIsEmcBearerSupported && this.mNwProvidedEmc == that.mNwProvidedEmc && this.mNwProvidedEmf == that.mNwProvidedEmf && TextUtils.equals(this.mMcc, that.mMcc) && TextUtils.equals(this.mMnc, that.mMnc) && TextUtils.equals(this.mCountryIso, that.mCountryIso)) {
+        if (this.mAccessNetworkType == that.mAccessNetworkType
+                && this.mRegState == that.mRegState
+                && this.mDomain == that.mDomain
+                && this.mIsVopsSupported == that.mIsVopsSupported
+                && this.mIsEmcBearerSupported == that.mIsEmcBearerSupported
+                && this.mNwProvidedEmc == that.mNwProvidedEmc
+                && this.mNwProvidedEmf == that.mNwProvidedEmf
+                && TextUtils.equals(this.mMcc, that.mMcc)
+                && TextUtils.equals(this.mMnc, that.mMnc)
+                && TextUtils.equals(this.mCountryIso, that.mCountryIso)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mAccessNetworkType), Integer.valueOf(this.mRegState), Integer.valueOf(this.mDomain), Boolean.valueOf(this.mIsVopsSupported), Boolean.valueOf(this.mIsEmcBearerSupported), Integer.valueOf(this.mNwProvidedEmc), Integer.valueOf(this.mNwProvidedEmf), this.mMcc, this.mMnc, this.mCountryIso);
+        return Objects.hash(
+                Integer.valueOf(this.mAccessNetworkType),
+                Integer.valueOf(this.mRegState),
+                Integer.valueOf(this.mDomain),
+                Boolean.valueOf(this.mIsVopsSupported),
+                Boolean.valueOf(this.mIsEmcBearerSupported),
+                Integer.valueOf(this.mNwProvidedEmc),
+                Integer.valueOf(this.mNwProvidedEmf),
+                this.mMcc,
+                this.mMnc,
+                this.mCountryIso);
     }
 
     @Override // android.os.Parcelable

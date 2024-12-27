@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ISemFingerprintAodController extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.bio.fingerprint.ISemFingerprintAodController";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.bio.fingerprint.ISemFingerprintAodController";
 
     void hideAodScreen() throws RemoteException;
 
@@ -22,24 +23,19 @@ public interface ISemFingerprintAodController extends IInterface {
 
     public static class Default implements ISemFingerprintAodController {
         @Override // com.samsung.android.bio.fingerprint.ISemFingerprintAodController
-        public void turnOnDozeMode() throws RemoteException {
-        }
+        public void turnOnDozeMode() throws RemoteException {}
 
         @Override // com.samsung.android.bio.fingerprint.ISemFingerprintAodController
-        public void turnOffDozeMode() throws RemoteException {
-        }
+        public void turnOffDozeMode() throws RemoteException {}
 
         @Override // com.samsung.android.bio.fingerprint.ISemFingerprintAodController
-        public void turnOnDozeHlpmMode() throws RemoteException {
-        }
+        public void turnOnDozeHlpmMode() throws RemoteException {}
 
         @Override // com.samsung.android.bio.fingerprint.ISemFingerprintAodController
-        public void turnOffDozeHlpmMode() throws RemoteException {
-        }
+        public void turnOffDozeHlpmMode() throws RemoteException {}
 
         @Override // com.samsung.android.bio.fingerprint.ISemFingerprintAodController
-        public void hideAodScreen() throws RemoteException {
-        }
+        public void hideAodScreen() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +43,7 @@ public interface ISemFingerprintAodController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemFingerprintAodController {
+    public abstract static class Stub extends Binder implements ISemFingerprintAodController {
         static final int TRANSACTION_hideAodScreen = 5;
         static final int TRANSACTION_turnOffDozeHlpmMode = 4;
         static final int TRANSACTION_turnOffDozeMode = 2;
@@ -97,7 +93,8 @@ public interface ISemFingerprintAodController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemFingerprintAodController.DESCRIPTOR);
             }

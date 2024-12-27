@@ -22,15 +22,18 @@ import android.util.Log;
 import android.util.StateSet;
 import android.util.TypedValue;
 import android.util.Xml;
+
 import com.android.internal.R;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public abstract class Drawable {
@@ -74,7 +77,10 @@ public abstract class Drawable {
             this.mBounds = rect;
             oldBounds = rect;
         }
-        if (oldBounds.left != left || oldBounds.top != top || oldBounds.right != right || oldBounds.bottom != bottom) {
+        if (oldBounds.left != left
+                || oldBounds.top != top
+                || oldBounds.right != right
+                || oldBounds.bottom != bottom) {
             if (!oldBounds.isEmpty()) {
                 invalidateSelf();
             }
@@ -115,11 +121,9 @@ public abstract class Drawable {
     }
 
     @Deprecated
-    public void setDither(boolean dither) {
-    }
+    public void setDither(boolean dither) {}
 
-    public void setFilterBitmap(boolean filter) {
-    }
+    public void setFilterBitmap(boolean filter) {}
 
     public boolean isFilterBitmap() {
         return false;
@@ -177,8 +181,7 @@ public abstract class Drawable {
         return 255;
     }
 
-    public void setXfermode(Xfermode mode) {
-    }
+    public void setXfermode(Xfermode mode) {}
 
     @Deprecated
     public void setColorFilter(int color, PorterDuff.Mode mode) {
@@ -195,8 +198,7 @@ public abstract class Drawable {
         setTintList(ColorStateList.valueOf(tintColor));
     }
 
-    public void setTintList(ColorStateList tint) {
-    }
+    public void setTintList(ColorStateList tint) {}
 
     public void setTintMode(PorterDuff.Mode tintMode) {
         if (!this.mSetTintModeInvoked) {
@@ -224,11 +226,9 @@ public abstract class Drawable {
         setColorFilter(null);
     }
 
-    public void setHotspot(float x, float y) {
-    }
+    public void setHotspot(float x, float y) {}
 
-    public void setHotspotBounds(int left, int top, int right, int bottom) {
-    }
+    public void setHotspotBounds(int left, int top, int right, int bottom) {}
 
     public void getHotspotBounds(Rect outRect) {
         outRect.set(getBounds());
@@ -258,8 +258,7 @@ public abstract class Drawable {
         return this.mStateSet;
     }
 
-    public void jumpToCurrentState() {
-    }
+    public void jumpToCurrentState() {}
 
     public Drawable getCurrent() {
         return this;
@@ -290,15 +289,13 @@ public abstract class Drawable {
         return this.mVisible;
     }
 
-    public void setAutoMirrored(boolean mirrored) {
-    }
+    public void setAutoMirrored(boolean mirrored) {}
 
     public boolean isAutoMirrored() {
         return false;
     }
 
-    public void applyTheme(Resources.Theme t) {
-    }
+    public void applyTheme(Resources.Theme t) {}
 
     public boolean canApplyTheme() {
         return false;
@@ -332,8 +329,7 @@ public abstract class Drawable {
         return false;
     }
 
-    protected void onBoundsChange(Rect bounds) {
-    }
+    protected void onBoundsChange(Rect bounds) {}
 
     public int getIntrinsicWidth() {
         return -1;
@@ -377,8 +373,7 @@ public abstract class Drawable {
         return this;
     }
 
-    public void clearMutated() {
-    }
+    public void clearMutated() {}
 
     public static Drawable createFromStream(InputStream is, String srcName) {
         Trace.traceBegin(8192L, srcName != null ? srcName : "Unknown drawable");
@@ -389,7 +384,8 @@ public abstract class Drawable {
         }
     }
 
-    public static Drawable createFromResourceStream(Resources res, TypedValue value, InputStream is, String srcName) {
+    public static Drawable createFromResourceStream(
+            Resources res, TypedValue value, InputStream is, String srcName) {
         Trace.traceBegin(8192L, srcName != null ? srcName : "Unknown drawable");
         try {
             return createFromResourceStream(res, value, is, srcName, null);
@@ -399,14 +395,19 @@ public abstract class Drawable {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:45:0x001b, code lost:
-    
-        if (r13.endsWith(".spr") == false) goto L32;
-     */
+
+       if (r13.endsWith(".spr") == false) goto L32;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.graphics.drawable.Drawable createFromResourceStream(android.content.res.Resources r10, android.util.TypedValue r11, java.io.InputStream r12, java.lang.String r13, android.graphics.BitmapFactory.Options r14) {
+    public static android.graphics.drawable.Drawable createFromResourceStream(
+            android.content.res.Resources r10,
+            android.util.TypedValue r11,
+            java.io.InputStream r12,
+            java.lang.String r13,
+            android.graphics.BitmapFactory.Options r14) {
         /*
             r0 = 0
             if (r12 != 0) goto L4
@@ -505,7 +506,11 @@ public abstract class Drawable {
         Lb6:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.drawable.Drawable.createFromResourceStream(android.content.res.Resources, android.util.TypedValue, java.io.InputStream, java.lang.String, android.graphics.BitmapFactory$Options):android.graphics.drawable.Drawable");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.graphics.drawable.Drawable.createFromResourceStream(android.content.res.Resources,"
+                    + " android.util.TypedValue, java.io.InputStream, java.lang.String,"
+                    + " android.graphics.BitmapFactory$Options):android.graphics.drawable.Drawable");
     }
 
     private static Drawable getBitmapDrawable(Resources res, TypedValue value, InputStream is) {
@@ -522,41 +527,55 @@ public abstract class Drawable {
             } else {
                 source = ImageDecoder.createSource(res, is);
             }
-            return ImageDecoder.decodeDrawable(source, new ImageDecoder.OnHeaderDecodedListener() { // from class: android.graphics.drawable.Drawable$$ExternalSyntheticLambda0
-                @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
-                public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source2) {
-                    Drawable.lambda$getBitmapDrawable$1(imageDecoder, imageInfo, source2);
-                }
-            });
+            return ImageDecoder.decodeDrawable(
+                    source,
+                    new ImageDecoder.OnHeaderDecodedListener() { // from class:
+                        // android.graphics.drawable.Drawable$$ExternalSyntheticLambda0
+                        @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
+                        public final void onHeaderDecoded(
+                                ImageDecoder imageDecoder,
+                                ImageDecoder.ImageInfo imageInfo,
+                                ImageDecoder.Source source2) {
+                            Drawable.lambda$getBitmapDrawable$1(imageDecoder, imageInfo, source2);
+                        }
+                    });
         } catch (IOException e) {
             Log.e("Drawable", "Unable to decode stream: " + e);
             return null;
         }
     }
 
-    static /* synthetic */ void lambda$getBitmapDrawable$1(ImageDecoder decoder, ImageDecoder.ImageInfo info, ImageDecoder.Source src) {
+    static /* synthetic */ void lambda$getBitmapDrawable$1(
+            ImageDecoder decoder, ImageDecoder.ImageInfo info, ImageDecoder.Source src) {
         decoder.setAllocator(1);
-        decoder.setOnPartialImageListener(new ImageDecoder.OnPartialImageListener() { // from class: android.graphics.drawable.Drawable$$ExternalSyntheticLambda1
-            @Override // android.graphics.ImageDecoder.OnPartialImageListener
-            public final boolean onPartialImage(ImageDecoder.DecodeException decodeException) {
-                return Drawable.lambda$getBitmapDrawable$0(decodeException);
-            }
-        });
+        decoder.setOnPartialImageListener(
+                new ImageDecoder.OnPartialImageListener() { // from class:
+                    // android.graphics.drawable.Drawable$$ExternalSyntheticLambda1
+                    @Override // android.graphics.ImageDecoder.OnPartialImageListener
+                    public final boolean onPartialImage(
+                            ImageDecoder.DecodeException decodeException) {
+                        return Drawable.lambda$getBitmapDrawable$0(decodeException);
+                    }
+                });
     }
 
     static /* synthetic */ boolean lambda$getBitmapDrawable$0(ImageDecoder.DecodeException e) {
         return e.getError() == 2;
     }
 
-    public static Drawable createFromXml(Resources r, XmlPullParser parser) throws XmlPullParserException, IOException {
+    public static Drawable createFromXml(Resources r, XmlPullParser parser)
+            throws XmlPullParserException, IOException {
         return createFromXml(r, parser, null);
     }
 
-    public static Drawable createFromXml(Resources r, XmlPullParser parser, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public static Drawable createFromXml(Resources r, XmlPullParser parser, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         return createFromXmlForDensity(r, parser, 0, theme);
     }
 
-    public static Drawable createFromXmlForDensity(Resources r, XmlPullParser parser, int density, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public static Drawable createFromXmlForDensity(
+            Resources r, XmlPullParser parser, int density, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         int type;
         AttributeSet attrs = Xml.asAttributeSet(parser);
         do {
@@ -575,16 +594,26 @@ public abstract class Drawable {
         return drawable;
     }
 
-    public static Drawable createFromXmlInner(Resources r, XmlPullParser parser, AttributeSet attrs) throws XmlPullParserException, IOException {
+    public static Drawable createFromXmlInner(Resources r, XmlPullParser parser, AttributeSet attrs)
+            throws XmlPullParserException, IOException {
         return createFromXmlInner(r, parser, attrs, null);
     }
 
-    public static Drawable createFromXmlInner(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public static Drawable createFromXmlInner(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         return createFromXmlInnerForDensity(r, parser, attrs, 0, theme);
     }
 
-    static Drawable createFromXmlInnerForDensity(Resources r, XmlPullParser parser, AttributeSet attrs, int density, Resources.Theme theme) throws XmlPullParserException, IOException {
-        return r.getDrawableInflater().inflateFromXmlForDensity(parser.getName(), parser, attrs, density, theme);
+    static Drawable createFromXmlInnerForDensity(
+            Resources r,
+            XmlPullParser parser,
+            AttributeSet attrs,
+            int density,
+            Resources.Theme theme)
+            throws XmlPullParserException, IOException {
+        return r.getDrawableInflater()
+                .inflateFromXmlForDensity(parser.getName(), parser, attrs, density, theme);
     }
 
     public static Drawable createFromPath(String pathName) {
@@ -613,17 +642,21 @@ public abstract class Drawable {
         }
     }
 
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs) throws XmlPullParserException, IOException {
+    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs)
+            throws XmlPullParserException, IOException {
         inflate(r, parser, attrs, null);
     }
 
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.Drawable);
         this.mVisible = a.getBoolean(0, this.mVisible);
         a.recycle();
     }
 
-    void inflateWithAttributes(Resources r, XmlPullParser parser, TypedArray attrs, int visibleAttr) throws XmlPullParserException, IOException {
+    void inflateWithAttributes(Resources r, XmlPullParser parser, TypedArray attrs, int visibleAttr)
+            throws XmlPullParserException, IOException {
         this.mVisible = attrs.getBoolean(visibleAttr, this.mVisible);
     }
 
@@ -631,7 +664,7 @@ public abstract class Drawable {
         this.mSrcDensityOverride = density;
     }
 
-    public static abstract class ConstantState {
+    public abstract static class ConstantState {
         public abstract int getChangingConfigurations();
 
         public abstract Drawable newDrawable();
@@ -653,36 +686,44 @@ public abstract class Drawable {
         return null;
     }
 
-    private static Drawable drawableFromBitmap(Resources res, Bitmap bm, byte[] np, Rect pad, Rect layoutBounds, String srcName) {
+    private static Drawable drawableFromBitmap(
+            Resources res, Bitmap bm, byte[] np, Rect pad, Rect layoutBounds, String srcName) {
         if (np != null) {
             return new NinePatchDrawable(res, bm, np, pad, layoutBounds, srcName);
         }
         return new BitmapDrawable(res, bm);
     }
 
-    PorterDuffColorFilter updateTintFilter(PorterDuffColorFilter tintFilter, ColorStateList tint, PorterDuff.Mode tintMode) {
+    PorterDuffColorFilter updateTintFilter(
+            PorterDuffColorFilter tintFilter, ColorStateList tint, PorterDuff.Mode tintMode) {
         if (tint == null || tintMode == null) {
             return null;
         }
         int color = tint.getColorForState(getState(), 0);
-        if (tintFilter == null || tintFilter.getColor() != color || tintFilter.getMode() != tintMode) {
+        if (tintFilter == null
+                || tintFilter.getColor() != color
+                || tintFilter.getMode() != tintMode) {
             return new PorterDuffColorFilter(color, tintMode);
         }
         return tintFilter;
     }
 
-    BlendModeColorFilter updateBlendModeFilter(BlendModeColorFilter blendFilter, ColorStateList tint, BlendMode blendMode) {
+    BlendModeColorFilter updateBlendModeFilter(
+            BlendModeColorFilter blendFilter, ColorStateList tint, BlendMode blendMode) {
         if (tint == null || blendMode == null) {
             return null;
         }
         int color = tint.getColorForState(getState(), 0);
-        if (blendFilter == null || blendFilter.getColor() != color || blendFilter.getMode() != blendMode) {
+        if (blendFilter == null
+                || blendFilter.getColor() != color
+                || blendFilter.getMode() != blendMode) {
             return new BlendModeColorFilter(color, blendMode);
         }
         return blendFilter;
     }
 
-    protected static TypedArray obtainAttributes(Resources res, Resources.Theme theme, AttributeSet set, int[] attrs) {
+    protected static TypedArray obtainAttributes(
+            Resources res, Resources.Theme theme, AttributeSet set, int[] attrs) {
         if (theme == null) {
             return res.obtainAttributes(set, attrs);
         }

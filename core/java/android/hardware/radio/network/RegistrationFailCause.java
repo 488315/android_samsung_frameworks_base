@@ -23,8 +23,7 @@ public @interface RegistrationFailCause {
     public static final int MESSAGE_TYPE_NON_EXISTENT_OR_NOT_IMPLEMENTED = 97;
     public static final int MESSAGE_TYPE_NOT_COMPATIBLE_WITH_PROTOCOL_STATE = 98;
 
-    @Deprecated
-    public static final int MSC_TEMPORARILY_NOT_REACHABLE = 15;
+    @Deprecated public static final int MSC_TEMPORARILY_NOT_REACHABLE = 15;
     public static final int MSC_TEMP_NOT_REACHABLE = 16;
     public static final int MS_IDENTITY_CANNOT_BE_DERIVED_BY_NETWORK = 9;
     public static final int NETWORK_FAILURE = 17;

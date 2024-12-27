@@ -11,6 +11,7 @@ import android.os.ResultReceiver;
 import android.telecom.CallEndpoint;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.ims.ImsCallProfile;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -31,7 +32,8 @@ public interface IInCallAdapter extends IInterface {
 
     void exitBackgroundAudioProcessing(String str, boolean z) throws RemoteException;
 
-    void handoverTo(String str, PhoneAccountHandle phoneAccountHandle, int i, Bundle bundle) throws RemoteException;
+    void handoverTo(String str, PhoneAccountHandle phoneAccountHandle, int i, Bundle bundle)
+            throws RemoteException;
 
     void holdCall(String str) throws RemoteException;
 
@@ -39,7 +41,8 @@ public interface IInCallAdapter extends IInterface {
 
     void mute(boolean z) throws RemoteException;
 
-    void phoneAccountSelected(String str, PhoneAccountHandle phoneAccountHandle, boolean z) throws RemoteException;
+    void phoneAccountSelected(String str, PhoneAccountHandle phoneAccountHandle, boolean z)
+            throws RemoteException;
 
     void playDtmfTone(String str, char c) throws RemoteException;
 
@@ -55,7 +58,8 @@ public interface IInCallAdapter extends IInterface {
 
     void removeExtras(String str, List<String> list) throws RemoteException;
 
-    void requestCallEndpointChange(CallEndpoint callEndpoint, ResultReceiver resultReceiver) throws RemoteException;
+    void requestCallEndpointChange(CallEndpoint callEndpoint, ResultReceiver resultReceiver)
+            throws RemoteException;
 
     void respondToRttRequest(String str, int i, boolean z) throws RemoteException;
 
@@ -85,140 +89,118 @@ public interface IInCallAdapter extends IInterface {
 
     public static class Default implements IInCallAdapter {
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void answerCall(String callId, int videoState) throws RemoteException {
-        }
+        public void answerCall(String callId, int videoState) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void deflectCall(String callId, Uri address) throws RemoteException {
-        }
+        public void deflectCall(String callId, Uri address) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void rejectCall(String callId, boolean rejectWithMessage, String textMessage) throws RemoteException {
-        }
+        public void rejectCall(String callId, boolean rejectWithMessage, String textMessage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void rejectCallWithReason(String callId, int rejectReason) throws RemoteException {
-        }
+        public void rejectCallWithReason(String callId, int rejectReason) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void transferCall(String callId, Uri targetNumber, boolean isConfirmationRequired) throws RemoteException {
-        }
+        public void transferCall(String callId, Uri targetNumber, boolean isConfirmationRequired)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void consultativeTransfer(String callId, String otherCallId) throws RemoteException {
-        }
+        public void consultativeTransfer(String callId, String otherCallId)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void disconnectCall(String callId) throws RemoteException {
-        }
+        public void disconnectCall(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void holdCall(String callId) throws RemoteException {
-        }
+        public void holdCall(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void unholdCall(String callId) throws RemoteException {
-        }
+        public void unholdCall(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void mute(boolean shouldMute) throws RemoteException {
-        }
+        public void mute(boolean shouldMute) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void setAudioRoute(int route, String bluetoothAddress) throws RemoteException {
-        }
+        public void setAudioRoute(int route, String bluetoothAddress) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void requestCallEndpointChange(CallEndpoint endpoint, ResultReceiver callback) throws RemoteException {
-        }
+        public void requestCallEndpointChange(CallEndpoint endpoint, ResultReceiver callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void enterBackgroundAudioProcessing(String callId) throws RemoteException {
-        }
+        public void enterBackgroundAudioProcessing(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void exitBackgroundAudioProcessing(String callId, boolean shouldRing) throws RemoteException {
-        }
+        public void exitBackgroundAudioProcessing(String callId, boolean shouldRing)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void playDtmfTone(String callId, char digit) throws RemoteException {
-        }
+        public void playDtmfTone(String callId, char digit) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void stopDtmfTone(String callId) throws RemoteException {
-        }
+        public void stopDtmfTone(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void postDialContinue(String callId, boolean proceed) throws RemoteException {
-        }
+        public void postDialContinue(String callId, boolean proceed) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void phoneAccountSelected(String callId, PhoneAccountHandle accountHandle, boolean setDefault) throws RemoteException {
-        }
+        public void phoneAccountSelected(
+                String callId, PhoneAccountHandle accountHandle, boolean setDefault)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void conference(String callId, String otherCallId) throws RemoteException {
-        }
+        public void conference(String callId, String otherCallId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void splitFromConference(String callId) throws RemoteException {
-        }
+        public void splitFromConference(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void mergeConference(String callId) throws RemoteException {
-        }
+        public void mergeConference(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void swapConference(String callId) throws RemoteException {
-        }
+        public void swapConference(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void addConferenceParticipants(String callId, List<Uri> participants) throws RemoteException {
-        }
+        public void addConferenceParticipants(String callId, List<Uri> participants)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void turnOnProximitySensor() throws RemoteException {
-        }
+        public void turnOnProximitySensor() throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void turnOffProximitySensor(boolean screenOnImmediately) throws RemoteException {
-        }
+        public void turnOffProximitySensor(boolean screenOnImmediately) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void pullExternalCall(String callId) throws RemoteException {
-        }
+        public void pullExternalCall(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void sendCallEvent(String callId, String event, int targetSdkVer, Bundle extras) throws RemoteException {
-        }
+        public void sendCallEvent(String callId, String event, int targetSdkVer, Bundle extras)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void putExtras(String callId, Bundle extras) throws RemoteException {
-        }
+        public void putExtras(String callId, Bundle extras) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void removeExtras(String callId, List<String> keys) throws RemoteException {
-        }
+        public void removeExtras(String callId, List<String> keys) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void sendRttRequest(String callId) throws RemoteException {
-        }
+        public void sendRttRequest(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void respondToRttRequest(String callId, int id, boolean accept) throws RemoteException {
-        }
+        public void respondToRttRequest(String callId, int id, boolean accept)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void stopRtt(String callId) throws RemoteException {
-        }
+        public void stopRtt(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void setRttMode(String callId, int mode) throws RemoteException {
-        }
+        public void setRttMode(String callId, int mode) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IInCallAdapter
-        public void handoverTo(String callId, PhoneAccountHandle destAcct, int videoState, Bundle extras) throws RemoteException {
-        }
+        public void handoverTo(
+                String callId, PhoneAccountHandle destAcct, int videoState, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -226,7 +208,7 @@ public interface IInCallAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInCallAdapter {
+    public abstract static class Stub extends Binder implements IInCallAdapter {
         public static final String DESCRIPTOR = "com.android.internal.telecom.IInCallAdapter";
         static final int TRANSACTION_addConferenceParticipants = 23;
         static final int TRANSACTION_answerCall = 1;
@@ -364,7 +346,8 @@ public interface IInCallAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -438,8 +421,10 @@ public interface IInCallAdapter extends IInterface {
                     setAudioRoute(_arg011, _arg17);
                     return true;
                 case 12:
-                    CallEndpoint _arg012 = (CallEndpoint) data.readTypedObject(CallEndpoint.CREATOR);
-                    ResultReceiver _arg18 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    CallEndpoint _arg012 =
+                            (CallEndpoint) data.readTypedObject(CallEndpoint.CREATOR);
+                    ResultReceiver _arg18 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     requestCallEndpointChange(_arg012, _arg18);
                     return true;
@@ -473,7 +458,8 @@ public interface IInCallAdapter extends IInterface {
                     return true;
                 case 18:
                     String _arg018 = data.readString();
-                    PhoneAccountHandle _arg112 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg112 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     boolean _arg23 = data.readBoolean();
                     data.enforceNoDataAvail();
                     phoneAccountSelected(_arg018, _arg112, _arg23);
@@ -563,7 +549,8 @@ public interface IInCallAdapter extends IInterface {
                     return true;
                 case 34:
                     String _arg033 = data.readString();
-                    PhoneAccountHandle _arg120 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg120 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     int _arg26 = data.readInt();
                     Bundle _arg32 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
@@ -617,7 +604,8 @@ public interface IInCallAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallAdapter
-            public void rejectCall(String callId, boolean rejectWithMessage, String textMessage) throws RemoteException {
+            public void rejectCall(String callId, boolean rejectWithMessage, String textMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -631,7 +619,8 @@ public interface IInCallAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallAdapter
-            public void rejectCallWithReason(String callId, int rejectReason) throws RemoteException {
+            public void rejectCallWithReason(String callId, int rejectReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -644,7 +633,9 @@ public interface IInCallAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallAdapter
-            public void transferCall(String callId, Uri targetNumber, boolean isConfirmationRequired) throws RemoteException {
+            public void transferCall(
+                    String callId, Uri targetNumber, boolean isConfirmationRequired)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -658,7 +649,8 @@ public interface IInCallAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallAdapter
-            public void consultativeTransfer(String callId, String otherCallId) throws RemoteException {
+            public void consultativeTransfer(String callId, String otherCallId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -732,7 +724,8 @@ public interface IInCallAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallAdapter
-            public void requestCallEndpointChange(CallEndpoint endpoint, ResultReceiver callback) throws RemoteException {
+            public void requestCallEndpointChange(CallEndpoint endpoint, ResultReceiver callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -757,7 +750,8 @@ public interface IInCallAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallAdapter
-            public void exitBackgroundAudioProcessing(String callId, boolean shouldRing) throws RemoteException {
+            public void exitBackgroundAudioProcessing(String callId, boolean shouldRing)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -808,7 +802,9 @@ public interface IInCallAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallAdapter
-            public void phoneAccountSelected(String callId, PhoneAccountHandle accountHandle, boolean setDefault) throws RemoteException {
+            public void phoneAccountSelected(
+                    String callId, PhoneAccountHandle accountHandle, boolean setDefault)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -871,7 +867,8 @@ public interface IInCallAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallAdapter
-            public void addConferenceParticipants(String callId, List<Uri> participants) throws RemoteException {
+            public void addConferenceParticipants(String callId, List<Uri> participants)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -919,7 +916,8 @@ public interface IInCallAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallAdapter
-            public void sendCallEvent(String callId, String event, int targetSdkVer, Bundle extras) throws RemoteException {
+            public void sendCallEvent(String callId, String event, int targetSdkVer, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -972,7 +970,8 @@ public interface IInCallAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallAdapter
-            public void respondToRttRequest(String callId, int id, boolean accept) throws RemoteException {
+            public void respondToRttRequest(String callId, int id, boolean accept)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1011,7 +1010,9 @@ public interface IInCallAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IInCallAdapter
-            public void handoverTo(String callId, PhoneAccountHandle destAcct, int videoState, Bundle extras) throws RemoteException {
+            public void handoverTo(
+                    String callId, PhoneAccountHandle destAcct, int videoState, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -4,8 +4,7 @@ package com.android.internal.dynamicanimation.animation;
 public class FloatValueHolder {
     private float mValue = 0.0f;
 
-    public FloatValueHolder() {
-    }
+    public FloatValueHolder() {}
 
     public FloatValueHolder(float value) {
         setValue(value);

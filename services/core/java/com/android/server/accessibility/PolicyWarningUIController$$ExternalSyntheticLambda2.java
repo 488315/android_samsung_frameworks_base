@@ -4,8 +4,9 @@ import android.content.ComponentName;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
 import com.android.internal.util.function.pooled.PooledLambda;
-import com.android.server.accessibility.PolicyWarningUIController;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -15,7 +16,8 @@ import java.util.function.BiConsumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class PolicyWarningUIController$$ExternalSyntheticLambda2 implements BiConsumer {
+public final /* synthetic */ class PolicyWarningUIController$$ExternalSyntheticLambda2
+        implements BiConsumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -31,18 +33,33 @@ public final /* synthetic */ class PolicyWarningUIController$$ExternalSyntheticL
         Object obj3 = this.f$0;
         switch (i) {
             case 0:
-                PolicyWarningUIController policyWarningUIController = (PolicyWarningUIController) obj3;
+                PolicyWarningUIController policyWarningUIController =
+                        (PolicyWarningUIController) obj3;
                 policyWarningUIController.getClass();
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(10, 24);
-                policyWarningUIController.mAlarmManager.set(0, calendar.getTimeInMillis(), PolicyWarningUIController.createPendingIntent(policyWarningUIController.mContext, ((Integer) obj).intValue(), PolicyWarningUIController.ACTION_SEND_NOTIFICATION, (ComponentName) obj2));
+                policyWarningUIController.mAlarmManager.set(
+                        0,
+                        calendar.getTimeInMillis(),
+                        PolicyWarningUIController.createPendingIntent(
+                                policyWarningUIController.mContext,
+                                ((Integer) obj).intValue(),
+                                PolicyWarningUIController.ACTION_SEND_NOTIFICATION,
+                                (ComponentName) obj2));
                 break;
             case 1:
-                PolicyWarningUIController policyWarningUIController2 = (PolicyWarningUIController) obj3;
-                policyWarningUIController2.mAlarmManager.cancel(PolicyWarningUIController.createPendingIntent(policyWarningUIController2.mContext, ((Integer) obj).intValue(), PolicyWarningUIController.ACTION_SEND_NOTIFICATION, (ComponentName) obj2));
+                PolicyWarningUIController policyWarningUIController2 =
+                        (PolicyWarningUIController) obj3;
+                policyWarningUIController2.mAlarmManager.cancel(
+                        PolicyWarningUIController.createPendingIntent(
+                                policyWarningUIController2.mContext,
+                                ((Integer) obj).intValue(),
+                                PolicyWarningUIController.ACTION_SEND_NOTIFICATION,
+                                (ComponentName) obj2));
                 break;
             case 2:
-                PolicyWarningUIController policyWarningUIController3 = (PolicyWarningUIController) obj3;
+                PolicyWarningUIController policyWarningUIController3 =
+                        (PolicyWarningUIController) obj3;
                 Integer num = (Integer) obj;
                 num.intValue();
                 Set set = (Set) obj2;
@@ -51,31 +68,48 @@ public final /* synthetic */ class PolicyWarningUIController$$ExternalSyntheticL
                 arraySet2.removeAll(set);
                 policyWarningUIController3.mEnabledA11yServices.clear();
                 policyWarningUIController3.mEnabledA11yServices.addAll(set);
-                PolicyWarningUIController.NotificationController notificationController = policyWarningUIController3.mNotificationController;
+                PolicyWarningUIController.NotificationController notificationController =
+                        policyWarningUIController3.mNotificationController;
                 Objects.requireNonNull(notificationController);
-                policyWarningUIController3.mMainHandler.sendMessage(PooledLambda.obtainMessage(new PolicyWarningUIController$$ExternalSyntheticLambda2(4, notificationController), num, arraySet2));
+                policyWarningUIController3.mMainHandler.sendMessage(
+                        PooledLambda.obtainMessage(
+                                new PolicyWarningUIController$$ExternalSyntheticLambda2(
+                                        4, notificationController),
+                                num,
+                                arraySet2));
                 break;
             case 3:
-                PolicyWarningUIController policyWarningUIController4 = (PolicyWarningUIController) obj3;
+                PolicyWarningUIController policyWarningUIController4 =
+                        (PolicyWarningUIController) obj3;
                 int intValue = ((Integer) obj).intValue();
                 policyWarningUIController4.mEnabledA11yServices.clear();
                 policyWarningUIController4.mEnabledA11yServices.addAll((Set) obj2);
-                PolicyWarningUIController.NotificationController notificationController2 = policyWarningUIController4.mNotificationController;
-                ((ArrayList) notificationController2.mSentA11yServiceNotification).forEach(new PolicyWarningUIController$$ExternalSyntheticLambda0(1, notificationController2));
+                PolicyWarningUIController.NotificationController notificationController2 =
+                        policyWarningUIController4.mNotificationController;
+                ((ArrayList) notificationController2.mSentA11yServiceNotification)
+                        .forEach(
+                                new PolicyWarningUIController$$ExternalSyntheticLambda0(
+                                        1, notificationController2));
                 ((ArrayList) notificationController2.mSentA11yServiceNotification).clear();
                 notificationController2.mNotifiedA11yServices.clear();
                 notificationController2.mCurrentUserId = intValue;
                 ArraySet arraySet3 = notificationController2.mNotifiedA11yServices;
-                String stringForUser = Settings.Secure.getStringForUser(notificationController2.mContext.getContentResolver(), "notified_non_accessibility_category_services", intValue);
+                String stringForUser =
+                        Settings.Secure.getStringForUser(
+                                notificationController2.mContext.getContentResolver(),
+                                "notified_non_accessibility_category_services",
+                                intValue);
                 if (TextUtils.isEmpty(stringForUser)) {
                     arraySet = new ArraySet();
                 } else {
-                    TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(':');
+                    TextUtils.SimpleStringSplitter simpleStringSplitter =
+                            new TextUtils.SimpleStringSplitter(':');
                     simpleStringSplitter.setString(stringForUser);
                     arraySet = new ArraySet();
                     Iterator<String> it = simpleStringSplitter.iterator();
                     while (it.hasNext()) {
-                        ComponentName unflattenFromString = ComponentName.unflattenFromString(it.next());
+                        ComponentName unflattenFromString =
+                                ComponentName.unflattenFromString(it.next());
                         if (unflattenFromString != null) {
                             arraySet.add(unflattenFromString);
                         }
@@ -84,10 +118,12 @@ public final /* synthetic */ class PolicyWarningUIController$$ExternalSyntheticL
                 arraySet3.addAll(arraySet);
                 break;
             default:
-                PolicyWarningUIController.NotificationController notificationController3 = (PolicyWarningUIController.NotificationController) obj3;
+                PolicyWarningUIController.NotificationController notificationController3 =
+                        (PolicyWarningUIController.NotificationController) obj3;
                 int intValue2 = ((Integer) obj).intValue();
                 if (notificationController3.mNotifiedA11yServices.removeAll((ArraySet) obj2)) {
-                    notificationController3.writeNotifiedServiceList(intValue2, notificationController3.mNotifiedA11yServices);
+                    notificationController3.writeNotifiedServiceList(
+                            intValue2, notificationController3.mNotifiedA11yServices);
                     break;
                 }
                 break;

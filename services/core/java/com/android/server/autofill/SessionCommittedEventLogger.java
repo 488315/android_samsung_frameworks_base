@@ -22,7 +22,8 @@ public final class SessionCommittedEventLogger {
 
     public SessionCommittedEventLogger(int i) {
         this.mSessionId = i;
-        SessionCommittedEventInternal sessionCommittedEventInternal = new SessionCommittedEventInternal();
+        SessionCommittedEventInternal sessionCommittedEventInternal =
+                new SessionCommittedEventInternal();
         sessionCommittedEventInternal.mComponentPackageUid = -1;
         sessionCommittedEventInternal.mRequestCount = 0;
         sessionCommittedEventInternal.mCommitReason = 0;

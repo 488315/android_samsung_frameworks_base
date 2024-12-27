@@ -12,7 +12,13 @@ public class AudioDescriptor {
     private final byte mAdPan;
     private final char mVersionTextTag;
 
-    private AudioDescriptor(byte adFade, byte adPan, char versionTextTag, byte adGainCenter, byte adGainFront, byte adGainSurround) {
+    private AudioDescriptor(
+            byte adFade,
+            byte adPan,
+            char versionTextTag,
+            byte adGainCenter,
+            byte adGainFront,
+            byte adGainSurround) {
         this.mAdFade = adFade;
         this.mAdPan = adPan;
         this.mVersionTextTag = versionTextTag;

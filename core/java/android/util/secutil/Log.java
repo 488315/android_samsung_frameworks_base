@@ -1,9 +1,11 @@
 package android.util.secutil;
 
 import android.os.DeadSystemException;
+
 import com.android.internal.os.RuntimeInit;
 import com.android.internal.util.FastPrintWriter;
 import com.android.internal.util.LineBreakBufferedWriter;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -22,12 +24,13 @@ public final class Log {
     public static final int LOG_ID_SYSTEM = 3;
     public static final int VERBOSE = 2;
     public static final int WARN = 5;
-    private static TerribleFailureHandler sWtfHandler = new TerribleFailureHandler() { // from class: android.util.secutil.Log.1
-        @Override // android.util.secutil.Log.TerribleFailureHandler
-        public void onTerribleFailure(String tag, TerribleFailure what, boolean system) {
-            RuntimeInit.wtf(tag, what, system);
-        }
-    };
+    private static TerribleFailureHandler sWtfHandler =
+            new TerribleFailureHandler() { // from class: android.util.secutil.Log.1
+                @Override // android.util.secutil.Log.TerribleFailureHandler
+                public void onTerribleFailure(String tag, TerribleFailure what, boolean system) {
+                    RuntimeInit.wtf(tag, what, system);
+                }
+            };
 
     public interface TerribleFailureHandler {
         void onTerribleFailure(String str, TerribleFailure terribleFailure, boolean z);
@@ -46,8 +49,7 @@ public final class Log {
         }
     }
 
-    private Log() {
-    }
+    private Log() {}
 
     public static int v(String tag, String msg) {
         if (LogSwitcher.isShowingGlobalLog) {
@@ -259,7 +261,8 @@ public final class Log {
         return 0;
     }
 
-    static int wtf(int logId, String tag, String msg, Throwable tr, boolean localStack, boolean system) {
+    static int wtf(
+            int logId, String tag, String msg, Throwable tr, boolean localStack, boolean system) {
         TerribleFailure what = new TerribleFailure(msg, tr);
         int bytes = printlns(logId, 6, tag, msg, localStack ? what : tr);
         sWtfHandler.onTerribleFailure(tag, what, system);
@@ -305,8 +308,11 @@ public final class Log {
 
     public static int printlns(int bufID, int priority, String tag, String msg, Throwable tr) {
         ImmediateLogWriter logWriter = new ImmediateLogWriter(bufID, priority, tag);
-        int bufferSize = ((NoPreloadHolder.LOGGER_ENTRY_MAX_PAYLOAD - 2) - (tag != null ? tag.length() : 0)) - 32;
-        LineBreakBufferedWriter lbbw = new LineBreakBufferedWriter(logWriter, Math.max(bufferSize, 100));
+        int bufferSize =
+                ((NoPreloadHolder.LOGGER_ENTRY_MAX_PAYLOAD - 2) - (tag != null ? tag.length() : 0))
+                        - 32;
+        LineBreakBufferedWriter lbbw =
+                new LineBreakBufferedWriter(logWriter, Math.max(bufferSize, 100));
         lbbw.println(msg);
         if (tr != null) {
             Throwable t = tr;
@@ -315,7 +321,9 @@ public final class Log {
                     break;
                 }
                 if (t instanceof DeadSystemException) {
-                    lbbw.println("DeadSystemException: The system died; earlier logs will point to the root cause");
+                    lbbw.println(
+                            "DeadSystemException: The system died; earlier logs will point to the"
+                                + " root cause");
                     break;
                 }
                 t = t.getCause();
@@ -331,8 +339,7 @@ public final class Log {
     static class NoPreloadHolder {
         public static final int LOGGER_ENTRY_MAX_PAYLOAD = Log.logger_entry_max_payload_native();
 
-        NoPreloadHolder() {
-        }
+        NoPreloadHolder() {}
     }
 
     private static class ImmediateLogWriter extends Writer {
@@ -353,15 +360,15 @@ public final class Log {
 
         @Override // java.io.Writer
         public void write(char[] cbuf, int off, int len) {
-            this.written += Log.println_native(this.bufID, this.priority, this.tag, new String(cbuf, off, len));
+            this.written +=
+                    Log.println_native(
+                            this.bufID, this.priority, this.tag, new String(cbuf, off, len));
         }
 
         @Override // java.io.Writer, java.io.Flushable
-        public void flush() {
-        }
+        public void flush() {}
 
         @Override // java.io.Writer, java.io.Closeable, java.lang.AutoCloseable
-        public void close() {
-        }
+        public void close() {}
     }
 }

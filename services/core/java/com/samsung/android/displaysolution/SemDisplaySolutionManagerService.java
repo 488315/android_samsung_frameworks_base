@@ -14,15 +14,16 @@ import android.os.PowerManager;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.samsung.android.displaysolution.BigDataLoggingService;
+
 import com.samsung.android.displaysolution.BigDataLoggingService.ScreenWatchingReceiver;
-import com.samsung.android.displaysolution.ISemDisplaySolutionManager;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.view.SemWindowManager;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -108,46 +109,71 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
         public SettingsObserver(Handler handler) {
             super(handler);
             SemDisplaySolutionManagerService.this.mContext.getContentResolver();
-            this.HIGH_BRIGHTNESS_MODE_PMS_ENTER_URI = Settings.System.getUriFor("high_brightness_mode_pms_enter");
-            this.SCREEN_MODE_AUTOMATIC_SETTING_URI = Settings.System.getUriFor("screen_mode_automatic_setting");
+            this.HIGH_BRIGHTNESS_MODE_PMS_ENTER_URI =
+                    Settings.System.getUriFor("high_brightness_mode_pms_enter");
+            this.SCREEN_MODE_AUTOMATIC_SETTING_URI =
+                    Settings.System.getUriFor("screen_mode_automatic_setting");
             this.SCREEN_EXTRA_BRIGHTNESS_URI = Settings.Secure.getUriFor("screen_extra_brightness");
             this.SCREEN_BRIGHTNESS_MODE_URI = Settings.System.getUriFor("screen_brightness_mode");
         }
 
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
-            SemDisplaySolutionManagerService semDisplaySolutionManagerService = SemDisplaySolutionManagerService.this;
+            SemDisplaySolutionManagerService semDisplaySolutionManagerService =
+                    SemDisplaySolutionManagerService.this;
             int i = SemDisplaySolutionManagerService.$r8$clinit;
             semDisplaySolutionManagerService.setting_is_changed();
-            if ((this.SCREEN_EXTRA_BRIGHTNESS_URI.equals(uri) || this.SCREEN_BRIGHTNESS_MODE_URI.equals(uri)) && SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_EXTRA_BRIGHTNESS", false)) {
+            if ((this.SCREEN_EXTRA_BRIGHTNESS_URI.equals(uri)
+                            || this.SCREEN_BRIGHTNESS_MODE_URI.equals(uri))
+                    && SemFloatingFeature.getInstance()
+                            .getBoolean(
+                                    "SEC_FLOATING_FEATURE_LCD_SUPPORT_EXTRA_BRIGHTNESS", false)) {
                 StringBuilder sb = new StringBuilder("mAutoBrightnessModeEnabled : ");
                 sb.append(SemDisplaySolutionManagerService.this.mAutoBrightnessModeEnabled);
                 sb.append(" , mExtraBrightnessModeEnabled : ");
-                AnyMotionDetector$$ExternalSyntheticOutline0.m("SemDisplaySolutionManagerService", sb, SemDisplaySolutionManagerService.this.mExtraBrightnessModeEnabled);
-                SemDisplaySolutionManagerService semDisplaySolutionManagerService2 = SemDisplaySolutionManagerService.this;
-                if (semDisplaySolutionManagerService2.mAutoBrightnessModeEnabled || !semDisplaySolutionManagerService2.mExtraBrightnessModeEnabled) {
-                    semDisplaySolutionManagerService2.setMultipleScreenBrightness("extra_brightness_off");
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        "SemDisplaySolutionManagerService",
+                        sb,
+                        SemDisplaySolutionManagerService.this.mExtraBrightnessModeEnabled);
+                SemDisplaySolutionManagerService semDisplaySolutionManagerService2 =
+                        SemDisplaySolutionManagerService.this;
+                if (semDisplaySolutionManagerService2.mAutoBrightnessModeEnabled
+                        || !semDisplaySolutionManagerService2.mExtraBrightnessModeEnabled) {
+                    semDisplaySolutionManagerService2.setMultipleScreenBrightness(
+                            "extra_brightness_off");
                 } else {
-                    semDisplaySolutionManagerService2.setMultipleScreenBrightness("extra_brightness_on");
+                    semDisplaySolutionManagerService2.setMultipleScreenBrightness(
+                            "extra_brightness_on");
                 }
             }
-            if (this.SCREEN_MODE_AUTOMATIC_SETTING_URI.equals(uri) || this.HIGH_BRIGHTNESS_MODE_PMS_ENTER_URI.equals(uri)) {
+            if (this.SCREEN_MODE_AUTOMATIC_SETTING_URI.equals(uri)
+                    || this.HIGH_BRIGHTNESS_MODE_PMS_ENTER_URI.equals(uri)) {
                 StringBuilder sb2 = new StringBuilder("mHighBrightnessModeEnabled : ");
                 sb2.append(SemDisplaySolutionManagerService.this.mHighBrightnessModeEnabled);
                 sb2.append(" , mAdaptiveScreenModeEnabled : ");
-                AnyMotionDetector$$ExternalSyntheticOutline0.m("SemDisplaySolutionManagerService", sb2, SemDisplaySolutionManagerService.this.mAdaptiveScreenModeEnabled);
-                SemDisplaySolutionManagerService semDisplaySolutionManagerService3 = SemDisplaySolutionManagerService.this;
-                if (semDisplaySolutionManagerService3.mHighBrightnessModeEnabled || semDisplaySolutionManagerService3.mAdaptiveScreenModeEnabled) {
-                    SemDisplaySolutionManagerService.sysfsWrite(0, semDisplaySolutionManagerService3.IRC_MODE_NODE);
-                    if (new File(SemDisplaySolutionManagerService.this.IRC_MODE_SUB_NODE).exists()) {
-                        SemDisplaySolutionManagerService.sysfsWrite(0, SemDisplaySolutionManagerService.this.IRC_MODE_SUB_NODE);
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        "SemDisplaySolutionManagerService",
+                        sb2,
+                        SemDisplaySolutionManagerService.this.mAdaptiveScreenModeEnabled);
+                SemDisplaySolutionManagerService semDisplaySolutionManagerService3 =
+                        SemDisplaySolutionManagerService.this;
+                if (semDisplaySolutionManagerService3.mHighBrightnessModeEnabled
+                        || semDisplaySolutionManagerService3.mAdaptiveScreenModeEnabled) {
+                    SemDisplaySolutionManagerService.sysfsWrite(
+                            0, semDisplaySolutionManagerService3.IRC_MODE_NODE);
+                    if (new File(SemDisplaySolutionManagerService.this.IRC_MODE_SUB_NODE)
+                            .exists()) {
+                        SemDisplaySolutionManagerService.sysfsWrite(
+                                0, SemDisplaySolutionManagerService.this.IRC_MODE_SUB_NODE);
                     }
                     Slog.d("SemDisplaySolutionManagerService", "IRC Mode : moderato_mode");
                     return;
                 }
-                SemDisplaySolutionManagerService.sysfsWrite(1, semDisplaySolutionManagerService3.IRC_MODE_NODE);
+                SemDisplaySolutionManagerService.sysfsWrite(
+                        1, semDisplaySolutionManagerService3.IRC_MODE_NODE);
                 if (new File(SemDisplaySolutionManagerService.this.IRC_MODE_SUB_NODE).exists()) {
-                    SemDisplaySolutionManagerService.sysfsWrite(1, SemDisplaySolutionManagerService.this.IRC_MODE_SUB_NODE);
+                    SemDisplaySolutionManagerService.sysfsWrite(
+                            1, SemDisplaySolutionManagerService.this.IRC_MODE_SUB_NODE);
                 }
                 Slog.d("SemDisplaySolutionManagerService", "IRC Mode : flat_gamma_mode");
             }
@@ -191,26 +217,55 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
         boolean z = context.getResources().getBoolean(R.bool.config_noHomeScreen);
         boolean z2 = context.getResources().getBoolean(R.bool.config_allow3rdPartyAppOnInternal);
         boolean z3 = context.getResources().getBoolean(R.bool.config_brightWhenDozing);
-        int integer = context.getResources().getInteger(R.integer.config_vibratorControlServiceDumpSizeLimit);
-        this.mScaleFactorStringArray = context.getResources().getStringArray(R.array.config_displayUniqueIdArray);
-        this.mBurnInScaleFactorStringArray = context.getResources().getStringArray(R.array.config_displayCutoutSideOverrideArray);
-        this.mGammaStringArray = context.getResources().getStringArray(R.array.config_displayShapeArray);
-        this.mExtraBrightnessStringArray = context.getResources().getStringArray(R.array.config_display_no_service_when_sim_unready);
-        this.mGalleryAppBrightnessStringArray = context.getResources().getStringArray(R.array.config_emergency_iso_country_codes);
-        this.mCameraAppBrightnessStringArray = context.getResources().getStringArray(R.array.config_disableApksUnlessMatchedSku_apk_list);
-        this.mSamsungVideoAppBrightnessStringArray = context.getResources().getStringArray(R.array.config_gnssParameters);
-        this.mOverHeatAppBrightnessStringArray = context.getResources().getStringArray(R.array.config_force_cellular_transport_capabilities);
-        this.mVideoEnhancerBrightnessStringArray = context.getResources().getStringArray(R.array.config_keep_warming_services);
-        this.mBrightnessBacklightValueStringArray = context.getResources().getStringArray(R.array.config_healthConnectMigrationKnownSigners);
-        this.mBrightnessNitsValueStringArray = context.getResources().getStringArray(R.array.config_healthConnectRestoreKnownSigners);
-        this.DOU_BRIGHTNESS_SUPPORT_VALUE = context.getResources().getInteger(R.integer.config_deskDockRotation);
-        this.DOU_BRIGHTNESS_STANDARD_VALUE = context.getResources().getInteger(R.integer.config_deskDockKeepsScreenOn);
-        this.DOU_VERSION = context.getResources().getInteger(R.integer.config_jobSchedulerInactivityIdleThreshold);
-        this.mAfcType = context.getResources().getInteger(R.integer.config_MaxConcurrentDownloadsAllowed);
-        if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_SUPPORT_BLUE_FILTER_ADAPTIVE_MODE", 0) > 0) {
+        int integer =
+                context.getResources()
+                        .getInteger(R.integer.config_vibratorControlServiceDumpSizeLimit);
+        this.mScaleFactorStringArray =
+                context.getResources().getStringArray(R.array.config_displayUniqueIdArray);
+        this.mBurnInScaleFactorStringArray =
+                context.getResources()
+                        .getStringArray(R.array.config_displayCutoutSideOverrideArray);
+        this.mGammaStringArray =
+                context.getResources().getStringArray(R.array.config_displayShapeArray);
+        this.mExtraBrightnessStringArray =
+                context.getResources()
+                        .getStringArray(R.array.config_display_no_service_when_sim_unready);
+        this.mGalleryAppBrightnessStringArray =
+                context.getResources().getStringArray(R.array.config_emergency_iso_country_codes);
+        this.mCameraAppBrightnessStringArray =
+                context.getResources()
+                        .getStringArray(R.array.config_disableApksUnlessMatchedSku_apk_list);
+        this.mSamsungVideoAppBrightnessStringArray =
+                context.getResources().getStringArray(R.array.config_gnssParameters);
+        this.mOverHeatAppBrightnessStringArray =
+                context.getResources()
+                        .getStringArray(R.array.config_force_cellular_transport_capabilities);
+        this.mVideoEnhancerBrightnessStringArray =
+                context.getResources().getStringArray(R.array.config_keep_warming_services);
+        this.mBrightnessBacklightValueStringArray =
+                context.getResources()
+                        .getStringArray(R.array.config_healthConnectMigrationKnownSigners);
+        this.mBrightnessNitsValueStringArray =
+                context.getResources()
+                        .getStringArray(R.array.config_healthConnectRestoreKnownSigners);
+        this.DOU_BRIGHTNESS_SUPPORT_VALUE =
+                context.getResources().getInteger(R.integer.config_deskDockRotation);
+        this.DOU_BRIGHTNESS_STANDARD_VALUE =
+                context.getResources().getInteger(R.integer.config_deskDockKeepsScreenOn);
+        this.DOU_VERSION =
+                context.getResources()
+                        .getInteger(R.integer.config_jobSchedulerInactivityIdleThreshold);
+        this.mAfcType =
+                context.getResources().getInteger(R.integer.config_MaxConcurrentDownloadsAllowed);
+        if (SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_LCD_SUPPORT_BLUE_FILTER_ADAPTIVE_MODE", 0)
+                > 0) {
             this.mUseEyeComfortSolutionServiceConfig = true;
         }
-        "DDI".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LCD_CONFIG_HW_MDNIE"));
+        "DDI"
+                .equals(
+                        SemFloatingFeature.getInstance()
+                                .getString("SEC_FLOATING_FEATURE_LCD_CONFIG_HW_MDNIE"));
         if (z) {
             this.mMSCSEnable = true;
             this.mscsService = new MdnieScenarioControlService(context);
@@ -234,7 +289,8 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
             intentFilter.addAction("android.intent.action.SCREEN_ON");
             intentFilter.addAction("android.intent.action.SCREEN_OFF");
             intentFilter.addAction("android.intent.action.USER_PRESENT");
-            context.registerReceiver(bigDataLoggingService.new ScreenWatchingReceiver(), intentFilter);
+            context.registerReceiver(
+                    bigDataLoggingService.new ScreenWatchingReceiver(), intentFilter);
             if (z4) {
                 SystemProperties.set("sys.bigdatalogging.bdlon", "true");
             }
@@ -243,10 +299,17 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
             this.SEC_FEATURE_EXTENDED_BRIGHTNESS = true;
         }
         Slog.d("SemDisplaySolutionManagerService", "mUseMdnieScenarioControlServiceConfig : " + z);
-        Slog.d("SemDisplaySolutionManagerService", "mUseAdaptiveDisplaySolutionServiceConfig : " + z2);
-        Slog.d("SemDisplaySolutionManagerService", "mUseEyeComfortSolutionServiceConfig : " + this.mUseEyeComfortSolutionServiceConfig);
+        Slog.d(
+                "SemDisplaySolutionManagerService",
+                "mUseAdaptiveDisplaySolutionServiceConfig : " + z2);
+        Slog.d(
+                "SemDisplaySolutionManagerService",
+                "mUseEyeComfortSolutionServiceConfig : "
+                        + this.mUseEyeComfortSolutionServiceConfig);
         Slog.d("SemDisplaySolutionManagerService", "mUseBigDataLoggingServiceConfig : " + z);
-        Slog.d("SemDisplaySolutionManagerService", "mScreenBrightnessExtendedMaximumConfig : " + integer);
+        Slog.d(
+                "SemDisplaySolutionManagerService",
+                "mScreenBrightnessExtendedMaximumConfig : " + integer);
         this.mScaleFactorValueArray = new float[1];
         int i = 0;
         while (true) {
@@ -340,42 +403,72 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
         SettingsObserver settingsObserver = new SettingsObserver(new Handler());
         ContentResolver contentResolver = this.mContext.getContentResolver();
         this.mPowerManager = (PowerManager) this.mContext.getSystemService("power");
-        contentResolver.registerContentObserver(Settings.System.getUriFor("high_brightness_mode_pms_enter"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_mode_automatic_setting"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.Secure.getUriFor("screen_extra_brightness"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_brightness_mode"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("blue_light_filter"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("blue_light_filter_night_dim"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("high_brightness_mode_pms_enter"),
+                false,
+                settingsObserver,
+                -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_mode_automatic_setting"),
+                false,
+                settingsObserver,
+                -1);
+        contentResolver.registerContentObserver(
+                Settings.Secure.getUriFor("screen_extra_brightness"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_brightness_mode"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("blue_light_filter"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("blue_light_filter_night_dim"),
+                false,
+                settingsObserver,
+                -1);
         Slog.d("SemDisplaySolutionManagerService", "registerDisplayStateListener");
-        this.mFoldStateListener = new SemWindowManager.FoldStateListener() { // from class: com.samsung.android.displaysolution.SemDisplaySolutionManagerService.1
-            public final void onFoldStateChanged(boolean z5) {
-                synchronized (SemDisplaySolutionManagerService.this.mLock) {
-                    try {
-                        SemDisplaySolutionManagerService.this.mIsFolded = z5;
-                        if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_LARGE_COVER_SCREEN", false)) {
-                            SemDisplaySolutionManagerService semDisplaySolutionManagerService = SemDisplaySolutionManagerService.this;
-                            if (semDisplaySolutionManagerService.mAutoBrightnessModeEnabled || !semDisplaySolutionManagerService.mExtraBrightnessModeEnabled || semDisplaySolutionManagerService.mIsFolded) {
-                                semDisplaySolutionManagerService.setMultipleScreenBrightness("extra_brightness_off");
-                            } else {
-                                semDisplaySolutionManagerService.setMultipleScreenBrightness("extra_brightness_on");
+        this.mFoldStateListener =
+                new SemWindowManager.FoldStateListener() { // from class:
+                    // com.samsung.android.displaysolution.SemDisplaySolutionManagerService.1
+                    public final void onFoldStateChanged(boolean z5) {
+                        synchronized (SemDisplaySolutionManagerService.this.mLock) {
+                            try {
+                                SemDisplaySolutionManagerService.this.mIsFolded = z5;
+                                if (SemFloatingFeature.getInstance()
+                                        .getBoolean(
+                                                "SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_LARGE_COVER_SCREEN",
+                                                false)) {
+                                    SemDisplaySolutionManagerService
+                                            semDisplaySolutionManagerService =
+                                                    SemDisplaySolutionManagerService.this;
+                                    if (semDisplaySolutionManagerService.mAutoBrightnessModeEnabled
+                                            || !semDisplaySolutionManagerService
+                                                    .mExtraBrightnessModeEnabled
+                                            || semDisplaySolutionManagerService.mIsFolded) {
+                                        semDisplaySolutionManagerService
+                                                .setMultipleScreenBrightness(
+                                                        "extra_brightness_off");
+                                    } else {
+                                        semDisplaySolutionManagerService
+                                                .setMultipleScreenBrightness("extra_brightness_on");
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            public final void onTableModeChanged(boolean z5) {
-            }
-        };
-        SemWindowManager.getInstance().registerFoldStateListener(this.mFoldStateListener, (Handler) null);
+                    public final void onTableModeChanged(boolean z5) {}
+                };
+        SemWindowManager.getInstance()
+                .registerFoldStateListener(this.mFoldStateListener, (Handler) null);
         setting_is_changed();
-        if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_EXTRA_BRIGHTNESS", false)) {
+        if (SemFloatingFeature.getInstance()
+                .getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_EXTRA_BRIGHTNESS", false)) {
             StringBuilder sb = new StringBuilder("mAutoBrightnessModeEnabled : ");
             sb.append(this.mAutoBrightnessModeEnabled);
             sb.append(" , mExtraBrightnessModeEnabled : ");
-            AnyMotionDetector$$ExternalSyntheticOutline0.m("SemDisplaySolutionManagerService", sb, this.mExtraBrightnessModeEnabled);
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    "SemDisplaySolutionManagerService", sb, this.mExtraBrightnessModeEnabled);
             if (this.mAutoBrightnessModeEnabled || !this.mExtraBrightnessModeEnabled) {
                 setMultipleScreenBrightness("extra_brightness_off");
             } else {
@@ -385,7 +478,8 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
         StringBuilder sb2 = new StringBuilder("mHighBrightnessModeEnabled : ");
         sb2.append(this.mHighBrightnessModeEnabled);
         sb2.append(" , mAdaptiveScreenModeEnabled : ");
-        AnyMotionDetector$$ExternalSyntheticOutline0.m("SemDisplaySolutionManagerService", sb2, this.mAdaptiveScreenModeEnabled);
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                "SemDisplaySolutionManagerService", sb2, this.mAdaptiveScreenModeEnabled);
         if (this.mHighBrightnessModeEnabled || this.mAdaptiveScreenModeEnabled) {
             sysfsWrite(0, this.IRC_MODE_NODE);
             if (new File(this.IRC_MODE_SUB_NODE).exists()) {
@@ -516,7 +610,9 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
         L95:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.displaysolution.SemDisplaySolutionManagerService.getStringFromFile(java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.displaysolution.SemDisplaySolutionManagerService.getStringFromFile(java.lang.String):java.lang.String");
     }
 
     public static boolean sysfsWrite(int i, String str) {
@@ -558,15 +654,20 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
         this.mScaleFactor = f;
         this.mTitle = "application";
         this.mName = str;
-        if (new File(this.BURN_IN_APPLY_COUNT).exists() || new File(this.BURN_IN_APPLY_COUNT_SUB).exists()) {
+        if (new File(this.BURN_IN_APPLY_COUNT).exists()
+                || new File(this.BURN_IN_APPLY_COUNT_SUB).exists()) {
             try {
                 boolean z = this.mIsFolded;
                 if (!z) {
                     str2 = getStringFromFile(this.BURN_IN_APPLY_COUNT);
-                    Slog.d("SemDisplaySolutionManagerService", "burn_in_brightness_compensation() raw : " + str2);
+                    Slog.d(
+                            "SemDisplaySolutionManagerService",
+                            "burn_in_brightness_compensation() raw : " + str2);
                 } else if (z) {
                     String stringFromFile = getStringFromFile(this.BURN_IN_APPLY_COUNT_SUB);
-                    Slog.d("SemDisplaySolutionManagerService", "burn_in_brightness_compensation() sub raw : " + stringFromFile);
+                    Slog.d(
+                            "SemDisplaySolutionManagerService",
+                            "burn_in_brightness_compensation() sub raw : " + stringFromFile);
                     str2 = stringFromFile;
                 } else {
                     str2 = null;
@@ -577,11 +678,14 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
                         if (split.length == 2) {
                             int i = this.mAfcType;
                             if (i == 2) {
-                                this.mBrightnessCompensation = (Float.parseFloat(split[0].trim()) * 0.01f) + 1.0f;
+                                this.mBrightnessCompensation =
+                                        (Float.parseFloat(split[0].trim()) * 0.01f) + 1.0f;
                             } else if (i >= 3 && i <= 7) {
-                                this.mBrightnessCompensation = (Float.parseFloat(split[0].trim()) * 0.005f) + 1.0f;
+                                this.mBrightnessCompensation =
+                                        (Float.parseFloat(split[0].trim()) * 0.005f) + 1.0f;
                             } else if (i >= 8) {
-                                this.mBrightnessCompensation = (Float.parseFloat(split[0].trim()) * 0.007f) + 1.0f;
+                                this.mBrightnessCompensation =
+                                        (Float.parseFloat(split[0].trim()) * 0.007f) + 1.0f;
                             }
                         } else {
                             this.mBrightnessCompensation = 1.0f;
@@ -596,17 +700,56 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
                 e2.printStackTrace();
             }
         }
-        if (this.mTitle.equals("application") && this.SEC_FEATURE_EXTENDED_BRIGHTNESS && this.mScaleFactor * this.mBrightnessCompensation >= FullScreenMagnificationGestureHandler.MAX_SCALE) {
-            Slog.d("SemDisplaySolutionManagerService", "where : " + this.mTitle + " what : " + this.mName + " setScreenBrightnessScaleFactor(" + this.mScaleFactor + ") , mBrightnessCompensation : " + this.mBrightnessCompensation + " , PMS value : " + (this.mScaleFactor * this.mBrightnessCompensation));
-            this.mPowerManager.setScreenBrightnessScaleFactor(this.mScaleFactor * this.mBrightnessCompensation, binder);
+        if (this.mTitle.equals("application")
+                && this.SEC_FEATURE_EXTENDED_BRIGHTNESS
+                && this.mScaleFactor * this.mBrightnessCompensation
+                        >= FullScreenMagnificationGestureHandler.MAX_SCALE) {
+            Slog.d(
+                    "SemDisplaySolutionManagerService",
+                    "where : "
+                            + this.mTitle
+                            + " what : "
+                            + this.mName
+                            + " setScreenBrightnessScaleFactor("
+                            + this.mScaleFactor
+                            + ") , mBrightnessCompensation : "
+                            + this.mBrightnessCompensation
+                            + " , PMS value : "
+                            + (this.mScaleFactor * this.mBrightnessCompensation));
+            this.mPowerManager.setScreenBrightnessScaleFactor(
+                    this.mScaleFactor * this.mBrightnessCompensation, binder);
         }
     }
 
     public final float getAlphaMaskLevel(float f, float f2, float f3) {
-        Slog.d("SemDisplaySolutionManagerService", "getAlphaMaskLevel() CurrentPlatformBrightnessValue : " + f + " , FingerPrintPlatformValue : " + f2 + " , br_ctrl : " + f3 + " , gamma : " + this.mGammaArray[0]);
-        float parseFloat = f >= FullScreenMagnificationGestureHandler.MAX_SCALE ? Float.parseFloat(this.mBrightnessNitsValueStringArray[(int) f]) : -1.0f;
-        float parseFloat2 = f2 >= FullScreenMagnificationGestureHandler.MAX_SCALE ? Float.parseFloat(this.mBrightnessNitsValueStringArray[(int) f2]) : -1.0f;
-        Slog.d("SemDisplaySolutionManagerService", "calculateAlphaBlendingValue() currentNits : " + parseFloat + " , targetNits : " + parseFloat2 + " , br_ctrl : " + f3 + " , gamma : " + this.mGammaArray[0]);
+        Slog.d(
+                "SemDisplaySolutionManagerService",
+                "getAlphaMaskLevel() CurrentPlatformBrightnessValue : "
+                        + f
+                        + " , FingerPrintPlatformValue : "
+                        + f2
+                        + " , br_ctrl : "
+                        + f3
+                        + " , gamma : "
+                        + this.mGammaArray[0]);
+        float parseFloat =
+                f >= FullScreenMagnificationGestureHandler.MAX_SCALE
+                        ? Float.parseFloat(this.mBrightnessNitsValueStringArray[(int) f])
+                        : -1.0f;
+        float parseFloat2 =
+                f2 >= FullScreenMagnificationGestureHandler.MAX_SCALE
+                        ? Float.parseFloat(this.mBrightnessNitsValueStringArray[(int) f2])
+                        : -1.0f;
+        Slog.d(
+                "SemDisplaySolutionManagerService",
+                "calculateAlphaBlendingValue() currentNits : "
+                        + parseFloat
+                        + " , targetNits : "
+                        + parseFloat2
+                        + " , br_ctrl : "
+                        + f3
+                        + " , gamma : "
+                        + this.mGammaArray[0]);
         return (float) (1.0d - Math.pow((parseFloat * f3) / parseFloat2, 1.0f / r7));
     }
 
@@ -644,10 +787,17 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
                 return -1.0f;
             }
             if (i <= Integer.parseInt(strArr[i2])) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "getFingerPrintBacklightValue() brightnessNits : ", " , FingerPrintBacklightValue : ");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                i,
+                                "getFingerPrintBacklightValue() brightnessNits : ",
+                                " , FingerPrintBacklightValue : ");
                 m.append(Float.parseFloat(this.mBrightnessBacklightValueStringArray[i2]));
                 m.append(" , mBrightnessNitsValueStringArray_Size : ");
-                DeviceIdleController$$ExternalSyntheticOutline0.m(m, this.mBrightnessNitsValueStringArray.length, "SemDisplaySolutionManagerService");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        m,
+                        this.mBrightnessNitsValueStringArray.length,
+                        "SemDisplaySolutionManagerService");
                 return Float.parseFloat(this.mBrightnessBacklightValueStringArray[i2]);
             }
             i2++;
@@ -671,11 +821,14 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
     }
 
     public final boolean getting_auto_brightness_mode_enabled() {
-        return Settings.System.getIntForUser(this.mContext.getContentResolver(), "screen_brightness_mode", 0, -2) == 1;
+        return Settings.System.getIntForUser(
+                        this.mContext.getContentResolver(), "screen_brightness_mode", 0, -2)
+                == 1;
     }
 
     public final float getting_platform_brightness_value() {
-        return Settings.System.getIntForUser(this.mContext.getContentResolver(), "screen_brightness", 0, -2);
+        return Settings.System.getIntForUser(
+                this.mContext.getContentResolver(), "screen_brightness", 0, -2);
     }
 
     public final boolean isBlueLightFilterScheduledTime() {
@@ -686,8 +839,14 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
                 if (eyeComfortSolutionService == null) {
                     return false;
                 }
-                Slog.d("EyeComfortSolutionService", "mBlueLightFilterAdaptiveModeEnabled: " + eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled + " , mBlueLightFilterScheduledTime: " + eyeComfortSolutionService.mBlueLightFilterScheduledTime);
-                if (!eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled && eyeComfortSolutionService.mBlueLightFilterScheduledTime) {
+                Slog.d(
+                        "EyeComfortSolutionService",
+                        "mBlueLightFilterAdaptiveModeEnabled: "
+                                + eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled
+                                + " , mBlueLightFilterScheduledTime: "
+                                + eyeComfortSolutionService.mBlueLightFilterScheduledTime);
+                if (!eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled
+                        && eyeComfortSolutionService.mBlueLightFilterScheduledTime) {
                     z = true;
                 }
                 return z;
@@ -726,7 +885,8 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
                         adaptiveDisplaySolutionService.setAutoCurrentLimitState(z);
                     }
                 } else {
-                    AdaptiveDisplaySolutionService adaptiveDisplaySolutionService2 = this.adsService;
+                    AdaptiveDisplaySolutionService adaptiveDisplaySolutionService2 =
+                            this.adsService;
                     if (adaptiveDisplaySolutionService2 != null) {
                         adaptiveDisplaySolutionService2.setAutoCurrentLimitState(z);
                     }
@@ -741,11 +901,18 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
         synchronized (this.mLock) {
             AdaptiveDisplaySolutionService adaptiveDisplaySolutionService = this.adsService;
             if (adaptiveDisplaySolutionService != null) {
-                ContentResolver contentResolver = adaptiveDisplaySolutionService.mContext.getContentResolver();
-                if (adaptiveDisplaySolutionService.AUTO_CURRENT_LIMIT_VERSION >= 3 && i == 1 && Settings.System.getIntForUser(contentResolver, "screen_brightness_mode", 0, -2) == 0) {
+                ContentResolver contentResolver =
+                        adaptiveDisplaySolutionService.mContext.getContentResolver();
+                if (adaptiveDisplaySolutionService.AUTO_CURRENT_LIMIT_VERSION >= 3
+                        && i == 1
+                        && Settings.System.getIntForUser(
+                                        contentResolver, "screen_brightness_mode", 0, -2)
+                                == 0) {
                     i += 2;
                 }
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "setAutoCurrentLimitStateInt(", ") , mADSEnableCondition : ");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                i, "setAutoCurrentLimitStateInt(", ") , mADSEnableCondition : ");
                 m.append(adaptiveDisplaySolutionService.mADSEnableCondition);
                 Slog.d("AdaptiveDisplaySolutionService", m.toString());
                 adaptiveDisplaySolutionService.updateAdaptiveControlStateInt(i);
@@ -762,7 +929,8 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
                         adaptiveDisplaySolutionService.setAutoCurrentLimitStateWithBrightness(z);
                     }
                 } else {
-                    AdaptiveDisplaySolutionService adaptiveDisplaySolutionService2 = this.adsService;
+                    AdaptiveDisplaySolutionService adaptiveDisplaySolutionService2 =
+                            this.adsService;
                     if (adaptiveDisplaySolutionService2 != null) {
                         adaptiveDisplaySolutionService2.setAutoCurrentLimitStateWithBrightness(z);
                     }
@@ -798,7 +966,8 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
                         adaptiveDisplaySolutionService.setGalleryDetailViewMode(z);
                     }
                 } else {
-                    AdaptiveDisplaySolutionService adaptiveDisplaySolutionService2 = this.adsService;
+                    AdaptiveDisplaySolutionService adaptiveDisplaySolutionService2 =
+                            this.adsService;
                     if (adaptiveDisplaySolutionService2 != null) {
                         adaptiveDisplaySolutionService2.setGalleryDetailViewMode(z);
                     }
@@ -845,13 +1014,16 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
             EyeComfortSolutionService eyeComfortSolutionService = this.ecsService;
             if (eyeComfortSolutionService != null) {
                 eyeComfortSolutionService.getClass();
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i, "setEadIndexOffset(", ")", "EyeComfortSolutionService");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i, "setEadIndexOffset(", ")", "EyeComfortSolutionService");
                 if (i < 0) {
                     i = 0;
                 }
                 eyeComfortSolutionService.mBlfIndexEadOffset = i;
-                if (eyeComfortSolutionService.mBlueLightFilterModeEnabled && eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled) {
-                    eyeComfortSolutionService.setBlueLightFilterMode(eyeComfortSolutionService.mLastTotalBlueLightFilterIndex, true);
+                if (eyeComfortSolutionService.mBlueLightFilterModeEnabled
+                        && eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled) {
+                    eyeComfortSolutionService.setBlueLightFilterMode(
+                            eyeComfortSolutionService.mLastTotalBlueLightFilterIndex, true);
                 }
             }
         }
@@ -877,7 +1049,10 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
             MdnieScenarioControlService mdnieScenarioControlService = this.mscsService;
             if (mdnieScenarioControlService != null) {
                 mdnieScenarioControlService.mHighDynamicRangeEnabled = z;
-                Slog.d("MdnieScenarioControlService", "isHighDynamicRangeModeState : " + mdnieScenarioControlService.mHighDynamicRangeEnabled);
+                Slog.d(
+                        "MdnieScenarioControlService",
+                        "isHighDynamicRangeModeState : "
+                                + mdnieScenarioControlService.mHighDynamicRangeEnabled);
                 if (mdnieScenarioControlService.mHighDynamicRangeEnabled) {
                     mdnieScenarioControlService.setAclModeScenario(0, true);
                 } else if (!mdnieScenarioControlService.mGalleryAppState) {
@@ -892,13 +1067,25 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
             try {
                 if (z) {
                     sysfsWrite(0, this.IRC_MODE_NODE);
-                    Slog.d("SemDisplaySolutionManagerService", "setIRCompensationMode(" + z + ") IRC Mode : moderato_mode");
+                    Slog.d(
+                            "SemDisplaySolutionManagerService",
+                            "setIRCompensationMode(" + z + ") IRC Mode : moderato_mode");
                 } else if (this.mAdaptiveScreenModeEnabled) {
                     sysfsWrite(0, this.IRC_MODE_NODE);
-                    Slog.d("SemDisplaySolutionManagerService", "setIRCompensationMode(" + z + ") IRC Mode : moderato_mode , vivid mode :" + this.mAdaptiveScreenModeEnabled);
+                    Slog.d(
+                            "SemDisplaySolutionManagerService",
+                            "setIRCompensationMode("
+                                    + z
+                                    + ") IRC Mode : moderato_mode , vivid mode :"
+                                    + this.mAdaptiveScreenModeEnabled);
                 } else {
                     sysfsWrite(1, this.IRC_MODE_NODE);
-                    Slog.d("SemDisplaySolutionManagerService", "setIRCompensationMode(" + z + ") IRC Mode : flat_gamma_mode , vivid mode :" + this.mAdaptiveScreenModeEnabled);
+                    Slog.d(
+                            "SemDisplaySolutionManagerService",
+                            "setIRCompensationMode("
+                                    + z
+                                    + ") IRC Mode : flat_gamma_mode , vivid mode :"
+                                    + this.mAdaptiveScreenModeEnabled);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -923,7 +1110,9 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
             Method dump skipped, instructions count: 1786
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.displaysolution.SemDisplaySolutionManagerService.setMultipleScreenBrightness(java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.displaysolution.SemDisplaySolutionManagerService.setMultipleScreenBrightness(java.lang.String):void");
     }
 
     public final void setMultipleScreenBrightnessValueForHDR(float f) {
@@ -998,10 +1187,20 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
 
     public final void setting_is_changed() {
         ContentResolver contentResolver = this.mContext.getContentResolver();
-        this.mHighBrightnessModeEnabled = Settings.System.getIntForUser(contentResolver, "high_brightness_mode_pms_enter", 0, -2) == 1;
-        this.mAdaptiveScreenModeEnabled = Settings.System.getIntForUser(contentResolver, "screen_mode_automatic_setting", 1, -2) == 1;
-        this.mExtraBrightnessModeEnabled = Settings.Secure.getIntForUser(contentResolver, "screen_extra_brightness", 0, -2) == 1;
-        this.mAutoBrightnessModeEnabled = Settings.System.getIntForUser(contentResolver, "screen_brightness_mode", 0, -2) == 1;
+        this.mHighBrightnessModeEnabled =
+                Settings.System.getIntForUser(
+                                contentResolver, "high_brightness_mode_pms_enter", 0, -2)
+                        == 1;
+        this.mAdaptiveScreenModeEnabled =
+                Settings.System.getIntForUser(
+                                contentResolver, "screen_mode_automatic_setting", 1, -2)
+                        == 1;
+        this.mExtraBrightnessModeEnabled =
+                Settings.Secure.getIntForUser(contentResolver, "screen_extra_brightness", 0, -2)
+                        == 1;
+        this.mAutoBrightnessModeEnabled =
+                Settings.System.getIntForUser(contentResolver, "screen_brightness_mode", 0, -2)
+                        == 1;
         StringBuilder sb = new StringBuilder("mHighBrightnessModeEnabled : ");
         sb.append(this.mHighBrightnessModeEnabled);
         sb.append(" , mAdaptiveScreenModeEnabled : ");
@@ -1009,7 +1208,8 @@ public class SemDisplaySolutionManagerService extends ISemDisplaySolutionManager
         sb.append(" , mExtraBrightnessModeEnabled : ");
         sb.append(this.mExtraBrightnessModeEnabled);
         sb.append(" , mAutoBrightnessModeEnabled : ");
-        AnyMotionDetector$$ExternalSyntheticOutline0.m("SemDisplaySolutionManagerService", sb, this.mAutoBrightnessModeEnabled);
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                "SemDisplaySolutionManagerService", sb, this.mAutoBrightnessModeEnabled);
     }
 
     public final void updateAutoBrightnessLux(int i, int i2) {

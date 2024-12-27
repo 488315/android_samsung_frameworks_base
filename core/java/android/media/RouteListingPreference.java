@@ -4,7 +4,9 @@ import android.content.ComponentName;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -15,19 +17,21 @@ import java.util.Objects;
 /* loaded from: classes2.dex */
 public final class RouteListingPreference implements Parcelable {
     public static final String ACTION_TRANSFER_MEDIA = "android.media.action.TRANSFER_MEDIA";
-    public static final Parcelable.Creator<RouteListingPreference> CREATOR = new Parcelable.Creator<RouteListingPreference>() { // from class: android.media.RouteListingPreference.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RouteListingPreference createFromParcel(Parcel in) {
-            return new RouteListingPreference(in);
-        }
+    public static final Parcelable.Creator<RouteListingPreference> CREATOR =
+            new Parcelable.Creator<RouteListingPreference>() { // from class:
+                // android.media.RouteListingPreference.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RouteListingPreference createFromParcel(Parcel in) {
+                    return new RouteListingPreference(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RouteListingPreference[] newArray(int size) {
-            return new RouteListingPreference[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RouteListingPreference[] newArray(int size) {
+                    return new RouteListingPreference[size];
+                }
+            };
     public static final String EXTRA_ROUTE_ID = "android.media.extra.ROUTE_ID";
     private final List<Item> mItems;
     private final ComponentName mLinkedItemComponentName;
@@ -40,7 +44,8 @@ public final class RouteListingPreference implements Parcelable {
     }
 
     private RouteListingPreference(Parcel in) {
-        List<Item> items = in.readParcelableList(new ArrayList(), Item.class.getClassLoader(), Item.class);
+        List<Item> items =
+                in.readParcelableList(new ArrayList(), Item.class.getClassLoader(), Item.class);
         this.mItems = List.copyOf(items);
         this.mUseSystemOrdering = in.readBoolean();
         this.mLinkedItemComponentName = ComponentName.readFromParcel(in);
@@ -78,11 +83,16 @@ public final class RouteListingPreference implements Parcelable {
             return false;
         }
         RouteListingPreference that = (RouteListingPreference) other;
-        return this.mItems.equals(that.mItems) && this.mUseSystemOrdering == that.mUseSystemOrdering && Objects.equals(this.mLinkedItemComponentName, that.mLinkedItemComponentName);
+        return this.mItems.equals(that.mItems)
+                && this.mUseSystemOrdering == that.mUseSystemOrdering
+                && Objects.equals(this.mLinkedItemComponentName, that.mLinkedItemComponentName);
     }
 
     public int hashCode() {
-        return Objects.hash(this.mItems, Boolean.valueOf(this.mUseSystemOrdering), this.mLinkedItemComponentName);
+        return Objects.hash(
+                this.mItems,
+                Boolean.valueOf(this.mUseSystemOrdering),
+                this.mLinkedItemComponentName);
     }
 
     public static final class Builder {
@@ -111,19 +121,21 @@ public final class RouteListingPreference implements Parcelable {
     }
 
     public static final class Item implements Parcelable {
-        public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>() { // from class: android.media.RouteListingPreference.Item.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Item createFromParcel(Parcel in) {
-                return new Item(in);
-            }
+        public static final Parcelable.Creator<Item> CREATOR =
+                new Parcelable.Creator<
+                        Item>() { // from class: android.media.RouteListingPreference.Item.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Item createFromParcel(Parcel in) {
+                        return new Item(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Item[] newArray(int size) {
-                return new Item[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Item[] newArray(int size) {
+                        return new Item[size];
+                    }
+                };
         public static final int FLAG_ONGOING_SESSION = 1;
         public static final int FLAG_ONGOING_SESSION_MANAGED = 2;
         public static final int FLAG_SUGGESTED = 4;
@@ -146,16 +158,13 @@ public final class RouteListingPreference implements Parcelable {
         private final int mSubText;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Flags {
-        }
+        public @interface Flags {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface SelectionBehavior {
-        }
+        public @interface SelectionBehavior {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface SubText {
-        }
+        public @interface SubText {}
 
         private Item(Builder builder) {
             this.mRouteId = builder.mRouteId;
@@ -218,15 +227,26 @@ public final class RouteListingPreference implements Parcelable {
                 return false;
             }
             Item item = (Item) other;
-            return this.mRouteId.equals(item.mRouteId) && this.mSelectionBehavior == item.mSelectionBehavior && this.mFlags == item.mFlags && this.mSubText == item.mSubText && TextUtils.equals(this.mCustomSubtextMessage, item.mCustomSubtextMessage);
+            return this.mRouteId.equals(item.mRouteId)
+                    && this.mSelectionBehavior == item.mSelectionBehavior
+                    && this.mFlags == item.mFlags
+                    && this.mSubText == item.mSubText
+                    && TextUtils.equals(this.mCustomSubtextMessage, item.mCustomSubtextMessage);
         }
 
         public int hashCode() {
-            return Objects.hash(this.mRouteId, Integer.valueOf(this.mSelectionBehavior), Integer.valueOf(this.mFlags), Integer.valueOf(this.mSubText), this.mCustomSubtextMessage);
+            return Objects.hash(
+                    this.mRouteId,
+                    Integer.valueOf(this.mSelectionBehavior),
+                    Integer.valueOf(this.mFlags),
+                    Integer.valueOf(this.mSubText),
+                    this.mCustomSubtextMessage);
         }
 
         private void validateCustomMessageSubtext() {
-            Preconditions.checkArgument((this.mSubText == 10000 && this.mCustomSubtextMessage == null) ? false : true, "The custom subtext message cannot be null if subtext is SUBTEXT_CUSTOM.");
+            Preconditions.checkArgument(
+                    (this.mSubText == 10000 && this.mCustomSubtextMessage == null) ? false : true,
+                    "The custom subtext message cannot be null if subtext is SUBTEXT_CUSTOM.");
         }
 
         public static final class Builder {

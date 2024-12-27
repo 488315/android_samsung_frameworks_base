@@ -5,8 +5,9 @@ import android.hardware.hdmi.IHdmiControlCallback;
 import android.net.INetd;
 import android.sysprop.HdmiProperties;
 import android.util.Slog;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
-import com.android.server.hdmi.HdmiCecLocalDevice;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +36,11 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
                     if (i != -1) {
                         if (i != 0 && i != 2) {
                             if (i == 1 || i == 3) {
-                                Slog.i("HdmiCecLocalDeviceSource", "TV power toggle: turning on TV");
-                                ((HdmiCecLocalDeviceSource) this.this$0).oneTouchPlay(new AnonymousClass1(1, this));
+                                Slog.i(
+                                        "HdmiCecLocalDeviceSource",
+                                        "TV power toggle: turning on TV");
+                                ((HdmiCecLocalDeviceSource) this.this$0)
+                                        .oneTouchPlay(new AnonymousClass1(1, this));
                                 break;
                             }
                         } else {
@@ -46,15 +50,22 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
                             break;
                         }
                     } else {
-                        Slog.i("HdmiCecLocalDeviceSource", "TV power toggle: TV power status unknown");
-                        ((HdmiCecLocalDeviceSource) this.this$0).sendUserControlPressedAndReleased(0, 107);
+                        Slog.i(
+                                "HdmiCecLocalDeviceSource",
+                                "TV power toggle: TV power status unknown");
+                        ((HdmiCecLocalDeviceSource) this.this$0)
+                                .sendUserControlPressedAndReleased(0, 107);
                         break;
                     }
                     break;
                 default:
                     if (i != 0) {
-                        DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Failed to complete One Touch Play. result=", "HdmiCecLocalDeviceSource");
-                        ((HdmiCecLocalDeviceSource) ((AnonymousClass1) this.this$0).this$0).sendUserControlPressedAndReleased(0, 107);
+                        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                i,
+                                "Failed to complete One Touch Play. result=",
+                                "HdmiCecLocalDeviceSource");
+                        ((HdmiCecLocalDeviceSource) ((AnonymousClass1) this.this$0).this$0)
+                                .sendUserControlPressedAndReleased(0, 107);
                         break;
                     }
                     break;
@@ -64,13 +75,16 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
 
     public HdmiCecLocalDeviceSource(HdmiControlService hdmiControlService, int i) {
         super(hdmiControlService, i);
-        this.mIsSwitchDevice = ((Boolean) HdmiProperties.is_switch().orElse(Boolean.FALSE)).booleanValue();
+        this.mIsSwitchDevice =
+                ((Boolean) HdmiProperties.is_switch().orElse(Boolean.FALSE)).booleanValue();
         this.mRoutingPort = 0;
         this.mLocalActivePort = 0;
     }
 
     @Override // com.android.server.hdmi.HdmiCecLocalDevice
-    public void disableDevice(boolean z, HdmiCecLocalDevice.PendingActionClearedCallback pendingActionClearedCallback) {
+    public void disableDevice(
+            boolean z,
+            HdmiCecLocalDevice.PendingActionClearedCallback pendingActionClearedCallback) {
         removeAction(OneTouchPlayAction.class);
         removeAction(DevicePowerStatusAction.class);
         super.disableDevice(z, pendingActionClearedCallback);
@@ -100,7 +114,8 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
         if (hdmiCecConfig.getIntValue("rc_profile_source_handles_top_menu") == 1) {
             arrayList.add(1);
         }
-        if (hdmiCecConfig.getIntValue("rc_profile_source_handles_media_context_sensitive_menu") == 1) {
+        if (hdmiCecConfig.getIntValue("rc_profile_source_handles_media_context_sensitive_menu")
+                == 1) {
             arrayList.add(0);
         }
         return arrayList;
@@ -124,9 +139,13 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
         assertRunOnServiceThread();
         int i = hdmiCecMessage.mSource;
         int twoBytesToInt = HdmiUtils.twoBytesToInt(hdmiCecMessage.mParams);
-        HdmiCecLocalDevice.ActiveSource activeSource = new HdmiCecLocalDevice.ActiveSource(i, twoBytesToInt);
+        HdmiCecLocalDevice.ActiveSource activeSource =
+                new HdmiCecLocalDevice.ActiveSource(i, twoBytesToInt);
         if (!this.mService.getLocalActiveSource().equals(activeSource)) {
-            setActiveSource(activeSource.logicalAddress, activeSource.physicalAddress, "HdmiCecLocalDeviceSource#handleActiveSource()");
+            setActiveSource(
+                    activeSource.logicalAddress,
+                    activeSource.physicalAddress,
+                    "HdmiCecLocalDeviceSource#handleActiveSource()");
         }
         if (isRoutingControlFeatureEnabled()) {
             switchInputOnReceivingNewActivePath(twoBytesToInt);
@@ -143,7 +162,8 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
     public int handleRoutingChange(HdmiCecMessage hdmiCecMessage) {
         assertRunOnServiceThread();
         int twoBytesToInt = HdmiUtils.twoBytesToInt(2, hdmiCecMessage.mParams);
-        if (twoBytesToInt != this.mService.mHdmiCecNetwork.getPhysicalAddress() || !isActiveSource()) {
+        if (twoBytesToInt != this.mService.mHdmiCecNetwork.getPhysicalAddress()
+                || !isActiveSource()) {
             assertRunOnServiceThread();
             setActiveSource(-1, twoBytesToInt, "HdmiCecLocalDeviceSource#handleRoutingChange()");
         }
@@ -160,9 +180,11 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
     public int handleRoutingInformation(HdmiCecMessage hdmiCecMessage) {
         assertRunOnServiceThread();
         int twoBytesToInt = HdmiUtils.twoBytesToInt(hdmiCecMessage.mParams);
-        if (twoBytesToInt != this.mService.mHdmiCecNetwork.getPhysicalAddress() || !isActiveSource()) {
+        if (twoBytesToInt != this.mService.mHdmiCecNetwork.getPhysicalAddress()
+                || !isActiveSource()) {
             assertRunOnServiceThread();
-            setActiveSource(-1, twoBytesToInt, "HdmiCecLocalDeviceSource#handleRoutingInformation()");
+            setActiveSource(
+                    -1, twoBytesToInt, "HdmiCecLocalDeviceSource#handleRoutingInformation()");
         }
         if (!isRoutingControlFeatureEnabled()) {
             return 4;
@@ -176,9 +198,15 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
         assertRunOnServiceThread();
         int twoBytesToInt = HdmiUtils.twoBytesToInt(hdmiCecMessage.mParams);
         HdmiControlService hdmiControlService = this.mService;
-        if (twoBytesToInt == hdmiControlService.mHdmiCecNetwork.getPhysicalAddress() && hdmiControlService.isPlaybackDevice()) {
-            hdmiControlService.setAndBroadcastActiveSource(twoBytesToInt, getDeviceInfo().getDeviceType(), hdmiCecMessage.mSource, "HdmiCecLocalDeviceSource#handleSetStreamPath()");
-        } else if (twoBytesToInt != hdmiControlService.mHdmiCecNetwork.getPhysicalAddress() || !isActiveSource()) {
+        if (twoBytesToInt == hdmiControlService.mHdmiCecNetwork.getPhysicalAddress()
+                && hdmiControlService.isPlaybackDevice()) {
+            hdmiControlService.setAndBroadcastActiveSource(
+                    twoBytesToInt,
+                    getDeviceInfo().getDeviceType(),
+                    hdmiCecMessage.mSource,
+                    "HdmiCecLocalDeviceSource#handleSetStreamPath()");
+        } else if (twoBytesToInt != hdmiControlService.mHdmiCecNetwork.getPhysicalAddress()
+                || !isActiveSource()) {
             assertRunOnServiceThread();
             setActiveSource(-1, twoBytesToInt, "HdmiCecLocalDeviceSource#handleSetStreamPath()");
         }
@@ -191,7 +219,8 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
             return false;
         }
         HdmiCecLocalDevice.ActiveSource localActiveSource = this.mService.getLocalActiveSource();
-        return localActiveSource.logicalAddress == getDeviceInfo().getLogicalAddress() && localActiveSource.physicalAddress == getDeviceInfo().getPhysicalAddress();
+        return localActiveSource.logicalAddress == getDeviceInfo().getLogicalAddress()
+                && localActiveSource.physicalAddress == getDeviceInfo().getPhysicalAddress();
     }
 
     public final boolean isRoutingControlFeatureEnabled() {
@@ -208,8 +237,7 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
         }
     }
 
-    public void onActiveSourceLost() {
-    }
+    public void onActiveSourceLost() {}
 
     public final void oneTouchPlay(IHdmiControlCallback iHdmiControlCallback) {
         OneTouchPlayAction oneTouchPlayAction;
@@ -218,7 +246,8 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
         List actions = getActions(OneTouchPlayAction.class);
         if (!actions.isEmpty()) {
             Slog.i("HdmiCecLocalDeviceSource", "oneTouchPlay already in progress");
-            ((ArrayList) ((OneTouchPlayAction) actions.get(0)).mCallbacks).add(iHdmiControlCallback);
+            ((ArrayList) ((OneTouchPlayAction) actions.get(0)).mCallbacks)
+                    .add(iHdmiControlCallback);
             return;
         }
         if (iHdmiControlCallback == null) {
@@ -247,14 +276,18 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
     public final void sendStandby(int i) {
         assertRunOnServiceThread();
         HdmiControlService hdmiControlService = this.mService;
-        String stringValue = hdmiControlService.getHdmiCecConfig().getStringValue("power_control_mode");
+        String stringValue =
+                hdmiControlService.getHdmiCecConfig().getStringValue("power_control_mode");
         if (stringValue.equals(INetd.IF_FLAG_BROADCAST)) {
-            hdmiControlService.sendCecCommand(HdmiCecMessage.build(getDeviceInfo().getLogicalAddress(), 15, 54), null);
+            hdmiControlService.sendCecCommand(
+                    HdmiCecMessage.build(getDeviceInfo().getLogicalAddress(), 15, 54), null);
             return;
         }
-        hdmiControlService.sendCecCommand(HdmiCecMessage.build(getDeviceInfo().getLogicalAddress(), 0, 54), null);
+        hdmiControlService.sendCecCommand(
+                HdmiCecMessage.build(getDeviceInfo().getLogicalAddress(), 0, 54), null);
         if (stringValue.equals("to_tv_and_audio_system")) {
-            hdmiControlService.sendCecCommand(HdmiCecMessage.build(getDeviceInfo().getLogicalAddress(), 5, 54), null);
+            hdmiControlService.sendCecCommand(
+                    HdmiCecMessage.build(getDeviceInfo().getLogicalAddress(), 5, 54), null);
         }
     }
 
@@ -280,8 +313,7 @@ public abstract class HdmiCecLocalDeviceSource extends HdmiCecLocalDevice {
         }
     }
 
-    public void switchInputOnReceivingNewActivePath(int i) {
-    }
+    public void switchInputOnReceivingNewActivePath(int i) {}
 
     public final void wakeUpIfActiveSource() {
         if (isActiveSource()) {

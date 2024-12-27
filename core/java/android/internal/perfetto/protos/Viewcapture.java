@@ -8,8 +8,7 @@ public final class Viewcapture {
         public static final long VIEWS = 2246267895811L;
         public static final long WINDOW_NAME_IID = 1120986464258L;
 
-        public ViewCapture() {
-        }
+        public ViewCapture() {}
 
         public final class View {
             public static final long ALPHA = 1108101562384L;
@@ -33,8 +32,7 @@ public final class Viewcapture {
             public static final long WIDTH = 1120986464264L;
             public static final long WILL_NOT_DRAW = 1133871366161L;
 
-            public View() {
-            }
+            public View() {}
         }
     }
 }

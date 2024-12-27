@@ -5,7 +5,9 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+
 import com.samsung.android.rune.PMRune;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,8 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
     private boolean mHasBeenParceled = false;
     private int mStartIndexForWrite = -1;
 
-    protected abstract Parcelable.Creator<?> readParcelableCreator(Parcel parcel, ClassLoader classLoader);
+    protected abstract Parcelable.Creator<?> readParcelableCreator(
+            Parcel parcel, ClassLoader classLoader);
 
     protected abstract void writeElement(T t, Parcel parcel, int i);
 
@@ -58,11 +61,13 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
                         reply.readException();
                     }
                     while (i < N && reply.readInt() != 0) {
-                        listElementClass = readVerifyAndAddElement(creator, reply, loader, listElementClass);
+                        listElementClass =
+                                readVerifyAndAddElement(creator, reply, loader, listElementClass);
                         i++;
                     }
                 } catch (RemoteException e) {
-                    throw new BadParcelableException("Failure retrieving array; only received " + i + " of " + N, e);
+                    throw new BadParcelableException(
+                            "Failure retrieving array; only received " + i + " of " + N, e);
                 }
             } finally {
                 reply.recycle();
@@ -71,7 +76,11 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
         }
     }
 
-    private Class<?> readVerifyAndAddElement(Parcelable.Creator<?> creator, Parcel p, ClassLoader loader, Class<?> listElementClass) {
+    private Class<?> readVerifyAndAddElement(
+            Parcelable.Creator<?> creator,
+            Parcel p,
+            ClassLoader loader,
+            Class<?> listElementClass) {
         T parcelable = readCreator(creator, p, loader);
         if (listElementClass == null) {
             listElementClass = parcelable.getClass();
@@ -84,7 +93,8 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
 
     private T readCreator(Parcelable.Creator<?> creator, Parcel parcel, ClassLoader classLoader) {
         if (creator instanceof Parcelable.ClassLoaderCreator) {
-            return (T) ((Parcelable.ClassLoaderCreator) creator).createFromParcel(parcel, classLoader);
+            return (T)
+                    ((Parcelable.ClassLoaderCreator) creator).createFromParcel(parcel, classLoader);
         }
         return (T) creator.createFromParcel(parcel);
     }
@@ -92,7 +102,11 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
     /* JADX INFO: Access modifiers changed from: private */
     public static void verifySameType(Class<?> expected, Class<?> actual) {
         if (!actual.equals(expected)) {
-            throw new IllegalArgumentException("Can't unparcel type " + (actual == null ? null : actual.getName()) + " in list of type " + (expected != null ? expected.getName() : null));
+            throw new IllegalArgumentException(
+                    "Can't unparcel type "
+                            + (actual == null ? null : actual.getName())
+                            + " in list of type "
+                            + (expected != null ? expected.getName() : null));
         }
     }
 
@@ -105,15 +119,15 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:14:0x004f, code lost:
-    
-        r9.writeInt(0);
-        r0 = new android.content.pm.BaseParceledListSlice.AnonymousClass1(r8);
-        r9.writeStrongBinder(r0);
-     */
+
+       r9.writeInt(0);
+       r0 = new android.content.pm.BaseParceledListSlice.AnonymousClass1(r8);
+       r9.writeStrongBinder(r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:15:0x005a, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     @Override // android.os.Parcelable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -168,6 +182,9 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
             r0.<init>(r1)
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.pm.BaseParceledListSlice.writeToParcel(android.os.Parcel, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.content.pm.BaseParceledListSlice.writeToParcel(android.os.Parcel,"
+                    + " int):void");
     }
 }

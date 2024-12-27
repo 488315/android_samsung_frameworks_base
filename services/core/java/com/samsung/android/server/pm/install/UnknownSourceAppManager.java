@@ -10,9 +10,12 @@ import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.UserManager;
 import android.util.Log;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.pm.PackageManagerService$$ExternalSyntheticLambda55;
+
 import com.samsung.android.feature.SemCscFeature;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.function.Supplier;
@@ -30,12 +33,29 @@ public final class UnknownSourceAppManager {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Helper {
-        public static void suspendUnknownSourceAppsForAllUsers(Context context, String[] strArr, boolean z) {
-            Iterator it = ((UserManager) context.getSystemService(UserManager.class)).getUsers().iterator();
+        public static void suspendUnknownSourceAppsForAllUsers(
+                Context context, String[] strArr, boolean z) {
+            Iterator it =
+                    ((UserManager) context.getSystemService(UserManager.class))
+                            .getUsers()
+                            .iterator();
             while (it.hasNext()) {
                 int i = ((UserInfo) it.next()).id;
                 try {
-                    AppGlobals.getPackageManager().setPackagesSuspendedAsUser(strArr, z, (PersistableBundle) null, (PersistableBundle) null, new SuspendDialogInfo.Builder().setTitle(context.getString(17043303)).setMessage(context.getString(17043302)).build(), 0, "system", i, i);
+                    AppGlobals.getPackageManager()
+                            .setPackagesSuspendedAsUser(
+                                    strArr,
+                                    z,
+                                    (PersistableBundle) null,
+                                    (PersistableBundle) null,
+                                    new SuspendDialogInfo.Builder()
+                                            .setTitle(context.getString(17043303))
+                                            .setMessage(context.getString(17043302))
+                                            .build(),
+                                    0,
+                                    "system",
+                                    i,
+                                    i);
                 } catch (RemoteException | IllegalArgumentException e) {
                     e.printStackTrace();
                 }
@@ -47,18 +67,23 @@ public final class UnknownSourceAppManager {
     public final class PackageSettingsDelegator {
         public final Supplier mGetPackagesLocked;
 
-        public PackageSettingsDelegator(PackageManagerService$$ExternalSyntheticLambda55 packageManagerService$$ExternalSyntheticLambda55) {
+        public PackageSettingsDelegator(
+                PackageManagerService$$ExternalSyntheticLambda55
+                        packageManagerService$$ExternalSyntheticLambda55) {
             this.mGetPackagesLocked = packageManagerService$$ExternalSyntheticLambda55;
         }
     }
 
-    public UnknownSourceAppManager(Handler handler, PackageSettingsDelegator packageSettingsDelegator) {
+    public UnknownSourceAppManager(
+            Handler handler, PackageSettingsDelegator packageSettingsDelegator) {
         this.mSettingsDelegator = packageSettingsDelegator;
         this.mHandler = handler;
     }
 
     public static boolean isSideLoadingApp(String str) {
-        return "com.google.android.packageinstaller".equals(str) || ("CN".equalsIgnoreCase(SemCscFeature.getInstance().getString("CountryISO")) && "com.samsung.android.packageinstaller".equals(str));
+        return "com.google.android.packageinstaller".equals(str)
+                || ("CN".equalsIgnoreCase(SemCscFeature.getInstance().getString("CountryISO"))
+                        && "com.samsung.android.packageinstaller".equals(str));
     }
 
     public boolean loadListFromFile(String str) {
@@ -76,7 +101,9 @@ public final class UnknownSourceAppManager {
 
     public void writeUnknownPackageXmlSync(String str) {
         synchronized (this.mUnknownLock) {
-            Log.d("UnknownSourceAppManager", "writeUnknownPackageXmlSync: " + this.mUnknownSourceAppSet.size());
+            Log.d(
+                    "UnknownSourceAppManager",
+                    "writeUnknownPackageXmlSync: " + this.mUnknownSourceAppSet.size());
             PmConfigParser pmConfigParser = this.mPmConfigParser;
             HashSet hashSet = this.mUnknownSourceAppSet;
             pmConfigParser.getClass();

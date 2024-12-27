@@ -9,23 +9,24 @@ public class Region implements Parcelable {
     private static final int MAX_POOL_SIZE = 10;
     public long mNativeRegion;
     private static final Pools.SynchronizedPool<Region> sPool = new Pools.SynchronizedPool<>(10);
-    public static final Parcelable.Creator<Region> CREATOR = new Parcelable.Creator<Region>() { // from class: android.graphics.Region.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Region createFromParcel(Parcel p) {
-            long ni = Region.nativeCreateFromParcel(p);
-            if (ni == 0) {
-                throw new RuntimeException();
-            }
-            return new Region(ni);
-        }
+    public static final Parcelable.Creator<Region> CREATOR =
+            new Parcelable.Creator<Region>() { // from class: android.graphics.Region.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Region createFromParcel(Parcel p) {
+                    long ni = Region.nativeCreateFromParcel(p);
+                    if (ni == 0) {
+                        throw new RuntimeException();
+                    }
+                    return new Region(ni);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Region[] newArray(int size) {
-            return new Region[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Region[] newArray(int size) {
+                    return new Region[size];
+                }
+            };
 
     private static native long nativeConstructor();
 
@@ -189,7 +190,8 @@ public class Region implements Parcelable {
     }
 
     public boolean op(Region region1, Region region2, Op op) {
-        return nativeOp(this.mNativeRegion, region1.mNativeRegion, region2.mNativeRegion, op.nativeInt);
+        return nativeOp(
+                this.mNativeRegion, region1.mNativeRegion, region2.mNativeRegion, op.nativeInt);
     }
 
     public String toString() {

@@ -2,11 +2,13 @@ package android.graphics;
 
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.system.VMRuntime;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public class PathIterator implements Iterator<Segment> {
@@ -18,7 +20,9 @@ public class PathIterator implements Iterator<Segment> {
     public static final int VERB_LINE = 1;
     public static final int VERB_MOVE = 0;
     public static final int VERB_QUAD = 2;
-    private static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(PathIterator.class.getClassLoader(), nGetFinalizer());
+    private static final NativeAllocationRegistry sRegistry =
+            NativeAllocationRegistry.createMalloced(
+                    PathIterator.class.getClassLoader(), nGetFinalizer());
     private int mCachedVerb = -1;
     private boolean mDone = false;
     private final long mNativeIterator;
@@ -28,8 +32,7 @@ public class PathIterator implements Iterator<Segment> {
     private final float[] mPointsArray;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface Verb {
-    }
+    @interface Verb {}
 
     private static native long nCreate(long j);
 
@@ -53,7 +56,8 @@ public class PathIterator implements Iterator<Segment> {
 
     public int next(float[] points, int offset) {
         if (points.length < offset + 8) {
-            throw new ArrayIndexOutOfBoundsException("points array must be able to hold at least 8 entries");
+            throw new ArrayIndexOutOfBoundsException(
+                    "points array must be able to hold at least 8 entries");
         }
         int returnVerb = getReturnVerb(this.mCachedVerb);
         this.mCachedVerb = -1;

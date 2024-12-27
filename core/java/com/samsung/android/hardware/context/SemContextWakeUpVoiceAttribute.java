@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextWakeUpVoiceAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextWakeUpVoiceAttribute> CREATOR = new Parcelable.Creator<SemContextWakeUpVoiceAttribute>() { // from class: com.samsung.android.hardware.context.SemContextWakeUpVoiceAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextWakeUpVoiceAttribute createFromParcel(Parcel in) {
-            return new SemContextWakeUpVoiceAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextWakeUpVoiceAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextWakeUpVoiceAttribute>() { // from class:
+                                                        // com.samsung.android.hardware.context.SemContextWakeUpVoiceAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextWakeUpVoiceAttribute createFromParcel(Parcel in) {
+                    return new SemContextWakeUpVoiceAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextWakeUpVoiceAttribute[] newArray(int size) {
-            return new SemContextWakeUpVoiceAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextWakeUpVoiceAttribute[] newArray(int size) {
+                    return new SemContextWakeUpVoiceAttribute[size];
+                }
+            };
     private static final int MODE_REFERENCE_DATA = 1;
     private static final int MODE_REGISTER = 0;
     private static final String TAG = "SemContextWakeUpVoiceAttribute";

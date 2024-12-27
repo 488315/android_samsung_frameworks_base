@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,24 +15,24 @@ import java.util.Set;
 
 /* loaded from: classes.dex */
 public final class ContentValues implements Parcelable {
-    public static final Parcelable.Creator<ContentValues> CREATOR = new Parcelable.Creator<ContentValues>() { // from class: android.content.ContentValues.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentValues createFromParcel(Parcel in) {
-            return new ContentValues(in);
-        }
+    public static final Parcelable.Creator<ContentValues> CREATOR =
+            new Parcelable.Creator<ContentValues>() { // from class: android.content.ContentValues.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentValues createFromParcel(Parcel in) {
+                    return new ContentValues(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentValues[] newArray(int size) {
-            return new ContentValues[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentValues[] newArray(int size) {
+                    return new ContentValues[size];
+                }
+            };
     public static final String TAG = "ContentValues";
     private final ArrayMap<String, Object> mMap;
 
-    @Deprecated
-    private HashMap<String, Object> mValues;
+    @Deprecated private HashMap<String, Object> mValues;
 
     public ContentValues() {
         this.mMap = new ArrayMap<>();
@@ -322,7 +324,8 @@ public final class ContentValues implements Parcelable {
             return (Boolean) value;
         } catch (ClassCastException e) {
             if (value instanceof CharSequence) {
-                return Boolean.valueOf(Boolean.valueOf(value.toString()).booleanValue() || "1".equals(value));
+                return Boolean.valueOf(
+                        Boolean.valueOf(value.toString()).booleanValue() || "1".equals(value));
             }
             if (value instanceof Number) {
                 return Boolean.valueOf(((Number) value).intValue() != 0);
@@ -382,7 +385,16 @@ public final class ContentValues implements Parcelable {
     }
 
     public static boolean isSupportedValue(Object value) {
-        if (value == null || (value instanceof String) || (value instanceof Byte) || (value instanceof Short) || (value instanceof Integer) || (value instanceof Long) || (value instanceof Float) || (value instanceof Double) || (value instanceof Boolean) || (value instanceof byte[])) {
+        if (value == null
+                || (value instanceof String)
+                || (value instanceof Byte)
+                || (value instanceof Short)
+                || (value instanceof Integer)
+                || (value instanceof Long)
+                || (value instanceof Float)
+                || (value instanceof Double)
+                || (value instanceof Boolean)
+                || (value instanceof byte[])) {
             return true;
         }
         return false;

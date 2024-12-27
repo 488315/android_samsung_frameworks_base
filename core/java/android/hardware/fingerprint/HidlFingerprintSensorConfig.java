@@ -4,7 +4,9 @@ import android.content.Context;
 import android.hardware.biometrics.common.CommonProps;
 import android.hardware.biometrics.fingerprint.SensorLocation;
 import android.hardware.biometrics.fingerprint.SensorProps;
+
 import com.android.internal.R;
+
 import com.samsung.android.bio.fingerprint.SemFingerprintManager;
 
 /* loaded from: classes2.dex */
@@ -34,10 +36,12 @@ public final class HidlFingerprintSensorConfig extends SensorProps {
         this.commonProps.componentInfo = null;
         this.commonProps.sensorId = this.mSensorId;
         this.commonProps.sensorStrength = authenticatorStrengthToPropertyStrength(this.mStrength);
-        this.commonProps.maxEnrollmentsPerUser = context.getResources().getInteger(R.integer.config_fingerprintMaxTemplatesPerUser);
+        this.commonProps.maxEnrollmentsPerUser =
+                context.getResources().getInteger(R.integer.config_fingerprintMaxTemplatesPerUser);
         this.halControlsIllumination = false;
         this.sensorLocations = new SensorLocation[1];
-        this.commonProps.maxEnrollmentsPerUser = SemFingerprintManager.getMaxTemplateNumberFromSPF();
+        this.commonProps.maxEnrollmentsPerUser =
+                SemFingerprintManager.getMaxTemplateNumberFromSPF();
         switch (FingerprintManager.semGetSensorPosition()) {
             case 0:
                 this.sensorType = (byte) 0;

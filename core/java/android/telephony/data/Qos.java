@@ -2,6 +2,7 @@ package android.telephony.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -15,8 +16,7 @@ public abstract class Qos implements Parcelable {
     final QosBandwidth uplink;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface QosType {
-    }
+    public @interface QosType {}
 
     Qos(int type, QosBandwidth downlink, QosBandwidth uplink) {
         this.type = type;
@@ -33,19 +33,21 @@ public abstract class Qos implements Parcelable {
     }
 
     public static class QosBandwidth implements Parcelable {
-        public static final Parcelable.Creator<QosBandwidth> CREATOR = new Parcelable.Creator<QosBandwidth>() { // from class: android.telephony.data.Qos.QosBandwidth.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public QosBandwidth createFromParcel(Parcel source) {
-                return new QosBandwidth(source);
-            }
+        public static final Parcelable.Creator<QosBandwidth> CREATOR =
+                new Parcelable.Creator<
+                        QosBandwidth>() { // from class: android.telephony.data.Qos.QosBandwidth.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public QosBandwidth createFromParcel(Parcel source) {
+                        return new QosBandwidth(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public QosBandwidth[] newArray(int size) {
-                return new QosBandwidth[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public QosBandwidth[] newArray(int size) {
+                        return new QosBandwidth[size];
+                    }
+                };
         int guaranteedBitrateKbps;
         int maxBitrateKbps;
 
@@ -79,7 +81,9 @@ public abstract class Qos implements Parcelable {
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.maxBitrateKbps), Integer.valueOf(this.guaranteedBitrateKbps));
+            return Objects.hash(
+                    Integer.valueOf(this.maxBitrateKbps),
+                    Integer.valueOf(this.guaranteedBitrateKbps));
         }
 
         public boolean equals(Object o) {
@@ -90,21 +94,32 @@ public abstract class Qos implements Parcelable {
                 return false;
             }
             QosBandwidth other = (QosBandwidth) o;
-            if (this.maxBitrateKbps == other.maxBitrateKbps && this.guaranteedBitrateKbps == other.guaranteedBitrateKbps) {
+            if (this.maxBitrateKbps == other.maxBitrateKbps
+                    && this.guaranteedBitrateKbps == other.guaranteedBitrateKbps) {
                 return true;
             }
             return false;
         }
 
         public String toString() {
-            return "Bandwidth { maxBitrateKbps=" + this.maxBitrateKbps + " guaranteedBitrateKbps=" + this.guaranteedBitrateKbps + "}";
+            return "Bandwidth { maxBitrateKbps="
+                    + this.maxBitrateKbps
+                    + " guaranteedBitrateKbps="
+                    + this.guaranteedBitrateKbps
+                    + "}";
         }
     }
 
     protected Qos(Parcel source) {
         this.type = source.readInt();
-        this.downlink = (QosBandwidth) source.readParcelable(QosBandwidth.class.getClassLoader(), QosBandwidth.class);
-        this.uplink = (QosBandwidth) source.readParcelable(QosBandwidth.class.getClassLoader(), QosBandwidth.class);
+        this.downlink =
+                (QosBandwidth)
+                        source.readParcelable(
+                                QosBandwidth.class.getClassLoader(), QosBandwidth.class);
+        this.uplink =
+                (QosBandwidth)
+                        source.readParcelable(
+                                QosBandwidth.class.getClassLoader(), QosBandwidth.class);
     }
 
     public void writeToParcel(int type, Parcel dest, int flags) {
@@ -126,6 +141,8 @@ public abstract class Qos implements Parcelable {
             return true;
         }
         Qos other = (Qos) o;
-        return this.type == other.type && this.downlink.equals(other.downlink) && this.uplink.equals(other.uplink);
+        return this.type == other.type
+                && this.downlink.equals(other.downlink)
+                && this.uplink.equals(other.uplink);
     }
 }

@@ -9,8 +9,7 @@ public class Constants {
         public static final int NOT_DETECTED = 2;
         public static final int NOT_SUPPORTED = 0;
 
-        public ContaminantDetectionStatus() {
-        }
+        public ContaminantDetectionStatus() {}
     }
 
     public final class ContaminantProtectionMode {
@@ -19,8 +18,7 @@ public class Constants {
         public static final int FORCE_SOURCE = 2;
         public static final int NONE = 0;
 
-        public ContaminantProtectionMode() {
-        }
+        public ContaminantProtectionMode() {}
     }
 
     public final class ContaminantProtectionStatus {
@@ -30,7 +28,6 @@ public class Constants {
         public static final int FORCE_SOURCE = 2;
         public static final int NONE = 0;
 
-        public ContaminantProtectionStatus() {
-        }
+        public ContaminantProtectionStatus() {}
     }
 }

@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto.signers;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Encoding;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.DERNull;
@@ -20,6 +21,7 @@ import com.android.internal.org.bouncycastle.crypto.engines.RSABlindedEngine;
 import com.android.internal.org.bouncycastle.crypto.params.AsymmetricKeyParameter;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.IOException;
 import java.util.Hashtable;
 
@@ -92,7 +94,8 @@ public class RSADigestSigner implements Signer {
     @Override // com.android.internal.org.bouncycastle.crypto.Signer
     public byte[] generateSignature() throws CryptoException, DataLengthException {
         if (!this.forSigning) {
-            throw new IllegalStateException("RSADigestSigner not initialised for signature generation.");
+            throw new IllegalStateException(
+                    "RSADigestSigner not initialised for signature generation.");
         }
         byte[] hash = new byte[this.digest.getDigestSize()];
         this.digest.doFinal(hash, 0);
@@ -149,7 +152,8 @@ public class RSADigestSigner implements Signer {
                 DigestInfo.getInstance(hash);
                 return hash;
             } catch (IllegalArgumentException e) {
-                throw new IOException("malformed DigestInfo for NONEwithRSA hash: " + e.getMessage());
+                throw new IOException(
+                        "malformed DigestInfo for NONEwithRSA hash: " + e.getMessage());
             }
         }
         DigestInfo dInfo = new DigestInfo(this.algId, hash);

@@ -3,24 +3,27 @@ package android.media.audio.common;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class AudioIoFlags implements Parcelable {
-    public static final Parcelable.Creator<AudioIoFlags> CREATOR = new Parcelable.Creator<AudioIoFlags>() { // from class: android.media.audio.common.AudioIoFlags.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioIoFlags createFromParcel(Parcel _aidl_source) {
-            return new AudioIoFlags(_aidl_source);
-        }
+    public static final Parcelable.Creator<AudioIoFlags> CREATOR =
+            new Parcelable.Creator<
+                    AudioIoFlags>() { // from class: android.media.audio.common.AudioIoFlags.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioIoFlags createFromParcel(Parcel _aidl_source) {
+                    return new AudioIoFlags(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioIoFlags[] newArray(int _aidl_size) {
-            return new AudioIoFlags[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioIoFlags[] newArray(int _aidl_size) {
+                    return new AudioIoFlags[_aidl_size];
+                }
+            };
     public static final int input = 0;
     public static final int output = 1;
     private int _tag;
@@ -120,7 +123,9 @@ public final class AudioIoFlags implements Parcelable {
             case 0:
                 return "AudioIoFlags.input(" + getInput() + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "AudioIoFlags.output(" + getOutput() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioIoFlags.output("
+                        + getOutput()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -141,12 +146,18 @@ public final class AudioIoFlags implements Parcelable {
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
     }
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

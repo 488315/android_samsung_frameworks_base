@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.PatternMatcher;
+
 import java.util.regex.Pattern;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -12,7 +13,8 @@ public abstract class StringFilter implements Filter {
     public final AnonymousClass1 mValueProvider;
     public static final AnonymousClass1 COMPONENT = new AnonymousClass1("component", 0);
     public static final AnonymousClass1 COMPONENT_NAME = new AnonymousClass1("component-name", 2);
-    public static final AnonymousClass1 COMPONENT_PACKAGE = new AnonymousClass1("component-package", 3);
+    public static final AnonymousClass1 COMPONENT_PACKAGE =
+            new AnonymousClass1("component-package", 3);
     public static final AnonymousClass1 ACTION = new AnonymousClass1("action", 4);
     public static final AnonymousClass1 DATA = new AnonymousClass1("data", 5);
     public static final AnonymousClass1 MIME_TYPE = new AnonymousClass1("mime-type", 6);
@@ -146,7 +148,9 @@ public abstract class StringFilter implements Filter {
             Lbf:
                 return r3
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.firewall.StringFilter.AnonymousClass1.newFilter(org.xmlpull.v1.XmlPullParser):com.android.server.firewall.Filter");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.firewall.StringFilter.AnonymousClass1.newFilter(org.xmlpull.v1.XmlPullParser):com.android.server.firewall.Filter");
         }
     }
 
@@ -250,7 +254,14 @@ public abstract class StringFilter implements Filter {
     }
 
     @Override // com.android.server.firewall.Filter
-    public final boolean matches(IntentFirewall intentFirewall, ComponentName componentName, Intent intent, int i, int i2, String str, int i3) {
+    public final boolean matches(
+            IntentFirewall intentFirewall,
+            ComponentName componentName,
+            Intent intent,
+            int i,
+            int i2,
+            String str,
+            int i3) {
         String flattenToString;
         switch (this.mValueProvider.$r8$classId) {
             case 0:

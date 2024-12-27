@@ -12,13 +12,14 @@ import android.view.InsetsSourceControl;
 import android.view.SurfaceControl;
 import android.view.WindowInsets;
 import android.view.inputmethod.Flags;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.internal.util.function.TriFunction;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
-import com.android.server.wm.AsyncRotationController;
-import com.android.server.wm.SurfaceAnimator;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -70,8 +71,7 @@ public class InsetsSourceProvider {
         }
 
         @Override // com.android.server.wm.AnimationAdapter
-        public final void dumpDebug$1(ProtoOutputStream protoOutputStream) {
-        }
+        public final void dumpDebug$1(ProtoOutputStream protoOutputStream) {}
 
         @Override // com.android.server.wm.AnimationAdapter
         public final long getDurationHint() {
@@ -92,26 +92,48 @@ public class InsetsSourceProvider {
         public final void onAnimationCancelled(SurfaceControl surfaceControl) {
             InsetsSourceProvider insetsSourceProvider = InsetsSourceProvider.this;
             if (insetsSourceProvider.mAdapter == this) {
-                insetsSourceProvider.mStateController.removeFromControlMaps(insetsSourceProvider.mControlTarget, insetsSourceProvider, false);
+                insetsSourceProvider.mStateController.removeFromControlMaps(
+                        insetsSourceProvider.mControlTarget, insetsSourceProvider, false);
                 insetsSourceProvider.mControl = null;
                 insetsSourceProvider.mControlTarget = null;
                 insetsSourceProvider.mAdapter = null;
-                insetsSourceProvider.setClientVisible((WindowInsets.Type.defaultVisible() & insetsSourceProvider.mSource.getType()) != 0);
+                insetsSourceProvider.setClientVisible(
+                        (WindowInsets.Type.defaultVisible()
+                                        & insetsSourceProvider.mSource.getType())
+                                != 0);
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_INSETS_enabled[2]) {
-                    ProtoLogImpl_54989576.i(ProtoLogGroup.WM_DEBUG_WINDOW_INSETS, -6857870589074001153L, 0, null, String.valueOf(insetsSourceProvider.mSource), String.valueOf(insetsSourceProvider.mControlTarget));
+                    ProtoLogImpl_54989576.i(
+                            ProtoLogGroup.WM_DEBUG_WINDOW_INSETS,
+                            -6857870589074001153L,
+                            0,
+                            null,
+                            String.valueOf(insetsSourceProvider.mSource),
+                            String.valueOf(insetsSourceProvider.mControlTarget));
                 }
             }
         }
 
         @Override // com.android.server.wm.AnimationAdapter
-        public final void startAnimation(SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, int i, SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback) {
+        public final void startAnimation(
+                SurfaceControl surfaceControl,
+                SurfaceControl.Transaction transaction,
+                int i,
+                SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback) {
             InsetsSourceProvider insetsSourceProvider = InsetsSourceProvider.this;
-            if (insetsSourceProvider.mSource.getType() == WindowInsets.Type.ime() && (!Flags.refactorInsetsController() || !insetsSourceProvider.mClientVisible)) {
+            if (insetsSourceProvider.mSource.getType() == WindowInsets.Type.ime()
+                    && (!Flags.refactorInsetsController()
+                            || !insetsSourceProvider.mClientVisible)) {
                 transaction.setAlpha(surfaceControl, 1.0f);
                 transaction.hide(surfaceControl);
             }
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_INSETS_enabled[2]) {
-                ProtoLogImpl_54989576.i(ProtoLogGroup.WM_DEBUG_WINDOW_INSETS, -8601070090234611338L, 0, null, String.valueOf(insetsSourceProvider.mSource), String.valueOf(insetsSourceProvider.mControlTarget));
+                ProtoLogImpl_54989576.i(
+                        ProtoLogGroup.WM_DEBUG_WINDOW_INSETS,
+                        -8601070090234611338L,
+                        0,
+                        null,
+                        String.valueOf(insetsSourceProvider.mSource),
+                        String.valueOf(insetsSourceProvider.mControlTarget));
             }
             this.mCapturedLeash = surfaceControl;
             Point point = this.mSurfacePosition;
@@ -120,7 +142,10 @@ public class InsetsSourceProvider {
         }
     }
 
-    public InsetsSourceProvider(InsetsSource insetsSource, InsetsStateController insetsStateController, DisplayContent displayContent) {
+    public InsetsSourceProvider(
+            InsetsSource insetsSource,
+            InsetsStateController insetsStateController,
+            DisplayContent displayContent) {
         Insets insets = Insets.NONE;
         this.mInsetsHint = insets;
         this.mInsetsHintStale = true;
@@ -128,7 +153,14 @@ public class InsetsSourceProvider {
         this.mSource = insetsSource;
         this.mDisplayContent = displayContent;
         this.mStateController = insetsStateController;
-        this.mFakeControl = new InsetsSourceControl(insetsSource.getId(), insetsSource.getType(), (SurfaceControl) null, false, new Point(), insets);
+        this.mFakeControl =
+                new InsetsSourceControl(
+                        insetsSource.getId(),
+                        insetsSource.getType(),
+                        (SurfaceControl) null,
+                        false,
+                        new Point(),
+                        insets);
         this.mControllable = (insetsSource.getType() & InsetsPolicy.CONTROLLABLE_TYPES) != 0;
         this.mSetLeashPositionConsumer = new InsetsSourceProvider$$ExternalSyntheticLambda0(this);
     }
@@ -201,7 +233,9 @@ public class InsetsSourceProvider {
             this.mControlTarget.getWindow().dumpDebug(protoOutputStream, 1146756268037L, i);
         }
         InsetsControlTarget insetsControlTarget2 = this.mPendingControlTarget;
-        if (insetsControlTarget2 != null && insetsControlTarget2 != this.mControlTarget && insetsControlTarget2.getWindow() != null) {
+        if (insetsControlTarget2 != null
+                && insetsControlTarget2 != this.mControlTarget
+                && insetsControlTarget2.getWindow() != null) {
             this.mPendingControlTarget.getWindow().dumpDebug(protoOutputStream, 1146756268038L, i);
         }
         InsetsControlTarget insetsControlTarget3 = this.mFakeControlTarget;
@@ -226,7 +260,15 @@ public class InsetsSourceProvider {
 
     public InsetsSourceControl getControl(InsetsControlTarget insetsControlTarget) {
         if (insetsControlTarget == this.mControlTarget) {
-            return (isLeashReadyForDispatching() || this.mControl == null) ? this.mControl : new InsetsSourceControl(this.mControl.getId(), this.mControl.getType(), (SurfaceControl) null, this.mControl.isInitiallyVisible(), this.mControl.getSurfacePosition(), this.mControl.getInsetsHint());
+            return (isLeashReadyForDispatching() || this.mControl == null)
+                    ? this.mControl
+                    : new InsetsSourceControl(
+                            this.mControl.getId(),
+                            this.mControl.getType(),
+                            (SurfaceControl) null,
+                            this.mControl.isInitiallyVisible(),
+                            this.mControl.getSurfacePosition(),
+                            this.mControl.getInsetsHint());
         }
         if (insetsControlTarget == this.mFakeControlTarget) {
             return this.mFakeControl;
@@ -243,7 +285,8 @@ public class InsetsSourceProvider {
             return this.mInsetsHint;
         }
         if (this.mInsetsHintStale) {
-            this.mInsetsHint = this.mSource.calculateInsets(this.mWindowContainer.getBounds(), true);
+            this.mInsetsHint =
+                    this.mSource.calculateInsets(this.mWindowContainer.getBounds(), true);
             this.mInsetsHintStale = false;
         }
         return this.mInsetsHint;
@@ -253,12 +296,21 @@ public class InsetsSourceProvider {
         AsyncRotationController asyncRotationController;
         int i;
         WindowState asWindowState = this.mWindowContainer.asWindowState();
-        if (asWindowState != null && this.mControl != null && (asyncRotationController = this.mDisplayContent.getAsyncRotationController()) != null && (i = asyncRotationController.mTransitionOp) != 0 && ((i == 1 || i == 3 || TransitionController.SYNC_METHOD == 1) && AsyncRotationController.canBeAsync(asWindowState.mToken))) {
+        if (asWindowState != null
+                && this.mControl != null
+                && (asyncRotationController = this.mDisplayContent.getAsyncRotationController())
+                        != null
+                && (i = asyncRotationController.mTransitionOp) != 0
+                && ((i == 1 || i == 3 || TransitionController.SYNC_METHOD == 1)
+                        && AsyncRotationController.canBeAsync(asWindowState.mToken))) {
             if (asyncRotationController.mTargetWindowTokens.containsKey(asWindowState.mToken)) {
                 return this.mControl.getSurfacePosition();
             }
         }
-        Rect bounds = asWindowState != null ? asWindowState.mWindowFrames.mFrame : this.mWindowContainer.getBounds();
+        Rect bounds =
+                asWindowState != null
+                        ? asWindowState.mWindowFrames.mFrame
+                        : this.mWindowContainer.getBounds();
         Point point = new Point();
         this.mWindowContainer.transformFrameToSurfacePosition(bounds.left, bounds.top, point);
         return point;
@@ -275,8 +327,17 @@ public class InsetsSourceProvider {
             return;
         }
         WindowState asWindowState = windowContainer.asWindowState();
-        boolean isVisibleRequested = asWindowState != null ? asWindowState.wouldBeVisibleIfPolicyIgnored() && asWindowState.isVisibleByPolicy() : this.mWindowContainer.isVisibleRequested();
-        if (Flags.refactorInsetsController() && (insetsSourceControl = this.mControl) != null && insetsSourceControl.getType() == WindowInsets.Type.ime() && !this.mServerVisible && isVisibleRequested && asWindowState != null) {
+        boolean isVisibleRequested =
+                asWindowState != null
+                        ? asWindowState.wouldBeVisibleIfPolicyIgnored()
+                                && asWindowState.isVisibleByPolicy()
+                        : this.mWindowContainer.isVisibleRequested();
+        if (Flags.refactorInsetsController()
+                && (insetsSourceControl = this.mControl) != null
+                && insetsSourceControl.getType() == WindowInsets.Type.ime()
+                && !this.mServerVisible
+                && isVisibleRequested
+                && asWindowState != null) {
             isVisibleRequested = asWindowState.isDrawn() && !asWindowState.mGivenInsetsPending;
         }
         boolean z = this.mServerVisible != isVisibleRequested;
@@ -312,7 +373,8 @@ public class InsetsSourceProvider {
         updateVisibility();
     }
 
-    public final void setWindowContainer(WindowContainer windowContainer, TriFunction triFunction, SparseArray sparseArray) {
+    public final void setWindowContainer(
+            WindowContainer windowContainer, TriFunction triFunction, SparseArray sparseArray) {
         WindowContainer windowContainer2 = this.mWindowContainer;
         boolean z = this.mControllable;
         if (windowContainer2 != null) {
@@ -329,7 +391,13 @@ public class InsetsSourceProvider {
             }
         }
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_INSETS_enabled[0]) {
-            ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_WINDOW_INSETS, 1522894362518893789L, 0, null, String.valueOf(windowContainer), String.valueOf(WindowInsets.Type.toString(this.mSource.getType())));
+            ProtoLogImpl_54989576.d(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_INSETS,
+                    1522894362518893789L,
+                    0,
+                    null,
+                    String.valueOf(windowContainer),
+                    String.valueOf(WindowInsets.Type.toString(this.mSource.getType())));
         }
         this.mWindowContainer = windowContainer;
         this.mFrameProvider = triFunction;
@@ -356,7 +424,8 @@ public class InsetsSourceProvider {
 
     public boolean updateClientVisibility(InsetsControlTarget insetsControlTarget) {
         boolean isRequestedVisible = insetsControlTarget.isRequestedVisible(this.mSource.getType());
-        if (insetsControlTarget != this.mControlTarget || isRequestedVisible == this.mClientVisible) {
+        if (insetsControlTarget != this.mControlTarget
+                || isRequestedVisible == this.mClientVisible) {
             return false;
         }
         setClientVisible(isRequestedVisible);
@@ -381,32 +450,69 @@ public class InsetsSourceProvider {
         if ((insetsControlTarget != this.mControlTarget || z) && !this.mHasPendingPosition) {
             if (insetsControlTarget == null) {
                 windowContainer2.cancelAnimation();
-                setClientVisible((WindowInsets.Type.defaultVisible() & this.mSource.getType()) != 0);
+                setClientVisible(
+                        (WindowInsets.Type.defaultVisible() & this.mSource.getType()) != 0);
                 return;
             }
             Point windowFrameSurfacePosition = getWindowFrameSurfacePosition();
             DisplayContent displayContent = this.mDisplayContent;
-            if (displayContent.mDisplayId == 2 && this.mWindowContainer.asWindowState() != null && this.mWindowContainer.asWindowState().mWindowFrames.mFrame.isEmpty() && this.mWindowContainer.asWindowState().mAttrs.type == 2019 && windowFrameSurfacePosition.y != (i = displayContent.getBounds().bottom - displayContent.mDisplayPolicy.mDexTaskbarHeight)) {
+            if (displayContent.mDisplayId == 2
+                    && this.mWindowContainer.asWindowState() != null
+                    && this.mWindowContainer.asWindowState().mWindowFrames.mFrame.isEmpty()
+                    && this.mWindowContainer.asWindowState().mAttrs.type == 2019
+                    && windowFrameSurfacePosition.y
+                            != (i =
+                                    displayContent.getBounds().bottom
+                                            - displayContent.mDisplayPolicy.mDexTaskbarHeight)) {
                 windowFrameSurfacePosition.y = i;
             }
             this.mAdapter = new ControlAdapter(windowFrameSurfacePosition);
             if (this.mSource.getType() == WindowInsets.Type.ime()) {
-                z2 = displayContent.mRemoteInsetsControlTarget == this.mControlTarget && displayContent.mImeInputTarget == insetsControlTarget && this.mClientVisible;
+                z2 =
+                        displayContent.mRemoteInsetsControlTarget == this.mControlTarget
+                                && displayContent.mImeInputTarget == insetsControlTarget
+                                && this.mClientVisible;
                 setClientVisible(insetsControlTarget.isRequestedVisible(WindowInsets.Type.ime()));
             } else {
                 z2 = false;
             }
-            this.mWindowContainer.startAnimation(this.mWindowContainer.getSyncTransaction(), this.mAdapter, !this.mClientVisible, 32);
+            this.mWindowContainer.startAnimation(
+                    this.mWindowContainer.getSyncTransaction(),
+                    this.mAdapter,
+                    !this.mClientVisible,
+                    32);
             this.mIsLeashReadyForDispatching = false;
             SurfaceControl surfaceControl = this.mAdapter.mCapturedLeash;
             this.mControlTarget = insetsControlTarget;
             updateVisibility();
-            InsetsSourceControl insetsSourceControl = new InsetsSourceControl(this.mSource.getId(), this.mSource.getType(), surfaceControl, this.mSource.getType() == WindowInsets.Type.ime() ? z2 : this.mClientVisible, windowFrameSurfacePosition, getInsetsHint());
+            InsetsSourceControl insetsSourceControl =
+                    new InsetsSourceControl(
+                            this.mSource.getId(),
+                            this.mSource.getType(),
+                            surfaceControl,
+                            this.mSource.getType() == WindowInsets.Type.ime()
+                                    ? z2
+                                    : this.mClientVisible,
+                            windowFrameSurfacePosition,
+                            getInsetsHint());
             this.mControl = insetsSourceControl;
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_INSETS_enabled[0]) {
-                ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_WINDOW_INSETS, 6243049416211184258L, 0, null, String.valueOf(insetsSourceControl), String.valueOf(this.mControlTarget));
+                ProtoLogImpl_54989576.d(
+                        ProtoLogGroup.WM_DEBUG_WINDOW_INSETS,
+                        6243049416211184258L,
+                        0,
+                        null,
+                        String.valueOf(insetsSourceControl),
+                        String.valueOf(this.mControlTarget));
             }
-            Slog.d("InsetsSourceProvider", "updateControlForTarget: control=" + this.mControl + ", target=" + this.mControlTarget + ", from=" + Debug.getCallers(5));
+            Slog.d(
+                    "InsetsSourceProvider",
+                    "updateControlForTarget: control="
+                            + this.mControl
+                            + ", target="
+                            + this.mControlTarget
+                            + ", from="
+                            + Debug.getCallers(5));
         }
     }
 
@@ -418,17 +524,32 @@ public class InsetsSourceProvider {
         }
         Point windowFrameSurfacePosition = getWindowFrameSurfacePosition();
         boolean z2 = false;
-        if (this.mControl.setSurfacePosition(windowFrameSurfacePosition.x, windowFrameSurfacePosition.y) && this.mControlTarget != null) {
-            InsetsSourceProvider$$ExternalSyntheticLambda0 insetsSourceProvider$$ExternalSyntheticLambda0 = this.mSetLeashPositionConsumer;
-            if (windowState != null && windowState.mWindowFrames.didFrameSizeChange() && windowState.mWinAnimator.getShown() && this.mWindowContainer.okToDisplay()) {
+        if (this.mControl.setSurfacePosition(
+                        windowFrameSurfacePosition.x, windowFrameSurfacePosition.y)
+                && this.mControlTarget != null) {
+            InsetsSourceProvider$$ExternalSyntheticLambda0
+                    insetsSourceProvider$$ExternalSyntheticLambda0 = this.mSetLeashPositionConsumer;
+            if (windowState != null
+                    && windowState.mWindowFrames.didFrameSizeChange()
+                    && windowState.mWinAnimator.getShown()
+                    && this.mWindowContainer.okToDisplay()) {
                 this.mHasPendingPosition = true;
                 windowState.applyWithNextDraw(0, insetsSourceProvider$$ExternalSyntheticLambda0);
             } else {
-                SurfaceControl.Transaction syncTransaction = this.mWindowContainer.getSyncTransaction();
-                if (windowState != null && (asyncRotationController = this.mDisplayContent.getAsyncRotationController()) != null) {
+                SurfaceControl.Transaction syncTransaction =
+                        this.mWindowContainer.getSyncTransaction();
+                if (windowState != null
+                        && (asyncRotationController =
+                                        this.mDisplayContent.getAsyncRotationController())
+                                != null) {
                     WindowToken windowToken = windowState.mToken;
                     SurfaceControl.Transaction transaction = null;
-                    if (asyncRotationController.mTransitionOp != 0 && (operation = (AsyncRotationController.Operation) asyncRotationController.mTargetWindowTokens.get(windowToken)) != null) {
+                    if (asyncRotationController.mTransitionOp != 0
+                            && (operation =
+                                            (AsyncRotationController.Operation)
+                                                    asyncRotationController.mTargetWindowTokens.get(
+                                                            windowToken))
+                                    != null) {
                         if (operation.mDrawTransaction == null) {
                             operation.mDrawTransaction = new SurfaceControl.Transaction();
                         }
@@ -464,7 +585,10 @@ public class InsetsSourceProvider {
                 this.mTmpRect.set(this.mWindowContainer.getBounds());
                 TriFunction triFunction = this.mFrameProvider;
                 if (triFunction != null) {
-                    triFunction.apply(this.mWindowContainer.getDisplayContent().mDisplayFrames, this.mWindowContainer, this.mTmpRect);
+                    triFunction.apply(
+                            this.mWindowContainer.getDisplayContent().mDisplayFrames,
+                            this.mWindowContainer,
+                            this.mTmpRect);
                 }
             } else {
                 this.mTmpRect.setEmpty();
@@ -476,7 +600,14 @@ public class InsetsSourceProvider {
         this.mSourceFrame.set(rect);
         TriFunction triFunction2 = this.mFrameProvider;
         if (triFunction2 != null) {
-            int intValue = ((Integer) triFunction2.apply(this.mWindowContainer.getDisplayContent().mDisplayFrames, this.mWindowContainer, this.mSourceFrame)).intValue();
+            int intValue =
+                    ((Integer)
+                                    triFunction2.apply(
+                                            this.mWindowContainer.getDisplayContent()
+                                                    .mDisplayFrames,
+                                            this.mWindowContainer,
+                                            this.mSourceFrame))
+                            .intValue();
             this.mFlagsFromFrameProvider = intValue;
             this.mSource.setFlags(intValue | this.mFlagsFromServer);
         }
@@ -496,7 +627,11 @@ public class InsetsSourceProvider {
                     rect2 = new Rect(rect);
                 }
                 if (((TriFunction) this.mOverrideFrameProviders.get(keyAt)) != null) {
-                    ((TriFunction) this.mOverrideFrameProviders.get(keyAt)).apply(this.mWindowContainer.getDisplayContent().mDisplayFrames, this.mWindowContainer, rect2);
+                    ((TriFunction) this.mOverrideFrameProviders.get(keyAt))
+                            .apply(
+                                    this.mWindowContainer.getDisplayContent().mDisplayFrames,
+                                    this.mWindowContainer,
+                                    rect2);
                 }
                 this.mOverrideFrames.put(keyAt, rect2);
             }
@@ -530,10 +665,28 @@ public class InsetsSourceProvider {
         boolean isVisible = this.mSource.isVisible();
         this.mSource.setVisible(this.mServerVisible && this.mClientVisible);
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_INSETS_enabled[0]) {
-            ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_WINDOW_INSETS, -8234068212532234206L, 0, null, String.valueOf(WindowInsets.Type.toString(this.mSource.getType())), String.valueOf(this.mServerVisible), String.valueOf(this.mClientVisible));
+            ProtoLogImpl_54989576.d(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_INSETS,
+                    -8234068212532234206L,
+                    0,
+                    null,
+                    String.valueOf(WindowInsets.Type.toString(this.mSource.getType())),
+                    String.valueOf(this.mServerVisible),
+                    String.valueOf(this.mClientVisible));
         }
         if (isVisible != this.mSource.isVisible()) {
-            Slog.d("InsetsSourceProvider", "updateVisibility: serverVisible=" + this.mServerVisible + ", clientVisible=" + this.mClientVisible + ", source=" + this.mSource + ", controlTarget=" + this.mControlTarget + ", from=" + Debug.getCallers(10));
+            Slog.d(
+                    "InsetsSourceProvider",
+                    "updateVisibility: serverVisible="
+                            + this.mServerVisible
+                            + ", clientVisible="
+                            + this.mClientVisible
+                            + ", source="
+                            + this.mSource
+                            + ", controlTarget="
+                            + this.mControlTarget
+                            + ", from="
+                            + Debug.getCallers(10));
         }
     }
 }

@@ -3,6 +3,7 @@ package android.hardware.radio.sim;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -20,21 +21,23 @@ public class AppStatus implements Parcelable {
     public static final int APP_TYPE_SIM = 1;
     public static final int APP_TYPE_UNKNOWN = 0;
     public static final int APP_TYPE_USIM = 2;
-    public static final Parcelable.Creator<AppStatus> CREATOR = new Parcelable.Creator<AppStatus>() { // from class: android.hardware.radio.sim.AppStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppStatus createFromParcel(Parcel _aidl_source) {
-            AppStatus _aidl_out = new AppStatus();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AppStatus> CREATOR =
+            new Parcelable.Creator<
+                    AppStatus>() { // from class: android.hardware.radio.sim.AppStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppStatus createFromParcel(Parcel _aidl_source) {
+                    AppStatus _aidl_out = new AppStatus();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppStatus[] newArray(int _aidl_size) {
-            return new AppStatus[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppStatus[] newArray(int _aidl_size) {
+                    return new AppStatus[_aidl_size];
+                }
+            };
     public String aidPtr;
     public String appLabelPtr;
     public int persoSubstate;

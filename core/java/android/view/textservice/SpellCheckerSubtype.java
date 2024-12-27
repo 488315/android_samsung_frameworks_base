@@ -6,7 +6,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.inputmethod.SubtypeLocaleUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,27 +31,34 @@ public final class SpellCheckerSubtype implements Parcelable {
     private final String mSubtypeLocale;
     private final int mSubtypeNameResId;
     private static final String TAG = SpellCheckerSubtype.class.getSimpleName();
-    public static final Parcelable.Creator<SpellCheckerSubtype> CREATOR = new Parcelable.Creator<SpellCheckerSubtype>() { // from class: android.view.textservice.SpellCheckerSubtype.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SpellCheckerSubtype createFromParcel(Parcel source) {
-            return new SpellCheckerSubtype(source);
-        }
+    public static final Parcelable.Creator<SpellCheckerSubtype> CREATOR =
+            new Parcelable.Creator<
+                    SpellCheckerSubtype>() { // from class:
+                                             // android.view.textservice.SpellCheckerSubtype.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SpellCheckerSubtype createFromParcel(Parcel source) {
+                    return new SpellCheckerSubtype(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SpellCheckerSubtype[] newArray(int size) {
-            return new SpellCheckerSubtype[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SpellCheckerSubtype[] newArray(int size) {
+                    return new SpellCheckerSubtype[size];
+                }
+            };
 
-    public SpellCheckerSubtype(int nameId, String locale, String languageTag, String extraValue, int subtypeId) {
+    public SpellCheckerSubtype(
+            int nameId, String locale, String languageTag, String extraValue, int subtypeId) {
         this.mSubtypeNameResId = nameId;
         this.mSubtypeLocale = locale != null ? locale : "";
         this.mSubtypeLanguageTag = languageTag != null ? languageTag : "";
         this.mSubtypeExtraValue = extraValue != null ? extraValue : "";
         this.mSubtypeId = subtypeId;
-        this.mSubtypeHashCode = this.mSubtypeId != 0 ? this.mSubtypeId : hashCodeInternal(this.mSubtypeLocale, this.mSubtypeExtraValue);
+        this.mSubtypeHashCode =
+                this.mSubtypeId != 0
+                        ? this.mSubtypeId
+                        : hashCodeInternal(this.mSubtypeLocale, this.mSubtypeExtraValue);
     }
 
     @Deprecated
@@ -66,7 +75,10 @@ public final class SpellCheckerSubtype implements Parcelable {
         String s3 = source.readString();
         this.mSubtypeExtraValue = s3 != null ? s3 : "";
         this.mSubtypeId = source.readInt();
-        this.mSubtypeHashCode = this.mSubtypeId != 0 ? this.mSubtypeId : hashCodeInternal(this.mSubtypeLocale, this.mSubtypeExtraValue);
+        this.mSubtypeHashCode =
+                this.mSubtypeId != 0
+                        ? this.mSubtypeId
+                        : hashCodeInternal(this.mSubtypeLocale, this.mSubtypeExtraValue);
     }
 
     public int getNameResId() {
@@ -122,7 +134,13 @@ public final class SpellCheckerSubtype implements Parcelable {
             return false;
         }
         SpellCheckerSubtype subtype = (SpellCheckerSubtype) o;
-        return (subtype.mSubtypeId == 0 && this.mSubtypeId == 0) ? subtype.hashCode() == hashCode() && subtype.getNameResId() == getNameResId() && subtype.getLocale().equals(getLocale()) && subtype.getLanguageTag().equals(getLanguageTag()) && subtype.getExtraValue().equals(getExtraValue()) : subtype.hashCode() == hashCode();
+        return (subtype.mSubtypeId == 0 && this.mSubtypeId == 0)
+                ? subtype.hashCode() == hashCode()
+                        && subtype.getNameResId() == getNameResId()
+                        && subtype.getLocale().equals(getLocale())
+                        && subtype.getLanguageTag().equals(getLanguageTag())
+                        && subtype.getExtraValue().equals(getExtraValue())
+                : subtype.hashCode() == hashCode();
     }
 
     public Locale getLocaleObject() {
@@ -132,13 +150,15 @@ public final class SpellCheckerSubtype implements Parcelable {
         return SubtypeLocaleUtils.constructLocaleFromString(this.mSubtypeLocale);
     }
 
-    public CharSequence getDisplayName(Context context, String packageName, ApplicationInfo appInfo) {
+    public CharSequence getDisplayName(
+            Context context, String packageName, ApplicationInfo appInfo) {
         Locale locale = getLocaleObject();
         String localeStr = locale != null ? locale.getDisplayName() : this.mSubtypeLocale;
         if (this.mSubtypeNameResId == 0) {
             return localeStr;
         }
-        CharSequence subtypeName = context.getPackageManager().getText(packageName, this.mSubtypeNameResId, appInfo);
+        CharSequence subtypeName =
+                context.getPackageManager().getText(packageName, this.mSubtypeNameResId, appInfo);
         if (!TextUtils.isEmpty(subtypeName)) {
             return String.format(subtypeName.toString(), localeStr);
         }
@@ -160,10 +180,14 @@ public final class SpellCheckerSubtype implements Parcelable {
     }
 
     private static int hashCodeInternal(String locale, String extraValue) {
-        return Arrays.hashCode(new Object[]{locale, extraValue});
+        return Arrays.hashCode(new Object[] {locale, extraValue});
     }
 
-    public static List<SpellCheckerSubtype> sort(Context context, int flags, SpellCheckerInfo sci, List<SpellCheckerSubtype> subtypeList) {
+    public static List<SpellCheckerSubtype> sort(
+            Context context,
+            int flags,
+            SpellCheckerInfo sci,
+            List<SpellCheckerSubtype> subtypeList) {
         if (sci == null) {
             return subtypeList;
         }

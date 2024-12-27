@@ -18,6 +18,7 @@ import java.security.cert.CertStore;
 import java.security.cert.CertStoreParameters;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
+
 import javax.crypto.Cipher;
 import javax.crypto.ExemptionMechanism;
 import javax.crypto.KeyAgreement;
@@ -35,7 +36,8 @@ public class ProviderJcaJceHelper implements JcaJceHelper {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public Cipher createCipher(String algorithm) throws NoSuchAlgorithmException, NoSuchPaddingException {
+    public Cipher createCipher(String algorithm)
+            throws NoSuchAlgorithmException, NoSuchPaddingException {
         return Cipher.getInstance(algorithm, this.provider);
     }
 
@@ -50,12 +52,14 @@ public class ProviderJcaJceHelper implements JcaJceHelper {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public AlgorithmParameterGenerator createAlgorithmParameterGenerator(String algorithm) throws NoSuchAlgorithmException {
+    public AlgorithmParameterGenerator createAlgorithmParameterGenerator(String algorithm)
+            throws NoSuchAlgorithmException {
         return AlgorithmParameterGenerator.getInstance(algorithm, this.provider);
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public AlgorithmParameters createAlgorithmParameters(String algorithm) throws NoSuchAlgorithmException {
+    public AlgorithmParameters createAlgorithmParameters(String algorithm)
+            throws NoSuchAlgorithmException {
         return AlgorithmParameters.getInstance(algorithm, this.provider);
     }
 
@@ -70,12 +74,14 @@ public class ProviderJcaJceHelper implements JcaJceHelper {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public SecretKeyFactory createSecretKeyFactory(String algorithm) throws NoSuchAlgorithmException {
+    public SecretKeyFactory createSecretKeyFactory(String algorithm)
+            throws NoSuchAlgorithmException {
         return SecretKeyFactory.getInstance(algorithm, this.provider);
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public KeyPairGenerator createKeyPairGenerator(String algorithm) throws NoSuchAlgorithmException {
+    public KeyPairGenerator createKeyPairGenerator(String algorithm)
+            throws NoSuchAlgorithmException {
         return KeyPairGenerator.getInstance(algorithm, this.provider);
     }
 
@@ -95,7 +101,8 @@ public class ProviderJcaJceHelper implements JcaJceHelper {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public CertificateFactory createCertificateFactory(String algorithm) throws CertificateException {
+    public CertificateFactory createCertificateFactory(String algorithm)
+            throws CertificateException {
         return CertificateFactory.getInstance(algorithm, this.provider);
     }
 
@@ -110,17 +117,20 @@ public class ProviderJcaJceHelper implements JcaJceHelper {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public CertPathValidator createCertPathValidator(String algorithm) throws NoSuchAlgorithmException {
+    public CertPathValidator createCertPathValidator(String algorithm)
+            throws NoSuchAlgorithmException {
         return CertPathValidator.getInstance(algorithm, this.provider);
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public CertStore createCertStore(String type, CertStoreParameters params) throws NoSuchAlgorithmException, InvalidAlgorithmParameterException {
+    public CertStore createCertStore(String type, CertStoreParameters params)
+            throws NoSuchAlgorithmException, InvalidAlgorithmParameterException {
         return CertStore.getInstance(type, params, this.provider);
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public ExemptionMechanism createExemptionMechanism(String algorithm) throws NoSuchAlgorithmException {
+    public ExemptionMechanism createExemptionMechanism(String algorithm)
+            throws NoSuchAlgorithmException {
         return ExemptionMechanism.getInstance(algorithm, this.provider);
     }
 

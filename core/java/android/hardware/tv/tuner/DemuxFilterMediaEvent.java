@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class DemuxFilterMediaEvent implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterMediaEvent> CREATOR = new Parcelable.Creator<DemuxFilterMediaEvent>() { // from class: android.hardware.tv.tuner.DemuxFilterMediaEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterMediaEvent createFromParcel(Parcel _aidl_source) {
-            DemuxFilterMediaEvent _aidl_out = new DemuxFilterMediaEvent();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DemuxFilterMediaEvent> CREATOR =
+            new Parcelable.Creator<DemuxFilterMediaEvent>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterMediaEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterMediaEvent createFromParcel(Parcel _aidl_source) {
+                    DemuxFilterMediaEvent _aidl_out = new DemuxFilterMediaEvent();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterMediaEvent[] newArray(int _aidl_size) {
-            return new DemuxFilterMediaEvent[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterMediaEvent[] newArray(int _aidl_size) {
+                    return new DemuxFilterMediaEvent[_aidl_size];
+                }
+            };
     public NativeHandle avMemory;
     public DemuxFilterMediaEventExtraMetaData extraMetaData;
     public DemuxFilterScIndexMask scIndexMask;
@@ -176,14 +178,19 @@ public class DemuxFilterMediaEvent implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.extraMetaData = (DemuxFilterMediaEventExtraMetaData) _aidl_parcel.readTypedObject(DemuxFilterMediaEventExtraMetaData.CREATOR);
+            this.extraMetaData =
+                    (DemuxFilterMediaEventExtraMetaData)
+                            _aidl_parcel.readTypedObject(
+                                    DemuxFilterMediaEventExtraMetaData.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.scIndexMask = (DemuxFilterScIndexMask) _aidl_parcel.readTypedObject(DemuxFilterScIndexMask.CREATOR);
+                this.scIndexMask =
+                        (DemuxFilterScIndexMask)
+                                _aidl_parcel.readTypedObject(DemuxFilterScIndexMask.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

@@ -4,6 +4,7 @@ import android.content.res.AssetFileDescriptor;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,7 +55,8 @@ public abstract class SemBackgroundMusic {
         return bgmInfo;
     }
 
-    protected BGMInfo addInfo(BGMInfo bgmInfo, AssetFileDescriptor afd, int startTime, int endTime) {
+    protected BGMInfo addInfo(
+            BGMInfo bgmInfo, AssetFileDescriptor afd, int startTime, int endTime) {
         bgmInfo.fd = afd.getFileDescriptor();
         bgmInfo.offset = afd.getStartOffset();
         bgmInfo.length = afd.getLength();
@@ -72,7 +74,6 @@ public abstract class SemBackgroundMusic {
         long offset;
         int startTimeMs;
 
-        protected BGMInfo() {
-        }
+        protected BGMInfo() {}
     }
 }

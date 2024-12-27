@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.backup.BackupAgentTimeoutParameters;
@@ -29,7 +30,9 @@ import com.android.server.backup.transport.TransportStatusCallback;
 import com.android.server.backup.utils.BackupEligibilityRules;
 import com.android.server.backup.utils.BackupManagerMonitorEventSender;
 import com.android.server.backup.utils.BackupObserverUtils;
+
 import com.google.android.collect.Sets;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,7 +45,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class PerformFullTransportBackupTask extends FullBackupTask implements BackupRestoreTask {
+public final class PerformFullTransportBackupTask extends FullBackupTask
+        implements BackupRestoreTask {
     public final BackupAgentTimeoutParameters mAgentTimeoutParameters;
     public ActivityManagerInternal mAmInternal;
     public final BackupEligibilityRules mBackupEligibilityRules;
@@ -75,7 +79,8 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
         public final AtomicLong mResult = new AtomicLong(-1003);
         public final CountDownLatch mLatch = new CountDownLatch(1);
 
-        public SinglePackageBackupPreflight(TransportConnection transportConnection, long j, int i, int i2) {
+        public SinglePackageBackupPreflight(
+                TransportConnection transportConnection, long j, int i, int i2) {
             this.mTransportConnection = transportConnection;
             this.mQuota = j;
             this.mCurrentOpToken = i;
@@ -83,21 +88,22 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
         }
 
         @Override // com.android.server.backup.BackupRestoreTask
-        public final void execute() {
-        }
+        public final void execute() {}
 
         @Override // com.android.server.backup.BackupRestoreTask
         public final void handleCancel(boolean z) {
             this.mResult.set(-1003L);
             this.mLatch.countDown();
-            ((LifecycleOperationStorage) PerformFullTransportBackupTask.this.mOperationStorage).removeOperation(this.mCurrentOpToken);
+            ((LifecycleOperationStorage) PerformFullTransportBackupTask.this.mOperationStorage)
+                    .removeOperation(this.mCurrentOpToken);
         }
 
         @Override // com.android.server.backup.BackupRestoreTask
         public final void operationComplete(long j) {
             this.mResult.set(j);
             this.mLatch.countDown();
-            ((LifecycleOperationStorage) PerformFullTransportBackupTask.this.mOperationStorage).removeOperation(this.mCurrentOpToken);
+            ((LifecycleOperationStorage) PerformFullTransportBackupTask.this.mOperationStorage)
+                    .removeOperation(this.mCurrentOpToken);
         }
     }
 
@@ -117,29 +123,44 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
         public final PackageInfo mTarget;
         public final int mTransportFlags;
 
-        public SinglePackageBackupRunner(ParcelFileDescriptor parcelFileDescriptor, PackageInfo packageInfo, TransportConnection transportConnection, long j, int i, int i2) {
+        public SinglePackageBackupRunner(
+                ParcelFileDescriptor parcelFileDescriptor,
+                PackageInfo packageInfo,
+                TransportConnection transportConnection,
+                long j,
+                int i,
+                int i2) {
             this.mOutput = ParcelFileDescriptor.dup(parcelFileDescriptor.getFileDescriptor());
             this.mTarget = packageInfo;
             this.mCurrentOpToken = i;
-            int generateRandomIntegerToken = PerformFullTransportBackupTask.this.mUserBackupManagerService.generateRandomIntegerToken();
+            int generateRandomIntegerToken =
+                    PerformFullTransportBackupTask.this.mUserBackupManagerService
+                            .generateRandomIntegerToken();
             this.mEphemeralToken = generateRandomIntegerToken;
-            this.mPreflight = PerformFullTransportBackupTask.this.new SinglePackageBackupPreflight(transportConnection, j, generateRandomIntegerToken, i2);
+            this.mPreflight =
+                    PerformFullTransportBackupTask.this
+                    .new SinglePackageBackupPreflight(
+                            transportConnection, j, generateRandomIntegerToken, i2);
             this.mPreflightLatch = new CountDownLatch(1);
             this.mBackupLatch = new CountDownLatch(1);
             this.mPreflightResult = -1003;
             this.mBackupResult = -1003;
             this.mQuota = j;
             this.mTransportFlags = i2;
-            ((LifecycleOperationStorage) PerformFullTransportBackupTask.this.mOperationStorage).registerOperationForPackages(i, Sets.newHashSet(new String[]{packageInfo.packageName}), this, 0);
+            ((LifecycleOperationStorage) PerformFullTransportBackupTask.this.mOperationStorage)
+                    .registerOperationForPackages(
+                            i, Sets.newHashSet(new String[] {packageInfo.packageName}), this, 0);
         }
 
         @Override // com.android.server.backup.BackupRestoreTask
-        public final void execute() {
-        }
+        public final void execute() {}
 
         public final int getBackupResultBlocking() {
             try {
-                this.mBackupLatch.await(PerformFullTransportBackupTask.this.mAgentTimeoutParameters.getFullBackupAgentTimeoutMillis(), TimeUnit.MILLISECONDS);
+                this.mBackupLatch.await(
+                        PerformFullTransportBackupTask.this.mAgentTimeoutParameters
+                                .getFullBackupAgentTimeoutMillis(),
+                        TimeUnit.MILLISECONDS);
                 if (this.mIsCancelled) {
                     return -2003;
                 }
@@ -150,7 +171,9 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
         }
 
         public final long getPreflightResultBlocking() {
-            long fullBackupAgentTimeoutMillis = PerformFullTransportBackupTask.this.mAgentTimeoutParameters.getFullBackupAgentTimeoutMillis();
+            long fullBackupAgentTimeoutMillis =
+                    PerformFullTransportBackupTask.this.mAgentTimeoutParameters
+                            .getFullBackupAgentTimeoutMillis();
             try {
                 CountDownLatch countDownLatch = this.mPreflightLatch;
                 TimeUnit timeUnit = TimeUnit.MILLISECONDS;
@@ -163,7 +186,10 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
                 }
                 SinglePackageBackupPreflight singlePackageBackupPreflight = this.mPreflight;
                 try {
-                    singlePackageBackupPreflight.mLatch.await(PerformFullTransportBackupTask.this.mAgentTimeoutParameters.getFullBackupAgentTimeoutMillis(), timeUnit);
+                    singlePackageBackupPreflight.mLatch.await(
+                            PerformFullTransportBackupTask.this.mAgentTimeoutParameters
+                                    .getFullBackupAgentTimeoutMillis(),
+                            timeUnit);
                     return singlePackageBackupPreflight.mResult.get();
                 } catch (InterruptedException unused) {
                     return -1L;
@@ -175,23 +201,32 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
 
         @Override // com.android.server.backup.BackupRestoreTask
         public final void handleCancel(boolean z) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Full backup cancel of "), this.mTarget.packageName, "PFTBT");
-            PerformFullTransportBackupTask performFullTransportBackupTask = PerformFullTransportBackupTask.this;
-            performFullTransportBackupTask.mBackupManagerMonitorEventSender.monitorEvent(4, performFullTransportBackupTask.mCurrentPackage, 2, null);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Full backup cancel of "), this.mTarget.packageName, "PFTBT");
+            PerformFullTransportBackupTask performFullTransportBackupTask =
+                    PerformFullTransportBackupTask.this;
+            performFullTransportBackupTask.mBackupManagerMonitorEventSender.monitorEvent(
+                    4, performFullTransportBackupTask.mCurrentPackage, 2, null);
             this.mIsCancelled = true;
-            UserBackupManagerService userBackupManagerService = PerformFullTransportBackupTask.this.mUserBackupManagerService;
+            UserBackupManagerService userBackupManagerService =
+                    PerformFullTransportBackupTask.this.mUserBackupManagerService;
             int i = this.mEphemeralToken;
             userBackupManagerService.getClass();
-            userBackupManagerService.mOperationStorage.cancelOperation(i, z, new UserBackupManagerService$$ExternalSyntheticLambda14(0, userBackupManagerService));
-            PerformFullTransportBackupTask.this.mUserBackupManagerService.tearDownAgentAndKill(this.mTarget.applicationInfo);
+            userBackupManagerService.mOperationStorage.cancelOperation(
+                    i,
+                    z,
+                    new UserBackupManagerService$$ExternalSyntheticLambda14(
+                            0, userBackupManagerService));
+            PerformFullTransportBackupTask.this.mUserBackupManagerService.tearDownAgentAndKill(
+                    this.mTarget.applicationInfo);
             this.mPreflightLatch.countDown();
             this.mBackupLatch.countDown();
-            ((LifecycleOperationStorage) PerformFullTransportBackupTask.this.mOperationStorage).removeOperation(this.mCurrentOpToken);
+            ((LifecycleOperationStorage) PerformFullTransportBackupTask.this.mOperationStorage)
+                    .removeOperation(this.mCurrentOpToken);
         }
 
         @Override // com.android.server.backup.BackupRestoreTask
-        public final void operationComplete(long j) {
-        }
+        public final void operationComplete(long j) {}
 
         /* JADX WARN: Removed duplicated region for block: B:29:0x00fb  */
         /* JADX WARN: Removed duplicated region for block: B:38:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
@@ -205,27 +240,51 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
                 Method dump skipped, instructions count: 292
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.fullbackup.PerformFullTransportBackupTask.SinglePackageBackupRunner.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.backup.fullbackup.PerformFullTransportBackupTask.SinglePackageBackupRunner.run():void");
         }
 
         public final void sendQuotaExceeded(final long j, final long j2) {
             final FullBackupEngine fullBackupEngine = this.mEngine;
             if (fullBackupEngine.initializeAgent()) {
                 try {
-                    new RemoteCall(false, new RemoteCallable() { // from class: com.android.server.backup.fullbackup.FullBackupEngine$$ExternalSyntheticLambda0
-                        @Override // com.android.server.backup.remote.RemoteCallable
-                        public final void call(FutureBackupCallback futureBackupCallback) {
-                            FullBackupEngine.this.mAgent.doQuotaExceeded(j, j2, futureBackupCallback);
-                        }
-                    }, fullBackupEngine.mAgentTimeoutParameters.getQuotaExceededTimeoutMillis()).call();
+                    new RemoteCall(
+                                    false,
+                                    new RemoteCallable() { // from class:
+                                                           // com.android.server.backup.fullbackup.FullBackupEngine$$ExternalSyntheticLambda0
+                                        @Override // com.android.server.backup.remote.RemoteCallable
+                                        public final void call(
+                                                FutureBackupCallback futureBackupCallback) {
+                                            FullBackupEngine.this.mAgent.doQuotaExceeded(
+                                                    j, j2, futureBackupCallback);
+                                        }
+                                    },
+                                    fullBackupEngine.mAgentTimeoutParameters
+                                            .getQuotaExceededTimeoutMillis())
+                            .call();
                 } catch (RemoteException unused) {
-                    Slog.e("BackupManagerService", "Remote exception while telling agent about quota exceeded");
+                    Slog.e(
+                            "BackupManagerService",
+                            "Remote exception while telling agent about quota exceeded");
                 }
             }
         }
     }
 
-    public PerformFullTransportBackupTask(UserBackupManagerService userBackupManagerService, OperationStorage operationStorage, TransportConnection transportConnection, String[] strArr, boolean z, FullBackupJob fullBackupJob, CountDownLatch countDownLatch, IBackupObserver iBackupObserver, IBackupManagerMonitor iBackupManagerMonitor, OnTaskFinishedListener onTaskFinishedListener, boolean z2, BackupEligibilityRules backupEligibilityRules) {
+    public PerformFullTransportBackupTask(
+            UserBackupManagerService userBackupManagerService,
+            OperationStorage operationStorage,
+            TransportConnection transportConnection,
+            String[] strArr,
+            boolean z,
+            FullBackupJob fullBackupJob,
+            CountDownLatch countDownLatch,
+            IBackupObserver iBackupObserver,
+            IBackupManagerMonitor iBackupManagerMonitor,
+            OnTaskFinishedListener onTaskFinishedListener,
+            boolean z2,
+            BackupEligibilityRules backupEligibilityRules) {
         super(null);
         this.mCancelLock = new Object();
         this.mUserBackupManagerService = userBackupManagerService;
@@ -236,12 +295,17 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
         this.mJob = fullBackupJob;
         this.mPackages = new ArrayList(strArr.length);
         this.mBackupObserver = iBackupObserver;
-        this.mListener = onTaskFinishedListener == null ? OnTaskFinishedListener.NOP : onTaskFinishedListener;
+        this.mListener =
+                onTaskFinishedListener == null
+                        ? OnTaskFinishedListener.NOP
+                        : onTaskFinishedListener;
         this.mUserInitiated = z2;
         this.mCurrentOpToken = userBackupManagerService.generateRandomIntegerToken();
         this.mBackupRunnerOpToken = userBackupManagerService.generateRandomIntegerToken();
-        this.mBackupManagerMonitorEventSender = new BackupManagerMonitorEventSender(iBackupManagerMonitor);
-        BackupAgentTimeoutParameters backupAgentTimeoutParameters = userBackupManagerService.mAgentTimeoutParameters;
+        this.mBackupManagerMonitorEventSender =
+                new BackupManagerMonitorEventSender(iBackupManagerMonitor);
+        BackupAgentTimeoutParameters backupAgentTimeoutParameters =
+                userBackupManagerService.mAgentTimeoutParameters;
         Objects.requireNonNull(backupAgentTimeoutParameters, "Timeout parameters cannot be null");
         this.mAgentTimeoutParameters = backupAgentTimeoutParameters;
         this.mUserId = userBackupManagerService.mUserId;
@@ -253,31 +317,41 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
         }
         for (String str : strArr) {
             try {
-                PackageInfo packageInfoAsUser = userBackupManagerService.mPackageManager.getPackageInfoAsUser(str, 134217728, this.mUserId);
+                PackageInfo packageInfoAsUser =
+                        userBackupManagerService.mPackageManager.getPackageInfoAsUser(
+                                str, 134217728, this.mUserId);
                 this.mCurrentPackage = packageInfoAsUser;
-                if (!this.mBackupEligibilityRules.appIsEligibleForBackup(packageInfoAsUser.applicationInfo)) {
-                    this.mBackupManagerMonitorEventSender.monitorEvent(9, packageInfoAsUser, 3, null);
+                if (!this.mBackupEligibilityRules.appIsEligibleForBackup(
+                        packageInfoAsUser.applicationInfo)) {
+                    this.mBackupManagerMonitorEventSender.monitorEvent(
+                            9, packageInfoAsUser, 3, null);
                     BackupObserverUtils.sendBackupOnPackageResult(this.mBackupObserver, str, -2001);
                 } else if (this.mBackupEligibilityRules.appGetsFullBackup(packageInfoAsUser)) {
                     BackupEligibilityRules backupEligibilityRules2 = this.mBackupEligibilityRules;
                     ApplicationInfo applicationInfo = packageInfoAsUser.applicationInfo;
                     backupEligibilityRules2.getClass();
                     if (BackupEligibilityRules.appIsStopped(applicationInfo)) {
-                        this.mBackupManagerMonitorEventSender.monitorEvent(11, packageInfoAsUser, 3, null);
-                        BackupObserverUtils.sendBackupOnPackageResult(this.mBackupObserver, str, -2001);
+                        this.mBackupManagerMonitorEventSender.monitorEvent(
+                                11, packageInfoAsUser, 3, null);
+                        BackupObserverUtils.sendBackupOnPackageResult(
+                                this.mBackupObserver, str, -2001);
                     } else {
                         this.mPackages.add(packageInfoAsUser);
                     }
                 } else {
-                    this.mBackupManagerMonitorEventSender.monitorEvent(10, packageInfoAsUser, 3, null);
+                    this.mBackupManagerMonitorEventSender.monitorEvent(
+                            10, packageInfoAsUser, 3, null);
                     BackupObserverUtils.sendBackupOnPackageResult(this.mBackupObserver, str, -2001);
                 }
             } catch (PackageManager.NameNotFoundException unused) {
-                BootReceiver$$ExternalSyntheticOutline0.m58m("Requested package ", str, " not found; ignoring", "PFTBT");
-                this.mBackupManagerMonitorEventSender.monitorEvent(12, this.mCurrentPackage, 3, null);
+                BootReceiver$$ExternalSyntheticOutline0.m58m(
+                        "Requested package ", str, " not found; ignoring", "PFTBT");
+                this.mBackupManagerMonitorEventSender.monitorEvent(
+                        12, this.mCurrentPackage, 3, null);
             }
         }
-        List filterUserFacingPackages = userBackupManagerService.filterUserFacingPackages(this.mPackages);
+        List filterUserFacingPackages =
+                userBackupManagerService.filterUserFacingPackages(this.mPackages);
         this.mPackages = filterUserFacingPackages;
         HashSet newHashSet = Sets.newHashSet();
         Iterator it = filterUserFacingPackages.iterator();
@@ -285,7 +359,8 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
             newHashSet.add(((PackageInfo) it.next()).packageName);
         }
         Slog.d("PFTBT", "backupmanager pftbt token=" + Integer.toHexString(this.mCurrentOpToken));
-        ((LifecycleOperationStorage) this.mOperationStorage).registerOperationForPackages(this.mCurrentOpToken, newHashSet, this, 2);
+        ((LifecycleOperationStorage) this.mOperationStorage)
+                .registerOperationForPackages(this.mCurrentOpToken, newHashSet, this, 2);
     }
 
     public static void cleanUpPipes(ParcelFileDescriptor[] parcelFileDescriptorArr) {
@@ -312,8 +387,7 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
     }
 
     @Override // com.android.server.backup.BackupRestoreTask
-    public final void execute() {
-    }
+    public final void execute() {}
 
     @Override // com.android.server.backup.BackupRestoreTask
     public final void handleCancel(boolean z) {
@@ -334,10 +408,16 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
                 UserBackupManagerService userBackupManagerService = this.mUserBackupManagerService;
                 int i = this.mBackupRunnerOpToken;
                 userBackupManagerService.getClass();
-                userBackupManagerService.mOperationStorage.cancelOperation(i, z, new UserBackupManagerService$$ExternalSyntheticLambda14(0, userBackupManagerService));
+                userBackupManagerService.mOperationStorage.cancelOperation(
+                        i,
+                        z,
+                        new UserBackupManagerService$$ExternalSyntheticLambda14(
+                                0, userBackupManagerService));
                 try {
-                    BackupTransportClient connectedTransport = this.mTransportConnection.getConnectedTransport();
-                    BackupTransportClient.TransportStatusCallbackPool transportStatusCallbackPool = connectedTransport.mCallbackPool;
+                    BackupTransportClient connectedTransport =
+                            this.mTransportConnection.getConnectedTransport();
+                    BackupTransportClient.TransportStatusCallbackPool transportStatusCallbackPool =
+                            connectedTransport.mCallbackPool;
                     TransportStatusCallback acquire = transportStatusCallbackPool.acquire();
                     try {
                         connectedTransport.mTransportBinder.cancelFullBackup(acquire);
@@ -355,16 +435,15 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
     }
 
     @Override // com.android.server.backup.BackupRestoreTask
-    public final void operationComplete(long j) {
-    }
+    public final void operationComplete(long j) {}
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:359:0x051f
-        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
-        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
-        */
+    jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:359:0x051f
+    	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
+    	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:106:0x06b1  */
     /* JADX WARN: Removed duplicated region for block: B:228:0x04ca A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -402,7 +481,9 @@ public final class PerformFullTransportBackupTask extends FullBackupTask impleme
             Method dump skipped, instructions count: 1878
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.fullbackup.PerformFullTransportBackupTask.run():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.fullbackup.PerformFullTransportBackupTask.run():void");
     }
 
     public final void unregisterTask() {

@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.InputMethodService;
-import android.inputmethodservice.navigationbar.KeyButtonRipple;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -16,6 +15,7 @@ import android.view.ViewConfiguration;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.ImageView;
+
 import com.android.internal.R;
 
 /* loaded from: classes2.dex */
@@ -51,7 +51,9 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
         this.mPlaySounds = true;
         setClickable(true);
         this.mAudioManager = (AudioManager) context.getSystemService(AudioManager.class);
-        this.mRipple = new KeyButtonRipple(context, this, R.dimen.input_method_nav_key_button_ripple_max_width);
+        this.mRipple =
+                new KeyButtonRipple(
+                        context, this, R.dimen.input_method_nav_key_button_ripple_max_width);
         setBackground(this.mRipple);
         setWillNotDraw(false);
         forceHasOverlappingRendering(false);
@@ -78,7 +80,8 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
         if (this.mCode != 0) {
             info.addAction(new AccessibilityNodeInfo.AccessibilityAction(16, (CharSequence) null));
             if (isLongClickable()) {
-                info.addAction(new AccessibilityNodeInfo.AccessibilityAction(32, (CharSequence) null));
+                info.addAction(
+                        new AccessibilityNodeInfo.AccessibilityAction(32, (CharSequence) null));
             }
         }
     }
@@ -113,9 +116,9 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:43:0x00c7, code lost:
-    
-        return true;
-     */
+
+       return true;
+    */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -239,7 +242,9 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
         Lc7:
             return r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.inputmethodservice.navigationbar.KeyButtonView.onTouchEvent(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.inputmethodservice.navigationbar.KeyButtonView.onTouchEvent(android.view.MotionEvent):boolean");
     }
 
     @Override // android.widget.ImageView, android.inputmethodservice.navigationbar.ButtonInterface
@@ -255,7 +260,10 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
         if (this.mHasOvalBg) {
             this.mOvalBgPaint.setColor(keyButtonDrawable.getDrawableBackgroundColor());
         }
-        this.mRipple.setType(keyButtonDrawable.hasOvalBg() ? KeyButtonRipple.Type.OVAL : KeyButtonRipple.Type.ROUNDED_RECT);
+        this.mRipple.setType(
+                keyButtonDrawable.hasOvalBg()
+                        ? KeyButtonRipple.Type.OVAL
+                        : KeyButtonRipple.Type.ROUNDED_RECT);
     }
 
     @Override // android.view.View
@@ -274,7 +282,18 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
         InputConnection ic;
         if (this.mContext instanceof InputMethodService) {
             int repeatCount = (flags & 128) != 0 ? 1 : 0;
-            KeyEvent ev = new KeyEvent(this.mDownTime, when, action, this.mCode, repeatCount, 0, -1, 0, flags | 2 | 64, 257);
+            KeyEvent ev =
+                    new KeyEvent(
+                            this.mDownTime,
+                            when,
+                            action,
+                            this.mCode,
+                            repeatCount,
+                            0,
+                            -1,
+                            0,
+                            flags | 2 | 64,
+                            257);
             int displayId = -1;
             if (getDisplay() != null) {
                 displayId = getDisplay().getDisplayId();
@@ -286,7 +305,10 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
             switch (action) {
                 case 0:
                     boolean handled2 = ims.onKeyDown(ev.getKeyCode(), ev);
-                    this.mTracking = handled2 && ev.getRepeatCount() == 0 && (ev.getFlags() & 1073741824) != 0;
+                    this.mTracking =
+                            handled2
+                                    && ev.getRepeatCount() == 0
+                                    && (ev.getFlags() & 1073741824) != 0;
                     handled = handled2;
                     break;
                 case 1:

@@ -12,7 +12,11 @@ public final class AppBindRecord {
     public final IntentBindRecord intent;
     public final ServiceRecord service;
 
-    public AppBindRecord(ServiceRecord serviceRecord, IntentBindRecord intentBindRecord, ProcessRecord processRecord, ProcessRecord processRecord2) {
+    public AppBindRecord(
+            ServiceRecord serviceRecord,
+            IntentBindRecord intentBindRecord,
+            ProcessRecord processRecord,
+            ProcessRecord processRecord2) {
         this.service = serviceRecord;
         this.intent = intentBindRecord;
         this.client = processRecord;

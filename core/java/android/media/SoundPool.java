@@ -2,15 +2,15 @@ package android.media;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
-import android.media.AudioAttributes;
-import android.media.VolumeShaper;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.util.AndroidRuntimeException;
 import android.util.Log;
+
 import com.samsung.android.audio.AudioManagerHelper;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -71,7 +71,11 @@ public class SoundPool extends PlayerBase {
     }
 
     public SoundPool(int maxStreams, int streamType, int srcQuality) {
-        this(null, maxStreams, new AudioAttributes.Builder().setInternalLegacyStreamType(streamType).build(), 0);
+        this(
+                null,
+                maxStreams,
+                new AudioAttributes.Builder().setInternalLegacyStreamType(streamType).build(),
+                0);
         PlayerBase.deprecateStreamTypeForPlayback(streamType, TAG, "SoundPool()");
     }
 
@@ -140,10 +144,18 @@ public class SoundPool extends PlayerBase {
         return _load(fd, offset, length, priority);
     }
 
-    public final int play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate) {
+    public final int play(
+            int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate) {
         baseStart(0);
         float volMultiplier = getVolMultiplier();
-        return _play(soundID, leftVolume * volMultiplier, rightVolume * volMultiplier, priority, loop, rate, getPlayerIId());
+        return _play(
+                soundID,
+                leftVolume * volMultiplier,
+                rightVolume * volMultiplier,
+                priority,
+                loop,
+                rate,
+                getPlayerIId());
     }
 
     public final void setVolume(int streamID, float leftVolume, float rightVolume) {
@@ -151,7 +163,8 @@ public class SoundPool extends PlayerBase {
     }
 
     @Override // android.media.PlayerBase
-    int playerApplyVolumeShaper(VolumeShaper.Configuration configuration, VolumeShaper.Operation operation) {
+    int playerApplyVolumeShaper(
+            VolumeShaper.Configuration configuration, VolumeShaper.Operation operation) {
         return -1;
     }
 
@@ -172,16 +185,13 @@ public class SoundPool extends PlayerBase {
     }
 
     @Override // android.media.PlayerBase
-    void playerStart() {
-    }
+    void playerStart() {}
 
     @Override // android.media.PlayerBase
-    void playerPause() {
-    }
+    void playerPause() {}
 
     @Override // android.media.PlayerBase
-    void playerStop() {
-    }
+    void playerStop() {}
 
     public void setVolume(int streamID, float volume) {
         setVolume(streamID, volume, volume);
@@ -243,13 +253,15 @@ public class SoundPool extends PlayerBase {
 
         public Builder setMaxStreams(int maxStreams) throws IllegalArgumentException {
             if (maxStreams <= 0) {
-                throw new IllegalArgumentException("Strictly positive value required for the maximum number of streams");
+                throw new IllegalArgumentException(
+                        "Strictly positive value required for the maximum number of streams");
             }
             this.mMaxStreams = maxStreams;
             return this;
         }
 
-        public Builder setAudioAttributes(AudioAttributes attributes) throws IllegalArgumentException {
+        public Builder setAudioAttributes(AudioAttributes attributes)
+                throws IllegalArgumentException {
             if (attributes == null) {
                 throw new IllegalArgumentException("Invalid null AudioAttributes");
             }
@@ -274,7 +286,8 @@ public class SoundPool extends PlayerBase {
             if (this.mAudioAttributes == null) {
                 this.mAudioAttributes = new AudioAttributes.Builder().setUsage(1).build();
             }
-            return new SoundPool(this.mContext, this.mMaxStreams, this.mAudioAttributes, this.mSessionId);
+            return new SoundPool(
+                    this.mContext, this.mMaxStreams, this.mAudioAttributes, this.mSessionId);
         }
     }
 }

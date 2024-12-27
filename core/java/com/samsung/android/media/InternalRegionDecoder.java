@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -27,11 +28,14 @@ public class InternalRegionDecoder {
 
     private static native void nativeClean(long j);
 
-    private static native Bitmap nativeDecodeGainRegion(long j, int i, int i2, int i3, int i4, BitmapFactory.Options options);
+    private static native Bitmap nativeDecodeGainRegion(
+            long j, int i, int i2, int i3, int i4, BitmapFactory.Options options);
 
-    private static native Bitmap nativeDecodePhotoHdrRegion(long j, int i, int i2, int i3, int i4, BitmapFactory.Options options);
+    private static native Bitmap nativeDecodePhotoHdrRegion(
+            long j, int i, int i2, int i3, int i4, BitmapFactory.Options options);
 
-    private static native Bitmap nativeDecodeRegion(long j, int i, int i2, int i3, int i4, BitmapFactory.Options options);
+    private static native Bitmap nativeDecodeRegion(
+            long j, int i, int i2, int i3, int i4, BitmapFactory.Options options);
 
     private static native int nativeGetHeight(long j);
 
@@ -64,7 +68,8 @@ public class InternalRegionDecoder {
         return nativeNewInstance(pathName);
     }
 
-    public static InternalRegionDecoder newInstance(byte[] data, int offset, int length) throws IOException {
+    public static InternalRegionDecoder newInstance(byte[] data, int offset, int length)
+            throws IOException {
         Log.d(TAG, "newInstance ByteArray e");
         if (data == null) {
             throw new IOException("data is null");
@@ -119,7 +124,10 @@ public class InternalRegionDecoder {
         Log.d(TAG, "decodeRegion e");
         synchronized (this.mNativeLock) {
             checkRecycled("decodeRegion called on recycled region decoder");
-            if (rect.right <= 0 || rect.bottom <= 0 || rect.left >= getWidth() || rect.top >= getHeight()) {
+            if (rect.right <= 0
+                    || rect.bottom <= 0
+                    || rect.left >= getWidth()
+                    || rect.top >= getHeight()) {
                 throw new IllegalArgumentException("rectangle is outside the image");
             }
             if (opt != null) {
@@ -132,12 +140,20 @@ public class InternalRegionDecoder {
                 int tile_height = rect.height();
                 int tile_width2 = ((tile_width + sample_size) - 1) / sample_size;
                 int tile_height2 = ((tile_height + sample_size) - 1) / sample_size;
-                if (opt.inBitmap != null && (opt.inBitmap.getWidth() != tile_width2 || opt.inBitmap.getHeight() != tile_height2)) {
+                if (opt.inBitmap != null
+                        && (opt.inBitmap.getWidth() != tile_width2
+                                || opt.inBitmap.getHeight() != tile_height2)) {
                     Log.w(TAG, "RegionDecode Input Bitmap error");
                     return opt.inBitmap;
                 }
             }
-            return nativeDecodeRegion(this.mNativeBitmapRegionDecoder, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, opt);
+            return nativeDecodeRegion(
+                    this.mNativeBitmapRegionDecoder,
+                    rect.left,
+                    rect.top,
+                    rect.right - rect.left,
+                    rect.bottom - rect.top,
+                    opt);
         }
     }
 
@@ -145,7 +161,10 @@ public class InternalRegionDecoder {
         Log.d(TAG, "decodeGainRegion e");
         synchronized (this.mNativeLock) {
             checkRecycled("decodeRegion called on recycled region decoder");
-            if (rect.right <= 0 || rect.bottom <= 0 || rect.left >= getWidth() || rect.top >= getHeight()) {
+            if (rect.right <= 0
+                    || rect.bottom <= 0
+                    || rect.left >= getWidth()
+                    || rect.top >= getHeight()) {
                 throw new IllegalArgumentException("rectangle is outside the image");
             }
             if (opt != null) {
@@ -158,12 +177,20 @@ public class InternalRegionDecoder {
                 int tile_height = rect.height();
                 int tile_width2 = ((tile_width + sample_size) - 1) / sample_size;
                 int tile_height2 = ((tile_height + sample_size) - 1) / sample_size;
-                if (opt.inBitmap != null && (opt.inBitmap.getWidth() != tile_width2 || opt.inBitmap.getHeight() != tile_height2)) {
+                if (opt.inBitmap != null
+                        && (opt.inBitmap.getWidth() != tile_width2
+                                || opt.inBitmap.getHeight() != tile_height2)) {
                     Log.w(TAG, "RegionDecode Input Bitmap error");
                     return opt.inBitmap;
                 }
             }
-            return nativeDecodeGainRegion(this.mNativeBitmapRegionDecoder, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, opt);
+            return nativeDecodeGainRegion(
+                    this.mNativeBitmapRegionDecoder,
+                    rect.left,
+                    rect.top,
+                    rect.right - rect.left,
+                    rect.bottom - rect.top,
+                    opt);
         }
     }
 
@@ -171,7 +198,10 @@ public class InternalRegionDecoder {
         Log.d(TAG, "decodeGainRegion e");
         synchronized (this.mNativeLock) {
             checkRecycled("decodeRegion called on recycled region decoder");
-            if (rect.right <= 0 || rect.bottom <= 0 || rect.left >= getWidth() || rect.top >= getHeight()) {
+            if (rect.right <= 0
+                    || rect.bottom <= 0
+                    || rect.left >= getWidth()
+                    || rect.top >= getHeight()) {
                 throw new IllegalArgumentException("rectangle is outside the image");
             }
             if (opt != null) {
@@ -184,12 +214,20 @@ public class InternalRegionDecoder {
                 int tile_height = rect.height();
                 int tile_width2 = ((tile_width + sample_size) - 1) / sample_size;
                 int tile_height2 = ((tile_height + sample_size) - 1) / sample_size;
-                if (opt.inBitmap != null && (opt.inBitmap.getWidth() != tile_width2 || opt.inBitmap.getHeight() != tile_height2)) {
+                if (opt.inBitmap != null
+                        && (opt.inBitmap.getWidth() != tile_width2
+                                || opt.inBitmap.getHeight() != tile_height2)) {
                     Log.w(TAG, "RegionDecode Input Bitmap error");
                     return opt.inBitmap;
                 }
             }
-            return nativeDecodePhotoHdrRegion(this.mNativeBitmapRegionDecoder, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, opt);
+            return nativeDecodePhotoHdrRegion(
+                    this.mNativeBitmapRegionDecoder,
+                    rect.left,
+                    rect.top,
+                    rect.right - rect.left,
+                    rect.bottom - rect.top,
+                    opt);
         }
     }
 

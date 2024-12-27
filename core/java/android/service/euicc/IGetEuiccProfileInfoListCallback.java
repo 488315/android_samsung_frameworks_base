@@ -8,12 +8,12 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IGetEuiccProfileInfoListCallback extends IInterface {
-    void onComplete(GetEuiccProfileInfoListResult getEuiccProfileInfoListResult) throws RemoteException;
+    void onComplete(GetEuiccProfileInfoListResult getEuiccProfileInfoListResult)
+            throws RemoteException;
 
     public static class Default implements IGetEuiccProfileInfoListCallback {
         @Override // android.service.euicc.IGetEuiccProfileInfoListCallback
-        public void onComplete(GetEuiccProfileInfoListResult result) throws RemoteException {
-        }
+        public void onComplete(GetEuiccProfileInfoListResult result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +21,9 @@ public interface IGetEuiccProfileInfoListCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetEuiccProfileInfoListCallback {
-        public static final String DESCRIPTOR = "android.service.euicc.IGetEuiccProfileInfoListCallback";
+    public abstract static class Stub extends Binder implements IGetEuiccProfileInfoListCallback {
+        public static final String DESCRIPTOR =
+                "android.service.euicc.IGetEuiccProfileInfoListCallback";
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -60,7 +61,8 @@ public interface IGetEuiccProfileInfoListCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +72,9 @@ public interface IGetEuiccProfileInfoListCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    GetEuiccProfileInfoListResult _arg0 = (GetEuiccProfileInfoListResult) data.readTypedObject(GetEuiccProfileInfoListResult.CREATOR);
+                    GetEuiccProfileInfoListResult _arg0 =
+                            (GetEuiccProfileInfoListResult)
+                                    data.readTypedObject(GetEuiccProfileInfoListResult.CREATOR);
                     data.enforceNoDataAvail();
                     onComplete(_arg0);
                     return true;

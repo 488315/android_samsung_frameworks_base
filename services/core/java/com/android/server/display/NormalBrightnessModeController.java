@@ -1,6 +1,5 @@
 package com.android.server.display;
 
-import com.android.server.display.DisplayDeviceConfig;
 import java.util.Map;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -12,9 +11,17 @@ public final class NormalBrightnessModeController {
     public Map mMaxBrightnessLimits;
 
     public final boolean recalculateMaxBrightness() {
-        Map map = this.mAutoBrightnessEnabled ? (Map) this.mMaxBrightnessLimits.get(DisplayDeviceConfig.BrightnessLimitMapType.ADAPTIVE) : null;
+        Map map =
+                this.mAutoBrightnessEnabled
+                        ? (Map)
+                                this.mMaxBrightnessLimits.get(
+                                        DisplayDeviceConfig.BrightnessLimitMapType.ADAPTIVE)
+                        : null;
         if (this.mAutoBrightnessEnabled && map == null) {
-            map = (Map) this.mMaxBrightnessLimits.get(DisplayDeviceConfig.BrightnessLimitMapType.DEFAULT);
+            map =
+                    (Map)
+                            this.mMaxBrightnessLimits.get(
+                                    DisplayDeviceConfig.BrightnessLimitMapType.DEFAULT);
         }
         float f = 1.0f;
         if (map != null) {

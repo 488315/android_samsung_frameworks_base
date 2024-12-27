@@ -3,7 +3,9 @@ package android.media.tv;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -11,19 +13,21 @@ import java.util.List;
 
 /* loaded from: classes3.dex */
 public final class SignalingDataRequest extends BroadcastInfoRequest implements Parcelable {
-    public static final Parcelable.Creator<SignalingDataRequest> CREATOR = new Parcelable.Creator<SignalingDataRequest>() { // from class: android.media.tv.SignalingDataRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalingDataRequest[] newArray(int size) {
-            return new SignalingDataRequest[size];
-        }
+    public static final Parcelable.Creator<SignalingDataRequest> CREATOR =
+            new Parcelable.Creator<
+                    SignalingDataRequest>() { // from class: android.media.tv.SignalingDataRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalingDataRequest[] newArray(int size) {
+                    return new SignalingDataRequest[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalingDataRequest createFromParcel(Parcel in) {
-            return new SignalingDataRequest(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalingDataRequest createFromParcel(Parcel in) {
+                    return new SignalingDataRequest(in);
+                }
+            };
     private static final int REQUEST_TYPE = 9;
     public static final int SIGNALING_DATA_NO_GROUP_ID = -1;
     public static final String SIGNALING_METADATA_AEAT = "AEAT";
@@ -60,14 +64,15 @@ public final class SignalingDataRequest extends BroadcastInfoRequest implements 
     private final List<String> mSignalingDataTypes;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SignalingMetadata {
-    }
+    public @interface SignalingMetadata {}
 
-    public SignalingDataRequest(int requestId, int option, int group, List<String> signalingDataTypes) {
+    public SignalingDataRequest(
+            int requestId, int option, int group, List<String> signalingDataTypes) {
         super(9, requestId, option);
         this.mGroup = group;
         this.mSignalingDataTypes = signalingDataTypes;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataTypes);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataTypes);
     }
 
     static SignalingDataRequest createFromParcelBody(Parcel in) {
@@ -101,6 +106,7 @@ public final class SignalingDataRequest extends BroadcastInfoRequest implements 
         in.readStringList(signalingDataTypes);
         this.mGroup = group;
         this.mSignalingDataTypes = signalingDataTypes;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataTypes);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataTypes);
     }
 }

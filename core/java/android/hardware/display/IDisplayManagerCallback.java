@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
@@ -18,28 +19,25 @@ public interface IDisplayManagerCallback extends IInterface {
 
     void onDisplayVolumeKeyEvent(int i) throws RemoteException;
 
-    void onWifiDisplayParameterEvent(int i, List<SemWifiDisplayParameter> list) throws RemoteException;
+    void onWifiDisplayParameterEvent(int i, List<SemWifiDisplayParameter> list)
+            throws RemoteException;
 
     public static class Default implements IDisplayManagerCallback {
         @Override // android.hardware.display.IDisplayManagerCallback
-        public void onDisplayEvent(int displayId, int event) throws RemoteException {
-        }
+        public void onDisplayEvent(int displayId, int event) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManagerCallback
-        public void onDisplayVolumeEvent(int event, Bundle msg) throws RemoteException {
-        }
+        public void onDisplayVolumeEvent(int event, Bundle msg) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManagerCallback
-        public void onDisplayVolumeKeyEvent(int event) throws RemoteException {
-        }
+        public void onDisplayVolumeKeyEvent(int event) throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManagerCallback
-        public void onWifiDisplayParameterEvent(int event, List<SemWifiDisplayParameter> parameters) throws RemoteException {
-        }
+        public void onWifiDisplayParameterEvent(int event, List<SemWifiDisplayParameter> parameters)
+                throws RemoteException {}
 
         @Override // android.hardware.display.IDisplayManagerCallback
-        public void onDeviceEvent(Bundle msg, int event) throws RemoteException {
-        }
+        public void onDeviceEvent(Bundle msg, int event) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +45,7 @@ public interface IDisplayManagerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDisplayManagerCallback {
+    public abstract static class Stub extends Binder implements IDisplayManagerCallback {
         public static final String DESCRIPTOR = "android.hardware.display.IDisplayManagerCallback";
         static final int TRANSACTION_onDeviceEvent = 5;
         static final int TRANSACTION_onDisplayEvent = 1;
@@ -98,7 +96,8 @@ public interface IDisplayManagerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -126,7 +125,8 @@ public interface IDisplayManagerCallback extends IInterface {
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    List<SemWifiDisplayParameter> _arg13 = data.createTypedArrayList(SemWifiDisplayParameter.CREATOR);
+                    List<SemWifiDisplayParameter> _arg13 =
+                            data.createTypedArrayList(SemWifiDisplayParameter.CREATOR);
                     data.enforceNoDataAvail();
                     onWifiDisplayParameterEvent(_arg04, _arg13);
                     return true;
@@ -196,7 +196,8 @@ public interface IDisplayManagerCallback extends IInterface {
             }
 
             @Override // android.hardware.display.IDisplayManagerCallback
-            public void onWifiDisplayParameterEvent(int event, List<SemWifiDisplayParameter> parameters) throws RemoteException {
+            public void onWifiDisplayParameterEvent(
+                    int event, List<SemWifiDisplayParameter> parameters) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

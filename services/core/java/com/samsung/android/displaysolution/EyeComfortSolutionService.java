@@ -25,6 +25,7 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
@@ -37,9 +38,11 @@ import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyn
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.displayaiqe.DisplayAiqeManager;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.hardware.display.SemMdnieManager;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -117,14 +120,19 @@ public final class EyeComfortSolutionService {
             EyeComfortSolutionService eyeComfortSolutionService = EyeComfortSolutionService.this;
             if (i != 1) {
                 if (i == 2) {
-                    EyeComfortSolutionService.m1136$$Nest$mgetBoprValue(eyeComfortSolutionService, true);
+                    EyeComfortSolutionService.m1136$$Nest$mgetBoprValue(
+                            eyeComfortSolutionService, true);
                     return;
                 }
                 if (i == 3) {
-                    EyeComfortSolutionService.m1136$$Nest$mgetBoprValue(eyeComfortSolutionService, false);
+                    EyeComfortSolutionService.m1136$$Nest$mgetBoprValue(
+                            eyeComfortSolutionService, false);
                     return;
                 } else if (i == 4) {
-                    eyeComfortSolutionService.blue_light_filter_setting_day(eyeComfortSolutionService.mBlueLightFilterModeEnabled && eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled);
+                    eyeComfortSolutionService.blue_light_filter_setting_day(
+                            eyeComfortSolutionService.mBlueLightFilterModeEnabled
+                                    && eyeComfortSolutionService
+                                            .mBlueLightFilterAdaptiveModeEnabled);
                     return;
                 } else {
                     if (i != 5) {
@@ -138,26 +146,39 @@ public final class EyeComfortSolutionService {
             int i2 = eyeComfortSolutionService.GET_SYSTEM_SERVICES_MILLIS;
             ECSControlHandler eCSControlHandler = eyeComfortSolutionService.mHandler;
             if (z) {
-                eyeComfortSolutionService.mDisplayAiqeManager = (DisplayAiqeManager) eyeComfortSolutionService.mContext.getSystemService("display_aiqe");
-                Slog.v("EyeComfortSolutionService", "mDisplayAiqeManager : " + eyeComfortSolutionService.mDisplayAiqeManager);
+                eyeComfortSolutionService.mDisplayAiqeManager =
+                        (DisplayAiqeManager)
+                                eyeComfortSolutionService.mContext.getSystemService("display_aiqe");
+                Slog.v(
+                        "EyeComfortSolutionService",
+                        "mDisplayAiqeManager : " + eyeComfortSolutionService.mDisplayAiqeManager);
                 if (eyeComfortSolutionService.mDisplayAiqeManager != null) {
-                    Slog.v("EyeComfortSolutionService", "Success to register all of the services system.");
+                    Slog.v(
+                            "EyeComfortSolutionService",
+                            "Success to register all of the services system.");
                     return;
                 }
                 long uptimeMillis = SystemClock.uptimeMillis();
                 eCSControlHandler.removeMessages(1);
                 eCSControlHandler.sendEmptyMessageAtTime(1, uptimeMillis + i2);
-                Slog.v("EyeComfortSolutionService", "Failure to register all of the services system.");
+                Slog.v(
+                        "EyeComfortSolutionService",
+                        "Failure to register all of the services system.");
                 return;
             }
-            eyeComfortSolutionService.mSensorManager = (SensorManager) eyeComfortSolutionService.mContext.getSystemService("sensor");
-            Slog.v("EyeComfortSolutionService", "mSensorManager : " + eyeComfortSolutionService.mSensorManager);
+            eyeComfortSolutionService.mSensorManager =
+                    (SensorManager) eyeComfortSolutionService.mContext.getSystemService("sensor");
+            Slog.v(
+                    "EyeComfortSolutionService",
+                    "mSensorManager : " + eyeComfortSolutionService.mSensorManager);
             SensorManager sensorManager = eyeComfortSolutionService.mSensorManager;
             if (sensorManager != null) {
                 eyeComfortSolutionService.mBoprSensor = sensorManager.getDefaultSensor(65587);
             }
             if (eyeComfortSolutionService.mSensorManager != null) {
-                Slog.v("EyeComfortSolutionService", "Success to register all of the services system.");
+                Slog.v(
+                        "EyeComfortSolutionService",
+                        "Success to register all of the services system.");
                 return;
             }
             long uptimeMillis2 = SystemClock.uptimeMillis();
@@ -169,33 +190,41 @@ public final class EyeComfortSolutionService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenWatchingReceiver extends BroadcastReceiver {
-        public ScreenWatchingReceiver() {
-        }
+        public ScreenWatchingReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             long uptimeMillis = SystemClock.uptimeMillis();
             Slog.i("EyeComfortSolutionService", "action  :  " + action);
-            if ("android.intent.action.BOOT_COMPLETED".equals(action) || "android.intent.action.USER_SWITCHED".equals(action)) {
-                EyeComfortSolutionService.m1137$$Nest$msetting_is_changed(EyeComfortSolutionService.this);
+            if ("android.intent.action.BOOT_COMPLETED".equals(action)
+                    || "android.intent.action.USER_SWITCHED".equals(action)) {
+                EyeComfortSolutionService.m1137$$Nest$msetting_is_changed(
+                        EyeComfortSolutionService.this);
                 EyeComfortSolutionService.this.getClass();
                 return;
             }
             if ("android.intent.action.SCREEN_ON".equals(action)) {
-                EyeComfortSolutionService eyeComfortSolutionService = EyeComfortSolutionService.this;
+                EyeComfortSolutionService eyeComfortSolutionService =
+                        EyeComfortSolutionService.this;
                 eyeComfortSolutionService.mScreenOn = true;
-                if (eyeComfortSolutionService.mBlueLightFilterModeEnabled && eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled && eyeComfortSolutionService.mBlueLightFilterEnableTime) {
+                if (eyeComfortSolutionService.mBlueLightFilterModeEnabled
+                        && eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled
+                        && eyeComfortSolutionService.mBlueLightFilterEnableTime) {
                     eyeComfortSolutionService.mHandler.removeMessages(2);
-                    EyeComfortSolutionService.this.mHandler.sendEmptyMessageAtTime(2, uptimeMillis + r5.ACTION_GET_BOPR_VALUE_DEBOUNCE_MILLIS);
+                    EyeComfortSolutionService.this.mHandler.sendEmptyMessageAtTime(
+                            2, uptimeMillis + r5.ACTION_GET_BOPR_VALUE_DEBOUNCE_MILLIS);
                     return;
                 }
                 return;
             }
             if ("android.intent.action.SCREEN_OFF".equals(action)) {
-                EyeComfortSolutionService eyeComfortSolutionService2 = EyeComfortSolutionService.this;
+                EyeComfortSolutionService eyeComfortSolutionService2 =
+                        EyeComfortSolutionService.this;
                 eyeComfortSolutionService2.mScreenOn = false;
-                if (eyeComfortSolutionService2.mBlueLightFilterModeEnabled && eyeComfortSolutionService2.mBlueLightFilterAdaptiveModeEnabled && eyeComfortSolutionService2.mBlueLightFilterEnableTime) {
+                if (eyeComfortSolutionService2.mBlueLightFilterModeEnabled
+                        && eyeComfortSolutionService2.mBlueLightFilterAdaptiveModeEnabled
+                        && eyeComfortSolutionService2.mBlueLightFilterEnableTime) {
                     eyeComfortSolutionService2.mHandler.removeMessages(2);
                     EyeComfortSolutionService.this.mHandler.removeMessages(3);
                     EyeComfortSolutionService.this.mHandler.sendEmptyMessage(3);
@@ -207,8 +236,10 @@ public final class EyeComfortSolutionService {
                 return;
             }
             if ("android.intent.action.TIME_TICK".equals(action)) {
-                EyeComfortSolutionService eyeComfortSolutionService3 = EyeComfortSolutionService.this;
-                if (eyeComfortSolutionService3.mBlueLightFilterModeEnabled && eyeComfortSolutionService3.mBlueLightFilterAdaptiveModeEnabled) {
+                EyeComfortSolutionService eyeComfortSolutionService3 =
+                        EyeComfortSolutionService.this;
+                if (eyeComfortSolutionService3.mBlueLightFilterModeEnabled
+                        && eyeComfortSolutionService3.mBlueLightFilterAdaptiveModeEnabled) {
                     eyeComfortSolutionService3.mHandler.removeMessages(4);
                     EyeComfortSolutionService.this.mHandler.sendEmptyMessage(4);
                     return;
@@ -216,8 +247,10 @@ public final class EyeComfortSolutionService {
                 return;
             }
             if ("android.intent.action.TIME_SET".equals(action)) {
-                EyeComfortSolutionService eyeComfortSolutionService4 = EyeComfortSolutionService.this;
-                if (eyeComfortSolutionService4.mBlueLightFilterModeEnabled && eyeComfortSolutionService4.mBlueLightFilterAdaptiveModeEnabled) {
+                EyeComfortSolutionService eyeComfortSolutionService4 =
+                        EyeComfortSolutionService.this;
+                if (eyeComfortSolutionService4.mBlueLightFilterModeEnabled
+                        && eyeComfortSolutionService4.mBlueLightFilterAdaptiveModeEnabled) {
                     eyeComfortSolutionService4.mHandler.removeMessages(4);
                     EyeComfortSolutionService.this.mHandler.sendEmptyMessage(4);
                     return;
@@ -225,8 +258,10 @@ public final class EyeComfortSolutionService {
                 return;
             }
             if ("android.intent.action.TIMEZONE_CHANGED".equals(action)) {
-                EyeComfortSolutionService eyeComfortSolutionService5 = EyeComfortSolutionService.this;
-                if (eyeComfortSolutionService5.mBlueLightFilterModeEnabled && eyeComfortSolutionService5.mBlueLightFilterAdaptiveModeEnabled) {
+                EyeComfortSolutionService eyeComfortSolutionService5 =
+                        EyeComfortSolutionService.this;
+                if (eyeComfortSolutionService5.mBlueLightFilterModeEnabled
+                        && eyeComfortSolutionService5.mBlueLightFilterAdaptiveModeEnabled) {
                     eyeComfortSolutionService5.mHandler.removeMessages(4);
                     EyeComfortSolutionService.this.mHandler.sendEmptyMessage(4);
                     return;
@@ -234,8 +269,12 @@ public final class EyeComfortSolutionService {
                 return;
             }
             if ("com.sec.android.intent.action.HQM_UPDATE_REQ".equals(action)) {
-                EyeComfortSolutionService eyeComfortSolutionService6 = EyeComfortSolutionService.this;
-                eyeComfortSolutionService6.mSemHqmManager = (SemHqmManager) eyeComfortSolutionService6.mContext.getSystemService("HqmManagerService");
+                EyeComfortSolutionService eyeComfortSolutionService6 =
+                        EyeComfortSolutionService.this;
+                eyeComfortSolutionService6.mSemHqmManager =
+                        (SemHqmManager)
+                                eyeComfortSolutionService6.mContext.getSystemService(
+                                        "HqmManagerService");
                 if (EyeComfortSolutionService.this.mSemHqmManager != null) {
                     Integer.toString(0);
                     Integer.toString(0);
@@ -252,12 +291,14 @@ public final class EyeComfortSolutionService {
 
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
-            EyeComfortSolutionService.m1137$$Nest$msetting_is_changed(EyeComfortSolutionService.this);
+            EyeComfortSolutionService.m1137$$Nest$msetting_is_changed(
+                    EyeComfortSolutionService.this);
         }
     }
 
     /* renamed from: -$$Nest$mgetBoprValue, reason: not valid java name */
-    public static void m1136$$Nest$mgetBoprValue(EyeComfortSolutionService eyeComfortSolutionService, boolean z) {
+    public static void m1136$$Nest$mgetBoprValue(
+            EyeComfortSolutionService eyeComfortSolutionService, boolean z) {
         SensorManager sensorManager;
         boolean z2 = eyeComfortSolutionService.mColorOnPixelRatioSupported;
         boolean z3 = eyeComfortSolutionService.mSupportAPmDNIe;
@@ -274,7 +315,11 @@ public final class EyeComfortSolutionService {
             if (sensorManager2 == null || !z2) {
                 return;
             }
-            sensorManager2.registerListener(eyeComfortSolutionService.mBoprSensorListener, eyeComfortSolutionService.mBoprSensor, 3, eCSControlHandler);
+            sensorManager2.registerListener(
+                    eyeComfortSolutionService.mBoprSensorListener,
+                    eyeComfortSolutionService.mBoprSensor,
+                    3,
+                    eCSControlHandler);
             return;
         }
         long uptimeMillis = SystemClock.uptimeMillis();
@@ -284,23 +329,42 @@ public final class EyeComfortSolutionService {
         if (eyeComfortSolutionService.mBlueLightFilterEnableTime) {
             eyeComfortSolutionService.blue_light_filter_setting_bopr(coprValue, i);
         }
-        if (eyeComfortSolutionService.BOPR_VALUE_STEP >= 54 || !eyeComfortSolutionService.mBlueLightFilterEnableTime) {
+        if (eyeComfortSolutionService.BOPR_VALUE_STEP >= 54
+                || !eyeComfortSolutionService.mBlueLightFilterEnableTime) {
             return;
         }
         eCSControlHandler.removeMessages(2);
-        eCSControlHandler.sendEmptyMessageAtTime(2, uptimeMillis + eyeComfortSolutionService.ACTION_GET_BOPR_VALUE_DEBOUNCE_MILLIS);
+        eCSControlHandler.sendEmptyMessageAtTime(
+                2, uptimeMillis + eyeComfortSolutionService.ACTION_GET_BOPR_VALUE_DEBOUNCE_MILLIS);
     }
 
     /* renamed from: -$$Nest$msetting_is_changed, reason: not valid java name */
-    public static void m1137$$Nest$msetting_is_changed(EyeComfortSolutionService eyeComfortSolutionService) {
+    public static void m1137$$Nest$msetting_is_changed(
+            EyeComfortSolutionService eyeComfortSolutionService) {
         ContentResolver contentResolver = eyeComfortSolutionService.mContext.getContentResolver();
         long uptimeMillis = SystemClock.uptimeMillis();
-        eyeComfortSolutionService.mBlueLightFilterModeEnabled = Settings.System.getIntForUser(contentResolver, "blue_light_filter", 0, -2) == 1;
-        eyeComfortSolutionService.mNightDimModeEnabled = Settings.System.getIntForUser(contentResolver, "blue_light_filter_night_dim", 0, -2) == 1;
-        eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled = Settings.System.getIntForUser(contentResolver, "blue_light_filter_adaptive_mode", 0, -2) == 1;
-        eyeComfortSolutionService.mDefaultThemeEnabled = Settings.System.getStringForUser(contentResolver, "current_sec_active_themepackage", -2) == null;
-        eyeComfortSolutionService.mBlueLightFilterCustomAlwaysOn = Settings.System.getIntForUser(contentResolver, "blue_light_filter_type", 0, -2) == 0;
-        eyeComfortSolutionService.mScreenModeSetting = Settings.System.getIntForUser(eyeComfortSolutionService.mContext.getContentResolver(), "screen_mode_setting", 4, -2);
+        eyeComfortSolutionService.mBlueLightFilterModeEnabled =
+                Settings.System.getIntForUser(contentResolver, "blue_light_filter", 0, -2) == 1;
+        eyeComfortSolutionService.mNightDimModeEnabled =
+                Settings.System.getIntForUser(contentResolver, "blue_light_filter_night_dim", 0, -2)
+                        == 1;
+        eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled =
+                Settings.System.getIntForUser(
+                                contentResolver, "blue_light_filter_adaptive_mode", 0, -2)
+                        == 1;
+        eyeComfortSolutionService.mDefaultThemeEnabled =
+                Settings.System.getStringForUser(
+                                contentResolver, "current_sec_active_themepackage", -2)
+                        == null;
+        eyeComfortSolutionService.mBlueLightFilterCustomAlwaysOn =
+                Settings.System.getIntForUser(contentResolver, "blue_light_filter_type", 0, -2)
+                        == 0;
+        eyeComfortSolutionService.mScreenModeSetting =
+                Settings.System.getIntForUser(
+                        eyeComfortSolutionService.mContext.getContentResolver(),
+                        "screen_mode_setting",
+                        4,
+                        -2);
         StringBuilder sb = new StringBuilder("mBlueLightFilterModeEnabled : ");
         sb.append(eyeComfortSolutionService.mBlueLightFilterModeEnabled);
         sb.append(" , mNightDimModeEnabled : ");
@@ -310,15 +374,22 @@ public final class EyeComfortSolutionService {
         sb.append(" , mDefaultThemeEnabled : ");
         sb.append(eyeComfortSolutionService.mDefaultThemeEnabled);
         sb.append(" , mBlueLightFilterCustomAlwaysOn : ");
-        AnyMotionDetector$$ExternalSyntheticOutline0.m("EyeComfortSolutionService", sb, eyeComfortSolutionService.mBlueLightFilterCustomAlwaysOn);
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                "EyeComfortSolutionService",
+                sb,
+                eyeComfortSolutionService.mBlueLightFilterCustomAlwaysOn);
         boolean z = eyeComfortSolutionService.mBlueLightFilterModeEnabled;
         ECSControlHandler eCSControlHandler = eyeComfortSolutionService.mHandler;
         if (z && eyeComfortSolutionService.mBlueLightFilterAdaptiveModeEnabled) {
             eyeComfortSolutionService.updateSleepWakeupTime("All");
             eyeComfortSolutionService.blue_light_filter_setting_day(true);
-            if (eyeComfortSolutionService.mScreenOn && eyeComfortSolutionService.mBlueLightFilterEnableTime) {
+            if (eyeComfortSolutionService.mScreenOn
+                    && eyeComfortSolutionService.mBlueLightFilterEnableTime) {
                 eCSControlHandler.removeMessages(2);
-                eCSControlHandler.sendEmptyMessageAtTime(2, uptimeMillis + eyeComfortSolutionService.ACTION_GET_BOPR_VALUE_DEBOUNCE_MILLIS);
+                eCSControlHandler.sendEmptyMessageAtTime(
+                        2,
+                        uptimeMillis
+                                + eyeComfortSolutionService.ACTION_GET_BOPR_VALUE_DEBOUNCE_MILLIS);
             }
         } else {
             eyeComfortSolutionService.blue_light_filter_setting_day(false);
@@ -328,12 +399,14 @@ public final class EyeComfortSolutionService {
             Slog.i("EyeComfortSolutionService", "reset blue_light_filter_data_reset");
             eyeComfortSolutionService.BOPR_VALUE_STEP = 0;
             eyeComfortSolutionService.bopr_cumulative_count = 0;
-            eyeComfortSolutionService.cal_value_sum = FullScreenMagnificationGestureHandler.MAX_SCALE;
+            eyeComfortSolutionService.cal_value_sum =
+                    FullScreenMagnificationGestureHandler.MAX_SCALE;
             eyeComfortSolutionService.mLastDayBlueLightFilterIndex = 0;
             eyeComfortSolutionService.mLastBoprBlueLightFilterIndex = 0;
             eyeComfortSolutionService.mLastTotalBlueLightFilterIndex = 0;
         }
-        eyeComfortSolutionService.updateNightDimSettings(eyeComfortSolutionService.mLastTotalBlueLightFilterIndex);
+        eyeComfortSolutionService.updateNightDimSettings(
+                eyeComfortSolutionService.mLastTotalBlueLightFilterIndex);
     }
 
     /* JADX WARN: Type inference failed for: r1v1, types: [com.samsung.android.displaysolution.EyeComfortSolutionService$1] */
@@ -387,68 +460,121 @@ public final class EyeComfortSolutionService {
         this.mBlueLightFilterCustomAlwaysOn = false;
         this.mEnvironmentAdaptiveDisplaySupported = false;
         this.mNaturalGammaScreenModeSupported = false;
-        this.mBoprSensorListener = new SensorEventListener() { // from class: com.samsung.android.displaysolution.EyeComfortSolutionService.1
-            @Override // android.hardware.SensorEventListener
-            public final void onAccuracyChanged(Sensor sensor, int i) {
-            }
+        this.mBoprSensorListener =
+                new SensorEventListener() { // from class:
+                                            // com.samsung.android.displaysolution.EyeComfortSolutionService.1
+                    @Override // android.hardware.SensorEventListener
+                    public final void onAccuracyChanged(Sensor sensor, int i) {}
 
-            @Override // android.hardware.SensorEventListener
-            public final void onSensorChanged(SensorEvent sensorEvent) {
-                long uptimeMillis = SystemClock.uptimeMillis();
-                EyeComfortSolutionService eyeComfortSolutionService = EyeComfortSolutionService.this;
-                int i = (int) sensorEvent.values[2];
-                eyeComfortSolutionService.getClass();
-                int i2 = eyeComfortSolutionService.bopr_cumulative_count + 1;
-                eyeComfortSolutionService.bopr_cumulative_count = i2;
-                if (eyeComfortSolutionService.mBlueLightFilterEnableTime) {
-                    eyeComfortSolutionService.blue_light_filter_setting_bopr(i, i2);
-                }
-                EyeComfortSolutionService eyeComfortSolutionService2 = EyeComfortSolutionService.this;
-                eyeComfortSolutionService2.mSensorManager.unregisterListener(eyeComfortSolutionService2.mBoprSensorListener);
-                EyeComfortSolutionService eyeComfortSolutionService3 = EyeComfortSolutionService.this;
-                if (eyeComfortSolutionService3.BOPR_VALUE_STEP >= 54 || !eyeComfortSolutionService3.mBlueLightFilterEnableTime) {
-                    return;
-                }
-                eyeComfortSolutionService3.mHandler.removeMessages(2);
-                EyeComfortSolutionService.this.mHandler.sendEmptyMessageAtTime(2, uptimeMillis + r6.ACTION_GET_BOPR_VALUE_DEBOUNCE_MILLIS);
-            }
-        };
+                    @Override // android.hardware.SensorEventListener
+                    public final void onSensorChanged(SensorEvent sensorEvent) {
+                        long uptimeMillis = SystemClock.uptimeMillis();
+                        EyeComfortSolutionService eyeComfortSolutionService =
+                                EyeComfortSolutionService.this;
+                        int i = (int) sensorEvent.values[2];
+                        eyeComfortSolutionService.getClass();
+                        int i2 = eyeComfortSolutionService.bopr_cumulative_count + 1;
+                        eyeComfortSolutionService.bopr_cumulative_count = i2;
+                        if (eyeComfortSolutionService.mBlueLightFilterEnableTime) {
+                            eyeComfortSolutionService.blue_light_filter_setting_bopr(i, i2);
+                        }
+                        EyeComfortSolutionService eyeComfortSolutionService2 =
+                                EyeComfortSolutionService.this;
+                        eyeComfortSolutionService2.mSensorManager.unregisterListener(
+                                eyeComfortSolutionService2.mBoprSensorListener);
+                        EyeComfortSolutionService eyeComfortSolutionService3 =
+                                EyeComfortSolutionService.this;
+                        if (eyeComfortSolutionService3.BOPR_VALUE_STEP >= 54
+                                || !eyeComfortSolutionService3.mBlueLightFilterEnableTime) {
+                            return;
+                        }
+                        eyeComfortSolutionService3.mHandler.removeMessages(2);
+                        EyeComfortSolutionService.this.mHandler.sendEmptyMessageAtTime(
+                                2, uptimeMillis + r6.ACTION_GET_BOPR_VALUE_DEBOUNCE_MILLIS);
+                    }
+                };
         this.mContext = context;
-        ECSControlHandler eCSControlHandler = new ECSControlHandler(KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("EyeComfortSolutionServiceThread").getLooper());
+        ECSControlHandler eCSControlHandler =
+                new ECSControlHandler(
+                        KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(
+                                        "EyeComfortSolutionServiceThread")
+                                .getLooper());
         this.mHandler = eCSControlHandler;
-        boolean z = context.getResources().getBoolean(R.bool.config_goToSleepOnButtonPressTheaterMode);
-        this.BOPR_MAX_VALUE = context.getResources().getInteger(R.integer.config_attentiveWarningDuration);
+        boolean z =
+                context.getResources().getBoolean(R.bool.config_goToSleepOnButtonPressTheaterMode);
+        this.BOPR_MAX_VALUE =
+                context.getResources().getInteger(R.integer.config_attentiveWarningDuration);
         this.mEnvironmentAdaptiveDisplaySupported = true;
         Slog.i("EyeComfortSolutionService", "mEnvironmentAdaptiveDisplaySupported true");
         SettingsObserver settingsObserver = new SettingsObserver(eCSControlHandler);
         ContentResolver contentResolver = context.getContentResolver();
         long uptimeMillis = SystemClock.uptimeMillis();
-        contentResolver.registerContentObserver(Settings.System.getUriFor("blue_light_filter"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("blue_light_filter_night_dim"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("blue_light_filter_adaptive_mode"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("current_sec_active_themepackage"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("blue_light_filter_type"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_mode_setting"), false, settingsObserver, -2);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("blue_light_filter"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("blue_light_filter_night_dim"),
+                false,
+                settingsObserver,
+                -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("blue_light_filter_adaptive_mode"),
+                false,
+                settingsObserver,
+                -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("current_sec_active_themepackage"),
+                false,
+                settingsObserver,
+                -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("blue_light_filter_type"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_mode_setting"), false, settingsObserver, -2);
         IntentFilter intentFilter = new IntentFilter();
-        ActivityManagerService$$ExternalSyntheticOutline0.m(intentFilter, "android.intent.action.BOOT_COMPLETED", "android.intent.action.USER_SWITCHED", "android.intent.action.SCREEN_ON", "android.intent.action.SCREEN_OFF");
-        ActivityManagerService$$ExternalSyntheticOutline0.m(intentFilter, "android.intent.action.USER_PRESENT", "android.intent.action.TIME_TICK", "android.intent.action.TIME_SET", "android.intent.action.TIMEZONE_CHANGED");
+        ActivityManagerService$$ExternalSyntheticOutline0.m(
+                intentFilter,
+                "android.intent.action.BOOT_COMPLETED",
+                "android.intent.action.USER_SWITCHED",
+                "android.intent.action.SCREEN_ON",
+                "android.intent.action.SCREEN_OFF");
+        ActivityManagerService$$ExternalSyntheticOutline0.m(
+                intentFilter,
+                "android.intent.action.USER_PRESENT",
+                "android.intent.action.TIME_TICK",
+                "android.intent.action.TIME_SET",
+                "android.intent.action.TIMEZONE_CHANGED");
         intentFilter.addAction("com.sec.android.intent.action.HQM_UPDATE_REQ");
-        context.registerReceiverAsUser(new ScreenWatchingReceiver(), UserHandle.ALL, intentFilter, null, null);
+        context.registerReceiverAsUser(
+                new ScreenWatchingReceiver(), UserHandle.ALL, intentFilter, null, null);
         eCSControlHandler.removeMessages(1);
         eCSControlHandler.sendEmptyMessageAtTime(1, 4000 + uptimeMillis);
-        if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_SUPPORT_BLUE_FILTER_ADAPTIVE_MODE", 0) > 0) {
+        if (SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_LCD_SUPPORT_BLUE_FILTER_ADAPTIVE_MODE", 0)
+                > 0) {
             this.mAdaptiveBlueLightFilterSupported = true;
         }
-        if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_SUPPORT_BLUE_FILTER_ADAPTIVE_MODE", 0) == 1) {
+        if (SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_LCD_SUPPORT_BLUE_FILTER_ADAPTIVE_MODE", 0)
+                == 1) {
             this.mColorOnPixelRatioSupported = true;
         }
-        if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_NATURAL_MODE_TYPE", 0) == 1) {
+        if (SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_NATURAL_MODE_TYPE", 0)
+                == 1) {
             this.mNaturalGammaScreenModeSupported = true;
         }
-        if (!"DDI".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LCD_CONFIG_HW_MDNIE"))) {
+        if (!"DDI"
+                .equals(
+                        SemFloatingFeature.getInstance()
+                                .getString("SEC_FLOATING_FEATURE_LCD_CONFIG_HW_MDNIE"))) {
             this.mSupportAPmDNIe = true;
         }
-        Slog.i("EyeComfortSolutionService", "A_BLF : " + this.mAdaptiveBlueLightFilterSupported + " , COPR_IP : " + this.mColorOnPixelRatioSupported);
+        Slog.i(
+                "EyeComfortSolutionService",
+                "A_BLF : "
+                        + this.mAdaptiveBlueLightFilterSupported
+                        + " , COPR_IP : "
+                        + this.mColorOnPixelRatioSupported);
         SystemProperties.set("sys.eyecomfortsolution.ecson", "false");
         if (z) {
             SystemProperties.set("sys.eyecomfortsolution.ecson", "true");
@@ -488,8 +614,10 @@ public final class EyeComfortSolutionService {
 
     public final void blue_light_filter_setting_bopr(int i, int i2) {
         this.mContext.getContentResolver();
-        float f = Settings.System.getInt(this.mContext.getContentResolver(), "screen_brightness", 0);
-        float pow = (float) (Math.pow(r8 / 256.0f, 2.200000047683716d) * this.app_weighting_factor * f);
+        float f =
+                Settings.System.getInt(this.mContext.getContentResolver(), "screen_brightness", 0);
+        float pow =
+                (float) (Math.pow(r8 / 256.0f, 2.200000047683716d) * this.app_weighting_factor * f);
         this.cal_value_sum += pow;
         StringBuilder sb = new StringBuilder("count : ");
         sb.append(i2);
@@ -504,7 +632,8 @@ public final class EyeComfortSolutionService {
         sb.append(" , sum_value : ");
         sb.append(this.cal_value_sum);
         sb.append(" , BOPR_MAX_VALUE : ");
-        GmsAlarmManager$$ExternalSyntheticOutline0.m(sb, this.BOPR_MAX_VALUE, "EyeComfortSolutionService");
+        GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                sb, this.BOPR_MAX_VALUE, "EyeComfortSolutionService");
         if (this.BOPR_VALUE_STEP < 54) {
             for (int i3 = 0; i3 < 54; i3++) {
                 float f2 = this.cal_value_sum;
@@ -512,10 +641,15 @@ public final class EyeComfortSolutionService {
                 int i5 = i4 + 1;
                 if (f2 >= (r8 / 54) * i5 && i4 == i3) {
                     this.mLastBoprBlueLightFilterIndex = i5;
-                    StringBuilder sb2 = new StringBuilder("Change BLF step by B-opr, BLF dayIndex : [");
+                    StringBuilder sb2 =
+                            new StringBuilder("Change BLF step by B-opr, BLF dayIndex : [");
                     sb2.append(this.mLastDayBlueLightFilterIndex);
                     sb2.append("] , boprIndex : [");
-                    CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0.m(sb2, this.mLastBoprBlueLightFilterIndex, "]", "EyeComfortSolutionService");
+                    CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0.m(
+                            sb2,
+                            this.mLastBoprBlueLightFilterIndex,
+                            "]",
+                            "EyeComfortSolutionService");
                     int i6 = this.mLastDayBlueLightFilterIndex + this.mLastBoprBlueLightFilterIndex;
                     this.mLastTotalBlueLightFilterIndex = i6;
                     setBlueLightFilterMode(i6, true);
@@ -526,13 +660,13 @@ public final class EyeComfortSolutionService {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:80:0x01a3, code lost:
-    
-        if (r9 < 36) goto L75;
-     */
+
+       if (r9 < 36) goto L75;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:90:0x01d3, code lost:
-    
-        if (r9 < 36) goto L75;
-     */
+
+       if (r9 < 36) goto L75;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -542,12 +676,19 @@ public final class EyeComfortSolutionService {
             Method dump skipped, instructions count: 782
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.displaysolution.EyeComfortSolutionService.blue_light_filter_setting_day(boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.displaysolution.EyeComfortSolutionService.blue_light_filter_setting_day(boolean):void");
     }
 
     public final void setBlfEnableTimeBySchedule(boolean z, int i) {
         this.mBlueLightFilterScheduledTime = z;
-        Slog.d("EyeComfortSolutionService", "setBlueLightFilterModeEnabledTime - mBlueLightFilterScheduledTime: " + this.mBlueLightFilterScheduledTime + " , index: " + i);
+        Slog.d(
+                "EyeComfortSolutionService",
+                "setBlueLightFilterModeEnabledTime - mBlueLightFilterScheduledTime: "
+                        + this.mBlueLightFilterScheduledTime
+                        + " , index: "
+                        + i);
         ECSControlHandler eCSControlHandler = this.mHandler;
         eCSControlHandler.sendMessage(Message.obtain(eCSControlHandler, 5));
     }
@@ -557,15 +698,29 @@ public final class EyeComfortSolutionService {
         if (this.mAdaptiveBlueLightFilterSupported) {
             boolean z2 = this.mColorOnPixelRatioSupported;
             if (z2) {
-                StringBuilder m = AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "BLF Adaptive Mode Enable : ", " , targetIndex : [", " + 11] = ", z);
+                StringBuilder m =
+                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                i,
+                                "BLF Adaptive Mode Enable : ",
+                                " , targetIndex : [",
+                                " + 11] = ",
+                                z);
                 m.append(6000.0d - (i * 22.22222222222222d));
                 m.append(" , ead offset : ");
-                SystemServiceManager$$ExternalSyntheticOutline0.m(m, this.mBlfIndexEadOffset, "EyeComfortSolutionService");
+                SystemServiceManager$$ExternalSyntheticOutline0.m(
+                        m, this.mBlfIndexEadOffset, "EyeComfortSolutionService");
             } else if (!z2) {
-                StringBuilder m2 = AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "BLF Adaptive Mode Enable : ", " , targetIndex : [", " + 11] = ", z);
+                StringBuilder m2 =
+                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                i,
+                                "BLF Adaptive Mode Enable : ",
+                                " , targetIndex : [",
+                                " + 11] = ",
+                                z);
                 m2.append(6000.0d - (i * 55.55555555555556d));
                 m2.append(" , ead offset : ");
-                SystemServiceManager$$ExternalSyntheticOutline0.m(m2, this.mBlfIndexEadOffset, "EyeComfortSolutionService");
+                SystemServiceManager$$ExternalSyntheticOutline0.m(
+                        m2, this.mBlfIndexEadOffset, "EyeComfortSolutionService");
             }
             this.mMdnieManager = (SemMdnieManager) this.mContext.getSystemService("mDNIe");
             Slog.v("EyeComfortSolutionService", "mMdnieManager : " + this.mMdnieManager);
@@ -591,7 +746,9 @@ public final class EyeComfortSolutionService {
     }
 
     public final void setmDNIeModeState(String str) {
-        if (!this.mNaturalGammaScreenModeSupported || str == null || str.equals(this.mPrevmDNIeMode)) {
+        if (!this.mNaturalGammaScreenModeSupported
+                || str == null
+                || str.equals(this.mPrevmDNIeMode)) {
             return;
         }
         this.mPrevmDNIeMode = str;
@@ -686,31 +843,46 @@ public final class EyeComfortSolutionService {
         } else {
             this.mNightDimFontConfigValue = 32;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m(i, "updateNightDimSettings index : ", " , mNightDimFontConfigValue : "), this.mNightDimFontConfigValue, "EyeComfortSolutionService");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        i, "updateNightDimSettings index : ", " , mNightDimFontConfigValue : "),
+                this.mNightDimFontConfigValue,
+                "EyeComfortSolutionService");
         if (this.mNightDimFontConfigValue != this.mNightDimFontConfigValuePrev) {
             StringBuilder sb = new StringBuilder("updateConfiguration (");
             sb.append(this.mNightDimFontConfigValuePrev);
             sb.append(") -> (");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, this.mNightDimFontConfigValue, ")", "EyeComfortSolutionService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    sb, this.mNightDimFontConfigValue, ")", "EyeComfortSolutionService");
             int i2 = this.mNightDimFontConfigValue;
             this.mNightDimFontConfigValuePrev = i2;
             Settings.Secure.putIntForUser(contentResolver, "enhanced_comfort_font_value", i2, -2);
             final IActivityManager service = ActivityManager.getService();
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() { // from class: com.samsung.android.displaysolution.EyeComfortSolutionService$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    EyeComfortSolutionService eyeComfortSolutionService = EyeComfortSolutionService.this;
-                    IActivityManager iActivityManager = service;
-                    eyeComfortSolutionService.getClass();
-                    try {
-                        Configuration globalConfiguration = iActivityManager.getGlobalConfiguration();
-                        globalConfiguration.nightDim = eyeComfortSolutionService.mNightDimFontConfigValue;
-                        iActivityManager.updateConfiguration(globalConfiguration);
-                    } catch (Exception e) {
-                        NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("cannot update Configuration : "), "EyeComfortSolutionService");
-                    }
-                }
-            }, 0L);
+            new Handler(Looper.getMainLooper())
+                    .postDelayed(
+                            new Runnable() { // from class:
+                                             // com.samsung.android.displaysolution.EyeComfortSolutionService$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    EyeComfortSolutionService eyeComfortSolutionService =
+                                            EyeComfortSolutionService.this;
+                                    IActivityManager iActivityManager = service;
+                                    eyeComfortSolutionService.getClass();
+                                    try {
+                                        Configuration globalConfiguration =
+                                                iActivityManager.getGlobalConfiguration();
+                                        globalConfiguration.nightDim =
+                                                eyeComfortSolutionService.mNightDimFontConfigValue;
+                                        iActivityManager.updateConfiguration(globalConfiguration);
+                                    } catch (Exception e) {
+                                        NandswapManager$$ExternalSyntheticOutline0.m(
+                                                e,
+                                                new StringBuilder("cannot update Configuration : "),
+                                                "EyeComfortSolutionService");
+                                    }
+                                }
+                            },
+                            0L);
         }
         if (this.mNaturalGammaScreenModeSupported) {
             return;
@@ -768,7 +940,8 @@ public final class EyeComfortSolutionService {
             sb.append(") , BedTime : ");
             sb.append(this.mBedtime_saturday);
             sb.append(" , WakeupTime : ");
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb, this.mWakeupTime_sunday, "EyeComfortSolutionService");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    sb, this.mWakeupTime_sunday, "EyeComfortSolutionService");
             return;
         }
         if ("MONDAY".equals(str)) {
@@ -784,7 +957,8 @@ public final class EyeComfortSolutionService {
             sb2.append(") , BedTime : ");
             sb2.append(this.mBedtime_sunday);
             sb2.append(" , WakeupTime : ");
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb2, this.mWakeupTime_monday, "EyeComfortSolutionService");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    sb2, this.mWakeupTime_monday, "EyeComfortSolutionService");
             return;
         }
         if ("TUESDAY".equals(str)) {
@@ -800,7 +974,8 @@ public final class EyeComfortSolutionService {
             sb3.append(") , BedTime : ");
             sb3.append(this.mBedtime_monday);
             sb3.append(" , WakeupTime : ");
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb3, this.mWakeupTime_tuesday, "EyeComfortSolutionService");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    sb3, this.mWakeupTime_tuesday, "EyeComfortSolutionService");
             return;
         }
         if ("WEDNESDAY".equals(str)) {
@@ -816,7 +991,8 @@ public final class EyeComfortSolutionService {
             sb4.append(") , BedTime : ");
             sb4.append(this.mBedtime_tuesday);
             sb4.append(" , WakeupTime : ");
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb4, this.mWakeupTime_wednesday, "EyeComfortSolutionService");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    sb4, this.mWakeupTime_wednesday, "EyeComfortSolutionService");
             return;
         }
         if ("THURSDAY".equals(str)) {
@@ -832,7 +1008,8 @@ public final class EyeComfortSolutionService {
             sb5.append(") , BedTime : ");
             sb5.append(this.mBedtime_wednesday);
             sb5.append(" , WakeupTime : ");
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb5, this.mWakeupTime_thursday, "EyeComfortSolutionService");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    sb5, this.mWakeupTime_thursday, "EyeComfortSolutionService");
             return;
         }
         if ("FRIDAY".equals(str)) {
@@ -848,7 +1025,8 @@ public final class EyeComfortSolutionService {
             sb6.append(") , BedTime : ");
             sb6.append(this.mBedtime_thursday);
             sb6.append(" , WakeupTime : ");
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb6, this.mWakeupTime_friday, "EyeComfortSolutionService");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    sb6, this.mWakeupTime_friday, "EyeComfortSolutionService");
             return;
         }
         if ("SATURDAY".equals(str)) {
@@ -864,14 +1042,15 @@ public final class EyeComfortSolutionService {
             sb7.append(") , BedTime : ");
             sb7.append(this.mBedtime_friday);
             sb7.append(" , WakeupTime : ");
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb7, this.mWakeupTime_saturday, "EyeComfortSolutionService");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    sb7, this.mWakeupTime_saturday, "EyeComfortSolutionService");
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:146:0x0087, code lost:
-    
-        if (r7.getBoolean("isEnabledInSupportedApps") != false) goto L18;
-     */
+
+       if (r7.getBoolean("isEnabledInSupportedApps") != false) goto L18;
+    */
     /* JADX WARN: Removed duplicated region for block: B:14:0x00de  */
     /* JADX WARN: Removed duplicated region for block: B:33:0x011c  */
     /*
@@ -883,6 +1062,8 @@ public final class EyeComfortSolutionService {
             Method dump skipped, instructions count: 804
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.displaysolution.EyeComfortSolutionService.updateSleepWakeupTime(java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.displaysolution.EyeComfortSolutionService.updateSleepWakeupTime(java.lang.String):void");
     }
 }

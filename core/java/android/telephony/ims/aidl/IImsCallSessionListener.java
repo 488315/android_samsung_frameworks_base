@@ -13,7 +13,9 @@ import android.telephony.ims.ImsReasonInfo;
 import android.telephony.ims.ImsStreamMediaProfile;
 import android.telephony.ims.ImsSuppServiceNotification;
 import android.telephony.ims.RtpHeaderExtension;
+
 import com.android.ims.internal.IImsCallSession;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -28,17 +30,21 @@ public interface IImsCallSessionListener extends IInterface {
 
     void callSessionConferenceExtendFailed(ImsReasonInfo imsReasonInfo) throws RemoteException;
 
-    void callSessionConferenceExtendReceived(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException;
+    void callSessionConferenceExtendReceived(
+            IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException;
 
-    void callSessionConferenceExtended(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException;
+    void callSessionConferenceExtended(
+            IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException;
 
-    void callSessionConferenceStateUpdated(ImsConferenceState imsConferenceState) throws RemoteException;
+    void callSessionConferenceStateUpdated(ImsConferenceState imsConferenceState)
+            throws RemoteException;
 
     void callSessionDtmfReceived(char c) throws RemoteException;
 
     void callSessionHandover(int i, int i2, ImsReasonInfo imsReasonInfo) throws RemoteException;
 
-    void callSessionHandoverFailed(int i, int i2, ImsReasonInfo imsReasonInfo) throws RemoteException;
+    void callSessionHandoverFailed(int i, int i2, ImsReasonInfo imsReasonInfo)
+            throws RemoteException;
 
     void callSessionHeld(ImsCallProfile imsCallProfile) throws RemoteException;
 
@@ -58,7 +64,8 @@ public interface IImsCallSessionListener extends IInterface {
 
     void callSessionInviteParticipantsRequestDelivered() throws RemoteException;
 
-    void callSessionInviteParticipantsRequestFailed(ImsReasonInfo imsReasonInfo) throws RemoteException;
+    void callSessionInviteParticipantsRequestFailed(ImsReasonInfo imsReasonInfo)
+            throws RemoteException;
 
     void callSessionMayHandover(int i, int i2) throws RemoteException;
 
@@ -66,7 +73,8 @@ public interface IImsCallSessionListener extends IInterface {
 
     void callSessionMergeFailed(ImsReasonInfo imsReasonInfo) throws RemoteException;
 
-    void callSessionMergeStarted(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException;
+    void callSessionMergeStarted(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile)
+            throws RemoteException;
 
     void callSessionMultipartyStateChanged(boolean z) throws RemoteException;
 
@@ -74,7 +82,8 @@ public interface IImsCallSessionListener extends IInterface {
 
     void callSessionRemoveParticipantsRequestDelivered() throws RemoteException;
 
-    void callSessionRemoveParticipantsRequestFailed(ImsReasonInfo imsReasonInfo) throws RemoteException;
+    void callSessionRemoveParticipantsRequestFailed(ImsReasonInfo imsReasonInfo)
+            throws RemoteException;
 
     void callSessionResumeFailed(ImsReasonInfo imsReasonInfo) throws RemoteException;
 
@@ -82,9 +91,11 @@ public interface IImsCallSessionListener extends IInterface {
 
     void callSessionResumed(ImsCallProfile imsCallProfile) throws RemoteException;
 
-    void callSessionRtpHeaderExtensionsReceived(List<RtpHeaderExtension> list) throws RemoteException;
+    void callSessionRtpHeaderExtensionsReceived(List<RtpHeaderExtension> list)
+            throws RemoteException;
 
-    void callSessionRttAudioIndicatorChanged(ImsStreamMediaProfile imsStreamMediaProfile) throws RemoteException;
+    void callSessionRttAudioIndicatorChanged(ImsStreamMediaProfile imsStreamMediaProfile)
+            throws RemoteException;
 
     void callSessionRttMessageReceived(String str) throws RemoteException;
 
@@ -94,7 +105,8 @@ public interface IImsCallSessionListener extends IInterface {
 
     void callSessionSendAnbrQuery(int i, int i2, int i3) throws RemoteException;
 
-    void callSessionSuppServiceReceived(ImsSuppServiceNotification imsSuppServiceNotification) throws RemoteException;
+    void callSessionSuppServiceReceived(ImsSuppServiceNotification imsSuppServiceNotification)
+            throws RemoteException;
 
     void callSessionTerminated(ImsReasonInfo imsReasonInfo) throws RemoteException;
 
@@ -114,188 +126,162 @@ public interface IImsCallSessionListener extends IInterface {
 
     public static class Default implements IImsCallSessionListener {
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionInitiating(ImsCallProfile profile) throws RemoteException {
-        }
+        public void callSessionInitiating(ImsCallProfile profile) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionInitiatingFailed(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionInitiatingFailed(ImsReasonInfo reasonInfo) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionProgressing(ImsStreamMediaProfile profile) throws RemoteException {
-        }
+        public void callSessionProgressing(ImsStreamMediaProfile profile) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionInitiated(ImsCallProfile profile) throws RemoteException {
-        }
+        public void callSessionInitiated(ImsCallProfile profile) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionInitiatedFailed(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionInitiatedFailed(ImsReasonInfo reasonInfo) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionTerminated(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionTerminated(ImsReasonInfo reasonInfo) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionHeld(ImsCallProfile profile) throws RemoteException {
-        }
+        public void callSessionHeld(ImsCallProfile profile) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionHoldFailed(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionHoldFailed(ImsReasonInfo reasonInfo) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionHoldReceived(ImsCallProfile profile) throws RemoteException {
-        }
+        public void callSessionHoldReceived(ImsCallProfile profile) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionResumed(ImsCallProfile profile) throws RemoteException {
-        }
+        public void callSessionResumed(ImsCallProfile profile) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionResumeFailed(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionResumeFailed(ImsReasonInfo reasonInfo) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionResumeReceived(ImsCallProfile profile) throws RemoteException {
-        }
+        public void callSessionResumeReceived(ImsCallProfile profile) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionMergeStarted(IImsCallSession newSession, ImsCallProfile profile) throws RemoteException {
-        }
+        public void callSessionMergeStarted(IImsCallSession newSession, ImsCallProfile profile)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionMergeComplete(IImsCallSession session) throws RemoteException {
-        }
+        public void callSessionMergeComplete(IImsCallSession session) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionMergeFailed(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionMergeFailed(ImsReasonInfo reasonInfo) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionUpdated(ImsCallProfile profile) throws RemoteException {
-        }
+        public void callSessionUpdated(ImsCallProfile profile) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionUpdateFailed(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionUpdateFailed(ImsReasonInfo reasonInfo) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionUpdateReceived(ImsCallProfile profile) throws RemoteException {
-        }
+        public void callSessionUpdateReceived(ImsCallProfile profile) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionConferenceExtended(IImsCallSession newSession, ImsCallProfile profile) throws RemoteException {
-        }
+        public void callSessionConferenceExtended(
+                IImsCallSession newSession, ImsCallProfile profile) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionConferenceExtendFailed(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionConferenceExtendFailed(ImsReasonInfo reasonInfo)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionConferenceExtendReceived(IImsCallSession newSession, ImsCallProfile profile) throws RemoteException {
-        }
+        public void callSessionConferenceExtendReceived(
+                IImsCallSession newSession, ImsCallProfile profile) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionInviteParticipantsRequestDelivered() throws RemoteException {
-        }
+        public void callSessionInviteParticipantsRequestDelivered() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionInviteParticipantsRequestFailed(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionInviteParticipantsRequestFailed(ImsReasonInfo reasonInfo)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionRemoveParticipantsRequestDelivered() throws RemoteException {
-        }
+        public void callSessionRemoveParticipantsRequestDelivered() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionRemoveParticipantsRequestFailed(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionRemoveParticipantsRequestFailed(ImsReasonInfo reasonInfo)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionConferenceStateUpdated(ImsConferenceState state) throws RemoteException {
-        }
+        public void callSessionConferenceStateUpdated(ImsConferenceState state)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionUssdMessageReceived(int mode, String ussdMessage) throws RemoteException {
-        }
+        public void callSessionUssdMessageReceived(int mode, String ussdMessage)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionHandover(int srcNetworkType, int targetNetworkType, ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionHandover(
+                int srcNetworkType, int targetNetworkType, ImsReasonInfo reasonInfo)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionHandoverFailed(int srcNetworkType, int targetNetworkType, ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionHandoverFailed(
+                int srcNetworkType, int targetNetworkType, ImsReasonInfo reasonInfo)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionMayHandover(int srcNetworkType, int targetNetworkType) throws RemoteException {
-        }
+        public void callSessionMayHandover(int srcNetworkType, int targetNetworkType)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionTtyModeReceived(int mode) throws RemoteException {
-        }
+        public void callSessionTtyModeReceived(int mode) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionMultipartyStateChanged(boolean isMultiParty) throws RemoteException {
-        }
+        public void callSessionMultipartyStateChanged(boolean isMultiParty)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionSuppServiceReceived(ImsSuppServiceNotification suppSrvNotification) throws RemoteException {
-        }
+        public void callSessionSuppServiceReceived(ImsSuppServiceNotification suppSrvNotification)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionRttModifyRequestReceived(ImsCallProfile callProfile) throws RemoteException {
-        }
+        public void callSessionRttModifyRequestReceived(ImsCallProfile callProfile)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionRttModifyResponseReceived(int status) throws RemoteException {
-        }
+        public void callSessionRttModifyResponseReceived(int status) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionRttMessageReceived(String rttMessage) throws RemoteException {
-        }
+        public void callSessionRttMessageReceived(String rttMessage) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionRttAudioIndicatorChanged(ImsStreamMediaProfile profile) throws RemoteException {
-        }
+        public void callSessionRttAudioIndicatorChanged(ImsStreamMediaProfile profile)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionTransferred() throws RemoteException {
-        }
+        public void callSessionTransferred() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionTransferFailed(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionTransferFailed(ImsReasonInfo reasonInfo) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionCancelTransferred() throws RemoteException {
-        }
+        public void callSessionCancelTransferred() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionCancelTransferFailed(ImsReasonInfo reasonInfo) throws RemoteException {
-        }
+        public void callSessionCancelTransferFailed(ImsReasonInfo reasonInfo)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionImsCallEvent(String event, Bundle extras) throws RemoteException {
-        }
+        public void callSessionImsCallEvent(String event, Bundle extras) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionDtmfReceived(char dtmf) throws RemoteException {
-        }
+        public void callSessionDtmfReceived(char dtmf) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callQualityChanged(CallQuality callQuality) throws RemoteException {
-        }
+        public void callQualityChanged(CallQuality callQuality) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionRtpHeaderExtensionsReceived(List<RtpHeaderExtension> extensions) throws RemoteException {
-        }
+        public void callSessionRtpHeaderExtensionsReceived(List<RtpHeaderExtension> extensions)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCallSessionListener
-        public void callSessionSendAnbrQuery(int mediaType, int direction, int bitsPerSecond) throws RemoteException {
-        }
+        public void callSessionSendAnbrQuery(int mediaType, int direction, int bitsPerSecond)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -303,7 +289,7 @@ public interface IImsCallSessionListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsCallSessionListener {
+    public abstract static class Stub extends Binder implements IImsCallSessionListener {
         static final int TRANSACTION_callQualityChanged = 44;
         static final int TRANSACTION_callSessionCancelTransferFailed = 41;
         static final int TRANSACTION_callSessionCancelTransferred = 40;
@@ -476,7 +462,8 @@ public interface IImsCallSessionListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsCallSessionListener.DESCRIPTOR);
             }
@@ -486,130 +473,155 @@ public interface IImsCallSessionListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ImsCallProfile _arg0 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _arg0 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionInitiating(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    ImsReasonInfo _arg02 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg02 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionInitiatingFailed(_arg02);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    ImsStreamMediaProfile _arg03 = (ImsStreamMediaProfile) data.readTypedObject(ImsStreamMediaProfile.CREATOR);
+                    ImsStreamMediaProfile _arg03 =
+                            (ImsStreamMediaProfile)
+                                    data.readTypedObject(ImsStreamMediaProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionProgressing(_arg03);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    ImsCallProfile _arg04 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _arg04 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionInitiated(_arg04);
                     reply.writeNoException();
                     return true;
                 case 5:
-                    ImsReasonInfo _arg05 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg05 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionInitiatedFailed(_arg05);
                     reply.writeNoException();
                     return true;
                 case 6:
-                    ImsReasonInfo _arg06 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg06 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionTerminated(_arg06);
                     reply.writeNoException();
                     return true;
                 case 7:
-                    ImsCallProfile _arg07 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _arg07 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionHeld(_arg07);
                     reply.writeNoException();
                     return true;
                 case 8:
-                    ImsReasonInfo _arg08 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg08 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionHoldFailed(_arg08);
                     reply.writeNoException();
                     return true;
                 case 9:
-                    ImsCallProfile _arg09 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _arg09 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionHoldReceived(_arg09);
                     reply.writeNoException();
                     return true;
                 case 10:
-                    ImsCallProfile _arg010 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _arg010 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionResumed(_arg010);
                     reply.writeNoException();
                     return true;
                 case 11:
-                    ImsReasonInfo _arg011 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg011 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionResumeFailed(_arg011);
                     reply.writeNoException();
                     return true;
                 case 12:
-                    ImsCallProfile _arg012 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _arg012 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionResumeReceived(_arg012);
                     reply.writeNoException();
                     return true;
                 case 13:
-                    IImsCallSession _arg013 = IImsCallSession.Stub.asInterface(data.readStrongBinder());
-                    ImsCallProfile _arg1 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    IImsCallSession _arg013 =
+                            IImsCallSession.Stub.asInterface(data.readStrongBinder());
+                    ImsCallProfile _arg1 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionMergeStarted(_arg013, _arg1);
                     reply.writeNoException();
                     return true;
                 case 14:
-                    IImsCallSession _arg014 = IImsCallSession.Stub.asInterface(data.readStrongBinder());
+                    IImsCallSession _arg014 =
+                            IImsCallSession.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     callSessionMergeComplete(_arg014);
                     reply.writeNoException();
                     return true;
                 case 15:
-                    ImsReasonInfo _arg015 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg015 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionMergeFailed(_arg015);
                     reply.writeNoException();
                     return true;
                 case 16:
-                    ImsCallProfile _arg016 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _arg016 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionUpdated(_arg016);
                     reply.writeNoException();
                     return true;
                 case 17:
-                    ImsReasonInfo _arg017 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg017 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionUpdateFailed(_arg017);
                     reply.writeNoException();
                     return true;
                 case 18:
-                    ImsCallProfile _arg018 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _arg018 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionUpdateReceived(_arg018);
                     reply.writeNoException();
                     return true;
                 case 19:
-                    IImsCallSession _arg019 = IImsCallSession.Stub.asInterface(data.readStrongBinder());
-                    ImsCallProfile _arg12 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    IImsCallSession _arg019 =
+                            IImsCallSession.Stub.asInterface(data.readStrongBinder());
+                    ImsCallProfile _arg12 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionConferenceExtended(_arg019, _arg12);
                     reply.writeNoException();
                     return true;
                 case 20:
-                    ImsReasonInfo _arg020 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg020 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionConferenceExtendFailed(_arg020);
                     reply.writeNoException();
                     return true;
                 case 21:
-                    IImsCallSession _arg021 = IImsCallSession.Stub.asInterface(data.readStrongBinder());
-                    ImsCallProfile _arg13 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    IImsCallSession _arg021 =
+                            IImsCallSession.Stub.asInterface(data.readStrongBinder());
+                    ImsCallProfile _arg13 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionConferenceExtendReceived(_arg021, _arg13);
                     reply.writeNoException();
@@ -619,7 +631,8 @@ public interface IImsCallSessionListener extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 23:
-                    ImsReasonInfo _arg022 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg022 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionInviteParticipantsRequestFailed(_arg022);
                     reply.writeNoException();
@@ -629,13 +642,15 @@ public interface IImsCallSessionListener extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 25:
-                    ImsReasonInfo _arg023 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg023 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionRemoveParticipantsRequestFailed(_arg023);
                     reply.writeNoException();
                     return true;
                 case 26:
-                    ImsConferenceState _arg024 = (ImsConferenceState) data.readTypedObject(ImsConferenceState.CREATOR);
+                    ImsConferenceState _arg024 =
+                            (ImsConferenceState) data.readTypedObject(ImsConferenceState.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionConferenceStateUpdated(_arg024);
                     reply.writeNoException();
@@ -650,7 +665,8 @@ public interface IImsCallSessionListener extends IInterface {
                 case 28:
                     int _arg026 = data.readInt();
                     int _arg15 = data.readInt();
-                    ImsReasonInfo _arg2 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg2 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionHandover(_arg026, _arg15, _arg2);
                     reply.writeNoException();
@@ -658,7 +674,8 @@ public interface IImsCallSessionListener extends IInterface {
                 case 29:
                     int _arg027 = data.readInt();
                     int _arg16 = data.readInt();
-                    ImsReasonInfo _arg22 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg22 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionHandoverFailed(_arg027, _arg16, _arg22);
                     reply.writeNoException();
@@ -683,13 +700,16 @@ public interface IImsCallSessionListener extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 33:
-                    ImsSuppServiceNotification _arg031 = (ImsSuppServiceNotification) data.readTypedObject(ImsSuppServiceNotification.CREATOR);
+                    ImsSuppServiceNotification _arg031 =
+                            (ImsSuppServiceNotification)
+                                    data.readTypedObject(ImsSuppServiceNotification.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionSuppServiceReceived(_arg031);
                     reply.writeNoException();
                     return true;
                 case 34:
-                    ImsCallProfile _arg032 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _arg032 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionRttModifyRequestReceived(_arg032);
                     reply.writeNoException();
@@ -707,7 +727,9 @@ public interface IImsCallSessionListener extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 37:
-                    ImsStreamMediaProfile _arg035 = (ImsStreamMediaProfile) data.readTypedObject(ImsStreamMediaProfile.CREATOR);
+                    ImsStreamMediaProfile _arg035 =
+                            (ImsStreamMediaProfile)
+                                    data.readTypedObject(ImsStreamMediaProfile.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionRttAudioIndicatorChanged(_arg035);
                     reply.writeNoException();
@@ -717,7 +739,8 @@ public interface IImsCallSessionListener extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 39:
-                    ImsReasonInfo _arg036 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg036 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionTransferFailed(_arg036);
                     reply.writeNoException();
@@ -727,7 +750,8 @@ public interface IImsCallSessionListener extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 41:
-                    ImsReasonInfo _arg037 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg037 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionCancelTransferFailed(_arg037);
                     reply.writeNoException();
@@ -752,7 +776,8 @@ public interface IImsCallSessionListener extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 45:
-                    List<RtpHeaderExtension> _arg041 = data.createTypedArrayList(RtpHeaderExtension.CREATOR);
+                    List<RtpHeaderExtension> _arg041 =
+                            data.createTypedArrayList(RtpHeaderExtension.CREATOR);
                     data.enforceNoDataAvail();
                     callSessionRtpHeaderExtensionsReceived(_arg041);
                     reply.writeNoException();
@@ -802,7 +827,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionInitiatingFailed(ImsReasonInfo reasonInfo) throws RemoteException {
+            public void callSessionInitiatingFailed(ImsReasonInfo reasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -817,7 +843,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionProgressing(ImsStreamMediaProfile profile) throws RemoteException {
+            public void callSessionProgressing(ImsStreamMediaProfile profile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -847,7 +874,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionInitiatedFailed(ImsReasonInfo reasonInfo) throws RemoteException {
+            public void callSessionInitiatedFailed(ImsReasonInfo reasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -967,7 +995,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionMergeStarted(IImsCallSession newSession, ImsCallProfile profile) throws RemoteException {
+            public void callSessionMergeStarted(IImsCallSession newSession, ImsCallProfile profile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1058,7 +1087,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionConferenceExtended(IImsCallSession newSession, ImsCallProfile profile) throws RemoteException {
+            public void callSessionConferenceExtended(
+                    IImsCallSession newSession, ImsCallProfile profile) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1074,7 +1104,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionConferenceExtendFailed(ImsReasonInfo reasonInfo) throws RemoteException {
+            public void callSessionConferenceExtendFailed(ImsReasonInfo reasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1089,7 +1120,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionConferenceExtendReceived(IImsCallSession newSession, ImsCallProfile profile) throws RemoteException {
+            public void callSessionConferenceExtendReceived(
+                    IImsCallSession newSession, ImsCallProfile profile) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1119,7 +1151,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionInviteParticipantsRequestFailed(ImsReasonInfo reasonInfo) throws RemoteException {
+            public void callSessionInviteParticipantsRequestFailed(ImsReasonInfo reasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1148,7 +1181,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionRemoveParticipantsRequestFailed(ImsReasonInfo reasonInfo) throws RemoteException {
+            public void callSessionRemoveParticipantsRequestFailed(ImsReasonInfo reasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1163,7 +1197,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionConferenceStateUpdated(ImsConferenceState state) throws RemoteException {
+            public void callSessionConferenceStateUpdated(ImsConferenceState state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1178,7 +1213,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionUssdMessageReceived(int mode, String ussdMessage) throws RemoteException {
+            public void callSessionUssdMessageReceived(int mode, String ussdMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1194,7 +1230,9 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionHandover(int srcNetworkType, int targetNetworkType, ImsReasonInfo reasonInfo) throws RemoteException {
+            public void callSessionHandover(
+                    int srcNetworkType, int targetNetworkType, ImsReasonInfo reasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1211,7 +1249,9 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionHandoverFailed(int srcNetworkType, int targetNetworkType, ImsReasonInfo reasonInfo) throws RemoteException {
+            public void callSessionHandoverFailed(
+                    int srcNetworkType, int targetNetworkType, ImsReasonInfo reasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1228,7 +1268,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionMayHandover(int srcNetworkType, int targetNetworkType) throws RemoteException {
+            public void callSessionMayHandover(int srcNetworkType, int targetNetworkType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1259,7 +1300,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionMultipartyStateChanged(boolean isMultiParty) throws RemoteException {
+            public void callSessionMultipartyStateChanged(boolean isMultiParty)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1274,7 +1316,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionSuppServiceReceived(ImsSuppServiceNotification suppSrvNotification) throws RemoteException {
+            public void callSessionSuppServiceReceived(
+                    ImsSuppServiceNotification suppSrvNotification) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1289,7 +1332,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionRttModifyRequestReceived(ImsCallProfile callProfile) throws RemoteException {
+            public void callSessionRttModifyRequestReceived(ImsCallProfile callProfile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1334,7 +1378,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionRttAudioIndicatorChanged(ImsStreamMediaProfile profile) throws RemoteException {
+            public void callSessionRttAudioIndicatorChanged(ImsStreamMediaProfile profile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1392,7 +1437,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionCancelTransferFailed(ImsReasonInfo reasonInfo) throws RemoteException {
+            public void callSessionCancelTransferFailed(ImsReasonInfo reasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1407,7 +1453,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionImsCallEvent(String event, Bundle extras) throws RemoteException {
+            public void callSessionImsCallEvent(String event, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1453,7 +1500,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionRtpHeaderExtensionsReceived(List<RtpHeaderExtension> extensions) throws RemoteException {
+            public void callSessionRtpHeaderExtensionsReceived(List<RtpHeaderExtension> extensions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1468,7 +1516,8 @@ public interface IImsCallSessionListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCallSessionListener
-            public void callSessionSendAnbrQuery(int mediaType, int direction, int bitsPerSecond) throws RemoteException {
+            public void callSessionSendAnbrQuery(int mediaType, int direction, int bitsPerSecond)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

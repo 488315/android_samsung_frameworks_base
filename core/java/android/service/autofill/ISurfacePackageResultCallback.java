@@ -9,14 +9,14 @@ import android.view.SurfaceControlViewHost;
 
 /* loaded from: classes3.dex */
 public interface ISurfacePackageResultCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.autofill.ISurfacePackageResultCallback";
+    public static final String DESCRIPTOR =
+            "android.service.autofill.ISurfacePackageResultCallback";
 
     void onResult(SurfaceControlViewHost.SurfacePackage surfacePackage) throws RemoteException;
 
     public static class Default implements ISurfacePackageResultCallback {
         @Override // android.service.autofill.ISurfacePackageResultCallback
-        public void onResult(SurfaceControlViewHost.SurfacePackage result) throws RemoteException {
-        }
+        public void onResult(SurfaceControlViewHost.SurfacePackage result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface ISurfacePackageResultCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISurfacePackageResultCallback {
+    public abstract static class Stub extends Binder implements ISurfacePackageResultCallback {
         static final int TRANSACTION_onResult = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface ISurfacePackageResultCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISurfacePackageResultCallback.DESCRIPTOR);
             }
@@ -72,7 +73,10 @@ public interface ISurfacePackageResultCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SurfaceControlViewHost.SurfacePackage _arg0 = (SurfaceControlViewHost.SurfacePackage) data.readTypedObject(SurfaceControlViewHost.SurfacePackage.CREATOR);
+                    SurfaceControlViewHost.SurfacePackage _arg0 =
+                            (SurfaceControlViewHost.SurfacePackage)
+                                    data.readTypedObject(
+                                            SurfaceControlViewHost.SurfacePackage.CREATOR);
                     data.enforceNoDataAvail();
                     onResult(_arg0);
                     return true;
@@ -98,7 +102,8 @@ public interface ISurfacePackageResultCallback extends IInterface {
             }
 
             @Override // android.service.autofill.ISurfacePackageResultCallback
-            public void onResult(SurfaceControlViewHost.SurfacePackage result) throws RemoteException {
+            public void onResult(SurfaceControlViewHost.SurfacePackage result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISurfacePackageResultCallback.DESCRIPTOR);

@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IFMEventListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.media.fmradio.internal.IFMEventListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.media.fmradio.internal.IFMEventListener";
 
     void onAlternateFrequencyReceived(long j) throws RemoteException;
 
@@ -20,7 +21,8 @@ public interface IFMEventListener extends IInterface {
 
     void onHeadsetDisconnected() throws RemoteException;
 
-    void onProgrammeIdentificationExtendedCountryCodesReceived(int i, int i2) throws RemoteException;
+    void onProgrammeIdentificationExtendedCountryCodesReceived(int i, int i2)
+            throws RemoteException;
 
     void onRadioDataSystemDisabled() throws RemoteException;
 
@@ -32,7 +34,8 @@ public interface IFMEventListener extends IInterface {
 
     void onRadioEnabled() throws RemoteException;
 
-    void onRadioTextPlusReceived(int i, int i2, int i3, int i4, int i5, int i6) throws RemoteException;
+    void onRadioTextPlusReceived(int i, int i2, int i3, int i4, int i5, int i6)
+            throws RemoteException;
 
     void onRecordingFinished() throws RemoteException;
 
@@ -48,76 +51,67 @@ public interface IFMEventListener extends IInterface {
 
     public static class Default implements IFMEventListener {
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onRadioEnabled() throws RemoteException {
-        }
+        public void onRadioEnabled() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onRadioDisabled(int reasonCode) throws RemoteException {
-        }
+        public void onRadioDisabled(int reasonCode) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onChannelFound(long freq) throws RemoteException {
-        }
+        public void onChannelFound(long freq) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onScanStarted() throws RemoteException {
-        }
+        public void onScanStarted() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onScanStopped(long[] freqArray) throws RemoteException {
-        }
+        public void onScanStopped(long[] freqArray) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onScanFinished(long[] freqArray) throws RemoteException {
-        }
+        public void onScanFinished(long[] freqArray) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onTuned(long freq) throws RemoteException {
-        }
+        public void onTuned(long freq) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onHeadsetConnected() throws RemoteException {
-        }
+        public void onHeadsetConnected() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onHeadsetDisconnected() throws RemoteException {
-        }
+        public void onHeadsetDisconnected() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onRadioDataSystemReceived(long freq, String channelName, String radioText) throws RemoteException {
-        }
+        public void onRadioDataSystemReceived(long freq, String channelName, String radioText)
+                throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onRadioTextPlusReceived(int contentType1, int startPos1, int additionalLen1, int contentType2, int startPos2, int additionalLen2) throws RemoteException {
-        }
+        public void onRadioTextPlusReceived(
+                int contentType1,
+                int startPos1,
+                int additionalLen1,
+                int contentType2,
+                int startPos2,
+                int additionalLen2)
+                throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onRadioDataSystemEnabled() throws RemoteException {
-        }
+        public void onRadioDataSystemEnabled() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onRadioDataSystemDisabled() throws RemoteException {
-        }
+        public void onRadioDataSystemDisabled() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onAlternateFrequencyStarted() throws RemoteException {
-        }
+        public void onAlternateFrequencyStarted() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onAlternateFrequencyReceived(long freq) throws RemoteException {
-        }
+        public void onAlternateFrequencyReceived(long freq) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onVolumeLocked() throws RemoteException {
-        }
+        public void onVolumeLocked() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onRecordingFinished() throws RemoteException {
-        }
+        public void onRecordingFinished() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-        public void onProgrammeIdentificationExtendedCountryCodesReceived(int pi, int ecc) throws RemoteException {
-        }
+        public void onProgrammeIdentificationExtendedCountryCodesReceived(int pi, int ecc)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -125,7 +119,7 @@ public interface IFMEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFMEventListener {
+    public abstract static class Stub extends Binder implements IFMEventListener {
         static final int TRANSACTION_onAlternateFrequencyReceived = 15;
         static final int TRANSACTION_onAlternateFrequencyStarted = 14;
         static final int TRANSACTION_onChannelFound = 3;
@@ -214,7 +208,8 @@ public interface IFMEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             long[] _arg0;
             long[] _arg02;
             if (code >= 1 && code <= 16777215) {
@@ -453,7 +448,8 @@ public interface IFMEventListener extends IInterface {
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-            public void onRadioDataSystemReceived(long freq, String channelName, String radioText) throws RemoteException {
+            public void onRadioDataSystemReceived(long freq, String channelName, String radioText)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
@@ -467,7 +463,14 @@ public interface IFMEventListener extends IInterface {
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-            public void onRadioTextPlusReceived(int contentType1, int startPos1, int additionalLen1, int contentType2, int startPos2, int additionalLen2) throws RemoteException {
+            public void onRadioTextPlusReceived(
+                    int contentType1,
+                    int startPos1,
+                    int additionalLen1,
+                    int contentType2,
+                    int startPos2,
+                    int additionalLen2)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
@@ -551,7 +554,8 @@ public interface IFMEventListener extends IInterface {
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
-            public void onProgrammeIdentificationExtendedCountryCodesReceived(int pi, int ecc) throws RemoteException {
+            public void onProgrammeIdentificationExtendedCountryCodesReceived(int pi, int ecc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFMEventListener.DESCRIPTOR);

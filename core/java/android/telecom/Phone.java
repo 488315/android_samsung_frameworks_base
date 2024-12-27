@@ -3,8 +3,8 @@ package android.telecom;
 import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.OutcomeReceiver;
-import android.telecom.InCallService;
 import android.util.ArrayMap;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -28,28 +28,21 @@ public final class Phone {
     private boolean mCanAddCall = true;
     private final Object mLock = new Object();
 
-    public static abstract class Listener {
+    public abstract static class Listener {
         @Deprecated
-        public void onAudioStateChanged(Phone phone, AudioState audioState) {
-        }
+        public void onAudioStateChanged(Phone phone, AudioState audioState) {}
 
-        public void onCallAudioStateChanged(Phone phone, CallAudioState callAudioState) {
-        }
+        public void onCallAudioStateChanged(Phone phone, CallAudioState callAudioState) {}
 
-        public void onBringToForeground(Phone phone, boolean showDialpad) {
-        }
+        public void onBringToForeground(Phone phone, boolean showDialpad) {}
 
-        public void onCallAdded(Phone phone, Call call) {
-        }
+        public void onCallAdded(Phone phone, Call call) {}
 
-        public void onCallRemoved(Phone phone, Call call) {
-        }
+        public void onCallRemoved(Phone phone, Call call) {}
 
-        public void onCanAddCallChanged(Phone phone, boolean canAddCall) {
-        }
+        public void onCanAddCallChanged(Phone phone, boolean canAddCall) {}
 
-        public void onSilenceRinger(Phone phone) {
-        }
+        public void onSilenceRinger(Phone phone) {}
     }
 
     Phone(InCallAdapter adapter, String callingPackage, int targetSdkVersion) {
@@ -60,12 +53,22 @@ public final class Phone {
 
     final void internalAddCall(ParcelableCall parcelableCall) {
         if (this.mTargetSdkVersion < 30 && parcelableCall.getState() == 12) {
-            Log.i(this, "Skipping adding audio processing call for sdk compatibility", new Object[0]);
+            Log.i(
+                    this,
+                    "Skipping adding audio processing call for sdk compatibility",
+                    new Object[0]);
             return;
         }
         Call call = getCallById(parcelableCall.getId());
         if (call == null) {
-            Call call2 = new Call(this, parcelableCall.getId(), this.mInCallAdapter, parcelableCall.getState(), this.mCallingPackage, this.mTargetSdkVersion);
+            Call call2 =
+                    new Call(
+                            this,
+                            parcelableCall.getId(),
+                            this.mInCallAdapter,
+                            parcelableCall.getState(),
+                            this.mCallingPackage,
+                            this.mTargetSdkVersion);
             synchronized (this.mLock) {
                 this.mCallByTelecomCallId.put(parcelableCall.getId(), call2);
                 this.mCalls.add(call2);
@@ -97,7 +100,10 @@ public final class Phone {
 
     final void internalUpdateCall(ParcelableCall parcelableCall) {
         if (this.mTargetSdkVersion < 30 && parcelableCall.getState() == 12) {
-            Log.i(this, "removing audio processing call during update for sdk compatibility", new Object[0]);
+            Log.i(
+                    this,
+                    "removing audio processing call during update for sdk compatibility",
+                    new Object[0]);
             Call call = getCallById(parcelableCall.getId());
             if (call != null) {
                 internalRemoveCall(call);
@@ -235,7 +241,10 @@ public final class Phone {
         this.mInCallAdapter.requestBluetoothAudio(bluetoothAddress);
     }
 
-    public void requestCallEndpointChange(CallEndpoint endpoint, Executor executor, OutcomeReceiver<Void, CallEndpointException> callback) {
+    public void requestCallEndpointChange(
+            CallEndpoint endpoint,
+            Executor executor,
+            OutcomeReceiver<Void, CallEndpointException> callback) {
         this.mInCallAdapter.requestCallEndpointChange(endpoint, executor, callback);
     }
 
@@ -296,8 +305,13 @@ public final class Phone {
     private void checkCallTree(ParcelableCall parcelableCall) {
         if (parcelableCall.getChildCallIds() != null) {
             for (int i = 0; i < parcelableCall.getChildCallIds().size(); i++) {
-                if (!this.mCallByTelecomCallId.containsKey(parcelableCall.getChildCallIds().get(i))) {
-                    Log.wtf(this, "ParcelableCall %s has nonexistent child %s", parcelableCall.getId(), parcelableCall.getChildCallIds().get(i));
+                if (!this.mCallByTelecomCallId.containsKey(
+                        parcelableCall.getChildCallIds().get(i))) {
+                    Log.wtf(
+                            this,
+                            "ParcelableCall %s has nonexistent child %s",
+                            parcelableCall.getId(),
+                            parcelableCall.getChildCallIds().get(i));
                 }
             }
         }

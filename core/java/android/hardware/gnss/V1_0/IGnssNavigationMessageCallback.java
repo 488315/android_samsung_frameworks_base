@@ -10,8 +10,11 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -19,7 +22,8 @@ import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public interface IGnssNavigationMessageCallback extends IBase {
-    public static final String kInterfaceName = "android.hardware.gnss@1.0::IGnssNavigationMessageCallback";
+    public static final String kInterfaceName =
+            "android.hardware.gnss@1.0::IGnssNavigationMessageCallback";
 
     @Override // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
     IHwBinder asBinder();
@@ -33,7 +37,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
     @Override // android.internal.hidl.base.V1_0.IBase
     ArrayList<byte[]> getHashChain() throws RemoteException;
 
-    void gnssNavigationMessageCb(GnssNavigationMessage gnssNavigationMessage) throws RemoteException;
+    void gnssNavigationMessageCb(GnssNavigationMessage gnssNavigationMessage)
+            throws RemoteException;
 
     @Override // android.internal.hidl.base.V1_0.IBase
     ArrayList<String> interfaceChain() throws RemoteException;
@@ -85,7 +90,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
         return asInterface(iface.asBinder());
     }
 
-    static IGnssNavigationMessageCallback getService(String serviceName, boolean retry) throws RemoteException {
+    static IGnssNavigationMessageCallback getService(String serviceName, boolean retry)
+            throws RemoteException {
         return asInterface(HwBinder.getService(kInterfaceName, serviceName, retry));
     }
 
@@ -249,18 +255,42 @@ public interface IGnssNavigationMessageCallback extends IBase {
                 return false;
             }
             GnssNavigationMessage other = (GnssNavigationMessage) otherObject;
-            if (this.svid == other.svid && this.type == other.type && HidlSupport.deepEquals(Short.valueOf(this.status), Short.valueOf(other.status)) && this.messageId == other.messageId && this.submessageId == other.submessageId && HidlSupport.deepEquals(this.data, other.data)) {
+            if (this.svid == other.svid
+                    && this.type == other.type
+                    && HidlSupport.deepEquals(
+                            Short.valueOf(this.status), Short.valueOf(other.status))
+                    && this.messageId == other.messageId
+                    && this.submessageId == other.submessageId
+                    && HidlSupport.deepEquals(this.data, other.data)) {
                 return true;
             }
             return false;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.svid))), Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.type))), Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.status))), Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.messageId))), Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.submessageId))), Integer.valueOf(HidlSupport.deepHashCode(this.data)));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.svid))),
+                    Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.type))),
+                    Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.status))),
+                    Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.messageId))),
+                    Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.submessageId))),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.data)));
         }
 
         public final String toString() {
-            return "{.svid = " + ((int) this.svid) + ", .type = " + GnssNavigationMessageType.toString(this.type) + ", .status = " + NavigationMessageStatus.dumpBitfield(this.status) + ", .messageId = " + ((int) this.messageId) + ", .submessageId = " + ((int) this.submessageId) + ", .data = " + this.data + "}";
+            return "{.svid = "
+                    + ((int) this.svid)
+                    + ", .type = "
+                    + GnssNavigationMessageType.toString(this.type)
+                    + ", .status = "
+                    + NavigationMessageStatus.dumpBitfield(this.status)
+                    + ", .messageId = "
+                    + ((int) this.messageId)
+                    + ", .submessageId = "
+                    + ((int) this.submessageId)
+                    + ", .data = "
+                    + this.data
+                    + "}";
         }
 
         public final void readFromParcel(HwParcel parcel) {
@@ -272,7 +302,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
             ArrayList<GnssNavigationMessage> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 GnssNavigationMessage _hidl_vec_element = new GnssNavigationMessage();
@@ -282,14 +313,17 @@ public interface IGnssNavigationMessageCallback extends IBase {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.svid = _hidl_blob.getInt16(_hidl_offset + 0);
             this.type = _hidl_blob.getInt16(_hidl_offset + 2);
             this.status = _hidl_blob.getInt16(_hidl_offset + 4);
             this.messageId = _hidl_blob.getInt16(_hidl_offset + 6);
             this.submessageId = _hidl_blob.getInt16(_hidl_offset + 8);
             int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 16 + 8);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 1, _hidl_blob.handle(), _hidl_offset + 16 + 0, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(
+                            _hidl_vec_size * 1, _hidl_blob.handle(), _hidl_offset + 16 + 0, true);
             this.data.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 byte _hidl_vec_element = childBlob.getInt8(_hidl_index_0 * 1);
@@ -303,7 +337,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<GnssNavigationMessage> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<GnssNavigationMessage> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -340,7 +375,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -349,7 +385,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
             try {
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException e) {
-                return "[class or subclass of android.hardware.gnss@1.0::IGnssNavigationMessageCallback]@Proxy";
+                return "[class or subclass of"
+                        + " android.hardware.gnss@1.0::IGnssNavigationMessageCallback]@Proxy";
             }
         }
 
@@ -376,7 +413,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -392,7 +430,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -408,7 +447,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -424,7 +464,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -436,7 +477,9 @@ public interface IGnssNavigationMessageCallback extends IBase {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -450,7 +493,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -463,12 +507,15 @@ public interface IGnssNavigationMessageCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -482,7 +529,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -499,7 +547,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -512,51 +561,129 @@ public interface IGnssNavigationMessageCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements IGnssNavigationMessageCallback {
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements IGnssNavigationMessageCallback {
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(IGnssNavigationMessageCallback.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            IGnssNavigationMessageCallback.kInterfaceName, IBase.kInterfaceName));
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return IGnssNavigationMessageCallback.kInterfaceName;
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{78, 113, 105, -111, -99, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -5, -27, 87, 62, 91, -51, 104, 61, 11, -41, -85, -11, 83, -92, -26, -61, 76, 65, -7, -33, -63, -31, 32, 80, -37, 7}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                78,
+                                113,
+                                105,
+                                -111,
+                                -99,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -5,
+                                -27,
+                                87,
+                                62,
+                                91,
+                                -51,
+                                104,
+                                61,
+                                11,
+                                -41,
+                                -85,
+                                -11,
+                                83,
+                                -92,
+                                -26,
+                                -61,
+                                76,
+                                65,
+                                -7,
+                                -33,
+                                -63,
+                                -31,
+                                32,
+                                80,
+                                -37,
+                                7
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -565,12 +692,14 @@ public interface IGnssNavigationMessageCallback extends IBase {
             return info;
         }
 
-        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V1_0.IGnssNavigationMessageCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -592,7 +721,9 @@ public interface IGnssNavigationMessageCallback extends IBase {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(IGnssNavigationMessageCallback.kInterfaceName);
@@ -637,7 +768,8 @@ public interface IGnssNavigationMessageCallback extends IBase {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

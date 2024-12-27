@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.format;
 
 import android.graphics.Rect;
+
 import com.samsung.android.sume.core.filter.MediaFilter;
 import com.samsung.android.sume.core.types.CodecType;
 import com.samsung.android.sume.core.types.ColorFormat;

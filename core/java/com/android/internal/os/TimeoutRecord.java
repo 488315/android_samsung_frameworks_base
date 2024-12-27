@@ -3,7 +3,9 @@ package com.android.internal.os;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.SystemClock;
+
 import com.android.internal.os.anr.AnrLatencyTracker;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -30,7 +32,8 @@ public class TimeoutRecord {
         public static final int SHORT_FGS_TIMEOUT = 8;
     }
 
-    private TimeoutRecord(int kind, String reason, long endUptimeMillis, boolean endTakenBeforeLocks) {
+    private TimeoutRecord(
+            int kind, String reason, long endUptimeMillis, boolean endTakenBeforeLocks) {
         this.mKind = kind;
         this.mReason = reason;
         this.mEndUptimeMillis = endUptimeMillis;
@@ -48,7 +51,8 @@ public class TimeoutRecord {
         return new TimeoutRecord(kind, reason, endUptimeMillis, false);
     }
 
-    public static TimeoutRecord forBroadcastReceiver(Intent intent, String packageName, String className) {
+    public static TimeoutRecord forBroadcastReceiver(
+            Intent intent, String packageName, String className) {
         Intent logIntent;
         if (packageName != null) {
             if (className != null) {
@@ -88,7 +92,8 @@ public class TimeoutRecord {
     }
 
     public static TimeoutRecord forServiceExec(String shortInstanceName, long timeoutDurationMs) {
-        String reason = "executing service " + shortInstanceName + ", waited " + timeoutDurationMs + "ms";
+        String reason =
+                "executing service " + shortInstanceName + ", waited " + timeoutDurationMs + "ms";
         return endingNow(5, reason);
     }
 

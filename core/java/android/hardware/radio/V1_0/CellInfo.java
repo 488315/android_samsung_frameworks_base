@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -26,18 +27,53 @@ public final class CellInfo {
             return false;
         }
         CellInfo other = (CellInfo) otherObject;
-        if (this.cellInfoType == other.cellInfoType && this.registered == other.registered && this.timeStampType == other.timeStampType && this.timeStamp == other.timeStamp && HidlSupport.deepEquals(this.gsm, other.gsm) && HidlSupport.deepEquals(this.cdma, other.cdma) && HidlSupport.deepEquals(this.lte, other.lte) && HidlSupport.deepEquals(this.wcdma, other.wcdma) && HidlSupport.deepEquals(this.tdscdma, other.tdscdma)) {
+        if (this.cellInfoType == other.cellInfoType
+                && this.registered == other.registered
+                && this.timeStampType == other.timeStampType
+                && this.timeStamp == other.timeStamp
+                && HidlSupport.deepEquals(this.gsm, other.gsm)
+                && HidlSupport.deepEquals(this.cdma, other.cdma)
+                && HidlSupport.deepEquals(this.lte, other.lte)
+                && HidlSupport.deepEquals(this.wcdma, other.wcdma)
+                && HidlSupport.deepEquals(this.tdscdma, other.tdscdma)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cellInfoType))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.registered))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.timeStampType))), Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.timeStamp))), Integer.valueOf(HidlSupport.deepHashCode(this.gsm)), Integer.valueOf(HidlSupport.deepHashCode(this.cdma)), Integer.valueOf(HidlSupport.deepHashCode(this.lte)), Integer.valueOf(HidlSupport.deepHashCode(this.wcdma)), Integer.valueOf(HidlSupport.deepHashCode(this.tdscdma)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cellInfoType))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.registered))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.timeStampType))),
+                Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.timeStamp))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.gsm)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.cdma)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.lte)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.wcdma)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.tdscdma)));
     }
 
     public final String toString() {
-        return "{.cellInfoType = " + CellInfoType.toString(this.cellInfoType) + ", .registered = " + this.registered + ", .timeStampType = " + TimeStampType.toString(this.timeStampType) + ", .timeStamp = " + this.timeStamp + ", .gsm = " + this.gsm + ", .cdma = " + this.cdma + ", .lte = " + this.lte + ", .wcdma = " + this.wcdma + ", .tdscdma = " + this.tdscdma + "}";
+        return "{.cellInfoType = "
+                + CellInfoType.toString(this.cellInfoType)
+                + ", .registered = "
+                + this.registered
+                + ", .timeStampType = "
+                + TimeStampType.toString(this.timeStampType)
+                + ", .timeStamp = "
+                + this.timeStamp
+                + ", .gsm = "
+                + this.gsm
+                + ", .cdma = "
+                + this.cdma
+                + ", .lte = "
+                + this.lte
+                + ", .wcdma = "
+                + this.wcdma
+                + ", .tdscdma = "
+                + this.tdscdma
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -49,7 +85,8 @@ public final class CellInfo {
         ArrayList<CellInfo> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 104, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 104, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CellInfo _hidl_vec_element = new CellInfo();
@@ -59,13 +96,16 @@ public final class CellInfo {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.cellInfoType = _hidl_blob.getInt32(_hidl_offset + 0);
         this.registered = _hidl_blob.getBool(_hidl_offset + 4);
         this.timeStampType = _hidl_blob.getInt32(_hidl_offset + 8);
         this.timeStamp = _hidl_blob.getInt64(_hidl_offset + 16);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 24 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 64, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 64, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
         this.gsm.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CellInfoGsm _hidl_vec_element = new CellInfoGsm();
@@ -73,7 +113,9 @@ public final class CellInfo {
             this.gsm.add(_hidl_vec_element);
         }
         int _hidl_vec_size2 = _hidl_blob.getInt32(_hidl_offset + 40 + 8);
-        HwBlob childBlob2 = parcel.readEmbeddedBuffer(_hidl_vec_size2 * 40, _hidl_blob.handle(), _hidl_offset + 40 + 0, true);
+        HwBlob childBlob2 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size2 * 40, _hidl_blob.handle(), _hidl_offset + 40 + 0, true);
         this.cdma.clear();
         for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
             CellInfoCdma _hidl_vec_element2 = new CellInfoCdma();
@@ -81,7 +123,9 @@ public final class CellInfo {
             this.cdma.add(_hidl_vec_element2);
         }
         int _hidl_vec_size3 = _hidl_blob.getInt32(_hidl_offset + 56 + 8);
-        HwBlob childBlob3 = parcel.readEmbeddedBuffer(_hidl_vec_size3 * 72, _hidl_blob.handle(), _hidl_offset + 56 + 0, true);
+        HwBlob childBlob3 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size3 * 72, _hidl_blob.handle(), _hidl_offset + 56 + 0, true);
         this.lte.clear();
         for (int _hidl_index_03 = 0; _hidl_index_03 < _hidl_vec_size3; _hidl_index_03++) {
             CellInfoLte _hidl_vec_element3 = new CellInfoLte();
@@ -89,7 +133,9 @@ public final class CellInfo {
             this.lte.add(_hidl_vec_element3);
         }
         int _hidl_vec_size4 = _hidl_blob.getInt32(_hidl_offset + 72 + 8);
-        HwBlob childBlob4 = parcel.readEmbeddedBuffer(_hidl_vec_size4 * 56, _hidl_blob.handle(), _hidl_offset + 72 + 0, true);
+        HwBlob childBlob4 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size4 * 56, _hidl_blob.handle(), _hidl_offset + 72 + 0, true);
         this.wcdma.clear();
         for (int _hidl_index_04 = 0; _hidl_index_04 < _hidl_vec_size4; _hidl_index_04++) {
             CellInfoWcdma _hidl_vec_element4 = new CellInfoWcdma();
@@ -97,7 +143,9 @@ public final class CellInfo {
             this.wcdma.add(_hidl_vec_element4);
         }
         int _hidl_vec_size5 = _hidl_blob.getInt32(_hidl_offset + 88 + 8);
-        HwBlob childBlob5 = parcel.readEmbeddedBuffer(_hidl_vec_size5 * 56, _hidl_blob.handle(), _hidl_offset + 88 + 0, true);
+        HwBlob childBlob5 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size5 * 56, _hidl_blob.handle(), _hidl_offset + 88 + 0, true);
         this.tdscdma.clear();
         for (int _hidl_index_05 = 0; _hidl_index_05 < _hidl_vec_size5; _hidl_index_05++) {
             CellInfoTdscdma _hidl_vec_element5 = new CellInfoTdscdma();

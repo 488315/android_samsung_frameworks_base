@@ -7,19 +7,22 @@ import android.os.Parcelable;
 /* loaded from: classes6.dex */
 public class SemContextSpecificPoseAlert extends SemContextEventContext {
     public static final int ACTION = 1;
-    public static final Parcelable.Creator<SemContextSpecificPoseAlert> CREATOR = new Parcelable.Creator<SemContextSpecificPoseAlert>() { // from class: com.samsung.android.hardware.context.SemContextSpecificPoseAlert.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSpecificPoseAlert createFromParcel(Parcel in) {
-            return new SemContextSpecificPoseAlert(in);
-        }
+    public static final Parcelable.Creator<SemContextSpecificPoseAlert> CREATOR =
+            new Parcelable.Creator<
+                    SemContextSpecificPoseAlert>() { // from class:
+                                                     // com.samsung.android.hardware.context.SemContextSpecificPoseAlert.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSpecificPoseAlert createFromParcel(Parcel in) {
+                    return new SemContextSpecificPoseAlert(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSpecificPoseAlert[] newArray(int size) {
-            return new SemContextSpecificPoseAlert[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSpecificPoseAlert[] newArray(int size) {
+                    return new SemContextSpecificPoseAlert[size];
+                }
+            };
     public static final int NONE = 0;
     private Bundle mContext;
 

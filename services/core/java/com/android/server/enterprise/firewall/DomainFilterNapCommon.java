@@ -7,6 +7,7 @@ import android.net.NetworkRequest;
 import android.os.Binder;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.android.internal.util.FunctionalUtils;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
@@ -35,23 +36,38 @@ public final class DomainFilterNapCommon {
                     domainFilterNapCommon = sInstance;
                     if (domainFilterNapCommon == null) {
                         domainFilterNapCommon = new DomainFilterNapCommon();
-                        domainFilterNapCommon.mConnectivityCallback = new ConnectivityManager.NetworkCallback() { // from class: com.android.server.enterprise.firewall.DomainFilterNapCommon.1
-                            @Override // android.net.ConnectivityManager.NetworkCallback
-                            public final void onAvailable(Network network) {
-                                Log.d("DomainFilterNapCommon", "onAvailable : " + network.getNetId());
-                                super.onAvailable(network);
-                                DomainFilterNapCommon domainFilterNapCommon2 = DomainFilterNapCommon.this;
-                                if (domainFilterNapCommon2.mNapEnabled || domainFilterNapCommon2.mDomainFilterEnabled) {
-                                    DomainFilterNapCommon domainFilterNapCommon3 = DomainFilterNapCommon.this;
-                                    int netId = network.getNetId();
-                                    domainFilterNapCommon3.getClass();
-                                    DnsResolverAdapter dnsResolverAdapter = DnsResolverAdapter.getInstance();
-                                    Log.d("DnsResolverAdapter", "updateEnforceDnsUidForNetwork - entered");
-                                    dnsResolverAdapter.runWithExceptionHandling(new DnsResolverAdapter$$ExternalSyntheticLambda0(netId, true));
-                                    Log.d("DnsResolverAdapter", "updateEnforceDnsUidForNetwork - exited");
-                                }
-                            }
-                        };
+                        domainFilterNapCommon.mConnectivityCallback =
+                                new ConnectivityManager
+                                        .NetworkCallback() { // from class:
+                                                             // com.android.server.enterprise.firewall.DomainFilterNapCommon.1
+                                    @Override // android.net.ConnectivityManager.NetworkCallback
+                                    public final void onAvailable(Network network) {
+                                        Log.d(
+                                                "DomainFilterNapCommon",
+                                                "onAvailable : " + network.getNetId());
+                                        super.onAvailable(network);
+                                        DomainFilterNapCommon domainFilterNapCommon2 =
+                                                DomainFilterNapCommon.this;
+                                        if (domainFilterNapCommon2.mNapEnabled
+                                                || domainFilterNapCommon2.mDomainFilterEnabled) {
+                                            DomainFilterNapCommon domainFilterNapCommon3 =
+                                                    DomainFilterNapCommon.this;
+                                            int netId = network.getNetId();
+                                            domainFilterNapCommon3.getClass();
+                                            DnsResolverAdapter dnsResolverAdapter =
+                                                    DnsResolverAdapter.getInstance();
+                                            Log.d(
+                                                    "DnsResolverAdapter",
+                                                    "updateEnforceDnsUidForNetwork - entered");
+                                            dnsResolverAdapter.runWithExceptionHandling(
+                                                    new DnsResolverAdapter$$ExternalSyntheticLambda0(
+                                                            netId, true));
+                                            Log.d(
+                                                    "DnsResolverAdapter",
+                                                    "updateEnforceDnsUidForNetwork - exited");
+                                        }
+                                    }
+                                };
                         domainFilterNapCommon.mContext = context;
                         sInstance = domainFilterNapCommon;
                     }
@@ -63,51 +79,74 @@ public final class DomainFilterNapCommon {
     }
 
     public final void registerConnectivityCallback() {
-        RCPManagerService$$ExternalSyntheticOutline0.m("DomainFilterNapCommon", new StringBuilder("registerConnectivityCallback "), this.mCallbackRegistered);
+        RCPManagerService$$ExternalSyntheticOutline0.m(
+                "DomainFilterNapCommon",
+                new StringBuilder("registerConnectivityCallback "),
+                this.mCallbackRegistered);
         if (this.mCallbackRegistered) {
             return;
         }
-        final NetworkRequest.Builder addTransportType = new NetworkRequest.Builder().addTransportType(1).addTransportType(0).addTransportType(4).addTransportType(3);
-        final ConnectivityManager connectivityManager = (ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class);
+        final NetworkRequest.Builder addTransportType =
+                new NetworkRequest.Builder()
+                        .addTransportType(1)
+                        .addTransportType(0)
+                        .addTransportType(4)
+                        .addTransportType(3);
+        final ConnectivityManager connectivityManager =
+                (ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class);
         if (connectivityManager != null) {
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: com.android.server.enterprise.firewall.DomainFilterNapCommon$$ExternalSyntheticLambda2
-                public final void runOrThrow() {
-                    DomainFilterNapCommon domainFilterNapCommon = DomainFilterNapCommon.this;
-                    ConnectivityManager connectivityManager2 = connectivityManager;
-                    NetworkRequest.Builder builder = addTransportType;
-                    domainFilterNapCommon.getClass();
-                    connectivityManager2.registerNetworkCallback(builder.build(), domainFilterNapCommon.mConnectivityCallback);
-                    Log.d("DomainFilterNapCommon", "callback registered");
-                    domainFilterNapCommon.mCallbackRegistered = true;
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // com.android.server.enterprise.firewall.DomainFilterNapCommon$$ExternalSyntheticLambda2
+                        public final void runOrThrow() {
+                            DomainFilterNapCommon domainFilterNapCommon =
+                                    DomainFilterNapCommon.this;
+                            ConnectivityManager connectivityManager2 = connectivityManager;
+                            NetworkRequest.Builder builder = addTransportType;
+                            domainFilterNapCommon.getClass();
+                            connectivityManager2.registerNetworkCallback(
+                                    builder.build(), domainFilterNapCommon.mConnectivityCallback);
+                            Log.d("DomainFilterNapCommon", "callback registered");
+                            domainFilterNapCommon.mCallbackRegistered = true;
+                        }
+                    });
         }
     }
 
     public final void setDomainFilterEnabled(boolean z) {
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("setDomainFilterEnabled ", "DomainFilterNapCommon", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "setDomainFilterEnabled ", "DomainFilterNapCommon", z);
         this.mDomainFilterEnabled = z;
         updateEnforceDnsUidForAllNetworks();
     }
 
     public final void setDomainFilterOnIptablesEnabled(boolean z) {
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("setDomainFilterOnIptablesEnabled ", "DomainFilterNapCommon", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "setDomainFilterOnIptablesEnabled ", "DomainFilterNapCommon", z);
         this.mDomainFilterOnIptablesEnabled = z;
         setNapProperty(z);
     }
 
     public final void setNapProperty(final boolean z) {
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("setNapProperty ", "DomainFilterNapCommon", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "setNapProperty ", "DomainFilterNapCommon", z);
         if (z || !(this.mDomainFilterOnIptablesEnabled || this.mNapEnabled)) {
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: com.android.server.enterprise.firewall.DomainFilterNapCommon$$ExternalSyntheticLambda1
-                public final void runOrThrow() {
-                    try {
-                        SystemProperties.set("net.knox.nap", z ? "1" : "0");
-                    } catch (Exception e) {
-                        Log.e("DomainFilterNapCommon", "Unable to set NPA feature property", e);
-                    }
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // com.android.server.enterprise.firewall.DomainFilterNapCommon$$ExternalSyntheticLambda1
+                        public final void runOrThrow() {
+                            try {
+                                SystemProperties.set("net.knox.nap", z ? "1" : "0");
+                            } catch (Exception e) {
+                                Log.e(
+                                        "DomainFilterNapCommon",
+                                        "Unable to set NPA feature property",
+                                        e);
+                            }
+                        }
+                    });
         }
     }
 
@@ -121,16 +160,29 @@ public final class DomainFilterNapCommon {
             Log.d("DomainFilterNapCommon", "Features are disabled, reverting enforce dns uid");
             this.mNetworksUpdated = false;
             updateEnforceDnsUidForAllNetworks(false);
-            RCPManagerService$$ExternalSyntheticOutline0.m("DomainFilterNapCommon", new StringBuilder("unregisterConnectivityCallback "), this.mCallbackRegistered);
-            if (this.mCallbackRegistered && (connectivityManager = (ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class)) != null) {
-                Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: com.android.server.enterprise.firewall.DomainFilterNapCommon$$ExternalSyntheticLambda0
-                    public final void runOrThrow() {
-                        DomainFilterNapCommon domainFilterNapCommon = DomainFilterNapCommon.this;
-                        connectivityManager.unregisterNetworkCallback(domainFilterNapCommon.mConnectivityCallback);
-                        domainFilterNapCommon.mCallbackRegistered = false;
-                        Log.d("DomainFilterNapCommon", "callback unregistered");
-                    }
-                });
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    "DomainFilterNapCommon",
+                    new StringBuilder("unregisterConnectivityCallback "),
+                    this.mCallbackRegistered);
+            if (this.mCallbackRegistered
+                    && (connectivityManager =
+                                    (ConnectivityManager)
+                                            this.mContext.getSystemService(
+                                                    ConnectivityManager.class))
+                            != null) {
+                Binder.withCleanCallingIdentity(
+                        new FunctionalUtils
+                                .ThrowingRunnable() { // from class:
+                                                      // com.android.server.enterprise.firewall.DomainFilterNapCommon$$ExternalSyntheticLambda0
+                            public final void runOrThrow() {
+                                DomainFilterNapCommon domainFilterNapCommon =
+                                        DomainFilterNapCommon.this;
+                                connectivityManager.unregisterNetworkCallback(
+                                        domainFilterNapCommon.mConnectivityCallback);
+                                domainFilterNapCommon.mCallbackRegistered = false;
+                                Log.d("DomainFilterNapCommon", "callback unregistered");
+                            }
+                        });
             }
             return;
         }
@@ -141,8 +193,10 @@ public final class DomainFilterNapCommon {
     }
 
     public final void updateEnforceDnsUidForAllNetworks(boolean z) {
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("updateEnforceDnsUidForAllNetworks ", "DomainFilterNapCommon", z);
-        ConnectivityManager connectivityManager = (ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "updateEnforceDnsUidForAllNetworks ", "DomainFilterNapCommon", z);
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class);
         if (connectivityManager == null) {
             Log.e("DomainFilterNapCommon", "Failed to get connectivity manager instance");
             return;
@@ -153,7 +207,8 @@ public final class DomainFilterNapCommon {
                 int netId = network.getNetId();
                 DnsResolverAdapter dnsResolverAdapter = DnsResolverAdapter.getInstance();
                 Log.d("DnsResolverAdapter", "updateEnforceDnsUidForNetwork - entered");
-                dnsResolverAdapter.runWithExceptionHandling(new DnsResolverAdapter$$ExternalSyntheticLambda0(netId, z));
+                dnsResolverAdapter.runWithExceptionHandling(
+                        new DnsResolverAdapter$$ExternalSyntheticLambda0(netId, z));
                 Log.d("DnsResolverAdapter", "updateEnforceDnsUidForNetwork - exited");
             }
         }

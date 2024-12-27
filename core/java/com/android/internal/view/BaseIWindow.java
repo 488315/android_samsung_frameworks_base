@@ -15,8 +15,11 @@ import android.view.ScrollCaptureResponse;
 import android.view.inputmethod.ImeTracker;
 import android.window.ActivityWindowInfo;
 import android.window.ClientWindowFrames;
+
 import com.android.internal.os.IResultReceiver;
+
 import com.samsung.android.content.smartclip.SmartClipRemoteRequestInfo;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -27,7 +30,17 @@ public class BaseIWindow extends IWindow.Stub {
         this.mSession = session;
     }
 
-    public void resized(ClientWindowFrames frames, boolean reportDraw, MergedConfiguration mergedConfiguration, InsetsState insetsState, boolean forceLayout, boolean alwaysConsumeSystemBars, int displayId, int seqId, boolean dragResizing, ActivityWindowInfo activityWindowInfo) {
+    public void resized(
+            ClientWindowFrames frames,
+            boolean reportDraw,
+            MergedConfiguration mergedConfiguration,
+            InsetsState insetsState,
+            boolean forceLayout,
+            boolean alwaysConsumeSystemBars,
+            int displayId,
+            int seqId,
+            boolean dragResizing,
+            ActivityWindowInfo activityWindowInfo) {
         if (reportDraw) {
             try {
                 this.mSession.finishDrawing(this, null, seqId);
@@ -37,26 +50,21 @@ public class BaseIWindow extends IWindow.Stub {
     }
 
     @Override // android.view.IWindow
-    public void insetsControlChanged(InsetsState insetsState, InsetsSourceControl.Array activeControls) {
-    }
+    public void insetsControlChanged(
+            InsetsState insetsState, InsetsSourceControl.Array activeControls) {}
 
     @Override // android.view.IWindow
-    public void showInsets(int types, boolean fromIme, ImeTracker.Token statsToken) {
-    }
+    public void showInsets(int types, boolean fromIme, ImeTracker.Token statsToken) {}
 
     @Override // android.view.IWindow
-    public void hideInsets(int types, boolean fromIme, ImeTracker.Token statsToken) {
-    }
+    public void hideInsets(int types, boolean fromIme, ImeTracker.Token statsToken) {}
 
-    public void moved(int newX, int newY) {
-    }
+    public void moved(int newX, int newY) {}
 
-    public void dispatchAppVisibility(boolean visible) {
-    }
+    public void dispatchAppVisibility(boolean visible) {}
 
     @Override // android.view.IWindow
-    public void dispatchGetNewSurface() {
-    }
+    public void dispatchGetNewSurface() {}
 
     @Override // android.view.IWindow
     public void executeCommand(String command, String parameters, ParcelFileDescriptor out) {
@@ -69,10 +77,10 @@ public class BaseIWindow extends IWindow.Stub {
     }
 
     @Override // android.view.IWindow
-    public void closeSystemDialogs(String reason) {
-    }
+    public void closeSystemDialogs(String reason) {}
 
-    public void dispatchWallpaperOffsets(float x, float y, float xStep, float yStep, float zoom, boolean sync) {
+    public void dispatchWallpaperOffsets(
+            float x, float y, float xStep, float yStep, float zoom, boolean sync) {
         if (sync) {
             try {
                 this.mSession.wallpaperOffsetsComplete(asBinder());
@@ -91,7 +99,8 @@ public class BaseIWindow extends IWindow.Stub {
         }
     }
 
-    public void dispatchWallpaperCommand(String action, int x, int y, int z, Bundle extras, boolean sync) {
+    public void dispatchWallpaperCommand(
+            String action, int x, int y, int z, Bundle extras, boolean sync) {
         if (sync) {
             try {
                 this.mSession.wallpaperCommandComplete(asBinder(), null);
@@ -101,46 +110,38 @@ public class BaseIWindow extends IWindow.Stub {
     }
 
     @Override // android.view.IWindow
-    public void dispatchWindowShown() {
-    }
+    public void dispatchWindowShown() {}
 
     @Override // android.view.IWindow
-    public void requestAppKeyboardShortcuts(IResultReceiver receiver, int deviceId) {
-    }
+    public void requestAppKeyboardShortcuts(IResultReceiver receiver, int deviceId) {}
 
     @Override // android.view.IWindow
     public void requestScrollCapture(IScrollCaptureResponseListener listener) {
         try {
-            listener.onScrollCaptureResponse(new ScrollCaptureResponse.Builder().setDescription("Not Implemented").build());
+            listener.onScrollCaptureResponse(
+                    new ScrollCaptureResponse.Builder().setDescription("Not Implemented").build());
         } catch (RemoteException e) {
         }
     }
 
     @Override // android.view.IWindow
-    public void dumpWindow(ParcelFileDescriptor pfd) {
-    }
+    public void dumpWindow(ParcelFileDescriptor pfd) {}
 
     @Override // android.view.IWindow
-    public void dispatchSmartClipRemoteRequest(SmartClipRemoteRequestInfo request) {
-    }
+    public void dispatchSmartClipRemoteRequest(SmartClipRemoteRequestInfo request) {}
 
     @Override // android.view.IWindow
-    public void dispatchLetterboxDirectionChanged(int direction) {
-    }
+    public void dispatchLetterboxDirectionChanged(int direction) {}
 
     @Override // android.view.IWindow
-    public void dispatchDragEventUpdated(DragEvent event) {
-    }
+    public void dispatchDragEventUpdated(DragEvent event) {}
 
     @Override // android.view.IWindow
-    public void windowFocusInTaskChanged(boolean hasFocus) {
-    }
+    public void windowFocusInTaskChanged(boolean hasFocus) {}
 
     @Override // android.view.IWindow
-    public void dispatchSPenGestureEvent(InputEvent[] events) {
-    }
+    public void dispatchSPenGestureEvent(InputEvent[] events) {}
 
     @Override // android.view.IWindow
-    public void invalidateForScreenShot(boolean forceMode) {
-    }
+    public void invalidateForScreenShot(boolean forceMode) {}
 }

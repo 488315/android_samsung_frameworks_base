@@ -5,12 +5,14 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.server.health.HealthRegCallbackAidl;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public interface ISehHealth extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$health$ISehHealth".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$health$ISehHealth".replace('$', '.');
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements ISehHealth {
@@ -25,7 +27,8 @@ public interface ISehHealth extends IInterface {
                 return this.mRemote;
             }
 
-            public final void registerCallback(HealthRegCallbackAidl.HalInfoCallback halInfoCallback) {
+            public final void registerCallback(
+                    HealthRegCallbackAidl.HalInfoCallback halInfoCallback) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -58,7 +61,8 @@ public interface ISehHealth extends IInterface {
                 }
             }
 
-            public final void unregisterCallback(HealthRegCallbackAidl.HalInfoCallback halInfoCallback) {
+            public final void unregisterCallback(
+                    HealthRegCallbackAidl.HalInfoCallback halInfoCallback) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {

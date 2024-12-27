@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IVibratorCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$vibrator$IVibratorCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$vibrator$IVibratorCallback".replace('$', '.');
     public static final String HASH = "ea8742d6993e1a82917da38b9938e537aa7fcb54";
     public static final int VERSION = 2;
 
@@ -20,8 +21,7 @@ public interface IVibratorCallback extends IInterface {
 
     public static class Default implements IVibratorCallback {
         @Override // android.hardware.vibrator.IVibratorCallback
-        public void onComplete() throws RemoteException {
-        }
+        public void onComplete() throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibratorCallback
         public int getInterfaceVersion() {
@@ -39,7 +39,7 @@ public interface IVibratorCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVibratorCallback {
+    public abstract static class Stub extends Binder implements IVibratorCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_onComplete = 1;
@@ -66,7 +66,8 @@ public interface IVibratorCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);

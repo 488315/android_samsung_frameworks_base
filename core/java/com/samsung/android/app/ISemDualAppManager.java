@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -37,7 +38,8 @@ public interface ISemDualAppManager extends IInterface {
         }
 
         @Override // com.samsung.android.app.ISemDualAppManager
-        public Bundle updateDualAppData(String pkgName, int userId, Bundle bundle) throws RemoteException {
+        public Bundle updateDualAppData(String pkgName, int userId, Bundle bundle)
+                throws RemoteException {
             return null;
         }
 
@@ -47,7 +49,7 @@ public interface ISemDualAppManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemDualAppManager {
+    public abstract static class Stub extends Binder implements ISemDualAppManager {
         static final int TRANSACTION_getAllInstalledWhitelistedPackages = 1;
         static final int TRANSACTION_getAllWhitelistedPackages = 3;
         static final int TRANSACTION_isInstalledWhitelistedPackage = 2;
@@ -94,7 +96,8 @@ public interface ISemDualAppManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemDualAppManager.DESCRIPTOR);
             }
@@ -200,7 +203,8 @@ public interface ISemDualAppManager extends IInterface {
             }
 
             @Override // com.samsung.android.app.ISemDualAppManager
-            public Bundle updateDualAppData(String pkgName, int userId, Bundle bundle) throws RemoteException {
+            public Bundle updateDualAppData(String pkgName, int userId, Bundle bundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

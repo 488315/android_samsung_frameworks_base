@@ -1,6 +1,5 @@
 package android.media.tv.ad;
 
-import android.media.tv.ad.ITvAdSession;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -30,36 +29,30 @@ public interface ITvAdSessionCallback extends IInterface {
 
     public static class Default implements ITvAdSessionCallback {
         @Override // android.media.tv.ad.ITvAdSessionCallback
-        public void onSessionCreated(ITvAdSession session) throws RemoteException {
-        }
+        public void onSessionCreated(ITvAdSession session) throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdSessionCallback
-        public void onLayoutSurface(int left, int top, int right, int bottom) throws RemoteException {
-        }
+        public void onLayoutSurface(int left, int top, int right, int bottom)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdSessionCallback
-        public void onRequestCurrentVideoBounds() throws RemoteException {
-        }
+        public void onRequestCurrentVideoBounds() throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdSessionCallback
-        public void onRequestCurrentChannelUri() throws RemoteException {
-        }
+        public void onRequestCurrentChannelUri() throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdSessionCallback
-        public void onRequestTrackInfoList() throws RemoteException {
-        }
+        public void onRequestTrackInfoList() throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdSessionCallback
-        public void onRequestCurrentTvInputId() throws RemoteException {
-        }
+        public void onRequestCurrentTvInputId() throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdSessionCallback
-        public void onRequestSigning(String id, String algorithm, String alias, byte[] data) throws RemoteException {
-        }
+        public void onRequestSigning(String id, String algorithm, String alias, byte[] data)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdSessionCallback
-        public void onTvAdSessionData(String type, Bundle data) throws RemoteException {
-        }
+        public void onTvAdSessionData(String type, Bundle data) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -67,7 +60,7 @@ public interface ITvAdSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvAdSessionCallback {
+    public abstract static class Stub extends Binder implements ITvAdSessionCallback {
         static final int TRANSACTION_onLayoutSurface = 2;
         static final int TRANSACTION_onRequestCurrentChannelUri = 4;
         static final int TRANSACTION_onRequestCurrentTvInputId = 6;
@@ -126,7 +119,8 @@ public interface ITvAdSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITvAdSessionCallback.DESCRIPTOR);
             }
@@ -208,7 +202,8 @@ public interface ITvAdSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdSessionCallback
-            public void onLayoutSurface(int left, int top, int right, int bottom) throws RemoteException {
+            public void onLayoutSurface(int left, int top, int right, int bottom)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvAdSessionCallback.DESCRIPTOR);
@@ -267,7 +262,8 @@ public interface ITvAdSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdSessionCallback
-            public void onRequestSigning(String id, String algorithm, String alias, byte[] data) throws RemoteException {
+            public void onRequestSigning(String id, String algorithm, String alias, byte[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvAdSessionCallback.DESCRIPTOR);

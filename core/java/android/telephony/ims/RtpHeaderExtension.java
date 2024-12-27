@@ -3,25 +3,29 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class RtpHeaderExtension implements Parcelable {
-    public static final Parcelable.Creator<RtpHeaderExtension> CREATOR = new Parcelable.Creator<RtpHeaderExtension>() { // from class: android.telephony.ims.RtpHeaderExtension.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RtpHeaderExtension createFromParcel(Parcel in) {
-            return new RtpHeaderExtension(in);
-        }
+    public static final Parcelable.Creator<RtpHeaderExtension> CREATOR =
+            new Parcelable.Creator<
+                    RtpHeaderExtension>() { // from class:
+                                            // android.telephony.ims.RtpHeaderExtension.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RtpHeaderExtension createFromParcel(Parcel in) {
+                    return new RtpHeaderExtension(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RtpHeaderExtension[] newArray(int size) {
-            return new RtpHeaderExtension[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RtpHeaderExtension[] newArray(int size) {
+                    return new RtpHeaderExtension[size];
+                }
+            };
     private byte[] mExtensionData;
     private int mLocalIdentifier;
 
@@ -68,7 +72,8 @@ public final class RtpHeaderExtension implements Parcelable {
             return false;
         }
         RtpHeaderExtension that = (RtpHeaderExtension) o;
-        if (this.mLocalIdentifier == that.mLocalIdentifier && Arrays.equals(this.mExtensionData, that.mExtensionData)) {
+        if (this.mLocalIdentifier == that.mLocalIdentifier
+                && Arrays.equals(this.mExtensionData, that.mExtensionData)) {
             return true;
         }
         return false;

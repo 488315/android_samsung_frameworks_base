@@ -5,7 +5,7 @@ import android.os.SystemClock;
 import android.os.Trace;
 import android.util.Pair;
 import android.window.TaskSnapshot;
-import com.android.server.wm.SnapshotCache;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,14 +50,18 @@ public final class TaskSnapshotCache extends SnapshotCache {
         synchronized (this.mLock) {
             try {
                 taskSnapshot.addReference(2);
-                SnapshotCache.CacheEntry cacheEntry = (SnapshotCache.CacheEntry) this.mRunningCache.get(Integer.valueOf(task.mTaskId));
+                SnapshotCache.CacheEntry cacheEntry =
+                        (SnapshotCache.CacheEntry)
+                                this.mRunningCache.get(Integer.valueOf(task.mTaskId));
                 if (cacheEntry != null) {
                     this.mAppIdMap.remove(cacheEntry.topApp);
                     cacheEntry.snapshot.removeReference(2);
                 }
                 ActivityRecord topMostActivity = task.getTopMostActivity();
                 this.mAppIdMap.put(topMostActivity, Integer.valueOf(task.mTaskId));
-                this.mRunningCache.put(Integer.valueOf(task.mTaskId), new SnapshotCache.CacheEntry(taskSnapshot, topMostActivity));
+                this.mRunningCache.put(
+                        Integer.valueOf(task.mTaskId),
+                        new SnapshotCache.CacheEntry(taskSnapshot, topMostActivity));
                 removeOldestCacheIfNeeded(task);
             } catch (Throwable th) {
                 throw th;
@@ -71,7 +75,8 @@ public final class TaskSnapshotCache extends SnapshotCache {
             return;
         }
         boolean z = true;
-        if ((sSplitModeMaxCacheSize > 0) && WindowConfiguration.isSplitScreenWindowingMode(task.getWindowConfiguration())) {
+        if ((sSplitModeMaxCacheSize > 0)
+                && WindowConfiguration.isSplitScreenWindowingMode(task.getWindowConfiguration())) {
             ((ArrayList) this.mTaskIdsInSplitMode).clear();
         } else {
             z = false;
@@ -80,16 +85,21 @@ public final class TaskSnapshotCache extends SnapshotCache {
         int i = -1;
         for (Integer num : this.mRunningCache.keySet()) {
             int intValue = num.intValue();
-            SnapshotCache.CacheEntry cacheEntry = (SnapshotCache.CacheEntry) this.mRunningCache.get(num);
+            SnapshotCache.CacheEntry cacheEntry =
+                    (SnapshotCache.CacheEntry) this.mRunningCache.get(num);
             if (cacheEntry != null) {
                 long j2 = cacheEntry.timestamp;
                 ActivityRecord activityRecord = cacheEntry.topApp;
                 if (activityRecord != null) {
-                    if (z && WindowConfiguration.isSplitScreenWindowingMode(activityRecord.getWindowConfiguration())) {
+                    if (z
+                            && WindowConfiguration.isSplitScreenWindowingMode(
+                                    activityRecord.getWindowConfiguration())) {
                         ((ArrayList) this.mTaskIdsInSplitMode).add(new Pair(num, Long.valueOf(j2)));
                     } else if (!activityRecord.mKeepSnapshotCache) {
-                        if (!activityRecord.mStyleFillsParent && (task2 = activityRecord.task) != null && task2.getWindow(new Task$$ExternalSyntheticLambda0(7)) != null) {
-                        }
+                        if (!activityRecord.mStyleFillsParent
+                                && (task2 = activityRecord.task) != null
+                                && task2.getWindow(new Task$$ExternalSyntheticLambda0(7))
+                                        != null) {}
                     }
                 }
                 if (j2 < j) {
@@ -101,10 +111,21 @@ public final class TaskSnapshotCache extends SnapshotCache {
         if (i != -1) {
             removeRunningEntry(Integer.valueOf(i));
         }
-        if (!z || sSplitModeMaxCacheSize <= 0 || ((ArrayList) this.mTaskIdsInSplitMode).size() <= sSplitModeMaxCacheSize) {
+        if (!z
+                || sSplitModeMaxCacheSize <= 0
+                || ((ArrayList) this.mTaskIdsInSplitMode).size() <= sSplitModeMaxCacheSize) {
             return;
         }
-        Integer num2 = (Integer) ((Pair) ((List) this.mTaskIdsInSplitMode.stream().sorted(new TaskSnapshotCache$$ExternalSyntheticLambda0()).collect(Collectors.toList())).get(0)).first;
+        Integer num2 =
+                (Integer)
+                        ((Pair)
+                                        ((List)
+                                                        this.mTaskIdsInSplitMode.stream()
+                                                                .sorted(
+                                                                        new TaskSnapshotCache$$ExternalSyntheticLambda0())
+                                                                .collect(Collectors.toList()))
+                                                .get(0))
+                                .first;
         num2.getClass();
         removeRunningEntry(num2);
     }
